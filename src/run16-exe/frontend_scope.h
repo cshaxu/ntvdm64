@@ -12,8 +12,8 @@ void run16_frontend_scope_end(run16_frontend_scope *);
 HANDLE run16_frontend_scope_capability(run16_frontend_scope *);
 BOOL run16_frontend_scope_has_execution(run16_frontend_scope *);
 DWORD run16_frontend_scope_console_mask(run16_frontend_scope *);
-DWORD run16_frontend_scope_launch_native(run16_frontend_scope *,const run16_native_start *);
-DWORD run16_frontend_scope_launch_gui(run16_frontend_scope *,const run16_native_start *);
+DWORD run16_frontend_scope_launch_win32_text(run16_frontend_scope *,const run16_native_start *);
+DWORD run16_frontend_scope_launch_win32_gui(run16_frontend_scope *,const run16_native_start *);
 DWORD run16_frontend_scope_wait_native(run16_frontend_scope *,DWORD *,DWORD *);
 /* Common direct-task receipt wait; result decoding remains with its source. */
 DWORD run16_wait_direct_event(HANDLE receipt);

@@ -7,7 +7,7 @@
 static DWORD test_prepare_vga(HANDLE output,SMALL_RECT *window)
 {
     if(!window)return ERROR_INVALID_PARAMETER;
-    return run16_console_prepare_text(output,window,(COORD){80,
+    return frontend_console_prepare_text(output,window,(COORD){80,
         ntvdm_console_return_height(window->Bottom-window->Top+1)});
 }
 #endif

@@ -36,20 +36,20 @@ BOOL frontend_window_keyboard_release_next(frontend_window_keyboard_state *state
  * unread records can be returned to a native cooked reader. Use
  * exclusively on the frontend input-owner thread (not the Window message
  * thread). Reset on backend/source retirement before reusing that thread. */
-typedef struct frontend_native_keyboard {
+typedef struct frontend_console_keyboard {
     HKL layout;
     DWORD thread;
-} frontend_native_keyboard;
-#define FRONTEND_NATIVE_KEY_RECORDS 16
-DWORD frontend_native_keyboard_reset(frontend_native_keyboard *);
-DWORD frontend_native_keyboard_records(frontend_native_keyboard *,
+} frontend_console_keyboard;
+#define FRONTEND_CONSOLE_KEY_RECORDS 16
+DWORD frontend_console_keyboard_reset(frontend_console_keyboard *);
+DWORD frontend_console_keyboard_records(frontend_console_keyboard *,
     const kvm_input_event *,const INPUT_RECORD *,HKL,
-    INPUT_RECORD [FRONTEND_NATIVE_KEY_RECORDS],DWORD *);
+    INPUT_RECORD [FRONTEND_CONSOLE_KEY_RECORDS],DWORD *);
 
 typedef DWORD (*frontend_keyboard_sink)(void *,const INPUT_RECORD *,DWORD);
 typedef struct frontend_keyboard_delivery {
     frontend_window_keyboard_state physical;
-    frontend_native_keyboard native;
+    frontend_console_keyboard console_records;
 } frontend_keyboard_delivery;
 /* Caller serializes dispatch and does not change backend until retirement.
  * A failed sink is terminal: translation state must not be replayed. */

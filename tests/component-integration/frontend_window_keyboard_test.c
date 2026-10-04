@@ -41,7 +41,7 @@ static void returned_dos_tests(BOOL cooked)
         assert(read==4 && !memcmp(text,L"ab\r\n",4*sizeof(WCHAR)));
         assert(SetConsoleMode(console,mode));CloseHandle(console);
     }
-    assert(!frontend_native_keyboard_reset(&delivery.native));
+    assert(!frontend_console_keyboard_reset(&delivery.console_records));
     puts("PASS DOS-dispatched records retain one physical make/break and native cooked typeahead characters");
 }
 static DWORD checked_sink(void *context,const INPUT_RECORD *records,DWORD count)
@@ -105,65 +105,65 @@ static void input_reset_tests(void)
 
 static void native_tests(BOOL cooked)
 {
-    frontend_native_keyboard state={0};
-    kvm_input_event event={0};INPUT_RECORD physical={0},records[FRONTEND_NATIVE_KEY_RECORDS],line[4];
+    frontend_console_keyboard state={0};
+    kvm_input_event event={0};INPUT_RECORD physical={0},records[FRONTEND_CONSOLE_KEY_RECORDS],line[4];
     DWORD count;HKL layout=LoadKeyboardLayoutW(L"00000409",0);
     assert(layout);
     event.type=KVM_EVENT_KEY;event.source_identity=1;event.data.key.key='A';
     event.data.key.scan_code=0x1e;event.data.key.pressed=TRUE;
     assert(frontend_window_keyboard_record(&event,0,layout,&physical));
-    assert(!frontend_native_keyboard_records(&state,&event,&physical,layout,records,&count));
+    assert(!frontend_console_keyboard_records(&state,&event,&physical,layout,records,&count));
     assert(count==1 && records[0].Event.KeyEvent.uChar.UnicodeChar==L'a');line[0]=records[0];
     assert(physical.Event.KeyEvent.uChar.UnicodeChar==0); /* DOS record unchanged. */
     event.data.key.key='B';event.data.key.scan_code=0x30;
     assert(frontend_window_keyboard_record(&event,SHIFT_PRESSED,layout,&physical));
-    assert(!frontend_native_keyboard_records(&state,&event,&physical,layout,records,&count));
+    assert(!frontend_console_keyboard_records(&state,&event,&physical,layout,records,&count));
     assert(count==1 && records[0].Event.KeyEvent.uChar.UnicodeChar==L'B');line[1]=records[0];
     event.data.key.key=KVM_KEY_ENTER;event.data.key.scan_code=0x1c;
     assert(frontend_window_keyboard_record(&event,0,layout,&physical));
-    assert(!frontend_native_keyboard_records(&state,&event,&physical,layout,records,&count));
+    assert(!frontend_console_keyboard_records(&state,&event,&physical,layout,records,&count));
     assert(count==1 && records[0].Event.KeyEvent.uChar.UnicodeChar==L'\r');line[2]=records[0];
     event.data.key.pressed=FALSE;
     assert(frontend_window_keyboard_record(&event,0,layout,&physical));
-    assert(!frontend_native_keyboard_records(&state,&event,&physical,layout,records,&count));
+    assert(!frontend_console_keyboard_records(&state,&event,&physical,layout,records,&count));
     assert(count==1 && !records[0].Event.KeyEvent.bKeyDown && !records[0].Event.KeyEvent.uChar.UnicodeChar);
     event.type=KVM_EVENT_TEXT;event.data.text.scalar=0x1f600;
-    assert(!frontend_native_keyboard_records(&state,&event,&physical,layout,records,&count));
+    assert(!frontend_console_keyboard_records(&state,&event,&physical,layout,records,&count));
     assert(count==2 && records[0].Event.KeyEvent.uChar.UnicodeChar==0xd83d && records[1].Event.KeyEvent.uChar.UnicodeChar==0xde00);
-    assert(!frontend_native_keyboard_reset(&state));
+    assert(!frontend_console_keyboard_reset(&state));
     {
         HKL international=LoadKeyboardLayoutW(L"00020409",0);
         assert(international);
         event.type=KVM_EVENT_KEY;event.data.key.pressed=TRUE;
         event.data.key.key='\'';event.data.key.scan_code=0x28;
         assert(frontend_window_keyboard_record(&event,0,international,&physical));
-        assert(!frontend_native_keyboard_records(&state,&event,&physical,international,records,&count));
+        assert(!frontend_console_keyboard_records(&state,&event,&physical,international,records,&count));
         assert(count==1 && !records[0].Event.KeyEvent.uChar.UnicodeChar);
         event.data.key.key='E';event.data.key.scan_code=0x12;
         assert(frontend_window_keyboard_record(&event,0,international,&physical));
-        assert(!frontend_native_keyboard_records(&state,&event,&physical,international,records,&count));
+        assert(!frontend_console_keyboard_records(&state,&event,&physical,international,records,&count));
         assert(count==1 && records[0].Event.KeyEvent.uChar.UnicodeChar==0xe9);
         event.data.key.key='\'';event.data.key.scan_code=0x28;
         assert(frontend_window_keyboard_record(&event,0,international,&physical));
-        assert(!frontend_native_keyboard_records(&state,&event,&physical,international,records,&count));
-        assert(!frontend_native_keyboard_reset(&state));
+        assert(!frontend_console_keyboard_records(&state,&event,&physical,international,records,&count));
+        assert(!frontend_console_keyboard_reset(&state));
         event.data.key.key='E';event.data.key.scan_code=0x12;
         assert(frontend_window_keyboard_record(&event,0,international,&physical));
-        assert(!frontend_native_keyboard_records(&state,&event,&physical,international,records,&count));
+        assert(!frontend_console_keyboard_records(&state,&event,&physical,international,records,&count));
         assert(count==1 && records[0].Event.KeyEvent.uChar.UnicodeChar==L'e');
-        assert(!frontend_native_keyboard_reset(&state));
+        assert(!frontend_console_keyboard_reset(&state));
         event.data.key.key='\'';event.data.key.scan_code=0x28;
         assert(frontend_window_keyboard_record(&event,0,international,&physical));
-        assert(!frontend_native_keyboard_records(&state,&event,&physical,international,records,&count));
+        assert(!frontend_console_keyboard_records(&state,&event,&physical,international,records,&count));
         event.data.key.key='B';event.data.key.scan_code=0x30;
         assert(frontend_window_keyboard_record(&event,0,international,&physical));
-        assert(!frontend_native_keyboard_records(&state,&event,&physical,international,records,&count));
+        assert(!frontend_console_keyboard_records(&state,&event,&physical,international,records,&count));
         assert(count==2 && records[0].Event.KeyEvent.uChar.UnicodeChar==L'\'' &&
             records[0].Event.KeyEvent.wVirtualScanCode==0 &&
             records[0].Event.KeyEvent.wVirtualKeyCode==VK_PACKET);
         assert(records[1].Event.KeyEvent.uChar.UnicodeChar==L'b' &&
             records[1].Event.KeyEvent.wVirtualScanCode==0x30);
-        assert(!frontend_native_keyboard_reset(&state));
+        assert(!frontend_console_keyboard_reset(&state));
         puts("PASS noncomposing dead key retains character-only prefix and one physical trailing key");
         puts("PASS Windows dead-key composition and retirement discard without injecting a space");
     }
@@ -307,7 +307,7 @@ int main(int argc,char **argv)
         input.event.source_identity=73;input.event.data.text.scalar=0xd800;
         assert(frontend_keyboard_dispatch(&delivery,&input,returned_sink,&output)==ERROR_NO_UNICODE_TRANSLATION);
         assert(output.count==2);
-        assert(!frontend_native_keyboard_reset(&delivery.native));
+        assert(!frontend_console_keyboard_reset(&delivery.console_records));
         puts("PASS unified text dispatch: surrogate pair, stale source and invalid scalar rejection; worker policy remains local");
     }
     return 0;

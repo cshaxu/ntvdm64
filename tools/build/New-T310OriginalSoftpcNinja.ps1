@@ -1344,10 +1344,11 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build guest-environment-test.exe: broker_test_link obj/tests/guest_environment.obj obj/common/guest_environment.obj')
     $graph.Add('build obj/worker-base/connection.obj: cc ' + (NinjaPath (Join-Path $root 'src/worker-base/connection.c')))
+    $graph.Add('build obj/worker-base/shutdown_close.obj: cc ' + (NinjaPath (Join-Path $root 'src/worker-base/shutdown_close.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/ntvwm/next_command.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvwm-exe/next_command.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build worker-base.lib: lib obj/worker-base/connection.obj')
+    $graph.Add('build worker-base.lib: lib obj/worker-base/connection.obj obj/worker-base/shutdown_close.obj')
     $graph.Add('build obj/tests/worker_shutdown.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/worker_shutdown_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build worker-shutdown-test.exe: base_rpc_test_link obj/tests/worker_shutdown.obj worker-base.lib frontend-client.lib obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
@@ -1411,11 +1412,11 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('rule run16_link')
     $graph.Add('  command = link.exe /nologo /subsystem:console /entry:wWinMainCRTStartup /opt:ref /out:$out /map:$out.map $in rpcrt4.lib ntdll.lib kernel32.lib shell32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib')
-    $graph.Add('build obj/run16/console_frontend.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'console_frontend.c')))
+    $graph.Add('build obj/frontend/console_frontend.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'console_frontend.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build obj/run16/console_video.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'console_video.c')))
+    $graph.Add('build obj/frontend/console_video.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'console_video.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build obj/run16/console_channel.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'console_channel.c')))
+    $graph.Add('build obj/frontend/console_channel.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'console_channel.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/run16/frontend_scope.obj: cc ' + (NinjaPath (Join-Path $run16Root 'frontend_scope.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
@@ -1433,12 +1434,12 @@ if ($Architecture -eq 'x86') {
         $object = 'obj/tests/frontend_window_' + $kind + '.obj'
         $graph.Add('build ' + $object + ': cc ' + (NinjaPath $source))
         $graph.Add('  cflags = ' + $nativeServiceFlags + ' /std:c11 /I "' + (NinjaPath $frontendRoot) + '" /I "' + (NinjaPath $fontBuild) + '"')
-        $graph.Add('build frontend-window-' + $kind + '-test.exe: console_test_link ' + $object + ' frontend-window.lib obj/run16/console_video.obj obj/ntvwm/text_frame.obj')
+        $graph.Add('build frontend-window-' + $kind + '-test.exe: console_test_link ' + $object + ' frontend-window.lib obj/frontend/console_video.obj obj/ntvwm/text_frame.obj')
     }
-    $graph.Add('build console-frontend-test.exe: console_test_link obj/tests/console_frontend_test.obj obj/run16/console_frontend.obj obj/run16/console_video.obj ' + $consoleGridObject)
+    $graph.Add('build console-frontend-test.exe: console_test_link obj/tests/console_frontend_test.obj obj/frontend/console_frontend.obj obj/frontend/console_video.obj ' + $consoleGridObject)
     $graph.Add('build obj/tests/console_video.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/console_video_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build console-video-test.exe: console_test_link obj/tests/console_video.obj obj/run16/console_frontend.obj obj/run16/console_video.obj ' + $consoleGridObject)
+    $graph.Add('build console-video-test.exe: console_test_link obj/tests/console_video.obj obj/frontend/console_frontend.obj obj/frontend/console_video.obj ' + $consoleGridObject)
     # Standalone carrier fixture; the same source is selected in the worker
     # adapter list above. Device/history and guest gates remain separate tests.
     $graph.Add('build obj/tests/keyboard_history_carrier.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/softpc/mvdm_keyboard_history.c')))
@@ -1451,7 +1452,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build common-codec.lib: lib obj/common/native_launch.obj')
     $graph.Add('build obj/run16/native_launch.obj: cc ' + (NinjaPath (Join-Path $root 'src/run16-exe/native_launch.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build obj/run16/native_console_frontend.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'native_console_frontend.c')))
+    $graph.Add('build obj/frontend/frontend_session.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'frontend_session.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags + ' /std:c11 /I "' + (NinjaPath $frontendRoot) + '"')
     $graph.Add('build obj/frontend/native_request_client.obj: cc ' + (NinjaPath (Join-Path $root 'src/run16-exe/native_request_client.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
@@ -1467,7 +1468,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build frontend-client.lib: lib obj/frontend/native_request_client.obj obj/frontend/bootstrap_client.obj')
     $graph.Add('rule frontend_link')
     $graph.Add('  command = link.exe /nologo /subsystem:console /entry:wmainCRTStartup /opt:ref /out:$out /map:$out.map $in rpcrt4.lib ntdll.lib kernel32.lib shell32.lib user32.lib gdi32.lib advapi32.lib legacy_stdio_definitions.lib')
-    $graph.Add('build ntcon.exe: frontend_link obj/frontend/main.obj obj/frontend/session_service.obj obj/run16/native_console_frontend.obj frontend-window.lib obj/run16/console_frontend.obj obj/run16/console_video.obj obj/run16/console_channel.obj frontend-client.lib obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj ' + $consoleGridObject + ' opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
+    $graph.Add('build ntcon.exe: frontend_link obj/frontend/main.obj obj/frontend/session_service.obj obj/frontend/frontend_session.obj frontend-window.lib obj/frontend/console_frontend.obj obj/frontend/console_video.obj obj/frontend/console_channel.obj frontend-client.lib obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj ' + $consoleGridObject + ' opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
     foreach ($name in @('main','console_state','execution')) {
         $graph.Add('build obj/ntvwm/' + $name + '.obj: cc ' + (NinjaPath (Join-Path $root ('src/ntvwm-exe/' + $name + '.c'))))
         $graph.Add('  cflags = ' + $nativeServiceFlags + ' /I "' + (NinjaPath $fontBuild) + '"')
@@ -1488,17 +1489,17 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/tests/ntvwm_text_frame.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntvwm_text_frame_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags + ' /std:c11')
-    $graph.Add('build ntvwm-text-frame-test.exe: console_test_link obj/tests/ntvwm_text_frame.obj obj/ntvwm/text_frame.obj obj/run16/console_video.obj')
+    $graph.Add('build ntvwm-text-frame-test.exe: console_test_link obj/tests/ntvwm_text_frame.obj obj/ntvwm/text_frame.obj obj/frontend/console_video.obj')
     $graph.Add('build obj/tests/ntvwm_native_colour_probe.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntvwm_native_colour_probe.c')))
     $graph.Add('build ntvwm-native-colour-probe.exe: console_test_link obj/tests/ntvwm_native_colour_probe.obj obj/ntvwm/text_frame.obj')
     $graph.Add('build obj/ntvwm/presentation.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvwm-exe/presentation.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/tests/ntvwm_presentation.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntvwm_presentation_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build ntvwm-presentation-test.exe: console_test_link obj/tests/ntvwm_presentation.obj obj/ntvwm/presentation.obj obj/ntvwm/console_state.obj obj/ntvwm/text_frame.obj obj/run16/console_video.obj')
+    $graph.Add('build ntvwm-presentation-test.exe: console_test_link obj/tests/ntvwm_presentation.obj obj/ntvwm/presentation.obj obj/ntvwm/console_state.obj obj/ntvwm/text_frame.obj obj/frontend/console_video.obj')
     $graph.Add('build obj/tests/frontend_text_handoff.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/frontend_text_handoff_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build frontend-text-handoff-test.exe: console_test_link obj/tests/frontend_text_handoff.obj obj/run16/native_console_frontend.obj frontend-window.lib obj/run16/console_frontend.obj obj/run16/console_video.obj ' + $consoleGridObject)
+    $graph.Add('build frontend-text-handoff-test.exe: console_test_link obj/tests/frontend_text_handoff.obj obj/frontend/frontend_session.obj frontend-window.lib obj/frontend/console_frontend.obj obj/frontend/console_video.obj ' + $consoleGridObject)
     $graph.Add('build obj/tests/ntvwm_execution_lifetime.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntvwm_execution_lifetime_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build ntvwm-execution-lifetime-test.exe: frontend_link obj/tests/ntvwm_execution_lifetime.obj obj/ntvwm/execution.obj obj/run16/native_launch.obj common-codec.lib')
@@ -1545,7 +1546,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build ntvwm-geometry-handoff-probe.exe: console_test_link obj/tests/ntvwm_geometry_handoff.obj')
     $graph.Add('build obj/tests/console_channel_lifetime.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/console_channel_lifetime_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build console-channel-lifetime-test.exe: console_test_link obj/tests/console_channel_lifetime.obj obj/run16/native_console_frontend.obj frontend-window.lib common-transport.lib ' + $consoleGridObject)
+    $graph.Add('build console-channel-lifetime-test.exe: console_test_link obj/tests/console_channel_lifetime.obj obj/frontend/frontend_session.obj frontend-window.lib common-transport.lib ' + $consoleGridObject)
     $graph.Add('build obj/tests/console_frame_failure.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/console_frame_failure_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags + ' /std:c11 /I "' + (NinjaPath (Join-Path $root 'src/ntcon-exe')) + '"')
     $graph.Add('build console-frame-failure-test.exe: console_test_link obj/tests/console_frame_failure.obj frontend-window.lib common-transport.lib ' + $consoleGridObject)
@@ -1553,12 +1554,12 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('rule pointer_test_link')
     $graph.Add('  command = link.exe /nologo /manifest:embed /manifestuac:"level=''asInvoker'' uiAccess=''false''" /out:$out $in libcmt.lib libvcruntime.lib libucrt.lib kernel32.lib user32.lib')
-    $graph.Add('build console-pointer-contract-test.exe: pointer_test_link obj/tests/console_pointer_dispatch_test.obj obj/run16/console_video.obj ' + $consoleGridObject)
+    $graph.Add('build console-pointer-contract-test.exe: pointer_test_link obj/tests/console_pointer_dispatch_test.obj obj/frontend/console_video.obj ' + $consoleGridObject)
     $graph.Add('build obj/tests/console_client_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/console_client_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/tests/console_client.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/win32/console_client.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build console-client-test.exe: console_test_link obj/tests/console_client_test.obj obj/tests/console_client.obj obj/tests/console_graphics_provider.obj obj/tests/console_bitmap_provider.obj obj/run16/console_frontend.obj obj/run16/console_video.obj ' + $consoleGridObject)
+    $graph.Add('build console-client-test.exe: console_test_link obj/tests/console_client_test.obj obj/tests/console_client.obj obj/tests/console_graphics_provider.obj obj/tests/console_bitmap_provider.obj obj/frontend/console_frontend.obj obj/frontend/console_video.obj worker-base.lib ' + $consoleGridObject)
     $graph.Add('build obj/tests/softpc_text_video.obj: cc ' + (NinjaPath (Join-Path $root 'tests/component-integration/softpc_text_video_test.c')))
     $graph.Add('build softpc-text-video-test.exe: console_test_link obj/tests/softpc_text_video.obj obj/adapter-softpc/mvdm_softpc_text_video.obj')
     $graph.Add('build obj/tests/console_text_producer.obj: cc ' + (NinjaPath (Join-Path $root 'tests/component-integration/console_text_producer_test.c')))
@@ -1572,7 +1573,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = /nologo /c /MT /std:c11 /W4 /we4013 /showIncludes /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"')
     $graph.Add('build obj/tests/run16_package_observed.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/run16_package_observed.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $baseOwnerFlags)
-    $graph.Add('build frontend-video-observer.exe: frontend_link obj/frontend/main.obj obj/frontend/session_service.obj obj/run16/native_console_frontend.obj frontend-window.lib frontend-client.lib obj/tests/console_video_observed.obj obj/run16/console_channel.obj obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj ' + $consoleGridObject + ' opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
+    $graph.Add('build frontend-video-observer.exe: frontend_link obj/frontend/main.obj obj/frontend/session_service.obj obj/frontend/frontend_session.obj frontend-window.lib frontend-client.lib obj/tests/console_video_observed.obj obj/frontend/console_channel.obj obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj ' + $consoleGridObject + ' opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
     $graph.Add('rule basesrv_idl')
     $graph.Add('  command = midl.exe /nologo /env win32 /target NT100 /prefix client Client_ /prefix server Server_ /acf "' + (NinjaPath (Join-Path $root 'src/common/protocol/service.acf')) + '" /out obj/basesrv /h service.h /cstub service_c.c /sstub service_s.c $in')
     $graph.Add('build obj/basesrv/service_s.c | obj/basesrv/service_c.c obj/basesrv/service.h: basesrv_idl ' + (NinjaPath (Join-Path $root 'src/common/protocol/service.idl')) + ' | ' + (NinjaPath (Join-Path $root 'src/common/protocol/service.acf')))
@@ -1638,7 +1639,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add($workerEdge.Replace('build ntvdm.exe | ntvdm.lib:', 'build ntvdm-console-wire-observer.exe:').Replace(': worker_link ', ': worker_link obj/tests/console_client_observed.obj '))
     $frontendEdge = $graph | Where-Object { $_.StartsWith('build ntcon.exe: ') }
     if(@($frontendEdge).Count -ne 1){throw 'Expected one frontend edge'}
-    $graph.Add($frontendEdge.Replace('build ntcon.exe:', 'build frontend-console-wire-observer.exe:').Replace('obj/run16/console_channel.obj','obj/tests/console_channel_observed.obj'))
+    $graph.Add($frontendEdge.Replace('build ntcon.exe:', 'build frontend-console-wire-observer.exe:').Replace('obj/frontend/console_channel.obj','obj/tests/console_channel_observed.obj'))
 }
 $workerPackageObjects = foreach ($name in $workerPackageNames) {
     $object = 'obj/worker/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
@@ -1891,7 +1892,7 @@ if ($objectOutputDirectories.Count -gt 0) {
         target = 'worker-base.lib'
         selected = ($Architecture -eq 'x86')
         disposition = 'project-owned worker connection initialization and disconnect; NTVDM and NTVWM only; common provides protocol clients'
-        sources = @('connection.c', 'connection.h' | ForEach-Object {
+        sources = @('connection.c', 'connection.h', 'shutdown_close.c' | ForEach-Object {
             $path = 'src/worker-base/' + $_
             [ordered]@{ path = $path; sha256 = Get-NodeSha256 (Join-Path $root $path) }
         })
@@ -1973,7 +1974,7 @@ if ($objectOutputDirectories.Count -gt 0) {
         target = 'ntcon.exe'
         selected = ($Architecture -eq 'x86')
         disposition = 'independent authenticated visible presentation owner; no native backend, parser or helper'
-        sources = @('src/ntcon-exe/main.c', 'src/run16-exe/frontend_bootstrap.h', 'src/ntcon-exe/native_console_frontend.c', 'src/ntcon-exe/native_console_frontend.h', 'src/ntcon-exe/console_frontend.c', 'src/ntcon-exe/console_frontend.h', 'src/ntcon-exe/console_video.c', 'src/ntcon-exe/console_video.h', 'src/ntcon-exe/console_channel.c', 'src/ntcon-exe/console_channel.h', 'src/common/protocol/console_video.h', 'src/common/protocol/console_io.h' | ForEach-Object {
+        sources = @('src/ntcon-exe/main.c', 'src/run16-exe/frontend_bootstrap.h', 'src/ntcon-exe/frontend_session.c', 'src/ntcon-exe/frontend_session.h', 'src/ntcon-exe/console_frontend.c', 'src/ntcon-exe/console_frontend.h', 'src/ntcon-exe/console_video.c', 'src/ntcon-exe/console_video.h', 'src/ntcon-exe/console_channel.c', 'src/ntcon-exe/console_channel.h', 'src/common/protocol/console_video.h', 'src/common/protocol/console_io.h' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
     }

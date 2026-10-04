@@ -16,7 +16,7 @@ typedef struct peer_state {
     unsigned publication_begins,publication_ends,publication_aborts;
     unsigned titles,cell_writes;
     console_io_state screen;
-    run16_console_video video;
+    frontend_video video;
     console_io_input returned[2*CONSOLE_IO_INPUT_CAPACITY+3];
     DWORD returned_count;
     LONG page_shift;
@@ -50,9 +50,9 @@ static DWORD WINAPI peer(void *context)
                 console_video_description description;
                 if(request.bytes!=sizeof(description))return ERROR_INVALID_DATA;
                 memcpy(&description,request.data,sizeof(description));
-                error=run16_console_video_begin(&state->video,request.state.mode,&description);
+                error=frontend_video_begin(&state->video,request.state.mode,&description);
             } else if(request.operation==CONSOLE_IO_VIDEO_DATA)
-                error=run16_console_video_data(&state->video,request.state.mode,request.state.count,
+                error=frontend_video_data(&state->video,request.state.mode,request.state.count,
                     request.data,request.bytes);
             else if(request.operation!=CONSOLE_IO_BARRIER && state->mode!=6)return ERROR_INVALID_FUNCTION;
         }
@@ -158,9 +158,9 @@ static DWORD WINAPI peer(void *context)
                 console_video_description description;
                 if(request.bytes!=sizeof(description))return ERROR_INVALID_DATA;
                 memcpy(&description,request.data,sizeof(description));
-                error=run16_console_video_begin(&state->video,request.state.mode,&description);
+                error=frontend_video_begin(&state->video,request.state.mode,&description);
             } else if(request.operation==CONSOLE_IO_VIDEO_DATA)
-                error=run16_console_video_data(&state->video,request.state.mode,request.state.count,request.data,request.bytes);
+                error=frontend_video_data(&state->video,request.state.mode,request.state.count,request.data,request.bytes);
             else if(request.operation!=CONSOLE_IO_BARRIER && request.operation!=CONSOLE_IO_SET_MODE &&
                 request.operation!=CONSOLE_IO_WRITE_CELLS_W && request.operation!=CONSOLE_IO_CURSOR_POSITION &&
                 request.operation!=CONSOLE_IO_CURSOR_INFO && request.operation!=CONSOLE_IO_ATTRIBUTE)
@@ -502,7 +502,7 @@ done:
                 style->fonts[1][255][31]==0xa5 && state.video.description.palette[1]==0x123456);
         }
     }
-    run16_console_video_dispose(&state.video);
+    frontend_video_dispose(&state.video);
     if(stop)CloseHandle(stop);
     if(process)CloseHandle(process);
     CloseHandle(pipe);

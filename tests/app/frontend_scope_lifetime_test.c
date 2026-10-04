@@ -14,11 +14,13 @@
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"line %u error %lu: %s\n", \
     (unsigned)__LINE__,GetLastError(),#x); ExitProcess(1); } } while (0)
 #define COUNT 34
-struct run16_console_channel { HANDLE thread,release; DWORD index; };
-static run16_console_channel *channels[COUNT];
+struct frontend_io_channel { HANDLE thread,release; DWORD index; };
+static frontend_io_channel *channels[COUNT];
 static HANDLE notification,ready,retirement_state;
 static CRITICAL_SECTION lock;
-static DWORD pending,created;
+static DWORD pending,created,disconnects;
+static BOOL disconnect_pending;
+static HANDLE disconnect_seen;
 static LONG stopped;
 static DWORD registrations,retains,bindings,retain_error=ERROR_ACCESS_DENIED;
 static HANDLE expected_execution;
@@ -51,6 +53,12 @@ DWORD OpenNtBaseClientStartFrontend(uint64_t window,BOOL borrowed,HANDLE *root,
     return error;
 }
 DWORD OpenNtBaseClientReturnFrontendConsole(void){return ERROR_SUCCESS;}
+DWORD OpenNtBaseClientFrontendIoDisconnected(void)
+{
+    CHECK(created && !channels[created-1]);
+    CHECK(InterlockedCompareExchange(&stopped,0,0)==(LONG)created);
+    ++disconnects;CHECK(SetEvent(disconnect_seen));return ERROR_SUCCESS;
+}
 DWORD OpenNtBaseClientWaitFrontendConsoleRestored(void){return ERROR_SUCCESS;}
 DWORD OpenNtBaseClientAcquireFrontendRoot(uint64_t window,DWORD *create_root,
     HANDLE *root,HANDLE *capability,HANDLE *retire,HANDLE *restored)
@@ -64,13 +72,13 @@ void frontend_bootstrap_release(frontend_connection *connection)
     ZeroMemory(connection,sizeof(*connection));
 }
 /* This fixture exercises scope/channel lifetime, not native presentation. */
-struct run16_native_frontend { DWORD unused; };
-DWORD run16_native_frontend_create(run16_native_frontend **out)
+struct frontend_session { DWORD unused; };
+DWORD frontend_session_create(frontend_session **out)
 { *out=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(**out));return *out ? 0 : ERROR_NOT_ENOUGH_MEMORY; }
-void run16_native_frontend_cancel(run16_native_frontend *value) { (void)value; }
-DWORD run16_native_frontend_park(run16_native_frontend *value)
+void frontend_session_cancel(frontend_session *value) { (void)value; }
+DWORD frontend_session_park(frontend_session *value)
 { (void)value;CHECK(retirement_mode);InterlockedIncrement(&park_calls);CHECK(SetEvent(park_seen));return 0; }
-DWORD run16_native_frontend_drain(run16_native_frontend *value)
+DWORD frontend_session_drain(frontend_session *value)
 { (void)value;CHECK(retirement_mode);InterlockedIncrement(&drain_calls);return 0; }
 DWORD OpenNtBaseClientFrontendUsage(DWORD *pending_count,DWORD *tasks)
 {
@@ -105,7 +113,7 @@ DWORD OpenNtBaseClientRetireWorkerlessFrontend(DWORD *retired)
     *retired=(DWORD)InterlockedCompareExchange(&broker_shutdown,0,0);
     return ERROR_SUCCESS;
 }
-DWORD run16_native_frontend_destroy(run16_native_frontend *value) { if(value)HeapFree(GetProcessHeap(),0,value);return 0; }
+DWORD frontend_session_destroy(frontend_session *value) { if(value)HeapFree(GetProcessHeap(),0,value);return 0; }
 DWORD run16_native_request_submit(HANDLE capability,const run16_native_start *start,HANDLE *out,HANDLE *receipt,DWORD *request)
 {
     (void)capability;(void)start;*out=*receipt=NULL;*request=0;
@@ -171,7 +179,10 @@ DWORD OpenNtBaseClientFrontendRequest(DWORD *request,HANDLE *worker)
 {
     DWORD error=ERROR_NOT_FOUND;
     EnterCriticalSection(&lock);
-    if (pending) {
+    if(disconnect_pending) {
+        CHECK(!pending);disconnect_pending=FALSE;*request=0;*worker=NULL;
+        error=ERROR_SUCCESS;
+    } else if (pending) {
         *request=pending;pending=0;
         error=DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),
             GetCurrentProcess(),worker,SYNCHRONIZE,FALSE,0) ? 0 : GetLastError();
@@ -181,13 +192,13 @@ DWORD OpenNtBaseClientFrontendRequest(DWORD *request,HANDLE *worker)
 }
 static DWORD WINAPI channel_main(void *value)
 {
-    run16_console_channel *channel=value;
+    frontend_io_channel *channel=value;
     return WaitForSingleObject(channel->release,INFINITE)==WAIT_OBJECT_0 ? 0 : 1;
 }
-DWORD run16_console_channel_start_request(DWORD request,HANDLE worker,
-    run16_native_frontend *native,run16_console_channel **output)
+DWORD frontend_io_channel_start_request(DWORD request,HANDLE worker,
+    frontend_session *native,frontend_io_channel **output)
 {
-    run16_console_channel *channel;
+    frontend_io_channel *channel;
     CHECK(native!=NULL);
     CloseHandle(worker);
     CHECK(request && created<COUNT);
@@ -202,11 +213,11 @@ DWORD run16_console_channel_start_request(DWORD request,HANDLE worker,
     *output=channel;
     return 0;
 }
-HANDLE run16_console_channel_thread(run16_console_channel *channel)
+HANDLE frontend_io_channel_thread(frontend_io_channel *channel)
 {
     return channel->thread;
 }
-DWORD run16_console_channel_stop(run16_console_channel *channel)
+DWORD frontend_io_channel_stop(frontend_io_channel *channel)
 {
     CHECK(SetEvent(channel->release));
     CHECK(WaitForSingleObject(channel->thread,5000)==WAIT_OBJECT_0);
@@ -265,6 +276,7 @@ int main(void)
     CHECK(SetEnvironmentVariableA("NTVDM_EXECUTION_CONSOLE",NULL));
     InitializeCriticalSection(&lock);
     ready=CreateEventW(NULL,FALSE,FALSE,NULL);CHECK(ready);
+    disconnect_seen=CreateEventW(NULL,FALSE,FALSE,NULL);CHECK(disconnect_seen);
     CHECK(run16_frontend_scope_begin(&scope)==0);
     CHECK(scope && !run16_frontend_scope_capability(NULL));
     CHECK(registrations==1);
@@ -323,7 +335,7 @@ int main(void)
         native_mode=TRUE;
         for(case_index=0;case_index<ARRAYSIZE(errors);++case_index) {
             native_error=errors[case_index];
-            CHECK(!run16_frontend_scope_launch_native(scope,&start));
+            CHECK(!run16_frontend_scope_launch_win32_text(scope,&start));
             CHECK(!GetHandleInformation(diagnostic_target,&flags) && GetLastError()==ERROR_INVALID_HANDLE);
             result=completed=99;
             CHECK(run16_frontend_scope_wait_native(scope,&result,&completed)==native_error);
@@ -334,28 +346,26 @@ int main(void)
         CHECK(GetProcessHandleCount(GetCurrentProcess(),&after) && after==before);
         puts("PASS native receipt alone distinguishes target completion/final-I/O failure/unfinished failure; diagnostic reference closed before wait; no leaked handles");
     }
-    submit(1); /* Keep this channel live throughout the repeated short ones. */
-    for (i=1;i<COUNT;++i) {
-        HANDLE release,thread;
+    for (i=0;i<COUNT;++i) {
         submit(i+1);
-        CHECK(channels[0] && WaitForSingleObject(channels[0]->thread,0)==WAIT_TIMEOUT);
-        CHECK(InterlockedCompareExchange(&stopped,0,0)==(LONG)i-1);
-        /* The pump may reclaim the entry immediately after thread exit. */
-        CHECK(DuplicateHandle(GetCurrentProcess(),channels[i]->release,GetCurrentProcess(),
-            &release,0,FALSE,DUPLICATE_SAME_ACCESS));
-        CHECK(DuplicateHandle(GetCurrentProcess(),channels[i]->thread,GetCurrentProcess(),
-            &thread,SYNCHRONIZE,FALSE,0));
-        CHECK(SetEvent(release));
-        CHECK(WaitForSingleObject(thread,5000)==WAIT_OBJECT_0);
-        CloseHandle(release);CloseHandle(thread);
+        CHECK(channels[i] && WaitForSingleObject(channels[i]->thread,0)==WAIT_TIMEOUT);
+        CHECK(InterlockedCompareExchange(&stopped,0,0)==(LONG)i);
+        if(i+1==COUNT)break; /* Keep the final physical lease alive. */
+        /* NTSRV, not an EOF or a new claimant, orders disposal. The
+         * acknowledgment may only follow joining and freeing this lease. */
+        EnterCriticalSection(&lock);
+        CHECK(!pending && !disconnect_pending);disconnect_pending=TRUE;
+        CHECK(SetEvent(notification));LeaveCriticalSection(&lock);
+        CHECK(WaitForSingleObject(disconnect_seen,5000)==WAIT_OBJECT_0);
+        CHECK(!channels[i] && disconnects==i+1);
     }
     run16_frontend_scope_end(scope);
-    CHECK(channels[0] && WaitForSingleObject(channels[0]->thread,0)==WAIT_TIMEOUT);
+    CHECK(channels[COUNT-1] && WaitForSingleObject(channels[COUNT-1]->thread,0)==WAIT_TIMEOUT);
     frontend_service_close(fixture_service);
     CHECK(stopped==COUNT);
     for (i=0;i<COUNT;++i) CHECK(!channels[i]);
     service_controls_retirement();
-    CloseHandle(notification);CloseHandle(ready);DeleteCriticalSection(&lock);
+    CloseHandle(notification);CloseHandle(ready);CloseHandle(disconnect_seen);DeleteCriticalSection(&lock);
     puts("PASS completed channels reclaimed; live channel preserved; final join complete");
     return 0;
 }

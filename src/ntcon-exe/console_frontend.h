@@ -1,17 +1,17 @@
-#ifndef RUN16_CONSOLE_FRONTEND_H
-#define RUN16_CONSOLE_FRONTEND_H
+#ifndef FRONTEND_CONSOLE_H
+#define FRONTEND_CONSOLE_H
 #include <windows.h>
 #include "common/protocol/console_io.h"
 #include "console_video.h"
 
 /* One explicit frontend instance. These handles never enter the wire. */
-typedef struct run16_console_frontend {
+typedef struct frontend_console {
     HANDLE input,output;
     uint32_t generation,sequence;
     /* Borrowed session geometry, protected by enter/leave. Physical Console
      * clipping is presentation only and must not become worker geometry. */
     SMALL_RECT *logical_window;
-    run16_console_video video;
+    frontend_video video;
     void *io_context;
     DWORD (*activate)(void *,BOOL);
     DWORD (*prepare_text)(void *,COORD);
@@ -38,10 +38,10 @@ typedef struct run16_console_frontend {
     DWORD (*read_input)(void *,BOOL,INPUT_RECORD *,DWORD,DWORD *);
     DWORD (*prepend_input)(void *,const INPUT_RECORD *,DWORD);
     DWORD (*read_text_configuration)(void *,DWORD,DWORD,console_io_reply *);
-} run16_console_frontend;
-DWORD run16_console_dispatch(run16_console_frontend *,const console_io_request *,
+} frontend_console;
+DWORD frontend_console_dispatch(frontend_console *,const console_io_request *,
     console_io_reply *);
 /* Storage conversion accepts explicit dimensions; it selects no device mode.
  * Caller serializes access and owns the returned logical viewport. */
-DWORD run16_console_prepare_text(HANDLE,SMALL_RECT *,COORD);
+DWORD frontend_console_prepare_text(HANDLE,SMALL_RECT *,COORD);
 #endif

@@ -62,7 +62,7 @@ S5 implements the existing worker-watch association authority and shared GUI
 reuse; the [S5 evidence](../etc/evidence/m0-t428-s5-worker-association.md)
 records focused passes and retained failures. Final r015 package regression,
 lifetime, recoverable publication and deployed smoke/hash checks passed;
-the reviewed implementation increment is delivered through Git. S5 stays
+the reviewed implementation increment is delivered through Git. S5
 is closed by pushed final P db855a66c. Paired route cancellation,
 actual prepared native root-loss/Connect and asynchronous cleanup now pass
 27 service cases. Final r021 package passes r022 Console17/Window17/WOW,
@@ -70,6 +70,20 @@ r027 six GUI cases and r028 lifetime/close/isolation probes. r029 publishes
 that coherent package, preserving r015 recovery; r030 deployed Console/Window
 smoke and eight hashes pass. Owner confirms no exclusive GUI launch option.
 S6 is admitted for the approved final naming/caller audit; T428 remains open.
+
+## S6 Delivery Review
+
+S6's [ownership/naming inventory](../etc/evidence/m0-t428-s6-ownership-naming.md)
+records private frontend API/build-owner renames, unchanged shared close-body
+separation and retained source boundaries. Affected x86 builds, ownership
+negative controls, 29 service cases, 37 shutdown assertions, worker-neutral
+input/presentation, 34 sequential physical leases and actual Console close
+fixtures pass. Final r002 package passes r007 Console17/Window17/retained WOW,
+r009 six GUI cases and r010 management/loss/isolation. r011 publishes the
+coherent eight-file package to O:/winnt/system32 and preserves S5 recovery;
+r012 deployed Console/Window smoke and eight hashes pass. No mirror, wire,
+CLI, kind mapping or native30ms polling change. Final source/diff/governance
+review and sequential P delivery apply; T428 remains open for owner acceptance.
 
 ## S5 Closure Record
 
@@ -130,8 +144,8 @@ S2 6a8934f6b. T428 remains open.
 
 ## Current Technical Baseline
 
-Current verified/published package is the T428 S5 implementation increment from
-build/M0-T428/S5/r021/runtime, with recovery of r015 in S5/r029/recovery. It retains
+Current verified/published package is the T428 S6 implementation from
+build/M0-T428/S6/r002/runtime, with coherent S5 recovery in S6/r011/recovery. It retains
 the following accepted T427 layout/protocol baseline, S2 native GUI-carrier
 residency, authenticated service-owned parent restoration and common shutdown
 execution with pre-text native close-control registration.

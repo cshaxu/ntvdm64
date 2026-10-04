@@ -2,7 +2,7 @@
 #include <limits.h>
 #include <string.h>
 
-void run16_console_video_abort_pending(run16_console_video *video)
+void frontend_video_abort_pending(frontend_video *video)
 {
     if (!video) return;
     if (video->pending) HeapFree(GetProcessHeap(), 0, video->pending);
@@ -12,15 +12,15 @@ void run16_console_video_abort_pending(run16_console_video *video)
     ZeroMemory(&video->pending_description, sizeof(video->pending_description));
 }
 
-void run16_console_video_dispose(run16_console_video *video)
+void frontend_video_dispose(frontend_video *video)
 {
     if (!video) return;
-    run16_console_video_abort_pending(video);
+    frontend_video_abort_pending(video);
     if (video->pixels) HeapFree(GetProcessHeap(), 0, video->pixels);
     ZeroMemory(video, sizeof(*video));
 }
 
-DWORD run16_console_video_begin(run16_console_video *video, uint32_t serial,
+DWORD frontend_video_begin(frontend_video *video, uint32_t serial,
     const console_video_description *description)
 {
     uint64_t stride, bytes;
@@ -54,14 +54,14 @@ DWORD run16_console_video_begin(run16_console_video *video, uint32_t serial,
         if (description->palette[i] & 0xff000000u) return ERROR_INVALID_DATA;
     pending = HeapAlloc(GetProcessHeap(), 0, (SIZE_T)bytes);
     if (!pending) return ERROR_NOT_ENOUGH_MEMORY;
-    run16_console_video_abort_pending(video);
+    frontend_video_abort_pending(video);
     video->pending = pending;
     video->pending_description = *description;
     video->serial = video->pending_serial = serial;
     return ERROR_SUCCESS;
 }
 
-DWORD run16_console_video_stage_data(run16_console_video *video, uint32_t serial,
+DWORD frontend_video_stage_data(frontend_video *video, uint32_t serial,
     uint32_t offset, const void *data, uint32_t bytes)
 {
     if (!video || !data) return ERROR_INVALID_PARAMETER;
@@ -69,7 +69,7 @@ DWORD run16_console_video_stage_data(run16_console_video *video, uint32_t serial
         offset != video->received || !bytes ||
         video->received > video->pending_description.bytes ||
         bytes > video->pending_description.bytes - video->received) {
-        run16_console_video_abort_pending(video);
+        frontend_video_abort_pending(video);
         return ERROR_INVALID_DATA;
     }
     memcpy(video->pending + offset, data, bytes);
@@ -83,7 +83,7 @@ DWORD run16_console_video_stage_data(run16_console_video *video, uint32_t serial
                 const BYTE *cells=video->pending+sizeof(*style);
                 uint32_t i,count=video->pending_description.width*video->pending_description.height;
                 for(i=0;i<count;++i)if(cells[i*3+2]&~CONSOLE_TEXT_STYLE_MASK) {
-                    run16_console_video_abort_pending(video);return ERROR_INVALID_DATA;
+                    frontend_video_abort_pending(video);return ERROR_INVALID_DATA;
                 }
             }
             if(!style->font_height || style->font_height>32 ||
@@ -92,7 +92,7 @@ DWORD run16_console_video_stage_data(run16_console_video *video, uint32_t serial
                 style->cursor_height1<0 || style->cursor_height1>32 ||
                 style->cursor_start < -32 || style->cursor_start>31 ||
                 style->cursor_start1 < -32 || style->cursor_start1>31) {
-                run16_console_video_abort_pending(video);return ERROR_INVALID_DATA;
+                frontend_video_abort_pending(video);return ERROR_INVALID_DATA;
             }
         }
         video->pending_validated = TRUE;
@@ -100,7 +100,7 @@ DWORD run16_console_video_stage_data(run16_console_video *video, uint32_t serial
     return ERROR_SUCCESS;
 }
 
-DWORD run16_console_video_commit_pending(run16_console_video *video)
+DWORD frontend_video_commit_pending(frontend_video *video)
 {
     if(!video || !video->pending || !video->pending_validated ||
         video->received!=video->pending_description.bytes)
@@ -110,7 +110,7 @@ DWORD run16_console_video_commit_pending(run16_console_video *video)
         memcpy(video->configuration.palette,video->pending_description.palette,
             sizeof(video->configuration.palette));
         video->configuration_serial=video->pending_serial;
-        run16_console_video_abort_pending(video);
+        frontend_video_abort_pending(video);
         return ERROR_SUCCESS;
     }
     /* No allocation or external call can fail after validation. The owner
@@ -120,24 +120,24 @@ DWORD run16_console_video_commit_pending(run16_console_video *video)
     video->description = video->pending_description;
     video->published_serial = video->pending_serial;
     video->pending = NULL;
-    run16_console_video_abort_pending(video);
+    frontend_video_abort_pending(video);
     return ERROR_SUCCESS;
 }
 
-DWORD run16_console_video_data(run16_console_video *video,uint32_t serial,
+DWORD frontend_video_data(frontend_video *video,uint32_t serial,
     uint32_t offset,const void *data,uint32_t bytes)
 {
-    DWORD error=run16_console_video_stage_data(video,serial,offset,data,bytes);
+    DWORD error=frontend_video_stage_data(video,serial,offset,data,bytes);
     if(error)return error;
     return video->received==video->pending_description.bytes ?
-        run16_console_video_commit_pending(video) : ERROR_SUCCESS;
+        frontend_video_commit_pending(video) : ERROR_SUCCESS;
 }
 
-DWORD run16_console_video_text(run16_console_video *video, uint32_t serial)
+DWORD frontend_video_text(frontend_video *video, uint32_t serial)
 {
     if (!video) return ERROR_INVALID_PARAMETER;
     if (!serial || serial <= video->serial) return ERROR_INVALID_DATA;
-    run16_console_video_dispose(video);
+    frontend_video_dispose(video);
     video->serial = video->published_serial = serial;
     return ERROR_SUCCESS;
 }

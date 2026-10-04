@@ -182,9 +182,9 @@ done:
     CloseHandle(changed);
     return error;
 }
-DWORD run16_frontend_scope_launch_native(run16_frontend_scope *scope,const run16_native_start *start)
+DWORD run16_frontend_scope_launch_win32_text(run16_frontend_scope *scope,const run16_native_start *start)
 { return scope_launch_native(scope,start,TRUE); }
-DWORD run16_frontend_scope_launch_gui(run16_frontend_scope *scope,const run16_native_start *start)
+DWORD run16_frontend_scope_launch_win32_gui(run16_frontend_scope *scope,const run16_native_start *start)
 { return scope_launch_native(scope,start,FALSE); }
 DWORD run16_wait_direct_event(HANDLE receipt)
 {

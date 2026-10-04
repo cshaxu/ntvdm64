@@ -6,7 +6,7 @@ DWORD frontend_keyboard_dispatch(frontend_keyboard_delivery *delivery,
     const frontend_window_input *input,frontend_keyboard_sink sink,void *context)
 {
     frontend_window_keyboard_state next;
-    INPUT_RECORD physical={0},records[FRONTEND_NATIVE_KEY_RECORDS];DWORD count=1,error;
+    INPUT_RECORD physical={0},records[FRONTEND_CONSOLE_KEY_RECORDS];DWORD count=1,error;
     const kvm_input_event *event;
     if(!delivery || !input || !sink)return ERROR_INVALID_PARAMETER;
     event=&input->event;next=delivery->physical;
@@ -19,7 +19,7 @@ DWORD frontend_keyboard_dispatch(frontend_keyboard_delivery *delivery,
         }
         if(GetLastError()!=ERROR_NO_DATA)return GetLastError();
         delivery->physical=next;
-        return frontend_native_keyboard_reset(&delivery->native);
+        return frontend_console_keyboard_reset(&delivery->console_records);
     }
     if(event->type!=KVM_EVENT_KEY && event->type!=KVM_EVENT_TEXT)return ERROR_SUCCESS;
     if(event->type==KVM_EVENT_TEXT) {
@@ -33,7 +33,7 @@ DWORD frontend_keyboard_dispatch(frontend_keyboard_delivery *delivery,
         /* Original ntcon/HandleKeyEvent supplies character-bearing records
          * even to VDM. ReturnUnusedKeyEvents may give those records back to
          * a native reader, which cannot reconstruct text from scans alone. */
-        error=frontend_native_keyboard_records(&delivery->native,event,&physical,input->keyboard_layout,records,&count);
+        error=frontend_console_keyboard_records(&delivery->console_records,event,&physical,input->keyboard_layout,records,&count);
         if(error)return error;
     }
     error=sink(context,records,count);
@@ -41,9 +41,9 @@ DWORD frontend_keyboard_dispatch(frontend_keyboard_delivery *delivery,
     return error;
 }
 
-DWORD frontend_native_keyboard_reset(frontend_native_keyboard *state)
+DWORD frontend_console_keyboard_reset(frontend_console_keyboard *state)
 {
-    BYTE keys[256]={0};WCHAR text[FRONTEND_NATIVE_KEY_RECORDS];
+    BYTE keys[256]={0};WCHAR text[FRONTEND_CONSOLE_KEY_RECORDS];
     if(!state)return ERROR_INVALID_PARAMETER;
     if(state->thread && state->thread!=GetCurrentThreadId())return ERROR_INVALID_THREAD_ID;
     if(state->layout) {
@@ -56,17 +56,17 @@ DWORD frontend_native_keyboard_reset(frontend_native_keyboard *state)
     return ERROR_SUCCESS;
 }
 
-DWORD frontend_native_keyboard_records(frontend_native_keyboard *state,
+DWORD frontend_console_keyboard_records(frontend_console_keyboard *state,
     const kvm_input_event *event,const INPUT_RECORD *physical,HKL layout,
-    INPUT_RECORD records[FRONTEND_NATIVE_KEY_RECORDS],DWORD *count)
+    INPUT_RECORD records[FRONTEND_CONSOLE_KEY_RECORDS],DWORD *count)
 {
-    BYTE keys[256]={0};WCHAR text[FRONTEND_NATIVE_KEY_RECORDS];
+    BYTE keys[256]={0};WCHAR text[FRONTEND_CONSOLE_KEY_RECORDS];
     DWORD control,error,i;int length;
     if(!state || !event || !physical || !layout || !records || !count)return ERROR_INVALID_PARAMETER;
     *count=0;
     if(state->thread && state->thread!=GetCurrentThreadId())return ERROR_INVALID_THREAD_ID;
     if(state->layout && state->layout!=layout) {
-        error=frontend_native_keyboard_reset(state);if(error)return error;
+        error=frontend_console_keyboard_reset(state);if(error)return error;
     }
     if(event->type==KVM_EVENT_TEXT) {
         DWORD scalar=event->data.text.scalar;
@@ -98,7 +98,7 @@ DWORD frontend_native_keyboard_records(frontend_native_keyboard *state,
     if(control&CAPSLOCK_ON)keys[VK_CAPITAL]=1;
     length=ToUnicodeEx(physical->Event.KeyEvent.wVirtualKeyCode,
         physical->Event.KeyEvent.wVirtualScanCode,keys,text,ARRAYSIZE(text),0,layout);
-    if(length>FRONTEND_NATIVE_KEY_RECORDS)return ERROR_INSUFFICIENT_BUFFER;
+    if(length>FRONTEND_CONSOLE_KEY_RECORDS)return ERROR_INSUFFICIENT_BUFFER;
     if(length>0) {
         for(i=0;i<(DWORD)length;++i) {
             records[i]=*physical;records[i].Event.KeyEvent.uChar.UnicodeChar=text[i];

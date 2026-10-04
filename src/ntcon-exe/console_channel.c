@@ -5,47 +5,47 @@
 #include <stddef.h>
 #include <stdio.h>
 
-struct run16_console_channel {
-    run16_console_frontend console;
+struct frontend_io_channel {
+    frontend_console console;
     HANDLE pipe,worker,stop,thread,io_event,ready;
     BOOL input_pending;
     BOOL snapshot_held;
     HANDLE publication_surface;
     DWORD publication_terminal_error;
     SMALL_RECT publication_window;
-    run16_console_video committed_video;
+    frontend_video committed_video;
     char title[CONSOLE_IO_TITLE_BYTES];
     BOOL title_valid;
-    run16_native_frontend *root;
+    frontend_session *root;
 };
 static DWORD activate(void *context,BOOL active)
 {
-    run16_console_channel *channel=context;
+    frontend_io_channel *channel=context;
     DWORD error;
     /* NTSRV has already granted the only connection. A conflicting local
      * binding is an invariant failure, not permission to queue or arbitrate. */
-    error=run16_native_frontend_bind(channel->root,channel,active);
+    error=frontend_session_bind(channel->root,channel,active);
     if(!error && active) {
         HANDLE logical=NULL;
-        error=run16_native_frontend_logical_console(channel->root,&logical);
+        error=frontend_session_logical_console(channel->root,&logical);
         if(!error) {
             CloseHandle(channel->console.output);
             channel->console.output=logical;
-        } else (void)run16_native_frontend_bind(channel->root,channel,FALSE);
+        } else (void)frontend_session_bind(channel->root,channel,FALSE);
     }
     /* Keep the shared logical viewport through acquisition. Only a copied
      * geometry operation or publication changes its dimensions. */
     if(!error && active && channel->title_valid &&
-        !run16_native_frontend_enter(channel->root,channel)) {
-        run16_native_frontend_worker_title(channel->root,channel,channel->title);
-        run16_native_frontend_leave(channel->root);
+        !frontend_session_enter(channel->root,channel)) {
+        frontend_session_worker_title(channel->root,channel,channel->title);
+        frontend_session_leave(channel->root);
     }
     /* A released worker's cached frame predates the new owner's geometry.
      * Root binding has detached this pointer under the shared I/O lock. Keep
      * the visible common screen, but require a fresh complete worker frame. */
     if(!error && !active) {
         uint32_t serial=channel->console.video.serial;
-        run16_console_video_dispose(&channel->console.video);
+        frontend_video_dispose(&channel->console.video);
         channel->console.video.serial=serial; /* Handoff does not authorize replay. */
     }
     return error;
@@ -58,35 +58,35 @@ static DWORD reject_pipe_activation(void *context,BOOL active)
 }
 static DWORD prepare_text(void *context,COORD size)
 {
-    run16_console_channel *channel=context;
+    frontend_io_channel *channel=context;
     HANDLE logical=NULL;
     BOOL committed=FALSE;
-    DWORD error=run16_native_frontend_prepare_text(channel->root,channel,size,&committed);
-    if(!error)error=run16_native_frontend_logical_console(channel->root,&logical);
+    DWORD error=frontend_session_prepare_text(channel->root,channel,size,&committed);
+    if(!error)error=frontend_session_logical_console(channel->root,&logical);
     if(!error){CloseHandle(channel->console.output);channel->console.output=logical;}
     else if(committed)channel->publication_terminal_error=error;
     return error;
 }
 static DWORD video_data(void *context,uint32_t serial,uint32_t offset,const void *data,uint32_t bytes)
 {
-    run16_console_channel *channel=context;
-    run16_console_video *video=&channel->console.video;
+    frontend_io_channel *channel=context;
+    frontend_video *video=&channel->console.video;
     HANDLE logical=NULL;
     DWORD error;
     /* Explicit batches already own a private grid and frame. Standalone
      * publications need the same old-until-commit guarantee. */
     if(channel->publication_surface)
-        return run16_console_video_data(video,serial,offset,data,bytes);
-    error=run16_console_video_stage_data(video,serial,offset,data,bytes);
+        return frontend_video_data(video,serial,offset,data,bytes);
+    error=frontend_video_stage_data(video,serial,offset,data,bytes);
     if(error || !video->pending_validated)return error;
-    error=run16_native_frontend_video(channel->root,channel,video,TRUE);
+    error=frontend_session_video(channel->root,channel,video,TRUE);
     if(error) {
-        if(video->pending)run16_console_video_abort_pending(video); /* Precommit failure. */
+        if(video->pending)frontend_video_abort_pending(video); /* Precommit failure. */
         else channel->publication_terminal_error=error; /* Projection failed after commit. */
         return error;
     }
     if(video->pixels && video->description.kind==CONSOLE_VIDEO_TEXT_FRAME) {
-        error=run16_native_frontend_logical_console(channel->root,&logical);
+        error=frontend_session_logical_console(channel->root,&logical);
         if(error){channel->publication_terminal_error=error;return error;}
         CloseHandle(channel->console.output);channel->console.output=logical;
     }
@@ -94,13 +94,13 @@ static DWORD video_data(void *context,uint32_t serial,uint32_t offset,const void
 }
 static DWORD enter(void *context)
 {
-    run16_console_channel *channel=context;
-    return run16_native_frontend_enter(channel->root,channel);
+    frontend_io_channel *channel=context;
+    return frontend_session_enter(channel->root,channel);
 }
 static void leave(void *context)
 {
-    run16_console_channel *channel=context;
-    run16_native_frontend_leave(channel->root);
+    frontend_io_channel *channel=context;
+    frontend_session_leave(channel->root);
 }
 static DWORD screen_begin(void *context)
 {
@@ -110,25 +110,25 @@ static DWORD screen_begin(void *context)
 }
 static DWORD screen_end(void *context,BOOL write)
 {
-    run16_console_channel *channel=context;
+    frontend_io_channel *channel=context;
     return write && !channel->publication_surface ?
-        run16_native_frontend_project_text(channel->root) : ERROR_SUCCESS;
+        frontend_session_project_text(channel->root) : ERROR_SUCCESS;
 }
 static DWORD publication(void *context,uint32_t operation)
 {
-    run16_console_channel *channel=context;
+    frontend_io_channel *channel=context;
     DWORD error;
     BOOL committed;
     if(operation==CONSOLE_IO_PUBLICATION_BEGIN) {
         if(channel->publication_terminal_error)return ERROR_INVALID_STATE;
         if(channel->publication_surface)return ERROR_BUSY;
-        error=run16_native_frontend_clone_text(channel->root,&channel->publication_surface,
+        error=frontend_session_clone_text(channel->root,&channel->publication_surface,
             &channel->publication_window);
         if(error)return error;
         /* Save the last committed frame; a failed tile stream cannot mutate
          * the object still borrowed by the renderer. */
         channel->committed_video=channel->console.video;
-        error=run16_native_frontend_video(channel->root,channel,&channel->committed_video,FALSE);
+        error=frontend_session_video(channel->root,channel,&channel->committed_video,FALSE);
         if(error) {
             CloseHandle(channel->publication_surface);channel->publication_surface=NULL;
             ZeroMemory(&channel->committed_video,sizeof(channel->committed_video));return error;
@@ -158,25 +158,25 @@ static DWORD publication(void *context,uint32_t operation)
             return ERROR_INVALID_DATA;
         /* Validate font/revision/notification before consuming staging. Grid,
          * frame and font then use the same commit as standalone publication. */
-        error=run16_native_frontend_publish_text(channel->root,channel,&channel->console.video,
+        error=frontend_session_publish_text(channel->root,channel,&channel->console.video,
             channel->publication_surface,channel->publication_window,&committed);
         if(!committed)return error; /* Staging can still be explicitly aborted. */
         channel->publication_surface=NULL;channel->console.output=NULL;
-        run16_console_video_dispose(&channel->committed_video);
+        frontend_video_dispose(&channel->committed_video);
         if(error)channel->publication_terminal_error=error;
     } else {
         uint32_t attempted_serial=channel->console.video.serial;
         CloseHandle(channel->publication_surface);
         channel->publication_surface=NULL;channel->console.output=NULL;
-        run16_console_video_dispose(&channel->console.video);
+        frontend_video_dispose(&channel->console.video);
         channel->console.video=channel->committed_video;
         if(channel->console.video.serial<attempted_serial)channel->console.video.serial=attempted_serial;
         ZeroMemory(&channel->committed_video,sizeof(channel->committed_video));
-        error=run16_native_frontend_video(channel->root,channel,&channel->console.video,FALSE);
+        error=frontend_session_video(channel->root,channel,&channel->console.video,FALSE);
     }
-    channel->console.logical_window=run16_native_frontend_text_region(channel->root);
+    channel->console.logical_window=frontend_session_text_region(channel->root);
     {
-        DWORD handle_error=run16_native_frontend_logical_console(channel->root,&channel->console.output);
+        DWORD handle_error=frontend_session_logical_console(channel->root,&channel->console.output);
         if(handle_error)channel->publication_terminal_error=handle_error;
         if(!error)error=handle_error;
     }
@@ -184,74 +184,74 @@ static DWORD publication(void *context,uint32_t operation)
 }
 static DWORD snapshot_begin(void *context)
 {
-    run16_console_channel *channel=context;
+    frontend_io_channel *channel=context;
     if(channel->snapshot_held)return ERROR_BUSY;
-    run16_native_frontend_snapshot_begin(channel->root);
+    frontend_session_snapshot_begin(channel->root);
     channel->snapshot_held=TRUE;return ERROR_SUCCESS;
 }
 static DWORD snapshot_end(void *context)
 {
-    run16_console_channel *channel=context;
+    frontend_io_channel *channel=context;
     if(!channel->snapshot_held)return ERROR_INVALID_STATE;
     channel->snapshot_held=FALSE;
-    run16_native_frontend_snapshot_end(channel->root);
+    frontend_session_snapshot_end(channel->root);
     return ERROR_SUCCESS;
 }
 static BOOL text_frame_required(void *context)
 {
-    run16_console_channel *channel=context;
-    return run16_native_frontend_text_frame_required(channel->root);
+    frontend_io_channel *channel=context;
+    return frontend_session_text_frame_required(channel->root);
 }
 static BOOL window_clip_owned(void *context)
 {
-    run16_console_channel *channel=context;
-    return run16_native_frontend_window_clip_owned(channel->root);
+    frontend_io_channel *channel=context;
+    return frontend_session_window_clip_owned(channel->root);
 }
 static void title_changed(void *context)
 {
-    run16_console_channel *channel=context;
-    run16_native_frontend_console_title_changed(channel->root);
+    frontend_io_channel *channel=context;
+    frontend_session_console_title_changed(channel->root);
 }
 static void publish_title(void *context,const char *title)
 {
-    run16_console_channel *channel=context;
+    frontend_io_channel *channel=context;
     strcpy_s(channel->title,sizeof(channel->title),title);
     channel->title_valid=TRUE;
-    if(!run16_native_frontend_enter(channel->root,channel)) {
-        run16_native_frontend_worker_title(channel->root,channel,channel->title);
-        run16_native_frontend_leave(channel->root);
+    if(!frontend_session_enter(channel->root,channel)) {
+        frontend_session_worker_title(channel->root,channel,channel->title);
+        frontend_session_leave(channel->root);
     }
 }
 static DWORD read_text_configuration(void *context,DWORD offset,DWORD revision,console_io_reply *reply)
 {
-    return run16_native_frontend_read_text_configuration(
-        ((run16_console_channel *)context)->root,offset,revision,reply);
+    return frontend_session_read_text_configuration(
+        ((frontend_io_channel *)context)->root,offset,revision,reply);
 }
-static BOOL active(run16_console_channel *channel)
+static BOOL active(frontend_io_channel *channel)
 {
     if(enter(channel))return FALSE;
     leave(channel);return TRUE;
 }
 static DWORD read_input(void *context,BOOL peek,INPUT_RECORD *records,DWORD count,DWORD *read)
 {
-    run16_console_channel *channel=context;
-    return run16_native_frontend_read(channel->root,peek,records,count,read);
+    frontend_io_channel *channel=context;
+    return frontend_session_read(channel->root,peek,records,count,read);
 }
 static DWORD prepend_input(void *context,const INPUT_RECORD *records,DWORD count)
 {
-    run16_console_channel *channel=context;
-    return run16_native_frontend_prepend(channel->root,records,count);
+    frontend_io_channel *channel=context;
+    return frontend_session_prepend(channel->root,records,count);
 }
 
 /* Explicit cancellation plus peer death. Never close an OVERLAPPED event or
  * buffer while the kernel may still complete its outstanding operation. */
-static DWORD transfer(run16_console_channel *channel,BOOL write,void *buffer,DWORD bytes)
+static DWORD transfer(frontend_io_channel *channel,BOOL write,void *buffer,DWORD bytes)
 {
     BYTE *cursor=buffer;
     while (bytes) {
         common_pipe_operation io;
         DWORD done=0,error,wait;
-        HANDLE waits[4]={channel->stop,channel->worker,channel->io_event,run16_native_frontend_ready(channel->root)};
+        HANDLE waits[4]={channel->stop,channel->worker,channel->io_event,frontend_session_ready(channel->root)};
         if (WaitForSingleObject(channel->stop,0)==WAIT_OBJECT_0) return ERROR_OPERATION_ABORTED;
         error=common_pipe_begin(&io,channel->pipe,channel->io_event,write,cursor,bytes,bytes,&done);
         if (error) {
@@ -280,7 +280,7 @@ static DWORD transfer(run16_console_channel *channel,BOOL write,void *buffer,DWO
 
 static DWORD WINAPI console_channel_main(void *context)
 {
-    run16_console_channel *channel=context;
+    frontend_io_channel *channel=context;
     console_io_request *request=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*request));
     console_io_reply reply={0};
     DWORD error=request ? ERROR_SUCCESS : ERROR_NOT_ENOUGH_MEMORY;
@@ -311,13 +311,13 @@ static DWORD WINAPI console_channel_main(void *context)
             /* Dispatch commits frame and dependent grid at the final chunk.
              * Keep its logical-grid import and duplicate update in that same
              * critical section; the renderer must not see new-frame/old-grid. */
-            run16_native_frontend_snapshot_begin(channel->root);video_locked=TRUE;
+            frontend_session_snapshot_begin(channel->root);video_locked=TRUE;
         }
-        if (!error) error=run16_console_dispatch(&channel->console,request,&reply);
+        if (!error) error=frontend_console_dispatch(&channel->console,request,&reply);
         if(!error && reply.result && !channel->publication_surface && !channel->console.video.pending && (request->operation==CONSOLE_IO_VIDEO_BEGIN ||
             request->operation==CONSOLE_IO_VIDEO_TEXT))
-            error=run16_native_frontend_video(channel->root,channel,&channel->console.video,TRUE);
-        if(video_locked)run16_native_frontend_snapshot_end(channel->root);
+            error=frontend_session_video(channel->root,channel,&channel->console.video,TRUE);
+        if(video_locked)frontend_session_snapshot_end(channel->root);
         if (!error && (request->operation==CONSOLE_IO_READ_INPUT ||
             request->operation==CONSOLE_IO_PEEK_INPUT || request->operation==CONSOLE_IO_ACTIVATE)) {
             INPUT_RECORD record;
@@ -340,9 +340,9 @@ static DWORD WINAPI console_channel_main(void *context)
     if(channel->publication_surface) {
         /* The endpoint is failed; abort staging even if it lost ownership.
          * No publication callback may invoke activation during EOF cleanup. */
-        run16_native_frontend_snapshot_begin(channel->root);
+        frontend_session_snapshot_begin(channel->root);
         (void)publication(channel,CONSOLE_IO_PUBLICATION_ABORT);
-        run16_native_frontend_snapshot_end(channel->root);
+        frontend_session_snapshot_end(channel->root);
     }
     if (request) HeapFree(GetProcessHeap(),0,request);
     /* This thread owns the endpoint after creation. EOF must reach the worker
@@ -352,12 +352,12 @@ static DWORD WINAPI console_channel_main(void *context)
     return error;
 }
 
-HANDLE run16_console_channel_thread(run16_console_channel *channel)
+HANDLE frontend_io_channel_thread(frontend_io_channel *channel)
 {
     return channel ? channel->thread : NULL;
 }
 
-DWORD run16_console_channel_stop(run16_console_channel *channel)
+DWORD frontend_io_channel_stop(frontend_io_channel *channel)
 {
     DWORD wait;
     if (!channel) return ERROR_SUCCESS;
@@ -378,9 +378,9 @@ DWORD run16_console_channel_stop(run16_console_channel *channel)
             return wait==WAIT_TIMEOUT ? ERROR_TIMEOUT : GetLastError();
         CloseHandle(channel->thread);
     } else if (channel->pipe && channel->pipe!=INVALID_HANDLE_VALUE) CloseHandle(channel->pipe);
-    run16_native_frontend_forget(channel->root,channel);
-    run16_console_video_dispose(&channel->console.video);
-    run16_console_video_dispose(&channel->committed_video);
+    frontend_session_forget(channel->root,channel);
+    frontend_video_dispose(&channel->console.video);
+    frontend_video_dispose(&channel->committed_video);
     if (channel->io_event) CloseHandle(channel->io_event);
     if (channel->ready) CloseHandle(channel->ready);
     if (channel->stop) CloseHandle(channel->stop);
@@ -391,9 +391,9 @@ DWORD run16_console_channel_stop(run16_console_channel *channel)
     return ERROR_SUCCESS;
 }
 
-DWORD run16_console_channel_start_request(DWORD request,HANDLE worker,run16_native_frontend *root,run16_console_channel **output)
+DWORD frontend_io_channel_start_request(DWORD request,HANDLE worker,frontend_session *root,frontend_io_channel **output)
 {
-    run16_console_channel *channel;
+    frontend_io_channel *channel;
     HANDLE server=INVALID_HANDLE_VALUE;
     WCHAR name[96];
     OVERLAPPED connect={0};
@@ -409,7 +409,7 @@ DWORD run16_console_channel_start_request(DWORD request,HANDLE worker,run16_nati
     if (!channel) { if (worker) CloseHandle(worker);return ERROR_NOT_ENOUGH_MEMORY; }
     channel->worker=worker;
     channel->root=root;
-    channel->console.logical_window=run16_native_frontend_text_region(root);
+    channel->console.logical_window=frontend_session_text_region(root);
     channel->console.io_context=channel;
     channel->console.activate=reject_pipe_activation;channel->console.prepare_text=prepare_text;
     channel->console.video_data=video_data;
@@ -427,12 +427,12 @@ DWORD run16_console_channel_start_request(DWORD request,HANDLE worker,run16_nati
     channel->io_event=CreateEventW(NULL,TRUE,FALSE,NULL);
     channel->ready=CreateEventW(NULL,TRUE,FALSE,NULL);
     if (!channel->stop || !channel->io_event || !channel->ready) { error=GetLastError();goto fail; }
-    error=run16_native_frontend_console(root,&channel->console.input,&channel->console.output);
+    error=frontend_session_console(root,&channel->console.input,&channel->console.output);
     if (error) goto fail;
     CloseHandle(channel->console.output);channel->console.output=NULL;
-    run16_native_frontend_snapshot_begin(root);
-    error=run16_native_frontend_logical_console(root,&channel->console.output);
-    run16_native_frontend_snapshot_end(root);
+    frontend_session_snapshot_begin(root);
+    error=frontend_session_logical_console(root,&channel->console.output);
+    frontend_session_snapshot_end(root);
     if(error)goto fail;
     swprintf_s(name,96,L"\\\\.\\pipe\\ntvdm-console-%lu-%lu",GetCurrentProcessId(),
         (DWORD)InterlockedIncrement(&serial));
@@ -470,6 +470,6 @@ DWORD run16_console_channel_start_request(DWORD request,HANDLE worker,run16_nati
     return ERROR_SUCCESS;
 fail:
     if (server!=INVALID_HANDLE_VALUE) CloseHandle(server);
-    (void)run16_console_channel_stop(channel);
+    (void)frontend_io_channel_stop(channel);
     return error;
 }

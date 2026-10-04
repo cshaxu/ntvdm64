@@ -30,7 +30,7 @@ static BOOL frame_test_write_console_output(HANDLE output,const CHAR_INFO *cells
 }
 #define HeapAlloc frame_test_heap_alloc
 #define WriteConsoleOutputW frame_test_write_console_output
-#include "../../src/ntcon-exe/native_console_frontend.c"
+#include "../../src/ntcon-exe/frontend_session.c"
 #undef HeapAlloc
 #undef WriteConsoleOutputW
 #define NTCON_FRAME_FAILURE_TEST

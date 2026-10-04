@@ -54,7 +54,7 @@ boundaries, not an import or a full mirror-diff audit in this S.
 
 ## Ownership naming
 
-[NTCON native_console_frontend](../../../src/ntcon-exe/native_console_frontend.h),
+[NTCON frontend session (renamed in S6)](../../../src/ntcon-exe/frontend_session.h),
 [console_channel](../../../src/ntcon-exe/console_channel.h),
 [console_frontend](../../../src/ntcon-exe/console_frontend.h) and
 [console_video](../../../src/ntcon-exe/console_video.h) still expose

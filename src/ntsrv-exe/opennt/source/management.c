@@ -18,7 +18,7 @@ static void service_capture_management_label_from_info(OPENNT_BASE_WORKER_WATCH 
     PDOSRECORD record);
 static OPENNT_BASE_WORKER_WATCH *service_find_management_watch_for_console(
     OPENNT_BASE_SERVICE *service,HANDLE console);
-static void service_copy_management_record(OPENNT_BASE_WORKER_WATCH *watch,
+static void service_copy_vdm_management_record(OPENNT_BASE_WORKER_WATCH *watch,
     OPENNT_BASE_WORKER_INFO *item);
 static void service_sort_management_records(OPENNT_BASE_WORKER_INFO *entries,uint32_t count);
 static void service_copy_win32record(OPENNT_BASE_CONNECTION *native,
@@ -259,7 +259,7 @@ void service_capture_checked_management_label(OPENNT_BASE_SERVICE *service,
     RtlLeaveCriticalSection(&BaseSrvDOSCriticalSection);
 }
 
-static void service_copy_management_record(OPENNT_BASE_WORKER_WATCH *watch,
+static void service_copy_vdm_management_record(OPENNT_BASE_WORKER_WATCH *watch,
     OPENNT_BASE_WORKER_INFO *item)
 {
     PCONSOLERECORD console;
@@ -385,7 +385,7 @@ static void service_copy_worker(OPENNT_BASE_WORKER_WATCH *watch,OPENNT_BASE_WORK
                 service_copy_win32record(native,item);break;
             }
         }
-    } else service_copy_management_record(watch,item);
+    } else service_copy_vdm_management_record(watch,item);
     item->display_state=item->state==0 ? MANAGEMENT_UNKNOWN :
         item->stack_depth ? MANAGEMENT_BUSY : MANAGEMENT_IDLE;
     if(watch->termination_requested || (item->state&0x80000000u) ||

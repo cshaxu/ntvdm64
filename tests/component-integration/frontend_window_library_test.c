@@ -19,7 +19,7 @@ typedef struct run16_native_frame_info {
 static DWORD frontend_window_native_frame_pointer(const run16_native_frame_info *info,
     const CHAR_INFO *cells,SIZE_T count,const POINT *pointer,kvm_window_frame *frame)
 {
-    console_text_style font={0};run16_console_video video={0};
+    console_text_style font={0};frontend_video video={0};
     BYTE *payload=NULL;DWORD error;unsigned bank,glyph;
     frame->valid=0;font.font_height=14;
     for(bank=0;bank<2;++bank)for(glyph=0;glyph<256;++glyph)
@@ -161,7 +161,7 @@ int main(void)
         CHECK(fitted_width==784 && fitted_height==471);
         puts("PASS library Window sizing: frame-sized by default; monitor fit only when necessary");
     }
-    run16_console_video video = {0};
+    frontend_video video = {0};
     console_video_description description = {9, 2, 4, 1, 8, {0}};
     BYTE dib[8] = {0x80, 0x80, 0xee, 0xee, 0x40, 0, 0xee, 0xee};
     run16_native_frame_info native = {0};
@@ -226,25 +226,25 @@ int main(void)
     CHECK(kvm_window_create(&window, &options) == LIB_STATUS_INVALID_ARGUMENT);
     CHECK(window == NULL);
     description.palette[1] = 0x2468ac;
-    CHECK(run16_console_video_begin(&video, 1, &description) == ERROR_SUCCESS);
-    CHECK(run16_console_video_data(&video, 1, 0, dib, 4) == ERROR_SUCCESS);
+    CHECK(frontend_video_begin(&video, 1, &description) == ERROR_SUCCESS);
+    CHECK(frontend_video_data(&video, 1, 0, dib, 4) == ERROR_SUCCESS);
     CHECK(frontend_window_decode_frame(&video, frame) == ERROR_NO_DATA && !frame->valid);
-    CHECK(run16_console_video_data(&video, 1, 4, dib + 4, 4) == ERROR_SUCCESS);
+    CHECK(frontend_video_data(&video, 1, 4, dib + 4, 4) == ERROR_SUCCESS);
     CHECK(frontend_window_decode_frame(&video, frame) == ERROR_SUCCESS);
     CHECK(frame->image.width == 9 && frame->image.stride == 9 && frame->image.height == 2);
     CHECK(frame->image.pixels[0] == 1 && frame->image.pixels[8] == 1);
     CHECK(frame->image.pixels[9] == 0 && frame->image.pixels[10] == 1);
     CHECK(frame->image.palette[1] == 0x2468ac);
-    CHECK(run16_console_video_begin(&video, 2, &description) == ERROR_SUCCESS);
+    CHECK(frontend_video_begin(&video, 2, &description) == ERROR_SUCCESS);
     CHECK(frontend_window_decode_frame(&video, frame) == ERROR_SUCCESS); /* Retain complete frame. */
-    CHECK(run16_console_video_text(&video, 3) == ERROR_SUCCESS);
+    CHECK(frontend_video_text(&video, 3) == ERROR_SUCCESS);
     CHECK(frontend_window_decode_frame(&video, frame) == ERROR_NO_DATA && !frame->valid);
     description.width = 3; description.depth = 8;
-    CHECK(run16_console_video_begin(&video, 4, &description) == ERROR_SUCCESS);
-    CHECK(run16_console_video_data(&video, 4, 0, dib, 8) == ERROR_SUCCESS);
+    CHECK(frontend_video_begin(&video, 4, &description) == ERROR_SUCCESS);
+    CHECK(frontend_video_data(&video, 4, 0, dib, 8) == ERROR_SUCCESS);
     CHECK(frontend_window_decode_frame(&video, frame) == ERROR_SUCCESS);
     CHECK(frame->image.pixels[2] == 0xee && frame->image.pixels[3] == 0x40);
-    run16_console_video_dispose(&video);
+    frontend_video_dispose(&video);
     {
         console_video_description text={80,50,160,0,0,{0},CONSOLE_VIDEO_TEXT_FRAME};
         console_text_style *style;BYTE *payload;
@@ -254,47 +254,47 @@ int main(void)
         style->fonts[1][65][7]=1;text.palette[9]=0x123456;
         payload[sizeof(*style)+(49*80+79)*2]=65;
         payload[sizeof(*style)+(49*80+79)*2+1]=9;
-        CHECK(!run16_console_video_begin(&video,1,&text));
-        CHECK(!run16_console_video_data(&video,1,0,payload,16384));
+        CHECK(!frontend_video_begin(&video,1,&text));
+        CHECK(!frontend_video_data(&video,1,0,payload,16384));
         CHECK(frontend_window_decode_frame(&video,frame)==ERROR_NO_DATA);
-        CHECK(!run16_console_video_data(&video,1,16384,payload+16384,text.bytes-16384));
+        CHECK(!frontend_video_data(&video,1,16384,payload+16384,text.bytes-16384));
         CHECK(!frontend_window_decode_frame(&video,frame) && !frame->graphics);
         CHECK(frame->text.base.text_rows==50 && frame->text.base.font_height==8);
         valid=LIB_FALSE;
         CHECK(kvm_window_render_frame(frame,pixels,640,400,&valid,&changed));
         CHECK(pixels[399*640+639]==0x123456);
-        CHECK(!run16_console_video_begin(&video,2,&text));
+        CHECK(!frontend_video_begin(&video,2,&text));
         style->font_height=33;
-        CHECK(run16_console_video_data(&video,2,0,payload,text.bytes)==ERROR_INVALID_DATA);
+        CHECK(frontend_video_data(&video,2,0,payload,text.bytes)==ERROR_INVALID_DATA);
         CHECK(video.published_serial==1 && !frontend_window_decode_frame(&video,frame));
         style->font_height=8;style->cursor_start=INT32_MAX;
-        CHECK(!run16_console_video_begin(&video,3,&text));
-        CHECK(run16_console_video_data(&video,3,0,payload,text.bytes)==ERROR_INVALID_DATA);
+        CHECK(!frontend_video_begin(&video,3,&text));
+        CHECK(frontend_video_data(&video,3,0,payload,text.bytes)==ERROR_INVALID_DATA);
         CHECK(video.published_serial==1);
         style->cursor_start=0;text.height=25;text.bytes=sizeof(*style)+160*25;
         style->font_height=20;style->fonts[0][65][19]=1;style->attribute_font_select=0;
         payload[sizeof(*style)]=65;payload[sizeof(*style)+1]=9;
-        CHECK(!run16_console_video_begin(&video,4,&text));
-        CHECK(!run16_console_video_data(&video,4,0,payload,text.bytes));
+        CHECK(!frontend_video_begin(&video,4,&text));
+        CHECK(!frontend_video_data(&video,4,0,payload,text.bytes));
         CHECK(!frontend_window_decode_frame(&video,frame) && !frame->graphics);
         valid=LIB_FALSE;
         CHECK(kvm_window_render_frame(frame,pixels,640,500,&valid,&changed));
         CHECK(pixels[19*640+7]==0x123456);
         --text.bytes;
-        CHECK(run16_console_video_begin(&video,5,&text)==ERROR_INVALID_DATA);
+        CHECK(frontend_video_begin(&video,5,&text)==ERROR_INVALID_DATA);
         /* Text transport is not subject to the 768-line DIB limit. The
          * unchanged library directly renders 80x50 with a 16-line font. */
         text.height=50;text.bytes=sizeof(*style)+160*50;
         style->font_height=16;style->attribute_font_select=1;
         style->fonts[1][65][15]=1;
-        CHECK(!run16_console_video_begin(&video,6,&text));
-        CHECK(!run16_console_video_data(&video,6,0,payload,text.bytes));
+        CHECK(!frontend_video_begin(&video,6,&text));
+        CHECK(!frontend_video_data(&video,6,0,payload,text.bytes));
         CHECK(!frontend_window_decode_frame(&video,frame) && !frame->graphics);
         CHECK(frame->text.base.text_rows==50 && frame->text.base.font_height==16);
         valid=LIB_FALSE;
         CHECK(kvm_window_render_frame(frame,pixels,640,800,&valid,&changed));
         CHECK(pixels[799*640+639]==0x123456);
-        free(payload);run16_console_video_dispose(&video);
+        free(payload);frontend_video_dispose(&video);
         /* The normal native 16-line font plus a per-cell underline must not
          * turn a supported 80x50 TEXT page into an oversized DIB. */
         text.stride=240;text.bytes=sizeof(*style)+text.stride*50;
@@ -305,8 +305,8 @@ int main(void)
             payload[sizeof(*style)+cell*3+1]=7;
         }
         payload[sizeof(*style)+3999*3+2]=CONSOLE_TEXT_UNDERLINE;
-        CHECK(!run16_console_video_begin(&video,1,&text));
-        CHECK(!run16_console_video_data(&video,1,0,payload,text.bytes));
+        CHECK(!frontend_video_begin(&video,1,&text));
+        CHECK(!frontend_video_data(&video,1,0,payload,text.bytes));
         CHECK(!frontend_window_decode_frame(&video,frame) && !frame->graphics);
         valid=LIB_FALSE;
         CHECK(kvm_window_render_frame(frame,pixels,640,800,&valid,&changed));
@@ -323,8 +323,8 @@ int main(void)
             payload[sizeof(*style)+cell*3+1]=7;
             payload[sizeof(*style)+cell*3+2]=cell>=256 && cell<512 ? CONSOLE_TEXT_UNDERLINE : 0;
         }
-        CHECK(!run16_console_video_begin(&video,2,&text));
-        CHECK(!run16_console_video_data(&video,2,0,payload,text.bytes));
+        CHECK(!frontend_video_begin(&video,2,&text));
+        CHECK(!frontend_video_data(&video,2,0,payload,text.bytes));
         CHECK(!frontend_window_decode_frame(&video,frame) && !frame->graphics);
         for(unsigned cell=0;cell<512;++cell) {
             kvm_text_cell mapped=frame->text.base.cells[(cell/80)*KVM_TEXT_COLUMNS+cell%80];
@@ -339,11 +339,11 @@ int main(void)
         /* Styles are stored per cell, so a 513th distinct glyph/style
          * combination no longer exhausts the two source font banks. */
         payload[sizeof(*style)+512*3+1]=15;
-        CHECK(!run16_console_video_begin(&video,3,&text));
-        CHECK(!run16_console_video_data(&video,3,0,payload,text.bytes));
+        CHECK(!frontend_video_begin(&video,3,&text));
+        CHECK(!frontend_video_data(&video,3,0,payload,text.bytes));
         CHECK(!frontend_window_decode_frame(&video,frame) && !frame->graphics);
         CHECK(style->fonts[0][0][15]==15 && style->fonts[1][0][15]==16);
-        free(payload);run16_console_video_dispose(&video);
+        free(payload);frontend_video_dispose(&video);
         puts("PASS copied DOS text: complete-frame publication, 80x50 dual font, tall glyph text and malformed frame retention");
     }
     native_cells = calloc(5001u * 300u, sizeof(*native_cells));
@@ -416,8 +416,8 @@ int main(void)
         payload[sizeof(*style)+(120+1)*3+1]=7;
         payload[sizeof(*style)+(120+1)*3+2]=CONSOLE_TEXT_UNDERLINE;
         text.palette[7]=0xffffff;
-        CHECK(!run16_console_video_begin(&video,11,&text));
-        CHECK(!run16_console_video_data(&video,11,0,payload,text.bytes));
+        CHECK(!frontend_video_begin(&video,11,&text));
+        CHECK(!frontend_video_data(&video,11,0,payload,text.bytes));
         CHECK(!frontend_window_decode_frame(&video,frame) && !frame->graphics);
         CHECK(kvm_window_frame_size(frame,&width,&height) && width==960 && height==960);
         CHECK(kvm_window_cursor_rect(frame,&display,&cursor_a));
@@ -427,7 +427,7 @@ int main(void)
         valid=LIB_FALSE;
         CHECK(kvm_window_render_frame(frame,pixels,width,height,&valid,&changed));
         CHECK(pixels[63*width+8]==0xffffff && pixels[32*width+8]==0);
-        free(payload);run16_console_video_dispose(&video);
+        free(payload);frontend_video_dispose(&video);
     }
     puts("PASS native 160-column text; oversized protocol view rejected without font shrinking");
     free(native_cells);

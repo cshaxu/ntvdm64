@@ -3,7 +3,7 @@
 #include "text_frame.h"
 
 
-static DWORD decode_text_frame(const run16_console_video *video,kvm_window_frame *frame)
+static DWORD decode_text_frame(const frontend_video *video,kvm_window_frame *frame)
 {
     const console_video_description *d=&video->description;
     const console_text_style *style=(const console_text_style *)video->pixels;
@@ -59,7 +59,7 @@ done:
     if(snapshot)HeapFree(GetProcessHeap(),0,snapshot);
     return error;
 }
-DWORD frontend_window_decode_frame(const run16_console_video *video, kvm_window_frame *frame)
+DWORD frontend_window_decode_frame(const frontend_video *video, kvm_window_frame *frame)
 {
     const console_video_description *description;
     uint64_t stride;

@@ -5,5 +5,5 @@
 
 /* Decode copied TEXT_FRAME or DIB data, independently of worker type.
  * TEXT_CONFIGURATION updates metadata; it is not a standalone Window frame. */
-DWORD frontend_window_decode_frame(const run16_console_video *, kvm_window_frame *);
+DWORD frontend_window_decode_frame(const frontend_video *, kvm_window_frame *);
 #endif

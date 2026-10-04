@@ -1496,7 +1496,10 @@ int main(int argc,char **argv)
         CloseHandle(capability);CloseHandle(child.hThread);CloseHandle(child.hProcess);
         CloseHandle(stdinRead);CloseHandle(stdinWrite);CloseHandle(stdoutRead);CloseHandle(stdoutWrite);
         CloseHandle(self);free(updateAnswer);free(updateWire);free(answer);free(wire);
-        CHECK(beforeStop==afterStop+(!strcmp(argv[1],"--frontend-unclaimed-stop") ? 1 : 0));
+        /* Stop always closes the service's frontend_lifetime_changed event.
+         * Only the no-reconnect path still owns the cancelled route's worker
+         * reference: reconnect already proved release of that extra handle. */
+        CHECK(beforeStop==afterStop+(!strcmp(argv[1],"--frontend-unclaimed-stop") ? 2 : 1));
         puts(!strcmp(argv[1],"--frontend-unclaimed-stop") ?
             "PASS: service stop releases the unclaimed cancelled frontend worker handle" :
             "PASS: new admission releases dead cancelled route before service stop");

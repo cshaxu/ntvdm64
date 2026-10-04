@@ -68,7 +68,7 @@ mechanism, retained adapter and actual positive/negative evidence.
 
 | Current name and point | Target meaning |
 | --- | --- |
-| [native_console_frontend.h](../../src/ntcon-exe/native_console_frontend.h), matching `.c`, `run16_native_frontend` and its function family. | NTCON-owned common frontend; remove misleading launcher and native-worker qualifiers from project-owned names and filenames. |
+| [frontend_session.h](../../src/ntcon-exe/frontend_session.h) (formerly native_console_frontend.h), matching `.c`, former `run16_native_frontend` family. | NTCON-owned common frontend; remove misleading launcher and native-worker qualifiers from project-owned names and filenames. |
 | [console_channel.h](../../src/ntcon-exe/console_channel.h), `run16_console_channel_*`. | Frontend-owned worker I/O channel. |
 | [console_frontend.h](../../src/ntcon-exe/console_frontend.h), `run16_console_frontend` and dispatch family. | Frontend-owned Console operation state/dispatch. |
 | [console_video.h](../../src/ntcon-exe/console_video.h), `run16_console_video_*`. | Frontend-owned copied video/publication state. |

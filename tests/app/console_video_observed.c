@@ -1,11 +1,11 @@
 /* Test-only link substitution: all operations still execute the production
  * receiver; record completed frames and copied input for boundary diagnosis.
  * Never a product input. */
-#define run16_console_video_data production_video_data
-#define run16_console_video_text production_video_text
+#define frontend_video_data production_video_data
+#define frontend_video_text production_video_text
 #include "../../src/ntcon-exe/console_video.c"
-#undef run16_console_video_data
-#undef run16_console_video_text
+#undef frontend_video_data
+#undef frontend_video_text
 #include <stdio.h>
 static SRWLOCK report_lock=SRWLOCK_INIT;
 static void close_report(FILE *file)
@@ -66,7 +66,7 @@ DWORD frontend_keyboard_dispatch(frontend_keyboard_delivery *delivery,
     return error;
 }
 
-DWORD run16_console_video_data(run16_console_video *video,uint32_t serial,
+DWORD frontend_video_data(frontend_video *video,uint32_t serial,
     uint32_t offset,const void *data,uint32_t bytes)
 {
     console_text_style failed_style={0};
@@ -122,7 +122,7 @@ DWORD run16_console_video_data(run16_console_video *video,uint32_t serial,
     return result;
 }
 
-DWORD run16_console_video_text(run16_console_video *video,uint32_t serial)
+DWORD frontend_video_text(frontend_video *video,uint32_t serial)
 {
     DWORD result=production_video_text(video,serial);
     FILE *file=report();
@@ -130,10 +130,10 @@ DWORD run16_console_video_text(run16_console_video *video,uint32_t serial)
     return result;
 }
 
-#define run16_console_dispatch production_console_dispatch
+#define frontend_console_dispatch production_console_dispatch
 #include "../../src/ntcon-exe/console_frontend.c"
-#undef run16_console_dispatch
-DWORD run16_console_dispatch(run16_console_frontend *owner,
+#undef frontend_console_dispatch
+DWORD frontend_console_dispatch(frontend_console *owner,
     const console_io_request *request,console_io_reply *reply)
 {
     CONSOLE_SCREEN_BUFFER_INFO before={0},after={0};

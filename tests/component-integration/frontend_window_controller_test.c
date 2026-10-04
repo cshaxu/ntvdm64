@@ -263,7 +263,7 @@ int main(int argc,char **argv)
     CHECK(!frontend_window_visible(a) && !IsWindow(wa) && !first.window);
     CHECK(frontend_window_visible(b) && IsWindow(wb));
     CHECK(frontend_window_mode(a)==FRONTEND_DISPLAY_CONSOLE && first.retired==1);
-    CHECK(first.keyboard.physical.source_identity==0 && !first.keyboard.native.layout);
+    CHECK(first.keyboard.physical.source_identity==0 && !first.keyboard.console_records.layout);
     CHECK(SetConsoleMode(first.native_input,input_mode));CloseHandle(first.native_input);first.native_input=NULL;
     {
         unsigned chord;

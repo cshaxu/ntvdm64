@@ -42,7 +42,7 @@ static BOOL WINAPI test_set_clip(const RECT *rect)
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"FAIL %d\n",__LINE__);return 1; } } while (0)
 int main(void)
 {
-    run16_console_frontend owner={0};
+    frontend_console owner={0};
     console_io_request request={0};
     console_io_reply reply;
     DWORD operation;
@@ -50,40 +50,40 @@ int main(void)
     request.version=CONSOLE_IO_VERSION;request.generation=17;
     request.sequence=1;request.operation=CONSOLE_IO_SET_POINTER;
     request.state.x=40000;request.state.y=-40000;
-    CHECK(!run16_console_dispatch(&owner,&request,&reply) && reply.result && calls==1);
+    CHECK(!frontend_console_dispatch(&owner,&request,&reply) && reply.result && calls==1);
     CHECK(pointer_position.x==40000 && pointer_position.y==-40000);
     ++request.sequence;request.operation=CONSOLE_IO_GET_POINTER;
-    CHECK(!run16_console_dispatch(&owner,&request,&reply) && reply.result && calls==2);
+    CHECK(!frontend_console_dispatch(&owner,&request,&reply) && reply.result && calls==2);
     CHECK(reply.state.x==40000 && reply.state.y==-40000);
     ++request.sequence;request.operation=CONSOLE_IO_SET_POINTER_CLIP;
     request.state.has_clip=1;request.state.left=-50000;request.state.top=-40000;
     request.state.right=50000;request.state.bottom=40000;
-    CHECK(!run16_console_dispatch(&owner,&request,&reply) && reply.result && !release_clip);
+    CHECK(!frontend_console_dispatch(&owner,&request,&reply) && reply.result && !release_clip);
     ++request.sequence;request.operation=CONSOLE_IO_GET_POINTER_CLIP;
-    CHECK(!run16_console_dispatch(&owner,&request,&reply) && reply.result);
+    CHECK(!frontend_console_dispatch(&owner,&request,&reply) && reply.result);
     CHECK(reply.state.left==-50000 && reply.state.top==-40000 &&
         reply.state.right==50000 && reply.state.bottom==40000);
     ++request.sequence;request.operation=CONSOLE_IO_SET_POINTER_CLIP;request.state.has_clip=0;
-    CHECK(!run16_console_dispatch(&owner,&request,&reply) && reply.result && release_clip);
+    CHECK(!frontend_console_dispatch(&owner,&request,&reply) && reply.result && release_clip);
     window_clip_owned=TRUE;release_clip=FALSE;
     ++request.sequence;request.operation=CONSOLE_IO_SET_POINTER_CLIP;
-    CHECK(!run16_console_dispatch(&owner,&request,&reply) && reply.result && !release_clip);
+    CHECK(!frontend_console_dispatch(&owner,&request,&reply) && reply.result && !release_clip);
     window_clip_owned=FALSE;
     ++request.sequence;request.operation=CONSOLE_IO_SET_POINTER_CLIP;
-    CHECK(!run16_console_dispatch(&owner,&request,&reply) && reply.result && release_clip);
+    CHECK(!frontend_console_dispatch(&owner,&request,&reply) && reply.result && release_clip);
     failure=ERROR_ACCESS_DENIED;
     for (operation=CONSOLE_IO_GET_POINTER;operation<=CONSOLE_IO_SET_POINTER_CLIP;++operation) {
         DWORD before=calls;
         ++request.sequence;request.operation=operation;
-        CHECK(!run16_console_dispatch(&owner,&request,&reply) && !reply.result &&
+        CHECK(!frontend_console_dispatch(&owner,&request,&reply) && !reply.result &&
             reply.error==failure && calls==before+1);
         CHECK(!reply.state.x && !reply.state.left && !reply.bytes);
     }
     ++request.sequence;request.operation=CONSOLE_IO_KEYBOARD_LAYOUT;
-    CHECK(!run16_console_dispatch(&owner,&request,&reply) && reply.result &&
+    CHECK(!frontend_console_dispatch(&owner,&request,&reply) && reply.result &&
         reply.bytes==KL_NAMELENGTH && !memcmp(reply.data,"00000409",KL_NAMELENGTH) && layout_calls==1);
     ++request.sequence;layout_error=ERROR_INVALID_HANDLE;
-    CHECK(!run16_console_dispatch(&owner,&request,&reply) && !reply.result &&
+    CHECK(!frontend_console_dispatch(&owner,&request,&reply) && !reply.result &&
         reply.error==layout_error && !reply.bytes && layout_calls==2);
     puts("PASS: production pointer/layout dispatch, signed LONG, null release, native errors (mock host only)");
     return 0;

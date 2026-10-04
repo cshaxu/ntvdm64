@@ -5,6 +5,23 @@ param(
 $ErrorActionPreference = 'Stop'
 $graph = Get-Content -LiteralPath (Join-Path $BuildRoot 'build.ninja')
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
+function Assert-FrontendPrivateNames([string]$Source) {
+    if($Source -match '\b(?:run16_native_frontend|run16_console_(?:channel|frontend|video|dispatch|prepare_text)|frontend_native_keyboard|FRONTEND_NATIVE_KEY_RECORDS)(?:\b|_)|\bnative_console_frontend\.h\b') {
+        throw 'Retired launcher/worker-owned spelling in frontend-private API'
+    }
+}
+foreach($file in Get-ChildItem (Join-Path $repo 'src/ntcon-exe') -File | Where-Object Extension -in '.c','.h') {
+    Assert-FrontendPrivateNames (Get-Content $file.FullName -Raw)
+}
+foreach($spelling in @('run16_native_frontend','run16_console_channel','frontend_native_keyboard',
+        'FRONTEND_NATIVE_KEY_RECORDS','native_console_frontend.h','run16_native_frontend_create')) {
+    $rejected=$false
+    try { Assert-FrontendPrivateNames $spelling } catch { $rejected=$true }
+    if(!$rejected){throw "Retired private-name negative control accepted $spelling"}
+}
+if($graph -match '^build obj/run16/(?:native_console_frontend|frontend_session|console_frontend|console_video|console_channel)\.obj:') {
+    throw 'Frontend-private compilation retained under launcher object ownership'
+}
 # Presentation attachment is live; execution submission to a frontend is not.
 # A stale RPC method must not survive merely because no EXE calls it today.
 foreach ($path in @('src/common/protocol/service.idl',
@@ -177,7 +194,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
     }
     foreach($target in @('worker-base.lib','ntvdm.exe','ntvwm.exe')) {
         $actual=@(Get-FrontendSources $target 'worker-base')
-        if(@(Compare-Object @('connection.c') $actual).Count) {
+        if(@(Compare-Object @('connection.c','shutdown_close.c') $actual).Count) {
             throw "$target does not use the complete common worker implementation"
         }
     }
@@ -204,7 +221,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
         if ($backend -in $service) { throw "Native backend entered presentation-only ntcon.exe: $backend" }
     }
     foreach ($required in @('main.c', 'session_service.c', 'console_channel.c',
-            'console_frontend.c', 'console_video.c', 'native_console_frontend.c',
+            'console_frontend.c', 'console_video.c', 'frontend_session.c',
             'window_controller.c', 'window_frame.c',
             'window_keyboard.c', 'window_input_queue.c',
             'lib/kvm-window/win32/component.c')) {
@@ -266,7 +283,7 @@ if (!$rejected) { throw 'Launcher rebuild dependency negative control was accept
 foreach ($target in @('run16.exe', 'frontend-client.lib', 'ntvdm.exe','worker-base.lib')) {
     $mutated = @($graph | ForEach-Object {
         if ($_ -match ('^build ' + [regex]::Escape($target) + '(?: |:)')) {
-            $_ -replace ': (\S+) ', ': $1 obj/run16/console_frontend.obj '
+            $_ -replace ': (\S+) ', ': $1 obj/frontend/console_frontend.obj '
         } else { $_ }
     })
     $rejected = $false

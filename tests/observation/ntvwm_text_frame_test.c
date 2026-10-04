@@ -10,7 +10,7 @@ int wmain(int argc,WCHAR **argv)
     CONSOLE_SCREEN_BUFFER_INFOEX screen={sizeof(screen)};
     CONSOLE_CURSOR_INFO cursor={20,TRUE};CHAR_INFO cells[12]={0};
     console_text_style font={0},*style;console_video_description description;
-    run16_console_video video={0};BYTE *payload=NULL;FILE *log=NULL;
+    frontend_video video={0};BYTE *payload=NULL;FILE *log=NULL;
     unsigned i,height;DWORD error;
     if(argc!=2 || _wfopen_s(&log,argv[1],L"wx"))return 2;
     screen.dwSize=(COORD){6,2};screen.srWindow=(SMALL_RECT){1,0,4,1};
@@ -45,10 +45,10 @@ int wmain(int argc,WCHAR **argv)
         CHECK(payload[sizeof(font)+12]=='?' && payload[sizeof(font)+14]==' ');
         /* Use the production NTVDM receiver unchanged. Incomplete frames must
          * not replace the last complete one. No special native decoder. */
-        CHECK(run16_console_video_begin(&video,height,&description)==0);
-        CHECK(run16_console_video_data(&video,height,0,payload,100)==0);
+        CHECK(frontend_video_begin(&video,height,&description)==0);
+        CHECK(frontend_video_data(&video,height,0,payload,100)==0);
         CHECK(video.published_serial==(height==14 ? 0u : 14u));
-        CHECK(run16_console_video_data(&video,height,100,payload+100,description.bytes-100)==0);
+        CHECK(frontend_video_data(&video,height,100,payload+100,description.bytes-100)==0);
         CHECK(video.published_serial==height && !memcmp(video.pixels,payload,description.bytes));
         HeapFree(GetProcessHeap(),0,payload);payload=NULL;
     }
@@ -71,12 +71,12 @@ int wmain(int argc,WCHAR **argv)
     if(payload) {
         CHECK(description.stride==12 && description.bytes==sizeof(font)+24);
         CHECK(payload[sizeof(font)+2]==CONSOLE_TEXT_UNDERLINE);
-        CHECK(run16_console_video_begin(&video,33,&description)==0);
-        CHECK(run16_console_video_data(&video,33,0,payload,description.bytes)==0);
+        CHECK(frontend_video_begin(&video,33,&description)==0);
+        CHECK(frontend_video_data(&video,33,0,payload,description.bytes)==0);
         CHECK(video.published_serial==33);
         payload[sizeof(font)+2]=0x80;
-        CHECK(run16_console_video_begin(&video,34,&description)==0);
-        CHECK(run16_console_video_data(&video,34,0,payload,description.bytes)==ERROR_INVALID_DATA);
+        CHECK(frontend_video_begin(&video,34,&description)==0);
+        CHECK(frontend_video_data(&video,34,0,payload,description.bytes)==ERROR_INVALID_DATA);
         CHECK(video.published_serial==33);
         HeapFree(GetProcessHeap(),0,payload);payload=NULL;
     }
@@ -87,7 +87,7 @@ int wmain(int argc,WCHAR **argv)
     screen.srWindow.Left=1;font.font_height=33;
     CHECK(ntvwm_text_frame_pack(&screen,&cursor,cells,12,&font,&description,&payload)==ERROR_INVALID_DATA);
     CHECK(video.published_serial==33);
-    run16_console_video_dispose(&video);
+    frontend_video_dispose(&video);
     {
         CHAR_INFO *page=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,4000*sizeof(*page));
         CHECK(page!=NULL);
@@ -141,12 +141,12 @@ int wmain(int argc,WCHAR **argv)
                 CHECK(events[0].Event.MouseEvent.dwMousePosition.X==59 &&
                     events[0].Event.MouseEvent.dwMousePosition.Y==124);
                 CHECK(description.width==80 && description.height==50 && description.stride==160);
-                CHECK(!run16_console_video_begin(&video,1,&description));
-                CHECK(!run16_console_video_data(&video,1,0,payload,description.bytes));
+                CHECK(!frontend_video_begin(&video,1,&description));
+                CHECK(!frontend_video_data(&video,1,0,payload,description.bytes));
                 CHECK(video.published_serial==1);
                 HeapFree(GetProcessHeap(),0,payload);payload=NULL;
             }
-            HeapFree(GetProcessHeap(),0,page);run16_console_video_dispose(&video);
+            HeapFree(GetProcessHeap(),0,page);frontend_video_dispose(&video);
         }
     }
     {

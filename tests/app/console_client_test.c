@@ -45,7 +45,7 @@ static void create_transport(void);
 static HANDLE broker_shutdown;
 static session_teardown_fn cleanup;
 static void *cleanup_context;
-static run16_console_frontend frontend;
+static frontend_console frontend;
 static BOOL dos_active;
 static DWORD bind_error;
 static DWORD prepare_error,prepare_calls;
@@ -68,7 +68,7 @@ static DWORD prepare_text(void *context,COORD size)
         if(!GetConsoleScreenBufferInfo(frontend.output,&info))return GetLastError();
         logical=info.srWindow;frontend.logical_window=&logical;
     }
-    return run16_console_prepare_text(frontend.output,frontend.logical_window,size);
+    return frontend_console_prepare_text(frontend.output,frontend.logical_window,size);
 }
 static BOOL hang_close;
 static DWORD execution_error;
@@ -165,7 +165,7 @@ static DWORD WINAPI serve(void *unused)
         if (WaitForSingleObject(stop,0)==WAIT_OBJECT_0) break;
         CHECK(request.bytes<=CONSOLE_IO_DATA_BYTES);
         CHECK(transfer(FALSE,request.data,request.bytes));
-        CHECK(!run16_console_dispatch(&frontend,&request,&reply));
+        CHECK(!frontend_console_dispatch(&frontend,&request,&reply));
         CHECK(transfer(TRUE,&reply,(DWORD)offsetof(console_io_reply,data)+reply.bytes));
     }
     CloseHandle(peer);return 0;
@@ -888,7 +888,7 @@ int main(int argc,char **argv)
         CHECK(frontend.video.serial==++serial);
         CHECK(ntvdm_console_set_active(FALSE));
         /* Production retires the channel-local decoder with the old pipe. */
-        run16_console_video_dispose(&frontend.video);serial=0;
+        frontend_video_dispose(&frontend.video);serial=0;
         CHECK(ntvdm_console_set_active(TRUE));
         CHECK(ntvdm_console_publish_video(&description,payload,description.bytes));
         CHECK(frontend.video.serial==++serial);

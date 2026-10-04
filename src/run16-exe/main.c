@@ -394,7 +394,7 @@ static DWORD launch_native(run16_frontend_scope *scope,PCWSTR application,PCWSTR
     start.standard[2]=GetStdHandle(STD_ERROR_HANDLE);
     start.console_mask=run16_frontend_scope_console_mask(scope);
     for(i=0;i<3;++i)if(GetConsoleMode(start.standard[i],&mode))start.console_mask|=1u<<i;
-    error=text ? run16_frontend_scope_launch_native(scope,&start) : run16_frontend_scope_launch_gui(scope,&start);
+    error=text ? run16_frontend_scope_launch_win32_text(scope,&start) : run16_frontend_scope_launch_win32_gui(scope,&start);
     if(!error && !wait)result=ERROR_SUCCESS;
     if(!error && wait) {
         DWORD target_completed=0;

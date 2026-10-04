@@ -7,8 +7,8 @@ struct frontend_session_service {
     HANDLE notification,stop,thread,retire,state_changed;
     HANDLE creator,console_anchor;
     BOOL retire_requested,creator_exited;
-    run16_console_channel *channel;
-    run16_native_frontend *native;
+    frontend_io_channel *channel;
+    frontend_session *presentation;
     void (*channel_ready)(void);
 };
 /* Borrowed roots must not keep an otherwise closed user Console alive just
@@ -57,7 +57,7 @@ static DWORD WINAPI frontend_pump(void *context)
         if(scope->creator && !scope->creator_exited) { creator_index=wait_count;waits[wait_count++]=scope->creator; }
         if(scope->console_anchor) { anchor_index=wait_count;waits[wait_count++]=scope->console_anchor; }
         if(scope->state_changed) waits[wait_count++]=scope->state_changed;
-        if(scope->channel)waits[wait_count++]=run16_console_channel_thread(scope->channel);
+        if(scope->channel)waits[wait_count++]=frontend_io_channel_thread(scope->channel);
         wait=WaitForMultipleObjects(wait_count,waits,FALSE,INFINITE);
         if (wait==WAIT_OBJECT_0) break;
         if (wait<WAIT_OBJECT_0 || wait>=WAIT_OBJECT_0+wait_count) {
@@ -106,7 +106,7 @@ static DWORD WINAPI frontend_pump(void *context)
                 /* EOF is a transport failure unless NTSRV has authorized
                  * release. It cannot itself choose the next logical owner. */
                 if(scope->channel && WaitForSingleObject(
-                    run16_console_channel_thread(scope->channel),0)==WAIT_OBJECT_0)
+                    frontend_io_channel_thread(scope->channel),0)==WAIT_OBJECT_0)
                     return ERROR_PIPE_NOT_CONNECTED;
                 break;
             }
@@ -114,7 +114,7 @@ static DWORD WINAPI frontend_pump(void *context)
             if(!request && !worker) {
                 /* NTSRV orders the endpoint closed after final I/O. Joining
                  * and disposal precede our acknowledgement, never vice versa. */
-                error=run16_console_channel_stop(scope->channel);
+                error=frontend_io_channel_stop(scope->channel);
                 if(error)return error;
                 scope->channel=NULL;
                 error=OpenNtBaseClientFrontendIoDisconnected();
@@ -125,17 +125,17 @@ static DWORD WINAPI frontend_pump(void *context)
                 if(worker)CloseHandle(worker);
                 return ERROR_INVALID_STATE;
             }
-            if(!scope->native) {
-                error=run16_native_frontend_create(&scope->native);
+            if(!scope->presentation) {
+                error=frontend_session_create(&scope->presentation);
                 if(error){CloseHandle(worker);return error;}
             }
-            error=run16_console_channel_start_request(request,worker,scope->native,&scope->channel);
+            error=frontend_io_channel_start_request(request,worker,scope->presentation,&scope->channel);
             if (error) {
                 return error;
             }
             if (scope->channel_ready) scope->channel_ready();
         }
-        if(scope->native && ((scope->creator && scope->creator_exited) ||
+        if(scope->presentation && ((scope->creator && scope->creator_exited) ||
             scope->retire_requested)){
             DWORD pending=0,tasks=0;
             error=OpenNtBaseClientFrontendUsage(&pending,&tasks);
@@ -146,7 +146,7 @@ static DWORD WINAPI frontend_pump(void *context)
             /* Return the visible Console but retain resident worker I/O.
              * Only the broker decides when the root must retire. */
             {
-                error=run16_native_frontend_park(scope->native);
+                error=frontend_session_park(scope->presentation);
                 if(error)return error;
             }
             /* Resident channels remain admitted across borrowed leases. A
@@ -166,18 +166,18 @@ DWORD frontend_service_close(frontend_session_service *scope)
     DWORD error=ERROR_SUCCESS;
     if (!scope) return ERROR_SUCCESS;
     if (scope->stop) SetEvent(scope->stop);
-    run16_native_frontend_cancel(scope->native);
+    frontend_session_cancel(scope->presentation);
     if (scope->thread) {
         WaitForSingleObject(scope->thread,INFINITE);
         CloseHandle(scope->thread);
     }
     if(scope->channel) {
-        error=run16_console_channel_stop(scope->channel);
+        error=frontend_io_channel_stop(scope->channel);
         if(error)return error;
         scope->channel=NULL;
     }
-    error=run16_native_frontend_destroy(scope->native);
-    /* A failed teardown deliberately retains the native object and its
+    error=frontend_session_destroy(scope->presentation);
+    /* A failed teardown deliberately retains the presentation object and its
      * handles for process cleanup.  Do not free the owning service storage:
      * the caller must report failure rather than manufacture a handoff. */
     if(error)return error;
@@ -208,7 +208,7 @@ static DWORD service_start(HANDLE notification,HANDLE creator,HANDLE retire,
     }
     scope->stop=CreateEventW(NULL,TRUE,FALSE,NULL);
     if(!scope->stop){error=GetLastError();goto fail;}
-    error=run16_native_frontend_create(&scope->native);if(error)goto fail;
+    error=frontend_session_create(&scope->presentation);if(error)goto fail;
     scope->thread=CreateThread(NULL,0,frontend_pump,scope,0,NULL);
     if(!scope->thread){error=GetLastError();goto fail;}
     *output=scope;return ERROR_SUCCESS;

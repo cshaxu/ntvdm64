@@ -53,7 +53,7 @@ static BOOL coordinate(int32_t value)
     return value>=SHRT_MIN && value<=SHRT_MAX;
 }
 
-DWORD run16_console_prepare_text(HANDLE output,SMALL_RECT *window,COORD size)
+DWORD frontend_console_prepare_text(HANDLE output,SMALL_RECT *window,COORD size)
 {
     CONSOLE_SCREEN_BUFFER_INFO before,after;
     SMALL_RECT physical={0,0,0,0};
@@ -81,7 +81,7 @@ DWORD run16_console_prepare_text(HANDLE output,SMALL_RECT *window,COORD size)
 }
 
 
-DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_request *request,
+DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request *request,
     console_io_reply *reply)
 {
     const console_io_state *s;
@@ -206,15 +206,15 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     case CONSOLE_IO_VIDEO_BEGIN: {
         console_video_description description;
         memcpy(&description,request->data,sizeof(description));
-        mode=run16_console_video_begin(&owner->video,s->mode,&description);
+        mode=frontend_video_begin(&owner->video,s->mode,&description);
         ok=mode==ERROR_SUCCESS;SetLastError(mode);break;
     }
     case CONSOLE_IO_VIDEO_DATA:
         mode=owner->video_data ? owner->video_data(owner->io_context,s->mode,s->count,request->data,request->bytes) :
-            run16_console_video_data(&owner->video,s->mode,s->count,request->data,request->bytes);
+            frontend_video_data(&owner->video,s->mode,s->count,request->data,request->bytes);
         ok=mode==ERROR_SUCCESS;SetLastError(mode);break;
     case CONSOLE_IO_VIDEO_TEXT:
-        mode=run16_console_video_text(&owner->video,s->mode);
+        mode=frontend_video_text(&owner->video,s->mode);
         /* Text-mode publication is transported without a worker-side call
          * to activate the user's screen buffer. Headless protocol fixtures
          * may intentionally omit a Console handle. */
