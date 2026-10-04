@@ -63,6 +63,8 @@ claimed.
 
 ## S4 Closure Record
 
+The [S4 evidence](../etc/evidence/m0-t428-s4-common-worker-shutdown.md)
+records provenance, retained failures and the completed verification gates.
 S4 production paths use worker-base's common local close mechanism; native
 GUI-only workers register control before text binding. Original NTVDM cleanup
 and real native Console closure remain worker-local. Affected x86 /MT CCPU40
