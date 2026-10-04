@@ -305,6 +305,9 @@ checks, retained failed attempts and final same-package verification.
 All other historical supporting material is in the [external documentation archive](../../artifacts/documentation-archive/20260910/strict-topology/).
 ## T423 restart reference
 
+[T429 S3 frame-local code-page query](evidence/m0-t429-s3-frame-codepage-snapshot.md)
+records the bounded measured publication-cost repair and its semantic/runtime gates.
+
 [T429 S2 release DECODE diagnostics](evidence/m0-t429-s2-release-decode-diagnostics.md)
 records source provenance, compile-selected attribution, normal/diagnostic object
 proof and the explicit runtime/publication gates still pending.

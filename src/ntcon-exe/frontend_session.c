@@ -182,14 +182,17 @@ static DWORD prepare_text_frame(frontend_session *frontend,const frontend_video 
     CONSOLE_CURSOR_INFO cursor;
     HANDLE incoming=NULL;
     CHAR_INFO *cells;
-    DWORD error,index,count=(DWORD)size.X*size.Y,step=video->description.stride/size.X;
+    DWORD error,index,code_page,count=(DWORD)size.X*size.Y,step=video->description.stride/size.X;
     *output=NULL;
     error=clone_grid(frontend->logical_surface,&incoming);if(error)return error;
     cells=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,count*sizeof(*cells));
     if(!cells){CloseHandle(incoming);return ERROR_NOT_ENOUGH_MEMORY;}
+    /* One copied frame uses one current Console code page; query anew for
+     * the next frame, not once per glyph and not a persistent cache. */
+    code_page=GetConsoleOutputCP();
     for(index=0;index<count;++index) {
         char glyph=(char)text[index*step];
-        if(!MultiByteToWideChar(GetConsoleOutputCP(),0,&glyph,1,&cells[index].Char.UnicodeChar,1)) {
+        if(!MultiByteToWideChar(code_page,0,&glyph,1,&cells[index].Char.UnicodeChar,1)) {
             error=GetLastError();goto done;
         }
         cells[index].Attributes=text[index*step+1];

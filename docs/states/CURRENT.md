@@ -2,33 +2,34 @@
 
 ## Current Work
 
-**Active: M0 T429 S2** (Ordinary Mode).
+**Active: M0 T429 S3** (Ordinary Mode).
 
 Owner admitted the performance package after closing T428. S1's bounded
 measurement conclusion is recorded in the
 [baseline evidence](../etc/evidence/m0-t429-s1-performance-baseline.md).
-Only S2 is now active, following the approved sequential scope.
+S2 is delivered at production123c0ad3e/status651efdd7b. Only S3 is now active,
+following the owner's continuous performance-optimization direction.
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T429 S2; Ordinary Mode. |
-| Admission And Approval | Sequential admission after S1's baseline/control/measurement exit; owner directs continuous execution-performance optimization. Owner additionally approves the reproduced native Console-close ordering defect as a bounded S2 dependency repair. |
+| Identifier Mode | M0 T429 S3; Ordinary Mode. |
+| Admission And Approval | Sequential admission after pushed S2 closure; owner directs continuous execution-performance optimization. Measured frame-publication attribution selects only the proven per-cell host-query cost in the existing NTCON cell importer. |
 | Candidate Proposal | [Execution-performance recovery](../proposals/proposal-ntvdm-execution-performance-recovery-001.md). |
-| Objective | Remove project-added per-instruction DECODE diagnostics from the normal selected CCPU40 build; retain explicitly selected diagnostic capability and prove behavior and measured effect. |
-| Non-goals | No CCPU algorithm, guest/firmware, CPU30, lifecycle policy/wire, helper/channel/component/scheduler change; no NTCON/worker-base display dedup or speculative input/transport optimization. Existing authenticated native Console closure must precede generic cancellation/fault teardown; this ordering repair is admitted, not a new retirement policy. |
-| Reference Baseline | Last accepted production68e860553, T428 S6/r002/runtime/system32; main d7c20f0e9 S1 closure. MSVC14.43/SDK22621/x86 /MT CCPU40; APP0.0.427/RPC38/I/O25. Owner-requested early published S2 candidate is identified below, not yet a reviewed P. |
-| Files And ABI Surface | c_main.c project diagnostic selection and registered mirror README; NTVWM close/cancellation ordering; reproducible object-selection/performance tests, test-only frontend API-cost attribution, close failure diagnostics and evidence. No cross-EXE ABI change. |
+| Objective | Query the current Console output code page once per copied text frame instead of once per character; preserve exact cells/styles/cursor, failure rollback and every explicit publication. Measure the actual transfer/commit benefit without changing queues or transport. |
+| Non-goals | No CCPU/mirror/guest/firmware, lifecycle, wire, helper/channel/component/scheduler change; no permanent code-page cache, display dedup, input batching or speculative transport optimization. NTVWM30ms sampling is unchanged. |
+| Reference Baseline | Production123c0ad3e/status651efdd7b; coherent S2 r025/runtime, deployed and verified r027/r028. MSVC14.43/SDK22621/x86 /MT CCPU40; APP0.0.427/RPC38/I/O25. S2 r023 attributes94.36% of cumulative text commit to39120 per-cell code-page queries. |
+| Files And ABI Surface | NTCON frontend_session.c frame conversion; production-linked code-page/style/cursor/failure fixture and reproducible measured comparison; evidence/status. No cross-EXE ABI or ownership change. |
 | Applicable Rules | Full AGENTS set, source policy, mirror provenance/minimal registered diff, original instruction semantics, build-only artifacts, preserved other-session edits and serial global endpoint/Z:-only tests. |
-| Verification | Incremental affected x86 closure with source/toolchain/input identity; normal and diagnostic object checks; identical-package benchmark/control comparison; affected CCPU/input/video tests; Console17/Window17/retained WOW/lifecycle, coherent recovery/publication and published smoke before production P. Governance, links and diff review. |
-| Expected Markers | Normal DECODE has no diagnostic call or replacement per-instruction branch; diagnostic build retains selected observer references; real guest/output/order/receipt and existing frontiers do not regress. Report measured improvement or contrary result. |
-| Asset Needs | Validated build/M0-T427/S2/r001 dependency cache; immutable T428 S6 runtime/media; new S2 outputs under build/M0-T429/S2. Read-only SoftPC/upstream comparison only. |
+| Verification | Incremental affected x86 closure with pinned cache/source/toolchain identities; exact code-page call count and next-frame refresh, paired/triple cells, cursor and conversion-failure rollback; retained frontend/handoff/lifecycle tests; alternating real EDIT200 measured variants and unchanged native control; Console17/Window17/WOW, coherent eight-file publication and smoke. Governance, links and diff review. |
+| Expected Markers | One output-CP query per imported frame, no permanent cache; next frame uses changed CP, character/style/cursor state and failure atomicity remain; real EDIT queue/order/receipt assertions pass and transfer/commit distributions improve or contrary evidence is reported. |
+| Asset Needs | Validated build/M0-T427/S2/r001 dependency cache; immutable S2 r025 runtime/media and S2 r022 measured frontend/worker; new outputs under build/M0-T429/S3. No external runtime dependency. |
 | Reporting Requirements | Separate source/object, measured and physical observations; report hashes, commands, failed attempts, median/tails and retained limits, not inferred speed claims. |
-| Stop Conditions | Need for instruction/guest semantics, new wire/lifecycle/helper or comparison runtime dependency pauses repair for renewed approval. Unexplained regression prevents delivery. |
-| Exit Criteria | Selected normal object excludes per-decode diagnostics, separate diagnostic object retains them; measured effect and semantic/production gates reviewed, coherent eight files published, commit/push delivered. |
-| Original Owner Request | Improve execution performance while preserving original OpenNT/CCPU semantics and frontend/worker boundaries; first remove the confirmed added release hot-loop diagnostic work. |
-| Similar-Issue Sweep | All project-added WOW observers within DECODE, other diagnostic calls at coarse boundaries, false claims from startup/measurement overhead and unchanged native controls. |
+| Stop Conditions | Need for new protocol, ownership/lifecycle policy, mirror/guest changes, event filtering or external acceptance dependency pauses for renewed approval. Unexplained cell/input/handoff regression prevents delivery. |
+| Exit Criteria | Production frame importer issues one current CP query per frame with tested exact conversion/rollback; causal measured comparison and retained runtime gates reviewed; coherent eight files published, reviewed commit/push delivered. |
+| Original Owner Request | Continue execution-performance optimization using evidence; preserve original execution and explicit frame/input semantics rather than concealing issues with dedup. |
+| Similar-Issue Sweep | Per-character host queries in frame import/conversion, CP changes between frames and ownership handoffs, concurrent code-page change within a copied frame, rollback on multibyte conversion failure. |
 
 ## S1 Closure Record
 
@@ -72,8 +73,9 @@ COMMAND/MEM/EDIT/native smoke and all eight hashes pass. Production123c0ad3e
 is committed and pushed to main; S2 reaches its bounded closure. Owner manual
 acceptance and overall T429 closure remain distinct and pending.
 Test-only r021/r023 narrow the remaining transaction cost to per-cell Console
-code-page queries (94% of cumulative text commit in r023); no frontend production
-repair is admitted or published yet. Original frame/input assertions pass.
+code-page queries (94% of cumulative text commit in r023). Sequential S3 now
+repairs exactly that query cost; its full runtime/publication gates now pass.
+Original frame/input assertions pass.
 S1/S2 measured wrapper
 binaries were never published.
 
@@ -93,7 +95,16 @@ Shared GUI carriers reside/reuse; no exclusive GUI option is introduced.
 Physical RDP/RawInput/focus is waived or unobserved, not passed. Matched SoftPC
 runtime comparison remains unperformed; S4 must disclose it. WOW keeps retained
 frontier nonregression, not broader usability. Host scrollback is not promised.
-S3/S4 remain later scopes, not active work. Native30ms polling is unchanged.
+S3 now owns only the measured text-frame conversion cost; S4 remains later.
+Native30ms polling is unchanged. [S3 evidence](../etc/evidence/m0-t429-s3-frame-codepage-snapshot.md)
+records r005 importer/rollback/public-channel passes and r008's fixed six-sample
+EDIT200 comparison. Commit median falls100350→5512us; whole scripted workload
+median8924→7958ms. These are injected private-desktop observations, not physical
+RDP latency. r007's wrong-observer rejection remains evidence. S3 r009 formal
+Console17/Window17/WOW passes (total219979ms). r010 publishes the coherent eight
+files to O:/winnt/system32 with only NTCON changed; r011's published Console/
+Window smoke and all hashes pass. S3 final diff review is complete; its reviewed
+production commit/push and sequential S4 admission are the remaining handoff.
 Other-session proposal chronology is preserved and excluded from this delivery.
 
 ## Recent M0 Closures
@@ -107,6 +118,6 @@ Other-session proposal chronology is preserved and excluded from this delivery.
 ## Recent Governance
 
 S1 concludes as measurement-only; S2 is bounded-closed at production123c0ad3e.
-The packet is retained through sequential handoff; S3 is not yet admitted.
+S3 is admitted sequentially as the only active bounded repair.
 Guest and lifecycle policy remain unchanged; the approved close dependency
 repairs ordering only. T429 remains open and other-session work is preserved.
