@@ -280,6 +280,10 @@ proves the original `FSTI` continuation reaches BOP `FDh`.
 | [T420 S37 OEMUNI capability review](evidence/m0-t420-s37-oemuni-capability-review.md) | M0 T420 S37 | Original consumer inventory and non-ASCII conversion/buffer verification. | Retain with T420 capability evidence. |
 | [T420 S38 DPMI32 capability review](evidence/m0-t420-s38-dpmi32-capability-review.md) | M0 T420 S38 | Selected package, BOP dispatch and protected-mode verification obligations. | Retain with T420 capability evidence. |
 
+[T425 S11 typeahead and closure audit](evidence/m0-t425-s11-typeahead-closure.md)
+records unchanged continuous input, complete execution witnesses, negative
+checks, retained failed attempts and final same-package verification.
+
 All other historical supporting material is in the [external documentation archive](../../artifacts/documentation-archive/20260910/strict-topology/).
 ## T423 restart reference
 

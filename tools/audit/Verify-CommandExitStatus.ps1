@@ -18,6 +18,7 @@ if ($env:MVDM_OBSERVER_WINDOW_INPUT -and $env:MVDM_OBSERVER_PRIVATE_DESKTOP -ne 
     throw 'Window input tests require MVDM_OBSERVER_PRIVATE_DESKTOP=1; no product process was started.'
 }
 . (Join-Path $PSScriptRoot 'Merge-ConsoleTextSnapshots.ps1')
+. (Join-Path $PSScriptRoot '../../tests/observation/typeahead_witness.ps1')
 . (Join-Path $PSScriptRoot '../../tests/observation/isolated_package_cleanup.ps1')
 $Observer = (Resolve-Path -LiteralPath $Observer).Path
 $PackageRoot = (Resolve-Path -LiteralPath $PackageRoot).Path
@@ -149,7 +150,7 @@ $matrix = @(
     # the original keyboard queue is between those two owners.
     @{ Name='nested-empty'; Text="command`rexit`rexit`r"; LineDelayMs=1000; Code=1; ConsoleMarkers=@('Microsoft(R) Windows NT DOS'); ConsoleMarkerCount=2 },
     @{ Name='nested-mem'; Text="command`rcommand`rmem`rexit`rmem`rexit`rmem`rexit`r"; LineDelayMs=1000; Code=1; ConsoleMarkers=@('bytes total conventional memory'); SequentialMemLines=@(3,5,7) },
-    @{ Name='nested-mem-typeahead'; Supplemental=$true; Text="command`rcommand`rmem`rexit`rmem`rexit`rmem`rexit`r"; LineDelayMs=0; Code=1; ConsoleMarkers=@('bytes total conventional memory'); SequentialMemWitnessCount=3 },
+    @{ Name='nested-mem-typeahead'; Supplemental=$true; Typeahead=$true; Text="command`rcommand`rmem`rexit`rmem`rexit`rmem`rexit`r"; LineDelayMs=0; Code=1; ConsoleMarkers=@('bytes total conventional memory'); WitnessCommands=@('mem','mem','mem'); WitnessLines=@(3,5,7) },
     @{ Name='interactive-native-dos-return'; Supplemental=$true; Text="cmd`rrun16 command`rmem`rexit`recho window-native-return`rexit`rmem`rexit`r"; LineDelayMs=1000; Code=1; ConsoleMarkers=@('bytes total conventional memory'); ConsoleMarkerCount=2; ExactConsoleLines=@('window-native-return') },
     @{ Name='mem-repeat'; Text="mem`rmem`rexit`r"; Code=1; ConsoleMarkers=@('bytes total conventional memory'); SequentialMemLines=@(1,2) },
     @{ Name='direct-mem'; Args=@('MEM.EXE'); Code=0; ConsoleMarkers=@('bytes total conventional memory') },
@@ -172,7 +173,7 @@ $matrix = @(
     @{ Name='dos-native-dos'; Supplemental=$true; Text="cmd.exe /d`rrun16 mem`rexit`rmem`rexit`r"; LineDelayMs=1000; Code=1; ConsoleMarkers=@('bytes total conventional memory','Microsoft Windows [Version'); ConsoleMarkerCount=2 },
     # No line-level wait for an owner change: keep typing through DOS/native
     # handoff. The observer still emits ordinary paired key records.
-    @{ Name='dos-native-typeahead'; Supplemental=$true; Text="cmd.exe /d`rrun16 mem`rexit`rmem`rexit`r"; LineDelayMs=0; Code=1; ConsoleMarkers=@('bytes total conventional memory','Microsoft Windows [Version'); ConsoleMarkerCount=2 },
+    @{ Name='dos-native-typeahead'; Supplemental=$true; Typeahead=$true; Text="cmd.exe /d`rrun16 mem`rexit`rmem`rexit`r"; LineDelayMs=0; Code=1; ConsoleMarkers=@('bytes total conventional memory','Microsoft Windows [Version'); WitnessCommands=@('run16 mem','mem'); WitnessLines=@(2,4) },
     @{ Name='frontend-chain-a'; Supplemental=$true; Text="cmd.exe /d`rrun16 command.com`rcmd.exe /d`recho S3-A-NATIVE-INNER`rexit /b 37`rmem`rexit`recho S3-A-PARENT-RETURN-%errorlevel%`rexit /b 23`rmem`rexit`r"; LineDelayMs=1000; TimeoutMs=45000; Code=1; ConsoleMarkers=@('bytes total conventional memory','Microsoft Windows [Version'); ConsoleMarkerCount=2; ExactConsoleLines=@('S3-A-NATIVE-INNER','S3-A-PARENT-RETURN-1'); NativeExitCodes=@(37,23) },
     @{ Name='frontend-chain-b'; Supplemental=$true; Args=@('cmd.exe','/d'); Text="run16 command.com`rcmd.exe /d`rrun16 command.com`rmem`rexit`recho S3-B-INNER-RETURN-%errorlevel%`rexit /b 37`rmem`rexit`recho S3-B-ROOT-RETURN-%errorlevel%`rexit /b 23`r"; LineDelayMs=1000; TimeoutMs=45000; Code=23; ConsoleMarkers=@('bytes total conventional memory','Microsoft Windows [Version'); ConsoleMarkerCount=2; ExactConsoleLines=@('S3-B-INNER-RETURN-1','S3-B-ROOT-RETURN-1'); NativeExitCodes=@(37,23) },
     @{ Name='worker-version-rejection'; Args=@('MEM.EXE'); Code=1306; Negative=$true }
@@ -310,7 +311,7 @@ try {
                 throw "Missing captured guest Console text: $($case.Name)"
             }
             $screen=Get-Content -LiteralPath $consolePath -Raw
-            if($case.Text -and !$case.SequentialMemLines -and ($env:MVDM_OBSERVER_WINDOW_INPUT -eq '1' -or
+            if($case.Text -and !$case.Typeahead -and !$case.SequentialMemLines -and ($env:MVDM_OBSERVER_WINDOW_INPUT -eq '1' -or
                 $case.Name -in @('dos-native-dos','dos-native-typeahead',
                     'interactive-native-dos-return'))) {
                 # Window text is finite, and a Console/native/DOS transition
@@ -322,6 +323,23 @@ try {
                 if(!$snapshots.Count){throw "Missing Window command snapshots: $($case.Name)"}
                 $screen=Merge-ConsoleTextSnapshots ($snapshots+@($screen))
                 $screen | Set-Content -LiteralPath "$report.transcript.txt" -Encoding UTF8
+            }
+            if($case.Typeahead){
+                if($record -notmatch 'milestone-waits=0'){
+                    throw 'Typeahead must retain continuous input with no consumption waits'
+                }
+                $before=Get-Content -LiteralPath "$report.pre-input-console.txt.console.txt" -Raw
+                $lineCount=($case.Text.ToCharArray() | Where-Object {$_ -eq "`r"}).Count
+                $observations=@(foreach($number in 1..$lineCount){
+                    $path='{0}.line-{1:d2}.console.txt' -f $report,$number
+                    [pscustomobject]@{Line=$number;Text=(Get-Content -LiteralPath $path -Raw)}
+                })+@([pscustomobject]@{Line=($lineCount+1);Text=$screen})
+                $witness=@(Assert-TypeaheadWitness $before $observations $case.WitnessCommands $case.WitnessLines)
+                $witness | ConvertTo-Json | Set-Content -LiteralPath "$report.execution.json" -Encoding UTF8
+                # Marker presence is observation across pages, not a merged
+                # history or execution count. Counts/order use the witnesses.
+                $screen+=(@(Get-ChildItem -LiteralPath (Split-Path $report) -Filter ((Split-Path $report -Leaf)+'.line-*.console.txt') |
+                    Sort-Object Name | ForEach-Object {Get-Content -LiteralPath $_.FullName -Raw}) -join "`n")
             }
             # SequentialMemLines already requires each real MEM result after
             # that command in its own ordered snapshot below. A merged scroll
@@ -373,31 +391,6 @@ try {
                 if($commandAt -lt 0 -or
                     $plain.IndexOf('bytestotalconventionalmemory',$commandAt,[StringComparison]::OrdinalIgnoreCase) -lt 0) {
                     throw "MEM output did not follow its own command in $($case.Name): line $lineNumber"
-                }
-            }
-            if ($case.SequentialMemWitnessCount) {
-                # Zero-delay typeahead snapshots can precede their command's
-                # output.  Observe every subsequent snapshot instead of
-                # requiring output in the snapshot taken at key delivery.
-                # Nested MEM reports a distinct executable-size value at
-                # each depth, so each new completed report is one witness.
-                $witnesses=[System.Collections.Generic.HashSet[string]]::new()
-                $lineCount=($case.Text.ToCharArray() | Where-Object { $_ -eq "`r" }).Count
-                for($lineNumber=1; $lineNumber -le $lineCount; $lineNumber++) {
-                    $linePath='{0}.line-{1:d2}.console.txt' -f $report,$lineNumber
-                    if(!(Test-Path -LiteralPath $linePath)) {
-                        throw "Missing typeahead Console snapshot for $($case.Name): line $lineNumber"
-                    }
-                    $step=Get-Content -LiteralPath $linePath -Raw
-                    $plain=($step -replace '(?m)^\[\d+\]\s?','') -replace '\s',''
-                    if($plain -match '>mem' -and $plain -match 'bytestotalconventionalmemory') {
-                        foreach($size in [regex]::Matches($plain,'(\d+)largestexecutableprogramsize')) {
-                            [void]$witnesses.Add($size.Groups[1].Value)
-                        }
-                    }
-                }
-                if($witnesses.Count -ne $case.SequentialMemWitnessCount) {
-                    throw "Expected $($case.SequentialMemWitnessCount) distinct completed MEM reports in $($case.Name), observed $($witnesses.Count)"
                 }
             }
             if ($case.ConsoleMarkerCount -and

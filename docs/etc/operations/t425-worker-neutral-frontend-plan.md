@@ -29,6 +29,8 @@ original guest/device/painter algorithms. T closure requires owner acceptance.
 | S7 | Owner follow-up: suppress unchanged native publication to preserve host cursor blink, and share the finite local character-start gate while WOW/native GUI skip it. Preserve original classifiers and execution; retained full package gates and publication apply. |
 | S8 | Owner-superseded dedup proposal: unfiltered explicit frames, correct producer notifications, software VGA FULLSCREEN and natural mouse draw/erase at route edges. Preserve original algorithms, hardware exclusions, final-paint barriers and lifecycle gates. |
 | S9 | Owner-approved test audit, simplification and throughput improvement: parallelize isolated checks, remove proved redundant/useless tests, and replace real ten-second policy waits with deterministic clock/event tests while preserving behavior coverage. |
+| S10 | Diagnose repeated shared-WOW WINMINE startup; retain original single-instance policy without a guest patch. |
+| S11 | Complete continuous-input execution evidence without screen-history reconstruction; audit and deliver T closure under the owner's final acceptance boundaries. |
 
 ## S9 test audit, simplification and throughput
 
@@ -188,11 +190,18 @@ identity; new outputs only under declared build/M0-T425/S<n>/r<nnn> run roots.
   eight-file publication. Initial P 51f09f7d1 is delivered. Owner continues S9
   for observed input/results, EDIT state waits and cleanup/timing optimization;
   owner closes S9 at 817fe636b with 31-32 percent measured reduction; the
-  60-second target and supplemental snapshot-merge failures remain limitations.
-- [ ] S10 owner-inserted investigation: second shared-WOW WINMINE launch while
-  first task remains live. Locate submission/wakeup/load/startup outcome before
-  proposing production repair; no guest patch or new scheduler.
-- [ ] Owner verification and acceptance before T closure.
+  original snapshot-merge failures remain retained evidence. Owner subsequently
+  withdraws the one-minute requirement; S11 repairs the typeahead proof.
+- [x] S10 repeated shared-WOW WINMINE: original guest single-instance policy
+  confirmed; ordinary repeated launches and independent completion pass at
+  15143473a. No production repair or guest patch required.
+- [x] S11 selected continuous typeahead passes in Console/Window, including
+  actual complete MEM output/count/order and direct root completion. Eight
+  assertion negatives pass. See [S11 audit](../evidence/m0-t425-s11-typeahead-closure.md).
+- [x] Owner directs T closure once the remaining typeahead row passes. One-minute
+  and 1000-motion gates are cancelled; retain 200-motion and agreed WOW gates.
+  [Closure](../../history/m0-t425-worker-neutral-frontend-closure.md) records
+  retained boundaries. No next task is admitted.
 
 ## RDP boundary
 
