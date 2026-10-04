@@ -3,8 +3,9 @@
 ## Boundary and implementation
 
 Baseline e33f90807; previous published S4 886f13758. APP0.0.427/RPC38/I/O25
-is unchanged. This implementation increment is built, tested and published;
-S5 remains open for the requirement disposition below.
+is unchanged. The initial implementation increment is e81e9fc9f. The final
+paired cancellation increment and owner's GUI policy clarification are
+recorded below; both coherent packages passed their own publication gates.
 
 | Mechanism / provenance | Production owner and change | Retained independent boundary |
 | --- | --- | --- |
@@ -61,12 +62,61 @@ uses the validated build/M0-T427/S2/r001 MSVC14.43/SDK22621 graph.
 
 ## Source-owned differences and current policy coverage
 
-`service_clear_frontend()` already uses one route-list rundown. Its retained
+The first increment e81e9fc9f's `service_clear_frontend()` uses one route-list rundown. Its retained
 native branch deletes the route because the native Direct record owns request
 cancellation; the undelivered DOS-startup tombstone keeps the original pending
 worker identity so Connect observes cancellation rather than adopting a new
 root. These are different accepted/pending record contracts, not duplicated
 root registries. This delivery does not blindly merge those operations.
+
+### Subsequent paired cancellation repair
+
+The first increment's type-based root-loss deletion was re-examined rather
+than accepted as final. New `--route-cancellation` fixture against that
+production library failed: `FAIL cancellation kind=0 phase=1 line=277`.
+It found that a fully closed DOS lease remained as a pending marker, while an
+undelivered native lease was discarded. The two outcomes depend on transport
+phase, not worker kind.
+
+The production rundown now deletes a delivered lease or one with both closure
+acknowledgments; it retains a null-root cancellation marker for undelivered
+DOS and native leases alike. Existing worker-process rundown/pruning owns
+marker removal; no new list, scheduler, observer or timer is added. Launcher
+abandonment still invokes its source-owned DOS/native command cancellation.
+That command contract is not confused with the common root-loss I/O grant.
+
+r020 `verify-service-fixtures.ps1` passed all 26 cases, 4154ms, with all
+previous assertions retained. The new case covers both kinds and both pending
+and fully closed phases, denies use after cancellation, and ensures a live
+prepared-process marker is not pruned. It seeds only service-private route
+identities; it does not claim guest execution or replace the production provider.
+The source change rebuilds the affected x86 closure. Final r021 coherent
+eight-file package passed r022 Product: Console17 62983ms, Window17 75922ms,
+retained WOW 65991ms, preparation1894ms, total210617ms. r022's manifest is
+the final publication authority, not a mixture with earlier runs.
+
+The additional `--prepared-native-root-loss` case drives actual reservation,
+PrepareWorker, RequestFrontend and Connect in the production service archive.
+Its owned child remains suspended: after root loss, the exact child receives
+an already signaled shutdown instruction and cannot fall back to the old
+Console identity. Actual child death and asynchronous watch cleanup must both
+complete before IsEmpty/Stop can pass. It does not claim guest execution or
+RPC root-admission coverage from its trusted private root seed.
+
+Retained test-development failures: r023 initially failed the final IsEmpty
+check by assuming process death meant asynchronous cleanup had finished.
+r024's callback lacked WINAPI and failed compilation; a mistakenly continued
+stale-fixture invocation is not a valid result. r025 then failed because the
+fixture attempted ConfigureEmptyNotify after registration; that API requires
+an empty service. The final fixture configures its cleanup event before
+Connect and waits for the actual callback, without Sleep or weaker assertions.
+r026 passed all 27 service cases in4397ms with previous assertions retained.
+
+r027 passed all six actual GUI routing/residency cases against r021, including
+same-worker reuse and GUI target survival after carrier management close.
+r028 passed paired DOS/native frontend loss/receipt1067, actual Console close,
+independent session input/exit23, worker death with surviving target, and
+explicit frontend close. All real-package runs were serial; Z: was removed.
 
 Original cmdmisc.c DosSessionId/CloseOnExit and srvvdm.c separate-WOW handling
 remain unchanged. Current run16 default Win16 classification is
@@ -75,7 +125,7 @@ CLI option or new native scheduling/lifetime policy was invented. Exclusive
 native text final-empty retirement and shared borrowed/nested protection are
 tested; a newly exposed exclusive GUI launch is not claimed.
 
-## Remaining closure gates
+## Delivery and closure
 
 Final-package r019 management.ps1 passed paired DOS/native frontend loss with
 direct receipt1067, actual selected-worker Console close, independent session
@@ -91,9 +141,22 @@ governance, relative links and whitespace checks passed. Original mirror diff
 is empty. The reviewed implementation P is recorded in Git; unrelated planning
 changes remain excluded.
 
-S5 remains open for final cancellation/exclusive-GUI requirement disposition;
-this reviewed implementation increment does not pretend that the lack of a
-current separate-GUI launch input is a runtime verification pass. Physical
+Owner explicitly confirms “不新增独占 GUI 选项”: default native GUI carriers
+remain shared/resident like shared WOW. Native exclusive text follows the
+existing self-created Console/CloseOnExit boundary. The plan is corrected,
+not expanded with an unrequested option or a new lifetime policy.
+
+r029 publishes the final r021 package after validating r022's eight hashes,
+preserving the previous e81e9fc9f/r015 package in r029/recovery. Guest media,
+NTVDM.REG and configuration remain untouched. Publication passed. r030
+published Console/Window empty/native-zero/MEM/EDIT smoke and all eight hashes
+passed. Final source/ownership/lock/handle and diff review passed; the only
+production change in this increment is phase-based route cancellation.
+No src/mvdm or src/opennt-host file changed. Documentation governance/links
+and whitespace are checked before forming the final reviewed P.
+
+S5 closes only after those final gates and push. S6 retains naming and final
+duplicate/caller audit; this is not whole-T closure. Physical
 RDP/focus remains owner-waived; WOW retains its existing frontier contract
 rather than a new full-usability claim. Side-session proposal and queue edits
 remain separate.

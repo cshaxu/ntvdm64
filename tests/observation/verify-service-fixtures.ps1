@@ -16,7 +16,7 @@ $observerPath=(Resolve-Path $Observer).Path
 $fixturePath=(Resolve-Path $Fixture).Path
 # Each fixture owns an in-process service and PID-qualified pipe names.
 # None binds the global RPC endpoint. Do not add real-package cases here.
-$cases=@('parent-resume-origin','io-authority','frontend-delegated','frontend-wait','frontend-wait-root-loss',
+$cases=@('parent-resume-origin','io-authority','route-cancellation','prepared-native-root-loss','frontend-delegated','frontend-wait','frontend-wait-root-loss',
     'frontend-wait-request-loss','frontend-wait-worker-loss','frontend-rundown',
     'reenter-before-return','reenter-after-return','reenter-nested-return',
     'reenter-pending-command','reenter-before-increment','launcher-completed-rundown',

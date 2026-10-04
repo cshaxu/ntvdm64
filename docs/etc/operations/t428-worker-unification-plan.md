@@ -24,7 +24,7 @@ superseded by the owner's explicit rejection.
 | S2 | Remove the added ten-second retirement of admitted, unbound native carriers. Shared GUI residency matches shared WOW. Preserve frontend workerless grace, service empty grace and finite startup failure boundaries. Test with explicit policy-owner time and retained product gates. |
 | S3 | Move eligible parent restoration out of run16's Console membership/worker selection. Prove authenticated parent identity in existing service records, exact completion and final I/O acknowledgment; preserve original DOS resume. |
 | S4 | Common worker-base shutdown reception and service management contract for DOS/WOW/native, including native GUI-only registration. Preserve original close-handler ordering and actual Console closure proof. |
-| S5 | Consolidate existing root-worker association, route cancellation, kind validation, occupancy and management projection; retain source-owned record readers and exclusive/shared policies. Implement native exclusive text/GUI retirement corresponding to original DOS/separate WOW without altering GUI startup-only return. |
+| S5 | Consolidate existing root-worker association, route cancellation, kind validation, occupancy and management projection; retain source-owned record readers and exclusive/shared policies. Native exclusive text follows CloseOnExit; default GUI carriers remain shared/resident like shared WOW, preserving GUI startup-only return. Owner confirms no new exclusive GUI launch option. |
 | S6 | Ownership/format naming and final duplicate/caller sweep; integrated gates and owner handoff, T remains open until owner acceptance. |
 
 Each code-bearing delivery requires affected x86 /MT CCPU40 builds, focused

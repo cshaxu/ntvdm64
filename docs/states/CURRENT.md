@@ -19,7 +19,7 @@ records the subsequent bounded stages.
 | Identifier Mode | M0 T428 S5; Ordinary Mode. |
 | Admission And Approval | Owner: “批准你的所有的回复…目标：精简，去重复，统一逻辑。NTVDM符合OpenNT的原始语义，NTVWM参照NTVDM的方法来做。开始。” Sequentially admit approved association/exclusive-session stage after S4 886f13758, built/tested/published/pushed. |
 | Candidate Proposal | [Worker control/lifecycle/ownership unification](../proposals/proposal-worker-control-lifecycle-naming-unification-001.md). |
-| Objective | Consolidate existing service-owned root-worker association/reuse, route cancellation, kind/occupancy and management projection. Align native exclusive text/GUI carrier retirement with the corresponding original DOS/separate WOW policy without altering GUI startup-only return. |
+| Objective | Consolidate existing service-owned root-worker association/reuse, route cancellation, kind/occupancy and management projection. Native exclusive text follows CloseOnExit; default GUI carriers remain shared/resident like shared WOW, preserving GUI startup-only return. Owner confirms no new exclusive GUI launch option. |
 | Non-goals | No original mirror/guest changes, second registry, scheduler/helper, ancestry/observed tracking, performance work, new cooperative-then-force timeout policy or component rename. |
 | Reference Baseline | main 886f13758; published S4 eight-file package equals build/M0-T428/S4/r003/runtime/system32, APP0.0.427/RPC38/I/O25. Preserve side-session planning edits; S2 independent GUI worker reuse remains explicitly unproved/failed. |
 | Files And ABI Surface | NTSRV existing connection/worker/root/management records, registration/selection/lifecycle/route consumers; NTVWM session adapters; common/worker-base only for identical project mechanisms; focused tests. Prefer existing contracts; record necessary DTO/RPC changes and synchronized versions before implementation. No original mirror change is admitted. |
@@ -63,9 +63,25 @@ reuse; the [S5 evidence](../etc/evidence/m0-t428-s5-worker-association.md)
 records focused passes and retained failures. Final r015 package regression,
 lifetime, recoverable publication and deployed smoke/hash checks passed;
 the reviewed implementation increment is delivered through Git. S5 stays
-open for final cancellation/exclusive-GUI requirement disposition, not a
-claim that a new separate-GUI launch input exists. The published baseline
-is now this S5 increment; S6 is not yet admitted.
+open until the final reviewed delivery is pushed. Paired route cancellation,
+actual prepared native root-loss/Connect and asynchronous cleanup now pass
+27 service cases. Final r021 package passes r022 Console17/Window17/WOW,
+r027 six GUI cases and r028 lifetime/close/isolation probes. r029 publishes
+that coherent package, preserving r015 recovery; r030 deployed Console/Window
+smoke and eight hashes pass. Owner confirms no exclusive GUI launch option.
+S6 is not yet admitted; T428 remains open.
+
+## S5 Closure Record
+
+The [S5 evidence](../etc/evidence/m0-t428-s5-worker-association.md)
+records the initial e81e9fc9f increment and final transport-phase cancellation
+repair. Pending DOS/native grants retain exact-process cancellation proof;
+delivered or fully closed leases are removed. Source-owned command cancellation
+is unchanged. Affected x86 builds, 27 service cases, six actual GUI cases,
+Console17/Window17/WOW, paired loss/receipt1067, actual close/isolation and
+published smoke/hash gates pass. No original mirror or protocol change.
+The final reviewed P is being formed; closure is effective only on push.
+Unrelated planning edits remain separate. Format/ownership naming remains S6.
 
 ## S4 Closure Record
 
@@ -115,7 +131,7 @@ S2 6a8934f6b. T428 remains open.
 ## Current Technical Baseline
 
 Current verified/published package is the T428 S5 implementation increment from
-build/M0-T428/S5/r015/runtime, with recovery of S4 in S5/r013/recovery. It retains
+build/M0-T428/S5/r021/runtime, with recovery of r015 in S5/r029/recovery. It retains
 the following accepted T427 layout/protocol baseline, S2 native GUI-carrier
 residency, authenticated service-owned parent restoration and common shutdown
 execution with pre-text native close-control registration.

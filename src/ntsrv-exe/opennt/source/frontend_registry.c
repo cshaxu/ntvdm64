@@ -296,7 +296,12 @@ void service_clear_frontend(OPENNT_BASE_CONNECTION *connection)
         if (route->root==connection || (!route->native_worker && !route->pipe && !route->delivered &&
             !route->io_worker_closed && !route->io_frontend_closed &&
             route->request==connection->process.SequenceNumber)) {
-            if (route->delivered || route->native_worker) service_delete_frontend(route);
+            /* Root loss revokes the same physical grant for either worker.
+             * Keep an undelivered cancellation marker until the exact worker
+             * dies; Connect must not adopt a different root. A delivered or
+             * fully closed lease has no outstanding delivery to cancel. */
+            if (route->delivered || (route->io_worker_closed && route->io_frontend_closed))
+                service_delete_frontend(route);
             else {
                 OPENNT_BASE_CONNECTION *root=route->root;
                 /* Retain only the selected worker identity until its exit:

@@ -249,6 +249,102 @@ int fixture_shared_worker_residency(void)
 #undef RETIRE_CHECK
 }
 
+/* Trust only the fixture's prepared process identities. The production
+ * rundown must preserve cancellation before delivery for either worker kind,
+ * and release an already closed physical route rather than retaining it. */
+int fixture_route_cancellation(void)
+{
+    DWORD kind,phase;
+    for(kind=0;kind<2;++kind)for(phase=0;phase<2;++phase) {
+        OPENNT_BASE_SERVICE *service=OpenNtBaseServiceStart();
+        OPENNT_BASE_CONNECTION *root=NULL;
+        OPENNT_FRONTEND_ROUTE *route;
+        DWORD generation;
+#define CANCEL_CHECK(value) do {if(!(value)){fprintf(stderr,"FAIL cancellation kind=%lu phase=%lu line=%d\n",kind,phase,__LINE__);return 1;}}while(0)
+        CANCEL_CHECK(service && !OpenNtBaseServiceConnect(service,GetCurrentProcess(),&root,&generation));
+        root->frontend_capability=CreateEventW(NULL,TRUE,FALSE,NULL);
+        CANCEL_CHECK(root->frontend_capability);
+        route=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*route));
+        CANCEL_CHECK(route);
+        route->root=root;route->native_worker=kind!=0;
+        route->io_worker_closed=route->io_frontend_closed=phase!=0;
+        CANCEL_CHECK(DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),
+            &route->worker,SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,FALSE,0));
+        route->ready=CreateEventW(NULL,TRUE,FALSE,NULL);CANCEL_CHECK(route->ready);
+        InsertTailList(&service->frontend_routes,&route->link);
+        EnterCriticalSection(&service->lock);
+        service_clear_frontend(root);
+        if(phase)CANCEL_CHECK(IsListEmpty(&service->frontend_routes));
+        else {
+            CANCEL_CHECK(!IsListEmpty(&service->frontend_routes));
+            CANCEL_CHECK(!route->root && !route->pipe && !route->ready);
+            CANCEL_CHECK(service_authorize_worker_io(root,GetCurrentProcessId())==ERROR_PIPE_NOT_CONNECTED);
+            /* The cancellation tombstone holds the same live process until
+             * its owning rundown; an idle prune must not discard the proof. */
+            service_prune_cancelled_frontends(service);
+            CANCEL_CHECK(!IsListEmpty(&service->frontend_routes));
+            service_delete_frontend(route);
+        }
+        LeaveCriticalSection(&service->lock);
+        CANCEL_CHECK(!OpenNtBaseServiceDisconnect(root));
+        CANCEL_CHECK(OpenNtBaseServiceIsEmpty(service) && OpenNtBaseServiceStop(service));
+#undef CANCEL_CHECK
+    }
+    puts("PASS paired route cancellation: pending identity retained, closed lease removed, no cross-root acquisition");
+    return 0;
+}
+
+static void WINAPI fixture_worker_cleanup_seen(void *context)
+{
+    (void)SetEvent((HANDLE)context);
+}
+
+int fixture_prepared_native_root_loss(void)
+{
+    OPENNT_BASE_SERVICE *service=OpenNtBaseServiceStart();
+    OPENNT_BASE_CONNECTION *root=NULL,*worker=NULL;
+    PROCESS_INFORMATION child={0};STARTUPINFOW startup={sizeof(startup)};
+    WCHAR image[MAX_PATH],command[MAX_PATH+32];
+    DWORD root_generation=0,worker_generation=0,member=GetCurrentProcessId();
+    uint64_t reservation=0;HANDLE shutdown=NULL,cleanup_seen=NULL;
+#define PREPARED_CHECK(value) do {if(!(value)){fprintf(stderr,"FAIL prepared root loss line=%d\n",__LINE__);return 1;}}while(0)
+    PREPARED_CHECK(service);
+    cleanup_seen=CreateEventW(NULL,TRUE,FALSE,NULL);PREPARED_CHECK(cleanup_seen);
+    PREPARED_CHECK(OpenNtBaseServiceConfigureEmptyNotify(service,fixture_worker_cleanup_seen,cleanup_seen));
+    PREPARED_CHECK(!OpenNtBaseServiceConnect(service,GetCurrentProcess(),&root,&root_generation));
+    root->frontend_capability=CreateEventW(NULL,TRUE,FALSE,NULL);
+    PREPARED_CHECK(root->frontend_capability);
+    PREPARED_CHECK(!OpenNtBaseServiceReportConsoleMembers(root,member,root_generation,1,&member));
+    PREPARED_CHECK(!OpenNtBaseServiceCreateNativeReservation(root,member,root_generation,&reservation));
+    PREPARED_CHECK(GetModuleFileNameW(NULL,image,ARRAYSIZE(image)));
+    swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" --reservation-child",image);
+    PREPARED_CHECK(CreateProcessW(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
+        NULL,NULL,&startup,&child));
+    PREPARED_CHECK(!OpenNtBaseServicePrepareWorker(root,member,root_generation,reservation,child.hProcess));
+    PREPARED_CHECK(!OpenNtBaseServiceRequestFrontend(root,member,root_generation,root->frontend_capability));
+    EnterCriticalSection(&service->lock);
+    service_clear_frontend(root);
+    LeaveCriticalSection(&service->lock);
+    /* Connect must consume the canceled exact-process grant, not the still
+     * valid Console membership fallback. No substitute worker is selected. */
+    PREPARED_CHECK(!OpenNtBaseServiceConnect(service,child.hProcess,&worker,&worker_generation));
+    PREPARED_CHECK(!OpenNtBaseServiceWorkerShutdownEvent(worker,child.dwProcessId,worker_generation,&shutdown));
+    PREPARED_CHECK(WaitForSingleObject(shutdown,0)==WAIT_OBJECT_0);
+    PREPARED_CHECK(!service_worker_root(worker));
+    CloseHandle(shutdown);
+    PREPARED_CHECK(TerminateProcess(child.hProcess,ERROR_CANCELLED));
+    PREPARED_CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
+    PREPARED_CHECK(WaitForSingleObject(cleanup_seen,5000)==WAIT_OBJECT_0);
+    PREPARED_CHECK(!OpenNtBaseServiceDisconnect(worker));
+    PREPARED_CHECK(!OpenNtBaseServiceDisconnect(root));
+    CloseHandle(child.hThread);CloseHandle(child.hProcess);
+    PREPARED_CHECK(OpenNtBaseServiceIsEmpty(service) && OpenNtBaseServiceStop(service));
+    CloseHandle(cleanup_seen);
+    puts("PASS prepared native root loss: actual claim/Connect consumes cancellation, shutdown already signaled, no adoption");
+    return 0;
+#undef PREPARED_CHECK
+}
+
 typedef struct IO_TRANSITION_TEST {
     OPENNT_BASE_CONNECTION *worker;
     DWORD pid,generation,action,error;
