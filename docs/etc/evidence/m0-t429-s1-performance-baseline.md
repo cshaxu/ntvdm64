@@ -132,3 +132,81 @@ instrumentation perturbation at those boundaries. The existing mouse-hook ACK
 only proves frontend input-sink acceptance; WMS7 completion includes settling
 and is not a mouse latency measurement. No 1000-event extreme run was used.
 S1 remains open; S2 is not admitted by this initial baseline delivery.
+
+## Worker queue/transport measurements — subsequent S1 delivery
+
+Question: does the retained 200-input workload produce unbounded worker
+backlog, and how long do input, video and final handoff transactions take?
+No production source, mirror, wire, guest or published package is changed.
+Test-only wrapper TUs include the actual project-owned bridge/client, call
+the real implementation once, and precede the unchanged production archives
+at link. Original ICA ownership still serializes queue push/take. A test-only
+SRW lock protects a fixed8192 sample array; recording has no file I/O.
+Successful existing quiesced I/O close flushes the report. Overflow is explicit.
+
+Entrypoints (fresh build/report roots required):
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tests/observation/build-worker-performance.ps1 -BuildRoot O:/repos.hobby/ntvdm64/build/M0-T429/S1/r007
+powershell -NoProfile -ExecutionPolicy Bypass -File tests/observation/measure-worker-boundaries.ps1 -MeasuredWorker build/M0-T429/S1/r007/ntvdm-performance-observer.exe -Observer build/M0-T429/S1/r003/console-startup-observer.exe -ReportRoot O:/repos.hobby/ntvdm64/build/M0-T429/S1/r009
+```
+
+Build reuses manifest-hashed selected x86 /MT CCPU40 link inputs from
+build/M0-T427/S2/r001. VDM_TIB storage validation passes. The /OUT warning
+identifies the retained provider export name versus test executable filename.
+r007 measured worker SHA256:
+8A5FEA9519578DD01004C5C4B6C3C27900E43FC6E6A61EAE0DFCD577DD706FD4.
+Observer AC9A7AF8D74F5DD5EF55D4C3F13736FE697F6D76C7EC9F92A69F9D59C8761188;
+WMS7.COM A60EDF938A866810CC3BD3D92800E72A5BEB73369C12580A14F1BEA8BA337E6A;
+S7MOUSE.dll EE490315CF28E428FEF9BDE854D89CBCA4FB48CF249D205CDE16C167C8418A80.
+Only the test-linked worker differs in the isolated accepted-package copy.
+Only Z: is mapped, then removed; pinned cleanup is not proof of normal retirement.
+
+The private-desktop hook feeds the actual frontend input sink, not hardware
+RawInput. WMS7 is an authored graphics fixture, **not EDIT**: actual guest
+callbacks assert movement, one press/release and final released buttons.
+Each measured run reads205 records in batches up to5, including route edges
+and203 injected movements/button samples. Counts below establish consumption
+of every enqueued item, not one IRQ per merged movement.
+
+| r009 iteration | Enqueued / merged / consumed | High-water | Queue-age median / max (us) | Read median / max (us) | Video transaction median / max (us) |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 65 / 140 / 65 | 17 | 4339 / 21501 | 52 / 367 | 1196 / 350193 |
+| 2 | 53 / 152 / 53 | 17 | 5815 / 141282 | 43 / 431 | 1474 / 355766 |
+| 3 | 63 / 142 / 63 | 17 | 4959 / 18922 | 64 / 235 | 1489 / 353011 |
+
+No sample overflow, unmatched consumption, rejected input or transport error.
+Queue age starts at the oldest enqueue in a merged slot and ends at actual
+queue take by the original CPU/IRQ consumer; it is not host-to-render latency.
+Video timing covers the synchronous chunked transaction and peer replies,
+not separately identified copy/render phases. Seven transactions mix graphics,
+mode changes and final text; their maximum is not steady EDIT text latency.
+
+Final handoff barriers take57/33/36us; actual broker-authorized I/O-close ACKs
+take1882/1814/2244us. Existing guest/direct-exit assertions pass. Disabled total
+11048ms versus measured10403/10523/10685ms includes fixed probe settling,
+mode changes and startup, not mouse latency or evidence that measurement is free.
+Earlier r005/r006 exploratory inputs are retained separately. Final labels
+measure actual handoff/close, not a nonexistent publication message in this caller.
+
+`worker_performance_test.c` links the actual pure queue plus measured support;
+it is a unit, not mock guest acceptance. Build with the recorded x86 environment
+wrapper /MT /W4 /WX /TC /Isrc, linking r007/worker_performance.obj and the
+actual mvdm_softpc_mouse_input.c object. r008 enabled/disabled both preserve
+displacement200, seventeen queue entries and the last-error sentinel.
+Enabled has217 samples/high-water17; disabled writes no report. Deliberate
+sample8193 produces samples8192/overflow1: detection, not silent truncation.
+Initial mistyped /Fo placed one test object at repository root; it was
+immediately moved by exact path to r008/worker_performance_test.obj.
+No stray intermediate remains and no recursive removal was used.
+
+The final runner also enforces enqueue+merge>=203, consumed==enqueued, zero
+errors and actual handoff/close markers. Existing r009 reports are rechecked
+against these added assertions; measured binary/observer are unchanged.
+Later build-manifest source-hash metadata does not change r007 executable code.
+
+Interpretation: this workload proves bounded, conserving mouse batching, not
+that EDIT has no latency issue. Approximately141ms consumer tail remains
+observed, without queue explosion. Still open: matched EDIT mouse measurement,
+raw-input/producer/frontend attribution, matched SoftPC comparison and meaningful
+instrumentation-overhead measurement. S1 remains active; S2 is not admitted.

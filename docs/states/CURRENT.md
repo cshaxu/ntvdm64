@@ -39,8 +39,13 @@ optional buffered test-observer timing, 42 real serial COMMAND/EDIT/native-contr
 samples and two missing-marker negatives pass; the actual disabled diagnostic
 provider has a separately measured isolated cost. The ordinary fixture's
 observed Console is 120x30, not an assumed 80 columns. Production and published
-eight-file hashes remain unchanged; no speedup is claimed. Raw-input/queue/IRQ
-and producer/transfer/presentation attribution remain open. S1 is not closed.
+eight-file hashes remain unchanged; no speedup is claimed. Test-only measured
+worker links now exercise the actual 200-input guest path: three measured runs
+plus a disabled control pass, with 205 records accepted, pressure coalescing,
+queue high-water17 and no rejection/overflow. Queue consumption, read batches,
+video transaction and final handoff/close acknowledgment are measured; bounded
+sample-overflow and disabled/last-error unit checks pass. Raw-input, producer/
+frontend phase attribution and perturbation proof remain open. S1 is not closed.
 
 The proposal supplies the bounded S1-S4 sequence: baseline measurement;
 release hot-loop diagnostic removal; only proven input/producer repair;
