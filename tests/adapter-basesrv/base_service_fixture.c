@@ -13,6 +13,7 @@ int fixture_parent_resume_origin(void)
     PROCESS_INFORMATION children[2]={{0}};STARTUPINFOW startup={sizeof(startup)};
     WCHAR image[MAX_PATH],command[MAX_PATH+32];DWORD i;
     DWORD rg=0,pg=0,cg=0;BOOL required=FALSE;
+    OPENNT_BASE_WORKER_WATCH parent_watch={0};
 #define ORIGIN_CHECK(x) do {if(!(x)){fprintf(stderr,"FAIL origin %d\n",__LINE__);return 1;}}while(0)
     self=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,GetCurrentProcessId());
     ORIGIN_CHECK(service && self);
@@ -35,7 +36,12 @@ int fixture_parent_resume_origin(void)
     ORIGIN_CHECK(!OpenNtBaseServiceBindConsoleContext(caller,children[1].dwProcessId,cg,native));
     ORIGIN_CHECK(caller->execution_worker_generation==pg);
     EnterCriticalSection(&service->lock);
-    parent->native_worker=TRUE;parent->native_root=rg;parent->native_inflight=1;
+    parent->native_worker=TRUE;parent->native_inflight=1;
+    parent_watch.process=parent->process;parent_watch.service=service;
+    parent_watch.kind=OPENNT_BASE_WORKER_NATIVE;
+    parent_watch.frontend_root_generation=rg;
+    InsertTailList(&service->worker_watches,&parent_watch.link);
+    ORIGIN_CHECK(service_worker_root(parent)==rg && service_root_has_worker(root));
     ORIGIN_CHECK(service_prepare_parent_resume(caller,rg,&required)==ERROR_INVALID_STATE);
     caller->dos_completion_read=TRUE;
     ORIGIN_CHECK(service_prepare_parent_resume(caller,rg+1,&required)==ERROR_INVALID_STATE);
@@ -61,6 +67,8 @@ int fixture_parent_resume_origin(void)
     root->process.fVDM=FALSE;
     caller->execution_worker_generation=MAXDWORD;
     ORIGIN_CHECK(service_prepare_parent_resume(caller,rg,&required)==ERROR_PROCESS_ABORTED);
+    RemoveEntryList(&parent_watch.link);
+    ORIGIN_CHECK(!service_worker_root(parent) && !service_root_has_worker(root));
     LeaveCriticalSection(&service->lock);
     ORIGIN_CHECK(OpenNtBaseServiceBindConsoleContext(caller,children[1].dwProcessId,cg+1,again)==ERROR_ACCESS_DENIED);
     CloseHandle(native);CloseHandle(dos);CloseHandle(again);
@@ -149,11 +157,11 @@ cleanup:
 int fixture_shared_worker_residency(void)
 {
     OPENNT_BASE_SERVICE *service=OpenNtBaseServiceStart();
-    OPENNT_BASE_CONNECTION *worker=NULL;
+    OPENNT_BASE_CONNECTION *worker=NULL,*root=NULL;
     OPENNT_BASE_WORKER_WATCH watch={0};
     PROCESS_INFORMATION child={0};STARTUPINFOW startup={sizeof(startup)};
     WCHAR image[MAX_PATH],command[MAX_PATH+32];
-    DWORD generation=0;ULONGLONG due=0;
+    DWORD generation=0,root_generation=0,index;ULONGLONG due=0;
 #define RETIRE_CHECK(value) do {if(!(value)){fprintf(stderr,"FAIL unbound line %d\n",__LINE__);return 1;}}while(0)
     RETIRE_CHECK(service && GetModuleFileNameW(NULL,image,ARRAYSIZE(image)));
     swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" --reservation-child",image);
@@ -194,12 +202,49 @@ int fixture_shared_worker_residency(void)
     RETIRE_CHECK(!service_next_frontend_deadline_at(service,172800000,&due) && !due);
     RETIRE_CHECK(WaitForSingleObject(watch.shutdown,0)==WAIT_TIMEOUT);
     RETIRE_CHECK(WaitForSingleObject(child.hProcess,0)==WAIT_TIMEOUT);
+    /* Paired DOS/native relationship decisions read this same watch, even
+     * when its Console identity does not match the root's Console. */
+    RETIRE_CHECK(!OpenNtBaseServiceConnect(service,GetCurrentProcess(),&root,&root_generation));
+    root->frontend_capability=CreateEventW(NULL,TRUE,FALSE,NULL);
+    RETIRE_CHECK(root->frontend_capability);
+    for(index=0;index<2;++index) {
+        EnterCriticalSection(&service->lock);
+        watch.wow=FALSE;watch.kind=index ? OPENNT_BASE_WORKER_NATIVE : OPENNT_BASE_WORKER_DOS;
+        watch.console=(HANDLE)123;root->console=(HANDLE)456;
+        root->frontend_closing=FALSE;
+        RETIRE_CHECK(!service_bind_worker_root(service,child.hProcess,root));
+        RETIRE_CHECK(watch.frontend_root_generation==root_generation && service_root_has_worker(root));
+        LeaveCriticalSection(&service->lock);
+        RETIRE_CHECK(!service_retire_expired_frontends_at(service,172800001+index));
+        RETIRE_CHECK(WaitForSingleObject(watch.shutdown,0)==WAIT_TIMEOUT);
+        EnterCriticalSection(&service->lock);root->frontend_closing=TRUE;LeaveCriticalSection(&service->lock);
+        RETIRE_CHECK(!service_retire_expired_frontends_at(service,172800003+index));
+        RETIRE_CHECK(WaitForSingleObject(watch.shutdown,0)==WAIT_OBJECT_0);
+        RETIRE_CHECK(ResetEvent(watch.shutdown));
+    }
+    /* Native final-empty completion uses the same root authority, but only
+     * its creating launcher may retire a self-created Console. Borrowed and
+     * nested Console sessions remain resident. No original PIF is replaced. */
+    EnterCriticalSection(&service->lock);
+    worker->native_worker=TRUE;worker->console=root->console;
+    worker->retained_frontend_root=root_generation;root->frontend_closing=FALSE;
+    root->frontend_creator_generation=generation+1;
+    service_retire_completed_root(worker,generation);
+    RETIRE_CHECK(!root->frontend_closing);
+    root->frontend_creator_generation=generation;root->frontend_borrowed=TRUE;
+    service_retire_completed_root(worker,generation);
+    RETIRE_CHECK(!root->frontend_closing);
+    root->frontend_borrowed=FALSE;
+    service_retire_completed_root(worker,generation);
+    RETIRE_CHECK(root->frontend_closing);
+    LeaveCriticalSection(&service->lock);
     EnterCriticalSection(&service->lock);RemoveEntryList(&watch.link);LeaveCriticalSection(&service->lock);
+    RETIRE_CHECK(!OpenNtBaseServiceDisconnect(root));
     RETIRE_CHECK(!OpenNtBaseServiceDisconnect(worker));
     RETIRE_CHECK(OpenNtBaseServiceIsEmpty(service) && OpenNtBaseServiceStop(service));
     RETIRE_CHECK(TerminateProcess(child.hProcess,0));
     CloseHandle(child.hThread);CloseHandle(child.hProcess);CloseHandle(watch.shutdown);
-    puts("PASS shared GUI carrier: native/WOW residency, no idle deadline or shutdown, active-to-idle transition");
+    puts("PASS shared GUI carrier: native/WOW residency; DOS/native common root authority and loss shutdown");
     return 0;
 #undef RETIRE_CHECK
 }
@@ -226,6 +271,8 @@ int fixture_io_authority(void)
     OPENNT_BASE_SERVICE *service=OpenNtBaseServiceStart();
     OPENNT_BASE_CONNECTION *root=NULL,*workers[2]={NULL,NULL};
     OPENNT_FRONTEND_ROUTE *routes[2]={NULL,NULL};
+    OPENNT_BASE_WORKER_WATCH watches[2]={{0},{0}};
+    BOOL watched[2]={FALSE,FALSE};
     PROCESS_INFORMATION children[2]={{0},{0}};
     STARTUPINFOW startup={sizeof(startup)};
     DWORD root_generation=0,generations[2]={0,0},index,request;
@@ -247,7 +294,11 @@ int fixture_io_authority(void)
         workers[index]->native_worker=TRUE;
         IO_CHECK(OpenNtBaseServiceWorkerIoReleaseEvent(workers[index],children[index].dwProcessId,
             generations[index],&release_capability)==ERROR_ACCESS_DENIED && !release_capability);
-        workers[index]->native_root=root_generation;
+        watches[index].process=workers[index]->process;watches[index].service=service;
+        watches[index].kind=OPENNT_BASE_WORKER_NATIVE;
+        watches[index].frontend_root_generation=root_generation;
+        InsertTailList(&service->worker_watches,&watches[index].link);watched[index]=TRUE;
+        IO_CHECK(service_worker_root(workers[index])==root_generation && service_root_has_worker(root));
         IO_CHECK(OpenNtBaseServiceWorkerIoReleaseEvent(workers[index],children[index].dwProcessId,
             generations[index]+1,&release_capability)==ERROR_ACCESS_DENIED && !release_capability);
         IO_CHECK(!OpenNtBaseServiceWorkerIoReleaseEvent(workers[index],children[index].dwProcessId,
@@ -329,6 +380,7 @@ cleanup:
     if(release.entered)CloseHandle(release.entered);
     if(acquire.entered)CloseHandle(acquire.entered);
     for(index=0;index<2;++index) {
+        if(watched[index])RemoveEntryList(&watches[index].link);
         if(workers[index])OpenNtBaseServiceDisconnect(workers[index]);
         if(children[index].hProcess) {
             TerminateProcess(children[index].hProcess,0);WaitForSingleObject(children[index].hProcess,5000);

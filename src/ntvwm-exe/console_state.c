@@ -375,12 +375,20 @@ DWORD ntvwm_console_close(void)
     if(!FreeConsole())return GetLastError();
     if(!IsWindow(window))return ERROR_SUCCESS;
     if(GetWindowThreadProcessId(window,&current_process)!=thread || current_process!=process)
-        return ERROR_INVALID_HANDLE;
-    if(!PostMessageW(window,WM_CLOSE,0,0))return GetLastError();
+        return ERROR_SUCCESS; /* The captured Console window has been destroyed. */
+    if(!PostMessageW(window,WM_CLOSE,0,0)) {
+        DWORD error=GetLastError();
+        /* Last-member detach can destroy the window between validation and
+         * posting. Only disappearance of that exact window proves closure. */
+        if(!IsWindow(window) ||
+            GetWindowThreadProcessId(window,&current_process)!=thread || current_process!=process)
+            return ERROR_SUCCESS;
+        return error;
+    }
     deadline=GetTickCount64()+8000;
     while(IsWindow(window)) {
         if(GetWindowThreadProcessId(window,&current_process)!=thread || current_process!=process)
-            return ERROR_INVALID_HANDLE;
+            return ERROR_SUCCESS;
         if(GetTickCount64()>=deadline)return ERROR_TIMEOUT;
         Sleep(10);
     }

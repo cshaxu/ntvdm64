@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T428 S5 worker association](evidence/m0-t428-s5-worker-association.md) | M0 T428 S5 | Existing watch authority, shared GUI reuse, native close race and ongoing verification/delivery. | Retain through T428 acceptance. |
 | [T428 S4 common worker shutdown](evidence/m0-t428-s4-common-worker-shutdown.md) | M0 T428 S4 | Shared local close mechanism, native pre-text control registration and real acknowledgment verification/publication. | Retain through T428 acceptance. |
 | [T428 S3 authenticated parent resume](evidence/m0-t428-s3-authenticated-parent-resume.md) | M0 T428 S3 | Existing context origin replaces launcher PID census; exact completion/negative verification and pending runtime delivery. | Retain through T428 acceptance. |
 | [T428 S2 shared GUI residency](evidence/m0-t428-s2-shared-gui-worker-residency.md) | M0 T428 S2 | Removed added GUI-carrier idle timer; exact policy, full package, actual GUI and publication evidence with reuse limitation. | Retain through T428 acceptance. |

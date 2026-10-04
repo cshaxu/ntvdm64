@@ -17,6 +17,48 @@ static BOOL service_native_root_selectable(OPENNT_BASE_SERVICE *service,
 static VOID CALLBACK service_vdm_process_completed(void *context,BOOLEAN fired);
 static DWORD service_vdm_update(service_vdm_admission *state,BOOL undo);
 static DWORD service_vdm_admit(void *context,HANDLE process);
+/* All callers hold the existing service lock. The worker watch is the single
+ * persistent relationship authority; Console context only proves admission. */
+OPENNT_BASE_WORKER_WATCH *service_find_worker_watch(OPENNT_BASE_SERVICE *service,DWORD generation)
+{
+    LIST_ENTRY *link;
+    for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
+        OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
+        if(watch->process.SequenceNumber==generation)return watch;
+    }
+    return NULL;
+}
+
+DWORD service_worker_root(OPENNT_BASE_CONNECTION *worker)
+{
+    OPENNT_BASE_WORKER_WATCH *watch=service_find_worker_watch(worker->service,worker->process.SequenceNumber);
+    return watch ? watch->frontend_root_generation : 0;
+}
+
+DWORD service_bind_worker_root(OPENNT_BASE_SERVICE *service,HANDLE worker,
+    OPENNT_BASE_CONNECTION *root)
+{
+    LIST_ENTRY *link;
+    SERVICE_COMPARE_HANDLES compare=(SERVICE_COMPARE_HANDLES)GetProcAddress(
+        GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
+    if(!worker || !root || !root->frontend_capability)return ERROR_INVALID_PARAMETER;
+    if(!compare)return ERROR_CALL_NOT_IMPLEMENTED;
+    if(root->frontend_closing || WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT)
+        return ERROR_PIPE_NOT_CONNECTED;
+    for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
+        OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
+        if(!compare(watch->process.ProcessHandle,worker))continue;
+        if(watch->wow)return ERROR_INVALID_STATE;
+        if(watch->frontend_root_generation && watch->frontend_root_generation!=root->process.SequenceNumber)
+            return ERROR_PIPE_NOT_CONNECTED;
+        watch->frontend_root_generation=root->process.SequenceNumber;
+        watch->frontend_root_pid=GetProcessId(root->process.ProcessHandle);
+        return ERROR_SUCCESS;
+    }
+    /* A prepared worker has not registered its watch yet. The authenticated
+     * route retains this grant until Connect publishes the worker watch. */
+    return ERROR_SUCCESS;
+}
 /* A resident native worker may be selected only while its original
  * authenticated frontend root is still an open character session. A new
  * root in the same Windows Console is not a replacement for that root. */
@@ -28,12 +70,13 @@ static BOOL service_native_root_selectable(OPENNT_BASE_SERVICE *service,
         OPENNT_BASE_CONNECTION *worker=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
         if(worker->process.SequenceNumber!=worker_generation || !worker->native_worker)
             continue;
-        if(!worker->native_root)return TRUE; /* First direct admission. */
-        if(!requested_root || worker->native_root!=requested_root)return FALSE;
+        DWORD bound_root=service_worker_root(worker);
+        if(!bound_root)return TRUE; /* First direct admission. */
+        if(!requested_root || bound_root!=requested_root)return FALSE;
         for(root_link=service->connections.Flink;root_link!=&service->connections;
             root_link=root_link->Flink) {
             OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(root_link,OPENNT_BASE_CONNECTION,service_link);
-            if(root->process.SequenceNumber==worker->native_root && root->frontend_capability &&
+            if(root->process.SequenceNumber==bound_root && root->frontend_capability &&
                 !root->frontend_closing &&
                 WaitForSingleObject(root->process.ProcessHandle,0)==WAIT_TIMEOUT)return TRUE;
         }
@@ -146,8 +189,8 @@ DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *connection,
         if(error)goto done;
     } else if(connection->native_stop || connection->native_closed)
         {error=ERROR_INVALID_STATE;goto done;}
-    if(connection->native_root) {
-        if(connection->native_root==root_generation) {error=ERROR_INVALID_STATE;goto done;}
+    if(connection->native_frontend_registered) {
+        if(service_worker_root(connection)==root_generation) {error=ERROR_INVALID_STATE;goto done;}
         error=ERROR_PIPE_NOT_CONNECTED;goto done;
     }
     if(compare(stop,closed) || (frontend && (compare(stop,frontend) || compare(closed,frontend))))
@@ -162,14 +205,15 @@ DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *connection,
     }
     for(link=connection->service->connections.Flink;link!=&connection->service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *other=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-        if(root_generation && other->native_root==root_generation && WaitForSingleObject(other->process.ProcessHandle,0)==WAIT_TIMEOUT)
+        if(root_generation && other!=connection && other->native_worker &&
+            other->native_frontend_registered && service_worker_root(other)==root_generation &&
+            WaitForSingleObject(other->process.ProcessHandle,0)==WAIT_TIMEOUT)
             {error=ERROR_ALREADY_EXISTS;goto done;}
     }
     if(!DuplicateHandle(GetCurrentProcess(),stop,GetCurrentProcess(),&stop_copy,
         SYNCHRONIZE|EVENT_MODIFY_STATE,FALSE,0) ||
         !DuplicateHandle(GetCurrentProcess(),closed,GetCurrentProcess(),&closed_copy,SYNCHRONIZE,FALSE,0))
         {error=GetLastError();goto done;}
-    connection->native_root=root_generation;
     {
         LIST_ENTRY *root_link;
         for(root_link=connection->service->connections.Flink;
@@ -177,13 +221,15 @@ DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *connection,
             OPENNT_BASE_CONNECTION *registered_root=CONTAINING_RECORD(root_link,
                 OPENNT_BASE_CONNECTION,service_link);
             if(registered_root->process.SequenceNumber==root_generation)
-                {registered_root->frontend_admission_deadline=0;
-                 service_bind_management_root(connection->service,connection->process.ProcessHandle,registered_root);break;}
+                {error=service_bind_worker_root(connection->service,connection->process.ProcessHandle,registered_root);
+                 if(error)goto done;
+                 registered_root->frontend_admission_deadline=0;break;}
         }
     }
     if(connection->native_stop)CloseHandle(connection->native_stop);
     if(connection->native_closed)CloseHandle(connection->native_closed);
     connection->native_stop=stop_copy;connection->native_closed=closed_copy;
+    connection->native_frontend_registered=root_generation!=0;
     stop_copy=closed_copy=NULL;service_signal_frontend_states(connection->service);error=0;
 done:
     if(root)CloseHandle(root);if(stop_copy)CloseHandle(stop_copy);if(closed_copy)CloseHandle(closed_copy);
@@ -214,7 +260,9 @@ DWORD OpenNtBaseServiceRetainCommandWorker(OPENNT_BASE_CONNECTION *connection,
     if (connection->selected_native_generation) {
         for (link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
             OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
-            if (watch->kind==OPENNT_BASE_WORKER_NATIVE && watch->console==connection->console &&
+            if (watch->kind==OPENNT_BASE_WORKER_NATIVE &&
+                (watch->console==connection->console ||
+                 (!connection->retained_frontend_root && !watch->frontend_root_generation)) &&
                 watch->process.SequenceNumber==connection->selected_native_generation) {
                 selected=watch->process.ProcessHandle;break;
             }
@@ -290,7 +338,7 @@ DWORD OpenNtBaseServiceWorkerIoReleaseEvent(OPENNT_BASE_CONNECTION *worker,DWORD
     EnterCriticalSection(&worker->service->lock);
     if(OpenNtBaseServicePeer(worker,pid,generation) &&
         (worker->registered_worker || (worker->native_worker &&
-            (worker->native_root || (worker->native_stop && worker->native_closed))))) {
+            (service_worker_root(worker) || (worker->native_stop && worker->native_closed))))) {
         if(!worker->worker_io_release)
             worker->worker_io_release=CreateEventW(NULL,FALSE,FALSE,NULL);
         if(!worker->worker_io_release)error=GetLastError();
@@ -369,7 +417,7 @@ DWORD OpenNtBaseServiceSelectNativeWorker(OPENNT_BASE_CONNECTION *connection,
     DWORD pid,DWORD generation,HANDLE *worker)
 {
     OPENNT_BASE_SERVICE *service;OPENNT_BASE_WORKER_WATCH *selected=NULL;
-    LIST_ENTRY *link;DWORD error;
+    LIST_ENTRY *link;DWORD error,requested_root;
     if(!worker)return ERROR_INVALID_PARAMETER;
     *worker=NULL;
     if(!connection || !OpenNtBaseServicePeer(connection,pid,generation))return ERROR_ACCESS_DENIED;
@@ -377,6 +425,7 @@ DWORD OpenNtBaseServiceSelectNativeWorker(OPENNT_BASE_CONNECTION *connection,
     if(error)return error;
     service=connection->service;
     EnterCriticalSection(&service->lock);
+    requested_root=connection->frontend_capability ? generation : connection->retained_frontend_root;
     if(!OpenNtBaseServicePeer(connection,pid,generation)) {error=ERROR_ACCESS_DENIED;goto done;}
     if(connection->selected_native_generation) {
         error=OpenNtBaseServiceRetainCommandWorker(connection,pid,generation,worker);goto done;
@@ -389,11 +438,18 @@ DWORD OpenNtBaseServiceSelectNativeWorker(OPENNT_BASE_CONNECTION *connection,
     error=ERROR_NOT_FOUND;
     for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
         OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
-        if(watch->kind!=OPENNT_BASE_WORKER_NATIVE || watch->console!=connection->console ||
+        if(watch->kind!=OPENNT_BASE_WORKER_NATIVE ||
+            (watch->console!=connection->console &&
+             (requested_root || watch->frontend_root_generation)) ||
             watch->termination_requested || WaitForSingleObject(watch->process.ProcessHandle,0)!=WAIT_TIMEOUT ||
             !service_native_root_selectable(service,watch->process.SequenceNumber,
-                connection->retained_frontend_root))continue;
-        if(selected) {error=ERROR_INVALID_DATA;goto done;}
+                requested_root))continue;
+        /* Shared GUI carriers, like shared WOW, are not keyed by an outer
+         * text Console. Never admit a foreign bound text worker by this rule. */
+        if(selected) {
+            if(requested_root){error=ERROR_INVALID_DATA;goto done;}
+            continue;
+        }
         selected=watch;
     }
     if(selected) {

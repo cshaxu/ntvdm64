@@ -222,19 +222,7 @@ BOOL service_root_has_worker(OPENNT_BASE_CONNECTION *root)
         OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
         if(watch->wow || WaitForSingleObject(watch->process.ProcessHandle,0)!=WAIT_TIMEOUT)
             continue;
-        if(watch->kind==OPENNT_BASE_WORKER_DOS && service_root_console_matches(root,watch->console))
-            return TRUE;
-        if(watch->kind==OPENNT_BASE_WORKER_NATIVE) {
-            LIST_ENTRY *connection_link;
-            for(connection_link=service->connections.Flink;
-                connection_link!=&service->connections;connection_link=connection_link->Flink) {
-                OPENNT_BASE_CONNECTION *worker=CONTAINING_RECORD(connection_link,
-                    OPENNT_BASE_CONNECTION,service_link);
-                if(worker->process.SequenceNumber==watch->process.SequenceNumber &&
-                    (worker->native_root==generation ||
-                    (!worker->native_root && watch->console==root->console)))return TRUE;
-            }
-        }
+        if(watch->frontend_root_generation==generation)return TRUE;
     }
     return FALSE;
 }
@@ -319,24 +307,16 @@ DWORD service_retire_expired_frontends_at(OPENNT_BASE_SERVICE *service,ULONGLONG
         OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
         LIST_ENTRY *root_link;
         BOOL attached=FALSE;
-        DWORD native_root=0;
-        if(watch->wow)continue;
-        if(watch->kind==OPENNT_BASE_WORKER_NATIVE)
-            for(root_link=service->connections.Flink;root_link!=&service->connections;root_link=root_link->Flink) {
-                OPENNT_BASE_CONNECTION *worker=CONTAINING_RECORD(root_link,OPENNT_BASE_CONNECTION,service_link);
-                if(worker->process.SequenceNumber==watch->process.SequenceNumber){native_root=worker->native_root;break;}
-            }
+        if(watch->wow || !watch->frontend_root_generation)continue;
         for(root_link=service->connections.Flink;root_link!=&service->connections;root_link=root_link->Flink) {
             OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(root_link,OPENNT_BASE_CONNECTION,service_link);
             if(!root->frontend_capability)continue;
-            if((native_root && native_root==root->process.SequenceNumber) ||
-                (!native_root && service_root_console_matches(root,watch->console))) {
-                watch->frontend_associated=TRUE;
+            if(watch->frontend_root_generation==root->process.SequenceNumber) {
                 if(!root->frontend_closing && WaitForSingleObject(root->process.ProcessHandle,0)==WAIT_TIMEOUT)
                     attached=TRUE;
             }
         }
-        if(watch->frontend_associated && !attached && watch->shutdown &&
+        if(!attached && watch->shutdown &&
             WaitForSingleObject(watch->shutdown,0)==WAIT_TIMEOUT) {
             (void)SetEvent(watch->shutdown);
             changed=TRUE; /* Also wake pre-binding GetNextCommand. */
@@ -394,7 +374,7 @@ void service_retire_completed_root(OPENNT_BASE_CONNECTION *parent,DWORD idle_wor
                 OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(watch_link,OPENNT_BASE_WORKER_WATCH,link);
                 if(watch->wow || WaitForSingleObject(watch->process.ProcessHandle,0)!=WAIT_TIMEOUT)continue;
                 if(watch->process.SequenceNumber==idle_worker)continue;
-                if(service_root_console_matches(root,watch->console)){pending=TRUE;break;}
+                if(watch->frontend_root_generation==root->process.SequenceNumber){pending=TRUE;break;}
             }
             if(pending)continue;
         } else if(service_root_has_worker(root))continue;
@@ -412,7 +392,7 @@ void service_retire_completed_root(OPENNT_BASE_CONNECTION *parent,DWORD idle_wor
         if(idle_worker)for(other_link=parent->service->connections.Flink;
             other_link!=&parent->service->connections;other_link=other_link->Flink) {
             OPENNT_BASE_CONNECTION *other=CONTAINING_RECORD(other_link,OPENNT_BASE_CONNECTION,service_link);
-            if(other->native_worker && other->native_root==root->process.SequenceNumber &&
+            if(other->native_worker && service_worker_root(other)==root->process.SequenceNumber &&
                 (other->native_inflight || !IsListEmpty(&other->win32records))) {pending=TRUE;break;}
         }
         if(pending)continue;

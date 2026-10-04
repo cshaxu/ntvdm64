@@ -495,7 +495,7 @@ DWORD service_prepare_parent_resume(OPENNT_BASE_CONNECTION *caller,
         if(parent->worker_failed || WaitForSingleObject(parent->process.ProcessHandle,0)!=WAIT_TIMEOUT)
             return ERROR_PROCESS_ABORTED;
         if(parent->native_worker) {
-            if(parent->native_root!=root_generation || !parent->native_inflight)
+            if(service_worker_root(parent)!=root_generation || !parent->native_inflight)
                 return ERROR_INVALID_STATE;
             caller->selected_native_generation=parent->process.SequenceNumber;
             *native_parent=TRUE;return ERROR_SUCCESS;

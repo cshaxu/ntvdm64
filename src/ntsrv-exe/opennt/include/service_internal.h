@@ -138,7 +138,7 @@ struct OPENNT_BASE_CONNECTION {
     HANDLE native_start_event,native_start_target,native_start_receipt;
     DWORD native_start_worker,native_start_request,native_start_status;
     BOOL native_start_reported;
-    DWORD native_root;
+    BOOL native_frontend_registered; /* Control registration, not root identity. */
     DWORD native_inflight,native_activity_root;
     /* Project-owned native-text counterpart to BaseSrv's original DOSRECORD
      * projection.  The broker, not the native Console process list, owns
@@ -193,8 +193,7 @@ typedef struct OPENNT_BASE_WORKER_WATCH {
     LIST_ENTRY management_labels;
     BOOL termination_requested;
     HANDLE shutdown;
-    BOOL frontend_associated;
-    DWORD management_root_generation,management_root_pid;
+    DWORD frontend_root_generation,frontend_root_pid;
 } OPENNT_BASE_WORKER_WATCH;
 typedef struct OPENNT_BASE_MANAGEMENT_LABEL {
     LIST_ENTRY link;
@@ -260,7 +259,9 @@ void service_capture_wow_management_labels(OPENNT_BASE_CONNECTION *);
 void service_capture_checked_management_label(OPENNT_BASE_SERVICE *service,
     HANDLE console,const BASE_CHECKVDM_MSG *command);
 /* Caller holds service lock; capture only an already authenticated binding. */
-void service_bind_management_root(OPENNT_BASE_SERVICE *,HANDLE worker,
+OPENNT_BASE_WORKER_WATCH *service_find_worker_watch(OPENNT_BASE_SERVICE *,DWORD generation);
+DWORD service_worker_root(OPENNT_BASE_CONNECTION *);
+DWORD service_bind_worker_root(OPENNT_BASE_SERVICE *,HANDLE worker,
     OPENNT_BASE_CONNECTION *root);
 BOOL service_root_has_worker(OPENNT_BASE_CONNECTION *root);
 DWORD service_queue_native_command(OPENNT_BASE_CONNECTION *connection,DWORD pid,

@@ -37,23 +37,6 @@ static DWORD service_win32record_depth(const OPENNT_BASE_CONNECTION *connection)
     return depth;
 }
 
-void service_bind_management_root(OPENNT_BASE_SERVICE *service,HANDLE worker,
-    OPENNT_BASE_CONNECTION *root)
-{
-    LIST_ENTRY *link;
-    SERVICE_COMPARE_HANDLES compare=(SERVICE_COMPARE_HANDLES)GetProcAddress(
-        GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
-    if(!root || !root->frontend_capability)return;
-    if(!compare || !worker)return; /* No guessed PID-based association. */
-    for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
-        OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
-        if(watch->wow || !compare(watch->process.ProcessHandle,worker))continue;
-        watch->management_root_generation=root->process.SequenceNumber;
-        watch->management_root_pid=GetProcessId(root->process.ProcessHandle);
-        break;
-    }
-}
-
 static OPENNT_BASE_MANAGEMENT_LABEL *service_wow_label(OPENNT_BASE_WORKER_WATCH *watch,
     PWOWRECORD record)
 {
@@ -392,10 +375,9 @@ static void service_copy_worker(OPENNT_BASE_WORKER_WATCH *watch,OPENNT_BASE_WORK
     item->sequence=watch->process.SequenceNumber;
     item->key=service_management_key(watch->service,MANAGEMENT_WORKER,item->sequence,0);
     item->process_id=GetProcessId(watch->process.ProcessHandle);
-    item->kind=watch->wow ? 1u : 0u;
+    item->kind=watch->kind==OPENNT_BASE_WORKER_NATIVE ? 2u : watch->wow ? 1u : 0u;
     item->state=VDM_READY;
     item->started_filetime=((uint64_t)watch->started.dwHighDateTime<<32)|watch->started.dwLowDateTime;
-    service_copy_management_record(watch,item);
     if(watch->kind==OPENNT_BASE_WORKER_NATIVE) {
         for(entry=watch->service->connections.Flink;entry!=&watch->service->connections;entry=entry->Flink) {
             OPENNT_BASE_CONNECTION *native=CONTAINING_RECORD(entry,OPENNT_BASE_CONNECTION,service_link);
@@ -403,16 +385,16 @@ static void service_copy_worker(OPENNT_BASE_WORKER_WATCH *watch,OPENNT_BASE_WORK
                 service_copy_win32record(native,item);break;
             }
         }
-    }
+    } else service_copy_management_record(watch,item);
     item->display_state=item->state==0 ? MANAGEMENT_UNKNOWN :
         item->stack_depth ? MANAGEMENT_BUSY : MANAGEMENT_IDLE;
     if(watch->termination_requested || (item->state&0x80000000u) ||
         WaitForSingleObject(watch->process.ProcessHandle,0)!=WAIT_TIMEOUT) {
         item->state|=0x80000000u;item->display_state=MANAGEMENT_CLOSING;
     } else item->actions=MANAGEMENT_CAN_CLOSE;
-    if(watch->management_root_generation && !watch->wow) {
+    if(watch->frontend_root_generation && !watch->wow) {
         item->parent=service_management_key(watch->service,MANAGEMENT_FRONTEND,
-            watch->management_root_generation,0);
+            watch->frontend_root_generation,0);
         item->depth=1;
     }
     if(!item->image[0])lstrcpynW(item->image,item->stack_depth ? L"<UNKNOWN>" : L"<EMPTY>",
@@ -503,7 +485,7 @@ static DWORD service_copy_management_tree(OPENNT_BASE_SERVICE *service,
         error=service_append_management(rows,count,capacity,&item);if(error)return error;
         for(child=service->worker_watches.Flink;child!=&service->worker_watches;child=child->Flink) {
             OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(child,OPENNT_BASE_WORKER_WATCH,link);
-            if(watch->management_root_generation!=root->process.SequenceNumber || watch->wow)continue;
+            if(watch->frontend_root_generation!=root->process.SequenceNumber || watch->wow)continue;
             error=service_append_worker(watch,rows,count,capacity);if(error)return error;
         }
     }
@@ -513,24 +495,24 @@ static DWORD service_copy_management_tree(OPENNT_BASE_SERVICE *service,
         OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
         OPENNT_BASE_WORKER_INFO missing={0};
         BOOL first=TRUE;
-        if(watch->wow || !watch->management_root_generation) {
+        if(watch->wow || !watch->frontend_root_generation) {
             error=service_append_worker(watch,rows,count,capacity);if(error)return error;
             continue;
         }
-        if(service_management_root(service,watch->management_root_generation))continue;
+        if(service_management_root(service,watch->frontend_root_generation))continue;
         for(child=service->worker_watches.Flink;child!=link;child=child->Flink) {
             OPENNT_BASE_WORKER_WATCH *prior=CONTAINING_RECORD(child,OPENNT_BASE_WORKER_WATCH,link);
-            if(prior->management_root_generation==watch->management_root_generation && !prior->wow)
+            if(prior->frontend_root_generation==watch->frontend_root_generation && !prior->wow)
                 {first=FALSE;break;}
         }
         if(!first)continue;
-        missing.key=service_management_key(service,MANAGEMENT_FRONTEND,watch->management_root_generation,0);
-        missing.process_id=watch->management_root_pid;missing.display_state=MANAGEMENT_MISSING;
+        missing.key=service_management_key(service,MANAGEMENT_FRONTEND,watch->frontend_root_generation,0);
+        missing.process_id=watch->frontend_root_pid;missing.display_state=MANAGEMENT_MISSING;
         lstrcpynW(missing.image,L"NTCON <MISSING>",OPENNT_BASE_WORKER_IMAGE_CHARS);
         error=service_append_management(rows,count,capacity,&missing);if(error)return error;
         for(child=link;child!=&service->worker_watches;child=child->Flink) {
             OPENNT_BASE_WORKER_WATCH *member=CONTAINING_RECORD(child,OPENNT_BASE_WORKER_WATCH,link);
-            if(member->management_root_generation!=watch->management_root_generation || member->wow)continue;
+            if(member->frontend_root_generation!=watch->frontend_root_generation || member->wow)continue;
             error=service_append_worker(member,rows,count,capacity);if(error)return error;
         }
     }

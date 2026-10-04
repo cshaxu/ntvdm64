@@ -281,7 +281,7 @@ void service_clear_frontend(OPENNT_BASE_CONNECTION *connection)
             caller->channel_worker_generation==connection->process.SequenceNumber)
             service_clear_frontend_channel(caller);
     }
-    /* Do not clear native_root here. The worker's authenticated root process
+    /* Do not clear the worker watch's root here. Its authenticated root process
      * is its Console-session lifetime; only worker rundown releases that
      * association, so a new root cannot adopt the old hidden Console. */
     while (context_link!=&connection->service->console_contexts) {
@@ -1163,7 +1163,10 @@ DWORD OpenNtBaseServiceRequestFrontend(OPENNT_BASE_CONNECTION *connection,DWORD 
                 if(authorization)error=authorization;
             }
             if(!error || error==ERROR_ALREADY_EXISTS)
-                service_bind_management_root(connection->service,worker,route->root);
+            {
+                DWORD binding=service_bind_worker_root(connection->service,worker,route->root);
+                if(binding)error=binding;
+            }
             goto done;
         }
     }
@@ -1183,6 +1186,7 @@ DWORD OpenNtBaseServiceRequestFrontend(OPENNT_BASE_CONNECTION *connection,DWORD 
         connection->frontend_request_root=0;
         error=pending->native_worker ? ERROR_SUCCESS :
             service_authorize_worker_io(connection,GetProcessId(pending->worker));
+        if(!error)error=service_bind_worker_root(connection->service,pending->worker,root);
         if(!error)error=service_refresh_frontend_work(root);
         if(error) {
             connection->frontend_request_root=0;
@@ -1191,7 +1195,6 @@ DWORD OpenNtBaseServiceRequestFrontend(OPENNT_BASE_CONNECTION *connection,DWORD 
         }
         service_signal_frontend_states(connection->service);
         error=ERROR_SUCCESS;
-        service_bind_management_root(connection->service,pending->worker,root);
         break;
     }
 done:

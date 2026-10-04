@@ -33,6 +33,7 @@ try {
         if($worker.ProcessName -ne 'ntvwm'){throw 'GUI was not created by NTVWM'}
     }
     if($worker.HasExited){throw 'First shared GUI worker did not remain resident'}
+    if($matches[0].ParentProcessId -ne $worker.Id){throw 'Repeated shared GUI launch did not reuse the resident worker'}
     # A deliberate longevity check, not input pacing or startup readiness.
     # Normal coverage uses exact-time policy fixtures; FullDeadlines also
     # proves real worker wiring survives beyond the old ten-second boundary.

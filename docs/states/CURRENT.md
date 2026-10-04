@@ -58,8 +58,14 @@ records 37 shutdown assertions, 25 service cases, six actual GUI cases,
 Console17/Window17/WOW, frontend/worker loss, independent close isolation and
 published smoke/hash checks. Original DOS/WOW cleanup and wire versions remain
 unchanged. Reviewed P 886f13758 is pushed; side-session planning stays separate.
-S5 is admitted for the next approved bounded stage; implementation is not yet
-claimed.
+S5 implements the existing worker-watch association authority and shared GUI
+reuse; the [S5 evidence](../etc/evidence/m0-t428-s5-worker-association.md)
+records focused passes and retained failures. Final r015 package regression,
+lifetime, recoverable publication and deployed smoke/hash checks passed;
+the reviewed implementation increment is delivered through Git. S5 stays
+open for final cancellation/exclusive-GUI requirement disposition, not a
+claim that a new separate-GUI launch input exists. The published baseline
+is now this S5 increment; S6 is not yet admitted.
 
 ## S4 Closure Record
 
@@ -108,8 +114,8 @@ S2 6a8934f6b. T428 remains open.
 
 ## Current Technical Baseline
 
-Current verified/published package is T428 S4 886f13758 from
-build/M0-T428/S4/r003/runtime. It retains
+Current verified/published package is the T428 S5 implementation increment from
+build/M0-T428/S5/r015/runtime, with recovery of S4 in S5/r013/recovery. It retains
 the following accepted T427 layout/protocol baseline, S2 native GUI-carrier
 residency, authenticated service-owned parent restoration and common shutdown
 execution with pre-text native close-control registration.

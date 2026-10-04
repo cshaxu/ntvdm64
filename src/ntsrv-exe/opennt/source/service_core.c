@@ -182,19 +182,38 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                  * delivery; DOS keeps the initial root for re-entry. */
                 if(!error && !shared_wow && console) {
                     LIST_ENTRY *root_link;
+                    OPENNT_BASE_CONNECTION *selected_root=NULL;
+                    BOOL route_found=FALSE;
+                    SERVICE_COMPARE_HANDLES compare=(SERVICE_COMPARE_HANDLES)GetProcAddress(
+                        GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
+                    /* RequestFrontend can precede worker Connect. Consume its
+                     * exact authenticated process grant, not a Console guess. */
+                    if(!compare)error=ERROR_CALL_NOT_IMPLEMENTED;
+                    else for(root_link=service->frontend_routes.Flink;
+                        root_link!=&service->frontend_routes;root_link=root_link->Flink) {
+                        OPENNT_FRONTEND_ROUTE *route=CONTAINING_RECORD(root_link,OPENNT_FRONTEND_ROUTE,link);
+                        if(!compare(route->worker,watch->process.ProcessHandle))continue;
+                        route_found=TRUE;
+                        selected_root=route->root;
+                        if(!selected_root || selected_root->frontend_closing)
+                            (void)SetEvent(watch->shutdown);
+                        break;
+                    }
                     for(root_link=service->connections.Flink;
-                        root_link!=&service->connections;root_link=root_link->Flink) {
+                        !error && !route_found && !selected_root && root_link!=&service->connections;root_link=root_link->Flink) {
                         OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(root_link,
                             OPENNT_BASE_CONNECTION,service_link);
                         if(root->frontend_capability && service_root_console_matches(root,console) &&
                             root->console_member_count && !root->frontend_closing &&
                             WaitForSingleObject(root->process.ProcessHandle,0)==WAIT_TIMEOUT) {
-                            error=service_copy_execution_console_members(connection,root);
-                            watch->frontend_associated=TRUE;
-                            watch->management_root_generation=root->process.SequenceNumber;
-                            watch->management_root_pid=GetProcessId(root->process.ProcessHandle);
+                            selected_root=root;
                             break;
                         }
+                    }
+                    if(selected_root) {
+                        error=service_copy_execution_console_members(connection,selected_root);
+                        watch->frontend_root_generation=selected_root->process.SequenceNumber;
+                        watch->frontend_root_pid=GetProcessId(selected_root->process.ProcessHandle);
                     }
                 }
                 if (error || !RegisterWaitForSingleObject(&watch->wait,watch->process.ProcessHandle,

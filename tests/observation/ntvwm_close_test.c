@@ -21,7 +21,13 @@ int wmain(int argc,WCHAR **argv)
         if(!SetConsoleCtrlHandler(control,TRUE) || !SetEvent(ready))return 2;
         Sleep(20000);return 3;
     }
-    if(argc==2 && !wcscmp(argv[1],L"--owner")) {
+    if(argc==2 && !wcscmp(argv[1],L"--empty-owner")) {
+        HWND window=GetConsoleWindow();
+        if(!window || IsWindowVisible(window))return 16;
+        error=ntvwm_console_close();
+        if(!error && (IsWindow(window) || GetConsoleWindow()))error=17;
+        if(!error && ntvwm_console_close()!=ERROR_INVALID_HANDLE)error=18;
+    } else if(argc==2 && !wcscmp(argv[1],L"--owner")) {
         HWND window=GetConsoleWindow();
         if(!window || IsWindowVisible(window))return 4;
         ready=CreateEventW(&security,TRUE,FALSE,NULL);
@@ -44,6 +50,16 @@ int wmain(int argc,WCHAR **argv)
         else if(!GetExitCodeProcess(process.hProcess,&code))error=14;
         else error=code;
         printf("NTVWM-CLOSE error=%lu target-image-and-normal-console-close=%s\n",error,error ? "FAIL" : "PASS");
+        if(!error) {
+            CloseHandle(process.hProcess);CloseHandle(process.hThread);
+            ZeroMemory(&process,sizeof(process));
+            swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" --empty-owner",image);
+            if(!CreateProcessW(image,command,NULL,NULL,FALSE,CREATE_NEW_CONSOLE,NULL,NULL,&startup,&process))error=19;
+            else if(WaitForSingleObject(process.hProcess,15000)!=WAIT_OBJECT_0)error=20;
+            else if(!GetExitCodeProcess(process.hProcess,&code))error=21;
+            else error=code;
+            printf("NTVWM-CLOSE error=%lu empty-console-close=%s\n",error,error ? "FAIL" : "PASS");
+        }
     } else return 15;
     if(process.hProcess) {
         if(WaitForSingleObject(process.hProcess,0)==WAIT_TIMEOUT)TerminateProcess(process.hProcess,99);
