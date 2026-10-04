@@ -93,7 +93,12 @@ try {
     try {Stop-IsolatedPackageScope $testScope}finally{
         if($mapped) {& subst.exe Z: /d; if($LASTEXITCODE){Write-Error 'Failed to remove owned Z: mapping'}}
         foreach($name in $environmentNames) {
-            [Environment]::SetEnvironmentVariable($name,$saved[$name],'Process')
+            # PowerShell can marshal null to an empty string here. Native
+            # GetEnvironmentVariable(name,NULL,0) sees that as present (1),
+            # accidentally enabling a later observer's boolean mode.
+            if($null -eq $saved[$name]){
+                Remove-Item -LiteralPath ('Env:'+$name) -ErrorAction SilentlyContinue
+            }else{[Environment]::SetEnvironmentVariable($name,$saved[$name],'Process')}
         }
     }
 }

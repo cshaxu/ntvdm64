@@ -2,34 +2,35 @@
 
 ## Current Work
 
-**Active: M0 T429 S3** (Ordinary Mode).
+**Active: M0 T429 S4** (Ordinary Mode; delivery complete, owner T acceptance pending).
 
 Owner admitted the performance package after closing T428. S1's bounded
 measurement conclusion is recorded in the
 [baseline evidence](../etc/evidence/m0-t429-s1-performance-baseline.md).
-S2 is delivered at production123c0ad3e/status651efdd7b. Only S3 is now active,
-following the owner's continuous performance-optimization direction.
+S3 is delivered at production0654f5e0b after S2 production123c0ad3e.
+S4's final verification/test-only delivery is complete; this packet is retained
+for owner T acceptance. No further implementation or next T is admitted.
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T429 S3; Ordinary Mode. |
-| Admission And Approval | Sequential admission after pushed S2 closure; owner directs continuous execution-performance optimization. Measured frame-publication attribution selects only the proven per-cell host-query cost in the existing NTCON cell importer. |
+| Identifier Mode | M0 T429 S4; Ordinary Mode. |
+| Admission And Approval | Sequential admission after pushed S3 closure under the owner's continuous execution-performance direction; final integration and limits audit from the approved proposal. |
 | Candidate Proposal | [Execution-performance recovery](../proposals/proposal-ntvdm-execution-performance-recovery-001.md). |
-| Objective | Query the current Console output code page once per copied text frame instead of once per character; preserve exact cells/styles/cursor, failure rollback and every explicit publication. Measure the actual transfer/commit benefit without changing queues or transport. |
+| Objective | Audit the delivered S2/S3 performance claims and retained semantics; verify native/DOS nested return, modern EDIT/cooked caller restoration and lifecycle wiring with the exact published package; reach the T owner-verification handoff. |
 | Non-goals | No CCPU/mirror/guest/firmware, lifecycle, wire, helper/channel/component/scheduler change; no permanent code-page cache, display dedup, input batching or speculative transport optimization. NTVWM30ms sampling is unchanged. |
-| Reference Baseline | Production123c0ad3e/status651efdd7b; coherent S2 r025/runtime, deployed and verified r027/r028. MSVC14.43/SDK22621/x86 /MT CCPU40; APP0.0.427/RPC38/I/O25. S2 r023 attributes94.36% of cumulative text commit to39120 per-cell code-page queries. |
-| Files And ABI Surface | NTCON frontend_session.c frame conversion; production-linked code-page/style/cursor/failure fixture and reproducible measured comparison; evidence/status. No cross-EXE ABI or ownership change. |
+| Reference Baseline | Production0654f5e0b; coherent S3 r006/runtime, r009 Console17/Window17/WOW and r010/r011 deployment/smoke. MSVC14.43/SDK22621/x86 /MT CCPU40; APP0.0.427/RPC38/I/O25. S3 matched EDIT200 commit median100350→5512us, scripted workload8924→7958ms. |
+| Files And ABI Surface | Evidence/status/index and existing production-linked test entrypoints; fix verified test-only broker-I/O environment restoration (absent flag must be deleted, not restored empty), with a reproducible native environment diagnostic. No admitted production-source, cross-EXE ABI or ownership change. |
 | Applicable Rules | Full AGENTS set, source policy, mirror provenance/minimal registered diff, original instruction semantics, build-only artifacts, preserved other-session edits and serial global endpoint/Z:-only tests. |
-| Verification | Incremental affected x86 closure with pinned cache/source/toolchain identities; exact code-page call count and next-frame refresh, paired/triple cells, cursor and conversion-failure rollback; retained frontend/handoff/lifecycle tests; alternating real EDIT200 measured variants and unchanged native control; Console17/Window17/WOW, coherent eight-file publication and smoke. Governance, links and diff review. |
-| Expected Markers | One output-CP query per imported frame, no permanent cache; next frame uses changed CP, character/style/cursor state and failure atomicity remain; real EDIT queue/order/receipt assertions pass and transfer/commit distributions improve or contrary evidence is reported. |
-| Asset Needs | Validated build/M0-T427/S2/r001 dependency cache; immutable S2 r025 runtime/media and S2 r022 measured frontend/worker; new outputs under build/M0-T429/S3. No external runtime dependency. |
+| Verification | Pin all eight hashes to S3 published/tested manifest; reuse exact unchanged S3 full-product and importer/channel/failure results, S2 release-object/diagnostic proof and matched CPU samples. Incremental graph check; serial nested Console/Window broker I/O handoff, modern EDIT return, cooked caller return, native frontend close, unexpected-worker-loss and independent sessions. Governance, links and independent final diff/requirement review. |
+| Expected Markers | Actual parent-return/MEM and direct exit23; original cooked caller completion19; modern EDIT ownership/return; native closure succeeds before generic fault, unexpected worker loss1067 does not fabricate target completion, independent sessions retain input/exit. Every omitted gate maps to unchanged exact inputs, not elapsed-time convenience. |
+| Asset Needs | Validated T427 S2 r001 dependency cache; exact S3 r006 runtime/media and S3 r010 deployed manifest. Existing private-desktop observers and fixtures; fresh S4 build-only reports, Z:-only serial runtime. |
 | Reporting Requirements | Separate source/object, measured and physical observations; report hashes, commands, failed attempts, median/tails and retained limits, not inferred speed claims. |
 | Stop Conditions | Need for new protocol, ownership/lifecycle policy, mirror/guest changes, event filtering or external acceptance dependency pauses for renewed approval. Unexplained cell/input/handoff regression prevents delivery. |
-| Exit Criteria | Production frame importer issues one current CP query per frame with tested exact conversion/rollback; causal measured comparison and retained runtime gates reviewed; coherent eight files published, reviewed commit/push delivered. |
+| Exit Criteria | Delivered performance/semantic claims have reproducible evidence and truthful bounds; selected actual integration/lifecycle gates pass at the published identity, final audit delivered and pushed. T closure remains owner-directed; no physical/RDP or SoftPC measurement is invented. |
 | Original Owner Request | Continue execution-performance optimization using evidence; preserve original execution and explicit frame/input semantics rather than concealing issues with dedup. |
-| Similar-Issue Sweep | Per-character host queries in frame import/conversion, CP changes between frames and ownership handoffs, concurrent code-page change within a copied frame, rollback on multibyte conversion failure. |
+| Similar-Issue Sweep | Diagnostic release leakage, frame/CP snapshot scope, explicit publications, nested final-paint/input restoration, management-vs-fault priority, isolated sessions and performance claims versus physical/SoftPC/WOW limits. |
 
 ## S1 Closure Record
 
@@ -43,6 +44,22 @@ comparison remain explicitly unproved. Sequential S2 is admitted, not T closure.
 records source/object proof, matched distributions, all retained runtime gates,
 the approved native-close dependency and coherent eight-file publication.
 Production123c0ad3e is pushed. S2 is bounded-closed, not T429 owner closure.
+
+## S3 Closure Record
+
+[S3 frame-local code-page evidence](../etc/evidence/m0-t429-s3-frame-codepage-snapshot.md)
+records importer/failure/channel tests, six matched EDIT200 samples, full product
+and coherent deployment/smoke. Production0654f5e0b is pushed; S3 is bounded-closed.
+S4 final integration is the only active S, not T owner acceptance.
+
+## S4 Delivery Record
+
+[S4 integration audit](../etc/evidence/m0-t429-s4-integration-audit.md) records
+the final eight actual integration/lifecycle passes at unchanged published
+identity, retained failed combined run, native environment diagnostic and
+minimal test-only flag-restoration fix. Production0654f5e0b remains deployed.
+The final verification/test-only commit/push is pending; T429 stays open for
+owner acceptance, not additional automatic implementation.
 
 ## Current Technical Baseline
 
@@ -95,7 +112,7 @@ Shared GUI carriers reside/reuse; no exclusive GUI option is introduced.
 Physical RDP/RawInput/focus is waived or unobserved, not passed. Matched SoftPC
 runtime comparison remains unperformed; S4 must disclose it. WOW keeps retained
 frontier nonregression, not broader usability. Host scrollback is not promised.
-S3 now owns only the measured text-frame conversion cost; S4 remains later.
+S3 delivers only the measured text-frame conversion cost; S4 delivery is complete.
 Native30ms polling is unchanged. [S3 evidence](../etc/evidence/m0-t429-s3-frame-codepage-snapshot.md)
 records r005 importer/rollback/public-channel passes and r008's fixed six-sample
 EDIT200 comparison. Commit median falls100350→5512us; whole scripted workload
@@ -103,8 +120,11 @@ median8924→7958ms. These are injected private-desktop observations, not physic
 RDP latency. r007's wrong-observer rejection remains evidence. S3 r009 formal
 Console17/Window17/WOW passes (total219979ms). r010 publishes the coherent eight
 files to O:/winnt/system32 with only NTCON changed; r011's published Console/
-Window smoke and all hashes pass. S3 final diff review is complete; its reviewed
-production commit/push and sequential S4 admission are the remaining handoff.
+Window smoke and all hashes pass. S3 final diff review is complete and production
+0654f5e0b is pushed. [S4 audit](../etc/evidence/m0-t429-s4-integration-audit.md)
+records final integration and explicit limits, not T closure. S4 r004's eight
+cases and r005's native environment diagnostic pass; the preceding r001 failure
+is retained. Only test flag cleanup changed, not the eight deployed binaries.
 Other-session proposal chronology is preserved and excluded from this delivery.
 
 ## Recent M0 Closures
@@ -118,6 +138,7 @@ Other-session proposal chronology is preserved and excluded from this delivery.
 ## Recent Governance
 
 S1 concludes as measurement-only; S2 is bounded-closed at production123c0ad3e.
-S3 is admitted sequentially as the only active bounded repair.
+S3 is bounded-closed at production0654f5e0b; S4 integration reaches its delivery
+boundary. T429 remains at owner acceptance; no further automatic implementation.
 Guest and lifecycle policy remain unchanged; the approved close dependency
 repairs ordering only. T429 remains open and other-session work is preserved.

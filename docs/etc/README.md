@@ -308,6 +308,9 @@ All other historical supporting material is in the [external documentation archi
 [T429 S3 frame-local code-page query](evidence/m0-t429-s3-frame-codepage-snapshot.md)
 records the bounded measured publication-cost repair and its semantic/runtime gates.
 
+[T429 S4 integration audit](evidence/m0-t429-s4-integration-audit.md)
+records exact-input reuse, final real integration checks and acceptance limits.
+
 [T429 S2 release DECODE diagnostics](evidence/m0-t429-s2-release-decode-diagnostics.md)
 records source provenance, compile-selected attribution, normal/diagnostic object
 proof and the explicit runtime/publication gates still pending.
