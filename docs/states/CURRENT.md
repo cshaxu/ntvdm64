@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T428 S6** (Ordinary Mode).
+**Active: M0 T428 S6** (Ordinary Mode; implementation delivered, awaiting owner T acceptance).
 
 Owner admits the queue-head worker control/lifecycle/ownership unification
 package on 2026-10-04, asking first for current-state audit and architecture
@@ -83,7 +83,11 @@ r009 six GUI cases and r010 management/loss/isolation. r011 publishes the
 coherent eight-file package to O:/winnt/system32 and preserves S5 recovery;
 r012 deployed Console/Window smoke and eight hashes pass. No mirror, wire,
 CLI, kind mapping or native30ms polling change. Final source/diff/governance
-review and sequential P delivery apply; T428 remains open for owner acceptance.
+review passed. Reviewed production P 68e860553 is pushed to main/origin; S6
+implementation is closed. T428 remains open for owner acceptance; no later
+T/S is admitted. The evidence includes the whole-proposal requirement audit
+and deliberate original/native boundaries. Other-session planning remains dirty
+and excluded, not discarded or falsely reported as a clean whole worktree.
 
 ## S5 Closure Record
 

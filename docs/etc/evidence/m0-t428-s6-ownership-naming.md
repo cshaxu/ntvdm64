@@ -104,7 +104,10 @@ hash checks. Logs are O:/winnt/Logs2/t428-s6-final-console/window. Source review
 confirms mechanical-only production renames and an unchanged close body;
 fixture corrections retain actual ownership/ordering/handle assertions.
 Governance, relative links, ownership negative controls and diff checks precede
-the reviewed Git delivery recorded in CURRENT.
+the reviewed Git delivery. Production P 68e860553 is pushed to main/origin.
+S6 implementation is closed; T428 remains open pending owner acceptance.
+The subsequent status-only delivery records that revision without rebuilding
+or replacing the already verified runtime.
 
 Physical RDP/focus is owner-waived/unobserved, not passed. WOW comparisons retain
 the established frontier contract, not a new full-usability/gameplay claim.
