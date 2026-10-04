@@ -21,7 +21,7 @@ Copy-Item -LiteralPath $Probe -Destination (Join-Path $test 'SEARCH.EXE')
 $scope=New-IsolatedPackageScope $runtime
 & subst.exe Z: $runtime
 if($LASTEXITCODE){throw 'SUBST failed'}
-$scope.Paths+=@($scope.Paths|ForEach-Object {Join-Path Z:\ ([IO.Path]::GetFileName($_))})
+$scope.Paths+=@($scope.Paths|ForEach-Object {Join-Path Z:\ $_.Substring($runtime.Length+1)})
 function Observe([string]$Name,[string[]]$Tail){
     $report=Join-Path $RunRoot ($Name+'.txt')
     $start=[Diagnostics.ProcessStartInfo]::new($Observer)
@@ -30,7 +30,7 @@ function Observe([string]$Name,[string[]]$Tail){
     $start.Environment['MVDM_OBSERVER_SHORT_HISTORY']='1'
     $start.Environment['PATH']=Join-Path $env:SystemRoot 'System32'
     $start.Environment['SEARCH_IDENTITY_REPORT']=Join-Path $RunRoot ($Name+'.image.txt')
-    foreach($item in (@('Z:\run16.exe','Z:\tests',$report)+$Tail+@('--observation-timeout-ms','20000'))){$start.ArgumentList.Add($item)}
+    foreach($item in (@('Z:\system32\run16.exe','Z:\tests',$report)+$Tail+@('--observation-timeout-ms','20000'))){$start.ArgumentList.Add($item)}
     $process=[Diagnostics.Process]::Start($start)
     try{
         if(!$process.WaitForExit(30000)){throw "Owned observer timeout: $($process.Id)"}

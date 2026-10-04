@@ -1,6 +1,20 @@
 # Test-only ownership boundary. Never use this for publication or O:\winnt.
 # Caller creates the scope before starting any case; exact isolated paths are
 # the only cleanup authority, not image names or normal idle deadlines.
+function Get-PackageBinaryRoot([string]$PackageRoot) {
+    # Test-only compatibility for sealed flat baselines and build-link caches.
+    # Production has one layout: <root>\system32. Never mix the two layouts.
+    $system=Join-Path $PackageRoot 'system32'
+    if(Test-Path -LiteralPath (Join-Path $system 'run16.exe')){
+        foreach($name in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL')){
+            if(Test-Path -LiteralPath (Join-Path $PackageRoot $name)){
+                throw 'Mixed product binary layout'
+            }
+        }
+        return $system
+    }
+    return $PackageRoot
+}
 function New-IsolatedPackageScope([string]$PackageRoot,[string]$LaunchRoot='') {
     $physical=(Resolve-Path $PackageRoot).Path
     $build=(Resolve-Path "$PSScriptRoot/../../build").Path+'\'
@@ -9,11 +23,13 @@ function New-IsolatedPackageScope([string]$PackageRoot,[string]$LaunchRoot='') {
     }
     if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'Existing broker; no test ownership'}
     $paths=@()
+    $binary=Get-PackageBinaryRoot $physical
+    $launchBinary=if($LaunchRoot){Get-PackageBinaryRoot $LaunchRoot}else{''}
     foreach($name in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe')){
-        $file=Join-Path $physical $name
+        $file=Join-Path $binary $name
         $paths+=$file
         if($LaunchRoot){
-            $alias=Join-Path $LaunchRoot $name
+            $alias=Join-Path $launchBinary $name
             if((Get-FileHash $alias).Hash -ne (Get-FileHash $file).Hash){throw 'Test alias identity mismatch'}
             $paths+=$alias
         }

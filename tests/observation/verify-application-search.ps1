@@ -31,7 +31,7 @@ $results=@()
 function Run-Case([string]$Name,[string]$Argument,[string]$Expected,
     [string]$PathValue=($first+';'+$second),[string]$WorkingDirectory=$cwd,[switch]$UnsetPath){
     $report=Join-Path $RunRoot ($Name+'.image.txt')
-    $start=[Diagnostics.ProcessStartInfo]::new((Join-Path $runtime 'run16.exe'))
+    $start=[Diagnostics.ProcessStartInfo]::new((Join-Path $runtime 'system32\run16.exe'))
     $start.UseShellExecute=$false
     $start.CreateNoWindow=$true
     $start.WorkingDirectory=$WorkingDirectory

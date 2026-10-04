@@ -19,12 +19,12 @@ if($Prefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid prefix'}
 $Observer=(Resolve-Path $Observer).Path
 $WindowObserver=(Resolve-Path $WindowObserver).Path
 $PackageRoot=(Resolve-Path $PackageRoot).Path
-$paths=@('run16.exe','ntvdm.exe','ntsrv.exe') | ForEach-Object {Join-Path $PackageRoot $_}
+$paths=@('run16.exe','ntvdm.exe','ntsrv.exe') | ForEach-Object {Join-Path (Get-PackageBinaryRoot $PackageRoot) $_}
 if($ProcessPackageRoot){
     $ProcessPackageRoot=(Resolve-Path -LiteralPath $ProcessPackageRoot).Path
     foreach($name in @('run16.exe','ntvdm.exe','ntsrv.exe')){
-        $physical=Join-Path $ProcessPackageRoot $name
-        if((Get-FileHash $physical).Hash -ne (Get-FileHash (Join-Path $PackageRoot $name)).Hash){
+        $physical=Join-Path (Get-PackageBinaryRoot $ProcessPackageRoot) $name
+        if((Get-FileHash $physical).Hash -ne (Get-FileHash (Join-Path (Get-PackageBinaryRoot $PackageRoot) $name)).Hash){
             throw "Process package differs from launch package: $name"
         }
         $paths+=$physical
@@ -44,7 +44,7 @@ foreach($guest in $Guests){
     $launcher=$null
     try {
         $start=[Diagnostics.ProcessStartInfo]::new($Observer)
-        $observerArguments=@((Join-Path $PackageRoot 'run16.exe'),$PackageRoot,($stem+'.txt'))
+        $observerArguments=@((Join-Path (Get-PackageBinaryRoot $PackageRoot) 'run16.exe'),$PackageRoot,($stem+'.txt'))
         if($WaitTarget){$observerArguments+='--wait'}
         $observerArguments+=@((Join-Path (Join-Path $PackageRoot 'system32') $guest),
             '--observation-timeout-ms','20000')

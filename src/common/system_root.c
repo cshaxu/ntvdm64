@@ -25,7 +25,11 @@ DWORD common_system_root_w(PWSTR output,DWORD capacity)
     length=GetModuleFileNameW(NULL,image,ROOT_PATH_CHARS);
     if(!length) error=GetLastError();
     else if(length>=ROOT_PATH_CHARS) error=ERROR_FILENAME_EXCED_RANGE;
-    else error=image_directory(image);
+    else {
+        /* Product images live in <Windows root>\system32. */
+        error=image_directory(image);
+        if(!error) error=image_directory(image);
+    }
     if(!error) {
         length=(DWORD)wcslen(image);
         if(length>=capacity) error=ERROR_INSUFFICIENT_BUFFER;

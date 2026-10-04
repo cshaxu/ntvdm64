@@ -22,7 +22,7 @@ try{
     & subst.exe Z: $runtime
     if($LASTEXITCODE){throw 'SUBST failed'}
     $mapped=$true
-    $scope.Paths+=@($scope.Paths|ForEach-Object {Join-Path Z:\ ([IO.Path]::GetFileName($_))})
+    $scope.Paths+=@($scope.Paths|ForEach-Object {Join-Path Z:\ $_.Substring($runtime.Length+1)})
     foreach($case in @('direct','dos-native','nested-dos-native')){
         $tail=switch($case){
             'direct' {@('Z:\tests\HROOT.EXE')}
@@ -38,7 +38,7 @@ try{
         $start.Environment['HOST_ROOT_REPORT']=$hostReport
         $start.Environment['NtvdmSystemRoot']='C:\wrong-root'
         $start.Environment['PATH']='Z:\system32;'+(Join-Path $env:SystemRoot 'System32')
-        foreach($argument in (@('Z:\run16.exe','Z:\tests',$report)+$tail+@('--observation-timeout-ms','20000'))){$start.ArgumentList.Add($argument)}
+        foreach($argument in (@('Z:\system32\run16.exe','Z:\tests',$report)+$tail+@('--observation-timeout-ms','20000'))){$start.ArgumentList.Add($argument)}
         $process=[Diagnostics.Process]::Start($start)
         try{
             if(!$process.WaitForExit(30000)){throw "Owned observer timeout $($process.Id)"}

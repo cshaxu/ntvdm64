@@ -103,12 +103,12 @@ function stage(source, destination, replace = false) {
 /* The original late-loaded owner DLLs import the parent as ntvdm.exe.  The
  * formal build output may retain a descriptive filename, but the staged,
  * launched product must retain this original module identity. */
-stage(executablePath, 'ntvdm.exe', replaceProduct);
+stage(executablePath, 'system32/ntvdm.exe', replaceProduct);
 const runtimeCompanions = [];
 if (redirectorDllPath !== null) {
   /* VDMREDIR is a parent-product companion, not mutable guest media.  The
    * original nt_bop loader resolves it beside the selected parent EXE. */
-  stage(redirectorDllPath, 'VDMREDIR.DLL', replaceProduct);
+  stage(redirectorDllPath, 'system32/VDMREDIR.DLL', replaceProduct);
   runtimeCompanions.push(manifest[manifest.length - 1]);
 }
 for (const [source, destination] of requiredAssets) stage(join(scriptRoot, source), destination);

@@ -38,9 +38,9 @@ void *mvdm_softpc_load_library(const char *name)
     PCWSTR provider=NULL;
     DWORD error;
     if(name && (!_stricmp(name,"WOW32") || !_stricmp(name,"WOW32.DLL")))
-        provider=L"WOW32.DLL";
+        provider=L"system32\\WOW32.DLL";
     else if(name && (!_stricmp(name,"VDMREDIR") || !_stricmp(name,"VDMREDIR.DLL")))
-        provider=L"VDMREDIR.DLL";
+        provider=L"system32\\VDMREDIR.DLL";
     if(!provider)return LoadLibraryA(name);
     error=common_product_path_w(provider,path,ARRAYSIZE(path));
     if(error){SetLastError(error);return NULL;}

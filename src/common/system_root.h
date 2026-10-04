@@ -4,6 +4,7 @@
 #include <windows.h>
 
 /* Status-returning APIs clear output on failure. Capacity includes NUL.
+ * Images live in <root>\system32; root is that directory's parent.
  * The actual loaded EXE is the only authority; no environment/CWD fallback. */
 DWORD common_system_root_w(PWSTR output,DWORD capacity);
 DWORD common_system_root_a(PSTR output,DWORD capacity);

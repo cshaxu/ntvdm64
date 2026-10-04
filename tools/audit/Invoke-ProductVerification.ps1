@@ -27,13 +27,14 @@ if(!$log.StartsWith($build,[StringComparison]::OrdinalIgnoreCase) -or (Test-Path
 . "$repo/tests/observation/isolated_package_cleanup.ps1"
 $runtimeScope=New-IsolatedPackageScope $runtime
 $cacheScope=New-IsolatedPackageScope $cache
+$runtimeBinary=Get-PackageBinaryRoot $runtime
 foreach($name in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe')){
-    if((Get-FileHash (Join-Path $cache $name)).Hash -ne (Get-FileHash (Join-Path $runtime $name)).Hash){
+    if((Get-FileHash (Join-Path $cache $name)).Hash -ne (Get-FileHash (Join-Path $runtimeBinary $name)).Hash){
         throw "Build cache/runtime mismatch: $name; build affected targets first"
     }
 }
 $manifest=foreach($name in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL')){
-    $path=Join-Path $runtime $name
+    $path=Join-Path $runtimeBinary $name
     $bytes=[IO.File]::ReadAllBytes($path);$pe=[BitConverter]::ToInt32($bytes,60)
     if([BitConverter]::ToUInt16($bytes,$pe+4) -ne 0x14c){throw 'Non-x86 runtime'}
     [pscustomobject]@{Name=$name;Sha256=(Get-FileHash $path).Hash}
@@ -74,7 +75,7 @@ function Invoke-ShortRuntime([scriptblock]$Body) {
     if($observerPath.StartsWith($runtime+'\',[StringComparison]::OrdinalIgnoreCase)){
         $observerPath=Join-Path 'Z:\' $observerPath.Substring($runtime.Length+1)
     }
-    $runtimeScope.Paths=@($paths)+@($paths|ForEach-Object {Join-Path 'Z:\' ([IO.Path]::GetFileName($_))})
+    $runtimeScope.Paths=@($paths)+@($paths|ForEach-Object {Join-Path 'Z:\' $_.Substring($runtime.Length+1)})
     try { & $Body } finally {
         try {Stop-IsolatedPackageScope $runtimeScope} finally {
             & subst.exe Z: /d
@@ -176,7 +177,7 @@ try {
         }
         Invoke-Gate 'nested-window-handoff' {& "$repo/tests/observation/verify-broker-io-handoff.ps1" -RuntimeRoot $runtime -Observer $observerPath -ReportPrefix "$log/handoff" -Case nested-window}
     }
-    foreach($row in $manifest){if((Get-FileHash (Join-Path $runtime $row.Name)).Hash -ne $row.Sha256){throw 'Runtime identity changed during verification'}}
+    foreach($row in $manifest){if((Get-FileHash (Join-Path $runtimeBinary $row.Name)).Hash -ne $row.Sha256){throw 'Runtime identity changed during verification'}}
     "PASS $Suite selected gates; identical eight-file package"
 }finally{
     try {Stop-IsolatedPackageScope $runtimeScope;Stop-IsolatedPackageScope $cacheScope} finally {

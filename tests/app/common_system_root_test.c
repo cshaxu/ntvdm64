@@ -6,7 +6,7 @@
 #define CHECK(x) do { if(!(x)) { \
     fprintf(stderr,"FAIL line %d: %s\n",__LINE__,#x);return 1; } } while(0)
 
-int main(void)
+int main(int argc,char **argv)
 {
     WCHAR image[32768],root[32768],path[32768],tiny_wide[2];
     CHAR ansi[32768],tiny[2];
@@ -18,6 +18,8 @@ int main(void)
     unsigned int index;
     count=GetModuleFileNameW(NULL,image,ARRAYSIZE(image));
     CHECK(count && count<ARRAYSIZE(image));
+    slash=wcsrchr(image,L'\\');CHECK(slash);
+    if(slash==image+2 && image[1]==L':')slash[1]=0;else *slash=0;
     slash=wcsrchr(image,L'\\');CHECK(slash);
     if(slash==image+2 && image[1]==L':')slash[1]=0;else *slash=0;
     CHECK(SetEnvironmentVariableW(L"NtvdmSystemRoot",L"C:\\not-the-product"));
@@ -33,6 +35,7 @@ int main(void)
     CHECK(common_product_path_w(L"ntvdm.exe",tiny_wide,ARRAYSIZE(tiny_wide))==ERROR_INSUFFICIENT_BUFFER);
     CHECK(tiny_wide[0]==0);
     CHECK(common_system_root_a(ansi,sizeof(ansi))==0);
+    CHECK(argc==1 || (argc==2 && !_stricmp(ansi,argv[1])));
     CHECK(common_product_path_a(L"ntvdm.exe",ansi,sizeof(ansi))==0);
     CHECK(strstr(ansi,"ntvdm.exe")!=NULL);
     CHECK(common_product_path_a(L"ntvdm.exe",tiny,sizeof(tiny))==ERROR_INSUFFICIENT_BUFFER);

@@ -13,7 +13,7 @@ int main(int argc,char **argv)
     BOOL entered=FALSE,created=FALSE;
     int result=1;
     if(argc!=2 || !GetCurrentDirectoryA(sizeof(cwd),cwd))return 10;
-    if(common_product_path_w(L"WOW32.DLL",provider,ARRAYSIZE(provider)) ||
+    if(common_product_path_w(L"system32\\WOW32.DLL",provider,ARRAYSIZE(provider)) ||
         GetFileAttributesW(provider)!=INVALID_FILE_ATTRIBUTES)return 11;
     if(!CreateDirectoryA(argv[1],NULL))return 12;
     if(!SetCurrentDirectoryA(argv[1]))goto done;

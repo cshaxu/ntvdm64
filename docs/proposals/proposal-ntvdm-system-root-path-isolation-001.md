@@ -12,8 +12,10 @@ not a claim that all runtime gates have passed.
 
 Introduce one product-owned `NtvdmSystemRoot` directory contract shared by the
 product's native EXEs (`run16`, `ntsrv`, `ntvdm`, `ntcon`, `ntvwm`, `ntmon`). Each
-process derives its own root from the directory containing its actual loaded
-EXE image. Co-located EXEs normally agree; a split or mismatched package must
+process derives its own root from the parent of the system32 directory
+containing its actual loaded EXE image. The owner's S5 clarification puts all
+six EXEs and two host DLLs in system32. Co-located EXEs normally agree;
+a split or mismatched package must
 not silently borrow another process's root. Internal product components and
 guest system resources use this root and their declared relative locations.
 User applications use explicit paths or DOS-style current-directory-then-PATH

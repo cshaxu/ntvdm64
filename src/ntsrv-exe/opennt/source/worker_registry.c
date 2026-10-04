@@ -541,8 +541,8 @@ DWORD OpenNtBaseServiceStartVdmWorker(OPENNT_BASE_CONNECTION *connection,DWORD p
     if(error)return error;
     error=OpenNtBaseServiceCreateReservation(connection,pid,generation,connection->task,&reservation);
     if(error)goto done;
-    error=common_product_path_w(L"ntvdm.exe",image,ARRAYSIZE(image));
-    if(!error)error=common_product_path_a(L"ntvdm.exe",ansi,sizeof(ansi));
+    error=common_product_path_w(L"system32\\ntvdm.exe",image,ARRAYSIZE(image));
+    if(!error)error=common_product_path_a(L"system32\\ntvdm.exe",ansi,sizeof(ansi));
     if(!error)error=common_product_path_a(L"system32\\krnl386",kernel,sizeof(kernel));
     if(error)goto done;
     if(!OpenNtBaseInitializeVdmConfig(&config,ansi,kernel))
@@ -595,7 +595,7 @@ DWORD OpenNtBaseServiceStartNativeWorker(OPENNT_BASE_CONNECTION *connection,DWOR
     error=OpenNtBaseServiceCreateNativeReservation(connection,pid,generation,&reservation);
     if(error)return error;
     /* Same-package product worker only. No remote executable/flags command. */
-    error=common_product_path_w(L"ntvwm.exe",image,ARRAYSIZE(image));
+    error=common_product_path_w(L"system32\\ntvwm.exe",image,ARRAYSIZE(image));
     if(error)goto done;
     if(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\"",image)<0)
         {error=ERROR_FILENAME_EXCED_RANGE;goto done;}

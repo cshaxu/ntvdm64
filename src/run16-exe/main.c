@@ -123,7 +123,7 @@ static DWORD connect_broker(void)
     STARTUPINFOW startup = {sizeof(startup)};
     PROCESS_INFORMATION child = {0};
     DWORD error=ERROR_GEN_FAILURE, attempt;
-    if (!sibling_path(L"ntsrv.exe", broker, MAX_PATH))
+    if (!sibling_path(L"system32\\ntsrv.exe", broker, MAX_PATH))
         return GetLastError();
     /* A concurrent launcher may own a healthy endpoint, or may be in the
      * broker-only empty-stop window.  Candidate creation is never readiness:

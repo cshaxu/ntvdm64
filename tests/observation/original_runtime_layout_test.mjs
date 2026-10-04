@@ -33,5 +33,6 @@ for (const file of dosFiles) {
   assert.ok(names.has(`SYSTEM32/${file}`), `Original setup target 2 missing: ${file}`);
   assert.equal(existsSync(resolve(staged, file)), false, `Unexpected flat copy: ${file}`);
 }
-assert.equal(hash(resolve(staged, 'ntvdm.exe')), hash(resolve(executable)));
+assert.equal(hash(resolve(staged, 'system32/ntvdm.exe')), hash(resolve(executable)));
+assert.equal(existsSync(resolve(staged, 'ntvdm.exe')), false);
 console.log('PASS original system32 deployment, unique destinations and immutable media hashes');

@@ -56,17 +56,19 @@ $generatedFixtures = @(
     (Join-Path $runtimeFixtureRoot 'D7.CMD')
 )
 $productNames = @('run16.exe','ntvdm.exe','ntsrv.exe','ntcon.exe')
+$binaryRoot=Get-PackageBinaryRoot $PackageRoot
 # Retain compatibility with sealed pre-NTVWM evidence packages.
-if(Test-Path -LiteralPath (Join-Path $PackageRoot 'ntvwm.exe')){$productNames+='ntvwm.exe'}
-$productPaths = $productNames | ForEach-Object { Join-Path $PackageRoot $_ }
+if(Test-Path -LiteralPath (Join-Path $binaryRoot 'ntvwm.exe')){$productNames+='ntvwm.exe'}
+$productPaths = $productNames | ForEach-Object { Join-Path $binaryRoot $_ }
 if($Cases -contains 'native-surviving-client'){
     $productPaths+=Join-Path $runtimeFixtureRoot 'SURVIVE.EXE'
 }
 if($ProcessPackageRoot){
     $ProcessPackageRoot=(Resolve-Path -LiteralPath $ProcessPackageRoot).Path
+    $physicalBinary=Get-PackageBinaryRoot $ProcessPackageRoot
     foreach($name in $productNames){
-        $physical=Join-Path $ProcessPackageRoot $name
-        if((Get-FileHash $physical).Hash -ne (Get-FileHash (Join-Path $PackageRoot $name)).Hash){
+        $physical=Join-Path $physicalBinary $name
+        if((Get-FileHash $physical).Hash -ne (Get-FileHash (Join-Path $binaryRoot $name)).Hash){
             throw "Process package differs from launch package: $name"
         }
         $productPaths+= $physical
@@ -164,12 +166,12 @@ $matrix = @(
     @{ Name='command-c-mem'; Args=@('COMMAND.COM','/c','MEM.EXE'); Code=0; ConsoleMarkers=@('bytes total conventional memory') },
     @{ Name='direct-seven'; Args=@('cmd.exe','/c',(Join-Path $shortFixtureRoot 'D7.CMD')); Code=7; ConsoleMarkers=@('S10_DIRECT_SEVEN') },
     @{ Name='edit'; Edit=$true; Code=1; ConsoleMarkers=@('bytes total conventional memory') }
-    @{ Name='native-cmd-dos'; Supplemental=$true; Args=@('cmd.exe','/d','/c',('"'+(Join-Path $PackageRoot 'run16.exe')+' MEM.EXE"')); Code=0; ConsoleMarkers=@('bytes total conventional memory') },
-    @{ Name='native-root-frontend'; Supplemental=$true; RootFrontend=$true; Args=@('cmd.exe','/d','/c',('"'+(Join-Path $PackageRoot 'run16.exe')+' MEM.EXE"')); Code=0; ConsoleMarkers=@('bytes total conventional memory') },
+    @{ Name='native-cmd-dos'; Supplemental=$true; Args=@('cmd.exe','/d','/c',('"'+(Join-Path $binaryRoot 'run16.exe')+' MEM.EXE"')); Code=0; ConsoleMarkers=@('bytes total conventional memory') },
+    @{ Name='native-root-frontend'; Supplemental=$true; RootFrontend=$true; Args=@('cmd.exe','/d','/c',('"'+(Join-Path $binaryRoot 'run16.exe')+' MEM.EXE"')); Code=0; ConsoleMarkers=@('bytes total conventional memory') },
     @{ Name='direct-graphics-return'; Supplemental=$true; Args=@((Join-Path $runtimeFixtureRoot 'VTGRAPH.COM')); Code=0; ConsoleMarkers=@('S23_GRAPHICS_VRAM_OK') },
     @{ Name='graphics-return'; Supplemental=$true; Text=((Join-Path $runtimeFixtureRoot 'VTGRAPH.COM')+"`rmem`rexit`r"); LineDelayMs=1000; Code=1; ConsoleMarkers=@('S23_GRAPHICS_VRAM_OK','bytes total conventional memory') },
     # Keep one root frontend alive across two sequential DOS submissions.
-    @{ Name='native-cmd-dos-repeat'; Supplemental=$true; Args=@('cmd.exe','/d','/c',('""'+(Join-Path $PackageRoot 'run16.exe')+'" MEM.EXE & "'+(Join-Path $PackageRoot 'run16.exe')+'" MEM.EXE"')); Code=0; ConsoleMarkers=@('bytes total conventional memory'); ConsoleMarkerCount=2 },
+    @{ Name='native-cmd-dos-repeat'; Supplemental=$true; Args=@('cmd.exe','/d','/c',('""'+(Join-Path $binaryRoot 'run16.exe')+'" MEM.EXE & "'+(Join-Path $binaryRoot 'run16.exe')+'" MEM.EXE"')); Code=0; ConsoleMarkers=@('bytes total conventional memory'); ConsoleMarkerCount=2 },
     @{ Name='dos-native-dos'; Supplemental=$true; Text="cmd.exe /d`rrun16 mem`rexit`rmem`rexit`r"; LineDelayMs=1000; Code=1; ConsoleMarkers=@('bytes total conventional memory','Microsoft Windows [Version'); ConsoleMarkerCount=2 },
     # No line-level wait for an owner change: keep typing through DOS/native
     # handoff. The observer still emits ordinary paired key records.
@@ -190,7 +192,7 @@ if($OrdinaryFrontend -and $FrontendObserver){throw 'Select ordinary or instrumen
 if(!$OrdinaryFrontend -and @($matrix | Where-Object {$_.RootFrontend -and $_.Name -in $Cases}).Count){
     if(!$FrontendObserver -or
        (Get-FileHash -LiteralPath $FrontendObserver).Hash -ne
-       (Get-FileHash -LiteralPath (Join-Path $PackageRoot 'ntcon.exe')).Hash){
+       (Get-FileHash -LiteralPath (Join-Path $binaryRoot 'ntcon.exe')).Hash){
         throw 'Owner cases require the test-only frontend observer in the isolated test package'
     }
 }
@@ -212,7 +214,7 @@ try {
         if($OrdinaryFrontend){[Environment]::SetEnvironmentVariable('MVDM_TEST_FRAME_REPORT',$null)}
         elseif($case.RootFrontend){[Environment]::SetEnvironmentVariable('MVDM_TEST_FRAME_REPORT',"$report.frontend.log")}
         else{[Environment]::SetEnvironmentVariable('MVDM_TEST_FRAME_REPORT',$previous['MVDM_TEST_FRAME_REPORT'])}
-        $arguments=@((Join-Path $PackageRoot 'run16.exe'),$PackageRoot,$report)
+        $arguments=@((Join-Path $binaryRoot 'run16.exe'),$PackageRoot,$report)
         if ($case.Args) { $arguments += $case.Args } else { $arguments += 'COMMAND.COM' }
         if ($case.Text) {
             $arguments += @('--observe-console-input-text',('"'+$case.Text+'"'))
@@ -269,7 +271,7 @@ try {
                     if($OrdinaryFrontend -and $case.RootFrontend){
                         foreach($node in $tree){
                             $frontendId=[int]$node.ProcessId
-                            if($node.ExecutablePath -eq (Join-Path $PackageRoot 'ntcon.exe') -and
+                            if($node.ExecutablePath -eq (Join-Path $binaryRoot 'ntcon.exe') -and
                                 $node.CommandLine -match '--session\s' -and
                                 $observedDescendants.Contains($frontendId) -and !$frontendWaiters.ContainsKey($frontendId)){
                                 $probe=$null

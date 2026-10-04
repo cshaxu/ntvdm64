@@ -23,12 +23,12 @@ try{
     & subst.exe Z: $runtime
     if($LASTEXITCODE){throw 'SUBST failed'}
     $mapped=$true
-    $scope.Paths+=@($scope.Paths|ForEach-Object {Join-Path Z:\ ([IO.Path]::GetFileName($_))})
+    $scope.Paths+=@($scope.Paths|ForEach-Object {Join-Path Z:\ $_.Substring($runtime.Length+1)})
     $start=[Diagnostics.ProcessStartInfo]::new($Observer)
     $start.UseShellExecute=$false;$start.WindowStyle=[Diagnostics.ProcessWindowStyle]::Hidden
     $start.Environment['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'
     $start.Environment['NtvdmSystemRoot']='C:\wrong-root'
-    foreach($argument in @('Z:\run16.exe','Z:\tests',(Join-Path $RunRoot 'observer.txt'),
+    foreach($argument in @('Z:\system32\run16.exe','Z:\tests',(Join-Path $RunRoot 'observer.txt'),
         '--wait','Z:\tests\DIRP.EXE','--observation-timeout-ms','20000')){$start.ArgumentList.Add($argument)}
     $process=[Diagnostics.Process]::Start($start)
     if($DiagnoseWindows -and !$process.WaitForExit(1500)){

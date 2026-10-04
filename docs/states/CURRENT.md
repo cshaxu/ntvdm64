@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T427 S4** (Ordinary Mode).
+**Active: M0 T427 S5** (Ordinary Mode).
 
 Owner accepts T426 and admits the queued system-root/application-search
 isolation package. [T426 closure](../history/m0-t426-console-root-monitor-tree-closure.md)
@@ -14,19 +14,23 @@ and makes the product-generated COMMAND interpreter path explicit. S3 is
 delivered at e33e8090c, pushed to main; focused and full product gates,
 publication and smoke pass. S4 completes the admitted contract and remaining
 caller/API coverage; its reviewed P includes owner-admitted NTMON TASK
-presentation cleanup. T427 remains open for final owner acceptance.
+presentation cleanup, delivered at d0c2fc1d0 and pushed. Owner now admits S5:
+place all six product EXEs and the two host DLLs together in system32, matching
+the original NTVDM/COMMAND/provider deployment relationship. S5 implementation,
+retained gates and coherent publication are complete; reviewed P delivery is
+being recorded. T427 stays open for owner validation.
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T427 S4; Ordinary Mode. |
-| Admission And Approval | Owner: “收口t 准入 系统根目录与应用搜索隔离”. Close accepted T426 and admit the former Queue head. |
+| Identifier Mode | M0 T427 S5; Ordinary Mode. |
+| Admission And Approval | Owner: “你把我们的另外5个新增组件exe，也都放到 ntvdm.exe同样路径 system32里面，即可。请你一并处理。” S4 delivered; admit original host/guest co-location migration. |
 | Candidate Proposal | [System-root and application search isolation](../proposals/proposal-ntvdm-system-root-path-isolation-001.md). |
-| Objective | Complete the root/search caller and requirements sweep; verify direct/nested/relocated product paths, native host versus Win16 guest directories, and retained behavior. Report exact proven boundaries and reduce stale documentation before owner handoff. |
+| Objective | Deploy all six EXEs and WOW32/VDMREDIR in system32; derive Windows/product root from their actual loaded image's parent directory. Preserve original guest system32 paths, root SYSTEM.INI, separate Win16 system semantics, user search and user data. |
 | Non-goals | No guest/parser/EXEC patch, new component/helper, RPC validation, broad loader change, lifecycle/scheduler redesign or global host environment/Registry mutation. Preserve existing CLI argument syntax and native shell fallback contract. |
-| Reference Baseline | main e33e8090c; published T427 S3/r001/runtime in O:/winnt, full and published-smoke gates passed; APP0.0.427/RPC38/I/O25. |
-| Files And ABI Surface | Whole-objective ledger, shared ANSI guest projection, WOW boot environment boundary, original guest deployment layout and integration tests; S4 evidence below build/M0-T427/S4. Real Win16 probe proves SYSTEMROOT still comes from the initial worker environment, not the submitted task record. A minimal registered GetWowKernelCmdLine guest-copy hook is required. Owner requires original OpenNT relative file locations: staging/default media bindings and their tests must follow TXTSETUP.SIF; no original loop/execution rewrite or RPC/I/O wire change. |
+| Reference Baseline | main d0c2fc1d0; published S4/r050/runtime, Product r052 and published smoke r054 passed; APP0.0.427/RPC38/I/O25. |
+| Files And ABI Surface | common root/path mechanics, product-generated component/provider locations, staging, selected runtime test/cleanup paths and deployment evidence. No guest binary, original execution algorithm or RPC/I/O wire change. NTVDM.REG must be preserved while maintaining its existing beside-worker ownership. |
 | Applicable Rules | AGENTS reading set; execution, architecture, coding, document and source policies; preserve original search/EXEC and immutable guest media. |
 | Verification | Map every proposal requirement to exact source and assertion; inspect remaining derivations and native environment/guest API coverage. Reuse S2/S3 sealed evidence by proven unchanged inputs, add actual missing witnesses where needed. Any production change rebuilds affected x86 closure and repeats retained Console17/Window17/WOW, coherent publication/recovery/hash smoke; governance/link/diff and reviewed commit/push. |
 | Expected Markers | User search has no implicit package-first authority; internal root derives from actual own EXE; real host paths remain host-owned; guest projection is bounded. Evidence distinguishes current behavior from proposed repair. |
@@ -34,12 +38,12 @@ presentation cleanup. T427 remains open for final owner acceptance.
 | Reporting Requirements | Report exact callers, sources, reproduction results, proposed minimal shared owner, migration stages and unresolved edges; do not claim audit conclusions as implemented behavior. |
 | Stop Conditions | Missing source/provenance, required guest change or expanded loader/lifecycle policy requires renewed admission; preserve unrelated work and baseline. |
 | Exit Criteria | All root/search requirements have an explicit implementation/test disposition, verified runtime identity and original semantics preserved; no new RPC validation. Any unresolved limit is honestly distinguished from a pass and does not silently weaken the admitted scope. Build/test/publication obligations for changed inputs, review/commit/push complete; T remains open for owner validation. |
-| Original Owner Request | Close current T and admit system-root/application-search isolation. |
+| Original Owner Request | Move the five added EXEs to the same system32 location as original NTVDM.EXE; handle related paths coherently. |
 | Similar-Issue Sweep | Direct, nested and internal COMMAND launches; all six EXEs; guest config/media/Win16 directories; host fonts/temp, relocation and inherited wrong root. Each process uses its own EXE root; RPC keeps existing acceptance policy. |
 
 The [implementation sequence](../etc/operations/t427-system-root-search-isolation-plan.md)
-keeps S1 audit, S2 shared root/resource binding, S3 user search isolation and
-S4 integration/closure separate. Only S4 is active. S2/S3 deliveries have
+keeps S1 audit, S2 shared root/resource binding, S3 user search isolation,
+S4 integration and S5 host co-location separate. Only S5 is active. S2-S4 deliveries have
 indexed evidence and unchanged RPC acceptance.
 
 S4's [guest-root/layout integration record](../etc/evidence/m0-t427-s4-guest-root-layout.md)
@@ -47,7 +51,8 @@ tracks the actual WOW boot PDB correction and original TXTSETUP.SIF locations.
 Canonical-layout focused DOS/native and Win16 probes pass. Final S4/r052
 passes Console17/Window17 and three retained WOW frontiers; r053 publishes
 the exact coherent eight-file package recoverably and r054 passes published
-Console/Window smoke and all hashes. O:/winnt equals S4/r050/runtime.
+Console/Window smoke and all hashes. S4 publication equaled S4/r050/runtime;
+S5's system32 host layout supersedes it.
 Original media/configuration now use system32 destinations; root SYSTEM.INI,
 NTVDM.REG and user applications are preserved. Bare utility names require
 ordinary CWD/PATH; explicit system32 paths also work. No RPC policy change.
@@ -84,7 +89,34 @@ actual selected-file assertions, internal interpreter/handoff probes, full
 retained Product gate, recoverable eight-file O:/winnt publication and smoke.
 Governance, links and diff checks pass. No CLI/parser/guest/RPC change.
 
+## S4 Closure Record
+
+S4 is delivered at d0c2fc1d0 and pushed. Its
+[guest-root/layout evidence](../etc/evidence/m0-t427-s4-guest-root-layout.md)
+records the final affected x86 build, original guest directory/layout probes,
+Console17/Window17 and retained WOW gates, recoverable publication and smoke.
+Only the owner-approved S5 host co-location follow-up is active; T remains open.
+
+## S5 Closure Record
+
+S5's [host co-location evidence](../etc/evidence/m0-t427-s5-system32-host-colocation.md)
+records original-source layout, own-image parent root, internal launch/DLL
+binding, actual native/Win16 APIs, selected-image and staging negatives.
+Affected x86 closure, final S5/r012 Console17/Window17/WOW gate and all eight
+published smoke cases pass. S5/r011 preserves the old layout and publishes
+the exact eight-file set to O:/winnt/system32; media/config/user hashes remain.
+The containing reviewed commit/push completes S5 delivery; T remains open.
+
 ## Current Technical Baseline
+
+S5 uses MSVC14.43/SDK22621/Win32 x86 /MT CCPU40, unchanged APP0.0.427/RPC38/I/O25.
+All six EXEs and both host DLLs now reside in O:/winnt/system32. Guest system32
+media and root SYSTEM.INI remain. NtvdmSystemRoot is the parent of each actual
+EXE directory; ordinary user search and native host APIs are unchanged.
+S5/r012, recoverable r011 publication and r013 published smoke pin this set.
+T427 awaits owner validation. Other sessions' queue/proposal edits are preserved.
+
+The S4 record below is predecessor evidence, not the current installed layout.
 
 S4 delivery uses MSVC14.43 / SDK22621 / Win32 x86 /MT CCPU40, unchanged
 APP0.0.427/RPC38/I/O25. Its [evidence](../etc/evidence/m0-t427-s4-guest-root-layout.md)

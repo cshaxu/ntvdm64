@@ -245,7 +245,7 @@ static BOOL opennt_command_launch_vdm_child(
      * Use the sibling public launcher for both: it owns native target lifetime
      * and the original BaseClient admission of DOS/NE targets. Original
      * cmdCreateProcess still owns suspension, waiting and guest re-entry. */
-    error = common_product_path_a(L"run16.exe", launcher, sizeof(launcher));
+    error = common_product_path_a(L"system32\\run16.exe", launcher, sizeof(launcher));
     if (error) {
         SetLastError(error);
         return FALSE;

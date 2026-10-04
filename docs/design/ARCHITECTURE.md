@@ -10,8 +10,10 @@ NTCON renderer or modifying guest/shared-library code.
 
 ### Own-image product root — T427 S2
 
-`common/system_root` supplies checked native EXE-directory and relative-path
-mechanics. Each caller uses its own loaded image; CWD, PATH, argv and inherited
+`common/system_root` supplies checked Windows-root and relative-path
+mechanics. S5 installs all six EXEs and both host DLLs in system32; Windows
+root is the parent of that loaded EXE directory. Each caller uses its own
+loaded image; CWD, PATH, argv and inherited
 environment text are not root authorities. Internal executables, media and
 the exact WOW32/VDMREDIR provider names use their declared package-relative
 locations. Missing local providers do not fall back to user search. This is

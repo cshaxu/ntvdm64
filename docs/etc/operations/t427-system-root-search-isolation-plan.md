@@ -18,6 +18,11 @@ owns requirements; [Status](../../states/CURRENT.md) owns the only active S.
    explicit without changing guest EXEC/parser or native host environment.
 4. S4: sweep callers, verify direct/nested/relocated paths and retained product
    matrices/WOW frontiers, publish coherent package, review diff and hand off.
+5. S5: install all six EXEs and two host DLLs in system32 by owner request.
+   Derive Windows root from the parent of the loaded EXE directory; preserve
+   original guest layout, root SYSTEM.INI, user search and Registry state.
+   Verify relocation/internal launches and retained product gates before
+   recoverable publication and reviewed delivery.
 
 Each implementation S requires its own admission, affected x86 build, focused
 tests, retained product gates and coherent O:/winnt publication/recovery before
