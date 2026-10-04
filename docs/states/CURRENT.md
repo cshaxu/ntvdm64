@@ -17,8 +17,8 @@ caller/API coverage; its reviewed P includes owner-admitted NTMON TASK
 presentation cleanup, delivered at d0c2fc1d0 and pushed. Owner now admits S5:
 place all six product EXEs and the two host DLLs together in system32, matching
 the original NTVDM/COMMAND/provider deployment relationship. S5 implementation,
-retained gates and coherent publication are complete; reviewed P delivery is
-being recorded. T427 stays open for owner validation.
+retained gates and coherent publication are complete; delivery 62a71fd90 is
+committed and pushed to main. T427 stays open for owner validation.
 
 ## Active Packet
 
@@ -105,7 +105,7 @@ binding, actual native/Win16 APIs, selected-image and staging negatives.
 Affected x86 closure, final S5/r012 Console17/Window17/WOW gate and all eight
 published smoke cases pass. S5/r011 preserves the old layout and publishes
 the exact eight-file set to O:/winnt/system32; media/config/user hashes remain.
-The containing reviewed commit/push completes S5 delivery; T remains open.
+S5 code delivery 62a71fd90 is committed and pushed; T remains open.
 
 ## Current Technical Baseline
 

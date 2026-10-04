@@ -85,6 +85,8 @@ are unchanged. Published logs are O:/winnt/Logs2/t427-s5-published-*.
 From root use `system32\run16 system32\command.com`, or enter system32 and
 use `run16 command`. No root wrapper or implicit search exception.
 
-Final source/diff review and governance gates belong to this P delivery.
+Final source/diff review, governance and relative-link gates pass. r016 retains
+the reviewed 28-file source/hash manifest and diff. Code delivery 62a71fd90 is
+committed and pushed to main; publication still equals its verified set.
 Other-session queue/proposal edits remain outside it. T427 remains open for
 owner validation; no next task is admitted by this delivery.
