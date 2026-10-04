@@ -39,7 +39,7 @@ typedef struct MONITOR_STATE {
     HANDLE process;
     DTASKMGR_KEY selected_key,confirm_key;
     ULONG confirm_pid;
-    ULONG confirm_task_count;
+    ULONG selected_row; /* Last snapshot position, not an execution identity. */
     DWORD status;
     DWORD action_error;
     ULONG rendered_rows;
@@ -200,7 +200,7 @@ static void render_scrollbars(HANDLE output,const MONITOR_STATE *state,ULONG sel
 static void task_line(WCHAR *line,DWORD capacity,const MONITOR_STATE *state,
     const DTASKMGR_WORKER *item,const FILETIME *now)
 {
-    FILETIME started; WCHAR elapsed[16],pid[16],stack[16];
+    FILETIME started; WCHAR elapsed[16],pid[16],node[16],stack[16];
     started.dwLowDateTime=(DWORD)item->started_filetime;
     started.dwHighDateTime=(DWORD)(item->started_filetime>>32);
     elapsed_text(&started,now,elapsed);
@@ -208,8 +208,11 @@ static void task_line(WCHAR *line,DWORD capacity,const MONITOR_STATE *state,
     else lstrcpyW(pid,L"-");
     if(item->key.category==MANAGEMENT_WORKER)swprintf_s(stack,ARRAYSIZE(stack),L"%lu",item->stack_depth);
     else lstrcpyW(stack,L"-");
-    swprintf_s(line,capacity,L"%c %*s%-8s %-7s %-7s %-10s %-5s %s",
-        same_key(&item->key,&state->selected_key) ? L'>' : L' ',(int)(item->depth*2),L"",pid,
+    /* The service contract has roots and one child level. Reserve indentation
+     * inside the PID field so every other column stays aligned. */
+    swprintf_s(node,ARRAYSIZE(node),L"%s%s",item->depth ? L"  " : L"",pid);
+    swprintf_s(line,capacity,L"%c %-12s %-7s %-7s %-10s %-5s %s",
+        same_key(&item->key,&state->selected_key) ? L'>' : L' ',node,
         item->key.category==MANAGEMENT_FRONTEND ? L"CONSOLE" : kind_name(item->kind),
         state_name(item->display_state),elapsed,stack,
         item->image[0] ? item->image : L"Unknown");
@@ -306,7 +309,7 @@ static void render(HANDLE output,MONITOR_STATE *state,DTASKMGR_WORKER *items,ULO
     render_line(output,(SHORT)row++,frame,MONITOR_TAB_ATTRIBUTE);
     framed_rule(frame,L'\x250C',L'\x2500',L'\x2510');
     render_framed_line(output,(SHORT)row++,frame,MONITOR_ACCENT_ATTRIBUTE);
-    swprintf_s(line,ARRAYSIZE(line),L"  %-8s %-7s %-7s %-10s %-5s %s",
+    swprintf_s(line,ARRAYSIZE(line),L"  %-12s %-7s %-7s %-10s %-5s %s",
         L"PID",L"KIND",L"STATE",L"ELAPSED",L"STACK",L"TASK");
     framed_text(frame,L'\x2502',scrolled_text(line,state->horizontal_offset),L'\x2502');render_framed_line(output,(SHORT)row++,frame,MONITOR_ACCENT_ATTRIBUTE);
     framed_rule(frame,L'\x251C',L'\x2500',L'\x2524');render_framed_line(output,(SHORT)row++,frame,MONITOR_ACCENT_ATTRIBUTE);
@@ -330,52 +333,88 @@ static void render(HANDLE output,MONITOR_STATE *state,DTASKMGR_WORKER *items,ULO
     render_line(output,(SHORT)row++,frame,MONITOR_STATUS_ATTRIBUTE);
     state->rendered_rows=row;
 }
+static void clear_confirmation(MONITOR_STATE *state)
+{
+    state->confirm_pid=0;
+    ZeroMemory(&state->confirm_key,sizeof(state->confirm_key));
+}
+static void accept_snapshot(MONITOR_STATE *state,const DTASKMGR_WORKER *items,ULONG count)
+{
+    ULONG index;
+    for(index=0;index<count;++index)
+        if(same_key(&items[index].key,&state->selected_key))break;
+    if(index==count) {
+        /* A removed row selects its next neighbour, or the preceding last
+         * row. Reordering a live node never changes selection by identity. */
+        index=count ? (state->selected_row<count ? state->selected_row : count-1) : 0;
+        if(count)state->selected_key=items[index].key;
+        else ZeroMemory(&state->selected_key,sizeof(state->selected_key));
+    }
+    state->selected_row=index;
+    if(state->confirm_key.category) {
+        for(index=0;index<count;++index)
+            if(same_key(&items[index].key,&state->confirm_key) &&
+                (items[index].actions&MANAGEMENT_CAN_CLOSE))break;
+        if(index==count)clear_confirmation(state);
+    }
+}
 static DWORD refresh(MONITOR_STATE *state,DTASKMGR_WORKER **items,ULONG *count)
 {
     ULONG result_count=0;
     DTASKMGR_WORKER *result=NULL;
     DWORD error=ERROR_SUCCESS;
     common_rpc_management management;
-    if (!state->binding && !bind_basesrv(state)) return GetLastError();
+    *items=NULL;*count=0;
+    if (!state->binding && !bind_basesrv(state)) {
+        error=GetLastError();clear_confirmation(state);return error;
+    }
     management.binding=state->binding;management.process=state->process;
     error=common_rpc_task_snapshot(&management,&result_count,&result);
     if (error) {
         /* With no authoritative snapshot, a queued kill cannot remain valid. */
-        state->confirm_pid=0;
-        ZeroMemory(&state->confirm_key,sizeof(state->confirm_key));
-        state->confirm_task_count=0;
+        clear_confirmation(state);
         return error;
     }
     *items=result; *count=result_count;
-    if (result_count && !state->selected_key.category) state->selected_key=result[0].key;
-    if (state->selected_key.category) {
-        ULONG index; BOOL found=FALSE;
-        for (index=0;index<result_count;++index) if (same_key(&result[index].key,&state->selected_key)) found=TRUE;
-        if (!found) {
-            ZeroMemory(&state->selected_key,sizeof(state->selected_key));
-            if(result_count)state->selected_key=result[0].key;
-        }
-    }
-    if (state->confirm_key.category) {
-        ULONG index;
-        BOOL live=FALSE;
-        for (index=0;index<result_count;++index)
-            if (same_key(&result[index].key,&state->confirm_key) && (result[index].actions&MANAGEMENT_CAN_CLOSE)) {
-                live=TRUE;
-                state->confirm_task_count=result[index].stack_depth;
-                break;
-            }
-        if (!live) { state->confirm_pid=0; state->confirm_task_count=0;
-            ZeroMemory(&state->confirm_key,sizeof(state->confirm_key)); }
-    }
+    accept_snapshot(state,result,result_count);
     return ERROR_SUCCESS;
 }
-static DWORD terminate_worker(MONITOR_STATE *state)
+static DWORD close_selected_node(MONITOR_STATE *state)
 {
     common_rpc_management management;
     if (!state->confirm_key.category) return ERROR_NOT_FOUND;
     management.binding=state->binding;management.process=state->process;
     return common_rpc_close_management_node(&management,&state->confirm_key);
+}
+/* One production dispatch path, also exercised by the Console fixture. TRUE
+ * means exit; no-op/readonly rows cannot fall through to a worker close. */
+static BOOL handle_key(MONITOR_STATE *state,const DTASKMGR_WORKER *items,
+    ULONG count,WORD key,WCHAR character)
+{
+    if(state->confirm_key.category) {
+        if(character==L'n' || character==L'N' || key==VK_ESCAPE)clear_confirmation(state);
+        else if(character==L'y' || character==L'Y') {
+            state->action_error=close_selected_node(state);
+            clear_confirmation(state);
+        }
+        return FALSE;
+    }
+    if(key==VK_ESCAPE)return TRUE;
+    accept_snapshot(state,items,count);
+    if(key==VK_UP && count && state->selected_row)--state->selected_row;
+    if(key==VK_DOWN && count && state->selected_row+1<count)++state->selected_row;
+    if(count)state->selected_key=items[state->selected_row].key;
+    if(key==VK_LEFT && state->horizontal_offset)--state->horizontal_offset;
+    if(key==VK_RIGHT && state->horizontal_offset<state->horizontal_limit)++state->horizontal_offset;
+    if(key==VK_DELETE) {
+        state->action_error=ERROR_NOT_SUPPORTED;
+        if(count && (items[state->selected_row].actions&MANAGEMENT_CAN_CLOSE)) {
+            state->confirm_key=items[state->selected_row].key;
+            state->confirm_pid=items[state->selected_row].process_id;
+            state->action_error=ERROR_SUCCESS;
+        }
+    }
+    return FALSE;
 }
 int wmain(void)
 {
@@ -399,33 +438,9 @@ int wmain(void)
             INPUT_RECORD record; DWORD read=0;
             if (ReadConsoleInputW(input,&record,1,&read) && record.EventType==KEY_EVENT && record.Event.KeyEvent.bKeyDown) {
                 WORD key=record.Event.KeyEvent.wVirtualKeyCode;
-                ULONG index;
-                if (state.confirm_key.category) {
-                    WCHAR character=record.Event.KeyEvent.uChar.UnicodeChar;
-                    if (character==L'n' || character==L'N' || key==VK_ESCAPE)
-                        { state.confirm_pid=0; state.confirm_task_count=0;
-                          ZeroMemory(&state.confirm_key,sizeof(state.confirm_key)); }
-                    else if (character==L'y' || character==L'Y') {
-                        state.action_error=terminate_worker(&state);
-                        state.confirm_pid=0;
-                        ZeroMemory(&state.confirm_key,sizeof(state.confirm_key));
-                        state.confirm_task_count=0;
-                    }
-                    if (items) MIDL_user_free(items);
-                    continue;
-                }
-                if (key==VK_ESCAPE) { if (items) MIDL_user_free(items); break; }
-                for (index=0;index<count;++index) if (same_key(&items[index].key,&state.selected_key)) break;
-                if (key==VK_UP && count) state.selected_key=items[index ? index-1 : 0].key;
-                if (key==VK_DOWN && count) state.selected_key=items[index+1<count ? index+1 : count-1].key;
-                if (key==VK_LEFT && state.horizontal_offset) --state.horizontal_offset;
-                if (key==VK_RIGHT && state.horizontal_offset<state.horizontal_limit) ++state.horizontal_offset;
-                if (key==VK_DELETE) {
-                    state.action_error=ERROR_SUCCESS;
-                    if(index<count && (items[index].actions&MANAGEMENT_CAN_CLOSE)) {
-                        state.confirm_key=items[index].key;state.confirm_pid=items[index].process_id;
-                    } else state.action_error=ERROR_NOT_SUPPORTED;
-                    state.confirm_task_count=index<count ? items[index].stack_depth : 0;
+                if(handle_key(&state,items,count,key,record.Event.KeyEvent.uChar.UnicodeChar)) {
+                    if(items)MIDL_user_free(items);
+                    break;
                 }
             }
         }

@@ -80,13 +80,33 @@ and hashes in r009 and passing published smoke in r011. The
 retains exact commands, environment failures, review, actual gates and
 remaining S3/S4 boundaries. T426 remains open for owner acceptance.
 
+## S3 Closure Record
+
+S3 reaches its bounded UI delivery. The
+[S3 implementation and verification record](../etc/evidence/m0-t426-s3-monitor-tree-ui.md)
+records aligned tree fields, stable full-key selection, nearby removal,
+confirmation invalidation and the single original-key dispatch path. Formal
+x86 renderer/dispatch fixture and actual Console/Window NTMON pass. Frozen
+r001/runtime passes Console17/Window17 and three retained WOW frontiers in
+r003 (209612ms); coherent O:/winnt publication/recovery is r004 and published
+smoke passes in r006. The r005 script JSON enumeration failure is preserved,
+not a product pass. Governance/link/diff and reviewed commit/push complete
+this P; S4 final real mixed-kind/multi-root integration remains separate.
+
 ## Current Technical Baseline
 
-Published O:/winnt equals build/M0-T426/S2/r004/runtime, all eight hashes
-verified against r005/runtime-manifest.json and again after publication.
+S3 production UI and formal layout/dispatch fixture link using the retained
+x86 cache. Real Console cells, refresh/selection/confirmation/input assertions
+and actual Console/Window NTMON ESC tests pass. Frozen S3/r001/runtime is
+verified by its full retained Product gate in r003 and coherently published.
+The [S3 record](../etc/evidence/m0-t426-s3-monitor-tree-ui.md) retains exact
+coverage and remaining publication/review gates. S4 is not admitted.
+
+Published O:/winnt equals build/M0-T426/S3/r001/runtime, all eight hashes
+verified against S3/r003/runtime-manifest.json and again after publication.
 Files: run16.exe, ntsrv.exe, ntcon.exe, ntvdm.exe, ntvwm.exe, ntmon.exe,
-WOW32.DLL and VDMREDIR.DLL. Recovery/publication manifest: S2/r009; published
-smoke: r011. MSVC14.43 / SDK22621 / Win32 x86 /MT CCPU40,
+WOW32.DLL and VDMREDIR.DLL. Recovery/publication manifest: S3/r004; published
+smoke: S3/r006. MSVC14.43 / SDK22621 / Win32 x86 /MT CCPU40,
 APP0.0.426, control/RPC38 and I/O25. Previous T425 package remains recoverable;
 unchanged WOW32.DLL/guest inputs retain their accepted identity and boundaries.
 

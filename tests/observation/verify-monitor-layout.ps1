@@ -1,32 +1,40 @@
 [CmdletBinding()]
-param([string]$BuildRoot='build/M0-T423/S19/monitor-layout')
+param(
+    [Parameter(Mandatory)][string]$BuildRoot,
+    [Parameter(Mandatory)][string]$Observer,
+    [Parameter(Mandatory)][string]$ReportPath,
+    [Parameter(Mandatory)][string]$MsvcWrapper,
+    [string]$Ninja='ninja'
+)
 $ErrorActionPreference='Stop'
 $repo=Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
-$build=[IO.Path]::GetFullPath((Join-Path $repo $BuildRoot))
-if (!$build.StartsWith((Join-Path $repo 'build')+[IO.Path]::DirectorySeparatorChar,[StringComparison]::OrdinalIgnoreCase)) {
-    throw 'Fixture output must stay under repository build/.'
+$build=(Resolve-Path -LiteralPath $BuildRoot).Path
+$observerPath=(Resolve-Path -LiteralPath $Observer).Path
+$wrapper=(Resolve-Path -LiteralPath $MsvcWrapper).Path
+$report=[IO.Path]::GetFullPath($ReportPath)
+$prefix=(Join-Path $repo 'build')+'\'
+if(!$build.StartsWith($prefix,[StringComparison]::OrdinalIgnoreCase) -or
+   !$report.StartsWith($prefix,[StringComparison]::OrdinalIgnoreCase)) {
+    throw 'Build and evidence must remain under repository build/'
 }
-New-Item -ItemType Directory -Force -Path $build | Out-Null
-$commands=@"
-@echo off
-call "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul
-if errorlevel 1 exit /b 1
-midl.exe /nologo /env win32 /target NT100 /prefix client Client_ /prefix server Server_ /out . /h service.h /cstub service_c.c /sstub service_s.c "$repo\src\interface\service.idl"
-if errorlevel 1 exit /b 1
-cl.exe /nologo /c /MT /W4 /we4013 /I . /I "$repo\src" "$repo\src\ntmon-exe\main.c" service_c.c "$repo\src\ntsrv-exe\transport\rpc_security.c" "$repo\tests\observation\monitor_layout_test.c"
-if errorlevel 1 exit /b 1
-link.exe /nologo /subsystem:console /out:ntmon.exe main.obj service_c.obj rpc_security.obj rpcrt4.lib kernel32.lib user32.lib advapi32.lib
-if errorlevel 1 exit /b 1
-link.exe /nologo /subsystem:console /out:monitor_layout_test.exe monitor_layout_test.obj service_c.obj rpc_security.obj rpcrt4.lib kernel32.lib user32.lib advapi32.lib
-exit /b %errorlevel%
-"@
-[IO.File]::WriteAllText((Join-Path $build 'build.cmd'),$commands,[Text.Encoding]::ASCII)
-Push-Location $build
+if(!(Test-Path -LiteralPath (Join-Path $build 'build.ninja'))) {
+    throw 'Generate the formal x86 Ninja graph before running this fixture'
+}
+if(Test-Path -LiteralPath $report){throw 'Use a fresh evidence path'}
+# Reuse the selected graph and common/RPC dependencies, not an ad-hoc recipe.
+& $wrapper $Ninja -C $build monitor-layout-test.exe
+if($LASTEXITCODE){throw 'Formal x86 fixture build failed'}
+$oldPrivate=$env:MVDM_OBSERVER_PRIVATE_DESKTOP
 try {
-    & cmd.exe /c build.cmd
-    if ($LASTEXITCODE) { throw 'x86 build failed' }
-    $test=Start-Process -FilePath (Join-Path $build 'monitor_layout_test.exe') -WorkingDirectory $build -WindowStyle Hidden -PassThru -Wait -RedirectStandardOutput (Join-Path $build 'fixture.stdout.txt') -RedirectStandardError (Join-Path $build 'fixture.stderr.txt')
-    Get-Content (Join-Path $build 'fixture.stdout.txt')
-    Get-Content (Join-Path $build 'fixture.stderr.txt')
-    if ($test.ExitCode) { throw "Layout fixture failed: $($test.ExitCode)" }
-} finally { Pop-Location }
+    $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
+    & $observerPath (Join-Path $build 'monitor-layout-test.exe') $build $report --observation-timeout-ms 10000
+    if($LASTEXITCODE){throw 'Console observer failed'}
+    $record=Get-Content -LiteralPath $report -Raw
+    $screen=Get-Content -LiteralPath ($report+'.console.txt') -Raw
+    if($record -notmatch '(?m)^result=exited\r?$' -or
+        $record -notmatch '(?m)^exit=0x00000000\r?$' -or $screen -notmatch 'PASS') {
+        throw "Layout/dispatch fixture failed: $report"
+    }
+    $screen
+    'PASS formal x86 monitor renderer/refresh/input fixture'
+} finally {$env:MVDM_OBSERVER_PRIVATE_DESKTOP=$oldPrivate}

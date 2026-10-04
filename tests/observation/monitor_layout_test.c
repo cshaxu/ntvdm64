@@ -1,9 +1,102 @@
 /* Native Console fixture: exercises the product renderer in a private buffer.
  * No broker, guest session or visible screen-buffer switch is needed. */
 #define wmain monitor_product_main
+#define common_rpc_task_snapshot fixture_task_snapshot
+#define common_rpc_close_management_node fixture_close_node
 #include "../../src/ntmon-exe/main.c"
 #undef wmain
 #include <assert.h>
+
+static const DTASKMGR_WORKER *reply_items;
+static ULONG reply_count,close_calls;
+static DWORD reply_error,close_error;
+static DTASKMGR_KEY closed_key;
+DWORD fixture_task_snapshot(const common_rpc_management *client,ULONG *count,DTASKMGR_WORKER **items)
+{
+    assert(client->binding && client->process);
+    *count=0;*items=NULL;
+    if(reply_error)return reply_error;
+    if(reply_count) {
+        *items=MIDL_user_allocate(reply_count*sizeof(**items));assert(*items);
+        CopyMemory(*items,reply_items,reply_count*sizeof(**items));
+    }
+    *count=reply_count;return ERROR_SUCCESS;
+}
+DWORD fixture_close_node(const common_rpc_management *client,const DTASKMGR_KEY *key)
+{
+    assert(client->binding && client->process);
+    ++close_calls;closed_key=*key;return close_error;
+}
+static void selection_and_input(void)
+{
+    MONITOR_STATE state={0};
+    DTASKMGR_WORKER rows[4]={0},reordered[4],*copy=NULL;
+    ULONG count=0,index;
+    state.binding=(RPC_BINDING_HANDLE)(ULONG_PTR)1;state.process=(HANDLE)(ULONG_PTR)1;
+    for(index=0;index<4;++index) {
+        rows[index].key=(DTASKMGR_KEY){17,MANAGEMENT_WORKER,index+1,0};
+        rows[index].process_id=100+index;rows[index].actions=MANAGEMENT_CAN_CLOSE;
+    }
+    rows[0].key.category=MANAGEMENT_FRONTEND;
+    rows[1].depth=1;rows[1].parent=rows[0].key;
+    rows[2].key.category=MANAGEMENT_WOW_TASK;rows[2].actions=0;
+    rows[3].key.category=MANAGEMENT_GUI_TARGET;rows[3].key.object=19;
+    reply_items=rows;reply_count=4;
+    assert(!refresh(&state,&copy,&count) && count==4 && same_key(&state.selected_key,&rows[0].key));
+    MIDL_user_free(copy);copy=NULL;
+    assert(!handle_key(&state,rows,4,VK_UP,0) && state.selected_row==0);
+    assert(!handle_key(&state,rows,4,VK_DOWN,0) && same_key(&state.selected_key,&rows[1].key));
+    assert(!handle_key(&state,rows,4,VK_DOWN,0) && state.selected_row==2);
+    assert(!handle_key(&state,rows,4,VK_DELETE,0) && state.action_error==ERROR_NOT_SUPPORTED);
+    assert(!handle_key(&state,rows,4,'Y',L'y') && !close_calls && !state.confirm_key.category);
+    assert(!handle_key(&state,rows,4,VK_DOWN,0) && state.selected_row==3);
+    assert(!handle_key(&state,rows,4,VK_DOWN,0) && state.selected_row==3);
+    assert(!handle_key(&state,rows,4,VK_DELETE,0) && same_key(&state.confirm_key,&rows[3].key));
+    assert(!handle_key(&state,rows,4,VK_ESCAPE,0) && !state.confirm_key.category && !close_calls);
+    assert(!handle_key(&state,rows,4,VK_DELETE,0));
+    assert(!handle_key(&state,rows,4,'N',L'n') && !state.confirm_key.category && !close_calls);
+    assert(!handle_key(&state,rows,4,VK_DELETE,0));
+    close_error=ERROR_TIMEOUT;
+    assert(!handle_key(&state,rows,4,'Y',L'Y') && close_calls==1 &&
+        same_key(&closed_key,&rows[3].key) && state.action_error==ERROR_TIMEOUT && !state.confirm_key.category);
+    close_error=0;
+    assert(!handle_key(&state,rows,4,VK_DELETE,0));
+    assert(!handle_key(&state,rows,4,'Y',L'y') && close_calls==2 && !state.action_error);
+    reordered[0]=rows[3];reordered[1]=rows[0];reordered[2]=rows[1];reordered[3]=rows[2];
+    accept_snapshot(&state,reordered,4);
+    assert(state.selected_row==0 && same_key(&state.selected_key,&rows[3].key));
+    assert(!handle_key(&state,reordered,4,VK_DOWN,0));
+    assert(!handle_key(&state,reordered,4,VK_DELETE,0));
+    assert(same_key(&state.confirm_key,&rows[0].key));
+    reordered[1].actions=0;accept_snapshot(&state,reordered,4);
+    assert(!state.confirm_key.category && close_calls==2);
+    reordered[1].actions=MANAGEMENT_CAN_CLOSE;
+    assert(!handle_key(&state,reordered,4,VK_DELETE,0));
+    ++reordered[1].key.generation; /* Same PID is a replacement, not a target. */
+    accept_snapshot(&state,reordered,4);
+    assert(!state.confirm_key.category && state.selected_row==1 &&
+        same_key(&state.selected_key,&reordered[1].key));
+    state.selected_key=rows[1].key;accept_snapshot(&state,rows,4);
+    assert(state.selected_row==1);
+    accept_snapshot(&state,rows+2,2); /* Removed row selects the nearest next row. */
+    assert(state.selected_row==1 && same_key(&state.selected_key,&rows[3].key));
+    accept_snapshot(&state,rows,1); /* Removed tail clamps to surviving last row. */
+    assert(state.selected_row==0 && same_key(&state.selected_key,&rows[0].key));
+    assert(!handle_key(&state,rows,1,VK_DELETE,0));
+    reply_error=RPC_S_SERVER_UNAVAILABLE;reply_items=NULL;reply_count=0;
+    copy=(DTASKMGR_WORKER *)(ULONG_PTR)1;count=1;
+    assert(refresh(&state,&copy,&count)==reply_error && !copy && !count && !state.confirm_key.category);
+    reply_error=0;
+    assert(!refresh(&state,&copy,&count) && !count && !copy && !state.selected_key.category);
+    assert(!handle_key(&state,NULL,0,VK_DELETE,0) && state.action_error==ERROR_NOT_SUPPORTED);
+    assert(!handle_key(&state,NULL,0,VK_DOWN,0) && !state.selected_key.category);
+    assert(handle_key(&state,NULL,0,VK_ESCAPE,0));
+    state.horizontal_limit=2;
+    assert(!handle_key(&state,NULL,0,VK_RIGHT,0) && state.horizontal_offset==1);
+    assert(!handle_key(&state,NULL,0,VK_RIGHT,0) && state.horizontal_offset==2);
+    assert(!handle_key(&state,NULL,0,VK_RIGHT,0) && state.horizontal_offset==2);
+    assert(!handle_key(&state,NULL,0,VK_LEFT,0) && state.horizontal_offset==1);
+}
 
 static CHAR_INFO screen[MONITOR_COLUMNS*MONITOR_ROWS];
 static void capture(HANDLE output)
@@ -33,7 +126,7 @@ int wmain(void)
         task_line(line,ARRAYSIZE(line),&state,&native,&now);
         assert(wcsstr(line,L"WIN32") && wcsstr(line,L"1234") &&
             wcsstr(line,L"2") && !wcsstr(line,L"MEMBERS=") && wcsstr(line,L"ntvwm.exe"));
-        state.confirm_pid=1234;state.confirm_task_count=2;state.confirm_key=native.key;
+        state.confirm_pid=1234;state.confirm_key=native.key;
         confirmation_text(line,ARRAYSIZE(line),&state);
         assert(wcsstr(line,L"End worker 1234") && !wcsstr(line,L"members"));
         ZeroMemory(&state,sizeof(state));
@@ -114,7 +207,6 @@ int wmain(void)
     state.selected_key=items[0].key;
     state.confirm_pid=1;
     state.confirm_key=items[0].key;
-    state.confirm_task_count=2;
     render(output,&state,items,1);
     capture(output);
     assert(state.first_visible==0 && state.horizontal_offset==0);
@@ -128,6 +220,40 @@ int wmain(void)
     capture(output);
     cell(3,4,L'N',MONITOR_NORMAL_ATTRIBUTE);
     cell(57,24,L'R',MONITOR_STATUS_ATTRIBUTE);
+    {
+        const WCHAR footer[]=L"UP/DOWN=Select Task DEL=End Task ESC=EXIT";
+        DTASKMGR_WORKER mixed[6]={0};
+        for(i=0;i<ARRAYSIZE(footer)-1;++i)cell(1+i,24,footer[i],MONITOR_STATUS_ATTRIBUTE);
+        for(i=0;i<6;++i) {
+            mixed[i].key=(DTASKMGR_KEY){17,MANAGEMENT_WORKER,i+1,0};
+            mixed[i].process_id=i+100;mixed[i].display_state=MANAGEMENT_BUSY;
+        }
+        mixed[0].key.category=MANAGEMENT_FRONTEND;
+        mixed[0].display_state=MANAGEMENT_MISSING;
+        mixed[1].depth=1;mixed[1].process_id=MAXDWORD;
+        mixed[2].kind=1;
+        mixed[3].depth=1;mixed[3].kind=1;mixed[3].process_id=0;
+        mixed[3].key.category=MANAGEMENT_WOW_TASK;
+        mixed[4].kind=2;mixed[4].key.category=MANAGEMENT_GUI_TARGET;
+        mixed[5].depth=1;mixed[5].kind=2;
+        lstrcpyW(mixed[3].image,L"WINMINE.EXE");
+        ZeroMemory(&state,sizeof(state));state.selected_key=mixed[3].key;
+        render(output,&state,mixed,6);capture(output);
+        cell(16,2,L'K',MONITOR_NORMAL_ATTRIBUTE); /* Fixed KIND column. */
+        cell(16,4,L'C',MONITOR_NORMAL_ATTRIBUTE);
+        cell(16,5,L'D',MONITOR_NORMAL_ATTRIBUTE);
+        cell(16,6,L'W',MONITOR_NORMAL_ATTRIBUTE);
+        cell(16,7,L'W',MONITOR_SELECTED_ATTRIBUTE);
+        cell(16,8,L'W',MONITOR_NORMAL_ATTRIBUTE);
+        cell(16,9,L'W',MONITOR_NORMAL_ATTRIBUTE);
+        cell(24,4,L'M',MONITOR_NORMAL_ATTRIBUTE);
+        cell(3,5,L' ',MONITOR_NORMAL_ATTRIBUTE);
+        cell(5,5,L'4',MONITOR_NORMAL_ATTRIBUTE); /* Full 10-digit PID fits. */
+        cell(5,7,L'-',MONITOR_SELECTED_ATTRIBUTE);
+        cell(32,7,L'-',MONITOR_SELECTED_ATTRIBUTE); /* Unknown WOW elapsed. */
+        cell(43,7,L'-',MONITOR_SELECTED_ATTRIBUTE); /* No invented stack. */
+        cell(49,7,L'W',MONITOR_SELECTED_ATTRIBUTE);
+    }
     {
         WCHAR line[512];FILETIME now;
         DTASKMGR_WORKER child={0};
@@ -146,6 +272,7 @@ int wmain(void)
     }
     CloseHandle(output);
     if (allocated) FreeConsole();
-    puts("PASS: EDIT frame, four arrows, colors, 25 rows, overflow selection, horizontal extent, shrink, empty and confirmation");
+    selection_and_input();
+    puts("PASS: aligned mixed tree, exact title/footer, EDIT frame/colors/25 rows, scrolling, stable refresh/selection and production UP/DOWN/DEL/ESC dispatch");
     return 0;
 }
