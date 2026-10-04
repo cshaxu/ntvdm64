@@ -36,6 +36,13 @@ Measurement-only S1 concludes with [baseline and control evidence](../etc/eviden
 No production speedup is claimed; physical input and matched SoftPC runtime
 comparison remain explicitly unproved. Sequential S2 is admitted, not T closure.
 
+## S2 Closure Record
+
+[S2 diagnostic-selection and close-ordering evidence](../etc/evidence/m0-t429-s2-release-decode-diagnostics.md)
+records source/object proof, matched distributions, all retained runtime gates,
+the approved native-close dependency and coherent eight-file publication.
+Production123c0ad3e is pushed. S2 is bounded-closed, not T429 owner closure.
+
 ## Current Technical Baseline
 
 T428 is owner-closed at production68e860553/statusb1b77e129; its
@@ -61,8 +68,9 @@ r026 repeats Console17/Window17 and all retained WOW frontiers successfully
 with the repaired coherent package. r027 publishes its eight matching files
 to O:/winnt/system32; recovery is r027/recovery. NTVWM is the only additional
 changed binary beyond the release DECODE repair. r028 published Console/Window
-COMMAND/MEM/EDIT/native smoke and all eight hashes pass. Review and sequential
-commit/push are the final delivery steps.
+COMMAND/MEM/EDIT/native smoke and all eight hashes pass. Production123c0ad3e
+is committed and pushed to main; S2 reaches its bounded closure. Owner manual
+acceptance and overall T429 closure remain distinct and pending.
 Test-only r021/r023 narrow the remaining transaction cost to per-cell Console
 code-page queries (94% of cumulative text commit in r023); no frontend production
 repair is admitted or published yet. Original frame/input assertions pass.
@@ -98,7 +106,7 @@ Other-session proposal chronology is preserved and excluded from this delivery.
 
 ## Recent Governance
 
-S1 concludes as measurement-only; S2 reaches its bounded implementation/testing
-exit and remains the one active packet through delivery. Guest and lifecycle
-policy remain unchanged; the approved native-close dependency repairs ordering
-only. Governance, links and diff checks precede sequential commit/push.
+S1 concludes as measurement-only; S2 is bounded-closed at production123c0ad3e.
+The packet is retained through sequential handoff; S3 is not yet admitted.
+Guest and lifecycle policy remain unchanged; the approved close dependency
+repairs ordering only. T429 remains open and other-session work is preserved.
