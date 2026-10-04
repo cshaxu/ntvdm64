@@ -21,10 +21,18 @@ and protocol versions remain unchanged.
 Real Windows directory calls retain host meaning. Run16 projects the product
 root into the bounded ANSI Win16 guest record only; the Unicode host worker
 environment and native process SYSTEMROOT remain real-host values. Original
-KRNL386 module-directory and WIN16DIR rules remain at their owners. User
-application search is a separate S3 repair and is not yet changed by S2.
+KRNL386 module-directory and WIN16DIR rules remain at their owners.
 The [S2 evidence](../etc/evidence/m0-t427-s2-own-image-root-bindings.md) records
 production bindings, focused tests and the exact runtime coverage limits.
+
+S3 separates user search: CWD then each caller PATH directory, with
+COM/EXE/BAT/PIF order inside that directory; explicit paths never search
+elsewhere. The package participates only through ordinary CWD/PATH or explicit
+paths, not an executable-directory priority. Product-generated nested COMMAND
+uses an explicit root/system32/COMMAND.COM path, independently of user PATH.
+Classification, shell fallback, CLI and original EXEC semantics stay at their
+existing owners. The [S3 record](../etc/evidence/m0-t427-s3-application-search-isolation.md)
+contains production search, real image selection and internal handoff proof.
 
 ### Service-owned management tree — T426
 

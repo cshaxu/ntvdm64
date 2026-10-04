@@ -15,6 +15,7 @@
 #include "common/protocol/console_io.h"
 #include "common/system_root.h"
 #include "guest_environment.h"
+#include "application_search.h"
 #include <shellapi.h>
 #include <stdio.h>
 #include <wchar.h>
@@ -109,60 +110,11 @@ static BOOL sibling_path(PCWSTR name, PWSTR output, DWORD capacity)
     return error == ERROR_SUCCESS;
 }
 
-static BOOL image_has_extension(PCWSTR image)
-{
-    PCWSTR dot, slash, forward;
-    if (!image || !*image)
-        return FALSE;
-    dot = wcsrchr(image, L'.');
-    slash = wcsrchr(image, L'\\');
-    forward = wcsrchr(image, L'/');
-    if (forward && (!slash || forward > slash))
-        slash = forward;
-    return dot && (!slash || dot > slash);
-}
-
-/* This is product executable discovery, not image classification.  Resolve a
- * bare target beside the installed three-program package before consulting the
- * process search path, then pass only that canonical path to the selected
- * original OpenNT classifier. */
 static BOOL resolve_image_path(PCWSTR image, PWSTR output, DWORD capacity)
 {
-    static PCWSTR const extensions[] = {L".com", L".exe", L".pif", L".bat"};
-    WCHAR package[MAX_PATH];
-    PWSTR slash;
-    DWORD result;
-    size_t index, count;
-    BOOL bare;
-
-    if (!image || !*image || !output || !capacity)
-        return FALSE;
-    bare = !wcschr(image, L'\\') && !wcschr(image, L'/');
-    package[0] = L'\0';
-    if (bare)
-    {
-        if (!GetModuleFileNameW(NULL, package, MAX_PATH))
-            return FALSE;
-        slash = wcsrchr(package, L'\\');
-        if (!slash)
-            return FALSE;
-        *slash = L'\0';
-    }
-    count = image_has_extension(image) ? 1u : sizeof(extensions) / sizeof(extensions[0]);
-    for (index = 0; index < count; ++index)
-    {
-        PCWSTR extension = image_has_extension(image) ? NULL : extensions[index];
-        if (bare)
-        {
-            result = SearchPathW(package, image, extension, capacity, output, NULL);
-            if (result && result < capacity)
-                return TRUE;
-        }
-        result = SearchPathW(NULL, image, extension, capacity, output, NULL);
-        if (result && result < capacity)
-            return TRUE;
-    }
-    return FALSE;
+    DWORD error=run16_resolve_application(image,output,capacity);
+    if(error)SetLastError(error);
+    return error==ERROR_SUCCESS;
 }
 
 static DWORD connect_broker(void)
@@ -509,7 +461,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         goto done;
     /* The former one-process product accepted a compact first option such as
      * `command/c`: its bare image part and /option were separate argv items.
-     * Restore that entry convention for any resolvable bare package image,
+     * Restore that entry convention for any resolvable bare user image,
      * but do not reinterpret a backslash/drive-qualified forward-slash path. */
     image_argument=arguments[0];
     launch_command=command;

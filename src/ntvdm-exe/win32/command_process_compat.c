@@ -235,7 +235,7 @@ static BOOL opennt_command_launch_vdm_child(
     LPSTARTUPINFOA startup_info,
     LPPROCESS_INFORMATION process_information)
 {
-    char launcher[MAX_PATH];
+    char launcher[MAX_PATH],interpreter[MAX_PATH];
     char child_command[MAX_PATH * 2u + MAXIMUM_VDM_COMMAND_LENGTH * 2u + 32u];
     DWORD error;
     int formatted;
@@ -261,8 +261,10 @@ static BOOL opennt_command_launch_vdm_child(
             thread_attributes, inherit_handles, creation_flags, environment,
             current_directory, startup_info, process_information);
     }
+    error=common_product_path_a(L"system32\\COMMAND.COM",interpreter,sizeof(interpreter));
+    if(error){SetLastError(error);return FALSE;}
     formatted = snprintf(child_command, sizeof(child_command),
-        "\"%s\" COMMAND.COM /c ", launcher);
+        "\"%s\" \"%s\" /c ", launcher,interpreter);
     if (formatted < 0 || (size_t)formatted >= sizeof(child_command)) {
         SetLastError(ERROR_FILENAME_EXCED_RANGE);
         return FALSE;
