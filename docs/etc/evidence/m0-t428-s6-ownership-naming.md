@@ -113,3 +113,11 @@ Physical RDP/focus is owner-waived/unobserved, not passed. WOW comparisons retai
 the established frontier contract, not a new full-usability/gameplay claim.
 No host scrollback or descendant observation capability is claimed. T428 stays
 open for owner acceptance. Unrelated proposal/queue work remains excluded.
+
+## Owner disposition
+
+On 2026-10-04 the owner directs T428 closure and next-task admission. The
+previous pending-acceptance statements record the delivery stage; this later
+decision closes T428 at the same verified/published inputs. See the
+[T428 closure](../../history/m0-t428-worker-interface-unification-closure.md).
+No new physical/WOW/performance result is inferred from owner-directed closure.

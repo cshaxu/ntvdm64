@@ -162,6 +162,20 @@ retained. Already unified frontend mechanisms and the active decoder naming
 cleanup are not open repairs in this candidate. The active packet is unchanged and no
 numeric T is allocated by this queue insertion.
 
+Owner planning dated 2026-10-04 inserts the
+[NTVDM execution-performance recovery candidate](../proposals/proposal-ntvdm-execution-performance-recovery-001.md)
+at position 1. It measures the selected `EDIT.COM` input/presentation path,
+removes the proven release CCPU inner-loop diagnostic cost, and changes later
+transport work only where evidence proves a bottleneck. Every existing
+candidate shifts one position while retaining relative order. This does not
+admit work, allocate a numeric task, or change the active root/search packet.
+
+The owner's subsequent direction on 2026-10-04 swaps only the first two
+candidates: worker control/lifecycle/naming unification is now first, followed
+by NTVDM execution-performance recovery. Position 3 and all later candidates
+retain their order. This supersedes the performance candidate's initial head
+placement without admitting either package or changing the active packet.
+
 ## Unresolved audit-family ownership
 
 Owner planning dated 2026-10-03 appends the
@@ -200,3 +214,8 @@ Historical queue/proposal material is indexed in
 The owner has now admitted the former Console-root worker-tree head in
 [CURRENT](CURRENT.md), after the preceding closure delivery. It is absent
 from the remaining candidates above; all later relative ordering is retained.
+
+Owner direction on 2026-10-04 closes the delivered worker-interface package
+and admits the then-head execution-performance package in CURRENT. It is
+removed from this unnumbered candidate table; later relative order is retained.
+The prior insertion/swap paragraphs are historical planning, not live admission.

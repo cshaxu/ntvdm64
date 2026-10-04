@@ -2,7 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
-| [T428 S6 ownership naming](evidence/m0-t428-s6-ownership-naming.md) | M0 T428 S6 | Frontend-private API/build ownership and final sharing/caller audit, verification in progress. | Retain through T428 acceptance. |
+| [T428 S6 ownership naming](evidence/m0-t428-s6-ownership-naming.md) | M0 T428 S6 | Frontend-private API/build ownership and final sharing/caller audit, integrated verification and published delivery. | Retained accepted T428 evidence. |
 | [T428 S5 worker association](evidence/m0-t428-s5-worker-association.md) | M0 T428 S5 | Existing watch authority, shared GUI reuse, native close race and verified paired cancellation/publication. | Retain through T428 acceptance. |
 | [T428 S4 common worker shutdown](evidence/m0-t428-s4-common-worker-shutdown.md) | M0 T428 S4 | Shared local close mechanism, native pre-text control registration and real acknowledgment verification/publication. | Retain through T428 acceptance. |
 | [T428 S3 authenticated parent resume](evidence/m0-t428-s3-authenticated-parent-resume.md) | M0 T428 S3 | Existing context origin replaces launcher PID census; exact completion/negative verification and pending runtime delivery. | Retain through T428 acceptance. |
