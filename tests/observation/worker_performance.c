@@ -39,6 +39,12 @@ void worker_performance_record(const char *phase,LONGLONG start,DWORD count,DWOR
     AcquireSRWLockExclusive(&lock);append(phase,start,end,count,error);ReleaseSRWLockExclusive(&lock);
     SetLastError(saved);
 }
+void worker_performance_record_total(const char *phase,LONGLONG duration,DWORD count,DWORD error)
+{
+    DWORD saved=GetLastError();LONGLONG end=worker_performance_clock();
+    AcquireSRWLockExclusive(&lock);append(phase,end-duration,end,count,error);ReleaseSRWLockExclusive(&lock);
+    SetLastError(saved);
+}
 void worker_performance_push(mvdm_mouse_input *queue,DWORD before,int accepted,LONGLONG start)
 {
     DWORD saved=GetLastError();LONGLONG end=worker_performance_clock();DWORD slot;

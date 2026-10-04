@@ -14,12 +14,12 @@ Only S2 is now active, following the approved sequential scope.
 | Field | Required record |
 | --- | --- |
 | Identifier Mode | M0 T429 S2; Ordinary Mode. |
-| Admission And Approval | Sequential admission after S1's baseline/control/measurement exit; owner directs continuous execution-performance optimization. |
+| Admission And Approval | Sequential admission after S1's baseline/control/measurement exit; owner directs continuous execution-performance optimization. Owner additionally approves the reproduced native Console-close ordering defect as a bounded S2 dependency repair. |
 | Candidate Proposal | [Execution-performance recovery](../proposals/proposal-ntvdm-execution-performance-recovery-001.md). |
 | Objective | Remove project-added per-instruction DECODE diagnostics from the normal selected CCPU40 build; retain explicitly selected diagnostic capability and prove behavior and measured effect. |
-| Non-goals | No CCPU algorithm, guest/firmware, CPU30, lifecycle/wire, helper/channel/component/scheduler change; no NTCON/worker-base display dedup or speculative input/transport optimization. |
-| Reference Baseline | Production68e860553, T428 S6/r002/runtime/system32; main3b9d01a08 S1 measurement. MSVC14.43/SDK22621/x86 /MT CCPU40; APP0.0.427/RPC38/I/O25. Published eight files match accepted baseline. |
-| Files And ABI Surface | c_main.c project diagnostic selection and registered mirror README; reproducible object-selection/performance tests and evidence. No cross-EXE ABI change. |
+| Non-goals | No CCPU algorithm, guest/firmware, CPU30, lifecycle policy/wire, helper/channel/component/scheduler change; no NTCON/worker-base display dedup or speculative input/transport optimization. Existing authenticated native Console closure must precede generic cancellation/fault teardown; this ordering repair is admitted, not a new retirement policy. |
+| Reference Baseline | Last accepted production68e860553, T428 S6/r002/runtime/system32; main d7c20f0e9 S1 closure. MSVC14.43/SDK22621/x86 /MT CCPU40; APP0.0.427/RPC38/I/O25. Owner-requested early published S2 candidate is identified below, not yet a reviewed P. |
+| Files And ABI Surface | c_main.c project diagnostic selection and registered mirror README; NTVWM close/cancellation ordering; reproducible object-selection/performance tests, test-only frontend API-cost attribution, close failure diagnostics and evidence. No cross-EXE ABI change. |
 | Applicable Rules | Full AGENTS set, source policy, mirror provenance/minimal registered diff, original instruction semantics, build-only artifacts, preserved other-session edits and serial global endpoint/Z:-only tests. |
 | Verification | Incremental affected x86 closure with source/toolchain/input identity; normal and diagnostic object checks; identical-package benchmark/control comparison; affected CCPU/input/video tests; Console17/Window17/retained WOW/lifecycle, coherent recovery/publication and published smoke before production P. Governance, links and diff review. |
 | Expected Markers | Normal DECODE has no diagnostic call or replacement per-instruction branch; diagnostic build retains selected observer references; real guest/output/order/receipt and existing frontiers do not regress. Report measured improvement or contrary result. |
@@ -40,9 +40,34 @@ comparison remain explicitly unproved. Sequential S2 is admitted, not T closure.
 
 T428 is owner-closed at production68e860553/statusb1b77e129; its
 [closure](../history/m0-t428-worker-interface-unification-closure.md)
-retains S1-S6 results. O:/winnt/system32 contains the coherent six EXEs and
-WOW32.DLL/VDMREDIR.DLL matching build/M0-T428/S6/r002/runtime/system32.
-Recovery is S6/r011/recovery. S1 test-only measured binaries were never published.
+retains S1-S6 results. The last fully accepted set remains
+build/M0-T428/S6/r002/runtime/system32. Owner subsequently requests immediate
+S2 candidate publication before full regression. The initial publication matched
+build/M0-T429/S2/r002/runtime/system32, with only ntvdm.exe changed; all eight
+hashes pass. Recovery is build/M0-T429/S2/r007/recovery. This explicit early
+publication is not a reviewed production P or S2 closure.
+[S2 evidence](../etc/evidence/m0-t429-s2-release-decode-diagnostics.md)
+records passed normal/diagnostic objects, all48 paired comparison cases,
+actual EDIT200, service29 and input/video/shutdown fixtures. Console EDIT
+aggregate median improves9.9%; Window is essentially unchanged, not a universal
+speedup. Full product r013 and deployed Console/Window smoke pass. Management
+frontend-close failed in r014; fixed paired r018 also reproduced it in the
+unchanged accepted baseline (worker exits1067 while CMD survives). The owner
+approved its bounded close-ordering dependency repair. r025 now passes four
+fixed real close samples, unexpected-worker-loss target survival and independent
+Console isolation. Production priority fixture and existing shutdown37 pass.
+The original failed samples remain evidence, not reclassified as passes.
+r026 repeats Console17/Window17 and all retained WOW frontiers successfully
+with the repaired coherent package. r027 publishes its eight matching files
+to O:/winnt/system32; recovery is r027/recovery. NTVWM is the only additional
+changed binary beyond the release DECODE repair. r028 published Console/Window
+COMMAND/MEM/EDIT/native smoke and all eight hashes pass. Review and sequential
+commit/push are the final delivery steps.
+Test-only r021/r023 narrow the remaining transaction cost to per-cell Console
+code-page queries (94% of cumulative text commit in r023); no frontend production
+repair is admitted or published yet. Original frame/input assertions pass.
+S1/S2 measured wrapper
+binaries were never published.
 
 S1 delivered measurements at c8754f75d,b7178e53d,3b9d01a08 and its final
 control review.42 baseline cases, missing-marker negatives, actual EDIT200
@@ -73,6 +98,7 @@ Other-session proposal chronology is preserved and excluded from this delivery.
 
 ## Recent Governance
 
-S1 concludes as measurement-only; S2 begins with one bounded active packet.
-This admission/control delivery changes no production binary, guest or process
-policy. Governance, relative links and diff checks precede commit/push.
+S1 concludes as measurement-only; S2 reaches its bounded implementation/testing
+exit and remains the one active packet through delivery. Guest and lifecycle
+policy remain unchanged; the approved native-close dependency repairs ordering
+only. Governance, links and diff checks precede sequential commit/push.

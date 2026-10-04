@@ -43,6 +43,8 @@ int main(int argc,char **argv)
         if(total!=(long)(200*bursts))return 71;
     }
     QueryPerformanceCounter(&end);
+    if(!strcmp(argv[1],"total"))
+        worker_performance_record_total("unit-total",frequency.QuadPart/1000,17,0);
     worker_performance_flush();
     if(GetLastError()!=0x53510002)return 72;
     printf("PASS measurement unit mode=%s pid=%lu displacement=%ld\n",argv[1],GetCurrentProcessId(),total);

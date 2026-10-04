@@ -235,9 +235,8 @@ typedef union
 LOCAL IU16 cpu_hw_interrupt_number;
 #ifdef NTVDM
 #include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
-/* This is a default-off attribution latch only.  `NEXT_INST` observes the
- * post-instruction CPU position, while `DECODE` is the last source-owned
- * point at which the preceding instruction address is known. */
+/* DIVERGENCE: MVDM-HOST-DIV-325. Coarse worker diagnostics remain available;
+ * per-instruction attribution is selected only by the diagnostic build. */
 #endif
 #if defined(SFELLOW)
 extern IU32	cpu_interrupt_map ;
@@ -877,7 +876,9 @@ DO_INST:
     */
 DECODE:
 
-#ifdef NTVDM
+/* DIVERGENCE: MVDM-HOST-DIV-325. Do not charge normal guest execution for
+ * project trace observers, even when their runtime trace paths are unset. */
+#if defined(NTVDM) && defined(MVDM_CCPU_DECODE_DIAGNOSTICS)
    mvdm_softpc_report_nt_transition(getCS(), getEIP(), getEFLAGS(),
       getSS(), getESP());
    if (getCS() == 0x00c7u && getEIP() >= 0x4f6au &&

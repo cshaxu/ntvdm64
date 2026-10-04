@@ -106,7 +106,19 @@ try {
             throw 'Management RPC rejected or timed out'
         }
     }
-    if(!$WorkerLoss -and (!$worker.WaitForExit(5000) -or !$target.WaitForExit(5000))){throw 'NTVWM or attached CMD survived acknowledged close'}
+    if(!$WorkerLoss -and (!$worker.WaitForExit(5000) -or !$target.WaitForExit(5000))){
+        # Preserve the actual pinned participants before finally cleans them.
+        # A failed close is evidence, not a reason to retry or extend its bound.
+        $worker.Refresh();$target.Refresh()
+        @("worker-pid=$($worker.Id)","worker-alive=$(!$worker.HasExited)",
+            "target-pid=$($target.Id)","target-alive=$(!$target.HasExited)",
+            "frontend-pid=$(if($frontend){$frontend.Id}else{0})",
+            "frontend-alive=$(if($frontend){!$frontend.HasExited}else{'not-selected'})",
+            "worker-exit=$(if($worker.HasExited){$worker.ExitCode}else{'running'})",
+            "target-exit=$(if($target.HasExited){$target.ExitCode}else{'running'})") |
+            Set-Content "$report.close-state.txt"
+        throw 'NTVWM or attached CMD survived acknowledged close'
+    }
     if($FrontendClose -and !$frontend.WaitForExit(5000)){throw 'Frontend survived its acknowledged close'}
     if(!$observerProcess.WaitForExit(10000)){throw 'Direct launcher did not return after management close'}
     $record=Get-Content $report -Raw

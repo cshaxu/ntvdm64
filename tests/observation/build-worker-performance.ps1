@@ -46,7 +46,7 @@ if($LASTEXITCODE){throw 'Measured frontend link failed'}
     FrontendOutput=(Get-FileHash $frontendOutput).Hash
     Inputs=@($linkInputs | ForEach-Object {[ordered]@{Path=$_;Hash=(Get-FileHash $_).Hash}})
     FrontendInputs=@($frontendInputs | ForEach-Object {[ordered]@{Path=$_;Hash=(Get-FileHash $_).Hash}})
-    Measurements=@('worker mouse queue enqueue/merge/IRQ consumption','worker read batches','text assembly','complete video transfer','frontend decode/present calls','handoff barrier and I/O-close acknowledgement')
+    Measurements=@('worker mouse queue enqueue/merge/IRQ consumption','worker read batches','text assembly','complete video transfer','frontend video commit and nested Console buffer create/read/write/resize','frontend decode/present calls','handoff barrier and I/O-close acknowledgement')
     Excluded=@('raw-input hardware latency','guest callback execution time','physical display latency')
 }|ConvertTo-Json -Depth 6|Set-Content (Join-Path $root 'manifest.json') -Encoding UTF8
 Write-Output "PASS built test-only measured worker: $output"

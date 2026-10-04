@@ -305,6 +305,10 @@ checks, retained failed attempts and final same-package verification.
 All other historical supporting material is in the [external documentation archive](../../artifacts/documentation-archive/20260910/strict-topology/).
 ## T423 restart reference
 
+[T429 S2 release DECODE diagnostics](evidence/m0-t429-s2-release-decode-diagnostics.md)
+records source provenance, compile-selected attribution, normal/diagnostic object
+proof and the explicit runtime/publication gates still pending.
+
 [Restarted lifecycle evidence](evidence/m0-t423-s1-restart-lifecycle.md) records
 the clean build, Console ownership diagnosis and current S1 verification gaps.
 

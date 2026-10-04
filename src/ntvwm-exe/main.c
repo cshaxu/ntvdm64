@@ -129,6 +129,19 @@ static DWORD WINAPI close_console(void *context)
     (void)context;
     return ntvwm_console_close();
 }
+/* A GetNext cancellation or failed final-I/O RPC may race the close watcher.
+ * An already issued broker close must win over generic worker-fault teardown.
+ * Reuse the I/O lock: exactly one caller closes the actual Console and exits;
+ * this does not invent a close instruction on unexpected broker/worker loss. */
+static void honor_console_close(native_membership *state)
+{
+    if((state->shutdown && WaitForSingleObject(state->shutdown,0)==WAIT_OBJECT_0) ||
+        (state->stop_requested && WaitForSingleObject(state->stop_requested,0)==WAIT_OBJECT_0)) {
+        EnterCriticalSection(state->lock);
+        worker_base_shutdown_close(close_console,state,INFINITE,ERROR_CANCELLED,state->closed);
+        LeaveCriticalSection(state->lock);
+    }
+}
 static DWORD presentation_loop(void *context)
 {
     native_membership *state=context;DWORD error=0;
@@ -193,6 +206,7 @@ static DWORD WINAPI presentation_pump(void *context)
     native_membership *state=context;
     DWORD error=presentation_loop(context);
     ntvwm_trace_error("pump",0,error);
+    honor_console_close(state);
     if(!error || WaitForSingleObject(state->quit,0)!=WAIT_TIMEOUT)return error;
     /* Only an unrecoverable worker-side failure reaches here. A worker whose
      * presentation watcher has stopped cannot remain resident: it would no
@@ -277,7 +291,7 @@ static BOOL WINAPI control_event(DWORD event)
 
 static void broker_completion_fault(void *context,DWORD error)
 {
-    (void)context;
+    honor_console_close(context);
     ntvwm_trace_error("broker-complete",0,error);
     /* GetNext may be blocked in a synchronous RPC while a serving thread
      * discovers the failure. Process exit closes the worker's handles; it
@@ -304,7 +318,7 @@ int wmain(int argc,WCHAR **argv)
     if(!error) error=ntvwm_executions_open(&requests);
     if(!error) {
         ntvwm_executions_bind_io(requests,&io);
-        ntvwm_executions_bind_fault(requests,broker_completion_fault,NULL);
+        ntvwm_executions_bind_fault(requests,broker_completion_fault,&membership);
     }
     if(!error && !SetConsoleCtrlHandler(control_event,TRUE))error=GetLastError();
     while(!error) {
@@ -346,6 +360,7 @@ int wmain(int argc,WCHAR **argv)
             continue;
         }
     }
+    honor_console_close(&membership);
     if(membership.quit)SetEvent(membership.quit);
     ntvwm_executions_close(requests);
     membership_close(&membership);

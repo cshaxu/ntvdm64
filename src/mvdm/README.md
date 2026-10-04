@@ -1,5 +1,14 @@
 # mvdm
 
+MVDM-HOST-DIV-325 (T429 S2): `softpc.new/base/ccpu386/c_main.c::DECODE`
+compile-selects the project-added transition and four WOW instruction observers
+with `MVDM_CCPU_DECODE_DIAGNOSTICS`. The normal CCPU40 graph does not define
+it, so opcode fetch/dispatch incurs no observer call or replacement branch.
+An explicit diagnostic compile retains the unchanged attribution block.
+The block was added by project commit806598b9b1, not original OpenNT;
+instruction execution, interrupt handling and coarse diagnostics are unchanged.
+This removes diagnostic work rather than substituting a CPU algorithm.
+
 MVDM-HOST-DIV-322 (T425 S8): CCPU Window presentation uses software
 FULLSCREEN without enabling X86GFX/MONITOR or hardware BIOS/regen mapping.
 The existing ntvdm-exe/softpc/mvdm_softpc_text_video.c adapter samples frontend
