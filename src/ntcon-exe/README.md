@@ -86,7 +86,8 @@ contract; only a complete validated publication replaces the committed grid
 and renderer snapshot. Abort/EOF retains the prior snapshot and anti-replay
 serial. DOS stream operations and complete VGA frames use this same storage.
 Physical Console size clips upper-left projection only; unused visible cells
-are blanked. Host cursor updates are skipped when unchanged, preserving blink.
+are blanked. Host cursor updates are applied even when unchanged in the
+owner-requested diagnostic baseline; workers' repeated requests stay visible.
 Current logical state seeds the next worker; no old-page/row-bias heuristic
 or initial CMD snapshot is a source of truth. Host scrollback is not promised.
 

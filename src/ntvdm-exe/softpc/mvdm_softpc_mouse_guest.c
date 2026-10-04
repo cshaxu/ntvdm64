@@ -14,6 +14,7 @@
 extern void EmulateCoordinates(half_word,IS16,IS16,IS16 *,IS16 *);
 extern void host_ica_lock(void);
 extern void host_ica_unlock(void);
+extern void mouse_pointer_route_changed(int);
 
 BOOL mvdm_softpc_mouse_route_active(void)
 {
@@ -60,6 +61,10 @@ BOOL mvdm_softpc_mouse_apply(MOUSE_CURSOR_STATUS *cursor,MOUSE_VECTOR *counter,
     if(input.action==CONSOLE_MOUSE_LEAVE) {
         mvdm_softpc_mouse_leave(state);
     }
+    /* Consume the route edge on the original CPU owner, after committing
+     * guest position and route state. Do not invent POSITION callback bits. */
+    if(input.action==CONSOLE_MOUSE_ENTER || input.action==CONSOLE_MOUSE_LEAVE)
+        mouse_pointer_route_changed(input.action==CONSOLE_MOUSE_ENTER);
     return TRUE;
 }
 void mvdm_softpc_mouse_receive(const INPUT_RECORD *record)

@@ -54,8 +54,9 @@
 #include "conapi.h"
 /* DIVERGENCE(MVDM-HOST-DIV-314): copied text for the independent frontend. */
 #include "ntvdm-exe/win32/console_text.h"
+/* DIVERGENCE(MVDM-HOST-DIV-322): CCPU software fullscreen route adapter. */
+#include "ntvdm-exe/softpc/include/mvdm_softpc_text_video.h"
 /* DIVERGENCE(MVDM-HOST-DIV-318): original CCPU cursor refresh owner. */
-extern void mouse_refresh_pointer(void);
 
 #include "nt_graph.h"
 #include "nt_cga.h"
@@ -85,6 +86,9 @@ extern int  ega_int_enable;
 extern byte  *video_copy;
 
 static int flush_count = 0;	 /*count of graphic ticks since last flush*/
+/* DIVERGENCE(MVDM-HOST-DIV-314): only the original update-start callback
+ * establishes a completed refresh; a timer check alone is not a repaint. */
+static BOOL presentation_updated = FALSE;
 
 // DIB_PAL_INDICES shouldn't be used, use CreateDIBSECTION to get better
 // performance characteristics.
@@ -761,7 +765,8 @@ void nt_clear_screen(void)
 
     if(sc.ScreenBufHandle) return;
 
-#ifndef X86GFX
+#if !defined(X86GFX) && !defined(CCPU)
+    /* DIVERGENCE(MVDM-HOST-DIV-322): software VGA still clears its backing. */
     if (sc.ScreenState == FULLSCREEN)   // don't want sudden screen clears
         return;
 #endif
@@ -797,16 +802,38 @@ void nt_clear_screen(void)
 /*::::::::::::::::::::::::::: Flush screen :::::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
+/* DIVERGENCE(MVDM-HOST-DIV-314): publish the original painter's completed
+   grid and consume its update notification. Mouse flushes occur between
+   timer ticks; a tick must not discard that real update. */
+static void publish_text_update(void)
+{
+    if (sc.ModeType == TEXT && presentation_updated) {
+        presentation_updated = FALSE;
+        if (!NtvdmConsoleUpdateText(sc.ColPalette))
+            DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
+    }
+}
+
 void nt_flush_screen(void)
 {
     sub_note_trace0(ALL_ADAPT_VERBOSE, "nt_flush_screen");
+
+#if defined(CCPU) && !defined(X86GFX)
+    /* DIVERGENCE(MVDM-HOST-DIV-322): mouse IRQs only change simulated VGA.
+       The existing video tick extracts it; never wait on frontend I/O here. */
+    if (sc.ScreenState == FULLSCREEN) return;
+#endif
 
     if (ConsoleInitialised == TRUE && ConsoleNoUpdates == FALSE &&
 	!get_mode_change_required())
 #ifdef X86GFX
         if (sc.ScreenState == WINDOWED)
 #endif
+        {
             (void)(*update_alg.calc_update)();
+            /* DIVERGENCE(MVDM-HOST-DIV-314): preserve the notification until
+               the video owner publishes; do not perform transport in an IRQ. */
+        }
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -827,20 +854,24 @@ void nt_mark_screen_refresh(void)
 
 void nt_graphics_tick(void)
 {
-    /* DIVERGENCE(MVDM-HOST-DIV-314): publish only after an original refresh. */
-    BOOL presentation_updated = FALSE;
-
-    /* DIVERGENCE(MVDM-HOST-DIV-318): restore background after route changes. */
-    mouse_refresh_pointer();
-
+    /* DIV-314: a mode-selection tick is not a completed software paint.
+       Retain pending cursor/frame changes until palette and cells are ready. */
+    BOOL software_update_completed = FALSE;
+#if defined(CCPU) && !defined(X86GFX)
+    /* DIVERGENCE(MVDM-HOST-DIV-322): software route, not hardware takeover. */
+    if (!mvdm_softpc_text_video_sync_route())
+        DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
+#endif
     /* DIVERGENCE(MVDM-HOST-DIV-314): retain the original stream-to-video
        transition; a separate frontend cannot render stream-only VGA state. */
+#if !defined(CCPU) || defined(X86GFX)
     if (sc.ScreenState == STREAM_IO) {
         BOOL requested;
         if (!NtvdmConsoleTextRequested(&requested))
             DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
         if (requested) disable_stream_io();
     }
+#endif
     if (sc.ScreenState == STREAM_IO) {
 	if (++flush_count == TICKS_PER_FLUSH){
 	    stream_io_update();
@@ -898,8 +929,6 @@ void nt_graphics_tick(void)
 #endif
                     {
                         (void)(*update_alg.calc_update)();
-                        /* DIVERGENCE(MVDM-HOST-DIV-314): completed frame. */
-                        presentation_updated = TRUE;
                     }
 
                 ega_tick_delay = EGA_TICK_DELAY;
@@ -910,6 +939,7 @@ void nt_graphics_tick(void)
 		if (CursorResizeNeeded)
 		    make_cursor_change();
 
+                software_update_completed = TRUE;
                 flush_count = 0;
              }
         }
@@ -929,18 +959,15 @@ void nt_graphics_tick(void)
 #endif
                 {
                     (void)(*update_alg.calc_update)();
-                    /* DIVERGENCE(MVDM-HOST-DIV-314): completed frame. */
-                    presentation_updated = TRUE;
                 }
 
+            software_update_completed = TRUE;
             flush_count = 0;
         }
     }
     /* DIVERGENCE(MVDM-HOST-DIV-314): Window consumers receive a completed
        copy, never the mutable original painter or EGA storage. */
-    if (sc.ModeType == TEXT && presentation_updated)
-        if (!NtvdmConsoleUpdateText(sc.ColPalette))
-            DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
+    if (software_update_completed) publish_text_update();
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -949,6 +976,8 @@ void nt_graphics_tick(void)
 
 void nt_start_update(void)
 {
+   /* DIVERGENCE(MVDM-HOST-DIV-314): original painter began an update. */
+   presentation_updated = TRUE;
    IDLE_video();
 }
 
@@ -1112,6 +1141,11 @@ void nt_paint_cursor IFN3(int, cursor_x, int, cursor_y, half_word, attr)
 {
     COORD CursorPos;
 
+    /* DIVERGENCE(MVDM-HOST-DIV-314/322): actual VGA cursor movement is a
+       publication even without changed cells; Window owns its host caret. */
+    presentation_updated = TRUE;
+    if (sc.ScreenState == FULLSCREEN) return;
+
     /*::::::::::::::::::::::::::::::::::::::::::::::::::: Guess where we are */
 
     sub_note_trace3(ALL_ADAPT_VERBOSE, "nt_paint_cursor x=%d, y=%d, attr=%d\n",
@@ -1139,6 +1173,8 @@ void nt_cursor_size_changed(int lo, int hi)
     UNREFERENCED_FORMAL_PARAMETER(lo);
     UNREFERENCED_FORMAL_PARAMETER(hi);
     CursorResizeNeeded = TRUE;
+    /* DIVERGENCE(MVDM-HOST-DIV-314): register-only shape/visibility change. */
+    presentation_updated = TRUE;
 }
 
 void make_cursor_change(void)
@@ -1150,9 +1186,11 @@ void make_cursor_change(void)
     SAVED DWORD CurrentCursorSize = (DWORD)-1;
     SAVED BOOL CurNowOff = FALSE;
 
-    if(sc.ScreenState == FULLSCREEN) return;
-
     CursorResizeNeeded = FALSE;
+
+    /* DIVERGENCE(MVDM-HOST-DIV-322): clear the consumed software notification
+       even when no host Console caret operation is applicable. */
+    if(sc.ScreenState == FULLSCREEN) return;
 
     /*::::::::::::::::::::::::::::::::::::::::::::::::::::::: Update cursor */
 
@@ -2101,8 +2139,11 @@ void graphicsResize(void)
         DWORD    headerSize;
         LPBITMAPINFO     infoStructPtr;
 
+#ifdef X86GFX
+        /* DIVERGENCE(MVDM-HOST-DIV-322): CCPU requires software DIB backing. */
         if (sc.ScreenState == FULLSCREEN)
             return;
+#endif
 
         /* Destroy previous data. */
 	closeGraphicsBuffer(); /* Tim Oct 92 */

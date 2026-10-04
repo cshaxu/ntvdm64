@@ -37,8 +37,6 @@ typedef struct console_client {
     ntvdm_console_graphics *graphics;
     PALETTEENTRY text_palette[16];
     BOOL text_palette_valid;
-    console_text_configuration sent_configuration;
-    BOOL configuration_sent;
     mvdm_mouse_bridge mouse;
 } console_client;
 static DWORD console_activate(console_client *,BOOL);
@@ -370,7 +368,6 @@ static DWORD console_activate(console_client *client,BOOL active)
              * after physical closure discard its local operation state. */
             if(!pipe) {
                 ntcon_worker_client_dispose(&client->channel);
-                client->configuration_sent=FALSE;
                 ResetEvent(client->wake);SetEvent(client->rearm);
             }
         }
@@ -422,20 +419,7 @@ BOOL ntvdm_console_publish_video(const console_video_description *description,
     if ((description && (!pixels || capacity<description->bytes || !description->bytes)) ||
         (!description && (pixels || capacity))) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
     EnterCriticalSection(&client->lock);
-    if(description && description->kind==CONSOLE_VIDEO_TEXT_CONFIGURATION &&
-        description->bytes==sizeof(console_text_style) && client->configuration_sent &&
-        !memcmp(pixels,&client->sent_configuration.style,sizeof(console_text_style)) &&
-        !memcmp(description->palette,client->sent_configuration.palette,
-            sizeof(client->sent_configuration.palette)))goto done;
     error=ntcon_worker_video(&client->channel,description,pixels);
-    if(!error && description && description->kind==CONSOLE_VIDEO_TEXT_CONFIGURATION &&
-        description->bytes==sizeof(console_text_style)) {
-        memcpy(&client->sent_configuration.style,pixels,sizeof(console_text_style));
-        memcpy(client->sent_configuration.palette,description->palette,
-            sizeof(client->sent_configuration.palette));
-        client->configuration_sent=TRUE;
-    } else if(!error)client->configuration_sent=FALSE;
-done:
     LeaveCriticalSection(&client->lock);
     SetLastError(error);
     return error==ERROR_SUCCESS;

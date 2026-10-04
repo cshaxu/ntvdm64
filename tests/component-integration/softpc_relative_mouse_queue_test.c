@@ -1,4 +1,5 @@
 #include "ntvdm-exe/softpc/mvdm_softpc_mouse_input.h"
+#include "common/protocol/console_mouse.h"
 #include <assert.h>
 #include <limits.h>
 #include <stdio.h>
@@ -37,6 +38,28 @@ int main(void)
     sample.buttons=4;assert(!mvdm_mouse_input_push(&queue,&sample));
     sample.buttons=0;assert(mvdm_mouse_input_push(&queue,&sample));
     mvdm_mouse_input_clear(&queue);assert(!mvdm_mouse_input_take(&queue,&out));
+    /* Native-rate motion cannot delay button/route boundaries by hundreds
+       of IRQs. Preserve all displacement; never merge through an edge. */
+    sample.action=CONSOLE_MOUSE_MOVE;sample.dx=1;sample.dy=-1;sample.buttons=0;
+    for(i=0;i<1000;++i)assert(mvdm_mouse_input_push(&queue,&sample));
+    assert(queue.count==17);
+    sample.dx=sample.dy=0;sample.buttons=1;
+    assert(mvdm_mouse_input_push(&queue,&sample));
+    sample.buttons=0;assert(mvdm_mouse_input_push(&queue,&sample));
+    sample.action=CONSOLE_MOUSE_LEAVE;assert(mvdm_mouse_input_push(&queue,&sample));
+    sample.action=CONSOLE_MOUSE_ENTER;assert(mvdm_mouse_input_push(&queue,&sample));
+    assert(queue.count==21);x=y=0;
+    for(i=0;i<17;++i) {
+        assert(mvdm_mouse_input_take(&queue,&out));
+        assert(out.action==CONSOLE_MOUSE_MOVE && !out.buttons);
+        x+=out.dx;y+=out.dy;
+    }
+    assert(x==1000 && y==-1000);
+    assert(mvdm_mouse_input_take(&queue,&out) && out.buttons==1);
+    assert(mvdm_mouse_input_take(&queue,&out) && !out.buttons);
+    assert(mvdm_mouse_input_take(&queue,&out) && out.action==CONSOLE_MOUSE_LEAVE);
+    assert(mvdm_mouse_input_take(&queue,&out) && out.action==CONSOLE_MOUSE_ENTER);
+    assert(!queue.count);
     puts("PASS relative carrier: exact signed motion, split/button ordering, release, FIFO wrap, bounded rejection without mutation");
     return 0;
 }

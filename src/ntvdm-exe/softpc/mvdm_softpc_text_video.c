@@ -1,3 +1,4 @@
+#include <windows.h>
 #include <insignia.h>
 #include <host_def.h>
 #include <xt.h>
@@ -7,12 +8,39 @@
 #include <egagraph.h>
 #include <egacpu.h>
 #include <egaports.h>
+#include <conapi.h>
+#include <nt_graph.h>
+#include <nt_uis.h>
 #include "mvdm_softpc_text_video.h"
+#include "ntvdm-exe/win32/console_text.h"
 #include <string.h>
 
 /* Original nt_graph.c::textResize dimensions used by nt_cga_text clipping.
  * RegisterConsoleVDM's backing capacity is not the visible screen extent. */
 extern int now_width, now_height;
+extern void disable_stream_io(void);
+extern void nt_cursor_size_changed(int, int);
+
+/* CCPU's software VGA remains active in either presentation route. Never
+ * request hardware fullscreen, map physical regen or change guest video mode
+ * merely because the frontend switches its visible surface. */
+int mvdm_softpc_text_video_sync_route(void)
+{
+    BOOL requested=FALSE;
+    DWORD desired;
+    if(!NtvdmConsoleTextRequested(&requested))return 0;
+    if(requested && sc.ScreenState==STREAM_IO)disable_stream_io();
+    if(sc.ScreenState==STREAM_IO)return 1;
+    /* Graphics already requires the software Window even when the user's
+       text display preference remains Console. */
+    desired=(requested || sc.ModeType==GRAPHICS) ? FULLSCREEN : WINDOWED;
+    if(sc.ScreenState!=desired) {
+        sc.ScreenState=desired;
+        nt_mark_screen_refresh();
+        nt_cursor_size_changed(0,0);
+    }
+    return 1;
+}
 
 /* Original ega_vide.c::load_ega_fonts stores each glyph in a 32-byte slot,
  * using this original eight-bank ordering. C-video interleaves four planes;

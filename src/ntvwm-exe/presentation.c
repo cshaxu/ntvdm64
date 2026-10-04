@@ -12,8 +12,9 @@ struct ntvwm_presentation {
     CRITICAL_SECTION lock;
     CHAR_INFO *published_cells;
     DWORD published_count,published_width;
-    BYTE *published_frame;
-    console_video_description published_description;
+    /* Native producer's last observed screen, not a transport filter. */
+    console_video_description captured_description;
+    BYTE *captured_payload;
     CONSOLE_SCREEN_BUFFER_INFOEX published_screen;
     CONSOLE_CURSOR_INFO published_cursor;
     console_text_style handoff_font;
@@ -45,7 +46,7 @@ void ntvwm_presentation_close(ntvwm_presentation *client)
 {
     if(!client)return;
     if(client->published_cells)HeapFree(GetProcessHeap(),0,client->published_cells);
-    if(client->published_frame)HeapFree(GetProcessHeap(),0,client->published_frame);
+    if(client->captured_payload)HeapFree(GetProcessHeap(),0,client->captured_payload);
     ntcon_worker_client_dispose(&client->channel);DeleteCriticalSection(&client->lock);
     HeapFree(GetProcessHeap(),0,client);
 }
@@ -178,17 +179,19 @@ DWORD ntvwm_presentation_capture(ntvwm_presentation *client,const console_text_s
     /* Polling the native Console need not repaint the host Console. Include
      * the full Unicode grid and the composed frame: cursor, font, palette and
      * mouse-only changes remain observable even with unchanged characters.
-     * Cache only acknowledged publications; a new endpoint has no cache. */
-    if(client->published_frame && client->published_count==total &&
+     * A sample is not an update. Explicit presentation_text calls below this
+     * producer remain unfiltered, including repeated identical frames. */
+    if(client->captured_payload &&
+        !memcmp(&client->captured_description,&description,sizeof(description)) &&
+        !memcmp(client->captured_payload,payload,description.bytes) &&
+        client->published_count==total &&
         client->published_width==(DWORD)capture.info.dwSize.X &&
         client->published_screen.wAttributes==capture.info.wAttributes &&
         client->published_cursor.dwSize==capture.cursor.dwSize &&
         client->published_cursor.bVisible==capture.cursor.bVisible &&
         !memcmp(&client->published_screen.srWindow,&capture.info.srWindow,sizeof(SMALL_RECT)) &&
         !memcmp(&client->published_screen.dwCursorPosition,&capture.info.dwCursorPosition,sizeof(COORD)) &&
-        !memcmp(client->published_cells,cells,(SIZE_T)total*sizeof(*cells)) &&
-        !memcmp(&client->published_description,&description,sizeof(description)) &&
-        !memcmp(client->published_frame,payload,description.bytes))goto captured_done;
+        !memcmp(client->published_cells,cells,(SIZE_T)total*sizeof(*cells)))goto captured_done;
     ZeroMemory(&request,sizeof(request));request.operation=CONSOLE_IO_PUBLICATION_BEGIN;
     error=exchange(client,&request,&reply);
     if(error)goto captured_done;
@@ -223,6 +226,9 @@ DWORD ntvwm_presentation_capture(ntvwm_presentation *client,const console_text_s
         ZeroMemory(&request,sizeof(request));
         count=min((DWORD)capture.info.dwSize.X-offset%capture.info.dwSize.X,
             CONSOLE_IO_DATA_BYTES/sizeof(console_io_cell));
+        /* A sampled cursor/font change is not a write to every Console row.
+         * Derive dirty rows at this native producer, like VGA calc_update;
+         * explicit exchange/text publications remain completely unfiltered. */
         if(client->published_count==total && client->published_width==(DWORD)capture.info.dwSize.X &&
             !memcmp(client->published_cells+offset,cells+offset,count*sizeof(*cells)))continue;
         request.operation=CONSOLE_IO_WRITE_CELLS_W;
@@ -262,13 +268,14 @@ DWORD ntvwm_presentation_capture(ntvwm_presentation *client,const console_text_s
     }
     if(client->published_cells)HeapFree(GetProcessHeap(),0,client->published_cells);
     client->published_cells=NULL;client->published_count=0;
-    if(client->published_frame)HeapFree(GetProcessHeap(),0,client->published_frame);
-    client->published_frame=NULL;
+    if(client->captured_payload)HeapFree(GetProcessHeap(),0,client->captured_payload);
+    client->captured_payload=NULL;
     if(!error) {
         client->published_cells=cells;cells=NULL;client->published_count=total;
         client->published_width=(DWORD)capture.info.dwSize.X;
-        client->published_frame=payload;payload=NULL;
-        client->published_description=description;client->published_screen=capture.info;
+        client->captured_description=description;
+        client->captured_payload=payload;payload=NULL;
+        client->published_screen=capture.info;
         client->published_cursor=capture.cursor;
     }
 captured_done:

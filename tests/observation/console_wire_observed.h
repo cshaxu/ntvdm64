@@ -14,16 +14,16 @@ static __declspec(thread) observed_console_pending observed_console_io;
 static void observed_console_log(const char *phase,HANDLE pipe,BOOL write,
     const void *buffer,DWORD requested,DWORD done,DWORD error)
 {
-    DWORD saved=GetLastError(),length,written,words[6]={0};
+    DWORD saved=GetLastError(),length,written,words[8]={0};
     char prefix[MAX_PATH],path[MAX_PATH],line[256];HANDLE file;
     length=GetEnvironmentVariableA("MVDM_TEST_CONSOLE_WIRE_PATH",prefix,sizeof(prefix));
     if(!length || length>=sizeof(prefix))goto end;
     if(sprintf_s(path,sizeof(path),"%s-%lu.log",prefix,GetCurrentProcessId())<0)goto end;
     if(buffer && (write ? requested : done)>=sizeof(words))memcpy(words,buffer,sizeof(words));
     length=(DWORD)sprintf_s(line,sizeof(line),
-        "%llu tid=%lu %s pipe=%p %s requested=%lu done=%lu error=%lu words=%08lx,%08lx,%08lx,%08lx,%08lx,%08lx\r\n",
+        "%llu tid=%lu %s pipe=%p %s requested=%lu done=%lu error=%lu words=%08lx,%08lx,%08lx,%08lx,%08lx,%08lx,%08lx,%08lx\r\n",
         GetTickCount64(),GetCurrentThreadId(),phase,pipe,write ? "write":"read",
-        requested,done,error,words[0],words[1],words[2],words[3],words[4],words[5]);
+        requested,done,error,words[0],words[1],words[2],words[3],words[4],words[5],words[6],words[7]);
     if(!length || length>=sizeof(line))goto end;
     file=CreateFileA(path,FILE_APPEND_DATA,FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_ALWAYS,0,NULL);
     if(file!=INVALID_HANDLE_VALUE){WriteFile(file,line,length,&written,NULL);CloseHandle(file);}

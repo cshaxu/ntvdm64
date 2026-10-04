@@ -5469,12 +5469,13 @@ LOCAL void cursor_undisplay IFN0()
 
 
 
-/* DIVERGENCE(MVDM-HOST-DIV-318): execution-owner refresh pairs draw/undraw
-   across route changes, including stationary pointers without an IRQ. */
-GLOBAL void mouse_refresh_pointer IFN0()
+/* DIVERGENCE(MVDM-HOST-DIV-318): CPU-owner route edges reuse the original
+   drawing operations without fabricating movement or guest callbacks. */
+GLOBAL void mouse_pointer_route_changed IFN1(int,active)
 {
-    cursor_undisplay();
-    if (cursor_flag == MOUSE_CURSOR_DISPLAYED) cursor_display();
+    if (active) cursor_update();
+    if (active && cursor_flag == MOUSE_CURSOR_DISPLAYED) cursor_display();
+    if (!active) cursor_undisplay();
 }
 
 LOCAL void cursor_mode_change IFN1(int,new_mode)

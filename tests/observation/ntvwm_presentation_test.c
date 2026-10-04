@@ -14,7 +14,7 @@ typedef struct peer_state {
     unsigned activations,releases;
     unsigned snapshot_begins,snapshot_ends,screen_reads;
     unsigned publication_begins,publication_ends,publication_aborts;
-    unsigned titles;
+    unsigned titles,cell_writes;
     console_io_state screen;
     run16_console_video video;
     console_io_input returned[2*CONSOLE_IO_INPUT_CAPACITY+3];
@@ -41,6 +41,7 @@ static DWORD WINAPI peer(void *context)
             request.generation!=17 || request.sequence!=++sequence)return ERROR_INVALID_DATA;
         if(!transfer(state->pipe,FALSE,request.data,request.bytes))return ERROR_BROKEN_PIPE;
         ++state->calls;
+        if(request.operation==CONSOLE_IO_WRITE_CELLS_W)++state->cell_writes;
         /* The sender must never acquire the frontend implicitly. */
         if(request.operation==CONSOLE_IO_ACTIVATE)return ERROR_INVALID_FUNCTION;
         if(state->mode==0 || (state->mode==6 && sequence<=5)) {
@@ -363,6 +364,13 @@ static void run_case(unsigned mode)
         memset(payload+sizeof(*style),'A',4000);
         CHECK(ntvwm_presentation_text(endpoint,&description,payload,description.bytes)==0);
         CHECK(ntvwm_presentation_call(endpoint,&request,&reply)==0);
+        if(mode==6) {
+            unsigned calls=state.calls;
+            /* Sampling decides whether to generate an update. Explicit
+             * worker frame sends must never be filtered by the transport. */
+            CHECK(ntvwm_presentation_text(endpoint,&description,payload,description.bytes)==0);
+            CHECK(state.calls==calls+3);
+        }
         description.kind=CONSOLE_VIDEO_DIB;
         CHECK(ntvwm_presentation_text(endpoint,&description,payload,description.bytes)==ERROR_INVALID_PARAMETER);
         description.kind=CONSOLE_VIDEO_TEXT_FRAME;
@@ -403,6 +411,7 @@ static void run_case(unsigned mode)
                 {
                     unsigned calls=state.calls;
                     unsigned publications=state.publication_begins;
+                    unsigned writes=state.cell_writes;
                     /* A real unchanged Console capture must not emit another
                      * publication and thereby repaint the visible Console. */
                     CHECK(ntvwm_presentation_capture(endpoint,style)==0);
@@ -412,17 +421,21 @@ static void run_case(unsigned mode)
                     CHECK(!ntvwm_presentation_capture(endpoint,style));
                     CHECK(state.publication_begins==publications+1);
                     CHECK(((console_text_style *)state.video.pixels)->cursor_column==4);
+                    CHECK(state.cell_writes==writes);
                     calls=state.calls;
                     CHECK(!ntvwm_presentation_capture(endpoint,style));
                     CHECK(state.calls==calls);
                     CHECK(SetConsoleCursorPosition(buffer,position));
                     CHECK(!ntvwm_presentation_capture(endpoint,style));
+                    CHECK(state.cell_writes==writes);
                     CHECK(WriteConsoleOutputCharacterW(buffer,L"Q",1,origin,&written) && written==1);
                     CHECK(!ntvwm_presentation_capture(endpoint,style));
                     CHECK(state.video.pixels[sizeof(console_text_style)]=='Q');
+                    CHECK(state.cell_writes>writes);writes=state.cell_writes;
                     calls=state.calls;
                     CHECK(!ntvwm_presentation_capture(endpoint,style));
                     CHECK(state.calls==calls);
+                    CHECK(state.cell_writes==writes);
                     CHECK(WriteConsoleOutputCharacterW(buffer,L"Z",1,origin,&written) && written==1);
                     CHECK(!ntvwm_presentation_capture(endpoint,style));
                 }
@@ -458,7 +471,7 @@ done:
         if(mode==6)CHECK(state.screen.width<=80 && state.screen.height<=25 &&
             state.screen.right<state.screen.width && state.screen.bottom<state.screen.height);
         if(mode==6)CHECK(state.titles==1);
-        CHECK(state.video.published_serial==(mode==6 ? 6u : 1u) && state.video.description.kind==CONSOLE_VIDEO_TEXT_FRAME);
+        CHECK(state.video.published_serial==(mode==6 ? 7u : 1u) && state.video.description.kind==CONSOLE_VIDEO_TEXT_FRAME);
         CHECK(state.video.pixels && state.video.pixels[sizeof(console_text_style)]==(mode==6 ? 'Z' : 'A'));
         if(mode==6 && state.video.pixels) {
             const console_text_style *style=(const console_text_style *)state.video.pixels;

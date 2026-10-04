@@ -16,5 +16,7 @@ typedef struct mvdm_softpc_text_video {
 } mvdm_softpc_text_video;
 
 int mvdm_softpc_text_video_copy(mvdm_softpc_text_video *copy);
+/* Original video owner only; existing frontend policy, no hardware switch. */
+int mvdm_softpc_text_video_sync_route(void);
 
 #endif

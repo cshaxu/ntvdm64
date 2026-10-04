@@ -11,8 +11,10 @@ same NTVDM-shaped contract. Similar names alone do not justify consolidation.
 Baseline: [T424 closure](../../history/m0-t424-component-control-closure.md),
 ff50ff588, S12 46abdb554 and its eight-file release. CURRENT alone owns active
 admission. No new executable/helper, scheduler, observation graph, lifecycle
-policy, polling cleanup, guest/mirror/imported-library edit or worker font/
-extent repair is admitted. T closure requires owner acceptance.
+policy, polling cleanup, guest/imported-library edit or worker font/extent
+repair is admitted. The later owner-approved S8 exception permits registered
+project adaptation hooks inside MVDM (DIV-314/318/322), not replacement of
+original guest/device/painter algorithms. T closure requires owner acceptance.
 
 ## Ordered stages
 
@@ -25,6 +27,51 @@ extent repair is admitted. T closure requires owner acceptance.
 | S5 | Owner follow-up: clean misleading DOS-specific names in the shared format decoder and actual callers/tests; preserve TEXT_FRAME/TEXT_CONFIGURATION/DIB processing and all runtime gates. Stop for owner T verification after delivery. |
 | S6 | Owner-approved broker-controlled handoff repair: NTSRV owns associations and connection/takeover/release authorization; NTCON has zero or one physical I/O pipe, no pending-owner list. Close and acknowledge the old pipe before granting the next. Preserve original DOS block/resume/reentry; use the same worker-facing contract for NTVWM. |
 | S7 | Owner follow-up: suppress unchanged native publication to preserve host cursor blink, and share the finite local character-start gate while WOW/native GUI skip it. Preserve original classifiers and execution; retained full package gates and publication apply. |
+| S8 | Owner-superseded dedup proposal: unfiltered explicit frames, correct producer notifications, software VGA FULLSCREEN and natural mouse draw/erase at route edges. Preserve original algorithms, hardware exclusions, final-paint barriers and lifecycle gates. |
+| S9 | Owner-approved test audit, simplification and throughput improvement: parallelize isolated checks, remove proved redundant/useless tests, and replace real ten-second policy waits with deterministic clock/event tests while preserving behavior coverage. |
+
+## S9 test audit, simplification and throughput
+
+Owner approval dated 2026-10-03 schedules S9 after S8 delivery. S8 remains the
+sole active implementation packet until sequential admission in CURRENT.
+This bounded follow-up permits test/fixture and verification-gate improvements,
+not a new runtime component, production lifecycle policy or polling cleanup.
+
+- Inventory each test's asserted contract, production path, dependencies,
+  elapsed time and wait budget. Identify duplicated scenarios, repeated package
+  setup/builds, unconditional grace periods and tests without useful assertions.
+- Remove obsolete, assertion-free or redundant tests only with an explicit
+  retained-coverage mapping. Preserve meaningful negative, handoff, completion,
+  disconnect, independent-session and prior guest-frontier assertions; a slow
+  test is not automatically a useless test.
+- Run independent units and isolated fixtures concurrently with bounded
+  concurrency. Group tests sharing the global BaseSrv endpoint or runtime
+  package serially inside that group; parallelize other groups, not competing
+  owners of the same endpoint. Do not add runtime brokers/helpers for tests.
+- Stop spending ten real seconds repeatedly proving a ten-second retirement
+  deadline. Use a controlled clock/deadline input at the existing policy owner
+  and explicit events to test before/at expiry, new-work cancellation, rearming
+  and cleanup. Keep the production ten-second policy unchanged. Retain focused
+  real-process acknowledgement/wiring tests without waiting out the policy
+  duration; do not substitute shortened production deadlines or sleeps.
+- Replace test-only fixed delays with ready/completion/stop acknowledgements
+  and bounded failure timeouts. Clean up fixture-owned resources explicitly
+  instead of waiting for normal idle retirement between scenarios. Timeout
+  itself is never a passing marker; do not disturb unrelated owner sessions.
+- Consolidate test entrypoints and shared setup, reuse build inputs only by
+  proved source/toolchain identity, and select focused gates by affected
+  contracts. Review the retained full-product gates for actual incremental
+  coverage instead of rerunning overlapping suites mechanically. Any gate
+  change must be documented with equivalent coverage, not silently waived.
+- Record before/after wall-clock time, per-suite timings, parallel groups,
+  removed-test dispositions and retained assertions. Repeat the optimized
+  schedule to prove stable isolation and handle/process cleanup. S9 closes
+  only with a measured reduction in test wait time, no real ten-second policy
+  waits as routine tests, and no weakening of product/non-regression evidence.
+
+S9 implementation must update the applicable execution guidance and its own
+evidence to match the verified schedule. This planning approval does not claim
+the optimization is implemented or change the currently admitted S8 gates.
 
 ## S6 connection ownership and implementation boundary
 
@@ -124,6 +171,18 @@ identity; new outputs only under declared build/M0-T425/S<n>/r<nnn> run roots.
   The [S7 ledger](../evidence/m0-t425-s7-idle-cursor-gui-startup.md) records
   focused evidence, retained package gates, coherent publication and reviewed
   P delivery, including the attributed original guest environment limitation.
+- [x] S8 owner supersedes suppression: remove shared frame-cache and frontend
+  cursor no-op filters; explicit worker events remain unfiltered. Repair
+  project-added producer notifications instead of hiding identical events.
+  Admit registered DIV-314/318/322 software VGA FULLSCREEN integration without
+  changing original device/painter algorithms or hardware exclusions. Connect
+  natural mouse route draw/erase before retiring tick compensation; preserve
+  native Unicode change detection and all handoff/failure assertions. The
+  [S8 ledger](../evidence/m0-t425-s8-worker-frame-deduplication.md) records actual
+  frames, source attribution, retained failures and final release gates.
+- [ ] S9 test audit and throughput improvement: coverage-mapped pruning,
+  isolated parallel scheduling, deterministic deadline tests and measured
+  before/after time reduction without weakening runtime assertions.
 - [ ] Owner verification and acceptance before T closure.
 
 ## RDP boundary

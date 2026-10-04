@@ -320,11 +320,9 @@ DWORD run16_native_frontend_project_text(run16_native_frontend *frontend)
     if(cursor.X<0 || cursor.Y<0 || cursor.X>=width || cursor.Y>=height)shape.bVisible=FALSE;
     else {
         cursor.X+=visible.srWindow.Left;cursor.Y+=visible.srWindow.Top;
-        if((cursor.X!=visible.dwCursorPosition.X || cursor.Y!=visible.dwCursorPosition.Y) &&
-            !SetConsoleCursorPosition(frontend->console_output,cursor))return GetLastError();
+        if(!SetConsoleCursorPosition(frontend->console_output,cursor))return GetLastError();
     }
-    if((shape.dwSize!=visible_shape.dwSize || shape.bVisible!=visible_shape.bVisible) &&
-        !SetConsoleCursorInfo(frontend->console_output,&shape))return GetLastError();
+    if(!SetConsoleCursorInfo(frontend->console_output,&shape))return GetLastError();
     return ERROR_SUCCESS;
 }
 /* Copied frontend transport records, serialized by io_lock. Windows still

@@ -147,9 +147,12 @@ host_reset()
 #ifdef	HUNTER
     IDLE_ctl(FALSE);	/* makes Trapper too slow */
 #else	/* ! ( HUNTER ) */
+#ifdef X86GFX
+    /* DIVERGENCE(MVDM-HOST-DIV-322): software VGA changes remain observable. */
     if (sc.ScreenState == FULLSCREEN)	// initialised in ConsoleInit()
 	IDLE_ctl(FALSE);
     else
+#endif
 	IDLE_ctl(TRUE);		// can't idle detect fullscreen
 
     host_idle_init();		// host sleep event creation

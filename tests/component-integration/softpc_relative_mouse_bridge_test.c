@@ -75,12 +75,12 @@ int main(void)
     /* Full-queue failure cannot change producer ownership or remainder. */
     for(i=0;i<MVDM_MOUSE_INPUT_CAPACITY;++i) {
         assert(mvdm_softpc_mouse_capacity(&s)==MVDM_MOUSE_INPUT_CAPACITY-i && !locked);
-        submit(&s,CONSOLE_MOUSE_MOVE,0,1,0,640,400,ERROR_SUCCESS);
+        submit(&s,CONSOLE_MOUSE_MOVE,0,1,i&1,640,400,ERROR_SUCCESS);
     }
     assert(!mvdm_softpc_mouse_capacity(&s) && !locked);
     submit(&s,CONSOLE_MOUSE_LEAVE,0,0,0,0,0,ERROR_BUFFER_OVERFLOW);
     for(i=0;i<MVDM_MOUSE_INPUT_CAPACITY;++i)
-        take(&s,CONSOLE_MOUSE_MOVE,0,(int)(i&1),0);
+        take(&s,CONSOLE_MOUSE_MOVE,0,(int)(i&1),i&1);
     submit(&s,CONSOLE_MOUSE_LEAVE,0,0,0,0,0,ERROR_SUCCESS);
     take(&s,CONSOLE_MOUSE_LEAVE,0,0,0);mvdm_softpc_mouse_leave(&s);
     assert(!mvdm_softpc_mouse_next(&s,&out));

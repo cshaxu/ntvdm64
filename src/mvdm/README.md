@@ -1,5 +1,21 @@
 # mvdm
 
+MVDM-HOST-DIV-322 (T425 S8): CCPU Window presentation uses software
+FULLSCREEN without enabling X86GFX/MONITOR or hardware BIOS/regen mapping.
+The existing ntvdm-exe/softpc/mvdm_softpc_text_video.c adapter samples frontend
+policy on the original video owner and requests the original stream transition.
+nt_fulsc.c retains software VGA mode, font and CRTC initialization in both
+routes; nt_graph.c retains software backing and defers IRQ-triggered extraction
+to the existing video tick, while guest cursor changes publish independently.
+nt_event.c extracts and acknowledges final software text/cursor before release;
+hardware desktop transitions stay excluded. nt_reset.c retains software idle
+detection. Original VGA/painter/mouse algorithms remain at their owners; route
+ENTER/LEAVE and CPU-owner handoff now call the original draw/undraw boundary;
+the per-tick mouse_refresh_pointer compensation is removed from the current
+implementation. Natural-path tests and final r046/r045 release identity are
+tracked in the [S8 ledger](../../docs/etc/evidence/m0-t425-s8-worker-frame-deduplication.md).
+The earlier r040 package remains recovery and owner-accepted performance evidence.
+
 MVDM-HOST-DIV-321: `softpc.new/base/keymouse/keyba.c::Reset6805and8042`
 retains the original 6805/8042 reset and delegates only stale host keyboard
 IRQ retirement to `ntvdm-exe/softpc/mvdm_keyboard_reset.c`. The original
@@ -21,7 +37,7 @@ The companion
 ReadConsoleInputExW binding no longer clamps consuming reads to one record.
 See the [S11 ledger](../../docs/etc/evidence/m0-t423-s11-interaction-retirement.md).
 
-MVDM-HOST-DIV-318 (S7 candidate, not delivered): original `nt_event.c`
+MVDM-HOST-DIV-318 (retained mouse integration, T425 S8 route repair): original `nt_event.c`
 dispatches copied Window-relative mouse records through the worker-owned
 bridge; its existing EOI/pending and cancellation boundaries include that
 queue. `nt_mouse.c` retains original absolute input as fallback and delegates
@@ -31,11 +47,15 @@ The attempted MONITOR/X86GFX cursor hooks were removed after final-link and
 source review disproved their availability in this CCPU40 composition.
 The reviewed 286d54a3 reference's non-MONITOR `mouse_io.c` software cursor
 count, shape/hotspot, geometry, draw/erase and saved-background paths are now
-selected in the candidate. `nt_graph.c` refreshes that original cursor owner;
-an ICA-protected worker route snapshot replaces the old presentation binding.
+selected in the candidate. S8 replaces periodic route refresh with consumed
+ENTER/LEAVE and original CPU-owner block edges calling a three-statement
+mouse_pointer_route_changed wrapper over original cursor_update/display/undisplay.
+No synthetic motion or callback mask is produced for a stationary route edge.
+An ICA-protected worker route snapshot replaces the old presentation binding.
 Real guest cursor count, text/graphics draw/erase and reset/position/input
-integration pass in the S7 candidate; publication and P delivery remain open.
-No hardware FULLSCREEN state is fabricated and no shared library changes.
+integration retain their S7 evidence; S8 additionally tests actual transmitted
+stationary ENTER/LEAVE frames and original CRTC-only changes. Software
+FULLSCREEN is separate from excluded hardware takeover; no shared library changes.
 Frontend/native handoff, real guest callbacks and Console mouse regression pass;
 see the [S7 ledger](../../docs/etc/evidence/m0-t423-s7-window-mouse.md).
 
@@ -80,10 +100,15 @@ authenticated channel. STREAM_IO asks only whether frontend policy requires
 text frames, then uses original `disable_stream_io`; no new mode transition,
 guest decoder, font loader or worker UI is introduced. Original update,
 palette resolution, cursor batching and error reporting retain their owner.
+The added publication trigger follows original `nt_start_update`, not mere
+return from `calc_update`: an idle dirty check does not publish a full frame.
+Its notification survives between ticks and is consumed on the video owner.
+Software-fullscreen mouse flushes leave VGA dirt for the existing video tick;
+they do not execute synchronous copied-frame transport in the guest IRQ.
 S12 also copies the resolved text configuration after the original periodic
 stream flush, without requesting video mode. This lets NTVWM inherit the
-current fonts/palette without changing the DOS stream/cursor path; the adapter
-deduplicates configuration messages. See the
+current fonts/palette without changing the DOS stream/cursor path. Explicit
+configuration and frame messages are no longer filtered by the adapter. See the
 [S12 ledger](../../docs/etc/evidence/m0-t423-s12-ntw32-backend.md).
 The bounded copy/packing is in `ntvdm-exe/{softpc,win32}`; frontend owns all
 rendering. Source recovery, tests and pending real-guest gates are recorded

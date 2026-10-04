@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T425 S8 producer triggers and software VGA](evidence/m0-t425-s8-worker-frame-deduplication.md) | M0 T425 S8 | Superseded dedup proposal, unfiltered transport, software fullscreen, natural mouse routes, retained failures and release status. | Retain through T425 acceptance. |
 | [T425 S7 idle cursor and GUI startup](evidence/m0-t425-s7-idle-cursor-gui-startup.md) | M0 T425 S7 | Idle publication reproduction, shared local startup gate, source audit and actual verification status. | Retain through T425 acceptance. |
 | [T425 S6 broker I/O ownership](evidence/m0-t425-s6-broker-io-ownership.md) | M0 T425 S6 | Delivered broker-only association and single I/O connection, retained gates and coherent publication/recovery. | Retain through T425 acceptance. |
 | [T425 S5 format-decoder names](evidence/m0-t425-s5-format-decoder-names.md) | M0 T425 S5 | Format-only dispatch audit, neutral decoder names, actual build/test and delivery status. | Retain through T425 acceptance. |

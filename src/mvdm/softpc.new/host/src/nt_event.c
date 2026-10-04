@@ -88,6 +88,10 @@ extern unsigned PendingKeyboardHistory(void);
 /* DIVERGENCE(MVDM-HOST-DIV-313): acknowledge the original input handoff at
  * the root-owned Console, without moving its block/resume policy here. */
 extern BOOL ntvdm_console_set_active(BOOL active);
+/* DIVERGENCE(MVDM-HOST-DIV-322): final software text before ownership release. */
+#include "ntvdm-exe/win32/console_text.h"
+/* DIVERGENCE(MVDM-HOST-DIV-318): CPU-owner retirement restores mouse backing. */
+extern void mouse_pointer_route_changed(int);
 /*================================================================
 External references.
 ================================================================*/
@@ -1459,13 +1463,19 @@ BOOL CntrlHandler(ULONG CtrlType)
 
         /*::::::::::::::::::::::::::::::::: Flush screen output, reset console */
 
+        /* DIVERGENCE(MVDM-HOST-DIV-318): restore the original saved background
+           before final paint; blocked input need not consume a queued LEAVE. */
+        mouse_pointer_route_changed(FALSE);
 
 	if (sc.ScreenState == STREAM_IO)
 	    {
 	    stream_io_update();
 	    }
 	else {
-	    if (sc.ScreenState != FULLSCREEN) {
+#ifdef X86GFX
+            if (sc.ScreenState != FULLSCREEN)
+#endif
+            { /* DIVERGENCE(MVDM-HOST-DIV-322): always extract software VGA. */
                 /* DIVERGENCE(MVDM-HOST-DIV-311): this stopped-guest
                  * handoff must finish the original pending mode selection
                  * before its final paint. Advance only the bounded video
@@ -1474,6 +1484,10 @@ BOOL CntrlHandler(ULONG CtrlType)
                     host_graphics_tick();
 		(*update_alg.calc_update)();
             }
+            /* DIVERGENCE(MVDM-HOST-DIV-322): acknowledge final cells and VGA
+               cursor before ResetConsoleState and ownership release. */
+            if (sc.ModeType == TEXT && !NtvdmConsoleUpdateText(sc.ColPalette))
+                DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
 	    // Put Console back the way it was when we started up
 	    ResetConsoleState();
 
@@ -1487,10 +1501,13 @@ BOOL CntrlHandler(ULONG CtrlType)
 
 	    /* If keeping window open when exiting and fullscreen, return to desktop */
 	    /* Transition made simple as VDM de-registered from console */
-	    if (BlockFlags == 1 && sc.ScreenState == FULLSCREEN)
+#ifdef X86GFX
+            /* DIVERGENCE(MVDM-HOST-DIV-322): not a hardware desktop switch. */
+            if (BlockFlags == 1 && sc.ScreenState == FULLSCREEN)
 	    {
 		SetConsoleDisplayMode(sc.OutputHandle, CONSOLE_WINDOWED_MODE, &scrSize);
 	    }
+#endif
 	}
 
         // Turn off PIF Reserved & ShortCut Keys

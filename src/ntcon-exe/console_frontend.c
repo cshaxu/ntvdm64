@@ -345,19 +345,13 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
         break;
     }
     case CONSOLE_IO_CURSOR_POSITION: {
-        CONSOLE_SCREEN_BUFFER_INFO current;
-        ok=GetConsoleScreenBufferInfo(owner->output,&current);
-        if(ok && (current.dwCursorPosition.X!=position.X ||
-            current.dwCursorPosition.Y!=position.Y))
-            ok=SetConsoleCursorPosition(owner->output,position);
+        ok=SetConsoleCursorPosition(owner->output,position);
         break;
     }
     case CONSOLE_IO_CURSOR_INFO: {
-        CONSOLE_CURSOR_INFO cursor,current;
+        CONSOLE_CURSOR_INFO cursor;
         cursor.dwSize=s->cursor_size; cursor.bVisible=s->cursor_visible;
-        ok=GetConsoleCursorInfo(owner->output,&current);
-        if(ok && (current.dwSize!=cursor.dwSize || current.bVisible!=cursor.bVisible))
-            ok=SetConsoleCursorInfo(owner->output,&cursor);
+        ok=SetConsoleCursorInfo(owner->output,&cursor);
         break;
     }
     case CONSOLE_IO_GET_CURSOR_INFO: {

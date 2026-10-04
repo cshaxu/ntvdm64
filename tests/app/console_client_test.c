@@ -849,6 +849,64 @@ int main(int argc,char **argv)
         puts("PASS copied text over worker/frontend IPC: 80x50 dual font, malformed retention, 43-row replacement and retirement");
         fflush(stdout);
     }
+    {
+        console_video_description description={80,25,160,0,0,{0},CONSOLE_VIDEO_TEXT_FRAME};
+        BYTE *payload;
+        console_text_style *style;
+        DWORD sequence,serial,index;
+        description.bytes=sizeof(*style)+description.stride*description.height;
+        payload=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,description.bytes);CHECK(payload);
+        style=(console_text_style *)payload;style->font_height=16;
+        CHECK(ntvdm_console_publish_video(&description,payload,description.bytes));
+        sequence=frontend.sequence;serial=frontend.video.serial;
+        for(index=0;index<100;++index)
+            CHECK(ntvdm_console_publish_video(&description,payload,description.bytes));
+        CHECK(frontend.sequence>sequence && frontend.video.serial==serial+100);
+        serial=frontend.video.serial;
+        style->cursor_visible=1;style->cursor_column=1;
+        CHECK(ntvdm_console_publish_video(&description,payload,description.bytes));
+        CHECK(frontend.video.serial==++serial);
+        style->fonts[0][65][0]=0x81;
+        CHECK(ntvdm_console_publish_video(&description,payload,description.bytes));
+        CHECK(frontend.video.serial==++serial);
+        description.palette[1]=0x123456;
+        CHECK(ntvdm_console_publish_video(&description,payload,description.bytes));
+        CHECK(frontend.video.serial==++serial);
+        payload[description.bytes-2]=65;
+        CHECK(ntvdm_console_publish_video(&description,payload,description.bytes));
+        CHECK(frontend.video.serial==++serial);
+        CHECK(SetConsoleCursorPosition(local,(COORD){1,0}));
+        CHECK(ntvdm_console_publish_video(&description,payload,description.bytes));
+        CHECK(frontend.video.serial==++serial);
+        CHECK(SetConsoleCursorPosition(local,(COORD){2,0}));
+        CHECK(ntvdm_console_publish_video(&description,payload,description.bytes));
+        CHECK(frontend.video.serial==++serial);
+        /* A delta replaces the frame's logical contents. The same guest frame
+         * must be sent again, not incorrectly suppressed by the old cache. */
+        CHECK(FillConsoleOutputCharacterA(local,'X',1,(COORD){0,0},&count));
+        CHECK(ntvdm_console_publish_video(&description,payload,description.bytes));
+        CHECK(frontend.video.serial==++serial);
+        CHECK(ntvdm_console_set_active(FALSE));
+        /* Production retires the channel-local decoder with the old pipe. */
+        run16_console_video_dispose(&frontend.video);serial=0;
+        CHECK(ntvdm_console_set_active(TRUE));
+        CHECK(ntvdm_console_publish_video(&description,payload,description.bytes));
+        CHECK(frontend.video.serial==++serial);
+        CHECK(ntvdm_console_publish_video(NULL,NULL,0));
+        CHECK(ntvdm_console_publish_video(&description,payload,description.bytes));
+        CHECK(frontend.video.serial==serial+2);
+        serial=frontend.video.serial;
+        style->font_height=33;
+        CHECK(!ntvdm_console_publish_video(&description,payload,description.bytes) &&
+            GetLastError()==ERROR_INVALID_DATA);
+        CHECK(frontend.video.published_serial==serial);
+        style->font_height=16;
+        CHECK(ntvdm_console_publish_video(&description,payload,description.bytes));
+        CHECK(frontend.video.published_serial==serial+2);
+        HeapFree(GetProcessHeap(),0,payload);
+        puts("PASS DOS repeated frames forwarded, cursor/font/palette/cell changes, reconnect and retirement");
+        fflush(stdout);
+    }
     SetEvent(stop);
     CHECK(TerminateProcess(frontend_process,23));
     CHECK(WaitForSingleObject(frontend_process,5000)==WAIT_OBJECT_0);

@@ -200,8 +200,11 @@ GLOBAL VOID nt_init_event_thread(VOID)
 	setVDMCursorPosition((UTINY)StartupCharHeight,
 					&ConsBufferInfo.dwCursorPosition);
                       
-	if (sc.ScreenState == WINDOWED)
-		enableUpdates();
+#ifdef X86GFX
+        /* DIVERGENCE(MVDM-HOST-DIV-322): CCPU updates in both routes. */
+        if (sc.ScreenState == WINDOWED)
+#endif
+            enableUpdates();
     }
     else
 	enableUpdates();
@@ -533,7 +536,10 @@ GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )
 	ErrorExit();
 
     /* Now sync the SoftPC screen to the console. */
+#ifdef X86GFX
+    /* DIVERGENCE(MVDM-HOST-DIV-322): software fullscreen uses this VGA body. */
     if (sc.ScreenState == WINDOWED)
+#endif
     {
 	consoleWidth = ConsBufferInfo.srWindow.Right -
 		       ConsBufferInfo.srWindow.Left + 1;
@@ -592,7 +598,10 @@ GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )
 	charHeight = 8;
     }
 
+#ifdef X86GFX
+    /* DIVERGENCE(MVDM-HOST-DIV-322): retain CCPU scan/font/BIOS configuration. */
     if (sc.ScreenState == WINDOWED)
+#endif
     {
         /* The app may have shutdown in a gfx mode - force text mode back */
         if (blocked_in_gfx_mode)
@@ -1994,7 +2003,10 @@ VOID setVDMCursorPosition(UTINY height, PCOORD cursorPos)
 	cursorStart--;
     cursorEnd = height - 1;
 
+#ifdef X86GFX
+    /* DIVERGENCE(MVDM-HOST-DIV-322): simulated CRTC still owns the cursor. */
     if (sc.ScreenState == WINDOWED)
+#endif
     {
 
 	/* Pass cursor size to video ports. */
@@ -2018,7 +2030,10 @@ VOID setVDMCursorPosition(UTINY height, PCOORD cursorPos)
     pageOffset = cursorPos->Y * colsOnScreen * 2 + (cursorPos->X << 1);
     cursorWord = (currentPage * videoLen + pageOffset) / 2;
 
+#ifdef X86GFX
+    /* DIVERGENCE(MVDM-HOST-DIV-322): software fullscreen has emulated ports. */
     if (sc.ScreenState == WINDOWED)
+#endif
     {
 
 	/* Send cursor position to video ports. */
@@ -2032,7 +2047,10 @@ VOID setVDMCursorPosition(UTINY height, PCOORD cursorPos)
     sas_storew_no_check(VID_CURPOS + (currentPage * 2),
 			(word) ((cursorPos->Y << 8) | (cursorPos->X & 0xff)));
 
+#ifdef X86GFX
+    /* DIVERGENCE(MVDM-HOST-DIV-322): notify the software cursor owner. */
     if (sc.ScreenState == WINDOWED)
+#endif
     {
 #ifdef MONITOR
         resetNowCur();        /* reset static vars holding cursor pos. */
@@ -2418,8 +2436,11 @@ void host_disable_stream_io(void)
     setVDMCursorPosition((UTINY)StartupCharHeight,
 				&ConsBufferInfo.dwCursorPosition);
 
+#ifdef X86GFX
+    /* DIVERGENCE(MVDM-HOST-DIV-322): stream-to-software-VGA keeps updates. */
     if (sc.ScreenState == WINDOWED)
-	enableUpdates();
+#endif
+        enableUpdates();
 
     MouseAttachMenuItem(sc.ActiveOutputBufferHandle);
     host_stream_io_enabled = FALSE;

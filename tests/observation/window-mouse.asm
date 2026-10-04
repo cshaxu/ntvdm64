@@ -6,8 +6,25 @@ org 100h
 %ifndef MOUSE_WAIT_TICKS
 %define MOUSE_WAIT_TICKS 180
 %endif
+%ifdef MOUSE_TEXT_MODE
+    mov ax, 3
+    int 10h
+    mov dx, ready
+    mov ah, 9
+    int 21h
+.key:
+    xor ah, ah
+    int 16h
+    or al, 20h
+    cmp al, 't'
+    jne .key
+    ; Already in text mode. Do not reset its geometry after the observer has
+    ; selected the Window for the pressure hook. Mode transitions are covered
+    ; separately by MCVIDEO; this probe asserts input on one live surface.
+%else
     mov ax, 13h
     int 10h
+%endif
     call settle
     xor ax, ax
     int 33h
@@ -121,6 +138,9 @@ events dw 0
 stage db 1
 passed db 'WINDOW-MOUSE-PASS',13,10,'$'
 failed db 'WINDOW-MOUSE-FAIL',13,10,'$'
+%ifdef MOUSE_TEXT_MODE
+ready db 'S7_TEXT_CURSOR_READY',13,10,'$'
+%endif
 %ifdef MOUSE_DIAGNOSTICS
 mask_text db 'callback-mask=$'
 hex_digits db '0123456789ABCDEF'
