@@ -120,5 +120,7 @@ No S4 production change requires redeployment: O:/winnt/system32 remains the
 verified S3 eight-file set. The original failed r001 and the isolated r002 remain
 alongside the passing original-sequence r004 and diagnostic r005. Documentation,
 links and staged diff review must pass before S4's verification/test-only P.
-S1–S4 reach bounded implementation/automatic-verification delivery. T429 stays
-open for owner manual acceptance; no next T or scope is admitted.
+Documentation governance, links and staged diff review pass. Verification/test-only
+973a671bf is committed and pushed; production0654f5e0b remains the published
+identity. S1–S4 reach bounded implementation/automatic-verification delivery.
+T429 stays open for owner manual acceptance; no next T or scope is admitted.

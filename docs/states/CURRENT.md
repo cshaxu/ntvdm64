@@ -58,8 +58,8 @@ S4 final integration is the only active S, not T owner acceptance.
 the final eight actual integration/lifecycle passes at unchanged published
 identity, retained failed combined run, native environment diagnostic and
 minimal test-only flag-restoration fix. Production0654f5e0b remains deployed.
-The final verification/test-only commit/push is pending; T429 stays open for
-owner acceptance, not additional automatic implementation.
+Verification/test-only973a671bf is committed and pushed. S1–S4 are bounded-closed;
+T429 stays open for owner acceptance, not additional automatic implementation.
 
 ## Current Technical Baseline
 
