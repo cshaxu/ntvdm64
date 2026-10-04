@@ -93,6 +93,18 @@ smoke passes in r006. The r005 script JSON enumeration failure is preserved,
 not a product pass. Governance/link/diff and reviewed commit/push complete
 this P; S4 final real mixed-kind/multi-root integration remains separate.
 
+## S4 Closure Record
+
+S4 completes its bounded test/integration delivery; T426 awaits owner acceptance.
+The [final integration and requirement audit](../etc/evidence/m0-t426-s4-monitor-integration-handoff.md)
+records actual mixed DOS/native/WOW/GUI tree, independent roots, DOS/native
+frontend close, selected worker/GUI close, survivor fresh input/exit23 and
+original RPC negatives. All22 service fixtures pass. S4 is tests/docs only;
+all eight production files retain the passing S3 full regression/publication
+identity. Failed initial test setup/input runs remain explicit, not passes.
+Final governance/link/diff, source review and commit/push complete this P;
+no next T is admitted before owner acceptance.
+
 ## Current Technical Baseline
 
 S3 production UI and formal layout/dispatch fixture link using the retained
@@ -100,7 +112,8 @@ x86 cache. Real Console cells, refresh/selection/confirmation/input assertions
 and actual Console/Window NTMON ESC tests pass. Frozen S3/r001/runtime is
 verified by its full retained Product gate in r003 and coherently published.
 The [S3 record](../etc/evidence/m0-t426-s3-monitor-tree-ui.md) retains exact
-coverage and completed publication/review gates. S4 is now admitted.
+coverage and completed publication/review gates. S4 final integration passes
+as recorded above; implementation is ready for owner verification.
 
 Published O:/winnt equals build/M0-T426/S3/r001/runtime, all eight hashes
 verified against S3/r003/runtime-manifest.json and again after publication.
@@ -142,5 +155,6 @@ documentation-only admission allocates T426 and removes its candidate from
 S1 audit-only delivery ff3221711 passed governance/link/diff checks without
 changing the published package. S2 is code-bearing and passes its full
 build/runtime/publication gates at a8f356a22, not final T acceptance. S3
-admission does not itself modify or certify a newer product. Outstanding debt
+production/UI delivery 3908fccb7 publishes the verified package; S4 final
+integration is tests/docs only and awaits owner T acceptance. Outstanding debt
 remains in [TODO](TODO.md).

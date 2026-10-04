@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T426 S4 final monitor integration](evidence/m0-t426-s4-monitor-integration-handoff.md) | M0 T426 S4 | Actual mixed tree, root/worker/GUI close isolation, unchanged published package and final owner handoff. | Retain through T426 acceptance. |
 | [T426 S3 monitor tree UI](evidence/m0-t426-s3-monitor-tree-ui.md) | M0 T426 S3 | Aligned tree cells, stable selection/confirmation, production keyboard dispatch and actual verification/publication boundaries. | Retain through T426 acceptance. |
 | [T426 S2 management projection](evidence/m0-t426-s2-management-projection.md) | M0 T426 S2 | Active implementation: atomic production snapshot, actual x86/focused tests and explicit remaining hierarchy/action/publication gates. | Retain through T426 acceptance. |
 | [T426 S1 Console-root management contract](evidence/m0-t426-s1-console-root-management-contract.md) | M0 T426 S1 | Source-backed projection, identity, close and test contract; no UNBOUND, independent WOW/GUI roots and preserved task ownership. | Retain through T426 acceptance. |

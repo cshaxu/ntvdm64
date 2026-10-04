@@ -20,6 +20,38 @@ void __RPC_USER MIDL_user_free(void *value) { free(value); }
 
 static const unsigned char version[APP_VERSION_BYTES]=APP_VERSION;
 
+static void json_string(const WCHAR *value)
+{
+    const WCHAR *p;
+    putwchar(L'"');
+    for(p=value;*p;++p) {
+        if(*p==L'"' || *p==L'\\')putwchar(L'\\');
+        if(*p<32)wprintf(L"\\u%04x",(unsigned)*p);
+        else putwchar(*p);
+    }
+    putwchar(L'"');
+}
+static void json_key(const DTASKMGR_KEY *key)
+{
+    wprintf(L"\"%016llx:%lu:%lu:%016llx\"",key->instance,
+        key->category,key->generation,key->object);
+}
+static void json_snapshot(const DTASKMGR_WORKER *rows,ULONG count)
+{
+    ULONG i;
+    putwchar(L'[');
+    for(i=0;i<count;++i) {
+        if(i)putwchar(L',');
+        wprintf(L"{\"key\":");json_key(&rows[i].key);
+        wprintf(L",\"parent\":");json_key(&rows[i].parent);
+        wprintf(L",\"category\":%lu,\"pid\":%lu,\"kind\":%lu,\"depth\":%lu,\"actions\":%lu,\"state\":%lu,\"stack\":%lu,\"image\":",
+            rows[i].key.category,rows[i].process_id,rows[i].kind,rows[i].depth,
+            rows[i].actions,rows[i].display_state,rows[i].stack_depth);
+        json_string(rows[i].image);putwchar(L'}');
+    }
+    wprintf(L"]\n");
+}
+
 static RPC_BINDING_HANDLE bind_server(const broker_rpc_scope *scope)
 {
     WCHAR endpoint[128];
@@ -184,11 +216,14 @@ int main(int argc,char **argv)
     ULONG count=0;
     DTASKMGR_WORKER *entries=NULL;
     BOOL empty=argc==2 && !_stricmp(argv[1],"--empty");
-    BOOL existing=argc>=2 && (!_stricmp(argv[1],"--existing") || !_stricmp(argv[1],"--terminate"));
+    BOOL tree=argc==2 && !_stricmp(argv[1],"--tree-json");
+    BOOL node_close=argc==4 && !_stricmp(argv[1],"--close-node");
+    ULONG selected_category=node_close ? strtoul(argv[2],NULL,10) : MANAGEMENT_WORKER;
+    BOOL existing=tree || node_close || (argc>=2 && (!_stricmp(argv[1],"--existing") || !_stricmp(argv[1],"--terminate")));
     BOOL terminate=(argc==2 || argc==3) && !_stricmp(argv[1],"--terminate");
-    DWORD selected_pid=terminate && argc==3 ? strtoul(argv[2],NULL,10) : 0;
+    DWORD selected_pid=node_close ? strtoul(argv[3],NULL,10) : terminate && argc==3 ? strtoul(argv[2],NULL,10) : 0;
     ULONG index;
-    if (argc!=1 && !empty && !existing) { fputs("usage: monitor-rpc-test [--empty|--existing|--terminate [pid]]\n",stderr); return 2; }
+    if (argc!=1 && !empty && !existing) { fputs("usage: monitor-rpc-test [--empty|--existing|--tree-json|--terminate [pid]|--close-node category pid]\n",stderr); return 2; }
     CHECK(broker_rpc_capture_scope(&scope));
     if (!existing) {
         CHECK(GetModuleFileNameW(NULL,path,MAX_PATH));
@@ -204,25 +239,30 @@ int main(int argc,char **argv)
         if (error==ERROR_SUCCESS) break;
         Sleep(50);
     }
-    if(error!=ERROR_SUCCESS || (existing && !count)) {
+    if(error!=ERROR_SUCCESS || (existing && !tree && !count)) {
         fprintf(stderr,"TaskSnapshot error=%lu count=%lu existing=%d\n",
             (unsigned long)error,(unsigned long)count,existing);
         return 1;
     }
     if (existing) {
+        if(tree) {
+            json_snapshot(entries,count);
+            MIDL_user_free(entries);RpcBindingFree(&binding);CloseHandle(self);
+            return 0;
+        }
         for (index=0;index<count;++index)
             wprintf(L"%ls pid=%lu task=%lu kind=%lu state=%lu image=%ls\n",
                 entries[index].key.category==MANAGEMENT_WORKER ? L"WORKER" : L"NODE",
                 (unsigned long)entries[index].process_id,(unsigned long)entries[index].task,
                 (unsigned long)entries[index].kind,(unsigned long)entries[index].state,
                 entries[index].image);
-        if (terminate) {
+        if (terminate || node_close) {
             ULONG selected=0;
-            if(argc==3) {
+            if(argc==3 || node_close) {
                 CHECK(selected_pid!=0);
                 for(selected=0;selected<count;++selected)
                     if(entries[selected].process_id==selected_pid &&
-                        entries[selected].key.category==MANAGEMENT_WORKER)break;
+                        entries[selected].key.category==selected_category)break;
                 CHECK(selected<count);
             } else {
                 ULONG workers=0;
@@ -235,7 +275,7 @@ int main(int argc,char **argv)
             if(error)fprintf(stderr,"TerminateWorker pid=%lu error=%lu\n",
                 (unsigned long)entries[selected].process_id,(unsigned long)error);
             CHECK(error==ERROR_SUCCESS);
-            puts("PASS: authenticated DTASKMGR RPC accepted selected live worker termination");
+            puts("PASS: authenticated DTASKMGR RPC accepted selected live node close");
         }
         MIDL_user_free(entries); RpcBindingFree(&binding); CloseHandle(self);
         puts("PASS: authenticated DTASKMGR RPC sees at least one live worker");

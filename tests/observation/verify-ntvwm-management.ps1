@@ -8,11 +8,13 @@ param(
     [string]$LogRoot='O:\winnt\Logs2',
     [switch]$TwoSessions,
     [switch]$FrontendLoss,
-    [switch]$WorkerLoss
+    [switch]$WorkerLoss,
+    [switch]$FrontendClose
 )
 $ErrorActionPreference='Stop'
-if($FrontendLoss -and $WorkerLoss){throw 'Select one fault injection'}
+if(@($FrontendLoss,$WorkerLoss,$FrontendClose|Where-Object {$_}).Count -gt 1){throw 'Select one management/fault mode'}
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
+. "$PSScriptRoot/isolated_package_cleanup.ps1"
 $physical=(Resolve-Path $ProcessPackageRoot).Path
 if(!$physical.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase)){throw 'Require isolated build candidate'}
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid log prefix'}
@@ -50,7 +52,7 @@ try {
     }while([DateTime]::UtcNow -lt $deadline)
     if(!$worker -or !$target){throw 'Real NTVWM/CMD pair did not start'}
     $frontend=$null
-    if($FrontendLoss){
+    if($FrontendLoss -or $FrontendClose){
         $owners=@(Get-CimInstance Win32_Process -Filter "Name='ntcon.exe'" | Where-Object {$_.ExecutablePath -in $paths})
         if($owners.Count -ne 1){throw 'Expected exactly one authenticated test frontend before isolation launch'}
         $frontend=Get-Process -Id $owners[0].ProcessId;$null=$frontend.Handle
@@ -93,7 +95,8 @@ try {
         $frontend.Kill()
         if(!$frontend.WaitForExit(5000)){throw 'Fault injection did not end frontend'}
     }else{
-        $monitor=Start-Process -FilePath (Resolve-Path $MonitorRpc).Path -ArgumentList @('--terminate',$worker.Id) -WindowStyle Hidden -PassThru `
+        $closeArguments=if($FrontendClose){@('--close-node',1,$frontend.Id)}else{@('--terminate',$worker.Id)}
+        $monitor=Start-Process -FilePath (Resolve-Path $MonitorRpc).Path -ArgumentList $closeArguments -WindowStyle Hidden -PassThru `
             -RedirectStandardOutput "$report.management.log" -RedirectStandardError "$report.management.err"
         if(!$monitor.WaitForExit(18000) -or $monitor.ExitCode -ne 0){
             $worker.Refresh();$target.Refresh()
@@ -104,6 +107,7 @@ try {
         }
     }
     if(!$WorkerLoss -and (!$worker.WaitForExit(5000) -or !$target.WaitForExit(5000))){throw 'NTVWM or attached CMD survived acknowledged close'}
+    if($FrontendClose -and !$frontend.WaitForExit(5000)){throw 'Frontend survived its acknowledged close'}
     if(!$observerProcess.WaitForExit(10000)){throw 'Direct launcher did not return after management close'}
     $record=Get-Content $report -Raw
     if($record -notmatch '(?m)^result=exited\r?$'){throw 'Launcher timeout is not completion'}
@@ -142,7 +146,6 @@ try {
         if($process){if(!$process.HasExited){$process.Kill();$process.WaitForExit(5000)|Out-Null};$process.Dispose()}
     }
     if($gate){$gate.Dispose()}
-    foreach($process in @(Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -in $paths})){
-        Stop-Process -Id $process.ProcessId -Force -ErrorAction SilentlyContinue
-    }
+    $remaining=@(Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -in $paths})
+    Stop-IdentityCheckedProcesses $remaining $paths
 }

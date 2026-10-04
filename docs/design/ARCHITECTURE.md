@@ -29,7 +29,10 @@ owners; GUI close targets its registered process only. WOW task rows have no
 fabricated host PID/time or individual close permission. This is a projection,
 not a second execution registry or scheduler. The
 [S2 evidence](../etc/evidence/m0-t426-s2-management-projection.md) distinguishes
-implemented production paths, actual verification and pending delivery/UI work.
+implemented production paths. The [S3 UI record](../etc/evidence/m0-t426-s3-monitor-tree-ui.md)
+and [S4 integration record](../etc/evidence/m0-t426-s4-monitor-integration-handoff.md)
+retain actual renderer/key behavior, real multi-root/GUI/WOW isolation,
+published package identity and the remaining owner-acceptance boundary.
 
 ### Broker-controlled single I/O connection — T425 S6 delivery
 
