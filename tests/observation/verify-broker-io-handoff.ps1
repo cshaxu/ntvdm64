@@ -17,6 +17,8 @@ if(!(Test-Path (Split-Path $prefix -Parent))) {throw 'Declare/create the build r
 if(Test-Path "$prefix.observer") {throw 'Preserve existing run evidence; choose a fresh prefix'}
 if(Test-Path 'Z:\') {throw 'Z: already exists; do not replace an existing mapping'}
 if(Get-Process ntsrv -ErrorAction SilentlyContinue) {throw 'An existing broker must finish before this isolated probe'}
+. "$PSScriptRoot/isolated_package_cleanup.ps1"
+$testScope=New-IsolatedPackageScope $runtime
 $names='run16.exe','ntsrv.exe','ntvdm.exe','ntvwm.exe','ntcon.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL'
 $identity=@($names | ForEach-Object {
     $path=Join-Path $runtime $_
@@ -33,6 +35,11 @@ try {
     & subst.exe Z: $runtime
     if($LASTEXITCODE){throw 'SUBST Z: failed'}
     $mapped=$true
+    $testScope.Paths+=@($testScope.Paths | ForEach-Object {Join-Path 'Z:\' ([IO.Path]::GetFileName($_))})
+    $observerLaunch=$observerPath
+    if($observerPath.StartsWith($runtime+'\',[StringComparison]::OrdinalIgnoreCase)){
+        $observerLaunch=Join-Path 'Z:\' $observerPath.Substring($runtime.Length+1)
+    }
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     Remove-Item Env:MVDM_OBSERVER_WINDOW_INPUT -ErrorAction SilentlyContinue
     if($Case -eq 'nested-window'){$env:MVDM_OBSERVER_WINDOW_INPUT='1'}
@@ -42,7 +49,7 @@ try {
     if($Case -ne 'native') {
         $input="run16 command`rver`rmem`rexit`recho S6-PARENT-RETURN`rexit /b 23`r"
     }
-    & $observerPath Z:\run16.exe Z:\ "$prefix.observer" cmd.exe /d `
+    & $observerLaunch Z:\run16.exe Z:\ "$prefix.observer" cmd.exe /d `
         --observe-console-input-text $input --observe-console-line-delay-ms 1800 `
         --observation-timeout-ms 40000
     if(!(Test-Path "$prefix.observer")){throw 'Observer did not write a report'}
@@ -55,8 +62,13 @@ try {
     $screen=Get-Content "$prefix.observer.console.txt" -Raw
     if($screen -notmatch 'exit /b 23'){throw 'Missing actual CMD exit command'}
     if($Case -ne 'native') {
-        if($screen -notmatch 'Microsoft\(R\) Windows NT DOS' -or
-           $screen -notmatch 'bytes total conventional memory' -or
+        # Assert each actual output at its execution boundary, not perpetual
+        # retention of an old banner after the worker's page is relinquished.
+        # This strengthens ordering without depending on unsupported history.
+        $dos=Get-Content "$prefix.observer.line-01.console.txt" -Raw
+        $mem=Get-Content "$prefix.observer.line-03.console.txt" -Raw
+        if($dos -notmatch 'Microsoft\(R\) Windows NT DOS' -or
+           $mem -notmatch 'bytes total conventional memory' -or
            $screen -notmatch '(?m)^\[\d+\] S6-PARENT-RETURN\r?$') {
             throw 'Missing real DOS/MEM output or executed parent-return marker'
         }
@@ -74,8 +86,10 @@ try {
     }
     "PASS broker I/O $Case : actual CMD/DOS input, parent return and direct exit=23"
 } finally {
-    if($mapped) {& subst.exe Z: /d; if($LASTEXITCODE){Write-Error 'Failed to remove owned Z: mapping'}}
-    foreach($name in $environmentNames) {
-        [Environment]::SetEnvironmentVariable($name,$saved[$name],'Process')
+    try {Stop-IsolatedPackageScope $testScope}finally{
+        if($mapped) {& subst.exe Z: /d; if($LASTEXITCODE){Write-Error 'Failed to remove owned Z: mapping'}}
+        foreach($name in $environmentNames) {
+            [Environment]::SetEnvironmentVariable($name,$saved[$name],'Process')
+        }
     }
 }

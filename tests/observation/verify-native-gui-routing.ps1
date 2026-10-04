@@ -1,14 +1,19 @@
 param([Parameter(Mandatory)][string]$Observer,
       [Parameter(Mandatory)][string]$PackageRoot,
-      [Parameter(Mandatory)][string]$ReportPrefix)
+      [Parameter(Mandatory)][string]$ReportPrefix,
+      [switch]$FullDeadlines)
 $ErrorActionPreference='Stop'
 $Observer=(Resolve-Path $Observer).Path
 $PackageRoot=(Resolve-Path $PackageRoot).Path
 $ReportPrefix=[IO.Path]::GetFullPath($ReportPrefix)
 $build=(Resolve-Path "$PSScriptRoot/../../build").Path+'\'
 if(!$ReportPrefix.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)){throw 'Evidence must remain under build'}
+$null=New-Item -ItemType Directory -Force -Path ([IO.Path]::GetDirectoryName($ReportPrefix))
 if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'Existing service must not be controlled'}
+. "$PSScriptRoot/isolated_package_cleanup.ps1"
+$testScope=New-IsolatedPackageScope $PackageRoot
 function Wait-IsolatedService {
+    if(!$FullDeadlines){Stop-IsolatedPackageScope $testScope;return}
     foreach($row in @(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'")) {
         if($row.ExecutablePath -ne (Join-Path $PackageRoot 'ntsrv.exe')){throw 'Foreign service present'}
         try {$process=[Diagnostics.Process]::GetProcessById($row.ProcessId)}catch{continue}
@@ -39,7 +44,11 @@ $launcher=Join-Path $PackageRoot 'run16.exe'
 Observe 'startup' $launcher @($probe) 'exit=0x00000000'
 Observe 'wait' $launcher @('--wait',$probe) 'exit=0x00000025'
 Observe 'gui-fresh-text' $launcher @('--wait',$probe,'--spawn-text') 'exit=0x00000025'
-$survivalArguments=@('-NoProfile','-File',(Join-Path $PSScriptRoot 'native_gui_route_fixture.ps1'),'-PackageRoot',$PackageRoot,'-WaitWorkerRetirement')
-Observe 'carrier-retirement' (Get-Command pwsh).Source $survivalArguments 'exit=0x00000000' 'PASS GUI survives launcher/request release; actual exit=37; worker-retirement=True'
+$survivalArguments=@('-NoProfile','-File',(Join-Path $PSScriptRoot 'native_gui_route_fixture.ps1'),'-PackageRoot',$PackageRoot)
+if($FullDeadlines){$survivalArguments+='-WaitWorkerRetirement'}
+$survivalMarker='PASS GUI-SURVIVAL-EXIT-37'
+Observe 'carrier-retirement' (Get-Command pwsh).Source $survivalArguments 'exit=0x00000000' $survivalMarker
+$survivalScreen=Get-Content ($ReportPrefix+'-carrier-retirement.txt.console.txt') -Raw
+if(!$survivalScreen.Contains('PASS GUI-RETIREMENT-'+[bool]$FullDeadlines)){throw 'Wrong retirement coverage mode'}
 $command='"'+$launcher+'" --wait "'+$probe+'" & echo S9-GUI-TEXT-RESUMED & exit /b 19'
 Observe 'text-gui-text' $launcher @('cmd','/d','/c',$command) 'exit=0x00000013' 'S9-GUI-TEXT-RESUMED'

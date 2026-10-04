@@ -104,6 +104,32 @@ interpretation, confidence, and follow-up in etc/ or an appropriate history/
 record. A failed or unavailable check is evidence with a limitation; it is
 never a passing result.
 
+### Verification throughput
+
+Record each required group's contract, prerequisite/input hashes, isolation,
+actual elapsed time and coverage before changing its schedule. Reuse validated
+dependency-selected build caches; do not recompile unrelated closures merely
+to allocate a fresh evidence ID. Product packages and sealed evidence remain
+immutable. Focused selection must map every omitted gate to unchanged input
+identity or an explicitly approved scope, never simply to its elapsed time.
+The every-P runtime/publication gate below still applies.
+
+In-process service fixtures without the global BaseSrv endpoint may run with
+bounded concurrency through tests/observation/verify-service-fixtures.ps1.
+Real-package RPC/frontend/session scenarios must remain serial. A runner must
+propagate actual fixture/assertion failures, enforce per-case time budgets,
+clean only its pinned owned processes, and restore environment and Z: mapping
+even on failure. Explicit fixture cleanup is not evidence of normal retirement.
+
+Test ten-second lifecycle decisions at their existing production owner using
+explicit time inputs, including before/at expiry, cancellation, rearm and
+shutdown notification. Preserve the production deadline and separately verify
+real process/event/receipt wiring. -FullDeadlines retains the real-timer
+diagnostic for policy/timer changes or investigation; do not repeatedly spend
+that grace merely waiting for test-owned services between unrelated cases.
+Do not shorten product waits, remove meaningful input pacing, waive negatives
+or weaken output assertions as a throughput optimization.
+
 ## Build And Debug Output Hygiene
 
 ### Every-P regression and side-test publication gate

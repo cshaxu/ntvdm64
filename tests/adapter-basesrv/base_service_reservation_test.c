@@ -17,6 +17,9 @@ DWORD fixture_queue_native_command(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE,D
 DWORD fixture_take_native_command(OPENNT_BASE_CONNECTION *,DWORD,DWORD,DWORD,BYTE *,DWORD *,HANDLE *,HANDLE *,HANDLE *,DWORD *);
 DWORD fixture_frontend_notification_denied(OPENNT_BASE_CONNECTION *,DWORD,DWORD,DWORD,BOOL,BOOL *);
 int fixture_io_authority(void);
+int fixture_unbound_retirement(void);
+DWORD service_next_frontend_deadline_at(OPENNT_BASE_SERVICE *,ULONGLONG,ULONGLONG *);
+DWORD service_retire_expired_frontends_at(OPENNT_BASE_SERVICE *,ULONGLONG);
 static const BYTE native_payload[3]={'N','T','C'};
 static DWORD test_native_request;
 #define queue_native_fixture(a,b,c,d,e) \
@@ -298,7 +301,7 @@ static DWORD WINAPI native_command_wait(void *context)
 static int frontend_authority(void)
 {
     DWORD phase;
-    for(phase=0;phase<4;++phase) {
+    for(phase=0;phase<6;++phase) {
         DWORD borrowed=phase%2;
         OPENNT_BASE_SERVICE *service=OpenNtBaseServiceStart();
         OPENNT_BASE_CONNECTION *launcher=NULL,*root=NULL;
@@ -381,10 +384,33 @@ static int frontend_authority(void)
                 NULL,NULL,&startup,&backend));
             CHECK(!OpenNtBaseServicePrepareWorker(launcher,GetCurrentProcessId(),launcher_generation,reservation,backend.hProcess));
             CHECK(!OpenNtBaseServiceConnect(service,backend.hProcess,&worker,&worker_generation));
+            {
+                ULONGLONG next=0;
+                /* Newly admitted work cancels the already armed root grace,
+                 * even when evaluated at its former expiry. */
+                CHECK(!service_next_frontend_deadline_at(service,deadline,&next));
+                CHECK(!service_retire_expired_frontends_at(service,deadline));
+                CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(root,child.dwProcessId,root_generation,&closing) && !closing);
+            }
             CHECK(OpenNtBaseServiceWorkerShutdownEvent(worker,backend.dwProcessId,worker_generation+1,&shutdown)==ERROR_ACCESS_DENIED);
             CHECK(!OpenNtBaseServiceWorkerShutdownEvent(worker,backend.dwProcessId,worker_generation,&shutdown));
             CHECK(WaitForSingleObject(shutdown,0)==WAIT_TIMEOUT);
             CHECK(!SetEvent(shutdown) && GetLastError()==ERROR_ACCESS_DENIED);
+            if(phase>=4) {
+                ULONGLONG again=0,now=deadline+20000;
+                CHECK(TerminateProcess(backend.hProcess,0));
+                CHECK(WaitForSingleObject(backend.hProcess,5000)==WAIT_OBJECT_0);
+                CHECK(!OpenNtBaseServiceDisconnect(worker));worker=NULL;
+                CHECK(!service_next_frontend_deadline_at(service,now,&again) && again==now+10000);
+                CHECK(!service_retire_expired_frontends_at(service,again-1));
+                CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(root,child.dwProcessId,root_generation,&closing) && !closing);
+                CHECK(!service_retire_expired_frontends_at(service,again));
+                CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(root,child.dwProcessId,root_generation,&closing) && closing);
+                CHECK(!OpenNtBaseServiceDisconnect(root));root=NULL;
+                CHECK(!OpenNtBaseServiceDisconnect(launcher));launcher=NULL;
+                CloseHandle(shutdown);CloseHandle(backend.hThread);CloseHandle(backend.hProcess);
+                goto authority_finish;
+            }
             waiting.connection=worker;waiting.pid=backend.dwProcessId;waiting.generation=worker_generation;
             waiting.started=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(waiting.started);
             command_wait=CreateThread(NULL,0,native_command_wait,&waiting,0,NULL);CHECK(command_wait);
@@ -412,20 +438,24 @@ static int frontend_authority(void)
         CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(root,child.dwProcessId,root_generation,&closing) && !closing);
         CHECK(!OpenNtBaseServiceNextFrontendDeadline(service,&deadline) && deadline);
         {
-            HANDLE timer=CreateWaitableTimerW(NULL,TRUE,NULL);
-            LARGE_INTEGER due;ULONGLONG now=GetTickCount64();
-            CHECK(timer && deadline>now && deadline<=now+10000);
-            due.QuadPart=-(LONGLONG)(deadline-now+1)*10000;
-            CHECK(SetWaitableTimer(timer,&due,0,NULL,NULL,FALSE));
-            CHECK(WaitForSingleObject(timer,15000)==WAIT_OBJECT_0);
-            CloseHandle(timer);
+            ULONGLONG next=0;
+            HANDLE state_changed=NULL;
+            CHECK(!OpenNtBaseServiceFrontendStateChanged(root,child.dwProcessId,root_generation,&state_changed));
+            while(WaitForSingleObject(state_changed,0)==WAIT_OBJECT_0) {}
+            CHECK(!service_retire_expired_frontends_at(service,deadline-1));
+            CHECK(WaitForSingleObject(state_changed,0)==WAIT_TIMEOUT);
+            CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(root,child.dwProcessId,root_generation,&closing) && !closing);
+            CHECK(!service_next_frontend_deadline_at(service,deadline-1,&next) && next==deadline);
+            CHECK(!service_retire_expired_frontends_at(service,deadline));
+            CHECK(WaitForSingleObject(state_changed,0)==WAIT_OBJECT_0);
+            CloseHandle(state_changed);
         }
-        CHECK(!OpenNtBaseServiceRetireExpiredFrontends(service));
         CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(root,child.dwProcessId,root_generation,&closing) && closing);
         CHECK(!OpenNtBaseServiceNextFrontendDeadline(service,&deadline) && !deadline);
         CHECK(!OpenNtBaseServiceIsEmpty(service));
         CHECK(!OpenNtBaseServiceDisconnect(root));root=NULL;
         }
+authority_finish:
         CHECK(OpenNtBaseServiceIsEmpty(service) && OpenNtBaseServiceStop(service));
         CHECK(TerminateProcess(child.hProcess,0));
         CloseHandle(child.hThread);CloseHandle(child.hProcess);
@@ -645,7 +675,21 @@ int main(int argc,char **argv)
     uint32_t workerInfoCount=0;
     ULONG standardCount=0;
     STARTUPINFOA getStartup={sizeof(getStartup)};
+    if(argc==2 && !strcmp(argv[1],"--runner-failure")) {
+        char image[MAX_PATH],line[MAX_PATH+32];
+        PROCESS_INFORMATION orphan={0};
+        CHECK(GetModuleFileNameA(NULL,image,MAX_PATH));
+        sprintf_s(line,sizeof(line),"\"%s\" --reservation-child",image);
+        CHECK(CreateProcessA(NULL,line,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
+            NULL,NULL,&getStartup,&orphan));
+        /* Deliberately leave the test-owned suspended child on failure to
+         * verify the runner's negative cleanup; never a product task. */
+        CloseHandle(orphan.hThread);CloseHandle(orphan.hProcess);
+        fputs("EXPECTED runner-failure with owned child\n",stderr);
+        return 91;
+    }
     if(argc==2 && !strcmp(argv[1],"--io-authority"))return fixture_io_authority();
+    if(argc==2 && !strcmp(argv[1],"--unbound-retirement"))return fixture_unbound_retirement();
     if(argc==3 && !strcmp(argv[1],"--reservation-wait-child"))
         return reservation_wait_child(argv[2]);
     if(argc==3 && !strcmp(argv[1],"--reservation-descendant"))

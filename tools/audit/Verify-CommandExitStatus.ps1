@@ -307,7 +307,7 @@ try {
                 throw "Missing captured guest Console text: $($case.Name)"
             }
             $screen=Get-Content -LiteralPath $consolePath -Raw
-            if($case.Text -and ($env:MVDM_OBSERVER_WINDOW_INPUT -eq '1' -or
+            if($case.Text -and !$case.SequentialMemLines -and ($env:MVDM_OBSERVER_WINDOW_INPUT -eq '1' -or
                 $case.Name -in @('dos-native-dos','dos-native-typeahead',
                     'interactive-native-dos-return'))) {
                 # Window text is finite, and a Console/native/DOS transition
@@ -320,6 +320,10 @@ try {
                 $screen=Merge-ConsoleTextSnapshots ($snapshots+@($screen))
                 $screen | Set-Content -LiteralPath "$report.transcript.txt" -Encoding UTF8
             }
+            # SequentialMemLines already requires each real MEM result after
+            # that command in its own ordered snapshot below. A merged scroll
+            # history is neither necessary proof nor a product guarantee; do
+            # not impose contiguous-frame history on these repainting pages.
             if($case.NativeExitCodes){
                 $nativeResults=@(foreach($pair in $nativeWaiters.GetEnumerator()){
                     [pscustomobject]@{ProcessId=$pair.Key;Ended=$pair.Value.HasExited;Code=$(if($pair.Value.HasExited){$pair.Value.ExitCode}else{$null})}

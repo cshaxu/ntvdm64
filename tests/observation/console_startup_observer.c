@@ -1003,6 +1003,10 @@ static int private_desktop_observer(void)
     command = _strdup(GetCommandLineA());
     if (!command) { CloseDesktop(desktop); return 69; }
     startup.lpDesktop = name;
+    /* Give the disposable Console a stable initial title, independent of
+     * build-path spelling. Title-specific fixtures set their own explicit
+     * titles after this baseline; no user's Console is changed. */
+    startup.lpTitle = "NTVDM observation";
     startup.dwFlags = STARTF_USESHOWWINDOW;
     startup.wShowWindow = SW_HIDE;
     SetEnvironmentVariableA("MVDM_OBSERVER_PRIVATE_DESKTOP", NULL);

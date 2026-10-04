@@ -30,6 +30,9 @@ try {
     $null=$release.Set()
     if(!$target.WaitForExit(10000) -or $target.ExitCode -ne 37){throw "Wrong actual GUI exit: $($target.ExitCode)"}
     'PASS GUI survives launcher/request release; actual exit=37; worker-retirement='+[bool]$WaitWorkerRetirement
+    # Stable short assertions survive narrow observer Console line wrapping.
+    'PASS GUI-SURVIVAL-EXIT-37'
+    'PASS GUI-RETIREMENT-'+[bool]$WaitWorkerRetirement
 } finally {
     $null=$release.Set()
     if($worker){$worker.Dispose()}

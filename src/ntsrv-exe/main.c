@@ -10,13 +10,13 @@
 #include "opennt-abi/source/public/internal/base/inc/vdmapi.h"
 #include "ntsrv-exe/opennt/include/base_service.h"
 #include "common/protocol/version.h"
+#include "ntsrv-exe/idle_policy.h"
 static broker_rpc_scope scope;
 static OPENNT_BASE_SERVICE *service;
 static SRWLOCK idle_lock=SRWLOCK_INIT;
 static HANDLE idle_timer;
 static HANDLE frontend_timer; /* Broker-only startup and workerless-root deadlines. */
-static ULONGLONG idle_deadline;
-static ULONG pending_connects;
+static BASESRV_IDLE_POLICY idle_policy;
 error_status_t Server_SubmitNativeRequest(handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation,HANDLE frontend,ULONG bytes,BYTE *payload,
     HANDLE *target,HANDLE *receipt,ULONG *request)
@@ -95,8 +95,6 @@ error_status_t Server_WaitFrontendConsoleRestored(handle_t binding,VDM_CONNECTIO
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
     return error ? error : OpenNtBaseServiceWaitFrontendConsoleRestored(connection,pid,generation);
 }
-static BOOL idle_stopping;
-#define BASESRV_EMPTY_GRACE_MS 10000u
 #define BASE_CHECK_REPLY_BYTES 40u
 #define BASE_UPDATE_REPLY_BYTES 32u
 
@@ -114,10 +112,9 @@ static __declspec(noreturn) void basesrv_idle_fatal(PCSTR operation,DWORD error)
 static void basesrv_schedule_empty_locked(void)
 {
     LARGE_INTEGER due;
-    if (!idle_stopping && !idle_deadline && !pending_connects &&
-        service && OpenNtBaseServiceIsEmpty(service)) {
+    if (!idle_policy.stopping && !idle_policy.deadline && !idle_policy.pending &&
+        service && basesrv_idle_arm(&idle_policy,GetTickCount64(),OpenNtBaseServiceIsEmpty(service))) {
         due.QuadPart=-(LONGLONG)BASESRV_EMPTY_GRACE_MS*10000;
-        idle_deadline=GetTickCount64()+BASESRV_EMPTY_GRACE_MS;
         if (!SetWaitableTimer(idle_timer,&due,0,NULL,NULL,FALSE))
             basesrv_idle_fatal("SetWaitableTimer",GetLastError());
     }
@@ -132,11 +129,9 @@ static DWORD basesrv_begin_connect(void)
 {
     DWORD error=ERROR_SUCCESS;
     AcquireSRWLockExclusive(&idle_lock);
-    if (idle_stopping) error=RPC_S_SERVER_UNAVAILABLE;
-    else {
-        if (pending_connects==MAXDWORD) basesrv_idle_fatal("Connect count",ERROR_ARITHMETIC_OVERFLOW);
-        ++pending_connects;
-        idle_deadline=0;
+    error=basesrv_idle_connect(&idle_policy);
+    if(error==ERROR_ARITHMETIC_OVERFLOW)basesrv_idle_fatal("Connect count",error);
+    if(!error) {
         if (!CancelWaitableTimer(idle_timer))
             basesrv_idle_fatal("CancelWaitableTimer",GetLastError());
     }
@@ -146,7 +141,7 @@ static DWORD basesrv_begin_connect(void)
 static void basesrv_end_connect(void)
 {
     AcquireSRWLockExclusive(&idle_lock);
-    --pending_connects;
+    --idle_policy.pending;
     basesrv_schedule_empty_locked();
     ReleaseSRWLockExclusive(&idle_lock);
 }
@@ -157,16 +152,17 @@ static BOOL basesrv_claim_empty_stop(void)
     LARGE_INTEGER due;
     AcquireSRWLockExclusive(&idle_lock);
     now=GetTickCount64();
-    if (!pending_connects && idle_deadline) {
-        if (now<idle_deadline) {
+    if (!idle_policy.pending && idle_policy.deadline) {
+        BASESRV_IDLE_DECISION decision=basesrv_idle_expire(&idle_policy,now,
+            now>=idle_policy.deadline && OpenNtBaseServiceIsEmpty(service));
+        if (decision==BASESRV_IDLE_REARM) {
             /* A wake consumed just before Connect rearmed the same timer. */
-            due.QuadPart=-(LONGLONG)(idle_deadline-now)*10000;
+            due.QuadPart=-(LONGLONG)(idle_policy.deadline-now)*10000;
             if (!SetWaitableTimer(idle_timer,&due,0,NULL,NULL,FALSE))
                 basesrv_idle_fatal("SetWaitableTimer",GetLastError());
-        } else if (OpenNtBaseServiceIsEmpty(service)) {
-            idle_stopping=TRUE;
+        } else if (decision==BASESRV_IDLE_STOP) {
             stop=TRUE;
-        } else idle_deadline=0;
+        }
     }
     ReleaseSRWLockExclusive(&idle_lock);
     return stop;

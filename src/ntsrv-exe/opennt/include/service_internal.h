@@ -258,4 +258,8 @@ DWORD service_take_native_command(OPENNT_BASE_CONNECTION *root,DWORD pid,
     HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request,DWORD *caller_generation);
 void service_retire_completed_root(OPENNT_BASE_CONNECTION *parent,DWORD idle_worker);
 DWORD service_bind_existing_console(OPENNT_BASE_CONNECTION *connection);
+/* Policy-owner time inputs; production callers pass GetTickCount64 through
+ * the public wrappers. No mutable clock or runtime timeout override. */
+DWORD service_next_frontend_deadline_at(OPENNT_BASE_SERVICE *,ULONGLONG,ULONGLONG *);
+DWORD service_retire_expired_frontends_at(OPENNT_BASE_SERVICE *,ULONGLONG);
 #endif

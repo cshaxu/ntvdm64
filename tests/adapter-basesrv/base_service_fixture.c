@@ -4,6 +4,56 @@
 #include <service_internal.h>
 #include <stdio.h>
 
+/* Trusted fixture inserts only the existing watch record; all deadline,
+ * cancellation and shutdown decisions execute the production archive. */
+int fixture_unbound_retirement(void)
+{
+    OPENNT_BASE_SERVICE *service=OpenNtBaseServiceStart();
+    OPENNT_BASE_CONNECTION *worker=NULL;
+    OPENNT_BASE_WORKER_WATCH watch={0};
+    PROCESS_INFORMATION child={0};STARTUPINFOW startup={sizeof(startup)};
+    WCHAR image[MAX_PATH],command[MAX_PATH+32];
+    DWORD generation=0;ULONGLONG due=0;
+#define RETIRE_CHECK(value) do {if(!(value)){fprintf(stderr,"FAIL unbound line %d\n",__LINE__);return 1;}}while(0)
+    RETIRE_CHECK(service && GetModuleFileNameW(NULL,image,ARRAYSIZE(image)));
+    swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" --reservation-child",image);
+    RETIRE_CHECK(CreateProcessW(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
+        NULL,NULL,&startup,&child));
+    RETIRE_CHECK(!OpenNtBaseServiceConnect(service,child.hProcess,&worker,&generation));
+    watch.service=service;watch.kind=OPENNT_BASE_WORKER_NATIVE;
+    watch.process.ProcessHandle=child.hProcess;watch.process.SequenceNumber=generation;
+    watch.shutdown=CreateEventW(NULL,TRUE,FALSE,NULL);RETIRE_CHECK(watch.shutdown);
+    EnterCriticalSection(&service->lock);
+    worker->native_worker=TRUE;
+    InsertTailList(&service->worker_watches,&watch.link);
+    LeaveCriticalSection(&service->lock);
+    RETIRE_CHECK(!service_next_frontend_deadline_at(service,100,&due) && due==10100);
+    RETIRE_CHECK(!service_retire_expired_frontends_at(service,10099));
+    RETIRE_CHECK(WaitForSingleObject(watch.shutdown,0)==WAIT_TIMEOUT);
+    EnterCriticalSection(&service->lock);
+    worker->native_inflight=1; /* Existing direct execution suppresses idle grace. */
+    LeaveCriticalSection(&service->lock);
+    RETIRE_CHECK(!service_next_frontend_deadline_at(service,10100,&due) && !due);
+    RETIRE_CHECK(!watch.unbound_native_deadline);
+    RETIRE_CHECK(!service_retire_expired_frontends_at(service,20000));
+    RETIRE_CHECK(WaitForSingleObject(watch.shutdown,0)==WAIT_TIMEOUT);
+    EnterCriticalSection(&service->lock);worker->native_inflight=0;LeaveCriticalSection(&service->lock);
+    RETIRE_CHECK(!service_next_frontend_deadline_at(service,30000,&due) && due==40000);
+    RETIRE_CHECK(!service_retire_expired_frontends_at(service,39999));
+    RETIRE_CHECK(WaitForSingleObject(watch.shutdown,0)==WAIT_TIMEOUT);
+    RETIRE_CHECK(!service_retire_expired_frontends_at(service,40000));
+    RETIRE_CHECK(WaitForSingleObject(watch.shutdown,0)==WAIT_OBJECT_0);
+    RETIRE_CHECK(WaitForSingleObject(child.hProcess,0)==WAIT_TIMEOUT); /* Instruction, no tree kill. */
+    EnterCriticalSection(&service->lock);RemoveEntryList(&watch.link);LeaveCriticalSection(&service->lock);
+    RETIRE_CHECK(!OpenNtBaseServiceDisconnect(worker));
+    RETIRE_CHECK(OpenNtBaseServiceIsEmpty(service) && OpenNtBaseServiceStop(service));
+    RETIRE_CHECK(TerminateProcess(child.hProcess,0));
+    CloseHandle(child.hThread);CloseHandle(child.hProcess);CloseHandle(watch.shutdown);
+    puts("PASS unbound native: exact 10s, execution cancellation, rearm, shutdown event and no process kill");
+    return 0;
+#undef RETIRE_CHECK
+}
+
 typedef struct IO_TRANSITION_TEST {
     OPENNT_BASE_CONNECTION *worker;
     DWORD pid,generation,action,error;

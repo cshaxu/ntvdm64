@@ -4,7 +4,8 @@ param(
     [Parameter(Mandatory)][string]$PackageRoot,
     [Parameter(Mandatory)][string]$ProcessPackageRoot,
     [Parameter(Mandatory)][string]$LogRoot,
-    [Parameter(Mandatory)][string]$LogPrefix
+    [Parameter(Mandatory)][string]$LogPrefix,
+    [switch]$FullDeadlines
 )
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
@@ -24,7 +25,12 @@ $old=$env:MVDM_OBSERVER_PRIVATE_DESKTOP
 try {
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     foreach($kind in @('ntvdm','ntvwm')){
-        foreach($fault in @('worker','frontend')){
+        # Routine gate checks real frontend-loss shutdown/receipt wiring.
+        # Workerless and empty 10s rules are covered by the production policy
+        # fixture with explicit time. FullDeadlines retains the old slow
+        # end-to-end timer diagnostic, but is not a routine per-P gate.
+        $faults=if($FullDeadlines){@('worker','frontend')}else{@('frontend')}
+        foreach($fault in $faults){
             $report=Join-Path $LogRoot "$LogPrefix-$kind-$fault.txt"
             if(Test-Path $report){throw 'Use fresh evidence'}
             $observerProcess=$null;$worker=$null;$frontend=$null;$broker=$null;$nativeTarget=$null
@@ -69,8 +75,14 @@ try {
                 $exit=[regex]::Match($text,'(?m)^exit=0x([0-9a-f]+)\r?$')
                 if(!$exit.Success -or [Convert]::ToUInt32($exit.Groups[1].Value,16) -ne 1067){throw 'Worker/frontend failure did not return the broker task failure 1067'}
                 # Nothing remains registered: now, and only now, empty grace applies.
-                if(!$broker.WaitForExit(15000)){throw 'Empty broker failed to retire after its grace'}
-                Write-Output "PASS $kind $fault loss: broker-ordered peer retirement, failed direct receipt, empty service retirement"
+                if($FullDeadlines){
+                    if(!$broker.WaitForExit(15000)){throw 'Empty broker failed to retire after its grace'}
+                    Write-Output "PASS $kind $fault loss: broker-ordered peer retirement, failed direct receipt, empty service retirement"
+                }else{
+                    # Fixture owns this exact broker; cleanup is not proof of
+                    # idle timer expiry, which the deterministic unit asserts.
+                    Write-Output "PASS $kind frontend loss: real worker shutdown, frontend exit and direct receipt 1067; explicit fixture cleanup"
+                }
             }finally{
                 foreach($process in @($observerProcess,$worker,$frontend,$broker,$nativeTarget)){
                     if($process){if(!$process.HasExited){$process.Kill();$null=$process.WaitForExit(5000)};$process.Dispose()}

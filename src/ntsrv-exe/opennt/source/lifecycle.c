@@ -4,7 +4,6 @@
 #include <service_internal.h>
 
 static ULONGLONG service_root_retirement_deadline(OPENNT_BASE_CONNECTION *root,ULONGLONG now);
-static BOOL service_root_workerless(OPENNT_BASE_CONNECTION *root);
 
 static ULONGLONG service_unbound_native_deadline(OPENNT_BASE_WORKER_WATCH *watch,ULONGLONG now)
 {
@@ -219,12 +218,6 @@ static ULONGLONG service_root_retirement_deadline(OPENNT_BASE_CONNECTION *root,U
     return deadline;
 }
 
-static BOOL service_root_workerless(OPENNT_BASE_CONNECTION *root)
-{
-    ULONGLONG now=GetTickCount64(),deadline=service_root_retirement_deadline(root,now);
-    return deadline && deadline<=now;
-}
-
 HANDLE OpenNtBaseServiceFrontendLifetimeChanged(OPENNT_BASE_SERVICE *service)
 {
     return service ? service->frontend_lifetime_changed : NULL;
@@ -232,10 +225,16 @@ HANDLE OpenNtBaseServiceFrontendLifetimeChanged(OPENNT_BASE_SERVICE *service)
 
 DWORD OpenNtBaseServiceNextFrontendDeadline(OPENNT_BASE_SERVICE *service,ULONGLONG *deadline)
 {
+    return service_next_frontend_deadline_at(service,GetTickCount64(),deadline);
+}
+
+/* Explicit time is private to the policy owner. Fixtures advance the same
+ * decision path, not a shortened timer or replacement lifecycle policy. */
+DWORD service_next_frontend_deadline_at(OPENNT_BASE_SERVICE *service,ULONGLONG now,ULONGLONG *deadline)
+{
     LIST_ENTRY *link;
-    ULONGLONG now;
     if(!service || !deadline)return ERROR_INVALID_PARAMETER;
-    *deadline=0;now=GetTickCount64();
+    *deadline=0;
     EnterCriticalSection(&service->lock);
     for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
@@ -253,6 +252,11 @@ DWORD OpenNtBaseServiceNextFrontendDeadline(OPENNT_BASE_SERVICE *service,ULONGLO
 
 DWORD OpenNtBaseServiceRetireExpiredFrontends(OPENNT_BASE_SERVICE *service)
 {
+    return service_retire_expired_frontends_at(service,GetTickCount64());
+}
+
+DWORD service_retire_expired_frontends_at(OPENNT_BASE_SERVICE *service,ULONGLONG now)
+{
     LIST_ENTRY *link;
     BOOL changed=FALSE,gui_changed;
     if(!service)return ERROR_INVALID_PARAMETER;
@@ -260,7 +264,8 @@ DWORD OpenNtBaseServiceRetireExpiredFrontends(OPENNT_BASE_SERVICE *service)
     gui_changed=service_prune_gui_records(service);
     for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-        if(service_root_workerless(root)) {
+        ULONGLONG deadline=service_root_retirement_deadline(root,now);
+        if(deadline && deadline<=now) {
             root->frontend_closing=TRUE;
             changed=TRUE;
         }
@@ -274,7 +279,7 @@ DWORD OpenNtBaseServiceRetireExpiredFrontends(OPENNT_BASE_SERVICE *service)
         DWORD native_root=0;
         if(watch->wow)continue;
         {
-            ULONGLONG now=GetTickCount64(),due=service_unbound_native_deadline(watch,now);
+            ULONGLONG due=service_unbound_native_deadline(watch,now);
             if(due && due<=now) {(void)SetEvent(watch->shutdown);changed=TRUE;}
         }
         if(watch->kind==OPENNT_BASE_WORKER_NATIVE)
