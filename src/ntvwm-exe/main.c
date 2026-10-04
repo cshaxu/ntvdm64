@@ -124,6 +124,11 @@ static DWORD take_presentation(native_membership *state)
     error=ntvwm_presentation_call(state->presentation,&request,&reply);
     return error==ERROR_NOT_READY || error==ERROR_BUSY ? ERROR_SUCCESS : error;
 }
+static DWORD WINAPI close_console(void *context)
+{
+    (void)context;
+    return ntvwm_console_close();
+}
 static DWORD presentation_loop(void *context)
 {
     native_membership *state=context;DWORD error=0;
@@ -132,12 +137,10 @@ static DWORD presentation_loop(void *context)
     while((wait=WaitForMultipleObjects(4,waits,FALSE,30))!=WAIT_OBJECT_0+2) {
         EnterCriticalSection(state->lock);
         if(wait==WAIT_OBJECT_0 || wait==WAIT_OBJECT_0+1) {
-            error=ntvwm_console_close();
-            if(!error && !SetEvent(state->closed))error=GetLastError();
             /* The authenticated broker orders Console-session closure,
              * just as it does for NTVDM. Closing a direct launcher does not.
              * Explicit management close uses this same backend operation. */
-            TerminateProcess(GetCurrentProcess(),error ? error : ERROR_CANCELLED);
+            worker_base_shutdown_close(close_console,state,INFINITE,ERROR_CANCELLED,state->closed);
             LeaveCriticalSection(state->lock);
             return error ? error : ERROR_CANCELLED;
         }
@@ -222,17 +225,9 @@ static void membership_close(native_membership *state)
     ZeroMemory(state,sizeof(*state));
     state->lock=lock;
 }
-static DWORD membership_bind(native_membership *state,HANDLE frontend)
+static DWORD membership_initialize(native_membership *state)
 {
-    typedef BOOL (WINAPI *compare_handles)(HANDLE,HANDLE);
-    compare_handles compare=(compare_handles)GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
     DWORD error;
-    if(!compare)return ERROR_CALL_NOT_IMPLEMENTED;
-    if(state->capability && compare(state->capability,frontend)) {
-        if(WaitForSingleObject(state->thread,0)==WAIT_TIMEOUT)return 0;
-        return GetExitCodeThread(state->thread,&error) ? (error ? error : ERROR_OPERATION_ABORTED) : GetLastError();
-    }
-    membership_close(state);
     {
         unsigned bank,glyph;
         /* Match original startup 80x25 VGA; later handoffs supply the actual
@@ -247,9 +242,7 @@ static DWORD membership_bind(native_membership *state,HANDLE frontend)
     state->admission_ready=CreateEventW(NULL,TRUE,FALSE,NULL);
     if(!state->quit || !state->stop_requested || !state->closed || !state->admission_ready)error=GetLastError();
     else error=ERROR_SUCCESS;
-    if(!error && !DuplicateHandle(GetCurrentProcess(),frontend,GetCurrentProcess(),
-        &state->capability,SYNCHRONIZE,FALSE,0))error=GetLastError();
-    if(!error)error=OpenNtBaseClientRegisterNativeBackend(frontend,state->stop_requested,state->closed);
+    if(!error)error=OpenNtBaseClientRegisterNativeBackend(NULL,state->stop_requested,state->closed);
     if(!error)error=worker_base_shutdown_event(&state->shutdown);
     if(!error)error=worker_base_io_release_event(&state->io_release);
     if(!error) {
@@ -258,6 +251,24 @@ static DWORD membership_bind(native_membership *state,HANDLE frontend)
     }
     if(error)membership_close(state);
     /* Only explicit management close may acknowledge actual Console closure. */
+    return error;
+}
+
+static DWORD membership_bind(native_membership *state,HANDLE frontend)
+{
+    typedef BOOL (WINAPI *compare_handles)(HANDLE,HANDLE);
+    compare_handles compare=(compare_handles)GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
+    DWORD error;
+    if(!compare)return ERROR_CALL_NOT_IMPLEMENTED;
+    if(state->capability) {
+        if(!compare(state->capability,frontend))return ERROR_PIPE_NOT_CONNECTED;
+        if(WaitForSingleObject(state->thread,0)==WAIT_TIMEOUT)return ERROR_SUCCESS;
+        return GetExitCodeThread(state->thread,&error) ? (error ? error : ERROR_OPERATION_ABORTED) : GetLastError();
+    }
+    if(!DuplicateHandle(GetCurrentProcess(),frontend,GetCurrentProcess(),
+        &state->capability,SYNCHRONIZE,FALSE,0))return GetLastError();
+    error=OpenNtBaseClientRegisterNativeBackend(frontend,state->stop_requested,state->closed);
+    if(error){CloseHandle(state->capability);state->capability=NULL;}
     return error;
 }
 
@@ -289,6 +300,7 @@ int wmain(int argc,WCHAR **argv)
     if(!CsrPortHeap)return GetLastError();
     error=worker_base_connect();
     if(!error) error=ntvwm_console_initialize();
+    if(!error) error=membership_initialize(&membership);
     if(!error) error=ntvwm_executions_open(&requests);
     if(!error) {
         ntvwm_executions_bind_io(requests,&io);

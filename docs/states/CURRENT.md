@@ -52,7 +52,24 @@ records provenance and ordering. Console17/Window17/WOW and real nested
 Console/Window parent-return gates passed. The coherent eight-file S3 package
 is published to O:/winnt/system32 with recovery in build/M0-T428/S3/r008;
 published smoke and all eight hash checks passed. Reviewed P ae28ef7ce is
-pushed. S4 is admitted for the approved common shutdown work; not implemented yet.
+pushed. S4's common shutdown implementation is built, tested and published.
+Its [source boundary and verification record](../etc/evidence/m0-t428-s4-common-worker-shutdown.md)
+records 37 shutdown assertions, 25 service cases, six actual GUI cases,
+Console17/Window17/WOW, frontend/worker loss, independent close isolation and
+published smoke/hash checks. Original DOS/WOW cleanup and wire versions remain
+unchanged. Reviewed commit/push is pending; side-session planning stays separate.
+
+## S4 Closure Record
+
+S4 production paths use worker-base's common local close mechanism; native
+GUI-only workers register control before text binding. Original NTVDM cleanup
+and real native Console closure remain worker-local. Affected x86 /MT CCPU40
+builds, 37 shutdown assertions, 25 service cases, six GUI cases, paired
+frontend-loss/receipt checks, native close isolation and failure tests passed.
+Console17/Window17/retained WOW passed in r004. The eight-file tested package
+equals O:/winnt/system32; recoverable S3 backup is in build/M0-T428/S4/r008.
+Published Console/Window smoke and all eight hashes passed. Final review,
+commit and push remain to be recorded. T428 stays open; S5/S6 remain pending.
 
 ## S3 Closure Record
 

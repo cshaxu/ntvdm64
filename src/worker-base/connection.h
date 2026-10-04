@@ -15,6 +15,12 @@ static __inline DWORD worker_base_start_character_io(BOOL required,
 }
 /* Caller owns a synchronize-only shutdown event; NTSRV alone signals it. */
 DWORD worker_base_shutdown_event(HANDLE *shutdown);
+/* Execute worker-local close after an authenticated instruction. Grace is
+ * supplied by that existing owner (INFINITE calls inline). A successful close
+ * alone may signal closed; failure never fabricates that acknowledgment.
+ * Always ends this carrier only, not a process tree. Does not return. */
+void worker_base_shutdown_close(LPTHREAD_START_ROUTINE close,void *context,
+    DWORD grace,DWORD exit_code,HANDLE closed);
 /* Service instruction to publish/return input and release presentation.
  * This does not end a task or worker. Caller owns a wait-only event handle. */
 DWORD worker_base_io_release_event(HANDLE *release);

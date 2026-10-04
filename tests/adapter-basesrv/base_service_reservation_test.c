@@ -855,6 +855,25 @@ int main(int argc,char **argv)
             HANDLE native_stop=CreateEventW(NULL,TRUE,FALSE,NULL);
             HANDLE native_closed=CreateEventW(NULL,TRUE,FALSE,NULL);
             CHECK(native_stop && native_closed);
+            /* GUI-only carrier controls exist before its first text route.
+             * Authentication and event validation are unchanged. */
+            CHECK(OpenNtBaseServiceRegisterNativeBackend(worker,child.dwProcessId,
+                workerGeneration+1,NULL,native_stop,native_closed)==ERROR_ACCESS_DENIED);
+            CHECK(OpenNtBaseServiceRegisterNativeBackend(worker,child.dwProcessId,
+                workerGeneration,NULL,native_stop,native_stop)==ERROR_INVALID_PARAMETER);
+            CHECK(SetEvent(native_closed));
+            CHECK(OpenNtBaseServiceRegisterNativeBackend(worker,child.dwProcessId,
+                workerGeneration,NULL,native_stop,native_closed)==ERROR_INVALID_PARAMETER);
+            CHECK(ResetEvent(native_closed));
+            CHECK(!OpenNtBaseServiceRegisterNativeBackend(worker,child.dwProcessId,
+                workerGeneration,NULL,native_stop,native_closed));
+            CHECK(OpenNtBaseServiceRegisterNativeBackend(worker,child.dwProcessId,
+                workerGeneration,NULL,native_stop,native_closed)==ERROR_INVALID_STATE);
+            {HANDLE release=NULL;
+                CHECK(!OpenNtBaseServiceWorkerIoReleaseEvent(worker,child.dwProcessId,
+                    workerGeneration,&release));
+                CHECK(release && WaitForSingleObject(release,0)==WAIT_TIMEOUT);
+                CloseHandle(release);}
             CHECK(DuplicateHandle(GetCurrentProcess(),initial_capability,GetCurrentProcess(),
                 &capability,0,FALSE,DUPLICATE_SAME_ACCESS));
             CHECK(capability && foreign && ready);

@@ -2,6 +2,7 @@ param([Parameter(Mandatory)][string]$Observer,
       [Parameter(Mandatory)][string]$PackageRoot,
       [Parameter(Mandatory)][string]$ReportPrefix,
       [string]$LaunchRoot='',
+      [string]$MonitorRpc='',
       [switch]$FullDeadlines)
 $ErrorActionPreference='Stop'
 $Observer=(Resolve-Path $Observer).Path
@@ -51,6 +52,11 @@ $survivalMarker='PASS GUI-SURVIVAL-EXIT-37'
 Observe 'carrier-residency' (Get-Command pwsh).Source $survivalArguments 'exit=0x00000000' $survivalMarker
 $survivalScreen=Get-Content ($ReportPrefix+'-carrier-residency.txt.console.txt') -Raw
 if(!$survivalScreen.Contains('PASS GUI-RESIDENCY-'+[bool]$FullDeadlines)){throw 'Wrong residency coverage mode'}
+if($MonitorRpc){
+    Observe 'gui-only-management' (Get-Command pwsh).Source @('-NoProfile','-File',
+        (Join-Path $PSScriptRoot 'native_gui_route_fixture.ps1'),'-PackageRoot',$PackageRoot,
+        '-ManagementClose','-MonitorRpc',(Resolve-Path $MonitorRpc).Path) 'exit=0x00000000' 'PASS GUI-ONLY-MANAGEMENT-CLOSE'
+}
 $command='"'+$launcher+'" --wait "'+$probe+'" & echo S9-GUI-TEXT-RESUMED & exit /b 19'
 Observe 'text-gui-text' $launcher @('cmd','/d','/c',$command) 'exit=0x00000013' 'S9-GUI-TEXT-RESUMED'
 } finally { Stop-IsolatedPackageScope $testScope }

@@ -185,13 +185,11 @@ static DWORD WINAPI console_input_watch(void *context)
         if(ready)CloseHandle(ready);
         if (result==WAIT_OBJECT_0+1) return 0;
         if (result==WAIT_OBJECT_0) {
-            HANDLE close=CreateThread(NULL,0,console_close_callback,client,0,NULL);
             /* The broker ordered closure: there is no remaining UI in which to
              * cancel closing this session. Bound a blocked original handler,
              * then close this worker only, as Console Server forced close did.
              * This timeout is a close grace, never a guest idle timeout. */
-            if (close) { WaitForSingleObject(close,5000);CloseHandle(close); }
-            TerminateProcess(GetCurrentProcess(),CONTROL_C_EXIT);
+            worker_base_shutdown_close(console_close_callback,client,5000,CONTROL_C_EXIT,NULL);
             return ERROR_PROCESS_ABORTED;
         }
         if(result==WAIT_OBJECT_0+2){pending=FALSE;continue;}

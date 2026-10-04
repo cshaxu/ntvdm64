@@ -133,17 +133,24 @@ DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *connection,
     EnterCriticalSection(&connection->service->lock);
     /* Only the process which claimed the authenticated native reservation may
      * become a native worker.  A connected launcher/root is not sufficient. */
+    if(!OpenNtBaseServicePeer(connection,pid,generation))
+        {error=ERROR_ACCESS_DENIED;goto done;}
     if(!connection->native_worker ||
         connection->reservation_kind!=OPENNT_BASE_WORKER_NATIVE ||
         connection->frontend_capability || connection->process.fVDM)
         {error=ERROR_INVALID_STATE;goto done;}
-    error=OpenNtBaseServiceRetainFrontendRoot(connection,pid,generation,frontend,&root,&root_generation);
-    if(error)goto done;
+    /* Close control belongs to the worker before it acquires any text route.
+     * The same events accompany the later authenticated frontend binding. */
+    if(frontend) {
+        error=OpenNtBaseServiceRetainFrontendRoot(connection,pid,generation,frontend,&root,&root_generation);
+        if(error)goto done;
+    } else if(connection->native_stop || connection->native_closed)
+        {error=ERROR_INVALID_STATE;goto done;}
     if(connection->native_root) {
         if(connection->native_root==root_generation) {error=ERROR_INVALID_STATE;goto done;}
         error=ERROR_PIPE_NOT_CONNECTED;goto done;
     }
-    if(compare(stop,closed) || compare(stop,frontend) || compare(closed,frontend))
+    if(compare(stop,closed) || (frontend && (compare(stop,frontend) || compare(closed,frontend))))
         {error=ERROR_INVALID_PARAMETER;goto done;}
     events[0]=stop;events[1]=closed;
     for(index=0;index<2;++index) {
@@ -155,7 +162,7 @@ DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *connection,
     }
     for(link=connection->service->connections.Flink;link!=&connection->service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *other=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-        if(other->native_root==root_generation && WaitForSingleObject(other->process.ProcessHandle,0)==WAIT_TIMEOUT)
+        if(root_generation && other->native_root==root_generation && WaitForSingleObject(other->process.ProcessHandle,0)==WAIT_TIMEOUT)
             {error=ERROR_ALREADY_EXISTS;goto done;}
     }
     if(!DuplicateHandle(GetCurrentProcess(),stop,GetCurrentProcess(),&stop_copy,
@@ -282,7 +289,8 @@ DWORD OpenNtBaseServiceWorkerIoReleaseEvent(OPENNT_BASE_CONNECTION *worker,DWORD
     *release=NULL;
     EnterCriticalSection(&worker->service->lock);
     if(OpenNtBaseServicePeer(worker,pid,generation) &&
-        (worker->registered_worker || (worker->native_worker && worker->native_root))) {
+        (worker->registered_worker || (worker->native_worker &&
+            (worker->native_root || (worker->native_stop && worker->native_closed))))) {
         if(!worker->worker_io_release)
             worker->worker_io_release=CreateEventW(NULL,FALSE,FALSE,NULL);
         if(!worker->worker_io_release)error=GetLastError();
