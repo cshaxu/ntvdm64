@@ -235,7 +235,7 @@ DWORD OpenNtBaseServiceBindNativeTarget(OPENNT_BASE_CONNECTION *connection,DWORD
                     if(!DuplicateHandle(GetCurrentProcess(),receipt,GetCurrentProcess(),&owned_receipt,
                         EVENT_MODIFY_STATE,FALSE,0))error=GetLastError();
                     else if(record->gui && !DuplicateHandle(GetCurrentProcess(),target,GetCurrentProcess(),&owned_target,
-                        SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,FALSE,0))error=GetLastError();
+                        SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION|PROCESS_TERMINATE,FALSE,0))error=GetLastError();
                     else if(record->gui && !RegisterWaitForSingleObject(&owned_wait,owned_target,
                         service_gui_exit,connection->service,INFINITE,WT_EXECUTEONLYONCE))error=GetLastError();
                     else {
@@ -243,6 +243,7 @@ DWORD OpenNtBaseServiceBindNativeTarget(OPENNT_BASE_CONNECTION *connection,DWORD
                         record->gui_process=owned_target;owned_target=NULL;
                         record->gui_wait=owned_wait;owned_wait=NULL;
                         record->process_id=target_pid;
+                        record->worker_generation=generation;
                         service_query_native_image(target_pid,record->image);
                         service_signal_frontend_states(connection->service);
                         error=ERROR_SUCCESS;

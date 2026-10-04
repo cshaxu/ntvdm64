@@ -27,13 +27,14 @@ DWORD common_rpc_task_snapshot(const common_rpc_management *state,
     return ERROR_SUCCESS;
 }
 
-DWORD common_rpc_terminate_worker(const common_rpc_management *state,DWORD pid)
+DWORD common_rpc_close_management_node(const common_rpc_management *state,const DTASKMGR_KEY *key)
 {
     DWORD error=ERROR_INVALID_STATE;
     if (!state || !state->binding || !state->process) return error;
+    if(!key)return ERROR_INVALID_PARAMETER;
     RpcTryExcept {
-        error=Client_TerminateWorker(state->binding,state->process,APP_PROTOCOL_VERSION,
-            (unsigned char *)app_version,pid);
+        error=Client_CloseManagementNode(state->binding,state->process,APP_PROTOCOL_VERSION,
+            (unsigned char *)app_version,(DTASKMGR_KEY *)key);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept

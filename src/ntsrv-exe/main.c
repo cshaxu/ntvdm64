@@ -214,16 +214,26 @@ error_status_t Server_TaskSnapshot(handle_t binding,HANDLE process,ULONG protoco
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
     if (error) return error;
     error=basesrv_management_version(protocol,application_version);
-    if (!error) error=OpenNtBaseServiceSnapshot(service,&service_epoch,NULL,0,&actual);
-    if (error!=ERROR_INSUFFICIENT_BUFFER && error!=ERROR_SUCCESS) goto done;
+    if (!error) error=OpenNtBaseServiceSnapshotCopy(service,&service_epoch,&local,&actual);
+    if (error) goto done;
     if (actual) {
-        local=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*local)*actual);
-        if (!local) { error=ERROR_NOT_ENOUGH_MEMORY; goto done; }
-        error=OpenNtBaseServiceSnapshot(service,&service_epoch,local,actual,&actual);
-        if (error) goto done;
-        *entries=MIDL_user_allocate(sizeof(**entries)*actual);
+        if ((size_t)actual>SIZE_MAX/sizeof(**entries)) {
+            error=ERROR_ARITHMETIC_OVERFLOW;goto done;
+        }
+        *entries=MIDL_user_allocate(sizeof(**entries)*(size_t)actual);
         if (!*entries) { error=ERROR_NOT_ENOUGH_MEMORY; goto done; }
         for (index=0;index<actual;++index) {
+            (*entries)[index].key.instance=(hyper)local[index].key.instance;
+            (*entries)[index].key.category=local[index].key.category;
+            (*entries)[index].key.generation=local[index].key.generation;
+            (*entries)[index].key.object=(hyper)local[index].key.object;
+            (*entries)[index].parent.instance=(hyper)local[index].parent.instance;
+            (*entries)[index].parent.category=local[index].parent.category;
+            (*entries)[index].parent.generation=local[index].parent.generation;
+            (*entries)[index].parent.object=(hyper)local[index].parent.object;
+            (*entries)[index].depth=local[index].depth;
+            (*entries)[index].display_state=local[index].display_state;
+            (*entries)[index].actions=local[index].actions;
             (*entries)[index].process_id=local[index].process_id;
             (*entries)[index].kind=local[index].kind;
             (*entries)[index].state=local[index].state;
@@ -240,14 +250,18 @@ done:
     if (error) *count=0;
     return error;
 }
-error_status_t Server_TerminateWorker(handle_t binding,HANDLE process,ULONG protocol,
-    unsigned char application_version[32],ULONG process_id)
+error_status_t Server_CloseManagementNode(handle_t binding,HANDLE process,ULONG protocol,
+    unsigned char application_version[32],DTASKMGR_KEY *key)
 {
     DWORD pid,error;
+    OPENNT_BASE_MANAGEMENT_KEY selector;
+    if(!key)return ERROR_INVALID_PARAMETER;
+    selector.instance=(uint64_t)key->instance;selector.category=key->category;
+    selector.generation=key->generation;selector.object=(uint64_t)key->object;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
     if (error) return error;
     error=basesrv_management_version(protocol,application_version);
-    if (!error) error=OpenNtBaseServiceTerminateWorker(service,process_id);
+    if (!error) error=OpenNtBaseServiceCloseManagementNode(service,&selector);
     basesrv_schedule_empty_stop();
     return error;
 }
@@ -878,7 +892,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v37_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v38_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -925,7 +939,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v37_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v38_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);

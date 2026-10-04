@@ -1,7 +1,7 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(37.0),
+    version(38.0),
     pointer_default(unique)
 ]
 interface vdm_service
@@ -274,11 +274,19 @@ interface vdm_service
         [out, system_handle(sh_process)] HANDLE *frontend,
         [out] unsigned long *frontend_generation,
         [out, system_handle(sh_event)] HANDLE *ready);
-    /* This is an authenticated, copied management projection.  PID is its
-     * sole cross-process worker identity; BaseSrv's sequence/generation stays
-     * private routing state.  No HANDLE, guest pointer or record pointer is
-     * serialized. */
+    typedef struct _DTASKMGR_KEY {
+        hyper instance;
+        unsigned long category;
+        unsigned long generation;
+        hyper object;
+    } DTASKMGR_KEY;
+    /* Copied service identities, not PID-only selectors, handles or pointers. */
     typedef struct _DTASKMGR_WORKER {
+        DTASKMGR_KEY key;
+        DTASKMGR_KEY parent;
+        unsigned long depth;
+        unsigned long display_state;
+        unsigned long actions;
         unsigned long process_id;
         unsigned long kind;
         unsigned long state;
@@ -465,12 +473,12 @@ interface vdm_service
         [in] byte application_version[32],
         [out] unsigned long *count,
         [out, size_is(,*count)] DTASKMGR_WORKER **entries);
-    error_status_t TerminateWorker(
+    error_status_t CloseManagementNode(
         [in] handle_t binding,
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long protocol,
         [in] byte application_version[32],
-        [in] unsigned long process_id);
+        [in] DTASKMGR_KEY *key);
     error_status_t RegisterWowExec(
         [in] handle_t binding,
         [in] VDM_CONNECTION connection,

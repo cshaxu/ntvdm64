@@ -8,6 +8,29 @@ NTCON renderer or modifying guest/shared-library code.
 
 ## Product boundary
 
+### Service-owned management tree — T426
+
+NTSRV projects existing authenticated frontend associations, worker watches,
+original WOW records and registered detached GUI records in one copied
+management snapshot. NTCON frontends are top-level with associated DOS and
+Win32-text workers beneath them; independent Win16 workers are top-level with
+their actual WOW tasks beneath them. Detached Win32 GUI targets are top-level.
+There is no UNBOUND group. A departed known frontend is displayed as MISSING
+only while workers retain its exact authenticated association; a replacement
+frontend cannot acquire those children merely by PID reuse.
+
+Management keys contain service instance, category, generation and object
+identity, never process-local pointers or trusted PID-only selectors. NTMON
+consumes server ordering, state, labels and permissions; it neither enumerates
+processes nor owns relationships. Explicit close goes through authenticated
+NTSRV validation and pins the existing actual target before leaving the lock.
+Existing worker/frontend shutdown and completion semantics remain at their
+owners; GUI close targets its registered process only. WOW task rows have no
+fabricated host PID/time or individual close permission. This is a projection,
+not a second execution registry or scheduler. The
+[S2 evidence](../etc/evidence/m0-t426-s2-management-projection.md) distinguishes
+implemented production paths, actual verification and pending delivery/UI work.
+
 ### Broker-controlled single I/O connection — T425 S6 delivery
 
 Owner-approved S6 replaces the frontend pending-owner policy with one

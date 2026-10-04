@@ -21,7 +21,7 @@ $cases=@('io-authority','frontend-delegated','frontend-wait','frontend-wait-root
     'reenter-before-return','reenter-after-return','reenter-nested-return',
     'reenter-pending-command','reenter-before-increment','launcher-completed-rundown',
     'completed-worker-loss','wow-start-late-query','default','frontend-authority','unbound-retirement',
-    'native-command','native-worker')
+    'native-command','native-worker','management-gui','management-frontend-close')
 if($FailureProbe){$cases=@('runner-failure')}
 $null=New-Item -ItemType Directory -Path $log
 $running=[Collections.Generic.List[object]]::new()

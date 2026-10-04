@@ -1153,6 +1153,8 @@ DWORD OpenNtBaseServiceRequestFrontend(OPENNT_BASE_CONNECTION *connection,DWORD 
                 DWORD authorization=service_authorize_worker_io(connection,GetProcessId(worker));
                 if(authorization)error=authorization;
             }
+            if(!error || error==ERROR_ALREADY_EXISTS)
+                service_bind_management_root(connection->service,worker,route->root);
             goto done;
         }
     }
@@ -1180,6 +1182,7 @@ DWORD OpenNtBaseServiceRequestFrontend(OPENNT_BASE_CONNECTION *connection,DWORD 
         }
         service_signal_frontend_states(connection->service);
         error=ERROR_SUCCESS;
+        service_bind_management_root(connection->service,pending->worker,root);
         break;
     }
 done:

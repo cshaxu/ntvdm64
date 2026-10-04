@@ -55,6 +55,7 @@ struct OPENNT_BASE_SERVICE {
     OPENNT_BASE_EMPTY_NOTIFY empty_notify;
     void *empty_notify_context;
     uint64_t management_epoch;
+    uint64_t next_management_task; /* Label admission identity, never scheduling. */
 };
 struct OPENNT_BASE_CONNECTION {
     OPENNT_BASE_SERVICE *service;
@@ -153,10 +154,11 @@ typedef struct OPENNT_BASE_WIN32RECORD {
     DWORD request;
     /* Bind only the admitted direct target's actual CreateProcess identity. */
     DWORD process_id;
+    DWORD worker_generation; /* Retained when a GUI record leaves its carrier. */
     DWORD launcher_generation,exit_code,completion_error;
     BOOL completed;
     BOOL gui;
-    HANDLE gui_process,gui_wait; /* Restricted process reference and event-only watch. */
+    HANDLE gui_process,gui_wait; /* Query/wait/explicit-close reference; event-only watch. */
     HANDLE receipt; /* Signalled after NTVWM reports exit and I/O release. */
     DWORD io_error,io_flags; /* Final I/O precedes receipt under the service lock. */
     BOOL startup_delivered;
@@ -191,6 +193,7 @@ typedef struct OPENNT_BASE_WORKER_WATCH {
     BOOL termination_requested;
     HANDLE shutdown;
     BOOL frontend_associated;
+    DWORD management_root_generation,management_root_pid;
     ULONGLONG unbound_native_deadline;
 } OPENNT_BASE_WORKER_WATCH;
 typedef struct OPENNT_BASE_MANAGEMENT_LABEL {
@@ -198,6 +201,8 @@ typedef struct OPENNT_BASE_MANAGEMENT_LABEL {
     PDOSRECORD record;
     HANDLE parent_wait;
     ULONG task;
+    PWOWRECORD wow_record;
+    uint64_t identity;
     WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS];
 } OPENNT_BASE_MANAGEMENT_LABEL;
 typedef struct OPENNT_BASE_CONSOLE_CONTEXT {
@@ -246,8 +251,12 @@ void service_resources_init(OPENNT_BASE_SERVICE_RESOURCES *scope,
 void service_abandon_launch(OPENNT_BASE_CONNECTION *connection);
 void service_clear_management_labels(OPENNT_BASE_WORKER_WATCH *watch);
 void service_capture_initial_management_labels(OPENNT_BASE_WORKER_WATCH *watch);
+void service_capture_wow_management_labels(OPENNT_BASE_CONNECTION *);
 void service_capture_checked_management_label(OPENNT_BASE_SERVICE *service,
     HANDLE console,const BASE_CHECKVDM_MSG *command);
+/* Caller holds service lock; capture only an already authenticated binding. */
+void service_bind_management_root(OPENNT_BASE_SERVICE *,HANDLE worker,
+    OPENNT_BASE_CONNECTION *root);
 BOOL service_root_has_worker(OPENNT_BASE_CONNECTION *root);
 DWORD service_queue_native_command(OPENNT_BASE_CONNECTION *connection,DWORD pid,
     DWORD generation,HANDLE capability,const WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS],

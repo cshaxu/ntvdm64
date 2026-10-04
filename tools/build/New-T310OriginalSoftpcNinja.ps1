@@ -1583,6 +1583,9 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build ' + $monitorRpcTestObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/adapter-basesrv/monitor_rpc_test.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build monitor-rpc-test.exe: monitor_link ' + $monitorRpcTestObject + ' obj/monitor/stub.obj broker-transport.lib common-rpc.lib')
+    $graph.Add('build obj/tests/monitor_layout.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/monitor_layout_test.c')) + ' | obj/basesrv/service.h')
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build monitor-layout-test.exe: monitor_link obj/tests/monitor_layout.obj obj/monitor/stub.obj broker-transport.lib common-rpc.lib')
     $graph.Add('rule worker_link')
     # MSVC leaves an unchanged import library's timestamp intact. Without
     # restat that implicit output makes the whole link dirty on every build.

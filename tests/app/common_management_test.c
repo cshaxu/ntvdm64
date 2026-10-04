@@ -7,6 +7,7 @@
 static unsigned checks,failures,calls,allocations,mode;
 static common_rpc_management expected;
 static const unsigned char version[APP_VERSION_BYTES]=APP_VERSION;
+static DTASKMGR_KEY selected={17,2,123,0};
 #define CHECK(x) do { ++checks; if (!(x)) { ++failures;printf("FAIL %u %s\n",__LINE__,#x); } } while(0)
 void *__RPC_USER MIDL_user_allocate(size_t size) {void *p=malloc(size);if(p)++allocations;return p;}
 void __RPC_USER MIDL_user_free(void *p) {if(p){--allocations;free(p);}}
@@ -29,10 +30,12 @@ error_status_t Client_TaskSnapshot(handle_t binding,HANDLE process,unsigned long
     if(*items){ZeroMemory(*items,sizeof(**items));(*items)->process_id=123;}
     return result();
 }
-error_status_t Client_TerminateWorker(handle_t binding,HANDLE process,unsigned long protocol,
-    unsigned char *application,unsigned long pid)
+error_status_t Client_CloseManagementNode(handle_t binding,HANDLE process,unsigned long protocol,
+    unsigned char *application,DTASKMGR_KEY *key)
 {
-    peer(binding,process,protocol,application);CHECK(pid==123);return result();
+    peer(binding,process,protocol,application);
+    CHECK(key && key->instance==selected.instance && key->category==selected.category &&
+        key->generation==selected.generation && key->object==selected.object);return result();
 }
 int main(void)
 {
@@ -46,24 +49,25 @@ int main(void)
         if(i==0){CHECK(count==1 && items && items->process_id==123);MIDL_user_free(items);}
         else CHECK(count==0 && items==NULL);
         CHECK(allocations==0);
-        CHECK(common_rpc_terminate_worker(&expected,123)==error);
+        CHECK(common_rpc_close_management_node(&expected,&selected)==error);
     }
     before=calls;count=99;items=(DTASKMGR_WORKER *)(ULONG_PTR)1;
     CHECK(common_rpc_task_snapshot(NULL,&count,&items)==ERROR_INVALID_STATE);
     CHECK(count==0 && items==NULL);
     CHECK(common_rpc_task_snapshot(&expected,NULL,&items)==ERROR_INVALID_PARAMETER);
     CHECK(common_rpc_task_snapshot(&expected,&count,NULL)==ERROR_INVALID_PARAMETER);
-    CHECK(common_rpc_terminate_worker(NULL,123)==ERROR_INVALID_STATE);
+    CHECK(common_rpc_close_management_node(NULL,&selected)==ERROR_INVALID_STATE);
+    CHECK(common_rpc_close_management_node(&expected,NULL)==ERROR_INVALID_PARAMETER);
     CHECK(calls==before);CHECK(allocations==0);
     CHECK(WaitForSingleObject(expected.process,0)==WAIT_TIMEOUT);
     {
         common_rpc_management missing=expected;
         missing.binding=NULL;
         CHECK(common_rpc_task_snapshot(&missing,&count,&items)==ERROR_INVALID_STATE);
-        CHECK(common_rpc_terminate_worker(&missing,123)==ERROR_INVALID_STATE);
+        CHECK(common_rpc_close_management_node(&missing,&selected)==ERROR_INVALID_STATE);
         missing=expected;missing.process=NULL;
         CHECK(common_rpc_task_snapshot(&missing,&count,&items)==ERROR_INVALID_STATE);
-        CHECK(common_rpc_terminate_worker(&missing,123)==ERROR_INVALID_STATE);
+        CHECK(common_rpc_close_management_node(&missing,&selected)==ERROR_INVALID_STATE);
         CHECK(calls==before);
     }
     mode=3;expected.binding=(RPC_BINDING_HANDLE)(ULONG_PTR)22;

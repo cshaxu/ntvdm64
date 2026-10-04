@@ -191,6 +191,8 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                             WaitForSingleObject(root->process.ProcessHandle,0)==WAIT_TIMEOUT) {
                             error=service_copy_execution_console_members(connection,root);
                             watch->frontend_associated=TRUE;
+                            watch->management_root_generation=root->process.SequenceNumber;
+                            watch->management_root_pid=GetProcessId(root->process.ProcessHandle);
                             break;
                         }
                     }

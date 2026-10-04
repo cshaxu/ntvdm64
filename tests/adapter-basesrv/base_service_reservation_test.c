@@ -18,6 +18,7 @@ DWORD fixture_take_native_command(OPENNT_BASE_CONNECTION *,DWORD,DWORD,DWORD,BYT
 DWORD fixture_frontend_notification_denied(OPENNT_BASE_CONNECTION *,DWORD,DWORD,DWORD,BOOL,BOOL *);
 int fixture_io_authority(void);
 int fixture_unbound_retirement(void);
+int fixture_management_gui(void);
 DWORD service_next_frontend_deadline_at(OPENNT_BASE_SERVICE *,ULONGLONG,ULONGLONG *);
 DWORD service_retire_expired_frontends_at(OPENNT_BASE_SERVICE *,ULONGLONG);
 static const BYTE native_payload[3]={'N','T','C'};
@@ -109,6 +110,64 @@ static DWORD WINAPI acknowledge_native_close(void *context)
     if(test->observed!=WAIT_OBJECT_0)return ERROR_TIMEOUT;
     if(!TerminateProcess(test->process,ERROR_CANCELLED))return GetLastError();
     return SetEvent(test->closed) ? ERROR_SUCCESS : GetLastError();
+}
+
+typedef struct FRONTEND_CLOSE_TEST {
+    OPENNT_BASE_CONNECTION *root;
+    HANDLE changed,process;
+    DWORD pid,generation;
+} FRONTEND_CLOSE_TEST;
+static DWORD WINAPI acknowledge_frontend_close(void *context)
+{
+    FRONTEND_CLOSE_TEST *test=context;
+    DWORD closing=0,error;
+    if(WaitForSingleObject(test->changed,5000)!=WAIT_OBJECT_0)return ERROR_TIMEOUT;
+    error=OpenNtBaseServiceRetireWorkerlessFrontend(test->root,test->pid,test->generation,&closing);
+    if(error || !closing)return error ? error : ERROR_INVALID_STATE;
+    return TerminateProcess(test->process,ERROR_CANCELLED) ? ERROR_SUCCESS : GetLastError();
+}
+
+static int management_frontend_close(void)
+{
+    OPENNT_BASE_SERVICE *service=OpenNtBaseServiceStart();
+    OPENNT_BASE_CONNECTION *root=NULL;
+    PROCESS_INFORMATION child={0};STARTUPINFOA startup={sizeof(startup)};
+    HANDLE capability=CreateEventW(NULL,TRUE,FALSE,NULL),changed=NULL,thread;
+    char image[MAX_PATH],command[MAX_PATH+32];
+    DWORD generation=0,exit=ERROR_GEN_FAILURE;
+    OPENNT_BASE_WORKER_INFO *tree=NULL;
+    uint64_t epoch=0;uint32_t count=0;
+    FRONTEND_CLOSE_TEST actor={0};
+    CHECK(service && capability && GetModuleFileNameA(NULL,image,MAX_PATH));
+    sprintf_s(command,sizeof(command),"\"%s\" --reservation-child",image);
+    CHECK(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
+        NULL,NULL,&startup,&child));
+    CHECK(!OpenNtBaseServiceConnect(service,child.hProcess,&root,&generation));
+    CHECK(!OpenNtBaseServiceRegisterFrontendRoot(root,child.dwProcessId,generation,capability));
+    CHECK(!OpenNtBaseServiceFrontendStateChanged(root,child.dwProcessId,generation,&changed));
+    while(WaitForSingleObject(changed,0)==WAIT_OBJECT_0) {}
+    CHECK(!OpenNtBaseServiceSnapshotCopy(service,&epoch,&tree,&count) && count==1);
+    CHECK(tree[0].key.category==MANAGEMENT_FRONTEND && tree[0].actions==MANAGEMENT_CAN_CLOSE);
+    {
+        OPENNT_BASE_MANAGEMENT_KEY stale=tree[0].key;
+        ++stale.generation;
+        CHECK(OpenNtBaseServiceCloseManagementNode(service,&stale)==ERROR_NOT_FOUND);
+        CHECK(WaitForSingleObject(changed,0)==WAIT_TIMEOUT);
+    }
+    actor.root=root;actor.changed=changed;actor.process=child.hProcess;
+    actor.pid=child.dwProcessId;actor.generation=generation;
+    thread=CreateThread(NULL,0,acknowledge_frontend_close,&actor,0,NULL);CHECK(thread);
+    CHECK(!OpenNtBaseServiceCloseManagementNode(service,&tree[0].key));
+    CHECK(WaitForSingleObject(thread,5000)==WAIT_OBJECT_0 && GetExitCodeThread(thread,&exit) && !exit);
+    CHECK(WaitForSingleObject(child.hProcess,0)==WAIT_OBJECT_0);
+    HeapFree(GetProcessHeap(),0,tree);tree=NULL;
+    CHECK(!OpenNtBaseServiceSnapshotCopy(service,&epoch,&tree,&count) && !count && !tree);
+    CHECK(!OpenNtBaseServiceDisconnect(root));
+    CHECK(OpenNtBaseServiceIsEmpty(service) && OpenNtBaseServiceStop(service));
+    CloseHandle(thread);CloseHandle(changed);CloseHandle(capability);
+    CloseHandle(child.hThread);CloseHandle(child.hProcess);
+    puts("PASS management frontend: stale selector has no wake, authoritative closing instruction, wait outside lock, actual exit");
+    return 0;
 }
 
 /* A named release event keeps the real native target and its ordinary child
@@ -689,6 +748,8 @@ int main(int argc,char **argv)
         return 91;
     }
     if(argc==2 && !strcmp(argv[1],"--io-authority"))return fixture_io_authority();
+    if(argc==2 && !strcmp(argv[1],"--management-gui"))return fixture_management_gui();
+    if(argc==2 && !strcmp(argv[1],"--management-frontend-close"))return management_frontend_close();
     if(argc==2 && !strcmp(argv[1],"--unbound-retirement"))return fixture_unbound_retirement();
     if(argc==3 && !strcmp(argv[1],"--reservation-wait-child"))
         return reservation_wait_child(argv[2]);
@@ -731,6 +792,13 @@ int main(int argc,char **argv)
     service=OpenNtBaseServiceStart();
     CHECK(self && service!=NULL);
     CHECK(OpenNtBaseServiceIsEmpty(service));
+    {
+        OPENNT_BASE_WORKER_INFO *empty=(OPENNT_BASE_WORKER_INFO *)(ULONG_PTR)1;
+        uint64_t emptyEpoch=0;
+        uint32_t emptyCount=1;
+        CHECK(!OpenNtBaseServiceSnapshotCopy(service,&emptyEpoch,&empty,&emptyCount));
+        CHECK(emptyEpoch && !empty && !emptyCount);
+    }
     if(argc==2 && !strcmp(argv[1],"--native-worker")) {
         uint64_t duplicate=0;
         OPENNT_BASE_CONNECTION *initial_root=NULL;
@@ -945,6 +1013,18 @@ int main(int argc,char **argv)
                 workerGeneration,&shutdown));
             CHECK(WaitForSingleObject(shutdown,0)==WAIT_TIMEOUT);
             CHECK(!OpenNtBaseServiceDisconnect(root));root=NULL;initial_root=NULL;
+            {
+                OPENNT_BASE_WORKER_INFO *tree=NULL;
+                uint32_t count=0;uint64_t epoch=0;
+                CHECK(!OpenNtBaseServiceSnapshotCopy(service,&epoch,&tree,&count) && count==2);
+                CHECK(tree[0].key.category==MANAGEMENT_FRONTEND &&
+                    tree[0].key.generation==old_generation && tree[0].display_state==MANAGEMENT_MISSING &&
+                    !tree[0].actions && tree[0].process_id==initial_process.dwProcessId);
+                CHECK(tree[1].key.category==MANAGEMENT_WORKER && tree[1].depth==1 &&
+                    tree[1].key.generation==workerGeneration && tree[1].parent.generation==old_generation);
+                CHECK(OpenNtBaseServiceCloseManagementNode(service,&tree[0].key)==ERROR_NOT_FOUND);
+                HeapFree(GetProcessHeap(),0,tree);
+            }
             CHECK(!OpenNtBaseServiceRetireExpiredFrontends(service));
             CHECK(WaitForSingleObject(shutdown,0)==WAIT_OBJECT_0);
             {
@@ -971,6 +1051,15 @@ int main(int argc,char **argv)
                     root_generation,2,members));}
             CHECK(OpenNtBaseServiceRegisterNativeBackend(worker,child.dwProcessId,workerGeneration,
                 capability,native_stop,native_closed)==ERROR_PIPE_NOT_CONNECTED);
+            {
+                OPENNT_BASE_WORKER_INFO *tree=NULL;
+                uint32_t count=0;uint64_t epoch=0;
+                CHECK(!OpenNtBaseServiceSnapshotCopy(service,&epoch,&tree,&count) && count==3);
+                CHECK(tree[0].key.generation==root_generation && tree[0].depth==0);
+                CHECK(tree[1].key.generation==old_generation && tree[1].display_state==MANAGEMENT_MISSING);
+                CHECK(tree[2].key.generation==workerGeneration && tree[2].parent.generation==old_generation);
+                HeapFree(GetProcessHeap(),0,tree);
+            }
             CHECK(OpenNtBaseServiceRequestFrontend(launcher,GetCurrentProcessId(),
                 launcherGeneration,capability)==ERROR_ACCESS_DENIED);
             CHECK(OpenNtBaseServiceAttachFrontendRequest(root,initial_process.dwProcessId,old_generation,
@@ -1002,7 +1091,10 @@ int main(int argc,char **argv)
                 /* The route/root is already gone.  Service authority comes
                  * from the authenticated native worker watch, not the former
                  * frontend association. */
-                CHECK(!OpenNtBaseServiceTerminateWorker(service,child.dwProcessId));
+                {
+                    OPENNT_BASE_MANAGEMENT_KEY key={managementEpoch,MANAGEMENT_WORKER,workerGeneration,0};
+                    CHECK(!OpenNtBaseServiceCloseManagementNode(service,&key));
+                }
                 CHECK(WaitForSingleObject(closer,5000)==WAIT_OBJECT_0);
                 CHECK(GetExitCodeThread(closer,&closer_exit) && !closer_exit);
                 CHECK(close_test.observed==WAIT_OBJECT_0);
@@ -1019,6 +1111,10 @@ int main(int argc,char **argv)
             while(!OpenNtBaseServiceIsEmpty(service) && (LONG)(deadline-GetTickCount())>0)Sleep(10);}
         CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
         CHECK(!workerInfoCount && !DOSHead && !WOWHead && OpenNtBaseServiceIsEmpty(service));
+        {
+            OPENNT_BASE_WORKER_INFO *tree=NULL;uint32_t count=0;uint64_t epoch=0;
+            CHECK(!OpenNtBaseServiceSnapshotCopy(service,&epoch,&tree,&count) && !count && !tree);
+        }
         CHECK(OpenNtBaseServiceStop(service));
         CHECK(TerminateProcess(initial_process.hProcess,0));
         CloseHandle(initial_process.hThread);CloseHandle(initial_process.hProcess);
@@ -1652,6 +1748,32 @@ int main(int argc,char **argv)
     CHECK(OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount)==ERROR_SUCCESS);
     CHECK(workerInfoCount==1 && workerInfo.sequence==workerGeneration &&
         workerInfo.started_filetime!=0 && !wcscmp(workerInfo.image,L"MEM.EXE"));
+    {
+        OPENNT_BASE_WORKER_INFO *copied=NULL;
+        uint64_t copiedEpoch=0;
+        uint32_t copiedCount=0;
+        CHECK(!OpenNtBaseServiceSnapshotCopy(service,&copiedEpoch,&copied,&copiedCount));
+        CHECK(copied && copiedEpoch==managementEpoch && copiedCount==2);
+        CHECK(copied[0].key.category==MANAGEMENT_FRONTEND &&
+            copied[0].key.generation==launcherGeneration && copied[0].depth==0);
+        CHECK(copied[1].key.category==MANAGEMENT_WORKER &&
+            copied[1].key.generation==workerGeneration && copied[1].depth==1 &&
+            copied[1].parent.generation==launcherGeneration);
+        CHECK(!memcmp(&copied[1],&workerInfo,sizeof(workerInfo)));
+        {
+            OPENNT_BASE_MANAGEMENT_KEY stale=copied[1].key;
+            ++stale.instance;
+            CHECK(OpenNtBaseServiceCloseManagementNode(service,&stale)==ERROR_INVALID_HANDLE);
+            stale=copied[1].key;++stale.generation;
+            CHECK(OpenNtBaseServiceCloseManagementNode(service,&stale)==ERROR_NOT_FOUND);
+            CHECK(WaitForSingleObject(child.hProcess,0)==WAIT_TIMEOUT);
+        }
+        HeapFree(GetProcessHeap(),0,copied);
+        copied=(OPENNT_BASE_WORKER_INFO *)(ULONG_PTR)1;
+        copiedEpoch=1;copiedCount=1;
+        CHECK(OpenNtBaseServiceSnapshotCopy(NULL,&copiedEpoch,&copied,&copiedCount)==ERROR_INVALID_PARAMETER);
+        CHECK(!copied && !copiedEpoch && !copiedCount);
+    }
     /* READY alone is not worker readiness: a resident COMMAND prompt has no
      * outstanding GetNextVDMCommand wait to receive an unrelated launch. */
     { BOOL recordExists=FALSE;
@@ -2213,6 +2335,26 @@ int main(int argc,char **argv)
         &getAnswer,&wireBytes,&getWait,standard,&standardCount)==ERROR_SUCCESS);
     CHECK(getAnswer!=NULL && getWait==NULL && standardCount==0);
     OpenNtBaseServiceReleaseCommandReply(getAnswer);getAnswer=NULL;
+    {
+        OPENNT_BASE_WORKER_INFO *tree=NULL;
+        uint32_t count=0,index,wowRows=0,taskRows=0;
+        uint64_t epoch=0;
+        CHECK(!OpenNtBaseServiceSnapshotCopy(service,&epoch,&tree,&count));
+        for(index=0;index<count;++index) {
+            if(tree[index].key.category==MANAGEMENT_WORKER && tree[index].key.generation==wowGeneration) {
+                ++wowRows;CHECK(!tree[index].parent.category && tree[index].depth==0);
+            }
+            if(tree[index].key.category==MANAGEMENT_WOW_TASK && tree[index].key.generation==wowGeneration) {
+                ++taskRows;CHECK(tree[index].parent.category==MANAGEMENT_WORKER &&
+                    tree[index].parent.generation==wowGeneration && tree[index].key.object &&
+                    tree[index].task==wowTask && !tree[index].process_id && !tree[index].actions &&
+                    tree[index].image[0] && wcscmp(tree[index].image,L"<UNKNOWN>"));
+                CHECK(OpenNtBaseServiceCloseManagementNode(service,&tree[index].key)==ERROR_NOT_SUPPORTED);
+            }
+        }
+        CHECK(wowRows==1 && taskRows==1);
+        HeapFree(GetProcessHeap(),0,tree);
+    }
     if (wowStartup) {
         /* Test-only identity fault: same task number, different original
          * parent receipt must not notify this launcher. No product mutation. */

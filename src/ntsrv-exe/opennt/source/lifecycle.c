@@ -45,16 +45,22 @@ BOOL OpenNtBaseServiceIsEmpty(OPENNT_BASE_SERVICE *service)
     return empty;
 }
 
-DWORD OpenNtBaseServiceTerminateWorker(OPENNT_BASE_SERVICE *service,uint32_t process_id)
+static DWORD service_terminate_worker(OPENNT_BASE_SERVICE *service,uint32_t process_id,
+    const OPENNT_BASE_MANAGEMENT_KEY *key)
 {
     LIST_ENTRY *link;
     HANDLE process=NULL,native_stop=NULL,native_closed=NULL;
     DWORD error=ERROR_NOT_FOUND;
-    if (!service || !process_id) return ERROR_INVALID_PARAMETER;
+    if (!service || (!process_id && !key)) return ERROR_INVALID_PARAMETER;
     EnterCriticalSection(&service->lock);
+    if(key && (key->instance!=service->management_epoch || key->category!=MANAGEMENT_WORKER ||
+        !key->generation || key->object)) {error=ERROR_INVALID_HANDLE;goto unlock;}
     for (link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
         OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
-        if ((DWORD)(ULONG_PTR)watch->process.ClientId.UniqueProcess!=process_id) continue;
+        if(key ? watch->process.SequenceNumber!=key->generation :
+            (DWORD)(ULONG_PTR)watch->process.ClientId.UniqueProcess!=process_id)continue;
+        process_id=(DWORD)(ULONG_PTR)watch->process.ClientId.UniqueProcess;
+        if (watch->termination_requested) { error=ERROR_BUSY; break; }
         /* Native close must close its Console session, not only the carrier.
          * Until its control binding is registered, fail explicitly. */
         if(watch->kind==OPENNT_BASE_WORKER_NATIVE) {
@@ -84,6 +90,7 @@ DWORD OpenNtBaseServiceTerminateWorker(OPENNT_BASE_SERVICE *service,uint32_t pro
         error=ERROR_SUCCESS;
         break;
     }
+unlock:
     LeaveCriticalSection(&service->lock);
     if(native_stop && native_closed && !error) {
         /* Session owner must close its Console and acknowledge it. Carrier death
@@ -95,6 +102,64 @@ DWORD OpenNtBaseServiceTerminateWorker(OPENNT_BASE_SERVICE *service,uint32_t pro
     if(native_stop)CloseHandle(native_stop);if(native_closed)CloseHandle(native_closed);
     if(error) {if(process)CloseHandle(process);return error;}
     CloseHandle(process);
+    return error;
+}
+
+/* Local compatibility entry for the existing owner fixtures, not wire identity. */
+DWORD OpenNtBaseServiceTerminateWorker(OPENNT_BASE_SERVICE *service,uint32_t process_id)
+{
+    return service_terminate_worker(service,process_id,NULL);
+}
+
+DWORD OpenNtBaseServiceCloseManagementNode(OPENNT_BASE_SERVICE *service,
+    const OPENNT_BASE_MANAGEMENT_KEY *key)
+{
+    LIST_ENTRY *link;
+    HANDLE target=NULL;
+    BOOL frontend=FALSE;
+    DWORD error=ERROR_NOT_FOUND;
+    if(!service || !key)return ERROR_INVALID_PARAMETER;
+    if(key->category==MANAGEMENT_WORKER)return service_terminate_worker(service,0,key);
+    EnterCriticalSection(&service->lock);
+    if(key->instance!=service->management_epoch || !key->generation) {
+        error=ERROR_INVALID_HANDLE;goto done;
+    }
+    if(key->category==MANAGEMENT_FRONTEND && !key->object) {
+        for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
+            OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
+            if(root->process.SequenceNumber!=key->generation || !root->frontend_capability)continue;
+            if(root->frontend_closing){error=ERROR_BUSY;break;}
+            if(WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT)break;
+            if(!DuplicateHandle(GetCurrentProcess(),root->process.ProcessHandle,GetCurrentProcess(),
+                &target,SYNCHRONIZE,FALSE,0)){error=GetLastError();break;}
+            root->frontend_closing=TRUE;
+            service_signal_frontend_states(service);
+            WakeAllConditionVariable(&service->frontend_changed);
+            frontend=TRUE;error=ERROR_SUCCESS;break;
+        }
+    } else if(key->category==MANAGEMENT_GUI_TARGET && key->object) {
+        for(link=service->gui_records.Flink;link!=&service->gui_records;link=link->Flink) {
+            OPENNT_BASE_WIN32RECORD *record=CONTAINING_RECORD(link,OPENNT_BASE_WIN32RECORD,link);
+            if(record->worker_generation!=key->generation || record->request!=key->object)continue;
+            if(record->completed || !record->gui_process ||
+                WaitForSingleObject(record->gui_process,0)!=WAIT_TIMEOUT)break;
+            if(!DuplicateHandle(GetCurrentProcess(),record->gui_process,GetCurrentProcess(),&target,
+                PROCESS_TERMINATE|SYNCHRONIZE,FALSE,0))error=GetLastError();
+            else error=ERROR_SUCCESS;
+            break;
+        }
+    } else error=ERROR_NOT_SUPPORTED;
+done:
+    LeaveCriticalSection(&service->lock);
+    /* Wait/termination cannot hold the registry lock needed for rundown.
+     * A pinned original process object, never a reopened PID, is targeted. */
+    if(!error) {
+        if(frontend) {
+            DWORD wait=WaitForSingleObject(target,10000);
+            if(wait!=WAIT_OBJECT_0)error=wait==WAIT_FAILED ? GetLastError() : ERROR_TIMEOUT;
+        } else if(!TerminateProcess(target,ERROR_CANCELLED))error=GetLastError();
+    }
+    if(target)CloseHandle(target);
     return error;
 }
 

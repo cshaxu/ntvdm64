@@ -169,7 +169,8 @@ DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *connection,
             OPENNT_BASE_CONNECTION *registered_root=CONTAINING_RECORD(root_link,
                 OPENNT_BASE_CONNECTION,service_link);
             if(registered_root->process.SequenceNumber==root_generation)
-                {registered_root->frontend_admission_deadline=0;break;}
+                {registered_root->frontend_admission_deadline=0;
+                 service_bind_management_root(connection->service,connection->process.ProcessHandle,registered_root);break;}
         }
     }
     if(connection->native_stop)CloseHandle(connection->native_stop);

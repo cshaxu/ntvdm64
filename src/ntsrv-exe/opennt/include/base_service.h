@@ -2,6 +2,7 @@
 #define OPENNT_BASE_SERVICE_H
 #include <windows.h>
 #include <stdint.h>
+#include "common/protocol/management.h"
 /* Native composition boundary; opaque pointers never enter command records.
  * One service instance per process, matching original BaseSrv globals.
  * Call only after RPC identity authentication. All operations serialized by
@@ -15,11 +16,17 @@ DWORD OpenNtBaseServiceSubmitNativeRequest(OPENNT_BASE_CONNECTION *,DWORD,DWORD,
     DWORD,BYTE *,HANDLE *,HANDLE *,DWORD *);
 DWORD OpenNtBaseServiceFinishNativeRequest(OPENNT_BASE_CONNECTION *,DWORD,DWORD,DWORD,DWORD *,DWORD *);
 typedef void (WINAPI *OPENNT_BASE_EMPTY_NOTIFY)(void *);
-/* Copied management projection. PID selects the currently authenticated,
- * registered worker. BaseSrv sequence remains private routing state. No
- * HANDLE, original record pointer or guest address crosses this boundary. */
+/* Copied management identities; PID is display information, not a selector.
+ * No HANDLE, original record pointer or guest address crosses this boundary. */
 #define OPENNT_BASE_WORKER_IMAGE_CHARS 260u
+typedef struct OPENNT_BASE_MANAGEMENT_KEY {
+    uint64_t instance;
+    uint32_t category,generation;
+    uint64_t object;
+} OPENNT_BASE_MANAGEMENT_KEY;
 typedef struct OPENNT_BASE_WORKER_INFO {
+    OPENNT_BASE_MANAGEMENT_KEY key,parent;
+    uint32_t depth,display_state,actions;
     uint32_t sequence;
     uint32_t kind;
     uint32_t state;
@@ -45,12 +52,20 @@ DWORD OpenNtBaseServiceNextFrontendDeadline(OPENNT_BASE_SERVICE *,ULONGLONG *dea
 DWORD OpenNtBaseServiceWorkerShutdownEvent(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE *);
 DWORD OpenNtBaseServiceWorkerIoReleaseEvent(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE *);
 DWORD OpenNtBaseServiceRetireExpiredFrontends(OPENNT_BASE_SERVICE *);
-/* Management callers are authenticated by the transport before reaching
- * these methods. The service resolves a PID while holding its registration
- * lock, so a removed/reused prior process cannot be selected. */
+/* Management callers are authenticated by transport. Wire close resolves a
+ * full service/node identity and pins the actual object under the same lock.
+ * Snapshot is the worker-only local compatibility projection; SnapshotCopy
+ * returns the complete management tree used by production RPC. */
 DWORD OpenNtBaseServiceSnapshot(OPENNT_BASE_SERVICE *,uint64_t *epoch,
     OPENNT_BASE_WORKER_INFO *entries,uint32_t capacity,uint32_t *count);
+/* Atomic owner-side allocation/copy; caller owns the returned process-heap
+ * block. Outputs are empty on failure. Original projection and locks remain
+ * with the service; RPC serialization never traverses live service lists. */
+DWORD OpenNtBaseServiceSnapshotCopy(OPENNT_BASE_SERVICE *,uint64_t *epoch,
+    OPENNT_BASE_WORKER_INFO **entries,uint32_t *count);
 DWORD OpenNtBaseServiceTerminateWorker(OPENNT_BASE_SERVICE *,uint32_t process_id);
+DWORD OpenNtBaseServiceCloseManagementNode(OPENNT_BASE_SERVICE *,
+    const OPENNT_BASE_MANAGEMENT_KEY *);
 DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *,HANDLE,OPENNT_BASE_CONNECTION **,DWORD *);
 /* Local Console membership is sampled only by the authenticated NTCON root
  * which is actually attached to that Console. It is a bounded selection

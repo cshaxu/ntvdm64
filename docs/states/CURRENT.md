@@ -2,15 +2,15 @@
 
 ## Current Work
 
-**Active: M0 T426 S1** (Ordinary Mode).
+**Active: M0 T426 S2** (Ordinary Mode).
 
 Owner closes T425 and directs admission of the next queued T. T425 closure is
 delivered and pushed at 8cbc1c997; [closure](../history/m0-t425-worker-neutral-frontend-closure.md)
 and [S11 evidence](../etc/evidence/m0-t425-s11-typeahead-closure.md) retain the
 actual proof and limits. T426 consumes the former queue-head
 [Console-root worker-tree proposal](../proposals/proposal-ntmon-console-worker-tree-001.md).
-Only S1 is admitted: inspect current service registration/projection/close
-boundaries and freeze the implementation contract before changing production.
+S1 is delivered at ff3221711. Owner says “好 开干”; admit S2 service-owned
+management projection, stable selection/action and focused verification.
 Owner's final clarification removes UNBOUND entirely: NTCON and independent
 Win16 workers are top-level nodes; Win16 tasks remain beneath their actual
 WOW worker. Detached registered Win32 GUI targets are top-level nodes, not
@@ -21,20 +21,20 @@ text workers remain below NTCON; missing former roots retain their children.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T426 S1; Ordinary Mode. |
-| Admission And Approval | Owner: “一起纳入提交。然后准入下一个T”. T425 is closed at 8cbc1c997; admit the former queue head, with one active bounded S. |
+| Identifier Mode | M0 T426 S2; Ordinary Mode. |
+| Admission And Approval | Owner approves the final no-UNBOUND hierarchy and says “好 开干”. S1 audit delivered at ff3221711; sequentially admit service projection/action implementation only. |
 | Candidate Proposal | [NTMON Console-root worker tree](../proposals/proposal-ntmon-console-worker-tree-001.md). |
-| Objective | Produce a source-backed Console-root/worker snapshot and management contract, source ownership/lock inventory, stable identity/tombstone rules and exact implementation/test handoff for the subsequent bounded stages. |
-| Non-goals | No production implementation in S1, descendant observation, Job/hooks, synthetic tasks, new scheduler/helper, guest/library changes or worker execution/lifecycle redesign. No claim that the tree UI already works. |
-| Reference Baseline | Delivered T425 8cbc1c997 and unchanged S9/r022 eight-file package; current NTCON frontend, NTVWM native worker, NTSRV authority and NTMON snapshot consumer. |
-| Files And ABI Surface | Audit src/ntsrv-exe, src/ntmon-exe and their current callers; protocol declarations belong to src/common/protocol, not retired src/interface. Document the smallest proposed DTO/RPC/version changes without implementing them. S1 owns CURRENT and indexed audit/design evidence only. |
+| Objective | Deliver one coherent NTSRV-owned management snapshot of real frontend/worker/WOW-task/GUI identities and associations, minimal missing-root retention and stable authenticated close selectors, retaining original execution/lifecycle owners. |
+| Non-goals | No descendant observation, Job/hooks, synthetic tasks, scheduler/helper, guest/library or original mirror changes; no complete tree UI claim before S3. No UNBOUND heading or worker retention solely for display. |
+| Reference Baseline | S1 ff3221711 contract; delivered T425 8cbc1c997 and unchanged S9/r022 eight-file package, APP0.0.425/RPC37/I/O25. |
+| Files And ABI Surface | NTSRV private management/association/native/control state; common/protocol DTO/IDL/version and common RPC client; corresponding NTMON compatibility consumer and service/RPC/client tests. Wire changes synchronize RPC38 and APP0.0.426; I/O25 unchanged. Evidence/CURRENT are owned. |
 | Applicable Rules | docs/README.md reading set, Execution/Architecture/Coding/Document rules, design authorities, CONTRIBUTING and source policy. Original DOS/WOW ownership and completion remain unchanged. |
-| Verification | Read actual production callers/providers and management fixtures; review identity, locking, projection and close acknowledgement contracts. Documentation governance with links, actual diff review and git diff --check. No runtime/build capability claims from an audit-only P. |
-| Expected Markers | Each root/worker/state/close requirement maps to a source owner, proposed contract and exact positive/negative test; gaps and unsupported WOW/task identities are explicit. |
-| Asset Needs | Current repository source and retained T425 build/test evidence; no new guest media, process, helper or desktop interaction needed. |
-| Reporting Requirements | Report current versus proposed behavior, retained adapters, lock/resource owners, exact downstream tests, limits and bounded S2-S4 implementation sequence. |
+| Verification | S1 exact management-tree/missing-root/close fixtures, existing DOS/WOW/native/reentry and RPC/client negatives, x86 incremental affected build/MIDL, retained Console17/Window17/WOW frontiers and coherent eight-file publication. Governance/link/diff checks before P. All new outputs below build/M0-T426/S2. |
+| Expected Markers | Real roots and task owners, no UNBOUND, no PID-only close, coherent copied snapshot, stale selector rejected, missing root pruned only after final association, GUI close never kills carrier, original completion/return assertions retained. |
+| Asset Needs | Existing source/build cache and immutable guest set; no helper, new component, host mutation or desktop automation. |
+| Reporting Requirements | Actual changed ownership, executed commands/results, coherent published hashes and unverified boundaries; do not claim S3 tree UI or per-WOW-task close when no original supported mechanism exists. |
 | Stop Conditions | Required original execution change, incompatible ownership, absent trustworthy identity/close contract or material scope expansion requires re-admission; do not invent process-tree control. |
-| Exit Criteria | Source-backed contract and test inventory complete, all proposal requirements dispositioned, governed evidence reviewed/committed/pushed; implementation remains unclaimed until its own stages pass. |
+| Exit Criteria | Production provider/client/consumer linked; stated positive/negative/lifecycle gates pass, full retained regression and coherent publication no worse than baseline, reviewed evidence and source committed/pushed. |
 | Original Owner Request | Include reviewed planning changes in T425 commit, then admit the next T. Owner subsequently approves a hierarchy without UNBOUND and says “好 开干”: top-level frontend, independent WOW worker and detached GUI target; actual WOW task ownership preserved. |
 | Similar-Issue Sweep | Root rebuild/PID reuse, missing-root retention, independent Consoles, worker/GUI/WOW association, stale selection and authorization, orderly close failure, absence of UNBOUND, unchanged labels/title/three hotkeys and elapsed-time meaning. |
 
@@ -53,20 +53,46 @@ service, original WOW record, client, renderer and fixture boundaries; no
 production change or newly verified runtime capability. Governance and
 relative-link/diff checks gate this documentation-only S1 delivery.
 
+## S1 Closure Record
+
+S1 delivered and pushed at ff3221711. The
+[source contract and test inventory](../etc/evidence/m0-t426-s1-console-root-management-contract.md)
+records actual service/record/client/UI ownership, stable identities, lock and
+close boundaries and final no-UNBOUND hierarchy. Governance, relative links
+and diff checks passed; audit-only, no product build/runtime change claimed.
+S2 implementation is complete to its bounded provider/client/compatibility
+consumer scope; delivery is the containing reviewed S2 P. S3 UI polish and
+S4 mixed-kind/final integration remain open, not implied by S2 closure.
+
+S2 production provider now copies the typed management tree under the existing
+service lock, retains authenticated association and WOW labels, and validates
+stable close selectors before pinning actual target objects. APP0.0.426/RPC38
+and all affected x86 product targets link; I/O25 is unchanged. All 22 service
+fixtures, typed-client checks, isolated layout, selected real RPC/failure,
+five version negatives, GUI routing, actual Console/Window NTMON ESC and
+two-session selective worker close cases pass. Frozen r004/runtime passes
+final Console17/Window17/WOW in r005 and is coherently published, with recovery
+and hashes in r009 and passing published smoke in r011. The
+[S2 implementation record](../etc/evidence/m0-t426-s2-management-projection.md)
+retains exact commands, environment failures, review, actual gates and
+remaining S3/S4 boundaries. T426 remains open for owner acceptance.
+
 ## Current Technical Baseline
 
-Published O:/winnt still equals build/M0-T425/S9/r022/runtime, all eight hashes
-verified during S11. Files: run16.exe, ntsrv.exe, ntcon.exe, ntvdm.exe,
-ntvwm.exe, ntmon.exe, WOW32.DLL and VDMREDIR.DLL. Recovery/publication manifest:
-S9/r030; published smoke: r031. MSVC14.43 / SDK22621 / Win32 x86 /MT CCPU40,
-APP0.0.425, control/RPC37 and I/O25.
+Published O:/winnt equals build/M0-T426/S2/r004/runtime, all eight hashes
+verified against r005/runtime-manifest.json and again after publication.
+Files: run16.exe, ntsrv.exe, ntcon.exe, ntvdm.exe, ntvwm.exe, ntmon.exe,
+WOW32.DLL and VDMREDIR.DLL. Recovery/publication manifest: S2/r009; published
+smoke: r011. MSVC14.43 / SDK22621 / Win32 x86 /MT CCPU40,
+APP0.0.426, control/RPC38 and I/O25. Previous T425 package remains recoverable;
+unchanged WOW32.DLL/guest inputs retain their accepted identity and boundaries.
 
 S9/r035-r036 independently passed Console17/Window17 and the three retained
 WOW frontiers. S11/r006 adds four selected real continuous-input cases with
 zero consumption waits, expected root exit 1, complete MEM reports and
 identity-checked cleanup. Z: is removed; no owned product process remains.
-S11 changes only tests/docs, not C build or production inputs; valid sealed
-builds and matrices are reused by identity. No product replacement is needed.
+S11 changed only tests/docs; the subsequent S2 code-bearing delivery rebuilds
+the affected closure and adds its own full retained package gates above.
 
 S8 accepted software VGA FULLSCREEN, natural mouse route/draw/erase and
 producer-side update triggers remain. NTCON/worker-base do not filter emitted
@@ -90,6 +116,7 @@ T425 closure commit 8cbc1c997 includes the owner-approved other-session Queue
 and two proposals without expanding T425 implementation. This separate
 documentation-only admission allocates T426 and removes its candidate from
 [Queue](QUEUE.md), retaining every remaining candidate's relative order.
-S1 is audit-only; no production build, runtime mutation or redeployment is
-required for admission. Documentation governance, link/diff review and clean
-synchronized Git delivery apply. Outstanding debt remains in [TODO](TODO.md).
+S1 audit-only delivery ff3221711 passed governance/link/diff checks without
+changing the published package. S2 is code-bearing and passes its full
+build/runtime/publication gates; containing reviewed commit/push is its P,
+not a final T or S3/S4 acceptance. Outstanding debt remains in [TODO](TODO.md).

@@ -10,6 +10,7 @@
 #include "common/protocol/version.h"
 #include "common/rpc/local_binding.h"
 #include "common/rpc/management.h"
+#include "common/protocol/management.h"
 
 #define MONITOR_COLUMNS 80
 #define MONITOR_ROWS 25
@@ -36,7 +37,7 @@ typedef struct MONITOR_STATE {
     RPC_BINDING_HANDLE binding;
     broker_rpc_scope scope;
     HANDLE process;
-    ULONG selected_pid;
+    DTASKMGR_KEY selected_key,confirm_key;
     ULONG confirm_pid;
     ULONG confirm_task_count;
     DWORD status;
@@ -73,12 +74,27 @@ static const WCHAR *kind_name(ULONG kind)
 {
     return kind==2u ? L"WIN32" : kind==1u ? L"WIN16" : L"DOS";
 }
+static BOOL same_key(const DTASKMGR_KEY *left,const DTASKMGR_KEY *right)
+{
+    return left->instance==right->instance && left->category==right->category &&
+        left->generation==right->generation && left->object==right->object;
+}
+static const WCHAR *state_name(ULONG state)
+{
+    switch(state) {
+    case MANAGEMENT_IDLE:return L"IDLE";
+    case MANAGEMENT_BUSY:return L"BUSY";
+    case MANAGEMENT_MISSING:return L"MISSING";
+    case MANAGEMENT_CLOSING:return L"CLOSING";
+    default:return L"UNKNOWN";
+    }
+}
 static void elapsed_text(const FILETIME *started,const FILETIME *now,WCHAR output[16])
 {
     ULARGE_INTEGER then_value,now_value;
     ULONGLONG seconds;
     if (!started->dwLowDateTime && !started->dwHighDateTime) {
-        lstrcpyW(output,L"-"); return;
+        lstrcpyW(output,L"--:--:--"); return;
     }
     then_value.LowPart=started->dwLowDateTime;then_value.HighPart=started->dwHighDateTime;
     now_value.LowPart=now->dwLowDateTime;now_value.HighPart=now->dwHighDateTime;
@@ -184,19 +200,26 @@ static void render_scrollbars(HANDLE output,const MONITOR_STATE *state,ULONG sel
 static void task_line(WCHAR *line,DWORD capacity,const MONITOR_STATE *state,
     const DTASKMGR_WORKER *item,const FILETIME *now)
 {
-    FILETIME started; WCHAR elapsed[16];
+    FILETIME started; WCHAR elapsed[16],pid[16],stack[16];
     started.dwLowDateTime=(DWORD)item->started_filetime;
     started.dwHighDateTime=(DWORD)(item->started_filetime>>32);
     elapsed_text(&started,now,elapsed);
-    swprintf_s(line,capacity,L"%c  %-8lu %-7s %-10s %-5lu %s",
-        item->process_id==state->selected_pid ? L'>' : L' ',(unsigned long)item->process_id,
-        kind_name(item->kind),elapsed,(unsigned long)item->stack_depth,
+    if(item->process_id)swprintf_s(pid,ARRAYSIZE(pid),L"%lu",item->process_id);
+    else lstrcpyW(pid,L"-");
+    if(item->key.category==MANAGEMENT_WORKER)swprintf_s(stack,ARRAYSIZE(stack),L"%lu",item->stack_depth);
+    else lstrcpyW(stack,L"-");
+    swprintf_s(line,capacity,L"%c %*s%-8s %-7s %-7s %-10s %-5s %s",
+        same_key(&item->key,&state->selected_key) ? L'>' : L' ',(int)(item->depth*2),L"",pid,
+        item->key.category==MANAGEMENT_FRONTEND ? L"CONSOLE" : kind_name(item->kind),
+        state_name(item->display_state),elapsed,stack,
         item->image[0] ? item->image : L"Unknown");
 }
 static void confirmation_text(WCHAR *line,DWORD capacity,const MONITOR_STATE *state)
 {
-    swprintf_s(line,capacity,L"End worker %lu and all its %lu tasks [Y/N]?",
-        (unsigned long)state->confirm_pid,(unsigned long)state->confirm_task_count);
+    swprintf_s(line,capacity,L"End %s %lu [Y/N]?",
+        state->confirm_key.category==MANAGEMENT_FRONTEND ? L"Console" :
+        state->confirm_key.category==MANAGEMENT_GUI_TARGET ? L"program" : L"worker",
+        (unsigned long)state->confirm_pid);
 }
 static PCWSTR scrolled_text(PCWSTR text,DWORD offset)
 {
@@ -266,7 +289,7 @@ static void render(HANDLE output,MONITOR_STATE *state,DTASKMGR_WORKER *items,ULO
         length=(DWORD)lstrlenW(line);
         if (length>MONITOR_INTERIOR && length-MONITOR_INTERIOR>state->horizontal_limit)
             state->horizontal_limit=length-MONITOR_INTERIOR;
-        if (items[index].process_id==state->selected_pid) {
+        if (same_key(&items[index].key,&state->selected_key)) {
             selected_index=index;
             if (index<state->first_visible) state->first_visible=index;
             else if (index-state->first_visible>=MONITOR_BODY_ROWS)
@@ -283,8 +306,8 @@ static void render(HANDLE output,MONITOR_STATE *state,DTASKMGR_WORKER *items,ULO
     render_line(output,(SHORT)row++,frame,MONITOR_TAB_ATTRIBUTE);
     framed_rule(frame,L'\x250C',L'\x2500',L'\x2510');
     render_framed_line(output,(SHORT)row++,frame,MONITOR_ACCENT_ATTRIBUTE);
-    swprintf_s(line,ARRAYSIZE(line),L"   %-8s %-7s %-10s %-5s %s",
-        L"PID",L"KIND",L"ELAPSED",L"STACK",L"TASK");
+    swprintf_s(line,ARRAYSIZE(line),L"  %-8s %-7s %-7s %-10s %-5s %s",
+        L"PID",L"KIND",L"STATE",L"ELAPSED",L"STACK",L"TASK");
     framed_text(frame,L'\x2502',scrolled_text(line,state->horizontal_offset),L'\x2502');render_framed_line(output,(SHORT)row++,frame,MONITOR_ACCENT_ATTRIBUTE);
     framed_rule(frame,L'\x251C',L'\x2500',L'\x2524');render_framed_line(output,(SHORT)row++,frame,MONITOR_ACCENT_ATTRIBUTE);
     for (index=0;index<visible;++index) {
@@ -292,7 +315,7 @@ static void render(HANDLE output,MONITOR_STATE *state,DTASKMGR_WORKER *items,ULO
         task_line(line,ARRAYSIZE(line),state,item,&now);
         framed_text(frame,L'\x2502',scrolled_text(line,state->horizontal_offset),L'\x2502');
         render_framed_line(output,(SHORT)row++,frame,
-            item->process_id==state->selected_pid ? MONITOR_SELECTED_ATTRIBUTE : MONITOR_NORMAL_ATTRIBUTE);
+            same_key(&item->key,&state->selected_key) ? MONITOR_SELECTED_ATTRIBUTE : MONITOR_NORMAL_ATTRIBUTE);
     }
     if (!count) {
         framed_text(frame,L'\x2502',state->status==ERROR_SUCCESS ? L"  No active tasks." : L"",L'\x2502');
@@ -300,10 +323,10 @@ static void render(HANDLE output,MONITOR_STATE *state,DTASKMGR_WORKER *items,ULO
     }
     while (row<MONITOR_SCROLL_ROW) { framed_text(frame,L'\x2502',L"",L'\x2502');render_framed_line(output,(SHORT)row++,frame,MONITOR_NORMAL_ATTRIBUTE); }
     render_scrollbars(output,state,selected_index);++row;
-    if (state->confirm_pid) {
+    if (state->confirm_key.category) {
         confirmation_text(line,ARRAYSIZE(line),state);
         footer_text(frame,state->status,state->action_error,line);
-    } else footer_text(frame,state->status,state->action_error,L"UP/DOWN=Select   DEL=Kill   F3=Exit");
+    } else footer_text(frame,state->status,state->action_error,L"UP/DOWN=Select Task DEL=End Task ESC=EXIT");
     render_line(output,(SHORT)row++,frame,MONITOR_STATUS_ATTRIBUTE);
     state->rendered_rows=row;
 }
@@ -319,35 +342,40 @@ static DWORD refresh(MONITOR_STATE *state,DTASKMGR_WORKER **items,ULONG *count)
     if (error) {
         /* With no authoritative snapshot, a queued kill cannot remain valid. */
         state->confirm_pid=0;
+        ZeroMemory(&state->confirm_key,sizeof(state->confirm_key));
         state->confirm_task_count=0;
         return error;
     }
     *items=result; *count=result_count;
-    if (result_count && !state->selected_pid) state->selected_pid=result[0].process_id;
-    if (state->selected_pid) {
+    if (result_count && !state->selected_key.category) state->selected_key=result[0].key;
+    if (state->selected_key.category) {
         ULONG index; BOOL found=FALSE;
-        for (index=0;index<result_count;++index) if (result[index].process_id==state->selected_pid) found=TRUE;
-        if (!found) state->selected_pid=result_count ? result[0].process_id : 0;
+        for (index=0;index<result_count;++index) if (same_key(&result[index].key,&state->selected_key)) found=TRUE;
+        if (!found) {
+            ZeroMemory(&state->selected_key,sizeof(state->selected_key));
+            if(result_count)state->selected_key=result[0].key;
+        }
     }
-    if (state->confirm_pid) {
+    if (state->confirm_key.category) {
         ULONG index;
         BOOL live=FALSE;
         for (index=0;index<result_count;++index)
-            if (result[index].process_id==state->confirm_pid) {
+            if (same_key(&result[index].key,&state->confirm_key) && (result[index].actions&MANAGEMENT_CAN_CLOSE)) {
                 live=TRUE;
                 state->confirm_task_count=result[index].stack_depth;
                 break;
             }
-        if (!live) { state->confirm_pid=0; state->confirm_task_count=0; }
+        if (!live) { state->confirm_pid=0; state->confirm_task_count=0;
+            ZeroMemory(&state->confirm_key,sizeof(state->confirm_key)); }
     }
     return ERROR_SUCCESS;
 }
 static DWORD terminate_worker(MONITOR_STATE *state)
 {
     common_rpc_management management;
-    if (!state->confirm_pid) return ERROR_NOT_FOUND;
+    if (!state->confirm_key.category) return ERROR_NOT_FOUND;
     management.binding=state->binding;management.process=state->process;
-    return common_rpc_terminate_worker(&management,state->confirm_pid);
+    return common_rpc_close_management_node(&management,&state->confirm_key);
 }
 int wmain(void)
 {
@@ -372,27 +400,31 @@ int wmain(void)
             if (ReadConsoleInputW(input,&record,1,&read) && record.EventType==KEY_EVENT && record.Event.KeyEvent.bKeyDown) {
                 WORD key=record.Event.KeyEvent.wVirtualKeyCode;
                 ULONG index;
-                if (state.confirm_pid) {
+                if (state.confirm_key.category) {
                     WCHAR character=record.Event.KeyEvent.uChar.UnicodeChar;
                     if (character==L'n' || character==L'N' || key==VK_ESCAPE)
-                        { state.confirm_pid=0; state.confirm_task_count=0; }
+                        { state.confirm_pid=0; state.confirm_task_count=0;
+                          ZeroMemory(&state.confirm_key,sizeof(state.confirm_key)); }
                     else if (character==L'y' || character==L'Y') {
                         state.action_error=terminate_worker(&state);
                         state.confirm_pid=0;
+                        ZeroMemory(&state.confirm_key,sizeof(state.confirm_key));
                         state.confirm_task_count=0;
                     }
                     if (items) MIDL_user_free(items);
                     continue;
                 }
-                if (key==VK_F3) { if (items) MIDL_user_free(items); break; }
-                for (index=0;index<count;++index) if (items[index].process_id==state.selected_pid) break;
-                if (key==VK_UP && count) state.selected_pid=items[index ? index-1 : 0].process_id;
-                if (key==VK_DOWN && count) state.selected_pid=items[index+1<count ? index+1 : count-1].process_id;
+                if (key==VK_ESCAPE) { if (items) MIDL_user_free(items); break; }
+                for (index=0;index<count;++index) if (same_key(&items[index].key,&state.selected_key)) break;
+                if (key==VK_UP && count) state.selected_key=items[index ? index-1 : 0].key;
+                if (key==VK_DOWN && count) state.selected_key=items[index+1<count ? index+1 : count-1].key;
                 if (key==VK_LEFT && state.horizontal_offset) --state.horizontal_offset;
                 if (key==VK_RIGHT && state.horizontal_offset<state.horizontal_limit) ++state.horizontal_offset;
                 if (key==VK_DELETE) {
                     state.action_error=ERROR_SUCCESS;
-                    state.confirm_pid=state.selected_pid;
+                    if(index<count && (items[index].actions&MANAGEMENT_CAN_CLOSE)) {
+                        state.confirm_key=items[index].key;state.confirm_pid=items[index].process_id;
+                    } else state.action_error=ERROR_NOT_SUPPORTED;
                     state.confirm_task_count=index<count ? items[index].stack_depth : 0;
                 }
             }

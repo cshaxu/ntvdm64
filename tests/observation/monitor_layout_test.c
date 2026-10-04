@@ -26,15 +26,16 @@ int wmain(void)
         DTASKMGR_WORKER native={0};FILETIME now;WCHAR line[512];
         GetSystemTimeAsFileTime(&now);
         native.kind=2;native.process_id=1234;
+        native.key=(DTASKMGR_KEY){17,MANAGEMENT_WORKER,1234,0};
         native.state=8;native.stack_depth=2;
         native.started_filetime=((uint64_t)now.dwHighDateTime<<32)|now.dwLowDateTime;
         lstrcpyW(native.image,L"ntvwm.exe");
         task_line(line,ARRAYSIZE(line),&state,&native,&now);
         assert(wcsstr(line,L"WIN32") && wcsstr(line,L"1234") &&
             wcsstr(line,L"2") && !wcsstr(line,L"MEMBERS=") && wcsstr(line,L"ntvwm.exe"));
-        state.confirm_pid=1234;state.confirm_task_count=2;
+        state.confirm_pid=1234;state.confirm_task_count=2;state.confirm_key=native.key;
         confirmation_text(line,ARRAYSIZE(line),&state);
-        assert(wcsstr(line,L"End worker 1234 and all its 2 tasks") && !wcsstr(line,L"members"));
+        assert(wcsstr(line,L"End worker 1234") && !wcsstr(line,L"members"));
         ZeroMemory(&state,sizeof(state));
     }
     BOOL allocated=AllocConsole();
@@ -69,35 +70,36 @@ int wmain(void)
     cell(57,24,L'B',MONITOR_STATUS_ATTRIBUTE);
     for (i=0;i<24;++i) {
         items[i].process_id=i+1;
+        items[i].key=(DTASKMGR_KEY){17,MANAGEMENT_WORKER,i+1,0};
         items[i].kind=0;
         lstrcpyW(items[i].image,L"COMMAND.COM");
     }
     for (i=0;i<200;++i) items[23].image[i]=L'X';
     items[23].image[200]=0;
     state.status=ERROR_SUCCESS;
-    state.selected_pid=1;
+    state.selected_key=items[0].key;
     render(output,&state,items,3);
     capture(output);
     cell(79,4,L' ',MONITOR_THUMB_ATTRIBUTE);
-    state.selected_pid=2;
+    state.selected_key=items[1].key;
     render(output,&state,items,3);
     capture(output);
     assert(state.first_visible==0);
     cell(1,5,L'>',MONITOR_SELECTED_ATTRIBUTE);
     cell(79,4,L'\x2591',MONITOR_SCROLL_ATTRIBUTE);
     cell(79,5,L' ',MONITOR_THUMB_ATTRIBUTE);
-    state.selected_pid=3;
+    state.selected_key=items[2].key;
     render(output,&state,items,3);
     capture(output);
     cell(79,5,L'\x2591',MONITOR_SCROLL_ATTRIBUTE);
     cell(79,6,L' ',MONITOR_THUMB_ATTRIBUTE);
-    state.selected_pid=2;
+    state.selected_key=items[1].key;
     render(output,&state,items,24);
     capture(output);
     assert(state.first_visible==0);
     cell(79,5,L' ',MONITOR_THUMB_ATTRIBUTE);
     cell(79,6,L'\x2591',MONITOR_SCROLL_ATTRIBUTE);
-    state.selected_pid=24;
+    state.selected_key=items[23].key;
     render(output,&state,items,24);
     capture(output);
     assert(state.first_visible==5);
@@ -109,8 +111,9 @@ int wmain(void)
     capture(output);
     cell(77,23,L' ',MONITOR_THUMB_ATTRIBUTE);
     cell(78,22,L'X',MONITOR_SELECTED_ATTRIBUTE);
-    state.selected_pid=1;
+    state.selected_key=items[0].key;
     state.confirm_pid=1;
+    state.confirm_key=items[0].key;
     state.confirm_task_count=2;
     render(output,&state,items,1);
     capture(output);
@@ -120,10 +123,27 @@ int wmain(void)
     cell(79,4,L' ',MONITOR_THUMB_ATTRIBUTE);
     cell(1,24,L'E',MONITOR_STATUS_ATTRIBUTE);
     state.confirm_pid=0;
+    ZeroMemory(&state.confirm_key,sizeof(state.confirm_key));
     render(output,&state,NULL,0);
     capture(output);
     cell(3,4,L'N',MONITOR_NORMAL_ATTRIBUTE);
     cell(57,24,L'R',MONITOR_STATUS_ATTRIBUTE);
+    {
+        WCHAR line[512];FILETIME now;
+        DTASKMGR_WORKER child={0};
+        GetSystemTimeAsFileTime(&now);
+        child.key=(DTASKMGR_KEY){17,MANAGEMENT_WOW_TASK,9,12};
+        child.parent=(DTASKMGR_KEY){17,MANAGEMENT_WORKER,9,0};
+        child.depth=1;child.kind=1;child.display_state=MANAGEMENT_BUSY;
+        lstrcpyW(child.image,L"WINMINE.EXE");
+        state.selected_key=child.key;
+        task_line(line,ARRAYSIZE(line),&state,&child,&now);
+        assert(line[0]==L'>' && wcsstr(line,L"WIN16") && wcsstr(line,L"BUSY") &&
+            wcsstr(line,L"--:--:--") && !wcsstr(line,L"UNBOUND"));
+        ++state.selected_key.object;
+        task_line(line,ARRAYSIZE(line),&state,&child,&now);
+        assert(line[0]==L' '); /* Same PID/task owner is not same node identity. */
+    }
     CloseHandle(output);
     if (allocated) FreeConsole();
     puts("PASS: EDIT frame, four arrows, colors, 25 rows, overflow selection, horizontal extent, shrink, empty and confirmation");

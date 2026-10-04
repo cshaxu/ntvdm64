@@ -11,6 +11,7 @@
 #include "ntsrv-exe/transport/rpc_security.h"
 #include "common/protocol/version.h"
 #include "common/rpc/management.h"
+#include "common/protocol/management.h"
 
 #define CHECK(value) do { if (!(value)) { fprintf(stderr,"FAIL %d: %lu\n",__LINE__,(unsigned long)GetLastError()); return 1; } } while (0)
 
@@ -210,7 +211,8 @@ int main(int argc,char **argv)
     }
     if (existing) {
         for (index=0;index<count;++index)
-            wprintf(L"WORKER pid=%lu task=%lu kind=%lu state=%lu image=%ls\n",
+            wprintf(L"%ls pid=%lu task=%lu kind=%lu state=%lu image=%ls\n",
+                entries[index].key.category==MANAGEMENT_WORKER ? L"WORKER" : L"NODE",
                 (unsigned long)entries[index].process_id,(unsigned long)entries[index].task,
                 (unsigned long)entries[index].kind,(unsigned long)entries[index].state,
                 entries[index].image);
@@ -219,10 +221,17 @@ int main(int argc,char **argv)
             if(argc==3) {
                 CHECK(selected_pid!=0);
                 for(selected=0;selected<count;++selected)
-                    if(entries[selected].process_id==selected_pid)break;
+                    if(entries[selected].process_id==selected_pid &&
+                        entries[selected].key.category==MANAGEMENT_WORKER)break;
                 CHECK(selected<count);
-            } else CHECK(count==1);
-            error=common_rpc_terminate_worker(&management,entries[selected].process_id);
+            } else {
+                ULONG workers=0;
+                for(index=0;index<count;++index)if(entries[index].key.category==MANAGEMENT_WORKER) {
+                    selected=index;++workers;
+                }
+                CHECK(workers==1);
+            }
+            error=common_rpc_close_management_node(&management,&entries[selected].key);
             if(error)fprintf(stderr,"TerminateWorker pid=%lu error=%lu\n",
                 (unsigned long)entries[selected].process_id,(unsigned long)error);
             CHECK(error==ERROR_SUCCESS);
@@ -244,11 +253,12 @@ int main(int argc,char **argv)
     RpcEndExcept
     CHECK(error==ERROR_REVISION_MISMATCH);
     RpcTryExcept {
-        error=Client_TerminateWorker(binding,self,APP_PROTOCOL_VERSION,(unsigned char *)version,1);
+        DTASKMGR_KEY stale={1,MANAGEMENT_WORKER,1,0};
+        error=Client_CloseManagementNode(binding,self,APP_PROTOCOL_VERSION,(unsigned char *)version,&stale);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    CHECK(error==ERROR_NOT_FOUND);
+    CHECK(error==ERROR_INVALID_HANDLE);
     RpcBindingFree(&binding); CloseHandle(self);
     /* A preceding isolated root test can still own the singleton during its
      * empty grace. Our duplicate broker then exits normally; never terminate

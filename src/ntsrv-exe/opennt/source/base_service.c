@@ -767,8 +767,13 @@ EnterCriticalSection(&connection->service->lock);
     previous_thread=OpenNtBaseBindServerRequestThread(&thread);
     previous_registry=OpenNtBaseBindProcessRegistry(&connection->service->registry);
     previous_resources=OpenNtBaseBindResources(&resources.binding);
+    /* Capture project-only WOW display labels before the original GetNext
+     * frees VDMINFO. The original record still owns dispatch/completion. */
+    if(message.u.GetNextVDMCommand.VDMState & ASKING_FOR_WOW_BINARY)
+        service_capture_wow_management_labels(connection);
     status=OpenNtBaseDispatchOperation((PCSR_API_MSG)&message,BROKER_VDM_GET_NEXT,
         sizeof(message.u.GetNextVDMCommand));
+    if(connection->wow)service_capture_wow_management_labels(connection);
     OpenNtBaseBindResources(previous_resources);
     OpenNtBaseBindProcessRegistry(previous_registry);
     OpenNtBaseBindServerRequestThread(previous_thread);
@@ -882,6 +887,7 @@ DWORD OpenNtBaseServiceExit(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD g
     previous_registry=OpenNtBaseBindProcessRegistry(&connection->service->registry);
     status=OpenNtBaseDispatchOperation((PCSR_API_MSG)&message,BROKER_VDM_EXIT,
         sizeof(message.u.ExitVDM));
+    if(connection->wow)service_capture_wow_management_labels(connection);
     OpenNtBaseBindProcessRegistry(previous_registry);
     OpenNtBaseBindServerRequestThread(previous_thread);
     if (status && !message.ReturnValue) message.ReturnValue=status;
