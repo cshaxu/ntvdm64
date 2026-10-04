@@ -35,6 +35,13 @@ The [implementation sequence](../etc/operations/t427-system-root-search-isolatio
 keeps S1 audit, S2 shared root/resource binding, S3 user search isolation and
 S4 integration/closure separate. Only S1 is active.
 
+S1 first-pass [audit and actual selected-image evidence](../etc/evidence/m0-t427-s1-root-search-audit.md)
+confirms package shadowing of CWD/PATH in four real native launch cases (r002),
+and original directory-first COM/EXE/BAT search from COMMAND source. Shared
+root ownership is proposed in common, not worker-base. Win16 environment,
+selected resource/loader reachability, PIF ordering and package-join audit
+remain open; no production repair or S1 closure is claimed.
+
 ## Current Technical Baseline
 
 
