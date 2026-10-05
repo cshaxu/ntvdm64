@@ -2,6 +2,18 @@
 
 ## Status and dependency
 
+Latest owner revision separates general component x64 migration into the next
+queued candidate. This hook package selects NTVWM32/64 and nthook32/64 only;
+run16, NTCON, NTMON, NTSRV, NTVDM, WOW32 and VDMREDIR remain x86. Both workers
+retain separate hidden Consoles and the existing NTSRV-controlled handoff.
+Ordinary native children retain actual Windows identity/waits. A transient
+installer-only helper is permitted if necessary after mechanism review; no
+resident helper, replacement child or new lifecycle authority. These choices
+supersede the earlier Hook-only/no-helper planning wording below. The current
+working sequence is maintained in the
+[task plan](../etc/operations/t431-native-launch-hook-plan.md); the older S
+sequence below is historical candidate planning, not current admission.
+
 Owner-approved planning, fourth unnumbered candidate in the remaining queue,
 after NTMON Console-root management, root/search isolation and the bounded CCPU40/V86 contract audit; all
 follow the active component-renaming package. This is not implementation

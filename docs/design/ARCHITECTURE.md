@@ -10,22 +10,28 @@ NTCON renderer or modifying guest/shared-library code.
 
 ### Proposed native worker width variants — T431 S3 design
 
-Owner's subsequent design freeze selects run16/ntcon/ntmon as x64-only,
-ntsrv/ntvdm/WOW32/VDMREDIR as x86-only, and ntvwm32/ntvwm64 plus
-nthook32/nthook64 as dual builds. This narrowly planned scope supersedes
-the earlier Hook-only x64 option, not the32-bit CCPU40/guest execution profile.
+Owner's latest scope revision keeps run16/ntcon/ntmon, ntsrv/ntvdm and
+WOW32/VDMREDIR x86 throughout T431. Only ntvwm32/ntvwm64 and
+nthook32/nthook64 are dual builds. This supersedes the earlier all-component
+width freeze, not the32-bit CCPU40/guest execution profile. General
+run16/ntcon/ntmon x64 migration is a separate next candidate T at Queue head;
+it is neither active nor a prerequisite for dual native workers/Hooks.
 Shared libraries and RPC clients have per-consumer native ABI builds, while
-copied wire contracts remain shared/fixed-width. Current Base/RTL mirror
-dependencies require source/symbol/ABI review before x64 linking; EXE-owned
-source alone does not imply an independent historical-free link closure.
-Do not rewrite mirrors or introduce a second classification/search policy.
+copied wire contracts remain shared/fixed-width. Audit actual pulled symbols:
+current NTCON/NTVWM maps select project Base bindings, not original BaseClient/
+RTL bodies; run16 and Hook32 do select the original classifier, which has a
+same-machine restriction. Audit native classification for both target widths
+without porting run16 or introducing a second discovery policy. Native-width
+ABI/classifier composition needed by Hook64 remains in T431; broader launcher
+BaseClient/RTL porting belongs to the queued migration.
 
 Ordinary native children retain real Windows creation handles, parent waits,
 exit codes and Console inheritance, without Run16 replacement or bitness-only
 worker switching. Worker-to-worker handoff and native Hook installation are
 distinct boundaries. Prefer no-helper installation; the owner permits
-research of a transient cross-width installer helper, but its exact mechanism
-still needs approval before implementation. No new resident backend/helper
+a transient cross-width installer helper if helper-free installation proves
+unsuitable; review its exact mechanism and rollback before implementation.
+No new resident backend/helper
 or target lifecycle authority is selected. The
 [frozen contract](../etc/operations/t431-native-launch-hook-design.md#s3-design-freeze-component-widths-handoff-and-native-propagation)
 supersedes the earlier single-x86-worker/no-helper-only options below.

@@ -15,12 +15,12 @@ before personal acceptance and admits S3 for64-bit design discussion only.
 | Field | Required record |
 | --- | --- |
 | Identifier Mode | M0 T431 S3; Ordinary Mode. |
-| Admission And Approval | Owner directs S2 closure before personal acceptance and S3 discussion, then approves component-width organization as a separate S, real native child semantics and optional helper research, and asks for S3 design freeze/three-part report. S3 remains design/source only. |
+| Admission And Approval | Owner directs S2 closure before personal acceptance and S3 discussion; latest revision limits this T to NTVWM32/64 and nthook32/64, keeps all other components x86, and queues run16/ntcon/ntmon x64 migration as the next candidate T. S3 remains design/source only. |
 | Candidate Proposal | [Controlled native launch hooks](../proposals/proposal-native-launch-hook-001.md). |
 | Objective | Agree Hook64 and dual-build NTVWM design: each worker owns its hidden Console; DOS/native32/native64 reuse one NTSRV-controlled handoff contract, with explicit cross-width propagation and rollback gates. |
 | Non-goals | No production coding/build/injection/publication at design stage; no private WOW64 executable probe, helper implementation, guest/mirror change, x64 MVDM/NTSRV/WOW32/VDMREDIR, global hook, observation or scheduler. Transient installer helper research/discussion is permitted, not shipment approval. |
 | Reference Baseline | S2 P2 committed/pushed12160c657; coherent S2/r027-runtime published, r031-publication; APP0.0.427/RPC38/I/O25. Personal acceptance pending. |
-| Files And ABI Surface | CURRENT, ARCHITECTURE and existing T431 plan/design/evidence; read-only Hook/search/bootstrap/worker callers. Proposed nthook64-dll and dual-build NTVWM need implementation admission; shared fixed-width service/I/O contracts remain canonical, required changes must be separately audited/versioned. |
+| Files And ABI Surface | CURRENT, QUEUE, ARCHITECTURE, native-hook proposal and existing T431 plan/design; new queued component-x64 proposal; read-only Hook/search/bootstrap/worker callers. Proposed nthook64-dll and dual-build NTVWM need implementation admission; shared fixed-width service/I/O contracts remain canonical, required changes must be separately audited/versioned. |
 | Applicable Rules | Full AGENTS authorities/source recovery, owner-scoped mixed-width design and optional installer-helper research revision, non-invasive boundary, one active packet, preserved other-session edits and build-only generated artifacts. |
 | Verification | Selected-source/primary-reference review; four-width ABI/bootstrap/failure contract; documentation governance, relative links and diff checks. No runtime result claimed. |
 | Expected Markers | Shared architecture-neutral logic versus native ABI mechanics; exact32-to64 blocker and64-to32 candidate; no silent helper or reduced width coverage. |
@@ -33,14 +33,17 @@ before personal acceptance and admits S3 for64-bit design discussion only.
 
 ## S3 Design Freeze
 
-Owner-approved target widths and three separate contracts are recorded in
-[the frozen design](../etc/operations/t431-native-launch-hook-design.md#s3-design-freeze-component-widths-handoff-and-native-propagation)
-and ARCHITECTURE. Dedicated S4 organizes component widths, S5 implements
-Hook64/four-direction propagation, and former final S4 becomes S6. None is
-yet admitted. Original32-bit Base/RTL link dependencies and32-to64 launcher
-context delivery are explicit engineering gates. A reviewed transient helper
-may be researched, but exact implementation needs approval. No source,
-runtime, process or published package is changed;64-bit capability is unproved.
+Owner's latest revision limits this T to NTVWM32/64 and nthook32/64;
+run16/ntcon/ntmon and ntsrv/ntvdm/WOW32/VDMREDIR stay x86. The revised
+[frozen design](../etc/operations/t431-native-launch-hook-design.md#s3-design-freeze-component-widths-handoff-and-native-propagation)
+and ARCHITECTURE preserve real native child semantics and width-neutral handoff.
+S4 organizes only the dual-worker/Hook build and selection boundary; S5 proves
+four-direction propagation, including Hook64 context delivery to x86 run16;
+S6 retains final audit. None is yet admitted. General component x64 migration
+is the next unnumbered Queue candidate, not a prerequisite or active task.
+An installer-only transient helper is acceptable if necessary after mechanism
+review; no resident helper or changed child identity. No source/runtime/process
+or published package is changed;64-bit capability remains unproved.
 
 ## S2 Closure Record
 

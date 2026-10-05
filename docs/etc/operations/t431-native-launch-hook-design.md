@@ -2,18 +2,19 @@
 
 ## S3 design freeze: component widths, handoff and native propagation
 
-Owner agrees on2026-10-05 to freeze the three boundaries below and allocate
-a separate subsequent S for compilation-width organization. This section
-supersedes earlier single-x86-worker/no-helper-only options, without declaring
+Owner's latest revision on2026-10-05 limits T431 to dual NTVWM and Hook
+builds. General run16/ntcon/ntmon x64 migration moves to the next unnumbered
+candidate T at Queue head. This section supersedes the earlier broad width
+freeze and single-x86-worker/no-helper-only options, without declaring
 64-bit runtime support or admitting production implementation in S3.
 
 ### Component compilation contract
 
 | Installed image | Selected build | Ownership |
 | --- | --- | --- |
-| run16.exe | x64 only | Existing search/classification, NTSRV submission/direct receipt and context consumer; no frontend or native-child scheduler. |
-| ntcon.exe | x64 only | Existing visible Console/Window and one authorized worker I/O connection. |
-| ntmon.exe | x64 only | Existing NTSRV management client and projection. |
+| run16.exe | x86 throughout T431; x64 migration queued separately | Existing search/classification, NTSRV submission/direct receipt and context consumer; no frontend or native-child scheduler. |
+| ntcon.exe | x86 throughout T431; x64 migration queued separately | Existing visible Console/Window and one authorized worker I/O connection. |
+| ntmon.exe | x86 throughout T431; x64 migration queued separately | Existing NTSRV management client and projection. |
 | ntsrv.exe | x86 only | Original BaseSrv owner and project control/registration/receipt authority. |
 | ntvdm.exe | x86 only | Original CCPU40 DOS/WOW execution. |
 | WOW32.DLL, VDMREDIR.DLL | x86 only | Existing NTVDM-only loaded providers. |
@@ -24,21 +25,26 @@ The final coherent set has11 images, replacing current ntvwm.exe with its
 two named variants and adding Hook64. All retain product-relative system32
 placement, not an extra runtime layer. Shared static libraries are rebuilt
 per consuming architecture with isolated objects/CRT/MIDL outputs under build;
-they do not become additional installed DLLs or processes. x64 MVDM,
-NTSRV, WOW32 and VDMREDIR are not selected. This targets64-bit Windows;
-an x86-only Windows release is not supplied by the new x64-only launcher.
+they do not become additional installed DLLs or processes. run16/ntcon/ntmon
+remain x86; x64 MVDM/NTSRV/WOW32/VDMREDIR are not selected. The dual-worker
+acceptance host is64-bit Windows. No launcher/frontend/monitor migration is
+required to deliver this set; an x86-only Windows package is not proved here.
 
-Source audit shows EXE source ownership is not link-closure ownership:
-New-T310OriginalSoftpcNinja.ps1 currently links run16/ntcon/ntmon and NTVWM
-against historical Base/RTL binding archives. run16 image_classification.c
-and hook_classification.c select original section metadata/classification;
-original-opennt-rtl-x86.lib contains architecture-specific carriers. Merely
-switching cl.exe cannot satisfy this contract. Audit each required symbol,
-retain independently composable original algorithms, and use only bounded
-native-width ABI/modern bindings at unavailable boundaries. No mirror
-rewrite, second resolver/classifier or x86 archive linked into an x64 image.
-An uncomposable original dependency is a reported gate, not permission to
-replace its semantics wholesale.
+Source audit distinguishes listed libraries from actually pulled members.
+The current maps show run16 selects original vdm.c classifier/command/
+environment bodies, csrutil.c capture and RTL environ/error. Hook32 selects
+original classification/error bodies. NTCON/NTVWM select project Base binding
+objects, not those original BaseClient/RTL bodies; NTMON has neither closure.
+The selected x86 assembly objects are not pulled into these EXEs. Thus source
+ownership or an archive name alone cannot prove a native-width blocker.
+Hook64 needs architecture-correct section metadata and classification bindings;
+the original same-machine check is not a general native-type test. The x86
+launcher must recognize both native target widths and permit NTSRV selection,
+without acquiring a second search policy or requiring a general x64 port.
+Audit each selected symbol and retain original algorithms through the smallest
+native-width binding. Broader run16 BaseClient/RTL porting moves to the queued
+migration. No x86 object enters an x64 image; an uncomposable dependency is a
+reported gate, not permission for wholesale semantic replacement.
 
 Regenerate RPC clients for their local ABI from the same IDL. Preserve copied
 fixed-width records and recipient-local resource ownership. Review narrowing,
@@ -89,24 +95,24 @@ Review matching DLL/path/export, authority/handle transfer, finite installer
 wait/cancellation, exact success acknowledgment and failure rollback before
 adoption. Do not blindly enable Detours wrapper helper fallback.
 
-Also cover the now-reversed launcher boundary: Hook32/NTVDM can create the
-new64-bit run16; Hook64 creates it same-width. Run16 receives copied context
-only, never an interception DLL. Conversely64-bit run16's context reader must
-not accidentally pull x86 Detours objects into its image. Context installation
-needs its own width tests, independently of interception installation.
+Run16 remains x86 in this T: Hook32/NTVDM create it at the existing width;
+Hook64 must deliver context to this opposite-width launcher. Run16 receives
+copied context only, never an interception DLL. Context installation has its
+own width tests independently of interception. Future x64 launcher context
+reader/link work belongs to the queued migration, not this T's prerequisite.
 
 ### Sequential implementation and acceptance
 
-S3 freezes design only. S4 will own the dedicated component-width/source/link/
-build/package organization with minimal context-delivery compatibility needed
-to preserve S2 behavior. S5 will own Hook64 and ordinary four-direction native
-propagation, selecting any temporary-helper mechanism only after review.
-Original whole-package isolation/fault/cleanup/trace handoff moves to S6.
-Only one S is admitted at a time; no implementation or helper is auto-admitted.
+S3 freezes design only. S4 owns dual NTVWM/Hook source/link/build/package
+organization, NTSRV native-machine selection and minimal x86 launcher
+classification/context compatibility. S5 owns Hook64 and ordinary four-direction
+native propagation, selecting any transient-helper mechanism after review.
+S6 retains whole-package isolation/fault/cleanup/trace handoff. General component
+x64 migration is queued next, not an S in this T. Only one S is admitted at a time.
 
-S4 must preserve actual32-bit Hook chains despite run16 becoming64-bit. If the
-necessary context-delivery mechanism is unavailable, retain the S2 package
-and report the dependency rather than publish a mixed or unhooked regression.
+S4 must preserve actual32-bit Hook chains with run16 still x86. If the needed
+native-width classification/context mechanism is unavailable, retain S2 and
+report the dependency rather than publish a mixed or unhooked regression.
 S5 must prove all four native width directions, caller-suspended/no-inherit,
 immediate child creation, GUI propagation, real returned-target identity and
 rollback. All production deliveries retain affected lifecycle negatives,
@@ -115,11 +121,12 @@ Focused width/handoff fixtures use both native worker images, independent
 roots and return ordering. Documentation freeze runs governance/links/diff
 checks only and changes no runtime package or running process.
 
-Remaining owner decision: whether a reviewed transient cross-width installer
-helper may actually be implemented, and its exact carrier/name if required.
-Permission to investigate is not permission to ship it. Original dependency
-ABI composition, worker reentry and cross-width resource correctness are
-engineering proofs, not requests to choose another handoff architecture.
+Owner permits a transient installer helper if helper-free installation is
+unsuitable. Its exact carrier, source provenance, bounded wait, success and
+rollback must be reviewed at implementation admission; no resident helper or
+new execution authority. Original dependency ABI composition, worker reentry
+and resource correctness remain engineering proofs, not reasons to change the
+handoff architecture. This planning delivery changes no running product.
 
 Primary references rechecked on2026-10-05:
 [Windows process interoperability](https://learn.microsoft.com/en-us/windows/win32/winprog64/process-interoperability),
