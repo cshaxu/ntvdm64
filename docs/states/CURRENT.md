@@ -2,10 +2,9 @@
 
 ## Current Work
 
-**Active: M0 T430 S4 — Ordinary Mode.** S3 is committed/pushed as
-250ab563b. S4's bounded VDMREDIR copy/completion recovery is verified and
-published, undergoing final delivery review; S5–S7
-remain planned, not simultaneously active.
+**Active: M0 T430 S5 — Ordinary Mode.** S4 is committed/pushed as
+fb5843dc6 with the verified eight-file package published. S5 admits bounded
+DEM directory-reset proof; S6–S7 remain planned, not simultaneously active.
 The [non-WOW sequence](../etc/operations/t430-non-wow-contract-plan.md) retains
 the owner provenance gate: preserve original guest defects; adopt only verified
 existing SoftPC fixes for original host defects; otherwise defer originals;
@@ -16,24 +15,35 @@ existing proposal receivers and queue order is unchanged.
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T430 S4; Ordinary Mode. |
+| Identifier Mode | M0 T430 S5; Ordinary Mode. |
 | Candidate Proposal | [CCPU40/V86 audit](../proposals/proposal-ccpu40-v86-guest-contract-audit-001.md); owner-approved non-WOW completion plan. |
-| Admission And Approval | Sequential continuation after S3 delivery; owner approves correcting attributable project defects and retaining unmatched original defects. |
-| Objective | Correct demonstrated project-added OEM capacity and async read-publication order; verify CD-name copies without inventing a guest error ABI. |
-| Non-goals | No original CX0-underflow repair without existing SoftPC match, guest patch, new scheduler, protocol, helper or WOW recovery. |
-| Reference Baseline | S2 accepted eight-file production; S3 test-only commit 250ab563b and [proof](../etc/evidence/m0-t430-s3-controller-pic-boundary.md). |
-| Files And ABI Surface | VDMREDIR vrnetapi/vrnmpipe audit and minimal original-owner hooks; ntvdm-exe/redir async/copy boundary, vdmredir-dll bounded conversion, tests and selected fixture build; existing exported ABI only as narrowly required. |
-| Applicable Rules | Original-owner/source-policy recovery ladder; immutable guest; mirror diff registration; bounded synchronous leases; every-P build/product/publication and documentation gates. |
-| Verification | Actual original VrGetUserName/CDNames and async completion/provider ordering where feasible; OEM terminator/capacity/CX0/1/DBCS, independently failed payload/result destinations, callback order, dead session/cancel/release-once; x86 CCPU40 build, Console17/Window17, WOW frontiers, coherent publication and smoke. |
-| Expected Markers | No OEM write past declared caller capacity; read payload precedes completion words and callback; failure does not emit stale callback; all owned resources released; explicit retained original limitations. |
-| Asset Needs | Current fixtures and production cache, pinned OpenNT and read-only sibling comparison; controlled pipe/NetAPI/memory negatives; unchanged guest media. |
-| Reporting Requirements | [S4 evidence](../etc/evidence/m0-t430-s4-redirector-copy-completion.md) records provenance, exact tests/limitations and actual delivery status; unrelated proposal preserved. |
-| Stop Conditions | Need to invent original error/atomicity semantics, mutate guest, broaden worker policy or lack matched original repair; disposition originals instead. |
-| Exit Criteria | Each K02–K04 obligation proved or source-qualified/dispositioned; project defects repaired with production connection and focused tests, full required delivery gates, commit/push. |
+| Admission And Approval | Sequential continuation after S4 delivery; approved non-WOW plan and owner provenance policy. |
+| Objective | Verify actual DEM indexed restart versus current slow fallback under mutation; restore only a demonstrated missing project carrier, otherwise retain qualified limits. |
+| Non-goals | No new filesystem algorithm, unmatched original repair, guest mutation, WOW recovery or worker/protocol change. |
+| Reference Baseline | S4 fb5843dc6, published eight-file package and [proof](../etc/evidence/m0-t430-s4-redirector-copy-completion.md). |
+| Files And ABI Surface | Original demsrch FileFindReset/FCB callers, existing monitor VdmQueryDir binding, selected filesystem/guest tests and fixture build. Mirror unchanged unless source gate justifies a minimal hook. |
+| Applicable Rules | Original-owner/source-policy ladder; immutable guest; bounded leases; no dummy binding; every-P production gates if production changes. |
+| Verification | Real FCB enumeration after remembered-file deletion/reordering, fresh status/output, fallback disposition and handle cleanup; actual provider/binding map and guest witness. Full product/publication gates if production inputs change. |
+| Expected Markers | No fabricated restart result, valid original status and closed handles; original missing-name/performance limits reproduced rather than hidden. |
+| Asset Needs | Existing T230 FCB fixture, current selected cache, pinned OpenNT and read-only SoftPC comparison; controlled directory below build, Z: only. |
+| Reporting Requirements | [S5 evidence](../etc/evidence/m0-t430-s5-dem-directory-reset.md) records source/provider identity, actual cases and limits; unrelated edits preserved. |
+| Stop Conditions | Need to invent mutation semantics or repair originals without matching SoftPC source; preserve and disposition instead. |
+| Exit Criteria | K01 proved or explicitly dispositioned, reproducible tests/evidence and review, appropriate build/runtime gates, commit/push. |
 | Original Owner Request | Original guest defects retained; original host defects adopt existing SoftPC fix only, otherwise TODO; design and execute correct non-mirror/project defect fixes. Continue execution. |
-| Similar-Issue Sweep | Other wide/ANSI copy consumers, OEM bytes versus Unicode characters, NULL/overlapping CD destinations, async read/write count, error publication and teardown/callback ownership. |
+| Similar-Issue Sweep | FCB versus handle searches, index/name mismatch, expiry/reopen, missing remembered file, first/next/end status and close/failure ownership. |
 
-## S4 Progress
+## S5 Verification Record
+
+The [S5 evidence](../etc/evidence/m0-t430-s5-dem-directory-reset.md) proves
+the original reset body is unchanged. Fresh actual-provider filesystem tests
+pass47 assertions; ordinary guest FCB first/next/end/missing-name witness and
+outer COMMAND completion pass. Deleted remembered name remains the original
+failure, not repaired or counted as mutation tolerance; missing indexed
+service/performance capability is TODO. No production inputs changed.
+The S4 published package remains unchanged. S5 delivery review/commit/push
+is the remaining sequential gate; S6/S7 and final owner acceptance remain.
+
+## S4 Closure Record
 
 The candidate builds x86 /MT CCPU40. Actual staging/session/lease tests pass24
 assertions; OEM/CD-name tests pass15; original VrGetUserName/CDNames entrypoints
@@ -45,8 +55,8 @@ The coherent eight-file candidate is published to O:/winnt/system32 with
 all hashes matching the tested manifest; S2 is retained in recovery.
 Published Console/Window MEM/native-zero smoke and all three preceding
 native/nested input/parent-return/exit23 frontiers pass. Final provenance,
-diff and documentation review passes; exit criteria are met for sequential
-commit/push. T430 remains open and S5 is not admitted until that delivery.
+diff and documentation review passes; fb5843dc6 is committed/pushed.
+T430 remains open; S5 is now admitted independently.
 Unrelated proposal/TODO edits remain excluded.
 
 ## S3 Closure Record
