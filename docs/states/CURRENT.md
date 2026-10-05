@@ -2,8 +2,33 @@
 
 ## Current Work
 
-**No active M/T/S packet.** T429 remains open for owner manual acceptance.
-S5 has reached bounded delivery; no succeeding S or T is admitted.
+**Active: M0 T429 S6** (Ordinary Mode; shared publication admission/source review).
+Owner approves both workers adopting the publisher mechanism in worker-base.
+S5 is delivered and pushed at903d25d8a; T429 remains open.
+
+## Active Packet
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T429 S6; Ordinary Mode. |
+| Admission And Approval | Owner approves extracting the S5 publisher into worker-base and connecting both NTVDM and NTVWM production paths. This explicitly admits worker-side full-snapshot comparison in worker-base, not frontend deduplication. |
+| Objective | Both workers use one shared copied latest-state publication mechanism,50Hz cap, final drain, failure and stop/join contract; remove replaced private publisher and native full-publication comparison. |
+| Non-goals | No new process/helper/component/channel/wire, frontend dedup, VGA/CCPU/guest algorithm, broker lifecycle, NTCON rendering or native30ms acquisition change. Do not move original OpenNT execution or introduce worker-kind branches in the shared publisher. |
+| Reference Baseline | P903d25d8a; S5 r019/runtime, r028 Product, r029 eight-case integration, r018 EDIT200 and r017/r021 coherent publication/smoke. Existing S5 causal limitations remain explicit. MSVC14.43/SDK22621/x86 /MT CCPU40; APP0.0.427/RPC38/I/O25 unchanged. |
+| Files And ABI Surface | worker-base publication module; NTVDM console_client adapter; NTVWM presentation acquisition/commit separation; build graph, production-linked fixtures and evidence. Common wire unchanged. Native immutable publication must include Unicode cell grid and geometry/cursor metadata alongside the text frame. Expected no new mvdm/opennt-host mirror diff. |
+| Applicable Rules | Full AGENTS reading set; worker-only source ownership; provenance-first extraction; original mirror algorithms retained; explicit instance/resources/locks/failure; build-only artifacts; preserved side-session edits and serial BaseSrv/Z: tests. |
+| Verification | Production-linked shared publisher positive/negative/blocked-send/handle tests; both actual callers, native Unicode/geometry/mouse changes, identical idle, final transaction and handoff ordering, cancellation and reopen. x86 affected closure, Console17/Window17/WOW frontiers, EDIT200 and native interaction, bidirectional nested handoff, cooked return, close/fault/session isolation, coherent eight-file publication/smoke, governance/relative links and diff review. |
+| Expected Markers | Same generic instance mechanism really linked by both workers; latest replacement without FIFO; last-successful complete-state comparison; no data/transport lock while waiting for drain/join; final paint acknowledged before input return or parent output. |
+| Asset Needs | Reuse validated T427 S2 r001 cache and S5 sealed baseline; existing original observers/media and production fixtures. New run evidence under build/M0-T429/S6 only; Z: is the sole temporary alias and must be removed. |
+| Reporting Requirements | Map each removed duplicate and each retained worker-specific operation to source/evidence; distinguish admission, implementation and runtime proof. Retain raw failures and waived physical boundaries. |
+| Stop Conditions | Need for new protocol/helper/scheduler, unsafe mutable capture access, unbounded snapshot queue, changed native Unicode/geometry transaction, original execution relocation or uncontrolled lock ordering requires re-review. |
+| Exit Criteria | Shared engine used in both production callers; replaced private/full-frame mechanisms removed; focused/full affected gates and publication pass; evidence reviewed, committed and pushed. T429 manual acceptance remains separate. |
+| Original Owner Request | "批准请准入s来共用" after approval of extracting the publication thread into worker-base for both workers. |
+| Similar-Issue Sweep | Frame/config retirement, Unicode-only changes, mouse-only changes, size/viewport/cursor, channel reopen, final drain, failed sends, worker/frontend loss, old snapshot invalidation and Console/Window routes. |
+
+[S6 source review and implementation checklist](../etc/evidence/m0-t429-s6-shared-video-publication.md)
+records the native atomic-publication boundary. Admission is not implementation
+or capability closure; the S5 package remains installed until S6 verification.
 
 Owner admitted the performance package after closing T428. S1's bounded
 measurement conclusion is recorded in the
@@ -177,6 +202,7 @@ Other-session proposal chronology is preserved and excluded from this delivery.
 S1 concludes as measurement-only; S2 is bounded-closed at production123c0ad3e.
 S3 is bounded-closed at production0654f5e0b; S4 integration is owner-closed.
 S5 reaches its bounded delivery with the final coherent published package.
-No active packet remains; overall T429 acceptance is still pending.
+Owner subsequently admits only S6 shared publication; overall T429 acceptance
+is still pending.
 Guest and lifecycle policy remain unchanged; the approved close dependency
 repairs ordering only. T429 remains open and other-session work is preserved.

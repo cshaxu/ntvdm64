@@ -333,5 +333,9 @@ PID-close/session-isolation evidence and the 17-route text regression.
 pre-restart chronology; current admission remains in states/CURRENT.md.
 
 [T429 S5 software-video publication](evidence/m0-t429-s5-software-video-publication.md)
-records the owner-approved exception boundary, source audit and unresolved
-publication execution context; no candidate publication is claimed.
+records the owner-approved exception boundary, copied publisher, source audit,
+retained failures and final coherent publication/verification.
+
+[T429 S6 shared worker publication](evidence/m0-t429-s6-shared-video-publication.md)
+records approved extraction into worker-base, both producer boundaries and the
+native atomic-publication checklist; admission is not runtime completion.
