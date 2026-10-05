@@ -331,3 +331,7 @@ PID-close/session-isolation evidence and the 17-route text regression.
 
 [Retained prior status](evidence/m0-t423-restart-prior-status.md) preserves the
 pre-restart chronology; current admission remains in states/CURRENT.md.
+
+[T429 S5 software-video publication](evidence/m0-t429-s5-software-video-publication.md)
+records the owner-approved exception boundary, source audit and unresolved
+publication execution context; no candidate publication is claimed.
