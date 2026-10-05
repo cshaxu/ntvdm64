@@ -249,10 +249,7 @@ CALLF
 
 	 /* update stack segment */
 	 load_SS_cache(new_ss, ss_descr_addr, &ss_entry);
-	 if ( GET_OPERAND_SIZE() == USE16 )
-	    SET_SP(new_sp);
-	 else
-	    SET_ESP(new_sp);
+	 set_current_SP(new_sp);
 
 	 /*
 	    FORM NEW STACK, VIZ

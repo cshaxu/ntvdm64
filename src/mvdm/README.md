@@ -1,5 +1,13 @@
 # mvdm
 
+MVDM-HOST-DIV-327 (T430 S2): protected-mode CALL gate, outer RETF and
+outer IRET install the new stack pointer with the original set_current_SP
+helper after loading SS. This is the exact three-body correction already
+present in sibling SoftPC ce5f53515d3e6ce0a64e66a5465aa7a8fbca00f7;
+destination SS address width, not instruction operand width, selects SP/ESP.
+No validation, privilege transition, parameter layout or VM-return policy
+is replaced. [Source and profile evidence](../../docs/etc/evidence/m0-t430-s2-softpc-repair-gate.md).
+
 MVDM-HOST-DIV-326 (T429 S5): software text mouse flush retains
 original-owner `calc_update` and copies the completed frame. A dedicated
 NTVDM publisher holds only the latest immutable state, compares the full

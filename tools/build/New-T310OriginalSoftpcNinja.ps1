@@ -1768,6 +1768,8 @@ $graph.Add('build original-external-memory-test.exe: memory_test_link obj/tests/
 $highLinearPageFixtureObject = 'obj/tests/ccpu_bounded_execution_fixture.obj'
 $graph.Add('build ' + $highLinearPageFixtureObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_bounded_execution_fixture.c')))
 $graph.Add('build ccpu-high-linear-page-test.exe: memory_test_link ' + $highLinearPageFixtureObject + ' ' + $boundedExecutionFixtureSeamsObject + ' ' + $fixtureHostLibraries)
+$graph.Add('build obj/tests/ccpu_stack_transition_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_stack_transition_test.c')))
+$graph.Add('build ccpu-stack-transition-test.exe: memory_test_link obj/tests/ccpu_stack_transition_test.obj ' + $boundedExecutionFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $wowPageDomainFixtureObject = 'obj/tests/wow_page_domain_fixture.obj'
 $wowUserObjectFixtureObject = 'obj/adapter-wow/wow_user_object_bindings.obj'
 $graph.Add('build ' + $wowPageDomainFixtureObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/wow_page_domain_fixture.c')))

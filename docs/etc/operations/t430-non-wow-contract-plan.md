@@ -6,11 +6,12 @@ Owner direction on 2026-10-04 supersedes the candidate's audit-only S2–S4
 sequence: close S1's inherited/current audit, then plan required non-WOW gap
 completion within this task. Known WOW gaps go to the existing WOW32
 candidates, not a parallel recovery program. CURRENT is the only admission
-authority. These stages are planned, not active or already implemented.
+authority. S1 and S2 are delivered; S3–S7 remain planned, not active.
 
 [S1 conclusions](../evidence/m0-t430-s1-inherited-contract-audit.md) freeze
 inputs and distinguish source risk, missing evidence and original limitations.
-The accepted T429 eight-file package remains unchanged.
+The T429 eight-file package is the S2 recovery baseline; the delivered S2
+package and bounded profile proof are in the [S2 evidence](../evidence/m0-t430-s2-softpc-repair-gate.md).
 
 ## Sequential stages
 

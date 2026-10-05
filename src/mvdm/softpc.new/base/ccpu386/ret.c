@@ -205,10 +205,7 @@ IFN1(
 
 	 new_sp = tpop(STACK_ITEM_3, (ISM32)op1);
 	 load_SS_cache(new_ss, ss_descr_addr, &ss_entry);
-	 if ( GET_OPERAND_SIZE() == USE16 )
-	    SET_SP(new_sp);
-	 else
-	    SET_ESP(new_sp);
+	 set_current_SP(new_sp);
 	 stk_inc = 0;
 
 	 /* finally re-validate DS and ES segments */
