@@ -1,5 +1,16 @@
 # Architecture Rules
 
+## Owner-approved selective native component migration
+
+Owner admits x64-only run16/NTCON/NTMON migration after the delivered
+single-worker/dual-Hook baseline; initially only audit/design is active.
+This narrowly supersedes old x64 build exclusions for those consumers and
+their separately compiled native dependencies. NTSRV/NTVDM/NTVWM/WOW32/
+VDMREDIR stay x86. No new worker, helper, source root, guest port or original
+algorithm rewrite is authorized. Native process-local ABI and fixed-width
+wire ABI remain distinct; source-first mirror and resource rules still apply.
+The active packet governs implementation admission, not this exception alone.
+
 ## Owner-approved T431 S2 native hook boundary
 
 Owner admits src/nthook32-dll for one32-bit DLL and shared static installer,

@@ -1,5 +1,15 @@
 # Source Layout
 
+## Selective native-width migration admission
+
+Owner admits run16-exe, ntcon-exe and ntmon-exe x64-only migration, initially
+audit/design only. Their selected common/RPC/static dependencies have
+architecture-local build closures, never mixed-width objects or a new source
+owner. NTSRV/NTVDM/NTVWM/WOW32/VDMREDIR remain x86; both Hook widths remain.
+This supersedes older blanket x64 prohibitions only for these consumer
+islands. Original execution and mirror-minimality remain binding; see the
+[migration plan](../etc/operations/t433-native-components-x64-plan.md).
+
 ## Own-image root mechanics — T427 S2
 
 T431 S2 shares the unchanged run16 application-search implementation in
@@ -113,9 +123,10 @@ under this component with notices/provenance. GUI/CUI propagation is separate
 from character frontend authority. That T431 delivery has no helper or x64
 island. T432 S6 retains a single x86 ntvwm.exe and rebuilds dual Hook DLLs
 from the accepted source baseline. The rejected dual-worker implementation
-and its [helper register](../etc/operations/t432-detours-helper-adaptation.md)
-remain research only; any necessary installer seam requires fresh individual
-review before production inclusion. All other components remain x86.
+remains research only. The individually reviewed
+[helper register](../etc/operations/t432-detours-helper-adaptation.md) records
+the delivered finite installer-only exception; it is not a resident helper.
+All other T432 components remained x86.
 
 ## Executable-owned runtime
 

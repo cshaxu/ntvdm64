@@ -2,13 +2,15 @@
 
 ## Status and dependency
 
-Owner places this unnumbered candidate at Queue head, immediately after the
-current native-worker/Hook package. No numeric T or implementation is admitted
-by this planning change. The current package delivers NTVWM32/64 and
-nthook32/64 while all other components remain x86. This candidate then migrates
+Owner originally placed this candidate at Queue head after native-worker/Hook
+delivery. The revised delivered baseline retains one x86 NTVWM and both
+Hook widths. Owner now admits this candidate; [Status](../states/CURRENT.md)
+owns its only active packet and the
+[migration plan](../etc/operations/t433-native-components-x64-plan.md) its
+bounded sequence. This package migrates
 run16.exe, ntcon.exe and ntmon.exe to x64-only builds without changing their
-roles. NTSRV, NTVDM, WOW32.DLL and VDMREDIR.DLL remain x86; both NTVWM and Hook
-variants remain available. NTCON is the visible frontend, not the native worker.
+roles. NTSRV, NTVDM, NTVWM, WOW32.DLL and VDMREDIR.DLL remain x86; both Hook
+widths remain available. NTCON is the visible frontend, not the native worker.
 
 ## Objective and boundary
 
@@ -49,10 +51,11 @@ resolver or extension-only parser. Reuse the preceding Hook64 ABI conclusions.
 
 ## Proposed implementation sequence
 
-At numeric admission allocate bounded S briefs for: dependency/ABI audit and
+The migration plan records the bounded sequence: dependency/ABI audit and
 design; x64 frontend/monitor and shared RPC bindings; x64 launcher/Base-client
 composition and both Hook-to-launcher context directions; coherent package
-regression/publication and owner acceptance. This sequence allocates no S now.
+regression/publication and owner disposition. Only Status admits an active S;
+this proposal does not allocate or authorize simultaneous implementation.
 
 ## Acceptance
 
@@ -62,8 +65,8 @@ Hook32/64 context-only delivery to x64 run16; native32/64 and DOS/Win16
 classification; native child real handles/exit codes; independent roots,
 disconnect/failure cleanup, worker reuse and DOS/native bidirectional handoff.
 Retain Console17/Window17 and independent WOW frontiers against the preceding
-verified package. Seal/recover/publish one coherent eleven-image set and verify
+verified package. Seal/recover/publish one coherent ten-image set and verify
 its hashes. Compiler/linker success alone is not runtime acceptance.
 
 All generated/build/test products remain below build/; preserve other-session
-changes. This proposal changes no production source, process or deployed file.
+changes. Admission/design changes no production source, process or deployed file.

@@ -1,5 +1,12 @@
 # Project Goal
 
+Owner-approved selective migration admits x64-only run16/NTCON/NTMON after
+the delivered single x86 native-worker/dual-Hook baseline. Current admission
+starts with audit/design; existing production is unchanged. NTSRV, NTVDM,
+NTVWM, WOW32 and VDMREDIR retain x86; original CCPU40 and guest contracts
+remain. This scoped profile supersedes older blanket x64 exclusion below
+only for the named native consumers, not general MVDM/native x64 recovery.
+
 Deliver a self-contained, non-invasive NTVDM CLI for modern Windows hosts.
 The current product package is x86 `run16.exe`, `ntsrv.exe` and `ntvdm.exe`;
 native x64 compilation is not a product or acceptance target. The run16 CLI

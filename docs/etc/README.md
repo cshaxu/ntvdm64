@@ -2,10 +2,12 @@
 
 [T432 S6 single-worker reconstruction](evidence/m0-t432-s6-single-worker-reconstruction.md)
 records the superseded evidence branch, accepted source restoration and
-pending single-worker/dual-Hook gates.
+delivered single-worker/dual-Hook gates; see
+[T432 closure](../history/m0-t432-single-worker-dual-hook-closure.md).
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T433 native component migration plan](operations/t433-native-components-x64-plan.md) | M0 T433 | Selective run16/NTCON/NTMON migration, bounded source-first design and delivery; one x86 NTVWM retained. | Retain through implementation and owner closure. |
 | [T432 dual-width worker/Hook plan](operations/t432-dual-width-native-workers-hooks-plan.md) | M0 T432 | Accepted Hook32 baseline preservation, staged dual builds/propagation and explicit runtime gates. | Retain through owner acceptance. |
 | [T432 S1 dual-width design](operations/t432-dual-width-native-workers-hooks-design.md) | M0 T432 S1 | Source/link ledger, machine selection, ABI/context and bounded installer-helper contracts; runtime gates remain planned. | Retain through implementation and owner acceptance. |
 | [T432 S1 design-only closure](evidence/m0-t432-s1-dual-width-design.md) | M0 T432 S1 | Published design P1 identity and its non-runtime boundary. | Retain through owner acceptance. |

@@ -8,6 +8,23 @@ NTCON renderer or modifying guest/shared-library code.
 
 ## Product boundary
 
+### Selective native component migration — T433 admission
+
+Owner closes the delivered T432 package without manual testing and admits
+x64-only run16, NTCON and NTMON migration. Only dependency/ABI audit and
+detailed design are active initially; no new x64 EXE delivery is claimed.
+NTSRV, NTVDM, the single NTVWM, WOW32 and VDMREDIR remain x86; both Hooks
+remain. Target architecture does not select another worker. The package stays
+ten images and retains current names, system32 paths, shared search, copied
+protocols, recipient-local capabilities and NTSRV I/O/lifecycle authority.
+Consumer-local static/RPC dependencies must be rebuilt at their own native
+ABI. Reuse original classification through bounded architecture-correct
+composition before proposing an owner-reviewed mirror diff; no new classifier,
+resident helper or MVDM port is authorized. This scoped admission supersedes
+older x86-only wording for these three consumer islands, not the x86 CCPU40
+machine or source-provenance restrictions. See the
+[migration plan](../etc/operations/t433-native-components-x64-plan.md).
+
 ### Single worker and dual Hooks — T432 S6 superseding contract
 
 Owner replaces the dual-worker design: only x86 ntvwm.exe remains. Actual
@@ -30,7 +47,9 @@ disconnect. Both endpoint acknowledgements precede a new connection or a
 release-dependent result. worker-base shares client/cleanup mechanics, not
 task policy; worker-local user counts cannot authorize closure. Original
 DOS/WOW execution boundaries and fatal/CloseOnExit semantics remain unchanged.
-RPC41 carries this checkpoint; integration and publication remain S6 gates.
+RPC41 carries this checkpoint; S6 integration/publication is delivered and
+[T432 closure](../history/m0-t432-single-worker-dual-hook-closure.md) records
+owner disposition without manual testing.
 
 ### Superseded dual-worker research — not the active contract
 
