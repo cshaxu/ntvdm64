@@ -8,8 +8,9 @@ Hook widths. Owner now admits this candidate; [Status](../states/CURRENT.md)
 owns its only active packet and the
 [migration plan](../etc/operations/t433-native-components-x64-plan.md) its
 bounded sequence. This package migrates
-run16.exe, ntcon.exe and ntmon.exe to x64-only builds without changing their
-roles. NTSRV, NTVDM, NTVWM, WOW32.DLL and VDMREDIR.DLL remain x86; both Hook
+run16.exe, ntcon.exe, ntmon.exe and, by the owner's latest expansion, the
+single ntvwm.exe to x64-only builds without changing their roles.
+NTSRV, NTVDM, WOW32.DLL and VDMREDIR.DLL remain x86; both Hook
 widths remain available. NTCON is the visible frontend, not the native worker.
 
 ## Objective and boundary
@@ -24,7 +25,7 @@ widths remain available. NTCON is the visible frontend, not the native worker.
 - Keep all installed images at the existing product-relative system32 paths.
   Do not globally disable WOW64 redirection or silently change user search.
 
-No x64 MVDM/NTSRV/WOW32/VDMREDIR, new scheduler/registry, frontend kind branch,
+No x64 MVDM/NTSRV/WOW32/VDMREDIR, dual NTVWM, new scheduler/registry, frontend kind branch,
 guest mutation or additional resident helper is selected. The preceding
 package's approved installer mechanism is reused, not redesigned here.
 

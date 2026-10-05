@@ -11,9 +11,10 @@ NTCON renderer or modifying guest/shared-library code.
 ### Selective native component migration — T433 admission
 
 Owner closes the delivered T432 package without manual testing and admits
-x64-only run16, NTCON and NTMON migration. Only dependency/ABI audit and
+x64-only run16, NTCON and NTMON migration; the latest owner direction also
+adds the single NTVWM's native x64 audit/design. Only dependency/ABI audit and
 detailed design are active initially; no new x64 EXE delivery is claimed.
-NTSRV, NTVDM, the single NTVWM, WOW32 and VDMREDIR remain x86; both Hooks
+NTSRV, NTVDM, WOW32 and VDMREDIR remain x86; both Hooks
 remain. Target architecture does not select another worker. The package stays
 ten images and retains current names, system32 paths, shared search, copied
 protocols, recipient-local capabilities and NTSRV I/O/lifecycle authority.
@@ -21,7 +22,7 @@ Consumer-local static/RPC dependencies must be rebuilt at their own native
 ABI. Reuse original classification through bounded architecture-correct
 composition before proposing an owner-reviewed mirror diff; no new classifier,
 resident helper or MVDM port is authorized. This scoped admission supersedes
-older x86-only wording for these three consumer islands, not the x86 CCPU40
+older x86-only wording for these four consumer islands, not the x86 CCPU40
 machine or source-provenance restrictions. See the
 [migration plan](../etc/operations/t433-native-components-x64-plan.md).
 
