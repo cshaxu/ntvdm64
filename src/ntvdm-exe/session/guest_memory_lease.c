@@ -85,8 +85,16 @@ int guest_memory_lease_release(guest_memory_lease_context *context,
     guest_memory_lease *lease, int commit)
 {
     int result;
+    uint32_t index;
     if (!guest_memory_lease_context_valid(context) || context->active == 0u ||
-        lease == NULL || lease->active == 0u || lease->epoch != context->epoch)
+        lease == NULL)
+        return 0;
+    /* Validate slot ownership before dereferencing an untrusted lease pointer. */
+    for (index = 0u; index < GUEST_MEMORY_LEASE_MAXIMUM; ++index) {
+        if (lease == &context->leases[index]) break;
+    }
+    if (index == GUEST_MEMORY_LEASE_MAXIMUM || lease->active == 0u ||
+        lease->epoch != context->epoch)
         return 0;
     result = commit == 0 || (lease->access & GUEST_MEMORY_ACCESS_WRITE) == 0u ||
         lease->byte_count == 0u || context->write(context->context, lease->address,

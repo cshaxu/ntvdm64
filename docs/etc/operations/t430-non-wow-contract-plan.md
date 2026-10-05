@@ -9,10 +9,9 @@ candidates, not a parallel recovery program. CURRENT is the only admission
 authority. S1 and S2 are delivered; S3's applicability review retains the
 original selected-NTVDM response limitation without adopting an inapplicable
 SoftPC patch. See [S3 proof](../evidence/m0-t430-s3-controller-pic-boundary.md).
-S4 is delivered as fb5843dc6. S5 proves ordinary FCB/fallback behavior and
-retains original deleted-name and missing indexed-service limits; its
-test/disposition delivery is reviewed in CURRENT. S6–S7 remain planned,
-not active.
+S4 is delivered as fb5843dc6. S5 a143894f1 proves ordinary FCB/fallback
+behavior and retains original deleted-name/missing indexed-service limits.
+S6 is now admitted in CURRENT; S7 remains planned, not active.
 
 [S1 conclusions](../evidence/m0-t430-s1-inherited-contract-audit.md) freeze
 inputs and distinguish source risk, missing evidence and original limitations.

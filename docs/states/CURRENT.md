@@ -2,9 +2,12 @@
 
 ## Current Work
 
-**Active: M0 T430 S5 — Ordinary Mode.** S4 is committed/pushed as
-fb5843dc6 with the verified eight-file package published. S5 admits bounded
-DEM directory-reset proof; S6–S7 remain planned, not simultaneously active.
+**Active: M0 T430 S6 — Ordinary Mode.** S5 is committed/pushed as
+a143894f1 with qualified DEM/FCB proof and retained original limits.
+S6 admits bounded non-WOW memory/transition proof; S7 remains planned,
+not simultaneously active. S6's verified lease-isolation correction is now
+published as an eight-file set. S6 P1 is the bounded lease-isolation delivery;
+S6 is not yet closed and remaining selected proof obligations stay active.
 The [non-WOW sequence](../etc/operations/t430-non-wow-contract-plan.md) retains
 the owner provenance gate: preserve original guest defects; adopt only verified
 existing SoftPC fixes for original host defects; otherwise defer originals;
@@ -15,24 +18,24 @@ existing proposal receivers and queue order is unchanged.
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T430 S5; Ordinary Mode. |
+| Identifier Mode | M0 T430 S6; Ordinary Mode. |
 | Candidate Proposal | [CCPU40/V86 audit](../proposals/proposal-ccpu40-v86-guest-contract-audit-001.md); owner-approved non-WOW completion plan. |
-| Admission And Approval | Sequential continuation after S4 delivery; approved non-WOW plan and owner provenance policy. |
-| Objective | Verify actual DEM indexed restart versus current slow fallback under mutation; restore only a demonstrated missing project carrier, otherwise retain qualified limits. |
-| Non-goals | No new filesystem algorithm, unmatched original repair, guest mutation, WOW recovery or worker/protocol change. |
-| Reference Baseline | S4 fb5843dc6, published eight-file package and [proof](../etc/evidence/m0-t430-s4-redirector-copy-completion.md). |
-| Files And ABI Surface | Original demsrch FileFindReset/FCB callers, existing monitor VdmQueryDir binding, selected filesystem/guest tests and fixture build. Mirror unchanged unless source gate justifies a minimal hook. |
+| Admission And Approval | Sequential continuation after S5 delivery; approved non-WOW plan and owner provenance policy. |
+| Objective | Reconcile current DPMI/XMS/EMS/IRQ/lease evidence and supplement the selected unproved failure/restoration boundaries; correct only demonstrated project defects. |
+| Non-goals | No new census, unmatched original repair, guest mutation, WOW recovery, scheduler or worker/protocol change. |
+| Reference Baseline | S5 a143894f1; S4 fb5843dc6 published package and [proof](../etc/evidence/m0-t430-s4-redirector-copy-completion.md). |
+| Files And ABI Surface | NTVDM DPMI/SoftPC/session adapters and original PM/EMS/interrupt callers; existing PM-entry, descriptor, lease and EMS fixtures, selected fixture build. Mirrors unchanged unless provenance gate justifies a minimal hook. |
 | Applicable Rules | Original-owner/source-policy ladder; immutable guest; bounded leases; no dummy binding; every-P production gates if production changes. |
-| Verification | Real FCB enumeration after remembered-file deletion/reordering, fresh status/output, fallback disposition and handle cleanup; actual provider/binding map and guest witness. Full product/publication gates if production inputs change. |
-| Expected Markers | No fabricated restart result, valid original status and closed handles; original missing-name/performance limits reproduced rather than hidden. |
-| Asset Needs | Existing T230 FCB fixture, current selected cache, pinned OpenNT and read-only SoftPC comparison; controlled directory below build, Z: only. |
-| Reporting Requirements | [S5 evidence](../etc/evidence/m0-t430-s5-dem-directory-reset.md) records source/provider identity, actual cases and limits; unrelated edits preserved. |
-| Stop Conditions | Need to invent mutation semantics or repair originals without matching SoftPC source; preserve and disposition instead. |
-| Exit Criteria | K01 proved or explicitly dispositioned, reproducible tests/evidence and review, appropriate build/runtime gates, commit/push. |
+| Verification | Invalid DOSX IDT without partial CPU mutation, PM-stack/exception return, EMS AH56/BOP68 stack/mapping restoration, lease failure/teardown and IRQ sentinel/notification. Reuse proof only with compatible input identity; label mock/provider versus guest results. Full product/publication gates if production inputs change. |
+| Expected Markers | Correct original failure/status, preserved CPU/mapping state and owned cleanup; retained original/external limits explicitly non-pass. |
+| Asset Needs | Current selected cache, existing memory/EMS/DPMI fixtures and retained audits, pinned OpenNT/read-only SoftPC; all output below build, Z: only. |
+| Reporting Requirements | [S6 evidence](../etc/evidence/m0-t430-s6-memory-transition-boundaries.md) records input reconciliation, actual proof, original limitations and any project correction; unrelated edits preserved. |
+| Stop Conditions | New owner/scope, invented original algorithm or original repair without matching SoftPC; retain disposition or revise brief before expansion. |
+| Exit Criteria | Selected gaps proved or explicitly dispositioned, reproducible tests/evidence/review, applicable build/runtime gates, commit/push. |
 | Original Owner Request | Original guest defects retained; original host defects adopt existing SoftPC fix only, otherwise TODO; design and execute correct non-mirror/project defect fixes. Continue execution. |
-| Similar-Issue Sweep | FCB versus handle searches, index/name mismatch, expiry/reopen, missing remembered file, first/next/end status and close/failure ownership. |
+| Similar-Issue Sweep | PM entry/return, descriptor widths and invalid tables, EMS map/stack restoration, XMS failure data preservation, lease cancellation/teardown and concurrent notification ownership. |
 
-## S5 Verification Record
+## S5 Closure Record
 
 The [S5 evidence](../etc/evidence/m0-t430-s5-dem-directory-reset.md) proves
 the original reset body is unchanged. Fresh actual-provider filesystem tests
@@ -40,8 +43,10 @@ pass47 assertions; ordinary guest FCB first/next/end/missing-name witness and
 outer COMMAND completion pass. Deleted remembered name remains the original
 failure, not repaired or counted as mutation tolerance; missing indexed
 service/performance capability is TODO. No production inputs changed.
-The S4 published package remains unchanged. S5 delivery review/commit/push
-is the remaining sequential gate; S6/S7 and final owner acceptance remain.
+The S4 published package remains unchanged; all eight hashes match.
+Governance/links/diff review pass; a143894f1 is committed/pushed. Other-session
+proposal/TODO edits remain preserved and excluded. S6/S7 and final owner
+acceptance remain.
 
 ## S4 Closure Record
 
@@ -101,15 +106,17 @@ It does not certify universal runtime equivalence or production fixes.
 
 ## Current Technical Baseline
 
-The S4 coherent eight-file set build/M0-T430/S4/r006-runtime is published
+The S6 coherent eight-file set build/M0-T430/S6/r007-runtime is published
 at O:/winnt/system32: run16.exe, ntsrv.exe, ntcon.exe, ntvdm.exe, ntvwm.exe,
 ntmon.exe, WOW32.DLL and VDMREDIR.DLL. MSVC14.43/SDK22621, x86 /MT CCPU40;
-APP0.0.427/RPC38/I/O25 unchanged. S4/r027-publication records matching source/
-published hashes and recovery of S2; S4/r028-published-smoke
-passes actual published Console/Window MEM and native-zero.
+APP0.0.427/RPC38/I/O25 unchanged. S6/r010-publication records matching source/
+published hashes and recovery of S4; S6/r013-published-smoke
+passes actual published Console/Window MEM and native-zero. S6/r008-product
+passes Console17/Window17 and independent WOW frontiers. The bounded lease
+test passes45 assertions after its pre-fix cross-context failure.
 
 The formal cache is build/M0-T427/S2/r001, with regenerated source manifest.
-The preceding production package 065ba3b3f/T430 S2 is the recovery baseline.
+The preceding production package fb5843dc6/T430 S4 is the recovery baseline.
 Both workers retain shared publication/input machinery; original guest media,
 VGA presentation, frontend format routing and NTSRV authority are unchanged.
 No helper, CPU30, new wire or unrelated sibling repair is included.
