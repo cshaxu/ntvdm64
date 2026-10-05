@@ -8,10 +8,14 @@ NTCON renderer or modifying guest/shared-library code.
 
 ## Product boundary
 
-### Proposed native worker width variants — T431 S3 design
+### Proposed native worker width variants — T432 design
 
-Owner's latest scope revision keeps run16/ntcon/ntmon, ntsrv/ntvdm and
-WOW32/VDMREDIR x86 throughout T431. Only ntvwm32/ntvwm64 and
+Owner accepts the delivered T431 Hook32 baseline and transfers unimplemented
+dual-width work to the separate T432 package. Its
+[plan](../etc/operations/t432-dual-width-native-workers-hooks-plan.md) owns
+the live stages; T431's retained design supplies source/contract evidence.
+The latest scope keeps run16/ntcon/ntmon, ntsrv/ntvdm and
+WOW32/VDMREDIR x86 throughout T432. Only ntvwm32/ntvwm64 and
 nthook32/nthook64 are dual builds. This supersedes the earlier all-component
 width freeze, not the32-bit CCPU40/guest execution profile. General
 run16/ntcon/ntmon x64 migration is a separate next candidate T at Queue head;
@@ -22,7 +26,7 @@ current NTCON/NTVWM maps select project Base bindings, not original BaseClient/
 RTL bodies; run16 and Hook32 do select the original classifier, which has a
 same-machine restriction. Audit native classification for both target widths
 without porting run16 or introducing a second discovery policy. Native-width
-ABI/classifier composition needed by Hook64 remains in T431; broader launcher
+ABI/classifier composition needed by Hook64 remains in T432; broader launcher
 BaseClient/RTL porting belongs to the queued migration.
 
 Ordinary native children retain real Windows creation handles, parent waits,
@@ -36,7 +40,7 @@ or target lifecycle authority is selected. The
 [frozen contract](../etc/operations/t431-native-launch-hook-design.md#s3-design-freeze-component-widths-handoff-and-native-propagation)
 supersedes the earlier single-x86-worker/no-helper-only options below.
 
-Owner-directed S3 design records NTVWM32 and NTVWM64 as two builds of the
+Retained owner-approved design records NTVWM32 and NTVWM64 as two builds of the
 same native-worker implementation, each with its own hidden execution Console.
 They must never jointly attach to one hidden Console. They can share one
 user-visible NTCON frontend through the existing NTSRV-owned logical

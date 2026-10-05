@@ -2,6 +2,13 @@
 
 ## Status and dependency
 
+Owner subsequently accepts the delivered32-bit Hook package; its
+[closure](../history/m0-t431-native-hook32-closure.md) preserves the verified
+baseline. The unimplemented width expansion transfers to the separate
+[dual-worker/Hook proposal](proposal-dual-width-native-workers-hooks-001.md).
+Earlier planning below is retained context, not active admission or a claim
+that the cross-width stages passed.
+
 Latest owner revision separates general component x64 migration into the next
 queued candidate. This hook package selects NTVWM32/64 and nthook32/64 only;
 run16, NTCON, NTMON, NTSRV, NTVDM, WOW32 and VDMREDIR remain x86. Both workers

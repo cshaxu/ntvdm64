@@ -1,5 +1,11 @@
 # T431 native launch hook detailed design
 
+Owner subsequently accepts the delivered Hook32 baseline and closes T431 at
+that boundary. The width design below is retained research input for the
+separate [T432 plan](t432-dual-width-native-workers-hooks-plan.md), which owns
+the live S sequence. This record does not claim the planned width stages were
+implemented; all production files remain at the accepted32-bit baseline.
+
 ## S3 design freeze: component widths, handoff and native propagation
 
 Owner's latest revision on2026-10-05 limits T431 to dual NTVWM and Hook

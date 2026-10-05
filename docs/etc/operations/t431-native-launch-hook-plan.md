@@ -2,6 +2,14 @@
 
 ## Current admission revision
 
+Owner subsequently accepts nthook32 and closes T431 within its delivered x86
+scope. S3 concludes design/replanning only. Planned S4–S6 were never admitted
+or implemented; their remaining work transfers to the separate
+[T432 plan](t432-dual-width-native-workers-hooks-plan.md). The
+[closure](../../history/m0-t431-native-hook32-closure.md) preserves the accepted
+production baseline. Earlier planning below is retained source context, not
+an active sequence or a claim of64-bit capability.
+
 Owner's latest S3 revision limits T431 to named ntvwm32/ntvwm64 and
 nthook32/nthook64 variants. All other components stay x86, including
 run16/ntcon/ntmon. Their x64 migration is the separate next unnumbered Queue
