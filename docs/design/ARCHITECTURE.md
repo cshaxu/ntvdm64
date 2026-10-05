@@ -30,6 +30,18 @@ The [S5 source audit](../etc/evidence/m0-t429-s5-software-video-publication.md)
 and [S6 sharing evidence](../etc/evidence/m0-t429-s6-shared-video-publication.md)
 record the explicit owner exception, shared boundary and retained limits.
 
+T429 S8 places the project-added readable-source wait/rearm thread in
+worker-base/input_watch. Both workers own an explicit instance, pin wait-only
+source handles across endpoint replacement, and cancel/join before releasing
+callback resources. NTVDM exposes its stable wake to the unchanged original
+DOS event consumer; NTVWM consumes and converts records in its worker callback.
+Native admission uses an explicit state-change event. Its20ms timeout only
+captures active hidden Console output, never reads input or retries admission;
+idle waits indefinitely for control/state events. Final input return disables
+readiness under the execution/I/O lock before draining/releasing the endpoint.
+No frontend policy, guest scheduling, wire or worker-kind branch moves into
+the shared input mechanism.
+
 ### Own-image product root — T427 S2
 
 `common/system_root` supplies checked Windows-root and relative-path

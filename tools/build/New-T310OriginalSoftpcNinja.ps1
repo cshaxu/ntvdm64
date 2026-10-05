@@ -1349,7 +1349,11 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/ntvwm/next_command.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvwm-exe/next_command.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/worker-base/publication.obj: cc ' + (NinjaPath (Join-Path $root 'src/worker-base/publication.c')))
-    $graph.Add('build worker-base.lib: lib obj/worker-base/connection.obj obj/worker-base/shutdown_close.obj obj/worker-base/publication.obj')
+    $graph.Add('build obj/worker-base/input_watch.obj: cc ' + (NinjaPath (Join-Path $root 'src/worker-base/input_watch.c')))
+    $graph.Add('build worker-base.lib: lib obj/worker-base/connection.obj obj/worker-base/shutdown_close.obj obj/worker-base/publication.obj obj/worker-base/input_watch.obj')
+    $graph.Add('build obj/tests/worker_input_watch.obj: cc ' + (NinjaPath (Join-Path $root 'tests/component-integration/worker_input_watch_test.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build worker-input-watch-test.exe: broker_test_link obj/tests/worker_input_watch.obj worker-base.lib')
     $graph.Add('build obj/tests/worker_shutdown.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/worker_shutdown_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build worker-shutdown-test.exe: base_rpc_test_link obj/tests/worker_shutdown.obj worker-base.lib frontend-client.lib obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
@@ -1893,7 +1897,7 @@ if ($objectOutputDirectories.Count -gt 0) {
         target = 'worker-base.lib'
         selected = ($Architecture -eq 'x86')
         disposition = 'project-owned worker connection initialization and disconnect; NTVDM and NTVWM only; common provides protocol clients'
-        sources = @('connection.c', 'connection.h', 'shutdown_close.c', 'publication.c', 'publication.h' | ForEach-Object {
+        sources = @('connection.c', 'connection.h', 'shutdown_close.c', 'publication.c', 'publication.h', 'input_watch.c', 'input_watch.h' | ForEach-Object {
             $path = 'src/worker-base/' + $_
             [ordered]@{ path = $path; sha256 = Get-NodeSha256 (Join-Path $root $path) }
         })

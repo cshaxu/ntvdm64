@@ -2,32 +2,47 @@
 
 ## Current Work
 
-**Active: M0 T429 S7** (Ordinary Mode; bounded delivery complete, awaiting owner acceptance).
-Owner requests changing only NTVWM's native acquisition wait from30ms to20ms.
-S6 is delivered at a47979990; its evidence and accepted mechanisms remain below.
-T429 remains open. This does not admit event-driven native acquisition.
+**Active: M0 T429 S8** (Ordinary Mode; delivered, T429 remains open).
+Owner requests sharing the project-added input thread mechanism in worker-base,
+with NTVWM20ms polling confined to hidden Console capture. S7 is delivered at
+f484f6193. T429 remains open; original DOS input processing stays in place.
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T429 S7; Ordinary Mode. |
-| Admission And Approval | Owner: "既然如此麻烦 那不然至少把30ms改成20ms 免得错过了发布窗口". Admit only the existing native loop interval change. |
-| Objective | Native input/acquisition checks wait20ms instead of30ms; preserve shared maximum50Hz publication, idle comparison and final drain. |
-| Non-goals | No event observer, helper, wire, thread, worker-base algorithm, VGA/mirror, frontend or lifecycle changes. No claim of phase synchronization or guaranteed50Hz delivery. |
-| Reference Baseline | Pa47979990; S6 r006/runtime and r009/r010/r013/r015 verification/publication. x86 MSVC14.43/SDK22621 /MT CCPU40; APP0.0.427/RPC38/I/O25. |
-| Files And ABI Surface | ntvwm-exe/main.c wait timeout; focused source-contract test and evidence. No ABI change. |
-| Applicable Rules | Full AGENTS authorities, existing worker ownership, build-only output, serial BaseSrv/Z: tests, preserve side-session proposal. |
-| Verification | Source interval/unchanged wait-set assertion, affected x86 build, native presentation/input-return and publisher fixtures; Console17/Window17/WOW, nested native/DOS handoff and cleanup; coherent eight-file publication/smoke and governance/diff checks. |
-| Expected Markers | One production timeout changes30→20; stop/release priority and50Hz cap unchanged. Increased acquisition cost disclosed, no physical latency claim. |
-| Asset Needs | Reuse validated M0-T427/S2/r001 cache and sealed S6 runtime; new evidence under build/M0-T429/S7. |
-| Reporting Requirements | Separate configured sampling frequency, measured verification and unmeasured desktop/performance impact. |
-| Stop Conditions | New protocol/observer or failing existing assertions requires review; never weaken tests. |
-| Exit Criteria | Build, affected/full retained gates, publication, governance and diff review pass; commit/push; T stays open. |
-| Original Owner Request | Change NTVWM30ms to20ms rather than pursue event-driven acquisition now. |
-| Similar-Issue Sweep | Same loop input/admission/capture, stop/release event ordering, shared cap, idle/final drain, native reentry. |
+| Identifier Mode | M0 T429 S8; Ordinary Mode. |
+| Admission And Approval | Owner approves extracting shared project-added input threading into worker-base for both workers; NTVWM20ms timeout only acquires hidden Console output. |
+| Objective | Reuse one event wait/rearm/source-pin/stop mechanism, remove private NTVDM watcher and timer-driven native input; explicit native admission/resume wakes. |
+| Non-goals | No original DOS input/keyboard/mouse/scheduler relocation, mirror change, new process/helper/channel/wire, frontend policy or event-only native output. |
+| Reference Baseline | Pf484f6193; S7 r001 runtime, r003/r004 product/integration, r005/r007 publication/smoke; x86 MSVC14.43/SDK22621 /MT CCPU40, APP0.0.427/RPC38/I/O25. |
+| Files And ABI Surface | worker-base input mechanism; NTVDM console_client, NTVWM membership/input callbacks, build selection/fixtures and evidence; wire unchanged. |
+| Applicable Rules | Full AGENTS authorities, provenance-first shared extraction, original input processing retained, explicit state/resources/locks/failure; build-only output, serial BaseSrv/Z:, side-session edits preserved. |
+| Verification | Production-linked wait/rearm/rebind/stop-priority/failure/handle fixture; actual both callers, ordered/burst input, native final input return, route reentry/shutdown; x86 closure, Console17/Window17/WOW, EDIT200, eight integration cases, publication/smoke, ownership/governance/links/diff. |
+| Expected Markers | No input consumption or admission retry gated by native20ms timeout; no hot signalled-event loop; source handles pinned across channel release; cancellation before join and no owner/transport lock held across join. |
+| Asset Needs | Validated cache M0-T427/S2/r001 and S7 sealed runtime; original observers; new evidence build/M0-T429/S8. |
+| Reporting Requirements | Source/provenance/shared-versus-independent map, exact failures/results, retained native capture retry and physical limits. |
+| Stop Conditions | Need for new wire/helper, changed original scheduling, unsafe lock ordering or lost/duplicated input pauses for review. |
+| Exit Criteria | Shared code linked by both workers, replaced watcher/input timer path removed; affected/full gates, publication and review pass; commit/push; T open. |
+| Original Owner Request | "进行架构调整 把该放入workerbase的输入线程逻辑放进去两边统一 这样20ms轮询只负责读取隐藏console". |
+| Similar-Issue Sweep | Admission, resume, queued input, cancellation, close priority, source replacement, final input return, mouse-only frame and independent session isolation. |
 
-[S7 evidence](../etc/evidence/m0-t429-s7-native-acquisition-interval.md) records the bounded change.
+[S8 audit and delivery](../etc/evidence/m0-t429-s8-shared-event-input.md) records the scoped extraction.
+
+## S8 Closure Record
+
+Both workers use worker-base/input_watch in their actual link maps. NTVDM's
+private watcher is removed; its original DOS input consumer is unchanged.
+NTVWM input and launch admission are event-driven; its20ms wait only captures
+active hidden Console output. No mirror, frontend policy, wire or helper change.
+Shared627 assertions, native501/input-return689, original close fixtures,
+Console17/Window17/WOW, EDIT200 and all8 integration cases pass. Final r008
+eight-file package is published at O:/winnt/system32; r011 retains recovery
+and all-eight hashes, r013 verifies actual published Console4/Window4 and
+unchanged hashes. Governance/links/ownership/diff review pass. Native capture
+and final-capture retry remain; physical RDP latency is not newly measured.
+This is the S8 delivery record; T429 stays open, no next S admitted. Unrelated
+side-session proposal remains untouched and excluded.
 
 ## S7 Closure Record
 

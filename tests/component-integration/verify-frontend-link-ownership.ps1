@@ -194,7 +194,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
     }
     foreach($target in @('worker-base.lib','ntvdm.exe','ntvwm.exe')) {
         $actual=@(Get-FrontendSources $target 'worker-base')
-        if(@(Compare-Object @('connection.c','shutdown_close.c','publication.c') $actual).Count) {
+        if(@(Compare-Object @('connection.c','shutdown_close.c','publication.c','input_watch.c') $actual).Count) {
             throw "$target does not use the complete common worker implementation"
         }
     }

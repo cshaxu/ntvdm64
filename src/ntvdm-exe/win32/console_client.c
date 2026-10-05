@@ -3,6 +3,7 @@
 #include "console_text.h"
 #include "console_geometry.h"
 #include "worker-base/publication.h"
+#include "worker-base/input_watch.h"
 #include "common/console/client.h"
 #include "opennt-abi/host-compat/include/console_grid.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
@@ -31,7 +32,8 @@ static BOOL decode_input(const console_io_input *wire,INPUT_RECORD *record)
 typedef struct console_client {
     session *owner;
     ntcon_worker_client channel;
-    HANDLE ready,wake,stop,rearm,watcher,shutdown;
+    HANDLE ready,stop,shutdown;
+    worker_base_input_watch *input_watch;
     HANDLE capability,input_identity,output_identity;
     CRITICAL_SECTION lock;
     CRITICAL_SECTION palette_lock;
@@ -200,42 +202,10 @@ static DWORD WINAPI console_close_callback(void *context)
 /* nt_event caches its wait handle once. Keep that local event stable; the
  * authenticated frontend event and process are notification sources only.
  * A signalled source is armed again after read/peek, avoiding a hot wait loop. */
-static DWORD WINAPI console_input_watch(void *context)
+static void console_input_close(void *context)
 {
     console_client *client=context;
-    BOOL pending=FALSE;
-    for (;;) {
-        HANDLE ready=NULL,waits[4]={client->shutdown,client->stop,client->rearm,NULL};
-        DWORD count=3,result;
-        /* The original guest wait event is stable across broker reconnection.
-         * Pin a wait-only copy before dropping the endpoint lock; closing an
-         * old channel must never invalidate a concurrent Windows wait. */
-        EnterCriticalSection(&client->lock);
-        if(!pending && client->channel.pipe && client->ready) {
-            if(!DuplicateHandle(GetCurrentProcess(),client->ready,GetCurrentProcess(),
-                &ready,SYNCHRONIZE,FALSE,0)) {
-                DWORD error=GetLastError();LeaveCriticalSection(&client->lock);return error;
-            }
-            waits[count++]=ready;
-        }
-        LeaveCriticalSection(&client->lock);
-        result=WaitForMultipleObjects(count,waits,FALSE,INFINITE);
-        if(ready)CloseHandle(ready);
-        if (result==WAIT_OBJECT_0+1) return 0;
-        if (result==WAIT_OBJECT_0) {
-            /* The broker ordered closure: there is no remaining UI in which to
-             * cancel closing this session. Bound a blocked original handler,
-             * then close this worker only, as Console Server forced close did.
-             * This timeout is a close grace, never a guest idle timeout. */
-            worker_base_shutdown_close(console_close_callback,client,5000,CONTROL_C_EXIT,NULL);
-            return ERROR_PROCESS_ABORTED;
-        }
-        if(result==WAIT_OBJECT_0+2){pending=FALSE;continue;}
-        if (result!=WAIT_OBJECT_0+3) {
-            SetEvent(client->wake);return result==WAIT_FAILED ? GetLastError() : ERROR_PIPE_NOT_CONNECTED;
-        }
-        SetEvent(client->wake);pending=TRUE;
-    }
+    worker_base_shutdown_close(console_close_callback,client,5000,CONTROL_C_EXIT,NULL);
 }
 
 static void console_client_end(void *context)
@@ -245,16 +215,12 @@ static void console_client_end(void *context)
     OpenNtBaseClientSetCommandBinding(NULL,NULL);
     if (client->stop) SetEvent(client->stop);
     worker_base_publication_destroy(client->publisher);
-    if (client->watcher) {
-        WaitForSingleObject(client->watcher,INFINITE);CloseHandle(client->watcher);
-    }
+    worker_base_input_watch_destroy(client->input_watch);
     CloseHandle(client->channel.pipe);CloseHandle(client->channel.peer);
     ntcon_worker_client_dispose(&client->channel);
     CloseHandle(client->ready);
     if (client->capability) CloseHandle(client->capability);
-    if (client->wake) CloseHandle(client->wake);
     if (client->stop) CloseHandle(client->stop);
-    if (client->rearm) CloseHandle(client->rearm);
     if (client->shutdown) CloseHandle(client->shutdown);
     if (client->input_identity) CloseHandle(client->input_identity);
     if (client->output_identity) CloseHandle(client->output_identity);
@@ -292,12 +258,10 @@ DWORD ntvdm_console_client_begin(session *owner)
     error=ntcon_worker_client_init(&client->channel,client->channel.pipe,
         client->channel.peer,NULL,client->channel.generation);
     if(error){console_client_end(client);return error;}
-    client->wake=CreateEventW(NULL,TRUE,FALSE,NULL);
     client->stop=CreateEventW(NULL,TRUE,FALSE,NULL);
-    client->rearm=CreateEventW(NULL,FALSE,FALSE,NULL);
     client->input_identity=CreateEventW(NULL,TRUE,FALSE,NULL);
     client->output_identity=CreateEventW(NULL,TRUE,FALSE,NULL);
-    if (!client->channel.event || !client->wake || !client->stop || !client->rearm ||
+    if (!client->channel.event || !client->stop ||
         !client->input_identity || !client->output_identity) {
         error=GetLastError();console_client_end(client);return error;
     }
@@ -305,8 +269,9 @@ DWORD ntvdm_console_client_begin(session *owner)
     if(error){console_client_end(client);return error;}
     client->publisher=worker_base_publication_create(send_video_copy,client,client->shutdown);
     if(!client->publisher){error=GetLastError();console_client_end(client);return error;}
-    client->watcher=CreateThread(NULL,0,console_input_watch,client,0,NULL);
-    error=client->watcher ? console_activate(client,TRUE) : GetLastError();
+    client->input_watch=worker_base_input_watch_create(client->shutdown,client->stop,
+        NULL,console_input_close,NULL,client);
+    error=client->input_watch ? console_activate(client,TRUE) : GetLastError();
     if (!error && !session_register_teardown(owner,console_client_end,client))error=ERROR_NOT_ENOUGH_MEMORY;
     if (error) {
         console_client_end(client);return error;
@@ -349,7 +314,7 @@ HANDLE ntvdm_console_input_wait_handle(void)
 {
     session *owner=session_thread_current();
     console_client *client=owner ? owner->console_client : NULL;
-    return client ? client->wake : GetStdHandle(STD_INPUT_HANDLE);
+    return client ? worker_base_input_watch_event(client->input_watch) : GetStdHandle(STD_INPUT_HANDLE);
 }
 
 static console_client *mode_client(HANDLE handle)
@@ -396,7 +361,6 @@ static DWORD console_activate(console_client *client,BOOL active)
             &client->channel.generation);
         if(!error)error=ntcon_worker_client_init(&client->channel,client->channel.pipe,
             client->channel.peer,client->stop,client->channel.generation);
-        if(!error)SetEvent(client->rearm);
     }
     if(!active && client->channel.pipe) {
         console_io_request barrier={0};console_io_reply reply;
@@ -409,7 +373,8 @@ static DWORD console_activate(console_client *client,BOOL active)
              * after physical closure discard its local operation state. */
             if(!pipe) {
                 ntcon_worker_client_dispose(&client->channel);
-                ResetEvent(client->wake);SetEvent(client->rearm);
+                DWORD disabled=worker_base_input_watch_bind(client->input_watch,NULL);
+                if(!error)error=disabled;
             }
         }
     }
@@ -438,6 +403,7 @@ static DWORD console_activate(console_client *client,BOOL active)
      * Original nt_block_event_thread has quiesced the event/timer producers
      * before this call. Match that acknowledged retirement locally; the next
      * DOS activation will receive a fresh ENTER. Never reset on failed RPC. */
+    if(!error && active)error=worker_base_input_watch_bind(client->input_watch,client->ready);
     if(!error && !active)ZeroMemory(&client->mouse,sizeof(client->mouse));
     LeaveCriticalSection(&client->lock);
     return error;
@@ -1052,8 +1018,8 @@ static BOOL input_operation(HANDLE input,INPUT_RECORD *records,DWORD length,LPDW
     }
     if (ok) *read=reply.state.count;
     if (ok) {
-        ResetEvent(client->wake);
-        SetEvent(client->rearm);
+        error=worker_base_input_watch_ack(client->input_watch);
+        if(error)ok=FALSE;
     }
     LeaveCriticalSection(&client->lock);
     if (!ok) SetLastError(error);

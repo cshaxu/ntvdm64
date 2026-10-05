@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T429 S8 shared event-driven input](evidence/m0-t429-s8-shared-event-input.md) | M0 T429 S8 | Common worker notification thread, native input/capture separation and verification/publication. | Retain through T429 acceptance. |
 | [T429 S7 native acquisition interval](evidence/m0-t429-s7-native-acquisition-interval.md) | M0 T429 S7 | Bounded native30ms→20ms sampling change and verification/publication. | Retain through T429 acceptance. |
 | [T429 S1 performance baseline](evidence/m0-t429-s1-performance-baseline.md) | M0 T429 S1 | Initial real EDIT/COMMAND/native-control timings, measurement negatives and isolated diagnostic cost; remaining queue/IRQ attribution is open. | Retain through T429 acceptance. |
 | [T428 S6 ownership naming](evidence/m0-t428-s6-ownership-naming.md) | M0 T428 S6 | Frontend-private API/build ownership and final sharing/caller audit, integrated verification and published delivery. | Retained accepted T428 evidence. |

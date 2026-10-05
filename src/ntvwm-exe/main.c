@@ -5,6 +5,7 @@
 #include "console_state.h"
 #include "presentation.h"
 #include "worker-base/connection.h"
+#include "worker-base/input_watch.h"
 #include "next_command.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include "native_pc_font.h"
@@ -16,6 +17,8 @@ PVOID CsrPortHeap;
 typedef struct native_membership {
     HANDLE quit,thread,capability,stop_requested,closed,admission_ready,shutdown,io_release;
     HANDLE pipe,frontend,ready;
+    HANDLE route_changed;
+    worker_base_input_watch *input_watch;
     ntvwm_presentation *presentation;
     CRITICAL_SECTION *lock;
     console_text_style font;
@@ -29,7 +32,8 @@ typedef struct native_membership {
  * Dispose only local transport state; the broker retains logical association. */
 static DWORD membership_release_io(native_membership *state)
 {
-    DWORD error;
+    DWORD error=worker_base_input_watch_bind(state->input_watch,NULL);
+    if(error)return error;
     ntvwm_presentation_close(state->presentation);state->presentation=NULL;
     error=worker_base_io_close(&state->pipe,&state->frontend,&state->ready);
     state->presenting=FALSE;state->io_released=TRUE;
@@ -43,6 +47,10 @@ static DWORD begin_io(void *context,HANDLE stop)
     ULONGLONG deadline=GetTickCount64()+10000;
     EnterCriticalSection(state->lock);
     ++state->admissions;
+    if(!SetEvent(state->route_changed)) {
+        error=GetLastError();--state->admissions;
+        LeaveCriticalSection(state->lock);return error;
+    }
     for(;;) {
         /* A Console target must not run before its frontend can receive output
          * and provide input. Broker delivery alone is not an I/O handoff. */
@@ -56,6 +64,9 @@ static DWORD begin_io(void *context,HANDLE stop)
          * through the target lifetime or response I/O. */
         if(state->presentation && state->presenting) {
             ++state->users;--state->admissions;
+            error=worker_base_input_watch_bind(state->input_watch,state->ready);
+            if(!error && !SetEvent(state->route_changed))error=GetLastError();
+            if(error){--state->users;LeaveCriticalSection(state->lock);return error;}
             return ERROR_SUCCESS;
         }
         now=GetTickCount64();
@@ -92,7 +103,8 @@ static DWORD end_io(void *context)
     /* Completion belongs to the direct target. Physical Console membership
      * does not create broker tasks or retain NTSRV BUSY. */
     if(!error && state->presenting) {
-        error=ntvwm_presentation_end(state->presentation,&state->font);
+        error=worker_base_input_watch_bind(state->input_watch,NULL);
+        if(!error)error=ntvwm_presentation_end(state->presentation,&state->font);
         if(!error)error=membership_release_io(state);
     }
     if(state->users)--state->users;
@@ -142,12 +154,43 @@ static void honor_console_close(native_membership *state)
         LeaveCriticalSection(state->lock);
     }
 }
+static void input_failure(void *context,DWORD error)
+{
+    native_membership *state=context;
+    honor_console_close(state);
+    if(WaitForSingleObject(state->quit,0)!=WAIT_TIMEOUT)return;
+    ntvwm_trace_error("input",0,error);
+    EnterCriticalSection(state->lock);
+    SetEvent(state->stop_requested);
+    (void)ntvwm_console_close();
+    TerminateProcess(GetCurrentProcess(),error);
+    LeaveCriticalSection(state->lock);
+}
+static DWORD consume_input(void *context)
+{
+    native_membership *state=context;DWORD error=ERROR_SUCCESS,accepted=0;
+    EnterCriticalSection(state->lock);
+    /* The lock serializes actual reads with final input return. A wake from
+     * a retired source is never permission to consume a newly routed queue. */
+    if(state->users && state->presenting && !state->io_released &&
+        WaitForSingleObject(state->io_release,0)==WAIT_TIMEOUT &&
+        WaitForSingleObject(state->quit,0)==WAIT_TIMEOUT) {
+        error=ntvwm_presentation_input(state->presentation,GetStdHandle(STD_INPUT_HANDLE),&accepted);
+        if(!error)error=worker_base_input_watch_ack(state->input_watch);
+    } else error=worker_base_input_watch_bind(state->input_watch,NULL);
+    LeaveCriticalSection(state->lock);return error;
+}
 static DWORD presentation_loop(void *context)
 {
     native_membership *state=context;DWORD error=0;
-    HANDLE waits[4]={state->shutdown,state->stop_requested,state->quit,state->io_release};
-    DWORD wait;
-    while((wait=WaitForMultipleObjects(4,waits,FALSE,20))!=WAIT_OBJECT_0+2) {
+    HANDLE waits[5]={state->shutdown,state->stop_requested,state->quit,state->io_release,state->route_changed};
+    DWORD wait,timeout;
+    for(;;) {
+        EnterCriticalSection(state->lock);
+        timeout=state->presenting && state->users && !state->io_released ? 20 : INFINITE;
+        LeaveCriticalSection(state->lock);
+        wait=WaitForMultipleObjects(5,waits,FALSE,timeout);
+        if(wait==WAIT_OBJECT_0+2)break;
         EnterCriticalSection(state->lock);
         if(wait==WAIT_OBJECT_0 || wait==WAIT_OBJECT_0+1) {
             /* The authenticated broker orders Console-session closure,
@@ -158,18 +201,18 @@ static DWORD presentation_loop(void *context)
             return error ? error : ERROR_CANCELLED;
         }
         if(wait==WAIT_OBJECT_0+3) {
-            error=state->presenting ? ntvwm_presentation_end(state->presentation,&state->font) : ERROR_SUCCESS;
+            error=worker_base_input_watch_bind(state->input_watch,NULL);
+            if(!error && state->presenting)error=ntvwm_presentation_end(state->presentation,&state->font);
             if(!error && state->presentation)error=membership_release_io(state);
             LeaveCriticalSection(state->lock);
             if(error)return error;
             continue;
         }
-        if(wait!=WAIT_TIMEOUT) {
+        if(wait!=WAIT_TIMEOUT && wait!=WAIT_OBJECT_0+4) {
             error=wait==WAIT_FAILED ? GetLastError() : ERROR_INVALID_STATE;
             LeaveCriticalSection(state->lock);return error;
         }
-        if(state->admissions || (state->users && !state->io_released)) {
-            DWORD accepted=0;
+        if(wait==WAIT_OBJECT_0+4 && state->admissions) {
             error=take_presentation(state);
             if(!error && !state->presenting) {
                 HANDLE output=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
@@ -182,18 +225,12 @@ static DWORD presentation_loop(void *context)
                     if(!SetEvent(state->admission_ready))error=GetLastError();
                 }
             }
-            /* A completed direct target may still be waiting for its final
-             * presentation receipt. Do not feed the next DOS command to a
-             * Console which has no native consumer during that interval. */
-            if(!error && state->users)
-                error=ntvwm_presentation_input(state->presentation,GetStdHandle(STD_INPUT_HANDLE),&accepted);
-            if(!error && state->users)
-                error=ntvwm_presentation_capture(state->presentation,&state->font);
-            if(error==ERROR_NOT_READY || error==ERROR_BUSY){
-                state->presenting=FALSE;ResetEvent(state->admission_ready);error=0;
-            }
-            if(error==ERROR_RETRY)error=0;
         }
+        /* Only hidden Console output lacks a change notification. Input and
+         * launch admission above never depend on this acquisition timeout. */
+        if(wait==WAIT_TIMEOUT && state->presenting && state->users && !state->io_released)
+            error=ntvwm_presentation_capture(state->presentation,&state->font);
+        if(error==ERROR_RETRY)error=0;
         /* Unexpected transport failure is not permission to rediscover or
          * reconnect a frontend. Expected broker release was handled above. */
         LeaveCriticalSection(state->lock);
@@ -225,6 +262,7 @@ static void membership_close(native_membership *state)
     CRITICAL_SECTION *lock=state->lock;
     if(state->quit)SetEvent(state->quit);
     if(state->thread){WaitForSingleObject(state->thread,INFINITE);CloseHandle(state->thread);}
+    worker_base_input_watch_destroy(state->input_watch);
     ntvwm_presentation_close(state->presentation);
     if(state->pipe)CloseHandle(state->pipe);
     if(state->frontend)CloseHandle(state->frontend);
@@ -236,6 +274,7 @@ static void membership_close(native_membership *state)
     if(state->admission_ready)CloseHandle(state->admission_ready);
     if(state->shutdown)CloseHandle(state->shutdown);
     if(state->io_release)CloseHandle(state->io_release);
+    if(state->route_changed)CloseHandle(state->route_changed);
     ZeroMemory(state,sizeof(*state));
     state->lock=lock;
 }
@@ -254,11 +293,17 @@ static DWORD membership_initialize(native_membership *state)
     state->stop_requested=CreateEventW(NULL,TRUE,FALSE,NULL);
     state->closed=CreateEventW(NULL,TRUE,FALSE,NULL);
     state->admission_ready=CreateEventW(NULL,TRUE,FALSE,NULL);
-    if(!state->quit || !state->stop_requested || !state->closed || !state->admission_ready)error=GetLastError();
+    state->route_changed=CreateEventW(NULL,FALSE,FALSE,NULL);
+    if(!state->quit || !state->stop_requested || !state->closed || !state->admission_ready || !state->route_changed)error=GetLastError();
     else error=ERROR_SUCCESS;
     if(!error)error=OpenNtBaseClientRegisterNativeBackend(NULL,state->stop_requested,state->closed);
     if(!error)error=worker_base_shutdown_event(&state->shutdown);
     if(!error)error=worker_base_io_release_event(&state->io_release);
+    if(!error) {
+        state->input_watch=worker_base_input_watch_create(state->shutdown,state->quit,
+            consume_input,NULL,input_failure,state);
+        if(!state->input_watch)error=GetLastError();
+    }
     if(!error) {
         state->thread=CreateThread(NULL,0,presentation_pump,state,0,NULL);
         if(!state->thread)error=GetLastError();
