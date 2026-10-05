@@ -3,6 +3,7 @@
 #include "run16-exe/native_request_client.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include "common/protocol/console_io.h"
+#include "nthook32-dll/hook.h"
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -46,15 +47,28 @@ static DWORD scope_begin(run16_frontend_scope **output,BOOL lease,BOOL console_o
     char text[32];
     DWORD error=ERROR_SUCCESS,generation;
     HANDLE inherited_frontend=NULL,inherited_execution=NULL;
+    nthook_context seed;BOOL seeded=FALSE;
     if (!output) return ERROR_INVALID_PARAMETER;
     *output=NULL;
-    error=inherited_capability(FRONTEND_ENV,&inherited_frontend);
-    if (!error) error=inherited_capability(EXECUTION_ENV,&inherited_execution);
+    error=nthook_context_read(&seed,&seeded);
+    if(!error && seeded) {
+        if(seed.mode!=NATIVE_HOOK_LAUNCHER)error=ERROR_INVALID_DATA;
+        else { inherited_frontend=seed.frontend;inherited_execution=seed.execution; }
+    } else if(!error) {
+        error=inherited_capability(FRONTEND_ENV,&inherited_frontend);
+        if (!error) error=inherited_capability(EXECUTION_ENV,&inherited_execution);
+    }
     if (error) return error;
     /* An orphan execution locator cannot promote this launcher to root. */
     if (inherited_execution && !inherited_frontend) return ERROR_INVALID_DATA;
     scope=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*scope));
-    if (!scope) return ERROR_NOT_ENOUGH_MEMORY;
+    if (!scope) {
+        if(seeded) {
+            if(inherited_frontend)CloseHandle(inherited_frontend);
+            if(inherited_execution)CloseHandle(inherited_execution);
+        }
+        return ERROR_NOT_ENOUGH_MEMORY;
+    }
     if (inherited_frontend) {
         /* The broker first authenticates a worker-local execution context,
          * when present, then verifies that its owner is the retained root. */
@@ -97,9 +111,17 @@ static DWORD scope_begin(run16_frontend_scope **output,BOOL lease,BOOL console_o
             }
         }else if(GetLastError()!=ERROR_ENVVAR_NOT_FOUND){error=ERROR_INVALID_DATA;goto fail;}
     }
+    if(seeded) {
+        if(inherited_frontend)CloseHandle(inherited_frontend);
+        if(inherited_execution)CloseHandle(inherited_execution);
+    }
     *output=scope;
     return ERROR_SUCCESS;
 fail:
+    if(seeded) {
+        if(inherited_frontend)CloseHandle(inherited_frontend);
+        if(inherited_execution)CloseHandle(inherited_execution);
+    }
     run16_frontend_scope_end(scope);
     return error;
 }

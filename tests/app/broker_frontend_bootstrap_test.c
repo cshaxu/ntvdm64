@@ -97,6 +97,10 @@ static int startup_failures(BOOL timeout)
     wcscpy_s(source,ARRAYSIZE(source),self);slash=wcsrchr(source,L'\\');if(!slash)return 84;slash[1]=0;
     swprintf_s(package,ARRAYSIZE(package),L"%lsbootstrap-rejections",source);
     if(!CreateDirectoryW(package,NULL) && GetLastError()!=ERROR_ALREADY_EXISTS)return 84;
+    /* The real service derives its package root from a system32 executable.
+     * Keep the rejection-provider substitute at that same layout boundary. */
+    wcscat_s(package,ARRAYSIZE(package),L"\\system32");
+    if(!CreateDirectoryW(package,NULL) && GetLastError()!=ERROR_ALREADY_EXISTS)return 84;
     swprintf_s(image,ARRAYSIZE(image),L"%ls\\ntcon.exe",package);
     if(!CopyFileW(self,image,FALSE))return 84;
     wcscat_s(source,ARRAYSIZE(source),L"ntsrv.exe");

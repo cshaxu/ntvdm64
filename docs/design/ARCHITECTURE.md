@@ -10,18 +10,25 @@ NTCON renderer or modifying guest/shared-library code.
 
 ### Controlled native launch hook contract — T431 S1 design
 
-The admitted audit specifies a bounded per-process native launch hook, not a
-production implementation. NTVWM and injected native text callers use one
-suspended-child installation transaction; copied bootstrap resources are
+Owner subsequently admits T431 S2 implementation as32-bit only, component
+nthook32-dll. One installation transaction covers both native CUI and GUI
+creation/propagation; GUI receives launch compatibility but no implicit text
+frontend authority. Cross-width feasibility is deferred, not proved. The
+existing caller's native flags/resources and GUI startup-only completion stay
+unchanged. No runtime delivery is yet claimed by this admission.
+
+The S1 audit specifies a bounded per-process native launch hook. Its S2
+implementation candidate uses one mechanism in NTVWM and injected CUI/GUI callers:
+a suspended-child installation transaction; copied bootstrap resources are
 recipient-local and verified through existing NTSRV root/execution contracts.
-Run16 remains a launcher/result client, with a proposed context-only bootstrap
+Run16 remains a launcher/result client, with a context-only bootstrap
 consumer and no API interception of itself. NTCON presentation, NTSRV task/
 lifecycle authority and original DOS/WOW execution remain unchanged.
 The [detailed contract](../etc/operations/t431-native-launch-hook-design.md)
 records source reuse, native search/flags, loader-lock limits and rollback.
-No source-root creation, external-code adoption or native-x64 toolchain
-exception is yet admitted. Helper-free cross-width installation, actual CMD
-selection and bootstrap feasibility remain gates before production work.
+S2 admits nthook32-dll and its exact Detours slice, not a native-x64 toolchain.
+The candidate is not yet delivered. Actual CMD selection, bootstrap authority,
+flags/resources and retained product acceptance remain runtime gates.
 
 ### Worker copied-state publication — T429 S5/S6
 

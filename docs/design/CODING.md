@@ -80,6 +80,7 @@ src/
   ntmon-exe/
   wow32-dll/
   vdmredir-dll/
+  nthook32-dll/
 ```
 
 `mvdm/` is the one canonical physical selected-OpenNT `base/mvdm` tree: its
@@ -97,6 +98,12 @@ examples stay under `tests/`; historical source comparison stays in the
 explicitly read-only external reference roots under `O:\repos.external`.
 `src.old/` is quarantined comparison material and never a source, build, link
 or runtime input.
+
+Owner-admitted T431 S2 nthook32-dll is a specialist x86 /MT native launch hook.
+Its installer/context static slice is selected by NTVWM and the DLL; the
+context-only consumer is selected by run16. Pinned MIT Detours sources remain
+under this component with notices/provenance. GUI/CUI propagation is separate
+from character frontend authority. No helper or x64 island is admitted.
 
 ## Executable-owned runtime
 

@@ -3,7 +3,8 @@ param(
     [Parameter(Mandatory)][string]$BaselineRoot,
     [Parameter(Mandatory)][string]$BuildCache,
     [Parameter(Mandatory)][string]$Wow32,
-    [Parameter(Mandatory)][string]$OutputRoot
+    [Parameter(Mandatory)][string]$OutputRoot,
+    [string]$NativeHook=''
 )
 $ErrorActionPreference='Stop'
 $baseline=(Resolve-Path -LiteralPath $BaselineRoot).Path
@@ -17,8 +18,9 @@ Copy-Item -LiteralPath $baseline -Destination $output -Recurse
 $system=Join-Path $output 'system32'
 if(!(Test-Path -LiteralPath $system -PathType Container)){throw 'Baseline lacks original system32 media'}
 $names=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL')
+if($NativeHook){$NativeHook=(Resolve-Path -LiteralPath $NativeHook).Path;$names+='nthook32.dll'}
 $manifest=foreach($name in $names){
-    $source=if($name -eq 'WOW32.DLL'){$wow}else{Join-Path $cache $name}
+    $source=if($name -eq 'WOW32.DLL'){$wow}elseif($name -eq 'nthook32.dll'){$NativeHook}else{Join-Path $cache $name}
     $bytes=[IO.File]::ReadAllBytes($source)
     $pe=[BitConverter]::ToInt32($bytes,60)
     if([BitConverter]::ToUInt16($bytes,$pe+4) -ne 0x14c){throw "Non-x86 input: $name"}
@@ -40,4 +42,7 @@ if(Test-Path -LiteralPath $flatRegistry){
     }else{Move-Item -LiteralPath $flatRegistry -Destination $registry}
 }
 $manifest|ConvertTo-Json|Set-Content -LiteralPath (Join-Path $output 'product-system32-manifest.json')
+if($NativeHook){
+    Copy-Item -LiteralPath "$PSScriptRoot/../../src/nthook32-dll/detours/LICENSE.md" -Destination (Join-Path $system 'nthook32-LICENSE.txt')
+}
 'PASS staged coherent x86 system32 host package; baseline media/configuration retained'

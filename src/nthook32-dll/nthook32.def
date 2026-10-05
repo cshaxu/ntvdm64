@@ -1,0 +1,4 @@
+LIBRARY nthook32
+EXPORTS
+    NthookAnchor @1
+    NthookContextFlags

@@ -23,6 +23,8 @@ src/mvdm/** -text -whitespace
 src/opennt-host/** -text -whitespace
 # Pinned nxvm presentation inputs retain their upstream byte identity.
 src/frontend-exe/lib/** -text
+# Pinned MIT Detours slice retains the registered upstream byte hashes.
+src/nthook32-dll/detours/** -text
 src/opennt-softpc/bios/** -text -whitespace
 src/opennt-guest/wow16/fonts/** -text -whitespace
 docs/etc/legacy_code/opennt-bop/original/** -text -whitespace

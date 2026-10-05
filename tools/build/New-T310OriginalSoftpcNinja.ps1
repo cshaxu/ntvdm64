@@ -1324,7 +1324,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $nativeServiceFlags + ' /I"' + (NinjaPath (Join-Path $root 'src/opennt-abi/host-compat/include')) + '"')
     $graph.Add('build obj/tests/frontend_scope_lifetime.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/frontend_scope_lifetime_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build frontend-scope-lifetime-test.exe: broker_test_link obj/tests/frontend_scope_lifetime.obj obj/run16/frontend_scope.obj obj/frontend/session_service.obj')
+    $graph.Add('build frontend-scope-lifetime-test.exe: broker_test_link obj/tests/frontend_scope_lifetime.obj obj/run16/frontend_scope.obj obj/frontend/session_service.obj nthook-context.lib')
     $graph.Add('build obj/tests/native_lifetime_pair.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/native_lifetime_pair_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build native-lifetime-pair-test.exe: broker_test_link obj/tests/native_lifetime_pair.obj')
@@ -1479,9 +1479,37 @@ if ($Architecture -eq 'x86') {
         $graph.Add('  cflags = ' + $nativeServiceFlags + ' /I "' + (NinjaPath $fontBuild) + '"')
     }
     $nativeBinding = ' obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib'
-    $graph.Add('build ntvwm.exe: frontend_link worker-base.lib obj/ntvwm/next_command.obj obj/ntvwm/main.obj obj/ntvwm/presentation.obj obj/ntvwm/text_frame.obj obj/ntvwm/console_state.obj obj/ntvwm/execution.obj obj/run16/native_launch.obj' + $nativeBinding)
+    $graph.Add('build ntvwm.exe: frontend_link worker-base.lib obj/ntvwm/next_command.obj obj/ntvwm/main.obj obj/ntvwm/presentation.obj obj/ntvwm/text_frame.obj obj/ntvwm/console_state.obj obj/ntvwm/execution.obj obj/run16/native_launch.obj nthook-installer.lib nthook-context.lib' + $nativeBinding + ' || nthook32.dll')
     $graph.Add('build obj/run16/image_classification.obj: cc ' + (NinjaPath (Join-Path $run16Root 'image_classification.c')))
     $graph.Add('  cflags = ' + $baseOwnerFlags)
+    # T431: same-width suspended-child installer, never Detours helper wrappers.
+    $hookFlags = '/nologo /TP /c /MT /O2 /Gy /W4 /showIncludes /std:c++14 /DWIN32_LEAN_AND_MEAN /D_WIN32_WINNT=0x0601 /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
+    $hookDetoursObjects = @()
+    foreach ($name in @('detours','modules','disasm','image','creatwth')) {
+        $object = 'obj/nthook32/detours-' + $name + '.obj'
+        $hookDetoursObjects += $object
+        $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root ('src/nthook32-dll/detours/' + $name + '.cpp'))))
+        $graph.Add('  cflags = ' + $hookFlags)
+    }
+    foreach ($name in @('context','installer','entry','create_process')) {
+        $graph.Add('build obj/nthook32/' + $name + '.obj: cc ' + (NinjaPath (Join-Path $root ('src/nthook32-dll/' + $name + '.cpp'))))
+        $graph.Add('  cflags = ' + $hookFlags)
+    }
+    $graph.Add('build obj/nthook32/classification.obj: cc ' + (NinjaPath (Join-Path $run16Root 'hook_classification.c')))
+    $graph.Add('  cflags = ' + $baseOwnerFlags + ' /Gy')
+    $graph.Add('build nthook-context.lib: lib obj/nthook32/context.obj ' + ($hookDetoursObjects -join ' '))
+    $graph.Add('build nthook-installer.lib: lib obj/nthook32/installer.obj')
+    $graph.Add('rule nthook_dll_link')
+    $graph.Add('  command = link.exe /nologo /dll /opt:ref /out:$out /map:$out.map /implib:nthook32-import.lib /def:"' + (NinjaPath (Join-Path $root 'src/nthook32-dll/nthook32.def')) + '" $in kernel32.lib ntdll.lib advapi32.lib legacy_stdio_definitions.lib')
+    $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthook32/create_process.obj obj/nthook32/classification.obj obj/run16/image_classification.obj nthook-installer.lib nthook-context.lib opennt-base-client.lib opennt-base-bindings.lib obj/run16/support.obj original-opennt-rtl-x86.lib | ' + (NinjaPath (Join-Path $root 'src/nthook32-dll/nthook32.def')))
+    $graph.Add('build obj/tests/nthook_install.obj: cc ' + (NinjaPath (Join-Path $root 'tests/component-integration/nthook_install_test.cpp')))
+    $graph.Add('  cflags = ' + $hookFlags)
+    $graph.Add('rule nthook_test_link')
+    $graph.Add('  command = link.exe /nologo /manifest:embed /manifestuac:"level=''asInvoker'' uiAccess=''false''" /subsystem:$subsystem /entry:wmainCRTStartup /out:$out $in kernel32.lib')
+    $graph.Add('build nthook-install-test.exe: nthook_test_link obj/tests/nthook_install.obj nthook-installer.lib nthook-context.lib || nthook32.dll nthook-gui-test.exe run16.exe')
+    $graph.Add('  subsystem = console')
+    $graph.Add('build nthook-gui-test.exe: nthook_test_link obj/tests/nthook_install.obj nthook-installer.lib nthook-context.lib')
+    $graph.Add('  subsystem = windows')
     $graph.Add('build obj/tests/run16_image_classification.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/run16_image_classification_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build run16-image-classification-test.exe: frontend_link obj/tests/run16_image_classification.obj obj/run16/image_classification.obj obj/run16/support.obj original-opennt-rtl-x86.lib')
@@ -1507,7 +1535,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build frontend-text-handoff-test.exe: console_test_link obj/tests/frontend_text_handoff.obj obj/frontend/frontend_session.obj frontend-window.lib obj/frontend/console_frontend.obj obj/frontend/console_video.obj ' + $consoleGridObject)
     $graph.Add('build obj/tests/ntvwm_execution_lifetime.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntvwm_execution_lifetime_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build ntvwm-execution-lifetime-test.exe: frontend_link obj/tests/ntvwm_execution_lifetime.obj obj/ntvwm/execution.obj obj/run16/native_launch.obj common-codec.lib')
+    $graph.Add('build ntvwm-execution-lifetime-test.exe: frontend_link obj/tests/ntvwm_execution_lifetime.obj obj/ntvwm/execution.obj obj/run16/native_launch.obj common-codec.lib nthook-installer.lib nthook-context.lib || nthook32.dll run16.exe')
     $graph.Add('build obj/tests/ntsrv_native_job_tracker.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntsrv_native_job_tracker_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/tests/native_job_tracker_research.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/native_job_tracker_research.c')))
@@ -1573,7 +1601,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build console-text-producer-test.exe: console_test_link obj/tests/console_text_producer.obj obj/tests/console_text_provider.obj')
     # The frontend EXE is a runtime prerequisite, never a launcher link input.
-    $graph.Add('build run16.exe: run16_link obj/run16/entry.obj obj/run16/application_search.obj obj/run16/image_classification.obj obj/run16/launch_options.obj obj/run16/frontend_scope.obj frontend-client.lib obj/run16/native_launch.obj obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib || ntcon.exe')
+    $graph.Add('build run16.exe: run16_link obj/run16/entry.obj obj/run16/application_search.obj obj/run16/image_classification.obj obj/run16/launch_options.obj obj/run16/frontend_scope.obj frontend-client.lib obj/run16/native_launch.obj obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib nthook-context.lib || ntcon.exe')
     $graph.Add('build obj/tests/console_video_observed.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/console_video_observed.c')))
     $graph.Add('  cflags = /nologo /c /MT /std:c11 /W4 /we4013 /showIncludes /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"')
     $graph.Add('build obj/tests/run16_package_observed.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/run16_package_observed.c')) + ' | obj/basesrv/service.h')
@@ -1943,6 +1971,15 @@ if ($objectOutputDirectories.Count -gt 0) {
         selected = ($Architecture -eq 'x86')
         disposition = 'ncalrpc binding/rollback, native-command/frontend-control/worker-control clients; no endpoint selection or service policy'
         sources = @('src/common/rpc/local_binding.c', 'src/common/rpc/local_binding.h', 'src/common/rpc/connection.h', 'src/common/rpc/native_command.c', 'src/common/rpc/native_command.h', 'src/common/rpc/frontend_control.c', 'src/common/rpc/frontend_control.h', 'src/common/rpc/worker_control.c', 'src/common/rpc/worker_control.h', 'src/common/rpc/management.c', 'src/common/rpc/management.h' | ForEach-Object {
+            [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
+        })
+    }
+    nativeHookComposition = [ordered]@{
+        target = 'nthook32.dll'
+        selected = ($Architecture -eq 'x86')
+        consumers = @('ntvwm.exe','run16.exe')
+        disposition = 'owner-admitted x86 installer/context and native CUI/GUI propagation; no helper/cross-width or mirror changes'
+        sources = @('src/common/protocol/native_hook.h', 'src/nthook32-dll/hook.h', 'src/nthook32-dll/intercept.h', 'src/nthook32-dll/context.cpp', 'src/nthook32-dll/installer.cpp', 'src/nthook32-dll/create_process.cpp', 'src/nthook32-dll/entry.cpp', 'src/nthook32-dll/nthook32.def', 'src/run16-exe/hook_classification.c', 'src/nthook32-dll/detours/detours.cpp', 'src/nthook32-dll/detours/modules.cpp', 'src/nthook32-dll/detours/disasm.cpp', 'src/nthook32-dll/detours/image.cpp', 'src/nthook32-dll/detours/creatwth.cpp', 'src/nthook32-dll/detours/uimports.cpp', 'src/nthook32-dll/detours/detours.h', 'src/nthook32-dll/detours/LICENSE.md' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
     }

@@ -6,6 +6,7 @@
 #include "run16-exe/native_launch.h"
 #include "common/protocol/frontend_protocol.h"
 #include "worker-base/connection.h"
+#include "nthook32-dll/hook.h"
 struct ntvwm_executions {
     CRITICAL_SECTION lock;
     HANDLE stop,idle,broker_failed;
@@ -98,6 +99,14 @@ static DWORD launch_request(ntvwm_execution *request,BYTE *payload,DWORD bytes,
         BYTE *local_payload=NULL;DWORD local_bytes=0;PROCESS_INFORMATION process={0};
         error=run16_native_launch_pack(&start,&local_payload,&local_bytes);
         if(!error)error=run16_native_launch_start_suspended(local_payload,local_bytes,&process);
+        if(!error && nthook_target32(process.hProcess)) {
+            nthook_context hook;
+            error=nthook_context_paths(&hook);
+            if(!error) {
+                hook.frontend=start.capabilities[0];hook.execution=start.capabilities[1];
+                error=nthook_install(process.hProcess,&hook,NATIVE_HOOK_INTERCEPT);
+            }
+        }
         /* Bind the direct target identity before it can execute.  S24 does
          * not assign a Job here: descendant observation is deferred and must
          * never decide direct-command admission or completion. */

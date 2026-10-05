@@ -33,7 +33,16 @@ foreach($name in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','
         throw "Build cache/runtime mismatch: $name; build affected targets first"
     }
 }
-$manifest=foreach($name in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL')){
+$packageNames=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL')
+if(Test-Path -LiteralPath (Join-Path $cache 'nthook32.dll')){
+    $hook=Join-Path $runtimeBinary 'nthook32.dll'
+    if(!(Test-Path -LiteralPath $hook) -or
+       (Get-FileHash (Join-Path $cache 'nthook32.dll')).Hash -ne (Get-FileHash $hook).Hash){
+        throw 'Build cache/runtime mismatch: nthook32.dll'
+    }
+    $packageNames+='nthook32.dll'
+}
+$manifest=foreach($name in $packageNames){
     $path=Join-Path $runtimeBinary $name
     $bytes=[IO.File]::ReadAllBytes($path);$pe=[BitConverter]::ToInt32($bytes,60)
     if([BitConverter]::ToUInt16($bytes,$pe+4) -ne 0x14c){throw 'Non-x86 runtime'}
@@ -179,7 +188,7 @@ try {
         Invoke-Gate 'nested-window-handoff' {& "$repo/tests/observation/verify-broker-io-handoff.ps1" -RuntimeRoot $runtime -Observer $observerPath -ReportPrefix "$log/handoff" -Case nested-window}
     }
     foreach($row in $manifest){if((Get-FileHash (Join-Path $runtimeBinary $row.Name)).Hash -ne $row.Sha256){throw 'Runtime identity changed during verification'}}
-    "PASS $Suite selected gates; identical eight-file package"
+    "PASS $Suite selected gates; identical $($packageNames.Count)-file package"
 }finally{
     try {Stop-IsolatedPackageScope $runtimeScope;Stop-IsolatedPackageScope $cacheScope} finally {
         foreach($name in $variables){

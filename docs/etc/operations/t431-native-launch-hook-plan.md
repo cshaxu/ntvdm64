@@ -1,5 +1,33 @@
 # T431 controlled native launch plan
 
+## Current admission revision
+
+The owner closed S1's bounded contract/audit and admitted S2 on2026-10-05:
+32-bit only, both CUI and GUI propagation, component `nthook32-dll`.
+[S2 evidence](../evidence/m0-t431-s2-nthook32-implementation.md) records the
+actual installer, production callers and tests. The following earlier S1
+plan remains historical; its unimplemented/admission wording is not current
+status. S3 cross-width is explicitly deferred by the owner and not
+automatically admitted. Whole-package observation/fault coverage is not a
+claim that every arbitrary CreateProcess attribute combination is supported.
+
+Current reproducible entries:
+
+- `nthook-install-test.exe`: actual CUI/GUI immediate children, actual x86 CMD,
+  CreateProcessA, caller suspension, no-inherit private capability copies,
+  explicit HANDLE_LIST/Unicode environment/CWD/streams, eight malformed
+  payloads, invalid capability and missing DLL. Fixture events prove local
+  transport/ownership only, not NTSRV authorization.
+- `tests/observation/verify-native-hook-chain.ps1`: production SysWOW64 CMD
+  absolute/bare COMMAND, parent-output return and explicit run16 via SUBST
+  identity; optional WindowObserver verifies WINMINE startup receipt and
+  the retained localized visible main window, not gameplay.
+- Existing frontend scope and NTVWM execution lifetime fixtures retain actual
+  receipt/authentication and uncommitted-target rollback assertions.
+- ProductVerification Product/Full retain Console17/Window17 and independent
+  WOW frontiers with the coherent nine-file set; no input or output assertion
+  is weakened to accept Hook implementation.
+
 CURRENT is the sole active packet. Owner admits the queue-head package after
 T430 acceptance on 2026-10-05; the [proposal](../../proposals/proposal-native-launch-hook-001.md)
 supplies the bounded sequence. No Hook production source root is created yet.

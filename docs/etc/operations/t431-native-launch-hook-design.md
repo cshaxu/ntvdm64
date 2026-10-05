@@ -1,5 +1,45 @@
 # T431 native launch hook detailed design
 
+## S2 implementation revision (2026-10-05)
+
+The owner subsequently approved 32-bit-only implementation, propagation to
+both CUI and GUI, and the exact component name `nthook32-dll`. This revision
+supersedes the admission and same-width scope assumptions in the retained S1
+contract below. Cross-width remains deferred, not implemented or accepted.
+See [implementation evidence](../evidence/m0-t431-s2-nthook32-implementation.md).
+
+- NTVWM and an injected child use the same `nthook_install` static installer.
+  It borrows an actual suspended child and returns a Windows status. Failure
+  requires the creator to abort only this unpublished child; it does not
+  promise that partially rewritten imports can safely resume as native.
+- Native GUI children receive compatibility propagation without text frontend
+  authority. Native CUI children in the same session carry the existing paired
+  capabilities. New-console/detached/no-window native children drop them.
+- The actual pinned run16 file is identified by volume/file index, including
+  SUBST aliases. It receives copied context only, never its own interception
+  DLL. Copied context precedes environment discovery; existing NTSRV calls
+  still authenticate the real process and capability objects.
+- The copied header remains 64 bytes/version1. Modes are INTERCEPT/LAUNCHER;
+  the former hook64 span is reserved/zero. Reader/installer are specialist
+  code in nthook32-dll; only copied protocol declarations belong in common.
+- Actual CMD uses extended startup attributes. Blanket EX exclusion failed
+  its immediate-child test. Pass the original attribute list unchanged;
+  explicit HANDLE_LIST, Unicode environment, CWD and redirected stream
+  behavior are tested. No rebuilding or expanding caller attributes occurs.
+  This is not acceptance of arbitrary token/parent/mitigation combinations.
+- Legacy redirection accepts an explicit classified application with matching
+  full-path or basename argv[0], or a quoted absolute null-application token.
+  A differing argv[0]/ambiguous null selection stays native. The chosen target
+  is pinned into an owned command line with its original parameter tail.
+  run16 syntax and DOS receipt/Win16 startup semantics are unchanged.
+- Only CreateProcessA/W are intercepted. Other token/logon APIs, direct system
+  calls, unsupported widths and arbitrary security attributes are not covered.
+  No helper wrapper, global interception or host installation is selected.
+
+The implementation does not claim S1's complete four-width matrix, arbitrary
+creation transparency or every fault/isolation scenario. Exact tested cases
+and remaining boundaries are recorded separately from retained product gates.
+
 ## Status, inputs and decision
 
 This is the S1 implementation contract, not an implemented hook or production

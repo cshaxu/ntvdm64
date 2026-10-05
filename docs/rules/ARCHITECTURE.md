@@ -1,5 +1,15 @@
 # Architecture Rules
 
+## Owner-approved T431 S2 native hook boundary
+
+Owner admits src/nthook32-dll for one32-bit DLL and shared static installer,
+with exact MIT Detours4.0.1 source provenance. NTVWM and controlled CUI/GUI
+callers use the same suspended-child installation mechanism. Run16 consumes
+context only, never intercepts itself. No worker policy/rendering moves into
+the hook; GUI propagation grants no character frontend ownership. No helper,
+global hook, Registry/host mutation, mirror change or x64/private WOW64 work.
+This finite root admission supersedes the root restriction only for this owner.
+
 ## Owner-approved T424 S7 library reorganization
 
 The owner explicitly plans src/common as the successor to src/interface after

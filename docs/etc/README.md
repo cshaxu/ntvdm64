@@ -2,6 +2,8 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T431 S1 bounded conclusion](evidence/m0-t431-s1-hook-contract-conclusion.md) | M0 T431 S1 | Source/design conclusion and owner-approved32-only implementation handoff, not T closure. | Retain through owner acceptance. |
+| [T431 S2 hook implementation](evidence/m0-t431-s2-nthook32-implementation.md) | M0 T431 S2 | Source admission, installer/propagation changes and exact verification progress; not automatically runtime closure. | Retain through owner acceptance. |
 | [T431 native launch detailed design](operations/t431-native-launch-hook-design.md) | M0 T431 S1 | Suspended-child installation, copied bootstrap/authorization, flags, rollback, module boundaries and explicit remaining feasibility gates. | Retain through implementation and owner acceptance. |
 | [T431 native launch plan](operations/t431-native-launch-hook-plan.md) | M0 T431 | Controlled Hook sequence and exact planned capability gates; no production completion claim. | Retain through delivery and owner acceptance. |
 | [T431 S1 hook audit](evidence/m0-t431-s1-native-launch-hook-audit.md) | M0 T431 S1 | Actual CMD imports, existing classifier/install boundary and no-helper feasibility checkpoint. | Retain through contract and implementation review. |
