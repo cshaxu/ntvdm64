@@ -46,7 +46,7 @@ static DWORD search_directory(PCWSTR directory,PCWSTR image,PWSTR output,DWORD c
     return ERROR_FILE_NOT_FOUND;
 }
 
-DWORD run16_resolve_application(PCWSTR image,PWSTR output,DWORD capacity)
+DWORD common_resolve_application(PCWSTR image,PWSTR output,DWORD capacity)
 {
     DWORD error,length,read;
     PWSTR path,entry,next;

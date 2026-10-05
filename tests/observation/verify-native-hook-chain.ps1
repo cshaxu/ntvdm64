@@ -21,6 +21,7 @@ $scope=New-IsolatedPackageScope $runtime
 $null=New-Item -ItemType Directory -Path $log
 $saved=[Environment]::GetEnvironmentVariable('MVDM_OBSERVER_PRIVATE_DESKTOP')
 $savedPost=[Environment]::GetEnvironmentVariable('MVDM_OBSERVER_POST_EXIT_MS')
+$savedInput=[Environment]::GetEnvironmentVariable('MVDM_OBSERVER_MILESTONE_INPUT')
 $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
 $names=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll')
 $identity=foreach($name in $names){[pscustomobject]@{Name=$name;Hash=(Get-FileHash (Join-Path $binary $name)).Hash}}
@@ -33,6 +34,12 @@ $minePattern='(?m)^window-utf16=\S+ visible=1 class=(626B96F7|00C900A800C000D7) 
 $cases=@(
     @{Name='absolute';Command='Z:\system32\command.com /c ver';Marker='MS-DOS Version 5.00.500'},
     @{Name='bare';Command='cd /d Z:\system32 & command.com /c ver';Marker='MS-DOS Version 5.00.500'},
+    @{Name='bare-command-stem';Command='cd /d Z:\system32 & command /c ver';Marker='MS-DOS Version 5.00.500'},
+    @{Name='bare-mem-stem';Command='cd /d Z:\system32 & mem';Marker='bytes total conventional memory'},
+    @{Name='bare-mem-extension';Command='cd /d Z:\system32 & MEM.EXE';Marker='bytes total conventional memory'},
+    @{Name='absolute-mem';Command='Z:\system32\MEM.EXE';Marker='bytes total conventional memory'},
+    @{Name='mem-parent-return';Command='cd /d Z:\system32 & mem & echo MEM-PARENT-RETURN';Marker='bytes total conventional memory';After='MEM-PARENT-RETURN'},
+    @{Name='interactive-mem';Text="cd /d Z:\system32`rmem`recho MEM-INTERACTIVE-RETURN`rexit`r";Marker='bytes total conventional memory';After='MEM-INTERACTIVE-RETURN'},
     @{Name='parent-return';Command='Z:\system32\command.com /c ver & echo HOOK-PARENT-RETURN';Marker='HOOK-PARENT-RETURN'},
     @{Name='explicit-launcher';Command='Z:\system32\run16.exe Z:\system32\command.com /c ver';Marker='MS-DOS Version 5.00.500'}
 )
@@ -40,12 +47,25 @@ try {
     foreach($case in $cases){
         $report=Join-Path $log ($case.Name+'.txt')
         try {
-            & $observerPath Z:\system32\run16.exe Z:\ $report $cmd /d /c $case.Command --observation-timeout-ms 20000
+            $arguments=@('Z:\system32\run16.exe','Z:\',$report,$cmd,'/d')
+            if($case.Text){
+                $env:MVDM_OBSERVER_MILESTONE_INPUT='1'
+                $arguments+=@('--observe-console-input-text',$case.Text,
+                    '--observe-console-line-delay-ms','1000')
+            }else{$arguments+=@('/c',$case.Command)}
+            $arguments+=@('--observation-timeout-ms','20000')
+            & $observerPath @arguments
             if($LASTEXITCODE){throw "Observer failed: $($case.Name)"}
             $result=Get-Content -LiteralPath $report -Raw
             $screen=Get-Content -LiteralPath ($report+'.console.txt') -Raw
+            if($case.Text -and $result -notmatch '(?m)^scripted-console-input=delivered'){
+                throw "Interactive input delivery failed: $($case.Name)"
+            }
             if($result -notmatch 'result=exited' -or $result -notmatch 'exit=0x00000000' -or
                !$screen.Contains($case.Marker)){throw "Hook chain assertions failed: $($case.Name)"}
+            if($case.After -and ($screen.IndexOf($case.After) -le $screen.IndexOf($case.Marker))){
+                throw "Direct DOS completion/parent output order failed: $($case.Name)"
+            }
             "PASS $($case.Name): actual x86 CMD/Windows completion/current Console marker"
         } finally {Stop-IsolatedPackageScope $scope}
     }
@@ -99,5 +119,6 @@ try {
         & subst.exe Z: /d
         [Environment]::SetEnvironmentVariable('MVDM_OBSERVER_PRIVATE_DESKTOP',$saved)
         [Environment]::SetEnvironmentVariable('MVDM_OBSERVER_POST_EXIT_MS',$savedPost)
+        [Environment]::SetEnvironmentVariable('MVDM_OBSERVER_MILESTONE_INPUT',$savedInput)
     }
 }

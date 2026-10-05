@@ -157,3 +157,82 @@ scenario, or Win16 gameplay. Actual CMD bare COMMAND is supported by its
 observed explicit application call, not a replacement Windows search engine.
 Physical foreground/RDP/pointer observation is owner-waived, not tested.
 T431 remains open; cross-width and broader S4 boundaries are not auto-admitted.
+
+## Owner correction: shared application discovery (P2)
+
+Question: why does actual x86 CMD reject `mem` while run16 already has the
+required discovery/classification mechanism? Owner requires reuse, not a
+second Hook-specific resolver or extension workaround.
+
+Inputs: main cc3517e7d, sealed S2/r010-runtime, current x86 formal cache,
+immutable baseline guest/configuration and SysWOW64 CMD. The original Hook
+trace in r018-mem-diagnostic proves CMD supplies application
+`Z:/system32/MEM.EXE` but command `mem  `. Original classification succeeds
+as DOS; the Hook's subsequent argv[0]/basename equality rejects redirection.
+The initial local extension workaround is discarded, not delivered.
+
+Source recovery: reuse the complete existing T427 application-search body.
+Move application_search.[ch] from run16-exe to common, rename only its exported
+symbol, and link the same object in run16 and nthook32. A normalized comparison
+against HEAD passes with only that symbol rename. CWD/PATH directory order,
+COM/EXE/BAT/PIF precedence, explicit/drive-relative paths, Unicode, capacity
+and failure behavior are unchanged. Both callers already select the same
+original OpenNtBaseGetBinaryTypeW implementation; no new classifier/parser
+or original mirror change is introduced. The Hook removes its separate
+argv[0]/quoted-absolute eligibility policy, pins the resolved application and
+preserves the original parameter tail. Native A/W creation, flags, environment,
+startup attributes, suspended installation and rollback retain their owners.
+Run16 CLI and shell fallback are unchanged.
+
+Verification so far:
+
+- x86 /MT CCPU40 graph regeneration and all affected product targets pass;
+  sealed coherent candidate is S2/r027-runtime, with unchanged WOW32 reused.
+- `application-search-test.exe .../S2/r026-search-fixture`: PASS, unchanged
+  directory/suffix/explicit/drive/empty/Unicode/capacity assertions.
+- `nthook-install-test.exe`: PASS, 93 assertions, including ANSI, inheritance,
+  suspension, nested propagation, GUI and rollback negatives.
+- `verify-native-hook-chain.ps1` against r027-runtime with the existing
+  `MVDM_OBSERVER_SHORT_HISTORY=1` fixture: r028-hook-short-geometry passes all
+  nine real CMD chains. Includes bare COMMAND, `mem`, `MEM.EXE`, absolute MEM,
+  and ordered MEM output before `MEM-PARENT-RETURN`; actual exit0 and guest
+  output are required, never just process creation. Z: and owned processes
+  are cleaned in finally. This fixture geometry is also already selected by
+  the standard Product runner, not a new relaxation of its assertions.
+
+Retained failures/limits: default private-desktop geometry currently reaches
+NTVDM but fails the frontend prepare-text boundary with error87, including
+direct run16 MEM without Hook interception and the old package's COMMAND
+comparison. Default observed host geometry is53x15 (buffer53x9001), unlike
+the prior passing120x30 host. A temporary project-owned callback trace in
+r024/r025-diagnostic locates prepare-text error87; the short-history fixture
+gives command_ready error0 and real MEM output/exit0. All temporary diagnostic
+source is removed before r027. No frontend or original DOS repair is bundled.
+The complete default-geometry cause and arbitrary null-application API forms
+are not proved by the focused CMD cases.
+
+r029-product observes three WOW programs but cannot compare them because the
+invocation supplied nonexistent baseline directory r011-product. This is a
+failed prerequisite, not a WOW pass or product regression. r030-product uses
+the actual retained r011-full baseline with unchanged assertions.
+
+Final gate: r030-product PASS, same nine-file candidate throughout. WOW
+frontiers68137ms, Console17 61528ms, Window17 65229ms; overall200764ms.
+WINMINE remains an actual visible main window; SOL/WRITE retain their prior
+known error-dialog frontiers, not functional passes. No reduced assertion or
+timeout change. r032-final-hook-chains passes ten CMD chains and Win16
+startup/UI, including an actual interactive CMD with observed input milestones:
+fresh MEM output, MEM-INTERACTIVE-RETURN and exit0. Actual guest bytes and
+parent output order are checked, not merely successful input submission.
+
+Publication: r031-publication/publish.ps1 verifies the old P1 hashes before
+replacement and preserves all nine files plus MIT notice in recovery/.
+The nine deployed hashes match published.json at O:/winnt/system32;
+guest/configuration/NTVDM.REG are untouched. Published CMD -> bare MEM ->
+parent-return passes with actual exit0 and conventional-memory output. Exact
+logs are retained in O:/winnt/Logs2 and copied to r031. No temporary trace is
+selected by the final package. Source review retains the unchanged resolver
+and original classifier, with no mirror, wire, frontend or worker lifecycle
+changes. Documentation governance, links and diff checks pass. Other-session
+proposal/TODO hashes remain unchanged and excluded. P2 is a repair delivery
+awaiting owner verification, not S2 or T431 closure.

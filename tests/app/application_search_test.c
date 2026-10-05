@@ -1,4 +1,4 @@
-#include "run16-exe/application_search.h"
+#include "common/application_search.h"
 #include <stdio.h>
 #include <wchar.h>
 
@@ -17,7 +17,7 @@ static BOOL selected(PCWSTR input,PCWSTR directory,PCWSTR leaf)
 {
     WCHAR actual[MAX_PATH],expected[MAX_PATH];
     if(swprintf_s(expected,ARRAYSIZE(expected),L"%ls\\%ls",directory,leaf)<0)return FALSE;
-    return !run16_resolve_application(input,actual,ARRAYSIZE(actual)) &&
+    return !common_resolve_application(input,actual,ARRAYSIZE(actual)) &&
         !_wcsicmp(actual,expected);
 }
 
@@ -49,21 +49,21 @@ int wmain(int argc,WCHAR **argv)
     CHECK(swprintf_s(explicit_path,ARRAYSIZE(explicit_path),L"%ls\\path-order",second)>0);
     CHECK(selected(explicit_path,second,L"path-order.com"));
     CHECK(touch(first,L"missing.exe"));
-    CHECK(run16_resolve_application(L".\\missing.exe",output,ARRAYSIZE(output))==ERROR_FILE_NOT_FOUND && !*output);
+    CHECK(common_resolve_application(L".\\missing.exe",output,ARRAYSIZE(output))==ERROR_FILE_NOT_FOUND && !*output);
     CHECK(swprintf_s(drive_relative,ARRAYSIZE(drive_relative),L"%lc:missing.exe",root[0])>0);
-    CHECK(run16_resolve_application(drive_relative,output,ARRAYSIZE(output))==ERROR_FILE_NOT_FOUND && !*output);
+    CHECK(common_resolve_application(drive_relative,output,ARRAYSIZE(output))==ERROR_FILE_NOT_FOUND && !*output);
     CHECK(swprintf_s(drive_relative,ARRAYSIZE(drive_relative),L"%lc:suffix",root[0])>0);
     CHECK(selected(drive_relative,cwd,L"suffix.com"));
-    CHECK(run16_resolve_application(L"suffix",tiny,ARRAYSIZE(tiny))==ERROR_INSUFFICIENT_BUFFER && !*tiny);
+    CHECK(common_resolve_application(L"suffix",tiny,ARRAYSIZE(tiny))==ERROR_INSUFFICIENT_BUFFER && !*tiny);
     CHECK(SetEnvironmentVariableW(L"PATH",NULL));
     CHECK(selected(L"suffix",cwd,L"suffix.com"));
-    CHECK(run16_resolve_application(L"path-order",output,ARRAYSIZE(output))==ERROR_FILE_NOT_FOUND && !*output);
+    CHECK(common_resolve_application(L"path-order",output,ARRAYSIZE(output))==ERROR_FILE_NOT_FOUND && !*output);
     CHECK(SetEnvironmentVariableW(L"PATH",L""));
-    CHECK(run16_resolve_application(L"path-order",output,ARRAYSIZE(output))==ERROR_FILE_NOT_FOUND && !*output);
+    CHECK(common_resolve_application(L"path-order",output,ARRAYSIZE(output))==ERROR_FILE_NOT_FOUND && !*output);
     CHECK(swprintf_s(paths,ARRAYSIZE(paths),L";\"%ls\";;%ls;",second,first)>0);
     CHECK(SetEnvironmentVariableW(L"PATH",paths));
     CHECK(selected(L"path-order",second,L"path-order.com"));
-    CHECK(run16_resolve_application(NULL,output,ARRAYSIZE(output))==ERROR_INVALID_PARAMETER && !*output);
+    CHECK(common_resolve_application(NULL,output,ARRAYSIZE(output))==ERROR_INVALID_PARAMETER && !*output);
     puts("APPLICATION-SEARCH-PASS: directory-first suffix/explicit/drive/empty/Unicode/capacity");
     return 0;
 }

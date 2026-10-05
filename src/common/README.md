@@ -1,5 +1,11 @@
 # Common cross-component mechanisms
 
+T431 S2 owner correction shares application_search.[ch] between run16 and
+nthook32. This is run16's unchanged CWD/PATH directory-first COM/EXE/BAT/PIF
+discovery, with exact explicit paths and no product-root search injection.
+Both consumers then use the selected original OpenNT classifier. This module
+has no execution, frontend, task or native-child lifecycle policy.
+
 T424 S7 owns this bounded static-library family. Both admitted protocol
 families and their selected shared mechanisms are production-wired; the
 S7 evidence records the runtime/publication gate. NTSRV's service-private

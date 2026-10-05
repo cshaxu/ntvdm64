@@ -15,7 +15,7 @@
 #include "common/protocol/console_io.h"
 #include "common/system_root.h"
 #include "common/guest_environment.h"
-#include "application_search.h"
+#include "common/application_search.h"
 #include <shellapi.h>
 #include <stdio.h>
 #include <wchar.h>
@@ -112,7 +112,7 @@ static BOOL sibling_path(PCWSTR name, PWSTR output, DWORD capacity)
 
 static BOOL resolve_image_path(PCWSTR image, PWSTR output, DWORD capacity)
 {
-    DWORD error=run16_resolve_application(image,output,capacity);
+    DWORD error=common_resolve_application(image,output,capacity);
     if(error)SetLastError(error);
     return error==ERROR_SUCCESS;
 }

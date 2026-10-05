@@ -27,11 +27,13 @@ See [implementation evidence](../evidence/m0-t431-s2-nthook32-implementation.md)
   explicit HANDLE_LIST, Unicode environment, CWD and redirected stream
   behavior are tested. No rebuilding or expanding caller attributes occurs.
   This is not acceptance of arbitrary token/parent/mitigation combinations.
-- Legacy redirection accepts an explicit classified application with matching
-  full-path or basename argv[0], or a quoted absolute null-application token.
-  A differing argv[0]/ambiguous null selection stays native. The chosen target
-  is pinned into an owned command line with its original parameter tail.
-  run16 syntax and DOS receipt/Win16 startup semantics are unchanged.
+- Owner correction after P1: both callers select common/application_search,
+  recovered unchanged from run16: CWD, then each PATH entry, with COM/EXE/BAT/PIF
+  precedence per directory and exact explicit paths. The same original OpenNT
+  classifier follows discovery. DLL-only argv[0]/quoted-absolute eligibility
+  rules are removed; CMD's explicit MEM.EXE plus extensionless `mem` is valid.
+  A/W wrappers marshal their call and preserve the parameter tail, not another
+  executable search policy. run16 syntax/completion remain unchanged.
 - Only CreateProcessA/W are intercepted. Other token/logon APIs, direct system
   calls, unsupported widths and arbitrary security attributes are not covered.
   No helper wrapper, global interception or host installation is selected.
@@ -182,16 +184,19 @@ interceptor-owned scheduler or direct NTCON control call.
 
 ## Selection, arguments and unsupported cases
 
-CreateProcess and run16 deliberately have different resolvers. Microsoft
-documents application-name and null-application search/ambiguity separately.
-Keep native creation on its original API; do not replace it with SearchPath,
-run16's COM-first lookup or a process-global WOW64 redirection toggle.
+Owner's post-P1 correction supersedes the original S1 restriction to separate
+native discovery: reuse run16's existing common/application_search before the
+original classifier. Both callers share directory/suffix/error rules, not a
+new Hook-specific stem matcher or SearchPath policy. Native creation still uses
+the caller's original A/W API, environment, flags and attributes; no process-
+global WOW64 redirection toggle is introduced. Ambiguous command parsing is
+not proved by a passing explicit-application CMD case.
 
 | Input | Contract |
 | --- | --- |
 | Explicit application pathname with an independently bounded argument tail | Candidate redirect after original legacy classification and exact command-tail tests. Preserve a different supplied argv[0]; do not assume it equals applicationName. |
-| Null application with an unambiguous quoted/explicit executable token | Candidate only after proving native token interpretation and preserving the token/tail boundary. |
-| Null application, bare name or ambiguous unquoted spaces | Native passthrough until source/actual-CMD tests prove the exact selected image and precedence. Never guess the DOS candidate from CLI search. Ordinary bare COMMAND acceptance remains an open gate if CMD supplies this form. |
+| Null application with a bounded quoted or bare executable token | Use shared discovery and original classification; preserve the original tail. Arbitrary unquoted-space ambiguity remains a separate unproved API boundary. |
+| Explicit application plus extensionless command token | Pin the shared resolver's selected file; no argv[0] identity gate. Real CMD MEM.EXE plus `mem` is the repaired production case. |
 | Native image, DLL, unsupported subsystem, malformed or missing image | Native API/result, not COMSPEC fallback or forced run16. Classification errors cannot replace unrelated native errors. |
 | BAT/CMD | Ordinary native command-interpreter behavior. No direct legacy-image redirection based on suffix. |
 | Explicit run16/internal product image | Never redirect recursively; only real run16 may receive authenticated context-only seed for same character session. Identify the admitted product image, not an arbitrary equal basename. |

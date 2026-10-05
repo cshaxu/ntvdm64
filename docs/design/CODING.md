@@ -2,6 +2,13 @@
 
 ## Own-image root mechanics — T427 S2
 
+T431 S2 shares the unchanged run16 application-search implementation in
+common/application_search.[ch], directly selected by run16 and nthook32.
+It searches CWD then PATH, with COM/EXE/BAT/PIF order per directory, and
+has no classifier, creation, service or lifecycle dependency. Both callers
+use the already selected original OpenNT classifier; no DLL-only search or
+argv[0] identity policy remains. The shared search test links this same object.
+
 `common/system_root.[ch]` owns only checked actual-EXE directory derivation,
 bounded relative joins and loss-checked ANSI conversion. Its separately
 selected `common-root.lib` is usable by all native EXEs without depending on

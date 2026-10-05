@@ -32,6 +32,22 @@ implementation is published for owner validation; cross-width remains deferred.
 
 ## S2 Progress
 
+Owner verification reports `run16 cmd -> mem` failing with a Windows dialog.
+P2 repairs the DLL's extra argv[0]/basename eligibility rule by sharing
+run16's unchanged search object. S2 remains open for owner verification.
+Previously passing COMMAND-only Hook chains did not prove MEM interception.
+Owner correction requires reusing run16's actual CWD/PATH and COM/EXE/BAT/PIF
+discovery, followed by the selected original classifier. The unchanged search
+mechanism is now in common for both production callers; the DLL's
+separate argv[0]/quoted-absolute eligibility rules are removed.
+Preserve launcher syntax, child creation flags/resources and existing execution.
+P2/r027-runtime is published coherently; r030 passes Console17/Window17 and
+the three retained WOW frontiers. r032 passes ten CMD chains plus WINMINE
+startup, including actual interactive CMD -> MEM -> parent output -> exit.
+Published bare MEM/parent-return smoke and all nine hashes pass in r031.
+Default private-desktop geometry's separate prepare-text error87 is retained
+in evidence; no frontend/mirror repair or test-assertion waiver is bundled.
+
 [S1 conclusion](../etc/evidence/m0-t431-s1-hook-contract-conclusion.md) records the bounded
 audit, exact unresolved width gate and owner32-only implementation revision.
 Installer, copied-context reader, DLL entry/interception and both production
@@ -79,12 +95,13 @@ is recorded in history for this in-place S continuation.
 
 ## Current Technical Baseline
 
-The T431 S2 coherent nine-file set build/M0-T431/S2/r010-runtime is published
+The T431 S2 P2 coherent nine-file set build/M0-T431/S2/r027-runtime is published
 at O:/winnt/system32: run16.exe, ntsrv.exe, ntcon.exe, ntvdm.exe, ntvwm.exe,
 ntmon.exe, WOW32.DLL, VDMREDIR.DLL and nthook32.dll (MIT notice alongside).
 MSVC14.43/SDK22621, x86 /MT CCPU40; APP0.0.427/RPC38/I/O25 unchanged.
-S2/r016-publication preserves the accepted T430 recovery set and exact new
-published hashes; final Product groups/focused probes and published smoke pass.
+S2/r031-publication preserves the P1 recovery set and exact new published
+hashes; final Product groups/focused Hook probes and published MEM smoke pass.
+S2/r016-publication retains the prior T430 recovery set and P1 hashes.
 The retained T430 S6/r010-publication records matching source/
 published hashes and recovery of S4; S6/r013-published-smoke
 passes actual published Console/Window MEM and native-zero. S6/r008-product
@@ -92,7 +109,8 @@ passes Console17/Window17 and independent WOW frontiers. The bounded lease
 test passes45 assertions after its pre-fix cross-context failure.
 
 The formal cache is build/M0-T427/S2/r001, with regenerated source manifest.
-The immediate recovery package is T430 S6/r007-runtime; older
+The immediate recovery package is T431 S2/r010-runtime; T430 S6/r007-runtime
+remains the accepted pre-Hook recovery set. Older
 fb5843dc6/T430 S4 remains historical recovery evidence.
 Both workers retain shared publication/input machinery; original guest media,
 VGA presentation, frontend format routing and NTSRV authority are unchanged.

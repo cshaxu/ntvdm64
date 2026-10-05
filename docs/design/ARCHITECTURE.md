@@ -93,6 +93,13 @@ Classification, shell fallback, CLI and original EXEC semantics stay at their
 existing owners. The [S3 record](../etc/evidence/m0-t427-s3-application-search-isolation.md)
 contains production search, real image selection and internal handoff proof.
 
+T431 S2 owner correction places this unchanged application-search mechanism
+in common/application_search for both run16 and nthook32. Both link the same
+selected original OpenNT binary classifier after discovery. The Hook must not
+add an independent argv[0]/basename eligibility policy; its native creation,
+injection and legacy redirection remain caller-owned. Launcher syntax and
+batch/built-in shell fallback are not redefined by the shared search module.
+
 Original deployment locations are independent of application search: guest
 DOS utilities, startup media and configuration live in root/system32 as
 assigned by OpenNT TXTSETUP.SIF; SYSTEM.INI remains at root. A build staging
