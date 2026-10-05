@@ -2,6 +2,7 @@
  * not an original OpenNT mirror. Physical separation only: existing function
  * bodies, state authority and lock/resource contracts are preserved. */
 #include <service_internal.h>
+#include "common/native_image.h"
 
 static void service_delete_win32record(OPENNT_BASE_WIN32RECORD *record);
 static BOOL service_launcher_connected(OPENNT_BASE_SERVICE *service,DWORD generation);
@@ -213,11 +214,14 @@ done:
 DWORD OpenNtBaseServiceBindNativeTarget(OPENNT_BASE_CONNECTION *connection,DWORD pid,
     DWORD generation,DWORD request,HANDLE target,HANDLE receipt)
 {
-    DWORD error=ERROR_ACCESS_DENIED,target_pid=0;
+    DWORD error=ERROR_ACCESS_DENIED,target_pid=0,machine=0,subsystem=0;
     LIST_ENTRY *link;
     if(!connection || !request || !target || !receipt)return error;
     target_pid=GetProcessId(target);
     if(!target_pid)return GetLastError();
+    error=common_native_process_image(target,&machine,&subsystem);
+    if(error)return error;
+    error=ERROR_ACCESS_DENIED;
     EnterCriticalSection(&connection->service->lock);
     if(OpenNtBaseServicePeer(connection,pid,generation) && connection->native_worker) {
         for(link=connection->win32records.Flink;link!=&connection->win32records;link=link->Flink) {
@@ -243,6 +247,7 @@ DWORD OpenNtBaseServiceBindNativeTarget(OPENNT_BASE_CONNECTION *connection,DWORD
                         record->gui_process=owned_target;owned_target=NULL;
                         record->gui_wait=owned_wait;owned_wait=NULL;
                         record->process_id=target_pid;
+                        record->native_machine=machine;
                         record->worker_generation=generation;
                         service_query_native_image(target_pid,record->image);
                         service_signal_frontend_states(connection->service);
@@ -703,6 +708,10 @@ DWORD service_take_native_command(OPENNT_BASE_CONNECTION *root,DWORD pid,
         }
         if(caller->channel_frontend) {
             error=service_authorize_worker_io(root,pid);
+            /* A service-ordered release is not a launch failure. Leave this
+             * pending command intact and wait for the existing both-endpoint
+             * acknowledgement condition before another admission. */
+            if(error==ERROR_BUSY)error=ERROR_NOT_FOUND;
             if(error)goto done;
         }
         if(caller->pending_win32record) {

@@ -10,6 +10,8 @@ if($env:MVDM_OBSERVER_WINDOW_INPUT){
 }
 $Observer=(Resolve-Path -LiteralPath $Observer).Path
 $PackageRoot=(Resolve-Path -LiteralPath $PackageRoot).Path
+. "$PSScriptRoot/isolated_package_cleanup.ps1"
+$binary=Get-PackageBinaryRoot $PackageRoot
 $ReportPath=[IO.Path]::GetFullPath($ReportPath)
 $build=(Resolve-Path (Join-Path $PSScriptRoot '../../build')).Path+'\'
 if(!$ReportPath.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)){
@@ -22,9 +24,10 @@ $start=[Diagnostics.ProcessStartInfo]::new($Observer)
 $start.UseShellExecute=$false
 $start.WindowStyle=[Diagnostics.ProcessWindowStyle]::Hidden
 $start.EnvironmentVariables['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'
-$text="cmd.exe /d`r$edit`r$([char]17)`recho S40-NATIVE-RETURN-OK`rexit`rmem`rexit`r"
-foreach($argument in @((Join-Path $PackageRoot 'run16.exe'),$PackageRoot,$ReportPath,
-    'command','--observe-console-input-text',$text,
+$mem=Join-Path $binary 'MEM.EXE'
+$text="cmd.exe /d`r$edit`r$([char]17)`recho S40-NATIVE-RETURN-OK`rexit`r$mem`rexit`r"
+foreach($argument in @((Join-Path $binary 'run16.exe'),$PackageRoot,$ReportPath,
+    (Join-Path $binary 'COMMAND.COM'),'--observe-console-input-text',$text,
     '--observe-console-line-delay-ms','1800','--observation-timeout-ms','35000')){
     $start.ArgumentList.Add($argument)
 }

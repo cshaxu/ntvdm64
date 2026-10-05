@@ -169,9 +169,12 @@ static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
         RPC_CHECK(Client_SubmitNativeRequest(binding,connection,self,generation,frontend,1,&malformed,
             &target,&receipt,&request),ERROR_INVALID_DATA);
         CHECK(!target && !receipt && !request);
-        /* Frontend identity alone cannot nominate an execution recipient. */
+        /* A zero-byte request is the accepted broker parent-resume operation.
+         * This fresh launcher has no completed child/selected parent, so the
+         * original service_prepare_parent_resume contract rejects its state;
+         * it is not a pending command waiting for a worker to become ready. */
         RPC_CHECK(Client_SubmitNativeRequest(binding,connection,self,generation,frontend,0,NULL,
-            &target,&receipt,&request),ERROR_NOT_READY);
+            &target,&receipt,&request),ERROR_INVALID_STATE);
         CHECK(!target && !receipt && !request);
         RPC_CHECK(Client_GetNextNativeCommand(binding,connection,self,generation,1,&malformed,&bytes,&sender,&context,&io,&request,&caller_generation),ERROR_ACCESS_DENIED);
         CHECK(!received && !sender && !context && !io);

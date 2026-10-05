@@ -11,7 +11,7 @@ static BOOL finish(BOOL created,DWORD flags,PROCESS_INFORMATION *child,BOOL laun
     if(!created)return FALSE;
     DWORD saved=GetLastError(),error=ERROR_SUCCESS;
     nthook_context context=nthook_process_context;
-    if(nthook_target32(child->hProcess)) {
+    {
         BOOL actual_launcher=FALSE;
         error=nthook_launcher_target(child->hProcess,&context,&actual_launcher);
         launcher=launcher || actual_launcher;
@@ -22,7 +22,7 @@ static BOOL finish(BOOL created,DWORD flags,PROCESS_INFORMATION *child,BOOL laun
             context.frontend=context.execution=NULL;
         if(!error)error=nthook_install(child->hProcess,&context,
             launcher ? NATIVE_HOOK_LAUNCHER : NATIVE_HOOK_INTERCEPT);
-    } else if(launcher)error=ERROR_NOT_SUPPORTED;
+    }
     if(!error && !(flags&CREATE_SUSPENDED) && ResumeThread(child->hThread)==(DWORD)-1)
         error=GetLastError();
     if(error) {

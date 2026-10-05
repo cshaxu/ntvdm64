@@ -485,7 +485,7 @@ static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
     RPC_STATUS status,uuid_status;
     unsigned int index;
     DWORD result=RPC_S_SERVER_UNAVAILABLE;
-    status=RpcIfInqId(Client_vdm_service_v38_0_c_ifspec,&expected);
+    status=RpcIfInqId(Client_vdm_service_v41_0_c_ifspec,&expected);
     if (status) return status;
     status=RpcMgmtInqIfIds(binding,&interfaces);
     if (status) return status;
@@ -940,6 +940,11 @@ DWORD OpenNtBaseClientWorkerIoTransition(DWORD action)
 {
     common_rpc_connection state=client_rpc_view();
     return common_rpc_worker_io_transition(&state,action);
+}
+DWORD OpenNtBaseClientWorkerIoCheckpoint(DWORD reason,DWORD request,DWORD *decision)
+{
+    common_rpc_connection state=client_rpc_view();
+    return common_rpc_worker_io_checkpoint(&state,reason,request,decision);
 }
 DWORD OpenNtBaseClientFrontendIoDisconnected(void)
 {

@@ -1,4 +1,4 @@
-LIBRARY nthook32
+LIBRARY nthook64
 EXPORTS
     NthookFinishHelper @1 NONAME
     NthookAnchor

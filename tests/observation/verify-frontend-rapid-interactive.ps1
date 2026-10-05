@@ -13,12 +13,14 @@ if(!$ReportPath.StartsWith($build,[StringComparison]::OrdinalIgnoreCase) -or (Te
 }
 if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'An existing broker must not be controlled'}
 $batch=[IO.Path]::ChangeExtension($ReportPath,'.cmd')
+. "$PSScriptRoot/isolated_package_cleanup.ps1"
+$launcher='"'+(Join-Path (Get-PackageBinaryRoot $PackageRoot) 'run16.exe')+'"'
 $lines=@('@echo off')
 for($round=1;$round -le $Rounds;$round++) {
-    $lines+="run16 cmd /d /k echo S10-INTERACTIVE-$round"
+    $lines+="$launcher cmd /d /k echo S10-INTERACTIVE-$round"
     $lines+='if errorlevel 1 exit /b 81'
 }
-$lines+=@('run16 cmd /d /c echo S10-INTERACTIVE-FINAL','if errorlevel 1 exit /b 82',
+$lines+=@("$launcher cmd /d /c echo S10-INTERACTIVE-FINAL",'if errorlevel 1 exit /b 82',
     'echo S10-INTERACTIVE-COMPLETE','exit /b 19')
 [IO.File]::WriteAllLines($batch,$lines,[Text.Encoding]::ASCII)
 $start=[Diagnostics.ProcessStartInfo]::new((Resolve-Path $Observer).Path)

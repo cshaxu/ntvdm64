@@ -8,6 +8,7 @@ param(
     [string]$GuestFixture,
     [string]$WindowObserver,
     [string]$TerminalObserver,
+    [string]$NativeHook64,
     [string]$Node='node',
     [string[]]$WowBaselineRoots,
     [ValidateSet('Observed','Paced')][string]$InputPolicy='Observed',
@@ -42,11 +43,22 @@ if(Test-Path -LiteralPath (Join-Path $cache 'nthook32.dll')){
     }
     $packageNames+='nthook32.dll'
 }
+if(Test-Path -LiteralPath (Join-Path $runtimeBinary 'nthook64.dll')){
+    if(!$NativeHook64 -or $packageNames -notcontains 'nthook32.dll'){
+        throw 'Hook64 runtime requires explicit matching build input and Hook32'
+    }
+    $hook64=(Resolve-Path -LiteralPath $NativeHook64).Path
+    if((Get-FileHash $hook64).Hash -ne (Get-FileHash (Join-Path $runtimeBinary 'nthook64.dll')).Hash){
+        throw 'Build/runtime mismatch: nthook64.dll'
+    }
+    $packageNames+='nthook64.dll'
+}elseif($NativeHook64){throw 'Hook64 build input missing from runtime'}
 $manifest=foreach($name in $packageNames){
     $path=Join-Path $runtimeBinary $name
     $bytes=[IO.File]::ReadAllBytes($path);$pe=[BitConverter]::ToInt32($bytes,60)
-    if([BitConverter]::ToUInt16($bytes,$pe+4) -ne 0x14c){throw 'Non-x86 runtime'}
-    [pscustomobject]@{Name=$name;Sha256=(Get-FileHash $path).Hash}
+    $machine=if($name -eq 'nthook64.dll'){0x8664}else{0x14c}
+    if([BitConverter]::ToUInt16($bytes,$pe+4) -ne $machine){throw "Wrong runtime machine: $name"}
+    [pscustomobject]@{Name=$name;Sha256=(Get-FileHash $path).Hash;Machine=$machine}
 }
 if($Suite -ne 'Control' -and (!$GuestFixture -or !$WindowObserver -or !$WowBaselineRoots)){
     throw 'Product gate requires guest fixture, Window observer and retained WOW baselines'
@@ -142,25 +154,49 @@ try {
     }
     if($Suite -ne 'Product'){
         Remove-Item Env:MVDM_OBSERVER_WINDOW_INPUT -ErrorAction SilentlyContinue
+        # These native fixtures create the service through their executable's
+        # sibling path. Use the real System32 package layout, not the flat
+        # linker cache (whose service would derive the wrong Windows root).
+        foreach($fixture in @('frontend-request-client-test.exe','broker-frontend-bootstrap-test.exe',
+            'monitor-rpc-test.exe','native-gui-startup-probe.exe')){
+            $input=Join-Path $cache $fixture;$output=Join-Path $runtimeBinary $fixture
+            Copy-Item -LiteralPath $input -Destination $output -Force
+            if((Get-FileHash $input).Hash -ne (Get-FileHash $output).Hash){throw 'Control fixture copy mismatch'}
+        }
         Invoke-Gate 'rpc' {
             # native-command/native-registry are in-process archive cases,
             # now run concurrently in verify-service-fixtures, not duplicated here.
             $cases=@('client','bootstrap','startup-rejections','startup-timeout','native-worker-failure','native-completed-worker-loss','monitor-rpc')
             if($FullDeadlines){$cases+=@('workerless-grace','workerless-cancel')}
-            & "$repo/tests/observation/verify-s7-rpc-fixtures.ps1" -Observer $observerPath -PackageRoot $cache -ReportPrefix "$log/rpc" -Cases $cases
+            & "$repo/tests/observation/verify-s7-rpc-fixtures.ps1" -Observer $observerPath -PackageRoot $runtimeBinary -ReportPrefix "$log/rpc" -Cases $cases
         }
         Invoke-Gate 'native-gui' {
-            & "$repo/tests/observation/verify-native-gui-routing.ps1" -Observer $observerPath -PackageRoot $cache -ReportPrefix "$log/gui" -FullDeadlines:$FullDeadlines
+            & "$repo/tests/observation/verify-native-gui-routing.ps1" -Observer $observerPath -PackageRoot $runtime -ReportPrefix "$log/gui" -FullDeadlines:$FullDeadlines
         }
         Invoke-ShortRuntime {
             $env:MVDM_OBSERVER_SHORT_HISTORY='1'
             Invoke-Gate 'version-negatives' {
-                $env:OPENNT_BROKER_PRODUCT_BUILD=$cache
-                $env:OPENNT_VERSION_TEST_BUILD="$log/version-negative"
-                $env:OPENNT_VERSION_TEST_LOGS="$log/version-negative/logs"
-                $env:OPENNT_VERSION_TEST_RUNTIME='Z:\'
-                & $Node "$repo/tools/audit/Verify-ProductVersions.mjs"
-                if($LASTEXITCODE){throw 'Version negative gate failed'}
+                # These configure only the negative-peer builder. Do not
+                # leak its long diagnostic paths into later guest requests.
+                # Restore the incoming environment even if Node throws or
+                # reports a failed negative; never strip a caller's values.
+                $versionNames=@('OPENNT_BROKER_PRODUCT_BUILD','OPENNT_VERSION_TEST_BUILD',
+                    'OPENNT_VERSION_TEST_LOGS','OPENNT_VERSION_TEST_RUNTIME')
+                $versionSaved=@{}
+                foreach($name in $versionNames){$versionSaved[$name]=[Environment]::GetEnvironmentVariable($name,'Process')}
+                try {
+                    $env:OPENNT_BROKER_PRODUCT_BUILD=$cache
+                    $env:OPENNT_VERSION_TEST_BUILD="$log/version-negative"
+                    $env:OPENNT_VERSION_TEST_LOGS="$log/version-negative/logs"
+                    $env:OPENNT_VERSION_TEST_RUNTIME='Z:\'
+                    & $Node "$repo/tools/audit/Verify-ProductVersions.mjs"
+                    if($LASTEXITCODE){throw 'Version negative gate failed'}
+                }finally{
+                    foreach($name in $versionNames){
+                        if($null -eq $versionSaved[$name]){Remove-Item -LiteralPath ('Env:'+$name) -ErrorAction SilentlyContinue}
+                        else{[Environment]::SetEnvironmentVariable($name,$versionSaved[$name],'Process')}
+                    }
+                }
             }
             if($TerminalObserver){
                 Invoke-Gate 'strict-dir' {

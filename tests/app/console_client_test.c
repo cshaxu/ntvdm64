@@ -6,6 +6,7 @@
 #include "ntvdm-exe/win32/console_text.h"
 #include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h"
 #include "ntcon-exe/console_frontend.h"
+#include "common/protocol/frontend_protocol.h"
 static BOOL native_write_cells(HANDLE output,const CHAR_INFO *buffer,COORD size,
     COORD origin,PSMALL_RECT region) { return WriteConsoleOutputW(output,buffer,size,origin,region); }
 static BOOL native_read_cells(HANDLE output,PCHAR_INFO buffer,COORD size,
@@ -133,6 +134,11 @@ DWORD worker_base_io_open(HANDLE *pipe,HANDLE *process,HANDLE *ready,DWORD *gene
     if(error)return error;
     if(!delivery)create_transport();
     return OpenNtBaseClientWaitFrontend(pipe,process,generation,ready);
+}
+DWORD worker_base_io_checkpoint(DWORD reason,DWORD request,DWORD *decision)
+{
+    CHECK(reason==WORKER_IO_CHECKPOINT_PAUSE && !request && decision);
+    *decision=WORKER_IO_RELEASE;return ERROR_SUCCESS;
 }
 DWORD worker_base_io_close(HANDLE *pipe,HANDLE *process,HANDLE *ready)
 {

@@ -1,7 +1,8 @@
 # nthook32-dll
 
-Owner-admitted T431 S2, x86 /MT only. `nthook32.dll` is the sole injected
-product DLL. NTVWM and the DLL select the same suspended-child installer;
+Owner-accepted T431 S2 baseline is x86 /MT. T432 S6 freshly builds this shared
+source family as nthook32.dll and nthook64.dll; ntvwm.exe remains x86 only.
+NTVWM and both DLLs select the same suspended-child installer;
 run16 selects the copied-context reader without loading the interception DLL.
 Native GUI propagation does not grant character-frontend authority.
 
@@ -12,12 +13,21 @@ No independent argv[0]/basename identity gate remains in the DLL; actual
 CMD's MEM.EXE application and extensionless `mem` command are valid together.
 The wrapper retains its original A/W creation, attributes and parameter tail.
 
-`detours/` is the unmodified MIT-licensed Microsoft Detours v4.0.1 slice,
+`detours/` is the pinned MIT-licensed Microsoft Detours v4.0.1 slice,
 commit e4bfd6b03e50de46b47abfbd1e46b384f0c5f833. Its LICENSE.md is retained.
 Selected translation units: detours.cpp, modules.cpp, disasm.cpp, image.cpp,
 creatwth.cpp; the latter includes uimports.cpp. No examples/helper are selected.
-Use only direct same-width DetourUpdateProcessWithDll, never the
-DetourCreateProcessWithDll wrappers which can start a helper.
+Same-width installation uses direct DetourUpdateProcessWithDll. Opposite-width
+installation uses only the freshly reviewed finite W helper routine; never the
+DetourCreateProcessWithDll wrappers or the unbounded A helper. The existing
+Windows rundll32 is an installer, not a guest/worker/frontend or resident helper.
+
+T432-DETOURS-DIV-001 changes only DetourProcessViaHelperDllsW: actual host
+Windows directory, exact caller-selected DLL names after the allocator's
+caller-width heuristic, target-death-first10-second wait, one helper resume,
+concrete errors and exact owned-helper cleanup. Original import update,
+payload layout/restoration and all other imported bodies remain unchanged.
+See the [fresh S6 register](../../docs/etc/operations/t432-detours-helper-adaptation.md#s6-fresh-individual-review).
 
 The installer never resumes or closes borrowed creation handles. Installation
 failure may leave import/payload allocations in an unpublished suspended
@@ -40,4 +50,6 @@ off process or descendant is terminated by this mechanism.
 
 The copied payload is private bootstrap data, not RPC or authorization.
 Existing NTSRV object authentication remains authoritative. No broker call,
-wait, process creation or session lookup is permitted in DllMain.
+wait, process creation or session lookup is permitted in DllMain. The official
+DetourIsHelperProcess payload check bypasses target interception for the
+installer process; ordinal1 invokes the existing DetourFinishHelperProcess.

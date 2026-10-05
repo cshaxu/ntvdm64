@@ -1,4 +1,5 @@
 #include "common/rpc/worker_control.h"
+#include "common/protocol/frontend_protocol.h"
 #include <stdio.h>
 
 static unsigned checks,failures,calls,mode,takes,waits;
@@ -28,6 +29,14 @@ EVENT_CALL(WorkerFrontendCapability)
 EVENT_CALL(WorkerShutdownEvent)
 EVENT_CALL(WorkerStateChanged)
 EVENT_CALL(WorkerIoReleaseEvent)
+error_status_t Client_WorkerIoCheckpoint(handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,unsigned long generation,unsigned long reason,unsigned long request,unsigned long *decision)
+{
+    peer(binding,connection,process,generation);
+    CHECK(reason==WORKER_IO_CHECKPOINT_COMPLETE && request==42);
+    *decision=mode==3 ? 99 : mode==4 ? WORKER_IO_KEEP : WORKER_IO_RELEASE;
+    return result();
+}
 error_status_t Client_WorkerIoTransition(handle_t binding,VDM_CONNECTION connection,
     HANDLE process,unsigned long generation,unsigned long action)
 {
@@ -100,11 +109,21 @@ int main(void)
     CHECK(common_rpc_bind_console_context(NULL,NULL)==ERROR_INVALID_STATE);
     CHECK(common_rpc_register_native_backend(NULL,NULL,NULL,NULL)==ERROR_INVALID_STATE);
     CHECK(common_rpc_worker_io_transition(NULL,1)==ERROR_INVALID_STATE);
+    CHECK(common_rpc_worker_io_checkpoint(&expected,2,42,NULL)==ERROR_INVALID_PARAMETER);
+    generation=99;
+    CHECK(common_rpc_worker_io_checkpoint(NULL,2,42,&generation)==ERROR_INVALID_STATE && generation==WORKER_IO_KEEP);
     CHECK(common_rpc_frontend_io_disconnected(NULL)==ERROR_INVALID_STATE);
     CHECK(common_rpc_take_frontend(&expected,NULL,&frontend,&generation,&ready,FALSE)==ERROR_INVALID_PARAMETER);
     pipe=frontend=ready=expected.process;generation=99;
     CHECK(common_rpc_take_frontend(NULL,&pipe,&frontend,&generation,&ready,TRUE)==ERROR_INVALID_STATE);
     CHECK(!pipe && !frontend && !ready && !generation && !calls);
+    for(mode=0;mode<5;++mode) {
+        generation=99;
+        want=mode==0 || mode==4 ? 0 : mode==1 ? ERROR_ACCESS_DENIED :
+            mode==2 ? RPC_S_CALL_FAILED : ERROR_INVALID_DATA;
+        CHECK(common_rpc_worker_io_checkpoint(&expected,WORKER_IO_CHECKPOINT_COMPLETE,42,&generation)==want);
+        CHECK(generation==(mode==0 ? WORKER_IO_RELEASE : WORKER_IO_KEEP));
+    }
     for(mode=0;mode<3;++mode) {
         initial=calls;want=mode==0 ? 0 : mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED;
         for(i=0;i<4;++i) {

@@ -24,6 +24,9 @@ void worker_base_shutdown_close(LPTHREAD_START_ROUTINE close,void *context,
 /* Service instruction to publish/return input and release presentation.
  * This does not end a task or worker. Caller owns a wait-only event handle. */
 DWORD worker_base_io_release_event(HANDLE *release);
+/* Report execution facts. Only the authenticated service response decides
+ * whether this endpoint remains usable or must perform final-I/O release. */
+DWORD worker_base_io_checkpoint(DWORD reason,DWORD request,DWORD *decision);
 /* Caller serializes its endpoint and quiesces all pipe calls before close.
  * Peer handles authenticate transport only; NTSRV owns the association.
  * Handles are explicit instance state; NULL means no physical channel. */

@@ -626,11 +626,19 @@ if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--s38-window-reentry") && strcmp(argv
           return wait==WAIT_TIMEOUT && preserved && dos_alive ? 0 : 1; }
     }
     if(argc==5 && !strcmp(argv[4],"--s34-full-dir")) {
-        char runtime[MAX_PATH]="O:\\winnt",launch[MAX_PATH+32];
+        char runtime[MAX_PATH]="O:\\winnt",launch[2*MAX_PATH+16],launcher[MAX_PATH],guest[MAX_PATH];
         DWORD wait,code=STILL_ACTIVE;
         int dirty,entered;BOOL directory_complete;
         GetEnvironmentVariableA("TEST_RUNTIME_ROOT",runtime,sizeof(runtime));
-        snprintf(launch,sizeof(launch),"%s\\run16 command\r",runtime);
+        snprintf(launcher,sizeof(launcher),"%s\\system32\\run16.exe",runtime);
+        if(GetFileAttributesA(launcher)==INVALID_FILE_ATTRIBUTES)
+            snprintf(launcher,sizeof(launcher),"%s\\run16.exe",runtime);
+        snprintf(guest,sizeof(guest),"%s\\system32\\command.com",runtime);
+        if(GetFileAttributesA(guest)==INVALID_FILE_ATTRIBUTES)
+            snprintf(guest,sizeof(guest),"%s\\command.com",runtime);
+        /* The package root is the test working directory, not an application
+         * search path. Select the real guest just as we select the launcher. */
+        snprintf(launch,sizeof(launch),"\"%s\" \"%s\"\r",launcher,guest);
         send_keys(launch);
         {
             char text[16];DWORD delay=3000;

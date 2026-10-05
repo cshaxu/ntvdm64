@@ -20,6 +20,18 @@ remain x86. S6 reconstructs from accepted12160c657; archived S2–S5 candidate
 implementation is evidence only, not automatically reusable production code.
 Final delivery adds Hook64 to the nine-image baseline, not another worker.
 
+S6's owner-approved I/O correction separates execution facts from release
+authority. A worker reports its safe pause or exact direct-completion
+checkpoint to NTSRV. NTSRV decides KEEP/RELEASE from existing task and route
+records. KEEP permits final-output confirmation without disconnecting a live
+parent. RELEASE permits the worker to drain final output and return unused
+input, then report release readiness. Only then does NTSRV instruct NTCON to
+disconnect. Both endpoint acknowledgements precede a new connection or a
+release-dependent result. worker-base shares client/cleanup mechanics, not
+task policy; worker-local user counts cannot authorize closure. Original
+DOS/WOW execution boundaries and fatal/CloseOnExit semantics remain unchanged.
+RPC41 carries this checkpoint; integration and publication remain S6 gates.
+
 ### Superseded dual-worker research — not the active contract
 
 The owner's subsequent goal requires NTSRV to retain verified native machine

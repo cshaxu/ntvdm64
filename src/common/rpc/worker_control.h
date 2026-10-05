@@ -12,6 +12,7 @@ DWORD common_rpc_register_native_backend(const common_rpc_connection *state,HAND
 DWORD common_rpc_worker_shutdown_event(const common_rpc_connection *state,HANDLE *shutdown);
 DWORD common_rpc_worker_io_release_event(const common_rpc_connection *state,HANDLE *release);
 DWORD common_rpc_worker_io_transition(const common_rpc_connection *state,DWORD action);
+DWORD common_rpc_worker_io_checkpoint(const common_rpc_connection *state,DWORD reason,DWORD request,DWORD *decision);
 DWORD common_rpc_frontend_io_disconnected(const common_rpc_connection *state);
 DWORD common_rpc_worker_state_changed(const common_rpc_connection *state,HANDLE *state_changed);
 DWORD common_rpc_take_frontend(const common_rpc_connection *state,HANDLE *pipe,HANDLE *frontend,DWORD *frontend_generation,HANDLE *ready,BOOL wait);

@@ -3,7 +3,8 @@ param(
     [Parameter(Mandatory)][string]$RuntimeRoot,
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$LogRoot,
-    [string]$WindowObserver
+    [string]$WindowObserver,
+    [ValidateSet('I386','AMD64')][string]$NativeMachine='I386'
 )
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/isolated_package_cleanup.ps1"
@@ -16,20 +17,31 @@ if(!$log.StartsWith($build,[StringComparison]::OrdinalIgnoreCase) -or (Test-Path
 }
 $binary=Get-PackageBinaryRoot $runtime
 if(!(Test-Path (Join-Path $binary 'nthook32.dll'))){throw 'Missing hook-enabled package'}
+if($NativeMachine -eq 'AMD64' -and !(Test-Path (Join-Path $binary 'nthook64.dll'))){throw 'Missing Hook64 for AMD64 target'}
 if(Test-Path Z:\){throw 'Z: in use'}
 $scope=New-IsolatedPackageScope $runtime
 $null=New-Item -ItemType Directory -Path $log
 $saved=[Environment]::GetEnvironmentVariable('MVDM_OBSERVER_PRIVATE_DESKTOP')
 $savedPost=[Environment]::GetEnvironmentVariable('MVDM_OBSERVER_POST_EXIT_MS')
 $savedInput=[Environment]::GetEnvironmentVariable('MVDM_OBSERVER_MILESTONE_INPUT')
+$savedHistory=[Environment]::GetEnvironmentVariable('MVDM_OBSERVER_SHORT_HISTORY')
 $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
+$env:MVDM_OBSERVER_SHORT_HISTORY='1' # Checked disposable80-column fixture.
 $names=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll')
+if(Test-Path (Join-Path $binary 'nthook64.dll')){$names+='nthook64.dll'}
 $identity=foreach($name in $names){[pscustomobject]@{Name=$name;Hash=(Get-FileHash (Join-Path $binary $name)).Hash}}
 $identity|ConvertTo-Json|Set-Content "$log/package.json"
+$cmd=Join-Path $env:WINDIR $(if($NativeMachine -eq 'AMD64'){'System32\cmd.exe'}else{'SysWOW64\cmd.exe'})
+$cmdBytes=[IO.File]::ReadAllBytes($cmd)
+$cmdPe=[BitConverter]::ToInt32($cmdBytes,60)
+$cmdMachine=[BitConverter]::ToUInt16($cmdBytes,$cmdPe+4)
+if($cmdMachine -ne $(if($NativeMachine -eq 'AMD64'){0x8664}else{0x14c})){throw 'Native CMD fixture machine mismatch'}
+# The launcher/worker is x86. Preserve the requested real System32 image
+# through Windows' documented WOW64 alias, rather than reopening SysWOW64.
+if($NativeMachine -eq 'AMD64'){$cmd=Join-Path $env:WINDIR 'Sysnative\cmd.exe'}
 & subst.exe Z: $runtime
 if($LASTEXITCODE){throw 'SUBST failed'}
 $scope.Paths=@($scope.Paths)+@($scope.Paths|ForEach-Object {Join-Path Z:\ $_.Substring($runtime.Length+1)})
-$cmd=Join-Path $env:WINDIR 'SysWOW64\cmd.exe'
 $minePattern='(?m)^window-utf16=\S+ visible=1 class=(626B96F7|00C900A800C000D7) text=\1\r?$'
 $cases=@(
     @{Name='absolute';Command='Z:\system32\command.com /c ver';Marker='MS-DOS Version 5.00.500'},
@@ -66,7 +78,7 @@ try {
             if($case.After -and ($screen.IndexOf($case.After) -le $screen.IndexOf($case.Marker))){
                 throw "Direct DOS completion/parent output order failed: $($case.Name)"
             }
-            "PASS $($case.Name): actual x86 CMD/Windows completion/current Console marker"
+            "PASS $($case.Name): actual $NativeMachine CMD/Windows completion/current Console marker"
         } finally {Stop-IsolatedPackageScope $scope}
     }
     if($WindowObserver){
@@ -107,7 +119,7 @@ try {
                 $windows -notmatch $minePattern){
                 throw 'Hook Win16 startup-only receipt/window assertions failed'
             }
-            'PASS winmine: x86 CMD legacy redirect/startup-only receipt/actual Mines window; not gameplay'
+            "PASS winmine: actual $NativeMachine CMD legacy redirect/startup-only receipt/actual Mines window; not gameplay"
         } finally {
             if(!$process.HasExited){$process.Kill();$null=$process.WaitForExit(5000)}
             $process.Dispose();Stop-IsolatedPackageScope $scope
@@ -117,8 +129,13 @@ try {
 } finally {
     try {Stop-IsolatedPackageScope $scope} finally {
         & subst.exe Z: /d
-        [Environment]::SetEnvironmentVariable('MVDM_OBSERVER_PRIVATE_DESKTOP',$saved)
-        [Environment]::SetEnvironmentVariable('MVDM_OBSERVER_POST_EXIT_MS',$savedPost)
-        [Environment]::SetEnvironmentVariable('MVDM_OBSERVER_MILESTONE_INPUT',$savedInput)
+        foreach($setting in @(
+            @{Name='MVDM_OBSERVER_PRIVATE_DESKTOP';Value=$saved},
+            @{Name='MVDM_OBSERVER_POST_EXIT_MS';Value=$savedPost},
+            @{Name='MVDM_OBSERVER_MILESTONE_INPUT';Value=$savedInput},
+            @{Name='MVDM_OBSERVER_SHORT_HISTORY';Value=$savedHistory})) {
+            if($null -eq $setting.Value){Remove-Item ('Env:'+$setting.Name) -ErrorAction SilentlyContinue}
+            else{[Environment]::SetEnvironmentVariable($setting.Name,$setting.Value,'Process')}
+        }
     }
 }

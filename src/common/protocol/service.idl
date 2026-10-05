@@ -1,12 +1,17 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(38.0),
+    version(41.0),
     pointer_default(unique)
 ]
 interface vdm_service
 {
     typedef [context_handle] void *VDM_CONNECTION;
+    error_status_t WorkerIoCheckpoint(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation, [in] unsigned long reason,
+        [in] unsigned long request, [out] unsigned long *decision);
     error_status_t WorkerIoTransition(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,

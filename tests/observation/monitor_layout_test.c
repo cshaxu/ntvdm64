@@ -263,6 +263,15 @@ int wmain(void)
         cell(49,7,L'W',MONITOR_SELECTED_ATTRIBUTE);
         cell(49,8,L'N',MONITOR_NORMAL_ATTRIBUTE);
         cell(49,9,L'C',MONITOR_NORMAL_ATTRIBUTE);
+        mixed[5].kind=3;
+        state.selected_key=mixed[5].key;
+        render(output,&state,mixed,6);capture(output);
+        {
+            const WCHAR label[]=L"WIN64";
+            for(i=0;i<ARRAYSIZE(label)-1;++i)
+                cell(16+i,9,label[i],MONITOR_SELECTED_ATTRIBUTE);
+        }
+        cell(16,8,L'W',MONITOR_NORMAL_ATTRIBUTE); /* GUI32 remains WIN32. */
     }
     {
         WCHAR line[512];FILETIME now;

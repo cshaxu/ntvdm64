@@ -6,6 +6,7 @@
 #include "presentation.h"
 #include "worker-base/connection.h"
 #include "worker-base/input_watch.h"
+#include "common/protocol/frontend_protocol.h"
 #include "next_command.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include "native_pc_font.h"
@@ -96,17 +97,19 @@ static void release_launch(void *context)
     native_membership *state=context;
     LeaveCriticalSection(state->lock);
 }
-static DWORD end_io(void *context)
+static DWORD end_io(void *context,DWORD request)
 {
-    native_membership *state=context;DWORD error=ERROR_SUCCESS;
+    native_membership *state=context;DWORD error,decision=WORKER_IO_KEEP;
     EnterCriticalSection(state->lock);
-    /* Completion belongs to the direct target. Physical Console membership
-     * does not create broker tasks or retain NTSRV BUSY. */
-    if(!error && state->presenting) {
+    /* Report the exact direct completion. Neither local admissions nor
+     * physical Console membership decides whether this channel closes. */
+    error=worker_base_io_checkpoint(WORKER_IO_CHECKPOINT_COMPLETE,request,&decision);
+    if(!error && decision==WORKER_IO_RELEASE && state->presenting) {
         error=worker_base_input_watch_bind(state->input_watch,NULL);
         if(!error)error=ntvwm_presentation_end(state->presentation,&state->font);
         if(!error)error=membership_release_io(state);
-    }
+    } else if(!error && state->presenting)
+        error=ntvwm_presentation_flush(state->presentation,&state->font);
     if(state->users)--state->users;
     ntvwm_trace_error("end-io",0,error);
     LeaveCriticalSection(state->lock);return error;

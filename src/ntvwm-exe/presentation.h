@@ -29,4 +29,6 @@ DWORD ntvwm_presentation_seed(ntvwm_presentation *,HANDLE output);
  * even on final-frame failure and preserves the first failure for its caller. */
 DWORD ntvwm_presentation_begin(ntvwm_presentation *,HANDLE output);
 DWORD ntvwm_presentation_end(ntvwm_presentation *,const console_text_style *);
+/* Confirm current output while retaining input ownership and publication. */
+DWORD ntvwm_presentation_flush(ntvwm_presentation *,const console_text_style *);
 #endif

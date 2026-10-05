@@ -431,7 +431,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
     WCHAR normalized_command[MAX_PATH + MAXIMUM_VDM_COMMAND_LENGTH + 8u];
     WCHAR shell_command[MAX_PATH + MAXIMUM_VDM_COMMAND_LENGTH + 8u];
     DWORD type, result = ERROR_INVALID_PARAMETER, binary = 0, comspec_bytes;
-    BOOL image_resolved,initial_console_only;
+    BOOL image_resolved,initial_console_only,binary_classified;
     DWORD console_member;
     int count;
     (void)instance;
@@ -493,7 +493,17 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
     }
     if (!image_resolved)
         image_resolved=resolve_image_path(image_argument,application,MAX_PATH);
-    if (!OpenNtBaseGetBinaryTypeW(image_resolved ? application : image_argument, &type))
+    binary_classified=OpenNtBaseGetBinaryTypeW(image_resolved ? application : image_argument,&type);
+    if(!binary_classified) {
+        DWORD subsystem=0;
+        /* The retained historical classifier rejects opposite native machine
+         * images. Accept only positively verified native SEC_IMAGE metadata;
+         * DOS/WOW, shell syntax and failed discovery keep their original path. */
+        if(!run16_classify_native_image(image_resolved ? application : image_argument,&subsystem)) {
+            type=SCS_32BIT_BINARY;binary_classified=TRUE;
+        }
+    }
+    if (!binary_classified)
     {
         /* The original COMMAND worker has already chosen COMSPEC /c before
          * this public launcher sees a native-child tail.  A token which is

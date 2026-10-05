@@ -1244,7 +1244,10 @@ BOOL WINAPI DetourProcessViaHelperDllsW(_In_ DWORD dwTargetPid,
                                         _In_ PDETOUR_CREATE_PROCESS_ROUTINEW pfCreateProcessW)
 {
     BOOL Result = FALSE;
-    PROCESS_INFORMATION pi;
+    // DIVERGENCE: T432-DETOURS-DIV-001; finite installer transaction only.
+    PROCESS_INFORMATION pi = {};
+    HANDLE target = NULL;
+    DWORD error = ERROR_DLL_INIT_FAILED;
     STARTUPINFOW si;
     WCHAR szExe[MAX_PATH];
     WCHAR szCommand[MAX_PATH];
@@ -1253,15 +1256,33 @@ BOOL WINAPI DetourProcessViaHelperDllsW(_In_ DWORD dwTargetPid,
 
     DETOUR_TRACE(("DetourProcessViaHelperDlls(pid=%d,dlls=%d)\n", dwTargetPid, nDlls));
     if (nDlls < 1 || nDlls > 4096) {
-        SetLastError(ERROR_INVALID_PARAMETER);
+        error = ERROR_INVALID_PARAMETER;
         goto Cleanup;
     }
     if (!AllocExeHelper(&helper, dwTargetPid, nDlls, rlpDlls)) {
+        error = GetLastError();
         goto Cleanup;
     }
-
-    DWORD nLen = GetEnvironmentVariableW(L"WINDIR", szExe, ARRAYSIZE(szExe));
+    // AllocExeHelper guesses opposite-width names. Our caller has selected
+    // exact target-width paths already; preserve those without changing its ABI.
+    {
+        DWORD offset = 0, available = helper->cb - sizeof(*helper);
+        for (DWORD i = 0; i < nDlls; ++i) {
+            size_t length = 0;
+            if (FAILED(StringCchLengthA(rlpDlls[i], 4096, &length)) ||
+                length + 1 > available - offset ||
+                FAILED(StringCchCopyA(helper->rDlls + offset, available - offset, rlpDlls[i]))) {
+                error = ERROR_INVALID_PARAMETER;
+                goto Cleanup;
+            }
+            offset += (DWORD)length + 1;
+        }
+    }
+    target = OpenProcess(SYNCHRONIZE, FALSE, dwTargetPid);
+    if (!target) { error = GetLastError(); goto Cleanup; }
+    DWORD nLen = GetWindowsDirectoryW(szExe, ARRAYSIZE(szExe));
     if (nLen == 0 || nLen >= ARRAYSIZE(szExe)) {
+        error = nLen ? ERROR_INSUFFICIENT_BUFFER : GetLastError();
         goto Cleanup;
     }
 
@@ -1275,18 +1296,22 @@ BOOL WINAPI DetourProcessViaHelperDllsW(_In_ DWORD dwTargetPid,
     hr = StringCchCatW(szExe, ARRAYSIZE(szExe), L"\\system32\\rundll32.exe");
 #endif // DETOURS_OPTIONS_BITS
     if (!SUCCEEDED(hr)) {
+        error = ERROR_INSUFFICIENT_BUFFER;
         goto Cleanup;
     }
 
     hr = StringCchPrintfW(szCommand, ARRAYSIZE(szCommand),
                           L"rundll32.exe \"%hs\",#1", &helper->rDlls[0]);
     if (!SUCCEEDED(hr)) {
+        error = ERROR_INSUFFICIENT_BUFFER;
         goto Cleanup;
     }
 
     ZeroMemory(&pi, sizeof(pi));
     ZeroMemory(&si, sizeof(si));
     si.cb = sizeof(si);
+    si.dwFlags = STARTF_USESHOWWINDOW;
+    si.wShowWindow = SW_HIDE;
 
     DETOUR_TRACE(("DetourProcessViaHelperDlls(\"%ls\", \"%ls\")\n", szExe, szCommand));
     if (pfCreateProcessW(szExe, szCommand, NULL, NULL, FALSE, CREATE_SUSPENDED,
@@ -1296,36 +1321,51 @@ BOOL WINAPI DetourProcessViaHelperDllsW(_In_ DWORD dwTargetPid,
                                         DETOUR_EXE_HELPER_GUID,
                                         helper, helper->cb)) {
             DETOUR_TRACE(("DetourCopyPayloadToProcess failed: %d\n", GetLastError()));
-            TerminateProcess(pi.hProcess, ~0u);
-            CloseHandle(pi.hProcess);
-            CloseHandle(pi.hThread);
+            error = GetLastError();
             goto Cleanup;
         }
-
-        ResumeThread(pi.hThread);
-
-        ResumeThread(pi.hThread);
-        WaitForSingleObject(pi.hProcess, INFINITE);
-
-        DWORD dwResult = 500;
-        GetExitCodeProcess(pi.hProcess, &dwResult);
-
-        CloseHandle(pi.hProcess);
-        CloseHandle(pi.hThread);
-
-        if (dwResult != 0) {
-            DETOUR_TRACE(("Rundll32.exe failed: result=%d\n", dwResult));
+        if (ResumeThread(pi.hThread) != 1) {
+            error = ERROR_INVALID_STATE;
             goto Cleanup;
+        }
+        {
+            HANDLE waits[2] = {target, pi.hProcess};
+            DWORD wait = WaitForMultipleObjects(2, waits, FALSE, 10000);
+            if (wait != WAIT_OBJECT_0 + 1) {
+                error = wait == WAIT_OBJECT_0 ? ERROR_PROCESS_ABORTED :
+                    wait == WAIT_TIMEOUT ? ERROR_TIMEOUT : GetLastError();
+                goto Cleanup;
+            }
+            DWORD dwResult = 500;
+            if (!GetExitCodeProcess(pi.hProcess, &dwResult)) {
+                error = GetLastError();
+                goto Cleanup;
+            }
+            if (dwResult != 0) {
+                error = ERROR_DLL_INIT_FAILED;
+                goto Cleanup;
+            }
         }
         Result = TRUE;
+        error = ERROR_SUCCESS;
     }
     else {
         DETOUR_TRACE(("CreateProcess failed: %d\n", GetLastError()));
+        error = GetLastError();
         goto Cleanup;
     }
 
   Cleanup:
+    if (pi.hProcess) {
+        if (!Result && WaitForSingleObject(pi.hProcess, 0) == WAIT_TIMEOUT &&
+            TerminateProcess(pi.hProcess, error))
+            WaitForSingleObject(pi.hProcess, INFINITE);
+        CloseHandle(pi.hProcess);
+    }
+    if (pi.hThread) CloseHandle(pi.hThread);
+    if (target) CloseHandle(target);
     FreeExeHelper(&helper);
+    SetLastError(error);
     return Result;
 }
 

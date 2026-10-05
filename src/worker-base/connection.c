@@ -27,6 +27,10 @@ DWORD worker_base_io_release_event(HANDLE *release)
 {
     return OpenNtBaseClientWorkerIoReleaseEvent(release);
 }
+DWORD worker_base_io_checkpoint(DWORD reason,DWORD request,DWORD *decision)
+{
+    return OpenNtBaseClientWorkerIoCheckpoint(reason,request,decision);
+}
 
 DWORD worker_base_io_open(HANDLE *pipe,HANDLE *peer,HANDLE *ready,DWORD *generation)
 {

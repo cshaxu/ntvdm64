@@ -5,6 +5,7 @@
 #include "worker-base/publication.h"
 #include "worker-base/input_watch.h"
 #include "common/console/client.h"
+#include "common/protocol/frontend_protocol.h"
 #include "opennt-abi/host-compat/include/console_grid.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include "worker-base/connection.h"
@@ -365,6 +366,11 @@ static DWORD console_activate(console_client *client,BOOL active)
     if(!active && client->channel.pipe) {
         console_io_request barrier={0};console_io_reply reply;
         HANDLE pipe=client->channel.pipe,peer=client->channel.peer;
+        DWORD decision=WORKER_IO_KEEP;
+        error=worker_base_io_checkpoint(WORKER_IO_CHECKPOINT_PAUSE,0,&decision);
+        if(error || decision==WORKER_IO_KEEP) {
+            LeaveCriticalSection(&client->lock);return error;
+        }
         barrier.operation=CONSOLE_IO_BARRIER;
         error=ntcon_worker_call(&client->channel,&barrier,&reply);
         if(!error) {

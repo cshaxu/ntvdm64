@@ -6,6 +6,7 @@
 #include <windows.h>
 #include <stdint.h>
 DWORD OpenNtBaseClientWorkerIoTransition(DWORD);
+DWORD OpenNtBaseClientWorkerIoCheckpoint(DWORD,DWORD,DWORD *);
 DWORD OpenNtBaseClientFrontendIoDisconnected(void);
 DWORD OpenNtBaseClientSubmitNativeRequest(HANDLE,DWORD,BYTE *,HANDLE *,HANDLE *,DWORD *);
 DWORD OpenNtBaseClientFinishNativeRequest(DWORD,DWORD *,DWORD *);

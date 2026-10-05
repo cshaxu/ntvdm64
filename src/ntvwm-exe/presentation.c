@@ -514,9 +514,36 @@ static DWORD return_unused_input(ntvwm_presentation *client)
     }
     HeapFree(GetProcessHeap(),0,records);return error;
 }
+static DWORD final_capture(ntvwm_presentation *client,const console_text_style *font)
+{
+    DWORD error,attempt;
+    for(attempt=0;attempt<8;++attempt) {
+        error=ntvwm_presentation_capture(client,font);
+        if(error!=ERROR_RETRY)break;
+        if(attempt<7)Sleep(10);
+    }
+    return error;
+}
+DWORD ntvwm_presentation_flush(ntvwm_presentation *client,const console_text_style *font)
+{
+    console_io_request request={0};console_io_reply reply;
+    DWORD error,resume;
+    if(!client || !font)return ERROR_INVALID_PARAMETER;
+    error=worker_base_publication_active(client->publisher,FALSE);
+    if(error)return error;
+    EnterCriticalSection(&client->lock);
+    error=final_capture(client,font);
+    if(!error) {
+        request.operation=CONSOLE_IO_BARRIER;
+        error=exchange(client,&request,&reply);
+    }
+    LeaveCriticalSection(&client->lock);
+    resume=worker_base_publication_active(client->publisher,TRUE);
+    return error ? error : resume;
+}
 DWORD ntvwm_presentation_end(ntvwm_presentation *client,const console_text_style *font)
 {
-    console_io_request request={0};console_io_reply reply;DWORD error,attempt;
+    console_io_request request={0};console_io_reply reply;DWORD error;
     if(!client || !font)return ERROR_INVALID_PARAMETER;
     /* Disable/drain outside the channel lock. A callback may currently hold
      * that lock. Fresh final capture below is synchronous and uncapped. */
@@ -531,11 +558,7 @@ DWORD ntvwm_presentation_end(ntvwm_presentation *client,const console_text_style
     }
     /* A native target may resize during capture. Restart from a fresh
      * snapshot before returning unused input or releasing ownership. */
-    if(!error)for(attempt=0;attempt<8;++attempt) {
-        error=ntvwm_presentation_capture(client,font);
-        if(error!=ERROR_RETRY)break;
-        if(attempt<7)Sleep(10);
-    }
+    if(!error)error=final_capture(client,font);
     if(!error)error=return_unused_input(client);
     if(!error) {
         request.operation=CONSOLE_IO_BARRIER;

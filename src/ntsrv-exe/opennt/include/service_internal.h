@@ -155,6 +155,7 @@ typedef struct OPENNT_BASE_WIN32RECORD {
     DWORD request;
     /* Bind only the admitted direct target's actual CreateProcess identity. */
     DWORD process_id;
+    DWORD native_machine; /* Verified actual direct target, never worker width. */
     DWORD worker_generation; /* Retained when a GUI record leaves its carrier. */
     DWORD launcher_generation,exit_code,completion_error;
     BOOL completed;
@@ -174,7 +175,7 @@ typedef struct OPENNT_FRONTEND_ROUTE {
     BOOL delivered;
     BOOL native_worker; /* I/O route survives its native launcher, not its root. */
     DWORD request;
-    BOOL io_requested,io_releasing,io_worker_closed,io_frontend_closed;
+    BOOL io_requested,io_release_ordered,io_releasing,io_worker_closed,io_frontend_closed;
 } OPENNT_FRONTEND_ROUTE;
 typedef struct OPENNT_BASE_WORKER_WATCH {
     LIST_ENTRY link;

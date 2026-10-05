@@ -8,6 +8,7 @@ const build=path.resolve(process.env.OPENNT_VERSION_TEST_BUILD || 'build/M0-T412
 const logs=path.resolve(process.env.OPENNT_VERSION_TEST_LOGS || path.join(build,'logs'));
 const runtime=process.env.OPENNT_VERSION_TEST_RUNTIME;
 if(!runtime)throw Error('OPENNT_VERSION_TEST_RUNTIME must name the deployed runtime directory');
+const runtimeBinary=fs.existsSync(path.join(runtime,'system32','run16.exe'))?path.join(runtime,'system32'):runtime;
 fs.mkdirSync(build,{recursive:true});fs.mkdirSync(logs,{recursive:true});
 const source=fs.readFileSync('src/ntsrv-exe/main.c','utf8');
 const header=fs.readFileSync('src/common/protocol/version.h','utf8');
@@ -69,7 +70,7 @@ for (const [name] of variants) {
         clearTimeout(timer);
         for(const [exe,args] of [['run16.exe',['MEM.EXE']],['ntvdm.exe',[]]]) {
             const start=Date.now();
-            const r=spawnSync(path.join(runtime,exe),args,{cwd:runtime,windowsHide:true,encoding:'utf8',timeout:4000});
+            const r=spawnSync(path.join(runtimeBinary,exe),args,{cwd:runtime,windowsHide:true,encoding:'utf8',timeout:4000});
             fs.writeFileSync(path.join(logs,`${name}-${exe}.json`),JSON.stringify({status:r.status,error:r.error?.message,ms:Date.now()-start,stdout:r.stdout,stderr:r.stderr},null,2));
             assert.equal(r.status,1306,`${name} ${exe}: expected ERROR_REVISION_MISMATCH, not retry/timeout`);
             assert.match(r.stderr,/version mismatch/);

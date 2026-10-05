@@ -1,9 +1,26 @@
-# T432 S4 bounded Detours helper adaptation register
+# T432 bounded Detours helper adaptation register
+
+## S6 fresh individual review
+
+S4 below is retained research, not a mainline implementation source. S6
+rechecks restored creatwth.cpp against its pinned SHA256 and reuses only the
+official helper algorithm, not archived candidate code. A single x86 worker
+must install Hook64 in an actual AMD64 target; Hook64 must propagate Hook32
+to an actual I386 child. Direct import updating cannot cross those widths.
+The owner permits a finite installer-only Windows rundll32; no worker or
+resident executable is added. The original W routine's internal infinite wait
+and double resume cannot be corrected by its creation callback. Therefore the
+same narrowly scoped W routine adaptation described below is freshly admitted
+for S6, with its original signature, helper payload and import-update algorithm.
+The target remains suspended and creator-owned throughout. Required tests are
+fresh matching/cross-width cases plus timeout/create failure/target death;
+archived S4 passes are not acceptance evidence. Source register and component
+README must describe the resulting new diff before production delivery.
 
 ## Admission and original source
 
 The owner-approved T432 S1 design admits the matching rundll32 transient
-installer, preserving true suspended Windows children. S4 is active in CURRENT.
+installer, preserving true suspended Windows children. S4 was historically active.
 This register precedes source modification; runtime gates below are not passes.
 
 - Source: Microsoft Research Detours4.0.1, pinned commit

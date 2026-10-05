@@ -99,7 +99,7 @@ static DWORD launch_request(ntvwm_execution *request,BYTE *payload,DWORD bytes,
         BYTE *local_payload=NULL;DWORD local_bytes=0;PROCESS_INFORMATION process={0};
         error=run16_native_launch_pack(&start,&local_payload,&local_bytes);
         if(!error)error=run16_native_launch_start_suspended(local_payload,local_bytes,&process);
-        if(!error && nthook_target32(process.hProcess)) {
+        if(!error) {
             nthook_context hook;
             error=nthook_context_paths(&hook);
             if(!error) {
@@ -192,7 +192,7 @@ reply_ready:
                 ntvwm_executions_note_broker_failure(owner,error);
                 goto done;
             }
-            error=bound ? owner->io.end(owner->io.context) : ERROR_SUCCESS;
+            error=bound ? owner->io.end(owner->io.context,request->request) : ERROR_SUCCESS;
             bound=FALSE;
             /* One resource check after the direct process has exited. Do not
              * close an owned Console still used by an unregistered native
@@ -217,7 +217,7 @@ done:
             request->request,error ? error : ERROR_PROCESS_ABORTED,NULL,NULL);
         if(startup_error)ntvwm_executions_note_broker_failure(owner,startup_error);
     }
-    if(bound)(void)owner->io.end(owner->io.context);
+    if(bound)(void)owner->io.end(owner->io.context,request->request);
     if(receipt)CloseHandle(receipt);
     if(target)CloseHandle(target);
     if(!broker_completed){

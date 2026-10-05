@@ -7,7 +7,7 @@ typedef struct ntvwm_executions ntvwm_executions;
 typedef struct ntvwm_execution_io {
     void *context;
     DWORD (*begin)(void *,HANDLE stop);
-    DWORD (*end)(void *);
+    DWORD (*end)(void *,DWORD request);
     /* Paired with successful begin after the launch attempt, before reply I/O.
      * Lets the Console owner serialize CreateProcess against explicit close. */
     void (*release_launch)(void *);

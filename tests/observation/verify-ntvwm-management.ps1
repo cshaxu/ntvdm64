@@ -20,8 +20,10 @@ if(!$physical.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::Ordin
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid log prefix'}
 if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'An existing broker must not be controlled by this test'}
 $paths=@()
+$physicalBinary=Get-PackageBinaryRoot $physical
+$launchBinary=Get-PackageBinaryRoot $PackageRoot
 foreach($name in @('run16.exe','ntsrv.exe','ntcon.exe','ntvwm.exe')){
-    $actual=Join-Path $physical $name;$launch=Join-Path $PackageRoot $name
+    $actual=Join-Path $physicalBinary $name;$launch=Join-Path $launchBinary $name
     if((Get-FileHash $actual).Hash -ne (Get-FileHash $launch).Hash){throw 'Candidate mismatch'}
     $paths+=@($actual,$launch)
 }
@@ -35,7 +37,7 @@ $oldGate=$env:MVDM_OBSERVER_INPUT_GATE
 try {
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     $observerProcess=Start-Process -FilePath (Resolve-Path $Observer).Path -ArgumentList @(
-        (Join-Path $PackageRoot 'run16.exe'),$PackageRoot,$report,
+        (Join-Path $launchBinary 'run16.exe'),$PackageRoot,$report,
         'cmd.exe','/d','/k','--observation-timeout-ms','25000') -WindowStyle Hidden -PassThru
     $deadline=[DateTime]::UtcNow.AddSeconds(15)
     do {
@@ -64,7 +66,7 @@ try {
         $otherReport=Join-Path $LogRoot "$LogPrefix-other.txt"
         if(Test-Path $otherReport){throw 'Use fresh second-session evidence'}
         $otherObserver=Start-Process -FilePath (Resolve-Path $Observer).Path -ArgumentList @(
-            (Join-Path $PackageRoot 'run16.exe'),$PackageRoot,$otherReport,
+            (Join-Path $launchBinary 'run16.exe'),$PackageRoot,$otherReport,
             'cmd.exe','/d','/k','--observation-timeout-ms','25000',
             '--observe-console-input-text',('"'+"echo ISOLATED-SESSION-OK`rexit /b 23`r"+'"')) -WindowStyle Hidden -PassThru
         $env:MVDM_OBSERVER_INPUT_GATE=$oldGate

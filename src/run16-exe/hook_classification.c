@@ -4,6 +4,7 @@
 #include <base_classifier.h>
 #include "nthook32-dll/hook.h"
 #include "image_classification.h"
+#include "common/native_image.h"
 /* Classifier-only composition owns these original suffix descriptors; it
  * does not select run16/main.c or the service/worker implementation. */
 UNICODE_STRING BaseDotComSuffixName={8,10,L".com"};
@@ -20,7 +21,6 @@ DWORD nthook_legacy_type(PCWSTR application,DWORD *type)
 }
 DWORD nthook_native_subsystem(HANDLE child,DWORD *subsystem)
 {
-    WCHAR image[MAX_PATH];DWORD count=MAX_PATH;
-    if(!QueryFullProcessImageNameW(child,0,image,&count))return GetLastError();
-    return run16_classify_native_image(image,subsystem);
+    DWORD machine;
+    return common_native_process_image(child,&machine,subsystem);
 }

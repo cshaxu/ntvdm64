@@ -10,6 +10,7 @@
 #include "opennt-abi/source/public/internal/base/inc/vdmapi.h"
 #include "ntsrv-exe/opennt/include/base_service.h"
 #include "common/protocol/version.h"
+#include "common/protocol/frontend_protocol.h"
 #include "ntsrv-exe/idle_policy.h"
 static broker_rpc_scope scope;
 static OPENNT_BASE_SERVICE *service;
@@ -406,6 +407,13 @@ error_status_t Server_WorkerShutdownEvent(handle_t binding,VDM_CONNECTION connec
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
     *shutdown=NULL;
     return error ? error : OpenNtBaseServiceWorkerShutdownEvent(connection,pid,generation,shutdown);
+}
+error_status_t Server_WorkerIoCheckpoint(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,ULONG reason,ULONG request,ULONG *decision)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    *decision=WORKER_IO_KEEP;
+    return error ? error : OpenNtBaseServiceWorkerIoCheckpoint(connection,pid,generation,reason,request,decision);
 }
 error_status_t Server_WorkerIoTransition(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG action)
@@ -892,7 +900,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v38_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v41_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -939,7 +947,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v38_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v41_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);

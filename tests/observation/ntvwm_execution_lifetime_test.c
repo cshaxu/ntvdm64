@@ -236,7 +236,7 @@ static void concurrent_io_cancellation(void)
     if(payload)HeapFree(GetProcessHeap(),0,payload);if(state.all_entered)CloseHandle(state.all_entered);
 }
 static DWORD target_begin(void *context,HANDLE stop);
-static DWORD target_end(void *context);
+static DWORD target_end(void *context,DWORD request);
 static void no_launch_failure(BOOL preflight)
 {
     ntvwm_executions *owner=NULL;HANDLE marker,input=NULL,output=NULL;
@@ -278,8 +278,8 @@ static void broker_completion_failure_stops_reentry(void)
 }
 static DWORD target_begin(void *context,HANDLE stop)
 { (void)context;return WaitForSingleObject(stop,0)==WAIT_TIMEOUT ? ERROR_SUCCESS : ERROR_OPERATION_ABORTED; }
-static DWORD target_end(void *context)
-{ return *(DWORD *)context; }
+static DWORD target_end(void *context,DWORD request)
+{ CHECK(request!=0);return *(DWORD *)context; }
 static void target_case(BOOL held,DWORD io_error,DWORD broker_error)
 {
     ntvwm_executions *owner=NULL;BYTE *payload=NULL;DWORD bytes;unsigned id=0;

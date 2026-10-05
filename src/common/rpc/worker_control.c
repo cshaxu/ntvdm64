@@ -1,6 +1,7 @@
 /* Project-added worker/control RPC adaptation; not original VDM dispatch,
  * task completion, blocking/resume or resource lifetime decisions. */
 #include "worker_control.h"
+#include "common/protocol/frontend_protocol.h"
 
 DWORD common_rpc_worker_frontend_capability(const common_rpc_connection *state,HANDLE *capability)
 {
@@ -78,6 +79,22 @@ DWORD common_rpc_worker_shutdown_event(const common_rpc_connection *state,HANDLE
     *shutdown=local;return ERROR_SUCCESS;
 }
 
+DWORD common_rpc_worker_io_checkpoint(const common_rpc_connection *state,DWORD reason,DWORD request,DWORD *decision)
+{
+    DWORD error=ERROR_INVALID_STATE,local=WORKER_IO_KEEP;
+    if(!decision)return ERROR_INVALID_PARAMETER;
+    *decision=WORKER_IO_KEEP;
+    if(!state || !state->connection || !state->binding || !state->process)return error;
+    RpcTryExcept {
+        error=Client_WorkerIoCheckpoint(state->binding,state->connection,state->process,
+            state->generation,reason,request,&local);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    if(error)return error;
+    if(local!=WORKER_IO_KEEP && local!=WORKER_IO_RELEASE)return ERROR_INVALID_DATA;
+    *decision=local;return ERROR_SUCCESS;
+}
 DWORD common_rpc_worker_io_transition(const common_rpc_connection *state,DWORD action)
 {
     DWORD error=ERROR_INVALID_STATE;

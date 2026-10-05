@@ -22,7 +22,9 @@ BOOLEAN NTAPI OpenNtBaseDosPathNameToNtPathName_U(PCWSTR, PUNICODE_STRING, PWSTR
 #define RtlDosPathNameToNtPathName_U OpenNtBaseDosPathNameToNtPathName_U
 typedef struct _SECTION_IMAGE_INFORMATION {
     PVOID TransferAddress;
-    ULONG ZeroBits, MaximumStackSize, CommittedStackSize, SubSystemType;
+    ULONG ZeroBits;
+    SIZE_T MaximumStackSize, CommittedStackSize;
+    ULONG SubSystemType;
     union {
         struct { USHORT SubSystemMinorVersion, SubSystemMajorVersion; };
         ULONG SubSystemVersion;

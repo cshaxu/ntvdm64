@@ -356,6 +356,8 @@ static void service_copy_win32record(OPENNT_BASE_CONNECTION *native,
     item->state=native->native_inflight ? VDM_BUSY : VDM_READY;
     item->stack_depth=service_win32record_depth(native);
     item->task=record ? record->request : 0;
+    if(record)item->kind=record->native_machine==IMAGE_FILE_MACHINE_AMD64 ?
+        MANAGEMENT_KIND_WIN64 : MANAGEMENT_KIND_WIN32;
     lstrcpynW(item->image,record ? record->image : L"<EMPTY>",
         OPENNT_BASE_WORKER_IMAGE_CHARS);
     if(WaitForSingleObject(native->native_stop,0)==WAIT_OBJECT_0)item->state|=0x80000000u;
@@ -523,7 +525,9 @@ static DWORD service_copy_management_tree(OPENNT_BASE_SERVICE *service,
         if(record->completed || !record->gui_process ||
             WaitForSingleObject(record->gui_process,0)!=WAIT_TIMEOUT)continue;
         item.key=service_management_key(service,MANAGEMENT_GUI_TARGET,record->worker_generation,record->request);
-        item.process_id=record->process_id;item.kind=2;item.task=record->request;
+        item.process_id=record->process_id;item.task=record->request;
+        item.kind=record->native_machine==IMAGE_FILE_MACHINE_AMD64 ?
+            MANAGEMENT_KIND_WIN64 : MANAGEMENT_KIND_WIN32;
         item.display_state=MANAGEMENT_BUSY;item.actions=MANAGEMENT_CAN_CLOSE;
         if(GetProcessTimes(record->gui_process,&started,&ignored,&ignored,&ignored))
             item.started_filetime=((uint64_t)started.dwHighDateTime<<32)|started.dwLowDateTime;

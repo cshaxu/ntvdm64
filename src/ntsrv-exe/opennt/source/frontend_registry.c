@@ -33,9 +33,11 @@ DWORD service_authorize_worker_io(OPENNT_BASE_CONNECTION *worker,DWORD pid)
     if(!route)return ERROR_NOT_FOUND;
     if(!route->root || route->root->frontend_closing)
         return ERROR_PIPE_NOT_CONNECTED;
-    if(route->io_releasing)return ERROR_BUSY;
+    if(route->io_release_ordered || route->io_releasing)return ERROR_BUSY;
     if(route->root->frontend_io_route && route->root->frontend_io_route!=route) {
-        DWORD owner=GetProcessId(route->root->frontend_io_route->worker);
+        OPENNT_FRONTEND_ROUTE *previous=route->root->frontend_io_route;
+        DWORD owner=GetProcessId(previous->worker);
+        previous->io_release_ordered=TRUE;
         for(link=worker->service->connections.Flink;
             link!=&worker->service->connections;link=link->Flink) {
             OPENNT_BASE_CONNECTION *current=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
@@ -52,9 +54,47 @@ static void service_finish_io_release(OPENNT_FRONTEND_ROUTE *route)
 {
     if(!route->io_worker_closed || !route->io_frontend_closed)return;
     route->root->frontend_io_route=NULL;
-    route->io_requested=route->io_releasing=route->delivered=FALSE;
+    route->io_requested=route->io_release_ordered=route->io_releasing=route->delivered=FALSE;
     WakeAllConditionVariable(&route->root->service->frontend_changed);
     service_signal_frontend_states(route->root->service);
+}
+DWORD OpenNtBaseServiceWorkerIoCheckpoint(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,DWORD reason,DWORD request,DWORD *decision)
+{
+    OPENNT_FRONTEND_ROUTE *route;
+    LIST_ENTRY *link;
+    DWORD error=ERROR_ACCESS_DENIED;
+    BOOL retain=FALSE,found=FALSE;
+    if(!decision)return ERROR_INVALID_PARAMETER;
+    *decision=WORKER_IO_KEEP;
+    if(!connection)return ERROR_INVALID_PARAMETER;
+    EnterCriticalSection(&connection->service->lock);
+    if(!OpenNtBaseServicePeer(connection,pid,generation) || connection->wow)goto done;
+    if(reason==WORKER_IO_CHECKPOINT_PAUSE) {
+        if(request || !connection->process.fVDM || connection->native_worker)goto done;
+    } else if(reason==WORKER_IO_CHECKPOINT_COMPLETE) {
+        if(!request || !connection->native_worker)goto done;
+        for(link=connection->win32records.Flink;link!=&connection->win32records;link=link->Flink) {
+            OPENNT_BASE_WIN32RECORD *record=CONTAINING_RECORD(link,OPENNT_BASE_WIN32RECORD,link);
+            if(record->completed || record->gui)continue;
+            if(record->request==request)found=TRUE;
+            else retain=TRUE;
+        }
+        if(!found){error=ERROR_INVALID_STATE;goto done;}
+    } else {error=ERROR_INVALID_PARAMETER;goto done;}
+    route=service_worker_io_route(connection,pid);
+    if(!route || !route->root || route->root->frontend_closing) {
+        error=ERROR_PIPE_NOT_CONNECTED;goto done;
+    }
+    /* A paused parent's completion cannot close a different owner's channel.
+     * Same-worker direct parents remain authoritative service records. */
+    if(route->root->frontend_io_route!=route || (retain && !route->io_release_ordered)) {
+        error=ERROR_SUCCESS;goto done;
+    }
+    route->io_release_ordered=TRUE;
+    *decision=WORKER_IO_RELEASE;error=ERROR_SUCCESS;
+done:
+    LeaveCriticalSection(&connection->service->lock);return error;
 }
 DWORD OpenNtBaseServiceWorkerIoTransition(OPENNT_BASE_CONNECTION *connection,DWORD pid,
     DWORD generation,DWORD action)
@@ -79,11 +119,15 @@ DWORD OpenNtBaseServiceWorkerIoTransition(OPENNT_BASE_CONNECTION *connection,DWO
         }
         if(action==WORKER_IO_ACQUIRE) {
             if(!route->io_requested){error=ERROR_ACCESS_DENIED;break;}
+            /* A release instruction revokes acquisition, even before final
+             * I/O has drained. Only a new admitted execution phase may grant
+             * this route again after both endpoints acknowledge closure. */
+            if(route->io_release_ordered){error=ERROR_BUSY;break;}
             if(root->frontend_io_route==route && !route->io_releasing) {
                 error=ERROR_SUCCESS;break;
             }
             if(!root->frontend_io_route) {
-                route->io_releasing=route->io_worker_closed=route->io_frontend_closed=FALSE;
+                route->io_release_ordered=route->io_releasing=route->io_worker_closed=route->io_frontend_closed=FALSE;
                 root->frontend_io_route=route;
                 error=service_refresh_frontend_work(root);
                 if(error){root->frontend_io_route=NULL;route->io_requested=FALSE;break;}
@@ -100,6 +144,7 @@ DWORD OpenNtBaseServiceWorkerIoTransition(OPENNT_BASE_CONNECTION *connection,DWO
                 error=ERROR_INVALID_STATE;break;
             }
             if(action==WORKER_IO_RELEASE_BEGIN) {
+                if(!route->io_release_ordered){error=ERROR_ACCESS_DENIED;break;}
                 route->io_releasing=TRUE;
                 error=service_refresh_frontend_work(root);break;
             }

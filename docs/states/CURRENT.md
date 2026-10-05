@@ -17,10 +17,10 @@ after this active package.
 | Identifier Mode | M0 T432 S6; Ordinary Mode. |
 | Admission And Approval | Owner supersedes dual workers: retain one x86 ntvwm.exe and nthook32/64.dll; all superseded implementation is evidence only and must not enter main. Restore accepted T431 S2 P2 production sources before implementing the new contract. S2–S5 candidate is archived at evidence/t432-dual-worker-superseded-20261005, commit3d5bc9466cf7208112ea53b9ff3ebf97534b0354; S5 is superseded, not delivered. |
 | Candidate Proposal | [Dual-width native workers and hooks](../proposals/proposal-dual-width-native-workers-hooks-001.md). |
-| Objective | Reconstruct from12160c657 with one x86 NTVWM and matching Hook32/64; implement actual16/32/64 propagation and existing I/O handoff without worker-width selection. NTSRV distinguishes actual64 tasks and NTMON displays WIN64. Verify and publish a coherent ten-image set, then review/commit/push and await owner T acceptance. |
+| Objective | Reconstruct from12160c657 with one x86 NTVWM and matching Hook32/64; implement actual16/32/64 propagation without worker-width selection. NTSRV distinguishes actual64 tasks and NTMON displays WIN64. Owner further requires NTSRV to decide I/O channel retention/release on both worker and NTCON endpoints; worker-base shares execution/acknowledgement mechanics, never a task registry or release policy. Verify and publish a coherent ten-image set, then review/commit/push and await owner T acceptance. |
 | Non-goals | No general component x64 migration, guest/mirror execution change, new EXE/component/resident helper, scheduler/registry, private WOW64 transition or child replacement. Cross-worker I/O retains the existing protocol. |
 | Reference Baseline | Owner-accepted T431 S2 P2 at12160c657; sealed S2/r027-runtime and r031-publication; APP0.0.427/RPC38/I/O25, x86 /MT CCPU40. [Closure](../history/m0-t431-native-hook32-closure.md). |
-| Files And ABI Surface | Restore src/, tests/ and tools/ to accepted12160c657; remove untracked candidate source/build files after archival. Reimplement only reviewed shared Hook/native-metadata bindings, x64 DLL build and actual-task projection; no original mirror rewrite, worker-width reservation or frontend type branch. Evidence remains historical, never a build input. |
+| Files And ABI Surface | Restore src/, tests/ and tools/ to accepted12160c657; remove untracked candidate source/build files after archival. Reimplement reviewed shared Hook/native-metadata bindings, x64 DLL build and actual-task projection; no original mirror rewrite, worker-width reservation or frontend type branch. Owner-approved release-authority correction covers NTSRV frontend/native completion, worker-base connection mechanics and worker/NTCON adapters with focused nesting/final-I/O tests. Evidence remains historical, never a build input. |
 | Applicable Rules | Full AGENTS authorities/source policy; minimal original-shaped adaptation before mirror diff/new behavior; one active S; preserve other-session changes and build-only outputs. |
 | Verification | build/M0-T432/S6/r001 onward. Verify baseline source identity before rebuild. Revalidate actual32/64 targets in one x86 worker, matching/cross-width Hooks, actual WIN64 task projection, handoff, typeahead/failure/reuse/isolation; Console17/Window17 and independent WOW frontiers. Ten-image manifest/preflight/recovery/publication plus source/ABI/governance/link/diff checks. No archived candidate package is an acceptance substitute. |
 | Expected Markers | One ntvwm.exe (I386), nthook32.dll (I386), nthook64.dll (AMD64); no ntvwm32/64 production targets, width-selected worker records or reservations. Actual output/result/input return and WIN64 task projection; tested/deployed ten-image hashes match with recoverable accepted baseline. |
@@ -32,6 +32,15 @@ after this active package.
 | Similar-Issue Sweep | Both native widths, A/W and COM/EXE/BAT/PIF discovery, machine mismatch, context-only x86 run16, flags/handles/environment/CWD, GUI/new Console propagation, suspension, recursion, early exit and root isolation. |
 
 ## Plan and retained boundary
+
+Owner confirms the S6 I/O correction: the worker reports completion/pause
+facts, NTSRV decides retain/release from its existing records, and the worker
+performs final paint/input return at its safe boundary. NTSRV then orders
+frontend disconnection and waits for both endpoint acknowledgements. No local
+worker admission count may decide closure. This preserves original DOS/WOW
+execution ownership and adds no second relationship/task registry. RPC41
+candidate integration is active; RPC40 r031 remains sealed evidence only,
+not the delivered package or proof of this newly approved correction.
 
 The [T432 plan](../etc/operations/t432-dual-width-native-workers-hooks-plan.md)
 owns the sequential S1–S5 design/build/Hook64/cross-width/final-audit split.
@@ -167,32 +176,36 @@ supersedes its implementation plan; verification restarts from accepted source.
 
 ## Reconstructed Technical Baseline
 
-S6 is active. src/tests/tools match accepted12160c657 exactly; Hook64 and
-WIN64 task projection are not yet implemented on the reconstructed tree.
-The [S6 record](../etc/evidence/m0-t432-s6-single-worker-reconstruction.md)
-records archive/source identity and remaining gates. Historical S3's
-[implementation evidence](../etc/evidence/m0-t432-s3-matching-hook-progress.md)
-records matching Hook32/64 shared-family formal builds, actual same-width
-installer113/114 assertions,64-to-x86 context-only fixture, and real service
-direct execution twice per width with matching Hook and receipts. Both widths
-pass unchanged search and227-check native metadata tests. No original mirror
-body changed. Actual32 and64 CMD legacy search/Run16/DOS parent return and
-visible WINMINE startup pass on the integration-only eleven-image package,
-using the retained short-history fixture; default private-desktop geometry
-fails in both candidate and accepted baseline and remains a non-pass limit.
-S4's [current implementation evidence](../etc/evidence/m0-t432-s4-cross-width-progress.md)
-records actual four-direction/alternating Hook propagation, inherited handles/
-Unicode/CWD/streams, actual exit37 and finite helper failure cleanup. Both-way
-actual mixed CMD-to-DOS return, final path correction and partial rollback
-pass; integrated S5 product gates still require verification. No S3/S4
-P/publication is claimed; the accepted package below remains untouched.
+S6 delivery review is active. Reconstruction started from accepted12160c657;
+superseded dual-worker sources remain archive-only. The final r048-runtime
+ten-image APP0.0.432/RPC41/I/O25 package is published at O:/winnt/system32.
+Only nthook64.dll is AMD64; all other images remain MSVC14.43/SDK22621 x86
+/MT, with the original CCPU40 executor. One ntvwm.exe handles both actual
+native widths. No original MVDM/OpenNT-host body differs from12160c657.
 
-The unchanged T431 S2 P2 nine-file set build/M0-T431/S2/r027-runtime is
-published at O:/winnt/system32: run16.exe, ntsrv.exe, ntcon.exe, ntvdm.exe,
-ntvwm.exe, ntmon.exe, WOW32.DLL, VDMREDIR.DLL and nthook32.dll, plus MIT notice.
-Production commit12160c657 and sealed artifacts/publication manifests preserve
-this baseline independently of future dual-width changes. MSVC14.43/SDK22621,
-x86 /MT CCPU40, APP0.0.427/RPC38/I/O25 are unchanged by this admission.
+Current matching/alternating-width Hook fixtures147/147, native metadata402,
+RPC220, native lifetime1084 and service29 pass. r051 supplies identical-image
+Console17/Window17 and three independent WOW frontiers; its final handoff
+failure remains recorded. Environment contrast identifies leaked version-test
+configuration as the trigger. The runner scopes those values without changing
+guest or product behavior; its six restoration/failure cases pass. r057 then
+passes every affected Control gate, including the previously failed actual
+Window/DOS/parent-return and both real frontend-loss/receipt1067 cases.
+r050 additionally proves all four32/64 Console/Window handoffs; r052/r053/r054
+prove native search/legacy routes, actual cross-width same-worker reentry and
+GUI startup/projection/close. Default private-desktop geometry/environment
+limits remain explicit non-passes, not silently repaired by fixture profiles.
+
+Publication r029 preserves the coherent T431 nine-image/configuration recovery
+set and verifies all ten deployed images plus MIT notice. r059 published
+DOS MEM and actual32/64 CMD output/direct-receipt smoke tests pass; post-test
+deployed hashes still match. An attempted r058 isolated probe rejected
+O:/winnt before launching anything, as its build-only cleanup contract requires;
+publication smoke uses the distinct approved exact-image/creation-time boundary.
+The [S6 record](../etc/evidence/m0-t432-s6-single-worker-reconstruction.md)
+retains all failed/intermediate observations and final evidence selection.
+Review/commit/push remain before S6 delivery closure; T432 awaits owner
+acceptance and no successor T is admitted.
 
 [T431 S2 evidence](../etc/evidence/m0-t431-s2-nthook32-implementation.md)
 retains installer93 assertions, selected NTVWM lifetime1077 checks, shared
@@ -209,6 +222,35 @@ documentation-only transition. Future changes require affected rebuild,
 runtime non-regression and coherent publication before production P delivery.
 
 ## Recent M0 Closures
+
+Latest S6 integration: r044-full passes WOW frontiers, Console17/Window17,
+RPC/GUI/version negatives, strict DIR and modern EDIT return, then fails the
+cooked-return fixture because bare COMMAND/MEM were unresolved from package
+root. Owner confirms normal search semantics: fixture cwd is corrected to
+System32 with bare COMMAND/MEM; existing assertions and product PATH remain.
+Final release-order ACQUIRE rejection passes all29 service fixtures in r045;
+RPC220/native-lifetime1084 checks also pass. r048-runtime is the latest sealed
+ten-image candidate. r049 passes cooked return/rapid relaunch/isolation, then
+its retirement fixture fails bare COMMAND lookup from package root; that cwd
+is now System32. r050 passes both real retirement cases and all four32/64
+Console/Window handoffs using the existing checked80-column observer profile.
+The earlier default private-desktop environment failure remains separately
+retained, not claimed repaired. Current dual-Hook147/147 and metadata402
+assertions pass. r051-full ends with exit1: every preceding group passes,
+but final nested-window-handoff times out with an actual NTVDM illegal
+instruction dialog. r055's controlled RPC40/RPC41 pair both fail at the same
+guest address under the full-run version-test environment; this does not
+prove the cause or pass the handoff gate. Current r052 native chains pass
+ten legacy routes and visible WINMINE startup at each actual width; r053
+passes both same-worker cross-width reentry directions, and r054 actual64
+GUI startup/projection/management close passes. After approval service
+recovery, r056 proves absent and build-only environments pass, while
+version-only reproduces the illegal instruction. The runner now restores
+version-negative variables at that gate's own finally; the actual block's
+absent/present x success/nonzero/exception fixture passes. r057 serial
+Control gates pass on the identical r048 ten images, including final handoff.
+Publication and deployed DOS/32/64 smoke pass; review/commit/push remain.
+S6 delivery closure and T432 owner acceptance are not yet claimed.
 
 | Task | Outcome and evidence |
 | --- | --- |

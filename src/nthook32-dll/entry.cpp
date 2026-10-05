@@ -2,6 +2,10 @@
 #include "detours/detours.h"
 nthook_context nthook_process_context={0};
 extern "C" void WINAPI NthookAnchor(void) {}
+extern "C" void CALLBACK NthookFinishHelper(HWND window,HINSTANCE instance,LPSTR command,INT show)
+{
+    DetourFinishHelperProcess(window,instance,command,show);
+}
 /* Diagnostic fixture reads only local payload state; never a broker API. */
 extern "C" DWORD WINAPI NthookContextFlags(void)
 {
@@ -11,6 +15,7 @@ extern "C" DWORD WINAPI NthookContextFlags(void)
 BOOL WINAPI DllMain(HINSTANCE instance,DWORD reason,LPVOID)
 {
     if(reason==DLL_PROCESS_ATTACH) {
+        if(DetourIsHelperProcess())return TRUE;
         BOOL found=FALSE;
         DisableThreadLibraryCalls(instance);
         if(!DetourRestoreAfterWith() ||

@@ -18,5 +18,6 @@ interface vdm_service
      * worker's command thread is blocked in GetNextNativeCommand. Both calls
      * use the same authenticated identity and service-lock/CV protection. */
     WorkerIoTransition([context_handle_noserialize] connection);
+    WorkerIoCheckpoint([context_handle_noserialize] connection);
     WaitFrontend([context_handle_noserialize] connection);
 }

@@ -418,6 +418,42 @@ int fixture_io_authority(void)
     IO_CHECK(!index);
     IO_CHECK(!OpenNtBaseServiceWorkerIoTransition(workers[0],children[0].dwProcessId,generations[0],WORKER_IO_ACQUIRE));
     IO_CHECK(root->frontend_io_route==routes[0]);
+    IO_CHECK(OpenNtBaseServiceWorkerIoTransition(workers[0],children[0].dwProcessId,
+        generations[0],WORKER_IO_RELEASE_BEGIN)==ERROR_ACCESS_DENIED);
+    {
+        OPENNT_BASE_WIN32RECORD *parent,*child;
+        DWORD decision=99;
+        parent=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*parent));
+        IO_CHECK(parent);parent->request=11;
+        InsertTailList(&workers[0]->win32records,&parent->link);
+        child=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*child));
+        IO_CHECK(child);child->request=12;
+        InsertTailList(&workers[0]->win32records,&child->link);
+        IO_CHECK(OpenNtBaseServiceWorkerIoCheckpoint(workers[0],children[0].dwProcessId,
+            generations[0]+1,WORKER_IO_CHECKPOINT_COMPLETE,12,&decision)==ERROR_ACCESS_DENIED);
+        IO_CHECK(decision==WORKER_IO_KEEP);
+        IO_CHECK(OpenNtBaseServiceWorkerIoCheckpoint(workers[0],children[0].dwProcessId,
+            generations[0],WORKER_IO_CHECKPOINT_COMPLETE,99,&decision)==ERROR_INVALID_STATE);
+        IO_CHECK(!OpenNtBaseServiceWorkerIoCheckpoint(workers[0],children[0].dwProcessId,
+            generations[0],WORKER_IO_CHECKPOINT_COMPLETE,12,&decision));
+        IO_CHECK(decision==WORKER_IO_KEEP && !routes[0]->io_release_ordered);
+        IO_CHECK(OpenNtBaseServiceWorkerIoCheckpoint(workers[0],children[0].dwProcessId,
+            generations[0],WORKER_IO_CHECKPOINT_PAUSE,0,&decision)==ERROR_ACCESS_DENIED);
+        /* Only the last direct completion can receive the service release
+         * instruction. It does not yet notify the frontend to close. */
+        child->completed=TRUE;
+        IO_CHECK(!OpenNtBaseServiceWorkerIoCheckpoint(workers[0],children[0].dwProcessId,
+            generations[0],WORKER_IO_CHECKPOINT_COMPLETE,11,&decision));
+        IO_CHECK(decision==WORKER_IO_RELEASE && routes[0]->io_release_ordered &&
+            !routes[0]->io_releasing && !routes[0]->io_frontend_closed);
+        EnterCriticalSection(&service->lock);
+        index=service_authorize_worker_io(workers[0],children[0].dwProcessId);
+        LeaveCriticalSection(&service->lock);
+        IO_CHECK(index==ERROR_BUSY);
+        IO_CHECK(OpenNtBaseServiceWorkerIoTransition(workers[0],children[0].dwProcessId,
+            generations[0],WORKER_IO_ACQUIRE)==ERROR_BUSY);
+        IO_CHECK(root->frontend_io_route==routes[0] && !routes[0]->io_releasing);
+    }
     IO_CHECK(OpenNtBaseServiceWorkerIoTransition(workers[1],children[1].dwProcessId,generations[1],
         WORKER_IO_ACQUIRE)==ERROR_ACCESS_DENIED);
     IO_CHECK(WaitForSingleObject(workers[0]->worker_io_release,0)==WAIT_TIMEOUT);

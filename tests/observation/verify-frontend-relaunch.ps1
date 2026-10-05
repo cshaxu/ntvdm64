@@ -14,8 +14,13 @@ if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'An 
 $start=[Diagnostics.ProcessStartInfo]::new((Resolve-Path $Observer).Path)
 $start.UseShellExecute=$false;$start.WindowStyle=[Diagnostics.ProcessWindowStyle]::Hidden
 $start.EnvironmentVariables['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'
-$text="run16 command`rmem`rexit`rrun16 cmd /c ver`rrun16 command`rmem`rexit`rexit /b 19`r"
-foreach($argument in @((Join-Path $env:WINDIR 'System32/cmd.exe'),$PackageRoot,$ReportPath,
+. "$PSScriptRoot/isolated_package_cleanup.ps1"
+$binary=Get-PackageBinaryRoot $PackageRoot
+$launcher='"'+(Join-Path $binary 'run16.exe')+'"'
+# Match the owner workflow: guest media are in System32, so bare names are
+# resolved from that cwd. Do not alter production PATH/search semantics.
+$text="$launcher command`rmem`rexit`r$launcher cmd /c ver`r$launcher command`rmem`rexit`rexit /b 19`r"
+foreach($argument in @((Join-Path $env:WINDIR 'System32/cmd.exe'),$binary,$ReportPath,
     '/d','/k','--observe-console-input-text',$text,'--observe-console-line-delay-ms','1600',
     '--observation-timeout-ms','30000')){$start.ArgumentList.Add($argument)}
 $process=[Diagnostics.Process]::Start($start)

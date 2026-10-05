@@ -13,6 +13,11 @@
 #define WORKER_IO_ACQUIRE 1u
 #define WORKER_IO_RELEASE_BEGIN 2u
 #define WORKER_IO_RELEASED 3u
+/* Execution checkpoints are facts, not permission to close an endpoint. */
+#define WORKER_IO_CHECKPOINT_PAUSE 1u
+#define WORKER_IO_CHECKPOINT_COMPLETE 2u
+#define WORKER_IO_KEEP 0u
+#define WORKER_IO_RELEASE 1u
 
 /* Followed by application/command/directory/environment strings. Numeric
  * resource slots are never authority: the authenticated receiver materializes
