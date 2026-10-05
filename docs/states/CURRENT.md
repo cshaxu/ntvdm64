@@ -2,11 +2,11 @@
 
 ## Current Work
 
-**No active M/T/S packet.** T430 remains open between stages.
+**Active: M0 T430 S2** (Ordinary Mode; conditional SoftPC stack-profile recovery).
 Owner approves updating the inherited audit, closing S1 and planning required
 non-WOW completion, with known WOW gaps handed to existing WOW32 candidates.
 
-S1 is closed as research/documentation only; its
+S1 is closed as research/documentation only (ee57f6d64, pushed); its
 [updated conclusions](../etc/evidence/m0-t430-s1-inherited-contract-audit.md)
 record verified identities, current receivers and qualified outstanding gaps.
 No new production repair, runtime proof or deployment is claimed.
@@ -14,9 +14,51 @@ No new production repair, runtime proof or deployment is claimed.
 The [owner-replanned sequence](../etc/operations/t430-non-wow-contract-plan.md)
 replaces the original audit-only S2–S4 plan: S2 CPU stack transitions,
 S3 8042/PIC, S4 redirector copies, S5 directory reset, S6 bounded non-WOW
-evidence completion, S7 integrated closure. S2 is planned, not admitted.
+evidence completion, S7 integrated closure. Owner now authorizes the provenance
+gate: preserve guest defects; original host defects may use verified SoftPC
+repairs only, otherwise TODO; correct demonstrated project-code defects.
 WOW task/shared-view, WRITE first-provider investigation and SOUND limits
 have unique existing proposal receivers; queue order is unchanged.
+
+## Active Packet
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T430 S2; Ordinary Mode. |
+| Candidate Proposal | [Guest-contract recovery](../proposals/proposal-ccpu40-v86-guest-contract-audit-001.md). |
+| Candidate Proposal | [Guest-contract recovery](../proposals/proposal-ccpu40-v86-guest-contract-audit-001.md). |
+| Admission And Approval | Owner directs retaining original guest defects, adopting existing SoftPC fixes for original MVDM/OpenNT defects only, deferring originals without such fixes, and designing/executing project-code repairs. Sequential S2 starts after delivered S1; no simultaneous S3. |
+| Objective | Recover the already evidenced SoftPC CALL/outer RETF/outer IRET stack-width correction as a complete finite CCPU40 profile, with actual-entrypoint positive/fault proof. |
+| Non-goals | Guest changes; novel fixes for original host defects; CPU30; global CPU audit; unrelated sibling changes; WOW implementation; helpers/protocol changes. |
+| Reference Baseline | S1 ee57f6d64 and accepted production5b9931b8e/T429 eight-file hashes; comparative SoftPC ce5f53515d3e6ce0a64e66a5465aa7a8fbca00f7 contains all3 instruction fixes. |
+| Files And ABI Surface | CURRENT, source policy, indexed evidence/plan, proposal scope; later source-profile changes limited to ccpu386 call/ret/iret, recovery register and focused tests/build tools. Existing ABI unchanged. |
+| Applicable Rules | AGENTS reading set, source policy recovery ladder, owner provenance gate, CPU profile completion, x86 /MT, original guest immutability, side-session preservation. |
+| Verification | Pin/compare the sibling fix and original/current bodies; actual CALL gate/outer RETF/IRET across operand16/32 and new SS16/32, high ESP, frames/adjustment and fault-before-commit; affected x86 build and every-P runtime/publication gates before production delivery. Documentation-only P uses governance/links/diff. |
+| Expected Markers | Verified pre-existing SoftPC fix, bounded minimal semantic diff, complete positive/negative profile rather than helper-only proof; no production pass from static inspection. |
+| Asset Needs | Read-only pinned OpenNT/SoftPC sources and existing current formal cache; fresh intermediates below build/M0-T430/S2. |
+| Reporting Requirements | Separate source confirmation, implementation, focused instruction proof, guest regression and coherent publication. Track original defects without SoftPC fixes as deferred non-pass, not silently fixed. |
+| Stop Conditions | No usable matching SoftPC fix; wider CPU policy or guest change; unexplained failure; required new owner domain. Record/resolve before expansion. |
+| Exit Criteria | Complete profile proof, source provenance/diff registration, production build/regression/publication, review/commit/push. Current planning P does not close S2. |
+| Original Owner Request | Preserve original guest defects; original MVDM/OpenNT defects use SoftPC fixes if present, otherwise TODO and no repair; project-code defects receive correct designed fixes. |
+| Similar-Issue Sweep | Independent operand versus SS address size; existing VM-return/interrupt set_current_SP paths; original defects versus project hooks even inside mirrors. |
+
+[S2 source gate](../etc/evidence/m0-t430-s2-softpc-repair-gate.md) confirms
+available comparative fixes only. Production implementation/test gates remain
+open; this initial P changes policy/planning, not executables.
+
+## S1 Closure Record
+
+Research-only closure ee57f6d64 is pushed. The
+[S1 evidence](../etc/evidence/m0-t430-s1-inherited-contract-audit.md) reconciles
+all selected inherited input changes and assigns bounded follow-ups. It does
+not certify universal runtime equivalence or claim production fixes.
+
+## S1 Closure Record
+
+Research-only closure ee57f6d64 is pushed. The
+[S1 evidence](../etc/evidence/m0-t430-s1-inherited-contract-audit.md) reconciles
+all selected inherited input changes and assigns bounded follow-ups. It does
+not certify universal runtime equivalence or claim production fixes.
 
 ## Current Technical Baseline
 

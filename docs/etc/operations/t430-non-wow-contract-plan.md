@@ -14,6 +14,12 @@ The accepted T429 eight-file package remains unchanged.
 
 ## Sequential stages
 
+Owner correction on 2026-10-04 restricts every stage: original guest defects
+remain untouched; original host defects use only an existing matching SoftPC
+repair, otherwise TODO and deferral; attributable project adaptation defects
+receive designed, verified fixes. Provenance overrides file location. Unknown
+risks first need proof, not a novel original repair to satisfy a checklist.
+
 | Stage | Bounded deliverable | Required exit evidence |
 | --- | --- | --- |
 | S1 | Current/inherited reconciliation, source dispositions and unique gap owners. | Identity checks, current receiver ledger, qualified findings, non-WOW plan and WOW handoff; documentation/tool verification, commit/push. Research closure only. |
@@ -27,6 +33,14 @@ The accepted T429 eight-file package remains unchanged.
 S2/S3 concern registered host-source defects. S4–S6 are investigate-and-complete
 stages, not claims that all suspected paths are broken. Retained limitations
 keep their reproducer and reason; never weaken an assertion to pass.
+
+The [source gate](../evidence/m0-t430-s2-softpc-repair-gate.md) confirms the
+referenced SoftPC commit contains the S2 stack-width and S3 controller fixes;
+integration and current-product proof remain open. S4 separates original
+CX0/other inherited defects from project Unicode/OEM and staging adaptations;
+without a matching SoftPC repair, originals are TODO, not fixed incidentally.
+S5 may restore missing project service binding but not invent a correction
+to an original fallback algorithm. S6 supplements proof under the same gate.
 
 S2/S3's comparative reference is SoftPC commit
 ce5f53515d3e6ce0a64e66a5465aa7a8fbca00f7. It is evidence, not a source/build/

@@ -24,6 +24,24 @@ triggers it; establish causality before applying this disposition.
 
 ### Canonical source ownership
 
+Owner clarification dated 2026-10-04 distinguishes defect cause, not location:
+
+- Defects in unchanged original guest media remain recorded and unmodified.
+- Inherited original MVDM/OpenNT host defects may adopt only an already
+  existing matching SoftPC correction, with the same semantic fix/minimal
+  diff, provenance and affected-profile tests. Without one, retain TODO for
+  later research and do not invent a correction now.
+- Project-owned code and added-adaptation defects require designed, verified
+  corrections. A project hook inside a mirror is still project-added; moving
+  an inherited algorithm outside a mirror does not authorize rewriting it.
+- Unknown cause or missing evidence requires bounded investigation, not a
+  presumed repair or original-defect exemption.
+
+This does not authorize bulk SoftPC imports, a runtime/build dependency,
+guest modifications or unverified publication. Restoring a missing project
+host binding is distinct from inventing a fix to an original algorithm; it
+still follows the source-first recovery ladder below.
+
 The mirror-file rule prohibits project-invented files, not recovery of files
 that exist in original OpenNT. An audited original file may be added under
 `mvdm` or `opennt-host` at its original relative path as byte-exact source,
