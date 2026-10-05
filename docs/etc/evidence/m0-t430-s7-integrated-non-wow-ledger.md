@@ -74,5 +74,6 @@ the owner's original/project split and each named WOW receiver. No original
 defect is disguised as repaired, and no unexecuted interface is counted as
 pass. Documentation governance, relative links and diff checks are closure
 gates. Other-session proposal/TODO modifications are preserved and excluded.
-S1–S7 implementation/proof/disposition is complete; T430 remains open for
-the owner's final acceptance, with no next task admitted automatically.
+S1–S7 implementation/proof/disposition is complete. Owner acceptance on
+2026-10-05 closes T430; see the [closure](../../history/m0-t430-non-wow-contract-closure.md).
+Its next-task admission is recorded separately in CURRENT, not inferred from S7.

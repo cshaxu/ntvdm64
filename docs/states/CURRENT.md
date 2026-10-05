@@ -2,107 +2,32 @@
 
 ## Current Work
 
-**No active M/T/S packet.** T430 remains open for final owner acceptance.
-S1–S7's selected implementation, proof and original-limit dispositions are
-complete; [S7 final ledger](../etc/evidence/m0-t430-s7-integrated-non-wow-ledger.md)
-records the final product/handoff gates. No next T or additional S is admitted.
-The published eight-file S6 set remains the usable runtime baseline.
-The [non-WOW sequence](../etc/operations/t430-non-wow-contract-plan.md) retains
-the owner provenance gate: preserve original guest defects; adopt only verified
-existing SoftPC fixes for original host defects; otherwise defer originals;
-correct demonstrated project-code defects. Known WOW gaps retain their
-existing proposal receivers and queue order is unchanged.
+**Active: M0 T431 S1** (Ordinary Mode).
+Owner accepted T430 and requested closure, admission and execution of the next
+queued task on 2026-10-05. T431 admits the controlled native launch compatibility
+hook package, beginning with a bounded source/API/bitness and contract audit.
+No production hook, source root or cross-width runtime capability is yet delivered.
 
-## S7 Closure Record
+## Active Packet
 
-[S7 evidence](../etc/evidence/m0-t430-s7-integrated-non-wow-ledger.md)
-reconciles all selected dispositions and passes Console17/Window17, three
-independent retained WOW frontiers, and native/nested Console/nested Window
-actual input, parent recovery and exit23. The x86 dependency build has no
-new production inputs. All eight published hashes match the tested S6 set;
-no diagnostic profile is published. Four changed mirrors retain their pinned
-source/registered semantic-diff accounting. Governance/links/diff review and
-commit/push complete this S; owner T acceptance is still pending.
-
-## S6 Closure Record
-
-[S6 evidence](../etc/evidence/m0-t430-s6-memory-transition-boundaries.md)
-records delivered lease ownership correction526f73c1c and test supplement
-d8a05a3bd. Six actual guest cases pass zero completion, including16/32/CODE32
-interrupt/fault/IRQ returns, task-exit capacity, EMS AH56/BOP68 and XMS
-failure/data. Actual CCPU/PIC sentinel and4096 concurrent notification rounds
-pass. Controlled IDT/lease/provider proof remains explicitly layer-qualified.
-No additional original/production change; current publication matches all
-eight S6 hashes. Other-session proposal/TODO changes remain excluded.
-
-## S5 Closure Record
-
-The [S5 evidence](../etc/evidence/m0-t430-s5-dem-directory-reset.md) proves
-the original reset body is unchanged. Fresh actual-provider filesystem tests
-pass47 assertions; ordinary guest FCB first/next/end/missing-name witness and
-outer COMMAND completion pass. Deleted remembered name remains the original
-failure, not repaired or counted as mutation tolerance; missing indexed
-service/performance capability is TODO. No production inputs changed.
-The S4 published package remains unchanged; all eight hashes match.
-Governance/links/diff review pass; a143894f1 is committed/pushed. Other-session
-proposal/TODO edits remain preserved and excluded. S6/S7 and final owner
-acceptance remain.
-
-## S4 Closure Record
-
-The candidate builds x86 /MT CCPU40. Actual staging/session/lease tests pass24
-assertions; OEM/CD-name tests pass15; original VrGetUserName/CDNames entrypoints
-pass10 with controlled NetAPI inputs and verified link-map ownership. Original
-CX0/BX0 behavior remains unchanged. Serial Console17/Window17 and independent
-WOW frontiers pass against the S2 package. Three real DOS async-read/write and
-NetAPI witnesses pass, including callback/data, subsequent MEM and exit.
-The coherent eight-file candidate is published to O:/winnt/system32 with
-all hashes matching the tested manifest; S2 is retained in recovery.
-Published Console/Window MEM/native-zero smoke and all three preceding
-native/nested input/parent-return/exit23 frontiers pass. Final provenance,
-diff and documentation review passes; fb5843dc6 is committed/pushed.
-T430 remains open; S5 is now admitted independently.
-Unrelated proposal/TODO edits remain excluded.
-
-## S3 Closure Record
-
-[S3 proof](../etc/evidence/m0-t430-s3-controller-pic-boundary.md) establishes
-that the matching sibling IRQ repair is excluded under the selected NTVDM
-profile; the C0 one-line assignment alone cannot repair its original response
-delivery. No production change is adopted. The actual production controller/
-PIC fixture passes18 assertions twice, explicitly reproducing the retained
-C0 limitation and proving masked-read/INTACK/EOI/queued-byte ownership with
-controlled host callbacks, not a real BIOS ISR or timer/concurrency claim.
-Tests and fixture build selection are delivered; original response debt is
-retained in TODO. All eight published S2 hashes remain unchanged. S4–S7 and
-final owner acceptance remain outstanding.
-
-## S2 Closure Record
-
-[S2 evidence](../etc/evidence/m0-t430-s2-softpc-repair-gate.md) records
-MVDM-HOST-DIV-327: the exact existing SoftPC correction for CALL gate, outer
-RETF and outer IRET, using original set_current_SP after loading new SS.
-No new CPU helper, guest patch, protocol or scheduling policy is introduced.
-
-The pre-repair 24-case actual-entrypoint fixture fails exactly six mismatched
-operand/SS-width cases; the repaired complete 36-case profile passes. Original
-CCPU high-linear, reset/debug/fault and thread-lifecycle fixtures pass.
-Formal x86 build, Console17/Window17, three independent WOW frontiers,
-native/nested Console/nested Window input/parent-return/exit23, coherent
-eight-file publication and actual published Console/Window smoke all pass.
-Fault observation is not exhaustive IDT or whole-CPU equivalence proof.
-
-Source provenance, test-only fail-closed dependency maintenance and remaining
-acceptance boundaries are retained in the evidence. Physical RDP behavior and
-new WOW capability are not claimed. S3 is the bounded 8042/PIC follow-up;
-T430 final closure is not approved or claimed.
-
-## S1 Closure Record
-
-Research-only closure ee57f6d64 is pushed. The
-[S1 evidence](../etc/evidence/m0-t430-s1-inherited-contract-audit.md) reconciles
-the selected inherited inputs and records qualified gaps and receivers.
-It does not certify universal runtime equivalence or production fixes.
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T431 S1; Ordinary Mode. |
+| Admission And Approval | Owner: “收口准入下一个t任务执行”. Close accepted T430 and admit the earliest queued native-launch hook candidate; execute its audit before implementation. |
+| Candidate Proposal | [Controlled native launch hooks](../proposals/proposal-native-launch-hook-001.md). |
+| Objective | Source-backed classifier, installation, launch-flag, bitness and ownership contracts with reproducible verification cases and a finite no-helper feasibility decision. |
+| Non-goals | No production injection, source-root creation, guest/mirror changes, global hooks, Job observation, process-tree control, new helper or task registry in S1. |
+| Reference Baseline | T430 accepted at e60e29844; [closure](../history/m0-t430-non-wow-contract-closure.md). Published coherent S6/r007-runtime; APP0.0.427/RPC38/I/O25. |
+| Files And ABI Surface | Audit run16 image classification/search/native launch, NTVWM suspended bind/resume, existing common protocol attachments; documentation/test plan only in S1. Future hook-only ABI/toolchain exceptions require an explicit finite admission record before production changes. |
+| Applicable Rules | Full AGENTS authorities, source policy/recovery ladder, no-helper/non-invasive boundary, one active packet, preserved other-session edits and build-only generated artifacts. |
+| Verification | Source/caller/ownership review; official API and exact installation-source review; classifier and unsupported-flag case ledger; governance, relative links, actual diff and Git delivery checks. No production-code runtime gate is claimed by this audit. |
+| Expected Markers | One reusable classifier, one installation mechanism or specific proved blocker; supported/passthrough/refusal cases; four width directions; no invented guest process HANDLE or altered launcher syntax. |
+| Asset Needs | Current source and accepted T430 evidence; official Windows contracts and provenance-pinned installation reference. No new guest media. Audit outputs under build/M0-T431/S1/r001-source. |
+| Reporting Requirements | Separate source conclusions, feasibility and actual runtime results; record failed earlier recovery rungs and precise remaining engineering gates. |
+| Stop Conditions | No-helper cross-width mechanism unavailable, new host mutation/security bypass, missing source/license authority, or material changed ownership requires reporting/re-admission, not a helper workaround. |
+| Exit Criteria | Reviewed finite contract/capability ledger, provenance and source-first decision, supported/unsupported boundaries and reproducible cases; governance/link/diff checks and commit/push. No runtime completion claim. |
+| Original Owner Request | “收口准入下一个t任务执行”. |
+| Similar-Issue Sweep | ANSI/Unicode creation, null application/quoting/search, redirected handles/environment/CWD, suspension/debug/token boundaries, GUI/new Console propagation, recursion and early-child exit. |
 
 ## Current Technical Baseline
 
@@ -125,16 +50,15 @@ No helper, CPU30, new wire or unrelated sibling repair is included.
 
 | Task | Outcome and evidence |
 | --- | --- |
+| T430 | Owner-accepted non-WOW guest contract repairs/proofs; [closure](../history/m0-t430-non-wow-contract-closure.md). |
 | T429 | Owner-accepted performance and shared worker I/O; [closure](../history/m0-t429-performance-worker-io-closure.md). |
 | T428 | Owner-accepted worker interface unification; [closure](../history/m0-t428-worker-interface-unification-closure.md). |
 | T427 | Owner-accepted system-root/search isolation; [closure](../history/m0-t427-system-root-search-isolation-closure.md). |
 | T426 | Owner-accepted monitor tree; [closure](../history/m0-t426-console-root-monitor-tree-closure.md). |
 
+
 ## Recent Governance
 
-S2 removes the repaired CPU item from unplanned TODO; S3 replaces the proposed
-8042 repair with the verified selected-branch original response limitation.
-Other original defects retain their bounded future work or deferral. Detailed proof lives in
-indexed S2 evidence, not a second task register. Unrelated side-session
-proposal edits remain preserved and excluded. Governance, links, diff review,
-commit and push form the sequential deliveries; T430 remains open.
+T430 is owner-closed; original guest/original-host limits and WOW handoffs remain
+explicit. T431 S1 is the sole active packet. Other-session proposal/TODO changes
+remain preserved and excluded from this delivery.

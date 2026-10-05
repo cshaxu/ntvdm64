@@ -13,8 +13,9 @@ S4 is delivered as fb5843dc6. S5 a143894f1 proves ordinary FCB/fallback
 behavior and retains original deleted-name/missing indexed-service limits.
 S6 is delivered as526f73c1c/d8a05a3bd. S7's
 [integrated ledger](../evidence/m0-t430-s7-integrated-non-wow-ledger.md)
-completes the selected sequence. T430 stays open for final owner acceptance;
-no further S or next T is admitted in this intermission.
+completes the selected sequence. Owner acceptance on 2026-10-05 closes T430;
+the [closure](../../history/m0-t430-non-wow-contract-closure.md) preserves the
+bounded results and original/WOW limitations. CURRENT admits the next task separately.
 
 [S1 conclusions](../evidence/m0-t430-s1-inherited-contract-audit.md) freeze
 inputs and distinguish source risk, missing evidence and original limitations.
