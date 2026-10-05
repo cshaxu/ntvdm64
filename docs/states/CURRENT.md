@@ -29,6 +29,16 @@ No production hook, source root or cross-width runtime capability is yet deliver
 | Original Owner Request | “收口准入下一个t任务执行”. |
 | Similar-Issue Sweep | ANSI/Unicode creation, null application/quoting/search, redirected handles/environment/CWD, suspension/debug/token boundaries, GUI/new Console propagation, recursion and early-child exit. |
 
+## S1 Progress
+
+[Audit checkpoint](../etc/evidence/m0-t431-s1-native-launch-hook-audit.md) pins
+actual32/64 CMD imports and existing classifier/NTVWM creation boundaries.
+The [plan](../etc/operations/t431-native-launch-hook-plan.md) records exact
+future cases. No production changes or deployment occurred. Unmodified Detours
+cross-width installation is rejected because it requires a helper; this does
+not prove every no-helper design impossible. S1 remains open pending installer,
+actual CMD route and authenticated initialization/inheritance contracts.
+
 ## Current Technical Baseline
 
 The S6 coherent eight-file set build/M0-T430/S6/r007-runtime is published
