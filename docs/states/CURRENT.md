@@ -2,35 +2,21 @@
 
 ## Current Work
 
-**Active: M0 T430 S1** (Ordinary Mode; bounded audit, no production repair).
-Owner admits the CCPU40/V86 guest-contract audit on 2026-10-04 and requests
-reuse of the other session's build-directory research. T429 is owner-closed;
-the accepted production package remains unchanged.
+**No active M/T/S packet.** T430 remains open between stages.
+Owner approves updating the inherited audit, closing S1 and planning required
+non-WOW completion, with known WOW gaps handed to existing WOW32 candidates.
 
-## Active Packet
+S1 is closed as research/documentation only; its
+[updated conclusions](../etc/evidence/m0-t430-s1-inherited-contract-audit.md)
+record verified identities, current receivers and qualified outstanding gaps.
+No new production repair, runtime proof or deployment is claimed.
 
-| Field | Required record |
-| --- | --- |
-| Identifier Mode | M0 T430 S1; Ordinary Mode. |
-| Admission And Approval | Owner: "好，准入CCPU40/V86 guest 契约一致性审计，你找一下，build目录下应该已有另外会话做的审计结果了，你研究下。" |
-| Candidate Proposal | [Bounded guest-contract audit](../proposals/proposal-ccpu40-v86-guest-contract-audit-001.md). |
-| Objective | Freeze the selected current x86 contract boundary and classify inherited source/build/media/runtime evidence; connect reached guest edges to current receivers and explicit unreached/profile dispositions without a new global census. |
-| Non-goals | No production or guest repair, CPU30 selection, new CPU correctness proof, global BFS, helper, protocol, scheduler or speculative WRITE attribution. |
-| Reference Baseline | Production5b9931b8e, owner closure930a0f2d8; T429 S8 r008 runtime/r011 manifest/r013 smoke, x86 MSVC14.43/SDK22621 /MT CCPU40 APP0.0.427/RPC38/I/O25. Old research snapshot99c458b4b and September30 updates are historical until input identity is verified. |
-| Files And ABI Surface | CURRENT/QUEUE, indexed audit ledger and build/M0-T430/S1 output; selected original/adapter/source/build/media files read-only. ABI unchanged. |
-| Applicable Rules | AGENTS reading set, source policy, finite proposal scope, provenance/identity before reuse, original-owner recovery ladder, side-session preservation and build-only output. |
-| Verification | Check prior report schemas/counts/IDs, current source hashes versus saved census, current actual build selection, media and artifact identity, existing test provenance and evidence confidence; governance/links/diff. No product tests in initial inventory review. |
-| Expected Markers | G01–G17 and H/K/G/O/W IDs preserved; source candidate, selected implementation, runtime witness and semantic equivalence distinguished; changed/missing inputs and bounded follow-up explicit. |
-| Asset Needs | build/research-ccpu40-v86-guest-contract-20260929; existing T420/T422/T425/T427/T428/T429 evidence and validated formal cache. Fresh audit products only under build/M0-T430/S1. |
-| Reporting Requirements | Identify reusable, stale and unproved conclusions; report changed-source/build/media counts and concrete owner handoffs; do not equate static coverage with runtime equivalence. |
-| Stop Conditions | Required cross-package repair, changed guest media, new tracing in mirrors, revived CPU30 or enlarged instruction/global inventory needs separate review. |
-| Exit Criteria | Bounded source/profile/receiver ledger reconciled against current selected inputs; reached edges have receiver, remaining candidates have honest finite dispositions; evidence/governance review and commit/push. S2 requires sequential admission after S1 closure. |
-| Original Owner Request | Admit the queued contract audit and study existing other-session results in build. |
-| Similar-Issue Sweep | Stale component names/paths, graph versus binary identity, macro versus decoded runtime evidence, original guest limitations, conditional dispatch and startup-environment attribution. |
-
-[S1 inherited-evidence review](../etc/evidence/m0-t430-s1-inherited-contract-audit.md)
-records progress, not closure. Later S2–S4 retain the proposal's bounded
-binding review, workload evidence and original-owner handoff sequence.
+The [owner-replanned sequence](../etc/operations/t430-non-wow-contract-plan.md)
+replaces the original audit-only S2–S4 plan: S2 CPU stack transitions,
+S3 8042/PIC, S4 redirector copies, S5 directory reset, S6 bounded non-WOW
+evidence completion, S7 integrated closure. S2 is planned, not admitted.
+WOW task/shared-view, WRITE first-provider investigation and SOUND limits
+have unique existing proposal receivers; queue order is unchanged.
 
 ## Current Technical Baseline
 
@@ -65,7 +51,9 @@ and recorded limits remain; host scrollback is not promised.
 
 ## Recent Governance
 
-Owner admits the former queue head as T430 S1; it is removed from the
-unnumbered queue and later relative order is retained. Admission and initial
-evidence review are documentation-only. Unrelated proposal edits remain
-untouched and excluded. Production repairs are not admitted by this audit.
+S1 closes the bounded audit and records the owner's non-WOW scope revision.
+Verifier r003 passes source/group/media/publication checks and all82 drift
+records have existing current boundary receivers, not asserted equivalence.
+The accepted production package is unchanged. Documentation gates and
+review precede commit/push; unrelated proposal edits are preserved/excluded.
+T430 final closure and subsequent S implementation are not claimed.

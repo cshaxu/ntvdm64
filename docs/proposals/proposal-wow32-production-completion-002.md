@@ -1,5 +1,18 @@
 # WOW32 production completion program after initial WINMINE milestone
 
+## Guest-contract audit handoff
+
+The owner assigns known WOW-side contract gaps to this program's existing
+candidate packages, while non-WOW completion proceeds separately. The
+[current handoff ledger](../etc/operations/t430-non-wow-contract-plan.md#known-wow-handoff)
+is a required input at recipient admission: W01 owns dispatch/task/callback
+return proof, W02 shared-view proof, W03 the initial WRITE first-provider
+investigation (not a presumed heap fix), W05 a resource discrepancy only if
+proved, and W16 the original SOUND ordinal limitation. Each recipient's
+admitted S checklist must carry its normal/failure/cleanup evidence obligation.
+No unfinished WOW implementation is absorbed into non-WOW audit closure or
+W20 acceptance, and no generic OOM message proves its failing owner.
+
 ## Objective and admission
 
 Owner direction dated 2026-09-28 replaces the single 20-S candidate with

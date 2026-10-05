@@ -49,6 +49,51 @@ $sources = @(foreach ($row in (Import-Csv (Join-Path $research 'current-formal-s
 })
 $sources | Export-Csv -NoTypeInformation -Encoding UTF8 (Join-Path $out 'source-identity.csv')
 
+# Boundary successors, not a declaration of file/body or behavioral equivalence.
+# History establishes the rename; deleted launch/control implementations have
+# explicit current owners rather than a fabricated basename match.
+$successors = @{
+    'src/ntsrv-exe/transport/console_membership.c' = 'src/ntsrv-exe/opennt/source/frontend_registry.c'
+    'src/worker-base/console_client.c' = 'src/common/console/client.c'
+    'src/run16-exe/console_probe.c' = 'src/ntsrv-exe/opennt/source/frontend_registry.c'
+    'src/ntkvm-exe/bootstrap_client.c' = 'src/ntsrv-exe/transport/worker_spawn.c'
+    'src/ntkvm-exe/bootstrap.h' = 'src/common/protocol/frontend_protocol.h'
+    'src/ntkvm-exe/native_request_client.c' = 'src/common/rpc/native_command.c'
+    'src/ntkvm-exe/native_request_client.h' = 'src/common/rpc/native_command.h'
+    'src/ntkvm-exe/native_request_protocol.h' = 'src/common/protocol/service.idl'
+    'src/ntkvm-exe/native_console_frontend.c' = 'src/ntcon-exe/console_frontend.c'
+    'src/ntkvm-exe/native_console_frontend.h' = 'src/ntcon-exe/console_frontend.h'
+    'src/ntcon-exe/launch_packet.c' = 'src/common/codec/native_launch.c'
+    'src/interface/native_launch.h' = 'src/common/codec/native_launch.h'
+    'src/ntcon-exe/launch.c' = 'src/ntvwm-exe/execution.c'
+    'src/ntcon-exe/io.h' = 'src/ntvwm-exe/presentation.h'
+    'src/ntcon-exe/channel_io.c' = 'src/common/console/client.c'
+}
+$reconciliation = @(foreach ($row in $sources) {
+    if ($row.State -eq 'same') { continue }
+    $target = $row.Path
+    $kind = 'changed-input-requires-owner-evidence'
+    if ($row.State -eq 'missing') {
+        $kind = 'boundary-successor-not-file-equivalence'
+        if ($successors.ContainsKey($target)) { $target = $successors[$target] }
+        elseif ($target.StartsWith('src/interface/')) {
+            $target = $target.Replace('src/interface/', 'src/common/protocol/')
+        } elseif ($target.StartsWith('src/ntkvm-exe/')) {
+            $target = $target.Replace('src/ntkvm-exe/', 'src/ntcon-exe/')
+        } elseif ($target.StartsWith('src/ntcon-exe/')) {
+            $target = $target.Replace('src/ntcon-exe/', 'src/ntvwm-exe/')
+        } else { throw "Unclassified inherited path: $target" }
+    }
+    $file = Join-Path $repo $target
+    if (-not (Test-Path -LiteralPath $file -PathType Leaf)) {
+        throw "Missing reviewed boundary successor: $target"
+    }
+    [pscustomobject]@{ OldPath=$row.Path; OldState=$row.State;
+        CurrentReceiver=$target; CurrentHash=(Get-FileHash -LiteralPath $file).Hash;
+        Disposition=$kind; RuntimeEquivalenceProved=$false }
+})
+$reconciliation | Export-Csv -NoTypeInformation -Encoding UTF8 (Join-Path $out 'boundary-reconciliation.csv')
+
 $media = @(foreach ($row in (Import-Csv (Join-Path $research 'guest-binary-provenance.csv'))) {
     $name = [IO.Path]::GetFileName($row.deployed_file)
     foreach ($path in (@($row.deployed_file, (Join-Path 'O:/winnt/system32' $name)) | Select-Object -Unique)) {
