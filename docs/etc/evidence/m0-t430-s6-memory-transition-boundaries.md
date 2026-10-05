@@ -2,7 +2,8 @@
 
 Sequential admission after S5 a143894f1. Reconcile current selected inputs
 with existing non-WOW DPMI/XMS/EMS/IRQ/lease proof, then supplement only named
-unproved boundaries. This note admits no new runtime result or production fix.
+unproved boundaries. The lease correction is delivered as526f73c1c; the
+subsequent boundary supplement changes tests only. S6 closure is recorded below.
 
 The owner provenance gate remains controlling: immutable guest defects stay;
 original host defects adopt only an existing matching SoftPC repair; otherwise
@@ -23,7 +24,7 @@ existing queued owners.
 - IRQ sentinel/concurrent notification: actual selected notification adapter;
   no relocation of original scheduler or fabricated guest interrupt success.
 
-## Project lease isolation correction (in progress)
+## Project lease isolation correction — delivered526f73c1c
 
 `src/ntvdm-exe/session/guest_memory_lease.c` is project-owned adaptation,
 not an original OpenNT/MVDM algorithm. Its release checked active/epoch but
@@ -105,7 +106,69 @@ check changes production behavior; no API layout, mirror, original allocator,
 worker lifecycle or shared transport changes. Other-session proposal/TODO
 edits remain excluded.
 
-S6 remains active: selected EMS AH56/BOP68, XMS failure and IRQ concurrency
-proof reconciliation, complete product/publication gates and review remain.
-S4's published eight-file set is unchanged. S7 and final owner acceptance
-remain outside this active S.
+## Selected boundary supplement and closure
+
+The original owner remains in place. No production file changes after the
+lease delivery. Current c_main's DIV214 atomic notification adapter and
+DIV221 negative INTACK guard are project additions, not newly discovered
+original defects. Original PIC/CCPU, DOSX, HIMEM, EMS driver and allocator
+algorithms are not rewritten. No new SoftPC import is warranted by this proof.
+
+| Obligation | Current proof and actual boundary |
+| --- | --- |
+| Invalid DOSX IDT/no partial mutation | Fresh PM-entry extraction65,538 controlled cases and actual descriptor fixture above; not a real invalid-media DOSX launch. Original DOSX is immutable. |
+| PM-stack/exception return | Actual original CCPU stack36 cases, descriptor/debug/task-switch fixture, plus fresh ordinary guest16/32 and CODE32 return witnesses. Each checks SP, flags/registers, a twice-nested divide handler and two actual timer IRQs. |
+| EMS AH56/BOP68 | Authored ems_call_return_probe.asm calls actual original INT67 driver: map page1, far-call, RETF through EmmRet/BOP68, restore page0; exact SP, caller/target cell data, callback count and free. Invalid subfunction8F and handle83 leave map/SP/call count unchanged. Not a claim of nested AH56 reentrancy or atomic late-map failure. |
+| XMS failure/data | Original HIMEM guest with FORCED_RELOCATION proves actual move, failed huge growthA0 preserving size/data, shrink, locked resizeAB, double unlockAA, double freeA2, oversized allocationA0, restored capacity and A20 nesting. UMB_NO_FREE_BLOCKS is a retained original unavailable outcome, not UMB allocation success. Controlled copy-cancel/provider failures retain r009 proof. |
+| Lease teardown | P1's45 assertions and unchanged session fixture; forged/cross-context/range/provider failure, rollback, slot exhaustion, epoch and teardown. No unsupported concurrent lease API claim. |
+| IRQ sentinel | Actual linked PIC intack returns-1; actual CCPU receives stale HW notification, executes STI and reaches BEEF instead of dispatching INTFFFF. Same fixture retains HALT/reset and exception/debug tests. |
+| Concurrent notification | Extract current complete atomic functions and actual local masks verbatim. Two real Windows producers raise distinct bits for4096 rounds;8192 raises, selective consumption preserves the other bit; timer clear preserves other notifications. This is adapter synchronization proof, not a guest IRQ throughput/SLA measurement. |
+
+Reproduce notification with
+`tests/observation/verify-ccpu-notification.ps1 -BuildRoot build/M0-T430/S6/<fresh>`.
+`r018-notification-final` passes and records source/extraction/fixture/EXE hashes.
+`r016-notification` passed the earlier fixture revision. Actual CPU/PIC
+`r022-cpu-replay` passes and retains source/EXE/linked-provider identities.
+The first new PIC run crashed because the fixture omitted InitializeIcaLock;
+the worker's original initialization was not missing. Only test setup changed.
+
+Reproduce selected guest cases with
+`tests/observation/verify-memory-transition-guest.ps1 -RuntimeRoot
+build/M0-T430/S6/r007-runtime -Observer
+build/M0-T427/S4/r049/console-startup-observer.exe -BuildRoot
+build/M0-T430/S6/<fresh> -Case <case>`.
+Cases are interrupt16, interrupt32, code32, task-cleanup, ems-call and
+xms-failure. They use a fresh build-only package clone, exact process-owned
+cleanup, serialized BaseSrv use and Z: removed afterward. Guest probes are
+NASM-authored tests, not altered original media. MSVC x86/MT builds the EMS
+test-only PIF builder; all intermediates remain below the run root.
+Each run requires actual output markers and real zero completion, not only
+observer exit. DOSX stays
+C5AF29A29ABF167B243DAABF877459E8278B8C9A339BF8E1E2576EAD5F6CEEFF.
+
+Retained unsuccessful attempts are not waived passes:
+r017-ems-call printed the complete success marker but its old CloseOnExit0
+profile correctly stayed Inactive and timed out. The builder now accepts an
+explicit test-only --close-on-exit, leaving its old default unchanged.
+r019-dpmi16 passed all guest assertions but bare outer COMMAND EXIT returned
+its established1; the verifier refused it. The revised direct /c route
+propagates actual probe completion instead of weakening the zero assertion.
+r021-task-cleanup failed NASM before launch due to a scalar/null splat;
+the definitions are now always an array. Fresh final runs below supersede
+these setup attempts, not retry-to-success product failures.
+
+Final source-identical `r024-final-<case>` passes all six cases with actual
+zero exits and expected markers. Runtime manifests, original media, source,
+observer and guest hashes are retained; task-cleanup also hashes both freshly
+assembled children. Product sources have no diff from526f73c1c. All eight
+O:/winnt/system32 hashes match r007, Z: is absent after cleanup, and
+documentation governance, relative links and diff checks pass. Test review
+confirms no changed production algorithm, masked assertion or original-media
+mutation. Other-session proposal/TODO changes remain excluded.
+
+Source review leaves original guest limitations, external-device prerequisites
+and unknown unselected boundaries explicitly unproved; no new repair owner is
+invented. S6's selected obligations are proved at their stated layer or retain
+their original disposition. Current eight-file publication is the S6 P1 set,
+not S4; product runtime inputs are unchanged by this supplement. S7 owns the
+integrated final ledger/gates; T430 still requires owner acceptance.

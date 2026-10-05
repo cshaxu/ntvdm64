@@ -17,6 +17,9 @@ extern unsigned short c_getAX(void);
 extern void c_sas_stores(uint32_t, unsigned char *, uint32_t);
 extern unsigned char *c_GetPhyAdd(uint32_t);
 extern int debug_exception_pending;
+extern void ica0_init(void), ica1_init(void);
+extern void InitializeIcaLock(void);
+extern int ica_intack(uint32_t *hook);
 extern uint32_t CCPU_DR[8];
 extern void MOV_DR(uint32_t, uint32_t);
 extern void c_setGDT_BASE_LIMIT(uint32_t, uint16_t);
@@ -186,6 +189,28 @@ static void report(const char *text)
     WriteFile(GetStdHandle(STD_ERROR_HANDLE), text, lstrlenA(text), &written, NULL);
 }
 
+static int stale_pic_notification(void)
+{
+    /* Actual PIC has no pending line; actual CCPU receives a stale wakeup.
+     * No fake ISR or replacement intack body. INT FFFF must not be dispatched. */
+    static const unsigned char program[] = {
+        0xfb, 0x90, 0x90, 0x90, 0xb8, 0xef, 0xbe, 0xd6, 0xfe
+    };
+    uint32_t hook = 0;
+    c_cpu_init();
+    /* This fixture previously used no PIC. Its production host lock must be
+     * initialized before the actual intack path, just as in worker startup. */
+    InitializeIcaLock();
+    ica0_init();
+    ica1_init();
+    if (ica_intack(&hook) != -1) return 0;
+    CopyMemory(c_GetPhyAdd(0xf1000), program, sizeof(program));
+    c_cpu_interrupt(3, 0); /* original CPU_INT_TYPE::CPU_HW_INT */
+    c_setIP(0x1000);
+    c_cpu_simulate();
+    return c_getAX() == 0xbeef;
+}
+
 static DWORD WINAPI raise_reset(void *context)
 {
     volatile unsigned char *entered = context;
@@ -272,5 +297,7 @@ int main(void)
     report("S38_CCPU_REAL_DESCRIPTOR_PAGING_REFUSAL_OK\n");
     if (!debug_task_switch(1) || !debug_task_switch(0)) return 10;
     report("S38_CCPU_TSS_TBIT_SINGLE_DELIVERY_OK\n");
+    if (!stale_pic_notification()) return 11;
+    report("T430_CCPU_STALE_PIC_SENTINEL_OK\n");
     return 0;
 }

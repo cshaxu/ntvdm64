@@ -5,9 +5,11 @@
 **Active: M0 T430 S6 — Ordinary Mode.** S5 is committed/pushed as
 a143894f1 with qualified DEM/FCB proof and retained original limits.
 S6 admits bounded non-WOW memory/transition proof; S7 remains planned,
-not simultaneously active. S6's verified lease-isolation correction is now
-published as an eight-file set. S6 P1 is the bounded lease-isolation delivery;
-S6 is not yet closed and remaining selected proof obligations stay active.
+not simultaneously active. S6's verified lease-isolation correction526f73c1c
+is published as an eight-file set. The selected DPMI/EMS/XMS/IRQ supplement
+passes all six final guest cases at its documented proof layers. Source,
+publication identity, governance, links and diff review pass; this delivery
+completes S6's selected proof. S7 is the next sequential integration stage.
 The [non-WOW sequence](../etc/operations/t430-non-wow-contract-plan.md) retains
 the owner provenance gate: preserve original guest defects; adopt only verified
 existing SoftPC fixes for original host defects; otherwise defer originals;

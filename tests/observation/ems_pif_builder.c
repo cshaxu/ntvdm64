@@ -22,7 +22,7 @@ int main(int argc, char **argv)
     static const char config[] = "EMM=RAM\r\ndos=high, umb\r\ndevice=%SystemRoot%\\system32\\himem.sys\r\n";
     static const char autoexec[] = "@echo off\r\n";
 
-    if (argc != 2 || snprintf(pif_path, sizeof(pif_path), "%s\\E30.PIF", argv[1]) < 0 ||
+    if ((argc != 2 && (argc != 3 || strcmp(argv[2], "--close-on-exit"))) || snprintf(pif_path, sizeof(pif_path), "%s\\E30.PIF", argv[1]) < 0 ||
         snprintf(config_path, sizeof(config_path), "%s\\E30.NT", argv[1]) < 0 ||
         snprintf(autoexec_path, sizeof(autoexec_path), "%s\\E30AUTO.NT", argv[1]) < 0) return 64;
     memset(&standard, 0, sizeof(standard));
@@ -34,6 +34,9 @@ int main(int argc, char **argv)
 
     strcpy_s(standard.appname, sizeof(standard.appname), "S30 EMS capability");
     strcpy_s(standard.startfile, sizeof(standard.startfile), "E30.COM");
+    /* Selected only by a test requesting completed-process evidence. The
+     * original default inactive-window profile remains available unchanged. */
+    if (argc == 3) standard.MSflags |= fDestroy;
     strcpy_s(first.extsig, sizeof(first.extsig), STDHDRSIG);
     first.extnxthdrfloff = (WORD)(sizeof(standard) + sizeof(first));
     strcpy_s(w386_header.extsig, sizeof(w386_header.extsig), W386HDRSIG30);
