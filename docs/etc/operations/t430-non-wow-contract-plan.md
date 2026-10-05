@@ -11,7 +11,10 @@ original selected-NTVDM response limitation without adopting an inapplicable
 SoftPC patch. See [S3 proof](../evidence/m0-t430-s3-controller-pic-boundary.md).
 S4 is delivered as fb5843dc6. S5 a143894f1 proves ordinary FCB/fallback
 behavior and retains original deleted-name/missing indexed-service limits.
-S6 is now admitted in CURRENT; S7 remains planned, not active.
+S6 is delivered as526f73c1c/d8a05a3bd. S7's
+[integrated ledger](../evidence/m0-t430-s7-integrated-non-wow-ledger.md)
+completes the selected sequence. T430 stays open for final owner acceptance;
+no further S or next T is admitted in this intermission.
 
 [S1 conclusions](../evidence/m0-t430-s1-inherited-contract-audit.md) freeze
 inputs and distinguish source risk, missing evidence and original limitations.

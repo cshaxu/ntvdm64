@@ -2,40 +2,38 @@
 
 ## Current Work
 
-**Active: M0 T430 S6 — Ordinary Mode.** S5 is committed/pushed as
-a143894f1 with qualified DEM/FCB proof and retained original limits.
-S6 admits bounded non-WOW memory/transition proof; S7 remains planned,
-not simultaneously active. S6's verified lease-isolation correction526f73c1c
-is published as an eight-file set. The selected DPMI/EMS/XMS/IRQ supplement
-passes all six final guest cases at its documented proof layers. Source,
-publication identity, governance, links and diff review pass; this delivery
-completes S6's selected proof. S7 is the next sequential integration stage.
+**No active M/T/S packet.** T430 remains open for final owner acceptance.
+S1–S7's selected implementation, proof and original-limit dispositions are
+complete; [S7 final ledger](../etc/evidence/m0-t430-s7-integrated-non-wow-ledger.md)
+records the final product/handoff gates. No next T or additional S is admitted.
+The published eight-file S6 set remains the usable runtime baseline.
 The [non-WOW sequence](../etc/operations/t430-non-wow-contract-plan.md) retains
 the owner provenance gate: preserve original guest defects; adopt only verified
 existing SoftPC fixes for original host defects; otherwise defer originals;
 correct demonstrated project-code defects. Known WOW gaps retain their
 existing proposal receivers and queue order is unchanged.
 
-## Active Packet
+## S7 Closure Record
 
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T430 S6; Ordinary Mode. |
-| Candidate Proposal | [CCPU40/V86 audit](../proposals/proposal-ccpu40-v86-guest-contract-audit-001.md); owner-approved non-WOW completion plan. |
-| Admission And Approval | Sequential continuation after S5 delivery; approved non-WOW plan and owner provenance policy. |
-| Objective | Reconcile current DPMI/XMS/EMS/IRQ/lease evidence and supplement the selected unproved failure/restoration boundaries; correct only demonstrated project defects. |
-| Non-goals | No new census, unmatched original repair, guest mutation, WOW recovery, scheduler or worker/protocol change. |
-| Reference Baseline | S5 a143894f1; S4 fb5843dc6 published package and [proof](../etc/evidence/m0-t430-s4-redirector-copy-completion.md). |
-| Files And ABI Surface | NTVDM DPMI/SoftPC/session adapters and original PM/EMS/interrupt callers; existing PM-entry, descriptor, lease and EMS fixtures, selected fixture build. Mirrors unchanged unless provenance gate justifies a minimal hook. |
-| Applicable Rules | Original-owner/source-policy ladder; immutable guest; bounded leases; no dummy binding; every-P production gates if production changes. |
-| Verification | Invalid DOSX IDT without partial CPU mutation, PM-stack/exception return, EMS AH56/BOP68 stack/mapping restoration, lease failure/teardown and IRQ sentinel/notification. Reuse proof only with compatible input identity; label mock/provider versus guest results. Full product/publication gates if production inputs change. |
-| Expected Markers | Correct original failure/status, preserved CPU/mapping state and owned cleanup; retained original/external limits explicitly non-pass. |
-| Asset Needs | Current selected cache, existing memory/EMS/DPMI fixtures and retained audits, pinned OpenNT/read-only SoftPC; all output below build, Z: only. |
-| Reporting Requirements | [S6 evidence](../etc/evidence/m0-t430-s6-memory-transition-boundaries.md) records input reconciliation, actual proof, original limitations and any project correction; unrelated edits preserved. |
-| Stop Conditions | New owner/scope, invented original algorithm or original repair without matching SoftPC; retain disposition or revise brief before expansion. |
-| Exit Criteria | Selected gaps proved or explicitly dispositioned, reproducible tests/evidence/review, applicable build/runtime gates, commit/push. |
-| Original Owner Request | Original guest defects retained; original host defects adopt existing SoftPC fix only, otherwise TODO; design and execute correct non-mirror/project defect fixes. Continue execution. |
-| Similar-Issue Sweep | PM entry/return, descriptor widths and invalid tables, EMS map/stack restoration, XMS failure data preservation, lease cancellation/teardown and concurrent notification ownership. |
+[S7 evidence](../etc/evidence/m0-t430-s7-integrated-non-wow-ledger.md)
+reconciles all selected dispositions and passes Console17/Window17, three
+independent retained WOW frontiers, and native/nested Console/nested Window
+actual input, parent recovery and exit23. The x86 dependency build has no
+new production inputs. All eight published hashes match the tested S6 set;
+no diagnostic profile is published. Four changed mirrors retain their pinned
+source/registered semantic-diff accounting. Governance/links/diff review and
+commit/push complete this S; owner T acceptance is still pending.
+
+## S6 Closure Record
+
+[S6 evidence](../etc/evidence/m0-t430-s6-memory-transition-boundaries.md)
+records delivered lease ownership correction526f73c1c and test supplement
+d8a05a3bd. Six actual guest cases pass zero completion, including16/32/CODE32
+interrupt/fault/IRQ returns, task-exit capacity, EMS AH56/BOP68 and XMS
+failure/data. Actual CCPU/PIC sentinel and4096 concurrent notification rounds
+pass. Controlled IDT/lease/provider proof remains explicitly layer-qualified.
+No additional original/production change; current publication matches all
+eight S6 hashes. Other-session proposal/TODO changes remain excluded.
 
 ## S5 Closure Record
 
