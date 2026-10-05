@@ -9,6 +9,9 @@
 #include <egagraph.h>
 #include <egacpu.h>
 #include <egaports.h>
+#include <conapi.h>
+#include <nt_graph.h>
+#include <nt_uis.h>
 #include "mvdm_softpc_text_video.h"
 #include <stdio.h>
 #include <string.h>
@@ -18,6 +21,22 @@ struct EGA_GLOBALS EGA_GRAPH;
 byte *EGA_planes;
 int now_width,now_height;
 static byte planes[4*65536];
+/* Native boundary substitutes only: exercise the production adapter without
+ * importing a guest executor or inventing a different snapshot algorithm. */
+SCREEN_DESCRIPTION sc;
+UPDATE_ALG update_alg;
+BOOL ConsoleInitialised,ConsoleNoUpdates;
+static BOOL requested,async_active;
+static unsigned painted,published,refreshed,shaped,stream_disabled;
+BOOL NtvdmConsoleTextRequested(BOOL *value){*value=requested;return TRUE;}
+BOOL ntvdm_console_video_async(BOOL value){async_active=value;return TRUE;}
+void disable_stream_io(void){++stream_disabled;sc.ScreenState=WINDOWED;}
+void nt_mark_screen_refresh(void){++refreshed;}
+void nt_cursor_size_changed(int x,int y){(void)x;(void)y;++shaped;}
+int DisplayErrorTerm(int code,DWORD error,char *file,int line)
+{(void)code;(void)error;(void)file;(void)line;return 0;}
+static void paint(void){++painted;}
+static void publish(void){++published;}
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"FAIL line %d\n",__LINE__); return 1; } } while (0)
 
 int main(void)
@@ -62,6 +81,26 @@ int main(void)
     planes[FONT_BASE_ADDR+4*(32*65+7)]=0xa5;
     CHECK(mvdm_softpc_text_video_copy(&copy));
     CHECK(copy.rows==43 && copy.fonts[0][65][7]==0xa5 && copy.fonts[1][65][7]==0xa5);
-    puts("PASS production text-state copy: eight EGA banks, 1..32 scanlines, downloaded glyph, dimensions, split cursor and refusal without mutation");
+    sc.ModeType=TEXT;sc.ScreenState=WINDOWED;ConsoleInitialised=TRUE;
+    update_alg.calc_update=paint;requested=TRUE;
+    CHECK(mvdm_softpc_text_video_sync_route() && async_active);
+    CHECK(sc.ScreenState==FULLSCREEN && refreshed==1 && shaped==1);
+    CHECK(mvdm_softpc_text_video_local());
+    mvdm_softpc_text_video_flush(publish);CHECK(painted==1 && published==1);
+    ConsoleNoUpdates=TRUE;mvdm_softpc_text_video_flush(publish);
+    CHECK(painted==1 && published==1);ConsoleNoUpdates=FALSE;
+    PCDisplay.mode_change_required=1;mvdm_softpc_text_video_flush(publish);
+    CHECK(painted==1);PCDisplay.mode_change_required=0;
+    mvdm_softpc_text_video_pause();CHECK(!async_active);
+    mvdm_softpc_text_video_resume();CHECK(async_active);
+    async_active=FALSE;mvdm_softpc_text_video_flush(publish);
+    CHECK(async_active && painted==2 && published==2);
+    requested=FALSE;CHECK(mvdm_softpc_text_video_sync_route() && !async_active);
+    CHECK(sc.ScreenState==WINDOWED && !mvdm_softpc_text_video_local());
+    sc.ModeType=GRAPHICS;CHECK(mvdm_softpc_text_video_sync_route() && async_active);
+    mvdm_softpc_text_video_flush(publish);CHECK(painted==2);
+    sc.ModeType=TEXT;sc.ScreenState=STREAM_IO;requested=TRUE;
+    CHECK(mvdm_softpc_text_video_sync_route() && stream_disabled==1 && async_active);
+    puts("PASS production copy/fonts/split cursor and local flush, mode-settle, block/resume, Console/Window/graphics routes");
     return 0;
 }

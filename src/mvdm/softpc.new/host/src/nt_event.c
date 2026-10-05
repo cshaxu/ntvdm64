@@ -90,6 +90,8 @@ extern unsigned PendingKeyboardHistory(void);
 extern BOOL ntvdm_console_set_active(BOOL active);
 /* DIVERGENCE(MVDM-HOST-DIV-322): final software text before ownership release. */
 #include "ntvdm-exe/win32/console_text.h"
+/* DIVERGENCE(MVDM-HOST-DIV-326): quiesce before final ownership release. */
+#include "mvdm_softpc_text_video.h"
 /* DIVERGENCE(MVDM-HOST-DIV-318): CPU-owner retirement restores mouse backing. */
 extern void mouse_pointer_route_changed(int);
 /*================================================================
@@ -1461,6 +1463,8 @@ BOOL CntrlHandler(ULONG CtrlType)
             }
 
 
+        /* DIVERGENCE(MVDM-HOST-DIV-326): drain before final synchronous paint. */
+        mvdm_softpc_text_video_pause();
         /*::::::::::::::::::::::::::::::::: Flush screen output, reset console */
 
         /* DIVERGENCE(MVDM-HOST-DIV-318): restore the original saved background
@@ -1642,6 +1646,8 @@ void nt_resume_event_thread(void)
 	DoFullScreenResume();
 	MouseAttachMenuItem(sc.ActiveOutputBufferHandle);
     }
+    /* DIVERGENCE(MVDM-HOST-DIV-326): resume after native ownership ack. */
+    mvdm_softpc_text_video_resume();
     ResumeTimerThread(); /* Restart timer thread */
 
     // set kbd state flags in biosdata area

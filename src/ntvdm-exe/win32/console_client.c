@@ -2,6 +2,7 @@
 #include "console_client.h"
 #include "console_text.h"
 #include "console_geometry.h"
+#include "console_video_publisher.h"
 #include "common/console/client.h"
 #include "opennt-abi/host-compat/include/console_grid.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
@@ -33,6 +34,8 @@ typedef struct console_client {
     HANDLE ready,wake,stop,rearm,watcher,shutdown;
     HANDLE capability,input_identity,output_identity;
     CRITICAL_SECTION lock;
+    CRITICAL_SECTION palette_lock;
+    ntvdm_video_publisher *publisher;
     console_io_request request;
     ntvdm_console_graphics *graphics;
     PALETTEENTRY text_palette[16];
@@ -41,6 +44,20 @@ typedef struct console_client {
 } console_client;
 static DWORD console_activate(console_client *,BOOL);
 static console_client *output_client(HANDLE);
+static DWORD send_video(void *context,const console_video_description *description,const void *pixels)
+{
+    console_client *client=context;DWORD error;
+    EnterCriticalSection(&client->lock);
+    error=ntcon_worker_video(&client->channel,description,pixels);
+    LeaveCriticalSection(&client->lock);return error;
+}
+BOOL ntvdm_console_video_async(BOOL active)
+{
+    session *owner=session_thread_current();
+    console_client *client=owner ? owner->console_client : NULL;
+    DWORD error=client ? ntvdm_video_publisher_active(client->publisher,active) : ERROR_SUCCESS;
+    SetLastError(error);return !error;
+}
 
 /* Same bound worker endpoint as copied keyboard input. Its existing teardown
  * runs after bound threads have joined, so no separate mouse lifetime exists. */
@@ -125,10 +142,10 @@ void NtvdmConsoleTextColours(const PALETTEENTRY *colours)
     session *owner=session_thread_current();
     console_client *client=owner ? owner->console_client : NULL;
     if (!client || !colours) return;
-    EnterCriticalSection(&client->lock);
+    EnterCriticalSection(&client->palette_lock);
     memcpy(client->text_palette,colours,sizeof(client->text_palette));
     client->text_palette_valid=TRUE;
-    LeaveCriticalSection(&client->lock);
+    LeaveCriticalSection(&client->palette_lock);
 }
 
 BOOL ntvdm_console_text_palette(PALETTEENTRY colours[16])
@@ -137,10 +154,10 @@ BOOL ntvdm_console_text_palette(PALETTEENTRY colours[16])
     console_client *client=owner ? owner->console_client : NULL;
     BOOL valid;
     if (!client) { SetLastError(ERROR_NOT_READY);return FALSE; }
-    EnterCriticalSection(&client->lock);
+    EnterCriticalSection(&client->palette_lock);
     valid=client->text_palette_valid;
     if (valid) memcpy(colours,client->text_palette,sizeof(client->text_palette));
-    LeaveCriticalSection(&client->lock);
+    LeaveCriticalSection(&client->palette_lock);
     SetLastError(valid ? ERROR_SUCCESS : ERROR_NO_DATA);
     return valid;
 }
@@ -206,6 +223,7 @@ static void console_client_end(void *context)
     client->owner->console_client=NULL;
     OpenNtBaseClientSetCommandBinding(NULL,NULL);
     if (client->stop) SetEvent(client->stop);
+    ntvdm_video_publisher_destroy(client->publisher);
     if (client->watcher) {
         WaitForSingleObject(client->watcher,INFINITE);CloseHandle(client->watcher);
     }
@@ -220,6 +238,7 @@ static void console_client_end(void *context)
     if (client->input_identity) CloseHandle(client->input_identity);
     if (client->output_identity) CloseHandle(client->output_identity);
     DeleteCriticalSection(&client->lock);
+    DeleteCriticalSection(&client->palette_lock);
     ntvdm_console_graphics_destroy(client->graphics);
     HeapFree(GetProcessHeap(),0,client);
 }
@@ -242,6 +261,7 @@ DWORD ntvdm_console_client_begin(session *owner)
     if (error) { HeapFree(GetProcessHeap(),0,client);return error; }
     client->owner=owner;
     InitializeCriticalSection(&client->lock);
+    InitializeCriticalSection(&client->palette_lock);
     client->graphics=ntvdm_console_graphics_create();
     if (!client->graphics) { error=GetLastError();console_client_end(client);return error; }
     error=OpenNtBaseClientWorkerFrontendCapability(&client->capability);
@@ -262,6 +282,8 @@ DWORD ntvdm_console_client_begin(session *owner)
     }
     error=worker_base_shutdown_event(&client->shutdown);
     if(error){console_client_end(client);return error;}
+    client->publisher=ntvdm_video_publisher_create(send_video,client,client->shutdown);
+    if(!client->publisher){error=GetLastError();console_client_end(client);return error;}
     client->watcher=CreateThread(NULL,0,console_input_watch,client,0,NULL);
     error=client->watcher ? console_activate(client,TRUE) : GetLastError();
     if (!error && !session_register_teardown(owner,console_client_end,client))error=ERROR_NOT_ENOUGH_MEMORY;
@@ -352,7 +374,7 @@ static DWORD console_activate(console_client *client,BOOL active)
         error=worker_base_io_open(&client->channel.pipe,&client->channel.peer,&client->ready,
             &client->channel.generation);
         if(!error)error=ntcon_worker_client_init(&client->channel,client->channel.pipe,
-            client->channel.peer,NULL,client->channel.generation);
+            client->channel.peer,client->stop,client->channel.generation);
         if(!error)SetEvent(client->rearm);
     }
     if(!active && client->channel.pipe) {
@@ -416,9 +438,17 @@ BOOL ntvdm_console_publish_video(const console_video_description *description,
     if (!client) { SetLastError(ERROR_NOT_READY);return FALSE; }
     if ((description && (!pixels || capacity<description->bytes || !description->bytes)) ||
         (!description && (pixels || capacity))) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
-    EnterCriticalSection(&client->lock);
-    error=ntcon_worker_video(&client->channel,description,pixels);
-    LeaveCriticalSection(&client->lock);
+    if(description && description->kind!=CONSOLE_VIDEO_TEXT_CONFIGURATION) {
+        BOOL queued=FALSE;
+        error=ntvdm_video_publisher_offer(client->publisher,description,pixels,&queued);
+        if(error || queued){SetLastError(error);return !error;}
+    } else {
+        /* Format/retirement controls cannot overtake an older frame. Route
+         * owner re-enables async publication after its next software tick. */
+        error=ntvdm_video_publisher_active(client->publisher,FALSE);
+        if(error){SetLastError(error);return FALSE;}
+    }
+    error=send_video(client,description,pixels);
     SetLastError(error);
     return error==ERROR_SUCCESS;
 }

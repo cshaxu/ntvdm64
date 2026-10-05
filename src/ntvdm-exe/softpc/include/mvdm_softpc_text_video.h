@@ -18,5 +18,10 @@ typedef struct mvdm_softpc_text_video {
 int mvdm_softpc_text_video_copy(mvdm_softpc_text_video *copy);
 /* Original video owner only; existing frontend policy, no hardware switch. */
 int mvdm_softpc_text_video_sync_route(void);
+/* DIV-326: original-owner extraction; dedicated copied-state publisher. */
+int mvdm_softpc_text_video_local(void);
+void mvdm_softpc_text_video_flush(void (*publish)(void));
+void mvdm_softpc_text_video_pause(void);
+void mvdm_softpc_text_video_resume(void);
 
 #endif

@@ -256,7 +256,7 @@ if (!(Test-Path -LiteralPath $redirResourceSource)) { throw "Original Redirector
 if (!(Test-Path -LiteralPath $redirExportDefinition)) { throw "Original Redirector export definition missing: $redirExportDefinition" }
 $adapterWin32Names = @('ntioapi_facade.c', 'thread_start_compat.c',
                           'nt_thread_alert_compat.c',
-                          'console_compat.c', 'console_client.c', 'console_bitmap.c', 'console_graphics.c', 'console_text.c', 'crt_compat.c',
+                          'console_compat.c', 'console_client.c', 'console_bitmap.c', 'console_graphics.c', 'console_text.c', 'console_video_publisher.c', 'crt_compat.c',
                            'command_process_compat.c', 'wow_private_unavailable.c',
                            'wow_hard_error_dialog.c',
                            'mvdm_base_vdm_environment.c')

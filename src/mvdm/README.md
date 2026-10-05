@@ -1,5 +1,17 @@
 # mvdm
 
+MVDM-HOST-DIV-326 (T429 S5): software text mouse flush retains
+original-owner `calc_update` and copies the completed frame. A dedicated
+NTVDM publisher holds only the latest immutable state, compares the full
+descriptor/payload with its last successful send, and caps ordinary sends at
+50Hz with an event and one-shot timer. Idle state has no recurring timer.
+Heartbeat/CCPU timers remain unchanged; the publisher never reads VGA memory
+or CPU registers. Final block/resume and route changes quiesce copied sends
+before the existing final-frame acknowledgement. Graphics invalidations use
+the same complete-copy publisher when Window presentation is active.
+The [S5 evidence](../../docs/etc/evidence/m0-t429-s5-software-video-publication.md)
+records supersession of the unpublished heartbeat/FIFO candidate and limits.
+
 MVDM-HOST-DIV-325 (T429 S2): `softpc.new/base/ccpu386/c_main.c::DECODE`
 compile-selects the project-added transition and four WOW instruction observers
 with `MVDM_CCPU_DECODE_DIAGNOSTICS`. The normal CCPU40 graph does not define
@@ -14,8 +26,9 @@ FULLSCREEN without enabling X86GFX/MONITOR or hardware BIOS/regen mapping.
 The existing ntvdm-exe/softpc/mvdm_softpc_text_video.c adapter samples frontend
 policy on the original video owner and requests the original stream transition.
 nt_fulsc.c retains software VGA mode, font and CRTC initialization in both
-routes; nt_graph.c retains software backing and defers IRQ-triggered extraction
-to the existing video tick, while guest cursor changes publish independently.
+routes; nt_graph.c retains software backing. DIV-326 restores text flush
+extraction on the original owner and separates copied display transport;
+ordinary video checks remain original, while guest cursor changes publish.
 nt_event.c extracts and acknowledges final software text/cursor before release;
 hardware desktop transitions stay excluded. nt_reset.c retains software idle
 detection. Original VGA/painter/mouse algorithms remain at their owners; route
@@ -523,6 +536,10 @@ runtime-discovery inputs.  The complete per-file provenance is in
 | MVDM-SUPPORT-DIV-008 | Include the original VDM_TIB declaration through an absolute NT source-tree path. | The historical path cannot resolve outside the OpenNT build tree. | Resolve the selected identical `vdm.h` declaration through the mirrored OpenNT ABI include root; no type, field or ABI is recreated. | `inc/vdmtib.h` |
 
 ### Existing MVDM host divergences
+
+DIV-326 uses only minimal nt_graph.c flush and nt_event.c block/resume hooks;
+its new cadence, copied state and synchronization live in ntvdm-exe adapters.
+The original clock, VGA/mouse algorithms and NTCON protocol are unchanged.
 
 T427 restores `cmdredir.c`'s original `GetWindowsDirectory` temporary-file
 fallback (OpenNT `base/mvdm/dos/command/cmdredir.c`): this is host scratch space,

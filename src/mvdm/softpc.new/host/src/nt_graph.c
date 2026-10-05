@@ -819,9 +819,10 @@ void nt_flush_screen(void)
     sub_note_trace0(ALL_ADAPT_VERBOSE, "nt_flush_screen");
 
 #if defined(CCPU) && !defined(X86GFX)
-    /* DIVERGENCE(MVDM-HOST-DIV-322): mouse IRQs only change simulated VGA.
-       The existing video tick extracts it; never wait on frontend I/O here. */
-    if (sc.ScreenState == FULLSCREEN) return;
+    /* DIVERGENCE(MVDM-HOST-DIV-326): local painter, copied async delivery. */
+    if (sc.ScreenState == FULLSCREEN) {
+        mvdm_softpc_text_video_flush(publish_text_update);return;
+    }
 #endif
 
     if (ConsoleInitialised == TRUE && ConsoleNoUpdates == FALSE &&

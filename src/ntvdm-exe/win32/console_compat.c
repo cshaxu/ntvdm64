@@ -13,6 +13,7 @@
 #include "console_client.h"
 #include "console_input.h"
 #include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_text_video.h"
 #include "common/protocol/console_io.h"
 
 
@@ -141,6 +142,9 @@ BOOL WINAPI InvalidateConsoleDIBits(HANDLE output, PSMALL_RECT rect)
         SetLastError(ERROR_INVALID_PARAMETER);
         return FALSE;
     }
+    /* Software VGA text is copied completely by its guest owner. Do not
+     * transport intermediate rectangles from mouse IRQ/painter callbacks. */
+    if(mvdm_softpc_text_video_local() && output==GetStdHandle(STD_OUTPUT_HANDLE))return TRUE;
     graphics_result=ntvdm_console_graphics_invalidate(output,rect);
     if (graphics_result) return graphics_result>0;
     /* DIVERGENCE(ADAPTER-WIN32-048): public Console lacks the NT4 shared VDM

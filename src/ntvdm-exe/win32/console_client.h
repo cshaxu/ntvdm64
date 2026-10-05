@@ -24,4 +24,6 @@ BOOL ntvdm_console_prepend_keys(HANDLE,PINPUT_RECORD,DWORD,LPDWORD);
 int ntvdm_console_window_query(DWORD query,LONG values[4]);
 /* Latest original resolved text palette, owned by this worker endpoint. */
 BOOL ntvdm_console_text_palette(PALETTEENTRY colours[16]);
+/* Guest owner toggles publication at route and final-paint boundaries. */
+BOOL ntvdm_console_video_async(BOOL);
 #endif

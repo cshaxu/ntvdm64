@@ -8,6 +8,20 @@ NTCON renderer or modifying guest/shared-library code.
 
 ## Product boundary
 
+### NTVDM copied software-VGA publication — T429 S5
+
+Original guest/video execution remains the sole extractor of mutable software
+VGA state. An NTVDM-owned publisher holds immutable complete snapshots, one
+latest pending state and the last successfully sent state. It uses a dirty
+event and a one-shot maximum50Hz/20ms publication cap; idle has no recurring
+timer. This does not change the guest VGA/CCPU clock or guarantee20ms capture
+of arbitrary memory writes. Publication is outside guest IRQ/painter locks.
+Block/release quiesces admission and drains before the existing final-frame
+acknowledgement; teardown cancels transport and joins before endpoint release.
+NTCON remains format-driven; no frontend/worker-base dedup or lifecycle change.
+The [source audit and tests](../etc/evidence/m0-t429-s5-software-video-publication.md)
+record the explicit owner exception and retained limits.
+
 ### Own-image product root — T427 S2
 
 `common/system_root` supplies checked Windows-root and relative-path

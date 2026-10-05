@@ -163,7 +163,8 @@ try {
                         if($LASTEXITCODE){throw 'Strict DIR gate failed'}
                     }finally{
                         foreach($name in @('TEST_RUNTIME_ROOT','MVDM_TEST_DIRECT_CMD','MVDM_TEST_S34_REPEAT_DIR')){
-                            [Environment]::SetEnvironmentVariable($name,$old[$name])
+                            if($null -eq $old[$name]){Remove-Item -LiteralPath ('Env:'+$name) -ErrorAction SilentlyContinue}
+                            else{[Environment]::SetEnvironmentVariable($name,$old[$name])}
                         }
                     }
                 }
@@ -181,7 +182,10 @@ try {
     "PASS $Suite selected gates; identical eight-file package"
 }finally{
     try {Stop-IsolatedPackageScope $runtimeScope;Stop-IsolatedPackageScope $cacheScope} finally {
-        foreach($name in $variables){[Environment]::SetEnvironmentVariable($name,$old[$name])}
+        foreach($name in $variables){
+            if($null -eq $old[$name]){Remove-Item -LiteralPath ('Env:'+$name) -ErrorAction SilentlyContinue}
+            else{[Environment]::SetEnvironmentVariable($name,$old[$name])}
+        }
         $total.Stop()
         [pscustomobject]@{Suite=$Suite;ElapsedMs=$total.ElapsedMilliseconds;
             InputPolicy=$InputPolicy;PreparationMs=$preparationMs;Gates=$timings.ToArray()}|

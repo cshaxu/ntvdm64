@@ -11,8 +11,10 @@
 #include <conapi.h>
 #include <nt_graph.h>
 #include <nt_uis.h>
+#include <host_rrr.h>
 #include "mvdm_softpc_text_video.h"
 #include "ntvdm-exe/win32/console_text.h"
+#include "ntvdm-exe/win32/console_client.h"
 #include <string.h>
 
 /* Original nt_graph.c::textResize dimensions used by nt_cga_text clipping.
@@ -20,6 +22,31 @@
 extern int now_width, now_height;
 extern void disable_stream_io(void);
 extern void nt_cursor_size_changed(int, int);
+extern BOOL ConsoleInitialised,ConsoleNoUpdates;
+
+int mvdm_softpc_text_video_local(void)
+{ return sc.ScreenState==FULLSCREEN && sc.ModeType==TEXT; }
+void mvdm_softpc_text_video_flush(void (*publish)(void))
+{
+    if(sc.ModeType==TEXT && ConsoleInitialised && !ConsoleNoUpdates && !get_mode_change_required()) {
+        /* Mode retirement can quiesce copied sends between ordinary ticks.
+         * Mouse flush must rearm locally, never fall back to IRQ transport. */
+        if(!ntvdm_console_video_async(TRUE)) {
+            DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);return;
+        }
+        (void)(*update_alg.calc_update)();publish();
+    }
+}
+void mvdm_softpc_text_video_pause(void)
+{
+    if(!ntvdm_console_video_async(FALSE))
+        DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
+}
+void mvdm_softpc_text_video_resume(void)
+{
+    if(!ntvdm_console_video_async(sc.ScreenState==FULLSCREEN))
+        DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
+}
 
 /* CCPU's software VGA remains active in either presentation route. Never
  * request hardware fullscreen, map physical regen or change guest video mode
@@ -34,6 +61,7 @@ int mvdm_softpc_text_video_sync_route(void)
     /* Graphics already requires the software Window even when the user's
        text display preference remains Console. */
     desired=(requested || sc.ModeType==GRAPHICS) ? FULLSCREEN : WINDOWED;
+    if(!ntvdm_console_video_async(desired==FULLSCREEN))return 0;
     if(sc.ScreenState!=desired) {
         sc.ScreenState=desired;
         nt_mark_screen_refresh();
