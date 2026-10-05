@@ -21,7 +21,9 @@ acknowledgement; teardown cancels transport and joins before endpoint release.
 T429 S6 extracts the copied-state publication mechanism into worker-base for
 both workers. Complete opaque native snapshots include Unicode cells,
 geometry/cursor and text metadata in one acknowledged transaction. Native
-30ms acquisition remains separate; original VGA extraction remains NTVDM's.
+acquisition remains separate (T429 S7 changes its wait from30ms to20ms);
+original VGA extraction remains NTVDM's. Capture/RPC cost adds to this wait;
+it is not synchronized with the shared publication deadline.
 Only the shared publisher compares complete state against its last successful
 commit. NTCON remains format-driven without frontend dedup or lifecycle change.
 The [S5 source audit](../etc/evidence/m0-t429-s5-software-video-publication.md)

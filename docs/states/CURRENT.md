@@ -2,11 +2,50 @@
 
 ## Current Work
 
-**Active: M0 T429 S6** (Ordinary Mode; bounded delivery complete, awaiting owner acceptance).
+**Active: M0 T429 S7** (Ordinary Mode; bounded delivery complete, awaiting owner acceptance).
+Owner requests changing only NTVWM's native acquisition wait from30ms to20ms.
+S6 is delivered at a47979990; its evidence and accepted mechanisms remain below.
+T429 remains open. This does not admit event-driven native acquisition.
+
+## Active Packet
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T429 S7; Ordinary Mode. |
+| Admission And Approval | Owner: "既然如此麻烦 那不然至少把30ms改成20ms 免得错过了发布窗口". Admit only the existing native loop interval change. |
+| Objective | Native input/acquisition checks wait20ms instead of30ms; preserve shared maximum50Hz publication, idle comparison and final drain. |
+| Non-goals | No event observer, helper, wire, thread, worker-base algorithm, VGA/mirror, frontend or lifecycle changes. No claim of phase synchronization or guaranteed50Hz delivery. |
+| Reference Baseline | Pa47979990; S6 r006/runtime and r009/r010/r013/r015 verification/publication. x86 MSVC14.43/SDK22621 /MT CCPU40; APP0.0.427/RPC38/I/O25. |
+| Files And ABI Surface | ntvwm-exe/main.c wait timeout; focused source-contract test and evidence. No ABI change. |
+| Applicable Rules | Full AGENTS authorities, existing worker ownership, build-only output, serial BaseSrv/Z: tests, preserve side-session proposal. |
+| Verification | Source interval/unchanged wait-set assertion, affected x86 build, native presentation/input-return and publisher fixtures; Console17/Window17/WOW, nested native/DOS handoff and cleanup; coherent eight-file publication/smoke and governance/diff checks. |
+| Expected Markers | One production timeout changes30→20; stop/release priority and50Hz cap unchanged. Increased acquisition cost disclosed, no physical latency claim. |
+| Asset Needs | Reuse validated M0-T427/S2/r001 cache and sealed S6 runtime; new evidence under build/M0-T429/S7. |
+| Reporting Requirements | Separate configured sampling frequency, measured verification and unmeasured desktop/performance impact. |
+| Stop Conditions | New protocol/observer or failing existing assertions requires review; never weaken tests. |
+| Exit Criteria | Build, affected/full retained gates, publication, governance and diff review pass; commit/push; T stays open. |
+| Original Owner Request | Change NTVWM30ms to20ms rather than pursue event-driven acquisition now. |
+| Similar-Issue Sweep | Same loop input/admission/capture, stop/release event ordering, shared cap, idle/final drain, native reentry. |
+
+[S7 evidence](../etc/evidence/m0-t429-s7-native-acquisition-interval.md) records the bounded change.
+
+## S7 Closure Record
+
+[S7 native acquisition evidence](../etc/evidence/m0-t429-s7-native-acquisition-interval.md)
+records the sole production30→20ms timeout change. Affected x86 build, native
+501/689 assertions, shared publisher tests, Console17/Window17/WOW and all
+eight integration cases pass. S7/r001/runtime is published coherently in
+O:/winnt/system32; r005 retains all-eight hashes/recovery, r007 verifies
+actual published Console4/Window4 and hashes. Input/acquisition stay coupled;
+no event-only acquisition, phase synchronization or measured speedup is claimed.
+T429 remains open. Unrelated side-session proposal is preserved and excluded.
+
+## S6 Delivery Packet
+
 Owner approves both workers adopting the publisher mechanism in worker-base.
 S5 is delivered and pushed at903d25d8a; S6 is delivered below. T429 remains open.
 
-## Active Packet
+### Retained S6 Packet
 
 | Field | Required record |
 | --- | --- |
@@ -25,6 +64,8 @@ S5 is delivered and pushed at903d25d8a; S6 is delivered below. T429 remains open
 | Exit Criteria | Shared engine used in both production callers; replaced private/full-frame mechanisms removed; focused/full affected gates and publication pass; evidence reviewed, committed and pushed. T429 manual acceptance remains separate. |
 | Original Owner Request | "批准请准入s来共用" after approval of extracting the publication thread into worker-base for both workers. |
 | Similar-Issue Sweep | Frame/config retirement, Unicode-only changes, mouse-only changes, size/viewport/cursor, channel reopen, final drain, failed sends, worker/frontend loss, old snapshot invalidation and Console/Window routes. |
+
+## S6 Closure Record
 
 [S6 source review and implementation checklist](../etc/evidence/m0-t429-s6-shared-video-publication.md)
 records the native atomic-publication boundary and final delivery results.
@@ -116,6 +157,13 @@ Test environment restoration is repaired without weakening assertions.
 S5 reaches its bounded closure; T429 owner acceptance remains pending.
 
 ## Current Technical Baseline
+
+[S7 native acquisition delivery](../etc/evidence/m0-t429-s7-native-acquisition-interval.md)
+supersedes the S6 installed identity below. Only NTVWM changes, SHA256
+6AF71B8F7BC5136CE4414106A33D2193AC859AC88A5BF91E9052EF6411456F1A.
+S7/r003/r004 pass retained product/integration gates; r005/r007 verify
+publication and deployed smoke. Shared50Hz publisher and seven other files
+are unchanged. T429 remains open; input/acquisition separation is not admitted.
 
 [S6 shared publication delivery](../etc/evidence/m0-t429-s6-shared-video-publication.md)
 supersedes the S5 installed identity below. S6/r006/runtime passes Product

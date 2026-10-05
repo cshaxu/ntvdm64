@@ -147,7 +147,7 @@ static DWORD presentation_loop(void *context)
     native_membership *state=context;DWORD error=0;
     HANDLE waits[4]={state->shutdown,state->stop_requested,state->quit,state->io_release};
     DWORD wait;
-    while((wait=WaitForMultipleObjects(4,waits,FALSE,30))!=WAIT_OBJECT_0+2) {
+    while((wait=WaitForMultipleObjects(4,waits,FALSE,20))!=WAIT_OBJECT_0+2) {
         EnterCriticalSection(state->lock);
         if(wait==WAIT_OBJECT_0 || wait==WAIT_OBJECT_0+1) {
             /* The authenticated broker orders Console-session closure,
