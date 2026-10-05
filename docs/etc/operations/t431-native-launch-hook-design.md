@@ -2,6 +2,10 @@
 
 ## S3 discussion admission (2026-10-05)
 
+The owner's subsequent dual-build worker/handoff direction below supersedes
+this section's single-x86-NTVWM proposal. It remains the earlier option's
+feasibility analysis, not a prohibition on the newly discussed worker variant.
+
 Owner closes S2 before personal acceptance and admits discussion of
 `nthook64-dll` / `nthook64.dll`. S2 P2 at12160c657 remains the published
 baseline. No new production source, executable probe or x64 build is admitted
@@ -60,6 +64,85 @@ common/protocol/native_hook.h, run16 hook_classification.c, the retained
 and S2 evidence. Rechecked primary pinned Detours source, PR161 page and
 DuplicateHandle documentation on2026-10-05; no new code imported or executed.
 This is source-backed design, not a feasibility/runtime pass.
+
+## Dual-build NTVWM and width-neutral handoff
+
+Owner clarification: NTVWM32 and NTVWM64 each own their own hidden Console.
+The shared object is NTCON's user-visible frontend and continuous logical
+page, never one hidden Console jointly owned/attached by the two workers.
+NTVDM-to-NTVWM and NTVWM32-to-NTVWM64 must have the same external handoff
+principle. This design does not claim a new64-bit implementation is tested.
+
+```text
+run16 -> NTSRV -> select/reuse NTVDM or NTVWM32 or NTVWM64
+                   | logical associations and handoff authority
+                   v
+                 NTCON: one visible Console/Window and current logical page
+                   ^ zero or one authorized active I/O pipe
+                   |
+        selected worker's private backend state
+        DOS VGA / native32 hidden Console / native64 hidden Console
+```
+
+Each native variant is one build of the same source, not a copied native
+implementation. Hook32/Hook64 likewise reuse discovery, classification
+semantics, wrapper behavior and transaction mechanics with bounded native
+ABI/installer bindings. Shared project-added worker transport/publication/
+input/cancellation/handoff mechanisms stay in worker-base/common. Original
+NTVDM execution and block/resume are not relocated or made64-bit.
+
+At an actual worker handoff:
+
+1. Old worker reaches its existing execution-side yield boundary and asks
+   NTSRV to release I/O. It does not independently enqueue itself as pending
+   or compete for reacquisition while waiting for its nested child.
+2. Complete existing final-state/input-return acknowledgments and confirm
+   the old pipe closes before a new owner is granted.
+3. New worker imports the latest logical cells, geometry/cursor and text
+   metadata into its own backend, using the existing capability conversion.
+   Native variants materialize this in their own hidden Console; DOS retains
+   original supported-VGA geometry rules.
+4. Acknowledge seed/acquisition before execution/resumed-parent output.
+5. On return, repeat the same protocol with the latest page, not the outer
+   worker's old page. No bitness-specific NTCON path, second pipe or scheduler.
+
+Example: broker-mediated CMD32 -> run16 CMD64 -> run16 COMMAND -> return to
+CMD64 -> return to CMD32. All three backends retain their execution state;
+only the current owner reads frontend input/publishes. Final COMMAND output
+is imported into native64, whose subsequent output is imported into native32.
+Direct completion remains owned by the corresponding actual task/worker and
+NTSRV receipt, not by the page transfer or process bitness.
+
+NTSRV must distinguish native worker machine for admission/reuse, not a new
+business task kind: NTMON keeps existing DOS/Win16/Win32 labels. Native32 and
+native64 share lifecycle/control contracts and frontend association semantics.
+The final image filenames, machine selection and fixed-width wire additions
+need reviewed implementation admission and synchronized versions if changed.
+The32-bit Run16/NTSRV/NTCON/NTVDM need no role change; only admitted native
+worker/Hook dependency closures get separate x86/x64 objects and CRT builds.
+
+### Remaining decisions versus engineering gates
+
+| Item | Decision or implementation proof |
+| --- | --- |
+| Dual native worker builds | Owner confirms this as the implementation direction and admits the narrowly scoped64-bit worker/Hook build exception; proposed names ntvwm32.exe/ntvwm64.exe require resolving current ntvwm.exe package naming. |
+| Ordinary mixed-width native child creation | Decide whether to preserve actual Windows child handles/parent semantics with a bounded helper-free cross-width installer investigation, or explicitly redesign such calls as mediated Run16 launches. The latter changes visible process identity and is not silently equivalent. Recommended: preserve actual native creation; investigate the installer first. |
+| Unsupported installation behavior | Required cross-width propagation must not silently pass unhooked as success. The exact failure/rollback boundary follows the chosen installer; partial mutation never resumes a corrupt/unpublished child. No helper fallback. |
+| Shared64-bit implementation | Engineering gate: original classifier ABI facade, generated64-bit RPC client, worker-base/common pointer/handle review, full-width attachments, native launch and Hook payload version/layout. No second resolver/classifier policy, x86 object linking or mirror rewrite. |
+| Handoff/reentry | Engineering gate: DOS/native32/native64 forward/return state and input order, final barriers, resident reuse, independent roots, GUI exclusions and normal/fault cleanup. No new decision on the already confirmed handoff semantics. |
+
+Two worker builds remove the initial direct native32-to64 installation
+requirement by letting NTSRV select a same-width creator. They do not by
+themselves fix CMD32's ordinary CreateProcess of native64, the reverse
+direction, or Hook64's context-only delivery to32-bit Run16. Routing those
+ordinary descendants through another worker is not a mere rendering change;
+it must not alter Windows creation/returned-target semantics without approval.
+
+Procedure: compare owner direction with the existing S3 design, NTVWM
+execution/hidden-Console ownership and NTSRV worker selection. Record the
+design contract and unresolved choices in this document and ARCHITECTURE;
+run governance/link/diff checks. No production source, build, running process
+or published runtime is changed. S3 remains discussion-only.
 
 ## S2 implementation revision (2026-10-05)
 

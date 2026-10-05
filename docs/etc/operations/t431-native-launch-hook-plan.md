@@ -2,6 +2,14 @@
 
 ## Current admission revision
 
+The owner's follow-up S3 direction records the dual-build NTVWM option in
+[the design](t431-native-launch-hook-design.md#dual-build-ntvwm-and-width-neutral-handoff):
+each native worker owns its own hidden Console, and DOS/native32/native64
+reuse the same NTSRV-controlled frontend handoff. No shared hidden Console,
+NTCON worker-width branch or separate handoff policy is selected. Production
+implementation/build admission and ordinary cross-width creation mechanics
+remain explicit decisions; the published S2 package is unchanged.
+
 Owner direction on2026-10-05 closes S2 before personal acceptance and admits
 S3 for Hook64 architecture/source discussion. S2 P2 is12160c657, with coherent
 r027-runtime publication and retained automated proofs. No personal acceptance

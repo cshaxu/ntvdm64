@@ -17,10 +17,10 @@ before personal acceptance and admits S3 for64-bit design discussion only.
 | Identifier Mode | M0 T431 S3; Ordinary Mode. |
 | Admission And Approval | Owner: “你先把 S2收口了，我还没有验收，但是你先收口，我们准入S3，来讨论一下如何实现64位的支持，就是NT Hook 64.dll的实现。” S2 closes by direction without personal acceptance; S3 is bounded design/source review. |
 | Candidate Proposal | [Controlled native launch hooks](../proposals/proposal-native-launch-hook-001.md). |
-| Objective | Agree a minimal Hook64 design reusing Hook32 discovery/classification/bootstrap/interception, with four-direction installer feasibility and rollback gates. |
+| Objective | Agree Hook64 and dual-build NTVWM design: each worker owns its hidden Console; DOS/native32/native64 reuse one NTSRV-controlled handoff contract, with explicit cross-width propagation and rollback gates. |
 | Non-goals | No production coding/build/injection/publication at discussion stage; no private WOW64 executable probe, helper, guest/mirror change, x64 MVDM/worker/service, global hook, observation or scheduler. |
 | Reference Baseline | S2 P2 committed/pushed12160c657; coherent S2/r027-runtime published, r031-publication; APP0.0.427/RPC38/I/O25. Personal acceptance pending. |
-| Files And ABI Surface | CURRENT and existing T431 plan/design/evidence; read-only nthook32-dll, common/application_search, bootstrap and selected classifier/installer callers. Proposed nthook64-dll/x64 Hook-only island needs implementation admission; no service/I/O change. |
+| Files And ABI Surface | CURRENT, ARCHITECTURE and existing T431 plan/design/evidence; read-only Hook/search/bootstrap/worker callers. Proposed nthook64-dll and dual-build NTVWM need implementation admission; shared fixed-width service/I/O contracts remain canonical, required changes must be separately audited/versioned. |
 | Applicable Rules | Full AGENTS authorities, source policy/recovery ladder, no-helper/non-invasive boundary, one active packet, preserved other-session edits and build-only generated artifacts. |
 | Verification | Selected-source/primary-reference review; four-width ABI/bootstrap/failure contract; documentation governance, relative links and diff checks. No runtime result claimed. |
 | Expected Markers | Shared architecture-neutral logic versus native ABI mechanics; exact32-to64 blocker and64-to32 candidate; no silent helper or reduced width coverage. |

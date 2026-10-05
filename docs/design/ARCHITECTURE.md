@@ -8,6 +8,45 @@ NTCON renderer or modifying guest/shared-library code.
 
 ## Product boundary
 
+### Proposed native worker width variants — T431 S3 design
+
+Owner-directed S3 design records NTVWM32 and NTVWM64 as two builds of the
+same native-worker implementation, each with its own hidden execution Console.
+They must never jointly attach to one hidden Console. They can share one
+user-visible NTCON frontend through the existing NTSRV-owned logical
+association and single active I/O connection. This is a design boundary,
+not delivered64-bit capability or implementation/build admission; current
+production remains the published S2 x86 package.
+
+NTVDM DOS/VGA, NTVWM32 and NTVWM64 use the same external handoff contract:
+quiesce the old owner's I/O at its execution boundary, commit/acknowledge its
+final screen/cursor and return unused input, confirm old pipe release, seed/
+acknowledge the incoming worker's current state, then permit its execution
+or parent output to resume. Transfer the latest logical page, geometry,
+cursor, font/style/palette and ordered input under existing capability rules;
+never restore a stale pre-child page. DOS-specific geometry conversion and
+original guest block/resume stay at their current owners. Native32/native64
+differences are worker-local ABI adaptations, not new handoff rules.
+
+NTSRV alone selects/reuses workers, stores their frontend associations and
+coordinates connection/release/resume. NTCON remains width/kind-neutral and
+holds zero or one authorized I/O pipe, not a worker list or arbitration queue.
+Matching project-added mechanisms stay in worker-base/common; neither owns
+another scheduler or task registry. Both native builds retain the same
+registration, direct results, residency, exclusive CloseOnExit, shutdown and
+failure contracts. Win16 GUI stays on the original WOW/host-window path,
+not this DOS/native-text handoff.
+
+This contract applies when execution actually enters a broker-mediated
+worker boundary. Ordinary Windows child creation is a separate boundary:
+changing a native child's bitness does not automatically authorize replacing
+its returned process with run16 or creating a new direct receipt. Hook
+cross-width installation/context delivery and any proposed mediation must
+retain or explicitly resolve those creation semantics. The
+[T431 design](../etc/operations/t431-native-launch-hook-design.md#dual-build-ntvwm-and-width-neutral-handoff)
+records remaining decisions. No helper, x64 MVDM or extra control edge is
+admitted by this design section.
+
 ### Controlled native launch hook contract — T431 S1 design
 
 Owner subsequently admits T431 S2 implementation as32-bit only, component
