@@ -13,7 +13,7 @@ int main(void) {
  if (!session_activate(&s)||!session_guest_memory_begin(&s,&m,read_memory,write_memory)||!session_thread_bind(&s)) return 2;
  if (!mvdm_redirector_copy_ansi_to_guest(0,0x10,"ok",3)||memcmp(m.bytes+0x10,"ok",3)) return 3;
  if (mvdm_redirector_copy_ansi_to_guest(0,0x1ff,"x",2)) return 4;
- if (!mvdm_redirector_copy_wide_to_guest(0,0x20,L"user")||memcmp(m.bytes+0x20,"user",5)) return 5;
+ if (mvdm_redirector_copy_wide_to_guest(0,0x20,L"user",5)!=0||memcmp(m.bytes+0x20,"user",5)) return 5;
  session_guest_memory_end(&s);
  if (mvdm_redirector_copy_ansi_to_guest(0,0x10,"x",2)) return 6;
  return !session_thread_unbind(&s)||!session_dispose(&s) ? 7 : 0;

@@ -9,7 +9,7 @@ candidates, not a parallel recovery program. CURRENT is the only admission
 authority. S1 and S2 are delivered; S3's applicability review retains the
 original selected-NTVDM response limitation without adopting an inapplicable
 SoftPC patch. See [S3 proof](../evidence/m0-t430-s3-controller-pic-boundary.md).
-S4–S7 remain planned, not active.
+S4 is admitted in CURRENT; S5–S7 remain planned, not active.
 
 [S1 conclusions](../evidence/m0-t430-s1-inherited-contract-audit.md) freeze
 inputs and distinguish source risk, missing evidence and original limitations.

@@ -193,6 +193,16 @@ int mvdm_redirector_async_complete(PDOS_ASYNC_NAMED_PIPE_INFO request,
         mvdm_redirector_async_trace("complete-not-bound");
         return 0;
     }
+    /* Original ReadFile had already written the guest payload when completion
+     * published error/count. Staging must preserve that order: a failed payload
+     * commit must not make the request appear completed. This is not an atomic
+     * multi-destination transaction; retain original error-before-count order. */
+    if (state->is_read && byte_count != 0u) {
+        if (byte_count > state->length || !mvdm_guest_location_acquire(
+            &state->buffer, byte_count, GUEST_MEMORY_ACCESS_WRITE, &lease)) goto failed;
+        memcpy(lease.bytes, state->staging, byte_count);
+        if (!mvdm_guest_location_release(&lease, 1)) goto failed;
+    }
     words[0] = (uint8_t)error_code;
     words[1] = (uint8_t)(error_code >> 8);
     if (!mvdm_guest_location_copy_to_guest(&state->error_code, words, 2u))
@@ -201,12 +211,6 @@ int mvdm_redirector_async_complete(PDOS_ASYNC_NAMED_PIPE_INFO request,
     words[1] = (uint8_t)(byte_count >> 8);
     if (!mvdm_guest_location_copy_to_guest(&state->bytes_transferred, words, 2u))
         goto failed;
-    if (state->is_read && byte_count != 0u) {
-        if (byte_count > state->length || !mvdm_guest_location_acquire(
-            &state->buffer, byte_count, GUEST_MEMORY_ACCESS_WRITE, &lease)) goto failed;
-        memcpy(lease.bytes, state->staging, byte_count);
-        if (!mvdm_guest_location_release(&lease, 1)) goto failed;
-    }
     mvdm_redirector_async_trace("complete-ok");
     return 1;
 

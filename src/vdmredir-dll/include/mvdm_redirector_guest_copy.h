@@ -7,8 +7,10 @@
 /* Copies one already-bounded ANSI result into an exact real-mode guest span. */
 int mvdm_redirector_copy_ansi_to_guest(uint16_t segment, uint16_t offset,
     char const *bytes, uint32_t byte_count);
-int mvdm_redirector_copy_wide_to_guest(uint16_t segment, uint16_t offset,
-    wchar_t const *text);
+/* Returns a Win32/LAN status. Capacity is OEM bytes including the terminator,
+ * not Unicode characters; no guest write occurs if it is too small. */
+uint32_t mvdm_redirector_copy_wide_to_guest(uint16_t segment, uint16_t offset,
+    wchar_t const *text, uint32_t capacity);
 
 /* Writes the three original I_CDNames far-pointer targets through bounded
  * session leases. A null value retains the original "clear only" result. */

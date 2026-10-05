@@ -491,12 +491,12 @@ Return Value:
             itFits = TRUE;
         }
         if (itFits) {
-            /* DIVERGENCE(MVDM-HOST-DIV-171): use one exact synchronous lease
-             * rather than retain the original unbounded guest pointer. */
-            if (!mvdm_redirector_copy_wide_to_guest(getES(), getDI(),
-                pInfo->wkui0_username)) {
-                SET_ERROR(ERROR_INVALID_ADDRESS);
-            }
+            /* DIVERGENCE(MVDM-HOST-DIV-171): bound the added OEM conversion
+             * by bytes, including NUL. Keep the original BX=0 unchecked ABI
+             * and CX=0 underflow; neither authorizes an original guest fix. */
+            status = mvdm_redirector_copy_wide_to_guest(getES(), getDI(),
+                pInfo->wkui0_username, getBX() && getCX() ? getCX() : UINT32_MAX);
+            if (status != NERR_Success) SET_ERROR((WORD)status);
         }
         NetApiBufferFree(buffer);
     } else {

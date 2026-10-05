@@ -392,7 +392,13 @@ int main(int argc,char **argv) {
               if(!GetSystemDirectoryA(system_directory,sizeof(system_directory)))return 66;
               snprintf(cmd,sizeof(cmd),"%s\\cmd.exe /d /k",system_directory);
           }
-          else snprintf(cmd,sizeof(cmd),"%s\\run16.exe %s",runtime,initial); }
+          else {
+              char launcher[MAX_PATH];
+              snprintf(launcher,sizeof(launcher),"%s\\system32\\run16.exe",runtime);
+              if(GetFileAttributesA(launcher)==INVALID_FILE_ATTRIBUTES)
+                  snprintf(launcher,sizeof(launcher),"%s\\run16.exe",runtime);
+              snprintf(cmd,sizeof(cmd),"\"%s\" %s",launcher,initial);
+          } }
         {
             char launch[2 * MAX_PATH + 32];
             snprintf(launch,sizeof(launch),"PTY child runtime=%s command=%s\r\n",runtime,cmd);
@@ -883,7 +889,7 @@ if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--s38-window-reentry") && strcmp(argv
             log_contains(argv[3],"CALL-OK") && log_contains(argv[3],"bytes total conventional memory")?0:1;
     }
     if(argc==5 && !strcmp(argv[4],"--vdmredir-async")) {
-        send_keys("REDIR.EXE\r"); Sleep(1500); send_keys("VDMPASY.COM\r"); Sleep(5000); send_keys("mem\r");Sleep(2000);send_keys("exit\r");
+        send_keys("system32\\REDIR.EXE\r"); Sleep(1500); send_keys("tests\\VDMPASY.COM\r"); Sleep(5000); send_keys("system32\\MEM.EXE\r");Sleep(2000);send_keys("exit\r");
         DWORD pipe_wait=WaitForSingleObject(pi.hProcess,5000),pipe_code=0; GetExitCodeProcess(pi.hProcess,&pipe_code);
         printf("async connected=%ld sent=%ld wait=%lu exit=%lu\n",named_pipe_connected,named_pipe_sent,pipe_wait,pipe_code); fflush(stdout);
         CloseHandle(job);ClosePseudoConsole(pty);CloseHandle(write_pipe);WaitForSingleObject(thread,3000);CloseHandle(raw_log);CloseHandle(named_pipe_server);
@@ -891,7 +897,7 @@ if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--s38-window-reentry") && strcmp(argv
             log_contains(argv[3],"ASYNC-OK") && log_contains(argv[3],"bytes total conventional memory")?0:1;
     }
     if(argc==5 && !strcmp(argv[4],"--vdmredir-async-write")) {
-        send_keys("REDIR.EXE\r"); Sleep(1500); send_keys("VDMPASW.COM\r"); Sleep(5000); send_keys("mem\r");Sleep(2000);send_keys("exit\r");
+        send_keys("system32\\REDIR.EXE\r"); Sleep(1500); send_keys("tests\\VDMPASW.COM\r"); Sleep(5000); send_keys("system32\\MEM.EXE\r");Sleep(2000);send_keys("exit\r");
         DWORD pipe_wait=WaitForSingleObject(pi.hProcess,5000),pipe_code=0; GetExitCodeProcess(pi.hProcess,&pipe_code);
         printf("async-write connected=%ld received=%ld wait=%lu exit=%lu\n",named_pipe_connected,named_pipe_received,pipe_wait,pipe_code); fflush(stdout);
         CloseHandle(job);ClosePseudoConsole(pty);CloseHandle(write_pipe);WaitForSingleObject(thread,3000);CloseHandle(raw_log);CloseHandle(named_pipe_server);
@@ -941,7 +947,7 @@ if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--s38-window-reentry") && strcmp(argv
           CloseHandle(job);ClosePseudoConsole(pty);return passed?0:1; }
     }
     if(argc==5 && !strcmp(argv[4],"--vdmredir-netapi")) {
-        send_keys("REDIR.EXE\r"); Sleep(1500); send_keys("VDMNETAP.COM\r"); Sleep(3000); send_keys("mem\r");Sleep(2000);send_keys("exit\r");
+        send_keys("system32\\REDIR.EXE\r"); Sleep(1500); send_keys("tests\\VDMNETAP.COM\r"); Sleep(3000); send_keys("system32\\MEM.EXE\r");Sleep(2000);send_keys("exit\r");
         DWORD pipe_wait=WaitForSingleObject(pi.hProcess,5000),pipe_code=0; GetExitCodeProcess(pi.hProcess,&pipe_code);
         /* Let the ConPTY reader drain the child's final marker before the
          * bounded raw-log assertion below. */
