@@ -2,284 +2,46 @@
 
 ## Current Work
 
-**Active: M0 T429 S8** (Ordinary Mode; delivered, T429 remains open).
-Owner requests sharing the project-added input thread mechanism in worker-base,
-with NTVWM20ms polling confined to hidden Console capture. S7 is delivered at
-f484f6193. T429 remains open; original DOS input processing stays in place.
-
-## Active Packet
-
-| Field | Required record |
-| --- | --- |
-| Identifier Mode | M0 T429 S8; Ordinary Mode. |
-| Admission And Approval | Owner approves extracting shared project-added input threading into worker-base for both workers; NTVWM20ms timeout only acquires hidden Console output. |
-| Objective | Reuse one event wait/rearm/source-pin/stop mechanism, remove private NTVDM watcher and timer-driven native input; explicit native admission/resume wakes. |
-| Non-goals | No original DOS input/keyboard/mouse/scheduler relocation, mirror change, new process/helper/channel/wire, frontend policy or event-only native output. |
-| Reference Baseline | Pf484f6193; S7 r001 runtime, r003/r004 product/integration, r005/r007 publication/smoke; x86 MSVC14.43/SDK22621 /MT CCPU40, APP0.0.427/RPC38/I/O25. |
-| Files And ABI Surface | worker-base input mechanism; NTVDM console_client, NTVWM membership/input callbacks, build selection/fixtures and evidence; wire unchanged. |
-| Applicable Rules | Full AGENTS authorities, provenance-first shared extraction, original input processing retained, explicit state/resources/locks/failure; build-only output, serial BaseSrv/Z:, side-session edits preserved. |
-| Verification | Production-linked wait/rearm/rebind/stop-priority/failure/handle fixture; actual both callers, ordered/burst input, native final input return, route reentry/shutdown; x86 closure, Console17/Window17/WOW, EDIT200, eight integration cases, publication/smoke, ownership/governance/links/diff. |
-| Expected Markers | No input consumption or admission retry gated by native20ms timeout; no hot signalled-event loop; source handles pinned across channel release; cancellation before join and no owner/transport lock held across join. |
-| Asset Needs | Validated cache M0-T427/S2/r001 and S7 sealed runtime; original observers; new evidence build/M0-T429/S8. |
-| Reporting Requirements | Source/provenance/shared-versus-independent map, exact failures/results, retained native capture retry and physical limits. |
-| Stop Conditions | Need for new wire/helper, changed original scheduling, unsafe lock ordering or lost/duplicated input pauses for review. |
-| Exit Criteria | Shared code linked by both workers, replaced watcher/input timer path removed; affected/full gates, publication and review pass; commit/push; T open. |
-| Original Owner Request | "进行架构调整 把该放入workerbase的输入线程逻辑放进去两边统一 这样20ms轮询只负责读取隐藏console". |
-| Similar-Issue Sweep | Admission, resume, queued input, cancellation, close priority, source replacement, final input return, mouse-only frame and independent session isolation. |
-
-[S8 audit and delivery](../etc/evidence/m0-t429-s8-shared-event-input.md) records the scoped extraction.
-
-## S8 Closure Record
-
-Both workers use worker-base/input_watch in their actual link maps. NTVDM's
-private watcher is removed; its original DOS input consumer is unchanged.
-NTVWM input and launch admission are event-driven; its20ms wait only captures
-active hidden Console output. No mirror, frontend policy, wire or helper change.
-Shared627 assertions, native501/input-return689, original close fixtures,
-Console17/Window17/WOW, EDIT200 and all8 integration cases pass. Final r008
-eight-file package is published at O:/winnt/system32; r011 retains recovery
-and all-eight hashes, r013 verifies actual published Console4/Window4 and
-unchanged hashes. Governance/links/ownership/diff review pass. Native capture
-and final-capture retry remain; physical RDP latency is not newly measured.
-This is the S8 delivery record; T429 stays open, no next S admitted. Unrelated
-side-session proposal remains untouched and excluded.
-
-## S7 Closure Record
-
-[S7 native acquisition evidence](../etc/evidence/m0-t429-s7-native-acquisition-interval.md)
-records the sole production30→20ms timeout change. Affected x86 build, native
-501/689 assertions, shared publisher tests, Console17/Window17/WOW and all
-eight integration cases pass. S7/r001/runtime is published coherently in
-O:/winnt/system32; r005 retains all-eight hashes/recovery, r007 verifies
-actual published Console4/Window4 and hashes. Input/acquisition stay coupled;
-no event-only acquisition, phase synchronization or measured speedup is claimed.
-T429 remains open. Unrelated side-session proposal is preserved and excluded.
-
-## S6 Delivery Packet
-
-Owner approves both workers adopting the publisher mechanism in worker-base.
-S5 is delivered and pushed at903d25d8a; S6 is delivered below. T429 remains open.
-
-### Retained S6 Packet
-
-| Field | Required record |
-| --- | --- |
-| Identifier Mode | M0 T429 S6; Ordinary Mode. |
-| Admission And Approval | Owner approves extracting the S5 publisher into worker-base and connecting both NTVDM and NTVWM production paths. This explicitly admits worker-side full-snapshot comparison in worker-base, not frontend deduplication. |
-| Objective | Both workers use one shared copied latest-state publication mechanism,50Hz cap, final drain, failure and stop/join contract; remove replaced private publisher and native full-publication comparison. |
-| Non-goals | No new process/helper/component/channel/wire, frontend dedup, VGA/CCPU/guest algorithm, broker lifecycle, NTCON rendering or native30ms acquisition change. Do not move original OpenNT execution or introduce worker-kind branches in the shared publisher. |
-| Reference Baseline | P903d25d8a; S5 r019/runtime, r028 Product, r029 eight-case integration, r018 EDIT200 and r017/r021 coherent publication/smoke. Existing S5 causal limitations remain explicit. MSVC14.43/SDK22621/x86 /MT CCPU40; APP0.0.427/RPC38/I/O25 unchanged. |
-| Files And ABI Surface | worker-base publication module; NTVDM console_client adapter; NTVWM presentation acquisition/commit separation; build graph, production-linked fixtures and evidence. Common wire unchanged. Native immutable publication must include Unicode cell grid and geometry/cursor metadata alongside the text frame. Expected no new mvdm/opennt-host mirror diff. |
-| Applicable Rules | Full AGENTS reading set; worker-only source ownership; provenance-first extraction; original mirror algorithms retained; explicit instance/resources/locks/failure; build-only artifacts; preserved side-session edits and serial BaseSrv/Z: tests. |
-| Verification | Production-linked shared publisher positive/negative/blocked-send/handle tests; both actual callers, native Unicode/geometry/mouse changes, identical idle, final transaction and handoff ordering, cancellation and reopen. x86 affected closure, Console17/Window17/WOW frontiers, EDIT200 and native interaction, bidirectional nested handoff, cooked return, close/fault/session isolation, coherent eight-file publication/smoke, governance/relative links and diff review. |
-| Expected Markers | Same generic instance mechanism really linked by both workers; latest replacement without FIFO; last-successful complete-state comparison; no data/transport lock while waiting for drain/join; final paint acknowledged before input return or parent output. |
-| Asset Needs | Reuse validated T427 S2 r001 cache and S5 sealed baseline; existing original observers/media and production fixtures. New run evidence under build/M0-T429/S6 only; Z: is the sole temporary alias and must be removed. |
-| Reporting Requirements | Map each removed duplicate and each retained worker-specific operation to source/evidence; distinguish admission, implementation and runtime proof. Retain raw failures and waived physical boundaries. |
-| Stop Conditions | Need for new protocol/helper/scheduler, unsafe mutable capture access, unbounded snapshot queue, changed native Unicode/geometry transaction, original execution relocation or uncontrolled lock ordering requires re-review. |
-| Exit Criteria | Shared engine used in both production callers; replaced private/full-frame mechanisms removed; focused/full affected gates and publication pass; evidence reviewed, committed and pushed. T429 manual acceptance remains separate. |
-| Original Owner Request | "批准请准入s来共用" after approval of extracting the publication thread into worker-base for both workers. |
-| Similar-Issue Sweep | Frame/config retirement, Unicode-only changes, mouse-only changes, size/viewport/cursor, channel reopen, final drain, failed sends, worker/frontend loss, old snapshot invalidation and Console/Window routes. |
-
-## S6 Closure Record
-
-[S6 source review and implementation checklist](../etc/evidence/m0-t429-s6-shared-video-publication.md)
-records the native atomic-publication boundary and final delivery results.
-Both workers use the shared publisher. Affected x86 build, shared fixtures,
-501 native assertions,689 input-return assertions, EDIT200, full Console17/
-Window17/WOW and all8 integration cases pass. The verified eight-file package
-is published at O:/winnt/system32 with recovery and deployed smoke/hash checks.
-S6 reaches bounded closure; no next S is automatically admitted. T429 awaits
-owner acceptance. The other session's proposal remains untouched and unstaged.
-
-Owner admitted the performance package after closing T428. S1's bounded
-measurement conclusion is recorded in the
-[baseline evidence](../etc/evidence/m0-t429-s1-performance-baseline.md).
-S3 is delivered at production0654f5e0b after S2 production123c0ad3e.
-The owner closes delivered S4 and admits S5: restore timely software-VGA
-publication without synchronous frontend transport in mouse IRQs. Register the
-minimal mirror exception; build and run focused checks, publish the coherent
-eight-file candidate for owner testing, then run the full regression gate.
-Early publication was not S5/P closure. Final S5 delivery is recorded below;
-T429 remains open.
-
-## S5 Delivery Record
-
-| Field | Required record |
-| --- | --- |
-| Identifier Mode | M0 T429 S5; Ordinary Mode. |
-| Admission And Approval | Owner supersedes and requests reversal of the unpublished heartbeat/FIFO candidate. Explicitly approves a dedicated event-driven VGA publisher, latest-state coalescing, complete-state comparison against the last successful send, maximum50Hz (20ms), and mandatory final-state acknowledgement. Publish after build/focused checks for owner testing, then run the full suite. |
-| Candidate Proposal | [Execution-performance recovery](../proposals/proposal-ntvdm-execution-performance-recovery-001.md). |
-| Objective | Remove the proven mouse-update-to-video-tick deferral in software Window presentation while preserving original VGA/mouse algorithms and keeping frontend transport outside mouse IRQ handling. |
-| Non-goals | No guest/firmware, CCPU algorithm, heartbeat, lifecycle policy, wire, helper/channel/component or generic scheduler change. No dedup in NTCON/worker-base. NTVWM30ms sampling unchanged. One NTVDM-owned publication thread only, no intermediate-frame FIFO, no idle periodic polling. |
-| Reference Baseline | Production0654f5e0b; coherent S3 r006/runtime, r009 Console17/Window17/WOW and r010/r011 deployment/smoke. MSVC14.43/SDK22621/x86 /MT CCPU40; APP0.0.427/RPC38/I/O25. S3 matched EDIT200 commit median100350→5512us, scripted workload8924→7958ms. |
-| Files And ABI Surface | NTVDM software-video and Console adapters; minimal nt_graph.c and pause/resume nt_event.c hooks. Original guest owner extracts immutable copies; the event-driven publisher compares/sends latest copies outside guest/painter locks. nt_timer.c stays unchanged. Explicit stop/join and final-paint barrier; production-linked tests and registered source exception. No cross-EXE ABI or ownership change. |
-| Applicable Rules | Full AGENTS set, source policy, mirror provenance/minimal registered diff, original instruction semantics, build-only artifacts, preserved other-session edits and serial global endpoint/Z:-only tests. |
-| Verification | Audit execution/ICA/transport lock ownership, suspension and final-paint barriers before editing. Focused wake/publication/failure fixtures, original EDIT200 and keyboard/Console return, x86 incremental build, coherent early publication/recovery/hash check; then serial Console17/Window17/WOW and affected handoff/lifecycle gates, governance/links and final independent diff review. |
-| Expected Markers | No frontend transport in mouse IRQ; timely publication after actual software update; no guest-clock advancement caused by display notification; input conservation, idle cursor behavior, final frame/parent return and orderly teardown retained. Distinguish measured boundaries from physical latency. |
-| Asset Needs | Validated T427 S2 r001 dependency cache; exact S3 r006 runtime/media and S3 r010 deployed manifest. Existing private-desktop observers and fixtures; fresh S5 build-only reports, Z:-only serial runtime. |
-| Reporting Requirements | Separate source, existing instrumented evidence and fresh measurements; disclose publication before full verification and exact known limits. Record every retained mirror expression and rejected recovery rung. |
-| Stop Conditions | Unsafe concurrent VGA access, need for extra threads/protocol/scheduler/lifecycle policy, guest changes or frontend dedup pauses implementation. Do not repurpose heartbeat/input listener or trigger extra guest timer ticks. |
-| Exit Criteria | Focused and full affected gates pass, coherent package published, minimal exception/source accounting reviewed, evidence committed/pushed. Owner hand test and T closure remain distinct. |
-| Original Owner Request | Close current S, admit a repair S, register diff exception, publish for hand testing before running the full suite. |
-| Similar-Issue Sweep | Mouse draw/undraw, cursor/register-only updates, graphics/text changes, Console/Window route, blocked/resumed guest, final publication and shutdown priority; no idle repeated publication. |
-
-## S1 Closure Record
-
-Measurement-only S1 concludes with [baseline and control evidence](../etc/evidence/m0-t429-s1-performance-baseline.md), including r020 matched variants.
-No production speedup is claimed; physical input and matched SoftPC runtime
-comparison remain explicitly unproved. Sequential S2 is admitted, not T closure.
-
-## S2 Closure Record
-
-[S2 diagnostic-selection and close-ordering evidence](../etc/evidence/m0-t429-s2-release-decode-diagnostics.md)
-records source/object proof, matched distributions, all retained runtime gates,
-the approved native-close dependency and coherent eight-file publication.
-Production123c0ad3e is pushed. S2 is bounded-closed, not T429 owner closure.
-
-## S3 Closure Record
-
-[S3 frame-local code-page evidence](../etc/evidence/m0-t429-s3-frame-codepage-snapshot.md)
-records importer/failure/channel tests, six matched EDIT200 samples, full product
-and coherent deployment/smoke. Production0654f5e0b is pushed; S3 is bounded-closed.
-Its succeeding S4 final integration is delivered below; S5 is now active.
-
-## S4 Closure Record
-
-[S4 integration audit](../etc/evidence/m0-t429-s4-integration-audit.md) records
-the final eight actual integration/lifecycle passes at unchanged published
-identity, retained failed combined run, native environment diagnostic and
-minimal test-only flag-restoration fix. Production0654f5e0b remains deployed.
-Verification/test-only973a671bf is committed and pushed. S1–S4 are bounded-closed;
-T429 stays open for owner acceptance, not additional automatic implementation.
-The owner's subsequent direction closes this S4 delivery and admits only the
-bounded S5 software-video publication repair above. Existing S4 evidence and
-production identity are retained; this is not T429 closure.
-
-## S5 Closure Record
-
-[S5 software-VGA publication evidence](../etc/evidence/m0-t429-s5-software-video-publication.md)
-records the event-driven copied publisher, source exception DIV-326, final
-x86 dependency build, production fixtures and50 handle-clean teardown cycles.
-The final r019 package passes Product r020 and r028 (Console17/Window17 and
-each retained WOW frontier), plus all eight handoff/lifecycle cases r026/r029.
-r018 passes Console4/Window4 and actual EDIT200. r017 publishes all eight
-matching files to O:/winnt/system32 with recovery; r021 passes published
-Console/Window smoke and every hash. Source review preserves original guest
-ownership and clock, final-frame acknowledgement and cancellation after reopen.
-NTCON/worker-base have no dedup or production changes. The failed r012 attempt
-and causal uncertainty remain explicit evidence, not a passed or waived test.
-Test environment restoration is repaired without weakening assertions.
-S5 reaches its bounded closure; T429 owner acceptance remains pending.
+**No active M/T/S packet.** Owner accepts and closes T429 on 2026-10-04.
+S1–S8 are closed; no following T or S is admitted. See the
+[T429 closure and retained packets](../history/m0-t429-performance-worker-io-closure.md),
+[ordered candidate queue](QUEUE.md) and [debt disposition](TODO.md).
 
 ## Current Technical Baseline
 
-[S7 native acquisition delivery](../etc/evidence/m0-t429-s7-native-acquisition-interval.md)
-supersedes the S6 installed identity below. Only NTVWM changes, SHA256
-6AF71B8F7BC5136CE4414106A33D2193AC859AC88A5BF91E9052EF6411456F1A.
-S7/r003/r004 pass retained product/integration gates; r005/r007 verify
-publication and deployed smoke. Shared50Hz publisher and seven other files
-are unchanged. T429 remains open; input/acquisition separation is not admitted.
+Accepted production delivery: 5b9931b8e, pushed to main/origin.
+The coherent eight-file set build/M0-T429/S8/r008/runtime remains published
+at O:/winnt/system32: run16.exe, ntsrv.exe, ntcon.exe, ntvdm.exe, ntvwm.exe,
+ntmon.exe, WOW32.DLL and VDMREDIR.DLL. MSVC14.43/SDK22621, x86 /MT CCPU40;
+APP0.0.427/RPC38/I/O25 unchanged. S8/r011 pins publication/recovery hashes;
+r013 confirms published Console/Window smoke and all-eight hashes.
 
-[S6 shared publication delivery](../etc/evidence/m0-t429-s6-shared-video-publication.md)
-supersedes the S5 installed identity below. S6/r006/runtime passes Product
-r009, eight-case integration r010 and published smoke r015. r013 publishes
-all8 matching files and retains recovery. NTVDM SHA256 is
-055F2F07CD571826F90A21ED7FD90C2FF5A1BF6695ECE030F69B816307AD12CC.
-The shared publisher is linked by both workers; native30ms capture remains.
-No original mirror code, frontend, wire or lifecycle policy changes. T429
-remains open for owner hand acceptance; prior S5 evidence stays historical.
+Both workers use worker-base publication and event-driven input machinery.
+The publisher compares immutable complete state against its last successful
+commit, with a maximum50Hz cap. Native20ms sampling only captures active
+hidden Console output. NTVDM original input processing remains in place;
+NTCON remains format-driven without display deduplication. NTSRV retains
+connection/lifecycle authority. No helper or new wire is added.
 
-[S5 source audit and delivery](../etc/evidence/m0-t429-s5-software-video-publication.md)
-record the approved independent event-driven publisher, latest-state/full-copy
-comparison and20ms cap. Guest-clock timing, original VGA and mouse algorithms
-remain unchanged. Unpublished heartbeat/FIFO edits were reverted; no
-guest-timer wake is authorized. Final r019/runtime is published coherently at
-O:/winnt/system32, with NTVDM SHA256
-F3589AA37BB3FFB4621B3C580B5E637C693196637AEC9AAD286B80B2C17B3C5A.
-Dependent VDMREDIR relinks; the other six artifacts are unchanged. r017 pins
-all eight hashes/recovery, r021 verifies actual publication and smoke. S5 is
-bounded-closed, not T429 acceptance. The early r005 candidate/recovery remains
-historical evidence. The other session's proposal edits are preserved outside
-this delivery; no new package or task is automatically admitted.
-
-T428 is owner-closed at production68e860553/statusb1b77e129; its
-[closure](../history/m0-t428-worker-interface-unification-closure.md)
-retains S1-S6 results. The last fully accepted set remains
-build/M0-T428/S6/r002/runtime/system32. Owner subsequently requests immediate
-S2 candidate publication before full regression. The initial publication matched
-build/M0-T429/S2/r002/runtime/system32, with only ntvdm.exe changed; all eight
-hashes pass. Recovery is build/M0-T429/S2/r007/recovery. This explicit early
-publication is not a reviewed production P or S2 closure.
-[S2 evidence](../etc/evidence/m0-t429-s2-release-decode-diagnostics.md)
-records passed normal/diagnostic objects, all48 paired comparison cases,
-actual EDIT200, service29 and input/video/shutdown fixtures. Console EDIT
-aggregate median improves9.9%; Window is essentially unchanged, not a universal
-speedup. Full product r013 and deployed Console/Window smoke pass. Management
-frontend-close failed in r014; fixed paired r018 also reproduced it in the
-unchanged accepted baseline (worker exits1067 while CMD survives). The owner
-approved its bounded close-ordering dependency repair. r025 now passes four
-fixed real close samples, unexpected-worker-loss target survival and independent
-Console isolation. Production priority fixture and existing shutdown37 pass.
-The original failed samples remain evidence, not reclassified as passes.
-r026 repeats Console17/Window17 and all retained WOW frontiers successfully
-with the repaired coherent package. r027 publishes its eight matching files
-to O:/winnt/system32; recovery is r027/recovery. NTVWM is the only additional
-changed binary beyond the release DECODE repair. r028 published Console/Window
-COMMAND/MEM/EDIT/native smoke and all eight hashes pass. Production123c0ad3e
-is committed and pushed to main; S2 reaches its bounded closure. Owner manual
-acceptance and overall T429 closure remain distinct and pending.
-Test-only r021/r023 narrow the remaining transaction cost to per-cell Console
-code-page queries (94% of cumulative text commit in r023). Sequential S3 now
-repairs exactly that query cost; its full runtime/publication gates now pass.
-Original frame/input assertions pass.
-S1/S2 measured wrapper
-binaries were never published.
-
-S1 delivered measurements at c8754f75d,b7178e53d,3b9d01a08 and its final
-control review.42 baseline cases, missing-marker negatives, actual EDIT200
-and graphics200, producer/transfer/frontend timing, queue conservation and
-instrumentation units pass. r020 original/disabled/enabled comparisons pass;
-run-order variability does not establish zero measurement overhead. Actual
-transfer cost is larger than assembly, but its cause remains unisolated.
-
-NTSRV remains relationship/lifecycle authority; original DOS/WOW execution,
-records, scheduling, blocking/resume and cleanup remain in their mirrors.
-NTCON is presentation; NTVWM owns native targets and hidden Console.
-Root/system32 lookup and ordinary application search remain unchanged.
-Shared GUI carriers reside/reuse; no exclusive GUI option is introduced.
-
-Physical RDP/RawInput/focus is waived or unobserved, not passed. Matched SoftPC
-runtime comparison remains unperformed; S4 must disclose it. WOW keeps retained
-frontier nonregression, not broader usability. Host scrollback is not promised.
-S3 delivers only the measured text-frame conversion cost; S4 delivery is complete.
-Native30ms polling is unchanged. [S3 evidence](../etc/evidence/m0-t429-s3-frame-codepage-snapshot.md)
-records r005 importer/rollback/public-channel passes and r008's fixed six-sample
-EDIT200 comparison. Commit median falls100350→5512us; whole scripted workload
-median8924→7958ms. These are injected private-desktop observations, not physical
-RDP latency. r007's wrong-observer rejection remains evidence. S3 r009 formal
-Console17/Window17/WOW passes (total219979ms). r010 publishes the coherent eight
-files to O:/winnt/system32 with only NTCON changed; r011's published Console/
-Window smoke and all hashes pass. S3 final diff review is complete and production
-0654f5e0b is pushed. [S4 audit](../etc/evidence/m0-t429-s4-integration-audit.md)
-records final integration and explicit limits, not T closure. S4 r004's eight
-cases and r005's native environment diagnostic pass; the preceding r001 failure
-is retained. Only test flag cleanup changed, not the eight deployed binaries.
-Other-session proposal chronology is preserved and excluded from this delivery.
+[S8 verification](../etc/evidence/m0-t429-s8-shared-event-input.md) passes
+focused fixtures, Console17/Window17/WOW, EDIT200, all8 integration cases and
+published smoke. Physical RDP latency, matched SoftPC comparison and universal
+mouse-speed improvement are not claimed. Native capture/final-capture retry
+and recorded limits remain; host scrollback is not promised.
 
 ## Recent M0 Closures
 
 | Task | Outcome and evidence |
 | --- | --- |
-| T428 | Owner-closed worker interface unification, production68e860553/statusb1b77e129; [closure](../history/m0-t428-worker-interface-unification-closure.md). |
+| T429 | Owner-accepted performance and shared worker I/O; [closure](../history/m0-t429-performance-worker-io-closure.md). |
+| T428 | Owner-accepted worker interface unification; [closure](../history/m0-t428-worker-interface-unification-closure.md). |
 | T427 | Owner-accepted system-root/search isolation; [closure](../history/m0-t427-system-root-search-isolation-closure.md). |
 | T426 | Owner-accepted monitor tree; [closure](../history/m0-t426-console-root-monitor-tree-closure.md). |
 
 ## Recent Governance
 
-S1 concludes as measurement-only; S2 is bounded-closed at production123c0ad3e.
-S3 is bounded-closed at production0654f5e0b; S4 integration is owner-closed.
-S5 reaches its bounded delivery with the final coherent published package.
-Owner subsequently admits S6 shared publication, now bounded-closed with its
-verified coherent package installed; overall T429 acceptance is still pending.
-Guest and lifecycle policy remain unchanged; the approved close dependency
-repairs ordering only. T429 remains open and other-session work is preserved.
+Owner-directed T429 closure is documentation-only. Retained detailed packets
+move to history rather than being discarded. Queue order is unchanged; its
+head remains the bounded CCPU40/V86 guest-contract audit. Unrelated proposal
+modifications remain untouched and excluded. No implementation may proceed
+until the owner admits the next packet.
