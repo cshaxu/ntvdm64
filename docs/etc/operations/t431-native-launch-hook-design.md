@@ -1,5 +1,134 @@
 # T431 native launch hook detailed design
 
+## S3 design freeze: component widths, handoff and native propagation
+
+Owner agrees on2026-10-05 to freeze the three boundaries below and allocate
+a separate subsequent S for compilation-width organization. This section
+supersedes earlier single-x86-worker/no-helper-only options, without declaring
+64-bit runtime support or admitting production implementation in S3.
+
+### Component compilation contract
+
+| Installed image | Selected build | Ownership |
+| --- | --- | --- |
+| run16.exe | x64 only | Existing search/classification, NTSRV submission/direct receipt and context consumer; no frontend or native-child scheduler. |
+| ntcon.exe | x64 only | Existing visible Console/Window and one authorized worker I/O connection. |
+| ntmon.exe | x64 only | Existing NTSRV management client and projection. |
+| ntsrv.exe | x86 only | Original BaseSrv owner and project control/registration/receipt authority. |
+| ntvdm.exe | x86 only | Original CCPU40 DOS/WOW execution. |
+| WOW32.DLL, VDMREDIR.DLL | x86 only | Existing NTVDM-only loaded providers. |
+| ntvwm32.exe, ntvwm64.exe | x86 and x64 | Same worker source/control/lifecycle, each process owning its own hidden Console. |
+| nthook32.dll, nthook64.dll | x86 and x64 | Same Hook contract with architecture-correct installer/interception ABI. |
+
+The final coherent set has11 images, replacing current ntvwm.exe with its
+two named variants and adding Hook64. All retain product-relative system32
+placement, not an extra runtime layer. Shared static libraries are rebuilt
+per consuming architecture with isolated objects/CRT/MIDL outputs under build;
+they do not become additional installed DLLs or processes. x64 MVDM,
+NTSRV, WOW32 and VDMREDIR are not selected. This targets64-bit Windows;
+an x86-only Windows release is not supplied by the new x64-only launcher.
+
+Source audit shows EXE source ownership is not link-closure ownership:
+New-T310OriginalSoftpcNinja.ps1 currently links run16/ntcon/ntmon and NTVWM
+against historical Base/RTL binding archives. run16 image_classification.c
+and hook_classification.c select original section metadata/classification;
+original-opennt-rtl-x86.lib contains architecture-specific carriers. Merely
+switching cl.exe cannot satisfy this contract. Audit each required symbol,
+retain independently composable original algorithms, and use only bounded
+native-width ABI/modern bindings at unavailable boundaries. No mirror
+rewrite, second resolver/classifier or x86 archive linked into an x64 image.
+An uncomposable original dependency is a reported gate, not permission to
+replace its semantics wholesale.
+
+Regenerate RPC clients for their local ABI from the same IDL. Preserve copied
+fixed-width records and recipient-local resource ownership. Review narrowing,
+sign extension/pseudo handles, structure packing, process-image machine queries,
+copied payload discovery and physical Windows System32/SysWOW64 search effects.
+Do not globally disable WOW64 redirection or silently substitute a different
+user target merely to match worker width. Match worker width to the selected
+actual image while retaining the agreed shared discovery semantics.
+
+### Worker handoff contract
+
+NTVDM, NTVWM32 and NTVWM64 use the same existing NTSRV-coordinated final
+state/input return -> old pipe release -> incoming backend seed/ack -> resume
+contract. Each native worker owns its own hidden Console; no joint attachment.
+NTCON retains the current logical page and zero/one authorized I/O pipe without
+bitness/kind special cases. Transfers carry latest cells, geometry, cursor and
+font/style/palette under current capability conversion, not an old parent page.
+Reuse project-added worker-base/common mechanisms and original NTVDM
+block/resume ordering. Native32/native64 differ only in native ABI/materializing
+their backend state; lifecycle, receipt, nesting and control remain symmetric.
+
+NTSRV selection/reuse gains a native-machine discriminator, not a new task
+kind or second registry. Reentrant native32 -> native64 -> native32 must be
+audited against the real execution-origin and worker admission rules; do not
+declare it supported solely because the page-transfer protocol is reusable.
+WOW GUI and native GUI remain on host windows, not text presentation ownership.
+
+### Ordinary native child creation contract
+
+Native32 -> native64 and native64 -> native32 retain actual Windows child
+process/thread handles, caller waiting and real exit codes, environment,
+streams, attributes and requested suspension. They do not redirect through
+run16, become broker direct tasks, or automatically switch worker merely due
+to bitness. Such ordinary descendants normally retain their inherited real
+Console, even when its owning worker has a different bitness. This is not
+two worker processes attaching to one hidden Console.
+
+Hook propagation is a separate suspended-child installation transaction.
+Prefer same-width/direct and proven no-helper mechanics. Owner now permits
+research/discussion of a transient cross-width installer helper if necessary;
+no new helper implementation, executable or process is yet approved. Microsoft's
+Detours OverviewHelpers documents a rundll32 helper that patches the already
+created opposite-width target. That is a source-reuse candidate, not an OS
+API promising transparent arbitrary injection or a tested project solution.
+Helper role, if selected, is installation/context copying only: no target
+creation replacement, target completion wait, frontend, worker or residency.
+Review matching DLL/path/export, authority/handle transfer, finite installer
+wait/cancellation, exact success acknowledgment and failure rollback before
+adoption. Do not blindly enable Detours wrapper helper fallback.
+
+Also cover the now-reversed launcher boundary: Hook32/NTVDM can create the
+new64-bit run16; Hook64 creates it same-width. Run16 receives copied context
+only, never an interception DLL. Conversely64-bit run16's context reader must
+not accidentally pull x86 Detours objects into its image. Context installation
+needs its own width tests, independently of interception installation.
+
+### Sequential implementation and acceptance
+
+S3 freezes design only. S4 will own the dedicated component-width/source/link/
+build/package organization with minimal context-delivery compatibility needed
+to preserve S2 behavior. S5 will own Hook64 and ordinary four-direction native
+propagation, selecting any temporary-helper mechanism only after review.
+Original whole-package isolation/fault/cleanup/trace handoff moves to S6.
+Only one S is admitted at a time; no implementation or helper is auto-admitted.
+
+S4 must preserve actual32-bit Hook chains despite run16 becoming64-bit. If the
+necessary context-delivery mechanism is unavailable, retain the S2 package
+and report the dependency rather than publish a mixed or unhooked regression.
+S5 must prove all four native width directions, caller-suspended/no-inherit,
+immediate child creation, GUI propagation, real returned-target identity and
+rollback. All production deliveries retain affected lifecycle negatives,
+17 Console/17 Window, independent WOW frontiers and coherent publication.
+Focused width/handoff fixtures use both native worker images, independent
+roots and return ordering. Documentation freeze runs governance/links/diff
+checks only and changes no runtime package or running process.
+
+Remaining owner decision: whether a reviewed transient cross-width installer
+helper may actually be implemented, and its exact carrier/name if required.
+Permission to investigate is not permission to ship it. Original dependency
+ABI composition, worker reentry and cross-width resource correctness are
+engineering proofs, not requests to choose another handoff architecture.
+
+Primary references rechecked on2026-10-05:
+[Windows process interoperability](https://learn.microsoft.com/en-us/windows/win32/winprog64/process-interoperability),
+[WOW64 filesystem redirection](https://learn.microsoft.com/en-us/windows/win32/winprog64/file-system-redirector),
+[Detours helper mechanism](https://github.com/microsoft/Detours/wiki/OverviewHelpers).
+Source inputs are the current formal graph, image/classification and Hook
+installer/context units plus retained S1/S2 evidence. No executable feasibility
+probe, new import or runtime proof is claimed by this design freeze.
+
 ## S3 discussion admission (2026-10-05)
 
 The owner's subsequent dual-build worker/handoff direction below supersedes

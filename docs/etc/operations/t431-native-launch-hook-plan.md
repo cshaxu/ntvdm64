@@ -2,6 +2,16 @@
 
 ## Current admission revision
 
+Owner freezes the three-part S3 design: run16/ntcon/ntmon x64 only;
+ntsrv/ntvdm/WOW32/VDMREDIR x86 only; named ntvwm32/ntvwm64 and
+nthook32/nthook64 variants. Native worker handoff reuses the current protocol
+with private hidden Consoles. Ordinary native children keep actual Windows
+process/handle/wait semantics, never Run16 mediation. Transient installer
+helper research is now permitted, not implementation/deployment approval.
+The [frozen design](t431-native-launch-hook-design.md#s3-design-freeze-component-widths-handoff-and-native-propagation)
+supersedes prior no-helper-only/single-x86-worker options. Dedicated S4 width
+organization and S5 Hook propagation precede the original final audit, now S6.
+
 The owner's follow-up S3 direction records the dual-build NTVWM option in
 [the design](t431-native-launch-hook-design.md#dual-build-ntvwm-and-width-neutral-handoff):
 each native worker owns its own hidden Console, and DOS/native32/native64
@@ -66,8 +76,10 @@ helper, production change or reduced width coverage is authorized implicitly.
 | --- | --- | --- |
 | S1 | Source/API/bitness audit and contract; [checkpoint](../evidence/m0-t431-s1-native-launch-hook-audit.md). | Bounded source/design closed; runtime proofs assigned to S2/S3. |
 | S2 | Actual Hook32 direct installation and controlled child propagation. | Owner-directed engineering closure at12160c657; automated tests/publication retained; personal acceptance pending. |
-| S3 | Hook64 and four width directions without helper; design/source discussion currently admitted. | After implementation admission: actual32→32/32→64/64→64/64→32; DLL compilation alone is insufficient. Report unresolved no-helper boundaries, not reduced acceptance. |
-| S4 | Whole-package isolation/concurrency/fault/cleanup and trace handoff. | All established runtime gates, extended coherent runtime manifest and owner acceptance before T closure. |
+| S3 | Freeze component widths, shared native worker handoff and real native child creation/propagation design. | Documentation/source contract only; no64-bit runtime completion claimed. |
+| S4 | Dedicated component compilation-width/source-ABI/build/package organization. | Actual mixed-width RPC, resources and minimal launcher context support preserve S2 behavior; never publish an incomplete mixed package. Not yet admitted. |
+| S5 | Hook64 and four-direction native propagation, preserving actual child identity. | Actual32→32/32→64/64→64/64→32 and rollback; helper research permitted, exact implementation requires approval. Not yet admitted. |
+| S6 | Whole-package isolation/concurrency/fault/cleanup and trace handoff (former S4). | All established runtime gates, extended coherent runtime manifest and owner acceptance before T closure. Not yet admitted. |
 
 ## Reproducible capability case plan
 

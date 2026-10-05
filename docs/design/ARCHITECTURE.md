@@ -10,6 +10,26 @@ NTCON renderer or modifying guest/shared-library code.
 
 ### Proposed native worker width variants — T431 S3 design
 
+Owner's subsequent design freeze selects run16/ntcon/ntmon as x64-only,
+ntsrv/ntvdm/WOW32/VDMREDIR as x86-only, and ntvwm32/ntvwm64 plus
+nthook32/nthook64 as dual builds. This narrowly planned scope supersedes
+the earlier Hook-only x64 option, not the32-bit CCPU40/guest execution profile.
+Shared libraries and RPC clients have per-consumer native ABI builds, while
+copied wire contracts remain shared/fixed-width. Current Base/RTL mirror
+dependencies require source/symbol/ABI review before x64 linking; EXE-owned
+source alone does not imply an independent historical-free link closure.
+Do not rewrite mirrors or introduce a second classification/search policy.
+
+Ordinary native children retain real Windows creation handles, parent waits,
+exit codes and Console inheritance, without Run16 replacement or bitness-only
+worker switching. Worker-to-worker handoff and native Hook installation are
+distinct boundaries. Prefer no-helper installation; the owner permits
+research of a transient cross-width installer helper, but its exact mechanism
+still needs approval before implementation. No new resident backend/helper
+or target lifecycle authority is selected. The
+[frozen contract](../etc/operations/t431-native-launch-hook-design.md#s3-design-freeze-component-widths-handoff-and-native-propagation)
+supersedes the earlier single-x86-worker/no-helper-only options below.
+
 Owner-directed S3 design records NTVWM32 and NTVWM64 as two builds of the
 same native-worker implementation, each with its own hidden execution Console.
 They must never jointly attach to one hidden Console. They can share one
@@ -44,8 +64,8 @@ its returned process with run16 or creating a new direct receipt. Hook
 cross-width installation/context delivery and any proposed mediation must
 retain or explicitly resolve those creation semantics. The
 [T431 design](../etc/operations/t431-native-launch-hook-design.md#dual-build-ntvwm-and-width-neutral-handoff)
-records remaining decisions. No helper, x64 MVDM or extra control edge is
-admitted by this design section.
+records remaining decisions. No helper implementation, x64 MVDM or extra
+control edge is admitted by this design section.
 
 ### Controlled native launch hook contract — T431 S1 design
 

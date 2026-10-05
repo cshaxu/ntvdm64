@@ -15,21 +15,32 @@ before personal acceptance and admits S3 for64-bit design discussion only.
 | Field | Required record |
 | --- | --- |
 | Identifier Mode | M0 T431 S3; Ordinary Mode. |
-| Admission And Approval | Owner: “你先把 S2收口了，我还没有验收，但是你先收口，我们准入S3，来讨论一下如何实现64位的支持，就是NT Hook 64.dll的实现。” S2 closes by direction without personal acceptance; S3 is bounded design/source review. |
+| Admission And Approval | Owner directs S2 closure before personal acceptance and S3 discussion, then approves component-width organization as a separate S, real native child semantics and optional helper research, and asks for S3 design freeze/three-part report. S3 remains design/source only. |
 | Candidate Proposal | [Controlled native launch hooks](../proposals/proposal-native-launch-hook-001.md). |
 | Objective | Agree Hook64 and dual-build NTVWM design: each worker owns its hidden Console; DOS/native32/native64 reuse one NTSRV-controlled handoff contract, with explicit cross-width propagation and rollback gates. |
-| Non-goals | No production coding/build/injection/publication at discussion stage; no private WOW64 executable probe, helper, guest/mirror change, x64 MVDM/worker/service, global hook, observation or scheduler. |
+| Non-goals | No production coding/build/injection/publication at design stage; no private WOW64 executable probe, helper implementation, guest/mirror change, x64 MVDM/NTSRV/WOW32/VDMREDIR, global hook, observation or scheduler. Transient installer helper research/discussion is permitted, not shipment approval. |
 | Reference Baseline | S2 P2 committed/pushed12160c657; coherent S2/r027-runtime published, r031-publication; APP0.0.427/RPC38/I/O25. Personal acceptance pending. |
 | Files And ABI Surface | CURRENT, ARCHITECTURE and existing T431 plan/design/evidence; read-only Hook/search/bootstrap/worker callers. Proposed nthook64-dll and dual-build NTVWM need implementation admission; shared fixed-width service/I/O contracts remain canonical, required changes must be separately audited/versioned. |
-| Applicable Rules | Full AGENTS authorities, source policy/recovery ladder, no-helper/non-invasive boundary, one active packet, preserved other-session edits and build-only generated artifacts. |
+| Applicable Rules | Full AGENTS authorities/source recovery, owner-scoped mixed-width design and optional installer-helper research revision, non-invasive boundary, one active packet, preserved other-session edits and build-only generated artifacts. |
 | Verification | Selected-source/primary-reference review; four-width ABI/bootstrap/failure contract; documentation governance, relative links and diff checks. No runtime result claimed. |
 | Expected Markers | Shared architecture-neutral logic versus native ABI mechanics; exact32-to64 blocker and64-to32 candidate; no silent helper or reduced width coverage. |
 | Asset Needs | Retained S1 source/hash evidence, S2 production tests and exact MIT Detours4.0.1 slice. No new guest media or executable research artifact. |
 | Reporting Requirements | Separate source conclusions, feasibility and actual runtime results; record failed earlier recovery rungs and precise remaining engineering gates. |
-| Stop Conditions | Security bypass/host mutation, missing provenance, helper requirement, changed execution/frontend ownership or unexplained runtime regression; preserve coherent baseline and report rather than publish. |
+| Stop Conditions | Security bypass/host mutation, missing provenance, unapproved helper implementation or native creation replacement, changed execution/frontend ownership or unexplained regression; preserve coherent baseline and report rather than publish. |
 | Exit Criteria | Reviewed source-backed design and explicit owner decision on implementation boundaries; discussion cannot close Hook64 runtime capability. |
 | Original Owner Request | “准入S3，来讨论一下如何实现64位的支持，就是NT Hook 64.dll的实现。” |
 | Similar-Issue Sweep | ANSI/Unicode creation, null application/quoting/search, redirected handles/environment/CWD, suspension/debug/token boundaries, GUI/new Console propagation, recursion and early-child exit. |
+
+## S3 Design Freeze
+
+Owner-approved target widths and three separate contracts are recorded in
+[the frozen design](../etc/operations/t431-native-launch-hook-design.md#s3-design-freeze-component-widths-handoff-and-native-propagation)
+and ARCHITECTURE. Dedicated S4 organizes component widths, S5 implements
+Hook64/four-direction propagation, and former final S4 becomes S6. None is
+yet admitted. Original32-bit Base/RTL link dependencies and32-to64 launcher
+context delivery are explicit engineering gates. A reviewed transient helper
+may be researched, but exact implementation needs approval. No source,
+runtime, process or published package is changed;64-bit capability is unproved.
 
 ## S2 Closure Record
 
