@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T431 native launch detailed design](operations/t431-native-launch-hook-design.md) | M0 T431 S1 | Suspended-child installation, copied bootstrap/authorization, flags, rollback, module boundaries and explicit remaining feasibility gates. | Retain through implementation and owner acceptance. |
 | [T431 native launch plan](operations/t431-native-launch-hook-plan.md) | M0 T431 | Controlled Hook sequence and exact planned capability gates; no production completion claim. | Retain through delivery and owner acceptance. |
 | [T431 S1 hook audit](evidence/m0-t431-s1-native-launch-hook-audit.md) | M0 T431 S1 | Actual CMD imports, existing classifier/install boundary and no-helper feasibility checkpoint. | Retain through contract and implementation review. |
 | [T430 S2 SoftPC repair gate](evidence/m0-t430-s2-softpc-repair-gate.md) | M0 T430 S2 | Owner provenance gate and existing comparative fix bodies; no runtime closure. | Retain through profile recovery. |

@@ -4,6 +4,13 @@ CURRENT is the sole active packet. Owner admits the queue-head package after
 T430 acceptance on 2026-10-05; the [proposal](../../proposals/proposal-native-launch-hook-001.md)
 supplies the bounded sequence. No Hook production source root is created yet.
 
+The [detailed design](t431-native-launch-hook-design.md) specifies the shared
+suspended-child installer contract,64-byte copied bootstrap, real run16
+context-only seed, no-inherit authorization, native passthrough and rollback.
+Contract design is complete; four-width installation, actual CMD selection and
+bootstrap runtime proofs remain explicit S1 gates. No S2 implementation is
+auto-admitted by the design delivery.
+
 | Stage | Deliverable | Gate |
 | --- | --- | --- |
 | S1 | Source/API/bitness audit, one classifier/installer, initialization and supported-flag contract; [checkpoint](../evidence/m0-t431-s1-native-launch-hook-audit.md). | No-helper feasibility and authenticated inheritance/path contracts before production implementation. Currently open, not runtime-complete. |

@@ -8,6 +8,21 @@ NTCON renderer or modifying guest/shared-library code.
 
 ## Product boundary
 
+### Controlled native launch hook contract — T431 S1 design
+
+The admitted audit specifies a bounded per-process native launch hook, not a
+production implementation. NTVWM and injected native text callers use one
+suspended-child installation transaction; copied bootstrap resources are
+recipient-local and verified through existing NTSRV root/execution contracts.
+Run16 remains a launcher/result client, with a proposed context-only bootstrap
+consumer and no API interception of itself. NTCON presentation, NTSRV task/
+lifecycle authority and original DOS/WOW execution remain unchanged.
+The [detailed contract](../etc/operations/t431-native-launch-hook-design.md)
+records source reuse, native search/flags, loader-lock limits and rollback.
+No source-root creation, external-code adoption or native-x64 toolchain
+exception is yet admitted. Helper-free cross-width installation, actual CMD
+selection and bootstrap feasibility remain gates before production work.
+
 ### Worker copied-state publication — T429 S5/S6
 
 Original guest/video execution remains the sole extractor of mutable software

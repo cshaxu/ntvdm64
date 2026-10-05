@@ -13,7 +13,7 @@ No production hook, source root or cross-width runtime capability is yet deliver
 | Field | Required record |
 | --- | --- |
 | Identifier Mode | M0 T431 S1; Ordinary Mode. |
-| Admission And Approval | Owner: “收口准入下一个t任务执行”. Close accepted T430 and admit the earliest queued native-launch hook candidate; execute its audit before implementation. |
+| Admission And Approval | Owner: “收口准入下一个t任务执行”, followed by “继续执行 完成详细设计”. Close accepted T430 and admit the earliest queued native-launch hook candidate; execute its audit and detailed contract design before implementation. |
 | Candidate Proposal | [Controlled native launch hooks](../proposals/proposal-native-launch-hook-001.md). |
 | Objective | Source-backed classifier, installation, launch-flag, bitness and ownership contracts with reproducible verification cases and a finite no-helper feasibility decision. |
 | Non-goals | No production injection, source-root creation, guest/mirror changes, global hooks, Job observation, process-tree control, new helper or task registry in S1. |
@@ -37,7 +37,11 @@ The [plan](../etc/operations/t431-native-launch-hook-plan.md) records exact
 future cases. No production changes or deployment occurred. Unmodified Detours
 cross-width installation is rejected because it requires a helper; this does
 not prove every no-helper design impossible. S1 remains open pending installer,
-actual CMD route and authenticated initialization/inheritance contracts.
+actual CMD route and authenticated initialization/inheritance proofs.
+The [detailed design](../etc/operations/t431-native-launch-hook-design.md) now
+specifies module boundaries, one suspended-child transaction, copied bootstrap
+and context-only run16 delivery, supported flags, resource rollback and exact
+verification gates. This is contract design, not runtime proof or S2 admission.
 
 ## Current Technical Baseline
 
