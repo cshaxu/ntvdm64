@@ -288,9 +288,9 @@ cannot be made transactional by terminating an already running program.
 | Installer caller → child | Current evidence | Required proof |
 | --- | --- | --- |
 | x86 NTVWM/hook → x86 text | Detours same-width candidate, not runtime-tested | Actual DLL loaded before first child creation; copied context, handles, caller suspension and rollback. |
-| x86 NTVWM/hook → x64 text | Pinned default update rejects width, wrapper uses forbidden helper | A registered helper-free mechanism capable of full-width target discovery/read/write/install/undo; no address truncation or private-thunk assumption. |
+| x86 NTVWM/hook → x64 text | Pinned default update and exact PR161 head reject width; wrapper uses forbidden helper | A separately admitted helper-free full-width memory/installation facade, including protection and undo; installed private exports alone do not prove it. |
 | x64 hook → x64 text | Same-width candidate; hook-only island not yet admitted | Separate x64 objects/CRT/DLL and correct native ABI; actual64 CMD nested/legacy chains. |
-| x64 hook → x86 text/run16 | Pinned default update also rejects this direction | Same installer contract with a proven target-width implementation, including context-only run16 seed. No helper fallback. |
+| x64 hook → x86 text/run16 | Pinned default update rejects; official PR161 offers an unmerged source candidate | Same installer contract with restoration/payload-layout review and runtime proof, including context-only run16 seed. No helper fallback. |
 
 DuplicateHandle's cross-width contract solves resource duplication only.
 CreateRemoteThread/LoadLibrary pointer recipes or compiling two DLLs do not
@@ -360,6 +360,14 @@ Detailed design is complete at the contract level. These feasibility/runtime
 proofs remain open; S1 is not declared closed and S2 is not auto-admitted.
 No production capability, injection success, new package publication or
 cross-width equivalence is asserted by this documentation P.
+
+The source checkpoint's follow-up pins PR161 head and installed ntdll exports.
+It narrows the remaining installer gate to32->64 full-width installation and
+rollback. The current S1 does not admit private WOW64 calls/transitions or
+executable probes; further work at that boundary needs a finite research
+admission. This is a selected-mechanism blocker, not a claim that helper-free
+cross-width installation is universally impossible. Keep all four directions
+in the eventual acceptance matrix; do not silently reduce the target.
 
 Design-delivery verification on2026-10-05: Verify-DocumentationGovernance.ps1,
 Test-DocumentationRelativeLinks.ps1 and git diff --check passed. Reviewed the

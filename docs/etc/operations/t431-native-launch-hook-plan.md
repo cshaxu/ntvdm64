@@ -11,6 +11,13 @@ Contract design is complete; four-width installation, actual CMD selection and
 bootstrap runtime proofs remain explicit S1 gates. No S2 implementation is
 auto-admitted by the design delivery.
 
+Follow-up source audit identifies the exact32->64 blocker: unchanged Detours
+and PR161 both reject it; the installed private WOW64 read/write/allocation
+exports do not prove protection/undo or safe pre-entry installation. The
+checkpoint pins the unmerged64->32 patch separately. A build-only private
+WOW64 feasibility probe needs bounded re-admission before execution; no
+helper, production change or reduced width coverage is authorized implicitly.
+
 | Stage | Deliverable | Gate |
 | --- | --- | --- |
 | S1 | Source/API/bitness audit, one classifier/installer, initialization and supported-flag contract; [checkpoint](../evidence/m0-t431-s1-native-launch-hook-audit.md). | No-helper feasibility and authenticated inheritance/path contracts before production implementation. Currently open, not runtime-complete. |

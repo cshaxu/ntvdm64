@@ -97,3 +97,98 @@ S1 is still open: actual ordinary CMD route, cross-width feasibility, initializa
 ABI/resource transfer and final supported-flag ledger are not yet proved.
 S2 production code is not admitted by this checkpoint. The current installed
 eight-file package is untouched and usable.
+
+## Follow-up: finite no-helper width decision
+
+On2026-10-05 the owner requested continued execution. This follow-up inspects
+the official Detours cross-width change and installed Windows API carriers;
+it does not inject, create target processes, compile hooks or admit private
+WOW64 transitions. The preceding contract design remains a candidate.
+
+Research artifacts remain in build/M0-T431/S1/r001-source:
+
+| Input | Identity / observation |
+| --- | --- |
+| Official repository PR161 metadata | Open, unmerged; head daaae6988c94647d7d194e8b15340ec3c2360bb3, retained detours-pr161.json. Status is a retrieval-time observation, not a support guarantee. |
+| PR161 diff | detours-pr161.diff SHA25641E64913D8E618DF724A5715013EC35FDF477B2B896AF66196AEDAA5E1B8B3D7. |
+| Exact head creatwth.cpp | detours-pr161-creatwth.cpp SHA25608BA0DA5FFAAC0C050CE297037F78F0FC9E1B7E4106AC10BE01A39F17DEDBF87. |
+| Exact head MIT notice | detours-pr161-LICENSE.md SHA256B301808B732CFAA60DF2B4B422D78CD97D2A15058B207E7E33F0535BA5170DD6. No production import. |
+| Installed SysWOW64 ntdll.dll | SHA25656770F0C0B47F313662444F3ECF77257BE36F1B82DDB36BE14555790FCA2F430; exports dump SHA2565294E25ABECF8FCC67639DB4C9172D4BCF3613F44417D14F32A639ECE824371B. |
+| Installed System32 CMD headers | cmd64-headers.txt SHA2568ACE2D8E9CB491AEDCD4F2FEF392D1D95A7D426F45F68155D424AB814314844B; native AMD64 CUI, preferred ImageBase0x140000000, high-entropy ASLR. Preferred base is not an observed runtime mapping. |
+
+Procedure: retrieve the official PR metadata/diff and its exact-head source
+and notice; inspect the actual width branches; run dumpbin /exports and
+/headers through the existing compiler wrapper. The initial sandbox network
+fetch failed; the approved read-only network retry succeeded. No downloaded
+implementation was built or executed. No project process was stopped.
+
+### What the patch actually changes
+
+[PR161](https://github.com/microsoft/Detours/pull/161) adds an UpdateImports32
+instantiation to the64-bit build and selects it for a32-bit target. The exact
+[source](https://github.com/number201724/Detours/blob/daaae6988c94647d7d194e8b15340ec3c2360bb3/src/creatwth.cpp)
+at703–717 still rejects a64-bit target from the32-bit build with
+ERROR_INVALID_HANDLE. The64->32 branch at720–733 is a research candidate,
+not an accepted four-width installer. General CreateProcess/runtime restore,
+rollback and payload-layout compatibility remain untested here. PR discussion
+of private WOW64 APIs is not implementation or acceptance evidence.
+
+| Direction | Finite disposition |
+| --- | --- |
+| 32->32 | Original same-width Detours import-table mechanism remains a source candidate; runtime proof pending. |
+| 64->64 | Same mechanism, separate hook-only ABI/toolchain admission and runtime proof pending. |
+| 64->32 | PR161 is a source candidate for the same installer contract; unmerged patch requires exact provenance, restoration/layout review and focused tests before adoption. |
+| 32->64 | Neither pinned v4.0.1 nor PR161 provides it. Public pointer-width APIs cannot represent arbitrary64-bit target addresses from this32-bit installer. A different finite memory/installation facade is required; it has not been admitted or proved. |
+
+### Why two DLLs do not finish the32->64 route
+
+The public [ReadProcessMemory](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-readprocessmemory)
+and [VirtualProtectEx](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualprotectex)
+contracts take caller-width address pointers. An x86 caller cannot represent
+an address above4GiB with those arguments. The native CMD preferred image base
+demonstrates why assuming every target header lies below that boundary is not
+a valid contract; no actual runtime address is claimed from its file header.
+The retained source uses pointer-valued header/import addresses, remote reads,
+writes, allocation and protection changes. A narrower read/write-only fix
+does not establish that full transaction or its rollback.
+
+The installed32-bit ntdll exports NtWow64QueryInformationProcess64,
+NtWow64ReadVirtualMemory64, NtWow64WriteVirtualMemory64 and
+NtWow64AllocateVirtualMemory64. The dump has no NtWow64ProtectVirtualMemory64
+or NtWow64FreeVirtualMemory64 export. It also exposes NtWow64CallFunction64,
+RtlWow64CallFunction64 and Wow64Transition, but their presence does not supply
+an admitted general function-call ABI, allocation undo or protection facade.
+No private entrypoint was called. This is a capability gap in the selected
+mechanism, not proof that all possible no-helper mechanisms are impossible.
+
+[QueueUserAPC](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-queueuserapc)
+explicitly warns about cross-process/cross-width addresses. A guessed remote
+LoadLibrary address/APC is not a safe fallback. Executing an extra remote
+thread to load a DLL while the caller requested an entirely pre-entry install
+also needs a different ordering/loader/suspension contract; it is not adopted
+as a drop-in workaround. The
+[official helper design](https://github.com/microsoft/Detours/wiki/OverviewHelpers)
+uses a matching-width helper, which remains prohibited here.
+
+### Recovery disposition and admission boundary
+
+- Existing original OpenNT classification remains reusable; its obsolete
+  Kernel32/CSR product shell is not a composable cross-width installer.
+- The smallest unchanged external source slice supports same-width installs;
+  the selected unchanged cross-width wrapper requires the forbidden helper.
+- PR161 is the smallest identified external adaptation for64->32, not32->64.
+  No patch is adopted merely because the repository is official.
+- A32->64 facade must prove full-width discovery/read/write/allocation,
+  protection, context/import installation and undo without running the child's
+  main thread or adding a helper. Private WOW64 ABI/transition work requires
+  a separate bounded research admission, not an implicit product exception.
+  Do not import the prohibited NTVDMx64 injector or add a second injector.
+
+The next required owner decision is whether to admit a build-only, no-helper
+private WOW64 feasibility probe for that exact32->64 transaction, with no
+production wiring, no host policy/Registry changes and no deployment. Such an
+admission must name the source/ABI/toolchain boundaries and explicit failure
+stop. A successful probe would still not admit the production hook automatically.
+Without it, the current source/API audit has reached its specific stop boundary;
+S1 remains open, S2 is not admitted, and actual CMD/bootstrap tests are not
+claimed passed. The accepted runtime package and unrelated edits are preserved.

@@ -42,6 +42,12 @@ The [detailed design](../etc/operations/t431-native-launch-hook-design.md) now
 specifies module boundaries, one suspended-child transaction, copied bootstrap
 and context-only run16 delivery, supported flags, resource rollback and exact
 verification gates. This is contract design, not runtime proof or S2 admission.
+The follow-up audit pins official PR161 and installed Windows API carriers:
+64->32 has an unmerged source candidate;32->64 remains unsupported by both
+selected Detours revisions. Private exports do not prove a complete installer
+or rollback. Further private WOW64 executable research requires finite
+re-admission; S1 remains open at this explicit boundary. No production build,
+target injection, process termination or package publication occurred.
 
 ## Current Technical Baseline
 
