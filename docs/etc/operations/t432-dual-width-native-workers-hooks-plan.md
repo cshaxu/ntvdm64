@@ -20,6 +20,9 @@ not new runtime proofs. Its former planned S4–S6 transfer to the sequence belo
 | S5 | Integrated compatibility, isolation/fault/reuse/cleanup and final source/manifest audit. | Native32/64↔DOS and applicable worker handoff, real parent return, independent sessions, established Console17/Window17 and WOW frontiers, coherent eleven-image publication and hash verification; stop for owner T acceptance. |
 
 Only one S is active; later stages need a bounded CURRENT brief before work.
+S1's [source-backed design](t432-dual-width-native-workers-hooks-design.md)
+freezes the selected implementation boundaries, including the exact bounded
+Detours helper seam and still-unproved native ABI/context runtime gates.
 S2–S4 may share dependencies but cannot publish an incomplete or regressed
 package. If a later installer prerequisite blocks a coherent earlier delivery,
 retain the accepted package and explicitly report the dependency; compilation

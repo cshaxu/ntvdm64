@@ -3,6 +3,7 @@
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
 | [T432 dual-width worker/Hook plan](operations/t432-dual-width-native-workers-hooks-plan.md) | M0 T432 | Accepted Hook32 baseline preservation, staged dual builds/propagation and explicit runtime gates. | Retain through owner acceptance. |
+| [T432 S1 dual-width design](operations/t432-dual-width-native-workers-hooks-design.md) | M0 T432 S1 | Source/link ledger, machine selection, ABI/context and bounded installer-helper contracts; runtime gates remain planned. | Retain through implementation and owner acceptance. |
 | [T431 S1 bounded conclusion](evidence/m0-t431-s1-hook-contract-conclusion.md) | M0 T431 S1 | Source/design conclusion and owner-approved32-only implementation handoff, not T closure. | Retain through owner acceptance. |
 | [T431 S2 hook implementation](evidence/m0-t431-s2-nthook32-implementation.md) | M0 T431 S2 | Source admission, installer/propagation changes and exact verification progress; not automatically runtime closure. | Retain through owner acceptance. |
 | [T431 native launch detailed design](operations/t431-native-launch-hook-design.md) | M0 T431 S1 | Suspended-child installation, copied bootstrap/authorization, flags, rollback, module boundaries and explicit remaining feasibility gates. | Retain through implementation and owner acceptance. |

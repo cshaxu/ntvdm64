@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T432 S1** (Ordinary Mode).
+**Active: M0 T432 S1** (Ordinary Mode; bounded design conclusion).
 Owner verifies nthook32 works and directs preserving that accepted baseline,
 closing T431 within its delivered x86 scope and opening a separate T for dual
 NTVWM/Hook support. T431's unimplemented width expansion is transferred, not
@@ -48,6 +48,22 @@ or implemented and transfer to T432; no x64 result is claimed. Original
 source evidence, superseded for live scope/sequence by the T432 plan.
 Owner acceptance supersedes the former personal-verification-pending wording,
 not the retained API/default-geometry limitations.
+
+## S1 source/design conclusion
+
+The [S1 design](../etc/operations/t432-dual-width-native-workers-hooks-design.md)
+records actual linked original versus project bodies, unchanged shared search,
+native-machine selection/reuse and caller-resolved system path handling,
+native ABI facade/build islands, versioned copied context, true-child ownership
+and the bounded opposite-width Detours helper adaptation. No new component,
+resident helper, frontend width policy or mirror rewrite is selected.
+The helper's existing infinite wait/double resume cannot be fixed through its
+creation callback alone; S4 requires a narrow registered adaptation and actual
+timeout/rollback proof. Runtime addressability, x64 classifier composition and
+RPC/resource interoperability remain explicit implementation gates, not passes.
+S1 governance, relative-link and diff checks pass; P1 is documentation-only.
+S2 is next and is not yet admitted. Production
+baseline and the two other-session proposal/TODO modifications are unchanged.
 
 ## Current Technical Baseline
 
