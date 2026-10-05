@@ -26,14 +26,20 @@ DWORD nthook_context_read(nthook_context *context,BOOL *found)
     memcpy(&header,data,sizeof(header));
     if(header.bytes!=bytes || header.version!=NATIVE_HOOK_VERSION ||
        (header.mode!=NATIVE_HOOK_INTERCEPT && header.mode!=NATIVE_HOOK_LAUNCHER) ||
-       header.machine!=IMAGE_FILE_MACHINE_I386 || header.flags || header.reserved ||
-       header.unused_offset || header.unused_bytes ||
-       !!header.frontend!=!!header.execution || header.frontend>MAXDWORD || header.execution>MAXDWORD ||
+       header.machine!=
+#if defined(_WIN64)
+           IMAGE_FILE_MACHINE_AMD64 ||
+#else
+           IMAGE_FILE_MACHINE_I386 || header.frontend>MAXDWORD || header.execution>MAXDWORD ||
+#endif
+       header.flags || header.reserved || !!header.frontend!=!!header.execution ||
        header.launcher_offset!=sizeof(header) ||
        (uint64_t)header.hook_offset!=(uint64_t)header.launcher_offset+header.launcher_bytes ||
-       header.hook_offset>bytes || header.hook_bytes!=bytes-header.hook_offset)return ERROR_INVALID_DATA;
+       (uint64_t)header.hook64_offset!=(uint64_t)header.hook_offset+header.hook_bytes ||
+       header.hook64_offset>bytes || header.hook64_bytes!=bytes-header.hook64_offset)return ERROR_INVALID_DATA;
     error=path_read(data,bytes,header.launcher_offset,header.launcher_bytes,context->launcher);
     if(!error)error=path_read(data,bytes,header.hook_offset,header.hook_bytes,context->hook);
+    if(!error)error=path_read(data,bytes,header.hook64_offset,header.hook64_bytes,context->hook64);
     if(error)return error;
     context->mode=header.mode;
     context->frontend=(HANDLE)(ULONG_PTR)header.frontend;
@@ -50,6 +56,7 @@ DWORD nthook_context_paths(nthook_context *context)
     slash=wcsrchr(image,L'\\');if(!slash)return ERROR_INVALID_NAME;
     slash[1]=0;
     if(swprintf_s(context->launcher,MAX_PATH,L"%lsrun16.exe",image)<0 ||
-       swprintf_s(context->hook,MAX_PATH,L"%lsnthook32.dll",image)<0)return ERROR_FILENAME_EXCED_RANGE;
+       swprintf_s(context->hook,MAX_PATH,L"%lsnthook32.dll",image)<0 ||
+       swprintf_s(context->hook64,MAX_PATH,L"%lsnthook64.dll",image)<0)return ERROR_FILENAME_EXCED_RANGE;
     return ERROR_SUCCESS;
 }

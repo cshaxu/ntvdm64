@@ -24,6 +24,7 @@
 #include "ntsrv-exe/transport/frontend_admission.h"
 #include "run16-exe/frontend_bootstrap.h"
 #include "common/codec/native_launch.h"
+#include "common/image_classification.h"
 #include <stdio.h>
 #define FRONTEND_STARTUP_DEADLINE_MS 10000u
 typedef NTSTATUS (*OPENNT_USER_TEST_TOKEN_FOR_INTERACTIVE)(HANDLE,PLUID);
@@ -82,6 +83,7 @@ struct OPENNT_BASE_CONNECTION {
     BOOL vdm_starting;
     BOOL registered_worker;
     BOOL native_worker;
+    DWORD native_machine; /* Requested machine for launcher; verified machine for worker. */
     DWORD selected_native_generation; /* Explicit launcher grant, not membership alone. */
     /* The original BaseSrvDupStandardHandles copies these caller streams
      * into the suspended worker during UpdateDOSEntry.  The standalone
@@ -156,6 +158,7 @@ typedef struct OPENNT_BASE_WIN32RECORD {
     /* Bind only the admitted direct target's actual CreateProcess identity. */
     DWORD process_id;
     DWORD worker_generation; /* Retained when a GUI record leaves its carrier. */
+    DWORD native_machine; /* Verified target machine; never guessed from its name. */
     DWORD launcher_generation,exit_code,completion_error;
     BOOL completed;
     BOOL gui;
@@ -185,6 +188,7 @@ typedef struct OPENNT_BASE_WORKER_WATCH {
     BOOL wow;
     uint64_t reservation;
     OPENNT_BASE_WORKER_KIND kind;
+    DWORD native_machine;
     FILETIME started;
     /* The original GetNextVDMCommand body frees VDMINFO immediately after
      * copying it to the worker.  These are labels keyed to surviving original

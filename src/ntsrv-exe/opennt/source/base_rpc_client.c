@@ -485,7 +485,7 @@ static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
     RPC_STATUS status,uuid_status;
     unsigned int index;
     DWORD result=RPC_S_SERVER_UNAVAILABLE;
-    status=RpcIfInqId(Client_vdm_service_v38_0_c_ifspec,&expected);
+    status=RpcIfInqId(Client_vdm_service_v39_0_c_ifspec,&expected);
     if (status) return status;
     status=RpcMgmtInqIfIds(binding,&interfaces);
     if (status) return status;
@@ -841,7 +841,7 @@ DWORD OpenNtBaseClientBrokerProcess(HANDLE *server)
     return DuplicateHandle(GetCurrentProcess(),client.server,GetCurrentProcess(),
         server,PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,0) ? 0 : GetLastError();
 }
-DWORD OpenNtBaseClientStartNativeWorker(HANDLE *worker)
+DWORD OpenNtBaseClientStartNativeWorker(DWORD machine,HANDLE *worker)
 {
     DWORD error=ERROR_INVALID_STATE;
     if(!worker)return ERROR_INVALID_PARAMETER;
@@ -849,7 +849,7 @@ DWORD OpenNtBaseClientStartNativeWorker(HANDLE *worker)
     if(!client.connection || !client.binding || !client.process)return error;
     RpcTryExcept {
         error=Client_StartNativeWorker(client.binding,client.connection,client.process,
-            client.generation,worker);
+            client.generation,machine,worker);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept

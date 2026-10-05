@@ -1244,12 +1244,18 @@ BOOL WINAPI DetourProcessViaHelperDllsW(_In_ DWORD dwTargetPid,
                                         _In_ PDETOUR_CREATE_PROCESS_ROUTINEW pfCreateProcessW)
 {
     BOOL Result = FALSE;
-    PROCESS_INFORMATION pi;
+    PROCESS_INFORMATION pi = {};
     STARTUPINFOW si;
     WCHAR szExe[MAX_PATH];
     WCHAR szCommand[MAX_PATH];
     PDETOUR_EXE_HELPER helper = NULL;
     HRESULT hr;
+    // T432-DETOURS-DIV-001: bounded installer-only helper ownership.
+    // Import update/payload algorithms are unchanged; see adaptation register.
+    HANDLE hTarget = NULL;
+    DWORD error = ERROR_SUCCESS;
+    ULONGLONG started = GetTickCount64();
+    DWORD dllOffset = 0;
 
     DETOUR_TRACE(("DetourProcessViaHelperDlls(pid=%d,dlls=%d)\n", dwTargetPid, nDlls));
     if (nDlls < 1 || nDlls > 4096) {
@@ -1260,8 +1266,27 @@ BOOL WINAPI DetourProcessViaHelperDllsW(_In_ DWORD dwTargetPid,
         goto Cleanup;
     }
 
-    DWORD nLen = GetEnvironmentVariableW(L"WINDIR", szExe, ARRAYSIZE(szExe));
+    // This caller already selected matching target-width names. AllocExeHelper
+    // retains its original filename heuristic for other callers, but W must
+    // not rewrite a directory containing "32."/"64." in these explicit paths.
+    for (DWORD n = 0; n < nDlls; ++n) {
+        size_t chars = 0;
+        if (!SUCCEEDED(StringCchLengthA(rlpDlls[n], 4096, &chars)) ||
+            dllOffset >= helper->cb - sizeof(*helper) ||
+            !SUCCEEDED(StringCchCopyA(&helper->rDlls[dllOffset],
+                helper->cb - sizeof(*helper) - dllOffset, rlpDlls[n]))) {
+            SetLastError(ERROR_INVALID_PARAMETER);
+            goto Cleanup;
+        }
+        dllOffset += (DWORD)chars + 1;
+    }
+    hTarget = OpenProcess(SYNCHRONIZE, FALSE, dwTargetPid);
+    if (hTarget == NULL) {
+        goto Cleanup;
+    }
+    DWORD nLen = GetWindowsDirectoryW(szExe, ARRAYSIZE(szExe));
     if (nLen == 0 || nLen >= ARRAYSIZE(szExe)) {
+        if (nLen != 0) SetLastError(ERROR_FILENAME_EXCED_RANGE);
         goto Cleanup;
     }
 
@@ -1275,18 +1300,22 @@ BOOL WINAPI DetourProcessViaHelperDllsW(_In_ DWORD dwTargetPid,
     hr = StringCchCatW(szExe, ARRAYSIZE(szExe), L"\\system32\\rundll32.exe");
 #endif // DETOURS_OPTIONS_BITS
     if (!SUCCEEDED(hr)) {
+        SetLastError(ERROR_FILENAME_EXCED_RANGE);
         goto Cleanup;
     }
 
     hr = StringCchPrintfW(szCommand, ARRAYSIZE(szCommand),
                           L"rundll32.exe \"%hs\",#1", &helper->rDlls[0]);
     if (!SUCCEEDED(hr)) {
+        SetLastError(ERROR_FILENAME_EXCED_RANGE);
         goto Cleanup;
     }
 
     ZeroMemory(&pi, sizeof(pi));
     ZeroMemory(&si, sizeof(si));
     si.cb = sizeof(si);
+    si.dwFlags = STARTF_USESHOWWINDOW;
+    si.wShowWindow = SW_HIDE;
 
     DETOUR_TRACE(("DetourProcessViaHelperDlls(\"%ls\", \"%ls\")\n", szExe, szCommand));
     if (pfCreateProcessW(szExe, szCommand, NULL, NULL, FALSE, CREATE_SUSPENDED,
@@ -1296,25 +1325,30 @@ BOOL WINAPI DetourProcessViaHelperDllsW(_In_ DWORD dwTargetPid,
                                         DETOUR_EXE_HELPER_GUID,
                                         helper, helper->cb)) {
             DETOUR_TRACE(("DetourCopyPayloadToProcess failed: %d\n", GetLastError()));
-            TerminateProcess(pi.hProcess, ~0u);
-            CloseHandle(pi.hProcess);
-            CloseHandle(pi.hThread);
             goto Cleanup;
         }
 
-        ResumeThread(pi.hThread);
-
-        ResumeThread(pi.hThread);
-        WaitForSingleObject(pi.hProcess, INFINITE);
+        if (ResumeThread(pi.hThread) == (DWORD)-1) goto Cleanup;
+        HANDLE waits[2] = { hTarget, pi.hProcess };
+        ULONGLONG elapsed = GetTickCount64() - started;
+        DWORD wait = WaitForMultipleObjects(2, waits, FALSE,
+            elapsed >= 10000 ? 0 : (DWORD)(10000 - elapsed));
+        if (wait != WAIT_OBJECT_0 + 1) {
+            if (wait == WAIT_OBJECT_0) SetLastError(ERROR_PROCESS_ABORTED);
+            else if (wait == WAIT_TIMEOUT) SetLastError(ERROR_TIMEOUT);
+            goto Cleanup;
+        }
 
         DWORD dwResult = 500;
-        GetExitCodeProcess(pi.hProcess, &dwResult);
-
-        CloseHandle(pi.hProcess);
-        CloseHandle(pi.hThread);
+        if (!GetExitCodeProcess(pi.hProcess, &dwResult)) goto Cleanup;
+        if (WaitForSingleObject(hTarget, 0) != WAIT_TIMEOUT) {
+            SetLastError(ERROR_PROCESS_ABORTED);
+            goto Cleanup;
+        }
 
         if (dwResult != 0) {
             DETOUR_TRACE(("Rundll32.exe failed: result=%d\n", dwResult));
+            SetLastError(ERROR_DLL_INIT_FAILED);
             goto Cleanup;
         }
         Result = TRUE;
@@ -1325,7 +1359,21 @@ BOOL WINAPI DetourProcessViaHelperDllsW(_In_ DWORD dwTargetPid,
     }
 
   Cleanup:
+    error = Result ? ERROR_SUCCESS : GetLastError();
+    if (pi.hProcess != NULL) {
+        if (!Result && WaitForSingleObject(pi.hProcess, 0) == WAIT_TIMEOUT) {
+            if (!TerminateProcess(pi.hProcess, error ? error : ERROR_DLL_INIT_FAILED))
+                error = GetLastError();
+            // Join only the helper created by this call, never the target.
+            if (WaitForSingleObject(pi.hProcess, 10000) != WAIT_OBJECT_0)
+                error = ERROR_TIMEOUT;
+        }
+        CloseHandle(pi.hProcess);
+    }
+    if (pi.hThread != NULL) CloseHandle(pi.hThread);
+    if (hTarget != NULL) CloseHandle(hTarget);
     FreeExeHelper(&helper);
+    SetLastError(error ? error : (Result ? ERROR_SUCCESS : ERROR_DLL_INIT_FAILED));
     return Result;
 }
 

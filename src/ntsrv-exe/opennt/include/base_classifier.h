@@ -22,7 +22,9 @@ BOOLEAN NTAPI OpenNtBaseDosPathNameToNtPathName_U(PCWSTR, PUNICODE_STRING, PWSTR
 #define RtlDosPathNameToNtPathName_U OpenNtBaseDosPathNameToNtPathName_U
 typedef struct _SECTION_IMAGE_INFORMATION {
     PVOID TransferAddress;
-    ULONG ZeroBits, MaximumStackSize, CommittedStackSize, SubSystemType;
+    ULONG ZeroBits;
+    SIZE_T MaximumStackSize, CommittedStackSize;
+    ULONG SubSystemType;
     union {
         struct { USHORT SubSystemMinorVersion, SubSystemMajorVersion; };
         ULONG SubSystemVersion;
@@ -34,7 +36,7 @@ typedef struct _SECTION_IMAGE_INFORMATION {
 } SECTION_IMAGE_INFORMATION;
 #define SectionImageInformation 1
 NTSTATUS NTAPI NtCreateSection(PHANDLE, ACCESS_MASK, POBJECT_ATTRIBUTES, PLARGE_INTEGER, ULONG, ULONG, HANDLE);
-NTSTATUS NTAPI NtQuerySection(HANDLE, ULONG, PVOID, ULONG, PULONG);
+NTSTATUS NTAPI NtQuerySection(HANDLE, ULONG, PVOID, SIZE_T, PSIZE_T);
 PIMAGE_NT_HEADERS NTAPI RtlImageNtHeader(PVOID);
 extern UNICODE_STRING BaseDotComSuffixName, BaseDotPifSuffixName, BaseDotExeSuffixName;
 ULONG BaseIsDosApplication(PUNICODE_STRING, NTSTATUS);

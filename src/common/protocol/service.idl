@@ -1,7 +1,7 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(38.0),
+    version(39.0),
     pointer_default(unique)
 ]
 interface vdm_service
@@ -54,6 +54,7 @@ interface vdm_service
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation,
+        [in] unsigned long machine,
         [out, system_handle(sh_process)] HANDLE *worker);
     /* The broker creates the exact product frontend. Console operations are
      * performed by that frontend against this authenticated caller. */

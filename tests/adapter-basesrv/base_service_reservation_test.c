@@ -22,6 +22,8 @@ int fixture_prepared_native_root_loss(void);
 int fixture_parent_resume_origin(void);
 int fixture_shared_worker_residency(void);
 int fixture_management_gui(void);
+int fixture_management_gui64(PCWSTR);
+int fixture_native_width_root(PCWSTR);
 DWORD service_next_frontend_deadline_at(OPENNT_BASE_SERVICE *,ULONGLONG,ULONGLONG *);
 DWORD service_retire_expired_frontends_at(OPENNT_BASE_SERVICE *,ULONGLONG);
 static const BYTE native_payload[3]={'N','T','C'};
@@ -755,6 +757,16 @@ int main(int argc,char **argv)
     if(argc==2 && !strcmp(argv[1],"--prepared-native-root-loss"))return fixture_prepared_native_root_loss();
     if(argc==2 && !strcmp(argv[1],"--parent-resume-origin"))return fixture_parent_resume_origin();
     if(argc==2 && !strcmp(argv[1],"--management-gui"))return fixture_management_gui();
+    if(argc==3 && !strcmp(argv[1],"--management-gui64")) {
+        WCHAR image[MAX_PATH];
+        CHECK(MultiByteToWideChar(CP_ACP,0,argv[2],-1,image,ARRAYSIZE(image)));
+        return fixture_management_gui64(image);
+    }
+    if(argc==3 && !strcmp(argv[1],"--native-width-root")) {
+        WCHAR image[MAX_PATH];
+        CHECK(MultiByteToWideChar(CP_ACP,0,argv[2],-1,image,ARRAYSIZE(image)));
+        return fixture_native_width_root(image);
+    }
     if(argc==2 && !strcmp(argv[1],"--management-frontend-close"))return management_frontend_close();
     if(argc==2 && !strcmp(argv[1],"--shared-worker-residency"))return fixture_shared_worker_residency();
     if(argc==3 && !strcmp(argv[1],"--reservation-wait-child"))

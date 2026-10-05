@@ -65,7 +65,9 @@ proof; do not silently replace it if an unavailable dependency appears.
    resolution into broker worker selection.
 
 Final GUI/text routing remains in NTVWM; machine selection is not a second
-subsystem policy. Monitor kind remains DOS=0, Win16=1, Win32=2. Width does not
+subsystem policy. The latest owner goal extends monitor kind to DOS=0, Win16=1,
+Win32=2 and Win64=3. NTSRV supplies the verified machine; NTMON only labels it.
+Width does not
 create Observed task records or a separate scheduler.
 
 ## Build and wire boundary

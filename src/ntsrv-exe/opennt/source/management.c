@@ -266,7 +266,7 @@ static void service_copy_vdm_management_record(OPENNT_BASE_WORKER_WATCH *watch,
     PDOSRECORD dos,selected=NULL;
     PWOWRECORD wow,selected_wow=NULL;
     if(watch->kind==OPENNT_BASE_WORKER_NATIVE) {
-        item->kind=2u; /* Win32 text worker */
+        item->kind=watch->native_machine==IMAGE_FILE_MACHINE_AMD64 ? MANAGEMENT_KIND_WIN64 : MANAGEMENT_KIND_WIN32;
         /* Execution request/member publication is a separate binding. A
          * claimed process alone is not proof of native command readiness. */
         item->state=0;
@@ -375,7 +375,9 @@ static void service_copy_worker(OPENNT_BASE_WORKER_WATCH *watch,OPENNT_BASE_WORK
     item->sequence=watch->process.SequenceNumber;
     item->key=service_management_key(watch->service,MANAGEMENT_WORKER,item->sequence,0);
     item->process_id=GetProcessId(watch->process.ProcessHandle);
-    item->kind=watch->kind==OPENNT_BASE_WORKER_NATIVE ? 2u : watch->wow ? 1u : 0u;
+    item->kind=watch->kind==OPENNT_BASE_WORKER_NATIVE ?
+        (watch->native_machine==IMAGE_FILE_MACHINE_AMD64 ? MANAGEMENT_KIND_WIN64 : MANAGEMENT_KIND_WIN32) :
+        watch->wow ? MANAGEMENT_KIND_WIN16 : MANAGEMENT_KIND_DOS;
     item->state=VDM_READY;
     item->started_filetime=((uint64_t)watch->started.dwHighDateTime<<32)|watch->started.dwLowDateTime;
     if(watch->kind==OPENNT_BASE_WORKER_NATIVE) {
@@ -523,7 +525,9 @@ static DWORD service_copy_management_tree(OPENNT_BASE_SERVICE *service,
         if(record->completed || !record->gui_process ||
             WaitForSingleObject(record->gui_process,0)!=WAIT_TIMEOUT)continue;
         item.key=service_management_key(service,MANAGEMENT_GUI_TARGET,record->worker_generation,record->request);
-        item.process_id=record->process_id;item.kind=2;item.task=record->request;
+        item.process_id=record->process_id;
+        item.kind=record->native_machine==IMAGE_FILE_MACHINE_AMD64 ? MANAGEMENT_KIND_WIN64 : MANAGEMENT_KIND_WIN32;
+        item.task=record->request;
         item.display_state=MANAGEMENT_BUSY;item.actions=MANAGEMENT_CAN_CLOSE;
         if(GetProcessTimes(record->gui_process,&started,&ignored,&ignored,&ignored))
             item.started_filetime=((uint64_t)started.dwHighDateTime<<32)|started.dwLowDateTime;

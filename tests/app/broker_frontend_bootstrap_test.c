@@ -290,7 +290,7 @@ int wmain(int argc,WCHAR **argv)
         puts("PASS workerless root remains alive during grace; NTSRV retires it after ten seconds");
         failed=0;goto done;
     }
-    error=OpenNtBaseClientStartNativeWorker(&worker);
+    error=OpenNtBaseClientStartNativeWorker(IMAGE_FILE_MACHINE_I386,&worker);
     if(error || !worker || parent_pid(GetProcessId(worker))!=broker.dwProcessId) {
         printf("FAIL native worker creation/parent=%lu\n",error);goto done;
     }

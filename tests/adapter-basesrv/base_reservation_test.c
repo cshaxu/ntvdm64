@@ -71,6 +71,16 @@ int main(void)
             OPENNT_BASE_WORKER_NATIVE,&native)==ERROR_SUCCESS);
         CHECK(OpenNtBaseReservationCreateKind(state,105,16,0,(HANDLE)0x4567,
             OPENNT_BASE_WORKER_NATIVE,&other)==ERROR_ALREADY_EXISTS && !other);
+        CHECK(OpenNtBaseReservationCreateNative(state,105,16,(HANDLE)0x4567,
+            IMAGE_FILE_MACHINE_ARM64,&other)==ERROR_INVALID_PARAMETER && !other);
+        CHECK(OpenNtBaseReservationCreateNative(state,105,16,(HANDLE)0x4567,
+            IMAGE_FILE_MACHINE_AMD64,&other)==ERROR_SUCCESS && other);
+        {
+            uint64_t duplicate=0;
+            CHECK(OpenNtBaseReservationCreateNative(state,106,17,(HANDLE)0x4567,
+                IMAGE_FILE_MACHINE_AMD64,&duplicate)==ERROR_ALREADY_EXISTS && !duplicate);
+        }
+        CHECK(OpenNtBaseReservationRelease(state,other,105,16)==ERROR_SUCCESS);
         CHECK(OpenNtBaseReservationCreateKind(state,105,16,0,(HANDLE)0x4568,
             OPENNT_BASE_WORKER_NATIVE,&other)==ERROR_SUCCESS && other);
         CHECK(OpenNtBaseReservationRelease(state,other,105,16)==ERROR_SUCCESS);

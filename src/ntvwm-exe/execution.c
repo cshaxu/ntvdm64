@@ -5,6 +5,7 @@
 #include "console_state.h"
 #include "run16-exe/native_launch.h"
 #include "common/protocol/frontend_protocol.h"
+#include "common/image_classification.h"
 #include "worker-base/connection.h"
 #include "nthook32-dll/hook.h"
 struct ntvwm_executions {
@@ -99,7 +100,13 @@ static DWORD launch_request(ntvwm_execution *request,BYTE *payload,DWORD bytes,
         BYTE *local_payload=NULL;DWORD local_bytes=0;PROCESS_INFORMATION process={0};
         error=run16_native_launch_pack(&start,&local_payload,&local_bytes);
         if(!error)error=run16_native_launch_start_suspended(local_payload,local_bytes,&process);
-        if(!error && nthook_target32(process.hProcess)) {
+        if(!error) {
+            DWORD worker_machine=0,target_machine=0;
+            error=common_process_machine(GetCurrentProcess(),&worker_machine);
+            if(!error)error=common_process_machine(process.hProcess,&target_machine);
+            if(!error && worker_machine!=target_machine)error=ERROR_BAD_EXE_FORMAT;
+        }
+        if(!error) {
             nthook_context hook;
             error=nthook_context_paths(&hook);
             if(!error) {

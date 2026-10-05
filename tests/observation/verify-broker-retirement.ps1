@@ -16,8 +16,13 @@ if(!$physical.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::Ordin
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid prefix'}
 if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'Existing broker must not be controlled'}
 $paths=@()
-foreach($name in @('run16.exe','ntcon.exe','ntsrv.exe','ntvdm.exe','ntvwm.exe')){
-    $actual=Join-Path $physical $name;$launch=Join-Path $PackageRoot $name
+. "$PSScriptRoot/isolated_package_cleanup.ps1"
+$physicalBinary=Get-PackageBinaryRoot $physical
+$launchBinary=Get-PackageBinaryRoot $PackageRoot
+$nativeNames=@(Get-PackageNativeWorkerNames $physical)
+$nativeFilter=($nativeNames | ForEach-Object {"Name='$_'"}) -join ' OR '
+foreach($name in @('run16.exe','ntcon.exe','ntsrv.exe','ntvdm.exe')+$nativeNames){
+    $actual=Join-Path $physicalBinary $name;$launch=Join-Path $launchBinary $name
     if((Get-FileHash $actual).Hash -ne (Get-FileHash $launch).Hash){throw 'Candidate mismatch'}
     $paths+=@($actual,$launch)
 }
@@ -37,10 +42,11 @@ try {
             try {
                 $target=if($kind -eq 'ntvdm'){@('command')}else{@('cmd.exe','/d','/k')}
                 $observerProcess=Start-Process -FilePath (Resolve-Path $Observer).Path -WindowStyle Hidden -PassThru -ArgumentList (
-                    @((Join-Path $PackageRoot 'run16.exe'),$PackageRoot,$report)+$target+@('--observation-timeout-ms','30000'))
+                    @((Join-Path $launchBinary 'run16.exe'),$PackageRoot,$report)+$target+@('--observation-timeout-ms','30000'))
                 $until=[DateTime]::UtcNow.AddSeconds(15)
                 do {
-                    $workerRows=@(Get-CimInstance Win32_Process -Filter "Name='$kind.exe'" | Where-Object {$_.ExecutablePath -in $paths})
+                    $workerFilter=if($kind -eq 'ntvwm'){$nativeFilter}else{"Name='ntvdm.exe'"}
+                    $workerRows=@(Get-CimInstance Win32_Process -Filter $workerFilter | Where-Object {$_.ExecutablePath -in $paths})
                     $frontRows=@(Get-CimInstance Win32_Process -Filter "Name='ntcon.exe'" | Where-Object {$_.ExecutablePath -in $paths})
                     $brokerRows=@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'" | Where-Object {$_.ExecutablePath -in $paths})
                     if($workerRows.Count -eq 1 -and $frontRows.Count -eq 1 -and $brokerRows.Count -eq 1){

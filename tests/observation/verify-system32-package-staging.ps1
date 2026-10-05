@@ -1,7 +1,9 @@
 param([Parameter(Mandatory)][string]$BaselineRoot,
       [Parameter(Mandatory)][string]$BuildCache,
       [Parameter(Mandatory)][string]$Wow32,
-      [Parameter(Mandatory)][string]$RunRoot)
+      [Parameter(Mandatory)][string]$RunRoot,
+      [string]$NativeWorker32='',[string]$NativeWorker64='',
+      [string]$NativeHook32='')
 $ErrorActionPreference='Stop'
 $baseline=(Resolve-Path $BaselineRoot).Path
 $run=[IO.Path]::GetFullPath($RunRoot)
@@ -40,7 +42,25 @@ $conflictRejected=$false
 try{& $stage -BaselineRoot $fixture -BuildCache $BuildCache -Wow32 $Wow32 -OutputRoot (Join-Path $run 'conflict')}
 catch{$conflictRejected=$_.Exception.Message -eq 'Conflicting Registry overlays'}
 if(!$conflictRejected -or (Get-FileHash $registry).Hash -ne $hash){throw 'Conflicting overlays were merged or source mutated'}
+$dualNegatives=@()
+if($NativeWorker32 -or $NativeWorker64 -or $NativeHook32){
+ if(!$NativeWorker32 -or !$NativeWorker64 -or !$NativeHook32){throw 'Supply all three native fixture inputs'}
+ $cases=@(
+   @{Name='incomplete';Arguments=@{NativeWorker32=$NativeWorker32};Expected='Dual-width package requires both workers and both hooks'},
+   @{Name='wrong-worker';Arguments=@{NativeWorker32=$NativeWorker32;NativeWorker64=$NativeWorker32;NativeHook=$NativeHook32;NativeHook64=$NativeWorker64};Expected='Wrong machine input: ntvwm64.exe'},
+   @{Name='wrong-hook';Arguments=@{NativeWorker32=$NativeWorker32;NativeWorker64=$NativeWorker64;NativeHook=$NativeHook32;NativeHook64=$NativeWorker64};Expected='Wrong image type: nthook64.dll'}
+ )
+ foreach($case in $cases){
+   $rejected=$false;$negativeOutput=Join-Path $run $case.Name
+   $arguments=$case.Arguments
+   try{& $stage -BaselineRoot $fixture -BuildCache $BuildCache -Wow32 $Wow32 -OutputRoot $negativeOutput @arguments}
+   catch{$rejected=$_.Exception.Message -eq $case.Expected}
+   if(!$rejected -or (Test-Path $negativeOutput)){throw "Dual-width preflight failed: $($case.Name)"}
+   $dualNegatives+=$case.Name
+ }
+}
 [pscustomobject]@{OverlayMovedByteExactly=$true;SourcePreserved=$true;
-    MixedLayoutRejected=$mixedRejected;ConflictingOverlaysRejected=$conflictRejected}|
+    MixedLayoutRejected=$mixedRejected;ConflictingOverlaysRejected=$conflictRejected;
+    DualWidthPreflightNegatives=$dualNegatives}|
  ConvertTo-Json|Set-Content (Join-Path $run 'results.json')
 'PASS system32 eight-file staging, overlay preservation and conflict/mixed-layout negatives'

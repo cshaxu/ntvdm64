@@ -21,7 +21,7 @@ if(Get-Process ntsrv -ErrorAction SilentlyContinue) {throw 'An existing broker m
 $testScope=New-IsolatedPackageScope $runtime
 $binary=Get-PackageBinaryRoot $runtime
 $binaryRelative=$binary.Substring($runtime.Length).TrimStart('\')
-$names='run16.exe','ntsrv.exe','ntvdm.exe','ntvwm.exe','ntcon.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL'
+$names=@(Get-PackageImageNames $runtime)
 $identity=@($names | ForEach-Object {
     $path=Join-Path $binary $_
     if(!(Test-Path $path)){throw "Missing package file: $path"}

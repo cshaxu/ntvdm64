@@ -13,6 +13,7 @@ BOOL WINAPI DllMain(HINSTANCE instance,DWORD reason,LPVOID)
     if(reason==DLL_PROCESS_ATTACH) {
         BOOL found=FALSE;
         DisableThreadLibraryCalls(instance);
+        if(DetourIsHelperProcess())return TRUE;
         if(!DetourRestoreAfterWith() ||
            nthook_context_read(&nthook_process_context,&found) || !found ||
            nthook_process_context.mode!=NATIVE_HOOK_INTERCEPT)return FALSE;

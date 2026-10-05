@@ -206,6 +206,7 @@ DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *connection,
     for(link=connection->service->connections.Flink;link!=&connection->service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *other=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
         if(root_generation && other!=connection && other->native_worker &&
+            other->native_machine==connection->native_machine &&
             other->native_frontend_registered && service_worker_root(other)==root_generation &&
             WaitForSingleObject(other->process.ProcessHandle,0)==WAIT_TIMEOUT)
             {error=ERROR_ALREADY_EXISTS;goto done;}
@@ -400,8 +401,9 @@ DWORD OpenNtBaseServiceCreateNativeReservation(OPENNT_BASE_CONNECTION *connectio
             connection->process.fVDM || connection->native_worker || connection->wow)
         error=ERROR_INVALID_STATE;
     else {
-        error=OpenNtBaseReservationCreateKind(connection->service->reservations,
-            pid,generation,0,connection->console,OPENNT_BASE_WORKER_NATIVE,reservation);
+        error=OpenNtBaseReservationCreateNative(connection->service->reservations,
+            pid,generation,connection->console,
+            connection->native_machine ? connection->native_machine : IMAGE_FILE_MACHINE_I386,reservation);
         if (!error) {
             connection->reservation=*reservation;
             connection->reservation_kind=OPENNT_BASE_WORKER_NATIVE;
@@ -439,6 +441,7 @@ DWORD OpenNtBaseServiceSelectNativeWorker(OPENNT_BASE_CONNECTION *connection,
     for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
         OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
         if(watch->kind!=OPENNT_BASE_WORKER_NATIVE ||
+            watch->native_machine!=(connection->native_machine ? connection->native_machine : IMAGE_FILE_MACHINE_I386) ||
             (watch->console!=connection->console &&
              (requested_root || watch->frontend_root_generation)) ||
             watch->termination_requested || WaitForSingleObject(watch->process.ProcessHandle,0)!=WAIT_TIMEOUT ||
@@ -467,6 +470,12 @@ DWORD OpenNtBaseServicePrepareWorker(OPENNT_BASE_CONNECTION *connection,DWORD pi
 {
     if (!connection) return ERROR_INVALID_PARAMETER;
     if (!OpenNtBaseServicePeer(connection,pid,generation)) return ERROR_ACCESS_DENIED;
+    if(connection->reservation_kind==OPENNT_BASE_WORKER_NATIVE) {
+        DWORD actual,error=common_process_machine(worker,&actual);
+        if(error)return error;
+        if(actual!=(connection->native_machine ? connection->native_machine : IMAGE_FILE_MACHINE_I386))
+            return ERROR_BAD_EXE_FORMAT;
+    }
     return OpenNtBaseReservationPrepareWorker(connection->service->reservations,reservation,
         pid,generation,worker);
 }
@@ -647,19 +656,28 @@ done:
 
 
 DWORD OpenNtBaseServiceStartNativeWorker(OPENNT_BASE_CONNECTION *connection,DWORD pid,
-    DWORD generation,HANDLE *worker)
+    DWORD generation,DWORD machine,HANDLE *worker)
 {
     WCHAR image[MAX_PATH],command[MAX_PATH+3];
     STARTUPINFOW startup={sizeof(startup)};
     uint64_t reservation=0;DWORD error;
     if(!worker)return ERROR_INVALID_PARAMETER;
     *worker=NULL;
+    if(!connection || !OpenNtBaseServicePeer(connection,pid,generation))return ERROR_ACCESS_DENIED;
+    if(machine!=IMAGE_FILE_MACHINE_I386 && machine!=IMAGE_FILE_MACHINE_AMD64)return ERROR_NOT_SUPPORTED;
+    EnterCriticalSection(&connection->service->lock);
+    if((connection->selected_native_generation || connection->reservation || connection->pending_creation) &&
+        connection->native_machine && connection->native_machine!=machine)error=ERROR_INVALID_STATE;
+    else {connection->native_machine=machine;error=ERROR_SUCCESS;}
+    LeaveCriticalSection(&connection->service->lock);
+    if(error)return error;
     error=OpenNtBaseServiceSelectNativeWorker(connection,pid,generation,worker);
     if(error!=ERROR_NOT_FOUND)return error;
     error=OpenNtBaseServiceCreateNativeReservation(connection,pid,generation,&reservation);
     if(error)return error;
     /* Same-package product worker only. No remote executable/flags command. */
-    error=common_product_path_w(L"system32\\ntvwm.exe",image,ARRAYSIZE(image));
+    error=common_product_path_w(machine==IMAGE_FILE_MACHINE_AMD64 ?
+        L"system32\\ntvwm64.exe" : L"system32\\ntvwm32.exe",image,ARRAYSIZE(image));
     if(error)goto done;
     if(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\"",image)<0)
         {error=ERROR_FILENAME_EXCED_RANGE;goto done;}

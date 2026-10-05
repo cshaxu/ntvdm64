@@ -213,13 +213,17 @@ done:
 DWORD OpenNtBaseServiceBindNativeTarget(OPENNT_BASE_CONNECTION *connection,DWORD pid,
     DWORD generation,DWORD request,HANDLE target,HANDLE receipt)
 {
-    DWORD error=ERROR_ACCESS_DENIED,target_pid=0;
+    DWORD error=ERROR_ACCESS_DENIED,target_pid=0,target_machine=0;
     LIST_ENTRY *link;
     if(!connection || !request || !target || !receipt)return error;
     target_pid=GetProcessId(target);
     if(!target_pid)return GetLastError();
     EnterCriticalSection(&connection->service->lock);
     if(OpenNtBaseServicePeer(connection,pid,generation) && connection->native_worker) {
+        error=common_process_machine(target,&target_machine);
+        if(error)goto bound;
+        if(target_machine!=connection->native_machine){error=ERROR_BAD_EXE_FORMAT;goto bound;}
+        error=ERROR_ACCESS_DENIED;
         for(link=connection->win32records.Flink;link!=&connection->win32records;link=link->Flink) {
             OPENNT_BASE_WIN32RECORD *record=CONTAINING_RECORD(link,OPENNT_BASE_WIN32RECORD,link);
             if(record->request==request) {
@@ -243,6 +247,7 @@ DWORD OpenNtBaseServiceBindNativeTarget(OPENNT_BASE_CONNECTION *connection,DWORD
                         record->gui_process=owned_target;owned_target=NULL;
                         record->gui_wait=owned_wait;owned_wait=NULL;
                         record->process_id=target_pid;
+                        record->native_machine=target_machine;
                         record->worker_generation=generation;
                         service_query_native_image(target_pid,record->image);
                         service_signal_frontend_states(connection->service);
@@ -256,6 +261,7 @@ DWORD OpenNtBaseServiceBindNativeTarget(OPENNT_BASE_CONNECTION *connection,DWORD
             }
         }
     }
+bound:
     LeaveCriticalSection(&connection->service->lock);
     return error;
 }

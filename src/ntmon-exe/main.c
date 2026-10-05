@@ -72,7 +72,8 @@ static BOOL bind_basesrv(MONITOR_STATE *state)
 }
 static const WCHAR *kind_name(ULONG kind)
 {
-    return kind==2u ? L"WIN32" : kind==1u ? L"WIN16" : L"DOS";
+    return kind==MANAGEMENT_KIND_WIN64 ? L"WIN64" :
+        kind==MANAGEMENT_KIND_WIN32 ? L"WIN32" : kind==MANAGEMENT_KIND_WIN16 ? L"WIN16" : L"DOS";
 }
 static BOOL same_key(const DTASKMGR_KEY *left,const DTASKMGR_KEY *right)
 {

@@ -8,6 +8,11 @@ unnumbered implementation candidate, not admission or expansion of the active
 T425 packet. Numeric T allocation and bounded S admission occur only in
 [CURRENT](../states/CURRENT.md), under [Execution Rules](../rules/EXECUTION.md).
 
+The owner's subsequent 2026-10-04 direction places this candidate at the queue
+head, before execution-performance recovery. The original position 3 above
+records its initial insertion; current ordering belongs to Queue. This does
+not admit implementation or change the active root/search-isolation packet.
+
 Consolidate project-owned worker control, frontend routing, association,
 occupancy and termination mechanisms across NTVDM and NTVWM, and align names
 with their actual owner and semantic scope. Keep run16 a thin classifier,

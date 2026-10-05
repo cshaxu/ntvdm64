@@ -2,6 +2,7 @@
  * Do not embed a second service translation. All service modules are selected
  * from the same production archive; no substitute policy or public API. */
 #include <service_internal.h>
+#include "ntsrv-exe/transport/frontend_admission.h"
 #include <stdio.h>
 
 int fixture_parent_resume_origin(void)
@@ -86,19 +87,20 @@ int fixture_parent_resume_origin(void)
 /* Projection/close fixture: seed the existing admitted GUI record boundary,
  * bind a real suspended target through the production provider, then model
  * its already-tested startup transfer. No substitute close implementation. */
-int fixture_management_gui(void)
+static int fixture_management_gui_machine(PCWSTR native_image,DWORD expected_machine)
 {
     OPENNT_BASE_SERVICE *service=OpenNtBaseServiceStart();
     OPENNT_BASE_CONNECTION *worker=NULL;
     OPENNT_BASE_WIN32RECORD *record=NULL;
     OPENNT_BASE_WORKER_INFO *tree=NULL;
-    PROCESS_INFORMATION carrier={0},target={0};STARTUPINFOW startup={sizeof(startup)};
+    PROCESS_INFORMATION carrier={0},target={0},wrong_target={0};STARTUPINFOW startup={sizeof(startup)};
     WCHAR image[MAX_PATH],command[MAX_PATH+32];
     HANDLE receipt=NULL;
     DWORD generation=0,result=1;uint32_t count=0;uint64_t epoch=0;
     OPENNT_BASE_MANAGEMENT_KEY key={0};
 #define GUI_CHECK(x) do {if(!(x)){fprintf(stderr,"FAIL management-gui line %d\n",__LINE__);goto cleanup;}}while(0)
     GUI_CHECK(service && GetModuleFileNameW(NULL,image,ARRAYSIZE(image)));
+    if(native_image)GUI_CHECK(!wcscpy_s(image,ARRAYSIZE(image),native_image));
     swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" --reservation-child",image);
     GUI_CHECK(CreateProcessW(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
         NULL,NULL,&startup,&carrier));
@@ -111,8 +113,19 @@ int fixture_management_gui(void)
     record->request=17;record->gui=TRUE;lstrcpyW(record->image,L"fixture-gui.exe");
     EnterCriticalSection(&service->lock);
     worker->native_worker=TRUE;
+    result=common_process_machine(carrier.hProcess,&worker->native_machine);
     InsertTailList(&worker->win32records,&record->link);
     LeaveCriticalSection(&service->lock);
+    GUI_CHECK(!result && worker->native_machine==expected_machine);result=1;
+    if(native_image) {
+        WCHAR fixture[MAX_PATH];
+        GUI_CHECK(GetModuleFileNameW(NULL,fixture,ARRAYSIZE(fixture)));
+        GUI_CHECK(CreateProcessW(fixture,NULL,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
+            NULL,NULL,&startup,&wrong_target));
+        GUI_CHECK(OpenNtBaseServiceBindNativeTarget(worker,carrier.dwProcessId,generation,17,
+            wrong_target.hProcess,receipt)==ERROR_BAD_EXE_FORMAT);
+        GUI_CHECK(!record->receipt && !record->process_id && !record->native_machine);
+    }
     GUI_CHECK(!OpenNtBaseServiceBindNativeTarget(worker,carrier.dwProcessId,generation,17,target.hProcess,receipt));
     EnterCriticalSection(&service->lock);
     RemoveEntryList(&record->link);InsertTailList(&service->gui_records,&record->link);
@@ -120,7 +133,8 @@ int fixture_management_gui(void)
     GUI_CHECK(!OpenNtBaseServiceSnapshotCopy(service,&epoch,&tree,&count) && count==1);
     GUI_CHECK(tree[0].key.category==MANAGEMENT_GUI_TARGET && tree[0].key.generation==generation &&
         tree[0].key.object==17 && !tree[0].parent.category && !tree[0].depth &&
-        tree[0].process_id==target.dwProcessId && tree[0].kind==2 &&
+        tree[0].process_id==target.dwProcessId && tree[0].kind==
+            (expected_machine==IMAGE_FILE_MACHINE_AMD64 ? MANAGEMENT_KIND_WIN64 : MANAGEMENT_KIND_WIN32) &&
         tree[0].actions==MANAGEMENT_CAN_CLOSE && tree[0].started_filetime && tree[0].image[0]);
     key=tree[0].key;++key.object;
     GUI_CHECK(OpenNtBaseServiceCloseManagementNode(service,&key)==ERROR_NOT_FOUND);
@@ -138,6 +152,8 @@ int fixture_management_gui(void)
     GUI_CHECK(!OpenNtBaseServiceSnapshotCopy(service,&epoch,&tree,&count) && !count && !tree);
     result=0;
 cleanup:
+    if(wrong_target.hProcess){TerminateProcess(wrong_target.hProcess,ERROR_CANCELLED);WaitForSingleObject(wrong_target.hProcess,5000);}
+    if(wrong_target.hThread)CloseHandle(wrong_target.hThread);if(wrong_target.hProcess)CloseHandle(wrong_target.hProcess);
     if(tree)HeapFree(GetProcessHeap(),0,tree);
     if(target.hProcess){TerminateProcess(target.hProcess,ERROR_CANCELLED);WaitForSingleObject(target.hProcess,5000);}
     if(service){EnterCriticalSection(&service->lock);service_prune_gui_records(service);LeaveCriticalSection(&service->lock);}
@@ -150,6 +166,77 @@ cleanup:
     if(!result)puts("PASS management GUI: real pinned target, independent row, stale key, carrier survives, actual exit owns completion");
     return result;
 #undef GUI_CHECK
+}
+
+int fixture_management_gui(void)
+{return fixture_management_gui_machine(NULL,IMAGE_FILE_MACHINE_I386);}
+
+int fixture_management_gui64(PCWSTR native_image)
+{return fixture_management_gui_machine(native_image,IMAGE_FILE_MACHINE_AMD64);}
+
+/* Trusted registration fixture: real process identities and machine queries,
+ * with admitted worker watches seeded locally. This tests the production root
+ * binding policy, not RPC authentication or guest execution. */
+int fixture_native_width_root(PCWSTR native64)
+{
+    OPENNT_BASE_SERVICE *service=OpenNtBaseServiceStart();
+    OPENNT_BASE_CONNECTION *root=NULL,*workers[3]={0};
+    OPENNT_BASE_WORKER_WATCH watches[3]={0};
+    PROCESS_INFORMATION processes[3]={0};STARTUPINFOW startup={sizeof(startup)};
+    DWORD generation=0,result=1;WCHAR self_image[MAX_PATH];
+    HANDLE self=GetCurrentProcess(),capability=NULL,stops[3]={0},closed[3]={0};
+#define WIDTH_CHECK(x) do{if(!(x)){fprintf(stderr,"FAIL native-width-root line %d\n",__LINE__);goto cleanup;}}while(0)
+    WIDTH_CHECK(service && native64 && GetModuleFileNameW(NULL,self_image,MAX_PATH));
+    WIDTH_CHECK(!OpenNtBaseServiceConnect(service,self,&root,&generation));
+    capability=CreateEventW(NULL,TRUE,FALSE,NULL);WIDTH_CHECK(capability);
+    WIDTH_CHECK(!broker_frontend_admit(root,GetCurrentProcessId(),generation,self,
+        capability,capability,capability,NULL));
+    WIDTH_CHECK(!OpenNtBaseServiceRegisterFrontendRoot(root,GetCurrentProcessId(),generation,capability));
+    broker_frontend_clear_admission(root);
+    for(unsigned index=0;index<3;++index) {
+        DWORD worker_generation=0,machine=0;
+        WIDTH_CHECK(CreateProcessW(index==1 ? native64 : self_image,NULL,NULL,NULL,FALSE,
+            CREATE_SUSPENDED|CREATE_NO_WINDOW,NULL,NULL,&startup,&processes[index]));
+        WIDTH_CHECK(!common_process_machine(processes[index].hProcess,&machine));
+        WIDTH_CHECK(machine==(index==1 ? IMAGE_FILE_MACHINE_AMD64 : IMAGE_FILE_MACHINE_I386));
+        WIDTH_CHECK(!OpenNtBaseServiceConnect(service,processes[index].hProcess,&workers[index],&worker_generation));
+        stops[index]=CreateEventW(NULL,TRUE,FALSE,NULL);closed[index]=CreateEventW(NULL,TRUE,FALSE,NULL);
+        WIDTH_CHECK(stops[index] && closed[index]);
+        EnterCriticalSection(&service->lock);
+        workers[index]->native_worker=TRUE;workers[index]->native_machine=machine;
+        workers[index]->reservation_kind=OPENNT_BASE_WORKER_NATIVE;
+        watches[index].service=service;watches[index].kind=OPENNT_BASE_WORKER_NATIVE;
+        watches[index].process=workers[index]->process;watches[index].native_machine=machine;
+        InsertTailList(&service->worker_watches,&watches[index].link);
+        LeaveCriticalSection(&service->lock);
+        DWORD error=OpenNtBaseServiceRegisterNativeBackend(workers[index],processes[index].dwProcessId,
+            worker_generation,capability,stops[index],closed[index]);
+        WIDTH_CHECK(error==(index==2 ? ERROR_ALREADY_EXISTS : ERROR_SUCCESS));
+        WIDTH_CHECK(service_worker_root(workers[index])==(index==2 ? 0 : generation));
+        WIDTH_CHECK(workers[index]->native_frontend_registered==(index!=2));
+    }
+    result=0;
+cleanup:
+    if(service) {
+        EnterCriticalSection(&service->lock);
+        for(unsigned index=0;index<3;++index) {
+            if(watches[index].link.Flink)RemoveEntryList(&watches[index].link);
+            if(workers[index])workers[index]->native_worker=FALSE;
+        }
+        LeaveCriticalSection(&service->lock);
+        for(unsigned index=0;index<3;++index)if(workers[index])OpenNtBaseServiceDisconnect(workers[index]);
+        if(root)OpenNtBaseServiceDisconnect(root);
+        if(!OpenNtBaseServiceStop(service))result=1;
+    }
+    for(unsigned index=0;index<3;++index) {
+        if(processes[index].hProcess){TerminateProcess(processes[index].hProcess,0);WaitForSingleObject(processes[index].hProcess,5000);CloseHandle(processes[index].hProcess);}
+        if(processes[index].hThread)CloseHandle(processes[index].hThread);
+        if(stops[index])CloseHandle(stops[index]);if(closed[index])CloseHandle(closed[index]);
+    }
+    if(capability)CloseHandle(capability);
+    if(!result)puts("PASS native-width root: real I386/AMD64 workers share one root; duplicate same-width binding rejected");
+    return result;
+#undef WIDTH_CHECK
 }
 
 /* Trusted fixture inserts only the existing watch record; all deadline,

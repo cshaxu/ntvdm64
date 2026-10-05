@@ -23,6 +23,8 @@ DWORD OpenNtBaseReservationCreate(OPENNT_BASE_RESERVATIONS *,DWORD launcher_pid,
     DWORD launcher_generation,ULONG task,HANDLE console,BOOL shared_wow,uint64_t *reservation);
 DWORD OpenNtBaseReservationCreateKind(OPENNT_BASE_RESERVATIONS *,DWORD launcher_pid,
     DWORD launcher_generation,ULONG task,HANDLE console,OPENNT_BASE_WORKER_KIND,uint64_t *reservation);
+DWORD OpenNtBaseReservationCreateNative(OPENNT_BASE_RESERVATIONS *,DWORD launcher_pid,
+    DWORD launcher_generation,HANDLE console,DWORD machine,uint64_t *reservation);
 DWORD OpenNtBaseReservationPrepareWorker(OPENNT_BASE_RESERVATIONS *,uint64_t reservation,
     DWORD launcher_pid,DWORD launcher_generation,HANDLE worker);
 /* A worker cannot nominate a reservation.  The service finds the one whose

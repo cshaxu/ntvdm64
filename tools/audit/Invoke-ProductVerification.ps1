@@ -28,12 +28,24 @@ if(!$log.StartsWith($build,[StringComparison]::OrdinalIgnoreCase) -or (Test-Path
 $runtimeScope=New-IsolatedPackageScope $runtime
 $cacheScope=New-IsolatedPackageScope $cache
 $runtimeBinary=Get-PackageBinaryRoot $runtime
-foreach($name in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe')){
+$dual=Test-Path -LiteralPath (Join-Path $runtimeBinary 'ntvwm32.exe')
+$workerNames=if($dual){@('ntvwm32.exe','ntvwm64.exe')}else{@('ntvwm.exe')}
+foreach($name in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntmon.exe')+$workerNames){
     if((Get-FileHash (Join-Path $cache $name)).Hash -ne (Get-FileHash (Join-Path $runtimeBinary $name)).Hash){
         throw "Build cache/runtime mismatch: $name; build affected targets first"
     }
 }
-$packageNames=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL')
+$packageNames=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL')+$workerNames
+if($dual){
+    if(Test-Path -LiteralPath (Join-Path $runtimeBinary 'ntvwm.exe')){throw 'Mixed worker family'}
+    foreach($name in @('nthook32.dll','nthook64.dll')){
+        $file=Join-Path $runtimeBinary $name
+        if(!(Test-Path $file) -or (Get-FileHash (Join-Path $cache $name)).Hash -ne (Get-FileHash $file).Hash){
+            throw "Build cache/runtime mismatch: $name"
+        }
+    }
+    $packageNames+='nthook64.dll'
+}
 if(Test-Path -LiteralPath (Join-Path $cache 'nthook32.dll')){
     $hook=Join-Path $runtimeBinary 'nthook32.dll'
     if(!(Test-Path -LiteralPath $hook) -or
@@ -45,7 +57,8 @@ if(Test-Path -LiteralPath (Join-Path $cache 'nthook32.dll')){
 $manifest=foreach($name in $packageNames){
     $path=Join-Path $runtimeBinary $name
     $bytes=[IO.File]::ReadAllBytes($path);$pe=[BitConverter]::ToInt32($bytes,60)
-    if([BitConverter]::ToUInt16($bytes,$pe+4) -ne 0x14c){throw 'Non-x86 runtime'}
+    $expectedMachine=if($name -in @('ntvwm64.exe','nthook64.dll')){0x8664}else{0x14c}
+    if([BitConverter]::ToUInt16($bytes,$pe+4) -ne $expectedMachine){throw "Wrong runtime machine: $name"}
     [pscustomobject]@{Name=$name;Sha256=(Get-FileHash $path).Hash}
 }
 if($Suite -ne 'Control' -and (!$GuestFixture -or !$WindowObserver -or !$WowBaselineRoots)){

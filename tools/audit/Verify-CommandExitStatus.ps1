@@ -10,6 +10,9 @@ param(
     [string]$VideoGuestFixturePath,
     [string]$FrontendObserver,
     [string]$NativeSurvivorFixture,
+    # Explicit caller-resolved native path, e.g. Sysnative for the x86 launcher.
+    # Does not change any expected output, receipt, order or exit assertion.
+    [string]$NativeApplication='cmd.exe',
     [ValidateRange(1000,60000)][int]$ObservationTimeoutMs = 20000,
     [switch]$OrdinaryFrontend
 )
@@ -58,7 +61,9 @@ $generatedFixtures = @(
 $productNames = @('run16.exe','ntvdm.exe','ntsrv.exe','ntcon.exe')
 $binaryRoot=Get-PackageBinaryRoot $PackageRoot
 # Retain compatibility with sealed pre-NTVWM evidence packages.
-if(Test-Path -LiteralPath (Join-Path $binaryRoot 'ntvwm.exe')){$productNames+='ntvwm.exe'}
+foreach($workerName in @('ntvwm.exe','ntvwm32.exe','ntvwm64.exe')){
+    if(Test-Path -LiteralPath (Join-Path $binaryRoot $workerName)){$productNames+=$workerName}
+}
 $productPaths = $productNames | ForEach-Object { Join-Path $binaryRoot $_ }
 if($Cases -contains 'native-surviving-client'){
     $productPaths+=Join-Path $runtimeFixtureRoot 'SURVIVE.EXE'
@@ -75,7 +80,7 @@ if($ProcessPackageRoot){
     }
 }
 function Get-PackageProcesses {
-    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='ntsrv.exe' OR Name='ntcon.exe' OR Name='ntvwm.exe' OR Name='SURVIVE.EXE'" |
+    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='ntsrv.exe' OR Name='ntcon.exe' OR Name='ntvwm.exe' OR Name='ntvwm32.exe' OR Name='ntvwm64.exe' OR Name='SURVIVE.EXE'" |
         Where-Object { $_.ExecutablePath -in $productPaths })
 }
 function Test-ExactFileBytes {
@@ -181,6 +186,7 @@ $matrix = @(
     @{ Name='worker-version-rejection'; Args=@('MEM.EXE'); Code=1306; Negative=$true }
 )
 foreach ($case in $matrix) {
+    if($case.Args -and $case.Args[0] -eq 'cmd.exe'){$case.Args[0]=$NativeApplication}
     if ($case.Name -in @('native-cmd-dos-repeat','dos-native-dos','dos-native-typeahead','frontend-chain-a','frontend-chain-b')) {
         $case.RootFrontend=$true
     }

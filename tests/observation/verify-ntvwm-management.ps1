@@ -20,8 +20,12 @@ if(!$physical.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::Ordin
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid log prefix'}
 if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'An existing broker must not be controlled by this test'}
 $paths=@()
-foreach($name in @('run16.exe','ntsrv.exe','ntcon.exe','ntvwm.exe')){
-    $actual=Join-Path $physical $name;$launch=Join-Path $PackageRoot $name
+$physicalBinary=Get-PackageBinaryRoot $physical
+$launchBinary=Get-PackageBinaryRoot $PackageRoot
+$nativeNames=@(Get-PackageNativeWorkerNames $physical)
+$nativeFilter=($nativeNames | ForEach-Object {"Name='$_'"}) -join ' OR '
+foreach($name in @('run16.exe','ntsrv.exe','ntcon.exe')+$nativeNames){
+    $actual=Join-Path $physicalBinary $name;$launch=Join-Path $launchBinary $name
     if((Get-FileHash $actual).Hash -ne (Get-FileHash $launch).Hash){throw 'Candidate mismatch'}
     $paths+=@($actual,$launch)
 }
@@ -35,11 +39,11 @@ $oldGate=$env:MVDM_OBSERVER_INPUT_GATE
 try {
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     $observerProcess=Start-Process -FilePath (Resolve-Path $Observer).Path -ArgumentList @(
-        (Join-Path $PackageRoot 'run16.exe'),$PackageRoot,$report,
+        (Join-Path $launchBinary 'run16.exe'),$PackageRoot,$report,
         'cmd.exe','/d','/k','--observation-timeout-ms','25000') -WindowStyle Hidden -PassThru
     $deadline=[DateTime]::UtcNow.AddSeconds(15)
     do {
-        $native=@(Get-CimInstance Win32_Process -Filter "Name='ntvwm.exe'" | Where-Object {$_.ExecutablePath -in $paths})
+        $native=@(Get-CimInstance Win32_Process -Filter $nativeFilter | Where-Object {$_.ExecutablePath -in $paths})
         if($native.Count -eq 1){
             $children=@(Get-CimInstance Win32_Process -Filter "Name='cmd.exe'" | Where-Object {$_.ParentProcessId -eq $native[0].ProcessId})
             if($children.Count -eq 1){
@@ -64,13 +68,13 @@ try {
         $otherReport=Join-Path $LogRoot "$LogPrefix-other.txt"
         if(Test-Path $otherReport){throw 'Use fresh second-session evidence'}
         $otherObserver=Start-Process -FilePath (Resolve-Path $Observer).Path -ArgumentList @(
-            (Join-Path $PackageRoot 'run16.exe'),$PackageRoot,$otherReport,
+            (Join-Path $launchBinary 'run16.exe'),$PackageRoot,$otherReport,
             'cmd.exe','/d','/k','--observation-timeout-ms','25000',
             '--observe-console-input-text',('"'+"echo ISOLATED-SESSION-OK`rexit /b 23`r"+'"')) -WindowStyle Hidden -PassThru
         $env:MVDM_OBSERVER_INPUT_GATE=$oldGate
         $deadline=[DateTime]::UtcNow.AddSeconds(10)
         do {
-            $native=@(Get-CimInstance Win32_Process -Filter "Name='ntvwm.exe'" | Where-Object {
+            $native=@(Get-CimInstance Win32_Process -Filter $nativeFilter | Where-Object {
                 $_.ExecutablePath -in $paths -and $_.ProcessId -ne $worker.Id
             })
             if($native.Count -eq 1){

@@ -4,6 +4,7 @@
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include "common/protocol/console_io.h"
 #include "nthook32-dll/hook.h"
+#include "common/image_classification.h"
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -166,14 +167,18 @@ static DWORD wait_worker_change(HANDLE changed,HANDLE worker,HANDLE root,ULONGLO
 
 static DWORD scope_launch_native(run16_frontend_scope *scope,const run16_native_start *start,BOOL text)
 {
-    HANDLE worker=NULL,changed=NULL,target=NULL;DWORD error;
+    HANDLE worker=NULL,changed=NULL,target=NULL;DWORD error,machine=0,subsystem=0;
+    run16_native_start delivery;WCHAR resolved[MAX_PATH];
     ULONGLONG deadline=GetTickCount64()+10000;
     if(!scope || !start)return ERROR_INVALID_PARAMETER;
     if(scope->receipt)return ERROR_BUSY;
+    error=common_classify_native_image(start->application,&machine,&subsystem,resolved,ARRAYSIZE(resolved));
+    if(error)return error;
+    delivery=*start;delivery.application=resolved;
     error=OpenNtBaseClientWorkerStateChanged(&changed);
     if(error)return error;
     for(;;) {
-        error=OpenNtBaseClientStartNativeWorker(&worker);
+        error=OpenNtBaseClientStartNativeWorker(machine,&worker);
         if(error==ERROR_ALREADY_EXISTS) {
             /* Each launcher has its own auto-reset state event; NTCON's
              * retirement event is never shared with this admission wait. */
@@ -189,7 +194,7 @@ static DWORD scope_launch_native(run16_frontend_scope *scope,const run16_native_
          * A reused route is not a new frontend or an input activation. */
         error=text ? OpenNtBaseClientRequestFrontend(scope->capability) : ERROR_SUCCESS;
         if(error==ERROR_ALREADY_EXISTS)error=ERROR_SUCCESS;
-        if(!error)error=run16_native_request_submit(text ? scope->capability : NULL,start,&target,&scope->receipt,&scope->native_request);
+        if(!error)error=run16_native_request_submit(text ? scope->capability : NULL,&delivery,&target,&scope->receipt,&scope->native_request);
         if(error!=ERROR_NOT_READY)break;
         /* No request was accepted. Wait only for initial registration; never
          * replay a submitted request or restart a failed worker. */

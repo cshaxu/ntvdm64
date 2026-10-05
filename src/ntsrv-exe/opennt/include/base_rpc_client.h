@@ -14,7 +14,7 @@ DWORD OpenNtBaseClientBrokerProcess(HANDLE *server);
 DWORD OpenNtBaseClientStartFrontend(uint64_t console_window,BOOL borrowed,
     HANDLE *root,HANDLE *capability,HANDLE *restored);
 DWORD OpenNtBaseClientReturnFrontendConsole(void);
-DWORD OpenNtBaseClientStartNativeWorker(HANDLE *);
+DWORD OpenNtBaseClientStartNativeWorker(DWORD machine,HANDLE *);
 DWORD OpenNtBaseClientStartVdmWorker(PCWSTR environment,DWORD characters,
     DWORD show,HANDLE frontend,HANDLE *worker,HANDLE *parent);
 DWORD OpenNtBaseClientWaitFrontendConsoleRestored(void);

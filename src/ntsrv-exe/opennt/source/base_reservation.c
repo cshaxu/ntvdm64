@@ -11,6 +11,7 @@ typedef struct OPENNT_BASE_RESERVATION {
     ULONG task;
     HANDLE console,worker;
     OPENNT_BASE_WORKER_KIND kind;
+    DWORD native_machine;
     BOOL abandoned;
     broker_vdm_receipts streams;
 } OPENNT_BASE_RESERVATION;
@@ -74,8 +75,9 @@ DWORD OpenNtBaseReservationCreate(OPENNT_BASE_RESERVATIONS *state,DWORD launcher
         task,console,shared_wow ? OPENNT_BASE_WORKER_WOW : OPENNT_BASE_WORKER_DOS,reservation);
 }
 
-DWORD OpenNtBaseReservationCreateKind(OPENNT_BASE_RESERVATIONS *state,DWORD launcher_pid,
-    DWORD launcher_generation,ULONG task,HANDLE console,OPENNT_BASE_WORKER_KIND kind,uint64_t *reservation)
+static DWORD create_reservation(OPENNT_BASE_RESERVATIONS *state,DWORD launcher_pid,
+    DWORD launcher_generation,ULONG task,HANDLE console,OPENNT_BASE_WORKER_KIND kind,
+    DWORD native_machine,uint64_t *reservation)
 {
     OPENNT_BASE_RESERVATION *entry;
     /* A shared WOW request has no DOS ConsoleRecord in original srvvdm.c.
@@ -96,7 +98,7 @@ DWORD OpenNtBaseReservationCreateKind(OPENNT_BASE_RESERVATIONS *state,DWORD laun
          * DOS/WOW cardinality remains owned by the original service. */
         for(cursor=state->entries.Flink;cursor!=&state->entries;cursor=cursor->Flink) {
             OPENNT_BASE_RESERVATION *existing=CONTAINING_RECORD(cursor,OPENNT_BASE_RESERVATION,link);
-            if(existing->kind==kind && existing->console==console) {
+            if(existing->kind==kind && existing->console==console && existing->native_machine==native_machine) {
                 LeaveCriticalSection(&state->lock);HeapFree(GetProcessHeap(),0,entry);
                 return ERROR_ALREADY_EXISTS;
             }
@@ -106,6 +108,7 @@ DWORD OpenNtBaseReservationCreateKind(OPENNT_BASE_RESERVATIONS *state,DWORD laun
     entry->id=state->next++;
     entry->launcher_pid=launcher_pid;entry->launcher_generation=launcher_generation;
     entry->task=task;entry->console=console;entry->kind=kind;
+    entry->native_machine=native_machine;
     if (broker_vdm_receipts_initialize(&entry->streams,launcher_generation)) {
         LeaveCriticalSection(&state->lock);HeapFree(GetProcessHeap(),0,entry);
         return ERROR_INVALID_DATA;
@@ -114,6 +117,21 @@ DWORD OpenNtBaseReservationCreateKind(OPENNT_BASE_RESERVATIONS *state,DWORD laun
     *reservation=entry->id;
     LeaveCriticalSection(&state->lock);
     return ERROR_SUCCESS;
+}
+
+DWORD OpenNtBaseReservationCreateKind(OPENNT_BASE_RESERVATIONS *state,DWORD launcher_pid,
+    DWORD launcher_generation,ULONG task,HANDLE console,OPENNT_BASE_WORKER_KIND kind,uint64_t *reservation)
+{
+    return create_reservation(state,launcher_pid,launcher_generation,task,console,kind,
+        kind==OPENNT_BASE_WORKER_NATIVE ? IMAGE_FILE_MACHINE_I386 : 0,reservation);
+}
+
+DWORD OpenNtBaseReservationCreateNative(OPENNT_BASE_RESERVATIONS *state,DWORD launcher_pid,
+    DWORD launcher_generation,HANDLE console,DWORD machine,uint64_t *reservation)
+{
+    if(machine!=IMAGE_FILE_MACHINE_I386 && machine!=IMAGE_FILE_MACHINE_AMD64)return ERROR_INVALID_PARAMETER;
+    return create_reservation(state,launcher_pid,launcher_generation,0,console,
+        OPENNT_BASE_WORKER_NATIVE,machine,reservation);
 }
 
 DWORD OpenNtBaseReservationAcceptStream(OPENNT_BASE_RESERVATIONS *state,uint64_t reservation,

@@ -589,14 +589,14 @@ static int ntvwm_execution_rpc(void)
     }
     REQUIRE(GetModuleFileNameW(NULL,image,MAX_PATH));
     slash=wcsrchr(image,L'\\');REQUIRE(slash);
-    REQUIRE(!wcscpy_s(slash+1,MAX_PATH-(size_t)(slash+1-image),L"ntvwm.exe"));
+    REQUIRE(!wcscpy_s(slash+1,MAX_PATH-(size_t)(slash+1-image),L"ntvwm32.exe"));
     REQUIRE(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\"",image)>0);
     capability=CreateEventW(NULL,TRUE,FALSE,NULL);
     REQUIRE(capability && !OpenNtBaseClientRegisterFrontendRoot(capability));
     /* This standalone fixture is its own frontend root. A direct launcher
      * may no longer publish the outer Console identity. */
     REQUIRE(!OpenNtBaseClientReportCurrentConsoleMembers());
-    REQUIRE(!OpenNtBaseClientStartNativeWorker(&worker) && worker);
+    REQUIRE(!OpenNtBaseClientStartNativeWorker(IMAGE_FILE_MACHINE_I386,&worker) && worker);
     REQUIRE(GetCurrentDirectoryW(MAX_PATH,directory));
     REQUIRE(GetSystemDirectoryW(native,MAX_PATH));
     REQUIRE(!wcscat_s(native,MAX_PATH,L"\\cmd.exe"));

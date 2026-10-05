@@ -11,6 +11,7 @@
 #include "frontend_scope.h"
 #include "launch_options.h"
 #include "image_classification.h"
+#include "common/image_classification.h"
 #include "native_launch.h"
 #include "common/protocol/console_io.h"
 #include "common/system_root.h"
@@ -495,6 +496,14 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         image_resolved=resolve_image_path(image_argument,application,MAX_PATH);
     if (!OpenNtBaseGetBinaryTypeW(image_resolved ? application : image_argument, &type))
     {
+        DWORD classifier_error=GetLastError(),machine=0,subsystem=0;
+        /* Original classification rejects a native machine unlike this x86
+         * launcher. Confirm actual section metadata before shell fallback. */
+        if(classifier_error==ERROR_BAD_EXE_FORMAT && image_resolved &&
+            !common_classify_native_image(application,&machine,&subsystem,NULL,0)) {
+            type=SCS_32BIT_BINARY;
+            goto classified_image;
+        }
         /* The original COMMAND worker has already chosen COMSPEC /c before
          * this public launcher sees a native-child tail.  A token which is
          * not an image may be a command built-in, batch file, or shell
@@ -521,6 +530,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         result=launch_native(frontend_scope,application,shell_command,TRUE,TRUE);
         goto done;
     }
+classified_image:
     if (type == SCS_DOS_BINARY)
         binary = BINARY_TYPE_DOS;
     else if (type == SCS_PIF_BINARY)

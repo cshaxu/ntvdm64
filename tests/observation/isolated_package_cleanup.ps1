@@ -6,7 +6,7 @@ function Get-PackageBinaryRoot([string]$PackageRoot) {
     # Production has one layout: <root>\system32. Never mix the two layouts.
     $system=Join-Path $PackageRoot 'system32'
     if(Test-Path -LiteralPath (Join-Path $system 'run16.exe')){
-        foreach($name in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL')){
+        foreach($name in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntvwm32.exe','ntvwm64.exe','nthook32.dll','nthook64.dll','ntmon.exe','WOW32.DLL','VDMREDIR.DLL')){
             if(Test-Path -LiteralPath (Join-Path $PackageRoot $name)){
                 throw 'Mixed product binary layout'
             }
@@ -14,6 +14,28 @@ function Get-PackageBinaryRoot([string]$PackageRoot) {
         return $system
     }
     return $PackageRoot
+}
+function Get-PackageNativeWorkerNames([string]$PackageRoot) {
+    $binary=Get-PackageBinaryRoot $PackageRoot
+    if(Test-Path -LiteralPath (Join-Path $binary 'ntvwm32.exe')){
+        if(!(Test-Path -LiteralPath (Join-Path $binary 'ntvwm64.exe'))){throw 'Incomplete dual worker family'}
+        return @('ntvwm32.exe','ntvwm64.exe')
+    }
+    if(!(Test-Path -LiteralPath (Join-Path $binary 'ntvwm.exe'))){throw 'Missing native worker family'}
+    return @('ntvwm.exe')
+}
+function Get-PackageImageNames([string]$PackageRoot) {
+    $binary=Get-PackageBinaryRoot $PackageRoot
+    $workers=@(Get-PackageNativeWorkerNames $PackageRoot)
+    $names=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL')+$workers
+    if($workers.Count -eq 2){
+        if(Test-Path -LiteralPath (Join-Path $binary 'ntvwm.exe')){throw 'Mixed legacy/dual product family'}
+        foreach($hook in @('nthook32.dll','nthook64.dll')){
+            if(!(Test-Path -LiteralPath (Join-Path $binary $hook))){throw 'Incomplete dual Hook family'}
+            $names+=$hook
+        }
+    }elseif(Test-Path -LiteralPath (Join-Path $binary 'nthook32.dll')){$names+='nthook32.dll'}
+    return $names
 }
 function New-IsolatedPackageScope([string]$PackageRoot,[string]$LaunchRoot='') {
     $physical=(Resolve-Path $PackageRoot).Path
@@ -25,8 +47,9 @@ function New-IsolatedPackageScope([string]$PackageRoot,[string]$LaunchRoot='') {
     $paths=@()
     $binary=Get-PackageBinaryRoot $physical
     $launchBinary=if($LaunchRoot){Get-PackageBinaryRoot $LaunchRoot}else{''}
-    foreach($name in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe')){
+    foreach($name in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntvwm32.exe','ntvwm64.exe')){
         $file=Join-Path $binary $name
+        if(!(Test-Path -LiteralPath $file)){continue}
         $paths+=$file
         if($LaunchRoot){
             $alias=Join-Path $launchBinary $name

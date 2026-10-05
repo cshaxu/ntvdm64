@@ -3,7 +3,9 @@ param(
     [Parameter(Mandatory)][string]$RuntimeRoot,
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$LogRoot,
-    [string]$WindowObserver
+    [string]$WindowObserver,
+    [ValidateSet('x86','x64')][string]$NativeMachine='x86',
+    [switch]$IncludeCrossWidth
 )
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/isolated_package_cleanup.ps1"
@@ -15,7 +17,8 @@ if(!$log.StartsWith($build,[StringComparison]::OrdinalIgnoreCase) -or (Test-Path
     throw 'Require fresh build-only evidence'
 }
 $binary=Get-PackageBinaryRoot $runtime
-if(!(Test-Path (Join-Path $binary 'nthook32.dll'))){throw 'Missing hook-enabled package'}
+$hookName=if($NativeMachine -eq 'x64'){'nthook64.dll'}else{'nthook32.dll'}
+if(!(Test-Path (Join-Path $binary $hookName))){throw 'Missing matching hook-enabled package'}
 if(Test-Path Z:\){throw 'Z: in use'}
 $scope=New-IsolatedPackageScope $runtime
 $null=New-Item -ItemType Directory -Path $log
@@ -23,13 +26,18 @@ $saved=[Environment]::GetEnvironmentVariable('MVDM_OBSERVER_PRIVATE_DESKTOP')
 $savedPost=[Environment]::GetEnvironmentVariable('MVDM_OBSERVER_POST_EXIT_MS')
 $savedInput=[Environment]::GetEnvironmentVariable('MVDM_OBSERVER_MILESTONE_INPUT')
 $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
-$names=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll')
+$names=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll')
+foreach($name in @('ntvwm.exe','ntvwm32.exe','ntvwm64.exe','nthook64.dll')){
+    if(Test-Path (Join-Path $binary $name)){$names+=$name}
+}
 $identity=foreach($name in $names){[pscustomobject]@{Name=$name;Hash=(Get-FileHash (Join-Path $binary $name)).Hash}}
 $identity|ConvertTo-Json|Set-Content "$log/package.json"
 & subst.exe Z: $runtime
 if($LASTEXITCODE){throw 'SUBST failed'}
 $scope.Paths=@($scope.Paths)+@($scope.Paths|ForEach-Object {Join-Path Z:\ $_.Substring($runtime.Length+1)})
-$cmd=Join-Path $env:WINDIR 'SysWOW64\cmd.exe'
+# The observer and launcher remain x86. Sysnative selects the actual native64
+# image without changing the Hook's legacy search or execution assertions.
+$cmd=Join-Path $env:WINDIR $(if($NativeMachine -eq 'x64'){'Sysnative\cmd.exe'}else{'SysWOW64\cmd.exe'})
 $minePattern='(?m)^window-utf16=\S+ visible=1 class=(626B96F7|00C900A800C000D7) text=\1\r?$'
 $cases=@(
     @{Name='absolute';Command='Z:\system32\command.com /c ver';Marker='MS-DOS Version 5.00.500'},
@@ -43,6 +51,21 @@ $cases=@(
     @{Name='parent-return';Command='Z:\system32\command.com /c ver & echo HOOK-PARENT-RETURN';Marker='HOOK-PARENT-RETURN'},
     @{Name='explicit-launcher';Command='Z:\system32\run16.exe Z:\system32\command.com /c ver';Marker='MS-DOS Version 5.00.500'}
 )
+if($IncludeCrossWidth) {
+    foreach($name in @('nthook32.dll','nthook64.dll')) {
+        if(!(Test-Path (Join-Path $binary $name))){throw 'Cross-width chains require both actual hooks'}
+    }
+    $oppositeCmd=Join-Path $env:WINDIR $(if($NativeMachine -eq 'x64'){'SysWOW64\cmd.exe'}else{'Sysnative\cmd.exe'})
+    # This observer CRT-quotes an entire forwarded /c argument. Embedding
+    # another quoted executable then supplies literal backslash-quotes to CMD
+    # (whose parser is not the CRT parser). Use the actual short fixture path,
+    # as the existing COMMAND/MEM cases do; do not reinterpret product syntax.
+    if($oppositeCmd -match '\s'){throw 'Cross-CMD observer fixture requires a host Windows path without spaces'}
+    $cases+=@(
+        @{Name='cross-native-mem';Command=($oppositeCmd+' /d /c Z:\system32\MEM.EXE & echo CROSS-NATIVE-RETURN');Marker='bytes total conventional memory';After='CROSS-NATIVE-RETURN'},
+        @{Name='cross-native-dos';Command=($oppositeCmd+' /d /c Z:\system32\run16.exe Z:\system32\command.com /c ver & echo CROSS-DOS-RETURN');Marker='MS-DOS Version 5.00.500';After='CROSS-DOS-RETURN'}
+    )
+}
 try {
     foreach($case in $cases){
         $report=Join-Path $log ($case.Name+'.txt')
@@ -66,7 +89,7 @@ try {
             if($case.After -and ($screen.IndexOf($case.After) -le $screen.IndexOf($case.Marker))){
                 throw "Direct DOS completion/parent output order failed: $($case.Name)"
             }
-            "PASS $($case.Name): actual x86 CMD/Windows completion/current Console marker"
+            "PASS $($case.Name): actual $NativeMachine CMD/Windows completion/current Console marker"
         } finally {Stop-IsolatedPackageScope $scope}
     }
     if($WindowObserver){
@@ -107,7 +130,7 @@ try {
                 $windows -notmatch $minePattern){
                 throw 'Hook Win16 startup-only receipt/window assertions failed'
             }
-            'PASS winmine: x86 CMD legacy redirect/startup-only receipt/actual Mines window; not gameplay'
+            "PASS winmine: $NativeMachine CMD legacy redirect/startup-only receipt/actual Mines window; not gameplay"
         } finally {
             if(!$process.HasExited){$process.Kill();$null=$process.WaitForExit(5000)}
             $process.Dispose();Stop-IsolatedPackageScope $scope

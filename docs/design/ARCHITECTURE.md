@@ -10,6 +10,11 @@ NTCON renderer or modifying guest/shared-library code.
 
 ### Proposed native worker width variants — T432 design
 
+The owner's subsequent goal requires NTSRV to retain verified native machine
+identity and NTMON to show WIN64 separately from WIN32. This extends the prior
+three-label freeze: DOS=0, Win16=1, Win32=2, Win64=3. Both native widths use the
+same task/worker control paths; NTCON does not distinguish worker width.
+
 Owner accepts the delivered T431 Hook32 baseline and transfers unimplemented
 dual-width work to the separate T432 package. Its
 [plan](../etc/operations/t432-dual-width-native-workers-hooks-plan.md) owns

@@ -137,6 +137,8 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
             OPENNT_BASE_WORKER_WATCH *watch;
             shared_wow=kind==OPENNT_BASE_WORKER_WOW;
             connection->native_worker=kind==OPENNT_BASE_WORKER_NATIVE;
+            if(connection->native_worker)
+                error=common_process_machine(connection->process.ProcessHandle,&connection->native_machine);
             connection->reservation=reservation;connection->task=task;connection->reservation_kind=kind;
             connection->console=console;connection->wow=shared_wow;
             /* This is the post-create registration performed by original
@@ -150,8 +152,8 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
             if(!connection->native_worker)BaseSrvUpdateVDMSequenceNumber(shared_wow ? OPENNT_BASE_CONSOLE_WOW : task ? NULL : console,
                 connection->process.SequenceNumber,task);
             watch=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*watch));
-            if (!watch || !reserved_worker) {
-                error=watch ? ERROR_INVALID_HANDLE : ERROR_NOT_ENOUGH_MEMORY;
+            if (error || !watch || !reserved_worker) {
+                if(!error)error=watch ? ERROR_INVALID_HANDLE : ERROR_NOT_ENOUGH_MEMORY;
                 if (watch) HeapFree(GetProcessHeap(),0,watch);
                 if(!connection->native_worker)BaseSrvCleanupVDMResources(&connection->process);
             } else {
@@ -162,6 +164,7 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                 watch->process.SequenceNumber=connection->process.SequenceNumber;
                 watch->process.fVDM=connection->process.fVDM;
                 watch->kind=kind;
+                watch->native_machine=connection->native_machine;
                 watch->console=console;
                 watch->wow=shared_wow;
                 watch->reservation=reservation;

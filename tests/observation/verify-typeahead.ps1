@@ -19,8 +19,9 @@ if(!$log.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgn
 . "$PSScriptRoot/isolated_package_cleanup.ps1"
 $scope=New-IsolatedPackageScope $runtime
 if(Test-Path Z:\){throw 'Z: already exists; no mapping changed'}
-$names=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL')
-$manifest=@($names | ForEach-Object {[pscustomobject]@{Name=$_;Sha256=(Get-FileHash (Join-Path $runtime $_)).Hash}})
+$binary=Get-PackageBinaryRoot $runtime
+$names=@(Get-PackageImageNames $runtime)
+$manifest=@($names | ForEach-Object {[pscustomobject]@{Name=$_;Sha256=(Get-FileHash (Join-Path $binary $_)).Hash}})
 $variables=@('MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_WINDOW_INPUT',
     'MVDM_OBSERVER_SHORT_HISTORY','MVDM_OBSERVER_MILESTONE_INPUT',
     'MVDM_OBSERVER_AFTER_FIRST_LINE_EVENT','MVDM_OBSERVER_WAIT_PROMPT_AFTER_FIRST_LINE')
@@ -33,7 +34,7 @@ try {
     & subst.exe Z: $runtime
     if($LASTEXITCODE){throw 'SUBST Z: failed'}
     $mapped=$true
-    $scope.Paths+=@($scope.Paths | ForEach-Object {Join-Path 'Z:\' ([IO.Path]::GetFileName($_))})
+    $scope.Paths+=@($scope.Paths | ForEach-Object {Join-Path 'Z:\' $_.Substring($runtime.Length+1)})
     foreach($name in $variables){[Environment]::SetEnvironmentVariable($name,$null)}
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     $env:MVDM_OBSERVER_SHORT_HISTORY='1'
@@ -59,7 +60,7 @@ try {
         foreach($name in $variables){[Environment]::SetEnvironmentVariable($name,$old[$name])}
         $timings | ConvertTo-Json | Set-Content "$log/timings.json"
         foreach($entry in $manifest){
-            if((Get-FileHash (Join-Path $runtime $entry.Name)).Hash -ne $entry.Sha256){throw "Runtime changed: $($entry.Name)"}
+            if((Get-FileHash (Join-Path $binary $entry.Name)).Hash -ne $entry.Sha256){throw "Runtime changed: $($entry.Name)"}
         }
     }
 }

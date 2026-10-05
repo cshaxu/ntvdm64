@@ -153,8 +153,8 @@ DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE value)
     return DuplicateHandle(GetCurrentProcess(),value,GetCurrentProcess(),
         &notification,0,FALSE,DUPLICATE_SAME_ACCESS) ? 0 : GetLastError();
 }
-DWORD OpenNtBaseClientStartNativeWorker(HANDLE *worker)
-{ return OpenNtBaseClientSelectNativeWorker(worker); }
+DWORD OpenNtBaseClientStartNativeWorker(DWORD machine,HANDLE *worker)
+{CHECK(machine==IMAGE_FILE_MACHINE_I386 || machine==IMAGE_FILE_MACHINE_AMD64);return OpenNtBaseClientSelectNativeWorker(worker);}
 DWORD OpenNtBaseClientFrontendJoinCandidate(DWORD *nonce,DWORD *pid)
 {*nonce=*pid=0;return ERROR_NOT_FOUND;}
 DWORD OpenNtBaseClientFrontendJoinDecision(DWORD nonce,BOOL same)
@@ -331,6 +331,9 @@ int main(void)
     {
         static const DWORD errors[]={0,ERROR_WRITE_FAULT,ERROR_PROCESS_ABORTED};
         run16_native_start start={0};DWORD case_index,flags,result,completed,before,after;
+        WCHAR application[MAX_PATH];
+        CHECK(GetModuleFileNameW(NULL,application,ARRAYSIZE(application)));
+        start.application=application;
         CHECK(GetProcessHandleCount(GetCurrentProcess(),&before));
         native_mode=TRUE;
         for(case_index=0;case_index<ARRAYSIZE(errors);++case_index) {
