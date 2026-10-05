@@ -2,39 +2,46 @@
 
 ## Current Work
 
-**Active: M0 T431 S2** (Ordinary Mode).
+**Active: M0 T431 S3** (Ordinary Mode).
 Owner accepted T430 and requested closure, admission and execution of the next
 queued task on 2026-10-05. T431 admits the controlled native launch compatibility
 hook package, beginning with a bounded source/API/bitness and contract audit.
 The owner admitted the x86 nthook32-dll source root. The verified32-bit
-implementation is published for owner validation; cross-width remains deferred.
+implementation is published for owner validation. Owner now directs S2 closure
+before personal acceptance and admits S3 for64-bit design discussion only.
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T431 S2; Ordinary Mode. |
-| Admission And Approval | Owner: “先别管跨位了”, “不止文本 窗口程序也要传播”, then “批准实现；名字还是nthook32-dll”. S1 reaches its bounded source/design conclusion; admit32-bit production installation and CUI/GUI propagation. |
+| Identifier Mode | M0 T431 S3; Ordinary Mode. |
+| Admission And Approval | Owner: “你先把 S2收口了，我还没有验收，但是你先收口，我们准入S3，来讨论一下如何实现64位的支持，就是NT Hook 64.dll的实现。” S2 closes by direction without personal acceptance; S3 is bounded design/source review. |
 | Candidate Proposal | [Controlled native launch hooks](../proposals/proposal-native-launch-hook-001.md). |
-| Objective | One nthook32.dll and common suspended-child installer, real32-bit CUI/GUI child propagation and confirmed DOS/Win16 redirection through unchanged run16 syntax and completion. |
-| Non-goals | No cross-width implementation, x64 build, private WOW64 transition, guest/mirror edits, global hook, Job observation, process-tree control, helper or task registry. |
-| Reference Baseline | T430 accepted at e60e29844; [closure](../history/m0-t430-non-wow-contract-closure.md). Published coherent S6/r007-runtime; APP0.0.427/RPC38/I/O25. |
-| Files And ABI Surface | Owner-admitted src/nthook32-dll; pinned MIT Detours4.0.1 slice; run16 owned classifier/early copied-context consumer; NTVWM common suspended bind/resume insertion; common copied bootstrap; formal x86 Ninja graph, tests and package manifest. Existing service/I/O wire unchanged. |
+| Objective | Agree a minimal Hook64 design reusing Hook32 discovery/classification/bootstrap/interception, with four-direction installer feasibility and rollback gates. |
+| Non-goals | No production coding/build/injection/publication at discussion stage; no private WOW64 executable probe, helper, guest/mirror change, x64 MVDM/worker/service, global hook, observation or scheduler. |
+| Reference Baseline | S2 P2 committed/pushed12160c657; coherent S2/r027-runtime published, r031-publication; APP0.0.427/RPC38/I/O25. Personal acceptance pending. |
+| Files And ABI Surface | CURRENT and existing T431 plan/design/evidence; read-only nthook32-dll, common/application_search, bootstrap and selected classifier/installer callers. Proposed nthook64-dll/x64 Hook-only island needs implementation admission; no service/I/O change. |
 | Applicable Rules | Full AGENTS authorities, source policy/recovery ladder, no-helper/non-invasive boundary, one active packet, preserved other-session edits and build-only generated artifacts. |
-| Verification | MSVC x86 /MT build; installer/context/flags/error/cleanup fixtures; real SysWOW64 CMD and GUI chains;17 Console+17 Window and retained WOW gates; coherent nine-file publication, governance/link/diff/commit/push. |
-| Expected Markers | Actual nthook32 load and child propagation in CUI/GUI; DOS real receipt and Win16 startup; caller suspension/inheritance preserved; no helper or altered CLI; unsupported widths explicitly native. |
-| Asset Needs | Current source/T430 runtime; exact Detours4.0.1 e4bfd6b03e50de46b47abfbd1e46b384f0c5f833 MIT slice; build/M0-T431/S2/r001 for fixtures; validated formal cache build/M0-T427/S2/r001. No new guest media. |
+| Verification | Selected-source/primary-reference review; four-width ABI/bootstrap/failure contract; documentation governance, relative links and diff checks. No runtime result claimed. |
+| Expected Markers | Shared architecture-neutral logic versus native ABI mechanics; exact32-to64 blocker and64-to32 candidate; no silent helper or reduced width coverage. |
+| Asset Needs | Retained S1 source/hash evidence, S2 production tests and exact MIT Detours4.0.1 slice. No new guest media or executable research artifact. |
 | Reporting Requirements | Separate source conclusions, feasibility and actual runtime results; record failed earlier recovery rungs and precise remaining engineering gates. |
 | Stop Conditions | Security bypass/host mutation, missing provenance, helper requirement, changed execution/frontend ownership or unexplained runtime regression; preserve coherent baseline and report rather than publish. |
-| Exit Criteria | Actual32-bit production chains and positive/negative/ownership tests, retained package gates and nine-file publication; reviewed evidence, commit/push. Cross-width remains deferred by owner. |
-| Original Owner Request | “批准实现；名字还是nthook32-dll”. |
+| Exit Criteria | Reviewed source-backed design and explicit owner decision on implementation boundaries; discussion cannot close Hook64 runtime capability. |
+| Original Owner Request | “准入S3，来讨论一下如何实现64位的支持，就是NT Hook 64.dll的实现。” |
 | Similar-Issue Sweep | ANSI/Unicode creation, null application/quoting/search, redirected handles/environment/CWD, suspension/debug/token boundaries, GUI/new Console propagation, recursion and early-child exit. |
 
-## S2 Progress
+## S2 Closure Record
+
+Owner explicitly directs S2 closure on2026-10-05 before personal acceptance.
+Production P2 is committed/pushed12160c657; automated gates and publication
+are retained in [S2 evidence](../etc/evidence/m0-t431-s2-nthook32-implementation.md).
+This is bounded32-bit engineering closure, not personal acceptance or T closure.
+Default-geometry error87 and unproved API boundaries remain limitations.
 
 Owner verification reports `run16 cmd -> mem` failing with a Windows dialog.
 P2 repairs the DLL's extra argv[0]/basename eligibility rule by sharing
-run16's unchanged search object. S2 remains open for owner verification.
+run16's unchanged search object. Personal verification remains pending.
 Previously passing COMMAND-only Hook chains did not prove MEM interception.
 Owner correction requires reusing run16's actual CWD/PATH and COM/EXE/BAT/PIF
 discovery, followed by the selected original classifier. The unchanged search
@@ -130,5 +137,5 @@ No helper, CPU30, new wire or unrelated sibling repair is included.
 ## Recent Governance
 
 T430 is owner-closed; original guest/original-host limits and WOW handoffs remain
-explicit. T431 S2 is the sole active packet. Other-session proposal/TODO changes
+explicit. T431 S3 is the sole active packet. Other-session proposal/TODO changes
 remain preserved and excluded from this delivery.

@@ -1,5 +1,66 @@
 # T431 native launch hook detailed design
 
+## S3 discussion admission (2026-10-05)
+
+Owner closes S2 before personal acceptance and admits discussion of
+`nthook64-dll` / `nthook64.dll`. S2 P2 at12160c657 remains the published
+baseline. No new production source, executable probe or x64 build is admitted
+by this discussion. Earlier cross-width deferral below is historical.
+
+Source inspection: installer.cpp currently admits only nthook_target32;
+context.cpp requires I386 and32-bit recipient handle values, and reserves the
+second DLL path span; create_process.cpp only propagates to32-bit children.
+These are explicit S2 restrictions, not a ready Hook64 implementation.
+
+Proposed minimal structure: two DLL targets, one shared Hook implementation
+source set. Recompile architecture-neutral interception, recursion, copied
+context validation, flags/resource handling and rollback for each target;
+link common/application_search in both, never create a second resolver. Keep
+small architecture-specific image/remote-install bindings inside the Hook
+owner. nthook64-dll is the named64-bit target; do not make a second worker,
+service or generic injection component. Final physical shared-source placement
+is an implementation decision, not an already-created production root.
+
+| Surface | Proposed reuse or necessary width binding | Proof gate |
+| --- | --- | --- |
+| Discovery/arguments | Same common application search and preserved run16 syntax/tail. | A/W, CWD/PATH, COM/EXE/BAT/PIF, native selection and actual64 CMD. |
+| Classification | Same original recognition algorithm through an audited native-width ABI facade. Existing historical section/RTL declarations are not presumed64-bit-safe. | DOS/WOW/native32/native64, malformed images; no mirror modification or extension-only classifier. |
+| Child transaction | Same suspended actual-child install/bind/resume and creator-owned unpublished rollback. | No caller suspension lost, no corrupt child resumed, no handed-off tree kill. |
+| Bootstrap | Retain copied fixed-width fields and recipient-local duplicated capabilities; add separately validated Hook32/Hook64 paths and actual machine. Version the changed contract. | Old/new/malformed packets, full-width values, context-only32-bit run16, no-inherit and root isolation. |
+| Interception | Same CreateProcessA/W body compiled for the injected process ABI; bounded local DllMain, no broker work under loader lock. | Actual CUI/GUI immediate-child propagation, recursion and real returned handles. |
+| Product ownership | Existing x86 NTVWM/Run16/NTSRV/NTVDM/NTCON remain unchanged in role; only Hook64 and width fixtures are64-bit. | No helper, no x64 MVDM or second execution/frontend owner. |
+
+Four directions remain distinct mechanical gates within one installer
+contract:32-to32 is delivered;64-to64 has a same-width Detours candidate;
+64-to32 has the pinned PR161 source candidate requiring adoption/provenance
+and restoration tests;32-to64 is still unresolved. The unchanged pinned
+Detours implementation does not provide that last no-helper transaction.
+NTVWM is32-bit, so this is required for the initial64-bit target, not merely
+an unusual descendant edge. Furthermore Hook64 must seed the existing32-bit
+run16 for legacy redirection, making64-to32 necessary as well.
+
+DuplicateHandle supports cross-width capability copying, but does not solve
+remote full-width address access/import mutation. Reusing an existing process
+as a new injection service would introduce another control responsibility;
+upgrading NTVWM/NTSRV to64-bit is not selected merely to avoid this gate.
+Private WOW64 memory/transition research, if chosen, requires finite explicit
+admission with allocate/read/write/protect/free, pre-entry loader restoration,
+failure ordering and rollback proofs. It is not authorized by the DLL name
+or the presence of installed private exports. No helper fallback is allowed.
+
+Implementation order after owner agreement: shared-source/native64 ABI audit,
+same-width64 fixture,64-to32 context/installer proof, then the bounded32-to64
+gate; only a verified four-direction package may claim complete64-bit launch
+compatibility. Existing S2 package stays usable throughout. DLL compilation
+or loading alone is never that acceptance proof.
+
+Discussion inputs: current installer.cpp/context.cpp/create_process.cpp,
+common/protocol/native_hook.h, run16 hook_classification.c, the retained
+[S1 source checkpoint](../evidence/m0-t431-s1-native-launch-hook-audit.md)
+and S2 evidence. Rechecked primary pinned Detours source, PR161 page and
+DuplicateHandle documentation on2026-10-05; no new code imported or executed.
+This is source-backed design, not a feasibility/runtime pass.
+
 ## S2 implementation revision (2026-10-05)
 
 The owner subsequently approved 32-bit-only implementation, propagation to

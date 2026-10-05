@@ -2,13 +2,21 @@
 
 ## Current admission revision
 
+Owner direction on2026-10-05 closes S2 before personal acceptance and admits
+S3 for Hook64 architecture/source discussion. S2 P2 is12160c657, with coherent
+r027-runtime publication and retained automated proofs. No personal acceptance
+is claimed. The earlier cross-width deferral is superseded for discussion only:
+implementation, a Hook-only x64 toolchain island or private WOW64 executable
+probes require reviewed design and explicit admission. No helper or x64
+MVDM/worker/service is selected.
+
 The owner closed S1's bounded contract/audit and admitted S2 on2026-10-05:
 32-bit only, both CUI and GUI propagation, component `nthook32-dll`.
 [S2 evidence](../evidence/m0-t431-s2-nthook32-implementation.md) records the
 actual installer, production callers and tests. The following earlier S1
 plan remains historical; its unimplemented/admission wording is not current
-status. S3 cross-width is explicitly deferred by the owner and not
-automatically admitted. Whole-package observation/fault coverage is not a
+status. S3 was deferred at that revision; its discussion admission above is
+the successor. Whole-package observation/fault coverage is not a
 claim that every arbitrary CreateProcess attribute combination is supported.
 
 Current reproducible entries:
@@ -48,9 +56,9 @@ helper, production change or reduced width coverage is authorized implicitly.
 
 | Stage | Deliverable | Gate |
 | --- | --- | --- |
-| S1 | Source/API/bitness audit, one classifier/installer, initialization and supported-flag contract; [checkpoint](../evidence/m0-t431-s1-native-launch-hook-audit.md). | No-helper feasibility and authenticated inheritance/path contracts before production implementation. Currently open, not runtime-complete. |
-| S2 | Actual Hook32 direct installation and controlled child propagation. | Real SysWOW64 CMD→COMMAND→return, nested/native passthrough and exact resource/error/exit semantics; affected tests/full product and coherent publication. |
-| S3 | Hook64 and four width directions without helper. | Actual32→32/32→64/64→64/64→32; building DLLs is insufficient. Specific unresolved no-helper boundary requires reporting, not extra process or reduced acceptance. |
+| S1 | Source/API/bitness audit and contract; [checkpoint](../evidence/m0-t431-s1-native-launch-hook-audit.md). | Bounded source/design closed; runtime proofs assigned to S2/S3. |
+| S2 | Actual Hook32 direct installation and controlled child propagation. | Owner-directed engineering closure at12160c657; automated tests/publication retained; personal acceptance pending. |
+| S3 | Hook64 and four width directions without helper; design/source discussion currently admitted. | After implementation admission: actual32→32/32→64/64→64/64→32; DLL compilation alone is insufficient. Report unresolved no-helper boundaries, not reduced acceptance. |
 | S4 | Whole-package isolation/concurrency/fault/cleanup and trace handoff. | All established runtime gates, extended coherent runtime manifest and owner acceptance before T closure. |
 
 ## Reproducible capability case plan

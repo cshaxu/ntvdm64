@@ -235,4 +235,15 @@ selected by the final package. Source review retains the unchanged resolver
 and original classifier, with no mirror, wire, frontend or worker lifecycle
 changes. Documentation governance, links and diff checks pass. Other-session
 proposal/TODO hashes remain unchanged and excluded. P2 is a repair delivery
-awaiting owner verification, not S2 or T431 closure.
+awaiting owner verification at that delivery, not then an S2 or T431 closure.
+
+## Owner-directed S2 closure
+
+On2026-10-05 the owner explicitly requests S2 closure before personal
+acceptance and admits S3 for64-bit Hook discussion. P2 commit12160c657 is
+pushed; r027-runtime/r031-publication and tests above remain the unchanged
+engineering baseline. S2 closes within its32-bit scope; personal verification
+is not claimed. Default-geometry error87, unsupported API forms, cross-width
+and remaining S4 coverage retain their limitations. T431 remains open. This
+documentation transition changes no source or runtime package; no repeated
+product testing or redeployment is claimed.
