@@ -2,7 +2,7 @@
 #include "console_client.h"
 #include "console_text.h"
 #include "console_geometry.h"
-#include "console_video_publisher.h"
+#include "worker-base/publication.h"
 #include "common/console/client.h"
 #include "opennt-abi/host-compat/include/console_grid.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
@@ -35,7 +35,7 @@ typedef struct console_client {
     HANDLE capability,input_identity,output_identity;
     CRITICAL_SECTION lock;
     CRITICAL_SECTION palette_lock;
-    ntvdm_video_publisher *publisher;
+    worker_base_publication *publisher;
     console_io_request request;
     ntvdm_console_graphics *graphics;
     PALETTEENTRY text_palette[16];
@@ -51,11 +51,32 @@ static DWORD send_video(void *context,const console_video_description *descripti
     error=ntcon_worker_video(&client->channel,description,pixels);
     LeaveCriticalSection(&client->lock);return error;
 }
+/* Private VGA packet: the shared publisher sees only one immutable blob. */
+static DWORD send_video_copy(void *context,const void *copy,SIZE_T bytes)
+{
+    const console_video_description *description=copy;
+    if(bytes<sizeof(*description) || bytes-sizeof(*description)!=description->bytes)
+        return ERROR_INVALID_DATA;
+    return send_video(context,description,description+1);
+}
+static DWORD offer_video(console_client *client,const console_video_description *description,
+    const void *pixels,BOOL *queued)
+{
+    SIZE_T bytes;BYTE *copy;DWORD error;
+    if(description->bytes>SIZE_MAX-sizeof(*description))return ERROR_ARITHMETIC_OVERFLOW;
+    bytes=sizeof(*description)+description->bytes;
+    copy=HeapAlloc(GetProcessHeap(),0,bytes);
+    if(!copy)return ERROR_NOT_ENOUGH_MEMORY;
+    memcpy(copy,description,sizeof(*description));
+    memcpy(copy+sizeof(*description),pixels,description->bytes);
+    error=worker_base_publication_offer(client->publisher,copy,bytes,queued);
+    HeapFree(GetProcessHeap(),0,copy);return error;
+}
 BOOL ntvdm_console_video_async(BOOL active)
 {
     session *owner=session_thread_current();
     console_client *client=owner ? owner->console_client : NULL;
-    DWORD error=client ? ntvdm_video_publisher_active(client->publisher,active) : ERROR_SUCCESS;
+    DWORD error=client ? worker_base_publication_active(client->publisher,active) : ERROR_SUCCESS;
     SetLastError(error);return !error;
 }
 
@@ -223,7 +244,7 @@ static void console_client_end(void *context)
     client->owner->console_client=NULL;
     OpenNtBaseClientSetCommandBinding(NULL,NULL);
     if (client->stop) SetEvent(client->stop);
-    ntvdm_video_publisher_destroy(client->publisher);
+    worker_base_publication_destroy(client->publisher);
     if (client->watcher) {
         WaitForSingleObject(client->watcher,INFINITE);CloseHandle(client->watcher);
     }
@@ -282,7 +303,7 @@ DWORD ntvdm_console_client_begin(session *owner)
     }
     error=worker_base_shutdown_event(&client->shutdown);
     if(error){console_client_end(client);return error;}
-    client->publisher=ntvdm_video_publisher_create(send_video,client,client->shutdown);
+    client->publisher=worker_base_publication_create(send_video_copy,client,client->shutdown);
     if(!client->publisher){error=GetLastError();console_client_end(client);return error;}
     client->watcher=CreateThread(NULL,0,console_input_watch,client,0,NULL);
     error=client->watcher ? console_activate(client,TRUE) : GetLastError();
@@ -440,12 +461,12 @@ BOOL ntvdm_console_publish_video(const console_video_description *description,
         (!description && (pixels || capacity))) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
     if(description && description->kind!=CONSOLE_VIDEO_TEXT_CONFIGURATION) {
         BOOL queued=FALSE;
-        error=ntvdm_video_publisher_offer(client->publisher,description,pixels,&queued);
+        error=offer_video(client,description,pixels,&queued);
         if(error || queued){SetLastError(error);return !error;}
     } else {
         /* Format/retirement controls cannot overtake an older frame. Route
          * owner re-enables async publication after its next software tick. */
-        error=ntvdm_video_publisher_active(client->publisher,FALSE);
+        error=worker_base_publication_active(client->publisher,FALSE);
         if(error){SetLastError(error);return FALSE;}
     }
     error=send_video(client,description,pixels);

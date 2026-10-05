@@ -2,9 +2,9 @@
 
 ## Current Work
 
-**Active: M0 T429 S6** (Ordinary Mode; shared publication admission/source review).
+**Active: M0 T429 S6** (Ordinary Mode; bounded delivery complete, awaiting owner acceptance).
 Owner approves both workers adopting the publisher mechanism in worker-base.
-S5 is delivered and pushed at903d25d8a; T429 remains open.
+S5 is delivered and pushed at903d25d8a; S6 is delivered below. T429 remains open.
 
 ## Active Packet
 
@@ -27,8 +27,13 @@ S5 is delivered and pushed at903d25d8a; T429 remains open.
 | Similar-Issue Sweep | Frame/config retirement, Unicode-only changes, mouse-only changes, size/viewport/cursor, channel reopen, final drain, failed sends, worker/frontend loss, old snapshot invalidation and Console/Window routes. |
 
 [S6 source review and implementation checklist](../etc/evidence/m0-t429-s6-shared-video-publication.md)
-records the native atomic-publication boundary. Admission is not implementation
-or capability closure; the S5 package remains installed until S6 verification.
+records the native atomic-publication boundary and final delivery results.
+Both workers use the shared publisher. Affected x86 build, shared fixtures,
+501 native assertions,689 input-return assertions, EDIT200, full Console17/
+Window17/WOW and all8 integration cases pass. The verified eight-file package
+is published at O:/winnt/system32 with recovery and deployed smoke/hash checks.
+S6 reaches bounded closure; no next S is automatically admitted. T429 awaits
+owner acceptance. The other session's proposal remains untouched and unstaged.
 
 Owner admitted the performance package after closing T428. S1's bounded
 measurement conclusion is recorded in the
@@ -111,6 +116,15 @@ Test environment restoration is repaired without weakening assertions.
 S5 reaches its bounded closure; T429 owner acceptance remains pending.
 
 ## Current Technical Baseline
+
+[S6 shared publication delivery](../etc/evidence/m0-t429-s6-shared-video-publication.md)
+supersedes the S5 installed identity below. S6/r006/runtime passes Product
+r009, eight-case integration r010 and published smoke r015. r013 publishes
+all8 matching files and retains recovery. NTVDM SHA256 is
+055F2F07CD571826F90A21ED7FD90C2FF5A1BF6695ECE030F69B816307AD12CC.
+The shared publisher is linked by both workers; native30ms capture remains.
+No original mirror code, frontend, wire or lifecycle policy changes. T429
+remains open for owner hand acceptance; prior S5 evidence stays historical.
 
 [S5 source audit and delivery](../etc/evidence/m0-t429-s5-software-video-publication.md)
 record the approved independent event-driven publisher, latest-state/full-copy
@@ -202,7 +216,7 @@ Other-session proposal chronology is preserved and excluded from this delivery.
 S1 concludes as measurement-only; S2 is bounded-closed at production123c0ad3e.
 S3 is bounded-closed at production0654f5e0b; S4 integration is owner-closed.
 S5 reaches its bounded delivery with the final coherent published package.
-Owner subsequently admits only S6 shared publication; overall T429 acceptance
-is still pending.
+Owner subsequently admits S6 shared publication, now bounded-closed with its
+verified coherent package installed; overall T429 acceptance is still pending.
 Guest and lifecycle policy remain unchanged; the approved close dependency
 repairs ordering only. T429 remains open and other-session work is preserved.

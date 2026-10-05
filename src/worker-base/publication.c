@@ -1,14 +1,14 @@
-#include "console_video_publisher.h"
+#include "publication.h"
 #include <string.h>
 
 typedef struct frame_copy {
-    console_video_description description;
+    SIZE_T bytes;
     BYTE *payload;
 } frame_copy;
-struct ntvdm_video_publisher {
+struct worker_base_publication {
     CRITICAL_SECTION lock;
     HANDLE stop,changed,idle,timer,thread,shutdown;
-    ntvdm_video_send_fn send;
+    worker_base_publication_send_fn send;
     void *context;
     frame_copy pending,last;
     LARGE_INTEGER frequency,last_sent;
@@ -24,17 +24,16 @@ static void free_frame(frame_copy *frame)
 static BOOL same_frame(const frame_copy *a,const frame_copy *b)
 {
     return a->payload && b->payload &&
-        !memcmp(&a->description,&b->description,sizeof(a->description)) &&
-        !memcmp(a->payload,b->payload,a->description.bytes);
+        a->bytes==b->bytes && !memcmp(a->payload,b->payload,a->bytes);
 }
-/* Only one sender: publisher, or guest final drain after disabling admission
+/* Only one sender: publisher, or owner final drain after disabling admission
  * and waiting for idle. No state/painter lock covers transport. */
-static DWORD deliver(ntvdm_video_publisher *p,frame_copy *copy)
+static DWORD deliver(worker_base_publication *p,frame_copy *copy)
 {
     DWORD error=ERROR_SUCCESS;BOOL same;
     EnterCriticalSection(&p->lock);same=same_frame(copy,&p->last);LeaveCriticalSection(&p->lock);
     if(!same) {
-        error=p->send(p->context,&copy->description,copy->payload);
+        error=p->send(p->context,copy->payload,copy->bytes);
         if(!error) {
             EnterCriticalSection(&p->lock);
             free_frame(&p->last);p->last=*copy;memset(copy,0,sizeof(*copy));
@@ -44,14 +43,14 @@ static DWORD deliver(ntvdm_video_publisher *p,frame_copy *copy)
     }
     free_frame(copy);return error;
 }
-static DWORD publisher_exit(ntvdm_video_publisher *p,DWORD error)
+static DWORD publisher_exit(worker_base_publication *p,DWORD error)
 {
     EnterCriticalSection(&p->lock);p->error=error;SetEvent(p->idle);LeaveCriticalSection(&p->lock);
     return error;
 }
 static DWORD WINAPI publish_thread(void *context)
 {
-    ntvdm_video_publisher *p=context;
+    worker_base_publication *p=context;
     HANDLE waits[3]={p->shutdown,p->stop,p->changed};
     for(;;) {
         DWORD status=WaitForMultipleObjects(3,waits,FALSE,INFINITE);
@@ -84,9 +83,9 @@ static DWORD WINAPI publish_thread(void *context)
     }
 }
 
-ntvdm_video_publisher *ntvdm_video_publisher_create(ntvdm_video_send_fn send,void *context,HANDLE shutdown)
+worker_base_publication *worker_base_publication_create(worker_base_publication_send_fn send,void *context,HANDLE shutdown)
 {
-    ntvdm_video_publisher *p;
+    worker_base_publication *p;
     if(!send || !shutdown){SetLastError(ERROR_INVALID_PARAMETER);return NULL;}
     p=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*p));
     if(!p){SetLastError(ERROR_NOT_ENOUGH_MEMORY);return NULL;}
@@ -96,36 +95,37 @@ ntvdm_video_publisher *ntvdm_video_publisher_create(ntvdm_video_send_fn send,voi
     p->idle=CreateEventW(NULL,TRUE,TRUE,NULL);p->timer=CreateWaitableTimerW(NULL,FALSE,NULL);
     if(p->stop && p->changed && p->idle && p->timer)
         p->thread=CreateThread(NULL,0,publish_thread,p,0,NULL);
-    if(!p->thread){DWORD error=GetLastError();ntvdm_video_publisher_destroy(p);SetLastError(error);return NULL;}
+    if(!p->thread){DWORD error=GetLastError();worker_base_publication_destroy(p);SetLastError(error);return NULL;}
     return p;
 }
 
-DWORD ntvdm_video_publisher_offer(ntvdm_video_publisher *p,const console_video_description *description,
-    const void *payload,BOOL *queued)
+DWORD worker_base_publication_offer(worker_base_publication *p,const void *payload,SIZE_T bytes,BOOL *queued)
 {
     BYTE *copy;DWORD error;
+    if(!queued || !payload || !bytes)return ERROR_INVALID_PARAMETER;
     *queued=FALSE;
     if(!p)return ERROR_SUCCESS;
     EnterCriticalSection(&p->lock);
     error=p->error;
     if(!error && p->active) {
-        copy=HeapAlloc(GetProcessHeap(),0,description->bytes);
+        copy=HeapAlloc(GetProcessHeap(),0,bytes);
         if(!copy)error=ERROR_NOT_ENOUGH_MEMORY;
         else {
-            memcpy(copy,payload,description->bytes);free_frame(&p->pending);
-            p->pending.description=*description;p->pending.payload=copy;
+            memcpy(copy,payload,bytes);free_frame(&p->pending);
+            p->pending.bytes=bytes;p->pending.payload=copy;
             SetEvent(p->changed);*queued=TRUE;
         }
     }
     LeaveCriticalSection(&p->lock);return error;
 }
 
-DWORD ntvdm_video_publisher_active(ntvdm_video_publisher *p,BOOL active)
+DWORD worker_base_publication_active(worker_base_publication *p,BOOL active)
 {
     frame_copy copy={0};DWORD error,status;
     if(!p)return ERROR_SUCCESS;
     EnterCriticalSection(&p->lock);
     if(active==p->active){error=p->error;LeaveCriticalSection(&p->lock);return error;}
+    if(active && p->error){error=p->error;LeaveCriticalSection(&p->lock);return error;}
     p->active=active;
     if(active) {free_frame(&p->last);p->last_sent.QuadPart=0;}
     LeaveCriticalSection(&p->lock);
@@ -149,7 +149,26 @@ DWORD ntvdm_video_publisher_active(ntvdm_video_publisher *p,BOOL active)
     return error;
 }
 
-void ntvdm_video_publisher_destroy(ntvdm_video_publisher *p)
+DWORD worker_base_publication_commit(worker_base_publication *p,const void *payload,SIZE_T bytes)
+{
+    frame_copy copy={0};DWORD error;
+    if(!p || !payload || !bytes)return ERROR_INVALID_PARAMETER;
+    EnterCriticalSection(&p->lock);
+    error=p->error;
+    if(!error && p->active)error=ERROR_BUSY;
+    LeaveCriticalSection(&p->lock);
+    if(error)return error;
+    copy.payload=HeapAlloc(GetProcessHeap(),0,bytes);
+    if(!copy.payload)return ERROR_NOT_ENOUGH_MEMORY;
+    copy.bytes=bytes;memcpy(copy.payload,payload,bytes);
+    error=deliver(p,&copy);
+    if(error) {
+        EnterCriticalSection(&p->lock);p->error=error;LeaveCriticalSection(&p->lock);
+    }
+    return error;
+}
+
+void worker_base_publication_destroy(worker_base_publication *p)
 {
     if(!p)return;
     if(p->stop)SetEvent(p->stop);

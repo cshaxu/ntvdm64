@@ -8,7 +8,7 @@ if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or 
 }
 $wrapper=(Resolve-Path $CompilerWrapper).Path
 $null=New-Item -ItemType Directory -Path $root
-$sources=@('src/ntvdm-exe/win32/console_video_publisher.c',
+$sources=@('src/worker-base/publication.c',
  'tests/component-integration/software_video_publisher_test.c')
 $objects=@()
 foreach($source in $sources){

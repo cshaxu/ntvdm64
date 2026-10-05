@@ -256,7 +256,7 @@ if (!(Test-Path -LiteralPath $redirResourceSource)) { throw "Original Redirector
 if (!(Test-Path -LiteralPath $redirExportDefinition)) { throw "Original Redirector export definition missing: $redirExportDefinition" }
 $adapterWin32Names = @('ntioapi_facade.c', 'thread_start_compat.c',
                           'nt_thread_alert_compat.c',
-                          'console_compat.c', 'console_client.c', 'console_bitmap.c', 'console_graphics.c', 'console_text.c', 'console_video_publisher.c', 'crt_compat.c',
+                          'console_compat.c', 'console_client.c', 'console_bitmap.c', 'console_graphics.c', 'console_text.c', 'crt_compat.c',
                            'command_process_compat.c', 'wow_private_unavailable.c',
                            'wow_hard_error_dialog.c',
                            'mvdm_base_vdm_environment.c')
@@ -1348,7 +1348,8 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/ntvwm/next_command.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvwm-exe/next_command.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build worker-base.lib: lib obj/worker-base/connection.obj obj/worker-base/shutdown_close.obj')
+    $graph.Add('build obj/worker-base/publication.obj: cc ' + (NinjaPath (Join-Path $root 'src/worker-base/publication.c')))
+    $graph.Add('build worker-base.lib: lib obj/worker-base/connection.obj obj/worker-base/shutdown_close.obj obj/worker-base/publication.obj')
     $graph.Add('build obj/tests/worker_shutdown.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/worker_shutdown_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build worker-shutdown-test.exe: base_rpc_test_link obj/tests/worker_shutdown.obj worker-base.lib frontend-client.lib obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
@@ -1496,7 +1497,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/tests/ntvwm_presentation.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntvwm_presentation_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build ntvwm-presentation-test.exe: console_test_link obj/tests/ntvwm_presentation.obj obj/ntvwm/presentation.obj obj/ntvwm/console_state.obj obj/ntvwm/text_frame.obj obj/frontend/console_video.obj')
+    $graph.Add('build ntvwm-presentation-test.exe: console_test_link obj/tests/ntvwm_presentation.obj obj/ntvwm/presentation.obj obj/ntvwm/console_state.obj obj/ntvwm/text_frame.obj obj/frontend/console_video.obj worker-base.lib')
     $graph.Add('build obj/tests/frontend_text_handoff.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/frontend_text_handoff_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build frontend-text-handoff-test.exe: console_test_link obj/tests/frontend_text_handoff.obj obj/frontend/frontend_session.obj frontend-window.lib obj/frontend/console_frontend.obj obj/frontend/console_video.obj ' + $consoleGridObject)
@@ -1892,7 +1893,7 @@ if ($objectOutputDirectories.Count -gt 0) {
         target = 'worker-base.lib'
         selected = ($Architecture -eq 'x86')
         disposition = 'project-owned worker connection initialization and disconnect; NTVDM and NTVWM only; common provides protocol clients'
-        sources = @('connection.c', 'connection.h', 'shutdown_close.c' | ForEach-Object {
+        sources = @('connection.c', 'connection.h', 'shutdown_close.c', 'publication.c', 'publication.h' | ForEach-Object {
             $path = 'src/worker-base/' + $_
             [ordered]@{ path = $path; sha256 = Get-NodeSha256 (Join-Path $root $path) }
         })

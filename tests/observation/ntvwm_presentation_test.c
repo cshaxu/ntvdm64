@@ -10,6 +10,7 @@ static unsigned checks,failures;
 #define CHECK(x) do { ++checks; if(!(x)){++failures;fprintf(log,"FAIL %d %s\n",__LINE__,#x);} } while(0)
 typedef struct peer_state {
     HANDLE pipe;
+    HANDLE publication_ack;
     unsigned mode,calls;
     unsigned activations,releases;
     unsigned snapshot_begins,snapshot_ends,screen_reads;
@@ -120,6 +121,8 @@ static DWORD WINAPI peer(void *context)
                     state->screen.left=request.state.left;state->screen.right=request.state.right;
                     state->screen.top=request.state.top;state->screen.bottom=request.state.bottom;
                 }
+            } else if(request.operation==CONSOLE_IO_CURSOR_POSITION) {
+                state->screen.x=request.state.x;state->screen.y=request.state.y;
             } else if(request.operation==CONSOLE_IO_GET_CURSOR_INFO) {
                 reply.state.cursor_size=25;reply.state.cursor_visible=1;
                 if(state->mode==12)reply.state.cursor_size=0;
@@ -178,6 +181,8 @@ static DWORD WINAPI peer(void *context)
             transfer(state->pipe,TRUE,&reply,8);break;
         }
         if(!transfer(state->pipe,TRUE,&reply,offsetof(console_io_reply,data)+reply.bytes))break;
+        if(request.operation==CONSOLE_IO_PUBLICATION_END && !error)
+            ReleaseSemaphore(state->publication_ack,1,NULL);
     }
     DisconnectNamedPipe(state->pipe);return 0;
 }
@@ -195,6 +200,8 @@ static void run_case(unsigned mode)
     CHECK(ConnectNamedPipe(pipe,NULL) || GetLastError()==ERROR_PIPE_CONNECTED);
     stop=CreateEventW(NULL,TRUE,mode==5,NULL);CHECK(stop!=NULL);if(!stop)goto done;
     state.pipe=pipe;state.mode=mode;
+    state.publication_ack=CreateSemaphoreW(NULL,0,64,NULL);
+    CHECK(state.publication_ack!=NULL);if(!state.publication_ack)goto done;
     state.screen.width=20;state.screen.height=8;state.screen.right=19;state.screen.bottom=7;
     state.screen.x=4;state.screen.y=2;state.screen.attribute=7;
     if(mode==6) {
@@ -336,7 +343,36 @@ static void run_case(unsigned mode)
                         CHECK(WriteConsoleInputW(input,keys,ARRAYSIZE(keys),&written) && written==ARRAYSIZE(keys));
                     }
                     CHECK(SetConsoleActiveScreenBuffer(buffer));
+                    if(mode==11) {
+                        unsigned writes;
+                        BYTE glyph;
+                        /* Real begin enables the production publisher. Wait
+                         * for this transaction's END, not an old screen. */
+                        CHECK(!ntvwm_presentation_capture(endpoint,&font));
+                        CHECK(WaitForSingleObject(state.publication_ack,5000)==WAIT_OBJECT_0);
+                        writes=state.cell_writes;
+                        CHECK(WriteConsoleOutputCharacterW(buffer,L"\x2603",1,origin,&count) && count==1);
+                        CHECK(!ntvwm_presentation_capture(endpoint,&font));
+                        CHECK(WaitForSingleObject(state.publication_ack,5000)==WAIT_OBJECT_0);
+                        CHECK(state.cell_writes>writes);
+                        glyph=state.video.pixels[sizeof(console_text_style)];
+                        /* Different Unicode, same fallback PC glyph, still
+                         * requires a Unicode-grid transaction. */
+                        writes=state.cell_writes;
+                        CHECK(WriteConsoleOutputCharacterW(buffer,L"\x2604",1,origin,&count) && count==1);
+                        CHECK(!ntvwm_presentation_capture(endpoint,&font));
+                        CHECK(WaitForSingleObject(state.publication_ack,5000)==WAIT_OBJECT_0);
+                        CHECK(state.cell_writes>writes);
+                        CHECK(state.video.pixels[sizeof(console_text_style)]==glyph);
+                        CHECK(!ntvwm_presentation_capture(endpoint,&font));
+                        CHECK(WaitForSingleObject(state.publication_ack,80)==WAIT_TIMEOUT);
+                        CHECK(SetConsoleCursorPosition(buffer,(COORD){3,4}));
+                        CHECK(!ntvwm_presentation_capture(endpoint,&font));
+                        /* End must drain this pending cursor before barrier,
+                         * without waiting under the transport lock. */
+                    }
                     CHECK(ntvwm_presentation_end(endpoint,&font)==0);
+                    if(mode==11)CHECK(state.screen.x==3 && state.screen.y==4);
                     if(mode==16) {
                         DWORD remaining=MAXDWORD;
                         CHECK(GetNumberOfConsoleInputEvents(GetStdHandle(STD_INPUT_HANDLE),&remaining) && !remaining);
@@ -464,6 +500,7 @@ done:
         CHECK(GetExitCodeThread(thread,&exit_code) && exit_code==0);
         CloseHandle(thread);
     }
+    if(state.publication_ack)CloseHandle(state.publication_ack);
     fprintf(log,"mode=%u calls=%u activations=%u releases=%u\n",mode,state.calls,
         state.activations,state.releases);
     if(mode==0 || mode==6) {
@@ -492,7 +529,7 @@ done:
             CHECK(state.returned[i].type==KEY_EVENT && state.returned[i].key_down==1 &&
                 state.returned[i].repeat==1 && state.returned[i].character==0x100+i);
     }
-    if(mode==11)CHECK(state.video.published_serial==1 && state.video.pixels &&
+    if(mode==11)CHECK(state.video.published_serial==4 && state.video.pixels &&
         state.video.pixels[sizeof(console_text_style)+2*(2*20+4)]=='N');
     if(mode==13) {
         CHECK(state.video.published_serial==1 && state.video.pixels);

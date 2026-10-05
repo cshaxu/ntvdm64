@@ -337,5 +337,5 @@ records the owner-approved exception boundary, copied publisher, source audit,
 retained failures and final coherent publication/verification.
 
 [T429 S6 shared worker publication](evidence/m0-t429-s6-shared-video-publication.md)
-records approved extraction into worker-base, both producer boundaries and the
-native atomic-publication checklist; admission is not runtime completion.
+records shared production extraction, native atomic publication, focused and
+full integration results, eight-file publication/recovery and retained limits.

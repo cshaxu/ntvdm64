@@ -9,6 +9,15 @@ The S21 audit records this shared boundary and the owner-local mechanisms that
 must not be merged: [worker-base audit](../../docs/etc/evidence/m0-t423-s21-worker-base-audit.md).
 The service still owns authentication; the worker owns its heap/backend state.
 
+T429 S6 publication.c/h owns the shared copied-state publisher: an opaque
+complete snapshot, one replaceable pending copy, last-successful comparison,
+dirty-event wakeup, one-shot maximum50Hz cap, quiesced final commit/drain,
+sticky failure and stop/join. Both production workers link it. NTVDM owns
+VGA extraction; NTVWM owns hidden Console acquisition and the atomic Unicode
+grid/geometry/cursor/text commit. No shared callback reads mutable guest state.
+Owners must not hold their transport lock across drain/join; they cancel
+callback transport before destruction. No original mirror algorithm moves.
+
 run16, NTSRV, NTCON and NTMON retain their own common two-kind handling paths.
 They do not link worker-base. Launcher request packing belongs to run16;
 NTSRV owns worker creation and shared Console retirement/return-ack decisions,

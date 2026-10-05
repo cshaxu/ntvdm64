@@ -9,6 +9,8 @@ Heartbeat/CCPU timers remain unchanged; the publisher never reads VGA memory
 or CPU registers. Final block/resume and route changes quiesce copied sends
 before the existing final-frame acknowledgement. Graphics invalidations use
 the same complete-copy publisher when Window presentation is active.
+T429 S6 relocates that project-owned copied-state engine to worker-base for
+NTVDM and NTVWM; the VGA extraction and DIV-326 mirror hooks stay unchanged.
 The [S5 evidence](../../docs/etc/evidence/m0-t429-s5-software-video-publication.md)
 records supersession of the unpublished heartbeat/FIFO candidate and limits.
 

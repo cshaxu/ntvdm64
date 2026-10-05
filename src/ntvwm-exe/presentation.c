@@ -2,6 +2,7 @@
  * No guest context, original Console-close policy or frontend ownership here. */
 #include "presentation.h"
 #include "common/console/client.h"
+#include "worker-base/publication.h"
 #include "console_state.h"
 #include "text_frame.h"
 #include <stddef.h>
@@ -12,17 +13,25 @@ struct ntvwm_presentation {
     CRITICAL_SECTION lock;
     CHAR_INFO *published_cells;
     DWORD published_count,published_width;
-    /* Native producer's last observed screen, not a transport filter. */
-    console_video_description captured_description;
-    BYTE *captured_payload;
-    CONSOLE_SCREEN_BUFFER_INFOEX published_screen;
-    CONSOLE_CURSOR_INFO published_cursor;
+    worker_base_publication *publisher;
     console_text_style handoff_font;
     BOOL has_handoff_font;
     char published_title[CONSOLE_IO_TITLE_BYTES];
     BOOL title_valid;
     ntvwm_mouse mouse;
 };
+/* Native capture owns acquisition. Publisher owns this immutable complete
+ * transaction; Unicode is not reconstructed from the PC-glyph frame. */
+typedef struct native_publication {
+    CONSOLE_SCREEN_BUFFER_INFOEX info;
+    CONSOLE_CURSOR_INFO cursor;
+    console_video_description description;
+    DWORD total;
+    BOOL title_read;
+    char title[CONSOLE_IO_TITLE_BYTES];
+    /* Followed by total CHAR_INFO cells, then description.bytes frame bytes. */
+} native_publication;
+static DWORD publish_copy(void *,const void *,SIZE_T);
 static DWORD exchange(ntvwm_presentation *client,console_io_request *request,console_io_reply *reply)
 {
     DWORD error=ntcon_worker_call(&client->channel,request,reply);
@@ -40,13 +49,20 @@ DWORD ntvwm_presentation_open(HANDLE pipe,HANDLE frontend,HANDLE stop,DWORD gene
     if(!client)return ERROR_NOT_ENOUGH_MEMORY;
     error=ntcon_worker_client_init(&client->channel,pipe,frontend,stop,generation);
     if(error) { HeapFree(GetProcessHeap(),0,client);return error; }
-    InitializeCriticalSection(&client->lock);*output=client;return ERROR_SUCCESS;
+    InitializeCriticalSection(&client->lock);
+    client->publisher=worker_base_publication_create(publish_copy,client,stop);
+    if(!client->publisher) {
+        error=GetLastError();ntvwm_presentation_close(client);return error;
+    }
+    *output=client;return ERROR_SUCCESS;
 }
 void ntvwm_presentation_close(ntvwm_presentation *client)
 {
     if(!client)return;
+    /* Caller has drained ownership, or signalled the borrowed channel stop.
+     * Never join under the transport lock; its callback acquires that lock. */
+    worker_base_publication_destroy(client->publisher);
     if(client->published_cells)HeapFree(GetProcessHeap(),0,client->published_cells);
-    if(client->captured_payload)HeapFree(GetProcessHeap(),0,client->captured_payload);
     ntcon_worker_client_dispose(&client->channel);DeleteCriticalSection(&client->lock);
     HeapFree(GetProcessHeap(),0,client);
 }
@@ -132,8 +148,7 @@ DWORD ntvwm_presentation_text(ntvwm_presentation *client,const console_video_des
 DWORD ntvwm_presentation_capture(ntvwm_presentation *client,const console_text_style *font)
 {
     ntvwm_capture capture={0};CHAR_INFO *cells=NULL;BYTE *payload=NULL;
-    char title[CONSOLE_IO_TITLE_BYTES]={0};BOOL title_read=FALSE,publication_held=FALSE;
-    console_io_request request={0};console_io_reply reply;
+    char title[CONSOLE_IO_TITLE_BYTES]={0};BOOL title_read=FALSE;
     console_video_description description={0};DWORD error,total,offset=0,count;
     SMALL_RECT region;
     if(!client || !font)return ERROR_INVALID_PARAMETER;
@@ -163,47 +178,80 @@ DWORD ntvwm_presentation_capture(ntvwm_presentation *client,const console_text_s
     if(!error)ntvwm_mouse_compose(&client->mouse,&description,payload);
     LeaveCriticalSection(&client->lock);
     if(error)goto done;
-    /* Publish the complete logical cell grid and its viewport text metadata
-     * as one transaction. Unicode remains in logical Console cells; bounded
-     * PC glyph conversion remains in this worker, not the frontend. */
+    {
+        SIZE_T cell_bytes=(SIZE_T)total*sizeof(*cells),bytes;
+        native_publication *snapshot;BOOL queued=FALSE;
+        if(cell_bytes>SIZE_MAX-sizeof(*snapshot) ||
+            description.bytes>SIZE_MAX-sizeof(*snapshot)-cell_bytes) {
+            error=ERROR_ARITHMETIC_OVERFLOW;goto done;
+        }
+        bytes=sizeof(*snapshot)+cell_bytes+description.bytes;
+        snapshot=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,bytes);
+        if(!snapshot){error=ERROR_NOT_ENOUGH_MEMORY;goto done;}
+        snapshot->info=capture.info;snapshot->cursor=capture.cursor;
+        snapshot->description=description;snapshot->total=total;
+        snapshot->title_read=title_read;memcpy(snapshot->title,title,sizeof(title));
+        memcpy(snapshot+1,cells,cell_bytes);
+        memcpy((BYTE *)(snapshot+1)+cell_bytes,payload,description.bytes);
+        error=worker_base_publication_offer(client->publisher,snapshot,bytes,&queued);
+        if(!error && !queued)error=worker_base_publication_commit(client->publisher,snapshot,bytes);
+        HeapFree(GetProcessHeap(),0,snapshot);
+    }
+done:
+    if(payload)HeapFree(GetProcessHeap(),0,payload);
+    if(cells)HeapFree(GetProcessHeap(),0,cells);
+    ntvwm_trace_error("capture",0,error);
+    ntvwm_capture_end(&capture);return error;
+}
+
+/* Entire transaction, including final video ACK, completes before the shared
+ * engine records success. Never inspect mutable Console state on this thread. */
+static DWORD publish_copy(void *context,const void *copy,SIZE_T bytes)
+{
+    ntvwm_presentation *client=context;
+    const native_publication *snapshot=copy;
+    const CHAR_INFO *cells;
+    const BYTE *payload;
+    console_video_description description;
+    console_io_request request={0};console_io_reply reply;
+    DWORD error=0,total,offset=0,count;
+    BOOL publication_held=FALSE;
+    CHAR_INFO *published;
+    SIZE_T cell_bytes;
+    if(bytes<sizeof(*snapshot))return ERROR_INVALID_DATA;
+    total=snapshot->total;cell_bytes=(SIZE_T)total*sizeof(*cells);
+    if(!total || total>SIZE_MAX/sizeof(*cells) ||
+        cell_bytes>bytes-sizeof(*snapshot) ||
+        bytes-sizeof(*snapshot)-cell_bytes!=snapshot->description.bytes)
+        return ERROR_INVALID_DATA;
+    cells=(const CHAR_INFO *)(snapshot+1);
+    payload=(const BYTE *)cells+cell_bytes;description=snapshot->description;
+    published=HeapAlloc(GetProcessHeap(),0,cell_bytes);
+    if(!published)return ERROR_NOT_ENOUGH_MEMORY;
+    memcpy(published,cells,cell_bytes);
     EnterCriticalSection(&client->lock);
-    if(title_read && (!client->title_valid || strcmp(client->published_title,title))) {
-        error=ntcon_worker_publish_title(&client->channel,title);
+    if(snapshot->title_read && (!client->title_valid ||
+        strcmp(client->published_title,snapshot->title))) {
+        error=ntcon_worker_publish_title(&client->channel,snapshot->title);
         if(!error) {
-            strcpy_s(client->published_title,sizeof(client->published_title),title);
+            strcpy_s(client->published_title,sizeof(client->published_title),snapshot->title);
             client->title_valid=TRUE;
         }
     }
     if(error==ERROR_NOT_READY || error==ERROR_BUSY)error=ERROR_SUCCESS;
     if(error)goto captured_done;
-    /* Polling the native Console need not repaint the host Console. Include
-     * the full Unicode grid and the composed frame: cursor, font, palette and
-     * mouse-only changes remain observable even with unchanged characters.
-     * A sample is not an update. Explicit presentation_text calls below this
-     * producer remain unfiltered, including repeated identical frames. */
-    if(client->captured_payload &&
-        !memcmp(&client->captured_description,&description,sizeof(description)) &&
-        !memcmp(client->captured_payload,payload,description.bytes) &&
-        client->published_count==total &&
-        client->published_width==(DWORD)capture.info.dwSize.X &&
-        client->published_screen.wAttributes==capture.info.wAttributes &&
-        client->published_cursor.dwSize==capture.cursor.dwSize &&
-        client->published_cursor.bVisible==capture.cursor.bVisible &&
-        !memcmp(&client->published_screen.srWindow,&capture.info.srWindow,sizeof(SMALL_RECT)) &&
-        !memcmp(&client->published_screen.dwCursorPosition,&capture.info.dwCursorPosition,sizeof(COORD)) &&
-        !memcmp(client->published_cells,cells,(SIZE_T)total*sizeof(*cells)))goto captured_done;
     ZeroMemory(&request,sizeof(request));request.operation=CONSOLE_IO_PUBLICATION_BEGIN;
     error=exchange(client,&request,&reply);
     if(error)goto captured_done;
     publication_held=TRUE;
     request.operation=CONSOLE_IO_SCREEN_INFO;
     error=exchange(client,&request,&reply);
-    if(!error && (reply.state.width!=capture.info.dwSize.X || reply.state.height!=capture.info.dwSize.Y)) {
+    if(!error && (reply.state.width!=snapshot->info.dwSize.X || reply.state.height!=snapshot->info.dwSize.Y)) {
         /* Same order as ntvwm_screen_apply: grow before moving the viewport,
          * shrink only after it fits. A native TUI may shrink 120x9001 to
          * 80x25; shrinking beneath the old visible window is invalid. */
-        LONG width=max(reply.state.width,capture.info.dwSize.X);
-        LONG height=max(reply.state.height,capture.info.dwSize.Y);
+        LONG width=max(reply.state.width,snapshot->info.dwSize.X);
+        LONG height=max(reply.state.height,snapshot->info.dwSize.Y);
         if(width!=reply.state.width || height!=reply.state.height) {
             request.operation=CONSOLE_IO_BUFFER_SIZE;
             request.state.width=width;request.state.height=height;
@@ -212,52 +260,52 @@ DWORD ntvwm_presentation_capture(ntvwm_presentation *client,const console_text_s
         if(!error) {
             ZeroMemory(&request,sizeof(request));
             request.operation=CONSOLE_IO_WINDOW_RECT;request.state.mode=1;
-            request.state.left=capture.info.srWindow.Left;request.state.right=capture.info.srWindow.Right;
-            request.state.top=capture.info.srWindow.Top;request.state.bottom=capture.info.srWindow.Bottom;
+            request.state.left=snapshot->info.srWindow.Left;request.state.right=snapshot->info.srWindow.Right;
+            request.state.top=snapshot->info.srWindow.Top;request.state.bottom=snapshot->info.srWindow.Bottom;
             error=exchange(client,&request,&reply);
         }
-        if(!error && (width!=capture.info.dwSize.X || height!=capture.info.dwSize.Y)) {
+        if(!error && (width!=snapshot->info.dwSize.X || height!=snapshot->info.dwSize.Y)) {
             request.operation=CONSOLE_IO_BUFFER_SIZE;
-            request.state.width=capture.info.dwSize.X;request.state.height=capture.info.dwSize.Y;
+            request.state.width=snapshot->info.dwSize.X;request.state.height=snapshot->info.dwSize.Y;
             error=exchange(client,&request,&reply);
         }
     }
     for(offset=0;!error && offset<total;offset+=count) {
         ZeroMemory(&request,sizeof(request));
-        count=min((DWORD)capture.info.dwSize.X-offset%capture.info.dwSize.X,
+        count=min((DWORD)snapshot->info.dwSize.X-offset%snapshot->info.dwSize.X,
             CONSOLE_IO_DATA_BYTES/sizeof(console_io_cell));
         /* A sampled cursor/font change is not a write to every Console row.
          * Derive dirty rows at this native producer, like VGA calc_update;
          * explicit exchange/text publications remain completely unfiltered. */
-        if(client->published_count==total && client->published_width==(DWORD)capture.info.dwSize.X &&
+        if(client->published_count==total && client->published_width==(DWORD)snapshot->info.dwSize.X &&
             !memcmp(client->published_cells+offset,cells+offset,count*sizeof(*cells)))continue;
         request.operation=CONSOLE_IO_WRITE_CELLS_W;
         request.state.width=count;request.state.height=1;
-        request.state.left=offset%capture.info.dwSize.X;request.state.right=request.state.left+count-1;
-        request.state.top=request.state.bottom=offset/capture.info.dwSize.X;
+        request.state.left=offset%snapshot->info.dwSize.X;request.state.right=request.state.left+count-1;
+        request.state.top=request.state.bottom=offset/snapshot->info.dwSize.X;
         request.bytes=count*sizeof(console_io_cell);
         memcpy(request.data,cells+offset,request.bytes);
         error=exchange(client,&request,&reply);
     }
     if(!error) {
         ZeroMemory(&request,sizeof(request));request.operation=CONSOLE_IO_CURSOR_POSITION;
-        request.state.x=capture.info.dwCursorPosition.X;request.state.y=capture.info.dwCursorPosition.Y;
+        request.state.x=snapshot->info.dwCursorPosition.X;request.state.y=snapshot->info.dwCursorPosition.Y;
         error=exchange(client,&request,&reply);
     }
     if(!error) {
         ZeroMemory(&request,sizeof(request));request.operation=CONSOLE_IO_WINDOW_RECT;request.state.mode=1;
-        request.state.left=capture.info.srWindow.Left;request.state.right=capture.info.srWindow.Right;
-        request.state.top=capture.info.srWindow.Top;request.state.bottom=capture.info.srWindow.Bottom;
+        request.state.left=snapshot->info.srWindow.Left;request.state.right=snapshot->info.srWindow.Right;
+        request.state.top=snapshot->info.srWindow.Top;request.state.bottom=snapshot->info.srWindow.Bottom;
         error=exchange(client,&request,&reply);
     }
     if(!error) {
         ZeroMemory(&request,sizeof(request));request.operation=CONSOLE_IO_CURSOR_INFO;
-        request.state.cursor_size=capture.cursor.dwSize;request.state.cursor_visible=capture.cursor.bVisible!=FALSE;
+        request.state.cursor_size=snapshot->cursor.dwSize;request.state.cursor_visible=snapshot->cursor.bVisible!=FALSE;
         error=exchange(client,&request,&reply);
     }
     if(!error) {
         ZeroMemory(&request,sizeof(request));request.operation=CONSOLE_IO_ATTRIBUTE;
-        request.state.attribute=capture.info.wAttributes;
+        request.state.attribute=snapshot->info.wAttributes;
         error=exchange(client,&request,&reply);
     }
     if(!error)error=ntvwm_presentation_text(client,&description,payload,description.bytes);
@@ -268,15 +316,10 @@ DWORD ntvwm_presentation_capture(ntvwm_presentation *client,const console_text_s
     }
     if(client->published_cells)HeapFree(GetProcessHeap(),0,client->published_cells);
     client->published_cells=NULL;client->published_count=0;
-    if(client->captured_payload)HeapFree(GetProcessHeap(),0,client->captured_payload);
-    client->captured_payload=NULL;
     if(!error) {
-        client->published_cells=cells;cells=NULL;client->published_count=total;
-        client->published_width=(DWORD)capture.info.dwSize.X;
-        client->captured_description=description;
-        client->captured_payload=payload;payload=NULL;
-        client->published_screen=capture.info;
-        client->published_cursor=capture.cursor;
+        client->published_cells=published;published=NULL;
+        client->published_count=total;
+        client->published_width=(DWORD)snapshot->info.dwSize.X;
     }
 captured_done:
     if(publication_held) {
@@ -285,11 +328,8 @@ captured_done:
         aborted=exchange(client,&request,&reply);if(!error)error=aborted;
     }
     LeaveCriticalSection(&client->lock);
-done:
-    if(payload)HeapFree(GetProcessHeap(),0,payload);
-    if(cells)HeapFree(GetProcessHeap(),0,cells);
-    ntvwm_trace_error("capture",0,error);
-    ntvwm_capture_end(&capture);return error;
+    if(published)HeapFree(GetProcessHeap(),0,published);
+    return error;
 }
 
 static DWORD read_configuration(ntvwm_presentation *client,console_text_configuration *configuration,BOOL *found)
@@ -441,7 +481,9 @@ DWORD ntvwm_presentation_begin(ntvwm_presentation *client,HANDLE output)
             error=exchange(client,&request,&reply);
         }
     }
-    LeaveCriticalSection(&client->lock);return error;
+    LeaveCriticalSection(&client->lock);
+    if(!error)error=worker_base_publication_active(client->publisher,TRUE);
+    return error;
 }
 /* Return only records still present in an empty native Console, never replay
  * consumed input. Same PREPEND_KEYS wire shape as console_client.c. The caller
@@ -476,6 +518,10 @@ DWORD ntvwm_presentation_end(ntvwm_presentation *client,const console_text_style
 {
     console_io_request request={0};console_io_reply reply;DWORD error,attempt;
     if(!client || !font)return ERROR_INVALID_PARAMETER;
+    /* Disable/drain outside the channel lock. A callback may currently hold
+     * that lock. Fresh final capture below is synchronous and uncapped. */
+    error=worker_base_publication_active(client->publisher,FALSE);
+    if(error)return error;
     EnterCriticalSection(&client->lock);
     {
         console_frame_mouse_input leave={0};INPUT_RECORD records[2];DWORD count=0,written=0;
