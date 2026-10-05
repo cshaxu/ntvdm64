@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T430 S1 inherited contract audit](evidence/m0-t430-s1-inherited-contract-audit.md) | M0 T430 S1 | Existing research provenance, stale/current evidence classification and bounded reconciliation. | Retain through audit and owner handoff. |
 | [T429 S8 shared event-driven input](evidence/m0-t429-s8-shared-event-input.md) | M0 T429 S8 | Common worker notification thread, native input/capture separation and verification/publication. | Retain through T429 acceptance. |
 | [T429 S7 native acquisition interval](evidence/m0-t429-s7-native-acquisition-interval.md) | M0 T429 S7 | Bounded native30ms→20ms sampling change and verification/publication. | Retain through T429 acceptance. |
 | [T429 S1 performance baseline](evidence/m0-t429-s1-performance-baseline.md) | M0 T429 S1 | Initial real EDIT/COMMAND/native-control timings, measurement negatives and isolated diagnostic cost; remaining queue/IRQ attribution is open. | Retain through T429 acceptance. |
