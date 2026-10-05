@@ -19,13 +19,18 @@ version, modify source/build inputs or replace the published package.
 | Stage | Outcome | Required proof |
 | --- | --- | --- |
 | S1 audit/design | Actual linked-original/project/common ledger, native layouts, source-first alternatives and detailed migration design. | Pulled map/dependency symbols versus unused archives; reuse Hook64 conclusions; explicit unresolved ABI/failure contracts. Design-only delivery. |
-| S2 frontend/monitor | x64 NTCON/NTMON with separately built neutral and RPC clients. | x64 clients/x86 NTSRV, authenticated resource transfer, Console/Window/text/DIB/input/title, management-only projection, shutdown/cancellation and cleanup. |
-| S3 single native worker | x64-only NTVWM and architecture-local worker-base/client closure, retaining both target widths. | Hidden Console, input/capture, real target handles/results, matching Hooks, reentry, shutdown and NTSRV final-I/O checkpoint; no second worker. |
-| S4 launcher/Hook integration | x64 run16, unchanged shared discovery/recognition/CLI and both incoming Hook widths. | Original/private versus OS/native ABI, DOS/Win16/native32/native64, real child flags/handles/waits/results, context-only launcher; no launcher fallback helper. |
-| S5 integrated delivery | Coherent recoverable ten-image mixed-width publication. | One worker, both Hooks, cross-width nesting and DOS/native handoff, Console17/Window17, independent WOW frontiers, version negatives, mirror/diff audit and published hashes/smoke. |
+| S2 NTVWM | x64-only single NTVWM with architecture-local worker-base/client closure, retaining both target widths. | Hidden Console, input/capture, real target handles/results, matching Hooks, reentry, shutdown and NTSRV final-I/O checkpoint; verify existing x86 frontend/launcher interoperability; no second worker. |
+| S3 NTCON | x64-only frontend with architecture-local neutral libraries and RPC clients. | x86 NTSRV/NTVDM and migrated NTVWM, typed resource transfer, Console/Window/text/DIB/input/title, final I/O, cancellation and cleanup. |
+| S4 NTMON | x64-only monitor with architecture-local management/RPC closure. | Service-only tree projection, exact labels/hotkeys/control permissions, x86 NTSRV authentication, snapshots and resource cleanup; no local process enumeration. |
+| S5 RUN16 | x64-only launcher, unchanged shared discovery/recognition/CLI and both incoming Hook widths. | Original/private versus OS/native ABI, DOS/Win16/native32/native64, real child flags/handles/waits/results, context-only launcher; no launcher fallback helper. |
+| S6 integrated delivery | Final coherent recoverable ten-image mixed-width package and T closure audit. | One worker, both Hooks, cross-width nesting and DOS/native handoff, Console17/Window17, independent WOW frontiers, version negatives, mirror/diff audit and published hashes/smoke. |
 
 Only S1 is admitted. Later rows require bounded stage conclusion and ordinary
 execution-rule admission/verification; they are not simultaneous active tasks.
+Owner explicitly selects S2 NTVWM, S3 NTCON, S4 NTMON and S5 RUN16.
+S6 retains the prior final integrated audit/publication contract. Component
+stages still perform their own affected build/runtime/coherent-package
+publication gates; S6 is not permission to defer those until the end.
 
 ## S1 detailed ledger
 

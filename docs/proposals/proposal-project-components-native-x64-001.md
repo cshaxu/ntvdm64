@@ -52,10 +52,11 @@ resolver or extension-only parser. Reuse the preceding Hook64 ABI conclusions.
 
 ## Proposed implementation sequence
 
-The migration plan records the bounded sequence: dependency/ABI audit and
-design; x64 frontend/monitor and shared RPC bindings; x64 launcher/Base-client
-composition and both Hook-to-launcher context directions; coherent package
-regression/publication and owner disposition. Only Status admits an active S;
+The migration plan records the owner's sequence: dependency/ABI audit and
+design, NTVWM, NTCON, NTMON, RUN16, then final integrated verification and
+delivery. Shared dependencies are rebuilt with the first selected consumer
+and reused by identity, not introduced as another component stage. Each
+component stage retains its own build/runtime/publication gate. Only Status admits an active S;
 this proposal does not allocate or authorize simultaneous implementation.
 
 ## Acceptance

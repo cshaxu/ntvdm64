@@ -34,8 +34,9 @@ the delivered baseline, superseded research and known limitations.
 ## Plan and retained boundaries
 
 [Native component migration plan](../etc/operations/t433-native-components-x64-plan.md)
-owns the proposed sequential design, frontend/monitor, launcher/Hook integration
-and coherent-package delivery stages. S2 and later are planned, not admitted.
+owns S1 audit/design, then the owner's order: S2 NTVWM, S3 NTCON, S4 NTMON,
+S5 RUN16, followed by S6 integrated delivery. S2 and later are planned,
+not admitted. Each component stage retains its own verification/publication gate.
 
 NTSRV remains the sole lifecycle/task/I/O connection authority. NTCON stays
 worker-neutral, holding zero or one authorized direct I/O pipe. NTVDM keeps
