@@ -1770,6 +1770,8 @@ $graph.Add('build ' + $highLinearPageFixtureObject + ': cc ' + (NinjaPath (Join-
 $graph.Add('build ccpu-high-linear-page-test.exe: memory_test_link ' + $highLinearPageFixtureObject + ' ' + $boundedExecutionFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $graph.Add('build obj/tests/ccpu_stack_transition_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_stack_transition_test.c')))
 $graph.Add('build ccpu-stack-transition-test.exe: memory_test_link obj/tests/ccpu_stack_transition_test.obj ' + $boundedExecutionFixtureSeamsObject + ' ' + $fixtureHostLibraries)
+$graph.Add('build obj/tests/keyboard_controller_pic_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/keyboard_controller_pic_test.c')))
+$graph.Add('build keyboard-controller-pic-test.exe: memory_test_link obj/tests/keyboard_controller_pic_test.obj ' + $boundedExecutionFixtureSeamsObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $wowPageDomainFixtureObject = 'obj/tests/wow_page_domain_fixture.obj'
 $wowUserObjectFixtureObject = 'obj/adapter-wow/wow_user_object_bindings.obj'
 $graph.Add('build ' + $wowPageDomainFixtureObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/wow_page_domain_fixture.c')))

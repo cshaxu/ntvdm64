@@ -2,13 +2,26 @@
 
 ## Current Work
 
-**No active M/T/S packet.** T430 remains open. S2 has reached its bounded
-delivery after S1; subsequent S3–S7 remain planned, not simultaneously active.
+**No active M/T/S packet.** T430 remains open. S3 has concluded its bounded
+applicability review; subsequent S4–S7 remain planned, not simultaneously active.
 The [non-WOW sequence](../etc/operations/t430-non-wow-contract-plan.md) retains
 the owner provenance gate: preserve original guest defects; adopt only verified
 existing SoftPC fixes for original host defects; otherwise defer originals;
 correct demonstrated project-code defects. Known WOW gaps retain their
 existing proposal receivers and queue order is unchanged.
+
+## S3 Closure Record
+
+[S3 proof](../etc/evidence/m0-t430-s3-controller-pic-boundary.md) establishes
+that the matching sibling IRQ repair is excluded under the selected NTVDM
+profile; the C0 one-line assignment alone cannot repair its original response
+delivery. No production change is adopted. The actual production controller/
+PIC fixture passes18 assertions twice, explicitly reproducing the retained
+C0 limitation and proving masked-read/INTACK/EOI/queued-byte ownership with
+controlled host callbacks, not a real BIOS ISR or timer/concurrency claim.
+Tests and fixture build selection are delivered; original response debt is
+retained in TODO. All eight published S2 hashes remain unchanged. S4–S7 and
+final owner acceptance remain outstanding.
 
 ## S2 Closure Record
 
@@ -63,8 +76,9 @@ No helper, CPU30, new wire or unrelated sibling repair is included.
 
 ## Recent Governance
 
-S2 removes the repaired CPU item from unplanned TODO; 8042 and other original
-defects retain their bounded future work or deferral. Detailed proof lives in
+S2 removes the repaired CPU item from unplanned TODO; S3 replaces the proposed
+8042 repair with the verified selected-branch original response limitation.
+Other original defects retain their bounded future work or deferral. Detailed proof lives in
 indexed S2 evidence, not a second task register. Unrelated side-session
 proposal edits remain preserved and excluded. Governance, links, diff review,
-commit and push form the S2 delivery; T430 remains open.
+commit and push form the sequential deliveries; T430 remains open.

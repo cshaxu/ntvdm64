@@ -3,6 +3,7 @@
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
 | [T430 S2 SoftPC repair gate](evidence/m0-t430-s2-softpc-repair-gate.md) | M0 T430 S2 | Owner provenance gate and existing comparative fix bodies; no runtime closure. | Retain through profile recovery. |
+| [T430 S3 controller/PIC boundary](evidence/m0-t430-s3-controller-pic-boundary.md) | M0 T430 S3 | Selected NTVDM branch and existing SoftPC repair applicability. | Retain bounded proof/disposition. |
 | [T430 non-WOW contract plan](operations/t430-non-wow-contract-plan.md) | M0 T430 | Owner-replanned sequential non-WOW completion and existing WOW32-owner handoffs. | Retain through contract closure and handoff acceptance. |
 | [T430 S1 inherited contract audit](evidence/m0-t430-s1-inherited-contract-audit.md) | M0 T430 S1 | Existing research provenance, stale/current evidence classification and bounded reconciliation. | Retain through audit and owner handoff. |
 | [T429 S8 shared event-driven input](evidence/m0-t429-s8-shared-event-input.md) | M0 T429 S8 | Common worker notification thread, native input/capture separation and verification/publication. | Retain through T429 acceptance. |

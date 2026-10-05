@@ -6,7 +6,10 @@ Owner direction on 2026-10-04 supersedes the candidate's audit-only S2–S4
 sequence: close S1's inherited/current audit, then plan required non-WOW gap
 completion within this task. Known WOW gaps go to the existing WOW32
 candidates, not a parallel recovery program. CURRENT is the only admission
-authority. S1 and S2 are delivered; S3–S7 remain planned, not active.
+authority. S1 and S2 are delivered; S3's applicability review retains the
+original selected-NTVDM response limitation without adopting an inapplicable
+SoftPC patch. See [S3 proof](../evidence/m0-t430-s3-controller-pic-boundary.md).
+S4–S7 remain planned, not active.
 
 [S1 conclusions](../evidence/m0-t430-s1-inherited-contract-audit.md) freeze
 inputs and distinguish source risk, missing evidence and original limitations.
@@ -37,7 +40,10 @@ keep their reproducer and reason; never weaken an assertion to pass.
 
 The [source gate](../evidence/m0-t430-s2-softpc-repair-gate.md) confirms the
 referenced SoftPC commit contains the S2 stack-width and S3 controller fixes;
-integration and current-product proof remain open. S4 separates original
+S3's selected-branch proof supersedes the assumption that both fixes apply:
+the IRQ correction is excluded under NTVDM, and C0 assignment alone cannot
+repair that branch's response delivery. No production change is justified.
+S4 separates original
 CX0/other inherited defects from project Unicode/OEM and staging adaptations;
 without a matching SoftPC repair, originals are TODO, not fixed incidentally.
 S5 may restore missing project service binding but not invent a correction
