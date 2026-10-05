@@ -110,7 +110,12 @@ Owner-admitted T431 S2 nthook32-dll is a specialist x86 /MT native launch hook.
 Its installer/context static slice is selected by NTVWM and the DLL; the
 context-only consumer is selected by run16. Pinned MIT Detours sources remain
 under this component with notices/provenance. GUI/CUI propagation is separate
-from character frontend authority. No helper or x64 island is admitted.
+from character frontend authority. That T431 delivery has no helper or x64
+island. T432 S6 retains a single x86 ntvwm.exe and rebuilds dual Hook DLLs
+from the accepted source baseline. The rejected dual-worker implementation
+and its [helper register](../etc/operations/t432-detours-helper-adaptation.md)
+remain research only; any necessary installer seam requires fresh individual
+review before production inclusion. All other components remain x86.
 
 ## Executable-owned runtime
 

@@ -8,7 +8,24 @@ NTCON renderer or modifying guest/shared-library code.
 
 ## Product boundary
 
-### Proposed native worker width variants — T432 design
+### Single worker and dual Hooks — T432 S6 superseding contract
+
+Owner replaces the dual-worker design: only x86 ntvwm.exe remains. Actual
+I386/AMD64 target machine selects nthook32/64.dll, never a different worker
+or reservation. NTSRV records verified actual target machine and NTMON
+shows64 tasks as WIN64; this is not the worker carrier width. NTCON stays
+width-neutral. Existing broker-mediated DOS handoff and ordinary Windows
+child identity/Console/wait semantics remain unchanged. All other components
+remain x86. S6 reconstructs from accepted12160c657; archived S2–S5 candidate
+implementation is evidence only, not automatically reusable production code.
+Final delivery adds Hook64 to the nine-image baseline, not another worker.
+
+### Superseded dual-worker research — not the active contract
+
+The owner's subsequent goal requires NTSRV to retain verified native machine
+identity and NTMON to show WIN64 separately from WIN32. This extends the prior
+three-label freeze: DOS=0, Win16=1, Win32=2, Win64=3. Both native widths use the
+same task/worker control paths; NTCON does not distinguish worker width.
 
 Owner accepts the delivered T431 Hook32 baseline and transfers unimplemented
 dual-width work to the separate T432 package. Its

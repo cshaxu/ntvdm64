@@ -1,9 +1,24 @@
 # T432 dual-width native workers and hooks plan
 
+## Superseding owner direction — S6
+
+Owner rejects the dual-worker candidate in main. S2–S5 below are historical
+research, not delivered production Ps. S5 is superseded, not passed.
+Evidence branch evidence/t432-dual-worker-superseded-20261005 at
+3d5bc9466cf7208112ea53b9ff3ebf97534b0354 preserves the complete candidate.
+S6 restores src/tests/tools from accepted T431 S2 P2,12160c657, then implements
+one x86 ntvwm.exe with nthook32/64.dll, actual16/32/64 execution/handoff,
+NTSRV actual64 task identity and NTMON WIN64 projection. No width-selected
+worker/reservation/registration or eleven-image package remains. Final set
+has ten images, only Hook64 is AMD64. Necessary new mechanisms receive fresh
+individual review and evidence, never bulk candidate merge. Retain all
+product/rollback/isolation/WOW gates; publish/commit/push then owner acceptance.
+The old sequence below does not authorize dual-worker production or builds.
+
 ## Admission and accepted reference
 
 Owner on2026-10-05 accepts nthook32 and requests a separate T to preserve its
-baseline. CURRENT admits only T432 S1. The
+baseline. CURRENT owns the sole active sequential S. The
 [T431 closure](../../history/m0-t431-native-hook32-closure.md) retains production
 commit12160c657, S2/r027-runtime and r031-publication. No prior width stage
 was implemented. T431 S1/S3 design and source research remain reusable inputs,
@@ -14,7 +29,7 @@ not new runtime proofs. Its former planned S4–S6 transfer to the sequence belo
 | S | Bounded objective | Exit evidence |
 | --- | --- | --- |
 | S1 | Reconcile retained design/actual links and freeze shared-versus-native-width classification, build, selection, install/context and failure contracts. | Exact source/ABI/provenance ledger, minimal original-shaped adaptation choice, finite helper role if needed, reproducible case plan. Design only, no runtime capability claim. |
-| S2 | One native-worker source family builds NTVWM32/64; separate architecture objects/RPC stubs, NTSRV target-machine selection and x86 launcher recognition. | Actual native32/64 direct startup, authentic service/resource binding, same lifecycle/result/handoff path, no frontend worker-width branch; passing recoverable coherent production package. |
+| S2 | One native-worker source family builds NTVWM32/64; separate architecture objects/RPC stubs, NTSRV target-machine selection and x86 launcher recognition. | Bounded build/selection/registration/projection and actual32 direct evidence; actual64 direct/runtime package delivery depends on matching Hook64 in S3. [S2 conclusion](../evidence/m0-t432-s2-dual-worker-build-selection.md) explicitly defers P/publication and does not claim complete runtime/handoff. |
 | S3 | Matching Hook64 from shared Hook/search/install/context sources; same-width64 propagation and context-only x86 launcher integration. | Actual64 CMD→64 child and64 CMD→run16→DOS/Win16→return; unchanged Hook32 paths, real handles/results, safe unsupported and rollback negatives. Cross-width interception not inferred from context copy. |
 | S4 | Complete opposite-width native propagation without replacing actual Windows children; adopt reviewed transient installer-only helper only if necessary. |32→64 and64→32 alongside both same-width directions; caller suspension, immediate child creation, GUI, resources, finite helper cancellation/cleanup and partial-install rollback. Unproved directions remain open, never silently unhooked success. |
 | S5 | Integrated compatibility, isolation/fault/reuse/cleanup and final source/manifest audit. | Native32/64↔DOS and applicable worker handoff, real parent return, independent sessions, established Console17/Window17 and WOW frontiers, coherent eleven-image publication and hash verification; stop for owner T acceptance. |

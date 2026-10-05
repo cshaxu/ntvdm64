@@ -1,5 +1,16 @@
 # Proposal — Dual-width native workers and launch hooks
 
+## Superseding owner approval — single worker
+
+The current scope is one x86 ntvwm.exe plus nthook32/64.dll, not dual workers.
+S6 rebuilds from accepted12160c657. Superseded candidate code is archived
+only and must not enter main. Actual target machine chooses its Hook DLL
+and task display (NTSRV actual64 metadata, NTMON WIN64), not worker selection.
+NTCON and existing lifecycle/handoff paths remain width-neutral. Final
+delivery has ten images, with only nthook64.dll AMD64. The current plan's
+S6 section owns verification and publication. The remainder below is the
+rejected earlier proposal, retained for provenance, not implementation scope.
+
 ## Owner direction and reference
 
 Owner accepts the delivered x86 Hook baseline and separates this package from

@@ -1,9 +1,19 @@
 # Supporting Material
 
+[T432 S6 single-worker reconstruction](evidence/m0-t432-s6-single-worker-reconstruction.md)
+records the superseded evidence branch, accepted source restoration and
+pending single-worker/dual-Hook gates.
+
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
 | [T432 dual-width worker/Hook plan](operations/t432-dual-width-native-workers-hooks-plan.md) | M0 T432 | Accepted Hook32 baseline preservation, staged dual builds/propagation and explicit runtime gates. | Retain through owner acceptance. |
 | [T432 S1 dual-width design](operations/t432-dual-width-native-workers-hooks-design.md) | M0 T432 S1 | Source/link ledger, machine selection, ABI/context and bounded installer-helper contracts; runtime gates remain planned. | Retain through implementation and owner acceptance. |
+| [T432 S1 design-only closure](evidence/m0-t432-s1-dual-width-design.md) | M0 T432 S1 | Published design P1 identity and its non-runtime boundary. | Retain through owner acceptance. |
+| [T432 S2 bounded build/selection conclusion](evidence/m0-t432-s2-dual-worker-build-selection.md) | M0 T432 S2 | Actual dual worker/RPC/registration/direct32 evidence; production P/publication deferred for Hook64 and retained gates. | Retain through owner acceptance. |
+| [T432 S3 matching Hook conclusion](evidence/m0-t432-s3-matching-hook-progress.md) | M0 T432 S3 | Actual dual Hook and legacy parent-return evidence; P/publication deferred for cross-width install and product gates. | Retain through implementation and owner acceptance. |
+| [T432 S4 Detours helper adaptation register](operations/t432-detours-helper-adaptation.md) | M0 T432 S4 | Exact source/hash and minimum finite helper seam; failure and runtime gates required. | Retain with source provenance and owner acceptance. |
+| [T432 S4 cross-width implementation conclusion](evidence/m0-t432-s4-cross-width-progress.md) | M0 T432 S4 | Actual alternating child/handle/exit, reciprocal product chains and finite helper rollback; P/publication deferred to integrated gates. | Retain through source review and owner acceptance. |
+| [T432 S5 integrated verification](evidence/m0-t432-s5-integrated-verification.md) | M0 T432 S5 | Final application identity, eleven-image gates and actual integrated verification/publication status. | Retain through owner acceptance. |
 | [T431 S1 bounded conclusion](evidence/m0-t431-s1-hook-contract-conclusion.md) | M0 T431 S1 | Source/design conclusion and owner-approved32-only implementation handoff, not T closure. | Retain through owner acceptance. |
 | [T431 S2 hook implementation](evidence/m0-t431-s2-nthook32-implementation.md) | M0 T431 S2 | Source admission, installer/propagation changes and exact verification progress; not automatically runtime closure. | Retain through owner acceptance. |
 | [T431 native launch detailed design](operations/t431-native-launch-hook-design.md) | M0 T431 S1 | Suspended-child installation, copied bootstrap/authorization, flags, rollback, module boundaries and explicit remaining feasibility gates. | Retain through implementation and owner acceptance. |

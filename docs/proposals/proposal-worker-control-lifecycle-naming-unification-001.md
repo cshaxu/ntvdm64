@@ -8,6 +8,13 @@ unnumbered implementation candidate, not admission or expansion of the active
 T425 packet. Numeric T allocation and bounded S admission occur only in
 [CURRENT](../states/CURRENT.md), under [Execution Rules](../rules/EXECUTION.md).
 
+The owner's subsequent 2026-10-04 direction moved this candidate to the queue
+head before execution-performance recovery. This is historical ordering, not
+the present queue: [T428 closure](../history/m0-t428-worker-interface-unification-closure.md)
+records the later admitted audit and delivery. The inventory below is retained
+research; it is not an open duplicate repair packet or expansion of T432 S6.
+Current ordering belongs to Queue and admission belongs to CURRENT.
+
 Consolidate project-owned worker control, frontend routing, association,
 occupancy and termination mechanisms across NTVDM and NTVWM, and align names
 with their actual owner and semantic scope. Keep run16 a thin classifier,
