@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T432 S6** (Ordinary Mode; accepted-baseline reconstruction).
+**Active: M0 T432 S6** (Ordinary Mode; implementation delivered, awaiting owner T acceptance).
 Owner verifies nthook32 works and directs preserving that accepted baseline,
 closing T431 within its delivered x86 scope and opening a separate T for dual
 Hooks with one x86 NTVWM. The later owner override rejects dual workers.
@@ -176,7 +176,7 @@ supersedes its implementation plan; verification restarts from accepted source.
 
 ## Reconstructed Technical Baseline
 
-S6 delivery review is active. Reconstruction started from accepted12160c657;
+S6 implementation is closed at P2b97041e74, pushed to main. Reconstruction started from accepted12160c657;
 superseded dual-worker sources remain archive-only. The final r048-runtime
 ten-image APP0.0.432/RPC41/I/O25 package is published at O:/winnt/system32.
 Only nthook64.dll is AMD64; all other images remain MSVC14.43/SDK22621 x86
@@ -204,8 +204,9 @@ O:/winnt before launching anything, as its build-only cleanup contract requires;
 publication smoke uses the distinct approved exact-image/creation-time boundary.
 The [S6 record](../etc/evidence/m0-t432-s6-single-worker-reconstruction.md)
 retains all failed/intermediate observations and final evidence selection.
-Review/commit/push remain before S6 delivery closure; T432 awaits owner
-acceptance and no successor T is admitted.
+Production review/commit/push are complete and the worktree was clean at P2.
+This documentation-only P3 records the observed delivery. T432 remains open
+for owner acceptance; no further implementation or successor T is admitted.
 
 [T431 S2 evidence](../etc/evidence/m0-t431-s2-nthook32-implementation.md)
 retains installer93 assertions, selected NTVWM lifetime1077 checks, shared
@@ -249,8 +250,8 @@ version-only reproduces the illegal instruction. The runner now restores
 version-negative variables at that gate's own finally; the actual block's
 absent/present x success/nonzero/exception fixture passes. r057 serial
 Control gates pass on the identical r048 ten images, including final handoff.
-Publication and deployed DOS/32/64 smoke pass; review/commit/push remain.
-S6 delivery closure and T432 owner acceptance are not yet claimed.
+Publication and deployed DOS/32/64 smoke pass; P2b97041e74 is pushed and
+synchronized. S6 implementation is closed; T432 awaits owner acceptance.
 
 | Task | Outcome and evidence |
 | --- | --- |
@@ -266,4 +267,6 @@ packet; queued component x64 migration has no numeric allocation or admission.
 Owner now authorizes including other-session proposal/TODO changes after
 review. Their historical queue wording is corrected against T428 closure;
 debt changes are checked against delivered T429 and retired source policy.
-S6 P1 is documentation/replanning only, not production delivery or S6 closure.
+S6 P1 was documentation/replanning only. P2b97041e74 delivers the reviewed
+production implementation and coherent published package. Documentation-only
+P3 records S6 implementation closure, not owner acceptance or T432 closure.

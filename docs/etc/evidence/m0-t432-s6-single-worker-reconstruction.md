@@ -613,3 +613,9 @@ restoration and failure propagation, not an alternate test implementation.
 Governance, relative links and diff checks pass before production P formation.
 T432 still awaits owner acceptance; default private-desktop and arbitrary
 large-environment behavior are not claimed repaired, nor are SOL/WRITE playable.
+
+P2b97041e748772dce813fb963e7527781c7321909 contains the reviewed implementation,
+tests and publication evidence, pushed to main; HEAD and origin/main match
+and the worktree is clean immediately afterward. Documentation-only P3
+records that observed delivery and S6 implementation closure. T432 remains
+open for the owner's actual product acceptance; no successor work is admitted.
