@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T433 S4** (Ordinary Mode; native monitor migration).
+**No active M/T/S packet. T433 remains open; S4 is closed; S5 awaits owner admission.**
 
 The owner authorizes closing the delivered single-worker/dual-Hook package
 without manual acceptance and admitting the next Queue candidate. This is
@@ -10,11 +10,14 @@ owner-directed closure on automated evidence, not a claim of hands-on testing.
 [T432 closure](../history/m0-t432-single-worker-dual-hook-closure.md) retains
 the delivered baseline, superseded research and known limitations.
 
-## Active Packet
+## S4 Closure Record
+
+[S4 closure evidence](../etc/evidence/m0-t433-s4-native-monitor-migration.md)
+records native monitor verification, coherent publication and retained limits.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T433 S4; Ordinary Mode. |
+| Identifier Mode | M0 T433 S4 closed; Ordinary Mode. Production P1 03456b24ce2616080fbb3bc84090939c42b71f22 committed/pushed; documentation-only P2 records closure. |
 | Candidate Proposal | [Native x64 launcher/frontend/monitor](../proposals/proposal-project-components-native-x64-001.md). |
 | Admission And Approval | Owner says “准入S四，给我汇报一下情况。” then “开始执行，帮我把NT Monitor做成原生64位EXE。” Admit and implement only S4 NTMON after delivered S3. |
 | Objective | Migrate the single ntmon.exe to AMD64 with architecture-local management/RPC dependencies, preserving service-only snapshots/tree selection, labels, existing hotkeys, explicit close authorization and disconnected-monitor behavior. Build/test, coherently publish, review/commit/push and report. |
@@ -61,7 +64,7 @@ including the retained scope and default-desktop limitations.
 [Native component migration plan](../etc/operations/t433-native-components-x64-plan.md)
 owns S1 audit/design, then the owner's order: S2 NTVWM, S3 NTCON, S4 NTMON,
 S5 RUN16, followed by S6 integrated delivery. S2 and S3 are delivered.
-S4 alone is active; S5 and later remain planned. Each stage retains its own verification/publication gate.
+S4 is delivered; S5 and later remain planned. Each stage retains its own verification/publication gate.
 
 NTSRV remains the sole lifecycle/task/I/O connection authority. NTCON stays
 worker-neutral, holding zero or one authorized direct I/O pipe. NTVDM keeps
@@ -171,5 +174,7 @@ actual standalone disconnected survival/restart/ESC, real Console/Window UI,
 mixed DOS/native/WOW/GUI projection and isolated close, plus input negatives4.
 Full r003 passes all14 groups in539462ms, including Console17/Window17 and
 independent WOW frontiers. r006/r007 publication and actual NTMON/DOS/32/64
-smoke pass with ten-image/notice hashes and Z released. Review/commit/push
-is pending; T433 stays open and S5 is not admitted.
+smoke pass with ten-image/notice hashes and Z released. Reviewed production
+P1 03456b24ce2616080fbb3bc84090939c42b71f22 is committed/pushed; documentation-only
+P2 records bounded S4 closure, not owner hands-on acceptance. T433 stays open
+and S5 is not admitted.

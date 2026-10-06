@@ -105,5 +105,7 @@ Physical desktop/focus/RDP clipping and default hidden-desktop53x15/arbitrary
 large-environment limits remain the prior explicit boundaries, not repaired
 or newly passed. WINMINE startup/WOW projection is not gameplay; SOL/WRITE
 remain separate retained frontiers. Known long-path defect remains untouched.
-T433 stays open; S5 requires owner admission. Commit/push identities are
-recorded after delivery; no hands-on owner acceptance is claimed.
+Production P1 `03456b24ce2616080fbb3bc84090939c42b71f22` is committed and
+pushed to main. Documentation-only P2 records bounded S4 closure; no further
+product change is included. T433 stays open; S5 requires owner admission.
+No hands-on owner acceptance is claimed.
