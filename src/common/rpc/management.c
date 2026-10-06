@@ -1,14 +1,14 @@
 /* Existing project management exchanges, not original VDM record policy. */
 #include "management.h"
 #include "common/protocol/version.h"
-#include <rpcasync.h>
+#include "async_call.h"
 
 static const unsigned char app_version[APP_VERSION_BYTES]=APP_VERSION;
 
 DWORD common_rpc_observe_native_creation_bounded(const common_rpc_management *state,HANDLE child,
     DWORD flags,uint64_t *node)
 {
-    RPC_ASYNC_STATE async={0};hyper identity=0;DWORD reply=ERROR_INVALID_STATE,error,wait;
+    RPC_ASYNC_STATE async={0};hyper identity=0;DWORD reply=ERROR_INVALID_STATE,error;
     HANDLE completed=NULL;BOOL issued=FALSE;
     if(!node)return ERROR_INVALID_PARAMETER;
     *node=0;
@@ -24,17 +24,7 @@ DWORD common_rpc_observe_native_creation_bounded(const common_rpc_management *st
     RpcExcept(1) {error=RpcExceptionCode();}
     RpcEndExcept
     if(issued) {
-        wait=WaitForSingleObject(completed,250);
-        if(wait!=WAIT_OBJECT_0) {
-            /* Abortive cancellation completes locally without waiting for
-             * the server's reply. State/inputs still live until notification. */
-            error=RpcAsyncCancelCall(&async,TRUE);
-            /* Even cancellation failure cannot justify freeing pending call
-             * state. Drain its actual notification, then complete it. */
-            if(WaitForSingleObject(completed,INFINITE)!=WAIT_OBJECT_0)
-                error=GetLastError();
-        }
-        {DWORD completion=RpcAsyncCompleteCall(&async,&reply);if(!error)error=completion;}
+        error=common_rpc_finish_async(&async,completed,NULL,250,&reply);
         if(!error)error=reply;
     }
     CloseHandle(completed);

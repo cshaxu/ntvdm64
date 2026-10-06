@@ -1,6 +1,7 @@
 interface vdm_service
 {
     [async] ObserveNativeCreationAsync();
+    [async] ObserveDosEventAsync();
     /* These calls retain the same context identity. Service locks protect
      * mutable fields; RPC still excludes Close/rundown until calls finish.
      * A blocking receive must not exclude its worker's completion/sampling. */

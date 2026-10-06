@@ -4,12 +4,15 @@
 #include <stdint.h>
 #include "common/protocol/management.h"
 #include "common/protocol/task_trace.h"
+#include "common/protocol/dos_observation.h"
 /* Native composition boundary; opaque pointers never enter command records.
  * One service instance per process, matching original BaseSrv globals.
  * Call only after RPC identity authentication. All operations serialized by
  * the service; transport guarantees connection rundown follows active calls. */
 typedef struct OPENNT_BASE_SERVICE OPENNT_BASE_SERVICE;
 typedef struct OPENNT_BASE_CONNECTION OPENNT_BASE_CONNECTION;
+DWORD OpenNtBaseServiceObserveDosEvent(OPENNT_BASE_CONNECTION *,DWORD,DWORD,
+    const common_dos_observation *,BOOL);
 DWORD OpenNtBaseServiceWorkerIoTransition(OPENNT_BASE_CONNECTION *,DWORD,DWORD,DWORD);
 DWORD OpenNtBaseServiceWorkerIoCheckpoint(OPENNT_BASE_CONNECTION *,DWORD,DWORD,DWORD,DWORD,DWORD *);
 DWORD OpenNtBaseServiceFrontendIoDisconnected(OPENNT_BASE_CONNECTION *,DWORD,DWORD);

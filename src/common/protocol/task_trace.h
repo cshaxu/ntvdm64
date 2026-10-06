@@ -21,6 +21,7 @@ typedef struct common_task_trace_node {
     uint64_t node,parent;
     uint32_t relation,source,kind,state;
     uint32_t process_id,task,flags,reserved;
+    uint32_t dos_psp,reserved2; /* Source numeric PSP, zero when unavailable. */
     wchar_t image[260];
 } common_task_trace_node;
 #endif

@@ -1864,6 +1864,13 @@ int main(int argc,char **argv)
         &getAnswer,&wireBytes,&getWait,standard,&standardCount)==ERROR_SUCCESS);
     CHECK(getAnswer!=NULL && getWait==NULL && standardCount==3 &&
         standard[0]!=NULL && standard[1]!=NULL && standard[2]!=NULL);
+    {
+        uint64_t delivered=0,wrong=99;
+        CHECK(OpenNtBaseReadGetObservation(getAnswer,wireBytes,workerGeneration,4,&delivered));
+        CHECK(delivered!=0);
+        CHECK(!OpenNtBaseReadGetObservation(getAnswer,wireBytes,workerGeneration,5,&wrong) && !wrong);
+        CHECK(!OpenNtBaseReadGetObservation(getAnswer,wireBytes-1,workerGeneration,4,&wrong) && !wrong);
+    }
     CHECK(WriteFile(standard[1],"S34\n",4,&bytes,NULL) && bytes==4);
     CHECK(ReadFile(stdoutRead,streamText,4,&bytes,NULL) && bytes==4 &&
         !memcmp(streamText,"S34\n",4));
@@ -1933,8 +1940,14 @@ int main(int argc,char **argv)
         OPENNT_BASE_MANAGEMENT_KEY key={managementEpoch,MANAGEMENT_WORKER,workerGeneration,0};
         common_task_trace_node *trace=NULL;uint32_t trace_count=0,coverage=0;
         CHECK(!OpenNtBaseServiceTaskTrace(service,&key,&coverage,&trace,&trace_count));
-        CHECK(firstTraceIdentity && trace_count==1 && trace && trace[0].node &&
-            trace[0].node!=firstTraceIdentity && trace[0].relation==TASK_TRACE_DIRECT);
+        CHECK(firstTraceIdentity && trace_count==2 && trace && trace[0].node &&
+            trace[0].node!=firstTraceIdentity && trace[0].relation==TASK_TRACE_DIRECT &&
+            !(trace[0].flags&TASK_TRACE_HISTORY));
+        /* Active Direct identity still changes on genuine record reuse.
+         * Read-only delivery history is separate, not another active task.
+         * This unit executes no guest callback, so old entry stays unknown. */
+        CHECK(trace[1].node==firstTraceIdentity && trace[1].relation==TASK_TRACE_DIRECT &&
+            (trace[1].flags&TASK_TRACE_HISTORY) && trace[1].state==TASK_TRACE_UNCERTAIN);
         if(trace)HeapFree(GetProcessHeap(),0,trace);
     }
     {

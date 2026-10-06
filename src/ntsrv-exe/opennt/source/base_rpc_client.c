@@ -18,6 +18,7 @@
 #include "common/rpc/native_command.h"
 #include "common/rpc/frontend_control.h"
 #include "common/rpc/worker_control.h"
+#include "common/rpc/dos_observation.h"
 #include "common/codec/native_launch.h"
 
 typedef struct OPENNT_BASE_RPC_CLIENT {
@@ -28,6 +29,7 @@ typedef struct OPENNT_BASE_RPC_CLIENT {
     HANDLE stop;
     HANDLE watcher;
     ULONG generation;
+    uint64_t observation_direct; /* Captured on actual Get delivery, not a selector. */
     DWORD (*command_ready)(void *);
     void *command_context;
 } OPENNT_BASE_RPC_CLIENT;
@@ -37,6 +39,16 @@ static common_rpc_connection client_rpc_view(void)
 {
     common_rpc_connection view={client.binding,client.connection,client.process,client.generation};
     return view;
+}
+uint64_t OpenNtBaseClientObservationDirect(void)
+{
+    /* Read only by the same original guest execution thread as GetNext. */
+    return client.observation_direct;
+}
+DWORD OpenNtBaseClientObserveDosEvent(const common_dos_observation *fact,BOOL gap,HANDLE stop)
+{
+    common_rpc_connection view=client_rpc_view();
+    return common_rpc_observe_dos_event(&view,fact,gap,stop);
 }
 void OpenNtBaseClientSetCommandBinding(DWORD (*ready)(void *),void *context)
 {
@@ -248,6 +260,7 @@ static NTSTATUS get_command(PCSR_API_MSG message,ULONG length)
     ULONG reply_bytes=0;
     DWORD error=ERROR_INVALID_DATA;
     BOOL applied=FALSE;
+    uint64_t observation_direct=0;
     if (!request) request=(uint32_t)InterlockedIncrement(&request_id);
     if (length!=sizeof(BASE_GET_NEXT_VDM_COMMAND_MSG) ||
         !OpenNtBaseEncodeGetCommand(base,request,client.generation,NULL,0,&wire_bytes) ||
@@ -267,6 +280,7 @@ static NTSTATUS get_command(PCSR_API_MSG message,ULONG length)
         file_count<=3 && (!file_count || file_handles) && reply && reply_bytes) {
         if (wait_event_count) wait_event=wait_events[0];
         applied=OpenNtBaseApplyGetCommand(reply,(uint32_t)reply_bytes,client.generation,request,base);
+        if(applied)(void)OpenNtBaseReadGetObservation(reply,reply_bytes,client.generation,request,&observation_direct);
     }
     if (applied) {
         base->u.GetNextVDMCommand.WaitObjectForVDM=wait_event;
@@ -343,6 +357,13 @@ done:
         message->ReturnValue=(ULONG)STATUS_UNSUCCESSFUL;
         return STATUS_UNSUCCESSFUL;
     }
+    if((message->ReturnValue==STATUS_SUCCESS || (message->ReturnValue==STATUS_NO_MEMORY &&
+        (base->u.GetNextVDMCommand.VDMState & RETURN_ON_NO_COMMAND))) &&
+        !base->u.GetNextVDMCommand.WaitObjectForVDM &&
+        (base->u.GetNextVDMCommand.CmdLen || (base->u.GetNextVDMCommand.VDMState & RETURN_ON_NO_COMMAND)) &&
+        !(base->u.GetNextVDMCommand.VDMState &
+            (ASKING_FOR_ENVIRONMENT|ASKING_FOR_PIF|ASKING_FOR_WOW_BINARY)))
+        client.observation_direct=observation_direct;
     if (message->ReturnValue==STATUS_SUCCESS && client.command_ready &&
         !base->u.GetNextVDMCommand.WaitObjectForVDM && base->u.GetNextVDMCommand.CmdLen &&
         !(base->u.GetNextVDMCommand.VDMState & ASKING_FOR_ENVIRONMENT)) {
@@ -485,7 +506,7 @@ static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
     RPC_STATUS status,uuid_status;
     unsigned int index;
     DWORD result=RPC_S_SERVER_UNAVAILABLE;
-    status=RpcIfInqId(Client_vdm_service_v43_0_c_ifspec,&expected);
+    status=RpcIfInqId(Client_vdm_service_v44_0_c_ifspec,&expected);
     if (status) return status;
     status=RpcMgmtInqIfIds(binding,&interfaces);
     if (status) return status;

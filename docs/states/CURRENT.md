@@ -58,19 +58,21 @@ UI fidelity are not claimed; admit S4 from the indexed plan.
 
 ## Current Technical Baseline
 
-[S3 evidence](../etc/evidence/m0-t434-s3-native-observation.md) records delivered
-production1e0f66177, r042 APP434/RPC43/I/O25 and r055 publication at
-O:/winnt/system32 with S2 recovery. Full14, mixed22/typeahead6, twelve final
-both-width observation cases and actual deployed DOS/native smoke/hashes pass.
-Authenticated native process facts are observation-only; Direct records,
-STACK, receipts and lifecycle remain authoritative and unchanged. Source
-coverage is explicitly incomplete, not a claim of universal descendants.
+[S4 evidence](../etc/evidence/m0-t434-s4-dos-observation.md) records r007
+APP434/RPC44/I/O25 and r034 publication at O:/winnt/system32, with S3 recovery.
+Original VDD callbacks now feed a bounded copied outbox and authenticated
+read-only NTSRV sidecar. Real normal/PSP reuse/COMMAND/DOSONLY0/1, TSR
+uncertainty, failed/load-only/overlay and native-return facts pass. Neither
+observation nor its history changes Direct STACK/results or lifecycle.
+Full14 passes436898ms; mixed22/typeahead6, final native12 and denied/slow
+both-width faults pass. Actual deployed DOS/native32/native64 exit0/output and
+ten hashes match. Source review and governance pass; commit/push remain.
 
-[S1 design](../etc/operations/t434-read-only-task-trace-design.md) assigns DOS
-callback collection to S4 and complete read-only modal hierarchy/fidelity to
-S5. Initial DOS entry suppression and TSR terminal evidence remain S4 proof
-obligations. Known DOS EXEC may remain internal even with DOSONLY0; do not
-invent Direct records. Original guest media remains immutable.
+[S1 design](../etc/operations/t434-read-only-task-trace-design.md) retains
+full read-only modal hierarchy/state/time/revision fidelity and integrated
+closure as S5. Source gaps/unknowns remain explicit; no universal tracing,
+physical/RDP certification or automatic TSR retirement claim. Original guest
+media and mvdm/opennt-host mirror files are unchanged. T434 remains open.
 
 | Architecture | Images |
 | --- | --- |

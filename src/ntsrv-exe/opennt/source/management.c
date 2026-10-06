@@ -567,6 +567,29 @@ done:
 
 /* Projection of existing Direct records only. The bounded allocation is not
  * an execution registry; observation coverage is explicitly absent in S2. */
+uint64_t service_dos_delivery_trace(OPENNT_BASE_CONNECTION *connection)
+{
+    OPENNT_BASE_WORKER_WATCH *watch;
+    PCONSOLERECORD console;PDOSRECORD selected=NULL;
+    OPENNT_BASE_MANAGEMENT_LABEL *label;uint64_t result=0;
+    /* Called under the service lock at successful original Get delivery.
+     * Capture only its existing BUSY record, never a later sampled task. */
+    if(connection->wow || !connection->process.fVDM)return 0;
+    watch=service_find_worker_watch(connection->service,connection->process.SequenceNumber);
+    if(!watch)return 0;
+    RtlEnterCriticalSection(&BaseSrvDOSCriticalSection);
+    for(console=DOSHead;console;console=console->Next) {
+        if(console->SequenceNumber!=watch->process.SequenceNumber)continue;
+        for(PDOSRECORD record=console->DOSRecord;record;record=record->DOSRecordNext)
+            if(record->VDMState==VDM_BUSY)selected=record;
+        break;
+    }
+    label=selected ? service_find_management_label(watch,selected,selected->hWaitForParent) : NULL;
+    if(label && label->identity && !service_observation_dos_bind(connection->service,
+        watch->process.SequenceNumber,label->identity,label->task,label->image))result=label->identity;
+    RtlLeaveCriticalSection(&BaseSrvDOSCriticalSection);return result;
+}
+
 static void service_trace_append(common_task_trace_node *rows,uint32_t *count,
     uint32_t *coverage,uint64_t identity,uint64_t parent,DWORD kind,DWORD pid,
     DWORD task,PCWSTR image)
@@ -651,7 +674,7 @@ DWORD OpenNtBaseServiceTaskTrace(OPENNT_BASE_SERVICE *service,
         }
         RtlLeaveCriticalSection(&BaseSrvDOSCriticalSection);
     }
-    if(watch->kind==OPENNT_BASE_WORKER_NATIVE)
+    if(!watch->wow)
         service_observation_copy(service,key->generation,rows,&actual,&flags);
     if(actual){*entries=rows;rows=NULL;}
     *count=actual;*coverage=flags;error=ERROR_SUCCESS;

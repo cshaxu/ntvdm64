@@ -13,6 +13,7 @@
 #include "common/rpc/management.h"
 #include "common/protocol/management.h"
 #include <rpcasync.h>
+#include "common/rpc/async_call.h"
 
 #define CHECK(value) do { if (!(value)) { fprintf(stderr,"FAIL %d: %lu\n",__LINE__,(unsigned long)GetLastError()); return 1; } } while (0)
 
@@ -46,6 +47,26 @@ static DWORD observation_call(RPC_BINDING_HANDLE binding,HANDLE reporter,ULONG p
             if(!error)error=reply;
         }
     }
+    CloseHandle(completed);return error;
+}
+
+static DWORD dos_observation_call(RPC_BINDING_HANDLE binding,VDM_CONNECTION connection,
+    HANDLE process,DWORD generation,DWORD protocol)
+{
+    RPC_ASYNC_STATE async={0};DOS_OBSERVATION_FACT fact={0};
+    HANDLE completed;DWORD error,reply=ERROR_INVALID_STATE;BOOL issued=FALSE;
+    fact.event=1;fact.occurrence=1;fact.direct=1;fact.psp=0x100;
+    error=RpcAsyncInitializeHandle(&async,sizeof(async));if(error)return error;
+    completed=CreateEventW(NULL,TRUE,FALSE,NULL);if(!completed)return GetLastError();
+    async.NotificationType=RpcNotificationTypeEvent;async.u.hEvent=completed;
+    RpcTryExcept {
+        Client_ObserveDosEventAsync(&async,binding,connection,process,generation,protocol,
+            (unsigned char *)version,&fact,0);
+        issued=TRUE;error=ERROR_SUCCESS;
+    }
+    RpcExcept(1){error=RpcExceptionCode();}
+    RpcEndExcept
+    if(issued){error=common_rpc_finish_async(&async,completed,NULL,1000,&reply);if(!error)error=reply;}
     CloseHandle(completed);return error;
 }
 
@@ -289,10 +310,10 @@ int main(int argc,char **argv)
             wprintf(L"{\"coverage\":%lu,\"nodes\":[",coverage);
             for(index=0;index<actual;++index) {
                 if(index)putwchar(L',');
-                wprintf(L"{\"node\":%llu,\"parent\":%llu,\"relation\":%lu,\"source\":%lu,\"kind\":%lu,\"pid\":%lu,\"task\":%lu,\"state\":%lu,\"flags\":%lu,\"exit\":%lu,\"image\":",
+                wprintf(L"{\"node\":%llu,\"parent\":%llu,\"relation\":%lu,\"source\":%lu,\"kind\":%lu,\"pid\":%lu,\"task\":%lu,\"state\":%lu,\"flags\":%lu,\"exit\":%lu,\"psp\":%lu,\"image\":",
                     nodes[index].node,nodes[index].parent,nodes[index].relation,nodes[index].source,
                     nodes[index].kind,nodes[index].process_id,nodes[index].task,
-                    nodes[index].state,nodes[index].flags,nodes[index].reserved);
+                    nodes[index].state,nodes[index].flags,nodes[index].reserved,nodes[index].dos_psp);
                 json_string(nodes[index].image);putwchar(L'}');
             }
             wprintf(L"]}\n");if(nodes)MIDL_user_free(nodes);
@@ -406,6 +427,18 @@ int main(int argc,char **argv)
         RpcExcept(1) {error=RpcExceptionCode();}
         RpcEndExcept
         CHECK(error==ERROR_REVISION_MISMATCH && !identity);
+        {
+            VDM_CONNECTION connected=NULL;ULONG generation=0,protocol=0;
+            unsigned char application[32]={0};
+            CHECK(!Client_Connect(binding,self,APP_PROTOCOL_VERSION,(unsigned char *)version,
+                &protocol,application,&connected,&generation) && connected && generation);
+            CHECK(dos_observation_call(binding,connected,self,generation,APP_PROTOCOL_VERSION)==ERROR_ACCESS_DENIED);
+            CHECK(dos_observation_call(binding,connected,self,generation+1,APP_PROTOCOL_VERSION)==ERROR_ACCESS_DENIED);
+            CHECK(dos_observation_call(binding,connected,created.hProcess,generation,APP_PROTOCOL_VERSION)==RPC_S_ACCESS_DENIED);
+            CHECK(dos_observation_call(binding,connected,self,generation,APP_PROTOCOL_VERSION-1)==ERROR_REVISION_MISMATCH);
+            CHECK(!Client_Disconnect(binding,self,generation,&connected) && !connected);
+            puts("PASS real DOS observation rejects non-worker, wrong generation, false process attachment and old protocol");
+        }
         CHECK(WaitForSingleObject(created.hProcess,0)==WAIT_TIMEOUT);
         CHECK(TerminateProcess(created.hProcess,0) && WaitForSingleObject(created.hProcess,5000)==WAIT_OBJECT_0);
         CloseHandle(created.hThread);CloseHandle(created.hProcess);

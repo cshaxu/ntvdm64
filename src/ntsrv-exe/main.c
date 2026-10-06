@@ -299,6 +299,23 @@ error_status_t Server_ObserveNativeCreationAsync(PRPC_ASYNC_STATE async,handle_t
     (void)RpcAsyncCompleteCall(async,&result);
     return ERROR_SUCCESS; /* Actual reply is supplied through async completion. */
 }
+error_status_t Server_ObserveDosEventAsync(PRPC_ASYNC_STATE async,handle_t binding,
+    VDM_CONNECTION connection,HANDLE process,ULONG generation,ULONG protocol,
+    unsigned char application_version[32],DOS_OBSERVATION_FACT *fact,ULONG gap)
+{
+    DWORD pid,result;common_dos_observation copied;
+    typedef char fact_abi[sizeof(copied)==sizeof(*fact)?1:-1];
+    result=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if(!result)result=basesrv_management_version(protocol,application_version);
+    if(!result && (!fact || gap>1))result=ERROR_INVALID_PARAMETER;
+    if(!result) {
+        memcpy(&copied,fact,sizeof(copied));
+        result=OpenNtBaseServiceObserveDosEvent(connection,pid,generation,&copied,gap!=0);
+    }
+    (void)RpcAsyncCompleteCall(async,&result);
+    return ERROR_SUCCESS;
+}
+
 error_status_t Server_CloseManagementNode(handle_t binding,HANDLE process,ULONG protocol,
     unsigned char application_version[32],DTASKMGR_KEY *key)
 {
@@ -948,7 +965,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v43_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v44_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -995,7 +1012,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v43_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v44_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);

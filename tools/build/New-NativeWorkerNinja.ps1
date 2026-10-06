@@ -174,6 +174,7 @@ function Add-Edge([string]$target) {
  }
 }
 $targets=if($Component -eq 'Service'){@('ntsrv.exe','basesrv-service-reservation-test.exe','basesrv-idle-policy-test.exe','basesrv-reservation-test.exe','native-service-layout-test.exe','native-observation-fixture.exe')}elseif($Component -eq 'Worker'){@('ntvwm.exe','ntvwm-execution-lifetime-test.exe','common-worker-control-test.exe')}elseif($Component -eq 'Monitor'){@('ntmon.exe','monitor-rpc-test.exe','monitor-layout-test.exe','monitor-session-test.exe','common-management-test.exe')}elseif($Component -eq 'Launcher'){@('run16.exe','run16-image-classification-test.exe','application-search-test.exe','native-capture-test.exe','frontend-scope-lifetime-test.exe','rtl-x86-fixture.exe')}else{@('ntcon.exe','frontend-session-arguments-test.exe','frontend-window-library-test.exe','frontend-window-controller-test.exe','frontend-window-keyboard-test.exe','frontend-window-mouse-test.exe','console-frontend-test.exe','console-video-test.exe','frontend-text-handoff-test.exe','console-channel-lifetime-test.exe','console-frame-failure-test.exe','console-pointer-contract-test.exe')}
+if($Component -eq 'Service'){$targets+=@('dos-observation-fixture.exe')}
 foreach($target in $targets){Add-Edge $target}
 $graph.Add('default '+$targets[0])
 $utf8=[Text.UTF8Encoding]::new($false)

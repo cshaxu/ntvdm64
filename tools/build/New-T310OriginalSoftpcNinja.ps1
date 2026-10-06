@@ -292,6 +292,7 @@ $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_shadow_registry.c', 'mvd
                          'mvdm_softpc_fast_bop.c',
                          'mvdm_softpc_wow_page_domain.c',
                          'mvdm_standalone_worker.c',
+                         'ntvdm_dos_observer.c',
                         'mvdm_softpc_event_thread.c',
                         'mvdm_softpc_presentation_font.c',
                         'mvdm_softpc_text_video.c',
@@ -1277,6 +1278,9 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/tests/native_observation_fixture.obj: cc ' + (NinjaPath (Join-Path $root 'tests/adapter-basesrv/native_observation_fixture.c')))
     $graph.Add('  cflags = ' + $baseServerFlags)
     $graph.Add('build native-observation-fixture.exe: basesrv_service_test_link obj/tests/native_observation_fixture.obj obj/tests/base_service_fixture.obj obj/run16/support.obj opennt-base-server.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
+    $graph.Add('build obj/tests/dos_observation_fixture.obj: cc ' + (NinjaPath (Join-Path $root 'tests/adapter-basesrv/dos_observation_fixture.c')))
+    $graph.Add('  cflags = ' + $baseServerFlags)
+    $graph.Add('build dos-observation-fixture.exe: basesrv_service_test_link obj/tests/dos_observation_fixture.obj obj/tests/base_service_fixture.obj obj/run16/support.obj opennt-base-server.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
     $graph.Add('build obj/tests/basesrv_idle_policy.obj: cc ' + (NinjaPath (Join-Path $root 'tests/adapter-basesrv/idle_policy_test.c')))
     $graph.Add('  cflags = /nologo /c /MT /W4 /WX /showIncludes /I"' + (Join-Path $root 'src') + '"')
     $graph.Add('build basesrv-idle-policy-test.exe: basesrv_service_test_link obj/tests/basesrv_idle_policy.obj')
@@ -1362,7 +1366,11 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/worker-base/publication.obj: cc ' + (NinjaPath (Join-Path $root 'src/worker-base/publication.c')))
     $graph.Add('build obj/worker-base/input_watch.obj: cc ' + (NinjaPath (Join-Path $root 'src/worker-base/input_watch.c')))
-    $graph.Add('build worker-base.lib: lib obj/worker-base/connection.obj obj/worker-base/shutdown_close.obj obj/worker-base/publication.obj obj/worker-base/input_watch.obj')
+    $graph.Add('build obj/worker-base/task_observation.obj: cc ' + (NinjaPath (Join-Path $root 'src/worker-base/task_observation.c')))
+    $graph.Add('build worker-base.lib: lib obj/worker-base/connection.obj obj/worker-base/shutdown_close.obj obj/worker-base/publication.obj obj/worker-base/input_watch.obj obj/worker-base/task_observation.obj')
+    $graph.Add('build obj/tests/worker_task_observation.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/worker_task_observation_test.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build worker-task-observation-test.exe: broker_test_link obj/tests/worker_task_observation.obj worker-base.lib')
     $graph.Add('build obj/tests/worker_input_watch.obj: cc ' + (NinjaPath (Join-Path $root 'tests/component-integration/worker_input_watch_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build worker-input-watch-test.exe: broker_test_link obj/tests/worker_input_watch.obj worker-base.lib')
@@ -1391,7 +1399,9 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/common/management.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/rpc/management.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build common-rpc.lib: lib obj/common/local_binding.obj obj/common/native_command.obj obj/common/frontend_control.obj obj/common/worker_control.obj obj/common/management.obj')
+    $graph.Add('build obj/common/dos_observation.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/rpc/dos_observation.c')) + ' | obj/basesrv/service.h')
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build common-rpc.lib: lib obj/common/local_binding.obj obj/common/native_command.obj obj/common/frontend_control.obj obj/common/worker_control.obj obj/common/management.obj obj/common/dos_observation.obj')
     $graph.Add('build obj/tests/common_management.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/common_management_test.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build common-management-test.exe: base_rpc_test_link obj/tests/common_management.obj common-rpc.lib')
@@ -1997,7 +2007,7 @@ if ($objectOutputDirectories.Count -gt 0) {
         target = 'worker-base.lib'
         selected = ($Architecture -eq 'x86')
         disposition = 'project-owned worker connection initialization and disconnect; NTVDM and NTVWM only; common provides protocol clients'
-        sources = @('connection.c', 'connection.h', 'shutdown_close.c', 'publication.c', 'publication.h', 'input_watch.c', 'input_watch.h' | ForEach-Object {
+        sources = @('connection.c', 'connection.h', 'shutdown_close.c', 'publication.c', 'publication.h', 'input_watch.c', 'input_watch.h', 'task_observation.c', 'task_observation.h' | ForEach-Object {
             $path = 'src/worker-base/' + $_
             [ordered]@{ path = $path; sha256 = Get-NodeSha256 (Join-Path $root $path) }
         })
@@ -2038,7 +2048,7 @@ if ($objectOutputDirectories.Count -gt 0) {
         target = 'common-rpc.lib'
         selected = ($Architecture -eq 'x86')
         disposition = 'ncalrpc binding/rollback, native-command/frontend-control/worker-control clients; no endpoint selection or service policy'
-        sources = @('src/common/rpc/local_binding.c', 'src/common/rpc/local_binding.h', 'src/common/rpc/connection.h', 'src/common/rpc/native_command.c', 'src/common/rpc/native_command.h', 'src/common/rpc/frontend_control.c', 'src/common/rpc/frontend_control.h', 'src/common/rpc/worker_control.c', 'src/common/rpc/worker_control.h', 'src/common/rpc/management.c', 'src/common/rpc/management.h' | ForEach-Object {
+        sources = @('src/common/rpc/local_binding.c', 'src/common/rpc/local_binding.h', 'src/common/rpc/connection.h', 'src/common/rpc/native_command.c', 'src/common/rpc/native_command.h', 'src/common/rpc/frontend_control.c', 'src/common/rpc/frontend_control.h', 'src/common/rpc/worker_control.c', 'src/common/rpc/worker_control.h', 'src/common/rpc/management.c', 'src/common/rpc/management.h', 'src/common/rpc/async_call.h', 'src/common/rpc/dos_observation.c', 'src/common/rpc/dos_observation.h', 'src/common/protocol/dos_observation.h' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
     }

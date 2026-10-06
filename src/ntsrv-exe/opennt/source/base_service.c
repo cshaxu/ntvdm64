@@ -778,6 +778,13 @@ EnterCriticalSection(&connection->service->lock);
     OpenNtBaseBindProcessRegistry(previous_registry);
     OpenNtBaseBindServerRequestThread(previous_thread);
     if (status && !message.ReturnValue) message.ReturnValue=status;
+    if((message.ReturnValue==STATUS_SUCCESS || (message.ReturnValue==STATUS_NO_MEMORY &&
+        (message.u.GetNextVDMCommand.VDMState & RETURN_ON_NO_COMMAND))) &&
+        !message.u.GetNextVDMCommand.WaitObjectForVDM &&
+        (message.u.GetNextVDMCommand.CmdLen || (message.u.GetNextVDMCommand.VDMState & RETURN_ON_NO_COMMAND)) &&
+        !(message.u.GetNextVDMCommand.VDMState &
+            (ASKING_FOR_ENVIRONMENT|ASKING_FOR_PIF|ASKING_FOR_WOW_BINARY)))
+        state.observation.direct=service_dos_delivery_trace(connection);
 if (!OpenNtBaseFinishGetCommand(&message,&state)) { error=ERROR_INVALID_DATA; goto done; }
     if (message.u.GetNextVDMCommand.StdIn || message.u.GetNextVDMCommand.StdOut ||
         message.u.GetNextVDMCommand.StdErr) {

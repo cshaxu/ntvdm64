@@ -11,9 +11,9 @@ static common_rpc_management expected;
 static const unsigned char version[APP_VERSION_BYTES]=APP_VERSION;
 static DTASKMGR_KEY selected={17,2,123,0};
 C_ASSERT(sizeof(common_task_trace_node)==sizeof(WORKER_TRACE_NODE));
-C_ASSERT(sizeof(common_task_trace_node)==568);
-C_ASSERT(offsetof(common_task_trace_node,image)==48);
-C_ASSERT(offsetof(WORKER_TRACE_NODE,image)==48);
+C_ASSERT(sizeof(common_task_trace_node)==576);
+C_ASSERT(offsetof(common_task_trace_node,image)==56);
+C_ASSERT(offsetof(WORKER_TRACE_NODE,image)==56);
 #define CHECK(x) do { ++checks; if (!(x)) { ++failures;printf("FAIL %u %s\n",__LINE__,#x); } } while(0)
 void *__RPC_USER MIDL_user_allocate(size_t size) {void *p=malloc(size);if(p)++allocations;return p;}
 void __RPC_USER MIDL_user_free(void *p) {if(p){--allocations;free(p);}}

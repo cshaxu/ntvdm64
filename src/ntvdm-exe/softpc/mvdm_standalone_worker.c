@@ -6,6 +6,7 @@
 #include "mvdm_softpc_execution.h"
 #include "mvdm_softpc_guest_memory.h"
 #include "mvdm_softpc_termination.h"
+#include "ntvdm_dos_observer.h"
 #include "ntvdm-exe/session/session.h"
 #include "ntvdm-exe/monitor/include/monitor_context.h"
 #include "ntvdm-exe/wow/include/wow_user_session_binding.h"
@@ -18,6 +19,8 @@
 PVOID CsrPortHeap;
 
 static session worker_session;
+static ntvdm_dos_observer worker_observer;
+static BOOL worker_character_io;
 static BOOL worker_heap;
 static BOOL worker_thread;
 static BOOL worker_memory;
@@ -37,6 +40,8 @@ static BOOL worker_shadow_registry;
 static int mvdm_standalone_worker_cleanup(int result)
 {
     uint32_t dispose_reason;
+
+    ntvdm_dos_observer_stop(&worker_observer);
 
     if (worker_escape) {
         session_disarm_termination_escape(&worker_session);
@@ -110,6 +115,7 @@ DWORD mvdm_standalone_worker_begin(void)
             }
         }
         error=worker_base_start_character_io(character_io,begin_character_io,&worker_session,NULL);
+        worker_character_io=character_io;
         if(error)goto fail;
     }
     if (!wow_user_session_attach(&worker_wow_binding, &worker_session,
@@ -124,6 +130,7 @@ DWORD mvdm_standalone_worker_begin(void)
         error=ERROR_NOT_ENOUGH_MEMORY; goto fail;
     }
     worker_memory=TRUE;
+    if(worker_character_io)(void)ntvdm_dos_observer_start(&worker_observer,&worker_session);
     if (!session_arm_termination_escape(&worker_session)) {
         error=ERROR_INVALID_STATE; goto fail;
     }

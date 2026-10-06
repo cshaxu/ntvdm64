@@ -57,8 +57,9 @@ typedef struct get_prefix {
     broker_vdm_message_header header;
     broker_vdm_get_values values;
     broker_vdm_startup startup;
+    common_dos_delivery observation;
 } get_prefix;
-typedef char get_prefix_size[sizeof(get_prefix)==104?1:-1];
+typedef char get_prefix_size[sizeof(get_prefix)==112?1:-1];
 typedef struct update_request {
     broker_vdm_message_header header;
     broker_vdm_update_values values;
@@ -237,7 +238,7 @@ DWORD OpenNtBasePrepareGetCommand(const void *input,uint32_t bytes,uint32_t gene
         header.operation!=BROKER_VDM_GET_NEXT) return ERROR_INVALID_PARAMETER;
     memcpy(&prefix,input,sizeof(prefix));
     decoded=*message;
-    if (prefix.startup.present!=1 || prefix.startup.x || prefix.startup.y || prefix.startup.x_size ||
+    if (prefix.observation.direct || prefix.startup.present!=1 || prefix.startup.x || prefix.startup.y || prefix.startup.x_size ||
         prefix.startup.y_size || prefix.startup.x_chars || prefix.startup.y_chars || prefix.startup.fill ||
         prefix.startup.flags || prefix.startup.show || prefix.values.code_page || prefix.values.creation_flags ||
         prefix.values.drive || prefix.values.from_bat ||
@@ -270,6 +271,7 @@ BOOL OpenNtBaseFinishGetCommand(const BASE_API_MSG *message,OPENNT_BASE_GET_COMM
     prefix.header.reply=1; prefix.header.status=message->ReturnValue;
     prefix.header.bytes=state->reply_bytes;
     prefix.header.payload_bytes=state->reply_bytes-sizeof(prefix.header);
+    prefix.observation=state->observation;
     memcpy(state->reply,&prefix,sizeof(prefix));
     memcpy((unsigned char *)state->reply+sizeof(prefix),state->payload.bytes,state->payload.size);
     return TRUE;
@@ -296,6 +298,17 @@ BOOL OpenNtBaseApplyGetCommand(const void *input,uint32_t bytes,uint32_t generat
     decoded.ReturnValue=header.status;
     *message=decoded;
     return TRUE;
+}
+
+BOOL OpenNtBaseReadGetObservation(const void *input,uint32_t bytes,uint32_t generation,
+    uint32_t request,uint64_t *direct)
+{
+    get_prefix prefix;broker_vdm_message_header header;
+    if(!direct)return FALSE;
+    *direct=0;
+    if(bytes<sizeof(prefix) || !broker_vdm_message_read(input,bytes,generation,1,&header) ||
+        header.operation!=BROKER_VDM_GET_NEXT || header.request_id!=request)return FALSE;
+    memcpy(&prefix,input,sizeof(prefix));*direct=prefix.observation.direct;return TRUE;
 }
 
 void OpenNtBaseReleaseGetCommand(OPENNT_BASE_GET_COMMAND *state)

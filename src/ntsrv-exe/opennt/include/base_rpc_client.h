@@ -5,6 +5,9 @@
 #define OPENNT_BASE_RPC_CLIENT_H
 #include <windows.h>
 #include <stdint.h>
+#include "common/protocol/dos_observation.h"
+uint64_t OpenNtBaseClientObservationDirect(void);
+DWORD OpenNtBaseClientObserveDosEvent(const common_dos_observation *,BOOL,HANDLE);
 DWORD OpenNtBaseClientWorkerIoTransition(DWORD);
 DWORD OpenNtBaseClientWorkerIoCheckpoint(DWORD,DWORD,DWORD *);
 DWORD OpenNtBaseClientFrontendIoDisconnected(void);

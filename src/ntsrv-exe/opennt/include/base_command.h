@@ -1,6 +1,7 @@
 #ifndef OPENNT_BASE_COMMAND_H
 #define OPENNT_BASE_COMMAND_H
 #include "ntsrv-exe/transport/vdm_message.h"
+#include "common/protocol/dos_observation.h"
 /* Decoded CheckVDM ConsoleHandle carries only one of these service-local
  * semantic sentinels.  A native Console handle is never serialized. */
 #define OPENNT_BASE_CONSOLE_NEW ((HANDLE)0)
@@ -44,6 +45,7 @@ typedef struct OPENNT_BASE_GET_COMMAND {
     broker_vdm_message_header request;
     void *reply;
     uint32_t reply_bytes;
+    common_dos_delivery observation;
 } OPENNT_BASE_GET_COMMAND;
 BOOL OpenNtBaseEncodeGetCommand(const BASE_API_MSG *,uint32_t request,uint32_t generation,
     void *,uint32_t capacity,uint32_t *required);
@@ -52,6 +54,9 @@ DWORD OpenNtBasePrepareGetCommand(const void *,uint32_t bytes,uint32_t generatio
 BOOL OpenNtBaseFinishGetCommand(const BASE_API_MSG *,OPENNT_BASE_GET_COMMAND *);
 BOOL OpenNtBaseApplyGetCommand(const void *,uint32_t bytes,uint32_t generation,
     uint32_t request,PBASE_API_MSG);
+/* Read-only project metadata after the original copied reply is validated.
+ * No original BASE message field or task wait is repurposed. */
+BOOL OpenNtBaseReadGetObservation(const void *,uint32_t,uint32_t,uint32_t,uint64_t *);
 /* Restore/discard borrowed native pointers before release; repeat-safe. */
 void OpenNtBaseReleaseGetCommand(OPENNT_BASE_GET_COMMAND *);
 #endif

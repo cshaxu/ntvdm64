@@ -289,4 +289,6 @@ uint64_t service_observation_direct_id(OPENNT_BASE_SERVICE *,DWORD,DWORD);
 void service_observation_copy(OPENNT_BASE_SERVICE *,DWORD,common_task_trace_node *,
     uint32_t *,uint32_t *);
 void service_observation_stop(OPENNT_BASE_SERVICE *);
+uint64_t service_dos_delivery_trace(OPENNT_BASE_CONNECTION *);
+DWORD service_observation_dos_bind(OPENNT_BASE_SERVICE *,DWORD,uint64_t,DWORD,PCWSTR);
 #endif

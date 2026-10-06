@@ -1,7 +1,7 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(43.0),
+    version(44.0),
     pointer_default(unique)
 ]
 interface vdm_service
@@ -307,8 +307,14 @@ interface vdm_service
         hyper parent;
         unsigned long relation,source,kind,state;
         unsigned long process_id,task,flags,reserved;
+        unsigned long dos_psp,reserved2;
         wchar_t image[260];
     } WORKER_TRACE_NODE;
+    typedef struct _DOS_OBSERVATION_FACT {
+        hyper occurrence,parent,direct;
+        unsigned long event,psp,parent_psp,flags;
+        wchar_t image[260];
+    } DOS_OBSERVATION_FACT;
     /* Authenticated lifetime capability, not a PID or restart authority. */
     error_status_t BrokerProcess(
         [in] handle_t binding,
@@ -511,6 +517,16 @@ interface vdm_service
         [in, system_handle(sh_process)] HANDLE child,
         [in] unsigned long creation_flags,
         [out] hyper *node);
+    /* Worker-scoped copied facts only; never guest dispatch/completion. */
+    error_status_t ObserveDosEventAsync(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] unsigned long protocol,
+        [in] byte application_version[32],
+        [in] DOS_OBSERVATION_FACT *fact,
+        [in] unsigned long gap);
     error_status_t RegisterWowExec(
         [in] handle_t binding,
         [in] VDM_CONNECTION connection,
