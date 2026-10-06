@@ -251,7 +251,8 @@ reports are O:/winnt/logs2/t434-s4-r035-{dos,native32,native64}.txt: expected
 output, exit0 and all10 installed hashes pass. Owned test processes are
 identity-checked/ended and Z is removed. Review confirms no original mirror
 or execution/receipt/lifecycle ownership change; only copied observation facts,
-metadata, transport and projection are added. Source delivery commit/push is
-the remaining bounded S4 step; full NTMON hierarchy/time/revision fidelity is
-S5, not yet a full T goal completion. Other-session queue/proposal edits remain
+metadata, transport and projection are added. Production73690a209 is now
+committed/pushed; bounded S4 closes and CURRENT admits S5. Full NTMON
+hierarchy/time/revision fidelity is S5, not yet a full T goal completion.
+Other-session queue/proposal edits remain
 outside this reviewed delivery.
