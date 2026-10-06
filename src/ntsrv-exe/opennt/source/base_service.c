@@ -247,7 +247,7 @@ void service_abandon_launch(OPENNT_BASE_CONNECTION *connection)
 }
     if (connection->reservation && !claimed) {
         OpenNtBaseReservationRelease(connection->service->reservations,connection->reservation,
-            (DWORD)connection->process.ClientId.UniqueProcess,connection->process.SequenceNumber);
+            (DWORD)(ULONG_PTR)connection->process.ClientId.UniqueProcess,connection->process.SequenceNumber);
         connection->reservation=0;
     }
     connection->pending_creation=FALSE;

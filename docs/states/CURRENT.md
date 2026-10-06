@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T433 S6** (Ordinary Mode; NTSRV native migration, source/ABI audit phase).
+**Active: M0 T433 S6** (Ordinary Mode; owner-approved NTSRV AMD64 implementation).
 
 The owner authorizes closing the delivered single-worker/dual-Hook package
 without manual acceptance and admitting the next Queue candidate. This is
@@ -14,20 +14,20 @@ the delivered baseline, superseded research and known limitations.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T433 S6; Ordinary Mode; audit/design first. |
+| Identifier Mode | M0 T433 S6; Ordinary Mode; audited implementation approved. |
 | Candidate Proposal | [Native component migration](../proposals/proposal-project-components-native-x64-001.md). |
-| Admission And Approval | Owner says “准入执行s6 审计镜像diff需求”. Admit S6 and first audit the actual NTSRV closure and required incremental mirror changes. Do not edit production bodies before presenting the bounded source findings. |
-| Objective | Establish the exact AMD64 NTSRV dependency/local-ABI port, distinguishing unchanged original reuse, existing shim/declaration/build binding and necessary minimal original expressions; compare its incremental mirror budget against delivered S5. |
-| Non-goals | No NTVDM/WOW32/VDMREDIR migration, original DOS/WOW scheduling/completion rewrite, second service/helper/registry, CSR shell, wire widening, runtime/deployment change during audit or automatic S7 admission. |
+| Admission And Approval | Source/ABI audit is delivered; owner says “没有太大问题的话 就帮我把ntsrv做成x64 完成后 编译测试提交推送吧”. Implement the audited seven original numeric/tag expressions and fifteen project casts, scoped NULL binding and finite native service build/import; compile, test, publish and commit/push. |
+| Objective | Deliver one AMD64 NTSRV with the audited minimal local-ABI changes, unchanged original algorithms and copied protocols; prove x86/x64 fixtures and real mixed-width lifecycle, then publish the coherent ten-image package. |
+| Non-goals | No NTVDM/WOW32/VDMREDIR migration, original DOS/WOW scheduling/completion rewrite, second service/helper/registry, CSR shell, wire widening or automatic S7 admission. |
 | Reference Baseline | S5 production39fe1f8a93c855a59298877ec10a93d8dd8bb92d, closurea009cdea975e25e9719af54899909db4317978f2; sealed build/M0-T433/S5/r007-final-runtime, final Full r026 and publication r020/smoke r021. APP0.0.433/RPC41/I/O25, five AMD64/five I386 images; NTSRV remains I386. |
-| Files And ABI Surface | Actual ntsrv.exe map/source graph, selected original srvvdm/srvinit/RTL and original declaration subsets; ntsrv-exe service/private state/resource bindings, common RPC/transport/codec and native MIDL. Fixed task/receipt IDs versus true pointers/HANDLEs must remain separate. |
+| Files And ABI Surface | Actual ntsrv.exe map/source graph selects original srvvdm/RTL error plus unchanged finite config/exports fragments, not srvinit or MVDM; ntsrv-exe service/private state/resource bindings, common RPC/transport/codec and native MIDL. Fixed task/receipt IDs versus true pointers/HANDLEs remain separate. |
 | Applicable Rules | AGENTS authorities, source-first mirror minimality/provenance, one active S, owner resource/lock/lifetime boundaries, per-consumer MT/native ABI and unchanged x86 CCPU40/guest semantics. Preserve other-session modifications. |
-| Verification | build/M0-T433/S6/r001-audit onward. Pin current source/artifact/graph/map; enumerate actually selected members including any x86 assembly; strict audit-only native compilation and declaration/layout/ID checks; inspect changed sites against upstream/S5 budget. No product test/process needed for admission. Later implementation retains full service/RPC/lifecycle/Console17/Window17/WOW/publication gates. |
-| Expected Markers | Source-position ledger with original versus project provenance, local versus copied numeric meaning, precise proposed edits/rejected alternatives and counted diff. Prefer zero algorithm changes, same x86 semantics and no bitness-only protocol bump. Audit compile is not native service runtime acceptance. |
+| Verification | build/M0-T433/S6/r001-r005 retain the admission audit. r009 native producer, r010 formal import and r011 sealed final runtime; both-width layout and service29 fixtures, real Full14 Console17/Window17/WOW/version/lifecycle gates, native-input negatives and actual publication/smoke. Inspect final map and seven-expression mirror budget against upstream/S5. |
+| Expected Markers | Six AMD64/four I386 images; seven-expression original diff, zero algorithm changes, same x86 semantics and fixed APP433/RPC41/I/O25. Actual native service with real mixed-width clients, receipts/resources, reentry and cleanup, not just an audit link. |
 | Asset Needs | S5 coherent package/recovery, formal x86 cache build/M0-T427/S2/r001, existing native client/MIDL/support islands, MSVC14.43/SDK22621/MT, pinned original OpenNT sources read-only. |
 | Reporting Requirements | Report confirmed compile/ABI requirements separately from suspected risk and future runtime proof. Compare original body/header/declaration carrier files, non-comment code/declaration lines and expression/type changes with S5; do not hide original movement in an adapter. |
 | Stop Conditions | Unknown provenance, larger mirror budget or original algorithm change, new helper/authority/transport, native pointer truncation, widened copied IDs or fabricated completion, changed resource/lock/cleanup ordering, unexplained regression. Present smallest alternative for owner review. |
-| Exit Criteria | Current phase delivers indexed audit, native compile attempts and exact minimal-diff proposal for review without production edits/publication. S6 stays active for reviewed implementation; final closure still requires native service build, mixed-width real processes/negative/cleanup gates, coherent ten-image publication and reviewed commit/push. |
+| Exit Criteria | Native service build, both-width fixtures, mixed-width real processes/negative/cleanup gates, coherent ten-image publication and deployed checks; reviewed commit/push with clean worktree. T433 remains open; do not auto-admit S7. |
 | Original Owner Request | “准入执行s6 审计镜像diff需求”. |
 | Similar-Issue Sweep | HANDLE-shaped hParent/task-ID tags, CLIENT_ID PID/TID casts, native allocation/address subtraction, fixed LP32 msg/DTO fields, local CSR thread/callback layouts, LUID/SID/heap APIs, source-selected RTL assembly, registration/reentry/exit/result and dead-worker cleanup; same ownership on x86/x64. |
 
@@ -41,8 +41,17 @@ conversions compile/link AMD64. Scoped integer-zero NULL binding avoids eleven
 unnecessary original literal edits without suppressing nonzero narrowing.
 Both-width layout/receipt-tag probes pass; copied values stay36/16/32 bytes.
 Proposed incremental mirror budget1 file/7 code lines is below S5's4/14.
-Production source and O:/winnt remain unchanged. S6 remains active at audit;
-implementation/runtime/publication are not claimed complete.
+Owner approves implementing this bounded proposal. Implementation, runtime
+and coherent publication verification are now complete; commit/push follows.
+
+[Implementation evidence](../etc/evidence/m0-t433-s6-native-service-migration.md)
+records final native producer/import, both-width layouts/service29 and
+Hook147/147 passes. r012 Full14 passes438018ms with Console17/Window17 and
+independent WOW frontiers. r022 proves both CMD widths, both display modes,
+DOS parent-return and actual Hook legacy/WINMINE chains. r020 publishes the
+six-AMD64/four-I386 ten-image set; r021 actual deployed DOS/32/64 smoke and
+all hashes pass, Z: removed. Seven original expressions only; algorithms,
+wire and guest contracts unchanged. Reviewed commit/push remains before closure.
 
 ## S5 Closure Record
 

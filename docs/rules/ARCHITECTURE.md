@@ -6,7 +6,7 @@ Owner admits x64-only run16/NTCON/NTMON migration and subsequently adds
 the single NTVWM's native x64 audit/design after the delivered
 single-worker/dual-Hook baseline; initially only audit/design is active.
 This narrowly supersedes old x64 build exclusions for those consumers and
-their separately compiled native dependencies. NTSRV/NTVDM/WOW32/
+their separately compiled native dependencies. S6 adds the audited NTSRV AMD64 port; NTVDM/WOW32/
 VDMREDIR stay x86. No new worker, helper, source root, guest port or original
 algorithm rewrite is authorized. Native process-local ABI and fixed-width
 wire ABI remain distinct; source-first mirror and resource rules still apply.

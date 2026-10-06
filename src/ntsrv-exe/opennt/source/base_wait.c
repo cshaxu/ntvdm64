@@ -11,7 +11,7 @@ NTSTATUS OpenNtBaseDuplicateWait(void *context,HANDLE sourceProcess,HANDLE sourc
     if (options==DUPLICATE_CLOSE_SOURCE) {
         if (sourceProcess!=binding->target_process || targetProcess || target || !binding->revoke)
             return (NTSTATUS)0xc00000bbL;
-        return binding->revoke(binding->context,(uint32_t)source);
+        return binding->revoke(binding->context,(uint32_t)(ULONG_PTR)source);
     }
     if (options!=DUPLICATE_SAME_ACCESS || sourceProcess!=NtCurrentProcess() || !target)
         return (NTSTATUS)0xc00000bbL;
@@ -23,7 +23,7 @@ NTSTATUS OpenNtBaseDuplicateWait(void *context,HANDLE sourceProcess,HANDLE sourc
     status=binding->deliver(binding->context,source,&receipt);
     if (status<0) return status;
     if (!receipt) return (NTSTATUS)0xc000000dL;
-    *target=(HANDLE)receipt;
+    *target=(HANDLE)(ULONG_PTR)receipt;
     return status;
 }
 NTSTATUS OpenNtBaseCloseWait(void *context,HANDLE event)

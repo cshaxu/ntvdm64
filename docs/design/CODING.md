@@ -5,7 +5,7 @@
 Owner admits run16-exe, ntcon-exe, ntmon-exe and the single ntvwm-exe x64-only migration, initially
 audit/design only. Their selected common/RPC/static dependencies have
 architecture-local build closures, never mixed-width objects or a new source
-owner. NTSRV/NTVDM/WOW32/VDMREDIR remain x86; both Hook widths remain.
+owner. S6 authorizes NTSRV AMD64; NTVDM/WOW32/VDMREDIR remain x86; both Hook widths remain.
 This supersedes older blanket x64 prohibitions only for these consumer
 islands. Original execution and mirror-minimality remain binding; see the
 [migration plan](../etc/operations/t433-native-components-x64-plan.md).

@@ -12,7 +12,7 @@ NTSTATUS OpenNtBaseDuplicateStream(void *context,HANDLE sourceProcess,HANDLE sou
     if (options==DUPLICATE_CLOSE_SOURCE) {
         if (sourceProcess!=binding->target_process || targetProcess || target || attributes || !binding->revoke)
             return (NTSTATUS)0xc00000bbL;
-        return binding->revoke(binding->context,(uint32_t)source);
+        return binding->revoke(binding->context,(uint32_t)(ULONG_PTR)source);
     }
     if (options!=DUPLICATE_SAME_ACCESS || attributes!=OBJ_INHERIT || !target ||
         sourceProcess!=binding->source_process || targetProcess!=binding->target_process || !binding->deliver)
@@ -20,10 +20,10 @@ NTSTATUS OpenNtBaseDuplicateStream(void *context,HANDLE sourceProcess,HANDLE sou
     /* Stream-family resolution permits the original stdout/stderr alias.
      * It never treats the source carrier as a native HANDLE. */
     if (broker_vdm_receipt_resolve(binding->source_receipts,binding->source_generation,
-        (uint32_t)source,BROKER_VDM_STDIN,&resource)) return (NTSTATUS)0xc0000008L;
+        (uint32_t)(ULONG_PTR)source,BROKER_VDM_STDIN,&resource)) return (NTSTATUS)0xc0000008L;
     status=binding->deliver(binding->context,resource,&receipt);
     if (status<0) return status;
     if (!receipt) return (NTSTATUS)0xc000000dL;
-    *target=(HANDLE)receipt;
+    *target=(HANDLE)(ULONG_PTR)receipt;
     return status;
 }

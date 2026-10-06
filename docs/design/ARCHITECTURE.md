@@ -14,7 +14,7 @@ Owner closes the delivered T432 package without manual testing and admits
 x64-only run16, NTCON and NTMON migration; the latest owner direction also
 adds the single NTVWM's native x64 audit/design. Only dependency/ABI audit and
 detailed design are active initially; no new x64 EXE delivery is claimed.
-NTSRV, NTVDM, WOW32 and VDMREDIR remain x86; both Hooks
+S6 owner approval adds the audited NTSRV AMD64 port. NTVDM, WOW32 and VDMREDIR remain x86; both Hooks
 remain. Target architecture does not select another worker. The package stays
 ten images and retains current names, system32 paths, shared search, copied
 protocols, recipient-local capabilities and NTSRV I/O/lifecycle authority.

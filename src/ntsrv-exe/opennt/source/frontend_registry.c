@@ -860,7 +860,7 @@ DWORD OpenNtBaseServiceRegisterFrontendLease(OPENNT_BASE_CONNECTION *root,DWORD 
             WaitForSingleObject(item->process.ProcessHandle,0)==WAIT_TIMEOUT)
             {error=ERROR_ALREADY_EXISTS;goto done;}
         if(item->frontend_reserved_window==console_window &&
-            (DWORD)item->process.ClientId.UniqueProcess==creator_pid &&
+            (DWORD)(ULONG_PTR)item->process.ClientId.UniqueProcess==creator_pid &&
             WaitForSingleObject(item->process.ProcessHandle,0)==WAIT_TIMEOUT)creator=item;
     }
     if(!creator)goto done;
@@ -1087,7 +1087,7 @@ DWORD OpenNtBaseServiceAcquireConsoleContext(OPENNT_BASE_CONNECTION *connection,
     for (link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *candidate=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
         if (candidate->process.SequenceNumber==root_generation &&
-            (DWORD)candidate->process.ClientId.UniqueProcess==GetProcessId(root_process) &&
+            (DWORD)(ULONG_PTR)candidate->process.ClientId.UniqueProcess==GetProcessId(root_process) &&
             candidate->frontend_capability) { root=candidate;break; }
     }
     if (!root || root->frontend_closing || WaitForSingleObject(root_process,0)!=WAIT_TIMEOUT) {
@@ -1502,7 +1502,7 @@ DWORD service_bind_existing_console(OPENNT_BASE_CONNECTION *connection)
             connection->console_member_processes) {
             for(index=0;index<connection->console_member_count;++index)
                 if(connection->console_members[index]==
-                        (DWORD)other->process.ClientId.UniqueProcess &&
+                        (DWORD)(ULONG_PTR)other->process.ClientId.UniqueProcess &&
                     connection->console_member_processes[index] &&
                     WaitForSingleObject(connection->console_member_processes[index],0)==WAIT_TIMEOUT &&
                     compare(connection->console_member_processes[index],
@@ -1557,7 +1557,7 @@ DWORD OpenNtBaseServiceReportConsoleMembers(OPENNT_BASE_CONNECTION *connection,
         WaitForSingleObject(connection->process.ProcessHandle,0)==WAIT_TIMEOUT) {
         BOOL self=FALSE;
         for(index=0;index<count;++index)
-            if(copy[index]==(DWORD)connection->process.ClientId.UniqueProcess &&
+            if(copy[index]==(DWORD)(ULONG_PTR)connection->process.ClientId.UniqueProcess &&
                 processes[index] && GetProcessId(processes[index])==copy[index])
                 {self=TRUE;break;}
         if(connection->console_members)error=ERROR_ALREADY_EXISTS;

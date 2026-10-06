@@ -38,12 +38,12 @@ BOOL OpenNtBaseRegisterProcess(OPENNT_BASE_PROCESS_REGISTRY *state, PCSR_PROCESS
     EnterCriticalSection(&state->Lock);
     for (entry=state->Processes.Flink;entry!=&state->Processes;entry=entry->Flink) {
         PCSR_PROCESS current=CONTAINING_RECORD(entry,CSR_PROCESS,ListLink);
-        if (current==process || current->ClientId.UniqueProcess==(HANDLE)pid) {
+        if (current==process || current->ClientId.UniqueProcess==(HANDLE)(ULONG_PTR)pid) {
             SetLastError(ERROR_ALREADY_EXISTS); goto done;
         }
     }
     if (state->NextSequence==MAXULONG) { SetLastError(ERROR_ARITHMETIC_OVERFLOW); goto done; }
-    process->ClientId.UniqueProcess=(HANDLE)pid;
+    process->ClientId.UniqueProcess=(HANDLE)(ULONG_PTR)pid;
     process->ProcessHandle=owned;
     process->SequenceNumber=++state->NextSequence;
     InsertTailList(&state->Processes,&process->ListLink);
@@ -137,7 +137,7 @@ BOOL OpenNtBaseRetainRegisteredProcess(OPENNT_BASE_PROCESS_REGISTRY *state,
     *output=NULL;
     if (!state || !pid || !generation) {SetLastError(ERROR_INVALID_PARAMETER);return FALSE;}
     previous=OpenNtBaseBindProcessRegistry(state);
-    if (CsrLockProcessByClientId((HANDLE)pid,&process)<0) error=ERROR_NOT_FOUND;
+    if (CsrLockProcessByClientId((HANDLE)(ULONG_PTR)pid,&process)<0) error=ERROR_NOT_FOUND;
     else {
         if (process->SequenceNumber!=generation) error=ERROR_ACCESS_DENIED;
         else if (WaitForSingleObject(process->ProcessHandle,0)!=WAIT_TIMEOUT) error=ERROR_PROCESS_ABORTED;

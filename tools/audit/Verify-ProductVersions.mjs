@@ -9,6 +9,12 @@ const logs=path.resolve(process.env.OPENNT_VERSION_TEST_LOGS || path.join(build,
 const runtime=process.env.OPENNT_VERSION_TEST_RUNTIME;
 if(!runtime)throw Error('OPENNT_VERSION_TEST_RUNTIME must name the deployed runtime directory');
 const runtimeBinary=fs.existsSync(path.join(runtime,'system32','run16.exe'))?path.join(runtime,'system32'):runtime;
+const serviceImage=fs.readFileSync(path.join(product,'ntsrv.exe'));
+const serviceMachine=serviceImage.readUInt16LE(serviceImage.readUInt32LE(60)+4);
+assert([0x14c,0x8664].includes(serviceMachine),'Selected service machine');
+const nativeService=serviceMachine===0x8664;
+const architecture=nativeService?'x64':'x86', midlEnvironment=nativeService?'x64':'win32';
+const rtlArchive=nativeService?'original-opennt-rtl-native.lib':'original-opennt-rtl-x86.lib';
 fs.mkdirSync(build,{recursive:true});fs.mkdirSync(logs,{recursive:true});
 const source=fs.readFileSync('src/ntsrv-exe/main.c','utf8');
 const header=fs.readFileSync('src/common/protocol/version.h','utf8');
@@ -21,7 +27,7 @@ assert(idl.includes(`version(${protocol}.0)`),'RPC major and protocol must agree
 assert.match(idl,/application_version\[32\]/);
 assert.match(header,/#define APP_VERSION_BYTES 32u/);
 const cmd=path.join(build,'msvc.cmd');
-fs.writeFileSync(cmd,'@echo off\r\ncall "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul\r\nif errorlevel 1 exit /b %errorlevel%\r\n%*\r\n');
+fs.writeFileSync(cmd,`@echo off\r\ncall "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=${architecture} -host_arch=x64 >nul\r\nif errorlevel 1 exit /b %errorlevel%\r\n%*\r\n`);
 const compileLog=fs.openSync(path.join(build,'build.log'),'w');
 function compile(command) {
     const r=spawnSync('cmd.exe',['/d','/c',`call "${cmd}" ${command}`],
@@ -44,14 +50,14 @@ function mutateConnect(from,to) {
 }
 try {
     fs.writeFileSync(path.join(build,'legacy.idl'),idl.replace(`version(${protocol}.0)`,'version(1.0)'));
-    compile('midl.exe /nologo /env win32 /target NT100 /prefix client Client_ /prefix server Server_ /h legacy.h /cstub legacy_c.c /sstub legacy_s.c legacy.idl');
+    compile(`midl.exe /nologo /env ${midlEnvironment} /target NT100 /prefix client Client_ /prefix server Server_ /h legacy.h /cstub legacy_c.c /sstub legacy_s.c legacy.idl`);
     compile(`cl.exe /nologo /c /MT /W4 /I "${product}/obj/basesrv" /I "${root}/src" legacy_s.c /Folegacy-stub.obj`);
     for (const [name,from,to] of variants) {
         const body=from?mutateConnect(from,to):source.replace('"service.h"','"legacy.h"').replaceAll(`Server_vdm_service_v${protocol}_0_s_ifspec`,'Server_vdm_service_v1_0_s_ifspec');
         fs.writeFileSync(path.join(build,`${name}.c`),body);
         compile(`cl.exe /nologo /c /MT /W4 /we4013 /I "${product}/obj/basesrv" /I "${root}/src" ${name}.c /Fo${name}.obj`);
         const stub=name==='legacy-interface'?'legacy-stub.obj':`"${product}/obj/basesrv/stub.obj"`;
-        compile(`link.exe /nologo /opt:ref /out:${name}.exe ${name}.obj ${stub} "${product}/obj/run16/support.obj" "${product}/opennt-base-server.lib" "${product}/opennt-base-bindings.lib" "${product}/broker-transport.lib" "${product}/original-opennt-rtl-x86.lib" "${product}/common-root.lib" "${product}/common-rpc.lib" "${product}/common-transport.lib" "${product}/common-codec.lib" "${product}/common-console.lib" rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`);
+        compile(`link.exe /nologo /opt:ref /out:${name}.exe ${name}.obj ${stub} "${product}/obj/run16/support.obj" "${product}/opennt-base-server.lib" "${product}/opennt-base-bindings.lib" "${product}/broker-transport.lib" "${product}/${rtlArchive}" "${product}/common-root.lib" "${product}/common-rpc.lib" "${product}/common-transport.lib" "${product}/common-codec.lib" "${product}/common-console.lib" rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`);
     }
 } finally {fs.closeSync(compileLog);}
 for (const [name] of variants) {

@@ -133,11 +133,14 @@ At admission this was source evidence/design, not an x64 launcher runtime
 pass. Delivered implementation evidence above uses build/M0-T433/S5/r001
 onward and retains S4 as independently recoverable production.
 
-## Planned S6 NTSRV native migration
+## S6 NTSRV native migration
 
 Owner requests this stage after run16, with additional original-mirror diff
 preferably no larger than run16's delivered migration. S5 is delivered; this
-plan is not S6 implementation admission. Preserve the completed S5 package as
+plan originally was not implementation admission. The owner now approves the
+[bounded source audit](../evidence/m0-t433-s6-native-service-mirror-audit.md):
+seven srvvdm numeric/tag expressions, fifteen project conversions and a scoped
+NULL=0 compile binding, with no original algorithm or wire change. Preserve the completed S5 package as
 the independently recoverable baseline and audit before editing service source.
 
 - Audit the actual NTSRV link map and selected BaseSrv/RTL/ABI dependencies,

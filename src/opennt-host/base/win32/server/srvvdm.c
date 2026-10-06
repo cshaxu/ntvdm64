@@ -26,6 +26,11 @@ Revision History:
 
 #include "basesrv.h"
 
+/* DIVERGENCE(OPENNT-HOST-068): PID/TID and wait-receipt numeric carriers
+ * convert through ULONG_PTR on both native widths. Parent bit-zero tagging
+ * masks that carrier without narrowing a native pointer. This TU's native
+ * build binds NULL to integer zero; original scheduling and cleanup remain. */
+
 //
 // Initialize to an unused LUID value.
 // Nobody will ever be assigned this value, so it shouldn't
@@ -629,7 +634,7 @@ BaseSrvRegisterWowExec(
     // SequenceNumber, which recycles much more slowly.
     //
 
-    Status = CsrLockProcessByClientId((HANDLE)dwWowExecProcessId, &Process);
+    Status = CsrLockProcessByClientId((HANDLE)(ULONG_PTR)dwWowExecProcessId, &Process);
     if ( !NT_SUCCESS(Status) ) {
         KdPrint(("BaseSrvRegisterWowExec: CsrLockProcessByClientId(0x%x) fails, not registering WowExec.\n",
                  dwWowExecProcessId));
@@ -845,8 +850,8 @@ BaseSrvCheckWOW(
 
                 if (UserNotifyProcessCreate != NULL) {
                     (*UserNotifyProcessCreate)(pWOWRecord->iTask,
-                                (DWORD)CSR_SERVER_QUERYCLIENTTHREAD()->ClientId.UniqueThread,
-                                (DWORD)TargetHandle, 0x04);
+                                (DWORD)(ULONG_PTR)CSR_SERVER_QUERYCLIENTTHREAD()->ClientId.UniqueThread,
+                                (DWORD)(ULONG_PTR)TargetHandle, 0x04);
                 }
 
                 if (hwndWowExec) {
@@ -862,7 +867,7 @@ BaseSrvCheckWOW(
                                      );
 
                     if (dwThreadId) {
-                        Status = CsrLockProcessByClientId((HANDLE)dwProcessId, &Process);
+                        Status = CsrLockProcessByClientId((HANDLE)(ULONG_PTR)dwProcessId, &Process);
                     } else {
                         Status = STATUS_UNSUCCESSFUL;
                     }
@@ -1548,8 +1553,8 @@ BaseSrvUpdateWOWEntry(
                 b->WaitObjectForParent = TargetHandle;
                 if (UserNotifyProcessCreate != NULL) {
                     (*UserNotifyProcessCreate)(pWOWRecord->iTask,
-                                (DWORD)CSR_SERVER_QUERYCLIENTTHREAD()->ClientId.UniqueThread,
-                                (DWORD)TargetHandle, 0x04);
+                                (DWORD)(ULONG_PTR)CSR_SERVER_QUERYCLIENTTHREAD()->ClientId.UniqueThread,
+                                (DWORD)(ULONG_PTR)TargetHandle, 0x04);
                 }
                 return STATUS_SUCCESS;
                 }
@@ -1869,7 +1874,7 @@ BaseSrvGetVDMExitCode(
             // sudeepb 05-Oct-1992
             // fix for the change markl has made for tagging VDM handles
 
-            if (pDOSRecord->hWaitForParent == (HANDLE)((DWORD)b->hParent & ~0x1)) {
+            if (pDOSRecord->hWaitForParent == (HANDLE)((ULONG_PTR)b->hParent & ~(ULONG_PTR)0x1)) {
                 if (pDOSRecord->VDMState == VDM_HAS_RETURNED_ERROR_CODE){
                     b->ExitCode = pDOSRecord->ErrorCode;
                     if (pDOSRecord == pConsoleRecord->DOSRecord &&

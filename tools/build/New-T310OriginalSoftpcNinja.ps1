@@ -9,6 +9,7 @@ param(
     [string]$NativeFrontend = '',
     [string]$NativeMonitor = '',
     [string]$NativeLauncher = '',
+    [string]$NativeService = '',
     [ValidateRange(0, 64)] [int]$ParallelJobs = 0
 )
 
@@ -1275,6 +1276,9 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/tests/basesrv_idle_policy.obj: cc ' + (NinjaPath (Join-Path $root 'tests/adapter-basesrv/idle_policy_test.c')))
     $graph.Add('  cflags = /nologo /c /MT /W4 /WX /showIncludes /I"' + (Join-Path $root 'src') + '"')
     $graph.Add('build basesrv-idle-policy-test.exe: basesrv_service_test_link obj/tests/basesrv_idle_policy.obj')
+    $graph.Add('build obj/tests/native_service_layout.obj: cc ' + (NinjaPath (Join-Path $root 'tests/adapter-basesrv/native_service_layout_test.c')))
+    $graph.Add('  cflags = ' + $baseServerFlags)
+    $graph.Add('build native-service-layout-test.exe: basesrv_service_test_link obj/tests/native_service_layout.obj')
     $graph.Add('build obj/tests/base_client_rpc_first.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/base_client_rpc_first_test.c')))
     $graph.Add('  cflags = ' + $baseOwnerFlags)
     $graph.Add('rule base_rpc_test_link')
@@ -1879,7 +1883,8 @@ if($Architecture -eq 'x86') {
     foreach($consumer in @(
         @{name='ntcon';rule='frontend_link';input=$NativeFrontend;option='NativeFrontend'},
         @{name='ntmon';rule='monitor_link';input=$NativeMonitor;option='NativeMonitor'},
-        @{name='run16';rule='run16_link';input=$NativeLauncher;option='NativeLauncher'}
+        @{name='run16';rule='run16_link';input=$NativeLauncher;option='NativeLauncher'},
+        @{name='ntsrv';rule='basesrv_link';input=$NativeService;option='NativeService'}
     )) {
         $image=$consumer.name+'.exe';$slot=-1
         for($index=0;$index -lt $graph.Count;++$index){if($graph[$index].StartsWith('build '+$image+': ')){$slot=$index;break}}
@@ -1889,7 +1894,8 @@ if($Architecture -eq 'x86') {
         $graph.Insert($slot,'rule '+$import);++$slot
         if($consumer.input){
             $nativeInput=(Resolve-Path -LiteralPath $consumer.input).Path
-            $graph.Insert($slot,'  command = powershell.exe -NoProfile -ExecutionPolicy Bypass -File "'+(NinjaPath (Join-Path $root 'tools/build/Stage-NativeWorkerImage.ps1'))+'" -InputFile $in -OutputFile "'+(NinjaPath (Join-Path $build $image))+'"')
+            $subsystemOption=if($consumer.name -eq 'ntsrv'){' -Subsystem Windows'}else{''}
+            $graph.Insert($slot,'  command = powershell.exe -NoProfile -ExecutionPolicy Bypass -File "'+(NinjaPath (Join-Path $root 'tools/build/Stage-NativeWorkerImage.ps1'))+'" -InputFile $in -OutputFile "'+(NinjaPath (Join-Path $build $image))+'"'+$subsystemOption)
             ++$slot
             $graph[$slot]='build '+$image+': '+$import+' '+(NinjaPath $nativeInput)
         }else{
@@ -2040,6 +2046,14 @@ if ($objectOutputDirectories.Count -gt 0) {
         sources = @('src/common/application_search.c', 'src/common/application_search.h', 'src/common/protocol/native_hook.h', 'src/nthook32-dll/hook.h', 'src/nthook32-dll/intercept.h', 'src/nthook32-dll/context.cpp', 'src/nthook32-dll/installer.cpp', 'src/nthook32-dll/create_process.cpp', 'src/nthook32-dll/entry.cpp', 'src/nthook32-dll/nthook32.def', 'src/run16-exe/hook_classification.c', 'src/nthook32-dll/detours/detours.cpp', 'src/nthook32-dll/detours/modules.cpp', 'src/nthook32-dll/detours/disasm.cpp', 'src/nthook32-dll/detours/image.cpp', 'src/nthook32-dll/detours/creatwth.cpp', 'src/nthook32-dll/detours/uimports.cpp', 'src/nthook32-dll/detours/detours.h', 'src/nthook32-dll/detours/LICENSE.md' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
+    }
+    serviceComposition = [ordered]@{
+        target = 'ntsrv.exe'
+        selected = ($Architecture -eq 'x86' -and !!$NativeService)
+        architecture = $(if($NativeService){'AMD64'}else{'unselected'})
+        nativeInput = $NativeService
+        sourceClosure = 'ntsrv-source-closure'
+        disposition = 'explicit architecture-local service import; original srvvdm semantics and fixed copied protocol retained; no x86 product fallback'
     }
     launcherComposition = [ordered]@{
         target = 'run16.exe'

@@ -130,7 +130,7 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
         OPENNT_BASE_WORKER_KIND kind=OPENNT_BASE_WORKER_DOS;
         broker_vdm_receipts_initialize(&connection->streams,connection->process.SequenceNumber);
         error=OpenNtBaseReservationClaimWorkerKind(service->reservations,
-            (DWORD)connection->process.ClientId.UniqueProcess,connection->process.SequenceNumber,
+            (DWORD)(ULONG_PTR)connection->process.ClientId.UniqueProcess,connection->process.SequenceNumber,
             &reservation,&task,&console,&kind,&reserved_worker);
         if (error==ERROR_NOT_FOUND) error=ERROR_SUCCESS;
         else if (!error) {
@@ -361,7 +361,7 @@ DWORD OpenNtBaseServiceRetainPeer(OPENNT_BASE_CONNECTION *connection,DWORD pid,
     *output=NULL;
     if (!connection || !pid || !generation) return ERROR_ACCESS_DENIED;
     EnterCriticalSection(&connection->service->lock);
-    if ((DWORD)connection->process.ClientId.UniqueProcess!=pid ||
+    if ((DWORD)(ULONG_PTR)connection->process.ClientId.UniqueProcess!=pid ||
         connection->process.SequenceNumber!=generation) error=ERROR_ACCESS_DENIED;
     else if (!OpenNtBaseRetainRegisteredProcess(&connection->service->registry,pid,generation,output))
         error=GetLastError();

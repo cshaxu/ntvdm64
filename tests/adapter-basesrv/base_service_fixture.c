@@ -120,7 +120,8 @@ int fixture_management_gui(void)
     GUI_CHECK(!OpenNtBaseServiceSnapshotCopy(service,&epoch,&tree,&count) && count==1);
     GUI_CHECK(tree[0].key.category==MANAGEMENT_GUI_TARGET && tree[0].key.generation==generation &&
         tree[0].key.object==17 && !tree[0].parent.category && !tree[0].depth &&
-        tree[0].process_id==target.dwProcessId && tree[0].kind==2 &&
+        tree[0].process_id==target.dwProcessId && tree[0].kind==
+        (sizeof(void *)==8 ? MANAGEMENT_KIND_WIN64 : MANAGEMENT_KIND_WIN32) &&
         tree[0].actions==MANAGEMENT_CAN_CLOSE && tree[0].started_filetime && tree[0].image[0]);
     key=tree[0].key;++key.object;
     GUI_CHECK(OpenNtBaseServiceCloseManagementNode(service,&key)==ERROR_NOT_FOUND);

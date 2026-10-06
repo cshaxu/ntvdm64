@@ -15,6 +15,9 @@ AMD64 NTSRV stage immediately afterward, before final integrated delivery;
 NTVDM, WOW32.DLL and VDMREDIR.DLL remain x86 and both Hook widths remain
 available. NTCON is the visible frontend, not the native worker. The planned
 service stage requires its own admission and bounded original-source audit.
+S6 has now received both: the owner approves the audited one-file/seven-expression
+original adaptation and the corresponding finite native service implementation,
+mixed-width verification and coherent publication. No further stage is admitted.
 
 ## Objective and boundary
 

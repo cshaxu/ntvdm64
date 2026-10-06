@@ -13,6 +13,7 @@ param(
     [string]$NativeFrontend,
     [string]$NativeMonitor,
     [string]$NativeLauncher,
+    [string]$NativeService,
     [string]$MonitorRpc,
     [string]$Node='node',
     [string[]]$WowBaselineRoots,
@@ -54,8 +55,12 @@ if($NativeLauncher){
     $NativeLauncher=(Resolve-Path -LiteralPath $NativeLauncher).Path
     if(!$NativeMonitor -or !$NativeLauncher.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)){throw 'Native launcher requires the native monitor and a build-owned input'}
 }
+if($NativeService){
+    $NativeService=(Resolve-Path -LiteralPath $NativeService).Path
+    if(!$NativeLauncher -or !$NativeService.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)){throw 'Native service requires the native launcher and a build-owned input'}
+}
 foreach($name in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe')){
-    $input=if($name -eq 'ntvwm.exe' -and $NativeWorker){$NativeWorker}elseif($name -eq 'ntcon.exe' -and $NativeFrontend){$NativeFrontend}elseif($name -eq 'ntmon.exe' -and $NativeMonitor){$NativeMonitor}elseif($name -eq 'run16.exe' -and $NativeLauncher){$NativeLauncher}else{Join-Path $cache $name}
+    $input=if($name -eq 'ntvwm.exe' -and $NativeWorker){$NativeWorker}elseif($name -eq 'ntcon.exe' -and $NativeFrontend){$NativeFrontend}elseif($name -eq 'ntmon.exe' -and $NativeMonitor){$NativeMonitor}elseif($name -eq 'run16.exe' -and $NativeLauncher){$NativeLauncher}elseif($name -eq 'ntsrv.exe' -and $NativeService){$NativeService}else{Join-Path $cache $name}
     if((Get-FileHash $input).Hash -ne (Get-FileHash (Join-Path $runtimeBinary $name)).Hash){
         throw "Build cache/runtime mismatch: $name; build affected targets first"
     }
@@ -82,7 +87,7 @@ if(Test-Path -LiteralPath (Join-Path $runtimeBinary 'nthook64.dll')){
 $manifest=foreach($name in $packageNames){
     $path=Join-Path $runtimeBinary $name
     $bytes=[IO.File]::ReadAllBytes($path);$pe=[BitConverter]::ToInt32($bytes,60)
-    $machine=if($name -eq 'nthook64.dll' -or ($name -eq 'ntvwm.exe' -and $NativeWorker) -or ($name -eq 'ntcon.exe' -and $NativeFrontend) -or ($name -eq 'ntmon.exe' -and $NativeMonitor) -or ($name -eq 'run16.exe' -and $NativeLauncher)){0x8664}else{0x14c}
+    $machine=if($name -eq 'nthook64.dll' -or ($name -eq 'ntvwm.exe' -and $NativeWorker) -or ($name -eq 'ntcon.exe' -and $NativeFrontend) -or ($name -eq 'ntmon.exe' -and $NativeMonitor) -or ($name -eq 'run16.exe' -and $NativeLauncher) -or ($name -eq 'ntsrv.exe' -and $NativeService)){0x8664}else{0x14c}
     if([BitConverter]::ToUInt16($bytes,$pe+4) -ne $machine){throw "Wrong runtime machine: $name"}
     [pscustomobject]@{Name=$name;Sha256=(Get-FileHash $path).Hash;Machine=$machine}
 }
@@ -211,7 +216,7 @@ try {
                 $versionSaved=@{}
                 foreach($name in $versionNames){$versionSaved[$name]=[Environment]::GetEnvironmentVariable($name,'Process')}
                 try {
-                    $env:OPENNT_BROKER_PRODUCT_BUILD=$cache
+                    $env:OPENNT_BROKER_PRODUCT_BUILD=if($NativeService){Split-Path $NativeService -Parent}else{$cache}
                     $env:OPENNT_VERSION_TEST_BUILD="$log/version-negative"
                     $env:OPENNT_VERSION_TEST_LOGS="$log/version-negative/logs"
                     $env:OPENNT_VERSION_TEST_RUNTIME='Z:\'

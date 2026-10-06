@@ -1,4 +1,5 @@
-param([Parameter(Mandatory)][string]$InputFile,[Parameter(Mandatory)][string]$OutputFile)
+param([Parameter(Mandatory)][string]$InputFile,[Parameter(Mandatory)][string]$OutputFile,
+    [ValidateSet('Console','Windows')][string]$Subsystem='Console')
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $root=(Join-Path $repo 'build')+'\'
@@ -12,7 +13,7 @@ $pe=[BitConverter]::ToInt32($bytes,60)
 if($pe -lt 0 -or $pe -gt $bytes.Length-94 -or [BitConverter]::ToUInt32($bytes,$pe) -ne 0x4550 -or
    [BitConverter]::ToUInt16($bytes,$pe+4) -ne 0x8664 -or
    ([BitConverter]::ToUInt16($bytes,$pe+22) -band 0x2000) -or
-   [BitConverter]::ToUInt16($bytes,$pe+24+68) -ne 3){throw 'Expected AMD64 native worker EXE'}
+   [BitConverter]::ToUInt16($bytes,$pe+24+68) -ne $(if($Subsystem -eq 'Windows'){2}else{3})){throw 'Expected AMD64 native worker EXE with selected subsystem'}
 if($inputPath -eq $outputPath){throw 'Do not overwrite worker input'}
 Copy-Item -LiteralPath $inputPath -Destination $outputPath -Force
 # The build runner can invoke Windows PowerShell with the caller's module

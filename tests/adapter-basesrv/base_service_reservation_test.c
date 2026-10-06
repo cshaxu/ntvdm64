@@ -955,15 +955,20 @@ int main(int argc,char **argv)
                  * actual CreateProcess target to the direct WIN32RECORD. */
                 {HANDLE completion=CreateEventW(NULL,TRUE,FALSE,NULL);
                     CHECK(completion);
-                    CHECK(!OpenNtBaseServiceBindNativeTarget(worker,child.dwProcessId,workerGeneration,
-                        test_native_request,laterChild.hProcess,completion));
+                    {DWORD bind_error=OpenNtBaseServiceBindNativeTarget(worker,child.dwProcessId,workerGeneration,
+                        test_native_request,laterChild.hProcess,completion);
+                        if(bind_error)fprintf(stderr,"native target binding error=%lu\n",bind_error);
+                        CHECK(!bind_error);
+                    }
                     CloseHandle(completion);
                 }
                 /* Bind precedes resume; it publishes only the admitted Direct
                  * target identity, never a sampled Console participant. */
                 CHECK(ResumeThread(laterChild.hThread)!=(DWORD)-1);
                 CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
-                CHECK(workerInfoCount==1 && workerInfo.kind==2 && workerInfo.stack_depth==1 &&
+                CHECK(workerInfoCount==1 && workerInfo.kind==
+                    (sizeof(void *)==8 ? MANAGEMENT_KIND_WIN64 : MANAGEMENT_KIND_WIN32) &&
+                    workerInfo.stack_depth==1 &&
                     workerInfo.task==test_native_request && workerInfo.image[0]);
                 CHECK(!OpenNtBaseServiceRetainFrontendRoot(worker,child.dwProcessId,workerGeneration,
                     io_capability,&retained,&frontend_generation));
