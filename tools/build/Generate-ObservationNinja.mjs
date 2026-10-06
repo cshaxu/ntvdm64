@@ -1,9 +1,11 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-if (process.argv.length !== 4) {
-  throw new Error('usage: node tools/build/Generate-ObservationNinja.mjs <repository-root> <build-root>');
+if (process.argv.length < 4 || process.argv.length > 5) {
+  throw new Error('usage: node tools/build/Generate-ObservationNinja.mjs <repository-root> <build-root> [x86|x64]');
 }
+const architecture = process.argv[4] ?? 'x86';
+if (!['x86', 'x64'].includes(architecture)) throw new Error('unsupported observer architecture');
 
 const root = resolve(process.argv[2]).replaceAll('\\', '/').replace(':', '$:');
 const build = resolve(process.argv[3]);
@@ -29,11 +31,10 @@ writeFileSync(resolve(build, 'build.ninja'), [
   'default console-startup-observer.exe',
   ''
 ].join('\n'));
-writeFileSync(resolve(build, 'msvc-x86.cmd'), [
+writeFileSync(resolve(build, `msvc-${architecture}.cmd`), [
   '@echo off',
   'set "OBSERVATION_CALLER_CWD=%CD%"',
-  'if defined VSCMD_VER goto ready',
-  'call "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul',
+  `call "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=${architecture} -host_arch=x64 >nul`,
   'if errorlevel 1 exit /b %errorlevel%',
   ':ready',
   'cd /d "%OBSERVATION_CALLER_CWD%"',

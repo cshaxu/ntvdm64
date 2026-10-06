@@ -6,6 +6,7 @@ param(
     [string]$NodeExecutable = '',
     [string]$NinjaExecutable = '',
     [string]$NativeWorker = '',
+    [string]$NativeFrontend = '',
     [ValidateRange(0, 64)] [int]$ParallelJobs = 0
 )
 
@@ -1475,7 +1476,12 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build frontend-client.lib: lib obj/frontend/native_request_client.obj obj/frontend/bootstrap_client.obj obj/common/native_path.obj')
     $graph.Add('rule frontend_link')
     $graph.Add('  command = link.exe /nologo /subsystem:console /entry:wmainCRTStartup /opt:ref /out:$out /map:$out.map $in rpcrt4.lib ntdll.lib kernel32.lib shell32.lib user32.lib gdi32.lib advapi32.lib legacy_stdio_definitions.lib')
-    $graph.Add('build ntcon.exe: frontend_link obj/frontend/main.obj obj/frontend/session_service.obj obj/frontend/frontend_session.obj frontend-window.lib obj/frontend/console_frontend.obj obj/frontend/console_video.obj obj/frontend/console_channel.obj frontend-client.lib obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj ' + $consoleGridObject + ' opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
+    $graph.Add('build obj/frontend/session_arguments.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntcon-exe/session_arguments.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build obj/tests/frontend_session_arguments.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/frontend_session_arguments_test.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build frontend-session-arguments-test.exe: console_test_link obj/tests/frontend_session_arguments.obj obj/frontend/session_arguments.obj')
+    $graph.Add('build ntcon.exe: frontend_link obj/frontend/main.obj obj/frontend/session_arguments.obj obj/frontend/session_service.obj obj/frontend/frontend_session.obj frontend-window.lib obj/frontend/console_frontend.obj obj/frontend/console_video.obj obj/frontend/console_channel.obj frontend-client.lib obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj ' + $consoleGridObject + ' opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
     foreach ($name in @('main','console_state','execution')) {
         $graph.Add('build obj/ntvwm/' + $name + '.obj: cc ' + (NinjaPath (Join-Path $root ('src/ntvwm-exe/' + $name + '.c'))))
         $graph.Add('  cflags = ' + $nativeServiceFlags + ' /I "' + (NinjaPath $fontBuild) + '"')
@@ -1859,6 +1865,26 @@ for ($commonIndex = 0; $commonIndex -lt $graph.Count; ++$commonIndex) {
         } else { $graph[$commonIndex] = $commonEdge + ' common-transport.lib common-codec.lib common-console.lib' }
     }
 }
+# Keep the audited source recipe available for the architecture-local native
+# builder. The formal product slot only imports the explicit AMD64 producer.
+if($Architecture -eq 'x86') {
+    $frontendIndex=-1
+    for($index=0;$index -lt $graph.Count;++$index){if($graph[$index].StartsWith('build ntcon.exe: ')){$frontendIndex=$index;break}}
+    if($frontendIndex -lt 0){throw 'Missing frontend source closure'}
+    $graph.Add($graph[$frontendIndex].Replace('build ntcon.exe: frontend_link','build ntcon-source-closure: phony'))
+    $graph.Insert($frontendIndex,'rule native_frontend_import')
+    ++$frontendIndex
+    if($NativeFrontend){
+        $nativeFrontendInput=(Resolve-Path -LiteralPath $NativeFrontend).Path
+        $graph.Insert($frontendIndex,'  command = powershell.exe -NoProfile -ExecutionPolicy Bypass -File "'+(NinjaPath (Join-Path $root 'tools/build/Stage-NativeWorkerImage.ps1'))+'" -InputFile $in -OutputFile "'+(NinjaPath (Join-Path $build 'ntcon.exe'))+'"')
+        ++$frontendIndex
+        $graph[$frontendIndex]='build ntcon.exe: native_frontend_import '+(NinjaPath $nativeFrontendInput)
+    }else{
+        $graph.Insert($frontendIndex,'  command = powershell.exe -NoProfile -Command "throw ''Select the verified AMD64 NTCON with -NativeFrontend; no x86 frontend fallback''"')
+        ++$frontendIndex
+        $graph[$frontendIndex]='build ntcon.exe: native_frontend_import'
+    }
+}
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), (($graph -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
 
 # Some product objects live below a component-local namespace (for example
@@ -2036,7 +2062,9 @@ if ($objectOutputDirectories.Count -gt 0) {
     }
     frontendBootstrapComposition = [ordered]@{
         target = 'ntcon.exe'
-        selected = ($Architecture -eq 'x86')
+        architecture = 'AMD64'
+        buildInput = $NativeFrontend
+        sourceClosure = 'ntcon-source-closure'
         disposition = 'independent authenticated visible presentation owner; no native backend, parser or helper'
         sources = @('src/ntcon-exe/main.c', 'src/run16-exe/frontend_bootstrap.h', 'src/ntcon-exe/frontend_session.c', 'src/ntcon-exe/frontend_session.h', 'src/ntcon-exe/console_frontend.c', 'src/ntcon-exe/console_frontend.h', 'src/ntcon-exe/console_video.c', 'src/ntcon-exe/console_video.h', 'src/ntcon-exe/console_channel.c', 'src/ntcon-exe/console_channel.h', 'src/common/protocol/console_video.h', 'src/common/protocol/console_io.h' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }

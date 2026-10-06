@@ -10,6 +10,7 @@ param(
     [string]$TerminalObserver,
     [string]$NativeHook64,
     [string]$NativeWorker,
+    [string]$NativeFrontend,
     [string]$Node='node',
     [string[]]$WowBaselineRoots,
     [ValidateSet('Observed','Paced')][string]$InputPolicy='Observed',
@@ -34,8 +35,12 @@ if($NativeWorker){
     $NativeWorker=(Resolve-Path -LiteralPath $NativeWorker).Path
     if(!$NativeHook64 -or !$NativeWorker.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)){throw 'Native worker requires both Hooks and build-owned input'}
 }
+if($NativeFrontend){
+    $NativeFrontend=(Resolve-Path -LiteralPath $NativeFrontend).Path
+    if(!$NativeWorker -or !$NativeFrontend.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)){throw 'Native frontend requires the native worker and a build-owned input'}
+}
 foreach($name in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe')){
-    $input=if($name -eq 'ntvwm.exe' -and $NativeWorker){$NativeWorker}else{Join-Path $cache $name}
+    $input=if($name -eq 'ntvwm.exe' -and $NativeWorker){$NativeWorker}elseif($name -eq 'ntcon.exe' -and $NativeFrontend){$NativeFrontend}else{Join-Path $cache $name}
     if((Get-FileHash $input).Hash -ne (Get-FileHash (Join-Path $runtimeBinary $name)).Hash){
         throw "Build cache/runtime mismatch: $name; build affected targets first"
     }
@@ -62,7 +67,7 @@ if(Test-Path -LiteralPath (Join-Path $runtimeBinary 'nthook64.dll')){
 $manifest=foreach($name in $packageNames){
     $path=Join-Path $runtimeBinary $name
     $bytes=[IO.File]::ReadAllBytes($path);$pe=[BitConverter]::ToInt32($bytes,60)
-    $machine=if($name -eq 'nthook64.dll' -or ($name -eq 'ntvwm.exe' -and $NativeWorker)){0x8664}else{0x14c}
+    $machine=if($name -eq 'nthook64.dll' -or ($name -eq 'ntvwm.exe' -and $NativeWorker) -or ($name -eq 'ntcon.exe' -and $NativeFrontend)){0x8664}else{0x14c}
     if([BitConverter]::ToUInt16($bytes,$pe+4) -ne $machine){throw "Wrong runtime machine: $name"}
     [pscustomobject]@{Name=$name;Sha256=(Get-FileHash $path).Hash;Machine=$machine}
 }

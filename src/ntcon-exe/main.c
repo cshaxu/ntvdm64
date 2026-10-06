@@ -1,5 +1,6 @@
 #include "run16-exe/frontend_bootstrap.h"
 #include "session_service.h"
+#include "session_arguments.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include <shellapi.h>
 #include <stdio.h>
@@ -72,22 +73,20 @@ done:
 }
 int wmain(int argc,WCHAR **argv)
 {
-    WCHAR *end;
     UINT_PTR caller,notification,retire,restored;
     uint64_t console_window=0;
     BOOL lease=FALSE,borrowed=FALSE;
     DWORD result;
     if((argc!=6 && argc!=8) || wcscmp(argv[1],L"--session"))return ERROR_INVALID_PARAMETER;
-    caller=(UINT_PTR)wcstoul(argv[2],&end,16);if(!caller || *end)return ERROR_INVALID_PARAMETER;
-    notification=(UINT_PTR)wcstoul(argv[3],&end,16);if(!notification || *end)return ERROR_INVALID_PARAMETER;
-    retire=(UINT_PTR)wcstoul(argv[4],&end,16);if(!retire || *end)return ERROR_INVALID_PARAMETER;
-    restored=(UINT_PTR)wcstoul(argv[5],&end,16);if(!restored || *end)return ERROR_INVALID_PARAMETER;
+    if(!frontend_session_resource(argv[2],&caller) ||
+       !frontend_session_resource(argv[3],&notification) ||
+       !frontend_session_resource(argv[4],&retire) ||
+       !frontend_session_resource(argv[5],&restored))return ERROR_INVALID_PARAMETER;
     if(argc==8) {
         lease=TRUE;
         if(wcscmp(argv[6],L"0") && wcscmp(argv[6],L"1"))return ERROR_INVALID_PARAMETER;
         borrowed=!wcscmp(argv[6],L"1");
-        console_window=_wcstoui64(argv[7],&end,16);
-        if(!console_window || *end)return ERROR_INVALID_PARAMETER;
+        if(!frontend_session_window(argv[7],&console_window))return ERROR_INVALID_PARAMETER;
     }
     CsrPortHeap=HeapCreate(0,0,0);if(!CsrPortHeap)return ERROR_NOT_ENOUGH_MEMORY;
     result=session_entry((HANDLE)caller,(HANDLE)notification,(HANDLE)retire,

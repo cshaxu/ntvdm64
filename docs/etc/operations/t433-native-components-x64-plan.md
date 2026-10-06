@@ -27,7 +27,9 @@ version, modify source/build inputs or replace the published package.
 | S5 RUN16 | x64-only launcher, unchanged shared discovery/recognition/CLI and both incoming Hook widths. | Original/private versus OS/native ABI, DOS/Win16/native32/native64, real child flags/handles/waits/results, context-only launcher; no launcher fallback helper. |
 | S6 integrated delivery | Final coherent recoverable ten-image mixed-width package and T closure audit. | One worker, both Hooks, cross-width nesting and DOS/native handoff, Console17/Window17, independent WOW frontiers, version negatives, mirror/diff audit and published hashes/smoke. |
 
-Only S3 is active; S1's bounded design handoff and S2 delivery are retained.
+S3 has completed its implementation/verification and coherent publication;
+the current packet records its delivery review. S1's design handoff and S2
+delivery are retained. S4 is not admitted; wait for owner direction.
 Later rows require bounded stage conclusion and ordinary
 execution-rule admission/verification; they are not simultaneous active tasks.
 Owner explicitly selects S2 NTVWM, S3 NTCON, S4 NTMON and S5 RUN16.

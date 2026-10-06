@@ -16,6 +16,18 @@
 #include "console_snapshot.h"
 #include "input_milestone.h"
 
+/* The rendered Window must be observed at the frontend's native pointer
+ * width. Guest fault diagnostics still read the x86 NTVDM context. */
+#ifdef _WIN64
+typedef WOW64_CONTEXT observer_guest_context;
+#define OBSERVER_GUEST_FLAGS (WOW64_CONTEXT_CONTROL | WOW64_CONTEXT_INTEGER)
+#define observer_get_guest_context Wow64GetThreadContext
+#else
+typedef CONTEXT observer_guest_context;
+#define OBSERVER_GUEST_FLAGS (CONTEXT_CONTROL | CONTEXT_INTEGER)
+#define observer_get_guest_context GetThreadContext
+#endif
+
 static char control_event_report[MAX_PATH];
 static ULONGLONG mouse_burst_started;
 static DWORD mouse_burst_elapsed;
@@ -131,7 +143,7 @@ static BOOL WINAPI record_console_control(DWORD event)
 typedef struct observation_thread_context {
     DWORD thread_id;
     BOOL context_available;
-    CONTEXT context;
+    observer_guest_context context;
     DWORD frame_count;
     DWORD64 frames[OBSERVATION_FRAME_LIMIT];
 } observation_thread_context;
@@ -192,12 +204,12 @@ static DWORD capture_process_threads(HANDLE process, DWORD process_id,
             if (thread != NULL) {
                 if (SuspendThread(thread) != (DWORD)-1) {
                     records[record_count].context.ContextFlags =
-                        CONTEXT_CONTROL | CONTEXT_INTEGER;
+                        OBSERVER_GUEST_FLAGS;
                     records[record_count].context_available =
-                        GetThreadContext(thread, &records[record_count].context);
+                        observer_get_guest_context(thread, &records[record_count].context);
                     if (records[record_count].context_available) {
                         STACKFRAME64 frame = { 0 };
-                        CONTEXT walk_context = records[record_count].context;
+                        observer_guest_context walk_context = records[record_count].context;
                         frame.AddrPC.Offset = walk_context.Eip;
                         frame.AddrPC.Mode = AddrModeFlat;
                         frame.AddrStack.Offset = walk_context.Esp;
@@ -1262,7 +1274,7 @@ int main(int argc, char **argv)
     HANDLE output;
     DWORD wait_status;
     DWORD exit_code = STILL_ACTIVE;
-    CONTEXT timed_context = { 0 };
+    observer_guest_context timed_context = { 0 };
     DWORD timed_stack[OBSERVATION_STACK_WORDS] = { 0 };
     observation_thread_context timed_threads[OBSERVATION_THREAD_LIMIT] = { 0 };
     BOOL have_timed_context = FALSE;
@@ -1850,8 +1862,8 @@ int main(int argc, char **argv)
         suspend_result = SuspendThread(child.hThread);
         if (suspend_result != (DWORD)-1) {
             memset(&timed_context, 0, sizeof(timed_context));
-            timed_context.ContextFlags = CONTEXT_CONTROL | CONTEXT_INTEGER;
-            have_timed_context = GetThreadContext(child.hThread, &timed_context);
+            timed_context.ContextFlags = OBSERVER_GUEST_FLAGS;
+            have_timed_context = observer_get_guest_context(child.hThread, &timed_context);
             if (have_timed_context) {
                 have_timed_stack = ReadProcessMemory(
                     child.hProcess, (LPCVOID)(ULONG_PTR)timed_context.Esp,

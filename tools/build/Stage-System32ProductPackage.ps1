@@ -6,6 +6,7 @@ param(
     [Parameter(Mandatory)][string]$OutputRoot,
     [string]$NativeHook='',
     [string]$NativeHook64='',
+    [string]$NativeFrontend='',
     [Parameter(Mandatory)][string]$NativeWorker
 )
 $ErrorActionPreference='Stop'
@@ -27,11 +28,15 @@ if($NativeWorker){
     $NativeWorker=(Resolve-Path -LiteralPath $NativeWorker).Path
     if(!$NativeHook64 -or !$NativeWorker.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)){throw 'Native worker requires both Hooks and a build-owned input'}
 }
+if($NativeFrontend){
+    $NativeFrontend=(Resolve-Path -LiteralPath $NativeFrontend).Path
+    if(!$NativeWorker -or !$NativeFrontend.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)){throw 'Native frontend requires the native worker and a build-owned input'}
+}
 $manifest=foreach($name in $names){
-    $source=if($name -eq 'WOW32.DLL'){$wow}elseif($name -eq 'nthook32.dll'){$NativeHook}elseif($name -eq 'nthook64.dll'){$NativeHook64}elseif($name -eq 'ntvwm.exe' -and $NativeWorker){$NativeWorker}else{Join-Path $cache $name}
+    $source=if($name -eq 'WOW32.DLL'){$wow}elseif($name -eq 'nthook32.dll'){$NativeHook}elseif($name -eq 'nthook64.dll'){$NativeHook64}elseif($name -eq 'ntvwm.exe' -and $NativeWorker){$NativeWorker}elseif($name -eq 'ntcon.exe' -and $NativeFrontend){$NativeFrontend}else{Join-Path $cache $name}
     $bytes=[IO.File]::ReadAllBytes($source)
     $pe=[BitConverter]::ToInt32($bytes,60)
-    $expectedMachine=if($name -eq 'nthook64.dll' -or ($name -eq 'ntvwm.exe' -and $NativeWorker)){0x8664}else{0x14c}
+    $expectedMachine=if($name -eq 'nthook64.dll' -or ($name -eq 'ntvwm.exe' -and $NativeWorker) -or ($name -eq 'ntcon.exe' -and $NativeFrontend)){0x8664}else{0x14c}
     if([BitConverter]::ToUInt16($bytes,$pe+4) -ne $expectedMachine){throw "Wrong PE machine input: $name"}
     $destination=Join-Path $system $name
     Copy-Item -LiteralPath $source -Destination $destination -Force

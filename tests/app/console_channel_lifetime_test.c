@@ -570,7 +570,15 @@ static void test_native_geometry_projection(SHORT rows)
     CHECK(output!=INVALID_HANDLE_VALUE);
     CHECK(GetConsoleScreenBufferInfo(output,&info));
     CHECK(SetConsoleScreenBufferSize(output,(COORD){max(info.dwSize.X,80),max(info.dwSize.Y,60)}));
-    CHECK(SetConsoleWindowInfo(output,TRUE,&large));
+    if(!SetConsoleWindowInfo(output,TRUE,&large)) {
+        DWORD error=GetLastError();COORD largest=GetLargestConsoleWindowSize(output);
+        CHECK(GetConsoleScreenBufferInfo(output,&info));
+        fprintf(private_report ? private_report : stderr,
+            "fixture canvas failed error=%lu buffer=%d,%d window=%d,%d,%d,%d largest=%d,%d\n",
+            error,info.dwSize.X,info.dwSize.Y,info.srWindow.Left,info.srWindow.Top,
+            info.srWindow.Right,info.srWindow.Bottom,largest.X,largest.Y);
+        SetLastError(error);CHECK(FALSE);
+    }
     CHECK(SetConsoleScreenBufferSize(output,(COORD){80,60}));
     CHECK(WriteConsoleOutputCharacterW(output,L"P",1,(COORD){7,17},&count) && count==1);
     CHECK(SetConsoleCursorPosition(output,(COORD){3,11}));
@@ -664,7 +672,11 @@ static void test_dos_conversion_thresholds(void)
             FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CONSOLE_TEXTMODE_BUFFER,NULL);
         CONSOLE_SCREEN_BUFFER_INFO info;SMALL_RECT physical={0,0,79,19};
         SMALL_RECT logical={0,0,79,heights[index]-1};DWORD count;WCHAR cell;
-        CHECK(output!=INVALID_HANDLE_VALUE && SetConsoleWindowInfo(output,TRUE,&physical));
+        CHECK(output!=INVALID_HANDLE_VALUE);
+        /* New buffers inherit the canonical extent left by preceding tests;
+         * this threshold fixture explicitly requires room for80x20 first. */
+        CHECK(SetConsoleScreenBufferSize(output,(COORD){80,60}));
+        CHECK(SetConsoleWindowInfo(output,TRUE,&physical));
         CHECK(SetConsoleScreenBufferSize(output,(COORD){80,heights[index]}));
         for(SHORT row=0;row<heights[index];++row) {
             WCHAR marker=L'A'+row%26;
@@ -1105,6 +1117,20 @@ int main(int argc,char **argv)
     if(argc==3 && !strcmp(argv[1],"--private-full")) {
         CHECK(!fopen_s(&private_report,argv[2],"w") && private_report);
         setvbuf(private_report,NULL,_IONBF,0);
+        /* This child owns a hidden Console. Establish a small raster font on
+         * its canonical buffer before derived buffers inherit it: private
+         * desktops otherwise inherit user font/DPI and can expose only58x15.
+         * All80x30 geometry assertions below remain unchanged. */
+        {
+            CONSOLE_FONT_INFOEX font={sizeof(font)};
+            HANDLE fixture_output=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
+                FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
+            CHECK(fixture_output!=INVALID_HANDLE_VALUE);
+            font.dwFontSize.X=4;font.dwFontSize.Y=6;
+            wcscpy_s(font.FaceName,LF_FACESIZE,L"Terminal");
+            CHECK(SetCurrentConsoleFontEx(fixture_output,FALSE,&font));
+            CloseHandle(fixture_output);
+        }
     }
     if(argc==3 && !strcmp(argv[1],"--geometry-child")) {
         HANDLE geometry_output;

@@ -14,6 +14,21 @@ CCPU40 formal graph in a caller-selected new build root. It rejects retired
 machine inputs and may refresh only graph metadata in an existing disposable
 root; it never imports cache output as a source or release input.
 
+The formal product graph requires explicit `-NativeWorker` and
+`-NativeFrontend` AMD64 producer images; it cannot silently link x86 NTVWM or
+NTCON. Declarative source closures remain available to
+`New-NativeWorkerNinja.ps1 -Component Worker|Frontend`, which builds only the
+selected native consumer and architecture-local dependencies. Frontend has
+no worker-base or original RTL body dependency; source-specific C11 settings
+and test entry points are retained. Import validates PE machine, EXE/subsystem
+and copied hashes before replacing a build-cache product slot.
+
+`Generate-ObservationNinja.mjs <repo> <build> [x86|x64]` defaults to x86 for
+existing callers. Observing private Window userdata requires an observer of
+the frontend's native width; its NTVDM fault diagnostics retain the x86
+context through WOW64 APIs when the observer is x64. This is test-only memory
+observation, not a production protocol or extra product/helper.
+
 `Invoke-T310OriginalSoftpcSerial.ps1` is the bounded fallback for a host where
 Ninja itself cannot dispatch its first job. It reads the generated graph's
 declared VS/Ninja paths, expands only the requested Ninja targets with

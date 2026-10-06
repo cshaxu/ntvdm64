@@ -16,7 +16,7 @@ the delivered baseline, superseded research and known limitations.
 | --- | --- |
 | Identifier Mode | M0 T433 S3; Ordinary Mode. |
 | Candidate Proposal | [Native x64 launcher/frontend/monitor](../proposals/proposal-project-components-native-x64-001.md). |
-| Admission And Approval | After verified/published/pushed S2 NTVWM delivery, owner says “准入下一个”; admit only S3 NTCON in the owner-fixed S2 NTVWM / S3 NTCON / S4 NTMON / S5 RUN16 sequence. |
+| Admission And Approval | After verified/published/pushed S2 NTVWM delivery, owner says “准入下一个” then “批准 开始执行”; admit only S3 NTCON in the owner-fixed S2 NTVWM / S3 NTCON / S4 NTMON / S5 RUN16 sequence. |
 | Objective | Migrate the unique ntcon.exe visible frontend to AMD64 with architecture-local common/Console/Window/RPC dependencies; preserve worker-neutral rendering/input, zero-or-one authorized I/O pipe, broker-owned association/lifecycle, actual caller Console attachment and final restoration ACK. Verify, coherently publish, review/commit/push and report. |
 | Non-goals | No x64 run16/NTMON in S3, no x64 NTSRV/NTVDM/WOW32/VDMREDIR, no second frontend/worker, private helper, guest/original mirror rewrite, protocol redesign, renderer duplication, frontend task registry or autonomous worker lifecycle. |
 | Reference Baseline | S2 production14796f8ba56a51075f098a532d251531a9937db2 and closure8c755716404a0cdfde5e39f0a7385c0a30f52447. Sealed build/M0-T433/S2/r010-runtime/r018-publication matches O:/winnt/system32: ten images APP0.0.433/RPC41/I/O25, NTVWM/Hook64 AMD64; other eight I386. |
@@ -55,9 +55,10 @@ launcher syntax change, bitness-only worker selection or private transition.
 ## Current Technical Baseline
 
 T432 is closed by owner direction without hands-on acceptance. Its ten-image
-package remains independently recoverable. S2's verified r010-runtime is now
-published at O:/winnt/system32, identity0.0.433/RPC41/I/O25. NTVWM and Hook64
-are AMD64; the other eight images stay I386. Guest/configuration are unchanged.
+package remains independently recoverable. S3's verified r002-runtime is now
+published at O:/winnt/system32, identity0.0.433/RPC41/I/O25. NTCON, NTVWM and
+Hook64 are AMD64; seven other images stay I386. Guest/configuration are
+unchanged; r008 retains the previous S2 recovery set.
 
 [Final S6 evidence](../etc/evidence/m0-t432-s6-single-worker-reconstruction.md)
 retains Hook147/147, metadata402, RPC220, native lifetime1084, service29,
@@ -118,7 +119,12 @@ are complete; S2 is delivered. T433 remains open.
 
 ## Recent Governance
 
-S3 admission only. No native frontend implementation or runtime result is
-claimed yet; S2's published ten-image package remains unchanged. S4 is not
-admitted. Next work audits the actual private frontend/library link closure
-and native handle/callback declarations before source adaptation.
+S3 implementation, build and affected verification are complete. Native
+frontend fixtures11 and staging negatives2 pass; x86/x64 parser48 checks each,
+x86/x64 full channel/failure fixtures pass. Full r006 passes all14 groups,
+Console17/Window17 and retained WOW frontiers in399055ms. Published r008/r009
+passes DOS MEM and32/64 CMD output/direct results with matching hashes and Z
+released. [S3 evidence](../etc/evidence/m0-t433-s3-native-frontend-migration.md)
+retains failed observer-width/default53x15 geometry experiments and unchanged
+scope limits. Original mirror bodies are unchanged. P review/commit/push is
+pending; T433 remains open and S4 is not admitted.
