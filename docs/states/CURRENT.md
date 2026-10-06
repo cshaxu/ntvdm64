@@ -2,168 +2,70 @@
 
 ## Current Work
 
-**Active: M0 T434 S5 owner review** (Ordinary Mode; implementation delivered,
-bounded S5 closed; T434 remains open for owner acceptance). No next S admitted.
-Owner closes M0 T433 with “t收口 队列给我看看”.
-[T433 closure](../history/m0-t433-native-components-x64-closure.md) retains
-S1–S7 briefs, evidence, limits and final integration audit. Planned S8 is folded
-into this owner-directed closure, not a separately executed implementation.
-Owner now admits the former queue head with “准入t任务 开始 给我设计方案”.
-[Queue](QUEUE.md) retains only the remaining candidates. Owner's continued
-goal “实现ntmon direct和observed观测” authorizes implementation through the
-designed sequential stages; one active S is retained. S1 design delivery
-f2b8af5f9 is committed/pushed with governance/link/diff checks passed.
-
-## Active Packet
-
-| Field | Required record |
-| --- | --- |
-| Identifier Mode | M0 T434 S5; Ordinary Mode; read-only UI and integrated completion audit. |
-| Candidate Proposal | [Read-only worker task traces](../proposals/proposal-worker-task-trace-observation-001.md). |
-| Admission And Approval | Owner requires pre-T T433 47d78555e UI basis, three time-ordered groups, block gaps/two-space children and WORKER TASKS popup with ID/METHOD/TYPE/ELAPSED/TASK and heading/footer gaps. Rejected candidates are retained as evidence; verified S5 r037 is now installed. |
-| Objective | Preserve the accepted frontend/worker text block; retain independent WOW worker/tasks; add native Direct/Hook program trees. Enter only on text-block workers opens a live-or-unconfirmed-dead task modal in entry order with ordinal, kind, elapsed and path. |
-| Non-goals | No scheduler, observed receipt/lifecycle/kill, Job/tree/member authority, new helper, guest/mirror mutation or internal WOW tracing. Ordinary tree/STACK/actions retain original semantics. |
-| Reference Baseline | S4 73690a209; r007 APP434/RPC44/I/O25 ten images installed through r034; DOS/native facts, Full14/Mixed22/typeahead6, faults and deployed smoke/hashes pass. |
-| Files And ABI Surface | NTMON three-block projection/modal; NTSRV live observation cleanup and copied entry-order/time; common DTO/IDL45; NTVDM callback entry timestamp. Existing I/O remains25; mirrors unchanged. |
-| Applicable Rules | AGENTS authorities; one active S; source-policy/mirror minimality; common/worker-base ownership; borrowed/owned resources and copied snapshots; preserve other-session changes. |
-| Verification | Render/layout/source-state/time/scroll/read-only keys; stale worker/service replacement, gaps/truncation/unknowns and distinct occurrences; actual native/DOS hierarchy with parent return, multi-session isolation, dead-worker snapshots, full retained product/mixed/publication gates. Outputs below build/M0-T434/S5. |
-| Expected Markers | One page, text/Win16/native groups; time-ascending root blocks, one blank row between blocks, roots flush and all descendants exactly two spaces. Pre-T main columns/style/hotkeys retained; popup overlay is entry-ordered and read-only, ESC closes it. No ended observation history; Enter on WOW/native rows does nothing. |
-| Asset Needs | Existing original callbacks, dual Hooks and authored S3/S4 probes; native components and immutable guest unchanged. No new media, helper or import. |
-| Reporting Requirements | Map every designed field/behavior to source and actual evidence; distinguish delivered observations from unavailable source coverage. Stop before owner T acceptance. |
-| Stop Conditions | Observation affects execution/termination; fabricated complete history/source/time; original/mirror algorithm mutation; source/API unsupported case hidden by polling or action fallback. |
-| Exit Criteria | Complete production-connected read-only detail and copied snapshot contract, focused and integrated tests, reviewed coherent publication/commit/push, requirement-by-requirement full goal audit; T awaits owner acceptance. |
-| Original Owner Request | “实现ntmon direct和observed观测”. |
-| Similar-Issue Sweep | Reused PID/PSP, unknown parent/image/time, requested suspension, target exit before receipt consumption, TSR uncertainty, stale/replaced keys, quota reuse, nested native/DOS and independent roots. |
-
-## S1 Closure Record
-
-[S1 evidence](../etc/evidence/m0-t434-s1-task-trace-design.md): design/audit
-delivery f2b8af5f9 committed/pushed; documentation governance/link/diff passed.
-No runtime capability claimed. Owner's continued implementation goal admits S2.
-
-## S2 Closure Record
-
-[S2 evidence](../etc/evidence/m0-t434-s2-direct-task-trace.md): e5769fcc3
-committed/pushed; copied Direct query and read-only modal connected. Both-width
-fixtures, actual Direct/isolation, Full14, mixed22/typeahead6, coherent ten-image
-publication and actual deployed smoke/hashes pass. Unrelated queue/proposal
-changes retained. No Observed implementation claimed by S2 closure.
-
-## S3 Closure Record
-
-[S3 evidence](../etc/evidence/m0-t434-s3-native-observation.md): production
-1e0f66177 committed/pushed; both-width native CREATE/EXIT/faults, identity/quota/
-rundown, Full14/Mixed22/typeahead6 and publication/deployed smoke pass.
-Observation remains read-only and coverage incomplete. DOS collector and full
-UI fidelity are not claimed; admit S4 from the indexed plan.
-
-## S4 Closure Record
-
-[S4 evidence](../etc/evidence/m0-t434-s4-dos-observation.md): production
-73690a209 committed/pushed. Original VDD callbacks, bounded copied outbox,
-real DOS/source/fault tests, full/mixed gates and publication/smoke pass;
-mirror/guest/execution/lifecycle semantics unchanged. TSR/source coverage and
-explicit fixture limits remain. Admit S5, not owner T closure.
+**No active M/T/S packet.** Owner closes M0 T434 with
+“t434没别的事情就可以收口了 队列任务给我看看”.
+[T434 closure](../history/m0-t434-direct-observed-monitor-closure.md) retains
+the final packet, S1-S5 conclusions, exact evidence and limits. No next T/S
+is admitted; [Queue](QUEUE.md) owns the ordered unnumbered candidates.
 
 ## Current Technical Baseline
 
-[S5 evidence](../etc/evidence/m0-t434-s5-monitor-fidelity.md) records final
-APP434/RPC45/I/O25 ten-image r037 package and r032 publication at O:/winnt/system32.
-S4 recovery is retained. Pre-T UI basis, one-page type/time-ordered blocks,
-uniform two-space child indentation and live-only popup are verified with
-real CMD/CMD/WINMINE/DOS captures; ended observations are removed, not archived.
-Full14 passes426979ms; native12/DOS7, mixed22/typeahead6, service29 and both-width
-faults pass. Final display-only revisions map nine unchanged participant hashes
-to full-gate reuse and exact final UI tests. Actual deployed DOS/native32/64
-output/exit0 and all10 hashes pass. Reviewed production9cf24314c is committed/pushed;
-T434 stays open for owner acceptance. Other-session queue/proposal changes stay
-outside this delivery.
-
-## S5 Closure Record
-
-[S5 evidence](../etc/evidence/m0-t434-s5-monitor-fidelity.md): production9cf24314c
-committed/pushed; final owner-aligned UI, live-only observation cleanup, all
-mapped positive/negative/lifecycle gates, coherent publication and deployed
-smoke/hashes pass. Own implementation changes are committed; other-session
-queue/proposal changes are preserved. S5 closes technically; T434 waits owner
-acceptance. No next T/S admission or universal tracing/gameplay claim.
-
-### Previous S4 baseline (recoverable)
-
-[S4 evidence](../etc/evidence/m0-t434-s4-dos-observation.md) records r007
-APP434/RPC44/I/O25 and r034 publication at O:/winnt/system32, with S3 recovery.
-Original VDD callbacks now feed a bounded copied outbox and authenticated
-read-only NTSRV sidecar. Real normal/PSP reuse/COMMAND/DOSONLY0/1, TSR
-uncertainty, failed/load-only/overlay and native-return facts pass. Neither
-observation nor its history changes Direct STACK/results or lifecycle.
-Full14 passes436898ms; mixed22/typeahead6, final native12 and denied/slow
-both-width faults pass. Actual deployed DOS/native32/native64 exit0/output and
-ten hashes match. Source review/governance pass; 73690a209 is committed/pushed.
-
-[S1 design](../etc/operations/t434-read-only-task-trace-design.md) now records
-the owner's superseding three-block page, entry-ordered live-only modal and
-deletion of ended observation records. S5 candidate fixed these production
-paths; native cleanup, DOS300 reuse and isolated layout/key tests pass under
-build/M0-T434/S5/r004-spec-build. Full integration/publication remains pending.
-Source gaps/unknowns remain explicit; no universal tracing,
-physical/RDP certification or automatic TSR retirement claim. Original guest
-media and mvdm/opennt-host mirror files are unchanged. T434 remains open.
+T434 production9cf24314c, S5 registration c152063bd and evidence ce4c05cad are
+committed/pushed. [S5 evidence](../etc/evidence/m0-t434-s5-monitor-fidelity.md)
+records APP0.0.434/RPC45/I/O25, final build/M0-T434/S5/r037-runtime and r032
+coherent publication at O:/winnt/system32. Closure rechecks all ten hashes
+read-only; S4 recovery remains available. No candidate or diagnostic service
+is published.
 
 | Architecture | Images |
 | --- | --- |
 | AMD64 | run16.exe, ntsrv.exe, ntcon.exe, ntvwm.exe, ntmon.exe, nthook64.dll |
 | I386 | ntvdm.exe, WOW32.DLL, VDMREDIR.DLL, nthook32.dll |
 
-NTVDM retains original CCPU40; one NTVWM executes both native widths with
-matching Hooks. NTSRV remains task/lifecycle/I/O authority; NTCON stays
-worker-neutral. Paths, CLI/search and fixed copied protocols remain.
-S7 fixes independent-PIF parent recovery at its existing authenticated boundary;
-original worker/ConsoleRecord identities and DOS/WOW execution are unchanged.
+NTVDM retains original CCPU40 and guest semantics. NTSRV owns execution,
+connections and lifecycle; NTCON is worker-neutral. The owner-aligned NTMON
+page has text, Win16 and native groups, time-ordered blocks, blank rows and
+two-space children. Its readonly WORKER TASKS popup has
+ID/METHOD/TYPE/ELAPSED/TASK and the required title/footer gaps. Ended
+observations are removed; original completion records retain their normal
+consumer lifetime. No guest/mirror, scheduler, helper or task-kill change.
 
-[S7 evidence](../etc/evidence/m0-t433-s7-mixed-batch-tests.md) records
-Full14/Console17/Window17/WOW, both-width service29, mixed batches16/typeahead6,
-exact missing-command10 and actual WOW BAT/UI3. r038 coherent publication
-preserves S6 recovery; r039 actual deployed DOS/32/64 smoke and ten hashes pass.
-Closure rechecks installed hashes read-only; Z: is removed.
+Full14 passes426979ms; Console17/Window17/WOW, native12/DOS7,
+mixed22/typeahead6, service29 and both-width faults pass. Final display-only
+revisions map nine unchanged participant hashes to full-gate reuse and exact
+final UI tests/live captures. Actual deployed DOS/native32/native64 outputs,
+exit0 and ten hashes pass.
 
-No physical/RDP/gameplay or universal compatibility claim. WINMINE reaches
-visible UI; SOL/WRITE retain independent known frontiers. Long-path/default
-geometry/large-environment limits and the unclassified rapid-interactive
-observation remain as recorded in [TODO](TODO.md) and closure evidence.
+Unknowns and bounded Hook/API/TSR coverage remain explicit; no internal WOW
+tracing, universal compatibility or physical/RDP/gameplay claim. Broader
+limitations stay in [TODO](TODO.md). Owner closure does not upgrade those limits.
 
 ## Reusable Build Inputs
 
-S3 current native caches: build/M0-T434/S3/r002-service, r003-hook64,
-r004-worker, r005-frontend, r006-launcher and r007-monitor. Formal x86 graph
-r001-formal and WOW32 r009-wow32 compose the r042 published manifest.
-These selected caches supersede the T433 consumer images below; reuse their
-objects only with verified source/header/generated-input identity.
-
-All disposable/reusable outputs remain below build/. Native service:
-build/M0-T433/S7/r028-native-final. Worker: build/M0-T433/S2/r001.
-Frontend: build/M0-T433/S3/r001. Monitor: build/M0-T433/S4/r001.
-Launcher: build/M0-T433/S5/r002-native. Hook64: build/M0-T433/S2/r002-hook64.
-Formal x86 fixture/worker cache: build/M0-T427/S2/r001.
-Use actual consumer ABI and manifests; never mix object/CRT widths or use
-diagnostic/superseded dual-worker images as production inputs.
+T434 validated native caches: S3/r002-service, r003-hook64, r004-worker,
+r005-frontend and r006-launcher; final monitor is S5/r024-monitor. Formal x86
+graph/NTVDM is S3/r001-formal; WOW32 is S3/r009-wow32. All paths are below
+build/M0-T434. Reuse only with verified source/header/generated/toolchain
+identity. Sealed S5/r037-runtime and earlier evidence remain immutable;
+do not substitute superseded monitor caches or diagnostic fault services.
 
 ## Recent M0 Closures
 
 | Task | Outcome and evidence |
 | --- | --- |
-| T433 | Selective native migration, mixed-width BAT coverage and PIF parent recovery; owner-directed closure on delivered evidence. [Closure](../history/m0-t433-native-components-x64-closure.md). |
-| T432 | Single native worker, dual Hooks and broker I/O release authority. [Closure](../history/m0-t432-single-worker-dual-hook-closure.md). |
+| T434 | Owner-aligned Direct/Observed monitoring, live-only cleanup and verified publication. [Closure](../history/m0-t434-direct-observed-monitor-closure.md). |
+| T433 | Native component migration and mixed-width/PIF parent recovery. [Closure](../history/m0-t433-native-components-x64-closure.md). |
+| T432 | Single native worker and dual Hooks. [Closure](../history/m0-t432-single-worker-dual-hook-closure.md). |
 | T431 | Accepted Hook32 baseline. [Closure](../history/m0-t431-native-hook32-closure.md). |
-| T430 | Accepted non-WOW contract repairs/proofs. [Closure](../history/m0-t430-non-wow-contract-closure.md). |
 
 ## Next Admission
 
-T434 S5 has delivered its final implementation/full requirement audit.
-Wait for owner acceptance; do not admit another S/T automatically. Unrelated
-candidate ordering remains solely in QUEUE.
+No next task is admitted. Await owner selection from Queue; its order and
+other-session uncommitted planning changes are preserved by this closure.
 
 ## Recent Governance
 
-T434 S3 keeps source/runtime evidence, publication and closure separate. S1–S3
-closures are indexed; T433 remains historical. Other-session queue/proposal
-changes remain excluded and preserved. S5 is the only active packet.
+T434 runtime delivery, S5 closure and owner T closure remain separate.
+Original stage records and failed/superseded candidates are retained as
+evidence. This closure changes documents only; no additional product test,
+process termination or publication is needed or claimed.
