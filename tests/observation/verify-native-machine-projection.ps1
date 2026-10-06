@@ -5,6 +5,7 @@ param(
     [Parameter(Mandatory)][string]$MonitorClient,
     [Parameter(Mandatory)][string]$LogRoot,
     [ValidateSet('I386','AMD64')][string]$NativeMachine='AMD64',
+    [ValidateSet('I386','AMD64')][string]$WorkerMachine,
     [string]$GuiTarget,
     [switch]$Reentry
 )
@@ -89,6 +90,26 @@ try {
                 $_.image -match ('(?i)'+[regex]::Escape($expectedImage)+'$') -and
                 (!$GuiTarget -or $_.category -eq 4)})
             $hit=$selected.Count -eq 1
+            if($hit -and $WorkerMachine -and !$GuiTarget) {
+                $carriers=@($rows|Where-Object {$_.category -eq 2 -and $_.kind -in @(2,3)})
+                if($carriers.Count -ne 1){throw 'Expected exactly one native carrier'}
+                $carrier=[Diagnostics.Process]::GetProcessById($carriers[0].pid)
+                try {
+                    $null=$carrier.Handle
+                    if($carrier.HasExited){throw 'Selected carrier exited before identity check'}
+                    $carrierPath=$carrier.MainModule.FileName
+                    if([IO.Path]::GetFileName($carrierPath) -ine 'ntvwm.exe'){throw 'Snapshot PID is not the native worker'}
+                    $expectedCarrier=Join-Path $runtime 'system32\ntvwm.exe'
+                    $hash=(Get-FileHash $carrierPath).Hash
+                    if($hash -ne (Get-FileHash $expectedCarrier).Hash){throw 'Selected worker is not this package image'}
+                    $image=[IO.File]::ReadAllBytes($carrierPath)
+                    $pe=[BitConverter]::ToInt32($image,60)
+                    $machine=[BitConverter]::ToUInt16($image,$pe+4)
+                    if($machine -ne $(if($WorkerMachine -eq 'AMD64'){0x8664}else{0x14c})){throw 'Actual native worker image width mismatch'}
+                    [pscustomobject]@{PID=$carrier.Id;Image=$carrierPath;Machine=$machine;Sha256=$hash}|
+                        ConvertTo-Json|Set-Content (Join-Path $log ('carrier-'+$index+'.json'))
+                }finally{$carrier.Dispose()}
+            }
             if($Reentry){
                 $workers=@($rows|Where-Object {$_.category -eq 2 -and $_.kind -in @(2,3)})
                 if($workers.Count -gt 1){throw 'Bitness-only reentry created another NTVWM worker'}

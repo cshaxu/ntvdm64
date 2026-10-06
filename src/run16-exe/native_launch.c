@@ -24,7 +24,7 @@ static DWORD environment_copy(PCWSTR source,HANDLE *capabilities,PWSTR *output)
     for(i=0;i<2;++i) {
         values[i][0]=0;
         if(capabilities[i]) {
-            swprintf_s(values[i],80,L"%ls%lx",names[i],(unsigned long)(ULONG_PTR)capabilities[i]);
+            swprintf_s(values[i],80,L"%ls%llx",names[i],(unsigned long long)(ULONG_PTR)capabilities[i]);
             count+=wcslen(values[i])+1;
         }
     }

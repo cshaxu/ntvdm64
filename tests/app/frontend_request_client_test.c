@@ -34,7 +34,8 @@ DWORD OpenNtBaseClientSubmitNativeRequest(HANDLE capability,DWORD bytes,BYTE *pa
     error=run16_native_launch_unpack(payload,bytes,&packet,strings);if(error)return error;
     if(packet.capabilities[0] || packet.capabilities[1])return ERROR_INVALID_DATA;
     if(scenario<6 && errors[scenario])return errors[scenario];
-    error=run16_native_launch_start(payload,bytes,&process);if(error)return error;
+    error=run16_native_launch_start(payload,bytes,&process);
+    if(error){printf("FAIL native create scenario=%lu error=%lu application=%ls\n",scenario,error,strings[0]);return error;}
     ++created;CloseHandle(process.hThread);
     *target=process.hProcess;*request=91;
     *receipt=CreateEventW(NULL,TRUE,scenario<6,NULL);
@@ -69,6 +70,7 @@ int main(void)
     for(scenario=0;scenario<6;++scenario) {
         HANDLE target=NULL,receipt=NULL;DWORD error,result=0,request=0,before=created;
         error=run16_native_request_submit((HANDLE)1,&start,&target,&receipt,&request);
+        printf("native submission scenario=%lu error=%lu expected=%lu\n",scenario,error,expected[scenario]);
         if(error!=expected[scenario])return 2;
         if(!error) {
             if(!target || !receipt || request!=91 || WaitForSingleObject(target,5000)!=WAIT_OBJECT_0 ||

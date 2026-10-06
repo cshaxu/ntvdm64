@@ -3,7 +3,9 @@
 ## Scope
 
 Owner admits the former Queue-head candidate after T432 closure without
-manual testing. Status owns the only active packet: S1 audit/design.
+manual testing. Status owns the only active packet; owner-approved S1 design
+handoff admits S2 NTVWM implementation. Remaining consumer-native probes
+continue at their own stages, not as already passed S1 runtime behavior.
 [T432 closure](../../history/m0-t432-single-worker-dual-hook-closure.md)
 supplies the baseline: one x86 NTVWM, dual Hooks, ten images,
 APP0.0.432/RPC41/I/O25. Old dual-worker/eleven-image planning is superseded.

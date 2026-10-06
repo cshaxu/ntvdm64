@@ -5,7 +5,8 @@ param(
     [Parameter(Mandatory)][string]$Wow32,
     [Parameter(Mandatory)][string]$OutputRoot,
     [string]$NativeHook='',
-    [string]$NativeHook64=''
+    [string]$NativeHook64='',
+    [Parameter(Mandatory)][string]$NativeWorker
 )
 $ErrorActionPreference='Stop'
 if($NativeHook64 -and !$NativeHook){throw 'Hook64 requires the matching Hook32 package input'}
@@ -22,11 +23,15 @@ if(!(Test-Path -LiteralPath $system -PathType Container)){throw 'Baseline lacks 
 $names=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL')
 if($NativeHook){$NativeHook=(Resolve-Path -LiteralPath $NativeHook).Path;$names+='nthook32.dll'}
 if($NativeHook64){$NativeHook64=(Resolve-Path -LiteralPath $NativeHook64).Path;$names+='nthook64.dll'}
+if($NativeWorker){
+    $NativeWorker=(Resolve-Path -LiteralPath $NativeWorker).Path
+    if(!$NativeHook64 -or !$NativeWorker.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)){throw 'Native worker requires both Hooks and a build-owned input'}
+}
 $manifest=foreach($name in $names){
-    $source=if($name -eq 'WOW32.DLL'){$wow}elseif($name -eq 'nthook32.dll'){$NativeHook}elseif($name -eq 'nthook64.dll'){$NativeHook64}else{Join-Path $cache $name}
+    $source=if($name -eq 'WOW32.DLL'){$wow}elseif($name -eq 'nthook32.dll'){$NativeHook}elseif($name -eq 'nthook64.dll'){$NativeHook64}elseif($name -eq 'ntvwm.exe' -and $NativeWorker){$NativeWorker}else{Join-Path $cache $name}
     $bytes=[IO.File]::ReadAllBytes($source)
     $pe=[BitConverter]::ToInt32($bytes,60)
-    $expectedMachine=if($name -eq 'nthook64.dll'){0x8664}else{0x14c}
+    $expectedMachine=if($name -eq 'nthook64.dll' -or ($name -eq 'ntvwm.exe' -and $NativeWorker)){0x8664}else{0x14c}
     if([BitConverter]::ToUInt16($bytes,$pe+4) -ne $expectedMachine){throw "Wrong PE machine input: $name"}
     $destination=Join-Path $system $name
     Copy-Item -LiteralPath $source -Destination $destination -Force
@@ -49,4 +54,4 @@ $manifest|ConvertTo-Json|Set-Content -LiteralPath (Join-Path $output 'product-sy
 if($NativeHook){
     Copy-Item -LiteralPath "$PSScriptRoot/../../src/nthook32-dll/detours/LICENSE.md" -Destination (Join-Path $system 'nthook32-LICENSE.txt')
 }
-'PASS staged coherent system32 host package; only optional Hook64 is AMD64; baseline media/configuration retained'
+'PASS staged coherent system32 host package; explicitly selected native images verified; baseline media/configuration retained'

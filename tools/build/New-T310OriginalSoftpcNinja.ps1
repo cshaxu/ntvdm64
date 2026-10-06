@@ -5,6 +5,7 @@ param(
     [string]$BuildRoot = '',
     [string]$NodeExecutable = '',
     [string]$NinjaExecutable = '',
+    [string]$NativeWorker = '',
     [ValidateRange(0, 64)] [int]$ParallelJobs = 0
 )
 
@@ -1470,7 +1471,8 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build control-transfer-test.exe: console_test_link obj/tests/control_transfer.obj')
     $graph.Add('build obj/common/console_client.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/console/client.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build frontend-client.lib: lib obj/frontend/native_request_client.obj obj/frontend/bootstrap_client.obj')
+    $graph.Add('build obj/common/native_path.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/native_path.c')))
+    $graph.Add('build frontend-client.lib: lib obj/frontend/native_request_client.obj obj/frontend/bootstrap_client.obj obj/common/native_path.obj')
     $graph.Add('rule frontend_link')
     $graph.Add('  command = link.exe /nologo /subsystem:console /entry:wmainCRTStartup /opt:ref /out:$out /map:$out.map $in rpcrt4.lib ntdll.lib kernel32.lib shell32.lib user32.lib gdi32.lib advapi32.lib legacy_stdio_definitions.lib')
     $graph.Add('build ntcon.exe: frontend_link obj/frontend/main.obj obj/frontend/session_service.obj obj/frontend/frontend_session.obj frontend-window.lib obj/frontend/console_frontend.obj obj/frontend/console_video.obj obj/frontend/console_channel.obj frontend-client.lib obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj ' + $consoleGridObject + ' opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
@@ -1479,7 +1481,18 @@ if ($Architecture -eq 'x86') {
         $graph.Add('  cflags = ' + $nativeServiceFlags + ' /I "' + (NinjaPath $fontBuild) + '"')
     }
     $nativeBinding = ' obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib'
-    $graph.Add('build ntvwm.exe: frontend_link worker-base.lib obj/ntvwm/next_command.obj obj/ntvwm/main.obj obj/ntvwm/presentation.obj obj/ntvwm/text_frame.obj obj/ntvwm/console_state.obj obj/ntvwm/execution.obj obj/run16/native_launch.obj nthook-installer.lib nthook-context.lib' + $nativeBinding + ' || nthook32.dll')
+    # One declared source closure, consumed by the isolated native builder.
+    # The x86 product graph must never silently link another worker carrier.
+    $graph.Add('build ntvwm-source-closure: phony worker-base.lib obj/ntvwm/next_command.obj obj/ntvwm/main.obj obj/ntvwm/presentation.obj obj/ntvwm/text_frame.obj obj/ntvwm/console_state.obj obj/ntvwm/execution.obj obj/run16/native_launch.obj nthook-installer.lib nthook-context.lib' + $nativeBinding + ' common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib')
+    $graph.Add('rule native_worker_import')
+    if($NativeWorker){
+        $nativeWorkerInput=(Resolve-Path -LiteralPath $NativeWorker).Path
+        $graph.Add('  command = powershell.exe -NoProfile -ExecutionPolicy Bypass -File "'+(NinjaPath (Join-Path $root 'tools/build/Stage-NativeWorkerImage.ps1'))+'" -InputFile $in -OutputFile "'+(NinjaPath (Join-Path $build 'ntvwm.exe'))+'"')
+        $graph.Add('build ntvwm.exe: native_worker_import '+(NinjaPath $nativeWorkerInput))
+    }else{
+        $graph.Add('  command = powershell.exe -NoProfile -Command "throw ''Select the verified AMD64 NTVWM with -NativeWorker; no x86 worker fallback''"')
+        $graph.Add('build ntvwm.exe: native_worker_import')
+    }
     $graph.Add('build obj/run16/image_classification.obj: cc ' + (NinjaPath (Join-Path $run16Root 'image_classification.c')))
     $graph.Add('  cflags = ' + $baseOwnerFlags)
     $graph.Add('build obj/common/native_image.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/native_image.c')))
@@ -1514,7 +1527,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  subsystem = windows')
     $graph.Add('build obj/tests/run16_image_classification.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/run16_image_classification_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build run16-image-classification-test.exe: frontend_link obj/tests/run16_image_classification.obj obj/run16/image_classification.obj obj/common/native_image.obj obj/run16/support.obj original-opennt-rtl-x86.lib')
+    $graph.Add('build run16-image-classification-test.exe: frontend_link obj/tests/run16_image_classification.obj obj/run16/image_classification.obj obj/common/native_image.obj obj/common/native_path.obj obj/run16/support.obj original-opennt-rtl-x86.lib')
     $graph.Add('build obj/tests/native_gui_startup_probe.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/native_gui_startup_probe.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('rule native_gui_probe_link')
@@ -2031,6 +2044,9 @@ if ($objectOutputDirectories.Count -gt 0) {
     }
     nativeConsoleComposition = [ordered]@{
         target = 'ntvwm.exe'
+        architecture = 'AMD64'
+        buildInput = $NativeWorker
+        sourceClosure = 'ntvwm-source-closure'
         disposition = 'independent registered hidden Console worker; shared frontend channel and direct target completion; acceptance remains gated'
         sources = @('main.c','next_command.c','next_command.h','console_state.c','console_state.h','execution.c','execution.h','presentation.c','presentation.h','text_frame.c','text_frame.h' | ForEach-Object {
             $path = 'src/ntvwm-exe/' + $_

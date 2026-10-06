@@ -4,6 +4,29 @@
 
 static unsigned checks,failures;
 #define CHECK(x) do { ++checks; if(!(x)) { ++failures; printf("FAIL %d: %s\n",__LINE__,#x); } } while(0)
+static void application_path(PCWSTR application,DWORD expected_machine)
+{
+    WCHAR path[32767];DWORD machine=0,subsystem=0,before,after;
+    HANDLE first,second;BY_HANDLE_FILE_INFORMATION a,b;
+    CHECK(GetProcessHandleCount(GetCurrentProcess(),&before));
+    CHECK(!common_native_application_path(application,path,ARRAYSIZE(path)));
+    CHECK(!common_native_image(path,&machine,&subsystem) && machine==expected_machine);
+    first=CreateFileW(application,FILE_READ_ATTRIBUTES,FILE_SHARE_READ|FILE_SHARE_DELETE,NULL,OPEN_EXISTING,0,NULL);
+    second=CreateFileW(path,FILE_READ_ATTRIBUTES,FILE_SHARE_READ|FILE_SHARE_DELETE,NULL,OPEN_EXISTING,0,NULL);
+    CHECK(first!=INVALID_HANDLE_VALUE && second!=INVALID_HANDLE_VALUE);
+    if(first!=INVALID_HANDLE_VALUE && second!=INVALID_HANDLE_VALUE) {
+        CHECK(GetFileInformationByHandle(first,&a) && GetFileInformationByHandle(second,&b));
+        CHECK(a.dwVolumeSerialNumber==b.dwVolumeSerialNumber &&
+            a.nFileIndexHigh==b.nFileIndexHigh && a.nFileIndexLow==b.nFileIndexLow);
+    }
+    if(first!=INVALID_HANDLE_VALUE)CloseHandle(first);
+    if(second!=INVALID_HANDLE_VALUE)CloseHandle(second);
+    CHECK(common_native_application_path(application,path,2)==ERROR_INSUFFICIENT_BUFFER && !path[0]);
+    CHECK(common_native_application_path(NULL,path,ARRAYSIZE(path))==ERROR_INVALID_PARAMETER && !path[0]);
+    CHECK(common_native_application_path(L"",path,ARRAYSIZE(path))==ERROR_INVALID_PARAMETER && !path[0]);
+    CHECK(common_native_application_path(L"?:\\invalid-image",path,ARRAYSIZE(path))!=ERROR_SUCCESS && !path[0]);
+    CHECK(GetProcessHandleCount(GetCurrentProcess(),&after) && after==before);
+}
 static void process_image(PCWSTR application,DWORD expected_machine)
 {
     STARTUPINFOW startup={sizeof(startup)};PROCESS_INFORMATION child={0};
@@ -56,6 +79,8 @@ int wmain(int argc,WCHAR **argv)
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&after));
     CHECK(after==before);
     if(argc==5) {
+        application_path(argv[2],IMAGE_FILE_MACHINE_I386);
+        application_path(argv[4],IMAGE_FILE_MACHINE_AMD64);
         process_image(argv[2],IMAGE_FILE_MACHINE_I386);
         process_image(argv[4],IMAGE_FILE_MACHINE_AMD64);
     }

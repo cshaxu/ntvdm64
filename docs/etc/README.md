@@ -7,6 +7,7 @@ delivered single-worker/dual-Hook gates; see
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T433 S2 native worker migration](evidence/m0-t433-s2-native-worker-migration.md) | M0 T433 S2 | Isolated AMD64 worker ABI/build, selected-file adaptation and current verification/publication state. | Retain through delivery and package closure. |
 | [T433 S1 native-width audit](evidence/m0-t433-s1-native-width-audit.md) | M0 T433 S1 | Four current image-matched link closures, concrete native-width boundaries and remaining audit/design work; not x64 runtime proof. | Retain through implementation and package verification. |
 | [T433 native component migration plan](operations/t433-native-components-x64-plan.md) | M0 T433 | Selective run16/NTCON/NTMON migration, bounded source-first design and delivery; one x86 NTVWM retained. | Retain through implementation and owner closure. |
 | [T432 dual-width worker/Hook plan](operations/t432-dual-width-native-workers-hooks-plan.md) | M0 T432 | Accepted Hook32 baseline preservation, staged dual builds/propagation and explicit runtime gates. | Retain through owner acceptance. |
