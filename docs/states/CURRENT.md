@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T434 S2** (Ordinary Mode; Direct task-trace production query).
+**Active: M0 T434 S3** (Ordinary Mode; native Observed creation/exit events).
 Owner closes M0 T433 with “t收口 队列给我看看”.
 [T433 closure](../history/m0-t433-native-components-x64-closure.md) retains
 S1–S7 briefs, evidence, limits and final integration audit. Planned S8 is folded
@@ -17,20 +17,20 @@ f2b8af5f9 is committed/pushed with governance/link/diff checks passed.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T434 S2; Ordinary Mode; production implementation. |
+| Identifier Mode | M0 T434 S3; Ordinary Mode; production implementation. |
 | Candidate Proposal | [Read-only worker task traces](../proposals/proposal-worker-task-trace-observation-001.md). |
-| Admission And Approval | Owner continuing goal requests implementation of Direct and Observed observation. S1 has reached its design exit criteria in f2b8af5f9; admit S2 according to its recorded staged plan. |
-| Objective | Expose existing Direct records through an authenticated generation-safe copied trace query and a read-only NTMON detail entry, without changing ordinary management or execution. |
-| Non-goals | Hook descendant reporting and DOS callback extraction belong to following S3/S4; no Job/tree scan/Console-member authority, helper, scheduler, observed completion/kill/lifecycle effect. |
-| Reference Baseline | T433 closure47d78555e; S7 productiond1aa8336c/closure31a1487e4; published ten-image APP433/RPC41/I/O25, six AMD64/four I386; CCPU40 and existing direct/GUI/worker authority unchanged. |
-| Files And ABI Surface | common/protocol trace DTO and service IDL, common/rpc management client, NTSRV private management projection/RPC handler, NTMON modal and focused fixtures. APP434/protocol42 and IDL42 synchronized; I/O25 unchanged. |
+| Admission And Approval | Continued owner goal authorizes sequential Direct/Observed implementation. S2 e5769fcc3 is verified, published and pushed; admit S3 from the indexed design. |
+| Objective | Controlled Hook parents publish actual successful child creation before their existing resume; NTSRV authenticates pinned process instances and observes real exits in a read-only sidecar exposed to NTMON. |
+| Non-goals | DOS collector belongs to S4, full UI hierarchy to S5. No Job/tree scan/Console-member authority, new helper, scheduler, observed completion/kill/lifecycle effect, fake cross-worker parent or launch failure caused by observation failure. |
+| Reference Baseline | S2 e5769fcc3; r016 ten-image APP434/RPC42/I/O25 published at O:/winnt/system32; Full14/Mixed22/typeahead6 and actual Direct/deployed smoke pass. Six AMD64/four I386 and original CCPU40 remain. |
+| Files And ABI Surface | common/protocol copied observation contract/IDL and finite client; Hook successful creation boundary at both widths; NTSRV private sidecar/root bind/process waits/query/cleanup; focused fixtures/build graphs. Wire change synchronizes protocol/IDL43; APP434 and I/O25 remain. |
 | Applicable Rules | AGENTS authorities, source policy and mirror minimality, one active S, common/worker-base ownership, immutable guest and native-width/fixed-wire separation. Preserve other-session changes. |
-| Verification | Both-width copied ABI and service fixtures, Direct query/forged/stale/cross-worker selection, modal keys/cleanup and management invariance; coherent ten-image build, retained Console/Window/WOW runtime and publication gates. All outputs under build/M0-T434/S2. |
+| Verification | Real controlled CMD descendants and authored short-lived/concurrent/suspended/forced-exit/surviving-child probes at both widths; forged/replayed/cross-scope reports, callback rundown/cancellation and partial failure; prove Direct completion/lifetime unchanged. Both-width builds and retained full/mixed/publication gates, outputs under build/M0-T434/S3. |
 | Expected Markers | Honest current-versus-proposed implementation, observation isolated from execution, validated process instances not bare PID, authenticated ordering/callback cleanup, truthful unknown states and unchanged monitor summary semantics. |
 | Asset Needs | Delivered dual Hooks and native components; existing original guest/process-wait boundaries and indexed S39 research. No import, new firmware/media or runtime asset. |
 | Reporting Requirements | Present ownership, event flow, identity, uncertainty, failure contract, mirror-hook requirements, stage split and remaining decisions before coding. |
 | Stop Conditions | Conflict with original execution/guest immutability, monitor affecting completion/lifetime, unavailable event fidelity hidden by polling, new helper/authority or unapproved original algorithm change. |
-| Exit Criteria | Production-connected Direct query/modal and reproducible tests; gates and coherent publication pass, evidence reviewed and commit/push complete before S3. Full Observed objective remains open. |
+| Exit Criteria | Production-connected authenticated creation/exit facts and visible Observed rows, strict identity/source/uncertainty/cleanup tests, non-regressing coherent publication and reviewed commit/push before S4. Full goal remains open. |
 | Original Owner Request | “实现ntmon direct和observed观测”. |
 | Similar-Issue Sweep | Short-lived/reused PID, concurrent/replayed native reports, caller-suspended targets, hook gaps/GUI boundaries, DOSONLY on/off, failed/load-only/overlay EXEC, ordinary exit versus TSR, stale worker/root selection and callback rundown. |
 
@@ -40,6 +40,14 @@ f2b8af5f9 is committed/pushed with governance/link/diff checks passed.
 delivery f2b8af5f9 committed/pushed; documentation governance/link/diff passed.
 No runtime capability claimed. Owner's continued implementation goal admits S2.
 
+## S2 Closure Record
+
+[S2 evidence](../etc/evidence/m0-t434-s2-direct-task-trace.md): e5769fcc3
+committed/pushed; copied Direct query and read-only modal connected. Both-width
+fixtures, actual Direct/isolation, Full14, mixed22/typeahead6, coherent ten-image
+publication and actual deployed smoke/hashes pass. Unrelated queue/proposal
+changes retained. No Observed implementation claimed by S2 closure.
+
 ## Current Technical Baseline
 
 [T434 S1 design](../etc/operations/t434-read-only-task-trace-design.md) records
@@ -47,15 +55,15 @@ actual missing Hook creation reports and existing original VDD user callbacks
 as the preferred DOS observation source. Execution records/STACK and lifecycle
 stay unchanged; observed trace is a separate read-only modal/sidecar. Exact
 source/fidelity and bounded native reporting remain implementation proof gates.
-S1 design is delivered; S2 implementation is verified and published, pending
-production commit/push. Current runtime is APP434/RPC42/I/O25 from r016.
+S1 design and S2 e5769fcc3 are delivered. Current runtime is APP434/RPC42/I/O25
+from r016; S3 candidate changes are not yet implemented or published.
 [S2 evidence](../etc/evidence/m0-t434-s2-direct-task-trace.md) records candidate
 Direct query/detail compilation, both-width service/client fixtures and
 private-Console layout passes. Real RPC negatives and two live native session
-Direct projections/isolation pass; full mixed-package and publication remain
-open. Observed production sources are not yet implemented.
+Direct projections/isolation, full mixed-package and publication pass.
+Observed production sources are not yet implemented.
 S2 review makes DOS display IDs fresh at true admission and both-width service
-reuse fixtures pass. Updated r016-runtime is staged, not published. r011 Full
+reuse fixtures pass. Updated r016-runtime is verified and published. r011 Full
 attempt passed five groups but failed1740 at version-negatives; independent
 performance research is repeatedly occupying BaseSrv through W:. Serial
 runtime coordination is requested; no failed gate is waived. New known-DOS
@@ -116,7 +124,7 @@ diagnostic/superseded dual-worker images as production inputs.
 
 ## Next Admission
 
-T434 S2 is active. Continue its designed sequential stages after each delivery;
+T434 S3 is active. Continue its designed sequential stages after each delivery;
 unrelated candidate ordering remains solely in QUEUE.
 
 ## Recent Governance

@@ -128,6 +128,8 @@ finite client; NTSRV owns projection/identities; NTMON owns read-only UI.
 Callbacks are not yet introduced. No Job/member scan/helper/observed admission.
 Main STACK/TASK/actions remain existing Direct semantics. Physical/RDP use is
 not newly certified; retained WOW frontiers are not gameplay acceptance.
-Production commit/push and closure-state registration are the final S2 steps.
+Production delivery e5769fcc3 is committed/pushed; bounded S2 is closed and
+CURRENT admits S3. Other-session queue/performance proposal changes remain
+untouched/uncommitted by this delivery.
 The full goal remains open: Hook descendants, DOSONLY callback/TSR facts and
 complete detail hierarchy/fidelity are following admitted stages, not waived.
