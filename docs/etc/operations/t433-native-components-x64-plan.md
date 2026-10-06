@@ -46,7 +46,9 @@ minimal registered local-ABI changes and unchanged original RTL algorithms.
 both-width ABI tests, corrected owned-Window input observation, final Full14,
 both real Hook chains, coherent publication and actual deployed checks. The
 unclassified rapid-interactive observation remains explicit debt, not a claimed
-repair. S5 delivery review/P recording is in Status; T433 stays open.
+repair. S5 production P1 39fe1f8a93c855a59298877ec10a93d8dd8bb92d is committed
+and pushed; documentation-only P2 records its bounded automated closure.
+No S is active; T433 stays open and later stages require admission.
 Later rows require bounded stage conclusion and ordinary
 execution-rule admission/verification; they are not simultaneous active tasks.
 Owner explicitly selects S2 NTVWM, S3 NTCON, S4 NTMON and S5 RUN16.
@@ -134,7 +136,7 @@ onward and retains S4 as independently recoverable production.
 ## Planned S6 NTSRV native migration
 
 Owner requests this stage after run16, with additional original-mirror diff
-preferably no larger than run16's delivered migration. S5 stays active; this
+preferably no larger than run16's delivered migration. S5 is delivered; this
 plan is not S6 implementation admission. Preserve the completed S5 package as
 the independently recoverable baseline and audit before editing service source.
 
@@ -176,8 +178,8 @@ this plan. S6 begins only after S5 closure and its own active packet admission.
 ## Planned S7 mixed 16/32/64-bit batch verification
 
 Owner side-conversation direction on2026-10-05 inserts a separate test stage
-immediately after NTSRV64 migration. This is planning only: S5 remains the
-active packet; no test, process, source implementation or new stage is admitted
+immediately after NTSRV64 migration. This is planning only: S5 was then the
+active packet and is now delivered; no test, process, implementation or new stage is admitted
 by this edit. S7 requires delivered S6 and its own active packet admission.
 
 - Start actual x86 and AMD64 CMD through run16, then execute a BAT containing

@@ -2,7 +2,8 @@
 
 ## Current Work
 
-**Active: M0 T433 S5** (Ordinary Mode; native launcher migration).
+**No active M/T/S packet.** T433 remains open; S5 native launcher migration
+is delivered on bounded automated evidence. Await owner admission of S6.
 
 The owner authorizes closing the delivered single-worker/dual-Hook package
 without manual acceptance and admitting the next Queue candidate. This is
@@ -10,11 +11,11 @@ owner-directed closure on automated evidence, not a claim of hands-on testing.
 [T432 closure](../history/m0-t432-single-worker-dual-hook-closure.md) retains
 the delivered baseline, superseded research and known limitations.
 
-## Active Packet
+## S5 Closure Record
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T433 S5; Ordinary Mode. |
+| Identifier Mode | M0 T433 S5 closed; Ordinary Mode. Production P1 39fe1f8a93c855a59298877ec10a93d8dd8bb92d committed/pushed; documentation-only P2 records closure. |
 | Candidate Proposal | [Native x64 launcher/frontend/monitor](../proposals/proposal-project-components-native-x64-001.md). |
 | Admission And Approval | Owner admits S5, reviews the audited vdm/capture expression changes and requires x86/x64 compatibility, then says “好的，请你开始实施。” Implement the bounded native launcher and minimal registered local-ABI adaptations; preserve original x86 behavior and fixed wire/guest types. |
 | Objective | Migrate the single run16.exe to AMD64, preserving shared CWD/PATH COM/EXE/BAT/PIF discovery, original DOS/WOW classification/client/environment semantics, native image fallback, unchanged CLI and GUI startup/explicit wait/direct receipt/Console restoration behavior. Build/test, coherently publish, review/commit/push and report. |
@@ -33,7 +34,7 @@ the delivered baseline, superseded research and known limitations.
 
 ## S5 Implementation Progress
 
-S5 implementation progress (not closure): [native launcher evidence](../etc/evidence/m0-t433-s5-native-launcher-migration.md)
+S5 delivered implementation: [native launcher evidence](../etc/evidence/m0-t433-s5-native-launcher-migration.md)
 records AMD64 run16, minimal registered native capture/client adaptations and
 the existing NT VM declaration-carrier correction, with unchanged original
 RTL algorithms. Both-width ABI/lifetime/environment fixtures and search/
@@ -51,8 +52,11 @@ Final r026 Full passes all14 groups in442666ms, including unchanged12-round
 interactive assertions. Actual Hook-to-legacy chains pass from both widths,
 with actual WINMINE windows; additional AMD64 nested Window return23 passes.
 r020 coherently publishes the final ten-image package, preserving S4 recovery;
-r021 actual deployed DOS/32/64 smoke and hashes pass. S5 delivery review/P1
-is pending; S6 remains unadmitted and T433 open.
+r021 actual deployed DOS/32/64 smoke and hashes pass. S5 reviewed production
+P1 39fe1f8a93c855a59298877ec10a93d8dd8bb92d is committed/pushed; documentation-only
+P2 records closure. The unclassified rapid observation remains TODO, not
+claimed repaired or automatically assigned to a new active task. S6 remains
+unadmitted and T433 open; no manual owner acceptance is claimed.
 
 ## S4 Closure Record
 
@@ -109,9 +113,9 @@ including the retained scope and default-desktop limitations.
 owns S1 audit/design, then the owner's order: S2 NTVWM, S3 NTCON, S4 NTMON,
 S5 RUN16, followed by planned S6 NTSRV native migration, then owner-requested
 S7 mixed16/32/64-bit batch verification; integrated delivery shifts to S8.
-S2-S4 are delivered; S5 alone is active. S6/S7/S8 require their own admission.
-This side-conversation edit only schedules the batch test after service
-migration; it does not start tests or change the active implementation. The plan records the owner's service
+S2-S5 are delivered; no S is active. S6/S7/S8 require their own admission.
+The side-conversation edit only schedules the batch test after service
+migration; it does not admit another implementation. The plan records the owner's service
 mirror-diff budget relative to delivered RUN16; no service work starts in S5.
 
 NTSRV remains the sole lifecycle/task/I/O connection authority. NTCON stays

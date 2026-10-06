@@ -235,6 +235,12 @@ and complete run are retained separately, without any product change.
 The diagnostic launcher in r024 is never published. S5 is a bounded automated
 native migration delivery; T433 remains open and S6 is not admitted.
 
+Reviewed production P1 39fe1f8a93c855a59298877ec10a93d8dd8bb92d is committed
+and pushed to main. Documentation-only P2 records S5 closure and the published
+baseline, not a product modification or claim that the unclassified rapid
+observation was repaired. Final source review includes the other conversation's
+planning-only S6 NTSRV64/S7 batch sequence, without starting either stage.
+
 ## Verification boundaries
 
 No physical desktop/RDP/Windows Terminal manual acceptance is claimed. Real
