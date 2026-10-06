@@ -7,6 +7,7 @@ param(
     [string]$NinjaExecutable = '',
     [string]$NativeWorker = '',
     [string]$NativeFrontend = '',
+    [string]$NativeMonitor = '',
     [ValidateRange(0, 64)] [int]$ParallelJobs = 0
 )
 
@@ -1653,6 +1654,9 @@ if ($Architecture -eq 'x86') {
     # shares only the native transport scope helper, never a BaseClient
     # registration or worker lifecycle library.
     $graph.Add('build ntmon.exe: monitor_link obj/monitor/main.obj obj/monitor/stub.obj broker-transport.lib')
+    $graph.Add('build obj/tests/monitor_session.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/monitor_session_test.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build monitor-session-test.exe: console_test_link obj/tests/monitor_session.obj')
     $monitorRpcTestObject = 'obj/tests/monitor_rpc_test.obj'
     $graph.Add('build ' + $monitorRpcTestObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/adapter-basesrv/monitor_rpc_test.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
@@ -1868,21 +1872,26 @@ for ($commonIndex = 0; $commonIndex -lt $graph.Count; ++$commonIndex) {
 # Keep the audited source recipe available for the architecture-local native
 # builder. The formal product slot only imports the explicit AMD64 producer.
 if($Architecture -eq 'x86') {
-    $frontendIndex=-1
-    for($index=0;$index -lt $graph.Count;++$index){if($graph[$index].StartsWith('build ntcon.exe: ')){$frontendIndex=$index;break}}
-    if($frontendIndex -lt 0){throw 'Missing frontend source closure'}
-    $graph.Add($graph[$frontendIndex].Replace('build ntcon.exe: frontend_link','build ntcon-source-closure: phony'))
-    $graph.Insert($frontendIndex,'rule native_frontend_import')
-    ++$frontendIndex
-    if($NativeFrontend){
-        $nativeFrontendInput=(Resolve-Path -LiteralPath $NativeFrontend).Path
-        $graph.Insert($frontendIndex,'  command = powershell.exe -NoProfile -ExecutionPolicy Bypass -File "'+(NinjaPath (Join-Path $root 'tools/build/Stage-NativeWorkerImage.ps1'))+'" -InputFile $in -OutputFile "'+(NinjaPath (Join-Path $build 'ntcon.exe'))+'"')
-        ++$frontendIndex
-        $graph[$frontendIndex]='build ntcon.exe: native_frontend_import '+(NinjaPath $nativeFrontendInput)
-    }else{
-        $graph.Insert($frontendIndex,'  command = powershell.exe -NoProfile -Command "throw ''Select the verified AMD64 NTCON with -NativeFrontend; no x86 frontend fallback''"')
-        ++$frontendIndex
-        $graph[$frontendIndex]='build ntcon.exe: native_frontend_import'
+    foreach($consumer in @(
+        @{name='ntcon';rule='frontend_link';input=$NativeFrontend;option='NativeFrontend'},
+        @{name='ntmon';rule='monitor_link';input=$NativeMonitor;option='NativeMonitor'}
+    )) {
+        $image=$consumer.name+'.exe';$slot=-1
+        for($index=0;$index -lt $graph.Count;++$index){if($graph[$index].StartsWith('build '+$image+': ')){$slot=$index;break}}
+        if($slot -lt 0){throw "Missing $image source closure"}
+        $graph.Add($graph[$slot].Replace('build '+$image+': '+$consumer.rule,'build '+$consumer.name+'-source-closure: phony'))
+        $import='native_'+$consumer.name+'_import'
+        $graph.Insert($slot,'rule '+$import);++$slot
+        if($consumer.input){
+            $nativeInput=(Resolve-Path -LiteralPath $consumer.input).Path
+            $graph.Insert($slot,'  command = powershell.exe -NoProfile -ExecutionPolicy Bypass -File "'+(NinjaPath (Join-Path $root 'tools/build/Stage-NativeWorkerImage.ps1'))+'" -InputFile $in -OutputFile "'+(NinjaPath (Join-Path $build $image))+'"')
+            ++$slot
+            $graph[$slot]='build '+$image+': '+$import+' '+(NinjaPath $nativeInput)
+        }else{
+            $graph.Insert($slot,'  command = powershell.exe -NoProfile -Command "throw ''Select the verified AMD64 '+$image+' with -'+$consumer.option+'; no x86 fallback''"')
+            ++$slot
+            $graph[$slot]='build '+$image+': '+$import
+        }
     }
 }
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), (($graph -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
@@ -2051,6 +2060,15 @@ if ($objectOutputDirectories.Count -gt 0) {
         sources = @('src/run16-exe/native_launch.c','src/run16-exe/native_launch.h' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
+    }
+    monitorComposition = [ordered]@{
+        target = 'ntmon.exe'
+        architecture = 'AMD64'
+        buildInput = $NativeMonitor
+        sourceClosure = 'ntmon-source-closure'
+        disposition = 'service-only management snapshot/control client; no original VDM/RTL body or worker-base'
+        source = 'src/ntmon-exe/main.c'
+        sha256 = Get-NodeSha256 (Join-Path $root 'src/ntmon-exe/main.c')
     }
     frontendServiceComposition = [ordered]@{
         target = 'obj/frontend/session_service.obj'

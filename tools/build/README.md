@@ -15,13 +15,19 @@ machine inputs and may refresh only graph metadata in an existing disposable
 root; it never imports cache output as a source or release input.
 
 The formal product graph requires explicit `-NativeWorker` and
-`-NativeFrontend` AMD64 producer images; it cannot silently link x86 NTVWM or
-NTCON. Declarative source closures remain available to
-`New-NativeWorkerNinja.ps1 -Component Worker|Frontend`, which builds only the
+`-NativeFrontend` and `-NativeMonitor` AMD64 producer images; it cannot silently
+link x86 NTVWM, NTCON or NTMON. Declarative source closures remain available to
+`New-NativeWorkerNinja.ps1 -Component Worker|Frontend|Monitor`, which builds only the
 selected native consumer and architecture-local dependencies. Frontend has
 no worker-base or original RTL body dependency; source-specific C11 settings
 and test entry points are retained. Import validates PE machine, EXE/subsystem
 and copied hashes before replacing a build-cache product slot.
+
+Monitor selects the existing management/RPC and broker transport plus its
+native MIDL client, not machine/frontend font code or original VDM/RTL bodies.
+Its layout/RPC/session fixtures use the same selected sources; actual package
+verification can select an explicit native MonitorRpc fixture so x64-client/
+x86-service behavior is exercised rather than only the old x86 test client.
 
 `Generate-ObservationNinja.mjs <repo> <build> [x86|x64]` defaults to x86 for
 existing callers. Observing private Window userdata requires an observer of

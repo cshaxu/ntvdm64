@@ -82,9 +82,9 @@ static int inner_launcher(HANDLE frontend,HANDLE execution,DWORD flags,DWORD exp
         &inherited_frontend,SYNCHRONIZE,TRUE,0));
     CHECK(DuplicateHandle(GetCurrentProcess(),execution,GetCurrentProcess(),
         &inherited_execution,SYNCHRONIZE,TRUE,0));
-    swprintf_s(text,32,L"%lx",(unsigned long)(ULONG_PTR)inherited_frontend);
+    swprintf_s(text,32,L"%llx",(unsigned long long)(ULONG_PTR)inherited_frontend);
     CHECK(SetEnvironmentVariableW(L"NTVDM_FRONTEND_CAPABILITY",text));
-    swprintf_s(text,32,L"%lx",(unsigned long)(ULONG_PTR)inherited_execution);
+    swprintf_s(text,32,L"%llx",(unsigned long long)(ULONG_PTR)inherited_execution);
     CHECK(SetEnvironmentVariableW(L"NTVDM_EXECUTION_CONSOLE",text));
     CHECK(GetModuleFileNameW(NULL,executable,MAX_PATH));
     slash=wcsrchr(executable,L'\\');CHECK(slash);
@@ -295,6 +295,16 @@ int main(int argc,char **argv)
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
     CHECK(error==ERROR_REVISION_MISMATCH);
+    {
+        unsigned char wrong_version[APP_VERSION_BYTES];
+        memcpy(wrong_version,version,sizeof(wrong_version));wrong_version[0]^=1;
+        RpcTryExcept {
+            error=Client_TaskSnapshot(binding,self,APP_PROTOCOL_VERSION,wrong_version,&count,&entries);
+        }
+        RpcExcept(1) {error=RpcExceptionCode();}
+        RpcEndExcept
+        CHECK(error==ERROR_REVISION_MISMATCH);
+    }
     RpcTryExcept {
         DTASKMGR_KEY stale={1,MANAGEMENT_WORKER,1,0};
         error=Client_CloseManagementNode(binding,self,APP_PROTOCOL_VERSION,(unsigned char *)version,&stale);

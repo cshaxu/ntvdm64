@@ -4,6 +4,7 @@ param(
     [Parameter(Mandatory)][string]$PackageRoot,
     [Parameter(Mandatory)][string]$ProcessPackageRoot,
     [Parameter(Mandatory)][string]$LogPrefix,
+    [ValidateSet('WIN32','WIN64')][string]$ExpectedKind='WIN32',
     [string]$LogRoot='O:\winnt\Logs2'
 )
 $ErrorActionPreference='Stop'
@@ -14,11 +15,19 @@ if(!$physical.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::Ordin
 }
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid log prefix'}
 $paths=@()
+. "$PSScriptRoot/isolated_package_cleanup.ps1"
+$scope=New-IsolatedPackageScope $physical $PackageRoot
+$binary=Get-PackageBinaryRoot $PackageRoot
+$physicalBinary=Get-PackageBinaryRoot $physical
 foreach($name in @('run16.exe','ntcon.exe','ntsrv.exe','ntmon.exe','ntvwm.exe')){
-    $launch=Join-Path $PackageRoot $name;$actual=Join-Path $physical $name
+    $launch=Join-Path $binary $name;$actual=Join-Path $physicalBinary $name
     if((Get-FileHash $launch).Hash -ne (Get-FileHash $actual).Hash){throw 'Candidate identity mismatch'}
     $paths+=@($launch,$actual)
 }
+$image=[IO.File]::ReadAllBytes((Join-Path $binary 'ntmon.exe'))
+$pe=[BitConverter]::ToInt32($image,60)
+$expectedMachine=if($ExpectedKind -eq 'WIN64'){0x8664}else{0x14c}
+if([BitConverter]::ToUInt16($image,$pe+4) -ne $expectedMachine){throw 'Monitor kind expectation differs from actual target machine'}
 if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'Broker already active'}
 $oldPrivate=$env:MVDM_OBSERVER_PRIVATE_DESKTOP
 $oldWindow=$env:MVDM_OBSERVER_WINDOW_INPUT
@@ -34,9 +43,9 @@ try {
         if($mode -eq 'window'){$env:MVDM_OBSERVER_WINDOW_INPUT='1'}
         else{Remove-Item Env:MVDM_OBSERVER_WINDOW_INPUT -ErrorAction SilentlyContinue}
         try {
-            & $Observer (Join-Path $PackageRoot 'run16.exe') $PackageRoot $report `
+            & $Observer (Join-Path $binary 'run16.exe') $PackageRoot $report `
                 --observation-timeout-ms 15000 --observe-console-input-marker 'CONSOLE' `
-                --observe-console-input-text ([string][char]27) (Join-Path $PackageRoot 'ntmon.exe')
+                --observe-console-input-text ([string][char]27) (Join-Path $binary 'ntmon.exe')
             if($LASTEXITCODE){throw 'Observer failed'}
             $record=Get-Content $report -Raw
             if(!(Test-Path ($report+'.pre-input-console.txt.console.txt'))){
@@ -50,7 +59,7 @@ try {
                # clip the centered title on narrow RDP/private desktops. The
                # formal layout fixture checks all 80 title/footer cells.
                $screen -notmatch 'NTVDM Task' -or
-               $screen -notmatch 'CONSOLE' -or $screen -notmatch 'WIN32' -or
+               $screen -notmatch 'CONSOLE' -or $screen -notmatch $ExpectedKind -or
                $screen -match 'UNBOUND|MEMBERS='){
                 throw "Actual NTMon tree/ESC/exit failed in $mode"
             }
@@ -63,10 +72,7 @@ try {
             }
             Write-Output "PASS actual NTMon $mode title, ESC input and direct exit 0 through NTVWM"
         } finally {
-            Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -in $paths} | ForEach-Object {
-                $process=Get-Process -Id $_.ProcessId -ErrorAction SilentlyContinue
-                if($process){try{$null=$process.Handle;$process.Kill();$null=$process.WaitForExit(5000)}finally{$process.Dispose()}}
-            }
+            Stop-IsolatedPackageScope $scope
         }
     }
 } finally {

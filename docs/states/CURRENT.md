@@ -16,7 +16,7 @@ the delivered baseline, superseded research and known limitations.
 | --- | --- |
 | Identifier Mode | M0 T433 S4; Ordinary Mode. |
 | Candidate Proposal | [Native x64 launcher/frontend/monitor](../proposals/proposal-project-components-native-x64-001.md). |
-| Admission And Approval | Owner says “准入S四，给我汇报一下情况。” Admit only S4 NTMON after delivered S3; initial admission/status audit does not claim implementation or runtime success. |
+| Admission And Approval | Owner says “准入S四，给我汇报一下情况。” then “开始执行，帮我把NT Monitor做成原生64位EXE。” Admit and implement only S4 NTMON after delivered S3. |
 | Objective | Migrate the single ntmon.exe to AMD64 with architecture-local management/RPC dependencies, preserving service-only snapshots/tree selection, labels, existing hotkeys, explicit close authorization and disconnected-monitor behavior. Build/test, coherently publish, review/commit/push and report. |
 | Non-goals | No new monitor feature, task observation/registry, local process enumeration, worker-base dependency, helper, GUI frontend, protocol redesign, original mirror change or x64 run16/NTSRV/NTVDM/WOW32/VDMREDIR. S5 is not admitted. |
 | Reference Baseline | S3 production245d3ac120cc060b04189bfa5118e08b34fd2a76 and closure1de70587b2c175ebafce3e171188c7481e85de83. Sealed build/M0-T433/S3/r002-runtime, publication r008 and smoke r009: ten images APP0.0.433/RPC41/I/O25; NTCON/NTVWM/Hook64 AMD64, seven others I386. Retain recovery and recorded default-desktop/environment limits. |
@@ -80,10 +80,10 @@ launcher syntax change, bitness-only worker selection or private transition.
 ## Current Technical Baseline
 
 T432 is closed by owner direction without hands-on acceptance. Its ten-image
-package remains independently recoverable. S3's verified r002-runtime is now
-published at O:/winnt/system32, identity0.0.433/RPC41/I/O25. NTCON, NTVWM and
-Hook64 are AMD64; seven other images stay I386. Guest/configuration are
-unchanged; r008 retains the previous S2 recovery set.
+package remains independently recoverable. S3's verified r002-runtime remains
+the recoverable preceding baseline. S4 r002-runtime is now at O:/winnt/system32,
+identity0.0.433/RPC41/I/O25. NTCON, NTVWM, NTMON and Hook64 are AMD64; six other
+images stay I386. Guest/configuration are unchanged; S4 r006 retains S3 recovery.
 
 [Final S6 evidence](../etc/evidence/m0-t432-s6-single-worker-reconstruction.md)
 retains Hook147/147, metadata402, RPC220, native lifetime1084, service29,
@@ -162,4 +162,14 @@ stub. S1's image-matched ledger selects no original BaseClient/RTL body.
 It already uses native HANDLE/RPC_BINDING_HANDLE and fixed copied management
 keys/rows; it does not enumerate Console members or processes. Its750ms
 display refresh remains existing behavior, not a migration target. No S4
-production edit, build, test or deployment has occurred at admission.
+production edit, build, test or deployment had occurred at admission.
+
+S4 now has a native Monitor build/import with unchanged production main and
+zero original mirror diff. [S4 evidence](../etc/evidence/m0-t433-s4-native-monitor-migration.md)
+records copied ABI/high-key/layout assertions, x64-client/x86-service RPC,
+actual standalone disconnected survival/restart/ESC, real Console/Window UI,
+mixed DOS/native/WOW/GUI projection and isolated close, plus input negatives4.
+Full r003 passes all14 groups in539462ms, including Console17/Window17 and
+independent WOW frontiers. r006/r007 publication and actual NTMON/DOS/32/64
+smoke pass with ten-image/notice hashes and Z released. Review/commit/push
+is pending; T433 stays open and S5 is not admitted.

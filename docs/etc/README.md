@@ -7,6 +7,7 @@ delivered single-worker/dual-Hook gates; see
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T433 S4 native monitor migration](evidence/m0-t433-s4-native-monitor-migration.md) | M0 T433 S4 | AMD64 monitor/client build, stable copied ABI, real UI/RPC/control/restart and publication evidence. | Retain through delivery and package closure. |
 | [T433 S3 native frontend migration](evidence/m0-t433-s3-native-frontend-migration.md) | M0 T433 S3 | AMD64 frontend build/resource/parser and actual observer/fixture/runtime/publication evidence. | Retain through delivery and package closure. |
 | [T433 S2 native worker migration](evidence/m0-t433-s2-native-worker-migration.md) | M0 T433 S2 | Isolated AMD64 worker ABI/build, selected-file adaptation and current verification/publication state. | Retain through delivery and package closure. |
 | [T433 S1 native-width audit](evidence/m0-t433-s1-native-width-audit.md) | M0 T433 S1 | Four current image-matched link closures, concrete native-width boundaries and remaining audit/design work; not x64 runtime proof. | Retain through implementation and package verification. |

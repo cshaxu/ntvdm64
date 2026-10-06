@@ -6,6 +6,7 @@
 #include "../../src/ntmon-exe/main.c"
 #undef wmain
 #include <assert.h>
+#include <stddef.h>
 
 static const DTASKMGR_WORKER *reply_items;
 static ULONG reply_count,close_calls;
@@ -115,6 +116,15 @@ int wmain(void)
     MONITOR_STATE state={0};
     DTASKMGR_WORKER items[24]={0};
     ULONG i;
+    assert(sizeof(DTASKMGR_KEY)==24 && offsetof(DTASKMGR_KEY,object)==16);
+    assert(sizeof(DTASKMGR_WORKER)==608 && offsetof(DTASKMGR_WORKER,image)==88);
+    {
+        DTASKMGR_KEY a={0x1234567887654321LL,MANAGEMENT_WORKER,0xfedcba98u,0x100000123LL};
+        DTASKMGR_KEY b=a;
+        assert(same_key(&a,&b));b.object+=0x100000000LL;
+        assert(!same_key(&a,&b));b=a;b.instance+=0x100000000LL;
+        assert(!same_key(&a,&b));
+    }
     {
         DTASKMGR_WORKER native={0};FILETIME now;WCHAR line[512];
         GetSystemTimeAsFileTime(&now);

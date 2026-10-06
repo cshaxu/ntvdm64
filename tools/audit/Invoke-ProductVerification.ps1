@@ -11,6 +11,8 @@ param(
     [string]$NativeHook64,
     [string]$NativeWorker,
     [string]$NativeFrontend,
+    [string]$NativeMonitor,
+    [string]$MonitorRpc,
     [string]$Node='node',
     [string[]]$WowBaselineRoots,
     [ValidateSet('Observed','Paced')][string]$InputPolicy='Observed',
@@ -39,8 +41,16 @@ if($NativeFrontend){
     $NativeFrontend=(Resolve-Path -LiteralPath $NativeFrontend).Path
     if(!$NativeWorker -or !$NativeFrontend.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)){throw 'Native frontend requires the native worker and a build-owned input'}
 }
+if($NativeMonitor){
+    $NativeMonitor=(Resolve-Path -LiteralPath $NativeMonitor).Path
+    if(!$NativeFrontend -or !$NativeMonitor.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)){throw 'Native monitor requires the native frontend and a build-owned input'}
+}
+if($MonitorRpc){
+    $MonitorRpc=(Resolve-Path -LiteralPath $MonitorRpc).Path
+    if(!$MonitorRpc.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)){throw 'Management fixture must be build-owned'}
+}
 foreach($name in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe')){
-    $input=if($name -eq 'ntvwm.exe' -and $NativeWorker){$NativeWorker}elseif($name -eq 'ntcon.exe' -and $NativeFrontend){$NativeFrontend}else{Join-Path $cache $name}
+    $input=if($name -eq 'ntvwm.exe' -and $NativeWorker){$NativeWorker}elseif($name -eq 'ntcon.exe' -and $NativeFrontend){$NativeFrontend}elseif($name -eq 'ntmon.exe' -and $NativeMonitor){$NativeMonitor}else{Join-Path $cache $name}
     if((Get-FileHash $input).Hash -ne (Get-FileHash (Join-Path $runtimeBinary $name)).Hash){
         throw "Build cache/runtime mismatch: $name; build affected targets first"
     }
@@ -67,7 +77,7 @@ if(Test-Path -LiteralPath (Join-Path $runtimeBinary 'nthook64.dll')){
 $manifest=foreach($name in $packageNames){
     $path=Join-Path $runtimeBinary $name
     $bytes=[IO.File]::ReadAllBytes($path);$pe=[BitConverter]::ToInt32($bytes,60)
-    $machine=if($name -eq 'nthook64.dll' -or ($name -eq 'ntvwm.exe' -and $NativeWorker) -or ($name -eq 'ntcon.exe' -and $NativeFrontend)){0x8664}else{0x14c}
+    $machine=if($name -eq 'nthook64.dll' -or ($name -eq 'ntvwm.exe' -and $NativeWorker) -or ($name -eq 'ntcon.exe' -and $NativeFrontend) -or ($name -eq 'ntmon.exe' -and $NativeMonitor)){0x8664}else{0x14c}
     if([BitConverter]::ToUInt16($bytes,$pe+4) -ne $machine){throw "Wrong runtime machine: $name"}
     [pscustomobject]@{Name=$name;Sha256=(Get-FileHash $path).Hash;Machine=$machine}
 }
@@ -170,7 +180,7 @@ try {
         # linker cache (whose service would derive the wrong Windows root).
         foreach($fixture in @('frontend-request-client-test.exe','broker-frontend-bootstrap-test.exe',
             'monitor-rpc-test.exe','native-gui-startup-probe.exe')){
-            $input=Join-Path $cache $fixture;$output=Join-Path $runtimeBinary $fixture
+            $input=if($fixture -eq 'monitor-rpc-test.exe' -and $MonitorRpc){$MonitorRpc}else{Join-Path $cache $fixture};$output=Join-Path $runtimeBinary $fixture
             Copy-Item -LiteralPath $input -Destination $output -Force
             if((Get-FileHash $input).Hash -ne (Get-FileHash $output).Hash){throw 'Control fixture copy mismatch'}
         }
@@ -182,7 +192,7 @@ try {
             & "$repo/tests/observation/verify-s7-rpc-fixtures.ps1" -Observer $observerPath -PackageRoot $runtimeBinary -ReportPrefix "$log/rpc" -Cases $cases
         }
         Invoke-Gate 'native-gui' {
-            & "$repo/tests/observation/verify-native-gui-routing.ps1" -Observer $observerPath -PackageRoot $runtime -ReportPrefix "$log/gui" -FullDeadlines:$FullDeadlines
+            & "$repo/tests/observation/verify-native-gui-routing.ps1" -Observer $observerPath -PackageRoot $runtime -ReportPrefix "$log/gui" -MonitorRpc $MonitorRpc -FullDeadlines:$FullDeadlines
         }
         Invoke-ShortRuntime {
             $env:MVDM_OBSERVER_SHORT_HISTORY='1'
@@ -229,7 +239,7 @@ try {
             Invoke-Gate 'cooked-return' {& "$repo/tests/observation/verify-frontend-relaunch.ps1" -Observer $observerPath -PackageRoot Z:\ -ReportPath "$log/cooked-return.txt"}
             Invoke-Gate 'rapid-relaunch' {& "$repo/tests/observation/verify-frontend-rapid-relaunch.ps1" -Observer $observerPath -PackageRoot Z:\ -ReportPath "$log/rapid.txt"}
             Invoke-Gate 'interactive-relaunch' {& "$repo/tests/observation/verify-frontend-rapid-interactive.ps1" -Observer $observerPath -PackageRoot Z:\ -ReportPath "$log/interactive.txt"}
-            Invoke-Gate 'session-isolation' {& "$repo/tests/observation/verify-ntvwm-management.ps1" -Observer $observerPath -MonitorRpc "$cache/monitor-rpc-test.exe" -PackageRoot Z:\ -ProcessPackageRoot $runtime -LogPrefix isolation -LogRoot $log -TwoSessions}
+            Invoke-Gate 'session-isolation' {& "$repo/tests/observation/verify-ntvwm-management.ps1" -Observer $observerPath -MonitorRpc $(if($MonitorRpc){$MonitorRpc}else{"$cache/monitor-rpc-test.exe"}) -PackageRoot Z:\ -ProcessPackageRoot $runtime -LogPrefix isolation -LogRoot $log -TwoSessions}
             Invoke-Gate 'retirement-wiring' {& "$repo/tests/observation/verify-broker-retirement.ps1" -Observer $observerPath -PackageRoot Z:\ -ProcessPackageRoot $runtime -LogPrefix retirement -LogRoot $log -FullDeadlines:$FullDeadlines}
         }
         Invoke-Gate 'nested-window-handoff' {& "$repo/tests/observation/verify-broker-io-handoff.ps1" -RuntimeRoot $runtime -Observer $observerPath -ReportPrefix "$log/handoff" -Case nested-window}

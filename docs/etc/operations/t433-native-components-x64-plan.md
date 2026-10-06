@@ -32,6 +32,9 @@ the current packet records its delivery review. S1's design handoff and S2
 delivery are retained. Owner now admits S4 NTMON only; S5 and later await
 their own admission. S4 starts with current-source/link/ABI review, preserving
 the existing monitor UI/control behavior rather than adding monitoring features.
+S4 has completed its native build, affected UI/RPC/lifecycle tests and coherent
+publication; [S4 evidence](../evidence/m0-t433-s4-native-monitor-migration.md)
+retains delivery review and limitations. S5 remains unadmitted.
 Later rows require bounded stage conclusion and ordinary
 execution-rule admission/verification; they are not simultaneous active tasks.
 Owner explicitly selects S2 NTVWM, S3 NTCON, S4 NTMON and S5 RUN16.

@@ -12,8 +12,10 @@ if(!$logs.StartsWith($build,[StringComparison]::OrdinalIgnoreCase) -or !(Test-Pa
 }
 . "$PSScriptRoot/isolated_package_cleanup.ps1"
 $scope=New-IsolatedPackageScope $physical $PackageRoot
+$binary=Get-PackageBinaryRoot $PackageRoot
+$physicalBinary=Get-PackageBinaryRoot $physical
 $saved=@{}
-foreach($name in @('MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_INPUT_GATE','MVDM_OBSERVER_SHORT_HISTORY','MVDM_OBSERVER_MILESTONE_INPUT')){
+foreach($name in @('MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_INPUT_GATE','MVDM_OBSERVER_SHORT_HISTORY','MVDM_OBSERVER_MILESTONE_INPUT','PATH')){
     $saved[$name]=[Environment]::GetEnvironmentVariable($name)
 }
 $children=[Collections.Generic.List[Diagnostics.Process]]::new()
@@ -25,7 +27,7 @@ function Observe([string]$Name,[string[]]$Arguments,[string]$ScriptedText='') {
     $start=[Diagnostics.ProcessStartInfo]::new((Resolve-Path $Observer).Path)
     $start.UseShellExecute=$false;$start.WindowStyle=[Diagnostics.ProcessWindowStyle]::Hidden
     $start.WorkingDirectory=$PackageRoot
-    $argsList=@((Join-Path $PackageRoot 'run16.exe'),$PackageRoot,$report)+$Arguments+@('--observation-timeout-ms','45000')
+    $argsList=@((Join-Path $binary 'run16.exe'),$PackageRoot,$report)+$Arguments+@('--observation-timeout-ms','45000')
     if($ScriptedText){$argsList+=@('--observe-console-input-text',$ScriptedText)}
     foreach($argument in $argsList){$start.ArgumentList.Add($argument)}
     $process=[Diagnostics.Process]::Start($start);$children.Add($process)
@@ -44,7 +46,7 @@ function Snapshot {
 }
 function Pin([uint32]$PidValue,[string]$Name) {
     $process=Get-Process -Id $PidValue;$null=$process.Handle
-    if($process.HasExited -or $process.Path -notin @((Join-Path $PackageRoot $Name),(Join-Path $physical $Name))){
+    if($process.HasExited -or $process.Path -notin @((Join-Path $binary $Name),(Join-Path $physicalBinary $Name))){
         $process.Dispose();throw 'Snapshot process identity changed'
     }
     $pins.Add($process);return $process
@@ -64,6 +66,7 @@ function Wait-Tree([scriptblock]$Condition) {
     throw 'Expected current tree state did not arrive'
 }
 try {
+    $env:PATH=$binary+';'+$saved['PATH']
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     $env:MVDM_OBSERVER_SHORT_HISTORY='1'
     $env:MVDM_OBSERVER_MILESTONE_INPUT='1'
@@ -97,7 +100,7 @@ try {
     $token='monitor-gui-'+[guid]::NewGuid().ToString('N')
     $ready=[Threading.EventWaitHandle]::new($false,[Threading.EventResetMode]::ManualReset,"Local\$token-ready")
     $release=[Threading.EventWaitHandle]::new($false,[Threading.EventResetMode]::ManualReset,"Local\$token-release")
-    $gui=Observe 'gui' @((Join-Path $PackageRoot 'native-gui-startup-probe.exe'),$token)
+    $gui=Observe 'gui' @((Join-Path $binary 'native-gui-startup-probe.exe'),$token)
     if(!$ready.WaitOne(12000) -or !$gui.Process.WaitForExit(10000)){throw 'GUI startup did not return while target lives'}
     $guiReport=Get-Content $gui.Report -Raw
     if($guiReport -notmatch '(?m)^result=exited\r?$' -or $guiReport -notmatch '(?m)^exit=0x00000000\r?$'){throw 'GUI direct startup result failed'}
