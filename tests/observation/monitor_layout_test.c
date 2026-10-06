@@ -3,6 +3,7 @@
 #define wmain monitor_product_main
 #define common_rpc_task_snapshot fixture_task_snapshot
 #define common_rpc_close_management_node fixture_close_node
+#define common_rpc_worker_task_trace fixture_task_trace
 #include "../../src/ntmon-exe/main.c"
 #undef wmain
 #include <assert.h>
@@ -12,6 +13,16 @@ static const DTASKMGR_WORKER *reply_items;
 static ULONG reply_count,close_calls;
 static DWORD reply_error,close_error;
 static DTASKMGR_KEY closed_key;
+DWORD fixture_task_trace(const common_rpc_management *client,const DTASKMGR_KEY *key,
+    ULONG *coverage,ULONG *count,WORKER_TRACE_NODE **nodes)
+{
+    assert(client->binding && client->process && key->category==MANAGEMENT_WORKER);
+    *coverage=TASK_TRACE_GAP_OBSERVATION;*count=1;
+    *nodes=MIDL_user_allocate(sizeof(**nodes));assert(*nodes);
+    ZeroMemory(*nodes,sizeof(**nodes));(*nodes)->node=1;
+    (*nodes)->relation=TASK_TRACE_DIRECT;(*nodes)->source=TASK_TRACE_SOURCE_RECORD;
+    lstrcpyW((*nodes)->image,L"COMMAND.COM");return 0;
+}
 DWORD fixture_task_snapshot(const common_rpc_management *client,ULONG *count,DTASKMGR_WORKER **items)
 {
     assert(client->binding && client->process);
@@ -47,6 +58,9 @@ static void selection_and_input(void)
     MIDL_user_free(copy);copy=NULL;
     assert(!handle_key(&state,rows,4,VK_UP,0) && state.selected_row==0);
     assert(!handle_key(&state,rows,4,VK_DOWN,0) && same_key(&state.selected_key,&rows[1].key));
+    assert(!handle_key(&state,rows,4,VK_RETURN,0) && same_key(&state.trace_key,&rows[1].key));
+    assert(!handle_key(&state,rows,4,VK_DELETE,0) && !close_calls && !state.confirm_key.category);
+    assert(!handle_key(&state,rows,4,VK_ESCAPE,0) && !state.trace_key.category);
     assert(!handle_key(&state,rows,4,VK_DOWN,0) && state.selected_row==2);
     assert(!handle_key(&state,rows,4,VK_DELETE,0) && state.action_error==ERROR_NOT_SUPPORTED);
     assert(!handle_key(&state,rows,4,'Y',L'y') && !close_calls && !state.confirm_key.category);
@@ -299,6 +313,12 @@ int wmain(void)
         task_line(line,ARRAYSIZE(line),&state,&child,&now);
         assert(line[0]==L' '); /* Same PID/task owner is not same node identity. */
     }
+    state.binding=(RPC_BINDING_HANDLE)(ULONG_PTR)1;state.process=(HANDLE)(ULONG_PTR)1;
+    state.trace_key=(DTASKMGR_KEY){17,MANAGEMENT_WORKER,9,0};
+    render_trace(output,&state);capture(output);
+    cell(3,4,L'D',MONITOR_NORMAL_ATTRIBUTE);
+    cell(2,23,L'O',MONITOR_ACCENT_ATTRIBUTE);
+    assert(state.trace_count==1);
     CloseHandle(output);
     if (allocated) FreeConsole();
     selection_and_input();

@@ -737,7 +737,7 @@ int main(int argc,char **argv)
     DWORD stdinReceipt=0,stdoutReceipt=0,bytes=0;
     char streamText[16]={0};
     uint32_t parentReceipt=0,laterParentReceipt=0;
-    uint64_t managementEpoch=0;
+    uint64_t managementEpoch=0,firstTraceIdentity=0;
     OPENNT_BASE_WORKER_INFO workerInfo={0};
     uint32_t workerInfoCount=0;
     ULONG standardCount=0;
@@ -1801,6 +1801,26 @@ int main(int argc,char **argv)
             copied[1].parent.generation==launcherGeneration);
         CHECK(!memcmp(&copied[1],&workerInfo,sizeof(workerInfo)));
         {
+            common_task_trace_node *trace=NULL;
+            uint32_t trace_count=0,coverage=0;
+            OPENNT_BASE_MANAGEMENT_KEY selector=copied[1].key;
+            CHECK(!OpenNtBaseServiceTaskTrace(service,&selector,&coverage,&trace,&trace_count));
+            CHECK(coverage&TASK_TRACE_GAP_OBSERVATION);
+            CHECK(trace_count==1 && trace && trace[0].node && !trace[0].parent &&
+                trace[0].relation==TASK_TRACE_DIRECT && trace[0].source==TASK_TRACE_SOURCE_RECORD &&
+                !wcscmp(trace[0].image,L"MEM.EXE"));
+            if(trace && trace_count==1)firstTraceIdentity=trace[0].node;
+            HeapFree(GetProcessHeap(),0,trace);trace=NULL;
+            ++selector.instance;
+            CHECK(OpenNtBaseServiceTaskTrace(service,&selector,&coverage,&trace,&trace_count)==ERROR_INVALID_HANDLE);
+            CHECK(!trace && !trace_count && !coverage);
+            selector=copied[1].key;++selector.generation;
+            CHECK(OpenNtBaseServiceTaskTrace(service,&selector,&coverage,&trace,&trace_count)==ERROR_NOT_FOUND);
+            selector=copied[0].key;
+            CHECK(OpenNtBaseServiceTaskTrace(service,&selector,&coverage,&trace,&trace_count)==ERROR_NOT_SUPPORTED);
+            CHECK(WaitForSingleObject(child.hProcess,0)==WAIT_TIMEOUT);
+        }
+        {
             OPENNT_BASE_MANAGEMENT_KEY stale=copied[1].key;
             ++stale.instance;
             CHECK(OpenNtBaseServiceCloseManagementNode(service,&stale)==ERROR_INVALID_HANDLE);
@@ -1909,6 +1929,14 @@ int main(int argc,char **argv)
     CHECK(reply.ReturnValue==STATUS_SUCCESS && reply.u.CheckVDM.VDMState==VDM_PRESENT_AND_READY &&
         laterParentEvent!=NULL && laterParentReceipt!=0);
     CHECK(laterParentReceipt!=parentReceipt);
+    {
+        OPENNT_BASE_MANAGEMENT_KEY key={managementEpoch,MANAGEMENT_WORKER,workerGeneration,0};
+        common_task_trace_node *trace=NULL;uint32_t trace_count=0,coverage=0;
+        CHECK(!OpenNtBaseServiceTaskTrace(service,&key,&coverage,&trace,&trace_count));
+        CHECK(firstTraceIdentity && trace_count==1 && trace && trace[0].node &&
+            trace[0].node!=firstTraceIdentity && trace[0].relation==TASK_TRACE_DIRECT);
+        if(trace)HeapFree(GetProcessHeap(),0,trace);
+    }
     {
         HANDLE pending=NULL,ui=NULL,ready=CreateEventW(NULL,TRUE,FALSE,NULL);
         CHECK(ready);

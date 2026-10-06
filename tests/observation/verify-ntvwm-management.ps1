@@ -9,7 +9,8 @@ param(
     [switch]$TwoSessions,
     [switch]$FrontendLoss,
     [switch]$WorkerLoss,
-    [switch]$FrontendClose
+    [switch]$FrontendClose,
+    [switch]$TaskTrace
 )
 $ErrorActionPreference='Stop'
 if(@($FrontendLoss,$WorkerLoss,$FrontendClose|Where-Object {$_}).Count -gt 1){throw 'Select one management/fault mode'}
@@ -34,6 +35,25 @@ $observerProcess=$null;$worker=$null;$target=$null;$monitor=$null
 $frontend=$null
 $otherObserver=$null;$otherWorker=$null;$otherTarget=$null;$gate=$null
 $oldGate=$env:MVDM_OBSERVER_INPUT_GATE
+function Test-DirectTrace([int]$WorkerId,[int]$TargetId,[string]$Suffix) {
+    $before=& $MonitorRpc --tree-json
+    if($LASTEXITCODE){throw 'Pre-trace management snapshot failed'}
+    $text=& $MonitorRpc --trace-json $WorkerId
+    if($LASTEXITCODE){throw 'Real Direct trace query failed'}
+    $text | Set-Content "$report.trace-$Suffix.json"
+    $trace=($text -join "`n")|ConvertFrom-Json
+    $direct=@($trace.nodes|Where-Object {$_.relation -eq 1})
+    if($direct.Count -ne 1 -or $direct[0].pid -ne $TargetId -or
+        $direct[0].source -ne 1 -or !$direct[0].node -or $direct[0].parent -ne 0 -or
+        $direct[0].image -notmatch '(?i)(^|\\)cmd\.exe$') {
+        throw 'Trace did not identify this actual Direct CMD in its selected worker'
+    }
+    $after=& $MonitorRpc --tree-json
+    if($LASTEXITCODE -or ($before -join "`n") -ne ($after -join "`n")) {
+        throw 'Read-only trace changed ordinary management projection'
+    }
+    Write-Output "PASS real Direct trace worker=$WorkerId target=$TargetId; main projection unchanged"
+}
 try {
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     $observerProcess=Start-Process -FilePath (Resolve-Path $Observer).Path -ArgumentList @(
@@ -53,6 +73,7 @@ try {
         Start-Sleep -Milliseconds 100
     }while([DateTime]::UtcNow -lt $deadline)
     if(!$worker -or !$target){throw 'Real NTVWM/CMD pair did not start'}
+    if($TaskTrace){Test-DirectTrace $worker.Id $target.Id 'first'}
     $frontend=$null
     if($FrontendLoss -or $FrontendClose){
         $owners=@(Get-CimInstance Win32_Process -Filter "Name='ntcon.exe'" | Where-Object {$_.ExecutablePath -in $paths})
@@ -86,6 +107,10 @@ try {
             Start-Sleep -Milliseconds 100
         }while([DateTime]::UtcNow -lt $deadline)
         if(!$otherWorker -or !$otherTarget){throw 'Independent second NTVWM/CMD pair did not start'}
+        if($TaskTrace){
+            Test-DirectTrace $otherWorker.Id $otherTarget.Id 'second'
+            Test-DirectTrace $worker.Id $target.Id 'first-isolated'
+        }
     }
     if($WorkerLoss){
         if($worker.Path -notin $paths){throw 'Pinned worker identity changed'}

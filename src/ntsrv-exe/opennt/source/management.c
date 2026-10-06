@@ -13,7 +13,7 @@ static OPENNT_BASE_MANAGEMENT_LABEL *service_find_management_label(
 static void service_prune_management_labels(OPENNT_BASE_WORKER_WATCH *watch,
     PCONSOLERECORD console);
 static void service_capture_management_label(OPENNT_BASE_WORKER_WATCH *watch,
-    PDOSRECORD record,ULONG task_id,const WCHAR *image);
+    PDOSRECORD record,ULONG task_id,const WCHAR *image,BOOL admission);
 static void service_capture_management_label_from_info(OPENNT_BASE_WORKER_WATCH *watch,
     PDOSRECORD record);
 static OPENNT_BASE_WORKER_WATCH *service_find_management_watch_for_console(
@@ -159,7 +159,7 @@ static void service_prune_management_labels(OPENNT_BASE_WORKER_WATCH *watch,
 }
 
 static void service_capture_management_label(OPENNT_BASE_WORKER_WATCH *watch,
-    PDOSRECORD record,ULONG task_id,const WCHAR *image)
+    PDOSRECORD record,ULONG task_id,const WCHAR *image,BOOL admission)
 {
     OPENNT_BASE_MANAGEMENT_LABEL *label;
     if (!watch || !record || !image || !image[0]) return;
@@ -171,6 +171,12 @@ static void service_capture_management_label(OPENNT_BASE_WORKER_WATCH *watch,
         label->parent_wait=record->hWaitForParent;
         InsertTailList(&watch->management_labels,&label->link);
     }
+    /* Check's successful admission is a new task even if the original record
+     * address and numeric wait handle have both been reused. Display identity
+     * cannot rely on those carriers; exhaustion never prevents execution. */
+    if(admission || !label->identity)
+        label->identity=watch->service->next_management_task==UINT64_MAX ? 0 :
+            ++watch->service->next_management_task;
     label->task=task_id;
     lstrcpynW(label->image,image,OPENNT_BASE_WORKER_IMAGE_CHARS);
 }
@@ -181,7 +187,7 @@ static void service_capture_management_label_from_info(OPENNT_BASE_WORKER_WATCH 
     WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS]={0};
     if (!record || !record->lpVDMInfo) return;
     service_copy_management_image(record->lpVDMInfo,image);
-    service_capture_management_label(watch,record,record->lpVDMInfo->iTask,image);
+    service_capture_management_label(watch,record,record->lpVDMInfo->iTask,image,FALSE);
 }
 
 void service_capture_initial_management_labels(OPENNT_BASE_WORKER_WATCH *watch)
@@ -250,7 +256,7 @@ void service_capture_checked_management_label(OPENNT_BASE_SERVICE *service,
         for (dos=source_console->DOSRecord;dos;dos=dos->DOSRecordNext) {
             if (service_same_management_wait(dos->hWaitForParent,
                     command->WaitObjectForParent)) {
-                service_capture_management_label(watch,dos,command->iTask,image);
+                service_capture_management_label(watch,dos,command->iTask,image,TRUE);
                 break;
             }
         }
@@ -556,6 +562,99 @@ DWORD OpenNtBaseServiceSnapshotCopy(OPENNT_BASE_SERVICE *service,uint64_t *epoch
 done:
     LeaveCriticalSection(&service->lock);
     if (copy) HeapFree(GetProcessHeap(),0,copy);
+    return error;
+}
+
+/* Projection of existing Direct records only. The bounded allocation is not
+ * an execution registry; observation coverage is explicitly absent in S2. */
+static void service_trace_append(common_task_trace_node *rows,uint32_t *count,
+    uint32_t *coverage,uint64_t identity,uint64_t parent,DWORD kind,DWORD pid,
+    DWORD task,PCWSTR image)
+{
+    common_task_trace_node *row;
+    if(*count==TASK_TRACE_MAX_NODES){*coverage|=TASK_TRACE_TRUNCATED;return;}
+    row=&rows[(*count)++];row->node=identity;row->parent=parent;
+    row->relation=TASK_TRACE_DIRECT;row->source=TASK_TRACE_SOURCE_RECORD;
+    row->kind=kind;row->state=TASK_TRACE_LIVE;row->process_id=pid;row->task=task;
+    lstrcpynW(row->image,image && image[0] ? image : L"<UNKNOWN>",260);
+}
+
+DWORD OpenNtBaseServiceTaskTrace(OPENNT_BASE_SERVICE *service,
+    const OPENNT_BASE_MANAGEMENT_KEY *key,uint32_t *coverage,
+    common_task_trace_node **entries,uint32_t *count)
+{
+    LIST_ENTRY *link;
+    OPENNT_BASE_WORKER_WATCH *watch=NULL;
+    common_task_trace_node *rows=NULL;
+    uint32_t actual=0,flags=TASK_TRACE_GAP_OBSERVATION;
+    uint64_t parent=0;
+    DWORD error=ERROR_NOT_FOUND;
+    if(!coverage || !entries || !count)return ERROR_INVALID_PARAMETER;
+    *coverage=0;*entries=NULL;*count=0;
+    if(!service || !key)return ERROR_INVALID_PARAMETER;
+    EnterCriticalSection(&service->lock);
+    if(key->instance!=service->management_epoch){error=ERROR_INVALID_HANDLE;goto done;}
+    if(key->category!=MANAGEMENT_WORKER || key->object){error=ERROR_NOT_SUPPORTED;goto done;}
+    for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
+        OPENNT_BASE_WORKER_WATCH *candidate=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
+        if(candidate->process.SequenceNumber==key->generation &&
+            WaitForSingleObject(candidate->process.ProcessHandle,0)==WAIT_TIMEOUT){watch=candidate;break;}
+    }
+    if(!watch)goto done;
+    rows=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,TASK_TRACE_MAX_NODES*sizeof(*rows));
+    if(!rows){error=ERROR_NOT_ENOUGH_MEMORY;goto done;}
+    if(watch->kind==OPENNT_BASE_WORKER_NATIVE) {
+        for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
+            OPENNT_BASE_CONNECTION *native=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
+            LIST_ENTRY *entry;
+            if(!native->native_worker || native->process.SequenceNumber!=key->generation)continue;
+            for(entry=native->win32records.Flink;entry!=&native->win32records;entry=entry->Flink) {
+                OPENNT_BASE_WIN32RECORD *record=CONTAINING_RECORD(entry,OPENNT_BASE_WIN32RECORD,link);
+                if(record->completed)continue;
+                service_trace_append(rows,&actual,&flags,record->request,parent,
+                    record->native_machine==IMAGE_FILE_MACHINE_AMD64 ? MANAGEMENT_KIND_WIN64 : MANAGEMENT_KIND_WIN32,
+                    record->process_id,record->request,record->image);
+                parent=record->request;
+            }
+            break;
+        }
+    } else if(watch->wow) {
+        PWOWRECORD record;
+        (void)RtlEnterCriticalSection(&BaseSrvWOWCriticalSection);
+        service_capture_wow_labels(watch);
+        if(WOWHead && WOWHead->SequenceNumber==key->generation)
+            for(record=WOWHead->WOWRecord;record;record=record->WOWRecordNext) {
+                OPENNT_BASE_MANAGEMENT_LABEL *label=service_wow_label(watch,record);
+                if(!label){flags|=TASK_TRACE_TRUNCATED;continue;}
+                /* WOW tasks are peers, not a DOS-style parent stack. */
+                service_trace_append(rows,&actual,&flags,label->identity,0,MANAGEMENT_KIND_WIN16,
+                    0,record->iTask,label->image);
+            }
+        RtlLeaveCriticalSection(&BaseSrvWOWCriticalSection);
+    } else {
+        PCONSOLERECORD console;
+        (void)RtlEnterCriticalSection(&BaseSrvDOSCriticalSection);
+        for(console=DOSHead;console;console=console->Next) {
+            PDOSRECORD record;
+            if(console->SequenceNumber!=key->generation)continue;
+            for(record=console->DOSRecord;record;record=record->DOSRecordNext) {
+                OPENNT_BASE_MANAGEMENT_LABEL *label;
+                if(record->VDMState!=VDM_BUSY && record->VDMState!=VDM_TO_TAKE_A_COMMAND)continue;
+                label=service_find_management_label(watch,record,record->hWaitForParent);
+                if(!label || !label->identity){flags|=TASK_TRACE_TRUNCATED;continue;}
+                service_trace_append(rows,&actual,&flags,label->identity,parent,MANAGEMENT_KIND_DOS,
+                    0,label->task,label->image);
+                parent=label->identity;
+            }
+            break;
+        }
+        RtlLeaveCriticalSection(&BaseSrvDOSCriticalSection);
+    }
+    if(actual){*entries=rows;rows=NULL;}
+    *count=actual;*coverage=flags;error=ERROR_SUCCESS;
+done:
+    LeaveCriticalSection(&service->lock);
+    if(rows)HeapFree(GetProcessHeap(),0,rows);
     return error;
 }
 

@@ -3,6 +3,7 @@
 #include <windows.h>
 #include <stdint.h>
 #include "common/protocol/management.h"
+#include "common/protocol/task_trace.h"
 /* Native composition boundary; opaque pointers never enter command records.
  * One service instance per process, matching original BaseSrv globals.
  * Call only after RPC identity authentication. All operations serialized by
@@ -64,6 +65,9 @@ DWORD OpenNtBaseServiceSnapshot(OPENNT_BASE_SERVICE *,uint64_t *epoch,
  * with the service; RPC serialization never traverses live service lists. */
 DWORD OpenNtBaseServiceSnapshotCopy(OPENNT_BASE_SERVICE *,uint64_t *epoch,
     OPENNT_BASE_WORKER_INFO **entries,uint32_t *count);
+DWORD OpenNtBaseServiceTaskTrace(OPENNT_BASE_SERVICE *,
+    const OPENNT_BASE_MANAGEMENT_KEY *,uint32_t *coverage,
+    common_task_trace_node **entries,uint32_t *count);
 DWORD OpenNtBaseServiceTerminateWorker(OPENNT_BASE_SERVICE *,uint32_t process_id);
 DWORD OpenNtBaseServiceCloseManagementNode(OPENNT_BASE_SERVICE *,
     const OPENNT_BASE_MANAGEMENT_KEY *);

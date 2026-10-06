@@ -7,6 +7,8 @@ delivered single-worker/dual-Hook gates; see
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T434 S1 design closure](evidence/m0-t434-s1-task-trace-design.md) | M0 T434 S1 | Source audit/design delivery and documentation-only verification before sequential implementation. | Retain through task closure. |
+| [T434 S2 Direct task trace](evidence/m0-t434-s2-direct-task-trace.md) | M0 T434 S2 | Production copied query/detail, focused evidence and outstanding coherent runtime/publication gates. | Retain through S delivery and trace acceptance. |
 | [T434 task-trace design](operations/t434-read-only-task-trace-design.md) | M0 T434 S1 | Current Hook/report gap, original VDD event reuse, observation authority/identity/fidelity and staged implementation proof. | Retain through design review and delivered trace scope. |
 | [T433 S7 mixed-width batches](evidence/m0-t433-s7-mixed-batch-tests.md) | M0 T433 S7 | COMMAND/CMD32/CMD64 actual batch tests, exact journals/typeahead, GUI wait semantics and retained nested-PIF parent-resume failure. | Retain through scoped repair and S acceptance. |
 | [T433 S6 native service migration](evidence/m0-t433-s6-native-service-migration.md) | M0 T433 S6 | Bounded AMD64 service build/import, both-width ABI/service fixtures, real mixed-width gates and coherent publication status. | Retain through delivery and T closure. |

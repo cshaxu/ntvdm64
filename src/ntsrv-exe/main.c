@@ -251,6 +251,33 @@ done:
     if (error) *count=0;
     return error;
 }
+error_status_t Server_WorkerTaskTrace(handle_t binding,HANDLE process,ULONG protocol,
+    unsigned char application_version[32],DTASKMGR_KEY *key,ULONG *coverage,
+    ULONG *count,WORKER_TRACE_NODE **entries)
+{
+    OPENNT_BASE_MANAGEMENT_KEY selector;
+    common_task_trace_node *local=NULL;
+    uint32_t actual=0,flags=0;
+    DWORD pid,error;
+    if(!coverage || !count || !entries)return ERROR_INVALID_PARAMETER;
+    *coverage=0;*count=0;*entries=NULL;
+    if(!key)return ERROR_INVALID_PARAMETER;
+    selector.instance=(uint64_t)key->instance;selector.category=key->category;
+    selector.generation=key->generation;selector.object=(uint64_t)key->object;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if(!error)error=basesrv_management_version(protocol,application_version);
+    if(!error)error=OpenNtBaseServiceTaskTrace(service,&selector,&flags,&local,&actual);
+    if(!error && actual) {
+        /* Identical fixed copied layouts; never serialize native pointers. */
+        C_ASSERT(sizeof(WORKER_TRACE_NODE)==sizeof(common_task_trace_node));
+        *entries=MIDL_user_allocate((size_t)actual*sizeof(**entries));
+        if(!*entries)error=ERROR_NOT_ENOUGH_MEMORY;
+        else memcpy(*entries,local,(size_t)actual*sizeof(**entries));
+    }
+    if(local)HeapFree(GetProcessHeap(),0,local);
+    if(!error){*coverage=flags;*count=actual;}
+    return error;
+}
 error_status_t Server_CloseManagementNode(handle_t binding,HANDLE process,ULONG protocol,
     unsigned char application_version[32],DTASKMGR_KEY *key)
 {
@@ -900,7 +927,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v41_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v42_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -947,7 +974,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v41_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v42_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);

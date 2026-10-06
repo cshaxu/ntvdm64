@@ -1,7 +1,7 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(41.0),
+    version(42.0),
     pointer_default(unique)
 ]
 interface vdm_service
@@ -301,6 +301,14 @@ interface vdm_service
         unsigned long stack_depth;
         wchar_t image[260];
     } DTASKMGR_WORKER;
+    /* Read-only trace: no receipts, capabilities, handles or close actions. */
+    typedef struct _WORKER_TRACE_NODE {
+        hyper node;
+        hyper parent;
+        unsigned long relation,source,kind,state;
+        unsigned long process_id,task,flags,reserved;
+        wchar_t image[260];
+    } WORKER_TRACE_NODE;
     /* Authenticated lifetime capability, not a PID or restart authority. */
     error_status_t BrokerProcess(
         [in] handle_t binding,
@@ -484,6 +492,15 @@ interface vdm_service
         [in] unsigned long protocol,
         [in] byte application_version[32],
         [in] DTASKMGR_KEY *key);
+    error_status_t WorkerTaskTrace(
+        [in] handle_t binding,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long protocol,
+        [in] byte application_version[32],
+        [in] DTASKMGR_KEY *key,
+        [out] unsigned long *coverage,
+        [out] unsigned long *count,
+        [out, size_is(,*count)] WORKER_TRACE_NODE **entries);
     error_status_t RegisterWowExec(
         [in] handle_t binding,
         [in] VDM_CONNECTION connection,

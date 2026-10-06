@@ -4,6 +4,27 @@
 
 static const unsigned char app_version[APP_VERSION_BYTES]=APP_VERSION;
 
+DWORD common_rpc_worker_task_trace(const common_rpc_management *state,const DTASKMGR_KEY *key,
+    ULONG *coverage,ULONG *count,WORKER_TRACE_NODE **items)
+{
+    DWORD error=ERROR_INVALID_STATE;
+    ULONG flags=0,actual=0;
+    WORKER_TRACE_NODE *result=NULL;
+    if(!coverage || !count || !items)return ERROR_INVALID_PARAMETER;
+    *coverage=0;*count=0;*items=NULL;
+    if(!key)return ERROR_INVALID_PARAMETER;
+    if(!state || !state->binding || !state->process)return error;
+    RpcTryExcept {
+        error=Client_WorkerTaskTrace(state->binding,state->process,APP_PROTOCOL_VERSION,
+            (unsigned char *)app_version,(DTASKMGR_KEY *)key,&flags,&actual,&result);
+    }
+    RpcExcept(1) {error=RpcExceptionCode();}
+    RpcEndExcept
+    if(error){if(result)MIDL_user_free(result);return error;}
+    *coverage=flags;*count=actual;*items=result;
+    return ERROR_SUCCESS;
+}
+
 DWORD common_rpc_task_snapshot(const common_rpc_management *state,
     ULONG *count,DTASKMGR_WORKER **items)
 {

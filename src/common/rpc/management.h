@@ -17,4 +17,6 @@ typedef struct common_rpc_management {
 DWORD common_rpc_task_snapshot(const common_rpc_management *state,
     ULONG *count,DTASKMGR_WORKER **items);
 DWORD common_rpc_close_management_node(const common_rpc_management *state,const DTASKMGR_KEY *key);
+DWORD common_rpc_worker_task_trace(const common_rpc_management *,const DTASKMGR_KEY *,
+    ULONG *coverage,ULONG *count,WORKER_TRACE_NODE **items);
 #endif

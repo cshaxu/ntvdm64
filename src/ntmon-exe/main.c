@@ -11,6 +11,7 @@
 #include "common/rpc/local_binding.h"
 #include "common/rpc/management.h"
 #include "common/protocol/management.h"
+#include "common/protocol/task_trace.h"
 
 #define MONITOR_COLUMNS 80
 #define MONITOR_ROWS 25
@@ -38,6 +39,8 @@ typedef struct MONITOR_STATE {
     broker_rpc_scope scope;
     HANDLE process;
     DTASKMGR_KEY selected_key,confirm_key;
+    DTASKMGR_KEY trace_key;
+    ULONG trace_first,trace_count;
     ULONG confirm_pid;
     ULONG selected_row; /* Last snapshot position, not an execution identity. */
     DWORD status;
@@ -342,6 +345,52 @@ static void clear_confirmation(MONITOR_STATE *state)
     state->confirm_pid=0;
     ZeroMemory(&state->confirm_key,sizeof(state->confirm_key));
 }
+
+static void render_trace(HANDLE output,MONITOR_STATE *state)
+{
+    common_rpc_management client={state->binding,state->process};
+    WORKER_TRACE_NODE *nodes=NULL;
+    ULONG coverage=0,count=0,index,row=0;
+    DWORD error=common_rpc_worker_task_trace(&client,&state->trace_key,&coverage,&count,&nodes);
+    WCHAR frame[MONITOR_COLUMNS+1],line[640];
+    state->trace_count=count;
+    if(count<=MONITOR_BODY_ROWS)state->trace_first=0;
+    else if(state->trace_first>count-MONITOR_BODY_ROWS)state->trace_first=count-MONITOR_BODY_ROWS;
+    framed_text(frame,L' ',L"  Worker task trace - read only",L' ');
+    render_line(output,(SHORT)row++,frame,MONITOR_TAB_ATTRIBUTE);
+    framed_rule(frame,L'\x250C',L'\x2500',L'\x2510');
+    render_framed_line(output,(SHORT)row++,frame,MONITOR_ACCENT_ATTRIBUTE);
+    swprintf_s(line,ARRAYSIZE(line),L"  RELATION SOURCE  KIND    PID     TASK   IMAGE");
+    framed_text(frame,L'\x2502',line,L'\x2502');
+    render_framed_line(output,(SHORT)row++,frame,MONITOR_ACCENT_ATTRIBUTE);
+    framed_rule(frame,L'\x251C',L'\x2500',L'\x2524');
+    render_framed_line(output,(SHORT)row++,frame,MONITOR_ACCENT_ATTRIBUTE);
+    for(index=state->trace_first;index<count && row<MONITOR_SCROLL_ROW;++index) {
+        const WORKER_TRACE_NODE *node=&nodes[index];
+        swprintf_s(line,ARRAYSIZE(line),L"  %-8s %-7s %-7s %-7lu %-6lu %s%s",
+            node->relation==TASK_TRACE_DIRECT ? L"DIRECT" : L"OBSERVED",
+            node->source==TASK_TRACE_SOURCE_RECORD ? L"RECORD" : node->source==TASK_TRACE_SOURCE_HOOK ? L"HOOK" : L"DOS",
+            kind_name(node->kind),node->process_id,node->task,node->parent ? L"  " : L"",node->image);
+        framed_text(frame,L'\x2502',line,L'\x2502');
+        render_framed_line(output,(SHORT)row++,frame,MONITOR_NORMAL_ATTRIBUTE);
+    }
+    if(!count) {
+        swprintf_s(line,ARRAYSIZE(line),error ? L"  Trace unavailable (error %lu)." : L"  No active Direct tasks.",error);
+        framed_text(frame,L'\x2502',line,L'\x2502');
+        render_framed_line(output,(SHORT)row++,frame,MONITOR_NORMAL_ATTRIBUTE);
+    }
+    while(row<MONITOR_SCROLL_ROW) {
+        framed_text(frame,L'\x2502',L"",L'\x2502');
+        render_framed_line(output,(SHORT)row++,frame,MONITOR_NORMAL_ATTRIBUTE);
+    }
+    framed_text(frame,L'\x2502',coverage&TASK_TRACE_GAP_OBSERVATION ?
+        L" Observed coverage unavailable; not evidence of no descendants." : L"",L'\x2502');
+    render_framed_line(output,(SHORT)row++,frame,MONITOR_ACCENT_ATTRIBUTE);
+    footer_text(frame,error,0,coverage&TASK_TRACE_TRUNCATED ?
+        L"ESC=Back UP/DOWN=Scroll - trace incomplete" : L"ESC=Back UP/DOWN=Scroll - read only");
+    render_line(output,(SHORT)row,frame,MONITOR_STATUS_ATTRIBUTE);
+    if(nodes)MIDL_user_free(nodes);
+}
 static void accept_snapshot(MONITOR_STATE *state,const DTASKMGR_WORKER *items,ULONG count)
 {
     ULONG index;
@@ -395,6 +444,12 @@ static DWORD close_selected_node(MONITOR_STATE *state)
 static BOOL handle_key(MONITOR_STATE *state,const DTASKMGR_WORKER *items,
     ULONG count,WORD key,WCHAR character)
 {
+    if(state->trace_key.category) {
+        if(key==VK_ESCAPE)ZeroMemory(&state->trace_key,sizeof(state->trace_key));
+        else if(key==VK_UP && state->trace_first)--state->trace_first;
+        else if(key==VK_DOWN && state->trace_first+MONITOR_BODY_ROWS<state->trace_count)++state->trace_first;
+        return FALSE; /* No modal key can dispatch management close. */
+    }
     if(state->confirm_key.category) {
         if(character==L'n' || character==L'N' || key==VK_ESCAPE)clear_confirmation(state);
         else if(character==L'y' || character==L'Y') {
@@ -418,6 +473,9 @@ static BOOL handle_key(MONITOR_STATE *state,const DTASKMGR_WORKER *items,
             state->action_error=ERROR_SUCCESS;
         }
     }
+    if(key==VK_RETURN && count && state->selected_key.category==MANAGEMENT_WORKER) {
+        state->trace_key=state->selected_key;state->trace_first=0;
+    }
     return FALSE;
 }
 int wmain(void)
@@ -436,7 +494,8 @@ int wmain(void)
     for (;;) {
         DTASKMGR_WORKER *items=NULL; ULONG count=0; DWORD wait,error;
         error=refresh(&state,&items,&count); state.status=error;
-        render(output,&state,items,count);
+        if(state.trace_key.category)render_trace(output,&state);
+        else render(output,&state,items,count);
         wait=WaitForSingleObject(input,750);
         if (wait==WAIT_OBJECT_0) {
             INPUT_RECORD record; DWORD read=0;

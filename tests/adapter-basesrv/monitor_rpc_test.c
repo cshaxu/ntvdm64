@@ -220,9 +220,10 @@ int main(int argc,char **argv)
     DTASKMGR_WORKER *entries=NULL;
     BOOL empty=argc==2 && !_stricmp(argv[1],"--empty");
     BOOL tree=argc==2 && !_stricmp(argv[1],"--tree-json");
+    BOOL trace=argc==3 && !_stricmp(argv[1],"--trace-json");
     BOOL node_close=argc==4 && !_stricmp(argv[1],"--close-node");
     ULONG selected_category=node_close ? strtoul(argv[2],NULL,10) : MANAGEMENT_WORKER;
-    BOOL existing=tree || node_close || (argc>=2 && (!_stricmp(argv[1],"--existing") || !_stricmp(argv[1],"--terminate")));
+    BOOL existing=trace || tree || node_close || (argc>=2 && (!_stricmp(argv[1],"--existing") || !_stricmp(argv[1],"--terminate")));
     BOOL terminate=(argc==2 || argc==3) && !_stricmp(argv[1],"--terminate");
     DWORD selected_pid=node_close ? strtoul(argv[3],NULL,10) : terminate && argc==3 ? strtoul(argv[2],NULL,10) : 0;
     ULONG index;
@@ -248,6 +249,25 @@ int main(int argc,char **argv)
         return 1;
     }
     if (existing) {
+        if(trace) {
+            WORKER_TRACE_NODE *nodes=NULL;ULONG actual=0,coverage=0;
+            DWORD pid=strtoul(argv[2],NULL,10);
+            CHECK(pid);
+            for(index=0;index<count;++index)
+                if(entries[index].key.category==MANAGEMENT_WORKER && entries[index].process_id==pid)break;
+            CHECK(index<count);
+            CHECK(!common_rpc_worker_task_trace(&management,&entries[index].key,&coverage,&actual,&nodes));
+            wprintf(L"{\"coverage\":%lu,\"nodes\":[",coverage);
+            for(index=0;index<actual;++index) {
+                if(index)putwchar(L',');
+                wprintf(L"{\"node\":%llu,\"parent\":%llu,\"relation\":%lu,\"source\":%lu,\"kind\":%lu,\"pid\":%lu,\"task\":%lu,\"image\":",
+                    nodes[index].node,nodes[index].parent,nodes[index].relation,nodes[index].source,
+                    nodes[index].kind,nodes[index].process_id,nodes[index].task);
+                json_string(nodes[index].image);putwchar(L'}');
+            }
+            wprintf(L"]}\n");if(nodes)MIDL_user_free(nodes);
+            MIDL_user_free(entries);RpcBindingFree(&binding);CloseHandle(self);return 0;
+        }
         if(tree) {
             json_snapshot(entries,count);
             MIDL_user_free(entries);RpcBindingFree(&binding);CloseHandle(self);
@@ -312,6 +332,19 @@ int main(int argc,char **argv)
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
     CHECK(error==ERROR_INVALID_HANDLE);
+    {
+        DTASKMGR_KEY absent={1,MANAGEMENT_WORKER,1,0};
+        WORKER_TRACE_NODE *nodes=NULL;ULONG actual=0,coverage=0;
+        CHECK(common_rpc_worker_task_trace(&management,&absent,&coverage,&actual,&nodes)==ERROR_INVALID_HANDLE);
+        CHECK(!actual && !coverage && !nodes);
+        RpcTryExcept {
+            error=Client_WorkerTaskTrace(binding,self,APP_PROTOCOL_VERSION-1,
+                (unsigned char *)version,&absent,&coverage,&actual,&nodes);
+        }
+        RpcExcept(1) {error=RpcExceptionCode();}
+        RpcEndExcept
+        CHECK(error==ERROR_REVISION_MISMATCH && !actual && !coverage && !nodes);
+    }
     RpcBindingFree(&binding); CloseHandle(self);
     /* A preceding isolated root test can still own the singleton during its
      * empty grace. Our duplicate broker then exits normally; never terminate
