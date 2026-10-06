@@ -310,10 +310,11 @@ int main(int argc,char **argv)
             wprintf(L"{\"coverage\":%lu,\"nodes\":[",coverage);
             for(index=0;index<actual;++index) {
                 if(index)putwchar(L',');
-                wprintf(L"{\"node\":%llu,\"parent\":%llu,\"relation\":%lu,\"source\":%lu,\"kind\":%lu,\"pid\":%lu,\"task\":%lu,\"state\":%lu,\"flags\":%lu,\"exit\":%lu,\"psp\":%lu,\"image\":",
+                wprintf(L"{\"node\":%llu,\"parent\":%llu,\"relation\":%lu,\"source\":%lu,\"kind\":%lu,\"pid\":%lu,\"task\":%lu,\"state\":%lu,\"flags\":%lu,\"psp\":%lu,\"entered\":%llu,\"started\":%llu,\"image\":",
                     nodes[index].node,nodes[index].parent,nodes[index].relation,nodes[index].source,
                     nodes[index].kind,nodes[index].process_id,nodes[index].task,
-                    nodes[index].state,nodes[index].flags,nodes[index].reserved,nodes[index].dos_psp);
+                    nodes[index].state,nodes[index].flags,nodes[index].dos_psp,
+                    nodes[index].entered_order,nodes[index].created_filetime);
                 json_string(nodes[index].image);putwchar(L'}');
             }
             wprintf(L"]}\n");if(nodes)MIDL_user_free(nodes);

@@ -6,6 +6,11 @@
 /* Original callback ABI has no context parameter. Bind one explicit owner
  * during this carrier's sole guest session; never introduce another machine. */
 static ntvdm_dos_observer *registered;
+static uint64_t callback_filetime(void)
+{
+    FILETIME value;GetSystemTimeAsFileTime(&value);
+    return ((uint64_t)value.dwHighDateTime<<32)|value.dwLowDateTime;
+}
 static BOOL guest_copy(uint16_t segment,uint16_t offset,void *bytes,DWORD count)
 {
     mvdm_guest_location location;mvdm_guest_location_lease lease;
@@ -63,6 +68,7 @@ static VOID created(USHORT psp)
         fact.event=DOS_OBSERVATION_GAP;worker_task_observer_offer(&state->outbox,&fact);return;
     }
     fact.event=DOS_OBSERVATION_ENTER;fact.psp=psp;fact.occurrence=++state->sequence;
+    fact.event_filetime=callback_filetime();
     fact.direct=OpenNtBaseClientObservationDirect();
     if(guest_copy(psp,0,header,sizeof(header)) && header[0]==0xcd && header[1]==0x20) {
         fact.parent_psp=word(header+0x16);

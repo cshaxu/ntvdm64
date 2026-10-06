@@ -61,10 +61,14 @@ static void selection_and_input(void)
     assert(!handle_key(&state,rows,4,VK_RETURN,0) && same_key(&state.trace_key,&rows[1].key));
     assert(!handle_key(&state,rows,4,VK_DELETE,0) && !close_calls && !state.confirm_key.category);
     assert(!handle_key(&state,rows,4,VK_ESCAPE,0) && !state.trace_key.category);
+    rows[1].kind=MANAGEMENT_KIND_WIN16;
+    assert(!handle_key(&state,rows,4,VK_RETURN,0) && !state.trace_key.category);
+    rows[1].kind=MANAGEMENT_KIND_DOS;
     assert(!handle_key(&state,rows,4,VK_DOWN,0) && state.selected_row==2);
     assert(!handle_key(&state,rows,4,VK_DELETE,0) && state.action_error==ERROR_NOT_SUPPORTED);
     assert(!handle_key(&state,rows,4,'Y',L'y') && !close_calls && !state.confirm_key.category);
     assert(!handle_key(&state,rows,4,VK_DOWN,0) && state.selected_row==3);
+    assert(!handle_key(&state,rows,4,VK_RETURN,0) && !state.trace_key.category);
     assert(!handle_key(&state,rows,4,VK_DOWN,0) && state.selected_row==3);
     assert(!handle_key(&state,rows,4,VK_DELETE,0) && same_key(&state.confirm_key,&rows[3].key));
     assert(!handle_key(&state,rows,4,VK_ESCAPE,0) && !state.confirm_key.category && !close_calls);
@@ -121,6 +125,9 @@ static void capture(HANDLE output)
 }
 static void cell(int x,int y,WCHAR glyph,WORD attribute)
 {
+    if(screen[y*80+x].Char.UnicodeChar!=glyph || screen[y*80+x].Attributes!=attribute)
+        fprintf(stderr,"CELL x=%d y=%d actual=%04x/%04x expected=%04x/%04x\n",x,y,
+            screen[y*80+x].Char.UnicodeChar,screen[y*80+x].Attributes,glyph,attribute);
     assert(screen[y*80+x].Char.UnicodeChar==glyph);
     assert(screen[y*80+x].Attributes==attribute);
 }
@@ -202,24 +209,24 @@ int wmain(void)
     render(output,&state,items,3);
     capture(output);
     assert(state.first_visible==0);
-    cell(1,5,L'>',MONITOR_SELECTED_ATTRIBUTE);
+    cell(1,6,L'>',MONITOR_SELECTED_ATTRIBUTE);
     cell(79,4,L'\x2591',MONITOR_SCROLL_ATTRIBUTE);
-    cell(79,5,L' ',MONITOR_THUMB_ATTRIBUTE);
+    cell(79,6,L' ',MONITOR_THUMB_ATTRIBUTE);
     state.selected_key=items[2].key;
     render(output,&state,items,3);
     capture(output);
     cell(79,5,L'\x2591',MONITOR_SCROLL_ATTRIBUTE);
-    cell(79,6,L' ',MONITOR_THUMB_ATTRIBUTE);
+    cell(79,8,L' ',MONITOR_THUMB_ATTRIBUTE);
     state.selected_key=items[1].key;
     render(output,&state,items,24);
     capture(output);
     assert(state.first_visible==0);
-    cell(79,5,L' ',MONITOR_THUMB_ATTRIBUTE);
-    cell(79,6,L'\x2591',MONITOR_SCROLL_ATTRIBUTE);
+    cell(79,6,L' ',MONITOR_THUMB_ATTRIBUTE);
+    cell(79,7,L'\x2591',MONITOR_SCROLL_ATTRIBUTE);
     state.selected_key=items[23].key;
     render(output,&state,items,24);
     capture(output);
-    assert(state.first_visible==5);
+    assert(state.first_visible==28); /* 24 roots plus 23 blank separators. */
     assert(state.horizontal_limit>0);
     cell(1,22,L'>',MONITOR_SELECTED_ATTRIBUTE);
     cell(79,21,L' ',MONITOR_THUMB_ATTRIBUTE);
@@ -271,34 +278,43 @@ int wmain(void)
         cell(16,2,L'K',MONITOR_NORMAL_ATTRIBUTE); /* Fixed KIND column. */
         cell(16,4,L'C',MONITOR_NORMAL_ATTRIBUTE);
         cell(16,5,L'D',MONITOR_NORMAL_ATTRIBUTE);
-        cell(16,6,L'W',MONITOR_NORMAL_ATTRIBUTE);
-        cell(16,7,L'W',MONITOR_SELECTED_ATTRIBUTE);
-        cell(16,8,L'W',MONITOR_NORMAL_ATTRIBUTE);
-        cell(16,9,L'W',MONITOR_NORMAL_ATTRIBUTE);
+        cell(16,6,L' ',MONITOR_NORMAL_ATTRIBUTE); /* One gap between blocks. */
+        cell(16,7,L'W',MONITOR_NORMAL_ATTRIBUTE);
+        cell(16,8,L'W',MONITOR_SELECTED_ATTRIBUTE);
+        cell(16,9,L' ',MONITOR_NORMAL_ATTRIBUTE);
+        cell(16,10,L'W',MONITOR_NORMAL_ATTRIBUTE);
+        cell(16,11,L'W',MONITOR_NORMAL_ATTRIBUTE);
         cell(24,4,L'M',MONITOR_NORMAL_ATTRIBUTE);
         cell(3,5,L' ',MONITOR_NORMAL_ATTRIBUTE);
         cell(5,5,L'4',MONITOR_NORMAL_ATTRIBUTE); /* Full 10-digit PID fits. */
-        cell(5,7,L'-',MONITOR_SELECTED_ATTRIBUTE);
-        cell(32,7,L'-',MONITOR_SELECTED_ATTRIBUTE); /* Unknown WOW elapsed. */
-        cell(43,7,L'-',MONITOR_SELECTED_ATTRIBUTE); /* No invented stack. */
+        cell(5,8,L'-',MONITOR_SELECTED_ATTRIBUTE);
+        cell(32,8,L'-',MONITOR_SELECTED_ATTRIBUTE); /* Unknown WOW elapsed. */
+        cell(43,8,L'-',MONITOR_SELECTED_ATTRIBUTE); /* No invented stack. */
         cell(49,4,L'-',MONITOR_NORMAL_ATTRIBUTE); /* Frontend is not a task. */
-        cell(49,6,L'-',MONITOR_NORMAL_ATTRIBUTE); /* WOW worker is not a task. */
+        cell(49,7,L'-',MONITOR_NORMAL_ATTRIBUTE); /* WOW worker is not a task. */
         cell(49,5,L'C',MONITOR_NORMAL_ATTRIBUTE);
-        cell(49,7,L'W',MONITOR_SELECTED_ATTRIBUTE);
-        cell(49,8,L'N',MONITOR_NORMAL_ATTRIBUTE);
-        cell(49,9,L'C',MONITOR_NORMAL_ATTRIBUTE);
+        cell(49,8,L'W',MONITOR_SELECTED_ATTRIBUTE);
+        cell(49,10,L'N',MONITOR_NORMAL_ATTRIBUTE);
+        cell(49,11,L'C',MONITOR_NORMAL_ATTRIBUTE);
         mixed[5].kind=3;
         state.selected_key=mixed[5].key;
         render(output,&state,mixed,6);capture(output);
         {
             const WCHAR label[]=L"WIN64";
             for(i=0;i<ARRAYSIZE(label)-1;++i)
-                cell(16+i,9,label[i],MONITOR_SELECTED_ATTRIBUTE);
+                cell(16+i,11,label[i],MONITOR_SELECTED_ATTRIBUTE);
         }
-        cell(16,8,L'W',MONITOR_NORMAL_ATTRIBUTE); /* GUI32 remains WIN32. */
+        cell(16,10,L'W',MONITOR_NORMAL_ATTRIBUTE); /* GUI32 remains WIN32. */
     }
     {
         WCHAR line[512];FILETIME now;
+        DTASKMGR_WORKER native={0};
+        GetSystemTimeAsFileTime(&now);native.key.category=MANAGEMENT_NATIVE_TASK;
+        native.process_id=1234;native.kind=MANAGEMENT_KIND_WIN64;
+        for(ULONG depth=1;depth<16;++depth) {
+            native.depth=depth;task_line(line,ARRAYSIZE(line),&state,&native,&now);
+            assert(!wcsncmp(line+2,L"  1234",6)); /* Exactly two, never recursive indentation. */
+        }
         DTASKMGR_WORKER child={0};
         GetSystemTimeAsFileTime(&now);
         child.key=(DTASKMGR_KEY){17,MANAGEMENT_WOW_TASK,9,12};
@@ -315,9 +331,17 @@ int wmain(void)
     }
     state.binding=(RPC_BINDING_HANDLE)(ULONG_PTR)1;state.process=(HANDLE)(ULONG_PTR)1;
     state.trace_key=(DTASKMGR_KEY){17,MANAGEMENT_WORKER,9,0};
-    render_trace(output,&state);capture(output);
-    cell(3,4,L'D',MONITOR_NORMAL_ATTRIBUTE);
-    cell(2,23,L'O',MONITOR_ACCENT_ATTRIBUTE);
+    render(output,&state,items,3);render_trace(output,&state);capture(output);
+    cell(0,1,L'\x250c',MONITOR_NORMAL_ATTRIBUTE); /* Original page remains. */
+    cell(3,8,L'\x250c',MONITOR_SELECTED_ATTRIBUTE);
+    cell(6,9,L'W',MONITOR_SELECTED_ATTRIBUTE);
+    cell(6,10,L' ',MONITOR_SELECTED_ATTRIBUTE); /* Gap below uppercase title. */
+    cell(8,12,L'1',MONITOR_SELECTED_ATTRIBUTE);
+    cell(10,12,L'D',MONITOR_SELECTED_ATTRIBUTE);
+    cell(19,12,L'D',MONITOR_SELECTED_ATTRIBUTE); /* Separate DOS TYPE. */
+    cell(10,13,L' ',MONITOR_SELECTED_ATTRIBUTE); /* Gap before modal footer. */
+    cell(6,14,L'E',MONITOR_SELECTED_ATTRIBUTE);
+    cell(1,24,L'U',MONITOR_STATUS_ATTRIBUTE); /* Original footer remains. */
     assert(state.trace_count==1);
     CloseHandle(output);
     if (allocated) FreeConsole();

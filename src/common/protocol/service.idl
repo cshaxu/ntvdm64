@@ -1,7 +1,7 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(44.0),
+    version(45.0),
     pointer_default(unique)
 ]
 interface vdm_service
@@ -308,9 +308,11 @@ interface vdm_service
         unsigned long relation,source,kind,state;
         unsigned long process_id,task,flags,reserved;
         unsigned long dos_psp,reserved2;
+        hyper entered_order,created_filetime;
         wchar_t image[260];
     } WORKER_TRACE_NODE;
     typedef struct _DOS_OBSERVATION_FACT {
+        hyper event_filetime;
         hyper occurrence,parent,direct;
         unsigned long event,psp,parent_psp,flags;
         wchar_t image[260];

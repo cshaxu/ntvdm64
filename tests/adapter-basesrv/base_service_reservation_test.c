@@ -1051,12 +1051,14 @@ int main(int argc,char **argv)
             {
                 OPENNT_BASE_WORKER_INFO *tree=NULL;
                 uint32_t count=0;uint64_t epoch=0;
-                CHECK(!OpenNtBaseServiceSnapshotCopy(service,&epoch,&tree,&count) && count==2);
+                CHECK(!OpenNtBaseServiceSnapshotCopy(service,&epoch,&tree,&count) && count==3);
                 CHECK(tree[0].key.category==MANAGEMENT_FRONTEND &&
                     tree[0].key.generation==old_generation && tree[0].display_state==MANAGEMENT_MISSING &&
                     !tree[0].actions && tree[0].process_id==initial_process.dwProcessId);
                 CHECK(tree[1].key.category==MANAGEMENT_WORKER && tree[1].depth==1 &&
                     tree[1].key.generation==workerGeneration && tree[1].parent.generation==old_generation);
+                CHECK(tree[2].key.category==MANAGEMENT_NATIVE_TASK && !tree[2].depth &&
+                    tree[2].process_id==laterChild.dwProcessId && !tree[2].actions);
                 CHECK(OpenNtBaseServiceCloseManagementNode(service,&tree[0].key)==ERROR_NOT_FOUND);
                 HeapFree(GetProcessHeap(),0,tree);
             }
@@ -1089,10 +1091,12 @@ int main(int argc,char **argv)
             {
                 OPENNT_BASE_WORKER_INFO *tree=NULL;
                 uint32_t count=0;uint64_t epoch=0;
-                CHECK(!OpenNtBaseServiceSnapshotCopy(service,&epoch,&tree,&count) && count==3);
+                CHECK(!OpenNtBaseServiceSnapshotCopy(service,&epoch,&tree,&count) && count==4);
                 CHECK(tree[0].key.generation==root_generation && tree[0].depth==0);
                 CHECK(tree[1].key.generation==old_generation && tree[1].display_state==MANAGEMENT_MISSING);
                 CHECK(tree[2].key.generation==workerGeneration && tree[2].parent.generation==old_generation);
+                CHECK(tree[3].key.category==MANAGEMENT_NATIVE_TASK &&
+                    tree[3].process_id==laterChild.dwProcessId && !tree[3].actions);
                 HeapFree(GetProcessHeap(),0,tree);
             }
             CHECK(OpenNtBaseServiceRequestFrontend(launcher,GetCurrentProcessId(),
@@ -1940,14 +1944,12 @@ int main(int argc,char **argv)
         OPENNT_BASE_MANAGEMENT_KEY key={managementEpoch,MANAGEMENT_WORKER,workerGeneration,0};
         common_task_trace_node *trace=NULL;uint32_t trace_count=0,coverage=0;
         CHECK(!OpenNtBaseServiceTaskTrace(service,&key,&coverage,&trace,&trace_count));
-        CHECK(firstTraceIdentity && trace_count==2 && trace && trace[0].node &&
-            trace[0].node!=firstTraceIdentity && trace[0].relation==TASK_TRACE_DIRECT &&
-            !(trace[0].flags&TASK_TRACE_HISTORY));
+        CHECK(firstTraceIdentity && trace_count==1 && trace && trace[0].node &&
+            trace[0].node!=firstTraceIdentity && trace[0].relation==TASK_TRACE_DIRECT);
         /* Active Direct identity still changes on genuine record reuse.
-         * Read-only delivery history is separate, not another active task.
-         * This unit executes no guest callback, so old entry stays unknown. */
-        CHECK(trace[1].node==firstTraceIdentity && trace[1].relation==TASK_TRACE_DIRECT &&
-            (trace[1].flags&TASK_TRACE_HISTORY) && trace[1].state==TASK_TRACE_UNCERTAIN);
+         * The original record proves completion even without a guest
+         * callback. That ended observation must not survive as history. */
+        CHECK(trace[0].state==TASK_TRACE_LIVE);
         if(trace)HeapFree(GetProcessHeap(),0,trace);
     }
     {

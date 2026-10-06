@@ -147,11 +147,16 @@ static void service_prune_management_labels(OPENNT_BASE_WORKER_WATCH *watch,
         for (dos=console->DOSRecord;dos;dos=dos->DOSRecordNext) {
             if (dos==label->record &&
                 service_same_management_wait(dos->hWaitForParent,label->parent_wait)) {
+                if(dos->VDMState!=VDM_BUSY && dos->VDMState!=VDM_TO_TAKE_A_COMMAND) {
+                    label->observation_exited=TRUE;
+                    service_observation_dos_forget(watch->service,watch->process.SequenceNumber,label->identity);
+                }
                 live=TRUE;
                 break;
             }
         }
         if (!live) {
+            service_observation_dos_forget(watch->service,watch->process.SequenceNumber,label->identity);
             RemoveEntryList(link);
             HeapFree(GetProcessHeap(),0,label);
         }
@@ -178,6 +183,7 @@ static void service_capture_management_label(OPENNT_BASE_WORKER_WATCH *watch,
         label->identity=watch->service->next_management_task==UINT64_MAX ? 0 :
             ++watch->service->next_management_task;
     label->task=task_id;
+    if(admission)label->observation_exited=FALSE;
     lstrcpynW(label->image,image,OPENNT_BASE_WORKER_IMAGE_CHARS);
 }
 
@@ -411,7 +417,7 @@ static void service_copy_worker(OPENNT_BASE_WORKER_WATCH *watch,OPENNT_BASE_WORK
 
 /* Copied rows have a single caller-owned allocation. Capacity changes are
  * local serialization work, not another registry, lifetime or lock. */
-static DWORD service_append_management(OPENNT_BASE_WORKER_INFO **rows,uint32_t *count,
+DWORD service_append_management(OPENNT_BASE_WORKER_INFO **rows,uint32_t *count,
     uint32_t *capacity,const OPENNT_BASE_WORKER_INFO *item)
 {
     if(*count==*capacity) {
@@ -503,7 +509,8 @@ static DWORD service_copy_management_tree(OPENNT_BASE_SERVICE *service,
         OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
         OPENNT_BASE_WORKER_INFO missing={0};
         BOOL first=TRUE;
-        if(watch->wow || !watch->frontend_root_generation) {
+        if(watch->wow)continue; /* WOW is the second page block. */
+        if(!watch->frontend_root_generation) {
             error=service_append_worker(watch,rows,count,capacity);if(error)return error;
             continue;
         }
@@ -524,12 +531,20 @@ static DWORD service_copy_management_tree(OPENNT_BASE_SERVICE *service,
             error=service_append_worker(member,rows,count,capacity);if(error)return error;
         }
     }
+    for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
+        OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
+        if(watch->wow) {
+            error=service_append_worker(watch,rows,count,capacity);if(error)return error;
+        }
+    }
+    error=service_observation_native_tree(service,rows,count,capacity);if(error)return error;
     for(link=service->gui_records.Flink;link!=&service->gui_records;link=link->Flink) {
         OPENNT_BASE_WIN32RECORD *record=CONTAINING_RECORD(link,OPENNT_BASE_WIN32RECORD,link);
         OPENNT_BASE_WORKER_INFO item={0};
         FILETIME started,ignored;
         if(record->completed || !record->gui_process ||
             WaitForSingleObject(record->gui_process,0)!=WAIT_TIMEOUT)continue;
+        if(service_observation_native_direct(service,record->worker_generation,record->request))continue;
         item.key=service_management_key(service,MANAGEMENT_GUI_TARGET,record->worker_generation,record->request);
         item.process_id=record->process_id;item.task=record->request;
         item.kind=record->native_machine==IMAGE_FILE_MACHINE_AMD64 ?
@@ -541,6 +556,49 @@ static DWORD service_copy_management_tree(OPENNT_BASE_SERVICE *service,
         error=service_append_management(rows,count,capacity,&item);if(error)return error;
     }
     return ERROR_SUCCESS;
+}
+
+static DWORD management_group(const OPENNT_BASE_WORKER_INFO *item)
+{
+    if(item->key.category==MANAGEMENT_WORKER && item->kind==MANAGEMENT_KIND_WIN16)return 1;
+    if(item->key.category==MANAGEMENT_GUI_TARGET || item->key.category==MANAGEMENT_NATIVE_TASK ||
+        (item->key.category==MANAGEMENT_WORKER && !item->parent.category &&
+         (item->kind==MANAGEMENT_KIND_WIN32 || item->kind==MANAGEMENT_KIND_WIN64)))return 2;
+    return 0;
+}
+static BOOL management_block_after(const OPENNT_BASE_WORKER_INFO *left,const OPENNT_BASE_WORKER_INFO *right)
+{
+    DWORD first=management_group(left),second=management_group(right);
+    if(first!=second)return first>second;
+    if(!right->started_filetime)return FALSE;
+    return !left->started_filetime || left->started_filetime>right->started_filetime;
+}
+static void management_reverse(OPENNT_BASE_WORKER_INFO *rows,uint32_t begin,uint32_t end)
+{
+    while(begin<end) {
+        OPENNT_BASE_WORKER_INFO temporary=rows[begin];rows[begin++]=rows[--end];rows[end]=temporary;
+    }
+}
+static void management_order_blocks(OPENNT_BASE_WORKER_INFO *rows,uint32_t count)
+{
+    /* Stable in-place block insertion: children never leave their root.
+     * Ordering copied rows creates no registry, timer or lifecycle state. */
+    uint32_t start=0;
+    while(start<count) {
+        uint32_t end=start+1,insert=start;
+        while(end<count && rows[end].depth)++end;
+        const uint32_t size=end-start;
+        while(insert) {
+            uint32_t previous=insert-1;
+            while(previous && rows[previous].depth)--previous;
+            if(!management_block_after(&rows[previous],&rows[insert]))break;
+            management_reverse(rows,previous,insert);
+            management_reverse(rows,insert,insert+size);
+            management_reverse(rows,previous,insert+size);
+            insert=previous;
+        }
+        start=end;
+    }
 }
 
 DWORD OpenNtBaseServiceSnapshotCopy(OPENNT_BASE_SERVICE *service,uint64_t *epoch,
@@ -555,8 +613,10 @@ DWORD OpenNtBaseServiceSnapshotCopy(OPENNT_BASE_SERVICE *service,uint64_t *epoch
     /* One traversal under the authority's lock; no count/copy race or retry.
      * Metadata allocation failure returns no partial, misleading tree. */
     EnterCriticalSection(&service->lock);
+    service_observation_prune(service);
     error=service_copy_management_tree(service,&copy,&needed,&capacity);
     if(error)goto done;
+    management_order_blocks(copy,needed);
     *epoch=service->management_epoch; *entries=copy; *count=needed;
     copy=NULL; error=ERROR_SUCCESS;
 done:
@@ -616,6 +676,7 @@ DWORD OpenNtBaseServiceTaskTrace(OPENNT_BASE_SERVICE *service,
     *coverage=0;*entries=NULL;*count=0;
     if(!service || !key)return ERROR_INVALID_PARAMETER;
     EnterCriticalSection(&service->lock);
+    service_observation_prune(service);
     if(key->instance!=service->management_epoch){error=ERROR_INVALID_HANDLE;goto done;}
     if(key->category!=MANAGEMENT_WORKER || key->object){error=ERROR_NOT_SUPPORTED;goto done;}
     for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
@@ -633,7 +694,7 @@ DWORD OpenNtBaseServiceTaskTrace(OPENNT_BASE_SERVICE *service,
             if(!native->native_worker || native->process.SequenceNumber!=key->generation)continue;
             for(entry=native->win32records.Flink;entry!=&native->win32records;entry=entry->Flink) {
                 OPENNT_BASE_WIN32RECORD *record=CONTAINING_RECORD(entry,OPENNT_BASE_WIN32RECORD,link);
-                if(record->completed)continue;
+                if(record->completed || record->observation_exited)continue;
                 uint64_t identity=service_observation_direct_id(service,key->generation,record->request);
                 service_trace_append(rows,&actual,&flags,identity,parent,
                     record->native_machine==IMAGE_FILE_MACHINE_AMD64 ? MANAGEMENT_KIND_WIN64 : MANAGEMENT_KIND_WIN32,
@@ -661,11 +722,13 @@ DWORD OpenNtBaseServiceTaskTrace(OPENNT_BASE_SERVICE *service,
         for(console=DOSHead;console;console=console->Next) {
             PDOSRECORD record;
             if(console->SequenceNumber!=key->generation)continue;
+            service_prune_management_labels(watch,console);
             for(record=console->DOSRecord;record;record=record->DOSRecordNext) {
                 OPENNT_BASE_MANAGEMENT_LABEL *label;
                 if(record->VDMState!=VDM_BUSY && record->VDMState!=VDM_TO_TAKE_A_COMMAND)continue;
                 label=service_find_management_label(watch,record,record->hWaitForParent);
                 if(!label || !label->identity){flags|=TASK_TRACE_TRUNCATED;continue;}
+                if(label->observation_exited)continue;
                 service_trace_append(rows,&actual,&flags,label->identity,parent,MANAGEMENT_KIND_DOS,
                     0,label->task,label->image);
                 parent=label->identity;

@@ -15,13 +15,12 @@
 #define TASK_TRACE_GAP_OBSERVATION 1u
 #define TASK_TRACE_TRUNCATED 2u
 #define TASK_TRACE_REQUESTED_SUSPENDED 4u
-#define TASK_TRACE_EXIT_KNOWN 8u
-#define TASK_TRACE_HISTORY 16u
 typedef struct common_task_trace_node {
     uint64_t node,parent;
     uint32_t relation,source,kind,state;
     uint32_t process_id,task,flags,reserved;
     uint32_t dos_psp,reserved2; /* Source numeric PSP, zero when unavailable. */
+    uint64_t entered_order,created_filetime;
     wchar_t image[260];
 } common_task_trace_node;
 #endif

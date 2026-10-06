@@ -11,7 +11,7 @@
 #include "common/rpc/local_binding.h"
 #include "common/rpc/management.h"
 #include "common/protocol/management.h"
-#include "common/protocol/task_trace.h"
+#include "trace_view.h"
 
 #define MONITOR_COLUMNS 80
 #define MONITOR_ROWS 25
@@ -19,6 +19,8 @@
 #define MONITOR_STATUS_COLUMN 55
 #define MONITOR_BODY_TOP 4
 #define MONITOR_BODY_ROWS 19
+#define MONITOR_MODAL_ROWS 10
+#define MONITOR_MODAL_WIDTH 74
 #define MONITOR_SCROLL_ROW 23
 #define MONITOR_SCROLL_ATTRIBUTE (BACKGROUND_RED|BACKGROUND_GREEN|BACKGROUND_BLUE)
 #define MONITOR_THUMB_ATTRIBUTE 0
@@ -40,7 +42,7 @@ typedef struct MONITOR_STATE {
     HANDLE process;
     DTASKMGR_KEY selected_key,confirm_key;
     DTASKMGR_KEY trace_key;
-    ULONG trace_first,trace_count;
+    ULONG trace_first,trace_count,trace_offset,trace_limit;
     ULONG confirm_pid;
     ULONG selected_row; /* Last snapshot position, not an execution identity. */
     DWORD status;
@@ -218,7 +220,8 @@ static void task_line(WCHAR *line,DWORD capacity,const MONITOR_STATE *state,
     swprintf_s(node,ARRAYSIZE(node),L"%s%s",item->depth ? L"  " : L"",pid);
     swprintf_s(line,capacity,L"%c %-12s %-7s %-7s %-10s %-5s %s",
         same_key(&item->key,&state->selected_key) ? L'>' : L' ',node,
-        item->key.category==MANAGEMENT_FRONTEND ? L"CONSOLE" : kind_name(item->kind),
+        item->key.category==MANAGEMENT_FRONTEND ? L"CONSOLE" :
+        item->key.category==MANAGEMENT_NATIVE_TASK && item->kind>MANAGEMENT_KIND_WIN64 ? L"UNKNOWN" : kind_name(item->kind),
         state_name(item->display_state),elapsed,stack,
         item->key.category==MANAGEMENT_FRONTEND ||
         (item->key.category==MANAGEMENT_WORKER && item->kind==1u) ? L"-" :
@@ -287,7 +290,7 @@ static void restore_presentation(HANDLE output,const MONITOR_STATE *state)
 }
 static void render(HANDLE output,MONITOR_STATE *state,DTASKMGR_WORKER *items,ULONG count)
 {
-    ULONG index,row=0,visible,selected_index=0;
+    ULONG index,row=0,position=0,total_rows=0,selected_position=0;
     static const WCHAR title[]=L"NTVDM Task Monitor";
     FILETIME now;
     WCHAR line[512],frame[MONITOR_COLUMNS+1];
@@ -295,22 +298,22 @@ static void render(HANDLE output,MONITOR_STATE *state,DTASKMGR_WORKER *items,ULO
     state->horizontal_limit=0;
     for (index=0;index<count;++index) {
         DWORD length;
+        if(index && !items[index].depth)++total_rows; /* Nonselectable block gap. */
         task_line(line,ARRAYSIZE(line),state,&items[index],&now);
         length=(DWORD)lstrlenW(line);
         if (length>MONITOR_INTERIOR && length-MONITOR_INTERIOR>state->horizontal_limit)
             state->horizontal_limit=length-MONITOR_INTERIOR;
         if (same_key(&items[index].key,&state->selected_key)) {
-            selected_index=index;
-            if (index<state->first_visible) state->first_visible=index;
-            else if (index-state->first_visible>=MONITOR_BODY_ROWS)
-                state->first_visible=index-MONITOR_BODY_ROWS+1;
+            selected_position=total_rows;
+            if (selected_position<state->first_visible) state->first_visible=selected_position;
+            else if (selected_position-state->first_visible>=MONITOR_BODY_ROWS)
+                state->first_visible=selected_position-MONITOR_BODY_ROWS+1;
         }
+        ++total_rows;
     }
     if (state->horizontal_offset>state->horizontal_limit) state->horizontal_offset=state->horizontal_limit;
-    if (count<=MONITOR_BODY_ROWS) state->first_visible=0;
-    else if (state->first_visible>count-MONITOR_BODY_ROWS) state->first_visible=count-MONITOR_BODY_ROWS;
-    visible=count-state->first_visible;
-    if (visible>MONITOR_BODY_ROWS) visible=MONITOR_BODY_ROWS;
+    if (total_rows<=MONITOR_BODY_ROWS) state->first_visible=0;
+    else if (state->first_visible>total_rows-MONITOR_BODY_ROWS) state->first_visible=total_rows-MONITOR_BODY_ROWS;
     framed_rule(frame,L' ',L' ',L' ');
     CopyMemory(frame+(MONITOR_COLUMNS-(ARRAYSIZE(title)-1))/2,title,sizeof(title)-sizeof(WCHAR));
     render_line(output,(SHORT)row++,frame,MONITOR_TAB_ATTRIBUTE);
@@ -320,8 +323,17 @@ static void render(HANDLE output,MONITOR_STATE *state,DTASKMGR_WORKER *items,ULO
         L"PID",L"KIND",L"STATE",L"ELAPSED",L"STACK",L"TASK");
     framed_text(frame,L'\x2502',scrolled_text(line,state->horizontal_offset),L'\x2502');render_framed_line(output,(SHORT)row++,frame,MONITOR_ACCENT_ATTRIBUTE);
     framed_rule(frame,L'\x251C',L'\x2500',L'\x2524');render_framed_line(output,(SHORT)row++,frame,MONITOR_ACCENT_ATTRIBUTE);
-    for (index=0;index<visible;++index) {
-        const DTASKMGR_WORKER *item=&items[state->first_visible+index];
+    for (index=0;index<count && row<MONITOR_SCROLL_ROW;++index) {
+        const DTASKMGR_WORKER *item=&items[index];
+        if(index && !item->depth) {
+            if(position>=state->first_visible) {
+                framed_text(frame,L'\x2502',L"",L'\x2502');
+                render_framed_line(output,(SHORT)row++,frame,MONITOR_NORMAL_ATTRIBUTE);
+            }
+            ++position;
+            if(row==MONITOR_SCROLL_ROW)break;
+        }
+        if(position++<state->first_visible)continue;
         task_line(line,ARRAYSIZE(line),state,item,&now);
         framed_text(frame,L'\x2502',scrolled_text(line,state->horizontal_offset),L'\x2502');
         render_framed_line(output,(SHORT)row++,frame,
@@ -332,7 +344,7 @@ static void render(HANDLE output,MONITOR_STATE *state,DTASKMGR_WORKER *items,ULO
         render_framed_line(output,(SHORT)row++,frame,MONITOR_NORMAL_ATTRIBUTE);
     }
     while (row<MONITOR_SCROLL_ROW) { framed_text(frame,L'\x2502',L"",L'\x2502');render_framed_line(output,(SHORT)row++,frame,MONITOR_NORMAL_ATTRIBUTE); }
-    render_scrollbars(output,state,selected_index);++row;
+    render_scrollbars(output,state,selected_position);++row;
     if (state->confirm_key.category) {
         confirmation_text(line,ARRAYSIZE(line),state);
         footer_text(frame,state->status,state->action_error,line);
@@ -346,50 +358,64 @@ static void clear_confirmation(MONITOR_STATE *state)
     ZeroMemory(&state->confirm_key,sizeof(state->confirm_key));
 }
 
+/* Added over the T433 page, never a replacement page. Normal main rendering,
+ * columns, selection, scrollbars and the original three hotkeys are untouched. */
+static void modal_line(HANDLE output,SHORT y,PCWSTR text,WCHAR left,WCHAR right)
+{
+    CHAR_INFO cells[MONITOR_MODAL_WIDTH];SMALL_RECT area={3,y,76,y};
+    size_t length=text ? wcslen(text) : 0;
+    for(unsigned x=0;x<MONITOR_MODAL_WIDTH;++x) {
+        cells[x].Char.UnicodeChar=x==0 ? left : x==MONITOR_MODAL_WIDTH-1 ? right :
+            x-1<length ? text[x-1] : L' ';
+        cells[x].Attributes=MONITOR_SELECTED_ATTRIBUTE;
+    }
+    (void)WriteConsoleOutputW(output,cells,(COORD){MONITOR_MODAL_WIDTH,1},(COORD){0,0},&area);
+}
 static void render_trace(HANDLE output,MONITOR_STATE *state)
 {
-    common_rpc_management client={state->binding,state->process};
-    WORKER_TRACE_NODE *nodes=NULL;
-    ULONG coverage=0,count=0,index,row=0;
+    common_rpc_management client={state->binding,state->process};WORKER_TRACE_NODE *nodes=NULL;
+    monitor_trace_row order[TASK_TRACE_MAX_NODES];ULONG coverage=0,count=0;uint32_t visible=0;
+    WCHAR line[640],rule[MONITOR_MODAL_WIDTH-1];FILETIME time;uint64_t now;
     DWORD error=common_rpc_worker_task_trace(&client,&state->trace_key,&coverage,&count,&nodes);
-    WCHAR frame[MONITOR_COLUMNS+1],line[640];
-    state->trace_count=count;
-    if(count<=MONITOR_BODY_ROWS)state->trace_first=0;
-    else if(state->trace_first>count-MONITOR_BODY_ROWS)state->trace_first=count-MONITOR_BODY_ROWS;
-    framed_text(frame,L' ',L"  Worker task trace - read only",L' ');
-    render_line(output,(SHORT)row++,frame,MONITOR_TAB_ATTRIBUTE);
-    framed_rule(frame,L'\x250C',L'\x2500',L'\x2510');
-    render_framed_line(output,(SHORT)row++,frame,MONITOR_ACCENT_ATTRIBUTE);
-    swprintf_s(line,ARRAYSIZE(line),L"  RELATION SOURCE  KIND    PID     TASK   IMAGE");
-    framed_text(frame,L'\x2502',line,L'\x2502');
-    render_framed_line(output,(SHORT)row++,frame,MONITOR_ACCENT_ATTRIBUTE);
-    framed_rule(frame,L'\x251C',L'\x2500',L'\x2524');
-    render_framed_line(output,(SHORT)row++,frame,MONITOR_ACCENT_ATTRIBUTE);
-    for(index=state->trace_first;index<count && row<MONITOR_SCROLL_ROW;++index) {
-        const WORKER_TRACE_NODE *node=&nodes[index];
-        swprintf_s(line,ARRAYSIZE(line),L"  %-8s %-7s %-7s %-7lu %-6lu %s%s",
-            node->relation==TASK_TRACE_DIRECT ? L"DIRECT" : L"OBSERVED",
-            node->source==TASK_TRACE_SOURCE_RECORD ? L"RECORD" : node->source==TASK_TRACE_SOURCE_HOOK ? L"HOOK" : L"DOS",
-            node->kind==UINT32_MAX ? L"UNKNOWN" : kind_name(node->kind),
-            node->process_id,node->task,node->parent ? L"  " : L"",node->image);
-        framed_text(frame,L'\x2502',line,L'\x2502');
-        render_framed_line(output,(SHORT)row++,frame,MONITOR_NORMAL_ATTRIBUTE);
+    C_ASSERT(sizeof(WORKER_TRACE_NODE)==sizeof(common_task_trace_node));
+    if(!error && !monitor_trace_order((const common_task_trace_node *)nodes,count,order,&visible))error=ERROR_INVALID_DATA;
+    if(error)visible=0;
+    state->trace_count=visible;state->trace_limit=0;
+    if(visible<=MONITOR_MODAL_ROWS)state->trace_first=0;
+    else if(state->trace_first>visible-MONITOR_MODAL_ROWS)state->trace_first=visible-MONITOR_MODAL_ROWS;
+    GetSystemTimeAsFileTime(&time);now=((uint64_t)time.dwHighDateTime<<32)|time.dwLowDateTime;
+    for(uint32_t index=0;index<visible;++index) {
+        monitor_trace_primary((const common_task_trace_node *)&nodes[order[index].index],index+1,now,line,ARRAYSIZE(line));
+        ULONG length=(ULONG)wcslen(line);
+        if(length>MONITOR_MODAL_WIDTH-4 && length-(MONITOR_MODAL_WIDTH-4)>state->trace_limit)
+            state->trace_limit=length-(MONITOR_MODAL_WIDTH-4);
     }
-    if(!count) {
-        swprintf_s(line,ARRAYSIZE(line),error ? L"  Trace unavailable (error %lu)." : L"  No active Direct tasks.",error);
-        framed_text(frame,L'\x2502',line,L'\x2502');
-        render_framed_line(output,(SHORT)row++,frame,MONITOR_NORMAL_ATTRIBUTE);
+    if(state->trace_offset>state->trace_limit)state->trace_offset=state->trace_limit;
+    unsigned shown=visible-state->trace_first;if(shown>MONITOR_MODAL_ROWS)shown=MONITOR_MODAL_ROWS;
+    if(!shown)shown=1;
+    SHORT top=(SHORT)((MONITOR_ROWS-(shown+7))/2),y=top;
+    for(unsigned x=0;x<MONITOR_MODAL_WIDTH-2;++x)rule[x]=L'\x2500';rule[MONITOR_MODAL_WIDTH-2]=0;
+    modal_line(output,y++,rule,L'\x250c',L'\x2510');
+    modal_line(output,y++,L"  WORKER TASKS",L'\x2502',L'\x2502');
+    modal_line(output,y++,L"",L'\x2502',L'\x2502');
+    modal_line(output,y++,L"  ID  METHOD   TYPE    ELAPSED    TASK",L'\x2502',L'\x2502');
+    for(uint32_t index=state->trace_first;index<visible && index<state->trace_first+MONITOR_MODAL_ROWS;++index) {
+        WCHAR shown_line[640];
+        const common_task_trace_node *node=(const common_task_trace_node *)&nodes[order[index].index];
+        const WCHAR *file=node->image[0] ? node->image : L"<UNKNOWN>";
+        monitor_trace_primary(node,index+1,now,line,ARRAYSIZE(line));
+        /* Horizontal pan exposes the address without moving METHOD/TYPE. */
+        size_t prefix=wcslen(line)-wcslen(file);
+        swprintf_s(shown_line,ARRAYSIZE(shown_line),L"  %.*s%s",(int)prefix,line,scrolled_text(file,state->trace_offset));
+        modal_line(output,y++,shown_line,L'\x2502',L'\x2502');
     }
-    while(row<MONITOR_SCROLL_ROW) {
-        framed_text(frame,L'\x2502',L"",L'\x2502');
-        render_framed_line(output,(SHORT)row++,frame,MONITOR_NORMAL_ATTRIBUTE);
+    if(!visible) {
+        swprintf_s(line,ARRAYSIZE(line),error ? L"  Unavailable (error %lu)." : L"  No known live tasks.",error);
+        modal_line(output,y++,line,L'\x2502',L'\x2502');
     }
-    framed_text(frame,L'\x2502',coverage&TASK_TRACE_GAP_OBSERVATION ?
-        L" Observed coverage incomplete; not proof of no descendants." : L"",L'\x2502');
-    render_framed_line(output,(SHORT)row++,frame,MONITOR_ACCENT_ATTRIBUTE);
-    footer_text(frame,error,0,coverage&TASK_TRACE_TRUNCATED ?
-        L"ESC=Back UP/DOWN=Scroll - trace incomplete" : L"ESC=Back UP/DOWN=Scroll - read only");
-    render_line(output,(SHORT)row,frame,MONITOR_STATUS_ATTRIBUTE);
+    modal_line(output,y++,L"",L'\x2502',L'\x2502');
+    modal_line(output,y++,L"  ESC=Close  UP/DOWN=Scroll  LEFT/RIGHT=Pan",L'\x2502',L'\x2502');
+    modal_line(output,y,rule,L'\x2514',L'\x2518');
     if(nodes)MIDL_user_free(nodes);
 }
 static void accept_snapshot(MONITOR_STATE *state,const DTASKMGR_WORKER *items,ULONG count)
@@ -429,6 +455,18 @@ static DWORD refresh(MONITOR_STATE *state,DTASKMGR_WORKER **items,ULONG *count)
         clear_confirmation(state);
         return error;
     }
+    /* Keep management permission/identity available in NTSRV's snapshot,
+     * but a GUI-only carrier is not one of the owner's program blocks. */
+    {
+        ULONG shown=0;
+        for(ULONG index=0;index<result_count;++index) {
+            const DTASKMGR_WORKER *item=&result[index];
+            if(item->key.category==MANAGEMENT_WORKER && !item->parent.category &&
+                (item->kind==MANAGEMENT_KIND_WIN32 || item->kind==MANAGEMENT_KIND_WIN64))continue;
+            result[shown++]=*item;
+        }
+        result_count=shown;
+    }
     *items=result; *count=result_count;
     accept_snapshot(state,result,result_count);
     return ERROR_SUCCESS;
@@ -448,8 +486,10 @@ static BOOL handle_key(MONITOR_STATE *state,const DTASKMGR_WORKER *items,
     if(state->trace_key.category) {
         if(key==VK_ESCAPE)ZeroMemory(&state->trace_key,sizeof(state->trace_key));
         else if(key==VK_UP && state->trace_first)--state->trace_first;
-        else if(key==VK_DOWN && state->trace_first+MONITOR_BODY_ROWS<state->trace_count)++state->trace_first;
-        return FALSE; /* No modal key can dispatch management close. */
+        else if(key==VK_DOWN && state->trace_first+MONITOR_MODAL_ROWS<state->trace_count)++state->trace_first;
+        else if(key==VK_LEFT && state->trace_offset)--state->trace_offset;
+        else if(key==VK_RIGHT && state->trace_offset<state->trace_limit)++state->trace_offset;
+        return FALSE;
     }
     if(state->confirm_key.category) {
         if(character==L'n' || character==L'N' || key==VK_ESCAPE)clear_confirmation(state);
@@ -474,8 +514,10 @@ static BOOL handle_key(MONITOR_STATE *state,const DTASKMGR_WORKER *items,
             state->action_error=ERROR_SUCCESS;
         }
     }
-    if(key==VK_RETURN && count && state->selected_key.category==MANAGEMENT_WORKER) {
-        state->trace_key=state->selected_key;state->trace_first=0;
+    if(key==VK_RETURN && count && state->selected_key.category==MANAGEMENT_WORKER &&
+        items[state->selected_row].parent.category==MANAGEMENT_FRONTEND &&
+        items[state->selected_row].kind!=MANAGEMENT_KIND_WIN16) {
+        state->trace_key=state->selected_key;state->trace_first=0;state->trace_offset=0;
     }
     return FALSE;
 }
@@ -495,8 +537,8 @@ int wmain(void)
     for (;;) {
         DTASKMGR_WORKER *items=NULL; ULONG count=0; DWORD wait,error;
         error=refresh(&state,&items,&count); state.status=error;
+        render(output,&state,items,count);
         if(state.trace_key.category)render_trace(output,&state);
-        else render(output,&state,items,count);
         wait=WaitForSingleObject(input,750);
         if (wait==WAIT_OBJECT_0) {
             INPUT_RECORD record; DWORD read=0;

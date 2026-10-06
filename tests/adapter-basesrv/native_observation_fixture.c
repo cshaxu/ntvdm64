@@ -27,7 +27,42 @@ int main(void)
     CHECK(!OpenNtBaseServiceObserveNativeCreation(service,self,child.hProcess,CREATE_SUSPENDED,&replayed) && replayed==first);
     CHECK(!OpenNtBaseServiceTaskTrace(service,&key,&flags,&rows,&count) && count==2);
     CHECK(rows[1].node==first && rows[1].parent==rows[0].node && rows[1].relation==TASK_TRACE_OBSERVED);
+    CHECK(rows[0].entered_order && rows[1].entered_order>rows[0].entered_order &&
+        rows[0].created_filetime && rows[1].created_filetime);
     CHECK(rows[1].flags&TASK_TRACE_REQUESTED_SUSPENDED);HeapFree(GetProcessHeap(),0,rows);rows=NULL;
+    {
+        OPENNT_BASE_WORKER_INFO *tree=NULL;uint64_t epoch=0;uint32_t actual=0;
+        CHECK(!OpenNtBaseServiceSnapshotCopy(service,&epoch,&tree,&actual) && actual==3);
+        CHECK(tree[0].key.category==MANAGEMENT_NATIVE_TASK && !tree[0].depth && !tree[0].actions);
+        CHECK(tree[1].key.category==MANAGEMENT_NATIVE_TASK && tree[1].depth==1 &&
+            tree[1].parent.object==tree[0].key.object && !tree[1].actions);
+        CHECK(tree[2].key.category==MANAGEMENT_WORKER && tree[2].key.generation==7);
+        CHECK(OpenNtBaseServiceCloseManagementNode(service,&tree[1].key)==ERROR_NOT_SUPPORTED);
+        HeapFree(GetProcessHeap(),0,tree);
+    }
+    {
+        /* Trusted projection timestamps, not OS creation/execution proof. */
+        OPENNT_BASE_WORKER_WATCH seeded[5]={0};OPENNT_BASE_WORKER_INFO *tree=NULL;
+        const DWORD kinds[5]={OPENNT_BASE_WORKER_NATIVE,OPENNT_BASE_WORKER_DOS,
+            OPENNT_BASE_WORKER_DOS,OPENNT_BASE_WORKER_DOS,OPENNT_BASE_WORKER_NATIVE};
+        const DWORD times[5]={25,30,20,10,5};uint64_t epoch=0;uint32_t actual=0;
+        EnterCriticalSection(&service->lock);
+        for(uint32_t index=0;index<5;++index) {
+            seeded[index].service=service;seeded[index].kind=kinds[index];seeded[index].wow=index==2;
+            seeded[index].process.ProcessHandle=self;seeded[index].process.SequenceNumber=20+index;
+            seeded[index].started.dwLowDateTime=times[index];InitializeListHead(&seeded[index].management_labels);
+            InsertTailList(&service->worker_watches,&seeded[index].link);
+        }
+        LeaveCriticalSection(&service->lock);
+        CHECK(!OpenNtBaseServiceSnapshotCopy(service,&epoch,&tree,&actual) && actual==8);
+        CHECK(tree[0].key.generation==23 && tree[1].key.generation==21 && tree[2].key.generation==22);
+        CHECK(tree[3].key.generation==24 && tree[4].key.generation==20);
+        CHECK(tree[5].key.category==MANAGEMENT_NATIVE_TASK && tree[6].parent.object==tree[5].key.object);
+        HeapFree(GetProcessHeap(),0,tree);
+        EnterCriticalSection(&service->lock);
+        for(uint32_t index=0;index<5;++index)RemoveEntryList(&seeded[index].link);
+        LeaveCriticalSection(&service->lock);
+    }
     /* Known reporter cannot nominate itself or a child of an unrelated
      * process as its own descendant. No identity is produced on rejection. */
     replayed=99;CHECK(OpenNtBaseServiceObserveNativeCreation(service,self,self,0,&replayed)==ERROR_NOT_SUPPORTED && !replayed);
@@ -61,15 +96,23 @@ int main(void)
     CHECK(OpenNtBaseServiceTaskTrace(service,&key,&flags,&rows,&count)==ERROR_NOT_FOUND && !rows && !count);
     key.generation=8;
     CHECK(!OpenNtBaseServiceTaskTrace(service,&key,&flags,&rows,&count) && !rows && !count);
+    CHECK(TerminateProcess(child.hProcess,23) && WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
+    {
+        OPENNT_BASE_WORKER_INFO *tree=NULL;uint64_t epoch=0;uint32_t actual=0;
+        CHECK(!OpenNtBaseServiceSnapshotCopy(service,&epoch,&tree,&actual) && actual==3);
+        CHECK(service->observation_count==2);
+        for(uint32_t index=0;index<actual;++index)CHECK(tree[index].process_id!=child.dwProcessId);
+        HeapFree(GetProcessHeap(),0,tree);
+    }
     EnterCriticalSection(&service->lock);RemoveEntryList(&replacement.link);LeaveCriticalSection(&service->lock);
     /* Stop cancels pending process waits outside the lock. References are
      * observation-only: unregister/close does not terminate either target. */
     CHECK(OpenNtBaseServiceIsEmpty(service)); /* Observations are not retention. */
     CHECK(OpenNtBaseServiceStop(service));
-    CHECK(WaitForSingleObject(child.hProcess,0)==WAIT_TIMEOUT && WaitForSingleObject(foreign.hProcess,0)==WAIT_TIMEOUT);
-    CHECK(TerminateProcess(child.hProcess,0) && TerminateProcess(foreign.hProcess,0));
+    CHECK(WaitForSingleObject(child.hProcess,0)==WAIT_OBJECT_0 && WaitForSingleObject(foreign.hProcess,0)==WAIT_TIMEOUT);
+    CHECK(TerminateProcess(foreign.hProcess,0));
     CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0 && WaitForSingleObject(foreign.hProcess,5000)==WAIT_OBJECT_0);
     CloseHandle(child.hThread);CloseHandle(child.hProcess);CloseHandle(foreign.hThread);CloseHandle(foreign.hProcess);CloseHandle(self);
-    puts("PASS unit real-object duplicate/rejection and pending-wait rundown; target processes survive observation stop");
+    puts("PASS live native tree, ended-node/resource cleanup, duplicate/rejection and pending-wait rundown; surviving target survives observation stop");
     return 0;
 }

@@ -10,6 +10,35 @@ runtime files for this design. S2 requires design review/admission.
 
 ## Two independent authorities
 
+### Owner product-spec correction (supersedes earlier UI detail)
+
+The one NTMON page has text, Win16 and native type groups, with blocks ordered
+by time within each group and one blank line between root/child blocks: unchanged
+NTCON-root/text-worker management; independent WOW workers with their Win16
+tasks; native Direct Win32/Win64 roots with Hook-created descendants, whether
+text or GUI. The text/native blocks intentionally reference the same facts.
+Roots are flush, all descendants have exactly two spaces, not recursive
+indentation. UI rebuild starts from pre-T T433 47d78555e, not the rejected
+T434 full-page detail. Text-worker Enter opens a popup overlay; ESC closes it.
+The modal lists Direct and Observed tasks in entry order, one row per task:
+ordinal, program kind, elapsed, full path. Direct/Observed remains visible
+as the relation, not a second execution stack. Enter on WOW/native rows is a
+no-op. All views exclude confirmed-dead tasks and retain those whose death
+has not been established; there is no user-facing history view. Elapsed uses
+proved OS creation or copied DOS entry time; unavailable time stays unknown.
+Existing text tree, STACK and management hotkeys must not change. Observation
+rows have no close action. Existing registered GUI close authority is retained.
+Diagnostic snapshot revision, source/exit/timestamp columns and modal DFS
+hierarchy introduced by the unapproved S5 candidate are withdrawn. The prior
+candidate patch is preserved below build/M0-T434/S5/r003-spec-realignment.
+S3/S4 collectors are retained; ended observation nodes and history flags are
+removed. Native waits only signal the existing service event; service-owned
+cleanup drains waits and frees nodes/handles. DOS EXIT frees its node directly.
+One ordered occurrence watermark rejects ended ENTER replays without a
+tombstone registry. Only a presentation bit on existing unconsumed Direct
+records prevents showing a target already known dead; it never completes a
+receipt. Native graph projection is NTSRV-owned, never NTMON enumeration.
+
 Execution remains existing DOSRECORD/WOWRECORD/native Direct Win32Records:
 admission, original/native waits, results, BUSY/READY/EMPTY, I/O and retirement.
 Observation is one NTSRV-private sidecar associated with the existing worker/

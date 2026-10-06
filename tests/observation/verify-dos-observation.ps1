@@ -5,6 +5,7 @@ param(
  [Parameter(Mandatory)][string]$MonitorRpc,
  [Parameter(Mandatory)][string]$ProbeRoot,
  [Parameter(Mandatory)][string]$LogRoot,
+ [string]$MonitorUi='',
  [ValidateSet('Normal','Reuse','Tsr','Exclusions')][string]$Case='Normal',
  [switch]$Command,
  [switch]$NativeFirst,
@@ -105,6 +106,9 @@ try {
     @($created.nodes|Where-Object {$_.state -ne 2}).Count -ne 3)){
     throw 'Native shell-out/resume or active occurrence isolation not proved'
  }
+ if($MonitorUi) {
+  & "$PSScriptRoot/capture-ntmon-live-view.ps1" -Probe $MonitorUi -Observer $Observer -WorkerId $worker.pid -OutputRoot $log
+ }
  [IO.File]::WriteAllBytes((Join-Path $fixture 'GO0'),[byte[]]@(1))
  $needed=if($Case -eq 'Reuse'){5}else{$afterIndex+1};$deadline=[DateTime]::UtcNow.AddSeconds(5)
  do {$journal=@(Journal);if($journal.Count -ge $needed){break};Start-Sleep -Milliseconds 20}while([DateTime]::UtcNow -lt $deadline)
@@ -113,15 +117,15 @@ try {
  do {
   $finished=Trace $worker.pid 'finished'
   $old=@($finished.nodes|Where-Object {$_.node -eq $child[0].node})
-  if($Case -eq 'Tsr' -or ($old.Count -eq 1 -and $old[0].state -eq 2)){break};Start-Sleep -Milliseconds 20
+  if($Case -eq 'Tsr' -or !$old.Count){break};Start-Sleep -Milliseconds 20
  }while([DateTime]::UtcNow -lt $deadline)
  if($Case -eq 'Tsr') {
   if(($journal[2].Result -shr 8) -ne 3 -or $old.Count -ne 1 -or $old[0].state -ne 3){throw 'TSR return was falsely presented as terminal EXIT'}
- }elseif($old.Count -ne 1 -or $old[0].state -ne 2 -or ($old[0].flags -band 8)){throw 'Original termination fact/code uncertainty incorrect'}
+ }elseif($old.Count){throw 'Terminated DOS child retained as history'}
  if($Case -eq 'Reuse') {
-  $last=@($finished.nodes|Where-Object {$_.relation -eq 2 -and $_.node -ne $old[0].node})
+  $last=@($finished.nodes|Where-Object {$_.relation -eq 2 -and $_.psp -eq $journal[3].PSP})
   if($journal[3].Role -ne 'F' -or $journal[3].PSP -ne $journal[1].PSP -or
-     $last.Count -ne 1 -or $last[0].psp -ne $journal[3].PSP -or $last[0].parent -ne $program[0].node -or $last[0].state -ne 2){throw 'Actual PSP reuse lost independent occurrence/history'}
+     $last.Count){throw 'Actual PSP reuse/result failed or ended occurrence retained'}
  }
  if($process.HasExited){throw 'Observed child completion completed Direct early'}
  [IO.File]::WriteAllBytes((Join-Path $fixture 'GO1'),[byte[]]@(1))
@@ -133,9 +137,9 @@ try {
   do {
    $returned=Trace $worker.pid 'root-returned'
    $rootFact=@($returned.nodes|Where-Object {$_.node -eq $program[0].node})
-   if($rootFact.Count -eq 1 -and $rootFact[0].state -eq 2){break};Start-Sleep -Milliseconds 20
+   if(!$rootFact.Count){break};Start-Sleep -Milliseconds 20
   }while([DateTime]::UtcNow -lt $deadline)
-  if($rootFact.Count -ne 1 -or $rootFact[0].state -ne 2 -or $process.HasExited){throw 'TSR changed original root-return/wait contract'}
+  if($rootFact.Count -or $process.HasExited){throw 'TSR retained ended root or changed original wait contract'}
   Copy-Item (Join-Path $fixture 'J.BIN') "$log/journal.bin"
   $journal|ConvertTo-Json|Set-Content "$log/journal.json"
   'PASS actual TSR entry/return uncertainty, real root EXIT fact and unchanged baseline launcher wait; explicit cleanup'

@@ -10,6 +10,7 @@
 #define MANAGEMENT_WORKER 2u
 #define MANAGEMENT_WOW_TASK 3u
 #define MANAGEMENT_GUI_TARGET 4u
+#define MANAGEMENT_NATIVE_TASK 5u /* Read-only program projection, not execution. */
 #define MANAGEMENT_UNKNOWN 0u
 #define MANAGEMENT_IDLE 1u
 #define MANAGEMENT_BUSY 2u

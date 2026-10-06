@@ -1672,7 +1672,9 @@ if ($Architecture -eq 'x86') {
     # monitor is a client of the authenticated local BaseSrv endpoint.  It
     # shares only the native transport scope helper, never a BaseClient
     # registration or worker lifecycle library.
-    $graph.Add('build ntmon.exe: monitor_link obj/monitor/main.obj obj/monitor/stub.obj broker-transport.lib')
+    $graph.Add('build obj/monitor/trace_view.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntmon-exe/trace_view.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build ntmon.exe: monitor_link obj/monitor/main.obj obj/monitor/trace_view.obj obj/monitor/stub.obj broker-transport.lib')
     $graph.Add('build obj/tests/native_capture.obj: cc ' + (NinjaPath (Join-Path $root 'tests/adapter-basesrv/native_capture_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags + ' ' + ($includeRoots -join ' ') + ' /I "' + (NinjaPath (Join-Path $root 'src/ntsrv-exe/opennt/include')) + '"')
     $graph.Add('build native-capture-test.exe: base_rpc_test_link obj/tests/native_capture.obj obj/opennt-base-client/capture.obj obj/run16/support.obj')
@@ -1688,7 +1690,13 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build worker-identity-version-test.exe: monitor_link obj/tests/worker_identity_version.obj obj/monitor/stub.obj broker-transport.lib | ntsrv.exe')
     $graph.Add('build obj/tests/monitor_layout.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/monitor_layout_test.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build monitor-layout-test.exe: monitor_link obj/tests/monitor_layout.obj obj/monitor/stub.obj broker-transport.lib common-rpc.lib')
+    $graph.Add('build monitor-layout-test.exe: monitor_link obj/tests/monitor_layout.obj obj/monitor/trace_view.obj obj/monitor/stub.obj broker-transport.lib common-rpc.lib')
+    $graph.Add('build obj/tests/monitor_trace_view.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/monitor_trace_view_test.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build monitor-trace-view-test.exe: monitor_link obj/tests/monitor_trace_view.obj obj/monitor/trace_view.obj')
+    $graph.Add('build obj/tests/monitor_live_view.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/monitor_live_view_test.c')) + ' | obj/basesrv/service.h')
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build monitor-live-view-test.exe: monitor_link obj/tests/monitor_live_view.obj obj/monitor/trace_view.obj obj/monitor/stub.obj broker-transport.lib common-rpc.lib')
     $graph.Add('rule worker_link')
     # MSVC leaves an unchanged import library's timestamp intact. Without
     # restat that implicit output makes the whole link dirty on every build.
@@ -2104,6 +2112,9 @@ if ($objectOutputDirectories.Count -gt 0) {
         disposition = 'service-only management snapshot/control client; no original VDM/RTL body or worker-base'
         source = 'src/ntmon-exe/main.c'
         sha256 = Get-NodeSha256 (Join-Path $root 'src/ntmon-exe/main.c')
+        sources = @('src/ntmon-exe/main.c','src/ntmon-exe/trace_view.c','src/ntmon-exe/trace_view.h' | ForEach-Object {
+            [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
+        })
     }
     frontendServiceComposition = [ordered]@{
         target = 'obj/frontend/session_service.obj'

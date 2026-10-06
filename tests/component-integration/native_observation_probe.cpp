@@ -23,7 +23,7 @@ static DWORD WINAPI spawn_fast(void *value)
     WCHAR image[MAX_PATH],command[2048];STARTUPINFOW startup={sizeof(startup)};
     PROCESS_INFORMATION child={0};DWORD code=0;
     BOOL ok=GetModuleFileNameW(NULL,image,MAX_PATH)!=0;
-    if(ok)swprintf_s(command,L"\"%s\" leaf-fast \"%s\" \"%s\" unused \"%s\"",image,args[2],args[4],args[5]);
+    if(ok)swprintf_s(command,L"\"%s\" leaf \"%s\" \"%s\" unused \"%s\"",image,args[2],args[4],args[5]);
     if(ok)ok=CreateProcessW(image,command,NULL,NULL,FALSE,0,NULL,NULL,&startup,&child);
     if(ok) {
         CloseHandle(child.hThread);

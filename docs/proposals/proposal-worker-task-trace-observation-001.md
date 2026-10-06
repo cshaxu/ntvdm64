@@ -3,10 +3,20 @@
 ## Status, dependency and outcome
 
 Owner admits the former queue head as M0 T434 after T433 closure. CURRENT owns
-S1 audit/design only; the [current-source design](../etc/operations/t434-read-only-task-trace-design.md)
-supersedes outdated queue positions, src/interface naming, PID-only selection
-and assumptions of delivered Hook reports below. No production implementation
-or S2 admission is claimed.
+the active packet; S2-S4 supplied the accepted sources. Owner now corrects S5's
+product specification: one page has unchanged frontend/text-worker blocks,
+WOW-worker/Win16-task blocks, then Direct native program/Hook-descendant blocks
+(both text and GUI). Groups share one page; blocks within each group are time-
+ascending and separated by one blank line. Roots are flush, children have
+two spaces. UI rebuild uses pre-T T433 47d78555e; text/native overlap is deliberate.
+Only text-block worker Enter opens a read-only popup overlay, ESC closes it; modal rows
+are entry-ordered ordinal/relation/kind/elapsed/path. All views contain only
+live or terminal-unconfirmed tasks. Ended observation records are deleted,
+not kept as history; original unconsumed Direct completion records are untouched.
+This supersedes the history, diagnostic revision and modal hierarchy proposed
+below. The [current-source design](../etc/operations/t434-read-only-task-trace-design.md)
+retains historical rationale and the exact current contract. Earlier queue
+positions, interface names and no-implementation claims below are historical.
 
 Owner-requested unnumbered T candidate, fifth in the remaining queue after
 the [native launch-hook candidate](proposal-native-launch-hook-001.md).

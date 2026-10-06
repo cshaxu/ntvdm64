@@ -10,6 +10,7 @@ typedef struct common_dos_delivery {
     uint64_t direct;
 } common_dos_delivery;
 typedef struct common_dos_observation {
+    uint64_t event_filetime;
     uint64_t occurrence,parent,direct;
     uint32_t event,psp,parent_psp,flags;
     wchar_t image[260];

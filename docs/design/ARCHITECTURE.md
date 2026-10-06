@@ -230,6 +230,32 @@ retain explicit names, leaving host Windows directory APIs unchanged.
 
 ### Service-owned management tree — T426
 
+#### Owner-realigned Direct/Observed product view — T434
+
+NTMON's one page has three consecutive type groups: accepted NTCON
+frontend/text-worker management; independent WOW workers with actual Win16
+tasks; native Direct Win32/Win64 programs with authenticated Hook descendants,
+whether text or GUI. Text/native overlap references the same facts, never
+duplicates execution records. Groups are text, Win16, native; root blocks
+within each group are time-ascending with one blank line between blocks.
+Roots have no indentation; every descendant has exactly two spaces, never
+recursive indentation. Only text-block workers open a popup overlay on Enter.
+It lists live or terminal-unconfirmed Direct/Observed tasks in broker entry
+order with ordinal, relation, kind, elapsed and path; ESC closes it. WOW/native
+Enter has no action. Main text tree, Direct STACK and established hotkeys remain.
+Hook/native rows are read-only; existing registered GUI close permission remains.
+NTMON does not enumerate processes or infer relationships.
+
+There is no ended observation history. Native exit waits signal the existing
+NTSRV service event; service-owned cleanup drains waits and frees ended nodes
+and process references. DOS termination removes the observation occurrence;
+one worker-local source watermark rejects old ENTER replay. Original Direct
+completion/exit-code records remain until their normal consumer releases them.
+Observation can only mark an existing pending record display-ended, never
+complete it or change lifecycle. Missing termination evidence remains uncertain.
+Elapsed uses actual native process creation or copied DOS entry time, not worker
+creation. The initial S5 diagnostic/history UI is withdrawn, not published.
+
 NTSRV projects existing authenticated frontend associations, worker watches,
 original WOW records and registered detached GUI records in one copied
 management snapshot. NTCON frontends are top-level with associated DOS and

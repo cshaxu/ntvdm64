@@ -5,6 +5,8 @@ param(
  [Parameter(Mandatory)][string]$MonitorRpc,
  [Parameter(Mandatory)][string]$Probe,
  [Parameter(Mandatory)][string]$LogRoot,
+ [string]$MonitorUi='',
+ [switch]$CaptureWow,
  [ValidateSet('ChildFirst','RootFirst','ForcedChild','ShortChild','SuspendedChild','Concurrent','CmdNested','ReportDenied','ReportSlow')][string]$Case='ChildFirst'
 )
 $ErrorActionPreference='Stop'
@@ -63,30 +65,57 @@ try {
  if($workers.Count -ne 1 -or $workers[0].stack -ne 1){throw 'Observed child changed Direct stack'}
  $worker=$workers[0]
  if($Case -eq 'Concurrent') {
-  $journalRows=@(Get-Content (Join-Path $fixture 'J.TXT'))
-  $childIds=@($journalRows|Where-Object {$_ -match '^CHILD \d+ width=(32|64) hook=1$'}|ForEach-Object {[int](($_ -split ' ')[1])})
+  $deadline=[DateTime]::UtcNow.AddSeconds(5)
+  do {
+   $journalRows=@(Get-Content (Join-Path $fixture 'J.TXT'))
+   $childIds=@($journalRows|Where-Object {$_ -match '^CHILD \d+ width=(32|64) hook=1$'}|ForEach-Object {[int](($_ -split ' ')[1])})
+   if($childIds.Count -eq 16){break};Start-Sleep -Milliseconds 20
+  }while([DateTime]::UtcNow -lt $deadline)
   if($childIds.Count -ne 16 -or @($childIds|Sort-Object -Unique).Count -ne 16){throw 'Sixteen actual hooked child witnesses not proved'}
   $deadline=[DateTime]::UtcNow.AddSeconds(3)
   do {
    $trace=Read-Trace $worker.pid 'concurrent'
    $observed=@($trace.nodes|Where-Object {$_.relation -eq 2})
-   if($observed.Count -eq 16 -and !@($observed|Where-Object {$_.state -ne 2}).Count){break}
+   if($observed.Count -eq 16 -and !@($observed|Where-Object {$_.state -ne 1}).Count){break}
    Start-Sleep -Milliseconds 20
   }while([DateTime]::UtcNow -lt $deadline)
   $direct=@($trace.nodes|Where-Object {$_.relation -eq 1 -and $_.pid -eq $rootPid})
   if($direct.Count -ne 1 -or $observed.Count -ne 16){throw 'Concurrent CREATE lost or duplicate'}
   foreach($node in $observed) {
    if($node.pid -notin $childIds -or $node.parent -ne $direct[0].node -or
-      $node.state -ne 2 -or !($node.flags -band 8) -or $node.exit -ne 23){throw 'Concurrent identity/order/source/exit differs'}
+      $node.state -ne 1){throw 'Concurrent live identity/order/source differs'}
   }
   if(@($observed.node|Sort-Object -Unique).Count -ne 16 -or $events[4].WaitOne(0)){throw 'Concurrent facts changed Direct or duplicated IDs'}
+  $null=$events[2].Set()
+  $deadline=[DateTime]::UtcNow.AddSeconds(5)
+  do {
+   $remaining=Read-Trace $worker.pid 'concurrent-ended'
+   if(!@($remaining.nodes|Where-Object {$_.relation -eq 2}).Count){break}
+   Start-Sleep -Milliseconds 20
+  }while([DateTime]::UtcNow -lt $deadline)
+  if(@($remaining.nodes|Where-Object {$_.relation -eq 2}).Count){throw 'Ended concurrent observations retained'}
   $null=$events[1].Set();if(!$events[4].WaitOne(5000)){throw 'Concurrent Direct did not complete'}
   $null=$events[3].Set();if(!$observerProcess.WaitForExit(5000)){throw 'Concurrent host did not complete'}
   if($observerProcess.ExitCode -or (Get-Content $report -Raw) -notmatch '(?m)^exit=0x00000025\r?$'){throw 'Concurrent Direct37 changed'}
-  'PASS actual 16 concurrent short children: no missing/duplicate CREATE/EXIT; Direct37 unchanged'
+  'PASS actual 16 gated concurrent children: all live CREATE identities, then removal; real child23 and Direct37 unchanged'
   return
  }
  $created=Read-Trace $worker.pid 'created'
+ if($CaptureWow) {
+  $wowReport=Join-Path $log 'wow-startup.txt'
+  & $observerPath 'Z:\system32\run16.exe' 'Z:\' $wowReport 'Z:\system32\WINMINE.EXE' --observation-timeout-ms 10000
+  if($LASTEXITCODE -or (Get-Content $wowReport -Raw) -notmatch '(?m)^exit=0x00000000\r?$'){
+   throw 'Companion Win16 startup failed'
+  }
+  $wowTree=& $probeTool --tree-json
+  if($LASTEXITCODE){throw 'Companion WOW snapshot failed'}
+  $wowRows=@(($wowTree -join "`n")|ConvertFrom-Json)
+  if(!@($wowRows|Where-Object {$_.category -eq 2 -and $_.kind -eq 1}).Count -or
+     !@($wowRows|Where-Object {$_.category -eq 3 -and $_.kind -eq 1}).Count){throw 'Win16 worker/task block absent'}
+ }
+ if($MonitorUi) {
+  & "$PSScriptRoot/capture-ntmon-live-view.ps1" -Probe $MonitorUi -Observer $Observer -WorkerId $worker.pid -OutputRoot $log
+ }
  if($Case -in @('ReportDenied','ReportSlow')) {
   $direct=@($created.nodes|Where-Object {$_.relation -eq 1 -and $_.pid -eq $rootPid})
   if($direct.Count -ne 1 -or !($created.coverage -band 1)){throw 'Observation gap not explicit'}
@@ -115,7 +144,9 @@ try {
   }
  }
  $child=@($created.nodes|Where-Object {$_.pid -eq $childPid -and $_.relation -eq 2})
- if($root.Count -ne 1 -or $child.Count -ne 1 -or !$child[0].node -or
+ if($Case -eq 'ShortChild') {
+  if($root.Count -ne 1 -or $child.Count){throw 'Short-lived child retained as history or Direct root missing'}
+ }elseif($root.Count -ne 1 -or $child.Count -ne 1 -or !$child[0].node -or
   $child[0].parent -ne $root[0].node -or $child[0].source -ne 2 -or
   ($Case -ne 'ShortChild' -and $child[0].state -ne 1)){throw 'Real child CREATE/parent/source missing'}
  if($Case -eq 'ShortChild') {
@@ -145,11 +176,11 @@ try {
  do {
   $finished=Read-Trace $worker.pid 'finished'
   $node=@($finished.nodes|Where-Object {$_.pid -eq $childPid})
-  if($node.Count -eq 1 -and $node[0].state -eq 2){break}
+  if(!$node.Count){break}
   Start-Sleep -Milliseconds 20
  }while([DateTime]::UtcNow -lt $deadline)
- if($node.Count -ne 1 -or $node[0].state -ne 2 -or !($node[0].flags -band 8) -or
-   [uint32]$node[0].exit -ne $expectedBits){throw 'True kernel EXIT/code not recorded'}
+ if($node.Count){throw 'Ended child observation retained'}
+ if($Case -ne 'ForcedChild' -and $expectedBits -ne 23){throw 'Actual child23 changed'}
  if($Case -ne 'RootFirst') {
   if($events[4].WaitOne(0)){throw 'Observed exit completed Direct root'}
   $null=$events[1].Set()

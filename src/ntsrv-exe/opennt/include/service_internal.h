@@ -57,7 +57,7 @@ struct OPENNT_BASE_SERVICE {
     void *empty_notify_context;
     uint64_t management_epoch;
     uint64_t next_management_task; /* Label admission identity, never scheduling. */
-    LIST_ENTRY observations; /* Read-only retained process facts, not tasks. */
+    LIST_ENTRY observations; /* Live/terminal-unconfirmed facts only, not tasks. */
     uint32_t observation_count;
     uint64_t next_observation;
 };
@@ -163,6 +163,7 @@ typedef struct OPENNT_BASE_WIN32RECORD {
     DWORD worker_generation; /* Retained when a GUI record leaves its carrier. */
     DWORD launcher_generation,exit_code,completion_error;
     BOOL completed;
+    BOOL observation_exited; /* Display fact only; never a completion receipt. */
     BOOL gui;
     HANDLE gui_process,gui_wait; /* Query/wait/explicit-close reference; event-only watch. */
     HANDLE receipt; /* Signalled after NTVWM reports exit and I/O release. */
@@ -196,6 +197,7 @@ typedef struct OPENNT_BASE_WORKER_WATCH {
      * DOSRECORD identities.  They never model execution lifetime: srvvdm.c's
      * DOSRecord chain remains the sole source of task depth and state. */
     LIST_ENTRY management_labels;
+    uint64_t last_dos_occurrence; /* Ordered source replay watermark, not history. */
     BOOL termination_requested;
     HANDLE shutdown;
     DWORD frontend_root_generation,frontend_root_pid;
@@ -207,6 +209,7 @@ typedef struct OPENNT_BASE_MANAGEMENT_LABEL {
     ULONG task;
     PWOWRECORD wow_record;
     uint64_t identity;
+    BOOL observation_exited;
     WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS];
 } OPENNT_BASE_MANAGEMENT_LABEL;
 typedef struct OPENNT_BASE_CONSOLE_CONTEXT {
@@ -289,6 +292,13 @@ uint64_t service_observation_direct_id(OPENNT_BASE_SERVICE *,DWORD,DWORD);
 void service_observation_copy(OPENNT_BASE_SERVICE *,DWORD,common_task_trace_node *,
     uint32_t *,uint32_t *);
 void service_observation_stop(OPENNT_BASE_SERVICE *);
+void service_observation_prune(OPENNT_BASE_SERVICE *); /* Service lock held. */
+void service_observation_dos_forget(OPENNT_BASE_SERVICE *,DWORD,uint64_t);
+DWORD service_append_management(OPENNT_BASE_WORKER_INFO **,uint32_t *,uint32_t *,
+    const OPENNT_BASE_WORKER_INFO *);
+DWORD service_observation_native_tree(OPENNT_BASE_SERVICE *,OPENNT_BASE_WORKER_INFO **,
+    uint32_t *,uint32_t *);
+BOOL service_observation_native_direct(OPENNT_BASE_SERVICE *,DWORD,DWORD);
 uint64_t service_dos_delivery_trace(OPENNT_BASE_CONNECTION *);
 DWORD service_observation_dos_bind(OPENNT_BASE_SERVICE *,DWORD,uint64_t,DWORD,PCWSTR);
 #endif

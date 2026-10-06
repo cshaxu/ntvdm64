@@ -292,6 +292,7 @@ DWORD service_retire_expired_frontends_at(OPENNT_BASE_SERVICE *service,ULONGLONG
     if(!service)return ERROR_INVALID_PARAMETER;
     EnterCriticalSection(&service->lock);
     gui_changed=service_prune_gui_records(service);
+    service_observation_prune(service);
     for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
         ULONGLONG deadline=service_root_retirement_deadline(root,now);
