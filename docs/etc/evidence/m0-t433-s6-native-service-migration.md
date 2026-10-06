@@ -97,8 +97,10 @@ SysWOW64/I386 CMD VER/output/exit0 through the published native service.
 All ten image hashes match; test-created Z: is removed.
 
 Source, diff, image-matched map/35-unit closure, strict compilation and
-governance/relative-link reviews are complete. Commit/push bookkeeping follows
-these measured gates. T433 remains open; S7/S8 are not admitted.
+governance/relative-link reviews are complete. Production P1
+35a38780a16c7a62402fd8bc41c9980acf3f25ec is committed and pushed to main after
+these measured gates. Documentation-only P2 records bounded S6 closure;
+T433 remains open and S7/S8 are not admitted. No product change is hidden in P2.
 
 Known S5 rapid-interactive unclassified observation remains explicit debt, not
 a claimed repair. Tests use owned observer Consoles/private desktops and only

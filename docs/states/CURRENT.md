@@ -2,7 +2,8 @@
 
 ## Current Work
 
-**Active: M0 T433 S6** (Ordinary Mode; owner-approved NTSRV AMD64 implementation).
+**No active M/T/S packet.** T433 remains open. S6 native NTSRV is delivered;
+S7 mixed-width batch verification and S8 integrated closure await admission.
 
 The owner authorizes closing the delivered single-worker/dual-Hook package
 without manual acceptance and admitting the next Queue candidate. This is
@@ -10,7 +11,7 @@ owner-directed closure on automated evidence, not a claim of hands-on testing.
 [T432 closure](../history/m0-t432-single-worker-dual-hook-closure.md) retains
 the delivered baseline, superseded research and known limitations.
 
-## Active Packet
+## Last Packet — S6 (closed)
 
 | Field | Required record |
 | --- | --- |
@@ -42,7 +43,8 @@ unnecessary original literal edits without suppressing nonzero narrowing.
 Both-width layout/receipt-tag probes pass; copied values stay36/16/32 bytes.
 Proposed incremental mirror budget1 file/7 code lines is below S5's4/14.
 Owner approves implementing this bounded proposal. Implementation, runtime
-and coherent publication verification are now complete; commit/push follows.
+and coherent publication verification are complete. Production P1
+35a38780a16c7a62402fd8bc41c9980acf3f25ec is reviewed, committed and pushed.
 
 [Implementation evidence](../etc/evidence/m0-t433-s6-native-service-migration.md)
 records final native producer/import, both-width layouts/service29 and
@@ -51,7 +53,18 @@ independent WOW frontiers. r022 proves both CMD widths, both display modes,
 DOS parent-return and actual Hook legacy/WINMINE chains. r020 publishes the
 six-AMD64/four-I386 ten-image set; r021 actual deployed DOS/32/64 smoke and
 all hashes pass, Z: removed. Seven original expressions only; algorithms,
-wire and guest contracts unchanged. Reviewed commit/push remains before closure.
+wire and guest contracts unchanged. S6 is closed on bounded automated evidence,
+not owner manual acceptance. Documentation-only P2 records this delivery.
+
+## S6 Closure Record
+
+[S6 delivery evidence](../etc/evidence/m0-t433-s6-native-service-migration.md)
+records native NTSRV, exact seven-expression original diff, both-width service
+fixtures, final Full14, real32/64 handoff/Hook chains, coherent ten-image
+publication and deployed smoke. Production P1 35a38780a is pushed; no further
+production edits occur in closure P2. Six AMD64/four I386 images remain at
+O:/winnt/system32 with verified hashes and recovery backup. T433 stays open;
+no S7/S8 admission or physical/manual acceptance is claimed.
 
 ## S5 Closure Record
 
@@ -158,7 +171,7 @@ including the retained scope and default-desktop limitations.
 owns S1 audit/design, then the owner's order: S2 NTVWM, S3 NTCON, S4 NTMON,
 S5 RUN16, followed by planned S6 NTSRV native migration, then owner-requested
 S7 mixed16/32/64-bit batch verification; integrated delivery shifts to S8.
-S2-S5 are delivered; S6 alone is active at source/ABI audit. S7/S8 remain planned and require admission.
+S2-S6 are delivered; no S is active. S7/S8 remain planned and require admission.
 The side-conversation edit only schedules the batch test after service
 migration; it does not admit another implementation. The plan records the owner's service
 mirror-diff budget relative to delivered RUN16; no service work starts in S5.

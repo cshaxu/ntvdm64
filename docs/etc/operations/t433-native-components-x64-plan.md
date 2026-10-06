@@ -178,6 +178,11 @@ the independently recoverable baseline and audit before editing service source.
 No AMD64 NTSRV compile/runtime success or final mirror-diff size is claimed by
 this plan. S6 begins only after S5 closure and its own active packet admission.
 
+S6 implementation is now delivered: production35a38780a is committed/pushed.
+[Native service evidence](../evidence/m0-t433-s6-native-service-migration.md)
+records final Full14, both-width service fixtures, real handoffs and coherent
+six-AMD64/four-I386 publication/deployed smoke. T433 remains open; S7 is not admitted.
+
 ## Planned S7 mixed 16/32/64-bit batch verification
 
 Owner side-conversation direction on2026-10-05 inserts a separate test stage
