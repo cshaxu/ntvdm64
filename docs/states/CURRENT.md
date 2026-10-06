@@ -2,13 +2,43 @@
 
 ## Current Work
 
-**No active M/T/S packet.** Owner closes M0 T433 with “t收口 队列给我看看”.
+**Active: M0 T434 S1** (Ordinary Mode; read-only task-trace audit/design).
+Owner closes M0 T433 with “t收口 队列给我看看”.
 [T433 closure](../history/m0-t433-native-components-x64-closure.md) retains
 S1–S7 briefs, evidence, limits and final integration audit. Planned S8 is folded
 into this owner-directed closure, not a separately executed implementation.
-No successor T/S is admitted; [Queue](QUEUE.md) owns candidate order.
+Owner now admits the former queue head with “准入t任务 开始 给我设计方案”.
+[Queue](QUEUE.md) retains only the remaining candidates; no S2 is admitted.
+
+## Active Packet
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T434 S1; Ordinary Mode; audit/design only. |
+| Candidate Proposal | [Read-only worker task traces](../proposals/proposal-worker-task-trace-observation-001.md). |
+| Admission And Approval | Owner requests admission/start/design after T433 closure. Admit former queue-head observation package as T434; only S1 current-source/contract design is active. |
+| Objective | Audit actual Hook/worker/service/monitor event sources, distinguish existing execution records from observation, and design a minimal read-only trace with explicit fidelity and original-source boundaries. |
+| Non-goals | No production implementation/build/test/process/deployment change in S1, Job/tree scan/Console-member authority, helper, scheduler, observed completion/kill/lifecycle effect or automatic S2 admission. |
+| Reference Baseline | T433 closure47d78555e; S7 productiond1aa8336c/closure31a1487e4; published ten-image APP433/RPC41/I/O25, six AMD64/four I386; CCPU40 and existing direct/GUI/worker authority unchanged. |
+| Files And ABI Surface | Read Hook create/installer/context, NTSRV direct records/typed attachments/process waits/management keys, NTVDM original EXEC/PDB/TSR selected boundaries and NTMON. Design future copied declarations in common/protocol; no wire change yet. |
+| Applicable Rules | AGENTS authorities, source policy and mirror minimality, one active S, common/worker-base ownership, immutable guest and native-width/fixed-wire separation. Preserve other-session changes. |
+| Verification | Read-only source-position ledger, existing-protocol/creation-handle audit, explicit DOSONLY/TSR limitations, design adversarial scenarios and stage gates; documentation governance/link/diff checks only. Artifacts under build/M0-T434/S1 if needed. |
+| Expected Markers | Honest current-versus-proposed implementation, observation isolated from execution, validated process instances not bare PID, authenticated ordering/callback cleanup, truthful unknown states and unchanged monitor summary semantics. |
+| Asset Needs | Delivered dual Hooks and native components; existing original guest/process-wait boundaries and indexed S39 research. No import, new firmware/media or runtime asset. |
+| Reporting Requirements | Present ownership, event flow, identity, uncertainty, failure contract, mirror-hook requirements, stage split and remaining decisions before coding. |
+| Stop Conditions | Conflict with original execution/guest immutability, monitor affecting completion/lifetime, unavailable event fidelity hidden by polling, new helper/authority or unapproved original algorithm change. |
+| Exit Criteria | Indexed current-source design and updated proposal/plan with exact implementation gaps and future validation; governance/link/diff review and documentation commit/push. Await design review before S2. |
+| Original Owner Request | “准入t任务 开始 给我设计方案”. |
+| Similar-Issue Sweep | Short-lived/reused PID, concurrent/replayed native reports, caller-suspended targets, hook gaps/GUI boundaries, DOSONLY on/off, failed/load-only/overlay EXEC, ordinary exit versus TSR, stale worker/root selection and callback rundown. |
 
 ## Current Technical Baseline
+
+[T434 S1 design](../etc/operations/t434-read-only-task-trace-design.md) records
+actual missing Hook creation reports and existing original VDD user callbacks
+as the preferred DOS observation source. Execution records/STACK and lifecycle
+stay unchanged; observed trace is a separate read-only modal/sidecar. Exact
+source/fidelity and bounded native reporting remain implementation proof gates.
+Await design review before S2; current runtime is still the T433 baseline.
 
 T433 S7 production d1aa8336c3940e84879d6bc3c625a2ea5175ced1 and closure
 31a1487e41657e07d8727b1078c9fc36d0a2f2c8 are committed/pushed.
@@ -58,8 +88,8 @@ diagnostic/superseded dual-worker images as production inputs.
 
 ## Next Admission
 
-Await owner direction. The queue head is NTSRV-owned read-only task traces and
-NTMON hierarchy. This is a candidate, not active work or a numeric T allocation.
+T434 S1 is active for design review. No implementation S2 or later candidate is
+admitted; the new queue head is WOW32 messages/callbacks/task execution.
 
 ## Recent Governance
 

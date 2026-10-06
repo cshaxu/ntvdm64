@@ -2,6 +2,12 @@
 
 ## Status, dependency and outcome
 
+Owner admits the former queue head as M0 T434 after T433 closure. CURRENT owns
+S1 audit/design only; the [current-source design](../etc/operations/t434-read-only-task-trace-design.md)
+supersedes outdated queue positions, src/interface naming, PID-only selection
+and assumptions of delivered Hook reports below. No production implementation
+or S2 admission is claimed.
+
 Owner-requested unnumbered T candidate, fifth in the remaining queue after
 the [native launch-hook candidate](proposal-native-launch-hook-001.md).
 The active component-renaming package is absent from Queue and is not
@@ -48,7 +54,7 @@ and real process instances, orders revisions, marks stale/dead or uncovered
 sources and serves a copied snapshot. A bare PID, caller-provided parent PID,
 pointer or exposed sequence is not an authority.
 
-`src/interface` owns versioned copied DTO/RPC declarations. `worker-base`
+`src/common/protocol` owns versioned copied DTO/RPC declarations. `worker-base`
 contains only mechanisms common to the two workers: validated copied-delta
 encoding and an authenticated publication client. The injected hook uses its
 finite report client, not worker lifecycle or frontend internals. NTSRV owns
@@ -61,7 +67,7 @@ populate its view.
 ## Trace contract and fidelity limits
 
 Each node carries opaque node identity, a parent-node identity only when
-proved, kind (`DOS`, `WIN16`, `WIN32`), relation (`DIRECT`/`OBSERVED`),
+proved, existing kind (`DOS`, `WIN16`, `WIN32`, `WIN64`), relation (`DIRECT`/`OBSERVED`),
 active/exited/failed/unknown state, image/path, optional PID, start/end times,
 source and snapshot revision. Parent links are valid only within their trace
 revision. Unknown is a result, not permission to invent a completion. A
@@ -70,7 +76,9 @@ Only actual Direct completion may release a waiting run16 or change worker
 state; Observed deltas cannot affect admission, receipt, worker selection,
 root retirement, task kill or process termination.
 
-For NTVWM, reuse the delivered launch hook's creation reports. No Job or
+For NTVWM, reuse the delivered launch hook's successful creation boundary;
+T434 S1 confirms there is no existing creation-report RPC/client. Add the
+minimal observation publication without changing the installation transaction. No Job or
 completion-port descendant observer is selected. NTVWM reports/authenticates
 the direct root; injected controlled parents report actual successful child
 creation through the same finite versioned observation contract. Retain a
@@ -108,7 +116,7 @@ does not provide a proved host terminal event; absent a real event, report
 distinct `DOSONLY` paths are enumerated in the transferred T423 S39 plan.
 
 `WorkerTaskTrace` is an authenticated, versioned, read-only NTSRV query keyed
-by a currently registered worker PID. NTSRV resolves the PID under the
+by the existing generation-safe worker management key, never a bare PID. NTSRV resolves the key under the
 registration lock; removed or reused identities cannot disclose another
 worker's trace. NTMON Enter opens a modal with hierarchy, source, revision,
 staleness and explicit unavailable states; existing selection/Delete behavior
