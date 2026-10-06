@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T433 S2** (Ordinary Mode; single native-worker migration).
+**Active: M0 T433 S2** (Ordinary Mode; delivered, awaiting next-stage instruction).
 
 The owner authorizes closing the delivered single-worker/dual-Hook package
 without manual acceptance and admitting the next Queue candidate. This is
@@ -97,6 +97,10 @@ earlier remote500 failure is resolved without a force push.
 
 ## Recent Governance
 
+S2 implementation is closed at production P1
+14796f8ba56a51075f098a532d251531a9937db2, pushed to main with clean worktree.
+This documentation-only P2 records the observed delivery; no S3 admission.
+
 [S2 evidence](../etc/evidence/m0-t433-s2-native-worker-migration.md) records
 the isolated AMD64 build, RPC220/lifetime1084 unit passes and actual native32
 and64 projection. A proven requester/worker file-view gap is corrected by
@@ -109,4 +113,4 @@ reentry and GUI management. Current Hook147/147 and final four build-input
 negatives pass. r018 publishes r010 and r019 deployed DOS/32/64 CMD VER/output/
 receipt smoke passes with matching hashes. Official build/import has no x86
 worker fallback and regenerates the same tested bytes. Review/commit/push
-remain before delivery closure; S3 is not admitted.
+are complete; S2 is delivered. S3 is not admitted and T433 remains open.

@@ -156,3 +156,9 @@ replaced. Explicit test-owned process cleanup is not normal retirement proof.
 Native build/source/ABI checks and final mirror diff against the preceding
 production commit remain clean: no src/mvdm or src/opennt-host body change.
 Review/governance/commit/push conclude delivery; S3 remains unadmitted.
+
+Production P1 14796f8ba56a51075f098a532d251531a9937db2 is committed/pushed;
+HEAD and origin/main match and worktree is clean immediately afterward.
+Documentation-only P2 records S2 implementation closure. T433 remains open;
+S3 NTCON is not admitted by this delivery. Current deployed sources/artifacts
+are the proved S2 combination, not completion of the remaining x64 consumers.
