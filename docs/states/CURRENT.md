@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T433 S3** (Ordinary Mode; native frontend migration).
+**No active M/T/S packet. T433 remains open; S3 is closed; S4 awaits owner admission.**
 
 The owner authorizes closing the delivered single-worker/dual-Hook package
 without manual acceptance and admitting the next Queue candidate. This is
@@ -10,11 +10,11 @@ owner-directed closure on automated evidence, not a claim of hands-on testing.
 [T432 closure](../history/m0-t432-single-worker-dual-hook-closure.md) retains
 the delivered baseline, superseded research and known limitations.
 
-## Active Packet
+## S3 Closure Record
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T433 S3; Ordinary Mode. |
+| Identifier Mode | M0 T433 S3 closed; Ordinary Mode. Production P1 245d3ac120cc060b04189bfa5118e08b34fd2a76 committed/pushed; this documentation-only P2 records closure. |
 | Candidate Proposal | [Native x64 launcher/frontend/monitor](../proposals/proposal-project-components-native-x64-001.md). |
 | Admission And Approval | After verified/published/pushed S2 NTVWM delivery, owner says “准入下一个” then “批准 开始执行”; admit only S3 NTCON in the owner-fixed S2 NTVWM / S3 NTCON / S4 NTMON / S5 RUN16 sequence. |
 | Objective | Migrate the unique ntcon.exe visible frontend to AMD64 with architecture-local common/Console/Window/RPC dependencies; preserve worker-neutral rendering/input, zero-or-one authorized I/O pipe, broker-owned association/lifecycle, actual caller Console attachment and final restoration ACK. Verify, coherently publish, review/commit/push and report. |
@@ -35,8 +35,8 @@ the delivered baseline, superseded research and known limitations.
 
 [Native component migration plan](../etc/operations/t433-native-components-x64-plan.md)
 owns S1 audit/design, then the owner's order: S2 NTVWM, S3 NTCON, S4 NTMON,
-S5 RUN16, followed by S6 integrated delivery. S2 is delivered and S3 alone
-is active. S4 and later remain planned; each stage retains its own verification/publication gate.
+S5 RUN16, followed by S6 integrated delivery. S2 and S3 are delivered.
+S4 and later remain planned; each stage retains its own verification/publication gate.
 
 NTSRV remains the sole lifecycle/task/I/O connection authority. NTCON stays
 worker-neutral, holding zero or one authorized direct I/O pipe. NTVDM keeps
@@ -44,7 +44,7 @@ the original x86 CCPU40/DOS/WOW execution boundary; NTVWM remains one worker
 executing both native target widths, with its x64 migration added by owner.
 Hook32/64 are retained. The intended final package still has ten images:
 four migrated EXEs plus Hook64 are AMD64, the remaining five images are x86.
-Current published NTVWM is AMD64. Names/system32-relative paths stay.
+Current published NTCON and NTVWM are AMD64. Names/system32-relative paths stay.
 
 Each shared dependency is compiled for its actual consumer ABI; no mixed
 object/library architecture or CRT in one image. Copied wire records retain
@@ -126,5 +126,7 @@ Console17/Window17 and retained WOW frontiers in399055ms. Published r008/r009
 passes DOS MEM and32/64 CMD output/direct results with matching hashes and Z
 released. [S3 evidence](../etc/evidence/m0-t433-s3-native-frontend-migration.md)
 retains failed observer-width/default53x15 geometry experiments and unchanged
-scope limits. Original mirror bodies are unchanged. P review/commit/push is
-pending; T433 remains open and S4 is not admitted.
+scope limits. Original mirror bodies are unchanged. P1
+245d3ac120cc060b04189bfa5118e08b34fd2a76 is committed/pushed; S3 is closed on
+the bounded automated evidence, not owner manual acceptance. Documentation-only
+P2 records delivery. T433 remains open and S4 is not admitted.

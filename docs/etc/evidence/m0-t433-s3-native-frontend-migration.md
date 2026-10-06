@@ -108,6 +108,10 @@ worker-base. Documentation governance, relative links and Git diff checks pass.
 S3 delivery retains these explicit boundaries; T433 stays open and S4 waits
 for owner admission.
 
+Production P1 `245d3ac120cc060b04189bfa5118e08b34fd2a76` is committed and
+pushed to main. Documentation-only P2 records bounded S3 closure; no later S
+is admitted and no further product change/build is part of that P2.
+
 No owner hands-on acceptance or physical RDP/focus/clipping observation is
 claimed. WINMINE visible startup and SOL/WRITE retained frontiers are not WOW
 gameplay/functionality proof. Known long-path limitation remains untouched.
