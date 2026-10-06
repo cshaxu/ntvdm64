@@ -1,5 +1,10 @@
 # T433 native components x64 migration plan
 
+Owner closes T433 on2026-10-06. This plan is retained design/history, not live
+admission. [T433 closure](../../history/m0-t433-native-components-x64-closure.md)
+records S1–S7 delivery and folds the planned S8 audit into owner-directed closure
+using the final S7 integrated package/evidence; no separate S8 implementation is claimed.
+
 ## Scope
 
 Owner admits the former Queue-head candidate after T432 closure without
