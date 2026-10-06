@@ -2,13 +2,34 @@
 
 ## Current Work
 
-**No active M/T/S packet. T433 remains open; S4 is closed; S5 awaits owner admission.**
+**Active: M0 T433 S5** (Ordinary Mode; native launcher migration).
 
 The owner authorizes closing the delivered single-worker/dual-Hook package
 without manual acceptance and admitting the next Queue candidate. This is
 owner-directed closure on automated evidence, not a claim of hands-on testing.
 [T432 closure](../history/m0-t432-single-worker-dual-hook-closure.md) retains
 the delivered baseline, superseded research and known limitations.
+
+## Active Packet
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T433 S5; Ordinary Mode. |
+| Candidate Proposal | [Native x64 launcher/frontend/monitor](../proposals/proposal-project-components-native-x64-001.md). |
+| Admission And Approval | Owner says “对，准入S5，然后报给我，run16迁移会有哪些问题和难点？” Admit S5 after S4 delivery; this turn performs admission and source/link audit/report, not production implementation. |
+| Objective | Migrate the single run16.exe to AMD64, preserving shared CWD/PATH COM/EXE/BAT/PIF discovery, original DOS/WOW classification/client/environment semantics, native image fallback, unchanged CLI and GUI startup/explicit wait/direct receipt/Console restoration behavior. Build/test, coherently publish, review/commit/push and report. |
+| Non-goals | No second launcher, classifier/search policy, new helper, worker-base/frontend renderer dependency, private PEB/TEB offset emulation, x64 MVDM/service/DLL migration, protocol redesign, guest patch, global WOW64-redirection disable or automatic S6 admission. |
+| Reference Baseline | S4 production03456b24ce2616080fbb3bc84090939c42b71f22, closuredf3a50c70; sealed build/M0-T433/S4/r002-runtime, publication r006 and deployed checks. APP0.0.433/RPC41/I/O25; NTCON/NTVWM/NTMON/Hook64 AMD64, six I386 images. Retain coherent recovery and recorded geometry/environment/long-path limits. |
+| Files And ABI Surface | run16-exe, finite Hook context-only slice, architecture-local common/client/MIDL and historical host ABI dependencies. Audit actual original vdm/classifier/capture/error/environment calls before adaptation. Copied wire records stay fixed-width; local pointers/resources/alignment follow the consumer ABI. |
+| Applicable Rules | AGENTS authorities, source-first recovery, original mirror minimality/provenance and immutable guest, one active S, owned/borrowed resources, no mixed library ABI, preserve other-session modifications and unchanged execution owners. |
+| Verification | build/M0-T433/S5/r001 onward. Image-matched original/project dependency ledger, local capture/message/RTL environment and native structure probes, checked capability parser/formatter, shared search/classification/CLI negatives, architecture-local native builds. Real x86 service/NTVDM, native32/native64 CUI/GUI, both Hook origins and launcher context-only propagation, nested DOS/native/reentry, true receipts/results and final Console restoration, failures/cancellation/cleanup. Retained Console17/Window17/WOW frontiers, version mismatch, no fallback, coherent ten-image publication/deployed smoke. Governance/link/diff review. |
+| Expected Markers | run16/NTCON/NTVWM/NTMON/Hook64 AMD64; NTSRV/NTVDM/WOW32/VDMREDIR/Hook32 I386. Same names and system32 layout, CLI/search and task semantics. No new registry/scheduler/control edge or bitness-only protocol bump. |
+| Asset Needs | S4 package/recovery, current image-matched run16 map, original source and bounded compatibility headers, delivered Hook64 classifier/context and native common/RPC work, MSVC14.43/SDK22621/MT and unchanged original media. |
+| Reporting Requirements | Distinguish confirmed narrowing, retained original assumptions and unproved obligations. No zero-mirror-diff promise before capture/environment audit. Report minimal adaptation alternatives and any required owner decision; retain failed experiments and prior limitations. |
+| Stop Conditions | Unknown provenance, substantial or unapproved original mirror change, replacement classifier/CSR shell, new helper/authority, pointer truncation or accidental wire widening, changed launch syntax/search semantics, broken context/receipt/restore ordering or unexplained baseline regression. |
+| Exit Criteria | Actual selected closure compiles natively with focused ABI and real workload/failure/cleanup gates, existing assertions/capabilities retained, coherent ten-image publication and deployed checks verified; source/evidence reviewed and committed/pushed, clean worktree. T stays open; S6 requires admission. |
+| Original Owner Request | “S2: NTVWM; S3: NTCON; S4: NTMON; S5: RUN16”; now “对，准入S5，然后报给我，run16迁移会有哪些问题和难点？” |
+| Similar-Issue Sweep | Pointer metadata/alignment versus numeric DWORD/ULONG fields, allocator/RTL/TLS ownership, capability text overflow and formatting, original NE/native machine classification, actual file identity under WOW64 views, Sysnative fixture selection, native target versus launcher Hook machine, real flags/handles/results, mixed-width command/capture marshalling and borrowed Console restoration barrier. |
 
 ## S4 Closure Record
 
@@ -64,7 +85,7 @@ including the retained scope and default-desktop limitations.
 [Native component migration plan](../etc/operations/t433-native-components-x64-plan.md)
 owns S1 audit/design, then the owner's order: S2 NTVWM, S3 NTCON, S4 NTMON,
 S5 RUN16, followed by S6 integrated delivery. S2 and S3 are delivered.
-S4 is delivered; S5 and later remain planned. Each stage retains its own verification/publication gate.
+S4 is delivered; S5 alone is active. S6 remains planned and each stage retains its verification/publication gate.
 
 NTSRV remains the sole lifecycle/task/I/O connection authority. NTCON stays
 worker-neutral, holding zero or one authorized direct I/O pipe. NTVDM keeps
@@ -177,4 +198,13 @@ independent WOW frontiers. r006/r007 publication and actual NTMON/DOS/32/64
 smoke pass with ten-image/notice hashes and Z released. Reviewed production
 P1 03456b24ce2616080fbb3bc84090939c42b71f22 is committed/pushed; documentation-only
 P2 records bounded S4 closure, not owner hands-on acceptance. T433 stays open
-and S5 is not admitted.
+and owner now admits S5 only.
+
+S5 admission/source audit: current cache and sealed S4 run16 hashes match.
+Its actual map selects original classifier/client/capture plus RTL error and
+environment bodies, unlike the earlier native monitor/frontend. Confirmed
+project narrowing remains in frontend_scope.c strtoul/%lx; native_launch's
+formatter is already corrected. Existing native metadata fallback and both
+Hook context paths are reusable. Original capture pointer metadata/alignment
+and private RTL environment layouts remain the main unproved native boundary;
+no S5 production edit, build, test or deployment has occurred this turn.

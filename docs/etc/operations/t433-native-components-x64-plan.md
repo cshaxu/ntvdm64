@@ -34,7 +34,9 @@ their own admission. S4 starts with current-source/link/ABI review, preserving
 the existing monitor UI/control behavior rather than adding monitoring features.
 S4 has completed its native build, affected UI/RPC/lifecycle tests and coherent
 publication; [S4 evidence](../evidence/m0-t433-s4-native-monitor-migration.md)
-retains delivery review and limitations. S5 remains unadmitted.
+retains delivery review and limitations. Owner now admits S5 RUN16; S6 is
+not admitted. The initial turn records source/link boundaries and difficulty
+reporting, without changing production code or the published package.
 Later rows require bounded stage conclusion and ordinary
 execution-rule admission/verification; they are not simultaneous active tasks.
 Owner explicitly selects S2 NTVWM, S3 NTCON, S4 NTMON and S5 RUN16.
@@ -74,3 +76,44 @@ S1 output: build/M0-T433/S1/r001. Retained maps/manifests are immutable;
 new indexed audit/design evidence distinguishes source proof, compile
 experiments and runtime results. Do not run a product matrix merely for
 admission. Escalate a material required mechanism rather than silently rewrite.
+
+## S5 admission audit and migration priorities
+
+Current run16 cache matches the sealed S4 image hash52F0C847B47C327C9F3B17BB856BBD9915A5F5CE4490E4EB65E09A3D687AA9F4.
+Its map still selects original classifier/client/capture and RTL error/environ,
+not just project RPC. These bodies require their own native ABI audit; prior
+native frontend/monitor success does not certify them.
+
+1. frontend_scope.c:24/94 still parses/formats native resource locators with
+   strtoul/%lx. Use checked full-width local values; keep broker authentication
+   and syntax. native_launch.c already has the delivered full-width formatter.
+2. Original csrutil.c has ULONG pointer-offset arrays, a pointer-to-ULONG cast
+   and four-byte alignment. The project provider ignores capture metadata and
+   does not implement original pointer rebasing. Audit which metadata is live
+   and native message/string alignment before selecting a bounded ABI binding;
+   do not widen numeric fields or reimplement CSR. Zero original diff is not
+   promised. A required material/unapproved mirror adaptation stops for review.
+3. Retain original DOS/NE/PIF classification. Original native classification
+   has a same-machine restriction, but run16 already falls back to verified
+   SEC_IMAGE metadata, accepting both native widths. Reuse the Hook64's
+   classifier-local _X86_ guest-rule composition after native declarations,
+   not a global x86 compile define or a second classifier.
+4. Preserve original RTL environment algorithms through their existing finite
+   private TLS/public-API PEB/TEB facade. Audit native local structures and
+   allocation/free/lock/encoding/failure contracts; never cast real modern
+   PEB/TEB layouts to NT4 or replace original environment behavior casually.
+5. Rebuild launcher clients/MIDL/common/Hook context at AMD64. NTSRV remains
+   x86 and existing typed resource/copy contracts remain unchanged. Both
+   Hook origins must seed the actual x64 launcher without interception of
+   run16 itself; current installer already derives the actual child's machine.
+6. System32 is the native view for an x64 launcher, and SysWOW64 is explicit
+   x86. Sysnative is a WOW64-only alias: existing tests must choose paths by
+   the actual launcher ABI and verify the resulting PE machine. Preserve
+   CWD/PATH order, explicit selected file identity, original arguments and
+   shell fallback; do not disable redirection globally or force all CMD32.
+7. Retain DOS/native receipts, GUI startup-only/explicit wait, Win16 startup
+   behavior and the final Console restored acknowledgement before outer CMD
+   resumes. Native compile alone cannot prove nested or failure/cleanup paths.
+
+This is source evidence/design, not an x64 launcher runtime pass. Migration
+uses build/M0-T433/S5/r001 onward and retains S4 as recoverable production.
