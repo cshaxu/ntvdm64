@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**No active M/T/S packet. T433 remains open; S3 is closed; S4 awaits owner admission.**
+**Active: M0 T433 S4** (Ordinary Mode; native monitor migration).
 
 The owner authorizes closing the delivered single-worker/dual-Hook package
 without manual acceptance and admitting the next Queue candidate. This is
@@ -10,7 +10,32 @@ owner-directed closure on automated evidence, not a claim of hands-on testing.
 [T432 closure](../history/m0-t432-single-worker-dual-hook-closure.md) retains
 the delivered baseline, superseded research and known limitations.
 
+## Active Packet
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T433 S4; Ordinary Mode. |
+| Candidate Proposal | [Native x64 launcher/frontend/monitor](../proposals/proposal-project-components-native-x64-001.md). |
+| Admission And Approval | Owner says “准入S四，给我汇报一下情况。” Admit only S4 NTMON after delivered S3; initial admission/status audit does not claim implementation or runtime success. |
+| Objective | Migrate the single ntmon.exe to AMD64 with architecture-local management/RPC dependencies, preserving service-only snapshots/tree selection, labels, existing hotkeys, explicit close authorization and disconnected-monitor behavior. Build/test, coherently publish, review/commit/push and report. |
+| Non-goals | No new monitor feature, task observation/registry, local process enumeration, worker-base dependency, helper, GUI frontend, protocol redesign, original mirror change or x64 run16/NTSRV/NTVDM/WOW32/VDMREDIR. S5 is not admitted. |
+| Reference Baseline | S3 production245d3ac120cc060b04189bfa5118e08b34fd2a76 and closure1de70587b2c175ebafce3e171188c7481e85de83. Sealed build/M0-T433/S3/r002-runtime, publication r008 and smoke r009: ten images APP0.0.433/RPC41/I/O25; NTCON/NTVWM/Hook64 AMD64, seven others I386. Retain recovery and recorded default-desktop/environment limits. |
+| Files And ABI Surface | Own ntmon-exe/main.c, selected common management/RPC and NTSRV-owned client transport, architecture-local MIDL, finite build/import/staging/verifier selection and relevant tests. Copied keys/rows retain fixed widths; native handles/pointers stay local. |
+| Applicable Rules | AGENTS authorities, original-source provenance and mirror-minimality, one active S, resource ownership and architecture-local MT builds. Preserve other-session modifications and source/guest bytes outside scope. |
+| Verification | build/M0-T433/S4/r001 onward. Audit actual selected map/source closure; AMD64 monitor/client/MIDL build; native layout/key/label/hotkey/selection tests, snapshot/close RPC against x86 NTSRV, permissions/stale identity/version/malformed results, disconnection/reconnection and cleanup. Real frontend/DOS/WOW/native32/native64/GUI projection and selected-close isolation; retained product/WOW gates; coherent ten-image publication, hashes and deployed monitor smoke. Governance/link/diff review. |
+| Expected Markers | One AMD64 NTCON/NTVWM/NTMON/Hook64 and six I386 images. Service remains the only snapshot/identity/control authority. Same DOS/WIN16/WIN32/WIN64 labels, no MEMBERS or new grouping, title NTVDM Task Monitor and UP/DOWN/DEL/ESC behavior retained. No original mirror diff or protocol bump merely for bitness. |
+| Asset Needs | Existing MSVC14.43/SDK22621/MT x64 island, S3 native generator/common/MIDL work, x86 formal cache, current monitor layout/RPC fixtures and immutable package/media. No external source or new runtime asset. |
+| Reporting Requirements | Distinguish admission/source audit, compiler/unit results, real service/control proof and publication. Retain prior limitations; no physical-desktop or WOW-gameplay claim. |
+| Stop Conditions | Original-body rewrite, unknown provenance, new helper/protocol/registry/control edge, pointer narrowing or copied ABI drift, changed labels/hotkeys/close permissions, unsafe process control or unexplained baseline regression. |
+| Exit Criteria | Selected native dependencies and positive/negative/UI/RPC/control/cleanup tests pass with original assertions; existing package capabilities do not regress; complete ten-image publication/deployed checks pass; source/evidence reviewed and committed/pushed, clean worktree. Await owner direction rather than auto-admit S5. |
+| Original Owner Request | “S2: NTVWM; S3: NTCON; S4: NTMON; S5: RUN16”; now “准入S四，给我汇报一下情况。” |
+| Similar-Issue Sweep | HANDLE/RPC binding width versus fixed PID/key/count/FILETIME fields; DTO/MIDL alignment and allocation ownership, stale row/confirmation identity, native format specifiers, Console render/input/restore, reconnect/error paths, build fallback and package PE/hash expectations. |
+
 ## S3 Closure Record
+
+[S3 closure evidence](../etc/evidence/m0-t433-s3-native-frontend-migration.md)
+records verified/published production245d3ac12 and pushed closure1de70587b,
+including the retained scope and default-desktop limitations.
 
 | Field | Required record |
 | --- | --- |
@@ -36,7 +61,7 @@ the delivered baseline, superseded research and known limitations.
 [Native component migration plan](../etc/operations/t433-native-components-x64-plan.md)
 owns S1 audit/design, then the owner's order: S2 NTVWM, S3 NTCON, S4 NTMON,
 S5 RUN16, followed by S6 integrated delivery. S2 and S3 are delivered.
-S4 and later remain planned; each stage retains its own verification/publication gate.
+S4 alone is active; S5 and later remain planned. Each stage retains its own verification/publication gate.
 
 NTSRV remains the sole lifecycle/task/I/O connection authority. NTCON stays
 worker-neutral, holding zero or one authorized direct I/O pipe. NTVDM keeps
@@ -129,4 +154,12 @@ retains failed observer-width/default53x15 geometry experiments and unchanged
 scope limits. Original mirror bodies are unchanged. P1
 245d3ac120cc060b04189bfa5118e08b34fd2a76 is committed/pushed; S3 is closed on
 the bounded automated evidence, not owner manual acceptance. Documentation-only
-P2 records delivery. T433 remains open and S4 is not admitted.
+P2 records delivery. T433 remains open; owner now admits S4 NTMON only.
+
+S4 admission audit: current NTMON is I386 and its458-line project-owned main
+consumes common management/RPC plus broker transport and generated client
+stub. S1's image-matched ledger selects no original BaseClient/RTL body.
+It already uses native HANDLE/RPC_BINDING_HANDLE and fixed copied management
+keys/rows; it does not enumerate Console members or processes. Its750ms
+display refresh remains existing behavior, not a migration target. No S4
+production edit, build, test or deployment has occurred at admission.
