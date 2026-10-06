@@ -2,8 +2,7 @@
 
 ## Current Work
 
-**No active M/T/S packet.** T433 remains open; S5 native launcher migration
-is delivered on bounded automated evidence. Await owner admission of S6.
+**Active: M0 T433 S6** (Ordinary Mode; NTSRV native migration, source/ABI audit phase).
 
 The owner authorizes closing the delivered single-worker/dual-Hook package
 without manual acceptance and admitting the next Queue candidate. This is
@@ -11,7 +10,44 @@ owner-directed closure on automated evidence, not a claim of hands-on testing.
 [T432 closure](../history/m0-t432-single-worker-dual-hook-closure.md) retains
 the delivered baseline, superseded research and known limitations.
 
+## Active Packet
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T433 S6; Ordinary Mode; audit/design first. |
+| Candidate Proposal | [Native component migration](../proposals/proposal-project-components-native-x64-001.md). |
+| Admission And Approval | Owner says “准入执行s6 审计镜像diff需求”. Admit S6 and first audit the actual NTSRV closure and required incremental mirror changes. Do not edit production bodies before presenting the bounded source findings. |
+| Objective | Establish the exact AMD64 NTSRV dependency/local-ABI port, distinguishing unchanged original reuse, existing shim/declaration/build binding and necessary minimal original expressions; compare its incremental mirror budget against delivered S5. |
+| Non-goals | No NTVDM/WOW32/VDMREDIR migration, original DOS/WOW scheduling/completion rewrite, second service/helper/registry, CSR shell, wire widening, runtime/deployment change during audit or automatic S7 admission. |
+| Reference Baseline | S5 production39fe1f8a93c855a59298877ec10a93d8dd8bb92d, closurea009cdea975e25e9719af54899909db4317978f2; sealed build/M0-T433/S5/r007-final-runtime, final Full r026 and publication r020/smoke r021. APP0.0.433/RPC41/I/O25, five AMD64/five I386 images; NTSRV remains I386. |
+| Files And ABI Surface | Actual ntsrv.exe map/source graph, selected original srvvdm/srvinit/RTL and original declaration subsets; ntsrv-exe service/private state/resource bindings, common RPC/transport/codec and native MIDL. Fixed task/receipt IDs versus true pointers/HANDLEs must remain separate. |
+| Applicable Rules | AGENTS authorities, source-first mirror minimality/provenance, one active S, owner resource/lock/lifetime boundaries, per-consumer MT/native ABI and unchanged x86 CCPU40/guest semantics. Preserve other-session modifications. |
+| Verification | build/M0-T433/S6/r001-audit onward. Pin current source/artifact/graph/map; enumerate actually selected members including any x86 assembly; strict audit-only native compilation and declaration/layout/ID checks; inspect changed sites against upstream/S5 budget. No product test/process needed for admission. Later implementation retains full service/RPC/lifecycle/Console17/Window17/WOW/publication gates. |
+| Expected Markers | Source-position ledger with original versus project provenance, local versus copied numeric meaning, precise proposed edits/rejected alternatives and counted diff. Prefer zero algorithm changes, same x86 semantics and no bitness-only protocol bump. Audit compile is not native service runtime acceptance. |
+| Asset Needs | S5 coherent package/recovery, formal x86 cache build/M0-T427/S2/r001, existing native client/MIDL/support islands, MSVC14.43/SDK22621/MT, pinned original OpenNT sources read-only. |
+| Reporting Requirements | Report confirmed compile/ABI requirements separately from suspected risk and future runtime proof. Compare original body/header/declaration carrier files, non-comment code/declaration lines and expression/type changes with S5; do not hide original movement in an adapter. |
+| Stop Conditions | Unknown provenance, larger mirror budget or original algorithm change, new helper/authority/transport, native pointer truncation, widened copied IDs or fabricated completion, changed resource/lock/cleanup ordering, unexplained regression. Present smallest alternative for owner review. |
+| Exit Criteria | Current phase delivers indexed audit, native compile attempts and exact minimal-diff proposal for review without production edits/publication. S6 stays active for reviewed implementation; final closure still requires native service build, mixed-width real processes/negative/cleanup gates, coherent ten-image publication and reviewed commit/push. |
+| Original Owner Request | “准入执行s6 审计镜像diff需求”. |
+| Similar-Issue Sweep | HANDLE-shaped hParent/task-ID tags, CLIENT_ID PID/TID casts, native allocation/address subtraction, fixed LP32 msg/DTO fields, local CSR thread/callback layouts, LUID/SID/heap APIs, source-selected RTL assembly, registration/reentry/exit/result and dead-worker cleanup; same ownership on x86/x64. |
+
+## S6 Audit Progress
+
+S6 audit checkpoint: [NTSRV native mirror audit](../etc/evidence/m0-t433-s6-native-service-mirror-audit.md)
+pins the published/cache I386 service and its actual35-unit closure: original
+srvvdm.c/error.c only, no RTL environment/time/x86 assembly member. Build-only
+candidate copies with seven srvvdm numeric/tag expressions and15 project
+conversions compile/link AMD64. Scoped integer-zero NULL binding avoids eleven
+unnecessary original literal edits without suppressing nonzero narrowing.
+Both-width layout/receipt-tag probes pass; copied values stay36/16/32 bytes.
+Proposed incremental mirror budget1 file/7 code lines is below S5's4/14.
+Production source and O:/winnt remain unchanged. S6 remains active at audit;
+implementation/runtime/publication are not claimed complete.
+
 ## S5 Closure Record
+
+[S5 closure evidence](../etc/evidence/m0-t433-s5-native-launcher-migration.md)
+records the delivered AMD64 launcher, publication and retained limitations.
 
 | Field | Required record |
 | --- | --- |
@@ -113,7 +149,7 @@ including the retained scope and default-desktop limitations.
 owns S1 audit/design, then the owner's order: S2 NTVWM, S3 NTCON, S4 NTMON,
 S5 RUN16, followed by planned S6 NTSRV native migration, then owner-requested
 S7 mixed16/32/64-bit batch verification; integrated delivery shifts to S8.
-S2-S5 are delivered; no S is active. S6/S7/S8 require their own admission.
+S2-S5 are delivered; S6 alone is active at source/ABI audit. S7/S8 remain planned and require admission.
 The side-conversation edit only schedules the batch test after service
 migration; it does not admit another implementation. The plan records the owner's service
 mirror-diff budget relative to delivered RUN16; no service work starts in S5.
