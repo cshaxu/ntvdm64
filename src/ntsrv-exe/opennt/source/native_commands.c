@@ -503,6 +503,12 @@ DWORD service_prepare_parent_resume(OPENNT_BASE_CONNECTION *caller,
             if(service_worker_root(parent)!=root_generation || !parent->native_inflight)
                 return ERROR_INVALID_STATE;
             caller->selected_native_generation=parent->process.SequenceNumber;
+            /* CheckDOS temporarily selects an independent PIF Console for
+             * this launcher. Its result is now consumed; restore the live,
+             * authenticated parent's execution association before selecting,
+             * queuing and delivering the native resume. The DOS worker and
+             * original ConsoleRecord retain their own identity unchanged. */
+            caller->console=parent->console;
             *native_parent=TRUE;return ERROR_SUCCESS;
         }
         return parent->process.fVDM && !parent->wow ? ERROR_SUCCESS : ERROR_ACCESS_DENIED;

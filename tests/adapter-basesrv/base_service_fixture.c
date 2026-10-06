@@ -47,9 +47,34 @@ int fixture_parent_resume_origin(void)
     ORIGIN_CHECK(service_prepare_parent_resume(caller,rg+1,&required)==ERROR_INVALID_STATE);
     ORIGIN_CHECK(!service_prepare_parent_resume(caller,rg,&required) && required);
     ORIGIN_CHECK(caller->selected_native_generation==pg);
+    /* A completed PIF leaves the launcher on the child's Console. Resume
+     * restores only that launcher's association to its authenticated parent. */
+    caller->retained_frontend_root=rg;
+    caller->console=(HANDLE)(ULONG_PTR)0x712;
+    ORIGIN_CHECK(!service_prepare_parent_resume(caller,rg,&required) && required);
+    ORIGIN_CHECK(caller->console==parent->console);
+    ORIGIN_CHECK(!OpenNtBaseServiceRetainCommandWorker(caller,children[1].dwProcessId,cg,&target));
+    ORIGIN_CHECK(GetProcessId(target)==children[0].dwProcessId);
+    CloseHandle(target);target=NULL;
+    caller->console=(HANDLE)(ULONG_PTR)0x712;
+    caller->dos_completion_read=FALSE;
+    ORIGIN_CHECK(service_prepare_parent_resume(caller,rg,&required)==ERROR_INVALID_STATE);
+    ORIGIN_CHECK(caller->console==(HANDLE)(ULONG_PTR)0x712);
+    ORIGIN_CHECK(OpenNtBaseServiceRetainCommandWorker(caller,children[1].dwProcessId,cg,&target)==ERROR_PROCESS_ABORTED && !target);
+    caller->dos_completion_read=TRUE;
+    caller->execution_worker_generation=rg;
+    ORIGIN_CHECK(OpenNtBaseServiceRetainCommandWorker(caller,children[1].dwProcessId,cg,&target)==ERROR_PROCESS_ABORTED && !target);
+    caller->execution_worker_generation=pg;
+    caller->retained_frontend_root=rg+1;
+    ORIGIN_CHECK(service_prepare_parent_resume(caller,rg+1,&required)==ERROR_INVALID_STATE);
+    ORIGIN_CHECK(caller->console==(HANDLE)(ULONG_PTR)0x712);
+    ORIGIN_CHECK(OpenNtBaseServiceRetainCommandWorker(caller,children[1].dwProcessId,cg,&target)!=ERROR_SUCCESS && !target);
+    caller->retained_frontend_root=rg;
+    caller->console=NULL;
     parent->worker_failed=TRUE;
     ORIGIN_CHECK(service_prepare_parent_resume(caller,rg,&required)==ERROR_PROCESS_ABORTED);
     parent->worker_failed=FALSE;parent->native_worker=FALSE;
+    caller->retained_frontend_root=0;
     caller->selected_native_generation=0;
     LeaveCriticalSection(&service->lock);
     /* Same root/Console but another origin must not reuse the native locator. */

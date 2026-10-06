@@ -2,8 +2,8 @@
 
 ## Current Work
 
-**No active M/T/S packet.** T433 remains open. S6 native NTSRV is delivered;
-S7 mixed-width batch verification and S8 integrated closure await admission.
+**Active: M0 T433 S7** (Ordinary Mode; COMMAND/CMD mixed-width batch tests).
+S6 native NTSRV is delivered; T433 remains open and S8 is not admitted.
 
 The owner authorizes closing the delivered single-worker/dual-Hook package
 without manual acceptance and admitting the next Queue candidate. This is
@@ -11,26 +11,38 @@ owner-directed closure on automated evidence, not a claim of hands-on testing.
 [T432 closure](../history/m0-t432-single-worker-dual-hook-closure.md) retains
 the delivered baseline, superseded research and known limitations.
 
-## Last Packet — S6 (closed)
+## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T433 S6; Ordinary Mode; audited implementation approved. |
-| Candidate Proposal | [Native component migration](../proposals/proposal-project-components-native-x64-001.md). |
-| Admission And Approval | Source/ABI audit is delivered; owner says “没有太大问题的话 就帮我把ntsrv做成x64 完成后 编译测试提交推送吧”. Implement the audited seven original numeric/tag expressions and fifteen project casts, scoped NULL binding and finite native service build/import; compile, test, publish and commit/push. |
-| Objective | Deliver one AMD64 NTSRV with the audited minimal local-ABI changes, unchanged original algorithms and copied protocols; prove x86/x64 fixtures and real mixed-width lifecycle, then publish the coherent ten-image package. |
-| Non-goals | No NTVDM/WOW32/VDMREDIR migration, original DOS/WOW scheduling/completion rewrite, second service/helper/registry, CSR shell, wire widening or automatic S7 admission. |
-| Reference Baseline | S5 production39fe1f8a93c855a59298877ec10a93d8dd8bb92d, closurea009cdea975e25e9719af54899909db4317978f2; sealed build/M0-T433/S5/r007-final-runtime, final Full r026 and publication r020/smoke r021. APP0.0.433/RPC41/I/O25, five AMD64/five I386 images; NTSRV remains I386. |
-| Files And ABI Surface | Actual ntsrv.exe map/source graph selects original srvvdm/RTL error plus unchanged finite config/exports fragments, not srvinit or MVDM; ntsrv-exe service/private state/resource bindings, common RPC/transport/codec and native MIDL. Fixed task/receipt IDs versus true pointers/HANDLEs remain separate. |
-| Applicable Rules | AGENTS authorities, source-first mirror minimality/provenance, one active S, owner resource/lock/lifetime boundaries, per-consumer MT/native ABI and unchanged x86 CCPU40/guest semantics. Preserve other-session modifications. |
-| Verification | build/M0-T433/S6/r001-r005 retain the admission audit. r009 native producer, r010 formal import and r011 sealed final runtime; both-width layout and service29 fixtures, real Full14 Console17/Window17/WOW/version/lifecycle gates, native-input negatives and actual publication/smoke. Inspect final map and seven-expression mirror budget against upstream/S5. |
-| Expected Markers | Six AMD64/four I386 images; seven-expression original diff, zero algorithm changes, same x86 semantics and fixed APP433/RPC41/I/O25. Actual native service with real mixed-width clients, receipts/resources, reentry and cleanup, not just an audit link. |
-| Asset Needs | S5 coherent package/recovery, formal x86 cache build/M0-T427/S2/r001, existing native client/MIDL/support islands, MSVC14.43/SDK22621/MT, pinned original OpenNT sources read-only. |
-| Reporting Requirements | Report confirmed compile/ABI requirements separately from suspected risk and future runtime proof. Compare original body/header/declaration carrier files, non-comment code/declaration lines and expression/type changes with S5; do not hide original movement in an adapter. |
-| Stop Conditions | Unknown provenance, larger mirror budget or original algorithm change, new helper/authority/transport, native pointer truncation, widened copied IDs or fabricated completion, changed resource/lock/cleanup ordering, unexplained regression. Present smallest alternative for owner review. |
-| Exit Criteria | Native service build, both-width fixtures, mixed-width real processes/negative/cleanup gates, coherent ten-image publication and deployed checks; reviewed commit/push with clean worktree. T433 remains open; do not auto-admit S7. |
-| Original Owner Request | “准入执行s6 审计镜像diff需求”. |
-| Similar-Issue Sweep | HANDLE-shaped hParent/task-ID tags, CLIENT_ID PID/TID casts, native allocation/address subtraction, fixed LP32 msg/DTO fields, local CSR thread/callback layouts, LUID/SID/heap APIs, source-selected RTL assembly, registration/reentry/exit/result and dead-worker cleanup; same ownership on x86/x64. |
+| Identifier Mode | M0 T433 S7; Ordinary Mode; mixed-width batch verification and approved nested-PIF parent-resume repair. |
+| Candidate Proposal | [Native component migration](../proposals/proposal-project-components-native-x64-001.md); [S7 plan](../etc/operations/t433-native-components-x64-plan.md#planned-s7-mixed-163264-bit-batch-verification). |
+| Admission And Approval | Owner admits COMMAND/CMD mixed-width batch tests and, after measured DOS7/resume1067 evidence, says “批准修复”. Extend S7 only to the existing parent-origin/lifetime/handoff defect, preserving NTSRV authority and original PIF execution. |
+| Objective | Reproducible mixed16/32/64 BAT execution from both DOS COMMAND and native CMD, proving actual target width, sequence, nested CALL/child return, results/branching, I/O and cleanup on the S6 package. |
+| Non-goals | No guest/original mirror modification, new hook/worker/helper/protocol/registry, error suppression, delay workaround, process-tree policy, universal BAT compatibility or automatic S8/T closure. |
+| Reference Baseline | S6 production35a38780a, closure2ec54eeea; sealed build/M0-T433/S6/r011-final-runtime and published O:/winnt/system32, six AMD64/four I386 images; APP433/RPC41/I/O25. Full14, Console17/Window17/WOW, both-width service29/Hook147 and real handoff pass. |
+| Files And ABI Surface | NTSRV-private native_commands.c authenticated parent-resume association; targeted service fixtures and test-owned native32/64 probes/BAT scripts under tests/. build/M0-T433/S7 artifacts only. Original guest/media and production ABI unchanged. |
+| Applicable Rules | AGENTS authorities; original CCPU40 execution and immutable guest; test-only provenance, native-width MT builds, exact owned cleanup, global BaseSrv serial isolation and Z: only. Preserve unrelated changes. |
+| Verification | Build both native fixture widths; run COMMAND, SysWOW64 CMD and System32 CMD batches in Console/Window; unique run journal and output files, ordered markers, actual child/exit/width, CALL, ERRORLEVEL, missing/nonzero, quoting/CWD/PATH COM/EXE/BAT/PIF, redirection and START/wait where supported. Review harness false-positive negatives and package hashes; retain source attribution for unavailable original semantics. |
+| Expected Markers | Exact per-case sequence and run ID, actual16 guest output/result and32/64 probe machine, correct native waits/exit codes/conditional branches, no premature parent output, final input/control return, no cross-session or leaked test processes. Input delivery alone is not execution proof. |
+| Asset Needs | Sealed S6 package/recovery; existing owned Console/Window observers; MSVC14.43/SDK22621/MT x86/x64; existing authored G7.COM and original media. No new Microsoft source or guest binary rewrite. |
+| Reporting Requirements | Capability ledger by shell/display mode; same batch syntax subset versus legitimate DOS/CMD differences. Separate verified success, original-source limitations and unknown/project defects; record commands, hashes, failures and cleanup. |
+| Stop Conditions | Unexplained failure, production gap requiring expanded scope, original mirror/guest repair, new control authority/helper or weakening assertions. Diagnose before seeking scoped implementation approval. |
+| Exit Criteria | Strict mixed/search/native/typeahead cases and focused parent-origin/PIF lifecycle negatives pass; affected builds and retained Full14/Console17/Window17/WOW gates, coherent ten-image publication and deployed smoke; governance/link/diff review and commit/push. T433 stays open; S8 awaits admission. |
+| Original Owner Request | “准入下一个s 添加混合位数的批处理测试 用command和cmd分别执行”. |
+| Similar-Issue Sweep | COMMAND versus CMD CALL/return and ERRORLEVEL, WOW64 file view versus real image width, both Hook origins, quoting/search, actual versus startup-only GUI completion, stdin/stdout/stderr, typeahead, final I/O return and cleanup. |
+
+## S7 Progress
+
+[S7 evidence](../etc/evidence/m0-t433-s7-mixed-batch-tests.md) records the
+confirmed independent-PIF association bug and one-assignment NTSRV repair at
+the authenticated parent-resume boundary, without mirror/ABI changes.
+r031 Mixed/Search/Native16, r033 typeahead6, r043 actual WOW BAT/UI3 and r044
+exact missing-command Search/Native10 pass. Both-width service29 and journal
+oracle negatives pass. r034 Full14 passes409388ms, preserving Console17,
+Window17 and three WOW frontiers. r038 publishes the coherent ten-image set;
+r039 deployed DOS/32/64 smoke and all hashes pass, Z: removed. Only NTSRV
+changes from S6. Reviewed commit/push is next; S8/T closure is not admitted.
 
 ## S6 Audit Progress
 
@@ -171,7 +183,7 @@ including the retained scope and default-desktop limitations.
 owns S1 audit/design, then the owner's order: S2 NTVWM, S3 NTCON, S4 NTMON,
 S5 RUN16, followed by planned S6 NTSRV native migration, then owner-requested
 S7 mixed16/32/64-bit batch verification; integrated delivery shifts to S8.
-S2-S6 are delivered; no S is active. S7/S8 remain planned and require admission.
+S2-S6 are delivered; S7 batch tests are active by owner admission. S8 awaits admission.
 The side-conversation edit only schedules the batch test after service
 migration; it does not admit another implementation. The plan records the owner's service
 mirror-diff budget relative to delivered RUN16; no service work starts in S5.
@@ -196,9 +208,9 @@ launcher syntax change, bitness-only worker selection or private transition.
 T432 is closed by owner direction without hands-on acceptance. Its ten-image
 package remains independently recoverable. S3's verified r002-runtime remains
 the recoverable preceding baseline. S4 r002-runtime is retained as recovery.
-S5 final r007 is now at O:/winnt/system32, identity0.0.433/RPC41/I/O25;
-run16, NTCON, NTVWM, NTMON and Hook64 are AMD64; the other five stay I386.
-Guest/configuration are unchanged; S5 r020 retains complete S4 recovery.
+S6 final r011 is at O:/winnt/system32, identity0.0.433/RPC41/I/O25;
+run16, NTSRV, NTCON, NTVWM, NTMON and Hook64 are AMD64; four stay I386.
+Guest/configuration are unchanged; S6 r020 retains complete S5 recovery.
 
 [Final S6 evidence](../etc/evidence/m0-t432-s6-single-worker-reconstruction.md)
 retains Hook147/147, metadata402, RPC220, native lifetime1084, service29,

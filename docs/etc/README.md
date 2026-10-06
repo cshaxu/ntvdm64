@@ -7,6 +7,7 @@ delivered single-worker/dual-Hook gates; see
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T433 S7 mixed-width batches](evidence/m0-t433-s7-mixed-batch-tests.md) | M0 T433 S7 | COMMAND/CMD32/CMD64 actual batch tests, exact journals/typeahead, GUI wait semantics and retained nested-PIF parent-resume failure. | Retain through scoped repair and S acceptance. |
 | [T433 S6 native service migration](evidence/m0-t433-s6-native-service-migration.md) | M0 T433 S6 | Bounded AMD64 service build/import, both-width ABI/service fixtures, real mixed-width gates and coherent publication status. | Retain through delivery and T closure. |
 | [T433 S4 native monitor migration](evidence/m0-t433-s4-native-monitor-migration.md) | M0 T433 S4 | AMD64 monitor/client build, stable copied ABI, real UI/RPC/control/restart and publication evidence. | Retain through delivery and package closure. |
 | [T433 S3 native frontend migration](evidence/m0-t433-s3-native-frontend-migration.md) | M0 T433 S3 | AMD64 frontend build/resource/parser and actual observer/fixture/runtime/publication evidence. | Retain through delivery and package closure. |

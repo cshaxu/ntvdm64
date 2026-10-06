@@ -360,6 +360,7 @@ static DWORD WINAPI native_command_wait(void *context)
         1,&payload,&bytes,&test->caller,&test->execution,&test->frontend,&test->request,&test->caller_generation);
     return test->error;
 }
+static void WINAPI frontend_notification_cleanup(void *context);
 static int frontend_authority(void)
 {
     DWORD phase;
@@ -371,6 +372,7 @@ static int frontend_authority(void)
         HANDLE capability=CreateEventW(NULL,TRUE,FALSE,NULL);
         HANDLE retire=CreateEventW(NULL,TRUE,FALSE,NULL),restored=CreateEventW(NULL,TRUE,FALSE,NULL);
         HANDLE startup_result=CreateEventW(NULL,TRUE,FALSE,NULL);
+        HANDLE worker_cleanup=CreateEventW(NULL,TRUE,FALSE,NULL);
         HANDLE selected=NULL,selected_cap=NULL,selected_retire=NULL,selected_restored=NULL,shutdown=NULL;
         PROCESS_INFORMATION child={0};
         STARTUPINFOA startup={sizeof(startup)};
@@ -378,6 +380,8 @@ static int frontend_authority(void)
         DWORD launcher_generation=0,root_generation=0,create=0,closing=0;
         ULONGLONG deadline=0,before=GetTickCount64();
         CHECK(service && self && capability && retire && restored && startup_result);
+        CHECK(worker_cleanup && OpenNtBaseServiceConfigureEmptyNotify(service,
+            frontend_notification_cleanup,worker_cleanup));
         CHECK(!OpenNtBaseServiceConnect(service,self,&launcher,&launcher_generation));
         CHECK(!OpenNtBaseServiceAcquireFrontendRoot(launcher,GetCurrentProcessId(),launcher_generation,
             1234,&create,&selected,&selected_cap,&selected_retire,&selected_restored) && create);
@@ -471,6 +475,7 @@ static int frontend_authority(void)
                 CHECK(!OpenNtBaseServiceDisconnect(root));root=NULL;
                 CHECK(!OpenNtBaseServiceDisconnect(launcher));launcher=NULL;
                 CloseHandle(shutdown);CloseHandle(backend.hThread);CloseHandle(backend.hProcess);
+                CHECK(WaitForSingleObject(worker_cleanup,5000)==WAIT_OBJECT_0);
                 goto authority_finish;
             }
             waiting.connection=worker;waiting.pid=backend.dwProcessId;waiting.generation=worker_generation;
@@ -491,8 +496,7 @@ static int frontend_authority(void)
             CHECK(!OpenNtBaseServiceDisconnect(worker));
             CloseHandle(shutdown);CloseHandle(backend.hThread);CloseHandle(backend.hProcess);
             CHECK(!OpenNtBaseServiceDisconnect(launcher));launcher=NULL;
-            {ULONGLONG until=GetTickCount64()+5000;
-                while(!OpenNtBaseServiceIsEmpty(service) && GetTickCount64()<until)Sleep(1);}
+            CHECK(WaitForSingleObject(worker_cleanup,5000)==WAIT_OBJECT_0);
         } else {
         /* No LeaseReady call: the obsolete idle gate must not pin this root. */
         CHECK(!OpenNtBaseServiceDisconnect(launcher));launcher=NULL;
@@ -519,6 +523,7 @@ static int frontend_authority(void)
         }
 authority_finish:
         CHECK(OpenNtBaseServiceIsEmpty(service) && OpenNtBaseServiceStop(service));
+        CloseHandle(worker_cleanup);
         CHECK(TerminateProcess(child.hProcess,0));
         CloseHandle(child.hThread);CloseHandle(child.hProcess);
         CloseHandle(capability);CloseHandle(retire);CloseHandle(restored);CloseHandle(self);
