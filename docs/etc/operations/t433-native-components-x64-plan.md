@@ -4,7 +4,7 @@
 
 Owner admits the former Queue-head candidate after T432 closure without
 manual testing. Status owns the only active packet; owner-approved S1 design
-handoff admits S2 NTVWM implementation. Remaining consumer-native probes
+handoff admitted S2 NTVWM, now delivered; owner admits S3 NTCON. Remaining consumer-native probes
 continue at their own stages, not as already passed S1 runtime behavior.
 [T432 closure](../../history/m0-t432-single-worker-dual-hook-closure.md)
 supplies the baseline: one x86 NTVWM, dual Hooks, ten images,
@@ -27,7 +27,8 @@ version, modify source/build inputs or replace the published package.
 | S5 RUN16 | x64-only launcher, unchanged shared discovery/recognition/CLI and both incoming Hook widths. | Original/private versus OS/native ABI, DOS/Win16/native32/native64, real child flags/handles/waits/results, context-only launcher; no launcher fallback helper. |
 | S6 integrated delivery | Final coherent recoverable ten-image mixed-width package and T closure audit. | One worker, both Hooks, cross-width nesting and DOS/native handoff, Console17/Window17, independent WOW frontiers, version negatives, mirror/diff audit and published hashes/smoke. |
 
-Only S1 is admitted. Later rows require bounded stage conclusion and ordinary
+Only S3 is active; S1's bounded design handoff and S2 delivery are retained.
+Later rows require bounded stage conclusion and ordinary
 execution-rule admission/verification; they are not simultaneous active tasks.
 Owner explicitly selects S2 NTVWM, S3 NTCON, S4 NTMON and S5 RUN16.
 S6 retains the prior final integrated audit/publication contract. Component

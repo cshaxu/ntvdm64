@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T433 S2** (Ordinary Mode; delivered, awaiting next-stage instruction).
+**Active: M0 T433 S3** (Ordinary Mode; native frontend migration).
 
 The owner authorizes closing the delivered single-worker/dual-Hook package
 without manual acceptance and admitting the next Queue candidate. This is
@@ -14,29 +14,29 @@ the delivered baseline, superseded research and known limitations.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T433 S2; Ordinary Mode. |
+| Identifier Mode | M0 T433 S3; Ordinary Mode. |
 | Candidate Proposal | [Native x64 launcher/frontend/monitor](../proposals/proposal-project-components-native-x64-001.md). |
-| Admission And Approval | Owner fixes S2 NTVWM / S3 NTCON / S4 NTMON / S5 RUN16, accepts the presented single-worker, mirror-zero-diff migration design and says “批准开始实施！完成后汇报。” S1 reaches an owner-approved bounded design handoff, not four-component native runtime closure. |
-| Objective | Migrate the single ntvwm.exe to AMD64 with architecture-local worker-base/common/RPC/installer dependencies; retain native32/64 targets, existing x86 NTSRV/NTCON/run16, hidden Console, actual handles/waits/results and NTSRV-authorized I/O/lifecycle. Verify, coherently publish, review/commit/push and report. |
-| Non-goals | No second NTVWM, no x64 run16/NTCON/NTMON in S2, no x64 NTSRV/NTVDM/WOW32/VDMREDIR; no original mirror/guest rewrite, new protocol/helper/scheduler/registry or target replacement. |
-| Reference Baseline | Production b97041e748772dce813fb963e7527781c7321909; documentation31140866907fccd35aaddf12ccca13b8c54a0517. Sealed build/M0-T432/S6/r048-runtime and r029-publication match O:/winnt/system32: ten images, APP0.0.432/RPC41/I/O25. Only Hook64 is AMD64; other images remain x86 /MT CCPU40. |
-| Files And ABI Surface | Own ntvwm-exe, selected worker-base/common/native client adaptations, native_launch capability text, isolated native build/packaging/verification tools and tests. Rebuild original RTL error.c unchanged through its existing native adapter. Shared x86 dependents rebuild as needed. Wire remains RPC41/I/O25 unless a real wire change is separately justified. |
+| Admission And Approval | After verified/published/pushed S2 NTVWM delivery, owner says “准入下一个”; admit only S3 NTCON in the owner-fixed S2 NTVWM / S3 NTCON / S4 NTMON / S5 RUN16 sequence. |
+| Objective | Migrate the unique ntcon.exe visible frontend to AMD64 with architecture-local common/Console/Window/RPC dependencies; preserve worker-neutral rendering/input, zero-or-one authorized I/O pipe, broker-owned association/lifecycle, actual caller Console attachment and final restoration ACK. Verify, coherently publish, review/commit/push and report. |
+| Non-goals | No x64 run16/NTMON in S3, no x64 NTSRV/NTVDM/WOW32/VDMREDIR, no second frontend/worker, private helper, guest/original mirror rewrite, protocol redesign, renderer duplication, frontend task registry or autonomous worker lifecycle. |
+| Reference Baseline | S2 production14796f8ba56a51075f098a532d251531a9937db2 and closure8c755716404a0cdfde5e39f0a7385c0a30f52447. Sealed build/M0-T433/S2/r010-runtime/r018-publication matches O:/winnt/system32: ten images APP0.0.433/RPC41/I/O25, NTVWM/Hook64 AMD64; other eight I386. |
+| Files And ABI Surface | Own ntcon-exe and its private lib/Window/Console callbacks, selected common/frontend/RPC ABI adaptations, mixed-width build/staging/verification tools and tests. Reuse S2 native dependency construction where contracts match. Original mirror/guest bodies remain unchanged; app433/RPC41/I/O25 stay unless a genuine wire change is separately justified. |
 | Applicable Rules | AGENTS authorities, source-first provenance, unchanged guest media, mirror-minimality, owner-local resource policy, fixed-width wire contracts and one active S. Preserve other-session changes. |
-| Verification | build/M0-T433/S2/r001 onward; fresh AMD64 NTVWM/client/MIDL closure, x86 formal cache and Hook64 affected input rebuild for APP0.0.433. Focused ABI/worker lifetime/Hook/native32/64/context/receipt/failure/reentry/handoff/isolation checks; retained Console17/Window17/WOW frontiers; coherent ten-image manifest/recovery/publication and deployed smoke; governance/link/diff review. |
-| Expected Markers | Exactly one AMD64 ntvwm.exe and nthook64.dll; remaining eight images I386. x86 service/frontend/launcher interoperable, actual native32/64 target Hook/results, double-ACK I/O release, no original MVDM/OpenNT-host source diff, tested/deployed hashes identical. |
-| Asset Needs | Existing MSVC14.43/SDK22621 native tools, T432 r048 baseline/current x86 graph/maps, audited Hook64/error adapter and immutable guest media. No new external import. |
-| Reporting Requirements | Distinguish compile/fixture/real-process proof, published state and remaining limits. Report original mirror diff explicitly. Retain failed evidence and do not call tests or publication complete before actual results. |
-| Stop Conditions | Unknown provenance, original mirror rewrite, broad source import, changed CLI/search/native child identity/waits/suspension, unapproved helper/worker/protocol, or unexplained baseline regression; preserve coherent old publication. |
-| Exit Criteria | Affected builds and positive/negative/lifecycle/native32/64 handoff checks plus retained product gates pass; coherent ten-image package published and verified; reviewed production diff committed/pushed and worktree clean. Do not auto-admit S3. |
-| Original Owner Request | “S2: NTVWM; S3: NTCON; S4: NTMON; S5: RUN16”，then accepts the NTVWM migration design and instructs “批准开始实施！完成后汇报。” |
-| Similar-Issue Sweep | Native resource widths/text locators, cross-width incoming/outgoing attachments, Hook32/64/context-only x86 run16, HWND/COORD/frame structs, MIDL native ABI, System32/Sysnative selection, publisher/input waits, final I/O, nested parent restoration, broker/frontend death and exact cleanup. |
+| Verification | build/M0-T433/S3/r001 onward. Audit/rebuild AMD64 frontend and MIDL/static dependencies; focused resource/handle parsing, callbacks/userdata, text/DIB/input/title, clipping/cursor/Console switch, final-I/O/teardown/restoration, peer/broker failure and handle tests. Actual x86 service/NTVDM and AMD64 NTVWM handoff, both native target widths, relaunch/isolation, retained Console17/Window17/WOW frontiers and coherent ten-image publication/deployed smoke. Governance/link/diff review. |
+| Expected Markers | Exactly one AMD64 NTCON/NTVWM/Hook64; seven other product images I386. One renderer and zero/one active pipe, fixed copied frame/input ABI, event-driven broker control, current Console geometry/cursor and restoration barrier preserved; no original mirror diff; tested/deployed hashes match. |
+| Asset Needs | Existing MSVC14.43/SDK22621 x86/x64 tools, S2 sealed package/maps/source manifests, private imported frontend library provenance, native worker/Hook caches and unchanged guest media. No new external import or runtime component. |
+| Reporting Requirements | Separate source/compile/unit/real-process proof and published state. Preserve S2 capabilities and known limits. Report source provenance and original mirror diff; no physical desktop claim where observation remains waived. |
+| Stop Conditions | Unknown provenance, mirror rewrite, new renderer/helper/protocol/control edge or frontend lifecycle authority, narrowed resource/callback pointers, lost restore/final-I/O barriers, unsafe host changes or unexplained baseline regression. |
+| Exit Criteria | Affected native/x86 dependency builds and positive/negative/lifecycle/frontend/real handoff gates pass without weaker assertions; coherent ten-image package published and verified; reviewed source/evidence committed/pushed and worktree clean. Do not auto-admit S4. |
+| Original Owner Request | Owner fixes “S2: NTVWM; S3: NTCON; S4: NTMON; S5: RUN16” and, after S2 delivery, says “准入下一个”. |
+| Similar-Issue Sweep | Full-width bootstrap handles, HWND/HDC/LRESULT/WPARAM/LPARAM/userdata/callbacks, native versus copied record sizes/alignment, typed RPC attachments across x86 service, channel cancellation and transport ownership, text/DIB frame limits, keyboard/mouse/title routes, Console identity/teardown, original buffer/modes/cursor and outer CMD return ordering. |
 
 ## Plan and retained boundaries
 
 [Native component migration plan](../etc/operations/t433-native-components-x64-plan.md)
 owns S1 audit/design, then the owner's order: S2 NTVWM, S3 NTCON, S4 NTMON,
-S5 RUN16, followed by S6 integrated delivery. S2 alone is admitted;
-S3 and later remain planned. Each stage retains its verification/publication gate.
+S5 RUN16, followed by S6 integrated delivery. S2 is delivered and S3 alone
+is active. S4 and later remain planned; each stage retains its own verification/publication gate.
 
 NTSRV remains the sole lifecycle/task/I/O connection authority. NTCON stays
 worker-neutral, holding zero or one authorized direct I/O pipe. NTVDM keeps
@@ -68,8 +68,8 @@ and unchanged-image product gates are separate results. WINMINE visible UI is
 not gameplay; SOL/WRITE retain known error frontiers. Default private-desktop
 geometry and arbitrary large-environment behavior are not claimed repaired.
 
-Formal x86 reusable cache: build/M0-T427/S2/r001. Hook64 cache:
-build/M0-T432/S6/r002-hook64. Keep these as evidenced inputs, not architecture-
+Formal x86 reusable cache: build/M0-T427/S2/r001. Native worker cache:
+build/M0-T433/S2/r001; Hook64 cache: build/M0-T433/S2/r002-hook64. Keep these as evidenced inputs, not architecture-
 mixed output roots. Superseded dual-worker candidate remains archive-only at
 evidence/t432-dual-worker-superseded-20261005; it is not a migration baseline.
 
@@ -95,11 +95,12 @@ explicit obligations of their later component stages, not silently passed.
 S1's design checkpoint9c0301ad7 and sequencing d9f8ba065 are pushed. The
 earlier remote500 failure is resolved without a force push.
 
-## Recent Governance
+## S2 Closure Record
 
 S2 implementation is closed at production P1
 14796f8ba56a51075f098a532d251531a9937db2, pushed to main with clean worktree.
-This documentation-only P2 records the observed delivery; no S3 admission.
+Closure P2 8c7557164 records the observed delivery; the owner's subsequent
+instruction now admits S3. No S4 admission.
 
 [S2 evidence](../etc/evidence/m0-t433-s2-native-worker-migration.md) records
 the isolated AMD64 build, RPC220/lifetime1084 unit passes and actual native32
@@ -113,4 +114,11 @@ reentry and GUI management. Current Hook147/147 and final four build-input
 negatives pass. r018 publishes r010 and r019 deployed DOS/32/64 CMD VER/output/
 receipt smoke passes with matching hashes. Official build/import has no x86
 worker fallback and regenerates the same tested bytes. Review/commit/push
-are complete; S2 is delivered. S3 is not admitted and T433 remains open.
+are complete; S2 is delivered. T433 remains open.
+
+## Recent Governance
+
+S3 admission only. No native frontend implementation or runtime result is
+claimed yet; S2's published ten-image package remains unchanged. S4 is not
+admitted. Next work audits the actual private frontend/library link closure
+and native handle/callback declarations before source adaptation.
