@@ -2,8 +2,8 @@
 
 ## Current Work
 
-**Active: M0 T433 S7** (Ordinary Mode; COMMAND/CMD mixed-width batch tests).
-S6 native NTSRV is delivered; T433 remains open and S8 is not admitted.
+**No active M/T/S packet.** T433 remains open. S7 mixed-width batches and
+nested-PIF resume repair are delivered; S8 awaits admission.
 
 The owner authorizes closing the delivered single-worker/dual-Hook package
 without manual acceptance and admitting the next Queue candidate. This is
@@ -11,7 +11,7 @@ owner-directed closure on automated evidence, not a claim of hands-on testing.
 [T432 closure](../history/m0-t432-single-worker-dual-hook-closure.md) retains
 the delivered baseline, superseded research and known limitations.
 
-## Active Packet
+## Last Packet — S7 (closed)
 
 | Field | Required record |
 | --- | --- |
@@ -32,7 +32,7 @@ the delivered baseline, superseded research and known limitations.
 | Original Owner Request | “准入下一个s 添加混合位数的批处理测试 用command和cmd分别执行”. |
 | Similar-Issue Sweep | COMMAND versus CMD CALL/return and ERRORLEVEL, WOW64 file view versus real image width, both Hook origins, quoting/search, actual versus startup-only GUI completion, stdin/stdout/stderr, typeahead, final I/O return and cleanup. |
 
-## S7 Progress
+## S7 Closure Record
 
 [S7 evidence](../etc/evidence/m0-t433-s7-mixed-batch-tests.md) records the
 confirmed independent-PIF association bug and one-assignment NTSRV repair at
@@ -42,7 +42,9 @@ exact missing-command Search/Native10 pass. Both-width service29 and journal
 oracle negatives pass. r034 Full14 passes409388ms, preserving Console17,
 Window17 and three WOW frontiers. r038 publishes the coherent ten-image set;
 r039 deployed DOS/32/64 smoke and all hashes pass, Z: removed. Only NTSRV
-changes from S6. Reviewed commit/push is next; S8/T closure is not admitted.
+changes from S6. Reviewed production P1 d1aa8336c3940e84879d6bc3c625a2ea5175ced1
+is committed/pushed. Documentation-only P2 records bounded automated closure,
+not owner manual acceptance. S8/T closure is not admitted.
 
 ## S6 Audit Progress
 
@@ -183,7 +185,7 @@ including the retained scope and default-desktop limitations.
 owns S1 audit/design, then the owner's order: S2 NTVWM, S3 NTCON, S4 NTMON,
 S5 RUN16, followed by planned S6 NTSRV native migration, then owner-requested
 S7 mixed16/32/64-bit batch verification; integrated delivery shifts to S8.
-S2-S6 are delivered; S7 batch tests are active by owner admission. S8 awaits admission.
+S2-S7 are delivered; no S is active. S8 awaits admission.
 The side-conversation edit only schedules the batch test after service
 migration; it does not admit another implementation. The plan records the owner's service
 mirror-diff budget relative to delivered RUN16; no service work starts in S5.

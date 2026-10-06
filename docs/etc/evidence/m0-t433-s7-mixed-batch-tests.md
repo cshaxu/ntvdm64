@@ -105,6 +105,11 @@ selected service units. The nine other images retain S6 hashes. No diagnostic
 image is published. Governance, relative links and diff/source review precede
 commit/push. T433 stays open; S8 is not admitted.
 
+Production P1 d1aa8336c3940e84879d6bc3c625a2ea5175ced1 is committed and pushed
+after the measured gates and publication. Documentation-only P2 records S7
+closure without another production change. Work remains stopped before S8;
+T433 stays open for owner direction/acceptance.
+
 r022's frontend-authority fixture also exposes an existing asynchronous
 cleanup race: it calls IsEmpty/Stop before the process-exit callback has drained
 the worker watch. That case never calls the changed retention function. The
