@@ -23,6 +23,7 @@ static BOOL disconnect_pending;
 static HANDLE disconnect_seen;
 static LONG stopped;
 static DWORD registrations,retains,bindings,retain_error=ERROR_ACCESS_DENIED;
+static ULONG_PTR observed_capability;
 static HANDLE expected_execution;
 static frontend_session_service *fixture_service;
 static BOOL retirement_mode;
@@ -162,7 +163,7 @@ DWORD OpenNtBaseClientFrontendJoinDecision(DWORD nonce,BOOL same)
 DWORD OpenNtBaseClientFrontendLeaseReady(void){CHECK(retirement_mode);return ERROR_SUCCESS;}
 DWORD OpenNtBaseClientRetainFrontendRoot(HANDLE value,HANDLE *root,DWORD *generation)
 {
-    (void)value;
+    observed_capability=(ULONG_PTR)value;
     ++retains;*root=NULL;*generation=0;
     if (retain_error) return retain_error;
     if (!DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),
@@ -271,6 +272,22 @@ int main(void)
     DWORD i;
     CHECK(SetEnvironmentVariableW(L"NTVDM_FRONTEND_CAPABILITY",NULL));
     CHECK(SetEnvironmentVariableW(L"NTVDM_EXECUTION_CONSOLE",NULL));
+    {
+        const char *invalid[]={"0","-1","12junk","10000000000000000"};
+        for(i=0;i<ARRAYSIZE(invalid);++i) {
+            CHECK(SetEnvironmentVariableA("NTVDM_FRONTEND_CAPABILITY",invalid[i]));
+            CHECK(run16_frontend_scope_begin_gui(&inner)==ERROR_INVALID_DATA && !inner);
+        }
+        CHECK(SetEnvironmentVariableA("NTVDM_FRONTEND_CAPABILITY","123456789abcdef0"));
+#ifdef _WIN64
+        CHECK(run16_frontend_scope_begin_gui(&inner)==ERROR_ACCESS_DENIED && !inner);
+        CHECK(observed_capability==(ULONG_PTR)UINT64_C(0x123456789abcdef0));
+#else
+        CHECK(run16_frontend_scope_begin_gui(&inner)==ERROR_INVALID_DATA && !inner);
+#endif
+        retains=0;
+        CHECK(SetEnvironmentVariableA("NTVDM_FRONTEND_CAPABILITY",NULL));
+    }
     CHECK(SetEnvironmentVariableA("NTVDM_EXECUTION_CONSOLE","1"));
     CHECK(run16_frontend_scope_begin(&inner)==ERROR_INVALID_DATA && !inner && !registrations);
     CHECK(SetEnvironmentVariableA("NTVDM_EXECUTION_CONSOLE",NULL));

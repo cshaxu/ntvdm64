@@ -1,5 +1,24 @@
 # opennt-host
 
+T433 S5 registers OPENNT-HOST-065 in base/win32/client/vdm.c: byte distances
+are computed before narrowing; STARTF_USEHOTKEY and UndoCreation retain their
+original DWORD/ULONG numeric carriers through ULONG_PTR. The unused config
+body in the selected translation unit receives the same byte-distance change.
+Original classification/environment/control ordering and x86 semantics remain.
+
+OPENNT-HOST-066 registers local CSR capture pointer-table width/alignment in
+base/ntdll/csrutil.c and its ntcsrmsg.h declaration carrier. x86 ULONG_PTR and
+alignment remain32/four bytes; x64 preserves complete process-local pointers.
+Length/count and wire fields remain32. The standalone provider still ignores
+capture rebasing metadata; no original CSR transport is restored. Tests and
+exact mirror accounting belong to the S5 native launcher evidence.
+
+OPENNT-HOST-067 corrects only the existing standalone zwapi.h declaration
+carrier under base/ntos/rtl: modern local NT VM API lengths and region pointers
+use SIZE_T/PSIZE_T, and ZeroBits uses ULONG_PTR. The original environ.c body
+is unchanged. x86 declarations retain their original widths. Native mutable
+environment/clone/error tests exercise the selected original implementations.
+
 OPENNT-HOST-063 selects the unchanged gabObjectCreateFlags table from
 `windows/core/ntuser/kernel/handtabl.c` (SHA-256
 `F0B56314A93423599F06645D17104391F19A0CA07C3944853B065D8866493F7C`),
@@ -415,7 +434,8 @@ carriers:
 - `base/win32/inc/base.h`, `basevdm.h`, and `basemsg.h`.
 
 Every file above is byte-identical to its canonical selected OpenNT source
-except registered true subsets required by a selected formal runtime.
+except registered true subsets and minimal same-shaped adaptations required
+by a selected formal runtime.
 The source selection, rejected OpenNT-4.5 `vdm.c` candidate and initial
 interface dispositions are recorded in
 [`m0-t291-s5-p2-basesrv-source-package-audit-001.md`](../../docs/etc/evidence/m0-t291-s5-p2-basesrv-source-package-audit-001.md)

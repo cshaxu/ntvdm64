@@ -30,8 +30,10 @@ $cmd=Join-Path $env:WINDIR $(if($NativeMachine -eq 'AMD64'){'System32\cmd.exe'}e
 $image=[IO.File]::ReadAllBytes($cmd)
 $machine=[BitConverter]::ToUInt16($image,[BitConverter]::ToInt32($image,60)+4)
 if($machine -ne $(if($NativeMachine -eq 'AMD64'){0x8664}else{0x14c})) {throw 'Native CMD machine mismatch'}
-# run16 remains x86: Sysnative names the actual AMD64 image without WOW64 redirection.
-if($NativeMachine -eq 'AMD64'){$cmd=Join-Path $env:WINDIR 'Sysnative\cmd.exe'}
+# Only an x86 launcher needs the WOW64 alias. Pin the actual launcher ABI.
+$launcherImage=[IO.File]::ReadAllBytes((Join-Path $binary 'run16.exe'))
+$launcherPe=[BitConverter]::ToInt32($launcherImage,60)
+if($NativeMachine -eq 'AMD64' -and [BitConverter]::ToUInt16($launcherImage,$launcherPe+4) -eq 0x14c){$cmd=Join-Path $env:WINDIR 'Sysnative\cmd.exe'}
 $identity=@($names | ForEach-Object {
     $path=Join-Path $binary $_
     if(!(Test-Path $path)){throw "Missing package file: $path"}

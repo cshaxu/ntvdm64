@@ -10,8 +10,11 @@ owns its only active packet and the
 bounded sequence. This package migrates
 run16.exe, ntcon.exe, ntmon.exe and, by the owner's latest expansion, the
 single ntvwm.exe to x64-only builds without changing their roles.
-NTSRV, NTVDM, WOW32.DLL and VDMREDIR.DLL remain x86; both Hook
-widths remain available. NTCON is the visible frontend, not the native worker.
+NTSRV remains x86 during RUN16 migration. Owner subsequently plans a single
+AMD64 NTSRV stage immediately afterward, before final integrated delivery;
+NTVDM, WOW32.DLL and VDMREDIR.DLL remain x86 and both Hook widths remain
+available. NTCON is the visible frontend, not the native worker. The planned
+service stage requires its own admission and bounded original-source audit.
 
 ## Objective and boundary
 
@@ -25,7 +28,7 @@ widths remain available. NTCON is the visible frontend, not the native worker.
 - Keep all installed images at the existing product-relative system32 paths.
   Do not globally disable WOW64 redirection or silently change user search.
 
-No x64 MVDM/NTSRV/WOW32/VDMREDIR, dual NTVWM, new scheduler/registry, frontend kind branch,
+No x64 MVDM/WOW32/VDMREDIR, dual NTSRV or NTVWM, new scheduler/registry, frontend kind branch,
 guest mutation or additional resident helper is selected. The preceding
 package's approved installer mechanism is reused, not redesigned here.
 
@@ -53,8 +56,20 @@ resolver or extension-only parser. Reuse the preceding Hook64 ABI conclusions.
 ## Proposed implementation sequence
 
 The migration plan records the owner's sequence: dependency/ABI audit and
-design, NTVWM, NTCON, NTMON, RUN16, then final integrated verification and
-delivery. Shared dependencies are rebuilt with the first selected consumer
+design, NTVWM, NTCON, NTMON, RUN16, then the newly planned S6 NTSRV native
+migration; S7 then verifies mixed16/32/64-bit BAT execution through run16-started
+x86/AMD64 CMD and both Hooks. Final integrated delivery shifts to S8. This
+test stage covers shared discovery, sequential/nested launches, real waits/
+exit codes/ERRORLEVEL, redirection, Console/Window handoff and failure cleanup;
+Win16 retains its existing startup-only/accepted-frontier boundary. No universal
+BAT compatibility, helper or scheduler is implied. The service stage
+keeps existing fixed32 RPC/receipt/task fields and native-width local resources,
+preserving original BaseSrv algorithms. Its incremental original-mirror diff
+should not exceed delivered RUN16's migration; compare changed files, code/
+declaration lines and expressions before implementation, and request review
+if exceeding that budget or changing an original algorithm is necessary.
+The migration plan records the complete audit, stop and verification boundary.
+Shared dependencies are rebuilt with the first selected consumer
 and reused by identity, not introduced as another component stage. Each
 component stage retains its own build/runtime/publication gate. Only Status admits an active S;
 this proposal does not allocate or authorize simultaneous implementation.

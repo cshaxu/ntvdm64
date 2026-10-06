@@ -65,7 +65,8 @@ Return Value:
         return NULL;
         }
     Size += sizeof( CSR_CAPTURE_HEADER ) + (CountPointers * sizeof( PVOID ));
-    Size = (Size + (3 * (CountPointers+1))) & ~3;
+    /* DIVERGENCE(OPENNT-HOST-066): native pointer alignment; x86 remains4. */
+    Size = (Size + ((sizeof(PVOID)-1) * (CountPointers+1))) & ~(sizeof(PVOID)-1);
 
     //
     // Allocate the capture buffer from the Port Memory Heap.
@@ -99,13 +100,14 @@ Return Value:
     //
 
     if (CountPointers != 0) {
-        CaptureBuffer->MessagePointerOffsets = (PULONG)(CaptureBuffer + 1);
+        /* DIVERGENCE(OPENNT-HOST-066): retain complete local pointer values. */
+        CaptureBuffer->MessagePointerOffsets = (PULONG_PTR)(CaptureBuffer + 1);
 
         CaptureBuffer->CapturePointerOffsets =
             CaptureBuffer->MessagePointerOffsets + CountMessagePointers;
 
         RtlZeroMemory( CaptureBuffer->MessagePointerOffsets,
-                       CountPointers * sizeof( ULONG )
+                       CountPointers * sizeof( ULONG_PTR )
                      );
 
         CaptureBuffer->FreeSpace = (PCHAR)
@@ -214,7 +216,8 @@ Return Value:
             return 0;
             }
 
-        Length = (Length + 3) & ~3;
+        /* DIVERGENCE(OPENNT-HOST-066): x86's original four-byte result remains. */
+        Length = (Length + sizeof(PVOID)-1) & ~(sizeof(PVOID)-1);
 
         //
         // Update the free space pointer to point to the next available byte
@@ -232,7 +235,7 @@ Return Value:
     //
 
     CaptureBuffer->MessagePointerOffsets[ CaptureBuffer->CountMessagePointers++ ] =
-        (ULONG)Pointer;
+        (ULONG_PTR)Pointer; /* DIVERGENCE(OPENNT-HOST-066): local, never wire. */
 
     //
     // Returned the actual length allocated.

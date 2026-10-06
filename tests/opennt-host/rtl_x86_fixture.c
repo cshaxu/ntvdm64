@@ -1,12 +1,14 @@
 #include <windows.h>
 #include <nt.h>
 #include <ntrtl.h>
+#include <stdio.h>
 #include "opennt-host/base/ntos/rtl/environapi.h"
 
 static int expect(int condition, int code)
 {
     return condition ? 0 : code;
 }
+
 
 /* The fixture supplies a minimal private PEB because environ.c consults it
  * for cache identity even when callers pass an explicit environment block.
@@ -34,11 +36,13 @@ static POPENNT_SUPPORT_PROCESS_PARAMETERS fixture_parameters(void)
 
 int main(void)
 {
+#ifndef OPENNT_ENVIRONMENT_ONLY
     LARGE_INTEGER dividend;
     LARGE_INTEGER quotient;
     LARGE_INTEGER product;
     ULONG remainder = 0;
     ULONG words[2] = { 0x11111111u, 0x22222222u };
+#endif
     PVOID environment = NULL;
     PVOID clone = NULL;
     UNICODE_STRING name;
@@ -47,6 +51,8 @@ int main(void)
     NTSTATUS status;
     int result;
 
+
+#ifndef OPENNT_ENVIRONMENT_ONLY
     dividend.HighPart = 1;
     dividend.LowPart = 0;
     quotient = RtlExtendedLargeIntegerDivide(dividend, 3u, &remainder);
@@ -74,6 +80,7 @@ int main(void)
     result = expect(words[1] == 0x22222222u, 7);
     if (result != 0) return result;
 
+#endif
     /* D11: exercise the imported original mutable MULTI_SZ implementation,
      * not the native NTDLL export with the same public spellings. */
     status = RtlCreateEnvironment(FALSE, &environment);
@@ -82,6 +89,7 @@ int main(void)
     RtlInitUnicodeString(&name, L"RTL_FIXTURE");
     RtlInitUnicodeString(&value, L"one");
     status = RtlSetEnvironmentVariable(&environment, &name, &value);
+    if (!NT_SUCCESS(status)) fprintf(stderr, "first environment set failed: %08lx\n", (unsigned long)status);
     result = expect(NT_SUCCESS(status), 9);
     if (result != 0) return result;
     RtlInitUnicodeString(&value, L"two");
@@ -177,6 +185,7 @@ int main(void)
                     STATUS_BUFFER_OVERFLOW, 30);
     if (result != 0) return result;
 
+#ifndef OPENNT_ENVIRONMENT_ONLY
     __try {
         (void)RtlExtendedLargeIntegerDivide(dividend, 0u, NULL);
         return 31;
@@ -184,4 +193,8 @@ int main(void)
                     EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
         return 0;
     }
+#else
+    /* Native launcher selects environment/error, not x86 arithmetic bodies. */
+    return 0;
+#endif
 }

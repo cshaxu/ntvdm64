@@ -16,7 +16,7 @@ the delivered baseline, superseded research and known limitations.
 | --- | --- |
 | Identifier Mode | M0 T433 S5; Ordinary Mode. |
 | Candidate Proposal | [Native x64 launcher/frontend/monitor](../proposals/proposal-project-components-native-x64-001.md). |
-| Admission And Approval | Owner says “对，准入S5，然后报给我，run16迁移会有哪些问题和难点？” Admit S5 after S4 delivery; this turn performs admission and source/link audit/report, not production implementation. |
+| Admission And Approval | Owner admits S5, reviews the audited vdm/capture expression changes and requires x86/x64 compatibility, then says “好的，请你开始实施。” Implement the bounded native launcher and minimal registered local-ABI adaptations; preserve original x86 behavior and fixed wire/guest types. |
 | Objective | Migrate the single run16.exe to AMD64, preserving shared CWD/PATH COM/EXE/BAT/PIF discovery, original DOS/WOW classification/client/environment semantics, native image fallback, unchanged CLI and GUI startup/explicit wait/direct receipt/Console restoration behavior. Build/test, coherently publish, review/commit/push and report. |
 | Non-goals | No second launcher, classifier/search policy, new helper, worker-base/frontend renderer dependency, private PEB/TEB offset emulation, x64 MVDM/service/DLL migration, protocol redesign, guest patch, global WOW64-redirection disable or automatic S6 admission. |
 | Reference Baseline | S4 production03456b24ce2616080fbb3bc84090939c42b71f22, closuredf3a50c70; sealed build/M0-T433/S4/r002-runtime, publication r006 and deployed checks. APP0.0.433/RPC41/I/O25; NTCON/NTVWM/NTMON/Hook64 AMD64, six I386 images. Retain coherent recovery and recorded geometry/environment/long-path limits. |
@@ -30,6 +30,29 @@ the delivered baseline, superseded research and known limitations.
 | Exit Criteria | Actual selected closure compiles natively with focused ABI and real workload/failure/cleanup gates, existing assertions/capabilities retained, coherent ten-image publication and deployed checks verified; source/evidence reviewed and committed/pushed, clean worktree. T stays open; S6 requires admission. |
 | Original Owner Request | “S2: NTVWM; S3: NTCON; S4: NTMON; S5: RUN16”; now “对，准入S5，然后报给我，run16迁移会有哪些问题和难点？” |
 | Similar-Issue Sweep | Pointer metadata/alignment versus numeric DWORD/ULONG fields, allocator/RTL/TLS ownership, capability text overflow and formatting, original NE/native machine classification, actual file identity under WOW64 views, Sysnative fixture selection, native target versus launcher Hook machine, real flags/handles/results, mixed-width command/capture marshalling and borrowed Console restoration barrier. |
+
+## S5 Implementation Progress
+
+S5 implementation progress (not closure): [native launcher evidence](../etc/evidence/m0-t433-s5-native-launcher-migration.md)
+records AMD64 run16, minimal registered native capture/client adaptations and
+the existing NT VM declaration-carrier correction, with unchanged original
+RTL algorithms. Both-width ABI/lifetime/environment fixtures and search/
+classification pass; both Hook origins147 pass. Final r008 Full passes WOW
+and Console17 but Window native-zero times out. Three same-case comparisons
+per S4/S5 package pass, not a repair. Owner directs continued investigation.
+The strict echo wait expected ver but received VER before sending Enter:
+the SendMessage fixture had not supplied the target UI keyboard-state table.
+Owned private-desktop input state is now explicit; controlled Caps negative
+reproduces the exact failure with zero Enter, while normal exact input passes.
+No production change or case-insensitive assertion workaround. r014's later
+rapid-interactive outer81 remains an unclassified debt, with failure-only
+diagnostics, S4/S5 comparisons and144 diagnostic rounds; no repair claimed.
+Final r026 Full passes all14 groups in442666ms, including unchanged12-round
+interactive assertions. Actual Hook-to-legacy chains pass from both widths,
+with actual WINMINE windows; additional AMD64 nested Window return23 passes.
+r020 coherently publishes the final ten-image package, preserving S4 recovery;
+r021 actual deployed DOS/32/64 smoke and hashes pass. S5 delivery review/P1
+is pending; S6 remains unadmitted and T433 open.
 
 ## S4 Closure Record
 
@@ -84,15 +107,20 @@ including the retained scope and default-desktop limitations.
 
 [Native component migration plan](../etc/operations/t433-native-components-x64-plan.md)
 owns S1 audit/design, then the owner's order: S2 NTVWM, S3 NTCON, S4 NTMON,
-S5 RUN16, followed by S6 integrated delivery. S2 and S3 are delivered.
-S4 is delivered; S5 alone is active. S6 remains planned and each stage retains its verification/publication gate.
+S5 RUN16, followed by planned S6 NTSRV native migration, then owner-requested
+S7 mixed16/32/64-bit batch verification; integrated delivery shifts to S8.
+S2-S4 are delivered; S5 alone is active. S6/S7/S8 require their own admission.
+This side-conversation edit only schedules the batch test after service
+migration; it does not start tests or change the active implementation. The plan records the owner's service
+mirror-diff budget relative to delivered RUN16; no service work starts in S5.
 
 NTSRV remains the sole lifecycle/task/I/O connection authority. NTCON stays
 worker-neutral, holding zero or one authorized direct I/O pipe. NTVDM keeps
 the original x86 CCPU40/DOS/WOW execution boundary; NTVWM remains one worker
 executing both native target widths, with its x64 migration added by owner.
 Hook32/64 are retained. The intended final package still has ten images:
-four migrated EXEs plus Hook64 are AMD64, the remaining five images are x86.
+At S5, four migrated EXEs plus Hook64 are AMD64 and five images remain x86;
+planned S6 adds NTSRV to AMD64, leaving NTVDM/WOW32/VDMREDIR/Hook32 x86.
 Current published NTCON and NTVWM are AMD64. Names/system32-relative paths stay.
 
 Each shared dependency is compiled for its actual consumer ABI; no mixed
@@ -105,9 +133,10 @@ launcher syntax change, bitness-only worker selection or private transition.
 
 T432 is closed by owner direction without hands-on acceptance. Its ten-image
 package remains independently recoverable. S3's verified r002-runtime remains
-the recoverable preceding baseline. S4 r002-runtime is now at O:/winnt/system32,
-identity0.0.433/RPC41/I/O25. NTCON, NTVWM, NTMON and Hook64 are AMD64; six other
-images stay I386. Guest/configuration are unchanged; S4 r006 retains S3 recovery.
+the recoverable preceding baseline. S4 r002-runtime is retained as recovery.
+S5 final r007 is now at O:/winnt/system32, identity0.0.433/RPC41/I/O25;
+run16, NTCON, NTVWM, NTMON and Hook64 are AMD64; the other five stay I386.
+Guest/configuration are unchanged; S5 r020 retains complete S4 recovery.
 
 [Final S6 evidence](../etc/evidence/m0-t432-s6-single-worker-reconstruction.md)
 retains Hook147/147, metadata402, RPC220, native lifetime1084, service29,

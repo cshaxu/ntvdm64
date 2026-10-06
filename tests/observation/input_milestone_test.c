@@ -18,6 +18,9 @@ int main(void)
     CHECK(!observer_prompt_echo(&view,"mem")); /* queue delivery is not echo */
     memcpy(view.cells+24*80+9,"mem",3); view.cursor_column=12;
     CHECK(observer_prompt_echo(&view,"mem"));
+    memcpy(view.cells+24*80+9,"MEM",3);
+    CHECK(!observer_prompt_echo(&view,"mem")); /* do not forgive wrong key state */
+    memcpy(view.cells+24*80+9,"mem",3);
     CHECK(!observer_prompt_echo(&view,"")); /* armed input is not completion */
     CHECK(!observer_prompt_echo(&view,"me")); /* partial consumption */
     view.cursor_row=23;

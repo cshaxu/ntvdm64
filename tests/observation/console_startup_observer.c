@@ -746,17 +746,62 @@ static HWND scripted_input_window(void)
     GetWindowThreadProcessId(window,&pid);
     return pid==scripted_window_frontend ? window : NULL;
 }
+static DWORD scripted_window_key_messages, scripted_window_enters;
+/* SendMessage does not update a foreign thread's keyboard-state table.
+ * Share only this owned private-desktop UI queue, then supply the same
+ * explicit modifier/toggle facts as the Console INPUT_RECORD fixture.
+ * No global SendInput, physical focus, guest write or production hook. */
+static BOOL send_window_keyboard_message(HWND window, UINT message,
+    WPARAM key, LPARAM bits, DWORD control, WORD virtual_key, BOOL down)
+{
+    char desktop[96]; DWORD needed, pid = 0, thread;
+    BYTE saved[256], state[256] = {0}; MSG pending;
+    DWORD_PTR result; BOOL sent = FALSE;
+    thread = GetWindowThreadProcessId(window, &pid);
+    if (!thread || pid != scripted_window_frontend ||
+        !GetUserObjectInformationA(GetThreadDesktop(GetCurrentThreadId()),
+            UOI_NAME, desktop, sizeof(desktop), &needed) ||
+        strncmp(desktop, "NTVDMConsoleTest-", 17)) return FALSE;
+    (void)PeekMessageW(&pending, NULL, 0, 0, PM_NOREMOVE);
+    if (!GetKeyboardState(saved) ||
+        !AttachThreadInput(GetCurrentThreadId(), thread, TRUE)) return FALSE;
+    state[VK_NUMLOCK] = (control & NUMLOCK_ON) ? 1 : 0;
+    state[VK_CAPITAL] = (control & CAPSLOCK_ON) ? 1 : 0;
+    state[VK_SCROLL] = (control & SCROLLLOCK_ON) ? 1 : 0;
+    if (control & SHIFT_PRESSED) state[VK_SHIFT] = state[VK_LSHIFT] = 0x80;
+    if (control & LEFT_CTRL_PRESSED) state[VK_CONTROL] = state[VK_LCONTROL] = 0x80;
+    if (control & RIGHT_CTRL_PRESSED) state[VK_CONTROL] = state[VK_RCONTROL] = 0x80;
+    if (control & LEFT_ALT_PRESSED) state[VK_MENU] = state[VK_LMENU] = 0x80;
+    if (control & RIGHT_ALT_PRESSED) state[VK_MENU] = state[VK_RMENU] = 0x80;
+    if (virtual_key < 256 && down) state[virtual_key] |= 0x80;
+    /* Explicit negative diagnostic: prove uncontrolled Caps reproduces the
+     * strict echo failure before Enter; never enabled by normal matrices. */
+    if (GetEnvironmentVariableA("MVDM_OBSERVER_WINDOW_CAPS_DIAGNOSTIC",NULL,0))
+        state[VK_CAPITAL] = 1;
+    if (SetKeyboardState(state))
+        sent = SendMessageTimeoutW(window, message, key, bits,
+            SMTO_ABORTIFHUNG, 3000, &result) != 0;
+    if (!AttachThreadInput(GetCurrentThreadId(), thread, FALSE)) sent = FALSE;
+    if (!SetKeyboardState(saved)) sent = FALSE;
+    if (sent) {
+        ++scripted_window_key_messages;
+        if (message == WM_KEYDOWN && virtual_key == VK_RETURN && down)
+            ++scripted_window_enters;
+    }
+    return sent;
+}
 static BOOL write_window_key_records(const INPUT_RECORD *records,DWORD count)
 {
-    HWND window=scripted_input_window();DWORD index;DWORD_PTR result;
+    HWND window=scripted_input_window();DWORD index;
     if(!window)return FALSE;
     for(index=0;index<count;++index) {
         const KEY_EVENT_RECORD *key=&records[index].Event.KeyEvent;
         LPARAM bits=1|((LPARAM)key->wVirtualScanCode<<16);
         if(records[index].EventType!=KEY_EVENT)return FALSE;
         if(!key->bKeyDown)bits|=(LPARAM)0xc0000000;
-        if(!SendMessageTimeoutW(window,key->bKeyDown ? WM_KEYDOWN : WM_KEYUP,
-            key->wVirtualKeyCode,bits,SMTO_ABORTIFHUNG,3000,&result))return FALSE;
+        if(!send_window_keyboard_message(window,key->bKeyDown ? WM_KEYDOWN : WM_KEYUP,
+            key->wVirtualKeyCode,bits,key->dwControlKeyState,
+            key->wVirtualKeyCode,key->bKeyDown))return FALSE;
     }
     return TRUE;
 }
@@ -870,12 +915,12 @@ static BOOL write_console_input_text(HANDLE input, const char *text, DWORD line_
         }
         if(scripted_window_frontend) {
             if(shifted) {
-                HWND window=scripted_input_window();DWORD_PTR result;
+                HWND window=scripted_input_window();
                 /* Exercise the public character-input route for shifted ASCII.
                  * The library owns its synthesized physical chord. This is
                  * not proof of real UI-thread Shift state or physical focus. */
-                if(!window || !SendMessageTimeoutW(window,WM_CHAR,
-                    (unsigned char)character,1,SMTO_ABORTIFHUNG,3000,&result))return FALSE;
+                if(!window || !send_window_keyboard_message(window,WM_CHAR,
+                    (unsigned char)character,1,NUMLOCK_ON,0,FALSE))return FALSE;
             } else if(!write_window_key_records(records,record_count))return FALSE;
         } else if (!WriteConsoleInputA(input, records, record_count, &written) ||
             written != record_count) return FALSE;
@@ -1915,6 +1960,8 @@ int main(int argc, char **argv)
         fprintf(report, "timeout-ms=%lu\n", (unsigned long)observation_timeout_ms);
         fprintf(report,"milestone-input=%u milestone-waits=%u milestone-wait-ms=%llu\n",
             (unsigned)milestone_input,milestone_waits,milestone_wait_ms);
+        fprintf(report,"window-key-message-count=%lu window-enter-count=%lu\n",
+            scripted_window_key_messages,scripted_window_enters);
         if (performance_timeline) {
             unsigned index;
             fprintf(report,"performance-samples=%u overflow=%u\n",performance_count,(unsigned)performance_overflow);

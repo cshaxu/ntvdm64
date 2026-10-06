@@ -8,6 +8,7 @@ param(
     [string]$NativeHook64='',
     [string]$NativeFrontend='',
     [string]$NativeMonitor='',
+    [string]$NativeLauncher='',
     [Parameter(Mandatory)][string]$NativeWorker
 )
 $ErrorActionPreference='Stop'
@@ -37,11 +38,15 @@ if($NativeMonitor){
     $NativeMonitor=(Resolve-Path -LiteralPath $NativeMonitor).Path
     if(!$NativeFrontend -or !$NativeMonitor.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)){throw 'Native monitor requires the native frontend and a build-owned input'}
 }
+if($NativeLauncher){
+    $NativeLauncher=(Resolve-Path -LiteralPath $NativeLauncher).Path
+    if(!$NativeMonitor -or !$NativeLauncher.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)){throw 'Native launcher requires the native monitor and a build-owned input'}
+}
 $manifest=foreach($name in $names){
-    $source=if($name -eq 'WOW32.DLL'){$wow}elseif($name -eq 'nthook32.dll'){$NativeHook}elseif($name -eq 'nthook64.dll'){$NativeHook64}elseif($name -eq 'ntvwm.exe' -and $NativeWorker){$NativeWorker}elseif($name -eq 'ntcon.exe' -and $NativeFrontend){$NativeFrontend}elseif($name -eq 'ntmon.exe' -and $NativeMonitor){$NativeMonitor}else{Join-Path $cache $name}
+    $source=if($name -eq 'WOW32.DLL'){$wow}elseif($name -eq 'nthook32.dll'){$NativeHook}elseif($name -eq 'nthook64.dll'){$NativeHook64}elseif($name -eq 'ntvwm.exe' -and $NativeWorker){$NativeWorker}elseif($name -eq 'ntcon.exe' -and $NativeFrontend){$NativeFrontend}elseif($name -eq 'ntmon.exe' -and $NativeMonitor){$NativeMonitor}elseif($name -eq 'run16.exe' -and $NativeLauncher){$NativeLauncher}else{Join-Path $cache $name}
     $bytes=[IO.File]::ReadAllBytes($source)
     $pe=[BitConverter]::ToInt32($bytes,60)
-    $expectedMachine=if($name -eq 'nthook64.dll' -or ($name -eq 'ntvwm.exe' -and $NativeWorker) -or ($name -eq 'ntcon.exe' -and $NativeFrontend) -or ($name -eq 'ntmon.exe' -and $NativeMonitor)){0x8664}else{0x14c}
+    $expectedMachine=if($name -eq 'nthook64.dll' -or ($name -eq 'ntvwm.exe' -and $NativeWorker) -or ($name -eq 'ntcon.exe' -and $NativeFrontend) -or ($name -eq 'ntmon.exe' -and $NativeMonitor) -or ($name -eq 'run16.exe' -and $NativeLauncher)){0x8664}else{0x14c}
     if([BitConverter]::ToUInt16($bytes,$pe+4) -ne $expectedMachine){throw "Wrong PE machine input: $name"}
     $destination=Join-Path $system $name
     Copy-Item -LiteralPath $source -Destination $destination -Force

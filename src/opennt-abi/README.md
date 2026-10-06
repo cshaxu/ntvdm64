@@ -1,5 +1,12 @@
 # opennt-abi
 
+T433 S5 OPENNT-HOST-066 changes only the two process-local CSR capture-table
+pointer element declarations in source/public/sdk/inc/ntcsrmsg.h to ULONG_PTR.
+The original x86 element/header layout is unchanged; native64 capture uses
+matching full-width metadata. This is not a wire declaration widening or an
+original CSR transport admission. The source owner registers its matching
+allocation/alignment/storage expressions in opennt-host/README.md.
+
 This component currently combines original declaration imports and selected
 declaration subsets under `source/` with standalone compatibility declarations
 and runtime bindings under `host-compat/`. It is not wholly byte-identical or

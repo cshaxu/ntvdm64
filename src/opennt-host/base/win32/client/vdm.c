@@ -132,7 +132,9 @@ BOOL BaseCreateVDMEnvironment(
             }
         }
         *pDst++ = UNICODE_NULL;
-        cchEnv = (DWORD)pDst - (DWORD)pNewEnv;
+        /* DIVERGENCE(OPENNT-HOST-065): byte distance, not truncated addresses;
+         * retain the original bounded DWORD/USHORT environment lengths. */
+        cchEnv = (DWORD)((PCHAR)pDst - (PCHAR)pNewEnv);
         pUStringEnv->MaximumLength = pUStringEnv->Length = (USHORT)cchEnv;
         pUStringEnv->Buffer = pNewEnv;
         Status = RtlUnicodeStringToAnsiString(pAStringEnv, pUStringEnv, TRUE);
@@ -1409,7 +1411,9 @@ Return Value:
 
                 swprintf(lpAllocatedReserved,
                          L"hotkey.%u %s",
-                         (DWORD) lpStartupInfo->hStdInput,
+                         /* DIVERGENCE(OPENNT-HOST-065): STARTF_USEHOTKEY
+                          * carries a DWORD number, not a process handle. */
+                         (DWORD)(ULONG_PTR) lpStartupInfo->hStdInput,
                          lpStartupInfo->lpReserved ? lpStartupInfo->lpReserved : L""
                          );
 
@@ -1779,7 +1783,8 @@ BaseUpdateVDMEntry(
 
     switch (UpdateIndex) {
 	case UPDATE_VDM_UNDO_CREATION:
-	    c->iTask = (ULONG)*WaitHandle;
+    	/* DIVERGENCE(OPENNT-HOST-065): this branch carries a numeric task ID. */
+    	c->iTask = (ULONG)(ULONG_PTR)*WaitHandle;
 	    c->VDMCreationState = (USHORT)IndexInfo;
 	    break;
 	case UPDATE_VDM_PROCESS_HANDLE:
@@ -2018,7 +2023,9 @@ Notes:
         //
         // convert wowkernel to short name
         //
-        Len = MAX_PATH + MAX_VDM_CFG_LINE - ((ULONG)pWowKernel - (ULONG)NewCmdLine) -1;
+        /* DIVERGENCE(OPENNT-HOST-065): retain byte-count arithmetic in this
+         * selected translation unit without narrowing either address. */
+        Len = MAX_PATH + MAX_VDM_CFG_LINE - (ULONG)(pWowKernel - NewCmdLine) -1;
         dw = GetShortPathNameA(pWowKernel, pWowKernel, Len);
         if (dw > Len) {
             RtlFreeHeap(RtlProcessHeap(), 0, NewCmdLine);

@@ -18,7 +18,9 @@ $launcher='"'+(Join-Path (Get-PackageBinaryRoot $PackageRoot) 'run16.exe')+'"'
 $lines=@('@echo off')
 for($round=1;$round -le $Rounds;$round++) {
     $lines+="$launcher cmd /d /k echo S10-INTERACTIVE-$round"
-    $lines+='if errorlevel 1 exit /b 81'
+    # Failure-only evidence: preserve the original predicate/81 result and
+    # capture the direct launcher's actual status before any diagnostic echo.
+    $lines+="if errorlevel 1 (echo S10-INTERACTIVE-FAILURE-$round-code-%errorlevel% & exit /b 81)"
 }
 $lines+=@("$launcher cmd /d /c echo S10-INTERACTIVE-FINAL",'if errorlevel 1 exit /b 82',
     'echo S10-INTERACTIVE-COMPLETE','exit /b 19')
@@ -26,6 +28,7 @@ $lines+=@("$launcher cmd /d /c echo S10-INTERACTIVE-FINAL",'if errorlevel 1 exit
 $start=[Diagnostics.ProcessStartInfo]::new((Resolve-Path $Observer).Path)
 $start.UseShellExecute=$false;$start.WindowStyle=[Diagnostics.ProcessWindowStyle]::Hidden
 $start.EnvironmentVariables['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'
+$start.EnvironmentVariables['NTVWM_GEOMETRY_ERROR_LOG']=$ReportPath+'.ntvwm-error.txt'
 # All exit lines are queued without per-line delay. Each real interactive CMD
 # consumes its own exit; the outer batch immediately starts the next launcher.
 $inputText=('exit'+"`r")*$Rounds

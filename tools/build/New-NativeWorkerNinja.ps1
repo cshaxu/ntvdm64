@@ -2,7 +2,7 @@
 param(
  [Parameter(Mandatory)][string]$BuildRoot,
  [Parameter(Mandatory)][string]$ReferenceGraph,
- [ValidateSet('Worker','Frontend','Monitor')][string]$Component='Worker',
+ [ValidateSet('Worker','Frontend','Monitor','Launcher')][string]$Component='Worker',
  [string]$RepositoryRoot=(Get-Location).Path
 )
 $ErrorActionPreference='Stop'
@@ -33,8 +33,9 @@ $null=New-Item -ItemType Directory -Path $build -Force
 if($edges.ContainsKey('ntvwm-source-closure')){$edges['ntvwm.exe']=$edges['ntvwm-source-closure']}
 if($edges.ContainsKey('ntcon-source-closure')){$edges['ntcon.exe']=$edges['ntcon-source-closure']}
 if($edges.ContainsKey('ntmon-source-closure')){$edges['ntmon.exe']=$edges['ntmon-source-closure']}
+if($edges.ContainsKey('run16-source-closure')){$edges['run16.exe']=$edges['run16-source-closure']}
 $null=New-Item -ItemType Directory -Path (Join-Path $build 'obj/basesrv') -Force
-if($Component -ne 'Monitor'){
+if($Component -in @('Worker','Frontend')){
  $null=New-Item -ItemType Directory -Path (Join-Path $build 'frontend-font') -Force
  & (Join-Path $root 'tools/build/Generate-FrontendFont.ps1') -OutputFile (Join-Path $build 'frontend-font/native_pc_font.h')
 }
@@ -60,16 +61,18 @@ $done=@{};$manifest=[Collections.Generic.List[object]]::new()
 # /Gy can discard the whole legacy dispatch branch; do not make regeneration
 # depend on whether a later optimized map happens to pull these members.
 $bindingMembers=@('command.obj','payload.obj','process.obj','startup.obj','values.obj')
+if($Component -eq 'Launcher'){$bindingMembers+=@('classifier-path.obj','config.obj')}
 function Add-Edge([string]$target) {
- if($target -eq 'opennt-base-client.lib'){return}
- if($Component -ne 'Worker' -and $target -eq 'original-opennt-rtl-x86.lib'){return}
+ if($Component -ne 'Launcher' -and $target -eq 'opennt-base-client.lib'){return}
+ if($Component -notin @('Worker','Launcher') -and $target -eq 'original-opennt-rtl-x86.lib'){return}
  if($target -match '^obj/basesrv/service_[cs]\.c$|^obj/basesrv/service\.h$'){return}
  if($done.ContainsKey($target)){return}
  if(!$edges.ContainsKey($target)){throw "Unresolved selected build edge: $target"}
  $edge=$edges[$target];$done[$target]=$true
  $output=$target.Replace('original-opennt-rtl-x86.lib','original-opennt-rtl-native.lib')
- $inputs=@($edge.Inputs|Where-Object {$_ -ne 'opennt-base-client.lib'})
- if($Component -ne 'Worker'){$inputs=@($inputs|Where-Object {$_ -ne 'original-opennt-rtl-x86.lib'})}
+ $inputs=@($edge.Inputs)
+ if($Component -ne 'Launcher'){$inputs=@($inputs|Where-Object {$_ -ne 'opennt-base-client.lib'})}
+ if($Component -notin @('Worker','Launcher')){$inputs=@($inputs|Where-Object {$_ -ne 'original-opennt-rtl-x86.lib'})}
  if($target -eq 'opennt-base-bindings.lib'){
   # This archive also houses the service provider. Select only the worker's
   # actually pulled client-side members, not unused server/config bodies.
@@ -78,13 +81,15 @@ function Add-Edge([string]$target) {
  if($target -eq 'original-opennt-rtl-x86.lib'){
   # Current matched NTVWM map proves error.obj only; no original Base VDM,
   # CSR capture or RTL environment may enter this native-worker closure.
-  $inputs=@('obj/opennt-rtl/error.obj')
+  $inputs=if($Component -eq 'Launcher'){@('obj/opennt-rtl/error.obj','obj/opennt-rtl/environ.obj')}else{@('obj/opennt-rtl/error.obj')}
  }
- if($edge.Rule -in @('lib','frontend_link','base_rpc_test_link','console_test_link','pointer_test_link','monitor_link') -or ($target -in @('ntvwm.exe','ntcon.exe','ntmon.exe') -and $edge.Rule -eq 'phony')) {
+ if($edge.Rule -in @('lib','frontend_link','base_rpc_test_link','console_test_link','pointer_test_link','monitor_link','run16_link','broker_test_link','rtl_fixture_link') -or ($target -in @('ntvwm.exe','ntcon.exe','ntmon.exe','run16.exe') -and $edge.Rule -eq 'phony')) {
   foreach($input in $inputs){Add-Edge $input}
-  $rule=if($edge.Rule -eq 'lib'){'lib'}elseif($edge.Rule -in @('console_test_link','pointer_test_link','monitor_link') -or $Component -eq 'Monitor'){'test_link'}else{'link'}
+  $rule=if($edge.Rule -eq 'lib'){'lib'}elseif($edge.Rule -in @('console_test_link','pointer_test_link','monitor_link','broker_test_link','rtl_fixture_link') -or $Component -eq 'Monitor'){'test_link'}else{'link'}
   $graph.Add('build '+$output+': '+$rule+' '+(($inputs|ForEach-Object {$_.Replace('original-opennt-rtl-x86.lib','original-opennt-rtl-native.lib')}) -join ' '))
   if($target -eq 'common-worker-control-test.exe' -or $edge.Rule -in @('console_test_link','pointer_test_link')){$graph.Add('  entry = mainCRTStartup')}
+  if($target -eq 'run16.exe'){$graph.Add('  entry = wWinMainCRTStartup')}
+  if($target -eq 'native-capture-test.exe'){$graph.Add('  entry = mainCRTStartup')}
   $entryOverride=[regex]::Match($edge.Bindings,'(?m)^\s+entry = (mainCRTStartup|wmainCRTStartup)\s*$').Groups[1].Value
   if($entryOverride){$graph.Add('  entry = '+$entryOverride)}
   return
@@ -99,7 +104,7 @@ function Add-Edge([string]$target) {
  $null=New-Item -ItemType Directory -Path (Join-Path $build (Split-Path $target -Parent)) -Force
  $graph.Add('build '+$target+': cc '+$source+' | obj/basesrv/service.h')
  $flags=$nativeFlags
- $binding=[regex]::Match($edge.Bindings,'(?m)^\s+cflags = (.*)$').Groups[1].Value
+ $binding=[regex]::Match($edge.Bindings,'(?m)^\s+\w*cflags = (.*)$').Groups[1].Value
  # Carry source-specific semantic defines, not old global machine/ABI flags.
  if($binding){
   foreach($option in [regex]::Matches($binding,'/std:c(?:11|17)(?=\s|$)')){$flags+=' '+$option.Value}
@@ -111,7 +116,9 @@ function Add-Edge([string]$target) {
    if($define.Value -notmatch '^/D(_X86_|CPU_[A-Z0-9_]+|NEW_CPU|CCPU|C_VID|SPC386|SIM32|V7VGA|NTVDM|ANSI|PROD|WIN32|WINNT|OPENNT_ADAPTER_NT_ALERT_THREAD|MVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION|_NO_CRT_STDIO_INLINE|_WIN32_WINNT)($|=)'){$flags+=' '+$define.Value}
   }
  }
- if($target -eq 'obj/opennt-rtl/error.obj'){$flags+=' /DNTOS_KERNEL_RUNTIME'}
+ if($target -in @('obj/opennt-rtl/error.obj','obj/opennt-rtl/environ.obj')){$flags+=' /DNTOS_KERNEL_RUNTIME'}
+ if($target -eq 'obj/tests/rtl_x86_fixture.obj'){$flags+=' /DOPENNT_ENVIRONMENT_ONLY'}
+ if($target -eq 'obj/opennt-base-client/classifier.obj'){$flags+=' /FI "'+(NP (Join-Path $root 'src/nthook32-dll/legacy_classifier_arch.h'))+'"'}
  if($target -eq 'obj/run16/rpc_client.obj'){
   # This existing client imports historical local Base message declarations.
   # Keep its source-facing ABI header, without injecting it into UI/worker TUs.
@@ -126,11 +133,13 @@ function Add-Edge([string]$target) {
  if($source -match '^O\$:/'){
   $path=$source.Replace('$:',':').Replace('/','\')
   $normalized=$path.Replace('\','/')
-  if($normalized.Contains('/src/mvdm/') -or ($normalized.Contains('/src/opennt-host/') -and !$normalized.EndsWith('/base/ntos/rtl/error.c'))){throw "Unadmitted original source: $path"}
+  $originalAllowed=@('/base/ntos/rtl/error.c')
+  if($Component -eq 'Launcher'){$originalAllowed+=@('/base/ntos/rtl/environ.c','/base/win32/client/vdm.c','/base/ntdll/csrutil.c')}
+  if($normalized.Contains('/src/mvdm/') -or ($normalized.Contains('/src/opennt-host/') -and !@($originalAllowed|Where-Object {$normalized.EndsWith($_)}).Count)){throw "Unadmitted original source: $path"}
   $manifest.Add(@{path=$path;sha256=(Get-FileHash $path).Hash;object=$target})
  }
 }
-$targets=if($Component -eq 'Worker'){@('ntvwm.exe','ntvwm-execution-lifetime-test.exe','common-worker-control-test.exe')}elseif($Component -eq 'Monitor'){@('ntmon.exe','monitor-rpc-test.exe','monitor-layout-test.exe','monitor-session-test.exe')}else{@('ntcon.exe','frontend-session-arguments-test.exe','frontend-window-library-test.exe','frontend-window-controller-test.exe','frontend-window-keyboard-test.exe','frontend-window-mouse-test.exe','console-frontend-test.exe','console-video-test.exe','frontend-text-handoff-test.exe','console-channel-lifetime-test.exe','console-frame-failure-test.exe','console-pointer-contract-test.exe')}
+$targets=if($Component -eq 'Worker'){@('ntvwm.exe','ntvwm-execution-lifetime-test.exe','common-worker-control-test.exe')}elseif($Component -eq 'Monitor'){@('ntmon.exe','monitor-rpc-test.exe','monitor-layout-test.exe','monitor-session-test.exe')}elseif($Component -eq 'Launcher'){@('run16.exe','run16-image-classification-test.exe','application-search-test.exe','native-capture-test.exe','frontend-scope-lifetime-test.exe','rtl-x86-fixture.exe')}else{@('ntcon.exe','frontend-session-arguments-test.exe','frontend-window-library-test.exe','frontend-window-controller-test.exe','frontend-window-keyboard-test.exe','frontend-window-mouse-test.exe','console-frontend-test.exe','console-video-test.exe','frontend-text-handoff-test.exe','console-channel-lifetime-test.exe','console-frame-failure-test.exe','console-pointer-contract-test.exe')}
 foreach($target in $targets){Add-Edge $target}
 $graph.Add('default '+$targets[0])
 $utf8=[Text.UTF8Encoding]::new($false)

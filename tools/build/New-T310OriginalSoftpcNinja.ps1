@@ -8,6 +8,7 @@ param(
     [string]$NativeWorker = '',
     [string]$NativeFrontend = '',
     [string]$NativeMonitor = '',
+    [string]$NativeLauncher = '',
     [ValidateRange(0, 64)] [int]$ParallelJobs = 0
 )
 
@@ -1654,6 +1655,9 @@ if ($Architecture -eq 'x86') {
     # shares only the native transport scope helper, never a BaseClient
     # registration or worker lifecycle library.
     $graph.Add('build ntmon.exe: monitor_link obj/monitor/main.obj obj/monitor/stub.obj broker-transport.lib')
+    $graph.Add('build obj/tests/native_capture.obj: cc ' + (NinjaPath (Join-Path $root 'tests/adapter-basesrv/native_capture_test.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags + ' ' + ($includeRoots -join ' ') + ' /I "' + (NinjaPath (Join-Path $root 'src/ntsrv-exe/opennt/include')) + '"')
+    $graph.Add('build native-capture-test.exe: base_rpc_test_link obj/tests/native_capture.obj obj/opennt-base-client/capture.obj obj/run16/support.obj')
     $graph.Add('build obj/tests/monitor_session.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/monitor_session_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build monitor-session-test.exe: console_test_link obj/tests/monitor_session.obj')
@@ -1874,7 +1878,8 @@ for ($commonIndex = 0; $commonIndex -lt $graph.Count; ++$commonIndex) {
 if($Architecture -eq 'x86') {
     foreach($consumer in @(
         @{name='ntcon';rule='frontend_link';input=$NativeFrontend;option='NativeFrontend'},
-        @{name='ntmon';rule='monitor_link';input=$NativeMonitor;option='NativeMonitor'}
+        @{name='ntmon';rule='monitor_link';input=$NativeMonitor;option='NativeMonitor'},
+        @{name='run16';rule='run16_link';input=$NativeLauncher;option='NativeLauncher'}
     )) {
         $image=$consumer.name+'.exe';$slot=-1
         for($index=0;$index -lt $graph.Count;++$index){if($graph[$index].StartsWith('build '+$image+': ')){$slot=$index;break}}
@@ -2038,12 +2043,14 @@ if ($objectOutputDirectories.Count -gt 0) {
     }
     launcherComposition = [ordered]@{
         target = 'run16.exe'
-        selected = ($Architecture -eq 'x86')
-        disposition = 'client-only x86 launcher; native independent-frontend paths tested; migrated DOS/GUI grouping gates pending'
+        selected = ($Architecture -eq 'x86' -and !!$NativeLauncher)
+        architecture = $(if($NativeLauncher){'AMD64'}else{'unselected'})
+        nativeInput = $NativeLauncher
+        disposition = 'client-only launcher; explicit architecture-local native import, shared original classification/client semantics and fixed wire ABI'
         sources = @('src/run16-exe/main.c', 'src/common/application_search.c', 'src/common/application_search.h', 'src/run16-exe/image_classification.c', 'src/run16-exe/image_classification.h', 'src/run16-exe/launch_options.c', 'src/run16-exe/launch_options.h', 'src/run16-exe/frontend_scope.c', 'src/run16-exe/frontend_scope.h', 'src/opennt-abi/host-compat/opennt_support_rtl.c' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
-        libraries = @('frontend-client.lib', 'opennt-base-client.lib', 'opennt-base-bindings.lib', 'broker-transport.lib', 'original-opennt-rtl-x86.lib')
+        libraries = @('frontend-client.lib', 'opennt-base-client.lib', 'opennt-base-bindings.lib', 'broker-transport.lib', 'original-opennt-rtl-native.lib')
     }
     frontendClientComposition = [ordered]@{
         target = 'frontend-client.lib'

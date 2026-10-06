@@ -372,3 +372,7 @@ retained failures and final coherent publication/verification.
 [T429 S6 shared worker publication](evidence/m0-t429-s6-shared-video-publication.md)
 records shared production extraction, native atomic publication, focused and
 full integration results, eight-file publication/recovery and retained limits.
+
+[T433 S5 native launcher migration](evidence/m0-t433-s5-native-launcher-migration.md)
+records the x86/x64 source boundary, minimal registered adaptations, native
+build/import, ABI/real-process verification, publication and retained limits.

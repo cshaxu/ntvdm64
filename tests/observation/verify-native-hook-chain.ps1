@@ -36,9 +36,11 @@ $cmdBytes=[IO.File]::ReadAllBytes($cmd)
 $cmdPe=[BitConverter]::ToInt32($cmdBytes,60)
 $cmdMachine=[BitConverter]::ToUInt16($cmdBytes,$cmdPe+4)
 if($cmdMachine -ne $(if($NativeMachine -eq 'AMD64'){0x8664}else{0x14c})){throw 'Native CMD fixture machine mismatch'}
-# The launcher/worker is x86. Preserve the requested real System32 image
-# through Windows' documented WOW64 alias, rather than reopening SysWOW64.
-if($NativeMachine -eq 'AMD64'){$cmd=Join-Path $env:WINDIR 'Sysnative\cmd.exe'}
+# Preserve the requested real System32 image through the documented WOW64
+# alias only when the actual launcher is x86; AMD64 uses System32 directly.
+$launcherImage=[IO.File]::ReadAllBytes((Join-Path $binary 'run16.exe'))
+$launcherPe=[BitConverter]::ToInt32($launcherImage,60)
+if($NativeMachine -eq 'AMD64' -and [BitConverter]::ToUInt16($launcherImage,$launcherPe+4) -eq 0x14c){$cmd=Join-Path $env:WINDIR 'Sysnative\cmd.exe'}
 & subst.exe Z: $runtime
 if($LASTEXITCODE){throw 'SUBST failed'}
 $scope.Paths=@($scope.Paths)+@($scope.Paths|ForEach-Object {Join-Path Z:\ $_.Substring($runtime.Length+1)})

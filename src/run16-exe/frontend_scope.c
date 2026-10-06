@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <wchar.h>
+#include <errno.h>
 
 /* A local handle locator, never a broker identity or authorization token. */
 #define FRONTEND_ENV "NTVDM_FRONTEND_CAPABILITY"
@@ -16,14 +17,16 @@ static DWORD inherited_capability(const char *name,HANDLE *capability)
 {
     char text[32],*end;
     DWORD count;
-    ULONG_PTR value;
+    unsigned long long value;
     *capability=NULL;
     count=GetEnvironmentVariableA(name,text,sizeof(text));
     if (!count) return GetLastError()==ERROR_ENVVAR_NOT_FOUND ? ERROR_SUCCESS : ERROR_INVALID_DATA;
     if (count>=sizeof(text)) return ERROR_INVALID_DATA;
-    value=(ULONG_PTR)strtoul(text,&end,16);
-    if (!value || end==text || *end) return ERROR_INVALID_DATA;
-    *capability=(HANDLE)value;
+    errno=0;
+    value=_strtoui64(text,&end,16);
+    if (!value || end==text || *end || errno==ERANGE ||
+        text[0]=='-' || value>(uint64_t)UINTPTR_MAX) return ERROR_INVALID_DATA;
+    *capability=(HANDLE)(ULONG_PTR)value;
     return ERROR_SUCCESS;
 }
 struct run16_frontend_scope {
@@ -91,7 +94,7 @@ static DWORD scope_begin(run16_frontend_scope **output,BOOL lease,BOOL console_o
         scope->restored=connection.restored;connection.restored=NULL;
         scope->root=connection.process;connection.process=NULL;
         frontend_bootstrap_release(&connection);
-        sprintf_s(text,sizeof(text),"%lx",(unsigned long)(uintptr_t)scope->capability);
+        sprintf_s(text,sizeof(text),"%llx",(unsigned long long)(uintptr_t)scope->capability);
         if (!SetEnvironmentVariableA(FRONTEND_ENV,text)) { error=GetLastError();goto fail; }
         scope->owns_environment=TRUE;
     }
