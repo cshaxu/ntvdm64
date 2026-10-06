@@ -2,7 +2,8 @@
 
 ## Current Work
 
-**Active: M0 T434 S5** (Ordinary Mode; truthful read-only detail and integration).
+**Active: M0 T434 S5 owner review** (Ordinary Mode; implementation delivered,
+bounded S5 closed; T434 remains open for owner acceptance). No next S admitted.
 Owner closes M0 T433 with “t收口 队列给我看看”.
 [T433 closure](../history/m0-t433-native-components-x64-closure.md) retains
 S1–S7 briefs, evidence, limits and final integration audit. Planned S8 is folded
@@ -74,9 +75,18 @@ real CMD/CMD/WINMINE/DOS captures; ended observations are removed, not archived.
 Full14 passes426979ms; native12/DOS7, mixed22/typeahead6, service29 and both-width
 faults pass. Final display-only revisions map nine unchanged participant hashes
 to full-gate reuse and exact final UI tests. Actual deployed DOS/native32/64
-output/exit0 and all10 hashes pass. Commit/push review remains pending;
+output/exit0 and all10 hashes pass. Reviewed production9cf24314c is committed/pushed;
 T434 stays open for owner acceptance. Other-session queue/proposal changes stay
 outside this delivery.
+
+## S5 Closure Record
+
+[S5 evidence](../etc/evidence/m0-t434-s5-monitor-fidelity.md): production9cf24314c
+committed/pushed; final owner-aligned UI, live-only observation cleanup, all
+mapped positive/negative/lifecycle gates, coherent publication and deployed
+smoke/hashes pass. Own implementation changes are committed; other-session
+queue/proposal changes are preserved. S5 closes technically; T434 waits owner
+acceptance. No next T/S admission or universal tracing/gameplay claim.
 
 ### Previous S4 baseline (recoverable)
 
@@ -148,8 +158,9 @@ diagnostic/superseded dual-worker images as production inputs.
 
 ## Next Admission
 
-T434 S5 is active. Complete its designed final stage and full goal audit;
-unrelated candidate ordering remains solely in QUEUE.
+T434 S5 has delivered its final implementation/full requirement audit.
+Wait for owner acceptance; do not admit another S/T automatically. Unrelated
+candidate ordering remains solely in QUEUE.
 
 ## Recent Governance
 
