@@ -195,14 +195,16 @@ Capacity is statistical-unit evidence, not1024 live-process stress; replacement
 identity/history is unit evidence, not a physical PID-reuse guarantee.
 Detailed state/time/revision UI and DOS original callback observation remain
 S5/S4 respectively. Physical/RDP use is not newly certified. Review and
-documentation governance pass; commit/push are the remaining S3 delivery step.
+documentation governance pass. Production1e0f66177 is committed/pushed;
+bounded S3 closes and CURRENT admits S4. Other-session proposal/queue changes
+remain outside this delivery. The full T434 goal remains open.
 
 ## Remaining acceptance
 
 S3's bounded native-source implementation, actual both-width positive/fault
 tests, identity/quota/history/rundown unit checks, retained Full14/Mixed22/
-typeahead6 and publication/smoke gates are proved above. Commit/push remain
-before stage admission. DOS observation and full monitor hierarchy/fidelity
+typeahead6 and publication/smoke gates are proved above and1e0f66177 is pushed.
+DOS observation and full monitor hierarchy/fidelity
 remain S4/S5, not waived and not a full-goal completion claim.
 
 Native-query ABI checked against

@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T434 S3** (Ordinary Mode; native Observed creation/exit events).
+**Active: M0 T434 S4** (Ordinary Mode; original DOS callback observation).
 Owner closes M0 T433 with “t收口 队列给我看看”.
 [T433 closure](../history/m0-t433-native-components-x64-closure.md) retains
 S1–S7 briefs, evidence, limits and final integration audit. Planned S8 is folded
@@ -17,22 +17,22 @@ f2b8af5f9 is committed/pushed with governance/link/diff checks passed.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T434 S3; Ordinary Mode; production implementation. |
+| Identifier Mode | M0 T434 S4; Ordinary Mode; production implementation. |
 | Candidate Proposal | [Read-only worker task traces](../proposals/proposal-worker-task-trace-observation-001.md). |
-| Admission And Approval | Continued owner goal authorizes sequential Direct/Observed implementation. S2 e5769fcc3 is verified, published and pushed; admit S3 from the indexed design. |
-| Objective | Controlled Hook parents publish actual successful child creation before their existing resume; NTSRV authenticates pinned process instances and observes real exits in a read-only sidecar exposed to NTMON. |
-| Non-goals | DOS collector belongs to S4, full UI hierarchy to S5. No Job/tree scan/Console-member authority, new helper, scheduler, observed completion/kill/lifecycle effect, fake cross-worker parent or launch failure caused by observation failure. |
-| Reference Baseline | S2 e5769fcc3; r016 ten-image APP434/RPC42/I/O25 published at O:/winnt/system32; Full14/Mixed22/typeahead6 and actual Direct/deployed smoke pass. Six AMD64/four I386 and original CCPU40 remain. |
-| Files And ABI Surface | common/protocol copied observation contract/IDL and finite client; Hook successful creation boundary at both widths; NTSRV private sidecar/root bind/process waits/query/cleanup; focused fixtures/build graphs. Wire change synchronizes protocol/IDL43; APP434 and I/O25 remain. |
+| Admission And Approval | Continued owner goal authorizes the indexed stages. S3 1e0f66177 is verified, published and pushed; admit S4 after its bounded closure. |
+| Objective | Register an NTVDM collector on original VDD create/terminate callbacks, copy proved PSP occurrence/parent facts and publish read-only DOS Observed rows without changing execution or Direct completion. |
+| Non-goals | Full UI fidelity belongs to S5; internal WOW tasks are not DOS PSPs. No guest patch/BOP, scan, helper, scheduler, observed receipt/kill/lifetime effect or guessed TSR completion. |
+| Reference Baseline | S3 1e0f66177; r042 APP434/RPC43/I/O25 ten images published through r055; Full14/Mixed22/typeahead6, twelve final native cases and deployed smoke/hashes pass. Six AMD64/four I386 and CCPU40 remain. |
+| Files And ABI Surface | NTVDM collector/initialization; worker-base bounded copied outbox/client; common copied DOS observation contract; NTSRV sidecar validation/projection; focused probes/build. Wire evolution synchronizes protocol/IDL; no unnecessary I/O change. |
 | Applicable Rules | AGENTS authorities, source policy and mirror minimality, one active S, common/worker-base ownership, immutable guest and native-width/fixed-wire separation. Preserve other-session changes. |
-| Verification | Real controlled CMD descendants and authored short-lived/concurrent/suspended/forced-exit/surviving-child probes at both widths; forged/replayed/cross-scope reports, callback rundown/cancellation and partial failure; prove Direct completion/lifetime unchanged. Both-width builds and retained full/mixed/publication gates, outputs under build/M0-T434/S3. |
-| Expected Markers | Honest current-versus-proposed implementation, observation isolated from execution, validated process instances not bare PID, authenticated ordering/callback cleanup, truthful unknown states and unchanged monitor summary semantics. |
-| Asset Needs | Delivered dual Hooks and native components; existing original guest/process-wait boundaries and indexed S39 research. No import, new firmware/media or runtime asset. |
-| Reporting Requirements | Present ownership, event flow, identity, uncertainty, failure contract, mirror-hook requirements, stage split and remaining decisions before coding. |
-| Stop Conditions | Conflict with original execution/guest immutability, monitor affecting completion/lifetime, unavailable event fidelity hidden by polling, new helper/authority or unapproved original algorithm change. |
-| Exit Criteria | Production-connected authenticated creation/exit facts and visible Observed rows, strict identity/source/uncertainty/cleanup tests, non-regressing coherent publication and reviewed commit/push before S4. Full goal remains open. |
+| Verification | Real nested EXEC with DOSONLY on/off; entry versus failed/load-only/overlay/builtin; PSP reuse, parent/root correlation, ordinary termination versus TSR uncertainty, overflow and callback/outbox shutdown. Retain native and full/mixed/publication gates; output under build/M0-T434/S4. |
+| Expected Markers | Original callbacks reused, bounded copied guest leases, no blocking/RPC in guest callbacks, authenticated worker scope, truthful unknown/gap state and unchanged Direct STACK/results/lifecycle. |
+| Asset Needs | Existing VDD callbacks/immutable media; independently authored DOS probes only below build. No guest replacement, helper or imported runtime. |
+| Reporting Requirements | Audit first-call suppression, callback threading, PSP/image/parent sources and teardown first; register any required minimal mirror hook, never claim zero diff in advance. |
+| Stop Conditions | Guest mutation, changed original execution/cleanup, unapproved mirror intrusion, guessed TSR state, missing events concealed by polling or new task authority. |
+| Exit Criteria | Connected DOS facts with proved normal/negative/uncertainty and cleanup, coherent publication and reviewed commit/push before S5. Full goal remains open. |
 | Original Owner Request | “实现ntmon direct和observed观测”. |
-| Similar-Issue Sweep | Short-lived/reused PID, concurrent/replayed native reports, caller-suspended targets, hook gaps/GUI boundaries, DOSONLY on/off, failed/load-only/overlay EXEC, ordinary exit versus TSR, stale worker/root selection and callback rundown. |
+| Similar-Issue Sweep | First-call omission, known-DOS EXEC bypassing Run16 even with DOSONLY0, PSP reuse, failed/overlay/load-only EXEC, parent resume/abort, TSR gap and stale worker/outbox cancellation. |
 
 ## S1 Closure Record
 
@@ -48,71 +48,29 @@ fixtures, actual Direct/isolation, Full14, mixed22/typeahead6, coherent ten-imag
 publication and actual deployed smoke/hashes pass. Unrelated queue/proposal
 changes retained. No Observed implementation claimed by S2 closure.
 
+## S3 Closure Record
+
+[S3 evidence](../etc/evidence/m0-t434-s3-native-observation.md): production
+1e0f66177 committed/pushed; both-width native CREATE/EXIT/faults, identity/quota/
+rundown, Full14/Mixed22/typeahead6 and publication/deployed smoke pass.
+Observation remains read-only and coverage incomplete. DOS collector and full
+UI fidelity are not claimed; admit S4 from the indexed plan.
+
 ## Current Technical Baseline
 
-[T434 S1 design](../etc/operations/t434-read-only-task-trace-design.md) records
-actual missing Hook creation reports and existing original VDD user callbacks
-as the preferred DOS observation source. Execution records/STACK and lifecycle
-stay unchanged; observed trace is a separate read-only modal/sidecar. Exact
-source/fidelity and bounded native reporting remain implementation proof gates.
-S1 design and S2 e5769fcc3 are delivered. Current runtime is APP434/RPC42/I/O25
-from r016; S3 candidate changes are not delivered or published.
-S3 now has a production candidate in
-[native observation evidence](../etc/evidence/m0-t434-s3-native-observation.md):
-root bind/sidecar/waits, typed stateless report and Hook pre-resume publication.
-Both Hook widths/native43 consumers compile; existing lifecycle and137-check
-client fixtures pass. Six actual 32/64-bit CREATE/EXIT/parent/root37 independence
-cases pass after correcting the new callback's signal/timeout boolean. Short /
-concurrent/suspended, negative/rundown/capacity and full/publication remain
-unproved; installed S2 stays42. No DOS Observed claim yet.
-Additional actual32/64 short, requested-suspended and16-thread short-child
-tests pass. Real RPC unknown/forged-reporter/old-protocol negatives and native
-unit idempotency/pending-wait rundown pass. Capacity/reuse, loss/timeout, actual
-CMD nesting and complete regression/publication remain open.
-Actual CMD/CMD/probe hierarchy and both-width statistical quota failure pass.
-Report-denied diagnostic preserves creation/23/37. Slow-report test exposed
-unbounded synchronous local RPC despite CALL_TIMEOUT; event-based async abort /
-drain candidate fixes the actual2000ms fault in r040. Final async cleanup,
-both-width/normal/fault and complete coherent gates remain unproved. Published
-S2 stays untouched; old failed diagnostics are retained, not merged into passes.
-Final sync wire/client removed; one async path remains. Final actual32/64 normal
-and denied/slow-report diagnostics pass, including265ms creation with2000ms
-injected delay. Test launcher path canonicalization fixes a proven cleanup
-alias residual; live broker checks remain strict. Final history/reuse and
-coherent package regression/publication still open.
-Final r042 package passes r052 Full14 in416919ms and r053 Mixed22 with all
-exact sequence/width/result assertions. Candidate ten hashes remain unchanged.
-Typeahead6 passes r054 including cleanup. Final-wire focused cases are in
-serial verification; publication and S3 delivery remain pending.
-Other-session proposal/queue changes are retained.
-Final-wire twelve both-width focused cases pass r056. r055 publishes the
-coherent r042 APP434/RPC43/I/O25 ten-image set with S2 recovery; actual deployed
-r057 DOS/CMD32/CMD64 output/exit0 and all hashes pass. Source review and
-governance pass; S3 commit/push remain. DOS Observed and full UI fidelity remain
-S4/S5; no complete-goal claim is made.
-[S2 evidence](../etc/evidence/m0-t434-s2-direct-task-trace.md) records candidate
-Direct query/detail compilation, both-width service/client fixtures and
-private-Console layout passes. Real RPC negatives and two live native session
-Direct projections/isolation, full mixed-package and publication pass.
-Observed production sources are not yet implemented.
-S2 review makes DOS display IDs fresh at true admission and both-width service
-reuse fixtures pass. Updated r016-runtime is verified and published. r011 Full
-attempt passed five groups but failed1740 at version-negatives; independent
-performance research is repeatedly occupying BaseSrv through W:. Serial
-runtime coordination is requested; no failed gate is waived. New known-DOS
-EXEC test expects the real one Direct, with internal guest observation in S4.
-r018 actual updated-package DOS/internal-EXEC/CMD32/CMD64 Direct queries,
-main-state invariance and witness/exit checks all pass. r019 Full14 passes
-661987ms against updated r016; r020 mixed22 and r021 typeahead6 pass. r022
-coherent ten-image publication and r024 actual DOS/CMD32/CMD64 smoke/hashes
-pass. Guest/configuration untouched; recovery preserved; Z removed. Review /
-governance pass; source commit/push remain pending. Other-session queue/proposal
-edits are preserved outside this delivery. No Observed capability claim.
+[S3 evidence](../etc/evidence/m0-t434-s3-native-observation.md) records delivered
+production1e0f66177, r042 APP434/RPC43/I/O25 and r055 publication at
+O:/winnt/system32 with S2 recovery. Full14, mixed22/typeahead6, twelve final
+both-width observation cases and actual deployed DOS/native smoke/hashes pass.
+Authenticated native process facts are observation-only; Direct records,
+STACK, receipts and lifecycle remain authoritative and unchanged. Source
+coverage is explicitly incomplete, not a claim of universal descendants.
 
-T433 S7 production d1aa8336c3940e84879d6bc3c625a2ea5175ced1 and closure
-31a1487e41657e07d8727b1078c9fc36d0a2f2c8 are committed/pushed.
-Final build/M0-T433/S7/r030-final-runtime matches O:/winnt/system32:
-APP0.0.433 / RPC41 / I/O25, ten images, unchanged guest/configuration.
+[S1 design](../etc/operations/t434-read-only-task-trace-design.md) assigns DOS
+callback collection to S4 and complete read-only modal hierarchy/fidelity to
+S5. Initial DOS entry suppression and TSR terminal evidence remain S4 proof
+obligations. Known DOS EXEC may remain internal even with DOSONLY0; do not
+invent Direct records. Original guest media remains immutable.
 
 | Architecture | Images |
 | --- | --- |
@@ -138,6 +96,12 @@ observation remain as recorded in [TODO](TODO.md) and closure evidence.
 
 ## Reusable Build Inputs
 
+S3 current native caches: build/M0-T434/S3/r002-service, r003-hook64,
+r004-worker, r005-frontend, r006-launcher and r007-monitor. Formal x86 graph
+r001-formal and WOW32 r009-wow32 compose the r042 published manifest.
+These selected caches supersede the T433 consumer images below; reuse their
+objects only with verified source/header/generated-input identity.
+
 All disposable/reusable outputs remain below build/. Native service:
 build/M0-T433/S7/r028-native-final. Worker: build/M0-T433/S2/r001.
 Frontend: build/M0-T433/S3/r001. Monitor: build/M0-T433/S4/r001.
@@ -157,11 +121,11 @@ diagnostic/superseded dual-worker images as production inputs.
 
 ## Next Admission
 
-T434 S3 is active. Continue its designed sequential stages after each delivery;
+T434 S4 is active. Continue its designed sequential stages after each delivery;
 unrelated candidate ordering remains solely in QUEUE.
 
 ## Recent Governance
 
-T434 S2 keeps source/runtime evidence, publication and closure separate. S1
-design closure is indexed; original T433 facts remain historical baseline.
-Current S2 production delivery excludes other-session queue/proposal changes.
+T434 S3 keeps source/runtime evidence, publication and closure separate. S1–S3
+closures are indexed; T433 remains historical. Other-session queue/proposal
+changes remain excluded and preserved. S4 is the only active packet.
