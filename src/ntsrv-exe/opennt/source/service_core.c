@@ -25,6 +25,7 @@ OPENNT_BASE_SERVICE *OpenNtBaseServiceStart(void)
     InitializeListHead(&service->frontend_routes);
     InitializeListHead(&service->console_contexts);
     InitializeListHead(&service->gui_records);
+    InitializeListHead(&service->observations);
     service->frontend_lifetime_changed=CreateEventW(NULL,FALSE,FALSE,NULL);
     if(!service->frontend_lifetime_changed) {
         DeleteCriticalSection(&service->lock);HeapFree(GetProcessHeap(),0,service);return NULL;
@@ -102,6 +103,7 @@ BOOL OpenNtBaseServiceStop(OPENNT_BASE_SERVICE *service)
         service_release_console_identities(connection);
         HeapFree(GetProcessHeap(),0,connection);
     }
+    service_observation_stop(service);
     DeleteCriticalSection(&service->lock);
     CloseHandle(service->frontend_lifetime_changed);
     HeapFree(GetProcessHeap(),0,service);

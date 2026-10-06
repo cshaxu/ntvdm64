@@ -249,6 +249,7 @@ DWORD OpenNtBaseServiceBindNativeTarget(OPENNT_BASE_CONNECTION *connection,DWORD
                         record->process_id=target_pid;
                         record->native_machine=machine;
                         record->worker_generation=generation;
+                        service_observation_bind(connection->service,generation,request,target);
                         service_query_native_image(target_pid,record->image);
                         service_signal_frontend_states(connection->service);
                         error=ERROR_SUCCESS;

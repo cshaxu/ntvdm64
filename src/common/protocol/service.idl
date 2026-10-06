@@ -1,7 +1,7 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(42.0),
+    version(43.0),
     pointer_default(unique)
 ]
 interface vdm_service
@@ -501,6 +501,16 @@ interface vdm_service
         [out] unsigned long *coverage,
         [out] unsigned long *count,
         [out, size_is(,*count)] WORKER_TRACE_NODE **entries);
+    /* Connectionless observation only. No worker registration, task receipt
+     * or nominated worker/PID; both objects are typed process attachments. */
+    error_status_t ObserveNativeCreationAsync(
+        [in] handle_t binding,
+        [in, system_handle(sh_process)] HANDLE reporter,
+        [in] unsigned long protocol,
+        [in] byte application_version[32],
+        [in, system_handle(sh_process)] HANDLE child,
+        [in] unsigned long creation_flags,
+        [out] hyper *node);
     error_status_t RegisterWowExec(
         [in] handle_t binding,
         [in] VDM_CONNECTION connection,

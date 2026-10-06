@@ -53,6 +53,17 @@ error_status_t Client_WorkerTaskTrace(handle_t binding,HANDLE process,unsigned l
     if(*items){ZeroMemory(*items,sizeof(**items));(*items)->node=19;}
     return result();
 }
+error_status_t Client_ObserveNativeCreationAsync(PRPC_ASYNC_STATE async,handle_t binding,
+    HANDLE process,unsigned long protocol,unsigned char *application,HANDLE child,
+    unsigned long flags,hyper *node)
+{
+    /* Only synchronous issuance failures are mocked here. Actual async reply,
+     * abort and completion require the real RPC fault/production fixtures. */
+    peer(binding,process,protocol,application);
+    CHECK(async && child==expected.process && flags==CREATE_SUSPENDED && node);
+    RpcRaiseException(mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED);
+    return ERROR_SUCCESS;
+}
 int main(void)
 {
     ULONG count;DTASKMGR_WORKER *items;unsigned i,before;
@@ -66,6 +77,11 @@ int main(void)
         else CHECK(count==0 && items==NULL);
         CHECK(allocations==0);
         CHECK(common_rpc_close_management_node(&expected,&selected)==error);
+        if(i==1 || i==2) {
+            uint64_t node=99;
+            CHECK(common_rpc_observe_native_creation_bounded(&expected,expected.process,CREATE_SUSPENDED,&node)==error);
+            CHECK(!node && !allocations);
+        }
         {
             ULONG coverage=99,trace_count=99;
             WORKER_TRACE_NODE *trace=(WORKER_TRACE_NODE *)(ULONG_PTR)1;
@@ -77,6 +93,14 @@ int main(void)
         }
     }
     before=calls;count=99;items=(DTASKMGR_WORKER *)(ULONG_PTR)1;
+    {
+        uint64_t node=99;
+        CHECK(common_rpc_observe_native_creation_bounded(NULL,expected.process,0,&node)==ERROR_INVALID_STATE);
+        CHECK(!node);
+        CHECK(common_rpc_observe_native_creation_bounded(&expected,expected.process,0,NULL)==ERROR_INVALID_PARAMETER);
+        node=99;CHECK(common_rpc_observe_native_creation_bounded(&expected,NULL,0,&node)==ERROR_INVALID_STATE);
+        CHECK(!node);
+    }
     CHECK(common_rpc_task_snapshot(NULL,&count,&items)==ERROR_INVALID_STATE);
     CHECK(count==0 && items==NULL);
     CHECK(common_rpc_task_snapshot(&expected,NULL,&items)==ERROR_INVALID_PARAMETER);

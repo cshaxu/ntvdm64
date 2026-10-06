@@ -21,7 +21,17 @@ function New-IsolatedPackageScope([string]$PackageRoot,[string]$LaunchRoot='') {
     if(!$physical.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)){
         throw 'Test cleanup requires a repository-build package'
     }
-    if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'Existing broker; no test ownership'}
+    # WMI may briefly retain a terminated row. Pin the actual process before
+    # deciding whether the shared endpoint is occupied; never waive a live
+    # service or retry a failed product case into a pass.
+    foreach($brokerRow in @(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'")){
+        $brokerProcess=$null
+        try {
+            try {$brokerProcess=[Diagnostics.Process]::GetProcessById($brokerRow.ProcessId)}catch [ArgumentException]{continue}
+            $null=$brokerProcess.Handle
+            if(!$brokerProcess.HasExited){throw "Existing live broker $($brokerRow.ProcessId) $($brokerRow.ExecutablePath); no test ownership"}
+        }finally{if($brokerProcess){$brokerProcess.Dispose()}}
+    }
     $paths=@()
     $binary=Get-PackageBinaryRoot $physical
     $launchBinary=if($LaunchRoot){Get-PackageBinaryRoot $LaunchRoot}else{''}

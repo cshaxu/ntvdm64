@@ -14,6 +14,9 @@
 #define TASK_TRACE_UNCERTAIN 3u
 #define TASK_TRACE_GAP_OBSERVATION 1u
 #define TASK_TRACE_TRUNCATED 2u
+#define TASK_TRACE_REQUESTED_SUSPENDED 4u
+#define TASK_TRACE_EXIT_KNOWN 8u
+#define TASK_TRACE_HISTORY 16u
 typedef struct common_task_trace_node {
     uint64_t node,parent;
     uint32_t relation,source,kind,state;

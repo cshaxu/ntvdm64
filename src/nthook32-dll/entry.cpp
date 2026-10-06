@@ -1,5 +1,11 @@
 #include "intercept.h"
 #include "detours/detours.h"
+#include <rpc.h>
+/* RPC allocation is local and has no initialization/loader-lock activity. */
+extern "C" void *__RPC_USER MIDL_user_allocate(size_t bytes)
+{return HeapAlloc(GetProcessHeap(),0,bytes);}
+extern "C" void __RPC_USER MIDL_user_free(void *value)
+{if(value)HeapFree(GetProcessHeap(),0,value);}
 nthook_context nthook_process_context={0};
 extern "C" void WINAPI NthookAnchor(void) {}
 extern "C" void CALLBACK NthookFinishHelper(HWND window,HINSTANCE instance,LPSTR command,INT show)

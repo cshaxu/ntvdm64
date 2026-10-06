@@ -3,6 +3,7 @@
  * It is build-only until command/resource/worker and idle gates are complete. */
 #include <windows.h>
 #include <rpc.h>
+#include <rpcasync.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "service.h"
@@ -277,6 +278,26 @@ error_status_t Server_WorkerTaskTrace(handle_t binding,HANDLE process,ULONG prot
     if(local)HeapFree(GetProcessHeap(),0,local);
     if(!error){*coverage=flags;*count=actual;}
     return error;
+}
+static DWORD basesrv_observe_native_creation(handle_t binding,HANDLE reporter,ULONG protocol,
+    unsigned char application_version[32],HANDLE child,ULONG flags,hyper *node)
+{
+    DWORD pid,error;uint64_t identity=0;
+    if(!node)return ERROR_INVALID_PARAMETER;
+    *node=0;
+    error=broker_rpc_peer_process(&scope,binding,reporter,&pid);
+    if(!error)error=basesrv_management_version(protocol,application_version);
+    if(!error)error=OpenNtBaseServiceObserveNativeCreation(service,reporter,child,flags,&identity);
+    if(!error)*node=(hyper)identity;
+    return error; /* Observation never schedules empty-service retirement. */
+}
+error_status_t Server_ObserveNativeCreationAsync(PRPC_ASYNC_STATE async,handle_t binding,HANDLE reporter,
+    ULONG protocol,unsigned char application_version[32],HANDLE child,ULONG flags,hyper *node)
+{
+    DWORD result=basesrv_observe_native_creation(binding,reporter,protocol,application_version,child,flags,node);
+    /* Same authenticated fact handler; async completion is not task completion. */
+    (void)RpcAsyncCompleteCall(async,&result);
+    return ERROR_SUCCESS; /* Actual reply is supplied through async completion. */
 }
 error_status_t Server_CloseManagementNode(handle_t binding,HANDLE process,ULONG protocol,
     unsigned char application_version[32],DTASKMGR_KEY *key)
@@ -927,7 +948,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v42_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v43_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -974,7 +995,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v42_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v43_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);

@@ -1,8 +1,12 @@
 #ifndef COMMON_RPC_MANAGEMENT_H
 #define COMMON_RPC_MANAGEMENT_H
 #include <windows.h>
+#include <stdint.h>
 #include <rpc.h>
 #include "service.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /* Connectionless management RPCs authenticate the borrowed process capability.
  * The caller owns the binding/process and serializes their release with calls.
@@ -19,4 +23,9 @@ DWORD common_rpc_task_snapshot(const common_rpc_management *state,
 DWORD common_rpc_close_management_node(const common_rpc_management *state,const DTASKMGR_KEY *key);
 DWORD common_rpc_worker_task_trace(const common_rpc_management *,const DTASKMGR_KEY *,
     ULONG *coverage,ULONG *count,WORKER_TRACE_NODE **items);
+DWORD common_rpc_observe_native_creation_bounded(const common_rpc_management *,HANDLE child,
+    DWORD flags,uint64_t *node);
+#ifdef __cplusplus
+}
+#endif
 #endif

@@ -1,10 +1,32 @@
 #include "intercept.h"
 #include "detours/detours.h"
 #include "common/application_search.h"
+#include "common/rpc/local_binding.h"
+#include "common/rpc/management.h"
+#include "ntsrv-exe/transport/rpc_security.h"
 #include <wchar.h>
 static decltype(&CreateProcessW) create_w=CreateProcessW;
 static decltype(&CreateProcessA) create_a=CreateProcessA;
 static __declspec(thread) unsigned entering;
+/* Called only from the successful creation transaction, never DllMain.
+ * Stateless finite publication: a missing/slow broker is diagnostic loss,
+ * not a failed launch. No registration, retry, helper or inherited token. */
+static void observe_created(HANDLE child,DWORD flags)
+{
+    broker_rpc_scope scope={0};common_rpc_management client={0};
+    WCHAR endpoint[128];uint64_t identity=0;
+    DWORD saved=GetLastError();
+    if(!broker_rpc_capture_scope(&scope))goto done;
+    swprintf_s(endpoint,ARRAYSIZE(endpoint),L"ntvdm-basesrv-%lu-%08lx-%08lx",scope.session,
+        (ULONG)scope.logon.HighPart,(ULONG)scope.logon.LowPart);
+    if(common_rpc_bind_local(endpoint,&client.binding)!=RPC_S_OK)goto done;
+    client.process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,GetCurrentProcessId());
+    if(client.process)(void)common_rpc_observe_native_creation_bounded(&client,child,flags,&identity);
+done:
+    if(client.process)CloseHandle(client.process);
+    if(client.binding)RpcBindingFree(&client.binding);
+    SetLastError(saved);
+}
 /* Only a newly created, unreturned child belongs to this rollback. */
 static BOOL finish(BOOL created,DWORD flags,PROCESS_INFORMATION *child,BOOL launcher)
 {
@@ -23,6 +45,7 @@ static BOOL finish(BOOL created,DWORD flags,PROCESS_INFORMATION *child,BOOL laun
         if(!error)error=nthook_install(child->hProcess,&context,
             launcher ? NATIVE_HOOK_LAUNCHER : NATIVE_HOOK_INTERCEPT);
     }
+    if(!error)observe_created(child->hProcess,flags);
     if(!error && !(flags&CREATE_SUSPENDED) && ResumeThread(child->hThread)==(DWORD)-1)
         error=GetLastError();
     if(error) {

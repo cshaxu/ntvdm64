@@ -56,7 +56,40 @@ as the preferred DOS observation source. Execution records/STACK and lifecycle
 stay unchanged; observed trace is a separate read-only modal/sidecar. Exact
 source/fidelity and bounded native reporting remain implementation proof gates.
 S1 design and S2 e5769fcc3 are delivered. Current runtime is APP434/RPC42/I/O25
-from r016; S3 candidate changes are not yet implemented or published.
+from r016; S3 candidate changes are not delivered or published.
+S3 now has a production candidate in
+[native observation evidence](../etc/evidence/m0-t434-s3-native-observation.md):
+root bind/sidecar/waits, typed stateless report and Hook pre-resume publication.
+Both Hook widths/native43 consumers compile; existing lifecycle and137-check
+client fixtures pass. Six actual 32/64-bit CREATE/EXIT/parent/root37 independence
+cases pass after correcting the new callback's signal/timeout boolean. Short /
+concurrent/suspended, negative/rundown/capacity and full/publication remain
+unproved; installed S2 stays42. No DOS Observed claim yet.
+Additional actual32/64 short, requested-suspended and16-thread short-child
+tests pass. Real RPC unknown/forged-reporter/old-protocol negatives and native
+unit idempotency/pending-wait rundown pass. Capacity/reuse, loss/timeout, actual
+CMD nesting and complete regression/publication remain open.
+Actual CMD/CMD/probe hierarchy and both-width statistical quota failure pass.
+Report-denied diagnostic preserves creation/23/37. Slow-report test exposed
+unbounded synchronous local RPC despite CALL_TIMEOUT; event-based async abort /
+drain candidate fixes the actual2000ms fault in r040. Final async cleanup,
+both-width/normal/fault and complete coherent gates remain unproved. Published
+S2 stays untouched; old failed diagnostics are retained, not merged into passes.
+Final sync wire/client removed; one async path remains. Final actual32/64 normal
+and denied/slow-report diagnostics pass, including265ms creation with2000ms
+injected delay. Test launcher path canonicalization fixes a proven cleanup
+alias residual; live broker checks remain strict. Final history/reuse and
+coherent package regression/publication still open.
+Final r042 package passes r052 Full14 in416919ms and r053 Mixed22 with all
+exact sequence/width/result assertions. Candidate ten hashes remain unchanged.
+Typeahead6 passes r054 including cleanup. Final-wire focused cases are in
+serial verification; publication and S3 delivery remain pending.
+Other-session proposal/queue changes are retained.
+Final-wire twelve both-width focused cases pass r056. r055 publishes the
+coherent r042 APP434/RPC43/I/O25 ten-image set with S2 recovery; actual deployed
+r057 DOS/CMD32/CMD64 output/exit0 and all hashes pass. Source review and
+governance pass; S3 commit/push remain. DOS Observed and full UI fidelity remain
+S4/S5; no complete-goal claim is made.
 [S2 evidence](../etc/evidence/m0-t434-s2-direct-task-trace.md) records candidate
 Direct query/detail compilation, both-width service/client fixtures and
 private-Console layout passes. Real RPC negatives and two live native session

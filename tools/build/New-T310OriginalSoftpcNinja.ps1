@@ -1196,6 +1196,7 @@ if ($Architecture -eq 'x86') {
             @('native-commands', 'src/ntsrv-exe/opennt/source/native_commands.c', $baseServerFlags),
             @('service-lifecycle', 'src/ntsrv-exe/opennt/source/lifecycle.c', $baseServerFlags),
             @('service-management', 'src/ntsrv-exe/opennt/source/management.c', $baseServerFlags),
+            @('task-observation', 'src/ntsrv-exe/opennt/source/task_observation.c', $baseServerFlags),
             @('worker-spawn', 'src/ntsrv-exe/transport/worker_spawn.c', ('/nologo /c /MT /W4 /we4013 /showIncludes /I "' + (NinjaPath (Join-Path $root 'src')) + '"')),
             @('command', 'src/ntsrv-exe/opennt/source/base_command.c', $baseServerFlags),
             @('values', 'src/ntsrv-exe/opennt/source/base_values.c', $baseServerFlags),
@@ -1273,6 +1274,9 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/tests/base_service_fixture.obj: cc ' + (NinjaPath (Join-Path $root 'tests/adapter-basesrv/base_service_fixture.c')))
     $graph.Add('  cflags = ' + $baseServerFlags)
     $graph.Add('build basesrv-service-reservation-test.exe: basesrv_service_test_link ' + $baseServiceReservationTestObject + ' obj/tests/base_service_fixture.obj obj/run16/support.obj opennt-base-server.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
+    $graph.Add('build obj/tests/native_observation_fixture.obj: cc ' + (NinjaPath (Join-Path $root 'tests/adapter-basesrv/native_observation_fixture.c')))
+    $graph.Add('  cflags = ' + $baseServerFlags)
+    $graph.Add('build native-observation-fixture.exe: basesrv_service_test_link obj/tests/native_observation_fixture.obj obj/tests/base_service_fixture.obj obj/run16/support.obj opennt-base-server.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
     $graph.Add('build obj/tests/basesrv_idle_policy.obj: cc ' + (NinjaPath (Join-Path $root 'tests/adapter-basesrv/idle_policy_test.c')))
     $graph.Add('  cflags = /nologo /c /MT /W4 /WX /showIncludes /I"' + (Join-Path $root 'src') + '"')
     $graph.Add('build basesrv-idle-policy-test.exe: basesrv_service_test_link obj/tests/basesrv_idle_policy.obj')
@@ -1510,7 +1514,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/common/native_image.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/native_image.c')))
     $graph.Add('  cflags = ' + $baseOwnerFlags)
     # One worker; actual child machine selects the reviewed matching Hook installer.
-    $hookFlags = '/nologo /TP /c /MT /O2 /Gy /W4 /showIncludes /std:c++14 /DWIN32_LEAN_AND_MEAN /D_WIN32_WINNT=0x0601 /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
+    $hookFlags = '/nologo /TP /c /MT /O2 /Gy /W4 /showIncludes /std:c++14 /DWIN32_LEAN_AND_MEAN /D_WIN32_WINNT=0x0A00 /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
     $hookDetoursObjects = @()
     foreach ($name in @('detours','modules','disasm','image','creatwth')) {
         $object = 'obj/nthook32/detours-' + $name + '.obj'
@@ -1519,7 +1523,7 @@ if ($Architecture -eq 'x86') {
         $graph.Add('  cflags = ' + $hookFlags)
     }
     foreach ($name in @('context','installer','entry','create_process')) {
-        $graph.Add('build obj/nthook32/' + $name + '.obj: cc ' + (NinjaPath (Join-Path $root ('src/nthook32-dll/' + $name + '.cpp'))))
+        $graph.Add('build obj/nthook32/' + $name + '.obj: cc ' + (NinjaPath (Join-Path $root ('src/nthook32-dll/' + $name + '.cpp'))) + ' | obj/basesrv/service.h')
         $graph.Add('  cflags = ' + $hookFlags)
     }
     $graph.Add('build obj/nthook32/classification.obj: cc ' + (NinjaPath (Join-Path $run16Root 'hook_classification.c')))
@@ -1527,8 +1531,8 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build nthook-context.lib: lib obj/nthook32/context.obj ' + ($hookDetoursObjects -join ' '))
     $graph.Add('build nthook-installer.lib: lib obj/nthook32/installer.obj obj/common/native_image.obj')
     $graph.Add('rule nthook_dll_link')
-    $graph.Add('  command = link.exe /nologo /dll /opt:ref /out:$out /map:$out.map /implib:nthook32-import.lib /def:"' + (NinjaPath (Join-Path $root 'src/nthook32-dll/nthook32.def')) + '" $in kernel32.lib ntdll.lib advapi32.lib legacy_stdio_definitions.lib')
-    $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthook32/create_process.obj obj/nthook32/classification.obj obj/common/application_search.obj obj/run16/image_classification.obj obj/common/native_image.obj nthook-installer.lib nthook-context.lib opennt-base-client.lib opennt-base-bindings.lib obj/run16/support.obj original-opennt-rtl-x86.lib | ' + (NinjaPath (Join-Path $root 'src/nthook32-dll/nthook32.def')))
+    $graph.Add('  command = link.exe /nologo /dll /opt:ref /out:$out /map:$out.map /implib:nthook32-import.lib /def:"' + (NinjaPath (Join-Path $root 'src/nthook32-dll/nthook32.def')) + '" $in kernel32.lib ntdll.lib advapi32.lib rpcrt4.lib legacy_stdio_definitions.lib')
+    $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthook32/create_process.obj obj/nthook32/classification.obj obj/common/application_search.obj obj/run16/image_classification.obj obj/common/native_image.obj obj/run16/stub.obj nthook-installer.lib nthook-context.lib opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib obj/run16/support.obj original-opennt-rtl-x86.lib | ' + (NinjaPath (Join-Path $root 'src/nthook32-dll/nthook32.def')))
     $graph.Add('build obj/tests/nthook_install.obj: cc ' + (NinjaPath (Join-Path $root 'tests/component-integration/nthook_install_test.cpp')))
     $graph.Add('  cflags = ' + $hookFlags)
     $graph.Add('rule nthook_test_link')

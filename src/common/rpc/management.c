@@ -1,8 +1,46 @@
 /* Existing project management exchanges, not original VDM record policy. */
 #include "management.h"
 #include "common/protocol/version.h"
+#include <rpcasync.h>
 
 static const unsigned char app_version[APP_VERSION_BYTES]=APP_VERSION;
+
+DWORD common_rpc_observe_native_creation_bounded(const common_rpc_management *state,HANDLE child,
+    DWORD flags,uint64_t *node)
+{
+    RPC_ASYNC_STATE async={0};hyper identity=0;DWORD reply=ERROR_INVALID_STATE,error,wait;
+    HANDLE completed=NULL;BOOL issued=FALSE;
+    if(!node)return ERROR_INVALID_PARAMETER;
+    *node=0;
+    if(!state || !state->binding || !state->process || !child)return ERROR_INVALID_STATE;
+    error=RpcAsyncInitializeHandle(&async,sizeof(async));if(error)return error;
+    completed=CreateEventW(NULL,TRUE,FALSE,NULL);if(!completed)return GetLastError();
+    async.NotificationType=RpcNotificationTypeEvent;async.u.hEvent=completed;
+    RpcTryExcept {
+        Client_ObserveNativeCreationAsync(&async,state->binding,state->process,APP_PROTOCOL_VERSION,
+            (unsigned char *)app_version,child,flags,&identity);
+        issued=TRUE;error=ERROR_SUCCESS;
+    }
+    RpcExcept(1) {error=RpcExceptionCode();}
+    RpcEndExcept
+    if(issued) {
+        wait=WaitForSingleObject(completed,250);
+        if(wait!=WAIT_OBJECT_0) {
+            /* Abortive cancellation completes locally without waiting for
+             * the server's reply. State/inputs still live until notification. */
+            error=RpcAsyncCancelCall(&async,TRUE);
+            /* Even cancellation failure cannot justify freeing pending call
+             * state. Drain its actual notification, then complete it. */
+            if(WaitForSingleObject(completed,INFINITE)!=WAIT_OBJECT_0)
+                error=GetLastError();
+        }
+        {DWORD completion=RpcAsyncCompleteCall(&async,&reply);if(!error)error=completion;}
+        if(!error)error=reply;
+    }
+    CloseHandle(completed);
+    if(!error)*node=(uint64_t)identity;
+    return error;
+}
 
 DWORD common_rpc_worker_task_trace(const common_rpc_management *state,const DTASKMGR_KEY *key,
     ULONG *coverage,ULONG *count,WORKER_TRACE_NODE **items)

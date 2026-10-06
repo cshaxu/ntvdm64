@@ -26,6 +26,7 @@
 #include "common/codec/native_launch.h"
 #include <stdio.h>
 #define FRONTEND_STARTUP_DEADLINE_MS 10000u
+#define SERVICE_OBSERVATION_MAX 1024u
 typedef NTSTATUS (*OPENNT_USER_TEST_TOKEN_FOR_INTERACTIVE)(HANDLE,PLUID);
 extern OPENNT_USER_TEST_TOKEN_FOR_INTERACTIVE UserTestTokenForInteractive;
 /* srvvdm.c owns these source-shaped lists and their lock objects.  They are
@@ -56,6 +57,9 @@ struct OPENNT_BASE_SERVICE {
     void *empty_notify_context;
     uint64_t management_epoch;
     uint64_t next_management_task; /* Label admission identity, never scheduling. */
+    LIST_ENTRY observations; /* Read-only retained process facts, not tasks. */
+    uint32_t observation_count;
+    uint64_t next_observation;
 };
 struct OPENNT_BASE_CONNECTION {
     OPENNT_BASE_SERVICE *service;
@@ -278,4 +282,11 @@ DWORD service_bind_existing_console(OPENNT_BASE_CONNECTION *connection);
  * the public wrappers. No mutable clock or runtime timeout override. */
 DWORD service_next_frontend_deadline_at(OPENNT_BASE_SERVICE *,ULONGLONG,ULONGLONG *);
 DWORD service_retire_expired_frontends_at(OPENNT_BASE_SERVICE *,ULONGLONG);
+/* Existing service lock protects facts. Stop joins waits outside that lock
+ * after transport has quiesced; observation never contributes to IsEmpty. */
+void service_observation_bind(OPENNT_BASE_SERVICE *,DWORD,DWORD,HANDLE);
+uint64_t service_observation_direct_id(OPENNT_BASE_SERVICE *,DWORD,DWORD);
+void service_observation_copy(OPENNT_BASE_SERVICE *,DWORD,common_task_trace_node *,
+    uint32_t *,uint32_t *);
+void service_observation_stop(OPENNT_BASE_SERVICE *);
 #endif

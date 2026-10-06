@@ -68,6 +68,10 @@ DWORD OpenNtBaseServiceSnapshotCopy(OPENNT_BASE_SERVICE *,uint64_t *epoch,
 DWORD OpenNtBaseServiceTaskTrace(OPENNT_BASE_SERVICE *,
     const OPENNT_BASE_MANAGEMENT_KEY *,uint32_t *coverage,
     common_task_trace_node **entries,uint32_t *count);
+/* Transport authenticates reporter; typed borrowed process references are
+ * validated against the observation cohort, never a nominated PID/worker. */
+DWORD OpenNtBaseServiceObserveNativeCreation(OPENNT_BASE_SERVICE *,HANDLE reporter,
+    HANDLE child,DWORD creation_flags,uint64_t *node);
 DWORD OpenNtBaseServiceTerminateWorker(OPENNT_BASE_SERVICE *,uint32_t process_id);
 DWORD OpenNtBaseServiceCloseManagementNode(OPENNT_BASE_SERVICE *,
     const OPENNT_BASE_MANAGEMENT_KEY *);

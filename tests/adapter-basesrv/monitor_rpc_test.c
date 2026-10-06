@@ -12,6 +12,7 @@
 #include "common/protocol/version.h"
 #include "common/rpc/management.h"
 #include "common/protocol/management.h"
+#include <rpcasync.h>
 
 #define CHECK(value) do { if (!(value)) { fprintf(stderr,"FAIL %d: %lu\n",__LINE__,(unsigned long)GetLastError()); return 1; } } while (0)
 
@@ -19,6 +20,34 @@ void *__RPC_USER MIDL_user_allocate(size_t bytes) { return malloc(bytes); }
 void __RPC_USER MIDL_user_free(void *value) { free(value); }
 
 static const unsigned char version[APP_VERSION_BYTES]=APP_VERSION;
+/* Real async wire negative, deliberately allowing version mutation. Normal
+ * publication uses the production common bounded client, not this fixture. */
+static DWORD observation_call(RPC_BINDING_HANDLE binding,HANDLE reporter,ULONG protocol,
+    HANDLE child,DWORD flags,hyper *node)
+{
+    RPC_ASYNC_STATE async={0};DWORD error,reply=ERROR_INVALID_STATE;
+    HANDLE completed=CreateEventW(NULL,TRUE,FALSE,NULL);
+    if(!completed)return GetLastError();*node=0;
+    error=RpcAsyncInitializeHandle(&async,sizeof(async));
+    if(!error) {
+        async.NotificationType=RpcNotificationTypeEvent;async.u.hEvent=completed;
+        RpcTryExcept {
+            Client_ObserveNativeCreationAsync(&async,binding,reporter,protocol,
+                (unsigned char *)version,child,flags,node);
+        }
+        RpcExcept(1) {error=RpcExceptionCode();}
+        RpcEndExcept
+        if(!error) {
+            if(WaitForSingleObject(completed,1000)!=WAIT_OBJECT_0) {
+                error=RpcAsyncCancelCall(&async,TRUE);
+                (void)WaitForSingleObject(completed,INFINITE);
+            }
+            {DWORD completion=RpcAsyncCompleteCall(&async,&reply);if(!error)error=completion;}
+            if(!error)error=reply;
+        }
+    }
+    CloseHandle(completed);return error;
+}
 
 static void json_string(const WCHAR *value)
 {
@@ -260,9 +289,10 @@ int main(int argc,char **argv)
             wprintf(L"{\"coverage\":%lu,\"nodes\":[",coverage);
             for(index=0;index<actual;++index) {
                 if(index)putwchar(L',');
-                wprintf(L"{\"node\":%llu,\"parent\":%llu,\"relation\":%lu,\"source\":%lu,\"kind\":%lu,\"pid\":%lu,\"task\":%lu,\"image\":",
+                wprintf(L"{\"node\":%llu,\"parent\":%llu,\"relation\":%lu,\"source\":%lu,\"kind\":%lu,\"pid\":%lu,\"task\":%lu,\"state\":%lu,\"flags\":%lu,\"exit\":%lu,\"image\":",
                     nodes[index].node,nodes[index].parent,nodes[index].relation,nodes[index].source,
-                    nodes[index].kind,nodes[index].process_id,nodes[index].task);
+                    nodes[index].kind,nodes[index].process_id,nodes[index].task,
+                    nodes[index].state,nodes[index].flags,nodes[index].reserved);
                 json_string(nodes[index].image);putwchar(L'}');
             }
             wprintf(L"]}\n");if(nodes)MIDL_user_free(nodes);
@@ -344,6 +374,43 @@ int main(int argc,char **argv)
         RpcExcept(1) {error=RpcExceptionCode();}
         RpcEndExcept
         CHECK(error==ERROR_REVISION_MISMATCH && !actual && !coverage && !nodes);
+    }
+    {
+        /* Real typed object whose parent is this authenticated client, but
+         * this client is not a registered Direct/Observed reporter. */
+        STARTUPINFOW created_start={sizeof(created_start)};PROCESS_INFORMATION created={0};
+        WCHAR own[MAX_PATH],line[MAX_PATH+32];hyper identity=99;
+        CHECK(GetModuleFileNameW(NULL,own,MAX_PATH));
+        swprintf_s(line,ARRAYSIZE(line),L"\"%s\" --empty",own);
+        CHECK(CreateProcessW(own,line,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
+            NULL,NULL,&created_start,&created));
+        RpcTryExcept {
+            error=observation_call(binding,self,APP_PROTOCOL_VERSION,created.hProcess,CREATE_SUSPENDED,&identity);
+        }
+        RpcExcept(1) {error=RpcExceptionCode();}
+        RpcEndExcept
+        CHECK(error==ERROR_ACCESS_DENIED && !identity);
+        identity=99;
+        RpcTryExcept {
+            /* An attachment of a different real process cannot stand in for
+             * the RPC caller even though both processes share the logon. */
+            error=observation_call(binding,created.hProcess,APP_PROTOCOL_VERSION,self,0,&identity);
+        }
+        RpcExcept(1) {error=RpcExceptionCode();}
+        RpcEndExcept
+        CHECK(error==RPC_S_ACCESS_DENIED && !identity);
+        identity=99;
+        RpcTryExcept {
+            error=observation_call(binding,self,APP_PROTOCOL_VERSION-1,created.hProcess,0,&identity);
+        }
+        RpcExcept(1) {error=RpcExceptionCode();}
+        RpcEndExcept
+        CHECK(error==ERROR_REVISION_MISMATCH && !identity);
+        CHECK(WaitForSingleObject(created.hProcess,0)==WAIT_TIMEOUT);
+        CHECK(TerminateProcess(created.hProcess,0) && WaitForSingleObject(created.hProcess,5000)==WAIT_OBJECT_0);
+        CloseHandle(created.hThread);CloseHandle(created.hProcess);
+        CHECK(!common_rpc_task_snapshot(&management,&count,&entries) && !count && !entries);
+        puts("PASS real native observation rejects unknown reporter, false process attachment and old protocol without creating tasks");
     }
     RpcBindingFree(&binding); CloseHandle(self);
     /* A preceding isolated root test can still own the singleton during its

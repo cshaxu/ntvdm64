@@ -370,7 +370,8 @@ static void render_trace(HANDLE output,MONITOR_STATE *state)
         swprintf_s(line,ARRAYSIZE(line),L"  %-8s %-7s %-7s %-7lu %-6lu %s%s",
             node->relation==TASK_TRACE_DIRECT ? L"DIRECT" : L"OBSERVED",
             node->source==TASK_TRACE_SOURCE_RECORD ? L"RECORD" : node->source==TASK_TRACE_SOURCE_HOOK ? L"HOOK" : L"DOS",
-            kind_name(node->kind),node->process_id,node->task,node->parent ? L"  " : L"",node->image);
+            node->kind==UINT32_MAX ? L"UNKNOWN" : kind_name(node->kind),
+            node->process_id,node->task,node->parent ? L"  " : L"",node->image);
         framed_text(frame,L'\x2502',line,L'\x2502');
         render_framed_line(output,(SHORT)row++,frame,MONITOR_NORMAL_ATTRIBUTE);
     }
@@ -384,7 +385,7 @@ static void render_trace(HANDLE output,MONITOR_STATE *state)
         render_framed_line(output,(SHORT)row++,frame,MONITOR_NORMAL_ATTRIBUTE);
     }
     framed_text(frame,L'\x2502',coverage&TASK_TRACE_GAP_OBSERVATION ?
-        L" Observed coverage unavailable; not evidence of no descendants." : L"",L'\x2502');
+        L" Observed coverage incomplete; not proof of no descendants." : L"",L'\x2502');
     render_framed_line(output,(SHORT)row++,frame,MONITOR_ACCENT_ATTRIBUTE);
     footer_text(frame,error,0,coverage&TASK_TRACE_TRUNCATED ?
         L"ESC=Back UP/DOWN=Scroll - trace incomplete" : L"ESC=Back UP/DOWN=Scroll - read only");

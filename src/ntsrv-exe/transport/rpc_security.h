@@ -3,6 +3,9 @@
 #define BROKER_RPC_SECURITY_H
 #include <windows.h>
 #include <rpc.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
 typedef struct broker_rpc_scope {
     LUID logon;
     DWORD session;
@@ -13,4 +16,7 @@ RPC_STATUS broker_rpc_authorize(const broker_rpc_scope *scope, RPC_BINDING_HANDL
 /* Validate a process attachment against the live local RPC peer. The caller
  * must duplicate a retained reference before the RPC-owned input expires. */
 RPC_STATUS broker_rpc_peer_process(const broker_rpc_scope *, RPC_BINDING_HANDLE, HANDLE, DWORD *);
+#ifdef __cplusplus
+}
+#endif
 #endif

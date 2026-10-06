@@ -611,10 +611,11 @@ DWORD OpenNtBaseServiceTaskTrace(OPENNT_BASE_SERVICE *service,
             for(entry=native->win32records.Flink;entry!=&native->win32records;entry=entry->Flink) {
                 OPENNT_BASE_WIN32RECORD *record=CONTAINING_RECORD(entry,OPENNT_BASE_WIN32RECORD,link);
                 if(record->completed)continue;
-                service_trace_append(rows,&actual,&flags,record->request,parent,
+                uint64_t identity=service_observation_direct_id(service,key->generation,record->request);
+                service_trace_append(rows,&actual,&flags,identity,parent,
                     record->native_machine==IMAGE_FILE_MACHINE_AMD64 ? MANAGEMENT_KIND_WIN64 : MANAGEMENT_KIND_WIN32,
                     record->process_id,record->request,record->image);
-                parent=record->request;
+                parent=identity;
             }
             break;
         }
@@ -650,6 +651,8 @@ DWORD OpenNtBaseServiceTaskTrace(OPENNT_BASE_SERVICE *service,
         }
         RtlLeaveCriticalSection(&BaseSrvDOSCriticalSection);
     }
+    if(watch->kind==OPENNT_BASE_WORKER_NATIVE)
+        service_observation_copy(service,key->generation,rows,&actual,&flags);
     if(actual){*entries=rows;rows=NULL;}
     *count=actual;*coverage=flags;error=ERROR_SUCCESS;
 done:

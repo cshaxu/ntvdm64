@@ -7,6 +7,7 @@ delivered single-worker/dual-Hook gates; see
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T434 S3 native observation](evidence/m0-t434-s3-native-observation.md) | M0 T434 S3 | Authenticated native CREATE/EXIT facts, both-width/fault evidence, coherent publication and explicit remaining DOS/UI scope. | Retain through delivery and full task acceptance. |
 | [T434 S1 design closure](evidence/m0-t434-s1-task-trace-design.md) | M0 T434 S1 | Source audit/design delivery and documentation-only verification before sequential implementation. | Retain through task closure. |
 | [T434 S2 Direct task trace](evidence/m0-t434-s2-direct-task-trace.md) | M0 T434 S2 | Production copied query/detail, focused evidence and outstanding coherent runtime/publication gates. | Retain through S delivery and trace acceptance. |
 | [T434 task-trace design](operations/t434-read-only-task-trace-design.md) | M0 T434 S1 | Current Hook/report gap, original VDD event reuse, observation authority/identity/fidelity and staged implementation proof. | Retain through design review and delivered trace scope. |
