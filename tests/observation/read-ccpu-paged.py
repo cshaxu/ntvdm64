@@ -76,6 +76,24 @@ try:
             'cpuFlags':{'if':flags[9],'vm':flags[17],'iopl':flags[12],'cpl':cpl},
             'registers':[hex(x) for x in gr],'segments':[{'selector':hex(s[0]),'big':s[7],'base':hex(s[8]),'limit':hex(s[9])} for s in segments]}
     result['hostTimerDiagnostic']={}
+    # Scalar-only command-delivery observation. Layout is the original x86
+    # VDMINFO (vdmapi.h): 52-byte prefix, 68-byte STARTUPINFOA, then fields.
+    # Do not read environment contents, application arguments or credentials.
+    result['commandDelivery']={}
+    for name in ['_IsFirstCall','_DosEnvCreated','_cchVDMEnv32']:
+        match=re.search(r'^\s*\S+\s+'+re.escape(name)+r'\s+([0-9A-Fa-f]+)\s',maps,re.M)
+        if match:result['commandDelivery'][name]=struct.unpack('<I',read(module.base+int(match[1],16)-preferred,4))[0]
+    match=re.search(r'^\s*\S+\s+_VDMInfo\s+([0-9A-Fa-f]+)\s',maps,re.M)
+    if match:
+        raw=read(module.base+int(match[1],16)-preferred,160)
+        result['commandDelivery']['VDMInfo']={
+            'environmentBytes':struct.unpack_from('<I',raw,48)[0],
+            'desktopBytes':struct.unpack_from('<I',raw,124)[0],
+            'titleBytes':struct.unpack_from('<I',raw,132)[0],
+            'reservedBytes':struct.unpack_from('<I',raw,140)[0],
+            **{name:struct.unpack_from('<H',raw,offset)[0] for name,offset in
+               [('commandBytes',144),('applicationBytes',146),('pifBytes',148),
+                ('directoryBytes',150),('state',152)]}}
     result['textGeometry']={}
     for name in ['_now_width','_now_height']:
         match=re.search(r'^\s*\S+\s+'+re.escape(name)+r'\s+([0-9A-Fa-f]+)\s',maps,re.M)

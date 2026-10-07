@@ -385,3 +385,25 @@ identical provider results remain evidence, not successful new replays. The
 driver stays candidate and S2 remains open. S3 is not admitted by this tooling
 delivery. Task file writes/temp stay on O:, C: tooling is read-only, E:/X:/Y:
 are excluded, and no subst is used.
+
+## Command-delivery failure narrowed, not a mouse result
+
+r047's captured CPU-thread stack, resolved against the exact published image
+base00CC0000 and r060 map, reaches cmdGetNextCmd+6B0. Read-only dumpbin confirms
+preferred659560 is immediately after RcErrorDialogBox at65955B, selected when
+GetNextVDMCommand returns FALSE at cmdmisc.c265. This is not the separate
+cmdCreateVDMEnvironment error branch. Original vdm.c clears returned lengths
+for failures other than STATUS_INVALID_PARAMETER; its generic text does not
+identify the underlying adapter/RPC error.
+
+r057 adds scalar-only VDMINFO inspection to the existing read-only CCPU probe
+(original x86 layout:52-byte prefix,68-byte STARTUPINFOA, trailing lengths).
+No environment contents, arguments or credentials are read. Quiesced snapshot
+shows IsFirstCall1, DosEnvCreated0, cchVDMEnv323364, VDMState5 and all returned
+command/app/PIF/environment/directory lengths0. The displayed popup is unchanged.
+r058's previously working WINSTD.PIF also reaches the same environment popup,
+so the boundary is not established as a COM-only or mouse-driver defect.
+Both bounded processes end by observation timeout/owned cleanup, not success.
+No production file, original guest or mirror is changed. The next diagnostic
+would need exact Client_Get/decoder/command-ready status observation; current
+packet does not authorize an expanded production RPC repair or a guessed fix.
