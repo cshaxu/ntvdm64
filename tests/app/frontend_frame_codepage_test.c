@@ -105,7 +105,46 @@ int wmain(int argc,WCHAR **argv)
     CHECK(GetConsoleScreenBufferInfo(frontend.logical_surface,&info));
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&handles_after));
     CHECK(handles_before==handles_after);
+    /* Reacquisition must not enlarge the hidden native viewport to the
+     * already-converted logical80x22 page. This catches the bug even on a
+     * large desktop where the incorrect enlargement would succeed. */
+    CloseHandle(frontend.logical_surface);
+    frontend.logical_surface=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,
+        FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CONSOLE_TEXTMODE_BUFFER,NULL);
+    frontend.console_output=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,
+        FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CONSOLE_TEXTMODE_BUFFER,NULL);
+    CHECK(frontend.logical_surface!=INVALID_HANDLE_VALUE && frontend.console_output!=INVALID_HANDLE_VALUE);
+    if(frontend.logical_surface!=INVALID_HANDLE_VALUE && frontend.console_output!=INVALID_HANDLE_VALUE) {
+        HANDLE surfaces[2]={frontend.logical_surface,frontend.console_output};
+        SHORT native_width=0,native_height=0;
+        for(index=0;index<2;++index) {
+            CHECK(SetConsoleWindowInfo(surfaces[index],TRUE,&(SMALL_RECT){0,0,0,0}));
+            CHECK(SetConsoleScreenBufferSize(surfaces[index],(COORD){80,22}));
+            CHECK(GetConsoleScreenBufferInfo(surfaces[index],&info));
+            native_width=min(53,info.dwMaximumWindowSize.X);
+            native_height=min(14,info.dwMaximumWindowSize.Y);
+            CHECK(SetConsoleWindowInfo(surfaces[index],TRUE,&(SMALL_RECT){0,0,native_width-1,native_height-1}));
+        }
+        frontend.logical_window=(SMALL_RECT){0,0,79,21};
+        CHECK(SetConsoleCursorPosition(frontend.logical_surface,(COORD){7,21}));
+        for(index=0;index<80*22;++index){cells[index].Char.UnicodeChar=L'Z';cells[index].Attributes=0x1f;}
+        rect=(SMALL_RECT){0,0,79,21};
+        CHECK(WriteConsoleOutputW(frontend.logical_surface,cells,(COORD){80,22},origin,&rect));
+        for(pass=0;pass<2;++pass) {
+            BOOL committed=FALSE;
+            CHECK(prepare_logical_surface(&frontend,(COORD){80,22},&committed)==0 && committed);
+            CHECK(GetConsoleScreenBufferInfo(frontend.logical_surface,&info));
+            CHECK(info.dwSize.X==80 && info.dwSize.Y==22 &&
+                info.dwCursorPosition.X==7 && info.dwCursorPosition.Y==21);
+            CHECK(info.srWindow.Right-info.srWindow.Left+1<=native_width &&
+                info.srWindow.Bottom-info.srWindow.Top+1<=native_height);
+            rect=(SMALL_RECT){0,0,79,21};
+            CHECK(ReadConsoleOutputW(frontend.logical_surface,cells,(COORD){80,22},origin,&rect));
+            for(index=0;index<80*22;++index)CHECK(cells[index].Char.UnicodeChar==L'Z' && cells[index].Attributes==0x1f);
+        }
+    }
 done:
+    if(frontend.console_output && frontend.console_output!=INVALID_HANDLE_VALUE)CloseHandle(frontend.console_output);
     if(incoming)CloseHandle(incoming);
     if(payload)HeapFree(GetProcessHeap(),0,payload);
     if(frontend.logical_surface && frontend.logical_surface!=INVALID_HANDLE_VALUE)

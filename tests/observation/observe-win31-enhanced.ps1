@@ -137,8 +137,12 @@ try {
                             }while([DateTime]::UtcNow -lt $deadline)
                             [IO.File]::AppendAllText("$root/mouse-observations.txt",
                                 "$($action.name) fresh-pixels=$changed capture=$capture`r`n")
-                            # Acknowledged input or changed pixels is not a click pass.
-                            # Retain the image for actual arrow/menu verification.
+                            # A changed surface is only transport evidence.  The
+                            # authoritative guest-consumption assertion is below:
+                            # after the complete move/down/up sequence it must
+                            # expose the exact Exit Windows confirmation dialog.
+                            # Program Manager does not reliably repaint its menu
+                            # hover selection for this synthetic relative route.
                         }
                         $mousePosted=$true
                         if($MouseExitSequence){Write-Output "Exit sequence posted; inspect fresh guest confirmation before confirming: frontend=$($p.Id) desktop=$desktop"}

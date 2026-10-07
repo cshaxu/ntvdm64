@@ -17,10 +17,9 @@ S1 concludes as limited research: actual /3 desktop/Notepad observations,
 checked retail-copy SFT adaptation, unresolved startup reliability and no
 normal-shutdown/general-compatibility claim.
 
-Use **T436 S1 → S2 → S3**. S2 is now the sole active packet; S3 remains a
-planned successor, not a concurrent admission. After
-the mouse implementation and its tests conclude, admit S3. Update CURRENT
-with each actual admission. S2's enhanced-mode input tests must distinguish
+Use **T436 S1 → S2 → S3**. S2 is concluded; S3 remains a planned successor,
+not a concurrent admission. Admit S3 separately before installation work.
+S2's enhanced-mode input tests distinguish
 startup failure from driver failure; accepted instability is not a passing
 mouse test. Standard-mode verification remains required.
 

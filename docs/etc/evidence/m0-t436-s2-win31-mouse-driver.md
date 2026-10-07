@@ -407,3 +407,91 @@ Both bounded processes end by observation timeout/owned cleanup, not success.
 No production file, original guest or mirror is changed. The next diagnostic
 would need exact Client_Get/decoder/command-ready status observation; current
 packet does not authorize an expanded production RPC repair or a guessed fix.
+
+## Temporary diagnostics identify the second viewport defect
+
+Owner grants standing approval for business-required temporary diagnosis.
+Test-only ntvdm_command_client_diagnostic.c includes the actual client with
+forwarding wrappers around Client_Get, reply application and command-ready;
+results/LastError and resource ownership are retained. No payload is logged.
+r062 links the original x86 NTVDM closure with only that client object replaced
+and preserves the original VDM_TIB check. Failed r059/r060/r061 build attempts
+are retained (wrong flags/link-rule extraction/formatting binding), not passes.
+
+r063 records Client_Get0, decoder TRUE/status0, then command-ready87. Thus
+request transport and reply decoding succeeded; I/O acquisition failed.
+r064/r065 adds test-only observation to the real console_grid primitive:
+window request0,0,79,21, storage80x22, native view0,0,52,14, maximum58x15,
+error87. Both diagnostic EXEs are restored in finally to exact published hashes;
+no diagnostic image enters release and no original guest/mirror/protocol changes.
+
+The remaining defect is prepare_logical_surface's repeat acquisition: it used
+the already-converted logical viewport80x22 as a native window before preserving
+storage. The prior frame-import repair did not cover this third call site.
+The bounded same-family repair queries the incoming native view and uses its
+extent for prerequisite shrink, retaining logical80x22, cursor and original
+cell-grid resize. Source diff is6 added/3 removed lines, no persistent state.
+
+r066 builds the affected AMD64 frontend closure. r067 adds a production-import
+reacquisition regression that keeps a smaller native view across two80x22
+acquisitions and checks every cell/attribute plus last-row cursor. It also
+catches unnecessary enlargement on a large host, rather than relying on one
+desktop's maximum.45045 checks, zero failures. Existing channel lifetime,
+frame/projection fault rollback and33-check text handoff pass with stable handles.
+
+r068 now actually executes the50-check guest mock with marker/exit0; r069
+actually executes real NT DOSX/provider16 checks with marker/exit0. Same
+release-identical driver/probe bytes as the previous failed attempts.
+r070 actually reaches Program Manager, consumes movement/down/up/menu exit,
+matches fresh Exit Windows confirmation, and returns exit0 in /S. These are
+restored runtime proofs, not retries that waive the prior failure. Experimental
+INI is restored; published original NTVDM remains6339F3CC. The tested NTCON
+9E480B890DF70EF346FA8927F93650CB96D0165E6CD0DBCA852E0EB34761B82A is published
+after focused gates; r071 serial product regressions follow. S2 reentry and
+enhanced cleanup remain pending; no stage closure is implied.
+
+## S2 conclusion
+
+S2 is complete.  The release `MOUSE31.DRV` is independently authored; fresh
+r090 rebuilds its NE/export contract and matches the released
+`D6BA5380A2EDCDB33E0C36850FB6BDD0542D78EC03B4A462B0A2F1A` byte-for-byte.
+Its real NT DOSX/DPMI provider route and INT33 callback ownership pass. r070
+is the decisive standard-mode production proof: its
+fresh Program Manager desktop receives the owned relative movement/down/up
+sequence, displays the exact Exit Windows confirmation dialog, receives Enter
+only after that dialog is matched, and returns `run16` with exit `0`.
+
+The /3 evidence is narrower: r020 and r022 observe movement/menu consumption
+and the real Exit Windows dialog when enhanced startup reaches its desktop;
+r023 documents the subsequent `ERROR_INVALID_PARAMETER`/timeout rather than
+calling it a successful normal return.  That retained enhanced startup/return
+instability is the owner-accepted S1 limitation, not a mouse-driver pass or a
+new S2 product claim.
+
+r088 attempted a fresh standard replay after the test harness changed its
+hover assertion.  It timed out before the harness reached its desktop image
+gate, while restoring the experimental `SYSTEM.INI` byte-for-byte in `finally`.
+It is therefore a harness-observation failure, not evidence against the
+driver.  Its prior “hover highlight” criterion was removed: an identical
+pre-click surface in r070 subsequently reached the Exit Windows dialog and
+normal exit, and Program Manager does not reliably repaint that hover row for
+the synthetic relative route.  The exact confirmation dialog and actual exit
+remain the authoritative assertion.
+
+The source manifest for r066 matches the current frontend sources; r067
+reports 45,045 focused checks with zero failures, r068/r069 pass the guest
+mock and real-provider checks, and r071/r072 retain serial targeted
+product-route evidence.  The deployed and released `ntcon.exe` now match
+`9E480B890DF70EF346FA8927F93650CB96D0165E6CD0DBCA852E0EB34761B82A`;
+the other nine host images match the same verified package.  S3 remains a
+separate, unadmitted installer task: it must provide `WINSTD.CMD/.PIF` and
+`WIN386.CMD/.PIF`, sharing `CONFIG.NT`/`AUTOEXEC.NT` only if their proven mode
+semantics permit it.
+
+A final direct-fixture convenience replay was deliberately not counted: the
+fixture expects a sufficiently large native Console. Direct invocation fails
+at its intentional 80x60 setup with `ERROR_INVALID_PARAMETER`; the fresh
+private-Console observer attempt r089 fails earlier with observer exit 93
+while establishing its 80x30 physical witness, before it starts the fixture.
+Those environment-capacity failures do not contradict r067's controlled
+45,045-check result and do not waive it; they are retained as non-passes.

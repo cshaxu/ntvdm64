@@ -225,7 +225,7 @@ done:
 }
 static DWORD prepare_logical_surface(frontend_session *frontend,COORD requested,BOOL *committed)
 {
-    CONSOLE_SCREEN_BUFFER_INFO visible;
+    CONSOLE_SCREEN_BUFFER_INFO visible,native;
     SMALL_RECT shrink,window;
     COORD cursor,viewport_size;
     DWORD error;
@@ -243,8 +243,11 @@ static DWORD prepare_logical_surface(frontend_session *frontend,COORD requested,
     if(cursor.X<0 || cursor.Y<0 || cursor.X>=viewport_size.X ||
         cursor.Y>=viewport_size.Y)cursor=(COORD){0,0};
     if(!SetConsoleCursorPosition(incoming,cursor)){error=GetLastError();goto fail;}
-    shrink=(SMALL_RECT){0,0,min(visible.dwSize.X,viewport_size.X)-1,
-        min(visible.dwSize.Y,viewport_size.Y)-1};
+    if(!GetConsoleScreenBufferInfo(incoming,&native)){error=GetLastError();goto fail;}
+    /* Logical viewports can exceed the host maximum after a prior handoff.
+     * Only shrink the actual native view before resizing copied storage. */
+    shrink=(SMALL_RECT){0,0,min(native.srWindow.Right-native.srWindow.Left+1,viewport_size.X)-1,
+        min(native.srWindow.Bottom-native.srWindow.Top+1,viewport_size.Y)-1};
     /* Window changes can resize/reflow even an inactive ConPTY buffer.
      * Preserve the copied cells at both calls, before requested conversion. */
     if(!opennt_console_resize_grid(incoming,NULL,TRUE,&shrink) ||

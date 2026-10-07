@@ -1639,13 +1639,32 @@ int main(int argc, char **argv)
         CONSOLE_FONT_INFOEX font={sizeof(font)};FILE *initial;
         DWORD n=GetEnvironmentVariableA("MVDM_OBSERVER_INITIAL_GEOMETRY",requested,sizeof(requested));
         if(n) {
-            int columns,rows;SMALL_RECT view;
+            int columns,rows;SMALL_RECT view,tiny={0,0,0,0};COORD size;
             if(n>=sizeof(requested) || sscanf_s(requested,"%d,%d",&columns,&rows)!=2 ||
                 columns<1 || columns>32767 || rows<1 || rows>32767 ||
                 !GetConsoleScreenBufferInfo(output,&info))return 93;
+            /* This observer owns a newly allocated Console.  Establish the
+             * requested physical baseline before starting the product, rather
+             * than letting a narrow controller/RDP viewport truncate the
+             * witness rows.  Product code never sees or performs this step. */
+            if(GetLargestConsoleWindowSize(output).X<columns ||
+               GetLargestConsoleWindowSize(output).Y<rows) {
+                font.dwFontSize.X=4;font.dwFontSize.Y=8;
+                if(!SetCurrentConsoleFontEx(output,FALSE,&font) ||
+                   !GetConsoleScreenBufferInfo(output,&info))return 93;
+            }
+            if(GetLargestConsoleWindowSize(output).X<columns ||
+               GetLargestConsoleWindowSize(output).Y<rows ||
+               !SetConsoleWindowInfo(output,TRUE,&tiny) ||
+               !SetConsoleCursorPosition(output,(COORD){0,0}))return 93;
+            size=(COORD){(SHORT)columns,(SHORT)max(info.dwSize.Y,rows)};
+            if(!SetConsoleScreenBufferSize(output,size))return 93;
             view=(SMALL_RECT){0,0,(SHORT)(columns-1),(SHORT)(rows-1)};
             if(!SetConsoleWindowInfo(output,TRUE,&view) ||
-                !SetConsoleScreenBufferSize(output,(COORD){(SHORT)columns,info.dwSize.Y}))return 93;
+               !GetConsoleScreenBufferInfo(output,&info) ||
+               info.dwSize.X!=columns ||
+               info.srWindow.Right-info.srWindow.Left+1!=columns ||
+               info.srWindow.Bottom-info.srWindow.Top+1!=rows)return 93;
         }
         if(!GetConsoleScreenBufferInfo(output,&info) || !GetCurrentConsoleFontEx(output,FALSE,&font))return 93;
         snprintf(path,sizeof(path),"%s.initial-console.txt",argv[3]);initial=fopen(path,"w");

@@ -196,7 +196,7 @@ if(!$OrdinaryFrontend -and @($matrix | Where-Object {$_.RootFrontend -and $_.Nam
         throw 'Owner cases require the test-only frontend observer in the isolated test package'
     }
 }
-$environmentNames = @('MVDM_BASESRV_TRACE_PATH','MVDM_S34_TRACE_PATH','MVDM_TEST_FRAME_REPORT','PATH')
+$environmentNames = @('MVDM_BASESRV_TRACE_PATH','MVDM_S34_TRACE_PATH','MVDM_TEST_FRAME_REPORT','MVDM_OBSERVER_INITIAL_GEOMETRY','PATH')
 $previous = @{}
 foreach ($name in $environmentNames) { $previous[$name]=[Environment]::GetEnvironmentVariable($name) }
 $results = @()
@@ -205,6 +205,10 @@ try {
     # ordinary user search input, not a product-owned package fallback.
     [Environment]::SetEnvironmentVariable('PATH',
         (Join-Path $PackageRoot 'system32')+';'+$previous['PATH'])
+    # The observer owns a disposable Console.  Its fixed 80-column baseline
+    # prevents a remote controller viewport from truncating marker text; this
+    # is test setup only, never a product geometry request.
+    [Environment]::SetEnvironmentVariable('MVDM_OBSERVER_INITIAL_GEOMETRY','80,30')
     foreach ($case in $matrix) {
         if (($case.Negative -or $case.Supplemental) -and !$Cases) { continue }
         if ($Cases -and $case.Name -notin $Cases) { continue }
