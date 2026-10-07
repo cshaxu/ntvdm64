@@ -20,7 +20,8 @@ and the released `MOUSE31.DRV`; it never invents an alternative mode or falls
 back from `/3` to `/S`.
 
 Run `<package>\PATCH\SETUP.CMD`, choose the destination in original Setup,
-then supply that actual destination when prompted. The script runs Setup from a
+finish and close Setup, then supply that actual destination when prompted. The
+script creates a package-local setup PIF/profile and runs Setup from the
 package's unchanged media root; it does not create a `WORK` copy. The
 installed destination receives its own self-contained `PATCH` directory:
 

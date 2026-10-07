@@ -45,14 +45,23 @@ profile edit, guest hot patch, or host-product image change occurred.
    idempotent. `win31_setup_package_test.ps1` scanned installed PIF/CMD/NT
    content for package/repository/WORK dependencies and passed.
 6. `win31_setup_runner_test.ps1` substituted only PATH `run16` with a bounded
-   test command. It proves `run-setup.ps1` calls package-root `SETUP.EXE`,
-   preserves the returned exit code, and creates no WORK directory; no real
-   Setup process was started by that fixture.
+   test command. It proves `run-setup.ps1` first generates package-local
+   `SETUP.PIF`, `CONFIG.NT`, and `AUTOEXEC.NT`, invokes that PIF through PATH
+   `run16`, preserves the returned exit code, and creates no WORK directory.
+7. A failed first hand launch exposed that a bare `SETUP.EXE` is a Win16 NE
+   GUI program, not a synchronous DOS task. The repaired runner now creates
+   the profile-bound Setup PIF at the actual package path. A short live
+   probe reached a live `run16` plus its new WOW/NTVDM session; it was then
+   explicitly terminated and all generated probe files were removed. This
+   proves the corrected entry boundary, not original Setup completion.
 
 ## Limitations and follow-up
 
 The final hand-test package is rebuilt from the subsequently supplied original
 compressed Setup media; its 467 original media files are byte-identical and
-`PATCH` is the only added root entry. It contains no WORK tree. Actual original Setup,
-physical installation selection, and owner hand-test remain the final T436
-acceptance step. Existing S1 enhanced instability remains unchanged.
+`PATCH` is the only added root entry. It contains no WORK tree. The generated
+Setup PIF/profile is intentionally not retained in the clean package: every
+`SETUP.CMD` execution recreates it for that package's actual location. Actual
+original Setup, physical installation selection, and owner hand-test remain
+the final T436 acceptance step. Existing S1 enhanced instability remains
+unchanged.

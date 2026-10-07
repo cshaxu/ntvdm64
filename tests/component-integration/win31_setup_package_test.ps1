@@ -12,6 +12,8 @@ foreach($name in @('SETUP.CMD','configure-launch.ps1','run-setup.ps1','WIN31-TEM
     if(!(Test-Path -LiteralPath (Join-Path $payload $name) -PathType Leaf)) {throw "Missing package payload: $name"}
 }
 if(Test-Path -LiteralPath (Join-Path $payload 'WORK')) {throw 'Package contains temporary WORK'}
+$runner=Get-Content -LiteralPath (Join-Path $payload 'run-setup.ps1') -Raw
+foreach($marker in @("'SETUP.PIF'", "'CONFIG.NT'", "'AUTOEXEC.NT'")) {if(!$runner.Contains($marker)) {throw "Setup runner lacks required package-local Win16 setup profile: $marker"}}
 & (Join-Path $repo 'tests\component-integration\win31_launch_profile_test.ps1') -InstallRoot $install -ProfileDirectory (Join-Path $install 'PATCH')
 foreach($file in @(Get-ChildItem -LiteralPath (Join-Path $install 'PATCH') -File | Where-Object {$_.Extension -in @('.CMD','.NT','.PIF')})) {
     $bytes = [IO.File]::ReadAllBytes($file.FullName)

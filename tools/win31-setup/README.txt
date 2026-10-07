@@ -4,9 +4,10 @@ Windows 3.1 original-Setup PATCH
 This PATCH adds only authored setup support and MOUSE31.DRV. It does not
 replace original media or default NT config files.
 
-1. Run PATCH\SETUP.CMD from a short physical path. It runs original Setup
-   directly from this package's media root and asks for the
-   actual directory selected by Setup.
+1. Run PATCH\SETUP.CMD from a short physical path. It creates a package-local
+   SETUP.PIF/profile, launches original Win16 Setup from this package's media
+   root, then waits for you to finish Setup before asking for the actual
+   directory selected by Setup.
 2. After postconfiguration, use exactly one installed entry point:
      PATCH\WINSTD.CMD   standard mode (/S)
      PATCH\WIN386.CMD   386 enhanced mode (/3)

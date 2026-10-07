@@ -51,6 +51,10 @@ if(Test-Path -LiteralPath $patch) {
     }
     foreach($item in @(Get-ChildItem -LiteralPath $patch -Recurse -File)) {
         $relative = $item.FullName.Substring($patch.Length + 1)
+        # Runtime Setup scratch is expressly package-owned.  It is not part
+        # of the authored payload and must not make a failed Setup impossible
+        # to repair/repackage; every other unknown PATCH file remains guarded.
+        if($relative -like 'TEMP\*') {continue}
         if($relative -ne 'addon-files.json' -and !$owned.ContainsKey($relative)) {
             throw "Preserve unknown existing PATCH payload: $relative"
         }
