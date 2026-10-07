@@ -1,5 +1,14 @@
 # Source Layout
 
+## Owner-approved independent guest add-on — T435
+
+`src/ADDON/Mouse Driver 101/` is the owner's explicit source destination for
+an independently authored Windows 1.01 INT33 bridge mouse driver. It is not
+part of the OpenNT mirrors, a host executable or a host link dependency.
+Generated guest products remain under build/; original guest media/core stay
+immutable. S1 admits placement/design only; implementation and installation
+follow the active sequential stage's ABI, provenance and test gates.
+
 ## Selective native-width migration admission
 
 Owner admits run16-exe, ntcon-exe, ntmon-exe and the single ntvwm-exe x64-only migration, initially
