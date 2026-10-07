@@ -39,9 +39,19 @@ one final acceptance round. Do not close T436 before that acceptance.
 
 ## Deliverables and ownership
 
-- **S3** `src/addon/win31-setup`: original Setup orchestration, packaging, checked
+Owner adds both compiled independent mouse drivers to assets/release with a
+separate add-on identity manifest, leaving the ten-host-image manifest intact.
+S2 delivers these artifacts and Win1.01's interactive apply-setup entrypoint;
+S3 delivers Win3.1's equivalent. Each accepts the actual original-media path,
+copies the release driver plus authored installer additions into media/PATCH,
+and preserves original media. Installed profiles/runtime add-ons belong to
+installed/PATCH and must not depend on the media/repository after installation.
+The Win1.01 accepted original-Setup workflow is retained, not reimplemented.
+
+- **S3** `tools/win31-setup`: original Setup orchestration, packaging, checked
   installation of adaptations accepted from S1, PIF/config generation and
-  launch templates/readmes. Use the existing singular `addon` root.
+  launch templates/readmes. Mirror the owner-approved tools/win101-setup home;
+  independently authored mouse-driver sources alone remain under src/addon.
 - **S2** `src/addon/win31-mouse-drv`: independently authored Windows 3.1 mouse
   adaptation to NTVDM's existing mouse capability. Audit the actual Win3.1
   driver ABI and standard/enhanced mode boundaries first; do not rename or

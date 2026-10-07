@@ -15,6 +15,19 @@ DPMI16-case checks and actual /S /3 movement/menu observations are recorded in
 passes actual /S return (exit0) and17 Console plus17 Window routes. No S2 closure
 or S3 admission is presumed; all
 candidate source/evidence is preserved and experimental INI restored.
+Owner adds release delivery of both compiled mouse drivers and a Win1.01
+interactive media-PATCH preparation entrypoint using those release artifacts.
+Implement under build/M0-T436/S2/r037-addon-release with all task writes on O:;
+C: tooling is read-only and E:/X:/Y: are excluded. S3 retains actual Win3.1
+installer preparation with the same package/installed PATCH independence.
+Owner also authorizes committing the obsolete src/interface/README.md deletion.
+Owner moves installer tooling to tools/win101-setup and future tools/win31-setup;
+driver sources remain src/addon. Preserve the original/installed PATCH workflow.
+Both NE driver assets and the separate add-on manifest are synchronized;
+Win101 is verified, Win31 remains candidate. Moved-tool package/profile/negative
+tests pass; refreshed Win101 ZIP preserves original media. New provider replays
+fail before guest test execution at environment setup and remain non-passes.
+S2 is still active; no S3 admission or closure is claimed by this delivery.
 Owner closes T435 and directly admits the former queue-tail Windows 3.x
 candidate, prioritizing Windows 3.1. [T435 closure](../history/m0-t435-win101-addon-closure.md)
 records accepted installation/add-on delivery and preserved compatibility limits.
@@ -29,7 +42,7 @@ records accepted installation/add-on delivery and preserved compatibility limits
 | Objective | Audit and implement an independently authored Windows 3.1 mouse driver using the existing NTVDM mouse provider; verify standard/enhanced entry, movement, clicks, show/hide and cleanup. Preserve original guest/host execution and default profiles. |
 | Non-goals | No CPU/device/mirror rewrite, runtime hot-patch, new helper/component/protocol or renewed enhanced-startup investigation. Do not blindly reuse the Win1.01 real-mode callback in protected Win3.1. Installer delivery belongs to S3; enhanced instability remains an explicit accepted limitation. |
 | Reference Baseline | Published T435 S2 APP0.0.435/RPC45/I/O25 ten images and matching assets/release manifest; accepted Windows 1.01 guest execution/mouse and S3 installation workflow. |
-| Files And ABI Surface | src/addon/win31-mouse-drv independent guest driver; approved src/ntcon-exe/frontend_session.c hidden-buffer preparation repair and focused production-linked tests. Build under build/M0-T436/S2. Driver/profile selection only on recoverable installation copies or installation PATCH; originals and defaults remain intact. No mirror/guest/wire change. |
+| Files And ABI Surface | src/addon/win31-mouse-drv independent guest driver; approved NTCON repair; assets/release/MOUSE101.DRV and MOUSE31.DRV with separate add-on manifest; tools/win101-setup interactive application script and tests. Build under build/M0-T436/S2. Driver/profile selection only on recoverable copies or installation PATCH; originals and defaults remain intact. No mirror/guest/wire change. |
 | Applicable Rules | AGENTS reading set, EXECUTION, architecture/coding/document rules, source policy and original guest immutability; inherited host defects only matching existing SoftPC correction, project defects separately designed. |
 | Verification | Exact Win3.1 NE/export/Inquire/event/callback ABI; real/protected-mode transition and callback ownership; guest-build positives/negatives and real INT33 route. Observe actual arrow movement and down/up behavior, balanced enable/disable and restart in /S and /3, distinguishing inherited startup failures. Pin owned processes, preserve hashes, no mappings. Governance/link/diff review. |
 | Expected Markers | Built independent driver, ABI/relocation proof, reversible provider callback installation, actual Windows input consumption, mode-specific pass/failure evidence and no original/default changes. |

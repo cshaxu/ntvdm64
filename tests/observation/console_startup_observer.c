@@ -1634,6 +1634,27 @@ int main(int argc, char **argv)
     SetEnvironmentVariableA("MVDM_MAIN_RETURN_REPORT_PATH", main_return_report_path);
     SetEnvironmentVariableA("MVDM_BASE_VDM_REPORT_PATH", base_vdm_report_path);
 
+    {
+        char requested[40],path[MAX_PATH];CONSOLE_SCREEN_BUFFER_INFO info;
+        CONSOLE_FONT_INFOEX font={sizeof(font)};FILE *initial;
+        DWORD n=GetEnvironmentVariableA("MVDM_OBSERVER_INITIAL_GEOMETRY",requested,sizeof(requested));
+        if(n) {
+            int columns,rows;SMALL_RECT view;
+            if(n>=sizeof(requested) || sscanf_s(requested,"%d,%d",&columns,&rows)!=2 ||
+                columns<1 || columns>32767 || rows<1 || rows>32767 ||
+                !GetConsoleScreenBufferInfo(output,&info))return 93;
+            view=(SMALL_RECT){0,0,(SHORT)(columns-1),(SHORT)(rows-1)};
+            if(!SetConsoleWindowInfo(output,TRUE,&view) ||
+                !SetConsoleScreenBufferSize(output,(COORD){(SHORT)columns,info.dwSize.Y}))return 93;
+        }
+        if(!GetConsoleScreenBufferInfo(output,&info) || !GetCurrentConsoleFontEx(output,FALSE,&font))return 93;
+        snprintf(path,sizeof(path),"%s.initial-console.txt",argv[3]);initial=fopen(path,"w");
+        if(!initial)return 70;
+        fprintf(initial,"buffer=%d,%d viewport=%d,%d,%d,%d maximum=%d,%d font=%d,%d\n",
+            info.dwSize.X,info.dwSize.Y,info.srWindow.Left,info.srWindow.Top,
+            info.srWindow.Right,info.srWindow.Bottom,info.dwMaximumWindowSize.X,info.dwMaximumWindowSize.Y,
+            font.dwFontSize.X,font.dwFontSize.Y);fclose(initial);
+    }
     if (!CreateProcessA(NULL, command_line, NULL, NULL, TRUE, 0, NULL, argv[2],
                         &startup, &child)) {
         if (had_previous_exception_report)

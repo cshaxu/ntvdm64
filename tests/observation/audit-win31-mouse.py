@@ -47,7 +47,7 @@ imports=[];table=n+u16(n+40)
 for i in range(u16(n+30)):
     pos=n+u16(n+42)+u16(table+2*i);size=b[pos]
     imports.append(b[pos+1:pos+1+size].decode('ascii'))
-result={'role':'original-media-ABI-evidence-not-implementation','driver':str(path),
+result={'role':'read-only-NE-ABI-evidence-not-runtime-validation','driver':str(path),
         'sha256':hashlib.sha256(b).hexdigest(),'neVersion':hex(u16(n+62)),
         'flags':hex(u16(n+12)),'automaticDataSegment':u16(n+14),
         'segments':segments,'entries':entries,'imports':imports,

@@ -319,3 +319,69 @@ byte-identical; no WOW repair is implied. The temporary media copies are removed
 after hash-checked cleanup. Complete ten-image published/assets equality and
 documentation governance/diff checks pass. This is an intermediate host repair
 delivery; the remaining independent mouse-driver candidate stays unclosed.
+
+## Compiled add-on release and tools-owned Setup entrypoint
+
+Owner adds compiled MOUSE101.DRV / MOUSE31.DRV to assets/release, with a
+separate addon-manifest.json (the ten-host-image manifest is unchanged).
+Stage-MouseDriverRelease.ps1 validates source and output hashes against each
+build before copying. r038/r039 rebuild both NE artifacts; Win101 SHA256
+DC01039B0FC2B7E9244F31A42A4AAA9ED10613291557B4B6E2695ECE1BA5666E
+equals the accepted win101-setup.zip PATCH/MOUSE.DRV byte-for-byte. Win31
+SHA256D6BA5380A2EDCDB33E0C36850FB6BDD0542D78EC03E982DBD5114A462B0A2F1A
+and source22D0A16DC701CA058BFC4357A155460C06187CBB0DDB6A3805735067CC19FCB9
+match r015/r016/r017/r033's tested driver. Win31 is explicitly candidate;
+normal reentry/enhanced cleanup remain open. Duplicate build/readme lines are
+removed, not a driver semantic change.
+
+Owner subsequently relocates all Win101 installer tooling to
+tools/win101-setup; future Win31 setup is tools/win31-setup at S3. Independent
+driver sources stay src/addon. git mv preserves modified/untracked files;
+root derivation, component-test callers and current design/plan references are
+updated. Historical run paths remain historical evidence, not live callers.
+The owner explicitly authorizes deletion of src/interface/README.md, the
+obsolete declaration-owner marker displaced by common/protocol.
+
+apply-setup.cmd invokes the adjacent script, prompts for original media and
+leaves output visible. apply-setup.ps1 reads the release driver/manifest,
+preserves original root files, validates accepted/owned PATCH identities and
+refuses unknown modified files before writes. Its PIF/SETVER support comes
+from the accepted existing ZIP; no installer compilation or build path is
+required. The advanced package entrypoint uses the same implementation, not
+a second PATCH assembler. Installed PATCH keeps MOUSE.DRV alongside profiles;
+actual Win101 still uses the original-Setup-embedded module. Existing plain
+run16/PATH, pause, result, WORK cleanup and package independence remain.
+
+verify-win101-release-setup.ps1 r040 correctly rejects a64-byte profile path.
+r41 exposes a test expectation that omitted the existing call prefix; that
+assertion is corrected to the exact call run16 adjacent-PIF command, not to
+permit a hardcoded launcher. r42/r48/r50 pass unchanged-original-media,
+repeat-apply, unknown-file preservation, modified-file refusal, corrupted
+release-driver refusal and installed-PATCH identity/independence. These use
+inert installed-file sentinels and never execute original Setup or Windows.
+r043/r049/r051/r055 pass complete packaging with no WORK or root-media changes.
+
+The old launch-profile fixture reveals a real Get-Command ambiguity when two
+PATH run16 applications exist: concatenating their Source values is not a
+valid executable. run-setup now selects the first matching application.
+r054 passes all existing PIF/destination/three-refusal/result/WORK-cleanup
+assertions with a PATH launcher fixture. r053 passes localized Win101 image
+installation, immutable inputs and four malformed-image refusals through the
+moved tool, without modifying the original O:/win101 image.
+
+r055 refreshes assets/win101-setup.zip from the accepted original media with
+current authored PATCH payloads, retaining a recoverable previous archive.
+Every original root-file hash is unchanged, and no WORK is shipped. This is
+package preparation, not new original-Setup/guest-execution acceptance.
+
+New provider replays are retained as non-passes: r044 fails before the probe
+on the known long TEMP path; r045/r047 with short O: TEMP fail at application
+environment setup, before mouse-test execution. A restricted PATH containing
+only O: and read-only C: system directories does not resolve it. No retry is
+counted as a pass or used to claim driver correctness. Default CONFIG.NT and
+AUTOEXEC.NT and the published NTVDM/NTCON hashes remain exact; attribution of
+this new runtime prerequisite failure is not established. Prior source/binary-
+identical provider results remain evidence, not successful new replays. The
+driver stays candidate and S2 remains open. S3 is not admitted by this tooling
+delivery. Task file writes/temp stay on O:, C: tooling is read-only, E:/X:/Y:
+are excluded, and no subst is used.

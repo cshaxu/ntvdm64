@@ -30,6 +30,7 @@ if($Mode -eq 'Setup') {
 if($Mode -eq 'Installed') {
     New-Item -ItemType Directory -Path $temp -Force|Out-Null
     Copy-Item -LiteralPath "$package/SETVER.EXE" -Destination "$profile/SETVER.EXE" -Force
+    Copy-Item -LiteralPath "$package/MOUSE.DRV" -Destination "$profile/MOUSE.DRV" -Force
 }
 $pif=[IO.File]::ReadAllBytes($template)
 if($pif.Length -lt 391){throw 'Truncated reference PIF'}

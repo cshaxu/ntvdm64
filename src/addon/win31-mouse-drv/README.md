@@ -2,7 +2,11 @@
 
 T436 S2 independent guest add-on. This is not an OpenNT mirror, host library,
 new process or replacement CPU/device implementation. Implementation and
-runtime verification are in progress; no driver has been published yet.
+runtime verification are in progress. The release copy is assets/release/MOUSE31.DRV,
+with exact source/binary identity and candidate acceptance in addon-manifest.json.
+Provider tests and /S /3 desktop input plus /S normal return are verified;
+normal reentry and enhanced cleanup remain open. Use tests/observation/build-win31-mouse-driver.ps1 with a
+fresh absolute BuildRoot below build/ and an explicit Python interpreter.
 
 ## Selected boundary
 
@@ -13,6 +17,9 @@ runtime verification are in progress; no driver has been published yet.
 - Use the existing DPMI simulated real interrupt and callback services for
   raw INT33 calls and a protected callback. Save/restore the prior real-mode
   callback with INT33 exchange; balance only the bridge's own pointer hide.
+- Real-mode ES values are numeric SI/packet fields. Never load a returned
+  real segment into protected ES. Only the protected register-image pointer
+  uses ES; a real DPMI test caught and verified this correction.
 - Do not rely on the OpenNT DOSX function20 reflector: dxintr.asm explicitly
   leaves exchange translation unimplemented. The retail DOSX/VMM contract
   still requires actual mode-specific runtime tests.

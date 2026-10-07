@@ -14,7 +14,9 @@ it is not a mirror, host component or host link input. Driver artifacts and
 tests remain build-owned. S3 will consolidate launch/setup implementations.
 
 Owner renames driver source to `src/addon/win101-mouse-drv/` and assigns all
-installation/patch implementation to `src/addon/win101-setup/`. These are the destinations for
+installation/patch implementation to `tools/win101-setup/` (owner's subsequent
+source-home correction). Future Win3.1 setup belongs to `tools/win31-setup/`.
+Driver sources remain under src/addon. These are the destinations for
 an independently authored Windows 1.01 INT33 bridge mouse driver. It is not
 part of the OpenNT mirrors, a host executable or a host link dependency.
 Generated guest products remain under build/; original guest media/core stay

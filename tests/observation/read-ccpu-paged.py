@@ -76,6 +76,17 @@ try:
             'cpuFlags':{'if':flags[9],'vm':flags[17],'iopl':flags[12],'cpl':cpl},
             'registers':[hex(x) for x in gr],'segments':[{'selector':hex(s[0]),'big':s[7],'base':hex(s[8]),'limit':hex(s[9])} for s in segments]}
     result['hostTimerDiagnostic']={}
+    result['textGeometry']={}
+    for name in ['_now_width','_now_height']:
+        match=re.search(r'^\s*\S+\s+'+re.escape(name)+r'\s+([0-9A-Fa-f]+)\s',maps,re.M)
+        if match:result['textGeometry'][name]=struct.unpack('<i',read(module.base+int(match[1],16)-preferred,4))[0]
+    for label in ['physical','currentLinear']:
+        try:
+            data=physical(0x449,0x3e) if label=='physical' else bytes.fromhex(linear_bytes(0x449,0x3e)[0])
+            result['textGeometry'][label]={'biosMode':data[0],
+                'biosColumns':struct.unpack_from('<H',data,1)[0],
+                'biosRows':data[0x3b]+1,'biosCharHeight':struct.unpack_from('<H',data,0x3c)[0]}
+        except (ValueError,OSError) as e:result['textGeometry'][label]={'unavailable':str(e)}
     for name,size in [('_TimerEventUSec',8),('_CurrHeartBeat',8),
                       ('_LastTimeCounterZero',8),('_ticks_blocked',4),
                       ('_timer_int_enabled',4),('_timers',128)]:

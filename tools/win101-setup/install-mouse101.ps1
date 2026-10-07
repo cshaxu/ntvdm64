@@ -4,7 +4,7 @@ param(
     [Parameter(Mandatory)][string]$OutputRoot
 )
 $ErrorActionPreference='Stop'
-$repo=(Resolve-Path "$PSScriptRoot/../../..").Path
+$repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $output=[IO.Path]::GetFullPath($OutputRoot)
 if(!$output.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -or
    (Test-Path -LiteralPath $output)) { throw 'Fresh build-owned output required' }

@@ -15,6 +15,8 @@ Windows 1.01 / NTVDM INT33 mouse installer
    AUTOEXEC.NT, SETVER.EXE and win.cmd under that destination's PATCH.
    Win1.01 uses SETVER; no Win3.1 /S switch or NT/WOW DOSX is loaded.
 6. Run the installed PATCH\win.cmd.
+   Installed PATCH also contains the same independent MOUSE.DRV; actual
+   Win1.01 execution uses the mouse module embedded by original Setup.
    Root WIN.PIF and SETUP.PIF are also generated using installed PATCH profiles.
    Copied root CONFIG.NT/AUTOEXEC.NT are rewritten to installed paths.
    You can remove the installation package afterwards: no installed launch

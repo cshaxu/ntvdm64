@@ -156,6 +156,17 @@ rebuild or redeployment, but must not present stale assets as current releases.
 Guest/setup ZIP archives have separate purposes and are not automatically
 rebuilt by this ten-component synchronization rule.
 
+Owner clarification for T436 add-on delivery: assets/release also contains the
+compiled independently authored MOUSE101.DRV and MOUSE31.DRV. Their separate
+addon-manifest.json records source/binary hashes and verified versus candidate
+acceptance; never add them to the ten-host-image manifest. A driver-source
+delivery rebuilds and verifies its affected guest add-on before synchronization.
+Setup preparation consumes these release artifacts, not a disposable driver
+build directory. Authored installer additions stay in media/PATCH, and installed
+runtime profiles/add-ons stay in installed/PATCH without media/repository
+dependencies. Keep original media unchanged and retain the accepted Win1.01
+original-Setup workflow. Reproducible producer is Stage-MouseDriverRelease.ps1.
+
 Owner-admitted T423 S12 will add ntvwm.exe to the seven-file package described
 below. Starting with S12 NTVWM production delivery, require one coherent eight-file set;
 all prior regression, recovery and publication gates remain binding. The new

@@ -1,8 +1,18 @@
 # Windows 1.01 Setup additions
 
 Owner-assigned source home for installer/patch scripts and launch templates.
-The independent driver source stays in ../win101-mouse-drv; neither directory
+The independent driver source stays in src/addon/win101-mouse-drv; neither directory
 is an OpenNT mirror or a host executable component.
+
+Run `apply-setup.cmd` in this source directory. It asks for the original
+Windows1.01 media directory, reads the compiled MOUSE101.DRV from assets/release,
+validates its add-on manifest/hash and creates media/PATCH. PowerShell callers
+may supply `-MediaRoot <directory>` to apply-setup.ps1. No assembler or driver
+build directory is required. PIF/SETVER support comes from the already accepted
+assets/win101-setup.zip; installer scripts come from this directory.
+Original media stay untouched. Existing accepted/owned PATCH files can be
+updated; unknown modified files are refused before any write, and unrelated
+PATCH files are retained. No WORK directory is generated or shipped at this step.
 
 package-win101-setup.ps1 prepares unchanged original flat media at the package
 root and puts all additions under PATCH. PATCH/SETUP.CMD resolves run16 from
@@ -43,7 +53,8 @@ Generated PIF/config files contain the actual supplied paths, not a fixed
 default. Regenerate them after relocating the installed directory.
 
 For package preparation, explicitly supply `-BuildRoot`, `-OriginalMedia`,
-`-DriverBuild`, `-Destination`, `-SetverPath` and `-PifTemplate`.
+`-Destination`, `-SetverPath` and `-PifTemplate`; `-ReleaseRoot` optionally
+selects another explicitly validated release directory.
 There are no machine-specific input-path defaults. Existing-package replacement
 requires its previous manifest and retains a recoverable directory backup.
 

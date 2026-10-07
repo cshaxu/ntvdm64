@@ -2,7 +2,7 @@ param([string]$InstallRoot,[switch]$ConfigureAfterFailure)
 $ErrorActionPreference='Stop'
 $work=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot 'WORK'))
 if(Test-Path -LiteralPath $work){throw 'WORK already exists; preserve and move it aside before starting Setup'}
-$launcher=Get-Command run16 -CommandType Application -ErrorAction Stop
+$launcher=Get-Command run16 -CommandType Application -ErrorAction Stop|Select-Object -First 1
 $oldLocation=Get-Location
 $oldTemp=$env:TEMP;$oldTmp=$env:TMP
 $result=1

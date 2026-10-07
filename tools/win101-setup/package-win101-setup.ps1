@@ -1,12 +1,12 @@
 param([Parameter(Mandatory)][string]$BuildRoot,
       [Parameter(Mandatory)][string]$OriginalMedia,
-      [Parameter(Mandatory)][string]$DriverBuild,
+      [string]$ReleaseRoot='',
       [Parameter(Mandatory)][string]$Destination,
       [Parameter(Mandatory)][string]$SetverPath,
       [Parameter(Mandatory)][string]$PifTemplate,
       [string]$PreviousManifest='')
 $ErrorActionPreference='Stop'
-$repo=(Resolve-Path "$PSScriptRoot/../../..").Path
+$repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $root=[IO.Path]::GetFullPath((Join-Path $repo $BuildRoot))
 if(!$root.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)) {
     throw 'Fresh build-owned packaging evidence required'
@@ -25,7 +25,8 @@ if(Test-Path $Destination) {
     }
 }
 $source=(Resolve-Path $OriginalMedia).Path
-$driver=(Resolve-Path (Join-Path $repo $DriverBuild)).Path
+if(!$ReleaseRoot){$ReleaseRoot=Join-Path $repo 'assets/release'}
+$driver=(Resolve-Path -LiteralPath $ReleaseRoot).Path
 $addon=$PSScriptRoot
 $mouseSource=Join-Path $repo 'src/addon/win101-mouse-drv'
 foreach($inputPath in @($source,$driver,(Resolve-Path $SetverPath).Path,(Resolve-Path $PifTemplate).Path)) {
@@ -41,19 +42,12 @@ $stage=Join-Path $root 'package'
 New-Item -ItemType Directory -Path $stage -Force|Out-Null
 $patch=Join-Path $stage 'PATCH'
 New-Item -ItemType Directory -Path $patch | Out-Null
-Copy-Item -LiteralPath $SetverPath -Destination "$patch/SETVER.EXE"
 $original=@(Get-ChildItem -LiteralPath $source -File|ForEach-Object {
     Copy-Item -LiteralPath $_.FullName -Destination $stage
     @{name=$_.Name;sha256=(Get-FileHash $_.FullName).Hash;length=$_.Length}
 })
-Copy-Item -LiteralPath "$driver/MOUSE101.DRV" -Destination "$patch/MOUSE.DRV"
+& "$addon/apply-setup.ps1" -MediaRoot $stage -ReleaseRoot $driver -SetverPath $SetverPath -PifTemplate $PifTemplate
 Copy-Item -LiteralPath "$mouseSource/mouse101.asm" -Destination $patch
-Copy-Item -LiteralPath $PifTemplate -Destination "$patch/WIN31-TEMPLATE.PIF"
-foreach($name in @('configure-launch.ps1','run-setup.ps1','win.cmd.template')) {
-    Copy-Item -LiteralPath "$addon/$name" -Destination $patch
-}
-Copy-Item -LiteralPath "$addon/setup.cmd.template" -Destination "$patch/SETUP.CMD"
-Copy-Item -LiteralPath "$addon/setup-readme.txt" -Destination "$patch/README.txt"
 # Generate WORK/PIF only when the owner starts Setup at its real short path.
 # Packaging does not create disposable work or use any drive substitution.
 $manifest=@(Get-ChildItem $stage -Recurse -File|ForEach-Object {

@@ -9,7 +9,7 @@ if(!$root.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIg
 }
 $original=(Resolve-Path $OriginalImage).Path;$driverPath=(Resolve-Path $Driver).Path
 $imageHash=(Get-FileHash $original).Hash;$driverHash=(Get-FileHash $driverPath).Hash
-$installer=Join-Path $repo 'src/addon/win101-setup/install-mouse101.ps1'
+$installer=Join-Path $repo 'tools/win101-setup/install-mouse101.ps1'
 New-Item -ItemType Directory -Path $root | Out-Null
 & $installer -OriginalImage $original -Driver $driverPath -OutputRoot "$root/positive"
 $proof=Get-Content "$root/positive/installation.json" -Raw | ConvertFrom-Json

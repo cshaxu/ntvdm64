@@ -7,12 +7,13 @@ $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -or
    (Test-Path $root)){throw 'Fresh build-owned fixture required'}
 New-Item -ItemType Directory -Path $root|Out-Null
-$source=Join-Path $repo 'src/addon/win101-setup'
+$source=Join-Path $repo 'tools/win101-setup'
 foreach($name in @('configure-launch.ps1','run-setup.ps1','win.cmd.template')) {
     Copy-Item -LiteralPath "$source/$name" -Destination $root
 }
 Copy-Item -LiteralPath $PifTemplate -Destination "$root/WIN31-TEMPLATE.PIF"
 Copy-Item -LiteralPath $SetverPath -Destination "$root/SETVER.EXE"
+Copy-Item -LiteralPath (Join-Path $repo 'assets/release/MOUSE101.DRV') -Destination "$root/MOUSE.DRV"
 # Deliberately inert existence fixtures, never executable guest replacements.
 foreach($name in @('WIN.COM','WIN100.BIN','WIN100.OVL','SETUP.EXE')) {
     [IO.File]::WriteAllBytes("$root/$name",[byte[]]@(0))
@@ -58,7 +59,6 @@ foreach($invalid in @("$root\missing", "$root\bad path", ("$root\"+('x'*70)))) {
 }
 if((Get-FileHash "$root/PATCH/WIN101.PIF").Hash -ne $before){throw 'Refusal mutated valid PIF'}
 # Exercise orchestration with a PATH launcher fixture, never original Setup.
-[IO.File]::WriteAllBytes("$root/MOUSE.DRV",[byte[]]@(0))
 [IO.File]::WriteAllText("$root/run16.cmd",@'
 @echo off
 if not "%WIN101_TEST_EXIT%"=="0" exit /b %WIN101_TEST_EXIT%
