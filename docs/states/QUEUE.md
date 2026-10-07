@@ -2,6 +2,9 @@
 
 This is the authoritative ordered queue of **unnumbered candidate T packages**.
 The current package is admitted in Status and absent here.
+Owner closes the Windows 1.01 package and directly admits the former queue-tail
+Windows 3.x non-WOW candidate, starting with Windows 3.1. It is now absent from
+this queue; all other candidates retain their relative order.
 The Windows 1.01 EGA/InPort candidate has now been admitted in CURRENT;
 performance is the head and all later candidates retain relative order.
 Owner admits the former read-only task-trace head after native-component
@@ -106,7 +109,6 @@ later package merely because an earlier linked component has no runtime proof.
 | 23 | OpenNT error-dialog response and termination semantics recovery — restore and verify residual source-defined response and completion paths; reuse WOW-owned results, bringing forward only dependencies needed for safe WOW execution. | [Proposal](../proposals/proposal-error-dialog-termination-semantics-restoration-001.md) |
 | 24 | MVDM whole-closure completeness audit and recovery — repair missing/cropped/unconnected originals and remove the local providers displaced by those recoveries; hand off the reconciled inventory to minimization. | [Proposal](../proposals/proposal-mvdm-whole-closure-recovery-001.md) |
 | 25 | Project-wide original-source implementation minimization review — reuse the closure inventory to consolidate remaining duplicate or unnecessary implementations, mirror diffs, overlays and bindings without losing verified capabilities. | [Proposal](../proposals/proposal-original-source-implementation-minimization-review-001.md) |
-| 26 | Windows 3.x non-WOW feasibility — investigate guest execution by version/mode, with explicit dependencies, failure boundaries and separately admitted implementation. | [Proposal](../proposals/proposal-windows-3x-dos-runtime-001.md) |
 
 Owner direction dated 2026-09-28 promoted root/search isolation from the tail
 to the then-head and replaced the aggregate WOW32 candidate with twenty independent
