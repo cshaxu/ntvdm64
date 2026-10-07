@@ -344,3 +344,8 @@ remain preserved. Physical Raw Input/RDP capture, dragging/general Win1.01
 application compatibility and inherited InPort/checksum defects are not claimed
 as fixed; the driver accepts the owner-selected INT33 contract. S2 meets its
 implementation/test/publication boundary; T435 awaits owner acceptance.
+
+Production/source/test/evidence P is263118b33, pushed to main. Documentation
+governance and staged diff checks pass; original mirror paths have no changes.
+The final status stamp is a documentation-only follow-up, not another product
+package or an additional runtime-capability claim.

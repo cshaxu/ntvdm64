@@ -77,8 +77,8 @@ MEM continuation; r066/r067 final-package INT33/mock47 checks; r056 installation
 positive/four refusals; r063 product3 plus r064 control11 with identical ten
 hashes; r065 publication/r068 deployed smoke. [S2 evidence](../etc/evidence/m0-t435-s2-int33-driver.md)
 retains original defect, failed attempts, source/ABI and physical input limits.
-Git P formation is the remaining delivery step; T435 stays open for owner
-acceptance. No next S/T is admitted and Queue ordering is unchanged.
+S2 P delivered as263118b33 and pushed. T435 stays open for owner acceptance.
+No next S/T is admitted and Queue ordering is unchanged.
 
 ## Recent Governance
 
