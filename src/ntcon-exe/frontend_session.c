@@ -116,12 +116,28 @@ static DWORD copy_grid(HANDLE source,HANDLE target,SMALL_RECT source_rect,COORD 
     HeapFree(GetProcessHeap(),0,cells);
     return error;
 }
+/* OpenNT resizeWindow shrinks a viewport before shrinking its buffer. These
+ * inactive surfaces are storage, not presentation: never enlarge their native
+ * viewport to the logical frame extent (which can exceed the host maximum). */
+static DWORD prepare_grid_size(HANDLE surface,COORD size)
+{
+    CONSOLE_SCREEN_BUFFER_INFO info;
+    if(!GetConsoleScreenBufferInfo(surface,&info))return GetLastError();
+    if(info.srWindow.Right>=size.X || info.srWindow.Bottom>=size.Y) {
+        SMALL_RECT fit={0,0,
+            min(size.X,info.srWindow.Right-info.srWindow.Left+1)-1,
+            min(size.Y,info.srWindow.Bottom-info.srWindow.Top+1)-1};
+        if(!SetConsoleWindowInfo(surface,TRUE,&fit))return GetLastError();
+    }
+    if((info.dwSize.X!=size.X || info.dwSize.Y!=size.Y) &&
+        !SetConsoleScreenBufferSize(surface,size))return GetLastError();
+    return ERROR_SUCCESS;
+}
 static DWORD clone_grid(HANDLE source,HANDLE *output)
 {
-    CONSOLE_SCREEN_BUFFER_INFO info,target;
+    CONSOLE_SCREEN_BUFFER_INFO info;
     CONSOLE_CURSOR_INFO cursor;
     HANDLE copy;
-    SMALL_RECT fit;
     DWORD error=ERROR_SUCCESS;
     LONG row;
     *output=NULL;
@@ -130,12 +146,7 @@ static DWORD clone_grid(HANDLE source,HANDLE *output)
     copy=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,
         FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CONSOLE_TEXTMODE_BUFFER,NULL);
     if(copy==INVALID_HANDLE_VALUE)return GetLastError();
-    if(!GetConsoleScreenBufferInfo(copy,&target)){error=GetLastError();goto fail;}
-    fit=(SMALL_RECT){0,0,min(info.dwSize.X,target.dwSize.X)-1,
-        min(info.dwSize.Y,target.dwSize.Y)-1};
-    if(!SetConsoleWindowInfo(copy,TRUE,&fit) || !SetConsoleScreenBufferSize(copy,info.dwSize)) {
-        error=GetLastError();goto fail;
-    }
+    error=prepare_grid_size(copy,info.dwSize);if(error)goto fail;
     for(row=0;row<info.dwSize.Y;) {
         SHORT rows=(SHORT)min(info.dwSize.Y-row,max(1,4096/info.dwSize.X));
         error=copy_grid(source,copy,(SMALL_RECT){0,(SHORT)row,info.dwSize.X-1,(SHORT)(row+rows-1)},(COORD){0,(SHORT)row});
@@ -178,7 +189,6 @@ static DWORD prepare_text_frame(frontend_session *frontend,const frontend_video 
     const BYTE *text=video->pixels+sizeof(*style);
     COORD size={(SHORT)video->description.width,(SHORT)video->description.height},origin={0,0};
     SMALL_RECT rect={0,0,size.X-1,size.Y-1};
-    CONSOLE_SCREEN_BUFFER_INFO info;
     CONSOLE_CURSOR_INFO cursor;
     HANDLE incoming=NULL;
     CHAR_INFO *cells;
@@ -199,12 +209,8 @@ static DWORD prepare_text_frame(frontend_session *frontend,const frontend_video 
         if(step==3 && (text[index*step+2]&CONSOLE_TEXT_UNDERLINE))
             cells[index].Attributes|=COMMON_LVB_UNDERSCORE;
     }
-    if(!GetConsoleScreenBufferInfo(incoming,&info)){error=GetLastError();goto done;}
-    {
-        SMALL_RECT fit={0,0,min(size.X,info.dwSize.X)-1,min(size.Y,info.dwSize.Y)-1};
-        if(!SetConsoleWindowInfo(incoming,TRUE,&fit) || !SetConsoleScreenBufferSize(incoming,size) ||
-            !WriteConsoleOutputW(incoming,cells,size,origin,&rect)) {error=GetLastError();goto done;}
-    }
+    error=prepare_grid_size(incoming,size);if(error)goto done;
+    if(!WriteConsoleOutputW(incoming,cells,size,origin,&rect)) {error=GetLastError();goto done;}
     cursor.dwSize=max(1,min(100,style->cursor_height*100/(int)style->font_height));
     cursor.bVisible=style->cursor_visible && style->cursor_column>=0 && style->cursor_row>=0 &&
         style->cursor_column<size.X && style->cursor_row<size.Y;

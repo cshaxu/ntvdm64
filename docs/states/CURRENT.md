@@ -3,6 +3,18 @@
 ## Current Work
 
 **Active: M0 T436 S2** (Ordinary Mode; Windows 3.1 mouse-driver implementation).
+Owner now authorizes targeted diagnosis of the final-text publication failure
+on Windows return (“你调查一下，给我一个确定性的答案”). Test-only API
+observation confirms the hidden viewport enlargement failure. Owner now approves
+the bounded NTCON storage/viewport repair (“好 批准实现修复”); preserve complete
+logical frames, restrict native viewport preparation, and reuse one local helper.
+Build/test evidence goes under build/M0-T436/S2/r031-viewport-repair.
+Driver50-case mock, real
+DPMI16-case checks and actual /S /3 movement/menu observations are recorded in
+[S2 evidence](../etc/evidence/m0-t436-s2-win31-mouse-driver.md). The repaired host
+passes actual /S return (exit0) and17 Console plus17 Window routes. No S2 closure
+or S3 admission is presumed; all
+candidate source/evidence is preserved and experimental INI restored.
 Owner closes T435 and directly admits the former queue-tail Windows 3.x
 candidate, prioritizing Windows 3.1. [T435 closure](../history/m0-t435-win101-addon-closure.md)
 records accepted installation/add-on delivery and preserved compatibility limits.
@@ -17,7 +29,7 @@ records accepted installation/add-on delivery and preserved compatibility limits
 | Objective | Audit and implement an independently authored Windows 3.1 mouse driver using the existing NTVDM mouse provider; verify standard/enhanced entry, movement, clicks, show/hide and cleanup. Preserve original guest/host execution and default profiles. |
 | Non-goals | No CPU/device/mirror rewrite, runtime hot-patch, new helper/component/protocol or renewed enhanced-startup investigation. Do not blindly reuse the Win1.01 real-mode callback in protected Win3.1. Installer delivery belongs to S3; enhanced instability remains an explicit accepted limitation. |
 | Reference Baseline | Published T435 S2 APP0.0.435/RPC45/I/O25 ten images and matching assets/release manifest; accepted Windows 1.01 guest execution/mouse and S3 installation workflow. |
-| Files And ABI Surface | src/addon/win31-mouse-drv independent guest driver; ABI/source evidence and tests under tests/ and docs/etc/. Build under build/M0-T436/S2. Driver/profile selection only on recoverable installation copies or installation PATCH; originals and defaults remain intact. No host/wire change. |
+| Files And ABI Surface | src/addon/win31-mouse-drv independent guest driver; approved src/ntcon-exe/frontend_session.c hidden-buffer preparation repair and focused production-linked tests. Build under build/M0-T436/S2. Driver/profile selection only on recoverable installation copies or installation PATCH; originals and defaults remain intact. No mirror/guest/wire change. |
 | Applicable Rules | AGENTS reading set, EXECUTION, architecture/coding/document rules, source policy and original guest immutability; inherited host defects only matching existing SoftPC correction, project defects separately designed. |
 | Verification | Exact Win3.1 NE/export/Inquire/event/callback ABI; real/protected-mode transition and callback ownership; guest-build positives/negatives and real INT33 route. Observe actual arrow movement and down/up behavior, balanced enable/disable and restart in /S and /3, distinguishing inherited startup failures. Pin owned processes, preserve hashes, no mappings. Governance/link/diff review. |
 | Expected Markers | Built independent driver, ABI/relocation proof, reversible provider callback installation, actual Windows input consumption, mode-specific pass/failure evidence and no original/default changes. |
@@ -32,31 +44,22 @@ records accepted installation/add-on delivery and preserved compatibility limits
 
 Owner accepts unstable enhanced execution on2026-10-07. The
 [S1 evidence](../etc/evidence/m0-t436-s1-win31-launch-profile.md) records the
-checked retail-copy discovery substitution, actual /3 desktop/Notepad,
-independent startup failures and preserved original/default hashes.
-Standard-profile fixture, adaptation positive/negative, ten-image identity,
-diff and governance checks pass. No host runtime code/image change; no stable
-startup, normal shutdown or mouse claim. Reviewed P is being formed; commit/
-push remains pending until verified. S2 admission is explicitly owner-approved.
-
-## S1 Closure Record
-
-Owner accepts unstable enhanced execution on2026-10-07. The
-[S1 evidence](../etc/evidence/m0-t436-s1-win31-launch-profile.md) records the
-checked retail-copy discovery substitution, actual /3 desktop/Notepad,
-independent startup failures and preserved original/default hashes.
-Standard-profile fixture, adaptation positive/negative, ten-image identity,
-diff and governance checks pass. No host runtime code/image change; no stable
-startup, normal shutdown or mouse claim. Reviewed P is being formed; commit/
-push remains pending until verified. S2 admission is explicitly owner-approved.
+checked retail-copy substitution, actual /3 desktop/Notepad, independent
+startup failures and preserved original/default hashes. Standard-profile,
+adaptation positive/negative, ten-image identity and governance checks pass.
+Research/design delivery42fd2c883 is committed and pushed to main. No host
+runtime change or stable-startup/normal-exit/mouse claim. S2 is admitted;
+its first guest driver build is not published or runtime-verified.
 
 ## Current Technical Baseline
 
-T435 S2 r060 ten-image package remains published at O:/winnt/system32,
-APP0.0.435/RPC45/I/O25. Its tests/publication/smoke are recorded in
-[S2 evidence](../etc/evidence/m0-t435-s2-int33-driver.md).
-assets/release/release-manifest.json matches all ten tested and deployed hashes.
-Asset synchronization/rule delivery9e2b16170 is pushed; no new runtime package.
+T436 S2 r031 publishes the bounded NTCON viewport repair at O:/winnt/system32,
+APP0.0.435/RPC45/I/O25 unchanged. Its [S2 evidence](../etc/evidence/m0-t436-s2-win31-mouse-driver.md)
+records actual /S return and focused/product verification. Nine unchanged images
+match T435 S2 r060; NTCON hash starts3927A308. assets/release/release-manifest.json
+matches all ten published images. The containing reviewed repair delivery records
+34 product passes and three retained WOW frontiers; the remaining mouse-driver
+candidate stays active and S3 is not admitted.
 
 | Architecture | Images |
 | --- | --- |

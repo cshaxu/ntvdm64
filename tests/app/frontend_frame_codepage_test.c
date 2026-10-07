@@ -27,7 +27,7 @@ int wmain(int argc,WCHAR **argv)
     HANDLE incoming=NULL;BYTE *payload=NULL;console_text_style *style;
     UINT saved;DWORD handles_before=0,handles_after=0;BOOL allocated=FALSE;
     unsigned pass,index;COORD size={80,28},origin={0,0};
-    CHAR_INFO cells[80*28];CONSOLE_SCREEN_BUFFER_INFO info;
+    CHAR_INFO cells[80*50];CONSOLE_SCREEN_BUFFER_INFO info;
     CONSOLE_CURSOR_INFO cursor;SMALL_RECT rect;
     if(argc!=2 || _wfopen_s(&report,argv[1],L"wx"))return 2;
     saved=GetConsoleOutputCP();
@@ -36,7 +36,7 @@ int wmain(int argc,WCHAR **argv)
         FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CONSOLE_TEXTMODE_BUFFER,NULL);
     CHECK(frontend.logical_surface!=INVALID_HANDLE_VALUE);
     if(frontend.logical_surface==INVALID_HANDLE_VALUE)goto done;
-    payload=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*style)+80*28*3);
+    payload=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*style)+80*50*3);
     CHECK(payload!=NULL);if(!payload)goto done;
     style=(console_text_style *)payload;style->font_height=16;
     style->cursor_height=4;style->cursor_visible=1;
@@ -69,6 +69,32 @@ int wmain(int argc,WCHAR **argv)
         CHECK(GetConsoleCursorInfo(incoming,&cursor));
         CHECK(cursor.bVisible && cursor.dwSize==25);
         CloseHandle(incoming);incoming=NULL;
+    }
+    /* Complete tall frames survive a smaller physical viewport. Repeated
+     * imports clone a tall source too; shrinking must keep the viewport legal.
+     * No glyph, final row, attribute or buffer-relative cursor is truncated. */
+    for(pass=0;pass<4;++pass) {
+        unsigned rows=pass==2 ? 25 : 50;
+        video.description.height=rows;video.description.stride=80*2;
+        style->cursor_row=rows-1;style->cursor_column=79;
+        for(index=0;index<80*rows;++index) {
+            payload[sizeof(*style)+index*2]=(BYTE)('A'+index/80%26);
+            payload[sizeof(*style)+index*2+1]=0x2f;
+        }
+        CHECK(prepare_text_frame(&frontend,&video,&incoming)==0);
+        CHECK(incoming!=NULL);if(!incoming)break;
+        CHECK(GetConsoleScreenBufferInfo(incoming,&info));
+        CHECK(info.dwSize.X==80 && info.dwSize.Y==(SHORT)rows);
+        CHECK(info.srWindow.Right-info.srWindow.Left+1<=info.dwMaximumWindowSize.X &&
+            info.srWindow.Bottom-info.srWindow.Top+1<=info.dwMaximumWindowSize.Y);
+        CHECK(info.dwCursorPosition.X==79 && info.dwCursorPosition.Y==(SHORT)rows-1);
+        rect=(SMALL_RECT){0,0,79,(SHORT)rows-1};size.Y=(SHORT)rows;
+        CHECK(ReadConsoleOutputW(incoming,cells,size,origin,&rect));
+        for(index=0;index<80*rows;++index) {
+            CHECK(cells[index].Char.UnicodeChar==(WCHAR)('A'+index/80%26));
+            CHECK(cells[index].Attributes==0x2f);
+        }
+        CloseHandle(frontend.logical_surface);frontend.logical_surface=incoming;incoming=NULL;
     }
     /* Conversion failure must release its candidate, not replace the source. */
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&handles_before));

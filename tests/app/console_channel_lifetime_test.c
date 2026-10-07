@@ -673,8 +673,10 @@ static void test_dos_conversion_thresholds(void)
         CONSOLE_SCREEN_BUFFER_INFO info;SMALL_RECT physical={0,0,79,19};
         SMALL_RECT logical={0,0,79,heights[index]-1};DWORD count;WCHAR cell;
         CHECK(output!=INVALID_HANDLE_VALUE);
-        /* New buffers inherit the canonical extent left by preceding tests;
-         * this threshold fixture explicitly requires room for80x20 first. */
+        /* New buffers inherit the canonical viewport, including its width
+         * and origin. Shrink it before requesting this fixture's80x60 buffer;
+         * a previous viewport wider than80 cannot fit that buffer. */
+        CHECK(SetConsoleWindowInfo(output,TRUE,&(SMALL_RECT){0,0,0,0}));
         CHECK(SetConsoleScreenBufferSize(output,(COORD){80,60}));
         CHECK(SetConsoleWindowInfo(output,TRUE,&physical));
         CHECK(SetConsoleScreenBufferSize(output,(COORD){80,heights[index]}));

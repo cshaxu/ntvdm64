@@ -4,6 +4,7 @@ param(
     [Parameter(Mandatory)][string]$Prefix,
     [string]$PackageRoot='O:\winnt',
     [string]$ProcessPackageRoot,
+    [string]$GuestRoot,
     [string]$LogRoot,
     [ValidateRange(0,5000)][int]$PostExitObservationMs=0,
     [switch]$VisibleDesktop,
@@ -19,6 +20,7 @@ if($Prefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid prefix'}
 $Observer=(Resolve-Path $Observer).Path
 $WindowObserver=(Resolve-Path $WindowObserver).Path
 $PackageRoot=(Resolve-Path $PackageRoot).Path
+$GuestRoot=if($GuestRoot){(Resolve-Path $GuestRoot).Path}else{Join-Path $PackageRoot 'system32'}
 $paths=@('run16.exe','ntvdm.exe','ntsrv.exe') | ForEach-Object {Join-Path (Get-PackageBinaryRoot $PackageRoot) $_}
 if($ProcessPackageRoot){
     $ProcessPackageRoot=(Resolve-Path -LiteralPath $ProcessPackageRoot).Path
@@ -46,7 +48,7 @@ foreach($guest in $Guests){
         $start=[Diagnostics.ProcessStartInfo]::new($Observer)
         $observerArguments=@((Join-Path (Get-PackageBinaryRoot $PackageRoot) 'run16.exe'),$PackageRoot,($stem+'.txt'))
         if($WaitTarget){$observerArguments+='--wait'}
-        $observerArguments+=@((Join-Path (Join-Path $PackageRoot 'system32') $guest),
+        $observerArguments+=@((Join-Path $GuestRoot $guest),
             '--observation-timeout-ms','20000')
         foreach($argument in $observerArguments){
             $start.ArgumentList.Add($argument)
