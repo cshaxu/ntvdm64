@@ -7,6 +7,16 @@
 #include "ntvdm-exe/softpc/include/mvdm_softpc_text_video.h"
 #include <string.h>
 
+static BOOL read_text_palette(PALETTEENTRY colours[16])
+{
+    if(ntvdm_console_text_palette(colours))return TRUE;
+    if(GetLastError()!=ERROR_NO_DATA)return FALSE;
+    /* A graphics-only guest may return to text and complete before its first
+     * text palette tick. Resolve through the original VGA owner, not NULL GDI. */
+    mvdm_softpc_text_video_refresh_palette();
+    return ntvdm_console_text_palette(colours);
+}
+
 BOOL NtvdmConsoleTextRequested(BOOL *requested)
 {
     LONG values[4]={0};
@@ -39,7 +49,7 @@ BOOL NtvdmConsoleUpdateText(HPALETTE palette)
     if (!columns || !rows || columns>160 || rows>96 || !video.columns || !video.rows ||
         video.columns>columns || video.rows>rows || bytes%(columns*rows) ||
         bytes/(columns*rows)<2) { SetLastError(ERROR_INVALID_DATA);return FALSE; }
-    if (!ntvdm_console_text_palette(colours)) {
+    if (!read_text_palette(colours)) {
         if (GetLastError()!=ERROR_NO_DATA) return FALSE;
         /* Only before the original VGA owner has published resolved colours. */
         if (GetPaletteEntries(palette,0,16,colours)!=16) {
@@ -98,7 +108,7 @@ BOOL NtvdmConsoleUpdateTextConfiguration(HPALETTE palette)
     /* Snapshot on the original video owner. Do not initialize a Console,
      * resize a screen, or disable STREAM_IO just to obtain its font. */
     if(!mvdm_softpc_text_video_copy(&video))return TRUE;
-    if(!ntvdm_console_text_palette(colours)) {
+    if(!read_text_palette(colours)) {
         if(GetLastError()!=ERROR_NO_DATA)return FALSE;
         if(!palette)return TRUE; /* Original palette not initialized yet. */
         if(GetPaletteEntries(palette,0,16,colours)!=16)return FALSE;

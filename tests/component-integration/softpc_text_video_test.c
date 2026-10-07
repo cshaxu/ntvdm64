@@ -28,6 +28,8 @@ UPDATE_ALG update_alg;
 BOOL ConsoleInitialised,ConsoleNoUpdates;
 static BOOL requested,async_active;
 static unsigned painted,published,refreshed,shaped,stream_disabled;
+static unsigned palette_resolved;
+void set_the_vlt(void){++palette_resolved;}
 BOOL NtvdmConsoleTextRequested(BOOL *value){*value=requested;return TRUE;}
 BOOL ntvdm_console_video_async(BOOL value){async_active=value;return TRUE;}
 void disable_stream_io(void){++stream_disabled;sc.ScreenState=WINDOWED;}
@@ -82,6 +84,11 @@ int main(void)
     CHECK(mvdm_softpc_text_video_copy(&copy));
     CHECK(copy.rows==43 && copy.fonts[0][65][7]==0xa5 && copy.fonts[1][65][7]==0xa5);
     sc.ModeType=TEXT;sc.ScreenState=WINDOWED;ConsoleInitialised=TRUE;
+    mvdm_softpc_text_video_refresh_palette();CHECK(palette_resolved==1);
+    PCDisplay.mode_change_required=1;mvdm_softpc_text_video_refresh_palette();
+    CHECK(palette_resolved==1);PCDisplay.mode_change_required=0;
+    sc.ModeType=GRAPHICS;mvdm_softpc_text_video_refresh_palette();
+    CHECK(palette_resolved==1);sc.ModeType=TEXT;
     update_alg.calc_update=paint;requested=TRUE;
     CHECK(mvdm_softpc_text_video_sync_route() && async_active);
     CHECK(sc.ScreenState==FULLSCREEN && refreshed==1 && shaped==1);

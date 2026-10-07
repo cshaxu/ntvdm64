@@ -4,6 +4,17 @@ OpenNT NT4 MVDM/NTDOS is the primary historical guest/service source family.
 
 ### Permanent guest-media immutability
 
+Owner-scoped T435 exception: after choosing an independently authored Win1.01
+INT33 mouse driver, the owner explicitly approves investigating original Setup
+image changes and binary installation of that driver. Work only on recoverable
+copies, preserving the original media/installation and hashes. This admits
+audited mouse-module/header/segment/relocation installation in WIN100 images,
+not arbitrary original core rewrites, changes to original NTVDM execution/device
+semantics or runtime hot patches. Separately admitted project-adapter repairs
+remain governed by their original-owner and minimal-diff rules.
+Record every changed range, unchanged-module proof, failure/recovery and real
+Windows acceptance. Other guest-media immutability rules remain in force.
+
 The owner permanently prohibits modifying original guest media. Do not
 recompile it for replacement, patch its binaries, or hot-patch its loaded
 code/data to work around a defect. Original execution and normal guest writes

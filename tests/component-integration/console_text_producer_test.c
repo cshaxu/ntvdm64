@@ -18,6 +18,10 @@ static mvdm_softpc_text_video video;
 static console_video_description description;
 static PALETTEENTRY colours[16];
 static unsigned publications;
+static BOOL restore_palette;
+static unsigned palette_refreshes;
+void mvdm_softpc_text_video_refresh_palette(void)
+{ ++palette_refreshes;if(restore_palette)palette_error=ERROR_SUCCESS; }
 session *session_thread_current(void) { return bound ? &owner : NULL; }
 int session_presentation_text_describe(const session *s,uint32_t *w,uint32_t *h,uint32_t *n)
 { (void)s;*w=columns;*h=rows;*n=storage_bytes;return 1; }
@@ -71,6 +75,10 @@ int main(void)
     send_error=ERROR_BROKEN_PIPE;CHECK(!NtvdmConsoleUpdateText(NULL) && GetLastError()==ERROR_BROKEN_PIPE);send_error=0;
     palette_error=ERROR_NO_DATA;
     CHECK(!NtvdmConsoleUpdateText(NULL) && GetLastError()==ERROR_INVALID_HANDLE);
+    CHECK(palette_refreshes==1);
+    restore_palette=TRUE;palette_error=ERROR_NO_DATA;
+    CHECK(NtvdmConsoleUpdateText(NULL) && palette_refreshes==2 && description.palette[9]==0x123456);
+    restore_palette=FALSE;palette_error=ERROR_NO_DATA;
     {
         struct { WORD version,count;PALETTEENTRY entries[16]; } palette={0x300,16,{0}};
         HPALETTE handle;

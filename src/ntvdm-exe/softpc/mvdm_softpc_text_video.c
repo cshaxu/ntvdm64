@@ -24,6 +24,13 @@ extern void disable_stream_io(void);
 extern void nt_cursor_size_changed(int, int);
 extern BOOL ConsoleInitialised,ConsoleNoUpdates;
 
+void mvdm_softpc_text_video_refresh_palette(void)
+{
+    /* set_the_vlt owns DAC/attribute mapping and publishes resolved colours
+     * through the existing adapter. No new palette algorithm or guest write. */
+    if(sc.ModeType==TEXT && !get_mode_change_required())set_the_vlt();
+}
+
 int mvdm_softpc_text_video_local(void)
 { return sc.ScreenState==FULLSCREEN && sc.ModeType==TEXT; }
 void mvdm_softpc_text_video_flush(void (*publish)(void))
