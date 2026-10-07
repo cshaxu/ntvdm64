@@ -4,6 +4,14 @@ OpenNT NT4 MVDM/NTDOS is the primary historical guest/service source family.
 
 ### Permanent guest-media immutability
 
+Owner-scoped T436 exception: after verified ten-CON DOSMGR SFT failure, owner
+explicitly approves adapting the supplied retail WIN386.EXE DOSMGR on a
+recoverable installation copy, like the prior KRNL386 experiment. Preserve
+the original NT DOS/OpenNT guests, existing standard-mode installation and
+default profiles. Record exact original hash, before bytes, changed range,
+relocation/ABI/cleanup proof and downstream tests. No live memory hot-patch,
+unrelated guest change or universal compatibility claim is authorized.
+
 Owner-scoped T435 exception: after choosing an independently authored Win1.01
 INT33 mouse driver, the owner explicitly approves investigating original Setup
 image changes and binary installation of that driver. Work only on recoverable

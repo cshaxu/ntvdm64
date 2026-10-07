@@ -1,0 +1,15 @@
+@echo off
+setlocal
+where /q run16
+if errorlevel 1 (
+  echo Cannot find run16 in PATH.
+  exit /b 2
+)
+set "TEMP=%~dp0TEMP"
+set "TMP=%TEMP%"
+if not exist "%TEMP%\" mkdir "%TEMP%"
+pushd "%~dp0.." || exit /b 3
+call run16 "%~dp0WIN31.PIF"
+set "win31_result=%errorlevel%"
+popd
+exit /b %win31_result%

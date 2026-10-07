@@ -2,6 +2,17 @@
 
 ## Owner-approved independent guest add-on — T435
 
+T436 S1 owner follow-up admits src/addon/win31-launch for isolated Windows 3.1
+launch-profile generation only. It owns scripts/templates, not guest binaries,
+kernel patches or host runtime linkage. Output is staged under build and copied
+to the owner-authorized installation PATCH directory; default profiles stay intact.
+
+Owner accepts S1's unstable enhanced-mode research and admits T436 S2's
+src/addon/win31-mouse-drv independent guest driver. It consumes NTVDM's
+existing INT33 provider through a verified real/protected-mode boundary;
+it is not a mirror, host component or host link input. Driver artifacts and
+tests remain build-owned. S3 will consolidate launch/setup implementations.
+
 Owner renames driver source to `src/addon/win101-mouse-drv/` and assigns all
 installation/patch implementation to `src/addon/win101-setup/`. These are the destinations for
 an independently authored Windows 1.01 INT33 bridge mouse driver. It is not

@@ -1,7 +1,9 @@
 param(
     [Parameter(Mandatory)][string]$BuildRoot,
     [string]$FormalCache='build/M0-T434/S3/r001-formal',
-    [string]$Baseline='build/M0-T434/S5/r037-runtime/system32/ntvdm.exe'
+    [string]$Baseline='build/M0-T434/S5/r037-runtime/system32/ntvdm.exe',
+    [string]$ProbeSource='',
+    [ValidateSet('win101_guard_entry','win31_console_trace_entry')][string]$EntrySymbol='win101_guard_entry'
 )
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
@@ -23,7 +25,10 @@ $inputs=@($match.Groups['inputs'].Value.Trim() -split '\s+' | ForEach-Object {
     '"'+$path+'"'
 })
 New-Item -ItemType Directory -Path $build | Out-Null
-$sources=@("$PSScriptRoot/win101_install_write_guard.cpp")
+if(!$ProbeSource){$ProbeSource="$PSScriptRoot/win101_install_write_guard.cpp"}
+$ProbeSource=(Resolve-Path $ProbeSource).Path
+if(!$ProbeSource.StartsWith((Join-Path $repo 'tests')+'\',[StringComparison]::OrdinalIgnoreCase)){throw 'Test-owned probe source required'}
+$sources=@($ProbeSource)
 foreach($name in @('detours','disasm','image','modules','creatwth')) {
     $sources+=Join-Path $repo "src/nthook32-dll/detours/$name.cpp"
 }
@@ -37,7 +42,7 @@ foreach($source in $sources) {
     $commands+='if errorlevel 1 exit /b %errorlevel%'
     $objects+='"'+$obj+'"'
 }
-$response=@('/nologo','/machine:x86','/subsystem:console','/opt:ref','/include:_win101_guard_entry',
+$response=@('/nologo','/machine:x86','/subsystem:console','/opt:ref',('/include:_'+$EntrySymbol),
     ('/out:"'+$build+'\ntvdm.exe"'),('/map:"'+$build+'\ntvdm.exe.map"'),
     ('/implib:"'+$build+'\ntvdm.lib"'),('/def:"'+$cache+'\generated\ntvdm-wow32-provider.def"'))
 $response+=$objects
@@ -50,7 +55,7 @@ $commands+='if errorlevel 1 exit /b %errorlevel%'
 & "$build/build.cmd" *> "$build/build.log"
 if ($LASTEXITCODE) { throw "Guard build failed; inspect $build/build.log" }
 [ordered]@{
-    role='test-only-restricted-write-relink-not-product'
+    role=$(if($EntrySymbol -eq 'win101_guard_entry'){'test-only-restricted-write-relink-not-product'}else{'test-only-console-trace-relink-not-product'})
     baselineSha256=(Get-FileHash $baselinePath).Hash
     formalCache=$cache
     sources=@($sources | ForEach-Object { @{path=$_;sha256=(Get-FileHash $_).Hash} })
