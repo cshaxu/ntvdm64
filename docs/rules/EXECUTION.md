@@ -134,6 +134,28 @@ or weaken output assertions as a throughput optimization.
 
 ### Every-P regression and side-test publication gate
 
+#### Current ten-component release and committed assets
+
+Owner clarification dated 2026-10-06: every delivery that updates product code
+must include the latest verified and published complete ten-component package
+in `assets/release/` in the same commit. The ten files are `run16.exe`,
+`ntsrv.exe`, `ntcon.exe`, `ntvdm.exe`, `ntvwm.exe`, `ntmon.exe`, `WOW32.DLL`,
+`VDMREDIR.DLL`, `nthook32.dll` and `nthook64.dll`. This supersedes historical
+six/eight-file counts below; architectures follow the current Status manifest.
+
+After required build/tests and coherent publication, synchronize all ten
+images, including unchanged components, from that exact tested package.
+Verify SHA-256 equality between the tested manifest, the published system32
+files and `assets/release/`; commit its `release-manifest.json` alongside them.
+Do not substitute older owner snapshots, diagnostic/test images or a mixture
+of builds. Preserve a recoverable prior asset set before replacement. A failed
+identity check blocks delivery; do not claim synchronization or publish a
+partial set. Unchanged verified artifacts may be reused under the existing
+dependency/input-identity rule. Documentation-only changes do not require a
+rebuild or redeployment, but must not present stale assets as current releases.
+Guest/setup ZIP archives have separate purposes and are not automatically
+rebuilt by this ten-component synchronization rule.
+
 Owner-admitted T423 S12 will add ntvwm.exe to the seven-file package described
 below. Starting with S12 NTVWM production delivery, require one coherent eight-file set;
 all prior regression, recovery and publication gates remain binding. The new

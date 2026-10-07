@@ -191,3 +191,16 @@ add-on source ownership, installer scripts/docs/test-only diagnostics and assets
 No mirror/host production algorithm, wire or deployed runtime input changes.
 Actual installed physical/RDP mouse and general application acceptance remain
 outside these focused fixtures. T435 is not automatically closed by this P.
+
+## Latest published ten-image asset synchronization
+
+Owner follow-up supersedes the supplied assets/release snapshot committed in
+dd7cddd7d. The required source is S2 r060-release/release-manifest.json and its
+runtime/system32 package, already tested and published through r065/r068.
+All ten live O:/winnt/system32 hashes match that manifest before asset copying.
+Retain previous asset bytes under S3/r036-assets-sync, copy only the ten named
+runtime images and the exact manifest, then verify all three identities.
+No compilation, runtime launch, process stop, guest/archive change or product
+redeployment is needed: source and deployed runtime are unchanged.
+EXECUTION records the owner-required same-commit ten-image synchronization for
+future product-code updates; this follow-up is asset/governance delivery only.

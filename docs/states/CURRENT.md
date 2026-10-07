@@ -111,6 +111,10 @@ exit status. Direct Notepad is rejected by the original NE classification rule
 their ten-image snapshot; it is not substituted for the verified S2 runtime.
 Real installed physical mouse/exit checks remain unclaimed. This P includes
 S3 installer/source rename/docs/assets; T435 stays open, no next task admitted.
+Owner's follow-up requires assets/release to match the latest published ten
+images. The S2 tested manifest remains the baseline; synchronize and verify
+all ten against O:/winnt/system32, not the superseded owner snapshot.
+EXECUTION now requires this same-commit asset gate for future product updates.
 
 ## Recent Governance
 
