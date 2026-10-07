@@ -36,7 +36,7 @@ objects never enter the native EXE build graph.
 
 Windows1.01 embeds its mouse module in WIN100.BIN; replacing a loose MOUSE.DRV
 does not update that installed image. The owner-authorized
-`install-mouse101.ps1 -OriginalImage <WIN100.BIN> -Driver <MOUSE101.DRV>
+`../win101-setup/install-mouse101.ps1 -OriginalImage <WIN100.BIN> -Driver <MOUSE101.DRV>
 -OutputRoot <fresh-absolute-build-root>` installs only the MOUSE slot in a
 recoverable copy. It preserves every other byte, module location/link and total
 image length. It refuses unsupported imports/relocations and malformed images.

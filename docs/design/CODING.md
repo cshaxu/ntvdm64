@@ -2,7 +2,8 @@
 
 ## Owner-approved independent guest add-on — T435
 
-`src/ADDON/Mouse Driver 101/` is the owner's explicit source destination for
+Owner renames driver source to `src/addon/win101-mouse-drv/` and assigns all
+installation/patch implementation to `src/addon/win101-setup/`. These are the destinations for
 an independently authored Windows 1.01 INT33 bridge mouse driver. It is not
 part of the OpenNT mirrors, a host executable or a host link dependency.
 Generated guest products remain under build/; original guest media/core stay

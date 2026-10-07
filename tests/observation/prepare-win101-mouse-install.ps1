@@ -2,8 +2,9 @@ param(
     [Parameter(Mandatory)][string]$BuildRoot,
     [Parameter(Mandatory)][string]$DriverBuild,
     [Parameter(Mandatory)][string]$GuardBuild,
-    [string]$PackageInput='build/M0-T434/S5/r037-runtime',
-    [string]$OriginalInstallation='O:\Windows'
+    [Parameter(Mandatory)][string]$PackageInput,
+    [Parameter(Mandatory)][string]$OriginalInstallation,
+    [Parameter(Mandatory)][string]$InstallTarget
 )
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
@@ -37,10 +38,12 @@ $original=@(Get-ChildItem -LiteralPath $OriginalInstallation -File | ForEach-Obj
 })
 # Augmented disposable source, not modification of the original installation.
 Copy-Item -LiteralPath "$driver/MOUSE101.DRV" -Destination "$media/MOUSE.DRV" -Force
+Add-Content -LiteralPath "$runtime/system32/config.nt" -Encoding ASCII -Value "`r`nREM Original Setup child execution stays inside this DOS machine.`r`ndosonly"
+New-Item -ItemType Directory -Path "$runtime/TMP" | Out-Null
 [ordered]@{
     role='private-original-setup-installation-not-product'
     root=$build; runtime=$runtime; media=$media
-    expectedDestination='Z:\WIN101'
+    expectedDestination=$InstallTarget
     originalRoot=(Resolve-Path $OriginalInstallation).Path
     originalInputs=$original
     addonDriverSha256=(Get-FileHash "$media/MOUSE.DRV").Hash

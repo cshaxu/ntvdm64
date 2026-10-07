@@ -5,7 +5,7 @@ $build=[IO.Path]::GetFullPath((Join-Path $repo $BuildRoot))
 if (!$build.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -or
     (Test-Path -LiteralPath $build)) { throw 'Fresh build-owned output required' }
 New-Item -ItemType Directory -Path $build | Out-Null
-$source=Join-Path $repo 'src/ADDON/Mouse Driver 101/mouse101.asm'
+$source=Join-Path $repo 'src/addon/win101-mouse-drv/mouse101.asm'
 $assembler=(Get-Command nasm.exe -ErrorAction Stop).Source
 & $assembler -f bin $source -o "$build/MOUSE101.DRV" -l "$build/mouse101.lst"
 if ($LASTEXITCODE) { throw 'Mouse driver assembly failed' }

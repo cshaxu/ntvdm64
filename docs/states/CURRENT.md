@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T435 S2** (Ordinary Mode; delivery/review of independent Win1.01 INT33 guest driver).
+**Active: M0 T435 S3** (Ordinary Mode; original Setup installation and launch profile).
 Owner admits Windows 1.01 support and confirms EGA is tested/passed; mouse
 repair is pending. [T434 closure](../history/m0-t434-direct-observed-monitor-closure.md)
 remains accepted. The selected Windows 1.01 candidate is removed from Queue;
@@ -12,22 +12,22 @@ no production mouse patch, guest change or deployment is claimed by admission.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T435 S2; Ordinary Mode; independent guest-driver implementation/build/validation. |
+| Identifier Mode | M0 T435 S3; Ordinary Mode; original Setup installation and Win31-shaped launch profile. |
 | Candidate Proposal | [Windows 1.01 EGA/InPort](../proposals/proposal-windows-101-ega-inport-runtime-001.md). |
-| Admission And Approval | Owner's active goal authorizes research/design/implementation of the independent Win1.01 INT33 bridge and explicitly places it in src/ADDON/Mouse Driver 101. S1 concludes its bounded source/ABI design in the linked evidence; guest implementation proceeds sequentially, no runtime capability claimed. |
-| Objective | Build an independent NE mouse driver using unchanged INT33 provider and actual Win1.01 absolute event ABI; verify callback/state/rollback mechanics and real Windows movement/click/release/normal return. |
-| Non-goals | No EGA redesign, NTVDM mirror change, fake hardware detection, Ignore workaround, CPU30, helper, new host component/channel, NTSRV/NTCON policy or publication-clock change. Owner now explicitly allows binary installation of the independent mouse module in a recoverable Win1.01 image copy; original media/files remain intact, no runtime hot patch or unrelated core algorithm rewrite. |
-| Reference Baseline | T4349cf24314c/r037 APP434/RPC45/I/O25 installed ten images; original CCPU40. Owner EGA acceptance and original Mouse6.24/WIN100.BIN installation retained; old RPC42 diagnostic is evidence only, not current runtime proof. |
-| Files And ABI Surface | src/ADDON/Mouse Driver 101 guest ASM/README; tests/observation build, contract and guest harness scripts. Normal-exit evidence admits the minimal project-added console_text / mvdm_softpc_text_video palette repair: call the existing original VGA resolver before final text publication when its copied palette is absent. No host mirror/transport change. NASM isolated16-bit NE/COM island, no guest object in host graph. |
+| Admission And Approval | Owner explicitly requests original Setup installation at O:/win101 after publication, plus start.cmd and matching PIF based on O:/win31. S2 P263118b33/7d273e11c is delivered; this request admits S3 and the named external destination. |
+| Objective | Deliver a complete, repo-independent installer directory for owner-run original Setup. Generate Setup and installed PIF/config/autoexec plus win.cmd only; invoke run16 through PATH, never a fixed location. Owner chooses the installation directory interactively. |
+| Non-goals | No product/mirror/guest-core algorithm change, fake setup completion, copied prebuilt WIN100 image presented as Setup output, new host component/channel or host Windows mutation. O:/win31 and O:/Windows remain read-only. |
+| Reference Baseline | Published S2 APP435/RPC45/I/O25 ten images; authored r008 driver and r062 real same-worker mouse/exit proof. O:/win31 START31.CMD, WIN31.PIF and PROFILE files are read-only launch references. |
+| Files And ABI Surface | Owner-renamed src/addon/win101-mouse-drv holds the driver; src/addon/win101-setup owns installer/patch scripts and templates. Test-only guards/probes stay in tests. Packaging at O:/win101-setup keeps original media at root and all additions/work copies under PATCH. Staging/backups under build/M0-T435/S3. Installed additions also use O:/win101/PATCH. Existing PIF declarations, no new protocol. |
 | Applicable Rules | AGENTS authorities, source policy/original guest immutability, matching SoftPC fix only for inherited host defects, mirror minimality/register, added adaptation fixes at NTVDM owner. |
-| Verification | Reproduce S1 readonly audit; NASM build and NE validation; executable guest mock/actual INT33 probes; owner-approved localized mouse-module installation in a recoverable build-owned image copy, real Win1.01 callbacks/menu/release/exit and same-worker repeat; affected DOS/native/WOW gates before production P. Fresh outputs below build/M0-T435/S2; only Z: short-path mapping. |
-| Expected Markers | Correct three Windows entrypoints; normalized absolute movement with bit15, Win1.01 button bits1..4 and DX2; state/rollback/Disable, no extra DOS pointer; real Windows acceptance distinguished from fixtures. |
-| Asset Needs | O:/Windows original installed files read-only source for separate build-owned test copy; current T434 package and existing observers; NASM. New driver is authored guest code, not patched original media. |
-| Reporting Requirements | Exact build/hash/provenance, assertions and real guest milestones; distinguish mock, original captured consumer and current runtime; retain independent Invalid handle error and unrepaired InPort defects. |
-| Stop Conditions | Original guest/core/media mutation, no bounded Windows driver ABI, new host process/channel/provider policy, irreversible user-install overwrite or hidden runtime failure. |
-| Exit Criteria | Built driver with reproducible tests; real Windows mouse/exit proof and retained acceptance gates; otherwise report missing boundaries, no capability closure. |
-| Original Owner Request | “调研和设计和实现适配于Windows 1.01的NTVDM的鼠标驱动”; “src 底下加个目录 ADDON…Mouse Driver 101”. |
-| Similar-Issue Sweep | Absolute endpoints/geometry, simultaneous buttons, repeated enable/disable, missing provider, size validation, callback RETF/stack, DOS restoration and repeat launch. |
+| Verification | Original Setup completion, produced BIN/OVL mouse-module identity and real PIF/config/launch/exit checks. Owner forbids drive mappings/hardcoded paths: package derives from the script; Setup remains interactive and prompts for the installed destination afterwards. Packaging inputs are explicit parameters. Temporary WORK is removed on completion. Use actual short paths; mapped-drive runs are historical only. Preserve original/reference and published-package hashes. |
+| Expected Markers | Setup actual success and generated WIN.COM/WIN100.BIN/WIN100.OVL; authored MOUSE module; win.cmd runs WIN101.PIF with Win1.01-correct arguments and profile; real color desktop/mouse/menu/normal exit. |
+| Asset Needs | Owner now selects pristine H:/ flat original media as the packaging source, replacing the earlier O:/Windows merged installation input. H:/, O:/Windows and O:/win31 are read-only. r008 MOUSE101.DRV; published S2 package; accepted Win31 PIF reference. |
+| Reporting Requirements | Exact original/generated hashes, Setup page/write evidence, profile differences, actual launch/return results, recovery and unresolved boundaries. |
+| Stop Conditions | Mutation outside build-owned staging, explicitly requested O:/win101-setup package and O:/win101 destination; unrelated media overwrite, unverified target, unrecoverable existing user installation or published product-package changes. |
+| Exit Criteria | Actual Setup installation, launcher/PIF/profile and real startup/mouse/exit proof; otherwise preserve partial installation and report unmet requirement, never substitute S2 binary patch for Setup. |
+| Original Owner Request | “发布完，用 Setup 安装到 O:/win101 ，参照 O:/win31 ，生成 start.cmd 与对应 PIF”. |
+| Similar-Issue Sweep | Target path and CWD, Win31-only /S removal, SETVER for Win1.01, DOS-only guest installer child execution, temp/profile paths, checksum/extension-chain preservation, original installation and published-package integrity. |
 
 ## S1 Closure Record
 
@@ -69,6 +69,13 @@ Any repair rebuilds its dependency-selected closure, not these evidence packages
 | T433 | Native migration and mixed-width/PIF recovery. [Closure](../history/m0-t433-native-components-x64-closure.md). |
 | T432 | Single worker/dual Hooks. [Closure](../history/m0-t432-single-worker-dual-hook-closure.md). |
 
+## S2 Closure Record
+
+[S2 evidence](../etc/evidence/m0-t435-s2-int33-driver.md) records source/ABI,
+real Windows mouse/repeated exit, final-package guest checks, all14 gates and
+publication/smoke. P263118b33 and status stamp7d273e11c are pushed. Physical
+Raw Input/RDP and broad Win1.01 application compatibility are not claimed.
+
 ## Next Admission
 
 S2 implementation, runtime and publication boundary is complete: r062 real
@@ -78,7 +85,32 @@ positive/four refusals; r063 product3 plus r064 control11 with identical ten
 hashes; r065 publication/r068 deployed smoke. [S2 evidence](../etc/evidence/m0-t435-s2-int33-driver.md)
 retains original defect, failed attempts, source/ABI and physical input limits.
 S2 P delivered as263118b33 and pushed. T435 stays open for owner acceptance.
-No next S/T is admitted and Queue ordering is unchanged.
+Owner admits S3 installation/profile work above, then takes over interactive
+Setup manually. The private Setup was quit normally without installation;
+the owner's later run produced WIN.COM/BIN/OVL at O:/win101, but its Setup
+exit code is unknown. r013 generates missing installed PATCH launch profiles,
+preserving all existing root file hashes. The owner relocates the package;
+the currently inspected copy is O:/w1setup/PATCH/SETUP.CMD. All96 original H:/ root files match exactly,
+including original MOUSE.DRV. New driver/source/scripts/config/SETVER and their
+working copies are only under PATCH. H: is unmounted; its retained96 SHA-verified
+bytes are recovered under r010-frozen-h. r012-patch-package identity/layout/PIF
+checks pass; prior directory is recoverable
+under its previous-package. [S3 evidence](../etc/evidence/m0-t435-s3-setup-package.md)
+records failures and remaining real-installation checks. Installation scripts
+now start without arguments and ask for the installed destination after original
+Setup returns; packaging input paths remain explicit. No drive mapping or fixed
+machine path remains. r018 profile/orchestration fixtures pass, including WORK
+cleanup on success/failure, without original Setup or guest execution. r019
+updates the actual package scripts. Owner reports installation success and
+requests win.cmd only. r020 removes installed alias/package template recoverably;
+r021 generation/cleanup tests pass. Owner now confirms final installation and
+Windows-internal Notepad work. r034 final fixtures cover copied profile repair,
+nonzero-return confirmed recovery and cleanup; SETUP.CMD pauses and preserves
+exit status. Direct Notepad is rejected by the original NE classification rule
+(r035), not a proven WOW load failure. Owner asks to commit all assets, including
+their ten-image snapshot; it is not substituted for the verified S2 runtime.
+Real installed physical mouse/exit checks remain unclaimed. This P includes
+S3 installer/source rename/docs/assets; T435 stays open, no next task admitted.
 
 ## Recent Governance
 

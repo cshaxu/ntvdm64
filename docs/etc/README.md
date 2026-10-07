@@ -9,6 +9,7 @@ delivered single-worker/dual-Hook gates; see
 | --- | --- | --- | --- |
 | [T435 S1 mouse audit](evidence/m0-t435-s1-win101-mouse-audit.md) | M0 T435 S1 | Original device gaps and actual Win1.01/INT33 bridge design. | Retain through repair and owner acceptance. |
 | [T435 S2 INT33 driver](evidence/m0-t435-s2-int33-driver.md) | M0 T435 S2 | Independent guest prototype build and pending runtime acceptance. | Retain through repair and owner acceptance. |
+| [T435 S3 Setup package](evidence/m0-t435-s3-setup-package.md) | M0 T435 S3 | Owner-confirmed installation, independent profiles, PATH launcher and final asset delivery; bounded fixtures and direct old-NE classification limit. | Retain through owner task acceptance. |
 | [T434 S5 monitor fidelity](evidence/m0-t434-s5-monitor-fidelity.md) | M0 T434 S5 | Owner-aligned three-group UI, live-only popup/cleanup, final integration and publication evidence. | Retain through full goal audit and owner acceptance. |
 | [T434 S4 DOS observation](evidence/m0-t434-s4-dos-observation.md) | M0 T434 S4 | Original VDD callbacks, copied PSP facts/outbox, real guest/fault/runtime gates, publication and explicit TSR/source limits. | Retain through delivery and full task acceptance. |
 | [T434 S3 native observation](evidence/m0-t434-s3-native-observation.md) | M0 T434 S3 | Authenticated native CREATE/EXIT facts, both-width/fault evidence, coherent publication and explicit remaining DOS/UI scope. | Retain through delivery and full task acceptance. |

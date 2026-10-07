@@ -10,7 +10,7 @@ typedef NTSTATUS (NTAPI *OpenFn)(PHANDLE,ACCESS_MASK,POBJECT_ATTRIBUTES,PIO_STAT
 typedef NTSTATUS (NTAPI *WriteFn)(HANDLE,HANDLE,PVOID,PVOID,PIO_STATUS_BLOCK,PVOID,ULONG,PLARGE_INTEGER,PULONG);
 typedef NTSTATUS (NTAPI *SetFn)(HANDLE,PIO_STATUS_BLOCK,PVOID,ULONG,FILE_INFORMATION_CLASS);
 static CreateFn real_create; static OpenFn real_open; static WriteFn real_write; static SetFn real_set;
-static std::wstring root;
+static std::wstring root, install_target;
 static HANDLE log_handle=INVALID_HANDLE_VALUE;
 static __declspec(thread) bool nested;
 static std::wstring handle_name(HANDLE h) {
@@ -31,8 +31,12 @@ static std::wstring normalize(std::wstring p) {
     return n && n<32768 ? std::wstring(full,n) : L"";
 }
 static bool owned(const std::wstring& p) {
-    return p.size()>=root.size() && !_wcsnicmp(p.c_str(),root.c_str(),root.size()) &&
+    bool staging=p.size()>=root.size() && !_wcsnicmp(p.c_str(),root.c_str(),root.size()) &&
         (p.size()==root.size() || p[root.size()]==L'\\');
+    bool destination=!install_target.empty() && p.size()>=install_target.size() &&
+        !_wcsnicmp(p.c_str(),install_target.c_str(),install_target.size()) &&
+        (p.size()==install_target.size() || p[install_target.size()]==L'\\');
+    return staging || destination;
 }
 static bool device(const std::wstring& p) {
     return prefix(p,L"\\Device\\NamedPipe\\") || prefix(p,L"\\Device\\ConDrv\\") ||
@@ -109,7 +113,16 @@ static void __cdecl initialize_guard() {
     wchar_t env[32768]; DWORD n=GetEnvironmentVariableW(L"WIN101_GUARD_ROOT",env,32768);
     if(!n || n>=32768) ExitProcess(127);
     root=normalize(std::wstring(env,n));
-    if(root.empty() || root.find(L"\\build\\")==std::wstring::npos) ExitProcess(127);
+    while(root.size()>3 && root.back()==L'\\')root.pop_back();
+    if(root.empty() || (root.find(L"\\build\\")==std::wstring::npos &&
+        _wcsicmp(root.c_str(),normalize(L"O:\\win101-setup").c_str()))) ExitProcess(127);
+    n=GetEnvironmentVariableW(L"WIN101_GUARD_TARGET",env,32768);
+    if(n) {
+        if(n>=32768)ExitProcess(127);
+        install_target=normalize(std::wstring(env,n));
+        // Owner's S3 installation destination only, not a generic write grant.
+        if(_wcsicmp(install_target.c_str(),normalize(L"O:\\win101").c_str()))ExitProcess(127);
+    }
     HMODULE nt=GetModuleHandleW(L"ntdll.dll");
     real_create=(CreateFn)GetProcAddress(nt,"NtCreateFile"); real_open=(OpenFn)GetProcAddress(nt,"NtOpenFile");
     real_write=(WriteFn)GetProcAddress(nt,"NtWriteFile"); real_set=(SetFn)GetProcAddress(nt,"NtSetInformationFile");
