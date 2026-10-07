@@ -2,7 +2,7 @@ param([Parameter(Mandatory)][string]$OriginalWin386,
       [Parameter(Mandatory)][string]$NtDos,
       [Parameter(Mandatory)][string]$OutputRoot)
 $ErrorActionPreference='Stop'
-$repo=(Resolve-Path "$PSScriptRoot/../../..").Path
+$repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $output=[IO.Path]::GetFullPath($OutputRoot)
 if(!$output.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $output)){throw 'Fresh build-owned output required'}
 if((Get-FileHash $OriginalWin386).Hash -ne '6006860AE1003114583D70A1C6447247E1280A99633202912092A5F06A0C22A5'){throw 'Unsupported retail WIN386 identity'}

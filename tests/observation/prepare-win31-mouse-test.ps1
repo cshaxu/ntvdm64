@@ -27,12 +27,12 @@ $body=[regex]::Replace($boot.Groups['body'].Value,'(?im)^mouse\.drv=[^\r\n]*',
 $start=$boot.Groups['body'].Index;$length=$boot.Groups['body'].Length
 $after=$before.Substring(0,$start)+$body+$before.Substring($start+$length)
 [IO.File]::WriteAllText("$root/SYSTEM.INI",$after,[Text.Encoding]::ASCII)
-foreach($mode in @('Standard','Enhanced')) {
-    & "$repo/src/addon/win31-launch/configure-launch.ps1" -InstallRoot $install -OutputDirectory "$root/$mode" -Mode $mode
-}
+# S3 keeps profile generation confined to an installation-local PATCH. This
+# non-mutating S2 preparation fixture stages only driver selection; its launch
+# profile assertion has moved to win31_launch_profile_test.ps1.
 [ordered]@{role='recoverable-installation-driver-selection-not-runtime-pass';
     installation=$install;originalIniSha256=(Get-FileHash $ini).Hash;
     driverSha256=(Get-FileHash $driverPath).Hash;
     targetDriver="$profile\MOUSE31.DRV";originalRetailMouseSha256=(Get-FileHash "$install/SYSTEM/MOUSE.DRV").Hash
 } |ConvertTo-Json|Set-Content "$root/preparation.json"
-'PASS staged test-only driver selection, recoverable INI and separate /S /3 PIFs; nothing deployed'
+'PASS staged test-only driver selection and recoverable INI; nothing deployed'

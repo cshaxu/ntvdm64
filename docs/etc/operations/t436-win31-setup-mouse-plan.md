@@ -55,8 +55,8 @@ The Win1.01 accepted original-Setup workflow is retained, not reimplemented.
   adaptation to NTVDM's existing mouse capability. Audit the actual Win3.1
   driver ABI and standard/enhanced mode boundaries first; do not rename or
   blindly copy the Windows 1.01 driver as a substitute.
-- **S3** review and fold the applicable existing `win31-launch` implementation into
-  `win31-setup`; remove displaced duplicate paths and update their callers.
+- **S3** review and fold the applicable migrated `tools/win31-setup` implementation
+  into its final package shape; remove displaced duplicate paths and update callers.
   Existing references/evidence are retained, not silently rewritten as passes.
 - **S3** `O:/w31setup`: unchanged original installation media at the root; all authored
   driver/script/template/patch additions under `PATCH`. Keep the package

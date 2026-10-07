@@ -15,7 +15,7 @@
       "sha256": "D6BA5380A2EDCDB33E0C36850FB6BDD0542D78EC03E982DBD5114A462B0A2F1A",
       "source": "src/addon/win31-mouse-drv/mouse31.asm",
       "sourceSha256": "22D0A16DC701CA058BFC4357A155460C06187CBB0DDB6A3805735067CC19FCB9",
-      "acceptance": "candidate"
+      "acceptance": "verified"
     }
   ]
 }

@@ -2,7 +2,7 @@
 
 ## Owner-approved independent guest add-on — T435
 
-T436 S1 owner follow-up admits src/addon/win31-launch for isolated Windows 3.1
+T436 S1 owner follow-up admits tools/win31-setup for isolated Windows 3.1
 launch-profile generation only. It owns scripts/templates, not guest binaries,
 kernel patches or host runtime linkage. Output is staged under build and copied
 to the owner-authorized installation PATCH directory; default profiles stay intact.

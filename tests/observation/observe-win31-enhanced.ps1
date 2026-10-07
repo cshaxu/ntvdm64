@@ -50,7 +50,7 @@ if($ExitConfirmProbe -and (!$MouseExitSequence -or !$ExitDialogRegion -or !$Exit
     throw 'Exit confirmation requires an observed specific dialog rectangle/hash'
 }
 if($RequiredTempDirectory -and !(Test-Path -LiteralPath $RequiredTempDirectory -PathType Container)) {
-    throw 'Missing launcher TEMP prerequisite; direct PIF observation does not run win.cmd mkdir'
+    throw 'Missing launcher TEMP prerequisite; direct PIF observation does not run WIN386.CMD mkdir'
 }
 $binary=Join-Path (Resolve-Path $PackageRoot).Path 'system32'
 if(@(Get-CimInstance Win32_Process|Where-Object {$_.ExecutablePath -eq "$binary\ntsrv.exe"}).Count){throw 'Preserve existing broker/session; trial requires idle endpoint'}

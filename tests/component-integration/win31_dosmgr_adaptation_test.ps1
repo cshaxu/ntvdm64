@@ -7,7 +7,7 @@ $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)) {
     throw 'Fresh build-owned test output required'
 }
-$generator=Join-Path $repo 'src/addon/win31-launch/adapt-retail-dosmgr.ps1'
+$generator=Join-Path $repo 'tools/win31-setup/adapt-retail-dosmgr.ps1'
 & $generator -OriginalWin386 $OriginalWin386 -NtDos $NtDos -OutputRoot "$root/positive"
 $output=Join-Path $root 'positive/WIN386.EXE'
 if((Get-FileHash $output).Hash -ne 'C67E667E25E91C65EFB5ACDDEC437DA8B586037DA7DE502228CA8FBD806CF3F8') {

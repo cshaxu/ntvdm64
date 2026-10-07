@@ -1,0 +1,6 @@
+@echo off
+powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0run-setup.ps1"
+set "setup_result=%errorlevel%"
+echo Original Setup/run16 exit code: %setup_result%
+pause
+exit /b %setup_result%

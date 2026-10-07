@@ -7,7 +7,8 @@ delivered single-worker/dual-Hook gates; see
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
-| [T436 stage sequence](operations/t436-win31-setup-mouse-plan.md) | M0 T436 concluded S2 / planned S3 | Accepted limited S1 research, concluded mouse-driver delivery and subsequent installer patches. | Retain through sequential delivery and task acceptance. |
+| [T436 stage sequence](operations/t436-win31-setup-mouse-plan.md) | M0 T436 concluded S2 / concluded S3 | Accepted limited S1 research, concluded mouse-driver delivery and subsequent installer patches. | Retain through sequential delivery and task acceptance. |
+| [T436 S3 Win31 Setup package](evidence/m0-t436-s3-win31-setup-package.md) | M0 T436 S3 | Original-media PATCH package, explicit standard/enhanced entrypoints, self-contained installed profiles and checked recovery adaptation. | Retain through owner hand-test and task acceptance. |
 | [T436 S2 Win31 mouse driver](evidence/m0-t436-s2-win31-mouse-driver.md) | M0 T436 S2 | Protected/real callback ABI, independent driver design, standard-mode exit proof and accepted enhanced limitation. | Retain through delivery and owner acceptance. |
 | [T436 S1 Win31 launch profile](evidence/m0-t436-s1-win31-launch-profile.md) | M0 T436 S1 | Isolated standard-mode PATCH profile and unchanged guest/default configuration proof; runtime trial pending. | Retain through feasibility and owner acceptance. |
 | [T435 S1 mouse audit](evidence/m0-t435-s1-win101-mouse-audit.md) | M0 T435 S1 | Original device gaps and actual Win1.01/INT33 bridge design. | Retain through repair and owner acceptance. |
