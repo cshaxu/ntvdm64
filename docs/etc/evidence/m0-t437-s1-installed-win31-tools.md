@@ -76,9 +76,16 @@ The actual shipped `APPLY.CMD` files were exercised against that short-path fixt
 returned zero for both Win31 tools.  Empty target input returns `64` and
 leaves the prompt window open for all three add-on entrypoints.
 
-## Remaining owner validation
+## Runtime startup witness and remaining limits
 
-The tools prepare standard (`/S`) and enhanced (`/3`) profiles.  Standard and
-enhanced guest launches still require owner runtime confirmation on a selected
-installed tree; enhanced preparation is not an enhanced-mode reliability
-claim.  The separate queue-tail original Setup transition remains untouched.
+Both generated profiles were launched through plain `run16` against the same
+short-path external fixture.  Each bounded fifteen-second observation created
+the expected chain — `run16`, `ntsrv`, `ntcon`, and `ntvdm` — and every owned
+process reported responsive before the probe cleanup.  This proves that both
+the standard (`/S`) and enhanced (`/3`) PIFs cross the ordinary `run16`
+startup boundary without a repository, package or fixed-drive dependency.
+
+It is deliberately not a claim that enhanced mode is reliable, that Program
+Manager becomes visibly usable, or that either guest exits normally.  Those
+are owner-facing runtime behaviors outside this installed-tree tool S; the
+separate queue-tail original Setup transition remains untouched.
