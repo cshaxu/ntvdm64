@@ -2,8 +2,16 @@
 
 ## Current Work
 
-**No active M/T/S packet. M0 T437 S9 is delivered; any follow-up requires a
+**No active M/T/S packet. M0 T437 S10 is delivered; any follow-up requires a
 new owner admission.**
+
+## S10 Closure Record
+
+`win31-launch` had incorrectly treated `MOUSE.DRV` as an installed-root file.
+The tool now uses the standard `SYSTEM\MOUSE.DRV` location for all preflight,
+identity, backup, and replacement operations, while retaining its recovery
+copy under `PATCH`. A focused command-contract test passed. See
+[S10 evidence](../etc/evidence/m0-t437-s10-win31-system-mouse-path.md).
 
 ## S9 Closure Record
 

@@ -8,7 +8,7 @@ echo.
 set /p "TARGET=Target installed Windows 3.1 directory: "
 if not defined TARGET (set "RESULT=64"& goto done)
 for %%I in ("%TARGET%") do set "TARGET=%%~fI"
-for %%F in (WIN.COM MOUSE.DRV SYSTEM.INI SYSTEM\KRNL386.EXE SYSTEM\WIN386.EXE) do if not exist "%TARGET%\%%F" (
+for %%F in (WIN.COM SYSTEM\MOUSE.DRV SYSTEM.INI SYSTEM\KRNL386.EXE SYSTEM\WIN386.EXE) do if not exist "%TARGET%\%%F" (
   echo Missing installed Windows file: %%F
   set "RESULT=2"
   goto done
@@ -76,7 +76,7 @@ exit /b 0
 
 :install_mouse
 set "CURRENT=" & set "RELEASE_HASH=" & set "BACKUP="
-for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%TARGET%\MOUSE.DRV"') do set "CURRENT=%%H"
+for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%TARGET%\SYSTEM\MOUSE.DRV"') do set "CURRENT=%%H"
 for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%RELEASE%\MOUSE31.DRV"') do set "RELEASE_HASH=%%H"
 if not defined CURRENT exit /b 1
 if /I not "%RELEASE_HASH%"=="D6BA5380A2EDCDB33E0C36850FB6BDD0542D78EC03E982DBD5114A462B0A2F1A" (
@@ -90,8 +90,8 @@ if /I "%CURRENT%"=="%RELEASE_HASH%" (
   exit /b 1
 )
 if exist "%PATCH%\MOUSE.DRV.ORIG" (echo Refusing to overwrite existing mouse-driver recovery copy.& exit /b 1)
-copy /y "%TARGET%\MOUSE.DRV" "%PATCH%\MOUSE.DRV.ORIG" >nul || exit /b 1
-copy /y "%RELEASE%\MOUSE31.DRV" "%TARGET%\MOUSE.DRV" >nul || exit /b 1
+copy /y "%TARGET%\SYSTEM\MOUSE.DRV" "%PATCH%\MOUSE.DRV.ORIG" >nul || exit /b 1
+copy /y "%RELEASE%\MOUSE31.DRV" "%TARGET%\SYSTEM\MOUSE.DRV" >nul || exit /b 1
 exit /b 0
 
 :mutation_failure

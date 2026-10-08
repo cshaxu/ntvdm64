@@ -5,11 +5,12 @@ project's NTVDM path.  It does not run Windows Setup and does not repair moved
 application or Program Manager paths.
 
 `APPLY.CMD` accepts a chosen installed root, preserves the two approved retail
-system binaries before replacement, replaces the installed `MOUSE.DRV` from
+system binaries before replacement, replaces the installed `SYSTEM\MOUSE.DRV` from
 the released add-on, and writes these owned recovery/profile files under
 `<root>\PATCH`:
 
-- `KRNL386.ORIG`, `WIN386.ORIG`, and `MOUSE.DRV.ORIG`;
+- `KRNL386.ORIG`, `WIN386.ORIG`, and `MOUSE.DRV.ORIG` (the original
+  `SYSTEM\MOUSE.DRV`);
 - `CONFIG.NT` and `AUTOEXEC.NT`;
 - `WINSTD.CMD` / `WINSTD.PIF` for `WIN.COM /S`;
 - `WIN386.CMD` / `WIN386.PIF` for `WIN.COM /3`.
