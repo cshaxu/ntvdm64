@@ -35,7 +35,7 @@ Get-ChildItem -LiteralPath $root -File -Include *.INI,*.GRP | ForEach-Object {
 Invoke-InteractiveCmd $apply $root 'apply-first'
 if (!(Test-Path -LiteralPath $manifest -PathType Leaf)) { throw 'Apply did not create a recovery manifest' }
 $entries = @(Get-Content -LiteralPath $manifest | ForEach-Object {
-    if ($_ -notmatch '^[^\\/:*?"<>|]+\.(INI|GRP)$') { throw "Malformed recovery manifest entry: $_" }
+    if ($_ -notmatch '^[^\\/:*?"<>|]+\.(INI|GRP|PIF)$') { throw "Malformed recovery manifest entry: $_" }
     [pscustomobject]@{ Name = $_ }
 })
 if (!$entries.Count) { throw 'Recovery manifest was empty' }

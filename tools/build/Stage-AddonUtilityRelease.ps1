@@ -1,13 +1,15 @@
 param(
     [Parameter(Mandatory)][string]$PifBuild,
-    [Parameter(Mandatory)][string]$HashBuild
+    [Parameter(Mandatory)][string]$HashBuild,
+    [Parameter(Mandatory)][string]$GrpBuild
 )
 
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $items=@(
     @{id='pif'; file='PIF.EXE'; build=$PifBuild; source='src/addon/pif/pif.c'},
-    @{id='hash';file='HASH.EXE';build=$HashBuild;source='src/addon/hash/hash.c'}
+    @{id='hash';file='HASH.EXE';build=$HashBuild;source='src/addon/hash/hash.c'},
+    @{id='grp'; file='GRP.EXE'; build=$GrpBuild; source='src/addon/grp/grp.c'}
 )
 $manifest=@()
 foreach($item in $items) {
@@ -32,4 +34,4 @@ $addonPath=Join-Path $repo 'assets/release/addon-manifest.json'
 $prior=Get-Content -LiteralPath $addonPath -Raw|ConvertFrom-Json
 if($prior.schema -ne 1 -or $null -eq $prior.drivers){throw 'Invalid existing add-on manifest'}
 [ordered]@{schema=1;drivers=@($prior.drivers);utilities=$manifest}|ConvertTo-Json -Depth 5|Set-Content -LiteralPath $addonPath -Encoding UTF8
-'PASS two AMD64 add-on utilities published in the shared add-on manifest'
+'PASS three AMD64 add-on utilities published in the shared add-on manifest'

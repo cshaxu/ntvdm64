@@ -7,7 +7,7 @@ for %%I in ("%~f1") do (
   set "OUTDIR=%%~dpI"
 )
 pushd "%OUTDIR%" || exit /b 1
-cl.exe /nologo /TC /std:c11 /W4 /WX /MT /DWINNT /I "%~dp0..\..\opennt-abi\source\public\internal\windows\inc" /Fe"%OUT%" "%~dp0pif.c" /link /MACHINE:X64
+cl.exe /nologo /TC /std:c11 /W4 /WX /MT /Fe"%OUT%" "%~dp0grp.c" /link /MACHINE:X64
 set "RESULT=%errorlevel%"
 popd
 exit /b %RESULT%

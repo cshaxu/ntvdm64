@@ -23,7 +23,8 @@ static void usage(void)
     fwprintf(stderr, L"Usage:\n"
                      L"  PIF.EXE show <file>\n"
                      L"  PIF.EXE create <file> --title T --program P --directory D --arguments A --config C --autoexec E [--close-on-exit]\n"
-                     L"  PIF.EXE update <file> [--title T] [--program P] [--directory D] [--arguments A] [--config C] [--autoexec E] [--close-on-exit]\n");
+                     L"  PIF.EXE update <file> [--title T] [--program P] [--directory D] [--arguments A] [--config C] [--autoexec E] [--close-on-exit]\n"
+                     L"  PIF.EXE replace-root <file> --from OLD --to NEW\n");
 }
 
 static BOOL read_file(const wchar_t *path, PIF_VIEW *view)
@@ -161,6 +162,52 @@ static BOOL set_values(PIF_VIEW *view, int argc, wchar_t **argv)
     return FALSE;
 }
 
+static BOOL replace_oem_root(char *field, size_t capacity,
+                             const wchar_t *old_wide, const wchar_t *new_wide,
+                             BOOL *changed)
+{
+    char old_root[260], new_root[260], replacement[260];
+    size_t length = strnlen_s(field, capacity);
+    size_t old_length;
+    int converted;
+
+    if (length == capacity) return FALSE;
+    converted = WideCharToMultiByte(CP_ACP, WC_NO_BEST_FIT_CHARS, old_wide, -1,
+                                    old_root, ARRAYSIZE(old_root), NULL, NULL);
+    if (!converted || converted == 1) return FALSE;
+    converted = WideCharToMultiByte(CP_ACP, WC_NO_BEST_FIT_CHARS, new_wide, -1,
+                                    new_root, ARRAYSIZE(new_root), NULL, NULL);
+    if (!converted || converted == 1) return FALSE;
+    old_length = strlen(old_root);
+    if (length < old_length || _strnicmp(field, old_root, old_length) ||
+        (field[old_length] && field[old_length] != '\\')) return TRUE;
+    if (strcpy_s(replacement, ARRAYSIZE(replacement), new_root) ||
+        strcat_s(replacement, ARRAYSIZE(replacement), field + old_length) ||
+        strlen(replacement) >= capacity) return FALSE;
+    ZeroMemory(field, capacity);
+    strcpy_s(field, capacity, replacement);
+    *changed = TRUE;
+    return TRUE;
+}
+
+static BOOL replace_root(PIF_VIEW *view, const wchar_t *old_root,
+                         const wchar_t *new_root, BOOL *changed)
+{
+    *changed = FALSE;
+    if (!replace_oem_root(view->standard->startfile, sizeof(view->standard->startfile),
+                          old_root, new_root, changed) ||
+        !replace_oem_root(view->standard->defpath, sizeof(view->standard->defpath),
+                          old_root, new_root, changed) ||
+        (view->nt && (!replace_oem_root(view->nt->nt31Prop.achConfigFile,
+                                        sizeof(view->nt->nt31Prop.achConfigFile),
+                                        old_root, new_root, changed) ||
+                      !replace_oem_root(view->nt->nt31Prop.achAutoexecFile,
+                                        sizeof(view->nt->nt31Prop.achAutoexecFile),
+                                        old_root, new_root, changed)))) return FALSE;
+    if (*changed && view->standard->id != 0) checksum(view);
+    return TRUE;
+}
+
 static BOOL create(const wchar_t *path, int argc, wchar_t **argv)
 {
     const wchar_t *title = option(argc, argv, L"--title"), *program = option(argc, argv, L"--program");
@@ -252,7 +299,7 @@ static void inspect(const PIF_VIEW *view)
 int wmain(int argc, wchar_t **argv)
 {
     PIF_VIEW view;
-    BOOL ok;
+    BOOL ok, changed;
     if (argc < 3) { usage(); return 64; }
     if (_wcsicmp(argv[1], L"create") == 0) {
         ok = create(argv[2], argc - 3, argv + 3);
@@ -267,6 +314,15 @@ int wmain(int argc, wchar_t **argv)
     if (_wcsicmp(argv[1], L"update") == 0) {
         ok = argc > 3 && set_values(&view, argc - 3, argv + 3) && write_file(argv[2], view.bytes, view.size);
         dispose(&view); if (!ok) fwprintf(stderr, L"PIF.EXE: could not edit %ls\n", argv[2]);
+        return ok ? 0 : 1;
+    }
+    if (_wcsicmp(argv[1], L"replace-root") == 0 && argc == 7 &&
+        _wcsicmp(argv[3], L"--from") == 0 && _wcsicmp(argv[5], L"--to") == 0) {
+        ok = replace_root(&view, argv[4], argv[6], &changed);
+        if (ok && changed) ok = write_file(argv[2], view.bytes, view.size);
+        dispose(&view);
+        if (!ok) fwprintf(stderr, L"PIF.EXE: could not update %ls\n", argv[2]);
+        else wprintf(L"CHANGED=%lu\n", changed ? 1ul : 0ul);
         return ok ? 0 : 1;
     }
     dispose(&view); usage(); return 64;

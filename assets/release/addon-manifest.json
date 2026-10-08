@@ -23,7 +23,7 @@
                           "id":  "pif",
                           "file":  "PIF.EXE",
                           "architecture":  "amd64",
-                          "sha256":  "A2C96803CD833FB858017F3F28DFBA9CD7F6152D5513DA2B8BC9825183F06DFC",
+                          "sha256":  "18BB1AF6A7C1E5B00D69490B978D3C48075889891DFB5B21F095711A5824AFDD",
                           "source":  "src/addon/pif/pif.c"
                       },
                       {
@@ -32,6 +32,13 @@
                           "architecture":  "amd64",
                           "sha256":  "CE17C834B092348F95093EFD33B4A80B74C6EE82C462C7D73ABFC37306887CCC",
                           "source":  "src/addon/hash/hash.c"
+                      },
+                      {
+                          "id":  "grp",
+                          "file":  "GRP.EXE",
+                          "architecture":  "amd64",
+                          "sha256":  "98F405D411C7A657BDD104187739A2EA87A8E35CFA43C5EC8BE2412A185E2824",
+                          "source":  "src/addon/grp/grp.c"
                       }
                   ]
 }
