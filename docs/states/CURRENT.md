@@ -6,10 +6,11 @@
 
 ## Latest closure
 
-M0 T437 closed with portable installed-Windows-3.1 launch/path tools and the
-follow-up S2 single-entrypoint cleanup. The original Setup protected-mode
-transition remains deferred; no active packet may absorb it without admission.
-See the [T437 closure](../history/m0-t437-installed-win31-portable-launch-closure.md).
+M0 T437 closed with portable installed-Windows-3.1 launch/path tools, S2
+single-entrypoint cleanup, and S3 AMD64 PIF/hash utilities. The original Setup
+protected-mode transition and the separate Win1.01 CMD orchestration migration
+remain deferred; no active packet may absorb either without admission. See the
+[T437 closure](../history/m0-t437-installed-win31-portable-launch-closure.md).
 
 ## Current Technical Baseline
 

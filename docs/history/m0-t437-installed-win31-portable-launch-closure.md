@@ -44,3 +44,10 @@ automation requires it. The comparable Win3.1 launch and path tools already
 had exactly one `APPLY.CMD`; build-only `win31-setup` has no repository-side
 interactive batch launcher. The focused sweep is recorded in
 [T437 S2 single tool entrypoint](../etc/evidence/m0-t437-s2-single-tool-entrypoint.md).
+
+## S3 reusable utility foundation
+
+S3 adds the AMD64 `PIF.EXE` and `HASH.EXE` tools under their own add-on source
+homes. They contain only PIF mechanics and SHA-256 printing respectively; they
+do not take over Win1.01 Setup policy. Their focused format, negative and
+machine-identity evidence is [T437 S3 PIF and hash utilities](../etc/evidence/m0-t437-s3-pif-hash-utilities.md).
