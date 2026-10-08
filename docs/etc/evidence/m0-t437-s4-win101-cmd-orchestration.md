@@ -56,3 +56,9 @@ needed in media or installed `PATCH` directories.
 Retain the original-Setup guest run as the acceptance step. Any failure that
 requires directly patching an immutable guest core image requires new task
 admission.
+
+## Superseded media handling
+
+S5 supersedes this record's temporary-media `MOUSE.DRV` handling. The current
+owner-approved model replaces the selected media-root file in place and keeps
+its original bytes as `MOUSE.DRV.BAK`; see the S5 evidence record.

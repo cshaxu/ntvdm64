@@ -22,18 +22,22 @@ foreach ($name in @('PIF.EXE','HASH.EXE','MOUSE101.DRV')) {
 function New-Media([string]$Name) {
     $media = Join-Path $BuildRoot $Name
     New-Item -ItemType Directory -Force -Path $media | Out-Null
-    foreach ($name in @('SETUP.EXE','SETUP.LBL','KERNEL.EXE','USER.EXE','GDI.EXE','DISK1','DISK2','DISK3','DISK4','DISK5')) {
+    foreach ($name in @('SETUP.EXE','SETUP.LBL','KERNEL.EXE','USER.EXE','GDI.EXE','DISK1','DISK2','DISK3','DISK4','DISK5','MOUSE.DRV')) {
         [IO.File]::WriteAllBytes((Join-Path $media $name), [Text.Encoding]::ASCII.GetBytes($name))
     }
     return $media
 }
 
-function Invoke-Apply([string]$Media) {
+function Invoke-Apply([string]$Media, [int]$ExpectedExit = 0) {
     $input = Join-Path $BuildRoot ('apply-' + [IO.Path]::GetFileName($Media) + '.txt')
     [IO.File]::WriteAllText($input, "$Media`r`n`r`n", [Text.Encoding]::ASCII)
     $command = '(type "{0}" & echo.) | call "{1}"' -f $input,(Join-Path $ToolRoot 'APPLY.CMD')
-    $process = Start-Process -FilePath cmd.exe -ArgumentList @('/d','/c',$command) -Wait -PassThru
-    if ($process.ExitCode -ne 0) { throw "APPLY.CMD failed: $($process.ExitCode)" }
+    $stdout = Join-Path $BuildRoot ('apply-' + [IO.Path]::GetFileName($Media) + '.out')
+    $stderr = Join-Path $BuildRoot ('apply-' + [IO.Path]::GetFileName($Media) + '.err')
+    $process = Start-Process -FilePath cmd.exe -ArgumentList @('/d','/c',$command) -RedirectStandardOutput $stdout -RedirectStandardError $stderr -Wait -PassThru
+    if ($process.ExitCode -ne $ExpectedExit) {
+        throw "APPLY.CMD returned $($process.ExitCode), expected $ExpectedExit`n$((Get-Content -LiteralPath $stdout -Raw))$((Get-Content -LiteralPath $stderr -Raw))"
+    }
 }
 
 function Invoke-Setup([string]$Media, [string]$Install, [int]$ExitCode) {
@@ -69,17 +73,34 @@ exit /b 0
 
 $media = New-Media 'm'
 $install = Join-Path $BuildRoot 'i'
+$originalMouse = (Get-FileHash -LiteralPath (Join-Path $media 'MOUSE.DRV')).Hash
 Invoke-Apply $media
 $patch = Join-Path $media 'PATCH'
-foreach ($name in @('SETUP.CMD','README.TXT','MOUSE.DRV','SETVER.EXE','PIF.EXE','HASH.EXE')) {
+foreach ($name in @('SETUP.CMD','PIF.EXE','HASH.EXE','SETVER.EXE')) {
     if (!(Test-Path -LiteralPath (Join-Path $patch $name) -PathType Leaf)) { throw "PATCH missing $name" }
 }
-foreach ($name in @('configure-launch.ps1','run-setup.ps1','win.cmd.template','WIN31-TEMPLATE.PIF','addon-files.json','TEMP')) {
+if ((Get-ChildItem -LiteralPath $patch -Force -File | Select-Object -ExpandProperty Name | Sort-Object) -join ',' -ne 'HASH.EXE,PIF.EXE,SETUP.CMD,SETVER.EXE') {
+    throw 'media PATCH did not contain exactly the declared helpers'
+}
+if ((Get-FileHash -LiteralPath (Join-Path $media 'MOUSE.DRV')).Hash -ne (Get-FileHash -LiteralPath (Join-Path $ToolRoot 'MOUSE.DRV')).Hash) {
+    throw 'media root did not receive the released replacement mouse driver'
+}
+if ((Get-FileHash -LiteralPath (Join-Path $media 'MOUSE.DRV.BAK')).Hash -ne $originalMouse) {
+    throw 'media MOUSE.DRV.BAK did not preserve the original driver bytes'
+}
+Invoke-Apply $media
+if ((Get-FileHash -LiteralPath (Join-Path $media 'MOUSE.DRV.BAK')).Hash -ne $originalMouse) {
+    throw 'repeat apply changed the preserved original driver'
+}
+foreach ($name in @('configure-launch.ps1','run-setup.ps1','win.cmd.template','WIN31-TEMPLATE.PIF','addon-files.json','TEMP','MOUSE.DRV','README.TXT')) {
     if (Test-Path -LiteralPath (Join-Path $patch $name)) { throw "PATCH retained forbidden $name" }
 }
 Invoke-Setup $media $install 0
 if (Test-Path -LiteralPath (Join-Path $patch 'TEMP')) { throw 'successful SETUP.CMD retained TEMP' }
-foreach ($name in @('WIN101.PIF','CONFIG.NT','AUTOEXEC.NT','WIN.CMD','MOUSE.DRV','SETVER.EXE')) {
+if ((Get-ChildItem -LiteralPath $patch -Force -File | Select-Object -ExpandProperty Name | Sort-Object) -join ',' -ne 'HASH.EXE,PIF.EXE,SETUP.CMD,SETVER.EXE') {
+    throw 'successful SETUP.CMD retained non-helper media PATCH state'
+}
+foreach ($name in @('WIN101.PIF','CONFIG.NT','AUTOEXEC.NT','WIN.CMD','SETVER.EXE')) {
     if (!(Test-Path -LiteralPath (Join-Path $install "PATCH\$name") -PathType Leaf)) { throw "installed PATCH missing $name" }
 }
 foreach ($name in @('WIN.PIF','CONFIG.NT','AUTOEXEC.NT')) {
@@ -95,5 +116,12 @@ $failedMedia = New-Media 'f'
 Invoke-Apply $failedMedia
 Invoke-Setup $failedMedia (Join-Path $BuildRoot 'n') 37
 if (Test-Path -LiteralPath (Join-Path $failedMedia 'PATCH\TEMP')) { throw 'failed SETUP.CMD retained TEMP' }
-if ((Get-Content -LiteralPath (Join-Path $failedMedia 'PATCH\setup-result.txt') -Raw).Trim() -ne 'run16_exit=37') { throw 'failed SETUP.CMD did not retain true result' }
+if (Test-Path -LiteralPath (Join-Path $failedMedia 'PATCH\setup-result.txt')) { throw 'failed SETUP.CMD retained non-helper result state' }
+$conflictingMedia = New-Media 'c'
+[IO.File]::WriteAllBytes((Join-Path $conflictingMedia 'MOUSE.DRV.BAK'), [Text.Encoding]::ASCII.GetBytes('unrecognised backup'))
+$beforeConflict = (Get-FileHash -LiteralPath (Join-Path $conflictingMedia 'MOUSE.DRV')).Hash
+Invoke-Apply $conflictingMedia 5
+if ((Get-FileHash -LiteralPath (Join-Path $conflictingMedia 'MOUSE.DRV')).Hash -ne $beforeConflict) {
+    throw 'conflicting backup failure overwrote the original media driver'
+}
 'PASS Win1.01 APPLY/SETUP CMD orchestration, generated profile, and cleanup'

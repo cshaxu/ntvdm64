@@ -69,3 +69,17 @@ and release-identity evidence is [T437 S4](../etc/evidence/m0-t437-s4-win101-cmd
 Original guest Setup completion remains a manual acceptance boundary. This
 tooling delivery neither patches immutable source media nor claims that a
 specific original Setup run completed.
+
+## S5 reversible selected-media replacement
+
+The owner revised the Win1.01 media rule: the selected user media is now the
+intended recoverable delivery surface. `APPLY.CMD` moves root `MOUSE.DRV` to
+`MOUSE.DRV.BAK` and puts the released replacement at the original root path.
+It recognizes an already-applied replacement, keeps the backup unchanged on
+repeat execution, and refuses conflicting backup/current state.
+
+The media `PATCH` now has exactly `SETUP.CMD`, `PIF.EXE`, `HASH.EXE`, and
+`SETVER.EXE`; it has neither a mouse-driver duplicate nor a persistent work
+area. `SETUP.CMD` builds only transient launch settings, which it removes on
+success or failure. The source, repeat, conflict, cleanup and profile tests
+are recorded in [T437 S5 evidence](../etc/evidence/m0-t437-s5-win101-reversible-media-mouse.md).

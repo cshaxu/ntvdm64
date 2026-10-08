@@ -6,12 +6,12 @@
 
 ## Latest closure
 
-M0 T437 closed with portable installed-tree Windows 3.1 repair tools, AMD64
-format-only `PIF.EXE`/single-purpose `HASH.EXE`, and a CMD-only Windows 1.01
-media/installed-PATCH orchestrator. The original Setup guest run remains a
-manual acceptance boundary; no source media or `WIN100.BIN` is patched
-directly. See the [T437 closure](../history/m0-t437-installed-win31-portable-launch-closure.md)
-and [S4 evidence](../etc/evidence/m0-t437-s4-win101-cmd-orchestration.md).
+M0 T437 now delivers a reversible Win1.01 media-root replacement: selected
+`MOUSE.DRV` becomes `MOUSE.DRV.BAK`, and the released driver occupies the
+original root path. The media `PATCH` contains only `SETUP.CMD`, `PIF.EXE`,
+`HASH.EXE`, and `SETVER.EXE`. See the
+[T437 closure](../history/m0-t437-installed-win31-portable-launch-closure.md)
+and [S5 evidence](../etc/evidence/m0-t437-s5-win101-reversible-media-mouse.md).
 
 ## Current Technical Baseline
 
