@@ -26,6 +26,16 @@ relocation evidence is recorded in
 The final utility ownership consolidation is recorded in
 [M0 T437 S8](../etc/evidence/m0-t437-s8-addon-utility-consolidation.md).
 
+## S9--S11 corrective closures
+
+S9 removed the remaining duplicate Win1.01 mouse driver from its tool package
+and made the released add-on the single source. S10 corrected Win3.1 driver
+selection to `SYSTEM\MOUSE.DRV`. S11 replaced the older `PATCH\*.ORIG`
+recovery layout with adjacent `.BAK` files and added authenticated
+`UNAPPLY.CMD`. Their evidence is [S9](../etc/evidence/m0-t437-s9-win101-release-driver-source.md),
+[S10](../etc/evidence/m0-t437-s10-win31-system-mouse-path.md), and
+[S11](../etc/evidence/m0-t437-s11-win31-adjacent-backups.md).
+
 On a valid short-path installed fixture, both generated PIFs started through
 plain `run16` in bounded fifteen-second probes.  Each created responsive
 owned `run16`, `ntsrv`, `ntcon`, and `ntvdm` processes before scoped cleanup.

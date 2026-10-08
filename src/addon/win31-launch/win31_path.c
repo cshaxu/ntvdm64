@@ -49,6 +49,17 @@ static BOOL write_file(const wchar_t *path, const char *bytes, DWORD length)
     return ok;
 }
 
+/* Preserve the preimage beside the file being replaced.  An existing .BAK
+ * belongs to an earlier repair and is never overwritten. */
+static BOOL backup_original(const wchar_t *path)
+{
+    wchar_t backup[MAX_PATH];
+
+    if (swprintf_s(backup, MAX_PATH, L"%ls.BAK", path) < 0 ||
+        GetFileAttributesW(backup) != INVALID_FILE_ATTRIBUTES) return FALSE;
+    return CopyFileW(path, backup, TRUE);
+}
+
 static BOOL ordinary_file(const wchar_t *path)
 {
     DWORD attributes = GetFileAttributesW(path);
@@ -199,8 +210,9 @@ static BOOL replace_references(const wchar_t *root, const wchar_t *path,
         cursor = match + old_length;
     }
     strcpy_s(writer, output_length - (size_t)(writer - output), cursor);
-    if (swprintf_s(temporary, MAX_PATH, L"%ls.T437", path) < 0 ||
+    if (swprintf_s(temporary, MAX_PATH, L"%ls.T438", path) < 0 ||
         !write_file(temporary, output, (DWORD)strlen(output)) ||
+        !backup_original(path) ||
         !MoveFileExW(temporary, path, MOVEFILE_REPLACE_EXISTING | MOVEFILE_WRITE_THROUGH)) {
         DeleteFileW(temporary);
         goto fail;
@@ -344,8 +356,9 @@ static BOOL repair_group_file(const wchar_t *root, const wchar_t *path,
         for (i = 0; i + 1u < cursor; i += 2u) checksum = (WORD)(checksum + read_u16(output, i));
         write_u16(output, 4, (WORD)(0u - checksum));
     }
-    if (swprintf_s(temporary, MAX_PATH, L"%ls.T437", path) < 0 ||
+    if (swprintf_s(temporary, MAX_PATH, L"%ls.T438", path) < 0 ||
         !write_file(temporary, (const char *)output, cursor) ||
+        !backup_original(path) ||
         !MoveFileExW(temporary, path, MOVEFILE_REPLACE_EXISTING | MOVEFILE_WRITE_THROUGH)) {
         DeleteFileW(temporary);
         goto fail;
