@@ -17,18 +17,18 @@ for %%F in (SETUP.EXE SETUP.LBL KERNEL.EXE USER.EXE GDI.EXE DISK1 DISK2 DISK3 DI
   set "RESULT=2"
   goto done
 )
-for %%F in (SETUP.CMD SETVER.EXE MOUSE.DRV) do if not exist "%~dp0%%F" (
+for %%F in (SETUP.CMD SETVER.EXE) do if not exist "%~dp0%%F" (
   echo Tool package is incomplete: %%F
   set "RESULT=3"
   goto done
 )
-for %%F in (PIF.EXE HASH.EXE) do if not exist "%RELEASE%\%%F" (
+for %%F in (PIF.EXE HASH.EXE MOUSE101.DRV) do if not exist "%RELEASE%\%%F" (
   echo Missing released add-on: %RELEASE%\%%F
   set "RESULT=3"
   goto done
 )
 set "NEW_HASH="
-for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%~dp0MOUSE.DRV"') do set "NEW_HASH=%%H"
+for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%RELEASE%\MOUSE101.DRV"') do set "NEW_HASH=%%H"
 if not defined NEW_HASH goto hash_failure
 set "PATCH=%TARGET%\PATCH"
 if not exist "%PATCH%\" mkdir "%PATCH%" || (
@@ -66,7 +66,7 @@ if exist "%TARGET%\MOUSE.DRV.BAK" (
     set "RESULT=5"
     goto done
   )
-  copy /y "%~dp0MOUSE.DRV" "%TARGET%\MOUSE.DRV" >nul || (
+  copy /y "%RELEASE%\MOUSE101.DRV" "%TARGET%\MOUSE.DRV" >nul || (
     echo Could not install replacement MOUSE.DRV.
     move /y "%TARGET%\MOUSE.DRV.BAK" "%TARGET%\MOUSE.DRV" >nul 2>nul
     set "RESULT=5"

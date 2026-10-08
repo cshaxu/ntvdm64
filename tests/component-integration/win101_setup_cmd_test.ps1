@@ -11,14 +11,10 @@ if ((Join-Path $BuildRoot 'm\PATCH\TEMP\CONFIG.NT').Length -gt 63) {
 }
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $release = Join-Path $repo 'assets/release'
-foreach ($name in @('PIF.EXE','HASH.EXE')) {
+foreach ($name in @('PIF.EXE','HASH.EXE','MOUSE.DRV')) {
     if (Test-Path -LiteralPath (Join-Path $ToolRoot $name)) {
         throw "Win1.01 tool directory must not duplicate released $name"
     }
-}
-if ((Get-FileHash -LiteralPath (Join-Path $ToolRoot 'MOUSE.DRV')).Hash -ne
-    (Get-FileHash -LiteralPath (Join-Path $release 'MOUSE101.DRV')).Hash) {
-    throw 'Win1.01 tool mouse driver is not the released MOUSE101.DRV'
 }
 
 $closePif=Join-Path $BuildRoot 'close-on-exit.pif'
@@ -107,7 +103,7 @@ foreach ($name in @('SETUP.CMD','PIF.EXE','HASH.EXE','SETVER.EXE')) {
 if ((Get-ChildItem -LiteralPath $patch -Force -File | Select-Object -ExpandProperty Name | Sort-Object) -join ',' -ne 'HASH.EXE,PIF.EXE,SETUP.CMD,SETVER.EXE') {
     throw 'media PATCH did not contain exactly the declared helpers'
 }
-if ((Get-FileHash -LiteralPath (Join-Path $media 'MOUSE.DRV')).Hash -ne (Get-FileHash -LiteralPath (Join-Path $ToolRoot 'MOUSE.DRV')).Hash) {
+if ((Get-FileHash -LiteralPath (Join-Path $media 'MOUSE.DRV')).Hash -ne (Get-FileHash -LiteralPath (Join-Path $release 'MOUSE101.DRV')).Hash) {
     throw 'media root did not receive the released replacement mouse driver'
 }
 if ((Get-FileHash -LiteralPath (Join-Path $media 'MOUSE.DRV.BAK')).Hash -ne $originalMouse) {

@@ -7,6 +7,7 @@ delivered single-worker/dual-Hook gates; see
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T437 S9 Win1.01 released driver source](evidence/m0-t437-s9-win101-release-driver-source.md) | M0 T437 S9 | Removes the duplicate Win1.01 driver from the tool package and verifies release-only Apply/Unapply identity. | Retain through Win1.01 media acceptance. |
 | [T437 S8 add-on utility consolidation](evidence/m0-t437-s8-addon-utility-consolidation.md) | M0 T437 S8 | Consolidates released PIF/HASH/driver use, CMD-owned installed-tree preparation, and the narrow PATCH386 helper. | Retain through portable-launch acceptance. |
 | [T437 S7 Win1.01 Setup completion](evidence/m0-t437-s7-win101-setup-close-on-exit.md) | M0 T437 S7 | Records the original PIF CloseOnExit distinction, explicit installer profile and focused tool/package proof. | Retain through original-Setup hand acceptance. |
 | [T437 S6 Win1.01 media recovery](evidence/m0-t437-s6-win101-media-unapply.md) | M0 T437 S6 | Verified selected-media unapply, local `.BAK` restoration, authenticated helper deletion, and owner-content preservation. | Retain through owner media acceptance. |

@@ -17,17 +17,17 @@ for %%F in (MOUSE.DRV MOUSE.DRV.BAK) do if not exist "%TARGET%\%%F" (
   set "RESULT=2"
   goto done
 )
-for %%F in (SETUP.CMD SETVER.EXE MOUSE.DRV) do if not exist "%~dp0%%F" (
+for %%F in (SETUP.CMD SETVER.EXE) do if not exist "%~dp0%%F" (
   echo Tool package is incomplete: %%F
   set "RESULT=3"
   goto done
 )
-for %%F in (PIF.EXE HASH.EXE) do if not exist "%RELEASE%\%%F" (
+for %%F in (PIF.EXE HASH.EXE MOUSE101.DRV) do if not exist "%RELEASE%\%%F" (
   echo Missing released add-on: %RELEASE%\%%F
   set "RESULT=3"
   goto done
 )
-fc /b "%~dp0MOUSE.DRV" "%TARGET%\MOUSE.DRV" >nul
+fc /b "%RELEASE%\MOUSE101.DRV" "%TARGET%\MOUSE.DRV" >nul
 if errorlevel 1 (
   echo Refusing to overwrite an unrecognised current MOUSE.DRV.
   set "RESULT=5"

@@ -2,14 +2,14 @@
 
 Open `APPLY.CMD`, enter the original Windows 1.01 media directory once, then
 run that media directory's `PATCH\SETUP.CMD` from CMD. `APPLY.CMD` renames
-the media-root `MOUSE.DRV` to `MOUSE.DRV.BAK` and installs the released driver
-at the original `MOUSE.DRV` path. It never puts a replacement driver in
+the media-root `MOUSE.DRV` to `MOUSE.DRV.BAK` and installs
+`assets\release\MOUSE101.DRV` at the original `MOUSE.DRV` path. It never puts a replacement driver in
 `PATCH`.
 
 The media `PATCH` contains exactly `SETUP.CMD`, `PIF.EXE`, `HASH.EXE`, and
-`SETVER.EXE`. `APPLY.CMD` takes `PIF.EXE` and `HASH.EXE` directly from the
-repository's `assets\release` originals before copying them there; it does not
-carry duplicate utility binaries in this tool directory. `SETUP.CMD` creates only transient launch configuration files,
+`SETVER.EXE`. `APPLY.CMD` takes `PIF.EXE`, `HASH.EXE`, and `MOUSE101.DRV`
+directly from the repository's `assets\release` originals; it does not carry
+duplicate utility binaries or a mouse-driver copy in this tool directory. `SETUP.CMD` creates only transient launch configuration files,
 starts original Setup through plain `run16`, and removes those files before
 returning. Original Setup remains responsible for assembling `WIN100.BIN`.
 Its one-shot Setup PIF and generated Windows launch PIF explicitly request

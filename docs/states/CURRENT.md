@@ -2,8 +2,16 @@
 
 ## Current Work
 
-**No active M/T/S packet. M0 T437 S8 is delivered; any follow-up requires a
+**No active M/T/S packet. M0 T437 S9 is delivered; any follow-up requires a
 new owner admission.**
+
+## S9 Closure Record
+
+`tools/win101-setup` no longer contains `MOUSE.DRV`. Its APPLY and UNAPPLY
+paths authenticate and consume only `assets/release/MOUSE101.DRV`; the media
+PATCH remains the four runtime helpers only. The focused apply/recovery/setup
+fixture passed with positive, repeat, failure, and recovery coverage. See
+[S9 evidence](../etc/evidence/m0-t437-s9-win101-release-driver-source.md).
 
 ## S8 Closure Record
 
