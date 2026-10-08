@@ -11,7 +11,9 @@ Windows 1.01 NTVDM installer patch
    installed PATCH\WIN.CMD and its PIF/configuration files.
 4. Run installed PATCH\WIN.CMD. It resolves run16 from PATH.
 
-Media PATCH contains only SETUP.CMD, PIF.EXE, HASH.EXE and SETVER.EXE. Its
+Media PATCH contains only SETUP.CMD, PIF.EXE, HASH.EXE and SETVER.EXE. APPLY.CMD
+gets PIF.EXE and HASH.EXE from the repository release directory; its tool
+directory does not retain duplicate utility copies. Its
 transient PIF/configuration files are removed on normal return, including an
 original Setup failure.
 

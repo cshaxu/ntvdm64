@@ -7,7 +7,9 @@ at the original `MOUSE.DRV` path. It never puts a replacement driver in
 `PATCH`.
 
 The media `PATCH` contains exactly `SETUP.CMD`, `PIF.EXE`, `HASH.EXE`, and
-`SETVER.EXE`. `SETUP.CMD` creates only transient launch configuration files,
+`SETVER.EXE`. `APPLY.CMD` takes `PIF.EXE` and `HASH.EXE` directly from the
+repository's `assets\release` originals before copying them there; it does not
+carry duplicate utility binaries in this tool directory. `SETUP.CMD` creates only transient launch configuration files,
 starts original Setup through plain `run16`, and removes those files before
 returning. Original Setup remains responsible for assembling `WIN100.BIN`.
 Its one-shot Setup PIF and generated Windows launch PIF explicitly request

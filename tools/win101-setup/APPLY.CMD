@@ -2,6 +2,7 @@
 setlocal EnableExtensions EnableDelayedExpansion
 set "TARGET="
 set "RESULT=1"
+for %%I in ("%~dp0..\..\assets\release") do set "RELEASE=%%~fI"
 echo Windows 1.01 patch preparation
 echo.
 set /p "TARGET=Target Windows 1.01 installation-media directory: "
@@ -16,13 +17,18 @@ for %%F in (SETUP.EXE SETUP.LBL KERNEL.EXE USER.EXE GDI.EXE DISK1 DISK2 DISK3 DI
   set "RESULT=2"
   goto done
 )
-for %%F in (SETUP.CMD PIF.EXE HASH.EXE SETVER.EXE MOUSE.DRV) do if not exist "%~dp0%%F" (
+for %%F in (SETUP.CMD SETVER.EXE MOUSE.DRV) do if not exist "%~dp0%%F" (
   echo Tool package is incomplete: %%F
   set "RESULT=3"
   goto done
 )
+for %%F in (PIF.EXE HASH.EXE) do if not exist "%RELEASE%\%%F" (
+  echo Missing released add-on: %RELEASE%\%%F
+  set "RESULT=3"
+  goto done
+)
 set "NEW_HASH="
-for /f "delims=" %%H in ('call "%~dp0HASH.EXE" "%~dp0MOUSE.DRV"') do set "NEW_HASH=%%H"
+for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%~dp0MOUSE.DRV"') do set "NEW_HASH=%%H"
 if not defined NEW_HASH goto hash_failure
 set "PATCH=%TARGET%\PATCH"
 if not exist "%PATCH%\" mkdir "%PATCH%" || (
@@ -32,7 +38,7 @@ if not exist "%PATCH%\" mkdir "%PATCH%" || (
 )
 if exist "%PATCH%\MOUSE.DRV" (
   set "OLD_PATCH_HASH="
-  for /f "delims=" %%H in ('call "%~dp0HASH.EXE" "%PATCH%\MOUSE.DRV"') do set "OLD_PATCH_HASH=%%H"
+  for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%PATCH%\MOUSE.DRV"') do set "OLD_PATCH_HASH=%%H"
   if not defined OLD_PATCH_HASH goto hash_failure
   if /I not "!OLD_PATCH_HASH!"=="!NEW_HASH!" (
     echo Refusing to remove an unrecognised PATCH\MOUSE.DRV.
@@ -47,7 +53,7 @@ if exist "%PATCH%\MOUSE.DRV" (
 )
 if exist "%TARGET%\MOUSE.DRV.BAK" (
   set "CURRENT_HASH="
-  for /f "delims=" %%H in ('call "%~dp0HASH.EXE" "%TARGET%\MOUSE.DRV"') do set "CURRENT_HASH=%%H"
+  for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%TARGET%\MOUSE.DRV"') do set "CURRENT_HASH=%%H"
   if not defined CURRENT_HASH goto hash_failure
   if /I not "!CURRENT_HASH!"=="!NEW_HASH!" (
     echo Existing MOUSE.DRV.BAK does not match an already-applied replacement.
@@ -67,8 +73,13 @@ if exist "%TARGET%\MOUSE.DRV.BAK" (
     goto done
   )
 )
-for %%F in (SETUP.CMD PIF.EXE HASH.EXE SETVER.EXE) do copy /y "%~dp0%%F" "%PATCH%\%%F" >nul || (
+for %%F in (SETUP.CMD SETVER.EXE) do copy /y "%~dp0%%F" "%PATCH%\%%F" >nul || (
   echo Could not copy %%F.
+  set "RESULT=5"
+  goto done
+)
+for %%F in (PIF.EXE HASH.EXE) do copy /y "%RELEASE%\%%F" "%PATCH%\%%F" >nul || (
+  echo Could not copy released %%F.
   set "RESULT=5"
   goto done
 )

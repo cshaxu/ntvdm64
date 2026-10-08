@@ -5,10 +5,11 @@
 T437 delivers two deliberately separate, installed-tree tools:
 
 - `tools/win31-launch\APPLY.CMD` prompts once for an installed Windows 3.1
-  root and creates its self-contained `PATCH` compatibility payload.  It
-  writes only `WINSTD.CMD/.PIF`, `WIN386.CMD/.PIF`, shared `CONFIG.NT` and
-  `AUTOEXEC.NT`, the released mouse driver, and identity-bound recoverable
-  `KRNL386`/`WIN386` adaptations.
+  root and creates its installation-local `PATCH` compatibility payload. CMD
+  owns the recovery copies, mouse replacement, profiles and configuration;
+  `PATCH386.EXE` owns only the two identity-bound `KRNL386`/`WIN386` byte
+  transforms. Generic utilities and the mouse driver are consumed from
+  `assets/release`, not duplicated in the tool directory.
 - `tools/win31-path\APPLY.CMD` prompts once for an installed root and repairs
   only proven relocatable textual and Program Manager paths.  It does not
   install launch compatibility files.
@@ -22,6 +23,8 @@ installed Windows tree.
 The focused construction, identity, idempotence, malformed-input and
 relocation evidence is recorded in
 [M0 T437 S1 installed Windows 3.1 tools](../etc/evidence/m0-t437-s1-installed-win31-tools.md).
+The final utility ownership consolidation is recorded in
+[M0 T437 S8](../etc/evidence/m0-t437-s8-addon-utility-consolidation.md).
 
 On a valid short-path installed fixture, both generated PIFs started through
 plain `run16` in bounded fifteen-second probes.  Each created responsive

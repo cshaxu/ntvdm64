@@ -11,18 +11,20 @@ if ((Join-Path $BuildRoot 'm\PATCH\TEMP\CONFIG.NT').Length -gt 63) {
 }
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $release = Join-Path $repo 'assets/release'
-foreach ($name in @('PIF.EXE','HASH.EXE','MOUSE101.DRV')) {
-    $packageName = if ($name -eq 'MOUSE101.DRV') { 'MOUSE.DRV' } else { $name }
-    if ((Get-FileHash -LiteralPath (Join-Path $ToolRoot $packageName)).Hash -ne
-        (Get-FileHash -LiteralPath (Join-Path $release $name)).Hash) {
-        throw "Win1.01 tool payload is not the released $name"
+foreach ($name in @('PIF.EXE','HASH.EXE')) {
+    if (Test-Path -LiteralPath (Join-Path $ToolRoot $name)) {
+        throw "Win1.01 tool directory must not duplicate released $name"
     }
+}
+if ((Get-FileHash -LiteralPath (Join-Path $ToolRoot 'MOUSE.DRV')).Hash -ne
+    (Get-FileHash -LiteralPath (Join-Path $release 'MOUSE101.DRV')).Hash) {
+    throw 'Win1.01 tool mouse driver is not the released MOUSE101.DRV'
 }
 
 $closePif=Join-Path $BuildRoot 'close-on-exit.pif'
-& (Join-Path $ToolRoot 'PIF.EXE') create $closePif --title 'close receipt' --program 'SETUP.EXE' --directory $BuildRoot --arguments '' --config 'CONFIG.NT' --autoexec 'AUTOEXEC.NT' --close-on-exit
+& (Join-Path $release 'PIF.EXE') create $closePif --title 'close receipt' --program 'SETUP.EXE' --directory $BuildRoot --arguments '' --config 'CONFIG.NT' --autoexec 'AUTOEXEC.NT' --close-on-exit
 if ($LASTEXITCODE -ne 0) { throw 'PIF.EXE could not create a CloseOnExit PIF' }
-$closeView=& (Join-Path $ToolRoot 'PIF.EXE') show $closePif
+$closeView=& (Join-Path $release 'PIF.EXE') show $closePif
 if ($LASTEXITCODE -ne 0 -or $closeView -notcontains 'STANDARD.MS_FLAGS=0x10' -or $closeView -notcontains 'STANDARD.CLOSE_ON_EXIT=YES') {
     throw 'PIF.EXE did not encode the explicit CloseOnExit PIF contract'
 }
@@ -129,7 +131,7 @@ foreach ($name in @('WIN101.PIF','CONFIG.NT','AUTOEXEC.NT','WIN.CMD','SETVER.EXE
 foreach ($name in @('WIN.PIF','CONFIG.NT','AUTOEXEC.NT')) {
     if (!(Test-Path -LiteralPath (Join-Path $install $name) -PathType Leaf)) { throw "installed root missing $name" }
 }
-$installedPif=& (Join-Path $ToolRoot 'PIF.EXE') show (Join-Path $install 'PATCH\WIN101.PIF')
+$installedPif=& (Join-Path $release 'PIF.EXE') show (Join-Path $install 'PATCH\WIN101.PIF')
 if ($LASTEXITCODE -ne 0 -or $installedPif -notcontains 'STANDARD.CLOSE_ON_EXIT=YES') {
     throw 'installed Windows launch PIF must be valid and CloseOnExit'
 }

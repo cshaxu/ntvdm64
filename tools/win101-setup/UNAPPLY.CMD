@@ -2,6 +2,7 @@
 setlocal EnableExtensions DisableDelayedExpansion
 set "TARGET="
 set "RESULT=1"
+for %%I in ("%~dp0..\..\assets\release") do set "RELEASE=%%~fI"
 echo Windows 1.01 patch recovery
 echo.
 set /p "TARGET=Target prepared Windows 1.01 installation-media directory: "
@@ -16,8 +17,13 @@ for %%F in (MOUSE.DRV MOUSE.DRV.BAK) do if not exist "%TARGET%\%%F" (
   set "RESULT=2"
   goto done
 )
-for %%F in (SETUP.CMD PIF.EXE HASH.EXE SETVER.EXE MOUSE.DRV) do if not exist "%~dp0%%F" (
+for %%F in (SETUP.CMD SETVER.EXE MOUSE.DRV) do if not exist "%~dp0%%F" (
   echo Tool package is incomplete: %%F
+  set "RESULT=3"
+  goto done
+)
+for %%F in (PIF.EXE HASH.EXE) do if not exist "%RELEASE%\%%F" (
+  echo Missing released add-on: %RELEASE%\%%F
   set "RESULT=3"
   goto done
 )
@@ -29,8 +35,16 @@ if errorlevel 1 (
 )
 set "PATCH=%TARGET%\PATCH"
 if exist "%PATCH%\" (
-  for %%F in (SETUP.CMD PIF.EXE HASH.EXE SETVER.EXE) do if exist "%PATCH%\%%F" (
+  for %%F in (SETUP.CMD SETVER.EXE) do if exist "%PATCH%\%%F" (
     fc /b "%~dp0%%F" "%PATCH%\%%F" >nul
+    if errorlevel 1 (
+      echo Refusing to delete an unrecognised PATCH\%%F.
+      set "RESULT=5"
+      goto done
+    )
+  )
+  for %%F in (PIF.EXE HASH.EXE) do if exist "%PATCH%\%%F" (
+    fc /b "%RELEASE%\%%F" "%PATCH%\%%F" >nul
     if errorlevel 1 (
       echo Refusing to delete an unrecognised PATCH\%%F.
       set "RESULT=5"

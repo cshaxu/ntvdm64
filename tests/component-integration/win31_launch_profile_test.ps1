@@ -6,7 +6,13 @@ param(
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $InstallRoot).Path.TrimEnd('\')
 $patch = (Resolve-Path -LiteralPath $ProfileDirectory).Path.TrimEnd('\')
+$repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
+$tool = Join-Path $repo 'tools/win31-launch'
 if($patch -ne (Join-Path $root 'PATCH')) {throw 'Profiles must be installation-local PATCH files'}
+foreach($name in @('PIF.EXE','HASH.EXE','MOUSE31.DRV','WIN31LAUNCH.EXE')) {
+    if(Test-Path -LiteralPath (Join-Path $tool $name)) {throw "win31-launch must not duplicate $name"}
+}
+if(!(Test-Path -LiteralPath (Join-Path $tool 'PATCH386.EXE') -PathType Leaf)) {throw 'win31-launch is missing PATCH386.EXE'}
 function Assert-Pif([string]$name, [string]$arguments) {
     $bytes = [IO.File]::ReadAllBytes((Join-Path $patch $name))
     function Field([int]$offset,[int]$length) {[Text.Encoding]::ASCII.GetString($bytes,$offset,$length).Trim([char]0)}
@@ -42,6 +48,7 @@ if((Get-FileHash -LiteralPath (Join-Path $root 'SYSTEM\WIN386.EXE')).Hash -ne 'C
 if((Get-FileHash -LiteralPath (Join-Path $patch 'WIN386.ORIG')).Hash -ne '6006860AE1003114583D70A1C6447247E1280A99633202912092A5F06A0C22A5') {throw 'Original WIN386 recovery copy is missing'}
 if((Get-FileHash -LiteralPath (Join-Path $root 'SYSTEM\KRNL386.EXE')).Hash -ne '88E095A7C39C6294E8E3BE71CBD2EDC1E4DCECBB7101D1581021EA7BE7B33181') {throw 'Installed KRNL386 is not the checked standard candidate'}
 if((Get-FileHash -LiteralPath (Join-Path $patch 'KRNL386.ORIG')).Hash -ne 'FBEAF672EE9E917318CE8FCD1D560DB805DBFADF4777039ABBAAFF1A9C75B980') {throw 'Original KRNL386 recovery copy is missing'}
+if(!(Test-Path -LiteralPath (Join-Path $patch 'MOUSE.DRV.ORIG') -PathType Leaf)) {throw 'Original mouse-driver recovery copy is missing'}
 foreach($forbidden in @('TEMP','WIN386-ADAPTATION.JSON','WIN31-TEMPLATE.PIF','configure-launch.ps1','run-setup.ps1','addon-files.json')) {
     if(Test-Path -LiteralPath (Join-Path $patch $forbidden)) {throw "Installed PATCH retains non-runtime payload: $forbidden"}
 }
@@ -49,4 +56,4 @@ if($BeforeHashes) {
     $before = Get-Content -LiteralPath $BeforeHashes -Raw | ConvertFrom-Json
     foreach($p in $before.PSObject.Properties) {if((Get-FileHash -LiteralPath $p.Name).Hash -ne $p.Value) {throw "Existing input changed: $($p.Name)"}}
 }
-'PASS explicit WINSTD/WIN386 PIFs and launchers, shared profile, and no ambiguous alias'
+'PASS explicit WINSTD/WIN386 PIFs and launchers, shared profile, CMD-owned recovery, and no duplicate tool payload'
