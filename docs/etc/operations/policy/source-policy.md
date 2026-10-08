@@ -21,6 +21,16 @@ minimal source-file representation required for Setup to copy the approved
 candidate.  This is not permission to alter SETUP.EXE/SETUP.INF, patch loaded
 guest memory, or add other media replacements.
 
+Owner-scoped T437 exception: the two already approved, identity-bound
+`KRNL386.EXE` and `WIN386.EXE` candidate images and released `MOUSE31.DRV` may
+be installed into a recoverable, user-selected **already installed** Windows
+3.1 tree. Preserve the first matching installed originals below that tree's
+owned `PATCH` directory, verify hashes before every replacement, and record
+every configuration/path rewrite. This authorizes portable-launch preparation
+only; it does not authorize retail-media mutation, any additional guest-binary
+change, Setup modification, runtime hot patch, enhanced-mode success claim, or
+a replacement for the separately queued ordinary-Setup transition recovery.
+
 Owner-scoped T435 exception: after choosing an independently authored Win1.01
 INT33 mouse driver, the owner explicitly approves investigating original Setup
 image changes and binary installation of that driver. Work only on recoverable
