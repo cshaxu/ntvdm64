@@ -6,12 +6,12 @@
 
 ## Latest closure
 
-M0 T437 now delivers a reversible Win1.01 media-root replacement: selected
-`MOUSE.DRV` becomes `MOUSE.DRV.BAK`, and the released driver occupies the
-original root path. The media `PATCH` contains only `SETUP.CMD`, `PIF.EXE`,
-`HASH.EXE`, and `SETVER.EXE`. See the
+M0 T437 S6 adds `tools/win101-setup/UNAPPLY.CMD`. It restores a selected,
+prepared Win1.01 media root only after authenticating the replacement driver
+and every helper it will delete. It restores root `MOUSE.DRV.BAK` in place and
+preserves all unknown `PATCH` content. See the
 [T437 closure](../history/m0-t437-installed-win31-portable-launch-closure.md)
-and [S5 evidence](../etc/evidence/m0-t437-s5-win101-reversible-media-mouse.md).
+and [S6 evidence](../etc/evidence/m0-t437-s6-win101-media-unapply.md).
 
 ## Current Technical Baseline
 

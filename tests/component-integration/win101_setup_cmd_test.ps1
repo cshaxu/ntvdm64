@@ -71,6 +71,18 @@ exit /b 0
     }
 }
 
+function Invoke-Unapply([string]$Media, [int]$ExpectedExit = 0) {
+    $input = Join-Path $BuildRoot ('unapply-' + [IO.Path]::GetFileName($Media) + '.txt')
+    [IO.File]::WriteAllText($input, "$Media`r`n`r`n", [Text.Encoding]::ASCII)
+    $stdout = Join-Path $BuildRoot ('unapply-' + [IO.Path]::GetFileName($Media) + '.out')
+    $stderr = Join-Path $BuildRoot ('unapply-' + [IO.Path]::GetFileName($Media) + '.err')
+    $command = '(type "{0}" & echo.) | call "{1}"' -f $input,(Join-Path $ToolRoot 'UNAPPLY.CMD')
+    $process = Start-Process -FilePath cmd.exe -ArgumentList @('/d','/c',$command) -RedirectStandardOutput $stdout -RedirectStandardError $stderr -Wait -PassThru
+    if ($process.ExitCode -ne $ExpectedExit) {
+        throw "UNAPPLY.CMD returned $($process.ExitCode), expected $ExpectedExit`n$((Get-Content -LiteralPath $stdout -Raw))$((Get-Content -LiteralPath $stderr -Raw))"
+    }
+}
+
 $media = New-Media 'm'
 $install = Join-Path $BuildRoot 'i'
 $originalMouse = (Get-FileHash -LiteralPath (Join-Path $media 'MOUSE.DRV')).Hash
@@ -111,6 +123,17 @@ if ($LASTEXITCODE -ne 0) { throw 'installed PIF is invalid' }
 if ((Get-Content -LiteralPath (Join-Path $install 'PATCH\WIN.CMD') -Raw) -notmatch '(?im)^call run16 ') {
     throw 'installed WIN.CMD does not resolve run16 through PATH'
 }
+[IO.File]::WriteAllText((Join-Path $patch 'KEEP.TXT'), 'owner content', [Text.Encoding]::ASCII)
+Invoke-Unapply $media
+if ((Get-FileHash -LiteralPath (Join-Path $media 'MOUSE.DRV')).Hash -ne $originalMouse) {
+    throw 'UNAPPLY.CMD did not restore the original root driver bytes'
+}
+if (Test-Path -LiteralPath (Join-Path $media 'MOUSE.DRV.BAK')) { throw 'UNAPPLY.CMD retained a consumed root backup' }
+foreach ($name in @('SETUP.CMD','PIF.EXE','HASH.EXE','SETVER.EXE')) {
+    if (Test-Path -LiteralPath (Join-Path $patch $name)) { throw "UNAPPLY.CMD retained helper $name" }
+}
+if (!(Test-Path -LiteralPath (Join-Path $patch 'KEEP.TXT') -PathType Leaf)) { throw 'UNAPPLY.CMD removed unknown PATCH content' }
+Invoke-Unapply $media 2
 
 $failedMedia = New-Media 'f'
 Invoke-Apply $failedMedia
@@ -124,4 +147,4 @@ Invoke-Apply $conflictingMedia 5
 if ((Get-FileHash -LiteralPath (Join-Path $conflictingMedia 'MOUSE.DRV')).Hash -ne $beforeConflict) {
     throw 'conflicting backup failure overwrote the original media driver'
 }
-'PASS Win1.01 APPLY/SETUP CMD orchestration, generated profile, and cleanup'
+'PASS Win1.01 APPLY/UNAPPLY/SETUP CMD orchestration, generated profile, recovery, and cleanup'

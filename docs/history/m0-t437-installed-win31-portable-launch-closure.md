@@ -83,3 +83,12 @@ The media `PATCH` now has exactly `SETUP.CMD`, `PIF.EXE`, `HASH.EXE`, and
 area. `SETUP.CMD` builds only transient launch settings, which it removes on
 success or failure. The source, repeat, conflict, cleanup and profile tests
 are recorded in [T437 S5 evidence](../etc/evidence/m0-t437-s5-win101-reversible-media-mouse.md).
+
+## S6 prepared-media recovery
+
+S6 adds `tools/win101-setup\UNAPPLY.CMD`. It refuses unprepared media,
+conflicting current drivers, and unrecognised same-named helpers. On an exact
+prepared state it restores `MOUSE.DRV.BAK` at the original media-root path,
+consumes that backup, and removes only the four authenticated helper files.
+Unknown `PATCH` content remains in place. The focused restoration and
+preservation result is [T437 S6 evidence](../etc/evidence/m0-t437-s6-win101-media-unapply.md).
