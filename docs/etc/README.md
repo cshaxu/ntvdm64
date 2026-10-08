@@ -7,6 +7,7 @@ delivered single-worker/dual-Hook gates; see
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T437 S11 Win3.1 adjacent backups](evidence/m0-t437-s11-win31-adjacent-backups.md) | M0 T437 S11 | Replaces PATCH recovery copies with adjacent `.BAK` files and adds authenticated rollback. | Retain through portable-launch acceptance. |
 | [T437 S10 Win3.1 system mouse path](evidence/m0-t437-s10-win31-system-mouse-path.md) | M0 T437 S10 | Corrects Win3.1 launch preparation to use the installed `SYSTEM\MOUSE.DRV` path. | Retain through portable-launch acceptance. |
 | [T437 S9 Win1.01 released driver source](evidence/m0-t437-s9-win101-release-driver-source.md) | M0 T437 S9 | Removes the duplicate Win1.01 driver from the tool package and verifies release-only Apply/Unapply identity. | Retain through Win1.01 media acceptance. |
 | [T437 S8 add-on utility consolidation](evidence/m0-t437-s8-addon-utility-consolidation.md) | M0 T437 S8 | Consolidates released PIF/HASH/driver use, CMD-owned installed-tree preparation, and the narrow PATCH386 helper. | Retain through portable-launch acceptance. |

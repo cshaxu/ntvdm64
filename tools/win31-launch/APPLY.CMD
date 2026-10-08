@@ -21,8 +21,8 @@ for %%F in (PIF.EXE HASH.EXE MOUSE31.DRV) do if not exist "%RELEASE%\%%F" (
 )
 set "PATCH=%TARGET%\PATCH"
 if not exist "%PATCH%\" mkdir "%PATCH%" || (echo Could not create "%PATCH%".& set "RESULT=4"& goto done)
-call :backup_retail "%TARGET%\SYSTEM\KRNL386.EXE" "%PATCH%\KRNL386.ORIG" FBEAF672EE9E917318CE8FCD1D560DB805DBFADF4777039ABBAAFF1A9C75B980 88E095A7C39C6294E8E3BE71CBD2EDC1E4DCECBB7101D1581021EA7BE7B33181 || goto mutation_failure
-call :backup_retail "%TARGET%\SYSTEM\WIN386.EXE" "%PATCH%\WIN386.ORIG" 6006860AE1003114583D70A1C6447247E1280A99633202912092A5F06A0C22A5 C67E667E25E91C65EFB5ACDDEC437DA8B586037DA7DE502228CA8FBD806CF3F8 || goto mutation_failure
+call :backup_retail "%TARGET%\SYSTEM\KRNL386.EXE" FBEAF672EE9E917318CE8FCD1D560DB805DBFADF4777039ABBAAFF1A9C75B980 88E095A7C39C6294E8E3BE71CBD2EDC1E4DCECBB7101D1581021EA7BE7B33181 || goto mutation_failure
+call :backup_retail "%TARGET%\SYSTEM\WIN386.EXE" 6006860AE1003114583D70A1C6447247E1280A99633202912092A5F06A0C22A5 C67E667E25E91C65EFB5ACDDEC437DA8B586037DA7DE502228CA8FBD806CF3F8 || goto mutation_failure
 "%~dp0PATCH386.EXE" --apply --krnl "%TARGET%\SYSTEM\KRNL386.EXE" --win386 "%TARGET%\SYSTEM\WIN386.EXE" || goto mutation_failure
 call :install_mouse || goto mutation_failure
 >"%PATCH%\CONFIG.NT" (
@@ -61,17 +61,38 @@ set "RESULT=0"
 goto done
 
 :backup_retail
-set "CURRENT=" & set "BACKUP=" & set "RETAIL=%~3" & set "CANDIDATE=%~4"
+set "CURRENT=" & set "BACKUP=" & set "LEGACY=" & set "RETAIL=%~2" & set "CANDIDATE=%~3"
+for %%I in ("%~1") do set "LEGACY=%PATCH%\%%~nI.ORIG"
 for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%~1"') do set "CURRENT=%%H"
 if not defined CURRENT exit /b 1
 if /I "%CURRENT%"=="%RETAIL%" (
-  if exist "%~2" (echo Refusing to overwrite existing recovery copy: %~2& exit /b 1)
-  copy /y "%~1" "%~2" >nul || exit /b 1
+  if exist "%~1.BAK" (
+    for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%~1.BAK"') do set "BACKUP=%%H"
+    call :require_retail_backup "%~1.BAK" || exit /b 1
+    exit /b 0
+  )
+  if exist "%LEGACY%" (
+    for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%LEGACY%"') do set "BACKUP=%%H"
+    call :require_retail_backup "%LEGACY%" || exit /b 1
+    move /y "%LEGACY%" "%~1.BAK" >nul || exit /b 1
+    exit /b 0
+  )
+  move /y "%~1" "%~1.BAK" >nul || exit /b 1
+  copy /y "%~1.BAK" "%~1" >nul || exit /b 1
   exit /b 0
 )
 if /I not "%CURRENT%"=="%CANDIDATE%" (echo Unsupported installed binary: %~1& exit /b 1)
-for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%~2"') do set "BACKUP=%%H"
-if /I not "%BACKUP%"=="%RETAIL%" (echo Patched binary lacks retail recovery copy: %~2& exit /b 1)
+if not exist "%~1.BAK" if exist "%LEGACY%" (
+  for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%LEGACY%"') do set "BACKUP=%%H"
+  call :require_retail_backup "%LEGACY%" || exit /b 1
+  move /y "%LEGACY%" "%~1.BAK" >nul || exit /b 1
+)
+for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%~1.BAK"') do set "BACKUP=%%H"
+if /I not "%BACKUP%"=="%RETAIL%" (echo Patched binary lacks retail recovery copy: %~1.BAK& exit /b 1)
+exit /b 0
+
+:require_retail_backup
+if /I not "%BACKUP%"=="%RETAIL%" (echo Recovery copy is not the original: %~1& exit /b 1)
 exit /b 0
 
 :install_mouse
@@ -84,13 +105,19 @@ if /I not "%RELEASE_HASH%"=="D6BA5380A2EDCDB33E0C36850FB6BDD0542D78EC03E982DBD51
   exit /b 1
 )
 if /I "%CURRENT%"=="%RELEASE_HASH%" (
-  for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%PATCH%\MOUSE.DRV.ORIG"') do set "BACKUP=%%H"
-  if defined BACKUP exit /b 0
-  echo Installed replacement lacks its recovery copy: %PATCH%\MOUSE.DRV.ORIG
+  if exist "%TARGET%\SYSTEM\MOUSE.DRV.BAK" (
+    for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%TARGET%\SYSTEM\MOUSE.DRV.BAK"') do set "BACKUP=%%H"
+    if defined BACKUP exit /b 0
+  )
+  if exist "%PATCH%\MOUSE.DRV.ORIG" (
+    move /y "%PATCH%\MOUSE.DRV.ORIG" "%TARGET%\SYSTEM\MOUSE.DRV.BAK" >nul || exit /b 1
+    exit /b 0
+  )
+  echo Installed replacement lacks its recovery copy: %TARGET%\SYSTEM\MOUSE.DRV.BAK
   exit /b 1
 )
-if exist "%PATCH%\MOUSE.DRV.ORIG" (echo Refusing to overwrite existing mouse-driver recovery copy.& exit /b 1)
-copy /y "%TARGET%\SYSTEM\MOUSE.DRV" "%PATCH%\MOUSE.DRV.ORIG" >nul || exit /b 1
+if exist "%TARGET%\SYSTEM\MOUSE.DRV.BAK" (echo Refusing to overwrite existing mouse-driver recovery copy.& exit /b 1)
+move /y "%TARGET%\SYSTEM\MOUSE.DRV" "%TARGET%\SYSTEM\MOUSE.DRV.BAK" >nul || exit /b 1
 copy /y "%RELEASE%\MOUSE31.DRV" "%TARGET%\SYSTEM\MOUSE.DRV" >nul || exit /b 1
 exit /b 0
 

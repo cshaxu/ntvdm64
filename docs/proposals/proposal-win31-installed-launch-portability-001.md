@@ -28,11 +28,11 @@ Setup pass; a Setup repair cannot be silently folded into this tool.
    Win3.1 system layout from required files, not fixed drive letters.
 2. Both reject absent, malformed, linked, or identity-incompatible
    installations without changing them.
-3. `win31-launch` creates/updates an owned `PATCH` directory with checked
-   recovery originals, shared `CONFIG.NT` and `AUTOEXEC.NT`, and explicit
-   `WINSTD.CMD/.PIF` plus `WIN386.CMD/.PIF`.  `APPLY.CMD` installs the released
-   mouse driver at the original installed `MOUSE.DRV` path while preserving its
-   first original under `PATCH`; `PATCH386.EXE` performs only the two checked
+3. `win31-launch` creates/updates an owned `PATCH` directory with shared
+   `CONFIG.NT` and `AUTOEXEC.NT`, and explicit `WINSTD.CMD/.PIF` plus
+   `WIN386.CMD/.PIF`. `APPLY.CMD` preserves each original beside the replacement
+   with a `.BAK` suffix and installs the released mouse driver at
+   `SYSTEM\MOUSE.DRV`; `PATCH386.EXE` performs only the two checked
    binary transformations.  Generic `PIF.EXE`, `HASH.EXE`, and `MOUSE31.DRV`
    are consumed from `assets/release`, never duplicated in the tool directory.
 4. `win31-path` repairs only configuration and Program Manager references that demonstrably

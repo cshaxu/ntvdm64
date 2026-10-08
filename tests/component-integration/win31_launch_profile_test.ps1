@@ -45,10 +45,11 @@ foreach($pair in @(@('WINSTD.CMD','WINSTD.PIF'), @('WIN386.CMD','WIN386.PIF'))) 
 }
 foreach($forbidden in @('win.cmd','start.cmd','WIN31.PIF')) {if(Test-Path -LiteralPath (Join-Path $patch $forbidden)) {throw "Ambiguous installed launcher remains: $forbidden"}}
 if((Get-FileHash -LiteralPath (Join-Path $root 'SYSTEM\WIN386.EXE')).Hash -ne 'C67E667E25E91C65EFB5ACDDEC437DA8B586037DA7DE502228CA8FBD806CF3F8') {throw 'Installed WIN386 is not the checked enhanced candidate'}
-if((Get-FileHash -LiteralPath (Join-Path $patch 'WIN386.ORIG')).Hash -ne '6006860AE1003114583D70A1C6447247E1280A99633202912092A5F06A0C22A5') {throw 'Original WIN386 recovery copy is missing'}
+if((Get-FileHash -LiteralPath (Join-Path $root 'SYSTEM\WIN386.EXE.BAK')).Hash -ne '6006860AE1003114583D70A1C6447247E1280A99633202912092A5F06A0C22A5') {throw 'Original WIN386 adjacent backup is missing'}
 if((Get-FileHash -LiteralPath (Join-Path $root 'SYSTEM\KRNL386.EXE')).Hash -ne '88E095A7C39C6294E8E3BE71CBD2EDC1E4DCECBB7101D1581021EA7BE7B33181') {throw 'Installed KRNL386 is not the checked standard candidate'}
-if((Get-FileHash -LiteralPath (Join-Path $patch 'KRNL386.ORIG')).Hash -ne 'FBEAF672EE9E917318CE8FCD1D560DB805DBFADF4777039ABBAAFF1A9C75B980') {throw 'Original KRNL386 recovery copy is missing'}
-if(!(Test-Path -LiteralPath (Join-Path $patch 'MOUSE.DRV.ORIG') -PathType Leaf)) {throw 'Original mouse-driver recovery copy is missing'}
+if((Get-FileHash -LiteralPath (Join-Path $root 'SYSTEM\KRNL386.EXE.BAK')).Hash -ne 'FBEAF672EE9E917318CE8FCD1D560DB805DBFADF4777039ABBAAFF1A9C75B980') {throw 'Original KRNL386 adjacent backup is missing'}
+if(!(Test-Path -LiteralPath (Join-Path $root 'SYSTEM\MOUSE.DRV.BAK') -PathType Leaf)) {throw 'Original mouse-driver adjacent backup is missing'}
+foreach($legacy in @('WIN386.ORIG','KRNL386.ORIG','MOUSE.DRV.ORIG')) {if(Test-Path -LiteralPath (Join-Path $patch $legacy)) {throw "Legacy PATCH recovery copy remains: $legacy"}}
 foreach($forbidden in @('TEMP','WIN386-ADAPTATION.JSON','WIN31-TEMPLATE.PIF','configure-launch.ps1','run-setup.ps1','addon-files.json')) {
     if(Test-Path -LiteralPath (Join-Path $patch $forbidden)) {throw "Installed PATCH retains non-runtime payload: $forbidden"}
 }

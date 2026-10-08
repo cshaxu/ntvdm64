@@ -5,12 +5,14 @@ project's NTVDM path.  It does not run Windows Setup and does not repair moved
 application or Program Manager paths.
 
 `APPLY.CMD` accepts a chosen installed root, preserves the two approved retail
-system binaries before replacement, replaces the installed `SYSTEM\MOUSE.DRV` from
-the released add-on, and writes these owned recovery/profile files under
-`<root>\PATCH`:
+system binaries before replacement, and replaces the installed
+`SYSTEM\MOUSE.DRV` from the released add-on. The original files remain beside
+their replacements as:
 
-- `KRNL386.ORIG`, `WIN386.ORIG`, and `MOUSE.DRV.ORIG` (the original
-  `SYSTEM\MOUSE.DRV`);
+- `SYSTEM\KRNL386.EXE.BAK`, `SYSTEM\WIN386.EXE.BAK`, and
+  `SYSTEM\MOUSE.DRV.BAK`.
+
+The tool writes only these profile files under `<root>\PATCH`:
 - `CONFIG.NT` and `AUTOEXEC.NT`;
 - `WINSTD.CMD` / `WINSTD.PIF` for `WIN.COM /S`;
 - `WIN386.CMD` / `WIN386.PIF` for `WIN.COM /3`.
@@ -35,9 +37,16 @@ Open `APPLY.CMD`, enter the installed root once when prompted, and leave the
 window open to read the final exit code.  The command file itself has no
 fixed-drive dependency.
 
-The tool directory contains only `APPLY.CMD`, `PATCH386.EXE`, and this
+The tool directory contains only `APPLY.CMD`, `UNAPPLY.CMD`, `PATCH386.EXE`, and this
 documentation.  It resolves `PIF.EXE`, `HASH.EXE`, and `MOUSE31.DRV` from the
 repository's `assets\release` directory; they are not duplicated here.
+
+`UNAPPLY.CMD` is the recovery entry point. It verifies that the active files
+are the approved candidates/released driver and that the adjacent `.BAK` files
+are present before moving each backup back into place. It deletes only the six
+tool-owned launch-profile files under `PATCH`; any other `PATCH` content is
+preserved. Older compatible `PATCH\*.ORIG` recovery copies are migrated to
+their adjacent `.BAK` locations by a successful later `APPLY.CMD`.
 
 `/3` means Windows 3.1's 386 enhanced mode.  The tool can prepare that profile
 and its approved candidate image; it does not claim that enhanced mode is

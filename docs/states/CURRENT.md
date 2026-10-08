@@ -2,8 +2,17 @@
 
 ## Current Work
 
-**No active M/T/S packet. M0 T437 S10 is delivered; any follow-up requires a
+**No active M/T/S packet. M0 T437 S11 is delivered; any follow-up requires a
 new owner admission.**
+
+## S11 Closure Record
+
+`win31-launch` now preserves `KRNL386.EXE`, `WIN386.EXE`, and `MOUSE.DRV` as
+adjacent `SYSTEM\*.BAK` files. `UNAPPLY.CMD` authenticates the active project
+files before restoring those backups, and a later Apply migrates compatible
+legacy `PATCH\*.ORIG` copies. First/repeat Apply, migration, profile, and
+Unapply fixture coverage passed. See
+[S11 evidence](../etc/evidence/m0-t437-s11-win31-adjacent-backups.md).
 
 ## S10 Closure Record
 
