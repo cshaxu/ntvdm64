@@ -51,3 +51,21 @@ S3 adds the AMD64 `PIF.EXE` and `HASH.EXE` tools under their own add-on source
 homes. They contain only PIF mechanics and SHA-256 printing respectively; they
 do not take over Win1.01 Setup policy. Their focused format, negative and
 machine-identity evidence is [T437 S3 PIF and hash utilities](../etc/evidence/m0-t437-s3-pif-hash-utilities.md).
+
+## S4 CMD-only Win1.01 Setup orchestration
+
+S4 removes the media-PATCH PowerShell/templates and replaces them with the
+inspectable `SETUP.CMD` flow. It stages only a private temporary copy of flat
+original media, replaces only that copy's `MOUSE.DRV`, invokes original Setup
+through `run16`, records the true result, and removes the temporary copy on
+both normal and negative return. After an owner-confirmed successful Setup,
+it creates the installed `PATCH` profile without repository/media dependencies.
+
+`PIF.EXE` and `HASH.EXE` are published in `assets/release/` through their
+separate `utility-manifest.json`, and are deployed to `O:\winnt\system32`.
+The focused CMD, profile-generation, cleanup, negative-result, PIF-structure,
+and release-identity evidence is [T437 S4](../etc/evidence/m0-t437-s4-win101-cmd-orchestration.md).
+
+Original guest Setup completion remains a manual acceptance boundary. This
+tooling delivery neither patches immutable source media nor claims that a
+specific original Setup run completed.

@@ -1,0 +1,19 @@
+﻿{
+    "schema":  1,
+    "utilities":  [
+                      {
+                          "id":  "pif",
+                          "file":  "PIF.EXE",
+                          "architecture":  "amd64",
+                          "sha256":  "7CC1F2D0E92CCFA544A43B6065D61A6ED7783A8D009291675477ED8F3694BE59",
+                          "source":  "src/addon/pif/pif.c"
+                      },
+                      {
+                          "id":  "hash",
+                          "file":  "HASH.EXE",
+                          "architecture":  "amd64",
+                          "sha256":  "F6B3CDD67887429DF94FC43AD22A62BDC0E4395996FCCBB08B881ECBD5C61720",
+                          "source":  "src/addon/hash/hash.c"
+                      }
+                  ]
+}

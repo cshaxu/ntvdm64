@@ -6,11 +6,12 @@
 
 ## Latest closure
 
-M0 T437 closed with portable installed-Windows-3.1 launch/path tools, S2
-single-entrypoint cleanup, and S3 AMD64 PIF/hash utilities. The original Setup
-protected-mode transition and the separate Win1.01 CMD orchestration migration
-remain deferred; no active packet may absorb either without admission. See the
-[T437 closure](../history/m0-t437-installed-win31-portable-launch-closure.md).
+M0 T437 closed with portable installed-tree Windows 3.1 repair tools, AMD64
+format-only `PIF.EXE`/single-purpose `HASH.EXE`, and a CMD-only Windows 1.01
+media/installed-PATCH orchestrator. The original Setup guest run remains a
+manual acceptance boundary; no source media or `WIN100.BIN` is patched
+directly. See the [T437 closure](../history/m0-t437-installed-win31-portable-launch-closure.md)
+and [S4 evidence](../etc/evidence/m0-t437-s4-win101-cmd-orchestration.md).
 
 ## Current Technical Baseline
 

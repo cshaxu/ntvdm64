@@ -13,6 +13,7 @@ typedef struct _PIF_VIEW {
     BYTE *bytes;
     DWORD size;
     STDPIF *standard;
+    W286PIF30 *w286;
     W386PIF30 *w386;
     WNTPIF31 *nt;
 } PIF_VIEW;
@@ -20,10 +21,9 @@ typedef struct _PIF_VIEW {
 static void usage(void)
 {
     fwprintf(stderr, L"Usage:\n"
-                     L"  PIF.EXE inspect <file>\n"
-                     L"  PIF.EXE verify <file>\n"
+                     L"  PIF.EXE show <file>\n"
                      L"  PIF.EXE create <file> --title T --program P --directory D --arguments A --config C --autoexec E\n"
-                     L"  PIF.EXE set <file> [--title T] [--program P] [--directory D] [--arguments A] [--config C] [--autoexec E]\n");
+                     L"  PIF.EXE update <file> [--title T] [--program P] [--directory D] [--arguments A] [--config C] [--autoexec E]\n");
 }
 
 static BOOL read_file(const wchar_t *path, PIF_VIEW *view)
@@ -66,7 +66,9 @@ static BOOL parse(PIF_VIEW *view)
     DWORD i;
     if (!view->standard || !range_ok(view, 0, sizeof(STDPIF))) return FALSE;
     for (i = 2; i < sizeof(STDPIF); ++i) sum = (BYTE)(sum + view->bytes[i]);
-    if (sum != view->standard->id) return FALSE;
+    /* A zero ID is the established no-checksum form used by legacy PIFs.
+     * When a producer did supply the byte, it remains an integrity check. */
+    if (view->standard->id != 0 && sum != view->standard->id) return FALSE;
     while (position != LASTHDRPTR) {
         PIFEXTHDR *header;
         DWORD data;
@@ -79,6 +81,9 @@ static BOOL parse(PIF_VIEW *view)
         if (strcmp(header->extsig, W386HDRSIG30) == 0) {
             if (header->extsizebytes < sizeof(W386PIF30)) return FALSE;
             view->w386 = (W386PIF30 *)(view->bytes + data);
+        } else if (strcmp(header->extsig, W286HDRSIG30) == 0) {
+            if (header->extsizebytes < sizeof(W286PIF30)) return FALSE;
+            view->w286 = (W286PIF30 *)(view->bytes + data);
         } else if (strcmp(header->extsig, WNTHDRSIG31) == 0) {
             if (header->extsizebytes < sizeof(WNTPIF31)) return FALSE;
             view->nt = (WNTPIF31 *)(view->bytes + data);
@@ -140,7 +145,9 @@ static BOOL set_values(PIF_VIEW *view, int argc, wchar_t **argv)
                          (!view->w386 || put_oem(view->w386->PfW386params, sizeof(view->w386->PfW386params), arguments)))) &&
         (!config || (view->nt && put_oem(view->nt->nt31Prop.achConfigFile, sizeof(view->nt->nt31Prop.achConfigFile), config))) &&
         (!autoexec || (view->nt && put_oem(view->nt->nt31Prop.achAutoexecFile, sizeof(view->nt->nt31Prop.achAutoexecFile), autoexec)))) {
-        checksum(view);
+        /* Preserve the legacy no-checksum convention on update.  Creation
+         * explicitly seals its new record below. */
+        if (view->standard->id != 0) checksum(view);
         return TRUE;
     }
     return FALSE;
@@ -174,17 +181,62 @@ static BOOL create(const wchar_t *path, int argc, wchar_t **argv)
     view.nt = (WNTPIF31 *)(bytes + at); view.nt->wInternalRevision = WNTPIF31_VERSION;
     view.w386->PfFPriority = 100; view.w386->PfBPriority = 50; view.w386->PfMaxXmsK = 1024;
     if (!set_values(&view, argc, argv)) return FALSE;
+    checksum(&view);
     return write_file(path, bytes, sizeof(bytes));
+}
+
+static void print_oem(const wchar_t *key, const char *value, size_t capacity)
+{
+    wchar_t converted[260];
+    int length;
+    while (capacity && (value[capacity - 1] == '\0' || value[capacity - 1] == ' ')) --capacity;
+    length = MultiByteToWideChar(CP_OEMCP, 0, value, (int)capacity, converted, ARRAYSIZE(converted));
+    wprintf(L"%ls=", key);
+    if (length > 0) wprintf(L"%.*ls", length, converted);
+    wprintf(L"\n");
 }
 
 static void inspect(const PIF_VIEW *view)
 {
-    wprintf(L"TITLE=%hs\nPROGRAM=%hs\nDIRECTORY=%hs\nARGUMENTS=%hs\n",
-            view->standard->appname, view->standard->startfile,
-            view->standard->defpath, view->standard->params);
-    if (view->w386) wprintf(L"W386_ARGUMENTS=%hs\n", view->w386->PfW386params);
-    if (view->nt) wprintf(L"CONFIG=%hs\nAUTOEXEC=%hs\n", view->nt->nt31Prop.achConfigFile,
-                           view->nt->nt31Prop.achAutoexecFile);
+    const STDPIF *s = view->standard;
+    wprintf(L"PIF_SIZE=%lu\nCHECKSUM=%ls\n", (unsigned long)view->size,
+            s->id ? L"VALID" : L"NONE");
+    print_oem(L"TITLE", s->appname, sizeof(s->appname));
+    print_oem(L"PROGRAM", s->startfile, sizeof(s->startfile));
+    print_oem(L"DIRECTORY", s->defpath, sizeof(s->defpath));
+    print_oem(L"ARGUMENTS", s->params, sizeof(s->params));
+    wprintf(L"STANDARD.MAXMEM_KB=%u\nSTANDARD.MINMEM_KB=%u\n"
+            L"STANDARD.MS_FLAGS=0x%02X\nSTANDARD.SCREEN=0x%02X\n"
+            L"STANDARD.PAGES=%u\nSTANDARD.LOW_VECTOR=0x%02X\n"
+            L"STANDARD.HIGH_VECTOR=0x%02X\nSTANDARD.ROWS=%u\n"
+            L"STANDARD.COLS=%u\nSTANDARD.SYSMEM=0x%04X\n"
+            L"STANDARD.BEHAVIOR=0x%02X\nSTANDARD.SYS_FLAGS=0x%02X\n",
+            s->maxmem, s->minmem, s->MSflags, s->screen, s->cPages,
+            s->lowVector, s->highVector, s->rows, s->cols, s->sysmem,
+            s->behavior, s->sysflags);
+    if (view->w286) {
+        wprintf(L"W286.MAX_XMS_KB=%u\nW286.MIN_XMS_KB=%u\nW286.FLAGS=0x%04X\n",
+                view->w286->PfMaxXmsK, view->w286->PfMinXmsK, view->w286->PfW286Flags);
+    }
+    if (view->w386) {
+        wprintf(L"W386.MAXMEM_KB=%u\nW386.MINMEM_KB=%u\n"
+                L"W386.FOREGROUND_PRIORITY=%u\nW386.BACKGROUND_PRIORITY=%u\n"
+                L"W386.MAX_EMS_KB=%u\nW386.MIN_EMS_KB=%u\n"
+                L"W386.MAX_XMS_KB=%u\nW386.MIN_XMS_KB=%u\n"
+                L"W386.FLAGS=0x%08lX\nW386.VIDEO_FLAGS=0x%08lX\n",
+                view->w386->PfW386maxmem, view->w386->PfW386minmem,
+                view->w386->PfFPriority, view->w386->PfBPriority,
+                view->w386->PfMaxEMMK, view->w386->PfMinEMMK,
+                view->w386->PfMaxXmsK, view->w386->PfMinXmsK,
+                (unsigned long)view->w386->PfW386Flags,
+                (unsigned long)view->w386->PfW386Flags2);
+        print_oem(L"W386.ARGUMENTS", view->w386->PfW386params, sizeof(view->w386->PfW386params));
+    }
+    if (view->nt) {
+        wprintf(L"NT31.FLAGS=0x%08lX\n", (unsigned long)view->nt->nt31Prop.dwWNTFlags);
+        print_oem(L"CONFIG", view->nt->nt31Prop.achConfigFile, sizeof(view->nt->nt31Prop.achConfigFile));
+        print_oem(L"AUTOEXEC", view->nt->nt31Prop.achAutoexecFile, sizeof(view->nt->nt31Prop.achAutoexecFile));
+    }
 }
 
 int wmain(int argc, wchar_t **argv)
@@ -201,9 +253,8 @@ int wmain(int argc, wchar_t **argv)
         fwprintf(stderr, L"PIF.EXE: invalid PIF %ls\n", argv[2]);
         dispose(&view); return 1;
     }
-    if (_wcsicmp(argv[1], L"verify") == 0) { dispose(&view); return 0; }
-    if (_wcsicmp(argv[1], L"inspect") == 0) { inspect(&view); dispose(&view); return 0; }
-    if (_wcsicmp(argv[1], L"set") == 0) {
+    if (_wcsicmp(argv[1], L"show") == 0) { inspect(&view); dispose(&view); return 0; }
+    if (_wcsicmp(argv[1], L"update") == 0) {
         ok = argc > 3 && set_values(&view, argc - 3, argv + 3) && write_file(argv[2], view.bytes, view.size);
         dispose(&view); if (!ok) fwprintf(stderr, L"PIF.EXE: could not edit %ls\n", argv[2]);
         return ok ? 0 : 1;

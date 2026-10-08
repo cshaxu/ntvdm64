@@ -7,6 +7,7 @@ delivered single-worker/dual-Hook gates; see
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T437 S4 Win1.01 CMD orchestration](evidence/m0-t437-s4-win101-cmd-orchestration.md) | M0 T437 S4 | CMD-only Win1.01 media/installed PATCH orchestration, released utility identity, cleanup, and focused normal/negative evidence. | Retain through original-Setup guest acceptance. |
 | [T437 S3 PIF and hash utilities](evidence/m0-t437-s3-pif-hash-utilities.md) | M0 T437 S3 | AMD64 single-purpose PIF and SHA-256 tool delivery, with format and negative evidence. | Retain through any installer migration that consumes them. |
 | [T437 S2 single tool entrypoint](evidence/m0-t437-s2-single-tool-entrypoint.md) | M0 T437 S2 | Removes the duplicate Win1.01 batch wrapper and records the four-tool entrypoint sweep. | Retain with T437 closure. |
 | [T437 S1 installed Win31 tools](evidence/m0-t437-s1-installed-win31-tools.md) | M0 T437 S1 | Native installed-tree launch/path finalizers, identity-bound guest candidates, bounded PMCC relocation, and focused fixture evidence. | Retain through owner portable-launch acceptance. |
