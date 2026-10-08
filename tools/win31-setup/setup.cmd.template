@@ -1,6 +1,32 @@
 @echo off
-powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0run-setup.ps1"
+setlocal EnableExtensions DisableDelayedExpansion
+where run16 >nul 2>nul || (
+  echo run16.exe must be available through PATH.
+  if not defined NTVDM_SETUP_TEST_NO_PAUSE pause
+  exit /b 2
+)
+pushd "%~dp0.." || (
+  echo Cannot enter the original Setup media directory.
+  if not defined NTVDM_SETUP_TEST_NO_PAUSE pause
+  exit /b 3
+)
+call run16 command /c SETUP.EXE
 set "setup_result=%errorlevel%"
-echo Setup launch/run16 exit code: %setup_result%
-pause
-exit /b %setup_result%
+popd
+echo Original Setup/run16 exit code: %setup_result%
+if not "%setup_result%"=="0" (
+  echo Setup did not report success.  No installed PATCH has been generated.
+  if not defined NTVDM_SETUP_TEST_NO_PAUSE pause
+  exit /b %setup_result%
+)
+set /p "INSTALLROOT=Windows 3.1 directory selected in Setup: "
+if "%INSTALLROOT%"=="" (
+  echo No installation directory supplied.
+  if not defined NTVDM_SETUP_TEST_NO_PAUSE pause
+  exit /b 4
+)
+"%~dp0PATCHSET.EXE" --win31 "%INSTALLROOT%"
+set "patch_result=%errorlevel%"
+echo PATCHSET exit code: %patch_result%
+if not defined NTVDM_SETUP_TEST_NO_PAUSE pause
+exit /b %patch_result%

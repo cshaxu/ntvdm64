@@ -72,6 +72,7 @@ Work outstanding on this module,
 #include "idetect.h"
 #include "sas.h"
 #include "printer.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 #ifndef PROD
 #include "trace.h"
 #endif
@@ -369,6 +370,7 @@ GLOBAL UCHAR host_read_printer_status_port(int adapter)
     DWORD   BytesReturn;
 
 
+    mvdm_softpc_report_setup_hardware_probe("lpt-status-enter", (unsigned long)adapter, 0ul);
     if(!lpt->active)
     {
 	/*:::::::::::::::::::::::::::: Port inactive, attempt to reopen it */
@@ -384,6 +386,7 @@ GLOBAL UCHAR host_read_printer_status_port(int adapter)
     }
     if (lpt->bytesInBuffer)
 	flushBuffer(adapter);
+    mvdm_softpc_report_setup_hardware_probe("lpt-status-ioctl-enter", (unsigned long)adapter, 0ul);
     if (!DeviceIoControl(lpt->handle,
 		     IOCTL_VDM_PAR_READ_STATUS_PORT,
 		     NULL,		    // no input buffer
@@ -402,6 +405,8 @@ GLOBAL UCHAR host_read_printer_status_port(int adapter)
 #endif
         PrinterStatus = 0;
     }
+    mvdm_softpc_report_setup_hardware_probe("lpt-status-ioctl-leave", (unsigned long)adapter,
+        (unsigned long)PrinterStatus);
     return(PrinterStatus);
 }
 

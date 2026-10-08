@@ -30,6 +30,7 @@
 #include "debug.h"
 #include "idetect.h"
 #include "nt_com.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 
 #include <math.h>
 #include <malloc.h>
@@ -343,6 +344,7 @@ GLOBAL CPU int host_com_open(int adapter)
     /*::::::::::::::::::::::::::: We have a vaild adapter so try to open it */
     config_inquire((UTINY)(C_COM1_NAME + adapter),
 		   &ComConfigValues);
+    mvdm_softpc_report_setup_hardware_probe("com-open-enter", (unsigned long)adapter, 0ul);
     current->handle = CreateFile(ComConfigValues.string,
 				 GENERIC_READ | GENERIC_WRITE, 0, NULL,
 				 OPEN_EXISTING,
@@ -351,6 +353,8 @@ GLOBAL CPU int host_com_open(int adapter)
 
     /*............................................... Validate open attempt */
 
+    mvdm_softpc_report_setup_hardware_probe("com-open-leave", (unsigned long)adapter,
+        current->handle == (HANDLE)-1 ? GetLastError() : ERROR_SUCCESS);
     if(current->handle == (HANDLE) -1)
     {
 	always_trace1("Cannot open comms port '%s'\n",

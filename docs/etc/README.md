@@ -7,7 +7,9 @@ delivered single-worker/dual-Hook gates; see
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
-| [T436 stage sequence](operations/t436-win31-setup-mouse-plan.md) | M0 T436 concluded S2 / concluded S3 | Accepted limited S1 research, concluded mouse-driver delivery and subsequent installer patches. | Retain through sequential delivery and task acceptance. |
+| [T436 S4 pre-copy derived media](evidence/m0-t436-s4-derived-media-precopy.md) | M0 T436 S4 | Exact SZDD replacement and recovery proof for the two approved protected-mode images before Setup's first post-copy load. | Retain as the deferred ordinary-Setup candidate baseline; not an installation pass. |
+| [T436 S4 CCPU40 device declaration](evidence/m0-t436-s4-ccpu-device-profile.md) | M0 T436 S4 | Minimal no-COM/no-LPT machine-profile repair, selected build/deployment identity and pending normal-Setup gate. | Retain as a falsified hypothesis; no product profile change is accepted. |
+| [T436 stage sequence](operations/t436-win31-setup-mouse-plan.md) | M0 T436 limited closure | Accepted limited S1 research, concluded mouse-driver delivery, installer patches and deferred normal Setup handoff. | Retain for the closure and its queued successor. |
 | [T436 S3 Win31 Setup package](evidence/m0-t436-s3-win31-setup-package.md) | M0 T436 S3 | Original-media PATCH package, explicit standard/enhanced entrypoints, self-contained installed profiles and checked recovery adaptation. | Retain through owner hand-test and task acceptance. |
 | [T436 S2 Win31 mouse driver](evidence/m0-t436-s2-win31-mouse-driver.md) | M0 T436 S2 | Protected/real callback ABI, independent driver design, standard-mode exit proof and accepted enhanced limitation. | Retain through delivery and owner acceptance. |
 | [T436 S1 Win31 launch profile](evidence/m0-t436-s1-win31-launch-profile.md) | M0 T436 S1 | Isolated standard-mode PATCH profile and unchanged guest/default configuration proof; runtime trial pending. | Retain through feasibility and owner acceptance. |

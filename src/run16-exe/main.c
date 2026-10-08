@@ -439,7 +439,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
     (void)show;
     if (!run16_parse_launch_options(command,&options))
     {
-        fputs("Usage: run16.exe [--wait] [--] <binary> [arguments]\n", stderr);
+        fputs("Usage: run16.exe [--wait] <binary> [arguments]\n", stderr);
         return ERROR_INVALID_PARAMETER;
     }
     command=(PWSTR)options.command;

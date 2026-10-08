@@ -210,11 +210,13 @@ ULONG MoveInfoAddress;
 
     // Yes, we could use memmov for handling the overlapping regions
     // but XMS spec wants memcpy behaviour.
+    mvdm_softpc_report_xms_move((ULONG)pSrc, (ULONG)pDst, cbTransfer, FALSE);
     if (!mvdm_softpc_guest_memory_copy_forward((ULONG)pDst,
             (ULONG)pSrc, cbTransfer)) {
         mvdm_xms_cancel_current_operation();
         return;
     }
+    mvdm_softpc_report_xms_move((ULONG)pSrc, (ULONG)pDst, cbTransfer, TRUE);
     setAX(1);
     return;
 }

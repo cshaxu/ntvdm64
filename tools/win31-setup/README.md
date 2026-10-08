@@ -1,8 +1,11 @@
 # Windows 3.1 original-Setup PATCH tooling
 
-`package-win31-setup.ps1` is the S3 producer. It copies an owner-supplied,
-unchanged Windows 3.1 media/install tree to a separate package directory and
-adds only authored files below `PATCH`. It never writes to its input media.
+`package-win31-setup.ps1` copies owner-supplied Windows 3.1 media to a separate,
+build-owned derived package. It never writes to its input media.  The derived
+root retains the original layout and replaces only `KRNL386.EX_` and
+`WIN386.EX_`: each is regenerated from its identity-checked approved candidate
+and expanded again with Windows `EXPAND.EXE` before publication. This is
+necessary because Setup loads Windows before any post-Setup PATCHSET can run.
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools/win31-setup/package-win31-setup.ps1 `
@@ -14,21 +17,23 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/win31-setup/package-wi
   -OriginalWin386 <checked-installed-WIN386.EXE>
 ```
 
-The checked retail `WIN386.EXE` source and NT DOS ABI identities are mandatory.
-The package carries the S1-approved recoverable `/3` candidate, its provenance,
-and the released `MOUSE31.DRV`; it never invents an alternative mode or falls
-back from `/3` to `/S`.
+The checked retail `KRNL386.EXE` and `WIN386.EXE` sources and NT DOS ABI
+identities are mandatory. The PATCH carries the owner-approved hash-gated
+candidates, matching checked retail recovery images, and the released
+`MOUSE31.DRV`; it never invents an alternative mode or falls back from `/3`
+to `/S`.
 
 Run `<package>\PATCH\SETUP.CMD`, choose the destination in original Setup,
-finish and close Setup, then supply that actual destination when prompted. The
-script creates a package-local setup PIF/profile and runs Setup from the
-package's unchanged media root; it does not create a `WORK` copy. The
+then supply that actual destination when prompted. The script runs Setup
+through DOS `COMMAND.COM /c` from the derived media root, selecting the
+original text installer and preserving synchronous completion; it does not
+create a `WORK` copy. The
 installed destination receives its own self-contained `PATCH` directory:
 
 - `WINSTD.CMD` / `WINSTD.PIF`: standard mode (`/S`)
 - `WIN386.CMD` / `WIN386.PIF`: forced enhanced mode (`/3`)
 - shared `CONFIG.NT` and `AUTOEXEC.NT`: same checked DOS/DOSX semantics
-- `MOUSE31.DRV`, the first original `WIN386.ORIG`, and adaptation provenance
+- `MOUSE31.DRV`, plus the first original `KRNL386.ORIG` and `WIN386.ORIG`
 
 Both command files resolve plain `run16` through `PATH`; no launcher, PIF,
 profile, or driver refers to the package directory, repository, or a

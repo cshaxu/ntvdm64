@@ -2,6 +2,7 @@ param([Parameter(Mandatory)][string]$Observer,
       [Parameter(Mandatory)][string]$PackageRoot,
       [Parameter(Mandatory)][string]$Pif,
       [Parameter(Mandatory)][string]$BuildRoot,[switch]$IgnoreDeniedDiskWarning,
+      [switch]$IgnoreIllegalOpcodeWarning,
       [string]$SurfaceObserver='', [string]$GuestObserver='', [string]$GuestMap='',
       [string]$Python='', [switch]$QuiescedGuestSnapshot,
       [switch]$EarlyGuestSnapshot,
@@ -12,7 +13,13 @@ param([Parameter(Mandatory)][string]$Observer,
       [string]$MouseProbeRoot='',
       [switch]$MouseExitSequence,
       [string]$ExitConfirmProbe='', [string]$ExitDialogRegion='', [string]$ExitDialogHash='',
-      [ValidateRange(10000,60000)][int]$ObservationTimeoutMs=30000)
+      [string[]]$ObserverArguments=@(),
+      # Diagnostic-only: Setup can hand off from its short-lived run16 launcher
+      # to a resident WOW worker.  Preserve the observer-owned private session
+      # briefly after that launcher exits so an external probe can capture the
+      # handoff; cleanup below still owns and terminates only pinned descendants.
+      [ValidateRange(0,600000)][int]$RetainAfterControllerExitMs=0,
+      [ValidateRange(10000,600000)][int]$ObservationTimeoutMs=30000)
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $root=[IO.Path]::GetFullPath($BuildRoot)
@@ -42,6 +49,42 @@ function DesktopHash([string]$path,[string]$region=$DesktopReadyRegion) {
     try{return ([BitConverter]::ToString($sha.ComputeHash($crop))).Replace('-','')}
     finally{$sha.Dispose()}
 }
+
+# Start-Process joins an ArgumentList array into one native command line but
+# does not preserve embedded spaces for us.  The setup observer deliberately
+# accepts visible-text markers and escaped input containing spaces, so encode
+# every argument with the documented Windows backslash/quote rule before that
+# join.  This is test-container transport only; it never alters product or
+# guest command parsing.
+function ConvertTo-Win32CommandLineArgument([string]$value) {
+    if ($value.Length -eq 0) { return '""' }
+    if ($value -notmatch '[\s"]') { return $value }
+    $out = [Text.StringBuilder]::new()
+    [void]$out.Append('"')
+    $slashes = 0
+    foreach ($character in $value.ToCharArray()) {
+        if ($character -eq [char]0x5c) {
+            $slashes++
+            continue
+        }
+        if ($character -eq [char]0x22) {
+            [void]$out.Append([string]::new([char]0x5c, ($slashes * 2) + 1))
+            [void]$out.Append($character)
+            $slashes = 0
+            continue
+        }
+        if ($slashes) {
+            [void]$out.Append([string]::new([char]0x5c, $slashes))
+            $slashes = 0
+        }
+        [void]$out.Append($character)
+    }
+    if ($slashes) {
+        [void]$out.Append([string]::new([char]0x5c, $slashes * 2))
+    }
+    [void]$out.Append('"')
+    return $out.ToString()
+}
 if($MouseProbeRoot -and ($RunNotepadProbe -or !$SurfaceObserver -or !$DesktopReadyHash)) {
     throw 'Mouse observation requires surface/desktop readiness and no concurrent keyboard sequence'
 }
@@ -61,13 +104,18 @@ if($RequiredTempDirectory){
 }
 # Load the bounded dialog inspector before the observation timer starts.
 $allowDeniedDisk=[bool]$IgnoreDeniedDiskWarning
+$allowIllegalOpcode=[bool]$IgnoreIllegalOpcodeWarning
 . "$PSScriptRoot/inspect-session-windows.ps1" -ProcessIds @(0) -BuildRoot $root
 $savedDesktop=$env:MVDM_OBSERVER_PRIVATE_DESKTOP
 $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
 $pins=@();$controller=$null
 try {
     $report=Join-Path $root 'observation.txt'
-    $controller=Start-Process $observerPath -ArgumentList @("$binary\run16.exe",$PackageRoot,$report,$Pif,'--observation-timeout-ms',"$ObservationTimeoutMs") -WindowStyle Hidden -PassThru
+    $observerArguments = @("$binary\run16.exe", $PackageRoot, $report, $Pif,
+        '--observation-timeout-ms', "$ObservationTimeoutMs") + $ObserverArguments
+    $controller=Start-Process $observerPath -ArgumentList (($observerArguments |
+        ForEach-Object { ConvertTo-Win32CommandLineArgument ([string]$_) }) -join ' ') `
+        -WindowStyle Hidden -PassThru
     $desktop='NTVDMConsoleTest-'+$controller.Id
     $known=@($controller.Id);$last='';$nextDiscovery=[DateTime]::UtcNow
     $nextSnapshot=[DateTime]::UtcNow.AddSeconds(5);$sample=0;$inputPosted=$false;$textPosted=$false;$mousePosted=$false;$exitConfirmed=$false
@@ -90,7 +138,7 @@ try {
             }
             $nextDiscovery=[DateTime]::UtcNow.AddMilliseconds($(if($EarlyGuestSnapshot){100}else{1000}))
         }
-        try {$text=[WindowInspector]::Read([int[]]$known,$desktop,$true,$allowDeniedDisk)}catch {
+        try {$text=[WindowInspector]::Read([int[]]$known,$desktop,$true,$allowDeniedDisk,$allowIllegalOpcode)}catch {
             [IO.File]::AppendAllText("$root/probe-errors.txt",[DateTime]::UtcNow.ToString('o')+' '+$_.Exception.Message+"`r`n")
             continue
         }
@@ -164,7 +212,7 @@ try {
                 }
                 if($GuestObserver -and $GuestMap -and $p.MainModule.FileName -eq "$binary\ntvdm.exe") {
                     [IO.File]::AppendAllText("$root/cpu-times.txt",[DateTime]::UtcNow.ToString('o')+" sample=$sample pid=$($p.Id) cpu=$($p.TotalProcessorTime.TotalSeconds)`r`n")
-                    & $GuestObserver $p.Id $GuestMap "$root/memory-$sample.bin" |
+                    & $GuestObserver $p.Id $GuestMap 2>&1 |
                         Set-Content "$root/guest-$sample.txt"
                     if($Python){
                         $snapshotOptions=@()
@@ -178,6 +226,11 @@ try {
         }
     }
     $controller.WaitForExit()
+    if($RetainAfterControllerExitMs -gt 0) {
+        [IO.File]::WriteAllText("$root/controller-retention.txt",
+            "controller-exited=true`r`nretain-ms=$RetainAfterControllerExitMs`r`n")
+        Start-Sleep -Milliseconds $RetainAfterControllerExitMs
+    }
     [IO.File]::WriteAllText("$root/controller-exit.txt",[string]$controller.ExitCode)
     Get-Content $report
     if(Test-Path "$report.console.txt"){Get-Content "$report.console.txt"}

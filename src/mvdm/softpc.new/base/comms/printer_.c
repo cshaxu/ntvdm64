@@ -60,6 +60,7 @@ static char SccsID[]="@(#)printer_io.c	1.11 08/25/93 Copyright Insignia Solution
 #include "config.h"
 #include "host_lpt.h"
 #include "idetect.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 
 #if defined(NTVDM) && defined(MONITOR)
 void    printer_bop_flush (void);
@@ -100,6 +101,9 @@ void    printer_bop_flush (void);
 
 void printer_io()
 {
+    /* DIVERGENCE(MVDM-HOST-DIV-325): default-off scalar-only Setup probe
+     * attribution; no printer selection or BIOS behavior changes. */
+    mvdm_softpc_report_setup_hardware_probe("int17-enter", getAH(), getDX());
 #ifdef PRINTER
 
     half_word time_out, status;
@@ -116,6 +120,7 @@ void printer_io()
         case 0:
             /* this is the bop to flush 16bit printer buffer */
             printer_bop_flush ();
+            mvdm_softpc_report_setup_hardware_probe("int17-leave", getAH(), getDX());
             return;
 #endif
 
@@ -123,6 +128,7 @@ void printer_io()
         case 2:
             /* this is the bop to track a DOS open/close on LPTn */
             printer_bop_openclose (bopsubfunction);
+            mvdm_softpc_report_setup_hardware_probe("int17-leave", getAH(), getDX());
             return;
    }
 #endif
@@ -195,6 +201,7 @@ void printer_io()
 	}
     }
 #endif
+    mvdm_softpc_report_setup_hardware_probe("int17-leave", getAH(), getDX());
 }
 
 #if defined(NTVDM) && defined(MONITOR)

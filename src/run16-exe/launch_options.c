@@ -26,7 +26,6 @@ int run16_parse_launch_options(const wchar_t *command, run16_launch_options *opt
         target = skip_space(target + 6);
         if (prefix_token(target, L"--wait")) return 0;
     }
-    if (prefix_token(target, L"--")) target = skip_space(target + 2);
     if (!*target) return 0;
     options->command = target;
     return 1;

@@ -109,6 +109,7 @@ later package merely because an earlier linked component has no runtime proof.
 | 23 | OpenNT error-dialog response and termination semantics recovery — restore and verify residual source-defined response and completion paths; reuse WOW-owned results, bringing forward only dependencies needed for safe WOW execution. | [Proposal](../proposals/proposal-error-dialog-termination-semantics-restoration-001.md) |
 | 24 | MVDM whole-closure completeness audit and recovery — repair missing/cropped/unconnected originals and remove the local providers displaced by those recoveries; hand off the reconciled inventory to minimization. | [Proposal](../proposals/proposal-mvdm-whole-closure-recovery-001.md) |
 | 25 | Project-wide original-source implementation minimization review — reuse the closure inventory to consolidate remaining duplicate or unnecessary implementations, mirror diffs, overlays and bindings without losing verified capabilities. | [Proposal](../proposals/proposal-original-source-implementation-minimization-review-001.md) |
+| 26 | Windows 3.1 ordinary-Setup post-copy protected-mode transition recovery — restore a valid normal-Setup witness, locate the actual DOSX/first-Windows source boundary after file copy, and repair only a proved project-owned or source-shaped host cause. | [Proposal](../proposals/proposal-win31-ordinary-setup-protected-mode-transition-001.md) |
 
 Owner direction dated 2026-09-28 promoted root/search isolation from the tail
 to the then-head and replaced the aggregate WOW32 candidate with twenty independent
@@ -258,3 +259,9 @@ The prior insertion/swap paragraphs are historical planning, not live admission.
 The owner subsequently admits the former CCPU40/V86 contract-audit head in
 [CURRENT](CURRENT.md). It is absent above; subsequent candidates retain their
 relative order. The native launch-hook candidate is now first.
+
+Owner direction dated 2026-10-08 closes the limited Windows 3.1 delivery and appends
+the [ordinary Windows 3.1 Setup protected-mode transition candidate](../proposals/proposal-win31-ordinary-setup-protected-mode-transition-001.md)
+at the queue tail. It inherits the proved two-file derived-media representation,
+but must not treat it as a normal Setup pass or use `/I` to bypass the remaining
+post-copy boundary. Every existing candidate retains its relative order.

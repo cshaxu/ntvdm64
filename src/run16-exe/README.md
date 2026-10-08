@@ -8,7 +8,7 @@ hidden Console helpers, a guest executor or BaseSrv DOS/WOW record policy.
 ## Launch contract
 
 ```text
-run16 [--wait] [--] <binary> [arguments]
+run16 [--wait] <binary> [arguments]
 ```
 
 `launch_options.c` consumes only leading launcher options; the remaining

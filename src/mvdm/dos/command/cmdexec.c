@@ -43,6 +43,10 @@
  * process-wide standard streams. */
 #include "opennt-abi/host-compat/include/command_process_compat.h"
 #include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
+/* DIVERGENCE(MVDM-HOST-DIV-327): default-off attribution for the original
+ * Win3.1 DOSX-to-KRNL286 compatibility branch.  The observer consumes only
+ * already-classified scalars and does not affect DOS EXEC classification. */
+#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 
 //*****************************************************************************
 // IsWowAppRunnable
@@ -219,6 +223,10 @@ VOID cmdCheckBinary (VOID)
         return;         // Invalid path
     }
 
+    mvdm_softpc_report_setup_command_classification("classified", BinaryType,
+        (unsigned long)VDMForWOW, (unsigned long)IsFirstWOWCheckBinary,
+        (unsigned long)IsFirstCall);
+
 
     if (BinaryType == SCS_DOS_BINARY) {
         setCF(0);
@@ -235,6 +243,9 @@ VOID cmdCheckBinary (VOID)
 
 
     if (VDMForWOW && BinaryType == SCS_WOW_BINARY && IsFirstWOWCheckBinary) {
+        mvdm_softpc_report_setup_command_classification("first-wow-pass",
+            BinaryType, (unsigned long)VDMForWOW,
+            (unsigned long)IsFirstWOWCheckBinary, (unsigned long)IsFirstCall);
         IsFirstWOWCheckBinary = FALSE;
         setCF(0);
         return;         // Special Hack for krnl286.exe

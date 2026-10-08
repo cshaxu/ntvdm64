@@ -40,6 +40,9 @@
 #include "config.h"
 #include "debug.h"
 #include "yoda.h"
+#ifdef NTVDM
+#include "mvdm_softpc_termination.h"
+#endif
 
 #ifndef PROD
 IU32	IntelMsgDest = IM_DST_TRACE;
@@ -93,6 +96,16 @@ void illegal_op_int()
 
 	ip = sas_hw_at(stack) + (sas_hw_at(stack+1)<<8);
 	cs = sas_hw_at(stack+2) + (sas_hw_at(stack+3)<<8);
+
+#ifdef NTVDM
+	/* DIVERGENCE(MVDM-HOST-DIV-328): S4's default-off Setup witness samples
+	 * the original #UD frame before this owner opens its existing panel and
+	 * advances the interrupted IP.  It cannot select an exception handler,
+	 * alter the frame, or affect the original continuation. */
+	mvdm_softpc_report_setup_illegal_opcode(cs, ip, getSS(), getESP(),
+		sas_hw_at(stack), sas_hw_at(stack + 2), sas_hw_at(stack + 4),
+		sas_hw_at(stack + 6), getEFLAGS());
+#endif
 
 	where(string, cs, ip);
 

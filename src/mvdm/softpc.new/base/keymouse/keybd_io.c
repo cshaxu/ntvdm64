@@ -87,6 +87,10 @@ static char SccsID[]="@(#)keybd_io.c	1.35 06/27/95 Copyright Insignia Solutions 
 
 #include "debug.h"
 #include "idetect.h"
+/* DIVERGENCE(MVDM-HOST-DIV-325): default-off Win3.1 Setup diagnosis.  This
+ * observes the already-decoded idle request; it neither changes keyboard
+ * ownership nor alters the original wait policy. */
+#include "mvdm_softpc_termination.h"
 
 
 /*
@@ -753,6 +757,11 @@ void NtPutInBuffer(half_word s, half_word v)
                 sas_store_no_check(BIOS_VAR_START + buffer_tail, v);
                 sas_store_no_check(BIOS_VAR_START + buffer_tail+1, s);
                 sas_storew_no_check(BIOS_KB_BUFFER_TAIL, buffer_ptr);
+                /* DIVERGENCE(MVDM-HOST-DIV-325): only the explicit Win3.1
+                 * Setup trace records a key after the original BIOS buffer
+                 * commit.  It cannot affect delivery, ownership or IRQs. */
+                mvdm_softpc_report_setup_hardware_probe("keyboard-buffer-put",
+                    (unsigned long)s, (unsigned long)v);
                 setAX(0x9102);
                 INT15();
       K26();
@@ -1493,6 +1502,22 @@ void kb_idle_poll()
     */
 void keyboard_io()
 {
+   sys_addr setup_keyboard_stack = effective_addr(getSS(), getSP());
+   unsigned long setup_keyboard_caller =
+       ((unsigned long)sas_w_at(setup_keyboard_stack + 2) << 16) |
+       (unsigned long)sas_w_at(setup_keyboard_stack);
+   unsigned long setup_keyboard_interrupted =
+       ((unsigned long)sas_w_at(setup_keyboard_stack + 6) << 16) |
+       (unsigned long)sas_w_at(setup_keyboard_stack + 4);
+   mvdm_softpc_report_setup_hardware_probe("keyboard-bop-enter",
+       (unsigned long)getAH(), (unsigned long)getAL());
+   mvdm_softpc_report_setup_hardware_probe("keyboard-bop-caller",
+       setup_keyboard_caller, (unsigned long)getAX());
+   /* The first return pair is the BIOS BOP stub.  The next pair identifies
+    * the interrupted DOS client and lets the opt-in trace distinguish a
+    * normal idle loop from an application wait. */
+   mvdm_softpc_report_setup_hardware_probe("keyboard-bop-interrupted",
+       setup_keyboard_interrupted, (unsigned long)getSS());
    switch (getAH()) {
            /*
             * The 16 bit thread has not reached idle status yet
@@ -1519,7 +1544,11 @@ void keyboard_io()
              * App is starting a waitio
              */
      case 2:
+       mvdm_softpc_report_setup_hardware_probe("keyboard-waitio-enter",
+           (unsigned long)getAH(), (unsigned long)getAL());
        IDLE_waitio();
+       mvdm_softpc_report_setup_hardware_probe("keyboard-waitio-leave",
+           (unsigned long)getAH(), (unsigned long)getAL());
        break;
 
             /*

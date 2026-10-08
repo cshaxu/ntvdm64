@@ -17,11 +17,20 @@ S1 concludes as limited research: actual /3 desktop/Notepad observations,
 checked retail-copy SFT adaptation, unresolved startup reliability and no
 normal-shutdown/general-compatibility claim.
 
-Use **T436 S1 → S2 → S3**. S2 is concluded; S3 remains a planned successor,
-not a concurrent admission. Admit S3 separately before installation work.
+Use **T436 S1 → S2 → S3 → S4**. S2 and S3 are concluded; S4 is a separately
+admitted host-machine repair, not a concurrent expansion of packaging work.
 S2's enhanced-mode input tests distinguish
 startup failure from driver failure; accepted instability is not a passing
 mouse test. Standard-mode verification remains required.
+
+## Closure disposition
+
+Owner closed T436 as a limited delivery on 2026-10-08.  S4's derived-media
+representation is retained because it proves that the two already-approved
+candidate images reach Setup before the first post-copy Windows load.  It does
+not prove that normal Setup crosses that load.  The remaining first
+DOSX/Windows protected-mode handoff is now a separate queue-tail candidate:
+[ordinary Setup protected-mode transition recovery](../../proposals/proposal-win31-ordinary-setup-protected-mode-transition-001.md).
 
 ## Stage boundaries
 
@@ -30,6 +39,7 @@ mouse test. Standard-mode verification remains required.
 | S1 — accepted limited 386 research | Owner accepts actual enhanced desktop/application observations with unresolved independent startup failures. Preserve checked retail-copy adaptation, original standard baseline and explicit limits; no stable/general-compatibility or mouse/installer claim. |
 | S2 — mouse driver | Audit the Win3.1 ABI, implement/build the independent NTVDM mouse adaptation, verify real input, movement/clicks/show-hide and restart/cleanup in standard and enhanced modes. Deliver driver source, artifact identity and reproducible tests; packaging waits for S3. |
 | S3 — installer/patch package | Consolidate the accepted startup adaptations and completed driver into original Setup plus PATCH, generate both explicit mode entrypoints and isolated installed profiles, validate fresh installation and package independence, publish the hand-test package. |
+| S4 — CCPU40 device declaration | Correct the default virtual COM/LPT declaration so BIOS equipment, BDA and registered SoftPC endpoints name only backended devices; use normal original Setup hardware detection as the integration workload, never `/I`. |
 
 Each stage follows existing build/test/review/commit/push rules. Stage delivery
 does not imply final owner acceptance of T436. After all three stages finish,

@@ -42,6 +42,7 @@ static char SccsID[]="@(#)rs232_io.c	1.7 08/03/93 Copyright Insignia Solutions L
 #include "trace.h"
 #include "rs232.h"
 #include "idetect.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 
 static word divisors[] = { 1047,768, 384, 192, 96, 48, 24, 12, 6 };
 
@@ -66,6 +67,9 @@ static void return_status()
 
 void rs232_io()
 {
+   /* DIVERGENCE(MVDM-HOST-DIV-325): default-off scalar-only Setup probe
+    * attribution; no serial selection or BIOS behavior changes. */
+   mvdm_softpc_report_setup_hardware_probe("int14-enter", getAH(), getDX());
 #ifdef BIT_ORDER2
    union {
       half_word all;
@@ -220,6 +224,7 @@ void rs232_io()
                
 	    inb(port + (io_addr) RS232_TX_RX, &value);
 	    setAL(value);
+	    mvdm_softpc_report_setup_hardware_probe("int14-leave", getAH(), getDX());
 	    return;
 	    }
 	 }
@@ -288,7 +293,8 @@ void rs232_io()
 	** Yes both XT and AT BIOS's really do this.
 	*/
 	setAH( getAH()-3 );
-      	break;
+       break;
    }
+   mvdm_softpc_report_setup_hardware_probe("int14-leave", getAH(), getDX());
 }
 

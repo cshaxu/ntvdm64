@@ -97,6 +97,229 @@ void mvdm_softpc_report_virtual_memory_failure(unsigned long status)
     CloseHandle(file);
 }
 
+void mvdm_softpc_report_setup_hardware_probe(char const *stage,
+    unsigned long value0, unsigned long value1)
+{
+    static __declspec(thread) char path[MAX_PATH];
+    static __declspec(thread) unsigned initialized, count;
+    int const direct_access = stage != NULL &&
+        strcmp(stage, "direct-access-error-bop") == 0;
+    DWORD saved = GetLastError(), bytes, written;
+    HANDLE file;
+    char line[160];
+
+    if (!initialized) {
+        bytes = GetEnvironmentVariableA("MVDM_WIN31_SETUP_HARDWARE_TRACE_PATH",
+            path, (DWORD)sizeof(path));
+        if (bytes == 0u || bytes >= sizeof(path)) path[0] = 0;
+        initialized = 1u;
+    }
+    /* The ordinary probe stream is intentionally bounded.  The original BOP
+     * 59 direct-access panel is a distinct causal boundary, however, and may
+     * be reached after a Setup keyboard-poll cohort has consumed that budget.
+     * Keep its already-decoded record visible without changing the BOP, panel
+     * result, or guest continuation. */
+    if (path[0] && (direct_access || count++ < 256u)) {
+        file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
+            NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+        if (file != INVALID_HANDLE_VALUE) {
+            bytes = (DWORD)snprintf(line, sizeof(line),
+                "tid=%lu %s value0=%08lx value1=%08lx\r\n",
+                GetCurrentThreadId(), stage, value0, value1);
+            if (bytes < sizeof(line)) (void)WriteFile(file, line, bytes, &written, NULL);
+            CloseHandle(file);
+        }
+    }
+    SetLastError(saved);
+}
+
+void mvdm_softpc_report_setup_mode_switch(char const *stage,
+    unsigned long operand, unsigned long cr0)
+{
+    static __declspec(thread) char path[MAX_PATH];
+    static __declspec(thread) unsigned initialized, count;
+    DWORD saved = GetLastError(), bytes, written;
+    HANDLE file;
+    char line[144];
+
+    if (!initialized) {
+        bytes = GetEnvironmentVariableA("MVDM_WIN31_SETUP_MODE_TRACE_PATH",
+            path, (DWORD)sizeof(path));
+        if (bytes == 0u || bytes >= sizeof(path)) path[0] = 0;
+        initialized = 1u;
+    }
+    if (path[0] && count++ < 64u) {
+        file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
+            NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+        if (file != INVALID_HANDLE_VALUE) {
+            bytes = (DWORD)snprintf(line, sizeof(line),
+                "tid=%lu %s operand=%08lx cr0=%08lx\r\n",
+                GetCurrentThreadId(), stage, operand, cr0);
+            if (bytes < sizeof(line)) (void)WriteFile(file, line, bytes, &written, NULL);
+            CloseHandle(file);
+        }
+    }
+    SetLastError(saved);
+}
+
+void mvdm_softpc_report_xms_service(unsigned long service,
+    unsigned long ax, unsigned long bx, unsigned long cx,
+    unsigned long dx, unsigned long ss, unsigned long bp)
+{
+    static __declspec(thread) char path[MAX_PATH];
+    static __declspec(thread) unsigned initialized, count;
+    DWORD saved = GetLastError(), bytes, written;
+    HANDLE file;
+    char line[192];
+
+    if (!initialized) {
+        bytes = GetEnvironmentVariableA("MVDM_WIN31_SETUP_XMS_TRACE_PATH",
+            path, (DWORD)sizeof(path));
+        if (bytes == 0u || bytes >= sizeof(path)) path[0] = 0;
+        initialized = 1u;
+    }
+    if (path[0] && count++ < 256u) {
+        file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
+            NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+        if (file != INVALID_HANDLE_VALUE) {
+            bytes = (DWORD)snprintf(line, sizeof(line),
+                "tid=%lu xms service=%02lx ax=%04lx bx=%04lx cx=%04lx dx=%04lx ss=%04lx bp=%04lx\r\n",
+                GetCurrentThreadId(), service, ax, bx, cx, dx, ss, bp);
+            if (bytes < sizeof(line)) (void)WriteFile(file, line, bytes, &written, NULL);
+            CloseHandle(file);
+        }
+    }
+    SetLastError(saved);
+}
+
+void mvdm_softpc_report_xms_move(unsigned long source,
+    unsigned long destination, unsigned long byte_count, int completed)
+{
+    static __declspec(thread) char path[MAX_PATH];
+    static __declspec(thread) unsigned initialized, count;
+    DWORD saved = GetLastError(), bytes, written;
+    HANDLE file;
+    char line[176];
+
+    if (!initialized) {
+        bytes = GetEnvironmentVariableA("MVDM_WIN31_SETUP_XMS_TRACE_PATH",
+            path, (DWORD)sizeof(path));
+        if (bytes == 0u || bytes >= sizeof(path)) path[0] = 0;
+        initialized = 1u;
+    }
+    if (path[0] && count++ < 256u) {
+        file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
+            NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+        if (file != INVALID_HANDLE_VALUE) {
+            bytes = (DWORD)snprintf(line, sizeof(line),
+                "tid=%lu xms-move %s src=%08lx dst=%08lx bytes=%08lx\r\n",
+                GetCurrentThreadId(), completed ? "done" : "begin", source,
+                destination, byte_count);
+            if (bytes < sizeof(line)) (void)WriteFile(file, line, bytes, &written, NULL);
+            CloseHandle(file);
+        }
+    }
+    SetLastError(saved);
+}
+
+void mvdm_softpc_report_setup_illegal_opcode(unsigned short cs,
+    unsigned short ip, unsigned short ss, unsigned long esp,
+    unsigned short stack0, unsigned short stack1, unsigned short stack2,
+    unsigned short stack3, unsigned long eflags)
+{
+    static __declspec(thread) char path[MAX_PATH];
+    static __declspec(thread) unsigned initialized, count;
+    DWORD saved = GetLastError(), bytes, written;
+    HANDLE file;
+    char line[256];
+
+    if (!initialized) {
+        bytes = GetEnvironmentVariableA("MVDM_WIN31_SETUP_ILLEGAL_TRACE_PATH",
+            path, (DWORD)sizeof(path));
+        if (bytes == 0u || bytes >= sizeof(path)) path[0] = 0;
+        initialized = 1u;
+    }
+    if (path[0] && count++ < 16u) {
+        file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
+            NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+        if (file != INVALID_HANDLE_VALUE) {
+            bytes = (DWORD)snprintf(line, sizeof(line),
+                "tid=%lu #ud frame=%04x:%04x stack=%04x:%08lx words=%04x,%04x,%04x,%04x flags=%08lx\r\n",
+                GetCurrentThreadId(), (unsigned int)cs, (unsigned int)ip,
+                (unsigned int)ss, esp, (unsigned int)stack0,
+                (unsigned int)stack1, (unsigned int)stack2,
+                (unsigned int)stack3, eflags);
+            if (bytes < sizeof(line)) (void)WriteFile(file, line, bytes, &written, NULL);
+            CloseHandle(file);
+        }
+    }
+    SetLastError(saved);
+}
+
+void mvdm_softpc_report_setup_real_instruction(unsigned short cs,
+    unsigned long eip, unsigned short ax, unsigned short bx,
+    unsigned short cx, unsigned short dx, unsigned short ss,
+    unsigned long esp, unsigned long eflags, unsigned char opcode)
+{
+    static __declspec(thread) char path[MAX_PATH];
+    static __declspec(thread) unsigned initialized, count;
+    DWORD saved = GetLastError(), bytes, written;
+    HANDLE file;
+    char line[256];
+
+    if (!initialized) {
+        bytes = GetEnvironmentVariableA("MVDM_WIN31_SETUP_REAL_TRACE_PATH",
+            path, (DWORD)sizeof(path));
+        if (bytes == 0u || bytes >= sizeof(path)) path[0] = 0;
+        initialized = 1u;
+    }
+    if (path[0] && cs == 0x03ffu && count++ < 512u) {
+        file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
+            NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+        if (file != INVALID_HANDLE_VALUE) {
+            bytes = (DWORD)snprintf(line, sizeof(line),
+                "tid=%lu real csip=%04x:%04lx op=%02x ax=%04x bx=%04x cx=%04x dx=%04x stack=%04x:%08lx flags=%08lx\r\n",
+                GetCurrentThreadId(), (unsigned int)cs, eip, (unsigned int)opcode,
+                (unsigned int)ax, (unsigned int)bx, (unsigned int)cx,
+                (unsigned int)dx, (unsigned int)ss, esp, eflags);
+            if (bytes < sizeof(line)) (void)WriteFile(file, line, bytes, &written, NULL);
+            CloseHandle(file);
+        }
+    }
+    SetLastError(saved);
+}
+
+void mvdm_softpc_report_setup_command_classification(char const *stage,
+    unsigned long binary_type, unsigned long vdm_for_wow,
+    unsigned long first_wow_check, unsigned long first_call)
+{
+    static __declspec(thread) char path[MAX_PATH];
+    static __declspec(thread) unsigned initialized, count;
+    DWORD saved = GetLastError(), bytes, written;
+    HANDLE file;
+    char line[192];
+
+    if (!initialized) {
+        bytes = GetEnvironmentVariableA("MVDM_WIN31_SETUP_COMMAND_TRACE_PATH",
+            path, (DWORD)sizeof(path));
+        if (bytes == 0u || bytes >= sizeof(path)) path[0] = 0;
+        initialized = 1u;
+    }
+    if (path[0] && count++ < 32u) {
+        file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
+            NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+        if (file != INVALID_HANDLE_VALUE) {
+            bytes = (DWORD)snprintf(line, sizeof(line),
+                "tid=%lu %s binary=%08lx wow=%lu first-wow=%lu first-call=%lu\r\n",
+                GetCurrentThreadId(), stage, binary_type, vdm_for_wow,
+                first_wow_check, first_call);
+            if (bytes < sizeof(line)) (void)WriteFile(file, line, bytes, &written, NULL);
+            CloseHandle(file);
+        }
+    }
+    SetLastError(saved);
+}
+
 void mvdm_softpc_report_dpmi_table_address(char const *stage,
     unsigned long source_address, unsigned long gdt_shadow_address,
     unsigned long ldt_shadow_address)

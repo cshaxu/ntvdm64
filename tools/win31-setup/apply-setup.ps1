@@ -1,9 +1,11 @@
 param(
     [string]$MediaRoot,
     [string]$ReleaseRoot = '',
-    [Parameter(Mandatory)][string]$PifTemplate,
-    [string]$AdaptedWin386 = '',
-    [string]$AdaptationManifest = ''
+    [Parameter(Mandatory)][string]$Patchset,
+    [Parameter(Mandatory)][string]$AdaptedWin386,
+    [Parameter(Mandatory)][string]$AdaptedKrnl386,
+    [Parameter(Mandatory)][string]$RetailWin386,
+    [Parameter(Mandatory)][string]$RetailKrnl386
 )
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path "$PSScriptRoot/../..").Path
@@ -29,16 +31,13 @@ function HashBytes([byte[]]$bytes) {
 }
 $files = @{}
 $files['MOUSE31.DRV'] = [IO.File]::ReadAllBytes($driver)
-$files['WIN31-TEMPLATE.PIF'] = [IO.File]::ReadAllBytes((Resolve-Path -LiteralPath $PifTemplate).Path)
-foreach($name in @('configure-launch.ps1','run-setup.ps1','winstd.cmd.template','win386.cmd.template','README.txt')) {
-    $files[$name] = [IO.File]::ReadAllBytes((Join-Path $PSScriptRoot $name))
-}
+$files['PATCHSET.EXE'] = [IO.File]::ReadAllBytes((Resolve-Path -LiteralPath $Patchset).Path)
+$files['README.TXT'] = [IO.File]::ReadAllBytes((Join-Path $PSScriptRoot 'README.txt'))
+$files['KRNL386-ADAPTED.EXE'] = [IO.File]::ReadAllBytes((Resolve-Path -LiteralPath $AdaptedKrnl386).Path)
+$files['KRNL386-RETAIL.EXE'] = [IO.File]::ReadAllBytes((Resolve-Path -LiteralPath $RetailKrnl386).Path)
 $files['SETUP.CMD'] = [IO.File]::ReadAllBytes((Join-Path $PSScriptRoot 'setup.cmd.template'))
-if($AdaptedWin386 -or $AdaptationManifest) {
-    if(!$AdaptedWin386 -or !$AdaptationManifest) {throw 'Supply both checked enhanced adaptation files or neither'}
-    $files['WIN386-ADAPTED.EXE'] = [IO.File]::ReadAllBytes((Resolve-Path -LiteralPath $AdaptedWin386).Path)
-    $files['WIN386-ADAPTATION.JSON'] = [IO.File]::ReadAllBytes((Resolve-Path -LiteralPath $AdaptationManifest).Path)
-}
+$files['WIN386-ADAPTED.EXE'] = [IO.File]::ReadAllBytes((Resolve-Path -LiteralPath $AdaptedWin386).Path)
+$files['WIN386-RETAIL.EXE'] = [IO.File]::ReadAllBytes((Resolve-Path -LiteralPath $RetailWin386).Path)
 
 $patch = Join-Path $media 'PATCH'; $owned = @{}
 if(Test-Path -LiteralPath $patch) {
@@ -73,6 +72,8 @@ $records = @(foreach($name in ($files.Keys | Sort-Object)) {
     [IO.File]::WriteAllBytes((Join-Path $patch $name), $files[$name])
     [ordered]@{name=$name;sha256=(HashBytes $files[$name])}
 })
-[ordered]@{id='win31';releaseDriver=$entry[0];files=$records} | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $patch 'addon-files.json') -Encoding UTF8
+# The package manifest belongs in the build evidence, not in the user-facing
+# PATCH directory.  It is deliberately not emitted beside the installer.
+if(Test-Path -LiteralPath (Join-Path $patch 'addon-files.json')) {Remove-Item -LiteralPath (Join-Path $patch 'addon-files.json') -Force}
 Write-Host "Prepared $patch; original media remain unchanged."
 Write-Host 'Run PATCH\SETUP.CMD. After original Setup, enter the actual installation directory when prompted.'

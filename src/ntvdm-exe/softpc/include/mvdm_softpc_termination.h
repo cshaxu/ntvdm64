@@ -13,6 +13,44 @@ int mvdm_softpc_terminate_current_session(uint32_t vdm_for_wow,
 void mvdm_softpc_report_termination(char const *stage,
     void const *return_address);
 void mvdm_softpc_report_virtual_memory_failure(unsigned long status);
+/* Default-off attribution for the original serial/parallel hardware probe
+ * boundaries.  The caller supplies already-live scalar register/status data;
+ * this observer neither enumerates, opens nor changes a device. */
+void mvdm_softpc_report_setup_hardware_probe(char const *stage,
+    unsigned long value0, unsigned long value1);
+/* Default-off witness for the original CCPU real-to-protected-mode
+ * instruction.  It observes only the source operand and CR0 before/after the
+ * existing instruction body; it never selects a mode or changes its result. */
+void mvdm_softpc_report_setup_mode_switch(char const *stage,
+    unsigned long operand, unsigned long cr0);
+/* Default-off XMS service witness for the Windows 3.1 Setup investigation.
+ * It observes the service byte and already-live register inputs at the BOP
+ * boundary; it neither dispatches nor changes XMS state. */
+void mvdm_softpc_report_xms_service(unsigned long service,
+    unsigned long ax, unsigned long bx, unsigned long cx,
+    unsigned long dx, unsigned long ss, unsigned long bp);
+void mvdm_softpc_report_xms_move(unsigned long source,
+    unsigned long destination, unsigned long byte_count, int completed);
+/* Default-off witness for the original real-mode #UD path.  The caller
+ * supplies the already-decoded interrupt frame and register scalars before
+ * the original panel/one-byte continuation changes that frame. */
+void mvdm_softpc_report_setup_illegal_opcode(unsigned short cs,
+    unsigned short ip, unsigned short ss, unsigned long esp,
+    unsigned short stack0, unsigned short stack1, unsigned short stack2,
+    unsigned short stack3, unsigned long eflags);
+/* Diagnostic-build-only instruction witness for the short real-mode window
+ * that has already transferred into the bad #UD segment. */
+void mvdm_softpc_report_setup_real_instruction(unsigned short cs,
+    unsigned long eip, unsigned short ax, unsigned short bx,
+    unsigned short cx, unsigned short dx, unsigned short ss,
+    unsigned long esp, unsigned long eflags, unsigned char opcode);
+/* Default-off witness for the original COMMAND binary-classification result
+ * around the special first-WOW KRNL286 compatibility return.  It receives
+ * only values that cmdCheckBinary has already computed; it does not inspect
+ * the guest pathname or change classification. */
+void mvdm_softpc_report_setup_command_classification(char const *stage,
+    unsigned long binary_type, unsigned long vdm_for_wow,
+    unsigned long first_wow_check, unsigned long first_call);
 void mvdm_softpc_report_wow_bop_state(unsigned long cr0, unsigned long cr3,
     unsigned short cs, unsigned short ip, unsigned long ds_base,
     unsigned long ds_limit);

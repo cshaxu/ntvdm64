@@ -131,7 +131,13 @@ static BOOL WINAPI record_console_control(DWORD event)
  * explicitly opt into bounded input chunks acknowledged by actual echo and
  * operation milestones; neither path manufactures a product input ACK. */
 #define OBSERVATION_TIMEOUT_MS 10000u
-#define OBSERVATION_TIMEOUT_MAX_MS 60000u
+/* Some original installers spend most of their first two minutes in their
+ * own hardware/configuration phase before exposing the next input milestone.
+ * Keep ordinary callers free to choose their usual shorter limit, but permit
+ * a bounded diagnostic run long enough to distinguish that phase from the
+ * later protected-mode handoff. */
+#define OBSERVATION_TIMEOUT_MAX_MS 600000u
+#define PRIVATE_DESKTOP_OBSERVER_TIMEOUT_MS 630000u
 #define OBSERVATION_INPUT_READY_TIMEOUT_MS 20000u
 #define OBSERVATION_KEY_EVENT_INTERVAL_MS 100u
 #define OBSERVATION_KEY_DRAIN_TIMEOUT_MS 1500u
@@ -610,6 +616,7 @@ static BOOL set1_key_for_ascii(char character, WORD *virtual_key,
     }
     switch (character == '\n' ? '\r' : character) {
     case '\r': *virtual_key = VK_RETURN; *scan_code = 0x1c; return TRUE;
+    case '\b': *virtual_key = VK_BACK; *scan_code = 0x0e; return TRUE;
     case '\x1b': *virtual_key = VK_ESCAPE; *scan_code = 0x01; return TRUE;
     case '\x11': /* Modern EDIT's normal Ctrl+Q exit, not target termination. */
         *virtual_key = 'Q'; *scan_code = 0x10;
@@ -643,6 +650,31 @@ static DWORD report_size_bytes(const char *path)
     size = GetFileSize(file, NULL);
     CloseHandle(file);
     return size == INVALID_FILE_SIZE ? 0u : size;
+}
+
+/* Test-only command-line form for Console input that cannot safely carry a
+ * literal CR through CreateProcess argument quoting.  The ordinary text option
+ * stays literal; this explicit form recognizes only \r, \n, \b, \e and \\. */
+static BOOL decode_console_input_escapes(const char *source, char *target,
+                                         size_t capacity)
+{
+    size_t used = 0u;
+    if (source == NULL || target == NULL || capacity == 0u) return FALSE;
+    while (*source != '\0') {
+        char value = *source++;
+        if (value == '\\') {
+            value = *source++;
+            if (value == 'r') value = '\r';
+            else if (value == 'n') value = '\n';
+            else if (value == 'b') value = '\b';
+            else if (value == 'e') value = '\x1b';
+            else if (value != '\\') return FALSE;
+        }
+        if (value == '\0' || used + 1u >= capacity) return FALSE;
+        target[used++] = value;
+    }
+    target[used] = '\0';
+    return TRUE;
 }
 
 /* Wait for the original source-owned 8042 output corresponding to one
@@ -1111,6 +1143,51 @@ static BOOL wait_for_console_prompt(HANDLE output, DWORD timeout_ms,
     return FALSE;
 }
 
+/* Later scripted inputs must be gated by a new screen state, not merely by a
+ * marker which is still visible from an earlier Setup page.  This is test
+ * transport only: it neither changes product input timing nor treats an echo
+ * as proof that a guest command completed. */
+static BOOL console_screen_fingerprint(HANDLE output, DWORD *fingerprint)
+{
+    CONSOLE_SCREEN_BUFFER_INFO info;
+    char row[1025];
+    DWORD count, hash = 2166136261u;
+    SHORT y;
+
+    if (fingerprint == NULL || !GetConsoleScreenBufferInfo(output, &info) ||
+        info.dwSize.X < 1 || info.dwSize.X >= (SHORT)sizeof(row)) return FALSE;
+    for (y = info.srWindow.Top; y <= info.srWindow.Bottom; ++y) {
+        COORD pos = { 0, y };
+        DWORD index;
+        if (!ReadConsoleOutputCharacterA(output, row, info.dwSize.X, pos,
+                                         &count) || count != (DWORD)info.dwSize.X)
+            return FALSE;
+        for (index = 0; index != count; ++index) {
+            hash ^= (unsigned char)row[index];
+            hash *= 16777619u;
+        }
+    }
+    hash ^= (WORD)info.dwCursorPosition.X;
+    hash *= 16777619u;
+    hash ^= (WORD)info.dwCursorPosition.Y;
+    hash *= 16777619u;
+    *fingerprint = hash;
+    return TRUE;
+}
+
+static BOOL wait_for_fresh_console_prompt(HANDLE output, DWORD timeout_ms,
+                                          const char *marker, DWORD prior)
+{
+    DWORD begin = GetTickCount();
+    do {
+        DWORD current;
+        if (console_screen_fingerprint(output, &current) && current != prior &&
+            wait_for_console_prompt(output, 0u, marker)) return TRUE;
+        Sleep(25u);
+    } while (GetTickCount() - begin < timeout_ms);
+    return FALSE;
+}
+
 /* The original INT 33h entry turns off stream I/O and the host transition
  * enables mouse/window Console records. Observe that public handle state
  * directly: a synthetic diagnostic stage is neither an activation boundary
@@ -1167,7 +1244,11 @@ static int private_desktop_observer(void)
     if (CreateProcessA(NULL, command, NULL, NULL, FALSE, CREATE_NEW_CONSOLE,
                        NULL, NULL, &startup, &child)) {
         CloseHandle(child.hThread);
-        wait = WaitForSingleObject(child.hProcess, 120000);
+        /* The nested private-desktop controller must outlive the bounded
+         * observation it hosts.  Keep a small teardown allowance rather than
+         * silently truncating an explicitly permitted diagnostic interval. */
+        wait = WaitForSingleObject(child.hProcess,
+                                   PRIVATE_DESKTOP_OBSERVER_TIMEOUT_MS);
         if (wait == WAIT_OBJECT_0) GetExitCodeProcess(child.hProcess, &result);
         else {
             /* Test timeout is a failure, never a successful task completion. */
@@ -1337,12 +1418,38 @@ int main(int argc, char **argv)
     BOOL observed_console_mouse_input_ready = FALSE;
     BOOL observed_console_mouse_input_delivered = FALSE;
     const char *scripted_console_input_text = "ver\rexit\r";
+    char scripted_console_input_escaped[512];
+    char scripted_console_input_next_escaped[512];
+    char scripted_console_input_next2_escaped[512];
+    char scripted_console_input_next3_escaped[512];
+    char scripted_console_input_next4_escaped[512];
+    char scripted_console_input_next5_escaped[512];
+    char scripted_console_input_next6_escaped[512];
     const char *scripted_console_input_sequence = "ver+exit";
     const char *scripted_console_input_marker = NULL;
+    const char *scripted_console_input_next_marker = NULL;
+    const char *scripted_console_input_next_text = NULL;
+    const char *scripted_console_input_next2_marker = NULL;
+    const char *scripted_console_input_next2_text = NULL;
+    const char *scripted_console_input_next3_marker = NULL;
+    const char *scripted_console_input_next3_text = NULL;
+    const char *scripted_console_input_next4_marker = NULL;
+    const char *scripted_console_input_next4_text = NULL;
+    const char *scripted_console_input_next5_marker = NULL;
+    const char *scripted_console_input_next5_text = NULL;
+    const char *scripted_console_input_next6_marker = NULL;
+    const char *scripted_console_input_next6_text = NULL;
     DWORD scripted_console_line_delay_ms = 0;
     unsigned scripted_console_function_key = 0;
     BOOL scripted_console_input_ready = FALSE;
+    BOOL scripted_console_input_next_ready = FALSE;
+    BOOL scripted_console_input_next2_ready = FALSE;
+    BOOL scripted_console_input_next3_ready = FALSE;
+    BOOL scripted_console_input_next4_ready = FALSE;
+    BOOL scripted_console_input_next5_ready = FALSE;
+    BOOL scripted_console_input_next6_ready = FALSE;
     BOOL scripted_console_input_delivered = FALSE;
+    DWORD scripted_console_screen_after_input = 0u;
     BOOL graphics_handshake=FALSE,graphics_handshake_ok=FALSE;
     DWORD scripted_console_input_remaining = 0;
     BOOL scripted_console_input_remaining_known = FALSE;
@@ -1434,6 +1541,24 @@ int main(int argc, char **argv)
     if (input == INVALID_HANDLE_VALUE || output == INVALID_HANDLE_VALUE) return 66;
 
     clear_console(output);
+    /* A private desktop can inherit a 53x15 Console even though Setup's
+     * original text UI has choices on rows 16--24.  The opt-in setup fixture
+     * establishes a conventional 80x25 surface before the child inherits
+     * CONIN$/CONOUT$.  It is test-only: no product Console or worker setting
+     * is queried or changed. */
+    if (GetEnvironmentVariableA("MVDM_OBSERVER_SETUP_CONSOLE", NULL, 0)) {
+        SMALL_RECT tiny = {0, 0, 0, 0};
+        SMALL_RECT window = {0, 0, 79, 24};
+        COORD size = {80, 9001};
+        CONSOLE_FONT_INFOEX font = {sizeof(font)};
+        if (!GetCurrentConsoleFontEx(output, FALSE, &font)) return 93;
+        font.dwFontSize.X = 4;
+        font.dwFontSize.Y = 8;
+        if (!SetCurrentConsoleFontEx(output, FALSE, &font) ||
+            !SetConsoleWindowInfo(output, TRUE, &tiny) ||
+            !SetConsoleScreenBufferSize(output, size) ||
+            !SetConsoleWindowInfo(output, TRUE, &window)) return 93;
+    }
     /* Explicit native-TUI baseline geometry on a disposable private Console.
      * Keep the real viewport/font: a narrow RDP desktop uses its scrollbar.
      * Never confuse a wrapped readiness marker with product completion. */
@@ -1543,6 +1668,118 @@ int main(int argc, char **argv)
                     scripted_console_line_delay_ms = 1500;
                     continue;
                 }
+                if (strcmp(argv[argument_index], "--observe-console-input-escaped") == 0) {
+                    if (++argument_index >= argc ||
+                        !decode_console_input_escapes(argv[argument_index],
+                            scripted_console_input_escaped,
+                            sizeof(scripted_console_input_escaped))) return 68;
+                    scripted_console_input = TRUE;
+                    scripted_console_input_text = scripted_console_input_escaped;
+                    scripted_console_input_sequence = "explicit-observer-escaped-text";
+                    scripted_console_line_delay_ms = 1500;
+                    continue;
+                }
+                /* Each later input is intentionally gated by a fresh visible
+                 * screen marker.  This keeps Setup diagnostics from turning
+                 * a human multi-page choice into typeahead: success writing C
+                 * must not be mistaken for the later Welcome page accepting
+                 * Enter. */
+                if (strcmp(argv[argument_index],
+                           "--observe-console-input-next-marker") == 0) {
+                    if (++argument_index >= argc || !argv[argument_index][0] ||
+                        strlen(argv[argument_index]) > 80) return 68;
+                    scripted_console_input_next_marker = argv[argument_index];
+                    continue;
+                }
+                if (strcmp(argv[argument_index],
+                           "--observe-console-input-next-escaped") == 0) {
+                    if (++argument_index >= argc ||
+                        !decode_console_input_escapes(argv[argument_index],
+                            scripted_console_input_next_escaped,
+                            sizeof(scripted_console_input_next_escaped))) return 68;
+                    scripted_console_input_next_text = scripted_console_input_next_escaped;
+                    continue;
+                }
+                if (strcmp(argv[argument_index],
+                           "--observe-console-input-next2-marker") == 0) {
+                    if (++argument_index >= argc || !argv[argument_index][0] ||
+                        strlen(argv[argument_index]) > 80) return 68;
+                    scripted_console_input_next2_marker = argv[argument_index];
+                    continue;
+                }
+                if (strcmp(argv[argument_index],
+                           "--observe-console-input-next2-escaped") == 0) {
+                    if (++argument_index >= argc ||
+                        !decode_console_input_escapes(argv[argument_index],
+                            scripted_console_input_next2_escaped,
+                            sizeof(scripted_console_input_next2_escaped))) return 68;
+                    scripted_console_input_next2_text = scripted_console_input_next2_escaped;
+                    continue;
+                }
+                if (strcmp(argv[argument_index],
+                           "--observe-console-input-next3-marker") == 0) {
+                    if (++argument_index >= argc || !argv[argument_index][0] ||
+                        strlen(argv[argument_index]) > 80) return 68;
+                    scripted_console_input_next3_marker = argv[argument_index];
+                    continue;
+                }
+                if (strcmp(argv[argument_index],
+                           "--observe-console-input-next3-escaped") == 0) {
+                    if (++argument_index >= argc ||
+                        !decode_console_input_escapes(argv[argument_index],
+                            scripted_console_input_next3_escaped,
+                            sizeof(scripted_console_input_next3_escaped))) return 68;
+                    scripted_console_input_next3_text = scripted_console_input_next3_escaped;
+                    continue;
+                }
+                if (strcmp(argv[argument_index],
+                           "--observe-console-input-next4-marker") == 0) {
+                    if (++argument_index >= argc || !argv[argument_index][0] ||
+                        strlen(argv[argument_index]) > 80) return 68;
+                    scripted_console_input_next4_marker = argv[argument_index];
+                    continue;
+                }
+                if (strcmp(argv[argument_index],
+                           "--observe-console-input-next4-escaped") == 0) {
+                    if (++argument_index >= argc ||
+                        !decode_console_input_escapes(argv[argument_index],
+                            scripted_console_input_next4_escaped,
+                            sizeof(scripted_console_input_next4_escaped))) return 68;
+                    scripted_console_input_next4_text = scripted_console_input_next4_escaped;
+                    continue;
+                }
+                if (strcmp(argv[argument_index],
+                           "--observe-console-input-next5-marker") == 0) {
+                    if (++argument_index >= argc || !argv[argument_index][0] ||
+                        strlen(argv[argument_index]) > 80) return 68;
+                    scripted_console_input_next5_marker = argv[argument_index];
+                    continue;
+                }
+                if (strcmp(argv[argument_index],
+                           "--observe-console-input-next5-escaped") == 0) {
+                    if (++argument_index >= argc ||
+                        !decode_console_input_escapes(argv[argument_index],
+                            scripted_console_input_next5_escaped,
+                            sizeof(scripted_console_input_next5_escaped))) return 68;
+                    scripted_console_input_next5_text = scripted_console_input_next5_escaped;
+                    continue;
+                }
+                if (strcmp(argv[argument_index],
+                           "--observe-console-input-next6-marker") == 0) {
+                    if (++argument_index >= argc || !argv[argument_index][0] ||
+                        strlen(argv[argument_index]) > 80) return 68;
+                    scripted_console_input_next6_marker = argv[argument_index];
+                    continue;
+                }
+                if (strcmp(argv[argument_index],
+                           "--observe-console-input-next6-escaped") == 0) {
+                    if (++argument_index >= argc ||
+                        !decode_console_input_escapes(argv[argument_index],
+                            scripted_console_input_next6_escaped,
+                            sizeof(scripted_console_input_next6_escaped))) return 68;
+                    scripted_console_input_next6_text = scripted_console_input_next6_escaped;
+                    continue;
+                }
                 if (strcmp(argv[argument_index],
                            "--observe-console-line-delay-ms") == 0) {
                     if (++argument_index >= argc ||
@@ -1618,6 +1855,20 @@ int main(int argc, char **argv)
     snprintf(console_mouse_postinput_snapshot_path,
              sizeof(console_mouse_postinput_snapshot_path),
              "%s.mouse-post-input-console.txt", report_base_path);
+    /* Diagnostic-only witness: when a bounded observation fails before the
+     * guest starts, preserve the exact command line that this test container
+     * gave CreateProcess.  This is not a product command transformation. */
+    {
+        char command_path[MAX_PATH];
+        FILE *command_file;
+        if (snprintf(command_path, sizeof(command_path), "%s.command-line.txt",
+                     report_base_path) > 0 &&
+            fopen_s(&command_file, command_path, "wb") == 0 && command_file) {
+            fputs(command_line, command_file);
+            fputc('\n', command_file);
+            fclose(command_file);
+        }
+    }
     snprintf(base_vdm_report_path, sizeof(base_vdm_report_path), "%s.base-vdm.txt",
              report_base_path);
     previous_exception_report_length = GetEnvironmentVariableA(
@@ -1800,10 +2051,127 @@ int main(int argc, char **argv)
                   !GetEnvironmentVariableA("MVDM_OBSERVER_WINDOW_INPUT",NULL,0)) || console_caf_return(input,argv[3]));
             record_performance("route-ready", scripted_window_frontend ? "Window" : "Console",
                 0, scripted_console_input_delivered);
+            if (scripted_console_input_delivered)
+                scripted_console_input_delivered = console_screen_fingerprint(output,
+                    &scripted_console_screen_after_input);
             if (scripted_console_input_delivered) {
                 if (observe_edit_return) record_performance("edit-submit", "edit.com", 0, TRUE);
                 scripted_console_input_delivered = write_console_input_text(input,scripted_console_input_text,
                     scripted_console_line_delay_ms,output,argv[3]);
+            }
+            if (scripted_console_input_delivered &&
+                (scripted_console_input_next_marker || scripted_console_input_next_text)) {
+                if (!scripted_console_input_next_marker || !scripted_console_input_next_text) {
+                    scripted_console_input_delivered = FALSE;
+                } else {
+                    scripted_console_input_next_ready = wait_for_fresh_console_prompt(output,
+                        OBSERVATION_INPUT_READY_TIMEOUT_MS,
+                        scripted_console_input_next_marker,
+                        scripted_console_screen_after_input);
+                    if (scripted_console_input_next_ready)
+                        scripted_console_input_next_ready = console_screen_fingerprint(output,
+                            &scripted_console_screen_after_input);
+                    if (scripted_console_input_next_ready)
+                        scripted_console_input_delivered = write_console_input_text(input,
+                            scripted_console_input_next_text,
+                            scripted_console_line_delay_ms,output,argv[3]);
+                    else scripted_console_input_delivered = FALSE;
+                }
+            }
+            if (scripted_console_input_delivered &&
+                (scripted_console_input_next2_marker || scripted_console_input_next2_text)) {
+                if (!scripted_console_input_next2_marker || !scripted_console_input_next2_text) {
+                    scripted_console_input_delivered = FALSE;
+                } else {
+                    scripted_console_input_next2_ready = wait_for_fresh_console_prompt(output,
+                        OBSERVATION_INPUT_READY_TIMEOUT_MS,
+                        scripted_console_input_next2_marker,
+                        scripted_console_screen_after_input);
+                    if (scripted_console_input_next2_ready)
+                        scripted_console_input_next2_ready = console_screen_fingerprint(output,
+                            &scripted_console_screen_after_input);
+                    if (scripted_console_input_next2_ready)
+                        scripted_console_input_delivered = write_console_input_text(input,
+                            scripted_console_input_next2_text,
+                            scripted_console_line_delay_ms,output,argv[3]);
+                    else scripted_console_input_delivered = FALSE;
+                }
+            }
+            if (scripted_console_input_delivered &&
+                (scripted_console_input_next3_marker || scripted_console_input_next3_text)) {
+                if (!scripted_console_input_next3_marker || !scripted_console_input_next3_text) {
+                    scripted_console_input_delivered = FALSE;
+                } else {
+                    scripted_console_input_next3_ready = wait_for_fresh_console_prompt(output,
+                        OBSERVATION_INPUT_READY_TIMEOUT_MS,
+                        scripted_console_input_next3_marker,
+                        scripted_console_screen_after_input);
+                    if (scripted_console_input_next3_ready)
+                        scripted_console_input_next3_ready = console_screen_fingerprint(output,
+                            &scripted_console_screen_after_input);
+                    if (scripted_console_input_next3_ready)
+                        scripted_console_input_delivered = write_console_input_text(input,
+                            scripted_console_input_next3_text,
+                            scripted_console_line_delay_ms,output,argv[3]);
+                    else scripted_console_input_delivered = FALSE;
+                }
+            }
+            if (scripted_console_input_delivered &&
+                (scripted_console_input_next4_marker || scripted_console_input_next4_text)) {
+                if (!scripted_console_input_next4_marker || !scripted_console_input_next4_text) {
+                    scripted_console_input_delivered = FALSE;
+                } else {
+                    scripted_console_input_next4_ready = wait_for_fresh_console_prompt(output,
+                        OBSERVATION_INPUT_READY_TIMEOUT_MS,
+                        scripted_console_input_next4_marker,
+                        scripted_console_screen_after_input);
+                    if (scripted_console_input_next4_ready)
+                        scripted_console_input_next4_ready = console_screen_fingerprint(output,
+                            &scripted_console_screen_after_input);
+                    if (scripted_console_input_next4_ready)
+                        scripted_console_input_delivered = write_console_input_text(input,
+                            scripted_console_input_next4_text,
+                            scripted_console_line_delay_ms,output,argv[3]);
+                    else scripted_console_input_delivered = FALSE;
+                }
+            }
+            if (scripted_console_input_delivered &&
+                (scripted_console_input_next5_marker || scripted_console_input_next5_text)) {
+                if (!scripted_console_input_next5_marker || !scripted_console_input_next5_text) {
+                    scripted_console_input_delivered = FALSE;
+                } else {
+                    scripted_console_input_next5_ready = wait_for_fresh_console_prompt(output,
+                        OBSERVATION_INPUT_READY_TIMEOUT_MS,
+                        scripted_console_input_next5_marker,
+                        scripted_console_screen_after_input);
+                    if (scripted_console_input_next5_ready)
+                        scripted_console_input_next5_ready = console_screen_fingerprint(output,
+                            &scripted_console_screen_after_input);
+                    if (scripted_console_input_next5_ready)
+                        scripted_console_input_delivered = write_console_input_text(input,
+                            scripted_console_input_next5_text,
+                            scripted_console_line_delay_ms,output,argv[3]);
+                    else scripted_console_input_delivered = FALSE;
+                }
+            }
+            if (scripted_console_input_delivered &&
+                (scripted_console_input_next6_marker || scripted_console_input_next6_text)) {
+                if (!scripted_console_input_next6_marker || !scripted_console_input_next6_text) {
+                    scripted_console_input_delivered = FALSE;
+                } else {
+                    scripted_console_input_next6_ready = wait_for_fresh_console_prompt(output,
+                        OBSERVATION_INPUT_READY_TIMEOUT_MS,
+                        scripted_console_input_next6_marker,
+                        scripted_console_screen_after_input);
+                    if (scripted_console_input_next6_ready)
+                        scripted_console_input_next6_ready = console_screen_fingerprint(output,
+                            &scripted_console_screen_after_input);
+                    if (scripted_console_input_next6_ready)
+                        scripted_console_input_delivered = write_console_input_text(input,
+                            scripted_console_input_next6_text,
+                            scripted_console_line_delay_ms,output,argv[3]);
+                    else scripted_console_input_delivered = FALSE;
+                }
             }
             if(scripted_console_input_delivered && scripted_console_function_key) {
                 INPUT_RECORD keys[2]={0};DWORD written=0;
@@ -2031,10 +2399,46 @@ int main(int argc, char **argv)
             fprintf(report, "scripted-console-input-trigger=%s\n",
                 scripted_console_input_marker ? scripted_console_input_marker :
                 "visible-command-prompt");
+            if (scripted_console_input_next_marker)
+                fprintf(report, "scripted-console-input-next-trigger=%s\n",
+                    scripted_console_input_next_marker);
+            if (scripted_console_input_next2_marker)
+                fprintf(report, "scripted-console-input-next2-trigger=%s\n",
+                    scripted_console_input_next2_marker);
+            if (scripted_console_input_next3_marker)
+                fprintf(report, "scripted-console-input-next3-trigger=%s\n",
+                    scripted_console_input_next3_marker);
+            if (scripted_console_input_next4_marker)
+                fprintf(report, "scripted-console-input-next4-trigger=%s\n",
+                    scripted_console_input_next4_marker);
+            if (scripted_console_input_next5_marker)
+                fprintf(report, "scripted-console-input-next5-trigger=%s\n",
+                    scripted_console_input_next5_marker);
+            if (scripted_console_input_next6_marker)
+                fprintf(report, "scripted-console-input-next6-trigger=%s\n",
+                    scripted_console_input_next6_marker);
             fprintf(report, "scripted-console-input-sequence=%s\n",
                     scripted_console_input_sequence);
             fprintf(report, "scripted-console-input-ready=%s\n",
-                    scripted_console_input_ready ? "yes" : "no");
+                scripted_console_input_ready ? "yes" : "no");
+            if (scripted_console_input_next_marker)
+                fprintf(report, "scripted-console-input-next-ready=%s\n",
+                    scripted_console_input_next_ready ? "yes" : "no");
+            if (scripted_console_input_next2_marker)
+                fprintf(report, "scripted-console-input-next2-ready=%s\n",
+                    scripted_console_input_next2_ready ? "yes" : "no");
+            if (scripted_console_input_next3_marker)
+                fprintf(report, "scripted-console-input-next3-ready=%s\n",
+                    scripted_console_input_next3_ready ? "yes" : "no");
+            if (scripted_console_input_next4_marker)
+                fprintf(report, "scripted-console-input-next4-ready=%s\n",
+                    scripted_console_input_next4_ready ? "yes" : "no");
+            if (scripted_console_input_next5_marker)
+                fprintf(report, "scripted-console-input-next5-ready=%s\n",
+                    scripted_console_input_next5_ready ? "yes" : "no");
+            if (scripted_console_input_next6_marker)
+                fprintf(report, "scripted-console-input-next6-ready=%s\n",
+                    scripted_console_input_next6_ready ? "yes" : "no");
             if (scripted_console_input_remaining_known)
                 fprintf(report, "scripted-console-input-remaining=%lu\n",
                         (unsigned long)scripted_console_input_remaining);

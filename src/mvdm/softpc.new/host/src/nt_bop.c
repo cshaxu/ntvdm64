@@ -338,10 +338,13 @@ void MS_bop_1(void) {
 
 // XMS BOP
 void MS_bop_2(void) {
-    XMSDispatch((ULONG)(*Sim32GetVDMPointer(SEGOFF(getCS(),getIP()),
-                                            1,
-                                            FALSE
-                                            )));
+    ULONG service = (ULONG)(*Sim32GetVDMPointer(SEGOFF(getCS(),getIP()),
+                                                 1,
+                                                 FALSE));
+
+    mvdm_softpc_report_xms_service(service, getAX(), getBX(), getCX(),
+        getDX(), getSS(), getBP());
+    XMSDispatch(service);
 
     setIP((USHORT)(getIP() + 1));
 }
@@ -680,7 +683,49 @@ void MS_bop_8 (void)
 //
 void MS_bop_9(void)
 {
+    sys_addr direct_access_stack = effective_addr(getSS(), getSP());
+    unsigned long direct_access_caller =
+        ((unsigned long)sas_w_at(direct_access_stack + 2) << 16) |
+        (unsigned long)sas_w_at(direct_access_stack);
+    unsigned long direct_access_cpu =
+        ((unsigned long)getCS() << 16) | (unsigned long)getIP();
+    unsigned long direct_access_stack_pointer =
+        ((unsigned long)getSS() << 16) | (unsigned long)getSP();
+    unsigned long direct_access_stack_tail =
+        ((unsigned long)sas_w_at(direct_access_stack + 6) << 16) |
+        (unsigned long)sas_w_at(direct_access_stack + 4);
+
+    /* Default-off diagnostic attribution only.  The original BOP hands the
+     * unsupported-direct-access type to the host error UI; record that
+     * already-decoded value so a hidden dialog cannot be mistaken for a
+     * guest keyboard or hardware-probe hang. */
+    mvdm_softpc_report_setup_hardware_probe("direct-access-error-bop",
+        (unsigned long)getAX(),
+        direct_access_caller);
+    mvdm_softpc_report_setup_hardware_probe("direct-access-bop-enter",
+        direct_access_cpu,
+        direct_access_stack_pointer);
+    mvdm_softpc_report_setup_hardware_probe("direct-access-stack-enter",
+        direct_access_caller,
+        direct_access_stack_tail);
     host_direct_access_error((ULONG)getAX());
+    direct_access_stack = effective_addr(getSS(), getSP());
+    direct_access_caller =
+        ((unsigned long)sas_w_at(direct_access_stack + 2) << 16) |
+        (unsigned long)sas_w_at(direct_access_stack);
+    direct_access_cpu =
+        ((unsigned long)getCS() << 16) | (unsigned long)getIP();
+    direct_access_stack_pointer =
+        ((unsigned long)getSS() << 16) | (unsigned long)getSP();
+    direct_access_stack_tail =
+        ((unsigned long)sas_w_at(direct_access_stack + 6) << 16) |
+        (unsigned long)sas_w_at(direct_access_stack + 4);
+    mvdm_softpc_report_setup_hardware_probe("direct-access-bop-leave",
+        direct_access_cpu,
+        direct_access_stack_pointer);
+    mvdm_softpc_report_setup_hardware_probe("direct-access-stack-leave",
+        direct_access_caller,
+        direct_access_stack_tail);
 }
 
 //

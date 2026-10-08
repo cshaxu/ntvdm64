@@ -50,6 +50,7 @@
 #include "trace.h"
 #include "debug.h"
 #include "quick_ev.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 
 
 #define ONE_MEGABYTE    (1024 * 1024)
@@ -71,6 +72,12 @@ LOCAL void wait_event IFN1(long, parm)
 
 void cassette_io()
 {
+        unsigned long setup_int15_function = (unsigned long)getAH();
+        unsigned long setup_int15_argument = (unsigned long)getAL();
+        sys_addr setup_int15_stack = effective_addr(getSS(), getSP());
+        unsigned long setup_int15_caller =
+            ((unsigned long)sas_w_at(setup_int15_stack + 2) << 16) |
+            (unsigned long)sas_w_at(setup_int15_stack);
 #ifdef PM
 #ifndef	CPU_30_STYLE
 IMPORT void retrieve_descr_fields IPT4(half_word *, AR, sys_addr *, base,
@@ -106,6 +113,10 @@ half_word target_AR;
         /*
          *	Determine function
          */
+	mvdm_softpc_report_setup_hardware_probe("int15-enter",
+		setup_int15_function, setup_int15_argument);
+	mvdm_softpc_report_setup_hardware_probe("int15-caller",
+		setup_int15_caller, (unsigned long)getAX());
 	switch ( getAH() )
 	{
 	case INT15_DEVICE_OPEN:
@@ -324,5 +335,7 @@ half_word target_AR;
 		setAH(INT15_INVALID);
 		break;
 	}
+	mvdm_softpc_report_setup_hardware_probe("int15-leave",
+		setup_int15_function, (unsigned long)getAH());
 }
 

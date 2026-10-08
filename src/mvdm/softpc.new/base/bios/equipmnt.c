@@ -44,11 +44,16 @@
 #include "bios.h"
 #include "sas.h"
 #include "equip.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 
 void equipment()
 {
     EQUIPMENT_WORD equip_flag;
 
     sas_loadw(EQUIP_FLAG, &equip_flag.all);
+    /* DIVERGENCE(MVDM-HOST-DIV-325): default-off witness for the
+     * already-read machine declaration while investigating retail Setup. */
+    mvdm_softpc_report_setup_hardware_probe("int11-equipment",
+        (unsigned long)equip_flag.all, 0);
     setAX(equip_flag.all);
 }

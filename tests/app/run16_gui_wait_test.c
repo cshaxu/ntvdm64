@@ -398,7 +398,7 @@ int wmain(int argc, wchar_t **argv)
     }
     failed=check_case(argv[1], argv[2], L"", FALSE, FALSE, 1,0) ||
         check_case(argv[1], argv[2], L"--wait", TRUE, FALSE, 2,0) ||
-        check_case(argv[1], argv[2], L"--wait --", TRUE, FALSE, 3,0) ||
+        check_case(argv[1], argv[2], L"--wait", TRUE, FALSE, 3,0) ||
         check_case(argv[1], argv[2], L"--wait", TRUE, TRUE, 4,0) ||
         check_case(argv[1], argv[2], L"", FALSE, FALSE, 5,1) ||
         check_case(argv[1], argv[2], L"--wait", TRUE, FALSE, 6,1) ||
