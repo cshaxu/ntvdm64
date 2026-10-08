@@ -7,6 +7,7 @@ param(
 $ErrorActionPreference = 'Stop'
 New-Item -ItemType Directory -Force -Path $BuildRoot | Out-Null
 $sample = Join-Path $BuildRoot 'sample.pif'
+$closeOnExit = Join-Path $BuildRoot 'close-on-exit.pif'
 $invalid = Join-Path $BuildRoot 'invalid.pif'
 $tampered = Join-Path $BuildRoot 'tampered.pif'
 & $Pif create $sample --title Sample --program 'C:\DOS\COMMAND.COM' --directory 'C:\DOS' --arguments '/P' --config 'C:\PATCH\CONFIG.NT' --autoexec 'C:\PATCH\AUTOEXEC.NT'
@@ -19,10 +20,18 @@ if ($LASTEXITCODE -ne 0 -or
     $initial -notcontains 'NT31.FLAGS=0x00000000') {
     throw 'PIF show did not expose standard, Windows 386, and NT 3.1 fields'
 }
-& $Pif update $sample --title Edited --arguments '/C VER'
+& $Pif create $closeOnExit --title Setup --program 'C:\DOS\SETUP.EXE' --directory 'C:\DOS' --arguments '' --config 'C:\PATCH\CONFIG.NT' --autoexec 'C:\PATCH\AUTOEXEC.NT' --close-on-exit
+if ($LASTEXITCODE -ne 0) { throw 'PIF close-on-exit create failed' }
+$closeOnExitView = & $Pif show $closeOnExit
+if ($LASTEXITCODE -ne 0 -or $closeOnExitView -notcontains 'STANDARD.MS_FLAGS=0x10' -or
+    $closeOnExitView -notcontains 'STANDARD.CLOSE_ON_EXIT=YES') {
+    throw 'PIF close-on-exit did not persist the standard MS flag'
+}
+& $Pif update $sample --title Edited --arguments '/C VER' --close-on-exit
 if ($LASTEXITCODE -ne 0) { throw 'PIF update failed' }
 $edited = & $Pif show $sample
-if ($LASTEXITCODE -ne 0 -or $edited -notcontains 'TITLE=Edited' -or $edited -notcontains 'ARGUMENTS=/C VER') { throw 'PIF update did not persist fields' }
+if ($LASTEXITCODE -ne 0 -or $edited -notcontains 'TITLE=Edited' -or $edited -notcontains 'ARGUMENTS=/C VER' -or
+    $edited -notcontains 'STANDARD.CLOSE_ON_EXIT=YES') { throw 'PIF update did not persist fields or CloseOnExit' }
 [IO.File]::WriteAllBytes($invalid, [Text.Encoding]::ASCII.GetBytes('not a pif'))
 $priorPreference = $ErrorActionPreference
 $ErrorActionPreference = 'Continue'

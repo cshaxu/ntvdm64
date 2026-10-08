@@ -19,6 +19,14 @@ foreach ($name in @('PIF.EXE','HASH.EXE','MOUSE101.DRV')) {
     }
 }
 
+$closePif=Join-Path $BuildRoot 'close-on-exit.pif'
+& (Join-Path $ToolRoot 'PIF.EXE') create $closePif --title 'close receipt' --program 'SETUP.EXE' --directory $BuildRoot --arguments '' --config 'CONFIG.NT' --autoexec 'AUTOEXEC.NT' --close-on-exit
+if ($LASTEXITCODE -ne 0) { throw 'PIF.EXE could not create a CloseOnExit PIF' }
+$closeView=& (Join-Path $ToolRoot 'PIF.EXE') show $closePif
+if ($LASTEXITCODE -ne 0 -or $closeView -notcontains 'STANDARD.MS_FLAGS=0x10' -or $closeView -notcontains 'STANDARD.CLOSE_ON_EXIT=YES') {
+    throw 'PIF.EXE did not encode the explicit CloseOnExit PIF contract'
+}
+
 function New-Media([string]$Name) {
     $media = Join-Path $BuildRoot $Name
     New-Item -ItemType Directory -Force -Path $media | Out-Null
@@ -61,7 +69,10 @@ exit /b 0
         $env:PATH = "$bin;$oldPath"; $env:RUN16 = $fake; $env:WIN101_TEST_INSTALL = $Install; $env:WIN101_TEST_EXIT = "$ExitCode"
         $stdout = Join-Path $BuildRoot ('setup-' + [IO.Path]::GetFileName($Media) + '.out')
         $stderr = Join-Path $BuildRoot ('setup-' + [IO.Path]::GetFileName($Media) + '.err')
-        $command = '(type "{0}" & echo.) | call "{1}"' -f $input,(Join-Path $Media 'PATCH\SETUP.CMD')
+        # SETUP.CMD uses internal batch subroutines.  A pipe runs CMD's left
+        # and right sides in separate command contexts, which makes CALL :label
+        # unreliable; standard-input redirection preserves the batch context.
+        $command = 'call "{0}" < "{1}"' -f (Join-Path $Media 'PATCH\SETUP.CMD'),$input
         $process = Start-Process -FilePath cmd.exe -ArgumentList @('/d','/c',$command) -RedirectStandardOutput $stdout -RedirectStandardError $stderr -Wait -PassThru
         if ($process.ExitCode -ne $ExitCode) {
             throw "SETUP.CMD returned $($process.ExitCode), expected $ExitCode`n$((Get-Content -LiteralPath $stdout -Raw))$((Get-Content -LiteralPath $stderr -Raw))"
@@ -118,8 +129,10 @@ foreach ($name in @('WIN101.PIF','CONFIG.NT','AUTOEXEC.NT','WIN.CMD','SETVER.EXE
 foreach ($name in @('WIN.PIF','CONFIG.NT','AUTOEXEC.NT')) {
     if (!(Test-Path -LiteralPath (Join-Path $install $name) -PathType Leaf)) { throw "installed root missing $name" }
 }
-& (Join-Path $ToolRoot 'PIF.EXE') show (Join-Path $install 'PATCH\WIN101.PIF') | Out-Null
-if ($LASTEXITCODE -ne 0) { throw 'installed PIF is invalid' }
+$installedPif=& (Join-Path $ToolRoot 'PIF.EXE') show (Join-Path $install 'PATCH\WIN101.PIF')
+if ($LASTEXITCODE -ne 0 -or $installedPif -notcontains 'STANDARD.CLOSE_ON_EXIT=YES') {
+    throw 'installed Windows launch PIF must be valid and CloseOnExit'
+}
 if ((Get-Content -LiteralPath (Join-Path $install 'PATCH\WIN.CMD') -Raw) -notmatch '(?im)^call run16 ') {
     throw 'installed WIN.CMD does not resolve run16 through PATH'
 }

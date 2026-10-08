@@ -206,7 +206,7 @@ int wmain(int argc, wchar_t **argv)
         const wchar_t *arguments = mode ? L"/3" : L"/S";
         if (!join(path, MAX_PATH, patch, mode ? L"WIN386.PIF" : L"WINSTD.PIF") ||
             !win31_write_pif(path, mode ? L"Windows 3.1 386 Enhanced" : L"Windows 3.1 Standard",
-                             kernel, root, arguments, config, autoexec) ||
+                             kernel, root, arguments, config, autoexec, TRUE) ||
             !join(path, MAX_PATH, patch, mode ? L"WIN386.CMD" : L"WINSTD.CMD") ||
             swprintf_s(command, MAX_PATH,
                         L"@echo off\r\nsetlocal\r\npushd \"%%~dp0..\" || exit /b 3\r\ncall run16 \"%%~dp0%ls.PIF\"\r\nset result=%%errorlevel%%\r\npopd\r\nexit /b %%result%%\r\n",

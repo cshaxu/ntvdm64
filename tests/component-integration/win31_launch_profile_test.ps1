@@ -11,6 +11,7 @@ function Assert-Pif([string]$name, [string]$arguments) {
     $bytes = [IO.File]::ReadAllBytes((Join-Path $patch $name))
     function Field([int]$offset,[int]$length) {[Text.Encoding]::ASCII.GetString($bytes,$offset,$length).Trim([char]0)}
     if((Field 36 63) -ne "$root\WIN.COM" -or (Field 101 64) -ne $root -or (Field 165 64) -ne $arguments) {throw "Wrong main PIF fields: $name"}
+    if(($bytes[2] -band 0x10) -eq 0) {throw "Synchronous launch PIF must set CloseOnExit: $name"}
     $pos = 369; $nt = $false; $extended = $false
     while($pos -ne 65535) {
         if($pos + 22 -gt $bytes.Length) {throw "Bad PIF extension chain: $name"}

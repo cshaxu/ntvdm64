@@ -22,9 +22,21 @@ for %%F in (SETUP.EXE SETUP.LBL KERNEL.EXE USER.EXE GDI.EXE DISK1 DISK2 DISK3 DI
     goto cleanup
   )
 )
-call :write_config "%PATCH%\CONFIG.NT" "%PATCH%\SETVER.EXE" || goto work_failure
-call :write_autoexec "%PATCH%\AUTOEXEC.NT" "%MEDIA%" || goto work_failure
-"%PATCH%\PIF.EXE" create "%PATCH%\SETUP.PIF" --title "Windows 1.01 Setup" --program "%MEDIA%\SETUP.EXE" --directory "%MEDIA%" --arguments "" --config "%PATCH%\CONFIG.NT" --autoexec "%PATCH%\AUTOEXEC.NT" || goto work_failure
+>"%PATCH%\CONFIG.NT" (
+  echo REM Windows 1.01 dedicated DOS profile
+  echo dos=high, umb
+  echo device=%%SystemRoot%%\system32\himem.sys
+  echo files=128
+  echo dosonly
+  echo device=%PATCH%\SETVER.EXE
+) || goto work_failure
+>"%PATCH%\AUTOEXEC.NT" (
+  echo @echo off
+  echo SET TEMP=%%SystemRoot%%\Temp
+  echo SET TMP=%%SystemRoot%%\Temp
+  echo SET PATH=%MEDIA%;%%SystemRoot%%\system32
+) || goto work_failure
+"%PATCH%\PIF.EXE" create "%PATCH%\SETUP.PIF" --title "Windows 1.01 Setup" --program "%MEDIA%\SETUP.EXE" --directory "%MEDIA%" --arguments "" --config "%PATCH%\CONFIG.NT" --autoexec "%PATCH%\AUTOEXEC.NT" --close-on-exit || goto work_failure
 pushd "%MEDIA%" || goto work_failure
 call "%RUN16%" "%PATCH%\SETUP.PIF"
 set "RESULT=%errorlevel%"
@@ -45,9 +57,21 @@ for %%F in (WIN.COM WIN100.BIN WIN100.OVL) do if not exist "%ROOT%\%%F" (
 )
 if not exist "%ROOT%\PATCH\" mkdir "%ROOT%\PATCH" || exit /b 1
 copy /y "%PATCH%\SETVER.EXE" "%ROOT%\PATCH\SETVER.EXE" >nul || exit /b 1
-call :write_config "%ROOT%\PATCH\CONFIG.NT" "%ROOT%\PATCH\SETVER.EXE" || exit /b 1
-call :write_autoexec "%ROOT%\PATCH\AUTOEXEC.NT" "%ROOT%" || exit /b 1
-"%PATCH%\PIF.EXE" create "%ROOT%\PATCH\WIN101.PIF" --title "Windows 1.01" --program "%ROOT%\WIN.COM" --directory "%ROOT%" --arguments "" --config "%ROOT%\PATCH\CONFIG.NT" --autoexec "%ROOT%\PATCH\AUTOEXEC.NT" || exit /b 1
+>"%ROOT%\PATCH\CONFIG.NT" (
+  echo REM Windows 1.01 dedicated DOS profile
+  echo dos=high, umb
+  echo device=%%SystemRoot%%\system32\himem.sys
+  echo files=128
+  echo dosonly
+  echo device=%ROOT%\PATCH\SETVER.EXE
+) || exit /b 1
+>"%ROOT%\PATCH\AUTOEXEC.NT" (
+  echo @echo off
+  echo SET TEMP=%%SystemRoot%%\Temp
+  echo SET TMP=%%SystemRoot%%\Temp
+  echo SET PATH=%ROOT%;%%SystemRoot%%\system32
+) || exit /b 1
+"%PATCH%\PIF.EXE" create "%ROOT%\PATCH\WIN101.PIF" --title "Windows 1.01" --program "%ROOT%\WIN.COM" --directory "%ROOT%" --arguments "" --config "%ROOT%\PATCH\CONFIG.NT" --autoexec "%ROOT%\PATCH\AUTOEXEC.NT" --close-on-exit || exit /b 1
 copy /y "%ROOT%\PATCH\CONFIG.NT" "%ROOT%\CONFIG.NT" >nul || exit /b 1
 copy /y "%ROOT%\PATCH\AUTOEXEC.NT" "%ROOT%\AUTOEXEC.NT" >nul || exit /b 1
 copy /y "%ROOT%\PATCH\WIN101.PIF" "%ROOT%\WIN.PIF" >nul || exit /b 1
@@ -66,26 +90,6 @@ if exist "%ROOT%\SETUP.EXE" "%PATCH%\PIF.EXE" create "%ROOT%\SETUP.PIF" --title 
   echo exit /b %%WIN101_RESULT%%
 )
 echo Installed PATCH profile is ready: %ROOT%\PATCH\WIN.CMD
-exit /b 0
-
-:write_config
->"%~1" (
-  echo REM Windows 1.01 dedicated DOS profile
-  echo dos=high, umb
-  echo device=%%SystemRoot%%\system32\himem.sys
-  echo files=128
-  echo dosonly
-  echo device=%~2
-)
-exit /b 0
-
-:write_autoexec
->"%~1" (
-  echo @echo off
-  echo SET TEMP=%%SystemRoot%%\Temp
-  echo SET TMP=%%SystemRoot%%\Temp
-  echo SET PATH=%~2;%%SystemRoot%%\system32
-)
 exit /b 0
 
 :missing_tool

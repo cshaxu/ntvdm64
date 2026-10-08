@@ -5,8 +5,8 @@ installation decisions.
 
 ```text
 PIF.EXE show <file>
-PIF.EXE create <file> --title T --program P --directory D --arguments A --config C --autoexec E
-PIF.EXE update <file> [--title T] [--program P] [--directory D] [--arguments A] [--config C] [--autoexec E]
+PIF.EXE create <file> --title T --program P --directory D --arguments A --config C --autoexec E [--close-on-exit]
+PIF.EXE update <file> [--title T] [--program P] [--directory D] [--arguments A] [--config C] [--autoexec E] [--close-on-exit]
 ```
 
 `show` writes the stored fields as `KEY=value` lines, and validates every
@@ -17,3 +17,7 @@ accepted; malformed records and bad nonzero checksums are rejected.
 `update` preserves unknown extension records while editing only supplied fields.
 It also preserves a legacy zero checksum byte; a pre-existing nonzero checksum
 is recomputed after the edit.
+
+`--close-on-exit` explicitly sets the original PIF `MSflags` CloseOnExit bit.
+Use it only for a generated PIF whose calling script waits for the launched
+session to end.  It is intentionally not the default for generic PIF files.

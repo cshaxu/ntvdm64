@@ -22,8 +22,8 @@ static void usage(void)
 {
     fwprintf(stderr, L"Usage:\n"
                      L"  PIF.EXE show <file>\n"
-                     L"  PIF.EXE create <file> --title T --program P --directory D --arguments A --config C --autoexec E\n"
-                     L"  PIF.EXE update <file> [--title T] [--program P] [--directory D] [--arguments A] [--config C] [--autoexec E]\n");
+                     L"  PIF.EXE create <file> --title T --program P --directory D --arguments A --config C --autoexec E [--close-on-exit]\n"
+                     L"  PIF.EXE update <file> [--title T] [--program P] [--directory D] [--arguments A] [--config C] [--autoexec E] [--close-on-exit]\n");
 }
 
 static BOOL read_file(const wchar_t *path, PIF_VIEW *view)
@@ -130,6 +130,13 @@ static const wchar_t *option(int argc, wchar_t **argv, const wchar_t *name)
     return NULL;
 }
 
+static BOOL switch_present(int argc, wchar_t **argv, const wchar_t *name)
+{
+    int i;
+    for (i = 0; i < argc; ++i) if (_wcsicmp(argv[i], name) == 0) return TRUE;
+    return FALSE;
+}
+
 static BOOL set_values(PIF_VIEW *view, int argc, wchar_t **argv)
 {
     const wchar_t *title = option(argc, argv, L"--title");
@@ -145,6 +152,7 @@ static BOOL set_values(PIF_VIEW *view, int argc, wchar_t **argv)
                          (!view->w386 || put_oem(view->w386->PfW386params, sizeof(view->w386->PfW386params), arguments)))) &&
         (!config || (view->nt && put_oem(view->nt->nt31Prop.achConfigFile, sizeof(view->nt->nt31Prop.achConfigFile), config))) &&
         (!autoexec || (view->nt && put_oem(view->nt->nt31Prop.achAutoexecFile, sizeof(view->nt->nt31Prop.achAutoexecFile), autoexec)))) {
+        if (switch_present(argc, argv, L"--close-on-exit")) view->standard->MSflags |= 0x10u;
         /* Preserve the legacy no-checksum convention on update.  Creation
          * explicitly seals its new record below. */
         if (view->standard->id != 0) checksum(view);
@@ -207,11 +215,13 @@ static void inspect(const PIF_VIEW *view)
     print_oem(L"ARGUMENTS", s->params, sizeof(s->params));
     wprintf(L"STANDARD.MAXMEM_KB=%u\nSTANDARD.MINMEM_KB=%u\n"
             L"STANDARD.MS_FLAGS=0x%02X\nSTANDARD.SCREEN=0x%02X\n"
+            L"STANDARD.CLOSE_ON_EXIT=%ls\n"
             L"STANDARD.PAGES=%u\nSTANDARD.LOW_VECTOR=0x%02X\n"
             L"STANDARD.HIGH_VECTOR=0x%02X\nSTANDARD.ROWS=%u\n"
             L"STANDARD.COLS=%u\nSTANDARD.SYSMEM=0x%04X\n"
             L"STANDARD.BEHAVIOR=0x%02X\nSTANDARD.SYS_FLAGS=0x%02X\n",
-            s->maxmem, s->minmem, s->MSflags, s->screen, s->cPages,
+            s->maxmem, s->minmem, s->MSflags, s->screen,
+            (s->MSflags & 0x10u) ? L"YES" : L"NO", s->cPages,
             s->lowVector, s->highVector, s->rows, s->cols, s->sysmem,
             s->behavior, s->sysflags);
     if (view->w286) {

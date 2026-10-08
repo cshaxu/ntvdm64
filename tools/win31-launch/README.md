@@ -13,6 +13,10 @@ under `<root>\PATCH`:
 - `WINSTD.CMD` / `WINSTD.PIF` for `WIN.COM /S`;
 - `WIN386.CMD` / `WIN386.PIF` for `WIN.COM /3`.
 
+Both generated launch PIFs explicitly set the original CloseOnExit flag: each
+`.CMD` synchronously waits for its own independent PIF session, so it must
+return after `WIN.COM` terminates rather than park that session inactive.
+
 The command files resolve `run16` through `PATH`; they contain no fixed drive,
 repository, package, or media path.  There is deliberately no generic
 `WIN.CMD`, `START.CMD`, or `WIN31.PIF` alias.

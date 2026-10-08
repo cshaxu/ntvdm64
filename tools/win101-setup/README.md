@@ -10,6 +10,9 @@ The media `PATCH` contains exactly `SETUP.CMD`, `PIF.EXE`, `HASH.EXE`, and
 `SETVER.EXE`. `SETUP.CMD` creates only transient launch configuration files,
 starts original Setup through plain `run16`, and removes those files before
 returning. Original Setup remains responsible for assembling `WIN100.BIN`.
+Its one-shot Setup PIF and generated Windows launch PIF explicitly request
+CloseOnExit, so each separate PIF session returns to its calling script when
+the target terminates.
 After Setup, enter its actual installed directory to generate the
 self-contained installed `PATCH\WIN.CMD` profile.
 

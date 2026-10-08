@@ -30,7 +30,7 @@ static BOOL write_exact(HANDLE file, const void *bytes, DWORD length)
 BOOL win31_write_pif(const wchar_t *path, const wchar_t *title,
                      const wchar_t *program, const wchar_t *directory,
                      const wchar_t *arguments, const wchar_t *config,
-                     const wchar_t *autoexec)
+                     const wchar_t *autoexec, BOOL close_on_exit)
 {
     STDPIF standard = {0};
     PIFEXTHDR first = {0}, w386_header = {0}, nt_header = {0};
@@ -55,6 +55,7 @@ BOOL win31_write_pif(const wchar_t *path, const wchar_t *title,
 
     standard.cPages = 1;
     standard.highVector = 0xff;
+    if (close_on_exit) standard.MSflags |= 0x10u;
     strcpy_s(first.extsig, sizeof(first.extsig), STDHDRSIG);
     first.extnxthdrfloff = (WORD)(sizeof(standard) + sizeof(first));
     first.extsizebytes = (WORD)sizeof(standard);
