@@ -32,8 +32,9 @@ Setup pass; a Setup repair cannot be silently folded into this tool.
    recovery originals, approved candidate images, shared `CONFIG.NT` and
    `AUTOEXEC.NT`, and explicit `WINSTD.CMD/.PIF` plus `WIN386.CMD/.PIF`.
 4. `win31-path` repairs only configuration and Program Manager references that demonstrably
-   name the old installation root; preserve unrelated user configuration and
-   record every changed file/line.
+   name an object in the selected tree.  It parses supported `PMCC` group-item
+   executable-path fields rather than doing raw binary replacement, preserves
+   unrelated user configuration, and records every changed file/line.
 5. `win31-launch` ensures generated launch files use `run16` from `PATH`, never a fixed
    `O:` location, a package path, repository path, default NT profile, or a
    drive substitution.

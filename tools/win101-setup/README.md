@@ -4,7 +4,7 @@ Owner-assigned source home for installer/patch scripts and launch templates.
 The independent driver source stays in src/addon/win101-mouse-drv; neither directory
 is an OpenNT mirror or a host executable component.
 
-Run `apply-setup.cmd` in this source directory. It asks for the original
+Run `APPLY.CMD` in this source directory. It asks for the original
 Windows1.01 media directory, reads the compiled MOUSE101.DRV from assets/release,
 validates its add-on manifest/hash and creates media/PATCH. PowerShell callers
 may supply `-MediaRoot <directory>` to apply-setup.ps1. No assembler or driver
