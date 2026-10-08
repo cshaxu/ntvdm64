@@ -35,3 +35,12 @@ Manager readiness, clean guest exit, or reliable enhanced-mode operation.
 The original Setup protected-mode transition remains the separately queued
 recovery package.  No host runtime component or release package changed in
 this tooling-only task.
+
+## S2 entrypoint cleanup
+
+The owner found the obsolete Win1.01 `apply-setup.cmd` wrapper beside the
+newer `APPLY.CMD`. S2 removed the wrapper after confirming that no active
+automation requires it. The comparable Win3.1 launch and path tools already
+had exactly one `APPLY.CMD`; build-only `win31-setup` has no repository-side
+interactive batch launcher. The focused sweep is recorded in
+[T437 S2 single tool entrypoint](../etc/evidence/m0-t437-s2-single-tool-entrypoint.md).

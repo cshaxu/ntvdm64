@@ -7,6 +7,7 @@ delivered single-worker/dual-Hook gates; see
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T437 S2 single tool entrypoint](evidence/m0-t437-s2-single-tool-entrypoint.md) | M0 T437 S2 | Removes the duplicate Win1.01 batch wrapper and records the four-tool entrypoint sweep. | Retain with T437 closure. |
 | [T437 S1 installed Win31 tools](evidence/m0-t437-s1-installed-win31-tools.md) | M0 T437 S1 | Native installed-tree launch/path finalizers, identity-bound guest candidates, bounded PMCC relocation, and focused fixture evidence. | Retain through owner portable-launch acceptance. |
 | [T436 S4 pre-copy derived media](evidence/m0-t436-s4-derived-media-precopy.md) | M0 T436 S4 | Exact SZDD replacement and recovery proof for the two approved protected-mode images before Setup's first post-copy load. | Retain as the deferred ordinary-Setup candidate baseline; not an installation pass. |
 | [T436 S4 CCPU40 device declaration](evidence/m0-t436-s4-ccpu-device-profile.md) | M0 T436 S4 | Minimal no-COM/no-LPT machine-profile repair, selected build/deployment identity and pending normal-Setup gate. | Retain as a falsified hypothesis; no product profile change is accepted. |

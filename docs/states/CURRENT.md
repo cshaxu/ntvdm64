@@ -6,9 +6,8 @@
 
 ## Latest closure
 
-M0 T437 closed at `a567614eb` plus its documentation closeout.  It delivers
-portable installed-Windows-3.1 launch and path tools, with both explicit PIFs
-observed crossing plain `run16` startup.  The original Setup protected-mode
+M0 T437 closed with portable installed-Windows-3.1 launch/path tools and the
+follow-up S2 single-entrypoint cleanup. The original Setup protected-mode
 transition remains deferred; no active packet may absorb it without admission.
 See the [T437 closure](../history/m0-t437-installed-win31-portable-launch-closure.md).
 
