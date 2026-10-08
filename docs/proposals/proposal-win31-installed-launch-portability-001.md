@@ -3,10 +3,13 @@
 ## Objective
 
 Make an already installed, otherwise clean Windows 3.1 tree portable for this
-project without requiring the original Setup workflow to run again. The tool
-creates only the installation's `PATCH` directory, validates the installation
-topology, installs the accepted add-ons and recoverable images, repairs known
-relocatable references, and writes explicit standard/real-mode launch profiles.
+project without requiring the original Setup workflow to run again. The work
+is deliberately split into two tools:
+
+- `win31-launch` owns only the installation-local compatibility `PATCH`,
+  accepted add-ons/recoverable images, and explicit `WINSTD`/`WIN386` profiles.
+- `win31-path` owns discovery and repair of relocatable Win3.1 system-path
+  references.
 
 ## Product boundary
 
@@ -21,25 +24,25 @@ Setup pass; a Setup repair cannot be silently folded into this tool.
 
 ## Intended behavior
 
-1. Accept an explicit installed-root path and discover the existing Win3.1
-   system layout from required files, not fixed drive letters.
-2. Reject absent, malformed, linked, or identity-incompatible installations
-   without changing them.
-3. Create/update an owned `PATCH` directory with `MOUSE31.DRV`, checked
+1. Both tools accept an explicit installed-root path and discover the existing
+   Win3.1 system layout from required files, not fixed drive letters.
+2. Both reject absent, malformed, linked, or identity-incompatible
+   installations without changing them.
+3. `win31-launch` creates/updates an owned `PATCH` directory with `MOUSE31.DRV`, checked
    recovery originals, approved candidate images, shared `CONFIG.NT` and
-   `AUTOEXEC.NT`, and explicit `WINSTD.CMD/.PIF` plus `WINREAL.CMD/.PIF`.
-4. Repair only configuration and Program Manager references that demonstrably
+   `AUTOEXEC.NT`, and explicit `WINSTD.CMD/.PIF` plus `WIN386.CMD/.PIF`.
+4. `win31-path` repairs only configuration and Program Manager references that demonstrably
    name the old installation root; preserve unrelated user configuration and
    record every changed file/line.
-5. Ensure generated launch files use `run16` from `PATH`, never a fixed
+5. `win31-launch` ensures generated launch files use `run16` from `PATH`, never a fixed
    `O:` location, a package path, repository path, default NT profile, or a
    drive substitution.
 
 ## Verification
 
-Use a fresh build-owned copied installation fixture. Assert topology
-discovery, path rewrite precision, PIF/profile integrity, recovery-copy and
-candidate hashes, idempotence, and negative no-write cases. When a valid
-runtime fixture is available, manually/automatically establish that standard
-and real-mode profiles invoke the expected `run16` target and retain their
-actual result. Record no enhanced-mode success claim.
+Use fresh build-owned copied installation fixtures. Assert launch PIF/profile
+integrity, recovery-copy and candidate hashes separately from path discovery,
+rewrite precision, idempotence and negative no-write cases. When a valid
+runtime fixture is available, establish that standard and 386-mode profiles
+invoke the expected `run16` target and retain their actual result. Record no
+enhanced-mode success claim.
