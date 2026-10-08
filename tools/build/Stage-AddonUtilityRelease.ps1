@@ -28,5 +28,8 @@ foreach($item in $items) {
     $image=if(Test-Path -LiteralPath $build -PathType Leaf) { $build } else { Join-Path $build $item.file }
     Copy-Item -LiteralPath $image -Destination (Join-Path $repo ('assets/release/'+$item.file)) -Force
 }
-[ordered]@{schema=1;utilities=$manifest}|ConvertTo-Json -Depth 4|Set-Content -LiteralPath (Join-Path $repo 'assets/release/utility-manifest.json') -Encoding UTF8
-'PASS two AMD64 add-on utilities published; host and driver manifests unchanged'
+$addonPath=Join-Path $repo 'assets/release/addon-manifest.json'
+$prior=Get-Content -LiteralPath $addonPath -Raw|ConvertFrom-Json
+if($prior.schema -ne 1 -or $null -eq $prior.drivers){throw 'Invalid existing add-on manifest'}
+[ordered]@{schema=1;drivers=@($prior.drivers);utilities=$manifest}|ConvertTo-Json -Depth 5|Set-Content -LiteralPath $addonPath -Encoding UTF8
+'PASS two AMD64 add-on utilities published in the shared add-on manifest'

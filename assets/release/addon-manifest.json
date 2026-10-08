@@ -1,21 +1,37 @@
-{
-  "schema": 1,
-  "drivers": [
-    {
-      "id": "win101",
-      "file": "MOUSE101.DRV",
-      "sha256": "DC01039B0FC2B7E9244F31A42A4AAA9ED10613291557B4B6E2695ECE1BA5666E",
-      "source": "src/addon/win101-mouse-drv/mouse101.asm",
-      "sourceSha256": "0999EA9631BBAE52DAFADFE0A6E4DD8B946DF8136A5D42869573A08C259CAA8E",
-      "acceptance": "verified"
-    },
-    {
-      "id": "win31",
-      "file": "MOUSE31.DRV",
-      "sha256": "D6BA5380A2EDCDB33E0C36850FB6BDD0542D78EC03E982DBD5114A462B0A2F1A",
-      "source": "src/addon/win31-mouse-drv/mouse31.asm",
-      "sourceSha256": "22D0A16DC701CA058BFC4357A155460C06187CBB0DDB6A3805735067CC19FCB9",
-      "acceptance": "verified"
-    }
-  ]
+﻿{
+    "schema":  1,
+    "drivers":  [
+                    {
+                        "id":  "win101",
+                        "file":  "MOUSE101.DRV",
+                        "sha256":  "DC01039B0FC2B7E9244F31A42A4AAA9ED10613291557B4B6E2695ECE1BA5666E",
+                        "source":  "src/addon/win101-mouse-drv/mouse101.asm",
+                        "sourceSha256":  "0999EA9631BBAE52DAFADFE0A6E4DD8B946DF8136A5D42869573A08C259CAA8E",
+                        "acceptance":  "verified"
+                    },
+                    {
+                        "id":  "win31",
+                        "file":  "MOUSE31.DRV",
+                        "sha256":  "D6BA5380A2EDCDB33E0C36850FB6BDD0542D78EC03E982DBD5114A462B0A2F1A",
+                        "source":  "src/addon/win31-mouse-drv/mouse31.asm",
+                        "sourceSha256":  "22D0A16DC701CA058BFC4357A155460C06187CBB0DDB6A3805735067CC19FCB9",
+                        "acceptance":  "verified"
+                    }
+                ],
+    "utilities":  [
+                      {
+                          "id":  "pif",
+                          "file":  "PIF.EXE",
+                          "architecture":  "amd64",
+                          "sha256":  "A2C96803CD833FB858017F3F28DFBA9CD7F6152D5513DA2B8BC9825183F06DFC",
+                          "source":  "src/addon/pif/pif.c"
+                      },
+                      {
+                          "id":  "hash",
+                          "file":  "HASH.EXE",
+                          "architecture":  "amd64",
+                          "sha256":  "CE17C834B092348F95093EFD33B4A80B74C6EE82C462C7D73ABFC37306887CCC",
+                          "source":  "src/addon/hash/hash.c"
+                      }
+                  ]
 }

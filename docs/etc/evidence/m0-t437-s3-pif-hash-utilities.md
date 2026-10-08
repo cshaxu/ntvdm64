@@ -18,9 +18,9 @@ The independently authored sources are respectively under `src/addon/pif/`
 and `src/addon/hash/`. Both `BUILD.CMD` files select the AMD64 MSVC environment
 and link with `/MACHINE:X64`.
 
-The released copies live in `assets/release/` and are declared by
-`utility-manifest.json`; this is a separate add-on utility manifest, not part
-of the ten-image host-product manifest or the guest-driver manifest.
+The released copies live in `assets/release/` and are declared by the shared
+`addon-manifest.json` under `utilities`; they are not part of the ten-image
+host-product manifest.
 
 ## Focused verification
 

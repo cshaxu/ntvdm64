@@ -61,8 +61,8 @@ through `run16`, records the true result, and removes the temporary copy on
 both normal and negative return. After an owner-confirmed successful Setup,
 it creates the installed `PATCH` profile without repository/media dependencies.
 
-`PIF.EXE` and `HASH.EXE` are published in `assets/release/` through their
-separate `utility-manifest.json`, and are deployed to `O:\winnt\system32`.
+`PIF.EXE` and `HASH.EXE` are published in `assets/release/` through the shared
+`addon-manifest.json`, and are deployed to `O:\winnt\system32`.
 The focused CMD, profile-generation, cleanup, negative-result, PIF-structure,
 and release-identity evidence is [T437 S4](../etc/evidence/m0-t437-s4-win101-cmd-orchestration.md).
 

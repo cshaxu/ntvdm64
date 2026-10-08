@@ -24,6 +24,10 @@ foreach($item in $drivers) {
     $root=if($item.id -eq 'win101'){$Win101Build}else{$Win31Build}
     Copy-Item -LiteralPath (Join-Path $root $item.file) -Destination (Join-Path $repo ('assets/release/'+$item.file)) -Force
 }
-[ordered]@{schema=1;drivers=$drivers}|ConvertTo-Json -Depth 5|
-    Set-Content -LiteralPath (Join-Path $repo 'assets/release/addon-manifest.json') -Encoding UTF8
+$addonPath=Join-Path $repo 'assets/release/addon-manifest.json'
+$prior=Get-Content -LiteralPath $addonPath -Raw|ConvertFrom-Json
+if($prior.schema -ne 1){throw 'Invalid existing add-on manifest'}
+$utilities=if($null -eq $prior.utilities){@()}else{@($prior.utilities)}
+[ordered]@{schema=1;drivers=$drivers;utilities=$utilities}|ConvertTo-Json -Depth 5|
+    Set-Content -LiteralPath $addonPath -Encoding UTF8
 'PASS two compiled guest add-ons published; host release manifest unchanged'

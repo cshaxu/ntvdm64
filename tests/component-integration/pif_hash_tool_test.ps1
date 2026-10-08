@@ -66,9 +66,9 @@ $missingHashExit = $LASTEXITCODE
 $ErrorActionPreference = $priorPreference
 if ($missingHashExit -eq 0) { throw 'HASH accepted a nonexistent file' }
 if ($ReleaseRoot) {
-    $manifestPath = Join-Path $ReleaseRoot 'utility-manifest.json'
+    $manifestPath = Join-Path $ReleaseRoot 'addon-manifest.json'
     $manifest = Get-Content -Raw -LiteralPath $manifestPath | ConvertFrom-Json
-    if ($manifest.schema -ne 1 -or $manifest.utilities.Count -ne 2) { throw 'Invalid utility release manifest' }
+    if ($manifest.schema -ne 1 -or $manifest.drivers.Count -ne 2 -or $manifest.utilities.Count -ne 2) { throw 'Invalid add-on utility manifest' }
     foreach ($utility in $manifest.utilities) {
         if ($utility.architecture -ne 'amd64') { throw "Unexpected utility architecture: $($utility.file)" }
         $image = Join-Path $ReleaseRoot $utility.file

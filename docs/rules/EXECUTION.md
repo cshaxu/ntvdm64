@@ -168,10 +168,10 @@ dependencies. Keep original media unchanged and retain the accepted Win1.01
 original-Setup workflow. Reproducible producer is Stage-MouseDriverRelease.ps1.
 
 Independently authored host-side add-on utilities are likewise released beside
-the drivers, but remain outside the ten-host-image manifest and the guest-driver
-manifest. `utility-manifest.json` records their source, AMD64 architecture and
-binary SHA-256. Consumers must copy the declared release artifact rather than a
-disposable build output.
+the drivers, but remain outside the ten-host-image manifest. The shared
+`addon-manifest.json` records their source, AMD64 architecture and binary
+SHA-256 alongside the guest-driver entries. Consumers must copy the declared
+release artifact rather than a disposable build output.
 
 Owner-admitted T423 S12 will add ntvwm.exe to the seven-file package described
 below. Starting with S12 NTVWM production delivery, require one coherent eight-file set;
