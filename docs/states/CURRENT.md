@@ -50,8 +50,12 @@ palette-indexed graphics exposed a latent publication race: capture before the
 guest palette install produced `ERROR_NOT_READY` and poisoned the publisher.
 That state now remains dirty and is republished when the existing palette
 install signals readiness. Focused framing, staging, palette-late graphics,
-build and attached-console graphics smoke checks pass. The coherent ten-image
-package is published to `O:/winnt/system32` and synchronized to
+build and attached-console graphics smoke checks pass. A subsequent field
+failure of DOS graphical launch was traced to stale `ntcon.exe` and `ntvdm.exe`
+release artifacts, not WOW routing or guest graphics semantics: a clean
+current-source relink of that pair restored both `MYSmb16` and `WINSTD` while
+the recorded release pair returned immediately. The pair was rebuilt, release
+manifest hashes refreshed, and published together to `O:/winnt/system32` and
 `assets/release`; interactive Win3.1/Window acceptance remains owner-facing.
 See [S5 evidence](../etc/evidence/m0-t440-s5-variable-worker-io.md).
 

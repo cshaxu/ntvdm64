@@ -39,6 +39,40 @@ publication ownership remain unchanged.
 | Attached-console `run16 mysmb16.exe` smoke | Returned `EXITCODE:0`; no device-not-ready termination |
 | Published/release identities | All ten `assets/release` files hash-equal their `O:/winnt/system32` counterparts; changed `ntvdm.exe` and `VDMREDIR.DLL` are hash-equal to their x86 build outputs |
 
+## Publication correction
+
+The owner later reported that `WINSTD.CMD` exited after its splash screen and
+that DOS graphical `mysmb16.exe` returned without a dialog, while `command`
+and `winmine` still started. `GetBinaryType` classifies both failing targets as
+DOS, so this was not a WOW16 route.
+
+Temporary, removed field tracing showed the failing worker had acquired the
+broker-authorized frontend transport but its first activation exchange returned
+`ERROR_PIPE_NOT_CONNECTED`. A full clean restart with current-source-linked
+`ntcon.exe` and `ntvdm.exe` instead completed activation and rendered both
+targets. Replacing only the recorded release pair with the clean relinks also
+reproduced the successful result. The old release `ntcon.exe` timestamp was
+2026-10-07, predating S5; the old `ntvdm.exe` link was likewise not equivalent
+to the current output despite the source tree being clean.
+
+The corrected pair has these SHA-256 identities:
+
+| Image | SHA-256 |
+| --- | --- |
+| `ntcon.exe` | `379857B087867F4BFD424556C61B2FF60FE68674024409A4202A450BEA34229A` |
+| `ntvdm.exe` | `5F7AF08DE717DB2CA54184D2C3E70F17540EAE6301944ADD6FBFA6889EF90269` |
+
+They were copied together to `assets/release` and `O:/winnt/system32`; the
+release manifest was regenerated for those two files and all manifest entries
+were re-hashed successfully. Focused post-correction checks passed:
+
+* `console-graphics-publication-test.exe`: palette-late DIB defers and later
+  publishes without poisoning the worker.
+* `console-client-test.exe --variable-video`: 307,200 B takes one payload;
+  1,310,720 B takes two bounded parts and one final reply.
+* Clean attached-Console probes entered graphical `mysmb16.exe` and
+  `O:/w31/PATCH/WINSTD.CMD` rather than returning immediately.
+
 The background-process smoke is intentionally not used as a product witness:
 it lacks the caller Console required by the normal frontend route. The
 attached-console invocation above is the relevant automated regression smoke.
