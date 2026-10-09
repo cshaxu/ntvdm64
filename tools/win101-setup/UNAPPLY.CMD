@@ -52,11 +52,13 @@ if exist "%PATCH%\" (
     )
   )
 )
+echo Restore: MOUSE.DRV =^> %TARGET%
 copy /y "%TARGET%\MOUSE.DRV.BAK" "%TARGET%\MOUSE.DRV" >nul || (
   echo Could not restore MOUSE.DRV from MOUSE.DRV.BAK.
   set "RESULT=5"
   goto done
 )
+echo Remove: MOUSE.DRV.BAK =^> %TARGET%
 del /q "%TARGET%\MOUSE.DRV.BAK" || (
   echo Restored MOUSE.DRV but could not remove MOUSE.DRV.BAK.
   set "RESULT=5"
@@ -65,7 +67,10 @@ del /q "%TARGET%\MOUSE.DRV.BAK" || (
 if exist "%PATCH%\" (
   rem Only the four helpers were authenticated above.  Do not remove a
   rem same-named configuration or directory that could belong to the owner.
-  for %%F in (SETUP.CMD PIF.EXE HASH.EXE SETVER.EXE) do if exist "%PATCH%\%%F" del /q "%PATCH%\%%F"
+  for %%F in (SETUP.CMD PIF.EXE HASH.EXE SETVER.EXE) do if exist "%PATCH%\%%F" (
+    echo Remove: %%F =^> %PATCH%
+    del /q "%PATCH%\%%F"
+  )
   rmdir "%PATCH%" 2>nul
 )
 set "RESULT=0"

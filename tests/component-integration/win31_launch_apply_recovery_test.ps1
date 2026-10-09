@@ -43,6 +43,7 @@ function Invoke-Tool([string]$Script, [string]$Root, [int]$ExpectedExit = 0) {
     if ($process.ExitCode -ne $ExpectedExit) {
         throw "$Script returned $($process.ExitCode), expected $ExpectedExit`n$((Get-Content -LiteralPath $stdout -Raw))$((Get-Content -LiteralPath $stderr -Raw))"
     }
+    return (Get-Content -LiteralPath $stdout -Raw)
 }
 
 $krnlRetail = (Get-FileHash -LiteralPath (Join-Path $reference 'SYSTEM\KRNL386.EXE')).Hash
@@ -64,13 +65,30 @@ function Assert-Applied([string]$Root) {
 }
 
 $fresh = New-Fixture 'fresh'
-Invoke-Tool 'APPLY.CMD' $fresh
+$applyOutput = Invoke-Tool 'APPLY.CMD' $fresh
+foreach ($expected in @(
+    "Replace: KRNL386.EXE => $fresh\SYSTEM",
+    "Replace: WIN386.EXE => $fresh\SYSTEM",
+    "Replace: MOUSE.DRV => $fresh\SYSTEM",
+    "New: CONFIG.NT => $fresh\PATCH",
+    "New: WINSTD.PIF => $fresh\PATCH",
+    "New: WIN386.CMD => $fresh\PATCH")) {
+    if (!$applyOutput.Contains($expected)) { throw "APPLY action report missing: $expected" }
+}
 Assert-Applied $fresh
 & (Join-Path $repo 'tests/component-integration/win31_launch_profile_test.ps1') -InstallRoot $fresh -ProfileDirectory (Join-Path $fresh 'PATCH')
 Invoke-Tool 'APPLY.CMD' $fresh
 Assert-Applied $fresh
 [IO.File]::WriteAllText((Join-Path $fresh 'PATCH\KEEP.TXT'), 'owner content', [Text.Encoding]::ASCII)
-Invoke-Tool 'UNAPPLY.CMD' $fresh
+$unapplyOutput = Invoke-Tool 'UNAPPLY.CMD' $fresh
+foreach ($expected in @(
+    "Restore: KRNL386.EXE => $fresh\SYSTEM",
+    "Restore: WIN386.EXE => $fresh\SYSTEM",
+    "Restore: MOUSE.DRV => $fresh\SYSTEM",
+    "Remove: CONFIG.NT => $fresh\PATCH",
+    "Remove: WINSTD.PIF => $fresh\PATCH")) {
+    if (!$unapplyOutput.Contains($expected)) { throw "UNAPPLY action report missing: $expected" }
+}
 $system = Join-Path $fresh 'SYSTEM'
 foreach ($pair in @(@('KRNL386.EXE',$krnlRetail),@('WIN386.EXE',$winRetail),@('MOUSE.DRV',$mouseRetail))) {
     if ((Get-FileHash -LiteralPath (Join-Path $system $pair[0])).Hash -ne $pair[1]) { throw "UNAPPLY did not restore $($pair[0])" }

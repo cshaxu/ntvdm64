@@ -6,7 +6,9 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <pif.h>
+#include <errno.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 typedef struct _PIF_VIEW {
@@ -22,8 +24,8 @@ static void usage(void)
 {
     fwprintf(stderr, L"Usage:\n"
                      L"  PIF.EXE show <file>\n"
-                     L"  PIF.EXE create <file> --title T --program P --directory D --arguments A --config C --autoexec E [--close-on-exit]\n"
-                     L"  PIF.EXE update <file> [--title T] [--program P] [--directory D] [--arguments A] [--config C] [--autoexec E] [--close-on-exit]\n"
+                     L"  PIF.EXE create <file> --title T --program P --directory D --arguments A --config C --autoexec E [--close-on-exit] [--w386-max-xms N] [--w386-flags N] [--nt31-flags N]\n"
+                     L"  PIF.EXE update <file> [--title T] [--program P] [--directory D] [--arguments A] [--config C] [--autoexec E] [--close-on-exit] [--w386-max-xms N] [--w386-flags N] [--nt31-flags N]\n"
                      L"  PIF.EXE replace-root <file> --from OLD --to NEW\n");
 }
 
@@ -138,6 +140,23 @@ static BOOL switch_present(int argc, wchar_t **argv, const wchar_t *name)
     return FALSE;
 }
 
+static BOOL option_ulong(int argc, wchar_t **argv, const wchar_t *name,
+                         DWORD *value, BOOL *present)
+{
+    const wchar_t *text = option(argc, argv, name);
+    wchar_t *end;
+    unsigned long parsed;
+    *present = FALSE;
+    if (!text) return TRUE;
+    if (*text == L'\0' || *text == L'-') return FALSE;
+    errno = 0;
+    parsed = wcstoul(text, &end, 0);
+    if (errno == ERANGE || *end != L'\0') return FALSE;
+    *value = (DWORD)parsed;
+    *present = TRUE;
+    return TRUE;
+}
+
 static BOOL set_values(PIF_VIEW *view, int argc, wchar_t **argv)
 {
     const wchar_t *title = option(argc, argv, L"--title");
@@ -146,6 +165,13 @@ static BOOL set_values(PIF_VIEW *view, int argc, wchar_t **argv)
     const wchar_t *arguments = option(argc, argv, L"--arguments");
     const wchar_t *config = option(argc, argv, L"--config");
     const wchar_t *autoexec = option(argc, argv, L"--autoexec");
+    DWORD max_xms = 0, w386_flags = 0, nt31_flags = 0;
+    BOOL has_max_xms, has_w386_flags, has_nt31_flags;
+    if (!option_ulong(argc, argv, L"--w386-max-xms", &max_xms, &has_max_xms) ||
+        !option_ulong(argc, argv, L"--w386-flags", &w386_flags, &has_w386_flags) ||
+        !option_ulong(argc, argv, L"--nt31-flags", &nt31_flags, &has_nt31_flags) ||
+        (has_max_xms && (max_xms > 0xffffu || !view->w386)) ||
+        (has_w386_flags && !view->w386) || (has_nt31_flags && !view->nt)) return FALSE;
     if ((!title || put_oem(view->standard->appname, sizeof(view->standard->appname), title)) &&
         (!program || put_oem(view->standard->startfile, sizeof(view->standard->startfile), program)) &&
         (!directory || put_oem(view->standard->defpath, sizeof(view->standard->defpath), directory)) &&
@@ -154,6 +180,9 @@ static BOOL set_values(PIF_VIEW *view, int argc, wchar_t **argv)
         (!config || (view->nt && put_oem(view->nt->nt31Prop.achConfigFile, sizeof(view->nt->nt31Prop.achConfigFile), config))) &&
         (!autoexec || (view->nt && put_oem(view->nt->nt31Prop.achAutoexecFile, sizeof(view->nt->nt31Prop.achAutoexecFile), autoexec)))) {
         if (switch_present(argc, argv, L"--close-on-exit")) view->standard->MSflags |= 0x10u;
+        if (has_max_xms) view->w386->PfMaxXmsK = (WORD)max_xms;
+        if (has_w386_flags) view->w386->PfW386Flags = w386_flags;
+        if (has_nt31_flags) view->nt->nt31Prop.dwWNTFlags = nt31_flags;
         /* Preserve the legacy no-checksum convention on update.  Creation
          * explicitly seals its new record below. */
         if (view->standard->id != 0) checksum(view);

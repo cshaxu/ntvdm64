@@ -16,8 +16,12 @@ $manifest = Join-Path $root 'PATCH\PATH-REPAIR.MANIFEST'
 function Invoke-InteractiveCmd([string]$script, [string]$target, [string]$name) {
     $input = Join-Path $build "$name.in"
     [IO.File]::WriteAllText($input, "$target`r`n`r`n", [Text.Encoding]::ASCII)
-    & cmd.exe /d /c "`"$script`" < `"$input`""
-    if ($LASTEXITCODE -ne 0) { throw "$name failed: $LASTEXITCODE" }
+    $stdout = Join-Path $build "$name.out"
+    $stderr = Join-Path $build "$name.err"
+    $command = 'call "{0}" < "{1}"' -f $script,$input
+    $process = Start-Process -FilePath cmd.exe -ArgumentList @('/d','/c',$command) -RedirectStandardOutput $stdout -RedirectStandardError $stderr -Wait -PassThru
+    if ($process.ExitCode -ne 0) { throw "$name failed: $($process.ExitCode)`n$((Get-Content -LiteralPath $stdout -Raw))$((Get-Content -LiteralPath $stderr -Raw))" }
+    return (Get-Content -LiteralPath $stdout -Raw)
 }
 
 function Test-BytesEqual([byte[]]$left, [byte[]]$right) {
@@ -32,7 +36,8 @@ $before = @{}
 Get-ChildItem -LiteralPath $root -File -Include *.INI,*.GRP | ForEach-Object {
     $before[$_.Name] = [IO.File]::ReadAllBytes($_.FullName)
 }
-Invoke-InteractiveCmd $apply $root 'apply-first'
+$applyOutput = Invoke-InteractiveCmd $apply $root 'apply-first'
+if (!$applyOutput.Contains("Replace: PROGMAN.INI => $root\")) { throw 'APPLY did not report the replaced INI location' }
 if (!(Test-Path -LiteralPath $manifest -PathType Leaf)) { throw 'Apply did not create a recovery manifest' }
 $entries = @(Get-Content -LiteralPath $manifest | ForEach-Object {
     if ($_ -notmatch '^[^\\/:*?"<>|]+\.(INI|GRP|PIF)$') { throw "Malformed recovery manifest entry: $_" }
@@ -49,7 +54,8 @@ foreach ($entry in $entries) {
 
 Invoke-InteractiveCmd $apply $root 'apply-repeat'
 Set-Content -LiteralPath (Join-Path $root 'PATCH\KEEP.TXT') -Value 'owner content' -NoNewline
-Invoke-InteractiveCmd $unapply $root 'unapply-positive'
+$unapplyOutput = Invoke-InteractiveCmd $unapply $root 'unapply-positive'
+if (!$unapplyOutput.Contains("Restore: PROGMAN.INI => $root\")) { throw 'UNAPPLY did not report the restored INI location' }
 foreach ($entry in $entries) {
     $live = Join-Path $root $entry.Name
     if (!(Test-BytesEqual ([IO.File]::ReadAllBytes($live)) $before[$entry.Name])) { throw "Unapply did not restore: $($entry.Name)" }

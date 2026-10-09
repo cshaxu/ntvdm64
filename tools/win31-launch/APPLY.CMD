@@ -21,36 +21,56 @@ for %%F in (PIF.EXE HASH.EXE MOUSE31.DRV) do if not exist "%RELEASE%\%%F" (
 )
 set "PATCH=%TARGET%\PATCH"
 if not exist "%PATCH%\" mkdir "%PATCH%" || (echo Could not create "%PATCH%".& set "RESULT=4"& goto done)
+if not exist "%PATCH%\TEMP\" (
+  echo New: TEMP =^> %PATCH%
+  mkdir "%PATCH%\TEMP" || (echo Could not create "%PATCH%\TEMP".& set "RESULT=4"& goto done)
+)
 call :backup_retail "%TARGET%\SYSTEM\KRNL386.EXE" FBEAF672EE9E917318CE8FCD1D560DB805DBFADF4777039ABBAAFF1A9C75B980 88E095A7C39C6294E8E3BE71CBD2EDC1E4DCECBB7101D1581021EA7BE7B33181 || goto mutation_failure
 call :backup_retail "%TARGET%\SYSTEM\WIN386.EXE" 6006860AE1003114583D70A1C6447247E1280A99633202912092A5F06A0C22A5 C67E667E25E91C65EFB5ACDDEC437DA8B586037DA7DE502228CA8FBD806CF3F8 || goto mutation_failure
 "%~dp0PATCH386.EXE" --apply --krnl "%TARGET%\SYSTEM\KRNL386.EXE" --win386 "%TARGET%\SYSTEM\WIN386.EXE" || goto mutation_failure
 call :install_mouse || goto mutation_failure
+call :announce_profile "%PATCH%\CONFIG.NT"
 >"%PATCH%\CONFIG.NT" (
   echo dos=high, umb
   echo device=%%SystemRoot%%\system32\himem.sys
   echo files=128
   echo dosonly
 )
+call :announce_profile "%PATCH%\AUTOEXEC.NT"
 >"%PATCH%\AUTOEXEC.NT" (
   echo @echo off
-  echo SET TEMP=%%SystemRoot%%\Temp
-  echo SET TMP=%%SystemRoot%%\Temp
+  echo lh %%SystemRoot%%\system32\mscdexnt.exe
+  echo lh %%SystemRoot%%\system32\redir
+  echo SET TEMP=%PATCH%\TEMP
+  echo SET TMP=%PATCH%\TEMP
   echo SET PATH=%TARGET%;%TARGET%\SYSTEM;%%SystemRoot%%\system32
 )
-"%RELEASE%\PIF.EXE" create "%PATCH%\WINSTD.PIF" --title "Windows 3.1 Standard" --program "%TARGET%\WIN.COM" --directory "%TARGET%" --arguments "/S" --config "%PATCH%\CONFIG.NT" --autoexec "%PATCH%\AUTOEXEC.NT" --close-on-exit || goto mutation_failure
-"%RELEASE%\PIF.EXE" create "%PATCH%\WIN386.PIF" --title "Windows 3.1 386 Enhanced" --program "%TARGET%\WIN.COM" --directory "%TARGET%" --arguments "/3" --config "%PATCH%\CONFIG.NT" --autoexec "%PATCH%\AUTOEXEC.NT" --close-on-exit || goto mutation_failure
+call :announce_profile "%PATCH%\WINSTD.PIF"
+"%RELEASE%\PIF.EXE" create "%PATCH%\WINSTD.PIF" --title "Windows 3.1 Standard" --program "%TARGET%\WIN.COM" --directory "%TARGET%" --arguments "/S" --config "%PATCH%\CONFIG.NT" --autoexec "%PATCH%\AUTOEXEC.NT" --close-on-exit --w386-max-xms 65535 --w386-flags 0x1003 --nt31-flags 1 || goto mutation_failure
+call :announce_profile "%PATCH%\WIN386.PIF"
+"%RELEASE%\PIF.EXE" create "%PATCH%\WIN386.PIF" --title "Windows 3.1 386 Enhanced" --program "%TARGET%\WIN.COM" --directory "%TARGET%" --arguments "/3" --config "%PATCH%\CONFIG.NT" --autoexec "%PATCH%\AUTOEXEC.NT" --close-on-exit --w386-max-xms 65535 --w386-flags 0x1003 --nt31-flags 1 || goto mutation_failure
+call :announce_profile "%PATCH%\WINSTD.CMD"
 >"%PATCH%\WINSTD.CMD" (
   echo @echo off
   echo setlocal
+  echo where /q run16 ^|^| exit /b 2
+  echo set "TEMP=%%~dp0TEMP"
+  echo set "TMP=%%TEMP%%"
+  echo if not exist "%%TEMP%%\" mkdir "%%TEMP%%" ^|^| exit /b 4
   echo pushd "%%~dp0.." ^|^| exit /b 3
   echo call run16 "%%~dp0WINSTD.PIF"
   echo set result=%%errorlevel%%
   echo popd
   echo exit /b %%result%%
 )
+call :announce_profile "%PATCH%\WIN386.CMD"
 >"%PATCH%\WIN386.CMD" (
   echo @echo off
   echo setlocal
+  echo where /q run16 ^|^| exit /b 2
+  echo set "TEMP=%%~dp0TEMP"
+  echo set "TMP=%%TEMP%%"
+  echo if not exist "%%TEMP%%\" mkdir "%%TEMP%%" ^|^| exit /b 4
   echo pushd "%%~dp0.." ^|^| exit /b 3
   echo call run16 "%%~dp0WIN386.PIF"
   echo set result=%%errorlevel%%
@@ -74,9 +94,11 @@ if /I "%CURRENT%"=="%RETAIL%" (
   if exist "%LEGACY%" (
     for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%LEGACY%"') do set "BACKUP=%%H"
     call :require_retail_backup "%LEGACY%" || exit /b 1
+    echo Replace: %~nx1 =^> %TARGET%\SYSTEM
     move /y "%LEGACY%" "%~1.BAK" >nul || exit /b 1
     exit /b 0
   )
+  echo Replace: %~nx1 =^> %TARGET%\SYSTEM
   move /y "%~1" "%~1.BAK" >nul || exit /b 1
   copy /y "%~1.BAK" "%~1" >nul || exit /b 1
   exit /b 0
@@ -85,6 +107,7 @@ if /I not "%CURRENT%"=="%CANDIDATE%" (echo Unsupported installed binary: %~1& ex
 if not exist "%~1.BAK" if exist "%LEGACY%" (
   for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%LEGACY%"') do set "BACKUP=%%H"
   call :require_retail_backup "%LEGACY%" || exit /b 1
+  echo Replace: %~nx1 =^> %TARGET%\SYSTEM
   move /y "%LEGACY%" "%~1.BAK" >nul || exit /b 1
 )
 for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%~1.BAK"') do set "BACKUP=%%H"
@@ -117,8 +140,17 @@ if /I "%CURRENT%"=="%RELEASE_HASH%" (
   exit /b 1
 )
 if exist "%TARGET%\SYSTEM\MOUSE.DRV.BAK" (echo Refusing to overwrite existing mouse-driver recovery copy.& exit /b 1)
+echo Replace: MOUSE.DRV =^> %TARGET%\SYSTEM
 move /y "%TARGET%\SYSTEM\MOUSE.DRV" "%TARGET%\SYSTEM\MOUSE.DRV.BAK" >nul || exit /b 1
 copy /y "%RELEASE%\MOUSE31.DRV" "%TARGET%\SYSTEM\MOUSE.DRV" >nul || exit /b 1
+exit /b 0
+
+:announce_profile
+if exist "%~1" (
+  echo Replace: %~nx1 =^> %PATCH%
+) else (
+  echo New: %~nx1 =^> %PATCH%
+)
 exit /b 0
 
 :mutation_failure

@@ -21,13 +21,19 @@ for %%F in (HASH.EXE MOUSE31.DRV) do if not exist "%RELEASE%\%%F" (
 call :verify_binary "%TARGET%\SYSTEM\KRNL386.EXE" FBEAF672EE9E917318CE8FCD1D560DB805DBFADF4777039ABBAAFF1A9C75B980 88E095A7C39C6294E8E3BE71CBD2EDC1E4DCECBB7101D1581021EA7BE7B33181 || goto mismatch
 call :verify_binary "%TARGET%\SYSTEM\WIN386.EXE" 6006860AE1003114583D70A1C6447247E1280A99633202912092A5F06A0C22A5 C67E667E25E91C65EFB5ACDDEC437DA8B586037DA7DE502228CA8FBD806CF3F8 || goto mismatch
 call :verify_mouse || goto mismatch
+echo Restore: KRNL386.EXE =^> %TARGET%\SYSTEM
 move /y "%TARGET%\SYSTEM\KRNL386.EXE.BAK" "%TARGET%\SYSTEM\KRNL386.EXE" >nul || goto mutation_failure
+echo Restore: WIN386.EXE =^> %TARGET%\SYSTEM
 move /y "%TARGET%\SYSTEM\WIN386.EXE.BAK" "%TARGET%\SYSTEM\WIN386.EXE" >nul || goto mutation_failure
+echo Restore: MOUSE.DRV =^> %TARGET%\SYSTEM
 move /y "%TARGET%\SYSTEM\MOUSE.DRV.BAK" "%TARGET%\SYSTEM\MOUSE.DRV" >nul || goto mutation_failure
 set "PATCH=%TARGET%\PATCH"
 if exist "%PATCH%\" (
   rem These six names are created only by APPLY.CMD. Preserve all other owner content.
-  for %%F in (CONFIG.NT AUTOEXEC.NT WINSTD.PIF WIN386.PIF WINSTD.CMD WIN386.CMD) do if exist "%PATCH%\%%F" del /q "%PATCH%\%%F"
+  for %%F in (CONFIG.NT AUTOEXEC.NT WINSTD.PIF WIN386.PIF WINSTD.CMD WIN386.CMD) do if exist "%PATCH%\%%F" (
+    echo Remove: %%F =^> %PATCH%
+    del /q "%PATCH%\%%F"
+  )
   rmdir "%PATCH%" 2>nul
 )
 set "RESULT=0"

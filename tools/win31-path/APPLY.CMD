@@ -42,7 +42,7 @@ if not errorlevel 1 (del /q "%WORK%"& echo Case-only or unsupported INI referenc
 call :backup "%SOURCE%" || (del /q "%WORK%"& set "FAILED=1"& exit /b 1)
 move /y "%WORK%" "%SOURCE%" >nul || (set "FAILED=1"& exit /b 1)
 call :record "%~nx1"
-echo INI: %~nx1
+echo Replace: %~nx1 =^> %~dp1
 exit /b 0
 
 :rewrite_ini
@@ -64,7 +64,7 @@ call :backup "%SOURCE%" || (set "FAILED=1"& exit /b 1)
 for /f "tokens=1,2 delims==" %%A in ('call "%RELEASE%\PIF.EXE" replace-root "%SOURCE%" --from "%OLD_ROOT%" --to "%TARGET%"') do if /I "%%A"=="CHANGED" set "CHANGED=%%B"
 if not "%CHANGED%"=="1" (echo Could not rewrite PIF: %~nx1& set "FAILED=1"& exit /b 1)
 call :record "%~nx1"
-echo PIF: %~nx1
+echo Replace: %~nx1 =^> %~dp1
 exit /b 0
 
 :repair_grp
@@ -74,7 +74,7 @@ for /f "tokens=1,2 delims==" %%A in ('call "%RELEASE%\GRP.EXE" replace-root "%SO
 if "%CHANGED%"=="0" (del /q "%SOURCE%.BAK"& exit /b 0)
 if not defined CHANGED (echo Could not rewrite GRP: %~nx1& set "FAILED=1"& exit /b 1)
 call :record "%~nx1"
-echo GRP: %~nx1
+echo Replace: %~nx1 =^> %~dp1
 exit /b 0
 
 :backup

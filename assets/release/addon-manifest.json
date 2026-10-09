@@ -23,21 +23,21 @@
                           "id":  "pif",
                           "file":  "PIF.EXE",
                           "architecture":  "amd64",
-                          "sha256":  "18BB1AF6A7C1E5B00D69490B978D3C48075889891DFB5B21F095711A5824AFDD",
+                          "sha256":  "9A2265B888DF7F219073B6FD78031FC5C638BFEFC1EF2402E186FA8E11D0B283",
                           "source":  "src/addon/pif/pif.c"
                       },
                       {
                           "id":  "hash",
                           "file":  "HASH.EXE",
                           "architecture":  "amd64",
-                          "sha256":  "CE17C834B092348F95093EFD33B4A80B74C6EE82C462C7D73ABFC37306887CCC",
+                          "sha256":  "2838242E0F7A3BACE0DA1DC0B42A1C84CCC358CB5B23A1473314AF0B85124726",
                           "source":  "src/addon/hash/hash.c"
                       },
                       {
                           "id":  "grp",
                           "file":  "GRP.EXE",
                           "architecture":  "amd64",
-                          "sha256":  "98F405D411C7A657BDD104187739A2EA87A8E35CFA43C5EC8BE2412A185E2824",
+                          "sha256":  "8C38B1FB777409D956F45E6F9E7967052502898A088B5E71C7FA47CCEE09AFD2",
                           "source":  "src/addon/grp/grp.c"
                       }
                   ]

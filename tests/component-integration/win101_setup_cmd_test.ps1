@@ -44,6 +44,7 @@ function Invoke-Apply([string]$Media, [int]$ExpectedExit = 0) {
     if ($process.ExitCode -ne $ExpectedExit) {
         throw "APPLY.CMD returned $($process.ExitCode), expected $ExpectedExit`n$((Get-Content -LiteralPath $stdout -Raw))$((Get-Content -LiteralPath $stderr -Raw))"
     }
+    return (Get-Content -LiteralPath $stdout -Raw)
 }
 
 function Invoke-Setup([string]$Media, [string]$Install, [int]$ExitCode) {
@@ -90,12 +91,21 @@ function Invoke-Unapply([string]$Media, [int]$ExpectedExit = 0) {
     if ($process.ExitCode -ne $ExpectedExit) {
         throw "UNAPPLY.CMD returned $($process.ExitCode), expected $ExpectedExit`n$((Get-Content -LiteralPath $stdout -Raw))$((Get-Content -LiteralPath $stderr -Raw))"
     }
+    return (Get-Content -LiteralPath $stdout -Raw)
 }
 
 $media = New-Media 'm'
 $install = Join-Path $BuildRoot 'i'
 $originalMouse = (Get-FileHash -LiteralPath (Join-Path $media 'MOUSE.DRV')).Hash
-Invoke-Apply $media
+$applyOutput = Invoke-Apply $media
+foreach ($expected in @(
+    "Replace: MOUSE.DRV => $media",
+    "New: SETUP.CMD => $media\PATCH",
+    "New: SETVER.EXE => $media\PATCH",
+    "New: PIF.EXE => $media\PATCH",
+    "New: HASH.EXE => $media\PATCH")) {
+    if (!$applyOutput.Contains($expected)) { throw "APPLY action report missing: $expected" }
+}
 $patch = Join-Path $media 'PATCH'
 foreach ($name in @('SETUP.CMD','PIF.EXE','HASH.EXE','SETVER.EXE')) {
     if (!(Test-Path -LiteralPath (Join-Path $patch $name) -PathType Leaf)) { throw "PATCH missing $name" }
@@ -135,7 +145,13 @@ if ((Get-Content -LiteralPath (Join-Path $install 'PATCH\WIN.CMD') -Raw) -notmat
     throw 'installed WIN.CMD does not resolve run16 through PATH'
 }
 [IO.File]::WriteAllText((Join-Path $patch 'KEEP.TXT'), 'owner content', [Text.Encoding]::ASCII)
-Invoke-Unapply $media
+$unapplyOutput = Invoke-Unapply $media
+foreach ($expected in @(
+    "Restore: MOUSE.DRV => $media",
+    "Remove: SETUP.CMD => $media\PATCH",
+    "Remove: PIF.EXE => $media\PATCH")) {
+    if (!$unapplyOutput.Contains($expected)) { throw "UNAPPLY action report missing: $expected" }
+}
 if ((Get-FileHash -LiteralPath (Join-Path $media 'MOUSE.DRV')).Hash -ne $originalMouse) {
     throw 'UNAPPLY.CMD did not restore the original root driver bytes'
 }

@@ -20,18 +20,22 @@ if ($LASTEXITCODE -ne 0 -or
     $initial -notcontains 'NT31.FLAGS=0x00000000') {
     throw 'PIF show did not expose standard, Windows 386, and NT 3.1 fields'
 }
-& $Pif create $closeOnExit --title Setup --program 'C:\DOS\SETUP.EXE' --directory 'C:\DOS' --arguments '' --config 'C:\PATCH\CONFIG.NT' --autoexec 'C:\PATCH\AUTOEXEC.NT' --close-on-exit
+& $Pif create $closeOnExit --title Setup --program 'C:\DOS\SETUP.EXE' --directory 'C:\DOS' --arguments '' --config 'C:\PATCH\CONFIG.NT' --autoexec 'C:\PATCH\AUTOEXEC.NT' --close-on-exit --w386-max-xms 65535 --w386-flags 0x1003 --nt31-flags 1
 if ($LASTEXITCODE -ne 0) { throw 'PIF close-on-exit create failed' }
 $closeOnExitView = & $Pif show $closeOnExit
 if ($LASTEXITCODE -ne 0 -or $closeOnExitView -notcontains 'STANDARD.MS_FLAGS=0x10' -or
-    $closeOnExitView -notcontains 'STANDARD.CLOSE_ON_EXIT=YES') {
+    $closeOnExitView -notcontains 'STANDARD.CLOSE_ON_EXIT=YES' -or
+    $closeOnExitView -notcontains 'W386.MAX_XMS_KB=65535' -or
+    $closeOnExitView -notcontains 'W386.FLAGS=0x00001003' -or
+    $closeOnExitView -notcontains 'NT31.FLAGS=0x00000001') {
     throw 'PIF close-on-exit did not persist the standard MS flag'
 }
-& $Pif update $sample --title Edited --arguments '/C VER' --close-on-exit
+& $Pif update $sample --title Edited --arguments '/C VER' --close-on-exit --w386-max-xms 2048 --w386-flags 0x20 --nt31-flags 0x4
 if ($LASTEXITCODE -ne 0) { throw 'PIF update failed' }
 $edited = & $Pif show $sample
 if ($LASTEXITCODE -ne 0 -or $edited -notcontains 'TITLE=Edited' -or $edited -notcontains 'ARGUMENTS=/C VER' -or
-    $edited -notcontains 'STANDARD.CLOSE_ON_EXIT=YES') { throw 'PIF update did not persist fields or CloseOnExit' }
+    $edited -notcontains 'STANDARD.CLOSE_ON_EXIT=YES' -or $edited -notcontains 'W386.MAX_XMS_KB=2048' -or
+    $edited -notcontains 'W386.FLAGS=0x00000020' -or $edited -notcontains 'NT31.FLAGS=0x00000004') { throw 'PIF update did not persist fields or CloseOnExit' }
 [IO.File]::WriteAllBytes($invalid, [Text.Encoding]::ASCII.GetBytes('not a pif'))
 $priorPreference = $ErrorActionPreference
 $ErrorActionPreference = 'Continue'

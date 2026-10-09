@@ -78,10 +78,14 @@ static BOOL string_length(const BYTE *bytes, DWORD length, WORD offset,
 static BOOL group_valid(const BYTE *bytes, DWORD length, DWORD *item_count)
 {
     DWORD i;
+    WORD group_end;
 
     if (length < 0x22 || memcmp(bytes, "PMCC", 4) ||
         (*item_count = read_u16(bytes, 0x20)) > 255 ||
         0x22u + *item_count * 2u > length) return FALSE;
+    /* Win3.1's cbGroup ends the pre-tag group payload.  Tag data follows it. */
+    group_end = read_u16(bytes, 6);
+    if (group_end < 0x22u + *item_count * 2u || group_end > length) return FALSE;
     for (i = 0; i < *item_count; ++i) {
         WORD item = read_u16(bytes, 0x22 + i * 2u);
         WORD executable;
@@ -89,6 +93,19 @@ static BOOL group_valid(const BYTE *bytes, DWORD length, DWORD *item_count)
         if ((DWORD)item + 24u > length) return FALSE;
         executable = read_u16(bytes, (DWORD)item + 22u);
         if (!string_length(bytes, length, executable, &ignored)) return FALSE;
+    }
+    for (i = group_end; i < length;) {
+        WORD id, item, size;
+        if (length - i < 6u) return FALSE;
+        id = read_u16(bytes, i);
+        item = read_u16(bytes, i + 2u);
+        size = read_u16(bytes, i + 4u);
+        if (id == 0xffffu && item == 0xffffu && !size)
+            return i + 6u == length;
+        if (size < 6u || size > length - i) return FALSE;
+        /* 0x8101 is the documented Program Item working-directory tag. */
+        if (id == 0x8101u && bytes[i + size - 1u]) return FALSE;
+        i += size;
     }
     return TRUE;
 }
@@ -127,14 +144,22 @@ static BOOL replace_root(const wchar_t *path, const wchar_t *root,
     char new_root[MAX_PATH];
     DWORD input_length, item_count, replacements = 0, cursor, i;
     DWORD additions = 0;
+    DWORD input_cursor;
+    WORD tag_offset;
+    BOOL item_changed[256] = { FALSE };
+    LONG tag_adjustment = 0;
     size_t new_length;
+    size_t new_directory_length;
     size_t output_length;
     BOOL ok = FALSE;
 
     *changed = 0;
     if (!root_oem(root, new_root) || !read_file(path, &input, &input_length) ||
         !group_valid(input, input_length, &item_count)) goto done;
+    tag_offset = read_u16(input, 6);
     new_length = strlen(new_root);
+    new_directory_length = new_length +
+        (new_root[new_length - 1u] == '\\' ? 0u : 1u);
     for (i = 0; i < item_count; ++i) {
         WORD item = read_u16(input, 0x22 + i * 2u);
         WORD executable = read_u16(input, (DWORD)item + 22u);
@@ -144,17 +169,42 @@ static BOOL replace_root(const wchar_t *path, const wchar_t *root,
         const char *suffix;
         if (length > 3 && target_in_root(root, target, &suffix)) {
             additions += (DWORD)new_length + (DWORD)strlen(suffix) + 1u;
+            item_changed[i] = TRUE;
             ++replacements;
         }
     }
     if (!replacements) { ok = TRUE; goto done; }
-    output_length = input_length + additions;
-    if (output_length > 0xffffu) goto done;
+    for (input_cursor = tag_offset; input_cursor < input_length;) {
+        WORD id = read_u16(input, input_cursor);
+        WORD item = read_u16(input, input_cursor + 2u);
+        WORD size = read_u16(input, input_cursor + 4u);
+        if (id == 0xffffu && item == 0xffffu && !size) {
+            input_cursor += 6u;
+            break;
+        }
+        if (id == 0x8101u && item < item_count && item_changed[item]) {
+            LONG new_size = (LONG)(6u + new_directory_length + 1u);
+            tag_adjustment += new_size - (LONG)size;
+        }
+        input_cursor += size;
+    }
+    if (input_cursor != input_length) goto done;
+    {
+        LONG total_length = (LONG)input_length + (LONG)additions + tag_adjustment;
+        if (total_length <= 0 || total_length > 0xffff) goto done;
+        output_length = (size_t)total_length;
+    }
     if (additions > 0xffffu - read_u16(input, 6)) goto done;
     output = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, output_length);
     if (!output) goto done;
-    CopyMemory(output, input, input_length);
-    cursor = input_length;
+    /*
+     * cbGroup is the byte offset at which the Win3.1 tag records begin, not
+     * the physical end of the file.  Program Manager requires item strings
+     * to remain before that boundary.  Insert the replacement strings there,
+     * then preserve the tag suffix verbatim after the new boundary.
+     */
+    CopyMemory(output, input, tag_offset);
+    cursor = tag_offset;
     for (i = 0; i < item_count; ++i) {
         WORD item = read_u16(input, 0x22 + i * 2u);
         WORD executable = read_u16(input, (DWORD)item + 22u);
@@ -172,12 +222,42 @@ static BOOL replace_root(const wchar_t *path, const wchar_t *root,
         cursor += (DWORD)new_length + (DWORD)suffix_length + 1u;
         ++*changed;
     }
-    if (cursor != output_length) goto done;
-    write_u16(output, 6, (WORD)(read_u16(input, 6) + additions));
+    for (input_cursor = tag_offset; input_cursor < input_length;) {
+        WORD id = read_u16(input, input_cursor);
+        WORD item = read_u16(input, input_cursor + 2u);
+        WORD size = read_u16(input, input_cursor + 4u);
+        if (id == 0xffffu && item == 0xffffu && !size) {
+            if (cursor + 6u > output_length) goto done;
+            CopyMemory(output + cursor, input + input_cursor, 6u);
+            cursor += 6u;
+            input_cursor += 6u;
+            break;
+        }
+        if (id == 0x8101u && item < item_count && item_changed[item]) {
+            DWORD size_out = (DWORD)(6u + new_directory_length + 1u);
+            if (cursor + size_out > output_length) goto done;
+            write_u16(output, cursor, id);
+            write_u16(output, cursor + 2u, item);
+            write_u16(output, cursor + 4u, (WORD)size_out);
+            CopyMemory(output + cursor + 6u, new_root, new_length);
+            if (new_directory_length != new_length)
+                output[cursor + 6u + new_length] = '\\';
+            output[cursor + 6u + new_directory_length] = 0;
+            cursor += size_out;
+            ++*changed;
+        } else {
+            if (cursor + size > output_length) goto done;
+            CopyMemory(output + cursor, input + input_cursor, size);
+            cursor += size;
+        }
+        input_cursor += size;
+    }
+    if (input_cursor != input_length || cursor != output_length) goto done;
+    write_u16(output, 6, (WORD)(tag_offset + additions));
     write_u16(output, 4, 0);
     {
         WORD checksum = 0;
-        for (i = 0; i + 1u < cursor; i += 2u)
+        for (i = 0; i + 1u < output_length; i += 2u)
             checksum = (WORD)(checksum + read_u16(output, i));
         write_u16(output, 4, (WORD)(0u - checksum));
     }

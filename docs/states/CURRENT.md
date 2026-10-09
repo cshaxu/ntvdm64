@@ -2,7 +2,11 @@
 
 ## Current Work
 
-**No active numeric M/T/S packet.** T438 closed after S2.
+**No active numeric M/T/S packet.** T439 closed after S1; see the
+[T439 closure](../history/m0-t439-win31-launch-profile-recovery-closure.md)
+and [S1 evidence](../etc/evidence/m0-t439-s1-win31-launch-profile-recovery.md).
+
+## Previously Closed Work
 
 | Field | Record |
 | --- | --- |

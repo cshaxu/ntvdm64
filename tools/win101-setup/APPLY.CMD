@@ -45,6 +45,7 @@ if exist "%PATCH%\MOUSE.DRV" (
     set "RESULT=5"
     goto done
   )
+  echo Remove: MOUSE.DRV =^> %PATCH%
   del /q "%PATCH%\MOUSE.DRV" || (
     echo Could not remove superseded PATCH\MOUSE.DRV.
     set "RESULT=5"
@@ -61,6 +62,7 @@ if exist "%TARGET%\MOUSE.DRV.BAK" (
     goto done
   )
 ) else (
+  echo Replace: MOUSE.DRV =^> %TARGET%
   move /y "%TARGET%\MOUSE.DRV" "%TARGET%\MOUSE.DRV.BAK" >nul || (
     echo Could not preserve original MOUSE.DRV as MOUSE.DRV.BAK.
     set "RESULT=5"
@@ -73,17 +75,22 @@ if exist "%TARGET%\MOUSE.DRV.BAK" (
     goto done
   )
 )
+for %%F in (SETUP.CMD SETVER.EXE) do call :announce_profile "%PATCH%\%%F"
 for %%F in (SETUP.CMD SETVER.EXE) do copy /y "%~dp0%%F" "%PATCH%\%%F" >nul || (
   echo Could not copy %%F.
   set "RESULT=5"
   goto done
 )
+for %%F in (PIF.EXE HASH.EXE) do call :announce_profile "%PATCH%\%%F"
 for %%F in (PIF.EXE HASH.EXE) do copy /y "%RELEASE%\%%F" "%PATCH%\%%F" >nul || (
   echo Could not copy released %%F.
   set "RESULT=5"
   goto done
 )
-for %%F in (README.TXT CONFIG.NT AUTOEXEC.NT SETUP.PIF setup-result.txt configure-launch.ps1 run-setup.ps1 win.cmd.template WIN31-TEMPLATE.PIF addon-files.json) do if exist "%PATCH%\%%F" del /q "%PATCH%\%%F"
+for %%F in (README.TXT CONFIG.NT AUTOEXEC.NT SETUP.PIF setup-result.txt configure-launch.ps1 run-setup.ps1 win.cmd.template WIN31-TEMPLATE.PIF addon-files.json) do if exist "%PATCH%\%%F" (
+  echo Remove: %%F =^> %PATCH%
+  del /q "%PATCH%\%%F"
+)
 if exist "%PATCH%\TEMP\" rmdir /s /q "%PATCH%\TEMP"
 set "RESULT=0"
 
@@ -97,3 +104,11 @@ exit /b %RESULT%
 echo Could not calculate the mouse-driver identity.
 set "RESULT=5"
 goto done
+
+:announce_profile
+if exist "%~1" (
+  echo Replace: %~nx1 =^> %PATCH%
+) else (
+  echo New: %~nx1 =^> %PATCH%
+)
+exit /b 0
