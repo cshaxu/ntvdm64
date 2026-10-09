@@ -40,7 +40,7 @@ static BOOL native_set_display(HANDLE h,DWORD flags,COORD *size)
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"FAIL %d error=%lu\n",__LINE__,GetLastError()); ExitProcess(1); } } while (0)
 static session owner;
 static __declspec(thread) session *bound;
-static HANDLE delivery,peer,stop,readiness,frontend_process;
+static HANDLE delivery,peer,stop,readiness,frontend_process,video_wait;
 static HANDLE server_thread;
 static void create_transport(void);
 static HANDLE broker_shutdown;
@@ -173,8 +173,20 @@ static DWORD WINAPI serve(void *unused)
         CHECK(transfer(FALSE,request.data,request.bytes));
         CHECK(!frontend_console_dispatch(&frontend,&request,&reply));
         CHECK(transfer(TRUE,&reply,(DWORD)offsetof(console_io_reply,data)+reply.bytes));
+        if(request.operation==CONSOLE_IO_VIDEO_DATA || request.operation==CONSOLE_IO_VIDEO_TEXT)
+            SetEvent(video_wait);
     }
     CloseHandle(peer);return 0;
+}
+static BOOL wait_video_serial(DWORD serial)
+{
+    DWORD status;
+    for(;;) {
+        if(frontend.video.published_serial>=serial)return TRUE;
+        status=WaitForSingleObject(video_wait,5000);
+        if(status!=WAIT_OBJECT_0)return FALSE;
+        ResetEvent(video_wait);
+    }
 }
 static void create_transport(void)
 {
@@ -234,7 +246,7 @@ int main(int argc,char **argv)
     CHECK(local!=INVALID_HANDLE_VALUE && frontend.output!=INVALID_HANDLE_VALUE &&
         frontend.input!=INVALID_HANDLE_VALUE);
     CHECK(SetConsoleActiveScreenBuffer(frontend.output));
-    stop=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(stop);
+    stop=CreateEventW(NULL,TRUE,FALSE,NULL);video_wait=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(stop && video_wait);
     create_transport();
     CHECK(!ntvdm_console_client_begin(&owner));bound=&owner;
     {
@@ -742,6 +754,7 @@ int main(int argc,char **argv)
         CHECK(!ntvdm_console_publish_video(&description,pixels,63999));
         CHECK(GetLastError()==ERROR_INVALID_PARAMETER);
         CHECK(ntvdm_console_publish_video(&description,pixels,64000));
+        CHECK(wait_video_serial(1));
         CHECK(frontend.video.published_serial==1 && frontend.video.description.bytes==64000);
         CHECK(frontend.video.pixels[0]==0x81 && frontend.video.pixels[63999]==0x81);
         CHECK(frontend.video.description.palette[1]==0x123456);
@@ -756,6 +769,7 @@ int main(int argc,char **argv)
         SMALL_RECT dirty={0,0,7,1},invalid={0,0,8,1};
         HANDLE surface;
         HPALETTE palette,replacement;
+        DWORD serial;
         bitmap.h.biSize=sizeof(bitmap.h);bitmap.h.biWidth=8;bitmap.h.biHeight=-2;
         bitmap.h.biPlanes=1;bitmap.h.biBitCount=8;bitmap.h.biSizeImage=16;
         logical.version=0x300;logical.count=256;
@@ -781,7 +795,9 @@ int main(int argc,char **argv)
         CHECK(ntvdm_console_graphics_palette(surface,palette,SYSPAL_STATIC)==1);
         CHECK(WaitForSingleObject(graphics.hMutex,0)==WAIT_OBJECT_0);
         memset(graphics.lpBitMap,17,16);CHECK(ReleaseMutex(graphics.hMutex));
+        serial=frontend.video.published_serial;
         CHECK(ntvdm_console_graphics_invalidate(surface,&dirty)==1);
+        CHECK(wait_video_serial(serial+1));
         CHECK(frontend.video.pixels && frontend.video.pixels[15]==17);
         CHECK(frontend.video.description.palette[17]==0x001100);
         CHECK(ntvdm_console_graphics_palette(surface,palette,SYSPAL_STATIC)==1);
@@ -794,7 +810,9 @@ int main(int argc,char **argv)
         CHECK(ntvdm_console_graphics_invalidate(surface,&invalid)==-1 && GetLastError()==ERROR_INVALID_PARAMETER);
         CHECK(SetConsoleActiveScreenBuffer(GetStdHandle(STD_OUTPUT_HANDLE)));
         CHECK(!frontend.video.pixels && !frontend.video.pending);
+        serial=frontend.video.published_serial;
         CHECK(SetConsoleActiveScreenBuffer(surface));
+        CHECK(wait_video_serial(serial+1));
         CHECK(frontend.video.pixels && frontend.video.pixels[15]==17);
         CHECK(SetConsoleActiveScreenBuffer(GetStdHandle(STD_OUTPUT_HANDLE)));
         CHECK(ShowConsoleCursor(surface,FALSE)==-1);
@@ -935,7 +953,7 @@ disconnected:
     cleanup(cleanup_context);bound=NULL;
     CHECK(!owner.console_client);
     CHECK(WaitForSingleObject(server_thread,5000)==WAIT_OBJECT_0);
-    CloseHandle(server_thread);CloseHandle(stop);CloseHandle(local);CloseHandle(frontend.output);CloseHandle(frontend.input);
+    CloseHandle(server_thread);CloseHandle(stop);CloseHandle(video_wait);CloseHandle(local);CloseHandle(frontend.output);CloseHandle(frontend.input);
     CloseHandle(readiness);CloseHandle(frontend_process);CloseHandle(broker_shutdown);
     puts("PASS client transport, distinct frontend ownership, native error and idle frontend loss");
     return 0;

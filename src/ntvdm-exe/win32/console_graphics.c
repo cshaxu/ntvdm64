@@ -3,6 +3,7 @@
  * locally, with copied presentation to run16; no Console server or KVM UI. */
 #include "console_bitmap.h"
 #include "console_client.h"
+#include "worker-base/publication.h"
 #include "conapi.h"
 #undef CreateConsoleScreenBuffer
 #undef SetConsoleActiveScreenBuffer
@@ -13,10 +14,10 @@ struct ntvdm_console_graphics {
     ntvdm_console_bitmap *bitmap;
     HANDLE identity;
     HPALETTE palette;
-    BYTE *snapshot;
     DWORD bytes,width,height;
-    BOOL active;
+    BOOL active,dirty;
     int cursor_count;
+    worker_base_publication *publisher;
 };
 
 ntvdm_console_graphics *ntvdm_console_graphics_create(void)
@@ -34,8 +35,7 @@ static void close_bitmap(ntvdm_console_graphics *state)
     state->palette=NULL;
     ntvdm_console_bitmap_destroy(state->bitmap);state->bitmap=NULL;
     if (state->identity) CloseHandle(state->identity);
-    if (state->snapshot) HeapFree(GetProcessHeap(),0,state->snapshot);
-    state->identity=NULL;state->snapshot=NULL;state->bytes=0;state->active=FALSE;
+    state->identity=NULL;state->bytes=0;state->active=FALSE;state->dirty=FALSE;
     state->cursor_count=0;
 }
 
@@ -62,19 +62,65 @@ void ntvdm_console_graphics_destroy(ntvdm_console_graphics *state)
     HeapFree(GetProcessHeap(),0,state);
 }
 
-static BOOL publish(ntvdm_console_graphics *state)
+static DWORD capture(ntvdm_console_graphics *state,void **payload,SIZE_T *payload_bytes)
 {
     ntvdm_bitmap_description local;
-    console_video_description copied={0};
+    console_video_description *copied;
+    SIZE_T bytes;
     unsigned int i;
-    if (!state->active) return TRUE;
-    if (!ntvdm_console_bitmap_copy(state->bitmap,state->snapshot,state->bytes,&local,INFINITE)) return FALSE;
-    copied.width=local.width;copied.height=local.height;copied.stride=local.stride;
-    copied.depth=local.depth;copied.bytes=local.bytes;
-    for (i=0;i<256;++i) copied.palette[i]=((uint32_t)local.palette[i].rgbRed<<16) |
+    BYTE *copy;
+    if(!payload || !payload_bytes)return ERROR_INVALID_PARAMETER;
+    *payload=NULL;*payload_bytes=0;
+    AcquireSRWLockExclusive(&state->lock);
+    if (!state->active || !state->dirty) {ReleaseSRWLockExclusive(&state->lock);return ERROR_SUCCESS;}
+    if((SIZE_T)state->bytes>SIZE_MAX-sizeof(*copied)) {
+        ReleaseSRWLockExclusive(&state->lock);return ERROR_ARITHMETIC_OVERFLOW;
+    }
+    bytes=sizeof(*copied)+(SIZE_T)state->bytes;
+    copy=HeapAlloc(GetProcessHeap(),0,bytes);
+    if(!copy) {ReleaseSRWLockExclusive(&state->lock);return ERROR_NOT_ENOUGH_MEMORY;}
+    copied=(console_video_description *)copy;
+    ZeroMemory(copied,sizeof(*copied));
+    if (!ntvdm_console_bitmap_copy(state->bitmap,copy+sizeof(*copied),state->bytes,&local,INFINITE)) {
+        DWORD error=GetLastError();HeapFree(GetProcessHeap(),0,copy);
+        ReleaseSRWLockExclusive(&state->lock);return error;
+    }
+    copied->width=local.width;copied->height=local.height;copied->stride=local.stride;
+    copied->depth=local.depth;copied->bytes=local.bytes;
+    for (i=0;i<256;++i) copied->palette[i]=((uint32_t)local.palette[i].rgbRed<<16) |
         ((uint32_t)local.palette[i].rgbGreen<<8) | local.palette[i].rgbBlue;
-    /* copy has released the painter mutex before the potentially blocking IPC. */
-    return ntvdm_console_publish_video(&copied,state->snapshot,state->bytes);
+    state->dirty=FALSE;
+    ReleaseSRWLockExclusive(&state->lock);
+    *payload=copy;*payload_bytes=bytes;
+    return ERROR_SUCCESS;
+}
+
+static DWORD capture_callback(void *context,void **payload,SIZE_T *payload_bytes)
+{
+    return capture(context,payload,payload_bytes);
+}
+
+DWORD ntvdm_console_graphics_attach_publisher(ntvdm_console_graphics *state,
+    worker_base_publication *publisher)
+{
+    DWORD error;
+    if(!state || !publisher)return ERROR_INVALID_PARAMETER;
+    AcquireSRWLockExclusive(&state->lock);
+    if(state->publisher) {ReleaseSRWLockExclusive(&state->lock);return ERROR_BUSY;}
+    state->publisher=publisher;
+    ReleaseSRWLockExclusive(&state->lock);
+    error=worker_base_publication_set_capture(publisher,capture_callback,state);
+    if(error) {
+        AcquireSRWLockExclusive(&state->lock);state->publisher=NULL;ReleaseSRWLockExclusive(&state->lock);
+    }
+    return error;
+}
+
+static BOOL signal_dirty(ntvdm_console_graphics *state)
+{
+    DWORD error=state->publisher ? worker_base_publication_signal(state->publisher) : ERROR_NOT_READY;
+    if(error) SetLastError(error);
+    return !error;
 }
 
 HANDLE WINAPI MvdmCreateConsoleScreenBuffer(DWORD access,DWORD share,
@@ -101,10 +147,9 @@ HANDLE WINAPI MvdmCreateConsoleScreenBuffer(DWORD access,DWORD share,
     state->width=(DWORD)info->lpBitMapInfo->bmiHeader.biWidth;
     state->height=(DWORD)(info->lpBitMapInfo->bmiHeader.biHeight<0 ?
         -info->lpBitMapInfo->bmiHeader.biHeight : info->lpBitMapInfo->bmiHeader.biHeight);
-    state->snapshot=HeapAlloc(GetProcessHeap(),0,state->bytes);
     state->identity=CreateEventW(NULL,TRUE,FALSE,NULL);
-    if (!state->snapshot || !state->identity) {
-        error=state->identity ? ERROR_NOT_ENOUGH_MEMORY : GetLastError();
+    if (!state->identity) {
+        error=GetLastError();
         close_bitmap(state);CloseHandle(mutex);goto done;
     }
     result=state->identity;info->hMutex=mutex;info->lpBitMap=pixels;
@@ -115,38 +160,52 @@ done:
 BOOL WINAPI MvdmSetConsoleActiveScreenBuffer(HANDLE output)
 {
     ntvdm_console_graphics *state=ntvdm_console_graphics_context();
-    BOOL result;
+    BOOL result,retire=FALSE;
     if (!state) return SetConsoleActiveScreenBuffer(output);
     AcquireSRWLockExclusive(&state->lock);
     if (output && output==state->identity) {
         BOOL was_active=state->active;
-        state->active=TRUE;
-        result=was_active || publish(state);
-        /* Original creation selects the surface before publishing its first
-         * logical palette. A later reactivation must republish existing pixels. */
-        if (!result && GetLastError()==ERROR_NOT_READY) result=TRUE;
+        state->active=TRUE;state->dirty=TRUE;
+        result=signal_dirty(state);
+        if(!result)state->active=was_active;
     }
     else if (output==GetStdHandle(STD_OUTPUT_HANDLE)) {
-        result=ntvdm_console_publish_video(NULL,NULL,0);
-        if (result) state->active=FALSE;
+        /* The source capture callback takes this lock.  Retire outside it so
+         * the publication final-drain can capture the last VGA frame. */
+        retire=TRUE;result=TRUE;
     } else result=SetConsoleActiveScreenBuffer(output);
-    ReleaseSRWLockExclusive(&state->lock);return result;
+    ReleaseSRWLockExclusive(&state->lock);
+    if(retire) {
+        result=ntvdm_console_publish_video(NULL,NULL,0);
+        if(result) {
+            AcquireSRWLockExclusive(&state->lock);state->active=FALSE;
+            ReleaseSRWLockExclusive(&state->lock);
+        }
+    }
+    return result;
 }
 
 BOOL WINAPI MvdmCloseConsoleHandle(HANDLE handle)
 {
     ntvdm_console_graphics *state=ntvdm_console_graphics_context();
-    BOOL result;
+    BOOL result,retire=FALSE,close_graphics=FALSE;
+    DWORD error=ERROR_SUCCESS;
     if (!state) return CloseHandle(handle);
     AcquireSRWLockExclusive(&state->lock);
     if (handle && handle==state->identity) {
-        DWORD error;
-        result=!state->active || ntvdm_console_publish_video(NULL,NULL,0);
-        error=GetLastError();
-        close_bitmap(state);
-        if (!result) SetLastError(error);
+        retire=state->active;close_graphics=TRUE;result=TRUE;
     } else result=CloseHandle(handle);
-    ReleaseSRWLockExclusive(&state->lock);return result;
+    ReleaseSRWLockExclusive(&state->lock);
+    if(retire) {
+        result=ntvdm_console_publish_video(NULL,NULL,0);
+        error=GetLastError();
+    }
+    if(close_graphics) {
+        AcquireSRWLockExclusive(&state->lock);close_bitmap(state);
+        ReleaseSRWLockExclusive(&state->lock);
+    }
+    if (!result) SetLastError(error);
+    return result;
 }
 
 int ntvdm_console_graphics_invalidate(HANDLE output,const SMALL_RECT *rect)
@@ -159,7 +218,7 @@ int ntvdm_console_graphics_invalidate(HANDLE output,const SMALL_RECT *rect)
         if (!rect || rect->Left<0 || rect->Top<0 || rect->Right<rect->Left || rect->Bottom<rect->Top ||
             (DWORD)rect->Right>=state->width || (DWORD)rect->Bottom>=state->height) {
             SetLastError(ERROR_INVALID_PARAMETER);result=-1;
-        } else result=publish(state) ? 1 : -1;
+        } else {state->dirty=TRUE;result=signal_dirty(state) ? 1 : -1;}
     }
     ReleaseSRWLockExclusive(&state->lock);return result;
 }
@@ -178,7 +237,7 @@ int ntvdm_console_graphics_palette(HANDLE output,HPALETTE palette,DWORD flags)
              * installation, before repaint; a failed transport is not rollback. */
             if (state->palette && state->palette!=palette) DeleteObject(state->palette);
             state->palette=palette;
-            result=publish(state) ? 1 : -1;
+            state->dirty=TRUE;result=signal_dirty(state) ? 1 : -1;
         }
     }
     ReleaseSRWLockExclusive(&state->lock);return result;

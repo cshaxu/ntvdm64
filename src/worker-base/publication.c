@@ -10,9 +10,11 @@ struct worker_base_publication {
     HANDLE stop,changed,idle,timer,thread,shutdown;
     worker_base_publication_send_fn send;
     void *context;
+    worker_base_publication_capture_fn capture;
+    void *capture_context;
     frame_copy pending,last;
     LARGE_INTEGER frequency,last_sent;
-    BOOL active;
+    BOOL active,source_pending;
     DWORD error;
 };
 
@@ -55,7 +57,8 @@ static DWORD WINAPI publish_thread(void *context)
     for(;;) {
         DWORD status=WaitForMultipleObjects(3,waits,FALSE,INFINITE);
         LARGE_INTEGER now,due;LONGLONG ticks;
-        frame_copy copy={0};DWORD error;
+        frame_copy copy={0};DWORD error;worker_base_publication_capture_fn capture=NULL;
+        void *capture_context=NULL;
         if(status!=WAIT_OBJECT_0+2)return publisher_exit(p,status==WAIT_FAILED ? GetLastError() : ERROR_OPERATION_ABORTED);
         QueryPerformanceCounter(&now);
         EnterCriticalSection(&p->lock);
@@ -74,13 +77,52 @@ static DWORD WINAPI publish_thread(void *context)
         ResetEvent(p->changed);
         if(p->active && p->pending.payload) {
             copy=p->pending;memset(&p->pending,0,sizeof(p->pending));ResetEvent(p->idle);
+        } else if(p->active && p->source_pending && p->capture) {
+            p->source_pending=FALSE;capture=p->capture;capture_context=p->capture_context;
+            ResetEvent(p->idle);
         }
         LeaveCriticalSection(&p->lock);
-        if(!copy.payload)continue;
+        if(capture) {
+            error=capture(capture_context,(void **)&copy.payload,&copy.bytes);
+            if(error || (copy.payload==NULL && copy.bytes!=0) || (copy.payload!=NULL && copy.bytes==0)) {
+                free_frame(&copy);
+                if(!error)error=ERROR_INVALID_DATA;
+                EnterCriticalSection(&p->lock);p->error=error;SetEvent(p->idle);LeaveCriticalSection(&p->lock);
+                return error;
+            }
+        }
+        if(!copy.payload) {
+            if(capture) {EnterCriticalSection(&p->lock);SetEvent(p->idle);LeaveCriticalSection(&p->lock);}
+            continue;
+        }
         error=deliver(p,&copy);
         EnterCriticalSection(&p->lock);p->error=error;SetEvent(p->idle);LeaveCriticalSection(&p->lock);
         if(error)return error;
     }
+}
+
+DWORD worker_base_publication_set_capture(worker_base_publication *p,
+    worker_base_publication_capture_fn capture,void *context)
+{
+    DWORD error=ERROR_SUCCESS;
+    if(!p || !capture)return ERROR_INVALID_PARAMETER;
+    EnterCriticalSection(&p->lock);
+    if(p->active || p->capture || p->pending.payload)error=ERROR_BUSY;
+    else {p->capture=capture;p->capture_context=context;}
+    LeaveCriticalSection(&p->lock);
+    return error;
+}
+
+DWORD worker_base_publication_signal(worker_base_publication *p)
+{
+    DWORD error=ERROR_SUCCESS;
+    if(!p)return ERROR_SUCCESS;
+    EnterCriticalSection(&p->lock);
+    if(p->error)error=p->error;
+    else if(!p->capture)error=ERROR_INVALID_STATE;
+    else {p->source_pending=TRUE;if(p->active)SetEvent(p->changed);}
+    LeaveCriticalSection(&p->lock);
+    return error;
 }
 
 worker_base_publication *worker_base_publication_create(worker_base_publication_send_fn send,void *context,HANDLE shutdown)
@@ -121,13 +163,21 @@ DWORD worker_base_publication_offer(worker_base_publication *p,const void *paylo
 
 DWORD worker_base_publication_active(worker_base_publication *p,BOOL active)
 {
-    frame_copy copy={0};DWORD error,status;
+    frame_copy copy={0},source={0};DWORD error,status;
+    worker_base_publication_capture_fn capture=NULL;void *capture_context=NULL;
     if(!p)return ERROR_SUCCESS;
     EnterCriticalSection(&p->lock);
-    if(active==p->active){error=p->error;LeaveCriticalSection(&p->lock);return error;}
+    /* A source can become dirty while the route is already retiring. Preserve
+     * its final immutable capture even when async admission was already off. */
+    if(active==p->active && (active || !p->source_pending)){
+        error=p->error;LeaveCriticalSection(&p->lock);return error;
+    }
     if(active && p->error){error=p->error;LeaveCriticalSection(&p->lock);return error;}
     p->active=active;
-    if(active) {free_frame(&p->last);p->last_sent.QuadPart=0;}
+    if(active) {
+        free_frame(&p->last);p->last_sent.QuadPart=0;
+        if(p->source_pending)SetEvent(p->changed);
+    }
     LeaveCriticalSection(&p->lock);
     if(active)return ERROR_SUCCESS;
     /* No new claim after active=false. Wait for the already claimed send,
@@ -138,10 +188,22 @@ DWORD worker_base_publication_active(worker_base_publication *p,BOOL active)
         if(status==WAIT_FAILED)return GetLastError();
     }
     EnterCriticalSection(&p->lock);
-    error=p->error;copy=p->pending;memset(&p->pending,0,sizeof(p->pending));ResetEvent(p->changed);
+    error=p->error;copy=p->pending;memset(&p->pending,0,sizeof(p->pending));
+    if(!error && p->source_pending && p->capture) {
+        p->source_pending=FALSE;capture=p->capture;capture_context=p->capture_context;
+    }
+    ResetEvent(p->changed);
     LeaveCriticalSection(&p->lock);
     if(copy.payload) {
         if(!error)error=deliver(p,&copy);else free_frame(&copy);
+    }
+    if(!error && capture) {
+        error=capture(capture_context,(void **)&source.payload,&source.bytes);
+        if(!error && ((source.payload==NULL && source.bytes!=0) || (source.payload!=NULL && source.bytes==0)))
+            error=ERROR_INVALID_DATA;
+        if(source.payload) {
+            if(!error)error=deliver(p,&source);else free_frame(&source);
+        }
     }
     if(error) {
         EnterCriticalSection(&p->lock);p->error=error;LeaveCriticalSection(&p->lock);

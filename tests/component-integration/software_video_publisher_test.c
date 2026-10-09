@@ -7,6 +7,8 @@ static HANDLE entered,unblock,ack;
 static volatile LONG calls;
 static DWORD values[32],fail_value;
 static LARGE_INTEGER times[32],frequency;
+static volatile LONG source_captures;
+static DWORD source_value;
 #define CHECK(x) do {if(!(x)){fprintf(stderr,"FAIL line %d error %lu\n",__LINE__,GetLastError());return 1;}} while(0)
 typedef struct fixture_copy { console_video_description description;DWORD value; } fixture_copy;
 static DWORD send_frame(void *context,const void *payload,SIZE_T bytes)
@@ -28,6 +30,19 @@ static DWORD offer(worker_base_publication *p,DWORD value)
     description->stride=4;description->bytes=sizeof(value);
     error=worker_base_publication_offer(p,&copy,sizeof(copy),&queued);
     return error ? error : queued ? 0 : ERROR_NOT_READY;
+}
+static DWORD capture_source(void *context,void **payload,SIZE_T *bytes)
+{
+    fixture_copy *copy;
+    (void)context;
+    if(!payload || !bytes)return ERROR_INVALID_PARAMETER;
+    *payload=NULL;*bytes=0;
+    copy=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*copy));
+    if(!copy)return ERROR_NOT_ENOUGH_MEMORY;
+    copy->description.kind=CONSOLE_VIDEO_TEXT_FRAME;copy->description.width=2;
+    copy->description.height=1;copy->description.stride=4;copy->description.bytes=sizeof(copy->value);
+    copy->value=source_value;InterlockedIncrement(&source_captures);
+    *payload=copy;*bytes=sizeof(*copy);return ERROR_SUCCESS;
 }
 int main(void)
 {
@@ -91,7 +106,25 @@ int main(void)
         CHECK(GetProcessHandleCount(GetCurrentProcess(),&after) && after==before);
         CHECK(WaitForSingleObject(shutdown,0)==WAIT_TIMEOUT);
     }
+    {
+        LONG before=calls,uncaptured;
+        while(WaitForSingleObject(ack,0)==WAIT_OBJECT_0) {}
+        p=worker_base_publication_create(send_frame,NULL,shutdown);CHECK(p);
+        CHECK(!worker_base_publication_set_capture(p,capture_source,NULL));
+        CHECK(!worker_base_publication_active(p,TRUE));
+        uncaptured=source_captures;
+        CHECK(WaitForSingleObject(ack,80)==WAIT_TIMEOUT && source_captures==uncaptured);
+        source_value=301;CHECK(!worker_base_publication_signal(p));
+        CHECK(WaitForSingleObject(ack,5000)==WAIT_OBJECT_0);
+        CHECK(calls==before+1 && values[before]==301 && source_captures==uncaptured+1);
+        source_value=302;CHECK(!worker_base_publication_signal(p));
+        CHECK(!worker_base_publication_active(p,FALSE));
+        CHECK(WaitForSingleObject(ack,5000)==WAIT_OBJECT_0);
+        CHECK(calls==before+2 && values[before+1]==302 && source_captures==uncaptured+2);
+        CHECK(worker_base_publication_signal(NULL)==ERROR_SUCCESS);
+        worker_base_publication_destroy(p);
+    }
     CloseHandle(shutdown);CloseHandle(entered);CloseHandle(unblock);CloseHandle(ack);
-    puts("PASS production publisher: latest of200, >=20ms, unchanged idle, palette-only change, forced final drain, resume, sticky failed send, 50 stop/join cycles without handle leaks");
+    puts("PASS production publisher: latest of200, >=20ms, unchanged idle, palette-only change, deferred source capture, forced final drain, resume, sticky failed send, 50 stop/join cycles without handle leaks");
     return 0;
 }

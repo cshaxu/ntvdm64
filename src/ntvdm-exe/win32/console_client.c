@@ -270,6 +270,8 @@ DWORD ntvdm_console_client_begin(session *owner)
     if(error){console_client_end(client);return error;}
     client->publisher=worker_base_publication_create(send_video_copy,client,client->shutdown);
     if(!client->publisher){error=GetLastError();console_client_end(client);return error;}
+    error=ntvdm_console_graphics_attach_publisher(client->graphics,client->publisher);
+    if(error){console_client_end(client);return error;}
     client->input_watch=worker_base_input_watch_create(client->shutdown,client->stop,
         NULL,console_input_close,NULL,client);
     error=client->input_watch ? console_activate(client,TRUE) : GetLastError();

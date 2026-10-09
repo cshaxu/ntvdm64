@@ -1,9 +1,13 @@
 #ifndef NTVDM_CONSOLE_GRAPHICS_H
 #define NTVDM_CONSOLE_GRAPHICS_H
 #include <windows.h>
+#include "worker-base/publication.h"
 typedef struct ntvdm_console_graphics ntvdm_console_graphics;
 ntvdm_console_graphics *ntvdm_console_graphics_create(void);
 void ntvdm_console_graphics_destroy(ntvdm_console_graphics *);
+/* The common publisher owns cadence and shutdown; this adapter owns source
+ * dirtiness and DIB capture. Attach before either side becomes active. */
+DWORD ntvdm_console_graphics_attach_publisher(ntvdm_console_graphics *,worker_base_publication *);
 /* Returns zero for non-owned handles; otherwise the source-shaped result. */
 int ntvdm_console_graphics_invalidate(HANDLE,const SMALL_RECT *);
 int ntvdm_console_graphics_palette(HANDLE,HPALETTE,DWORD);

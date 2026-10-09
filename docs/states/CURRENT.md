@@ -2,29 +2,66 @@
 
 ## Current Work
 
-**Active: M0 T440 S1**
+**Active: M0 T440 S3**
 
 ## Active Packet
 
-### Text responsiveness and guest-performance baseline
+### Source-side graphics publication
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T440 S1`, Ordinary Mode. |
-| Admission And Approval | Owner admits the queue-head text responsiveness and DOS/Win16 startup/execution-performance package after T439 closure. |
-| Objective | Refresh a reproducible current-release performance baseline and attribute perceptible text stalls plus DOS/Win16 cold/resident startup and steady-execution cost to actual stages before selecting any repair. |
-| Non-goals | No speculative optimization, blanket compiler-flag change, new helper/process/scheduler, guest-media change, lifecycle redesign, or claim that picture latency proves guest execution speed. |
-| Reference Baseline | [Performance proposal](../proposals/proposal-interaction-and-guest-performance-001.md), including its explicitly non-current 2026-10-06 research; T429 performance evidence remains historical input, not a pass. |
-| Files And ABI Surface | Performance workloads and measurements under `tests/` and `build/M0-T440/S1/`, source/lock/wait attribution records, status/evidence only; production ownership is selected only after measured attribution. |
+| Identifier Mode | `M0 T440 S3`, Ordinary Mode. |
+| Admission And Approval | Owner approved repair after the source audit established that NTVDM64 performs full source-frame construction and copies before worker-base's latest-frame coalescing, unlike the SoftPC comparison pipeline's source-side dirty-generation rejection. |
+| Objective | Move the project-owned NTVDM graphics publication eligibility decision ahead of complete DIB/frame construction, preserving only true original-painter updates and source-owned cursor/configuration changes. |
+| Non-goals | No timer/rate-policy change, worker-base or NTCON deduplication change, guest/media alteration, imported OpenNT mirror-algorithm rewrite, new process/helper/protocol, or lifecycle redesign. The existing worker-base publisher may gain only the source-capture seam required to defer DIB construction until its already-owned accepted delivery boundary. |
+| Reference Baseline | S1 timing evidence and S2 source audit: the shared Window renderer already has the same dirty-rectangle presentation mechanics as SoftPC; source capture/copy precedes current coalescing. |
+| Files And ABI Surface | Project-owned NTVDM Win32 video-publication adapters; the existing private worker-base publisher capture seam; focused fixtures/benchmarks under `tests/` and `build/M0-T440/S3/`, evidence and active status. No public wire ABI change. |
 | Applicable Rules | Execution, architecture, coding, documentation, source-policy, global BaseSrv serialization, immutable guest media, NTSRV lifecycle authority and worker-neutral NTCON. |
-| Verification | Freeze source/package/configuration identities; run serial cold and resident DOS, native text, and bounded Win16 measurements with enabled/disabled instrumentation controls; record boundary times, sample counts, CPU/wall attribution, queue/lock/publication facts and explicit unavailable observations. |
-| Expected Markers | Each measured claim identifies its operation witness and owner; input acceptance is separated from guest consumption and present; startup is separated from steady execution; no independent percentile values are summed; a repair candidate is selected only when a project-owned cause is demonstrated. |
-| Asset Needs | Current released package, immutable guest workloads, build-owned probes/logs and existing regression infrastructure only. |
-| Reporting Requirements | Record exact inputs/hashes, host and route conditions, raw/aggregate timing, instrumentation perturbation, failed or unavailable checks, ranked causes and each excluded hypothesis. |
-| Stop Conditions | A required measurement needs a new production mechanism, changes original timer/VGA/IRQ/WOW behavior without attribution, requires guest mutation, or produces only a non-reproducible/non-owner-specific result. |
-| Exit Criteria | Current evidence distinguishes at least one measured project-owned repair candidate from retained original/external limits, or records a justified no-repair conclusion; reviewed governance record and a committed/pushed audit delivery. |
+| Verification | Build affected x86 product targets; run source-owned publication and Window-render fixtures; prove clean frames avoid complete source construction while changed DIB/text/cursor/configuration frames remain published; compare current source and package hashes before release. |
+| Expected Markers | A source-owned generation/dirty observation gates frame construction before the current offer/copy chain; changed frames retain ordering and final-frame delivery; NTCON receives every frame that the worker elects to publish. |
+| Asset Needs | Current source/package, build-owned tests and logs only; no guest modification. |
+| Reporting Requirements | Record source ownership, copy/capture boundary, benchmark results, unchanged OpenNT mirror diff status, exact package hashes, and remaining manual Win3.1 boundary. |
+| Stop Conditions | A correct gate requires modifying original MVDM behavior or guest media, changing worker-base/NTCON semantics, or cannot preserve final-frame/route handoff. |
+| Exit Criteria | Minimal project-owned implementation, x86 build and focused regressions, release package/hash verification, governance/diff review, commit and push; await owner manual acceptance. |
 | Original Owner Request | “准入新T 文本响应性与 DOS/Win16 启动/执行性能：量化输入、抓取/发布、锁/传输及 guest/WOW 成本，只修已证明瓶颈。” |
-| Similar-Issue Sweep | DOS COMMAND/EDIT, native CMD/EDIT, cold versus resident worker startup, Window versus Console, Win16 front-end boundaries, publication cadence, capture/copy, locks, input queues, Hook/monitor overhead and existing T429 mechanisms. |
+| Similar-Issue Sweep | DIB, text, palette/configuration and cursor-only publication; inactive/final-frame handoff; NTVDM and NTVWM call sites; existing worker-base/NTCON source neutrality. |
+
+## S1 Closure Record
+
+S1 established a current, reproducible project-owned candidate without
+changing production code.  The shared publisher's ordinary waitable timer
+delivered roughly 31 ms p50 rather than its nominal 20 ms cadence; a test-only
+high-resolution timer factory delivered roughly 21 ms under the same policy.
+The worker mouse queue measured 9–14 ns per immediate pair and is excluded as
+a visible-stall cause.  Private Win3.1 and non-console startup probes did not
+produce a valid witness and remain explicitly unavailable.  The test harness,
+evidence are continued sequentially in S2; no timer implementation delivery
+is authorized.
+See [S1 evidence](../etc/evidence/m0-t440-s1-publication-timing-baseline.md).
+
+## S2 Closure Record
+
+S2's source audit found no missing dirty-rectangle support in the shared
+Window renderer: NTVDM64 and the SoftPC comparison project use the same
+pixel-diff, damaged-rectangle invalidation path. The material difference is
+upstream. NTVDM64 constructs and copies a complete DIB/frame before
+worker-base can replace it with a later frame, whereas SoftPC rejects an
+unchanged VGA generation before capture. The pure 640x480 Window renderer
+measured roughly 0.55 ms median per frame; this is not an end-to-end Win3.1
+witness. S3 owns only the resulting project-adapter repair.
+See [S2 evidence](../etc/evidence/m0-t440-s2-graphics-chain-audit.md).
+
+## S3 Closure Record
+
+S3 moves project-owned NTVDM DIB construction from every original graphics
+invalidation to worker-base's existing accepted publication boundary.  The
+original SoftPC painter and guest media remain unchanged; a private
+source-capture seam preserves existing 50 Hz policy, sender ownership and
+final-drain ordering.  The focused publication and real graphics-source
+fixtures pass, the x86 product relinks, and the verified ten-image package is
+published to `O:/winnt/system32`.  The existing observer-only `87` startup
+limitation occurs before graphics handoff and is retained rather than counted
+as a pass.  See [S3 evidence](../etc/evidence/m0-t440-s3-source-side-graphics-publication.md).
 
 ## Previously Closed Work
 
