@@ -10,6 +10,10 @@ param(
     [string]$NativeMonitor = '',
     [string]$NativeLauncher = '',
     [string]$NativeService = '',
+    # Attribution-only selector.  The default preserves the historical graph
+    # byte-for-byte at the compiler-option level; `O2` changes only CCPU
+    # translation units so the interpreter cost can be measured in isolation.
+    [ValidateSet('default', 'O2')] [string]$CcpuOptimization = 'default',
     [ValidateRange(0, 64)] [int]$ParallelJobs = 0
 )
 
@@ -289,6 +293,7 @@ $openntRtlNames = @('environ.c', 'error.c', 'time.c')
 $openntRtlX86Names = @('largeint-selected.asm', 'movemem-selected.asm')
 $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_shadow_registry.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c', 'mvdm_softpc_physical_mapping.c',
                          'mvdm_guest_location.c', 'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
+                         'mvdm_softpc_ccpu_wait.c',
                          'mvdm_softpc_fast_bop.c',
                          'mvdm_softpc_wow_page_domain.c',
                          'mvdm_standalone_worker.c',
@@ -690,6 +695,10 @@ $baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE 
     '/FI "' + (NinjaPath $softpcSymbolCompat) + '" ' +
     ''
 $baseFlags = $baseCommonFlags + ($softpcIncludeRoots -join ' ')
+$ccpuFlags = $baseFlags
+if ($CcpuOptimization -eq 'O2') {
+    $ccpuFlags += ' /O2'
+}
 $hostFlags = $baseFlags + ' /FI "' + (NinjaPath $hostCrtRedirect) + '"'
 # XACTSRV's selected local-provider bodies retain the original RAP-to-native
 # conversion.  On modern Windows the ANSI NetUse entry no longer preserves the
@@ -728,6 +737,7 @@ $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
 $graph.Add('build_root = ' + (NinjaPath $build))
 $graph.Add('cflags = ' + $baseFlags)
+$graph.Add('ccpu_cflags = ' + $ccpuFlags)
 $graph.Add('host_cflags = ' + $hostFlags)
 $graph.Add('rtl_cflags = ' + $baseFlags + ' /Gz')
 $graph.Add('dpmi_cflags = ' + $dpmiFlags)
@@ -741,6 +751,11 @@ $graph.Add('')
 $graph.Add('rule cc')
 $graph.Add('  command = cl.exe $cflags /Fo$out $in')
 $graph.Add('  description = CC $in')
+$graph.Add('  deps = msvc')
+$graph.Add('  msvc_deps_prefix = Note: including file: ')
+$graph.Add('rule cc_ccpu')
+$graph.Add('  command = cl.exe $ccpu_cflags /Fo$out $in')
+$graph.Add('  description = CC-CCPU $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file: ')
 $graph.Add('rule cc_host')
@@ -821,7 +836,7 @@ $ccpuObjects = foreach ($name in $ccpuNames) {
     # Existing localfm.c retains this profile's original Gdp/Cpu/Video state
     # declarations while omitting the already-owned Sas vector.
     $source = Join-Path $ccpuRoot $name
-$graph.Add('build ' + $object + ': cc ' + (NinjaPath $source))
+$graph.Add('build ' + $object + ': cc_ccpu ' + (NinjaPath $source))
     $object
 }
 $biosObjects = foreach ($name in $biosNames) {
@@ -1800,6 +1815,9 @@ $graph.Add('rule event_test_link')
 $graph.Add('  command = link.exe /nologo /force:multiple /map:$out.map /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib')
 $fixtureHostLibraries = 'worker-base.lib worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib vdmredir-dll-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res'
 $graph.Add('build ccpu-halt-reset-test.exe: event_test_link obj/tests/ccpu_halt_reset_test.obj ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
+$ccpuThroughputFixtureObject = 'obj/tests/ccpu_throughput_fixture.obj'
+$graph.Add('build ' + $ccpuThroughputFixtureObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_throughput_fixture.c')))
+$graph.Add('build ccpu-throughput-fixture.exe: event_test_link ' + $ccpuThroughputFixtureObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 # Test-only debug boundaries: original matching body and actual checked binding.
 $graph.Add('rule debug_unit_link')
 $graph.Add('  command = link.exe /nologo /machine:x86 /opt:ref /out:$out $in legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')

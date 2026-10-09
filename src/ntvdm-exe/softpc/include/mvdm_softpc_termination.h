@@ -226,6 +226,12 @@ void mvdm_softpc_report_wow_source_descriptor_store(unsigned long address,
     unsigned long value, unsigned long width, unsigned short cs,
     unsigned long eip, unsigned short ss, unsigned long esp);
 
+/* This process-wide configuration is resolved before CCPU execution.  The
+ * source-descriptor witness is an explicit diagnostic opt-in; a normal
+ * worker must not enter it from each SAS byte/word/dword store. */
+extern volatile LONG mvdm_softpc_wow_source_descriptor_trace_active;
+void mvdm_softpc_initialize_default_off_traces(void);
+
 void mvdm_softpc_report_nt_transition(unsigned short cs, unsigned long ip,
     unsigned long flags, unsigned short ss, unsigned long sp);
 

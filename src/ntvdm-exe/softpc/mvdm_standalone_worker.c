@@ -4,6 +4,7 @@
 #include "ntvdm-exe/package_layout.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include "mvdm_softpc_execution.h"
+#include "mvdm_softpc_ccpu_wait.h"
 #include "mvdm_softpc_guest_memory.h"
 #include "mvdm_softpc_termination.h"
 #include "ntvdm_dos_observer.h"
@@ -36,12 +37,20 @@ static DWORD begin_character_io(void *owner,HANDLE stop)
     return ntvdm_console_client_begin(owner);
 }
 static BOOL worker_shadow_registry;
+static BOOL worker_ccpu_wait;
 
 static int mvdm_standalone_worker_cleanup(int result)
 {
     uint32_t dispose_reason;
 
     ntvdm_dos_observer_stop(&worker_observer);
+
+    /* The original host has already stopped its timer/event producers before
+     * this process-level worker cleanup runs. */
+    if (worker_ccpu_wait) {
+        mvdm_softpc_ccpu_wait_end();
+        worker_ccpu_wait=FALSE;
+    }
 
     if (worker_escape) {
         session_disarm_termination_escape(&worker_session);
@@ -81,6 +90,11 @@ DWORD mvdm_standalone_worker_begin(void)
     if (worker_started) return ERROR_ALREADY_EXISTS;
     session_initialize(&worker_session,1u);
     worker_session_initialized=TRUE;
+    mvdm_softpc_initialize_default_off_traces();
+    if (!mvdm_softpc_ccpu_wait_begin()) {
+        error=GetLastError(); goto fail;
+    }
+    worker_ccpu_wait=TRUE;
     CsrPortHeap=HeapCreate(0,0,0);
     if (!CsrPortHeap) { error=ERROR_NOT_ENOUGH_MEMORY; goto fail; }
     worker_heap=TRUE;

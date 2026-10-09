@@ -30,6 +30,9 @@ DWORD OpenNtBaseClientWorkerShutdownEvent(HANDLE *value)
 { (void)value; return unexpected_broker(); }
 DWORD OpenNtBaseClientWorkerIoReleaseEvent(HANDLE *value)
 { (void)value; return unexpected_broker(); }
+DWORD OpenNtBaseClientWorkerIoCheckpoint(DWORD reason, DWORD request,
+    DWORD *decision)
+{ (void)reason; (void)request; (void)decision; return unexpected_broker(); }
 DWORD OpenNtBaseClientWaitFrontend(HANDLE *pipe, HANDLE *frontend,
     DWORD *generation, HANDLE *ready)
 { (void)pipe; (void)frontend; (void)generation; (void)ready; return unexpected_broker(); }

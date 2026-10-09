@@ -1,7 +1,9 @@
 #include <stdint.h>
+#include <stdlib.h>
 #include <windows.h>
 #include "ntvdm-exe/session/session.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_ccpu_wait.h"
 
 /* Formal original CCPU/SAS providers, not replacement decode/reset bodies. */
 extern void *setup_global_data_ptr(void);
@@ -12,6 +14,7 @@ extern void c_cpu_init(void);
 extern void load_sw_cpu_access_functions(void);
 extern void c_cpu_simulate(void);
 extern void c_cpu_interrupt(int, unsigned short);
+extern uint32_t c_cpu_q_ev_get_count(void);
 extern void c_setIP(unsigned short);
 extern unsigned short c_getAX(void);
 extern void c_sas_stores(uint32_t, unsigned char *, uint32_t);
@@ -34,6 +37,8 @@ extern void c_setCR3(uint32_t);
 extern void c_setPG(int);
 extern void c_setPE(int);
 extern BOOL mvdm_debugger_read_debug_registers(USHORT, USHORT, PULONG);
+
+static volatile uint32_t halt_quick_count_before_reset;
 
 static int debug_task_switch(int trap)
 {
@@ -214,13 +219,21 @@ static int stale_pic_notification(void)
 static DWORD WINAPI raise_reset(void *context)
 {
     volatile unsigned char *entered = context;
+    const char *delay_text = getenv("CCPU_HALT_DELAY_MS");
+    DWORD delay = 50;
     DWORD start = GetTickCount();
+    if (delay_text != NULL) {
+        unsigned long parsed = strtoul(delay_text, NULL, 10);
+        if (parsed >= 1 && parsed <= 5000)
+            delay = (DWORD)parsed;
+    }
     while (*entered != 1) {
         if (GetTickCount() - start > 5000) return 1;
         Sleep(1);
     }
     /* Guest writes marker immediately before HLT; allow it to enter wait. */
-    Sleep(50);
+    Sleep(delay);
+    halt_quick_count_before_reset = c_cpu_q_ev_get_count();
     c_cpu_interrupt(0, 0); /* original CPU_HW_RESET enum */
     return 0;
 }
@@ -256,6 +269,7 @@ int main(void)
     session_initialize(&owner, 412);
     if (!session_activate(&owner) || !session_thread_bind(&owner) ||
         setup_global_data_ptr() == NULL) return 2;
+    if (!mvdm_softpc_ccpu_wait_begin()) return 12;
     report("sas-init\n");
     sas_init(0x200000);
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 3;
@@ -284,7 +298,8 @@ int main(void)
     if (WaitForSingleObject(producer, 6000) != WAIT_OBJECT_0 ||
         !GetExitCodeThread(producer, &producer_result)) return 5;
     CloseHandle(producer);
-    wsprintfA(message, "original-CCPU HALT RESET: AX=%04x producer=%lu\n", ax, producer_result);
+    wsprintfA(message, "original-CCPU HALT RESET: AX=%04x producer=%lu quick=%lu\n",
+        ax, producer_result, (unsigned long)halt_quick_count_before_reset);
     report(message);
     /* BEEF proves execution restarted at the actual c_cpu_reset vector;
      * DEAD means it merely left HLT and continued after the instruction. */
@@ -299,5 +314,6 @@ int main(void)
     report("S38_CCPU_TSS_TBIT_SINGLE_DELIVERY_OK\n");
     if (!stale_pic_notification()) return 11;
     report("T430_CCPU_STALE_PIC_SENTINEL_OK\n");
+    mvdm_softpc_ccpu_wait_end();
     return 0;
 }

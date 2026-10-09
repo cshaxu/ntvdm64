@@ -798,8 +798,9 @@ IFN2(PHY_ADDR, addr, IU8, val)
 	sys_addr	temp_val;
 
 	sub_note_trace2(SAS_VERBOSE, "c_sas_store addr=%x, val=%x\n", addr, val);
-	mvdm_softpc_report_wow_source_descriptor_store((unsigned long)addr,
-		(unsigned long)val, sizeof(val), getCS(), getEIP(), getSS(), getESP());
+	if (mvdm_softpc_wow_source_descriptor_trace_active)
+		mvdm_softpc_report_wow_source_descriptor_store((unsigned long)addr,
+			(unsigned long)val, sizeof(val), getCS(), getEIP(), getSS(), getESP());
 
 	addr &= SasWrapMask;
 	checkAccess(addr);
@@ -848,8 +849,9 @@ GLOBAL void c_sas_store
 IFN2(LIN_ADDR, addr, IU8, val)
 {
 	sub_note_trace2(SAS_VERBOSE, "c_sas_store addr=%x, val=%x\n", addr, val);
-	mvdm_softpc_report_wow_source_descriptor_store((unsigned long)addr,
-		(unsigned long)val, sizeof(val), getCS(), getEIP(), getSS(), getESP());
+	if (mvdm_softpc_wow_source_descriptor_trace_active)
+		mvdm_softpc_report_wow_source_descriptor_store((unsigned long)addr,
+			(unsigned long)val, sizeof(val), getCS(), getEIP(), getSS(), getESP());
 	bios_write_byte(addr, val);
 }
 
@@ -860,8 +862,9 @@ phy_w16 IFN2(PHY_ADDR, addr, IU16, val)
 	sys_addr	temp_val;
 
 	sub_note_trace2(SAS_VERBOSE, "c_sas_storew addr=%x, val=%x\n", addr, val);
-	mvdm_softpc_report_wow_source_descriptor_store((unsigned long)addr,
-		(unsigned long)val, sizeof(val), getCS(), getEIP(), getSS(), getESP());
+	if (mvdm_softpc_wow_source_descriptor_trace_active)
+		mvdm_softpc_report_wow_source_descriptor_store((unsigned long)addr,
+			(unsigned long)val, sizeof(val), getCS(), getEIP(), getSS(), getESP());
 
 	addr &= SasWrapMask;
 	checkAccess(addr);
@@ -926,8 +929,9 @@ GLOBAL void
 c_sas_storew IFN2(LIN_ADDR, addr, IU16, val)
 {
 	sub_note_trace2(SAS_VERBOSE, "c_sas_storew addr=%x, val=%x\n", addr, val);
-	mvdm_softpc_report_wow_source_descriptor_store((unsigned long)addr,
-		(unsigned long)val, sizeof(val), getCS(), getEIP(), getSS(), getESP());
+	if (mvdm_softpc_wow_source_descriptor_trace_active)
+		mvdm_softpc_report_wow_source_descriptor_store((unsigned long)addr,
+			(unsigned long)val, sizeof(val), getCS(), getEIP(), getSS(), getESP());
 	if ((addr & 0xFFF) <= 0xFFE)
 		bios_write_word(addr, val);
 	else
@@ -942,8 +946,9 @@ GLOBAL void c_sas_storedw
 IFN2(LIN_ADDR, addr, IU32, val)
 {
 	sub_note_trace2(SAS_VERBOSE, "c_sas_storedw addr=%x, val=%x\n", addr, val);
-	mvdm_softpc_report_wow_source_descriptor_store((unsigned long)addr,
-		(unsigned long)val, sizeof(val), getCS(), getEIP(), getSS(), getESP());
+	if (mvdm_softpc_wow_source_descriptor_trace_active)
+		mvdm_softpc_report_wow_source_descriptor_store((unsigned long)addr,
+			(unsigned long)val, sizeof(val), getCS(), getEIP(), getSS(), getESP());
 
 	if ((addr & 0xFFF) <= 0xFFC)
 		bios_write_double(addr, val);

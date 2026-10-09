@@ -2,29 +2,47 @@
 
 ## Current Work
 
-**Active: M0 T440 S5**
+**No active M/T/S packet.** The focused T440/S8 checkpoint below is closed;
+the next timing-policy packet requires separate admission.
 
-## Active Packet
+## Latest Closure
 
-### Bounded variable-length worker I/O records
+### M0 T440 S8 — Win3.1 desktop CPU attribution after idle-HLT repair
 
-| Field | Record |
-| --- | --- |
-| Identifier Mode | `M0 T440 S5`, Ordinary Mode. |
-| Admission And Approval | Owner accepts S4's source-backed attribution and directs: make all worker/NTCON I/O records variable-length with a 1 MiB actual-payload maximum; frames larger than that may use continuous parts and receive one final frame acknowledgement. |
-| Objective | Replace the fixed 16 KiB embedded I/O-message payload model with bounded variable-length records, so a complete sub-1 MiB video frame crosses the worker/NTCON channel without per-16-KiB synchronous round trips. |
-| Non-goals | No publisher cadence, display deduplication, guest/mirror modification, new helper/process, unbounded allocation, worker-type branch, lifecycle-policy change, or alteration of NTSRV authority. |
-| Reference Baseline | S4 establishes 0.382 ms current renderer p50 versus 86.845 ms historical measured worker-to-NTCON transfer p50 for a 20 KiB text frame; current 640x480 DIBs are 307,200 B and need 20 request/reply exchanges under the 16 KiB protocol. |
-| Files And ABI Surface | Shared interface/common protocol and pipe transport, worker-base clients/publishers, NTCON channel receiver/session, focused protocol and lifecycle tests, release-version surface and evidence. |
-| Applicable Rules | Execution, architecture, coding, documentation, source-policy, NTSRV lifecycle authority, worker-neutral NTCON and global real-package serialization. |
-| Verification | Focused framed-record positive/negative/partial/disconnect/order tests; affected native/x86 builds; serial product Window/text regression appropriate to the changed package; coherent ten-image publication and hash verification. |
-| Expected Markers | Small records transmit exactly their actual byte count; a 307,200 B DIB crosses as one logical frame; >1 MiB frames are bounded, ordered parts with one terminal result; malformed/interleaved/short records fail without publishing a partial frame. |
-| Asset Needs | Existing source/build graphs and build-owned fixtures only; no guest or imported asset. |
-| Reporting Requirements | Record record framing/limits, completion and fault precedence, allocation/ownership bounds, old/new exchange counts, test hashes/results, retained timing limitation and publication identity. |
-| Stop Conditions | A required peer still depends on the fixed in-struct payload ABI; a safe message-boundary/partial-I/O contract cannot be established; a required protocol version receiver is unknown; or tests demonstrate a lifecycle/order regression. |
-| Exit Criteria | One bounded shared I/O contract, worker-base and NTCON implementation, affected test/build/runtime evidence, governance/diff review, coherent release publication, commit and push. |
-| Original Owner Request | “普通记录最大也可以是1MB…只要1MB以内就可以送，超过1MB的话，切成多个来送；但是不要变成固定每次都是发1MB。” |
-| Similar-Issue Sweep | Text/video/title/input records, stream framing helpers, all worker-base callers, NTCON receive/dispatch, final-frame and handoff barriers, peer failure and protocol-version negotiation. |
+S8 removes the project-added disabled SAS-store environment lookup and replaces
+only the full-overwrite XMS forward-copy bridge with the original numeric CCPU
+forward move. It retains S7's event-driven idle HLT repair (`MVDM-HOST-DIV-330`).
+Fresh x86 `r028-close` built `ntvdm.exe` (`B5217F3D…2229B4`) and passed the CCPU
+HLT/reset, CCPU throughput, original external-memory and mapped-XMS fixtures.
+The identical NTVDM was published with a recoverable predecessor under
+`O:\winnt\builds`; all ten release-manifest identities were checked. The
+normal full product matrix was not run because its only runner creates `Z:` via
+`subst`, which the owner has prohibited. A pipe-hosted `COMMAND.COM /c ver`
+smoke returned 87 and is recorded as an unsuitable noninteractive witness, not
+as a product pass. S8's evidence identifies the next independent problem: the
+CCPU quick-event clock assumes one instruction per microsecond. See
+[S8 evidence](../etc/evidence/m0-t440-s8-win31-xms-attribution.md).
+
+## S6 Closure Record
+
+## S7 Bounded Conclusion
+
+S7 retains a minimal `MVDM-HOST-DIV-330` event wait at CCPU's original HLT
+boundary. The focused old/new carrier comparison reduces a 500 ms steady idle
+window from 0.515625 CPU seconds to zero while preserving original reset-vector
+delivery. A real Win3.1 desktop diagnostic remained active-guest CPU work, so
+S7 does not claim a desktop-throughput improvement and defers its product P
+until the active-cost attribution is complete. See
+[S7 evidence](../etc/evidence/m0-t440-s7-ccpu-hlt-event-wait.md).
+
+S6 found that S5's variable 1 MiB-bounded worker records removed the earlier
+graphics-transfer bottleneck: current 640x480 payload/dispatch p50 is 0.405
+ms. A retained current Win3.1 Standard worker instead used 17.45 CPU seconds
+over an 18-second wall interval, while ordinary COMMAND idle used no measurable
+CPU in its separate sample. Source review isolates the reached Win3.1 cost to
+CCPU's ring-0 `HLT` polling loop. The physical desktop witness remains owner
+facing; this attribution did not claim a new graphical acceptance result. See
+[S6 evidence](../etc/evidence/m0-t440-s6-post-s5-responsiveness-attribution.md).
 
 ## S4 Closure Record
 

@@ -55,6 +55,7 @@ Actual worker routines are spun off elsewhere.
 #include <fault.h>
 #include <ica.h>
 #include <timer.h>
+#include <mvdm_softpc_ccpu_wait.h>
 
 extern void force_yoda(void);
 extern void TakeNpxExceptionInt(void);
@@ -4085,6 +4086,14 @@ TYPEE8:
 
          SYNCH_TICK();
          QUICK_EVENT_TICK();
+
+	 /* DIVERGENCE(MVDM-HOST-DIV-330): original CCPU leaves a ring-0 HLT
+	  * in a pure host polling loop.  The standalone host already raises the
+	  * original CCPU event bits for timer, PIC, reset and host-I/O work; its
+	  * process-local carrier retains one wake until this HLT waiter arrives.
+	  * Do not replace the event map, interrupt ordering or quick-event work. */
+	 if (c_cpu_event_snapshot() == 0 && c_cpu_q_ev_get_count() == 0)
+	    mvdm_softpc_ccpu_wait_for_event();
 	 }
 	quick_mode = FALSE;
 
@@ -4817,6 +4826,7 @@ LOCAL VOID
 	 break;
 	 }
       quick_mode = FALSE;
+      mvdm_softpc_ccpu_wait_signal();
       }
 
    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

@@ -13,6 +13,8 @@ extern void c_sas_loads(uint32_t address, uint8_t *bytes,
     uint32_t byte_count);
 extern void c_sas_stores(uint32_t address, uint8_t *bytes,
     uint32_t byte_count);
+extern void c_sas_move_bytes_forward(uint32_t source, uint32_t destination,
+    uint32_t byte_count);
 
 static int mvdm_softpc_guest_memory_range_valid(uint32_t address,
     uint32_t byte_count)
@@ -124,20 +126,21 @@ int mvdm_softpc_guest_memory_copy_to(uint32_t address, uint8_t const *bytes,
 int mvdm_softpc_guest_memory_copy_forward(uint32_t destination,
     uint32_t source, uint32_t byte_count)
 {
-    uint8_t bytes[MVDM_SOFTPC_GUEST_MEMORY_COPY_CHUNK];
-    uint32_t offset = 0u;
+    session *owner = session_thread_current();
 
     if (byte_count > UINT32_MAX - source ||
         byte_count > UINT32_MAX - destination) return 0;
-    while (offset < byte_count) {
-        uint32_t chunk = byte_count - offset;
+    if (byte_count == 0u) return 1;
+    if (!session_valid(owner) || owner->state != SESSION_STATE_ACTIVE ||
+        owner->guest_memory_lease.active != 1u ||
+        !mvdm_softpc_guest_memory_range_valid(source, byte_count) ||
+        !mvdm_softpc_guest_memory_range_valid(destination, byte_count)) return 0;
 
-        if (chunk > (uint32_t)sizeof(bytes)) chunk = (uint32_t)sizeof(bytes);
-        if (!mvdm_softpc_guest_memory_copy_from(source + offset, bytes, chunk) ||
-            !mvdm_softpc_guest_memory_copy_to(destination + offset, bytes, chunk))
-            return 0;
-        offset += chunk;
-    }
+    /* XMS's original MoveBlock contract overwrites every destination byte in
+     * forward order.  Keep the transfer as numeric CCPU addresses: unlike a
+     * generic WRITE lease, it neither exposes a host alias nor hydrates a
+     * destination bounce buffer that this operation cannot read. */
+    c_sas_move_bytes_forward(source, destination, byte_count);
     return 1;
 }
 

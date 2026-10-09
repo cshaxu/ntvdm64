@@ -1,7 +1,8 @@
 param(
     [string]$Cache='build/M0-T427/S2/r001',
     [Parameter(Mandatory)][string]$BuildRoot,
-    [string]$Environment='build/M0-T427/S4/r049/msvc-x86.cmd'
+    [string]$Environment='build/M0-T427/S4/r049/msvc-x86.cmd',
+    [switch]$WorkerOnly
 )
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
@@ -29,13 +30,16 @@ $map=$output+'.map'
 if($LASTEXITCODE){throw 'Measurement link failed'}
 & 'C:/Users/neko/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe' "$repo/tools/audit/Verify-VdmTibStorage.mjs" $map "$cachePath/obj/adapter-monitor/mvdm_vdm_tib.obj"
 if($LASTEXITCODE){throw 'VDM_TIB identity failed'}
-$frontendEntry=@($graph | Where-Object {$_ -match '^build ntcon.exe: frontend_link '})
-if($frontendEntry.Count -ne 1){throw 'Selected frontend link missing/ambiguous'}
-$frontendInputs=@(($frontendEntry[0] -replace '^.*: frontend_link ','') -split ' ' |
-    Where-Object {$_ -ne 'obj/frontend/frontend_session.obj'} | ForEach-Object {(Resolve-Path (Join-Path $cachePath $_)).Path})
-$frontendOutput=Join-Path $root 'ntcon-performance-observer.exe'
-& $environmentPath link.exe /nologo /subsystem:console /entry:wmainCRTStartup /opt:ref "/out:$frontendOutput" "/map:$frontendOutput.map" (Join-Path $root 'worker_performance.obj') (Join-Path $root 'frontend_session_measured.obj') @frontendInputs rpcrt4.lib ntdll.lib kernel32.lib shell32.lib user32.lib gdi32.lib advapi32.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib
-if($LASTEXITCODE){throw 'Measured frontend link failed'}
+$frontendInputs=@();$frontendOutput=$null
+if(!$WorkerOnly) {
+    $frontendEntry=@($graph | Where-Object {$_ -match '^build ntcon.exe: frontend_link '})
+    if($frontendEntry.Count -ne 1){throw 'Selected frontend link missing/ambiguous'}
+    $frontendInputs=@(($frontendEntry[0] -replace '^.*: frontend_link ','') -split ' ' |
+        Where-Object {$_ -ne 'obj/frontend/frontend_session.obj'} | ForEach-Object {(Resolve-Path (Join-Path $cachePath $_)).Path})
+    $frontendOutput=Join-Path $root 'ntcon-performance-observer.exe'
+    & $environmentPath link.exe /nologo /subsystem:console /entry:wmainCRTStartup /opt:ref "/out:$frontendOutput" "/map:$frontendOutput.map" (Join-Path $root 'worker_performance.obj') (Join-Path $root 'frontend_session_measured.obj') @frontendInputs rpcrt4.lib ntdll.lib kernel32.lib shell32.lib user32.lib gdi32.lib advapi32.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib
+    if($LASTEXITCODE){throw 'Measured frontend link failed'}
+}
 [ordered]@{
     Source=(& git rev-parse HEAD);Graph=(Get-FileHash (Join-Path $cachePath 'build.ninja')).Hash
     MeasurementSources=@(@('worker_performance.c','worker_performance.h','mouse_bridge_measured.c','console_client_measured.c','console_text_measured.c','frontend_session_measured.c') | ForEach-Object {
@@ -43,7 +47,7 @@ if($LASTEXITCODE){throw 'Measured frontend link failed'}
     })
     Profile='MSVC x86 /MT CCPU40; selected cache link; test-only producer/transport/frontend wrappers'
     Output=(Get-FileHash $output).Hash
-    FrontendOutput=(Get-FileHash $frontendOutput).Hash
+    FrontendOutput=if($frontendOutput){(Get-FileHash $frontendOutput).Hash}else{$null}
     Inputs=@($linkInputs | ForEach-Object {[ordered]@{Path=$_;Hash=(Get-FileHash $_).Hash}})
     FrontendInputs=@($frontendInputs | ForEach-Object {[ordered]@{Path=$_;Hash=(Get-FileHash $_).Hash}})
     Measurements=@('worker mouse queue enqueue/merge/IRQ consumption','worker read batches','text assembly','complete video transfer','frontend video commit and nested Console buffer create/read/write/resize','frontend decode/present calls','handoff barrier and I/O-close acknowledgement')

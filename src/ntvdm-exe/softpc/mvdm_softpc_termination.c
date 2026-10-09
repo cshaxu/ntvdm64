@@ -1220,14 +1220,40 @@ void mvdm_softpc_report_dpmi_fault_stack(char const *stage,
     CloseHandle(file);
 }
 
+volatile LONG mvdm_softpc_wow_source_descriptor_trace_active;
+static char wow_source_descriptor_trace_path[MAX_PATH];
+static char wow_source_descriptor_trace_filter[16];
+
+void mvdm_softpc_initialize_default_off_traces(void)
+{
+    DWORD path_bytes;
+    DWORD filter_bytes;
+
+    /* Environment is inherited before the worker begins.  Resolve this
+     * optional witness once, rather than querying it for every SAS store. */
+    path_bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_TRACE_PATH",
+        wow_source_descriptor_trace_path,
+        (DWORD)sizeof(wow_source_descriptor_trace_path));
+    filter_bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_SELECTOR",
+        wow_source_descriptor_trace_filter,
+        (DWORD)sizeof(wow_source_descriptor_trace_filter));
+    if (path_bytes == 0u ||
+        path_bytes >= sizeof(wow_source_descriptor_trace_path) ||
+        filter_bytes == 0u ||
+        filter_bytes >= sizeof(wow_source_descriptor_trace_filter)) {
+        wow_source_descriptor_trace_path[0] = 0;
+        wow_source_descriptor_trace_filter[0] = 0;
+        InterlockedExchange(&mvdm_softpc_wow_source_descriptor_trace_active, 0);
+        return;
+    }
+    InterlockedExchange(&mvdm_softpc_wow_source_descriptor_trace_active, 1);
+}
+
 void mvdm_softpc_report_wow_source_descriptor_store(unsigned long address,
     unsigned long value, unsigned long width, unsigned short cs,
     unsigned long eip, unsigned short ss, unsigned long esp)
 {
-    char path[MAX_PATH];
-    char filter[16];
     char line[288];
-    DWORD bytes;
     HANDLE file;
     DWORD written;
     unsigned long selected;
@@ -1245,14 +1271,9 @@ void mvdm_softpc_report_wow_source_descriptor_store(unsigned long address,
     int writer_mapped;
     unsigned char writer_bytes[8] = {0};
 
-    bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_TRACE_PATH", path,
-        (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
-    bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_SELECTOR", filter,
-        (DWORD)sizeof(filter));
-    if (bytes == 0u || bytes >= sizeof(filter) || Ldt == NULL || IntelBase == 0u)
-        return;
-    selected = strtoul(filter, NULL, 16);
+    if (!mvdm_softpc_wow_source_descriptor_trace_active || Ldt == NULL ||
+        IntelBase == 0u) return;
+    selected = strtoul(wow_source_descriptor_trace_filter, NULL, 16);
     source_address = (unsigned long)((unsigned char *)Ldt -
         (unsigned char *)(uintptr_t)IntelBase);
     descriptor_address = source_address + (selected & 0xfff8u);
@@ -1285,7 +1306,8 @@ void mvdm_softpc_report_wow_source_descriptor_store(unsigned long address,
      * select, publish, or alter the current CCPU translation. */
     c_sas_loads(writer_mapped ? writer_physical : writer_linear,
         writer_bytes, sizeof(writer_bytes));
-    file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
+    file = CreateFileA(wow_source_descriptor_trace_path, FILE_APPEND_DATA,
+        FILE_SHARE_READ | FILE_SHARE_WRITE,
         NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
     if (file == INVALID_HANDLE_VALUE) return;
     snprintf(line, sizeof(line),
