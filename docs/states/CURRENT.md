@@ -2,8 +2,29 @@
 
 ## Current Work
 
-**No active M/T/S packet.** The focused T440/S8 checkpoint below is closed;
-the next timing-policy packet requires separate admission.
+**Active: M0 T440 S9**
+
+## Active Packet
+
+### CCPU quick-event time-contract pacing
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T440 S9`, Ordinary Mode. |
+| Admission And Approval | Owner directs: retain S7/S8 repairs as the clean baseline and implement the separately designed CCPU timing contract rather than modifying guest code, the heartbeat, or graphics publication. |
+| Objective | Restore the reached CCPU40 quick-event assumption that one decoded instruction represents one microsecond of guest time on a modern host, using a bounded event-interruptible worker-local pacer. |
+| Non-goals | No guest/PIF modification, qevent conversion rewrite, mouse/VGA/NTCON/worker-base protocol change, polling helper, frame-rate change, raw-pointer path, or unrelated CCPU optimization policy. |
+| Reference Baseline | S8 measures current decoded CCPU throughput at 25.95–42.02 M instructions/s while original `add_q_event_i()` assumes 1 M instructions/s; the original 9.8 ms mouse EOI delay can therefore elapse in roughly 0.23 ms. |
+| Files And ABI Surface | A new process-local NTVDM CCPU pacer; existing worker lifecycle; minimal registered safe-point/HLT hooks in the CCPU mirror; focused fixture seams and evidence. No wire, guest or worker-base ABI changes. |
+| Applicable Rules | Execution, source-policy, inherited-host-diff, CCPU profile, coding, documentation, and no-`Z:` owner constraint. |
+| Verification | Prove a 9.8 ms quick event cannot fire early during active CCPU execution; prove pending reset/timer/input events interrupt a deadline wait; prove HLT idle time does not create execution credit; retain reset/fault, keyboard/mouse and DOS/WOW lifecycle checks; compare paced and explicitly disabled raw-throughput fixture modes. |
+| Expected Markers | One bounded safe point, monotonic deadline/debt private to the worker, event-first wake precedence, and no new producer or poller. A noninteractive pipe is not a Console product witness. |
+| Stop Conditions | Pause for an owner decision before changing the target rate, making pacing default-off/on policy configurable, changing original qevent units, adding a timer/input thread, or modifying guest/PIF behavior. |
+| Exit Criteria | Source-backed pacing design and minimal diff ledger; focused timing/wake/HLT tests; x86 build; bounded Desktop observation where available; release identity/evidence; and explicit product-matrix limitation while `Z:` remains prohibited. |
+| Original Owner Request | “既然是模拟硬件的 VGA，那就应该按照真实的语义来做！” followed by approval to implement the event-driven CCPU pacing design. |
+| Similar-Issue Sweep | Existing HLT carrier, timer/reset/hardware interrupt producers, CCPU quick events, mouse EOI delay, keyboard refill delay, raw throughput test, and retained Win3.1 Standard execution. |
+
+## Previous Closure
 
 ## Latest Closure
 
