@@ -2,9 +2,29 @@
 
 ## Current Work
 
-**No active numeric M/T/S packet.** T439 closed after S1; see the
-[T439 closure](../history/m0-t439-win31-launch-profile-recovery-closure.md)
-and [S1 evidence](../etc/evidence/m0-t439-s1-win31-launch-profile-recovery.md).
+**Active: M0 T440 S1**
+
+## Active Packet
+
+### Text responsiveness and guest-performance baseline
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T440 S1`, Ordinary Mode. |
+| Admission And Approval | Owner admits the queue-head text responsiveness and DOS/Win16 startup/execution-performance package after T439 closure. |
+| Objective | Refresh a reproducible current-release performance baseline and attribute perceptible text stalls plus DOS/Win16 cold/resident startup and steady-execution cost to actual stages before selecting any repair. |
+| Non-goals | No speculative optimization, blanket compiler-flag change, new helper/process/scheduler, guest-media change, lifecycle redesign, or claim that picture latency proves guest execution speed. |
+| Reference Baseline | [Performance proposal](../proposals/proposal-interaction-and-guest-performance-001.md), including its explicitly non-current 2026-10-06 research; T429 performance evidence remains historical input, not a pass. |
+| Files And ABI Surface | Performance workloads and measurements under `tests/` and `build/M0-T440/S1/`, source/lock/wait attribution records, status/evidence only; production ownership is selected only after measured attribution. |
+| Applicable Rules | Execution, architecture, coding, documentation, source-policy, global BaseSrv serialization, immutable guest media, NTSRV lifecycle authority and worker-neutral NTCON. |
+| Verification | Freeze source/package/configuration identities; run serial cold and resident DOS, native text, and bounded Win16 measurements with enabled/disabled instrumentation controls; record boundary times, sample counts, CPU/wall attribution, queue/lock/publication facts and explicit unavailable observations. |
+| Expected Markers | Each measured claim identifies its operation witness and owner; input acceptance is separated from guest consumption and present; startup is separated from steady execution; no independent percentile values are summed; a repair candidate is selected only when a project-owned cause is demonstrated. |
+| Asset Needs | Current released package, immutable guest workloads, build-owned probes/logs and existing regression infrastructure only. |
+| Reporting Requirements | Record exact inputs/hashes, host and route conditions, raw/aggregate timing, instrumentation perturbation, failed or unavailable checks, ranked causes and each excluded hypothesis. |
+| Stop Conditions | A required measurement needs a new production mechanism, changes original timer/VGA/IRQ/WOW behavior without attribution, requires guest mutation, or produces only a non-reproducible/non-owner-specific result. |
+| Exit Criteria | Current evidence distinguishes at least one measured project-owned repair candidate from retained original/external limits, or records a justified no-repair conclusion; reviewed governance record and a committed/pushed audit delivery. |
+| Original Owner Request | “准入新T 文本响应性与 DOS/Win16 启动/执行性能：量化输入、抓取/发布、锁/传输及 guest/WOW 成本，只修已证明瓶颈。” |
+| Similar-Issue Sweep | DOS COMMAND/EDIT, native CMD/EDIT, cold versus resident worker startup, Window versus Console, Win16 front-end boundaries, publication cadence, capture/copy, locks, input queues, Hook/monitor overhead and existing T429 mechanisms. |
 
 ## Previously Closed Work
 
