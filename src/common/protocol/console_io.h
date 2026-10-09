@@ -1,19 +1,27 @@
 #ifndef NTVDM_CONSOLE_IO_H
 #define NTVDM_CONSOLE_IO_H
+#include <stddef.h>
 #include <stdint.h>
 #include "console_video.h"
 #include "console_mouse.h"
 
-/* Direct worker/frontend protocol; no pointers or native resource identities.
- * Local x86 peers are authenticated by the BaseSrv channel attachment. */
-#define CONSOLE_IO_VERSION 25u
+/* Direct worker/frontend wire header; no pointers or native resource
+ * identities cross the pipe.  Local payload pointers below are explicitly
+ * process-local staging only.  Peers are authenticated by BaseSrv attachment. */
+#define CONSOLE_IO_VERSION 27u
 /* One-hop worker -> launcher stream routing, not an authorization token.
  * Versioned name; three low bits designate worker-local interactive endpoints.
  * File/pipe handles remain actual inherited resources. Consume before launch. */
 #define CONSOLE_COMMAND_STREAMS_ENV "NTVDM_COMMAND_STREAMS_V1"
 #define CONSOLE_COMMAND_STREAMS_ENTRY "NTVDM_COMMAND_STREAMS_V1="
 #define CONSOLE_COMMAND_STREAMS_WENTRY L"NTVDM_COMMAND_STREAMS_V1="
-#define CONSOLE_IO_DATA_BYTES 16384u
+/* Every record carries exactly `bytes` payload bytes after its fixed wire
+ * header.  `data` is a process-local borrowed/owned pointer and never crosses
+ * the pipe.  The hard maximum bounds allocation and malformed-peer recovery;
+ * it does not make ordinary records allocate or transmit a MiB. */
+#define CONSOLE_IO_MAX_DATA_BYTES (1024u*1024u)
+/* Some Console APIs are intentionally tiled independently of pipe framing. */
+#define CONSOLE_IO_TILE_BYTES 16384u
 #define CONSOLE_IO_TITLE_BYTES 128u
 typedef struct console_io_cell {
     uint16_t character,attribute;
@@ -26,7 +34,7 @@ typedef struct console_io_input {
     int32_t x,y;
     uint32_t buttons,menu,focus;
 } console_io_input;
-#define CONSOLE_IO_INPUT_CAPACITY (CONSOLE_IO_DATA_BYTES/sizeof(console_io_input))
+#define CONSOLE_IO_INPUT_CAPACITY (CONSOLE_IO_TILE_BYTES/sizeof(console_io_input))
 enum console_io_operation {
     CONSOLE_IO_WRITE = 1,
     CONSOLE_IO_SCREEN_INFO,
@@ -68,7 +76,8 @@ enum console_io_operation {
     /* input selects acquisition/release; mode is reserved zero. */
     CONSOLE_IO_ACTIVATE,
     /* state.count = byte offset, state.mode = revision (zero starts read).
-     * Reply count = total bytes, mode = revision; data is one bounded tile.
+     * Reply count = total bytes, mode = revision; data is the record's
+     * actual bounded payload.
      * No published text configuration returns ERROR_NOT_FOUND. */
     CONSOLE_IO_READ_TEXT_CONFIGURATION,
     /* Native worker copies a multi-tile frontend screen while its channel
@@ -104,12 +113,31 @@ typedef struct console_io_state {
 typedef struct console_io_request {
     uint32_t version,generation,sequence,operation,bytes;
     console_io_state state;
-    uint8_t data[CONSOLE_IO_DATA_BYTES];
+    /* Keeps the wire header fixed-width on both i386 and AMD64. */
+    uint32_t reserved;
+    /* Local-only borrowed payload; never crosses the pipe. */
+    uint8_t *data;
 } console_io_request;
 typedef struct console_io_reply {
     uint32_t version,generation,sequence,result,error;
     console_io_state state;
     uint32_t bytes;
-    uint8_t data[CONSOLE_IO_DATA_BYTES];
+    /* Keeps the wire header fixed-width on both i386 and AMD64. */
+    uint32_t reserved,padding;
+    /* Local-only response storage; never crosses the pipe. */
+    uint8_t *data;
 } console_io_reply;
+
+#define CONSOLE_IO_REQUEST_HEADER_BYTES ((uint32_t)offsetof(console_io_request,data))
+#define CONSOLE_IO_REPLY_HEADER_BYTES ((uint32_t)offsetof(console_io_reply,data))
+typedef char console_io_request_wire_header_is_fixed[(CONSOLE_IO_REQUEST_HEADER_BYTES==112u) ? 1 : -1];
+typedef char console_io_reply_wire_header_is_fixed[(CONSOLE_IO_REPLY_HEADER_BYTES==120u) ? 1 : -1];
+static inline const uint8_t *console_io_request_payload(const console_io_request *request)
+{
+    return request ? request->data : NULL;
+}
+static inline uint8_t *console_io_reply_payload(console_io_reply *reply)
+{
+    return reply ? reply->data : NULL;
+}
 #endif

@@ -40,6 +40,7 @@ typedef struct console_client {
     CRITICAL_SECTION palette_lock;
     worker_base_publication *publisher;
     console_io_request request;
+    BYTE request_tile[CONSOLE_IO_TILE_BYTES];
     ntvdm_console_graphics *graphics;
     PALETTEENTRY text_palette[16];
     BOOL text_palette_valid;
@@ -576,7 +577,7 @@ DWORD WINAPI MvdmGetConsoleTitleA(LPSTR title,DWORD capacity)
     console_io_reply reply;
     DWORD error,result=0;
     if (!client) return GetConsoleTitleA(title,capacity);
-    if ((!title && capacity) || capacity>CONSOLE_IO_DATA_BYTES) {
+    if ((!title && capacity) || capacity>CONSOLE_IO_TILE_BYTES) {
         SetLastError(ERROR_INVALID_PARAMETER);return 0;
     }
     EnterCriticalSection(&client->lock);
@@ -603,13 +604,13 @@ BOOL WINAPI MvdmSetConsoleTitleA(LPCSTR title)
     size_t length;
     if (!client) return SetConsoleTitleA(title);
     if (!title) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
-    length=strnlen_s(title,CONSOLE_IO_DATA_BYTES);
-    if (length==CONSOLE_IO_DATA_BYTES) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
+    length=strnlen_s(title,CONSOLE_IO_TILE_BYTES);
+    if (length==CONSOLE_IO_TILE_BYTES) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
     EnterCriticalSection(&client->lock);
     ZeroMemory(&client->request,offsetof(console_io_request,data));
     client->request.operation=CONSOLE_IO_SET_TITLE_A;
     client->request.bytes=(DWORD)length+1;
-    memcpy(client->request.data,title,length+1);
+    client->request.data=(BYTE *)title;
     error=exchange(client,&reply);
     if (!error) { result=reply.result!=0;error=reply.error; }
     if(!error && result) {
@@ -701,11 +702,11 @@ BOOL WINAPI MvdmWriteConsoleA(HANDLE output,const VOID *buffer,DWORD length,
     if (client->channel.failure) { error=client->channel.failure;goto done; }
     do {
         chunk=length-total;
-        if (chunk>CONSOLE_IO_DATA_BYTES) chunk=CONSOLE_IO_DATA_BYTES;
+        if (chunk>CONSOLE_IO_MAX_DATA_BYTES) chunk=CONSOLE_IO_MAX_DATA_BYTES;
         ZeroMemory(&client->request,offsetof(console_io_request,data));
         client->request.operation=CONSOLE_IO_WRITE;
         client->request.bytes=chunk;
-        if (chunk) memcpy(client->request.data,cursor+total,chunk);
+        client->request.data=(BYTE *)(cursor+total);
         error=exchange(client,&reply);
         if (!error && reply.state.count>chunk)
             error=ERROR_INVALID_DATA;
@@ -906,7 +907,7 @@ static BOOL cells_operation(console_client *client,BOOL write,BOOL wide,CHAR_INF
         client->request.state.top=region->Top;client->request.state.bottom=region->Bottom;
         if (write) {
             client->request.bytes=sizeof(CHAR_INFO);
-            memcpy(client->request.data,buffer+origin.Y*(size_t)size.X+origin.X,sizeof(CHAR_INFO));
+            client->request.data=(BYTE *)(buffer+origin.Y*(size_t)size.X+origin.X);
         }
         error=exchange(client,&reply);ok=!error && reply.result;
         if (!error) {
@@ -917,11 +918,11 @@ static BOOL cells_operation(console_client *client,BOOL write,BOOL wide,CHAR_INF
         goto done_cells;
     }
     for (row=start_row;row<height && ok;row+=rows) {
-        rows=width-start_column<=(int)(CONSOLE_IO_DATA_BYTES/sizeof(CHAR_INFO)) ?
-            min(height-row,(int)(CONSOLE_IO_DATA_BYTES/sizeof(CHAR_INFO))/(width-start_column)) : 1;
+        rows=width-start_column<=(int)(CONSOLE_IO_TILE_BYTES/sizeof(CHAR_INFO)) ?
+            min(height-row,(int)(CONSOLE_IO_TILE_BYTES/sizeof(CHAR_INFO))/(width-start_column)) : 1;
         for (column=start_column;column<width;column+=tile) {
             console_io_state *s=&client->request.state;
-            tile=min(width-column,(int)(CONSOLE_IO_DATA_BYTES/sizeof(CHAR_INFO)));
+            tile=min(width-column,(int)(CONSOLE_IO_TILE_BYTES/sizeof(CHAR_INFO)));
             ZeroMemory(&client->request,offsetof(console_io_request,data));
             client->request.operation=operation;
             s->width=tile;s->height=rows;
@@ -929,7 +930,8 @@ static BOOL cells_operation(console_client *client,BOOL write,BOOL wide,CHAR_INF
             s->top=region->Top+row;s->bottom=s->top+rows-1;
             if (write) {
                 client->request.bytes=tile*rows*sizeof(CHAR_INFO);
-                for (r=0;r<rows;r++) memcpy(client->request.data+r*tile*sizeof(CHAR_INFO),
+                client->request.data=client->request_tile;
+                for (r=0;r<rows;r++) memcpy(client->request_tile+r*tile*sizeof(CHAR_INFO),
                     buffer+(origin.Y+row+r)*(size_t)size.X+origin.X+column,tile*sizeof(CHAR_INFO));
             }
             error=exchange(client,&reply);

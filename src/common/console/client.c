@@ -17,6 +17,8 @@ DWORD ntcon_worker_client_init(ntcon_worker_client *client,HANDLE pipe,HANDLE pe
 }
 void ntcon_worker_client_dispose(ntcon_worker_client *client)
 {
+    if(!client)return;
+    if(client->reply_payload)HeapFree(GetProcessHeap(),0,client->reply_payload);
     if(client->event)CloseHandle(client->event);
     ZeroMemory(client,sizeof(*client));
 }
@@ -40,7 +42,7 @@ DWORD ntcon_worker_prepare_text(ntcon_worker_client *client,COORD size)
 DWORD ntcon_worker_prepend_keys(ntcon_worker_client *client,const INPUT_RECORD *records,
     DWORD count,console_io_reply *reply)
 {
-    console_io_request request={0};DWORD i,error;
+    console_io_request request={0};console_io_input payload[CONSOLE_IO_INPUT_CAPACITY];DWORD i,error;
     if(!client || !reply || (!records && count) || count>CONSOLE_IO_INPUT_CAPACITY)
         return ERROR_INVALID_PARAMETER;
     request.operation=CONSOLE_IO_PREPEND_KEYS;request.state.count=count;
@@ -52,8 +54,9 @@ DWORD ntcon_worker_prepend_keys(ntcon_worker_client *client,const INPUT_RECORD *
         wire.repeat=key->wRepeatCount;wire.virtual_key=key->wVirtualKeyCode;
         wire.scan=key->wVirtualScanCode;wire.character=key->uChar.UnicodeChar;
         wire.control=key->dwControlKeyState;
-        memcpy(request.data+i*sizeof(wire),&wire,sizeof(wire));
+        payload[i]=wire;
     }
+    request.data=(BYTE *)payload;
     error=ntcon_worker_exchange(client,&request,reply);
     if(!error && reply->state.count>count)error=client->failure=ERROR_INVALID_DATA;
     return error;
@@ -65,10 +68,51 @@ static DWORD transfer(ntcon_worker_client *client,BOOL write,void *buffer,DWORD 
         COMMON_PIPE_PEER_DEATH_FIRST,ERROR_PIPE_NOT_CONNECTED,write,buffer,bytes,bytes);
 }
 
+static DWORD reserve_reply_payload(ntcon_worker_client *client,console_io_reply *reply)
+{
+    BYTE *copy;
+    if(client->reply_capacity>=reply->bytes) {
+        reply->data=client->reply_payload;return ERROR_SUCCESS;
+    }
+    copy=client->reply_payload ? HeapReAlloc(GetProcessHeap(),0,client->reply_payload,reply->bytes) :
+        HeapAlloc(GetProcessHeap(),0,reply->bytes);
+    if(!copy)return ERROR_NOT_ENOUGH_MEMORY;
+    client->reply_payload=copy;client->reply_capacity=reply->bytes;
+    reply->data=copy;return ERROR_SUCCESS;
+}
+
+static DWORD send_request(ntcon_worker_client *client,const console_io_request *request)
+{
+    DWORD error;
+    const BYTE *payload=console_io_request_payload(request);
+    if(request->bytes && !payload)return ERROR_INVALID_PARAMETER;
+    error=transfer(client,TRUE,(void *)request,CONSOLE_IO_REQUEST_HEADER_BYTES);
+    if(!error && request->bytes)error=transfer(client,TRUE,(void *)payload,request->bytes);
+    return error;
+}
+
+static DWORD ntcon_worker_send(ntcon_worker_client *client,console_io_request *request)
+{
+    DWORD error;
+    if(!client || !request || request->bytes>CONSOLE_IO_MAX_DATA_BYTES)
+        return ERROR_INVALID_PARAMETER;
+    if(client->failure)return client->failure;
+    if(!client->pipe)return ERROR_NOT_READY;
+    if(client->sequence==UINT32_MAX)return ERROR_ARITHMETIC_OVERFLOW;
+    request->version=CONSOLE_IO_VERSION;request->generation=client->generation;
+    request->reserved=0;
+    request->sequence=++client->sequence;
+    error=send_request(client,request);
+    if(error==ERROR_BROKEN_PIPE || error==ERROR_NO_DATA || error==ERROR_PIPE_NOT_CONNECTED)
+        error=ERROR_PIPE_NOT_CONNECTED;
+    if(error)client->failure=error;
+    return error;
+}
+
 DWORD ntcon_worker_exchange(ntcon_worker_client *client,console_io_request *request,console_io_reply *reply)
 {
     DWORD error;
-    if(!client || !request || !reply || request->bytes>CONSOLE_IO_DATA_BYTES)
+    if(!client || !request || !reply || request->bytes>CONSOLE_IO_MAX_DATA_BYTES)
         return ERROR_INVALID_PARAMETER;
     ZeroMemory(reply,sizeof(*reply));
     if(client->failure)return client->failure;
@@ -76,21 +120,20 @@ DWORD ntcon_worker_exchange(ntcon_worker_client *client,console_io_request *requ
      * mutate its sequence or latch a transfer error: the caller may bind a
      * newly authorized transport after the broker's disconnect barrier. */
     if(!client->pipe)return ERROR_NOT_READY;
-    if(client->sequence==UINT32_MAX)return ERROR_ARITHMETIC_OVERFLOW;
-    request->version=CONSOLE_IO_VERSION;request->generation=client->generation;
-    request->sequence=++client->sequence;
-    error=transfer(client,TRUE,request,(DWORD)offsetof(console_io_request,data)+request->bytes);
-    if(!error)error=transfer(client,FALSE,reply,(DWORD)offsetof(console_io_reply,data));
+    error=ntcon_worker_send(client,request);
+    if(!error)error=transfer(client,FALSE,reply,CONSOLE_IO_REPLY_HEADER_BYTES);
     if(!error && (reply->version!=CONSOLE_IO_VERSION || reply->generation!=client->generation ||
         reply->sequence!=client->sequence || reply->result>1 || (reply->result && reply->error) ||
-        reply->bytes>CONSOLE_IO_DATA_BYTES ||
+        reply->reserved || reply->padding ||
+        reply->bytes>CONSOLE_IO_MAX_DATA_BYTES ||
         (reply->bytes && request->operation!=CONSOLE_IO_GET_TITLE_A &&
             request->operation!=CONSOLE_IO_KEYBOARD_LAYOUT &&
             request->operation!=CONSOLE_IO_READ_TEXT_CONFIGURATION &&
             request->operation!=CONSOLE_IO_READ_INPUT && request->operation!=CONSOLE_IO_PEEK_INPUT &&
             (request->operation<CONSOLE_IO_READ_CELLS_A || request->operation>CONSOLE_IO_READ_CELLS_W))))
         error=ERROR_INVALID_DATA;
-    if(!error)error=transfer(client,FALSE,reply->data,reply->bytes);
+    if(!error)error=reserve_reply_payload(client,reply);
+    if(!error && reply->bytes)error=transfer(client,FALSE,console_io_reply_payload(reply),reply->bytes);
     if(error==ERROR_BROKEN_PIPE || error==ERROR_NO_DATA || error==ERROR_PIPE_NOT_CONNECTED)
         error=ERROR_PIPE_NOT_CONNECTED;
     if(error)client->failure=error;
@@ -114,14 +157,19 @@ DWORD ntcon_worker_video(ntcon_worker_client *client,const console_video_descrip
     request.state.mode=++client->video_serial;
     request.operation=description ? CONSOLE_IO_VIDEO_BEGIN : CONSOLE_IO_VIDEO_TEXT;
     if(description) {
-        request.bytes=sizeof(*description);memcpy(request.data,description,sizeof(*description));
+        request.bytes=sizeof(*description);request.data=(BYTE *)description;
     }
     error=ntcon_worker_call(client,&request,&reply);
     while(!error && description && offset<description->bytes) {
-        count=min(description->bytes-offset,CONSOLE_IO_DATA_BYTES);
+        count=min(description->bytes-offset,CONSOLE_IO_MAX_DATA_BYTES);
         request.operation=CONSOLE_IO_VIDEO_DATA;request.state.count=offset;request.bytes=count;
-        memcpy(request.data,(const BYTE *)pixels+offset,count);
-        error=ntcon_worker_call(client,&request,&reply);offset+=count;
+        request.data=(BYTE *)pixels+offset;
+        /* Larger frames remain bounded parts, but only the final part waits
+         * for the one frame-level result.  A peer failure on an earlier part
+         * is observed by the next send/final reply as a broken endpoint. */
+        error=offset+count==description->bytes ?
+            ntcon_worker_call(client,&request,&reply) : ntcon_worker_send(client,&request);
+        offset+=count;
     }
     return error;
 }
@@ -135,7 +183,7 @@ DWORD ntcon_worker_publish_title(ntcon_worker_client *client,const char *title)
     if(length==CONSOLE_IO_TITLE_BYTES)return ERROR_INVALID_PARAMETER;
     request.operation=CONSOLE_IO_PUBLISH_TITLE_A;
     request.bytes=(uint32_t)length+1;
-    memcpy(request.data,title,request.bytes);
+    request.data=(BYTE *)title;
     return ntcon_worker_call(client,&request,&reply);
 }
 

@@ -914,7 +914,7 @@ DWORD frontend_session_read_text_configuration(frontend_session *frontend,
     if(offset>=total || (!revision && offset))return ERROR_INVALID_PARAMETER;
     if(!frontend->text_revision)return ERROR_NOT_FOUND;
     if(revision && revision!=frontend->text_revision)return ERROR_RETRY;
-    count=min(total-offset,CONSOLE_IO_DATA_BYTES);
+    count=min(total-offset,CONSOLE_IO_TILE_BYTES);
     memcpy(reply->data,(BYTE *)&frontend->text_configuration+offset,count);
     reply->bytes=count;reply->state.count=total;reply->state.mode=frontend->text_revision;
     return ERROR_SUCCESS;

@@ -10,6 +10,8 @@
 typedef struct ntcon_worker_client {
     HANDLE pipe,peer,cancel,event;
     DWORD generation,sequence,failure,video_serial;
+    BYTE *reply_payload;
+    DWORD reply_capacity;
 } ntcon_worker_client;
 
 /* Borrow pipe/peer/cancel; own only the overlapped event. Init requires zero

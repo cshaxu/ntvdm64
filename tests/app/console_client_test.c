@@ -6,6 +6,7 @@
 #include "ntvdm-exe/win32/console_text.h"
 #include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h"
 #include "ntcon-exe/console_frontend.h"
+#include "common/console/client.h"
 #include "common/protocol/frontend_protocol.h"
 static BOOL native_write_cells(HANDLE output,const CHAR_INFO *buffer,COORD size,
     COORD origin,PSMALL_RECT region) { return WriteConsoleOutputW(output,buffer,size,origin,region); }
@@ -164,18 +165,33 @@ static BOOL transfer(BOOL write,void *buffer,DWORD size)
 }
 static DWORD WINAPI serve(void *unused)
 {
-    console_io_request request;
+    console_io_request request={0};
     console_io_reply reply;
+    BYTE reply_data[CONSOLE_IO_TILE_BYTES];
     (void)unused;
-    while (transfer(FALSE,&request,(DWORD)offsetof(console_io_request,data))) {
+    while (transfer(FALSE,&request,CONSOLE_IO_REQUEST_HEADER_BYTES)) {
+        BOOL video_part,video_final=FALSE;
+        if(request.data) { HeapFree(GetProcessHeap(),0,(void *)request.data);request.data=NULL; }
         if (WaitForSingleObject(stop,0)==WAIT_OBJECT_0) break;
-        CHECK(request.bytes<=CONSOLE_IO_DATA_BYTES);
-        CHECK(transfer(FALSE,request.data,request.bytes));
+        CHECK(request.bytes<=CONSOLE_IO_MAX_DATA_BYTES);
+        if(request.bytes) { request.data=HeapAlloc(GetProcessHeap(),0,request.bytes);CHECK(request.data); }
+        CHECK(!request.bytes || transfer(FALSE,(void *)console_io_request_payload(&request),request.bytes));
+        video_part=request.operation==CONSOLE_IO_VIDEO_DATA;
+        if(video_part && frontend.video.pending && request.state.mode==frontend.video.pending_serial &&
+            request.state.count==frontend.video.received && request.bytes==
+                frontend.video.pending_description.bytes-frontend.video.received)
+            video_final=TRUE;
+        reply.data=reply_data;
         CHECK(!frontend_console_dispatch(&frontend,&request,&reply));
-        CHECK(transfer(TRUE,&reply,(DWORD)offsetof(console_io_reply,data)+reply.bytes));
+        if(video_part && !video_final) {
+            CHECK(reply.result);continue;
+        }
+        CHECK(transfer(TRUE,&reply,CONSOLE_IO_REPLY_HEADER_BYTES));
+        CHECK(!reply.bytes || transfer(TRUE,reply.data,reply.bytes));
         if(request.operation==CONSOLE_IO_VIDEO_DATA || request.operation==CONSOLE_IO_VIDEO_TEXT)
             SetEvent(video_wait);
     }
+    if(request.data)HeapFree(GetProcessHeap(),0,(void *)request.data);
     CloseHandle(peer);return 0;
 }
 static BOOL wait_video_serial(DWORD serial)
@@ -201,6 +217,42 @@ static void create_transport(void)
     frontend.sequence=0;
     server_thread=CreateThread(NULL,0,serve,NULL,0,NULL);CHECK(server_thread);
 }
+static int variable_video_case(void)
+{
+    ntcon_worker_client client={0};
+    console_video_description description={0};
+    BYTE *pixels;
+    DWORD before;
+    CHECK(!ntcon_worker_client_init(&client,delivery,frontend_process,stop,17));
+    description.width=640;description.height=480;description.stride=640;
+    description.depth=8;description.bytes=640u*480u;description.palette[1]=0x123456;
+    pixels=HeapAlloc(GetProcessHeap(),0,description.bytes);CHECK(pixels);
+    if(pixels) {
+        memset(pixels,0x81,description.bytes);before=frontend.sequence;
+        CHECK(!ntcon_worker_video(&client,&description,pixels));
+        CHECK(frontend.sequence==before+2 && frontend.video.published_serial==1 &&
+            frontend.video.pixels && frontend.video.pixels[description.bytes-1]==0x81);
+        HeapFree(GetProcessHeap(),0,pixels);
+    }
+    description.width=1280;description.height=1024;description.stride=1280;
+    description.bytes=1280u*1024u;
+    pixels=HeapAlloc(GetProcessHeap(),0,description.bytes);CHECK(pixels);
+    if(pixels) {
+        memset(pixels,0x42,description.bytes);before=frontend.sequence;
+        CHECK(!ntcon_worker_video(&client,&description,pixels));
+        CHECK(frontend.sequence==before+3 && frontend.video.published_serial==2 &&
+            frontend.video.pixels && frontend.video.pixels[description.bytes-1]==0x42);
+        HeapFree(GetProcessHeap(),0,pixels);
+    }
+    ntcon_worker_client_dispose(&client);
+    CHECK(SetEvent(stop));CloseHandle(delivery);delivery=NULL;
+    CHECK(WaitForSingleObject(server_thread,5000)==WAIT_OBJECT_0);
+    CloseHandle(server_thread);server_thread=NULL;
+    CloseHandle(frontend_process);frontend_process=NULL;
+    frontend_video_dispose(&frontend.video);
+    printf("PASS variable records: 307200B uses BEGIN+one payload; 1310720B uses BEGIN+two payload parts and one final reply\n");
+    return 0;
+}
 int main(int argc,char **argv)
 {
     HANDLE local;
@@ -218,6 +270,7 @@ int main(int argc,char **argv)
     int i;
     HANDLE stable_wait;
     BOOL broken_pipe=argc==2 && !strcmp(argv[1],"--broken-pipe");
+    BOOL variable_video=argc==2 && !strcmp(argv[1],"--variable-video");
     hang_close=argc==2 && !strcmp(argv[1],"--close-hang");
     if (argc==2 && !strcmp(argv[1],"--readiness-peer")) { Sleep(INFINITE);return 0; }
     if (broken_pipe) {
@@ -248,6 +301,7 @@ int main(int argc,char **argv)
     CHECK(SetConsoleActiveScreenBuffer(frontend.output));
     stop=CreateEventW(NULL,TRUE,FALSE,NULL);video_wait=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(stop && video_wait);
     create_transport();
+    if(variable_video)return variable_video_case();
     CHECK(!ntvdm_console_client_begin(&owner));bound=&owner;
     {
         mvdm_mouse_bridge *mouse=mvdm_softpc_mouse_current();
@@ -391,7 +445,7 @@ int main(int argc,char **argv)
         }
         sequence=frontend.sequence;
         CHECK(!SetConsoleTitleA(NULL) && GetLastError()==ERROR_INVALID_PARAMETER);
-        CHECK(!GetConsoleTitleA(actual_title,CONSOLE_IO_DATA_BYTES+1) &&
+        CHECK(!GetConsoleTitleA(actual_title,CONSOLE_IO_TILE_BYTES+1) &&
             GetLastError()==ERROR_INVALID_PARAMETER && frontend.sequence==sequence);
         bound=NULL;
         CHECK(SetConsoleTitleA("NATIVE-TITLE"));
@@ -746,20 +800,35 @@ int main(int argc,char **argv)
     CHECK(ResetEvent(stable_wait) && WaitForSingleObject(stable_wait,0)==WAIT_TIMEOUT);
     {
         console_video_description description={0};
-        BYTE *pixels=HeapAlloc(GetProcessHeap(),0,64000);
+        DWORD sequence=frontend.sequence;
+        BYTE *pixels=HeapAlloc(GetProcessHeap(),0,640u*480u);
         CHECK(pixels);
-        description.width=320;description.height=200;description.stride=320;
-        description.depth=8;description.bytes=64000;description.palette[1]=0x123456;
-        memset(pixels,0x81,64000);
-        CHECK(!ntvdm_console_publish_video(&description,pixels,63999));
+        description.width=640;description.height=480;description.stride=640;
+        description.depth=8;description.bytes=640u*480u;description.palette[1]=0x123456;
+        memset(pixels,0x81,description.bytes);
+        CHECK(!ntvdm_console_publish_video(&description,pixels,description.bytes-1));
         CHECK(GetLastError()==ERROR_INVALID_PARAMETER);
-        CHECK(ntvdm_console_publish_video(&description,pixels,64000));
+        CHECK(ntvdm_console_publish_video(&description,pixels,description.bytes));
         CHECK(wait_video_serial(1));
-        CHECK(frontend.video.published_serial==1 && frontend.video.description.bytes==64000);
-        CHECK(frontend.video.pixels[0]==0x81 && frontend.video.pixels[63999]==0x81);
+        /* BEGIN plus one variable-length payload record: no 16 KiB request/
+         * reply staircase remains for a normal VGA frame. */
+        CHECK(frontend.sequence==sequence+2);
+        CHECK(frontend.video.published_serial==1 && frontend.video.description.bytes==description.bytes);
+        CHECK(frontend.video.pixels[0]==0x81 && frontend.video.pixels[description.bytes-1]==0x81);
         CHECK(frontend.video.description.palette[1]==0x123456);
+        /* Above the one-MiB record ceiling, parts are still ordered but only
+         * the completed frame returns a reply: BEGIN + two parts. */
+        HeapFree(GetProcessHeap(),0,pixels);
+        description.width=1280;description.height=1024;description.stride=1280;
+        description.bytes=1280u*1024u;sequence=frontend.sequence;
+        pixels=HeapAlloc(GetProcessHeap(),0,description.bytes);CHECK(pixels);
+        memset(pixels,0x42,description.bytes);
+        CHECK(ntvdm_console_publish_video(&description,pixels,description.bytes));
+        CHECK(wait_video_serial(2));
+        CHECK(frontend.sequence==sequence+3 && frontend.video.published_serial==2 &&
+            frontend.video.pixels[description.bytes-1]==0x42);
         CHECK(ntvdm_console_publish_video(NULL,NULL,0));
-        CHECK(!frontend.video.pixels && !frontend.video.pending && frontend.video.serial==2);
+        CHECK(!frontend.video.pixels && !frontend.video.pending && frontend.video.serial==3);
         HeapFree(GetProcessHeap(),0,pixels);
     }
     {

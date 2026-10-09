@@ -7,6 +7,7 @@
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"FAIL %d error=%lu\n",__LINE__,GetLastError()); return 1; } } while (0)
 static console_io_request request;
 static console_io_reply reply;
+static BYTE request_data[CONSOLE_IO_TILE_BYTES],reply_data[CONSOLE_IO_TILE_BYTES];
 static DWORD begin_error,end_error,screen_begins,screen_ends,screen_leaves;
 static BOOL screen_written;
 static DWORD title_notifications;
@@ -44,6 +45,7 @@ static DWORD relative_input(void *context,BOOL peek,INPUT_RECORD *records,DWORD 
 static void operation(frontend_console *owner,uint32_t op)
 {
     ZeroMemory(&request,sizeof(request));
+    request.data=request_data;reply.data=reply_data;
     request.version=CONSOLE_IO_VERSION; request.generation=owner->generation;
     request.sequence=owner->sequence+1; request.operation=op;
 }
@@ -90,7 +92,8 @@ int main(void)
     owner.output=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,
         FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CONSOLE_TEXTMODE_BUFFER,NULL);
     CHECK(owner.input!=INVALID_HANDLE_VALUE && owner.output!=INVALID_HANDLE_VALUE);
-    CHECK(sizeof(console_io_state)==88 && offsetof(console_io_reply,data)==112);
+    CHECK(sizeof(console_io_state)==88 && CONSOLE_IO_REQUEST_HEADER_BYTES==112 &&
+        CONSOLE_IO_REPLY_HEADER_BYTES==120);
     operation(&owner,CONSOLE_IO_SCREEN_INFO);
     request.version++;
     CHECK(frontend_console_dispatch(&owner,&request,&reply)==ERROR_REVISION_MISMATCH && !owner.sequence);
@@ -123,7 +126,7 @@ int main(void)
     operation(&owner,CONSOLE_IO_ATTRIBUTE);request.state.attribute=0x1f;
     CHECK(!frontend_console_dispatch(&owner,&request,&reply) && reply.result);
     operation(&owner,CONSOLE_IO_WRITE);
-    request.bytes=CONSOLE_IO_DATA_BYTES+1;
+    request.bytes=CONSOLE_IO_MAX_DATA_BYTES+1;
     CHECK(frontend_console_dispatch(&owner,&request,&reply)==ERROR_INVALID_DATA);
     request.bytes=4;memcpy(request.data,"A\r\nB",4);
     CHECK(!frontend_console_dispatch(&owner,&request,&reply) && reply.result && reply.state.count==4);
@@ -156,7 +159,7 @@ int main(void)
     request.data[0]=0;request.data[2]=0;
     CHECK(frontend_console_dispatch(&owner,&request,&reply)==ERROR_INVALID_DATA);
     {
-        char original[CONSOLE_IO_DATA_BYTES],actual[CONSOLE_IO_DATA_BYTES];
+        char original[CONSOLE_IO_TILE_BYTES],actual[CONSOLE_IO_TILE_BYTES];
         GetConsoleTitleA(original,sizeof(original));
         operation(&owner,CONSOLE_IO_SET_TITLE_A);
         request.bytes=sizeof("S36-ATTACHED-CONSOLE");
@@ -176,7 +179,7 @@ int main(void)
     memcpy(request.data,"S36-NESTED-CMD",request.bytes);
     CHECK(!frontend_console_dispatch(&owner,&request,&reply) && reply.result &&
         published_titles==1 && !strcmp(last_published_title,"S36-NESTED-CMD"));
-    operation(&owner,CONSOLE_IO_GET_TITLE_A);request.state.count=CONSOLE_IO_DATA_BYTES+1;
+    operation(&owner,CONSOLE_IO_GET_TITLE_A);request.state.count=CONSOLE_IO_TILE_BYTES+1;
     CHECK(frontend_console_dispatch(&owner,&request,&reply)==ERROR_INVALID_DATA);
     operation(&owner,CONSOLE_IO_SET_POINTER_CLIP);request.state.has_clip=2;
     CHECK(frontend_console_dispatch(&owner,&request,&reply)==ERROR_INVALID_DATA);

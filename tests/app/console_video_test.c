@@ -97,9 +97,11 @@ int main(void)
     frontend_console owner={0};
     console_io_request request={0};
     console_io_reply reply;
+    BYTE request_data[64000],reply_data[CONSOLE_IO_TILE_BYTES];
     console_video_description description={0};
     uint32_t offset,count;
     REQUIRE(!staged_publication());
+    request.data=request_data;reply.data=reply_data;
     owner.generation=71;
     description.width=320; description.height=200; description.depth=8;
     description.stride=320; description.bytes=64000; description.palette[1]=0x00123456;
@@ -107,9 +109,9 @@ int main(void)
     REQUIRE(dispatch_frame(&owner,&request,&reply,CONSOLE_IO_VIDEO_BEGIN,1)==0 && reply.result);
     REQUIRE(!owner.video.pixels && owner.video.pending);
     for(offset=0;offset<64000;offset+=count) {
-        count=64000-offset; if(count>CONSOLE_IO_DATA_BYTES) count=CONSOLE_IO_DATA_BYTES;
+        count=64000-offset; if(count>CONSOLE_IO_TILE_BYTES) count=CONSOLE_IO_TILE_BYTES;
         request.bytes=count; request.state.count=offset;
-        memset(request.data,(int)(offset/CONSOLE_IO_DATA_BYTES+1),count);
+        memset(request.data,(int)(offset/CONSOLE_IO_TILE_BYTES+1),count);
         REQUIRE(dispatch_frame(&owner,&request,&reply,CONSOLE_IO_VIDEO_DATA,1)==0 && reply.result);
         if(offset+count<64000) REQUIRE(!owner.video.pixels);
     }
@@ -156,9 +158,9 @@ int main(void)
     memcpy(request.data,&description,sizeof(description)); request.bytes=sizeof(description);
     REQUIRE(dispatch_frame(&owner,&request,&reply,CONSOLE_IO_VIDEO_BEGIN,1)==0 && reply.result);
     for(offset=0;offset<64000;offset+=count) {
-        count=64000-offset; if(count>CONSOLE_IO_DATA_BYTES) count=CONSOLE_IO_DATA_BYTES;
+        count=64000-offset; if(count>CONSOLE_IO_TILE_BYTES) count=CONSOLE_IO_TILE_BYTES;
         request.bytes=count; request.state.count=offset;
-        memset(request.data,(int)(offset/CONSOLE_IO_DATA_BYTES+1),count);
+        memset(request.data,(int)(offset/CONSOLE_IO_TILE_BYTES+1),count);
         REQUIRE(dispatch_frame(&owner,&request,&reply,CONSOLE_IO_VIDEO_DATA,1)==0 && reply.result);
     }
     request.state.count=0;

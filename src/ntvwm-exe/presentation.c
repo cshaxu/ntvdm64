@@ -70,10 +70,10 @@ DWORD ntvwm_presentation_call(ntvwm_presentation *client,const console_io_reques
     console_io_reply *reply)
 {
     console_io_request request;DWORD error;
-    if(!client || !input || !reply || input->bytes>CONSOLE_IO_DATA_BYTES ||
+    if(!client || !input || !reply || input->bytes>CONSOLE_IO_MAX_DATA_BYTES ||
         input->operation<CONSOLE_IO_WRITE || input->operation>CONSOLE_IO_PREPARE_TEXT_REGION)
         return ERROR_INVALID_PARAMETER;
-    memcpy(&request,input,offsetof(console_io_request,data)+input->bytes);
+    memcpy(&request,input,sizeof(request));
     EnterCriticalSection(&client->lock);error=exchange(client,&request,reply);
     LeaveCriticalSection(&client->lock);return error;
 }
@@ -273,7 +273,7 @@ static DWORD publish_copy(void *context,const void *copy,SIZE_T bytes)
     for(offset=0;!error && offset<total;offset+=count) {
         ZeroMemory(&request,sizeof(request));
         count=min((DWORD)snapshot->info.dwSize.X-offset%snapshot->info.dwSize.X,
-            CONSOLE_IO_DATA_BYTES/sizeof(console_io_cell));
+            CONSOLE_IO_TILE_BYTES/sizeof(console_io_cell));
         /* A sampled cursor/font change is not a write to every Console row.
          * Derive dirty rows at this native producer, like VGA calc_update;
          * explicit exchange/text publications remain completely unfiltered. */
@@ -284,7 +284,7 @@ static DWORD publish_copy(void *context,const void *copy,SIZE_T bytes)
         request.state.left=offset%snapshot->info.dwSize.X;request.state.right=request.state.left+count-1;
         request.state.top=request.state.bottom=offset/snapshot->info.dwSize.X;
         request.bytes=count*sizeof(console_io_cell);
-        memcpy(request.data,cells+offset,request.bytes);
+        request.data=(BYTE *)(cells+offset);
         error=exchange(client,&request,&reply);
     }
     if(!error) {
@@ -345,7 +345,7 @@ static DWORD read_configuration(ntvwm_presentation *client,console_text_configur
         if(error)return error;
         if(!reply.state.mode || (revision && revision!=reply.state.mode) ||
             reply.state.count!=sizeof(*configuration) ||
-            reply.bytes!=min(sizeof(*configuration)-offset,CONSOLE_IO_DATA_BYTES))return ERROR_INVALID_DATA;
+            reply.bytes!=min(sizeof(*configuration)-offset,CONSOLE_IO_TILE_BYTES))return ERROR_INVALID_DATA;
         revision=reply.state.mode;
         memcpy((BYTE *)configuration+offset,reply.data,reply.bytes);offset+=reply.bytes;
     }
@@ -391,9 +391,9 @@ DWORD ntvwm_presentation_seed(ntvwm_presentation *client,HANDLE output)
     }
     cursor.dwSize=reply.state.cursor_size;cursor.bVisible=reply.state.cursor_visible;
     while(offset<total) {
-        DWORD columns=min(width-offset%width,CONSOLE_IO_DATA_BYTES/sizeof(console_io_cell));
+        DWORD columns=min(width-offset%width,CONSOLE_IO_TILE_BYTES/sizeof(console_io_cell));
         DWORD rows=offset%width || columns!=width ? 1 :
-            min((total-offset)/width,(CONSOLE_IO_DATA_BYTES/sizeof(console_io_cell))/width);
+            min((total-offset)/width,(CONSOLE_IO_TILE_BYTES/sizeof(console_io_cell))/width);
         count=columns*rows;
         request.operation=CONSOLE_IO_READ_CELLS_W;
         request.state.width=columns;request.state.height=rows;
@@ -437,9 +437,9 @@ DWORD ntvwm_presentation_seed(ntvwm_presentation *client,HANDLE output)
     info.wAttributes=(WORD)screen.attribute;
     error=ntvwm_screen_apply(output,&info,&cursor);
     for(offset=0;!error && offset<total;offset+=count) {
-        count=min(width-offset%width,CONSOLE_IO_DATA_BYTES/sizeof(console_io_cell));
+        count=min(width-offset%width,CONSOLE_IO_TILE_BYTES/sizeof(console_io_cell));
         if(!(offset%width) && count==width)
-            count=width*min((total-offset)/width,(CONSOLE_IO_DATA_BYTES/sizeof(console_io_cell))/width);
+            count=width*min((total-offset)/width,(CONSOLE_IO_TILE_BYTES/sizeof(console_io_cell))/width);
         error=ntvwm_cells_write(output,offset,cells+offset,count);
     }
     /* Seed is the acknowledged common screen. Publish subsequent changes,

@@ -78,6 +78,44 @@ int main(void)
     CloseHandle(mutex);
     worker_base_publication_destroy(publisher);ntvdm_console_graphics_destroy(graphics);current=NULL;
     CloseHandle(delivered);CloseHandle(shutdown);
-    puts("PASS graphics source: 200 DIB invalidations coalesce before one deferred full-frame capture/send");
+    /* PAL-colour graphics become active before the palette arrives. The
+     * first capture is deliberately deferred, and the palette installation
+     * must re-signal the same publisher instead of poisoning it with
+     * ERROR_NOT_READY. */
+    {
+        LOGPALETTE *logical;
+        struct { BITMAPINFOHEADER header;WORD colours[256]; } pal_bitmap={0};
+        PALETTEENTRY entries[256]={0};
+        HANDLE pal_surface,pal_mutex;
+        HPALETTE palette;
+        shutdown=CreateEventW(NULL,TRUE,FALSE,NULL);delivered=CreateEventW(NULL,TRUE,FALSE,NULL);
+        CHECK(shutdown && delivered);
+        graphics=ntvdm_console_graphics_create();CHECK(graphics);current=graphics;
+        publisher=worker_base_publication_create(send_frame,NULL,shutdown);CHECK(publisher);
+        CHECK(!ntvdm_console_graphics_attach_publisher(graphics,publisher));
+        CHECK(!worker_base_publication_active(publisher,TRUE));
+        pal_bitmap.header.biSize=sizeof(pal_bitmap.header);pal_bitmap.header.biWidth=8;
+        pal_bitmap.header.biHeight=-2;pal_bitmap.header.biPlanes=1;pal_bitmap.header.biBitCount=8;
+        for(index=0;index<256;++index)pal_bitmap.colours[index]=(WORD)index;
+        info.lpBitMapInfo=(BITMAPINFO *)&pal_bitmap;info.dwBitMapInfoLength=sizeof(pal_bitmap);
+        info.dwUsage=DIB_PAL_COLORS;
+        pal_surface=MvdmCreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,
+            FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CONSOLE_GRAPHICS_BUFFER,&info);
+        CHECK(pal_surface!=INVALID_HANDLE_VALUE && info.hMutex && info.lpBitMap);
+        pal_mutex=info.hMutex;
+        CHECK(MvdmSetConsoleActiveScreenBuffer(pal_surface));
+        CHECK(WaitForSingleObject(delivered,80)==WAIT_TIMEOUT);
+        logical=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*logical)+255*sizeof(PALETTEENTRY));
+        CHECK(logical);
+        logical->palVersion=0x300;logical->palNumEntries=256;
+        memcpy(logical->palPalEntry,entries,sizeof(entries));
+        palette=CreatePalette(logical);HeapFree(GetProcessHeap(),0,logical);CHECK(palette);
+        CHECK(ntvdm_console_graphics_palette(pal_surface,palette,SYSPAL_STATIC)==1);
+        CHECK(WaitForSingleObject(delivered,5000)==WAIT_OBJECT_0);
+        CHECK(MvdmCloseConsoleHandle(pal_surface));CloseHandle(pal_mutex);
+        worker_base_publication_destroy(publisher);ntvdm_console_graphics_destroy(graphics);current=NULL;
+        CloseHandle(delivered);CloseHandle(shutdown);
+    }
+    puts("PASS graphics source: 200 DIB invalidations coalesce before one deferred full-frame capture/send; palette-late DIB defers without poisoning publication");
     return 0;
 }

@@ -89,13 +89,16 @@ DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request
     DWORD count=0,mode=0;
     BOOL ok=FALSE;
     BOOL cells,write_cells,screen_operation,screen_write;
+    BYTE *reply_data;
     if (!owner || !request || !reply) return ERROR_INVALID_PARAMETER;
+    reply_data=reply->data;
     if (!!owner->screen_begin != !!owner->screen_end) return ERROR_INVALID_PARAMETER;
-    ZeroMemory(reply,sizeof(*reply));
+    ZeroMemory(reply,sizeof(*reply));reply->data=reply_data;
     if (request->version!=CONSOLE_IO_VERSION) return ERROR_REVISION_MISMATCH;
     if (!owner->generation || request->generation!=owner->generation) return ERROR_ACCESS_DENIED;
     if (!request->sequence || owner->sequence==UINT32_MAX ||
-        request->sequence!=owner->sequence+1 || request->bytes>CONSOLE_IO_DATA_BYTES ||
+        request->sequence!=owner->sequence+1 || request->bytes>CONSOLE_IO_MAX_DATA_BYTES ||
+        (request->bytes && !request->data) ||
         request->operation<CONSOLE_IO_WRITE || request->operation>CONSOLE_IO_PREPARE_TEXT_REGION)
         return ERROR_INVALID_DATA;
     cells=request->operation>=CONSOLE_IO_READ_CELLS_A && request->operation<=CONSOLE_IO_WRITE_CELLS_W;
@@ -111,14 +114,14 @@ DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request
     if (request->operation==CONSOLE_IO_VIDEO_BEGIN &&
         request->bytes!=sizeof(console_video_description)) return ERROR_INVALID_DATA;
     if (request->operation==CONSOLE_IO_VIDEO_DATA && !request->bytes) return ERROR_INVALID_DATA;
-    if (request->operation==CONSOLE_IO_GET_TITLE_A && s->count>CONSOLE_IO_DATA_BYTES)
+    if (request->operation==CONSOLE_IO_GET_TITLE_A && s->count>CONSOLE_IO_TILE_BYTES)
         return ERROR_INVALID_DATA;
     if (request->operation==CONSOLE_IO_SET_TITLE_A && (!request->bytes ||
-        memchr(request->data,0,request->bytes)!=request->data+request->bytes-1))
+        memchr(console_io_request_payload(request),0,request->bytes)!=console_io_request_payload(request)+request->bytes-1))
         return ERROR_INVALID_DATA;
     if (request->operation==CONSOLE_IO_PUBLISH_TITLE_A && (!request->bytes ||
         request->bytes>CONSOLE_IO_TITLE_BYTES ||
-        memchr(request->data,0,request->bytes)!=request->data+request->bytes-1))
+        memchr(console_io_request_payload(request),0,request->bytes)!=console_io_request_payload(request)+request->bytes-1))
         return ERROR_INVALID_DATA;
     if (request->operation==CONSOLE_IO_PREPEND_KEYS &&
         (s->count>CONSOLE_IO_INPUT_CAPACITY || request->bytes!=s->count*sizeof(console_io_input)))
@@ -133,7 +136,7 @@ DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request
         return ERROR_INVALID_DATA;
     if (request->operation==CONSOLE_IO_CURRENT_FONT && s->mode>1) return ERROR_INVALID_DATA;
     if (cells && (s->width<=0 || s->height<=0 || s->width>SHRT_MAX || s->height>SHRT_MAX ||
-        (uint64_t)s->width*s->height>CONSOLE_IO_DATA_BYTES/sizeof(CHAR_INFO) ||
+        (uint64_t)s->width*s->height>CONSOLE_IO_TILE_BYTES/sizeof(CHAR_INFO) ||
         (write_cells && request->bytes!=(uint32_t)(s->width*s->height*sizeof(CHAR_INFO)))))
         return ERROR_INVALID_DATA;
     if ((request->operation!=CONSOLE_IO_WINDOW_QUERY &&
@@ -205,13 +208,13 @@ DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request
     }
     case CONSOLE_IO_VIDEO_BEGIN: {
         console_video_description description;
-        memcpy(&description,request->data,sizeof(description));
+        memcpy(&description,console_io_request_payload(request),sizeof(description));
         mode=frontend_video_begin(&owner->video,s->mode,&description);
         ok=mode==ERROR_SUCCESS;SetLastError(mode);break;
     }
     case CONSOLE_IO_VIDEO_DATA:
-        mode=owner->video_data ? owner->video_data(owner->io_context,s->mode,s->count,request->data,request->bytes) :
-            frontend_video_data(&owner->video,s->mode,s->count,request->data,request->bytes);
+        mode=owner->video_data ? owner->video_data(owner->io_context,s->mode,s->count,console_io_request_payload(request),request->bytes) :
+            frontend_video_data(&owner->video,s->mode,s->count,console_io_request_payload(request),request->bytes);
         ok=mode==ERROR_SUCCESS;SetLastError(mode);break;
     case CONSOLE_IO_VIDEO_TEXT:
         mode=frontend_video_text(&owner->video,s->mode);
@@ -279,11 +282,11 @@ DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request
         SetLastError(mode);
         break;
     case CONSOLE_IO_SET_TITLE_A:
-        ok=SetConsoleTitleA((LPCSTR)request->data);
+        ok=SetConsoleTitleA((LPCSTR)console_io_request_payload(request));
         if(ok && owner->title_changed)owner->title_changed(owner->io_context);
         break;
     case CONSOLE_IO_PUBLISH_TITLE_A:
-        if(owner->publish_title)owner->publish_title(owner->io_context,(const char *)request->data);
+        if(owner->publish_title)owner->publish_title(owner->io_context,(const char *)console_io_request_payload(request));
         ok=owner->publish_title!=NULL;
         if(!ok)SetLastError(ERROR_INVALID_FUNCTION);
         break;
@@ -322,7 +325,7 @@ DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request
         ok=reply->state.count!=0;
         break;
     case CONSOLE_IO_WRITE:
-        ok=WriteConsoleA(owner->output,request->data,request->bytes,&count,NULL);
+        ok=WriteConsoleA(owner->output,console_io_request_payload(request),request->bytes,&count,NULL);
         reply->state.count=count;
         break;
     case CONSOLE_IO_SCREEN_INFO: {
@@ -407,7 +410,7 @@ DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request
         ZeroMemory(records,sizeof(records));
         for (i=0;i<s->count;i++) {
             console_io_input wire;
-            memcpy(&wire,request->data+i*sizeof(wire),sizeof(wire));
+            memcpy(&wire,console_io_request_payload(request)+i*sizeof(wire),sizeof(wire));
             if (wire.type!=KEY_EVENT || wire.key_down>1 || wire.repeat>UINT16_MAX ||
                 wire.virtual_key>UINT16_MAX || wire.scan>UINT16_MAX || wire.character>UINT16_MAX) {
                 SetLastError(ERROR_INVALID_DATA);break;
@@ -513,7 +516,7 @@ DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request
         CHAR_INFO *buffer=(CHAR_INFO *)reply->data;
         /* CHAR_INFO is two 16-bit scalar fields on the selected Windows ABI.
          * Copy, never interpret a native address received from the peer. */
-        if (write_cells) memcpy(buffer,request->data,request->bytes);
+        if (write_cells) memcpy(buffer,console_io_request_payload(request),request->bytes);
         if (request->operation==CONSOLE_IO_WRITE_CELLS_A)
             ok=WriteConsoleOutputA(owner->output,buffer,size,origin,&rect);
         else if (request->operation==CONSOLE_IO_WRITE_CELLS_W)

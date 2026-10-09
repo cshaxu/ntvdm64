@@ -278,18 +278,41 @@ static DWORD transfer(frontend_io_channel *channel,BOOL write,void *buffer,DWORD
     return ERROR_SUCCESS;
 }
 
+static DWORD send_reply(frontend_io_channel *channel,const console_io_reply *reply)
+{
+    DWORD error;
+    const BYTE *payload=console_io_reply_payload((console_io_reply *)reply);
+    if(reply->bytes && !payload)return ERROR_INVALID_PARAMETER;
+    error=transfer(channel,TRUE,(void *)reply,CONSOLE_IO_REPLY_HEADER_BYTES);
+    if(!error && reply->bytes)error=transfer(channel,TRUE,(void *)payload,reply->bytes);
+    return error;
+}
+
 static DWORD WINAPI console_channel_main(void *context)
 {
     frontend_io_channel *channel=context;
     console_io_request *request=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*request));
     console_io_reply reply={0};
+    BYTE reply_data[CONSOLE_IO_TILE_BYTES];
+    BYTE *request_data=NULL;
+    DWORD request_capacity=0;
     DWORD error=request ? ERROR_SUCCESS : ERROR_NOT_ENOUGH_MEMORY;
     while (!error) {
-        BOOL video_locked=FALSE;
-        error=transfer(channel,FALSE,request,(DWORD)offsetof(console_io_request,data));
+        BOOL video_locked=FALSE,video_part=FALSE,video_final=FALSE;
+        error=transfer(channel,FALSE,request,CONSOLE_IO_REQUEST_HEADER_BYTES);
         if (error) break;
-        if (request->bytes>CONSOLE_IO_DATA_BYTES) { error=ERROR_INVALID_DATA;break; }
-        error=transfer(channel,FALSE,request->data,request->bytes);
+        ZeroMemory(&reply,sizeof(reply));reply.data=reply_data;
+        if (request->reserved || request->bytes>CONSOLE_IO_MAX_DATA_BYTES) {
+            error=ERROR_INVALID_DATA;break;
+        }
+        if(request->bytes>request_capacity) {
+            BYTE *grown=request_data ? HeapReAlloc(GetProcessHeap(),0,request_data,request->bytes) :
+                HeapAlloc(GetProcessHeap(),0,request->bytes);
+            if(!grown) { error=ERROR_NOT_ENOUGH_MEMORY;break; }
+            request_data=grown;request_capacity=request->bytes;
+        }
+        request->data=request_data;
+        error=request->bytes ? transfer(channel,FALSE,(void *)console_io_request_payload(request),request->bytes) : ERROR_SUCCESS;
         /* No activation, input wait or publication is legal while this
          * channel holds the screen lock across the native read tiles. In
          * particular, an activation would wait for the presentation thread
@@ -306,6 +329,23 @@ static DWORD WINAPI console_channel_main(void *context)
              request->operation==CONSOLE_IO_SNAPSHOT_BEGIN ||
              request->operation==CONSOLE_IO_READ_INPUT || request->operation==CONSOLE_IO_PEEK_INPUT))
             error=ERROR_INVALID_DATA;
+        /* A staged video frame owns this output direction until it is
+         * complete.  Its bounded non-final parts deliberately carry no
+         * individual reply: the sender receives exactly one result when the
+         * frame is complete. */
+        if(!error && channel->console.video.pending && request->operation!=CONSOLE_IO_VIDEO_DATA)
+            error=ERROR_INVALID_DATA;
+        /* A framed-record violation abandons the staged frame and closes the
+         * endpoint.  Continuing would let a later payload complete a frame
+         * after an out-of-order operation, which is neither a valid stream nor
+         * a safe recovery point. */
+        if(error)break;
+        video_part=request->operation==CONSOLE_IO_VIDEO_DATA;
+        if(!error && video_part && channel->console.video.pending &&
+            request->state.mode==channel->console.video.pending_serial &&
+            request->state.count==channel->console.video.received && request->bytes==
+                channel->console.video.pending_description.bytes-channel->console.video.received)
+            video_final=TRUE;
         if(!error && (request->operation==CONSOLE_IO_VIDEO_BEGIN ||
             request->operation==CONSOLE_IO_VIDEO_DATA || request->operation==CONSOLE_IO_VIDEO_TEXT)) {
             /* Dispatch commits frame and dependent grid at the final chunk.
@@ -332,8 +372,14 @@ static DWORD WINAPI console_channel_main(void *context)
             channel->input_pending=count!=0;
             if (!error && count && !SetEvent(channel->ready)) error=GetLastError();
         }
-        if (!error) error=transfer(channel,TRUE,&reply,
-            (DWORD)offsetof(console_io_reply,data)+reply.bytes);
+        /* Only the sender's final data part receives a reply, including its
+         * frame-level failure. A malformed/interrupted non-final part closes
+         * the byte stream rather than leaving an unread reply ahead of the
+         * final frame result. */
+        if(!error && video_part && !video_final && !reply.result) {
+            error=reply.error ? reply.error : ERROR_INVALID_DATA;
+        }
+        if (!error && (!video_part || video_final)) error=send_reply(channel,&reply);
         if(!error && channel->publication_terminal_error)error=channel->publication_terminal_error;
     }
     if(channel->snapshot_held)(void)snapshot_end(channel);
@@ -344,7 +390,10 @@ static DWORD WINAPI console_channel_main(void *context)
         (void)publication(channel,CONSOLE_IO_PUBLICATION_ABORT);
         frontend_session_snapshot_end(channel->root);
     }
-    if (request) HeapFree(GetProcessHeap(),0,request);
+    if (request) {
+        if(request_data)HeapFree(GetProcessHeap(),0,request_data);
+        HeapFree(GetProcessHeap(),0,request);
+    }
     /* This thread owns the endpoint after creation. EOF must reach the worker
      * even when the launcher is still waiting for its original task event. */
     CloseHandle(channel->pipe);

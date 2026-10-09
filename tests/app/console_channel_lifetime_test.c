@@ -111,6 +111,11 @@ static void peer_io(BOOL write,void *buffer,DWORD bytes)
         CHECK(done && done<=bytes);CloseHandle(io.hEvent);cursor+=done;bytes-=done;
     }
 }
+static void peer_request(const console_io_request *request)
+{
+    peer_io(TRUE,(void *)request,CONSOLE_IO_REQUEST_HEADER_BYTES);
+    if(request->bytes)peer_io(TRUE,(void *)request->data,request->bytes);
+}
 static void verify_dos_input_queue(frontend_io_channel *channel)
 {
     INPUT_RECORD first[130]={0},second[130]={0},received[260];
@@ -163,8 +168,10 @@ static void run_case(unsigned mode,unsigned round)
     HANDLE worker,thread,ready;
     PROCESS_INFORMATION child={0};
     console_io_request request={0};console_io_reply reply={0};
+    BYTE request_data[CONSOLE_IO_TILE_BYTES],reply_data[CONSOLE_IO_TILE_BYTES];
     DWORD exit_code;ULONGLONG started;
     expected_generation=1+round*6+mode;
+    request.data=request_data;reply.data=reply_data;
     CHECK(ResetEvent(read_entered));
     if(mode==4) {
         STARTUPINFOW startup={sizeof(startup)};
@@ -210,15 +217,15 @@ static void run_case(unsigned mode,unsigned round)
         request.sequence=2;request.operation=CONSOLE_IO_VIDEO_BEGIN;
         request.state.mode=1;request.bytes=sizeof(description);
         memcpy(request.data,&description,sizeof(description));
-        peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data)+request.bytes);
+        peer_request(&request);
         peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));CHECK(reply.result);
         request.sequence=3;request.operation=CONSOLE_IO_VIDEO_DATA;request.bytes=4;
         memset(request.data,1,4);
-        peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data)+4);
+        peer_request(&request);
         peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));CHECK(reply.result);
         Sleep(100);CHECK(!FindWindowW(L"LibKvmWindow",NULL));
         request.sequence=4;request.state.count=4;
-        peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data)+4);
+        peer_request(&request);
         peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));CHECK(reply.result);
         deadline=GetTickCount64()+5000;
         do {
@@ -281,11 +288,11 @@ static void run_case(unsigned mode,unsigned round)
         request.sequence=6;request.operation=CONSOLE_IO_VIDEO_BEGIN;
         request.state.mode=3;request.bytes=sizeof(description);
         memcpy(request.data,&description,sizeof(description));
-        peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data)+request.bytes);
+        peer_request(&request);
         peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));CHECK(reply.result);
         request.sequence=7;request.operation=CONSOLE_IO_VIDEO_DATA;request.bytes=8;
         memset(request.data,1,8);
-        peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data)+8);
+        peer_request(&request);
         peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));CHECK(reply.result);
         deadline=GetTickCount64()+5000;
         while(!FindWindowW(L"LibKvmWindow",NULL) && GetTickCount64()<deadline)Sleep(10);
@@ -368,7 +375,7 @@ static void run_case(unsigned mode,unsigned round)
         /* Acknowledged normal output followed by peer EOF races owner stop. */
         CHECK(CloseHandle(peer));peer=NULL;
     } else if(mode==3) {
-        request.sequence=2;request.bytes=CONSOLE_IO_DATA_BYTES+1;
+        request.sequence=2;request.bytes=CONSOLE_IO_MAX_DATA_BYTES+1;
         peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data));
         CHECK(WaitForSingleObject(thread,5000)==WAIT_OBJECT_0);
         CHECK(GetExitCodeThread(thread,&exit_code) && exit_code==ERROR_INVALID_DATA);
@@ -428,7 +435,7 @@ static void run_case(unsigned mode,unsigned round)
         request.sequence=3;request.operation=CONSOLE_IO_WRITE_CELLS_W;
         request.state.width=request.state.height=1;request.bytes=sizeof(replacement);
         memcpy(request.data,&replacement,sizeof(replacement));
-        peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data)+request.bytes);
+        peer_request(&request);
         peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));CHECK(reply.result);
         CloseHandle(peer);peer=NULL;
         CHECK(WaitForSingleObject(thread,5000)==WAIT_OBJECT_0);
@@ -826,17 +833,19 @@ static void test_projection_failure_pipe(BOOL batch)
     text[0]='P';
     request.sequence++;request.operation=CONSOLE_IO_VIDEO_BEGIN;
     request.state.mode=1;request.bytes=sizeof(description);
-    memcpy(request.data,&description,sizeof(description));
-    peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data)+request.bytes);
+    request.data=(BYTE *)&description;
+    peer_request(&request);
     peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));CHECK(reply.result);
     for(offset=0;offset<bytes;offset+=count) {
-        count=min(bytes-offset,CONSOLE_IO_DATA_BYTES);
+        count=min(bytes-offset,CONSOLE_IO_MAX_DATA_BYTES);
         request.sequence++;request.operation=CONSOLE_IO_VIDEO_DATA;
-        request.state.count=offset;request.bytes=count;memcpy(request.data,payload+offset,count);
+        request.state.count=offset;request.bytes=count;request.data=payload+offset;
         if(!batch && offset+count==bytes)InterlockedExchange(&arm_pipe_projection,1);
-        peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data)+count);
-        peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));
-        CHECK(reply.result==(BOOL)(batch || offset+count<bytes));
+        peer_request(&request);
+        if(offset+count==bytes) {
+            peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));
+            CHECK(reply.result==(BOOL)batch);
+        }
     }
     if(batch) {
         request.sequence++;request.operation=CONSOLE_IO_PUBLICATION_END;request.bytes=0;

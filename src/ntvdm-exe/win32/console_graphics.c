@@ -83,6 +83,11 @@ static DWORD capture(ntvdm_console_graphics *state,void **payload,SIZE_T *payloa
     ZeroMemory(copied,sizeof(*copied));
     if (!ntvdm_console_bitmap_copy(state->bitmap,copy+sizeof(*copied),state->bytes,&local,INFINITE)) {
         DWORD error=GetLastError();HeapFree(GetProcessHeap(),0,copy);
+        /* A palette-indexed VGA surface becomes active before the guest's
+         * palette install.  That is a not-yet-publishable snapshot, not a
+         * broken publication route.  Keep dirty set; the palette install
+         * signals the existing publisher again once capture is possible. */
+        if(error==ERROR_NOT_READY)error=ERROR_SUCCESS;
         ReleaseSRWLockExclusive(&state->lock);return error;
     }
     copied->width=local.width;copied->height=local.height;copied->stride=local.stride;

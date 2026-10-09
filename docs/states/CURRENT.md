@@ -40,6 +40,21 @@ Window witness, so historical end-to-end percentiles remain explicitly
 labelled rather than projected as a current graphics measurement.  See
 [S4 evidence](../etc/evidence/m0-t440-s4-window-performance-attribution.md).
 
+## S5 Closure Record
+
+S5 replaces the fixed 16 KiB direct worker/NTCON payload array with bounded
+variable-length records (1 MiB maximum actual payload). A normal 640x480 VGA
+frame now crosses as `VIDEO_BEGIN` plus one payload record; larger frames
+remain ordered bounded parts with one final reply. During release validation,
+palette-indexed graphics exposed a latent publication race: capture before the
+guest palette install produced `ERROR_NOT_READY` and poisoned the publisher.
+That state now remains dirty and is republished when the existing palette
+install signals readiness. Focused framing, staging, palette-late graphics,
+build and attached-console graphics smoke checks pass. The coherent ten-image
+package is published to `O:/winnt/system32` and synchronized to
+`assets/release`; interactive Win3.1/Window acceptance remains owner-facing.
+See [S5 evidence](../etc/evidence/m0-t440-s5-variable-worker-io.md).
+
 ## S1 Closure Record
 
 S1 established a current, reproducible project-owned candidate without

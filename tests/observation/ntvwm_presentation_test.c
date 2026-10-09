@@ -35,12 +35,25 @@ static BOOL transfer(HANDLE pipe,BOOL write,void *data,DWORD bytes)
 static DWORD WINAPI peer(void *context)
 {
     peer_state *state=context;DWORD sequence=0;
+    console_io_request request={0};
+    BYTE reply_data[CONSOLE_IO_TILE_BYTES];
     for(;;) {
-        console_io_request request;console_io_reply reply={0};DWORD error=0;
-        if(!transfer(state->pipe,FALSE,&request,offsetof(console_io_request,data)))break;
-        if(request.bytes>CONSOLE_IO_DATA_BYTES || request.version!=CONSOLE_IO_VERSION ||
+        console_io_reply reply={0};DWORD error=0;BOOL video_part,video_final=FALSE;
+        if(request.data) { HeapFree(GetProcessHeap(),0,request.data);request.data=NULL; }
+        if(!transfer(state->pipe,FALSE,&request,CONSOLE_IO_REQUEST_HEADER_BYTES))break;
+        if(request.bytes>CONSOLE_IO_MAX_DATA_BYTES || request.version!=CONSOLE_IO_VERSION ||
             request.generation!=17 || request.sequence!=++sequence)return ERROR_INVALID_DATA;
-        if(!transfer(state->pipe,FALSE,request.data,request.bytes))return ERROR_BROKEN_PIPE;
+        if(request.bytes) {
+            request.data=HeapAlloc(GetProcessHeap(),0,request.bytes);
+            if(!request.data)return ERROR_NOT_ENOUGH_MEMORY;
+        }
+        if(request.bytes && !transfer(state->pipe,FALSE,request.data,request.bytes))return ERROR_BROKEN_PIPE;
+        reply.data=reply_data;
+        video_part=request.operation==CONSOLE_IO_VIDEO_DATA;
+        if(video_part && state->video.pending && request.state.mode==state->video.pending_serial &&
+            request.state.count==state->video.received && request.bytes==
+                state->video.pending_description.bytes-state->video.received)
+            video_final=TRUE;
         ++state->calls;
         if(request.operation==CONSOLE_IO_WRITE_CELLS_W)++state->cell_writes;
         /* The sender must never acquire the frontend implicitly. */
@@ -136,7 +149,7 @@ static DWORD WINAPI peer(void *context)
                     if(offset>=sizeof(configuration))return ERROR_INVALID_DATA;
                     reply.state.mode=state->mode==14 && offset ? 8 : 7;
                     reply.state.count=sizeof(configuration);
-                    reply.bytes=min(sizeof(configuration)-offset,CONSOLE_IO_DATA_BYTES);
+                    reply.bytes=min(sizeof(configuration)-offset,CONSOLE_IO_TILE_BYTES);
                     memcpy(reply.data,(BYTE *)&configuration+offset,reply.bytes);
                 }
             } else if(request.operation==CONSOLE_IO_READ_CELLS_W) {
@@ -180,10 +193,16 @@ static DWORD WINAPI peer(void *context)
         if(state->mode==4) {
             transfer(state->pipe,TRUE,&reply,8);break;
         }
-        if(!transfer(state->pipe,TRUE,&reply,offsetof(console_io_reply,data)+reply.bytes))break;
+        if(video_part && !video_final) {
+            if(!reply.result)return ERROR_INVALID_DATA;
+            continue;
+        }
+        if(!transfer(state->pipe,TRUE,&reply,CONSOLE_IO_REPLY_HEADER_BYTES))break;
+        if(reply.bytes && !transfer(state->pipe,TRUE,reply.data,reply.bytes))break;
         if(request.operation==CONSOLE_IO_PUBLICATION_END && !error)
             ReleaseSemaphore(state->publication_ack,1,NULL);
     }
+    if(request.data)HeapFree(GetProcessHeap(),0,request.data);
     DisconnectNamedPipe(state->pipe);return 0;
 }
 static void run_case(unsigned mode)
