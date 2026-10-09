@@ -2,29 +2,43 @@
 
 ## Current Work
 
-**Active: M0 T440 S3**
+**Active: M0 T440 S5**
 
 ## Active Packet
 
-### Source-side graphics publication
+### Bounded variable-length worker I/O records
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T440 S3`, Ordinary Mode. |
-| Admission And Approval | Owner approved repair after the source audit established that NTVDM64 performs full source-frame construction and copies before worker-base's latest-frame coalescing, unlike the SoftPC comparison pipeline's source-side dirty-generation rejection. |
-| Objective | Move the project-owned NTVDM graphics publication eligibility decision ahead of complete DIB/frame construction, preserving only true original-painter updates and source-owned cursor/configuration changes. |
-| Non-goals | No timer/rate-policy change, worker-base or NTCON deduplication change, guest/media alteration, imported OpenNT mirror-algorithm rewrite, new process/helper/protocol, or lifecycle redesign. The existing worker-base publisher may gain only the source-capture seam required to defer DIB construction until its already-owned accepted delivery boundary. |
-| Reference Baseline | S1 timing evidence and S2 source audit: the shared Window renderer already has the same dirty-rectangle presentation mechanics as SoftPC; source capture/copy precedes current coalescing. |
-| Files And ABI Surface | Project-owned NTVDM Win32 video-publication adapters; the existing private worker-base publisher capture seam; focused fixtures/benchmarks under `tests/` and `build/M0-T440/S3/`, evidence and active status. No public wire ABI change. |
-| Applicable Rules | Execution, architecture, coding, documentation, source-policy, global BaseSrv serialization, immutable guest media, NTSRV lifecycle authority and worker-neutral NTCON. |
-| Verification | Build affected x86 product targets; run source-owned publication and Window-render fixtures; prove clean frames avoid complete source construction while changed DIB/text/cursor/configuration frames remain published; compare current source and package hashes before release. |
-| Expected Markers | A source-owned generation/dirty observation gates frame construction before the current offer/copy chain; changed frames retain ordering and final-frame delivery; NTCON receives every frame that the worker elects to publish. |
-| Asset Needs | Current source/package, build-owned tests and logs only; no guest modification. |
-| Reporting Requirements | Record source ownership, copy/capture boundary, benchmark results, unchanged OpenNT mirror diff status, exact package hashes, and remaining manual Win3.1 boundary. |
-| Stop Conditions | A correct gate requires modifying original MVDM behavior or guest media, changing worker-base/NTCON semantics, or cannot preserve final-frame/route handoff. |
-| Exit Criteria | Minimal project-owned implementation, x86 build and focused regressions, release package/hash verification, governance/diff review, commit and push; await owner manual acceptance. |
-| Original Owner Request | “准入新T 文本响应性与 DOS/Win16 启动/执行性能：量化输入、抓取/发布、锁/传输及 guest/WOW 成本，只修已证明瓶颈。” |
-| Similar-Issue Sweep | DIB, text, palette/configuration and cursor-only publication; inactive/final-frame handoff; NTVDM and NTVWM call sites; existing worker-base/NTCON source neutrality. |
+| Identifier Mode | `M0 T440 S5`, Ordinary Mode. |
+| Admission And Approval | Owner accepts S4's source-backed attribution and directs: make all worker/NTCON I/O records variable-length with a 1 MiB actual-payload maximum; frames larger than that may use continuous parts and receive one final frame acknowledgement. |
+| Objective | Replace the fixed 16 KiB embedded I/O-message payload model with bounded variable-length records, so a complete sub-1 MiB video frame crosses the worker/NTCON channel without per-16-KiB synchronous round trips. |
+| Non-goals | No publisher cadence, display deduplication, guest/mirror modification, new helper/process, unbounded allocation, worker-type branch, lifecycle-policy change, or alteration of NTSRV authority. |
+| Reference Baseline | S4 establishes 0.382 ms current renderer p50 versus 86.845 ms historical measured worker-to-NTCON transfer p50 for a 20 KiB text frame; current 640x480 DIBs are 307,200 B and need 20 request/reply exchanges under the 16 KiB protocol. |
+| Files And ABI Surface | Shared interface/common protocol and pipe transport, worker-base clients/publishers, NTCON channel receiver/session, focused protocol and lifecycle tests, release-version surface and evidence. |
+| Applicable Rules | Execution, architecture, coding, documentation, source-policy, NTSRV lifecycle authority, worker-neutral NTCON and global real-package serialization. |
+| Verification | Focused framed-record positive/negative/partial/disconnect/order tests; affected native/x86 builds; serial product Window/text regression appropriate to the changed package; coherent ten-image publication and hash verification. |
+| Expected Markers | Small records transmit exactly their actual byte count; a 307,200 B DIB crosses as one logical frame; >1 MiB frames are bounded, ordered parts with one terminal result; malformed/interleaved/short records fail without publishing a partial frame. |
+| Asset Needs | Existing source/build graphs and build-owned fixtures only; no guest or imported asset. |
+| Reporting Requirements | Record record framing/limits, completion and fault precedence, allocation/ownership bounds, old/new exchange counts, test hashes/results, retained timing limitation and publication identity. |
+| Stop Conditions | A required peer still depends on the fixed in-struct payload ABI; a safe message-boundary/partial-I/O contract cannot be established; a required protocol version receiver is unknown; or tests demonstrate a lifecycle/order regression. |
+| Exit Criteria | One bounded shared I/O contract, worker-base and NTCON implementation, affected test/build/runtime evidence, governance/diff review, coherent release publication, commit and push. |
+| Original Owner Request | “普通记录最大也可以是1MB…只要1MB以内就可以送，超过1MB的话，切成多个来送；但是不要变成固定每次都是发1MB。” |
+| Similar-Issue Sweep | Text/video/title/input records, stream framing helpers, all worker-base callers, NTCON receive/dispatch, final-frame and handoff barriers, peer failure and protocol-version negotiation. |
+
+## S4 Closure Record
+
+S4 records a quantified attribution without modifying product behavior.  The
+fresh current-source 640x480 renderer p50 is 0.382 ms, while the accepted
+real Window EDIT trace measures 86.845 ms p50 through the synchronous
+worker-to-NTCON transfer boundary for a roughly 20 KiB text frame.  Current
+source requires three request/reply exchanges for that text frame and twenty
+for a 307,200 B 640x480 DIB.  Renderer/decode/assembly are excluded as the
+primary cause; mouse-IRQ consumption has a retained 97.950 ms tail.  The
+current private-desktop observer could not form a current native-frontend
+Window witness, so historical end-to-end percentiles remain explicitly
+labelled rather than projected as a current graphics measurement.  See
+[S4 evidence](../etc/evidence/m0-t440-s4-window-performance-attribution.md).
 
 ## S1 Closure Record
 
