@@ -11,6 +11,7 @@
 | Field | Record |
 | --- | --- |
 | Identifier Mode | `M0 T440 S9`, Ordinary Mode. |
+| Candidate Proposal | [Text responsiveness and DOS/Win16 execution performance](../proposals/proposal-interaction-and-guest-performance-001.md). |
 | Admission And Approval | Owner directs: retain S7/S8 repairs as the clean baseline and implement the separately designed CCPU timing contract rather than modifying guest code, the heartbeat, or graphics publication. |
 | Objective | Restore the reached CCPU40 quick-event assumption that one decoded instruction represents one microsecond of guest time on a modern host, using a bounded event-interruptible worker-local pacer. |
 | Non-goals | No guest/PIF modification, qevent conversion rewrite, mouse/VGA/NTCON/worker-base protocol change, polling helper, frame-rate change, raw-pointer path, or unrelated CCPU optimization policy. |
@@ -24,9 +25,7 @@
 | Original Owner Request | “既然是模拟硬件的 VGA，那就应该按照真实的语义来做！” followed by approval to implement the event-driven CCPU pacing design. |
 | Similar-Issue Sweep | Existing HLT carrier, timer/reset/hardware interrupt producers, CCPU quick events, mouse EOI delay, keyboard refill delay, raw throughput test, and retained Win3.1 Standard execution. |
 
-## Previous Closure
-
-## Latest Closure
+## S8 Closure Record
 
 ### M0 T440 S8 — Win3.1 desktop CPU attribution after idle-HLT repair
 
@@ -46,7 +45,9 @@ CCPU quick-event clock assumes one instruction per microsecond. See
 
 ## S6 Closure Record
 
-## S7 Bounded Conclusion
+See [S6 evidence](../etc/evidence/m0-t440-s6-post-s5-responsiveness-attribution.md).
+
+## S7 Closure Record
 
 S7 retains a minimal `MVDM-HOST-DIV-330` event wait at CCPU's original HLT
 boundary. The focused old/new carrier comparison reduces a 500 ms steady idle
