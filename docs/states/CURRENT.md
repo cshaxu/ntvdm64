@@ -2,11 +2,29 @@
 
 ## Current Work
 
-**No active M/T/S packet.**
+**Active: M0 T442 S1**
 
-T441 is closed: it republishes matching NTVDM/NTVWM worker images and retains
-the real-channel input/output regression probe.  See the
-[T441 closure](../history/m0-t441-variable-worker-io-release-integrity-closure.md).
+## Active Packet
+
+### Native CUI Console-window virtualization design
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T442 S1`, Ordinary Mode. |
+| Admission And Approval | Owner admits the queue-head Native CUI Console-window virtualization package and directs completion of its design before implementation. |
+| Objective | Establish the smallest authenticated control path which maps a native CUI target's proven request to show/foreground its inherited carrier Console onto the already-bound NTCON Console projection, without exposing the NTVWM carrier. |
+| Non-goals | No application-name exception, CUI-to-GUI reclassification, target stream/Console-identity emulation, new persistent helper/registry/polling loop, task/process observation, guest/media change, or unrelated lifecycle redesign. |
+| Reference Baseline | [Candidate proposal](../proposals/proposal-native-cui-console-window-virtualization-001.md), the matching T441 worker release, current `nthook32-dll` CreateProcess-only interception, NTSRV-owned frontend routes, and NTCON's existing Console/Window selector. |
+| Files And ABI Surface | Design/evidence under `docs/etc/operations` and `docs/etc/evidence`; expected later ownership is `src/nthook32-dll`, `src/common` control declarations, NTSRV service/RPC bindings, NTVWM, NTCON's existing presentation operation, affected tests and release manifest. |
+| Applicable Rules | Execution, architecture, coding, documentation and source-policy authorities; NTSRV remains lifecycle/relationship authority; NTCON remains worker-neutral; hidden Console carrier remains private. |
+| Verification | Source-map the existing carrier, target hook bootstrap, service route, worker event and frontend selector; capture the actual target API sequence before selecting a hooked API; document positive, unrelated-HWND, explicit new-Console, failure and direct-CMD controls. |
+| Expected Markers | The design names one authenticated intent record/event, one service validation point, one worker consumption point and the existing NTCON display selection; it distinguishes visibility from `FreeConsole`/`AllocConsole`/`AttachConsole`. |
+| Asset Needs | Current released package, owner-supplied `mysmb64.exe` reproduction and build-owned trace/test material only. |
+| Reporting Requirements | Record API trace evidence, exact validated identity predicates, state/event ordering, failure passthrough, width coverage, test matrix and any unsupported identity-changing transition. |
+| Stop Conditions | The target allocates, frees or attaches a distinct Console; a required hook cannot identify the current Console HWND; a design needs direct hook-to-NTCON control, broad HWND interception, new process tracking, or an unproved lifecycle change. |
+| Exit Criteria | A source-backed, implementable S1 design with the exact trace gate and no unresolved control-owner ambiguity; governance/diff review and a committed design delivery. |
+| Original Owner Request | “准入t任务并完成设计”。 |
+| Similar-Issue Sweep | Existing direct CMD behavior, native GUI route, x86/x64 hook bootstrap, nested native CUI children, NTSRV frontend route identity, NTCON Console/Window selection, teardown and target completion. |
 
 ## Previously Closed Work
 
