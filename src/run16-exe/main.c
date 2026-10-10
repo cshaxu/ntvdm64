@@ -392,15 +392,15 @@ static DWORD launch_native(run16_frontend_scope *scope,PCWSTR application,PCWSTR
     start.standard[0]=GetStdHandle(STD_INPUT_HANDLE);
     start.standard[1]=GetStdHandle(STD_OUTPUT_HANDLE);
     start.standard[2]=GetStdHandle(STD_ERROR_HANDLE);
-    /* A nested launcher inherits NTVDM's worker-local stream endpoints.
-     * They are already the correct child streams, not a request to replace
-     * them with NTVWM's hidden Console.  Only a root text launch delegates
-     * Console endpoint selection to NTVWM. */
-    if(!run16_frontend_scope_has_execution(scope)) {
-        start.console_mask=run16_frontend_scope_console_mask(scope);
-        for(i=0;i<3;++i)
-            if(GetConsoleMode(start.standard[i],&mode))start.console_mask|=1u<<i;
-    }
+    /* NTVDM's nested CONIN$/CONOUT$ values are worker-local identity
+     * objects.  They authenticate the existing frontend only inside that
+     * worker; they are not Win32 stream handles which a separate NTVWM can
+     * inherit into a native COMSPEC child.  Keep their mask so NTVWM replaces
+     * them with the real handles of its hidden Console.  Explicit redirected
+     * files and pipes remain unmasked and are still duplicated normally. */
+    start.console_mask=run16_frontend_scope_console_mask(scope);
+    for(i=0;i<3;++i)
+        if(GetConsoleMode(start.standard[i],&mode))start.console_mask|=1u<<i;
     error=text ? run16_frontend_scope_launch_win32_text(scope,&start) : run16_frontend_scope_launch_win32_gui(scope,&start);
     if(!error && !wait)result=ERROR_SUCCESS;
     if(!error && wait) {

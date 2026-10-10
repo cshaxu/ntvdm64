@@ -102,11 +102,11 @@ static void report_private_timeout_windows(FILE *report)
     char name[96] = {0};
     DWORD needed = 0;
     HDESK desktop = GetThreadDesktop(GetCurrentThreadId());
-    if (!GetUserObjectInformationA(desktop, UOI_NAME, name, sizeof(name), &needed) ||
-        strncmp(name, "NTVDMConsoleTest-", 17) != 0) {
-        fputs("windows=skipped-not-private-test-desktop\n", report);
-        return;
-    }
+    if (!GetUserObjectInformationA(desktop, UOI_NAME, name, sizeof(name), &needed))
+        snprintf(name, sizeof(name), "<unnamed:%lu>", GetLastError());
+    /* A hidden owned Console is still a real product environment.  Timeout
+     * diagnosis must report a modal NTVDM error there too; bounded caption
+     * and Static-control reads never activate, dismiss, or modify a window. */
     fprintf(report, "windows-desktop=%s\n", name);
     if (!EnumDesktopWindows(desktop, report_timeout_window, (LPARAM)report))
         fprintf(report, "windows-enumeration-error=%lu\n", GetLastError());
@@ -300,6 +300,23 @@ static void compare_console_capture(HANDLE output,const char *report_path)
     free(data);
 }
 #endif
+/* NTCON can select a new active screen buffer while this observer is waiting.
+ * A CONOUT$ handle opened before that selection continues to name the old
+ * buffer, even though CONIN$ remains the same shared input queue.  Read the
+ * current CONOUT$ at each observation boundary so the witness sees the same
+ * buffer as the actual Console user. */
+static HANDLE observer_open_active_output(HANDLE fallback, BOOL *opened)
+{
+    HANDLE current;
+
+    if (opened != NULL) *opened = FALSE;
+    current = CreateFileA("CONOUT$", GENERIC_READ | GENERIC_WRITE,
+                          FILE_SHARE_READ | FILE_SHARE_WRITE, NULL,
+                          OPEN_EXISTING, 0, NULL);
+    if (current == INVALID_HANDLE_VALUE) return fallback;
+    if (opened != NULL) *opened = TRUE;
+    return current;
+}
 static void write_console_snapshot(HANDLE output, const char *report_path)
 {
     char *screen;
@@ -307,6 +324,9 @@ static void write_console_snapshot(HANDLE output, const char *report_path)
     DWORD count = 0, row, column, error;
     CONSOLE_SCREEN_BUFFER_INFO info;
     FILE *file = NULL;
+    BOOL opened = FALSE;
+
+    output = observer_open_active_output(output, &opened);
 
 #ifdef OBSERVER_COMPARE_CAPTURE
     compare_console_capture(output,report_path);
@@ -316,7 +336,9 @@ static void write_console_snapshot(HANDLE output, const char *report_path)
     if (fopen_s(&file, path, "wb") == 0 && file != NULL) {
         if(error) {
             fprintf(file,"# capture-error=%lu\r\n",error);
-            fclose(file);return;
+            fclose(file);
+            if (opened) CloseHandle(output);
+            return;
         }
         /* A modern Console commonly allocates thousands of scrollback rows.
          * Persisting its full character plane makes an ordinary one-line DOS
@@ -348,6 +370,7 @@ static void write_console_snapshot(HANDLE output, const char *report_path)
         fclose(file);
     }
     free(screen);
+    if (opened) CloseHandle(output);
 }
 
 static void clear_console(HANDLE output)
@@ -1113,6 +1136,41 @@ static BOOL write_console_mouse_sequence(HANDLE input, const char *report_path)
     return TRUE;
 }
 
+/* A prompt marker is a complete, idle prompt only when nothing follows its
+ * final '>'.  A substring search alone accepts an echoed command such as
+ * "O:\\WINNT>run16 command" as the next prompt, then injects the following
+ * scripted line while the worker is still taking over input.  Text markers
+ * intentionally retain substring semantics; only prompt-shaped markers need
+ * this stricter readiness rule. */
+static BOOL console_row_has_marker(const char *row, DWORD count,
+                                   const char *marker)
+{
+    const char *found;
+    size_t marker_length;
+    DWORD index;
+
+    if (marker == NULL) {
+        /* This is only the initial outer-CMD gate: no scripted input has
+         * been delivered yet, so its historical loose drive-prompt test
+         * cannot race a worker handoff.  Some fresh Conhost buffers expose
+         * their untouched tail in a form that is not safely comparable as
+         * printable cells.  Later explicit prompt markers remain strict. */
+        return count > 2 && row[1] == ':' && memchr(row, '>', count) != NULL;
+    } else {
+        marker_length = strlen(marker);
+        found = strstr(row, marker);
+        if (found == NULL) return FALSE;
+        if (!marker_length || marker[marker_length - 1] != '>') return TRUE;
+        found += marker_length;
+    }
+    index = (DWORD)(found - row);
+    /* A newly allocated native Console can expose unpainted cells as NUL,
+     * while a normal painted Console returns spaces.  Both mean the prompt
+     * is idle; neither may hide a real character after it. */
+    while (index < count && (row[index] == ' ' || row[index] == '\0')) ++index;
+    return index == count;
+}
+
 /* Observe the real COMMAND prompt, not a diagnostic CPU hook. Retiring
  * the INTx observer must not turn source cleanup into a test-only failure. */
 static BOOL wait_for_console_prompt(HANDLE output, DWORD timeout_ms,
@@ -1122,7 +1180,9 @@ static BOOL wait_for_console_prompt(HANDLE output, DWORD timeout_ms,
     do {
         CONSOLE_SCREEN_BUFFER_INFO info;
         char row[1025]; DWORD count=0; SHORT y;
-        if(GetConsoleScreenBufferInfo(output,&info) && info.dwSize.X>2 &&
+        BOOL opened=FALSE;
+        HANDLE current=observer_open_active_output(output,&opened);
+        if(GetConsoleScreenBufferInfo(current,&info) && info.dwSize.X>2 &&
            info.dwSize.X<(SHORT)sizeof(row)) {
             /* COMMAND can paint its prompt before the public Console cursor
              * settles on that row.  Identify the same drive-qualified prompt
@@ -1130,14 +1190,17 @@ static BOOL wait_for_console_prompt(HANDLE output, DWORD timeout_ms,
              * guest readiness contract. */
             for(y=info.srWindow.Top;y<=info.srWindow.Bottom;y++) {
                 COORD pos={0,y};
-                if(ReadConsoleOutputCharacterA(output,row,info.dwSize.X,pos,&count) &&
+                if(ReadConsoleOutputCharacterA(current,row,info.dwSize.X,pos,&count) &&
                    count==(DWORD)info.dwSize.X) {
                     row[count]='\0';
-                    if(marker ? strstr(row,marker)!=NULL :
-                       (row[1]==':' && memchr(row,'>',count)!=NULL)) return TRUE;
+                    if(console_row_has_marker(row,count,marker)) {
+                        if(opened)CloseHandle(current);
+                        return TRUE;
+                    }
                 }
             }
         }
+        if(opened)CloseHandle(current);
         Sleep(25);
     } while(GetTickCount()-begin<timeout_ms);
     return FALSE;
@@ -1153,15 +1216,22 @@ static BOOL console_screen_fingerprint(HANDLE output, DWORD *fingerprint)
     char row[1025];
     DWORD count, hash = 2166136261u;
     SHORT y;
+    BOOL opened=FALSE;
+    HANDLE current=observer_open_active_output(output,&opened);
 
-    if (fingerprint == NULL || !GetConsoleScreenBufferInfo(output, &info) ||
-        info.dwSize.X < 1 || info.dwSize.X >= (SHORT)sizeof(row)) return FALSE;
+    if (fingerprint == NULL || !GetConsoleScreenBufferInfo(current, &info) ||
+        info.dwSize.X < 1 || info.dwSize.X >= (SHORT)sizeof(row)) {
+        if(opened)CloseHandle(current);
+        return FALSE;
+    }
     for (y = info.srWindow.Top; y <= info.srWindow.Bottom; ++y) {
         COORD pos = { 0, y };
         DWORD index;
-        if (!ReadConsoleOutputCharacterA(output, row, info.dwSize.X, pos,
-                                         &count) || count != (DWORD)info.dwSize.X)
+        if (!ReadConsoleOutputCharacterA(current, row, info.dwSize.X, pos,
+                                         &count) || count != (DWORD)info.dwSize.X) {
+            if(opened)CloseHandle(current);
             return FALSE;
+        }
         for (index = 0; index != count; ++index) {
             hash ^= (unsigned char)row[index];
             hash *= 16777619u;
@@ -1172,6 +1242,7 @@ static BOOL console_screen_fingerprint(HANDLE output, DWORD *fingerprint)
     hash ^= (WORD)info.dwCursorPosition.Y;
     hash *= 16777619u;
     *fingerprint = hash;
+    if(opened)CloseHandle(current);
     return TRUE;
 }
 
@@ -1523,10 +1594,14 @@ int main(int argc, char **argv)
                  argv[2]) < 0) return 68;
     fixed_system_root_short_length = GetShortPathNameA(fixed_system_root,
         fixed_system_root_short, (DWORD)sizeof(fixed_system_root_short));
-    /* Match the historical short-window reproducer: never resize an inherited
-     * controller Console or accept its viewport constraints as test geometry. */
-    if (GetEnvironmentVariableA("MVDM_OBSERVER_SHORT_HISTORY",NULL,0)) FreeConsole();
-    if (!AllocConsole() && GetLastError() != ERROR_ACCESS_DENIED) return 65;
+    /* This container must own an actual Console, not inherit the controller's
+     * Console or ConPTY endpoint.  The product authenticates a borrowed
+     * frontend by its Console HWND; an inherited ConPTY has usable CONIN$/
+     * CONOUT$ handles but no HWND, which is deliberately not a valid product
+     * frontend.  Always detach first, including the ordinary interactive
+     * case, so every observation has the same isolated conhost baseline. */
+    (void)FreeConsole();
+    if (!AllocConsole()) return 65;
     if (GetEnvironmentVariableA("MVDM_OBSERVER_RECORD_CONTROL", NULL, 0)) {
         if (snprintf(control_event_report, sizeof(control_event_report),
                      "%s.control.bin", argv[3]) < 0 ||
@@ -1630,8 +1705,21 @@ int main(int argc, char **argv)
         int argument_index;
 
         command_line[0] = '\0';
-        if (!append_command_line_argument(command_line, sizeof(command_line),
-                                          &command_length, argv[1])) return 68;
+        /* argv[1] is historically a launcher command line, not merely an
+         * executable pathname.  Keep a real pathname safely quoted, but do
+         * not quote an already-tokenized launcher such as
+         * "C:\\Windows\\System32\\cmd.exe /d /k" into one nonexistent
+         * image name. */
+        if (GetFileAttributesA(argv[1]) == INVALID_FILE_ATTRIBUTES) {
+            command_length = strlen(argv[1]);
+            if (command_length == 0 || command_length >= sizeof(command_line))
+                return 68;
+            memcpy(command_line, argv[1], command_length + 1u);
+        } else if (!append_command_line_argument(command_line,
+                                                   sizeof(command_line),
+                                                   &command_length, argv[1])) {
+            return 68;
+        }
         if (argc == 4) {
             if (!append_command_line_argument(command_line, sizeof(command_line),
                                               &command_length, "-f") ||
@@ -1889,6 +1977,7 @@ int main(int argc, char **argv)
         char requested[40],path[MAX_PATH];CONSOLE_SCREEN_BUFFER_INFO info;
         CONSOLE_FONT_INFOEX font={sizeof(font)};FILE *initial;
         DWORD n=GetEnvironmentVariableA("MVDM_OBSERVER_INITIAL_GEOMETRY",requested,sizeof(requested));
+        BOOL exact_buffer=GetEnvironmentVariableA("MVDM_OBSERVER_INITIAL_EXACT_BUFFER",NULL,0)!=0;
         if(n) {
             int columns,rows;SMALL_RECT view,tiny={0,0,0,0};COORD size;
             if(n>=sizeof(requested) || sscanf_s(requested,"%d,%d",&columns,&rows)!=2 ||
@@ -1908,7 +1997,11 @@ int main(int argc, char **argv)
                GetLargestConsoleWindowSize(output).Y<rows ||
                !SetConsoleWindowInfo(output,TRUE,&tiny) ||
                !SetConsoleCursorPosition(output,(COORD){0,0}))return 93;
-            size=(COORD){(SHORT)columns,(SHORT)max(info.dwSize.Y,rows)};
+            /* AllocConsole normally supplies a large scrollback store.  An
+             * explicit exact-buffer witness instead models a ConPTY's
+             * physical 80xN canvas, so geometry-sensitive product cases do
+             * not silently exercise a different Console shape. */
+            size=(COORD){(SHORT)columns,(SHORT)(exact_buffer ? rows : max(info.dwSize.Y,rows))};
             if(!SetConsoleScreenBufferSize(output,size))return 93;
             view=(SMALL_RECT){0,0,(SHORT)(columns-1),(SHORT)(rows-1)};
             if(!SetConsoleWindowInfo(output,TRUE,&view) ||
@@ -1920,6 +2013,7 @@ int main(int argc, char **argv)
         if(!GetConsoleScreenBufferInfo(output,&info) || !GetCurrentConsoleFontEx(output,FALSE,&font))return 93;
         snprintf(path,sizeof(path),"%s.initial-console.txt",argv[3]);initial=fopen(path,"w");
         if(!initial)return 70;
+        fprintf(initial,"console-window=%p\n",(void *)GetConsoleWindow());
         fprintf(initial,"buffer=%d,%d viewport=%d,%d,%d,%d maximum=%d,%d font=%d,%d\n",
             info.dwSize.X,info.dwSize.Y,info.srWindow.Left,info.srWindow.Top,
             info.srWindow.Right,info.srWindow.Bottom,info.dwMaximumWindowSize.X,info.dwMaximumWindowSize.Y,
