@@ -392,8 +392,15 @@ static DWORD launch_native(run16_frontend_scope *scope,PCWSTR application,PCWSTR
     start.standard[0]=GetStdHandle(STD_INPUT_HANDLE);
     start.standard[1]=GetStdHandle(STD_OUTPUT_HANDLE);
     start.standard[2]=GetStdHandle(STD_ERROR_HANDLE);
-    start.console_mask=run16_frontend_scope_console_mask(scope);
-    for(i=0;i<3;++i)if(GetConsoleMode(start.standard[i],&mode))start.console_mask|=1u<<i;
+    /* A nested launcher inherits NTVDM's worker-local stream endpoints.
+     * They are already the correct child streams, not a request to replace
+     * them with NTVWM's hidden Console.  Only a root text launch delegates
+     * Console endpoint selection to NTVWM. */
+    if(!run16_frontend_scope_has_execution(scope)) {
+        start.console_mask=run16_frontend_scope_console_mask(scope);
+        for(i=0;i<3;++i)
+            if(GetConsoleMode(start.standard[i],&mode))start.console_mask|=1u<<i;
+    }
     error=text ? run16_frontend_scope_launch_win32_text(scope,&start) : run16_frontend_scope_launch_win32_gui(scope,&start);
     if(!error && !wait)result=ERROR_SUCCESS;
     if(!error && wait) {
@@ -539,33 +546,11 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         binary = BINARY_TYPE_WIN16;
     if (binary)
     {
-        PCWSTR image_name;
         if (!image_resolved &&
             !GetFullPathNameW(image_argument, MAX_PATH, application, NULL))
         {
             result = GetLastError();
             goto done;
-        }
-        image_name=wcsrchr(application,L'\\');
-        image_name=image_name ? image_name+1 : application;
-        /* `/c` receives one command-text argv item from a CreateProcess
-         * caller.  Its outer quotes exist only to preserve that one argv
-         * item through Windows tokenization.  Passing those transport quotes
-         * verbatim makes original COMMAND try to execute `left | right` as
-         * one image name.  For this exact COMMAND /c composite form, rebuild
-         * only the outer argv boundary; COMMAND remains the sole parser and
-         * owner of its <, > and | syntax. */
-        if (binary==BINARY_TYPE_DOS && count==3 &&
-            !_wcsicmp(image_name,L"COMMAND.COM") &&
-            (!_wcsicmp(arguments[1],L"/c") || !_wcsicmp(arguments[1],L"/C")))
-        {
-            if (swprintf_s(normalized_command,ARRAYSIZE(normalized_command),L"%ls %ls %ls",
-                arguments[0],arguments[1],arguments[2])<0)
-            {
-                result=ERROR_FILENAME_EXCED_RANGE;
-                goto done;
-            }
-            launch_command=normalized_command;
         }
         /* WOW windows need no character Console. Release only our initially
          * exclusive launcher Console, never an inherited CMD/frontend one.

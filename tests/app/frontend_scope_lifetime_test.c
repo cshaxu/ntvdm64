@@ -246,7 +246,7 @@ static void service_controls_retirement(void)
     retirement_state=CreateEventW(NULL,FALSE,FALSE,NULL);
     CHECK(creator && usage_seen && park_seen && retirement_state);
     retirement_mode=TRUE;usage_pending=1;
-    CHECK(!frontend_service_start_process(notification,creator,notification,FALSE,&service));
+    CHECK(!frontend_service_start_process(notification,creator,notification,&service));
     CHECK(WaitForSingleObject(usage_seen,5000)==WAIT_OBJECT_0);
     CHECK(WaitForSingleObject(frontend_service_thread(service),0)==WAIT_TIMEOUT);
     CHECK(!retire_calls && !drain_calls);

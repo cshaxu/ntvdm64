@@ -86,9 +86,10 @@ static BOOL legacy_application(PCWSTR application,PCWSTR command,DWORD flags,
 static WCHAR *redirect_command(PCWSTR application,PCWSTR command)
 {
     WCHAR *text,token[MAX_PATH];size_t count;
-    /* Pin the already classified explicit application; preserve the complete
-     * original tail. Selection/classification already used the shared search
-     * and original classifier; no second argv[0] eligibility rule exists. */
+    /* Preserve the caller's legacy request shape.  The Hook uses its resolved
+     * candidate only to decide whether interception applies; run16 owns the
+     * next, shared CWD/PATH resolution and classification.  Do not turn this
+     * local classification aid into a second final-path authority. */
     if(application) {
         PCWSTR tail=command && *command ? command_tail(command,token) : L"";
         if(!tail){SetLastError(ERROR_INVALID_PARAMETER);return NULL;}
@@ -117,11 +118,15 @@ static BOOL WINAPI hooked_w(LPCWSTR application,LPWSTR command,
     WCHAR resolved[MAX_PATH];
     BOOL redirect=legacy_application(application,command,flags,resolved);
     BOOL launcher=redirect;
-    WCHAR *copy=redirect ? redirect_command(resolved,command) : NULL;
+    WCHAR *copy=redirect ? redirect_command(application,command) : NULL;
     BOOL result=FALSE;DWORD error;
     if(!redirect || copy) {
-        result=create_w(redirect ? nthook_process_context.launcher :
-            (*resolved ? resolved : application),
+        /* `resolved` is a classification aid only.  On a normal native
+         * CreateProcess call, replacing lpApplicationName changes Windows'
+         * own application-search contract. An affirmative legacy redirect
+         * sends the caller's original request to run16; otherwise forward
+         * the caller's application pointer exactly, including NULL. */
+        result=create_w(redirect ? nthook_process_context.launcher : application,
             redirect ? copy : command,process_attributes,thread_attributes,inherit,
             flags|CREATE_SUSPENDED,environment,directory,startup,process);
         result=finish(result,flags,process,launcher);
@@ -140,7 +145,7 @@ static BOOL WINAPI hooked_a(LPCSTR application,LPSTR command,
     ++entering;
     WCHAR *wide_application=NULL,*wide_command=NULL,*wide_redirect=NULL;
     WCHAR resolved[MAX_PATH]={0};
-    char launcher[MAX_PATH*2],selected[MAX_PATH*2],*redirect=NULL;
+    char launcher[MAX_PATH*2],*redirect=NULL;
     BOOL lossy=FALSE,is_legacy=FALSE,result=FALSE;
     LPCSTR source[2]={application,command};WCHAR **wide[2]={&wide_application,&wide_command};
     DWORD error=ERROR_SUCCESS;
@@ -153,7 +158,9 @@ static BOOL WINAPI hooked_a(LPCSTR application,LPSTR command,
     }
     if(!error)is_legacy=legacy_application(wide_application,wide_command,flags,resolved);
     if(is_legacy) {
-        wide_redirect=redirect_command(resolved,wide_command);
+        /* As in the W entry point, the resolved path is local classification
+         * evidence only.  Let run16 resolve the caller's original request. */
+        wide_redirect=redirect_command(wide_application,wide_command);
         if(!wide_redirect)error=GetLastError();
         if(!error && (!WideCharToMultiByte(CP_ACP,WC_NO_BEST_FIT_CHARS,
             nthook_process_context.launcher,-1,launcher,sizeof(launcher),NULL,&lossy) || lossy))
@@ -169,14 +176,10 @@ static BOOL WINAPI hooked_a(LPCSTR application,LPSTR command,
             }
         }
     }
-    if(!error && !is_legacy && *resolved &&
-        (!WideCharToMultiByte(CP_ACP,WC_NO_BEST_FIT_CHARS,resolved,-1,
-            selected,sizeof(selected),NULL,&lossy) || lossy))
-        error=ERROR_NO_UNICODE_TRANSLATION;
     if(!error) {
         /* Actual creation remains ANSI, including the caller's environment,
          * directory and STARTUPINFO. Only an owned redirect line is encoded. */
-        result=create_a(is_legacy ? launcher : (*resolved ? selected : application),
+        result=create_a(is_legacy ? launcher : application,
             is_legacy ? redirect : command,
             process_attributes,thread_attributes,inherit,flags|CREATE_SUSPENDED,
             environment,directory,startup,process);

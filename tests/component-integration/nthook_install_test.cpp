@@ -35,6 +35,39 @@ static DWORD child(PCWSTR mode,PCWSTR next=NULL,PCWSTR final=NULL)
     if(!read || (read()&0xff)!=NATIVE_HOOK_INTERCEPT)return 14;
     if(!wcscmp(mode,L"gui") && context.frontend)return 15;
     if(!wcscmp(mode,L"grandchild"))return 0;
+    if(!wcscmp(mode,L"legacy-request")) {
+        WCHAR self[MAX_PATH],current[MAX_PATH],temporary[MAX_PATH]={0},legacy[MAX_PATH]={0};
+        WCHAR command[256]=L"legacy";
+        STARTUPINFOW local_startup={sizeof(local_startup)};
+        PROCESS_INFORMATION local_process={0};
+        DWORD result=ERROR_INVALID_DATA;
+        static const BYTE dos_program[]={0xcd,0x20};
+        HANDLE file=INVALID_HANDLE_VALUE;DWORD written=0;
+        if(!GetModuleFileNameW(NULL,self,ARRAYSIZE(self)) ||
+           !GetCurrentDirectoryW(ARRAYSIZE(current),current) ||
+           swprintf_s(temporary,ARRAYSIZE(temporary),L"%ls\\nthook-identity-%lu",
+               current,GetCurrentProcessId())<0 || !CreateDirectoryW(temporary,NULL) ||
+           swprintf_s(legacy,ARRAYSIZE(legacy),L"%ls\\legacy.com",temporary)<0 ||
+           !SetCurrentDirectoryW(temporary)) goto native_identity_done;
+        file=CreateFileW(legacy,GENERIC_WRITE,0,NULL,CREATE_NEW,FILE_ATTRIBUTE_NORMAL,NULL);
+        if(file==INVALID_HANDLE_VALUE || !WriteFile(file,dos_program,sizeof(dos_program),&written,NULL) ||
+           written!=sizeof(dos_program)) goto native_identity_done;
+        CloseHandle(file);file=INVALID_HANDLE_VALUE;
+        /* Classification discovers the CWD's legacy.com, but this call's
+         * original application request is just "legacy". The Hook may not
+         * replace that request with its absolute classification result. */
+        if(!CreateProcessW(L"legacy",command,NULL,NULL,FALSE,0,NULL,NULL,
+            &local_startup,&local_process)) {result=GetLastError();goto native_identity_done;}
+        if(WaitForSingleObject(local_process.hProcess,10000)==WAIT_OBJECT_0 &&
+            GetExitCodeProcess(local_process.hProcess,&result) && result==41) result=0;
+        CloseHandle(local_process.hThread);CloseHandle(local_process.hProcess);
+native_identity_done:
+        if(file!=INVALID_HANDLE_VALUE)CloseHandle(file);
+        SetCurrentDirectoryW(current);
+        if(legacy[0]) DeleteFileW(legacy);
+        if(temporary[0]) RemoveDirectoryW(temporary);
+        return result;
+    }
     if(!wcscmp(mode,L"attributes-leaf")) {
         WCHAR value[128],directory[MAX_PATH],windows[MAX_PATH];DWORD written;
         if(!GetEnvironmentVariableW(L"NTHOOK_TEST",value,128) || wcscmp(value,L"\x4e2d\x6587"))return 21;
@@ -42,8 +75,9 @@ static DWORD child(PCWSTR mode,PCWSTR next=NULL,PCWSTR final=NULL)
         if(_wcsicmp(directory,windows))return 22;
         if(!GetEnvironmentVariableW(L"NTHOOK_INCLUDED",value,128) ||
            !SetEvent((HANDLE)(ULONG_PTR)_wcstoui64(value,NULL,10)))return 23;
-        if(GetEnvironmentVariableW(L"NTHOOK_EXCLUDED",value,128))
-            SetEvent((HANDLE)(ULONG_PTR)_wcstoui64(value,NULL,10));
+        /* HANDLE_LIST deliberately excludes this event. Its value remains
+         * descriptive environment data only; do not invoke an invalid handle. */
+        if(!GetEnvironmentVariableW(L"NTHOOK_EXCLUDED",value,128))return 24;
         return WriteFile(GetStdHandle(STD_OUTPUT_HANDLE),"UNICODE-ATTRIBUTES",18,&written,NULL) && written==18 ? 0 : 24;
     }
     WCHAR image[MAX_PATH],command[2*MAX_PATH];PROCESS_INFORMATION process={0};
@@ -62,11 +96,13 @@ static DWORD child(PCWSTR mode,PCWSTR next=NULL,PCWSTR final=NULL)
         InitializeProcThreadAttributeList(NULL,1,0,&bytes);
         extended.lpAttributeList=(LPPROC_THREAD_ATTRIBUTE_LIST)HeapAlloc(GetProcessHeap(),0,bytes);
         HANDLE list[3]={included,input,output};
-        WCHAR environment[256],windows[MAX_PATH];
-        int length=swprintf_s(environment,L"NTHOOK_TEST=\x4e2d\x6587");
-        length+=1+swprintf_s(environment+length+1,256-length-1,L"NTHOOK_INCLUDED=%llu",(unsigned long long)(ULONG_PTR)included);
-        length+=1+swprintf_s(environment+length+1,256-length-1,L"NTHOOK_EXCLUDED=%llu",(unsigned long long)(ULONG_PTR)excluded);
-        environment[length+1]=0;GetWindowsDirectoryW(windows,MAX_PATH);
+        WCHAR environment[256],windows[MAX_PATH],*cursor=environment;
+        int length=swprintf_s(cursor,ARRAYSIZE(environment),L"NTHOOK_TEST=\x4e2d\x6587");
+        if(length<0)return 25;cursor+=length+1;
+        length=swprintf_s(cursor,ARRAYSIZE(environment)-(cursor-environment),L"NTHOOK_INCLUDED=%llu",(unsigned long long)(ULONG_PTR)included);
+        if(length<0)return 25;cursor+=length+1;
+        length=swprintf_s(cursor,ARRAYSIZE(environment)-(cursor-environment),L"NTHOOK_EXCLUDED=%llu",(unsigned long long)(ULONG_PTR)excluded);
+        if(length<0)return 25;cursor+=length+1;*cursor=0;GetWindowsDirectoryW(windows,MAX_PATH);
         extended.StartupInfo.dwFlags=STARTF_USESTDHANDLES;
         extended.StartupInfo.hStdInput=input;extended.StartupInfo.hStdOutput=extended.StartupInfo.hStdError=output;
         swprintf_s(command,L"\"%ls\" attributes-leaf",image);
@@ -228,10 +264,16 @@ static void malformed(PCWSTR image,const nthook_context *context,unsigned mutati
 }
 int wmain(int argc,WCHAR **argv)
 {
+    /* The launcher fixture observes the literal argument reached by run16. */
+    {
+        PCWSTR name=wcsrchr(argv[0],L'\\');
+        if(!_wcsicmp(name ? name+1 : argv[0],L"hook-legacy-launcher.exe"))
+            return argc==2 && !wcscmp(argv[1],L"legacy") ? 41 : 57;
+    }
     if(argc==4 && !wcscmp(argv[1],L"alternate"))return (int)child(argv[1],argv[2],argv[3]);
     if(argc==3 && !wcscmp(argv[1],L"alternate-leaf"))return (int)child(argv[1],argv[2]);
     if(argc==2)return (int)child(argv[1]);
-    nthook_context context;WCHAR image[MAX_PATH],gui[MAX_PATH],*slash;
+    nthook_context context;WCHAR image[MAX_PATH],gui[MAX_PATH],legacy_launcher[MAX_PATH],saved_launcher[MAX_PATH],*slash;
     check(!nthook_context_paths(&context),"own-package pinned paths");
     GetModuleFileNameW(NULL,image,MAX_PATH);wcscpy_s(gui,image);
     slash=wcsrchr(gui,L'\\');wcscpy_s(slash+1,MAX_PATH-(slash+1-gui),L"nthook-gui-test.exe");
@@ -242,6 +284,13 @@ int wmain(int argc,WCHAR **argv)
     check(WaitForSingleObject(context.frontend,0)==WAIT_OBJECT_0 &&
           WaitForSingleObject(context.execution,0)==WAIT_OBJECT_0,"recipient-local duplicated events");
     check(run(image,L"nested",&context,NATIVE_HOOK_INTERCEPT)==0,"CUI immediate descendant propagated");
+    wcscpy_s(legacy_launcher,image);slash=wcsrchr(legacy_launcher,L'\\');
+    wcscpy_s(slash+1,MAX_PATH-(slash+1-legacy_launcher),L"hook-legacy-launcher.exe");
+    check(CopyFileW(image,legacy_launcher,FALSE),"private legacy launcher fixture");
+    wcscpy_s(saved_launcher,context.launcher);wcscpy_s(context.launcher,legacy_launcher);
+    check(run(image,L"legacy-request",&context,NATIVE_HOOK_INTERCEPT)==0,
+        "legacy Hook redirect forwards caller request to run16 unchanged");
+    wcscpy_s(context.launcher,saved_launcher);DeleteFileW(legacy_launcher);
     check(run(image,L"ansi",&context,NATIVE_HOOK_INTERCEPT)==0,"ANSI native child propagated");
     check(run(image,L"cmd",&context,NATIVE_HOOK_INTERCEPT)==0,"actual matching-width CMD propagated immediate child");
     check(run(image,L"attributes",&context,NATIVE_HOOK_INTERCEPT)==0,"explicit handle list/Unicode environment/CWD/streams preserved");

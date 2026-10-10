@@ -2,35 +2,36 @@
 
 ## Current Work
 
-**Active: M0 T442 S1**
+**Active: M0 T443 S3**
 
 ## Active Packet
 
-### Frontend Console-loss lifecycle diagnosis
+### COMMAND interpreter/target/tail contract recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T442 S1`, Ordinary Mode. |
-| Admission And Approval | Owner redirects active T442/S1 from the unneeded mysmb Console-identity experiment to a lifecycle debug and repair task: closing the outer CMD/visible Console after a DOS task must retire NTCON and its worker instead of leaving them in NTMON. Owner approves the source-backed repair below. |
-| Objective | Make NTSRV the sole borrowed-frontend loss authority. It must use NTCON's existing authenticated initial Console-member process identities as one-shot external-root waits; when every external initial member exits, NTSRV closes the root and orders worker shutdown. |
-| Non-goals | No mysmb compatibility change, target-specific Console hook, guest/media change, worker/NTCON type distinction, new protocol/RPC, polling/timer loop, Console handle transfer, or task/Observed-record model. NTCON must not independently choose retirement. |
-| Reference Baseline | T441 released lifecycle behavior, NTSRV-owned frontend route/worker shutdown model, NTCON Console-root attachment and existing frontend teardown tests. |
-| Files And ABI Surface | NTSRV frontend registry/lifecycle and connection cleanup, NTCON removal of local Console-anchor policy, focused lifecycle tests and evidence. No wire ABI change. |
-| Applicable Rules | Execution, architecture, coding, documentation and source-policy authorities; NTSRV remains lifecycle/relationship authority; NTCON remains worker-neutral; hidden Console carrier remains private. |
-| Verification | Exercise borrowed CMD and launcher-owned Console paths. Prove NTSRV waits the former's external initial members without polling; their final exit closes root and delivers NTCON/worker shutdown. Prove launcher-owned paths do not use this predicate. Distinguish NTMON stale display from live processes. |
-| Expected Markers | A source-backed transition from final external member exit through NTSRV `frontend_closing`, NTCON exit and worker shutdown; no arbitrary NTCON anchor/re-sampling remains. |
-| Asset Needs | Current released package and build-owned diagnostic trace/test material only. |
-| Reporting Requirements | Record exact reproduction, live PIDs/handle state when available, governing source functions, expected/actual state transition, causality confidence and safe repair scope. |
-| Stop Conditions | The scene cannot be reproduced or is outside project ownership; a repair would require new polling, target tracking or a general lifecycle redesign. |
-| Exit Criteria | Source-backed repair, focused borrowed/self-owned lifecycle proof, build/package publication gates, governance/evidence review, commit and push. |
-| Original Owner Request | “调查为什么可见console不存在了，ntcon还没死？” |
-| Similar-Issue Sweep | Outer CMD close, Console/Window frontend teardown, workerless NTSRV countdown, explicit worker kill, frontend-root loss, stale NTMON snapshot and DOS/Win32 worker symmetry. |
+| Identifier Mode | `M0 T443 S3`, Ordinary Mode. |
+| Admission And Approval | Owner directs “准入 S3，先解释问题和根源”. S2's shared-source Hook correction is complete in the working packet: both Hook bitnesses built and the focused installation suite passed three consecutive times with 104 assertions. S3 is the next coupled H01--H03 repair; Windows 3.1 window appearance remains the queue head. |
+| Objective | Preserve the complete original `COMSPEC /c <tail>` command that COMMAND has already assembled, but create it through run16/NTVWM so the host COMSPEC is Hooked. Remove the project-owned `|&<>`, bare `COMMAND.COM /c`, and three-argv quote-rebuild heuristics without taking shell grammar from COMMAND or host CMD. |
+| Non-goals | No guest/media mutation, generic Windows command-line parser, filename alias list, new shell/helper/scheduler/protocol, broad H04 fallback change, change to Hook identity behavior, or replacement of a `COMSPEC /c` tail by a new run16 shell fallback. |
+| Reference Baseline | [T443 S1 ledger](../etc/evidence/m0-t443-s1-special-case-contract-ledger.md), original `cmdExec` in `src/mvdm/dos/command/cmdexec.c` (its `AH=1` branch builds `COMSPEC /c <tail>`), `command_process_compat.c`, `run16/main.c`, and the focused S2 Hook result. |
+| Files And ABI Surface | Expected owner files are `src/ntvdm-exe/win32/command_process_compat.c`, `src/run16-exe/main.c`, their focused tests/evidence, and required governance records. No public protocol or guest ABI change is admitted. |
+| Applicable Rules | Execution, architecture, coding, documentation and source-policy authorities; original COMMAND creates the full host `COMSPEC /c` command, while host CMD remains the sole owner of its quoting, pipe, redirection, batch and built-in grammar. |
+| Verification | Focused build and component checks now pass; release identity is verified against all ten deployed images. The headless Console observer returns the same pre-input `ERROR_INVALID_PARAMETER` for both candidate and HEAD, so it is recorded as an unsuitable interactive witness rather than a false product regression. Owner acceptance remains `run16 command` with built-in, pipe/redirection, and nested return in a real Windows Terminal Console. See [S3 evidence](../etc/evidence/m0-t443-s3-command-comspec-contract.md). |
+| Expected Markers | No route decision is based merely on a metacharacter scan or bare basename; the original full `COMSPEC /c <tail>` reaches run16 unchanged and NTVWM injects Hook before that COMSPEC resumes. |
+| Asset Needs | Current ten-image release, source/build-owned command fixtures and existing original/ledger evidence only. |
+| Reporting Requirements | Record current call graph, each removed/retained decision, original/provenance basis, positive and negative witnesses, both Console/Window regression scope, and release boundary. |
+| Stop Conditions | The only apparent solution needs a general parser, changes original/mirror COMMAND code, requires new IPC/protocol, cannot preserve a nested or composite witness, or reveals that H04's error taxonomy must change; pause for re-admission rather than broaden S3. |
+| Exit Criteria | Source-backed contract and minimal owner-side repair are complete; focused build/component checks and ten-image release identity pass. This S remains active until the owner completes the real-Console COMMAND acceptance matrix. |
+| Original Owner Request | “准入s3 先解释问题和根源”. |
+| Similar-Issue Sweep | All project-owned COMMAND target/tail identity checks in the NTVDM adapter and run16, including quoted transport only; exclude H04 fallback and Hook H06 parser work unless the stop condition is met. |
 
-The unneeded mysmb Hook/RPC experiment is retained as non-delivery evidence
-only: [target transition](../etc/evidence/m0-t442-s1-mysmb64-console-identity-transition.md)
-and [withdrawn carrier experiment](../etc/evidence/m0-t442-s1-native-console-parent-redirection.md).
-Its source changes are removed before lifecycle diagnosis; no image from that
-experiment is published.
+## T442 S1 Delivery Note
+
+T442's borrowed-Console lifecycle repair was published at `44c25e138`.
+NTSRV now owns initial external-member exit waits and frontend closing; NTCON
+no longer owns local anchor retirement. Its visible-Console close observation
+remains an owner acceptance check, not a reason to keep a second active packet.
 
 ## Previously Closed Work
 
