@@ -72,7 +72,10 @@ static DWORD capture(ntvdm_console_graphics *state,void **payload,SIZE_T *payloa
     if(!payload || !payload_bytes)return ERROR_INVALID_PARAMETER;
     *payload=NULL;*payload_bytes=0;
     AcquireSRWLockExclusive(&state->lock);
-    if (!state->active || !state->dirty) {ReleaseSRWLockExclusive(&state->lock);return ERROR_SUCCESS;}
+    /* See flush(): physical Console selection is irrelevant to a copied
+     * software-VGA frame.  A live graphics identity is the source lifetime
+     * guard; route admission remains exclusively in worker-base. */
+    if (!state->identity || !state->dirty) {ReleaseSRWLockExclusive(&state->lock);return ERROR_SUCCESS;}
     if((SIZE_T)state->bytes>SIZE_MAX-sizeof(*copied)) {
         ReleaseSRWLockExclusive(&state->lock);return ERROR_ARITHMETIC_OVERFLOW;
     }
@@ -227,6 +230,35 @@ int ntvdm_console_graphics_invalidate(HANDLE output,const SMALL_RECT *rect)
     }
     ReleaseSRWLockExclusive(&state->lock);return result;
 }
+
+int ntvdm_console_graphics_flush(void)
+{
+    ntvdm_console_graphics *state=ntvdm_console_graphics_context();
+    int result=0;
+    if (!state) return 0;
+    AcquireSRWLockExclusive(&state->lock);
+    if (state->identity) {
+        /* `host_flush_screen` is the original completion boundary: do not
+         * infer rectangles or redraw a pointer here.  The existing capture
+         * callback copies the complete, already-painted DIB.  `active`
+         * records the legacy physical-Console buffer selection, not whether
+         * this worker's copied software-VGA source is routable.  Window mode
+         * owns a valid DIB without that old selection, so gating this flush
+         * on `active` silently falls back to the coarse invalidation timer. */
+        state->dirty=TRUE;
+        result=signal_dirty(state) ? 1 : -1;
+    }
+    ReleaseSRWLockExclusive(&state->lock);
+    return result;
+}
+
+#ifndef NTVDM_CONSOLE_GRAPHICS_FLUSH_PROBE_EXTERNAL
+void ntvdm_console_graphics_flush_probe(DWORD screen_state,DWORD mode_type)
+{
+    UNREFERENCED_PARAMETER(screen_state);
+    UNREFERENCED_PARAMETER(mode_type);
+}
+#endif
 
 int ntvdm_console_graphics_palette(HANDLE output,HPALETTE palette,DWORD flags)
 {

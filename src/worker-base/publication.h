@@ -23,7 +23,7 @@ DWORD worker_base_publication_signal(worker_base_publication *);
 DWORD worker_base_publication_offer(worker_base_publication *,const void *,SIZE_T,BOOL *);
 DWORD worker_base_publication_active(worker_base_publication *,BOOL);
 /* Quiesced owner's final/current state. Requires inactive admission and no
- * concurrent callback; uses the same last-successful comparison. */
+ * concurrent callback; always delivers the owner-supplied complete frame. */
 DWORD worker_base_publication_commit(worker_base_publication *,const void *,SIZE_T);
 void worker_base_publication_destroy(worker_base_publication *);
 #endif

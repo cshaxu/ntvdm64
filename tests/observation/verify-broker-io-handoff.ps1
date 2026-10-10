@@ -16,12 +16,10 @@ if(!$prefix.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)) {
 }
 if(!(Test-Path (Split-Path $prefix -Parent))) {throw 'Declare/create the build run root first'}
 if(Test-Path "$prefix.observer") {throw 'Preserve existing run evidence; choose a fresh prefix'}
-if(Test-Path 'Z:\') {throw 'Z: already exists; do not replace an existing mapping'}
 if(Get-Process ntsrv -ErrorAction SilentlyContinue) {throw 'An existing broker must finish before this isolated probe'}
 . "$PSScriptRoot/isolated_package_cleanup.ps1"
 $testScope=New-IsolatedPackageScope $runtime
 $binary=Get-PackageBinaryRoot $runtime
-$binaryRelative=$binary.Substring($runtime.Length).TrimStart('\')
 $names='run16.exe','ntsrv.exe','ntvdm.exe','ntvwm.exe','ntcon.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL'
 foreach($hook in 'nthook32.dll','nthook64.dll') {
     if(Test-Path (Join-Path $binary $hook)){$names+=,$hook}
@@ -45,17 +43,12 @@ $environmentNames='MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_WINDOW_INPUT','
     'NTVDM_BOOTSTRAP_TRACE','NTVWM_GEOMETRY_ERROR_LOG'
 $saved=@{}
 foreach($name in $environmentNames) {$saved[$name]=[Environment]::GetEnvironmentVariable($name,'Process')}
-$mapped=$false
 try {
-    & subst.exe Z: $runtime
-    if($LASTEXITCODE){throw 'SUBST Z: failed'}
-    $mapped=$true
-    $launchBinary=if($binaryRelative){Join-Path 'Z:\' $binaryRelative}else{'Z:\'}
-    $testScope.Paths+=@($testScope.Paths | ForEach-Object {Join-Path $launchBinary ([IO.Path]::GetFileName($_))})
+    # Run from the real build-owned package path. A global drive alias is not
+    # test isolation and would make failure attribution depend on unrelated
+    # process-wide state.
+    $launchBinary=$binary
     $observerLaunch=$observerPath
-    if($observerPath.StartsWith($runtime+'\',[StringComparison]::OrdinalIgnoreCase)){
-        $observerLaunch=Join-Path 'Z:\' $observerPath.Substring($runtime.Length+1)
-    }
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     # Use the observer's checked disposable 80-column Console fixture, like
     # control regression. The host's default private-desktop geometry is not
@@ -115,7 +108,6 @@ try {
     "PASS broker I/O $Case $NativeMachine : actual CMD/DOS input, parent return and direct exit=23"
 } finally {
     try {Stop-IsolatedPackageScope $testScope}finally{
-        if($mapped) {& subst.exe Z: /d; if($LASTEXITCODE){Write-Error 'Failed to remove owned Z: mapping'}}
         foreach($name in $environmentNames) {
             # PowerShell can marshal null to an empty string here. Native
             # GetEnvironmentVariable(name,NULL,0) sees that as present (1),

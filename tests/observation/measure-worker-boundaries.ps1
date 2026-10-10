@@ -14,7 +14,6 @@ $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $root=[IO.Path]::GetFullPath($ReportRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase)){throw 'Reports must remain below build/'}
 if(Test-Path $root){throw 'Fresh reports required'}
-if(Test-Path Z:\){throw 'Z: occupied'}
 if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'Existing broker'}
 $worker=(Resolve-Path $MeasuredWorker).Path;$observerPath=(Resolve-Path $Observer).Path
 $baselinePath=(Resolve-Path $Baseline).Path
@@ -32,8 +31,6 @@ $names=@('MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_MOUSE_HOOK','MVDM_OBSERV
 $saved=@{};foreach($name in $names){$saved[$name]=[Environment]::GetEnvironmentVariable($name)}
 $scope=$null;$results=@()
 try {
-    & subst.exe Z: $runtime
-    if($LASTEXITCODE){throw 'SUBST failed'}
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     $env:MVDM_OBSERVER_MOUSE_HOOK='O:\winnt\tests\S7MOUSE.dll'
     $env:MVDM_OBSERVER_MOUSE_BURST='200'
@@ -57,7 +54,7 @@ try {
                 Copy-Item $(if($original){Join-Path $baselinePath 'system32/ntcon.exe'}else{(Resolve-Path $MeasuredFrontend).Path}) (Join-Path $runtime 'system32/ntcon.exe') -Force
             }
         }
-        $scope=New-IsolatedPackageScope $runtime 'Z:\'
+        $scope=New-IsolatedPackageScope $runtime
         $prefixName="mouse-$iteration"
         $report=Join-Path $root ($prefixName+$(if($Edit){'-edit.txt'}else{'.txt'}))
         $prefix=Join-Path $root "worker-$iteration"
@@ -65,9 +62,9 @@ try {
         else{Remove-Item Env:MVDM_TEST_WORKER_PERFORMANCE -ErrorAction SilentlyContinue}
         $timer=[Diagnostics.Stopwatch]::StartNew()
         if($Edit){
-            & "$repo/tools/audit/Verify-CommandExitStatus.ps1" -Observer $observerPath -PackageRoot 'Z:\' -ProcessPackageRoot $runtime -LogRoot $root -LogPrefix $prefixName -Cases edit -OrdinaryFrontend
+            & "$repo/tools/audit/Verify-CommandExitStatus.ps1" -Observer $observerPath -PackageRoot $runtime -ProcessPackageRoot $runtime -LogRoot $root -LogPrefix $prefixName -Cases edit -OrdinaryFrontend
         }else{
-            & $observerPath 'Z:\system32\run16.exe' 'Z:\system32\' $report --observation-timeout-ms 60000 'O:\winnt\tests\WMS7.COM'
+            & $observerPath (Join-Path $runtime 'system32\run16.exe') (Join-Path $runtime 'system32') $report --observation-timeout-ms 60000 'O:\winnt\tests\WMS7.COM'
         }
         $observerExit=$LASTEXITCODE;$timer.Stop()
         $record=Get-Content $report -Raw
@@ -137,7 +134,6 @@ try {
         Cases=$results}|ConvertTo-Json -Depth 6|Set-Content (Join-Path $root 'measurements.json') -Encoding UTF8
 }finally{
     try {if($scope){Stop-IsolatedPackageScope $scope}}finally{
-        & subst.exe Z: /d
         foreach($name in $names){
             if($null -eq $saved[$name]){Remove-Item -LiteralPath ('Env:'+$name) -ErrorAction SilentlyContinue}
             else{Set-Item -LiteralPath ('Env:'+$name) -Value $saved[$name]}

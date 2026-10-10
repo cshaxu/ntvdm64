@@ -2,7 +2,9 @@
 param(
     [Parameter(Mandatory=$true)][string]$BuildRoot,
     [Parameter(Mandatory=$true)][string]$ReferenceGraph,
-    [string]$RepositoryRoot=(Get-Location).Path
+    [string]$RepositoryRoot=(Get-Location).Path,
+    # Explicit developer-only wrapper. The formal graph remains direct MSVC.
+    [string]$CompilerCache=''
 )
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
@@ -14,6 +16,15 @@ if(-not $build.StartsWith((Join-Path $root 'build')+'\',[StringComparison]::Ordi
 New-Item -ItemType Directory -Path $build -Force | Out-Null
 New-Item -ItemType Directory -Path (Join-Path $build 'obj/basesrv') -Force | Out-Null
 function NP([string]$p) { $p.Replace('\','/').Replace(':','$:') }
+$compilerCommand='cl.exe'
+$compilerCacheDirectory=''
+if(-not [string]::IsNullOrWhiteSpace($CompilerCache)) {
+    $compilerCachePath=(Resolve-Path -LiteralPath $CompilerCache -ErrorAction Stop).Path
+    if(-not (Test-Path -LiteralPath $compilerCachePath -PathType Leaf)) { throw "Compiler cache executable is not a file: $CompilerCache" }
+    $compilerCacheDirectory=Join-Path $root 'build/compiler-cache'
+    New-Item -ItemType Directory -Path $compilerCacheDirectory -Force | Out-Null
+    $compilerCommand='"'+(NP $compilerCachePath)+'" cl.exe'
+}
 $reference=[IO.File]::ReadAllText([IO.Path]::GetFullPath($ReferenceGraph))
 $referenceFlags=[regex]::Match($reference,'(?m)^cflags = (.*)$').Groups[1].Value
 if(-not $referenceFlags) { throw 'Missing reference include graph' }
@@ -23,9 +34,10 @@ $includes += '/I "'+(NP (Join-Path $root 'src/ntsrv-exe/opennt/include'))+'"'
 $flags='/nologo /c /MT /W4 /Gy /showIncludes /DWIN32 /D_WIN32_WINNT=0x0A00 /I obj/basesrv '+($includes -join ' ')
 $graph=[Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
+$graph.Add('release_cflags = /O2')
 $graph.Add('cflags = '+$flags)
 $graph.Add('rule cc')
-$graph.Add('  command = cl.exe $cflags /Fo$out $in')
+$graph.Add('  command = '+$compilerCommand+' $cflags $release_cflags /Fo$out $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file: ')
 $graph.Add('rule dll')
@@ -72,9 +84,18 @@ $utf8=[Text.UTF8Encoding]::new($false)
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'),($graph -join "`r`n")+"`r`n",$utf8)
 $ninja=(Get-Command ninja.exe -ErrorAction Stop).Source
 $vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
-[IO.File]::WriteAllText((Join-Path $build 'run-ninja.cmd'),
-    '@echo off'+"`r`n"+'call "'+$vs+'" -arch=x64 -host_arch=x64 >nul'+"`r`n"+
-    'if errorlevel 1 exit /b %errorlevel%'+"`r`n"+'"'+$ninja+'" -C "'+$build+'" -j 8 %*'+"`r`n",$utf8)
+$runner=[Collections.Generic.List[string]]::new()
+$runner.Add('@echo off')
+$runner.Add('call "'+$vs+'" -arch=x64 -host_arch=x64 >nul')
+$runner.Add('if errorlevel 1 exit /b %errorlevel%')
+if($compilerCacheDirectory) {
+    $runner.Add('set "CCACHE_DIR='+$compilerCacheDirectory+'"')
+    $runner.Add('set "CCACHE_BASEDIR='+$root+'"')
+    $runner.Add('set "CCACHE_NOHASHDIR=true"')
+}
+$runner.Add('"'+$ninja+'" -C "'+$build+'" -j 8 %*')
+[IO.File]::WriteAllText((Join-Path $build 'run-ninja.cmd'),($runner -join "`r`n")+"`r`n",$utf8)
+$cacheMetadata=if($compilerCacheDirectory){@{enabled=$true;executable=$compilerCachePath;directory=$compilerCacheDirectory;baseDirectory=$root;hashDirectory=$false}}
 [IO.File]::WriteAllText((Join-Path $build 'source-manifest.json'),
-    (@{architecture='AMD64';scope='Hook DLL only; no worker';sources=$manifest} | ConvertTo-Json -Depth 5),$utf8)
+    (@{architecture='AMD64';scope='Hook DLL only; no worker';compilerCache=$cacheMetadata;sources=$manifest} | ConvertTo-Json -Depth 5),$utf8)
 Write-Output "Generated Hook-only AMD64 graph: $build"

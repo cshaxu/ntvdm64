@@ -59,6 +59,7 @@
 /* DIVERGENCE(MVDM-HOST-DIV-318): original CCPU cursor refresh owner. */
 
 #include "nt_graph.h"
+#include "ntvdm-exe/win32/console_graphics.h"
 #include "nt_cga.h"
 #include "nt_ega.h"
 #include "nt_event.h"
@@ -817,10 +818,38 @@ static void publish_text_update(void)
 void nt_flush_screen(void)
 {
     sub_note_trace0(ALL_ADAPT_VERBOSE, "nt_flush_screen");
+    ntvdm_console_graphics_flush_probe((DWORD)sc.ScreenState,(DWORD)sc.ModeType);
+
+#if defined(CCPU) && defined(X86GFX)
+    /* The original X86GFX FULLSCREEN path writes its active graphics DIB
+     * directly to the physical Console, so it deliberately performs no
+     * calc_update here.  This product keeps the same software VGA state but
+     * presents it through NTKVM; preserve the original completion boundary by
+     * asking the copied-DIB publisher to capture the already-painted frame.
+     * No guest pixels, cursor shape, timer cadence, or damage rectangle is
+     * fabricated at this boundary. */
+    if (sc.ScreenState == FULLSCREEN && sc.ModeType == GRAPHICS) {
+        if (ntvdm_console_graphics_flush() < 0)
+            DisplayErrorTerm(EHS_FUNC_FAILED, GetLastError(), __FILE__, __LINE__);
+        return;
+    }
+#endif
 
 #if defined(CCPU) && !defined(X86GFX)
     /* DIVERGENCE(MVDM-HOST-DIV-326): local painter, copied async delivery. */
     if (sc.ScreenState == FULLSCREEN) {
+        /* The standalone host deliberately compiles its original host sources
+         * without X86GFX: VGA is software state presented by NTCON, not an
+         * old physical-Console renderer.  A completed graphics paint must
+         * therefore notify that copied source at the same original
+         * host_flush_screen boundary.  Do not send it through the text helper:
+         * that helper correctly ignores GRAPHICS and would otherwise swallow
+         * this completed paint. */
+        if (sc.ModeType == GRAPHICS) {
+            if (ntvdm_console_graphics_flush() < 0)
+                DisplayErrorTerm(EHS_FUNC_FAILED, GetLastError(), __FILE__, __LINE__);
+            return;
+        }
         mvdm_softpc_text_video_flush(publish_text_update);return;
     }
 #endif

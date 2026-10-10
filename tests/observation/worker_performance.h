@@ -9,6 +9,11 @@ LONGLONG worker_performance_clock(void);
 void worker_performance_record(const char *,LONGLONG,DWORD,DWORD);
 /* Sum of disjoint API-call durations, not a continuous phase interval. */
 void worker_performance_record_total(const char *,LONGLONG,DWORD,DWORD);
+/* Fixed aggregate counters avoid turning a high-frequency graphics damage
+ * measurement into an 8192-record trace or a producer-side file workload. */
+void worker_performance_graphics_invalidate(LONGLONG,DWORD,DWORD);
+void worker_performance_graphics_signal(LONGLONG,DWORD);
+void worker_performance_graphics_copy(LONGLONG,DWORD,DWORD);
 void worker_performance_push(mvdm_mouse_input *,DWORD,int,LONGLONG);
 void worker_performance_take(mvdm_mouse_input *,DWORD,DWORD,int,LONGLONG);
 void worker_performance_flush(void);

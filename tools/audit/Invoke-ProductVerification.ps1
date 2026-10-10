@@ -23,7 +23,7 @@ param(
 $ErrorActionPreference='Stop'
 $total=[Diagnostics.Stopwatch]::StartNew()
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
-$runtime=(Resolve-Path $RuntimeRoot).Path
+$sourceRuntime=(Resolve-Path $RuntimeRoot).Path
 $cache=(Resolve-Path $BuildCache).Path
 $observerPath=(Resolve-Path $Observer).Path
 $log=[IO.Path]::GetFullPath($LogRoot)
@@ -32,8 +32,15 @@ if(!$log.StartsWith($build,[StringComparison]::OrdinalIgnoreCase) -or (Test-Path
     throw 'Require a fresh repository-build evidence directory'
 }
 . "$repo/tests/observation/isolated_package_cleanup.ps1"
-$runtimeScope=New-IsolatedPackageScope $runtime
-$cacheScope=New-IsolatedPackageScope $cache
+$runtime=$null
+try {
+    $runtime=New-PhysicalRuntimeStage $sourceRuntime
+    $runtimeScope=New-IsolatedPackageScope $runtime
+    $cacheScope=New-IsolatedPackageScope $cache
+} catch {
+    if($runtime){Remove-PhysicalRuntimeStage $runtime}
+    throw
+}
 $runtimeBinary=Get-PackageBinaryRoot $runtime
 if($NativeWorker){
     $NativeWorker=(Resolve-Path -LiteralPath $NativeWorker).Path
@@ -118,23 +125,10 @@ function Invoke-Gate([string]$Name,[scriptblock]$Body) {
     }
 }
 function Invoke-ShortRuntime([scriptblock]$Body) {
-    if(Test-Path Z:\){throw 'Z: in use'}
-    & subst.exe Z: $runtime
-    if($LASTEXITCODE){throw 'SUBST failed'}
-    # Bind the alias to this exact package while it exists; cleanup before unmap.
-    $paths=$runtimeScope.Paths
-    $savedObserver=$observerPath
-    if($observerPath.StartsWith($runtime+'\',[StringComparison]::OrdinalIgnoreCase)){
-        $observerPath=Join-Path 'Z:\' $observerPath.Substring($runtime.Length+1)
-    }
-    $runtimeScope.Paths=@($paths)+@($paths|ForEach-Object {Join-Path 'Z:\' $_.Substring($runtime.Length+1)})
-    try { & $Body } finally {
-        try {Stop-IsolatedPackageScope $runtimeScope} finally {
-            & subst.exe Z: /d
-            $runtimeScope.Paths=$paths
-            $observerPath=$savedObserver
-        }
-    }
+    # Test packages execute from their physical build-owned path.  Do not
+    # create an OS-global drive mapping: it leaks across sessions and hides
+    # path/ownership bugs from the same isolated-package checks used below.
+    & $Body
 }
 try {
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
@@ -148,7 +142,7 @@ try {
             # Never resize an inherited user's Console.
             $env:MVDM_OBSERVER_SHORT_HISTORY='1'
             Invoke-Gate 'wow-frontiers' {
-                & "$repo/tests/observation/observe-wow-frontiers.ps1" -Observer $observerPath -WindowObserver $WindowObserver -Prefix wow-restored -PackageRoot Z:\ -ProcessPackageRoot $runtime -LogRoot $log -WaitTarget
+                & "$repo/tests/observation/observe-wow-frontiers.ps1" -Observer $observerPath -WindowObserver $WindowObserver -Prefix wow-restored -PackageRoot $runtime -ProcessPackageRoot $runtime -LogRoot $log -WaitTarget
                 foreach($guest in @('winmine','sol','write')){
                     $current=Get-Content "$log/wow-restored-$guest-windows.txt" -Raw
                     $last=($current -split 'sample-ms=')[-1]
@@ -177,7 +171,7 @@ try {
                 Invoke-Gate "$mode-17" {
                     try {
                         if($InputPolicy -eq 'Observed'){$env:MVDM_OBSERVER_MILESTONE_INPUT='1'}
-                        & "$repo/tools/audit/Verify-CommandExitStatus.ps1" -Observer $observerPath -PackageRoot Z:\ -ProcessPackageRoot $runtime -LogRoot $log -LogPrefix "$mode-17" -GuestFixturePath $GuestFixture -OrdinaryFrontend
+                        & "$repo/tools/audit/Verify-CommandExitStatus.ps1" -Observer $observerPath -PackageRoot $runtime -ProcessPackageRoot $runtime -LogRoot $log -LogPrefix "$mode-17" -GuestFixturePath $GuestFixture -OrdinaryFrontend
                     }finally{Remove-Item Env:MVDM_OBSERVER_MILESTONE_INPUT -ErrorAction SilentlyContinue}
                 }
             }
@@ -219,7 +213,7 @@ try {
                     $env:OPENNT_BROKER_PRODUCT_BUILD=if($NativeService){Split-Path $NativeService -Parent}else{$cache}
                     $env:OPENNT_VERSION_TEST_BUILD="$log/version-negative"
                     $env:OPENNT_VERSION_TEST_LOGS="$log/version-negative/logs"
-                    $env:OPENNT_VERSION_TEST_RUNTIME='Z:\'
+                    $env:OPENNT_VERSION_TEST_RUNTIME=$runtime
                     & $Node "$repo/tools/audit/Verify-ProductVersions.mjs"
                     if($LASTEXITCODE){throw 'Version negative gate failed'}
                 }finally{
@@ -231,7 +225,7 @@ try {
             }
             if($TerminalObserver){
                 Invoke-Gate 'strict-dir' {
-                    $env:TEST_RUNTIME_ROOT='Z:\'
+                    $env:TEST_RUNTIME_ROOT=$runtime
                     $env:MVDM_TEST_DIRECT_CMD='1'
                     $env:MVDM_TEST_S34_REPEAT_DIR='1'
                     try {
@@ -245,12 +239,12 @@ try {
                     }
                 }
             }else{throw 'Control gate requires the retained Terminal observer'}
-            Invoke-Gate 'modern-edit-return' {& "$repo/tests/observation/verify-command-native-edit-return.ps1" -Observer $observerPath -PackageRoot Z:\ -ReportPath "$log/modern-edit.txt"}
-            Invoke-Gate 'cooked-return' {& "$repo/tests/observation/verify-frontend-relaunch.ps1" -Observer $observerPath -PackageRoot Z:\ -ReportPath "$log/cooked-return.txt"}
-            Invoke-Gate 'rapid-relaunch' {& "$repo/tests/observation/verify-frontend-rapid-relaunch.ps1" -Observer $observerPath -PackageRoot Z:\ -ReportPath "$log/rapid.txt"}
-            Invoke-Gate 'interactive-relaunch' {& "$repo/tests/observation/verify-frontend-rapid-interactive.ps1" -Observer $observerPath -PackageRoot Z:\ -ReportPath "$log/interactive.txt"}
-            Invoke-Gate 'session-isolation' {& "$repo/tests/observation/verify-ntvwm-management.ps1" -Observer $observerPath -MonitorRpc $(if($MonitorRpc){$MonitorRpc}else{"$cache/monitor-rpc-test.exe"}) -PackageRoot Z:\ -ProcessPackageRoot $runtime -LogPrefix isolation -LogRoot $log -TwoSessions}
-            Invoke-Gate 'retirement-wiring' {& "$repo/tests/observation/verify-broker-retirement.ps1" -Observer $observerPath -PackageRoot Z:\ -ProcessPackageRoot $runtime -LogPrefix retirement -LogRoot $log -FullDeadlines:$FullDeadlines}
+            Invoke-Gate 'modern-edit-return' {& "$repo/tests/observation/verify-command-native-edit-return.ps1" -Observer $observerPath -PackageRoot $runtime -ReportPath "$log/modern-edit.txt"}
+            Invoke-Gate 'cooked-return' {& "$repo/tests/observation/verify-frontend-relaunch.ps1" -Observer $observerPath -PackageRoot $runtime -ReportPath "$log/cooked-return.txt"}
+            Invoke-Gate 'rapid-relaunch' {& "$repo/tests/observation/verify-frontend-rapid-relaunch.ps1" -Observer $observerPath -PackageRoot $runtime -ReportPath "$log/rapid.txt"}
+            Invoke-Gate 'interactive-relaunch' {& "$repo/tests/observation/verify-frontend-rapid-interactive.ps1" -Observer $observerPath -PackageRoot $runtime -ReportPath "$log/interactive.txt"}
+            Invoke-Gate 'session-isolation' {& "$repo/tests/observation/verify-ntvwm-management.ps1" -Observer $observerPath -MonitorRpc $(if($MonitorRpc){$MonitorRpc}else{"$cache/monitor-rpc-test.exe"}) -PackageRoot $runtime -ProcessPackageRoot $runtime -LogPrefix isolation -LogRoot $log -TwoSessions}
+            Invoke-Gate 'retirement-wiring' {& "$repo/tests/observation/verify-broker-retirement.ps1" -Observer $observerPath -PackageRoot $runtime -ProcessPackageRoot $runtime -LogPrefix retirement -LogRoot $log -FullDeadlines:$FullDeadlines}
         }
         Invoke-Gate 'nested-window-handoff' {& "$repo/tests/observation/verify-broker-io-handoff.ps1" -RuntimeRoot $runtime -Observer $observerPath -ReportPrefix "$log/handoff" -Case nested-window}
     }
@@ -266,5 +260,6 @@ try {
         [pscustomobject]@{Suite=$Suite;ElapsedMs=$total.ElapsedMilliseconds;
             InputPolicy=$InputPolicy;PreparationMs=$preparationMs;Gates=$timings.ToArray()}|
             ConvertTo-Json -Depth 4|Set-Content "$log/timings.json"
+        if($runtime){Remove-PhysicalRuntimeStage $runtime}
     }
 }

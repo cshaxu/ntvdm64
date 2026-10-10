@@ -2,139 +2,15 @@
 
 ## Current Work
 
-**Active: M0 T440 S9**
+**No active M/T/S packet.**
 
-## Active Packet
-
-### CCPU quick-event time-contract pacing
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | `M0 T440 S9`, Ordinary Mode. |
-| Candidate Proposal | [Text responsiveness and DOS/Win16 execution performance](../proposals/proposal-interaction-and-guest-performance-001.md). |
-| Admission And Approval | Owner directs: retain S7/S8 repairs as the clean baseline and implement the separately designed CCPU timing contract rather than modifying guest code, the heartbeat, or graphics publication. |
-| Objective | Restore the reached CCPU40 quick-event assumption that one decoded instruction represents one microsecond of guest time on a modern host, using a bounded event-interruptible worker-local pacer. |
-| Non-goals | No guest/PIF modification, qevent conversion rewrite, mouse/VGA/NTCON/worker-base protocol change, polling helper, frame-rate change, raw-pointer path, or unrelated CCPU optimization policy. |
-| Reference Baseline | S8 measures current decoded CCPU throughput at 25.95–42.02 M instructions/s while original `add_q_event_i()` assumes 1 M instructions/s; the original 9.8 ms mouse EOI delay can therefore elapse in roughly 0.23 ms. |
-| Files And ABI Surface | A new process-local NTVDM CCPU pacer; existing worker lifecycle; minimal registered safe-point/HLT hooks in the CCPU mirror; focused fixture seams and evidence. No wire, guest or worker-base ABI changes. |
-| Applicable Rules | Execution, source-policy, inherited-host-diff, CCPU profile, coding, documentation, and no-`Z:` owner constraint. |
-| Verification | Prove a 9.8 ms quick event cannot fire early during active CCPU execution; prove pending reset/timer/input events interrupt a deadline wait; prove HLT idle time does not create execution credit; retain reset/fault, keyboard/mouse and DOS/WOW lifecycle checks; compare paced and explicitly disabled raw-throughput fixture modes. |
-| Expected Markers | One bounded safe point, monotonic deadline/debt private to the worker, event-first wake precedence, and no new producer or poller. A noninteractive pipe is not a Console product witness. |
-| Stop Conditions | Pause for an owner decision before changing the target rate, making pacing default-off/on policy configurable, changing original qevent units, adding a timer/input thread, or modifying guest/PIF behavior. |
-| Exit Criteria | Source-backed pacing design and minimal diff ledger; focused timing/wake/HLT tests; x86 build; bounded Desktop observation where available; release identity/evidence; and explicit product-matrix limitation while `Z:` remains prohibited. |
-| Original Owner Request | “既然是模拟硬件的 VGA，那就应该按照真实的语义来做！” followed by approval to implement the event-driven CCPU pacing design. |
-| Similar-Issue Sweep | Existing HLT carrier, timer/reset/hardware interrupt producers, CCPU quick events, mouse EOI delay, keyboard refill delay, raw throughput test, and retained Win3.1 Standard execution. |
-
-## S8 Closure Record
-
-### M0 T440 S8 — Win3.1 desktop CPU attribution after idle-HLT repair
-
-S8 removes the project-added disabled SAS-store environment lookup and replaces
-only the full-overwrite XMS forward-copy bridge with the original numeric CCPU
-forward move. It retains S7's event-driven idle HLT repair (`MVDM-HOST-DIV-330`).
-Fresh x86 `r028-close` built `ntvdm.exe` (`B5217F3D…2229B4`) and passed the CCPU
-HLT/reset, CCPU throughput, original external-memory and mapped-XMS fixtures.
-The identical NTVDM was published with a recoverable predecessor under
-`O:\winnt\builds`; all ten release-manifest identities were checked. The
-normal full product matrix was not run because its only runner creates `Z:` via
-`subst`, which the owner has prohibited. A pipe-hosted `COMMAND.COM /c ver`
-smoke returned 87 and is recorded as an unsuitable noninteractive witness, not
-as a product pass. S8's evidence identifies the next independent problem: the
-CCPU quick-event clock assumes one instruction per microsecond. See
-[S8 evidence](../etc/evidence/m0-t440-s8-win31-xms-attribution.md).
-
-## S6 Closure Record
-
-See [S6 evidence](../etc/evidence/m0-t440-s6-post-s5-responsiveness-attribution.md).
-
-## S7 Closure Record
-
-S7 retains a minimal `MVDM-HOST-DIV-330` event wait at CCPU's original HLT
-boundary. The focused old/new carrier comparison reduces a 500 ms steady idle
-window from 0.515625 CPU seconds to zero while preserving original reset-vector
-delivery. A real Win3.1 desktop diagnostic remained active-guest CPU work, so
-S7 does not claim a desktop-throughput improvement and defers its product P
-until the active-cost attribution is complete. See
-[S7 evidence](../etc/evidence/m0-t440-s7-ccpu-hlt-event-wait.md).
-
-S6 found that S5's variable 1 MiB-bounded worker records removed the earlier
-graphics-transfer bottleneck: current 640x480 payload/dispatch p50 is 0.405
-ms. A retained current Win3.1 Standard worker instead used 17.45 CPU seconds
-over an 18-second wall interval, while ordinary COMMAND idle used no measurable
-CPU in its separate sample. Source review isolates the reached Win3.1 cost to
-CCPU's ring-0 `HLT` polling loop. The physical desktop witness remains owner
-facing; this attribution did not claim a new graphical acceptance result. See
-[S6 evidence](../etc/evidence/m0-t440-s6-post-s5-responsiveness-attribution.md).
-
-## S4 Closure Record
-
-S4 records a quantified attribution without modifying product behavior.  The
-fresh current-source 640x480 renderer p50 is 0.382 ms, while the accepted
-real Window EDIT trace measures 86.845 ms p50 through the synchronous
-worker-to-NTCON transfer boundary for a roughly 20 KiB text frame.  Current
-source requires three request/reply exchanges for that text frame and twenty
-for a 307,200 B 640x480 DIB.  Renderer/decode/assembly are excluded as the
-primary cause; mouse-IRQ consumption has a retained 97.950 ms tail.  The
-current private-desktop observer could not form a current native-frontend
-Window witness, so historical end-to-end percentiles remain explicitly
-labelled rather than projected as a current graphics measurement.  See
-[S4 evidence](../etc/evidence/m0-t440-s4-window-performance-attribution.md).
-
-## S5 Closure Record
-
-S5 replaces the fixed 16 KiB direct worker/NTCON payload array with bounded
-variable-length records (1 MiB maximum actual payload). A normal 640x480 VGA
-frame now crosses as `VIDEO_BEGIN` plus one payload record; larger frames
-remain ordered bounded parts with one final reply. During release validation,
-palette-indexed graphics exposed a latent publication race: capture before the
-guest palette install produced `ERROR_NOT_READY` and poisoned the publisher.
-That state now remains dirty and is republished when the existing palette
-install signals readiness. Focused framing, staging, palette-late graphics,
-build and attached-console graphics smoke checks pass. A subsequent field
-failure of DOS graphical launch was traced to stale `ntcon.exe` and `ntvdm.exe`
-release artifacts, not WOW routing or guest graphics semantics: a clean
-current-source relink of that pair restored both `MYSmb16` and `WINSTD` while
-the recorded release pair returned immediately. The pair was rebuilt, release
-manifest hashes refreshed, and published together to `O:/winnt/system32` and
-`assets/release`; interactive Win3.1/Window acceptance remains owner-facing.
-See [S5 evidence](../etc/evidence/m0-t440-s5-variable-worker-io.md).
-
-## S1 Closure Record
-
-S1 established a current, reproducible project-owned candidate without
-changing production code.  The shared publisher's ordinary waitable timer
-delivered roughly 31 ms p50 rather than its nominal 20 ms cadence; a test-only
-high-resolution timer factory delivered roughly 21 ms under the same policy.
-The worker mouse queue measured 9–14 ns per immediate pair and is excluded as
-a visible-stall cause.  Private Win3.1 and non-console startup probes did not
-produce a valid witness and remain explicitly unavailable.  The test harness,
-evidence are continued sequentially in S2; no timer implementation delivery
-is authorized.
-See [S1 evidence](../etc/evidence/m0-t440-s1-publication-timing-baseline.md).
-
-## S2 Closure Record
-
-S2's source audit found no missing dirty-rectangle support in the shared
-Window renderer: NTVDM64 and the SoftPC comparison project use the same
-pixel-diff, damaged-rectangle invalidation path. The material difference is
-upstream. NTVDM64 constructs and copies a complete DIB/frame before
-worker-base can replace it with a later frame, whereas SoftPC rejects an
-unchanged VGA generation before capture. The pure 640x480 Window renderer
-measured roughly 0.55 ms median per frame; this is not an end-to-end Win3.1
-witness. S3 owns only the resulting project-adapter repair.
-See [S2 evidence](../etc/evidence/m0-t440-s2-graphics-chain-audit.md).
-
-## S3 Closure Record
-
-S3 moves project-owned NTVDM DIB construction from every original graphics
-invalidation to worker-base's existing accepted publication boundary.  The
-original SoftPC painter and guest media remain unchanged; a private
-source-capture seam preserves existing 50 Hz policy, sender ownership and
-final-drain ordering.  The focused publication and real graphics-source
-fixtures pass, the x86 product relinks, and the verified ten-image package is
-published to `O:/winnt/system32`.  The existing observer-only `87` startup
-limitation occurs before graphics handoff and is retained rather than counted
-as a pass.  See [S3 evidence](../etc/evidence/m0-t440-s3-source-side-graphics-publication.md).
+M0 T440 is closed. Its independently verified graphics publication, bounded
+worker-record, idle-HLT, mapping, native `/O2`, and optional developer-cache
+work remain in the baseline. The unproven global CCPU quick-event pacing
+experiment was removed after it did not improve owner-observed responsiveness.
+The remaining Win3.1 interaction-latency investigation is an unadmitted
+queue-tail candidate; see the [T440 closure](../history/m0-t440-text-response-performance-closure.md)
+and [successor proposal](../proposals/proposal-win31-interactive-performance-root-cause-001.md).
 
 ## Previously Closed Work
 
@@ -279,6 +155,7 @@ repaired installed Win1.01 launch path. See the [S7 evidence](../etc/evidence/m0
 
 | Task | Outcome |
 | --- | --- |
+| T440 | Retained verified graphics/transport/idle/build improvements; global CCPU pacing withdrawn without a measured UX gain; active root-cause work deferred. [Closure](../history/m0-t440-text-response-performance-closure.md) |
 | T438 | Reversible installed Win3.1 path repair and CMD/PIF/GRP ownership split. [Closure](../history/m0-t438-win31-path-recovery-closure.md) |
 | T436 | Limited Windows 3.1 driver/setup delivery; ordinary Setup transition deferred. [Closure](../history/m0-t436-win31-setup-limited-closure.md) |
 | T437 | Installed-tree portable launch and path repair. [Closure](../history/m0-t437-installed-win31-portable-launch-closure.md) |

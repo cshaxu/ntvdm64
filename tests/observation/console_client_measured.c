@@ -5,20 +5,37 @@ static DWORD measured_exchange(ntcon_worker_client *,console_io_request *,consol
 static DWORD measured_video(ntcon_worker_client *,const console_video_description *,const void *);
 static DWORD measured_call(ntcon_worker_client *,console_io_request *,console_io_reply *);
 static DWORD measured_close(HANDLE *,HANDLE *,HANDLE *);
+static void measured_enter_critical(CRITICAL_SECTION *);
 #define ntcon_worker_exchange measured_exchange
 #define ntcon_worker_video measured_video
 #define ntcon_worker_call measured_call
 #define worker_base_io_close measured_close
+#define EnterCriticalSection measured_enter_critical
 #include "../../src/ntvdm-exe/win32/console_client.c"
+#undef EnterCriticalSection
 #undef ntcon_worker_exchange
 #undef ntcon_worker_video
 #undef ntcon_worker_call
 #undef worker_base_io_close
+static void measured_enter_critical(CRITICAL_SECTION *section)
+{
+    LONGLONG start;
+    if(!worker_performance_enabled()) {
+        EnterCriticalSection(section);return;
+    }
+    start=worker_performance_clock();
+    EnterCriticalSection(section);
+    worker_performance_record("worker-critical-section-acquire",start,0,0);
+}
 static DWORD measured_exchange(ntcon_worker_client *client,console_io_request *request,console_io_reply *reply)
 {
     DWORD result;LONGLONG start;
     if(!worker_performance_enabled())return ntcon_worker_exchange(client,request,reply);
     start=worker_performance_clock();result=ntcon_worker_exchange(client,request,reply);
+    /* Keep the opaque Console request code in count for source-side
+     * attribution.  The production client remains untouched: this wrapper
+     * exists only in the measured diagnostic worker. */
+    worker_performance_record("worker-exchange",start,request->operation,result);
     if(request->operation==CONSOLE_IO_READ_INPUT)
         worker_performance_record("worker-input-read",start,result ? 0 : reply->state.count,result);
     return result;

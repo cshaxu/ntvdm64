@@ -5,21 +5,16 @@ param(
 )
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/isolated_package_cleanup.ps1"
-$runtime=(Resolve-Path $RuntimeRoot).Path
+$sourceRuntime=(Resolve-Path $RuntimeRoot).Path
 $observerPath=(Resolve-Path $Observer).Path
 $reports=(Resolve-Path $ReportRoot).Path
 $build=(Resolve-Path "$PSScriptRoot/../../build").Path+'\'
 foreach($path in @($runtime,$observerPath,$reports)){
     if(!$path.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)){throw 'Require isolated build inputs/results'}
 }
-if(Test-Path Z:\){throw 'Z already in use'}
+$runtime=New-PhysicalRuntimeStage $sourceRuntime
 $scope=New-IsolatedPackageScope $runtime
-$mapped=$false
 try {
-    & subst.exe Z: $runtime
-    if($LASTEXITCODE){throw 'SUBST failed'}
-    $mapped=$true
-    $scope=New-IsolatedPackageScope $runtime 'Z:\'
     foreach($enabled in @($false,$true)){
         $report=Join-Path $reports "milestone-negative-$enabled.txt"
         if(Test-Path $report){throw 'Fresh evidence required'}
@@ -31,7 +26,7 @@ try {
         $start.Environment.Remove('MVDM_OBSERVER_SHORT_HISTORY')|Out-Null
         $start.Environment.Remove('MVDM_OBSERVER_PERFORMANCE')|Out-Null
         if($enabled){$start.Environment['MVDM_OBSERVER_PERFORMANCE']='1'}
-        foreach($argument in @('Z:\system32\run16.exe','Z:\',$report,'cmd.exe','/d','/c','exit','7',
+        foreach($argument in @((Join-Path $runtime 'system32\run16.exe'),$runtime,$report,'cmd.exe','/d','/c','exit','7',
             '--observe-console-input-text',"exit`r",'--observe-console-input-marker','S1-NOT-EMITTED')){
             $start.ArgumentList.Add($argument)
         }
@@ -54,6 +49,6 @@ try {
     }
 }finally{
     try{Stop-IsolatedPackageScope $scope}finally{
-        if($mapped){& subst.exe Z: /d;if($LASTEXITCODE){throw 'SUBST cleanup failed'}}
+        Remove-PhysicalRuntimeStage $runtime
     }
 }

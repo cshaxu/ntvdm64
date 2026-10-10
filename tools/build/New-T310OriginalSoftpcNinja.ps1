@@ -10,10 +10,9 @@ param(
     [string]$NativeMonitor = '',
     [string]$NativeLauncher = '',
     [string]$NativeService = '',
-    # Attribution-only selector.  The default preserves the historical graph
-    # byte-for-byte at the compiler-option level; `O2` changes only CCPU
-    # translation units so the interpreter cost can be measured in isolation.
-    [ValidateSet('default', 'O2')] [string]$CcpuOptimization = 'default',
+    # Opt-in developer acceleration.  A cache wrapper never changes the
+    # default reproducible graph or the compiler flags selected by a task.
+    [string]$CompilerCache = '',
     [ValidateRange(0, 64)] [int]$ParallelJobs = 0
 )
 
@@ -78,6 +77,21 @@ if (!(Test-Path -LiteralPath $vs -PathType Leaf) -or
     [string]::IsNullOrWhiteSpace($nativeNinja) -or
     !(Test-Path -LiteralPath $nativeNinja -PathType Leaf)) {
     throw 'MSVC Build Tools and Ninja are required.'
+}
+$compilerCachePath = ''
+$compilerCommand = 'cl.exe'
+$compilerCacheDirectory = ''
+if (![string]::IsNullOrWhiteSpace($CompilerCache)) {
+    $compilerCachePath = (Resolve-Path -LiteralPath $CompilerCache -ErrorAction Stop).Path
+    if (!(Test-Path -LiteralPath $compilerCachePath -PathType Leaf)) {
+        throw "Compiler cache executable is not a file: $CompilerCache"
+    }
+    # Keep the developer cache below build/, never in a user-global location.
+    # CCACHE_BASEDIR/NOHASHDIR permit same-source direct-mode reuse across
+    # developer graph roots when their remaining command-line inputs agree.
+    $compilerCacheDirectory = Join-Path $root 'build/compiler-cache'
+    New-Item -ItemType Directory -Force -Path $compilerCacheDirectory | Out-Null
+    $compilerCommand = '"' + (NinjaPath $compilerCachePath) + '" cl.exe'
 }
 
 $ccpuRoot = Join-Path $root 'src/mvdm/softpc.new/base/ccpu386'
@@ -593,6 +607,11 @@ $parallelRunner = Join-Path $build 'run-ninja-parallel.cmd'
 @('@echo off',
   ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'),
   'if errorlevel 1 exit /b %errorlevel%',
+  $(if (![string]::IsNullOrWhiteSpace($compilerCacheDirectory)) {
+      'set "CCACHE_DIR=' + $compilerCacheDirectory + '"'
+      'set "CCACHE_BASEDIR=' + $root + '"'
+      'set "CCACHE_NOHASHDIR=true"'
+  }),
   ('if "%MVDM_BUILD_JOBS%"=="" set "MVDM_BUILD_JOBS=' + $ParallelJobs + '"'),
   ('"' + $nativeNinja + '" -C "' + $build + '" -j %MVDM_BUILD_JOBS% %*')) |
     Set-Content -LiteralPath $parallelRunner -Encoding ascii
@@ -696,9 +715,6 @@ $baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE 
     ''
 $baseFlags = $baseCommonFlags + ($softpcIncludeRoots -join ' ')
 $ccpuFlags = $baseFlags
-if ($CcpuOptimization -eq 'O2') {
-    $ccpuFlags += ' /O2'
-}
 $hostFlags = $baseFlags + ' /FI "' + (NinjaPath $hostCrtRedirect) + '"'
 # XACTSRV's selected local-provider bodies retain the original RAP-to-native
 # conversion.  On modern Windows the ANSI NetUse entry no longer preserves the
@@ -736,8 +752,12 @@ $patchActivityCheckFlags = $baseFlags + ' /DMVDM_CCPU_ACTIVITY_CHECK_ONLY'
 $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
 $graph.Add('build_root = ' + (NinjaPath $build))
+# MSVC's supported release-speed equivalent to the requested “O3” mode.
+# Keep it in the compile rules rather than duplicating it through every
+# source-family flag variable, including the deliberately narrow closures.
+$graph.Add('release_cflags = /O2')
 $graph.Add('cflags = ' + $baseFlags)
-$graph.Add('ccpu_cflags = ' + $ccpuFlags)
+$graph.Add('ccpu_flags = ' + $ccpuFlags)
 $graph.Add('host_cflags = ' + $hostFlags)
 $graph.Add('rtl_cflags = ' + $baseFlags + ' /Gz')
 $graph.Add('dpmi_cflags = ' + $dpmiFlags)
@@ -749,22 +769,22 @@ $graph.Add('patch_activity_check_cflags = ' + $patchActivityCheckFlags)
 $graph.Add('rcflags = ' + ($includeRoots -join ' '))
 $graph.Add('')
 $graph.Add('rule cc')
-$graph.Add('  command = cl.exe $cflags /Fo$out $in')
+$graph.Add('  command = ' + $compilerCommand + ' $cflags $release_cflags /Fo$out $in')
 $graph.Add('  description = CC $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file: ')
 $graph.Add('rule cc_ccpu')
-$graph.Add('  command = cl.exe $ccpu_cflags /Fo$out $in')
+$graph.Add('  command = ' + $compilerCommand + ' $ccpu_flags $release_cflags /Fo$out $in')
 $graph.Add('  description = CC-CCPU $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file: ')
 $graph.Add('rule cc_host')
-$graph.Add('  command = cl.exe $host_cflags /Fo$out $in')
+$graph.Add('  command = ' + $compilerCommand + ' $host_cflags $release_cflags /Fo$out $in')
 $graph.Add('  description = CC-HOST $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file: ')
 $graph.Add('rule cc_rtl')
-$graph.Add('  command = cl.exe $rtl_cflags /Fo$out $in')
+$graph.Add('  command = ' + $compilerCommand + ' $rtl_cflags $release_cflags /Fo$out $in')
 $graph.Add('  description = CC-RTL $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file: ')
@@ -772,37 +792,37 @@ $graph.Add('rule asm_x86')
 $graph.Add('  command = ml.exe /nologo /c /coff /Fo$out $in')
 $graph.Add('  description = ASM-X86 $in')
 $graph.Add('rule cc_cvidc')
-$graph.Add('  command = cl.exe $cvidc_first_cflags /Fo$out $in')
+$graph.Add('  command = ' + $compilerCommand + ' $cvidc_first_cflags $release_cflags /Fo$out $in')
 $graph.Add('  description = CC-CVIDC $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file: ')
 $graph.Add('rule cc_dpmi')
-$graph.Add('  command = cl.exe $dpmi_cflags /Fo$out $in')
+$graph.Add('  command = ' + $compilerCommand + ' $dpmi_cflags $release_cflags /Fo$out $in')
 $graph.Add('  description = CC-DPMI $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file: ')
 $graph.Add('rule cc_cvidc_rule')
-$graph.Add('  command = cl.exe $cvidc_rule_cflags /Fo$out $in')
+$graph.Add('  command = ' + $compilerCommand + ' $cvidc_rule_cflags $release_cflags /Fo$out $in')
 $graph.Add('  description = CC-CVIDC-RULE $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file: ')
 $graph.Add('rule cc_cvidc_access')
-$graph.Add('  command = cl.exe $cvidc_access_cflags /Fo$out $in')
+$graph.Add('  command = ' + $compilerCommand + ' $cvidc_access_cflags $release_cflags /Fo$out $in')
 $graph.Add('  description = CC-CVIDC-ACCESS $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file: ')
 $graph.Add('rule cc_patch_vector_defaults')
-$graph.Add('  command = cl.exe $patch_vector_defaults_cflags /Fo$out $in')
+$graph.Add('  command = ' + $compilerCommand + ' $patch_vector_defaults_cflags $release_cflags /Fo$out $in')
 $graph.Add('  description = CC-PATCH $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file: ')
 $graph.Add('rule cc_patch_activity_check')
-$graph.Add('  command = cl.exe $patch_activity_check_cflags /Fo$out $in')
+$graph.Add('  command = ' + $compilerCommand + ' $patch_activity_check_cflags $release_cflags /Fo$out $in')
 $graph.Add('  description = CC-PATCH $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file: ')
 $graph.Add('rule cc_mvdm_debugger')
-$graph.Add('  command = cl.exe $cflags /D_NTDBG_ /Fo$out $in')
+$graph.Add('  command = ' + $compilerCommand + ' $cflags $release_cflags /D_NTDBG_ /Fo$out $in')
 $graph.Add('  description = CC-MVDM-DEBUGGER $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file: ')
@@ -1812,12 +1832,15 @@ $boundedExecutionFixtureSeamsObject = 'obj/tests/ccpu_bounded_execution_fixture_
 $graph.Add('build ' + $boundedExecutionFixtureSeamsObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_bounded_execution_fixture_seams.c')))
 # Same original owner libraries as the product, with a fixture main only.
 $graph.Add('rule event_test_link')
-$graph.Add('  command = link.exe /nologo /force:multiple /map:$out.map /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib')
+$graph.Add('  command = link.exe /nologo /force:multiple /map:$out.map /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
 $fixtureHostLibraries = 'worker-base.lib worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib vdmredir-dll-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res'
 $graph.Add('build ccpu-halt-reset-test.exe: event_test_link obj/tests/ccpu_halt_reset_test.obj ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $ccpuThroughputFixtureObject = 'obj/tests/ccpu_throughput_fixture.obj'
 $graph.Add('build ' + $ccpuThroughputFixtureObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_throughput_fixture.c')))
 $graph.Add('build ccpu-throughput-fixture.exe: event_test_link ' + $ccpuThroughputFixtureObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
+$physicalMappingFixtureObject = 'obj/tests/physical_mapping_observation_test.obj'
+$graph.Add('build ' + $physicalMappingFixtureObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/adapter-mvdm-host-out/physical_mapping_observation_test.c')))
+$graph.Add('build physical-mapping-observation-test.exe: event_test_link ' + $physicalMappingFixtureObject + ' obj/adapter-softpc/mvdm_softpc_physical_mapping.obj session.lib')
 # Test-only debug boundaries: original matching body and actual checked binding.
 $graph.Add('rule debug_unit_link')
 $graph.Add('  command = link.exe /nologo /machine:x86 /opt:ref /out:$out $in legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
@@ -1834,22 +1857,22 @@ $graph.Add('build oem-command-uppercase-test.exe: debug_unit_link obj/tests/oem_
 $graph.Add('build obj/tests/debugger_worker_module_observer.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/debugger_worker_module_observer.c')))
 $graph.Add('build debugger-worker-module-observer.exe: event_test_link obj/tests/debugger_worker_module_observer.obj')
 $graph.Add('rule s44_bop_vdd_cc')
-$graph.Add('  command = cl.exe $cflags /DS44_BOP_PROVIDER /Fo$out $in')
+$graph.Add('  command = ' + $compilerCommand + ' $cflags $release_cflags /DS44_BOP_PROVIDER /Fo$out $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file: ')
 $graph.Add('build obj/tests/s44_bop_vdd.obj: s44_bop_vdd_cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/s44_test_vdd.c')))
 $graph.Add('rule s44_entry_hook_vdd_cc')
-$graph.Add('  command = cl.exe $cflags /DS44_ENTRY_USER_HOOK /Fo$out $in')
+$graph.Add('  command = ' + $compilerCommand + ' $cflags $release_cflags /DS44_ENTRY_USER_HOOK /Fo$out $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file: ')
 $graph.Add('build obj/tests/s44_entry_hook_vdd.obj: s44_entry_hook_vdd_cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/s44_test_vdd.c')))
 $graph.Add('rule s44_memory_vdd_cc')
-$graph.Add('  command = cl.exe $cflags /DS44_MEMORY_PROVIDER /Fo$out $in')
+$graph.Add('  command = ' + $compilerCommand + ' $cflags $release_cflags /DS44_MEMORY_PROVIDER /Fo$out $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file: ')
 $graph.Add('build obj/tests/s44_memory_vdd.obj: s44_memory_vdd_cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/s44_test_vdd.c')))
 $graph.Add('rule s44_terminate_vdd_cc')
-$graph.Add('  command = cl.exe $cflags /DS44_TERMINATE_PROVIDER /Fo$out $in')
+$graph.Add('  command = ' + $compilerCommand + ' $cflags $release_cflags /DS44_TERMINATE_PROVIDER /Fo$out $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file: ')
 $graph.Add('build obj/tests/s44_terminate_vdd.obj: s44_terminate_vdd_cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/s44_test_vdd.c')))
@@ -1968,6 +1991,17 @@ if ($objectOutputDirectories.Count -gt 0) {
     architecture = $Architecture
     cpuProfile = 'CCPU40'
     toolchain = 'MSVC /MT via VsDevCmd'
+    compilerCache = if ([string]::IsNullOrWhiteSpace($compilerCachePath)) {
+        [ordered]@{ enabled = $false }
+    } else {
+        [ordered]@{
+            enabled = $true
+            executable = $compilerCachePath
+            directory = $compilerCacheDirectory
+            baseDirectory = $root
+            hashDirectory = $false
+        }
+    }
     ninjaParallelDefault = $ParallelJobs
     ninjaParallelOverride = 'MVDM_BUILD_JOBS'
     i386Define = $false

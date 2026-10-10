@@ -12,36 +12,39 @@ struct worker_base_publication {
     void *context;
     worker_base_publication_capture_fn capture;
     void *capture_context;
-    frame_copy pending,last;
+    frame_copy pending;
     LARGE_INTEGER frequency,last_sent;
     BOOL active,source_pending;
     DWORD error;
 };
+
+static HANDLE create_publication_timer(void)
+{
+#ifndef CREATE_WAITABLE_TIMER_HIGH_RESOLUTION
+#define CREATE_WAITABLE_TIMER_HIGH_RESOLUTION 0x00000002
+#endif
+    HANDLE timer = CreateWaitableTimerExW(NULL, NULL,
+        CREATE_WAITABLE_TIMER_HIGH_RESOLUTION, TIMER_ALL_ACCESS);
+    /* Older hosts can reject the newer creation flag.  Retain the original
+     * waitable timer contract there rather than making frame delivery depend
+     * on a scheduler capability. */
+    return timer ? timer : CreateWaitableTimerW(NULL, FALSE, NULL);
+}
 
 static void free_frame(frame_copy *frame)
 {
     if(frame->payload)HeapFree(GetProcessHeap(),0,frame->payload);
     memset(frame,0,sizeof(*frame));
 }
-static BOOL same_frame(const frame_copy *a,const frame_copy *b)
-{
-    return a->payload && b->payload &&
-        a->bytes==b->bytes && !memcmp(a->payload,b->payload,a->bytes);
-}
 /* Only one sender: publisher, or owner final drain after disabling admission
  * and waiting for idle. No state/painter lock covers transport. */
 static DWORD deliver(worker_base_publication *p,frame_copy *copy)
 {
-    DWORD error=ERROR_SUCCESS;BOOL same;
-    EnterCriticalSection(&p->lock);same=same_frame(copy,&p->last);LeaveCriticalSection(&p->lock);
-    if(!same) {
-        error=p->send(p->context,copy->payload,copy->bytes);
-        if(!error) {
-            EnterCriticalSection(&p->lock);
-            free_frame(&p->last);p->last=*copy;memset(copy,0,sizeof(*copy));
-            QueryPerformanceCounter(&p->last_sent);
-            LeaveCriticalSection(&p->lock);
-        }
+    DWORD error=p->send(p->context,copy->payload,copy->bytes);
+    if(!error) {
+        EnterCriticalSection(&p->lock);
+        QueryPerformanceCounter(&p->last_sent);
+        LeaveCriticalSection(&p->lock);
     }
     free_frame(copy);return error;
 }
@@ -134,7 +137,7 @@ worker_base_publication *worker_base_publication_create(worker_base_publication_
     InitializeCriticalSection(&p->lock);p->send=send;p->context=context;p->shutdown=shutdown;
     QueryPerformanceFrequency(&p->frequency);
     p->stop=CreateEventW(NULL,TRUE,FALSE,NULL);p->changed=CreateEventW(NULL,TRUE,FALSE,NULL);
-    p->idle=CreateEventW(NULL,TRUE,TRUE,NULL);p->timer=CreateWaitableTimerW(NULL,FALSE,NULL);
+    p->idle=CreateEventW(NULL,TRUE,TRUE,NULL);p->timer=create_publication_timer();
     if(p->stop && p->changed && p->idle && p->timer)
         p->thread=CreateThread(NULL,0,publish_thread,p,0,NULL);
     if(!p->thread){DWORD error=GetLastError();worker_base_publication_destroy(p);SetLastError(error);return NULL;}
@@ -175,7 +178,7 @@ DWORD worker_base_publication_active(worker_base_publication *p,BOOL active)
     if(active && p->error){error=p->error;LeaveCriticalSection(&p->lock);return error;}
     p->active=active;
     if(active) {
-        free_frame(&p->last);p->last_sent.QuadPart=0;
+        p->last_sent.QuadPart=0;
         if(p->source_pending)SetEvent(p->changed);
     }
     LeaveCriticalSection(&p->lock);
@@ -235,7 +238,7 @@ void worker_base_publication_destroy(worker_base_publication *p)
     if(!p)return;
     if(p->stop)SetEvent(p->stop);
     if(p->thread){WaitForSingleObject(p->thread,INFINITE);CloseHandle(p->thread);}
-    free_frame(&p->pending);free_frame(&p->last);
+    free_frame(&p->pending);
     if(p->timer)CloseHandle(p->timer);if(p->idle)CloseHandle(p->idle);
     if(p->changed)CloseHandle(p->changed);if(p->stop)CloseHandle(p->stop);
     DeleteCriticalSection(&p->lock);HeapFree(GetProcessHeap(),0,p);

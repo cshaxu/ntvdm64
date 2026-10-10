@@ -21,17 +21,14 @@ function PackageProcesses {
         Where-Object {$_.ExecutablePath -in $products})
 }
 if((PackageProcesses).Count){throw 'Package in use; will not terminate an existing session'}
-if(Test-Path Z:\){throw 'Z: is occupied'}
 $results=@()
 try {
-    subst Z: $FixtureRoot
-    if($LASTEXITCODE){throw 'Fixture mapping failed'}
     foreach($name in (Get-Content (Join-Path $FixtureRoot 'guest-cases.json') -Raw | ConvertFrom-Json)) {
         if($Cases -and $name -notin $Cases){continue}
         $report="O:\winnt\logs\$LogPrefix-$name.txt"
         if(Test-Path $report){throw 'Use a fresh log prefix'}
         $launcher=0
-        $p=Start-Process -FilePath $Observer -ArgumentList @('O:\winnt\run16.exe','O:\winnt',$report,"Z:\$name.EXE",'--observation-timeout-ms','12000') -WorkingDirectory O:\winnt -WindowStyle Hidden -PassThru
+        $p=Start-Process -FilePath $Observer -ArgumentList @('O:\winnt\run16.exe','O:\winnt',$report,(Join-Path $FixtureRoot ($name+'.EXE')),'--observation-timeout-ms','12000') -WorkingDirectory O:\winnt -WindowStyle Hidden -PassThru
         try {
             if(!$p.WaitForExit(30000)){throw "Observer timeout: $name"}
             $text=Get-Content $report -Raw
@@ -73,6 +70,5 @@ try {
         if((PackageProcesses).Count){throw 'Unowned session remains; stopping'}
     }
 } finally {
-    subst Z: /d
     $results | ConvertTo-Json | Set-Content "O:\winnt\logs\$LogPrefix-summary.json" -Encoding utf8
 }

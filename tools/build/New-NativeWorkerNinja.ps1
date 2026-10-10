@@ -3,7 +3,9 @@ param(
  [Parameter(Mandatory)][string]$BuildRoot,
  [Parameter(Mandatory)][string]$ReferenceGraph,
  [ValidateSet('Worker','Frontend','Monitor','Launcher','Service')][string]$Component='Worker',
- [string]$RepositoryRoot=(Get-Location).Path
+ [string]$RepositoryRoot=(Get-Location).Path,
+ # Explicit developer-only wrapper. The formal graph remains direct MSVC.
+ [string]$CompilerCache=''
 )
 $ErrorActionPreference='Stop'
 $root=[IO.Path]::GetFullPath($RepositoryRoot)
@@ -12,6 +14,15 @@ if(!$build.StartsWith((Join-Path $root 'build')+'\',[StringComparison]::OrdinalI
 $reference=(Resolve-Path $ReferenceGraph).Path
 $text=Get-Content $reference -Raw
 function NP([string]$path){$path.Replace('\','/').Replace(':','$:')}
+$compilerCommand='cl.exe'
+$compilerCacheDirectory=''
+if(-not [string]::IsNullOrWhiteSpace($CompilerCache)){
+ $compilerCachePath=(Resolve-Path -LiteralPath $CompilerCache -ErrorAction Stop).Path
+ if(!(Test-Path -LiteralPath $compilerCachePath -PathType Leaf)){throw "Compiler cache executable is not a file: $CompilerCache"}
+ $compilerCacheDirectory=Join-Path $root 'build/compiler-cache'
+ $null=New-Item -ItemType Directory -Path $compilerCacheDirectory -Force
+ $compilerCommand='"'+(NP $compilerCachePath)+'" cl.exe'
+}
 $baseFlags=[regex]::Match($text,'(?m)^cflags = (.*)$').Groups[1].Value
 if(!$baseFlags){throw 'Missing audited reference flags'}
 $includes=@([regex]::Matches($baseFlags,'/I "[^"]+"')|ForEach-Object {$_.Value})
@@ -45,11 +56,12 @@ if($Component -in @('Worker','Frontend')){
 }
 $graph=[Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
+$graph.Add('release_cflags = /O2')
 $graph.Add('cflags = '+$nativeFlags)
 $graph.Add('entry = wmainCRTStartup')
 $graph.Add('subsystem = console')
 $graph.Add('rule cc')
-$graph.Add('  command = cl.exe $cflags /Fo$out $in')
+$graph.Add('  command = '+$compilerCommand+' $cflags $release_cflags /Fo$out $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file: ')
 $graph.Add('rule lib')
@@ -182,6 +194,17 @@ $utf8=[Text.UTF8Encoding]::new($false)
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'),($graph -join "`r`n")+"`r`n",$utf8)
 $ninja=(Get-Command ninja.exe -ErrorAction Stop).Source
 $vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
-[IO.File]::WriteAllText((Join-Path $build 'run-ninja.cmd'),'@echo off'+"`r`n"+'call "'+$vs+'" -arch=x64 -host_arch=x64 >nul'+"`r`n"+'if errorlevel 1 exit /b %errorlevel%'+"`r`n"+'"'+$ninja+'" -C "'+$build+'" -j 8 %*'+"`r`n",$utf8)
-@{architecture='AMD64';scope=$Component;reference=$reference;referenceHash=(Get-FileHash $reference).Hash;sources=@($manifest)}|ConvertTo-Json -Depth 6|Set-Content (Join-Path $build 'source-manifest.json') -Encoding UTF8
+$runner=[Collections.Generic.List[string]]::new()
+$runner.Add('@echo off')
+$runner.Add('call "'+$vs+'" -arch=x64 -host_arch=x64 >nul')
+$runner.Add('if errorlevel 1 exit /b %errorlevel%')
+if($compilerCacheDirectory){
+ $runner.Add('set "CCACHE_DIR='+$compilerCacheDirectory+'"')
+ $runner.Add('set "CCACHE_BASEDIR='+$root+'"')
+ $runner.Add('set "CCACHE_NOHASHDIR=true"')
+}
+$runner.Add('"'+$ninja+'" -C "'+$build+'" -j 8 %*')
+[IO.File]::WriteAllText((Join-Path $build 'run-ninja.cmd'),($runner -join "`r`n")+"`r`n",$utf8)
+$cacheMetadata = if($compilerCacheDirectory){@{enabled=$true;executable=$compilerCachePath;directory=$compilerCacheDirectory;baseDirectory=$root;hashDirectory=$false}}else{@{enabled=$false}}
+@{architecture='AMD64';scope=$Component;reference=$reference;referenceHash=(Get-FileHash $reference).Hash;compilerCache=$cacheMetadata;sources=@($manifest)}|ConvertTo-Json -Depth 6|Set-Content (Join-Path $build 'source-manifest.json') -Encoding UTF8
 "Generated native $Component graph: $build ($($manifest.Count) source edges)"

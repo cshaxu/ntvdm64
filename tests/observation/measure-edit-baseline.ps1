@@ -15,18 +15,13 @@ $build=(Resolve-Path "$repo/build").Path+'\'
 foreach($path in @($runtime,$reports,$observerPath)){
     if(!$path.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)){throw 'Disposable inputs/results must be below build/'}
 }
-if(Test-Path Z:\){throw 'Z already in use'}
 if(Get-ChildItem $reports){throw 'Fresh report directory required'}
 $scope=New-IsolatedPackageScope $runtime
 $names=@('MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_MILESTONE_INPUT',
     'MVDM_OBSERVER_SHORT_HISTORY','MVDM_OBSERVER_WINDOW_INPUT','MVDM_OBSERVER_PERFORMANCE')
 $saved=@{};foreach($name in $names){$saved[$name]=[Environment]::GetEnvironmentVariable($name)}
-$rows=@();$mapped=$false
+$rows=@()
 try {
-    & subst.exe Z: $runtime
-    if($LASTEXITCODE){throw 'SUBST failed'}
-    $mapped=$true
-    $scope=New-IsolatedPackageScope $runtime 'Z:\'
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     $env:MVDM_OBSERVER_MILESTONE_INPUT='1'
     Remove-Item Env:MVDM_OBSERVER_SHORT_HISTORY -ErrorAction SilentlyContinue
@@ -43,7 +38,7 @@ try {
             foreach($case in @('empty','edit','direct-seven')){
                 $prefix='baseline-'+$mode.ToLowerInvariant()+'-'+($iteration+1)+'-'+$case
                 $watch=[Diagnostics.Stopwatch]::StartNew()
-                & "$repo/tools/audit/Verify-CommandExitStatus.ps1" -Observer $observerPath -PackageRoot 'Z:\' -ProcessPackageRoot $runtime -LogRoot $reports -LogPrefix $prefix -Cases $case -OrdinaryFrontend
+                & "$repo/tools/audit/Verify-CommandExitStatus.ps1" -Observer $observerPath -PackageRoot $runtime -ProcessPackageRoot $runtime -LogRoot $reports -LogPrefix $prefix -Cases $case -OrdinaryFrontend
                 $watch.Stop()
                 $report=Get-Content (Join-Path $reports "$prefix-$case.txt") -Raw
                 if($enabled -and ($report -notmatch 'performance-samples=\d+ overflow=0' -or $report -match 'performance .*observed=0')){throw 'Missing/failed performance milestone'}
@@ -58,13 +53,9 @@ try {
     $rows | ConvertTo-Json -Depth 6 | Set-Content (Join-Path $reports 'measurements.json') -Encoding UTF8
 } finally {
     try {Stop-IsolatedPackageScope $scope} finally {
-        try {
-            if($mapped){& subst.exe Z: /d;if($LASTEXITCODE){throw 'SUBST cleanup failed'}}
-        } finally {
-            foreach($name in $names){
-                if($null -eq $saved[$name]){Remove-Item -LiteralPath "Env:$name" -ErrorAction SilentlyContinue}
-                else{Set-Item -LiteralPath "Env:$name" -Value $saved[$name]}
-            }
+        foreach($name in $names){
+            if($null -eq $saved[$name]){Remove-Item -LiteralPath "Env:$name" -ErrorAction SilentlyContinue}
+            else{Set-Item -LiteralPath "Env:$name" -Value $saved[$name]}
         }
     }
 }

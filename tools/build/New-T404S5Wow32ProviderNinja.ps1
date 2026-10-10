@@ -5,6 +5,8 @@ param(
     [string]$RepositoryRoot = '',
     [string]$BuildRoot = '',
     [string]$ParentImportLibrary = '',
+    # Explicit developer-only wrapper. The formal graph remains direct MSVC.
+    [string]$CompilerCache = '',
     [ValidateRange(1, 32)]
     [int]$ParallelJobs = 8
 )
@@ -41,6 +43,15 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
     $RepositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 }
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
+$compilerCommand = 'cl'
+$compilerCacheDirectory = ''
+if (-not [string]::IsNullOrWhiteSpace($CompilerCache)) {
+    $compilerCachePath = (Resolve-Path -LiteralPath $CompilerCache -ErrorAction Stop).Path
+    if (!(Test-Path -LiteralPath $compilerCachePath -PathType Leaf)) { throw "Compiler cache executable is not a file: $CompilerCache" }
+    $compilerCacheDirectory = Join-Path $root 'build/compiler-cache'
+    New-Item -ItemType Directory -Path $compilerCacheDirectory -Force | Out-Null
+    $compilerCommand = '"' + (ConvertTo-NinjaPath $compilerCachePath) + '" cl'
+}
 $wow = Join-Path $root 'src/mvdm/wow32'
 $adapterWow = Join-Path $root 'src/wow32-dll/source'
 $manifest = Join-Path $wow 'sources'
@@ -295,6 +306,7 @@ $environment = Join-Path $build 'msvc-x86.cmd'
     ('call "' + $vs + '" -arch=x86 -host_arch=x64 >nul'),
     'if errorlevel 1 exit /b %errorlevel%',
     ':ready',
+    $(if ($compilerCacheDirectory) { 'set "CCACHE_DIR=' + $compilerCacheDirectory + '"'; 'set "CCACHE_BASEDIR=' + $root + '"'; 'set "CCACHE_NOHASHDIR=true"' }),
     'cd /d "%MVDM_T404_S5_CALLER_CWD%"',
     '%*',
     'exit /b %errorlevel%'
@@ -332,9 +344,10 @@ $ninja = [System.Collections.Generic.List[string]]::new()
 $ninja.Add('ninja_required_version = 1.10')
 $ninja.Add('root = ' + (ConvertTo-NinjaPath $root))
 $ninja.Add('environment = ' + (ConvertTo-NinjaPath $environment))
+$ninja.Add('release_cflags = /O2')
 $ninja.Add('cflags = ' + $cflags.Replace('\', '/'))
 $ninja.Add('rule cc')
-$ninja.Add('  command = cl $cflags /Fo$out $in')
+$ninja.Add('  command = ' + $compilerCommand + ' $cflags $release_cflags /Fo$out $in')
 $ninja.Add('  deps = msvc')
 $ninja.Add('  description = CC $in')
 $ninja.Add('rule rc')

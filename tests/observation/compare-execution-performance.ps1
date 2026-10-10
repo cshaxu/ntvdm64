@@ -14,7 +14,7 @@ $root=[IO.Path]::GetFullPath($ReportRoot)
 foreach($path in @($root,$observerPath)+@($roots.Values)){
     if(!$path.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase)){throw 'Require build-local inputs/results'}
 }
-if((Test-Path $root) -or (Test-Path Z:\)){throw 'Fresh report root and free Z: required'}
+if(Test-Path $root){throw 'Fresh report root required'}
 $identities=@{}
 foreach($variant in @('baseline','candidate')){
     $identities[$variant]=@(Get-ChildItem (Join-Path $roots[$variant] 'system32') -File |
@@ -32,7 +32,7 @@ $names=@('MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_MILESTONE_INPUT',
     'MVDM_OBSERVER_SHORT_HISTORY','MVDM_OBSERVER_WINDOW_INPUT','MVDM_OBSERVER_PERFORMANCE',
     'MVDM_TEST_WORKER_PERFORMANCE','MVDM_WOW_NT_TRACE_PATH')
 $saved=@{};foreach($name in $names){$saved[$name]=[Environment]::GetEnvironmentVariable($name)}
-$rows=@();$scope=$null;$mapped=$false
+$rows=@();$scope=$null
 try {
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     $env:MVDM_OBSERVER_MILESTONE_INPUT='1'
@@ -49,12 +49,10 @@ try {
                 $order=if($iteration%2){@('candidate','baseline')}else{@('baseline','candidate')}
                 foreach($variant in $order){
                     $runtime=$roots[$variant]
-                    & subst.exe Z: $runtime
-                    if($LASTEXITCODE){throw 'SUBST failed'}
-                    $mapped=$true;$scope=New-IsolatedPackageScope $runtime 'Z:\'
+                    $scope=New-IsolatedPackageScope $runtime
                     $prefix="$mode-$case-$iteration-$variant"
                     $watch=[Diagnostics.Stopwatch]::StartNew()
-                    & "$repo/tools/audit/Verify-CommandExitStatus.ps1" -Observer $observerPath -PackageRoot 'Z:\' -ProcessPackageRoot $runtime -LogRoot $root -LogPrefix $prefix -Cases $case -OrdinaryFrontend
+                    & "$repo/tools/audit/Verify-CommandExitStatus.ps1" -Observer $observerPath -PackageRoot $runtime -ProcessPackageRoot $runtime -LogRoot $root -LogPrefix $prefix -Cases $case -OrdinaryFrontend
                     $watch.Stop()
                     $report=Get-Content (Join-Path $root "$prefix-$case.txt") -Raw
                     if($report -notmatch 'performance-samples=\d+ overflow=0' -or $report -match 'performance .*observed=0'){
@@ -65,9 +63,6 @@ try {
                     })
                     $rows+=[pscustomobject]@{Variant=$variant;Mode=$mode;Case=$case;Iteration=$iteration;Warmup=($iteration -eq 0);WallMs=$watch.ElapsedMilliseconds;Samples=$samples;Report="$prefix-$case.txt"}
                     Stop-IsolatedPackageScope $scope;$scope=$null
-                    & subst.exe Z: /d
-                    if($LASTEXITCODE){throw 'SUBST cleanup failed'}
-                    $mapped=$false
                     Write-Output "PASS $prefix elapsed-ms=$($watch.ElapsedMilliseconds)"
                 }
             }
@@ -75,11 +70,9 @@ try {
     }
 } finally {
     try {if($scope){Stop-IsolatedPackageScope $scope}} finally {
-        try {if($mapped){& subst.exe Z: /d;if($LASTEXITCODE){throw 'SUBST cleanup failed'}}} finally {
-            foreach($name in $names){[Environment]::SetEnvironmentVariable($name,$saved[$name])}
-            [ordered]@{Profile='x86 /MT CCPU40; ordinary Console geometry; private desktop; serial paired cold starts';
-                Observer=(Get-FileHash $observerPath).Hash;Inputs=$identities;Cases=$rows} |
-                ConvertTo-Json -Depth 7 | Set-Content (Join-Path $root 'measurements.json')
-        }
+        foreach($name in $names){[Environment]::SetEnvironmentVariable($name,$saved[$name])}
+        [ordered]@{Profile='x86 /MT CCPU40; ordinary Console geometry; private desktop; serial paired cold starts';
+            Observer=(Get-FileHash $observerPath).Hash;Inputs=$identities;Cases=$rows} |
+            ConvertTo-Json -Depth 7 | Set-Content (Join-Path $root 'measurements.json')
     }
 }

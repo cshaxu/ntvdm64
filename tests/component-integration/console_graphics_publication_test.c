@@ -59,21 +59,27 @@ int main(void)
         FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CONSOLE_GRAPHICS_BUFFER,&info);
     CHECK(surface!=INVALID_HANDLE_VALUE && info.hMutex && info.lpBitMap);
     mutex=info.hMutex;
-    CHECK(MvdmSetConsoleActiveScreenBuffer(surface));
+    /* Window-mode software VGA owns a DIB before the historical physical
+     * Console selects it.  A completed host flush must still request one
+     * copied publication; ``active`` is not a presentation-route predicate. */
+    CHECK(ntvdm_console_graphics_flush()==1);
     CHECK(WaitForSingleObject(delivered,5000)==WAIT_OBJECT_0 && sends==1);
+    ResetEvent(delivered);
+    CHECK(MvdmSetConsoleActiveScreenBuffer(surface));
+    CHECK(WaitForSingleObject(delivered,5000)==WAIT_OBJECT_0 && sends==2);
     ResetEvent(delivered);
     CHECK(WaitForSingleObject(mutex,5000)==WAIT_OBJECT_0);
     memset(info.lpBitMap,0x5a,16);CHECK(ReleaseMutex(mutex));
     for(index=0;index<200;++index)CHECK(ntvdm_console_graphics_invalidate(surface,&dirty)==1);
     CHECK(WaitForSingleObject(delivered,5000)==WAIT_OBJECT_0);
-    CHECK(sends==2 && final_pixel==0x5a);
+    CHECK(sends==3 && final_pixel==0x5a);
     ResetEvent(delivered);
-    CHECK(WaitForSingleObject(delivered,80)==WAIT_TIMEOUT && sends==2);
+    CHECK(WaitForSingleObject(delivered,80)==WAIT_TIMEOUT && sends==3);
     CHECK(WaitForSingleObject(mutex,5000)==WAIT_OBJECT_0);
     memset(info.lpBitMap,0x6b,16);CHECK(ReleaseMutex(mutex));
     CHECK(ntvdm_console_graphics_invalidate(surface,&dirty)==1);
     CHECK(!worker_base_publication_active(publisher,FALSE));
-    CHECK(sends==3 && final_pixel==0x6b);
+    CHECK(sends==4 && final_pixel==0x6b);
     CHECK(MvdmCloseConsoleHandle(surface));
     CloseHandle(mutex);
     worker_base_publication_destroy(publisher);ntvdm_console_graphics_destroy(graphics);current=NULL;
@@ -116,6 +122,6 @@ int main(void)
         worker_base_publication_destroy(publisher);ntvdm_console_graphics_destroy(graphics);current=NULL;
         CloseHandle(delivered);CloseHandle(shutdown);
     }
-    puts("PASS graphics source: 200 DIB invalidations coalesce before one deferred full-frame capture/send; palette-late DIB defers without poisoning publication");
+    puts("PASS graphics source: host flush publishes a valid unselected software-VGA DIB; 200 invalidations coalesce before one deferred full-frame capture/send; palette-late DIB defers without poisoning publication");
     return 0;
 }
