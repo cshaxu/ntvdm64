@@ -7,8 +7,9 @@ delivered single-worker/dual-Hook gates; see
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
-| [T442 native CUI Console-window virtualization plan](operations/m0-t442-native-cui-console-window-virtualization-plan.md) | M0 T442 S1 | Active design: source-backed ownership, control path, validation and trace gate for native CUI carrier visibility. | Superseded by T442 closure evidence. |
-| [T442 S1 mysmb64 pre-trace audit](evidence/m0-t442-s1-mysmb64-pretrace-audit.md) | M0 T442 S1 | Static ownership audit and target-location boundary before selecting a visibility API detour. | Superseded by the target API trace. |
+| [T442 native CUI Console-window virtualization plan](operations/m0-t442-native-cui-console-window-virtualization-plan.md) | M0 T442 S1 | Active design; `mysmb64` source evidence has reached its Console-identity stop condition. | Superseded by T442 closure evidence. |
+| [T442 S1 mysmb64 pre-trace audit](evidence/m0-t442-s1-mysmb64-pretrace-audit.md) | M0 T442 S1 | Static ownership audit before target evidence; retained and succeeded by the source transition record. | Retain with its successor. |
+| [T442 S1 mysmb64 Console-identity transition](evidence/m0-t442-s1-mysmb64-console-identity-transition.md) | M0 T442 S1 | Source-backed proof that the target frees and reattaches its Console before showing it; stops the visibility-only design. | Retain until re-admission or closure. |
 | [T439 S1 Win31 launch-profile recovery](evidence/m0-t439-s1-win31-launch-profile-recovery.md) | M0 T439 S1 | Recoverable Standard VGA profile, PMCC working-directory-tag repair, focused tool proof, and owner desktop acceptance. | Retain with the T439 closure. |
 | [T438 S2 Win31 path tool split](evidence/m0-t438-s2-win31-path-tool-split.md) | M0 T438 S2 | CMD ownership split, released GRP/PIF structured transforms, and recovery fixture proof. | Retain through T438 closure. |
 | [T438 S1 Win31 path adjacent recovery](evidence/m0-t438-s1-win31-path-adjacent-recovery.md) | M0 T438 S1 | Bounded path-tool mutation audit, adjacent-backup recovery, and focused first/repeat/unapply fixture proof. | Retain through T438 completion. |

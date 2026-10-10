@@ -4,15 +4,17 @@
 
 T442 preserves the existing architecture: NTVWM owns a hidden carrier Console;
 NTCON owns the one user-visible Console/Window projection; NTSRV owns the
-authenticated frontend/worker/target relationship.  A native CUI target may
-request that its **current inherited carrier Console HWND** be shown or brought
-to foreground.  That request must select the already-bound NTCON Console
+authenticated frontend/worker/target relationship.  Its original candidate was
+to map a native CUI target's request to show or foreground its **current
+inherited carrier Console HWND** onto the already-bound NTCON Console
 projection, never the carrier HWND itself.
 
 This is a presentation request, not a Console transition. `FreeConsole`,
 `AllocConsole`, and `AttachConsole` remain distinct identity-changing calls.
-They are outside T442 unless S1 proves the reproduction uses one; in that case
-the packet stops for re-admission.
+S1 has now proved that `mysmb64` uses those calls; the original
+visibility-only candidate is therefore not an implementation plan for that
+target. The packet stops for re-admission rather than silently emulating the
+transition as visibility.
 
 ## Existing path
 
@@ -46,11 +48,36 @@ architectural preference. It also rejects reusing `CONSOLE_IO_SET_DISPLAY_MODE`:
 that existing operation controls a Win32 Console display mode, not NTCON's
 Console-versus-Window projection.
 
-The O: locations available for this audit did not yield `mysmb64.exe`; no
-dynamic target trace has been claimed. The exact intercepted API family and
-the semantics of a hide request remain deliberately unresolved until the
-owner supplies the binary or its path. The present design is complete for the
-owners, validation and ordering, conditional on that finite trace.
+The supplied deployed `mysmb64.exe` and its owner-maintained source tree have
+now resolved the trace gate at source level. The exact target sequence is
+recorded in the [S1 target transition evidence](../evidence/m0-t442-s1-mysmb64-console-identity-transition.md).
+It is not a runtime trace claim, but it is sufficient to prove the packet's
+identity-transition stop condition.
+
+## Actual target sequence and stop condition
+
+`mysmb64` is a graphical application that can temporarily enter its own text
+mode. Its source performs these transitions:
+
+1. Graphical startup calls `FreeConsole()` when it does not elect text startup.
+2. Its text-mode switch calls `mysmb_win32_text_console_open_profile()`. If it
+   has no Console and elects text startup, that function calls
+   `AttachConsole(ATTACH_PARENT_PROCESS)`; otherwise it may call
+   `AllocConsole()`.
+3. It obtains `GetConsoleWindow()`, hides the graphical HWND, then calls
+   `ShowWindow(consoleHwnd, SW_SHOW)` and `SetForegroundWindow(consoleHwnd)`.
+4. Returning to graphical mode closes the text Console with `FreeConsole()`
+   and re-shows the graphical HWND.
+
+Direct CMD works because `ATTACH_PARENT_PROCESS` names the actual outer CMD
+Console. Under the current NTVWM launch topology, the same API names NTVWM's
+private carrier. Showing that HWND is therefore the visible failure, but the
+cause is an actual target Console-identity transition, not an unhandled
+carrier-visibility request.
+
+The earlier target-control path below remains a valid ownership pattern only
+for a future target proven to retain the carrier identity. It cannot repair
+`mysmb64` without first selecting and admitting a separate identity design.
 
 ## Target control path
 
@@ -122,7 +149,7 @@ ownership, I/O lease, target execution, standard handles or completion.
 
 | S | Work and exit gate |
 | --- | --- |
-| S1 (active) | Capture `mysmb64` direct-CMD and run16 API/Console/window sequence; prove the affected HWND and exclude/identify identity-changing operations. Finalize exact detours, wire names and test fixtures from that evidence. |
+| S1 (active; stop reached) | Source-audit `mysmb64` direct-CMD and run16-relevant Console/window sequence. It proves `FreeConsole` and `AttachConsole(ATTACH_PARENT_PROCESS)`; preserve the evidence and obtain owner re-admission before selecting an identity route. |
 | S2 | Implement the validated hook/service/worker/typed-channel route for both hook widths. Unit-test authorization, foreign HWND, stale context, unsupported API, recursion and failure passthrough. |
 | S3 | Run serial product regressions: direct CMD, run16 CUI toggle, nested CUI, Console/Window routes, native GUI, DOS, Win16, worker teardown and carrier non-exposure. Publish only a matching ten-image package. |
 
@@ -135,4 +162,4 @@ ownership, I/O lease, target execution, standard handles or completion.
 | Unrelated HWND operation | Original call is untouched. |
 | CUI with no carrier visibility request | No new service/channel operation. |
 | Native GUI, DOS and Win16 | No hook/display route is acquired. |
-| `FreeConsole`/`AllocConsole`/`AttachConsole` found | Stop; do not emulate it through visibility. |
+| `FreeConsole`/`AllocConsole`/`AttachConsole` found | Reached for `mysmb64`; stop and do not emulate it through visibility. |

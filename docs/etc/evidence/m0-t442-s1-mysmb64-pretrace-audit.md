@@ -19,9 +19,11 @@ calls?
 - `src/ntsrv-exe/opennt/source/frontend_registry.c`: NTSRV owns native route
   authorization and worker I/O transition state.
 
-The audit also searched the permitted likely O: package/source locations for
-`mysmb64.exe`. No path was returned. This is not an assertion that the entire
-volume has no copy; it is a target-location gap.
+At this preliminary stage, the audit searched the permitted likely O: package/
+source locations for `mysmb64.exe` and did not find it. The owner subsequently
+identified the deployed `mysmb64.exe`; the resulting source-backed target sequence
+and stop condition are recorded by the
+[successor transition evidence](m0-t442-s1-mysmb64-console-identity-transition.md).
 
 ## Procedure
 
@@ -48,15 +50,15 @@ volume has no copy; it is a target-location gap.
 
 ## Interpretation and confidence
 
-The ownership design is high confidence: one validated intent through NTSRV,
-one event to NTVWM, and one typed existing-channel request to NTCON is the
-smallest route consistent with current ownership. The exact detour target is
-unknown by design: inferring it from the user's Tab gesture would be
-unsound. A dynamic trace is required before implementation.
+The ownership design is high confidence for a target that retains its carrier
+Console identity: one validated intent through NTSRV, one event to NTVWM, and
+one typed existing-channel request to NTCON is the smallest route consistent
+with current ownership. The successor evidence proves that `mysmb64` does not
+meet that condition, so this record is not an implementation authorization for
+that target.
 
 ## Follow-up
 
-Obtain the exact `mysmb64.exe` path or a reproducible package location, then
-capture its direct-CMD and `run16` Console/window API sequences. If it calls
-`FreeConsole`, `AllocConsole`, or `AttachConsole`, stop this visibility-only
-task for re-admission.
+The target location and source sequence are now known. The stop condition was
+reached: obtain re-admission for an explicit Console-identity design before
+performing any product implementation.

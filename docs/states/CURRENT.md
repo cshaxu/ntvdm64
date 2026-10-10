@@ -12,7 +12,7 @@
 | --- | --- |
 | Identifier Mode | `M0 T442 S1`, Ordinary Mode. |
 | Admission And Approval | Owner admits the queue-head Native CUI Console-window virtualization package and directs completion of its design before implementation. |
-| Objective | Establish the smallest authenticated control path which maps a native CUI target's proven request to show/foreground its inherited carrier Console onto the already-bound NTCON Console projection, without exposing the NTVWM carrier. |
+| Objective | Determine whether the supplied native CUI target can use the existing NTCON projection without exposing NTVWM's private carrier, and stop for re-admission if its actual Console identity transition requires a broader boundary. |
 | Non-goals | No application-name exception, CUI-to-GUI reclassification, target stream/Console-identity emulation, new persistent helper/registry/polling loop, task/process observation, guest/media change, or unrelated lifecycle redesign. |
 | Reference Baseline | [Candidate proposal](../proposals/proposal-native-cui-console-window-virtualization-001.md), the matching T441 worker release, current `nthook32-dll` CreateProcess-only interception, NTSRV-owned frontend routes, and NTCON's existing Console/Window selector. |
 | Files And ABI Surface | Design/evidence under `docs/etc/operations` and `docs/etc/evidence`; expected later ownership is `src/nthook32-dll`, `src/common` control declarations, NTSRV service/RPC bindings, NTVWM, NTCON's existing presentation operation, affected tests and release manifest. |
@@ -26,10 +26,15 @@
 | Original Owner Request | “准入t任务并完成设计”。 |
 | Similar-Issue Sweep | Existing direct CMD behavior, native GUI route, x86/x64 hook bootstrap, nested native CUI children, NTSRV frontend route identity, NTCON Console/Window selection, teardown and target completion. |
 
-S1 static ownership audit is recorded in the
+S1's static ownership audit is retained in the
 [pre-trace evidence](../etc/evidence/m0-t442-s1-mysmb64-pretrace-audit.md).
-The owner-supplied target has not yet been located on the permitted O: paths,
-so the exact API detour remains a trace gate rather than an assumption.
+The supplied target source audit reached the packet stop condition: graphical
+startup and the Text-mode switch call `FreeConsole` and
+`AttachConsole(ATTACH_PARENT_PROCESS)`, then show that attached Console HWND.
+The source-backed sequence is recorded in the
+[target transition evidence](../etc/evidence/m0-t442-s1-mysmb64-console-identity-transition.md).
+No production implementation is admitted until the owner approves an expanded
+Console-identity design.
 
 ## Previously Closed Work
 
