@@ -60,6 +60,7 @@ required by the execution rules.
 | `application-search-test.exe` | pass |
 | `native-capture-test.exe` | 3462 checks, 0 failures |
 | `nthook-install-test.exe` | 104 assertions, pass |
+| isolated `run16 command /c ver` | `MS-DOS Version 5.00.500`, exit code 0 |
 | release manifest vs all ten deployed images | pass |
 
 The console-startup observer was also tried with both the candidate and the
