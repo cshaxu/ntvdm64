@@ -26,6 +26,11 @@
 | Original Owner Request | “准入t任务并完成设计”。 |
 | Similar-Issue Sweep | Existing direct CMD behavior, native GUI route, x86/x64 hook bootstrap, nested native CUI children, NTSRV frontend route identity, NTCON Console/Window selection, teardown and target completion. |
 
+S1 static ownership audit is recorded in the
+[pre-trace evidence](../etc/evidence/m0-t442-s1-mysmb64-pretrace-audit.md).
+The owner-supplied target has not yet been located on the permitted O: paths,
+so the exact API detour remains a trace gate rather than an assumption.
+
 ## Previously Closed Work
 
 | Field | Record |

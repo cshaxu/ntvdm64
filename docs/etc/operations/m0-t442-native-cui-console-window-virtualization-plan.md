@@ -31,6 +31,27 @@ the packet stops for re-admission.
 Therefore a direct hook-to-NTCON call would bypass both service ownership and
 the worker's serialized channel. It is rejected.
 
+## S1 static audit result
+
+The injected hook currently attaches only `CreateProcessA/W`. Its bootstrap
+contains the inherited frontend and execution attachments, but no worker I/O
+pipe and no NTCON entry point. The attachment is intentionally enough for a
+nested `run16` launcher to bind its execution context; it is not authority to
+select a frontend display. NTVWM's existing presentation thread is already the
+only native owner which can safely serialize a frontend request, while NTCON's
+`frontend_session_display()` is the local owner of actual projection selection.
+
+This confirms the control path below is a necessary boundary rather than an
+architectural preference. It also rejects reusing `CONSOLE_IO_SET_DISPLAY_MODE`:
+that existing operation controls a Win32 Console display mode, not NTCON's
+Console-versus-Window projection.
+
+The O: locations available for this audit did not yield `mysmb64.exe`; no
+dynamic target trace has been claimed. The exact intercepted API family and
+the semantics of a hide request remain deliberately unresolved until the
+owner supplies the binary or its path. The present design is complete for the
+owners, validation and ordering, conditional on that finite trace.
+
 ## Target control path
 
 After S1 proves the exact API family, the implementation has this finite flow:
@@ -84,6 +105,18 @@ one worker-owned event registration, rather than an arbitrary HWND RPC:
 | NTSRV | Validate the caller against its existing direct record, execution context, frontend root and native route; retain the latest intent and signal the native worker event. |
 | NTVWM | Register/wait one presentation-intent event and turn a retrieved intent into one serialized frontend channel operation. |
 | NTCON | Reuse its existing display selector through one typed channel operation; no target or worker-kind branching. |
+
+The request wire carries only the `CONSOLE` or `WINDOW` intent and the existing
+execution attachment. It does not carry an HWND, PID, title or application
+name. NTSRV authenticates the caller from the RPC binding and compares the
+execution attachment with its existing direct native record before setting the
+route's latest intent and its registered native-worker event. NTVWM waits on
+that event beside its existing presentation waits, retrieves-and-clears the
+intent through NTSRV, then issues a new typed Console-I/O projection operation.
+That operation is handled by NTCON using `frontend_session_display()`.
+
+No participant polls for an intent, and an intent never changes worker
+ownership, I/O lease, target execution, standard handles or completion.
 
 ## S sequence
 
