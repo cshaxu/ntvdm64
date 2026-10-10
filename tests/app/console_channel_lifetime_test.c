@@ -16,6 +16,7 @@ static FILE *private_report;
 static HANDLE held_dispatch,release_dispatch;
 static frontend_session *test_frontend;
 static DWORD expected_generation;
+static BOOL input_output_only;
 static DWORD WINAPI snapshot_contender(void *context)
 {
     frontend_session_snapshot_begin(test_frontend);
@@ -188,7 +189,8 @@ static void run_case(unsigned mode,unsigned round)
     CHECK(!frontend_io_channel_start_request(expected_generation,worker,test_frontend,&channel));
     {
         WCHAR cell;DWORD count,flags;COORD origin={0,0};
-        CHECK(ReadConsoleOutputCharacterW(channel->console.output,&cell,1,origin,&count) && count==1 && cell==L'K');
+        CHECK(ReadConsoleOutputCharacterW(channel->console.output,&cell,1,origin,&count) && count==1 &&
+            (input_output_only || cell==L'K'));
         CHECK(GetHandleInformation(channel->console.output,&flags) && !(flags&HANDLE_FLAG_INHERIT));
         CHECK(GetHandleInformation(channel->console.input,&flags) && !(flags&HANDLE_FLAG_INHERIT));
     }
@@ -320,6 +322,33 @@ static void run_case(unsigned mode,unsigned round)
         peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));
         CHECK(reply.result && !reply.state.count && !reply.bytes && reply.sequence==2);
         CHECK(WaitForSingleObject(thread,0)==WAIT_TIMEOUT);
+        /* This is the ordinary COMMAND shape: a key arrives before the
+         * worker asks for it, the worker consumes it, then immediately emits
+         * text.  Keep it in the real channel (not the lightweight client
+         * fixture) because channel readiness is part of the contract. */
+        {
+            INPUT_RECORD key={0};console_io_input received;
+            DWORD written;
+            key.EventType=KEY_EVENT;key.Event.KeyEvent.bKeyDown=TRUE;
+            key.Event.KeyEvent.wRepeatCount=1;key.Event.KeyEvent.wVirtualKeyCode='V';
+            key.Event.KeyEvent.wVirtualScanCode=0x2f;key.Event.KeyEvent.uChar.UnicodeChar=L'v';
+            CHECK(WriteConsoleInputW(channel->console.input,&key,1,&written) && written==1);
+            CHECK(WaitForSingleObject(frontend_session_ready(test_frontend),5000)==WAIT_OBJECT_0);
+            ZeroMemory(&request.state,sizeof(request.state));
+            request.sequence=3;request.operation=CONSOLE_IO_READ_INPUT;request.state.count=1;
+            peer_io(TRUE,&request,CONSOLE_IO_REQUEST_HEADER_BYTES);
+            peer_io(FALSE,&reply,CONSOLE_IO_REPLY_HEADER_BYTES);
+            CHECK(reply.result && reply.sequence==3 && reply.state.count==1 &&
+                reply.bytes==sizeof(console_io_input));
+            peer_io(FALSE,&received,reply.bytes);
+            CHECK(received.type==KEY_EVENT && received.virtual_key=='V' && received.character==L'v');
+            request.sequence=4;request.operation=CONSOLE_IO_WRITE;request.bytes=1;
+            request.data=(BYTE *)"!";
+            peer_request(&request);
+            peer_io(FALSE,&reply,CONSOLE_IO_REPLY_HEADER_BYTES);
+            CHECK(reply.result && reply.sequence==4 && reply.state.count==1 && !reply.bytes);
+            puts("PASS queued input is consumed and the following output completes on the real variable-record channel");
+        }
     } else if(mode==2) {
         /* Real channel callback reads frontend policy under the I/O lock.
          * A request alone must not fabricate a DOS frame or open a Window. */
@@ -1158,6 +1187,21 @@ int main(int argc,char **argv)
         CloseHandle(geometry_output);
         fprintf(private_report,"PASS private 80x30 to 80x25/80x28 Console API handoff\n");
         fclose(private_report);return 0;
+    }
+    if(argc==2 && !strcmp(argv[1],"--input-output")) {
+        /* Keep the S5 regression probe independent of the broad geometry
+         * fixture: it needs only an ordinary Console, one real frontend
+         * channel and the queued-input/following-output transaction. */
+        read_entered=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(read_entered);
+        CHECK(GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE),&original_cursor));
+        CHECK(!frontend_session_create(&test_frontend));
+        test_prepare_operation();
+        input_output_only=TRUE;
+        run_case(1,1);
+        CHECK(!frontend_session_destroy(test_frontend));
+        CloseHandle(read_entered);
+        puts("PASS variable-record input/output regression probe");
+        return 0;
     }
     if(argc==2 && !strcmp(argv[1],"--worker-wait")) {Sleep(INFINITE);return 0;}
     test_native_geometry_projection(25);

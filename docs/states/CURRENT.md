@@ -4,13 +4,9 @@
 
 **No active M/T/S packet.**
 
-M0 T440 is closed. Its independently verified graphics publication, bounded
-worker-record, idle-HLT, mapping, native `/O2`, and optional developer-cache
-work remain in the baseline. The unproven global CCPU quick-event pacing
-experiment was removed after it did not improve owner-observed responsiveness.
-The remaining Win3.1 interaction-latency investigation is an unadmitted
-queue-tail candidate; see the [T440 closure](../history/m0-t440-text-response-performance-closure.md)
-and [successor proposal](../proposals/proposal-win31-interactive-performance-root-cause-001.md).
+T441 is closed: it republishes matching NTVDM/NTVWM worker images and retains
+the real-channel input/output regression probe.  See the
+[T441 closure](../history/m0-t441-variable-worker-io-release-integrity-closure.md).
 
 ## Previously Closed Work
 
@@ -155,6 +151,7 @@ repaired installed Win1.01 launch path. See the [S7 evidence](../etc/evidence/m0
 
 | Task | Outcome |
 | --- | --- |
+| T441 | Repaired the mixed NTVDM/NTVWM release pair that stalled `COMMAND → ver`; bounded variable worker I/O is retained. [Closure](../history/m0-t441-variable-worker-io-release-integrity-closure.md) |
 | T440 | Retained verified graphics/transport/idle/build improvements; global CCPU pacing withdrawn without a measured UX gain; active root-cause work deferred. [Closure](../history/m0-t440-text-response-performance-closure.md) |
 | T438 | Reversible installed Win3.1 path repair and CMD/PIF/GRP ownership split. [Closure](../history/m0-t438-win31-path-recovery-closure.md) |
 | T436 | Limited Windows 3.1 driver/setup delivery; ordinary Setup transition deferred. [Closure](../history/m0-t436-win31-setup-limited-closure.md) |
