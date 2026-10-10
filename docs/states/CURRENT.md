@@ -6,35 +6,31 @@
 
 ## Active Packet
 
-### Native CUI Console-window virtualization design
+### Frontend Console-loss lifecycle diagnosis
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | `M0 T442 S1`, Ordinary Mode. |
-| Admission And Approval | Owner admits the queue-head Native CUI Console-window virtualization package and directs completion of its design before implementation. |
-| Objective | Determine whether the supplied native CUI target can use the existing NTCON projection without exposing NTVWM's private carrier, and stop for re-admission if its actual Console identity transition requires a broader boundary. |
-| Non-goals | No application-name exception, CUI-to-GUI reclassification, target stream/Console-identity emulation, new persistent helper/registry/polling loop, task/process observation, guest/media change, or unrelated lifecycle redesign. |
-| Reference Baseline | [Candidate proposal](../proposals/proposal-native-cui-console-window-virtualization-001.md), the matching T441 worker release, current `nthook32-dll` CreateProcess-only interception, NTSRV-owned frontend routes, and NTCON's existing Console/Window selector. |
-| Files And ABI Surface | Design/evidence under `docs/etc/operations` and `docs/etc/evidence`; expected later ownership is `src/nthook32-dll`, `src/common` control declarations, NTSRV service/RPC bindings, NTVWM, NTCON's existing presentation operation, affected tests and release manifest. |
+| Admission And Approval | Owner redirects active T442/S1 from the unneeded mysmb Console-identity experiment to a lifecycle debug and repair task: closing the outer CMD/visible Console after a DOS task must retire NTCON and its worker instead of leaving them in NTMON. Owner approves the source-backed repair below. |
+| Objective | Make NTSRV the sole borrowed-frontend loss authority. It must use NTCON's existing authenticated initial Console-member process identities as one-shot external-root waits; when every external initial member exits, NTSRV closes the root and orders worker shutdown. |
+| Non-goals | No mysmb compatibility change, target-specific Console hook, guest/media change, worker/NTCON type distinction, new protocol/RPC, polling/timer loop, Console handle transfer, or task/Observed-record model. NTCON must not independently choose retirement. |
+| Reference Baseline | T441 released lifecycle behavior, NTSRV-owned frontend route/worker shutdown model, NTCON Console-root attachment and existing frontend teardown tests. |
+| Files And ABI Surface | NTSRV frontend registry/lifecycle and connection cleanup, NTCON removal of local Console-anchor policy, focused lifecycle tests and evidence. No wire ABI change. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy authorities; NTSRV remains lifecycle/relationship authority; NTCON remains worker-neutral; hidden Console carrier remains private. |
-| Verification | Source-map the existing carrier, target hook bootstrap, service route, worker event and frontend selector; capture the actual target API sequence before selecting a hooked API; document positive, unrelated-HWND, explicit new-Console, failure and direct-CMD controls. |
-| Expected Markers | The design names one authenticated intent record/event, one service validation point, one worker consumption point and the existing NTCON display selection; it distinguishes visibility from `FreeConsole`/`AllocConsole`/`AttachConsole`. |
-| Asset Needs | Current released package, owner-supplied `mysmb64.exe` reproduction and build-owned trace/test material only. |
-| Reporting Requirements | Record API trace evidence, exact validated identity predicates, state/event ordering, failure passthrough, width coverage, test matrix and any unsupported identity-changing transition. |
-| Stop Conditions | The target allocates, frees or attaches a distinct Console; a required hook cannot identify the current Console HWND; a design needs direct hook-to-NTCON control, broad HWND interception, new process tracking, or an unproved lifecycle change. |
-| Exit Criteria | A source-backed, implementable S1 design with the exact trace gate and no unresolved control-owner ambiguity; governance/diff review and a committed design delivery. |
-| Original Owner Request | “准入t任务并完成设计”。 |
-| Similar-Issue Sweep | Existing direct CMD behavior, native GUI route, x86/x64 hook bootstrap, nested native CUI children, NTSRV frontend route identity, NTCON Console/Window selection, teardown and target completion. |
+| Verification | Exercise borrowed CMD and launcher-owned Console paths. Prove NTSRV waits the former's external initial members without polling; their final exit closes root and delivers NTCON/worker shutdown. Prove launcher-owned paths do not use this predicate. Distinguish NTMON stale display from live processes. |
+| Expected Markers | A source-backed transition from final external member exit through NTSRV `frontend_closing`, NTCON exit and worker shutdown; no arbitrary NTCON anchor/re-sampling remains. |
+| Asset Needs | Current released package and build-owned diagnostic trace/test material only. |
+| Reporting Requirements | Record exact reproduction, live PIDs/handle state when available, governing source functions, expected/actual state transition, causality confidence and safe repair scope. |
+| Stop Conditions | The scene cannot be reproduced or is outside project ownership; a repair would require new polling, target tracking or a general lifecycle redesign. |
+| Exit Criteria | Source-backed repair, focused borrowed/self-owned lifecycle proof, build/package publication gates, governance/evidence review, commit and push. |
+| Original Owner Request | “调查为什么可见console不存在了，ntcon还没死？” |
+| Similar-Issue Sweep | Outer CMD close, Console/Window frontend teardown, workerless NTSRV countdown, explicit worker kill, frontend-root loss, stale NTMON snapshot and DOS/Win32 worker symmetry. |
 
-S1's static ownership audit is retained in the
-[pre-trace evidence](../etc/evidence/m0-t442-s1-mysmb64-pretrace-audit.md).
-The supplied target source audit reached the packet stop condition: graphical
-startup and the Text-mode switch call `FreeConsole` and
-`AttachConsole(ATTACH_PARENT_PROCESS)`, then show that attached Console HWND.
-The source-backed sequence is recorded in the
-[target transition evidence](../etc/evidence/m0-t442-s1-mysmb64-console-identity-transition.md).
-No production implementation is admitted until the owner approves an expanded
-Console-identity design.
+The unneeded mysmb Hook/RPC experiment is retained as non-delivery evidence
+only: [target transition](../etc/evidence/m0-t442-s1-mysmb64-console-identity-transition.md)
+and [withdrawn carrier experiment](../etc/evidence/m0-t442-s1-native-console-parent-redirection.md).
+Its source changes are removed before lifecycle diagnosis; no image from that
+experiment is published.
 
 ## Previously Closed Work
 

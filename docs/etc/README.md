@@ -7,7 +7,10 @@ delivered single-worker/dual-Hook gates; see
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
-| [T442 native CUI Console-window virtualization plan](operations/m0-t442-native-cui-console-window-virtualization-plan.md) | M0 T442 S1 | Active design; `mysmb64` source evidence has reached its Console-identity stop condition. | Superseded by T442 closure evidence. |
+| [T442 native CUI Console-window virtualization plan](operations/m0-t442-native-cui-console-window-virtualization-plan.md) | M0 T442 S1 | Withdrawn native-CUI transition branch; retained only to delimit the later lifecycle repair. | Retain through T442 closure. |
+| [T442 S1 borrowed Console-loss plan](operations/m0-t442-s1-borrowed-console-loss.md) | M0 T442 S1 | NTSRV-owned, one-shot external Console identity waits and central frontend/worker retirement design. | Retain through T442 closure. |
+| [T442 S1 borrowed Console-loss evidence](evidence/m0-t442-s1-borrowed-console-loss.md) | M0 T442 S1 | Root-cause audit, focused borrowed/self-owned proof, native closure/package evidence and retained visible-Console limitation. | Retain through T442 closure. |
+| [T442 S1 withdrawn native carrier experiment](evidence/m0-t442-s1-native-console-parent-redirection.md) | M0 T442 S1 | Rejected mysmb carrier experiment; no source or release image from it remains. | Retain as non-delivery evidence. |
 | [T442 S1 mysmb64 pre-trace audit](evidence/m0-t442-s1-mysmb64-pretrace-audit.md) | M0 T442 S1 | Static ownership audit before target evidence; retained and succeeded by the source transition record. | Retain with its successor. |
 | [T442 S1 mysmb64 Console-identity transition](evidence/m0-t442-s1-mysmb64-console-identity-transition.md) | M0 T442 S1 | Source-backed proof that the target frees and reattaches its Console before showing it; stops the visibility-only design. | Retain until re-admission or closure. |
 | [T439 S1 Win31 launch-profile recovery](evidence/m0-t439-s1-win31-launch-profile-recovery.md) | M0 T439 S1 | Recoverable Standard VGA profile, PMCC working-directory-tag repair, focused tool proof, and owner desktop acceptance. | Retain with the T439 closure. |

@@ -253,6 +253,28 @@ static ULONGLONG service_root_retirement_deadline(OPENNT_BASE_CONNECTION *root,U
     return deadline;
 }
 
+/* The root process is NTCON, so its continued attachment must never count as
+ * proof that a borrowed user Console still exists.  The identity is fixed at
+ * authenticated root registration: later processes cannot revive an orphaned
+ * frontend merely by attaching to the Console object NTCON kept alive. */
+static BOOL service_root_borrowed_console_lost(const OPENNT_BASE_CONNECTION *root)
+{
+    DWORD index,root_pid;
+    if(!root || !root->frontend_borrowed || !root->frontend_console_window ||
+        !root->console_members || !root->console_member_processes ||
+        !root->console_member_count)return FALSE;
+    root_pid=(DWORD)(ULONG_PTR)root->process.ClientId.UniqueProcess;
+    for(index=0;index<root->console_member_count;++index) {
+        HANDLE member=root->console_member_processes[index];
+        DWORD wait;
+        if(!member)return FALSE;
+        if(root->console_members[index]==root_pid && GetProcessId(member)==root_pid)continue;
+        wait=WaitForSingleObject(member,0);
+        if(wait==WAIT_TIMEOUT || wait==WAIT_FAILED)return FALSE;
+    }
+    return TRUE;
+}
+
 HANDLE OpenNtBaseServiceFrontendLifetimeChanged(OPENNT_BASE_SERVICE *service)
 {
     return service ? service->frontend_lifetime_changed : NULL;
@@ -295,6 +317,11 @@ DWORD service_retire_expired_frontends_at(OPENNT_BASE_SERVICE *service,ULONGLONG
     service_observation_prune(service);
     for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
+        if(service_root_borrowed_console_lost(root)) {
+            root->frontend_closing=TRUE;
+            changed=TRUE;
+            continue;
+        }
         ULONGLONG deadline=service_root_retirement_deadline(root,now);
         if(deadline && deadline<=now) {
             root->frontend_closing=TRUE;

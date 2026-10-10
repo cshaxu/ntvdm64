@@ -243,6 +243,15 @@ BOOL service_root_console_matches(OPENNT_BASE_CONNECTION *root,HANDLE console)
 void service_release_console_identities(OPENNT_BASE_CONNECTION *connection)
 {
     DWORD index;
+    if(connection->frontend_console_member_watches) {
+        for(index=0;index<connection->frontend_console_member_watch_count;++index)
+            if(connection->frontend_console_member_watches[index])
+                (void)UnregisterWaitEx(connection->frontend_console_member_watches[index],
+                    INVALID_HANDLE_VALUE);
+        HeapFree(GetProcessHeap(),0,connection->frontend_console_member_watches);
+        connection->frontend_console_member_watches=NULL;
+        connection->frontend_console_member_watch_count=0;
+    }
     if(connection->console_member_processes) {
         for(index=0;index<connection->console_member_count;++index)
             if(connection->console_member_processes[index])
@@ -833,6 +842,49 @@ static VOID CALLBACK service_frontend_exited(PVOID context,BOOLEAN fired)
     (void)SetEvent(service->frontend_lifetime_changed);
 }
 
+/* A root's initial external Console identity is authenticated by NTCON while
+ * attached.  NTSRV owns the waits and performs the lifecycle decision later;
+ * this callback only wakes that decision point and never touches a root. */
+static VOID CALLBACK service_frontend_console_member_exited(PVOID context,BOOLEAN fired)
+{
+    OPENNT_BASE_SERVICE *service=context;
+    if(!fired && service && service->frontend_lifetime_changed)
+        (void)SetEvent(service->frontend_lifetime_changed);
+}
+
+static DWORD service_arm_frontend_console_member_watches(OPENNT_BASE_CONNECTION *root)
+{
+    HANDLE *watches;
+    DWORD index,root_pid,external=0,error=ERROR_SUCCESS;
+    if(!root || !root->frontend_borrowed)return ERROR_SUCCESS;
+    if(!root->console_members || !root->console_member_processes || !root->console_member_count)
+        return ERROR_INVALID_STATE;
+    watches=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,
+        root->console_member_count*sizeof(*watches));
+    if(!watches)return ERROR_NOT_ENOUGH_MEMORY;
+    root_pid=(DWORD)(ULONG_PTR)root->process.ClientId.UniqueProcess;
+    for(index=0;index<root->console_member_count;++index) {
+        HANDLE member=root->console_member_processes[index];
+        if(!member) {error=ERROR_INVALID_STATE;goto fail;}
+        if(root->console_members[index]==root_pid && GetProcessId(member)==root_pid)continue;
+        ++external;
+        if(!RegisterWaitForSingleObject(&watches[index],member,
+            service_frontend_console_member_exited,root->service,INFINITE,
+            WT_EXECUTEONLYONCE)) {error=GetLastError();goto fail;}
+    }
+    root->frontend_console_member_watches=watches;
+    root->frontend_console_member_watch_count=root->console_member_count;
+    /* A borrowed root with no external identity is already an orphan.  Wake
+     * the service rather than asking NTCON to choose its own retirement. */
+    if(!external)(void)SetEvent(root->service->frontend_lifetime_changed);
+    return ERROR_SUCCESS;
+fail:
+    for(index=0;index<root->console_member_count;++index)
+        if(watches[index])(void)UnregisterWaitEx(watches[index],INVALID_HANDLE_VALUE);
+    HeapFree(GetProcessHeap(),0,watches);
+    return error;
+}
+
 
 DWORD OpenNtBaseServiceRegisterFrontendLease(OPENNT_BASE_CONNECTION *root,DWORD pid,
     DWORD generation,uint64_t console_window,DWORD creator_pid,BOOL borrowed,
@@ -896,10 +948,30 @@ DWORD OpenNtBaseServiceRegisterFrontendLease(OPENNT_BASE_CONNECTION *root,DWORD 
         root->frontend_console_window=0;
         root->frontend_creator_generation=0;
         root->frontend_admission_deadline=0;
+        root->frontend_workerless_deadline=0;
+        root->frontend_borrowed=FALSE;
         creator->retained_frontend_root=0;
         CloseHandle(root->frontend_retire);root->frontend_retire=NULL;
         CloseHandle(root->frontend_restored);root->frontend_restored=NULL;
         if(root->frontend_exit_process){CloseHandle(root->frontend_exit_process);root->frontend_exit_process=NULL;}
+        goto done;
+    }
+    /* Production NTCON reports its attached Console identity before leasing.
+     * Keep the service API order-tolerant for an already authenticated late
+     * report: that report arms these same NTSRV-owned waits below. */
+    error=root->console_member_count ? service_arm_frontend_console_member_watches(root) : ERROR_SUCCESS;
+    if(error) {
+        (void)UnregisterWaitEx(root->frontend_exit_watch,INVALID_HANDLE_VALUE);
+        root->frontend_exit_watch=NULL;
+        CloseHandle(root->frontend_exit_process);root->frontend_exit_process=NULL;
+        root->frontend_console_window=0;
+        root->frontend_creator_generation=0;
+        root->frontend_admission_deadline=0;
+        root->frontend_workerless_deadline=0;
+        root->frontend_borrowed=FALSE;
+        creator->retained_frontend_root=0;
+        CloseHandle(root->frontend_retire);root->frontend_retire=NULL;
+        CloseHandle(root->frontend_restored);root->frontend_restored=NULL;
         goto done;
     }
     creator->frontend_reserved_window=0;
@@ -1569,6 +1641,9 @@ DWORD OpenNtBaseServiceReportConsoleMembers(OPENNT_BASE_CONNECTION *connection,
     }
     LeaveCriticalSection(&connection->service->lock);
     if(!error)error=service_bind_existing_console(connection);
+    if(!error && connection->frontend_borrowed && connection->frontend_console_window &&
+        !connection->frontend_console_member_watches)
+        error=service_arm_frontend_console_member_watches(connection);
 done:
     if(processes) {
         for(index=0;index<count;++index)if(processes[index])CloseHandle(processes[index]);

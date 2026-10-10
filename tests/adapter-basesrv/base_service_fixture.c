@@ -592,3 +592,67 @@ DWORD fixture_frontend_notification_denied(OPENNT_BASE_CONNECTION *root,
     LeaveCriticalSection(&root->service->lock);
     return error;
 }
+
+/* The initial member set is an ownership identity, not a periodically
+ * refreshed process census.  When its final external process exits, only a
+ * borrowed root is closed and the same NTSRV decision orders its worker out.
+ * A launcher-owned Console must ignore that external-member predicate. */
+int fixture_borrowed_console_identity_loss(void)
+{
+    DWORD borrowed;
+    for(borrowed=0;borrowed<=1;++borrowed) {
+        OPENNT_BASE_SERVICE *service=OpenNtBaseServiceStart();
+        OPENNT_BASE_CONNECTION *root=NULL;
+        OPENNT_BASE_WORKER_WATCH watch={0};
+        PROCESS_INFORMATION external={0};
+        STARTUPINFOA startup={sizeof(startup)};
+        HANDLE shutdown=NULL;
+        DWORD generation=0;
+        char image[MAX_PATH],command[MAX_PATH+32];
+#define IDENTITY_CHECK(value) do {if(!(value)){fprintf(stderr,"FAIL borrowed Console identity loss borrowed=%lu line=%d\n",borrowed,__LINE__);return 1;}}while(0)
+        IDENTITY_CHECK(service);
+        IDENTITY_CHECK(GetModuleFileNameA(NULL,image,MAX_PATH));
+        sprintf_s(command,sizeof(command),"\"%s\" --reservation-child",image);
+        IDENTITY_CHECK(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
+            NULL,NULL,&startup,&external));
+        IDENTITY_CHECK(!OpenNtBaseServiceConnect(service,GetCurrentProcess(),&root,&generation));
+        root->frontend_capability=CreateEventW(NULL,TRUE,FALSE,NULL);
+        root->frontend_console_window=1234;
+        root->frontend_borrowed=borrowed;
+        root->console_member_count=2;
+        root->console_members=HeapAlloc(GetProcessHeap(),0,2*sizeof(*root->console_members));
+        root->console_member_processes=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,
+            2*sizeof(*root->console_member_processes));
+        IDENTITY_CHECK(root->frontend_capability && root->console_members &&
+            root->console_member_processes);
+        root->console_members[0]=GetCurrentProcessId();
+        root->console_members[1]=external.dwProcessId;
+        IDENTITY_CHECK(DuplicateHandle(GetCurrentProcess(),root->process.ProcessHandle,
+            GetCurrentProcess(),&root->console_member_processes[0],SYNCHRONIZE|
+            PROCESS_QUERY_LIMITED_INFORMATION,FALSE,0));
+        IDENTITY_CHECK(DuplicateHandle(GetCurrentProcess(),external.hProcess,
+            GetCurrentProcess(),&root->console_member_processes[1],SYNCHRONIZE|
+            PROCESS_QUERY_LIMITED_INFORMATION,FALSE,0));
+        shutdown=CreateEventW(NULL,TRUE,FALSE,NULL);IDENTITY_CHECK(shutdown);
+        watch.frontend_root_generation=generation;
+        watch.shutdown=shutdown;
+        EnterCriticalSection(&service->lock);
+        InsertTailList(&service->worker_watches,&watch.link);
+        LeaveCriticalSection(&service->lock);
+        IDENTITY_CHECK(TerminateProcess(external.hProcess,0));
+        IDENTITY_CHECK(WaitForSingleObject(external.hProcess,5000)==WAIT_OBJECT_0);
+        IDENTITY_CHECK(!service_retire_expired_frontends_at(service,1));
+        IDENTITY_CHECK((root->frontend_closing ? 1u : 0u)==borrowed);
+        IDENTITY_CHECK(WaitForSingleObject(shutdown,0)==(borrowed ? WAIT_OBJECT_0 : WAIT_TIMEOUT));
+        EnterCriticalSection(&service->lock);
+        RemoveEntryList(&watch.link);
+        LeaveCriticalSection(&service->lock);
+        IDENTITY_CHECK(!OpenNtBaseServiceDisconnect(root));root=NULL;
+        IDENTITY_CHECK(OpenNtBaseServiceStop(service));
+        CloseHandle(shutdown);
+        CloseHandle(external.hThread);CloseHandle(external.hProcess);
+#undef IDENTITY_CHECK
+    }
+    puts("PASS borrowed Console identity loss: NTSRV closes only borrowed roots and orders worker shutdown");
+    return 0;
+}

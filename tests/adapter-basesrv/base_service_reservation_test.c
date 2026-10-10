@@ -22,6 +22,7 @@ int fixture_prepared_native_root_loss(void);
 int fixture_parent_resume_origin(void);
 int fixture_shared_worker_residency(void);
 int fixture_management_gui(void);
+int fixture_borrowed_console_identity_loss(void);
 DWORD service_next_frontend_deadline_at(OPENNT_BASE_SERVICE *,ULONGLONG,ULONGLONG *);
 DWORD service_retire_expired_frontends_at(OPENNT_BASE_SERVICE *,ULONGLONG);
 static const BYTE native_payload[3]={'N','T','C'};
@@ -378,6 +379,7 @@ static int frontend_authority(void)
         STARTUPINFOA startup={sizeof(startup)};
         char image[MAX_PATH],command[MAX_PATH+32];
         DWORD launcher_generation=0,root_generation=0,create=0,closing=0;
+        DWORD members[2];
         ULONGLONG deadline=0,before=GetTickCount64();
         CHECK(service && self && capability && retire && restored && startup_result);
         CHECK(worker_cleanup && OpenNtBaseServiceConfigureEmptyNotify(service,
@@ -409,6 +411,12 @@ static int frontend_authority(void)
                 child.hProcess,capability,retire,restored,startup_result));
         }
         CHECK(!(OpenNtBaseServiceRegisterFrontendRoot)(root,child.dwProcessId,root_generation,capability));
+        /* NTCON samples its attached Console before it leases the root.  The
+         * broker must receive that self-containing, authenticated identity
+         * before it can arm borrowed-root lifetime waits. */
+        members[0]=child.dwProcessId;
+        members[1]=GetCurrentProcessId();
+        CHECK(!OpenNtBaseServiceReportConsoleMembers(root,child.dwProcessId,root_generation,2,members));
         CHECK(!OpenNtBaseServiceRegisterFrontendLease(root,child.dwProcessId,root_generation,
             1234,GetCurrentProcessId(),borrowed,retire,restored));
         CHECK(OpenNtBaseServiceFrontendStartupResult(launcher,GetCurrentProcessId(),launcher_generation,
@@ -437,12 +445,10 @@ static int frontend_authority(void)
             OPENNT_BASE_CONNECTION *worker=NULL;
             PROCESS_INFORMATION backend={0};
             DWORD worker_generation=0,retained_generation=0;
-            DWORD members[2]={child.dwProcessId,GetCurrentProcessId()};
             uint64_t reservation=0;
             HANDLE retained=NULL;
             HANDLE command_wait=NULL;
             NATIVE_COMMAND_WAIT_TEST waiting={0};
-            CHECK(!OpenNtBaseServiceReportConsoleMembers(root,child.dwProcessId,root_generation,2,members));
             CHECK(!OpenNtBaseServiceRetainFrontendRoot(launcher,GetCurrentProcessId(),launcher_generation,
                 capability,&retained,&retained_generation));CloseHandle(retained);
             CHECK(!OpenNtBaseServiceCreateNativeReservation(launcher,GetCurrentProcessId(),launcher_generation,&reservation));
@@ -768,6 +774,8 @@ int main(int argc,char **argv)
         return reservation_descendant(argv[2]);
     if(argc==2 && !strcmp(argv[1],"--console-identity"))
         return frontend_console_identity();
+    if(argc==2 && !strcmp(argv[1],"--borrowed-console-identity-loss"))
+        return fixture_borrowed_console_identity_loss();
     if(argc==2 && !strcmp(argv[1],"--frontend-authority"))
         return frontend_authority();
     if(argc==2 && !strcmp(argv[1],"--frontend-notification-baseline"))

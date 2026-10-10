@@ -114,12 +114,32 @@ immutable. Focused selection must map every omitted gate to unchanged input
 identity or an explicitly approved scope, never simply to its elapsed time.
 The every-P runtime/publication gate below still applies.
 
+### Background build and test execution
+
+Every compiler, linker, package-staging, unit, integration, product-regression
+or diagnostic test invocation must run as an owned **background** process.
+The foreground agent action may only start that process, record its PID, exact
+command, working/build root and stdout/stderr locations, then observe
+completion and read its captured result. Do not run a build or test
+synchronously in a foreground interactive command, and do not treat an
+interactive command's 30-second observation slice as a build/test timeout.
+
+Each background run records its start time, owned PID and eventual exit code in
+the active evidence. The runner must impose the test's real contract timeout
+(or an explicitly recorded diagnostic deadline), preserve its child-process
+ownership boundary, and terminate only its own stalled tree. Polling the
+process result is an observation mechanism, not a substitute for the test
+timeout or a reason to declare it passed. A new build/test may not start
+against the same mutable build root until the prior owned run has completed or
+been explicitly stopped and recorded.
+
 In-process service fixtures without the global BaseSrv endpoint may run with
 bounded concurrency through tests/observation/verify-service-fixtures.ps1.
 Real-package RPC/frontend/session scenarios must remain serial. A runner must
 propagate actual fixture/assertion failures, enforce per-case time budgets,
-clean only its pinned owned processes, and restore environment and Z: mapping
-even on failure. Explicit fixture cleanup is not evidence of normal retirement.
+clean only its pinned owned processes, and restore its environment even on
+failure. Tests must not create or depend on `subst` drive mappings. Explicit
+fixture cleanup is not evidence of normal retirement.
 
 Test ten-second lifecycle decisions at their existing production owner using
 explicit time inputs, including before/at expiry, cancellation, rearm and

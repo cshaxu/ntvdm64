@@ -40,7 +40,7 @@ static DWORD session_entry(HANDLE caller,HANDLE notification,HANDLE retire,HANDL
         error=OpenNtBaseClientRegisterFrontendLease(console_window,pid,borrowed,retire,restored);
         if(error){bootstrap_trace("lease",error);goto respond;}
     }
-    error=frontend_service_start_process(notification,caller,retire,lease && borrowed,&service);
+    error=frontend_service_start_process(notification,caller,retire,&service);
     if(error){bootstrap_trace("service",error);goto respond;}
 respond:
     {

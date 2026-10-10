@@ -1,61 +1,29 @@
 #include "session_service.h"
-#include "console_channel.h"
 #include "common/console/members.h"
+#include "console_channel.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include <stdio.h>
 struct frontend_session_service {
     HANDLE notification,stop,thread,retire,state_changed;
-    HANDLE creator,console_anchor;
+    HANDLE creator;
     BOOL retire_requested,creator_exited;
     frontend_io_channel *channel;
     frontend_session *presentation;
     void (*channel_ready)(void);
 };
-/* Borrowed roots must not keep an otherwise closed user Console alive just
- * because NTCON itself remains attached. Follow one real Console member at
- * a time; on its exit, resample only once to find the next surviving member.
- * This is Console ownership, never a worker/task or descendant census. */
-static DWORD next_console_anchor(HANDLE *anchor)
-{
-    DWORD count=0,index,self=GetCurrentProcessId(),error=ERROR_NOT_FOUND;
-    BOOL inaccessible=FALSE;
-    DWORD *members=NULL;
-    HANDLE selected=NULL;
-    *anchor=NULL;
-    error=common_console_members_read(16,4096,0,&members,&count);
-    if(error)return error;
-    error=ERROR_NOT_FOUND;
-    for(index=0;index<count;++index) {
-        if(members[index]==self)continue;
-        selected=OpenProcess(SYNCHRONIZE,FALSE,members[index]);
-        if(!selected) {
-            if(GetLastError()==ERROR_ACCESS_DENIED)inaccessible=TRUE;
-            continue; /* It may have exited since the snapshot. */
-        }
-        if(WaitForSingleObject(selected,0)==WAIT_TIMEOUT) {
-            *anchor=selected;error=ERROR_SUCCESS;break;
-        }
-        CloseHandle(selected);selected=NULL;
-    }
-    common_console_members_release(members);
-    if(error==ERROR_NOT_FOUND && inaccessible)error=ERROR_ACCESS_DENIED;
-    return error;
-}
 static DWORD WINAPI frontend_pump(void *context)
 {
     frontend_session_service *scope=context;
     HANDLE waits[7];
     DWORD error=ERROR_SUCCESS;
     for (;;) {
-        DWORD wait_count=0,retire_index=MAXDWORD,creator_index=MAXDWORD,
-            anchor_index=MAXDWORD,wait;
+        DWORD wait_count=0,retire_index=MAXDWORD,creator_index=MAXDWORD,wait;
         waits[wait_count++]=scope->stop;
         waits[wait_count++]=scope->notification;
         if(scope->retire && !scope->retire_requested) {
             retire_index=wait_count;waits[wait_count++]=scope->retire;
         }
         if(scope->creator && !scope->creator_exited) { creator_index=wait_count;waits[wait_count++]=scope->creator; }
-        if(scope->console_anchor) { anchor_index=wait_count;waits[wait_count++]=scope->console_anchor; }
         if(scope->state_changed) waits[wait_count++]=scope->state_changed;
         if(scope->channel)waits[wait_count++]=frontend_io_channel_thread(scope->channel);
         wait=WaitForMultipleObjects(wait_count,waits,FALSE,INFINITE);
@@ -75,14 +43,12 @@ static DWORD WINAPI frontend_pump(void *context)
             scope->retire_requested=TRUE;
         if(creator_index!=MAXDWORD && wait==WAIT_OBJECT_0+creator_index)
             scope->creator_exited=TRUE;
-        if(anchor_index!=MAXDWORD && wait==WAIT_OBJECT_0+anchor_index) {
-            CloseHandle(scope->console_anchor);scope->console_anchor=NULL;
-            error=next_console_anchor(&scope->console_anchor);
-            if(error==ERROR_NOT_FOUND)return ERROR_SUCCESS;
-            if(error)return error;
-        }
         {
             DWORD nonce=0,candidate=0,join;
+            /* NTSRV asks for this one-off, physical same-Console check while
+             * admitting a new launcher.  It authorizes a relationship that
+             * NTSRV owns; it is not a local liveness probe or retirement
+             * policy. */
             while((join=OpenNtBaseClientFrontendJoinCandidate(&nonce,&candidate))==ERROR_SUCCESS) {
                 DWORD count=0,*members=NULL,index,snapshot_error;
                 BOOL same=FALSE;
@@ -183,12 +149,11 @@ DWORD frontend_service_close(frontend_session_service *scope)
     if(error)return error;
     if(scope->stop)CloseHandle(scope->stop);
     if(scope->state_changed)CloseHandle(scope->state_changed);
-    if(scope->console_anchor)CloseHandle(scope->console_anchor);
     HeapFree(GetProcessHeap(),0,scope);
     return ERROR_SUCCESS;
 }
 static DWORD service_start(HANDLE notification,HANDLE creator,HANDLE retire,
-    BOOL borrowed,void (*ready)(void),frontend_session_service **output)
+    void (*ready)(void),frontend_session_service **output)
 {
     frontend_session_service *scope;
     DWORD error;
@@ -198,10 +163,6 @@ static DWORD service_start(HANDLE notification,HANDLE creator,HANDLE retire,
     if(!scope)return ERROR_NOT_ENOUGH_MEMORY;
     scope->notification=notification;scope->channel_ready=ready;
     scope->creator=creator;scope->retire=retire;
-    if(borrowed) {
-        error=next_console_anchor(&scope->console_anchor);
-        if(error)goto fail;
-    }
     if(creator) {
         error=OpenNtBaseClientFrontendStateChanged(&scope->state_changed);
         if(error)goto fail;
@@ -218,12 +179,12 @@ fail:
 DWORD frontend_service_start(HANDLE notification,
     void (*ready)(void),frontend_session_service **output)
 {
-    return service_start(notification,NULL,NULL,FALSE,ready,output);
+    return service_start(notification,NULL,NULL,ready,output);
 }
 DWORD frontend_service_start_process(HANDLE notification,
-    HANDLE creator,HANDLE retire,BOOL borrowed,frontend_session_service **output)
+    HANDLE creator,HANDLE retire,frontend_session_service **output)
 {
     if(!creator || !retire)return ERROR_INVALID_PARAMETER;
-    return service_start(notification,creator,retire,borrowed,NULL,output);
+    return service_start(notification,creator,retire,NULL,output);
 }
 HANDLE frontend_service_thread(frontend_session_service *scope){return scope ? scope->thread : NULL;}

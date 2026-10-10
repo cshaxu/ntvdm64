@@ -72,6 +72,11 @@ struct OPENNT_BASE_CONNECTION {
     DWORD *console_members;
     HANDLE *console_member_processes; /* Pinned process identities, not task state. */
     DWORD console_member_count;
+    /* NTSRV-owned one-shot waits for a borrowed frontend's initially
+     * authenticated external Console members.  They only wake lifecycle
+     * arbitration; they never create task or worker observations. */
+    HANDLE *frontend_console_member_watches;
+    DWORD frontend_console_member_watch_count;
     /* A resident worker outlives its direct launcher. Retain the
      * authenticated frontend root's visible-Console identity separately
      * from the worker's own hidden Console membership. This is only a local
