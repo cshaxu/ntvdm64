@@ -6,17 +6,13 @@
 
 ## Intermission
 
-T443 S5 is owner-accepted as a no-change disposition: one unclassified
-command-text route through Hooked `COMSPEC /c` remains simpler and more
-faithful than a project-owned shell/file-intent classifier. The source basis
-and disposition are recorded in
-[S5 evidence](../etc/evidence/m0-t443-s5-comspec-fallback-retain.md).
-No further implementation is authorized until a queue candidate is admitted.
-<!-- Retained S5 admission provenance follows.
-
-| Original Owner Request | “准入s5 先解释问题和根源”. |
-
--->
+T443 S6 is delivered: both Hook widths now select only the original
+`CreateProcess(application, command)` candidate needed for DOS/Win16
+classification, preserve native calls unchanged, and create the Run16 request
+with the original OpenNT `BaseCheckVDM` tail shape. The focused x86/x64 fixtures
+passed; real-root direct and Hooked `command /c ver` requests returned the DOS
+version; the coherent ten-image package was published and hash-verified. See
+[S6 evidence](../etc/evidence/m0-t443-s6-hook-createprocess-boundary.md).
 
 ## Previous Closed Packet
 

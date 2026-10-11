@@ -28,6 +28,8 @@ if(-not [string]::IsNullOrWhiteSpace($CompilerCache)) {
 $reference=[IO.File]::ReadAllText([IO.Path]::GetFullPath($ReferenceGraph))
 $referenceFlags=[regex]::Match($reference,'(?m)^cflags = (.*)$').Groups[1].Value
 if(-not $referenceFlags) { throw 'Missing reference include graph' }
+$referenceRun16=Join-Path (Split-Path -Parent ([IO.Path]::GetFullPath($ReferenceGraph))) 'run16.exe'
+if(-not (Test-Path -LiteralPath $referenceRun16 -PathType Leaf)) { throw 'Missing staged x86 run16.exe beside reference graph' }
 # Reuse only native include closure, never x86 objects/defines/worker targets.
 $includes=@([regex]::Matches($referenceFlags,'/I "[^"]+"') | ForEach-Object { $_.Value })
 $includes += '/I "'+(NP (Join-Path $root 'src/ntsrv-exe/opennt/include'))+'"'
@@ -42,13 +44,16 @@ $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file: ')
 $graph.Add('rule dll')
 $graph.Add('  command = link.exe /nologo /dll /opt:ref /out:$out /map:$out.map /implib:nthook64-import.lib /def:"'+(NP (Join-Path $root 'src/nthook32-dll/nthook64.def'))+'" $in kernel32.lib ntdll.lib advapi32.lib rpcrt4.lib legacy_stdio_definitions.lib')
+$graph.Add('rule stage')
+$graph.Add('  command = powershell.exe -NoProfile -ExecutionPolicy Bypass -File "'+(NP (Join-Path $root 'tools/build/Stage-NativeWorkerImage.ps1'))+'" -InputFile $in -OutputFile "$out"')
+$graph.Add('build run16.exe: stage '+(NP $referenceRun16))
 $graph.Add('rule idl')
 $graph.Add('  command = midl.exe /nologo /env x64 /target NT100 /prefix client Client_ /prefix server Server_ /acf "'+(NP (Join-Path $root 'src/common/protocol/service.acf'))+'" /out obj/basesrv /h service.h /cstub service_c.c /sstub service_s.c "'+(NP (Join-Path $root 'src/common/protocol/service.idl'))+'"')
 $graph.Add('build obj/basesrv/service.h obj/basesrv/service_c.c obj/basesrv/service_s.c: idl '+(NP (Join-Path $root 'src/common/protocol/service.idl'))+' | '+(NP (Join-Path $root 'src/common/protocol/service.acf')))
 $graph.Add('build observation-stub.obj: cc obj/basesrv/service_c.c | obj/basesrv/service.h')
 $sources=@('src/nthook32-dll/entry.cpp','src/nthook32-dll/context.cpp',
     'src/nthook32-dll/installer.cpp','src/nthook32-dll/create_process.cpp',
-    'src/common/application_search.c','src/common/native_image.c',
+    'src/common/native_image.c',
     'src/run16-exe/hook_classification.c',
     'src/opennt-host/base/win32/client/vdm.c',
     'src/ntsrv-exe/opennt/source/base_classifier_path.c',
@@ -72,12 +77,12 @@ foreach($source in $sources) {
 }
 $graph.Add('build nthook64.dll: dll '+($objects -join ' ')+' observation-stub.obj | '+(NP (Join-Path $root 'src/nthook32-dll/nthook64.def')))
 $graph.Add('rule test')
-$graph.Add('  command = link.exe /nologo /subsystem:$subsystem /entry:wmainCRTStartup /opt:ref /out:$out /map:$out.map $in kernel32.lib ntdll.lib advapi32.lib user32.lib legacy_stdio_definitions.lib')
+$graph.Add('  command = link.exe /nologo /subsystem:$subsystem /entry:wmainCRTStartup /opt:ref /out:$out /map:$out.map $in kernel32.lib ntdll.lib advapi32.lib user32.lib rpcrt4.lib legacy_stdio_definitions.lib')
 $graph.Add('build fixture.obj: cc '+(NP (Join-Path $root 'tests/component-integration/nthook_install_test.cpp')))
-$testObjects=@($objects | Where-Object { $_ -notin @('unit0.obj','unit3.obj','unit6.obj','unit7.obj','unit8.obj') -and [int]($_ -replace '\D','') -lt 16 })
-$graph.Add('build nthook-install-test.exe: test fixture.obj '+($testObjects -join ' ')+' || nthook64.dll nthook-gui-test.exe')
+$testObjects=$objects
+$graph.Add('build nthook-install-test.exe: test fixture.obj '+($testObjects -join ' ')+' observation-stub.obj || nthook64.dll nthook-gui-test.exe run16.exe')
 $graph.Add('  subsystem = console')
-$graph.Add('build nthook-gui-test.exe: test fixture.obj '+($testObjects -join ' '))
+$graph.Add('build nthook-gui-test.exe: test fixture.obj '+($testObjects -join ' ')+' observation-stub.obj')
 $graph.Add('  subsystem = windows')
 $graph.Add('default nthook64.dll')
 $utf8=[Text.UTF8Encoding]::new($false)

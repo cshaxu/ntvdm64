@@ -37,7 +37,8 @@ static DWORD child(PCWSTR mode,PCWSTR next=NULL,PCWSTR final=NULL)
     if(!wcscmp(mode,L"grandchild"))return 0;
     if(!wcscmp(mode,L"legacy-request")) {
         WCHAR self[MAX_PATH],current[MAX_PATH],temporary[MAX_PATH]={0},legacy[MAX_PATH]={0};
-        WCHAR command[256]=L"legacy";
+        WCHAR long_directory[1024]={0},long_legacy[1024]={0};unsigned long_segments=0;
+        WCHAR command[256]=L"legacy.com";
         STARTUPINFOW local_startup={sizeof(local_startup)};
         PROCESS_INFORMATION local_process={0};
         DWORD result=ERROR_INVALID_DATA;
@@ -53,16 +54,98 @@ static DWORD child(PCWSTR mode,PCWSTR next=NULL,PCWSTR final=NULL)
         if(file==INVALID_HANDLE_VALUE || !WriteFile(file,dos_program,sizeof(dos_program),&written,NULL) ||
            written!=sizeof(dos_program)) goto native_identity_done;
         CloseHandle(file);file=INVALID_HANDLE_VALUE;
-        /* Classification discovers the CWD's legacy.com, but this call's
-         * original application request is just "legacy". The Hook may not
-         * replace that request with its absolute classification result. */
-        if(!CreateProcessW(L"legacy",command,NULL,NULL,FALSE,0,NULL,NULL,
+        /* Application-only: the explicit application field selects the image,
+         * while a missing command field leaves BaseCheckVDM's tail empty. */
+        if(!CreateProcessW(legacy,NULL,NULL,NULL,FALSE,0,NULL,NULL,
             &local_startup,&local_process)) {result=GetLastError();goto native_identity_done;}
         if(WaitForSingleObject(local_process.hProcess,10000)==WAIT_OBJECT_0 &&
             GetExitCodeProcess(local_process.hProcess,&result) && result==41) result=0;
         CloseHandle(local_process.hThread);CloseHandle(local_process.hProcess);
+        if(!result) {
+            /* Both fields: the explicit application wins even when argv[0]
+             * differs, and the tail begins after command's first token. */
+            wcscpy_s(command,L"custom-name /explicit");
+            ZeroMemory(&local_process,sizeof(local_process));
+            if(!CreateProcessW(legacy,command,NULL,NULL,FALSE,0,NULL,NULL,
+                &local_startup,&local_process)) {result=GetLastError();goto native_identity_done;}
+            if(WaitForSingleObject(local_process.hProcess,10000)!=WAIT_OBJECT_0) {
+                TerminateProcess(local_process.hProcess,ERROR_TIMEOUT);result=ERROR_TIMEOUT;
+            } else if(!GetExitCodeProcess(local_process.hProcess,&result) || result!=42) {
+                if(!result)result=ERROR_INVALID_DATA;
+            } else result=0;
+            CloseHandle(local_process.hThread);CloseHandle(local_process.hProcess);
+        }
+        if(!result) {
+            swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" /command-only",legacy);
+            ZeroMemory(&local_process,sizeof(local_process));
+            if(!CreateProcessW(NULL,command,NULL,NULL,FALSE,0,NULL,NULL,
+                &local_startup,&local_process)) {result=GetLastError();goto native_identity_done;}
+            if(WaitForSingleObject(local_process.hProcess,10000)!=WAIT_OBJECT_0) {
+                TerminateProcess(local_process.hProcess,ERROR_TIMEOUT);result=ERROR_TIMEOUT;
+            } else if(!GetExitCodeProcess(local_process.hProcess,&result) || result!=43) {
+                if(!result)result=ERROR_INVALID_DATA;
+            } else result=0;
+            CloseHandle(local_process.hThread);CloseHandle(local_process.hProcess);
+        }
+        if(!result) {
+            char ansi_application[MAX_PATH*2],ansi_command[256];
+            STARTUPINFOA ansi_startup={sizeof(ansi_startup)};
+            if(!WideCharToMultiByte(CP_ACP,WC_NO_BEST_FIT_CHARS,legacy,-1,
+                ansi_application,ARRAYSIZE(ansi_application),NULL,NULL) ||
+               !WideCharToMultiByte(CP_ACP,WC_NO_BEST_FIT_CHARS,
+                L"custom-name /explicit",-1,ansi_command,ARRAYSIZE(ansi_command),NULL,NULL)) {
+                result=ERROR_NO_UNICODE_TRANSLATION;goto native_identity_done;
+            }
+            ZeroMemory(&local_process,sizeof(local_process));
+            if(!CreateProcessA(ansi_application,ansi_command,NULL,NULL,FALSE,0,NULL,NULL,
+                &ansi_startup,&local_process)) {result=GetLastError();goto native_identity_done;}
+            if(WaitForSingleObject(local_process.hProcess,10000)!=WAIT_OBJECT_0) {
+                TerminateProcess(local_process.hProcess,ERROR_TIMEOUT);result=ERROR_TIMEOUT;
+            } else if(!GetExitCodeProcess(local_process.hProcess,&result) || result!=42) {
+                if(!result)result=ERROR_INVALID_DATA;
+            } else result=0;
+            CloseHandle(local_process.hThread);CloseHandle(local_process.hProcess);
+        }
+        if(!result) {
+            /* The Hook's selected-image buffer must not inherit Run16's
+             * MAX_PATH CLI limit. Use an extended absolute DOS image path
+             * longer than MAX_PATH; the emitted Run16 request stays bounded
+             * by CreateProcess's 32767-character command contract. */
+            if(swprintf_s(long_directory,ARRAYSIZE(long_directory),L"\\\\?\\%ls",temporary)<0)
+                {result=ERROR_FILENAME_EXCED_RANGE;goto native_identity_done;}
+            while(long_segments<12u) {
+                size_t used=wcslen(long_directory);
+                if(swprintf_s(long_directory+used,ARRAYSIZE(long_directory)-used,
+                    L"\\capacity-segment-012345")<0 ||
+                   (!CreateDirectoryW(long_directory,NULL) && GetLastError()!=ERROR_ALREADY_EXISTS)) {
+                    result=GetLastError();goto native_identity_done;
+                }
+                ++long_segments;
+            }
+            if(swprintf_s(long_legacy,ARRAYSIZE(long_legacy),L"%ls\\legacy.com",long_directory)<0 ||
+               (file=CreateFileW(long_legacy,GENERIC_WRITE,0,NULL,CREATE_NEW,FILE_ATTRIBUTE_NORMAL,NULL))==INVALID_HANDLE_VALUE ||
+               !WriteFile(file,dos_program,sizeof(dos_program),&written,NULL) || written!=sizeof(dos_program)) {
+                result=GetLastError();goto native_identity_done;
+            }
+            CloseHandle(file);file=INVALID_HANDLE_VALUE;ZeroMemory(&local_process,sizeof(local_process));
+            if(!CreateProcessW(long_legacy,NULL,NULL,NULL,FALSE,0,NULL,NULL,&local_startup,&local_process)) {
+                result=GetLastError();goto native_identity_done;
+            }
+            if(WaitForSingleObject(local_process.hProcess,10000)!=WAIT_OBJECT_0) {
+                TerminateProcess(local_process.hProcess,ERROR_TIMEOUT);result=ERROR_TIMEOUT;
+            } else if(!GetExitCodeProcess(local_process.hProcess,&result) || result!=41) {
+                if(!result)result=ERROR_INVALID_DATA;
+            } else result=0;
+            CloseHandle(local_process.hThread);CloseHandle(local_process.hProcess);
+        }
 native_identity_done:
         if(file!=INVALID_HANDLE_VALUE)CloseHandle(file);
+        if(long_legacy[0])DeleteFileW(long_legacy);
+        while(long_segments) {
+            WCHAR *slash;
+            RemoveDirectoryW(long_directory);--long_segments;
+            slash=wcsrchr(long_directory,L'\\');if(!slash)break;*slash=0;
+        }
         SetCurrentDirectoryW(current);
         if(legacy[0]) DeleteFileW(legacy);
         if(temporary[0]) RemoveDirectoryW(temporary);
@@ -264,11 +347,18 @@ static void malformed(PCWSTR image,const nthook_context *context,unsigned mutati
 }
 int wmain(int argc,WCHAR **argv)
 {
-    /* The launcher fixture observes the literal argument reached by run16. */
+    /* The launcher fixture observes the selected legacy image plus the exact
+     * OpenNT BaseCheckVDM-style tail encoded by the Hook. */
     {
         PCWSTR name=wcsrchr(argv[0],L'\\');
-        if(!_wcsicmp(name ? name+1 : argv[0],L"hook-legacy-launcher.exe"))
-            return argc==2 && !wcscmp(argv[1],L"legacy") ? 41 : 57;
+        if(!_wcsicmp(name ? name+1 : argv[0],L"hook-legacy-launcher.exe")) {
+            PCWSTR image=argc>1 ? wcsrchr(argv[1],L'\\') : NULL;
+            BOOL legacy=argc>1 && !_wcsicmp(image ? image+1 : argv[1],L"legacy.com");
+            if(argc==2 && legacy)return 41;
+            if(argc==3 && legacy && !wcscmp(argv[2],L"/explicit"))return 42;
+            if(argc==3 && legacy && !wcscmp(argv[2],L"/command-only"))return 43;
+            return 57;
+        }
     }
     if(argc==4 && !wcscmp(argv[1],L"alternate"))return (int)child(argv[1],argv[2],argv[3]);
     if(argc==3 && !wcscmp(argv[1],L"alternate-leaf"))return (int)child(argv[1],argv[2]);
@@ -289,7 +379,7 @@ int wmain(int argc,WCHAR **argv)
     check(CopyFileW(image,legacy_launcher,FALSE),"private legacy launcher fixture");
     wcscpy_s(saved_launcher,context.launcher);wcscpy_s(context.launcher,legacy_launcher);
     check(run(image,L"legacy-request",&context,NATIVE_HOOK_INTERCEPT)==0,
-        "legacy Hook redirect forwards caller request to run16 unchanged");
+        "legacy Hook selects the image and preserves BaseCheckVDM-style tails");
     wcscpy_s(context.launcher,saved_launcher);DeleteFileW(legacy_launcher);
     check(run(image,L"ansi",&context,NATIVE_HOOK_INTERCEPT)==0,"ANSI native child propagated");
     check(run(image,L"cmd",&context,NATIVE_HOOK_INTERCEPT)==0,"actual matching-width CMD propagated immediate child");

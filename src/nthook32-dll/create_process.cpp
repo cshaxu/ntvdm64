@@ -1,6 +1,5 @@
 #include "intercept.h"
 #include "detours/detours.h"
-#include "common/application_search.h"
 #include "common/rpc/local_binding.h"
 #include "common/rpc/management.h"
 #include "ntsrv-exe/transport/rpc_security.h"
@@ -8,6 +7,7 @@
 static decltype(&CreateProcessW) create_w=CreateProcessW;
 static decltype(&CreateProcessA) create_a=CreateProcessA;
 static __declspec(thread) unsigned entering;
+#define NTHOOK_COMMAND_CAPACITY 32768u
 /* Called only from the successful creation transaction, never DllMain.
  * Stateless finite publication: a missing/slow broker is diagnostic loss,
  * not a failed launch. No registration, retry, helper or inherited token. */
@@ -55,54 +55,127 @@ static BOOL finish(BOOL created,DWORD flags,PROCESS_INFORMATION *child,BOOL laun
     }
     SetLastError(saved);return TRUE;
 }
-static PCWSTR command_tail(PCWSTR command,PWSTR token)
+static BOOL has_extension(PCWSTR image)
 {
-    PCWSTR begin=command,end;size_t count;BOOL quoted;
-    while(*begin==L' ' || *begin==L'\t')++begin;
-    quoted=*begin==L'"';
-    if(quoted){++begin;end=wcschr(begin,L'"');}
-    else {end=begin;while(*end && *end!=L' ' && *end!=L'\t')++end;}
-    count=end ? end-begin : 0;
-    if(!count || count>=MAX_PATH)return NULL;
-    memcpy(token,begin,count*sizeof(WCHAR));token[count]=0;
-    return quoted ? end+1 : end;
+    PCWSTR dot=wcsrchr(image,L'.'),slash=wcsrchr(image,L'\\');
+    PCWSTR forward=wcsrchr(image,L'/');
+    if(forward && (!slash || forward>slash))slash=forward;
+    return dot && (!slash || dot>slash);
 }
-/* Owner-selected launch discovery is shared with run16: CWD, then each
- * PATH directory, with COM/EXE/BAT/PIF precedence inside each directory.
- * Explicit application paths remain exact; argv[0] is not an identity check. */
-static BOOL legacy_application(PCWSTR application,PCWSTR command,DWORD flags,
-    PWSTR resolved)
+/* This is deliberately not common_resolve_application().  Run16 receives
+ * one user CLI field and owns its CWD/PATH COM/EXE/BAT/PIF discovery.  A Hook
+ * receives CreateProcess's two fields and must select only enough to decide
+ * whether its caller requested a legacy image. */
+static BOOL current_directory_image(PCWSTR image,BOOL append_exe,PWSTR output,DWORD capacity)
 {
-    WCHAR token[MAX_PATH];DWORD type;
-    resolved[0]=0;
-    if(!application) {
-        if(!command || !command_tail(command,token))return FALSE;
-        application=token;
+    WCHAR *candidate=NULL;DWORD count,attributes;size_t length=wcsnlen_s(image,NTHOOK_COMMAND_CAPACITY);
+    PCWSTR suffix=append_exe && !has_extension(image) ? L".exe" : L"";
+    size_t suffix_length=wcslen(suffix);
+    PCWSTR source=image;
+    if(!capacity || length==NTHOOK_COMMAND_CAPACITY || !length ||
+       length+suffix_length>=capacity) {SetLastError(ERROR_FILENAME_EXCED_RANGE);return FALSE;}
+    if(suffix_length) {
+        candidate=(WCHAR *)HeapAlloc(GetProcessHeap(),0,(length+suffix_length+1u)*sizeof(WCHAR));
+        if(!candidate){SetLastError(ERROR_NOT_ENOUGH_MEMORY);return FALSE;}
+        memcpy(candidate,image,length*sizeof(WCHAR));
+        memcpy(candidate+length,suffix,(suffix_length+1u)*sizeof(WCHAR));
+        source=candidate;
     }
-    if(common_resolve_application(application,resolved,MAX_PATH))return FALSE;
+    count=GetFullPathNameW(source,capacity,output,NULL);
+    if(candidate)HeapFree(GetProcessHeap(),0,candidate);
+    if(!count || count>=capacity)return FALSE;
+    attributes=GetFileAttributesW(output);
+    return attributes!=INVALID_FILE_ATTRIBUTES && !(attributes&FILE_ATTRIBUTE_DIRECTORY);
+}
+static BOOL selected_image(PCWSTR image,PWSTR output,DWORD capacity)
+{
+    DWORD count,attributes;
+    if(current_directory_image(image,TRUE,output,capacity))return TRUE;
+    /* A bare module name is resolved by Windows search.  An explicit
+     * application suppresses command-line candidate parsing, not that OS
+     * file-selection contract. */
+    if(wcschr(image,L'\\') || wcschr(image,L'/') || wcschr(image,L':'))return FALSE;
+    count=SearchPathW(NULL,image,has_extension(image) ? NULL : L".exe",
+        capacity,output,NULL);
+    if(!count || count>=capacity)return FALSE;
+    attributes=GetFileAttributesW(output);
+    return attributes!=INVALID_FILE_ATTRIBUTES && !(attributes&FILE_ATTRIBUTE_DIRECTORY);
+}
+static BOOL select_command_range(PCWSTR begin,PCWSTR end,PWSTR output,DWORD capacity)
+{
+    WCHAR *image;BOOL result;size_t length;
+    if(!begin || !end || end<=begin)return FALSE;
+    length=(size_t)(end-begin);
+    if(length>=capacity){SetLastError(ERROR_FILENAME_EXCED_RANGE);return FALSE;}
+    image=(WCHAR *)HeapAlloc(GetProcessHeap(),0,(length+1u)*sizeof(WCHAR));
+    if(!image){SetLastError(ERROR_NOT_ENOUGH_MEMORY);return FALSE;}
+    memcpy(image,begin,length*sizeof(WCHAR));image[length]=0;
+    result=selected_image(image,output,capacity);
+    HeapFree(GetProcessHeap(),0,image);return result;
+}
+/* Bounded selection for the only shape where Windows has no separate
+ * application field.  Each whitespace boundary is a documented unquoted
+ * CreateProcess module candidate; a quoted first field stays one candidate. */
+static BOOL select_command_image(PCWSTR command,PWSTR output,DWORD capacity)
+{
+    PCWSTR begin,end,limit;
+    if(!command)return FALSE;
+    limit=command+wcsnlen_s(command,NTHOOK_COMMAND_CAPACITY);
+    if(limit==command+NTHOOK_COMMAND_CAPACITY) {SetLastError(ERROR_FILENAME_EXCED_RANGE);return FALSE;}
+    begin=command;while(*begin==L' ' || *begin==L'\t')++begin;
+    if(!*begin)return FALSE;
+    if(*begin==L'"') {
+        end=wcschr(begin+1,L'"');
+        return end && end<limit && select_command_range(begin+1,end,output,capacity);
+    }
+    end=begin;
+    for(;;) {
+        while(*end && *end!=L' ' && *end!=L'\t')++end;
+        if(select_command_range(begin,end,output,capacity))return TRUE;
+        if(!*end)return FALSE;
+        ++end;
+    }
+}
+/* Exact tail selection shape retained from original OpenNT BaseCheckVDM:
+ * src/opennt-host/base/win32/client/vdm.c.  The Hook emits a normal Run16
+ * CLI; Run16 then calls the original implementation with the same selected
+ * application/tail relationship. */
+static PCWSTR opennt_vdm_tail(PCWSTR application,PCWSTR command)
+{
+    PCWSTR cursor;size_t length;
+    if(!command || !*command)return L"";
+    length=wcslen(application);
+    if(command[0]==L'"') {
+        cursor=command+1;while(*cursor && *cursor++!=L'"');
+    } else if(length<wcslen(command) && !_wcsnicmp(application,command,length)) {
+        cursor=command+length;
+    } else {
+        cursor=command;
+        while(*cursor==L' ' || *cursor==L'\t')++cursor;
+        if(*cursor==L'"') {++cursor;while(*cursor && *cursor++!=L'"');}
+        else while(*cursor && *cursor!=L' ' && *cursor!=L'\t')++cursor;
+    }
+    while(*cursor==L' ' || *cursor==L'\t')++cursor;
+    return cursor;
+}
+static BOOL legacy_application(PCWSTR application,PCWSTR command,DWORD flags,
+    PWSTR resolved,DWORD capacity)
+{
+    DWORD type;
+    resolved[0]=0;
+    if(application) {
+        if(!selected_image(application,resolved,capacity))return FALSE;
+    } else if(!select_command_image(command,resolved,capacity))return FALSE;
     if(flags&(CREATE_NEW_CONSOLE|DETACHED_PROCESS|CREATE_NO_WINDOW))return FALSE;
     return !nthook_legacy_type(resolved,&type);
 }
 static WCHAR *redirect_command(PCWSTR application,PCWSTR command)
 {
-    WCHAR *text,token[MAX_PATH];size_t count;
-    /* Preserve the caller's legacy request shape.  The Hook uses its resolved
-     * candidate only to decide whether interception applies; run16 owns the
-     * next, shared CWD/PATH resolution and classification.  Do not turn this
-     * local classification aid into a second final-path authority. */
-    if(application) {
-        PCWSTR tail=command && *command ? command_tail(command,token) : L"";
-        if(!tail){SetLastError(ERROR_INVALID_PARAMETER);return NULL;}
-        count=wcslen(nthook_process_context.launcher)+wcslen(application)+wcslen(tail)+7;
-        if(count>32767){SetLastError(ERROR_FILENAME_EXCED_RANGE);return NULL;}
-        text=(WCHAR *)HeapAlloc(GetProcessHeap(),0,count*sizeof(WCHAR));
-        if(text)swprintf_s(text,count,L"\"%ls\" \"%ls\"%ls",nthook_process_context.launcher,application,tail);
-    } else if(command && *command) {
-        count=wcslen(nthook_process_context.launcher)+wcslen(command)+5;
-        if(count>32767){SetLastError(ERROR_FILENAME_EXCED_RANGE);return NULL;}
-        text=(WCHAR *)HeapAlloc(GetProcessHeap(),0,count*sizeof(WCHAR));
-        if(text)swprintf_s(text,count,L"\"%ls\" %ls",nthook_process_context.launcher,command);
-    } else {SetLastError(ERROR_INVALID_PARAMETER);return NULL;}
+    WCHAR *text;PCWSTR tail=opennt_vdm_tail(application,command);size_t count;
+    count=wcslen(nthook_process_context.launcher)+wcslen(application)+wcslen(tail)+7;
+    if(count>32767){SetLastError(ERROR_FILENAME_EXCED_RANGE);return NULL;}
+    text=(WCHAR *)HeapAlloc(GetProcessHeap(),0,count*sizeof(WCHAR));
+    if(text)swprintf_s(text,count,L"\"%ls\" \"%ls\" %ls",nthook_process_context.launcher,application,tail);
     if(!text)SetLastError(ERROR_NOT_ENOUGH_MEMORY);
     return text;
 }
@@ -115,23 +188,22 @@ static BOOL WINAPI hooked_w(LPCWSTR application,LPWSTR command,
         return create_w(application,command,process_attributes,thread_attributes,
             inherit,flags,environment,directory,startup,process);
     ++entering;
-    WCHAR resolved[MAX_PATH];
-    BOOL redirect=legacy_application(application,command,flags,resolved);
+    WCHAR *resolved=(WCHAR *)HeapAlloc(GetProcessHeap(),0,NTHOOK_COMMAND_CAPACITY*sizeof(WCHAR));
+    BOOL redirect=resolved && legacy_application(application,command,flags,resolved,NTHOOK_COMMAND_CAPACITY);
     BOOL launcher=redirect;
-    WCHAR *copy=redirect ? redirect_command(application,command) : NULL;
+    WCHAR *copy=redirect ? redirect_command(resolved,command) : NULL;
     BOOL result=FALSE;DWORD error;
     if(!redirect || copy) {
-        /* `resolved` is a classification aid only.  On a normal native
-         * CreateProcess call, replacing lpApplicationName changes Windows'
-         * own application-search contract. An affirmative legacy redirect
-         * sends the caller's original request to run16; otherwise forward
-         * the caller's application pointer exactly, including NULL. */
+        /* Native CreateProcess receives the caller's original fields.  An
+         * affirmative legacy redirect alone receives the selected image and
+         * OpenNT-compatible tail encoded as Run16's ordinary CLI. */
         result=create_w(redirect ? nthook_process_context.launcher : application,
             redirect ? copy : command,process_attributes,thread_attributes,inherit,
             flags|CREATE_SUSPENDED,environment,directory,startup,process);
         result=finish(result,flags,process,launcher);
     }
     error=GetLastError();if(copy)HeapFree(GetProcessHeap(),0,copy);
+    if(resolved)HeapFree(GetProcessHeap(),0,resolved);
     --entering;SetLastError(error);return result;
 }
 static BOOL WINAPI hooked_a(LPCSTR application,LPSTR command,
@@ -144,7 +216,7 @@ static BOOL WINAPI hooked_a(LPCSTR application,LPSTR command,
             inherit,flags,environment,directory,startup,process);
     ++entering;
     WCHAR *wide_application=NULL,*wide_command=NULL,*wide_redirect=NULL;
-    WCHAR resolved[MAX_PATH]={0};
+    WCHAR *resolved=NULL;
     char launcher[MAX_PATH*2],*redirect=NULL;
     BOOL lossy=FALSE,is_legacy=FALSE,result=FALSE;
     LPCSTR source[2]={application,command};WCHAR **wide[2]={&wide_application,&wide_command};
@@ -156,11 +228,12 @@ static BOOL WINAPI hooked_a(LPCSTR application,LPSTR command,
         if(!*wide[i]){error=ERROR_NOT_ENOUGH_MEMORY;break;}
         if(!MultiByteToWideChar(CP_ACP,0,source[i],-1,*wide[i],count)){error=GetLastError();break;}
     }
-    if(!error)is_legacy=legacy_application(wide_application,wide_command,flags,resolved);
+    if(!error) {
+        resolved=(WCHAR *)HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,NTHOOK_COMMAND_CAPACITY*sizeof(WCHAR));
+    }
+    if(!error && resolved)is_legacy=legacy_application(wide_application,wide_command,flags,resolved,NTHOOK_COMMAND_CAPACITY);
     if(is_legacy) {
-        /* As in the W entry point, the resolved path is local classification
-         * evidence only.  Let run16 resolve the caller's original request. */
-        wide_redirect=redirect_command(wide_application,wide_command);
+        wide_redirect=redirect_command(resolved,wide_command);
         if(!wide_redirect)error=GetLastError();
         if(!error && (!WideCharToMultiByte(CP_ACP,WC_NO_BEST_FIT_CHARS,
             nthook_process_context.launcher,-1,launcher,sizeof(launcher),NULL,&lossy) || lossy))
@@ -188,6 +261,7 @@ static BOOL WINAPI hooked_a(LPCSTR application,LPSTR command,
     }
     if(redirect)HeapFree(GetProcessHeap(),0,redirect);
     if(wide_redirect)HeapFree(GetProcessHeap(),0,wide_redirect);
+    if(resolved)HeapFree(GetProcessHeap(),0,resolved);
     if(wide_command)HeapFree(GetProcessHeap(),0,wide_command);
     if(wide_application)HeapFree(GetProcessHeap(),0,wide_application);
     --entering;SetLastError(error);return result;

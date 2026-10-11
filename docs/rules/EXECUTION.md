@@ -14,6 +14,13 @@
 6. Make a sequential P delivery: update authorities/evidence, commit, push,
    and record any acceptance limitation.
 
+For any S that changes production code, local source review or focused tests
+are **not** completion. Do not report the S as completed or invite owner
+acceptance until its required coherent package has been built, exercised,
+published to both `assets/release/` and the configured `system32` target,
+hash-verified, committed and pushed. Report an earlier state only as
+"local verification complete; delivery pending".
+
 An active numeric T may reopen for its next sequential S after the preceding
 S has reached its bounded conclusion.  Status must link the preceding S
 evidence and state any deferred P delivery and its limitation; that deferral

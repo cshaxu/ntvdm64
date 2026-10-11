@@ -123,14 +123,20 @@ batch、复合 tail、缺失/坏/拒绝的 image-like 文本及显式 `cmd /c`�
 拒绝按路径、扩展名或 CMD 内部命令拆分“文件／shell 意图”；无生产改动。
 详见 [S5 evidence](../etc/evidence/m0-t443-s5-comspec-fallback-retain.md)。
 
-### S6 — Hook 有限 command-tail 与容量边界（H06、H09）
+### S6 — Hook 双字段启动边界与容量（H06、H09）
 
 H06 的 token 提取和 H09 的容量不一致共用同一输入边界，故同 S
-处理：限定 Hook 只在 legacy 分类所需的范围提取目标 token，调用者
-显式 application 优先；对 native 保留原 A/W 错误和 argv 行为。
-验证不一致 argv[0]、未加引号的空格路径、引号/空白、长路径、
+处理。Hook 是唯一看得到原始 `CreateProcess(application, command)`
+双字段的一方：它只按公开的 CreateProcess 选择合同选出分类候选，
+显式 application 优先；若候选为 DOS/Win16，则按原始
+`BaseCheckVDM` 的三分支规则构造 Run16 的普通“映像＋tail”调用。
+Run16 保留其单命令行用户入口、自己的发现规则与原始
+`BaseCheckVDM` 调用，不模拟双字段 CreateProcess。对 native 保留原
+A/W application、command、环境、目录和失败行为，同时走既有 Hook
+传播事务。验证不一致 argv[0]、未加引号的空格路径、引号/空白、长路径、
 Unicode/ANSI 不可表示、截断与短名不可用。不得将 DOS 的历史容量
-无依据扩张到 guest，亦不得创造全局 CreateProcess parser。
+无依据扩张到 guest，亦不得导入完整 Kernel32 或创造全局 CreateProcess
+parser。
 
 ### S7 — NtAlertThread fallback 的等价范围（H07）
 

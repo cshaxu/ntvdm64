@@ -6,12 +6,14 @@ NTVWM and both DLLs select the same suspended-child installer;
 run16 selects the copied-context reader without loading the interception DLL.
 Native GUI propagation does not grant character-frontend authority.
 
-Application discovery uses the same common/application_search object as
-run16: CWD then each PATH directory, COM/EXE/BAT/PIF precedence and exact
-explicit paths. The selected original OpenNT classifier follows discovery.
-No independent argv[0]/basename identity gate remains in the DLL; actual
-CMD's MEM.EXE application and extensionless `mem` command are valid together.
-The wrapper retains its original A/W creation, attributes and parameter tail.
+Run16 and the Hook deliberately have separate discovery contracts. Run16 owns
+one user CLI field: CWD/PATH COM/EXE/BAT/PIF discovery, including compact
+`command/c` normalization. The Hook owns the original two-field
+CreateProcess request: an explicit application is authoritative; without one,
+the Hook uses bounded documented command-line candidates only to decide
+whether a DOS/Win16 redirect applies. A redirect carries that selected image
+and the OpenNT `BaseCheckVDM` tail shape to Run16. Native calls retain their
+original A/W application, command, attributes and parameter tail.
 
 `detours/` is the pinned MIT-licensed Microsoft Detours v4.0.1 slice,
 commit e4bfd6b03e50de46b47abfbd1e46b384f0c5f833. Its LICENSE.md is retained.

@@ -8,6 +8,7 @@ delivered single-worker/dual-Hook gates; see
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
 | [T443 S5 COMSPEC fallback disposition](evidence/m0-t443-s5-comspec-fallback-retain.md) | M0 T443 S5 | Retains one unclassified command-text fallback to Hooked COMSPEC and rejects project shell/file-intent heuristics. | Retain through T443 closure. |
+| [T443 S6 Hook CreateProcess boundary](evidence/m0-t443-s6-hook-createprocess-boundary.md) | M0 T443 S6 | Separates Hook two-field CreateProcess selection from Run16's one-field CLI resolver while retaining the OpenNT BaseCheckVDM tail shape. | Retain through T443 closure. |
 | [T443 S4 native text sampling](evidence/m0-t443-s4-ntvwm-native-text-sampling.md) | M0 T443 S4 | Restores source-owned native hidden-Console sample classification so idle samples do not reset the host cursor; includes focused and owner Windows Terminal acceptance plus ten-image publication identity. | Retain through T443 closure. |
 | [T443 S3 COMMAND COMSPEC contract](evidence/m0-t443-s3-command-comspec-contract.md) | M0 T443 S3 | Restores the original COMMAND-to-COMSPEC tail through run16/Hook without project shell grammar reconstruction. | Retain through T443 closure. |
 | [T443 S1 special-case contract ledger](evidence/m0-t443-s1-special-case-contract-ledger.md) | M0 T443 S1 | Production reachability/provenance audit of H01--H10; selects the bounded Hook non-redirect application-identity repair and defers coupled shell/WOW boundaries. | Retain through T443 closure. |
