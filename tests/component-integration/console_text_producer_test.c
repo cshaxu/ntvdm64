@@ -66,10 +66,11 @@ int main(void)
     columns=0;CHECK(!NtvdmConsoleUpdateText(NULL) && GetLastError()==ERROR_INVALID_DATA);columns=80;
     ++storage_bytes;CHECK(!NtvdmConsoleUpdateText(NULL) && GetLastError()==ERROR_INVALID_DATA);--storage_bytes;
     snapshot_ok=FALSE;CHECK(!NtvdmConsoleUpdateText(NULL) && GetLastError()==ERROR_INVALID_DATA);snapshot_ok=TRUE;
-    /* A late timer paint may lose DOS ownership after the original native
-     * handoff. Drop only that paint; reclaim must publish a complete frame. */
+    /* Route retirement drains the final publication before it closes the
+     * channel. A subsequent rejected publication is an ownership failure,
+     * never a successful paint. */
     send_error=ERROR_NOT_READY;
-    CHECK(NtvdmConsoleUpdateText(NULL) && publications==2);
+    CHECK(!NtvdmConsoleUpdateText(NULL) && GetLastError()==ERROR_NOT_READY && publications==2);
     send_error=0;CHECK(NtvdmConsoleUpdateText(NULL) && publications==3);
     send_error=ERROR_INVALID_DATA;CHECK(!NtvdmConsoleUpdateText(NULL) && GetLastError()==ERROR_INVALID_DATA);
     send_error=ERROR_BROKEN_PIPE;CHECK(!NtvdmConsoleUpdateText(NULL) && GetLastError()==ERROR_BROKEN_PIPE);send_error=0;
@@ -102,7 +103,7 @@ int main(void)
         !description.width && !description.height && !description.stride &&
         description.bytes==sizeof(*style) && style->fonts[0][66][19]==0x5a &&
         !style->cursor_visible && description.palette[9]==0x123456);
-    send_error=ERROR_NOT_READY;CHECK(NtvdmConsoleUpdateTextConfiguration(NULL));
+    send_error=ERROR_NOT_READY;CHECK(!NtvdmConsoleUpdateTextConfiguration(NULL) && GetLastError()==ERROR_NOT_READY);
     send_error=ERROR_BROKEN_PIPE;CHECK(!NtvdmConsoleUpdateTextConfiguration(NULL));send_error=0;
     palette_error=ERROR_NO_DATA;CHECK(NtvdmConsoleUpdateTextConfiguration(NULL));
     palette_error=ERROR_ACCESS_DENIED;CHECK(!NtvdmConsoleUpdateTextConfiguration(NULL));

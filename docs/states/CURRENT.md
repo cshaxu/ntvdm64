@@ -1,15 +1,30 @@
 # Project Status
 
+**Active: M0 T443 S14**
+
+## Active Packet
+
 ## Current Work
 
-**No active M/T/S packet.** The owner accepted T443 S12 on 2026-10-11; its
-closure is [recorded here](../history/m0-t443-s12-command-service-run16-routing-closure.md).
-S6–S11 are already delivered historical stages and are not reopened.
+### Frontend stale `ERROR_NOT_READY` publication contract
 
-The retained T443 proposal is replanned through S16; none is active. S13 validates the NtAlertThread APC
-fallback; S14 resolves stale `ERROR_NOT_READY` publication results; S15 audits
-WOW font ownership; S16 performs T443 closure. See the [replanned proposal]
-(../proposals/proposal-project-special-case-contract-repair-001.md#s13--ntalertthread-fallback-合同h07).
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T443 S14 P1`, Ordinary Mode. |
+| Admission And Approval | Owner approves: “批准修复 按照治理规范”. |
+| Objective | Remove project-owned conversions of frontend `ERROR_NOT_READY`/`ERROR_BUSY` into publication success where the existing broker-ordered final-drain and I/O-release protocol already makes a late send invalid. |
+| Non-goals | No guest change, OpenNT mirror change, new protocol/state/error code, receiver-side filtering/deduplication, polling, or removal of the final-frame barrier. |
+| Reference Baseline | H10/S14 in the [T443 proposal](../proposals/proposal-project-special-case-contract-repair-001.md); current `worker_base_publication_active(FALSE)` drain, `worker_base_io_close`, NTSRV route-release ordering, and the NTVDM/NTVWM adaptation callers. |
+| Files And ABI Surface | Project-owned `console_text.c`, `presentation.c`, `main.c`, focused producer/presentation fixtures and required records only. No public protocol or guest ABI change. |
+| Applicable Rules | Execution, architecture, coding, documentation and source-policy authorities; NTSRV remains lifecycle/route authority, NTCON returns actual ownership failures, and workers never reinterpret a failed send as a successful paint. |
+| Verification | Prove final drain completes before physical channel close; prove inactive/released workers make no new send; prove deliberately rejected current-owner text/title publication propagates its error; retain palette-not-yet-installed graphics behavior. |
+| Expected Markers | No application-owned `ERROR_NOT_READY`/`ERROR_BUSY` success conversion remains for a frontend publication or ownership probe; the retained graphics capture case is explicitly source-local and leaves dirty state intact. |
+| Asset Needs | Existing source and build-owned fixtures only; no guest/media/import dependency. |
+| Reporting Requirements | Record all suppression sites, their source/error origins, retained/removal disposition, positive/negative lifecycle witnesses, no-mirror-diff proof, and release verification. |
+| Stop Conditions | A correct distinction requires a new cross-component protocol/state, changes original guest/mirror code, or a retained suppression is proven necessary but cannot be demonstrated with the current release ordering. |
+| Exit Criteria | All reachable publication-success conversions are removed or source-backed retained; focused positive/negative tests and build pass; required release/publish/governance evidence is complete, then owner acceptance. |
+| Original Owner Request | “你先检查最新代码看看类似情况都有哪些 怎么修” and “批准修复 按照治理规范”. |
+| Similar-Issue Sweep | NTVDM text demand/frame/configuration, NTVWM connection probe/title/input, common sender, frontend ownership gate, publisher final drain and graphics capture readiness. |
 
 ## Previous Closed Packet
 
@@ -39,6 +54,18 @@ The owner accepted S3 after the published nested `run16 command` repair.
 The separately reported visible-Console-close
 residual is not attributed to S3 and is now the first unadmitted candidate:
 [borrowed Console close lifecycle recovery](../proposals/proposal-borrowed-console-close-lifecycle-recovery-001.md).
+
+## S12 Closure Record
+
+See [S12 COMMAND service Run16 routing closure](../history/m0-t443-s12-command-service-run16-routing-closure.md)
+and its [evidence](../etc/evidence/m0-t443-s12-command-service-run16-routing.md).
+
+## S13 Closure Record
+
+No source change was required: the native `NtAlertThread` path and the
+existing APC wake-status handling already provide the applicable contract.
+The absent-export fallback is retained as a bounded limitation; see the
+[S13 disposition](../etc/evidence/m0-t443-s13-ntalertthread-disposition.md).
 
 ## T442 S1 Delivery Note
 

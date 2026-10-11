@@ -19,8 +19,8 @@ application shell behavior.
   product root from the loaded NTVDM module.  It launches either
   `run16.exe <original-tail>` or `run16.exe command`.  AH=1 replaces only the
   COMSPEC executable; it does not add another `COMMAND /c` wrapper.
-- No code writes `COMSPEC`; no component path uses `O:\\winnt` or
-  `C:\\Windows` as a product-root literal.
+- No code writes `COMSPEC`; no component path uses a hard-coded product root or
+  the host operating-system directory as a product-root literal.
 
 The new state is bounded to the already session-owned native-child snapshot.
 It is cleared by the existing finish/abort path.
@@ -38,7 +38,7 @@ It is cleared by the existing finish/abort path.
 - The nested candidate `run16 command/c command/c ver` likewise returned `0`
   and printed that DOS version.
 - During a retained interactive `run16 command`, process identity was:
-  `test cmd → O:\\winnt\\system32\\run16.exe → ntsrv.exe → ntcon.exe + ntvdm.exe`.
+  `test cmd → <configured System32>\\run16.exe → ntsrv.exe → ntcon.exe + ntvdm.exe`.
   No additional host `cmd.exe` existed below Run16/NTVDM.  After closing the
   owned Run16, its frontend and worker retired, then NTSRV completed its
   existing ten-second empty retirement.
@@ -46,7 +46,7 @@ It is cleared by the existing finish/abort path.
 ## Publication
 
 The full ten-image manifest was synchronized from the tested candidate to
-`assets/release/` and `O:\\winnt\\system32`.  Hash equality was verified for
+`assets/release/` and the configured product `System32` directory.  Hash equality was verified for
 all ten files.  The changed image identities are:
 
 | Image | SHA-256 |

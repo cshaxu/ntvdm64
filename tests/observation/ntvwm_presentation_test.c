@@ -94,7 +94,7 @@ static DWORD WINAPI peer(void *context)
             reply.state.count=3;reply.bytes=sizeof(events);
             memcpy(reply.data,events,sizeof(events));
         }
-        if((state->mode>=9 && state->mode<=16) || state->mode==20 ||
+        if((state->mode>=9 && state->mode<=16) || state->mode==20 || state->mode==21 ||
             (state->mode==6 && sequence>5)) {
             if(request.operation==CONSOLE_IO_PUBLICATION_BEGIN) {
                 if(state->publication_begins!=state->publication_ends+state->publication_aborts)error=ERROR_BUSY;
@@ -112,10 +112,13 @@ static DWORD WINAPI peer(void *context)
             } else if(request.operation==CONSOLE_IO_ACTIVATE) {
                 if(request.state.input)++state->activations;else ++state->releases;
             } else if(request.operation==CONSOLE_IO_PUBLISH_TITLE_A) {
+                if(state->mode==21)error=ERROR_NOT_READY;
+                else {
                 if(!request.bytes || request.bytes>CONSOLE_IO_TITLE_BYTES ||
                     request.data[request.bytes-1] ||
                     strlen((const char *)request.data)+1!=request.bytes)return ERROR_INVALID_DATA;
                 ++state->titles;
+                }
             } else if(request.operation==CONSOLE_IO_SCREEN_INFO) {
                 ++state->screen_reads;
                 reply.state=state->screen;
@@ -294,7 +297,7 @@ static void run_case(unsigned mode)
             CHECK(error==(DWORD)(mode==10 ? ERROR_RETRY : mode==12 || mode==14 || mode==15 ? ERROR_INVALID_DATA : ERROR_SUCCESS));
             CHECK(GetConsoleScreenBufferInfo(buffer,&after));
             CHECK(ReadConsoleOutputCharacterW(buffer,&cell,1,origin,&count) && count==1);
-            if(mode==9 || mode==11 || mode==13 || mode==16 || mode==20) {
+            if(mode==9 || mode==11 || mode==13 || mode==16 || mode==20 || mode==21) {
                 COORD last={19,7};
                 CHECK(cell=='A' && after.dwSize.X==20 && after.dwSize.Y==8);
                 CHECK(after.dwCursorPosition.X==4 && after.dwCursorPosition.Y==2);
@@ -344,7 +347,7 @@ static void run_case(unsigned mode)
                 CHECK(ReadConsoleOutputCharacterW(buffer,&value,1,shifted,&count) && value=='E');
                 CHECK(ReadConsoleOutputCharacterW(buffer,&value,1,last,&count) && value=='J');
             }
-            if(mode==11 || mode==13 || mode==16) {
+            if(mode==11 || mode==13 || mode==16 || mode==21) {
                 HANDLE original=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
                     FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
                 console_text_style font={0};font.font_height=14;
@@ -390,7 +393,12 @@ static void run_case(unsigned mode)
                         /* End must drain this pending cursor before barrier,
                          * without waiting under the transport lock. */
                     }
-                    CHECK(ntvwm_presentation_end(endpoint,&font)==0);
+                    if(mode==21) {
+                        /* A rejected title is a rejected publication, not a
+                         * successful frame with a missing optional caption. */
+                        CHECK(!ntvwm_presentation_capture(endpoint,&font));
+                        CHECK(ntvwm_presentation_end(endpoint,&font)==ERROR_NOT_READY);
+                    } else CHECK(ntvwm_presentation_end(endpoint,&font)==0);
                     if(mode==11)CHECK(state.screen.x==3 && state.screen.y==4);
                     if(mode==16) {
                         DWORD remaining=MAXDWORD;
@@ -536,10 +544,11 @@ done:
             CHECK(style->cursor_column==3 && style->cursor_row==2 && style->cursor_visible);
             CHECK(style->fonts[0][0][0]==0x5a);
         }
-    } else if(mode>=17 && mode!=20)CHECK(state.calls==1);
+    } else if(mode>=17 && mode!=20 && mode!=21)CHECK(state.calls==1);
+    else if(mode==21)CHECK(state.calls>=6u);
     else CHECK(mode==11 || mode>=13 ? state.calls>=6u :
         state.calls==(mode==5 ? 0u : mode==12 ? 4u : mode==10 ? 6u : mode==9 ? 21u : 1u));
-    if((mode>=9 && mode<=16) || mode==20)CHECK(state.snapshot_begins==state.snapshot_ends &&
+    if((mode>=9 && mode<=16) || mode==20 || mode==21)CHECK(state.snapshot_begins==state.snapshot_ends &&
         state.snapshot_begins==(mode==9 ? 3u : mode==20 ? 2u : 1u));
     /* Ownership is admitted/released over NTSRV RPC, never by presentation.
      * Reject ACTIVATE above, while retaining final paint/input/barrier checks. */
@@ -629,7 +638,12 @@ int wmain(int argc,WCHAR **argv)
         HANDLE input;
         /* Run on an observer-owned private desktop. A real, otherwise empty
          * Console is required: the production member guard must not be mocked. */
-        if(wcscmp(argv[2],L"--input-return"))return 2;
+        if(!wcscmp(argv[2],L"--title-not-ready")) {
+            /* Keep S14's rejected-publication witness independent from the
+             * historical multi-mode geometry fixture. */
+            run_case(21);
+        } else if(wcscmp(argv[2],L"--input-return"))return 2;
+        else {
         CHECK(FreeConsole());CHECK(AllocConsole());
         ShowWindow(GetConsoleWindow(),SW_HIDE);
         /* AllocConsole can retain inherited STARTF_USESTDHANDLES values. */
@@ -639,12 +653,13 @@ int wmain(int argc,WCHAR **argv)
         CHECK(SetStdHandle(STD_INPUT_HANDLE,input));
         run_case(16);
         if(input!=INVALID_HANDLE_VALUE)CloseHandle(input);
+        }
     } else {
         /* The geometry cases generate asynchronous WINDOW_BUFFER_SIZE_EVENTs.
          * Verify exact injected-input order before changing Console geometry;
          * do not weaken the queue-count assertions or wait out the event. */
         run_case(7);run_case(8);run_case(19);
-        for(mode=0;mode<=20;++mode)
+        for(mode=0;mode<=21;++mode)
             if(mode!=7 && mode!=8 && mode!=16 && mode!=19)run_case(mode);
     }
     fprintf(log_file,"NTVWM-PRESENTATION checks=%u failures=%u named-pipe=yes production-activation=no\n",checks,failures);

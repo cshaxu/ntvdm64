@@ -25,7 +25,13 @@ BOOL NtvdmConsoleTextRequested(BOOL *requested)
     *requested=FALSE;
     result=ntvdm_console_window_query(CONSOLE_WINDOW_TEXT_FRAME_REQUIRED,values);
     if (result<0) return TRUE; /* No character frontend, e.g. WOW. */
-    if (!result) return GetLastError()==ERROR_NOT_READY; /* Native I/O owner. */
+    /* Route selection runs before the broker has necessarily bound this
+     * worker to the frontend.  This is a readiness query, not a paint: defer
+     * the selection to the next software tick while the authorized binding
+     * settles.  Actual text/configuration publication below still reports a
+     * rejected frontend operation to its caller. */
+    if (!result && GetLastError()==ERROR_NOT_READY) return TRUE;
+    if (!result) return FALSE;
     *requested=values[0]!=0;
     return TRUE;
 }
@@ -83,12 +89,6 @@ BOOL NtvdmConsoleUpdateText(HPALETTE palette)
         payload[sizeof(*style)+index*2+1]=text[offset+1];
     }
     result=ntvdm_console_publish_video(&description,payload,description.bytes);
-    /* A queued graphics tick can finish after nt_block_event_thread has
-     * handed I/O to a native child. The frontend rejects that stale paint
-     * with NOT_READY; this is not loss of the frontend or task failure.
-     * Do not retry into the child's surface. The next active refresh sends
-     * a complete frame. All other publication failures remain errors. */
-    if (!result && GetLastError()==ERROR_NOT_READY) result=TRUE;
 done:
     error=GetLastError();
     if (text) HeapFree(GetProcessHeap(),0,text);
@@ -121,6 +121,5 @@ BOOL NtvdmConsoleUpdateTextConfiguration(HPALETTE palette)
     for(index=0;index<16;++index)
         description.palette[index]=((uint32_t)colours[index].peRed<<16) |
             ((uint32_t)colours[index].peGreen<<8)|colours[index].peBlue;
-    return ntvdm_console_publish_video(&description,&style,sizeof(style)) ||
-        GetLastError()==ERROR_NOT_READY;
+    return ntvdm_console_publish_video(&description,&style,sizeof(style));
 }

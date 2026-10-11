@@ -127,17 +127,15 @@ static DWORD resume_io(void *context)
 static DWORD take_presentation(native_membership *state)
 {
     DWORD generation=0,error;
-    console_io_request request={0};console_io_reply reply;
     if(state->presentation)return ERROR_SUCCESS;
     error=worker_base_io_open(&state->pipe,&state->frontend,&state->ready,&generation);
     if(error)return error;
     error=ntvwm_presentation_open(state->pipe,state->frontend,state->quit,generation,&state->presentation);
     if(error)return error;
-    /* Establish transport, not input ownership. An inactive frontend is a
-     * valid attached endpoint; only execution handoff may activate it. */
-    request.operation=CONSOLE_IO_BARRIER;
-    error=ntvwm_presentation_call(state->presentation,&request,&reply);
-    return error==ERROR_NOT_READY || error==ERROR_BUSY ? ERROR_SUCCESS : error;
+    /* Transport attachment is not ownership. The service-authorized begin
+     * below is the first ownership-sensitive operation; probing an inactive
+     * route and calling a rejection success only hid broken handoff order. */
+    return ERROR_SUCCESS;
 }
 static DWORD WINAPI close_console(void *context)
 {

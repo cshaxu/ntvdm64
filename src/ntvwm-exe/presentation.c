@@ -288,7 +288,6 @@ static DWORD publish_copy(void *context,const void *copy,SIZE_T bytes)
             client->title_valid=TRUE;
         }
     }
-    if(error==ERROR_NOT_READY || error==ERROR_BUSY)error=ERROR_SUCCESS;
     if(error)goto captured_done;
     ZeroMemory(&request,sizeof(request));request.operation=CONSOLE_IO_PUBLICATION_BEGIN;
     error=exchange(client,&request,&reply);
