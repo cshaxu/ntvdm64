@@ -1,4 +1,5 @@
 #include "command_process_compat.h"
+#include "ntvdm-exe/command/include/mvdm_command_native_child.h"
 #include "vdmapi.h"
 #include "console_client.h"
 #include "common/protocol/console_io.h"
@@ -19,11 +20,9 @@ typedef struct opennt_command_standard_handles {
 
 static __declspec(thread) opennt_command_standard_handles current_handles;
 
-/* COMMAND's original cmdExec has already selected the full process command:
- * either its native target or `%COMSPEC% /c <tail>`.  Preserve that command
- * unchanged.  run16/NTVWM creates the selected host process and injects
- * NTHOOK before it runs; host CMD then owns built-ins, batch, quotes, pipes
- * and redirection, while Hook returns only actual DOS/Win16 children. */
+/* COMMAND owns its original native target and COMSPEC-tail construction.
+ * The worker binding selects Run16 only for the latter service branch; it
+ * never derives that choice from a file name or shell metacharacter. */
 
 /* The locator is added only to the native child block, never guest memory.
  * The inherited handle is a restricted duplicate of the broker-proven root. */
@@ -49,9 +48,8 @@ static BOOL create_frontend_child(LPCSTR application,LPSTR command,
     if (!capabilities[0]) return CreateProcessA(application,command,process_attributes,
         thread_attributes,inherit,flags,environment,directory,startup,process);
     if (!inherit) { error=ERROR_INVALID_PARAMETER;result=FALSE;goto done; }
-    for (slot=0;slot<2;++slot) {
+    for (slot=0;slot<2;++slot)
         sprintf_s(value[slot],sizeof(value[slot]),"%s%lx",names[slot],(unsigned long)(ULONG_PTR)capabilities[slot]);
-    }
     for(slot=0;slot<3;++slot) {
         HANDLE stream=(startup->dwFlags&STARTF_USESTDHANDLES) ?
             (slot==0 ? startup->hStdInput : slot==1 ? startup->hStdOutput : startup->hStdError) :
@@ -126,8 +124,10 @@ static BOOL opennt_command_launch_vdm_child(
     LPSTARTUPINFOA startup_info,
     LPPROCESS_INFORMATION process_information)
 {
+    const char *service_tail = NULL;
+    unsigned int service;
     char launcher[MAX_PATH];
-    char child_command[MAX_PATH * 2u + MAXIMUM_VDM_COMMAND_LENGTH + 8u];
+    char child_command[MAX_PATH * 2u + MAXIMUM_VDM_COMMAND_LENGTH + 16u];
     DWORD error;
     int formatted;
 
@@ -135,13 +135,16 @@ static BOOL opennt_command_launch_vdm_child(
         SetLastError(ERROR_INVALID_PARAMETER);
         return FALSE;
     }
+    service = mvdm_command_native_child_command_service(&service_tail);
     error = common_product_path_a(L"system32\\run16.exe", launcher, sizeof(launcher));
-    if (error) {
-        SetLastError(error);
-        return FALSE;
-    }
-    formatted = snprintf(child_command, sizeof(child_command),
-        "\"%s\" %s", launcher, command_line);
+    if (error) { SetLastError(error); return FALSE; }
+    if (service == MVDM_COMMAND_SERVICE_INTERACTIVE)
+        formatted = snprintf(child_command, sizeof(child_command), "\"%s\" command", launcher);
+    else if (service == MVDM_COMMAND_SERVICE_EXECUTE && service_tail != NULL)
+        formatted = snprintf(child_command, sizeof(child_command),
+            "\"%s\" command /c %s", launcher, service_tail);
+    else
+        formatted = snprintf(child_command, sizeof(child_command), "\"%s\" %s", launcher, command_line);
     if (formatted < 0 || (size_t)formatted >= sizeof(child_command)) {
         SetLastError(ERROR_FILENAME_EXCED_RANGE);
         return FALSE;
@@ -216,8 +219,8 @@ BOOL opennt_command_create_process_a(
         local_startup.hStdError = current_handles.values[2];
         effective_startup = &local_startup;
     }
-    /* Original cmdCreateProcess calls CreateProcess(NULL, pCommand32); the
-     * command text has already been selected by COMMAND. */
+    /* Original cmdCreateProcess calls CreateProcess(NULL, pCommand32).  The
+     * snapshot carries whether original cmdExec selected its COMSPEC branch. */
     if (application_name == NULL && command_line != NULL && *command_line) {
         return opennt_command_launch_vdm_child(command_line,
             process_attributes, thread_attributes, inherit_handles,

@@ -25,6 +25,15 @@ int mvdm_command_native_child_std_handles(ULONG handles_out[3]);
 const char *mvdm_command_native_child_command(void);
 const char *mvdm_command_native_child_environment(void);
 int mvdm_command_native_child_replace_command(const char *command);
+/* The branch itself is the authority.  The adapter must never recover it by
+ * parsing COMSPEC, a program name, or shell punctuation. */
+enum {
+    MVDM_COMMAND_SERVICE_NONE = 0,
+    MVDM_COMMAND_SERVICE_INTERACTIVE = 1,
+    MVDM_COMMAND_SERVICE_EXECUTE = 2
+};
+int mvdm_command_native_child_select_command_service(unsigned int mode);
+unsigned int mvdm_command_native_child_command_service(const char **tail_out);
 void mvdm_command_native_child_finish(void);
 void mvdm_command_native_child_abort(void);
 #endif

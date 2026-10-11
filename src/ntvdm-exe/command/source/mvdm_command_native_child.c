@@ -13,10 +13,13 @@ typedef struct mvdm_command_native_child_state {
     session *owner;
     uint32_t owner_epoch;
     uint32_t active;
+    uint32_t command_service;
+    uint32_t command_service_tail_bytes;
     uint32_t command_bytes;
     uint32_t environment_bytes;
     ULONG standard_handles[3];
     char command[MVDM_COMMAND_NATIVE_CHILD_COMMAND_BYTES];
+    char command_service_tail[MVDM_COMMAND_NATIVE_CHILD_COMMAND_BYTES];
     char environment[MVDM_COMMAND_NATIVE_CHILD_ENVIRONMENT_BYTES];
 } mvdm_command_native_child_state;
 
@@ -291,14 +294,46 @@ int mvdm_command_native_child_replace_command(const char *command)
     return 1;
 }
 
+int mvdm_command_native_child_select_command_service(unsigned int mode)
+{
+    mvdm_command_native_child_state *state;
+    if (!state_current(&state) || state->active != 1u ||
+        (mode != MVDM_COMMAND_SERVICE_INTERACTIVE &&
+         mode != MVDM_COMMAND_SERVICE_EXECUTE)) return 0;
+    if (mode == MVDM_COMMAND_SERVICE_EXECUTE) {
+        if (state->command_bytes == 0u ||
+            state->command_bytes > sizeof(state->command_service_tail)) return 0;
+        memcpy(state->command_service_tail, state->command, state->command_bytes);
+        state->command_service_tail_bytes = state->command_bytes;
+    }
+    state->command_service = mode;
+    return 1;
+}
+
+unsigned int mvdm_command_native_child_command_service(const char **tail_out)
+{
+    mvdm_command_native_child_state *state;
+    if (tail_out != NULL) *tail_out = NULL;
+    if (!state_current(&state) || state->active != 1u) return MVDM_COMMAND_SERVICE_NONE;
+    if (state->command_service == MVDM_COMMAND_SERVICE_EXECUTE) {
+        if (state->command_service_tail_bytes == 0u ||
+            state->command_service_tail_bytes > sizeof(state->command_service_tail))
+            return MVDM_COMMAND_SERVICE_NONE;
+        if (tail_out != NULL) *tail_out = state->command_service_tail;
+    }
+    return state->command_service;
+}
+
 void mvdm_command_native_child_finish(void)
 {
     mvdm_command_native_child_state *state;
     if (!state_current(&state)) return;
     SecureZeroMemory(state->command, sizeof(state->command));
+    SecureZeroMemory(state->command_service_tail, sizeof(state->command_service_tail));
     SecureZeroMemory(state->environment, sizeof(state->environment));
     SecureZeroMemory(state->standard_handles, sizeof(state->standard_handles));
     state->command_bytes = state->environment_bytes = state->active = 0u;
+    state->command_service = state->command_service_tail_bytes = 0u;
 }
 
 void mvdm_command_native_child_abort(void)

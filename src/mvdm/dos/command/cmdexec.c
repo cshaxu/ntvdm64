@@ -643,6 +643,13 @@ VOID cmdExecComspec32 (VOID)
         setAL((UCHAR)ERROR_INVALID_ADDRESS);
         return;
     }
+    if (!mvdm_command_native_child_select_command_service(
+            MVDM_COMMAND_SERVICE_INTERACTIVE)) {
+        mvdm_command_native_child_abort();
+        setCF(0);
+        setAL((UCHAR)ERROR_INVALID_ADDRESS);
+        return;
+    }
     pEnv = (PCHAR)mvdm_command_native_child_environment();
 
     chDefaultDrive = (CHAR)(getAL() + 'A');
@@ -713,6 +720,15 @@ VOID cmdExec (VOID)
 
         strcat (Buffer, " /c ");
         strcat (Buffer, pCommandTail);
+        /* Preserve this source branch explicitly before replacement changes
+         * the session snapshot from the original tail to COMSPEC /c tail. */
+        if (!mvdm_command_native_child_select_command_service(
+                MVDM_COMMAND_SERVICE_EXECUTE)) {
+            mvdm_command_native_child_abort();
+            setCF(0);
+            setAL((UCHAR)ERROR_INVALID_ADDRESS);
+            return;
+        }
         if (!mvdm_command_native_child_replace_command(Buffer)) {
             mvdm_command_native_child_abort();
             setCF(0);

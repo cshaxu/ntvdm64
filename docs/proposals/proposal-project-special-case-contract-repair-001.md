@@ -166,6 +166,37 @@ owner；测试相对/绝对/远程字体、同名冲突和 task cleanup。若根
 CURRENT、证据与发布记录。S9 不新增另一项特判修复；它只消费前序
 S 的结果并按规则提交所有者验收。
 
+### S11 — Hooked CMD → DOS COMMAND `/c` 嵌套返回回归
+
+S6 之后现场报告 `run16 cmd/c command/c ver >> a.log` 卡住。该路径不是
+S3 已验收的直接 `run16 command /c ver`：外层 native CMD 经 Hook 选择
+DOS COMMAND，随后 DOS COMMAND 必须完成并把控制权、文件重定向和退出码
+交还 native CMD。先以真实 ConPTY 和干净 Console 分别证明问题及残留进程
+状态；若项目实现确有缺口，只修现有 Run16/NTVDM/NTVWM/NTSRV 完成合同，
+不得恢复已删除的 COMSPEC 名称、元字符或 built-in 特判。若干净同包可重复
+通过，保留精确回归用例并把现场残留转交给生命周期诊断，不能凭旧现场猜测
+修改生产代码。
+
+### S12 — COMMAND service COMSPEC → Run16 binding recovery
+
+S11's exact current-package controls return successfully, so it closes as a
+non-reproducing diagnostic rather than a production change.  The owner has
+instead admitted the source-backed S3 regression: the original COMMAND
+`cmdExec` branch still builds `%COMSPEC% /c <tail>`, but the S3 adapter wraps
+that complete command below Run16 while `%COMSPEC%` remains host CMD.  The
+result is an avoidable `COMMAND → run16 → cmd /c command → run16 → COMMAND`
+chain.
+
+S12 preserves original `cmdExec` and `cmdExecComspec32` branch/tail semantics,
+but changes the project-owned BOP 54:08 adapter call target directly to Run16:
+`NtvdmSystemRoot\System32\run16.exe command /c <tail>` for AH=1 and
+`…\run16.exe command` for the no-argument COMSPEC re-entry.  It does not read,
+modify or forward any `COMSPEC` environment value; all other COMSPEC consumers
+stay unchanged.  It retains guest `COMMAND.COM` discovery and public Run16
+command-line compatibility, does not alter a guest binary, and may not route
+based on a command name or shell metacharacters.  Native Hook transfer remains
+native; it is not another COMMAND parser.
+
 实现以准入时正式混合位宽包为准，NTVDM 继续 CCPU40/x86，其他组件
 遵循已交付位宽合同。每个代码交付保持真实生产调用、focused 正负
 测试、生命周期/RPC/版本/WOW 和 Console/Window、输入连续性、
