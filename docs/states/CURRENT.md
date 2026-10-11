@@ -1,30 +1,30 @@
 # Project Status
 
-**Active: M0 T443 S14**
+**Active: M0 T443 S16**
 
 ## Active Packet
 
 ## Current Work
 
-### Product-observer staged-runtime recovery
+### WOW regression reproduction and build-contract isolation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T443 S14 P2`, Ordinary Mode. |
-| Admission And Approval | Owner directs: “任务产品观察器以前存在吗 能用吗 你修一下呗”. |
-| Objective | Restore the product observer's hermetic staged-runtime witness without `subst`, by identifying the required legacy physical-root budget and guest-media root rather than weakening the original WOW assertions. |
-| Non-goals | No production/guest/mirror change, no SystemRoot override, no drive mapping, no weakening of WOW/Console/Window assertions, and no test retry-to-pass. |
-| Reference Baseline | A 47-character stage and a 15/16-character compact stage return 1067 before a WOW worker begins. The identical package succeeds from a ten-character real temporary stage with a four-character leaf when WOW media is at the package root; the identical published product also reaches live NTVDM/WINMINE on a private desktop. |
-| Files And ABI Surface | Test-only product staging/observation scripts, evidence and required status/index records. No product ABI surface. |
-| Applicable Rules | Execution and test-isolation rules; a stage remains build-owned, marker-authenticated and identity-cleaned, while `subst` remains prohibited. |
-| Verification | Compare failed and working physical stages; retain a real ten-character stage and package-root guest media; then run the unchanged observer assertions. Any later application-window failure is recorded as a product regression, not converted into a staging pass. |
-| Expected Markers | No global drive mapping appears; all three observers get past their prior 1067-before-worker failure and retain original assertions. The current window-signature failure remains visible for its owning WOW task. |
-| Asset Needs | Existing release package, build-owned observer/window fixture and retained WOW baselines only. |
-| Reporting Requirements | Record the old/new physical roots, root-cause evidence, exact runner output, cleanup ownership result and any independent product failure. |
-| Stop Conditions | No finite missing staging input explains the result, or repair would need a production path/search/environment change, an alias drive or altered guest media. |
-| Exit Criteria | Proven staging correction and focused three-fixture observer pass; record the unchanged full-gate assertion's independent product failure, then documentation governance, diff review, committed/pushed test-only delivery. |
-| Original Owner Request | “任务产品观察器以前存在吗 能用吗 你修一下呗”. |
-| Similar-Issue Sweep | All physical stage allocation call sites, marker validation, runtime/cache isolation and observer-reported SystemRoot length. |
+| Identifier Mode | `M0 T443 S16`, Ordinary Mode. |
+| Admission And Approval | Owner directs: “好 请继续探索”. |
+| Objective | Reproduce the reported WOW illegal-instruction/depth failure only with same-generation complete packages, isolate the failed publication boundary, and restore a coherent verified x86 release set. |
+| Non-goals | No guest mutation, no production publication, no broad rollback of T440 responsiveness work, and no mirror-source modification. |
+| Reference Baseline | Mixed historical-current package probes were invalid: a historic core paired with a current frontend can fault independently. A permissive frontier observer was also insufficient: its success condition did not reject an immediate target-missing/launcher exit. The real failure was the published x86 trio: formal release images did not register a WOW worker, while the current-source rebuilt trio did. |
+| Files And ABI Surface | Build generator/configuration and disposable build evidence only unless a same-generation reproduction identifies a product source owner. No public protocol or guest ABI change is admitted. |
+| Applicable Rules | Execution, source-provenance, build-output and evidence rules; builds/tests remain background-owned and `subst` remains prohibited. |
+| Verification | Verify the generated x86 graph applies `/O2` to every selected Release rule; build the current x86 WOW path in a disposable root; stage a `SYSTEM32`-only coherent current product set plus an explicit copied WINMINE guest input; run the existing no-drive-mapping monitor-tree integration test with current monitor RPC fixture. |
+| Expected Markers | The Release graph shows `/O2` for all C rules. The actual WINMINE run registers a top-level WOW worker and a depth-1, image-labeled task; DOS root closure, independent native input/exit and GUI closure leave that WOW worker alive. |
+| Asset Needs | Current source, historical repository revision, existing guest media and build-owned observers only. |
+| Reporting Requirements | Preserve the one-function diff, exact candidate hashes, fixture result, observer output and cleanup identity. |
+| Stop Conditions | The candidate cannot be isolated without changing unrelated sources, or it leaves the same fault signature. |
+| Exit Criteria | Met: the rebuilt coherent x86 trio passes actual depth/isolation assertions; `assets/release`, manifest and deployed `O:\winnt\system32` ten-component hashes agree. |
+| Original Owner Request | “好 请继续探索”. |
+| Similar-Issue Sweep | Check release/deployed hashes, x86 release-group build identity, product-root layout and guest-media presence before pursuing an alleged component regression; do not mix independently built historical/current images or count a generic observer timeout/exit as a WOW execution witness. |
 
 ## Previous Closed Packet
 
