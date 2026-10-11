@@ -8,18 +8,6 @@
 #include <stddef.h>
 #include <string.h>
 #include <limits.h>
-struct ntvwm_presentation {
-    ntcon_worker_client channel;
-    CRITICAL_SECTION lock;
-    CHAR_INFO *published_cells;
-    DWORD published_count,published_width;
-    worker_base_publication *publisher;
-    console_text_style handoff_font;
-    BOOL has_handoff_font;
-    char published_title[CONSOLE_IO_TITLE_BYTES];
-    BOOL title_valid;
-    ntvwm_mouse mouse;
-};
 /* Native capture owns acquisition. Publisher owns this immutable complete
  * transaction; Unicode is not reconstructed from the PC-glyph frame. */
 typedef struct native_publication {
@@ -31,7 +19,53 @@ typedef struct native_publication {
     char title[CONSOLE_IO_TITLE_BYTES];
     /* Followed by total CHAR_INFO cells, then description.bytes frame bytes. */
 } native_publication;
+struct ntvwm_presentation {
+    ntcon_worker_client channel;
+    CRITICAL_SECTION lock;
+    /* A polling sample is not a display event. Keep the last source-owned
+     * native state separately from published_cells, which is only the last
+     * acknowledged row image used by publish_copy to avoid redundant writes.
+     * This cache is deliberately here, not in worker-base or NTCON: explicit
+     * text calls below must still be sent exactly as requested. */
+    native_publication *captured;
+    SIZE_T captured_bytes;
+    CHAR_INFO *published_cells;
+    DWORD published_count,published_width;
+    worker_base_publication *publisher;
+    console_text_style handoff_font;
+    BOOL has_handoff_font;
+    char published_title[CONSOLE_IO_TITLE_BYTES];
+    BOOL title_valid;
+    ntvwm_mouse mouse;
+};
 static DWORD publish_copy(void *,const void *,SIZE_T);
+static BOOL native_sample_same(const native_publication *left,SIZE_T left_bytes,
+    const native_publication *right,SIZE_T right_bytes)
+{
+    SIZE_T data_bytes;
+    if(!left || left_bytes!=right_bytes || left_bytes<sizeof(*left) ||
+        left->total!=right->total || left->info.dwSize.X!=right->info.dwSize.X ||
+        left->info.dwSize.Y!=right->info.dwSize.Y ||
+        left->info.dwCursorPosition.X!=right->info.dwCursorPosition.X ||
+        left->info.dwCursorPosition.Y!=right->info.dwCursorPosition.Y ||
+        left->info.srWindow.Left!=right->info.srWindow.Left ||
+        left->info.srWindow.Top!=right->info.srWindow.Top ||
+        left->info.srWindow.Right!=right->info.srWindow.Right ||
+        left->info.srWindow.Bottom!=right->info.srWindow.Bottom ||
+        left->info.wAttributes!=right->info.wAttributes ||
+        left->cursor.dwSize!=right->cursor.dwSize ||
+        left->cursor.bVisible!=right->cursor.bVisible ||
+        left->title_read!=right->title_read ||
+        memcmp(left->title,right->title,sizeof(left->title)) ||
+        memcmp(&left->description,&right->description,sizeof(left->description)))return FALSE;
+    data_bytes=left_bytes-sizeof(*left);
+    return !memcmp(left+1,right+1,data_bytes);
+}
+static void native_sample_clear(ntvwm_presentation *client)
+{
+    if(client->captured)HeapFree(GetProcessHeap(),0,client->captured);
+    client->captured=NULL;client->captured_bytes=0;
+}
 static DWORD exchange(ntvwm_presentation *client,console_io_request *request,console_io_reply *reply)
 {
     DWORD error=ntcon_worker_call(&client->channel,request,reply);
@@ -62,6 +96,7 @@ void ntvwm_presentation_close(ntvwm_presentation *client)
     /* Caller has drained ownership, or signalled the borrowed channel stop.
      * Never join under the transport lock; its callback acquires that lock. */
     worker_base_publication_destroy(client->publisher);
+    native_sample_clear(client);
     if(client->published_cells)HeapFree(GetProcessHeap(),0,client->published_cells);
     ntcon_worker_client_dispose(&client->channel);DeleteCriticalSection(&client->lock);
     HeapFree(GetProcessHeap(),0,client);
@@ -193,9 +228,24 @@ DWORD ntvwm_presentation_capture(ntvwm_presentation *client,const console_text_s
         snapshot->title_read=title_read;memcpy(snapshot->title,title,sizeof(title));
         memcpy(snapshot+1,cells,cell_bytes);
         memcpy((BYTE *)(snapshot+1)+cell_bytes,payload,description.bytes);
-        error=worker_base_publication_offer(client->publisher,snapshot,bytes,&queued);
-        if(!error && !queued)error=worker_base_publication_commit(client->publisher,snapshot,bytes);
-        HeapFree(GetProcessHeap(),0,snapshot);
+        /* Do this classification at the producer. The shared publisher owns
+         * scheduling and copies every offered event; it cannot know whether a
+         * fresh hidden-Console sample represents a user-visible change. */
+        EnterCriticalSection(&client->lock);
+        queued=native_sample_same(client->captured,client->captured_bytes,snapshot,bytes);
+        LeaveCriticalSection(&client->lock);
+        if(!queued) {
+            BOOL deferred=FALSE;
+            error=worker_base_publication_offer(client->publisher,snapshot,bytes,&deferred);
+            if(!error && !deferred)error=worker_base_publication_commit(client->publisher,snapshot,bytes);
+            if(!error) {
+                EnterCriticalSection(&client->lock);
+                native_sample_clear(client);
+                client->captured=snapshot;client->captured_bytes=bytes;snapshot=NULL;
+                LeaveCriticalSection(&client->lock);
+            }
+        }
+        if(snapshot)HeapFree(GetProcessHeap(),0,snapshot);
     }
 done:
     if(payload)HeapFree(GetProcessHeap(),0,payload);
@@ -480,6 +530,9 @@ DWORD ntvwm_presentation_begin(ntvwm_presentation *client,HANDLE output)
             request.state.mode=ENABLE_WINDOW_INPUT|ENABLE_MOUSE_INPUT|ENABLE_EXTENDED_FLAGS;
             error=exchange(client,&request,&reply);
         }
+        /* A new frontend must receive its first complete source sample even
+         * when its hidden Console still matches the previous owner. */
+        if(!error)native_sample_clear(client);
     }
     LeaveCriticalSection(&client->lock);
     if(!error)error=worker_base_publication_active(client->publisher,TRUE);

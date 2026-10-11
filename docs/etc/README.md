@@ -7,6 +7,8 @@ delivered single-worker/dual-Hook gates; see
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T443 S4 native text sampling](evidence/m0-t443-s4-ntvwm-native-text-sampling.md) | M0 T443 S4 | Restores source-owned native hidden-Console sample classification so idle samples do not reset the host cursor; includes focused and owner Windows Terminal acceptance plus ten-image publication identity. | Retain through T443 closure. |
+| [T443 S3 COMMAND COMSPEC contract](evidence/m0-t443-s3-command-comspec-contract.md) | M0 T443 S3 | Restores the original COMMAND-to-COMSPEC tail through run16/Hook without project shell grammar reconstruction. | Retain through T443 closure. |
 | [T443 S1 special-case contract ledger](evidence/m0-t443-s1-special-case-contract-ledger.md) | M0 T443 S1 | Production reachability/provenance audit of H01--H10; selects the bounded Hook non-redirect application-identity repair and defers coupled shell/WOW boundaries. | Retain through T443 closure. |
 | [T442 native CUI Console-window virtualization plan](operations/m0-t442-native-cui-console-window-virtualization-plan.md) | M0 T442 S1 | Withdrawn native-CUI transition branch; retained only to delimit the later lifecycle repair. | Retain through T442 closure. |
 | [T442 S1 borrowed Console-loss plan](operations/m0-t442-s1-borrowed-console-loss.md) | M0 T442 S1 | NTSRV-owned, one-shot external Console identity waits and central frontend/worker retirement design. | Retain through T442 closure. |

@@ -94,7 +94,22 @@ COMMAND 的原始 tail”的边界，再删除或收敛 `|&<>`、裸
 路径/大小写/空白的 COMMAND、直接调用与多层 DOS/native 嵌套。不得
 通过更多文件名拼写、另造 shell 或篡改任意同名 native 程序来通过。
 
-### S4 — 分类失败与 COMSPEC fallback 的错误合同（H04）
+### S4 — NTVWM 原生文本采样/发布合同（已收口）
+
+共享 publisher 只负责异步、限速和最新状态转交；它不应把 NTVWM 对隐藏
+Console 的周期性采样变成显示事件。恢复 NTVWM 生产者自身对已观察状态
+的比较：未变化的采样不发 cursor operation、文字帧或 publication
+transaction；真实 Unicode 单元、viewport、光标形状/显隐/位置、字体、
+调色板、软件鼠标或标题变化仍完整到达前端。显式
+`ntvwm_presentation_text` 调用继续无过滤。不得把比较重新放入
+worker-base 或 NTCON，不能以 Terminal 特判、额外 sleep 或 guest/mirror
+修改修复闪烁。
+
+已恢复 NTVWM source-local 观察样本比较；focused named-pipe 覆盖与十组件
+发布哈希核验完成，所有者已在 Windows Terminal 验收。详见
+[S4 evidence](../etc/evidence/m0-t443-s4-ntvwm-native-text-sampling.md)。
+
+### S5 — 分类失败与 COMSPEC fallback 的错误合同（H04）
 
 为 run16 分类/搜索失败建立最小错误分类：明确 shell 请求可进入
 COMSPEC，缺失、无效映像、拒绝访问和不支持类型保留真实错误。验收
@@ -102,7 +117,7 @@ COMSPEC，缺失、无效映像、拒绝访问和不支持类型保留真实错�
 会启动另一程序后伪装成功。该 S 不顺带改动 S3 的 COMMAND tail
 语义。
 
-### S5 — Hook 有限 command-tail 与容量边界（H06、H09）
+### S6 — Hook 有限 command-tail 与容量边界（H06、H09）
 
 H06 的 token 提取和 H09 的容量不一致共用同一输入边界，故同 S
 处理：限定 Hook 只在 legacy 分类所需的范围提取目标 token，调用者
@@ -111,28 +126,28 @@ H06 的 token 提取和 H09 的容量不一致共用同一输入边界，故同 
 Unicode/ANSI 不可表示、截断与短名不可用。不得将 DOS 的历史容量
 无依据扩张到 guest，亦不得创造全局 CreateProcess parser。
 
-### S6 — NtAlertThread fallback 的等价范围（H07）
+### S7 — NtAlertThread fallback 的等价范围（H07）
 
 审计无导出时 `QueueUserAPC` fallback 是否只覆盖已证明的 alertable
 等待合同；分别验证 pending alert、alertable/non-alertable 等待、
 返回原因、无导出分支与 worker 生命周期。若不能等价，明确失败或
 保留经证明的有限边界，不能把 APC 入队成功当成 NT alert 已完成。
 
-### S7 — WOW 字体资源所有权与搜索边界（H08）
+### S8 — WOW 字体资源所有权与搜索边界（H08）
 
 确定宿主 GDI 字体、guest 资源、产品根和默认 `SearchPath` 各自的
 owner；测试相对/绝对/远程字体、同名冲突和 task cleanup。若根因归属
 后续 WOW 字体包，输出精确转交接口与保留理由；若在本 T 可独立修复，
 仅改真实 provider，不能机械替换 `GetWindowsDirectory`。
 
-### S8 — stale `ERROR_NOT_READY` 的发布结果边界（H10）
+### S9 — stale `ERROR_NOT_READY` 的发布结果边界（H10）
 
 以 handoff 状态证明何时旧 owner 的画面允许被忽略，何时接收端未就绪
 必须向上报错。验证旧帧不覆盖新 owner、真实故障不被吞掉、下一完整
 刷新和关闭；不得恢复 NTCON 接收侧去重/帧过滤，也不得拆除既有确认
 屏障。
 
-### S9 — T443 汇总收口
+### S10 — T443 汇总收口
 
 复核 H01–H10 均已有“已修复”或“有证据保留/转交”结论，删除被替代
 的重复绕行，运行相应 focused 负测及一致产品回归，更新 ledger、

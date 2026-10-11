@@ -2,10 +2,18 @@
 
 ## Current Work
 
-**Active: none — M0 T443 S3 is owner-accepted and closed; no subsequent S is
-admitted.**
+**No active M/T/S packet.**
 
-## Most Recent Closed Packet
+## Intermission
+
+T443 S4 is owner-accepted and delivered. The NTVWM producer again classifies
+an unchanged hidden-Console sample as no presentation event; receiver and
+transport remain faithful. The focused named-pipe result, ten-component
+publication identity and owner Windows Terminal smoke are recorded in
+[S4 evidence](../etc/evidence/m0-t443-s4-ntvwm-native-text-sampling.md).
+No further implementation is authorized until a queue candidate is admitted.
+
+## Previous Closed Packet
 
 ### COMMAND interpreter/target/tail contract recovery
 
@@ -30,8 +38,7 @@ admitted.**
 ## T443 S3 closure / next-step disposition
 
 The owner accepted S3 after the published nested `run16 command` repair.
-T443 has no admitted successor S; its S4--S9 proposal rows remain unadmitted
-until a later owner direction. The separately reported visible-Console-close
+The separately reported visible-Console-close
 residual is not attributed to S3 and is now the first unadmitted candidate:
 [borrowed Console close lifecycle recovery](../proposals/proposal-borrowed-console-close-lifecycle-recovery-001.md).
 

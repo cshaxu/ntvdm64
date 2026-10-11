@@ -5,9 +5,9 @@
 #include <stdio.h>
 #include <stddef.h>
 #include <string.h>
-static FILE *log;
+static FILE *log_file;
 static unsigned checks,failures;
-#define CHECK(x) do { ++checks; if(!(x)){++failures;fprintf(log,"FAIL %d %s\n",__LINE__,#x);} } while(0)
+#define CHECK(x) do { ++checks; if(!(x)){++failures;fprintf(log_file,"FAIL %d %s\n",__LINE__,#x);} } while(0)
 typedef struct peer_state {
     HANDLE pipe;
     HANDLE publication_ack;
@@ -253,9 +253,9 @@ static void run_case(unsigned mode)
             CHECK(error==(mode==8 ? ERROR_INVALID_DATA : ERROR_SUCCESS));
             CHECK(accepted==(mode==8 ? 0u : 3u));
             CHECK(PeekConsoleInputW(input,records,4,&count));
-            fprintf(log,"input case=%u accepted=%lu queued=%lu\n",mode,accepted,count);
+            fprintf(log_file,"input case=%u accepted=%lu queued=%lu\n",mode,accepted,count);
             for(DWORD index=0;index<count;++index)
-                fprintf(log,"input record=%lu type=%u flags=%lu\n",index,records[index].EventType,
+                fprintf(log_file,"input record=%lu type=%u flags=%lu\n",index,records[index].EventType,
                     records[index].EventType==MOUSE_EVENT ? records[index].Event.MouseEvent.dwEventFlags : 0);
             CHECK(count==(mode==8 ? 0u : 3u));
             if(mode==19 && count==3) {
@@ -405,7 +405,7 @@ static void run_case(unsigned mode)
     }
     request.operation=CONSOLE_IO_BARRIER;
     error=ntvwm_presentation_call(endpoint,&request,&reply);
-    fprintf(log,"case=%u first_error=%lu reply_error=%lu\n",mode,(unsigned long)error,(unsigned long)reply.error);
+    fprintf(log_file,"case=%u first_error=%lu reply_error=%lu\n",mode,(unsigned long)error,(unsigned long)reply.error);
     if(mode==0 || mode==6) {
         console_video_description description={0};console_text_style *style;
         BYTE *payload;
@@ -424,7 +424,9 @@ static void run_case(unsigned mode)
             /* Sampling decides whether to generate an update. Explicit
              * worker frame sends must never be filtered by the transport. */
             CHECK(ntvwm_presentation_text(endpoint,&description,payload,description.bytes)==0);
-            CHECK(state.calls==calls+3);
+            /* The complete 80x25 text frame is below the variable-record
+             * 1 MiB limit: one begin plus one complete data record. */
+            CHECK(state.calls==calls+2);
         }
         description.kind=CONSOLE_VIDEO_DIB;
         CHECK(ntvwm_presentation_text(endpoint,&description,payload,description.bytes)==ERROR_INVALID_PARAMETER);
@@ -452,7 +454,7 @@ static void run_case(unsigned mode)
                 CHECK(SetConsoleActiveScreenBuffer(buffer));
                 {
                     BOOL ok=SetConsoleWindowInfo(buffer,TRUE,&window);
-                    fprintf(log,"capture_window ok=%d error=%lu previous=%dx%d max=%dx%d\n",
+                    fprintf(log_file,"capture_window ok=%d error=%lu previous=%dx%d max=%dx%d\n",
                         ok,ok ? 0 : GetLastError(),info.dwSize.X,info.dwSize.Y,
                         info.dwMaximumWindowSize.X,info.dwMaximumWindowSize.Y);
                     CHECK(ok);
@@ -520,7 +522,7 @@ done:
         CloseHandle(thread);
     }
     if(state.publication_ack)CloseHandle(state.publication_ack);
-    fprintf(log,"mode=%u calls=%u activations=%u releases=%u\n",mode,state.calls,
+    fprintf(log_file,"mode=%u calls=%u activations=%u releases=%u\n",mode,state.calls,
         state.activations,state.releases);
     if(mode==0 || mode==6) {
         CHECK(mode==6 ? state.calls>8u : state.calls==5u);
@@ -565,8 +567,11 @@ done:
 }
 int wmain(int argc,WCHAR **argv)
 {
-    unsigned mode;
-    if((argc!=2 && argc!=3) || _wfopen_s(&log,argv[1],L"wx"))return 2;
+    unsigned mode;BOOL capture_only;
+    if((argc!=2 && argc!=3) || _wfopen_s(&log_file,argv[1],L"wx"))return 2;
+    setvbuf(log_file,NULL,_IONBF,0);
+    capture_only=argc==3 && !wcscmp(argv[2],L"--capture-only");
+    if(!capture_only) {
     {
         console_io_input wire={0},saved;INPUT_RECORD record;
         console_frame_mouse_input frame;
@@ -605,7 +610,22 @@ int wmain(int argc,WCHAR **argv)
         CHECK(GetHandleInformation(borrowed,&flags));
         CloseHandle(borrowed);
     }
-    if(argc==3) {
+    }
+    if(capture_only) {
+        /* Background verification has no inherited terminal Console. The
+         * capture contract needs a private real buffer, not a mocked screen. */
+        if(!GetConsoleWindow()) {
+            /* ConPTY has Console handles but no HWND; detach it before
+             * allocating the isolated buffer used by this observer. */
+            CHECK(FreeConsole());
+            CHECK(AllocConsole());
+            ShowWindow(GetConsoleWindow(),SW_HIDE);
+        }
+        /* Keep the idle-sample contract runnable without unrelated input
+         * geometry cases. It still uses the production named-pipe peer and
+         * a real Console screen buffer. */
+        run_case(6);
+    } else if(argc==3) {
         HANDLE input;
         /* Run on an observer-owned private desktop. A real, otherwise empty
          * Console is required: the production member guard must not be mocked. */
@@ -627,6 +647,6 @@ int wmain(int argc,WCHAR **argv)
         for(mode=0;mode<=20;++mode)
             if(mode!=7 && mode!=8 && mode!=16 && mode!=19)run_case(mode);
     }
-    fprintf(log,"NTVWM-PRESENTATION checks=%u failures=%u named-pipe=yes production-activation=no\n",checks,failures);
-    fclose(log);return failures ? 1 : 0;
+    fprintf(log_file,"NTVWM-PRESENTATION checks=%u failures=%u named-pipe=yes production-activation=no\n",checks,failures);
+    fclose(log_file);return failures ? 1 : 0;
 }
