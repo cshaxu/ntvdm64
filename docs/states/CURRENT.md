@@ -2,25 +2,13 @@
 
 ## Current Work
 
-### COMMAND service COMSPEC → Run16 routing recovery
+**No active M/T/S packet.** The owner accepted T443 S12 on 2026-10-11.
+Its closure is recorded in [the S12 closure]
+(../history/m0-t443-s12-command-service-run16-routing-closure.md), with the
+source, build, publication hashes and retained witness limit in [its evidence]
+(../etc/evidence/m0-t443-s12-command-service-run16-routing.md).
 
-| Field | Record |
-| --- | --- |
-| Identifier Mode | `M0 T443 S12 P2`, Ordinary Mode. |
-| Admission And Approval | Owner closes S11's non-reproducing investigation and admits a repair for the S3 COMMAND COMSPEC routing regression. |
-| Objective | With `DOSONLY=0`, preserve original COMMAND's COMSPEC execution branch while changing only its BOP 54:08 adapter execution target to `NtvdmSystemRoot\\System32\\run16.exe`, so ordinary nesting is `DOS COMMAND → run16 → DOS COMMAND`, never an extra host `cmd.exe /c command`. |
-| Non-goals | No guest `COMMAND.COM` change, user-global environment mutation, native-program COMSPEC replacement, filename/metacharacter routing heuristic, new parser/protocol/helper, or regression of public `run16 command/c ver`. |
-| Reference Baseline | Original `cmdExec`/`cmdExecComspec32`; S3 commit `c653e5f56`; `command_process_compat.c`; Run16 CLI resolver/fallback; NTVDM projected host environment and Hook child transfer. |
-| Files And ABI Surface | Expected project owners are the BOP 54:08 command adapter and its bounded command snapshot, focused observer fixtures and evidence. Any mirror edit must be a minimal registered diff; no guest/public wire ABI change. |
-| Applicable Rules | Execution, architecture, coding, document and source-policy authorities. Original COMMAND owns branch/tail construction; Run16 owns the product execution boundary; Hook preserves native child transfer. |
-| Verification | Use real command lines plus process identity and BOP/request evidence: triple nested COMMAND, ordered exits/receipt/owner transfer, explicit CMD/native/DOS/batch/internal/quoted/pipe/redirection, `cmdExecComspec32` no-argument, not-found, and no self-recursion. Build/test/package runs are owned background jobs; delivery uses coherent ten-image release/hash gate. |
-| Expected Markers | The BOP 54:08 adapter resolves product Run16 through `NtvdmSystemRoot`; guest `COMMAND.COM` discovery and every host/native `COMSPEC` consumer remain untouched; no unexpected host `cmd.exe` appears in ordinary nesting. |
-| Asset Needs | Existing source, test-owned build roots and current release only; no guest/media asset or external dependency. |
-| Reporting Requirements | Record the unchanged COMSPEC consumers, exact BOP call chain, selected/rejected routing designs, source diff registration, positive/negative execution witnesses, release hashes and any untested boundary. |
-| Stop Conditions | A repair needs guest mutation, a public protocol, a general shell parser, a global COMSPEC mutation, or mirror change broader than a bounded binding/contract hook. Re-admit before expanding scope. |
-| Exit Criteria | Source-backed minimal repair; focused normal/negative/lifecycle witnesses; affected build/tests; coherent release publication to assets and configured system32 with hashes; diff/governance review, commit and push. |
-| Original Owner Request | “把54：08BOP的调用点，从使用COMSPEC直接改成走run16。” |
-| Similar-Issue Sweep | `cmdExec` AH 0/1, `cmdExecComspec32`, projected versus guest environment, Run16 no-argument/`/c` entry, native fallback and Hook-created descendants. |
+The remaining T443 candidate stages are not active until separately admitted.
 
 ## Previous Closed Packet
 

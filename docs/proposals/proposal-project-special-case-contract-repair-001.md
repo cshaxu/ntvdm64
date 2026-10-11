@@ -179,6 +179,10 @@ DOS COMMAND，随后 DOS COMMAND 必须完成并把控制权、文件重定向�
 
 ### S12 — COMMAND service COMSPEC → Run16 binding recovery
 
+**Closed:** owner accepted the corrected routing on 2026-10-11.  The closure
+record is [here](../history/m0-t443-s12-command-service-run16-routing-closure.md)
+and the detailed evidence is [here](../etc/evidence/m0-t443-s12-command-service-run16-routing.md).
+
 S11's exact current-package controls return successfully, so it closes as a
 non-reproducing diagnostic rather than a production change.  The owner has
 instead admitted the source-backed S3 regression: the original COMMAND
