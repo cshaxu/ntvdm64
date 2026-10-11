@@ -20,7 +20,12 @@ if($Prefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid prefix'}
 $Observer=(Resolve-Path $Observer).Path
 $WindowObserver=(Resolve-Path $WindowObserver).Path
 $PackageRoot=(Resolve-Path $PackageRoot).Path
-$GuestRoot=if($GuestRoot){(Resolve-Path $GuestRoot).Path}else{Join-Path $PackageRoot 'system32'}
+# The package root is the guest application directory.  `system32` contains
+# the product carrier binaries; treating it as the application directory
+# changes the target's own sibling/resource lookup and can make a perfectly
+# valid WOW application fail before the worker registers.  Callers with a
+# deliberately different guest-media layout must select it explicitly.
+$GuestRoot=if($GuestRoot){(Resolve-Path $GuestRoot).Path}else{$PackageRoot}
 $paths=@('run16.exe','ntvdm.exe','ntsrv.exe') | ForEach-Object {Join-Path (Get-PackageBinaryRoot $PackageRoot) $_}
 if($ProcessPackageRoot){
     $ProcessPackageRoot=(Resolve-Path -LiteralPath $ProcessPackageRoot).Path

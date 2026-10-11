@@ -22,7 +22,23 @@ function New-PhysicalRuntimeStage([string]$PackageRoot) {
     if (!(Test-Path -LiteralPath $stageRoot -PathType Container)) {
         $null = New-Item -ItemType Directory -Path $stageRoot
     }
-    $stage = Join-Path $stageRoot ('ntvdm64-' + [Guid]::NewGuid().ToString('N'))
+    # Some immutable 16-bit WOW fixtures fail before worker registration at
+    # ordinary build-style physical paths.  Keep the stage real (never a
+    # drive alias), but deliberately short.  The marker remains the cleanup
+    # authority, so the compact leaf does not widen deletion scope.
+    $stage = $null
+    foreach($attempt in 1..8) {
+        # Keep the complete physical root within the proven legacy-guest
+        # budget (`O:\tmp\n123` is ten characters), not merely its 8.3 leaf.
+        # This is test containment only; it never aliases or changes a user
+        # installation path.
+        $candidate = Join-Path $stageRoot ('n' + [Guid]::NewGuid().ToString('N').Substring(0,3))
+        if(!(Test-Path -LiteralPath $candidate)) {
+            $stage = $candidate
+            break
+        }
+    }
+    if(!$stage) { throw 'Unable to allocate a short physical test stage' }
     $null = New-Item -ItemType Directory -Path $stage
     try {
         # Copy the complete product package, but never historical build/log

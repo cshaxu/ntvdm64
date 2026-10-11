@@ -6,25 +6,25 @@
 
 ## Current Work
 
-### Frontend stale `ERROR_NOT_READY` publication contract
+### Product-observer staged-runtime recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T443 S14 P1`, Ordinary Mode. |
-| Admission And Approval | Owner approves: “批准修复 按照治理规范”. |
-| Objective | Remove project-owned conversions of frontend `ERROR_NOT_READY`/`ERROR_BUSY` into publication success where the existing broker-ordered final-drain and I/O-release protocol already makes a late send invalid. |
-| Non-goals | No guest change, OpenNT mirror change, new protocol/state/error code, receiver-side filtering/deduplication, polling, or removal of the final-frame barrier. |
-| Reference Baseline | H10/S14 in the [T443 proposal](../proposals/proposal-project-special-case-contract-repair-001.md); current `worker_base_publication_active(FALSE)` drain, `worker_base_io_close`, NTSRV route-release ordering, and the NTVDM/NTVWM adaptation callers. |
-| Files And ABI Surface | Project-owned `console_text.c`, `presentation.c`, `main.c`, focused producer/presentation fixtures and required records only. No public protocol or guest ABI change. |
-| Applicable Rules | Execution, architecture, coding, documentation and source-policy authorities; NTSRV remains lifecycle/route authority, NTCON returns actual ownership failures, and workers never reinterpret a failed send as a successful paint. |
-| Verification | Prove final drain completes before physical channel close; prove inactive/released workers make no new send; prove deliberately rejected current-owner text/title publication propagates its error; retain palette-not-yet-installed graphics behavior. |
-| Expected Markers | No application-owned `ERROR_NOT_READY`/`ERROR_BUSY` success conversion remains for a frontend publication or ownership probe; the retained graphics capture case is explicitly source-local and leaves dirty state intact. |
-| Asset Needs | Existing source and build-owned fixtures only; no guest/media/import dependency. |
-| Reporting Requirements | Record all suppression sites, their source/error origins, retained/removal disposition, positive/negative lifecycle witnesses, no-mirror-diff proof, and release verification. |
-| Stop Conditions | A correct distinction requires a new cross-component protocol/state, changes original guest/mirror code, or a retained suppression is proven necessary but cannot be demonstrated with the current release ordering. |
-| Exit Criteria | All reachable publication-success conversions are removed or source-backed retained; focused positive/negative tests and build pass; required release/publish/governance evidence is complete, then owner acceptance. |
-| Original Owner Request | “你先检查最新代码看看类似情况都有哪些 怎么修” and “批准修复 按照治理规范”. |
-| Similar-Issue Sweep | NTVDM text demand/frame/configuration, NTVWM connection probe/title/input, common sender, frontend ownership gate, publisher final drain and graphics capture readiness. |
+| Identifier Mode | `M0 T443 S14 P2`, Ordinary Mode. |
+| Admission And Approval | Owner directs: “任务产品观察器以前存在吗 能用吗 你修一下呗”. |
+| Objective | Restore the product observer's hermetic staged-runtime witness without `subst`, by identifying the required legacy physical-root budget and guest-media root rather than weakening the original WOW assertions. |
+| Non-goals | No production/guest/mirror change, no SystemRoot override, no drive mapping, no weakening of WOW/Console/Window assertions, and no test retry-to-pass. |
+| Reference Baseline | A 47-character stage and a 15/16-character compact stage return 1067 before a WOW worker begins. The identical package succeeds from a ten-character real temporary stage with a four-character leaf when WOW media is at the package root; the identical published product also reaches live NTVDM/WINMINE on a private desktop. |
+| Files And ABI Surface | Test-only product staging/observation scripts, evidence and required status/index records. No product ABI surface. |
+| Applicable Rules | Execution and test-isolation rules; a stage remains build-owned, marker-authenticated and identity-cleaned, while `subst` remains prohibited. |
+| Verification | Compare failed and working physical stages; retain a real ten-character stage and package-root guest media; then run the unchanged observer assertions. Any later application-window failure is recorded as a product regression, not converted into a staging pass. |
+| Expected Markers | No global drive mapping appears; all three observers get past their prior 1067-before-worker failure and retain original assertions. The current window-signature failure remains visible for its owning WOW task. |
+| Asset Needs | Existing release package, build-owned observer/window fixture and retained WOW baselines only. |
+| Reporting Requirements | Record the old/new physical roots, root-cause evidence, exact runner output, cleanup ownership result and any independent product failure. |
+| Stop Conditions | No finite missing staging input explains the result, or repair would need a production path/search/environment change, an alias drive or altered guest media. |
+| Exit Criteria | Proven staging correction and focused three-fixture observer pass; record the unchanged full-gate assertion's independent product failure, then documentation governance, diff review, committed/pushed test-only delivery. |
+| Original Owner Request | “任务产品观察器以前存在吗 能用吗 你修一下呗”. |
+| Similar-Issue Sweep | All physical stage allocation call sites, marker validation, runtime/cache isolation and observer-reported SystemRoot length. |
 
 ## Previous Closed Packet
 
