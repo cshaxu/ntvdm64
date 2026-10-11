@@ -123,7 +123,7 @@ batch、复合 tail、缺失/坏/拒绝的 image-like 文本及显式 `cmd /c`�
 拒绝按路径、扩展名或 CMD 内部命令拆分“文件／shell 意图”；无生产改动。
 详见 [S5 evidence](../etc/evidence/m0-t443-s5-comspec-fallback-retain.md)。
 
-### S6 — Hook 双字段启动边界与容量（H06、H09）
+### S6 — Hook 双字段启动边界与容量（H06、H09，已交付）
 
 H06 的 token 提取和 H09 的容量不一致共用同一输入边界，故同 S
 处理。Hook 是唯一看得到原始 `CreateProcess(application, command)`
@@ -136,35 +136,70 @@ A/W application、command、环境、目录和失败行为，同时走既有 Hoo
 传播事务。验证不一致 argv[0]、未加引号的空格路径、引号/空白、长路径、
 Unicode/ANSI 不可表示、截断与短名不可用。不得将 DOS 的历史容量
 无依据扩张到 guest，亦不得导入完整 Kernel32 或创造全局 CreateProcess
-parser。
+parser。详见 [S6 evidence](../etc/evidence/m0-t443-s6-hook-createprocess-boundary.md)。
 
-### S7 — NtAlertThread fallback 的等价范围（H07）
+### 旧 S7–S10 编排（废止，未执行）
+
+以下四段是早期顺序草案，不能作为活动或完成状态引用。2026-10-11
+由后面的 S13–S16 取代；保留文字仅说明原来的问题来源。
+
+#### 旧 S7 — NtAlertThread fallback 的等价范围（H07）
 
 审计无导出时 `QueueUserAPC` fallback 是否只覆盖已证明的 alertable
 等待合同；分别验证 pending alert、alertable/non-alertable 等待、
 返回原因、无导出分支与 worker 生命周期。若不能等价，明确失败或
 保留经证明的有限边界，不能把 APC 入队成功当成 NT alert 已完成。
 
-### S8 — WOW 字体资源所有权与搜索边界（H08）
+#### 旧 S8 — WOW 字体资源所有权与搜索边界（H08）
 
 确定宿主 GDI 字体、guest 资源、产品根和默认 `SearchPath` 各自的
 owner；测试相对/绝对/远程字体、同名冲突和 task cleanup。若根因归属
 后续 WOW 字体包，输出精确转交接口与保留理由；若在本 T 可独立修复，
 仅改真实 provider，不能机械替换 `GetWindowsDirectory`。
 
-### S9 — stale `ERROR_NOT_READY` 的发布结果边界（H10）
+#### 旧 S9 — stale `ERROR_NOT_READY` 的发布结果边界（H10）
 
 以 handoff 状态证明何时旧 owner 的画面允许被忽略，何时接收端未就绪
 必须向上报错。验证旧帧不覆盖新 owner、真实故障不被吞掉、下一完整
 刷新和关闭；不得恢复 NTCON 接收侧去重/帧过滤，也不得拆除既有确认
 屏障。
 
-### S10 — T443 汇总收口
+#### 旧 S10 — T443 汇总收口
 
 复核 H01–H10 均已有“已修复”或“有证据保留/转交”结论，删除被替代
 的重复绕行，运行相应 focused 负测及一致产品回归，更新 ledger、
 CURRENT、证据与发布记录。S9 不新增另一项特判修复；它只消费前序
 S 的结果并按规则提交所有者验收。
+
+### S13 — NtAlertThread fallback 合同（H07）
+
+只审计并修复 `nt_thread_alert_compat.c` 在原 `NtAlertThread` 未导出时
+以 `QueueUserAPC` 替代的边界。先通过 pending alert、alertable 和
+non-alertable wait、返回原因及 worker 关闭证明实际语义；仅在被证明
+等价的等待合同中保留 fallback。不能等价的路径必须保留真实失败，不能把
+APC 入队成功报成已经 alert。不得改 guest、增加轮询或另造调度器。
+
+### S14 — 前端 stale `ERROR_NOT_READY` 发布合同（H10）
+
+以现有 handoff/owner 状态为唯一依据，区分可丢弃的旧 owner 过期发布和
+必须向上报告的当前 owner 未就绪。验证旧帧不会覆盖新 owner、真实失败不被
+吞掉、下一完整帧和关闭路径正确。不得在 NTCON 重引接收侧去重、过滤或拆除
+既有确认屏障；若缺少可表达的现有状态，先停下重新准入。
+
+### S15 — WOW 字体资源所有权与搜索边界（H08）
+
+冻结宿主 GDI 字体、guest 字体资源、产品根和默认 `SearchPath` 的实际
+consumer/owner，再测试相对、绝对、远程、同名冲突和任务清理。若该行为属于
+后续 WOW 字体 provider，输出精确转交合同并保留；若是本 T 项目 facade 的
+独立错误，只改该 provider。不得机械替换 `GetWindowsDirectory`，也不得把
+宿主字体迁入 guest 搜索路径。
+
+### S16 — T443 特判合同汇总收口
+
+复核 H01–H10 均已有已交付修复或有证据的保留/转交结论；清除已替代的计划
+文字，执行各 S 指定的 focused 正负回归及一致产品发布核验，更新 ledger、
+CURRENT、证据和最终 closure。该 S 不承接新功能或用“汇总”掩盖任一未解决
+的行为缺口。
 
 ### S11 — Hooked CMD → DOS COMMAND `/c` 嵌套返回回归
 

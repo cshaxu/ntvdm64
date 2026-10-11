@@ -6,8 +6,10 @@
 closure is [recorded here](../history/m0-t443-s12-command-service-run16-routing-closure.md).
 S6–S11 are already delivered historical stages and are not reopened.
 
-The retained T443 proposal currently defines work only through S12. A new S13
-requires its owner-defined objective and admission before implementation.
+The retained T443 proposal is replanned through S16; none is active. S13 validates the NtAlertThread APC
+fallback; S14 resolves stale `ERROR_NOT_READY` publication results; S15 audits
+WOW font ownership; S16 performs T443 closure. See the [replanned proposal]
+(../proposals/proposal-project-special-case-contract-repair-001.md#s13--ntalertthread-fallback-合同h07).
 
 ## Previous Closed Packet
 
