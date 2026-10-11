@@ -2,9 +2,10 @@
 
 ## Current Work
 
-**Active: M0 T443 S3**
+**Active: none — M0 T443 S3 is owner-accepted and closed; no subsequent S is
+admitted.**
 
-## Active Packet
+## Most Recent Closed Packet
 
 ### COMMAND interpreter/target/tail contract recovery
 
@@ -22,9 +23,17 @@
 | Asset Needs | Current ten-image release, source/build-owned command fixtures and existing original/ledger evidence only. |
 | Reporting Requirements | Record current call graph, each removed/retained decision, original/provenance basis, positive and negative witnesses, both Console/Window regression scope, and release boundary. |
 | Stop Conditions | The only apparent solution needs a general parser, changes original/mirror COMMAND code, requires new IPC/protocol, cannot preserve a nested or composite witness, or reveals that H04's error taxonomy must change; pause for re-admission rather than broaden S3. |
-| Exit Criteria | Source-backed contract and minimal owner-side repair are complete; focused build/component checks and ten-image release identity pass. This S remains active until the owner completes the real-Console COMMAND acceptance matrix. |
+| Exit Criteria | Met: source-backed contract and minimal owner-side repair are complete; focused build/component checks and ten-image release identity passed, and the owner accepted the real-Console COMMAND matrix on 2026-10-10. |
 | Original Owner Request | “准入s3 先解释问题和根源”. |
 | Similar-Issue Sweep | All project-owned COMMAND target/tail identity checks in the NTVDM adapter and run16, including quoted transport only; exclude H04 fallback and Hook H06 parser work unless the stop condition is met. |
+
+## T443 S3 closure / next-step disposition
+
+The owner accepted S3 after the published nested `run16 command` repair.
+T443 has no admitted successor S; its S4--S9 proposal rows remain unadmitted
+until a later owner direction. The separately reported visible-Console-close
+residual is not attributed to S3 and is now the first unadmitted candidate:
+[borrowed Console close lifecycle recovery](../proposals/proposal-borrowed-console-close-lifecycle-recovery-001.md).
 
 ## T442 S1 Delivery Note
 
