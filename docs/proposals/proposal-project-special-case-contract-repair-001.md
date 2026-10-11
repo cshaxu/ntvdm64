@@ -186,13 +186,16 @@ APC 入队成功报成已经 alert。不得改 guest、增加轮询或另造调�
 吞掉、下一完整帧和关闭路径正确。不得在 NTCON 重引接收侧去重、过滤或拆除
 既有确认屏障；若缺少可表达的现有状态，先停下重新准入。
 
-### S15 — WOW 字体资源所有权与搜索边界（H08）
+### S15 — WOW 字体资源边界转交（H08，已转交、不实施）
 
-冻结宿主 GDI 字体、guest 字体资源、产品根和默认 `SearchPath` 的实际
-consumer/owner，再测试相对、绝对、远程、同名冲突和任务清理。若该行为属于
-后续 WOW 字体 provider，输出精确转交合同并保留；若是本 T 项目 facade 的
-独立错误，只改该 provider。不得机械替换 `GetWindowsDirectory`，也不得把
-宿主字体迁入 guest 搜索路径。
+H08 已由 ledger 定性为宿主 GDI 字体合同，且与队列中的
+[`WOW32 fonts, text and metafiles`](proposal-wow32-fonts-text-metafiles-001.md)
+共享唯一 provider owner。为避免 T443 和该原始-owner 包重复实现，本 S 不再
+运行另一套字体搜索／加载／清理修复；它只将下列边界显式转交：宿主
+`GetWindowsDirectoryW`/Fonts/`SearchPathW` 的实际消费方、guest 资源根、
+相对/绝对/远程与同名冲突，以及 task cleanup。后续 WOW 字体包必须在其
+S1/S2 中消费这些条件并决定保留或修复。T443 不得机械替换
+`GetWindowsDirectory`，也不得把宿主字体迁入 guest 搜索路径。
 
 ### S16 — T443 特判合同汇总收口
 

@@ -10,6 +10,17 @@ below are local to this candidate; historical S references resolve through the
 program transfer table. Existing code, stable capability IDs, tests and failures
 are inherited rather than reset. No new global source audit is required.
 
+## T443 H08 transfer
+
+T443's special-case audit transferred H08 here rather than implementing a
+second font provider. This package is the sole owner of any production change
+to `wow_public_user_facade.c` font tracking/search behavior. Its S1/S2 must
+first distinguish host GDI font discovery (`GetWindowsDirectoryW`, Fonts and
+`SearchPathW`) from guest product-root resource lookup, then cover relative,
+absolute, remote and same-name resources plus task cleanup. A host-font path
+is not evidence of guest-root leakage by itself; do not mechanically replace
+`GetWindowsDirectoryW` or merge host fonts into guest search paths.
+
 ## Complete scope and dependencies
 
 Inherited: font/text conversion and drawing, font lifetime, metafile creation/playback/release and failure paths; consume W07 identities.

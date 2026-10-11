@@ -6,25 +6,25 @@
 
 ## Current Work
 
-### WOW regression reproduction and build-contract isolation
+### T443 special-case contract closure audit
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | `M0 T443 S16`, Ordinary Mode. |
-| Admission And Approval | Owner directs: “好 请继续探索”. |
-| Objective | Reproduce the reported WOW illegal-instruction/depth failure only with same-generation complete packages, isolate the failed publication boundary, and restore a coherent verified x86 release set. |
-| Non-goals | No guest mutation, no production publication, no broad rollback of T440 responsiveness work, and no mirror-source modification. |
-| Reference Baseline | Mixed historical-current package probes were invalid: a historic core paired with a current frontend can fault independently. A permissive frontier observer was also insufficient: its success condition did not reject an immediate target-missing/launcher exit. The real failure was the published x86 trio: formal release images did not register a WOW worker, while the current-source rebuilt trio did. |
-| Files And ABI Surface | Build generator/configuration and disposable build evidence only unless a same-generation reproduction identifies a product source owner. No public protocol or guest ABI change is admitted. |
-| Applicable Rules | Execution, source-provenance, build-output and evidence rules; builds/tests remain background-owned and `subst` remains prohibited. |
-| Verification | Verify the generated x86 graph applies `/O2` to every selected Release rule; build the current x86 WOW path in a disposable root; stage a `SYSTEM32`-only coherent current product set plus an explicit copied WINMINE guest input; run the existing no-drive-mapping monitor-tree integration test with current monitor RPC fixture. |
-| Expected Markers | The Release graph shows `/O2` for all C rules. The actual WINMINE run registers a top-level WOW worker and a depth-1, image-labeled task; DOS root closure, independent native input/exit and GUI closure leave that WOW worker alive. |
-| Asset Needs | Current source, historical repository revision, existing guest media and build-owned observers only. |
-| Reporting Requirements | Preserve the one-function diff, exact candidate hashes, fixture result, observer output and cleanup identity. |
-| Stop Conditions | The candidate cannot be isolated without changing unrelated sources, or it leaves the same fault signature. |
-| Exit Criteria | Met: the rebuilt coherent x86 trio passes actual depth/isolation assertions; `assets/release`, manifest and deployed `O:\winnt\system32` ten-component hashes agree. |
-| Original Owner Request | “好 请继续探索”. |
-| Similar-Issue Sweep | Check release/deployed hashes, x86 release-group build identity, product-root layout and guest-media presence before pursuing an alleged component regression; do not mix independently built historical/current images or count a generic observer timeout/exit as a WOW execution witness. |
+| Admission And Approval | Owner directs: “请你把这个S任务打包转交给队列中的wow字体T任务中去；然后准入T收口审计，再次核验特判问题。” |
+| Objective | Close T443 only after re-auditing H01--H10, recording H08's transfer to the unique queued WOW font owner, and verifying that all remaining dispositions have source/evidence support. |
+| Non-goals | No guest mutation, no new font provider or font-search repair, no broad rollback of T440 responsiveness work, and no mirror-source modification. |
+| Reference Baseline | S1 ledger; closed S2--S6, S11--S14 and S12 records; the coherent x86 WOW trio repair published at `543546d9b`. H08 is a host-GDI/font-owner boundary, now formally transferred to the queued WOW fonts/text/metafiles package. |
+| Files And ABI Surface | `docs/states/CURRENT.md`, the T443 and WOW-font proposals, ledger/closure evidence, and release-manifest records only. No public protocol, guest ABI or production source change is admitted. |
+| Applicable Rules | Execution, documentation, source-provenance and build-output authorities; builds/tests remain background-owned and `subst` remains prohibited. |
+| Verification | Re-read every H01--H10 ledger disposition against its closed S evidence and production owner; verify the latest release manifest and deployed ten-component hashes; identify missing positive/negative evidence rather than treating an old conclusion as current proof. |
+| Expected Markers | Every H row is either delivered, source-backed retained, or explicitly transferred to exactly one future owner. H08 names the WOW fonts/text/metafiles candidate as that owner. No unexecuted old S7--S10 text remains an active obligation. |
+| Asset Needs | Current authorities, committed evidence and release manifest only. |
+| Reporting Requirements | Produce a compact H01--H10 closure matrix, list any remaining evidence gap, correct stale status wording, and distinguish a passed audit from pending owner acceptance of T closure. The matrix is [S16 closure audit](../etc/evidence/m0-t443-s16-special-case-closure-audit.md). |
+| Stop Conditions | Any H row lacks a real owner, evidence conflicts with its disposition, the release identity is inconsistent, or a supposed documentation-only closure requires production behavior change. Pause for a separately admitted S rather than expanding this audit. |
+| Exit Criteria | Met: H01--H10 each have a verified delivered/retained/transferred disposition; H08 is uniquely transferred; latest release/deployment identity is checked; closure evidence and authorities are updated; no unresolved T443-owned product gap remains. Owner T closure remains pending. |
+| Original Owner Request | “请你把这个S任务打包转交给队列中的wow字体T任务中去；然后准入T收口审计，再次核验特判问题。” |
+| Similar-Issue Sweep | Compare all special-case ledger rows with proposal task ownership, closed evidence and queued proposals; ensure no T443 item duplicates a queued original-owner package. |
 
 ## Previous Closed Packet
 
