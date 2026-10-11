@@ -197,12 +197,17 @@ H08 已由 ledger 定性为宿主 GDI 字体合同，且与队列中的
 S1/S2 中消费这些条件并决定保留或修复。T443 不得机械替换
 `GetWindowsDirectory`，也不得把宿主字体迁入 guest 搜索路径。
 
-### S16 — T443 特判合同汇总收口
+### S16 — T443 特判合同汇总收口（已完成）
 
 复核 H01–H10 均已有已交付修复或有证据的保留/转交结论；清除已替代的计划
 文字，执行各 S 指定的 focused 正负回归及一致产品发布核验，更新 ledger、
 CURRENT、证据和最终 closure。该 S 不承接新功能或用“汇总”掩盖任一未解决
 的行为缺口。
+
+所有 H01--H10 处置与 H08 唯一转交已由
+[S16 closure audit](../etc/evidence/m0-t443-s16-special-case-closure-audit.md)
+复核；T443 的所有者收口记录见
+[closure](../history/m0-t443-special-case-contract-closure.md)。
 
 ### S11 — Hooked CMD → DOS COMMAND `/c` 嵌套返回回归
 
