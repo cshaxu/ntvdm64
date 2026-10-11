@@ -2,13 +2,25 @@
 
 ## Current Work
 
-**No active M/T/S packet.** The owner accepted T443 S12 on 2026-10-11.
-Its closure is recorded in [the S12 closure]
-(../history/m0-t443-s12-command-service-run16-routing-closure.md), with the
-source, build, publication hashes and retained witness limit in [its evidence]
-(../etc/evidence/m0-t443-s12-command-service-run16-routing.md).
+### Hook dual-field CreateProcess boundary and capacity
 
-The remaining T443 candidate stages are not active until separately admitted.
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T443 S6 P1`, Ordinary Mode. |
+| Admission And Approval | Owner directs after accepting S12: “确保工作区干净 一起提交 然后准入下一个s任务”. The next unclosed T443 stage is S6. |
+| Objective | Make Hook’s original two-field `CreateProcess(application, command)` selection obey the public Windows choice boundary and, for a selected DOS/Win16 image, construct the ordinary Run16 image-plus-tail call without truncation or a second user-facing parser. |
+| Non-goals | No Run16 CLI rewrite, complete Kernel32 import, global CreateProcess parser, guest command-tail capacity expansion, native A/W argument rewriting, new service/protocol/helper, or change to the accepted S12 BOP 54:08 route. |
+| Reference Baseline | T443 H06/H09 in the [special-case proposal](../proposals/proposal-project-special-case-contract-repair-001.md#s6--hook-双字段启动边界与容量h06h09); current Hook32/64 transfer, Run16 resolver, and original `BaseCheckVDM` branch record. |
+| Files And ABI Surface | Expected project owners are Hook32/Hook64 shared selection code, any bounded OpenNT `BaseCheckVDM` carrier needed for the image-plus-tail boundary, focused fixtures/evidence and current status. No guest/public wire ABI change is admitted. |
+| Applicable Rules | Execution, architecture, coding, documentation and source-policy authorities. Hook owns two-field process selection; Run16 owns its separate one-command-line contract; native calls retain their original fields and Hook propagation. |
+| Verification | Establish source-backed expected selection before editing; test explicit application only, command only, both fields with conflicting argv[0], quoted/unquoted spaces, long paths, ANSI/Unicode representability, capacity/truncation and native no-change paths. Build/test/package runs remain owned background jobs. |
+| Expected Markers | Explicit application takes precedence for classification; DOS/Win16 gets exactly one Run16 image-plus-tail transfer; native child calls preserve original application/command/environment/directory; no fabricated success or silent truncation. |
+| Asset Needs | Existing source and build-owned fixtures only; no guest/media/import dependency. |
+| Reporting Requirements | Record the public versus original source basis, selection table, capacity rule, positive/negative results, retained limitations, diff registration and any required follow-up. |
+| Stop Conditions | A correct result needs a general Windows parser, a guest/protocol change, altered native argument semantics, or a broad mirror/Kernel32 import. Pause for owner re-admission. |
+| Exit Criteria | One source-backed bounded contract; focused normal/negative/Unicode/capacity witnesses; required affected builds and product gates; governance/diff review, coherent publication, commit/push and owner acceptance. |
+| Original Owner Request | “准入下一个s任务”. |
+| Similar-Issue Sweep | Both Hook bitnesses; explicit/implicit application selection; Run16’s distinct CLI path; original `BaseCheckVDM` image/tail branches; Hook propagation and native failure preservation. |
 
 ## Previous Closed Packet
 
