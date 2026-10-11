@@ -1,14 +1,35 @@
 # Project Status
 
-**Active: none.** T443 is owner-closed; no successor is admitted.
+**Active: M0 T444 S1**
 
 ## Active Packet
 
-## No Active Packet
+## Active Packet
 
-T443 is owner-closed.  Its H01--H10 audit and unique H08 transfer are recorded
+### Native indexed-16 palette projection
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T444 S1`, Ordinary Mode. |
+| Admission And Approval | Owner directs: “队列第2条已经修复可以剔除。现在准入队列第一条”。 |
+| Objective | Prove and, if confirmed, repair NTCON Console projection so a committed text frame's 16-entry RGB palette is applied atomically with its indexed cell attributes, without changing worker identity or the frame protocol. |
+| Non-goals | No capability-environment work (S2), VT/RGB emulation (S3), guest change, worker-type branch, polling/helper/lifecycle redesign, or arbitrary per-cell RGB support. |
+| Reference Baseline | The queued proposal's static review: NTVWM captures/transmits `CONSOLE_SCREEN_BUFFER_INFOEX` palette and Window decoding retains it, while Console projection reportedly copies attributes without palette application. T442 borrowed-Console lifecycle is delivered at `44c25e138` and is removed from the queue by owner direction. |
+| Files And ABI Surface | Expected owner files are NTCON Console projection/session code, focused palette fixtures and T444 evidence/governance records. Existing text-frame palette ABI remains unchanged. |
+| Applicable Rules | Execution, architecture, coding, document and source-provenance authorities; all build/test runs background-owned; `subst` prohibited. |
+| Verification | First audit current palette capture, commit, handoff and restoration owners. If production repair is admitted by evidence, build the affected closure and verify non-default indexed colours, palette-only update, failure/rollback, Console/Window switching, DOS/native handoff and borrowed palette restoration. |
+| Expected Markers | The visible Console palette equals the committed frame palette whenever that frame's indexed attributes become visible; no mixed cells/palette, stale handoff palette or caller-palette leak remains. |
+| Asset Needs | Current ten-image release, build-owned native palette fixture and existing Console/Window harnesses only. |
+| Reporting Requirements | Separate static fact, focused fixture and real presentation evidence; record exact palette values, owner/rollback behavior, limitations and any required re-admission. |
+| Stop Conditions | A repair needs a frame ABI change, worker-type conditional, new RGB/VT conversion engine, guest alteration, or reveals missing restoration ownership. Pause rather than broaden. |
+| Exit Criteria | Current source ownership is proved; any required minimal repair passes focused positive/negative/lifecycle checks and full delivery gate; otherwise a source-backed retain/transfer disposition is recorded. |
+| Original Owner Request | “队列第2条已经修复可以剔除。现在准入队列第一条”。 |
+| Similar-Issue Sweep | Both Console and Window presentation routes; palette-only frames, owner handoff/final frame, worker-neutral callers and borrowed Console restoration. |
+
+## Previous Closure
+
+T443 is owner-closed. Its H01--H10 audit and unique H08 transfer are recorded
 in the [T443 closure](../history/m0-t443-special-case-contract-closure.md).
-The next task must be explicitly admitted from [Queue](QUEUE.md).
 
 ## Previous Closed Packet
 
