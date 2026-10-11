@@ -109,13 +109,19 @@ worker-base 或 NTCON，不能以 Terminal 特判、额外 sleep 或 guest/mirro
 发布哈希核验完成，所有者已在 Windows Terminal 验收。详见
 [S4 evidence](../etc/evidence/m0-t443-s4-ntvwm-native-text-sampling.md)。
 
-### S5 — 分类失败与 COMSPEC fallback 的错误合同（H04）
+### S5 — 分类失败与 COMSPEC fallback 的错误合同（H04，已收口）
 
-为 run16 分类/搜索失败建立最小错误分类：明确 shell 请求可进入
-COMSPEC，缺失、无效映像、拒绝访问和不支持类型保留真实错误。验收
-必须区分显式路径、built-in、batch、缺失、坏映像和访问拒绝，证明不
-会启动另一程序后伪装成功。该 S 不顺带改动 S3 的 COMMAND tail
-语义。
+审计 run16 的一个 unclassified-command fallback 是否应保留为公共命令
+文本合同。不得为了区分 shell 与文件意图而新增路径、扩展名、命令名或
+CMD 内部命令特判；那会另造一份不完整的 shell 语法。覆盖 built-in、
+batch、复合 tail、缺失/坏/拒绝的 image-like 文本及显式 `cmd /c`，记录
+单一路由的实际错误/退出码边界。若现有单一路径与 S3 的 COMMAND tail
+合同一致，应以证据保留而非修改生产代码；只有无需新增这类特判的确证
+问题才可提出最小修复。该 S 不顺带改动 S3 的 COMMAND tail 语义。
+
+结论：保留一个 unclassified-command → Hooked `COMSPEC /c` 路径。所有者
+拒绝按路径、扩展名或 CMD 内部命令拆分“文件／shell 意图”；无生产改动。
+详见 [S5 evidence](../etc/evidence/m0-t443-s5-comspec-fallback-retain.md)。
 
 ### S6 — Hook 有限 command-tail 与容量边界（H06、H09）
 

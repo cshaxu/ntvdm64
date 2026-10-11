@@ -6,12 +6,17 @@
 
 ## Intermission
 
-T443 S4 is owner-accepted and delivered. The NTVWM producer again classifies
-an unchanged hidden-Console sample as no presentation event; receiver and
-transport remain faithful. The focused named-pipe result, ten-component
-publication identity and owner Windows Terminal smoke are recorded in
-[S4 evidence](../etc/evidence/m0-t443-s4-ntvwm-native-text-sampling.md).
+T443 S5 is owner-accepted as a no-change disposition: one unclassified
+command-text route through Hooked `COMSPEC /c` remains simpler and more
+faithful than a project-owned shell/file-intent classifier. The source basis
+and disposition are recorded in
+[S5 evidence](../etc/evidence/m0-t443-s5-comspec-fallback-retain.md).
 No further implementation is authorized until a queue candidate is admitted.
+<!-- Retained S5 admission provenance follows.
+
+| Original Owner Request | “准入s5 先解释问题和根源”. |
+
+-->
 
 ## Previous Closed Packet
 
