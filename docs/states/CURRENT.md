@@ -6,7 +6,7 @@
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T443 S12`, Ordinary Mode. |
+| Identifier Mode | `M0 T443 S12 P2`, Ordinary Mode. |
 | Admission And Approval | Owner closes S11's non-reproducing investigation and admits a repair for the S3 COMMAND COMSPEC routing regression. |
 | Objective | With `DOSONLY=0`, preserve original COMMAND's COMSPEC execution branch while changing only its BOP 54:08 adapter execution target to `NtvdmSystemRoot\\System32\\run16.exe`, so ordinary nesting is `DOS COMMAND → run16 → DOS COMMAND`, never an extra host `cmd.exe /c command`. |
 | Non-goals | No guest `COMMAND.COM` change, user-global environment mutation, native-program COMSPEC replacement, filename/metacharacter routing heuristic, new parser/protocol/helper, or regression of public `run16 command/c ver`. |

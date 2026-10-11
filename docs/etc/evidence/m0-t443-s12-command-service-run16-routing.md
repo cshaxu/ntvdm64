@@ -17,7 +17,8 @@ application shell behavior.
 - The project-owned adapter reads that branch marker and uses
   `common_product_path_a(L"system32\\run16.exe", ...)`, which derives the
   product root from the loaded NTVDM module.  It launches either
-  `run16.exe command /c <original-tail>` or `run16.exe command`.
+  `run16.exe <original-tail>` or `run16.exe command`.  AH=1 replaces only the
+  COMSPEC executable; it does not add another `COMMAND /c` wrapper.
 - No code writes `COMSPEC`; no component path uses `O:\\winnt` or
   `C:\\Windows` as a product-root literal.
 
@@ -26,7 +27,7 @@ It is cleared by the existing finish/abort path.
 
 ## Build and runtime witnesses
 
-- Full x86 graph `build/M0-T443/S12/r003/x86` completed all 528 Ninja edges,
+- Corrected full x86 graph `build/M0-T443/S12/r005/x86` completed all 528 Ninja edges,
   including `ntvdm.exe` and `nthook32.dll`.
 - A headless launch is not a valid VDM witness: both pre-change and candidate
   packages return `87` without a Console.  The temporary deep staging root
@@ -50,16 +51,19 @@ all ten files.  The changed image identities are:
 
 | Image | SHA-256 |
 | --- | --- |
-| `ntvdm.exe` | `0168FA9A41D845172DB8D460BCF401AB62D595984ED05BE7157687F11CB01C5D` |
-| `nthook32.dll` | `7EFCEEB9C7402A4A35FA6912979D268382A7705591E1B6C7199E5BBCAD2E97A5` |
+| `ntvdm.exe` | `9FE49D8775F5B9F02D8D96012C845E4A8022AE67B06503CC7538848CE2378355` |
+| `nthook32.dll` | `5A3AD7B0F5CBDB0804BB7F269949F56B59B469241E2647EDFC6BF04CE1084FEA` |
 
 The other eight images are unchanged, but were republished in the same
 manifested package as required.
 
 ## Remaining acceptance boundary
 
-This focused witness proves no extra host CMD is inserted in ordinary COMMAND
-startup and verifies execute/nested return.  Owner manual acceptance remains
+The prior r003 interactive observation and its "no extra host CMD" conclusion
+applied to the erroneous `command /c` wrapper and is superseded by r005.
+The r005 source and full x86 build prove the wrapper is absent; an attempted
+headless observer launch did not retain a Console report and is not counted as
+an execution witness. Owner manual acceptance remains
 the full interactive Windows Terminal matrix: triple nesting, ordered exits,
 input/output ownership, quoting, pipe/redirection, explicit native CMD,
 batch, and failure paths.

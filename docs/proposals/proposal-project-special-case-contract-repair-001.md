@@ -189,8 +189,11 @@ chain.
 
 S12 preserves original `cmdExec` and `cmdExecComspec32` branch/tail semantics,
 but changes the project-owned BOP 54:08 adapter call target directly to Run16:
-`NtvdmSystemRoot\System32\run16.exe command /c <tail>` for AH=1 and
-`…\run16.exe command` for the no-argument COMSPEC re-entry.  It does not read,
+`NtvdmSystemRoot\System32\run16.exe <tail>` for AH=1 and
+`…\run16.exe command` for the no-argument COMSPEC re-entry.  AH=1 substitutes
+only the COMSPEC executable and leaves Run16 its already-established command
+line/classification boundary; it must not construct a second `command /c`.
+It does not read,
 modify or forward any `COMSPEC` environment value; all other COMSPEC consumers
 stay unchanged.  It retains guest `COMMAND.COM` discovery and public Run16
 command-line compatibility, does not alter a guest binary, and may not route

@@ -142,7 +142,7 @@ static BOOL opennt_command_launch_vdm_child(
         formatted = snprintf(child_command, sizeof(child_command), "\"%s\" command", launcher);
     else if (service == MVDM_COMMAND_SERVICE_EXECUTE && service_tail != NULL)
         formatted = snprintf(child_command, sizeof(child_command),
-            "\"%s\" command /c %s", launcher, service_tail);
+            "\"%s\" %s", launcher, service_tail);
     else
         formatted = snprintf(child_command, sizeof(child_command), "\"%s\" %s", launcher, command_line);
     if (formatted < 0 || (size_t)formatted >= sizeof(child_command)) {
