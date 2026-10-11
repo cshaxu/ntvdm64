@@ -2,17 +2,12 @@
 
 ## Current Work
 
-**No active M/T/S packet.** T443 S6 was already delivered in
-`b250d592d`: both Hook widths select the two-field CreateProcess image only
-for legacy classification, preserve native calls unchanged, and construct the
-ordinary Run16 image-plus-tail transfer with the original `BaseCheckVDM` tail
-shape. Its focused x86/x64 tests, real-root smoke and ten-image publication
-are recorded in [the S6 evidence]
-(../etc/evidence/m0-t443-s6-hook-createprocess-boundary.md).
+**No active M/T/S packet.** The owner accepted T443 S12 on 2026-10-11; its
+closure is [recorded here](../history/m0-t443-s12-command-service-run16-routing-closure.md).
+S6–S11 are already delivered historical stages and are not reopened.
 
-The owner has not yet separately accepted or rejected that delivered S6, so it
-is not reopened for implementation. The remaining unadmitted T443 stages are
-S7–S10.
+The retained T443 proposal currently defines work only through S12. A new S13
+requires its owner-defined objective and admission before implementation.
 
 ## Previous Closed Packet
 
