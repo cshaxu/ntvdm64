@@ -32,10 +32,11 @@ rule probe_link
 build layout.obj: cc @NINJA_REPO@/src/win16-style/layout.c
 build style.obj: cc @NINJA_REPO@/src/win16-style/win16_style.c
 build demo.obj: cc @NINJA_REPO@/tests/app/win16_style_demo.c
+build gallery.obj: cc @NINJA_REPO@/tests/app/win16_style_gallery.c
 build font-probe.obj: cc @NINJA_REPO@/tests/app/win31_font_probe.c
 build font-probe.exe: probe_link font-probe.obj
 build win16-style.lib: archive layout.obj style.obj
-build win16-style-demo.exe: link demo.obj win16-style.lib
+build win16-style-demo.exe: link demo.obj gallery.obj win16-style.lib
 default win16-style-demo.exe font-probe.exe
 '@.Replace('@REPO@',$r).Replace('@NINJA_REPO@',$r.Replace(':','$:').Replace(' ','$ ')) | Set-Content "$dir/build.ninja" -Encoding ascii
         @"
@@ -56,12 +57,12 @@ cd /d "$dir"
             if($LASTEXITCODE){throw "Original font probe failed $arch"}
         }
         Add-Type -AssemblyName System.Drawing
-        foreach($name in @('capture','capture.bmp-pressed','capture.bmp-canceled','capture.bmp-maximized')){
+        foreach($name in (Get-ChildItem $dir -Filter '*.bmp'|ForEach-Object BaseName)){
             $bitmap=[Drawing.Bitmap]::FromFile("$dir/$name.bmp")
             try{$bitmap.Save("$dir/$name.png",[Drawing.Imaging.ImageFormat]::Png)}finally{$bitmap.Dispose()}
         }
         Get-Content "$dir/test.txt"
     }
-    Get-FileHash "$repo/src/win16-style/*","$repo/tests/app/win16_style_demo.c","$repo/tests/app/win31_font_probe.c","$repo/tests/observation/verify-win16-style.ps1"|ConvertTo-Json|Set-Content "$root/inputs.json"
+    Get-FileHash "$repo/src/win16-style/*","$repo/tests/app/win16_style_demo.c","$repo/tests/app/win16_style_gallery.c","$repo/tests/app/win31_font_probe.c","$repo/tests/observation/verify-win16-style.ps1"|ConvertTo-Json|Set-Content "$root/inputs.json"
     '0'|Set-Content "$root/exit-code.txt"
 }catch{$_|Out-String|Set-Content "$root/failure.txt";'1'|Set-Content "$root/exit-code.txt";exit 1}

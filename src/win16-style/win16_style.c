@@ -145,6 +145,7 @@ static void paint(HWND w,style_window *s,HDC target)
     WCHAR *title;
     if(!dc)return;
     if(!layout(w,s,&l)){if(!target)ReleaseDC(w,dc);return;}
+    if(!l.border && IsRectEmpty(&l.caption)){if(!target)ReleaseDC(w,dc);return;}
     colors(s,&p);saved=SaveDC(dc);
     ExcludeClipRect(dc,l.client.left,l.client.top,l.client.right,l.client.bottom);
     fill(dc,l.outer,l.dialog_frame?(s->active?p.active:p.inactive):p.face);
@@ -153,6 +154,9 @@ static void paint(HWND w,style_window *s,HDC target)
      * the white upper/left bevel used by later Windows non-client frames. */
     r=l.outer;InflateRect(&r,-l.border+l.unit,-l.border+l.unit);
     outline(dc,r,l.unit,l.dialog_frame?p.light:p.edge);
+    if(IsRectEmpty(&l.caption)){
+        RestoreDC(dc,saved);if(!target)ReleaseDC(w,dc);return;
+    }
     fill(dc,l.caption,s->active?p.active:p.inactive);
     r=l.caption;r.top=r.bottom;r.bottom+=l.unit;fill(dc,r,p.edge);
     button(dc,l.system,HTSYSMENU,s->pressed==HTSYSMENU&&s->hot,FALSE,l.unit,&p);
@@ -253,7 +257,7 @@ BOOL win16_style_install(HWND w,const win16_style_palette *p)
     if(!local_window(w))return FALSE;
     if(state(w)){SetLastError(ERROR_ALREADY_EXISTS);return FALSE;}
     style=(DWORD)GetWindowLongPtr(w,GWL_STYLE);ex=(DWORD)GetWindowLongPtr(w,GWL_EXSTYLE);
-    if((style&WS_CAPTION)!=WS_CAPTION || (style&(WS_CHILD|WS_HSCROLL|WS_VSCROLL)) ||
+    if((style&(WS_CHILD|WS_HSCROLL|WS_VSCROLL)) ||
         (ex&(WS_EX_CLIENTEDGE|WS_EX_TOOLWINDOW|WS_EX_LAYERED)) || GetMenu(w) ||
         IsIconic(w) || IsZoomed(w)){
         SetLastError(ERROR_NOT_SUPPORTED);return FALSE;
@@ -304,21 +308,6 @@ BOOL win16_style_set_palette(HWND w,const win16_style_palette *p)
     return TRUE;
 }
 
-static void system_menu(HWND w,style_window *s)
-{
-    RECT r;UINT command;DWORD style=(DWORD)GetWindowLongPtr(w,GWL_STYLE);
-    HMENU menu=GetSystemMenu(w,FALSE);
-    if(!menu)return;
-    EnableMenuItem(menu,SC_RESTORE,MF_BYCOMMAND|(IsZoomed(w)||IsIconic(w)?MF_ENABLED:MF_GRAYED));
-    EnableMenuItem(menu,SC_SIZE,MF_BYCOMMAND|((style&WS_THICKFRAME)&&!IsZoomed(w)?MF_ENABLED:MF_GRAYED));
-    EnableMenuItem(menu,SC_MINIMIZE,MF_BYCOMMAND|((style&WS_MINIMIZEBOX)?MF_ENABLED:MF_GRAYED));
-    EnableMenuItem(menu,SC_MAXIMIZE,MF_BYCOMMAND|((style&WS_MAXIMIZEBOX)&&!IsZoomed(w)?MF_ENABLED:MF_GRAYED));
-    GetWindowRect(w,&r);
-    command=TrackPopupMenu(menu,TPM_RETURNCMD|TPM_LEFTALIGN|TPM_TOPALIGN,
-        r.left,r.top+MulDiv(21,(int)s->dpi,96),0,w,NULL);
-    if(command)PostMessageW(w,WM_SYSCOMMAND,command,0);
-}
-
 static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
     UINT_PTR id,DWORD_PTR data)
 {
@@ -344,11 +333,10 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
             result=win16_style_hit(&l,point);break;
         }
         goto forward;
-    case WM_NCLBUTTONDBLCLK:
-        if(wp==HTSYSMENU){PostMessageW(w,WM_SYSCOMMAND,SC_CLOSE,0);break;}
-        goto forward;
     case WM_NCLBUTTONDOWN:
-        if(wp==HTSYSMENU){system_menu(w,s);break;}
+        /* Native system-menu tracking owns the second click, cancellation
+         * and disabled SC_CLOSE semantics. TrackPopupMenu is not equivalent
+         * to the non-client menu loop. Double clicks also go to the owner. */
         if(wp==HTMINBUTTON || wp==HTMAXBUTTON){
             s->pressed=(int)wp;s->hot=TRUE;SetCapture(w);paint(w,s,NULL);break;
         }

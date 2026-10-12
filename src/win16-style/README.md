@@ -24,14 +24,18 @@ removes the subclass; explicit removal is required before unloading code.
 Repeated installation fails with ERROR_ALREADY_EXISTS; unsupported frame forms
 fail with ERROR_NOT_SUPPORTED and remain native.
 
-The S3 profile accepts captioned top-level ordinary, minimize-only and dialog-
-style windows. WS_EX_DLGMODALFRAME explicitly selects the wider caption-colored
+The S3 profile accepts top-level caption-button combinations, captionless
+sizeable/thin frames, borderless windows and dialog-style windows.
+WS_EX_DLGMODALFRAME explicitly selects the wider caption-colored
 dialog border and light inner outline; no title or button-absence heuristic is
 used. WS_DLGFRAME alone cannot distinguish this because WS_CAPTION includes it.
 Initial menus, child/MDI, scrollbars, client-edge/tool/layered
 windows and minimized/maximized installation are deliberately unsupported.
 Consumers must not introduce those unsupported forms while attached. Native
 system popup menus remain native; later stages own menu/MDI integration.
+System-menu single and double clicks go through the native non-client owner,
+not a separate TrackPopupMenu loop. This preserves native menu tracking and
+disabled-close semantics without a local double-click timer.
 This is not a creation/Hook adapter or real title-prefix implementation.
 
 The supplied reference palette is a preset, not a universal Win3.1 default.
@@ -47,8 +51,13 @@ Build/test (invoke from an owned background PowerShell process):
     tests/observation/verify-win16-style.ps1 -BuildRoot <repo>/build/<run>
 
 This generates independent x86/x64 Ninja graphs, /MT /O2 /W4 /WX archives and
-GUI-subsystem win16-style-demo.exe. Without arguments the executable opens
-four interactive windows; F2 changes title, F3 changes caption colors.
+GUI-subsystem win16-style-demo.exe. Without arguments it opens a 19-entry
+selector: double-click a row or choose Open selected. Close samples closes
+only the demo's sample HWNDs. The first 14 entries exercise styled top-level
+forms/states; the last five explicitly labelled native references show menus,
+scrollbars, child/MDI and ordinary host appearance, not implemented retro
+support. Minimized presentation is also still native. F2 changes title,
+F3 changes caption colors and Esc closes a sample (including borderless ones).
 --test <bitmap> runs on its own private desktop and captures only its HWNDs.
 PrintWindow capture is rendered-window evidence, not a physical-input/RDP test
 or capture of DWM composition. No computer-use automation is involved.

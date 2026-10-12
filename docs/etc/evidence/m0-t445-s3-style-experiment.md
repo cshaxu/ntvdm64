@@ -324,3 +324,52 @@ the fixture does not manipulate the user's desktop or switch desktops.
 
 S3 remains open for owner visual/stability acceptance and final layout review;
 this closes the measured maximization clipping defect, not all Win3.1 behavior.
+
+### Window-form gallery and native system-menu interaction
+
+Owner requests all discussed forms in the demo and reports that double-clicking
+the system box does not close. The earlier code did have a direct double-click
+handler, but first-click processing entered a generic TrackPopupMenu loop rather
+than native non-client system-menu tracking. Its mere presence was insufficient
+proof of the real gesture. Remove both that loop and the unconditional posted
+SC_CLOSE shortcut; delegate these messages through DefSubclassProc to the native
+window owner. No timer, click replay, hook or menu-state replica is added.
+The public contract is documented by
+[Microsoft's non-client double-click message](https://learn.microsoft.com/en-us/windows/win32/inputdev/wm-nclbuttondblclk).
+Original USER remains the recorded server stopping boundary; no mirror changes
+or copied USER executable code are required for this public-API binding.
+
+The same layout now handles absent captions and zero/thin/sizeable borders;
+painting avoids inventing a caption on those windows. The existing 18-pixel OEM
+images and embedded font are unchanged. tests/app/win16_style_gallery.c adds a
+19-entry selector to the standalone demo: 14 styled top-level form/state samples,
+then five explicitly labelled native reference samples for menus, scrollbars,
+child windows, MDI and ordinary host framing. The minimized host presentation
+is explicitly native too. This does not claim S6 retro menu/MDI/icon support.
+Owned popups actually carry their owner HWND. Each sample can be opened and
+closed independently; Esc also closes captionless/borderless samples.
+
+r055 builds but cannot create a private desktop under the restricted token
+(ERROR_ACCESS_DENIED); it is failed, not runtime evidence. r056 reruns under the
+approved diagnostic permission and passes both widths. Final r057 adds all
+eight button-bit combinations at 96/144/192 DPI, captionless border combinations,
+and the actual selector Open/Close handlers. Both widths pass 6,914 fixture
+assertions plus all 19 gallery and 19 selector cases. The menu probe observes
+SC_MOUSEMENU on first click, cancels that real loop on WM_ENTERIDLE, checks that
+disabled Close rejects a double-click message, then enables Close and observes
+exactly one SC_CLOSE and destroyed HWND. These are owned-message tests, not a
+claim of physical double-click timing/RDP acceptance. Physical owner testing
+still needs to confirm the complete first-click/second-click gesture.
+
+The original font probe remains zero-mismatch across 95 ASCII glyphs and
+11,264 pixels. The 80 create/destroy and 120 attach/detach loops retain stable
+52->52 attachment GDI counts. Five gallery PrintWindow pages are retained per
+width (capture.bmp-gallery-1 through -5.png), alongside existing normal,
+pressed/canceled and maximized probes. Captures show alternating active/inactive
+styles, not whole-window Win3.1 pixel-equivalence. Each page captures normal
+geometry for legibility; actual maximize/minimize/restore is separately asserted.
+
+All runners are owned background processes with 120-second outer and 30-second
+fixture deadlines. They never switch desktops or inject user input. No production
+ten-image, guest, original source/resource or runtime configuration changes.
+S3 remains pending owner visual/gesture acceptance; S4 is not admitted.

@@ -17,13 +17,13 @@ The owner now admits the former queue head, Windows 3.1 window appearance.
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T445 S3, Ordinary Mode; implementation then separate final review. |
-| Admission And Approval | Owner requests implementation of win16-style and an independent Win32 experiment, with probe screenshots; computer use prohibited. |
+| Admission And Approval | Owner requests the independent Win32 experiment, then expands its gallery to the window forms discussed and requires system-menu double-click close; probe screenshots only, computer use prohibited. |
 | Objective | Build a reusable local frame library and directly launched GUI demonstration, without product integration. |
 | Non-goals | No run16 options, Hook/WOW integration, NTCON changes, guest/mirror edits, runtime component or global theme/settings. Menu/MDI retro rendering remains later work. |
 | Reference Baseline | c12090805, accepted S2 ten-image package; S1 original-reference research and installation design. |
 | Files And ABI Surface | src/win16-style, tests/app and tests/observation; local same-thread C API, x86/x64 /MT static archives. |
 | Applicable Rules | Source/architecture/coding/document authorities; background-owned build/tests; build-only outputs; no computer use/subst. |
-| Verification | Actual HWND fixtures, normal/minimize-only/dialog/native samples, layout/hit tests, title/activation/palette changes, geometry preservation, system commands and lifetime; probe capture of owned windows. |
+| Verification | Actual HWND gallery: button combinations, caption/system-menu absence, fixed/sizeable/dialog/borderless frames and state changes; separately labelled native menu/MDI/child references. Test system-menu close and disabled close, layout/hits, geometry preservation and lifetime; owned probe captures. |
 | Expected Markers | Both-width runnable demo and tests with images; no link to other product components. |
 | Asset Needs | Owner authorizes original Win3.1 resources in the isolated experiment. Bounded VGA.DRV button and VGASYS.FON font resources carry source hashes and provenance; original media stays read-only. Fonts load privately from memory, not through host installation. |
 | Reporting Requirements | Exact binary paths, screenshots, measured test results and visual/physical interaction limitations. |
@@ -102,15 +102,19 @@ during S3.
 
 ## Current Work
 
-S3 prototype is implemented and verified under build/M0-T445/S3/r053: x86/x64
-pass 6,734 assertions each, including embedded original OEM button pixels,
+S3 gallery is implemented and verified under build/M0-T445/S3/r057: x86/x64
+pass 6,914 assertions each plus 19 gallery/selector cases, including native
+system-menu entry, double-click close and disabled-close rejection,
+embedded original OEM button pixels,
 normal/depressed/restore selection and actual restore clicks. r047 compares
-all 2,700 imported pixels against the original VGA.DRV. r053 also verifies
+all 2,700 imported pixels against the original VGA.DRV. r057 also verifies
 embedded original-font identity and 95 ASCII glyphs/11,264 pixels per width.
 Maximized client/title/button layout now uses the visible work-area intersection;
 PrintWindow verifies its full button pixels and real restore clicks.
 Probe captures and pixel-detail comparison
 are available. Owner visual stability acceptance remains pending; S4 is not admitted.
+The gallery includes captionless/borderless forms; its menu/MDI/child/scrollbar
+and ordinary native references are explicitly labelled, not retro acceptance.
 See [S3 experiment evidence](../etc/evidence/m0-t445-s3-style-experiment.md).
 No production images or deployed components changed.
 

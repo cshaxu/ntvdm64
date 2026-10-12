@@ -20,6 +20,13 @@ numbers. No integration starts before owner-confirmed experiment stability.
 
 ## S3 standalone experiment contract
 
+Owner follow-up admits a selectable demo gallery for all discussed forms.
+Extend the local renderer to captionless/borderless top-level windows and
+all caption-button combinations. Keep native-reference menu/scrollbar/child/
+MDI examples explicitly labelled, not disguised as retro support; their
+renderer remains S6. Repair system-menu double-click close through native
+non-client menu handling, including disabled-close and cancellation tests.
+
 - Library source remains src/win16-style. The authored Win32 API demo and tests
   live under tests/app; build/test orchestration under tests/observation. Produce
   executable, objects, logs and captured images only under build/M0-T445/S3.

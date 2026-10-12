@@ -13,8 +13,17 @@ static unsigned checks;
 static BOOL testing;
 static const WCHAR *capture_path;
 static int live;
+static HWND menu_probe;
+static unsigned menu_entries,close_commands;
+void win16_style_gallery_run(void);
+void win16_style_gallery_test(const WCHAR *path);
 static LRESULT CALLBACK window_proc(HWND w,UINT m,WPARAM a,LPARAM b)
 {
+    if(w==menu_probe){
+        if(m==WM_SYSCOMMAND && (a&0xfff0)==SC_MOUSEMENU)++menu_entries;
+        if(m==WM_SYSCOMMAND && (a&0xfff0)==SC_CLOSE)++close_commands;
+        if(m==WM_ENTERIDLE && a==MSGF_MENU){EndMenu();return 0;}
+    }
     if(m==WM_PAINT){
         PAINTSTRUCT ps;RECT r;HDC dc=BeginPaint(w,&ps);
         GetClientRect(w,&r);FillRect(dc,&r,(HBRUSH)GetStockObject(WHITE_BRUSH));
@@ -246,6 +255,49 @@ static void layout_tests(void)
         if(i==0){p.x=0;p.y=0;CHECK(win16_style_hit(&l,p)==HTTOPLEFT);}
     }
     CHECK(!win16_style_measure(0,400,96,WS_OVERLAPPEDWINDOW,0,FALSE,NULL));
+    for(dpi=96;dpi<=192;dpi+=48){
+        unsigned bits;
+        for(bits=0;bits<8;++bits){
+            DWORD style=WS_CAPTION|((bits&1)?WS_SYSMENU:0)|
+                ((bits&2)?WS_MINIMIZEBOX:0)|((bits&4)?WS_MAXIMIZEBOX:0);
+            win16_style_layout l;
+            CHECK(win16_style_measure(600,400,dpi,style,0,FALSE,&l));
+            CHECK(IsRectEmpty(&l.system)==!(bits&1));
+            CHECK(IsRectEmpty(&l.minimize)==!(bits&2));
+            CHECK(IsRectEmpty(&l.maximize)==!(bits&4));
+            CHECK(l.title.left>=l.caption.left && l.title.right<=l.caption.right);
+        }
+        {DWORD frames[]={0,WS_BORDER,WS_DLGFRAME,WS_THICKFRAME};
+        for(i=0;i<4;++i){win16_style_layout l;POINT p={100,100};
+            CHECK(win16_style_measure(600,400,dpi,WS_POPUP|frames[i],0,FALSE,&l));
+            CHECK(IsRectEmpty(&l.caption)&&IsRectEmpty(&l.system));
+            CHECK(win16_style_hit(&l,p)==HTCLIENT);
+            CHECK((l.border==0)==(i==0));
+        }}
+    }
+}
+
+static void menu_tests(void)
+{
+    RECT r;win16_style_layout l;LPARAM p;unsigned before;
+    menu_probe=make_window(WS_OVERLAPPEDWINDOW,0,L"System menu contract",20,20,TRUE);
+    CHECK(GetWindowRect(menu_probe,&r));
+    CHECK(win16_style_measure(r.right-r.left,r.bottom-r.top,GetDpiForWindow(menu_probe),
+        WS_OVERLAPPEDWINDOW,0,FALSE,&l));
+    p=MAKELPARAM(r.left+(l.system.left+l.system.right)/2,r.top+(l.system.top+l.system.bottom)/2);
+    CHECK(SendMessageW(menu_probe,WM_NCHITTEST,0,p)==HTSYSMENU);
+    /* Enter the real native menu loop and cancel on idle, without input
+     * injection. A generic TrackPopupMenu loop bypasses SC_MOUSEMENU. */
+    SendMessageW(menu_probe,WM_NCLBUTTONDOWN,HTSYSMENU,p);
+    CHECK(menu_entries==1);CHECK(IsWindow(menu_probe));
+    EnableMenuItem(GetSystemMenu(menu_probe,FALSE),SC_CLOSE,MF_BYCOMMAND|MF_GRAYED);
+    before=close_commands;
+    SendMessageW(menu_probe,WM_NCLBUTTONDBLCLK,HTSYSMENU,p);pump();
+    CHECK(IsWindow(menu_probe));CHECK(close_commands==before);
+    EnableMenuItem(GetSystemMenu(menu_probe,FALSE),SC_CLOSE,MF_BYCOMMAND|MF_ENABLED);
+    SendMessageW(menu_probe,WM_NCLBUTTONDBLCLK,HTSYSMENU,p);pump();
+    CHECK(!IsWindow(menu_probe));CHECK(close_commands==before+1);
+    menu_probe=NULL;
 }
 
 static void font_probe(void)
@@ -294,6 +346,7 @@ int wmain(int argc,WCHAR **argv)
     testing=argc==3 && !wcscmp(argv[1],L"--test");
     if(testing)capture_path=argv[2];
     SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
+    if(!testing){win16_style_gallery_run();return 0;}
     if(testing){
         WCHAR name[80];swprintf_s(name,80,L"Win16StyleTest-%lu",GetCurrentProcessId());
         desktop=CreateDesktopW(name,NULL,NULL,0,GENERIC_ALL,NULL);
@@ -339,6 +392,8 @@ int wmain(int argc,WCHAR **argv)
         capture(w,path,FALSE);
     }
     oem_window_tests(w[0]);
+    menu_tests();
+    win16_style_gallery_test(argv[2]);
     button_test(w[0],HTMAXBUTTON,SC_MAXIMIZE);
     button_test(w[1],HTMINBUTTON,SC_MINIMIZE);
     {HMENU menu=CreateMenu();CHECK(menu!=NULL);CHECK(SetMenu(w[3],menu));
