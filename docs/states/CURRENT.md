@@ -1,51 +1,58 @@
 # Project Status
 
-**No active M/T/S packet.**
+**Active: M0 T445 S2**
 
-M0 T445 S1 is closed as an audit/design delivery. T445 remains open; S2 awaits
-sequential admission. See the [S1 closure design](../etc/evidence/m0-t445-s1-installation-design.md).
+M0 T445 S1 closed at 2151cf750. The owner inserts an isolated UI experiment as
+the new S2; former S2 and subsequent integration stages move one position later.
+See the [S1 closure design](../etc/evidence/m0-t445-s1-installation-design.md).
 
 The owner closed T444 after accepting the S1 repair and the bounded S2/S3
 conclusions. See the [T444 closure](../history/m0-t444-indexed16-text-closure.md).
 The owner now admits the former queue head, Windows 3.1 window appearance.
 
-## Closed S1 Packet
+## Active Packet
 
-### Application HWND ownership and appearance-boundary audit
+### Standalone experimental Win16-style library and Win32 UI fixture
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T445 S1`, Ordinary Mode; one implementer with a separate final review pass. |
-| Candidate Proposal | [Windows 3.1 window appearance](../proposals/proposal-win31-window-appearance-001.md). |
-| Admission And Approval | Owner directs: “好的，准入队列第一条”. Admit ownership/API audit and design first, not live window restyling. |
-| Objective | Establish the actual host HWND/window-procedure owners for representative Win16, Win32 and Win64 GUI programs and design one shared non-client appearance implementation with two installation entries. First establish authentic Windows 3.1 visuals/interaction from original manuals and owner reference images, explicitly not Windows 95. |
-| Non-goals | No NTCON, Console/text rendering, guest Windows desktop framing, client-pixel changes, lifecycle changes, global hooks, helper processes or guest/media modifications. No appearance implementation is delivered by admission. |
-| Reference Baseline | T444 closure at `bc363f3d2`; accepted product `fb7650ce0`, release 0.0.444/protocol 45; proposal identifies WOW window/dialog bindings and dual native Hooks as candidate entrypoints. Those static paths require current verification. |
-| Files And ABI Surface | Read WOW window/dialog/procedure bindings, nthook creation/installation and NTVWM launch; write indexed audit/design evidence and governance only. Owner subsequently approves src/win16-style placement, not source creation or production ABI implementation in S1. |
-| Applicable Rules | Project execution, architecture, coding, document and source policies; background-owned probes if required; preserve unrelated changes; no computer use or subst. |
-| Verification | Trace creation, dialogs, later GUI threads, title/activation, sizing, system menu/commands, DPI, procedure replacement and destruction. Record exact source locations and distinguish static findings from runtime witnesses. Admission-only delivery runs governance, relative-link and diff checks. |
-| Expected Markers | Per-family owner/installation matrix, preserved callback and teardown ordering, explicit supported/unsupported HWND boundaries and a minimal shared implementation design. |
-| Asset Needs | Existing accepted release and representative Win16 WINMINE plus source-owned x86/x64 native GUI fixtures; no new guest media. Runtime witnesses require owned test inputs and recorded identities. |
-| Reporting Requirements | Explain common mechanism versus two installation adapters, source placement, message/geometry/DPI/accessibility contract, risks and decisions needing owner approval. Do not equate CreateProcess interception with HWND coverage. |
-| Stop Conditions | Missing authenticated in-process installation boundary, need for mirror/guest change, global hook/helper, lifecycle authority or uncontrolled subclass/message interference requires owner review. |
-| Exit Criteria | Met for audit/design: source-backed owner/field map, same-thread creation/subclass and teardown design, task-level inheritance, explicit real-caption marker semantics, shared source-owner admission and stage-specific positive/negative/lifecycle checks. Actual implementation proofs belong to S2/S3/S4 and are not claimed passed. Closure evidence is linked above. |
-| Original Owner Request | “好的，准入队列第一条”. |
-| Similar-Issue Sweep | A/W creation, dialogs, secondary GUI threads, child/owned/popup windows, application subclass replacement, failure and WM_NCDESTROY, custom-drawn frames and non-product launches. |
+| Identifier Mode | `M0 T445 S2`, Ordinary Mode; one implementer and separate final review. |
+| Admission And Approval | Owner inserts a new S2 to implement experimental win16-style and independently start a Win32 window program, without integration into other ntvdm64 components; integration waits until the experiment is stable. |
+| Objective | Exercise authentic Win3.1 frame appearance and interaction through the actual src/win16-style library in a standalone authored GUI fixture. |
+| Non-goals | No run16 options, NTSRV/RPC changes, Hook injection, WOW/NTVDM/NTVWM/NTCON/NTMON integration, guest changes, production-package publication or product-wide compatibility claims. |
+| Reference Baseline | S1 design 2151cf750, original-manual/owner-image research, owner-approved specialist library placement; accepted ten-image release remains unchanged by this experiment. |
+| Files And ABI Surface | src/win16-style only for library code; tests/app and tests/observation for the independent Win32 API GUI fixture and build/test runner; documentation. Local C API only, no production wire ABI. |
+| Applicable Rules | Architecture/source/coding/document rules, background-owned builds/tests, build-only generated output, preserve concurrent edits; no computer use or subst. |
+| Verification | Real ordinary/minimize-only/dialog samples, active/inactive and changing titles, button hit tests, move/size/minimize/maximize/restore/close, client geometry, creation/destruction and native comparison. Capture only owned fixture output for visual evidence; distinguish rendered images from physical interaction. Compile both widths and run an independently launched native GUI fixture. Admission-only delivery runs documentation gates. |
+| Expected Markers | Runnable build-owned demo, repeatable component tests and captured references; library directly linked, no product processes or libraries required. |
+| Asset Needs | Existing reference images/manual; authored fixture and selected MSVC/SDK. Font reuse requires provenance review, not an O:/W31 runtime dependency. |
+| Reporting Requirements | Exact executable/build location, architecture, invocation, tested interactions, visual results, limitations and stability verdict. Do not call the demo a product-integrated capability. |
+| Stop Conditions | Need for product integration, global hooks/settings, guest/mirror changes or unreviewed resources; do not expand this experiment into a new framework. |
+| Exit Criteria | Library prototype plus independently runnable GUI fixture, focused positive/negative/lifetime tests and reviewed visual evidence; owner confirms experiment stable before S3 admission. Required documentation/diff checks and commit/push; no replacement of ten production images for this isolated fixture. |
+| Original Owner Request | “插入新的S2，用于实现试验性的 win16-style组件，并独立启动一个win32窗口程序用于这个UI试验；不接入任何其他ntvdm64组件部分，等这部分试验稳定了再开始原S2的任务序列。” |
+| Similar-Issue Sweep | Both-width build, normal/minimize-only/dialog frames, missing buttons, repeated install/remove, title changes, DPI/high contrast, application procedure/geometry and failure cleanup. |
+
+## S1 Closure Record
+
+T445 S1 closed at 2151cf750. Its [design closure](../etc/evidence/m0-t445-s1-installation-design.md)
+and [retained packet](../etc/evidence/m0-t445-s1-closed-packet.md) preserve the
+source-backed design and original brief. Stage numbers in that evidence precede
+the owner-inserted standalone S2; current numbering is in the working plan.
 
 ## Planned Sequence
 
-S1 audits ownership and presents the design. Owner clarification makes S2 the
-complete opt-in CLI/policy propagation and visible `(Win16 Style)` title-marker
-delivery, without retro rendering. S3 defines and implements the shared classic
-frame; S4 completes menu/MDI and interaction coverage; S5 verifies the integrated
-appearance and retained product regressions. The
+S1 is closed. New S2 isolates UI implementation in a standalone GUI fixture.
+Former S2 becomes S3 (CLI/policy propagation and title-marker verification);
+former S3 becomes S4 (reuse and harden the experimental frame for integration),
+former S4 becomes S5 (menus/MDI), and former S5 becomes S6 (integrated acceptance).
+The
 [working plan](../etc/operations/t445-win31-window-style-plan.md) defines the
 two option contracts, task isolation and marker acceptance.
-S1 is closed; later stages require sequential admission.
+Only S2 is active. S3 admission waits for owner-confirmed experiment stability.
 
 Owner selects `src/win16-style` as the shared static-library source owner:
-x86 for WOW32/nthook32 and x64 for nthook64. This is placement approval only;
-S2 creates the common title-marker boundary and later stages add rendering.
+x86 for WOW32/nthook32 and x64 for nthook64 eventually. S2 links it only into
+the standalone test program; these production consumers remain disconnected.
 
 ## Closed S3 Packet
 
@@ -94,14 +101,12 @@ S2 creates the common title-marker boundary and later stages add rendering.
 
 ## Current Work
 
-S1 concludes the original Win3.1 research and concrete installation/policy design.
-The [closure design](../etc/evidence/m0-t445-s1-installation-design.md) supersedes
-the earlier research's unresolved source-placement and installation choices.
-S2 must prove real-window coverage, task isolation, propagation and title marking;
-S3 owns exact metrics/font realization and frame geometry. No runtime capability
-or source implementation is claimed. The real-caption marker is intentionally
-visible to title-read APIs; no title-query virtualization is planned. Product
-release 0.0.444 and all installed/guest files remain unchanged. Await S2 admission.
+S2 is admitted for an isolated component/UI experiment, not launch-policy or
+product integration. This admission delivers planning only; no demo has yet
+been built or started. The standalone fixture will directly invoke the same
+library later consumers reuse. Existing S1 records retain their historical
+stage numbers; the working plan provides the new numbering. Concurrent NTVWM
+and test changes belong to another session and remain outside this delivery.
 
 ## T444 Final Disposition
 
@@ -293,7 +298,7 @@ See [S8 evidence](../etc/evidence/m0-t437-s8-addon-utility-consolidation.md).
 | Original Owner Request | “用apply.cmd跑完了安装流程，安装程序结束之后它好像自己卡住了，我按了ctrl+c才显示出来” and “请你准入一个S修复”. |
 | Similar-Issue Sweep | Check ordinary DOS/PIF completion and post-exit receipt handling without expanding into the deferred Win3.1 ordinary-Setup transition. |
 
-## S1 Closure Record
+## T437 S1 Closure Record
 
 See [S1 evidence](../etc/evidence/m0-t437-s1-installed-win31-tools.md).
 

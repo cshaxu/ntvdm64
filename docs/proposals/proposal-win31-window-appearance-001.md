@@ -10,7 +10,9 @@ reference, not permission to skip review or change live window behavior.
 The audit/design stage is now closed with the
 [source-backed installation design](../etc/evidence/m0-t445-s1-installation-design.md).
 It fixes policy ownership, creation/teardown and the real-caption marker
-contract; implementation and its runtime proofs remain subsequent work.
+contract; implementation and its runtime proofs remain subsequent work. The
+owner subsequently inserts an isolated UI experiment before all product
+integration; the working plan supersedes the closure record's stage numbers.
 
 Provide a coherent Windows 3.1-style visible window appearance for supported
 Win16, Win32, and Win64 **window-program** presentations.  The result is a
@@ -60,15 +62,21 @@ not authorize a generic helper framework.
 
 `src/win16-style` is a project-owned static library, built separately for x86
 and x64 from the same sources. It creates no runtime DLL, EXE, thread, polling
-loop or IPC channel. Its consumers are:
+loop or IPC channel. Its eventual production consumers are:
 
 | Build | Linked consumers |
 | --- | --- |
 | x86 | WOW32.DLL and nthook32.dll |
 | x64 | nthook64.dll |
 
-The library owns per-window installation/cleanup and title decoration first,
-then shared non-client layout, drawing, hit testing and local visual state.
+The first implementation is an isolated experiment linked directly into an
+authored Win32 GUI test program. It builds and runs without run16, NTSRV, WOW32,
+either Hook, NTVDM, NTVWM or NTCON. Test source belongs under tests/, outputs
+under build/; the demo is not a new shipped runtime component. Only after owner
+acceptance of experiment stability do the production consumers integrate it.
+
+The library owns per-window installation/cleanup, title decoration, shared
+non-client layout, drawing, hit testing and local visual state.
 Consumers resolve their task/process policy and pass the effective per-window
 enable decision. The library does not classify Win16/Win32/Win64 programs,
 parse run16 options, propagate child-launch policy or maintain task records.
@@ -81,10 +89,11 @@ launch context. The library has no NTCON, worker-base, service-client or
 executable-private dependency; local USER/GDI operations remain in the owning
 application process. No original mirror or guest code is moved into it.
 
-The title-marker delivery establishes this component and the installation
-boundary used by later real style rendering. Do not create a disposable marker
-implementation followed by an unrelated renderer. Source-root admission does
-not admit implementation ahead of the active sequential stage.
+The experiment establishes the reusable component. The subsequent title-marker
+delivery proves task policy and product installation separately; later rendering
+integration reuses the experimental renderer. Do not create disposable parallel
+implementations. Source-root admission does not admit product integration ahead
+of the active sequential stage.
 
 The common implementation owns caption/border/button drawing, palette, metrics,
 DPI adaptation, non-client geometry and hit testing. Installation must preserve
@@ -146,10 +155,12 @@ intermediate that does not itself render the Win16-only style. Unrelated tasks
 in a shared WOW worker must remain unaffected. Default non-inherited launches
 retain native appearance.
 
-Policy/propagation is delivered and verified first through a visible
+The standalone UI experiment comes first, without these options or any product
+integration. Once stable, product policy/propagation is verified through a visible
 `(Win16 Style) ` title prefix on enabled windows. This is an enablement witness,
-not proof of retro rendering. Actual classic rendering follows only after
-that boundary is proven. The admitted package's multi-S sequence and acceptance
+not proof of integrated retro rendering. Actual product rendering is enabled
+only after that boundary is proven, reusing the experiment. The admitted
+package's multi-S sequence and acceptance
 matrix live in the [working plan](../etc/operations/t445-win31-window-style-plan.md);
 [Current Work](../states/CURRENT.md) alone admits the next stage.
 

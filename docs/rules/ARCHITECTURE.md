@@ -12,6 +12,13 @@ No runtime component, thread, polling loop, IPC or mirror relocation is admitted
 This bounded source-root approval supersedes the root restriction only for
 this owner; Current Work still controls implementation-stage admission.
 
+Owner's revised sequence first admits an isolated library/UI experiment with
+an authored standalone Win32 GUI test fixture. It links only the style library
+and ordinary host APIs, not other product components. The test executable stays
+under build and is not shipped as an eleventh runtime image. No product consumer,
+protocol or deployed release changes in that stage; subsequent integration waits
+for owner-confirmed experiment stability and separate stage admission.
+
 ## Owner-approved selective native component migration
 
 Owner admits x64-only run16/NTCON/NTMON migration and subsequently adds

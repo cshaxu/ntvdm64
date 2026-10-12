@@ -7,7 +7,10 @@ project-authored application-window style. Its x86 build serves WOW32.DLL and
 nthook32.dll; its x64 build serves nthook64.dll. Window title marking and later
 frame layout/drawing share this owner and installation boundary. Task-policy
 selection and propagation stay in their existing consumers. The directory is
-planned, not an implemented capability; see the
+admitted first for an isolated experiment: tests/app supplies an independently
+launched Win32 GUI fixture directly linked to the library, with outputs only
+under build/. No existing product consumer links it until later integration
+admission. This is not yet an implemented capability; see the
 [appearance proposal](../proposals/proposal-win31-window-appearance-001.md)
 and the source-owner admission in [Architecture Rules](../rules/ARCHITECTURE.md).
 
