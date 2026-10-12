@@ -2,6 +2,12 @@
 
 ## Question and scope
 
+Historical research checkpoint: subsequent owner approval selects
+src/win16-style, and the [S1 closure design](m0-t445-s1-installation-design.md)
+resolves installation/policy choices and assigns implementation proofs to
+later stages. Open questions/status below describe this earlier checkpoint,
+not a competing current packet.
+
 The owner requires Windows 3.1, explicitly not Windows 95 or a modern classic
 theme. This is source/document/image research, not implementation or a runtime
 appearance pass. Existing NTCON, guest desktop and application client pixels

@@ -4,8 +4,10 @@
 
 The owner approves two run16 options and requires the complete propagation
 contract plus a visible title marker in S2. S3 and later implement the actual
-retro style. This plan does not close S1 or admit S2; Current Work remains the
-sole active-packet authority. No product capability is claimed by this plan.
+retro style. S1 subsequently closes through its
+[installation design](../evidence/m0-t445-s1-installation-design.md); S2 remains
+unadmitted. Current Work is the sole active-packet authority. No product
+capability is claimed by this plan.
 
 | Stage | Bounded result |
 | --- | --- |
@@ -62,7 +64,10 @@ accumulate prefixes. Keep the application's undecorated title separate from the
 presentation prefix; do not infer policy by searching title text or remove an
 application-authored matching string. The supported title-read semantics and
 installation/detach ordering must be specified and tested before implementation
-is accepted, avoiding title-comparison breakage and reentrant WM_SETTEXT loops.
+is accepted, avoiding reentrant WM_SETTEXT loops. The S1 decision uses a real
+caption decoration: title-read APIs and exact-title lookup observe the changed
+caption. Do not virtualize those APIs or claim unmarked-title equality; test
+and report title-dependent application compatibility explicitly.
 
 The marker uses the same per-window enable decision and installation boundary
 that later rendering will consume, not a temporary process-wide caption scanner.
@@ -86,7 +91,8 @@ marker proves enablement only, not delivery of the Win3.1 appearance.
   and no doubled decoration or stale per-task/window state.
 - Evidence combines actual HWND titles, owning task/process identities and
   child-launch provenance; a screenshot or a stored flag alone is insufficient.
-  Preserve ordinary application title semantics and existing run16 CLI behavior.
+  Preserve documented title-API behavior with the explicitly decorated caption
+  and existing run16 CLI behavior, not identical unmarked title strings.
 - External activation brokers, pre-existing target processes and unsupported
   custom captions are explicit boundaries, not silent passes. Do not broaden
   the existing controlled Hook propagation guarantee without owner review.

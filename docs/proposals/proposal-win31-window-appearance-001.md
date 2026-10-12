@@ -7,6 +7,11 @@ This proposal has been admitted for ownership/API audit and design through
 alone allocates the active packet; the sequence below remains its scope
 reference, not permission to skip review or change live window behavior.
 
+The audit/design stage is now closed with the
+[source-backed installation design](../etc/evidence/m0-t445-s1-installation-design.md).
+It fixes policy ownership, creation/teardown and the real-caption marker
+contract; implementation and its runtime proofs remain subsequent work.
+
 Provide a coherent Windows 3.1-style visible window appearance for supported
 Win16, Win32, and Win64 **window-program** presentations.  The result is a
 user-interface policy, not a program classifier: DOS/text Console projection,

@@ -7,6 +7,7 @@ delivered single-worker/dual-Hook gates; see
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T445 S1 installation design closure](evidence/m0-t445-s1-installation-design.md) | M0 T445 S1 | Source-backed task policy map, window installation/lifetime and title-read contract; implementation obligations allocated to later stages. | Retain through T445 acceptance. |
 | [T445 window-style working plan](operations/t445-win31-window-style-plan.md) | M0 T445 S1 | Owner-approved staged CLI propagation, title-marker verification and later classic rendering. | Retain through T445 acceptance. |
 | [T445 S1 original Windows 3.1 appearance research](evidence/m0-t445-s1-win31-appearance-research.md) | M0 T445 S1 | Original manual and owner screenshots, HWND installation audit and explicit remaining design proofs. | Retain through appearance design and acceptance. |
 | [T444 S2 disposition and S3 VT fidelity](evidence/m0-t444-s3-host-vt-fidelity.md) | M0 T444 S3 | Audit-only capability disposition and measured host VT conversion/presentation verification. | Retain through T444 closure. |

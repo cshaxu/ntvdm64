@@ -1,12 +1,15 @@
 # Project Status
 
-**Active: M0 T445 S1**
+**No active M/T/S packet.**
+
+M0 T445 S1 is closed as an audit/design delivery. T445 remains open; S2 awaits
+sequential admission. See the [S1 closure design](../etc/evidence/m0-t445-s1-installation-design.md).
 
 The owner closed T444 after accepting the S1 repair and the bounded S2/S3
 conclusions. See the [T444 closure](../history/m0-t444-indexed16-text-closure.md).
 The owner now admits the former queue head, Windows 3.1 window appearance.
 
-## Active Packet
+## Closed S1 Packet
 
 ### Application HWND ownership and appearance-boundary audit
 
@@ -18,14 +21,14 @@ The owner now admits the former queue head, Windows 3.1 window appearance.
 | Objective | Establish the actual host HWND/window-procedure owners for representative Win16, Win32 and Win64 GUI programs and design one shared non-client appearance implementation with two installation entries. First establish authentic Windows 3.1 visuals/interaction from original manuals and owner reference images, explicitly not Windows 95. |
 | Non-goals | No NTCON, Console/text rendering, guest Windows desktop framing, client-pixel changes, lifecycle changes, global hooks, helper processes or guest/media modifications. No appearance implementation is delivered by admission. |
 | Reference Baseline | T444 closure at `bc363f3d2`; accepted product `fb7650ce0`, release 0.0.444/protocol 45; proposal identifies WOW window/dialog bindings and dual native Hooks as candidate entrypoints. Those static paths require current verification. |
-| Files And ABI Surface | Read WOW window/dialog/procedure bindings, nthook creation/installation and NTVWM launch; write indexed audit/design evidence and governance only. No production ABI or source-root change. |
+| Files And ABI Surface | Read WOW window/dialog/procedure bindings, nthook creation/installation and NTVWM launch; write indexed audit/design evidence and governance only. Owner subsequently approves src/win16-style placement, not source creation or production ABI implementation in S1. |
 | Applicable Rules | Project execution, architecture, coding, document and source policies; background-owned probes if required; preserve unrelated changes; no computer use or subst. |
 | Verification | Trace creation, dialogs, later GUI threads, title/activation, sizing, system menu/commands, DPI, procedure replacement and destruction. Record exact source locations and distinguish static findings from runtime witnesses. Admission-only delivery runs governance, relative-link and diff checks. |
 | Expected Markers | Per-family owner/installation matrix, preserved callback and teardown ordering, explicit supported/unsupported HWND boundaries and a minimal shared implementation design. |
 | Asset Needs | Existing accepted release and representative Win16 WINMINE plus source-owned x86/x64 native GUI fixtures; no new guest media. Runtime witnesses require owned test inputs and recorded identities. |
 | Reporting Requirements | Explain common mechanism versus two installation adapters, source placement, message/geometry/DPI/accessibility contract, risks and decisions needing owner approval. Do not equate CreateProcess interception with HWND coverage. |
 | Stop Conditions | Missing authenticated in-process installation boundary, need for mirror/guest change, global hook/helper, lifecycle authority or uncontrolled subclass/message interference requires owner review. |
-| Exit Criteria | Source-backed audit and detailed design cover all three families and positive/negative/lifecycle acceptance; uncertainty and runtime limits remain explicit; reviewed evidence committed/pushed for owner design review before live implementation. |
+| Exit Criteria | Met for audit/design: source-backed owner/field map, same-thread creation/subclass and teardown design, task-level inheritance, explicit real-caption marker semantics, shared source-owner admission and stage-specific positive/negative/lifecycle checks. Actual implementation proofs belong to S2/S3/S4 and are not claimed passed. Closure evidence is linked above. |
 | Original Owner Request | “好的，准入队列第一条”. |
 | Similar-Issue Sweep | A/W creation, dialogs, secondary GUI threads, child/owned/popup windows, application subclass replacement, failure and WM_NCDESTROY, custom-drawn frames and non-product launches. |
 
@@ -38,7 +41,7 @@ frame; S4 completes menu/MDI and interaction coverage; S5 verifies the integrate
 appearance and retained product regressions. The
 [working plan](../etc/operations/t445-win31-window-style-plan.md) defines the
 two option contracts, task isolation and marker acceptance.
-Only S1 is active; later stages require sequential admission.
+S1 is closed; later stages require sequential admission.
 
 Owner selects `src/win16-style` as the shared static-library source owner:
 x86 for WOW32/nthook32 and x64 for nthook64. This is placement approval only;
@@ -91,13 +94,14 @@ S2 creates the common title-marker boundary and later stages add rendering.
 
 ## Current Work
 
-S1 research now compares the original April 1992 user manual with four owner
-reference images, including MDI, minimize-only and dialog frames. The
-[research ledger](../etc/evidence/m0-t445-s1-win31-appearance-research.md)
-records confirmed visuals, source-owner findings and unresolved measurements.
-No live appearance change or runtime acceptance is claimed. Exact metrics,
-font realization, native creation coverage and subclass ordering still need
-proof before S1 can close and live implementation can proceed.
+S1 concludes the original Win3.1 research and concrete installation/policy design.
+The [closure design](../etc/evidence/m0-t445-s1-installation-design.md) supersedes
+the earlier research's unresolved source-placement and installation choices.
+S2 must prove real-window coverage, task isolation, propagation and title marking;
+S3 owns exact metrics/font realization and frame geometry. No runtime capability
+or source implementation is claimed. The real-caption marker is intentionally
+visible to title-read APIs; no title-query virtualization is planned. Product
+release 0.0.444 and all installed/guest files remain unchanged. Await S2 admission.
 
 ## T444 Final Disposition
 
