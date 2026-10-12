@@ -24,6 +24,12 @@ typedef struct style_window {
 
 static LRESULT CALLBACK style_proc(HWND,UINT,WPARAM,LPARAM,UINT_PTR,DWORD_PTR);
 #define STYLE_ID ((UINT_PTR)style_proc)
+/* UxTheme's non-client draw requests are not in the public SDK. They are
+ * observed compatibility messages, not structures we interpret or APIs we
+ * invoke. An attached custom frame must not delegate their drawing to USER.
+ * See resources.md for the boundary and provenance. */
+#define STYLE_NCUAHDRAWCAPTION 0x00ae
+#define STYLE_NCUAHDRAWFRAME   0x00af
 
 void win16_style_default_palette(win16_style_palette *p)
 {
@@ -324,9 +330,40 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
         }
         goto forward;
     case WM_NCPAINT: paint(w,s,NULL);break;
+    case WM_SETCURSOR:
+        /* Default NC cursor handling can also repaint native caption buttons.
+         * Only our frame belongs to us; preserve the application's client
+         * cursor and error handling. No hover artwork exists in Win3.1. */
+        if(!IsIconic(w) && (HWND)wp==w && (short)LOWORD(lp)>HTCLIENT){
+            LPCWSTR cursor=IDC_ARROW;
+            switch((short)LOWORD(lp)){
+            case HTLEFT: case HTRIGHT: cursor=IDC_SIZEWE;break;
+            case HTTOP: case HTBOTTOM: cursor=IDC_SIZENS;break;
+            case HTSIZE: case HTTOPLEFT: case HTBOTTOMRIGHT: cursor=IDC_SIZENWSE;break;
+            case HTTOPRIGHT: case HTBOTTOMLEFT: cursor=IDC_SIZENESW;break;
+            }
+            SetCursor(LoadCursorW(NULL,cursor));result=TRUE;break;
+        }
+        goto forward;
+    case STYLE_NCUAHDRAWCAPTION:
+    case STYLE_NCUAHDRAWFRAME:
+    case WM_NCMOUSEMOVE:
+    case WM_NCMOUSEHOVER:
+    case WM_NCMOUSELEAVE:
+        if(IsIconic(w))goto forward; /* S3 retains native minimized presentation. */
+        /* DWMNCRP_DISABLED does not disable USER/UxTheme painting. In
+         * particular default NC hover paints native caption buttons without
+         * asking our WM_NCPAINT owner, potentially into our client area.
+         * Win3.1 buttons have no hover drawing. Press tracking remains in
+         * WM_MOUSEMOVE below; menu/drag/size commands still go to USER. */
+        break;
     case WM_NCACTIVATE:
-        s->active=(BOOL)wp;result=DefSubclassProc(w,msg,wp,-1);
-        if(!s->detached)paint(w,s,NULL);break;
+        s->active=(BOOL)wp;
+        if(IsIconic(w))goto forward;
+        /* Own activation drawing too. Forwarding even with lp=-1 leaves
+         * native themed-caption pixels below the shorter custom caption.
+         * TRUE permits deactivation; WM_ACTIVATE/focus still go downstream. */
+        result=TRUE;paint(w,s,NULL);break;
     case WM_NCHITTEST:
         if(layout(w,s,&l)){
             GetWindowRect(w,&r);point.x=GET_X_LPARAM(lp)-r.left;point.y=GET_Y_LPARAM(lp)-r.top;
@@ -372,6 +409,7 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
         if(!s->detached){refresh_font(w,s);frame_changed(w);}break;
     case WM_SETTINGCHANGE:
     case WM_SYSCOLORCHANGE:
+    case WM_THEMECHANGED:
         result=DefSubclassProc(w,msg,wp,lp);
         if(!s->detached)paint(w,s,NULL);break;
     case WM_NCDESTROY:

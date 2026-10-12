@@ -38,9 +38,11 @@ non-client menu handling, including disabled-close and cancellation tests.
   comparison. Exercise activation, title changes, palette changes, pressed
   buttons, move/size, restore, close and repeated create/destroy. Preserve the
   actual client area. Explicitly label any incomplete menu/MDI behavior.
-- Capture only the owned fixture's rendered output with test instrumentation;
-  no computer-use automation. Automated message/layout tests and render captures
-  do not establish physical pointer or RDP acceptance; retain those distinctions.
+- Initially use owned-window probes. Owner subsequently authorizes computer use
+  for this demo after native caption-button leakage escapes those captures.
+  Compare actual desktop output as well as message/layout tests; a private-desktop
+  PrintWindow capture does not establish physical pointer or RDP acceptance.
+  Do not operate unrelated applications or change host settings.
 - Keep library API small and explicit. Reuse the experiment's actual layout,
   painter and window state later; do not make a disposable mock UI or a general
   skin framework. Select/verify original-looking metrics and fonts here, with

@@ -373,3 +373,73 @@ All runners are owned background processes with 120-second outer and 30-second
 fixture deadlines. They never switch desktops or inject user input. No production
 ten-image, guest, original source/resource or runtime configuration changes.
 S3 remains pending owner visual/gesture acceptance; S4 is not admitted.
+
+### Native caption leakage: hover and activation
+
+Owner reports both static native-button bottoms below the custom title and
+native buttons appearing on mouse hover. Owner then explicitly authorizes
+computer use of the standalone demo after earlier probes miss the artifact.
+This overrides the initial no-computer-use scope only for this demo. Real
+desktop observation of r057 and r060 reproduces the residue; later desktop
+access becomes black/unavailable, and a physical Escape stops computer use.
+No further desktop input is performed after that stop. Owner's r062 manual
+test confirms hover fixed but static residue still present.
+
+The original PrintWindow path repaints the frame and is not evidence that
+existing displayed pixels are clean. r059 adds existing WindowDC reads, but
+only compares hover against the initial bitmap. That baseline can already
+contain the defect. r062 passes 6,988 checks per width and catches the missing
+non-client cursor handler; r063-control links the unchanged HEAD renderer
+against the new tests and fails the WM_SETCURSOR return check. This proves the
+new handler contract, not absence of the separately reported static residue.
+
+r064 initially fails an activation-cycle pixel comparison because its private
+desktop baseline was inactive; r065 explicitly establishes the same active
+presentation and passes 7,025 checks. Its saved raw surface nevertheless shows
+native-caption contamination already in the baseline. Therefore r066 adds an
+independent oracle: the application's top 12 client rows must be white, not
+merely equal to an earlier picture. This fails with 3,304 contaminated pixels.
+Actual client rectangle 6,37,414,221 exactly matches the custom layout at
+144 DPI; the defect is not incorrect client geometry or insufficient coverage.
+
+r067 changes only the WM_NCACTIVATE forwarding to custom painting/TRUE return:
+the same strip becomes zero contaminated pixels, across initial, hover, title,
+icon, inactive/active and theme cases. Both widths pass 7,033 checks and the
+original font probe (95 ASCII glyphs, 11,264 pixels, zero mismatches). The
+recovered source boundary remains the S1 NTUSER-server stopping boundary;
+these are minimal project-owned modern presentation fixes, no mirror changes.
+
+The final handler retains native minimized activation, owns non-client cursor
+shapes and hover, consumes the known 0xAE/0xAF caption/frame draw requests
+without interpreting their private payloads, and paints theme-change updates.
+Normal activation is no longer delegated for native drawing even with lp=-1.
+Client cursor behavior, WM_ACTIVATE/focus, menu tracking, moving/resizing and
+window commands stay with their original owners. No window-height increase,
+global theme mutation, new thread, hook or repaint loop is introduced.
+Primary API/Chromium comparison provenance is recorded in
+[the component ledger](../../../src/win16-style/resources.md#host-non-client-painting-boundary).
+
+r068/r069 extend the oracle through minimize/restore: the strip stays clean,
+but two outer clip pixels at (1,1) and (418,1) become black on native restore.
+They are outside the caption/buttons/client. The final test records these
+outer-frame changes and compares the caption/button/client interior on restore;
+all non-geometry steps still require full sampled-pixel equality. It never
+allows non-white client-strip pixels. This is a stated geometry distinction,
+not a relaxed native-button check.
+
+Final r070 passes x86/x64 7,046 checks each plus the 19 gallery/selector cases,
+original-font identity and 95-glyph/11,264-pixel zero-mismatch proof. All nine
+client-strip samples have zero contaminated pixels, resize cursor directions
+and application cursor delegation pass, and minimized activation reaches the
+native application procedure. Attachment GDI counts remain stable. Builds/tests
+are owned background runs with 120-second outer/30-second fixture deadlines.
+Raw surface captures are capture.bmp-nc-0 through -8.bmp (and PNG) per width;
+the before artifact is r066/x86/capture.bmp-nc-0.bmp.
+
+Owner subsequently confirms r070 fixes the static-residue problem too. r071
+passes documentation governance, relative links, diff checks and all ten
+assets/deployed hashes against the unchanged release manifest. Separate final
+review confirms no frame metrics, client geometry, original resources, mirrors,
+product images or runtime configuration changed. S3 stays open: owner next
+requests raised/pressed system-box correction and a complete original-style
+comparison of implemented frame forms. This is not S4 integration admission.

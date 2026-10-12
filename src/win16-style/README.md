@@ -36,6 +36,12 @@ system popup menus remain native; later stages own menu/MDI integration.
 System-menu single and double clicks go through the native non-client owner,
 not a separate TrackPopupMenu loop. This preserves native menu tracking and
 disabled-close semantics without a local double-click timer.
+Normal non-client activation, cursor/hover and compatibility caption-draw
+messages belong to the custom renderer; delegating their drawing can leak
+native buttons into the shorter caption's client area. Client cursor handling,
+WM_ACTIVATE/focus and system commands remain downstream. Minimized activation
+and mouse presentation remain native. No extra repaint timer or larger frame
+is used to cover native drawing.
 This is not a creation/Hook adapter or real title-prefix implementation.
 
 The supplied reference palette is a preset, not a universal Win3.1 default.
@@ -60,4 +66,10 @@ support. Minimized presentation is also still native. F2 changes title,
 F3 changes caption colors and Esc closes a sample (including borderless ones).
 --test <bitmap> runs on its own private desktop and captures only its HWNDs.
 PrintWindow capture is rendered-window evidence, not a physical-input/RDP test
-or capture of DWM composition. No computer-use automation is involved.
+or capture of DWM composition. The fixture itself uses no computer-use automation.
+The non-client regression additionally reads existing WindowDC pixels without
+PrintWindow: assert a white client-top strip, unchanged caption/buttons through
+cursor/hover, title/icon/theme/activation changes and minimize/restore. It also
+checks all resize cursor directions and application client-cursor delegation.
+Owner subsequently authorized actual-desktop computer-use inspection of the
+standalone demo; it is separate evidence, not replaced by these probes.

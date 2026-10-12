@@ -17,12 +17,12 @@ The owner now admits the former queue head, Windows 3.1 window appearance.
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T445 S3, Ordinary Mode; implementation then separate final review. |
-| Admission And Approval | Owner requests the independent Win32 experiment, then expands its gallery to the window forms discussed and requires system-menu double-click close; probe screenshots only, computer use prohibited. |
+| Admission And Approval | Owner requests the independent Win32 experiment and gallery, then authorizes computer-use observation/interaction of that demo to reproduce native caption-button leakage missed by probes. |
 | Objective | Build a reusable local frame library and directly launched GUI demonstration, without product integration. |
 | Non-goals | No run16 options, Hook/WOW integration, NTCON changes, guest/mirror edits, runtime component or global theme/settings. Menu/MDI retro rendering remains later work. |
 | Reference Baseline | c12090805, accepted S2 ten-image package; S1 original-reference research and installation design. |
 | Files And ABI Surface | src/win16-style, tests/app and tests/observation; local same-thread C API, x86/x64 /MT static archives. |
-| Applicable Rules | Source/architecture/coding/document authorities; background-owned build/tests; build-only outputs; no computer use/subst. |
+| Applicable Rules | Source/architecture/coding/document authorities; background-owned build/tests; build-only outputs; no subst. Computer use is scoped to the owned demo, not other applications or host settings. |
 | Verification | Actual HWND gallery: button combinations, caption/system-menu absence, fixed/sizeable/dialog/borderless frames and state changes; separately labelled native menu/MDI/child references. Test system-menu close and disabled close, layout/hits, geometry preservation and lifetime; owned probe captures. |
 | Expected Markers | Both-width runnable demo and tests with images; no link to other product components. |
 | Asset Needs | Owner authorizes original Win3.1 resources in the isolated experiment. Bounded VGA.DRV button and VGASYS.FON font resources carry source hashes and provenance; original media stays read-only. Fonts load privately from memory, not through host installation. |
@@ -102,19 +102,20 @@ during S3.
 
 ## Current Work
 
-S3 gallery is implemented and verified under build/M0-T445/S3/r057: x86/x64
-pass 6,914 assertions each plus 19 gallery/selector cases, including native
-system-menu entry, double-click close and disabled-close rejection,
-embedded original OEM button pixels,
-normal/depressed/restore selection and actual restore clicks. r047 compares
-all 2,700 imported pixels against the original VGA.DRV. r057 also verifies
-embedded original-font identity and 95 ASCII glyphs/11,264 pixels per width.
-Maximized client/title/button layout now uses the visible work-area intersection;
-PrintWindow verifies its full button pixels and real restore clicks.
-Probe captures and pixel-detail comparison
-are available. Owner visual stability acceptance remains pending; S4 is not admitted.
-The gallery includes captionless/borderless forms; its menu/MDI/child/scrollbar
-and ordinary native references are explicitly labelled, not retro acceptance.
+Native-caption leakage follow-up is built under build/M0-T445/S3/r070:
+x86/x64 pass 7,046 checks each and zero original-font mismatches. Existing
+WindowDC reads now independently require a white client-top strip; the
+activation repair removes the r066 baseline's 3,304 contaminated pixels.
+The owner confirms r062 hover behavior fixed and accepts r070 static-residue
+repair. Next, audit original-style divergences across implemented frames,
+starting with the system-menu button's raised/pressed appearance. No frame
+height or client geometry change in the accepted repair. Normal
+NC activation/cursor drawing is custom-owned; minimized presentation stays native.
+
+The 19-entry gallery retains original bitmap/font checks, menu/disabled-close
+tests and geometry/lifetime coverage. Menu/MDI/child/scrollbar samples remain
+labelled native references, not retro acceptance. Detailed r047--r070 results
+are retained in the evidence below. Overall S3 acceptance and S4 admission wait.
 See [S3 experiment evidence](../etc/evidence/m0-t445-s3-style-experiment.md).
 No production images or deployed components changed.
 

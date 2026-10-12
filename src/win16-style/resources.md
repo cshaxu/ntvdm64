@@ -56,3 +56,41 @@ private memory loading, and 95 ASCII glyph widths plus 11,264 pixels against
 the original FNT bitmap records. This does not prove every extended ANSI or
 Unicode fallback glyph. Format reference: Microsoft's
 [Font-File Format developer notes](https://ftp.zx.net.nz/pub/Patches/ftp.microsoft.com/MISC/KB/en-us/65/123.HTM).
+
+## Host non-client painting boundary
+
+This is project-owned modern-host adaptation, not Win3.1 resource data or an
+OpenNT mirror change. DWMNCRP_DISABLED does not remove USER/UxTheme's caption
+painting. An attached custom frame owns its non-client cursor/hover handling
+as well as WM_NCPAINT. Client cursor handling, system-menu tracking and window
+commands still belong to the application/native window manager. Minimized
+presentation remains native in S3.
+
+Primary comparison inspected on 2026-10-12: Chromium's
+[HWND message handler header](https://raw.githubusercontent.com/chromium/chromium/main/ui/views/win/hwnd_message_handler.h)
+defines the undocumented compatibility draw messages 0xAE/0xAF, and its
+[implementation](https://raw.githubusercontent.com/chromium/chromium/main/ui/views/win/hwnd_message_handler.cc)
+documents native-caption artifacts from default cursor processing in OnSetCursor
+and absorbs the two draw requests in OnNCUAHDrawCaption/OnNCUAHDrawFrame for
+custom-drawn frames. These files identify Chromium Authors/BSD provenance;
+no Chromium function body or subsystem is imported. Only the message identities
+and host-boundary evidence are used here. Undocumented message behavior is a
+compatibility boundary, not a guaranteed Microsoft API; no payload is parsed,
+fabricated or forwarded by our handler.
+
+The small authored WM_SETCURSOR mapping follows Microsoft's
+[public contract](https://learn.microsoft.com/en-us/windows/win32/menurc/wm-setcursor):
+set the frame's arrow/resize cursor and return TRUE; client/error/foreign-window
+messages continue downstream. Neither process-wide theme settings nor
+SetWindowTheme changes are needed. This avoids changing application client
+theming or trying to reconstruct an unknown previous theme association.
+
+Static residue has a separately reproduced cause: forwarding WM_NCACTIVATE
+through the host default procedure with lParam=-1 still contaminated the
+custom client top in r066. Removing that forwarding alone eliminates all
+3,304 non-white pixels in the same 144-DPI fixture (r067). The renderer now
+owns normal activation painting and returns TRUE to allow deactivation;
+minimized windows continue downstream, as required by Microsoft's
+[WM_NCACTIVATE contract](https://learn.microsoft.com/en-us/windows/win32/winmsg/wm-ncactivate).
+WM_ACTIVATE, focus, system commands and client painting are not intercepted.
+No frame height, global setting or theme association changes are involved.

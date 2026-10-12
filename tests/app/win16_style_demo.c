@@ -15,10 +15,17 @@ static const WCHAR *capture_path;
 static int live;
 static HWND menu_probe;
 static unsigned menu_entries,close_commands;
+static HWND cursor_probe;
+static unsigned client_cursor_calls;
+static unsigned native_ncactivate_calls;
 void win16_style_gallery_run(void);
 void win16_style_gallery_test(const WCHAR *path);
 static LRESULT CALLBACK window_proc(HWND w,UINT m,WPARAM a,LPARAM b)
 {
+    if(w==cursor_probe && m==WM_NCACTIVATE)++native_ncactivate_calls;
+    if(w==cursor_probe && m==WM_SETCURSOR && LOWORD(b)==HTCLIENT){
+        ++client_cursor_calls;SetCursor(LoadCursorW(NULL,IDC_IBEAM));return TRUE;
+    }
     if(w==menu_probe){
         if(m==WM_SYSCOMMAND && (a&0xfff0)==SC_MOUSEMENU)++menu_entries;
         if(m==WM_SYSCOMMAND && (a&0xfff0)==SC_CLOSE)++close_commands;
@@ -300,6 +307,92 @@ static void menu_tests(void)
     menu_probe=NULL;
 }
 
+static void nonclient_surface_probe(void)
+{
+    HWND w=make_window(WS_OVERLAPPEDWINDOW,0,L"Non-client repaint probe",20,20,TRUE);
+    RECT r,client;win16_style_layout l;HDC dc=CreateCompatibleDC(NULL),source;
+    BITMAPINFO bi={0};HBITMAP bm,old;void *pixels;DWORD *baseline;int width,height=80,i;
+    const int hits[]={HTMINBUTTON,HTMAXBUTTON,HTCAPTION};
+    static const struct {int hit;LPCWSTR cursor;} cursors[]={
+        {HTCAPTION,IDC_ARROW},{HTSYSMENU,IDC_ARROW},{HTMINBUTTON,IDC_ARROW},{HTMAXBUTTON,IDC_ARROW},
+        {HTLEFT,IDC_SIZEWE},{HTRIGHT,IDC_SIZEWE},{HTTOP,IDC_SIZENS},{HTBOTTOM,IDC_SIZENS},
+        {HTTOPLEFT,IDC_SIZENWSE},{HTBOTTOMRIGHT,IDC_SIZENWSE},
+        {HTTOPRIGHT,IDC_SIZENESW},{HTBOTTOMLEFT,IDC_SIZENESW}};
+    GetWindowRect(w,&r);width=r.right-r.left;
+    CHECK(win16_style_measure(width,r.bottom-r.top,GetDpiForWindow(w),WS_OVERLAPPEDWINDOW,0,FALSE,&l));
+    client_rect(w,&client);OffsetRect(&client,-r.left,-r.top);
+    printf("NC CLIENT actual=%ld,%ld,%ld,%ld layout=%ld,%ld,%ld,%ld dpi=%u\n",
+        client.left,client.top,client.right,client.bottom,l.client.left,l.client.top,
+        l.client.right,l.client.bottom,GetDpiForWindow(w));
+    bi.bmiHeader.biSize=sizeof(BITMAPINFOHEADER);bi.bmiHeader.biWidth=width;bi.bmiHeader.biHeight=-height;
+    bi.bmiHeader.biPlanes=1;bi.bmiHeader.biBitCount=32;
+    bm=CreateDIBSection(dc,&bi,DIB_RGB_COLORS,&pixels,NULL,0);CHECK(bm);old=SelectObject(dc,bm);
+    baseline=malloc((size_t)width*height*4);CHECK(baseline);
+    SetActiveWindow(w);RedrawWindow(w,NULL,NULL,RDW_FRAME|RDW_INVALIDATE|RDW_UPDATENOW);pump();
+    /* The private desktop is not the input desktop: establish the tested
+     * active presentation explicitly, including before the activation cycle. */
+    SendMessageW(w,WM_NCACTIVATE,TRUE,0);
+    for(i=0;i<9;++i){
+        int n,changed=0,changed_inside=0,nonblack=0;WCHAR path[MAX_PATH];HANDLE out;DWORD written;BITMAPFILEHEADER fh={0};
+        if(i>0 && i<4){RECT b=hits[i-1]==HTMINBUTTON?l.minimize:hits[i-1]==HTMAXBUTTON?l.maximize:l.title;
+            /* Physical movement reaches WM_SETCURSOR before NC mouse input.
+             * Sending only WM_NCMOUSEMOVE missed the native redraw route. */
+            CHECK(SendMessageW(w,WM_SETCURSOR,(WPARAM)w,MAKELPARAM(hits[i-1],WM_MOUSEMOVE))==TRUE);
+            SendMessageW(w,WM_NCMOUSEMOVE,hits[i-1],MAKELPARAM(r.left+(b.left+b.right)/2,r.top+(b.top+b.bottom)/2));
+            SendMessageW(w,WM_NCMOUSEHOVER,hits[i-1],MAKELPARAM(r.left+(b.left+b.right)/2,r.top+(b.top+b.bottom)/2));
+            SendMessageW(w,WM_NCMOUSELEAVE,0,0);pump();}
+        if(i==4)CHECK(SetWindowTextW(w,L"Non-client repaint probe"));
+        if(i==5)SendMessageW(w,WM_SETICON,ICON_SMALL,(LPARAM)LoadIconW(NULL,IDI_APPLICATION));
+        if(i==6){SendMessageW(w,WM_NCACTIVATE,FALSE,0);SendMessageW(w,WM_NCACTIVATE,TRUE,0);}
+        if(i==7)SendMessageW(w,WM_THEMECHANGED,0,0);
+        if(i==8){
+            ShowWindow(w,SW_MINIMIZE);pump();CHECK(IsIconic(w));
+            cursor_probe=w;native_ncactivate_calls=0;
+            SendMessageW(w,WM_NCACTIVATE,TRUE,0);CHECK(native_ncactivate_calls==1);
+            cursor_probe=NULL;
+            ShowWindow(w,SW_RESTORE);pump();CHECK(!IsIconic(w));
+            SendMessageW(w,WM_NCACTIVATE,TRUE,0);
+        }
+        source=GetWindowDC(w);CHECK(source);CHECK(BitBlt(dc,0,0,width,height,source,0,0,SRCCOPY));ReleaseDC(w,source);GdiFlush();
+        if(!i)memcpy(baseline,pixels,(size_t)width*height*4);
+        for(n=0;n<width*height;++n){DWORD c=((DWORD *)pixels)[n]&0xffffff;
+            if(c)++nonblack;if(c!=(baseline[n]&0xffffff)){
+                if(changed<8)printf("NC PIXEL step=%d x=%d y=%d before=%06lx after=%06lx\n",
+                    i,n%width,n/width,baseline[n]&0xffffff,c);
+                if(n%width>=l.border && n%width<width-l.border && n/width>=l.border)++changed_inside;
+                ++changed;}}
+        printf("NC SURFACE step=%d nonblack=%d changed=%d\n",i,nonblack,changed);
+        CHECK(nonblack>width*height/2);
+        CHECK(swprintf_s(path,MAX_PATH,L"%ls-nc-%d.bmp",capture_path,i)>0);
+        fh.bfType=0x4d42;fh.bfOffBits=sizeof(fh)+sizeof(bi.bmiHeader);fh.bfSize=fh.bfOffBits+(DWORD)(width*height*4);
+        out=CreateFileW(path,GENERIC_WRITE,0,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);CHECK(out!=INVALID_HANDLE_VALUE);
+        CHECK(WriteFile(out,&fh,sizeof(fh),&written,NULL));CHECK(WriteFile(out,&bi.bmiHeader,sizeof(bi.bmiHeader),&written,NULL));
+        CHECK(WriteFile(out,pixels,(DWORD)(width*height*4),&written,NULL));CloseHandle(out);
+        {int x,y,dirty=0;
+            for(y=client.top;y<min(client.top+12,height);++y)
+                for(x=client.left;x<client.right;++x)
+                    if((((DWORD *)pixels)[y*width+x]&0xffffff)!=0xffffff)++dirty;
+            printf("NC CLIENT strip dirty=%d step=%d\n",dirty,i);
+            CHECK(dirty==0);
+        }
+        /* Native restore can change the two outermost clipped corner pixels.
+         * Keep the full equality assertion for non-geometry events; after
+         * restore require identical caption/buttons/client, excluding only
+         * the outer frame band. Client-white checks remain unconditional. */
+        if(i==8)CHECK(changed_inside==0);else CHECK(changed==0);
+    }
+    SendMessageW(w,WM_NCMOUSELEAVE,0,0);
+    cursor_probe=w;client_cursor_calls=0;
+    CHECK(SendMessageW(w,WM_SETCURSOR,(WPARAM)w,MAKELPARAM(HTCLIENT,WM_MOUSEMOVE))==TRUE);
+    CHECK(client_cursor_calls==1);CHECK(GetCursor()==LoadCursorW(NULL,IDC_IBEAM));
+    for(i=0;i<(int)(sizeof(cursors)/sizeof(cursors[0]));++i){
+        CHECK(SendMessageW(w,WM_SETCURSOR,(WPARAM)w,MAKELPARAM(cursors[i].hit,WM_MOUSEMOVE))==TRUE);
+        CHECK(GetCursor()==LoadCursorW(NULL,cursors[i].cursor));
+    }
+    CHECK(client_cursor_calls==1);cursor_probe=NULL;
+    free(baseline);SelectObject(dc,old);DeleteObject(bm);DeleteDC(dc);CHECK(DestroyWindow(w));
+}
+
 static void font_probe(void)
 {
     HDC dc=CreateCompatibleDC(NULL);int height;
@@ -393,6 +486,7 @@ int wmain(int argc,WCHAR **argv)
     }
     oem_window_tests(w[0]);
     menu_tests();
+    nonclient_surface_probe();
     win16_style_gallery_test(argv[2]);
     button_test(w[0],HTMAXBUTTON,SC_MAXIMIZE);
     button_test(w[1],HTMINBUTTON,SC_MINIMIZE);
