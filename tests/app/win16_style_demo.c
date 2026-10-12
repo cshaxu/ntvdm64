@@ -227,8 +227,8 @@ static void title_clip_test(void)
     a=CreateCompatibleBitmap(actual,logical_width,20);b=CreateCompatibleBitmap(actual,width,height);
     CHECK(a && b);old_a=SelectObject(base,a);old_b=SelectObject(expected,b);
     SetRect(&logical,0,0,logical_width,20);FillRect(base,&logical,(HBRUSH)GetStockObject(WHITE_BRUSH));
-    font=CreateFontW(16,0,0,0,FW_BOLD,FALSE,FALSE,FALSE,ANSI_CHARSET,OUT_RASTER_PRECIS,
-        CLIP_DEFAULT_PRECIS,NONANTIALIASED_QUALITY,DEFAULT_PITCH,L"Win31 VGA System");
+    font=CreateFontW(16,0,0,0,FW_BOLD,FALSE,FALSE,FALSE,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,
+        CLIP_DEFAULT_PRECIS,NONANTIALIASED_QUALITY,DEFAULT_PITCH,L"System");
     CHECK(font);SelectObject(base,font);SetBkMode(base,TRANSPARENT);SetTextColor(base,RGB(0,0,0));
     /* Oracle: a deliberately overflowing stream of original W glyphs starts
      * one logical pixel inside the left edge. No fitting/ellipsis algorithm.
@@ -462,7 +462,21 @@ static void menu_tests(void)
             GET_X_LPARAM(p),GET_Y_LPARAM(p));fflush(stdout);}
     /* Enter the real native menu loop and cancel on idle, without input
      * injection. A generic TrackPopupMenu loop bypasses SC_MOUSEMENU. */
+    if(variant){
+        SendMessageW(menu_probe,WM_NCLBUTTONDOWN,HTSYSMENU,p);
+        CHECK(GetCapture()==menu_probe);menu_pixels(menu_probe,TRUE);
+        SendMessageW(menu_probe,WM_CANCELMODE,0,0);pump();
+        CHECK(GetCapture()!=menu_probe);CHECK(key_menu_entries==0);
+        menu_pixels(menu_probe,FALSE);
+    }
     SendMessageW(menu_probe,WM_NCLBUTTONDOWN,HTSYSMENU,p);
+    if(variant){
+        POINT release={GET_X_LPARAM(p),GET_Y_LPARAM(p)};
+        CHECK(GetCapture()==menu_probe);CHECK(menu_popups==0);CHECK(key_menu_entries==0);
+        CHECK(ScreenToClient(menu_probe,&release));
+        SendMessageW(menu_probe,WM_LBUTTONUP,0,MAKELPARAM(release.x,release.y));
+        CHECK(GetCapture()!=menu_probe);pump();
+    }
     printf("MENU variant=%d mouse_commands=%u popups=%u\n",variant,menu_entries,menu_popups);fflush(stdout);
     CHECK(menu_entries+key_menu_entries==1);CHECK(IsWindow(menu_probe));
     if(variant)CHECK(key_menu_entries==1);

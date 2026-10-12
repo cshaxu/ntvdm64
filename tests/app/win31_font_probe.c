@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "win16-style/system_font.h"
 
 static int glyph_test(BYTE *original)
 {
@@ -49,7 +48,6 @@ int wmain(int argc,wchar_t **argv)
     data=(BYTE *)malloc(size);
     if(!data || !ReadFile(file,data,size,&got,NULL) || got!=size){free(data);CloseHandle(file);return 5;}
     CloseHandle(file);
-    if(sizeof(style_system_font)!=5441 || memcmp(data+1344,style_system_font,5441)){free(data);return 9;}
     /* Exact source identity is pinned by the runner. RT_FONT #31 starts at
      * 1344, dfSize=5441; NE resource size includes alignment padding. */
     font=AddFontMemResourceEx(data,size,NULL,&count);

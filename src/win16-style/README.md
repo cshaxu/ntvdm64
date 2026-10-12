@@ -2,7 +2,7 @@
 
 Project-authored same-thread static library with owner-approved original VGA
 button pixels embedded locally; see [resource provenance](resources.md).
-The original VGA System font is also embedded and loaded privately from memory;
+The title uses the host System font by owner-approved visual exception;
 no guest/mirror executable code is imported. S1's source ladder rejects
 NTUSER server composition at the existing private server boundary; this is the
 owner-admitted local presentation feature, not an NTUSER implementation.
@@ -35,7 +35,8 @@ Consumers must not introduce those unsupported forms while attached. Native
 system popup menus remain native; later stages own menu/MDI integration.
 System-menu tracking remains native, not a separate TrackPopupMenu loop.
 If the host reports an empty native system-button rectangle (modern dialog
-frames), our button enters the system menu through SC_KEYMENU/space.
+frames), our button enters the system menu through SC_KEYMENU/space after
+release inside its rectangle, using existing capture/cancellation tracking.
 Double-click commands retain native disabled-close semantics without a local
 timer. Physical second-click routing while that menu is open still requires
 acceptance; message-level close tests do not establish it.
@@ -49,9 +50,9 @@ This is not a creation/Hook adapter or real title-prefix implementation.
 
 The supplied reference palette is a preset, not a universal Win3.1 default.
 High contrast reads host colors; no global settings are written. Caption
-System font is rendered at its original 16-pixel base strike then scaled to
-window DPI, avoiding GDI's discrete-strike substitution. A private face alias
-selects the embedded original, not a host-supplied font with the same name.
+System font is requested at a 16-pixel base size then scaled to window DPI.
+No original font is embedded, privately registered, or installed. Exact face
+and glyph realization belong to the host and are not original-pixel guarantees.
 The owner-approved typography candidate keeps the earlier 20-row text canvas
 and clips its scaled result into the corrected 18-row caption. This preserves
 the earlier vertical scaling phase without enlarging buttons or the frame;

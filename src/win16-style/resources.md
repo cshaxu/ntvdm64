@@ -38,6 +38,10 @@ masked by resource reuse.
 
 ## Original title font
 
+Historical provenance only: the owner subsequently selected the host System
+font. The embedded header and private memory-font lifecycle have been removed.
+The paragraphs below describe the prior composition, not current dependencies.
+
 `system_font.h` contains the byte-exact 5,441-byte RT_FONT #31 at file offset
 1,344 in owner-supplied `O:/w31/SYSTEM/VGASYS.FON` (7,280 bytes), SHA-256
 `7BAEFA14EF8EF2355374D0B5061043DD5F4F8C33FF57680366E4A725F91646F8`.

@@ -630,3 +630,21 @@ The new assertion/instrumentation is removed; its failed logs remain under
 those build roots. No product workaround is added from that result. Physical
 second-click tracking stays unverified; the previous popup and separate
 double-click/disabled-close checks retain their narrower meaning.
+
+## Host font and release-triggered dialog menu
+
+Owner explicitly selects host System font and reports gallery 12's menu
+vanishes on button release. Remove system_font.h and the private memory-font
+registration/lifetime, retaining the 16-pixel host System request and existing
+title raster sizing. Historical original-font probe remains a standalone
+optional research tool, not a renderer font source; it no longer compares an
+embedded header. No original font is linked into the demo.
+
+The prior candidate invoked keyboard-menu tracking during mouse-down. The
+repair reuses existing pressed/hot/capture state: display selected system box
+while pressed, cancel on capture loss, and post SC_KEYMENU/space only after
+release inside the button. No timer or global mouse hook is added. r099 passes
+25,906 checks per width and actual dialog popup probes after the explicit
+release sequence. r100 adds selected-pixel and cancel-without-opening negatives.
+These probes do not synthesize physical input; owner must confirm the menu
+remains open after an actual click and the physical second-click behavior.

@@ -121,8 +121,10 @@ Owner's gallery-12 menu report has a repair verified in r093: both widths
 pass 25,896 private-desktop checks and separate input-desktop menu probes
 observe actual dialog popups and selected pixels. Missing native icon geometry
 uses the system keyboard-menu entry; system popup classification no longer
-requires an incorrect handle identity. Physical menu double-click tracking and
-owner-requested title-font rollback remain pending; this is not S3 closure.
+requires an incorrect handle identity. Owner then selected host System font;
+the embedded font is removed. Follow-up defers dialog menu entry until button
+release, addressing the owner's release-dismissal report. Physical menu
+tracking/appearance acceptance remains pending; this is not S3 closure.
 
 ## T444 Final Disposition
 

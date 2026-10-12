@@ -4,7 +4,6 @@
 #include "win16_style.h"
 #include "layout.h"
 #include "frame_buttons.h"
-#include "system_font.h"
 #include <commctrl.h>
 #include <dwmapi.h>
 #include <windowsx.h>
@@ -14,7 +13,6 @@
 typedef struct style_window {
     win16_style_palette palette;
     HFONT font;
-    HANDLE font_resource;
     UINT dpi, calls;
     BOOL active, detached, hot, system_menu;
     int pressed;
@@ -186,7 +184,7 @@ static void paint(HWND w,style_window *s,HDC target)
     }
     fill(dc,l.caption,s->active?p.active:p.inactive);
     r=l.caption;r.top=r.bottom;r.bottom+=l.unit;fill(dc,r,p.edge);
-    button(dc,l.system,HTSYSMENU,s->system_menu,FALSE,l.unit,&p);
+    button(dc,l.system,HTSYSMENU,s->system_menu||(s->pressed==HTSYSMENU&&s->hot),FALSE,l.unit,&p);
     button(dc,l.minimize,HTMINBUTTON,s->pressed==HTMINBUTTON&&s->hot,FALSE,l.unit,&p);
     button(dc,l.maximize,HTMAXBUTTON,s->pressed==HTMAXBUTTON&&s->hot,IsZoomed(w),l.unit,&p);
     len=GetWindowTextLengthW(w);
@@ -234,25 +232,10 @@ static void paint(HWND w,style_window *s,HDC target)
 static BOOL refresh_font(HWND w,style_window *s)
 {
     HFONT font;
-    /* A private face alias prevents GDI selecting the host's same-named
-     * System font. Only size/face metadata in this temporary copy changes;
-     * original widths, bitmaps and copyright remain unchanged. */
-    if(!s->font_resource){
-        static const char face[]="Win31 VGA System";
-        DWORD size=(DWORD)sizeof(style_system_font)+sizeof(face);
-        DWORD offset=(DWORD)sizeof(style_system_font),count=0;
-        BYTE *copy=(BYTE *)malloc(size);
-        if(!copy)return FALSE;
-        memcpy(copy,style_system_font,sizeof(style_system_font));
-        memcpy(copy+offset,face,sizeof(face));
-        memcpy(copy+2,&size,sizeof(size));memcpy(copy+105,&offset,sizeof(offset));
-        s->font_resource=AddFontMemResourceEx(copy,size,NULL,&count);free(copy);
-        if(!s->font_resource)return FALSE;
-    }
     s->dpi=GetDpiForWindow(w);if(!s->dpi)s->dpi=96;
     font=CreateFontW(16,0,0,0,FW_BOLD,FALSE,FALSE,FALSE,
-        ANSI_CHARSET,OUT_RASTER_PRECIS,CLIP_DEFAULT_PRECIS,NONANTIALIASED_QUALITY,
-        DEFAULT_PITCH,L"Win31 VGA System");
+        DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,NONANTIALIASED_QUALITY,
+        DEFAULT_PITCH,L"System");
     if(font){if(s->font)DeleteObject(s->font);s->font=font;}
     return font!=NULL;
 }
@@ -281,7 +264,6 @@ static void restore_client(HWND w,const RECT *wanted)
 static void dispose(style_window *s)
 {
     if(s->font)DeleteObject(s->font);
-    if(s->font_resource)RemoveFontMemResourceEx(s->font_resource);
     free(s);
 }
 
@@ -418,7 +400,9 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
              * icon rectangle. Their native mouse-menu entry has no button
              * to track; use the same system-menu entry as Alt+Space. */
             if(GetMenuBarInfo(w,OBJID_SYSMENU,0,&menu) && IsRectEmpty(&menu.rcBar)){
-                result=SendMessageW(w,WM_SYSCOMMAND,SC_KEYMENU,L' ');break;
+                /* Do not enter a keyboard menu with the mouse still down:
+                 * its subsequent release would immediately dismiss it. */
+                s->pressed=HTSYSMENU;s->hot=TRUE;SetCapture(w);paint(w,s,NULL);break;
             }
         }
         /* Native system-menu tracking owns the second click, cancellation
@@ -437,8 +421,9 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
             s->hot=win16_style_hit(&l,point)==pressed;
             if(msg==WM_LBUTTONUP){
                 BOOL invoke=s->hot;s->pressed=0;ReleaseCapture();
-                if(invoke)PostMessageW(w,WM_SYSCOMMAND,pressed==HTMINBUTTON?SC_MINIMIZE:
-                    (IsZoomed(w)?SC_RESTORE:SC_MAXIMIZE),0);
+                if(invoke)PostMessageW(w,WM_SYSCOMMAND,pressed==HTSYSMENU?SC_KEYMENU:
+                    pressed==HTMINBUTTON?SC_MINIMIZE:(IsZoomed(w)?SC_RESTORE:SC_MAXIMIZE),
+                    pressed==HTSYSMENU?L' ':0);
             }
             paint(w,s,NULL);break;
         }
