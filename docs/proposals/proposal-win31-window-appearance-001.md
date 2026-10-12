@@ -101,14 +101,21 @@ not assume that a process-creation hook already covers window creation.
 - Unmanaged/unsupported HWNDs retain native appearance rather than receiving
   a filename-, class-, or process-name-based special case.
 
-## Proposed sequence
+## Opt-in and delivery boundary
 
-| S | Deliverable and stop condition |
-| --- | --- |
-| S1 | Ownership and API audit for one representative Win16, Win32 and Win64 window program.  Record the exact visible-frame owner and all title/activation/resize/destruction edges.  Stop for design review if one family has no authenticated project presentation boundary. |
-| S2 | Define the shared Windows 3.1 metrics, palette, non-client state and DPI/accessibility policy at the proven owner boundary.  Add focused rendering/state tests before changing live target behavior. |
-| S3 | Connect the same appearance implementation through direct WOW-host installation and matching native nthook installation, preserving client input, title propagation, system commands, native-window fallback and existing lifecycle. |
-| S4 | Run focused Win16/Win32/Win64 appearance and interaction tests, then serial Console/Window product regressions.  Compare direct-native behavior separately so this package does not claim to restyle applications outside `run16` ownership. |
+Owner-approved entrypoints are `run16 --win16-window-style` (Win16 windows
+only) and `run16 --win16-window-style-all` (Win16/Win32/Win64 windows).
+Both propagate along controlled launch chains, including through a native
+intermediate that does not itself render the Win16-only style. Unrelated tasks
+in a shared WOW worker must remain unaffected. Default non-inherited launches
+retain native appearance.
+
+Policy/propagation is delivered and verified first through a visible
+`(Win16 Style) ` title prefix on enabled windows. This is an enablement witness,
+not proof of retro rendering. Actual classic rendering follows only after
+that boundary is proven. The admitted package's multi-S sequence and acceptance
+matrix live in the [working plan](../etc/operations/t445-win31-window-style-plan.md);
+[Current Work](../states/CURRENT.md) alone admits the next stage.
 
 ## Acceptance
 
