@@ -1,7 +1,7 @@
 #include "layout.h"
 #include <string.h>
 
-BOOL win16_style_measure(int width,int height,UINT dpi,DWORD style,
+BOOL win16_style_measure(int width,int height,UINT dpi,DWORD style,DWORD ex_style,
     BOOL maximized,win16_style_layout *l)
 {
     int top,button,right;
@@ -10,7 +10,8 @@ BOOL win16_style_measure(int width,int height,UINT dpi,DWORD style,
     memset(l,0,sizeof(*l));
     l->unit=max(1,(int)dpi/96);
     l->sizeable=(style&WS_THICKFRAME)!=0 && !maximized;
-    l->border=MulDiv(l->sizeable?4:3,(int)dpi,96);
+    l->dialog_frame=(ex_style&WS_EX_DLGMODALFRAME)!=0;
+    l->border=MulDiv(l->dialog_frame?6:l->sizeable?4:3,(int)dpi,96);
     top=l->border;button=MulDiv(20,(int)dpi,96);
     SetRect(&l->outer,0,0,width,height);
     SetRect(&l->caption,l->border,top,max(l->border,width-l->border),top+button);

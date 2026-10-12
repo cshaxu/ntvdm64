@@ -19,7 +19,10 @@ Repeated installation fails with ERROR_ALREADY_EXISTS; unsupported frame forms
 fail with ERROR_NOT_SUPPORTED and remain native.
 
 The S3 profile accepts captioned top-level ordinary, minimize-only and dialog-
-style windows. Initial menus, child/MDI, scrollbars, client-edge/tool/layered
+style windows. WS_EX_DLGMODALFRAME explicitly selects the wider caption-colored
+dialog border and light inner outline; no title or button-absence heuristic is
+used. WS_DLGFRAME alone cannot distinguish this because WS_CAPTION includes it.
+Initial menus, child/MDI, scrollbars, client-edge/tool/layered
 windows and minimized/maximized installation are deliberately unsupported.
 Consumers must not introduce those unsupported forms while attached. Native
 system popup menus remain native; later stages own menu/MDI integration.

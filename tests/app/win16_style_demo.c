@@ -49,9 +49,9 @@ static void client_rect(HWND w,RECT *r)
     POINT p={0,0};GetClientRect(w,r);ClientToScreen(w,&p);OffsetRect(r,p.x,p.y);
 }
 
-static HWND make_window(DWORD style,const WCHAR *title,int x,int y,BOOL styled)
+static HWND make_window(DWORD style,DWORD ex_style,const WCHAR *title,int x,int y,BOOL styled)
 {
-    HWND w=CreateWindowExW(0,L"Win16StyleTrial",title,style,x,y,430,240,NULL,NULL,
+    HWND w=CreateWindowExW(ex_style,L"Win16StyleTrial",title,style,x,y,430,240,NULL,NULL,
         GetModuleHandleW(NULL),NULL);
     RECT before,after;
     CHECK(w!=NULL);++live;
@@ -84,19 +84,21 @@ static void capture(HWND *windows,const WCHAR *path,BOOL pressed)
             int bright=max(1,MulDiv(1,(int)dpi,96));
             int shade=max(1,MulDiv(2,(int)dpi,96));
             CHECK(win16_style_measure(w,h,dpi,
-                (DWORD)GetWindowLongPtr(windows[i],GWL_STYLE),FALSE,&l));
+                (DWORD)GetWindowLongPtr(windows[i],GWL_STYLE),
+                (DWORD)GetWindowLongPtr(windows[i],GWL_EXSTYLE),FALSE,&l));
             b=l.maximize;
             CHECK(GetPixel(part,b.left+l.unit,b.top+l.unit+bright+1)==
                 (pressed?RGB(128,128,128):RGB(255,255,255)));
             CHECK(GetPixel(part,(b.left+b.right)/2,b.bottom-l.unit-shade)==
-                (pressed?RGB(255,255,255):RGB(128,128,128)));
+                (pressed?RGB(192,192,192):RGB(128,128,128)));
         }
         if(i==1){
             win16_style_layout l;RECT b;UINT dpi=GetDpiForWindow(windows[i]);
             int bright=max(1,MulDiv(1,(int)dpi,96));
             int shade=max(1,MulDiv(2,(int)dpi,96));
             CHECK(win16_style_measure(w,h,dpi,
-                (DWORD)GetWindowLongPtr(windows[i],GWL_STYLE),FALSE,&l));
+                (DWORD)GetWindowLongPtr(windows[i],GWL_STYLE),
+                (DWORD)GetWindowLongPtr(windows[i],GWL_EXSTYLE),FALSE,&l));
             CHECK(GetPixel(part,l.unit,l.client.top+8)==RGB(192,192,192));
             /* Verify actual painted layers, not just geometry. These are
              * the reference-derived flat control box and asymmetric button
@@ -108,6 +110,16 @@ static void capture(HWND *windows,const WCHAR *path,BOOL pressed)
             CHECK(GetPixel(part,b.left+l.unit+bright,b.top+l.unit+bright)==RGB(192,192,192));
             CHECK(GetPixel(part,(b.left+b.right)/2,b.bottom-l.unit-shade)==RGB(128,128,128));
             CHECK(GetPixel(part,(b.left+b.right)/2,b.bottom-l.unit-shade-1)==RGB(192,192,192));
+        }
+        if(i==2){
+            win16_style_layout l;
+            CHECK(win16_style_measure(w,h,GetDpiForWindow(windows[i]),
+                (DWORD)GetWindowLongPtr(windows[i],GWL_STYLE),
+                (DWORD)GetWindowLongPtr(windows[i],GWL_EXSTYLE),FALSE,&l));
+            CHECK(l.dialog_frame);
+            CHECK(GetPixel(part,0,l.client.top+8)==RGB(0,0,0));
+            CHECK(GetPixel(part,l.unit,l.client.top+8)==RGB(164,200,240));
+            CHECK(GetPixel(part,l.border-l.unit,l.client.top+8)==RGB(255,255,255));
         }
         CHECK(BitBlt(dc,30+(i%2)*490,30+(i/2)*310,w,h,part,0,0,SRCCOPY));
         SelectObject(part,prior);DeleteObject(shot);
@@ -130,14 +142,15 @@ static void layout_tests(void)
     size_t i;
     for(dpi=96;dpi<=192;dpi+=48)for(i=0;i<3;++i){
         win16_style_layout l;POINT p;
-        CHECK(win16_style_measure(600,400,dpi,kinds[i],FALSE,&l));
+        CHECK(win16_style_measure(600,400,dpi,kinds[i],i==2?WS_EX_DLGMODALFRAME:0,FALSE,&l));
+        CHECK(l.dialog_frame==(i==2));
         p.x=l.system.left+2;p.y=l.system.top+2;CHECK(win16_style_hit(&l,p)==HTSYSMENU);
         p.x=l.title.left+2;CHECK(win16_style_hit(&l,p)==HTCAPTION);
         p.x=l.client.left+20;p.y=l.client.top+20;CHECK(win16_style_hit(&l,p)==HTCLIENT);
         CHECK(IsRectEmpty(&l.maximize)==(i!=0));CHECK(IsRectEmpty(&l.minimize)==(i==2));
         if(i==0){p.x=0;p.y=0;CHECK(win16_style_hit(&l,p)==HTTOPLEFT);}
     }
-    CHECK(!win16_style_measure(0,400,96,WS_OVERLAPPEDWINDOW,FALSE,NULL));
+    CHECK(!win16_style_measure(0,400,96,WS_OVERLAPPEDWINDOW,0,FALSE,NULL));
 }
 
 static void font_probe(void)
@@ -161,7 +174,8 @@ static void button_test(HWND w,int hit,UINT command)
     win16_style_layout l;RECT outer,button;POINT p;LPARAM screen,client;
     CHECK(GetWindowRect(w,&outer));
     CHECK(win16_style_measure(outer.right-outer.left,outer.bottom-outer.top,
-        GetDpiForWindow(w),(DWORD)GetWindowLongPtr(w,GWL_STYLE),FALSE,&l));
+        GetDpiForWindow(w),(DWORD)GetWindowLongPtr(w,GWL_STYLE),
+        (DWORD)GetWindowLongPtr(w,GWL_EXSTYLE),FALSE,&l));
     button=hit==HTMAXBUTTON?l.maximize:l.minimize;
     p.x=outer.left+(button.left+button.right)/2;
     p.y=outer.top+(button.top+button.bottom)/2;
@@ -194,10 +208,10 @@ int wmain(int argc,WCHAR **argv)
     cls.style=CS_DBLCLKS;CHECK(RegisterClassW(&cls)!=0);
     layout_tests();
     font_probe();
-    w[0]=make_window(WS_OVERLAPPEDWINDOW,L"Program Manager",60,60,TRUE);
-    w[1]=make_window(WS_CAPTION|WS_SYSMENU|WS_MINIMIZEBOX,L"Control Panel",550,60,TRUE);
-    w[2]=make_window(WS_CAPTION|WS_SYSMENU|WS_DLGFRAME,L"Color",60,380,TRUE);
-    w[3]=make_window(WS_OVERLAPPEDWINDOW,L"Native Windows — comparison",550,380,FALSE);
+    w[0]=make_window(WS_OVERLAPPEDWINDOW,0,L"Program Manager",60,60,TRUE);
+    w[1]=make_window(WS_CAPTION|WS_SYSMENU|WS_MINIMIZEBOX,0,L"Control Panel",550,60,TRUE);
+    w[2]=make_window(WS_CAPTION|WS_SYSMENU,WS_EX_DLGMODALFRAME,L"Color",60,380,TRUE);
+    w[3]=make_window(WS_OVERLAPPEDWINDOW,0,L"Native Windows — comparison",550,380,FALSE);
     pump();
     if(!testing){
         SetForegroundWindow(w[0]);
@@ -213,7 +227,8 @@ int wmain(int argc,WCHAR **argv)
         win16_style_layout l;RECT r;POINT p;WCHAR path[MAX_PATH];
         CHECK(GetWindowRect(w[0],&r));
         CHECK(win16_style_measure(r.right-r.left,r.bottom-r.top,GetDpiForWindow(w[0]),
-            (DWORD)GetWindowLongPtr(w[0],GWL_STYLE),FALSE,&l));
+            (DWORD)GetWindowLongPtr(w[0],GWL_STYLE),
+            (DWORD)GetWindowLongPtr(w[0],GWL_EXSTYLE),FALSE,&l));
         p.x=r.left+(l.maximize.left+l.maximize.right)/2;
         p.y=r.top+(l.maximize.top+l.maximize.bottom)/2;
         SendMessageW(w[0],WM_NCLBUTTONDOWN,HTMAXBUTTON,MAKELPARAM(p.x,p.y));
@@ -246,7 +261,7 @@ int wmain(int argc,WCHAR **argv)
         CHECK(win16_style_install(w[0],NULL));}
     pump();GdiFlush();initial_gdi=GetGuiResources(GetCurrentProcess(),GR_GDIOBJECTS);
     for(i=0;i<80;++i){
-        HWND temp=make_window(WS_OVERLAPPEDWINDOW,L"Lifetime",0,0,TRUE);
+        HWND temp=make_window(WS_OVERLAPPEDWINDOW,0,L"Lifetime",0,0,TRUE);
         CHECK(win16_style_remove(temp));CHECK(win16_style_install(temp,NULL));
         CHECK(DestroyWindow(temp));
         pump();GdiFlush();

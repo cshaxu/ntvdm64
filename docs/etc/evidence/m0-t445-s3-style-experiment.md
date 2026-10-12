@@ -70,7 +70,7 @@ The reference is S1 r002 owner-control-panel.png. Region-based measurements:
   not a zero-error pixel-identity claim. Do not reproduce screenshot blur as
   guest behavior or declare the font asset identical.
 
-Latest owned-window captures are r020/x86/capture.png and x64/capture.png,
+Latest owned-window captures are r030/x86/capture.png and x64/capture.png,
 plus capture.bmp-pressed.png and capture.bmp-canceled.png for both widths.
 The pixel comparison uses explicit known capture rectangles, preserving
 aspect ratio; it does not assert whole-window similarity between different
@@ -103,6 +103,21 @@ capture ownership and absence of an unintended maximize command are checked.
 Both x86/x64 pass 920 checks, with attachment counts 51 to 51. These are local
 message-driven gestures on owned HWNDs, not physical desktop interaction.
 
+### Dialog-frame correction
+
+The supplied codex-clipboard-c576f52b-032e-42e4-a19b-7829be582fd8.png
+Color dialog has a dark outer edge, caption-colored band and white inner edge.
+At y=180, x=91 is 070707, x=93..97 is A4C8F0, x=98 is D1E3F7 and
+x=99 onward is FFFFFF. The former fixture merely ORed WS_DLGFRAME into
+WS_CAPTION, which already contains that bit: it did not establish a distinct
+dialog-frame request. The fixture now explicitly uses WS_EX_DLGMODALFRAME;
+layout carries that flag and selects a six-logical-pixel frame, while painting
+uses caption color and a light inner outline. Ordinary frames remain unchanged.
+No title/program-name or missing-button inference is used. r022 passes 944
+assertions on each width, including actual dialog-edge pixels and all prior
+normal/pressed/canceled states. Client geometry is still preserved. This
+dialog-style HWND is not evidence for later modal-creation adapter integration.
+
 The comparison script now saves raw frame scanlines and aligns title crops
 near their glyph origins; a differently positioned crop must not be mistaken
 for a title-centering defect. Font resampling and all frame variants still
@@ -110,8 +125,74 @@ need visual review; no pixel-identity or full appearance acceptance is claimed.
 
 ## Delivery and remaining acceptance
 
+### Owner-requested original binary research
+
+Owner requests read-only reverse engineering of installed Win3.1 USER/GDI
+rather than further screenshot guesses. O:/win31 is absent; the previously
+used O:/w31 tree exists. Its SYSTEM.INI selects VGA.DRV and VGASYS.FON (the
+Video 7 descriptive label is not the selected driver). No installed file was
+modified. Selected SHA-256 identities:
+
+- USER.EXE: 98036967F8396B387DA431699A9D3BE95EB56FCD0118F529E1FC2F25105EFAC6
+- GDI.EXE: 6D28146961AB4733E167B1657289206CE16A856E431F843E4EE3D504836DFB6F
+- VGA.DRV: 53312ED013BDA513C74E33659F4EE7D1B4F2B1CF1A06AED672432A8FBC4A820A
+- VGASYS.FON: 7BAEFA14EF8EF2355374D0B5061043DD5F4F8C33FF57680366E4A725F91646F8
+
+tests/observation/inspect-win31-frame-resources.ps1 decodes selected NE RT_BITMAP
+records read-only, with bounded 4-bit CORE/INFO DIB support. Background r024
+returns zero and preserves offsets/dimensions and a 4x nearest-neighbour
+research sheet. OEM names are matched against src/mvdm/wow16/inc/windows.h.
+REDUCE/ZOOM/RESTORE and their depressed variants are 19x18; CLOSE is 36x18.
+The latter contains differently sized bars, but its slicing/use is not yet
+traced. The depressed bitmaps do NOT simply swap normal highlight/shadow:
+they omit the normal white/right-bottom relief and displace the glyph. This
+contradicts the prototype's assumed symmetric pressed inversion and requires
+following the actual USER bitmap placement before the next appearance change.
+Bitmap extent alone does not determine the full caption-button slot extent.
+
+NE entry-table anchors for subsequent disassembly (not executed-call proof):
+USER DefWindowProc ordinal107 = segment1:A7FC, LoadBitmap ordinal175 =
+segment12:167E, GetSystemMetrics ordinal179 = segment1:A92D;
+GDI FastWindowFrame ordinal400 = segment1:420E; VGA FastBorder ordinal17 =
+segment1:2532. No historical bitmap, font or disassembled body is imported
+into the runtime/library. Research output remains build-only. The existing
+candidate dialog changes are independently measured and tested, not evidence
+that the entire original USER drawing algorithm has already been recovered.
+
+### Static call-chain follow-up and pressed-state repair
+
+New authored inspect-win31-ne-segment.ps1 decodes NE segment locations and
+relocation chains and invokes local ndisasm in 16-bit mode. Raw far-call
+operands are unrelocated; resolve their selector/import sites through the JSON,
+not their apparent segment numbers. r025 initially omitted module labels due
+to PowerShell integer-key types; r026 corrects that. r027's segment13 offset
+wrapped at 64 KiB because UInt16 was shifted without widening; it is INVALID
+disassembly, not evidence of guest code. r028 widens file offsets first and
+rechecks segment13 at file 124320. Resource inspection now widens too; r024's
+seven selected OEM offsets were below 64 KiB and are unaffected. No original
+file changed. The disassembler prints some shift-by-one immediates incorrectly
+(D1 E0 shown as zero); instruction bytes, not that textual immediate, govern.
+
+Static USER chain: ordinal107 stub at 1:A7FC dispatches to 1:5D4F;
+WM_NCPAINT 0x85 reaches 1:612E -> 1:572D -> relocated 13:074E;
+13:080D calls 1:9F5C for frame/caption painting. USER 3:0FB8..1015 loads
+REDUCE/ZOOM/RESTORE and depressed resources through 3:0881. That helper obtains
+BITMAP dimensions and stores width/height. Normal painting at 1:A450..A4A4
+uses GDI ordinal34 BitBlt. The tracking routine around 1:65AE selects separate
+normal/depressed sources and switches them on pointer inside/outside/release
+at 1:661D,6691,66BD,66EC. These are static decoded edges, not a runtime trace.
+
+Decoded original glyph bounds (excluding the left edge): REDUCE x6..12,y7..10;
+REDUCED x7..13,y9..12; ZOOM x6..12,y6..9; ZOOMD x7..13,y8..11. The independent
+prototype now uses the measured +1,+2 logical displacement and removes its
+incorrect depressed lower/right white bevel. No original resource/code body
+is copied into the renderer. r030 passes 944 checks on each width with actual
+normal/pressed/canceled captures and GDI attachment 51->51. Full original
+slot placement, title composition and all restore details remain open research;
+this bounded repair does not claim complete USER-algorithm reconstruction.
+
 The runnable experiment stays under build, not assets/release or system32.
 S3 remains open for owner visual/stability acceptance; S4 is not admitted.
 Final documentation/link/diff checks and unchanged ten-image identity are
-recorded in r012 and refreshed in r021. This P delivers a tested prototype, not integrated retro
+recorded in r012 and refreshed in r031. This P delivers a tested prototype, not integrated retro
 appearance or pixel-perfect Windows 3.1 compatibility.

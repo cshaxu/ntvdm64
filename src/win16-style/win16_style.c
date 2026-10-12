@@ -50,7 +50,8 @@ static BOOL layout(HWND w,style_window *s,win16_style_layout *l)
 {
     RECT r;
     return GetWindowRect(w,&r) && win16_style_measure(r.right-r.left,r.bottom-r.top,
-        s->dpi,(DWORD)GetWindowLongPtr(w,GWL_STYLE),IsZoomed(w),l);
+        s->dpi,(DWORD)GetWindowLongPtr(w,GWL_STYLE),
+        (DWORD)GetWindowLongPtr(w,GWL_EXSTYLE),IsZoomed(w),l);
 }
 
 static void colors(style_window *s,win16_style_palette *p)
@@ -84,12 +85,13 @@ static void outline(HDC dc,RECT r,int u,COLORREF c)
 static void button(HDC dc,RECT r,int kind,BOOL down,BOOL zoom,int u,UINT dpi,
     const win16_style_palette *p)
 {
-    int cx,cy,i,half,rows,offset=down?u:0;
+    int cx,cy,i,half,rows;
     RECT q;
     if(IsRectEmpty(&r))return;
     fill(dc,r,p->face);outline(dc,r,u,p->edge);
     InflateRect(&r,-u,-u);
-    cx=(r.left+r.right)/2+offset;cy=(r.top+r.bottom)/2+offset;
+    cx=(r.left+r.right)/2;cy=(r.top+r.bottom)/2;
+    if(down){cx+=max(1,MulDiv(1,(int)dpi,96));cy+=max(1,MulDiv(2,(int)dpi,96));}
     if(kind==HTSYSMENU){
         /* The original control box is flat. Its small outlined bar, not
          * the whole button, carries the lower/right relief. Measured from
@@ -110,8 +112,13 @@ static void button(HDC dc,RECT r,int kind,BOOL down,BOOL zoom,int u,UINT dpi,
         int dark=max(1,MulDiv(2,(int)dpi,96));
         q=r;q.bottom=q.top+light;fill(dc,q,down?p->shadow:p->light);
         q=r;q.right=q.left+light;fill(dc,q,down?p->shadow:p->light);
-        q=r;q.top=q.bottom-dark;fill(dc,q,down?p->light:p->shadow);
-        q=r;q.left=q.right-dark;fill(dc,q,down?p->light:p->shadow);
+        /* Original VGA depressed OEM buttons have no white lower/right
+         * bevel. USER selects a separate bitmap, not a bevel inversion.
+         * Reproduce the geometric rule without importing that resource. */
+        if(!down){
+            q=r;q.top=q.bottom-dark;fill(dc,q,p->shadow);
+            q=r;q.left=q.right-dark;fill(dc,q,p->shadow);
+        }
     }
     rows=max(3,(r.bottom-r.top+2)/5);
     for(i=0;i<rows;++i){
@@ -137,11 +144,12 @@ static void paint(HWND w,style_window *s,HDC target)
     if(!layout(w,s,&l)){if(!target)ReleaseDC(w,dc);return;}
     colors(s,&p);saved=SaveDC(dc);
     ExcludeClipRect(dc,l.client.left,l.client.top,l.client.right,l.client.bottom);
-    fill(dc,l.outer,p.face);outline(dc,l.outer,l.unit,p.edge);
+    fill(dc,l.outer,l.dialog_frame?(s->active?p.active:p.inactive):p.face);
+    outline(dc,l.outer,l.unit,p.edge);
     /* The reference frame has a grey band between two dark outlines, not
      * the white upper/left bevel used by later Windows non-client frames. */
     r=l.outer;InflateRect(&r,-l.border+l.unit,-l.border+l.unit);
-    outline(dc,r,l.unit,p.edge);
+    outline(dc,r,l.unit,l.dialog_frame?p.light:p.edge);
     fill(dc,l.caption,s->active?p.active:p.inactive);
     r=l.caption;r.top=r.bottom;r.bottom+=l.unit;fill(dc,r,p.edge);
     button(dc,l.system,HTSYSMENU,s->pressed==HTSYSMENU&&s->hot,FALSE,l.unit,s->dpi,&p);
@@ -298,7 +306,8 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
     case WM_NCCALCSIZE:
         r=wp?((NCCALCSIZE_PARAMS *)lp)->rgrc[0]:*(RECT *)lp;
         if(win16_style_measure(r.right-r.left,r.bottom-r.top,s->dpi,
-            (DWORD)GetWindowLongPtr(w,GWL_STYLE),IsZoomed(w),&l)){
+            (DWORD)GetWindowLongPtr(w,GWL_STYLE),
+            (DWORD)GetWindowLongPtr(w,GWL_EXSTYLE),IsZoomed(w),&l)){
             OffsetRect(&l.client,r.left,r.top);
             if(wp)((NCCALCSIZE_PARAMS *)lp)->rgrc[0]=l.client;else *(RECT *)lp=l.client;
             break;

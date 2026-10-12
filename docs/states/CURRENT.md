@@ -102,8 +102,8 @@ during S3.
 
 ## Current Work
 
-S3 prototype is implemented and verified under build/M0-T445/S3/r020: x86/x64
-pass 920 assertions each, including normal/pressed/canceled pixels. Probe captures and pixel-detail comparison
+S3 prototype is implemented and verified under build/M0-T445/S3/r030: x86/x64
+pass 944 assertions each, including dialog-frame and normal/pressed/canceled pixels. Probe captures and pixel-detail comparison
 are available. Owner visual stability acceptance remains pending; S4 is not admitted.
 See [S3 experiment evidence](../etc/evidence/m0-t445-s3-style-experiment.md).
 No production images or deployed components changed.
