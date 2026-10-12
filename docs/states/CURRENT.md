@@ -102,11 +102,13 @@ during S3.
 
 ## Current Work
 
-S3 prototype is implemented and verified under build/M0-T445/S3/r048: x86/x64
-pass 6,711 assertions each, including embedded original OEM button pixels,
+S3 prototype is implemented and verified under build/M0-T445/S3/r053: x86/x64
+pass 6,734 assertions each, including embedded original OEM button pixels,
 normal/depressed/restore selection and actual restore clicks. r047 compares
-all 2,700 imported pixels against the original VGA.DRV. r048 also verifies
+all 2,700 imported pixels against the original VGA.DRV. r053 also verifies
 embedded original-font identity and 95 ASCII glyphs/11,264 pixels per width.
+Maximized client/title/button layout now uses the visible work-area intersection;
+PrintWindow verifies its full button pixels and real restore clicks.
 Probe captures and pixel-detail comparison
 are available. Owner visual stability acceptance remains pending; S4 is not admitted.
 See [S3 experiment evidence](../etc/evidence/m0-t445-s3-style-experiment.md).

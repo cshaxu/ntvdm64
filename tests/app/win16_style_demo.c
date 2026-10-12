@@ -163,23 +163,53 @@ static void oem_window_tests(HWND w)
     int zoom,pressed,hit;
     for(zoom=0;zoom<2;++zoom){
         RECT r;win16_style_layout l;HDC dc=CreateCompatibleDC(NULL);
-        HBITMAP bitmap,old;HDC screen=GetDC(NULL);
+        HBITMAP bitmap,old;BITMAPINFO bi={0};void *pixels;
         if(zoom){SendMessageW(w,WM_SYSCOMMAND,SC_MAXIMIZE,0);pump();CHECK(IsZoomed(w));}
         CHECK(GetWindowRect(w,&r));
         fprintf(stderr,"OEM window zoom=%d rect=%ld,%ld,%ld,%ld dpi=%u\n",zoom,r.left,r.top,r.right,r.bottom,GetDpiForWindow(w));
+        {MONITORINFO mi={sizeof(mi)};RECT work={0};MINMAXINFO mm={0};
+            HMONITOR monitor=MonitorFromWindow(w,MONITOR_DEFAULTTONEAREST);
+            BOOL ok=GetMonitorInfoW(monitor,&mi),spi=SystemParametersInfoW(SPI_GETWORKAREA,0,&work,0);
+            SendMessageW(w,WM_GETMINMAXINFO,0,(LPARAM)&mm);
+            fprintf(stderr,"GEOMETRY monitor=%p valid=%d work=%ld,%ld,%ld,%ld spi=%d primary=%ld,%ld,%ld,%ld maxpos=%ld,%ld maxsize=%ld,%ld\n",
+                monitor,ok,mi.rcWork.left,mi.rcWork.top,mi.rcWork.right,mi.rcWork.bottom,spi,work.left,work.top,work.right,work.bottom,
+                mm.ptMaxPosition.x,mm.ptMaxPosition.y,mm.ptMaxSize.x,mm.ptMaxSize.y);
+            CHECK(ok);
+        }
         CHECK(win16_style_measure(r.right-r.left,r.bottom-r.top,GetDpiForWindow(w),
             (DWORD)GetWindowLongPtr(w,GWL_STYLE),(DWORD)GetWindowLongPtr(w,GWL_EXSTYLE),IsZoomed(w),&l));
-        bitmap=CreateCompatibleBitmap(screen,r.right-r.left,r.bottom-r.top);ReleaseDC(NULL,screen);
+        if(zoom){
+            MONITORINFO mi={sizeof(mi)};RECT visible,actual,expected;POINT p={0,0};int dx,dy;
+            CHECK(GetMonitorInfoW(MonitorFromWindow(w,MONITOR_DEFAULTTONEAREST),&mi));
+            CHECK(IntersectRect(&visible,&r,&mi.rcWork));
+            CHECK(win16_style_measure(visible.right-visible.left,visible.bottom-visible.top,GetDpiForWindow(w),
+                (DWORD)GetWindowLongPtr(w,GWL_STYLE),(DWORD)GetWindowLongPtr(w,GWL_EXSTYLE),TRUE,&l));
+            expected=l.client;OffsetRect(&expected,visible.left,visible.top);
+            CHECK(GetClientRect(w,&actual));CHECK(ClientToScreen(w,&p));OffsetRect(&actual,p.x,p.y);
+            CHECK(EqualRect(&actual,&expected));
+            dx=visible.left-r.left;dy=visible.top-r.top;
+            OffsetRect(&l.minimize,dx,dy);OffsetRect(&l.maximize,dx,dy);
+        }
+        bi.bmiHeader.biSize=sizeof(BITMAPINFOHEADER);bi.bmiHeader.biWidth=r.right-r.left;
+        bi.bmiHeader.biHeight=r.top-r.bottom;bi.bmiHeader.biPlanes=1;bi.bmiHeader.biBitCount=32;
+        bitmap=CreateDIBSection(dc,&bi,DIB_RGB_COLORS,&pixels,NULL,0);
         CHECK(bitmap!=NULL);old=(HBITMAP)SelectObject(dc,bitmap);
         for(hit=HTMINBUTTON;hit<=HTMAXBUTTON;++hit)for(pressed=0;pressed<2;++pressed){
             RECT b=hit==HTMINBUTTON?l.minimize:l.maximize;
             if(pressed){SendMessageW(w,WM_NCLBUTTONDOWN,hit,MAKELPARAM(r.left+b.left+3,r.top+b.top+3));CHECK(GetCapture()==w);}
-            /* PrintWindow clips an off-screen maximized border on this
-             * private desktop. Exercise the real HWND's WM_PRINT handler
-             * directly for the complete resource raster, including that
-             * clipped strip; normal captures still use PrintWindow. */
-            SendMessageW(w,WM_PRINT,(WPARAM)dc,PRF_NONCLIENT|PRF_CLIENT);
+            CHECK(PrintWindow(w,dc,0));
             oem_pixels(dc,b,l.unit,(hit==HTMINBUTTON?0:zoom?2:1)+(pressed?3:0));
+            if(zoom && hit==HTMAXBUTTON && !pressed){
+                WCHAR path[MAX_PATH];BITMAPFILEHEADER fh={0};DWORD written;HANDLE out;
+                GdiFlush();CHECK(swprintf_s(path,MAX_PATH,L"%ls-maximized.bmp",capture_path)>0);
+                fh.bfType=0x4d42;fh.bfOffBits=sizeof(fh)+sizeof(bi.bmiHeader);
+                fh.bfSize=fh.bfOffBits+(DWORD)((r.right-r.left)*(r.bottom-r.top)*4);
+                out=CreateFileW(path,GENERIC_WRITE,0,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);CHECK(out!=INVALID_HANDLE_VALUE);
+                CHECK(WriteFile(out,&fh,sizeof(fh),&written,NULL)&&written==sizeof(fh));
+                CHECK(WriteFile(out,&bi.bmiHeader,sizeof(bi.bmiHeader),&written,NULL)&&written==sizeof(bi.bmiHeader));
+                CHECK(WriteFile(out,pixels,fh.bfSize-fh.bfOffBits,&written,NULL)&&written==fh.bfSize-fh.bfOffBits);
+                CloseHandle(out);
+            }
             SendMessageW(w,WM_CANCELMODE,0,0);CHECK(GetCapture()!=w);
         }
         SelectObject(dc,old);DeleteObject(bitmap);DeleteDC(dc);
@@ -187,8 +217,11 @@ static void oem_window_tests(HWND w)
     /* Click the actual maximized window's restore slot, not only SC_RESTORE. */
     {RECT r;win16_style_layout l;POINT p;
         CHECK(GetWindowRect(w,&r));
-        CHECK(win16_style_measure(r.right-r.left,r.bottom-r.top,GetDpiForWindow(w),
+        {MONITORINFO mi={sizeof(mi)};RECT visible;
+        CHECK(GetMonitorInfoW(MonitorFromWindow(w,MONITOR_DEFAULTTONEAREST),&mi));CHECK(IntersectRect(&visible,&r,&mi.rcWork));
+        CHECK(win16_style_measure(visible.right-visible.left,visible.bottom-visible.top,GetDpiForWindow(w),
             (DWORD)GetWindowLongPtr(w,GWL_STYLE),(DWORD)GetWindowLongPtr(w,GWL_EXSTYLE),TRUE,&l));
+        OffsetRect(&l.maximize,visible.left-r.left,visible.top-r.top);}
         p.x=r.left+(l.maximize.left+l.maximize.right)/2;p.y=r.top+(l.maximize.top+l.maximize.bottom)/2;
         CHECK(SendMessageW(w,WM_NCHITTEST,0,MAKELPARAM(p.x,p.y))==HTMAXBUTTON);
         SendMessageW(w,WM_NCLBUTTONDOWN,HTMAXBUTTON,MAKELPARAM(p.x,p.y));

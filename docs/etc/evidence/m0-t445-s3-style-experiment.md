@@ -294,3 +294,33 @@ font byte/ASCII-width/11,264-pixel proof. Attachment GDI counts stay50->50.
 Probe captures are reviewed under r048. The product package and original files
 remain unchanged. Next remaining question is maximized visible-frame placement;
 resource fidelity does not close that earlier observation or owner acceptance.
+
+### Maximized visible-frame correction
+
+r050 measures a native maximized rectangle extending 11 pixels outside each
+work-area edge at 144 DPI. The current private-desktop work area is640x408;
+normal geometry65,68,485,295 becomes -11,-11,651,419. This is actual HWND geometry,
+not a bitmap-offset guess. r051 proves that a WM_GETMINMAXINFO override can
+return the work-area size when directly queried yet does not remove the reached
+native maximized inset. That trial fails the exact-rectangle assertion and is
+removed, not retained as another policy hook.
+
+The retained fix keeps Windows' maximization geometry. One measure_window
+routine intersects a maximized window with its monitor work area and computes
+the style layout there. Its translated rectangles serve WM_NCCALCSIZE, paint
+and hit testing alike. Normal window geometry is unchanged. This is real
+client/frame geometry, not cropping a screenshot or offsetting only pixels.
+
+r052 passes the strict public GetClientRect/ClientToScreen comparison with the
+expected work-area-relative client, plus the original button raster. r053 adds
+the retained maximized PrintWindow capture. Both widths pass6,734 checks,
+including PrintWindow verification of the maximized normal/pressed arrow pixels
+and actual restore hit/click; the earlier direct-WM_PRINT workaround is removed.
+The embedded-font source/95-glyph/11,264-pixel checks still pass. Attachment GDI
+counts are stable52->52. The reviewed maximized image includes the off-screen
+native margin as black but the entire style frame/title/buttons lie inside its
+visible work-area portion. Physical monitor/RDP interaction remains unobserved;
+the fixture does not manipulate the user's desktop or switch desktops.
+
+S3 remains open for owner visual/stability acceptance and final layout review;
+this closes the measured maximization clipping defect, not all Win3.1 behavior.

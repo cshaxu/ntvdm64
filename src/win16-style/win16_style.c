@@ -50,12 +50,31 @@ static BOOL local_window(HWND w)
     return TRUE;
 }
 
+static BOOL measure_window(HWND w,style_window *s,const RECT *outer,win16_style_layout *l)
+{
+    RECT visible=*outer;BOOL zoom=IsZoomed(w);int dx,dy;
+    if(zoom){
+        MONITORINFO monitor={sizeof(monitor)};RECT intersection;
+        if(GetMonitorInfoW(MonitorFromWindow(w,MONITOR_DEFAULTTONEAREST),&monitor) &&
+            IntersectRect(&intersection,outer,&monitor.rcWork))visible=intersection;
+    }
+    if(!win16_style_measure(visible.right-visible.left,visible.bottom-visible.top,
+        s->dpi,(DWORD)GetWindowLongPtr(w,GWL_STYLE),
+        (DWORD)GetWindowLongPtr(w,GWL_EXSTYLE),zoom,l))return FALSE;
+    /* Native maximized resize borders can lie outside the work area. Keep
+     * Windows' geometry, but place every custom non-client element and the
+     * actual client inside its visible part using one layout calculation. */
+    dx=visible.left-outer->left;dy=visible.top-outer->top;
+    OffsetRect(&l->outer,dx,dy);OffsetRect(&l->client,dx,dy);
+    OffsetRect(&l->caption,dx,dy);OffsetRect(&l->title,dx,dy);
+    OffsetRect(&l->system,dx,dy);OffsetRect(&l->minimize,dx,dy);OffsetRect(&l->maximize,dx,dy);
+    return TRUE;
+}
+
 static BOOL layout(HWND w,style_window *s,win16_style_layout *l)
 {
     RECT r;
-    return GetWindowRect(w,&r) && win16_style_measure(r.right-r.left,r.bottom-r.top,
-        s->dpi,(DWORD)GetWindowLongPtr(w,GWL_STYLE),
-        (DWORD)GetWindowLongPtr(w,GWL_EXSTYLE),IsZoomed(w),l);
+    return GetWindowRect(w,&r) && measure_window(w,s,&r,l);
 }
 
 static void colors(style_window *s,win16_style_palette *p)
@@ -309,9 +328,7 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
     switch(msg){
     case WM_NCCALCSIZE:
         r=wp?((NCCALCSIZE_PARAMS *)lp)->rgrc[0]:*(RECT *)lp;
-        if(win16_style_measure(r.right-r.left,r.bottom-r.top,s->dpi,
-            (DWORD)GetWindowLongPtr(w,GWL_STYLE),
-            (DWORD)GetWindowLongPtr(w,GWL_EXSTYLE),IsZoomed(w),&l)){
+        if(measure_window(w,s,&r,&l)){
             OffsetRect(&l.client,r.left,r.top);
             if(wp)((NCCALCSIZE_PARAMS *)lp)->rgrc[0]=l.client;else *(RECT *)lp=l.client;
             break;

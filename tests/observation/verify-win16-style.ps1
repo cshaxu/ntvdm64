@@ -56,7 +56,7 @@ cd /d "$dir"
             if($LASTEXITCODE){throw "Original font probe failed $arch"}
         }
         Add-Type -AssemblyName System.Drawing
-        foreach($name in @('capture','capture.bmp-pressed','capture.bmp-canceled')){
+        foreach($name in @('capture','capture.bmp-pressed','capture.bmp-canceled','capture.bmp-maximized')){
             $bitmap=[Drawing.Bitmap]::FromFile("$dir/$name.bmp")
             try{$bitmap.Save("$dir/$name.png",[Drawing.Imaging.ImageFormat]::Png)}finally{$bitmap.Dispose()}
         }

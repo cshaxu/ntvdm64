@@ -15,7 +15,11 @@ is introduced. No production executable links this experiment.
 layout.c owns geometry shared by paint/hit-testing. win16_style.c owns the
 subclass, local GDI resources, palette, title painting and button gestures.
 The public header is a process-local API, not a wire format.
-Normal installation/removal preserve client origin and dimensions. Destruction
+Normal installation/removal preserve client origin and dimensions.
+Maximization keeps native window management; while maximized, client sizing,
+painting and hit testing share the visible monitor-work-area intersection so
+the host's off-screen resize border cannot clip the custom title/buttons.
+Destruction
 removes the subclass; explicit removal is required before unloading code.
 Repeated installation fails with ERROR_ALREADY_EXISTS; unsupported frame forms
 fail with ERROR_NOT_SUPPORTED and remain native.
