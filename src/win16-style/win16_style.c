@@ -4,14 +4,17 @@
 #include "win16_style.h"
 #include "layout.h"
 #include "frame_buttons.h"
+#include "system_font.h"
 #include <commctrl.h>
 #include <dwmapi.h>
 #include <windowsx.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct style_window {
     win16_style_palette palette;
     HFONT font;
+    HANDLE font_resource;
     UINT dpi, calls;
     BOOL active, detached, hot;
     int pressed;
@@ -180,14 +183,30 @@ static void paint(HWND w,style_window *s,HDC target)
     RestoreDC(dc,saved);if(!target)ReleaseDC(w,dc);
 }
 
-static void refresh_font(HWND w,style_window *s)
+static BOOL refresh_font(HWND w,style_window *s)
 {
     HFONT font;
+    /* A private face alias prevents GDI selecting the host's same-named
+     * System font. Only size/face metadata in this temporary copy changes;
+     * original widths, bitmaps and copyright remain unchanged. */
+    if(!s->font_resource){
+        static const char face[]="Win31 VGA System";
+        DWORD size=(DWORD)sizeof(style_system_font)+sizeof(face);
+        DWORD offset=(DWORD)sizeof(style_system_font),count=0;
+        BYTE *copy=(BYTE *)malloc(size);
+        if(!copy)return FALSE;
+        memcpy(copy,style_system_font,sizeof(style_system_font));
+        memcpy(copy+offset,face,sizeof(face));
+        memcpy(copy+2,&size,sizeof(size));memcpy(copy+105,&offset,sizeof(offset));
+        s->font_resource=AddFontMemResourceEx(copy,size,NULL,&count);free(copy);
+        if(!s->font_resource)return FALSE;
+    }
     s->dpi=GetDpiForWindow(w);if(!s->dpi)s->dpi=96;
     font=CreateFontW(16,0,0,0,FW_BOLD,FALSE,FALSE,FALSE,
-        DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,NONANTIALIASED_QUALITY,
-        DEFAULT_PITCH,L"System");
+        ANSI_CHARSET,OUT_RASTER_PRECIS,CLIP_DEFAULT_PRECIS,NONANTIALIASED_QUALITY,
+        DEFAULT_PITCH,L"Win31 VGA System");
     if(font){if(s->font)DeleteObject(s->font);s->font=font;}
+    return font!=NULL;
 }
 
 static void frame_changed(HWND w)
@@ -213,7 +232,9 @@ static void restore_client(HWND w,const RECT *wanted)
 
 static void dispose(style_window *s)
 {
-    if(s->font)DeleteObject(s->font);free(s);
+    if(s->font)DeleteObject(s->font);
+    if(s->font_resource)RemoveFontMemResourceEx(s->font_resource);
+    free(s);
 }
 
 BOOL win16_style_install(HWND w,const win16_style_palette *p)
@@ -233,7 +254,9 @@ BOOL win16_style_install(HWND w,const win16_style_palette *p)
     s=(style_window *)calloc(1,sizeof(*s));
     if(!s){SetLastError(ERROR_NOT_ENOUGH_MEMORY);return FALSE;}
     if(p)s->palette=*p;else win16_style_default_palette(&s->palette);
-    s->active=GetActiveWindow()==w;refresh_font(w,s);client_screen(w,&client);
+    s->active=GetActiveWindow()==w;
+    if(!refresh_font(w,s)){dispose(s);SetLastError(ERROR_INVALID_DATA);return FALSE;}
+    client_screen(w,&client);
     s->policy_saved=SUCCEEDED(DwmGetWindowAttribute(w,DWMWA_NCRENDERING_POLICY,
         &s->old_policy,sizeof(s->old_policy)));
     if(!SetWindowSubclass(w,style_proc,STYLE_ID,(DWORD_PTR)s)){dispose(s);return FALSE;}

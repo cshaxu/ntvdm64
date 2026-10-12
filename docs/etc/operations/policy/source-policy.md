@@ -6,7 +6,7 @@ OpenNT NT4 MVDM/NTDOS is the primary historical guest/service source family.
 
 Owner explicitly authorizes extracting and embedding supplied Windows 3.1
 visual resources in the standalone win16-style experiment. Bounded original
-button pixels may live in src/win16-style with exact source identity, resource
+button pixels and the selected VGASYS.FON font resource may live in src/win16-style with exact source identity, resource
 IDs and reproducible extraction/verification. This supersedes the research-only
 asset restriction for these admitted resources only. Original installations
 remain read-only; no USER/GDI executable code, whole module, product integration

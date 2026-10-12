@@ -29,4 +29,25 @@ raster once into the existing caption button slot. Slot dimensions and frame
 layout remain the separately reviewed adaptation, not proof of complete USER
 behavior equivalence. CLOSE's two-part resource needs further source slicing
 analysis; the system-menu bar remains authored. Original font composition is
-also pending. These remaining gaps are not masked by the six-button import.
+covered below. Remaining layout gaps are not masked by resource reuse.
+
+## Original title font
+
+`system_font.h` contains the byte-exact 5,441-byte RT_FONT #31 at file offset
+1,344 in owner-supplied `O:/w31/SYSTEM/VGASYS.FON` (7,280 bytes), SHA-256
+`7BAEFA14EF8EF2355374D0B5061043DD5F4F8C33FF57680366E4A725F91646F8`.
+Its original Microsoft copyright notice is retained in the FNT resource.
+This is a version 0x0200 proportional 16-pixel, 700-weight ANSI font.
+
+The renderer copies that resource into temporary memory, appends the private
+face name `Win31 VGA System`, and adjusts only dfSize/dfFace. Private
+AddFontMemResourceEx avoids host font installation and same-name ambiguity.
+Each attached window owns its font resource handle and releases it after its
+HFONT. No FON file is written or loaded at runtime. Original glyphs and widths
+are unchanged. Ordinary GDI renders the title; no new font rasterizer exists.
+
+The focused font probe verifies the embedded bytes against the pinned source,
+private memory loading, and 95 ASCII glyph widths plus 11,264 pixels against
+the original FNT bitmap records. This does not prove every extended ANSI or
+Unicode fallback glyph. Format reference: Microsoft's
+[Font-File Format developer notes](https://ftp.zx.net.nz/pub/Patches/ftp.microsoft.com/MISC/KB/en-us/65/123.HTM).

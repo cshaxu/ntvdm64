@@ -2,7 +2,8 @@
 
 Project-authored same-thread static library with owner-approved original VGA
 button pixels embedded locally; see [resource provenance](resources.md).
-No guest/mirror executable code or fonts are imported. S1's source ladder rejects
+The original VGA System font is also embedded and loaded privately from memory;
+no guest/mirror executable code is imported. S1's source ladder rejects
 NTUSER server composition at the existing private server boundary; this is the
 owner-admitted local presentation feature, not an NTUSER implementation.
 
@@ -31,9 +32,10 @@ This is not a creation/Hook adapter or real title-prefix implementation.
 
 The supplied reference palette is a preset, not a universal Win3.1 default.
 High contrast reads host colors; no global settings are written. Caption
-System font is rendered at its 16-pixel base strike then scaled to window DPI,
-avoiding GDI's discrete-strike substitution. Host font identity can vary;
-no original FON is bundled and pixel identity across all hosts is not claimed.
+System font is rendered at its original 16-pixel base strike then scaled to
+window DPI, avoiding GDI's discrete-strike substitution. A private face alias
+selects the embedded original, not a host-supplied font with the same name.
+Extended/unsupported Unicode mapping remains outside the ASCII pixel proof.
 The demo alone opts into per-monitor DPI awareness; the library never does.
 
 Build/test (invoke from an owned background PowerShell process):

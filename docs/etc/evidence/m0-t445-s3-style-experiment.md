@@ -236,3 +236,39 @@ No production image or original installation file is modified.
 Next: finish original CLOSE resource slicing/font composition and resolve
 maximized visible-frame placement before claiming visual stability. S3 and
 the thread goal remain active, and S4 remains unadmitted.
+
+### Private original-font composition
+
+Read-only VGASYS.FON inspection locates RT_FONT #31 at 1,344 with dfSize 5,441
+(the NE resource includes alignment padding). Its version is 0x0200, height16,
+ascent13, weight700, proportional ANSI. Original Microsoft copyright bytes are
+retained. The native memory-font API accepts both the whole FON and the raw FNT
+on this host. No custom rasterizer or global installation is necessary.
+
+The first r041 memory-only probe succeeded; a subsequent expanded probe build
+in that directory failed to link because its new USER calls lacked user32.lib.
+The old result file is NOT evidence for that expanded build. Fresh r042 adds
+the required link dependency and proves a private face alias selects original
+glyph data: 95 ASCII widths and 11,264 pixels, zero mismatches. The alias changes
+only dfSize/dfFace and appends a name in a temporary memory copy; original source
+and embedded FNT bytes remain exact. The default shader/bitmap font data are not
+retouched. Public GDI performs text shaping/rendering within its ANSI limits.
+
+r043 composes the embedded resource into the actual style library and performs
+the same source identity/glyph tests independently on x86 and x64. Each width
+also passes 5,739 HWND/pixel/interaction/lifetime checks; GDI attachment count
+remains 51->51. The returned memory font is owned per attachment, removed after
+the HFONT, and never enumerated or installed globally. Installation fails if
+the required resource cannot load rather than silently using the host font.
+The revised test runner accepts an explicit -ReferenceFont for the pinned
+read-only original comparison; the demo itself has no external font dependency.
+
+Final r045 explicitly selects ANSI_CHARSET/OUT_RASTER_PRECIS, matching the
+original font and focused probe rather than depending on host default charset.
+It repeats both-width 5,739 checks and zero-mismatch original glyph results.
+
+This proves the ASCII original-resource boundary, not all extended ANSI/Unicode
+fallbacks, original title-slot sizing or physical DPI transitions. System-menu
+resource slicing and maximized visible-frame placement remain open. Source and
+API references are recorded in the component ledger and
+[Microsoft's memory-font contract](https://learn.microsoft.com/en-us/windows/win32/api/wingdi/nf-wingdi-addfontmemresourceex).
