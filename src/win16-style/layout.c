@@ -7,12 +7,15 @@ BOOL win16_style_measure(int width,int height,UINT dpi,DWORD style,DWORD ex_styl
     int top,button,caption_height,right;BOOL caption=(style&WS_CAPTION)==WS_CAPTION;
     if(!l || width<1 || height<1 || dpi<48 || dpi>768)return FALSE;
     memset(l,0,sizeof(*l));
-    l->unit=max(1,(int)dpi/96);
+    button=MulDiv(19,(int)dpi,96);
+    /* Round the one-pixel stroke like the scaled OEM separator, not down.
+     * floor(dpi/96) left a one-column gap at 144 DPI. */
+    l->unit=max(1,MulDiv(1,(int)dpi,96));
     l->sizeable=(style&WS_THICKFRAME)!=0 && !maximized;
     l->dialog_frame=(ex_style&WS_EX_DLGMODALFRAME)!=0;
     l->border=MulDiv(l->dialog_frame?6:l->sizeable?4:caption?3:
         (style&WS_DLGFRAME)?3:(style&WS_BORDER)?1:0,(int)dpi,96);
-    top=l->border;button=MulDiv(19,(int)dpi,96);
+    top=l->border;
     /* Original VGA: 18-pixel artwork, 19-pixel button pitch. USER's
      * 20-pixel CYCAPTION includes both boundary lines, not 20 content rows. */
     caption_height=MulDiv(18,(int)dpi,96);

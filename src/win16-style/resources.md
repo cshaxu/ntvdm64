@@ -129,3 +129,13 @@ The experiment now uses 19-wide slots and 18 content rows plus a separator;
 it no longer adds top/bottom padding inside OEM artwork. DPI scaling remains
 project adaptation; independent tests require sizing strokes to coincide with
 the actual button edges after rounding. Original resources remain byte-exact.
+
+Owner identifies a remaining 144-DPI mismatch: r078's OEM separator occupied
+columns 385 and 386, but its sizing stroke only column 385. Shared unit was
+floor(dpi/96), while bitmap dimensions were rounded. The correction rounds the
+one-pixel frame unit with MulDiv as well. r080 preserves the failing old-renderer
+test. r083 checks every pixel and adjacent grey bounds of all eight strokes,
+and independently samples GDI COLORONCOLOR output at every integer DPI from
+96 through 768 (673 values). The rounded unit matches the actual raster at all
+these values; no per-corner offset or special-case DPI is used. This verifies
+scaled separator consistency, not whole-window historical equivalence at every DPI.

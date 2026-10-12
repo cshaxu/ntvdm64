@@ -514,3 +514,31 @@ remain passing. Reviewed capture.png and selected/restored images show the
 flat band, aligned strokes and distinct system-box states. Physical menu
 acceptance and the full divergence audit remain open. No guest/mirror or
 ten-product-image change is involved.
+
+### All eight sizing strokes: scale-width correction
+
+The owner spots another apparent one-pixel offset above the maximum button.
+Reading r078's saved WindowDC pixels confirms x=385..386 is the OEM's black
+separator, whereas the top sizing mark covers only x=385. Same start coordinate
+was insufficient: the old test did not check full thickness. Original USER uses
+the same border unit throughout all eight PatBlt strokes; local floor(dpi/96)
+did not match the stretched original raster.
+
+r080 adds a negative oracle against the unchanged renderer: actual OEM black
+run length must equal the frame unit. It fails at that assertion. New checks
+then examine every pixel in all eight stroke rectangles and grey neighbours on
+both sides, rather than sampling a single point. The one-pixel unit is now
+rounded with MulDiv, like the artwork dimensions. A preliminary ceil candidate
+passed at 144 DPI (r081) but failed the expanded actual-raster oracle at 99 DPI
+(r082); it is not retained. No per-button shifts, DPI special cases or new state.
+
+r083 passes x86/x64 13,885 checks each, including all eight marks at the owned
+144-DPI HWND, and the actual 19-column GDI COLORONCOLOR separator at every
+integer DPI 96..768 (673 scales). The latter is an offscreen raster test, not
+673 physical monitors/windows. All existing lifecycle, client preservation,
+font, selected/restored system-box, gallery and native-caption regression tests
+remain. Source/font resource data is unchanged. Reviewed r083/x64/capture.bmp-nc-0.png
+shows aligned two-column stroke/button edges. Raw SIZING log records all eight
+rectangles; they include top-right [385,2,387,4) and its bottom counterpart.
+Final runnable candidate is r083/x64/win16-style-demo.exe. Full original-style
+audit and physical popup acceptance remain open; no product integration claim.

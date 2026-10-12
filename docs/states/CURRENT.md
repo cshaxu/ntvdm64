@@ -120,8 +120,8 @@ See [S3 experiment evidence](../etc/evidence/m0-t445-s3-style-experiment.md).
 No production images or deployed components changed.
 
 Owner's paired normal/selected references resolve the system box as palette-role
-inversion, not an arrow-style bevel. r078 implements that state, sizing-frame
-strokes and source-derived 19x18 button geometry; both widths pass 11,495 checks. Private
+inversion, not an arrow-style bevel. r083 implements that state, original 19x18
+button geometry and rounded stroke widths; both widths pass 13,885 checks. Private
 desktop notification/pixel checks do not certify physical menu tracking.
 Full frame-divergence review remains open (including long-title clipping and
 resize-corner hit geometry); no whole-window pixel-equivalence claim.

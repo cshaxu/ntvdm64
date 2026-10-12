@@ -136,9 +136,68 @@ static void sizing_strokes(HDC dc,const win16_style_layout *l,UINT dpi)
         CHECK(GetPixel(dc,l->outer.right-l->border+l->unit,y)==expected);
     }
     if(l->sizeable){
+        int raster_width=0,scan_y=(l->maximize.top+l->maximize.bottom)/2,j,k;
+        RECT strokes[8];
+        /* Independent oracle: read the actual stretched OEM black separator,
+         * not another copy of the layout's rounding expression. */
+        while(raster_width<l->maximize.right-l->maximize.left &&
+            GetPixel(dc,l->maximize.left+raster_width,scan_y)==RGB(0,0,0))++raster_width;
+        CHECK(raster_width>0);CHECK(l->unit==raster_width);
         CHECK(corner==l->system.right-l->unit);
         CHECK(l->outer.right-corner-l->unit==l->maximize.left);
+        for(i=0;i<2;++i){
+            int x=i?l->maximize.left:l->system.right-raster_width;
+            int y=i?l->outer.bottom-l->caption.bottom-raster_width:l->caption.bottom;
+            SetRect(&strokes[i*4],x,raster_width,x+raster_width,l->border-raster_width);
+            strokes[i*4+1]=strokes[i*4];OffsetRect(&strokes[i*4+1],0,l->outer.bottom-l->border);
+            SetRect(&strokes[i*4+2],raster_width,y,l->border-raster_width,y+raster_width);
+            strokes[i*4+3]=strokes[i*4+2];OffsetRect(&strokes[i*4+3],l->outer.right-l->border,0);
+        }
+        for(i=0;i<8;++i){
+            RECT r=strokes[i];BOOL vertical=i%4<2;
+            CHECK(!IsRectEmpty(&r));
+            printf("SIZING stroke=%d rect=%ld,%ld,%ld,%ld OEM-width=%d\n",
+                i,r.left,r.top,r.right,r.bottom,raster_width);
+            for(j=r.top;j<r.bottom;++j)for(k=r.left;k<r.right;++k)
+                CHECK(GetPixel(dc,k,j)==RGB(0,0,0));
+            /* Grey neighbours prove exact extent, not merely that one sampled
+             * point happens to lie somewhere on a longer/wider black stroke. */
+            if(vertical){
+                for(j=r.top;j<r.bottom;++j){
+                    CHECK(GetPixel(dc,r.left-1,j)==RGB(192,192,192));
+                    CHECK(GetPixel(dc,r.right,j)==RGB(192,192,192));
+                }
+            }else{
+                for(k=r.left;k<r.right;++k){
+                    CHECK(GetPixel(dc,k,r.top-1)==RGB(192,192,192));
+                    CHECK(GetPixel(dc,k,r.bottom)==RGB(192,192,192));
+                }
+            }
+        }
     }
+}
+
+static void raster_scale_tests(void)
+{
+    HDC dc=CreateCompatibleDC(NULL);BITMAPINFO target={0},source={0};
+    HBITMAP bitmap,old;void *pixels;DWORD row[19];int i;UINT dpi;
+    target.bmiHeader.biSize=sizeof(BITMAPINFOHEADER);target.bmiHeader.biWidth=152;
+    target.bmiHeader.biHeight=-1;target.bmiHeader.biPlanes=1;target.bmiHeader.biBitCount=32;
+    bitmap=CreateDIBSection(dc,&target,DIB_RGB_COLORS,&pixels,NULL,0);
+    CHECK(dc!=NULL && bitmap!=NULL);old=(HBITMAP)SelectObject(dc,bitmap);
+    source=target;source.bmiHeader.biWidth=19;
+    for(i=0;i<19;++i)row[i]=i?0xffffff:0;
+    SetStretchBltMode(dc,COLORONCOLOR);
+    for(dpi=96;dpi<=768;++dpi){
+        win16_style_layout l;int width=MulDiv(19,(int)dpi,96),observed=0;
+        CHECK(win16_style_measure(2000,2000,dpi,WS_OVERLAPPEDWINDOW,0,FALSE,&l));
+        CHECK(StretchDIBits(dc,0,0,width,1,0,0,19,1,row,&source,DIB_RGB_COLORS,SRCCOPY)!=GDI_ERROR);
+        while(observed<width && GetPixel(dc,observed,0)==RGB(0,0,0))++observed;
+        if(l.unit!=observed)fprintf(stderr,"RASTER dpi=%u width=%d expected=%d observed=%d\n",dpi,width,l.unit,observed);
+        CHECK(l.unit==observed);
+    }
+    printf("RASTER DPI=96..768 (673 scales) matches actual OEM separator stretch\n");
+    SelectObject(dc,old);DeleteObject(bitmap);DeleteDC(dc);
 }
 
 static void capture(HWND *windows,const WCHAR *path,BOOL pressed)
@@ -492,6 +551,7 @@ int wmain(int argc,WCHAR **argv)
     cls.hCursor=LoadCursorW(NULL,IDC_ARROW);cls.lpszClassName=L"Win16StyleTrial";
     cls.style=CS_DBLCLKS;CHECK(RegisterClassW(&cls)!=0);
     layout_tests();
+    raster_scale_tests();
     font_probe();
     w[0]=make_window(WS_OVERLAPPEDWINDOW,0,L"Program Manager",60,60,TRUE);
     w[1]=make_window(WS_CAPTION|WS_SYSMENU|WS_MINIMIZEBOX,0,L"Control Panel",550,60,TRUE);
