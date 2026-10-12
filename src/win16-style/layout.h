@@ -4,7 +4,7 @@
 
 /* Shared geometry for paint and hit-testing; all rectangles window-relative. */
 typedef struct win16_style_layout {
-    RECT outer, client, caption, system, minimize, maximize, title;
+    RECT outer, client, caption, system, minimize, maximize, title, menu;
     int border, unit;
     SIZE corner;
     BOOL sizeable, dialog_frame;

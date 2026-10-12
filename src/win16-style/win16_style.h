@@ -3,8 +3,11 @@
 #include <windows.h>
 
 /* Local, same-GUI-thread API. No process/task policy or cross-process ABI.
- * Eligible: captioned top-level windows without menus, scrollbars or custom
- * client edges. S3 deliberately leaves those later integration cases native.
+ * Eligible: top-level and child frames without scrollbars or custom
+ * client edges. String menu bars and standard MDI system/restore cells use
+ * shared geometry/painting. Popup tracking and MDI management remain native;
+ * the component adapts string popup painting and frame/child navigation.
+ * Arbitrary owner-drawn/bitmap menu bars are outside this experimental profile.
  * Install/remove preserve the current client origin and dimensions when normal.
  * Caller must remove before unloading this library. Destruction removes itself.
  */

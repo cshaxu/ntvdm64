@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T445 S4 menu/MDI review](evidence/m0-t445-s4-menu-mdi-review.md) records
+the standalone candidate, verified coverage and remaining acceptance limits.
+
 [T432 S6 single-worker reconstruction](evidence/m0-t432-s6-single-worker-reconstruction.md)
 records the superseded evidence branch, accepted source restoration and
 delivered single-worker/dual-Hook gates; see

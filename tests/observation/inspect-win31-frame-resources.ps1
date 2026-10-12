@@ -1,7 +1,8 @@
 param(
  [Parameter(Mandatory)][string]$Driver,
  [Parameter(Mandatory)][string]$OutputRoot,
- [string]$VerifyHeader
+ [string]$VerifyHeader,
+ [switch]$MenuGlyphs
 )
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
@@ -20,6 +21,7 @@ try {
  $p=$ne+(U16 ($ne+36));$shift=U16 $p;$p+=2
  if($shift -gt 16){throw 'Unsupported resource alignment'}
  $names=@{32754='CLOSE';32749='REDUCE';32748='ZOOM';32747='RESTORE';32746='REDUCED';32745='ZOOMD';32744='RESTORED'}
+ if($MenuGlyphs){$names=@{32760='CHECK';32739='MNARROW'}}
  $items=@();$verified=0
  while(($type=U16 $p) -ne 0){
   $count=U16 ($p+2);$p+=8
@@ -32,17 +34,18 @@ try {
    if($header -eq 12){$w=U16 ($offset+4);$h=U16 ($offset+6);$planes=U16 ($offset+8);$bits=U16 ($offset+10);$entry=3}
    elseif($header -eq 40){$w=U32 ($offset+4);$h=U32 ($offset+8);$planes=U16 ($offset+12);$bits=U16 ($offset+14);$entry=4;if((U32 ($offset+16)) -ne 0){throw 'Compressed bitmap'}}
    else{throw "Unsupported bitmap header $header"}
-   if($bits -ne 4 -or $planes -ne 1 -or $w -lt 1 -or $h -lt 1 -or $w -gt 256 -or $h -gt 256){throw 'Unsupported bitmap shape'}
-   $stride=[int]([Math]::Floor(($w*4+31)/32)*4)
-   $pixels=$offset+$header+16*$entry
+   if($bits -notin @(1,4) -or $planes -ne 1 -or $w -lt 1 -or $h -lt 1 -or $w -gt 256 -or $h -gt 256){throw 'Unsupported bitmap shape'}
+   $stride=[int]([Math]::Floor(($w*$bits+31)/32)*4)
+   $colors=1 -shl $bits
+   $pixels=$offset+$header+$colors*$entry
    if($pixels+$stride*$h -gt $offset+$length){throw 'Bitmap pixels outside resource'}
-   $palette=@();for($c=0;$c -lt 16;$c++){$q=$offset+$header+$c*$entry;$palette+=[Drawing.Color]::FromArgb($bytes[$q+2],$bytes[$q+1],$bytes[$q])}
+   $palette=@();for($c=0;$c -lt $colors;$c++){$q=$offset+$header+$c*$entry;$palette+=[Drawing.Color]::FromArgb($bytes[$q+2],$bytes[$q+1],$bytes[$q])}
    $bitmap=[Drawing.Bitmap]::new([int]$w,[int]$h)
    try {
     $rows=@()
     for($y=0;$y -lt $h;$y++){$row='';for($x=0;$x -lt $w;$x++){
-     $v=$bytes[$pixels+($h-1-$y)*$stride+[int][Math]::Floor($x/2)]
-     $index=if(($x%2) -eq 0){$v -shr 4}else{$v -band 15}
+     $v=$bytes[$pixels+($h-1-$y)*$stride+[int][Math]::Floor($x*$bits/8)]
+     $index=if($bits -eq 1){($v -shr (7-($x%8))) -band 1}elseif(($x%2) -eq 0){$v -shr 4}else{$v -band 15}
      $bitmap.SetPixel($x,$y,$palette[$index])
      if($VerifyHeader){
       $color=$palette[$index]
@@ -64,8 +67,8 @@ try {
    $items+=@{id=$number;name=$names[$number];offset=$offset;length=$length;width=$w;height=$h;header=$header}
   }
  }
- if($items.Count -ne 7){throw 'Missing expected OEM frame resources'}
- if($VerifyHeader -and $verified -ne 7){throw 'Expected seven verified embedded resources'}
+ if($items.Count -ne $names.Count){throw 'Missing expected OEM resources'}
+ if($VerifyHeader -and $verified -ne $names.Count){throw 'Expected all embedded resources verified'}
  $canvas=[Drawing.Bitmap]::new(680,700);$g=[Drawing.Graphics]::FromImage($canvas);$font=[Drawing.Font]::new('Arial',11)
  try {
   $g.Clear([Drawing.Color]::White)
@@ -80,6 +83,6 @@ try {
   }
   $canvas.Save("$root/oem-buttons.png",[Drawing.Imaging.ImageFormat]::Png)
  }finally{$font.Dispose();$g.Dispose();$canvas.Dispose()}
- @{source=(Resolve-Path $Driver).Path;sha256=(Get-FileHash $Driver).Hash;resources=$items;verifiedEmbedded=$verified;role='Read-only source decode; owner-admitted six-button experiment import verification'}|ConvertTo-Json -Depth 5|Set-Content "$root/resources.json"
+ @{source=(Resolve-Path $Driver).Path;sha256=(Get-FileHash $Driver).Hash;resources=$items;verifiedEmbedded=$verified;role='Read-only original visual resource verification'}|ConvertTo-Json -Depth 5|Set-Content "$root/resources.json"
  '0'|Set-Content "$root/exit-code.txt"
 }catch{$_|Out-String|Set-Content "$root/failure.txt";'1'|Set-Content "$root/exit-code.txt";exit 1}

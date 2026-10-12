@@ -1,5 +1,24 @@
 # Original Win3.1 visual resources
 
+## S4 menu glyphs
+
+The owner-requested original-resource approach continues in the standalone
+menu experiment: menu_glyphs.h stores VGA.DRV RT_BITMAP 32760 CHECK (14x14,
+file offset 24032, BITMAPCOREHEADER) and 32739 MNARROW (7x11, file offset
+24896, BITMAPINFOHEADER). Both are one-bit black/white images from the same
+pinned VGA.DRV identified below. No original executable code is imported.
+White pixels become the menu background and black pixels the current text
+colour. DPI adaptation scales the original pixel cells; it is not a claim of
+arbitrary-DPI whole-menu equivalence. Rights remain the same local-experiment
+restriction as the frame artwork.
+
+Reproduce with inspect-win31-frame-resources.ps1 -MenuGlyphs -Driver pointing
+to the pinned original VGA.DRV, -VerifyHeader src/win16-style/menu_glyphs.h,
+and a fresh build-owned -OutputRoot. The independent decoder compares all
+273 pixels. Native menu frames, metrics and tracking are separate work.
+
+## Frame resources
+
 Owner explicitly admits resource embedding for the T445 S3 isolated experiment.
 Original artwork is Microsoft's Windows 3.1 material, not project-authored or
 relicensed artwork. Public redistribution rights have not been established;

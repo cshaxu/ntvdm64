@@ -33,6 +33,13 @@ rule menu_v6_link
   command = link.exe /nologo /subsystem:windows /entry:wmainCRTStartup /manifest:embed /manifestdependency:"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'" /out:$out $in user32.lib gdi32.lib
 build layout.obj: cc @NINJA_REPO@/src/win16-style/layout.c
 build style.obj: cc @NINJA_REPO@/src/win16-style/win16_style.c
+build dc-failure.obj: cc @NINJA_REPO@/tests/app/win16_style_dc_failure.c
+build menu-paint.obj: cc @NINJA_REPO@/src/win16-style/menu_paint.c
+build menu-layout.obj: cc @NINJA_REPO@/src/win16-style/menu_layout.c
+build menu-bar.obj: cc @NINJA_REPO@/src/win16-style/menu_bar.c
+build menu-items.obj: cc @NINJA_REPO@/src/win16-style/menu_items.c
+build menu-scope.obj: cc @NINJA_REPO@/src/win16-style/menu_scope.c
+build dc-failure.exe: link dc-failure.obj layout.obj menu-paint.obj menu-layout.obj menu-bar.obj menu-items.obj menu-scope.obj
 build demo.obj: cc @NINJA_REPO@/tests/app/win16_style_demo.c
 build gallery.obj: cc @NINJA_REPO@/tests/app/win16_style_gallery.c
 build font-probe.obj: cc @NINJA_REPO@/tests/app/win31_font_probe.c
@@ -40,9 +47,9 @@ build font-probe.exe: probe_link font-probe.obj
 build native-menu.obj: cc @NINJA_REPO@/tests/app/native_menu_probe.c
 build native-menu-probe.exe: link native-menu.obj
 build native-menu-v6-probe.exe: menu_v6_link native-menu.obj
-build win16-style.lib: archive layout.obj style.obj
+build win16-style.lib: archive layout.obj style.obj menu-paint.obj menu-layout.obj menu-bar.obj menu-items.obj menu-scope.obj
 build win16-style-demo.exe: link demo.obj gallery.obj win16-style.lib
-default win16-style-demo.exe font-probe.exe native-menu-probe.exe native-menu-v6-probe.exe
+default win16-style-demo.exe font-probe.exe native-menu-probe.exe native-menu-v6-probe.exe dc-failure.exe
 '@.Replace('@REPO@',$r).Replace('@NINJA_REPO@',$r.Replace(':','$:').Replace(' ','$ ')) | Set-Content "$dir/build.ninja" -Encoding ascii
         @"
 @echo off
@@ -57,6 +64,10 @@ cd /d "$dir"
         @{pid=$p.Id;start=$p.StartTime;deadline=$p.StartTime.AddSeconds(30)}|ConvertTo-Json|Set-Content "$dir/owner.json"
         if(!$p.WaitForExit(30000)){$p.Kill($true);throw "Fixture timeout $arch"}
         if($p.ExitCode){throw "Fixture failed $arch"}
+        $dc=Start-Process "$dir/dc-failure.exe" -ArgumentList @("$dir/menu-paint.bmp") -WindowStyle Hidden -PassThru -RedirectStandardOutput "$dir/dc-failure.txt" -RedirectStandardError "$dir/dc-failure.err"
+        @{pid=$dc.Id;start=$dc.StartTime;deadline=$dc.StartTime.AddSeconds(15)}|ConvertTo-Json|Set-Content "$dir/dc-owner.json"
+        if(!$dc.WaitForExit(15000)){$dc.Kill($true);throw "DC fixture timeout $arch"}
+        if($dc.ExitCode){throw "DC fixture failed $arch"}
         if($ReferenceFont){
             & "$dir/font-probe.exe" $ReferenceFont *> "$dir/font-probe.txt"
             if($LASTEXITCODE){throw "Original font probe failed $arch"}
@@ -68,6 +79,6 @@ cd /d "$dir"
         }
         Get-Content "$dir/test.txt"
     }
-    Get-FileHash "$repo/src/win16-style/*","$repo/tests/app/win16_style_demo.c","$repo/tests/app/win16_style_gallery.c","$repo/tests/app/win31_font_probe.c","$repo/tests/app/native_menu_probe.c","$repo/tests/observation/verify-win16-style.ps1"|ConvertTo-Json|Set-Content "$root/inputs.json"
+    Get-FileHash "$repo/src/win16-style/*","$repo/tests/app/win16_style_demo.c","$repo/tests/app/win16_style_gallery.c","$repo/tests/app/win16_style_dc_failure.c","$repo/tests/app/win31_font_probe.c","$repo/tests/app/native_menu_probe.c","$repo/tests/observation/verify-win16-style.ps1"|ConvertTo-Json|Set-Content "$root/inputs.json"
     '0'|Set-Content "$root/exit-code.txt"
 }catch{$_|Out-String|Set-Content "$root/failure.txt";'1'|Set-Content "$root/exit-code.txt";exit 1}

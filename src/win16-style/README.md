@@ -29,10 +29,15 @@ sizeable/thin frames, borderless windows and dialog-style windows.
 WS_EX_DLGMODALFRAME explicitly selects the wider caption-colored
 dialog border and light inner outline; no title or button-absence heuristic is
 used. WS_DLGFRAME alone cannot distinguish this because WS_CAPTION includes it.
-Initial menus, child/MDI, scrollbars, client-edge/tool/layered
-windows and minimized/maximized installation are deliberately unsupported.
-Consumers must not introduce those unsupported forms while attached. Native
-system popup menus remain native; later stages own menu/MDI integration.
+Scrollbars, client-edge/tool/layered windows and minimized/maximized
+installation are deliberately unsupported. S4 admits string menu bars and
+the standard MDI merged system/restore controls; arbitrary application
+owner-drawn or bitmap menu bars are not supported.
+S4 now supports normal child/MDI frames with parent-relative client preservation
+and the original child system-box image. Maximized MDI children retain native
+management while the parent presents the merged system/restore controls.
+Consumers must not introduce unsupported forms while attached. System and
+ordinary string popup menus use retro painting with native menu tracking.
 System-menu tracking remains native, not a separate TrackPopupMenu loop.
 If the host reports an empty native system-button rectangle (modern dialog
 frames), our button enters the system menu through SC_KEYMENU/space after
@@ -71,9 +76,10 @@ This generates independent x86/x64 Ninja graphs, /MT /O2 /W4 /WX archives and
 GUI-subsystem win16-style-demo.exe. Without arguments it opens a 19-entry
 selector: double-click a row or choose Open selected. Close samples closes
 only the demo's sample HWNDs. The first 14 entries exercise styled top-level
-forms/states; the last five explicitly labelled native references show menus,
-scrollbars, child/MDI and ordinary host appearance, not implemented retro
-support. Minimized presentation is also still native. F2 changes title,
+forms/states; entry 18 now exercises styled MDI frames with native MDI management.
+Entry 15 exercises the retro menu bar and popups. Entries 16, 17 and 19
+remain native scrollbar/child/ordinary references.
+Minimized presentation is also still native. F2 changes title,
 F3 changes caption colors and Esc closes a sample (including borderless ones).
 --test <bitmap> runs on its own private desktop and captures only its HWNDs.
 --menu-test <absolute-build-bitmap-path> uses the input desktop and only its
@@ -109,3 +115,19 @@ cursor/hover, title/icon/theme/activation changes and minimize/restore. It also
 checks all resize cursor directions and application client-cursor delegation.
 Owner subsequently authorized actual-desktop computer-use inspection of the
 standalone demo; it is separate evidence, not replaced by these probes.
+
+S4 work in progress: menu_paint supplies borrowed-DC row measurement/drawing.
+menu_scope provides same-thread native popup-frame scopes. The shared window
+component now enters/exits these at WM_ENTERMENULOOP/WM_EXITMENULOOP and cleans
+them up on removal/destruction; applications do not wire a separate border hook.
+Nested scopes support an outer owner's removal while an inner owner is active.
+It neither owns HMENU data nor replaces input tracking. Only that thread's
+popup windows shown/painted within the scope are temporarily subclassed.
+No global hook/theme/animation change is made. Ordinary string popup entries
+are temporarily adapted and restored; application owner-draw rows remain with
+their owner. Tests now exercise actual queued popup loops for keyboard and
+hover switching, nested tracking, MDI frame/child WM_NEXTMENU transitions,
+merged system-button double-click, and callback removal/destruction. These
+are bounded automated cases, not full physical-interaction acceptance.
+Final S4 review and owner visual acceptance remain open. The private-desktop no-animation menu
+tests and direct-print images do not certify the deferred native animation bug.

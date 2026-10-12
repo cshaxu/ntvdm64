@@ -54,6 +54,8 @@ This does not declare the menu blankness repaired or the full T complete.
 S1--S3 are closed. S4 covers standalone retro menus/MDI; S5 is CLI/policy
 propagation and title-marker verification; S6 integrates the shared component;
 S7 is integrated acceptance and the deferred native-menu session retest.
+The [S4 review](../etc/evidence/m0-t445-s4-menu-mdi-review.md) records r052
+standalone menu/MDI coverage and open owner-acceptance/delivery gates.
 The [working plan](../etc/operations/t445-win31-window-style-plan.md) defines
 the contracts. S4 is active.
 The shared source owner remains src/win16-style, with no production integration

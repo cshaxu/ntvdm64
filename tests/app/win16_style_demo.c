@@ -349,11 +349,18 @@ static void capture(HWND *windows,const WCHAR *path,BOOL pressed)
     {RECT r={0,0,1000,650};HBRUSH brush=CreateSolidBrush(RGB(160,160,164));
     FillRect(dc,&r,brush);DeleteObject(brush);}
     for(i=0;i<4;++i){
-        RECT r;HBITMAP shot,prior;int w,h;
+        RECT r;POINT old_position;HBITMAP shot,prior;int w,h;
         GetWindowRect(windows[i],&r);w=r.right-r.left;h=r.bottom-r.top;
+        old_position.x=r.left;old_position.y=r.top;
+        /* Private-desktop geometry may be 640x480 after display/session
+         * changes. Keep the owned print target on-screen; this capture tests
+         * frame pixels, not off-screen composition. Restore after printing. */
+        CHECK(SetWindowPos(windows[i],NULL,0,0,0,0,SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE));
         shot=CreateCompatibleBitmap(dc,w,h);CHECK(shot!=NULL);
         prior=(HBITMAP)SelectObject(part,shot);
         CHECK(PrintWindow(windows[i],part,0));
+        CHECK(SetWindowPos(windows[i],NULL,old_position.x,old_position.y,0,0,
+            SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE));
         if(i==0){
             win16_style_layout l;RECT b;UINT dpi=GetDpiForWindow(windows[i]);
             CHECK(win16_style_measure(w,h,dpi,
@@ -854,7 +861,7 @@ int wmain(int argc,WCHAR **argv)
     button_test(w[0],HTMAXBUTTON,SC_MAXIMIZE);
     button_test(w[1],HTMINBUTTON,SC_MINIMIZE);
     {HMENU menu=CreateMenu();CHECK(menu!=NULL);CHECK(SetMenu(w[3],menu));
-        CHECK(!win16_style_install(w[3],NULL)&&GetLastError()==ERROR_NOT_SUPPORTED);
+        CHECK(win16_style_install(w[3],NULL));CHECK(win16_style_remove(w[3]));
         CHECK(SetMenu(w[3],NULL));CHECK(DestroyMenu(menu));}
     CHECK(SetWindowTextW(w[0],L"Changed title"));
     {WCHAR title[64];CHECK(GetWindowTextW(w[0],title,64)>0);
