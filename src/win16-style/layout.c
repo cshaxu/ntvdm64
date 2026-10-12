@@ -1,0 +1,52 @@
+#include "layout.h"
+#include <string.h>
+
+BOOL win16_style_measure(int width,int height,UINT dpi,DWORD style,
+    BOOL maximized,win16_style_layout *l)
+{
+    int top,button,right;
+    if(!l || width<1 || height<1 || dpi<48 || dpi>768 ||
+        (style&WS_CAPTION)!=WS_CAPTION)return FALSE;
+    memset(l,0,sizeof(*l));
+    l->unit=max(1,(int)dpi/96);
+    l->sizeable=(style&WS_THICKFRAME)!=0 && !maximized;
+    l->border=MulDiv(l->sizeable?4:3,(int)dpi,96);
+    top=l->border;button=MulDiv(20,(int)dpi,96);
+    SetRect(&l->outer,0,0,width,height);
+    SetRect(&l->caption,l->border,top,max(l->border,width-l->border),top+button);
+    SetRect(&l->client,l->border,top+button+l->unit,
+        max(l->border,width-l->border),max(top+button+l->unit,height-l->border));
+    l->title=l->caption;
+    if(style&WS_SYSMENU) {
+        l->system=l->caption;l->system.right=l->system.left+button;
+        l->title.left=l->system.right;
+    }
+    right=l->caption.right;
+    if(style&WS_MAXIMIZEBOX) {
+        l->maximize=l->caption;l->maximize.left=max(l->caption.left,right-button);
+        right=l->maximize.left;
+    }
+    if(style&WS_MINIMIZEBOX) {
+        l->minimize=l->caption;l->minimize.right=right;
+        l->minimize.left=max(l->caption.left,right-button);right=l->minimize.left;
+    }
+    l->title.right=max(l->title.left,right);
+    return TRUE;
+}
+
+LRESULT win16_style_hit(const win16_style_layout *l,POINT p)
+{
+    BOOL left,right,top,bottom;
+    if(!l || !PtInRect(&l->outer,p))return HTNOWHERE;
+    if(PtInRect(&l->system,p))return HTSYSMENU;
+    if(PtInRect(&l->minimize,p))return HTMINBUTTON;
+    if(PtInRect(&l->maximize,p))return HTMAXBUTTON;
+    if(PtInRect(&l->caption,p))return HTCAPTION;
+    if(PtInRect(&l->client,p))return HTCLIENT;
+    if(!l->sizeable)return HTBORDER;
+    left=p.x<l->border;right=p.x>=l->outer.right-l->border;
+    top=p.y<l->border;bottom=p.y>=l->outer.bottom-l->border;
+    if(top)return left?HTTOPLEFT:right?HTTOPRIGHT:HTTOP;
+    if(bottom)return left?HTBOTTOMLEFT:right?HTBOTTOMRIGHT:HTBOTTOM;
+    return left?HTLEFT:right?HTRIGHT:HTBORDER;
+}

@@ -10,7 +10,9 @@ selection and propagation stay in their existing consumers. The directory is
 admitted first for an isolated experiment: tests/app supplies an independently
 launched Win32 GUI fixture directly linked to the library, with outputs only
 under build/. No existing product consumer links it until later integration
-admission. This is not yet an implemented capability; see the
+admission. The standalone prototype now has dual-width HWND tests and probe
+captures; product integration and owner visual stability acceptance remain
+pending. See the
 [appearance proposal](../proposals/proposal-win31-window-appearance-001.md)
 and the source-owner admission in [Architecture Rules](../rules/ARCHITECTURE.md).
 

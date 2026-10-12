@@ -7,6 +7,7 @@ delivered single-worker/dual-Hook gates; see
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T445 S3 independent style experiment](evidence/m0-t445-s3-style-experiment.md) | M0 T445 S3 | Standalone x86/x64 frame library, HWND tests, probe captures and pixel comparison limits. | Retain through appearance acceptance. |
 | [T445 S2 accepted palette repair](evidence/m0-t445-s2-palette-repair.md) | M0 T445 S2 | Accepted NTVWM geometry repair, tests, publication and stage resequencing. | Retain through T445 closure. |
 | [T445 S1 retained closed packet](evidence/m0-t445-s1-closed-packet.md) | M0 T445 S1 | Full closed brief moved out of Current Work for its size limit; current scope stays in Status. | Retain with S1 closure. |
 | [T445 S1 installation design closure](evidence/m0-t445-s1-installation-design.md) | M0 T445 S1 | Source-backed task policy map, window installation/lifetime and title-read contract; implementation obligations allocated to later stages. | Retain through T445 acceptance. |

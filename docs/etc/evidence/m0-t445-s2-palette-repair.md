@@ -54,3 +54,25 @@ User acceptance is explicit. This delivery includes all six previously
 uncommitted repair/test/asset files plus the sequencing and evidence records.
 S2 closes with its commit/push; T445 remains open. S3 standalone UI requires
 admission and owner stability acceptance before S4 product propagation.
+
+## Closed S2 Packet — T445
+
+### Accepted NTVWM palette geometry repair delivery
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T445 S2, Ordinary Mode; single-person audit and separate final review. |
+| Admission And Approval | Owner inserts S2 to commit/push all uncommitted repair code and confirms manual acceptance. |
+| Objective | Deliver accepted palette-only geometry repair, its tests and published assets; renumber later stages. |
+| Non-goals | No UI implementation, product integration, guest/mirror or protocol change. |
+| Reference Baseline | a045e9359 plus accepted side-palette/r001 candidate, retained 0.0.444 ten-image baseline. |
+| Files And ABI Surface | NTVWM console_state.c, native capture and palette fixtures/runner, ntvwm.exe and release manifest, governance. No ABI change. |
+| Applicable Rules | Project execution, architecture, coding and documentation authorities; owned background checks, no subst/computer use. |
+| Verification | Audit prior build, focused negative/positive and serial product evidence; recheck ten-image candidate/assets/deployed hashes and documentation gates. |
+| Expected Markers | Prior code fails exclusive-bound assertion; repaired geometry tests and runtime gates pass; all release hashes agree. |
+| Asset Needs | Existing tested side-palette/r001 package; no new guest media. |
+| Reporting Requirements | Preserve failed attempts and distinguish substituted version gate from a one-shot Full pass. |
+| Stop Conditions | Unexplained source/binary divergence, missing runtime evidence or publication mismatch. |
+| Exit Criteria | Reviewed accepted repair, verified release identity, indexed evidence, governance/link/diff checks, commit and push. |
+| Original Owner Request | Insert S2 for accepted uncommitted repairs, commit/push and close; move experiment and later stages onward. |
+| Similar-Issue Sweep | Palette-only repeats, resizing/scrolled viewport, bottom-right cursor and edge-cell retention; existing lifecycle/GUI/Console/Window gates. |

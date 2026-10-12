@@ -1,36 +1,36 @@
 # Project Status
 
-**No active M/T/S packet. T445 remains open.**
+**Active: M0 T445 S3**
 
-M0 T445 S1 closed at 2151cf750. The owner inserts an isolated UI experiment as
-the new S2; former S2 and subsequent integration stages move one position later.
+M0 T445 S2 closed at c12090805. Owner admits S3's isolated UI experiment.
+Product propagation and integration remain S4--S7.
 See the [S1 closure design](../etc/evidence/m0-t445-s1-installation-design.md).
 
 The owner closed T444 after accepting the S1 repair and the bounded S2/S3
 conclusions. See the [T444 closure](../history/m0-t444-indexed16-text-closure.md).
 The owner now admits the former queue head, Windows 3.1 window appearance.
 
-## Closed S2 Packet — T445
+## Active Packet
 
-### Accepted NTVWM palette geometry repair delivery
+### Isolated Win16-style component and native GUI experiment
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T445 S2, Ordinary Mode; single-person audit and separate final review. |
-| Admission And Approval | Owner inserts S2 to commit/push all uncommitted repair code and confirms manual acceptance. |
-| Objective | Deliver accepted palette-only geometry repair, its tests and published assets; renumber later stages. |
-| Non-goals | No UI implementation, product integration, guest/mirror or protocol change. |
-| Reference Baseline | a045e9359 plus accepted side-palette/r001 candidate, retained 0.0.444 ten-image baseline. |
-| Files And ABI Surface | NTVWM console_state.c, native capture and palette fixtures/runner, ntvwm.exe and release manifest, governance. No ABI change. |
-| Applicable Rules | Project execution, architecture, coding and documentation authorities; owned background checks, no subst/computer use. |
-| Verification | Audit prior build, focused negative/positive and serial product evidence; recheck ten-image candidate/assets/deployed hashes and documentation gates. |
-| Expected Markers | Prior code fails exclusive-bound assertion; repaired geometry tests and runtime gates pass; all release hashes agree. |
-| Asset Needs | Existing tested side-palette/r001 package; no new guest media. |
-| Reporting Requirements | Preserve failed attempts and distinguish substituted version gate from a one-shot Full pass. |
-| Stop Conditions | Unexplained source/binary divergence, missing runtime evidence or publication mismatch. |
-| Exit Criteria | Reviewed accepted repair, verified release identity, indexed evidence, governance/link/diff checks, commit and push. |
-| Original Owner Request | Insert S2 for accepted uncommitted repairs, commit/push and close; move experiment and later stages onward. |
-| Similar-Issue Sweep | Palette-only repeats, resizing/scrolled viewport, bottom-right cursor and edge-cell retention; existing lifecycle/GUI/Console/Window gates. |
+| Identifier Mode | M0 T445 S3, Ordinary Mode; implementation then separate final review. |
+| Admission And Approval | Owner requests implementation of win16-style and an independent Win32 experiment, with probe screenshots; computer use prohibited. |
+| Objective | Build a reusable local frame library and directly launched GUI demonstration, without product integration. |
+| Non-goals | No run16 options, Hook/WOW integration, NTCON changes, guest/mirror edits, runtime component or global theme/settings. Menu/MDI retro rendering remains later work. |
+| Reference Baseline | c12090805, accepted S2 ten-image package; S1 original-reference research and installation design. |
+| Files And ABI Surface | src/win16-style, tests/app and tests/observation; local same-thread C API, x86/x64 /MT static archives. |
+| Applicable Rules | Source/architecture/coding/document authorities; background-owned build/tests; build-only outputs; no computer use/subst. |
+| Verification | Actual HWND fixtures, normal/minimize-only/dialog/native samples, layout/hit tests, title/activation/palette changes, geometry preservation, system commands and lifetime; probe capture of owned windows. |
+| Expected Markers | Both-width runnable demo and tests with images; no link to other product components. |
+| Asset Needs | Host USER/GDI and available system font; no imported historical font or image assets. |
+| Reporting Requirements | Exact binary paths, screenshots, measured test results and visual/physical interaction limitations. |
+| Stop Conditions | Need for product/guest integration, global interception/settings or unreviewed resources; no scope expansion. |
+| Exit Criteria | Focused tests and reviewed probe images, governance/link/diff checks, commit/push; owner visual stability acceptance before S4. No production release replacement for this isolated experiment. |
+| Original Owner Request | Admit S3, implement component and independent Win32 trial; show progress using probe screenshots; no computer use. |
+| Similar-Issue Sweep | Missing buttons, title changes, install/remove/destroy, unsupported frames, DPI/high contrast, pressed/canceled actions and application client preservation. |
 
 ## S1 Closure Record
 
@@ -43,7 +43,7 @@ the owner-inserted standalone S2; current numbering is in the working plan.
 
 Owner-accepted palette repair closes with this commit/push delivery.
 See [repair and verification evidence](../etc/evidence/m0-t445-s2-palette-repair.md).
-The standalone experiment is now S3 and awaits admission; no UI work starts here.
+The standalone experiment is admitted as S3 by the next owner request.
 
 ## Planned Sequence
 
@@ -51,7 +51,7 @@ S1 is closed. S2 delivers the accepted palette repair. S3 is the isolated UI
 experiment; S4 is CLI/policy propagation and title-marker verification; S5
 integrates the common frame; S6 covers menus/MDI; S7 is integrated acceptance.
 The [working plan](../etc/operations/t445-win31-window-style-plan.md) defines
-the contracts. S3 requires separate admission; S4 waits for experiment stability.
+the contracts. S3 is active; S4 waits for experiment stability.
 The shared source owner remains src/win16-style, with no production integration
 during S3.
 
@@ -102,9 +102,11 @@ during S3.
 
 ## Current Work
 
-S2 closes the owner-accepted concurrent repair. No UI demo has
-been implemented. Historical S1 and initial experiment-admission evidence retain
-their original numbering; the working plan records the superseding sequence.
+S3 prototype is implemented and verified under build/M0-T445/S3/r020: x86/x64
+pass 920 assertions each, including normal/pressed/canceled pixels. Probe captures and pixel-detail comparison
+are available. Owner visual stability acceptance remains pending; S4 is not admitted.
+See [S3 experiment evidence](../etc/evidence/m0-t445-s3-style-experiment.md).
+No production images or deployed components changed.
 
 ## T444 Final Disposition
 
