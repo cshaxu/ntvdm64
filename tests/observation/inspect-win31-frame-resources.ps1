@@ -44,18 +44,18 @@ try {
      $v=$bytes[$pixels+($h-1-$y)*$stride+[int][Math]::Floor($x/2)]
      $index=if(($x%2) -eq 0){$v -shr 4}else{$v -band 15}
      $bitmap.SetPixel($x,$y,$palette[$index])
-     if($VerifyHeader -and $number -ne 32754){
+     if($VerifyHeader){
       $color=$palette[$index]
       if($color.R -ne $color.G -or $color.R -ne $color.B){throw 'Unexpected non-grey OEM pixel'}
       $row+=switch($color.R){0{'0'}255{'1'}128{'2'}192{'3'}default{throw 'Unexpected OEM shade'}}
      }
     };$rows+=$row}
-    if($VerifyHeader -and $number -ne 32754){
+    if($VerifyHeader){
      $source=Get-Content -Raw $VerifyHeader
      $pattern='(?s)/\* '+$names[$number]+' \*/(.*?)\}'
      $match=[regex]::Match($source,$pattern)
      if(!$match.Success){throw "Missing embedded $($names[$number])"}
-     $embedded=@([regex]::Matches($match.Groups[1].Value,'"([0-3]{19})"')|ForEach-Object {$_.Groups[1].Value})
+     $embedded=@([regex]::Matches($match.Groups[1].Value,('"([0-3]{'+$w+'})"'))|ForEach-Object {$_.Groups[1].Value})
      if(($embedded -join "`n") -cne ($rows -join "`n")){throw "Embedded pixels differ: $($names[$number])"}
      $verified++
     }
@@ -65,7 +65,7 @@ try {
   }
  }
  if($items.Count -ne 7){throw 'Missing expected OEM frame resources'}
- if($VerifyHeader -and $verified -ne 6){throw 'Expected six verified embedded resources'}
+ if($VerifyHeader -and $verified -ne 7){throw 'Expected seven verified embedded resources'}
  $canvas=[Drawing.Bitmap]::new(680,700);$g=[Drawing.Graphics]::FromImage($canvas);$font=[Drawing.Font]::new('Arial',11)
  try {
   $g.Clear([Drawing.Color]::White)

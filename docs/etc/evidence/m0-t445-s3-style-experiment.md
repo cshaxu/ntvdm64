@@ -272,3 +272,25 @@ fallbacks, original title-slot sizing or physical DPI transitions. System-menu
 resource slicing and maximized visible-frame placement remain open. Source and
 API references are recorded in the component ledger and
 [Microsoft's memory-font contract](https://learn.microsoft.com/en-us/windows/win32/api/wingdi/nf-wingdi-addfontmemresourceex).
+
+### Original top-level system-menu bitmap
+
+Further static USER decoding resolves CLOSE: initialization 3:0F3C loads OEM
+32754 into descriptor 0x600; 3:1114 halves its width (opcode D1 /7, despite the
+disassembler's incorrect printed zero shift). Painting 1:A388..A3E9 chooses
+source x=0 for ordinary/popup top-levels and x=CXSIZE for child non-popup frames,
+then BitBlt copies CXSIZE by CYSIZE from atlas offset0x744. Therefore the 36x18
+resource is two 18x18 window-kind images, not pressed/unpressed artwork.
+
+The complete original resource is embedded losslessly; the currently admitted
+top-level experiment uses its left half. Child/MDI remains unimplemented and
+unadmitted in S3. The hand-drawn system-menu bar is deleted. The same small
+palette/DIB path now paints all buttons, accounting for the arrow resources'
+included left separator versus CLOSE's separate frame separator.
+
+r047 independently compares all seven resources / 2,700 pixels with VGA.DRV.
+r048 passes x86/x64 6,711 actual-window/pixel/interaction checks and the original
+font byte/ASCII-width/11,264-pixel proof. Attachment GDI counts stay50->50.
+Probe captures are reviewed under r048. The product package and original files
+remain unchanged. Next remaining question is maximized visible-frame placement;
+resource fidelity does not close that earlier observation or owner acceptance.

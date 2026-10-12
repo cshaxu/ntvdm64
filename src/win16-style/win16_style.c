@@ -86,47 +86,35 @@ static void outline(HDC dc,RECT r,int u,COLORREF c)
     q=r;q.left=q.right-u;fill(dc,q,c);
 }
 
-static void button(HDC dc,RECT r,int kind,BOOL down,BOOL zoom,int u,UINT dpi,
+static void button(HDC dc,RECT r,int kind,BOOL down,BOOL zoom,int u,
     const win16_style_palette *p)
 {
-    int cx,cy,half;
-    RECT q;
+    BITMAPINFO bi={0};DWORD pixels[19*18];int x,y,width,stride;
+    const char *bits;
+    COLORREF palette[4]={p->edge,p->light,p->shadow,p->face};
     if(IsRectEmpty(&r))return;
     fill(dc,r,p->face);outline(dc,r,u,p->edge);
-    if(kind!=HTSYSMENU){
-        BITMAPINFO bi={0};DWORD pixels[19*18];int x,y;
-        COLORREF palette[4]={p->edge,p->light,p->shadow,p->face};
-        int index=(kind==HTMINBUTTON?0:zoom?2:1)+(down?3:0);
-        for(y=0;y<18;++y)for(x=0;x<19;++x){
-            COLORREF c=palette[frame_buttons[index][y][x]-'0'];
-            pixels[y*19+x]=((DWORD)GetRValue(c)<<16)|((DWORD)GetGValue(c)<<8)|GetBValue(c);
-        }
-        bi.bmiHeader.biSize=sizeof(BITMAPINFOHEADER);
-        bi.bmiHeader.biWidth=19;bi.bmiHeader.biHeight=-18;
-        bi.bmiHeader.biPlanes=1;bi.bmiHeader.biBitCount=32;
-        /* OEM artwork includes its left separator. The caption supplies
-         * top/bottom and right separators. Scale the original raster once. */
-        SetStretchBltMode(dc,COLORONCOLOR);
-        StretchDIBits(dc,r.left,r.top+u,r.right-r.left-u,r.bottom-r.top-2*u,
-            0,0,19,18,pixels,&bi,DIB_RGB_COLORS,SRCCOPY);
-        return;
-    }
-    InflateRect(&r,-u,-u);
-    cx=(r.left+r.right)/2;cy=(r.top+r.bottom)/2;
-    if(down){cx+=max(1,MulDiv(1,(int)dpi,96));cy+=max(1,MulDiv(2,(int)dpi,96));}
     if(kind==HTSYSMENU){
-        /* The original control box is flat. Its small outlined bar, not
-         * the whole button, carries the lower/right relief. Measured from
-         * the owner's Control Panel reference (20x~5 at 150% scale). */
-        int width=MulDiv(13,(int)dpi,96),height=MulDiv(3,(int)dpi,96);
-        int shade=max(1,MulDiv(1,(int)dpi,96));
-        half=width/2;
-        if(down)fill(dc,r,p->shadow);
-        SetRect(&q,cx-half,cy-height/2,cx-half+width,cy-height/2+height);
-        OffsetRect(&q,shade,shade);fill(dc,q,p->shadow);
-        OffsetRect(&q,-shade,-shade);
-        fill(dc,q,p->light);outline(dc,q,u,p->edge);return;
+        /* CLOSE contains two side-by-side 18-pixel images. Original USER
+         * uses the first for top-level windows, second for WS_CHILD.
+         * Child/MDI frames are not yet part of this experiment. */
+        bits=&system_menu_bitmap[0][0];width=18;stride=37;r.left+=u;
+    }else{
+        int index=(kind==HTMINBUTTON?0:zoom?2:1)+(down?3:0);
+        bits=&frame_buttons[index][0][0];width=19;stride=20;
     }
+    for(y=0;y<18;++y)for(x=0;x<width;++x){
+        COLORREF c=palette[bits[y*stride+x]-'0'];
+        pixels[y*width+x]=((DWORD)GetRValue(c)<<16)|((DWORD)GetGValue(c)<<8)|GetBValue(c);
+    }
+    bi.bmiHeader.biSize=sizeof(BITMAPINFOHEADER);
+    bi.bmiHeader.biWidth=width;bi.bmiHeader.biHeight=-18;
+    bi.bmiHeader.biPlanes=1;bi.bmiHeader.biBitCount=32;
+    /* Arrow OEM artwork includes its left separator, CLOSE does not.
+     * The caption supplies the other separators. Scale the raster once. */
+    SetStretchBltMode(dc,COLORONCOLOR);
+    StretchDIBits(dc,r.left,r.top+u,r.right-r.left-u,r.bottom-r.top-2*u,
+        0,0,width,18,pixels,&bi,DIB_RGB_COLORS,SRCCOPY);
 }
 
 static void paint(HWND w,style_window *s,HDC target)
@@ -148,9 +136,9 @@ static void paint(HWND w,style_window *s,HDC target)
     outline(dc,r,l.unit,l.dialog_frame?p.light:p.edge);
     fill(dc,l.caption,s->active?p.active:p.inactive);
     r=l.caption;r.top=r.bottom;r.bottom+=l.unit;fill(dc,r,p.edge);
-    button(dc,l.system,HTSYSMENU,s->pressed==HTSYSMENU&&s->hot,FALSE,l.unit,s->dpi,&p);
-    button(dc,l.minimize,HTMINBUTTON,s->pressed==HTMINBUTTON&&s->hot,FALSE,l.unit,s->dpi,&p);
-    button(dc,l.maximize,HTMAXBUTTON,s->pressed==HTMAXBUTTON&&s->hot,IsZoomed(w),l.unit,s->dpi,&p);
+    button(dc,l.system,HTSYSMENU,s->pressed==HTSYSMENU&&s->hot,FALSE,l.unit,&p);
+    button(dc,l.minimize,HTMINBUTTON,s->pressed==HTMINBUTTON&&s->hot,FALSE,l.unit,&p);
+    button(dc,l.maximize,HTMAXBUTTON,s->pressed==HTMAXBUTTON&&s->hot,IsZoomed(w),l.unit,&p);
     len=GetWindowTextLengthW(w);
     title=(WCHAR *)calloc((size_t)len+1,sizeof(WCHAR));
     if(title){

@@ -66,11 +66,13 @@ static HWND make_window(DWORD style,DWORD ex_style,const WCHAR *title,int x,int 
 static void oem_pixels(HDC dc,RECT b,int u,int index)
 {
     static const COLORREF palette[]={RGB(0,0,0),RGB(255,255,255),RGB(128,128,128),RGB(192,192,192)};
-    int x,y,dw=b.right-b.left-u,dh=b.bottom-b.top-2*u;
-    for(y=0;y<18;++y)for(x=0;x<19;++x){
-        int px=b.left+((2*x+1)*dw)/38;
+    int x,y,width=index==6?18:19,dw,dh=b.bottom-b.top-2*u;
+    if(index==6)b.left+=u;
+    dw=b.right-b.left-u;
+    for(y=0;y<18;++y)for(x=0;x<width;++x){
+        int px=b.left+((2*x+1)*dw)/(2*width);
         int py=b.top+u+((2*y+1)*dh)/36;
-        COLORREF actual=GetPixel(dc,px,py),expected=palette[frame_buttons[index][y][x]-'0'];
+        COLORREF actual=GetPixel(dc,px,py),expected=palette[(index==6?system_menu_bitmap[y][x]:frame_buttons[index][y][x])-'0'];
         if(actual!=expected){
             BITMAPINFO bi={0};BITMAPFILEHEADER fh={0};BITMAP bm;DWORD written;HANDLE out;void *data;WCHAR path[MAX_PATH];
             HBITMAP image=(HBITMAP)GetCurrentObject(dc,OBJ_BITMAP);
@@ -128,6 +130,7 @@ static void capture(HWND *windows,const WCHAR *path,BOOL pressed)
              * contracts, not a claim of whole-window pixel equivalence. */
             b=l.system;
             CHECK(GetPixel(part,b.left+l.unit,b.top+l.unit)==RGB(192,192,192));
+            oem_pixels(part,b,l.unit,6);
             b=l.minimize;
             oem_pixels(part,b,l.unit,0);
         }

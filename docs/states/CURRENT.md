@@ -102,10 +102,10 @@ during S3.
 
 ## Current Work
 
-S3 prototype is implemented and verified under build/M0-T445/S3/r045: x86/x64
-pass 5,739 assertions each, including embedded original OEM button pixels,
-normal/depressed/restore selection and actual restore clicks. r032 compares
-all 2,052 imported pixels against the original VGA.DRV. r045 also verifies
+S3 prototype is implemented and verified under build/M0-T445/S3/r048: x86/x64
+pass 6,711 assertions each, including embedded original OEM button pixels,
+normal/depressed/restore selection and actual restore clicks. r047 compares
+all 2,700 imported pixels against the original VGA.DRV. r048 also verifies
 embedded original-font identity and 95 ASCII glyphs/11,264 pixels per width.
 Probe captures and pixel-detail comparison
 are available. Owner visual stability acceptance remains pending; S4 is not admitted.
