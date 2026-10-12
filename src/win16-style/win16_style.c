@@ -21,6 +21,34 @@ typedef struct style_window {
 } style_window;
 
 static LRESULT CALLBACK style_proc(HWND,UINT,WPARAM,LPARAM,UINT_PTR,DWORD_PTR);
+typedef struct menu_frame {
+    HWND window;
+    RECT button;
+    BOOL double_click;
+    LPARAM point;
+} menu_frame;
+/* Bound only while this thread runs a dialog's native system-menu loop.
+ * A stack binding preserves reentrant menus without a global mouse hook. */
+static __declspec(thread) menu_frame *tracking_menu;
+static LRESULT CALLBACK menu_filter(int code,WPARAM wp,LPARAM lp)
+{
+    menu_frame *frame=tracking_menu;
+    if(code==HC_ACTION && (wp&PM_REMOVE) && frame){
+        MSG *m=(MSG *)lp;
+        if(m->hwnd==frame->window &&
+           (m->message==WM_NCLBUTTONDBLCLK || m->message==WM_LBUTTONDBLCLK)){
+            POINT p={GET_X_LPARAM(m->lParam),GET_Y_LPARAM(m->lParam)};
+            /* Menu capture carries screen coordinates even for WM_LBUTTON*.
+             * USER may consume this double click as native-caption input
+             * before calling WH_MSGFILTER, so observe queue removal instead. */
+            if(PtInRect(&frame->button,p)){
+                frame->double_click=TRUE;frame->point=MAKELPARAM(p.x,p.y);
+                m->message=WM_NULL;m->wParam=0;m->lParam=0;EndMenu();
+            }
+        }
+    }
+    return CallNextHookEx(NULL,code,wp,lp);
+}
 #define STYLE_ID ((UINT_PTR)style_proc)
 /* UxTheme's non-client draw requests are not in the public SDK. They are
  * observed compatibility messages, not structures we interpret or APIs we
@@ -389,6 +417,25 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
             s->system_menu=TRUE;paint(w,s,NULL);
         }
         break;
+    case WM_SYSCOMMAND:
+        if((wp&0xfff0)==SC_KEYMENU && lp==L' ' && layout(w,s,&l)){
+            MENUBARINFO menu={sizeof(menu)};
+            if(GetMenuBarInfo(w,OBJID_SYSMENU,0,&menu) && IsRectEmpty(&menu.rcBar)){
+                menu_frame frame={0},*previous=tracking_menu;HHOOK hook;
+                GetWindowRect(w,&r);frame.window=w;frame.button=l.system;
+                OffsetRect(&frame.button,r.left,r.top);tracking_menu=&frame;
+                hook=SetWindowsHookExW(WH_GETMESSAGE,menu_filter,NULL,GetCurrentThreadId());
+                result=DefSubclassProc(w,msg,wp,lp);
+                if(hook)UnhookWindowsHookEx(hook);
+                tracking_menu=previous;
+                /* Outside the menu loop USER handles SC_CLOSE availability
+                 * and the application still receives its normal NC message. */
+                if(frame.double_click && !s->detached)
+                    PostMessageW(w,WM_NCLBUTTONDBLCLK,HTSYSMENU,frame.point);
+                break;
+            }
+        }
+        goto forward;
     case WM_EXITMENULOOP:
         result=DefSubclassProc(w,msg,wp,lp);
         if(!s->detached && s->system_menu){s->system_menu=FALSE;paint(w,s,NULL);}

@@ -118,9 +118,9 @@ desktop notification/pixel checks do not certify physical menu tracking.
 No whole-window pixel-equivalence claim is made.
 
 Host System font and release-triggered dialog menu were delivered at 879a8584f.
-Owner confirms the menu stays open, but reports blank initial items and broken
-physical double-click close; actual demo interaction reproduces both. Separate
-message-level close tests did not cover a second click inside the menu loop.
+Owner confirms menu persistence. r119 actual input repairs gallery-12 double
+click through a scoped menu-loop queue binding; r120 passes 27,220 checks and
+18 queued menu cases per width. Blank initial items remain unresolved.
 r105/r106 reproduce blank system-menu items in an independent native executable
 with no style library. Per-popup TPM_NOANIMATION restores text; system-DPI and
 v6-manifest controls do not. The owner's native File-menu report remains open:

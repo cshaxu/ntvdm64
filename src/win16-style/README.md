@@ -37,9 +37,12 @@ System-menu tracking remains native, not a separate TrackPopupMenu loop.
 If the host reports an empty native system-button rectangle (modern dialog
 frames), our button enters the system menu through SC_KEYMENU/space after
 release inside its rectangle, using existing capture/cancellation tracking.
-Double-click commands retain native disabled-close semantics without a local
-timer. Physical second-click routing while that menu is open still requires
-acceptance; message-level close tests do not establish it.
+While this fallback menu runs, a scoped thread-local WH_GETMESSAGE hook maps
+double-clicks inside our system button back to native NC handling after the
+loop exits. USER's menu capture uses screen coordinates and can consume the
+click before WH_MSGFILTER. Disabled-close handling remains native; no delay,
+global mouse hook or global setting change is used. The binding is restored
+and the hook removed before returning, including window removal/destruction.
 Normal non-client activation, cursor/hover and compatibility caption-draw
 messages belong to the custom renderer; delegating their drawing can leak
 native buttons into the shorter caption's client area. Client cursor handling,
@@ -85,7 +88,11 @@ visible owned system popup after 500 ms and exits; optional `--popup`,
 `--popup-no-animation`, `--file`, `--file-no-animation`, `--file-keyboard` or
 `--system-dpi` selects a diagnostic control. Exit 5 is unavailable observation,
 not success. No global animation/theme setting changes. These controls do not
-repair the known gallery-12 physical double-click regression.
+repair menu drawing. `--queued-menu-test` measures 18 native menu-loop cases,
+including disabled Close and outside-button input; these are queued messages,
+not physical mouse input. `--gallery-trace <build-log-path>` records only this
+demo thread's queue, dispatch and modal-filter messages for physical diagnosis.
+The repaired gallery-12 double click also has a separate actual-input check.
 PrintWindow capture is rendered-window evidence, not a physical-input/RDP test
 or capture of DWM composition. The fixture itself uses no computer-use automation.
 The non-client regression additionally reads existing WindowDC pixels without

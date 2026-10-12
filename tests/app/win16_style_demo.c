@@ -22,6 +22,49 @@ static BOOL native_menu_probe;
 static HWND cursor_probe;
 static unsigned client_cursor_calls;
 static unsigned native_ncactivate_calls;
+static FILE *menu_trace;
+static UINT queued_double;
+static LPARAM queued_point;
+static BOOL queued_sent;
+static LRESULT CALLBACK trace_queue(int code,WPARAM a,LPARAM b)
+{
+    if(code>=0){
+        MSG *m=(MSG *)b;
+        if((m->message>=WM_NCLBUTTONDOWN && m->message<=WM_NCLBUTTONDBLCLK) ||
+           (m->message>=WM_LBUTTONDOWN && m->message<=WM_LBUTTONDBLCLK) || m->message==WM_SYSCOMMAND){
+            fprintf(menu_trace,"QUEUE remove=%llu message=%04x hwnd=%p wp=%llx lp=%llx time=%lu\n",
+                (unsigned long long)a,m->message,m->hwnd,(unsigned long long)m->wParam,
+                (unsigned long long)m->lParam,m->time);fflush(menu_trace);
+        }
+    }
+    return CallNextHookEx(NULL,code,a,b);
+}
+static LRESULT CALLBACK trace_dispatch(int code,WPARAM a,LPARAM b)
+{
+    if(code>=0){
+        CWPSTRUCT *m=(CWPSTRUCT *)b;
+        if((m->message>=WM_NCLBUTTONDOWN && m->message<=WM_NCLBUTTONDBLCLK) ||
+           (m->message>=WM_LBUTTONDOWN && m->message<=WM_LBUTTONDBLCLK) ||
+           m->message==WM_SYSCOMMAND || m->message==WM_ENTERMENULOOP || m->message==WM_EXITMENULOOP){
+            fprintf(menu_trace,"DISPATCH message=%04x hwnd=%p wp=%llx lp=%llx\n",
+                m->message,m->hwnd,(unsigned long long)m->wParam,(unsigned long long)m->lParam);
+            fflush(menu_trace);
+        }
+    }
+    return CallNextHookEx(NULL,code,a,b);
+}
+static LRESULT CALLBACK trace_filter(int code,WPARAM a,LPARAM b)
+{
+    if(code>=0){
+        MSG *m=(MSG *)b;
+        if(m->message==WM_LBUTTONDOWN || m->message==WM_LBUTTONUP || m->message==WM_LBUTTONDBLCLK ||
+            m->message==WM_NCLBUTTONDOWN || m->message==WM_NCLBUTTONUP || m->message==WM_NCLBUTTONDBLCLK){
+            fprintf(menu_trace,"MENU INPUT code=%d message=%04x hwnd=%p point=%ld,%ld time=%lu\n",
+                code,m->message,m->hwnd,m->pt.x,m->pt.y,m->time);fflush(menu_trace);
+        }
+    }
+    return CallNextHookEx(NULL,code,a,b);
+}
 void win16_style_gallery_run(void);
 void win16_style_gallery_test(const WCHAR *path);
 static LRESULT CALLBACK window_proc(HWND w,UINT m,WPARAM a,LPARAM b)
@@ -44,6 +87,14 @@ static LRESULT CALLBACK window_proc(HWND w,UINT m,WPARAM a,LPARAM b)
         }
         if(m==WM_SYSCOMMAND && (a&0xfff0)==SC_CLOSE)++close_commands;
         if(m==WM_ENTERIDLE && a==MSGF_MENU){
+            if(queued_double){
+                if(!queued_sent){
+                    queued_sent=TRUE;
+                    CHECK(PostMessageW(w,queued_double,queued_double==WM_NCLBUTTONDBLCLK?HTSYSMENU:MK_LBUTTON,queued_point));
+                    CHECK(SetTimer(w,18,500,NULL)!=0);
+                }
+                return 0;
+            }
             if(!native_menu_probe)menu_pixels(w,TRUE);
             if(menu_desktop_test){
                 if(!popup_probe){popup_probe=(HWND)b;popup_snapshot(popup_probe);
@@ -55,6 +106,7 @@ static LRESULT CALLBACK window_proc(HWND w,UINT m,WPARAM a,LPARAM b)
         if(m==WM_TIMER && a==17){
             KillTimer(w,17);popup_snapshot(popup_probe);popup_probe=NULL;EndMenu();return 0;
         }
+        if(m==WM_TIMER && a==18){KillTimer(w,18);EndMenu();return 0;}
     }
     if(m==WM_PAINT){
         PAINTSTRUCT ps;RECT r;HDC dc=BeginPaint(w,&ps);
@@ -553,6 +605,39 @@ static void menu_tests(void)
     CHECK(DestroyWindow(owner));
 }
 
+/* Deliberately queued messages, not physical input: measure whether USER's
+ * modal menu loop delivers the two possible double-click message forms. */
+static void queued_menu_test(void)
+{
+    int variant,form,scenario;
+    for(variant=0;variant<3;++variant)for(form=0;form<2;++form)for(scenario=0;scenario<3;++scenario){
+        RECT r;win16_style_layout l;POINT p;unsigned before=close_commands;
+        DWORD ex=variant?WS_EX_DLGMODALFRAME:0;
+        DWORD style=WS_CAPTION|WS_SYSMENU|(variant==2?WS_POPUP:WS_OVERLAPPED);
+        queued_sent=FALSE;queued_double=form?WM_LBUTTONDBLCLK:WM_NCLBUTTONDBLCLK;
+        menu_probe=make_window(style,ex,L"Queued menu-loop diagnostic",20,20,TRUE);
+        if(scenario==1)EnableMenuItem(GetSystemMenu(menu_probe,FALSE),SC_CLOSE,MF_BYCOMMAND|MF_GRAYED);
+        ShowWindow(menu_probe,SW_SHOW);SetForegroundWindow(menu_probe);SetActiveWindow(menu_probe);pump();
+        CHECK(GetWindowRect(menu_probe,&r));
+        CHECK(win16_style_measure(r.right-r.left,r.bottom-r.top,GetDpiForWindow(menu_probe),style,ex,FALSE,&l));
+        p.x=r.left+(l.system.left+l.system.right)/2;p.y=r.top+(l.system.top+l.system.bottom)/2;
+        if(scenario==2)p.x=r.left+l.client.right-10;
+        /* USER menu capture uses screen coordinates for both message forms. */
+        queued_point=MAKELPARAM(p.x,p.y);
+        SendMessageW(menu_probe,WM_SYSCOMMAND,SC_KEYMENU,L' ');
+        pump();
+        printf("QUEUED variant=%d message=%04x scenario=%d entered=%d close=%u alive=%d\n",
+            variant,queued_double,scenario,queued_sent,close_commands-before,IsWindow(menu_probe));fflush(stdout);
+        CHECK(queued_sent);
+        {BOOL expected=scenario==0;
+            CHECK(close_commands-before==(expected?1u:0u));
+            CHECK(!!IsWindow(menu_probe)==!expected);}
+        if(IsWindow(menu_probe)){KillTimer(menu_probe,18);DestroyWindow(menu_probe);}
+        menu_probe=NULL;
+    }
+    queued_double=0;
+}
+
 static void nonclient_surface_probe(void)
 {
     HWND w=make_window(WS_OVERLAPPEDWINDOW,0,L"Non-client repaint probe",20,20,TRUE);
@@ -682,11 +767,28 @@ int wmain(int argc,WCHAR **argv)
 {
     WNDCLASSW cls={0};HWND w[4];MSG msg;int i;HDESK desktop=NULL;
     DWORD initial_gdi;
-    menu_desktop_test=argc==3 && !wcscmp(argv[1],L"--menu-test");
+    BOOL queued_test=argc==2 && !wcscmp(argv[1],L"--queued-menu-test");
+    menu_desktop_test=queued_test || (argc==3 && !wcscmp(argv[1],L"--menu-test"));
     testing=menu_desktop_test || (argc==3 && !wcscmp(argv[1],L"--test"));
-    if(testing)capture_path=argv[2];
+    if(testing && !queued_test)capture_path=argv[2];
     SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
-    if(!testing){win16_style_gallery_run();return 0;}
+    if(!testing){
+        HHOOK hook=NULL,dispatch=NULL,queue=NULL;
+        if(argc==3 && !wcscmp(argv[1],L"--gallery-trace")){
+            if(_wfopen_s(&menu_trace,argv[2],L"w"))return 2;
+            fprintf(menu_trace,"TRACE pid=%lu thread=%lu\n",GetCurrentProcessId(),GetCurrentThreadId());fflush(menu_trace);
+            PeekMessageW(&msg,NULL,0,0,PM_NOREMOVE);
+            hook=SetWindowsHookExW(WH_MSGFILTER,trace_filter,NULL,GetCurrentThreadId());
+            if(!hook){fprintf(menu_trace,"SetWindowsHookEx failed: %lu\n",GetLastError());fclose(menu_trace);return 3;}
+            dispatch=SetWindowsHookExW(WH_CALLWNDPROC,trace_dispatch,NULL,GetCurrentThreadId());
+            if(!dispatch){UnhookWindowsHookEx(hook);fclose(menu_trace);return 4;}
+            queue=SetWindowsHookExW(WH_GETMESSAGE,trace_queue,NULL,GetCurrentThreadId());
+        }
+        win16_style_gallery_run();if(hook)UnhookWindowsHookEx(hook);
+        if(dispatch)UnhookWindowsHookEx(dispatch);
+        if(queue)UnhookWindowsHookEx(queue);
+        if(menu_trace)fclose(menu_trace);return 0;
+    }
     if(testing && !menu_desktop_test){
         WCHAR name[80];swprintf_s(name,80,L"Win16StyleTest-%lu",GetCurrentProcessId());
         desktop=CreateDesktopW(name,NULL,NULL,0,GENERIC_ALL,NULL);
@@ -695,6 +797,7 @@ int wmain(int argc,WCHAR **argv)
     cls.lpfnWndProc=window_proc;cls.hInstance=GetModuleHandleW(NULL);
     cls.hCursor=LoadCursorW(NULL,IDC_ARROW);cls.lpszClassName=L"Win16StyleTrial";
     cls.style=CS_DBLCLKS;CHECK(RegisterClassW(&cls)!=0);
+    if(queued_test){queued_menu_test();return 0;}
     if(menu_desktop_test){menu_tests();return 0;}
     layout_tests();
     raster_scale_tests();

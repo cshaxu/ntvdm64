@@ -723,3 +723,61 @@ r110 verifies the r109 C/header/build-script identities, documentation/link
 gates and unchanged ten-image assets/deployed hashes. This delivery contains
 diagnostics and evidence only, not a menu repair or S3 closure. Concurrent
 Queue/WOW-residue proposal changes are unrelated and excluded from this commit.
+
+## Dialog double-click queue boundary (r113--r120)
+
+Owner reauthorizes computer use only on the standalone demo, then directs
+probes/private desktops first and actual input only for gaps they cannot cover.
+No production component, guest, mirror or global host setting changes here.
+
+The r114 actual-input trace confirms the failure; its private-desktop test
+attempt separately fails with CreateDesktop access denied and is not a pass.
+r115 repeats the build/tests with the required execution permissions, passing
+27,220 checks per width. The trace entry records only the demo GUI thread;
+no cross-process or global mouse hook is used.
+
+r116's queued native-menu-loop probe exposes what direct SendMessage tests
+missed: NC double-click closes a normal window but leaves both dialog-frame
+forms alive. The first candidate used WH_MSGFILTER. It passes the corresponding
+queued-message cases in r117, but actual input still fails, so it is rejected
+as the final mechanism. The physical queue trace at
+build/M0-T445/S3/r117/physical-queue.txt records:
+
+- first WM_NCLBUTTONDOWN, HTSYSMENU, screen point (224,214);
+- capture release WM_LBUTTONUP followed by SC_KEYMENU/space;
+- second WM_LBUTTONDBLCLK with the same **screen** coordinates, not client
+  coordinates, seen in queue peeks/removal but not WH_MSGFILTER;
+- menu exit without SC_CLOSE.
+
+Read-only OpenNT mnloop.c's xxxMNLoop has a pre-filter double-click branch:
+native FindNCHit can classify the point as caption and consume it before
+_CallMsgFilter. menu.c's xxxMNFindWindowFromPoint rejects a system-menu button
+when _HasCaptionIcon is false. These are source explanations of the unavailable
+native geometry, not imported executable code or proof of identical modern
+implementation. The modern actual trace independently proves early consumption.
+Additional source SHA-256, windows/core/ntuser/kernel/menu.c:
+`300D2D9645C729F8E9D7F4A91D009CCB766640FFB431BF1FD73465473B0A8FA6`.
+
+The final component repair scopes WH_GETMESSAGE to this thread only while an
+empty-native-icon dialog runs SC_KEYMENU/space. On removal of a double click
+for this HWND inside its custom system-button rectangle, consume that message,
+end the menu, unhook/restore the previous thread binding, and post the native
+WM_NCLBUTTONDBLCLK outside the loop. Native disabled-Close and application
+handling remain downstream. The existing reference guard protects detach or
+destruction during modal reentrancy; no timer, global input hook, repaint hack,
+guest or mirror change is introduced.
+
+r119 x86 actual computer-use double click closes gallery 12; a second fresh
+window-tree read confirms the owned popup disappeared. r119's initial queued
+oracle had an incorrect expectation for a normal window's client-form message
+after correcting it to screen coordinates; the native control closes correctly.
+r120 fixes that expectation without a runtime-source change. Both widths pass
+27,220 ordinary checks and all 18 queued-menu cases (three frame forms, two
+message forms, enabled Close / disabled Close / outside-button). Tests require
+actual menu-loop entry, exact close-command count and HWND liveness. Queued
+cases are not represented as physical input, and the actual-input check was
+x86 gallery 12 only. r118/r119 remain intermediate evidence, not final gates.
+
+Menu first-draw blankness is **not** repaired by this change. Independent native
+animation controls and the owner's ordinary File-menu report remain open.
+S3 is not closed and production integration is not admitted by these results.
