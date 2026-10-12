@@ -537,3 +537,11 @@ actual WOW gameplay, successful publication/smoke runs and all ten three-way
 hash identities. Documentation governance, relative links and diff check pass;
 the actual audit process exits zero. This is the bounded current delivery/test
 contract, not a claim that all queued future WOW capabilities are implemented.
+
+## Owner acceptance
+
+On 2026-10-11 the owner confirmed “验收通过，准入S2”. S1 is closed at
+`fb7650ce0e449e58732ea7e7d4bc3d442aeab779`, pushed to main with a clean
+worktree before admission. The accepted ten-image release remains 0.0.444,
+protocol 45; the documented guest/WOW limitations remain explicit. CURRENT
+now admits S2 capability discovery, not S3 or a new terminal-query responder.

@@ -1,31 +1,40 @@
 # Project Status
 
-**Active: M0 T444 S1**
+**Active: M0 T444 S2**
 
 ## Active Packet
 
-### Native indexed-16 palette projection
+### Native indexed-16 capability discovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T444 S1`, Ordinary Mode. |
+| Identifier Mode | `M0 T444 S2`, Ordinary Mode; single-person implementation and separate review passes. |
 | Candidate Proposal | [Native indexed-16 text contract](../proposals/proposal-native-indexed16-text-contract-001.md). |
-| Admission And Approval | Owner directs: “队列第2条已经修复可以剔除。现在准入队列第一条”; subsequent standing goal: “把当前项目所有该通过的测试都通过，包括wow”. The proved EDIT/MEM software-publication regression is included in the required delivery-gate repair, without changing lifecycle ownership. |
-| Objective | Prove and, if confirmed, repair NTCON Console projection so a committed text frame's 16-entry RGB palette is applied atomically with its indexed cell attributes, without changing worker identity or the frame protocol. |
-| Non-goals | No capability-environment work (S2), VT/RGB emulation (S3), guest change, worker-type branch, polling/helper/lifecycle redesign, or arbitrary per-cell RGB support. |
-| Reference Baseline | The queued proposal's static review: NTVWM captures/transmits `CONSOLE_SCREEN_BUFFER_INFOEX` palette and Window decoding retains it, while Console projection reportedly copies attributes without palette application. T442 borrowed-Console lifecycle is delivered at `44c25e138` and is removed from the queue by owner direction. |
-| Files And ABI Surface | NTCON Console projection/session code and focused palette fixtures; required-gate repairs include the original-blocked-state guard in nt_graph.c and the r095-proved NTVWM input/output-snapshot coupling. Keep their focused regressions and mirror registration where applicable. Observation harness repairs, evidence and shared application-version synchronization are included. Existing frame and control ABIs remain unchanged. |
+| Admission And Approval | On 2026-10-11 the owner directs “验收通过，准入S2”: accept delivered S1 and admit the proposal's next capability-discovery stage. |
+| Objective | Establish a truthful, discoverable indexed-16 colour contract for native CUI launches, based on actual application detection and the existing hidden Console rather than an invented compatibility claim. |
+| Non-goals | No S3-wide VT degradation implementation, arbitrary per-cell RGB, guest/mirror changes, ConPTY replacement, worker-type rendering branches, new helper or lifecycle redesign. No global user-environment mutation. |
+| Reference Baseline | Owner-accepted S1 at `fb7650ce0`, published 0.0.444 ten-image package and protocol 45. S1 evidence records palette fidelity and all required regressions; the historical Edit colour audit records unanswered OSC queries and ineffective environment-only advertising. Recheck the selected application version before relying on it. |
+| Files And ABI Surface | Audit run16/NTVWM target environment construction, native Hook inheritance and existing Console query consumers. Any minimal target-scope implementation stays with its existing owner and gains focused tests; no frame/control ABI change is admitted. |
 | Applicable Rules | Execution, architecture, coding, document and source-provenance authorities; all build/test runs background-owned; `subst` prohibited. |
-| Verification | First audit current palette capture, commit, handoff and restoration owners. If production repair is admitted by evidence, build the affected closure and verify non-default indexed colours, palette-only update, failure/rollback, Console/Window switching, DOS/native handoff and borrowed palette restoration. |
-| Expected Markers | The visible Console palette equals the committed frame palette whenever that frame's indexed attributes become visible; no mixed cells/palette, stale handoff palette or caller-palette leak remains. |
-| Asset Needs | Current ten-image release, build-owned native palette fixture and existing Console/Window harnesses only. |
-| Reporting Requirements | Separate static fact, focused fixture and real presentation evidence; record exact palette values, owner/rollback behavior, limitations and any required re-admission. |
-| Stop Conditions | A repair needs a frame ABI change, worker-type conditional, new RGB/VT conversion engine, guest alteration, or reveals missing restoration ownership. Pause rather than broaden. |
-| Exit Criteria | Automated criteria met by r115/r116, coherent ten-image publication verified by r117, published interactive smoke by r119. Owner acceptance remains pending; S2 is not admitted. |
-| Original Owner Request | “队列第2条已经修复可以剔除。现在准入队列第一条”。 |
-| Similar-Issue Sweep | Both Console and Window presentation routes; palette-only frames, owner handoff/final frame, worker-neutral callers and borrowed Console restoration. |
+| Verification | First inventory inherited capability claims, real target detection and Console query behaviour. Verify the selected mechanism on x86/x64 direct and nested CUI targets, unchanged outer environment and redirected bytes, plus a capability-aware consumer selecting indexed output. Production changes require the full coherent-package regression/publication gate; admission-only documentation requires governance, links and diff review. |
+| Expected Markers | Exact target-visible detection evidence identifies indexed-16 support without advertising independent RGB/256 cells; ordinary consumer support and unsupported negotiation are explicitly distinguished. |
+| Asset Needs | Accepted ten-image baseline, existing native Edit audit, selected source-proven consumer and build-owned x86/x64 capability fixtures. No new guest media. |
+| Reporting Requirements | Report detection inputs, ownership, inheritance and redirection effects, actual consumers, negative outcomes and minimal proposed mechanism before claiming compatibility. A private marker alone is not application acceptance. |
+| Stop Conditions | An application requires unanswered terminal queries: identify the exact query/consumer and seek owner review before adding responses. Also stop for new protocol, terminal emulator, guest/mirror change or broader architecture. |
+| Exit Criteria | Source-backed capability contract and bounded implementation, if needed, with direct/nested and negative evidence; required build/regression/publication for production changes, reviewed commit/push and owner acceptance. No unsupported application is labelled passed. |
+| Original Owner Request | “验收通过，准入S2”。 |
+| Similar-Issue Sweep | Both native target widths, direct and Hook-created descendants, inherited TERM/COLORTERM/terminal identity claims, Console API versus VT query detection, file/pipe redirection and unrelated host/GUI environments. |
 
 ## Current Work
+
+S2 is admitted at the audit stage. No capability environment, query responder,
+production source or published image has changed at admission. First select a
+minimal mechanism from actual consumer evidence; S3 remains unadmitted.
+
+## T444 S1 Owner Acceptance
+
+On 2026-10-11 the owner accepted S1 and authorized S2. S1 is closed at
+`fb7650ce0`, committed and pushed with a clean worktree before this admission.
 
 The final 0.0.444 ten-image package is published to assets/release and
 O:/winnt/system32, with all three copies equal to the tested manifest (r117).
@@ -34,7 +43,7 @@ frontiers and all control gates; real WINMINE gameplay, native fixtures and
 service29 also pass. r115 passes 49 palette checks and complete real-pipe
 frontend fault/lifecycle coverage. Published COMMAND and CMD both pass
 interactive VER/EXIT in r119. Review and documentation governance are recorded
-in the linked evidence; owner acceptance remains pending.
+in the linked evidence; owner acceptance is now recorded above.
 
 Repairs are committed-palette projection and restoration, palette-only
 geometry preservation, bounded native intermediate viewport, NTVWM keyboard
@@ -45,7 +54,8 @@ matched historical error frontiers are not functional application passes. The la
 inherited-environment failure matches the registered original COMMAND INIT
 lifetime defect and is not counted as a pass. See
 [S1 evidence](../etc/evidence/m0-t444-s1-native-indexed16-palette-projection.md).
-S1 awaits owner acceptance; S2 is not admitted.
+The acceptance does not convert the explicitly retained guest/WOW limitations
+into functional passes.
 
 ## Previous Closure
 
