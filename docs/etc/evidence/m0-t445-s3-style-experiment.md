@@ -904,3 +904,24 @@ owned-DIB prints return 1. These are expected-failure diagnosis checks, not
 menu acceptance passes. Native-menu
 failure is localized, not repaired; S3 remains open and no production image
 or style-library implementation changes in this diagnostic delivery.
+
+### Shared-state isolation limit (r135/r136)
+
+Further static inspection resolves the saved-DC clone ownership operation to
+win32kbase!GreSetDCOwnerExFastOpt (RVA 0x1A1700). GrepSaveDC contains multiple
+failure paths, including allocation and ownership transfer. Static inspection
+does not prove which executes, so neither resource exhaustion nor ownership
+failure is established. The base binary was read-only: SHA256
+BFB8C3929EA7D1645F07F06FC1666A2603CBB5385E35899A090DA8A8BABDAA42;
+Microsoft public PDB GUID A74A7E6053665B0DE1E691B07865180A, age 1.
+
+r135 rechecks the private-desktop native popup and gets the same failed native
+print followed by successful owned-DIB print. A disposable probe then tries
+CreateWindowStationW followed by SetProcessWindowStation and CreateDesktopW,
+without switching the input desktop. r136 separates the errors: creation
+itself is denied with ERROR_ACCESS_DENIED (5), before binding. No new station
+or session-isolated comparison was obtained. This is an unavailable control,
+not a test pass or evidence of a menu defect. The unverified station option
+was removed; tracked probe source returns exactly to the r134-tested version.
+Retained logs/binaries are under build/M0-T445/S3/r135 and r136. S3 remains
+open; no change to the host configuration, menu appearance or runtime library.
