@@ -1,31 +1,32 @@
 # Project Status
 
-**Active: M0 T445 S3**
+**Active: M0 T445 S4**
 
-M0 T445 S2 closed at c12090805. Owner admits S3's isolated UI experiment.
-Product propagation and integration remain S4--S7.
+Owner closes S3 with the native-menu session retest deferred to S7.
+S4 extends the standalone experiment with retro menus and MDI; product
+propagation and integration move to S5/S6. T445 remains open.
 See the [S1 closure design](../etc/evidence/m0-t445-s1-installation-design.md).
 
 ## Active Packet
 
-### Isolated Win16-style component and native GUI experiment
+### Standalone retro menus and MDI
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T445 S3, Ordinary Mode; implementation then separate final review. |
-| Admission And Approval | Owner requests the independent Win32 experiment and gallery, then authorizes computer-use observation/interaction of that demo to reproduce native caption-button leakage missed by probes. |
-| Objective | Build a reusable local frame library and directly launched GUI demonstration, without product integration. |
-| Non-goals | No run16 options, Hook/WOW integration, NTCON changes, guest/mirror edits, runtime component or global theme/settings. Menu/MDI retro rendering remains later work. |
-| Reference Baseline | c12090805, accepted S2 ten-image package; S1 original-reference research and installation design. |
+| Identifier Mode | M0 T445 S4, Ordinary Mode; implementation then separate final review. |
+| Admission And Approval | Owner directs S3 closure and moves retro menus/MDI to S4; updated goal explicitly covers the S3+S4 standalone app. |
+| Objective | Extend the shared standalone component and gallery with source-referenced Win3.1 system/ordinary menus and MDI visuals and interaction. |
+| Non-goals | No run16 options, Hook/WOW integration, NTCON changes, guest/mirror edits, production release or global theme/settings changes. No claim that retro drawing repairs the deferred native-menu failure. |
+| Reference Baseline | Owner-closed S3, library at 488aa73ae, diagnostic source at 67b3e586d; r134 both-width gates and r139/r140 historical controls. |
 | Files And ABI Surface | src/win16-style, tests/app and tests/observation; local same-thread C API, x86/x64 /MT static archives. |
 | Applicable Rules | Source/architecture/coding/document authorities; background-owned build/tests; build-only outputs; no subst. Computer use is scoped to the owned demo, not other applications or host settings. |
-| Verification | Actual HWND gallery: button combinations, caption/system-menu absence, fixed/sizeable/dialog/borderless frames and state changes; separately labelled native menu/MDI/child references. Test system-menu close and disabled close, layout/hits, geometry preservation and lifetime; owned probe captures. |
+| Verification | Both widths: menu initial paint, selection, disabled items, separators, submenus, keyboard/mouse cancellation and commands; MDI activation, child frames, maximize/restore, system menu and close; preserve S3 layout/lifetime tests. Compare original references and owned screenshots; distinguish probes from physical acceptance. |
 | Expected Markers | Both-width runnable demo and tests with images; no link to other product components. |
 | Asset Needs | Pinned VGA.DRV button resources; original media stays read-only. Owner now selects host System font; embedded VGASYS.FON and private font loading have been removed. |
 | Reporting Requirements | Exact binary paths, screenshots, measured test results and visual/physical interaction limitations. |
 | Stop Conditions | Need for product/guest integration, global interception/settings or unreviewed resources; no scope expansion. |
-| Exit Criteria | Focused tests and reviewed probe images, governance/link/diff checks, commit/push; owner visual stability acceptance before S4. No production release replacement for this isolated experiment. |
-| Original Owner Request | Admit S3, implement component and independent Win32 trial; show progress using probe screenshots; no computer use. |
+| Exit Criteria | Source-backed design, implemented standalone menus/MDI and focused tests, reviewed images, governance/link/diff checks, commit/push and owner acceptance. Native-menu fresh-session retest remains an explicit S7 obligation, not a pass. |
+| Original Owner Request | Close S3; move retro menus and MDI to S4, parameter propagation to S5 and product integration to S6. |
 | Similar-Issue Sweep | Missing buttons, title changes, install/remove/destroy, unsupported frames, DPI/high contrast, pressed/canceled actions and application client preservation. |
 
 ## S1 Closure Record
@@ -41,13 +42,20 @@ Owner-accepted palette repair closes with this commit/push delivery.
 See [repair and verification evidence](../etc/evidence/m0-t445-s2-palette-repair.md).
 The standalone experiment is admitted as S3 by the next owner request.
 
+## S3 Closure Record
+
+Owner accepts bounded S3 closure and defers native-menu fresh-session diagnosis
+to T445 S7. The [S3 closure evidence](../etc/evidence/m0-t445-s3-style-experiment.md)
+retains tested identities, limitations and the runnable standalone demo.
+This does not declare the menu blankness repaired or the full T complete.
+
 ## Planned Sequence
 
-S1 is closed. S2 delivers the accepted palette repair. S3 is the isolated UI
-experiment; S4 is CLI/policy propagation and title-marker verification; S5
-integrates the common frame; S6 covers menus/MDI; S7 is integrated acceptance.
+S1--S3 are closed. S4 covers standalone retro menus/MDI; S5 is CLI/policy
+propagation and title-marker verification; S6 integrates the shared component;
+S7 is integrated acceptance and the deferred native-menu session retest.
 The [working plan](../etc/operations/t445-win31-window-style-plan.md) defines
-the contracts. S3 is active; S4 waits for experiment stability.
+the contracts. S4 is active.
 The shared source owner remains src/win16-style, with no production integration
 during S3.
 
@@ -98,31 +106,14 @@ during S3.
 
 ## Current Work
 
-Owner accepted r070's native hover/static-residue repairs. NC activation and
-cursor painting are custom-owned; minimized presentation remains native.
-The 19-entry gallery retains bitmap/font, menu/disabled-close and lifetime
-tests. Menu/MDI/child/scrollbar samples remain labelled native references.
-Detailed runs and the original residue negative control are retained below.
-Overall S3 acceptance and S4 admission wait.
-See [S3 experiment evidence](../etc/evidence/m0-t445-s3-style-experiment.md).
-No production images or deployed components changed.
-
-Owner's paired normal/selected references resolve the system box as palette-role
-inversion, not an arrow-style bevel. r083 implements that state, original 19x18
-button geometry and rounded stroke widths; both widths pass 13,885 checks. Private
-desktop notification/pixel checks do not certify physical menu tracking.
-No whole-window pixel-equivalence claim is made.
-
-Host System font and release-triggered dialog menu were delivered at 879a8584f.
-Owner confirms menu persistence. r119 actual input repairs gallery-12 double
-click through a scoped menu-loop queue binding; r120 passes 27,220 checks and
-18 queued menu cases per width. Blank initial items remain unresolved.
-r105/r106 reproduce blank system-menu items in an independent native executable
-with no style library. Per-popup TPM_NOANIMATION restores text; system-DPI and
-v6-manifest controls do not. r122 now reproduces native File-menu blankness too:
-both widths remain blank after 3 seconds; per-popup no-animation draws normally.
-r134 both-width native probes localize animation WM_PRINT failure before client
-drawing (GreSaveDC abort); underlying DC-state cause remains unproven. S3 is open.
+S3 is owner-closed; S4 standalone menus/MDI is admitted. The complete
+[S3 experiment evidence](../etc/evidence/m0-t445-s3-style-experiment.md)
+retains caption leakage, original frame/button geometry, host System font,
+double-click repair, both-width tests and diagnostic controls. No production
+images changed. Native-menu animation blankness remains unresolved: the same
+old independent executable now fails where its earlier capture was normal.
+Fresh-session cause isolation is owner-deferred to S7. Retro menu implementation
+is a separate S4 product requirement, not proof that this failure is repaired.
 
 ## T444 Final Disposition
 

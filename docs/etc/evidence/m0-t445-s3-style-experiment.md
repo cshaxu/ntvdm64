@@ -925,3 +925,32 @@ not a test pass or evidence of a menu defect. The unverified station option
 was removed; tracked probe source returns exactly to the r134-tested version.
 Retained logs/binaries are under build/M0-T445/S3/r135 and r136. S3 remains
 open; no change to the host configuration, menu appearance or runtime library.
+
+### Owner-directed S3 closure and resequencing
+
+On 2026-10-12 the owner explicitly closes S3 and defers the native-menu
+fresh-session comparison to T445 final acceptance (S7). This is an accepted
+limitation, not a repair or passing menu first-paint result. S4 now owns
+standalone retro menus and MDI; propagation moves to S5 and integration to S6.
+
+r139 compiles seven historical library revisions with one x64 diagnostic
+harness. Keyboard system-menu animation print fails in all seven, including
+initial 1a5d14b6c. The button-message harness opens the old TrackPopupMenu path
+in the first two revisions but is unavailable in five later revisions; those
+five are not passes. No first-bad commit was established. r140 then reruns the
+retained r107 native-menu-probe.exe without rebuilding: SHA256
+59AAB16EFCBE6DDA500FA777712A87F81F4E8281944291346A5BD574F677A50C.
+Its original File capture showed all three items; the new animated capture is
+blank, while --file-no-animation again shows all three. Both runs exit 0 and
+report unobscured popup pixels. Exit 0 means captured, not visually passed.
+This rules out later code as necessary to reproduce the current failure, but
+does not identify who changed shared state. No global setting was modified.
+
+Closure reuses r134's 27,220 checks per width only after C/header/build-script
+identity validation; r120 retains queued menu/double-click evidence. The
+standalone owner demo is build/M0-T445/S3/r134/x64/win16-style-demo.exe (x86
+sibling available). No production component or release image changes here.
+Final closure gates are under build/M0-T445/S3/r141. Source review identifies
+unchecked SaveDC failure handling as a hardening follow-up for S4; it is not
+proven to cause the shared-state failure. S7 must obtain a fresh-session native
+control before and after demo execution, or record an explicit owner disposition.

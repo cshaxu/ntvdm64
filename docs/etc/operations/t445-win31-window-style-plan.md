@@ -5,17 +5,19 @@
 S1 closed through its [installation design](../evidence/m0-t445-s1-installation-design.md).
 The owner inserts accepted uncommitted palette repair delivery as S2.
 The previously admitted standalone experiment moves to S3; integration moves
-to S4--S7. Historical evidence and build directories retain their original
-numbers. No integration starts before owner-confirmed experiment stability.
+to S4--S7. On 2026-10-12 the owner closes S3 and resequences S4 as standalone
+menus/MDI, S5 as propagation and S6 as integration. Historical evidence and
+build directories retain their original numbers. S7 retains the unresolved
+native-menu animation fresh-session control; it is not a passing capability.
 
 | Stage | Bounded result |
 | --- | --- |
 | S1 | HWND ownership, original Win3.1 references, task/launch policy owners and installation design; preserve explicit remaining implementation proofs. |
 | S2 | Audit, commit/push and close the owner-accepted NTVWM palette geometry repair, tests and published assets. |
 | S3 | Implement experimental src/win16-style and independently launch an authored Win32 GUI test program linked directly to it. Prove basic frame visuals/interaction without any other product component; obtain owner stability acceptance. |
-| S4  | Both CLI options, explicit/inherited policy resolution, end-to-end propagation, per-Win16-task isolation and real-window title marker; build, verify, publish, commit/push for owner acceptance. No automatic activation of experimental retro painting in production. |
-| S5  | Reuse, integrate and harden the already-tested common frame, font/palette/DPI and geometry through WOW/Hook paths; do not build a second renderer. |
-| S6  | Standard menus, MDI and remaining supported interaction/state coverage; document custom-frame and host-shell limitations rather than inventing special cases. |
+| S4 | Standalone retro system/ordinary menus, MDI and remaining supported interaction/state coverage in the shared component and demo; no product integration. |
+| S5 | Both CLI options, explicit/inherited policy resolution, end-to-end propagation, per-Win16-task isolation and real-window title marker; build, verify, publish, commit/push for owner acceptance. No automatic activation of experimental retro painting in production. |
+| S6 | Reuse, integrate and harden the tested common frame/menu/MDI, font/palette/DPI and geometry through WOW/Hook paths; do not build a second renderer. |
 | S7  | Integrated visual/interaction and serial product regression, coherent release/publication and final owner acceptance. |
 
 ## S3 standalone experiment contract
@@ -24,7 +26,7 @@ Owner follow-up admits a selectable demo gallery for all discussed forms.
 Extend the local renderer to captionless/borderless top-level windows and
 all caption-button combinations. Keep native-reference menu/scrollbar/child/
 MDI examples explicitly labelled, not disguised as retro support; their
-renderer remains S6. Repair system-menu double-click close through native
+renderer is now S4. Repair system-menu double-click close through native
 non-client menu handling, including disabled-close and cancellation tests.
 
 - Library source remains src/win16-style. The authored Win32 API demo and tests
@@ -51,7 +53,8 @@ non-client menu handling, including disabled-close and cancellation tests.
   not a replacement in assets/release or O:/winnt/system32. No deployed ten-image
   behavior changes, no RPC/Hook/WOW integration, no global host theme changes.
 - Stability means focused repeatable tests plus owner acceptance of the visual
-  trial, not merely a successful compile. S4 waits at that gate.
+  trial, not merely a successful compile. Owner closed this gate with the
+  native-menu fresh-session retest explicitly deferred to S7.
 
 ## Policy contract
 
@@ -80,11 +83,11 @@ actual owning task's policy even when shared-worker tasks interleave. Native
 Hook contexts carry policy across both bitnesses and run16 redirection. Do not
 alter global user environment, add IPC, polling, helper processes or filename
 exceptions. Any unreached guest child-creation boundary must be audited before
-claiming propagation; a direct-launch-only implementation cannot close S4.
+claiming propagation; a direct-launch-only implementation cannot close S5.
 
-## S4 visible marker
+## S5 visible marker
 
-Reuse the owner-approved `src/win16-style` experimental library in S4: x86
+Reuse the owner-approved `src/win16-style` experimental library in S5: x86
 for WOW32/nthook32, x64 for nthook64. Each consumer supplies its effective
 window enable decision; the shared marker and later renderer do not determine
 program type or own propagation. No temporary parallel marker implementation.
@@ -107,10 +110,10 @@ and report title-dependent application compatibility explicitly.
 
 The marker uses the same per-window enable decision and installation boundary
 that later rendering will consume, not a temporary process-wide caption scanner.
-No production retro colours, font, borders, menus or layout are required in S4. A visible
+No production retro colours, font, borders, menus or layout are required in S5. A visible
 marker proves enablement only, not delivery of the Win3.1 appearance.
 
-## S4 acceptance matrix
+## S5 acceptance matrix
 
 - Default launches: existing Win16 and x86/x64 native windows remain unmarked.
 - Each option: exact expected marker on real eligible windows, absent on excluded
