@@ -38,7 +38,7 @@ VGA.DRV resources. No original executable code is imported.
 | S3 preservation | 27,261 checks per width retain frame/client geometry, titles, palettes, native-button suppression and GDI lifetime; recorded GDI cycles show no net growth |
 | Source boundaries | Standalone graph only; no production integration or mirror change |
 | Visual/physical acceptance | Owner trial of gallery12/15/18 remains pending; prints and queued messages do not prove DWM/RDP or actual pointer behavior |
-| Delivery | Final governance/link checks, scoped commit/push remain pending; unrelated queue/proposal work must be excluded |
+| Delivery | Governance/link and diff checks pass; implementation committed and pushed as de5526a16; unrelated queue/proposal work excluded |
 
 ## Separate review finding
 
@@ -50,6 +50,10 @@ inside a real menu cell and verifies no selection change, on both widths.
 This local dispatch repair does not diagnose native animated-menu blankness.
 
 ## Limits and follow-up
+
+Implementation delivery de5526a16 is on origin/main. This is the standalone
+trial delivery, not S4 owner acceptance. All remaining dirty paths belong to
+the pre-existing WOW queue/proposal work, not the delivered component.
 
 Arbitrary owner-drawn/bitmap bars, scrollbars, tool/layered/custom-client-edge
 forms remain unsupported. Minimized presentation remains native as admitted
