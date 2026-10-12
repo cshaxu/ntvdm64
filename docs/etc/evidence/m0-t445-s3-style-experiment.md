@@ -542,3 +542,63 @@ shows aligned two-column stroke/button edges. Raw SIZING log records all eight
 rectangles; they include top-right [385,2,387,4) and its bottom counterpart.
 Final runnable candidate is r083/x64/win16-style-demo.exe. Full original-style
 audit and physical popup acceptance remain open; no product integration claim.
+# Owned-dialog menu follow-up (r086/r087, not fixed)
+
+Owner reports gallery 12's system box does not open its menu. The new
+menu_tests matrix covers ordinary, dialog-frame and owned popup windows,
+including custom hit testing, native SC_MOUSEMENU dispatch, disabled close
+and double-click close. r086/r087 background x86/x64 runs pass those bounded
+checks; this is not menu-popup acceptance.
+
+r087's GetMenuBarInfo(OBJID_SYSMENU) observation distinguishes the cases:
+ordinary window has native screen bounds 36,41,69,74; both dialog-frame
+variants return an empty 0,0,0,0 rectangle despite WS_SYSMENU. Their custom
+button centre is 45,49 and hits HTSYSMENU. All three deliver one SC_MOUSEMENU;
+all three private-desktop runs observe zero real WM_INITMENUPOPUP messages.
+Thus message dispatch is intact, and the modern dialog's missing native
+system-box geometry is a concrete mismatch with the custom frame. The exact
+menu-loop rejection still requires a real popup observation; no repair or
+physical-interaction pass is claimed. Do not weaken the popup requirement to
+the command count. Existing explicit notification tests prove painting only.
+
+## Input-desktop menu evidence and candidate correction
+
+r088's unactivated windows also produced no popups. r089/r090 explicitly
+activate only their own windows. r090 proves Alt+Space's SC_KEYMENU entry
+opens all three real menus, but WM_INITMENUPOPUP's system-menu handle does
+not equal GetSystemMenu(FALSE). The library's extra handle comparison was
+therefore wrong; HIWORD(lParam) supplies the system-menu classification.
+
+The candidate removes that comparison. A custom system button with a
+successfully queried but empty native icon rectangle uses SC_KEYMENU/space;
+ordinary native icon tracking and double-click handling remain delegated.
+r091 x86 input-desktop probe observes one real click popup for both dialog
+variants, verifies selected pixels in actual WM_ENTERIDLE, cancellation,
+disabled-close and double-click-close. No global input injection is used.
+r091 private-desktop run times out because this menu entry waits for input;
+it is a failed fixture run, not a passing regression. Private-desktop tests
+now explicitly intercept that command after counting it; --menu-test is the
+separate real-popup contract and requires the input desktop. No claim is
+made about a physical second click while a native menu is already tracking.
+
+r092 completes x86/x64 private-desktop regression: 25,862 checks each.
+The separate --menu-test then passes on both widths with foreground/active
+identity confirmed and one actual click popup per dialog variant. These
+are candidate build results, not whole-S closure or physical-click acceptance.
+
+r093 adds all sixteen sides of the eight corner-hit boundaries at original
+96-DPI geometry, with and without a caption. Both widths pass 25,896 checks;
+separate input-desktop probes again observe both dialog click popups and
+keyboard popups. The menu probe now requires an explicit capture pathname:
+`win16-style-demo.exe --menu-test <absolute-build-path>/menu.bmp`.
+An r089 failed pixel assertion had written `(null)-failure.bmp` at the repo
+root; that exact file was moved to r089/menu-failure.bmp, and the required
+pathname plus build working directory removes that accidental output route.
+Title appearance remains awaiting the owner's reference-version clarification.
+
+The same tested source also replaces long-title ellipses with measured,
+left-clipped text, following original USER 1:A526--A5DE; it does not change
+the embedded font or its scaling. A long-title independent pixel oracle
+exercises this in r093. This clipping correction is not the requested font
+appearance rollback, which remains explicitly pending. Final review separates
+that pending visual choice from menu correctness and derived corner geometry.

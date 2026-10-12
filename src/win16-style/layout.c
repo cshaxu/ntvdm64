@@ -19,6 +19,8 @@ BOOL win16_style_measure(int width,int height,UINT dpi,DWORD style,DWORD ex_styl
     /* Original VGA: 18-pixel artwork, 19-pixel button pitch. USER's
      * 20-pixel CYCAPTION includes both boundary lines, not 20 content rows. */
     caption_height=MulDiv(18,(int)dpi,96);
+    l->corner.cx=l->border+button;
+    l->corner.cy=l->border+caption_height+l->unit;
     SetRect(&l->outer,0,0,width,height);
     if(!caption){
         SetRect(&l->client,l->border,l->border,max(l->border,width-l->border),
@@ -56,9 +58,14 @@ LRESULT win16_style_hit(const win16_style_layout *l,POINT p)
     if(PtInRect(&l->caption,p))return HTCAPTION;
     if(PtInRect(&l->client,p))return HTCLIENT;
     if(!l->sizeable)return HTBORDER;
-    left=p.x<l->border;right=p.x>=l->outer.right-l->border;
+    left=p.x<l->corner.cx;right=p.x>=l->outer.right-l->corner.cx+l->unit;
     top=p.y<l->border;bottom=p.y>=l->outer.bottom-l->border;
     if(top)return left?HTTOPLEFT:right?HTTOPRIGHT:HTTOP;
     if(bottom)return left?HTBOTTOMLEFT:right?HTBOTTOMRIGHT:HTBOTTOM;
-    return left?HTLEFT:right?HTRIGHT:HTBORDER;
+    /* USER 1:67BB..6859 extends corner hits along both adjacent bands.
+     * Left/top include the dividing stroke; right/bottom start after it. */
+    top=p.y<l->corner.cy;bottom=p.y>=l->outer.bottom-l->corner.cy+l->unit;
+    if(p.x<l->border)return top?HTTOPLEFT:bottom?HTBOTTOMLEFT:HTLEFT;
+    if(p.x>=l->outer.right-l->border)return top?HTTOPRIGHT:bottom?HTBOTTOMRIGHT:HTRIGHT;
+    return HTBORDER;
 }

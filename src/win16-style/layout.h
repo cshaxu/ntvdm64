@@ -6,6 +6,7 @@
 typedef struct win16_style_layout {
     RECT outer, client, caption, system, minimize, maximize, title;
     int border, unit;
+    SIZE corner;
     BOOL sizeable, dialog_frame;
 } win16_style_layout;
 BOOL win16_style_measure(int width, int height, UINT dpi, DWORD style, DWORD ex_style,

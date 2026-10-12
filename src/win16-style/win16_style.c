@@ -167,8 +167,7 @@ static void paint(HWND w,style_window *s,HDC target)
     if(l.sizeable && !l.dialog_frame){
         /* Original USER 1:A06B..A1DE divides the flat sizing band into
          * corner and edge regions. These are strokes, not a bevel. */
-        int corner=l.border+MulDiv(19,(int)s->dpi,96)-l.unit;
-        int vertical=l.border+MulDiv(18,(int)s->dpi,96),i;
+        int corner=l.corner.cx-l.unit,vertical=l.corner.cy-l.unit,i;
         for(i=0;i<2;++i){
             int x=i?l.outer.right-corner-l.unit:l.outer.left+corner;
             int y=i?l.outer.bottom-vertical-l.unit:l.outer.top+vertical;
@@ -196,7 +195,7 @@ static void paint(HWND w,style_window *s,HDC target)
         HDC text_dc;HBITMAP bitmap,prior;
         RECT logical;
         GetWindowTextW(w,title,len+1);
-        r=l.title;InflateRect(&r,-2*l.unit,0);
+        r=l.title;
         /* System is a discrete raster font. Asking GDI for a 24-pixel cell
          * selects its 20-pixel strike, not a scaled 16-pixel VGA strike.
          * Render the base cell, then scale once with the rest of the metrics. */
@@ -204,12 +203,17 @@ static void paint(HWND w,style_window *s,HDC target)
         text_dc=CreateCompatibleDC(dc);
         bitmap=CreateCompatibleBitmap(dc,logical.right,logical.bottom);
         if(text_dc && bitmap){
+            SIZE extent;
             prior=(HBITMAP)SelectObject(text_dc,bitmap);
             fill(text_dc,logical,s->active?p.active:p.inactive);
             SelectObject(text_dc,s->font?s->font:GetStockObject(SYSTEM_FONT));
             SetBkMode(text_dc,TRANSPARENT);
             SetTextColor(text_dc,s->active?p.active_text:p.inactive_text);
-            DrawTextW(text_dc,title,-1,&logical,DT_CENTER|DT_VCENTER|DT_SINGLELINE|DT_NOPREFIX|DT_END_ELLIPSIS);
+            /* USER 1:A526..A5DE measures, centres if it fits, otherwise
+             * clips from the left border. It does not synthesize ellipses. */
+            if(GetTextExtentPoint32W(text_dc,title,len,&extent))
+                ExtTextOutW(text_dc,max(1,(logical.right-extent.cx)/2),
+                    max(0,(logical.bottom-extent.cy)/2),ETO_CLIPPED,&logical,title,(UINT)len,NULL);
             SetStretchBltMode(dc,COLORONCOLOR);
             StretchBlt(dc,r.left,r.top,max(0,r.right-r.left),r.bottom-r.top,
                 text_dc,0,0,logical.right,logical.bottom,SRCCOPY);
@@ -394,7 +398,7 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
         goto forward;
     case WM_INITMENUPOPUP:
         result=DefSubclassProc(w,msg,wp,lp);
-        if(!s->detached && HIWORD(lp) && (HMENU)wp==GetSystemMenu(w,FALSE)){
+        if(!s->detached && HIWORD(lp)){
             s->system_menu=TRUE;paint(w,s,NULL);
         }
         break;
@@ -403,6 +407,15 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
         if(!s->detached && s->system_menu){s->system_menu=FALSE;paint(w,s,NULL);}
         break;
     case WM_NCLBUTTONDOWN:
+        if(wp==HTSYSMENU){
+            MENUBARINFO menu={sizeof(menu)};
+            /* Modern dialog frames can have a system menu but no native
+             * icon rectangle. Their native mouse-menu entry has no button
+             * to track; use the same system-menu entry as Alt+Space. */
+            if(GetMenuBarInfo(w,OBJID_SYSMENU,0,&menu) && IsRectEmpty(&menu.rcBar)){
+                result=SendMessageW(w,WM_SYSCOMMAND,SC_KEYMENU,L' ');break;
+            }
+        }
         /* Native system-menu tracking owns the second click, cancellation
          * and disabled SC_CLOSE semantics. TrackPopupMenu is not equivalent
          * to the non-client menu loop. Double clicks also go to the owner. */

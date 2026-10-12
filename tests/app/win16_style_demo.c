@@ -10,11 +10,11 @@
 
 static unsigned checks;
 #define CHECK(x) do {++checks;if(!(x)){fprintf(stderr,"FAIL %u line %d: %s error=%lu\n",checks,__LINE__,#x,GetLastError());exit(1);}}while(0)
-static BOOL testing;
+static BOOL testing,menu_desktop_test;
 static const WCHAR *capture_path;
 static int live;
 static HWND menu_probe;
-static unsigned menu_entries,close_commands;
+static unsigned menu_entries,close_commands,menu_popups,key_menu_entries;
 static void menu_pixels(HWND w,BOOL selected);
 static HWND cursor_probe;
 static unsigned client_cursor_calls;
@@ -28,10 +28,21 @@ static LRESULT CALLBACK window_proc(HWND w,UINT m,WPARAM a,LPARAM b)
         ++client_cursor_calls;SetCursor(LoadCursorW(NULL,IDC_IBEAM));return TRUE;
     }
     if(w==menu_probe){
+        if(m==WM_INITMENUPOPUP){
+            if(HIWORD(b))++menu_popups;
+            if(menu_desktop_test)printf("MENU init system=%u matches=%d\n",HIWORD(b),(HMENU)a==GetSystemMenu(w,FALSE));
+        }
         if(m==WM_SYSCOMMAND && (a&0xfff0)==SC_MOUSEMENU)++menu_entries;
+        if(m==WM_SYSCOMMAND && (a&0xfff0)==SC_KEYMENU){
+            ++key_menu_entries;
+            /* A private non-input desktop cannot exercise keyboard menu
+             * tracking. --menu-test separately requires the real popup. */
+            if(!menu_desktop_test)return 0;
+        }
         if(m==WM_SYSCOMMAND && (a&0xfff0)==SC_CLOSE)++close_commands;
         if(m==WM_ENTERIDLE && a==MSGF_MENU){
-            menu_pixels(w,TRUE);EndMenu();return 0;
+            menu_pixels(w,TRUE);
+            EndMenu();return 0;
         }
     }
     if(m==WM_PAINT){
@@ -200,6 +211,39 @@ static void raster_scale_tests(void)
     SelectObject(dc,old);DeleteObject(bitmap);DeleteDC(dc);
 }
 
+static void title_clip_test(void)
+{
+    WCHAR title[121];HWND w;RECT r;win16_style_layout l;int i,x,y,width,height,logical_width;
+    HDC actual,base=CreateCompatibleDC(NULL),expected=CreateCompatibleDC(NULL);
+    HBITMAP a,b,old_a,old_b;HFONT font;RECT logical;
+    for(i=0;i<120;++i)title[i]=L'W';title[120]=0;
+    w=make_window(WS_OVERLAPPEDWINDOW,0,title,20,20,TRUE);
+    SendMessageW(w,WM_NCACTIVATE,FALSE,0);
+    CHECK(GetWindowRect(w,&r));
+    CHECK(win16_style_measure(r.right-r.left,r.bottom-r.top,GetDpiForWindow(w),WS_OVERLAPPEDWINDOW,0,FALSE,&l));
+    width=l.title.right-l.title.left;height=l.title.bottom-l.title.top;
+    logical_width=MulDiv(width,96,(int)GetDpiForWindow(w));
+    actual=GetWindowDC(w);CHECK(actual && base && expected);
+    a=CreateCompatibleBitmap(actual,logical_width,18);b=CreateCompatibleBitmap(actual,width,height);
+    CHECK(a && b);old_a=SelectObject(base,a);old_b=SelectObject(expected,b);
+    SetRect(&logical,0,0,logical_width,18);FillRect(base,&logical,(HBRUSH)GetStockObject(WHITE_BRUSH));
+    font=CreateFontW(16,0,0,0,FW_BOLD,FALSE,FALSE,FALSE,ANSI_CHARSET,OUT_RASTER_PRECIS,
+        CLIP_DEFAULT_PRECIS,NONANTIALIASED_QUALITY,DEFAULT_PITCH,L"Win31 VGA System");
+    CHECK(font);SelectObject(base,font);SetBkMode(base,TRANSPARENT);SetTextColor(base,RGB(0,0,0));
+    /* Oracle: a deliberately overflowing stream of original W glyphs starts
+     * one logical pixel inside the left edge. No fitting/ellipsis algorithm.
+     * The bitmap boundary clips its tail. Compare the whole title, including
+     * the right edge where a modern ellipsis used to replace original glyphs. */
+    CHECK(TextOutW(base,1,1,title,120));SetStretchBltMode(expected,COLORONCOLOR);
+    CHECK(StretchBlt(expected,0,0,width,height,base,0,0,logical_width,18,SRCCOPY));
+    for(y=0;y<height;++y)for(x=0;x<width;++x)
+        CHECK(GetPixel(actual,l.title.left+x,l.title.top+y)==GetPixel(expected,x,y));
+    printf("TITLE overflowing original glyph stream clipped without ellipsis: %dx%d pixels\n",width,height);
+    ReleaseDC(w,actual);SelectObject(base,old_a);SelectObject(expected,old_b);
+    DeleteDC(base);DeleteDC(expected);DeleteObject(a);DeleteObject(b);DeleteObject(font);
+    CHECK(DestroyWindow(w));
+}
+
 static void capture(HWND *windows,const WCHAR *path,BOOL pressed)
 {
     BITMAPINFO bi={0};BITMAPFILEHEADER file={0};
@@ -344,6 +388,20 @@ static void layout_tests(void)
     UINT dpi;DWORD kinds[]={WS_OVERLAPPEDWINDOW,WS_CAPTION|WS_SYSMENU|WS_MINIMIZEBOX,
         WS_CAPTION|WS_SYSMENU};
     size_t i;
+    /* Original USER's inclusive corner comparisons at VGA 96 DPI.
+     * Test both sides of each of the eight dividing strokes. */
+    {static const struct {LONG x,y;int hit;} edges[]={
+        {22,0,HTTOPLEFT},{23,0,HTTOP},{577,0,HTTOP},{578,0,HTTOPRIGHT},
+        {22,399,HTBOTTOMLEFT},{23,399,HTBOTTOM},{577,399,HTBOTTOM},{578,399,HTBOTTOMRIGHT},
+        {0,22,HTTOPLEFT},{0,23,HTLEFT},{0,377,HTLEFT},{0,378,HTBOTTOMLEFT},
+        {599,22,HTTOPRIGHT},{599,23,HTRIGHT},{599,377,HTRIGHT},{599,378,HTBOTTOMRIGHT}};
+        win16_style_layout l;unsigned caption;
+        for(caption=0;caption<2;++caption){
+            CHECK(win16_style_measure(600,400,96,caption?WS_OVERLAPPEDWINDOW:WS_POPUP|WS_THICKFRAME,0,FALSE,&l));
+            for(i=0;i<sizeof(edges)/sizeof(edges[0]);++i){POINT p={edges[i].x,edges[i].y};
+                CHECK(win16_style_hit(&l,p)==edges[i].hit);}
+        }
+    }
     for(dpi=96;dpi<=192;dpi+=48)for(i=0;i<3;++i){
         win16_style_layout l;POINT p;
         CHECK(win16_style_measure(600,400,dpi,kinds[i],i==2?WS_EX_DLGMODALFRAME:0,FALSE,&l));
@@ -379,17 +437,41 @@ static void layout_tests(void)
 
 static void menu_tests(void)
 {
-    RECT r;win16_style_layout l;LPARAM p;unsigned before;
-    menu_probe=make_window(WS_OVERLAPPEDWINDOW,0,L"System menu contract",20,20,TRUE);
+    RECT r;win16_style_layout l;LPARAM p;unsigned before;int variant;
+    HWND owner=make_window(WS_OVERLAPPEDWINDOW,0,L"Menu test owner",20,20,FALSE);
+    for(variant=0;variant<3;++variant){
+    DWORD style=variant==0?WS_OVERLAPPEDWINDOW:WS_CAPTION|WS_SYSMENU|(variant==2?WS_POPUP:0);
+    DWORD ex=variant?WS_EX_DLGMODALFRAME:0;
+    menu_entries=0;menu_popups=0;key_menu_entries=0;
+    menu_probe=make_window(style,ex,L"System menu contract",20,20,TRUE);
+    if(variant==2){SetWindowLongPtrW(menu_probe,GWLP_HWNDPARENT,(LONG_PTR)owner);
+        CHECK(GetWindow(menu_probe,GW_OWNER)==owner);}
+    if(menu_desktop_test){
+        ShowWindow(menu_probe,SW_SHOW);SetForegroundWindow(menu_probe);SetActiveWindow(menu_probe);pump();
+        printf("MENU foreground=%d active=%d\n",GetForegroundWindow()==menu_probe,GetActiveWindow()==menu_probe);
+    }
     CHECK(GetWindowRect(menu_probe,&r));
     CHECK(win16_style_measure(r.right-r.left,r.bottom-r.top,GetDpiForWindow(menu_probe),
-        WS_OVERLAPPEDWINDOW,0,FALSE,&l));
+        style,ex,FALSE,&l));
     p=MAKELPARAM(r.left+(l.system.left+l.system.right)/2,r.top+(l.system.top+l.system.bottom)/2);
     CHECK(SendMessageW(menu_probe,WM_NCHITTEST,0,p)==HTSYSMENU);
+    {MENUBARINFO info={sizeof(info)};BOOL ok=GetMenuBarInfo(menu_probe,OBJID_SYSMENU,0,&info);
+        printf("MENU geometry variant=%d native=%d rect=%ld,%ld,%ld,%ld custom=%d,%d\n",
+            variant,ok,info.rcBar.left,info.rcBar.top,info.rcBar.right,info.rcBar.bottom,
+            GET_X_LPARAM(p),GET_Y_LPARAM(p));fflush(stdout);}
     /* Enter the real native menu loop and cancel on idle, without input
      * injection. A generic TrackPopupMenu loop bypasses SC_MOUSEMENU. */
     SendMessageW(menu_probe,WM_NCLBUTTONDOWN,HTSYSMENU,p);
-    CHECK(menu_entries==1);CHECK(IsWindow(menu_probe));
+    printf("MENU variant=%d mouse_commands=%u popups=%u\n",variant,menu_entries,menu_popups);fflush(stdout);
+    CHECK(menu_entries+key_menu_entries==1);CHECK(IsWindow(menu_probe));
+    if(variant)CHECK(key_menu_entries==1);
+    if(menu_desktop_test && variant)CHECK(menu_popups==1);
+    if(menu_desktop_test){
+        unsigned clicks=menu_popups;
+        SendMessageW(menu_probe,WM_SYSCOMMAND,SC_KEYMENU,L' ');
+        printf("MENU desktop variant=%d click_popups=%u keyboard_popups=%u\n",
+            variant,clicks,menu_popups-clicks);fflush(stdout);
+    }
     menu_pixels(menu_probe,FALSE);
     /* A non-input private desktop may cancel before entering the popup loop.
      * Explicit notification tests prove painting/state, not physical tracking. */
@@ -407,6 +489,8 @@ static void menu_tests(void)
     SendMessageW(menu_probe,WM_NCLBUTTONDBLCLK,HTSYSMENU,p);pump();
     CHECK(!IsWindow(menu_probe));CHECK(close_commands==before+1);
     menu_probe=NULL;
+    }
+    CHECK(DestroyWindow(owner));
 }
 
 static void nonclient_surface_probe(void)
@@ -538,11 +622,12 @@ int wmain(int argc,WCHAR **argv)
 {
     WNDCLASSW cls={0};HWND w[4];MSG msg;int i;HDESK desktop=NULL;
     DWORD initial_gdi;
-    testing=argc==3 && !wcscmp(argv[1],L"--test");
+    menu_desktop_test=argc==3 && !wcscmp(argv[1],L"--menu-test");
+    testing=menu_desktop_test || (argc==3 && !wcscmp(argv[1],L"--test"));
     if(testing)capture_path=argv[2];
     SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
     if(!testing){win16_style_gallery_run();return 0;}
-    if(testing){
+    if(testing && !menu_desktop_test){
         WCHAR name[80];swprintf_s(name,80,L"Win16StyleTest-%lu",GetCurrentProcessId());
         desktop=CreateDesktopW(name,NULL,NULL,0,GENERIC_ALL,NULL);
         CHECK(desktop!=NULL);CHECK(SetThreadDesktop(desktop));
@@ -550,9 +635,11 @@ int wmain(int argc,WCHAR **argv)
     cls.lpfnWndProc=window_proc;cls.hInstance=GetModuleHandleW(NULL);
     cls.hCursor=LoadCursorW(NULL,IDC_ARROW);cls.lpszClassName=L"Win16StyleTrial";
     cls.style=CS_DBLCLKS;CHECK(RegisterClassW(&cls)!=0);
+    if(menu_desktop_test){menu_tests();return 0;}
     layout_tests();
     raster_scale_tests();
     font_probe();
+    title_clip_test();
     w[0]=make_window(WS_OVERLAPPEDWINDOW,0,L"Program Manager",60,60,TRUE);
     w[1]=make_window(WS_CAPTION|WS_SYSMENU|WS_MINIMIZEBOX,0,L"Control Panel",550,60,TRUE);
     w[2]=make_window(WS_CAPTION|WS_SYSMENU,WS_EX_DLGMODALFRAME,L"Color",60,380,TRUE);

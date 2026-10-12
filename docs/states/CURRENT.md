@@ -102,20 +102,12 @@ during S3.
 
 ## Current Work
 
-Native-caption leakage follow-up is built under build/M0-T445/S3/r070:
-x86/x64 pass 7,046 checks each and zero original-font mismatches. Existing
-WindowDC reads now independently require a white client-top strip; the
-activation repair removes the r066 baseline's 3,304 contaminated pixels.
-The owner confirms r062 hover behavior fixed and accepts r070 static-residue
-repair. Next, audit original-style divergences across implemented frames,
-starting with the system-menu button's selected appearance. No frame
-height or client geometry change in the accepted repair. Normal
-NC activation/cursor drawing is custom-owned; minimized presentation stays native.
-
-The 19-entry gallery retains original bitmap/font checks, menu/disabled-close
-tests and geometry/lifetime coverage. Menu/MDI/child/scrollbar samples remain
-labelled native references, not retro acceptance. Detailed r047--r070 results
-are retained in the evidence below. Overall S3 acceptance and S4 admission wait.
+Owner accepted r070's native hover/static-residue repairs. NC activation and
+cursor painting are custom-owned; minimized presentation remains native.
+The 19-entry gallery retains bitmap/font, menu/disabled-close and lifetime
+tests. Menu/MDI/child/scrollbar samples remain labelled native references.
+Detailed runs and the original residue negative control are retained below.
+Overall S3 acceptance and S4 admission wait.
 See [S3 experiment evidence](../etc/evidence/m0-t445-s3-style-experiment.md).
 No production images or deployed components changed.
 
@@ -123,8 +115,14 @@ Owner's paired normal/selected references resolve the system box as palette-role
 inversion, not an arrow-style bevel. r083 implements that state, original 19x18
 button geometry and rounded stroke widths; both widths pass 13,885 checks. Private
 desktop notification/pixel checks do not certify physical menu tracking.
-Full frame-divergence review remains open (including long-title clipping and
-resize-corner hit geometry); no whole-window pixel-equivalence claim.
+No whole-window pixel-equivalence claim is made.
+
+Owner's gallery-12 menu report has a repair verified in r093: both widths
+pass 25,896 private-desktop checks and separate input-desktop menu probes
+observe actual dialog popups and selected pixels. Missing native icon geometry
+uses the system keyboard-menu entry; system popup classification no longer
+requires an incorrect handle identity. Physical menu double-click tracking and
+owner-requested title-font rollback remain pending; this is not S3 closure.
 
 ## T444 Final Disposition
 
