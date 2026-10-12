@@ -55,6 +55,12 @@ static DWORD WINAPI peer(void *context)
                 state->video.pending_description.bytes-state->video.received)
             video_final=TRUE;
         ++state->calls;
+        if(state->mode==0) {
+            static const DWORD expected[]={CONSOLE_IO_BARRIER,CONSOLE_IO_VIDEO_BEGIN,
+                CONSOLE_IO_VIDEO_DATA,CONSOLE_IO_BARRIER};
+            if(sequence>ARRAYSIZE(expected) || request.operation!=expected[sequence-1])
+                return ERROR_INVALID_FUNCTION;
+        }
         if(request.operation==CONSOLE_IO_WRITE_CELLS_W)++state->cell_writes;
         /* The sender must never acquire the frontend implicitly. */
         if(request.operation==CONSOLE_IO_ACTIVATE)return ERROR_INVALID_FUNCTION;
@@ -533,7 +539,9 @@ done:
     fprintf(log_file,"mode=%u calls=%u activations=%u releases=%u\n",mode,state.calls,
         state.activations,state.releases);
     if(mode==0 || mode==6) {
-        CHECK(mode==6 ? state.calls>8u : state.calls==5u);
+        /* One rejected barrier, VIDEO_BEGIN, one variable-length VIDEO_DATA,
+         * then the successful explicit barrier. No implicit ownership call. */
+        CHECK(mode==6 ? state.calls>8u : state.calls==4u);
         if(mode==6)CHECK(state.screen.width<=80 && state.screen.height<=25 &&
             state.screen.right<state.screen.width && state.screen.bottom<state.screen.height);
         if(mode==6)CHECK(state.titles==1);

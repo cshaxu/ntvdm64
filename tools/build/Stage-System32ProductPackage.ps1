@@ -13,6 +13,17 @@ param(
     [Parameter(Mandatory)][string]$NativeWorker
 )
 $ErrorActionPreference='Stop'
+function Get-StageFileSha256([string]$LiteralPath) {
+    $path=(Resolve-Path -LiteralPath $LiteralPath -ErrorAction Stop).Path
+    $algorithm=[Security.Cryptography.SHA256]::Create()
+    $stream=[IO.File]::OpenRead($path)
+    try {
+        return ([BitConverter]::ToString($algorithm.ComputeHash($stream))).Replace('-','')
+    } finally {
+        $stream.Dispose()
+        $algorithm.Dispose()
+    }
+}
 if($NativeHook64 -and !$NativeHook){throw 'Hook64 requires the matching Hook32 package input'}
 $baseline=(Resolve-Path -LiteralPath $BaselineRoot).Path
 $cache=(Resolve-Path -LiteralPath $BuildCache).Path
@@ -55,8 +66,8 @@ $manifest=foreach($name in $names){
     if([BitConverter]::ToUInt16($bytes,$pe+4) -ne $expectedMachine){throw "Wrong PE machine input: $name"}
     $destination=Join-Path $system $name
     Copy-Item -LiteralPath $source -Destination $destination -Force
-    $hash=(Get-FileHash -LiteralPath $source).Hash
-    if((Get-FileHash -LiteralPath $destination).Hash -ne $hash){throw 'Staging hash mismatch'}
+    $hash=Get-StageFileSha256 $source
+    if((Get-StageFileSha256 $destination) -ne $hash){throw 'Staging hash mismatch'}
     # Exact redundant product files only, in the already checked fresh tree.
     $flat=Join-Path $output $name
     if(Test-Path -LiteralPath $flat){Remove-Item -LiteralPath $flat}
@@ -66,7 +77,7 @@ $flatRegistry=Join-Path $output 'NTVDM.REG'
 $registry=Join-Path $system 'NTVDM.REG'
 if(Test-Path -LiteralPath $flatRegistry){
     if(Test-Path -LiteralPath $registry){
-        if((Get-FileHash $flatRegistry).Hash -ne (Get-FileHash $registry).Hash){throw 'Conflicting Registry overlays'}
+        if((Get-StageFileSha256 $flatRegistry) -ne (Get-StageFileSha256 $registry)){throw 'Conflicting Registry overlays'}
         Remove-Item -LiteralPath $flatRegistry
     }else{Move-Item -LiteralPath $flatRegistry -Destination $registry}
 }

@@ -7,6 +7,8 @@ delivered single-worker/dual-Hook gates; see
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [Queue planning history](operations/queue-planning-history.md) | Governance | Preserves the historical planning paragraphs and audit-family map removed from the live ordered queue, with candidate order unchanged. | Retain as admission and ownership history. |
+| [T444 S1 palette projection and delivery gates](evidence/m0-t444-s1-native-indexed16-palette-projection.md) | M0 T444 S1 | Palette ownership, blocked software-video tick, observer repairs and independent DOS/WOW regression evidence. | Retain through delivery and later regression comparison. |
 | [T443 S12 COMMAND service Run16 routing](evidence/m0-t443-s12-command-service-run16-routing.md) | M0 T443 S12 | Records the accepted COMMAND BOP service route through product-root `system32\\run16.exe`. | Retain through T443 closure. |
 | [T443 S13 NtAlertThread disposition](evidence/m0-t443-s13-ntalertthread-disposition.md) | M0 T443 S13 | Records the native `NtAlertThread` normal-path audit and retains the absent-export APC fallback as a bounded limitation rather than adding a redundant wait predicate. | Retain through T443 closure. |
 | [T443 S14 frontend publication error contract](evidence/m0-t443-s14-frontend-publication-error-contract.md) | M0 T443 S14 | Removes project-owned conversions of rejected frontend publication into successful paint while retaining the established final-drain protocol. | Retain through T443 closure. |

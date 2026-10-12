@@ -888,6 +888,12 @@ void nt_graphics_tick(void)
        Retain pending cursor/frame changes until palette and cells are ready. */
     BOOL software_update_completed = FALSE;
 #if defined(CCPU) && !defined(X86GFX)
+    /* DIVERGENCE(MVDM-HOST-DIV-314): COMMAND can return to guest code
+       between blocking and its next command BOP. A pending CPU timer tick
+       must not publish to the released channel. Keep dirty/cursor/mode state
+       until original resume clears this bit after reacquiring the frontend.
+       The final pre-release paint runs before this original bit is set. */
+    if (CntrlHandlerState & CNTRL_VDMBLOCKED) return;
     /* DIVERGENCE(MVDM-HOST-DIV-322): software route, not hardware takeover. */
     if (!mvdm_softpc_text_video_sync_route())
         DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);

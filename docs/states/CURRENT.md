@@ -4,27 +4,48 @@
 
 ## Active Packet
 
-## Active Packet
-
 ### Native indexed-16 palette projection
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | `M0 T444 S1`, Ordinary Mode. |
-| Admission And Approval | Owner directs: “队列第2条已经修复可以剔除。现在准入队列第一条”。 |
+| Candidate Proposal | [Native indexed-16 text contract](../proposals/proposal-native-indexed16-text-contract-001.md). |
+| Admission And Approval | Owner directs: “队列第2条已经修复可以剔除。现在准入队列第一条”; subsequent standing goal: “把当前项目所有该通过的测试都通过，包括wow”. The proved EDIT/MEM software-publication regression is included in the required delivery-gate repair, without changing lifecycle ownership. |
 | Objective | Prove and, if confirmed, repair NTCON Console projection so a committed text frame's 16-entry RGB palette is applied atomically with its indexed cell attributes, without changing worker identity or the frame protocol. |
 | Non-goals | No capability-environment work (S2), VT/RGB emulation (S3), guest change, worker-type branch, polling/helper/lifecycle redesign, or arbitrary per-cell RGB support. |
 | Reference Baseline | The queued proposal's static review: NTVWM captures/transmits `CONSOLE_SCREEN_BUFFER_INFOEX` palette and Window decoding retains it, while Console projection reportedly copies attributes without palette application. T442 borrowed-Console lifecycle is delivered at `44c25e138` and is removed from the queue by owner direction. |
-| Files And ABI Surface | Expected owner files are NTCON Console projection/session code, focused palette fixtures and T444 evidence/governance records. Existing text-frame palette ABI remains unchanged. |
+| Files And ABI Surface | NTCON Console projection/session code and focused palette fixtures; required-gate repairs include the original-blocked-state guard in nt_graph.c and the r095-proved NTVWM input/output-snapshot coupling. Keep their focused regressions and mirror registration where applicable. Observation harness repairs, evidence and shared application-version synchronization are included. Existing frame and control ABIs remain unchanged. |
 | Applicable Rules | Execution, architecture, coding, document and source-provenance authorities; all build/test runs background-owned; `subst` prohibited. |
 | Verification | First audit current palette capture, commit, handoff and restoration owners. If production repair is admitted by evidence, build the affected closure and verify non-default indexed colours, palette-only update, failure/rollback, Console/Window switching, DOS/native handoff and borrowed palette restoration. |
 | Expected Markers | The visible Console palette equals the committed frame palette whenever that frame's indexed attributes become visible; no mixed cells/palette, stale handoff palette or caller-palette leak remains. |
 | Asset Needs | Current ten-image release, build-owned native palette fixture and existing Console/Window harnesses only. |
 | Reporting Requirements | Separate static fact, focused fixture and real presentation evidence; record exact palette values, owner/rollback behavior, limitations and any required re-admission. |
 | Stop Conditions | A repair needs a frame ABI change, worker-type conditional, new RGB/VT conversion engine, guest alteration, or reveals missing restoration ownership. Pause rather than broaden. |
-| Exit Criteria | Current source ownership is proved; any required minimal repair passes focused positive/negative/lifecycle checks and full delivery gate; otherwise a source-backed retain/transfer disposition is recorded. |
+| Exit Criteria | Automated criteria met by r115/r116, coherent ten-image publication verified by r117, published interactive smoke by r119. Owner acceptance remains pending; S2 is not admitted. |
 | Original Owner Request | “队列第2条已经修复可以剔除。现在准入队列第一条”。 |
 | Similar-Issue Sweep | Both Console and Window presentation routes; palette-only frames, owner handoff/final frame, worker-neutral callers and borrowed Console restoration. |
+
+## Current Work
+
+The final 0.0.444 ten-image package is published to assets/release and
+O:/winnt/system32, with all three copies equal to the tested manifest (r117).
+r116 Full passes in 347,227 ms, including Console17, Window17, independent WOW
+frontiers and all control gates; real WINMINE gameplay, native fixtures and
+service29 also pass. r115 passes 49 palette checks and complete real-pipe
+frontend fault/lifecycle coverage. Published COMMAND and CMD both pass
+interactive VER/EXIT in r119. Review and documentation governance are recorded
+in the linked evidence; owner acceptance remains pending.
+
+Repairs are committed-palette projection and restoration, palette-only
+geometry preservation, bounded native intermediate viewport, NTVWM keyboard
+delivery independent of output snapshot stability, and the registered original
+blocked-state guard before project-added video publication. No guest binaries,
+frame/control ABI or lifecycle ownership change. SOL/WRITE's independently
+matched historical error frontiers are not functional application passes. The large
+inherited-environment failure matches the registered original COMMAND INIT
+lifetime defect and is not counted as a pass. See
+[S1 evidence](../etc/evidence/m0-t444-s1-native-indexed16-palette-projection.md).
+S1 awaits owner acceptance; S2 is not admitted.
 
 ## Previous Closure
 
@@ -198,10 +219,12 @@ See [S6 evidence](../etc/evidence/m0-t437-s6-win101-media-unapply.md).
 
 ## Current Technical Baseline
 
-The current ten-image release remains unchanged. T436 supplied approved,
-identity-bound `KRNL386` and `WIN386` candidates plus released `MOUSE31.DRV`.
-This task consumes those assets only for an existing, recoverable installed
-Windows 3.1 tree; it does not publish a host release merely for tooling work.
+The current deployed ten-image package contains the S1 NTCON palette repair;
+`assets/release/release-manifest.json` records its identities. The additional
+NTVDM blocked-tick repair is tested in the isolated r072 candidate package but
+is not yet published. Guest binaries and default configuration remain unchanged.
+T436's KRNL386/WIN386 candidates and MOUSE31.DRV remain separate approved add-on
+assets, not inputs altered by this frontend/test recovery packet.
 
 | Architecture | Images |
 | --- | --- |

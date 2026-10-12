@@ -23,11 +23,29 @@ foreach($case in $Cases) {
         elseif($case -eq 'monitor-rpc'){'monitor-rpc-test.exe'}
         elseif($case -in @('native-command','native-registry')){'basesrv-service-reservation-test.exe'}
         else{'broker-frontend-bootstrap-test.exe'}
+    $casePackageRoot=$PackageRoot
+    if($case -in @('startup-rejections','startup-timeout')) {
+        # This fixture deliberately replaces the frontend with an adversarial
+        # peer. Its C-side build-only guard must remain effective even when
+        # ordinary product cases execute in a short physical O:\tmp stage.
+        # Copy only its two inputs to fresh build-owned System32, retaining
+        # the real service's package-root semantics and exact input identity.
+        $casePackageRoot=$ReportPrefix+'-'+$case+'-package\system32'
+        if(Test-Path -LiteralPath $casePackageRoot){throw 'Require a fresh rejection fixture package'}
+        $null=New-Item -ItemType Directory -Path $casePackageRoot
+        foreach($name in @($image,'ntsrv.exe')) {
+            $source=Join-Path $PackageRoot $name
+            $destination=Join-Path $casePackageRoot $name
+            Copy-Item -LiteralPath $source -Destination $destination
+            if((Get-FileHash -LiteralPath $source).Hash -ne
+               (Get-FileHash -LiteralPath $destination).Hash){throw 'Rejection fixture input identity mismatch'}
+        }
+    }
     $start=[Diagnostics.ProcessStartInfo]::new($Observer)
     $start.UseShellExecute=$false
     $start.WindowStyle=[Diagnostics.ProcessWindowStyle]::Hidden
     $start.EnvironmentVariables['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'
-    $arguments=@((Join-Path $PackageRoot $image),$PackageRoot,$report)
+    $arguments=@((Join-Path $casePackageRoot $image),$casePackageRoot,$report)
     if($case -eq 'native-registry'){$arguments+='--native-worker'}
     elseif($case -notin @('client','bootstrap','monitor-rpc')){$arguments+='--'+$case}
     $arguments+=@('--observation-timeout-ms','45000')

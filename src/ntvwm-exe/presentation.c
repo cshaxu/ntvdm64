@@ -116,6 +116,7 @@ DWORD ntvwm_presentation_input(ntvwm_presentation *client,HANDLE input,DWORD *ac
 {
     console_io_request request={0};console_io_reply reply;
     INPUT_RECORD records[CONSOLE_IO_INPUT_CAPACITY*2];DWORD error,index,count=0;
+    BOOL mouse_geometry_read=FALSE;
     if(!client || !accepted || !input || input==INVALID_HANDLE_VALUE)return ERROR_INVALID_PARAMETER;
     *accepted=0;
     request.operation=CONSOLE_IO_READ_INPUT;request.state.count=CONSOLE_IO_INPUT_CAPACITY;
@@ -123,16 +124,28 @@ DWORD ntvwm_presentation_input(ntvwm_presentation *client,HANDLE input,DWORD *ac
     error=exchange(client,&request,&reply);
     if(!error && (reply.state.count>CONSOLE_IO_INPUT_CAPACITY ||
         reply.bytes!=reply.state.count*sizeof(console_io_input)))error=ERROR_INVALID_DATA;
-    if(!error && reply.state.count) {
-        ntvwm_capture capture={0};
-        error=ntvwm_capture_begin(&capture);
-        if(!error)error=ntvwm_mouse_geometry(&client->mouse,capture.info.srWindow,
-            client->has_handoff_font ? client->handoff_font.font_height : 16);
-        ntvwm_capture_end(&capture);
-    }
     for(index=0;!error && index<reply.state.count;++index) {
         console_io_input wire;
         memcpy(&wire,reply.data+index*sizeof(wire),sizeof(wire));
+        if(!mouse_geometry_read &&
+            (wire.type==CONSOLE_INPUT_FRAME_MOUSE || wire.type==MOUSE_EVENT)) {
+            CONSOLE_SCREEN_BUFFER_INFO info;
+            HANDLE output=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
+                FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
+            /* Input does not require a stable output-frame snapshot. Native
+             * scrolling between capture's two reads formerly killed the
+             * worker after it had already dequeued ordinary keyboard input.
+             * Only mouse mapping needs the current viewport, read once. */
+            if(output==INVALID_HANDLE_VALUE)error=GetLastError();
+            else {
+                if(!GetConsoleScreenBufferInfo(output,&info))error=GetLastError();
+                CloseHandle(output);
+                if(!error)error=ntvwm_mouse_geometry(&client->mouse,info.srWindow,
+                    client->has_handoff_font ? client->handoff_font.font_height : 16);
+            }
+            if(error)break;
+            mouse_geometry_read=TRUE;
+        }
         if(wire.type==CONSOLE_INPUT_FRAME_MOUSE) {
             console_frame_mouse_input frame;DWORD generated=0;
             INPUT_RECORD decoded;

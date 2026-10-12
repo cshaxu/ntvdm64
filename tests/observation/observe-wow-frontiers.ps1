@@ -31,7 +31,7 @@ if($ProcessPackageRoot){
     $ProcessPackageRoot=(Resolve-Path -LiteralPath $ProcessPackageRoot).Path
     foreach($name in @('run16.exe','ntvdm.exe','ntsrv.exe')){
         $physical=Join-Path (Get-PackageBinaryRoot $ProcessPackageRoot) $name
-        if((Get-FileHash $physical).Hash -ne (Get-FileHash (Join-Path (Get-PackageBinaryRoot $PackageRoot) $name)).Hash){
+        if((Get-IsolatedFileSha256 $physical) -ne (Get-IsolatedFileSha256 (Join-Path (Get-PackageBinaryRoot $PackageRoot) $name))){
             throw "Process package differs from launch package: $name"
         }
         $paths+=$physical
@@ -44,7 +44,14 @@ function PackageProcesses {
         Where-Object {$_.ExecutablePath -in $paths})
 }
 if((PackageProcesses).Count){throw 'Package already in use'}
-$profile=Get-FileHash (Join-Path $PackageRoot 'SYSTEM.INI')
+$profile=Get-IsolatedFileSha256 (Join-Path $PackageRoot 'SYSTEM.INI')
+function ConvertTo-Win32CommandLineArgument([string]$Value) {
+    # ProcessStartInfo.ArgumentList is unavailable in the .NET Framework
+    # PowerShell used by the retained product harness. Quote the observer's
+    # copied path arguments explicitly instead of assuming that collection.
+    if($Value -notmatch '[\s"]'){return $Value}
+    return '"'+(($Value -replace '(\\*)"','$1$1\"') -replace '(\\+)$','$1$1')+'"'
+}
 foreach($guest in $Guests){
     $stem=Join-Path $LogRoot ($Prefix+'-'+$guest.Split('.')[0].ToLowerInvariant())
     if(Test-Path ($stem+'.txt')){throw 'Use a fresh evidence prefix'}
@@ -55,9 +62,9 @@ foreach($guest in $Guests){
         if($WaitTarget){$observerArguments+='--wait'}
         $observerArguments+=@((Join-Path $GuestRoot $guest),
             '--observation-timeout-ms','20000')
-        foreach($argument in $observerArguments){
-            $start.ArgumentList.Add($argument)
-        }
+        $start.Arguments=($observerArguments | ForEach-Object {
+            ConvertTo-Win32CommandLineArgument ([string]$_)
+        }) -join ' '
         if($PostExitObservationMs){
             $start.EnvironmentVariables['MVDM_OBSERVER_POST_EXIT_MS']=[string]$PostExitObservationMs
         }
@@ -113,4 +120,4 @@ foreach($guest in $Guests){
         }
     }
 }
-if((Get-FileHash (Join-Path $PackageRoot 'SYSTEM.INI')).Hash -ne $profile.Hash){throw 'Profile changed'}
+if((Get-IsolatedFileSha256 (Join-Path $PackageRoot 'SYSTEM.INI')) -ne $profile){throw 'Profile changed'}

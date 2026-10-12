@@ -4,7 +4,7 @@
 #include "worker-base/connection.h"
 #include <stdio.h>
 
-static FILE *log;
+static FILE *log_file;
 static volatile LONG checks,failures,completed_resume_count,completed_direct_count,completed_cleanup_count;
 static unsigned serial;
 static DWORD completion_error,observed_broker_fault;
@@ -14,7 +14,7 @@ typedef struct startup_observation {
     DWORD request,status;
 } startup_observation;
 static startup_observation observations[1024];
-#define CHECK(x) do {InterlockedIncrement(&checks);if(!(x)){InterlockedIncrement(&failures);fprintf(log,"FAIL %d %s\n",__LINE__,#x);}} while(0)
+#define CHECK(x) do {InterlockedIncrement(&checks);if(!(x)){InterlockedIncrement(&failures);fprintf(log_file,"FAIL %d %s\n",__LINE__,#x);}} while(0)
 
 BOOL ntvwm_console_quiescent(DWORD completed_target)
 { (void)completed_target;return FALSE; } /* No carrier in this fixture. */
@@ -340,7 +340,7 @@ static void raw_failed_create_control(void)
     error=GetLastError();CHECK(error==ERROR_FILE_NOT_FOUND);
     CHECK(!process.hProcess && !process.hThread);
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&after));
-    fprintf(log,"RAW-CreateProcess-failure handles-before=%lu handles-after=%lu error=%lu\n",before,after,error);
+    fprintf(log_file,"RAW-CreateProcess-failure handles-before=%lu handles-after=%lu error=%lu\n",before,after,error);
 }
 static void gui_startup_failure_cleans_request(void)
 {
@@ -365,7 +365,7 @@ static void gui_startup_failure_cleans_request(void)
     ntvwm_executions_close(owner);
     if(id)dispose_observation(id);if(payload)HeapFree(GetProcessHeap(),0,payload);
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&handles_after));
-    fprintf(log,"GUI-failed-start handles-before=%lu handles-after=%lu\n",handles_before,handles_after);
+    fprintf(log_file,"GUI-failed-start handles-before=%lu handles-after=%lu\n",handles_before,handles_after);
 }
 static void gui_startup_releases_execution(void)
 {
@@ -407,12 +407,12 @@ int wmain(int argc,WCHAR **argv)
     if(argc==2 && !lstrcmpW(argv[1],L"--held-target")){Sleep(10000);return 73;}
     if(argc==2 && !lstrcmpW(argv[1],L"--completed-target"))return 73;
     if(argc==3 && !lstrcmpW(argv[1],L"--invalid-arguments")) {
-        if(_wfopen_s(&log,argv[2],L"wx"))return 2;
+        if(_wfopen_s(&log_file,argv[2],L"wx"))return 2;
         invalid_arguments_do_not_allocate();
-        fprintf(log,"INVALID-ARGUMENT-HEAP checks=%ld failures=%ld\n",checks,failures);
-        fclose(log);return failures ? 1 : 0;
+        fprintf(log_file,"INVALID-ARGUMENT-HEAP checks=%ld failures=%ld\n",checks,failures);
+        fclose(log_file);return failures ? 1 : 0;
     }
-    if(argc!=2 || _wfopen_s(&log,argv[1],L"wx"))return 2;
+    if(argc!=2 || _wfopen_s(&log_file,argv[1],L"wx"))return 2;
     character_start_gate();
     invalid_arguments_do_not_allocate();launch_packet_boundaries();target_case(TRUE,0,0);
     {HANDLE input=NULL,output=NULL;CHECK(CreatePipe(&input,&output,NULL,0));
@@ -432,7 +432,7 @@ int wmain(int argc,WCHAR **argv)
     resume_barrier(ERROR_SUCCESS,ERROR_SUCCESS);resume_barrier(ERROR_ACCESS_DENIED,ERROR_SUCCESS);
     resume_barrier(ERROR_SUCCESS,ERROR_PIPE_NOT_CONNECTED);
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&current) && current==baseline);
-    fprintf(log,"NTVWM-REQUEST-LIFETIME checks=%ld failures=%ld completed=%ld cancelled=16 target-survival=yes remaining-handles=%ld\n",
+    fprintf(log_file,"NTVWM-REQUEST-LIFETIME checks=%ld failures=%ld completed=%ld cancelled=16 target-survival=yes remaining-handles=%ld\n",
         checks,failures,completed_direct_count+completed_cleanup_count+completed_resume_count,(long)(current-baseline));
-    fclose(log);return failures ? 1 : 0;
+    fclose(log_file);return failures ? 1 : 0;
 }

@@ -25,6 +25,8 @@ struct frontend_session {
      * worker's final cell grid, viewport, or cursor position. */
     CONSOLE_CURSOR_INFO original_cursor;
     BOOL original_cursor_saved;
+    uint32_t original_palette[16];
+    BOOL original_palette_saved;
     HANDLE handoff,handoff_done;
     const void *handoff_owner;
     BOOL handoff_active;
@@ -79,6 +81,44 @@ static DWORD restore_cursor_shape(frontend_session *frontend)
     if(frontend->original_cursor_saved &&
         !SetConsoleCursorInfo(frontend->console_output,&frontend->original_cursor))return GetLastError();
     return ERROR_SUCCESS;
+}
+/* Palette state belongs to a Console buffer, just like its cells and cursor.
+ * Keep it with the copied logical surface; frame consumers only ever see the
+ * already committed surface. */
+static DWORD console_palette(HANDLE surface,uint32_t colours[16])
+{
+    CONSOLE_SCREEN_BUFFER_INFOEX info={sizeof(info)};
+    DWORD index;
+    if(!surface || surface==INVALID_HANDLE_VALUE || !colours)return ERROR_INVALID_PARAMETER;
+    if(!GetConsoleScreenBufferInfoEx(surface,&info))return GetLastError();
+    /* Console ColorTable entries are COLORREF (0x00BBGGRR), whereas the
+     * frontend wire contract is 0x00RRGGBB. Keep that conversion at the
+     * sole Console boundary, never in a worker or frame consumer. */
+    for(index=0;index<16;++index)
+        colours[index]=((DWORD)GetRValue(info.ColorTable[index])<<16)|
+            ((DWORD)GetGValue(info.ColorTable[index])<<8)|GetBValue(info.ColorTable[index]);
+    return ERROR_SUCCESS;
+}
+static DWORD console_set_palette(HANDLE surface,const uint32_t colours[16])
+{
+    CONSOLE_SCREEN_BUFFER_INFOEX info={sizeof(info)};
+    DWORD table[16],index;
+    if(!surface || surface==INVALID_HANDLE_VALUE || !colours)return ERROR_INVALID_PARAMETER;
+    if(!GetConsoleScreenBufferInfoEx(surface,&info))return GetLastError();
+    for(index=0;index<16;++index)
+        table[index]=RGB((colours[index]>>16)&0xff,(colours[index]>>8)&0xff,colours[index]&0xff);
+    if(!memcmp(info.ColorTable,table,sizeof(info.ColorTable)))return ERROR_SUCCESS;
+    memcpy(info.ColorTable,table,sizeof(info.ColorTable));
+    /* InfoEx returns inclusive bounds but its setter consumes exclusive
+     * right/bottom. A palette-only update must not shrink the viewport. */
+    ++info.srWindow.Right;++info.srWindow.Bottom;
+    return SetConsoleScreenBufferInfoEx(surface,&info) ? ERROR_SUCCESS : GetLastError();
+}
+static DWORD restore_console_palette(frontend_session *frontend)
+{
+    if(!frontend)return ERROR_INVALID_PARAMETER;
+    return frontend->original_palette_saved ?
+        console_set_palette(frontend->console_output,frontend->original_palette) : ERROR_SUCCESS;
 }
 /* DOS's OpenNT Console API calls operate on an inactive buffer. In a
  * multi-tab terminal, changing the active Conhost buffer to 28 rows need not
@@ -137,12 +177,14 @@ static DWORD clone_grid(HANDLE source,HANDLE *output)
 {
     CONSOLE_SCREEN_BUFFER_INFO info;
     CONSOLE_CURSOR_INFO cursor;
+    uint32_t palette[16];
     HANDLE copy;
     DWORD error=ERROR_SUCCESS;
     LONG row;
     *output=NULL;
     if(!GetConsoleScreenBufferInfo(source,&info) || !GetConsoleCursorInfo(source,&cursor))
         return GetLastError();
+    error=console_palette(source,palette);if(error)return error;
     copy=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,
         FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CONSOLE_TEXTMODE_BUFFER,NULL);
     if(copy==INVALID_HANDLE_VALUE)return GetLastError();
@@ -157,6 +199,7 @@ static DWORD clone_grid(HANDLE source,HANDLE *output)
         !SetConsoleCursorInfo(copy,&cursor) || !SetConsoleTextAttribute(copy,info.wAttributes)) {
         error=GetLastError();goto fail;
     }
+    error=console_set_palette(copy,palette);if(error)goto fail;
     *output=copy;return ERROR_SUCCESS;
 fail:
     CloseHandle(copy);return error;
@@ -182,8 +225,10 @@ DWORD frontend_session_commit_text(frontend_session *frontend,HANDLE surface,SMA
 }
 /* A VGA text frame is a complete cell publication, not a bitmap. Decode only
  * the worker's byte glyphs into the same Console cell storage used by stream
- * operations. Fonts/palette remain the worker's copied presentation metadata. */
-static DWORD prepare_text_frame(frontend_session *frontend,const frontend_video *video,HANDLE *output)
+ * operations. Font data remains presentation metadata; the indexed palette
+ * is committed to this same logical Console surface. */
+static DWORD prepare_text_frame(frontend_session *frontend,const frontend_video *video,
+    const uint32_t palette[16],HANDLE *output)
 {
     const console_text_style *style=(const console_text_style *)video->pixels;
     const BYTE *text=video->pixels+sizeof(*style);
@@ -218,6 +263,7 @@ static DWORD prepare_text_frame(frontend_session *frontend,const frontend_video 
         !SetConsoleCursorPosition(incoming,(COORD){(SHORT)style->cursor_column,(SHORT)style->cursor_row}))) {
         error=GetLastError();goto done;
     }
+    error=console_set_palette(incoming,palette);if(error)goto done;
     *output=incoming;error=ERROR_SUCCESS;
     incoming=NULL;
 done:
@@ -246,8 +292,10 @@ static DWORD prepare_logical_surface(frontend_session *frontend,COORD requested,
     if(!GetConsoleScreenBufferInfo(incoming,&native)){error=GetLastError();goto fail;}
     /* Logical viewports can exceed the host maximum after a prior handoff.
      * Only shrink the actual native view before resizing copied storage. */
-    shrink=(SMALL_RECT){0,0,min(native.srWindow.Right-native.srWindow.Left+1,viewport_size.X)-1,
-        min(native.srWindow.Bottom-native.srWindow.Top+1,viewport_size.Y)-1};
+    shrink=(SMALL_RECT){0,0,min(native.dwMaximumWindowSize.X,
+        min(native.srWindow.Right-native.srWindow.Left+1,viewport_size.X))-1,
+        min(native.dwMaximumWindowSize.Y,
+        min(native.srWindow.Bottom-native.srWindow.Top+1,viewport_size.Y))-1};
     /* Window changes can resize/reflow even an inactive ConPTY buffer.
      * Preserve the copied cells at both calls, before requested conversion. */
     if(!opennt_console_resize_grid(incoming,NULL,TRUE,&shrink) ||
@@ -302,6 +350,15 @@ DWORD frontend_session_project_text(frontend_session *frontend)
         frontend->logical_window.Left+width-1,frontend->logical_window.Top+height-1};
     /* Presentation never resizes storage to force a cursor into view. The
      * queried physical canvas only clips this copy; logical data survives. */
+    {
+        uint32_t palette[16];
+        error=console_palette(frontend->logical_surface,palette);
+        if(error)return error;
+        /* Apply the committed surface's palette before its cells. The
+         * frontend I/O lock holds this one Console presentation transaction. */
+        error=console_set_palette(frontend->console_output,palette);
+        if(error)return error;
+    }
     error=copy_grid(frontend->logical_surface,frontend->console_output,
         source,
         (COORD){visible.srWindow.Left,visible.srWindow.Top});
@@ -523,6 +580,8 @@ static DWORD present_loop(frontend_session *frontend)
             if(!frontend->park_error && frontend->input_mode_saved &&
                 !SetConsoleMode(frontend->console_input,frontend->original_input_mode))
                 frontend->park_error=GetLastError();
+            if(!frontend->park_error)
+                frontend->park_error=restore_console_palette(frontend);
             if(!frontend->park_error) {
                 frontend->parked=TRUE;
                 frontend->console_f_down=frontend->console_shortcut=FALSE;
@@ -620,6 +679,9 @@ DWORD frontend_session_create(frontend_session **output)
             error=GetLastError();frontend_session_destroy(frontend);return error;
         }
         frontend->original_cursor_saved=TRUE;
+        error=console_palette(frontend->console_output,frontend->original_palette);
+        if(error){frontend_session_destroy(frontend);return error;}
+        frontend->original_palette_saved=TRUE;
         error=clone_grid(frontend->console_output,&frontend->logical_surface);
         if(error){frontend_session_destroy(frontend);return error;}
     }
@@ -807,8 +869,12 @@ static DWORD publish_video(frontend_session *frontend,const void *owner,
     frontend_video candidate;
     console_text_configuration copy;
     HANDLE incoming=prepared;
-    BOOL staged,configuration_only,configuration_changed=FALSE;
+    BOOL staged,configuration_only,configuration_changed=FALSE,palette_only=FALSE;
+    BOOL palette_mutated=FALSE;
+    const uint32_t *palette=NULL;
+    uint32_t previous_palette[16];
     DWORD error;
+    HANDLE palette_surface=NULL;
     if(committed)*committed=FALSE;
     if(!video)return ERROR_INVALID_PARAMETER;
     error=frontend_session_enter(frontend,owner);
@@ -846,18 +912,44 @@ static DWORD publish_video(frontend_session *frontend,const void *owner,
             configuration_changed=TRUE;
         }
     }
+    if(candidate.configuration_serial>candidate.published_serial) {
+        palette=candidate.configuration.palette;
+        palette_only=TRUE;
+    } else if(candidate.pixels && candidate.description.kind==CONSOLE_VIDEO_TEXT_FRAME)
+        palette=candidate.description.palette;
     if(import_text && !configuration_only && !candidate.pending && candidate.pixels &&
         candidate.description.kind==CONSOLE_VIDEO_TEXT_FRAME) {
-        error=prepare_text_frame(frontend,&candidate,&incoming);
+        error=prepare_text_frame(frontend,&candidate,palette,&incoming);
         if(error){frontend_session_leave(frontend);return error;}
         window=(SMALL_RECT){0,0,(SHORT)candidate.description.width-1,
             (SHORT)candidate.description.height-1};
+    }
+    /* A publication batch supplies its already prepared grid. Its frame
+     * palette is still part of that same commit, not Window-only metadata. */
+    if(incoming && palette) {
+        if(incoming==prepared) {
+            error=console_palette(incoming,previous_palette);
+            if(error){frontend_session_leave(frontend);return error;}
+            palette_mutated=TRUE;palette_surface=incoming;
+        }
+        error=console_set_palette(incoming,palette);
+        if(error){if(incoming!=prepared)CloseHandle(incoming);frontend_session_leave(frontend);return error;}
+    }
+    if(palette_only && !incoming) {
+        error=console_palette(frontend->logical_surface,previous_palette);
+        if(!error) {
+            palette_mutated=TRUE;palette_surface=frontend->logical_surface;
+            error=console_set_palette(frontend->logical_surface,palette);
+        }
+        if(error){frontend_session_leave(frontend);return error;}
     }
     /* Wake before committing, while holding the renderer's lock. A failed
      * notification leaves every committed resource untouched; a successful
      * wake cannot read the candidate before this transaction releases it. */
     if(!SetEvent(frontend->changed)) {
-        error=GetLastError();if(incoming && !prepared)CloseHandle(incoming);
+        error=GetLastError();
+        if(palette_mutated)(void)console_set_palette(palette_surface,previous_palette);
+        if(incoming && !prepared)CloseHandle(incoming);
         frontend_session_leave(frontend);return error;
     }
     if(staged) {
@@ -875,7 +967,7 @@ static DWORD publish_video(frontend_session *frontend,const void *owner,
     if(committed)*committed=TRUE;
     /* Projection can fail only after a coherent logical commit. The channel
      * must then fail closed, not pretend to roll back already released data. */
-    error=incoming ? frontend_session_project_text(frontend) : ERROR_SUCCESS;
+    error=(incoming || palette_only) ? frontend_session_project_text(frontend) : ERROR_SUCCESS;
     frontend_session_leave(frontend);
     return error;
 }
@@ -980,6 +1072,8 @@ DWORD frontend_session_destroy(frontend_session *frontend)
         frontend->console_surface=NULL;
     }
     if(frontend->logical_surface) {CloseHandle(frontend->logical_surface);frontend->logical_surface=NULL;}
+    if(!frontend->parked)error=restore_console_palette(frontend);
+    if(error)return error;
     error=restore_cursor_shape(frontend);
     if(error)return error;
     if(frontend->input_mode_saved) {

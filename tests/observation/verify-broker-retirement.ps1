@@ -9,14 +9,12 @@ param(
 )
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
+. "$PSScriptRoot/isolated_package_cleanup.ps1"
 $physical=(Resolve-Path $ProcessPackageRoot).Path
-if(!$physical.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase)){
-    throw 'Require an isolated build package'
-}
+$testScope=New-IsolatedPackageScope $physical $PackageRoot
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid prefix'}
 if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'Existing broker must not be controlled'}
 $paths=@()
-. "$PSScriptRoot/isolated_package_cleanup.ps1"
 $physicalBinary=Get-PackageBinaryRoot $physical
 $launchBinary=Get-PackageBinaryRoot $PackageRoot
 foreach($name in @('run16.exe','ntcon.exe','ntsrv.exe','ntvdm.exe','ntvwm.exe')){
@@ -90,9 +88,7 @@ try {
                 foreach($process in @($observerProcess,$worker,$frontend,$broker,$nativeTarget)){
                     if($process){if(!$process.HasExited){$process.Kill();$null=$process.WaitForExit(5000)};$process.Dispose()}
                 }
-                foreach($process in @(Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -in $paths})){
-                    Stop-Process -Id $process.ProcessId -Force -ErrorAction SilentlyContinue
-                }
+                Stop-IsolatedPackageScope $testScope
             }
         }
     }

@@ -36,7 +36,10 @@ $runtime=$null
 try {
     $runtime=New-PhysicalRuntimeStage $sourceRuntime
     $runtimeScope=New-IsolatedPackageScope $runtime
-    $cacheScope=New-IsolatedPackageScope $cache
+    # The cache is an immutable comparison source; no gate launches from it.
+    # It therefore has no process-ownership scope.  Requiring it to be a
+    # build package incorrectly rejects the released package before a case.
+    $cacheScope=$null
 } catch {
     if($runtime){Remove-PhysicalRuntimeStage $runtime}
     throw
@@ -68,7 +71,7 @@ if($NativeService){
 }
 foreach($name in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe')){
     $input=if($name -eq 'ntvwm.exe' -and $NativeWorker){$NativeWorker}elseif($name -eq 'ntcon.exe' -and $NativeFrontend){$NativeFrontend}elseif($name -eq 'ntmon.exe' -and $NativeMonitor){$NativeMonitor}elseif($name -eq 'run16.exe' -and $NativeLauncher){$NativeLauncher}elseif($name -eq 'ntsrv.exe' -and $NativeService){$NativeService}else{Join-Path $cache $name}
-    if((Get-FileHash $input).Hash -ne (Get-FileHash (Join-Path $runtimeBinary $name)).Hash){
+    if((Get-IsolatedFileSha256 $input) -ne (Get-IsolatedFileSha256 (Join-Path $runtimeBinary $name))){
         throw "Build cache/runtime mismatch: $name; build affected targets first"
     }
 }
@@ -76,7 +79,7 @@ $packageNames=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntm
 if(Test-Path -LiteralPath (Join-Path $cache 'nthook32.dll')){
     $hook=Join-Path $runtimeBinary 'nthook32.dll'
     if(!(Test-Path -LiteralPath $hook) -or
-       (Get-FileHash (Join-Path $cache 'nthook32.dll')).Hash -ne (Get-FileHash $hook).Hash){
+       (Get-IsolatedFileSha256 (Join-Path $cache 'nthook32.dll')) -ne (Get-IsolatedFileSha256 $hook)){
         throw 'Build cache/runtime mismatch: nthook32.dll'
     }
     $packageNames+='nthook32.dll'
@@ -86,7 +89,7 @@ if(Test-Path -LiteralPath (Join-Path $runtimeBinary 'nthook64.dll')){
         throw 'Hook64 runtime requires explicit matching build input and Hook32'
     }
     $hook64=(Resolve-Path -LiteralPath $NativeHook64).Path
-    if((Get-FileHash $hook64).Hash -ne (Get-FileHash (Join-Path $runtimeBinary 'nthook64.dll')).Hash){
+    if((Get-IsolatedFileSha256 $hook64) -ne (Get-IsolatedFileSha256 (Join-Path $runtimeBinary 'nthook64.dll'))){
         throw 'Build/runtime mismatch: nthook64.dll'
     }
     $packageNames+='nthook64.dll'
@@ -96,7 +99,7 @@ $manifest=foreach($name in $packageNames){
     $bytes=[IO.File]::ReadAllBytes($path);$pe=[BitConverter]::ToInt32($bytes,60)
     $machine=if($name -eq 'nthook64.dll' -or ($name -eq 'ntvwm.exe' -and $NativeWorker) -or ($name -eq 'ntcon.exe' -and $NativeFrontend) -or ($name -eq 'ntmon.exe' -and $NativeMonitor) -or ($name -eq 'run16.exe' -and $NativeLauncher) -or ($name -eq 'ntsrv.exe' -and $NativeService)){0x8664}else{0x14c}
     if([BitConverter]::ToUInt16($bytes,$pe+4) -ne $machine){throw "Wrong runtime machine: $name"}
-    [pscustomobject]@{Name=$name;Sha256=(Get-FileHash $path).Hash;Machine=$machine}
+    [pscustomobject]@{Name=$name;Sha256=(Get-IsolatedFileSha256 $path);Machine=$machine}
 }
 if($Suite -ne 'Control' -and (!$GuestFixture -or !$WindowObserver -or !$WowBaselineRoots)){
     throw 'Product gate requires guest fixture, Window observer and retained WOW baselines'
@@ -117,7 +120,11 @@ function Invoke-Gate([string]$Name,[scriptblock]$Body) {
         $bodyMs=$watch.ElapsedMilliseconds
         $cleanup=[Diagnostics.Stopwatch]::StartNew()
         $cleaned=$false
-        try {Stop-IsolatedPackageScope $runtimeScope;Stop-IsolatedPackageScope $cacheScope;$cleaned=$true}
+        try {
+            Stop-IsolatedPackageScope $runtimeScope
+            if($cacheScope){Stop-IsolatedPackageScope $cacheScope}
+            $cleaned=$true
+        }
         finally {
             $timings.Add([pscustomobject]@{Gate=$Name;ElapsedMs=$bodyMs;
                 CleanupMs=$cleanup.ElapsedMilliseconds;Passed=($passed -and $cleaned)})
@@ -147,16 +154,23 @@ try {
                     $current=Get-Content "$log/wow-restored-$guest-windows.txt" -Raw
                     $last=($current -split 'sample-ms=')[-1]
                     $pattern=switch($guest){
-                        winmine {'visible=1 class=00C900A800C000D7 text=00C900A800C000D7'}
-                        sol {'visible=1 class=005300740061007400690063 text=00C400DA00B400E600B200BB00B900BB'}
+                        # The selected guest may be English or the retained
+                        # Chinese media. Still require the exact baseline
+                        # signature below; this is not a liveness waiver.
+                        winmine {'visible=1 class=(?:00C900A800C000D7 text=00C900A800C000D7|004D0069006E00650073007700650065007000650072 text=004D0069006E00650073007700650065007000650072)'}
+                        sol {'visible=1 class=005300740061007400690063 text=(?:00C400DA00B400E600B200BB00B900BB|004F007500740020006F00660020006D0065006D006F00720079)'}
                         write {'visible=1 class=005300740061007400690063 text=004E006F0074[0-9A-F]+'}
                     }
                     foreach($baselineRoot in $WowBaselineRoots){
                         $prior=Join-Path $baselineRoot "wow-restored-$guest-windows.txt"
                         if(!(Test-Path $prior)){$prior=Join-Path $baselineRoot "closure-wow-r001-$guest-windows.txt"}
+                        if(!(Test-Path $prior)){$prior=Join-Path $baselineRoot "wow-$guest-windows.txt"}
                         $baseline=Get-Content $prior -Raw
                         $signature=[regex]::Match($baseline,$pattern).Value
-                        if(!$signature -or !$last.Contains($signature) -or !$last.Contains('alive=1')){throw "WOW frontier changed: $guest"}
+                        if(!$signature){throw "WOW baseline lacks required application frontier: $guest ($prior)"}
+                        if(!$last.Contains($signature) -or !$last.Contains('alive=1')){
+                            throw "WOW frontier changed: $guest"
+                        }
                         $oldReport=Get-Content ($prior.Replace('-windows.txt','.txt')) -Raw
                         $report=Get-Content "$log/wow-restored-$guest.txt" -Raw
                         foreach($marker in @('result=timeout','exit=0x53504354')){
@@ -166,6 +180,11 @@ try {
                     "PASS independent retained WOW frontier $guest; not gameplay acceptance"
                 }
             }
+            # SHORT_HISTORY also seeds "prior shell output" into the screen;
+            # it is not just a geometry setting. Do not leak that independent
+            # dirty-screen fixture into the ordinary command/echo matrix.
+            # The strict DIR gate below retains its own seeded-history test.
+            Remove-Item Env:MVDM_OBSERVER_SHORT_HISTORY -ErrorAction SilentlyContinue
             foreach($mode in @('Console','Window')){
                 if($mode -eq 'Window'){$env:MVDM_OBSERVER_WINDOW_INPUT='1'}else{Remove-Item Env:MVDM_OBSERVER_WINDOW_INPUT -ErrorAction SilentlyContinue}
                 Invoke-Gate "$mode-17" {
@@ -186,7 +205,7 @@ try {
             'monitor-rpc-test.exe','native-gui-startup-probe.exe')){
             $input=if($fixture -eq 'monitor-rpc-test.exe' -and $MonitorRpc){$MonitorRpc}else{Join-Path $cache $fixture};$output=Join-Path $runtimeBinary $fixture
             Copy-Item -LiteralPath $input -Destination $output -Force
-            if((Get-FileHash $input).Hash -ne (Get-FileHash $output).Hash){throw 'Control fixture copy mismatch'}
+            if((Get-IsolatedFileSha256 $input) -ne (Get-IsolatedFileSha256 $output)){throw 'Control fixture copy mismatch'}
         }
         Invoke-Gate 'rpc' {
             # native-command/native-registry are in-process archive cases,
@@ -248,10 +267,13 @@ try {
         }
         Invoke-Gate 'nested-window-handoff' {& "$repo/tests/observation/verify-broker-io-handoff.ps1" -RuntimeRoot $runtime -Observer $observerPath -ReportPrefix "$log/handoff" -Case nested-window}
     }
-    foreach($row in $manifest){if((Get-FileHash (Join-Path $runtimeBinary $row.Name)).Hash -ne $row.Sha256){throw 'Runtime identity changed during verification'}}
+    foreach($row in $manifest){if((Get-IsolatedFileSha256 (Join-Path $runtimeBinary $row.Name)) -ne $row.Sha256){throw 'Runtime identity changed during verification'}}
     "PASS $Suite selected gates; identical $($packageNames.Count)-file package"
 }finally{
-    try {Stop-IsolatedPackageScope $runtimeScope;Stop-IsolatedPackageScope $cacheScope} finally {
+    try {
+        Stop-IsolatedPackageScope $runtimeScope
+        if($cacheScope){Stop-IsolatedPackageScope $cacheScope}
+    } finally {
         foreach($name in $variables){
             if($null -eq $old[$name]){Remove-Item -LiteralPath ('Env:'+$name) -ErrorAction SilentlyContinue}
             else{[Environment]::SetEnvironmentVariable($name,$old[$name])}

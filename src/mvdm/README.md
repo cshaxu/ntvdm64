@@ -135,6 +135,15 @@ palette resolution, cursor batching and error reporting retain their owner.
 The added publication trigger follows original `nt_start_update`, not mere
 return from `calc_update`: an idle dirty check does not publish a full frame.
 Its notification survives between ticks and is consumed on the video owner.
+T444 S1's required-regression repair checks the original `CNTRL_VDMBLOCKED`
+bit before the added CCPU software-video tick. A queued CPU timer event can
+arrive after COMMAND releases its frontend but before its next command BOP;
+it must retain dirty/cursor/mode state instead of publishing to a closed pipe.
+Original final paint precedes setting that bit, and resume clears it after
+reacquisition. This fixes the project-added publisher's integration, not
+the original timer's asynchronous suspension contract. No new state or
+transport-error suppression is introduced. See the
+[T444 S1 evidence](../../docs/etc/evidence/m0-t444-s1-native-indexed16-palette-projection.md).
 Software-fullscreen mouse flushes leave VGA dirt for the existing video tick;
 they do not execute synchronous copied-frame transport in the guest IRQ.
 S12 also copies the resolved text configuration after the original periodic

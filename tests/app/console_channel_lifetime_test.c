@@ -224,8 +224,11 @@ static void run_case(unsigned mode,unsigned round)
         request.sequence=3;request.operation=CONSOLE_IO_VIDEO_DATA;request.bytes=4;
         memset(request.data,1,4);
         peer_request(&request);
-        peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));CHECK(reply.result);
+        /* Non-final frame parts have no reply. The final part below is the
+         * sole acknowledgement for the complete frame. */
         Sleep(100);CHECK(!FindWindowW(L"LibKvmWindow",NULL));
+        { DWORD available=0;
+          CHECK(PeekNamedPipe(peer,NULL,0,NULL,&available,NULL) && !available); }
         request.sequence=4;request.state.count=4;
         peer_request(&request);
         peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));CHECK(reply.result);
@@ -1367,6 +1370,11 @@ int main(int argc,char **argv)
     reduced=current.srWindow;
     CHECK(reduced.Bottom>reduced.Top);
     --reduced.Bottom;
+    /* User font/DPI changes can leave an existing viewport larger than the
+     * current maximum. Pick a legal new viewport; teardown must still retain
+     * this exact rectangle and cursor rather than restore startup geometry. */
+    reduced.Right=min(reduced.Right,reduced.Left+current.dwMaximumWindowSize.X-1);
+    reduced.Bottom=min(reduced.Bottom,reduced.Top+current.dwMaximumWindowSize.Y-1);
     CHECK(opennt_console_resize_grid(canonical,NULL,TRUE,&reduced));
     CHECK(SetConsoleCursorPosition(canonical,(COORD){reduced.Left,reduced.Top}));
     current_cursor.bVisible=!current_cursor.bVisible;

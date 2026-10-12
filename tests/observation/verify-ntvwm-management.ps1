@@ -17,7 +17,7 @@ if(@($FrontendLoss,$WorkerLoss,$FrontendClose|Where-Object {$_}).Count -gt 1){th
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 . "$PSScriptRoot/isolated_package_cleanup.ps1"
 $physical=(Resolve-Path $ProcessPackageRoot).Path
-if(!$physical.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase)){throw 'Require isolated build candidate'}
+$testScope=New-IsolatedPackageScope $physical $PackageRoot
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid log prefix'}
 if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'An existing broker must not be controlled by this test'}
 $paths=@()
@@ -185,6 +185,5 @@ try {
         if($process){if(!$process.HasExited){$process.Kill();$process.WaitForExit(5000)|Out-Null};$process.Dispose()}
     }
     if($gate){$gate.Dispose()}
-    $remaining=@(Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -in $paths})
-    Stop-IdentityCheckedProcesses $remaining $paths
+    Stop-IsolatedPackageScope $testScope
 }

@@ -104,7 +104,7 @@ function Add-Edge([string]$target) {
   # CSR capture or RTL environment may enter this native-worker closure.
   $inputs=if($Component -eq 'Launcher'){@('obj/opennt-rtl/error.obj','obj/opennt-rtl/environ.obj')}else{@('obj/opennt-rtl/error.obj')}
  }
- if($edge.Rule -in @('lib','frontend_link','base_rpc_test_link','console_test_link','pointer_test_link','monitor_link','run16_link','broker_test_link','rtl_fixture_link','basesrv_link','basesrv_service_test_link') -or ($target -in @('ntvwm.exe','ntcon.exe','ntmon.exe','run16.exe','ntsrv.exe') -and $edge.Rule -eq 'phony')) {
+ if($edge.Rule -in @('lib','link','test_link','frontend_link','base_rpc_test_link','console_test_link','pointer_test_link','monitor_link','run16_link','broker_test_link','rtl_fixture_link','basesrv_link','basesrv_service_test_link') -or ($target -in @('ntvwm.exe','ntcon.exe','ntmon.exe','run16.exe','ntsrv.exe') -and $edge.Rule -eq 'phony')) {
   foreach($input in $inputs){Add-Edge $input}
   $rule=if($edge.Rule -eq 'lib'){'lib'}elseif($edge.Rule -in @('console_test_link','pointer_test_link','monitor_link','broker_test_link','rtl_fixture_link','basesrv_service_test_link') -or $Component -eq 'Monitor'){'test_link'}else{'link'}
   $graph.Add('build '+$output+': '+$rule+' '+(($inputs|ForEach-Object {$_.Replace('original-opennt-rtl-x86.lib','original-opennt-rtl-native.lib')}) -join ' '))
@@ -187,6 +187,7 @@ function Add-Edge([string]$target) {
 }
 $targets=if($Component -eq 'Service'){@('ntsrv.exe','basesrv-service-reservation-test.exe','basesrv-idle-policy-test.exe','basesrv-reservation-test.exe','native-service-layout-test.exe','native-observation-fixture.exe')}elseif($Component -eq 'Worker'){@('ntvwm.exe','ntvwm-execution-lifetime-test.exe','common-worker-control-test.exe')}elseif($Component -eq 'Monitor'){@('ntmon.exe','monitor-rpc-test.exe','monitor-layout-test.exe','monitor-session-test.exe','common-management-test.exe')}elseif($Component -eq 'Launcher'){@('run16.exe','run16-image-classification-test.exe','application-search-test.exe','native-capture-test.exe','frontend-scope-lifetime-test.exe','rtl-x86-fixture.exe')}else{@('ntcon.exe','frontend-session-arguments-test.exe','frontend-window-library-test.exe','frontend-window-controller-test.exe','frontend-window-keyboard-test.exe','frontend-window-mouse-test.exe','console-frontend-test.exe','console-video-test.exe','frontend-text-handoff-test.exe','console-channel-lifetime-test.exe','console-frame-failure-test.exe','console-pointer-contract-test.exe')}
 if($Component -eq 'Service'){$targets+=@('dos-observation-fixture.exe')}
+if($Component -eq 'Worker'){$targets+=@('ntvwm-presentation-test.exe')}
 if($Component -eq 'Monitor'){$targets+=@('monitor-trace-view-test.exe','monitor-live-view-test.exe')}
 foreach($target in $targets){Add-Edge $target}
 $graph.Add('default '+$targets[0])

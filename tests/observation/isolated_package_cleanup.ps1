@@ -2,6 +2,13 @@
 # Caller creates the scope before starting any case; exact isolated paths are
 # the only cleanup authority, not image names or normal idle deadlines.
 $script:IsolatedPackageCleanupRoot=$PSScriptRoot
+function Get-IsolatedFileSha256([string]$LiteralPath) {
+    $path=(Resolve-Path -LiteralPath $LiteralPath -ErrorAction Stop).Path
+    $algorithm=[Security.Cryptography.SHA256]::Create()
+    $stream=[IO.File]::OpenRead($path)
+    try {return ([BitConverter]::ToString($algorithm.ComputeHash($stream))).Replace('-','')}
+    finally {$stream.Dispose();$algorithm.Dispose()}
+}
 function Get-PhysicalRuntimeStageRoot {
     return 'O:\tmp'
 }
@@ -47,7 +54,11 @@ function New-PhysicalRuntimeStage([string]$PackageRoot) {
         Get-ChildItem -LiteralPath $source -Force | Where-Object {
             $_.Name -notin @('builds','logs','logs2')
         } | ForEach-Object {
-            Copy-Item -LiteralPath $_.FullName -Destination $stage -Recurse -Force
+            # This helper's sole successful pipeline result is the stage
+            # root below.  Do not leak Copy-Item results into the caller's
+            # `$runtime` assignment, which would turn it into an array and
+            # break the ownership check before any product case starts.
+            $null = Copy-Item -LiteralPath $_.FullName -Destination $stage -Recurse -Force
         }
         $marker = [ordered]@{
             schema = 1
@@ -56,7 +67,7 @@ function New-PhysicalRuntimeStage([string]$PackageRoot) {
             binaries = @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe') |
                 ForEach-Object {
                     $path = Join-Path (Get-PackageBinaryRoot $stage) $_
-                    [ordered]@{ name = $_; sha256 = (Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash }
+                    [ordered]@{ name = $_; sha256 = (Get-IsolatedFileSha256 $path) }
                 }
         }
         $marker | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $stage '.ntvdm64-test-stage.json') -Encoding UTF8
@@ -73,7 +84,7 @@ function Remove-PhysicalRuntimeStage([string]$Stage) {
     foreach ($row in @($marker.binaries)) {
         $path = Join-Path (Get-PackageBinaryRoot $root) $row.name
         if (!(Test-Path -LiteralPath $path) -or
-            (Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash -ne $row.sha256) {
+            (Get-IsolatedFileSha256 $path) -ne $row.sha256) {
             throw 'Test stage binary identity changed; preserve it for diagnosis'
         }
     }
@@ -119,7 +130,7 @@ function New-IsolatedPackageScope([string]$PackageRoot,[string]$LaunchRoot='') {
         $paths+=$file
         if($LaunchRoot){
             $alias=Join-Path $launchBinary $name
-            if((Get-FileHash $alias).Hash -ne (Get-FileHash $file).Hash){throw 'Test alias identity mismatch'}
+            if((Get-IsolatedFileSha256 $alias) -ne (Get-IsolatedFileSha256 $file)){throw 'Test alias identity mismatch'}
             $paths+=$alias
         }
     }

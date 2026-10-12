@@ -29,6 +29,7 @@ typedef CONTEXT observer_guest_context;
 #endif
 
 static char control_event_report[MAX_PATH];
+static DWORD scripted_window_frontend;
 static ULONGLONG mouse_burst_started;
 static DWORD mouse_burst_elapsed;
 /* Optional test-only timeline. Buffer observations until target completion:
@@ -319,19 +320,42 @@ static HANDLE observer_open_active_output(HANDLE fallback, BOOL *opened)
 }
 static void write_console_snapshot(HANDLE output, const char *report_path)
 {
-    char *screen;
+    char *screen = NULL;
     char path[MAX_PATH];
     DWORD count = 0, row, column, error;
-    CONSOLE_SCREEN_BUFFER_INFO info;
+    CONSOLE_SCREEN_BUFFER_INFO info = {0};
     FILE *file = NULL;
     BOOL opened = FALSE;
+    HWND window = scripted_window_frontend ? FindWindowW(L"LibKvmWindow", NULL) : NULL;
 
-    output = observer_open_active_output(output, &opened);
+    if (window && IsWindowVisible(window)) {
+        observer_text_view view;
+        /* Window input milestones observe the rendered text frame. Capture
+         * that same surface for per-command assertions: its parked Console
+         * can legitimately be blank and is not the user's Window output. */
+        error = ERROR_RETRY;
+        if (observer_text_read(output, window, scripted_window_frontend, &view)) {
+            count = view.columns * view.rows;
+            screen = (char *)malloc(count);
+            if (screen) {
+                memcpy(screen, view.cells, count);
+                memset(&info, 0, sizeof(info));
+                info.dwSize.X = (SHORT)view.columns;
+                info.dwSize.Y = (SHORT)view.rows;
+                info.srWindow.Right = (SHORT)(view.columns - 1);
+                info.srWindow.Bottom = (SHORT)(view.rows - 1);
+                error = ERROR_SUCCESS;
+            } else error = ERROR_NOT_ENOUGH_MEMORY;
+        }
+    } else {
+        /* Final completion can close the Window and restore Console output. */
+        output = observer_open_active_output(output, &opened);
 
 #ifdef OBSERVER_COMPARE_CAPTURE
-    compare_console_capture(output,report_path);
+        compare_console_capture(output,report_path);
 #endif
-    error=observer_console_snapshot(output,&info,&screen,&count);
+        error=observer_console_snapshot(output,&info,&screen,&count);
+    }
     snprintf(path, sizeof(path), "%s.console.txt", report_path);
     if (fopen_s(&file, path, "wb") == 0 && file != NULL) {
         if(error) {
@@ -741,7 +765,6 @@ static BOOL wait_for_report_marker_after(const char *path, const char *marker,
 
 /* End-to-end test only: public Console CAF, actual frontend Window, X return.
  * Refuse the user's desktop. No guest state or private product API is used. */
-static DWORD scripted_window_frontend;
 static BOOL console_caf_return(HANDLE input,const char *report_path)
 {
     char desktop[96],path[MAX_PATH];DWORD needed,written,pid=0;

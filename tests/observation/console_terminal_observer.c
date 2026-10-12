@@ -334,12 +334,27 @@ static DWORD WINAPI watch_cells(void *unused) {
         dir_event=OpenEventA(EVENT_MODIFY_STATE,FALSE,dir_event_name);
     char path[MAX_PATH];GetEnvironmentVariableA("TEST_CELL_LOG",path,sizeof(path));
     FILE *f=fopen(path,"w");if(!f)return 1;
-    DWORD previous=0,begin=GetTickCount();WCHAR data[16000];
+    DWORD previous=0,begin=GetTickCount();WCHAR data[16000];CHAR_INFO cells[16000];
     while(GetTickCount()-begin<45000) {
         CONSOLE_SCREEN_BUFFER_INFO info;DWORD count=0,hash=2166136261u,mode=0;
         if(GetConsoleScreenBufferInfo(h,&info)) {
-            DWORD total=(DWORD)info.dwSize.X*info.dwSize.Y;if(total>16000)total=16000;
-            COORD origin={0,0};ReadConsoleOutputCharacterW(h,data,total,origin,&count);
+            SHORT rows;
+            COORD origin={0,0},grid;
+            SMALL_RECT area;
+            if(info.dwSize.X<=0 || info.dwSize.X>16000) {Sleep(40);continue;}
+            rows=(SHORT)min(info.dwSize.Y,16000/info.dwSize.X);
+            if(rows<=0) {Sleep(40);continue;}
+            grid=(COORD){info.dwSize.X,rows};
+            area=(SMALL_RECT){0,0,(SHORT)(grid.X-1),(SHORT)(grid.Y-1)};
+            /* This assertion consumes cells, not a linear character stream.
+             * ReadConsoleOutputCharacterW may omit wide-character trailing
+             * cells; dividing that stream by the buffer width invents shifted
+             * rows and can hide a correctly positioned prompt. */
+            if(!ReadConsoleOutputW(h,cells,grid,origin,&area) ||
+                area.Left!=0 || area.Top!=0 || area.Right!=grid.X-1 ||
+                area.Bottom!=grid.Y-1) {Sleep(40);continue;}
+            count=(DWORD)grid.X*grid.Y;
+            for(DWORD i=0;i<count;++i)data[i]=cells[i].Char.UnicodeChar;
             if(dir_event && info.dwSize.X>0) {
                 int summary=0,prompt=0;SHORT summary_row=-1,prompt_row=-1;
                 for(DWORD row=0;row<count/(DWORD)info.dwSize.X;row++) {

@@ -16,9 +16,18 @@ if(!$log.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgn
 $null=New-Item -ItemType Directory -Path $log
 $results=[Collections.Generic.List[object]]::new()
 foreach($name in 'frontend-session-arguments','frontend-window-library','frontend-window-controller','frontend-window-keyboard','frontend-window-mouse','console-pointer-contract','console-frontend','console-video') {
- $output=& (Join-Path $build ($name+'-test.exe')) 2>&1
- $code=$LASTEXITCODE
- $output|Set-Content (Join-Path $log ($name+'.txt'))
+ # Several successful native fixtures deliberately write their diagnostic
+ # receipt to stderr.  Keep that receipt, but do not let PowerShell turn a
+ # zero-exit native process into a terminating ErrorRecord merely because its
+ # stream was merged with stdout.
+ $stderr=Join-Path $log ($name+'.stderr.txt')
+ $savedErrorAction=$ErrorActionPreference
+ try {
+  $ErrorActionPreference='Continue'
+  $output=& (Join-Path $build ($name+'-test.exe')) 2>$stderr
+  $code=$LASTEXITCODE
+ } finally {$ErrorActionPreference=$savedErrorAction}
+ @($output;Get-Content -LiteralPath $stderr -ErrorAction SilentlyContinue)|Set-Content (Join-Path $log ($name+'.txt'))
  $results.Add(@{case=$name;exit=$code})
  if($code){throw "Native frontend fixture failed: $name/$code"}
 }
@@ -33,9 +42,14 @@ try {
 }finally{$child.Dispose()}
 foreach($name in 'console-channel-lifetime','console-frame-failure') {
  $report=Join-Path $log ($name+'.txt')
- $output=& (Join-Path $build ($name+'-test.exe')) --private-desktop-full $report
- $code=$LASTEXITCODE
- $output|Set-Content (Join-Path $log ($name+'-launch.txt'))
+ $stderr=Join-Path $log ($name+'.stderr.txt')
+ $savedErrorAction=$ErrorActionPreference
+ try {
+  $ErrorActionPreference='Continue'
+  $output=& (Join-Path $build ($name+'-test.exe')) --private-desktop-full $report 2>$stderr
+  $code=$LASTEXITCODE
+ } finally {$ErrorActionPreference=$savedErrorAction}
+ @($output;Get-Content -LiteralPath $stderr -ErrorAction SilentlyContinue)|Set-Content (Join-Path $log ($name+'-launch.txt'))
  if($code -or !(Test-Path $report)){throw "Native frontend channel fixture failed: $name/$code"}
  $results.Add(@{case=$name;exit=$code})
 }

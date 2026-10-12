@@ -42,7 +42,7 @@ if($Cases -contains 'graphics-return' -or $Cases -contains 'direct-graphics-retu
     $videoBuild=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../build'))+'\'
     if(!$video.StartsWith($videoBuild,[StringComparison]::OrdinalIgnoreCase)){throw 'Video fixture must be under repository build'}
     $manifest=Get-Content -LiteralPath (Join-Path (Split-Path $video) 'manifest.json') -Raw | ConvertFrom-Json
-    if($manifest.route -ne 'graphics-vram' -or (Get-FileHash -LiteralPath $video).Hash -ne $manifest.sha256){throw 'Wrong video probe or hash'}
+    if($manifest.route -ne 'graphics-vram' -or (Get-IsolatedFileSha256 $video) -ne $manifest.sha256){throw 'Wrong video probe or hash'}
     if($env:MVDM_OBSERVER_GRAPHICS_RETURN -eq '1' -and
         (!$manifest.windowHandshake -or $Cases.Count -ne 1 -or $Cases[0] -ne 'direct-graphics-return')){
         throw 'Graphics Window handshake requires its held probe and only direct-graphics-return'
@@ -68,7 +68,7 @@ if($ProcessPackageRoot){
     $physicalBinary=Get-PackageBinaryRoot $ProcessPackageRoot
     foreach($name in $productNames){
         $physical=Join-Path $physicalBinary $name
-        if((Get-FileHash $physical).Hash -ne (Get-FileHash (Join-Path $binaryRoot $name)).Hash){
+        if((Get-IsolatedFileSha256 $physical) -ne (Get-IsolatedFileSha256 (Join-Path $binaryRoot $name))){
             throw "Process package differs from launch package: $name"
         }
         $productPaths+= $physical
@@ -191,8 +191,8 @@ foreach ($selected in $Cases) {
 if($OrdinaryFrontend -and $FrontendObserver){throw 'Select ordinary or instrumented frontend, not both'}
 if(!$OrdinaryFrontend -and @($matrix | Where-Object {$_.RootFrontend -and $_.Name -in $Cases}).Count){
     if(!$FrontendObserver -or
-       (Get-FileHash -LiteralPath $FrontendObserver).Hash -ne
-       (Get-FileHash -LiteralPath (Join-Path $binaryRoot 'ntcon.exe')).Hash){
+       (Get-IsolatedFileSha256 $FrontendObserver) -ne
+       (Get-IsolatedFileSha256 (Join-Path $binaryRoot 'ntcon.exe'))){
         throw 'Owner cases require the test-only frontend observer in the isolated test package'
     }
 }

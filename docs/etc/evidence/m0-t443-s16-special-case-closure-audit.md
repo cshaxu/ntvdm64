@@ -24,7 +24,7 @@ planning text, not active work.
 ## Current release identity
 
 On 2026-10-11, the documentation-only audit rechecked all ten manifest rows.
-Each `assets/release` SHA-256 and deployed `O:\\winnt\\system32` SHA-256 equals
+Each `assets/release` SHA-256 and deployed `O:/winnt/system32` SHA-256 equals
 the current `assets/release/release-manifest.json` value.  The immediately
 preceding repair commit is `543546d9b`, which republished the coherent x86
 `ntvdm.exe`/`VDMREDIR.DLL`/`nthook32.dll` trio after its actual WINMINE
