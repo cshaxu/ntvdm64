@@ -16,7 +16,7 @@ typedef struct style_window {
     HFONT font;
     HANDLE font_resource;
     UINT dpi, calls;
-    BOOL active, detached, hot;
+    BOOL active, detached, hot, system_menu;
     int pressed;
     DWORD old_policy;
     BOOL policy_saved;
@@ -118,12 +118,16 @@ static void button(HDC dc,RECT r,int kind,BOOL down,BOOL zoom,int u,
     const char *bits;
     COLORREF palette[4]={p->edge,p->light,p->shadow,p->face};
     if(IsRectEmpty(&r))return;
-    fill(dc,r,p->face);outline(dc,r,u,p->edge);
+    fill(dc,r,kind==HTSYSMENU&&down?p->shadow:p->face);outline(dc,r,u,p->edge);
     if(kind==HTSYSMENU){
         /* CLOSE contains two side-by-side 18-pixel images. Original USER
          * uses the first for top-level windows, second for WS_CHILD.
          * Child/MDI frames are not yet part of this experiment. */
-        bits=&system_menu_bitmap[0][0];width=18;stride=37;r.left+=u;
+        bits=&system_menu_bitmap[0][0];width=18;stride=37;
+        /* VGA selection inverts palette roles, not RGB bytes: light grey
+         * becomes dark grey, black becomes white. No second CLOSE bitmap. */
+        if(down){palette[0]=p->light;palette[1]=p->edge;
+            palette[2]=p->face;palette[3]=p->shadow;}
     }else{
         int index=(kind==HTMINBUTTON?0:zoom?2:1)+(down?3:0);
         bits=&frame_buttons[index][0][0];width=19;stride=20;
@@ -138,7 +142,7 @@ static void button(HDC dc,RECT r,int kind,BOOL down,BOOL zoom,int u,
     /* Arrow OEM artwork includes its left separator, CLOSE does not.
      * The caption supplies the other separators. Scale the raster once. */
     SetStretchBltMode(dc,COLORONCOLOR);
-    StretchDIBits(dc,r.left,r.top+u,r.right-r.left-u,r.bottom-r.top-2*u,
+    StretchDIBits(dc,r.left,r.top,r.right-r.left-(kind==HTSYSMENU?u:0),r.bottom-r.top,
         0,0,width,18,pixels,&bi,DIB_RGB_COLORS,SRCCOPY);
 }
 
@@ -160,12 +164,30 @@ static void paint(HWND w,style_window *s,HDC target)
      * the white upper/left bevel used by later Windows non-client frames. */
     r=l.outer;InflateRect(&r,-l.border+l.unit,-l.border+l.unit);
     outline(dc,r,l.unit,l.dialog_frame?p.light:p.edge);
+    if(l.sizeable && !l.dialog_frame){
+        /* Original USER 1:A06B..A1DE divides the flat sizing band into
+         * corner and edge regions. These are strokes, not a bevel. */
+        int corner=l.border+MulDiv(19,(int)s->dpi,96)-l.unit;
+        int vertical=l.border+MulDiv(18,(int)s->dpi,96),i;
+        for(i=0;i<2;++i){
+            int x=i?l.outer.right-corner-l.unit:l.outer.left+corner;
+            int y=i?l.outer.bottom-vertical-l.unit:l.outer.top+vertical;
+            if(l.outer.right-l.outer.left>2*corner+l.unit){
+                SetRect(&r,x,l.outer.top+l.unit,x+l.unit,l.outer.top+l.border-l.unit);fill(dc,r,p.edge);
+                OffsetRect(&r,0,l.outer.bottom-l.outer.top-l.border);fill(dc,r,p.edge);
+            }
+            if(l.outer.bottom-l.outer.top>2*vertical+l.unit){
+                SetRect(&r,l.outer.left+l.unit,y,l.outer.left+l.border-l.unit,y+l.unit);fill(dc,r,p.edge);
+                OffsetRect(&r,l.outer.right-l.outer.left-l.border,0);fill(dc,r,p.edge);
+            }
+        }
+    }
     if(IsRectEmpty(&l.caption)){
         RestoreDC(dc,saved);if(!target)ReleaseDC(w,dc);return;
     }
     fill(dc,l.caption,s->active?p.active:p.inactive);
     r=l.caption;r.top=r.bottom;r.bottom+=l.unit;fill(dc,r,p.edge);
-    button(dc,l.system,HTSYSMENU,s->pressed==HTSYSMENU&&s->hot,FALSE,l.unit,&p);
+    button(dc,l.system,HTSYSMENU,s->system_menu,FALSE,l.unit,&p);
     button(dc,l.minimize,HTMINBUTTON,s->pressed==HTMINBUTTON&&s->hot,FALSE,l.unit,&p);
     button(dc,l.maximize,HTMAXBUTTON,s->pressed==HTMAXBUTTON&&s->hot,IsZoomed(w),l.unit,&p);
     len=GetWindowTextLengthW(w);
@@ -178,7 +200,7 @@ static void paint(HWND w,style_window *s,HDC target)
         /* System is a discrete raster font. Asking GDI for a 24-pixel cell
          * selects its 20-pixel strike, not a scaled 16-pixel VGA strike.
          * Render the base cell, then scale once with the rest of the metrics. */
-        SetRect(&logical,0,0,max(1,MulDiv(r.right-r.left,96,(int)s->dpi)),20);
+        SetRect(&logical,0,0,max(1,MulDiv(r.right-r.left,96,(int)s->dpi)),18);
         text_dc=CreateCompatibleDC(dc);
         bitmap=CreateCompatibleBitmap(dc,logical.right,logical.bottom);
         if(text_dc && bitmap){
@@ -370,6 +392,16 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
             result=win16_style_hit(&l,point);break;
         }
         goto forward;
+    case WM_INITMENUPOPUP:
+        result=DefSubclassProc(w,msg,wp,lp);
+        if(!s->detached && HIWORD(lp) && (HMENU)wp==GetSystemMenu(w,FALSE)){
+            s->system_menu=TRUE;paint(w,s,NULL);
+        }
+        break;
+    case WM_EXITMENULOOP:
+        result=DefSubclassProc(w,msg,wp,lp);
+        if(!s->detached && s->system_menu){s->system_menu=FALSE;paint(w,s,NULL);}
+        break;
     case WM_NCLBUTTONDOWN:
         /* Native system-menu tracking owns the second click, cancellation
          * and disabled SC_CLOSE semantics. TrackPopupMenu is not equivalent

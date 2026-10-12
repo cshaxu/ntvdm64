@@ -108,7 +108,7 @@ WindowDC reads now independently require a white client-top strip; the
 activation repair removes the r066 baseline's 3,304 contaminated pixels.
 The owner confirms r062 hover behavior fixed and accepts r070 static-residue
 repair. Next, audit original-style divergences across implemented frames,
-starting with the system-menu button's raised/pressed appearance. No frame
+starting with the system-menu button's selected appearance. No frame
 height or client geometry change in the accepted repair. Normal
 NC activation/cursor drawing is custom-owned; minimized presentation stays native.
 
@@ -118,6 +118,13 @@ labelled native references, not retro acceptance. Detailed r047--r070 results
 are retained in the evidence below. Overall S3 acceptance and S4 admission wait.
 See [S3 experiment evidence](../etc/evidence/m0-t445-s3-style-experiment.md).
 No production images or deployed components changed.
+
+Owner's paired normal/selected references resolve the system box as palette-role
+inversion, not an arrow-style bevel. r078 implements that state, sizing-frame
+strokes and source-derived 19x18 button geometry; both widths pass 11,495 checks. Private
+desktop notification/pixel checks do not certify physical menu tracking.
+Full frame-divergence review remains open (including long-title clipping and
+resize-corner hit geometry); no whole-window pixel-equivalence claim.
 
 ## T444 Final Disposition
 

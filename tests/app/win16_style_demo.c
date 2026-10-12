@@ -15,6 +15,7 @@ static const WCHAR *capture_path;
 static int live;
 static HWND menu_probe;
 static unsigned menu_entries,close_commands;
+static void menu_pixels(HWND w,BOOL selected);
 static HWND cursor_probe;
 static unsigned client_cursor_calls;
 static unsigned native_ncactivate_calls;
@@ -29,7 +30,9 @@ static LRESULT CALLBACK window_proc(HWND w,UINT m,WPARAM a,LPARAM b)
     if(w==menu_probe){
         if(m==WM_SYSCOMMAND && (a&0xfff0)==SC_MOUSEMENU)++menu_entries;
         if(m==WM_SYSCOMMAND && (a&0xfff0)==SC_CLOSE)++close_commands;
-        if(m==WM_ENTERIDLE && a==MSGF_MENU){EndMenu();return 0;}
+        if(m==WM_ENTERIDLE && a==MSGF_MENU){
+            menu_pixels(w,TRUE);EndMenu();return 0;
+        }
     }
     if(m==WM_PAINT){
         PAINTSTRUCT ps;RECT r;HDC dc=BeginPaint(w,&ps);
@@ -82,13 +85,13 @@ static HWND make_window(DWORD style,DWORD ex_style,const WCHAR *title,int x,int 
 static void oem_pixels(HDC dc,RECT b,int u,int index)
 {
     static const COLORREF palette[]={RGB(0,0,0),RGB(255,255,255),RGB(128,128,128),RGB(192,192,192)};
-    int x,y,width=index==6?18:19,dw,dh=b.bottom-b.top-2*u;
-    if(index==6)b.left+=u;
-    dw=b.right-b.left-u;
+    int x,y,width=index>=6?18:19,dw,dh=b.bottom-b.top;
+    dw=b.right-b.left-(index>=6?u:0);
     for(y=0;y<18;++y)for(x=0;x<width;++x){
         int px=b.left+((2*x+1)*dw)/(2*width);
-        int py=b.top+u+((2*y+1)*dh)/36;
-        COLORREF actual=GetPixel(dc,px,py),expected=palette[(index==6?system_menu_bitmap[y][x]:frame_buttons[index][y][x])-'0'];
+        int py=b.top+((2*y+1)*dh)/36;
+        int role=(index>=6?system_menu_bitmap[y][x]:frame_buttons[index][y][x])-'0';
+        COLORREF actual=GetPixel(dc,px,py),expected=palette[index==7?role^1:role];
         if(actual!=expected){
             BITMAPINFO bi={0};BITMAPFILEHEADER fh={0};BITMAP bm;DWORD written;HANDLE out;void *data;WCHAR path[MAX_PATH];
             HBITMAP image=(HBITMAP)GetCurrentObject(dc,OBJ_BITMAP);
@@ -106,6 +109,35 @@ static void oem_pixels(HDC dc,RECT b,int u,int index)
             fprintf(stderr,"OEM index=%d source=%d,%d dest=%d,%d size=%d,%d actual=%06lx expected=%06lx\n",index,x,y,px,py,dw,dh,actual,expected);
         }
         CHECK(actual==expected);
+    }
+}
+
+static void menu_pixels(HWND w,BOOL selected)
+{
+    RECT r;win16_style_layout l;HDC dc;
+    CHECK(GetWindowRect(w,&r));
+    CHECK(win16_style_measure(r.right-r.left,r.bottom-r.top,GetDpiForWindow(w),
+        (DWORD)GetWindowLongPtr(w,GWL_STYLE),(DWORD)GetWindowLongPtr(w,GWL_EXSTYLE),FALSE,&l));
+    dc=GetWindowDC(w);CHECK(dc!=NULL);
+    oem_pixels(dc,l.system,l.unit,selected?7:6);
+    ReleaseDC(w,dc);
+}
+
+static void sizing_strokes(HDC dc,const win16_style_layout *l,UINT dpi)
+{
+    int corner=l->border+MulDiv(19,(int)dpi,96)-l->unit,i;
+    COLORREF expected=l->sizeable?RGB(0,0,0):RGB(192,192,192);
+    for(i=0;i<2;++i){
+        int x=i?l->outer.right-corner-l->unit:corner;
+        int y=i?l->outer.bottom-l->caption.bottom-l->unit:l->caption.bottom;
+        CHECK(GetPixel(dc,x,l->unit)==expected);
+        CHECK(GetPixel(dc,x,l->outer.bottom-l->border+l->unit)==expected);
+        CHECK(GetPixel(dc,l->unit,y)==expected);
+        CHECK(GetPixel(dc,l->outer.right-l->border+l->unit,y)==expected);
+    }
+    if(l->sizeable){
+        CHECK(corner==l->system.right-l->unit);
+        CHECK(l->outer.right-corner-l->unit==l->maximize.left);
     }
 }
 
@@ -134,6 +166,7 @@ static void capture(HWND *windows,const WCHAR *path,BOOL pressed)
                 (DWORD)GetWindowLongPtr(windows[i],GWL_EXSTYLE),FALSE,&l));
             b=l.maximize;
             oem_pixels(part,b,l.unit,pressed?4:1);
+            sizing_strokes(part,&l,dpi);
         }
         if(i==1){
             win16_style_layout l;RECT b;UINT dpi=GetDpiForWindow(windows[i]);
@@ -149,6 +182,7 @@ static void capture(HWND *windows,const WCHAR *path,BOOL pressed)
             oem_pixels(part,b,l.unit,6);
             b=l.minimize;
             oem_pixels(part,b,l.unit,0);
+            sizing_strokes(part,&l,dpi);
         }
         if(i==2){
             win16_style_layout l;
@@ -297,6 +331,15 @@ static void menu_tests(void)
      * injection. A generic TrackPopupMenu loop bypasses SC_MOUSEMENU. */
     SendMessageW(menu_probe,WM_NCLBUTTONDOWN,HTSYSMENU,p);
     CHECK(menu_entries==1);CHECK(IsWindow(menu_probe));
+    menu_pixels(menu_probe,FALSE);
+    /* A non-input private desktop may cancel before entering the popup loop.
+     * Explicit notification tests prove painting/state, not physical tracking. */
+    SendMessageW(menu_probe,WM_INITMENUPOPUP,(WPARAM)GetSystemMenu(menu_probe,FALSE),MAKELPARAM(0,TRUE));
+    menu_pixels(menu_probe,TRUE);
+    SendMessageW(menu_probe,WM_NCPAINT,1,0);menu_pixels(menu_probe,TRUE);
+    SendMessageW(menu_probe,WM_EXITMENULOOP,FALSE,0);menu_pixels(menu_probe,FALSE);
+    SendMessageW(menu_probe,WM_INITMENUPOPUP,(WPARAM)GetSystemMenu(menu_probe,FALSE),0);
+    menu_pixels(menu_probe,FALSE);
     EnableMenuItem(GetSystemMenu(menu_probe,FALSE),SC_CLOSE,MF_BYCOMMAND|MF_GRAYED);
     before=close_commands;
     SendMessageW(menu_probe,WM_NCLBUTTONDBLCLK,HTSYSMENU,p);pump();
@@ -465,6 +508,16 @@ int wmain(int argc,WCHAR **argv)
     SendMessageW(w[0],WM_NCACTIVATE,FALSE,0);SendMessageW(w[1],WM_NCACTIVATE,TRUE,0);
     SendMessageW(w[2],WM_NCACTIVATE,TRUE,0);
     capture(w,argv[2],FALSE);
+    {
+        WCHAR path[MAX_PATH];
+        SendMessageW(w[0],WM_INITMENUPOPUP,(WPARAM)GetSystemMenu(w[0],FALSE),MAKELPARAM(0,TRUE));
+        menu_pixels(w[0],TRUE);
+        CHECK(swprintf_s(path,MAX_PATH,L"%ls-system-selected.bmp",argv[2])>0);
+        capture(w,path,FALSE);
+        SendMessageW(w[0],WM_EXITMENULOOP,FALSE,0);menu_pixels(w[0],FALSE);
+        CHECK(swprintf_s(path,MAX_PATH,L"%ls-system-restored.bmp",argv[2])>0);
+        capture(w,path,FALSE);
+    }
     {
         win16_style_layout l;RECT r;POINT p;WCHAR path[MAX_PATH];
         CHECK(GetWindowRect(w[0],&r));

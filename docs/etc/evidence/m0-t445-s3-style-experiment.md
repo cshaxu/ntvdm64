@@ -443,3 +443,74 @@ review confirms no frame metrics, client geometry, original resources, mirrors,
 product images or runtime configuration changed. S3 stays open: owner next
 requests raised/pressed system-box correction and a complete original-style
 comparison of implemented frame forms. This is not S4 integration admission.
+
+### System-box selection and straight sizing-band divisions
+
+Question: does the normal system box need arrow-like relief, and which original
+frame details are absent? Owner's paired original screenshots bb43a2ea
+(selected) and fdcd9396 (normal) resolve the first issue. Read-only pixel samples
+in the box interior show dominant face C0C4C8 changing to 84888C. The bar's
+black/white roles reverse too. Do not manufacture a raised outer bevel or use
+the child half of CLOSE as a pressed bitmap. These are resampled screenshots,
+not a claim of exact original VGA RGB capture.
+
+Implementation keeps original resources and native menu tracking. It observes
+the system WM_INITMENUPOPUP notification, selects black/white and face/shadow
+role pairs, and restores normal drawing on WM_EXITMENULOOP. Application
+notifications remain forwarded, with existing detach/reentrancy protection.
+The formerly unreachable HTSYSMENU comparison against min/max capture state is
+replaced by the actual independent menu state. No timer, hook or replacement
+menu loop is added. Source policy and private-resource scope remain unchanged.
+
+Read-only original USER disassembly retained at r026, segment 1:A06B..A1DE,
+contains eight PatBlt strokes segmenting the thick sizing frame. The local
+renderer had only two outlines. It now adds those straight corner/edge marks
+using its current DPI-scaled metrics, excluding fixed/dialog frames. No bevel,
+caption-height adjustment or client-geometry change is introduced.
+
+Verification: r073 deliberately required menu-idle entry; this failed on the
+non-input private desktop, although native SC_MOUSEMENU was dispatched. The
+earlier dispatch-only assertion was insufficient to claim actual popup tracking.
+r074 separates the notification/rendering contract from that physical boundary:
+8,729 checks per width. r075 adds selected/restored probe images and passes
+11,485 checks per width, all 19 gallery/selector cases and the pinned original
+font checks. Existing white-client-strip/native-caption regression tests remain
+unchanged. Menu pixels are checked while selected, after repaint and after
+exit, and a non-system notification must leave the normal image intact.
+Eight sizing marks and their absence on a fixed frame are pixel-checked.
+
+r075/x64/capture.bmp-system-selected.png and -system-restored.png are owned
+rendering probes, not screenshots of an open physical popup. Native mouse
+tracking and double-click behavior remain forwarded; this iteration does not
+claim a new physical menu acceptance. Original normal/selected comparison and
+straight-frame appearance are for owner review in the independently launched
+r075/x64/win16-style-demo.exe. Builds/tests ran in owned background processes
+with 120-second outer/30-second fixture deadlines; outputs stay under build/.
+
+Audit disposition: OEM resource pixels and font are verified; accepted native
+caption guards are retained; selection and missing frame marks are repaired.
+Original USER 1:A50D..A5DE measures/positions/clips title text, whereas the local
+renderer still uses DT_END_ELLIPSIS. That remains a concrete next audit/repair,
+along with corner hit geometry (currently only border-square corner hits).
+Do not label this partial delivery as completion of the full divergence sweep.
+Menu/MDI/child/scrollbar restyling remains explicitly later scope.
+
+Owner then questions a one-pixel stroke offset and requires original-code
+inspection, not adjusting the picture by eye. The completed metric chain is
+recorded in src/win16-style/resources.md: 18x18 system artwork plus one divider,
+19-wide arrows, full frame F, left stroke F+18 and right stroke right-F-19.
+r075's inherited 20-wide slot is therefore not the final geometric contract.
+r077 corrects horizontal slots, and r078 additionally removes extra vertical
+artwork padding: CYCAPTION=20 includes boundaries, leaving 18 content rows and
+one separator inside the frame. Frame height changes here are source-derived
+fidelity work, not an attempted workaround for the already-fixed leakage bug.
+
+r078 is the current independently runnable candidate: both widths pass 11,495
+checks, 19 gallery/selector cases and original font comparison (zero of 11,264
+pixels differ). The stroke tests now also compare their x coordinates with the
+actual system/rightmost button separators and y coordinates with caption bottom.
+Install/remove client geometry and all nine native-caption client-strip checks
+remain passing. Reviewed capture.png and selected/restored images show the
+flat band, aligned strokes and distinct system-box states. Physical menu
+acceptance and the full divergence audit remain open. No guest/mirror or
+ten-product-image change is involved.

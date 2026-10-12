@@ -94,3 +94,38 @@ minimized windows continue downstream, as required by Microsoft's
 [WM_NCACTIVATE contract](https://learn.microsoft.com/en-us/windows/win32/winmsg/wm-ncactivate).
 WM_ACTIVATE, focus, system commands and client painting are not intercepted.
 No frame height, global setting or theme association changes are involved.
+
+## Control-box selection and sizing strokes
+
+Owner's paired original Program Manager screenshots (clipboard bb43a2ea,
+selected, and fdcd9396, normal, 2026-10-12) resolve the flat-versus-depressed
+ambiguity: the system box selects by reversing VGA shade roles, not by choosing
+an arrow-style depressed bitmap. Black/white exchange, and face/shadow exchange.
+The screenshot's resampled face changes from C0C4C8 to 84888C; this is not a
+literal 24-bit RGB complement. The embedded CLOSE pixels remain unchanged.
+The application menu owner still receives every notification. The local frame
+observes WM_INITMENUPOPUP's documented system-menu flag and WM_EXITMENULOOP to
+render and clear its selected state; it does not replace the native menu loop.
+See [WM_INITMENUPOPUP](https://learn.microsoft.com/en-us/windows/win32/menurc/wm-initmenupopup).
+
+Original USER.EXE segment 1:A06B..A1DE draws eight short PatBlt strokes dividing
+the thick sizing band into four corners and four edges. The experiment now
+draws the corresponding straight strokes with its existing scaled frame/button
+metrics. Fixed/dialog frames do not acquire these marks. This is a local
+rendering adaptation, not imported USER code or exact arbitrary-DPI equivalence.
+
+Metric chain checked after the owner's one-pixel alignment objection:
+USER 3:1114 halves CLOSE width to 18; 3:14EA..14F3 publishes 18x18 sizing
+metrics; 3:190F..192A binds these to the drawing globals. 3:24BC..24DD computes
+inner sizing-band thickness N and full frame F=N+border. For a one-pixel VGA
+border, 1:A06B..A0C4 places top strokes at F+18 and right-F-19; the caption
+system divider at 1:A39A..A3C3 is also F+18, and the 19-wide arrow starts at
+right-F-19. Side strokes sit at F+18 and bottom-F-19. The former 20-wide
+button slot was a project approximation, not an original metric.
+
+Likewise, 3:10CE..10E2 derives CYCAPTION=20 including boundaries. At
+1:A2D9..A351, the 18-row bitmap begins at F and the bottom separator at F+18.
+The experiment now uses 19-wide slots and 18 content rows plus a separator;
+it no longer adds top/bottom padding inside OEM artwork. DPI scaling remains
+project adaptation; independent tests require sizing strokes to coincide with
+the actual button edges after rounding. Original resources remain byte-exact.
