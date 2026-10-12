@@ -1,6 +1,6 @@
 # Project Status
 
-**Active: M0 T445 S2**
+**No active M/T/S packet. T445 remains open.**
 
 M0 T445 S1 closed at 2151cf750. The owner inserts an isolated UI experiment as
 the new S2; former S2 and subsequent integration stages move one position later.
@@ -10,27 +10,27 @@ The owner closed T444 after accepting the S1 repair and the bounded S2/S3
 conclusions. See the [T444 closure](../history/m0-t444-indexed16-text-closure.md).
 The owner now admits the former queue head, Windows 3.1 window appearance.
 
-## Active Packet
+## Closed S2 Packet — T445
 
-### Standalone experimental Win16-style library and Win32 UI fixture
+### Accepted NTVWM palette geometry repair delivery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T445 S2`, Ordinary Mode; one implementer and separate final review. |
-| Admission And Approval | Owner inserts a new S2 to implement experimental win16-style and independently start a Win32 window program, without integration into other ntvdm64 components; integration waits until the experiment is stable. |
-| Objective | Exercise authentic Win3.1 frame appearance and interaction through the actual src/win16-style library in a standalone authored GUI fixture. |
-| Non-goals | No run16 options, NTSRV/RPC changes, Hook injection, WOW/NTVDM/NTVWM/NTCON/NTMON integration, guest changes, production-package publication or product-wide compatibility claims. |
-| Reference Baseline | S1 design 2151cf750, original-manual/owner-image research, owner-approved specialist library placement; accepted ten-image release remains unchanged by this experiment. |
-| Files And ABI Surface | src/win16-style only for library code; tests/app and tests/observation for the independent Win32 API GUI fixture and build/test runner; documentation. Local C API only, no production wire ABI. |
-| Applicable Rules | Architecture/source/coding/document rules, background-owned builds/tests, build-only generated output, preserve concurrent edits; no computer use or subst. |
-| Verification | Real ordinary/minimize-only/dialog samples, active/inactive and changing titles, button hit tests, move/size/minimize/maximize/restore/close, client geometry, creation/destruction and native comparison. Capture only owned fixture output for visual evidence; distinguish rendered images from physical interaction. Compile both widths and run an independently launched native GUI fixture. Admission-only delivery runs documentation gates. |
-| Expected Markers | Runnable build-owned demo, repeatable component tests and captured references; library directly linked, no product processes or libraries required. |
-| Asset Needs | Existing reference images/manual; authored fixture and selected MSVC/SDK. Font reuse requires provenance review, not an O:/W31 runtime dependency. |
-| Reporting Requirements | Exact executable/build location, architecture, invocation, tested interactions, visual results, limitations and stability verdict. Do not call the demo a product-integrated capability. |
-| Stop Conditions | Need for product integration, global hooks/settings, guest/mirror changes or unreviewed resources; do not expand this experiment into a new framework. |
-| Exit Criteria | Library prototype plus independently runnable GUI fixture, focused positive/negative/lifetime tests and reviewed visual evidence; owner confirms experiment stable before S3 admission. Required documentation/diff checks and commit/push; no replacement of ten production images for this isolated fixture. |
-| Original Owner Request | “插入新的S2，用于实现试验性的 win16-style组件，并独立启动一个win32窗口程序用于这个UI试验；不接入任何其他ntvdm64组件部分，等这部分试验稳定了再开始原S2的任务序列。” |
-| Similar-Issue Sweep | Both-width build, normal/minimize-only/dialog frames, missing buttons, repeated install/remove, title changes, DPI/high contrast, application procedure/geometry and failure cleanup. |
+| Identifier Mode | M0 T445 S2, Ordinary Mode; single-person audit and separate final review. |
+| Admission And Approval | Owner inserts S2 to commit/push all uncommitted repair code and confirms manual acceptance. |
+| Objective | Deliver accepted palette-only geometry repair, its tests and published assets; renumber later stages. |
+| Non-goals | No UI implementation, product integration, guest/mirror or protocol change. |
+| Reference Baseline | a045e9359 plus accepted side-palette/r001 candidate, retained 0.0.444 ten-image baseline. |
+| Files And ABI Surface | NTVWM console_state.c, native capture and palette fixtures/runner, ntvwm.exe and release manifest, governance. No ABI change. |
+| Applicable Rules | Project execution, architecture, coding and documentation authorities; owned background checks, no subst/computer use. |
+| Verification | Audit prior build, focused negative/positive and serial product evidence; recheck ten-image candidate/assets/deployed hashes and documentation gates. |
+| Expected Markers | Prior code fails exclusive-bound assertion; repaired geometry tests and runtime gates pass; all release hashes agree. |
+| Asset Needs | Existing tested side-palette/r001 package; no new guest media. |
+| Reporting Requirements | Preserve failed attempts and distinguish substituted version gate from a one-shot Full pass. |
+| Stop Conditions | Unexplained source/binary divergence, missing runtime evidence or publication mismatch. |
+| Exit Criteria | Reviewed accepted repair, verified release identity, indexed evidence, governance/link/diff checks, commit and push. |
+| Original Owner Request | Insert S2 for accepted uncommitted repairs, commit/push and close; move experiment and later stages onward. |
+| Similar-Issue Sweep | Palette-only repeats, resizing/scrolled viewport, bottom-right cursor and edge-cell retention; existing lifecycle/GUI/Console/Window gates. |
 
 ## S1 Closure Record
 
@@ -39,20 +39,21 @@ and [retained packet](../etc/evidence/m0-t445-s1-closed-packet.md) preserve the
 source-backed design and original brief. Stage numbers in that evidence precede
 the owner-inserted standalone S2; current numbering is in the working plan.
 
+## S2 Closure Record
+
+Owner-accepted palette repair closes with this commit/push delivery.
+See [repair and verification evidence](../etc/evidence/m0-t445-s2-palette-repair.md).
+The standalone experiment is now S3 and awaits admission; no UI work starts here.
+
 ## Planned Sequence
 
-S1 is closed. New S2 isolates UI implementation in a standalone GUI fixture.
-Former S2 becomes S3 (CLI/policy propagation and title-marker verification);
-former S3 becomes S4 (reuse and harden the experimental frame for integration),
-former S4 becomes S5 (menus/MDI), and former S5 becomes S6 (integrated acceptance).
-The
-[working plan](../etc/operations/t445-win31-window-style-plan.md) defines the
-two option contracts, task isolation and marker acceptance.
-Only S2 is active. S3 admission waits for owner-confirmed experiment stability.
-
-Owner selects `src/win16-style` as the shared static-library source owner:
-x86 for WOW32/nthook32 and x64 for nthook64 eventually. S2 links it only into
-the standalone test program; these production consumers remain disconnected.
+S1 is closed. S2 delivers the accepted palette repair. S3 is the isolated UI
+experiment; S4 is CLI/policy propagation and title-marker verification; S5
+integrates the common frame; S6 covers menus/MDI; S7 is integrated acceptance.
+The [working plan](../etc/operations/t445-win31-window-style-plan.md) defines
+the contracts. S3 requires separate admission; S4 waits for experiment stability.
+The shared source owner remains src/win16-style, with no production integration
+during S3.
 
 ## Closed S3 Packet
 
@@ -101,12 +102,9 @@ the standalone test program; these production consumers remain disconnected.
 
 ## Current Work
 
-S2 is admitted for an isolated component/UI experiment, not launch-policy or
-product integration. This admission delivers planning only; no demo has yet
-been built or started. The standalone fixture will directly invoke the same
-library later consumers reuse. Existing S1 records retain their historical
-stage numbers; the working plan provides the new numbering. Concurrent NTVWM
-and test changes belong to another session and remain outside this delivery.
+S2 closes the owner-accepted concurrent repair. No UI demo has
+been implemented. Historical S1 and initial experiment-admission evidence retain
+their original numbering; the working plan records the superseding sequence.
 
 ## T444 Final Disposition
 

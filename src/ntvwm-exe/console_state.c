@@ -213,8 +213,16 @@ DWORD ntvwm_screen_apply(HANDLE output,const CONSOLE_SCREEN_BUFFER_INFOEX *info,
     if(moved && !set_hidden_window(output,&info->srWindow))return GetLastError();
     if((capacity.X!=info->dwSize.X || capacity.Y!=info->dwSize.Y) &&
         !set_hidden_size(output,info->dwSize))return GetLastError();
-    copy=*info;
-    if(colors && !SetConsoleScreenBufferInfoEx(output,&copy))return GetLastError();
+    if(colors) {
+        /* Keep current geometry/maxima after resizing, not the source's old
+         * limits. InfoEx's setter consumes exclusive right/bottom bounds. */
+        copy.cbSize=sizeof(copy);
+        if(!GetConsoleScreenBufferInfoEx(output,&copy))return GetLastError();
+        memcpy(copy.ColorTable,info->ColorTable,sizeof(copy.ColorTable));
+        copy.wPopupAttributes=info->wPopupAttributes;
+        ++copy.srWindow.Right;++copy.srWindow.Bottom;
+        if(!SetConsoleScreenBufferInfoEx(output,&copy))return GetLastError();
+    }
     if(previous.wAttributes!=info->wAttributes && !SetConsoleTextAttribute(output,info->wAttributes))return GetLastError();
     if(cursor_moved && !SetConsoleCursorPosition(output,info->dwCursorPosition))return GetLastError();
     /* Moving a cursor may scroll the viewport; restore the source's exact

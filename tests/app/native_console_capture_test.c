@@ -85,6 +85,18 @@ static int child(void)
         actual.ColorTable[1]==RGB(17,34,51));
     CHECK(GetConsoleCursorInfo(output,&actual_cursor) &&
         actual_cursor.dwSize==37 && !actual_cursor.bVisible);
+    /* A changed palette must preserve geometry, including a scrolled origin.
+     * The observed variant also checks immediately after the InfoEx setter,
+     * before screen_apply could hide a transient shrink with a repair. */
+    for(i=0;i<4;++i) {
+        info.ColorTable[1]=RGB(18+i,35+i,52+i);
+        OK(ntvwm_screen_apply(output,&info,&cursor));
+        CHECK(GetConsoleScreenBufferInfoEx(output,&actual));
+        CHECK(!memcmp(&actual.dwSize,&info.dwSize,sizeof(info.dwSize)) &&
+            !memcmp(&actual.srWindow,&info.srWindow,sizeof(info.srWindow)) &&
+            !memcmp(&actual.dwCursorPosition,&info.dwCursorPosition,sizeof(info.dwCursorPosition)) &&
+            actual.ColorTable[1]==info.ColorTable[1]);
+    }
     invalid=info;invalid.srWindow.Left=-1;
     CHECK(ntvwm_screen_apply(output,&invalid,&cursor)==ERROR_INVALID_DATA);
     for(i=0;i<80;++i) {cells[i].Char.UnicodeChar=(WCHAR)(0x4e00+i);cells[i].Attributes=(WORD)(1+i%15);}
@@ -152,6 +164,13 @@ static int child(void)
             CHECK(actual.dwSize.X==regions[region].X && actual.dwSize.Y==regions[region].Y);
             CHECK(!memcmp(&actual.srWindow,&info.srWindow,sizeof(info.srWindow)));
             CHECK(actual.dwCursorPosition.X==last.X && actual.dwCursorPosition.Y==last.Y);
+            info.ColorTable[1]^=0x00010101;
+            OK(ntvwm_screen_apply(output,&info,&cursor));
+            CHECK(GetConsoleScreenBufferInfoEx(output,&actual));
+            CHECK(!memcmp(&actual.srWindow,&info.srWindow,sizeof(info.srWindow)) &&
+                actual.dwSize.X==info.dwSize.X && actual.dwSize.Y==info.dwSize.Y &&
+                actual.dwCursorPosition.X==last.X && actual.dwCursorPosition.Y==last.Y &&
+                actual.ColorTable[1]==info.ColorTable[1]);
             CHECK(WriteConsoleOutputCharacterW(output,L"X",1,last,&count) && count==1);
             CHECK(ReadConsoleOutputCharacterW(output,&edge,1,last,&count) && count==1 && edge==L'X');
         }

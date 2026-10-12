@@ -3,26 +3,26 @@
 ## Authority and stage boundary
 
 S1 closed through its [installation design](../evidence/m0-t445-s1-installation-design.md).
-The owner now inserts standalone experimental UI work as new S2. Former S2--S5
-become S3--S6; historical S1 evidence keeps its original numbering. Current Work
-admits only new S2. No production integration starts before the owner confirms
-the experiment is stable. Both run16 options and title-marker requirements
-are retained unchanged for S3, not canceled by the experiment.
+The owner inserts accepted uncommitted palette repair delivery as S2.
+The previously admitted standalone experiment moves to S3; integration moves
+to S4--S7. Historical evidence and build directories retain their original
+numbers. No integration starts before owner-confirmed experiment stability.
 
 | Stage | Bounded result |
 | --- | --- |
 | S1 | HWND ownership, original Win3.1 references, task/launch policy owners and installation design; preserve explicit remaining implementation proofs. |
-| S2 (new) | Implement experimental src/win16-style and independently launch an authored Win32 GUI test program linked directly to it. Prove basic frame visuals/interaction without any other product component; obtain owner stability acceptance. |
-| S3 (former S2) | Both CLI options, explicit/inherited policy resolution, end-to-end propagation, per-Win16-task isolation and real-window title marker; build, verify, publish, commit/push for owner acceptance. No automatic activation of experimental retro painting in production. |
-| S4 (former S3) | Reuse, integrate and harden the already-tested common frame, font/palette/DPI and geometry through WOW/Hook paths; do not build a second renderer. |
-| S5 (former S4) | Standard menus, MDI and remaining supported interaction/state coverage; document custom-frame and host-shell limitations rather than inventing special cases. |
-| S6 (former S5) | Integrated visual/interaction and serial product regression, coherent release/publication and final owner acceptance. |
+| S2 | Audit, commit/push and close the owner-accepted NTVWM palette geometry repair, tests and published assets. |
+| S3 | Implement experimental src/win16-style and independently launch an authored Win32 GUI test program linked directly to it. Prove basic frame visuals/interaction without any other product component; obtain owner stability acceptance. |
+| S4  | Both CLI options, explicit/inherited policy resolution, end-to-end propagation, per-Win16-task isolation and real-window title marker; build, verify, publish, commit/push for owner acceptance. No automatic activation of experimental retro painting in production. |
+| S5  | Reuse, integrate and harden the already-tested common frame, font/palette/DPI and geometry through WOW/Hook paths; do not build a second renderer. |
+| S6  | Standard menus, MDI and remaining supported interaction/state coverage; document custom-frame and host-shell limitations rather than inventing special cases. |
+| S7  | Integrated visual/interaction and serial product regression, coherent release/publication and final owner acceptance. |
 
-## S2 standalone experiment contract
+## S3 standalone experiment contract
 
 - Library source remains src/win16-style. The authored Win32 API demo and tests
   live under tests/app; build/test orchestration under tests/observation. Produce
-  executable, objects, logs and captured images only under build/M0-T445/S2.
+  executable, objects, logs and captured images only under build/M0-T445/S3.
 - Launch the demo directly, not with run16 and not by injecting into an unrelated
   application. Direct linking is deliberate: it isolates the UI from transport,
   guest behavior and Hook installation. No other product library/runtime is a
@@ -42,7 +42,7 @@ are retained unchanged for S3, not canceled by the experiment.
   not a replacement in assets/release or O:/winnt/system32. No deployed ten-image
   behavior changes, no RPC/Hook/WOW integration, no global host theme changes.
 - Stability means focused repeatable tests plus owner acceptance of the visual
-  trial, not merely a successful compile. S3 waits at that gate.
+  trial, not merely a successful compile. S4 waits at that gate.
 
 ## Policy contract
 
@@ -71,11 +71,11 @@ actual owning task's policy even when shared-worker tasks interleave. Native
 Hook contexts carry policy across both bitnesses and run16 redirection. Do not
 alter global user environment, add IPC, polling, helper processes or filename
 exceptions. Any unreached guest child-creation boundary must be audited before
-claiming propagation; a direct-launch-only implementation cannot close S3.
+claiming propagation; a direct-launch-only implementation cannot close S4.
 
-## S3 visible marker
+## S4 visible marker
 
-Reuse the owner-approved `src/win16-style` experimental library in S3: x86
+Reuse the owner-approved `src/win16-style` experimental library in S4: x86
 for WOW32/nthook32, x64 for nthook64. Each consumer supplies its effective
 window enable decision; the shared marker and later renderer do not determine
 program type or own propagation. No temporary parallel marker implementation.
@@ -98,10 +98,10 @@ and report title-dependent application compatibility explicitly.
 
 The marker uses the same per-window enable decision and installation boundary
 that later rendering will consume, not a temporary process-wide caption scanner.
-No production retro colours, font, borders, menus or layout are required in S3. A visible
+No production retro colours, font, borders, menus or layout are required in S4. A visible
 marker proves enablement only, not delivery of the Win3.1 appearance.
 
-## S3 acceptance matrix
+## S4 acceptance matrix
 
 - Default launches: existing Win16 and x86/x64 native windows remain unmarked.
 - Each option: exact expected marker on real eligible windows, absent on excluded

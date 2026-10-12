@@ -13,6 +13,9 @@ It fixes policy ownership, creation/teardown and the real-caption marker
 contract; implementation and its runtime proofs remain subsequent work. The
 owner subsequently inserts an isolated UI experiment before all product
 integration; the working plan supersedes the closure record's stage numbers.
+The owner then inserts accepted palette-repair delivery as S2: the standalone
+experiment is S3, propagation S4, frame integration S5, menus/MDI S6 and final
+acceptance S7. This changes sequencing, not the appearance contract.
 
 Provide a coherent Windows 3.1-style visible window appearance for supported
 Win16, Win32, and Win64 **window-program** presentations.  The result is a
