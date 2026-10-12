@@ -47,8 +47,39 @@ entries**. Build the shared project-owned implementation for x86 and x64.
 The WOW host links and invokes it directly at its project-owned window/dialog
 boundary; native target processes use the same implementation through the
 matching nthook DLL. Do not inject nthook into the WOW host merely to share
-code. Exact specialist source placement and installation timing remain subject
-to admission review; this proposal does not authorize a new generic helper root.
+code. The owner explicitly selects `src/win16-style` as the specialist shared
+source owner. Installation timing still requires proof; this admission does
+not authorize a generic helper framework.
+
+## Shared component — owner-approved placement
+
+`src/win16-style` is a project-owned static library, built separately for x86
+and x64 from the same sources. It creates no runtime DLL, EXE, thread, polling
+loop or IPC channel. Its consumers are:
+
+| Build | Linked consumers |
+| --- | --- |
+| x86 | WOW32.DLL and nthook32.dll |
+| x64 | nthook64.dll |
+
+The library owns per-window installation/cleanup and title decoration first,
+then shared non-client layout, drawing, hit testing and local visual state.
+Consumers resolve their task/process policy and pass the effective per-window
+enable decision. The library does not classify Win16/Win32/Win64 programs,
+parse run16 options, propagate child-launch policy or maintain task records.
+
+WOW32 supplies the policy of the actual owning Win16 task, not a worker-global
+switch. The shared-source native Hooks carry the launch policy and apply its
+native-window decision at their creation boundaries. Run16 and NTSRV retain
+CLI/request and task-policy responsibilities; NTVWM only forwards required
+launch context. The library has no NTCON, worker-base, service-client or
+executable-private dependency; local USER/GDI operations remain in the owning
+application process. No original mirror or guest code is moved into it.
+
+The title-marker delivery establishes this component and the installation
+boundary used by later real style rendering. Do not create a disposable marker
+implementation followed by an unrelated renderer. Source-root admission does
+not admit implementation ahead of the active sequential stage.
 
 The common implementation owns caption/border/button drawing, palette, metrics,
 DPI adaptation, non-client geometry and hit testing. Installation must preserve

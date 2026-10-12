@@ -1,5 +1,16 @@
 # Source Layout
 
+## Approved window-style library placement — T445
+
+`src/win16-style` is the approved shared static-library source owner for
+project-authored application-window style. Its x86 build serves WOW32.DLL and
+nthook32.dll; its x64 build serves nthook64.dll. Window title marking and later
+frame layout/drawing share this owner and installation boundary. Task-policy
+selection and propagation stay in their existing consumers. The directory is
+planned, not an implemented capability; see the
+[appearance proposal](../proposals/proposal-win31-window-appearance-001.md)
+and the source-owner admission in [Architecture Rules](../rules/ARCHITECTURE.md).
+
 ## Owner-approved independent guest add-on — T435
 
 T436 S1 owner follow-up admits tools/win31-setup for isolated Windows 3.1

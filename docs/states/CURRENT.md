@@ -40,6 +40,10 @@ appearance and retained product regressions. The
 two option contracts, task isolation and marker acceptance.
 Only S1 is active; later stages require sequential admission.
 
+Owner selects `src/win16-style` as the shared static-library source owner:
+x86 for WOW32/nthook32 and x64 for nthook64. This is placement approval only;
+S2 creates the common title-marker boundary and later stages add rendering.
+
 ## Closed S3 Packet
 
 ### Host VT conversion and indexed-frame fidelity

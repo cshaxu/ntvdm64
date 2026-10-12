@@ -46,6 +46,11 @@ claiming propagation; a direct-launch-only implementation cannot close S2.
 
 ## S2 visible marker
 
+Use the owner-approved `src/win16-style` static library from S2 onward: x86
+for WOW32/nthook32, x64 for nthook64. Each consumer supplies its effective
+window enable decision; the shared marker and later renderer do not determine
+program type or own propagation. No temporary parallel marker implementation.
+
 An enabled supported application window displays exactly one decoration:
 
 `(Win16 Style) <application title>`
@@ -93,5 +98,7 @@ marker proves enablement only, not delivery of the Win3.1 appearance.
 ## Planning verification
 
 This is a documentation-only replanning delivery. Governance, relative-link
-and diff checks are retained under build/M0-T445/S1/r003. It introduces no source
-root, protocol, product binary, guest or installed configuration modification.
+and diff checks are retained under build/M0-T445/S1/r003. The subsequent
+source-owner planning update admits the specialist directory without creating
+it; checks for that update are under build/M0-T445/S1/r004. Neither planning
+delivery changes a protocol, product binary, guest or installed configuration.

@@ -1,5 +1,17 @@
 # Architecture Rules
 
+## Owner-approved T445 window-style source owner
+
+Owner admits `src/win16-style` as a specialist project-owned static library,
+compiled separately for x86 (WOW32.DLL/nthook32.dll) and x64 (nthook64.dll).
+It owns only local application-window presentation/installation and cleanup;
+callers supply the effective per-window enable decision. It owns no program
+classification, launch propagation, task registry or lifecycle policy, and
+depends on neither NTCON, worker-base nor executable-private/service code.
+No runtime component, thread, polling loop, IPC or mirror relocation is admitted.
+This bounded source-root approval supersedes the root restriction only for
+this owner; Current Work still controls implementation-stage admission.
+
 ## Owner-approved selective native component migration
 
 Owner admits x64-only run16/NTCON/NTMON migration and subsequently adds
