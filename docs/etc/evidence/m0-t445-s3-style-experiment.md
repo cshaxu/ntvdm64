@@ -648,3 +648,78 @@ release inside the button. No timer or global mouse hook is added. r099 passes
 release sequence. r100 adds selected-pixel and cancel-without-opening negatives.
 These probes do not synthesize physical input; owner must confirm the menu
 remains open after an actual click and the physical second-click behavior.
+
+## Blank-menu isolation and physical double-click regression
+
+Owner confirms release persistence but reports blank initial items, hover-only
+text and failure to close on double-click. Actual computer-use interaction of
+r103 gallery 12 reproduces both: single click opens a mostly white menu with
+Restore alone, and a physical double click leaves the dialog alive. The owner
+stopped computer use with Escape; no further computer-use input was attempted.
+Owner subsequently reports both system and File menus in native gallery 15
+affected. This is not evidence of a styled-only defect.
+
+r102 adds first-idle and 500-ms popup WindowDC snapshots. r103's native control
+reveals that occluded WindowDC captures can contain other-window pixels. These
+captures alone cannot establish on-screen drawing. The retained probe now
+checks WindowFromPoint on a popup grid and skips unavailable captures; it also
+removes the GetSystemMenu call from WM_INITMENUPOPUP logging to avoid creating
+a private menu copy during observation. No PrintWindow, invalidation, hover or
+global input injection is used by the snapshot probes.
+
+`tests/app/native_menu_probe.c` is an independent negative control. Its link
+contains no win16-style object/archive, no subclass or custom frame procedure.
+It uses a native window, default procedure and three ordinary File-menu items.
+The bounded `--probe <absolute-build-bitmap> [mode]` entry opens only its own
+menu, waits 500 ms, reads visible pixels and exits. Exit 5 means unavailable
+capture, not a passing menu. No arguments opens a manual native comparison.
+Modes are default system keyboard entry, `--system-dpi`, `--popup`,
+`--popup-no-animation`, `--file`, `--file-no-animation` and `--file-keyboard`.
+Only the named popup invocation receives TPM_NOANIMATION; no system setting
+is changed. Own-process module inventories showed only Windows modules beyond
+the probe image; this is not a survey of the host or proof of an OS internals bug.
+
+Observed runs, all below build/M0-T445/S3:
+
+- r104 native entry failed to open before explicit own-window activation;
+  exit 5 is retained as unavailable, not a visual result.
+- r105 x64 native keyboard entry captures a visible system menu with only
+  Restore drawn. This reproduces independently of the entire style library.
+- r106 x86 and x64 default system TrackPopupMenuEx both leave the text region
+  blank; the same executable/menu with TPM_NOANIMATION draws all items.
+  Region x=45..179/y=40..214 has 0 versus 500 pixels with all RGB channels
+  below 100 on each width. Both menus pass the visibility guard.
+- r106 system-DPI entry remains blank, so PMv2 alone is not the cause.
+- r107 ordinary File popup draws all three entries with and without animation.
+- r108 same-source v6 Common Controls manifest control still has blank system
+  items. Thus adding that manifest does not repair the reproduced issue.
+- r109 real File menu-bar keyboard entry (SC_KEYMENU/f) draws all three items.
+  This does not reproduce the owner's mouse/menu-bar failure and does not
+  invalidate it. r109 default system popup is blank except the highlighted
+  Close item; its following no-animation attempt returns unavailable (exit 5).
+  The earlier positive no-animation observations remain independently retained.
+- r109 both-width existing style tests pass 27,220 checks. These remain
+  geometry/drawing/message/lifetime tests, not physical double-click acceptance.
+
+The strongest conclusion is a native system-menu animation-path failure on
+this host, independent of our frame code. It does not justify global animation
+changes, a forced-repaint timer, or claiming the whole menu problem solved.
+The ordinary menu-bar mouse case still needs an equivalent observation.
+
+Double-click is a separate known regression. OpenNT research-only
+windows/core/ntuser/kernel/syscmd.c maps HTSYSMENU double-click to SC_CLOSE with
+disabled-item checks; mnloop.c routes double-clicks inside its modal menu loop
+through its own menu hit geometry. Our modern dialog has an empty native icon
+rectangle, and keyboard fallback does not establish equivalent mouse tracking.
+The earlier direct-message tests bypassed this loop and cannot certify it.
+No original source is imported and no speculative runtime workaround is added
+in this diagnosis. Correct menu-loop integration and physical close/disabled-
+close/cancel verification remain required before S3 acceptance.
+
+Read-only OpenNT source identities (SHA-256): syscmd.c
+`8A76AEF2359465A34957AAC4754FCFD218E2AED37FBD31476C86021785E65E9B`;
+mnloop.c `7B21FC770E85031CE8AC380AA4F506BC35ABDEBE54E4200D244897E00359E153`.
+r110 verifies the r109 C/header/build-script identities, documentation/link
+gates and unchanged ten-image assets/deployed hashes. This delivery contains
+diagnostics and evidence only, not a menu repair or S3 closure. Concurrent
+Queue/WOW-residue proposal changes are unrelated and excluded from this commit.

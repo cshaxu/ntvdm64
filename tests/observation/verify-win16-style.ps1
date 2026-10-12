@@ -29,15 +29,20 @@ rule link
   command = link.exe /nologo /subsystem:windows /entry:wmainCRTStartup /out:$out $in user32.lib gdi32.lib comctl32.lib dwmapi.lib
 rule probe_link
   command = link.exe /nologo /subsystem:console /out:$out $in user32.lib gdi32.lib
+rule menu_v6_link
+  command = link.exe /nologo /subsystem:windows /entry:wmainCRTStartup /manifest:embed /manifestdependency:"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'" /out:$out $in user32.lib gdi32.lib
 build layout.obj: cc @NINJA_REPO@/src/win16-style/layout.c
 build style.obj: cc @NINJA_REPO@/src/win16-style/win16_style.c
 build demo.obj: cc @NINJA_REPO@/tests/app/win16_style_demo.c
 build gallery.obj: cc @NINJA_REPO@/tests/app/win16_style_gallery.c
 build font-probe.obj: cc @NINJA_REPO@/tests/app/win31_font_probe.c
 build font-probe.exe: probe_link font-probe.obj
+build native-menu.obj: cc @NINJA_REPO@/tests/app/native_menu_probe.c
+build native-menu-probe.exe: link native-menu.obj
+build native-menu-v6-probe.exe: menu_v6_link native-menu.obj
 build win16-style.lib: archive layout.obj style.obj
 build win16-style-demo.exe: link demo.obj gallery.obj win16-style.lib
-default win16-style-demo.exe font-probe.exe
+default win16-style-demo.exe font-probe.exe native-menu-probe.exe native-menu-v6-probe.exe
 '@.Replace('@REPO@',$r).Replace('@NINJA_REPO@',$r.Replace(':','$:').Replace(' ','$ ')) | Set-Content "$dir/build.ninja" -Encoding ascii
         @"
 @echo off
@@ -63,6 +68,6 @@ cd /d "$dir"
         }
         Get-Content "$dir/test.txt"
     }
-    Get-FileHash "$repo/src/win16-style/*","$repo/tests/app/win16_style_demo.c","$repo/tests/app/win16_style_gallery.c","$repo/tests/app/win31_font_probe.c","$repo/tests/observation/verify-win16-style.ps1"|ConvertTo-Json|Set-Content "$root/inputs.json"
+    Get-FileHash "$repo/src/win16-style/*","$repo/tests/app/win16_style_demo.c","$repo/tests/app/win16_style_gallery.c","$repo/tests/app/win31_font_probe.c","$repo/tests/app/native_menu_probe.c","$repo/tests/observation/verify-win16-style.ps1"|ConvertTo-Json|Set-Content "$root/inputs.json"
     '0'|Set-Content "$root/exit-code.txt"
 }catch{$_|Out-String|Set-Content "$root/failure.txt";'1'|Set-Content "$root/exit-code.txt";exit 1}

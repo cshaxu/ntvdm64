@@ -16,6 +16,9 @@ static int live;
 static HWND menu_probe;
 static unsigned menu_entries,close_commands,menu_popups,key_menu_entries;
 static void menu_pixels(HWND w,BOOL selected);
+static void popup_snapshot(HWND w);
+static HWND popup_probe;
+static BOOL native_menu_probe;
 static HWND cursor_probe;
 static unsigned client_cursor_calls;
 static unsigned native_ncactivate_calls;
@@ -30,7 +33,7 @@ static LRESULT CALLBACK window_proc(HWND w,UINT m,WPARAM a,LPARAM b)
     if(w==menu_probe){
         if(m==WM_INITMENUPOPUP){
             if(HIWORD(b))++menu_popups;
-            if(menu_desktop_test)printf("MENU init system=%u matches=%d\n",HIWORD(b),(HMENU)a==GetSystemMenu(w,FALSE));
+            if(menu_desktop_test)printf("MENU init system=%u\n",HIWORD(b));
         }
         if(m==WM_SYSCOMMAND && (a&0xfff0)==SC_MOUSEMENU)++menu_entries;
         if(m==WM_SYSCOMMAND && (a&0xfff0)==SC_KEYMENU){
@@ -41,8 +44,16 @@ static LRESULT CALLBACK window_proc(HWND w,UINT m,WPARAM a,LPARAM b)
         }
         if(m==WM_SYSCOMMAND && (a&0xfff0)==SC_CLOSE)++close_commands;
         if(m==WM_ENTERIDLE && a==MSGF_MENU){
-            menu_pixels(w,TRUE);
+            if(!native_menu_probe)menu_pixels(w,TRUE);
+            if(menu_desktop_test){
+                if(!popup_probe){popup_probe=(HWND)b;popup_snapshot(popup_probe);
+                    CHECK(SetTimer(w,17,500,NULL)!=0);}
+                return 0;
+            }
             EndMenu();return 0;
+        }
+        if(m==WM_TIMER && a==17){
+            KillTimer(w,17);popup_snapshot(popup_probe);popup_probe=NULL;EndMenu();return 0;
         }
     }
     if(m==WM_PAINT){
@@ -121,6 +132,34 @@ static void oem_pixels(HDC dc,RECT b,int u,int index)
         }
         CHECK(actual==expected);
     }
+}
+
+static void popup_snapshot(HWND w)
+{
+    RECT r;DWORD pid,bytes;int width,height;static unsigned sequence;
+    HDC source,dc;HBITMAP bitmap,old;void *pixels;HANDLE out;WCHAR path[MAX_PATH];
+    BITMAPINFO bi={0};BITMAPFILEHEADER file={0};
+    CHECK(GetWindowThreadProcessId(w,&pid)!=0 && pid==GetCurrentProcessId());
+    CHECK(GetWindowRect(w,&r));width=r.right-r.left;height=r.bottom-r.top;
+    CHECK(width>0 && height>0 && width<4096 && height<4096);
+    {int x,y;BOOL visible=TRUE;
+        for(y=4;y<height;y+=12)for(x=4;x<width;x+=12){
+            POINT p={r.left+x,r.top+y};if(WindowFromPoint(p)!=w)visible=FALSE;
+        }
+        if(!visible){printf("POPUP capture unavailable: occluded\n");++sequence;return;}
+    }
+    source=GetWindowDC(w);dc=CreateCompatibleDC(source);CHECK(source && dc);
+    bi.bmiHeader.biSize=sizeof(BITMAPINFOHEADER);bi.bmiHeader.biWidth=width;
+    bi.bmiHeader.biHeight=-height;bi.bmiHeader.biPlanes=1;bi.bmiHeader.biBitCount=32;
+    bitmap=CreateDIBSection(dc,&bi,DIB_RGB_COLORS,&pixels,NULL,0);CHECK(bitmap);
+    old=SelectObject(dc,bitmap);CHECK(BitBlt(dc,0,0,width,height,source,0,0,SRCCOPY));GdiFlush();
+    CHECK(swprintf_s(path,MAX_PATH,L"%ls-popup-%u.bmp",capture_path,sequence++)>0);
+    out=CreateFileW(path,GENERIC_WRITE,0,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);CHECK(out!=INVALID_HANDLE_VALUE);
+    file.bfType=0x4d42;file.bfOffBits=sizeof(file)+sizeof(bi.bmiHeader);file.bfSize=file.bfOffBits+width*height*4;
+    CHECK(WriteFile(out,&file,sizeof(file),&bytes,NULL));
+    CHECK(WriteFile(out,&bi.bmiHeader,sizeof(bi.bmiHeader),&bytes,NULL));
+    CHECK(WriteFile(out,pixels,width*height*4,&bytes,NULL));CloseHandle(out);
+    SelectObject(dc,old);DeleteObject(bitmap);DeleteDC(dc);ReleaseDC(w,source);
 }
 
 static void menu_pixels(HWND w,BOOL selected)
@@ -440,6 +479,12 @@ static void menu_tests(void)
 {
     RECT r;win16_style_layout l;LPARAM p;unsigned before;int variant;
     HWND owner=make_window(WS_OVERLAPPEDWINDOW,0,L"Menu test owner",20,20,FALSE);
+    if(menu_desktop_test){
+        native_menu_probe=TRUE;menu_probe=owner;
+        ShowWindow(owner,SW_SHOW);SetForegroundWindow(owner);SetActiveWindow(owner);pump();
+        SendMessageW(owner,WM_SYSCOMMAND,SC_KEYMENU,L' ');
+        native_menu_probe=FALSE;menu_probe=NULL;
+    }
     for(variant=0;variant<3;++variant){
     DWORD style=variant==0?WS_OVERLAPPEDWINDOW:WS_CAPTION|WS_SYSMENU|(variant==2?WS_POPUP:0);
     DWORD ex=variant?WS_EX_DLGMODALFRAME:0;

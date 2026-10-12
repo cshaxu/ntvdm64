@@ -77,6 +77,15 @@ F3 changes caption colors and Esc closes a sample (including borderless ones).
 owned windows for real popup, selected-pixel and close-command checks.
 Run it in an owned, bounded background process; private-desktop dispatch
 checks deliberately do not claim real menu tracking.
+The build also produces native-menu-probe.exe and native-menu-v6-probe.exe:
+same standalone native source without this library, respectively without and
+with a Common Controls v6 manifest. They isolate host menu drawing. No arguments
+opens a manual comparison. `--probe <absolute-build-bitmap-path>` captures a
+visible owned system popup after 500 ms and exits; optional `--popup`,
+`--popup-no-animation`, `--file`, `--file-no-animation`, `--file-keyboard` or
+`--system-dpi` selects a diagnostic control. Exit 5 is unavailable observation,
+not success. No global animation/theme setting changes. These controls do not
+repair the known gallery-12 physical double-click regression.
 PrintWindow capture is rendered-window evidence, not a physical-input/RDP test
 or capture of DWM composition. The fixture itself uses no computer-use automation.
 The non-client regression additionally reads existing WindowDC pixels without

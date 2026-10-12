@@ -25,7 +25,7 @@ The owner now admits the former queue head, Windows 3.1 window appearance.
 | Applicable Rules | Source/architecture/coding/document authorities; background-owned build/tests; build-only outputs; no subst. Computer use is scoped to the owned demo, not other applications or host settings. |
 | Verification | Actual HWND gallery: button combinations, caption/system-menu absence, fixed/sizeable/dialog/borderless frames and state changes; separately labelled native menu/MDI/child references. Test system-menu close and disabled close, layout/hits, geometry preservation and lifetime; owned probe captures. |
 | Expected Markers | Both-width runnable demo and tests with images; no link to other product components. |
-| Asset Needs | Owner authorizes original Win3.1 resources in the isolated experiment. Bounded VGA.DRV button and VGASYS.FON font resources carry source hashes and provenance; original media stays read-only. Fonts load privately from memory, not through host installation. |
+| Asset Needs | Pinned VGA.DRV button resources; original media stays read-only. Owner now selects host System font; embedded VGASYS.FON and private font loading have been removed. |
 | Reporting Requirements | Exact binary paths, screenshots, measured test results and visual/physical interaction limitations. |
 | Stop Conditions | Need for product/guest integration, global interception/settings or unreviewed resources; no scope expansion. |
 | Exit Criteria | Focused tests and reviewed probe images, governance/link/diff checks, commit/push; owner visual stability acceptance before S4. No production release replacement for this isolated experiment. |
@@ -117,14 +117,15 @@ button geometry and rounded stroke widths; both widths pass 13,885 checks. Priva
 desktop notification/pixel checks do not certify physical menu tracking.
 No whole-window pixel-equivalence claim is made.
 
-Owner's gallery-12 menu report has a repair verified in r093: both widths
-pass 25,896 private-desktop checks and separate input-desktop menu probes
-observe actual dialog popups and selected pixels. Missing native icon geometry
-uses the system keyboard-menu entry; system popup classification no longer
-requires an incorrect handle identity. Owner then selected host System font;
-the embedded font is removed. Follow-up defers dialog menu entry until button
-release, addressing the owner's release-dismissal report. Physical menu
-tracking/appearance acceptance remains pending; this is not S3 closure.
+Host System font and release-triggered dialog menu were delivered at 879a8584f.
+Owner confirms the menu stays open, but reports blank initial items and broken
+physical double-click close; actual demo interaction reproduces both. Separate
+message-level close tests did not cover a second click inside the menu loop.
+r105/r106 reproduce blank system-menu items in an independent native executable
+with no style library. Per-popup TPM_NOANIMATION restores text; system-DPI and
+v6-manifest controls do not. The owner's native File-menu report remains open:
+r109's keyboard/menu-bar control draws normally. No runtime repair is claimed.
+S3 stays open; details and limitations are in the linked experiment evidence.
 
 ## T444 Final Disposition
 
