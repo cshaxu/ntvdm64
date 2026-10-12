@@ -87,7 +87,15 @@ opens a manual comparison. `--probe <absolute-build-bitmap-path>` captures a
 visible owned system popup after 500 ms and exits; optional `--popup`,
 `--popup-no-animation`, `--file`, `--file-no-animation`, `--file-keyboard` or
 `--system-dpi` selects a diagnostic control. Exit 5 is unavailable observation,
-not success. No global animation/theme setting changes. These controls do not
+not success. A final optional delay argument (1..10000 milliseconds) tests
+whether drawing recovers without hover; the default remains 500 milliseconds.
+After an explicit delay, `--trace` logs only this thread's native popup messages.
+`--isolated-print`/`--isolated-client` print into an owned DIB on a private
+desktop; `--isolated-hidden-print`/`--isolated-hidden-client` sample before show.
+`--isolated-return` additionally wraps only the probe's native popup procedure
+to record its unchanged WM_PRINT return. `--isolated-classic` is a process-local
+theme negative control. None is physical-display evidence or a runtime fix.
+No global animation/theme setting changes. These controls do not
 repair menu drawing. `--queued-menu-test` measures 18 native menu-loop cases,
 including disabled Close and outside-button input; these are queued messages,
 not physical mouse input. `--gallery-trace <build-log-path>` records only this

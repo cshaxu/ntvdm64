@@ -781,3 +781,126 @@ x86 gallery 12 only. r118/r119 remain intermediate evidence, not final gates.
 Menu first-draw blankness is **not** repaired by this change. Independent native
 animation controls and the owner's ordinary File-menu report remain open.
 S3 is not closed and production integration is not admitted by these results.
+
+## Native menu delayed-drawing controls (r122)
+
+Question: is the blank popup merely captured before its animation finishes?
+The independent native probe accepts an optional bounded observation delay and
+logs read-only menu animation/fade/show-delay settings and its popup styles.
+It still does not link the style library, invalidate/repaint, hover, inject
+input or change host settings. Each process owns only its own window, has a
+12-second deadline, captures only a visibility-checked popup, and exits.
+
+Both x86/x64 report animation enabled, fade enabled, show delay 400 ms.
+System popups at 3,000 ms remain blank. The x86 500-ms control is also blank.
+The same system menu passed to TrackPopupMenuEx with TPM_NOANIMATION displays
+all items at 3,000 ms. Both widths now reproduce the owner's File-menu issue:
+SC_KEYMENU/f shows the highlighted first item only, with the rest blank.
+The x64 File submenu with TPM_NOANIMATION displays all three items.
+Every retained capture reports visible=1, and all processes exit 0.
+
+Quantification uses dark pixels (each RGB channel below 100) in popup region
+x=45..179, y=40..min(213,height-1): system animated 0 versus no-animation 500
+on each width; x64 File animated 0 versus no-animation 360. PNG conversions
+of the original BMPs retain those pixels under build/M0-T445/S3/r122.
+This supersedes the earlier ordinary File-menu non-reproduction; it does not
+invalidate the earlier normally drawn observations. Drawing is intermittent
+across those historical runs, not an application-specific guarantee.
+
+This rules out insufficient 500-ms observation time and proves an independent
+native animation-path failure on this host, but not its internal OS/driver
+cause. TPM_NOANIMATION is a documented per-popup flag (Microsoft Learn,
+TrackPopupMenu); SC_KEYMENU does not accept that flag. Directly substituting
+TrackPopupMenuEx(GetSystemMenu()) is not an equivalent complete system-menu
+contract: the captured normal-window control even leaves Restore enabled.
+No such substitution or global animation toggle is delivered as a repair.
+The owner rejects advancing retro-menu drawing as a substitute for diagnosis:
+first identify the cause while retaining native menus. S3's scope is unchanged.
+
+r122 both-width independent builds/private-desktop regressions pass 27,220
+checks each. This delivery changes diagnostic code only; the runtime remains
+the already tested dialog double-click repair. Menu blankness remains open.
+
+### Paint-path investigation, not a root-cause claim (r123--r127)
+
+Read-only thread-local message traces on the independent native probe show
+different paths: the blank animated popup receives WM_PRINT with flags 0x0e
+(client, nonclient, erase background) while initially hidden; the normal
+nonanimated popup receives NC/background painting followed by menu/item
+drawing notifications. The first-item-only File control has one item-drawing
+notification after selection, rather than the normal full item sequence.
+Waiting three seconds does not produce the missing sequence. The flags do
+not omit PRF_CLIENT. These observations localize a path but do not identify
+the exact implementation defect or prove a compositor/driver cause.
+
+The attempted WH_CALLWNDPROCRET observation of the animation bitmap does not
+produce usable WM_PRINT return samples and must not be cited as proof of an
+empty animation bitmap. A separate direct WM_PRINT diagnostic to a probe-owned
+off-screen DC is not yet validated: r127 visible attempts terminate early with
+exit 5. Menu traces include external keyboard input, so visible probes are
+stopped to avoid interfering with the owner. Continue with isolated-desktop
+diagnostics before any further actual-desktop attempt. No root-cause claim,
+menu replacement, forced repaint or global setting change is authorized by
+these results. Concurrent Queue/WOW proposal changes remain unrelated.
+
+### Native print failure localized (r128--r134)
+
+Private-desktop controls now avoid interfering with owner input. These are
+off-screen rendering/message evidence, not captures of the physical desktop.
+r129 tests both widths, hidden/visible menus, and WM_PRINT/WM_PRINTCLIENT into
+a probe-owned DIB. All eight controls render text (region x45..179/y40..213
+contains 356--400 dark pixels). Thus neither hidden-window state nor generic
+WM_PRINT support explains the failure. Capture occurs once at the selected
+visibility transition; the idle timer no longer overwrites that evidence.
+
+r130/r131 metadata finds the native animation DC inaccessible to user-mode GDI
+(GetClipBox returns ERROR, last error 6), whereas the owned DIB DC has a full
+259x227 clip and is drawable. This alone is NOT proof of a stale/deleted DC:
+original OpenNT mndraw.c uses a system-owned animation DC and explicitly changes
+ownership around owner-draw callbacks. Original source identity is SHA256
+60E9E44BC2F350424A47A414812E4C68A7A146A082BECB40D4E50E2CEB0F714D.
+The read-only tracing hook preserves incoming LastError.
+
+r131's Windows-10-supportedOS plus v6-manifest control and r132's process-local
+classic-theme control retain the native animation path that omits client
+printing. Neither control is a product change or proposed repair. The latter
+uses [SetThemeAppProperties](https://learn.microsoft.com/en-us/windows/win32/api/uxtheme/nf-uxtheme-setthemeappproperties)
+only inside the disposable process, before creating its windows; no global
+setting changes. Those traces alone are not new physical blank-menu captures.
+
+r133 adds an explicitly selected, probe-only native popup procedure wrapper.
+It forwards unchanged to the original procedure and records WM_PRINT return.
+For system and ordinary File popups the actual animation request returns 0;
+the same popup's later print into an owned DIB returns 1 and renders all text.
+The observed last error is 87, but LastError is not a documented WM_PRINT
+failure-reason contract and is not used to assign the underlying GDI cause.
+Unwrapped earlier traces show the same missing client-print path. The wrapper
+is instrumentation, not production logic or proof that subclassing repairs it.
+The unsuccessful WH_CALLWNDPROCRET sampling has been removed.
+
+Read-only disassembly of the installed win32kfull.sys, matched to Microsoft's
+public PDB, localizes the abort: xxxDWPPrint at RVA 0x144EE0 draws the nonclient
+frame, then at 0x144FE0 calls GreSaveDC (0x104D38). A zero result branches at
+0x144FEA to 0x14521C, returning FALSE before WM_ERASEBKGND/WM_PRINTCLIENT.
+The observed frame notification, unchanged flags 0x0e, failed native return,
+and missing subsequent client notifications match this branch. This is a
+control-flow deduction from static code plus runtime messages/return, not a
+claimed live kernel breakpoint. It explains the empty content followed by
+individual items appearing on hover. It does NOT yet establish why that
+system animation DC cannot save its state (allocation/lifetime/session state
+remain unproven), nor justify a blanket Windows-version/driver accusation.
+Independent-process reproduction excludes the style library from the current
+failing call stack; it does not exclude prior shared-session state corruption.
+
+Binary SHA256: 9895F8F73B09619CF35CC3F92712D1ECD857B62EF59B7736749D832D76332C81.
+Public PDB identity: 54AF189C311681B6ABC0F98F58CD324B, age 1; SHA256
+D36FED9330B0589FEC1311AA5D5BC12F376464C1EF3FA1EE19E8B0E442E73E4B.
+Downloaded from Microsoft's symbol server; PDB/disassembly stay under build,
+not imported into product sources or committed as Microsoft binary assets.
+r134 rebuilds both widths and passes 27,220 existing checks each. Its eight
+private-desktop system/File x86/x64 animation/no-animation controls pass the
+diagnostic assertions: four animation requests return 0, all eight direct
+owned-DIB prints return 1. These are expected-failure diagnosis checks, not
+menu acceptance passes. Native-menu
+failure is localized, not repaired; S3 remains open and no production image
+or style-library implementation changes in this diagnostic delivery.

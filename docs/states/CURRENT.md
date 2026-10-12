@@ -6,10 +6,6 @@ M0 T445 S2 closed at c12090805. Owner admits S3's isolated UI experiment.
 Product propagation and integration remain S4--S7.
 See the [S1 closure design](../etc/evidence/m0-t445-s1-installation-design.md).
 
-The owner closed T444 after accepting the S1 repair and the bounded S2/S3
-conclusions. See the [T444 closure](../history/m0-t444-indexed16-text-closure.md).
-The owner now admits the former queue head, Windows 3.1 window appearance.
-
 ## Active Packet
 
 ### Isolated Win16-style component and native GUI experiment
@@ -123,9 +119,10 @@ click through a scoped menu-loop queue binding; r120 passes 27,220 checks and
 18 queued menu cases per width. Blank initial items remain unresolved.
 r105/r106 reproduce blank system-menu items in an independent native executable
 with no style library. Per-popup TPM_NOANIMATION restores text; system-DPI and
-v6-manifest controls do not. The owner's native File-menu report remains open:
-r109's keyboard/menu-bar control draws normally. No runtime repair is claimed.
-S3 stays open; details and limitations are in the linked experiment evidence.
+v6-manifest controls do not. r122 now reproduces native File-menu blankness too:
+both widths remain blank after 3 seconds; per-popup no-animation draws normally.
+r134 both-width native probes localize animation WM_PRINT failure before client
+drawing (GreSaveDC abort); underlying DC-state cause remains unproven. S3 is open.
 
 ## T444 Final Disposition
 
