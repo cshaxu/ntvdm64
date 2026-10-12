@@ -1,10 +1,41 @@
 # Project Status
 
-**No active M/T/S packet.**
+**Active: M0 T445 S1**
 
 The owner closed T444 after accepting the S1 repair and the bounded S2/S3
 conclusions. See the [T444 closure](../history/m0-t444-indexed16-text-closure.md).
-The ordered candidates remain in [Queue](QUEUE.md); none is admitted.
+The owner now admits the former queue head, Windows 3.1 window appearance.
+
+## Active Packet
+
+### Application HWND ownership and appearance-boundary audit
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T445 S1`, Ordinary Mode; one implementer with a separate final review pass. |
+| Candidate Proposal | [Windows 3.1 window appearance](../proposals/proposal-win31-window-appearance-001.md). |
+| Admission And Approval | Owner directs: “好的，准入队列第一条”. Admit ownership/API audit and design first, not live window restyling. |
+| Objective | Establish the actual host HWND/window-procedure owners for representative Win16, Win32 and Win64 GUI programs and design one shared non-client appearance implementation with two installation entries. |
+| Non-goals | No NTCON, Console/text rendering, guest Windows desktop framing, client-pixel changes, lifecycle changes, global hooks, helper processes or guest/media modifications. No appearance implementation is delivered by admission. |
+| Reference Baseline | T444 closure at `bc363f3d2`; accepted product `fb7650ce0`, release 0.0.444/protocol 45; proposal identifies WOW window/dialog bindings and dual native Hooks as candidate entrypoints. Those static paths require current verification. |
+| Files And ABI Surface | Read WOW window/dialog/procedure bindings, nthook creation/installation and NTVWM launch; write indexed audit/design evidence and governance only. No production ABI or source-root change. |
+| Applicable Rules | Project execution, architecture, coding, document and source policies; background-owned probes if required; preserve unrelated changes; no computer use or subst. |
+| Verification | Trace creation, dialogs, later GUI threads, title/activation, sizing, system menu/commands, DPI, procedure replacement and destruction. Record exact source locations and distinguish static findings from runtime witnesses. Admission-only delivery runs governance, relative-link and diff checks. |
+| Expected Markers | Per-family owner/installation matrix, preserved callback and teardown ordering, explicit supported/unsupported HWND boundaries and a minimal shared implementation design. |
+| Asset Needs | Existing accepted release and representative Win16 WINMINE plus source-owned x86/x64 native GUI fixtures; no new guest media. Runtime witnesses require owned test inputs and recorded identities. |
+| Reporting Requirements | Explain common mechanism versus two installation adapters, source placement, message/geometry/DPI/accessibility contract, risks and decisions needing owner approval. Do not equate CreateProcess interception with HWND coverage. |
+| Stop Conditions | Missing authenticated in-process installation boundary, need for mirror/guest change, global hook/helper, lifecycle authority or uncontrolled subclass/message interference requires owner review. |
+| Exit Criteria | Source-backed audit and detailed design cover all three families and positive/negative/lifecycle acceptance; uncertainty and runtime limits remain explicit; reviewed evidence committed/pushed for owner design review before live implementation. |
+| Original Owner Request | “好的，准入队列第一条”. |
+| Similar-Issue Sweep | A/W creation, dialogs, secondary GUI threads, child/owned/popup windows, application subclass replacement, failure and WM_NCDESTROY, custom-drawn frames and non-product launches. |
+
+## Planned Sequence
+
+S1 audits ownership and presents the design. S2 defines shared classic metrics,
+palette, non-client state, DPI/accessibility policy and focused tests. S3 connects
+the same implementation through WOW directly and native nthook32/64. S4 verifies
+appearance/interaction and retained product regressions before publication.
+Only S1 is active; later stages require sequential admission.
 
 ## Closed S3 Packet
 
@@ -53,7 +84,12 @@ The ordered candidates remain in [Queue](QUEUE.md); none is admitted.
 
 ## Current Work
 
-No implementation is active. T444 final disposition follows.
+S1 is admitted for audit/design. No live appearance change, new source owner,
+new binary or runtime test result is claimed by this admission. The proposed
+single implementation must preserve application client rendering and original
+WOW callbacks; source placement and installation timing await the audit.
+
+## T444 Final Disposition
 
 S2 is owner-closed with no product modifications. Existing palette queries
 do not imply universal terminal negotiation; environment mutation had no

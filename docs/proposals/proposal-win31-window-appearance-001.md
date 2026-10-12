@@ -2,8 +2,10 @@
 
 ## Status and objective
 
-This is an unadmitted queue candidate.  It does not allocate a numeric task,
-alter the active packet, or change current window behavior.
+This proposal has been admitted for ownership/API audit and design through
+[Current Work](../states/CURRENT.md). It is no longer queued. Current Work
+alone allocates the active packet; the sequence below remains its scope
+reference, not permission to skip review or change live window behavior.
 
 Provide a coherent Windows 3.1-style visible window appearance for supported
 Win16, Win32, and Win64 **window-program** presentations.  The result is a
