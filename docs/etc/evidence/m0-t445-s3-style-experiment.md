@@ -602,3 +602,31 @@ the embedded font or its scaling. A long-title independent pixel oracle
 exercises this in r093. This clipping correction is not the requested font
 appearance rollback, which remains explicitly pending. Final review separates
 that pending visual choice from menu correctness and derived corner geometry.
+
+## Title scaling candidate r095
+
+Owner permits a typography exception and requests the earlier appearance.
+Comparing r070 and r093 confirms unchanged private font bytes but different
+20-row versus 18-row text canvases. At 144 DPI, nearest-neighbour vertical
+replication changes despite the same nominal font height. r095 restores the
+20-row canvas and scales it to 30 physical rows, centred and clipped inside
+the corrected 27-row caption. Button/frame geometry stays unchanged. This
+is an explicit typography exception, not original 18-row caption fidelity.
+Both widths pass 25,896 checks, including the updated independent overflow
+oracle and unchanged original-font pixels. Compared with r070's title-only
+black-pixel region x=70..319/y=7..29 at a -1-row offset, mismatches fall from
+476 (r093) to 299 (r095). This is not exact restoration: corrected button
+widths also change the horizontal raster phase. Owner appearance acceptance
+and the requested earlier-version clarification remain open.
+
+## Rejected menu-loop double-click probe
+
+r096/r097 attempted to send WM_NCLBUTTONDBLCLK synchronously from menu
+WM_ENTERIDLE and require immediate HWND destruction. r096 fails. r097's
+unstyled native window control receives the same synthetic message, records
+one SC_CLOSE, and also remains alive. Thus this artificial reentrant message
+sequence is not evidence of a style defect or a faithful physical double click.
+The new assertion/instrumentation is removed; its failed logs remain under
+those build roots. No product workaround is added from that result. Physical
+second-click tracking stays unverified; the previous popup and separate
+double-click/disabled-close checks retain their narrower meaning.

@@ -224,9 +224,9 @@ static void title_clip_test(void)
     width=l.title.right-l.title.left;height=l.title.bottom-l.title.top;
     logical_width=MulDiv(width,96,(int)GetDpiForWindow(w));
     actual=GetWindowDC(w);CHECK(actual && base && expected);
-    a=CreateCompatibleBitmap(actual,logical_width,18);b=CreateCompatibleBitmap(actual,width,height);
+    a=CreateCompatibleBitmap(actual,logical_width,20);b=CreateCompatibleBitmap(actual,width,height);
     CHECK(a && b);old_a=SelectObject(base,a);old_b=SelectObject(expected,b);
-    SetRect(&logical,0,0,logical_width,18);FillRect(base,&logical,(HBRUSH)GetStockObject(WHITE_BRUSH));
+    SetRect(&logical,0,0,logical_width,20);FillRect(base,&logical,(HBRUSH)GetStockObject(WHITE_BRUSH));
     font=CreateFontW(16,0,0,0,FW_BOLD,FALSE,FALSE,FALSE,ANSI_CHARSET,OUT_RASTER_PRECIS,
         CLIP_DEFAULT_PRECIS,NONANTIALIASED_QUALITY,DEFAULT_PITCH,L"Win31 VGA System");
     CHECK(font);SelectObject(base,font);SetBkMode(base,TRANSPARENT);SetTextColor(base,RGB(0,0,0));
@@ -234,8 +234,9 @@ static void title_clip_test(void)
      * one logical pixel inside the left edge. No fitting/ellipsis algorithm.
      * The bitmap boundary clips its tail. Compare the whole title, including
      * the right edge where a modern ellipsis used to replace original glyphs. */
-    CHECK(TextOutW(base,1,1,title,120));SetStretchBltMode(expected,COLORONCOLOR);
-    CHECK(StretchBlt(expected,0,0,width,height,base,0,0,logical_width,18,SRCCOPY));
+    CHECK(TextOutW(base,1,2,title,120));SetStretchBltMode(expected,COLORONCOLOR);
+    {int scaled=MulDiv(20,(int)GetDpiForWindow(w),96);
+    CHECK(StretchBlt(expected,0,(height-scaled)/2,width,scaled,base,0,0,logical_width,20,SRCCOPY));}
     for(y=0;y<height;++y)for(x=0;x<width;++x)
         CHECK(GetPixel(actual,l.title.left+x,l.title.top+y)==GetPixel(expected,x,y));
     printf("TITLE overflowing original glyph stream clipped without ellipsis: %dx%d pixels\n",width,height);

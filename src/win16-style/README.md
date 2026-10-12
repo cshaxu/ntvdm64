@@ -33,9 +33,12 @@ Initial menus, child/MDI, scrollbars, client-edge/tool/layered
 windows and minimized/maximized installation are deliberately unsupported.
 Consumers must not introduce those unsupported forms while attached. Native
 system popup menus remain native; later stages own menu/MDI integration.
-System-menu single and double clicks go through the native non-client owner,
-not a separate TrackPopupMenu loop. This preserves native menu tracking and
-disabled-close semantics without a local double-click timer.
+System-menu tracking remains native, not a separate TrackPopupMenu loop.
+If the host reports an empty native system-button rectangle (modern dialog
+frames), our button enters the system menu through SC_KEYMENU/space.
+Double-click commands retain native disabled-close semantics without a local
+timer. Physical second-click routing while that menu is open still requires
+acceptance; message-level close tests do not establish it.
 Normal non-client activation, cursor/hover and compatibility caption-draw
 messages belong to the custom renderer; delegating their drawing can leak
 native buttons into the shorter caption's client area. Client cursor handling,
@@ -49,6 +52,10 @@ High contrast reads host colors; no global settings are written. Caption
 System font is rendered at its original 16-pixel base strike then scaled to
 window DPI, avoiding GDI's discrete-strike substitution. A private face alias
 selects the embedded original, not a host-supplied font with the same name.
+The owner-approved typography candidate keeps the earlier 20-row text canvas
+and clips its scaled result into the corrected 18-row caption. This preserves
+the earlier vertical scaling phase without enlarging buttons or the frame;
+it is a visual exception, not exact original caption rasterization.
 Extended/unsupported Unicode mapping remains outside the ASCII pixel proof.
 The demo alone opts into per-monitor DPI awareness; the library never does.
 
@@ -65,6 +72,10 @@ scrollbars, child/MDI and ordinary host appearance, not implemented retro
 support. Minimized presentation is also still native. F2 changes title,
 F3 changes caption colors and Esc closes a sample (including borderless ones).
 --test <bitmap> runs on its own private desktop and captures only its HWNDs.
+--menu-test <absolute-build-bitmap-path> uses the input desktop and only its
+owned windows for real popup, selected-pixel and close-command checks.
+Run it in an owned, bounded background process; private-desktop dispatch
+checks deliberately do not claim real menu tracking.
 PrintWindow capture is rendered-window evidence, not a physical-input/RDP test
 or capture of DWM composition. The fixture itself uses no computer-use automation.
 The non-client regression additionally reads existing WindowDC pixels without

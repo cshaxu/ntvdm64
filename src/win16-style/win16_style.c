@@ -199,7 +199,9 @@ static void paint(HWND w,style_window *s,HDC target)
         /* System is a discrete raster font. Asking GDI for a 24-pixel cell
          * selects its 20-pixel strike, not a scaled 16-pixel VGA strike.
          * Render the base cell, then scale once with the rest of the metrics. */
-        SetRect(&logical,0,0,max(1,MulDiv(r.right-r.left,96,(int)s->dpi)),18);
+        /* Owner-approved typography exception: retain the accepted 20-row
+         * text raster's scaling phase, independently of the 18-row buttons. */
+        SetRect(&logical,0,0,max(1,MulDiv(r.right-r.left,96,(int)s->dpi)),20);
         text_dc=CreateCompatibleDC(dc);
         bitmap=CreateCompatibleBitmap(dc,logical.right,logical.bottom);
         if(text_dc && bitmap){
@@ -214,9 +216,12 @@ static void paint(HWND w,style_window *s,HDC target)
             if(GetTextExtentPoint32W(text_dc,title,len,&extent))
                 ExtTextOutW(text_dc,max(1,(logical.right-extent.cx)/2),
                     max(0,(logical.bottom-extent.cy)/2),ETO_CLIPPED,&logical,title,(UINT)len,NULL);
+            {int text_height=MulDiv(20,(int)s->dpi,96),clip=SaveDC(dc);
+            IntersectClipRect(dc,r.left,r.top,r.right,r.bottom);
             SetStretchBltMode(dc,COLORONCOLOR);
-            StretchBlt(dc,r.left,r.top,max(0,r.right-r.left),r.bottom-r.top,
-                text_dc,0,0,logical.right,logical.bottom,SRCCOPY);
+            StretchBlt(dc,r.left,r.top+(r.bottom-r.top-text_height)/2,
+                max(0,r.right-r.left),text_height,text_dc,0,0,logical.right,logical.bottom,SRCCOPY);
+            RestoreDC(dc,clip);}
             SelectObject(text_dc,prior);
         }
         if(text_dc)DeleteDC(text_dc);
