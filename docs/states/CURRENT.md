@@ -1,8 +1,12 @@
 # Project Status
 
-**Active: M0 T444 S3**
+**No active M/T/S packet.**
 
-## Active Packet
+The owner closed T444 after accepting the S1 repair and the bounded S2/S3
+conclusions. See the [T444 closure](../history/m0-t444-indexed16-text-closure.md).
+The ordered candidates remain in [Queue](QUEUE.md); none is admitted.
+
+## Closed S3 Packet
 
 ### Host VT conversion and indexed-frame fidelity
 
@@ -20,7 +24,7 @@
 | Asset Needs | Accepted ten-image release and validated build dependencies, build-owned native probes; no guest media. |
 | Reporting Requirements | Exact cases, commands, identities, observations/assertions and limitations; distinguish component tests, deployed execution and physical observation. |
 | Stop Conditions | Need for query responder, new protocol/emulator, guest/mirror change or broader architecture requires review; do not assume host nearest-colour behaviour. |
-| Exit Criteria | Met for bounded test/evidence delivery: r003 passes 23 frame cases per width, 230,987 checks each, plus raw file/pipe bytes. r004 verifies all ten three-way release hashes, unchanged production, 49 retained palette checks and governance/links. The containing reviewed commit records delivery; T closure awaits owner direction. |
+| Exit Criteria | Met: r003 passes 23 frame cases per width, 230,987 checks each, plus raw file/pipe bytes. r004 verifies all ten three-way release hashes, unchanged production, 49 retained palette checks and governance/links. Delivered at `2487156ea`; owner subsequently directs T closure. |
 | Original Owner Request | “行，那收口S2，准入S3并执行到S3有完整结论为止。” |
 | Similar-Issue Sweep | Split sequences, VT toggles, both colour planes, palette-only changes, API writers, both presentation routes, redirected streams. |
 
@@ -49,6 +53,8 @@
 
 ## Current Work
 
+No implementation is active. T444 final disposition follows.
+
 S2 is owner-closed with no product modifications. Existing palette queries
 do not imply universal terminal negotiation; environment mutation had no
 demonstrated benefit, and the owner declined query-response expansion.
@@ -58,7 +64,10 @@ are preserved; RGB/256 fallback is already present at the host API observation
 boundary. No additional product defect is demonstrated and no runtime binary
 has changed. r004 confirms all ten deployed/assets/tested images match, the
 49-check retained palette regression passes, and governance/links pass. S3
-has complete bounded findings; T444 remains open pending owner direction.
+has complete bounded findings and was delivered at `2487156ea`. The owner
+has now directed T444 closure; no implementation or acceptance gap remains
+inside the agreed scope. Unsupported negotiation and independent RGB cells
+remain explicit capability limits, not passing capabilities.
 See
 [S2/S3 evidence](../etc/evidence/m0-t444-s3-host-vt-fidelity.md).
 
@@ -260,10 +269,12 @@ See [S6 evidence](../etc/evidence/m0-t437-s6-win101-media-unapply.md).
 
 ## Current Technical Baseline
 
-The current deployed ten-image package contains the S1 NTCON palette repair;
-`assets/release/release-manifest.json` records its identities. The additional
-NTVDM blocked-tick repair is tested in the isolated r072 candidate package but
-is not yet published. Guest binaries and default configuration remain unchanged.
+The current deployed ten-image package is the owner-accepted S1 release
+0.0.444 at `fb7650ce0`, protocol 45, including the NTCON palette and NTVDM
+blocked-tick repairs. `assets/release/release-manifest.json` records its
+identities; S3 r004 verified all ten against the deployed and tested copies.
+S2/S3 and this closure changed no product binaries. Guest binaries and default
+configuration remain unchanged.
 T436's KRNL386/WIN386 candidates and MOUSE31.DRV remain separate approved add-on
 assets, not inputs altered by this frontend/test recovery packet.
 
@@ -286,6 +297,7 @@ repaired installed Win1.01 launch path. See the [S7 evidence](../etc/evidence/m0
 
 | Task | Outcome |
 | --- | --- |
+| T444 | Owner-accepted indexed palette repair, audit-only capability disposition and measured host VT/API fidelity. [Closure](../history/m0-t444-indexed16-text-closure.md) |
 | T441 | Repaired the mixed NTVDM/NTVWM release pair that stalled `COMMAND → ver`; bounded variable worker I/O is retained. [Closure](../history/m0-t441-variable-worker-io-release-integrity-closure.md) |
 | T440 | Retained verified graphics/transport/idle/build improvements; global CCPU pacing withdrawn without a measured UX gain; active root-cause work deferred. [Closure](../history/m0-t440-text-response-performance-closure.md) |
 | T438 | Reversible installed Win3.1 path repair and CMD/PIF/GRP ownership split. [Closure](../history/m0-t438-win31-path-recovery-closure.md) |

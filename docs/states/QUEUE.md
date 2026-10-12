@@ -1,9 +1,9 @@
 # Queue
 
 This is the authoritative ordered queue of unnumbered candidate packages.
-Only [Current Work](CURRENT.md) admits an active task; the active indexed-16
-palette package is therefore absent here. The entries and order below are
-unchanged by the governance cleanup.
+Only [Current Work](CURRENT.md) admits an active task. The indexed-16 palette
+package is closed and is therefore absent here. No next package is admitted;
+the entries and order below are unchanged by that closure.
 
 | Next order | Candidate implementation package | Proposal |
 | --- | --- | --- |

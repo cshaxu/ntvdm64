@@ -2,6 +2,12 @@
 
 ## Status and objective
 
+This retained proposal is no longer queued. The owner closed the admitted
+package; see the [closure and stage dispositions](../history/m0-t444-indexed16-text-closure.md).
+The original proposal below is planning history, not outstanding implementation
+authority. In particular, the owner replaced S2 mechanism implementation with
+audit-only closure and declined query-response expansion.
+
 Owner-requested queue-head candidate dated 2026-10-10. This proposal allocates
 no numeric T and admits no active packet. Restore native CUI indexed-16 colour
 fidelity in both NTCON presentation routes and make the supported capability
