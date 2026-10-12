@@ -1,8 +1,30 @@
 # Project Status
 
-**Active: M0 T444 S2**
+**Active: M0 T444 S3**
 
 ## Active Packet
+
+### Host VT conversion and indexed-frame fidelity
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T444 S3`, Ordinary Mode, single-person implementation and separate review. |
+| Admission And Approval | Owner directs: “收口S2，准入S3并执行到S3有完整结论为止”. S2 is audit-only closure, not delivered automatic colour negotiation. |
+| Objective | Measure host Console VT standard/256/RGB conversion and verify production capture, frame and Console/Window fidelity to the resulting indexed cells/palette. |
+| Non-goals | No query responder, environment mutation, RGB cell protocol, second VT parser/quantizer, ConPTY, guest/mirror change or lifecycle redesign. |
+| Reference Baseline | Owner-accepted `fb7650ce0`, release 0.0.444, protocol 45, S1 r115/r116/r119 gates. S2 admission at `781830378` has no product changes. |
+| Files And ABI Surface | Test sources/scripts under tests/, indexed evidence and governance; existing native capture/packer and frontend presentation owners, no ABI change. |
+| Applicable Rules | Execution/architecture/coding/document/source authorities; background builds/tests, owned processes, no subst or computer use. |
+| Verification | Real ordinary Console oracle; foreground/background standard/bright/256/RGB, reset, fragmented writes, VT on/off, custom palette, raw file/pipe bytes; production packing/decoding/Console projection and Window colours. Reuse unchanged S1 gates explicitly; production repairs trigger full delivery gates. |
+| Expected Markers | Input sequence, observed cells/palette, frame and presentation agree; RGB loss is attributed to the API boundary, not invented frontend loss. |
+| Asset Needs | Accepted ten-image release and validated build dependencies, build-owned native probes; no guest media. |
+| Reporting Requirements | Exact cases, commands, identities, observations/assertions and limitations; distinguish component tests, deployed execution and physical observation. |
+| Stop Conditions | Need for query responder, new protocol/emulator, guest/mirror change or broader architecture requires review; do not assume host nearest-colour behaviour. |
+| Exit Criteria | Met for bounded test/evidence delivery: r003 passes 23 frame cases per width, 230,987 checks each, plus raw file/pipe bytes. r004 verifies all ten three-way release hashes, unchanged production, 49 retained palette checks and governance/links. The containing reviewed commit records delivery; T closure awaits owner direction. |
+| Original Owner Request | “行，那收口S2，准入S3并执行到S3有完整结论为止。” |
+| Similar-Issue Sweep | Split sequences, VT toggles, both colour planes, palette-only changes, API writers, both presentation routes, redirected streams. |
+
+## Closed S2 Packet
 
 ### Native indexed-16 capability discovery
 
@@ -21,15 +43,24 @@
 | Asset Needs | Accepted ten-image baseline, existing native Edit audit, selected source-proven consumer and build-owned x86/x64 capability fixtures. No new guest media. |
 | Reporting Requirements | Report detection inputs, ownership, inheritance and redirection effects, actual consumers, negative outcomes and minimal proposed mechanism before claiming compatibility. A private marker alone is not application acceptance. |
 | Stop Conditions | An application requires unanswered terminal queries: identify the exact query/consumer and seek owner review before adding responses. Also stop for new protocol, terminal emulator, guest/mirror change or broader architecture. |
-| Exit Criteria | Source-backed capability contract and bounded implementation, if needed, with direct/nested and negative evidence; required build/regression/publication for production changes, reviewed commit/push and owner acceptance. No unsupported application is labelled passed. |
+| Exit Criteria | Owner-approved audit-only closure, no production modification or automatic application-negotiation claim. S2 implementation/testing of a new capability mechanism is no longer required. |
 | Original Owner Request | “验收通过，准入S2”。 |
 | Similar-Issue Sweep | Both native target widths, direct and Hook-created descendants, inherited TERM/COLORTERM/terminal identity claims, Console API versus VT query detection, file/pipe redirection and unrelated host/GUI environments. |
 
 ## Current Work
 
-S2 is admitted at the audit stage. No capability environment, query responder,
-production source or published image has changed at admission. First select a
-minimal mechanism from actual consumer evidence; S3 remains unadmitted.
+S2 is owner-closed with no product modifications. Existing palette queries
+do not imply universal terminal negotiation; environment mutation had no
+demonstrated benefit, and the owner declined query-response expansion.
+S3 r003 passes both x86/x64 producer matrices using production capture, packing,
+Console projection and Window pixel rendering. Standard/custom indexed colours
+are preserved; RGB/256 fallback is already present at the host API observation
+boundary. No additional product defect is demonstrated and no runtime binary
+has changed. r004 confirms all ten deployed/assets/tested images match, the
+49-check retained palette regression passes, and governance/links pass. S3
+has complete bounded findings; T444 remains open pending owner direction.
+See
+[S2/S3 evidence](../etc/evidence/m0-t444-s3-host-vt-fidelity.md).
 
 ## T444 S1 Owner Acceptance
 
