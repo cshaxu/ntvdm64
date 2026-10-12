@@ -196,3 +196,43 @@ S3 remains open for owner visual/stability acceptance; S4 is not admitted.
 Final documentation/link/diff checks and unchanged ten-image identity are
 recorded in r012 and refreshed in r031. This P delivers a tested prototype, not integrated retro
 appearance or pixel-perfect Windows 3.1 compatibility.
+
+### Owner-admitted original button resources
+
+The owner now explicitly permits embedding original Win3.1 resources in the
+isolated experiment. This supersedes the earlier no-import decision above,
+not the product-integration boundary. Source policy and the active packet
+record the narrow admission. Source/rights/extraction details live in
+[the component resource ledger](../../../src/win16-style/resources.md).
+
+Six 19x18 VGA.DRV OEM button images now replace hand-drawn triangles/bevels.
+The header encodes their actual decoded pixels losslessly as four palette
+roles; original state selection chooses normal/depressed and zoom/restore.
+This is direct resource reuse with a small GDI presentation adapter. Whole
+16-bit USER execution is not composed because it requires the historical
+USER/GDI runtime; no executable instructions or mirror changes are imported.
+No fallback hand-drawn version of those six buttons remains. System-menu bar,
+font and broader frame layout are still separate outstanding fidelity work.
+
+r032 independently decodes the original file and verifies all 2,052 embedded
+pixels. Source hash matches the identity above. r033's old guessed-bevel
+assertion correctly failed after switching to original resource geometry;
+it is replaced by all-source-pixel-center checks, not a relaxed tolerance.
+r034--r038 additionally exposed PrintWindow clipping of the off-screen
+maximized border on the private desktop (window rect -11,-11,1931,1019 at
+144 DPI). A trial WM_GETMINMAXINFO override did not resolve that observation
+and was removed. These are failed diagnostic runs, not passes.
+
+r039 checks all six states through the actual HWND WM_PRINT path without
+PrintWindow's visible-region clipping. Ordinary four-window screenshots still
+use PrintWindow. Both x86/x64 /MT /O2 /W4 /WX builds pass 5,739 checks,
+including actual maximized restore hit/click, cancellation, HWND lifetime and
+attachment GDI 51->51. All runs are owned hidden background processes with
+logs/deadlines under build/M0-T445/S3. No computer use or physical input is used.
+Full-raster correctness does not prove that native maximized positioning leaves
+the entire frame visibly reachable; that edge remains to inspect separately.
+No production image or original installation file is modified.
+
+Next: finish original CLOSE resource slicing/font composition and resolve
+maximized visible-frame placement before claiming visual stability. S3 and
+the thread goal remain active, and S4 remains unadmitted.

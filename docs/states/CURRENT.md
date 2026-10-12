@@ -25,7 +25,7 @@ The owner now admits the former queue head, Windows 3.1 window appearance.
 | Applicable Rules | Source/architecture/coding/document authorities; background-owned build/tests; build-only outputs; no computer use/subst. |
 | Verification | Actual HWND fixtures, normal/minimize-only/dialog/native samples, layout/hit tests, title/activation/palette changes, geometry preservation, system commands and lifetime; probe capture of owned windows. |
 | Expected Markers | Both-width runnable demo and tests with images; no link to other product components. |
-| Asset Needs | Host USER/GDI and available system font; no imported historical font or image assets. |
+| Asset Needs | Owner now authorizes original Win3.1 resources in the isolated experiment. Extract bounded VGA.DRV button resources with source hashes and provenance; original media stays read-only. Host font remains until separately verified original-font composition. |
 | Reporting Requirements | Exact binary paths, screenshots, measured test results and visual/physical interaction limitations. |
 | Stop Conditions | Need for product/guest integration, global interception/settings or unreviewed resources; no scope expansion. |
 | Exit Criteria | Focused tests and reviewed probe images, governance/link/diff checks, commit/push; owner visual stability acceptance before S4. No production release replacement for this isolated experiment. |
@@ -102,8 +102,10 @@ during S3.
 
 ## Current Work
 
-S3 prototype is implemented and verified under build/M0-T445/S3/r030: x86/x64
-pass 944 assertions each, including dialog-frame and normal/pressed/canceled pixels. Probe captures and pixel-detail comparison
+S3 prototype is implemented and verified under build/M0-T445/S3/r039: x86/x64
+pass 5,739 assertions each, including embedded original OEM button pixels,
+normal/depressed/restore selection and actual restore clicks. r032 compares
+all 2,052 imported pixels against the original VGA.DRV. Probe captures and pixel-detail comparison
 are available. Owner visual stability acceptance remains pending; S4 is not admitted.
 See [S3 experiment evidence](../etc/evidence/m0-t445-s3-style-experiment.md).
 No production images or deployed components changed.

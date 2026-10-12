@@ -2,6 +2,7 @@
  * No input injection, desktop capture, product process or computer-use API. */
 #include "win16-style/win16_style.h"
 #include "win16-style/layout.h"
+#include "win16-style/frame_buttons.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -10,6 +11,7 @@
 static unsigned checks;
 #define CHECK(x) do {++checks;if(!(x)){fprintf(stderr,"FAIL %u line %d: %s error=%lu\n",checks,__LINE__,#x,GetLastError());exit(1);}}while(0)
 static BOOL testing;
+static const WCHAR *capture_path;
 static int live;
 static LRESULT CALLBACK window_proc(HWND w,UINT m,WPARAM a,LPARAM b)
 {
@@ -61,6 +63,34 @@ static HWND make_window(DWORD style,DWORD ex_style,const WCHAR *title,int x,int 
     ShowWindow(w,SW_SHOWNOACTIVATE);UpdateWindow(w);return w;
 }
 
+static void oem_pixels(HDC dc,RECT b,int u,int index)
+{
+    static const COLORREF palette[]={RGB(0,0,0),RGB(255,255,255),RGB(128,128,128),RGB(192,192,192)};
+    int x,y,dw=b.right-b.left-u,dh=b.bottom-b.top-2*u;
+    for(y=0;y<18;++y)for(x=0;x<19;++x){
+        int px=b.left+((2*x+1)*dw)/38;
+        int py=b.top+u+((2*y+1)*dh)/36;
+        COLORREF actual=GetPixel(dc,px,py),expected=palette[frame_buttons[index][y][x]-'0'];
+        if(actual!=expected){
+            BITMAPINFO bi={0};BITMAPFILEHEADER fh={0};BITMAP bm;DWORD written;HANDLE out;void *data;WCHAR path[MAX_PATH];
+            HBITMAP image=(HBITMAP)GetCurrentObject(dc,OBJ_BITMAP);
+            GetObjectW(image,sizeof(bm),&bm);
+            bi.bmiHeader.biSize=sizeof(BITMAPINFOHEADER);bi.bmiHeader.biWidth=bm.bmWidth;
+            bi.bmiHeader.biHeight=bm.bmHeight;bi.bmiHeader.biPlanes=1;bi.bmiHeader.biBitCount=32;
+            data=calloc((size_t)bm.bmWidth*bm.bmHeight,4);
+            if(data && GetDIBits(dc,image,0,(UINT)bm.bmHeight,data,&bi,DIB_RGB_COLORS)){
+                swprintf_s(path,MAX_PATH,L"%ls-failure.bmp",capture_path);
+                out=CreateFileW(path,GENERIC_WRITE,0,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
+                if(out!=INVALID_HANDLE_VALUE){fh.bfType=0x4d42;fh.bfOffBits=sizeof(fh)+sizeof(bi.bmiHeader);fh.bfSize=fh.bfOffBits+(DWORD)(bm.bmWidth*bm.bmHeight*4);
+                    WriteFile(out,&fh,sizeof(fh),&written,NULL);WriteFile(out,&bi.bmiHeader,sizeof(bi.bmiHeader),&written,NULL);WriteFile(out,data,fh.bfSize-fh.bfOffBits,&written,NULL);CloseHandle(out);}
+            }
+            free(data);
+            fprintf(stderr,"OEM index=%d source=%d,%d dest=%d,%d size=%d,%d actual=%06lx expected=%06lx\n",index,x,y,px,py,dw,dh,actual,expected);
+        }
+        CHECK(actual==expected);
+    }
+}
+
 static void capture(HWND *windows,const WCHAR *path,BOOL pressed)
 {
     BITMAPINFO bi={0};BITMAPFILEHEADER file={0};
@@ -81,21 +111,14 @@ static void capture(HWND *windows,const WCHAR *path,BOOL pressed)
         CHECK(PrintWindow(windows[i],part,0));
         if(i==0){
             win16_style_layout l;RECT b;UINT dpi=GetDpiForWindow(windows[i]);
-            int bright=max(1,MulDiv(1,(int)dpi,96));
-            int shade=max(1,MulDiv(2,(int)dpi,96));
             CHECK(win16_style_measure(w,h,dpi,
                 (DWORD)GetWindowLongPtr(windows[i],GWL_STYLE),
                 (DWORD)GetWindowLongPtr(windows[i],GWL_EXSTYLE),FALSE,&l));
             b=l.maximize;
-            CHECK(GetPixel(part,b.left+l.unit,b.top+l.unit+bright+1)==
-                (pressed?RGB(128,128,128):RGB(255,255,255)));
-            CHECK(GetPixel(part,(b.left+b.right)/2,b.bottom-l.unit-shade)==
-                (pressed?RGB(192,192,192):RGB(128,128,128)));
+            oem_pixels(part,b,l.unit,pressed?4:1);
         }
         if(i==1){
             win16_style_layout l;RECT b;UINT dpi=GetDpiForWindow(windows[i]);
-            int bright=max(1,MulDiv(1,(int)dpi,96));
-            int shade=max(1,MulDiv(2,(int)dpi,96));
             CHECK(win16_style_measure(w,h,dpi,
                 (DWORD)GetWindowLongPtr(windows[i],GWL_STYLE),
                 (DWORD)GetWindowLongPtr(windows[i],GWL_EXSTYLE),FALSE,&l));
@@ -106,10 +129,7 @@ static void capture(HWND *windows,const WCHAR *path,BOOL pressed)
             b=l.system;
             CHECK(GetPixel(part,b.left+l.unit,b.top+l.unit)==RGB(192,192,192));
             b=l.minimize;
-            CHECK(GetPixel(part,b.left+l.unit,b.top+l.unit+bright+1)==RGB(255,255,255));
-            CHECK(GetPixel(part,b.left+l.unit+bright,b.top+l.unit+bright)==RGB(192,192,192));
-            CHECK(GetPixel(part,(b.left+b.right)/2,b.bottom-l.unit-shade)==RGB(128,128,128));
-            CHECK(GetPixel(part,(b.left+b.right)/2,b.bottom-l.unit-shade-1)==RGB(192,192,192));
+            oem_pixels(part,b,l.unit,0);
         }
         if(i==2){
             win16_style_layout l;
@@ -133,6 +153,45 @@ static void capture(HWND *windows,const WCHAR *path,BOOL pressed)
     CHECK(WriteFile(out,&bi.bmiHeader,sizeof(bi.bmiHeader),&wrote,NULL));
     CHECK(WriteFile(out,pixels,(DWORD)(width*height*4),&wrote,NULL));
     CloseHandle(out);SelectObject(dc,old);DeleteObject(bitmap);DeleteDC(part);DeleteDC(dc);
+}
+
+static void oem_window_tests(HWND w)
+{
+    int zoom,pressed,hit;
+    for(zoom=0;zoom<2;++zoom){
+        RECT r;win16_style_layout l;HDC dc=CreateCompatibleDC(NULL);
+        HBITMAP bitmap,old;HDC screen=GetDC(NULL);
+        if(zoom){SendMessageW(w,WM_SYSCOMMAND,SC_MAXIMIZE,0);pump();CHECK(IsZoomed(w));}
+        CHECK(GetWindowRect(w,&r));
+        fprintf(stderr,"OEM window zoom=%d rect=%ld,%ld,%ld,%ld dpi=%u\n",zoom,r.left,r.top,r.right,r.bottom,GetDpiForWindow(w));
+        CHECK(win16_style_measure(r.right-r.left,r.bottom-r.top,GetDpiForWindow(w),
+            (DWORD)GetWindowLongPtr(w,GWL_STYLE),(DWORD)GetWindowLongPtr(w,GWL_EXSTYLE),IsZoomed(w),&l));
+        bitmap=CreateCompatibleBitmap(screen,r.right-r.left,r.bottom-r.top);ReleaseDC(NULL,screen);
+        CHECK(bitmap!=NULL);old=(HBITMAP)SelectObject(dc,bitmap);
+        for(hit=HTMINBUTTON;hit<=HTMAXBUTTON;++hit)for(pressed=0;pressed<2;++pressed){
+            RECT b=hit==HTMINBUTTON?l.minimize:l.maximize;
+            if(pressed){SendMessageW(w,WM_NCLBUTTONDOWN,hit,MAKELPARAM(r.left+b.left+3,r.top+b.top+3));CHECK(GetCapture()==w);}
+            /* PrintWindow clips an off-screen maximized border on this
+             * private desktop. Exercise the real HWND's WM_PRINT handler
+             * directly for the complete resource raster, including that
+             * clipped strip; normal captures still use PrintWindow. */
+            SendMessageW(w,WM_PRINT,(WPARAM)dc,PRF_NONCLIENT|PRF_CLIENT);
+            oem_pixels(dc,b,l.unit,(hit==HTMINBUTTON?0:zoom?2:1)+(pressed?3:0));
+            SendMessageW(w,WM_CANCELMODE,0,0);CHECK(GetCapture()!=w);
+        }
+        SelectObject(dc,old);DeleteObject(bitmap);DeleteDC(dc);
+    }
+    /* Click the actual maximized window's restore slot, not only SC_RESTORE. */
+    {RECT r;win16_style_layout l;POINT p;
+        CHECK(GetWindowRect(w,&r));
+        CHECK(win16_style_measure(r.right-r.left,r.bottom-r.top,GetDpiForWindow(w),
+            (DWORD)GetWindowLongPtr(w,GWL_STYLE),(DWORD)GetWindowLongPtr(w,GWL_EXSTYLE),TRUE,&l));
+        p.x=r.left+(l.maximize.left+l.maximize.right)/2;p.y=r.top+(l.maximize.top+l.maximize.bottom)/2;
+        CHECK(SendMessageW(w,WM_NCHITTEST,0,MAKELPARAM(p.x,p.y))==HTMAXBUTTON);
+        SendMessageW(w,WM_NCLBUTTONDOWN,HTMAXBUTTON,MAKELPARAM(p.x,p.y));
+        CHECK(ScreenToClient(w,&p));SendMessageW(w,WM_LBUTTONUP,0,MAKELPARAM(p.x,p.y));pump();
+        CHECK(!IsZoomed(w));CHECK(GetCapture()!=w);
+    }
 }
 
 static void layout_tests(void)
@@ -197,6 +256,7 @@ int wmain(int argc,WCHAR **argv)
     WNDCLASSW cls={0};HWND w[4];MSG msg;int i;HDESK desktop=NULL;
     DWORD initial_gdi;
     testing=argc==3 && !wcscmp(argv[1],L"--test");
+    if(testing)capture_path=argv[2];
     SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
     if(testing){
         WCHAR name[80];swprintf_s(name,80,L"Win16StyleTest-%lu",GetCurrentProcessId());
@@ -242,6 +302,7 @@ int wmain(int argc,WCHAR **argv)
         CHECK(swprintf_s(path,MAX_PATH,L"%ls-canceled.bmp",argv[2])>0);
         capture(w,path,FALSE);
     }
+    oem_window_tests(w[0]);
     button_test(w[0],HTMAXBUTTON,SC_MAXIMIZE);
     button_test(w[1],HTMINBUTTON,SC_MINIMIZE);
     {HMENU menu=CreateMenu();CHECK(menu!=NULL);CHECK(SetMenu(w[3],menu));

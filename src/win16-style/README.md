@@ -1,7 +1,8 @@
 # Experimental Win3.1 window frame
 
-Project-authored same-thread static library. No guest/mirror code, fonts,
-screenshots or external runtime assets are imported. S1's source ladder rejects
+Project-authored same-thread static library with owner-approved original VGA
+button pixels embedded locally; see [resource provenance](resources.md).
+No guest/mirror executable code or fonts are imported. S1's source ladder rejects
 NTUSER server composition at the existing private server boundary; this is the
 owner-admitted local presentation feature, not an NTUSER implementation.
 

@@ -3,6 +3,7 @@
  */
 #include "win16_style.h"
 #include "layout.h"
+#include "frame_buttons.h"
 #include <commctrl.h>
 #include <dwmapi.h>
 #include <windowsx.h>
@@ -85,10 +86,28 @@ static void outline(HDC dc,RECT r,int u,COLORREF c)
 static void button(HDC dc,RECT r,int kind,BOOL down,BOOL zoom,int u,UINT dpi,
     const win16_style_palette *p)
 {
-    int cx,cy,i,half,rows;
+    int cx,cy,half;
     RECT q;
     if(IsRectEmpty(&r))return;
     fill(dc,r,p->face);outline(dc,r,u,p->edge);
+    if(kind!=HTSYSMENU){
+        BITMAPINFO bi={0};DWORD pixels[19*18];int x,y;
+        COLORREF palette[4]={p->edge,p->light,p->shadow,p->face};
+        int index=(kind==HTMINBUTTON?0:zoom?2:1)+(down?3:0);
+        for(y=0;y<18;++y)for(x=0;x<19;++x){
+            COLORREF c=palette[frame_buttons[index][y][x]-'0'];
+            pixels[y*19+x]=((DWORD)GetRValue(c)<<16)|((DWORD)GetGValue(c)<<8)|GetBValue(c);
+        }
+        bi.bmiHeader.biSize=sizeof(BITMAPINFOHEADER);
+        bi.bmiHeader.biWidth=19;bi.bmiHeader.biHeight=-18;
+        bi.bmiHeader.biPlanes=1;bi.bmiHeader.biBitCount=32;
+        /* OEM artwork includes its left separator. The caption supplies
+         * top/bottom and right separators. Scale the original raster once. */
+        SetStretchBltMode(dc,COLORONCOLOR);
+        StretchDIBits(dc,r.left,r.top+u,r.right-r.left-u,r.bottom-r.top-2*u,
+            0,0,19,18,pixels,&bi,DIB_RGB_COLORS,SRCCOPY);
+        return;
+    }
     InflateRect(&r,-u,-u);
     cx=(r.left+r.right)/2;cy=(r.top+r.bottom)/2;
     if(down){cx+=max(1,MulDiv(1,(int)dpi,96));cy+=max(1,MulDiv(2,(int)dpi,96));}
@@ -104,32 +123,6 @@ static void button(HDC dc,RECT r,int kind,BOOL down,BOOL zoom,int u,UINT dpi,
         OffsetRect(&q,shade,shade);fill(dc,q,p->shadow);
         OffsetRect(&q,-shade,-shade);
         fill(dc,q,p->light);outline(dc,q,u,p->edge);return;
-    }
-    /* One logical highlight, two logical shadow pixels: the measured
-     * original has an asymmetric bevel, not concentric equal-width rings. */
-    {
-        int light=max(1,MulDiv(1,(int)dpi,96));
-        int dark=max(1,MulDiv(2,(int)dpi,96));
-        q=r;q.bottom=q.top+light;fill(dc,q,down?p->shadow:p->light);
-        q=r;q.right=q.left+light;fill(dc,q,down?p->shadow:p->light);
-        /* Original VGA depressed OEM buttons have no white lower/right
-         * bevel. USER selects a separate bitmap, not a bevel inversion.
-         * Reproduce the geometric rule without importing that resource. */
-        if(!down){
-            q=r;q.top=q.bottom-dark;fill(dc,q,p->shadow);
-            q=r;q.left=q.right-dark;fill(dc,q,p->shadow);
-        }
-    }
-    rows=max(3,(r.bottom-r.top+2)/5);
-    for(i=0;i<rows;++i){
-        int y=(kind==HTMINBUTTON)?cy-rows/2+i:cy+rows/2-i;
-        SetRect(&q,cx-(rows-1-i),y,cx+(rows-i),y+1);fill(dc,q,p->edge);
-    }
-    if(zoom && kind==HTMAXBUTTON){
-        for(i=0;i<3;++i){
-            SetRect(&q,cx-(2-i)*u,cy+3*u+i*u,cx+(3-i)*u,cy+4*u+i*u);
-            fill(dc,q,p->edge);
-        }
     }
 }
 

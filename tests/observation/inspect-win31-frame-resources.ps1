@@ -1,6 +1,7 @@
 param(
  [Parameter(Mandatory)][string]$Driver,
- [Parameter(Mandatory)][string]$OutputRoot
+ [Parameter(Mandatory)][string]$OutputRoot,
+ [string]$VerifyHeader
 )
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
@@ -19,7 +20,7 @@ try {
  $p=$ne+(U16 ($ne+36));$shift=U16 $p;$p+=2
  if($shift -gt 16){throw 'Unsupported resource alignment'}
  $names=@{32754='CLOSE';32749='REDUCE';32748='ZOOM';32747='RESTORE';32746='REDUCED';32745='ZOOMD';32744='RESTORED'}
- $items=@()
+ $items=@();$verified=0
  while(($type=U16 $p) -ne 0){
   $count=U16 ($p+2);$p+=8
   for($i=0;$i -lt $count;$i++){
@@ -38,17 +39,33 @@ try {
    $palette=@();for($c=0;$c -lt 16;$c++){$q=$offset+$header+$c*$entry;$palette+=[Drawing.Color]::FromArgb($bytes[$q+2],$bytes[$q+1],$bytes[$q])}
    $bitmap=[Drawing.Bitmap]::new([int]$w,[int]$h)
    try {
-    for($y=0;$y -lt $h;$y++){for($x=0;$x -lt $w;$x++){
+    $rows=@()
+    for($y=0;$y -lt $h;$y++){$row='';for($x=0;$x -lt $w;$x++){
      $v=$bytes[$pixels+($h-1-$y)*$stride+[int][Math]::Floor($x/2)]
      $index=if(($x%2) -eq 0){$v -shr 4}else{$v -band 15}
      $bitmap.SetPixel($x,$y,$palette[$index])
-    }}
+     if($VerifyHeader -and $number -ne 32754){
+      $color=$palette[$index]
+      if($color.R -ne $color.G -or $color.R -ne $color.B){throw 'Unexpected non-grey OEM pixel'}
+      $row+=switch($color.R){0{'0'}255{'1'}128{'2'}192{'3'}default{throw 'Unexpected OEM shade'}}
+     }
+    };$rows+=$row}
+    if($VerifyHeader -and $number -ne 32754){
+     $source=Get-Content -Raw $VerifyHeader
+     $pattern='(?s)/\* '+$names[$number]+' \*/(.*?)\}'
+     $match=[regex]::Match($source,$pattern)
+     if(!$match.Success){throw "Missing embedded $($names[$number])"}
+     $embedded=@([regex]::Matches($match.Groups[1].Value,'"([0-3]{19})"')|ForEach-Object {$_.Groups[1].Value})
+     if(($embedded -join "`n") -cne ($rows -join "`n")){throw "Embedded pixels differ: $($names[$number])"}
+     $verified++
+    }
     $bitmap.Save("$root/$($names[$number]).png",[Drawing.Imaging.ImageFormat]::Png)
    }finally{$bitmap.Dispose()}
    $items+=@{id=$number;name=$names[$number];offset=$offset;length=$length;width=$w;height=$h;header=$header}
   }
  }
  if($items.Count -ne 7){throw 'Missing expected OEM frame resources'}
+ if($VerifyHeader -and $verified -ne 6){throw 'Expected six verified embedded resources'}
  $canvas=[Drawing.Bitmap]::new(680,700);$g=[Drawing.Graphics]::FromImage($canvas);$font=[Drawing.Font]::new('Arial',11)
  try {
   $g.Clear([Drawing.Color]::White)
@@ -63,6 +80,6 @@ try {
   }
   $canvas.Save("$root/oem-buttons.png",[Drawing.Imaging.ImageFormat]::Png)
  }finally{$font.Dispose();$g.Dispose();$canvas.Dispose()}
- @{source=(Resolve-Path $Driver).Path;sha256=(Get-FileHash $Driver).Hash;resources=$items;role='Read-only research; not a runtime/build/import asset'}|ConvertTo-Json -Depth 5|Set-Content "$root/resources.json"
+ @{source=(Resolve-Path $Driver).Path;sha256=(Get-FileHash $Driver).Hash;resources=$items;verifiedEmbedded=$verified;role='Read-only source decode; owner-admitted six-button experiment import verification'}|ConvertTo-Json -Depth 5|Set-Content "$root/resources.json"
  '0'|Set-Content "$root/exit-code.txt"
 }catch{$_|Out-String|Set-Content "$root/failure.txt";'1'|Set-Content "$root/exit-code.txt";exit 1}
