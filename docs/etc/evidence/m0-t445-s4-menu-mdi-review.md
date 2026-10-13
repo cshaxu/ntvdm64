@@ -11,10 +11,9 @@ This snapshot is not S4 approval or owner acceptance.
 
 Owner subsequently identifies r255 black group backgrounds and inert window
 scrollbars. r259 repairs both, with both-width fresh-background and actual
-child-coordinate/thumb-drag tests. Its focused gates pass; current640x408/DPI144
-environment also makes unchanged r255 fail an offscreen pixel gate, so a fresh
-full-suite pass is not claimed. See the latest audit section. Earlier r255
-table/hash below remain the checkpoint evidence, not r259 identity. Owner
+child-coordinate/thumb-drag tests. Its focused gates pass; the then-current
+640x408/DPI144 environment also makes unchanged r255 fail an offscreen pixel
+gate. The subsequent r261 full pass below supersedes that testing gap. Owner
 physical acceptance is still pending. Clipboard smoke testing is supporting
 native-EDIT non-regression evidence, not a new mandatory S4 closure gate.
 
@@ -36,10 +35,10 @@ This resolves the fresh-full-suite gap, not owner physical acceptance.
 | Scrollbars | scroll-geometry, scroll-api, scroll-test and frame callback tests | Native accessibility geometry and documented wide native fallbacks remain non-pass limitations |
 | Shared24px System font | font-test, test_menu_font, control detach font restoration | CP1252 test coverage is not universal Unicode certification |
 | Attachment lifetime | control-lifetime removal/destruction/nested-installation tests, with old-library negatives in r248/r250; rerun in r255 | Message-path coverage does not certify every arbitrary application callback |
-| Delivery | r255 full x86/x64 pass;0 source-manifest mismatches; f8e0d5878 pushed to origin/main | Intermediate checkpoint, not expanded-S4 acceptance; unrelated Queue/WOW changes remain untouched |
+| Delivery | r261 full x86/x64 pass;0 source-manifest mismatches; 86c773006 pushed to origin/main | Not expanded-S4 owner acceptance; unrelated Queue/WOW changes remain untouched |
 
-r255 x64 demo SHA256:
-2102F71F134AF961908C5A434D8FB5EAD674A07D8F28F965B0EB36FC3973DC15.
+r261 x64 demo SHA256:
+EB97CDF25C9D637E4C94C97C05A33BF488CBE0041CFE3C16374F707B96A5BE7E.
 No production package or O:/winnt deployment is part of this standalone packet.
 
 ### Expanded-controls intermediate checkpoint
@@ -77,9 +76,11 @@ resource import, guest write, font installation or broader rights claim occurs.
 
 ### Remaining closure decisions
 
-Do not mark S4 complete from the retained27,261 headline count. Resolve or
-obtain an explicit disposition for the isolated clipboard test, and obtain owner physical review
-of sample01 plus outer system menus and combo/list scrolling. The existing
+Do not mark S4 complete from the retained27,261 headline count. Obtain owner
+physical review of sample01 plus outer system menus and combo/list scrolling,
+including the repaired group backgrounds and actual window-content movement.
+The environment-denied clipboard smoke is supporting evidence, not a mandatory
+closure gate. The existing
 S7 deferral covers native-menu fresh-session blankness only, not all these
 expanded-S4 requirements. Tests cannot silently narrow the owner request.
 
@@ -107,19 +108,17 @@ the six families, three Combo forms, tabbed/multicolumn lists, both scroll
 orientations and size box are present; the shared typography and layout have
 no newly identified overlap. This is explicit WM_PRINT output, not physical
 composition. It cannot settle the owner's clicking/flicker report. The r255
-input manifest and pushed checkpoint identity agree; the unmodified executable
-remains the candidate, with no redundant rebuild for this documentation review.
+input manifest and pushed checkpoint identity agreed at that review. r261 is
+now the candidate; the r255 capture is historical, not current delivery evidence.
 
-Closure is now waiting on two concrete acceptance decisions: actual owner
-interaction of sample01 and outer menus1/12/18 (including dropdown thumb release
-and moving focus caret), and isolated clipboard execution or an explicit owner
-disposition. A question requesting permission for interactive clipboard use is
-answered by the owner: shared-clipboard testing is approved. r256 now proves
-OpenClipboard is denied even in the existing desktop; execution permission,
-not owner consent, remains the blocker. Owner clarifies the physical test is
-"待会测"; it has not been accepted. The deferred
-native-menu fresh-session issue remains S7 separately. Do not close S4 or the
-S3+S4 objective while these acceptance requirements remain unresolved.
+Closure awaits actual owner interaction of sample01 and outer menus1/12/18
+(including dropdown thumb release and moving focus caret). Owner approved
+shared-clipboard testing, but r256 proves OpenClipboard is denied even in the
+existing desktop before styling. Preserve that limitation without treating it
+as a new mandatory closure gate. Owner clarified the physical test is
+"待会测"; it has not been accepted. The deferred native-menu fresh-session
+issue remains S7 separately. Do not close S4 or the S3+S4 objective before
+owner physical acceptance.
 
 ### Approved shared clipboard attempt, r256
 
