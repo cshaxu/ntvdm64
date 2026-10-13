@@ -40,8 +40,9 @@ then proves a normal draw presents once. This is not a new diagnosis of the
 owner's ordinary click flicker. See the detailed audit for exact evidence.
 
 The clipboard fixture's isolated-window-station creation is denied before any
-clipboard operation. Do not rerun it against the interactive clipboard without
-explicit owner consent; a consent question is pending. The fixture remains
+clipboard operation. Owner subsequently approves shared-clipboard testing;
+r256 still fails at OpenClipboard with access denied on the native baseline.
+The fixture remains
 outside the default runner. Physical click/menu/scroll acceptance remains open.
 The retained table above names earlier tests;
 r255 reruns them plus the size-box and exceptional-scroll coverage.
@@ -98,9 +99,34 @@ Closure is now waiting on two concrete acceptance decisions: actual owner
 interaction of sample01 and outer menus1/12/18 (including dropdown thumb release
 and moving focus caret), and isolated clipboard execution or an explicit owner
 disposition. A question requesting permission for interactive clipboard use is
-pending; no consent is inferred from automatic goal continuation. The deferred
+answered by the owner: shared-clipboard testing is approved. r256 now proves
+OpenClipboard is denied even in the existing desktop; execution permission,
+not owner consent, remains the blocker. Owner clarifies the physical test is
+"待会测"; it has not been accepted. The deferred
 native-menu fresh-session issue remains S7 separately. Do not close S4 or the
 S3+S4 objective while these acceptance requirements remain unresolved.
+
+### Approved shared clipboard attempt, r256
+
+The fixture adds only an explicit --allow-shared-clipboard test option; its
+default still requires the isolated station. No fallback silently touches the
+shared clipboard. Unknown arguments fail. The opt-in uses hidden self-owned
+windows on the current desktop; it never modifies window-station ACLs, host
+settings or other windows. Diagnostics do not print unexpected clipboard data.
+
+r256 runner20308 starts2026-10-13 07:02:57, deadline120s, exit1. Reusing WinSta0
+but retaining a private desktop fails the first native COPY assertion. Runner
+28924 at07:03:50 uses the existing desktop and also fails. Runner48152 at07:04:47
+adds exact API diagnostics: native EM_GETSEL returns the expected1..4 selection,
+but OpenClipboard returns FALSE/error5. Thus the style attachment has not even
+run; this is not an observed styled-edit regression or a passing clipboard test.
+The separate x64 build17036 at07:05:53 exits0, test34724 at07:05:58 exits1 with
+the same OpenClipboard error5. Both widths compile /MT /O2 /W4 /WX against the
+unchanged, verified r255 archives. No runtime component changes or new demo
+build are needed. The r256/test-clipboard.cmd offers a manually launched
+same-fixture test if the owner's process has access; this has not been run or
+called passing. Source review confirms that the opt-in is absent from the
+default full regression runner.
 
 ### Sequential source-review findings after r252
 

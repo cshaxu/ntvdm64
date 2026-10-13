@@ -1,7 +1,8 @@
-/* Clipboard belongs to a private window station, never the interactive user. */
+/* Private clipboard by default. Shared clipboard requires explicit opt-in. */
 #include <windows.h>
 #include <stdio.h>
 #include <wchar.h>
+#include <string.h>
 #include "win16-style/controls.h"
 #define CHECK(x) do { if(!(x)){fprintf(stderr,"EDIT CLIPBOARD FAIL line=%d error=%lu\n",__LINE__,GetLastError());return 1;} } while(0)
 static BOOL text_is(HWND w,const WCHAR *expected)
@@ -11,10 +12,14 @@ static BOOL text_is(HWND w,const WCHAR *expected)
 static BOOL clipboard_is(HWND w,const WCHAR *expected)
 {
     HANDLE data;const WCHAR *text;BOOL equal=FALSE;
-    if(!OpenClipboard(w))return FALSE;
+    SetLastError(0);
+    if(!OpenClipboard(w)){fprintf(stderr,"OpenClipboard denied error=%lu\n",GetLastError());return FALSE;}
+    SetLastError(0);
     data=GetClipboardData(CF_UNICODETEXT);
+    if(!data)fprintf(stderr,"GetClipboardData failed error=%lu\n",GetLastError());
     text=data?(const WCHAR *)GlobalLock(data):NULL;
     if(text){equal=!wcscmp(text,expected);GlobalUnlock(data);}
+    if(data && !equal)fprintf(stderr,"Clipboard did not match expected fixture text\n");
     CloseClipboard();return equal;
 }
 static int exercise(HWND root,BOOL styled,BOOL multiline)
@@ -26,7 +31,10 @@ static int exercise(HWND root,BOOL styled,BOOL multiline)
     CHECK(src && dst);
     SendMessageW(src,WM_SETFONT,(WPARAM)font,FALSE);SendMessageW(dst,WM_SETFONT,(WPARAM)font,FALSE);
     if(styled){CHECK(win16_style_edit_install(src,TRUE,NULL));CHECK(win16_style_edit_install(dst,TRUE,NULL));}
-    SendMessageW(src,EM_SETSEL,1,4);SendMessageW(src,WM_COPY,0,0);
+    SendMessageW(src,EM_SETSEL,1,4);
+    {DWORD first=0,last=0;SendMessageW(src,EM_GETSEL,(WPARAM)&first,(LPARAM)&last);
+        CHECK(first==1 && last==4);}
+    SendMessageW(src,WM_COPY,0,0);
     CHECK(clipboard_is(root,L"bcd") && text_is(src,L"abcdef"));
     SendMessageW(dst,EM_SETSEL,1,1);SendMessageW(dst,WM_PASTE,0,0);
     CHECK(text_is(dst,L"xbcdy"));CHECK(SendMessageW(dst,EM_UNDO,0,0));CHECK(text_is(dst,L"xy"));
@@ -44,25 +52,28 @@ static int exercise(HWND root,BOOL styled,BOOL multiline)
     printf("EDIT CLIPBOARD PASS styled=%d multiline=%d copy/paste/cut/undo/readonly/font-restore\n",styled,multiline);
     return 0;
 }
-int main(void)
+int main(int argc,char **argv)
 {
-    WCHAR name[80],actual[80];DWORD needed;HWINSTA station,original;HDESK desk,old_desk;
-    HWND root;unsigned styled,multiline;
+    WCHAR name[80],actual[80];DWORD needed;HWINSTA station=NULL,original;HDESK desk,old_desk;
+    HWND root;unsigned styled,multiline;BOOL shared=FALSE;
+    if(argc!=1){if(argc!=2 || strcmp(argv[1],"--allow-shared-clipboard"))return 2;shared=TRUE;}
     swprintf_s(name,80,L"Win16StyleClipboard-%lu",GetCurrentProcessId());
     original=GetProcessWindowStation();old_desk=GetThreadDesktop(GetCurrentThreadId());
-    station=CreateWindowStationW(name,0,WINSTA_CREATEDESKTOP|WINSTA_ACCESSCLIPBOARD|
+    if(!shared){station=CreateWindowStationW(name,0,WINSTA_CREATEDESKTOP|WINSTA_ACCESSCLIPBOARD|
         WINSTA_ACCESSGLOBALATOMS|WINSTA_READATTRIBUTES,NULL);CHECK(station);
-    CHECK(SetProcessWindowStation(station));
+        CHECK(SetProcessWindowStation(station));}
     CHECK(GetUserObjectInformationW(GetProcessWindowStation(),UOI_NAME,actual,sizeof(actual),&needed));
-    CHECK(!wcscmp(name,actual));
-    desk=CreateDesktopW(L"ClipboardProbe",NULL,NULL,0,GENERIC_ALL,NULL);CHECK(desk);
-    CHECK(SetThreadDesktop(desk));
-    wprintf(L"PRIVATE CLIPBOARD STATION %ls\n",actual);
+    CHECK(shared || !wcscmp(name,actual));
+    desk=NULL;
+    if(!shared){desk=CreateDesktopW(name,NULL,NULL,0,GENERIC_ALL,NULL);CHECK(desk);
+        CHECK(SetThreadDesktop(desk));}
+    wprintf(L"CLIPBOARD STATION %ls shared-opt-in=%d private-desktop=%d; hidden owned windows\n",actual,shared,desk!=NULL);
     root=CreateWindowW(L"STATIC",L"Private clipboard fixture",WS_OVERLAPPEDWINDOW,
         0,0,400,300,NULL,NULL,GetModuleHandleW(NULL),NULL);CHECK(root);
     for(styled=0;styled<2;++styled)for(multiline=0;multiline<2;++multiline)
         CHECK(!exercise(root,(BOOL)styled,(BOOL)multiline));
-    CHECK(DestroyWindow(root));CHECK(SetThreadDesktop(old_desk));
-    CHECK(CloseDesktop(desk));CHECK(SetProcessWindowStation(original));CHECK(CloseWindowStation(station));
+    CHECK(DestroyWindow(root));
+    if(desk){CHECK(SetThreadDesktop(old_desk));CHECK(CloseDesktop(desk));}
+    if(station){CHECK(SetProcessWindowStation(original));CHECK(CloseWindowStation(station));}
     return 0;
 }
