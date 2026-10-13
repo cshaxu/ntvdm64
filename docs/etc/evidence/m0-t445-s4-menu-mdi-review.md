@@ -4,10 +4,19 @@
 
 The r052 review below is retained historical evidence. It does not describe
 the present dirty worktree or the later admitted standard controls. Current
-candidate is r255, with full chronology in the
+candidate is r259, with full chronology in the
 [control and scrollbar audit](m0-t445-s4-scrollbar-fidelity-audit.md).
 The expanded-controls checkpoint is committed and pushed as f8e0d5878.
 This snapshot is not S4 approval or owner acceptance.
+
+Owner subsequently identifies r255 black group backgrounds and inert window
+scrollbars. r259 repairs both, with both-width fresh-background and actual
+child-coordinate/thumb-drag tests. Its focused gates pass; current640x408/DPI144
+environment also makes unchanged r255 fail an offscreen pixel gate, so a fresh
+full-suite pass is not claimed. See the latest audit section. Earlier r255
+table/hash below remain the checkpoint evidence, not r259 identity. Owner
+physical acceptance is still pending. Clipboard smoke testing is supporting
+native-EDIT non-regression evidence, not a new mandatory S4 closure gate.
 
 | Required surface | Current direct evidence | Remaining boundary |
 | --- | --- | --- |

@@ -147,9 +147,9 @@ static void print_dc_state(const char *phase,HDC dc)
 }
 static LRESULT CALLBACK print_observer(HWND w,UINT msg,WPARAM wp,LPARAM lp,UINT_PTR id,DWORD_PTR data)
 {
-    LRESULT result;(void)id;(void)data;
+    LRESULT result;(void)id;
     if(msg==WM_PRINT || msg==WM_PRINTCLIENT){printf("PRINT MESSAGE %04x flags=%Ix\n",msg,(UINT_PTR)lp);print_dc_state("enter",(HDC)wp);}
-    if(msg==WM_PRINTCLIENT){RECT outer;POINT client={0,0},actual={0,0};
+    if(msg==WM_PRINTCLIENT && wp==(WPARAM)data){RECT outer;POINT client={0,0},actual={0,0};
         REQUIRE(GetWindowRect(w,&outer) && ClientToScreen(w,&client) && LPtoDP((HDC)wp,&actual,1));
         REQUIRE(actual.x==client.x-outer.left && actual.y==client.y-outer.top);}
     result=DefSubclassProc(w,msg,wp,lp);
@@ -169,7 +169,7 @@ static void capture_menu(HWND popup,const WCHAR *name,BOOL check_border)
     if(!wcsncmp(name,L"all-controls",12)){
         RECT full={0,0,r.right-r.left,r.bottom-r.top};
         FillRect(dc,&full,(HBRUSH)GetStockObject(WHITE_BRUSH));
-        REQUIRE(SetWindowSubclass(popup,print_observer,(UINT_PTR)print_observer,0));print_dc_state("before",dc);
+        REQUIRE(SetWindowSubclass(popup,print_observer,(UINT_PTR)print_observer,(DWORD_PTR)dc));print_dc_state("before",dc);
     }
     if(!lstrcmpW(name,L"all-controls-screen")){
         HDC screen=GetWindowDC(popup);REQUIRE(screen);
@@ -224,6 +224,34 @@ static LRESULT CALLBACK mdi_proc(HWND w,UINT m,WPARAM a,LPARAM b)
     return DefMDIChildProcW(w,m,a,b);
 }
 
+static void showcase_move(HWND w,int dx,int dy)
+{
+    HWND child;RECT r;
+    if(!dx && !dy)return;
+    /* Move every direct child, including those currently outside the viewport.
+     * ScrollWindowEx's partially visible child handling is not sufficient. */
+    for(child=GetWindow(w,GW_CHILD);child;child=GetWindow(child,GW_HWNDNEXT)){
+        GetWindowRect(child,&r);MapWindowPoints(NULL,w,(POINT *)&r,2);
+        SetWindowPos(child,NULL,r.left+dx,r.top+dy,0,0,
+            SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE|SWP_NOREDRAW);
+    }
+    RedrawWindow(w,NULL,NULL,RDW_INVALIDATE|RDW_ERASE|RDW_ALLCHILDREN);
+}
+static void showcase_extent(HWND w)
+{
+    HWND child;RECT r,client;int x=GetScrollPos(w,SB_HORZ),y=GetScrollPos(w,SB_VERT),right=0,bottom=0;
+    SCROLLINFO info={sizeof(info),SIF_RANGE|SIF_PAGE|SIF_POS|SIF_DISABLENOSCROLL};
+    if(!GetPropW(w,L"ShowcaseReady"))return;
+    for(child=GetWindow(w,GW_CHILD);child;child=GetWindow(child,GW_HWNDNEXT)){
+        GetWindowRect(child,&r);MapWindowPoints(NULL,w,(POINT *)&r,2);
+        right=max(right,r.right+x);bottom=max(bottom,r.bottom+y);
+    }
+    GetClientRect(w,&client);info.nMax=right+18-1;info.nPage=(UINT)client.right;info.nPos=x;
+    win16_style_set_scroll_info(w,SB_HORZ,&info,TRUE);
+    info.nMax=bottom+18-1;info.nPage=(UINT)client.bottom;info.nPos=y;
+    win16_style_set_scroll_info(w,SB_VERT,&info,TRUE);
+    showcase_move(w,x-GetScrollPos(w,SB_HORZ),y-GetScrollPos(w,SB_VERT));
+}
 static LRESULT CALLBACK sample_proc(HWND w,UINT m,WPARAM a,LPARAM b)
 {
     const sample *s=(const sample *)GetWindowLongPtrW(w,GWLP_USERDATA);
@@ -235,6 +263,14 @@ static LRESULT CALLBACK sample_proc(HWND w,UINT m,WPARAM a,LPARAM b)
     }
     if(m==WM_NCCREATE){s=(const sample *)((CREATESTRUCTW *)b)->lpCreateParams;
         SetWindowLongPtrW(w,GWLP_USERDATA,(LONG_PTR)s);}
+    if(s && s->special==SHOWCASE && m==WM_SIZE && a!=SIZE_MINIMIZED)showcase_extent(w);
+    if(s && s->special==SHOWCASE && (m==WM_MOUSEWHEEL || m==WM_MOUSEHWHEEL)){
+        int steps=GET_WHEEL_DELTA_WPARAM(a)/WHEEL_DELTA;
+        UINT command=steps>0?SB_LINEUP:SB_LINEDOWN;
+        if(m==WM_MOUSEHWHEEL)command=steps>0?SB_LINEDOWN:SB_LINEUP;
+        for(steps=abs(steps)*3;steps;--steps)SendMessageW(w,m==WM_MOUSEWHEEL?WM_VSCROLL:WM_HSCROLL,command,0);
+        return 0;
+    }
     if(menu_test_action>=5 && m==WM_INITMENUPOPUP && (HMENU)a==GetSystemMenu(w,FALSE))
         menu_boundary_system=TRUE;
     if(menu_test_action==13 && m==WM_INITMENUPOPUP)++outer_menu_init_count;
@@ -329,15 +365,20 @@ static LRESULT CALLBACK sample_proc(HWND w,UINT m,WPARAM a,LPARAM b)
     if(s && s->special==BASICS && m==WM_COMMAND && LOWORD(a)==600 && HIWORD(a)==BN_CLICKED){++control_commands;return 0;}
     if(s && s->special==LISTS && m==WM_COMMAND && HIWORD(a)==LBN_SELCHANGE){++control_commands;return 0;}
     if(s && (s->special==SCROLL || s->special==SHOWCASE) && (m==WM_HSCROLL || m==WM_VSCROLL) && !b){
-        int bar=m==WM_HSCROLL?SB_HORZ:SB_VERT;SCROLLINFO info={sizeof(info),SIF_ALL};
+        int bar=m==WM_HSCROLL?SB_HORZ:SB_VERT,old,step=s->special==SHOWCASE?24:1;SCROLLINFO info={sizeof(info),SIF_ALL};
         REQUIRE(win16_style_get_scroll_info(w,bar,&info));
+        old=info.nPos;
         switch(LOWORD(a)){
-        case SB_LINEUP:--info.nPos;break;case SB_LINEDOWN:++info.nPos;break;
+        case SB_LINEUP:info.nPos-=step;break;case SB_LINEDOWN:info.nPos+=step;break;
         case SB_PAGEUP:info.nPos-=(int)info.nPage;break;case SB_PAGEDOWN:info.nPos+=(int)info.nPage;break;
         case SB_TOP:info.nPos=info.nMin;break;case SB_BOTTOM:info.nPos=info.nMax;break;
         case SB_THUMBTRACK:case SB_THUMBPOSITION:info.nPos=info.nTrackPos;break;
         default:return 0;}
-        ++control_commands;info.fMask=SIF_POS;win16_style_set_scroll_info(w,bar,&info,TRUE);return 0;
+        ++control_commands;info.fMask=SIF_POS;win16_style_set_scroll_info(w,bar,&info,TRUE);
+        if(s->special==SHOWCASE){int delta=old-GetScrollPos(w,bar);
+            showcase_move(w,bar==SB_HORZ?delta:0,bar==SB_VERT?delta:0);}
+        else InvalidateRect(w,NULL,FALSE);
+        return 0;
     }
     if(s && (s->special==SCROLLCONTROLS || s->special==SHOWCASE) && (m==WM_HSCROLL || m==WM_VSCROLL) && b){
         SCROLLINFO info={sizeof(info),SIF_ALL};REQUIRE(GetScrollInfo((HWND)b,SB_CTL,&info));
@@ -354,6 +395,7 @@ static LRESULT CALLBACK sample_proc(HWND w,UINT m,WPARAM a,LPARAM b)
         if(s && s->special==MDI){if(saved)RestoreDC(dc,saved);if(m==WM_PAINT)EndPaint(w,&ps);return 0;}
         GetClientRect(w,&r);FillRect(dc,&r,(HBRUSH)GetStockObject(WHITE_BRUSH));
         if(s && (s->special==CHECKS || s->special==BASICS || s->special==INPUTS || s->special==LISTS || s->special==COMBOS || s->special==SCROLLCONTROLS || s->special==AUTOCONTROLS || s->special==SHOWCASE || s->special==MULTILIST)){if(saved)RestoreDC(dc,saved);if(m==WM_PAINT)EndPaint(w,&ps);return 0;}
+        if(s && s->special==SCROLL)OffsetRect(&r,-GetScrollPos(w,SB_HORZ),-GetScrollPos(w,SB_VERT));
         SelectObject(dc,GetStockObject(DEFAULT_GUI_FONT));SetBkMode(dc,TRANSPARENT);
         r.left+=14;r.top+=14;
         if(s)DrawTextW(dc,s->name,-1,&r,DT_LEFT|DT_SINGLELINE);
@@ -1632,6 +1674,46 @@ static void test_focused_typography(HWND w,int special)
     printf("FONT24 FOCUSED PASS special=%d labels=%u bounds and actual text extents\n",special,checked);
 }
 
+static void test_showcase_viewport(HWND w)
+{
+    RECT outer,start,after,client;HWND child=GetDlgItem(w,1201);int axis;
+    GetWindowRect(w,&outer);GetWindowRect(child,&start);
+    REQUIRE(SetWindowPos(w,NULL,0,0,620,360,SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE));
+    for(axis=SB_HORZ;axis<=SB_VERT;++axis){UINT message=axis==SB_HORZ?WM_HSCROLL:WM_VSCROLL;
+        SCROLLINFO info={sizeof(info),SIF_ALL};RECT before;
+        REQUIRE(GetScrollInfo(w,axis,&info) && info.nPos==0 && info.nMax>(int)info.nPage);
+        GetWindowRect(child,&before);SendMessageW(w,message,SB_LINEDOWN,0);GetWindowRect(child,&after);
+        REQUIRE(GetScrollPos(w,axis)==24);
+        REQUIRE(after.left==before.left-(axis==SB_HORZ?24:0) && after.top==before.top-(axis==SB_VERT?24:0));
+        {SCROLLBARINFO bar={sizeof(bar)};RECT bounds;POINT click,move;win16_scroll_layout layout;
+            int dpi=(int)GetDpiForWindow(w);win16_scroll_metrics metrics={MulDiv(17,dpi,96),MulDiv(17,dpi,96),max(1,MulDiv(1,dpi,96))};
+            REQUIRE(GetScrollInfo(w,axis,&info));REQUIRE(GetScrollBarInfo(w,axis==SB_HORZ?OBJID_HSCROLL:OBJID_VSCROLL,&bar));
+            SetRect(&bounds,0,0,bar.rcScrollBar.right-bar.rcScrollBar.left,bar.rcScrollBar.bottom-bar.rcScrollBar.top);
+            REQUIRE(win16_scroll_measure(&bounds,axis==SB_VERT,&metrics,0,info.nMax-(int)info.nPage+1,info.nPos,&layout));
+            click.x=bar.rcScrollBar.left+(layout.thumb.left+layout.thumb.right)/2;
+            click.y=bar.rcScrollBar.top+(layout.thumb.top+layout.thumb.bottom)/2;
+            SendMessageW(w,WM_NCLBUTTONDOWN,axis==SB_HORZ?HTHSCROLL:HTVSCROLL,MAKELPARAM(click.x,click.y));
+            REQUIRE(GetCapture()==w);move=click;
+            if(axis==SB_HORZ)move.x+=layout.travel/3;else move.y+=layout.travel/3;
+            ScreenToClient(w,&move);SendMessageW(w,WM_MOUSEMOVE,MK_LBUTTON,MAKELPARAM(move.x,move.y));
+            SendMessageW(w,WM_LBUTTONUP,0,MAKELPARAM(move.x,move.y));REQUIRE(GetCapture()!=w);
+            REQUIRE(GetScrollPos(w,axis)>24);GetWindowRect(child,&after);
+            REQUIRE(axis==SB_HORZ?after.left==before.left-GetScrollPos(w,axis):after.top==before.top-GetScrollPos(w,axis));
+        }
+        SendMessageW(w,message,SB_BOTTOM,0);GetWindowRect(child,&after);
+        REQUIRE(GetScrollInfo(w,axis,&info));
+        REQUIRE(info.nPos==info.nMax-(int)info.nPage+1);
+        REQUIRE(axis==SB_HORZ?after.left==before.left-info.nPos:after.top==before.top-info.nPos);
+        SendMessageW(w,message,SB_TOP,0);
+    }
+    SendMessageW(w,WM_MOUSEWHEEL,MAKEWPARAM(0,(WORD)-WHEEL_DELTA),0);REQUIRE(GetScrollPos(w,SB_VERT)==72);
+    SendMessageW(w,WM_VSCROLL,SB_TOP,0);
+    REQUIRE(SetWindowPos(w,NULL,0,0,outer.right-outer.left,outer.bottom-outer.top,SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE));
+    GetWindowRect(child,&after);REQUIRE(EqualRect(&start,&after));GetClientRect(w,&client);
+    {SCROLLINFO info={sizeof(info),SIF_ALL};REQUIRE(GetScrollInfo(w,SB_HORZ,&info));REQUIRE(info.nPage==(UINT)client.right);}
+    RedrawWindow(w,NULL,NULL,RDW_INVALIDATE|RDW_ERASE|RDW_ALLCHILDREN|RDW_UPDATENOW);
+    puts("SHOWCASE VIEWPORT PASS both axes move actual children, thumb drag, end clamps, wheel, resize and restoration");
+}
 static HWND create_sample(int index,HWND owner,BOOL state)
 {
     const sample *s=&samples[index];RECT before,after;POINT p={0,0};HWND w;
@@ -1658,9 +1740,16 @@ static HWND create_sample(int index,HWND owner,BOOL state)
         p.x=p.y=0;GetClientRect(w,&after);ClientToScreen(w,&p);OffsetRect(&after,p.x,p.y);
         REQUIRE(EqualRect(&before,&after));}
     if(s->special==SHOWCASE){
-        REQUIRE(SetWindowPos(w,NULL,40,40,1395,945,SWP_NOZORDER|SWP_NOACTIVATE));
+        int width=1395,height=945,x=40,y=40;
+        if(!test_mode){MONITORINFO monitor={sizeof(monitor)};
+            if(GetMonitorInfoW(MonitorFromWindow(w,MONITOR_DEFAULTTONEAREST),&monitor)){
+                width=min(width,monitor.rcWork.right-monitor.rcWork.left);
+                height=min(height,monitor.rcWork.bottom-monitor.rcWork.top);
+                x=monitor.rcWork.left;y=monitor.rcWork.top;}}
+        REQUIRE(SetWindowPos(w,NULL,x,y,width,height,SWP_NOZORDER|SWP_NOACTIVATE));
         if(test_mode){test_static_text(w);test_static_icon(w);test_static_bitmap(w);}
         create_showcase(w);
+        REQUIRE(SetPropW(w,L"ShowcaseReady",(HANDLE)1));showcase_extent(w);
     }
     if(s->special==MENU){HMENU menu=CreateMenu(),file=CreatePopupMenu(),more=CreatePopupMenu();int n;
         REQUIRE(menu&&file&&more);
@@ -1679,7 +1768,7 @@ static HWND create_sample(int index,HWND owner,BOOL state)
             REQUIRE(AppendMenuW(extra,MF_STRING,200,L"&Next command"));
             REQUIRE(AppendMenuW(menu,MF_POPUP,(UINT_PTR)extra,L"&Extra"));}
         REQUIRE(SetMenu(w,menu));}
-    if(s->special==SCROLL || s->special==SHOWCASE){int n;SCROLLINFO info={sizeof(info),SIF_RANGE|SIF_PAGE|SIF_POS,0,100,20,30,0};
+    if(s->special==SCROLL){int n;SCROLLINFO info={sizeof(info),SIF_RANGE|SIF_PAGE|SIF_POS,0,100,20,30,0};
         SetScrollInfo(w,SB_HORZ,&info,TRUE);SetScrollInfo(w,SB_VERT,&info,TRUE);
         if(test_mode){
             for(n=0;n<2;++n){SCROLLBARINFO bar={sizeof(bar)};POINT center;RECT client;int which=n?SB_VERT:SB_HORZ;
@@ -2395,7 +2484,7 @@ static void test_late_frame_scroll(HWND parent)
 {
     HWND w;int axis;SCROLLINFO initial={sizeof(initial),SIF_RANGE|SIF_PAGE|SIF_POS,0,200000,20,30000,0};
     w=CreateWindowW(L"StyleGallerySample",L"Late frame scrollbars",WS_OVERLAPPEDWINDOW,
-        0,0,480,340,parent,NULL,GetModuleHandleW(NULL),(void *)&samples[0]);
+        0,0,480,340,parent,NULL,GetModuleHandleW(NULL),(void *)&samples[15]);
     REQUIRE(w && win16_style_install(w,NULL));
     REQUIRE(!(GetWindowLongPtrW(w,GWL_STYLE)&(WS_HSCROLL|WS_VSCROLL)));
     ShowWindow(w,SW_SHOWNOACTIVATE);
@@ -2458,11 +2547,24 @@ static void test_menu_font(HWND w)
         DestroyWindow(button);puts("FONT24 BINDING PASS effective font remains24; latest borrowed application font restored intact");}
 }
 
+void win16_style_viewport_test(const WCHAR *path)
+{
+    HWND w,group;HDC dc;test_mode=TRUE;menu_capture_path=path;create_controller();w=create_sample(0,controller,FALSE);
+    REQUIRE(SetWindowPos(w,NULL,0,0,620,380,SWP_NOZORDER|SWP_NOACTIVATE));
+    test_showcase_viewport(w);
+    SendMessageW(w,WM_VSCROLL,SB_PAGEDOWN,0);
+    RedrawWindow(w,NULL,NULL,RDW_INVALIDATE|RDW_ERASE|RDW_ALLCHILDREN|RDW_UPDATENOW);
+    group=GetDlgItem(w,1221);REQUIRE(group);dc=GetDC(group);REQUIRE(dc);
+    REQUIRE(GetPixel(dc,8,80)==RGB(255,255,255));ReleaseDC(group,dc);
+    capture_menu(w,L"all-controls-screen",FALSE);
+    DestroyWindow(w);DestroyWindow(controller);
+    puts("VIEWPORT PASS real child movement and newly exposed group background; screen capture retained");
+}
 void win16_style_capture_test(const WCHAR *path)
 {
     HWND w;test_mode=TRUE;menu_capture_path=path;create_controller();w=create_sample(0,controller,FALSE);
     REQUIRE(SetWindowPos(w,NULL,0,0,0,0,SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE));
-    UpdateWindow(w);test_combo_scroll_release(w);test_frame_scroll(w);test_frame_callbacks();test_late_frame_scroll(w);capture_menu(w,L"all-controls-children",FALSE);
+    UpdateWindow(w);test_combo_scroll_release(w);test_showcase_viewport(w);test_frame_callbacks();test_late_frame_scroll(w);capture_menu(w,L"all-controls-children",FALSE);
     capture_menu(w,L"all-controls-message",FALSE);capture_menu(w,L"all-controls",FALSE);
     /* Keep both capture routes: an explicit repaint distinguishes stale
      * screen contents from duplication inside the WM_PRINT implementation. */
@@ -2491,7 +2593,7 @@ void win16_style_gallery_test(const WCHAR *path)
         for(i=page*4;i<min(COUNT,page*4+4);++i){
             HWND w=create_sample(i,controller,FALSE);RECT r;HBITMAP shot,prior;int width,height,x,y;
             REQUIRE(SetWindowPos(w,NULL,0,0,0,0,SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE));
-            if(samples[i].special==SHOWCASE){test_showcase_keyboard(w);test_menu_font(w);UpdateWindow(w);test_frame_scroll(w);test_frame_callbacks();test_late_frame_scroll(w);capture_menu(w,L"all-controls",FALSE);
+            if(samples[i].special==SHOWCASE){test_showcase_keyboard(w);test_menu_font(w);UpdateWindow(w);test_showcase_viewport(w);test_frame_callbacks();test_late_frame_scroll(w);capture_menu(w,L"all-controls",FALSE);
                 capture_menu(w,L"all-controls-message",FALSE);menu_captured=FALSE;}
             if(samples[i].special==OWNED)REQUIRE(GetWindow(w,GW_OWNER)==controller);
             if(samples[i].special==MDI)test_mdi_keyboard(w);

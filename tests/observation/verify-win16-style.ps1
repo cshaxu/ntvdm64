@@ -1,6 +1,7 @@
 param(
     [Parameter(Mandatory)][string]$BuildRoot,
     [switch]$ScrollApiOnly,
+    [switch]$ViewportOnly,
     [string]$ReferenceFont,
     [string]$VsDevCmd='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 )
@@ -14,7 +15,8 @@ $null=New-Item -ItemType Directory $root
 Set-Location $root
 $env:TEMP=$root;$env:TMP=$root
 $ninja=(Get-Command ninja.exe -ErrorAction Stop).Source
-@{mode=if($ScrollApiOnly){'scroll-api-only'}else{'full'};architectures=@('x86','x64')} |
+if($ScrollApiOnly -and $ViewportOnly){throw 'Choose only one focused mode'}
+@{mode=if($ScrollApiOnly){'scroll-api-only'}elseif($ViewportOnly){'viewport-only'}else{'full'};architectures=@('x86','x64')} |
     ConvertTo-Json | Set-Content "$root/selection.json"
 try {
     if($ReferenceFont -and (Get-FileHash $ReferenceFont).Hash -ne '7BAEFA14EF8EF2355374D0B5061043DD5F4F8C33FF57680366E4A725F91646F8'){throw 'Unexpected original font identity'}
@@ -87,6 +89,19 @@ cd /d "$dir"
 "@ | Set-Content "$dir/build.cmd" -Encoding ascii
         & $env:ComSpec /d /c "$dir/build.cmd" *> "$dir/build.txt"
         if($LASTEXITCODE){throw "Build failed $arch"}
+        if(!$ScrollApiOnly){
+            $viewport=Start-Process "$dir/win16-style-demo.exe" -ArgumentList @('--viewport-test',"$dir/viewport.bmp") -WindowStyle Hidden -PassThru -RedirectStandardOutput "$dir/viewport.txt" -RedirectStandardError "$dir/viewport.err"
+            @{pid=$viewport.Id;start=$viewport.StartTime;deadline=$viewport.StartTime.AddSeconds(30)}|ConvertTo-Json|Set-Content "$dir/viewport-owner.json"
+            if(!$viewport.WaitForExit(30000)){$viewport.Kill($true);throw "Viewport timeout $arch"}
+            if($viewport.ExitCode){throw "Viewport failed $arch"}
+        }
+        if($ViewportOnly){
+            $present=Start-Process "$dir/control-present.exe" -WindowStyle Hidden -PassThru -RedirectStandardOutput "$dir/control-present.txt" -RedirectStandardError "$dir/control-present.err"
+            @{pid=$present.Id;start=$present.StartTime;deadline=$present.StartTime.AddSeconds(20)}|ConvertTo-Json|Set-Content "$dir/control-present-owner.json"
+            if(!$present.WaitForExit(20000)){$present.Kill($true);throw "Control presentation timeout $arch"}
+            if($present.ExitCode){throw "Control presentation failed $arch"}
+            continue
+        }
         if(!$ScrollApiOnly){
         $lifetime=Start-Process "$dir/control-lifetime.exe" -WindowStyle Hidden -PassThru -RedirectStandardOutput "$dir/control-lifetime.txt" -RedirectStandardError "$dir/control-lifetime.err"
         @{pid=$lifetime.Id;start=$lifetime.StartTime;deadline=$lifetime.StartTime.AddSeconds(20)}|ConvertTo-Json|Set-Content "$dir/lifetime-owner.json"

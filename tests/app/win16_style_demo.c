@@ -83,6 +83,7 @@ void win16_style_gallery_run(void);
 void win16_style_gallery_test(const WCHAR *path);
 void win16_style_capture_test(const WCHAR *path);
 void win16_style_scroll_test(void);
+void win16_style_viewport_test(const WCHAR *path);
 static LRESULT CALLBACK window_proc(HWND w,UINT m,WPARAM a,LPARAM b)
 {
     if(w==cursor_probe && m==WM_NCACTIVATE)++native_ncactivate_calls;
@@ -794,10 +795,11 @@ int wmain(int argc,WCHAR **argv)
     DWORD initial_gdi;
     BOOL queued_test=argc==2 && !wcscmp(argv[1],L"--queued-menu-test");
     BOOL scroll_test=argc==2 && !wcscmp(argv[1],L"--scroll-test");
+    BOOL viewport_test=argc==3 && !wcscmp(argv[1],L"--viewport-test");
     BOOL capture96=argc==3 && !wcscmp(argv[1],L"--capture-test-96");
     BOOL capture_test=capture96 || (argc==3 && !wcscmp(argv[1],L"--capture-test"));
     menu_desktop_test=queued_test || (argc==3 && !wcscmp(argv[1],L"--menu-test"));
-    testing=capture_test || scroll_test || menu_desktop_test || (argc==3 && !wcscmp(argv[1],L"--test"));
+    testing=viewport_test || capture_test || scroll_test || menu_desktop_test || (argc==3 && !wcscmp(argv[1],L"--test"));
     if(testing && argc==3)capture_path=argv[2];
     /* Diagnostic logical-96 coordinate baseline, not a host DPI change or
      * a claim that the monitor's physical pixels are 96 DPI. */
@@ -831,6 +833,7 @@ int wmain(int argc,WCHAR **argv)
     cls.style=CS_DBLCLKS;CHECK(RegisterClassW(&cls)!=0);
     if(queued_test){queued_menu_test();return 0;}
     if(scroll_test){win16_style_scroll_test();return 0;}
+    if(viewport_test){win16_style_viewport_test(argv[2]);return 0;}
     if(capture_test){win16_style_capture_test(argv[2]);return 0;}
     if(menu_desktop_test){menu_tests();return 0;}
     layout_tests();

@@ -38,6 +38,8 @@ static BOOL WINAPI observed_delete_dc(HDC dc)
 {BOOL result=DeleteDC(dc);if(result)released((HGDIOBJ)dc);return result;}
 static LRESULT CALLBACK witness(HWND w,UINT m,WPARAM a,LPARAM b)
 {
+    if(m==WM_PRINTCLIENT){RECT r;GetClientRect(w,&r);SetDCBrushColor((HDC)a,RGB(37,83,119));
+        FillRect((HDC)a,&r,(HBRUSH)GetStockObject(DC_BRUSH));return 0;}
     if(observe && m>=WM_CTLCOLORMSGBOX && m<=WM_CTLCOLORSTATIC)++native_paints;
     return DefWindowProcW(w,m,a,b);
 }
@@ -87,6 +89,19 @@ int main(int argc,char **argv)
     wc.lpfnWndProc=witness;wc.lpszClassName=L"StyleControlPresent";wc.hInstance=GetModuleHandleW(NULL);
     CHECK(RegisterClassW(&wc));root=CreateWindowW(wc.lpszClassName,L"Presentation",WS_OVERLAPPEDWINDOW|WS_VISIBLE,
         0,0,500,300,NULL,NULL,wc.hInstance,NULL);CHECK(root);ShowWindow(root,SW_SHOWNORMAL);UpdateWindow(root);
+    {HWND group,sibling;HDC dc=CreateCompatibleDC(NULL);HBITMAP bitmap,old;BITMAPINFO bi={0};void *pixels;
+     control_style state={0};RECT r={0,0,300,100};
+     group=CreateWindowW(L"BUTTON",L"Group",WS_CHILD|WS_VISIBLE|BS_GROUPBOX,10,10,300,100,root,NULL,wc.hInstance,NULL);
+     sibling=CreateWindowW(L"STATIC",L"Sibling",WS_CHILD|WS_VISIBLE,30,40,50,20,root,NULL,wc.hInstance,NULL);CHECK(group && sibling && dc);
+     bi.bmiHeader.biSize=sizeof(BITMAPINFOHEADER);bi.bmiHeader.biWidth=300;bi.bmiHeader.biHeight=-100;
+     bi.bmiHeader.biPlanes=1;bi.bmiHeader.biBitCount=32;
+     bitmap=CreateDIBSection(dc,&bi,DIB_RGB_COLORS,&pixels,NULL,0);CHECK(bitmap);old=SelectObject(dc,bitmap);
+     FillRect(dc,&r,(HBRUSH)GetStockObject(BLACK_BRUSH));win16_style_default_palette(&state.palette);
+     present_control(group,&state,dc,draw);
+     CHECK(GetPixel(dc,100,70)==RGB(37,83,119));CHECK(GetPixel(dc,25,35)==RGB(0,0,0));
+     CHECK(!owned_live && !owned_overflow);SelectObject(dc,old);DeleteObject(bitmap);DeleteDC(dc);
+     CHECK(DestroyWindow(sibling) && DestroyWindow(group));
+     puts("GROUP BACKGROUND PASS fresh black target restored from parent; sibling pixels preserved");}
     {HDC screen=GetDC(root),target;HBITMAP bitmap,old;control_style state={0};RECT area;
      SCROLLINFO range={sizeof(range),SIF_RANGE|SIF_PAGE|SIF_POS,0,100,10,25};int mode,x,y;
      CHECK(screen);target=CreateCompatibleDC(screen);bitmap=CreateCompatibleBitmap(screen,17,120);

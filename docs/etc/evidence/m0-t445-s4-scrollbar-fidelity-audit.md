@@ -2435,3 +2435,60 @@ The x64 demo SHA256 is
 This candidate supersedes r254 for the exceptional-paint repair only; normal
 physical interaction still requires owner acceptance. Clipboard isolation and
 the final scoped commit/push remain open, so S4 is not closed.
+
+### Owner black-background and inert-window-scroll repair
+
+Owner supplies an r255 screenshot with black group interiors and reports the
+window bars do not move content. Source confirms two separate omissions:
+group WM_PAINT copied existing target pixels while leaving the interior
+untouched, conflicting with the demo parent's WS_CLIPCHILDREN exclusion;
+the demo's window-scroll handler updated only nPos. The old full-window print
+fixture prefilled white and therefore did not establish fresh-screen painting.
+
+controls.c now composes the parent WM_PRINTCLIENT background for group screen
+painting, with a defined light fallback. It excludes visible sibling rectangles
+from the final target clip, so filling the group cannot erase controls enclosed
+by it. Borrowed WM_PRINTCLIENT drawing remains transparent. Saved DCs and the
+attachment's existing callback lifetime guard cover the new parent callback.
+The control-present fixture starts from black, checks a non-white parent
+background is restored, and checks an overlapping sibling's pixels remain
+untouched; its existing presentation/resource assertions are retained.
+
+The demo owns actual content scrolling: both axes move every direct child,
+including currently offscreen children, without intermediate per-child paints;
+then invalidate the newly exposed background/children. Extents derive from
+content coordinates, page size from the viewport, and resizing clamps position.
+Arrow steps, page/end, live thumb position and wheel commands move content.
+Interactive sample01 starts within the monitor work area. The renderer does
+not acquire application-content ownership. The generic frame32-bit tests now
+run on their dedicated SCROLL fixture, rather than corrupting showcase content
+coordinates by installing synthetic200000 ranges. Their assertions remain.
+
+New --viewport-test runs the real showcase in a620x380 window, checks actual
+child rectangles on both axes, thumb drag/capture release, end clamping, wheel,
+resize restoration, and a newly exposed group's live WindowDC background.
+It retains a WindowDC capture rather than repainting through WM_PRINT first.
+The print-observer assertion is restricted to its requested capture DC; a
+nested parent-background WM_PRINTCLIENT legitimately has a different origin.
+
+r257 full runner18744 starts2026-10-13 07:31:23, deadline300s, exit1 at the
+scroll fixture's offscreen arrow pixel comparison. Unchanged r255 control
+46556 at07:33:08 also exits1 at the same comparison:400/578 mismatches at
+x1108..1134. Current monitor work area is640x408 at DPI144, as recorded by the
+independent full-test diagnostic21612 at07:34:02. Do not claim the broad suite
+passes in this environment. That diagnostic also exposed the overbroad print
+observer, corrected as described above. No global resolution/DPI change occurs.
+
+r258 focused runner17248 starts07:36:33, deadline180s, exits0 for both widths.
+Its real WindowDC capture is inspected: the scrolled Labels group is white,
+labels retain their own backgrounds and the former black bands are absent.
+r259 runner47344 starts07:38:12, deadline180s, exits0 for both widths with
+the additional real thumb/child-motion assertions. Command:
+verify-win16-style.ps1 -ViewportOnly -BuildRoot build/M0-T445/S4/r259.
+This explicitly labelled focused mode builds the same complete demo/library
+and runs viewport plus control-presentation tests; it does not claim omitted
+full-gallery/scroll gates passed. Source-manifest rehash has0 mismatches.
+x64 demo SHA256:
+7AA455445932B640170AD800D9BD133D29E3FF2D6D28009B2C59CDDD8CD36B31.
+The standalone candidate is r259. Physical owner acceptance and the retained
+environment-dependent broader regression remain open; no product deployment.

@@ -700,21 +700,41 @@ static void present_control(HWND w,control_style *s,HDC target,
     void (*painter)(HWND,control_style *,HDC))
 {
     RECT dirty,client;HDC memory=NULL;HBITMAP bitmap=NULL,old=NULL;BOOL ready=FALSE;
+    WCHAR cls[16];BOOL group;int target_saved=0;
     if(!target || GetClipBox(target,&dirty)==ERROR || !GetClientRect(w,&client) ||
         !IntersectRect(&dirty,&dirty,&client))return;
+    group=GetClassNameW(w,cls,16) && !lstrcmpiW(cls,L"BUTTON") &&
+        (GetWindowLongPtrW(w,GWL_STYLE)&BS_TYPEMASK)==BS_GROUPBOX;
+    if(group){HWND sibling;RECT r;
+        target_saved=SaveDC(target);if(!target_saved)return;
+        /* Group interiors belong to the parent background. Never overwrite
+         * the sibling controls visually enclosed by this transparent group. */
+        for(sibling=GetWindow(GetParent(w),GW_CHILD);sibling;sibling=GetWindow(sibling,GW_HWNDNEXT))
+            if(sibling!=w && IsWindowVisible(sibling) && GetWindowRect(sibling,&r)){
+                MapWindowPoints(NULL,w,(POINT *)&r,2);
+                ExcludeClipRect(target,r.left,r.top,r.right,r.bottom);}
+    }
     memory=CreateCompatibleDC(target);
     if(memory)bitmap=CreateCompatibleBitmap(target,dirty.right-dirty.left,dirty.bottom-dirty.top);
     if(bitmap)old=(HBITMAP)SelectObject(memory,bitmap);
     if(old && old!=(HBITMAP)HGDI_ERROR &&
         BitBlt(memory,0,0,dirty.right-dirty.left,dirty.bottom-dirty.top,target,dirty.left,dirty.top,SRCCOPY) &&
         SetWindowOrgEx(memory,dirty.left,dirty.top,NULL)){
-        painter(w,s,memory);
+        if(group){HWND parent=GetParent(w);POINT origin={0,0};int saved=SaveDC(memory);
+            SetDCBrushColor(memory,s->palette.light);FillRect(memory,&client,(HBRUSH)GetStockObject(DC_BRUSH));
+            if(saved && parent){MapWindowPoints(w,parent,&origin,1);
+                OffsetViewportOrgEx(memory,-origin.x,-origin.y,NULL);
+                SendMessageW(parent,WM_PRINTCLIENT,(WPARAM)memory,PRF_CLIENT);}
+            if(saved)RestoreDC(memory,saved);
+        }
+        if(!s->detached)painter(w,s,memory);
         if(!s->detached)ready=BitBlt(target,dirty.left,dirty.top,dirty.right-dirty.left,
             dirty.bottom-dirty.top,memory,dirty.left,dirty.top,SRCCOPY);
     }
     if(old && old!=(HBITMAP)HGDI_ERROR)SelectObject(memory,old);
     if(bitmap)DeleteObject(bitmap);if(memory)DeleteDC(memory);
     if(!ready && !s->detached)painter(w,s,target);
+    if(target_saved)RestoreDC(target,target_saved);
 }
 
 /* Original LBSetTabStops stores set-time pixels. GdiGetCharDimensions uses
