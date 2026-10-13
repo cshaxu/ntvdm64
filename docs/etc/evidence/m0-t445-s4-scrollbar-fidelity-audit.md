@@ -2492,3 +2492,29 @@ x64 demo SHA256:
 7AA455445932B640170AD800D9BD133D29E3FF2D6D28009B2C59CDDD8CD36B31.
 The standalone candidate is r259. Physical owner acceptance and the retained
 environment-dependent broader regression remain open; no product deployment.
+
+### Complete regression follow-up after display recovery
+
+r260 reuses r259 executables without rebuilding and verifies their input
+manifest before testing. Runner40464 starts2026-10-13 07:43:48, deadline300s,
+exit1. Both widths pass lifetime, native/styled size boxes, normal/logical96
+font, menu dispatch, intentional-leak negative, tabs, scroll geometry/API,
+scroll integration and DC failure cases. The monitor work area is now
+1920x1008/DPI144; the previous offscreen arrow comparisons pass unchanged.
+Both gallery cases instead fail the new viewport nPage==client.width assertion.
+USER clamps the page size to the total range when the viewport exceeds the
+content extent. The assertion is corrected to min(viewport,range length),
+and additionally requires position0 when all content fits. No runtime branch
+or old regression assertion is removed. Runner42052 starts07:45:24, deadline300s,
+for a fresh full both-width r261 run; its final result is recorded below.
+
+r261 exits0 in full mode. Both x86/x64 pass the viewport/background fixtures,
+all retained scroll/font/menu/control/lifetime/DC gates and27,261 gallery
+checks each; attachment GDI returns54/54. Source-manifest rehash finds0
+mismatches. x64 demo SHA256:
+EB97CDF25C9D637E4C94C97C05A33BF488CBE0041CFE3C16374F707B96A5BE7E.
+This supersedes the earlier r259 focused-only verification limitation, without
+erasing its failed small-display observations. Owner physical acceptance of
+the latest black-background/content-scrolling repair remains pending. Clipboard
+smoke limitations remain supporting evidence rather than a mandatory closure
+gate, as clarified after the owner's question.

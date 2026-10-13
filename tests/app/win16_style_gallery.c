@@ -1710,7 +1710,10 @@ static void test_showcase_viewport(HWND w)
     SendMessageW(w,WM_VSCROLL,SB_TOP,0);
     REQUIRE(SetWindowPos(w,NULL,0,0,outer.right-outer.left,outer.bottom-outer.top,SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE));
     GetWindowRect(child,&after);REQUIRE(EqualRect(&start,&after));GetClientRect(w,&client);
-    {SCROLLINFO info={sizeof(info),SIF_ALL};REQUIRE(GetScrollInfo(w,SB_HORZ,&info));REQUIRE(info.nPage==(UINT)client.right);}
+    {SCROLLINFO info={sizeof(info),SIF_ALL};REQUIRE(GetScrollInfo(w,SB_HORZ,&info));
+        /* USER clamps nPage to the range length when all content fits. */
+        REQUIRE(info.nPage==(UINT)min(client.right,info.nMax-info.nMin+1));
+        if(client.right>info.nMax-info.nMin)REQUIRE(info.nPos==0);}
     RedrawWindow(w,NULL,NULL,RDW_INVALIDATE|RDW_ERASE|RDW_ALLCHILDREN|RDW_UPDATENOW);
     puts("SHOWCASE VIEWPORT PASS both axes move actual children, thumb drag, end clamps, wheel, resize and restoration");
 }

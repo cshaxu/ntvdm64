@@ -4,7 +4,7 @@
 
 The r052 review below is retained historical evidence. It does not describe
 the present dirty worktree or the later admitted standard controls. Current
-candidate is r259, with full chronology in the
+candidate is r261, with full chronology in the
 [control and scrollbar audit](m0-t445-s4-scrollbar-fidelity-audit.md).
 The expanded-controls checkpoint is committed and pushed as f8e0d5878.
 This snapshot is not S4 approval or owner acceptance.
@@ -17,6 +17,12 @@ full-suite pass is not claimed. See the latest audit section. Earlier r255
 table/hash below remain the checkpoint evidence, not r259 identity. Owner
 physical acceptance is still pending. Clipboard smoke testing is supporting
 native-EDIT non-regression evidence, not a new mandatory S4 closure gate.
+
+Follow-up: r261 passes the full both-width runner after the display recovers
+and the new viewport page-size assertion is corrected for USER's range clamp.
+The runtime repair is unchanged. All27,261 gallery checks per width, focused
+background/content-movement tests and retained gates pass; source hashes match.
+This resolves the fresh-full-suite gap, not owner physical acceptance.
 
 | Required surface | Current direct evidence | Remaining boundary |
 | --- | --- | --- |
