@@ -6,7 +6,8 @@ The r052 review below is retained historical evidence. It does not describe
 the present dirty worktree or the later admitted standard controls. Current
 candidate is r255, with full chronology in the
 [control and scrollbar audit](m0-t445-s4-scrollbar-fidelity-audit.md).
-This snapshot is not final approval, a commit/push record or owner acceptance.
+The expanded-controls checkpoint is committed and pushed as f8e0d5878.
+This snapshot is not S4 approval or owner acceptance.
 
 | Required surface | Current direct evidence | Remaining boundary |
 | --- | --- | --- |
@@ -19,8 +20,8 @@ This snapshot is not final approval, a commit/push record or owner acceptance.
 | Lists and combos | test_combo_scroll_release, native-paint boundary, integrated/multicolumn scroll and list-tabs fixture | Unknown pre-existing native tab state requires explicit caller input |
 | Scrollbars | scroll-geometry, scroll-api, scroll-test and frame callback tests | Native accessibility geometry and documented wide native fallbacks remain non-pass limitations |
 | Shared24px System font | font-test, test_menu_font, control detach font restoration | CP1252 test coverage is not universal Unicode certification |
-| Attachment lifetime | control-lifetime removal/destruction/nested-installation tests, with old-library negatives in r248/r250 | Final broader changed-file review still required |
-| Delivery | r251 full x86/x64 pass;0 source-manifest mismatches | Expanded-S4 changes remain uncommitted/unpushed; unrelated Queue/WOW changes must be excluded |
+| Attachment lifetime | control-lifetime removal/destruction/nested-installation tests, with old-library negatives in r248/r250; rerun in r255 | Message-path coverage does not certify every arbitrary application callback |
+| Delivery | r255 full x86/x64 pass;0 source-manifest mismatches; f8e0d5878 pushed to origin/main | Intermediate checkpoint, not expanded-S4 acceptance; unrelated Queue/WOW changes remain untouched |
 
 r255 x64 demo SHA256:
 2102F71F134AF961908C5A434D8FB5EAD674A07D8F28F965B0EB36FC3973DC15.
@@ -41,8 +42,8 @@ owner's ordinary click flicker. See the detailed audit for exact evidence.
 The clipboard fixture's isolated-window-station creation is denied before any
 clipboard operation. Do not rerun it against the interactive clipboard without
 explicit owner consent; a consent question is pending. The fixture remains
-outside the default runner. Physical click/menu/scroll acceptance and broader
-final source review remain open. The retained table below names earlier tests;
+outside the default runner. Physical click/menu/scroll acceptance remains open.
+The retained table above names earlier tests;
 r255 reruns them plus the size-box and exceptional-scroll coverage.
 
 ### Resource revalidation procedure
@@ -61,11 +62,45 @@ resource import, guest write, font installation or broader rights claim occurs.
 ### Remaining closure decisions
 
 Do not mark S4 complete from the retained27,261 headline count. Resolve or
-obtain an explicit disposition for the isolated clipboard test, complete the
-changed-source review and scoped delivery, and obtain owner physical review
+obtain an explicit disposition for the isolated clipboard test, and obtain owner physical review
 of sample01 plus outer system menus and combo/list scrolling. The existing
 S7 deferral covers native-menu fresh-session blankness only, not all these
 expanded-S4 requirements. Tests cannot silently narrow the owner request.
+
+### Post-checkpoint source and coverage review
+
+Review against f8e0d5878 covers the changed frame/layout/API code, controls
+renderer and dispatch/installation/teardown, font lifetime, creation scope,
+scroll geometry/tracker, runner changes and focused fixture assertions. The
+last discovered defects are retained with regression evidence: installation
+reentrancy (r249/r251), omitted original size-box variant (r254) and failed
+scroll composition (r255). No further required source repair is identified
+in this review. This is a bounded engineering review, not a claim of absence
+of bugs or universal compatibility with all modern native controls.
+
+The current headers consistently expose the standalone integration limits:
+same GUI thread, explicit original EDIT border and known list-tab state,
+caller-owned list/edit theme configuration and frame scrollbar API binding.
+The demo supplies those inputs for its owned windows. Hook propagation,
+arbitrary application attachment and production integration remain S5/S6,
+not evidence supplied by this experiment. Modern accessibility geometry and
+wide native fallback limits remain recorded, not silently called passing.
+
+The r255 x64 all-controls-message-popup capture was visually inspected again:
+the six families, three Combo forms, tabbed/multicolumn lists, both scroll
+orientations and size box are present; the shared typography and layout have
+no newly identified overlap. This is explicit WM_PRINT output, not physical
+composition. It cannot settle the owner's clicking/flicker report. The r255
+input manifest and pushed checkpoint identity agree; the unmodified executable
+remains the candidate, with no redundant rebuild for this documentation review.
+
+Closure is now waiting on two concrete acceptance decisions: actual owner
+interaction of sample01 and outer menus1/12/18 (including dropdown thumb release
+and moving focus caret), and isolated clipboard execution or an explicit owner
+disposition. A question requesting permission for interactive clipboard use is
+pending; no consent is inferred from automatic goal continuation. The deferred
+native-menu fresh-session issue remains S7 separately. Do not close S4 or the
+S3+S4 objective while these acceptance requirements remain unresolved.
 
 ### Sequential source-review findings after r252
 
