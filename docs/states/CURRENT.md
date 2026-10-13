@@ -9,23 +9,23 @@ See the [S1 closure design](../etc/evidence/m0-t445-s1-installation-design.md).
 
 ## Active Packet
 
-### Standalone retro menus and MDI
+### Standalone retro menus, MDI and standard controls
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T445 S4, Ordinary Mode; implementation then separate final review. |
 | Admission And Approval | Owner directs S3 closure and moves retro menus/MDI to S4; updated goal explicitly covers the S3+S4 standalone app. |
-| Objective | Extend the shared standalone component and gallery with source-referenced Win3.1 system/ordinary menus and MDI visuals and interaction. |
+| Objective | Extend the standalone component/gallery with Win3.x system/ordinary menus, MDI and standard controls. Owner expands S4 to buttons, radio/checkbox, edit/text input, labels, boxes, lists, combos and scrollbars; inventory all original standard-control families and variants without requiring owner enumeration. Sample 1 presents the controls together; focused pages supplement it. Repair real outer system-menu text/style for every system-box window, including samples1/12/18. |
 | Non-goals | No run16 options, Hook/WOW integration, NTCON changes, guest/mirror edits, production release or global theme/settings changes. No claim that retro drawing repairs the deferred native-menu failure. |
 | Reference Baseline | Owner-closed S3, library at 488aa73ae, diagnostic source at 67b3e586d; r134 both-width gates and r139/r140 historical controls. |
 | Files And ABI Surface | src/win16-style, tests/app and tests/observation; local same-thread C API, x86/x64 /MT static archives. |
 | Applicable Rules | Source/architecture/coding/document authorities; background-owned build/tests; build-only outputs; no subst. Computer use is scoped to the owned demo, not other applications or host settings. |
-| Verification | Both widths: menu initial paint, selection, disabled items, separators, submenus, keyboard/mouse cancellation and commands; MDI activation, child frames, maximize/restore, system menu and close; preserve S3 layout/lifetime tests. Compare original references and owned screenshots; distinguish probes from physical acceptance. |
+| Verification | Both widths: all system-box window menus including real samples1/12/18 outer menus; initial text/font and state rendering, keyboard/mouse commands; MDI activation/maximize/restore/close; standard-control normal/focused/pressed/disabled/checked/mixed states, native editing/navigation/notifications and teardown. Preserve S3 tests, compare original references and owned captures; probes are not physical acceptance. |
 | Expected Markers | Both-width runnable demo and tests with images; no link to other product components. |
-| Asset Needs | Pinned VGA.DRV button resources; original media stays read-only. Owner now selects host System font; embedded VGASYS.FON and private font loading have been removed. |
+| Asset Needs | Pinned original visual resources, read-only media. Owner requires unified24-pixel host System bitmap typography across title/menu/controls; no embedded VGASYS.FON or global font installation. Verify actual realization and native control layout/font restoration. |
 | Reporting Requirements | Exact binary paths, screenshots, measured test results and visual/physical interaction limitations. |
 | Stop Conditions | Need for product/guest integration, global interception/settings or unreviewed resources; no scope expansion. |
-| Exit Criteria | Source-backed design, implemented standalone menus/MDI and focused tests, reviewed images, governance/link/diff checks, commit/push and owner acceptance. Native-menu fresh-session retest remains an explicit S7 obligation, not a pass. |
+| Exit Criteria | Source-backed implementation of menus/MDI and all admitted standard-control families in one gallery; focused behavior/lifetime tests, original-reference visual review, governance/link/diff checks, commit/push and owner acceptance. r052 is an intermediate delivery, not expanded-S4 completion. Native-menu fresh-session retest remains S7. |
 | Original Owner Request | Close S3; move retro menus and MDI to S4, parameter propagation to S5 and product integration to S6. |
 | Similar-Issue Sweep | Missing buttons, title changes, install/remove/destroy, unsupported frames, DPI/high contrast, pressed/canceled actions and application client preservation. |
 
@@ -55,7 +55,7 @@ S1--S3 are closed. S4 covers standalone retro menus/MDI; S5 is CLI/policy
 propagation and title-marker verification; S6 integrates the shared component;
 S7 is integrated acceptance and the deferred native-menu session retest.
 The [S4 review](../etc/evidence/m0-t445-s4-menu-mdi-review.md) records r052
-standalone menu/MDI coverage, delivery de5526a16 and open owner acceptance.
+delivery de5526a16 and the r255 controls checkpoint; S4 acceptance remains open.
 The [working plan](../etc/operations/t445-win31-window-style-plan.md) defines
 the contracts. S4 is active.
 The shared source owner remains src/win16-style, with no production integration

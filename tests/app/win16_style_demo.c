@@ -3,7 +3,9 @@
 #include "win16-style/win16_style.h"
 #include "win16-style/layout.h"
 #include "win16-style/frame_buttons.h"
+#include "win16-style/font.h"
 #include <stdio.h>
+#include <share.h>
 #include <stdlib.h>
 #include <string.h>
 #include <windowsx.h>
@@ -26,6 +28,14 @@ static FILE *menu_trace;
 static UINT queued_double;
 static LPARAM queued_point;
 static BOOL queued_sent;
+static BOOL CALLBACK trace_thread_window(HWND w,LPARAM unused)
+{
+    WCHAR cls[128],title[128];RECT r;(void)unused;
+    if(!IsWindowVisible(w))return TRUE;
+    GetClassNameW(w,cls,128);GetWindowTextW(w,title,128);GetWindowRect(w,&r);
+    fprintf(menu_trace,"VISIBLE hwnd=%p class=%ls title=%ls rect=%ld,%ld,%ld,%ld\n",
+        w,cls,title,r.left,r.top,r.right,r.bottom);return TRUE;
+}
 static LRESULT CALLBACK trace_queue(int code,WPARAM a,LPARAM b)
 {
     if(code>=0){
@@ -45,10 +55,14 @@ static LRESULT CALLBACK trace_dispatch(int code,WPARAM a,LPARAM b)
         CWPSTRUCT *m=(CWPSTRUCT *)b;
         if((m->message>=WM_NCLBUTTONDOWN && m->message<=WM_NCLBUTTONDBLCLK) ||
            (m->message>=WM_LBUTTONDOWN && m->message<=WM_LBUTTONDBLCLK) ||
-           m->message==WM_SYSCOMMAND || m->message==WM_ENTERMENULOOP || m->message==WM_EXITMENULOOP){
+           m->message==WM_SYSCOMMAND || m->message==WM_ENTERMENULOOP || m->message==WM_EXITMENULOOP ||
+           m->message==WM_NCMOUSEMOVE || m->message==WM_NCMOUSEHOVER || m->message==WM_NCMOUSELEAVE ||
+           m->message==WM_SHOWWINDOW || (m->message>=0x90 && m->message<=0x95)){
             fprintf(menu_trace,"DISPATCH message=%04x hwnd=%p wp=%llx lp=%llx\n",
                 m->message,m->hwnd,(unsigned long long)m->wParam,(unsigned long long)m->lParam);
             fflush(menu_trace);
+            if(m->message==WM_NCMOUSEHOVER || m->message==WM_SHOWWINDOW){
+                EnumThreadWindows(GetCurrentThreadId(),trace_thread_window,0);fflush(menu_trace);}
         }
     }
     return CallNextHookEx(NULL,code,a,b);
@@ -67,6 +81,8 @@ static LRESULT CALLBACK trace_filter(int code,WPARAM a,LPARAM b)
 }
 void win16_style_gallery_run(void);
 void win16_style_gallery_test(const WCHAR *path);
+void win16_style_capture_test(const WCHAR *path);
+void win16_style_scroll_test(void);
 static LRESULT CALLBACK window_proc(HWND w,UINT m,WPARAM a,LPARAM b)
 {
     if(w==cursor_probe && m==WM_NCACTIVATE)++native_ncactivate_calls;
@@ -313,26 +329,24 @@ static void title_clip_test(void)
     CHECK(GetWindowRect(w,&r));
     CHECK(win16_style_measure(r.right-r.left,r.bottom-r.top,GetDpiForWindow(w),WS_OVERLAPPEDWINDOW,0,FALSE,&l));
     width=l.title.right-l.title.left;height=l.title.bottom-l.title.top;
-    logical_width=MulDiv(width,96,(int)GetDpiForWindow(w));
+    logical_width=width;
     actual=GetWindowDC(w);CHECK(actual && base && expected);
-    a=CreateCompatibleBitmap(actual,logical_width,20);b=CreateCompatibleBitmap(actual,width,height);
+    a=CreateCompatibleBitmap(actual,logical_width,height);b=CreateCompatibleBitmap(actual,width,height);
     CHECK(a && b);old_a=SelectObject(base,a);old_b=SelectObject(expected,b);
-    SetRect(&logical,0,0,logical_width,20);FillRect(base,&logical,(HBRUSH)GetStockObject(WHITE_BRUSH));
-    font=CreateFontW(16,0,0,0,FW_BOLD,FALSE,FALSE,FALSE,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,
-        CLIP_DEFAULT_PRECIS,NONANTIALIASED_QUALITY,DEFAULT_PITCH,L"System");
+    SetRect(&logical,0,0,logical_width,height);FillRect(base,&logical,(HBRUSH)GetStockObject(WHITE_BRUSH));
+    font=win16_style_font_acquire();
     CHECK(font);SelectObject(base,font);SetBkMode(base,TRANSPARENT);SetTextColor(base,RGB(0,0,0));
     /* Oracle: a deliberately overflowing stream of original W glyphs starts
      * one logical pixel inside the left edge. No fitting/ellipsis algorithm.
      * The bitmap boundary clips its tail. Compare the whole title, including
      * the right edge where a modern ellipsis used to replace original glyphs. */
-    CHECK(TextOutW(base,1,2,title,120));SetStretchBltMode(expected,COLORONCOLOR);
-    {int scaled=MulDiv(20,(int)GetDpiForWindow(w),96);
-    CHECK(StretchBlt(expected,0,(height-scaled)/2,width,scaled,base,0,0,logical_width,20,SRCCOPY));}
+    CHECK(TextOutW(base,1,max(0,(height-24)/2),title,120));
+    CHECK(BitBlt(expected,0,0,width,height,base,0,0,SRCCOPY));
     for(y=0;y<height;++y)for(x=0;x<width;++x)
         CHECK(GetPixel(actual,l.title.left+x,l.title.top+y)==GetPixel(expected,x,y));
     printf("TITLE overflowing original glyph stream clipped without ellipsis: %dx%d pixels\n",width,height);
     ReleaseDC(w,actual);SelectObject(base,old_a);SelectObject(expected,old_b);
-    DeleteDC(base);DeleteDC(expected);DeleteObject(a);DeleteObject(b);DeleteObject(font);
+    DeleteDC(base);DeleteDC(expected);DeleteObject(a);DeleteObject(b);win16_style_font_release(font);
     CHECK(DestroyWindow(w));
 }
 
@@ -498,6 +512,10 @@ static void layout_tests(void)
         for(caption=0;caption<2;++caption){
             CHECK(win16_style_measure(600,400,96,caption?WS_OVERLAPPEDWINDOW:WS_POPUP|WS_THICKFRAME,0,FALSE,&l));
             for(i=0;i<sizeof(edges)/sizeof(edges[0]);++i){POINT p={edges[i].x,edges[i].y};
+                /* A caption now needs24 rows for owner-selected type rather
+                 * than18. Its side corner bands follow that six-row growth;
+                 * captionless VGA boundaries stay unchanged. */
+                if(caption && i>=8)p.y+=p.y<200?6:-6;
                 CHECK(win16_style_hit(&l,p)==edges[i].hit);}
         }
     }
@@ -775,14 +793,21 @@ int wmain(int argc,WCHAR **argv)
     WNDCLASSW cls={0};HWND w[4];MSG msg;int i;HDESK desktop=NULL;
     DWORD initial_gdi;
     BOOL queued_test=argc==2 && !wcscmp(argv[1],L"--queued-menu-test");
+    BOOL scroll_test=argc==2 && !wcscmp(argv[1],L"--scroll-test");
+    BOOL capture96=argc==3 && !wcscmp(argv[1],L"--capture-test-96");
+    BOOL capture_test=capture96 || (argc==3 && !wcscmp(argv[1],L"--capture-test"));
     menu_desktop_test=queued_test || (argc==3 && !wcscmp(argv[1],L"--menu-test"));
-    testing=menu_desktop_test || (argc==3 && !wcscmp(argv[1],L"--test"));
-    if(testing && !queued_test)capture_path=argv[2];
-    SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
+    testing=capture_test || scroll_test || menu_desktop_test || (argc==3 && !wcscmp(argv[1],L"--test"));
+    if(testing && argc==3)capture_path=argv[2];
+    /* Diagnostic logical-96 coordinate baseline, not a host DPI change or
+     * a claim that the monitor's physical pixels are 96 DPI. */
+    SetProcessDpiAwarenessContext(capture96?DPI_AWARENESS_CONTEXT_UNAWARE:
+        DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
+    if(capture96)printf("CAPTURE logical-96 DPI-unaware diagnostic\n");
     if(!testing){
         HHOOK hook=NULL,dispatch=NULL,queue=NULL;
         if(argc==3 && !wcscmp(argv[1],L"--gallery-trace")){
-            if(_wfopen_s(&menu_trace,argv[2],L"w"))return 2;
+            menu_trace=_wfsopen(argv[2],L"w",_SH_DENYNO);if(!menu_trace)return 2;
             fprintf(menu_trace,"TRACE pid=%lu thread=%lu\n",GetCurrentProcessId(),GetCurrentThreadId());fflush(menu_trace);
             PeekMessageW(&msg,NULL,0,0,PM_NOREMOVE);
             hook=SetWindowsHookExW(WH_MSGFILTER,trace_filter,NULL,GetCurrentThreadId());
@@ -805,6 +830,8 @@ int wmain(int argc,WCHAR **argv)
     cls.hCursor=LoadCursorW(NULL,IDC_ARROW);cls.lpszClassName=L"Win16StyleTrial";
     cls.style=CS_DBLCLKS;CHECK(RegisterClassW(&cls)!=0);
     if(queued_test){queued_menu_test();return 0;}
+    if(scroll_test){win16_style_scroll_test();return 0;}
+    if(capture_test){win16_style_capture_test(argv[2]);return 0;}
     if(menu_desktop_test){menu_tests();return 0;}
     layout_tests();
     raster_scale_tests();

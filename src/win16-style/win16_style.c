@@ -7,6 +7,8 @@
 #include "menu_bar.h"
 #include "menu_items.h"
 #include "menu_scope.h"
+#include "controls.h"
+#include "font.h"
 #include <commctrl.h>
 #include <dwmapi.h>
 #include <windowsx.h>
@@ -20,7 +22,7 @@ typedef struct menu_loop {
 } menu_loop;
 typedef struct style_window {
     win16_style_palette palette;
-    HFONT font;
+    HFONT title_font,menu_font; /* One shared-font reference; both borrow it. */
     UINT dpi, calls;
     BOOL active, detached, hot, system_menu;
     int pressed,bar_selected,bar_direction,bar_hover;
@@ -35,6 +37,49 @@ typedef struct style_window {
 
 static LRESULT CALLBACK style_proc(HWND,UINT,WPARAM,LPARAM,UINT_PTR,DWORD_PTR);
 static void dispose(style_window *);
+
+typedef struct print_children {
+    HWND parent;
+    HDC dc;
+    POINT origin;
+    LPARAM flags;
+    BOOL owned;
+} print_children;
+
+static BOOL CALLBACK print_child(HWND child,LPARAM data)
+{
+    print_children *p=(print_children *)data;RECT r;int saved;
+    if(!IsWindow(p->parent))return FALSE;
+    if((p->owned?GetWindow(child,GW_OWNER):GetParent(child))!=p->parent || !IsWindowVisible(child))return TRUE;
+    if(!GetWindowRect(child,&r) || !(saved=SaveDC(p->dc)))return TRUE;
+    OffsetViewportOrgEx(p->dc,r.left-p->origin.x,r.top-p->origin.y,NULL);
+    IntersectClipRect(p->dc,0,0,r.right-r.left,r.bottom-r.top);
+    SendMessageW(child,WM_PRINT,(WPARAM)p->dc,p->flags|PRF_NONCLIENT|PRF_CLIENT|PRF_ERASEBKGND);
+    RestoreDC(p->dc,saved);return TRUE;
+}
+
+/* Custom nonclient geometry cannot delegate native frame printing. Preserve
+ * DWP's frame/client/child ordering using the public HWND/DC boundaries.
+ * See the S4 print audit for the original xxxDWPPrint reference. */
+static void print_client_and_children(HWND w,style_window *s,HDC dc,LPARAM flags)
+{
+    RECT wr,client;POINT origin={0,0};int saved;print_children children;
+    if(!GetWindowRect(w,&wr) || !GetClientRect(w,&client) || !ClientToScreen(w,&origin))return;
+    children.parent=w;children.dc=dc;children.origin=origin;children.flags=flags;children.owned=FALSE;
+    if(flags&PRF_NONCLIENT){children.origin.x=wr.left;children.origin.y=wr.top;}
+    if(flags&PRF_CLIENT){
+        saved=SaveDC(dc);if(!saved)return;
+        OffsetViewportOrgEx(dc,origin.x-children.origin.x,origin.y-children.origin.y,NULL);
+        IntersectClipRect(dc,0,0,client.right,client.bottom);
+        if(flags&PRF_ERASEBKGND)SendMessageW(w,WM_ERASEBKGND,(WPARAM)dc,0);
+        if(!s->detached)SendMessageW(w,WM_PRINTCLIENT,(WPARAM)dc,flags);
+        RestoreDC(dc,saved);
+    }
+    if(!s->detached && (flags&PRF_CHILDREN))EnumChildWindows(w,print_child,(LPARAM)&children);
+    if(!s->detached && (flags&PRF_OWNED)){
+        children.owned=TRUE;EnumThreadWindows(GetCurrentThreadId(),print_child,(LPARAM)&children);
+    }
+}
 typedef struct menu_frame {
     HWND window;
     RECT button;
@@ -106,6 +151,10 @@ static LRESULT CALLBACK menu_filter(int code,WPARAM wp,LPARAM lp)
  * See resources.md for the boundary and provenance. */
 #define STYLE_NCUAHDRAWCAPTION 0x00ae
 #define STYLE_NCUAHDRAWFRAME   0x00af
+/* Host UAH menu drawing bypasses WM_NCPAINT and precedes NC mouse dispatch.
+ * No private payload is interpreted: our menu-bar painter owns these pixels. */
+#define STYLE_UAHDRAWMENU     0x0091
+#define STYLE_UAHDRAWMENUITEM 0x0092
 
 void win16_style_default_palette(win16_style_palette *p)
 {
@@ -152,11 +201,25 @@ static BOOL measure_window(HWND w,style_window *s,const RECT *outer,win16_style_
     OffsetRect(&l->system,dx,dy);OffsetRect(&l->minimize,dx,dy);OffsetRect(&l->maximize,dx,dy);
     if(!(GetWindowLongPtr(w,GWL_STYLE)&WS_CHILD) && GetMenu(w)){
         win16_style_bar bar;POINT origin={l->client.left,l->client.top};
-        if(!win16_style_bar_read(GetMenu(w),s->font?s->font:(HFONT)GetStockObject(SYSTEM_FONT),
+        if(!win16_style_bar_read(GetMenu(w),s->menu_font?s->menu_font:(HFONT)GetStockObject(SYSTEM_FONT),
             s->dpi,origin,l->client.right-l->client.left,&bar))return FALSE;
         if(bar.height){l->menu=l->client;l->menu.bottom=min(l->client.bottom,l->client.top+bar.height+l->unit);
             l->client.top=l->menu.bottom;}
         win16_style_bar_free(&bar);
+    }
+    {DWORD flags=(DWORD)GetWindowLongPtrW(w,GWL_STYLE);
+        /* USER18:0F5F uses the inner sizing band N=F-B for the bars' outer
+         * edges: the bar shares the frame's inner border. Native bar geometry
+         * starts at rcClient, so reserve thickness minus that shared unit.
+         * Fixed/dialog and host-only left-bar profiles remain separate. */
+        int shared=l->sizeable && !l->dialog_frame &&
+            !(GetWindowLongPtrW(w,GWL_EXSTYLE)&WS_EX_LEFTSCROLLBAR)?l->unit:0;
+        if(flags&WS_VSCROLL){int cx=GetSystemMetricsForDpi(SM_CXVSCROLL,s->dpi)-shared;
+            if(l->client.right-l->client.left>=cx){
+                if(GetWindowLongPtrW(w,GWL_EXSTYLE)&WS_EX_LEFTSCROLLBAR)l->client.left+=cx;
+                else l->client.right-=cx;}}
+        if(flags&WS_HSCROLL){int cy=GetSystemMetricsForDpi(SM_CYHSCROLL,s->dpi)-shared;
+            if(l->client.bottom-l->client.top>cy)l->client.bottom-=cy;}
     }
     return TRUE;
 }
@@ -259,10 +322,10 @@ static void paint(HWND w,style_window *s,HDC target)
     if(!IsRectEmpty(&l.menu)){
         win16_style_bar bar;POINT origin={l.menu.left,l.menu.top};
         fill(dc,l.menu,p.light);
-        if(win16_style_bar_read(GetMenu(w),s->font,s->dpi,origin,l.menu.right-l.menu.left,&bar)){
+        if(win16_style_bar_read(GetMenu(w),s->menu_font,s->dpi,origin,l.menu.right-l.menu.left,&bar)){
             if(s->bar_selected>=0 && (UINT)s->bar_selected<bar.count)
                 bar.items[s->bar_selected].state|=MFS_HILITE;
-            win16_style_bar_paint(&bar,dc,s->font,s->dpi,&p);win16_style_bar_free(&bar);
+            win16_style_bar_paint(&bar,dc,s->menu_font,s->dpi,&p);win16_style_bar_free(&bar);
         }
         r=l.menu;r.top=r.bottom-l.unit;fill(dc,r,p.edge);
     }
@@ -283,6 +346,7 @@ static void paint(HWND w,style_window *s,HDC target)
             }
         }
     }
+    win16_style_scrollbars_paint(w,dc,&p);
     if(IsRectEmpty(&l.caption)){
         RestoreDC(dc,saved);if(!target)ReleaseDC(w,dc);return;
     }
@@ -295,41 +359,16 @@ static void paint(HWND w,style_window *s,HDC target)
     len=GetWindowTextLengthW(w);
     title=(WCHAR *)calloc((size_t)len+1,sizeof(WCHAR));
     if(title){
-        HDC text_dc;HBITMAP bitmap,prior;
-        RECT logical;
+        SIZE extent;
         GetWindowTextW(w,title,len+1);
         r=l.title;
-        /* System is a discrete raster font. Asking GDI for a 24-pixel cell
-         * selects its 20-pixel strike, not a scaled 16-pixel VGA strike.
-         * Render the base cell, then scale once with the rest of the metrics. */
-        /* Owner-approved typography exception: retain the accepted 20-row
-         * text raster's scaling phase, independently of the 18-row buttons. */
-        SetRect(&logical,0,0,max(1,MulDiv(r.right-r.left,96,(int)s->dpi)),20);
-        text_dc=CreateCompatibleDC(dc);
-        bitmap=CreateCompatibleBitmap(dc,logical.right,logical.bottom);
-        if(text_dc && bitmap){
-            SIZE extent;
-            prior=(HBITMAP)SelectObject(text_dc,bitmap);
-            fill(text_dc,logical,s->active?p.active:p.inactive);
-            SelectObject(text_dc,s->font?s->font:GetStockObject(SYSTEM_FONT));
-            SetBkMode(text_dc,TRANSPARENT);
-            SetTextColor(text_dc,s->active?p.active_text:p.inactive_text);
-            /* USER 1:A526..A5DE measures, centres if it fits, otherwise
-             * clips from the left border. It does not synthesize ellipses. */
-            if(GetTextExtentPoint32W(text_dc,title,len,&extent))
-                ExtTextOutW(text_dc,max(1,(logical.right-extent.cx)/2),
-                    max(0,(logical.bottom-extent.cy)/2),ETO_CLIPPED,&logical,title,(UINT)len,NULL);
-            {int text_height=MulDiv(20,(int)s->dpi,96),clip=SaveDC(dc);
-            if(clip){
-            IntersectClipRect(dc,r.left,r.top,r.right,r.bottom);
-            SetStretchBltMode(dc,COLORONCOLOR);
-            StretchBlt(dc,r.left,r.top+(r.bottom-r.top-text_height)/2,
-                max(0,r.right-r.left),text_height,text_dc,0,0,logical.right,logical.bottom,SRCCOPY);
-            RestoreDC(dc,clip);}}
-            SelectObject(text_dc,prior);
-        }
-        if(text_dc)DeleteDC(text_dc);
-        if(bitmap)DeleteObject(bitmap);
+        SelectObject(dc,s->title_font);SetBkMode(dc,TRANSPARENT);
+        SetTextColor(dc,s->active?p.active_text:p.inactive_text);
+        /* Shared24-pixel glyphs are already scaled. Never scale the title a
+         * second time; retain original centered-or-clipped, no-ellipsis text. */
+        if(GetTextExtentPoint32W(dc,title,len,&extent))
+            ExtTextOutW(dc,r.left+max(1,(r.right-r.left-extent.cx)/2),
+                r.top+max(0,(r.bottom-r.top-extent.cy)/2),ETO_CLIPPED,&r,title,(UINT)len,NULL);
         free(title);
     }
     RestoreDC(dc,saved);if(!target)ReleaseDC(w,dc);
@@ -338,19 +377,60 @@ static void paint(HWND w,style_window *s,HDC target)
 /* Called only from the pinned subclass invocation. Application menu-init and
  * native tracking can reenter/remove/destroy the frame; never paint afterwards
  * unless its attachment remains live. */
+/* Menu selection changes no caption, sizing band or scrollbar pixels.
+ * Reuse the frame painter with a bounded clip instead of clearing the frame. */
+static void paint_menu_state(HWND w,style_window *s)
+{
+    win16_style_layout l;HDC dc;HRGN clip,system;int saved;
+    if(!layout(w,s,&l))return;
+    dc=GetWindowDC(w);if(!dc)return;saved=SaveDC(dc);
+    if(!saved){ReleaseDC(w,dc);return;}
+    clip=CreateRectRgnIndirect(&l.menu);system=CreateRectRgnIndirect(&l.system);
+    if(clip && system && CombineRgn(clip,clip,system,RGN_OR)!=ERROR &&
+        ExtSelectClipRgn(dc,clip,RGN_AND)!=ERROR)paint(w,s,dc);
+    if(system)DeleteObject(system);if(clip)DeleteObject(clip);
+    RestoreDC(dc,saved);ReleaseDC(w,dc);
+}
+
+/* Press tracking changes one button, not the sizing band or other controls. */
+static void paint_button_state(HWND w,style_window *s,int hit)
+{
+    win16_style_layout l;RECT r;HDC dc,memory;HBITMAP bitmap=NULL,old=NULL;int saved;BOOL ready=FALSE;
+    if(!layout(w,s,&l))return;
+    r=hit==HTSYSMENU?l.system:hit==HTMINBUTTON?l.minimize:l.maximize;
+    if(IsRectEmpty(&r))return;
+    dc=GetWindowDC(w);if(!dc)return;saved=SaveDC(dc);
+    if(saved){if(IntersectClipRect(dc,r.left,r.top,r.right,r.bottom)!=ERROR){
+        memory=CreateCompatibleDC(dc);
+        if(memory)bitmap=CreateCompatibleBitmap(dc,r.right-r.left,r.bottom-r.top);
+        if(bitmap)old=(HBITMAP)SelectObject(memory,bitmap);
+        if(old && old!=(HBITMAP)HGDI_ERROR &&
+            BitBlt(memory,0,0,r.right-r.left,r.bottom-r.top,dc,r.left,r.top,SRCCOPY) &&
+            SetWindowOrgEx(memory,r.left,r.top,NULL)){
+            paint(w,s,memory);
+            if(!s->detached)ready=BitBlt(dc,r.left,r.top,r.right-r.left,r.bottom-r.top,memory,r.left,r.top,SRCCOPY);
+        }
+        if(old && old!=(HBITMAP)HGDI_ERROR)SelectObject(memory,old);
+        if(bitmap)DeleteObject(bitmap);if(memory)DeleteDC(memory);
+        if(!ready && !s->detached)paint(w,s,dc);
+        }
+        RestoreDC(dc,saved);}
+    ReleaseDC(w,dc);
+}
+
 static void leave_bar(HWND w,style_window *s,BOOL restore_focus)
 {
     HWND prior=s->bar_focus;
     s->bar_keyboard=FALSE;s->bar_focus=NULL;s->bar_selected=-1;
     if(restore_focus && prior && IsWindow(prior) && GetFocus()==w)SetFocus(prior);
-    if(!s->detached)paint(w,s,NULL);
+    if(!s->detached)paint_menu_state(w,s);
 }
 
 static void select_bar(HWND w,style_window *s,int direction)
 {
     int count;win16_style_layout l;win16_style_bar bar;POINT origin;
     if(!layout(w,s,&l))return;origin.x=l.menu.left;origin.y=l.menu.top;
-    if(!win16_style_bar_read(GetMenu(w),s->font,s->dpi,origin,l.menu.right-l.menu.left,&bar))return;
+    if(!win16_style_bar_read(GetMenu(w),s->menu_font,s->dpi,origin,l.menu.right-l.menu.left,&bar))return;
     count=(int)bar.count;win16_style_bar_free(&bar);
     if(count<=0)return;
     if(!s->bar_keyboard){s->bar_focus=GetFocus();s->bar_keyboard=TRUE;
@@ -361,7 +441,7 @@ static void select_bar(HWND w,style_window *s,int direction)
         else {int next=s->bar_selected+direction;
             s->bar_selected=(next<0 || next>=count)?(system?-2:(next+count)%count):next;}
     }
-    if(!s->detached)paint(w,s,NULL);
+    if(!s->detached)paint_menu_state(w,s);
 }
 
 static int bar_at_screen(HWND w,style_window *s,POINT point)
@@ -372,7 +452,7 @@ static int bar_at_screen(HWND w,style_window *s,POINT point)
     if(PtInRect(&l.system,point))return -2;
     if(!PtInRect(&l.menu,point))return -3;
     origin.x=l.menu.left;origin.y=l.menu.top;
-    if(!win16_style_bar_read(GetMenu(w),s->font,s->dpi,origin,l.menu.right-l.menu.left,&bar))return -3;
+    if(!win16_style_bar_read(GetMenu(w),s->menu_font,s->dpi,origin,l.menu.right-l.menu.left,&bar))return -3;
     hit=win16_style_menu_hit(bar.rects,bar.count,point);win16_style_bar_free(&bar);
     return hit<0?-3:hit;
 }
@@ -392,7 +472,7 @@ static int open_bar_once(HWND w,style_window *s,int index,int *hover)
     SendMessageW(w,WM_INITMENU,(WPARAM)GetMenu(w),0);
     if(s->detached || !layout(w,s,&l) || IsRectEmpty(&l.menu))return 0;
     origin.x=l.menu.left;origin.y=l.menu.top;
-    if(!win16_style_bar_read(GetMenu(w),s->font,s->dpi,origin,l.menu.right-l.menu.left,&bar))return 0;
+    if(!win16_style_bar_read(GetMenu(w),s->menu_font,s->dpi,origin,l.menu.right-l.menu.left,&bar))return 0;
     if(index<0 || (UINT)index>=bar.count || (bar.items[index].state&MFS_DISABLED)){
         win16_style_bar_free(&bar);return 0;}
     popup=bar.items[index].popup;command=bar.items[index].id;
@@ -405,18 +485,18 @@ static int open_bar_once(HWND w,style_window *s,int index,int *hover)
         if(merged_system){frame.button=bar.rects[index];OffsetRect(&frame.button,outer.left,outer.top);}
         tracking_menu=&frame;hook=SetWindowsHookExW(WH_GETMESSAGE,menu_filter,NULL,GetCurrentThreadId());
     }
-    win16_style_bar_free(&bar);s->bar_selected=index;paint(w,s,NULL);
+    win16_style_bar_free(&bar);s->bar_selected=index;paint_menu_state(w,s);
     if(s->bar_keyboard){
         if(popup)command=(UINT)TrackPopupMenuEx(popup,TPM_LEFTALIGN|TPM_TOPALIGN|TPM_RETURNCMD,
             anchor.x,anchor.y,w,NULL);
         if(!s->detached){
             if(command){leave_bar(w,s,TRUE);if(!s->detached)PostMessageW(w,WM_COMMAND,command,0);}
-            else paint(w,s,NULL); /* Escape returns to the selected bar. */
+            else paint_menu_state(w,s); /* Escape returns to the selected bar. */
         }
     }else{
         if(popup)TrackPopupMenuEx(popup,TPM_LEFTALIGN|TPM_TOPALIGN,anchor.x,anchor.y,w,NULL);
         else PostMessageW(w,WM_COMMAND,command,0);
-        if(!s->detached){s->bar_selected=-1;paint(w,s,NULL);}
+        if(!s->detached){s->bar_selected=-1;paint_menu_state(w,s);}
     }
     if(popup){
         if(hook)UnhookWindowsHookEx(hook);tracking_menu=previous;
@@ -436,7 +516,7 @@ static void open_bar(HWND w,style_window *s,int index)
         if(s->detached || (!direction && hover==-3))break;
         if(GetMenu(w) && layout(w,s,&l)){
             origin.x=l.menu.left;origin.y=l.menu.top;
-            if(win16_style_bar_read(GetMenu(w),s->font,s->dpi,origin,l.menu.right-l.menu.left,&bar)){
+            if(win16_style_bar_read(GetMenu(w),s->menu_font,s->dpi,origin,l.menu.right-l.menu.left,&bar)){
                 count=(int)bar.count;win16_style_bar_free(&bar);}}
         if(direction && (index==-2 || (index==0 && direction<0) || (index==count-1 && direction>0))){
             MDINEXTMENU next={0};style_window *target;int next_index;
@@ -450,7 +530,7 @@ static void open_bar(HWND w,style_window *s,int index)
                 else if(next.hmenuNext==GetMenu(next.hwndNext)){
                     if(!layout(next.hwndNext,target,&l))break;
                     origin.x=l.menu.left;origin.y=l.menu.top;
-                    if(!win16_style_bar_read(next.hmenuNext,target->font,target->dpi,origin,l.menu.right-l.menu.left,&bar))break;
+                    if(!win16_style_bar_read(next.hmenuNext,target->menu_font,target->dpi,origin,l.menu.right-l.menu.left,&bar))break;
                     next_index=direction>0?0:(int)bar.count-1;win16_style_bar_free(&bar);
                     if(next_index<0)break;
                 }else break;
@@ -462,18 +542,18 @@ static void open_bar(HWND w,style_window *s,int index)
                 SetFocus(w);
                 if(s->detached)break;
                 s->bar_focus=original_focus;s->bar_keyboard=TRUE;s->bar_selected=index;
-                paint(w,s,NULL);continue;
+                paint_menu_state(w,s);continue;
             }
         }
         /* Switch selection, but never execute a direct bar command merely
          * because an arrow reached it. Enter still owns command invocation. */
         if(!s->bar_keyboard)select_bar(w,s,0);
-        if(hover!=-3){s->bar_selected=hover;paint(w,s,NULL);}
+        if(hover!=-3){s->bar_selected=hover;paint_menu_state(w,s);}
         else {s->bar_selected=index;select_bar(w,s,direction);}
         index=s->bar_selected;
         if(index==-2)continue;
         if(!layout(w,s,&l))break;origin.x=l.menu.left;origin.y=l.menu.top;
-        if(!win16_style_bar_read(GetMenu(w),s->font,s->dpi,origin,l.menu.right-l.menu.left,&bar))break;
+        if(!win16_style_bar_read(GetMenu(w),s->menu_font,s->dpi,origin,l.menu.right-l.menu.left,&bar))break;
         popup=index>=0 && (UINT)index<bar.count && bar.items[index].popup!=NULL;
         win16_style_bar_free(&bar);if(!popup)break;
     }
@@ -484,11 +564,10 @@ static BOOL refresh_font(HWND w,style_window *s)
 {
     HFONT font;
     s->dpi=GetDpiForWindow(w);if(!s->dpi)s->dpi=96;
-    font=CreateFontW(16,0,0,0,FW_BOLD,FALSE,FALSE,FALSE,
-        DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,NONANTIALIASED_QUALITY,
-        DEFAULT_PITCH,L"System");
-    if(font){if(s->font)DeleteObject(s->font);s->font=font;}
-    return font!=NULL;
+    font=win16_style_font_acquire();
+    if(font){if(s->title_font)win16_style_font_release(s->title_font);
+        s->title_font=font;s->menu_font=font;}
+    return font!=NULL && s->menu_font!=NULL;
 }
 
 static void frame_changed(HWND w)
@@ -524,7 +603,7 @@ static void dispose(style_window *s)
 {
     while(s->menus)end_menu_scope(s);
     win16_style_menu_restore(&s->menu_items);
-    if(s->font)DeleteObject(s->font);
+    if(s->title_font)win16_style_font_release(s->title_font);
     free(s);
 }
 
@@ -537,8 +616,7 @@ BOOL win16_style_install(HWND w,const win16_style_palette *p)
     if(!local_window(w))return FALSE;
     if(state(w)){SetLastError(ERROR_ALREADY_EXISTS);return FALSE;}
     style=(DWORD)GetWindowLongPtr(w,GWL_STYLE);ex=(DWORD)GetWindowLongPtr(w,GWL_EXSTYLE);
-    if((style&(WS_HSCROLL|WS_VSCROLL)) ||
-        (ex&(WS_EX_CLIENTEDGE|WS_EX_TOOLWINDOW|WS_EX_LAYERED)) ||
+    if((ex&(WS_EX_CLIENTEDGE|WS_EX_TOOLWINDOW|WS_EX_LAYERED)) ||
         IsIconic(w) || IsZoomed(w)){
         SetLastError(ERROR_NOT_SUPPORTED);return FALSE;
     }
@@ -555,6 +633,10 @@ BOOL win16_style_install(HWND w,const win16_style_palette *p)
     s->policy_saved=!(style&WS_CHILD) && SUCCEEDED(DwmGetWindowAttribute(w,DWMWA_NCRENDERING_POLICY,
         &s->old_policy,sizeof(s->old_policy)));
     if(!SetWindowSubclass(w,style_proc,STYLE_ID,(DWORD_PTR)s)){dispose(s);return FALSE;}
+    /* Bars may be added by range/visibility changes after attachment. Keep
+     * one frame tracker ready instead of conditionally installing it later. */
+    if(!win16_style_frame_scrollbars_install(w,&s->palette)){
+        RemoveWindowSubclass(w,style_proc,STYLE_ID);dispose(s);return FALSE;}
     if(!(style&WS_CHILD))DwmSetWindowAttribute(w,DWMWA_NCRENDERING_POLICY,&policy,sizeof(policy));
     ++s->calls;
     frame_changed(w);
@@ -573,13 +655,14 @@ BOOL win16_style_remove(HWND w)
     if(!RemoveWindowSubclass(w,style_proc,STYLE_ID))return FALSE;
     ++s->calls;
     s->detached=TRUE;
+    win16_style_frame_scrollbars_remove(w);
     while(s->menus)end_menu_scope(s);
     win16_style_menu_restore(&s->menu_items);
     if(s->bar_keyboard)leave_bar(w,s,TRUE);
     if(s->pressed && GetCapture()==w)ReleaseCapture();
-    if(s->policy_saved)DwmSetWindowAttribute(w,DWMWA_NCRENDERING_POLICY,
+    if(IsWindow(w) && s->policy_saved)DwmSetWindowAttribute(w,DWMWA_NCRENDERING_POLICY,
         &s->old_policy,sizeof(s->old_policy));
-    frame_changed(w);if(normal)restore_client(w,&client);
+    if(IsWindow(w)){frame_changed(w);if(normal && IsWindow(w))restore_client(w,&client);}
     if(!--s->calls)dispose(s);
     return TRUE;
 }
@@ -590,7 +673,7 @@ BOOL win16_style_set_palette(HWND w,const win16_style_palette *p)
     if(!p){SetLastError(ERROR_INVALID_PARAMETER);return FALSE;}
     if(!local_window(w))return FALSE;
     s=state(w);if(!s){SetLastError(ERROR_NOT_FOUND);return FALSE;}
-    ++s->calls;s->palette=*p;paint(w,s,NULL);
+    ++s->calls;s->palette=*p;win16_style_frame_scrollbars_palette(w,p);paint(w,s,NULL);
     if(!--s->calls && s->detached)dispose(s);
     return TRUE;
 }
@@ -608,11 +691,11 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
        msg!=WM_NCDESTROY)goto forward;
     switch(msg){
     case WM_MEASUREITEM:
-        if(win16_style_menu_size(s->menu_items,(MEASUREITEMSTRUCT *)lp,s->font,s->dpi)){result=TRUE;break;}
+        if(win16_style_menu_size(s->menu_items,(MEASUREITEMSTRUCT *)lp,s->menu_font,s->dpi)){result=TRUE;break;}
         goto forward;
     case WM_DRAWITEM:
         {win16_style_palette palette;colors(s,&palette);
-        if(win16_style_menu_draw(s->menu_items,(DRAWITEMSTRUCT *)lp,s->font,s->dpi,&palette)){result=TRUE;break;}}
+        if(win16_style_menu_draw(s->menu_items,(DRAWITEMSTRUCT *)lp,s->menu_font,s->dpi,&palette)){result=TRUE;break;}}
         goto forward;
     case WM_MENUCHAR:
         /* Application-owned items retain their existing mnemonic handler. */
@@ -633,6 +716,11 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
     case WM_NCCALCSIZE:
         r=wp?((NCCALCSIZE_PARAMS *)lp)->rgrc[0]:*(RECT *)lp;
         if(measure_window(w,s,&r,&l)){
+            /* USER maintains scrollbar-presence state during native NC
+             * calculation. Let that owner update, then supply our client
+             * rectangle; no native nonclient drawing is requested here. */
+            DefSubclassProc(w,msg,wp,lp);
+            if(s->detached)break;
             OffsetRect(&l.client,r.left,r.top);
             if(wp)((NCCALCSIZE_PARAMS *)lp)->rgrc[0]=l.client;else *(RECT *)lp=l.client;
             break;
@@ -658,14 +746,18 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
     case STYLE_NCUAHDRAWFRAME:
         if(IsIconic(w))goto forward;
         break; /* Drawing notifications do not contain mouse coordinates. */
+    case STYLE_UAHDRAWMENU:
+    case STYLE_UAHDRAWMENUITEM:
+        if(IsIconic(w) || !GetMenu(w))goto forward;
+        break; /* Native hover must not paint a second, host-font menu item. */
     case WM_NCMOUSEMOVE:
         if(s->bar_keyboard && !tracking_menu){
             POINT cursor={GET_X_LPARAM(lp),GET_Y_LPARAM(lp)};int hit=bar_at_screen(w,s,cursor);
             if(hit!=-3 && hit!=s->bar_selected){
                 win16_style_bar bar;POINT origin;BOOL popup=hit==-2;
-                s->bar_selected=hit;paint(w,s,NULL);
+                s->bar_selected=hit;paint_menu_state(w,s);
                 if(hit>=0 && layout(w,s,&l)){origin.x=l.menu.left;origin.y=l.menu.top;
-                    if(win16_style_bar_read(GetMenu(w),s->font,s->dpi,origin,l.menu.right-l.menu.left,&bar)){
+                    if(win16_style_bar_read(GetMenu(w),s->menu_font,s->dpi,origin,l.menu.right-l.menu.left,&bar)){
                         popup=(UINT)hit<bar.count && bar.items[hit].popup!=NULL;
                         win16_style_bar_free(&bar);}}
                 if(popup)open_bar(w,s,hit);
@@ -691,6 +783,12 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
         result=TRUE;paint(w,s,NULL);break;
     case WM_NCHITTEST:
         if(layout(w,s,&l)){
+            SCROLLBARINFO scroll={sizeof(scroll)};POINT screen={GET_X_LPARAM(lp),GET_Y_LPARAM(lp)};
+            DWORD flags=(DWORD)GetWindowLongPtrW(w,GWL_STYLE);
+            if((flags&WS_HSCROLL) && GetScrollBarInfo(w,OBJID_HSCROLL,&scroll) && PtInRect(&scroll.rcScrollBar,screen)){
+                result=HTHSCROLL;break;}
+            if((flags&WS_VSCROLL) && GetScrollBarInfo(w,OBJID_VSCROLL,&scroll) && PtInRect(&scroll.rcScrollBar,screen)){
+                result=HTVSCROLL;break;}
             GetWindowRect(w,&r);point.x=GET_X_LPARAM(lp)-r.left;point.y=GET_Y_LPARAM(lp)-r.top;
             result=PtInRect(&l.menu,point)?HTMENU:win16_style_hit(&l,point);break;
         }
@@ -703,7 +801,7 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
         if(!s->detached && !win16_style_menu_prepare((HMENU)wp,&s->menu_items,s->menu_depth))
             win16_style_menu_restore_popup((HMENU)wp,&s->menu_items);
         if(!s->detached && HIWORD(lp)){
-            s->system_menu=TRUE;paint(w,s,NULL);
+            s->system_menu=TRUE;paint_button_state(w,s,HTSYSMENU);
         }
         break;
     case WM_SYSCOMMAND:
@@ -713,7 +811,7 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
         }
         if((wp&0xfff0)==SC_KEYMENU && lp && lp!=L' ' && GetMenu(w) && layout(w,s,&l)){
             win16_style_bar bar;POINT origin={l.menu.left,l.menu.top};int index=-1;
-            if(win16_style_bar_read(GetMenu(w),s->font,s->dpi,origin,l.menu.right-l.menu.left,&bar)){
+            if(win16_style_bar_read(GetMenu(w),s->menu_font,s->dpi,origin,l.menu.right-l.menu.left,&bar)){
                 UINT i;WCHAR key=(WCHAR)lp;CharUpperBuffW(&key,1);
                 for(i=0;i<bar.count && index<0;++i){const WCHAR *text=bar.items[i].text;
                     if(bar.items[i].state&MFS_DISABLED)continue;
@@ -767,13 +865,13 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
         if(s->menus && s->menus->depth==s->menu_depth)end_menu_scope(s);
         if(s->menu_depth)--s->menu_depth;
         result=DefSubclassProc(w,msg,wp,lp);
-        if(!s->detached && s->system_menu){s->system_menu=FALSE;paint(w,s,NULL);}
+        if(!s->detached && s->system_menu){s->system_menu=FALSE;paint_button_state(w,s,HTSYSMENU);}
         break;
     case WM_NCLBUTTONDBLCLK:
         if(wp==HTMENU && layout(w,s,&l)){
             win16_style_bar bar;POINT origin={l.menu.left,l.menu.top};int item;BOOL close=FALSE;
             GetWindowRect(w,&r);point.x=GET_X_LPARAM(lp)-r.left;point.y=GET_Y_LPARAM(lp)-r.top;
-            if(win16_style_bar_read(GetMenu(w),s->font,s->dpi,origin,l.menu.right-l.menu.left,&bar)){
+            if(win16_style_bar_read(GetMenu(w),s->menu_font,s->dpi,origin,l.menu.right-l.menu.left,&bar)){
                 item=win16_style_menu_hit(bar.rects,bar.count,point);
                 if(item>=0 && bar.items[item].control==HBMMENU_SYSTEM && bar.items[item].popup){
                     UINT state=GetMenuState(bar.items[item].popup,SC_CLOSE,MF_BYCOMMAND);
@@ -791,7 +889,7 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
         if(wp==HTMENU && layout(w,s,&l)){
             win16_style_bar bar;POINT origin={l.menu.left,l.menu.top};int item;
             GetWindowRect(w,&r);point.x=GET_X_LPARAM(lp)-r.left;point.y=GET_Y_LPARAM(lp)-r.top;
-            if(win16_style_bar_read(GetMenu(w),s->font,s->dpi,origin,l.menu.right-l.menu.left,&bar)){
+            if(win16_style_bar_read(GetMenu(w),s->menu_font,s->dpi,origin,l.menu.right-l.menu.left,&bar)){
                 item=win16_style_menu_hit(bar.rects,bar.count,point);
                 win16_style_bar_free(&bar);
                 if(item>=0)open_bar(w,s,item);
@@ -806,20 +904,20 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
             if(GetMenuBarInfo(w,OBJID_SYSMENU,0,&menu) && IsRectEmpty(&menu.rcBar)){
                 /* Do not enter a keyboard menu with the mouse still down:
                  * its subsequent release would immediately dismiss it. */
-                s->pressed=HTSYSMENU;s->hot=TRUE;SetCapture(w);paint(w,s,NULL);break;
+                s->pressed=HTSYSMENU;s->hot=TRUE;SetCapture(w);paint_button_state(w,s,HTSYSMENU);break;
             }
         }
         /* Native system-menu tracking owns the second click, cancellation
          * and disabled SC_CLOSE semantics. TrackPopupMenu is not equivalent
          * to the non-client menu loop. Double clicks also go to the owner. */
         if(wp==HTMINBUTTON || wp==HTMAXBUTTON){
-            s->pressed=(int)wp;s->hot=TRUE;SetCapture(w);paint(w,s,NULL);break;
+            s->pressed=(int)wp;s->hot=TRUE;SetCapture(w);paint_button_state(w,s,(int)wp);break;
         }
         goto forward;
     case WM_MOUSEMOVE:
     case WM_LBUTTONUP:
         if(s->pressed && layout(w,s,&l)){
-            int pressed=s->pressed;
+            int pressed=s->pressed;BOOL was_hot=s->hot;
             point.x=GET_X_LPARAM(lp);point.y=GET_Y_LPARAM(lp);ClientToScreen(w,&point);
             GetWindowRect(w,&r);point.x-=r.left;point.y-=r.top;
             s->hot=win16_style_hit(&l,point)==pressed;
@@ -829,21 +927,31 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
                     pressed==HTMINBUTTON?SC_MINIMIZE:(IsZoomed(w)?SC_RESTORE:SC_MAXIMIZE),
                     pressed==HTSYSMENU?L' ':0);
             }
-            paint(w,s,NULL);break;
+            if(!s->detached && (msg==WM_LBUTTONUP || was_hot!=s->hot))paint_button_state(w,s,pressed);break;
         }
         goto forward;
     case WM_CANCELMODE:
     case WM_CAPTURECHANGED:
         if(msg==WM_CANCELMODE && s->bar_keyboard)leave_bar(w,s,TRUE);
-        s->pressed=0;s->hot=FALSE;
+        if(!s->pressed)goto forward;
+        {int pressed=s->pressed;s->pressed=0;s->hot=FALSE;
         if(msg==WM_CANCELMODE && GetCapture()==w)ReleaseCapture();
-        paint(w,s,NULL);goto forward;
+        if(!s->detached)paint_button_state(w,s,pressed);}goto forward;
     case WM_PRINT:
-        result=DefSubclassProc(w,msg,wp,lp&~PRF_NONCLIENT);
-        if(!s->detached && (lp&PRF_NONCLIENT))paint(w,s,(HDC)wp);break;
+        if((lp&PRF_CHECKVISIBLE) && !IsWindowVisible(w))break;
+        if(lp&PRF_NONCLIENT)paint(w,s,(HDC)wp);
+        if(!s->detached)print_client_and_children(w,s,(HDC)wp,lp);break;
     case WM_SETTEXT:
         result=DefSubclassProc(w,msg,wp,lp);
         if(!s->detached)paint(w,s,NULL);break;
+    case WM_HSCROLL:
+    case WM_VSCROLL:
+        result=DefSubclassProc(w,msg,wp,lp);
+        /* A nonzero lParam identifies a child SCROLLBAR notification, not a
+         * change to this window's nonclient bars. */
+        /* Styled frame scroll updates repaint the affected bar via the API
+         * binding; child notifications never invalidate unrelated bars. */
+        break;
     case WM_DPICHANGED:
         result=DefSubclassProc(w,msg,wp,lp);
         if(!s->detached){refresh_font(w,s);frame_changed(w);}break;

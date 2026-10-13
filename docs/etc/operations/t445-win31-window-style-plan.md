@@ -2,6 +2,16 @@
 
 ## Authority and stage boundary
 
+S4 frame-scroll refinement: the isolated demo may explicitly call the
+component's same-thread GetScrollInfo/SetScrollInfo bindings to exercise
+full-width custom tracking. Subclassing cannot replace USER's non-message
+SB_HORZ/SB_VERT query path. These helpers retain native range/page/position
+ownership and prevent native redraw during retro updates. This is a local
+library API, not admission of process/import hooks or product integration.
+Automatic binding and the other scrollbar API entry points must be audited
+before claiming transparent arbitrary-application support in later stages.
+See the [scrollbar audit](../evidence/m0-t445-s4-scrollbar-fidelity-audit.md).
+
 S1 closed through its [installation design](../evidence/m0-t445-s1-installation-design.md).
 The owner inserts accepted uncommitted palette repair delivery as S2.
 The previously admitted standalone experiment moves to S3; integration moves
@@ -15,7 +25,7 @@ native-menu animation fresh-session control; it is not a passing capability.
 | S1 | HWND ownership, original Win3.1 references, task/launch policy owners and installation design; preserve explicit remaining implementation proofs. |
 | S2 | Audit, commit/push and close the owner-accepted NTVWM palette geometry repair, tests and published assets. |
 | S3 | Implement experimental src/win16-style and independently launch an authored Win32 GUI test program linked directly to it. Prove basic frame visuals/interaction without any other product component; obtain owner stability acceptance. |
-| S4 | Standalone retro system/ordinary menus, MDI and remaining supported interaction/state coverage in the shared component and demo; no product integration. |
+| S4 | Standalone retro system/ordinary menus, MDI and all admitted standard-control families, with complete examples and interaction/state coverage; no product integration. |
 | S5 | Both CLI options, explicit/inherited policy resolution, end-to-end propagation, per-Win16-task isolation and real-window title marker; build, verify, publish, commit/push for owner acceptance. No automatic activation of experimental retro painting in production. |
 | S6 | Reuse, integrate and harden the tested common frame/menu/MDI, font/palette/DPI and geometry through WOW/Hook paths; do not build a second renderer. |
 | S7  | Integrated visual/interaction and serial product regression, coherent release/publication and final owner acceptance. |
@@ -56,7 +66,245 @@ non-client menu handling, including disabled-close and cancellation tests.
   trial, not merely a successful compile. Owner closed this gate with the
   native-menu fresh-session retest explicitly deferred to S7.
 
+## S4 unified typography requirement
+
+Owner now requires the title, all menus and standard controls to use the same
+font and actual24-pixel size, and explicitly chooses retaining the host System
+bitmap appearance with identical scaling for all three surfaces. This
+supersedes the earlier title-only scaling exception and separate stock menu/
+control font. Do not substitute a scalable Microsoft Sans Serif face, a
+requested24-pixel font that actually realizes another height, or paint-only
+EDIT scaling that leaves caret/selection geometry at the old size.
+
+The binding must preserve native editing, selection, list/combo row metrics
+and restore application font ownership on detach. Adjust the demo layout as
+needed to expose the complete control inventory without clipping. Validate
+actual realized height, identical glyph pixels, font lifetime and native
+interaction before declaring the new typography delivered. No global font
+installation or embedded VGASYS.FON is admitted by this clarification.
+
 ## S4 development checkpoint
+
+### Owner expansion after r052 delivery
+
+r081 reuses the scrollbar painter for LISTBOX/EDIT non-client scrollbars,
+mapping native scrollbar screen rectangles into the borrowed window DC.
+It leaves native client geometry and state intact; track dithering uses one
+monochrome pattern fill instead of per-pixel GDI calls. Both widths pass
+(PID12724, 2026-10-12 15:03:21, exit0). Reviewed x64 gallery6 shows the shared
+arrows/track on scrolling lists and a two-axis multiline edit.
+r082 refreshes non-client presentation after returned scroll/edit input and
+tests list top-index/selection preservation through remove/reinstall. These
+tests do not establish continuously held native mouse-tracking appearance.
+Top-level WS_HSCROLL/WS_VSCROLL frame installation is still explicitly rejected;
+it needs client-layout/hit-test integration, not merely reusing the painter.
+r082 passes both widths and original-arrow verification (PID48080,
+2026-10-12 15:04:58, exit0), retaining27,261 checks and GDI56/56. This is the
+latest standalone candidate; owner mouse-menu, native-frame scrollbars,
+automatic attachment and comprehensive control visual/input gates remain open.
+
+r078-scroll extracts the eight original 17x17 scrollbar arrow resources from
+the pinned VGA.DRV. r079 introduces standalone SCROLLBAR presentation using
+native GetScrollBarInfo geometry/state, authored track/thumb and the original
+arrows. Gallery25 covers horizontal/vertical/disabled controls, native range/
+position, Right-key notification and remove/reinstall preservation. Both widths
+pass (PID42164, 2026-10-12 14:59:08, exit0); all2,312 arrow pixels verify exactly.
+Screenshot review finds the vertical sample extends below the client; r080
+corrects its layout and adds the track's outer black border. Disabled artwork,
+drag feedback, focus/DPI and window non-client scrollbars remain open. The
+native reference sample16 is not converted or claimed as retro support.
+r080 passes both widths and resource verification (PID16324, 2026-10-12
+15:00:44, exit0), retaining27,261 checks and stable GDI56/56. Reviewed gallery7
+shows complete horizontal/vertical controls without the prior clipping.
+Outer-system-menu mouse/font diagnosis remains unproved: code inspection
+finds a common popup-item drawing owner, but the opt-in private-desktop mouse
+probe lacks valid input-state evidence. No speculative menu-route replacement
+is made. Full S4 remains open and uncommitted development work is preserved.
+
+r075 adds editable CBS_DROPDOWN, excluding the native EDIT rectangle from
+combo chrome drawing. Replace/undo and selection survive remove/reinstall.
+Child-list attachment now carries its owning combo state; combo removal does
+not remove an independently reinstalled child. The negative also verifies
+failed combo installation preserves an already-attached child. Both widths
+pass retained regression (PID40816, 2026-10-12 14:52:21, exit0). Reviewed
+gallery6 shows the editable field alongside fixed-selection and disabled forms.
+r076 extends the same child-presentation boundary to CBS_SIMPLE, without a
+dropdown button and without painting over its always-visible list. Full
+S4 control/interaction acceptance remains pending.
+r076 passes both widths (PID25596, 2026-10-12 14:53:48, exit0). Visual review
+finds its internal simple-combo list still has a native sunken edge; r077
+extends border presentation to WS_EX_CLIENTEDGE lists without changing their
+client geometry. The inherited extra inset is white rather than a modern
+sunken shadow; full original-DPI metrics remain a separate visual gate.
+r077 passes both widths (PID43552, 2026-10-12 14:54:59, exit0), with retained
+27,261 checks and stable GDI56/56. Reviewed x86 gallery6 confirms black edges
+on the simple combo list; original COMBO resource verification also passes.
+The latest standalone candidate is r077, not a production release or S4 closure.
+
+r069 adds simple LISTBOX non-client black borders without changing client
+geometry, and verifies both opposite border pixels plus native Down-key
+selection and exactly one LBN_SELCHANGE notification. Both widths pass with
+retained tests (PID47464, 2026-10-12 14:44:18, exit0).
+r070-combo decodes original VGA.DRV COMBO32738, offset24768, length96,
+BITMAPINFOHEADER7x9. Its authored integration keeps native combo selection
+and popup-list ownership; editable/simple combos remain pending. r071's
+expanded gallery reaches sample23 then the old30-second suite deadline;
+the runner terminates its owned fixture. This is a failed run, not a combo
+pass. r072 uses a60-second suite deadline to distinguish suite growth from
+a hang, preserving all assertions and individual menu-loop deadlines.
+r072 completes both widths with 27,261 retained checks and GDI55/55
+(PID22328, 2026-10-12 14:48:03, exit0); original COMBO's63 pixels verify exactly.
+r073 extends the fixture to show the native dropdown, capture its actual
+styled list, send Down and close it. x86 passes, but x64 fails the earlier
+sample1 outer-menu capture deadline, before reaching the combo tests
+(PID25504, 2026-10-12 14:49:23, exit1). This remains failed evidence; r074
+repeats unchanged source/assertions. No physical mouse/menu acceptance is
+inferred from these API/queued-key tests.
+r074 passes both widths including dropdown capture/navigation and retained
+27,261 checks (PID40068, 2026-10-12 14:50:23, exit0). This establishes the
+bounded combo slice, not resolution of the intermittent outer-menu deadline
+or owner's real-mouse font report. Reviewed r072 gallery6 and r073 x86 popup
+show the new closed/open rendering. Full S4 acceptance remains open.
+
+r065 catches an invalid fixture assumption: borderless EDIT background is not
+necessarily white. The negative now compares the same native pixel with and
+without attachment and retains the native margins/selection assertions.
+r066 builds but private-desktop creation fails with access denied, before UI
+verification; it is not a pass. r067 reruns with private-desktop access and
+passes both widths (PID46132, 2026-10-12 14:40:24, exit0).
+
+r068 adds gallery23 and string LISTBOX client painting through native row/text/
+selection queries, without replacing native strings or item data. Single and
+multiple selections, disabled state, removal/state preservation and rejection
+of application owner-draw are exercised. Both widths pass these cases, the
+borderless EDIT comparison and retained 27,261 checks; GDI remains55/55.
+Runner PID41024, start2026-10-12 14:41:59, exit0. Source/build evidence and
+captures are under build/M0-T445/S4/r068. Reviewed gallery6 shows controls21--23;
+list non-client borders remain native grey and are explicitly unfinished.
+Combo/scrollbar presentation, full control lifecycle/input matrix, automatic
+attachment and real outer-system-menu mouse/font diagnosis remain open.
+These are development checkpoints, not S4 closure or product publication.
+
+r063 disproves the r062 non-client-border assumption: native EDIT has removed
+WS_BORDER (recorded styles50010080/50010044), client and outer dimensions are
+equal, and multiline WM_PRINT border pixel is646464 instead of black. Original
+editsl.c SLPaint draws fFlatBorder inside the client; editec.c ECSetEditClip and
+ECInvalidateClient preserve that strip. Read-only source hashes respectively:
+5D730399CE35740C88E7D5F98F1A4C4882802A6E66A830D11B3D8E4BFAD9EB1C and
+13E3AA26649C7B21A49A3F3114A73BC06FDFC6472B782663BB10879CABC0DDB6.
+r064 corrects the owner: explicit win16_style_edit_install receives the original
+creation border bit, and paints the client strip after native client drawing.
+Generic control install refuses EDIT instead of guessing from margins. Five
+EDIT forms now report000000 border pixels in both widths, editing and retained
+regressions pass (PID15368, 2026-10-12 14:34:49, exit0). Full no-border negative,
+selection/caret edge interaction and caller discovery remain further gates.
+
+r062 introduces the bounded EDIT border slice and gallery22 (single/multiline,
+read-only, disabled and password). Native EDIT remains the sole text buffer,
+selection/caret/undo/IME owner; only its ordinary WS_BORDER non-client pixels
+are painted. Client geometry/styles are not changed. Selection replacement,
+undo, read-only WM_CHAR, password flag, line count and removal preservation
+pass both widths with retained regressions (runner PID45064, 2026-10-12
+14:31:46, exit0). Font/palette and scrollbar completion remain open; this is
+not all-EDIT visual acceptance. Source reference editec.c retains parent
+WM_CTLCOLOREDIT ownership; do not silently replace application color policy.
+
+r060/r061 adds push/default/group BUTTON and text/box STATIC trial presentation
+plus gallery21. Original reference classification comes from OpenNT
+client/btnctl.c and statctl.c; later DrawFrameControl pixels are not treated as
+Win3.1 artwork. Authored bevel/group-box painting remains subject to original
+visual comparison; it is not exact-pixel acceptance. Native BN_CLICKED delivery,
+pressed state and reinstall pass in both widths along with prior tests.
+r060 rejects a shadowed fixture variable under /WX; corrected r061 exits0
+(runner PID18976, 2026-10-12 14:29:23). Gallery windows are moved to the monitor
+origin before capture; reviewed gallery21 no longer has the previous right-side
+white clipping. This run observes a 1920x1008 work area, unlike r059's narrow
+desktop, so it does not establish arbitrary-monitor capture correctness.
+Still pending: input/edit/list/combo/scrollbar families, complete control
+layout/state/lifetime coverage, automatic attachment and mouse-menu diagnosis.
+
+r058/r059 first control slice: controls.c attaches only checkbox/radio/three-state
+BUTTON windows on the owning thread, uses the pinned atlas and preserves native
+style/state/input/notifications. Gallery20 adds six examples. r058 caught a
+misplaced gallery paint condition at compile time; corrected r059 builds and
+passes both widths, native auto-checkbox toggling, radio exclusion and
+remove/reinstall style preservation, plus retained 27,261 checks. Runner PID5084
+started 2026-10-12 14:25:54 and exited0. The gallery capture visibly contains
+the new controls but the private-monitor right-side white clipping remains an
+observation limitation, not full-window visual acceptance. Remaining: complete
+control state/lifetime matrix, alignment/DPI/font decisions, other control
+families and automatic descendant attachment. No all-controls completion claim.
+The failed mouse-route test is retained behind the explicit fixture-only
+WIN16_STYLE_MOUSE_DIAGNOSTIC=1 opt-in; default logs say OUTER MOUSE NOT VERIFIED.
+This separates an unsuitable observer from other regressions without waiving
+the owner's reported menu problem or hiding the failed r054/r055 evidence.
+
+r056 decodes original VGA.DRV CHECKBOXES32759 (offset24320, 336 bytes,
+56x39 one-bit pixels). The owner-admitted original-button resource approach
+continues in control_glyphs.h; r057 independently verifies all 2,184 pixels.
+This supplies exact checkbox/radio/mixed artwork rather than modern-theme
+approximations. Control attachment, native state preservation and gallery
+integration are still implementation work, not claimed passed by the atlas.
+OpenNT client/btnctl.c identifies original button style families but uses later
+DrawFrameControl rendering; it is reference-only, not a Win3.1 pixel oracle or
+an admitted private-USER source import.
+
+r054/r055 mouse-entry diagnostics fail before a popup observation for sample1
+on the private desktop; neither is a product pass or proof of a drawing defect.
+r054 posts a synthetic release before NC down; r055 enters SC_MOUSEMENU directly.
+Both lack a real held-button/input-desktop witness. Preserve those failures
+under their build roots. The added strict diagnostic currently fails and must
+be resolved or separated explicitly from product acceptance before delivery;
+do not count the keyboard capture as mouse acceptance. No runtime fix has
+been inferred from these observation failures.
+
+r053 adds real outer-system-menu opening via SC_KEYMENU/space for every styled
+gallery sample carrying WS_SYSMENU, records per-item owner-draw flags, captures
+each popup independently and checks original Close metadata restoration.
+Both widths pass (hidden runner PID40560, 2026-10-12 13:57:20, exit0), retaining
+the previous regressions. Sample1's capture shows retro stippled Restore and
+flat selection; its seven entries are adapted in this keyboard/probe route.
+This narrows the investigation but does not refute the owner's mouse-open
+observation: real system-box mouse entry and actual font realization still
+need comparison. The new controls remain planned, not implemented or passed.
+
+Owner likes the frame result but reports that outer system menus in samples1,
+12 and18 still show modern lettering despite a retro black border. This is an
+open S4 defect, not final visual acceptance. Frame-border and item/text painting
+are independent; inspect the actual outer system-menu route, item adaptation,
+draw dispatch and selected font before choosing a repair. Cover every sample
+with WS_SYSMENU, not only the MDI child or direct TrackPopupMenu controls.
+
+The owner also admits all standard Win3.x control presentation into S4:
+
+| Family | Required example/state coverage |
+| --- | --- |
+| Push buttons | Normal/default, pressed, focus, disabled, keyboard activation |
+| Checkboxes | Unchecked/checked/three-state mixed, automatic toggling, focus/disabled |
+| Radio buttons | Group navigation/exclusion, checked/unchecked, focus/disabled |
+| Labels and boxes | Left/center/right text, mnemonic, group box, frame/filled box |
+| Edit/input | Single/multiline, read-only, disabled, password, selection/caret, keyboard/clipboard |
+| Lists and combos | Selection/focus/disabled, list/dropdown/dropdown-list, popup and scroll behavior |
+| Scrollbars | Horizontal/vertical, arrows/thumb/tracking, disabled/end states |
+
+Keep the same standalone program with dedicated control/state pages. Merely
+showing native controls or turning off modern themes is not Win3.x acceptance.
+Use one component-owned presentation implementation under src/win16-style,
+with native control editing, focus, state transitions and notifications retained.
+Separate fonts/metrics, control painting and attachment/lifetime from the frame
+owner instead of adding all controls to the frame procedure. Test existing and
+dynamically created child controls, remove/reinstall and destruction. Arbitrary
+application-rendered surfaces are not automatically recognizable standard
+controls; preserve their owner rather than pretending to restyle their pixels.
+Product Hook discovery/propagation remains S5/S6, not this expanded S4.
+
+Sequence: prove and repair outer menu/text coverage; audit original control
+resources and font realization; implement standard-control families and gallery
+pages; run x86/x64 behavioral and visual/lifetime regressions; review/commit/push
+and obtain renewed owner acceptance. Original USER/GDI executable imports and
+global theme/font mutation remain prohibited. The source-recovery stopping
+boundary remains the S1 private-NTUSER audit; any new original resource admitted
+to the experiment must retain exact provenance and independent verification.
 
 r052 review repair separates STYLE_NCUAHDRAWCAPTION/FRAME from
 WM_NCMOUSEMOVE: drawing notification parameters are not pointer coordinates
@@ -591,7 +839,290 @@ marker proves enablement only, not delivery of the Win3.1 appearance.
   coherent ten-image publication to assets/release and configured system32,
   hash verification, commit/push and owner acceptance before style implementation.
 
+## S4 combined control surface and coverage audit
+
+Owner additionally requires scrollbars and a combined sample 01, not an
+owner-enumerated list or a series of separate windows as the only review UI.
+The six original standard class families define the inventory; window menus,
+MDI and frame nonclient scrollbars have separate owners. Modern common controls
+are not described as original Win3.x controls.
+
+| Family | Combined sample 01 | Remaining variant/behavior audit |
+| --- | --- | --- |
+| BUTTON | Push/default/disabled, check/unchecked/mixed, radio, group | Manual versus automatic state, disabled/pressed/focus combinations, group keyboard navigation and cancellation |
+| EDIT | Single, read-only, disabled, password, multiline with both bars | Native editing/selection/IME remains native; continuous scrollbar tracking and palette/font refresh |
+| STATIC | Left/center/right, disabled text, rectangle/frame boxes | Icon/bitmap presentation, all rectangle/frame colours and text style variants |
+| LISTBOX | Single/extended selection with vertical bars; multicolumn with horizontal bar | Multicolumn geometry/pixel/scroll tests in r088; tab stops, disabled states and continuous scroll remain; application ownerdraw stays application-owned |
+| COMBOBOX | Dropdown-list, editable dropdown, simple list | Disabled/edit/list focus states, dropdown tracking and application ownerdraw boundary |
+| SCROLLBAR | Horizontal, vertical, disabled horizontal | Disabled vertical, pressed arrows, thumb/page tracking, size box and top-level nonclient bars |
+
+This is a completion checklist, not an assertion that listed variants pass.
+Sample 16 is now a styled outer-scrollbar trial, also included on sample 01.
+Resource-exact arrows and programmatic hit tests do not certify mouse tracking.
+Sample 01 uses the shared scoped creation attachment API. Focused samples
+20--27 remain as detailed tests, not substitutes for the combined UI.
+
+The multicolumn extension retains native rectangle/selection/scroll owners,
+with source identity and reuse-boundary analysis in win16-style/resources.md.
+It changes only the list painter's termination and per-item clipping, removes
+the explicit multicolumn rejection and refreshes after native column-width
+changes. Sample 01 now contains 38 controls; sample 27 proves all 30 item
+rectangles unchanged, second-column selection pixels, no selection spill into
+the next column, native horizontal scroll and attachment removal state. r087
+failed /WX for test-local name shadowing, before execution; r088 corrects names
+and takes the baseline rectangles after populating the whole native list.
+r088 hidden owner PID32280 started 2026-10-12 15:19:03 local and exited zero.
+Both widths pass the new multicolumn tests, 38-control showcase creation,
+27,261 retained checks and GDI baseline/final 56/56. The original eight-arrow
+resource comparison passes; x86 gallery page 7 visually confirms three visible
+columns with clipped long labels and the horizontal scrollbar. This is not
+continuous physical thumb-drag acceptance. Source diff whitespace checks pass.
+
+r089 adds outer-window scrollbar reservation after the menu, shared painting
+with control scrollbars, native hit rectangles and post-command repaint.
+Hidden owner PID36072 started 2026-10-12 15:22:04 local, exited zero; both-width
+retained tests plus rectangle/client-exclusion/hit/line-command/range checks
+pass. Gallery page 4 was visually reviewed. r090 additionally follows the
+original small-client horizontal/vertical reservation distinction and adds
+both outer bars to the larger combined sample 01. This does not yet certify
+continuous physical dragging, style toggles or tiny-window geometry.
+
+r090 hidden PID46236 (2026-10-12 15:23:47 local) and r091 both exit zero.
+r091 adds synthetic NCCALCSIZE cases just below/at/above original scrollbar
+thresholds, actual left-side bar geometry, and remove/reinstall preservation
+of the screen-space client rectangle. Both widths retain 27,261 checks and
+GDI 56/56. r090 full combined capture was visually checked, including outer
+scrollbars and all six control families. Continuous dragging remains open.
+
+Owner reports controls flickering during motion anywhere in the frame and
+requires original VGA/USER fidelity. Do not assume missing double buffering.
+r092 proves group-box interior overpaint but its hidden-window idle counts
+are unsuitable evidence. r093 moves the witness after ShowWindow: 100 idle
+WM_MOUSEMOVE requests yield 100 WM_PAINT calls each on group, push button and
+list; group interior changes sentinel 0x775325 to white 0xffffff. The original
+BUTTON idle/state and group damage contracts are recorded in resources.md.
+The repair removes unconditional motion invalidation, preserves state-change
+button repaint/captured list tracking, and does not fill a group interior.
+r094 is the post-repair both-width gate. No double-buffer layer or system
+setting change is introduced. VGA.DRV resources are not misrepresented as
+owning USER's control state machines; all remaining fidelity gaps stay open.
+r094 hidden PID46636 started 2026-10-12 15:29:26 local and exited zero. Both
+widths now record group/button/list 0/0/0 paints for the same 100 idle moves,
+with group interior preserved at 0x775325. The retained 27,261 checks, expanded
+gallery/state/scroll tests and GDI baseline/final 56/56 pass. The full x86
+showcase capture was visually reviewed and retains its controls. This proves
+the reproduced invalidation/overpaint defects repaired, not physical-screen
+absence of every possible flicker or completion of the original-fidelity audit.
+
+r095-disabled extracts the four original VGA disabled-arrow images; the old
+project recolouring erased the black perimeter and lacked the embossed glyph.
+r096 replaces it with those byte-verified visual resources and checks all
+1,156 original cells per runtime width across disabled horizontal/vertical
+controls. The combined sample now has 39 controls, including disabled vertical
+scrolling; native range/disabled state still owns selection. The extractor's
+contact sheet height now follows resource count, so all eight normal/pressed
+resources are visible rather than clipping the final row. Hidden r096 owner
+PID16844 started 2026-10-12 15:33:51 local and exited zero. Both widths pass the
+1,156 disabled-arrow cell comparisons, idle-move 0/0/0 checks, 27,261 retained
+checks and GDI 56/56. Independent extraction verifies all twelve embedded
+normal/pressed/disabled resources. Gallery page 7 was visually reviewed.
+The resource match does not certify the entire scroll mechanism: host
+page-proportional thumb sizing remains an explicit original-USER audit item,
+as does uninterrupted real mouse tracking.
+
+r097-user18 statically traces the pinned original USER scroll exports and
+thumb calculation. The [scrollbar fidelity audit](../evidence/m0-t445-s4-scrollbar-fidelity-audit.md)
+records initialization-derived thumb length versus the current native
+page-proportional length, exact segment/offset/relocation evidence and the
+required joint paint/input boundary. This is now a demonstrated fidelity gap,
+not an unexplained visual preference. No runtime change is made until drawing
+and native application-visible tracking can be kept coherent. It is not an
+approved exception; S4 remains open.
+
+r083 passed both-width creation-scope tests and the retained suite. r084 built
+the combined page and passed its 37-control creation check, then failed a
+gallery assertion that assumed sample 01 had no menu bar. The test now queries
+the actual menu, as required for all menu-bearing windows; r085 is the fresh
+verification root. r085 passed x86/x64, retained 27,261 checks per width and
+37 combined-page attachment assertions; its full-page print exposed a clipped
+default-button label in the demo layout. r086 increases the showcase button
+height and shortens a clipped checkbox label, then repeats both-width gates.
+Its hidden owner PID42556 started 2026-10-12 15:14:40 local and exited zero;
+both widths pass 27,261 retained checks, 37-control combined-page creation,
+scope tests and GDI baseline/final 56/56. The independent eight-arrow resource
+header comparison also passes. The x86 full-page capture was visually reviewed:
+the default label and disabled checkbox label are no longer clipped. Continuous
+physical mouse behavior and the open coverage rows are not certified by this.
+These are standalone-only edits, no production publication. Full-page captures
+are private-desktop PrintWindow evidence, not physical mouse acceptance.
+
 ## Planning verification
+
+### S4 list and combo scrollbar follow-up
+
+Owner reports combo dropdown flicker and unstable native-looking embedded
+scrollbars. r098 is the unfixed runtime negative: two visible captured lists
+each repaint 100 times for 100 identical mouse moves; both dropdown cases
+produce zero. The visible WindowDC hover comparison produces zero changed
+arrow pixels on this private desktop even before repair, so it does **not**
+reproduce or prove resolution of the owner's native-skin leak.
+
+The subclass now owns list/ComboLBox WM_NCPAINT and WM_PRINT nonclient output
+without first delegating native scrollbar paint. Nonclient hover/leave no
+longer enters the native themed-hover route. Native scrolling, range, selection
+and click/drag tracking are retained. Captured client motion compares native
+top/selection/caret before repainting; it no longer forces unconditional
+full-list repaint. Whole-window printing translates its client origin rather
+than drawing client content over the nonclient border.
+
+r099 hidden owner PID18280, start 2026-10-12 15:45:50 local, exits zero:
+x86/x64 retained 27,261 checks pass, all four stability cases report zero
+repeated-motion paints, and GDI resources return to 56. r100 adds CBS_SIMPLE
+as the fifth stability case and verifies the print-origin correction. Native
+modal tracking intermediate pixels and the physical owner-reported skin leak
+remain explicit acceptance limitations; no timer-based overpainting, global
+theme mutation, original mirror change or production integration is added.
+
+r100 hidden owner PID41864, start 2026-10-12 15:47:42 local, exits zero.
+Both widths pass all five stability cases (zero arrow-pixel changes and zero
+repeated-motion paints), 27,261 retained checks and GDI baseline/final 56/56.
+The twelve original arrow-resource comparisons pass. The x86 full-page
+capture was reviewed with retro embedded scrollbars visible; this is static
+capture evidence, not certification of physical hover or native modal drag.
+The standalone candidate is build/M0-T445/S4/r100/x64/win16-style-demo.exe.
+
+Owner subsequently rejects full interaction acceptance: clicking list scrollbars
+leaves a native skin; wheel scrolling shows native skin until stopping; combo
+dropdown wheel/motion has the same defect. r100 is not a complete repair.
+r101's extended arrow oracle initially read a popup after capture release had
+closed it; r102 then correctly detected that disabling the native popup also
+hides it. These are probe-lifecycle mistakes, not product painting diagnoses.
+r103 tests the combo itself for enable/disable and reopens for visible checks;
+both widths pass (hidden owner PID29108, 2026-10-12 15:52:48 local, exit0).
+
+r104 adds a lower subclass that samples after native WM_MOUSEWHEEL but before
+the style subclass's post-message repaint. It compares the **whole** existing
+WindowDC scrollbar with an offscreen rendering, not just the arrow resource.
+Both-width run exits0 (PID31284, 2026-10-12 15:56:03). At top indices3/6/9,
+intermediate differences are3640/2288/2288 pixels; after the style returns all
+are0. The previous stable-arrow checks therefore miss the demonstrated native
+thumb/track overpaint. Message-return/static captures cannot prove in-progress
+interaction fidelity.
+
+r105 separates foreign palette pixels from mere thumb-position differences:
+native intermediate states have3500/2200/2200 foreign pixels. A **test-only**
+native list WM_SETREDRAW false/true bracket retains style/visibility and moves
+top indices12/15/18 with zero foreign pixels; its remaining327/327/352 geometry
+differences disappear after the style painter returns. OpenNT client/lb1.c
+WM_SETREDRAW dispatches to xxxLBSetRedraw; lboxctl1.c updates scroll state through
+NtUserSetScrollInfo using plb->fRedraw; lboxctl2.c restores/deferred-invalidates.
+This is source-guided mechanism evidence, not permission to change public redraw
+state incorrectly or claim that the host implementation equals NT4.
+
+r105 exceeds the unchanged60-second fixture deadline due to synchronous
+per-pixel WindowDC reads and is not a suite pass (PID42860, start15:58:51,
+exit1). r106 replaces whole-bar GetPixel loops with one BitBlt of the existing
+surface into a DIB plus memory comparison, preserving the intermediate-state
+oracle, exact pixel scope and timeout. Runtime library remains the r100 code;
+the redraw bracket exists only in the diagnostic test. Before adoption verify
+application WM_SETREDRAW state, nested callbacks/removal, dropdown behavior,
+native click/hold/drag/cancel and both axes. Owner's in-progress skin requirement
+remains open; do not replace it with a final-frame-only acceptance condition.
+
+r106 completes both widths: hidden owner PID40476, start2026-10-12 16:01:21
+local, exit0; retained27,261 checks and GDI56/56 pass. The DIB-based oracle
+reproduces the same foreign-pixel counts and test-only redraw-bracket result.
+Documentation governance passes (PID39572, start16:02:49, exit0) and diff check
+passes. This is diagnostic/source-audit progress, not a new owner repair build
+or S4 closure. No new physical acceptance is claimed.
+
+r107--r110 attempted to move the redraw bracket into controls.c with nested
+depth, caller WM_SETREDRAW state and removal restoration. All fail the first
+native-intermediate pixel assertion on x86; none is published. The lower
+observer sees the false redraw message, yet the following wheel still produces
+3500 foreign pixels. r109 uses a fresh SendMessage dispatch rather than
+DefSubclassProc for that control message; it fails identically. r110 samples
+after redraw-off too: zero foreign pixels then3500 after the wheel. Thus the
+candidate cannot be retained as a working rendering fix. Its source additions
+are removed, restoring controls.c exactly to the r100 SHA256
+E8AB811D360F9834B001E3BCA92C5A382FA4077476F0A3ADEE08818464F45585.
+
+r111 preserves three distinct sample points inside the test-only lower
+subclass: after native processing but before redraw restoration, after redraw
+restoration and after the outer style returns. Contrary to the intermediate
+hypothesis that restore alone masked the result, the lower test bracket already
+has zero foreign pixels **before** restoration (geometry-only differences327/
+327/352). The equivalent higher style-layer candidate does not. Dispatch-layer
+or reentrant behavior therefore needs isolation before adopting the mechanism;
+do not characterize either mechanism as a verified runtime fix. Added native
+ComboLBox observations cover all three combo forms; the unbracketed dropdown
+case at top3 has3000 foreign pixels and later1700, while its final styled frame
+matches. Callback-disable/removal/destruction candidate checks were not reached
+and are not passing coverage. The known-defect probe explicitly labels its
+intermediate findings OPEN SCROLL DEFECT; retained-suite passes do not close it.
+
+r111 reaches the x86 diagnostic observations but exceeds the fixture deadline;
+it is not a pass. r112 replaces remaining live-arrow GetPixel loops with one
+WindowDC-to-DIB copy and the same in-memory pixel comparisons, retaining every
+sample and the60-second deadline. Both widths and retained27,261 checks pass,
+GDI56/56 (PID40832, start2026-10-12 16:16:24 local, exit0).
+
+r113 corrects another confounder: the earlier lower bracket began only after
+three unbracketed scrolls. Two fresh identical lists now start separately in
+each mode. Both start pos/page/max=0/7/31; both first scrolls end3/7/31 with
+3500 foreign pixels. Only the subsequent bracketed scrolls have zero foreign
+pixels (353/327 geometry-only differences). Thus the earlier placement/reentry
+hypothesis is not supported by a matched initial-state comparison; isolate the
+first-scroll initialization/drawing path next, not an artificial warm-up scroll.
+The candidate failure cannot be blamed on the higher subclass layer alone.
+r113's x86 diagnostic cases complete, but a later existing sample01 outer-menu
+capture hits its1-second menu deadline (line1226). Overall exit1; x64 was not
+reached (PID39768, start16:18:35). Do not count this as full regression success
+or silently enlarge the deadline. Runtime controls.c remains the exact r100
+baseline; ongoing changes are test/evidence only and no repaired owner binary
+is published from these failed candidates.
+
+r116 extends the test-only combined theme/redraw mode to all three combo forms:
+three wheel messages and four row-motion messages per newly created list.
+The combined mode asserts zero foreign scrollbar pixels before redraw restore;
+the default-mode control still demonstrates the leak. Both widths complete
+the retained suite, exit0 (PID25556, start2026-10-12 16:28:30 local). The source
+was amended with the next fingerprint probe before the runner's final input
+manifest, so that manifest alone does not identify r116's compiled gallery.
+r117 rebuilds the fingerprint amendment as a separate immutable run. It adds
+a 32-bit whole-scrollbar pixel fingerprint before and after native processing;
+this is stronger than palette-only detection, but not a formal collision-free
+pixel identity proof and not a held-input tracking test.
+r117 completes both widths with zero combined-mode fingerprint changes,
+27,261 retained checks per width and GDI56/56, exit0 (PID27688,
+start2026-10-12 16:30:44 local). Runtime controls.c remains at the r100 hash;
+this evidence is not a published scrollbar repair or S4 closure.
+
+The theme control is still diagnostic, not runtime code. The public
+[SetWindowTheme contract](https://learn.microsoft.com/en-us/windows/win32/api/uxtheme/nf-uxtheme-setwindowtheme)
+retains per-window associations and removes them for NULL/NULL; resetting to
+NULL does not establish restoration of an application's prior explicit theme
+association. Runtime adoption must resolve that ownership/restoration boundary,
+callback lifetime, and native modal arrow/thumb tracking rather than claiming
+the successful wheel/motion probe closes the scrollbar work.
+
+r114 builds the x86 diagnostic but cannot create its private desktop in the
+restricted execution token (error5); it is not a rendering result. r115 repeats
+the owned background fixture with private-desktop permission. Its four fresh
+list modes isolate theme and redraw effects: default first wheel3500 foreign
+pixels; redraw bracket alone first wheel3500; per-window empty theme alone1353
+on each of three wheels; empty theme plus redraw bracket zero on all three.
+The combined mode still has328/353/327 geometry-only mismatches before the outer
+paint, and final frames match. This supports a theme-dependent first-scroll
+draw path, not a complete production fix. The per-window theme override exists
+only in newly created diagnostic controls which are destroyed afterward; no
+global theme or runtime component is changed. Combo, held-arrow/thumb tracking,
+theme restoration and callback lifetime remain required before adoption.
+The fixture now explicitly closes diagnostic combo dropdowns before destruction.
+r115 completes both x86/x64 retained suites (27,261 checks each, GDI56/56),
+PID48460 start2026-10-12 16:25:46 local, exit0. Documentation governance and
+git diff --check pass. These passes explicitly coexist with the logged native
+intermediate scrollbar defect; no repaired owner-facing binary is published.
 
 This is a documentation-only replanning delivery. Governance, relative-link
 and diff checks are retained under build/M0-T445/S1/r003. The subsequent

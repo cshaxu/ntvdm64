@@ -94,24 +94,26 @@ int wmain(int argc,WCHAR **argv)
         printf("PASS menu bar layout: wrap, break, right alignment, clipping, hit boundaries and overflow\n");
     }
     w=CreateWindowW(wc.lpszClassName,L"DC preservation",WS_OVERLAPPEDWINDOW,0,0,320,200,NULL,NULL,wc.hInstance,NULL);
-    CHECK(w);s.dpi=GetDpiForWindow(w);win16_style_default_palette(&s.palette);
+    CHECK(w);CHECK(refresh_font(w,&s));win16_style_default_palette(&s.palette);
     dc=CreateCompatibleDC(NULL);CHECK(dc);
     bi.bmiHeader.biSize=sizeof(BITMAPINFOHEADER);bi.bmiHeader.biWidth=320;bi.bmiHeader.biHeight=-200;
     bi.bmiHeader.biPlanes=1;bi.bmiHeader.biBitCount=32;
     bm=CreateDIBSection(dc,&bi,DIB_RGB_COLORS,(void **)&pixels,NULL,0);CHECK(bm);
     old=(HBITMAP)SelectObject(dc,bm);
-    for(mode=1;mode<=3;++mode){
+    /* Direct shared-font title drawing removed the second SaveDC/stretch
+     * scope. Cover failure and success at the one remaining real boundary. */
+    for(mode=1;mode<=2;++mode){
         GdiFlush();for(i=0;i<320*200;++i)pixels[i]=0x00123456;
         SelectClipRgn(dc,NULL);IntersectClipRect(dc,2,2,318,198);
         SetStretchBltMode(dc,HALFTONE);SetTextColor(dc,RGB(7,8,9));
         CHECK(GetClipBox(dc,&before)!=ERROR);
-        save_calls=0;fail_save=mode<3?mode:0;
+        save_calls=0;fail_save=mode==1?1:0;
         paint(w,&s,dc);GdiFlush();
         CHECK(GetClipBox(dc,&after)!=ERROR && EqualRect(&before,&after));
         CHECK(GetStretchBltMode(dc)==HALFTONE && GetTextColor(dc)==RGB(7,8,9));
         CHECK(GetCurrentObject(dc,OBJ_BITMAP)==bm);
         if(mode==1){CHECK(save_calls==1);for(i=0;i<320*200;++i)CHECK(pixels[i]==0x00123456);}
-        else CHECK(save_calls==2);
+        else CHECK(save_calls==1);
         printf("PASS SaveDC case=%d preserved borrowed state\n",mode);
     }
     {
@@ -208,5 +210,6 @@ int wmain(int argc,WCHAR **argv)
             printf("PASS menu callback lifetime message=%x action=%d\n",messages[k],action);
         }}
     SelectObject(dc,old);DeleteObject(bm);DeleteDC(dc);DestroyWindow(w);
+    win16_style_font_release(s.title_font);
     return 0;
 }

@@ -2,7 +2,11 @@ param(
  [Parameter(Mandatory)][string]$Driver,
  [Parameter(Mandatory)][string]$OutputRoot,
  [string]$VerifyHeader,
- [switch]$MenuGlyphs
+ [switch]$MenuGlyphs,
+ [switch]$ControlGlyphs,
+ [switch]$ComboGlyphs,
+ [switch]$ScrollGlyphs,
+ [switch]$DisabledScrollGlyphs
 )
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
@@ -21,7 +25,15 @@ try {
  $p=$ne+(U16 ($ne+36));$shift=U16 $p;$p+=2
  if($shift -gt 16){throw 'Unsupported resource alignment'}
  $names=@{32754='CLOSE';32749='REDUCE';32748='ZOOM';32747='RESTORE';32746='REDUCED';32745='ZOOMD';32744='RESTORED'}
+ if(([int]$MenuGlyphs.IsPresent+[int]$ControlGlyphs.IsPresent+[int]$ComboGlyphs.IsPresent+[int]$ScrollGlyphs.IsPresent+[int]$DisabledScrollGlyphs.IsPresent) -gt 1){throw 'Select one resource family'}
  if($MenuGlyphs){$names=@{32760='CHECK';32739='MNARROW'}}
+ if($ControlGlyphs){
+  if($MenuGlyphs){throw 'Select one resource family'}
+  $names=@{32759='CHECKBOXES'}
+ }
+ if($ComboGlyphs){$names=@{32738='COMBO'}}
+ if($ScrollGlyphs){$names=@{32753='UPARROW';32752='DNARROW';32751='RGARROW';32750='LFARROW';32743='UPARROWD';32742='DNARROWD';32741='RGARROWD';32740='LFARROWD'}}
+ if($DisabledScrollGlyphs){$names=@{32737='UPARROWI';32736='DNARROWI';32735='RGARROWI';32734='LFARROWI'}}
  $items=@();$verified=0
  while(($type=U16 $p) -ne 0){
   $count=U16 ($p+2);$p+=8
@@ -69,7 +81,7 @@ try {
  }
  if($items.Count -ne $names.Count){throw 'Missing expected OEM resources'}
  if($VerifyHeader -and $verified -ne $names.Count){throw 'Expected all embedded resources verified'}
- $canvas=[Drawing.Bitmap]::new(680,700);$g=[Drawing.Graphics]::FromImage($canvas);$font=[Drawing.Font]::new('Arial',11)
+ $canvas=[Drawing.Bitmap]::new(680,[int](16+98*$items.Count));$g=[Drawing.Graphics]::FromImage($canvas);$font=[Drawing.Font]::new('Arial',11)
  try {
   $g.Clear([Drawing.Color]::White)
   $g.InterpolationMode=[Drawing.Drawing2D.InterpolationMode]::NearestNeighbor
