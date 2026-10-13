@@ -2,7 +2,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <string.h>
-#include "win16-style/controls.h"
+#include "ntw16s-dll/controls.h"
 #define CHECK(x) do{if(!(x)){fprintf(stderr,"SIZEBOX FAIL line=%d error=%lu\n",__LINE__,GetLastError());return 1;}}while(0)
 static UINT commands,last_command;
 static LPARAM last_point;

@@ -8,7 +8,7 @@ IDs32753/32752/32750/32751 are up/down/left/right; IDs32743/32742/32740/32741
 are their pressed forms. Offsets respectively22368/22944/21792/21216 and
 22656/23232/22080/21504. Resources are272 bytes with BITMAPCOREHEADER except
 DNARROWD (320 bytes, BITMAPINFOHEADER). r078-scroll records the read-only
-decode. Verify with -ScrollGlyphs -VerifyHeader src/win16-style/scroll_glyphs.h.
+decode. Verify with -ScrollGlyphs -VerifyHeader src/ntw16s-dll/scroll_glyphs.h.
 This preserves artwork only: native scrollbar geometry/state remains the
 behavior owner, while track/thumb presentation is project-authored and still
 requires original visual comparison. Local-experiment rights apply unchanged.
@@ -19,7 +19,7 @@ combo_glyph.h contains RT_BITMAP32738 COMBO from the same pinned VGA.DRV:
 offset24768, length96, BITMAPINFOHEADER, 7x9 pixels. r070-combo decodes the
 original downward arrow and underline. Verify independently with
 inspect-win31-frame-resources.ps1 -ComboGlyphs -VerifyHeader
-src/win16-style/combo_glyph.h and a fresh build-owned output root.
+src/ntw16s-dll/combo_glyph.h and a fresh build-owned output root.
 The same local-experiment rights restriction applies. Combo bevel and sizing
 are authored presentation, not imported or pixel-certified USER algorithms.
 Read-only OpenNT client/combo.c xxxCBPaint confirms separate button and
@@ -35,7 +35,7 @@ verified behavior; resource extraction alone is not control implementation.
 The Microsoft artwork remains under the owner-admitted local-experiment
 restriction, not a new redistribution license. No USER executable code is copied.
 Reproduce pixel verification with inspect-win31-frame-resources.ps1
--ControlGlyphs -VerifyHeader src/win16-style/control_glyphs.h and the pinned
+-ControlGlyphs -VerifyHeader src/ntw16s-dll/control_glyphs.h and the pinned
 read-only VGA.DRV plus a fresh build-owned output root.
 
 ## S4 menu glyphs
@@ -51,7 +51,7 @@ arbitrary-DPI whole-menu equivalence. Rights remain the same local-experiment
 restriction as the frame artwork.
 
 Reproduce with inspect-win31-frame-resources.ps1 -MenuGlyphs -Driver pointing
-to the pinned original VGA.DRV, -VerifyHeader src/win16-style/menu_glyphs.h,
+to the pinned original VGA.DRV, -VerifyHeader src/ntw16s-dll/menu_glyphs.h,
 and a fresh build-owned -OutputRoot. The independent decoder compares all
 273 pixels. Native menu frames, metrics and tracking are separate work.
 
@@ -75,7 +75,7 @@ Original default shades reproduce original decoded pixels exactly.
 
 Reproduce and verify using the read-only inspector, in an owned background run:
 
-    tests/observation/inspect-win31-frame-resources.ps1 -Driver <original-VGA.DRV> -OutputRoot <fresh-build-root> -VerifyHeader src/win16-style/frame_buttons.h
+    tests/observation/inspect-win31-frame-resources.ps1 -Driver <original-VGA.DRV> -OutputRoot <fresh-build-root> -VerifyHeader src/ntw16s-dll/frame_buttons.h
 
 It decodes the source NE resources independently and compares all 2,700 pixels
 with the embedded seven images. Output includes source identity, resource offsets,

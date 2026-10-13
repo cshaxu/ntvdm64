@@ -4,6 +4,13 @@ OpenNT NT4 MVDM/NTDOS is the primary historical guest/service source family.
 
 ### T445 isolated style-resource admission
 
+T445 S5 owner approval extends the already admitted visual-resource use to
+the NTW16S DLLs and W16Style.exe in the project's release assets and local
+system32 deployment. The source/resource owner moves to src/ntw16s-dll;
+the exact provenance and notices remain. This is no new resource import,
+Microsoft ownership transfer or claim of a general redistribution license.
+No USER/GDI executable code or embedded VGASYS font is selected.
+
 Owner explicitly authorizes extracting and embedding supplied Windows 3.1
 visual resources in the standalone win16-style experiment. Bounded original
 button pixels and the selected VGASYS.FON font resource may live in src/win16-style with exact source identity, resource

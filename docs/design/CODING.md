@@ -1,5 +1,15 @@
 # Source Layout
 
+## NTW16S and W16Style component placement — T445 S5
+
+The owner-approved successor to src/win16-style is src/ntw16s-dll: the whole
+core, internal headers and visual resources live there, with no parallel
+static core owner. One source family builds ntw16s32.dll and ntw16s64.dll.
+src/w16style-exe produces W16Style.exe, a thin public-API demonstration;
+automated fixtures remain in tests. The three admitted release images join
+release-manifest.json, not addon-manifest.json. Prior static-library text
+below describes the S3/S4 baseline superseded by this admission.
+
 ## Approved window-style library placement — T445
 
 `src/win16-style` is the approved shared static-library source owner for

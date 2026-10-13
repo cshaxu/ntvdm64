@@ -1,4 +1,26 @@
-# Experimental Win3.1 window frame
+# NTW16S Win3.x window-style DLL
+
+T445 S5 moves the entire S4 owner-accepted core here. One source family builds
+ntw16s32.dll and ntw16s64.dll; ntw16s.h is the public same-thread C API.
+W16Style.exe imports the matching DLL, not a static renderer. The public
+font lease, window/control attachment and control-creation scope contracts
+below are unchanged. Ntw16sGetAbiVersion reports NTW16S_ABI_VERSION.
+
+Build with tools/build/New-Ntw16sNinja.ps1 for each architecture, then invoke
+its build-style.cmd from an owned background runner. Production links only
+the DLL import library. Private fault-injection fixtures may statically link
+the same implementation; they are never release inputs. Headers other than
+ntw16s.h and its declared public includes are private, not consumer ABI.
+
+Callers retain their LoadLibrary/import reference until all HWND attachments,
+control scopes and font leases are released on their owner threads, with no
+outstanding calls/callbacks. DllMain never enumerates windows, installs hooks,
+creates fonts or performs cleanup under loader lock. No guest/WOW/Hook or
+process-selection dependency is introduced. A 16-bit guest cannot load this
+PE DLL; future WOW integration calls the x86 DLL from its native host.
+
+The following S3/S4 design and limitations remain applicable to presentation;
+references to experiment-only packaging are superseded by S5 publication.
 
 Owner-selected typography now uses one actual24-pixel System bitmap font for
 styled captions, menus and supported standard controls. font.c rasterizes the

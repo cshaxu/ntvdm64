@@ -1,13 +1,13 @@
 /* Selectable standalone HWND gallery. Native references are explicitly not
  * retro-renderer support. Captures use only this process's owned windows. */
-#include "win16-style/win16_style.h"
-#include "win16-style/layout.h"
-#include "win16-style/menu_paint.h"
-#include "win16-style/menu_bar.h"
-#include "win16-style/controls.h"
-#include "win16-style/font.h"
-#include "win16-style/scroll_glyphs.h"
-#include "win16-style/scroll_layout.h"
+#include "ntw16s-dll/win16_style.h"
+#include "ntw16s-dll/layout.h"
+#include "ntw16s-dll/menu_paint.h"
+#include "ntw16s-dll/menu_bar.h"
+#include "ntw16s-dll/controls.h"
+#include "ntw16s-dll/font.h"
+#include "ntw16s-dll/scroll_glyphs.h"
+#include "ntw16s-dll/scroll_layout.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <windowsx.h>

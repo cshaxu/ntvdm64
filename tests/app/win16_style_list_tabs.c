@@ -2,8 +2,8 @@
  * No public getter or inference of pre-existing private tab state is used. */
 #include <windows.h>
 #include <stdio.h>
-#include "win16-style/font.h"
-#include "win16-style/controls.h"
+#include "ntw16s-dll/font.h"
+#include "ntw16s-dll/controls.h"
 #define CHECK(x) do{if(!(x)){fprintf(stderr,"FAIL line=%d error=%lu\n",__LINE__,GetLastError());return 1;}}while(0)
 static COLORREF list_background=RGB(255,255,255),list_text;
 static LRESULT CALLBACK owner(HWND w,UINT m,WPARAM a,LPARAM b)

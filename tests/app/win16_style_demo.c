@@ -1,9 +1,9 @@
 /* Independent USER/GDI fixture. --test <bitmap> captures only its owned HWNDs.
  * No input injection, desktop capture, product process or computer-use API. */
-#include "win16-style/win16_style.h"
-#include "win16-style/layout.h"
-#include "win16-style/frame_buttons.h"
-#include "win16-style/font.h"
+#include "ntw16s-dll/win16_style.h"
+#include "ntw16s-dll/layout.h"
+#include "ntw16s-dll/frame_buttons.h"
+#include "ntw16s-dll/font.h"
 #include <stdio.h>
 #include <share.h>
 #include <stdlib.h>

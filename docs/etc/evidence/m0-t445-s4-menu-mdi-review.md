@@ -1,5 +1,14 @@
 # T445 S4 standalone menu and MDI review
 
+## Owner acceptance, 2026-10-13
+
+Owner explicitly accepts r261 and directs the next structural S: move the
+entire core into dual NTW16S DLLs and publish a thin W16Style.exe. This closes
+S4's physical acceptance boundary below; retained historical pending language
+describes earlier review states, not an outstanding S4 gate. Source delivery
+is 86c773006, review reconciliation 65a530b32. The environment-denied clipboard
+smoke is not a closure gate; deferred native-menu session retest moves to S8.
+
 ## Expanded S4 delivery review snapshot, 2026-10-13
 
 The r052 review below is retained historical evidence. It does not describe

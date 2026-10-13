@@ -8,7 +8,6 @@ void win16_style_bar_free(win16_style_bar *bar)
     if(bar->items)for(i=0;i<bar->count;++i)free(bar->items[i].text);
     free(bar->items);free(bar->rects);memset(bar,0,sizeof(*bar));
 }
-
 BOOL win16_style_bar_read(HMENU menu,HFONT font,UINT dpi,POINT origin,int width,win16_style_bar *bar)
 {
     int count=GetMenuItemCount(menu);UINT i,n=0;SIZE *sizes=NULL;UINT *flags=NULL;HDC dc=NULL;BOOL ok=FALSE;
@@ -50,17 +49,4 @@ done:
     if(dc)DeleteDC(dc);free(sizes);free(flags);
     if(!ok)win16_style_bar_free(bar);
     return ok;
-}
-
-void win16_style_bar_paint(const win16_style_bar *bar,HDC dc,HFONT font,UINT dpi,const win16_style_palette *palette)
-{
-    UINT i;
-    for(i=0;i<bar->count;++i){
-        UINT state=0;
-        if(bar->items[i].state&MFS_HILITE)state|=ODS_SELECTED;
-        if(bar->items[i].state&MFS_DISABLED)state|=ODS_DISABLED;
-        if(bar->items[i].control)win16_style_merged_control(dc,bar->rects[i],bar->items[i].control==HBMMENU_SYSTEM,
-            (state&ODS_SELECTED)!=0,max(1,MulDiv(1,(int)dpi,96)),palette);
-        else win16_style_menu_text(dc,&bar->rects[i],font,dpi,palette,bar->items[i].text,state,WIN16_STYLE_MENU_BAR,FALSE);
-    }
 }

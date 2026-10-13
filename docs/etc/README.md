@@ -447,6 +447,9 @@ full integration results, eight-file publication/recovery and retained limits.
 records the x86/x64 source boundary, minimal registered adaptations, native
 build/import, ABI/real-process verification, publication and retained limits.
 
+[T445 S5 NTW16S DLL and W16Style delivery](evidence/m0-t445-s5-style-dll.md)
+records core ownership, public ABI, dual-width regression and publication.
+
 [T433 S6 native service mirror audit](evidence/m0-t433-s6-native-service-mirror-audit.md)
 records actual selected dependencies, numeric-carrier versus local-resource
 semantics, strict native compile/link/layout attempts and the proposed diff budget.

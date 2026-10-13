@@ -2,6 +2,13 @@
 
 ## Authority and stage boundary
 
+On 2026-10-13 owner accepts S4 r261 and inserts S5: migrate the entire core
+to src/ntw16s-dll, with public DLL imports from thin src/w16style-exe.
+Publish ntw16s32.dll, ntw16s64.dll and x64 W16Style.exe in assets/release and
+the configured system32. Keep x86 demo build/tests. S6/S7/S8 below supersede
+older propagation/integration/final-stage numbering; historical runs are not
+renamed. No automatic Hook/WOW integration is part of this S5.
+
 S4 frame-scroll refinement: the isolated demo may explicitly call the
 component's same-thread GetScrollInfo/SetScrollInfo bindings to exercise
 full-width custom tracking. Subclassing cannot replace USER's non-message
@@ -26,9 +33,10 @@ native-menu animation fresh-session control; it is not a passing capability.
 | S2 | Audit, commit/push and close the owner-accepted NTVWM palette geometry repair, tests and published assets. |
 | S3 | Implement experimental src/win16-style and independently launch an authored Win32 GUI test program linked directly to it. Prove basic frame visuals/interaction without any other product component; obtain owner stability acceptance. |
 | S4 | Standalone retro system/ordinary menus, MDI and all admitted standard-control families, with complete examples and interaction/state coverage; no product integration. |
-| S5 | Both CLI options, explicit/inherited policy resolution, end-to-end propagation, per-Win16-task isolation and real-window title marker; build, verify, publish, commit/push for owner acceptance. No automatic activation of experimental retro painting in production. |
-| S6 | Reuse, integrate and harden the tested common frame/menu/MDI, font/palette/DPI and geometry through WOW/Hook paths; do not build a second renderer. |
-| S7  | Integrated visual/interaction and serial product regression, coherent release/publication and final owner acceptance. |
+| S5 | Entire core in dual NTW16S DLLs, thin W16Style.exe, versioned public API/lifecycle, both-width regression and formal release/publication. |
+| S6 | Both CLI options, policy resolution, propagation, per-Win16-task isolation and visible title marker. No automatic retro drawing yet. |
+| S7 | Integrate the tested NTW16S DLL through WOW/Hook; no duplicated renderer. |
+| S8 | Integrated visual/interaction and product regression, native-menu session retest, final owner acceptance. |
 
 ## S3 standalone experiment contract
 

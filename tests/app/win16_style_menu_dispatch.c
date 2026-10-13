@@ -1,7 +1,7 @@
 /* Regression for host menu drawing that bypasses WM_NCPAINT on hover.
  * The witness consumes opaque test payloads; it does not emulate UAH. */
-#include "win16-style/win16_style.h"
-#include "win16-style/controls.h"
+#include "ntw16s-dll/win16_style.h"
+#include "ntw16s-dll/controls.h"
 #include <commctrl.h>
 #include <stdio.h>
 #define CHECK(x) do{if(!(x)){fprintf(stderr,"MENU DISPATCH FAIL line=%d error=%lu\n",__LINE__,GetLastError());return 1;}}while(0)

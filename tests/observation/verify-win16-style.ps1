@@ -26,7 +26,7 @@ try {
         $r=$repo.Replace('\','/')
         @'
 rule cc
-  command = cl.exe /nologo /MT /O2 /W4 /WX /utf-8 /D_WIN32_WINNT=0x0A00 /DUNICODE /D_UNICODE /I"@REPO@/src" /showIncludes /c "$in" /Fo$out
+  command = cl.exe /nologo /MT /O2 /W4 /WX /utf-8 /DNTW16S_STATIC /D_WIN32_WINNT=0x0A00 /DUNICODE /D_UNICODE /I"@REPO@/src" /showIncludes /c "$in" /Fo$out
   deps = msvc
 rule archive
   command = lib.exe /nologo /out:$out $in
@@ -38,36 +38,37 @@ rule style_probe_link
   command = link.exe /nologo /manifest:embed /subsystem:console /out:$out $in user32.lib gdi32.lib comctl32.lib dwmapi.lib
 rule menu_v6_link
   command = link.exe /nologo /subsystem:windows /entry:wmainCRTStartup /manifest:embed /manifestdependency:"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'" /out:$out $in user32.lib gdi32.lib
-build layout.obj: cc @NINJA_REPO@/src/win16-style/layout.c
-build scroll-layout.obj: cc @NINJA_REPO@/src/win16-style/scroll_layout.c
-build scroll-track.obj: cc @NINJA_REPO@/src/win16-style/scroll_track.c
+build layout.obj: cc @NINJA_REPO@/src/ntw16s-dll/layout.c
+build scroll-layout.obj: cc @NINJA_REPO@/src/ntw16s-dll/scroll_layout.c
+build scroll-track.obj: cc @NINJA_REPO@/src/ntw16s-dll/scroll_track.c
 build scroll-geometry.obj: cc @NINJA_REPO@/tests/app/win16_style_scroll_geometry.c
 build scroll-geometry.exe: probe_link scroll-geometry.obj scroll-layout.obj scroll-track.obj
 build scroll-api.obj: cc @NINJA_REPO@/tests/app/win16_style_scroll_api.c
 build scroll-api.exe: probe_link scroll-api.obj
-build style.obj: cc @NINJA_REPO@/src/win16-style/win16_style.c
-build font.obj: cc @NINJA_REPO@/src/win16-style/font.c
+build style.obj: cc @NINJA_REPO@/src/ntw16s-dll/win16_style.c
+build font.obj: cc @NINJA_REPO@/src/ntw16s-dll/font.c
 build font-test.obj: cc @NINJA_REPO@/tests/app/win16_style_font.c
 build font-test.exe: probe_link font-test.obj font.obj
 build menu-dispatch.obj: cc @NINJA_REPO@/tests/app/win16_style_menu_dispatch.c
-build menu-dispatch.exe: style_probe_link menu-dispatch.obj win16-style.lib
+build menu-dispatch.exe: style_probe_link menu-dispatch.obj @STYLE_DLL@.lib
 build control-present.obj: cc @NINJA_REPO@/tests/app/win16_style_control_present.c
 build control-present.exe: style_probe_link control-present.obj win16-style.lib
 build list-tabs.obj: cc @NINJA_REPO@/tests/app/win16_style_list_tabs.c
-build list-tabs.exe: style_probe_link list-tabs.obj win16-style.lib
+build list-tabs.exe: style_probe_link list-tabs.obj @STYLE_DLL@.lib
 build control-lifetime.obj: cc @NINJA_REPO@/tests/app/win16_style_control_lifetime.c
-build control-lifetime.exe: style_probe_link control-lifetime.obj win16-style.lib
+build control-lifetime.exe: style_probe_link control-lifetime.obj @STYLE_DLL@.lib
 build sizebox.obj: cc @NINJA_REPO@/tests/app/win16_style_sizebox.c
-build sizebox.exe: style_probe_link sizebox.obj win16-style.lib
+build sizebox.exe: style_probe_link sizebox.obj @STYLE_DLL@.lib
 build dc-failure.obj: cc @NINJA_REPO@/tests/app/win16_style_dc_failure.c
-build menu-paint.obj: cc @NINJA_REPO@/src/win16-style/menu_paint.c
-build menu-layout.obj: cc @NINJA_REPO@/src/win16-style/menu_layout.c
-build menu-bar.obj: cc @NINJA_REPO@/src/win16-style/menu_bar.c
-build menu-items.obj: cc @NINJA_REPO@/src/win16-style/menu_items.c
-build menu-scope.obj: cc @NINJA_REPO@/src/win16-style/menu_scope.c
-build controls.obj: cc @NINJA_REPO@/src/win16-style/controls.c
-build control-scope.obj: cc @NINJA_REPO@/src/win16-style/control_scope.c
-build dc-failure.exe: link dc-failure.obj layout.obj scroll-layout.obj scroll-track.obj menu-paint.obj menu-layout.obj menu-bar.obj menu-items.obj menu-scope.obj controls.obj font.obj
+build menu-paint.obj: cc @NINJA_REPO@/src/ntw16s-dll/menu_paint.c
+build menu-layout.obj: cc @NINJA_REPO@/src/ntw16s-dll/menu_layout.c
+build menu-bar.obj: cc @NINJA_REPO@/src/ntw16s-dll/menu_bar.c
+build menu-bar-paint.obj: cc @NINJA_REPO@/src/ntw16s-dll/menu_bar_paint.c
+build menu-items.obj: cc @NINJA_REPO@/src/ntw16s-dll/menu_items.c
+build menu-scope.obj: cc @NINJA_REPO@/src/ntw16s-dll/menu_scope.c
+build controls.obj: cc @NINJA_REPO@/src/ntw16s-dll/controls.c
+build control-scope.obj: cc @NINJA_REPO@/src/ntw16s-dll/control_scope.c
+build dc-failure.exe: link dc-failure.obj layout.obj scroll-layout.obj scroll-track.obj menu-paint.obj menu-layout.obj menu-bar.obj menu-bar-paint.obj menu-items.obj menu-scope.obj controls.obj font.obj
 build demo.obj: cc @NINJA_REPO@/tests/app/win16_style_demo.c
 build gallery.obj: cc @NINJA_REPO@/tests/app/win16_style_gallery.c
 build font-probe.obj: cc @NINJA_REPO@/tests/app/win31_font_probe.c
@@ -75,10 +76,11 @@ build font-probe.exe: probe_link font-probe.obj
 build native-menu.obj: cc @NINJA_REPO@/tests/app/native_menu_probe.c
 build native-menu-probe.exe: link native-menu.obj
 build native-menu-v6-probe.exe: menu_v6_link native-menu.obj
-build win16-style.lib: archive layout.obj scroll-layout.obj scroll-track.obj style.obj menu-paint.obj menu-layout.obj menu-bar.obj menu-items.obj menu-scope.obj controls.obj control-scope.obj font.obj
-build win16-style-demo.exe: link demo.obj gallery.obj win16-style.lib
+build win16-style.lib: archive layout.obj scroll-layout.obj scroll-track.obj style.obj menu-paint.obj menu-layout.obj menu-bar.obj menu-bar-paint.obj menu-items.obj menu-scope.obj controls.obj control-scope.obj font.obj
+build win16-style-demo.exe: link demo.obj gallery.obj @STYLE_DLL@.lib layout.obj scroll-layout.obj menu-bar.obj menu-layout.obj
 default win16-style-demo.exe font-probe.exe font-test.exe menu-dispatch.exe control-present.exe control-lifetime.exe sizebox.exe list-tabs.exe native-menu-probe.exe native-menu-v6-probe.exe dc-failure.exe scroll-geometry.exe scroll-api.exe
-'@.Replace('@REPO@',$r).Replace('@NINJA_REPO@',$r.Replace(':','$:').Replace(' ','$ ')) | Set-Content "$dir/build.ninja" -Encoding ascii
+'@.Replace('@REPO@',$r).Replace('@STYLE_DLL@',$(if($arch -eq 'x86'){'ntw16s32'}else{'ntw16s64'})).Replace('@NINJA_REPO@',$r.Replace(':','$:').Replace(' ','$ ')) | Set-Content "$dir/build.ninja" -Encoding ascii
+        & "$repo/tools/build/New-Ntw16sNinja.ps1" -BuildRoot $dir -Architecture $arch -Append -IncludeTests -VsDevCmd $VsDevCmd
         $selectedTarget=if($ScrollApiOnly){'scroll-api.exe'}else{''}
         @"
 @echo off
@@ -176,6 +178,18 @@ cd /d "$dir"
         }
         Get-Content "$dir/test.txt"
     }
-    Get-FileHash "$repo/src/win16-style/*","$repo/tests/app/win16_style_demo.c","$repo/tests/app/win16_style_gallery.c","$repo/tests/app/win16_style_font.c","$repo/tests/app/win16_style_menu_dispatch.c","$repo/tests/app/win16_style_control_present.c","$repo/tests/app/win16_style_control_lifetime.c","$repo/tests/app/win16_style_sizebox.c","$repo/tests/app/win16_style_list_tabs.c","$repo/tests/app/win16_style_scroll_geometry.c","$repo/tests/app/win16_style_scroll_api.c","$repo/tests/app/win16_style_dc_failure.c","$repo/tests/app/win31_font_probe.c","$repo/tests/app/native_menu_probe.c","$repo/tests/observation/verify-win16-style.ps1"|ConvertTo-Json|Set-Content "$root/inputs.json"
+    Get-FileHash "$repo/src/ntw16s-dll/*","$repo/tests/app/win16_style_demo.c","$repo/tests/app/win16_style_gallery.c","$repo/tests/app/win16_style_font.c","$repo/tests/app/win16_style_menu_dispatch.c","$repo/tests/app/win16_style_control_present.c","$repo/tests/app/win16_style_control_lifetime.c","$repo/tests/app/win16_style_sizebox.c","$repo/tests/app/win16_style_list_tabs.c","$repo/tests/app/win16_style_scroll_geometry.c","$repo/tests/app/win16_style_scroll_api.c","$repo/tests/app/win16_style_dc_failure.c","$repo/tests/app/win31_font_probe.c","$repo/tests/app/native_menu_probe.c","$repo/tests/observation/verify-win16-style.ps1"|ConvertTo-Json|Set-Content "$root/inputs.json"
+    if(!$ScrollApiOnly -and !$ViewportOnly){
+        foreach($arch in @('x86','x64')){
+            $dir=Join-Path $root $arch
+            $dll=if($arch -eq 'x86'){'x86/ntw16s32.dll'}else{'x64/ntw16s64.dll'}
+            $wrong=if($arch -eq 'x86'){'x64/ntw16s64.dll'}else{'x86/ntw16s32.dll'}
+            $p=Start-Process "$dir/ntw16s-dll-test.exe" -ArgumentList @("$root/$dll","$root/$wrong","$dir/W16Style.exe") -WindowStyle Hidden -PassThru -RedirectStandardOutput "$dir/dll-test.txt" -RedirectStandardError "$dir/dll-test.err"
+            @{pid=$p.Id;start=$p.StartTime;deadline=$p.StartTime.AddSeconds(90)}|ConvertTo-Json|Set-Content "$dir/dll-owner.json"
+            if(!$p.WaitForExit(90000)){$p.Kill($true);throw "DLL boundary timeout $arch"}
+            if($p.ExitCode){throw "DLL boundary failed $arch"}
+        }
+    }
+    Get-FileHash "$repo/src/w16style-exe/*","$repo/tools/build/New-Ntw16sNinja.ps1","$repo/tests/app/ntw16s_dll.c"|ConvertTo-Json|Set-Content "$root/dll-inputs.json"
     '0'|Set-Content "$root/exit-code.txt"
 }catch{$_|Out-String|Set-Content "$root/failure.txt";'1'|Set-Content "$root/exit-code.txt";exit 1}

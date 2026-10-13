@@ -1,5 +1,15 @@
 # System Architecture
 
+## NTW16S style DLL boundary — T445 S5
+
+NTW16S owns the complete local Win3.x presentation engine, compiled as
+ntw16s32.dll and ntw16s64.dll. W16Style.exe owns only demonstration content,
+layout and application behavior and calls its public C interface. Hook launch
+propagation and WOW task/window policy remain outside the DLL and are not yet
+integrated. Win16 uses the x86 host DLL through WOW, never a guest DLL import.
+Borrowed HWNDs belong to the calling GUI thread; allocated state/resources
+are released by the DLL. DLL entry does not install hooks or draw windows.
+
 Owner-approved T423 S12 text extension: the common text ABI accepts original
 glyph/attribute pairs or optional glyph/attribute/style triples. Both workers
 share the decoder; DOS continues to publish pairs. This supersedes the exact

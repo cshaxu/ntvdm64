@@ -1,32 +1,33 @@
 # Project Status
 
-**Active: M0 T445 S4**
+**Active: M0 T445 S5**
 
-Owner closes S3 with the native-menu session retest deferred to S7.
-S4 extends the standalone experiment with retro menus and MDI; product
-propagation and integration move to S5/S6. T445 remains open.
+Owner accepts S4 r261 and admits S5 DLL/component extraction and publication.
+Propagation, integration and final acceptance move to S6/S7/S8. T445 remains open.
+S5 is implemented, both-width tested and published; this delivery is pending
+owner acceptance. See [S5 evidence](../etc/evidence/m0-t445-s5-style-dll.md).
 See the [S1 closure design](../etc/evidence/m0-t445-s1-installation-design.md).
 
 ## Active Packet
 
-### Standalone retro menus, MDI and standard controls
+### NTW16S DLL and W16Style executable separation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T445 S4, Ordinary Mode; implementation then separate final review. |
-| Admission And Approval | Owner directs S3 closure and moves retro menus/MDI to S4; updated goal explicitly covers the S3+S4 standalone app. |
-| Objective | Extend the standalone component/gallery with Win3.x system/ordinary menus, MDI and standard controls. Owner expands S4 to buttons, radio/checkbox, edit/text input, labels, boxes, lists, combos and scrollbars; inventory all original standard-control families and variants without requiring owner enumeration. Sample 1 presents the controls together; focused pages supplement it. Repair real outer system-menu text/style for every system-box window, including samples1/12/18. |
-| Non-goals | No run16 options, Hook/WOW integration, NTCON changes, guest/mirror edits, production release or global theme/settings changes. No claim that retro drawing repairs the deferred native-menu failure. |
-| Reference Baseline | Owner-closed S3, library at 488aa73ae, diagnostic source at 67b3e586d; r134 both-width gates and r139/r140 historical controls. |
-| Files And ABI Surface | src/win16-style, tests/app and tests/observation; local same-thread C API, x86/x64 /MT static archives. |
+| Identifier Mode | M0 T445 S5, Ordinary Mode; implementation then sequential final review. |
+| Admission And Approval | Owner accepts S4, requests the complete core in src/ntw16s-dll and a thin src/w16style-exe, approves dual DLLs and x64 W16Style.exe in assets/release and configured system32, then says begin. |
+| Objective | Migrate the sole style implementation into ntw16s32.dll/ntw16s64.dll; W16Style.exe demonstrates the public DLL API without embedding the renderer or test harness. Preserve accepted S4 appearance and interaction. |
+| Non-goals | No run16 options, Hook/WOW integration, NTCON changes, guest/mirror edits or global settings changes; no automatic cross-process styling. |
+| Reference Baseline | S4 owner-accepted r261, source 86c773006 and review 65a530b32; full both-width regression and unchanged ten-image release. |
+| Files And ABI Surface | src/ntw16s-dll, src/w16style-exe, tests and build/publication scripts; versioned local C API, x86/x64 MSVC /MT; no wire ABI changes. |
 | Applicable Rules | Source/architecture/coding/document authorities; background-owned build/tests; build-only outputs; no subst. Computer use is scoped to the owned demo, not other applications or host settings. |
-| Verification | Both widths: all system-box window menus including real samples1/12/18 outer menus; initial text/font and state rendering, keyboard/mouse commands; MDI activation/maximize/restore/close; standard-control normal/focused/pressed/disabled/checked/mixed states, native editing/navigation/notifications and teardown. Preserve S3 tests, compare original references and owned captures; probes are not physical acceptance. |
-| Expected Markers | Both-width runnable demo and tests with images; no link to other product components. |
+| Verification | Retained S4 both-width tests through DLL imports; PE/import/export checks, explicit version/failure/lifetime tests, independent GUI-thread isolation and load/cleanup/unload. Background build/tests and governance; verify publication hashes and retained package identity. |
+| Expected Markers | ntw16s32.dll, ntw16s64.dll and x64 W16Style.exe published with release manifest; x86 demo remains built/tested under build. No renderer objects linked into demo. |
 | Asset Needs | Pinned original visual resources, read-only media. Owner requires unified24-pixel host System bitmap typography across title/menu/controls; no embedded VGASYS.FON or global font installation. Verify actual realization and native control layout/font restoration. |
 | Reporting Requirements | Exact binary paths, screenshots, measured test results and visual/physical interaction limitations. |
-| Stop Conditions | Need for product/guest integration, global interception/settings or unreviewed resources; no scope expansion. |
-| Exit Criteria | Source-backed implementation of menus/MDI and all admitted standard-control families in one gallery; focused behavior/lifetime tests, original-reference visual review, governance/link/diff checks, commit/push and owner acceptance. r052 is an intermediate delivery, not expanded-S4 completion. Native-menu fresh-session retest remains S7. |
-| Original Owner Request | Close S3; move retro menus and MDI to S4, parameter propagation to S5 and product integration to S6. |
+| Stop Conditions | Need for Hook/WOW/guest changes, global interception/settings, new resources or loss of S4 behavior. |
+| Exit Criteria | One DLL source owner, thin executable, passing both-width API/GUI tests, reviewed lifecycle and source provenance, coherent publication/hash checks, commit/push and owner acceptance. |
+| Original Owner Request | Entire core belongs in DLL; W16Style.exe only demonstrates it; publish both DLL widths and executable as release components. |
 | Similar-Issue Sweep | Missing buttons, title changes, install/remove/destroy, unsupported frames, DPI/high contrast, pressed/canceled actions and application client preservation. |
 
 ## S1 Closure Record
@@ -51,15 +52,14 @@ This does not declare the menu blankness repaired or the full T complete.
 
 ## Planned Sequence
 
-S1--S3 are closed. S4 covers standalone retro menus/MDI; S5 is CLI/policy
-propagation and title-marker verification; S6 integrates the shared component;
-S7 is integrated acceptance and the deferred native-menu session retest.
+S1--S4 are owner-accepted. S5 extracts/publishes NTW16S and W16Style;
+S6 is CLI/policy propagation and title-marker verification; S7 integrates
+the DLL; S8 is integrated acceptance and the deferred native-menu retest.
 The [S4 review](../etc/evidence/m0-t445-s4-menu-mdi-review.md) records r052
-delivery de5526a16 and the r261 background/scroll repair; S4 acceptance remains open.
+delivery de5526a16 and the r261 background/scroll repair; owner accepts r261.
 The [working plan](../etc/operations/t445-win31-window-style-plan.md) defines
-the contracts. S4 is active.
-The shared source owner remains src/win16-style, with no production integration
-during S3.
+the contracts. S5 is active. The complete src/win16-style core migrates into
+src/ntw16s-dll; src/w16style-exe owns the released thin demonstration program.
 
 ## Closed S3 Packet
 

@@ -1,7 +1,7 @@
 #include <windows.h>
 #include <commctrl.h>
 #include <stdio.h>
-#include "win16-style/controls.h"
+#include "ntw16s-dll/controls.h"
 #define CHECK(x) do{if(!(x)){fprintf(stderr,"LIFETIME FAIL line=%d error=%lu\n",__LINE__,GetLastError());return 1;}}while(0)
 typedef struct action {BOOL destroy;unsigned calls;} action;
 typedef struct nested_action {BOOL entered,installed;} nested_action;

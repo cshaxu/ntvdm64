@@ -1,6 +1,6 @@
 #ifndef WIN16_STYLE_H
 #define WIN16_STYLE_H
-#include <windows.h>
+#include "api.h"
 
 /* Local, same-GUI-thread API. No process/task policy or cross-process ABI.
  * Eligible: top-level and child frames without custom client edges. Frames
@@ -17,13 +17,13 @@ typedef struct win16_style_palette {
     COLORREF face, light, shadow, edge;
 } win16_style_palette;
 
-void win16_style_default_palette(win16_style_palette *palette);
-BOOL win16_style_install(HWND window, const win16_style_palette *palette);
-BOOL win16_style_remove(HWND window);
-BOOL win16_style_set_palette(HWND window, const win16_style_palette *palette);
+NTW16S_API void win16_style_default_palette(win16_style_palette *palette);
+NTW16S_API BOOL win16_style_install(HWND window, const win16_style_palette *palette);
+NTW16S_API BOOL win16_style_remove(HWND window);
+NTW16S_API BOOL win16_style_set_palette(HWND window, const win16_style_palette *palette);
 /* Explicit standalone frame-scroll API binding. A subclass alone cannot
  * replace USER's non-message SB_HORZ/SB_VERT query/update entry points.
  * No process hooks are installed here; unstyled windows delegate unchanged. */
-BOOL win16_style_get_scroll_info(HWND window,int bar,LPSCROLLINFO info);
-int win16_style_set_scroll_info(HWND window,int bar,LPCSCROLLINFO info,BOOL redraw);
+NTW16S_API BOOL win16_style_get_scroll_info(HWND window,int bar,LPSCROLLINFO info);
+NTW16S_API int win16_style_set_scroll_info(HWND window,int bar,LPCSCROLLINFO info,BOOL redraw);
 #endif

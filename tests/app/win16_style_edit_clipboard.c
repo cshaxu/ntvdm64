@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <wchar.h>
 #include <string.h>
-#include "win16-style/controls.h"
+#include "ntw16s-dll/controls.h"
 #define CHECK(x) do { if(!(x)){fprintf(stderr,"EDIT CLIPBOARD FAIL line=%d error=%lu\n",__LINE__,GetLastError());return 1;} } while(0)
 static BOOL text_is(HWND w,const WCHAR *expected)
 {

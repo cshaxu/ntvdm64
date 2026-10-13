@@ -66,7 +66,7 @@ static BOOL WINAPI observed_blt(HDC dc,int x,int y,int cx,int cy,HDC from,int sx
 #define CreateSolidBrush observed_brush
 #define DeleteObject observed_delete
 #define DeleteDC observed_delete_dc
-#include "win16-style/controls.c"
+#include "ntw16s-dll/controls.c"
 #undef FillRect
 #undef SaveDC
 #undef BitBlt

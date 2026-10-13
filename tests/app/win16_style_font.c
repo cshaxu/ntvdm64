@@ -1,6 +1,6 @@
 /* Native bitmap-font realization, exact pixels and reference lifetime.
  * No visible window, global font installation or guest-font input. */
-#include "win16-style/font.h"
+#include "ntw16s-dll/font.h"
 #include <stdio.h>
 #include <string.h>
 #define CHECK(x) do {if(!(x)){fprintf(stderr,"FONT FAIL line %d error=%lu\n",__LINE__,GetLastError());return 1;}}while(0)
