@@ -2,9 +2,23 @@
 
 ## Authority and stage boundary
 
+Owner inserts S7 on 2026-10-13: separate Base RPC core and launch-style
+source/link closures, replacing the frontend-only conditional experiment.
+S6 remains undelivered with outstanding acceptance; this does not waive it.
+Previous integration/final S7/S8 become S8/S9. Evidence paths keep their numbers.
+
+Owner assigns the retained S6 gap to S7, keeping S numbering increasing:
+carry the existing native
+CREATE_SEPARATE_WOW_VDM flag through Hook-to-Run16 private launch context and
+verify independent Win16 child propagation. Reuse --win16-style and
+--win16-style-all, without a new public option or guest change. This approval
+does not reopen S6 or create a second active S. S7 covers both the split and
+this propagation completion; later stages remain S8/S9.
+
 On 2026-10-13 owner closes delivered S5 (7c6406575) explicitly without manual
 acceptance. Automated evidence remains valid; no manual pass is inferred.
-T445 remains open. S6/S7/S8 below remain planned, awaiting separate admission.
+T445 remains open. Those stages required separate admission at that point;
+the later S6 work and current owner-inserted S7 are recorded above and in Current.
 
 On 2026-10-13 owner accepts S4 r261 and inserts S5: migrate the entire core
 to src/ntw16s-dll, with public DLL imports from thin src/w16style-exe.
@@ -39,8 +53,9 @@ native-menu animation fresh-session control; it is not a passing capability.
 | S4 | Standalone retro system/ordinary menus, MDI and all admitted standard-control families, with complete examples and interaction/state coverage; no product integration. |
 | S5 | Entire core in dual NTW16S DLLs, thin W16Style.exe, versioned public API/lifecycle, both-width regression and formal release/publication. |
 | S6 | Both CLI options, policy resolution, propagation, per-Win16-task isolation and visible title marker. No automatic retro drawing yet. |
-| S7 | Integrate the tested NTW16S DLL through WOW/Hook; no duplicated renderer. |
-| S8 | Integrated visual/interaction and product regression, native-menu session retest, final owner acceptance. |
+| S7 | Split Base RPC core from launch/execution style, prove NTCON's minimal dependency boundary, and complete retained S6 propagation including independent WOW and real DOS/CUI child chains. |
+| S8 | Integrate the tested NTW16S DLL through WOW/Hook; no duplicated renderer. |
+| S9 | Integrated visual/interaction and product regression, native-menu session retest, final owner acceptance. |
 
 ## S3 standalone experiment contract
 

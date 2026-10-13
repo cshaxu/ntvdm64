@@ -26,7 +26,7 @@ rule w16style_link
   command = link.exe /nologo /subsystem:windows /manifest:embed /out:`$out /map:W16Style.map `$in user32.lib gdi32.lib comctl32.lib
 
 "@
-$units=@('layout','scroll_layout','scroll_track','win16_style','menu_paint','menu_layout','menu_bar','menu_bar_paint','menu_items','menu_scope','controls','control_scope','font','dllmain')
+$units=@('layout','scroll_layout','scroll_track','win16_style','menu_paint','menu_layout','menu_bar','menu_bar_paint','menu_items','menu_scope','controls','control_scope','font','dllmain','title_marker')
 foreach($unit in $units){$graph+="build dll-$unit.obj: ntw16s_cc $r/src/ntw16s-dll/$unit.c`n"}
 $objects=($units|ForEach-Object {"dll-$_.obj"}) -join ' '
 $graph+="build $name.dll $name.lib: ntw16s_link $objects`n"
@@ -39,6 +39,9 @@ if($IncludeTests){
     $graph+="build ntw16s-dll-test.obj: w16style_cc $r/tests/app/ntw16s_dll.c`n"
     $graph+="build ntw16s-dll-test.exe: ntw16s_test_link ntw16s-dll-test.obj`n"
     $graph+="default ntw16s-dll-test.exe`n"
+    $graph+="build title-marker-test.obj: w16style_cc $r/tests/app/title_marker_test.c`n"
+    $graph+="build title-marker-test.exe: ntw16s_test_link title-marker-test.obj`n"
+    $graph+="default title-marker-test.exe`n"
 }
 if($Append){Add-Content "$root/build.ninja" $graph -Encoding ascii}else{Set-Content "$root/build.ninja" $graph -Encoding ascii}
 $ninja=(Get-Command ninja.exe -ErrorAction Stop).Source

@@ -1,5 +1,15 @@
 # Source Layout
 
+## Base RPC client slices — T445 S7
+
+NTSRV retains both source owners under opennt/source:
+base_rpc_client_core.c builds base-rpc-client-core.lib for shared connection,
+control and resource handoff; base_rpc_client_launch_style.c builds
+base-rpc-client-launch-style.lib for Run16/VDM execution and style state.
+NTCON and NTVWM use core only; NTVDM and Run16 select both. WOW reaches the
+worker's existing client exports, not a DLL-private duplicate connection.
+The private composition header is not a wire ABI or general plugin registry.
+
 ## NTW16S and W16Style component placement — T445 S5
 
 The owner-approved successor to src/win16-style is src/ntw16s-dll: the whole

@@ -7,10 +7,6 @@
 #include <stdio.h>
 #include "service.h"
 #include "ntsrv-exe/transport/rpc_security.h"
-#include "ntsrv-exe/transport/vdm_receipt.h"
-#include <base_client.h>
-#include <base_command.h>
-#include <base_service.h>
 #include <base_rpc_client.h>
 #include "common/protocol/version.h" /* Shared metadata, no product behavior. */
 #include "common/console/members.h"
@@ -19,7 +15,7 @@
 #include "common/rpc/frontend_control.h"
 #include "common/rpc/worker_control.h"
 #include "common/rpc/dos_observation.h"
-#include "common/codec/native_launch.h"
+#include <base_rpc_client_internal.h>
 
 typedef struct OPENNT_BASE_RPC_CLIENT {
     RPC_BINDING_HANDLE binding;
@@ -29,40 +25,31 @@ typedef struct OPENNT_BASE_RPC_CLIENT {
     HANDLE stop;
     HANDLE watcher;
     ULONG generation;
-    uint64_t observation_direct; /* Captured on actual Get delivery, not a selector. */
-    DWORD (*command_ready)(void *);
-    void *command_context;
 } OPENNT_BASE_RPC_CLIENT;
 
 static OPENNT_BASE_RPC_CLIENT client;
+/* Optional execution-side resource cleanup, absent in frontend consumers. */
+static PVOID volatile execution_cleanup;
+
 static common_rpc_connection client_rpc_view(void)
 {
     common_rpc_connection view={client.binding,client.connection,client.process,client.generation};
     return view;
 }
-uint64_t OpenNtBaseClientObservationDirect(void)
+
+/* Borrowed for a synchronous launch-side call. No resource ownership moves. */
+common_rpc_connection OpenNtBaseClientExecutionConnection(void (*cleanup)(void))
 {
-    /* Read only by the same original guest execution thread as GetNext. */
-    return client.observation_direct;
+    (void)InterlockedCompareExchangePointer(&execution_cleanup,(PVOID)cleanup,NULL);
+    return client_rpc_view();
 }
+
 DWORD OpenNtBaseClientObserveDosEvent(const common_dos_observation *fact,BOOL gap,HANDLE stop)
 {
     common_rpc_connection view=client_rpc_view();
     return common_rpc_observe_dos_event(&view,fact,gap,stop);
 }
-void OpenNtBaseClientSetCommandBinding(DWORD (*ready)(void *),void *context)
-{
-    client.command_ready=ready;client.command_context=context;
-}
-static LONG request_id;
-static HANDLE parent_event_handle;
-static ULONG parent_receipt;
-/* Get delivers this source-shaped worker wait through a typed attachment.
- * ExitVDM later receives only the original broker receipt, so retain the
- * worker-local duplicate here until the original ExitVDM completion says to
- * close it.  This is one VDM client's single ConsoleRecord wait, not a task
- * scheduler or a reusable-worker policy. */
-static HANDLE worker_wait_event;
+
 /* Owner-approved standalone failure containment, not guest termination or
  * BaseSrv scheduling. Never reconnect a live command to a replacement server.
  * TerminateProcess avoids deadlocking in CRT/DLL teardown while other threads
@@ -80,421 +67,9 @@ static DWORD WINAPI broker_lifetime_watch(void *context)
     return 0;
 }
 
-static BOOL receipt_seen(const ULONG receipts[3],ULONG limit,ULONG receipt)
-{
-    ULONG index;
-    for (index=0;index<limit;++index) if (receipts[index]==receipt) return TRUE;
-    return FALSE;
-}
-
-/* A retained original BaseCheckVDM record can describe an inherited standard
- * stream using the caller's exact handle value.  On current Windows that
- * value is not necessarily an NT4 pseudo Console handle, so identify the
- * caller's three live standard handles before the RPC attachment boundary.
- * This deliberately does not treat a same-type file/pipe as Console. */
-static BOOL current_standard_console(HANDLE value,DWORD standard_id)
-{
-    HANDLE current=GetStdHandle(standard_id);
-    DWORD mode;
-
-    return value!=NULL && value==current &&
-        GetConsoleMode(current,&mode);
-}
-
 /* Generated client stubs own only their transient marshalling buffers. */
 void *__RPC_USER MIDL_user_allocate(size_t bytes) { return malloc(bytes); }
 void __RPC_USER MIDL_user_free(void *value) { free(value); }
-
-static NTSTATUS rpc_failure(DWORD error)
-{
-    (void)error;
-    return STATUS_UNSUCCESSFUL;
-}
-
-/* BaseCheckVDM is still the original classifier and record publisher.  Its
- * three standard fields are the sole resource inputs: replace their local
- * HANDLE spelling with typed attachment receipts before the copied request
- * crosses the broker, preserving stdout/stderr aliases. */
-static DWORD attach_standard_streams(PBASE_API_MSG message,ULONG receipts[3])
-{
-    HANDLE values[3]={message->u.CheckVDM.StdIn,message->u.CheckVDM.StdOut,
-        message->u.CheckVDM.StdErr};
-    ULONG roles[3]={BROKER_VDM_STDIN,BROKER_VDM_STDOUT,BROKER_VDM_STDERR};
-    DWORD standard_ids[3]={STD_INPUT_HANDLE,STD_OUTPUT_HANDLE,STD_ERROR_HANDLE};
-    DWORD present_mask=0u,original_console_mask=0u,current_console_mask=0u;
-    ULONG index,previous;
-    DWORD type;
-    DWORD error=ERROR_SUCCESS;
-    if (!receipts) return ERROR_INVALID_PARAMETER;
-    receipts[0]=receipts[1]=receipts[2]=0;
-    for (index=0;index<3;++index) {
-        BOOL original_console;
-        BOOL current_console;
-        if (values[index]) present_mask|=1u<<index;
-        original_console=OpenNtBaseIsConsoleHandle(values[index]);
-        current_console=current_standard_console(values[index],standard_ids[index]);
-        if (original_console) original_console_mask|=1u<<index;
-        if (current_console) current_console_mask|=1u<<index;
-        /* Original BaseCheckVDM/CSR represents the interactive Console via
-         * its ConsoleRecord, not through the three redirected standard-stream
-         * fields.  The modern Console exposes ordinary Win32 handles, so the
-         * cross-process carrier must recognize them before attempting a file
-         * attachment.  Pipes and files deliberately remain untouched: they
-         * are the original redirection contract and retain their typed
-         * receipts below. */
-        if (original_console || current_console) {
-            values[index]=NULL;
-            continue;
-        }
-        /* COMMAND's native-child startup can carry the original DOS
-         * INVALID_HANDLE_VALUE stdin sentinel.  It denotes no inheritable
-         * stream, not an OS resource eligible for typed attachment. */
-        if (!values[index] || values[index]==INVALID_HANDLE_VALUE) continue;
-        SetLastError(ERROR_SUCCESS);
-        type=GetFileType(values[index]);
-        if (type==FILE_TYPE_UNKNOWN && GetLastError()!=ERROR_SUCCESS) continue;
-        for (previous=0;previous<index;++previous) if (values[previous]==values[index]) {
-            receipts[index]=receipts[previous]; break;
-        }
-        if (previous<index) continue;
-        RpcTryExcept {
-            if (type==FILE_TYPE_PIPE)
-                error=Client_AttachPipe(client.binding,client.connection,client.process,
-                    client.generation,roles[index],values[index],&receipts[index]);
-            else
-                error=Client_AttachFile(client.binding,client.connection,client.process,
-                    client.generation,roles[index],values[index],&receipts[index]);
-        }
-        RpcExcept(1) { error=RpcExceptionCode(); }
-        RpcEndExcept
-        if (error || !receipts[index]) break;
-    }
-if (error || index!=3) {
-        for (index=0;index<3;++index) if (receipts[index] &&
-            !receipt_seen(receipts,index,receipts[index])) {
-            RpcTryExcept { (void)Client_RevokeStream(client.binding,client.connection,
-                client.process,client.generation,receipts[index]); }
-            RpcExcept(1) { }
-            RpcEndExcept
-        }
-        receipts[0]=receipts[1]=receipts[2]=0;
-        return error ? error : ERROR_INVALID_HANDLE;
-    }
-    return ERROR_SUCCESS;
-}
-
-static NTSTATUS check_command(PCSR_API_MSG message,ULONG length)
-{
-    PBASE_API_MSG base=(PBASE_API_MSG)message;
-    BASE_API_MSG forwarded;
-    unsigned char reply[40];
-    void *wire=NULL;
-    uint32_t request=(uint32_t)InterlockedIncrement(&request_id),wireBytes=0;
-    HANDLE parent_event=NULL,*parent_events=NULL;
-    ULONG parent_event_count=0,parent_receipt_value=0,replyBytes=0;
-    DWORD error=ERROR_INVALID_DATA;
-    BOOL applied=FALSE;
-    ULONG streams[3]={0,0,0};
-    if (!request) request=(uint32_t)InterlockedIncrement(&request_id);
-    if (length!=sizeof(BASE_CHECKVDM_MSG) ||
-        (error=attach_standard_streams(base,streams))!=ERROR_SUCCESS) goto done;
-    forwarded=*base;
-    forwarded.u.CheckVDM.StdIn=(HANDLE)(ULONG_PTR)streams[0];
-    forwarded.u.CheckVDM.StdOut=(HANDLE)(ULONG_PTR)streams[1];
-    forwarded.u.CheckVDM.StdErr=(HANDLE)(ULONG_PTR)streams[2];
-    if (!OpenNtBaseEncodeCheckCommand(&forwarded,request,client.generation,NULL,0,&wireBytes) ||
-        !(wire=HeapAlloc(GetProcessHeap(),0,wireBytes)) ||
-        !OpenNtBaseEncodeCheckCommand(&forwarded,request,client.generation,wire,wireBytes,&wireBytes))
-        goto done;
-    RpcTryExcept {
-        error=Client_Check(client.binding,client.connection,client.process,client.generation,
-            wireBytes,wire,&parent_event_count,&parent_events,&parent_receipt_value,&replyBytes,reply);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    if (!error && replyBytes==sizeof(reply) && parent_event_count<=1 &&
-        (!parent_event_count || parent_events)) {
-        if (parent_event_count) parent_event=parent_events[0];
-        applied=OpenNtBaseApplyCheckReply(reply,(uint32_t)replyBytes,client.generation,request,base);
-    }
-    if (applied && base->u.CheckVDM.VDMState==VDM_PRESENT_AND_READY &&
-        parent_event && parent_receipt_value) {
-        base->u.CheckVDM.WaitObjectForParent=parent_event;
-        parent_event_handle=parent_event;parent_receipt=parent_receipt_value;
-        parent_event=NULL;
-    } else if (applied && (parent_event || parent_receipt_value)) {
-        applied=FALSE;
-    }
-done:
-    if (parent_events) MIDL_user_free(parent_events);
-    if (parent_event) CloseHandle(parent_event);
-    if (wire) HeapFree(GetProcessHeap(),0,wire);
-    if (error || !applied) {
-        ULONG index;
-        for (index=0;index<3;++index) if (streams[index] &&
-            !receipt_seen(streams,index,streams[index])) {
-            RpcTryExcept { (void)Client_RevokeStream(client.binding,client.connection,
-                client.process,client.generation,streams[index]); }
-            RpcExcept(1) { }
-            RpcEndExcept
-        }
-        SetLastError(error ? error : ERROR_INVALID_DATA);
-        message->ReturnValue=(ULONG)STATUS_UNSUCCESSFUL;
-        return STATUS_UNSUCCESSFUL;
-    }
-    return (NTSTATUS)message->ReturnValue;
-}
-
-static NTSTATUS get_command(PCSR_API_MSG message,ULONG length)
-{
-    PBASE_API_MSG base=(PBASE_API_MSG)message;
-    uint32_t request=(uint32_t)InterlockedIncrement(&request_id),wire_bytes=0;
-    unsigned char *reply=NULL;
-    void *wire=NULL;
-    HANDLE wait_event=NULL;
-    HANDLE *wait_events=NULL;
-    HANDLE *pipe_handles=NULL;
-    HANDLE *file_handles=NULL;
-    ULONG wait_event_count=0;
-    ULONG pipe_mask=0,pipe_count=0,file_mask=0,file_count=0;
-    ULONG reply_bytes=0;
-    DWORD error=ERROR_INVALID_DATA;
-    BOOL applied=FALSE;
-    uint64_t observation_direct=0;
-    if (!request) request=(uint32_t)InterlockedIncrement(&request_id);
-    if (length!=sizeof(BASE_GET_NEXT_VDM_COMMAND_MSG) ||
-        !OpenNtBaseEncodeGetCommand(base,request,client.generation,NULL,0,&wire_bytes) ||
-        !(wire=HeapAlloc(GetProcessHeap(),0,wire_bytes)) ||
-        !OpenNtBaseEncodeGetCommand(base,request,client.generation,wire,wire_bytes,&wire_bytes))
-        goto done;
-    RpcTryExcept {
-        error=Client_Get(client.binding,client.connection,client.process,client.generation,
-            wire_bytes,wire,&wait_event_count,&wait_events,
-            &pipe_mask,&pipe_count,&pipe_handles,&file_mask,&file_count,&file_handles,
-            &reply_bytes,&reply);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    if (!error && wait_event_count<=1 && (!wait_event_count || wait_events) &&
-        pipe_count<=3 && (!pipe_count || pipe_handles) &&
-        file_count<=3 && (!file_count || file_handles) && reply && reply_bytes) {
-        if (wait_event_count) wait_event=wait_events[0];
-        applied=OpenNtBaseApplyGetCommand(reply,(uint32_t)reply_bytes,client.generation,request,base);
-        if(applied)(void)OpenNtBaseReadGetObservation(reply,reply_bytes,client.generation,request,&observation_direct);
-    }
-    if (applied) {
-        base->u.GetNextVDMCommand.WaitObjectForVDM=wait_event;
-        if (pipe_count || file_count) {
-            HANDLE streams[3]={NULL,NULL,NULL};
-            ULONG stream_mask=pipe_mask|file_mask;
-            ULONG pipe_index=0,file_index=0,index;
-            if ((pipe_mask&file_mask) || (pipe_mask&~7u) || (file_mask&~7u) ||
-                (!!base->u.GetNextVDMCommand.StdIn != !!(stream_mask&1u)) ||
-                (!!base->u.GetNextVDMCommand.StdOut != !!(stream_mask&2u)) ||
-                (!!base->u.GetNextVDMCommand.StdErr != !!(stream_mask&4u))) {
-                applied=FALSE;
-            } else {
-                for (index=0;index<3;++index) {
-                    if (pipe_mask&(1u<<index)) streams[index]=pipe_handles[pipe_index++];
-                    else if (file_mask&(1u<<index)) streams[index]=file_handles[file_index++];
-                }
-                if (pipe_index!=pipe_count || file_index!=file_count) { applied=FALSE; goto done; }
-                for (index=0;index<3;++index) if (streams[index] &&
-                    !SetHandleInformation(streams[index],HANDLE_FLAG_INHERIT,HANDLE_FLAG_INHERIT)) {
-                    error=GetLastError(); applied=FALSE; break;
-                }
-                if (!applied) goto done;
-                base->u.GetNextVDMCommand.StdIn=streams[0];
-                base->u.GetNextVDMCommand.StdOut=streams[1];
-                base->u.GetNextVDMCommand.StdErr=streams[2];
-                for (index=0;index<pipe_count;++index) pipe_handles[index]=NULL;
-                for (index=0;index<file_count;++index) file_handles[index]=NULL;
-            }
-        } else {
-            /* A declared standard stream is carried only as a typed RPC
-             * attachment.  The scalar reply contains presence bits, never a
-             * usable HANDLE value, so reject a truncated/malformed reply. */
-            if (base->u.GetNextVDMCommand.StdIn ||
-                base->u.GetNextVDMCommand.StdOut ||
-                base->u.GetNextVDMCommand.StdErr) {
-                applied=FALSE;
-            } else {
-                base->u.GetNextVDMCommand.StdIn=NULL;
-                base->u.GetNextVDMCommand.StdOut=NULL;
-                base->u.GetNextVDMCommand.StdErr=NULL;
-            }
-        }
-        if (applied && wait_event) {
-            /* Original srvvdm.c reuses its ConsoleRecord event across Get
-             * calls. RPC supplies another local duplicate on each reply;
-             * retain the first until ExitVDM, not a one-delivery restriction. */
-            if (worker_wait_event) {
-                CloseHandle(wait_event);
-                base->u.GetNextVDMCommand.WaitObjectForVDM=worker_wait_event;
-            } else worker_wait_event=wait_event;
-        }
-        wait_event=NULL;
-    }
-done:
-    if (wait_events) MIDL_user_free(wait_events);
-    if (pipe_handles) {
-        ULONG index;
-        for (index=0;index<pipe_count;++index) if (pipe_handles[index])
-            CloseHandle(pipe_handles[index]);
-        MIDL_user_free(pipe_handles);
-    }
-    if (file_handles) {
-        ULONG index;
-        for (index=0;index<file_count;++index) if (file_handles[index])
-            CloseHandle(file_handles[index]);
-        MIDL_user_free(file_handles);
-    }
-    if (wait_event) CloseHandle(wait_event);
-    if (reply) MIDL_user_free(reply);
-    if (wire) HeapFree(GetProcessHeap(),0,wire);
-    if (error || !applied) {
-        SetLastError(error ? error : ERROR_INVALID_DATA);
-        message->ReturnValue=(ULONG)STATUS_UNSUCCESSFUL;
-        return STATUS_UNSUCCESSFUL;
-    }
-    if((message->ReturnValue==STATUS_SUCCESS || (message->ReturnValue==STATUS_NO_MEMORY &&
-        (base->u.GetNextVDMCommand.VDMState & RETURN_ON_NO_COMMAND))) &&
-        !base->u.GetNextVDMCommand.WaitObjectForVDM &&
-        (base->u.GetNextVDMCommand.CmdLen || (base->u.GetNextVDMCommand.VDMState & RETURN_ON_NO_COMMAND)) &&
-        !(base->u.GetNextVDMCommand.VDMState &
-            (ASKING_FOR_ENVIRONMENT|ASKING_FOR_PIF|ASKING_FOR_WOW_BINARY)))
-        client.observation_direct=observation_direct;
-    if (message->ReturnValue==STATUS_SUCCESS && client.command_ready &&
-        !base->u.GetNextVDMCommand.WaitObjectForVDM && base->u.GetNextVDMCommand.CmdLen &&
-        !(base->u.GetNextVDMCommand.VDMState & ASKING_FOR_ENVIRONMENT)) {
-        error=client.command_ready(client.command_context);
-        if (error) {
-            SetLastError(error);message->ReturnValue=(ULONG)STATUS_UNSUCCESSFUL;
-            return STATUS_UNSUCCESSFUL;
-        }
-    }
-    return (NTSTATUS)message->ReturnValue;
-}
-
-static NTSTATUS exit_command(PCSR_API_MSG message,ULONG length)
-{
-    PBASE_EXIT_VDM_MSG exit_message=(PBASE_EXIT_VDM_MSG)&message->u.ApiMessageData;
-    DWORD error=ERROR_INVALID_PARAMETER;
-    ULONG close_worker_wait=0;
-    BOOL is_wow;
-
-    if (length!=sizeof(*exit_message)) goto done;
-    is_wow=exit_message->ConsoleHandle==(HANDLE)-1;
-    RpcTryExcept {
-        error=Client_Exit(client.binding,client.connection,client.process,client.generation,
-            is_wow ? 1u : 0u,is_wow ? exit_message->iWowTask : 0u,&close_worker_wait);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    if (error || close_worker_wait>1u || (close_worker_wait && !worker_wait_event)) goto done;
-    exit_message->WaitObjectForVDM=close_worker_wait ? worker_wait_event : NULL;
-    if (close_worker_wait) worker_wait_event=NULL;
-    message->ReturnValue=STATUS_SUCCESS;
-    return STATUS_SUCCESS;
-done:
-    SetLastError(error ? error : ERROR_INVALID_DATA);
-    message->ReturnValue=STATUS_UNSUCCESSFUL;
-    return STATUS_UNSUCCESSFUL;
-}
-
-static NTSTATUS update_command(PCSR_API_MSG message,ULONG length)
-{
-    PBASE_API_MSG base=(PBASE_API_MSG)message;
-    unsigned char reply[32];
-    void *wire=NULL;
-    HANDLE parent_event=NULL,*parent_events=NULL;
-    uint32_t request=(uint32_t)InterlockedIncrement(&request_id),wire_bytes=0;
-    ULONG parent_event_count=0,reply_bytes=0,receipt=0;
-    DWORD error=ERROR_INVALID_DATA;
-    BOOL applied=FALSE;
-    if (!request) request=(uint32_t)InterlockedIncrement(&request_id);
-    if (length!=sizeof(BASE_UPDATE_VDM_ENTRY_MSG) ||
-        !OpenNtBaseEncodeUpdateCommand(base,request,client.generation,NULL,0,&wire_bytes) ||
-        !(wire=HeapAlloc(GetProcessHeap(),0,wire_bytes)) ||
-        !OpenNtBaseEncodeUpdateCommand(base,request,client.generation,wire,wire_bytes,&wire_bytes))
-        goto done;
-    RpcTryExcept {
-        error=Client_Update(client.binding,client.connection,client.process,client.generation,
-            wire_bytes,wire,&parent_event_count,&parent_events,&receipt,&reply_bytes,reply);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    if (!error && reply_bytes==sizeof(reply) && parent_event_count<=1 &&
-        (!parent_event_count || parent_events)) {
-        if (parent_event_count) parent_event=parent_events[0];
-        applied=OpenNtBaseApplyUpdateReply(reply,(uint32_t)reply_bytes,client.generation,request,base);
-    }
-    if (applied) {
-        base->u.UpdateVDMEntry.WaitObjectForParent=parent_event;
-        parent_event_handle=parent_event;
-        parent_receipt=receipt;
-        parent_event=NULL;
-    }
-done:
-    if (parent_events) MIDL_user_free(parent_events);
-    if (parent_event) CloseHandle(parent_event);
-    if (wire) HeapFree(GetProcessHeap(),0,wire);
-    if (error || !applied) {
-        SetLastError(error ? error : ERROR_INVALID_DATA);
-        message->ReturnValue=(ULONG)STATUS_UNSUCCESSFUL;
-        return STATUS_UNSUCCESSFUL;
-    }
-    return (NTSTATUS)message->ReturnValue;
-}
-
-static NTSTATUS exit_code_command(PCSR_API_MSG message,ULONG length)
-{
-    PBASE_GET_VDM_EXIT_CODE_MSG exit_message=(PBASE_GET_VDM_EXIT_CODE_MSG)&message->u.ApiMessageData;
-    DWORD error=ERROR_INVALID_PARAMETER;
-    ULONG exit_code=0;
-    if (length!=sizeof(*exit_message) || exit_message->hParent!=parent_event_handle || !parent_receipt)
-        goto done;
-    RpcTryExcept {
-        error=Client_ExitCode(client.binding,client.connection,client.process,client.generation,
-            parent_receipt,&exit_code);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    if (!error) {
-        exit_message->ExitCode=exit_code;
-        parent_event_handle=NULL;parent_receipt=0;
-        message->ReturnValue=STATUS_SUCCESS;
-        return STATUS_SUCCESS;
-    }
-done:
-    SetLastError(error);
-    message->ReturnValue=STATUS_UNSUCCESSFUL;
-    return STATUS_UNSUCCESSFUL;
-}
-
-static NTSTATUS reenter_command(PCSR_API_MSG message,ULONG length)
-{
-    PBASE_SET_REENTER_COUNT_MSG reenter=(PBASE_SET_REENTER_COUNT_MSG)&message->u.ApiMessageData;
-    DWORD error=ERROR_INVALID_PARAMETER;
-
-    if (length!=sizeof(*reenter) ||
-        (reenter->fIncDec!=INCREMENT_REENTER_COUNT &&
-         reenter->fIncDec!=DECREMENT_REENTER_COUNT)) goto done;
-    RpcTryExcept {
-        error=Client_Reenter(client.binding,client.connection,client.process,client.generation,
-            reenter->fIncDec);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    if (!error) {
-        message->ReturnValue=STATUS_SUCCESS;
-        return STATUS_SUCCESS;
-    }
-done:
-    SetLastError(error);
-    message->ReturnValue=STATUS_UNSUCCESSFUL;
-    return STATUS_UNSUCCESSFUL;
-}
 
 /* UNKNOWN_IF also occurs while a healthy-version endpoint drains. Query the
  * same authenticated local endpoint before calling it a version mismatch.
@@ -506,7 +81,7 @@ static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
     RPC_STATUS status,uuid_status;
     unsigned int index;
     DWORD result=RPC_S_SERVER_UNAVAILABLE;
-    status=RpcIfInqId(Client_vdm_service_v45_0_c_ifspec,&expected);
+    status=RpcIfInqId(Client_vdm_service_v46_0_c_ifspec,&expected);
     if (status) return status;
     status=RpcMgmtInqIfIds(binding,&interfaces);
     if (status) return status;
@@ -608,40 +183,6 @@ done:
     return error;
 }
 
-DWORD WINAPI OpenNtBaseClientWowStarted(ULONG task)
-{
-    DWORD error=ERROR_INVALID_STATE;
-    if (!client.connection) return error;
-    RpcTryExcept {
-        error=Client_WowStarted(client.binding,client.connection,client.process,
-            client.generation,task);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    return error;
-}
-
-DWORD OpenNtBaseClientWowStartup(HANDLE parent,HANDLE *event,BOOL *started)
-{
-    DWORD error=ERROR_INVALID_STATE;
-    ULONG value=0;
-    if (!event || !started) return ERROR_INVALID_PARAMETER;
-    *event=NULL; *started=FALSE;
-    if (!client.connection) return error;
-    if (!parent || parent!=parent_event_handle || !parent_receipt)
-        return ERROR_INVALID_HANDLE;
-    RpcTryExcept {
-        error=Client_WowStartup(client.binding,client.connection,client.process,
-            client.generation,parent_receipt,event,&value);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    if (!error && (!*event || value>1)) error=ERROR_INVALID_DATA;
-    if (error && *event) { CloseHandle(*event); *event=NULL; }
-    if (!error) *started=value!=0;
-    return error;
-}
-
 DWORD OpenNtBaseClientWatchBroker(void)
 {
     if (!client.server) return ERROR_INVALID_STATE;
@@ -660,6 +201,7 @@ DWORD OpenNtBaseClientWatchBroker(void)
 void OpenNtBaseClientDisconnectCurrent(void)
 {
     VDM_CONNECTION connection;
+    void (*cleanup)(void);
     if (client.watcher) {
         SetEvent(client.stop);
         WaitForSingleObject(client.watcher,INFINITE);
@@ -678,9 +220,9 @@ void OpenNtBaseClientDisconnectCurrent(void)
     if (client.process) CloseHandle(client.process);
     if (client.server) CloseHandle(client.server);
     if (client.binding) RpcBindingFree(&client.binding);
-    if (worker_wait_event) CloseHandle(worker_wait_event);
+    cleanup=(void (*)(void))InterlockedExchangePointer(&execution_cleanup,NULL);
+    if (cleanup) cleanup();
     ZeroMemory(&client,sizeof(client));
-    worker_wait_event=NULL;
 }
 
 DWORD OpenNtBaseClientWorkerFrontendCapability(HANDLE *capability)
@@ -887,30 +429,6 @@ DWORD OpenNtBaseClientFinishNativeRequest(DWORD request,DWORD *exit_code,DWORD *
 {
     common_rpc_connection view=client_rpc_view();
     return common_rpc_finish_native_request(&view,request,exit_code,target_completed);
-}
-DWORD OpenNtBaseClientStartVdmWorker(PCWSTR environment,DWORD characters,DWORD show,
-    HANDLE frontend,HANDLE *worker,HANDLE *parent)
-{
-    DWORD error=ERROR_INVALID_STATE;ULONG receipt=0;
-    if(!worker || !parent)return ERROR_INVALID_PARAMETER;
-    *worker=*parent=NULL;
-    if(!client.connection || !client.binding || !client.process)return error;
-    RpcTryExcept {
-        error=Client_StartVdmWorker(client.binding,client.connection,client.process,
-            client.generation,characters,(WCHAR *)environment,show,frontend,
-            worker,parent,&receipt);
-    }
-    RpcExcept(1){error=RpcExceptionCode();}
-    RpcEndExcept
-    if(!error && (!*worker || (!!*parent != !!receipt)))error=ERROR_INVALID_DATA;
-    if(error) {
-        if(*worker)CloseHandle(*worker);if(*parent)CloseHandle(*parent);
-        *worker=*parent=NULL;
-    } else {
-        /* Same process-local receipt mapping as original Update's RPC facade. */
-        parent_event_handle=*parent;parent_receipt=receipt;
-    }
-    return error;
 }
 DWORD OpenNtBaseClientStartFrontend(uint64_t window,BOOL borrowed,
     HANDLE *root,HANDLE *capability,HANDLE *restored)
@@ -1145,59 +663,4 @@ DWORD OpenNtBaseClientReleaseWorker(uint64_t reservation)
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
     return error;
-}
-
-NTSTATUS NTAPI OpenNtBaseClientCallServer(PCSR_API_MSG message,
-    PCSR_CAPTURE_HEADER capture,CSR_API_NUMBER number,ULONG length)
-{
-    ULONG first=0;
-    DWORD error=ERROR_NOT_SUPPORTED;
-    (void)capture;
-    if (!message || !client.connection || !client.binding || !client.process)
-        return STATUS_UNSUCCESSFUL;
-    if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepRegisterWowExec)) {
-        if (length!=sizeof(BASE_REGISTER_WOWEXEC_MSG)) {
-            message->ReturnValue=STATUS_UNSUCCESSFUL;
-            return STATUS_UNSUCCESSFUL;
-        }
-        RpcTryExcept {
-            error=Client_RegisterWowExec(client.binding,client.connection,client.process,
-                client.generation,(ULONG)(ULONG_PTR)
-                    ((PBASE_API_MSG)message)->u.RegisterWowExec.hwndWowExec);
-        }
-        RpcExcept(1) { error=RpcExceptionCode(); }
-        RpcEndExcept
-        message->ReturnValue=error ? rpc_failure(error) : STATUS_SUCCESS;
-        return (NTSTATUS)message->ReturnValue;
-    }
-    if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM))
-        return check_command(message,length);
-    if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand))
-        return get_command(message,length);
-    if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepExitVDM))
-        return exit_command(message,length);
-    if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepUpdateVDMEntry))
-        return update_command(message,length);
-    if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetVDMExitCode))
-        return exit_code_command(message,length);
-    if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepSetReenterCount))
-        return reenter_command(message,length);
-    if (number!=CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepIsFirstVDM) ||
-        length!=sizeof(BASE_IS_FIRST_VDM_MSG)) {
-        message->ReturnValue=(ULONG)STATUS_UNSUCCESSFUL;
-        return STATUS_UNSUCCESSFUL;
-    }
-    RpcTryExcept {
-        error=Client_First(client.binding,client.connection,client.process,
-            client.generation,&first);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    if (error) {
-        message->ReturnValue=rpc_failure(error);
-        return (NTSTATUS)message->ReturnValue;
-    }
-    ((PBASE_IS_FIRST_VDM_MSG)&message->u.ApiMessageData)->FirstVDM=first;
-    message->ReturnValue=STATUS_SUCCESS;
-    return STATUS_SUCCESS;
 }

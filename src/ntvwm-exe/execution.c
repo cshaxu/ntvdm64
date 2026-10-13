@@ -74,6 +74,7 @@ static DWORD launch_request(ntvwm_execution *request,BYTE *payload,DWORD bytes,
     start.application=*strings[0] ? strings[0] : NULL;start.command=strings[1];
     start.directory=strings[2];start.environment=strings[3];
     start.console_mask=request->root_capability ? header.console_mask : 0;
+    start.window_style=header.window_style;
     start.capabilities[0]=request->root_capability;start.capabilities[1]=request->execution;
     for(i=0;i<3;++i) {
         HANDLE source;
@@ -104,6 +105,7 @@ static DWORD launch_request(ntvwm_execution *request,BYTE *payload,DWORD bytes,
             error=nthook_context_paths(&hook);
             if(!error) {
                 hook.frontend=start.capabilities[0];hook.execution=start.capabilities[1];
+                hook.window_style=start.window_style;
                 error=nthook_install(process.hProcess,&hook,NATIVE_HOOK_INTERCEPT);
             }
         }

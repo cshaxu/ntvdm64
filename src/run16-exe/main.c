@@ -8,6 +8,7 @@
 #include "ntsrv-exe/opennt/include/base_client.h"
 #include "ntsrv-exe/opennt/include/base_config.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
+#include "ntsrv-exe/opennt/include/base_rpc_client_launch_style.h"
 #include "frontend_scope.h"
 #include "launch_options.h"
 #include "image_classification.h"
@@ -210,6 +211,7 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
         CREATE_NEW_CONSOLE : 0;
     HANDLE saved_console=NtCurrentPeb()->ProcessParameters->ConsoleHandle;
     if (launcher_console_only) check_creation_flags |= CREATE_NEW_CONSOLE;
+    if (binary==BINARY_TYPE_SEPWOW) check_creation_flags |= CREATE_SEPARATE_WOW_VDM;
     /* Original BaseCheckVDM reads the private NT4 PEB projection, not the
      * broker connection. An authenticated execution context is an existing
      * Console identity even when this launcher has no native Console. */
@@ -376,7 +378,8 @@ static BOOL WINAPI launcher_control(DWORD event)
     return event == CTRL_C_EVENT || event == CTRL_BREAK_EVENT;
 }
 
-static DWORD launch_native(run16_frontend_scope *scope,PCWSTR application,PCWSTR command,BOOL text,BOOL wait)
+static DWORD launch_native(run16_frontend_scope *scope,PCWSTR application,PCWSTR command,BOOL text,BOOL wait,
+    const run16_launch_options *options)
 {
     run16_native_start start={0};
     WCHAR directory[32768];
@@ -389,6 +392,8 @@ static DWORD launch_native(run16_frontend_scope *scope,PCWSTR application,PCWSTR
     if(!environment) { error=GetLastError();goto done; }
     start.application=application;start.command=command;
     start.directory=directory;start.environment=environment;
+    start.window_style=options->window_style_explicit ? options->window_style :
+        run16_frontend_scope_window_style(scope);
     start.standard[0]=GetStdHandle(STD_INPUT_HANDLE);
     start.standard[1]=GetStdHandle(STD_OUTPUT_HANDLE);
     start.standard[2]=GetStdHandle(STD_ERROR_HANDLE);
@@ -446,7 +451,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
     (void)show;
     if (!run16_parse_launch_options(command,&options))
     {
-        fputs("Usage: run16.exe [--wait] <binary> [arguments]\n", stderr);
+        fputs("Usage: run16.exe [--wait] [--win16-style | --win16-style-all] <binary> [arguments]\n", stderr);
         return ERROR_INVALID_PARAMETER;
     }
     command=(PWSTR)options.command;
@@ -535,7 +540,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         result=connect_broker();
         if (!result) result=run16_frontend_scope_begin_lease(&frontend_scope,initial_console_only);
         if (result) goto done;
-        result=launch_native(frontend_scope,application,shell_command,TRUE,TRUE);
+        result=launch_native(frontend_scope,application,shell_command,TRUE,TRUE,&options);
         goto done;
     }
     if (type == SCS_DOS_BINARY)
@@ -578,6 +583,12 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         {
             if ((binary & ~BINARY_SUBTYPE_MASK)==BINARY_TYPE_DOS)
                 result=run16_frontend_scope_begin_lease(&frontend_scope,initial_console_only);
+            else result=run16_frontend_scope_begin_gui(&frontend_scope);
+            if (!result && binary==BINARY_TYPE_WIN16 &&
+                (run16_frontend_scope_creation_flags(frontend_scope) & CREATE_SEPARATE_WOW_VDM))
+                binary=BINARY_TYPE_SEPWOW;
+            if (!result) result=OpenNtBaseClientSetWindowStyle(options.window_style_explicit ?
+                options.window_style : run16_frontend_scope_window_style(frontend_scope));
             if (!result) result = launch_vdm(binary, application, launch_command,frontend_scope,initial_console_only,options.wait);
         }
         run16_frontend_scope_end(frontend_scope);frontend_scope=NULL;
@@ -605,12 +616,12 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         }
     }
     if(frontend_scope) {
-        result=launch_native(frontend_scope,image_resolved ? application : image_argument,launch_command,TRUE,TRUE);
+        result=launch_native(frontend_scope,image_resolved ? application : image_argument,launch_command,TRUE,TRUE,&options);
         goto done;
     }
     result=connect_broker();
     if(!result)result=run16_frontend_scope_begin_gui(&frontend_scope);
-    if(!result)result=launch_native(frontend_scope,image_resolved ? application : image_argument,launch_command,FALSE,options.wait);
+    if(!result)result=launch_native(frontend_scope,image_resolved ? application : image_argument,launch_command,FALSE,options.wait,&options);
 done:
     run16_frontend_scope_end(frontend_scope);
     OpenNtBaseClientDisconnectCurrent();

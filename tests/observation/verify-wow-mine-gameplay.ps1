@@ -3,7 +3,10 @@ param(
     [Parameter(Mandatory)][string]$PackageRoot,
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$CompilerDriver,
-    [Parameter(Mandatory)][string]$BuildRoot
+    [Parameter(Mandatory)][string]$BuildRoot,
+    [ValidateSet('Off','Win16','All')][string]$WindowStyle='Off',
+    [ValidateSet('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe')]
+    [string[]]$RuntimeImages=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe')
 )
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
@@ -21,7 +24,7 @@ try {
         & $CompilerDriver cl.exe /nologo /O2 /MT /W4 /WX /D_CRT_SECURE_NO_WARNINGS "/Fo$root\probe.obj" "/Fe$root\probe.exe" $source /link user32.lib gdi32.lib *> "$root\compile.txt"
         if($LASTEXITCODE){throw "Probe build failed: $LASTEXITCODE"}
     } finally {Pop-Location}
-    $runtime=New-PhysicalRuntimeStage $PackageRoot
+    $runtime=New-PhysicalRuntimeStage $PackageRoot -RuntimeImages $RuntimeImages
     $scope=New-IsolatedPackageScope $runtime
     @('WINMINE.EXE','system32\ntvdm.exe','system32\WOW32.DLL','system32\run16.exe') | ForEach-Object {
         [pscustomobject]@{File=$_;SHA256=(Get-IsolatedFileSha256 (Join-Path $runtime $_))}
@@ -30,8 +33,10 @@ try {
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     $start=[Diagnostics.ProcessStartInfo]::new($Observer)
     $start.UseShellExecute=$false;$start.CreateNoWindow=$true
-    $start.Arguments='"'+$runtime+'\system32\run16.exe" "'+$runtime+'" "'+$root+'\observer.txt" --wait "'+$runtime+'\WINMINE.EXE" --observation-timeout-ms 30000'
+    $styleArgument=if($WindowStyle -eq 'Win16'){' --win16-style'}elseif($WindowStyle -eq 'All'){' --win16-style-all'}else{''}
+    $start.Arguments='"'+$runtime+'\system32\run16.exe" "'+$runtime+'" "'+$root+'\observer.txt" --wait'+$styleArgument+' "'+$runtime+'\WINMINE.EXE" --observation-timeout-ms 30000'
     $process=[Diagnostics.Process]::Start($start)
+    $null=$process.Handle
     $process.Id | Set-Content "$root\observer.pid"
     $deadline=[DateTime]::UtcNow.AddSeconds(10);$worker=$null
     do {
@@ -39,7 +44,8 @@ try {
         if($worker -or $process.HasExited){break};Start-Sleep -Milliseconds 50
     }while([DateTime]::UtcNow -lt $deadline)
     if(!$worker){throw 'No worker in this owned runtime'}
-    & "$root\probe.exe" $worker.ProcessId "NTVDMConsoleTest-$($process.Id)" "$root\mine" *> "$root\probe.txt"
+    $marked=if($WindowStyle -eq 'Off'){'0'}else{'1'}
+    & "$root\probe.exe" $worker.ProcessId "NTVDMConsoleTest-$($process.Id)" "$root\mine" $marked *> "$root\probe.txt"
     if($LASTEXITCODE){throw "Gameplay probe failed: $LASTEXITCODE"}
     if(!$process.WaitForExit(35000)){throw 'Observer exceeded bound after window close'}
     $report=Get-Content "$root\observer.txt" -Raw

@@ -33,6 +33,8 @@ static BOOL finish(BOOL created,DWORD flags,PROCESS_INFORMATION *child,BOOL laun
     if(!created)return FALSE;
     DWORD saved=GetLastError(),error=ERROR_SUCCESS;
     nthook_context context=nthook_process_context;
+    /* One redirected request, not a persistent descendant policy. */
+    context.creation_flags=launcher ? flags & CREATE_SEPARATE_WOW_VDM : 0;
     {
         BOOL actual_launcher=FALSE;
         error=nthook_launcher_target(child->hProcess,&context,&actual_launcher);
@@ -272,6 +274,7 @@ LONG nthook_attach(void)
     if(!error)error=DetourUpdateThread(GetCurrentThread());
     if(!error)error=DetourAttach(&(PVOID &)create_w,hooked_w);
     if(!error)error=DetourAttach(&(PVOID &)create_a,hooked_a);
+    if(!error)error=nthook_attach_titles();
     if(error){DetourTransactionAbort();return error;}
     return DetourTransactionCommit();
 }

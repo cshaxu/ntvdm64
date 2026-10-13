@@ -6,6 +6,7 @@
  */
 
 #include <windows.h>
+#include "wow_title_policy.h"
 #include "opennt-abi/host-compat/include/wow32_provider_private.h"
 #include "opennt-abi/source/public/internal/windows/inc/wingdip.h"
 
@@ -18,13 +19,10 @@ int WINAPI DialogBoxIndirectParamAorW(HINSTANCE module,
     LPCDLGTEMPLATEW dialog_template, HWND owner, DLGPROC dialog_proc,
     LPARAM init_param, UINT flags)
 {
-    if (dialog_template == NULL) return -1;
-    if ((flags & SCDLG_ANSI) != 0) {
-        return DialogBoxIndirectParamA(module,
-            (LPCDLGTEMPLATEA)dialog_template, owner, dialog_proc, init_param);
-    }
-    return DialogBoxIndirectParamW(module, dialog_template, owner, dialog_proc,
-        init_param);
+    DWORD policy;
+    if (dialog_template == NULL || !wow_title_policy(&policy)) return -1;
+    return (int)wow_title_modal(module,dialog_template,owner,dialog_proc,
+        init_param,(flags&SCDLG_ANSI)!=0,policy);
 }
 
 /* DIVERGENCE(ADAPTER-WIN32-052): OpenNT's GetHFONT retrieves the font

@@ -40,7 +40,7 @@ const pairs=[
 ];
 const before=definitions(predecessor);
 const common=definitions('src/common/rpc/worker_control.c');
-const facade=definitions('src/ntsrv-exe/opennt/source/base_rpc_client.c');
+const facade=definitions('src/ntsrv-exe/opennt/source/base_rpc_client_core.c');
 const normalize=s=>s.replace(/\s+/g,' ').trim();
 const adapt=s=>s.replaceAll('client.','state->')
   .replace(/if\s*\(!state->connection \|\| !state->binding \|\| !state->process\)/g,

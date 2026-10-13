@@ -4,7 +4,7 @@ $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $cache=(Resolve-Path $Cache).Path;$root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Fresh build-owned output required'}
 $graph=Get-Content "$cache/build.ninja"
-$compile=[Array]::FindIndex($graph,[Predicate[string]]{param($line) $line.StartsWith('build obj/worker/rpc_client.obj: ')})
+$compile=[Array]::FindIndex($graph,[Predicate[string]]{param($line) $line.StartsWith('build obj/run16/rpc_client_launch_style.obj: ')})
 if($compile -lt 0 -or $graph[$compile+1] -notmatch '^  cflags = '){throw 'Missing actual worker client flags'}
 $flags=$graph[$compile+1].Trim().Substring(9)
 $edge=@($graph|Where-Object {$_ -match '^build ntvdm.exe \| ntvdm.lib: worker_link '})
@@ -19,7 +19,8 @@ $null=New-Item -ItemType Directory -Path $root
 $object="$root/diagnostic.obj"
 $sources=@()
 $inputs=@($inputs|ForEach-Object {
-    if($_ -eq 'obj/worker/rpc_client.obj'){'"'+$object+'"'}
+    if($_ -eq 'base-rpc-client-core.lib'){'"'+$object+'"'}
+    elseif($_ -eq 'base-rpc-client-launch-style.lib'){}
     else {$file=(Resolve-Path (Join-Path $cache $_)).Path;$sources+=@{path=$file;sha256=(Get-FileHash $file).Hash};'"'+$file+'"'}
 })
 $link=$command.Replace('$out',"$root/ntvdm.exe").Replace('$in',($inputs -join ' ')).Replace('$:',':')

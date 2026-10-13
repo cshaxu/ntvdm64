@@ -12,6 +12,14 @@ are inherited rather than reset. No new global source audit is required.
 
 ## Complete scope and dependencies
 
+Basic-display exit requires ordinary SOL and WRITE main windows with usable
+initial content, alongside retained WINMINE startup. An error dialog, splash,
+empty placeholder or hung window does not pass. Reuse initialization repairs
+from the basic-functionality owners and promote any remaining actual provider
+dependency before comprehensive interaction, rather than waiting for final
+three-application acceptance. Full drawing-family closure remains distinct
+from this mandatory early startup/display milestone.
+
 Inherited: bounded original-shape handle carrier, stock/select/delete/release, transforms, drawing, bitmap/DIB and palette. Verify original current-slot reuse semantics, positive/negative content and resource cleanup; no invented generation/type policy.
 
 Expected reuse boundaries: [USER objects and shared view](proposal-wow32-user-objects-shared-view-001.md), [Modules, memory and resource aliases](proposal-wow32-modules-memory-aliases-001.md), [Resource discovery and loading foundation](proposal-wow32-resource-loading-001.md).

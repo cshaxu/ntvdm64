@@ -1,14 +1,87 @@
 # Project Status
 
-**No active M/T/S packet.** T445 remains open between S5 and S6.
+**Active: M0 T445 S7**
 
-Owner accepts S4 r261 and admits S5 DLL/component extraction and publication.
-Propagation, integration and final acceptance move to S6/S7/S8. T445 remains open.
+S4 r261 is accepted; propagation/core split/integration/final acceptance are S6/S7/S8/S9.
 Owner explicitly closes S5 without manual acceptance on 2026-10-13.
 Implementation, tests and publication are delivered at 7c6406575; this is
 owner-directed closure, not a claim of manual test success.
 See [S5 evidence](../etc/evidence/m0-t445-s5-style-dll.md).
 See the [S1 closure design](../etc/evidence/m0-t445-s1-installation-design.md).
+
+## Active Packet
+
+### RPC client separation and approved child policy propagation completion
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T445 S7, Ordinary Mode; sequential implementation and review. |
+| Candidate Proposal | [Window appearance](../proposals/proposal-win31-window-appearance-001.md). |
+| Admission And Approval | Owner explicitly assigns the remaining S6 propagation work to S7 to keep S numbers increasing; carry CREATE_SEPARATE_WOW_VDM through private context and reuse existing public options. |
+| Objective | Complete the RPC core/style split and independent Win16 child execution with inherited style across Hook and Run16, absorbing the outstanding S6 ingress. |
+| Non-goals | No new public option, automatic renderer integration, guest change, global environment mutation or unrelated WOW repair; only the owner-approved WOW environment capacity/retry mirror repair is admitted. |
+| Reference Baseline | Retained S6 propagation and S7 source/link split; published S5 unchanged. |
+| Files And ABI Surface | RPC core/style split; Hook payload/context and A/W creation; Run16 scope/classification; NTSRV independent-WOW session identity, config and completion adaptation; tests. |
+| Applicable Rules | All authorities; background owned build/tests; preserve unrelated changes; no security bypass. |
+| Verification | Both Hook widths and ANSI/Unicode requests; shared/independent Win16 identity, inherited policies, native-child noninheritance of one-shot launch flag, invalid payloads, existing CLI and full coherent package gates. |
+| Expected Markers | Existing style options retain policy; only the requested Win16 launch uses separate WOW, without recursive launcher or new CLI syntax. |
+| Asset Needs | Existing source-owned native fixtures and immutable Win16 fixtures; no import. |
+| Reporting Requirements | Actual caller flags, worker identities, title markers, protocol validation, exact tests and remaining gate limitations. |
+| Stop Conditions | Guest change, mirror changes beyond the approved GetWowKernelCmdLine capacity/retry repair, public CLI expansion, unrelated lifecycle repair or security block. |
+| Exit Criteria | Complete propagation evidence, package regression and coherent verified publication, commit/push; no partial delivery claim. |
+| Original Owner Request | Approve existing CREATE_SEPARATE_WOW_VDM private propagation and include full child-chain verification, without adding public parameters. |
+| Similar-Issue Sweep | A/W and x86/x64 Hook paths, launcher bootstrap validation, native descendants, explicit independent/shared flags and existing CLI compatibility. |
+
+S7 retains its verified local split and absorbs S6's outstanding approved
+ingress work. The attempted S6 resumption is superseded by the owner's explicit
+instruction to keep S numbers increasing. S6 is not reopened. S7 remains the
+only active S. r107 publishes the verified r090 candidate. r111 CUI six,
+r129 DOS leaf six, r131 full DOS child/grandchild six and r132 reproducible
+observer checks pass. Verification/publication are complete; owner acceptance
+remains pending. This P includes the owner's Queue/proposal edits.
+
+S7 DIV-331's approved environment repair is verified by real guest resize
+1184->1200 for1185 bytes, without arena damage. The next failure was bootstrap
+InitTask querying policy before application delivery; existing independent
+PIF replies now carry the authenticated reservation's policy. r088 passes all12
+untraced separate child chains (two widths, A/W, three policies); r089 service29
+and r092 governance pass. r091 Product and r095 shared/direct propagation pass;
+r100 Control and r106 final shared/separate chains pass. r107 publishes all13
+images to assets/release and O:/winnt/system32 with three-way hash checks.
+Owner includes the pending Queue/proposal planning edits in the same delivery.
+See [S7 evidence](../etc/evidence/m0-t445-s7-base-rpc-client-split.md).
+
+## Retained S7 Bounded Packet
+
+See the retained [S7 packet](../etc/evidence/m0-t445-s7-base-rpc-client-split.md).
+
+S7 local split builds and its graph/map boundary checks pass. New NTCON is
+readable and its invalid-entry execution returns87; no Defender clearance is
+inferred. Early untraced Product verification failed the SOL window frontier in both
+the S7 candidate and a retained pre-split S6 control. Standalone comparisons
+do show the expected dialog. The r029 full gate passes with opt-in WOW tracing;
+that diagnostic-dependent success alone did not resolve it. Later r091 passes
+untraced with DIV-331; this does not establish SOL/WRITE functional completion.
+See [S7 evidence](../etc/evidence/m0-t445-s7-base-rpc-client-split.md).
+Independent Console17/Window17 and the actual WOW lifecycle/native-send/style
+fixtures pass; r026 confirms all13 published images remain the prior release.
+That was the historical pre-publication disposition; r107 supersedes it.
+No S7 commit/push or owner acceptance is yet claimed.
+
+## S6 Bounded Disposition
+
+At its bounded disposition S6 was not delivered or accepted. Its then-open
+DOS/CUI/package and separate-WOW work is retained in its
+[evidence](../etc/evidence/m0-t445-s6-real-chains.md).
+Owner inserts S7 to resolve the source/link boundary first. S6 outstanding
+verification is retained, not waived. The former integration/final stages
+move to S8/S9. Remaining S6 ingress work is now explicitly assigned to S7.
+
+Owner approves completing CREATE_SEPARATE_WOW_VDM propagation through the
+Hook-to-Run16 private request in S7, with full child-chain tests.
+Reuse the two existing public options --win16-style and --win16-style-all;
+add no public option and change no guest. The existing CreateProcess flag
+retains its own independent-WOW meaning, separate from the style policy.
 
 ## S1 Closure Record
 
@@ -33,12 +106,13 @@ This does not declare the menu blankness repaired or the full T complete.
 ## Planned Sequence
 
 S1--S4 are owner-accepted. S5 is owner-closed without manual acceptance;
-S6 is CLI/policy propagation and title-marker verification; S7 integrates
-the DLL; S8 is integrated acceptance and the deferred native-menu retest.
+S6 is CLI/policy propagation and title-marker verification (delivery pending).
+S7 separates the RPC client core from launch style; S8 integrates the DLL;
+S9 is integrated acceptance and the deferred native-menu retest.
 The [S4 review](../etc/evidence/m0-t445-s4-menu-mdi-review.md) records r052
 delivery de5526a16 and the r261 background/scroll repair; owner accepts r261.
 The [working plan](../etc/operations/t445-win31-window-style-plan.md) defines
-the contracts. S6 is planned, not yet admitted. The complete style core now
+the contracts. S7 is now admitted. The complete style core now
 belongs to src/ntw16s-dll; src/w16style-exe owns the released thin demo.
 
 ## S5 Closure Record
@@ -47,6 +121,11 @@ Owner states no manual acceptance was performed and explicitly directs S5
 closure. Delivery 7c6406575 is built, tested, published and pushed; the
 [S5 evidence](../etc/evidence/m0-t445-s5-style-dll.md) records the checks and
 limitations. This does not close T445 or automatically admit S6.
+
+## S4 Closure Record
+
+Owner accepts r261; [S4 evidence](../etc/evidence/m0-t445-s4-menu-mdi-review.md)
+retains delivery and scope. S5 subsequently moved the accepted core into DLLs.
 
 ## Closed S3 Packet
 
@@ -95,19 +174,14 @@ limitations. This does not close T445 or automatically admit S6.
 
 ## Current Work
 
-No S packet is active. S5 is closed by owner direction without manual
-acceptance; the next planned stage is S6. No new implementation is admitted.
+S6 progress: [propagation evidence](../etc/evidence/m0-t445-s6-style-propagation.md).
+S6 bounded tests remain valid only for their recorded inputs; delivery remains open.
+S7 now verifies and publishes that retained work; S8 drawing is not admitted.
 
 ## Historical S3 To S4 Transition
 
-S3 is owner-closed; S4 standalone menus/MDI is admitted. The complete
-[S3 experiment evidence](../etc/evidence/m0-t445-s3-style-experiment.md)
-retains caption leakage, original frame/button geometry, host System font,
-double-click repair, both-width tests and diagnostic controls. No production
-images changed. Native-menu animation blankness remains unresolved: the same
-old independent executable now fails where its earlier capture was normal.
-Fresh-session cause isolation is owner-deferred to S7. Retro menu implementation
-is a separate S4 product requirement, not proof that this failure is repaired.
+The [S3 evidence](../etc/evidence/m0-t445-s3-style-experiment.md) retains that
+historical transition. Native-menu session diagnosis now belongs to S8.
 
 ## T444 Final Disposition
 
@@ -160,25 +234,8 @@ in the [T443 closure](../history/m0-t443-special-case-contract-closure.md).
 
 ## Previous Closed Packet
 
-### COMMAND interpreter/target/tail contract recovery
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | `M0 T443 S3`, Ordinary Mode. |
-| Admission And Approval | Owner directs “准入 S3，先解释问题和根源”. S2's shared-source Hook correction is complete in the working packet: both Hook bitnesses built and the focused installation suite passed three consecutive times with 104 assertions. S3 is the next coupled H01--H03 repair; Windows 3.1 window appearance remains the queue head. |
-| Objective | Preserve the complete original `COMSPEC /c <tail>` command that COMMAND has already assembled, but create it through run16/NTVWM so the host COMSPEC is Hooked. Remove the project-owned `|&<>`, bare `COMMAND.COM /c`, and three-argv quote-rebuild heuristics without taking shell grammar from COMMAND or host CMD. |
-| Non-goals | No guest/media mutation, generic Windows command-line parser, filename alias list, new shell/helper/scheduler/protocol, broad H04 fallback change, change to Hook identity behavior, or replacement of a `COMSPEC /c` tail by a new run16 shell fallback. |
-| Reference Baseline | [T443 S1 ledger](../etc/evidence/m0-t443-s1-special-case-contract-ledger.md), original `cmdExec` in `src/mvdm/dos/command/cmdexec.c` (its `AH=1` branch builds `COMSPEC /c <tail>`), `command_process_compat.c`, `run16/main.c`, and the focused S2 Hook result. |
-| Files And ABI Surface | Expected owner files are `src/ntvdm-exe/win32/command_process_compat.c`, `src/run16-exe/main.c`, their focused tests/evidence, and required governance records. No public protocol or guest ABI change is admitted. |
-| Applicable Rules | Execution, architecture, coding, documentation and source-policy authorities; original COMMAND creates the full host `COMSPEC /c` command, while host CMD remains the sole owner of its quoting, pipe, redirection, batch and built-in grammar. |
-| Verification | Focused build and component checks now pass; release identity is verified against all ten deployed images. The headless Console observer returns the same pre-input `ERROR_INVALID_PARAMETER` for both candidate and HEAD, so it is recorded as an unsuitable interactive witness rather than a false product regression. Owner acceptance remains `run16 command` with built-in, pipe/redirection, and nested return in a real Windows Terminal Console. See [S3 evidence](../etc/evidence/m0-t443-s3-command-comspec-contract.md). |
-| Expected Markers | No route decision is based merely on a metacharacter scan or bare basename; the original full `COMSPEC /c <tail>` reaches run16 unchanged and NTVWM injects Hook before that COMSPEC resumes. |
-| Asset Needs | Current ten-image release, source/build-owned command fixtures and existing original/ledger evidence only. |
-| Reporting Requirements | Record current call graph, each removed/retained decision, original/provenance basis, positive and negative witnesses, both Console/Window regression scope, and release boundary. |
-| Stop Conditions | The only apparent solution needs a general parser, changes original/mirror COMMAND code, requires new IPC/protocol, cannot preserve a nested or composite witness, or reveals that H04's error taxonomy must change; pause for re-admission rather than broaden S3. |
-| Exit Criteria | Met: source-backed contract and minimal owner-side repair are complete; focused build/component checks and ten-image release identity passed, and the owner accepted the real-Console COMMAND matrix on 2026-10-10. |
-| Original Owner Request | “准入s3 先解释问题和根源”. |
-| Similar-Issue Sweep | All project-owned COMMAND target/tail identity checks in the NTVDM adapter and run16, including quoted transport only; exclude H04 fallback and Hook H06 parser work unless the stop condition is met. |
+The retained T443 S3 packet is indexed in the
+[S7 supporting record](../etc/evidence/m0-t445-s7-base-rpc-client-split.md#retained-prior-status-packet).
 
 ## T443 S3 closure / next-step disposition
 

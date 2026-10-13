@@ -164,7 +164,7 @@ function Add-Edge([string]$target) {
  if($target -in @('obj/opennt-rtl/error.obj','obj/opennt-rtl/environ.obj')){$flags+=' /DNTOS_KERNEL_RUNTIME'}
  if($target -eq 'obj/tests/rtl_x86_fixture.obj'){$flags+=' /DOPENNT_ENVIRONMENT_ONLY'}
  if($target -eq 'obj/opennt-base-client/classifier.obj'){$flags+=' /FI "'+(NP (Join-Path $root 'src/nthook32-dll/legacy_classifier_arch.h'))+'"'}
- if($target -eq 'obj/run16/rpc_client.obj'){
+ if($target -eq 'obj/run16/rpc_client_launch_style.obj'){
   # This existing client imports historical local Base message declarations.
   # Keep its source-facing ABI header, without injecting it into UI/worker TUs.
   $flags+=' /FI "'+(NP (Join-Path $root 'src/opennt-abi/host-compat/include/nt.h'))+'"'

@@ -1,5 +1,13 @@
 # Supporting Material
 
+[T445 S7 RPC client split](evidence/m0-t445-s7-base-rpc-client-split.md)
+records the admitted core/launch-style boundary and its verification status.
+
+[T445 S6 propagation](evidence/m0-t445-s6-style-propagation.md) records short
+options, copied policy boundaries and outstanding real-chain verification.
+[S6 real-chain follow-up](evidence/m0-t445-s6-real-chains.md) records mixed WOW
+policy and modal-window verification, including retained failures.
+
 [T445 S4 menu/MDI review](evidence/m0-t445-s4-menu-mdi-review.md) records
 the standalone candidate, verified coverage and remaining acceptance limits.
 

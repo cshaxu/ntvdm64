@@ -1,10 +1,11 @@
 [CmdletBinding()]
 param([Parameter(Mandatory)][string]$FormalRoot,
       [Parameter(Mandatory)][string]$BuildRoot,
-      [ValidateSet('environment','dpmi','exception','pm-allocation-failure','dpmi-pointer','dpmi-ioctl','dpmi-xmem-failure')][string]$Boundary = 'environment',
+      [ValidateSet('environment','wow-environment','thread-exit','dpmi','exception','pm-allocation-failure','dpmi-pointer','dpmi-ioctl','dpmi-xmem-failure')][string]$Boundary = 'environment',
       [switch]$DpmiLifecycleOnly,
       [Parameter(Mandatory)][string]$EnvironmentTraceLog)
 $ErrorActionPreference = 'Stop'
+Import-Module Microsoft.PowerShell.Utility
 if ($DpmiLifecycleOnly -and $Boundary -ne 'dpmi') { throw 'Lifecycle filter requires DPMI boundary' }
 $repo = (Resolve-Path "$PSScriptRoot\..\..").Path
 $formal = (Resolve-Path $FormalRoot).Path
@@ -14,7 +15,7 @@ if (!$build.StartsWith("$repo\build\", [StringComparison]::OrdinalIgnoreCase) -o
 New-Item -ItemType Directory $build | Out-Null
 $graph = Get-Content (Join-Path $formal 'build.ninja')
 $flags = ($graph | Where-Object { $_.StartsWith('cflags = ') }).Substring(9).Replace('$:', ':')
-if ($Boundary -eq 'environment') {
+if ($Boundary -in @('environment','wow-environment','thread-exit')) {
     $traceLog = [IO.Path]::GetFullPath($EnvironmentTraceLog).Replace('\', '/')
     if ([IO.Path]::GetDirectoryName($traceLog) -eq '' -or
         [IO.Path]::GetFileName($traceLog) -notmatch '^[A-Za-z0-9_.-]+$') {
@@ -25,6 +26,15 @@ if ($Boundary -eq 'environment') {
 $memberName = 'obj/command/cmdenv.obj'
 $libraryName = 'original-mvdm-command.lib'
 $traceSource = 'command_environment_trace.c'
+if ($Boundary -eq 'wow-environment') {
+    $memberName = 'obj/command/cmdmisc.obj'
+    $traceSource = 'wow_initial_environment_trace.c'
+}
+if ($Boundary -eq 'thread-exit') {
+    $memberName = 'obj/adapter-win32/thread_start_compat.obj'
+    $libraryName = 'softpc-win32-bindings.lib'
+    $traceSource = 'wow_thread_exit_trace.c'
+}
 if ($Boundary -in @('dpmi','pm-allocation-failure','dpmi-pointer','dpmi-ioctl','dpmi-xmem-failure')) {
     $memberName = 'obj/dpmi/dpmi32.obj'
     $libraryName = 'original-mvdm-dpmi32.lib'

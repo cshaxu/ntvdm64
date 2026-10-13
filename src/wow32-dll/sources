@@ -23,6 +23,9 @@ SOURCES= \
     wow_sim32_pointer_compat.c \
     wow_task_event_binding.c \
     wow_task_profile_binding.c \
+    wow_task_parent.c \
+    wow_native_process.c \
+    wow_title_policy.c \
     wow_public_user_facade.c \
     wow_user_borrow_scope.c \
     wow_user_message_bridge.c \

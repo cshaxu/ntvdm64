@@ -5,6 +5,8 @@
 #include "mvdm_guest_location.h"
 #include "ntvdm-exe/session/session.h"
 
+#include "ntsrv-exe/opennt/include/base_rpc_client_launch_style.h"
+
 #define MVDM_COMMAND_NATIVE_CHILD_COMMAND_BYTES 128u
 #define MVDM_COMMAND_NATIVE_CHILD_ENVIRONMENT_BYTES (32u * 1024u)
 #define MVDM_COMMAND_NATIVE_CHILD_STANDARD_BYTES 12u
@@ -13,6 +15,7 @@ typedef struct mvdm_command_native_child_state {
     session *owner;
     uint32_t owner_epoch;
     uint32_t active;
+    DWORD window_style;
     uint32_t command_service;
     uint32_t command_service_tail_bytes;
     uint32_t command_bytes;
@@ -196,6 +199,9 @@ static int capture_locations(mvdm_command_native_child_state *state,
         state->command_bytes = state->environment_bytes = 0u;
         return 0;
     }
+    /* Capture on the guest thread, before cmdExec32 starts its detached
+     * CreateProcess worker and re-enters GetNextVDMCommand. */
+    state->window_style = OpenNtBaseClientDosWindowStyle();
     state->active = 1u;
 
 
@@ -261,6 +267,15 @@ int mvdm_command_native_child_std_handles(ULONG handles_out[3])
     if (handles_out == NULL || !state_current(&state) || state->active != 1u)
         return 0;
     memcpy(handles_out, state->standard_handles, sizeof(state->standard_handles));
+    return 1;
+}
+
+int mvdm_command_native_child_window_style(DWORD *style_out)
+{
+    mvdm_command_native_child_state *state;
+    if (style_out == NULL || !state_current(&state) || state->active != 1u)
+        return 0;
+    *style_out = state->window_style;
     return 1;
 }
 
@@ -334,6 +349,7 @@ void mvdm_command_native_child_finish(void)
     SecureZeroMemory(state->standard_handles, sizeof(state->standard_handles));
     state->command_bytes = state->environment_bytes = state->active = 0u;
     state->command_service = state->command_service_tail_bytes = 0u;
+    state->window_style = 0u;
 }
 
 void mvdm_command_native_child_abort(void)

@@ -698,6 +698,13 @@ error_status_t Server_RegisterWowExec(handle_t binding,VDM_CONNECTION connection
     if (status) return status;
     return OpenNtBaseServiceRegisterWowExec(connection,pid,generation,window);
 }
+error_status_t Server_WowStyle(handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,ULONG generation,ULONG task,ULONG *style)
+{
+    DWORD pid;RPC_STATUS status=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if(status)return status;
+    return OpenNtBaseServiceWowStyle(connection,pid,generation,task,style);
+}
 error_status_t Server_WowStarted(handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation,ULONG task)
 {
@@ -965,7 +972,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v45_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v46_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -1012,7 +1019,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v45_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v46_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);

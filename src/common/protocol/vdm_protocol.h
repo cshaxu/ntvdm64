@@ -31,7 +31,7 @@ typedef struct broker_vdm_startup {
     uint32_t x, y, x_size, y_size, x_chars, y_chars, fill, flags, show;
 } broker_vdm_startup;
 
-#define BROKER_VDM_MESSAGE_VERSION 1u
+#define BROKER_VDM_MESSAGE_VERSION 2u
 enum broker_vdm_operation {
     BROKER_VDM_CHECK=1, BROKER_VDM_UPDATE, BROKER_VDM_GET_NEXT,
     BROKER_VDM_EXIT, BROKER_VDM_IS_FIRST, BROKER_VDM_EXIT_CODE,

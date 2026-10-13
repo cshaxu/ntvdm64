@@ -2,7 +2,8 @@ param(
     [Parameter(Mandatory=$true)][string]$ProviderBuildRoot,
     [Parameter(Mandatory=$true)][string]$WorkerBuildRoot,
     [string]$BuildRoot,
-    [ValidateSet('task-lifecycle','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','task-order','class-client','window-borrow','thunk-scope')] [string]$Case = 'task-lifecycle',
+    [ValidateSet('task-lifecycle','style-policy','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','task-order','class-client','window-borrow','thunk-scope')] [string]$Case = 'task-lifecycle',
+    [string]$StyleDll,
     [string]$Ninja = 'ninja.exe',
     [string]$VsDevCmd = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 )
@@ -27,7 +28,8 @@ function Invoke-NinjaTarget([string]$directory, [string]$target) {
 # T422 owns these worker-local objects. Build exactly those selected objects;
 # do not rely on a provider-only build or on an incidental aggregate archive.
 $workerObjects = @(
-    (Join-Path $worker 'obj/worker/rpc_client.obj'),
+    (Join-Path $worker 'base-rpc-client-core.lib'),
+    (Join-Path $worker 'base-rpc-client-launch-style.lib'),
     (Join-Path $worker 'obj/worker/stub.obj'),
     (Join-Path $worker 'obj/adapter-wow-worker/wow_gdi_alias.obj'),
     (Join-Path $worker 'obj/adapter-wow-worker/wow_user_runtime.obj'),
@@ -56,6 +58,9 @@ foreach ($object in $fixtureSupportObjects) {
     }
 }
 $fixtureLibraries = @(
+    'worker-base.lib', 'common-root.lib', 'common-rpc.lib',
+    'nthook-installer.lib', 'nthook-context.lib',
+    'common-transport.lib', 'common-codec.lib', 'common-console.lib',
     'opennt-base-client.lib', 'opennt-base-bindings.lib', 'broker-transport.lib',
     'worker-shell.lib', 'worker-command-bindings.lib',
     'original-softpc-host-fixture-roots.lib', 'original-softpc-support.lib',
@@ -94,6 +99,11 @@ $fixture = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+
 if ($fixture -eq $compile) { throw 'Fixture substitution failed' }
 if ($Case -eq 'window-borrow') { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE' }
 if ($Case -eq 'task-order') { $fixture += ' /we4113 /we4047' }
+if ($Case -eq 'style-policy') {
+    if(!$StyleDll){throw 'style-policy requires the tested ntw16s32.dll'}
+    Copy-Item -LiteralPath (Resolve-Path $StyleDll).Path -Destination "$out/ntw16s32.dll"
+    $fixture += ' /DWOW_TITLE_POLICY_FIXTURE'
+}
 if ($Case -in @('native-send','native-reply','native-nested','native-seen','native-identity','native-foreign')) { $fixture += ' /DWOW_NATIVE_SEND_FIXTURE' }
 if ($Case -eq 'native-reply') { $fixture += ' /DWOW_NATIVE_REPLY_FIXTURE' }
 if ($Case -eq 'native-nested') { $fixture += ' /DWOW_NATIVE_NESTED_FIXTURE' }
@@ -123,10 +133,17 @@ Invoke-Build ('link /nologo /force:multiple /NODEFAULTLIB:ntvdm.lib /out:"'+$out
 if (!(Test-Path -LiteralPath "$out\fixture.exe" -PathType Leaf)) {
     throw "Task cleanup fixture link produced no executable: $out\fixture.exe"
 }
-$fixtureOutput = @(& "$out\fixture.exe")
-$fixtureExitCode = $LASTEXITCODE
+$process=Start-Process "$out/fixture.exe" -WindowStyle Hidden -PassThru -RedirectStandardOutput "$out/stdout.txt" -RedirectStandardError "$out/stderr.txt"
+$null=$process.Handle
+if(!$process.WaitForExit(60000)) {
+    & taskkill /PID $process.Id /T /F
+    throw "Task cleanup fixture timeout: case=$Case"
+}
+$process.Refresh()
+$fixtureOutput = @(Get-Content "$out/stdout.txt"; Get-Content "$out/stderr.txt")
+$fixtureExitCode = $process.ExitCode
 $fixtureOutput | Write-Output
-if ($fixtureExitCode) { throw "Task cleanup fixture failed: exit=$fixtureExitCode case=$Case" }
+if ($null -eq $fixtureExitCode -or $fixtureExitCode -ne 0) { throw "Task cleanup fixture failed: exit=$fixtureExitCode case=$Case" }
 if ($Case -eq 'task-order' -and
     !($fixtureOutput -match '^WOW_ORIGINAL_TASK_ORDER errors=0(?:\s|$)')) {
     throw 'Task order fixture exited without its successful completion marker'

@@ -12,6 +12,11 @@ are inherited rather than reset. No new global source audit is required.
 
 ## Complete scope and dependencies
 
+The owner-approved [everyday usability checkpoint](proposal-wow32-everyday-usability-001.md)
+now runs earlier, before extended services. Reuse its tests and accepted
+behaviour, but do not equate that bounded milestone with this whole-provider
+closure. Deferred extension stages still require their own owner completion.
+
 Inherited: final same-artifact WRITE/WINMINE/SOL scenarios, repeated/concurrent tasks, abnormal cleanup, integrated OEM and subsequent DOS usability. Reconcile C11/C12 and all registration/dispatch/direct-data edges; no implementation backlog is deferred here.
 
 Acceptance prerequisites are all nineteen preceding owner packages in the

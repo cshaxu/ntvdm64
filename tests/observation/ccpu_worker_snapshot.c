@@ -164,7 +164,44 @@ int main(int argc, char **argv)
         print_bytes(process, backing, length, sr[1].base + ip, "code");
         if (ip >= 16) print_bytes(process, backing, length, sr[1].base + ip - 16, "code-before");
         print_bytes(process, backing, length, sr[2].base + (gr[4] & 0xffff), "stack");
+        if (sample == 0 && length >= 0xb8000 + 4000) {
+            BYTE text[4000];
+            if (read_exact(process, backing + 0xb8000, text, sizeof(text))) {
+                DWORD row, column;
+                puts("guest-text-memory (may be stale in graphics mode):");
+                for (row = 0; row < 25; ++row) {
+                    for (column = 0; column < 80; ++column) {
+                        BYTE ch = text[(row * 80 + column) * 2];
+                        putchar(ch >= 32 && ch < 127 ? ch : '.');
+                    }
+                    putchar('\n');
+                }
+            }
+        }
         if (!(cr[0] & 1)) {
+            /* DS is only a candidate PSP here; interpret the bytes using the
+             * original DOS PSP/arena layout, not as a proven current task. */
+            WORD environment;
+            DWORD arena = sr[3].selector ? sr[3].selector - 1u : 0;
+            if (read_exact(process, backing + sr[3].base + 0x2c,
+                    &environment, sizeof(environment))) {
+                printf("ds-psp-environment-candidate=%04X\n", environment);
+                if (environment) print_bytes(process, backing, length,
+                    (DWORD)(environment - 1u) * 16u, "environment-arena-candidate");
+            }
+            for (index = 0; arena && index < 12; ++index) {
+                BYTE header[16];
+                DWORD size, next;
+                if (arena * 16u + 16u > length ||
+                    !read_exact(process, backing + arena * 16u, header, sizeof(header))) break;
+                size = header[3] | ((DWORD)header[4] << 8);
+                printf("ds-arena-candidate=%04lX tag=%02X owner=%04X paragraphs=%04lX\n",
+                    arena, header[0], header[1] | (header[2] << 8), size);
+                if (header[0] != 'M') break;
+                next = arena + size + 1u;
+                if (next <= arena || next > 0xffff) break;
+                arena = next;
+            }
             WORD old_vector[2];
             DWORD vector_linear = sr[1].base + (gr[5] & 0xffff);
             WORD irq5_vector[2];

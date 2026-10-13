@@ -37,7 +37,9 @@ DWORD nthook_install(HANDLE child,const nthook_context *context,DWORD mode)
     HANDLE attached[2]={NULL,NULL};DWORD error=ERROR_SUCCESS,flags;
     char dll[MAX_PATH*2];BOOL default_char=FALSE;DWORD machine=0,subsystem=0;PCWSTR hook;
     if(!child || !context || (mode!=NATIVE_HOOK_INTERCEPT && mode!=NATIVE_HOOK_LAUNCHER) ||
-        !!context->frontend!=!!context->execution)return ERROR_INVALID_PARAMETER;
+        !!context->frontend!=!!context->execution ||
+        !WINDOW_STYLE_VALID(context->window_style) ||
+        (context->creation_flags & ~NATIVE_HOOK_SEPARATE_WOW))return ERROR_INVALID_PARAMETER;
     error=common_native_process_image(child,&machine,&subsystem);
     if(error)return error;
     hook=machine==IMAGE_FILE_MACHINE_AMD64 ? context->hook64 : context->hook;
@@ -53,6 +55,7 @@ DWORD nthook_install(HANDLE child,const nthook_context *context,DWORD mode)
          * NTVWM itself creates it. Never install its own interception DLL. */
         if(launcher)mode=NATIVE_HOOK_LAUNCHER;
     }
+    if(context->creation_flags && mode!=NATIVE_HOOK_LAUNCHER)return ERROR_INVALID_PARAMETER;
     if(mode==NATIVE_HOOK_INTERCEPT) {
         flags=GetFileAttributesW(hook);
         if(flags==INVALID_FILE_ATTRIBUTES)return GetLastError();
@@ -66,6 +69,8 @@ DWORD nthook_install(HANDLE child,const nthook_context *context,DWORD mode)
             0,FALSE,DUPLICATE_SAME_ACCESS)){error=GetLastError();goto failed;}
     }
     header->version=NATIVE_HOOK_VERSION;header->mode=mode;header->machine=machine;
+    header->window_style=context->window_style;
+    header->flags=context->creation_flags;
     header->frontend=(ULONG_PTR)attached[0];header->execution=(ULONG_PTR)attached[1];
     header->launcher_offset=sizeof(*header);
     header->launcher_bytes=(DWORD)((wcslen(context->launcher)+1)*sizeof(WCHAR));

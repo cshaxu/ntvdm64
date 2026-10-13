@@ -19,7 +19,10 @@ function Test-PhysicalRuntimeStage([string]$Path) {
     if (!$root.StartsWith($stageRoot, [StringComparison]::OrdinalIgnoreCase)) { return $false }
     return Test-Path -LiteralPath (Join-Path $root '.ntvdm64-test-stage.json') -PathType Leaf
 }
-function New-PhysicalRuntimeStage([string]$PackageRoot) {
+function New-PhysicalRuntimeStage([string]$PackageRoot,
+    [ValidateSet('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe')]
+    [string[]]$RuntimeImages=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe')) {
+    if(!$RuntimeImages.Count){throw 'At least one runtime image is required'}
     $source = (Resolve-Path -LiteralPath $PackageRoot).Path
     $build = (Resolve-Path "${script:IsolatedPackageCleanupRoot}/../../build").Path + '\'
     if (!$source.StartsWith($build, [StringComparison]::OrdinalIgnoreCase)) {
@@ -64,7 +67,9 @@ function New-PhysicalRuntimeStage([string]$PackageRoot) {
             schema = 1
             source = $source
             createdUtc = [DateTime]::UtcNow.ToString('o')
-            binaries = @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe') |
+            # Focused GUI/WOW tests can intentionally omit the text frontend.
+            # This marker proves cleanup ownership, not full-package acceptance.
+            binaries = $RuntimeImages |
                 ForEach-Object {
                     $path = Join-Path (Get-PackageBinaryRoot $stage) $_
                     [ordered]@{ name = $_; sha256 = (Get-IsolatedFileSha256 $path) }
@@ -166,7 +171,15 @@ function Stop-IdentityCheckedProcesses($Rows,[string[]]$Paths) {
             }catch{$process.Dispose();throw}
             $processes+=$process
         }
-        foreach($process in $processes){if(!$process.HasExited){$process.Kill()}}
+        foreach($process in $processes){if(!$process.HasExited){
+            try {$process.Kill()}
+            catch [ComponentModel.Win32Exception] {
+                # Stopping an owned broker can concurrently end its workers.
+                # Accept only a signaled pinned process handle, never an
+                # access-denied error by itself or a disappeared WMI row.
+                if(!$process.WaitForExit(1000)){throw}
+            }
+        }}
         foreach($process in $processes){
             if(!$process.WaitForExit(5000)){throw 'Owned test process did not stop'}
         }

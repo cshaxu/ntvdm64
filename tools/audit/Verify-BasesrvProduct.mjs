@@ -17,11 +17,12 @@ try {
     for (const command of [
         `cl.exe ${flags} "${root}/tests/broker/service_client.c" /Foclient.obj`,
         `cl.exe ${baseClientFlags} "${root}/tests/app/base_client_rpc_first_test.c" /Fobase-client-rpc-first.obj`,
-        `cl.exe ${baseClientFlags} "${root}/src/ntsrv-exe/opennt/source/base_rpc_client.c" /Forpc-client.obj`,
+        `cl.exe ${baseClientFlags} "${root}/src/ntsrv-exe/opennt/source/base_rpc_client_core.c" /Forpc-client-core.obj`,
+        `cl.exe ${baseClientFlags} "${root}/src/ntsrv-exe/opennt/source/base_rpc_client_launch_style.c" /Forpc-client-launch-style.obj`,
         `cl.exe ${flags} "${product}/obj/basesrv/service_c.c" /Fostub.obj`,
         `cl.exe ${sourceFlags} "${root}/tests/broker/service_stream_source.c" /Fostream-source.obj`,
         `link.exe /nologo /opt:ref /map:client.map /out:client.exe client.obj stub.obj stream-source.obj "${product}/obj/run16/support.obj" "${product}/broker-transport.lib" "${product}/opennt-base-server.lib" "${product}/opennt-base-bindings.lib" "${product}/original-opennt-rtl-x86.lib" rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`,
-        `link.exe /nologo /opt:ref /map:base-client-rpc-first.map /out:base-client-rpc-first.exe base-client-rpc-first.obj rpc-client.obj stub.obj "${product}/obj/run16/support.obj" "${product}/opennt-base-client.lib" "${product}/broker-transport.lib" "${product}/opennt-base-bindings.lib" "${product}/opennt-base-server.lib" "${product}/original-opennt-rtl-x86.lib" rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`
+        `link.exe /nologo /opt:ref /map:base-client-rpc-first.map /out:base-client-rpc-first.exe base-client-rpc-first.obj rpc-client-core.obj rpc-client-launch-style.obj stub.obj "${product}/obj/run16/support.obj" "${product}/opennt-base-client.lib" "${product}/broker-transport.lib" "${product}/opennt-base-bindings.lib" "${product}/opennt-base-server.lib" "${product}/original-opennt-rtl-x86.lib" rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`
     ]) {
         const result=spawnSync('cmd.exe',['/d','/c',`call "${env}" ${command}`],{cwd:build,windowsHide:true,windowsVerbatimArguments:true,stdio:['ignore',log,log],timeout:60000});
         if(result.status!==0) throw Error(`Client build failed ${result.status}; see ${build}/build.log`);
@@ -34,7 +35,7 @@ for(const [symbol,owner] of [['_BaseSrvDupStandardHandles','opennt-base-server:s
     if(!clientMap.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes(owner)))
         throw Error(`Wrong source-to-RPC provider ${symbol}`);
 const baseClientMap=fs.readFileSync(path.join(build,'base-client-rpc-first.map'),'utf8');
-if(!baseClientMap.split(/\r?\n/).some(line=>line.includes('_OpenNtBaseClientCallServer@16')&&line.includes('rpc-client.obj')))
+if(!baseClientMap.split(/\r?\n/).some(line=>line.includes('_OpenNtBaseClientCallServer@16')&&line.includes('rpc-client-launch-style.obj')))
     throw Error('BaseClient RPC facade did not select the product provider');
 for(const symbol of ['_Client_Check','_Client_Get','_Client_Update','_Client_ExitCode','_Client_Reenter','_Client_Reserve','_Client_Prepare','_Client_Release'])
     if(!baseClientMap.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes('stub.obj')))

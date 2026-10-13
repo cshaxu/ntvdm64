@@ -1,5 +1,16 @@
 # mvdm
 
+MVDM-HOST-DIV-331 (T445 S7): owner explicitly approves the reviewed inline
+`dos/command/cmdmisc.c::GetWowKernelCmdLine` capacity/retry repair. Before copying
+the rebuilt environment, compare its byte count with CMDINFO.EnvSize; on shortage
+free both temporary buffers and return the required size in AX with carry set.
+Reject resize requests at or above the immutable guest's 32 KiB limit without
+16-bit truncation. Leave first-call state unchanged until successful delivery.
+This bounded approved inline body is an exception to the three-line insertion
+rule, not permission for unrelated mirror expansion. Original guest tcode.asm
+already owns expansion and retry; no guest patch or host-environment filtering.
+See [writer proof and admission](../../docs/etc/evidence/m0-t445-s7-base-rpc-client-split.md#confirmed-environment-overwrite).
+
 MVDM-HOST-DIV-327 (T430 S2): protected-mode CALL gate, outer RETF and
 outer IRET install the new stack pointer with the original set_current_SP
 helper after loading SS. This is the exact three-body correction already

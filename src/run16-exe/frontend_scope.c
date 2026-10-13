@@ -33,6 +33,8 @@ struct run16_frontend_scope {
     HANDLE capability,restored,root,receipt;
     BOOL owns_environment,has_execution;
     DWORD console_mask,native_request;
+    DWORD window_style;
+    DWORD creation_flags;
 };
 void run16_frontend_scope_end(run16_frontend_scope *scope)
 {
@@ -98,6 +100,8 @@ static DWORD scope_begin(run16_frontend_scope **output,BOOL lease,BOOL console_o
         if (!SetEnvironmentVariableA(FRONTEND_ENV,text)) { error=GetLastError();goto fail; }
         scope->owns_environment=TRUE;
     }
+    scope->window_style=seeded ? seed.window_style : WINDOW_STYLE_OFF;
+    scope->creation_flags=seeded ? seed.creation_flags : 0;
     /* This describes streams, never grants membership. Only an authenticated
      * execution context can supply worker-local endpoints. Do not turn an
      * actual redirected file/pipe into Console I/O, and consume the one-hop
@@ -149,6 +153,11 @@ DWORD run16_frontend_scope_console_mask(run16_frontend_scope *scope)
 {
     return scope ? scope->console_mask : 0;
 }
+
+DWORD run16_frontend_scope_window_style(run16_frontend_scope *scope)
+{ return scope ? scope->window_style : WINDOW_STYLE_OFF; }
+DWORD run16_frontend_scope_creation_flags(run16_frontend_scope *scope)
+{ return scope ? scope->creation_flags : 0; }
 
 static DWORD wait_worker_change(HANDLE changed,HANDLE worker,HANDLE root,ULONGLONG deadline)
 {

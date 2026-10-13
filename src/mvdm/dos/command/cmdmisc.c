@@ -529,6 +529,32 @@ LPSTR    pszCmdLine;
     // Copy the transformed environment to real mode mem and then free it.
     //
 
+    /* DIVERGENCE(MVDM-HOST-DIV-331): use COMMAND's existing carry/AX
+     * environment-resize contract before writing beyond its allocation.
+     * Owner-approved local repair; no guest or environment filtering change. */
+    if (cmdVDMEnvBlk.cchEnv > FETCHWORD(pCMDInfo->EnvSize)) {
+        ULONG required = cmdVDMEnvBlk.cchEnv;
+
+        free(cmdVDMEnvBlk.lpszzEnv);
+        cmdVDMEnvBlk.lpszzEnv = NULL;
+        cmdVDMEnvBlk.cchEnv = 0;
+        FreeEnvironmentStrings(pEnvStrings);
+        lpszzVDMEnv32 = NULL;
+        cchVDMEnv32 = 0;
+
+        /* The unchanged guest resize protocol accepts sizes below 32 KiB.
+         * Never truncate an oversized length into the 16-bit AX register. */
+        if (required >= 0x8000u) {
+            RcErrorDialogBox(EG_ENVIRONMENT_ERR, NULL, NULL);
+            TerminateVDM();
+            return;
+        }
+
+        setAX((USHORT)required);
+        setCF(1);
+        return;
+    }
+
     pch = (PVOID)GetVDMAddr(FETCHWORD(pCMDInfo->EnvSeg),0);
     RtlMoveMemory(pch,
                   cmdVDMEnvBlk.lpszzEnv,

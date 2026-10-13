@@ -27,7 +27,10 @@ DWORD nthook_context_read(nthook_context *context,BOOL *found)
     if(header.bytes!=bytes || header.version!=NATIVE_HOOK_VERSION ||
        (header.mode!=NATIVE_HOOK_INTERCEPT && header.mode!=NATIVE_HOOK_LAUNCHER) ||
        header.machine!=(sizeof(void *)==8 ? IMAGE_FILE_MACHINE_AMD64 : IMAGE_FILE_MACHINE_I386) ||
-       header.flags || header.reserved ||
+       (header.flags & ~NATIVE_HOOK_SEPARATE_WOW) ||
+       (header.flags && header.mode!=NATIVE_HOOK_LAUNCHER) ||
+       header.reserved || header.policy_reserved ||
+       !WINDOW_STYLE_VALID(header.window_style) ||
        !!header.frontend!=!!header.execution ||
        header.frontend>(uint64_t)(ULONG_PTR)-1 || header.execution>(uint64_t)(ULONG_PTR)-1 ||
        header.launcher_offset!=sizeof(header) ||
@@ -39,6 +42,8 @@ DWORD nthook_context_read(nthook_context *context,BOOL *found)
     if(!error)error=path_read(data,bytes,header.hook64_offset,header.hook64_bytes,context->hook64);
     if(error)return error;
     context->mode=header.mode;
+    context->window_style=header.window_style;
+    context->creation_flags=header.flags;
     context->frontend=(HANDLE)(ULONG_PTR)header.frontend;
     context->execution=(HANDLE)(ULONG_PTR)header.execution;
     return ERROR_SUCCESS;

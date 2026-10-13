@@ -4,6 +4,18 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $graph = Get-Content -LiteralPath (Join-Path $BuildRoot 'build.ninja')
+# The x86 product graph imports five AMD64 executables. Audit their retained
+# source recipes, not the import/copy edge, for this source-ownership check.
+# The architecture-local final graphs/maps are checked separately.
+$graph = @($graph | ForEach-Object {
+    if ($_ -match '^build (ntcon|ntmon|run16|ntsrv)\.exe: native_\1_import(?:\s|$)' -or
+        $_ -match '^build (ntvwm)\.exe: native_worker_import(?:\s|$)') {
+        $name=$Matches[1]
+        $recipe=@($graph | Where-Object { $_ -match ('^build '+$name+'-source-closure: phony ') })
+        if($recipe.Count -ne 1){throw "Missing unique source recipe for imported $name"}
+        $recipe[0] -replace ('^build '+$name+'-source-closure:'),('build '+$name+'.exe:')
+    } else { $_ }
+})
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 function Assert-FrontendPrivateNames([string]$Source) {
     if($Source -match '\b(?:run16_native_frontend|run16_console_(?:channel|frontend|video|dispatch|prepare_text)|frontend_native_keyboard|FRONTEND_NATIVE_KEY_RECORDS)(?:\b|_)|\bnative_console_frontend\.h\b') {
@@ -25,7 +37,8 @@ if($graph -match '^build obj/run16/(?:native_console_frontend|frontend_session|c
 # Presentation attachment is live; execution submission to a frontend is not.
 # A stale RPC method must not survive merely because no EXE calls it today.
 foreach ($path in @('src/common/protocol/service.idl',
-        'src/ntsrv-exe/opennt/source/base_rpc_client.c',
+        'src/ntsrv-exe/opennt/source/base_rpc_client_core.c',
+        'src/ntsrv-exe/opennt/source/base_rpc_client_launch_style.c',
         'src/ntsrv-exe/opennt/source/base_service.c',
         'src/ntsrv-exe/opennt/source/service_core.c',
         'src/ntsrv-exe/opennt/source/worker_registry.c',

@@ -2,6 +2,7 @@
 #define NTVDM_FRONTEND_PROTOCOL_H
 #include <stdint.h>
 #include "version.h"
+#include "window_style.h"
 
 /* NTSRV owns the direct result and final I/O status in the same record. */
 /* Resource state at the final I/O boundary, not task membership or an exit
@@ -23,7 +24,7 @@
  * resource slots are never authority: the authenticated receiver materializes
  * and checks only the allowed resources of its pinned sender. */
 typedef struct run16_native_launch_packet {
-    uint32_t characters[4],console_mask;
+    uint32_t characters[4],console_mask,window_style;
     uint64_t standard[3],capabilities[2];
 } run16_native_launch_packet;
 #endif

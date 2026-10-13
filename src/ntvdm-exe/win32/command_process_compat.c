@@ -4,6 +4,7 @@
 #include "console_client.h"
 #include "common/protocol/console_io.h"
 #include "common/system_root.h"
+#include "nthook32-dll/hook.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -19,6 +20,35 @@ typedef struct opennt_command_standard_handles {
 } opennt_command_standard_handles;
 
 static __declspec(thread) opennt_command_standard_handles current_handles;
+
+static BOOL create_policy_child(LPCSTR application,LPSTR command,
+    LPSECURITY_ATTRIBUTES process_attributes,LPSECURITY_ATTRIBUTES thread_attributes,
+    BOOL inherit,DWORD flags,LPVOID environment,LPCSTR directory,
+    LPSTARTUPINFOA startup,LPPROCESS_INFORMATION process,HANDLE frontend,HANDLE execution)
+{
+    nthook_context context;
+    DWORD error=nthook_context_paths(&context);
+    if(error){SetLastError(error);return FALSE;}
+    if(!mvdm_command_native_child_window_style(&context.window_style)){
+        SetLastError(ERROR_INVALID_STATE);return FALSE;
+    }
+    context.frontend=frontend;context.execution=execution;
+    if(!CreateProcessA(application,command,process_attributes,thread_attributes,
+        inherit,flags|CREATE_SUSPENDED,environment,directory,startup,process))return FALSE;
+    /* The installer recognizes the pinned Run16 image and gives it a copied
+     * launcher payload only. Native images receive their matching-width Hook.
+     * Neither the user command tail nor its environment carries this policy. */
+    error=nthook_install(process->hProcess,&context,NATIVE_HOOK_INTERCEPT);
+    if(!error && !(flags&CREATE_SUSPENDED) && ResumeThread(process->hThread)==(DWORD)-1)
+        error=GetLastError();
+    if(error){
+        TerminateProcess(process->hProcess,error);
+        WaitForSingleObject(process->hProcess,INFINITE);
+        CloseHandle(process->hThread);CloseHandle(process->hProcess);
+        ZeroMemory(process,sizeof(*process));SetLastError(error);return FALSE;
+    }
+    return TRUE;
+}
 
 /* COMMAND owns its original native target and COMSPEC-tail construction.
  * The worker binding selects Run16 only for the latter service branch; it
@@ -45,8 +75,8 @@ static BOOL create_frontend_child(LPCSTR application,LPSTR command,
     WCHAR wide_value[3][80];
     DWORD error,console_mask=0;
     if (!ntvdm_console_inherit_launch_capabilities(&capabilities[0],&capabilities[1])) return FALSE;
-    if (!capabilities[0]) return CreateProcessA(application,command,process_attributes,
-        thread_attributes,inherit,flags,environment,directory,startup,process);
+    if (!capabilities[0]) return create_policy_child(application,command,process_attributes,
+        thread_attributes,inherit,flags,environment,directory,startup,process,NULL,NULL);
     if (!inherit) { error=ERROR_INVALID_PARAMETER;result=FALSE;goto done; }
     for (slot=0;slot<2;++slot)
         sprintf_s(value[slot],sizeof(value[slot]),"%s%lx",names[slot],(unsigned long)(ULONG_PTR)capabilities[slot]);
@@ -100,8 +130,8 @@ static BOOL create_frontend_child(LPCSTR application,LPSTR command,
      * A detached worker must not cause Windows to allocate a new Console
      * merely because the launcher is a Console-subsystem executable. */
     if (!(flags&(CREATE_NEW_CONSOLE|CREATE_NO_WINDOW))) flags|=DETACHED_PROCESS;
-    result=CreateProcessA(application,command,process_attributes,thread_attributes,
-        inherit,flags,copy,directory,&child_startup,process);
+    result=create_policy_child(application,command,process_attributes,thread_attributes,
+        inherit,flags,copy,directory,&child_startup,process,capabilities[0],capabilities[1]);
     error=GetLastError();
 done:
     for(slot=0;slot<3;++slot)if(endpoint_streams[slot])CloseHandle(endpoint_streams[slot]);

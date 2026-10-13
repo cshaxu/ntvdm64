@@ -45,6 +45,7 @@ typedef struct wow_user_task_lifecycle_thread {
     HANDLE queue_event;
     DWORD thread_id;
     DWORD message_wakes;
+    DWORD window_style;
 } wow_user_task_lifecycle_thread;
 
 static wow_user_task_lifecycle_thread *current_task(
@@ -391,6 +392,24 @@ BOOL WINAPI wow_user_task_lifecycle_init(wow_user_task_lifecycle *owner,
     UINT version, LPCSTR app_name, DWORD task_id, DWORD hotkey, DWORD shared_id,
     DWORD x, DWORD y, DWORD width, DWORD height, WORD show)
 {
+    return wow_user_task_lifecycle_init_style(owner, version, app_name, task_id,
+        hotkey, shared_id, x, y, width, height, show, WINDOW_STYLE_OFF, 0);
+}
+
+BOOL WINAPI wow_user_task_lifecycle_style(wow_user_task_lifecycle *owner,
+    DWORD *style)
+{
+    wow_user_task_lifecycle_thread *task = current_task(owner);
+    if (!style || !task) { SetLastError(ERROR_INVALID_STATE); return FALSE; }
+    *style = task->window_style;
+    return TRUE;
+}
+
+BOOL WINAPI wow_user_task_lifecycle_init_style(wow_user_task_lifecycle *owner,
+    UINT version, LPCSTR app_name, DWORD task_id, DWORD hotkey, DWORD shared_id,
+    DWORD x, DWORD y, DWORD width, DWORD height, WORD show,
+    DWORD window_style, WORD parent_task)
+{
     wow_user_task_lifecycle_thread *task;
     wow_user_runtime_thread *binding;
     WCHAR *wide = NULL;
@@ -399,6 +418,9 @@ BOOL WINAPI wow_user_task_lifecycle_init(wow_user_task_lifecycle *owner,
     NTSTATUS status;
     BOOL result = FALSE;
 
+    if (!WINDOW_STYLE_VALID(window_style)) {
+        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
+    }
     if (!owner || !owner->initialized || !owner->registered || !app_name ||
             !(binding = wow_user_runtime_current()) || binding->runtime != owner->runtime ||
             binding->thread || !wow_user_runtime_enter(binding)) {
@@ -416,6 +438,15 @@ BOOL WINAPI wow_user_task_lifecycle_init(wow_user_task_lifecycle *owner,
             (SIZE_T)length * sizeof(WCHAR))) || !MultiByteToWideChar(CP_ACP, 0,
             app_name, -1, wide, length)) goto done;
     task->owner = owner;
+    task->window_style = window_style;
+    if (parent_task) {
+        wow_user_task_lifecycle_thread *parent;
+        for (parent = owner->threads; parent; parent = parent->next)
+            if (parent->thread.ptdb && parent->thread.ptdb->hTaskWow == parent_task)
+                break;
+        if (!parent) { SetLastError(ERROR_NOT_FOUND); goto done; }
+        task->window_style = parent->window_style;
+    }
     task->thread_id = GetCurrentThreadId();
     task->queue_event = CreateEventW(NULL, FALSE, FALSE, NULL);
     if (!task->queue_event || !wow_user_message_bridge_initialize(&task->messages))
@@ -518,6 +549,37 @@ BOOL WINAPI wow_user_task_lifecycle_wait(wow_user_task_lifecycle *owner,
         result = xxxSleepTask(FALSE, wowexec_event, &task->thread);
     }
     __finally { (void)wow_user_runtime_leave(wow_user_runtime_current()); }
+    return result;
+}
+
+/* OpenNT client.c::MsgWaitForMultipleObjectsEx brackets its nonzero wait
+ * with WaitForMsgAndEvent(HEVENT_REMOVEME) and DirectedYield(DY_OLDYIELD).
+ * Native USER owns handles/queue/result; existing original taskman owns the
+ * WOW execution handoff. No private queue or alternate scheduler. */
+DWORD WINAPI wow_user_msg_wait(DWORD count, const HANDLE *handles, BOOL all,
+    DWORD timeout, DWORD wake_mask)
+{
+    wow_user_runtime_thread *binding = wow_user_runtime_current();
+    DWORD result, error = GetLastError();
+    if (!timeout || !binding || !binding->thread || !binding->thread->ptdb)
+        return MsgWaitForMultipleObjects(count, handles, all, timeout, wake_mask);
+    if (!wow_user_runtime_enter(binding)) return WAIT_FAILED;
+    __try {
+        (void)xxxSleepTask(FALSE, (HANDLE)-1, binding->thread);
+    } __finally {
+        (void)wow_user_runtime_leave(binding);
+    }
+    SetLastError(error);
+    __try {
+        result = MsgWaitForMultipleObjects(count, handles, all, timeout, wake_mask);
+    } __finally {
+        error = GetLastError();
+        if (!wow_user_runtime_enter(binding))
+            lifecycle_failure("msg-wait-reenter", ERROR_INVALID_STATE);
+        __try { (void)xxxDirectedYield((DWORD)-1, binding->thread); }
+        __finally { (void)wow_user_runtime_leave(binding); }
+        SetLastError(error);
+    }
     return result;
 }
 

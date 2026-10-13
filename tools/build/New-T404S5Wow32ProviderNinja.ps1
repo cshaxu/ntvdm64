@@ -84,6 +84,9 @@ $providerSupportSources = @(
     (Join-Path $adapterWow 'wow_class_client_bindings.c'),
     (Join-Path $adapterWow 'wow_task_event_binding.c'),
     (Join-Path $adapterWow 'wow_task_profile_binding.c'),
+    (Join-Path $adapterWow 'wow_task_parent.c'),
+    (Join-Path $adapterWow 'wow_native_process.c'),
+    (Join-Path $adapterWow 'wow_title_policy.c'),
     (Join-Path $adapterWow 'wow_user_message_bridge.c'),
     (Join-Path $adapterWow 'wow_user_task_lifecycle.c'),
     (Join-Path $adapterWow 'wow_dialog_creation_binding.c'),
@@ -219,6 +222,9 @@ foreach ($alias in @(
     [pscustomobject]@{ Decorated = 'NtCurrentPeb@0'; Raw = 'NtCurrentPeb' },
     [pscustomobject]@{ Decorated = 'ExitVDM@8'; Raw = 'ExitVDM' },
     [pscustomobject]@{ Decorated = 'OpenNtBaseClientWowStarted@4'; Raw = 'OpenNtBaseClientWowStarted' },
+    [pscustomobject]@{ Decorated = 'OpenNtBaseClientWowStyle@8'; Raw = 'OpenNtBaseClientWowStyle' },
+    [pscustomobject]@{ Decorated = 'NtvdmInstallChildStyle@8'; Raw = 'NtvdmInstallChildStyle' },
+    [pscustomobject]@{ Decorated = 'NtvdmSeparateWowStyle@4'; Raw = 'NtvdmSeparateWowStyle' },
     [pscustomobject]@{ Decorated = 'host_CreateThread@24'; Raw = 'host_CreateThread' },
     [pscustomobject]@{ Decorated = 'host_ExitThread@4'; Raw = 'host_ExitThread' },
     [pscustomobject]@{ Decorated = 'opennt_exit_thread@4'; Raw = 'opennt_exit_thread' },
@@ -366,6 +372,11 @@ foreach ($source in $sources) {
     $object = 'obj/' + [IO.Path]::GetFileNameWithoutExtension($source) + '.obj'
     $objects.Add($object)
     $ninja.Add('build ' + $object + ': cc ' + (ConvertTo-NinjaPath (Join-Path $wow $source)))
+    if ($source -eq 'wkman.c') {
+        $ninja.Add('  cflags = $cflags /DWOW_NATIVE_PROCESS_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_native_process.h')) + '"')
+    } elseif ($source -eq 'wudlg.c') {
+        $ninja.Add('  cflags = $cflags /DWOW_TITLE_MESSAGE_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_title_policy.h')) + '"')
+    }
 }
 $supportObjects = [System.Collections.Generic.List[string]]::new()
 # Original USER owner, not an adapter implementation (OPENNT-HOST-032).

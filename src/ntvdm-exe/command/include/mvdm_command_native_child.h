@@ -22,6 +22,8 @@ int mvdm_command_native_child_activate(const char *source_command,
     const char *source_environment, const char **command_out,
     const char **environment_out);
 int mvdm_command_native_child_std_handles(ULONG handles_out[3]);
+/* Copied with the command before the detached worker starts. */
+int mvdm_command_native_child_window_style(DWORD *style_out);
 const char *mvdm_command_native_child_command(void);
 const char *mvdm_command_native_child_environment(void);
 int mvdm_command_native_child_replace_command(const char *command);

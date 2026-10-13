@@ -29,7 +29,8 @@ $reference=[IO.File]::ReadAllText([IO.Path]::GetFullPath($ReferenceGraph))
 $referenceFlags=[regex]::Match($reference,'(?m)^cflags = (.*)$').Groups[1].Value
 if(-not $referenceFlags) { throw 'Missing reference include graph' }
 $referenceRun16=Join-Path (Split-Path -Parent ([IO.Path]::GetFullPath($ReferenceGraph))) 'run16.exe'
-if(-not (Test-Path -LiteralPath $referenceRun16 -PathType Leaf)) { throw 'Missing staged x86 run16.exe beside reference graph' }
+# Only the installer fixtures stage this executable. DLL-only builds have no
+# launcher dependency; Ninja diagnoses a missing input if a fixture needs it.
 # Reuse only native include closure, never x86 objects/defines/worker targets.
 $includes=@([regex]::Matches($referenceFlags,'/I "[^"]+"') | ForEach-Object { $_.Value })
 $includes += '/I "'+(NP (Join-Path $root 'src/ntsrv-exe/opennt/include'))+'"'
@@ -43,7 +44,7 @@ $graph.Add('  command = '+$compilerCommand+' $cflags $release_cflags /Fo$out $in
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file: ')
 $graph.Add('rule dll')
-$graph.Add('  command = link.exe /nologo /dll /opt:ref /out:$out /map:$out.map /implib:nthook64-import.lib /def:"'+(NP (Join-Path $root 'src/nthook32-dll/nthook64.def'))+'" $in kernel32.lib ntdll.lib advapi32.lib rpcrt4.lib legacy_stdio_definitions.lib')
+$graph.Add('  command = link.exe /nologo /dll /opt:ref /out:$out /map:$out.map /implib:nthook64-import.lib /def:"'+(NP (Join-Path $root 'src/nthook32-dll/nthook64.def'))+'" $in kernel32.lib user32.lib ntdll.lib advapi32.lib rpcrt4.lib legacy_stdio_definitions.lib')
 $graph.Add('rule stage')
 $graph.Add('  command = powershell.exe -NoProfile -ExecutionPolicy Bypass -File "'+(NP (Join-Path $root 'tools/build/Stage-NativeWorkerImage.ps1'))+'" -InputFile $in -OutputFile "$out"')
 $graph.Add('build run16.exe: stage '+(NP $referenceRun16))
@@ -52,7 +53,7 @@ $graph.Add('  command = midl.exe /nologo /env x64 /target NT100 /prefix client C
 $graph.Add('build obj/basesrv/service.h obj/basesrv/service_c.c obj/basesrv/service_s.c: idl '+(NP (Join-Path $root 'src/common/protocol/service.idl'))+' | '+(NP (Join-Path $root 'src/common/protocol/service.acf')))
 $graph.Add('build observation-stub.obj: cc obj/basesrv/service_c.c | obj/basesrv/service.h')
 $sources=@('src/nthook32-dll/entry.cpp','src/nthook32-dll/context.cpp',
-    'src/nthook32-dll/installer.cpp','src/nthook32-dll/create_process.cpp',
+    'src/nthook32-dll/installer.cpp','src/nthook32-dll/create_process.cpp','src/nthook32-dll/window_titles.cpp',
     'src/common/native_image.c',
     'src/run16-exe/hook_classification.c',
     'src/opennt-host/base/win32/client/vdm.c',

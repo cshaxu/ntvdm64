@@ -1,5 +1,16 @@
 # System Architecture
 
+## Base RPC client split — T445 S7
+
+The NTSRV-owned client has separately selected core and launch-style archives.
+Core owns one authenticated connection, frontend/native control and disconnect.
+Only launch/execution consumers link the original BaseClient dispatch facade
+and its appearance request/delivery/query state. The extension borrows the
+core connection for synchronous calls and registers its local cleanup for
+disconnect; it cannot replace connection authority or create a second client.
+NTCON links no execution/style archive. This is source/link ownership, not a
+frontend-only preprocessor variant or a change to copied RPC contracts.
+
 ## NTW16S style DLL boundary — T445 S5
 
 NTW16S owns the complete local Win3.x presentation engine, compiled as

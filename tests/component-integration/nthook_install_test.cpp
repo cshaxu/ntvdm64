@@ -22,6 +22,9 @@ static DWORD child(PCWSTR mode,PCWSTR next=NULL,PCWSTR final=NULL)
     DWORD context_error=nthook_context_read(&context,&found);
     if(!wcscmp(mode,L"invalid"))return found && context_error==ERROR_INVALID_DATA ? 0 : 28;
     if(context_error || !found)return 10;
+    if(!wcscmp(mode,L"separate-context"))
+        return context.mode==NATIVE_HOOK_LAUNCHER &&
+            context.creation_flags==CREATE_SEPARATE_WOW_VDM ? 0 : 29;
     HMODULE hook=GetModuleHandleW(sizeof(void *)==8 ? L"nthook64.dll" : L"nthook32.dll");
     if(!wcscmp(mode,L"context")) {
         if(hook || context.mode!=NATIVE_HOOK_LAUNCHER)return 11;
@@ -102,6 +105,29 @@ static DWORD child(PCWSTR mode,PCWSTR next=NULL,PCWSTR final=NULL)
             if(WaitForSingleObject(local_process.hProcess,10000)!=WAIT_OBJECT_0) {
                 TerminateProcess(local_process.hProcess,ERROR_TIMEOUT);result=ERROR_TIMEOUT;
             } else if(!GetExitCodeProcess(local_process.hProcess,&result) || result!=42) {
+                if(!result)result=ERROR_INVALID_DATA;
+            } else result=0;
+            CloseHandle(local_process.hThread);CloseHandle(local_process.hProcess);
+        }
+        for(unsigned variant=0;!result && variant<2;++variant) {
+            ZeroMemory(&local_process,sizeof(local_process));
+            BOOL created;
+            if(variant) {
+                char application_a[MAX_PATH*2],command_a[]="custom /separate";
+                STARTUPINFOA startup_a={sizeof(startup_a)};
+                if(!WideCharToMultiByte(CP_ACP,0,legacy,-1,application_a,
+                    ARRAYSIZE(application_a),NULL,NULL)) {result=GetLastError();break;}
+                created=CreateProcessA(application_a,command_a,NULL,NULL,FALSE,
+                    CREATE_SEPARATE_WOW_VDM,NULL,NULL,&startup_a,&local_process);
+            } else {
+                wcscpy_s(command,L"custom /separate");
+                created=CreateProcessW(legacy,command,NULL,NULL,FALSE,
+                    CREATE_SEPARATE_WOW_VDM,NULL,NULL,&local_startup,&local_process);
+            }
+            if(!created){result=GetLastError();break;}
+            if(WaitForSingleObject(local_process.hProcess,10000)!=WAIT_OBJECT_0) {
+                TerminateProcess(local_process.hProcess,ERROR_TIMEOUT);result=ERROR_TIMEOUT;
+            } else if(!GetExitCodeProcess(local_process.hProcess,&result) || result!=44) {
                 if(!result)result=ERROR_INVALID_DATA;
             } else result=0;
             CloseHandle(local_process.hThread);CloseHandle(local_process.hProcess);
@@ -334,6 +360,7 @@ static void malformed(PCWSTR image,const nthook_context *context,unsigned mutati
     case 5:header->launcher_bytes=MAXDWORD;break;
     case 6:data[bytes-2]=1;break;
     case 7:bytes=sizeof(*header)-1;break;
+    case 8:header->flags=NATIVE_HOOK_SEPARATE_WOW;header->mode=NATIVE_HOOK_INTERCEPT;break;
     }
     WCHAR command[2*MAX_PATH];STARTUPINFOW startup={sizeof(startup)};PROCESS_INFORMATION process={0};
     swprintf_s(command,L"\"%ls\" invalid",image);
@@ -357,6 +384,12 @@ int wmain(int argc,WCHAR **argv)
             if(argc==2 && legacy)return 41;
             if(argc==3 && legacy && !wcscmp(argv[2],L"/explicit"))return 42;
             if(argc==3 && legacy && !wcscmp(argv[2],L"/command-only"))return 43;
+            if(argc==3 && legacy && !wcscmp(argv[2],L"/separate")) {
+                nthook_context seed;BOOL found=FALSE;
+                return !nthook_context_read(&seed,&found) && found &&
+                    seed.mode==NATIVE_HOOK_LAUNCHER &&
+                    seed.creation_flags==CREATE_SEPARATE_WOW_VDM ? 44 : 58;
+            }
             return 57;
         }
     }
@@ -371,6 +404,12 @@ int wmain(int argc,WCHAR **argv)
     context.execution=CreateEventW(NULL,TRUE,FALSE,NULL);
     check(context.frontend && context.execution,"private fixture events");
     check(run(image,L"context",&context,NATIVE_HOOK_LAUNCHER)==0,"context-only payload/no DLL");
+    context.creation_flags=CREATE_SEPARATE_WOW_VDM;
+    check(run(image,L"separate-context",&context,NATIVE_HOOK_LAUNCHER)==0,
+        "existing independent-WOW flag survives launcher payload");
+    check(run(image,L"grandchild",&context,NATIVE_HOOK_INTERCEPT)==ERROR_INVALID_PARAMETER,
+        "one-shot independent-WOW flag rejected for native interception");
+    context.creation_flags=0;
     check(WaitForSingleObject(context.frontend,0)==WAIT_OBJECT_0 &&
           WaitForSingleObject(context.execution,0)==WAIT_OBJECT_0,"recipient-local duplicated events");
     check(run(image,L"nested",&context,NATIVE_HOOK_INTERCEPT)==0,"CUI immediate descendant propagated");
@@ -403,7 +442,7 @@ int wmain(int argc,WCHAR **argv)
             "opposite-width GUI has no character frontend authority");
         helper_failures(image,&context);
     }
-    for(unsigned i=0;i<8;++i)malformed(image,&context,i);
+    for(unsigned i=0;i<9;++i)malformed(image,&context,i);
     context.frontend=(HANDLE)(ULONG_PTR)0x7ffffffe;context.execution=(HANDLE)(ULONG_PTR)0x7ffffffd;
     check(run(image,L"grandchild",&context,NATIVE_HOOK_LAUNCHER)==ERROR_INVALID_HANDLE,"invalid capability fails before handoff");
     context.frontend=context.execution=NULL;

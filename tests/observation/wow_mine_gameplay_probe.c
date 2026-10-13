@@ -113,7 +113,8 @@ static BOOL click(UINT down, UINT up, WPARAM held)
 int main(int argc,char **argv)
 {
     HANDLE process; HDESK desk; ULONGLONG deadline; DWORD before, counter; DWORD_PTR reply;
-    if(argc!=4 || strncmp(argv[2],"NTVDMConsoleTest-",17))return 2;
+    if((argc!=4 && argc!=5) || strncmp(argv[2],"NTVDMConsoleTest-",17))return 2;
+    if(argc==5 && strcmp(argv[4],"0") && strcmp(argv[4],"1"))return 2;
     owner_pid=strtoul(argv[1],NULL,10);
     process=OpenProcess(SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,FALSE,owner_pid);
     desk=OpenDesktopA(argv[2],0,FALSE,DESKTOP_READOBJECTS|DESKTOP_WRITEOBJECTS|DESKTOP_ENUMERATE);
@@ -122,6 +123,14 @@ int main(int argc,char **argv)
     do {EnumDesktopWindows(desk,find_mine,0);if(mine)break;Sleep(25);}while(GetTickCount64()<deadline && WaitForSingleObject(process,0)==WAIT_TIMEOUT);
     if(!mine || !SendMessageTimeoutW(mine,WM_NULL,0,0,SMTO_ABORTIFHUNG,2000,&reply))return 4;
     printf("owned-window=%p pid=%lu\n",mine,owner_pid);
+    if(argc==5){
+        WCHAR caption[256];
+        BOOL marked;
+        if(!GetWindowTextW(mine,caption,256))return 15;
+        marked=wcsncmp(caption,L"(Win16 Style) ",14)==0;
+        if(marked!=(argv[4][0]=='1'))return 16;
+        printf("PASS title marker=%d\n",marked);
+    }
     if(!wait_board(process,&before,&counter) || !capture(mine,argv[3],"before"))return 5;
     if(!click(WM_RBUTTONDOWN,WM_RBUTTONUP,MK_RBUTTON) || !wait_cell(process,before,FALSE,"flag"))return 6;
     if(!capture(mine,argv[3],"flag"))return 7;

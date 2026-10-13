@@ -12,6 +12,13 @@ are inherited rather than reset. No new global source audit is required.
 
 ## Complete scope and dependencies
 
+Under the owner's functional-priority gate, diagnose and repair the first
+actual SOL/WRITE initialization failure during basic functionality. This is
+initial diagnostic ownership, not a claim that an OOM dialog proves a heap
+defect. Route a demonstrated different provider failure to its named owner
+with explicit early admission; neither error frontier may be deferred to
+comprehensive interaction or final acceptance.
+
 Inherited: loader/memory slice: original module/loader-facing services, allocation/rollback and alias lifetimes, module release without live-task destruction. Consume W01 execution and W02 identities.
 
 Expected reuse boundaries: [Messages, callbacks and task execution](proposal-wow32-message-task-execution-001.md), [USER objects and shared view](proposal-wow32-user-objects-shared-view-001.md).

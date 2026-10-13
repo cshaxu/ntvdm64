@@ -21,6 +21,17 @@ int main(int argc, char **argv)
     process = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ,
                           FALSE, pid);
     if (process) (void)SymInitialize(process, NULL, TRUE);
+    {
+        HANDLE modules = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pid);
+        MODULEENTRY32 module = { sizeof(module) };
+        if (modules != INVALID_HANDLE_VALUE) {
+            if (Module32First(modules, &module)) do {
+                printf("module base=%p bytes=%lu path=%s\n", module.modBaseAddr,
+                    (unsigned long)module.modBaseSize, module.szExePath);
+            } while (Module32Next(modules, &module));
+            CloseHandle(modules);
+        }
+    }
     snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0);
     if (snapshot == INVALID_HANDLE_VALUE) return 65;
     if (Thread32First(snapshot, &entry)) do {

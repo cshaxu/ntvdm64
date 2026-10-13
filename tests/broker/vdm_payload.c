@@ -30,7 +30,7 @@ int main(void)
         CHECK(!broker_vdm_message_read(&request,31,7,0,&decoded));
         CHECK(!broker_vdm_message_read(&request,32,8,0,&decoded));
         CHECK(!broker_vdm_message_read(&request,32,7,1,&decoded));
-        request.version=2; CHECK(!broker_vdm_message_read(&request,32,7,0,&decoded)); request.version=1;
+        request.version=BROKER_VDM_MESSAGE_VERSION+1; CHECK(!broker_vdm_message_read(&request,32,7,0,&decoded)); request.version=BROKER_VDM_MESSAGE_VERSION;
         request.payload_bytes=UINT32_MAX; CHECK(!broker_vdm_message_read(&request,32,7,0,&decoded)); request.payload_bytes=0;
         request.operation=0; CHECK(!broker_vdm_message_read(&request,32,7,0,&decoded)); request.operation=BROKER_VDM_CHECK;
         request.request_id=0; CHECK(!broker_vdm_message_read(&request,32,7,0,&decoded)); request.request_id=1;

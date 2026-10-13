@@ -15,6 +15,63 @@ W20 acceptance, and no generic OOM message proves its failing owner.
 
 ## Objective and admission
 
+### Owner-approved functional priority, 2026-10-12
+
+The current Queue supersedes the historical W01--W20 ordering below. W keys
+remain stable ownership identifiers, not execution priority. The owner's exact
+sequence is: basic functionality -> basic display -> comprehensive interaction
+-> comprehensive display -> comprehensive functionality. Printing, COMM,
+Winsock and multimedia are not presumed application
+startup prerequisites. A demonstrated dependency may be promoted explicitly.
+
+| Phase | Observable milestone and retained owners |
+| --- | --- |
+| Basic functionality | W01--W05: execute/return, valid objects, load modules/resources and access required files. Prioritize the first actual startup failure, not exhaustive unrelated API completion. |
+| Basic display | W07/W08: usable windows, client content, bitmaps and readable text. Provide the resource conversion needed for these cases without waiting for every advanced drawing family. |
+| Comprehensive interaction | W06, W09, ordinary W18, W10 and W12: input/focus/caret, timers, menus/accelerators, dialogs, open/save, clipboard and everyday Shell operations with cancellation and cleanup. |
+| Comprehensive display | Complete retained W07/W08/W09 display stages: fonts/metrics, colours/palettes, transforms, bitmap/icon/cursor conversion, metafile rendering and repaint/geometry fidelity; investigate the residual-pixel report, then run the three-app usability checkpoint. Repairs remain at their existing owners, not inside the acceptance task. |
+| Comprehensive functionality | Residual W19 plus DDE, OLE, multimedia, network, printing, COMM and inspection/debugging; finish with W20 whole-provider acceptance. Error handling required for earlier phases is never delayed here. |
+
+The first admitted investigation must recheck the current WINMINE/SOL/WRITE
+frontiers and identify the first failed provider behind startup errors, rather
+than infer heap failure from an out-of-memory dialog. Use existing evidence;
+do not repeat a global audit or wait until final acceptance to exercise apps.
+Necessary failure handling and cleanup accompany every repair, even while the
+remaining W19 hard-error work is later in Queue.
+
+Owner clarification: SOL and WRITE startup failures are mandatory blockers in
+the first two phases, not acceptable inherited frontiers at those phase exits.
+Basic functionality must repair their actual initialization failures; basic
+display must show each application's normal main interface with usable initial
+content, not an OOM/error dialog, splash-only state, empty placeholder or hung
+window. WINMINE retains its accepted startup baseline too. All three run on the
+same ordinary identified package without diagnostic bypasses or guest patches.
+Do not proceed to comprehensive-interaction admission while either SOL or WRITE
+still fails this startup/display gate. If the first failed call belongs to a
+later family, explicitly promote the necessary bounded owner work into these
+phases; do not wait for that entire later package or build a duplicate provider.
+Record exact failure, repair and normal-window/content evidence independently
+for each app. Matching historical error frontiers remains non-regression
+evidence only, never satisfaction of this new functional requirement.
+
+Within mixed packages, deliver font/text before metafiles, resource image
+correctness before menu refinements, and ordinary common dialogs before OLE.
+At admission, explicitly separate any extension that would delay the display/
+interaction milestone into a bounded deferred stage with its original owner,
+prerequisites and remaining obligations recorded. Do not claim the whole
+package closed or treat a later-owner dependency as already verified. Such a
+split/reopening must use the normal one-active-packet rules; it is not authority
+for concurrent tasks or silently dropping original coverage. In particular,
+W18 OLE must not force completing W11 DDE before ordinary dialogs can ship;
+W09 may reuse verified input support but must promote any actually missing W06
+contract rather than fabricate a temporary input provider.
+
+The new [everyday usability checkpoint](proposal-wow32-everyday-usability-001.md)
+follows the window-residue investigation and precedes extended services.
+It does not certify complete WOW32. W20 remains the final whole-provider gate
+after every selected capability, including the completed display and OLE stages, is
+reconciled. Retain the earlier usability tests as cumulative regressions.
+
 Owner direction dated 2026-09-28 replaces the single 20-S candidate with
 20 independently admitted, unnumbered candidate T packages. This document is
 the shared requirements, evidence and transfer index; it is not an additional

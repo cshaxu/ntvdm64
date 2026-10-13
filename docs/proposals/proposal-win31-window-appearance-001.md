@@ -151,8 +151,9 @@ not assume that a process-creation hook already covers window creation.
 
 ## Opt-in and delivery boundary
 
-Owner-approved entrypoints are `run16 --win16-window-style` (Win16 windows
-only) and `run16 --win16-window-style-all` (Win16/Win32/Win64 windows).
+Owner-renamed entrypoints are `run16 --win16-style` (Win16 windows
+only) and `run16 --win16-style-all` (Win16/Win32/Win64 windows).
+The previous names containing `-window` are not retained as aliases.
 Both propagate along controlled launch chains, including through a native
 intermediate that does not itself render the Win16-only style. Unrelated tasks
 in a shared WOW worker must remain unaffected. Default non-inherited launches

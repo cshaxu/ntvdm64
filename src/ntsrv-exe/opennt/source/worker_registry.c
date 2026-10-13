@@ -527,7 +527,8 @@ static DWORD service_vdm_admit(void *context,HANDLE process)
     if(!state->parent) {
         HANDLE event;
         OPENNT_BASE_SERVICE_RESOURCES resources;
-        if(state->binary!=BINARY_TYPE_DOS || !state->connection->task) {
+        if((state->binary!=BINARY_TYPE_DOS && state->binary!=BINARY_TYPE_SEPWOW) ||
+            !state->connection->task) {
             error=ERROR_INVALID_DATA;goto registered;
         }
         /* srvvdm deliberately returned NULL: keep its worker-exit semantics,
@@ -612,7 +613,7 @@ DWORD OpenNtBaseServiceStartVdmWorker(OPENNT_BASE_CONNECTION *connection,DWORD p
     if(!OpenNtBaseInitializeVdmConfig(&config,ansi,kernel))
         {error=ERROR_BAD_PATHNAME;goto done;}
     previous=OpenNtBaseBindVdmConfig(&config);
-    if(!BaseGetVdmConfigInfo(image,admission.binary==BINARY_TYPE_DOS ? connection->task : 0,
+    if(!BaseGetVdmConfigInfo(image,admission.binary==BINARY_TYPE_WIN16 ? 0 : connection->task,
         admission.binary,&command,&size))error=GetLastError();
     (void)OpenNtBaseBindVdmConfig(previous);
     if(error)goto done;
