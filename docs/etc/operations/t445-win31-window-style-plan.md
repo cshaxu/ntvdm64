@@ -2,6 +2,10 @@
 
 ## Authority and stage boundary
 
+On 2026-10-13 owner closes delivered S5 (7c6406575) explicitly without manual
+acceptance. Automated evidence remains valid; no manual pass is inferred.
+T445 remains open. S6/S7/S8 below remain planned, awaiting separate admission.
+
 On 2026-10-13 owner accepts S4 r261 and inserts S5: migrate the entire core
 to src/ntw16s-dll, with public DLL imports from thin src/w16style-exe.
 Publish ntw16s32.dll, ntw16s64.dll and x64 W16Style.exe in assets/release and
