@@ -2,6 +2,12 @@
 
 ## Owner disposition
 
+After reopening for S10 and S11, the owner confirms S11 "验收通过" and then
+authorizes whole-T closure audit, commit and push. This supersedes the earlier
+S9 closure disposition below. No implementation S remains planned or active;
+no next T is admitted. Earlier stages' manual-acceptance limitations remain
+explicit rather than being retrospectively converted into manual passes.
+
 The owner directs closure after S9, requests one final commit restoring the
 W16Style demo's20px proportions and removing the temporary generated caption
 prefix, and explicitly permits the historical unstyled native-menu animation
@@ -36,13 +42,32 @@ of additional manual testing. No subsequent task is admitted automatically.
 | S7 | RPC core/style split, separate-WOW propagation and registered DIV-331 environment repair; [evidence](../etc/evidence/m0-t445-s7-base-rpc-client-split.md). |
 | S8 | Hook/WOW32 integration, coherent13-image release; [evidence](../etc/evidence/m0-t445-s8-style-integration.md). |
 | S9 |20px font, actual menu hover/About corrections and final demo/caption cleanup; [evidence](../etc/evidence/m0-t445-s9-integrated-acceptance.md). |
+| S10 | Default-button geometry, pressed/focus/native-state fidelity; delivered e046ee3d7, no separately inferred manual pass; [evidence](../etc/evidence/m0-t445-s10-default-button.md). |
+| S11 | Generic dialog palette, SysLink typography/behavior, flat separators and multiline EDIT coverage; delivered b39ceb7e6, explicitly owner accepted in cbd0f7832; [evidence](../etc/evidence/m0-t445-s11-dialog-coverage.md). |
 
 S9 P1 is266067264cd7e26079ec67550f0368f6e5f7ab79. The commit containing this
-closure delivers P2 and its verified publication. No original mirror/guest
+original closure delivered P2 (4f8c181487) and its verified publication. No original mirror/guest
 change is introduced by S9/P2; the T as a whole retains the separately
 registered S7 DIV-331, so it must not be described as entirely mirror-diff-free.
 
 ## Verification and limits
+
+Final review uses the clean cbd0f7832 baseline and S11's sealed evidence:
+r017 full UI (27,261 checks per width), r018 attachment/unload, r019 retained
+default-button checks, r020 Product, r021 Control, r022 real WINMINE gameplay
+and r026 final dialog fixtures against the frozen DLLs. S11 r024 verifies
+the coherent13-image publication and all28 demo pages. These are prior
+runtime results, not newly executed tests during documentation closure.
+
+The final documentation audit is retained under build/M0-T445/closure-final:
+governance includes relative-link validation; git diff --check and exact
+manifest SHA-256 comparison cover all13 files at assets/release and
+O:/winnt/system32 against S11 r002/package/system32. Queue and TODO remain
+unchanged. Only Current, this closure and the historical working-plan header
+change. No source, binary, configuration or mirror change is introduced;
+the documentation-only delivery exemption requires no rebuild/redeployment.
+The final sequential review reconciles the S10/S11 reopening with this record
+and the task-intermission status, while preserving the limits below.
 
 The S9 evidence records exact candidate, background runs, positive/negative
 checks, full Product/Control regressions and three-way publication hashes.

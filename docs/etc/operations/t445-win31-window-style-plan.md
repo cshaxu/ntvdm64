@@ -1,15 +1,26 @@
 # T445 Windows 3.1 window-style working plan
 
-## S10 reopening
+## Final owner-directed closure after S11
+
+The owner accepts S11 and authorizes the final T445 audit, closure commit and
+push. S1-S11 are disposed; no S12 or next T is admitted. The
+[closure record](../../history/m0-t445-window-style-closure.md) records the
+final delivery and retained limits. The sequence below is historical only.
+S10 is delivered as e046ee3d7; S11 as b39ceb7e6, with explicit owner acceptance
+recorded in cbd0f7832. Earlier manual-acceptance limitations remain unchanged.
+
+## S10 reopening (historical)
 
 After the S9 closure, the owner explicitly reopens T445 for default-button
-fidelity repair. The sole active brief is in [Current](../../states/CURRENT.md).
+fidelity repair. [Current](../../states/CURRENT.md) alone governs admission.
 Compare original default/focus/pressed semantics before changing the NTW16S
 renderer; retain20px type, unchanged captions and the prior deferred TODO.
 S1-S9 below remain delivered historical stages. S10 P1 corrects the continuous
 default border, pressed relief and label focus; both-width and integrated
 gates pass and r015 verifies publication. [Evidence](../evidence/m0-t445-s10-default-button.md)
-records the source comparison and retained failures. Await owner acceptance.
+records the source comparison and retained failures. Its then-pending manual
+acceptance was not inferred from S11 admission; the owner now directs whole-T
+closure after accepting S11.
 
 ## Prior S9 final disposition
 
