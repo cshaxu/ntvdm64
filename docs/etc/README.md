@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T447 WOW execution plan](operations/t447-wow-execution-plan.md) records the
+admitted W01 sequence, inherited proof levels and baseline obligations.
+
 [T446 S1 carrier visibility](evidence/m0-t446-s1-carrier-visibility.md)
 records the event-driven guard, ownership review and verification progress.
 

@@ -167,4 +167,7 @@ interactive test inside the user's installation.
 This S1 P1 records the reviewed delivery for owner acceptance. The event-driven hide
 is asynchronous best effort: it cannot prevent every transient visible frame
 before event delivery. This delivery makes no zero-flicker, Console-retirement
-or unrelated Win3.1 performance claim. T446 remains active pending acceptance.
+or unrelated Win3.1 performance claim. The owner subsequently confirmed
+acceptance and authorized whole-T closure and next-task admission; the
+[closure](../../history/m0-t446-carrier-visibility-closure.md) records this
+disposition against delivered ca0abb7c4 without new runtime changes.

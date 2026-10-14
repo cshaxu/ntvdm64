@@ -2,7 +2,8 @@
 
 ## Status and objective
 
-Owner admits this package as T446. Current owns its sole active S1 brief.
+Owner accepted this package as T446 and approved whole-task closure after
+delivery ca0abb7c4. See the [closure](../history/m0-t446-carrier-visibility-closure.md).
 The proposed three-step sequence below is consolidated into one end-to-end
 implementation/integration/verification delivery; scope and acceptance remain.
 

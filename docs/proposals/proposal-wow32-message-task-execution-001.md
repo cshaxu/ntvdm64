@@ -2,8 +2,10 @@
 
 ## Objective and admission
 
-Owner-directed split dated 2026-09-28. This is one unnumbered candidate T in
-[Queue](../states/QUEUE.md), not an active task or an implementation approval.
+Owner-directed split dated 2026-09-28. Following accepted T446 closure, this
+package is admitted as T447 in [Current](../states/CURRENT.md) and removed
+from Queue. Current owns the active brief; the
+[working plan](../etc/operations/t447-wow-execution-plan.md) owns its sequence.
 It owns workstream **W01**, formerly successor S1 / T422 S3, under the
 [WOW32 program](proposal-wow32-production-completion-002.md). Its S identifiers
 below are local to this candidate; historical S references resolve through the

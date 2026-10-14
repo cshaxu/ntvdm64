@@ -1,41 +1,43 @@
 # Project Status
 
-**Active: M0 T446 S1 — private Console visibility guard.**
+**Active: M0 T447 S1 — WOW32 execution boundary and baseline.**
 
 ## Current Work
 
-Owner admits Queue head: "准入任务1 开始执行". T445 stays closed.
-The [carrier proposal](../proposals/proposal-ntvwm-hidden-carrier-visibility-guard-001.md)
-is now T446; its three proposed implementation/integration/test steps are
-one bounded S1 delivery so no unused guard is published separately.
+Owner accepts T446 and directs "验收通过 批准收口t任务 准入下一个t任务".
+[T446 closure](../history/m0-t446-carrier-visibility-closure.md) records its
+accepted delivery ca0abb7c4. The former queue head is now T447:
+[WOW32 messages, callbacks and task execution](../proposals/proposal-wow32-message-task-execution-001.md).
+Its W01 ownership and inherited evidence are retained. The
+[working plan](../etc/operations/t447-wow-execution-plan.md) records S1--S4;
+only S1 is active. No production change is admitted by this baseline stage.
 
 ## Active Packet
 
 | Field | Contract |
 | --- | --- |
-| Identifier Mode | M0 T446 S1, Ordinary Mode; single implementer followed by sequential review. |
-| Admission And Approval | Owner admits queued carrier visibility guard and requests execution. |
-| Objective | Keep the exact private NTVWM Console hidden during residency and at direct completion. |
-| Non-goals | No polling, target-name special case, presentation cadence, lifetime, protocol, Hook, guest or original mirror changes; transient exposure before asynchronous delivery is not prevented. |
-| Reference Baseline | Clean pushed6fc7e3db5; coherent13-image S11 release; existing WinEvent research and carrier proposal. |
-| Files And ABI Surface | NTVWM console-state guard and main integration; owned tests/build selection and evidence only. No shared ABI changes. |
-| Applicable Rules | Execution, architecture, coding, documentation and source policy; background-only builds/tests. |
-| Verification | Actual guard events, exact-window negative, no-HWND, shutdown race, resource cleanup; real native target/completion/reuse and required Product/Control regressions; coherent13-image publication and hashes. |
-| Expected Markers | Carrier show-to-hide, unrelated HWND unchanged, no periodic wait, stop/join before close, unchanged completion/output and only ntvwm.exe changed. |
-| Asset Needs | Existing MSVC/Ninja, sealed S11 package and original guest fixtures; private desktop probes. No imported assets. |
-| Reporting Requirements | Record exact process/window identity, failures and test scope; never equate asynchronous hide with zero transient visibility. |
-| Stop Conditions | Need to alter lifecycle, observe non-carrier windows, change presentation pump cadence, or modify another production component requires renewed scope. |
-| Exit Criteria | Reviewed implementation, affected/full gates, coherent publication to assets/release and O:/winnt/system32, hash verification, commit/push and clean tree; await owner acceptance. |
-| Original Owner Request | Admit queue item1 and begin execution of the NTVWM hidden-carrier guard. |
-| Similar-Issue Sweep | Management and fatal close, normal cleanup, startup failure, direct completion KEEP/RELEASE, GUI-only reuse, missing HWND, unrelated windows and show/stop races. |
+| Identifier Mode | M0 T447 S1, Ordinary Mode; one implementer and subsequent separate review pass. |
+| Admission And Approval | Owner accepts/closes T446 and admits the next queue package, W01 WOW32 execution. |
+| Objective | Establish a finite production caller/test matrix for C01--C03, C09 and execution C10; recheck current WINMINE/SOL/WRITE frontiers and inherited E92 failure. |
+| Non-goals | No production repair in S1, guest patches, global re-audit, local SMS transport, second scheduler or assumed heap diagnosis; no silent absorption of other W owners. |
+| Reference Baseline | Accepted ca0abb7c4 thirteen-image release; T422 E91/E92/E93 and S3 checklist; T430 G03 callback/task handoff; T446 independent application frontiers. |
+| Files And ABI Surface | Existing WOW task/callback production paths read-only; tests and indexed evidence/plan may change. No runtime or wire ABI change. |
+| Applicable Rules | Execution, architecture, coding, documentation, source policy and WOW program gates; original x86 /MT CCPU40; background-only test/build runs. |
+| Verification | Pin binaries/media/configuration; rerun the three app frontiers and applicable existing execution probes; classify real guest, native peer and mock evidence separately, including errors and cleanup. |
+| Expected Markers | Exact caller/provider mapping, source/build/wiring/focused/guest/teardown status, first observed failing boundary or explicit unresolved result; no mock-only capability completion. |
+| Asset Needs | Existing sealed package, immutable guest images, retained MSVC/Ninja and fixtures; new outputs only below build/M0-T447/S1 and approved isolated stages. |
+| Reporting Requirements | Keep stable C/W/E/G IDs; report expected/actual results and confidence independently per app; inherited failures remain open. |
+| Stop Conditions | Required production repair or another owner dependency must be scoped in the next implementation brief; unknown external inputs or guest mutation cannot be bypassed. |
+| Exit Criteria | Reviewed finite matrix and reproducible baseline evidence, documented next repair boundary, governance/link/diff checks, documentation/test delivery commit and push; no functional-completion claim. |
+| Original Owner Request | 验收通过 批准收口t任务 准入下一个t任务 |
+| Similar-Issue Sweep | Normal/early/duplicate replies; same/cross-task reentry; sender/receiver/task loss; callback frame/lease release; original init/yield/hung/wait paths. |
 
-S1 P1 implementation, AMD64 Release build, focused positive/negative/error
-tests, all3 Product and11 Control groups, MySMB Esc and WINMINE gameplay in
-Off/Win16/All modes pass; see [evidence](../etc/evidence/m0-t446-s1-carrier-visibility.md).
-The coherent13-image set is published and hash-verified in assets/release
-and O:/winnt/system32; only ntvwm.exe changes. Published-byte product reuse
-verification also passes. This P1 records the reviewed delivery; owner manual
-acceptance remains pending. No next task is admitted.
+Admission is documentation only; no new runtime tests or fixes are claimed.
+S1 must reproduce the current application frontiers rather than infer their
+cause from an OOM dialog. SOL/WRITE normal initialization is a mandatory
+basic-functionality milestone across the existing owners, not satisfied by
+matching their prior failure. Proven cross-owner dependencies require explicit
+bounded promotion. Full production gates apply to subsequent runtime changes.
 
 ## Current Technical Baseline
 
@@ -72,6 +74,7 @@ assigned to the existing basic-WOW queue rather than claimed repaired here.
 
 | Task | Outcome |
 | --- | --- |
+| T446 | Owner-accepted event-driven private Console hiding, completion ordering and coherent release. [Closure](../history/m0-t446-carrier-visibility-closure.md) |
 | T445 | Modular Win3.x appearance, propagation and integration,20px demo/caption cleanup, default-button and dialog/control coverage. [Closure](../history/m0-t445-window-style-closure.md) |
 | T444 | Owner-accepted indexed palette repair, audit-only capability disposition and measured host VT/API fidelity. [Closure](../history/m0-t444-indexed16-text-closure.md) |
 | T441 | Repaired mixed NTVDM/NTVWM release that stalled COMMAND/ver; bounded variable I/O retained. [Closure](../history/m0-t441-variable-worker-io-release-integrity-closure.md) |
