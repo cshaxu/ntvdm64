@@ -2,7 +2,7 @@ param([Parameter(Mandatory)][string]$BuildRoot,[Parameter(Mandatory)][string]$Wo
  [Parameter(Mandatory)][string]$Hook64BuildRoot,[Parameter(Mandatory)][string]$StyleBuildRoot,
  [switch]$CompileOnly)
 $ErrorActionPreference='Stop'
-Import-Module "$env:SystemRoot/System32/WindowsPowerShell/v1.0/Modules/Microsoft.PowerShell.Utility/Microsoft.PowerShell.Utility.psd1"
+Import-Module Microsoft.PowerShell.Utility
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase)){throw 'Build-owned output required'}
@@ -25,9 +25,11 @@ if errorlevel 1 exit /b %errorlevel%
 cd /d "$dir"
 rc /nologo /fo title.res "$repo/tests/component-integration/native_title_hook_test.rc"
 if errorlevel 1 exit /b %errorlevel%
-cl /nologo /MT /O2 /W4 /WX /D_WIN32_WINNT=0x0A00 /I"$repo/src" "$repo/tests/component-integration/native_title_hook_test.cpp" /Fenative-title-test.exe /link title.res $libraries kernel32.lib user32.lib ntdll.lib
+cl /nologo /MT /O2 /W4 /WX /D_WIN32_WINNT=0x0A00 /I"$repo/src" "$repo/tests/component-integration/native_title_hook_test.cpp" /Fenative-title-test.exe /link title.res $libraries kernel32.lib user32.lib uxtheme.lib ntdll.lib
 if errorlevel 1 exit /b %errorlevel%
-link /nologo /subsystem:windows /entry:wmainCRTStartup /out:native-title-gui.exe native_title_hook_test.obj title.res $libraries kernel32.lib user32.lib ntdll.lib
+link /nologo /subsystem:windows /entry:wmainCRTStartup /out:native-title-gui.exe native_title_hook_test.obj title.res $libraries kernel32.lib user32.lib uxtheme.lib ntdll.lib
+if errorlevel 1 exit /b %errorlevel%
+cl /nologo /MT /O2 /W4 /WX /D_WIN32_WINNT=0x0A00 /I"$repo/src" "$repo/tests/component-integration/style_loader_failure_test.cpp" /Festyle-loader-failure-test.exe /link $libraries kernel32.lib user32.lib ntdll.lib
 "@ | Set-Content "$dir/build.cmd" -Encoding ascii
   & $env:ComSpec /d /c "$dir/build.cmd" *> "$dir/build.txt"
   if($LASTEXITCODE){throw "Native title fixture build failed: $arch"}

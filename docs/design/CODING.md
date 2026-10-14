@@ -20,6 +20,16 @@ automated fixtures remain in tests. The three admitted release images join
 release-manifest.json, not addon-manifest.json. Prior static-library text
 below describes the S3/S4 baseline superseded by this admission.
 
+S8 adds creation attachment, per-window theme capture and three original
+native API leaves under the same NTW16S owner. Native Hook window_titles.cpp
+loads its same-width DLL from the trusted product System32 and binds original
+scroll/theme trampolines. WOW32 wow_title_policy.c loads ntw16s32.dll beside
+the existing worker and chooses each task's explicit creation scope, including
+Off masking. Neither consumer contains a second renderer; ntvdm.exe, NTCON,
+NTSRV and the guest receive no appearance implementation. This is local ABI2,
+not a wire-protocol change. See the [S8 design](../etc/operations/t445-s8-style-integration-design.md)
+and [verification status](../etc/evidence/m0-t445-s8-style-integration.md).
+
 ## Approved window-style library placement — T445
 
 `src/win16-style` is the approved shared static-library source owner for

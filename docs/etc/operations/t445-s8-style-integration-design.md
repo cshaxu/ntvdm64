@@ -1,11 +1,20 @@
 # T445 S8 NTW16S integration design draft
 
+## Owner approval
+
+Owner approves implementation after explicitly confirming WOW32.DLL as the
+Win16 attachment owner. It loads/calls ntw16s32.dll inside the existing x86
+ntvdm.exe process. The executable is the carrier, not a new appearance owner;
+Windows WOW64 is not a product integration component. Native integration remains
+nthook32/64 calling ntw16s32/64. The design-only delivery below is historical;
+Current Work now admits implementation with full product delivery gates.
+
 ## Admission and evidence
 
 Owner requests S8 design before implementation and advances without S7 manual
 acceptance. Baseline is delivered/pushed 292664b02, not a new binary candidate.
-This document is a source-backed proposal; no integrated rendering pass is
-claimed. Current Work owns the sole active packet. S9 remains final integrated
+This document retains the source-backed design; [implementation evidence](../evidence/m0-t445-s8-style-integration.md)
+records S8 integration tests and publication. Current Work owns the sole active packet. S9 remains final integrated
 acceptance, not a place to defer known S8 installation defects.
 
 Read-only procedure: inspect NTW16S public headers, native window_titles.cpp,

@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T445 S8 integration evidence](evidence/m0-t445-s8-style-integration.md)
+records implementation attempts, focused tests and remaining delivery gates.
+
 [T445 S8 integration design](operations/t445-s8-style-integration-design.md)
 records the proposed DLL/Hook/WOW attachment boundary and outstanding proofs.
 

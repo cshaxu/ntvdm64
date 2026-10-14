@@ -2,10 +2,17 @@
 
 ## Authority and stage boundary
 
-Owner now advances from delivered S7 (292664b02) without manual acceptance
-and admits S8 design first. The [S8 draft](t445-s8-style-integration-design.md)
-specifies integration and test gates; runtime implementation awaits approval.
+Owner advances from delivered S7 (292664b02) without manual acceptance
+and admits S8 design first, then approves its implementation. The
+[S8 design](t445-s8-style-integration-design.md) specifies integration and test
+gates. WOW32.DLL is the Win16 attachment owner, not ntvdm.exe or Windows WOW64.
 S7 automated evidence is retained, not converted into a manual pass.
+
+S8 r075 publishes the exact r059 thirteen-image candidate after native/UI,
+WOW propagation, Product/Control and unload tests. Both release locations match
+the tested hashes; deployed DLL/demo gates pass. See [S8 evidence](../evidence/m0-t445-s8-style-integration.md).
+Owner acceptance remains pending; S9 is not admitted. Retained initialization
+errors and physical visual/interaction limits are not declared repaired.
 
 Owner inserts S7 on 2026-10-13: separate Base RPC core and launch-style
 source/link closures, replacing the frontend-only conditional experiment.

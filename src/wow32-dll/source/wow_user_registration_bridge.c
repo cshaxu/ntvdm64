@@ -262,16 +262,16 @@ static HWND WINAPI registered_create_window_ex(DWORD ex_style,
     int width, int height, HWND parent, HMENU menu, HANDLE instance,
     LPVOID param, DWORD flags, LPDWORD wow_words)
 {
-    DWORD policy,error;HWND result;
+    DWORD policy,error=ERROR_SUCCESS,failure=ERROR_SUCCESS;HWND result=NULL;void *style_scope;
     if(!wow_title_policy(&policy))return NULL;
-    result = wow_user_create_window_ex(ex_style, class_name, window_name,
-        style, x, y, width, height, parent, menu, instance, param, flags,
-        wow_words);
-    error=GetLastError();
-    if(result && !wow_title_apply(result,policy)) {
-        error=GetLastError();DestroyWindow(result);result=NULL;
-        if(!error)error=ERROR_GEN_FAILURE;
-    }
+    if(!wow_style_creation_begin(policy,&style_scope))return NULL;
+    __try {
+        result = wow_user_create_window_ex(ex_style, class_name, window_name,
+            style, x, y, width, height, parent, menu, instance, param, flags,
+            wow_words);
+        error=GetLastError();
+    } __finally {failure=wow_style_creation_end(style_scope);}
+    if(failure){if(result)DestroyWindow(result);result=NULL;error=failure;}
     registration_trace("CreateWindowEx", (DWORD)(ULONG_PTR)result);
     SetLastError(error);
     return result;
@@ -280,14 +280,14 @@ static HWND WINAPI registered_create_window_ex(DWORD ex_style,
 static HWND WINAPI registered_create_dialog(HANDLE module,LPDLGTEMPLATE resource,
     DWORD bytes,HWND owner,DLGPROC procedure,LONG parameter,UINT flags)
 {
-    DWORD policy,error;HWND result;
+    DWORD policy,error=ERROR_SUCCESS,failure=ERROR_SUCCESS;HWND result=NULL;void *style_scope;
     if(!wow_title_policy(&policy))return NULL;
-    result=wow_user_server_create_dialog(module,resource,bytes,owner,procedure,parameter,flags);
-    error=GetLastError();
-    if(result && !wow_title_apply(result,policy)) {
-        error=GetLastError();DestroyWindow(result);result=NULL;
-        if(!error)error=ERROR_GEN_FAILURE;
-    }
+    if(!wow_style_creation_begin(policy,&style_scope))return NULL;
+    __try {
+        result=wow_user_server_create_dialog(module,resource,bytes,owner,procedure,parameter,flags);
+        error=GetLastError();
+    } __finally {failure=wow_style_creation_end(style_scope);}
+    if(failure){if(result)DestroyWindow(result);result=NULL;error=failure;}
     SetLastError(error);return result;
 }
 

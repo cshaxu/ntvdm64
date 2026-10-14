@@ -31,11 +31,11 @@ rule cc
 rule archive
   command = lib.exe /nologo /out:$out $in
 rule link
-  command = link.exe /nologo /subsystem:windows /entry:wmainCRTStartup /out:$out $in user32.lib gdi32.lib comctl32.lib dwmapi.lib
+  command = link.exe /nologo /subsystem:windows /entry:wmainCRTStartup /out:$out $in user32.lib gdi32.lib comctl32.lib dwmapi.lib uxtheme.lib
 rule probe_link
   command = link.exe /nologo /subsystem:console /out:$out $in user32.lib gdi32.lib
 rule style_probe_link
-  command = link.exe /nologo /manifest:embed /subsystem:console /out:$out $in user32.lib gdi32.lib comctl32.lib dwmapi.lib
+  command = link.exe /nologo /manifest:embed /subsystem:console /out:$out $in user32.lib gdi32.lib comctl32.lib dwmapi.lib uxtheme.lib
 rule menu_v6_link
   command = link.exe /nologo /subsystem:windows /entry:wmainCRTStartup /manifest:embed /manifestdependency:"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'" /out:$out $in user32.lib gdi32.lib
 build layout.obj: cc @NINJA_REPO@/src/ntw16s-dll/layout.c
@@ -67,8 +67,9 @@ build menu-bar-paint.obj: cc @NINJA_REPO@/src/ntw16s-dll/menu_bar_paint.c
 build menu-items.obj: cc @NINJA_REPO@/src/ntw16s-dll/menu_items.c
 build menu-scope.obj: cc @NINJA_REPO@/src/ntw16s-dll/menu_scope.c
 build controls.obj: cc @NINJA_REPO@/src/ntw16s-dll/controls.c
+build native-api.obj: cc @NINJA_REPO@/src/ntw16s-dll/native_api.c
 build control-scope.obj: cc @NINJA_REPO@/src/ntw16s-dll/control_scope.c
-build dc-failure.exe: link dc-failure.obj layout.obj scroll-layout.obj scroll-track.obj menu-paint.obj menu-layout.obj menu-bar.obj menu-bar-paint.obj menu-items.obj menu-scope.obj controls.obj font.obj
+build dc-failure.exe: link dc-failure.obj layout.obj scroll-layout.obj scroll-track.obj menu-paint.obj menu-layout.obj menu-bar.obj menu-bar-paint.obj menu-items.obj menu-scope.obj controls.obj font.obj native-api.obj
 build demo.obj: cc @NINJA_REPO@/tests/app/win16_style_demo.c
 build gallery.obj: cc @NINJA_REPO@/tests/app/win16_style_gallery.c
 build font-probe.obj: cc @NINJA_REPO@/tests/app/win31_font_probe.c
@@ -76,7 +77,7 @@ build font-probe.exe: probe_link font-probe.obj
 build native-menu.obj: cc @NINJA_REPO@/tests/app/native_menu_probe.c
 build native-menu-probe.exe: link native-menu.obj
 build native-menu-v6-probe.exe: menu_v6_link native-menu.obj
-build win16-style.lib: archive layout.obj scroll-layout.obj scroll-track.obj style.obj menu-paint.obj menu-layout.obj menu-bar.obj menu-bar-paint.obj menu-items.obj menu-scope.obj controls.obj control-scope.obj font.obj
+build win16-style.lib: archive layout.obj scroll-layout.obj scroll-track.obj style.obj menu-paint.obj menu-layout.obj menu-bar.obj menu-bar-paint.obj menu-items.obj menu-scope.obj controls.obj control-scope.obj font.obj native-api.obj
 build win16-style-demo.exe: link demo.obj gallery.obj @STYLE_DLL@.lib layout.obj scroll-layout.obj menu-bar.obj menu-layout.obj
 default win16-style-demo.exe font-probe.exe font-test.exe menu-dispatch.exe control-present.exe control-lifetime.exe sizebox.exe list-tabs.exe native-menu-probe.exe native-menu-v6-probe.exe dc-failure.exe scroll-geometry.exe scroll-api.exe
 '@.Replace('@REPO@',$r).Replace('@STYLE_DLL@',$(if($arch -eq 'x86'){'ntw16s32'}else{'ntw16s64'})).Replace('@NINJA_REPO@',$r.Replace(':','$:').Replace(' ','$ ')) | Set-Content "$dir/build.ninja" -Encoding ascii

@@ -44,7 +44,7 @@ $graph.Add('  command = '+$compilerCommand+' $cflags $release_cflags /Fo$out $in
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file: ')
 $graph.Add('rule dll')
-$graph.Add('  command = link.exe /nologo /dll /opt:ref /out:$out /map:$out.map /implib:nthook64-import.lib /def:"'+(NP (Join-Path $root 'src/nthook32-dll/nthook64.def'))+'" $in kernel32.lib user32.lib ntdll.lib advapi32.lib rpcrt4.lib legacy_stdio_definitions.lib')
+$graph.Add('  command = link.exe /nologo /dll /opt:ref /out:$out /map:$out.map /implib:nthook64-import.lib /def:"'+(NP (Join-Path $root 'src/nthook32-dll/nthook64.def'))+'" $in kernel32.lib user32.lib uxtheme.lib ntdll.lib advapi32.lib rpcrt4.lib legacy_stdio_definitions.lib')
 $graph.Add('rule stage')
 $graph.Add('  command = powershell.exe -NoProfile -ExecutionPolicy Bypass -File "'+(NP (Join-Path $root 'tools/build/Stage-NativeWorkerImage.ps1'))+'" -InputFile $in -OutputFile "$out"')
 $graph.Add('build run16.exe: stage '+(NP $referenceRun16))

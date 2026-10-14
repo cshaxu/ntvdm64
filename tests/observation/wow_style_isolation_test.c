@@ -2,6 +2,7 @@
  * baseline reaches an error dialog; that is a title witness, not gameplay. */
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#include <tlhelp32.h>
 #include <stdio.h>
 #include <wchar.h>
 static HWND mine,dialog,native;
@@ -9,6 +10,68 @@ static DWORD worker;
 static DWORD shell_worker;
 static HANDLE retained_launcher;
 static DWORD retained_pid;
+static const WCHAR *runtime_root;
+static BOOL style_module(DWORD pid)
+{
+    HANDLE snapshot;MODULEENTRY32W entry={sizeof(entry)};BOOL found=FALSE;
+    WCHAR expected[MAX_PATH];
+    snapshot=CreateToolhelp32Snapshot(TH32CS_SNAPMODULE|TH32CS_SNAPMODULE32,pid);
+    if(snapshot==INVALID_HANDLE_VALUE)return FALSE;
+    if(Module32FirstW(snapshot,&entry))do {
+        if(!lstrcmpiW(entry.szModule,L"ntw16s32.dll") || !lstrcmpiW(entry.szModule,L"ntw16s64.dll")){
+            swprintf_s(expected,MAX_PATH,L"%ls\\system32\\%ls",runtime_root,entry.szModule);
+            found=!lstrcmpiW(expected,entry.szExePath);
+            wprintf(L"STYLE MODULE pid=%lu path=%ls trusted=%u\n",pid,entry.szExePath,found);
+            break;
+        }
+    }while(Module32NextW(snapshot,&entry));
+    CloseHandle(snapshot);return found;
+}
+static BOOL capture_window(HWND window)
+{
+    WCHAR directory[MAX_PATH],path[MAX_PATH];RECT r;POINT client={0};
+    HDC dc;HBITMAP bitmap,previous;BITMAPINFO info={0};BITMAPFILEHEADER header={0};
+    void *pixels;HANDLE file;DWORD size,written;BOOL ok;static unsigned sequence;
+    static HWND captured[8];unsigned i;
+    if(!GetEnvironmentVariableW(L"MVDM_STYLE_CAPTURE_DIR",directory,MAX_PATH))return TRUE;
+    /* Capture each owned window before launching the next task. A later
+     * modal guest may legitimately block synchronous painting of its peer. */
+    for(i=0;i<sequence;++i)if(captured[i]==window)return TRUE;
+    if(sequence==ARRAYSIZE(captured))return FALSE;
+    if(IsIconic(window)){
+        DWORD_PTR ignored;
+        if(!SendMessageTimeoutW(window,WM_SYSCOMMAND,SC_RESTORE,0,SMTO_ABORTIFHUNG|SMTO_BLOCK,10000,&ignored) || IsIconic(window))return FALSE;
+    }
+    if(!GetWindowRect(window,&r) || !ClientToScreen(window,&client))return FALSE;
+    printf("FRAME hwnd=%p size=%ld,%ld client-origin=%ld,%ld iconic=%u\n",window,
+        r.right-r.left,r.bottom-r.top,client.x-r.left,client.y-r.top,IsIconic(window));
+    if(r.right<=r.left || r.bottom<=r.top || r.right-r.left>4096 || r.bottom-r.top>4096)return FALSE;
+    info.bmiHeader.biSize=sizeof(info.bmiHeader);info.bmiHeader.biWidth=r.right-r.left;
+    info.bmiHeader.biHeight=-(r.bottom-r.top);info.bmiHeader.biPlanes=1;info.bmiHeader.biBitCount=32;
+    size=(r.right-r.left)*(r.bottom-r.top)*4;
+    dc=CreateCompatibleDC(NULL);if(!dc)return FALSE;
+    bitmap=CreateDIBSection(dc,&info,DIB_RGB_COLORS,&pixels,NULL,0);
+    if(!bitmap){DeleteDC(dc);return FALSE;}
+    previous=SelectObject(dc,bitmap);ZeroMemory(pixels,size);
+    ok=PrintWindow(window,dc,0);GdiFlush();
+    {DWORD offset;BOOL changed=FALSE;
+        for(offset=0;offset<size;++offset)if(((BYTE *)pixels)[offset]){changed=TRUE;break;}
+        printf("CAPTURE print=%u nonblank=%u\n",ok,changed);fflush(stdout);
+        ok=ok && changed;
+    }
+    captured[sequence]=window;
+    swprintf_s(path,MAX_PATH,L"%ls\\window-%u.bmp",directory,++sequence);
+    file=CreateFileW(path,GENERIC_WRITE,0,NULL,CREATE_NEW,0,NULL);
+    if(file==INVALID_HANDLE_VALUE)ok=FALSE;
+    else {
+        header.bfType=0x4d42;header.bfOffBits=sizeof(header)+sizeof(info.bmiHeader);header.bfSize=header.bfOffBits+size;
+        ok=ok && WriteFile(file,&header,sizeof(header),&written,NULL) && written==sizeof(header);
+        ok=ok && WriteFile(file,&info.bmiHeader,sizeof(info.bmiHeader),&written,NULL) && written==sizeof(info.bmiHeader);
+        ok=ok && WriteFile(file,pixels,size,&written,NULL) && written==size;
+        CloseHandle(file);
+    }
+    SelectObject(dc,previous);DeleteObject(bitmap);DeleteDC(dc);return ok;
+}
 static BOOL CALLBACK collect(HWND window,LPARAM unused)
 {
     WCHAR cls[80];DWORD pid;
@@ -37,7 +100,8 @@ static BOOL marked_owner(HWND window,BOOL expected,DWORD owner)
     if(!window || !GetWindowTextW(window,title,256))title[0]=0;
     GetWindowThreadProcessId(window,&pid);
     wprintf(L"WITNESS pid=%lu hwnd=%p title=[%ls] expected-marker=%u\n",pid,window,title,expected);fflush(stdout);
-    return window && pid==owner && (!wcsncmp(title,L"(Win16 Style) ",14))==expected;
+    return window && pid==owner && (!wcsncmp(title,L"(Win16 Style) ",14))==expected &&
+        (!expected || style_module(pid)) && capture_window(window);
 }
 static BOOL marked(HWND window,BOOL expected){return marked_owner(window,expected,worker);}
 static BOOL launch(PCWSTR root,PCWSTR options,PCWSTR guest,PWSTR desktop,DWORD wait_ms)
@@ -69,11 +133,13 @@ static BOOL launch(PCWSTR root,PCWSTR options,PCWSTR guest,PWSTR desktop,DWORD w
 #define CHECK(x) do {if(!(x)){fprintf(stderr,"FAIL line=%d error=%lu %s\n",__LINE__,GetLastError(),#x);result=1;goto done;}}while(0)
 int wmain(int argc,WCHAR **argv)
 {
-    WCHAR name[80];HDESK desktop=NULL;int result=0;BOOL reverse;
+    WCHAR name[80];HDESK desktop=NULL,original=GetThreadDesktop(GetCurrentThreadId());int result=0;BOOL reverse;
     CHECK(argc==2 || argc==3);
+    runtime_root=argv[1];
     reverse=argc==3 && !wcscmp(argv[2],L"off-on");
     swprintf_s(name,80,L"WowStyle-%lu",GetCurrentProcessId());
     desktop=CreateDesktopW(name,NULL,NULL,0,GENERIC_ALL,NULL);CHECK(desktop);
+    CHECK(SetThreadDesktop(desktop));
     if(argc==3 && (!wcsncmp(argv[2],L"child-",6) || !wcsncmp(argv[2],L"relay-",6) ||
         !wcsncmp(argv[2],L"separate-",9) || !wcsncmp(argv[2],L"separate-a-",11))){
         BOOL separate=!wcsncmp(argv[2],L"separate-",9);
@@ -142,6 +208,6 @@ done:
         if(WaitForSingleObject(retained_launcher,0)!=WAIT_OBJECT_0)TerminateProcess(retained_launcher,98);
         CloseHandle(retained_launcher);
     }
-    if(desktop)CloseDesktop(desktop);
+    if(desktop){SetThreadDesktop(original);CloseDesktop(desktop);}
     return result;
 }

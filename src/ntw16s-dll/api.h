@@ -8,7 +8,7 @@
 #else
 #define NTW16S_API __declspec(dllimport)
 #endif
-#define NTW16S_ABI_VERSION 1u
+#define NTW16S_ABI_VERSION 2u
 /* Local C ABI, same native width. Never pass CRT allocations across it.
  * Calls and removal run on the HWND's GUI thread. The caller must retain its
  * module reference until all windows/scopes/fonts are released and no calls

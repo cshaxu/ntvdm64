@@ -17,6 +17,13 @@ static unsigned native_direct_calls;
 DWORD WINAPI NtvdmSeparateWowStyle(DWORD *style);
 extern BOOL fSeparateWow;
 static BOOL title_expected;
+static HWND style_window(DWORD policy,LPCWSTR title)
+{
+    void *scope=NULL;HWND window;
+    CHECK(wow_style_creation_begin(policy,&scope));
+    window=CreateWindowExW(0,L"STATIC",title,WS_OVERLAPPEDWINDOW,0,0,400,240,NULL,NULL,NULL,NULL);
+    CHECK(!wow_style_creation_end(scope));return window;
+}
 typedef struct style_peer {
     session *owner;wow_user_runtime *runtime;wow_user_task_lifecycle *lifecycle;HDESK desktop;
 } style_peer;
@@ -29,8 +36,8 @@ static DWORD WINAPI off_title_peer(void *argument)
     CHECK(wow_user_task_lifecycle_init_style(peer->lifecycle,0x0400,"OFF.EXE",
         0x1236,0,0,0,0,1,1,SW_HIDE,WINDOW_STYLE_OFF,0));
     CHECK(wow_title_policy(&policy) && policy==WINDOW_STYLE_OFF);
-    window=CreateWindowExW(0,L"STATIC",L"other task",WS_OVERLAPPEDWINDOW,0,0,100,80,NULL,NULL,NULL,NULL);
-    CHECK(window && wow_title_apply(window,policy));GetWindowTextW(window,text,80);
+    window=style_window(policy,L"other task");
+    CHECK(window);GetWindowTextW(window,text,80);
     CHECK(!wcscmp(text,L"other task"));CHECK(DestroyWindow(window));
     CHECK(wow_user_runtime_unbind(&binding));CHECK(session_thread_unbind(peer->owner));return 0;
 }
@@ -56,13 +63,13 @@ static void verify_task_title(void)
     CHECK(NtvdmSeparateWowStyle(&policy)==ERROR_INVALID_STATE);
     fSeparateWow=FALSE;
     CHECK(wow_title_policy(&policy) && policy==WINDOW_STYLE_WIN16);
-    w=CreateWindowExW(0,L"STATIC",L"task",WS_OVERLAPPEDWINDOW,0,0,100,80,NULL,NULL,NULL,NULL);
-    CHECK(w && wow_title_apply(w,policy));GetWindowTextW(w,title,100);
+    w=style_window(policy,L"task");
+    CHECK(w);GetWindowTextW(w,title,100);
     CHECK(!wcscmp(title,L"(Win16 Style) task"));
     CHECK(SetWindowTextW(w,L"changed"));GetWindowTextW(w,title,100);
     CHECK(!wcscmp(title,L"(Win16 Style) changed"));CHECK(DestroyWindow(w));
-    w=CreateWindowExW(0,L"STATIC",L"off",WS_OVERLAPPEDWINDOW,0,0,100,80,NULL,NULL,NULL,NULL);
-    CHECK(w && wow_title_apply(w,WINDOW_STYLE_OFF));GetWindowTextW(w,title,100);
+    w=style_window(WINDOW_STYLE_OFF,L"off");
+    CHECK(w);GetWindowTextW(w,title,100);
     CHECK(!wcscmp(title,L"off"));CHECK(DestroyWindow(w));
     resource.header.style=WS_POPUP|WS_CAPTION;resource.header.cx=100;resource.header.cy=80;
     wcscpy_s(resource.text,7,L"dialog");

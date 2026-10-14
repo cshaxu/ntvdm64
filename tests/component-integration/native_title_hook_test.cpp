@@ -1,6 +1,7 @@
 #include "nthook32-dll/hook.h"
 #include <stdio.h>
 #include <wchar.h>
+#include <uxtheme.h>
 static void failure(int line,const char *expression,DWORD error)
 {
     WCHAR path[MAX_PATH+32];FILE *file=NULL;
@@ -59,8 +60,52 @@ static DWORD wait_gui(HANDLE target,DWORD timeout)
         }
     }
 }
+static BOOL is_attached(HWND window)
+{
+    HMODULE style=GetModuleHandleW(sizeof(void *)==8?L"ntw16s64.dll":L"ntw16s32.dll");
+    typedef BOOL (__cdecl *attached_fn)(HWND);
+    attached_fn attached=style?(attached_fn)(void *)GetProcAddress(style,"Ntw16sWindowAttached"):NULL;
+    return attached && attached(window);
+}
 static void title(HWND window,PCWSTR expected)
-{ WCHAR actual[256],wanted[256];CHECK(window);GetWindowTextW(window,actual,256);swprintf_s(wanted,256,L"%ls%ls",enabled?L"(Win16 Style) ":L"",expected);if(wcscmp(actual,wanted))fwprintf(stderr,L"actual=[%ls] wanted=[%ls]\n",actual,wanted);CHECK(!wcscmp(actual,wanted)); }
+{
+    WCHAR actual[256],wanted[256];CHECK(window);GetWindowTextW(window,actual,256);
+    swprintf_s(wanted,256,L"%ls%ls",enabled?L"(Win16 Style) ":L"",expected);
+    if(wcscmp(actual,wanted))fwprintf(stderr,L"actual=[%ls] wanted=[%ls]\n",actual,wanted);
+    CHECK(!wcscmp(actual,wanted));
+    CHECK(is_attached(window)==enabled);
+}
+static void controls(HWND parent)
+{
+    HWND button=CreateWindowW(L"BUTTON",L"button",WS_CHILD|BS_AUTOCHECKBOX,0,0,160,40,parent,(HMENU)1,NULL,NULL);
+    HWND edit=CreateWindowW(L"EDIT",L"text",WS_CHILD|WS_BORDER,0,45,180,40,parent,(HMENU)2,NULL,NULL);
+    HWND list=CreateWindowW(L"LISTBOX",L"",WS_CHILD|WS_VSCROLL|LBS_USETABSTOPS,0,90,180,80,parent,(HMENU)3,NULL,NULL);
+    HWND combo=CreateWindowW(L"COMBOBOX",L"",WS_CHILD|WS_VSCROLL|CBS_DROPDOWNLIST,190,0,180,120,parent,(HMENU)4,NULL,NULL);
+    HWND custom=CreateWindowW(L"BUTTON",L"owner draw",WS_CHILD|BS_OWNERDRAW,190,130,180,40,parent,(HMENU)5,NULL,NULL);
+    CHECK(button && edit && list && combo && custom);
+    CHECK(is_attached(button)==enabled && is_attached(edit)==enabled && is_attached(list)==enabled && is_attached(combo)==enabled);
+    CHECK(!is_attached(custom));
+    CHECK(SendMessageW(button,BM_GETCHECK,0,0)==BST_UNCHECKED);
+    SendMessageW(button,BM_SETCHECK,BST_CHECKED,0);CHECK(SendMessageW(button,BM_GETCHECK,0,0)==BST_CHECKED);
+    CHECK(SetWindowTextW(edit,L"changed"));WCHAR text[40];CHECK(GetWindowTextW(edit,text,40) && !wcscmp(text,L"changed"));
+    int tabs[2]={24,48};CHECK(SendMessageW(list,LB_SETTABSTOPS,2,(LPARAM)tabs));
+    CHECK(SendMessageW(list,LB_ADDSTRING,0,(LPARAM)L"A\tB\tC")==0);
+    CHECK(SendMessageW(combo,CB_ADDSTRING,0,(LPARAM)L"item")==0);
+    CHECK(SendMessageW(combo,CB_SETCURSEL,0,0)==0 && SendMessageW(combo,CB_GETCURSEL,0,0)==0);
+    CHECK(SUCCEEDED(SetWindowTheme(list,L"Explorer",NULL)));
+    if(enabled)CHECK(GetWindowTheme(list)==NULL);
+    SCROLLINFO info={sizeof(info),SIF_RANGE|SIF_PAGE|SIF_POS,0,200000,100,100001};
+    CHECK(SetScrollInfo(parent,SB_VERT,&info,TRUE)==100001);
+    CHECK(GetScrollPos(parent,SB_VERT)==100001);
+    CHECK(SetScrollPos(parent,SB_VERT,100002,TRUE)==100001);
+    info.fMask=SIF_ALL;CHECK(GetScrollInfo(parent,SB_VERT,&info) && info.nPos==100002 && info.nMax==200000);
+    CHECK(SetScrollRange(parent,SB_VERT,0,300000,TRUE));
+    int first,last;CHECK(GetScrollRange(parent,SB_VERT,&first,&last) && first==0 && last==300000);
+    CHECK(ShowScrollBar(parent,SB_VERT,TRUE));EnableScrollBar(parent,SB_VERT,ESB_DISABLE_BOTH);
+    EnableScrollBar(parent,SB_VERT,ESB_ENABLE_BOTH);
+    CHECK(ShowScrollBar(parent,SB_VERT,FALSE));
+    printf("PASS native controls, owner-draw preservation, theme override and wide scroll APIs enabled=%d\n",enabled);fflush(stdout);
+}
 static LRESULT CALLBACK proc(HWND w,UINT m,WPARAM a,LPARAM b)
 {return DefWindowProcW(w,m,a,b);}
 static LRESULT CALLBACK return_proc(HWND w,UINT m,WPARAM a,LPARAM b)
@@ -131,7 +176,7 @@ static void message_boxes(void)
 {
     for(unsigned variant=0;variant<6;++variant){
         HHOOK observer=SetWindowsHookExW(WH_CBT,message_box_created,NULL,GetCurrentThreadId());CHECK(observer);
-        printf("MessageBox begin variant=%u enabled=%d\n",variant,enabled);fflush(stdout);
+        printf("MessageBox begin variant=%u enabled=%d tick=%llu\n",variant,enabled,GetTickCount64());fflush(stdout);
         int result=0;
         switch(variant){
         case 0:result=MessageBoxA(NULL,"text","message box",MB_OK);break;
@@ -143,7 +188,7 @@ static void message_boxes(void)
         }
         CHECK(result==IDOK);
         CHECK(UnhookWindowsHookEx(observer));
-        printf("PASS MessageBox variant=%u policy-enabled=%d tid=%lu\n",variant,enabled,GetCurrentThreadId());
+        printf("PASS MessageBox variant=%u policy-enabled=%d tid=%lu tick=%llu\n",variant,enabled,GetCurrentThreadId(),GetTickCount64());fflush(stdout);
     }
 }
 static DWORD WINAPI message_box_thread(void *){message_boxes();return 0;}
@@ -153,7 +198,7 @@ static DWORD WINAPI windows(void *)
     HWND w;WNDCLASSW cls={0};cls.lpfnWndProc=proc;cls.lpszClassName=L"NativeTitle";
     if(!RegisterClassW(&cls))CHECK(GetLastError()==ERROR_CLASS_ALREADY_EXISTS);
     w=CreateWindowExW(0,cls.lpszClassName,L"wide",WS_OVERLAPPEDWINDOW,0,0,200,100,NULL,NULL,NULL,NULL);
-    title(w,L"wide");CHECK(SetWindowTextA(w,"updated"));title(w,L"updated");CHECK(DestroyWindow(w));
+    title(w,L"wide");controls(w);CHECK(SetWindowTextA(w,"updated"));title(w,L"updated");CHECK(DestroyWindow(w));
     w=CreateWindowExA(0,"STATIC","ansi",WS_OVERLAPPEDWINDOW,0,0,200,100,NULL,NULL,NULL,NULL);
     title(w,L"ansi");CHECK(DestroyWindow(w));
     struct {DLGTEMPLATE header;WORD menu,cls;WCHAR caption[7];} resource={};
@@ -198,6 +243,7 @@ int wmain(int argc,WCHAR **argv)
         return 0;
     }
     if((argc==3 && !wcscmp(argv[1],L"leaf")) ||
+       (argc==4 && !wcscmp(argv[1],L"chain-child")) ||
        (argc==6 && !wcscmp(argv[1],L"relay-child"))){
         nthook_context context;BOOL found=FALSE;
         CHECK(!nthook_context_read(&context,&found) && found);
@@ -205,6 +251,15 @@ int wmain(int argc,WCHAR **argv)
         enabled=context.window_style==WINDOW_STYLE_ALL;
         HWND window=CreateWindowExW(0,L"STATIC",L"relay",WS_OVERLAPPEDWINDOW,0,0,200,100,NULL,NULL,NULL,NULL);
         title(window,L"relay");CHECK(SetWindowTextW(window,L"updated relay"));title(window,L"updated relay");CHECK(DestroyWindow(window));
+        if(argc==4){
+            WCHAR line[MAX_PATH+80];STARTUPINFOW start={sizeof(start)};PROCESS_INFORMATION child={0};DWORD code;
+            swprintf_s(line,ARRAYSIZE(line),L"\"%ls\" leaf %lu",argv[3],context.window_style);
+            CHECK(CreateProcessW(argv[3],line,NULL,NULL,FALSE,0,NULL,NULL,&start,&child));
+            if(wait_gui(child.hProcess,45000)!=WAIT_OBJECT_0){TerminateProcess(child.hProcess,ERROR_TIMEOUT);CHECK(FALSE);}
+            CHECK(GetExitCodeProcess(child.hProcess,&code) && !code);CloseHandle(child.hThread);CloseHandle(child.hProcess);
+            window=CreateWindowExW(0,L"STATIC",L"parent after child",WS_OVERLAPPEDWINDOW,0,0,200,100,NULL,NULL,NULL,NULL);
+            title(window,L"parent after child");CHECK(DestroyWindow(window));
+        }
         if(argc==6){
             DWORD expected=!wcscmp(argv[5],L"inherit")?context.window_style:(DWORD)_wtoi(argv[5]);
             PCWSTR option=!wcscmp(argv[5],L"inherit")?L"":expected==2?L"--win16-style-all ":L"--win16-style ";
@@ -229,7 +284,10 @@ int wmain(int argc,WCHAR **argv)
         enabled=context.window_style==WINDOW_STYLE_ALL;
         if(message_case)message_boxes();else windows(NULL);
         thread=CreateThread(NULL,0,message_case?message_box_thread:windows,NULL,0,NULL);CHECK(thread);
-        CHECK(wait_gui(thread,30000)==WAIT_OBJECT_0 && GetExitCodeThread(thread,&code) && !code);CloseHandle(thread);
+        /* Six sequential modal dialogs may each incur USER activation waits
+         * on an inactive private desktop. Keep the full matrix and a bounded
+         * whole-thread deadline; timestamps distinguish progress from hangs. */
+        CHECK(wait_gui(thread,60000)==WAIT_OBJECT_0 && GetExitCodeThread(thread,&code) && !code);CloseHandle(thread);
         if(argc==4){
             STARTUPINFOW start={sizeof(start)};PROCESS_INFORMATION child={0};WCHAR line[MAX_PATH+80];
             swprintf_s(line,ARRAYSIZE(line),L"\"%ls\" child %lu",argv[3],context.window_style);
@@ -267,10 +325,10 @@ int wmain(int argc,WCHAR **argv)
             unsigned first_before=dos_launcher?witness_count(first):0;
             unsigned second_before=dos_launcher?witness_count(second):0;
             if(dos_leaf)swprintf_s(line,ARRAYSIZE(line),L"\"%ls\" --wait %lsCOMMAND.COM /c %ls leaf %lu",argv[2],option,first,policy);
-            else if(dos_launcher)swprintf_s(line,ARRAYSIZE(line),L"\"%ls\" --wait %lsCOMMAND.COM /c %ls child %lu %ls",argv[2],option,first,policy,second);
+            else if(dos_launcher)swprintf_s(line,ARRAYSIZE(line),L"\"%ls\" --wait %lsCOMMAND.COM /c %ls chain-child %lu %ls",argv[2],option,first,policy,second);
             else if(relay_case)swprintf_s(line,ARRAYSIZE(line),L"\"%ls\" --wait %ls\"%ls\" relay-child %lu \"%ls\" \"%ls\" %ls",argv[2],option,first,policy,second,argv[2],variant?(policy==1?L"2":L"1"):L"inherit");
             else if(message_launcher)swprintf_s(line,ARRAYSIZE(line),L"\"%ls\" --wait %ls\"%ls\" messages %lu",argv[2],option,first,policy);
-            else swprintf_s(line,ARRAYSIZE(line),L"\"%ls\" --wait %ls%ls\"%ls\" child %lu \"%ls\"",argv[2],option,dos_launcher?L"COMMAND.COM /c ":L"",first,policy,second);
+            else swprintf_s(line,ARRAYSIZE(line),L"\"%ls\" --wait %ls\"%ls\" %ls %lu \"%ls\"",argv[2],option,first,cui_launcher?L"chain-child":L"child",policy,second);
             wprintf(L"Run16 case: %ls\n",line);fflush(stdout);
             /* No installer/test payload here: actual CLI and product broker /
              * native worker must originate the copied policy and Hook. */
@@ -303,7 +361,11 @@ int wmain(int argc,WCHAR **argv)
         DWORD error=nthook_install(process.hProcess,&context,NATIVE_HOOK_INTERCEPT);
         if(error){TerminateProcess(process.hProcess,error);SetLastError(error);CHECK(!error);}
         CHECK(ResumeThread(process.hThread)!=(DWORD)-1);
-        if(WaitForSingleObject(process.hProcess,90000)!=WAIT_OBJECT_0){TerminateProcess(process.hProcess,ERROR_TIMEOUT);CHECK(FALSE);}
+        /* Full styling now exercises four GUI-thread suites across the two
+         * widths. Observed All took about90s while all four suites advanced;
+         * the outer budget must exceed the retained nested45s wait plus the
+         * parent's two suites. This changes no product wait or assertion. */
+        if(WaitForSingleObject(process.hProcess,120000)!=WAIT_OBJECT_0){TerminateProcess(process.hProcess,ERROR_TIMEOUT);CHECK(FALSE);}
         CHECK(GetExitCodeProcess(process.hProcess,&code) && !code);CloseHandle(process.hThread);CloseHandle(process.hProcess);
     }
     CHECK(CloseDesktop(desktop));return 0;

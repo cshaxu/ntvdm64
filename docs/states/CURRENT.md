@@ -11,32 +11,39 @@ See the [S1 closure design](../etc/evidence/m0-t445-s1-installation-design.md).
 
 ## Active Packet
 
-### NTW16S product integration design
+### NTW16S product integration implementation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T445 S8, Ordinary Mode; design then sequential review. |
+| Identifier Mode | M0 T445 S8, Ordinary Mode; implementation then sequential review. |
 | Candidate Proposal | [Window appearance](../proposals/proposal-win31-window-appearance-001.md). |
-| Admission And Approval | Owner has no opportunity for S7 manual acceptance and directs admission of S8 with an integration design first. Runtime implementation awaits design approval. |
-| Objective | Specify how the existing dual NTW16S DLLs integrate with native Hook and per-task WOW creation, controls and API bindings, without duplicate rendering. |
-| Non-goals | No runtime edits/build/publication in this design delivery; no guest/mirror edits, new public option, RPC redesign, global theme mutation, NTCON styling or unrelated WOW recovery. |
+| Admission And Approval | Owner approves the S8 design and explicitly selects WOW32.DLL, not ntvdm.exe or Windows WOW64, as the Win16 integration owner; implementation may begin. S7 manual acceptance was not performed. |
+| Objective | Integrate the dual NTW16S DLLs through native Hooks and WOW32 per-task window creation, controls and finite API bindings, preserving one renderer. |
+| Non-goals | No guest/mirror edits, new public option, RPC redesign, global theme mutation, NTCON styling, ntvdm.exe appearance owner or unrelated WOW recovery. |
 | Reference Baseline | Delivered/pushed S7 292664b02; thirteen published images and automated gates retained. S7 manual acceptance was not performed. |
-| Files And ABI Surface | Current packet, working plan and indexed S8 design; proposed local DLL creation/lifecycle and scroll/theme bindings only, no wire changes. |
+| Files And ABI Surface | src/ntw16s-dll, src/nthook32-dll (both widths), src/wow32-dll, thin W16Style consumer as needed, tests/build/publication and documents; local DLL ABI only, no wire changes. |
 | Applicable Rules | All authorities; background owned build/tests; preserve unrelated changes; no security bypass. |
-| Verification | Source/interface review, owner/consumer coverage matrix, documentation governance and diff checks. Later runtime gates are specified, not claimed passed. |
+| Verification | Both-width real creation/control/scroll/lifecycle tests; mixed shared and separate WOW policy; retained S7 propagation and package gates; background builds/tests, coherent thirteen-image publication and hashes, governance/diff review. |
 | Expected Markers | One renderer, two installation entries; Off/Win16/All policy table; explicit creation, dynamic children, failure, teardown and API gaps. |
 | Asset Needs | Existing admitted NTW16S resources and source; no new import. |
-| Reporting Requirements | Design choices, exact source owners, remaining proofs and unchanged release status. |
-| Stop Conditions | Implementation before design approval; guest/mirror or global settings change; new resource import or broader application-layout engine. |
-| Exit Criteria | Reviewed design and documentation checks, commit/push; S8 remains active pending owner design approval and later implementation gates. |
-| Original Owner Request | Admit S8 without waiting for S7 manual acceptance; first provide an integration design draft. |
+| Reporting Requirements | Actual installed DLL and HWND policy, source owners, test results, retained WOW frontiers, publication hashes and remaining physical-acceptance limits. |
+| Stop Conditions | Guest/mirror or global settings change; new resource import or broader application-layout engine; security block or unexplained product regression. |
+| Exit Criteria | Approved implementation and required tests complete; coherent release/system32 publication verified, reviewed, committed/pushed, then owner acceptance. |
+| Original Owner Request | Approve the design and begin; Win16 integrates through WOW32.DLL calling ntw16s32.dll, not ntvdm.exe or Windows WOW64. |
 | Similar-Issue Sweep | Native A/W and both widths; WOW shared/separate tasks; modal/modeless/MDI/dynamic controls; scroll, theme, font and destruction boundaries. |
 
 S8 design is recorded in the [integration draft](../etc/operations/t445-s8-style-integration-design.md).
 S7 is delivered at 292664b02, including Queue/proposal edits. Owner directs
 the transition without manual acceptance; this is not a manual passing result.
 r107 publishes r090; r111 CUI, r129 DOS leaf, r131 full DOS chains and r132
-observer checks remain automated evidence. No runtime files change here.
+observer checks remain automated evidence. The approved S8 implementation is
+now completes its automated delivery gates; S8 r075 publishes the tested r059 package.
+Owner requires single-person implementation and separate-role review through
+publication, test, commit/push and then manual acceptance. The
+[S8 evidence](../etc/evidence/m0-t445-s8-style-integration.md) records both-width
+attachment, UI, propagation, Product/Control and deployed thirteen-image hash
+checks. Await owner acceptance; S9 is not admitted. SOL/WRITE remain at their
+known initialization-error frontiers, not functional success.
 
 S7 DIV-331's approved environment repair is verified by real guest resize
 1184->1200 for1185 bytes, without arena damage. The next failure was bootstrap

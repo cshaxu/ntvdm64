@@ -761,6 +761,22 @@ static void test_scroll_focus(HWND parent)
 
 /* Read the visible window DC after each input message: WM_PRINT would itself
  * repaint the retro image and hide a native nonclient-paint regression. */
+static void expose_test_window(HWND w)
+{
+    HWND root=GetAncestor(w,GA_ROOT);RECT target,outer,screen;
+    REQUIRE(root && GetWindowRect(w,&target) && GetWindowRect(root,&outer));
+    SetRect(&screen,0,0,GetSystemMetrics(SM_CXSCREEN),GetSystemMetrics(SM_CYSCREEN));
+    if(target.left>=0 && target.top>=0 && target.right<=screen.right && target.bottom<=screen.bottom)return;
+    /* Test-only viewport placement BEFORE an input sequence. Keep every
+     * sampled pixel on the private desktop, even in a disconnected 640x480
+     * session. Never move/repaint in the observation helpers themselves. */
+    REQUIRE(target.right-target.left<=screen.right-40 && target.bottom-target.top<=screen.bottom-40);
+    REQUIRE(SetWindowPos(root,NULL,outer.left+20-target.left,outer.top+20-target.top,0,0,
+        SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE));
+    RedrawWindow(root,NULL,NULL,RDW_INVALIDATE|RDW_FRAME|RDW_ALLCHILDREN|RDW_UPDATENOW);
+    REQUIRE(GetWindowRect(w,&target));
+    REQUIRE(target.left>=0 && target.top>=0 && target.right<=screen.right && target.bottom<=screen.bottom);
+}
 static HBITMAP read_window_pixels(HWND w,DWORD **pixels,int *width)
 {
     RECT r;BITMAPINFO info={0};HDC window=GetWindowDC(w),memory;HBITMAP bitmap,old;
@@ -801,8 +817,12 @@ static unsigned visible_list_arrow_errors(HWND list)
             int py=top+(MulDiv(y,height,17)+MulDiv(y+1,height,17)-1)/2;
             if(pixel_color(pixels[py*image_width+px])!=colors[bits[y][x]-'0'])++errors;
         }
-        if(errors!=before_errors)printf("ARROW PIXEL DIFFERENCE end=%d errors=%u rect=%ld,%ld,%ld,%ld metric=%d width=%d state=%lx\n",
-            end,errors-before_errors,bar.rcScrollBar.left,bar.rcScrollBar.top,bar.rcScrollBar.right,bar.rcScrollBar.bottom,height,width,state);
+        if(errors!=before_errors){
+            HDC dc=GetWindowDC(list);RECT clip;int kind=GetClipBox(dc,&clip);ReleaseDC(list,dc);
+            printf("ARROW PIXEL DIFFERENCE end=%d errors=%u rect=%ld,%ld,%ld,%ld metric=%d width=%d state=%lx clip=%d:%ld,%ld,%ld,%ld screen=%d,%d\n",
+                end,errors-before_errors,bar.rcScrollBar.left,bar.rcScrollBar.top,bar.rcScrollBar.right,bar.rcScrollBar.bottom,height,width,state,
+                kind,clip.left,clip.top,clip.right,clip.bottom,GetSystemMetrics(SM_CXSCREEN),GetSystemMetrics(SM_CYSCREEN));
+        }
     }
     DeleteObject(bitmap);return errors;
 }
@@ -996,6 +1016,7 @@ static void test_native_list_paint_boundary(HWND parent)
     list=CreateWindowW(L"LISTBOX",L"",WS_CHILD|WS_VISIBLE|WS_BORDER|((mode&4)?0:WS_VSCROLL),
         16,16,200,160,parent,(HMENU)1500,GetModuleHandleW(NULL),NULL);
     REQUIRE(list);
+    expose_test_window(list);
     if(mode&2)REQUIRE(SUCCEEDED(set_theme(list,L"",L"")));
     for(n=0;n<32;++n)SendMessageW(list,LB_ADDSTRING,0,(LPARAM)L"Scrolling boundary item");
     if(mode&4){SCROLLINFO info={sizeof(info),SIF_RANGE|SIF_PAGE|SIF_POS,0,31,8,0,0};
@@ -1024,6 +1045,7 @@ static void test_native_list_paint_boundary(HWND parent)
                 (kind==0?CBS_DROPDOWNLIST:kind==1?CBS_DROPDOWN:CBS_SIMPLE),
                 16,16,200,160,parent,(HMENU)(INT_PTR)(1501+kind),GetModuleHandleW(NULL),NULL);
             COMBOBOXINFO info={sizeof(info)};REQUIRE(combo);REQUIRE(GetComboBoxInfo(combo,&info));
+            expose_test_window(combo);
             if(mode&2)REQUIRE(SUCCEEDED(set_theme(info.hwndList,L"",L"")));
             for(n=0;n<32;++n)SendMessageW(combo,CB_ADDSTRING,0,(LPARAM)L"Scrolling dropdown item");
             if(mode&4){SCROLLINFO scroll={sizeof(scroll),SIF_RANGE|SIF_PAGE|SIF_POS,0,31,8,0,0};
@@ -1079,6 +1101,7 @@ static void test_combo_scroll_release(HWND parent)
         combo=CreateWindowW(L"COMBOBOX",L"",WS_CHILD|WS_VISIBLE|WS_VSCROLL|
             (kind?CBS_DROPDOWN:CBS_DROPDOWNLIST),16,16,220,200,parent,(HMENU)1790,GetModuleHandleW(NULL),NULL);
         REQUIRE(combo && GetComboBoxInfo(combo,&cb));list=cb.hwndList;
+        expose_test_window(combo);REQUIRE(GetComboBoxInfo(combo,&cb));
         for(n=0;n<60;++n)SendMessageW(combo,CB_ADDSTRING,0,(LPARAM)L"Dropdown release contract");
         REQUIRE(SetWindowSubclass(list,combo_capture_trace,(UINT_PTR)combo_capture_trace,0));
         REQUIRE(win16_style_control_install(combo,NULL));REQUIRE(win16_style_list_scrollbar_enable(list));
@@ -1163,6 +1186,7 @@ static void test_integrated_list_scroll(HWND parent)
         }else list=CreateWindowW(L"LISTBOX",L"",WS_CHILD|WS_VISIBLE|WS_BORDER|WS_VSCROLL,
                 16,16,220,200,parent,(HMENU)1700,GetModuleHandleW(NULL),NULL);
         REQUIRE(list);REQUIRE(SUCCEEDED(theme(list,L"",L"")));
+        expose_test_window(combo?combo:list);
         for(n=0;n<60;++n)SendMessageW(combo?combo:list,combo?CB_ADDSTRING:LB_ADDSTRING,0,(LPARAM)L"Integrated native list data");
         REQUIRE(SetWindowSubclass(list,integrated_list_boundary,(UINT_PTR)integrated_list_boundary,(DWORD_PTR)&boundary_samples));
         REQUIRE(win16_style_control_install(combo?combo:list,NULL));
@@ -1259,6 +1283,7 @@ static void test_multicolumn_scroll(HWND parent)
     REQUIRE(module);theme=(theme_fn)(void *)GetProcAddress(module,"SetWindowTheme");REQUIRE(theme);
     list=CreateWindowW(L"LISTBOX",L"",WS_CHILD|WS_VISIBLE|WS_BORDER|WS_HSCROLL|LBS_MULTICOLUMN,
         16,16,280,180,parent,(HMENU)1740,GetModuleHandleW(NULL),NULL);REQUIRE(list);
+    expose_test_window(list);
     SendMessageW(list,WM_SETFONT,(WPARAM)GetStockObject(SYSTEM_FONT),FALSE);
     SendMessageW(list,LB_SETCOLUMNWIDTH,90,0);
     for(n=0;n<200;++n)REQUIRE(SendMessageW(list,LB_ADDSTRING,0,(LPARAM)L"Column item")==n);
@@ -1307,6 +1332,7 @@ static void test_list_horizontal_content(HWND parent)
     REQUIRE(module);theme=(theme_fn)(void *)GetProcAddress(module,"SetWindowTheme");REQUIRE(theme);
     list=CreateWindowW(L"LISTBOX",L"",WS_CHILD|WS_VISIBLE|WS_BORDER|WS_HSCROLL|WS_VSCROLL,
         16,16,280,100,parent,(HMENU)1741,GetModuleHandleW(NULL),NULL);REQUIRE(list);
+    expose_test_window(list);
     SendMessageW(list,WM_SETFONT,(WPARAM)GetStockObject(SYSTEM_FONT),FALSE);
     REQUIRE(SendMessageW(list,LB_ADDSTRING,0,(LPARAM)L"ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789")==0);
     for(n=1;n<40;++n)REQUIRE(SendMessageW(list,LB_ADDSTRING,0,(LPARAM)L"Other horizontal content row")==n);
@@ -1380,6 +1406,7 @@ static void test_edit_scroll(HWND parent)
     for(n=0;n<100;++n)offset+=swprintf_s(text+offset,12000-offset,L"Native edit line %d: abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ\r\n",n);
     edit=CreateWindowW(L"EDIT",text,WS_CHILD|WS_VISIBLE|WS_VSCROLL|WS_HSCROLL|ES_MULTILINE|ES_AUTOVSCROLL|ES_AUTOHSCROLL,
         16,16,280,180,parent,(HMENU)1750,GetModuleHandleW(NULL),NULL);REQUIRE(edit);
+    expose_test_window(edit);
     notices.edit=edit;
     REQUIRE(SetWindowSubclass(parent,observe_edit_notifications,(UINT_PTR)observe_edit_notifications,(DWORD_PTR)&notices));
     REQUIRE(SUCCEEDED(theme(edit,L"",L"")));
@@ -1442,8 +1469,8 @@ static void test_list_scroll_stability(HWND parent)
         HWND combo=n>=2?GetDlgItem(parent,1230+n-2):NULL;
         COMBOBOXINFO ci={sizeof(ci)};HWND list;SCROLLBARINFO bar={sizeof(bar)};
         RECT outer;POINT pt;HBITMAP bitmap;DWORD *pixels;COLORREF *before;int image_width,width,height,x,y;unsigned changed=0,paints=0;
-        if(combo){SendMessageW(combo,CB_SHOWDROPDOWN,TRUE,0);REQUIRE(GetComboBoxInfo(combo,&ci));list=ci.hwndList;}
-        else list=GetDlgItem(parent,1218+n);
+        if(combo){expose_test_window(combo);SendMessageW(combo,CB_SHOWDROPDOWN,TRUE,0);REQUIRE(GetComboBoxInfo(combo,&ci));list=ci.hwndList;}
+        else {list=GetDlgItem(parent,1218+n);expose_test_window(list);}
         REQUIRE(IsWindowVisible(list));
         RedrawWindow(list,NULL,NULL,RDW_INVALIDATE|RDW_FRAME|RDW_UPDATENOW);
         {unsigned errors=visible_list_arrow_errors(list);

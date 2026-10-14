@@ -19,7 +19,8 @@ if (!(Test-Path -LiteralPath $vs)) { throw "Missing x86 build environment: $vs" 
 New-Item -ItemType Directory -Path $build | Out-Null
 $source = Join-Path $repository 'tests\observation\command_stream_observer.c'
 $output = Join-Path $build 'command-stream-observer.exe'
-$command = 'call "{0}" -arch=x86 -host_arch=x86 >nul && cl.exe /nologo /TC /W4 /WX /O2 "{1}" /link /out:"{2}" kernel32.lib' -f $vs, $source, $output
+$object = Join-Path $build 'command-stream-observer.obj'
+$command = 'call "{0}" -arch=x86 -host_arch=x86 >nul && cl.exe /nologo /TC /W4 /WX /O2 /Fo"{3}" "{1}" /link /out:"{2}" kernel32.lib' -f $vs, $source, $output, $object
 & cmd.exe /d /s /c $command
 if ($LASTEXITCODE -ne 0) { throw "S34 COMMAND stream observer failed: $LASTEXITCODE" }
 [ordered]@{

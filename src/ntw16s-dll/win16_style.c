@@ -611,15 +611,16 @@ BOOL win16_style_install(HWND w,const win16_style_palette *p)
 {
     style_window *s;
     DWORD style,ex;
+    BOOL normal;
     RECT client;
     DWORD policy=DWMNCRP_DISABLED;
     if(!local_window(w))return FALSE;
     if(state(w)){SetLastError(ERROR_ALREADY_EXISTS);return FALSE;}
     style=(DWORD)GetWindowLongPtr(w,GWL_STYLE);ex=(DWORD)GetWindowLongPtr(w,GWL_EXSTYLE);
-    if((ex&(WS_EX_CLIENTEDGE|WS_EX_TOOLWINDOW|WS_EX_LAYERED)) ||
-        IsIconic(w) || IsZoomed(w)){
+    if(ex&(WS_EX_CLIENTEDGE|WS_EX_TOOLWINDOW|WS_EX_LAYERED)){
         SetLastError(ERROR_NOT_SUPPORTED);return FALSE;
     }
+    normal=!IsIconic(w)&&!IsZoomed(w);
     s=(style_window *)calloc(1,sizeof(*s));
     if(!s){SetLastError(ERROR_NOT_ENOUGH_MEMORY);return FALSE;}
     s->bar_selected=-1;
@@ -640,7 +641,10 @@ BOOL win16_style_install(HWND w,const win16_style_palette *p)
     if(!(style&WS_CHILD))DwmSetWindowAttribute(w,DWMWA_NCRENDERING_POLICY,&policy,sizeof(policy));
     ++s->calls;
     frame_changed(w);
-    if(!s->detached)restore_client(w,&client);
+    /* Initial minimized/maximized creation is valid too. Native USER owns
+     * its saved normal placement; never resize that state to preserve the
+     * transient icon/maximized client rectangle. Restore uses normal layout. */
+    if(!s->detached && normal)restore_client(w,&client);
     --s->calls;
     if(s->detached){dispose(s);SetLastError(ERROR_INVALID_WINDOW_HANDLE);return FALSE;}
     return TRUE;

@@ -6,6 +6,8 @@ extern "C" {
 #endif
 #include "api.h"
 #include "title_marker.h"
+#include "attachment.h"
+#include "native_api.h"
 #include "win16_style.h"
 #include "controls.h"
 #include "font.h"

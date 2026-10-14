@@ -4,6 +4,7 @@
 #include "scroll_glyphs.h"
 #include "scroll_track.h"
 #include "font.h"
+#include "native_api.h"
 #include <commctrl.h>
 #include <oleacc.h>
 #include <stdlib.h>
@@ -332,7 +333,7 @@ static BOOL scroll_layout(HWND w,win16_scroll_layout *layout)
     RECT r;SCROLLINFO info={sizeof(info),SIF_RANGE|SIF_PAGE|SIF_POS};
     int dpi=(int)GetDpiForWindow(w);
     win16_scroll_metrics metrics={MulDiv(17,dpi,96),MulDiv(17,dpi,96),max(1,MulDiv(1,dpi,96))};LONGLONG maximum;
-    if(!GetClientRect(w,&r) || !GetScrollInfo(w,SB_CTL,&info))return FALSE;
+    if(!GetClientRect(w,&r) || !ntw16s_native_get_scroll_info(w,SB_CTL,&info))return FALSE;
     maximum=(LONGLONG)info.nMax-(info.nPage?info.nPage-1:0);
     if(maximum<info.nMin)maximum=info.nMin;
     return win16_scroll_measure(&r,(GetWindowLongPtrW(w,GWL_STYLE)&SBS_VERT)!=0,
@@ -345,7 +346,7 @@ static BOOL embedded_scroll_layout(HWND w,LONG object,win16_scroll_layout *layou
     RECT r;int dpi=(int)GetDpiForWindow(w);LONGLONG maximum;
     win16_scroll_metrics metrics={MulDiv(17,dpi,96),MulDiv(17,dpi,96),max(1,MulDiv(1,dpi,96))};
     if(!GetScrollBarInfo(w,vertical?OBJID_VSCROLL:OBJID_HSCROLL,&bar) || (bar.rgstate[0]&STATE_SYSTEM_INVISIBLE) ||
-        !GetScrollInfo(w,vertical?SB_VERT:SB_HORZ,&info))return FALSE;
+        !ntw16s_native_get_scroll_info(w,vertical?SB_VERT:SB_HORZ,&info))return FALSE;
     SetRect(&r,0,0,bar.rcScrollBar.right-bar.rcScrollBar.left,bar.rcScrollBar.bottom-bar.rcScrollBar.top);
     screen_origin->x=bar.rcScrollBar.left;screen_origin->y=bar.rcScrollBar.top;
     maximum=(LONGLONG)info.nMax-(info.nPage?info.nPage-1:0);if(maximum<info.nMin)maximum=info.nMin;
@@ -355,7 +356,7 @@ static BOOL embedded_scroll_layout(HWND w,LONG object,win16_scroll_layout *layou
 static BOOL horizontal_thumb_messages(HWND w)
 {
     SCROLLINFO info={sizeof(info),SIF_RANGE|SIF_PAGE};
-    return GetScrollInfo(w,SB_HORZ,&info) && info.nMin>=0 &&
+    return ntw16s_native_get_scroll_info(w,SB_HORZ,&info) && info.nMin>=0 &&
         (LONGLONG)info.nMax-(info.nPage?info.nPage-1:0)<=0xffff;
 }
 static BOOL list_axis_owned(HWND w,LONG object)
@@ -482,6 +483,7 @@ void win16_style_scrollbars_paint(HWND w,HDC target,const win16_style_palette *p
     if(palette)s.palette=*palette;else win16_style_default_palette(&s.palette);
     if(GetWindowSubclass(w,control_proc,(UINT_PTR)control_proc,&attached)){
         control_style *owner=(control_style *)attached;
+        if(!palette)s.palette=owner->palette;
         s.list_scrollbar=owner->list_scrollbar;s.edit_scrollbars=owner->edit_scrollbars;s.scroll=owner->scroll;
         s.frame_scrollbars=owner->frame_scrollbars;
         s.embedded_object=owner->embedded_object;
@@ -1025,7 +1027,7 @@ void win16_style_frame_scrollbars_palette(HWND w,const win16_style_palette *pale
 }
 BOOL win16_style_get_scroll_info(HWND w,int bar,LPSCROLLINFO info)
 {
-    DWORD_PTR data;BOOL result=GetScrollInfo(w,bar,info);
+    DWORD_PTR data;BOOL result=ntw16s_native_get_scroll_info(w,bar,info);DWORD error=GetLastError();
     if(result && (bar==SB_HORZ || bar==SB_VERT) && info && info->cbSize==sizeof(*info) &&
         (info->fMask&SIF_TRACKPOS) && GetWindowSubclass(w,control_proc,(UINT_PTR)control_proc,&data)){
         control_style *s=(control_style *)data;
@@ -1034,21 +1036,22 @@ BOOL win16_style_get_scroll_info(HWND w,int bar,LPSCROLLINFO info)
             else if(s->scroll.active)info->nTrackPos=s->scroll.position;
         }
     }
-    return result;
+    SetLastError(error);return result;
 }
 int win16_style_set_scroll_info(HWND w,int bar,LPCSCROLLINFO info,BOOL redraw)
 {
-    DWORD_PTR data;int result;
+    DWORD_PTR data;int result;DWORD error;
     BOOL styled=(bar==SB_HORZ || bar==SB_VERT) &&
         GetWindowSubclass(w,control_proc,(UINT_PTR)control_proc,&data) && ((control_style *)data)->frame_scrollbars;
-    result=SetScrollInfo(w,bar,info,styled?FALSE:redraw);
+    result=ntw16s_native_set_scroll_info(w,bar,info,styled?FALSE:redraw);
+    error=GetLastError();
     if(styled && redraw){
         if(GetWindowSubclass(w,control_proc,(UINT_PTR)control_proc,&data)){
             HDC dc=GetWindowDC(w);
             if(dc){draw_scroll(w,(control_style *)data,dc,bar==SB_HORZ?OBJID_HSCROLL:OBJID_VSCROLL,bar==SB_VERT);ReleaseDC(w,dc);}
         }else RedrawWindow(w,NULL,NULL,RDW_FRAME|RDW_INVALIDATE);
     }
-    return result;
+    SetLastError(error);return result;
 }
 BOOL win16_style_list_scrollbar_enable(HWND w)
 {
