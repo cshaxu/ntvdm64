@@ -1,4 +1,5 @@
 #include "ntw16s-dll/ntw16s.h"
+#pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
 void win16_style_gallery_run(void);
 

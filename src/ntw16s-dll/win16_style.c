@@ -24,7 +24,7 @@ typedef struct style_window {
     win16_style_palette palette;
     HFONT title_font,menu_font; /* One shared-font reference; both borrow it. */
     UINT dpi, calls;
-    BOOL active, detached, hot, system_menu;
+    BOOL active, detached, hot, system_menu, dialog;
     int pressed,bar_selected,bar_direction,bar_hover;
     BOOL bar_keyboard;
     HWND bar_focus;
@@ -624,6 +624,7 @@ BOOL win16_style_install(HWND w,const win16_style_palette *p)
     s=(style_window *)calloc(1,sizeof(*s));
     if(!s){SetLastError(ERROR_NOT_ENOUGH_MEMORY);return FALSE;}
     s->bar_selected=-1;
+    {WCHAR name[32];s->dialog=GetClassNameW(w,name,ARRAYSIZE(name)) && !lstrcmpW(name,L"#32770");}
     if(p)s->palette=*p;else win16_style_default_palette(&s->palette);
     s->active=(ex&WS_EX_MDICHILD)?
         (HWND)SendMessageW(GetParent(w),WM_MDIGETACTIVE,0,0)==w:GetActiveWindow()==w;
@@ -702,6 +703,19 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
         if(PtInRect(&l.menu,point))wp=HTMENU;
     }
     switch(msg){
+    case WM_CTLCOLORDLG:
+    case WM_CTLCOLORSTATIC:
+        if(s->dialog){
+            /* Native dialogs still own their contents and notifications.
+             * Supply a coherent client palette, including native SysLink;
+             * ordinary application windows retain their painting contract. */
+            HDC dc=(HDC)wp;
+            SetBkColor(dc,s->palette.light);
+            SetTextColor(dc,s->palette.edge);
+            SetDCBrushColor(dc,s->palette.light);
+            result=(LRESULT)GetStockObject(DC_BRUSH);break;
+        }
+        goto forward;
     case WM_MEASUREITEM:
         if(win16_style_menu_size(s->menu_items,(MEASUREITEMSTRUCT *)lp,s->menu_font,s->dpi)){result=TRUE;break;}
         goto forward;

@@ -48,6 +48,10 @@ if($IncludeTests){
     $graph+="build default-button-test.obj: w16style_cc $r/tests/app/win16_style_default_button.c`n"
     $graph+="build default-button-test.exe: ntw16s_test_link default-button-test.obj`n"
     $graph+="default default-button-test.exe`n"
+    $graph+="build style-dialog-test.obj: w16style_cc $r/tests/app/style_dialog.c`n"
+    $graph+="rule style_dialog_link`n  command = link.exe /nologo /manifest:embed /subsystem:console /out:`$out `$in user32.lib gdi32.lib comctl32.lib`n"
+    $graph+="build style-dialog-test.exe: style_dialog_link style-dialog-test.obj`n"
+    $graph+="default style-dialog-test.exe`n"
 }
 if($Append){Add-Content "$root/build.ninja" $graph -Encoding ascii}else{Set-Content "$root/build.ninja" $graph -Encoding ascii}
 $ninja=(Get-Command ninja.exe -ErrorAction Stop).Source

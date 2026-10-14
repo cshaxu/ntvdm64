@@ -29,7 +29,15 @@ static BOOL style_module(DWORD pid)
     }while(Module32NextW(snapshot,&entry));
     CloseHandle(snapshot);return found;
 }
-static BOOL capture_window(HWND window)
+static BOOL CALLBACK inventory_child(HWND w,LPARAM unused)
+{
+    WCHAR name[128],text[256];RECT r;(void)unused;
+    GetClassNameW(w,name,128);GetWindowTextW(w,text,256);GetWindowRect(w,&r);
+    wprintf(L"CONTROL class=%ls id=%d style=%08lx visible=%d rect=%ld,%ld,%ld,%ld text=%ls\n",
+        name,GetDlgCtrlID(w),(DWORD)GetWindowLongPtrW(w,GWL_STYLE),IsWindowVisible(w),
+        r.left,r.top,r.right,r.bottom,text);return TRUE;
+}
+static BOOL capture_window_pixels(HWND window)
 {
     WCHAR directory[MAX_PATH],path[MAX_PATH];RECT r;POINT client={0};
     HDC dc;HBITMAP bitmap,previous;BITMAPINFO info={0};BITMAPFILEHEADER header={0};
@@ -89,6 +97,14 @@ static BOOL capture_window(HWND window)
         CloseHandle(file);
     }
     SelectObject(dc,previous);DeleteObject(bitmap);DeleteDC(dc);return ok;
+}
+static BOOL capture_window(HWND window)
+{
+    /* PrintWindow renders physical pixels; an unaware observer otherwise
+     * allocates a virtualized rectangle and silently clips the evidence. */
+    DPI_AWARENESS_CONTEXT old=SetThreadDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
+    BOOL result=capture_window_pixels(window);
+    if(old)SetThreadDpiAwarenessContext(old);return result;
 }
 static BOOL CALLBACK collect(HWND window,LPARAM unused)
 {
@@ -185,6 +201,7 @@ int wmain(int argc,WCHAR **argv)
         Sleep(200);CHECK(capture_window(mine));capture_repeat=FALSE;capture_live=FALSE;
         CHECK(PostMessageW(mine,WM_COMMAND,about,0));CHECK(await_window(desktop,TRUE));
         CHECK(marked(dialog,enabled));
+        EnumChildWindows(dialog,inventory_child,0);
         {WCHAR title[256];CHECK(GetWindowTextW(dialog,title,256));
             CHECK(!wcsstr(title,L"(Win16 Style) "));}
         CHECK(PostMessageW(dialog,WM_COMMAND,IDOK,0));

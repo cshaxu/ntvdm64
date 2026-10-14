@@ -44,17 +44,24 @@ static BOOL is_combo(HWND w)
 {WCHAR name[16];return GetClassNameW(w,name,16) && !lstrcmpiW(name,L"COMBOBOX");}
 static BOOL is_scroll(HWND w)
 {WCHAR name[16];return GetClassNameW(w,name,16) && !lstrcmpiW(name,L"SCROLLBAR");}
+static BOOL is_link(HWND w)
+{WCHAR name[16];return GetClassNameW(w,name,16) && !lstrcmpiW(name,L"SysLink");}
+static BOOL is_separator(HWND w)
+{DWORD type=(DWORD)GetWindowLongPtrW(w,GWL_STYLE)&SS_TYPEMASK;
+ return is_static(w) && type>=SS_ETCHEDHORZ && type<=SS_ETCHEDFRAME;}
 
 static BOOL supported(HWND w)
 {
     WCHAR name[16];DWORD style=(DWORD)GetWindowLongPtrW(w,GWL_STYLE),type=style&BS_TYPEMASK;
     if(is_scroll(w))return !(style&SBS_SIZEGRIP);
+    if(is_link(w))return TRUE;
     if(is_combo(w))return ((style&3)==CBS_DROPDOWNLIST || (style&3)==CBS_DROPDOWN || (style&3)==CBS_SIMPLE) &&
         !(style&(CBS_OWNERDRAWFIXED|CBS_OWNERDRAWVARIABLE));
     if(is_list(w))return !(style&(LBS_OWNERDRAWFIXED|LBS_OWNERDRAWVARIABLE|LBS_NODATA|LBS_USETABSTOPS));
     if(is_edit(w))return !(GetWindowLongPtrW(w,GWL_EXSTYLE)&WS_EX_CLIENTEDGE);
     if(is_static(w)){type=style&SS_TYPEMASK;return type==SS_LEFT || type==SS_CENTER || type==SS_RIGHT ||
-        type==SS_ICON || type==SS_BITMAP || type==SS_SIMPLE || type==SS_LEFTNOWORDWRAP || (type>=SS_BLACKRECT && type<=SS_WHITEFRAME);}
+        type==SS_ICON || type==SS_BITMAP || type==SS_SIMPLE || type==SS_LEFTNOWORDWRAP ||
+        (type>=SS_BLACKRECT && type<=SS_WHITEFRAME) || (type>=SS_ETCHEDHORZ && type<=SS_ETCHEDFRAME);}
     if(!GetClassNameW(w,name,16) || lstrcmpiW(name,L"BUTTON") || (style&(BS_ICON|BS_BITMAP|BS_PUSHLIKE)))return FALSE;
     if(type==BS_PUSHBUTTON || type==BS_DEFPUSHBUTTON || type==BS_GROUPBOX)return TRUE;
     return type==BS_CHECKBOX || type==BS_AUTOCHECKBOX || type==BS_RADIOBUTTON ||
@@ -75,6 +82,13 @@ static void other_control(HWND w,control_style *s,HDC dc,RECT r,HFONT font,const
     UINT flags=DT_LEFT;BOOL pushed=!label && (SendMessageW(w,BM_GETSTATE,0,0)&BST_PUSHED);
     if(s->detached)return;
     SelectObject(dc,font);GetTextMetricsW(dc,&tm);SetBkMode(dc,TRANSPARENT);SetTextColor(dc,s->palette.edge);
+    if(label && type>=SS_ETCHEDHORZ && type<=SS_ETCHEDFRAME){
+        /* A later STATIC separator has no Win3.x etched relief. Keep its
+         * geometry and express it using the same flat border as SS_*FRAME. */
+        if(type==SS_ETCHEDHORZ)r.bottom=min(r.bottom,r.top+u);
+        if(type==SS_ETCHEDVERT)r.right=min(r.right,r.left+u);
+        frame(dc,r,s->palette.edge,u);return;
+    }
     if(label && type>=SS_BLACKRECT && type<=SS_WHITEFRAME){
         COLORREF color=(type==SS_BLACKRECT || type==SS_BLACKFRAME)?s->palette.edge:
             (type==SS_GRAYRECT || type==SS_GRAYFRAME)?s->palette.shadow:s->palette.light;
@@ -822,6 +836,11 @@ static LRESULT CALLBACK control_proc(HWND w,UINT m,WPARAM a,LPARAM b,UINT_PTR id
         scroll_stop_timer(w,s);
         detach_combo_list(s);
         result=DefSubclassProc(w,m,a,b);}
+    else if(is_link(w)){
+        /* Preserve native markup, hit testing, focus and NM_CLICK/NM_RETURN.
+         * Only the shared WM_SETFONT path above changes link typography. */
+        result=DefSubclassProc(w,m,a,b);
+    }
     else if(s->frame_scrollbars){
         if(embedded_scroll_input(w,s,m,a,b))result=0;
         else if(m==WM_NCMOUSEMOVE && (a==HTHSCROLL || a==HTVSCROLL))result=0;
@@ -960,8 +979,17 @@ static LRESULT CALLBACK control_proc(HWND w,UINT m,WPARAM a,LPARAM b,UINT_PTR id
                 result=DefSubclassProc(w,m,a,b);RestoreDC(dc,saved);}
         }else result=DefSubclassProc(w,m,a,b);
     }
+    /* Native etched STATIC adds WS_EX_STATICEDGE and can leave zero client
+     * height. Own its complete line rectangle without changing the stored
+     * style or its outer geometry; detach reinstates native NC calculation. */
+    else if(is_separator(w) && (m==WM_NCCALCSIZE || m==WM_NCPAINT))result=0;
     else if(m==WM_SETREDRAW){s->list_redraw_off=!a;result=DefSubclassProc(w,m,a,b);}
     else if(m==WM_PAINT){PAINTSTRUCT ps;HDC dc=BeginPaint(w,&ps);present_control(w,s,dc,draw);EndPaint(w,&ps);}
+    else if(m==WM_PRINT && is_separator(w)){
+        /* STATIC prints etched shapes internally rather than forwarding
+         * WM_PRINTCLIENT. Keep printed and on-screen separators identical. */
+        if((b&PRF_CLIENT) && (!(b&PRF_CHECKVISIBLE) || IsWindowVisible(w)))draw(w,s,(HDC)a);
+    }
     else if(m==WM_PRINTCLIENT)draw(w,s,(HDC)a);
     else if(m==WM_ERASEBKGND)result=1;
     else {
@@ -1028,6 +1056,8 @@ static BOOL install(HWND w,const win16_style_palette *palette,BOOL edit,BOOL ori
             ((control_style *)existing)->owner=s;
     }
     if(!frame_bars){SendMessageW(w,WM_SETFONT,(WPARAM)s->font,FALSE);
+        if(!s->detached && is_separator(w))SetWindowPos(w,NULL,0,0,0,0,
+            SWP_NOMOVE|SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE|SWP_FRAMECHANGED);
         if(!s->detached)RedrawWindow(w,NULL,NULL,RDW_INVALIDATE|RDW_FRAME);}
 installed:
     if(s->detached){result=FALSE;SetLastError(ERROR_CANCELLED);}
@@ -1094,7 +1124,7 @@ BOOL win16_style_edit_scrollbars_enable(HWND w)
 {
     DWORD_PTR data;LONG_PTR style=GetWindowLongPtrW(w,GWL_STYLE);
     if(GetWindowThreadProcessId(w,NULL)!=GetCurrentThreadId() || !is_edit(w) ||
-        !(style&ES_MULTILINE) || !(style&(WS_HSCROLL|WS_VSCROLL)) ||
+        !(style&ES_MULTILINE) ||
         !GetWindowSubclass(w,control_proc,(UINT_PTR)control_proc,&data)){
         SetLastError(ERROR_NOT_SUPPORTED);return FALSE;}
     ((control_style *)data)->edit_scrollbars=TRUE;
@@ -1116,6 +1146,8 @@ BOOL win16_style_control_remove(HWND w)
         s->removing=FALSE;--s->calls;return FALSE;}
     s->detached=TRUE;detach_combo_list(s);
     if(s->font && IsWindow(w))SendMessageW(w,WM_SETFONT,(WPARAM)s->original_font,FALSE);
+    if(IsWindow(w) && is_separator(w))SetWindowPos(w,NULL,0,0,0,0,
+        SWP_NOMOVE|SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE|SWP_FRAMECHANGED);
     scroll_caret_destroy(w,s);
     if(s->list_suppression && !s->list_redraw_off)SendMessageW(w,WM_SETREDRAW,TRUE,0);
     scroll_stop_timer(w,s);

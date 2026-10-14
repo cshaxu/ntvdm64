@@ -1,48 +1,47 @@
 # Project Status
 
-**Active: M0 T445 S10 — default-button repair delivered; awaiting owner acceptance.**
+**Active: M0 T445 S11 — delivered, awaiting owner acceptance.**
 
 ## Current Work
 
-The owner explicitly reopens T445 and admits S10 after reporting the original
-Win3.1 About Control Panel OK button as a default-button comparison. The prior
-[S1-S9 closure](../history/m0-t445-window-style-closure.md) remains historical
-evidence, not acceptance of this newly reported discrepancy. Queue order and
-the owner-deferred native-menu animation TODO remain unchanged.
+Owner approves generic repair after the host About screenshot shows grey
+dialog background, white STATIC islands and native link typography.
+S10 P1 e046ee3d7 is delivered; its manual acceptance is not inferred from this
+new request. [S10 evidence](../etc/evidence/m0-t445-s10-default-button.md)
+preserves its bounded result. Queue order and deferred native-menu TODO stay.
 
 ## Active Packet
 
 | Field | Contract |
 | --- | --- |
-| Identifier Mode | M0 T445 S10, Ordinary Mode; one implementer followed by a separate sequential reviewer pass. |
-| Admission And Approval | Owner: "重开T445，准入新S修复default button". Reopen only the bounded button correction. |
-| Objective | Source-backed Win3.1 default-button appearance and native default/focus/pressed behavior, verified in both style DLL widths and integrated callers. |
-| Non-goals | No guest/media changes, new style policy, general UI redesign, mirror change, or reopening of deferred native-menu animation work. Keep20px System type and unchanged captions. |
-| Reference Baseline | Clean published/pushed4f8c181487cc69e27f0ca7cb1c1c17ee5872ffa0; S9 r045 coherent13-image publication and linked S9 evidence. Owner screenshot8830ca0d is a comparison, not proof of the underlying control style. |
-| Files And ABI Surface | src/ntw16s-dll button painting/state observation, tests/app and tests/observation; W16Style demo only if needed for explicit state coverage. No planned public ABI change. |
-| Applicable Rules | Execution, Architecture, Coding, Document and source policy; existing USER stopping boundary and admitted read-only Win3.1 visual research. |
-| Verification | Inspect pinned original VGA/USER and dialog resources; compare default versus ordinary, focus, press, disable and default transitions; dual-width positive/negative/lifecycle and visual probes; retained UI/integrated and every-P Product/Control gates; documentation/link/diff review. All builds/tests hidden background under build/M0-T445/S10. |
-| Expected Markers | Original resource/style and drawing attribution; independently asserted pixels/state transitions and Enter behavior; no caption/menu/scroll regressions; tested/assets/system32 hash equality for13 images. |
-| Asset Needs | Read-only owner Win3.1 installation and retained original extraction evidence; existing MSVC/Ninja and probes. No new imported executable code or font. |
-| Reporting Requirements | Explain root cause, default/focus distinction, original owner and minimal correction; disclose failed/unavailable observations. No completion claim before delivery. |
-| Stop Conditions | Unproven original behavior, need for guest/mirror changes or new ABI/policy requires evidence and re-admission; unavailable verification remains pending, never passed. |
-| Exit Criteria | Reviewed correction, affected builds/tests and mandatory regressions pass; coherent backup/publication to assets/release and O:/winnt/system32, hashes verified, governance pass, commit/push and clean tree; then await owner acceptance. |
-| Original Owner Request | Check whether original About Control Panel OK is a default button; compare original VGA implementation and fix our default-button interpretation. Explicitly reopen T445 with a new S. |
-| Similar-Issue Sweep | Ordinary/default push buttons, focused/unfocused, pressed/disabled, BM_SETSTYLE/DM_SETDEFID transitions, dialog keyboard activation, native32/64 and WOW callers. |
+| Identifier Mode | M0 T445 S11, Ordinary Mode; one implementer and sequential reviewer pass. |
+| Admission And Approval | Owner: "对的，那请你做一下！要求全覆盖。" following the generic background/control coverage diagnosis. |
+| Objective | Consistent styled dialog background, standard control and link typography/palette with no missed visible About surfaces, backed by an explicit coverage inventory. |
+| Non-goals | No falsified host branding/version, replacement application artwork, guest/mirror mutation, new process policy or global Windows settings. Preserve20px System type and native behavior. |
+| Reference Baseline | Clean delivered e046ee3d7; S10 r015 coherent13-image package. Screenshot cd2df253 demonstrates partial About client coverage. |
+| Files And ABI Surface | NTW16S local dialog/control/attachment presentation, demo gallery and probes; build selection as needed. No planned consumer or wire ABI change. |
+| Applicable Rules | Execution, architecture, coding, documentation, source policy and existing USER/private-server stopping boundary. |
+| Verification | Enumerate actual About HWND classes and painting owners; standard-control coverage matrix; both-width actual DLL positive/negative/state/cleanup and pixel probes; real WOW About Off/Win16/All; retained UI and every-P Product/Control gates; publication/hash/governance review. Background build/M0-T445/S11 only. |
+| Expected Markers | Uniform parent/child backgrounds,20px non-image text, no native link/font islands; retained link notifications, focus, keyboard and Off behavior; exact cleanup and coherent13-image hashes. |
+| Asset Needs | Existing source/original research, MSVC/Ninja, private-desktop probes and original guest fixtures. No new original binary/resource import planned. |
+| Reporting Requirements | Publish explicit covered classes/states and original/native ownership; never equate frame attachment with client coverage. Disclose custom/owner-drawn content boundaries and all failures. |
+| Stop Conditions | Unknown original behavior, new guest/ABI/policy dependency or need to replace arbitrary app painting requires revised scope; missing evidence is not a pass. |
+| Exit Criteria | Reviewed generic correction, affected/full regression gates, coherent backup and publication to assets/release and O:/winnt/system32, hashes, commit/push and clean tree; await owner acceptance. |
+| Original Owner Request | Fully fix grey About body and remaining native text through generic dialog background/standard-control/link coverage, not a Minesweeper/About title special case. |
+| Similar-Issue Sweep | Modal/modeless/owned dialogs, standard BUTTON/STATIC/EDIT/LISTBOX/COMBOBOX/SCROLLBAR, SysLink or actual reached link class, disabled/read-only/focus/hover, late children, bitmap/icon/custom content, Off and detach restoration. |
 
-The original resource confirms OK is a default button. Retail USER comparison
-and the owned painter correction are recorded in [S10 evidence](../etc/evidence/m0-t445-s10-default-button.md).
-Dual-width focused positive/old-release negative tests, full UI and integrated
-runtime gates pass. S10 r015 publishes and verifies the coherent13-image set
-at both release locations; this commit delivers S10 P1. Await owner acceptance;
-no next S or T is admitted automatically.
+S11 P1 is built, tested and published to both required locations. Full UI,
+Product and Control gates pass; r024 verifies all13 tested/release/deployed
+hashes and the deployed DLL/demo boundary. [Coverage evidence](../etc/evidence/m0-t445-s11-dialog-coverage.md)
+records actual About classes, ownership, negative controls and limits.
+Owner manual acceptance remains pending; queue and deferred TODO are unchanged.
 
 ## Current Technical Baseline
 
 The coherent13-image T445 package is published to assets/release and
-O:/winnt/system32. release-manifest.json records exact identities; S10 r015
+O:/winnt/system32. release-manifest.json records exact identities; S11 r024
 verifies tested/copy/deployed hashes and the deployed style boundary.
-S9 P1 is266067264 and P2 is4f8c181487; this commit delivers S10 P1.
+S9 P1 is266067264 and P2 is4f8c181487; S10 P1 is e046ee3d7.
 Guest media and ordinary runtime configuration remain unchanged.
 
 | Architecture | Images |
@@ -52,6 +51,10 @@ Guest media and ordinary runtime configuration remain unchanged.
 
 --win16-style and --win16-style-all retain their propagated policy. WOW32
 owns Win16 attachment; native Hooks use their matching-width NTW16S DLL.
+S11 changes only NTW16S32/64 and W16Style among the13 images: generic dialog
+background/link typography, flat separators and multiline EDIT attachment.
+The other ten binaries retain the S10 identities. W16Style adds page28 for
+dialog/link coverage; native branding and application-owned painting remain.
 Title/menu/standard-control System bitmap type is20px. The demo layout
 matches20px proportions. Generated caption prefixes are retired; application
 titles remain unchanged. NTCON links RPC core without launch-style state.
@@ -72,8 +75,8 @@ verification and limits. SOL/WRITE retain their known initialization failures.
 
 ## Recent Governance
 
-The prior owner-directed T445 closure is superseded only by the explicit S10
-reopening above; S1-S9 delivery and acceptance limitations remain preserved.
+The prior owner-directed T445 closure is superseded by the explicit S10
+reopening and S11 follow-on; S1-S9 acceptance limitations remain preserved.
 Earlier stages closed without manual testing remain explicitly distinguished.
 Native-menu animation and bounded glyph/layout limitations stay in TODO,
 not represented as fixed. [Archived status](../history/m0-t445-pre-closure-status.md)

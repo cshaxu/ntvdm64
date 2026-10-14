@@ -16,7 +16,7 @@ typedef struct sample {
     BOOL retro;
     int special;
 } sample;
-enum {NORMAL,OWNED,MENU,SCROLL,CHILD,MDI,ICONIC,MAXIMIZED,CHECKS,BASICS,INPUTS,LISTS,COMBOS,SCROLLCONTROLS,AUTOCONTROLS,SHOWCASE,MULTILIST};
+enum {NORMAL,OWNED,MENU,SCROLL,CHILD,MDI,ICONIC,MAXIMIZED,CHECKS,BASICS,INPUTS,LISTS,COMBOS,SCROLLCONTROLS,AUTOCONTROLS,SHOWCASE,MULTILIST,DIALOGCONTROLS};
 static const sample samples[]={
     {L"01 Win3.x controls showcase",WS_OVERLAPPEDWINDOW|WS_CLIPCHILDREN|WS_HSCROLL|WS_VSCROLL,0,TRUE,SHOWCASE},
     {L"02 Minimize only / fixed",WS_CAPTION|WS_SYSMENU|WS_MINIMIZEBOX,0,TRUE,NORMAL},
@@ -44,7 +44,8 @@ static const sample samples[]={
     {L"24 Combobox forms [trial]",WS_OVERLAPPEDWINDOW,0,TRUE,COMBOS},
     {L"25 Scrollbar controls [trial]",WS_OVERLAPPEDWINDOW,0,TRUE,SCROLLCONTROLS},
     {L"26 Automatic controls [trial]",WS_OVERLAPPEDWINDOW,0,TRUE,AUTOCONTROLS},
-    {L"27 Multicolumn list [trial]",WS_OVERLAPPEDWINDOW,0,TRUE,MULTILIST}
+    {L"27 Multicolumn list [trial]",WS_OVERLAPPEDWINDOW,0,TRUE,MULTILIST},
+    {L"28 Dialog background / links",WS_POPUP|WS_CAPTION|WS_SYSMENU,0,TRUE,DIALOGCONTROLS}
 };
 #define COUNT ((int)(sizeof(samples)/sizeof(samples[0])))
 #define REQUIRE(x) do{if(!(x)){MessageBoxW(NULL,L"Unable to create the selected demonstration.",L"W16Style",MB_ICONERROR);ExitProcess(1);}}while(0)
@@ -438,9 +439,47 @@ static void layout_focused_typography(HWND w)
     }
 }
 
+static INT_PTR CALLBACK coverage_dialog(HWND w,UINT m,WPARAM a,LPARAM b)
+{
+    if(m==WM_INITDIALOG){
+        HINSTANCE instance=GetModuleHandleW(NULL);
+        REQUIRE(CreateWindowW(L"STATIC",L"Dialog body and text share the same white background.",
+            WS_CHILD|WS_VISIBLE,16,16,520,50,w,(HMENU)1,instance,NULL));
+        REQUIRE(CreateWindowW(WC_LINK,L"Read the <a id=\"sample\">sample link</a> using mouse or Enter.",
+            WS_CHILD|WS_VISIBLE|WS_TABSTOP,16,70,520,55,w,(HMENU)2,instance,NULL));
+        REQUIRE(CreateWindowW(L"STATIC",L"",WS_CHILD|WS_VISIBLE|SS_ETCHEDHORZ,
+            16,130,520,2,w,(HMENU)3,instance,NULL));
+        REQUIRE(CreateWindowW(L"EDIT",L"Multiline edit without scrollbars\r\nNative selection and input remain enabled.",
+            WS_CHILD|WS_VISIBLE|WS_TABSTOP|WS_BORDER|ES_MULTILINE,16,145,520,65,w,(HMENU)4,instance,NULL));
+        REQUIRE(CreateWindowW(L"STATIC",L"Link not yet activated",WS_CHILD|WS_VISIBLE,
+            16,225,520,30,w,(HMENU)5,instance,NULL));
+        REQUIRE(CreateWindowW(L"BUTTON",L"Close",WS_CHILD|WS_VISIBLE|WS_TABSTOP|BS_DEFPUSHBUTTON,
+            390,270,145,40,w,(HMENU)IDCANCEL,instance,NULL));
+        return TRUE;
+    }
+    if(m==WM_NOTIFY){NMHDR *n=(NMHDR *)b;
+        if(n->idFrom==2 && (n->code==NM_CLICK || n->code==NM_RETURN)){
+            SetDlgItemTextW(w,5,n->code==NM_CLICK?L"Native link notification: mouse":L"Native link notification: Enter");
+            return TRUE;
+        }
+    }
+    if(m==WM_CLOSE || (m==WM_COMMAND && LOWORD(a)==IDCANCEL)){DestroyWindow(w);return TRUE;}
+    return FALSE;
+}
 static HWND create_sample(int index,HWND owner,BOOL state)
 {
     const sample *s=&samples[index];RECT before,after;POINT p={0,0};HWND w;
+    if(s->special==DIALOGCONTROLS){
+        struct {DLGTEMPLATE dialog;WORD menu,window_class,title;} resource={0};
+        INITCOMMONCONTROLSEX cc={sizeof(cc),ICC_LINK_CLASS};
+        ntw16s_creation_scope *scope;ntw16s_creation_result result;
+        REQUIRE(InitCommonControlsEx(&cc));scope=Ntw16sCreationBegin(TRUE);REQUIRE(scope);
+        resource.dialog.style=s->style|DS_MODALFRAME;resource.dialog.cx=320;resource.dialog.cy=200;
+        w=CreateDialogIndirectParamW(GetModuleHandleW(NULL),&resource.dialog,owner,coverage_dialog,0);
+        REQUIRE(Ntw16sCreationEnd(scope,&result) && !result.failure && !result.unsupported && w);
+        SetWindowTextW(w,s->name);SetWindowPos(w,NULL,100,100,570,360,SWP_NOZORDER);
+        ShowWindow(w,SW_SHOWNOACTIVATE);return w;
+    }
     if(s->special==OWNED){
         struct {DLGTEMPLATE dialog;WORD menu,window_class,title;} resource={0};
         resource.dialog.style=s->style|DS_MODALFRAME;resource.dialog.dwExtendedStyle=s->ex;
@@ -675,6 +714,7 @@ static BOOL gallery_message(MSG *message)
 {
     HWND root=GetAncestor(message->hwnd,GA_ROOT);WCHAR name[32];const sample *s;
     if(root==controller)return IsDialogMessageW(controller,message);
+    if(root==opened[COUNT-1])return IsDialogMessageW(root,message);
     if(!GetClassNameW(root,name,32) || lstrcmpW(name,L"StyleGallerySample"))return FALSE;
     s=(const sample *)GetWindowLongPtrW(root,GWLP_USERDATA);if(!s)return FALSE;
     if(s->special==MDI)return TranslateMDISysAccel(GetDlgItem(root,2),message);

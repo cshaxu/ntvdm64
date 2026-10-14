@@ -27,7 +27,7 @@ static LRESULT CALLBACK created(int code,WPARAM a,LPARAM b)
         BOOL edit=class_is(m->hwnd,L"EDIT"),internal=FALSE;
         if(!edit && !class_is(m->hwnd,L"BUTTON") && !class_is(m->hwnd,L"STATIC") &&
             !class_is(m->hwnd,L"LISTBOX") && !class_is(m->hwnd,L"COMBOBOX") &&
-            !class_is(m->hwnd,L"SCROLLBAR"))goto done;
+            !class_is(m->hwnd,L"SCROLLBAR") && !class_is(m->hwnd,L"SysLink"))goto done;
         /* A combo owns installation of its internal list; do not attach it
          * prematurely while the native combo is still constructing itself. */
         for(ancestor=GetParent(m->hwnd);ancestor;ancestor=GetParent(ancestor))

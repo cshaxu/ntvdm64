@@ -3,6 +3,9 @@
 [T445 S10 default-button fidelity](evidence/m0-t445-s10-default-button.md)
 records the retail USER/resource comparison and correction verification.
 
+[T445 S11 dialog/control coverage](evidence/m0-t445-s11-dialog-coverage.md)
+records the actual About inventory, generic ownership correction and tests.
+
 [T445 S9 integrated acceptance](evidence/m0-t445-s9-integrated-acceptance.md)
 records20px typography, real menu hover and About ownership investigation.
 

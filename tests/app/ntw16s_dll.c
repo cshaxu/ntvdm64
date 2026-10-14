@@ -105,8 +105,8 @@ static void demo_boundary(const WCHAR *path,WCHAR *desktop_name)
     CHECK(ResumeThread(process.hThread)!=(DWORD)-1);
     for(n=0;n<250 && !found_controller;++n){EnumDesktopWindows(desktop,find_demo,0);Sleep(20);}
     CHECK(found_controller);list=GetDlgItem(found_controller,10);CHECK(list);
-    CHECK(send_owned(list,LB_GETCOUNT,0,0)==27);
-    for(n=0;n<27;++n){
+    CHECK(send_owned(list,LB_GETCOUNT,0,0)==28);
+    for(n=0;n<28;++n){
         CHECK(send_owned(list,LB_SETCURSEL,n,0)==n);send_owned(found_controller,WM_COMMAND,1,0);
         found_sample=NULL;EnumDesktopWindows(desktop,find_demo,0);CHECK(found_sample);
         if(n==0){HWND button=GetDlgItem(found_sample,1201);RECT before,after;SCROLLINFO info={sizeof(info),SIF_ALL};
@@ -127,7 +127,7 @@ static void demo_boundary(const WCHAR *path,WCHAR *desktop_name)
     CHECK(WaitForSingleObject(process.hProcess,10000)==WAIT_OBJECT_0);
     CHECK(GetExitCodeProcess(process.hProcess,&code) && code==0);
     CloseHandle(process.hThread);CloseHandle(process.hProcess);CloseHandle(job);
-    puts("DEMO PASS shipped W16Style: 27 pages, real viewport movement, close and normal process exit");
+    puts("DEMO PASS shipped W16Style: 28 pages, real viewport movement, close and normal process exit");
 }
 int wmain(int argc,WCHAR **argv)
 {

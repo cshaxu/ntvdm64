@@ -91,7 +91,7 @@ static BOOL install_created(HWND w,DWORD original_style)
     if(class_is(w,L"ComboLBox") || class_is(w,L"#32768"))return TRUE;
     edit=(original_style&WS_CHILD) && class_is(w,L"EDIT");
     control=(original_style&WS_CHILD) && (edit || class_is(w,L"BUTTON") || class_is(w,L"STATIC") ||
-        class_is(w,L"LISTBOX") || class_is(w,L"COMBOBOX") || class_is(w,L"SCROLLBAR"));
+        class_is(w,L"LISTBOX") || class_is(w,L"COMBOBOX") || class_is(w,L"SCROLLBAR") || class_is(w,L"SysLink"));
     /* A custom client-only child and MDICLIENT keep application painting.
      * MDI child frames have WS_CAPTION and take the ordinary frame route. */
     if(!control && (original_style&WS_CHILD) && !(original_style&(WS_CAPTION|WS_THICKFRAME))){
