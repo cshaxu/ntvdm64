@@ -1,6 +1,17 @@
 # T445 Windows 3.1 window-style working plan
 
-## Final disposition
+## S10 reopening
+
+After the S9 closure, the owner explicitly reopens T445 for default-button
+fidelity repair. The sole active brief is in [Current](../../states/CURRENT.md).
+Compare original default/focus/pressed semantics before changing the NTW16S
+renderer; retain20px type, unchanged captions and the prior deferred TODO.
+S1-S9 below remain delivered historical stages. S10 P1 corrects the continuous
+default border, pressed relief and label focus; both-width and integrated
+gates pass and r015 verifies publication. [Evidence](../evidence/m0-t445-s10-default-button.md)
+records the source comparison and retained failures. Await owner acceptance.
+
+## Prior S9 final disposition
 
 Owner-directed T445 closure is recorded in the
 [closure record](../../history/m0-t445-window-style-closure.md). The entries

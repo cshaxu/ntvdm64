@@ -1,22 +1,49 @@
 # Project Status
 
-**No active M/T/S packet.**
+**Active: M0 T445 S10 — default-button repair delivered; awaiting owner acceptance.**
 
 ## Current Work
 
-Owner-directed T445 closure follows its verified S9 delivery and final demo/
-caption cleanup. The [closure record](../history/m0-t445-window-style-closure.md)
-preserves stage dispositions and known limits. The historical unstyled native-
-menu animation investigation remains in [TODO](TODO.md) by explicit approval.
-No next task is admitted; [Queue](QUEUE.md) order is unchanged.
+The owner explicitly reopens T445 and admits S10 after reporting the original
+Win3.1 About Control Panel OK button as a default-button comparison. The prior
+[S1-S9 closure](../history/m0-t445-window-style-closure.md) remains historical
+evidence, not acceptance of this newly reported discrepancy. Queue order and
+the owner-deferred native-menu animation TODO remain unchanged.
+
+## Active Packet
+
+| Field | Contract |
+| --- | --- |
+| Identifier Mode | M0 T445 S10, Ordinary Mode; one implementer followed by a separate sequential reviewer pass. |
+| Admission And Approval | Owner: "重开T445，准入新S修复default button". Reopen only the bounded button correction. |
+| Objective | Source-backed Win3.1 default-button appearance and native default/focus/pressed behavior, verified in both style DLL widths and integrated callers. |
+| Non-goals | No guest/media changes, new style policy, general UI redesign, mirror change, or reopening of deferred native-menu animation work. Keep20px System type and unchanged captions. |
+| Reference Baseline | Clean published/pushed4f8c181487cc69e27f0ca7cb1c1c17ee5872ffa0; S9 r045 coherent13-image publication and linked S9 evidence. Owner screenshot8830ca0d is a comparison, not proof of the underlying control style. |
+| Files And ABI Surface | src/ntw16s-dll button painting/state observation, tests/app and tests/observation; W16Style demo only if needed for explicit state coverage. No planned public ABI change. |
+| Applicable Rules | Execution, Architecture, Coding, Document and source policy; existing USER stopping boundary and admitted read-only Win3.1 visual research. |
+| Verification | Inspect pinned original VGA/USER and dialog resources; compare default versus ordinary, focus, press, disable and default transitions; dual-width positive/negative/lifecycle and visual probes; retained UI/integrated and every-P Product/Control gates; documentation/link/diff review. All builds/tests hidden background under build/M0-T445/S10. |
+| Expected Markers | Original resource/style and drawing attribution; independently asserted pixels/state transitions and Enter behavior; no caption/menu/scroll regressions; tested/assets/system32 hash equality for13 images. |
+| Asset Needs | Read-only owner Win3.1 installation and retained original extraction evidence; existing MSVC/Ninja and probes. No new imported executable code or font. |
+| Reporting Requirements | Explain root cause, default/focus distinction, original owner and minimal correction; disclose failed/unavailable observations. No completion claim before delivery. |
+| Stop Conditions | Unproven original behavior, need for guest/mirror changes or new ABI/policy requires evidence and re-admission; unavailable verification remains pending, never passed. |
+| Exit Criteria | Reviewed correction, affected builds/tests and mandatory regressions pass; coherent backup/publication to assets/release and O:/winnt/system32, hashes verified, governance pass, commit/push and clean tree; then await owner acceptance. |
+| Original Owner Request | Check whether original About Control Panel OK is a default button; compare original VGA implementation and fix our default-button interpretation. Explicitly reopen T445 with a new S. |
+| Similar-Issue Sweep | Ordinary/default push buttons, focused/unfocused, pressed/disabled, BM_SETSTYLE/DM_SETDEFID transitions, dialog keyboard activation, native32/64 and WOW callers. |
+
+The original resource confirms OK is a default button. Retail USER comparison
+and the owned painter correction are recorded in [S10 evidence](../etc/evidence/m0-t445-s10-default-button.md).
+Dual-width focused positive/old-release negative tests, full UI and integrated
+runtime gates pass. S10 r015 publishes and verifies the coherent13-image set
+at both release locations; this commit delivers S10 P1. Await owner acceptance;
+no next S or T is admitted automatically.
 
 ## Current Technical Baseline
 
 The coherent13-image T445 package is published to assets/release and
-O:/winnt/system32. release-manifest.json records exact identities; S9 r045
+O:/winnt/system32. release-manifest.json records exact identities; S10 r015
 verifies tested/copy/deployed hashes and the deployed style boundary.
-S9 P1 is266067264; the commit containing this status delivers S9 P2.
-Guest media and ordinary runtime configuration are unchanged by S9.
+S9 P1 is266067264 and P2 is4f8c181487; this commit delivers S10 P1.
+Guest media and ordinary runtime configuration remain unchanged.
 
 | Architecture | Images |
 | --- | --- |
@@ -45,7 +72,8 @@ verification and limits. SOL/WRITE retain their known initialization failures.
 
 ## Recent Governance
 
-The owner permits T445 closure after the final requested production delivery.
+The prior owner-directed T445 closure is superseded only by the explicit S10
+reopening above; S1-S9 delivery and acceptance limitations remain preserved.
 Earlier stages closed without manual testing remain explicitly distinguished.
 Native-menu animation and bounded glyph/layout limitations stay in TODO,
 not represented as fixed. [Archived status](../history/m0-t445-pre-closure-status.md)

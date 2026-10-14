@@ -45,6 +45,9 @@ if($IncludeTests){
     $graph+="build style-attachment-test.obj: w16style_cc $r/tests/app/style_attachment.c`n"
     $graph+="build style-attachment-test.exe: ntw16s_test_link style-attachment-test.obj`n"
     $graph+="default style-attachment-test.exe`n"
+    $graph+="build default-button-test.obj: w16style_cc $r/tests/app/win16_style_default_button.c`n"
+    $graph+="build default-button-test.exe: ntw16s_test_link default-button-test.obj`n"
+    $graph+="default default-button-test.exe`n"
 }
 if($Append){Add-Content "$root/build.ninja" $graph -Encoding ascii}else{Set-Content "$root/build.ninja" $graph -Encoding ascii}
 $ninja=(Get-Command ninja.exe -ErrorAction Stop).Source

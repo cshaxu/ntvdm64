@@ -88,17 +88,32 @@ static void other_control(HWND w,control_style *s,HDC dc,RECT r,HFONT font,const
         title.left+=u;DrawTextW(dc,text,-1,&title,DT_SINGLELINE);return;
     }
     if(!label){
-        /* Bounded Win3.x trial: hard outer edge and raised light/shadow bands.
-         * Native default/pressed state remains the button's own state. */
-        if(type==BS_DEFPUSHBUTTON){frame(dc,bounds,s->palette.edge,u);InflateRect(&bounds,-2*u,-2*u);}
+        /* Retail USER 1:8E0C draws one continuous frame: two border units
+         * for an enabled default, one otherwise. It does not add a spaced
+         * second rectangle. USER 25:18BC suppresses default emphasis when
+         * disabled. Native BUTTON/dialog code still owns all these states. */
+        int border=(type==BS_DEFPUSHBUTTON && IsWindowEnabled(w)?2:1)*u;
+        RECT corner;
         SetDCBrushColor(dc,s->palette.face);FillRect(dc,&bounds,(HBRUSH)GetStockObject(DC_BRUSH));
-        frame(dc,bounds,s->palette.edge,u);InflateRect(&bounds,-u,-u);
-        {RECT strip=bounds;COLORREF light=pushed?s->palette.shadow:s->palette.light;
-            COLORREF dark=pushed?s->palette.light:s->palette.shadow;
-            SetDCBrushColor(dc,light);strip.bottom=strip.top+2*u;FillRect(dc,&strip,(HBRUSH)GetStockObject(DC_BRUSH));
-            strip=bounds;strip.right=strip.left+2*u;FillRect(dc,&strip,(HBRUSH)GetStockObject(DC_BRUSH));
-            SetDCBrushColor(dc,dark);strip=bounds;strip.top=strip.bottom-2*u;FillRect(dc,&strip,(HBRUSH)GetStockObject(DC_BRUSH));
-            strip=bounds;strip.left=strip.right-2*u;FillRect(dc,&strip,(HBRUSH)GetStockObject(DC_BRUSH));}
+        frame(dc,bounds,s->palette.edge,border);
+        /* The original clears just the four outer corner cells. */
+        SetDCBrushColor(dc,s->palette.light);
+        SetRect(&corner,r.left,r.top,r.left+u,r.top+u);FillRect(dc,&corner,(HBRUSH)GetStockObject(DC_BRUSH));
+        OffsetRect(&corner,r.right-r.left-u,0);FillRect(dc,&corner,(HBRUSH)GetStockObject(DC_BRUSH));
+        OffsetRect(&corner,0,r.bottom-r.top-u);FillRect(dc,&corner,(HBRUSH)GetStockObject(DC_BRUSH));
+        OffsetRect(&corner,-(r.right-r.left-u),0);FillRect(dc,&corner,(HBRUSH)GetStockObject(DC_BRUSH));
+        InflateRect(&bounds,-border,-border);
+        {RECT strip=bounds;int band=pushed?u:2*u;
+            SetDCBrushColor(dc,pushed?s->palette.shadow:s->palette.light);
+            strip.bottom=strip.top+band;FillRect(dc,&strip,(HBRUSH)GetStockObject(DC_BRUSH));
+            strip=bounds;strip.right=strip.left+band;FillRect(dc,&strip,(HBRUSH)GetStockObject(DC_BRUSH));
+            /* A depressed Win3.1 button loses the lower/right relief; it
+             * is not a raised bevel with its colours reversed (1:8F91). */
+            if(!pushed){int i;SetDCBrushColor(dc,s->palette.shadow);
+                for(i=0;i<2;++i){strip=bounds;InflateRect(&strip,-i*u,-i*u);
+                    strip.top=strip.bottom-u;FillRect(dc,&strip,(HBRUSH)GetStockObject(DC_BRUSH));
+                    strip=bounds;InflateRect(&strip,-i*u,-i*u);
+                    strip.left=strip.right-u;FillRect(dc,&strip,(HBRUSH)GetStockObject(DC_BRUSH));}}}
         InflateRect(&bounds,-3*u,-3*u);if(pushed)OffsetRect(&bounds,u,u);
         flags=DT_CENTER|DT_VCENTER|DT_SINGLELINE;
     }else {flags=type==SS_CENTER?DT_CENTER:type==SS_RIGHT?DT_RIGHT:DT_LEFT;
@@ -109,7 +124,18 @@ static void other_control(HWND w,control_style *s,HDC dc,RECT r,HFONT font,const
         if(style&SS_NOPREFIX)flags|=DT_NOPREFIX;}
     if(!IsWindowEnabled(w) && !(label && type==SS_SIMPLE))SetTextColor(dc,s->palette.shadow);
     DrawTextW(dc,text,-1,&bounds,flags);
-    if(!label && GetFocus()==w)DrawFocusRect(dc,&bounds);
+    if(!label && GetFocus()==w){
+        /* USER 25:15DE..1694 bounds focus around the measured label, not
+         * around the whole button face. Default status is independent. */
+        RECT focus=bounds,measure={0,0,0,0};int width,height;
+        DrawTextW(dc,text,-1,&measure,DT_CALCRECT|DT_SINGLELINE);
+        width=min(bounds.right-bounds.left,measure.right+4*u);
+        height=min(bounds.bottom-bounds.top,measure.bottom+3*u);
+        focus.left+=(bounds.right-bounds.left-width)/2;focus.right=focus.left+width;
+        focus.top=max(bounds.top,bounds.top+(bounds.bottom-bounds.top-measure.bottom)/2-u);
+        focus.bottom=min(bounds.bottom,focus.top+height);
+        DrawFocusRect(dc,&focus);
+    }
 }
 
 static void draw(HWND w,control_style *s,HDC dc)

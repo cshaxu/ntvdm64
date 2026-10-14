@@ -263,6 +263,35 @@ paints a group into a sentinel-colour DC to prove interior preservation.
 No claim that VGA.DRV owns the BUTTON state machine: driver resources and
 USER/GDI interaction/layout contracts are reviewed at their respective owners.
 
+### Default push-button geometry (T445 S10)
+
+Read-only retail USER.EXE SHA256
+98036967F8396B387DA431699A9D3BE95EB56FCD0118F529E1FC2F25105EFAC6
+provides the actual drawing owner, not a complete button bitmap in VGA.DRV.
+NE segment25:18BC selects ordinary emphasis for disabled buttons and calls
+segment1:8E0C. That painter selects one continuous border unit for ordinary
+buttons, two for default buttons; restores the four outer corner cells;
+draws raised two-unit light/shadow bands, or pressed upper/left shadow only.
+Segment25:147C offsets pressed text;25:15DE..1694 bounds focus around the
+label (four horizontal and three vertical border units), independently of
+default status. Relocation records, not the unresolved disassembler selectors,
+identify the inter-segment calls. This research imports no executable code.
+
+Retail SHELL.DLL SHA256
+667422428E0934D947C9B56D622CFFE6ACD576F8014CA3692D7639D5457044D6
+RT_DIALOG100, About %s, contains BUTTON ID1 OK, style0x50010001:
+BS_DEFPUSHBUTTON is explicitly present. The read-only decoder is
+tests/observation/inspect-win31-dialogs.ps1; segment research uses the existing
+inspect-win31-ne-segment.ps1. Evidence lives under build/M0-T445/S10.
+
+The existing private USER/PWND/ButtonWndProc stopping boundary still prevents
+direct translation-unit reuse or a same-shaped shim. OpenNT btnctl.c confirms
+state ownership but its later DrawEdge is not a Win3.1 visual oracle. No
+external intrusion is needed. The existing authored painter is corrected;
+native BUTTON/dialog code retains focus, styles, keyboard and default-ID
+ownership. Current palette/DPI and approved20px System type remain host
+adaptations, not an assertion of whole-window retail pixel identity.
+
 ### Disabled scrollbar artwork (S4)
 
 The same owner-supplied VGA.DRV (SHA256
