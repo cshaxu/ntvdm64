@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T445 S8 integration design](operations/t445-s8-style-integration-design.md)
+records the proposed DLL/Hook/WOW attachment boundary and outstanding proofs.
+
 [T445 S7 RPC client split](evidence/m0-t445-s7-base-rpc-client-split.md)
 records the admitted core/launch-style boundary and its verification status.
 

@@ -2,6 +2,11 @@
 
 ## Authority and stage boundary
 
+Owner now advances from delivered S7 (292664b02) without manual acceptance
+and admits S8 design first. The [S8 draft](t445-s8-style-integration-design.md)
+specifies integration and test gates; runtime implementation awaits approval.
+S7 automated evidence is retained, not converted into a manual pass.
+
 Owner inserts S7 on 2026-10-13: separate Base RPC core and launch-style
 source/link closures, replacing the frontend-only conditional experiment.
 S6 remains undelivered with outstanding acceptance; this does not waive it.

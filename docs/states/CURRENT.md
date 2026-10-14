@@ -1,6 +1,6 @@
 # Project Status
 
-**Active: M0 T445 S7**
+**Active: M0 T445 S8**
 
 S4 r261 is accepted; propagation/core split/integration/final acceptance are S6/S7/S8/S9.
 Owner explicitly closes S5 without manual acceptance on 2026-10-13.
@@ -11,34 +11,32 @@ See the [S1 closure design](../etc/evidence/m0-t445-s1-installation-design.md).
 
 ## Active Packet
 
-### RPC client separation and approved child policy propagation completion
+### NTW16S product integration design
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T445 S7, Ordinary Mode; sequential implementation and review. |
+| Identifier Mode | M0 T445 S8, Ordinary Mode; design then sequential review. |
 | Candidate Proposal | [Window appearance](../proposals/proposal-win31-window-appearance-001.md). |
-| Admission And Approval | Owner explicitly assigns the remaining S6 propagation work to S7 to keep S numbers increasing; carry CREATE_SEPARATE_WOW_VDM through private context and reuse existing public options. |
-| Objective | Complete the RPC core/style split and independent Win16 child execution with inherited style across Hook and Run16, absorbing the outstanding S6 ingress. |
-| Non-goals | No new public option, automatic renderer integration, guest change, global environment mutation or unrelated WOW repair; only the owner-approved WOW environment capacity/retry mirror repair is admitted. |
-| Reference Baseline | Retained S6 propagation and S7 source/link split; published S5 unchanged. |
-| Files And ABI Surface | RPC core/style split; Hook payload/context and A/W creation; Run16 scope/classification; NTSRV independent-WOW session identity, config and completion adaptation; tests. |
+| Admission And Approval | Owner has no opportunity for S7 manual acceptance and directs admission of S8 with an integration design first. Runtime implementation awaits design approval. |
+| Objective | Specify how the existing dual NTW16S DLLs integrate with native Hook and per-task WOW creation, controls and API bindings, without duplicate rendering. |
+| Non-goals | No runtime edits/build/publication in this design delivery; no guest/mirror edits, new public option, RPC redesign, global theme mutation, NTCON styling or unrelated WOW recovery. |
+| Reference Baseline | Delivered/pushed S7 292664b02; thirteen published images and automated gates retained. S7 manual acceptance was not performed. |
+| Files And ABI Surface | Current packet, working plan and indexed S8 design; proposed local DLL creation/lifecycle and scroll/theme bindings only, no wire changes. |
 | Applicable Rules | All authorities; background owned build/tests; preserve unrelated changes; no security bypass. |
-| Verification | Both Hook widths and ANSI/Unicode requests; shared/independent Win16 identity, inherited policies, native-child noninheritance of one-shot launch flag, invalid payloads, existing CLI and full coherent package gates. |
-| Expected Markers | Existing style options retain policy; only the requested Win16 launch uses separate WOW, without recursive launcher or new CLI syntax. |
-| Asset Needs | Existing source-owned native fixtures and immutable Win16 fixtures; no import. |
-| Reporting Requirements | Actual caller flags, worker identities, title markers, protocol validation, exact tests and remaining gate limitations. |
-| Stop Conditions | Guest change, mirror changes beyond the approved GetWowKernelCmdLine capacity/retry repair, public CLI expansion, unrelated lifecycle repair or security block. |
-| Exit Criteria | Complete propagation evidence, package regression and coherent verified publication, commit/push; no partial delivery claim. |
-| Original Owner Request | Approve existing CREATE_SEPARATE_WOW_VDM private propagation and include full child-chain verification, without adding public parameters. |
-| Similar-Issue Sweep | A/W and x86/x64 Hook paths, launcher bootstrap validation, native descendants, explicit independent/shared flags and existing CLI compatibility. |
+| Verification | Source/interface review, owner/consumer coverage matrix, documentation governance and diff checks. Later runtime gates are specified, not claimed passed. |
+| Expected Markers | One renderer, two installation entries; Off/Win16/All policy table; explicit creation, dynamic children, failure, teardown and API gaps. |
+| Asset Needs | Existing admitted NTW16S resources and source; no new import. |
+| Reporting Requirements | Design choices, exact source owners, remaining proofs and unchanged release status. |
+| Stop Conditions | Implementation before design approval; guest/mirror or global settings change; new resource import or broader application-layout engine. |
+| Exit Criteria | Reviewed design and documentation checks, commit/push; S8 remains active pending owner design approval and later implementation gates. |
+| Original Owner Request | Admit S8 without waiting for S7 manual acceptance; first provide an integration design draft. |
+| Similar-Issue Sweep | Native A/W and both widths; WOW shared/separate tasks; modal/modeless/MDI/dynamic controls; scroll, theme, font and destruction boundaries. |
 
-S7 retains its verified local split and absorbs S6's outstanding approved
-ingress work. The attempted S6 resumption is superseded by the owner's explicit
-instruction to keep S numbers increasing. S6 is not reopened. S7 remains the
-only active S. r107 publishes the verified r090 candidate. r111 CUI six,
-r129 DOS leaf six, r131 full DOS child/grandchild six and r132 reproducible
-observer checks pass. Verification/publication are complete; owner acceptance
-remains pending. This P includes the owner's Queue/proposal edits.
+S8 design is recorded in the [integration draft](../etc/operations/t445-s8-style-integration-design.md).
+S7 is delivered at 292664b02, including Queue/proposal edits. Owner directs
+the transition without manual acceptance; this is not a manual passing result.
+r107 publishes r090; r111 CUI, r129 DOS leaf, r131 full DOS chains and r132
+observer checks remain automated evidence. No runtime files change here.
 
 S7 DIV-331's approved environment repair is verified by real guest resize
 1184->1200 for1185 bytes, without arena damage. The next failure was bootstrap
@@ -66,7 +64,7 @@ See [S7 evidence](../etc/evidence/m0-t445-s7-base-rpc-client-split.md).
 Independent Console17/Window17 and the actual WOW lifecycle/native-send/style
 fixtures pass; r026 confirms all13 published images remain the prior release.
 That was the historical pre-publication disposition; r107 supersedes it.
-No S7 commit/push or owner acceptance is yet claimed.
+S7 commit/push is now 292664b02; manual acceptance was not performed.
 
 ## S6 Bounded Disposition
 
