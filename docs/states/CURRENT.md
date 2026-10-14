@@ -1,6 +1,6 @@
 # Project Status
 
-**Active: M0 T445 S11 — delivered, awaiting owner acceptance.**
+**Active: M0 T445 S11 — owner accepted; bounded closure recorded.**
 
 ## Current Work
 
@@ -34,14 +34,18 @@ S11 P1 is built, tested and published to both required locations. Full UI,
 Product and Control gates pass; r024 verifies all13 tested/release/deployed
 hashes and the deployed DLL/demo boundary. [Coverage evidence](../etc/evidence/m0-t445-s11-dialog-coverage.md)
 records actual About classes, ownership, negative controls and limits.
-Owner manual acceptance remains pending; queue and deferred TODO are unchanged.
+Owner confirms "验收通过" for delivered b39ceb7e6. S11 is accepted and
+closed; no next S or T is admitted by this acknowledgment. Queue and deferred
+TODO are unchanged. Earlier stages' separately recorded acceptance limits
+are not retroactively changed.
 
 ## Current Technical Baseline
 
 The coherent13-image T445 package is published to assets/release and
 O:/winnt/system32. release-manifest.json records exact identities; S11 r024
 verifies tested/copy/deployed hashes and the deployed style boundary.
-S9 P1 is266067264 and P2 is4f8c181487; S10 P1 is e046ee3d7.
+S9 P1 is266067264 and P2 is4f8c181487; S10 P1 is e046ee3d7;
+owner-accepted S11 P1 is b39ceb7e6.
 Guest media and ordinary runtime configuration remain unchanged.
 
 | Architecture | Images |

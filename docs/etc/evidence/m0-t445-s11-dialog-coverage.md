@@ -130,6 +130,15 @@ actual-DLL boundary plus all28 demo pages. Backups and verified-manifest.json
 are retained there; publication exit is0. The runtime fixture came from the
 previous sealed test package, not a bulk copy of the user's O:/winnt tree.
 
-No physical pointer or user manual acceptance is claimed. The existing
-unstyled-menu animation TODO remains deferred. S11 P1 is ready for owner
-acceptance; commit/push and final clean-tree identity accompany delivery.
+At automated delivery, no physical-pointer or user manual acceptance was
+claimed. P1 was committed and pushed as
+b39ceb7e6c230db29519f2fd1be60ad4e9c4fa42 with a clean tree.
+
+## Owner acceptance and bounded closure
+
+Owner subsequently confirms "验收通过" for this delivered version. S11 is
+accepted and closed. This acknowledgment admits no next task and does not
+retroactively change earlier stages' separate acceptance limitations.
+The existing unstyled-menu animation TODO and queue order remain unchanged.
+Acceptance recording is documentation-only: no source, binary, manifest or
+runtime configuration changes, and no rebuild or redeployment is required.
