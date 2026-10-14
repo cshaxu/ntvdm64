@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T447 S1 execution baseline](evidence/m0-t447-s1-execution-baseline.md)
+tracks current app frontiers, inherited task/reply probes and proof gaps.
+
 [T447 WOW execution plan](operations/t447-wow-execution-plan.md) records the
 admitted W01 sequence, inherited proof levels and baseline obligations.
 

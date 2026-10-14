@@ -16,10 +16,30 @@ patch or broad USER-server import is authorized.
 
 ## Sequence
 
+Owner clarification: find recovery gaps primarily by tracing source, not by
+repeatedly running tests to discover the next patch. Trace the original
+caller/owner contract through selected production bindings, implementations,
+and return/cleanup paths; enumerate missing and divergent edges and their
+dependencies before choosing repairs. Tests are acceptance after connecting
+new code, not the gap-discovery method. Already-started baseline observations
+are retained as auxiliary evidence only and do not dictate implementation.
+
+The owner further requires zero original-source diff where composable, or
+the minimum necessary original-source diff. Do not author substitutes for
+original logic that can be connected. Each proposed repair must first name
+the existing original function, its selected/unselected body, and exact
+dependency preventing direct composition; prefer connecting that body through
+the smallest same-shaped seam. This applies to teardown as well as execution.
+When original logic is proved composable, connect it and delete the equivalent
+project-authored replacement in that same repair; do not retain duplicate
+behavior or defer the replacement as future debt. Finding an original symbol
+alone is not proof of composition: account for its actual state and lifetime
+dependencies before declaring that condition satisfied.
+
 | S | Scope | Required result |
 | --- | --- | --- |
-| S1 | Inherited boundary and failing cases; active baseline investigation. | Finite C01--C03/C09/execution-C10 caller/test matrix; E92 reproduction, E91/E93 evidence classification; current independent WINMINE/SOL/WRITE frontiers. No production repair. |
-| S2 | Message delivery/reply/reentry. | Original-owner implementation and real Win16/Win16 plus both Win16/Win32 directions, including early/duplicate replies and nested execution. |
+| S1 | Source-first recovery-gap inventory and dependency design. | Finite C01--C03/C09/execution-C10 original-owner/production-binding/implementation/cleanup matrix; classified missing or divergent edges, dependency order and acceptance cases. Existing E91/E92/E93 and application observations are auxiliary evidence. No production repair. |
+| S2 | Message delivery/reply/reentry, beginning with its original callback-frame prerequisite. | Connect original callback address/failure semantics first, then original-owner message handoff and real Win16/Win16 plus both Win16/Win32 directions, including early/duplicate replies and nested execution. Callback prerequisite alone cannot close S2. |
 | S3 | Task execution/cancellation/cleanup. | Init/yield/hung registration, waits, task loss and callback frame/lease retirement; no stranded sender or second execution owner. |
 | S4 | Package acceptance and stable handoff. | Complete owned matrix and production regressions, coherent release, owner acceptance and explicit handoff to USER/object consumers. |
 
@@ -33,7 +53,8 @@ preserve all obligations rather than move unfinished implementation to S4.
   preserve every unchecked capability, original taskman handoff and cleanup.
 - [T422 lifecycle ledger](../evidence/m0-t422-s2-user-client-lifecycle-ledger.md):
   E91 native tests, E92 early-reply failure, E93 mock ordering are distinct.
-  Current reproduction is pending, not inferred from historical results.
+  Current auxiliary reproduction records exit95 after early native reply
+  returns114 but WOW execution remains with the receiver; see S1 evidence.
 - [Coverage ledger](wow32-recovery-coverage-ledger.md) and
   [run protocol](m0-t422-s2-run-evidence-protocol.md): reuse existing audited
   source slots and test infrastructure; new outputs use build/M0-T447/S1.
@@ -52,8 +73,8 @@ No runtime checks are claimed by this admission record.
 
 ## Phase and delivery constraints
 
-The first investigation rechecks all three apps under the identified ordinary
-package, including first failed initialization boundaries where observable.
+The investigation traces initialization and execution providers in source;
+it does not repeatedly launch applications to choose the next repair.
 SOL and WRITE must become normally initialized during basic functionality,
 and display their usable normal interfaces during basic display; preserved
 historical failures are only non-regression, never those phase exits.

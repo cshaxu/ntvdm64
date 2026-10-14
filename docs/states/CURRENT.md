@@ -11,6 +11,11 @@ accepted delivery ca0abb7c4. The former queue head is now T447:
 Its W01 ownership and inherited evidence are retained. The
 [working plan](../etc/operations/t447-wow-execution-plan.md) records S1--S4;
 only S1 is active. No production change is admitted by this baseline stage.
+Owner requires original-source reuse with zero/minimal diff, not newly
+authored substitutes for original connectable logic; source tracing identifies
+gaps and tests accept newly connected code, not select successive patches.
+Proven-composable original logic must replace its autonomous counterpart in
+the same repair, deleting that counterpart rather than deferring migration.
 
 ## Active Packet
 
@@ -18,12 +23,12 @@ only S1 is active. No production change is admitted by this baseline stage.
 | --- | --- |
 | Identifier Mode | M0 T447 S1, Ordinary Mode; one implementer and subsequent separate review pass. |
 | Admission And Approval | Owner accepts/closes T446 and admits the next queue package, W01 WOW32 execution. |
-| Objective | Establish a finite production caller/test matrix for C01--C03, C09 and execution C10; recheck current WINMINE/SOL/WRITE frontiers and inherited E92 failure. |
+| Objective | Source-first trace of C01--C03, C09 and execution C10 from original owners through selected production bindings and cleanup; enumerate missing/divergent edges and dependency order before repairs. |
 | Non-goals | No production repair in S1, guest patches, global re-audit, local SMS transport, second scheduler or assumed heap diagnosis; no silent absorption of other W owners. |
 | Reference Baseline | Accepted ca0abb7c4 thirteen-image release; T422 E91/E92/E93 and S3 checklist; T430 G03 callback/task handoff; T446 independent application frontiers. |
 | Files And ABI Surface | Existing WOW task/callback production paths read-only; tests and indexed evidence/plan may change. No runtime or wire ABI change. |
 | Applicable Rules | Execution, architecture, coding, documentation, source policy and WOW program gates; original x86 /MT CCPU40; background-only test/build runs. |
-| Verification | Pin binaries/media/configuration; rerun the three app frontiers and applicable existing execution probes; classify real guest, native peer and mock evidence separately, including errors and cleanup. |
+| Verification | Review source/build/wiring and complete the gap inventory first. Tests accept newly connected code, not discover successive gaps. Retain already-started baseline results as auxiliary evidence; distinguish real guest, native peer and mocks. |
 | Expected Markers | Exact caller/provider mapping, source/build/wiring/focused/guest/teardown status, first observed failing boundary or explicit unresolved result; no mock-only capability completion. |
 | Asset Needs | Existing sealed package, immutable guest images, retained MSVC/Ninja and fixtures; new outputs only below build/M0-T447/S1 and approved isolated stages. |
 | Reporting Requirements | Keep stable C/W/E/G IDs; report expected/actual results and confidence independently per app; inherited failures remain open. |
@@ -32,9 +37,21 @@ only S1 is active. No production change is admitted by this baseline stage.
 | Original Owner Request | 验收通过 批准收口t任务 准入下一个t任务 |
 | Similar-Issue Sweep | Normal/early/duplicate replies; same/cross-task reentry; sender/receiver/task loss; callback frame/lease release; original init/yield/hung/wait paths. |
 
-Admission is documentation only; no new runtime tests or fixes are claimed.
-S1 must reproduce the current application frontiers rather than infer their
-cause from an OOM dialog. SOL/WRITE normal initialization is a mandatory
+S1 baseline observation now reproduces WINMINE's main window and separate
+SOL/WRITE initialization-error dialogs; see the
+[execution baseline](../etc/evidence/m0-t447-s1-execution-baseline.md).
+The already-started fixtures terminated: send/foreign/task-order passed;
+early-reply failed with exit95 after native result114, still receiver-owned.
+These are auxiliary
+native fixtures, not guest acceptance. Source tracing identifies absent
+receive-state integration and missing task-name allocation release; input
+attachment and abnormal retirement remain under source review. No production
+repair or new release is claimed. The S1 second-role review has recorded
+the gap inventory and dependency order; S1 is at its research conclusion,
+subject to documentation gate and commit/push. S2's first implementation brief must cover the original callback
+frame prerequisite without dropping message/reply or lifetime obligations.
+S1 must trace missing providers rather than infer their cause from an OOM
+dialog or repeatedly run tests to select patches. SOL/WRITE normal initialization is a mandatory
 basic-functionality milestone across the existing owners, not satisfied by
 matching their prior failure. Proven cross-owner dependencies require explicit
 bounded promotion. Full production gates apply to subsequent runtime changes.

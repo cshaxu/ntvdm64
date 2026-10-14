@@ -21,6 +21,12 @@ published to both `assets/release/` and the configured `system32` target,
 hash-verified, committed and pushed. Report an earlier state only as
 "local verification complete; delivery pending".
 
+Owner permanent approval dated 2026-10-14 authorizes reviewed task commits
+and pushes for this project to main on its existing origin remote
+(https://github.com/cshaxu/ntvdm64.git), without asking again for each delivery.
+This does not waive verification/publication gates, authorize unrelated
+changes, force pushes, destructive history rewrites or a different remote.
+
 An active numeric T may reopen for its next sequential S after the preceding
 S has reached its bounded conclusion.  Status must link the preceding S
 evidence and state any deferred P delivery and its limitation; that deferral
