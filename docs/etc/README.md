@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T446 S1 carrier visibility](evidence/m0-t446-s1-carrier-visibility.md)
+records the event-driven guard, ownership review and verification progress.
+
 [T445 S10 default-button fidelity](evidence/m0-t445-s10-default-button.md)
 records the retail USER/resource comparison and correction verification.
 

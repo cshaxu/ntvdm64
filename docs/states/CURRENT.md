@@ -1,22 +1,53 @@
 # Project Status
 
-**No active M/T/S packet.**
+**Active: M0 T446 S1 — private Console visibility guard.**
 
 ## Current Work
 
-The owner accepts T445 S11 and authorizes final T445 closure audit, commit
-and push. T445 is closed with its recorded bounded results; no next S or T
-is admitted. See the [closure](../history/m0-t445-window-style-closure.md),
-[queue](QUEUE.md) and [retained debt](TODO.md). Queue order is unchanged.
+Owner admits Queue head: "准入任务1 开始执行". T445 stays closed.
+The [carrier proposal](../proposals/proposal-ntvwm-hidden-carrier-visibility-guard-001.md)
+is now T446; its three proposed implementation/integration/test steps are
+one bounded S1 delivery so no unused guard is published separately.
+
+## Active Packet
+
+| Field | Contract |
+| --- | --- |
+| Identifier Mode | M0 T446 S1, Ordinary Mode; single implementer followed by sequential review. |
+| Admission And Approval | Owner admits queued carrier visibility guard and requests execution. |
+| Objective | Keep the exact private NTVWM Console hidden during residency and at direct completion. |
+| Non-goals | No polling, target-name special case, presentation cadence, lifetime, protocol, Hook, guest or original mirror changes; transient exposure before asynchronous delivery is not prevented. |
+| Reference Baseline | Clean pushed6fc7e3db5; coherent13-image S11 release; existing WinEvent research and carrier proposal. |
+| Files And ABI Surface | NTVWM console-state guard and main integration; owned tests/build selection and evidence only. No shared ABI changes. |
+| Applicable Rules | Execution, architecture, coding, documentation and source policy; background-only builds/tests. |
+| Verification | Actual guard events, exact-window negative, no-HWND, shutdown race, resource cleanup; real native target/completion/reuse and required Product/Control regressions; coherent13-image publication and hashes. |
+| Expected Markers | Carrier show-to-hide, unrelated HWND unchanged, no periodic wait, stop/join before close, unchanged completion/output and only ntvwm.exe changed. |
+| Asset Needs | Existing MSVC/Ninja, sealed S11 package and original guest fixtures; private desktop probes. No imported assets. |
+| Reporting Requirements | Record exact process/window identity, failures and test scope; never equate asynchronous hide with zero transient visibility. |
+| Stop Conditions | Need to alter lifecycle, observe non-carrier windows, change presentation pump cadence, or modify another production component requires renewed scope. |
+| Exit Criteria | Reviewed implementation, affected/full gates, coherent publication to assets/release and O:/winnt/system32, hash verification, commit/push and clean tree; await owner acceptance. |
+| Original Owner Request | Admit queue item1 and begin execution of the NTVWM hidden-carrier guard. |
+| Similar-Issue Sweep | Management and fatal close, normal cleanup, startup failure, direct completion KEEP/RELEASE, GUI-only reuse, missing HWND, unrelated windows and show/stop races. |
+
+S1 P1 implementation, AMD64 Release build, focused positive/negative/error
+tests, all3 Product and11 Control groups, MySMB Esc and WINMINE gameplay in
+Off/Win16/All modes pass; see [evidence](../etc/evidence/m0-t446-s1-carrier-visibility.md).
+The coherent13-image set is published and hash-verified in assets/release
+and O:/winnt/system32; only ntvwm.exe changes. Published-byte product reuse
+verification also passes. This P1 records the reviewed delivery; owner manual
+acceptance remains pending. No next task is admitted.
 
 ## Current Technical Baseline
 
-The coherent13-image T445 package is published to assets/release and
-O:/winnt/system32. release-manifest.json records exact identities; S11 r024
-verifies tested/copy/deployed hashes and the deployed style boundary.
+The coherent13-image T446 S1 package is published to assets/release and
+O:/winnt/system32. release-manifest.json records exact identities; T446 S1
+publication verifies all tested/copy/deployed hashes and published-byte guard
+behavior. Twelve unchanged images retain the T445 S11 baseline and its style
+boundary evidence.
 S9 P1 is266067264 and P2 is4f8c181487; S10 P1 is e046ee3d7;
 owner-accepted S11 P1 is b39ceb7e6, acceptance record cbd0f7832.
-Final closure changes documentation only, without rebuild or redeployment.
+The preceding T445 final closure changed documentation only; T446 S1 updates
+NTVWM's private-carrier guard without changing the other components.
 Guest media and ordinary runtime configuration remain unchanged.
 
 | Architecture | Images |

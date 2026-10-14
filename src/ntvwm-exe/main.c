@@ -16,6 +16,8 @@ PVOID CsrPortHeap;
 
 
 typedef struct native_membership {
+    HWND carrier;
+    ntvwm_console_guard *guard;
     HANDLE quit,thread,capability,stop_requested,closed,admission_ready,shutdown,io_release;
     HANDLE pipe,frontend,ready;
     HANDLE route_changed;
@@ -107,9 +109,11 @@ static DWORD end_io(void *context,DWORD request)
     if(!error && decision==WORKER_IO_RELEASE && state->presenting) {
         error=worker_base_input_watch_bind(state->input_watch,NULL);
         if(!error)error=ntvwm_presentation_end(state->presentation,&state->font);
-        if(!error)error=membership_release_io(state);
     } else if(!error && state->presenting)
         error=ntvwm_presentation_flush(state->presentation,&state->font);
+    ntvwm_trace_error("carrier-final-hide",0,ntvwm_console_hide(state->carrier));
+    if(!error && decision==WORKER_IO_RELEASE && state->presenting)
+        error=membership_release_io(state);
     if(state->users)--state->users;
     ntvwm_trace_error("end-io",0,error);
     LeaveCriticalSection(state->lock);return error;
@@ -139,7 +143,8 @@ static DWORD take_presentation(native_membership *state)
 }
 static DWORD WINAPI close_console(void *context)
 {
-    (void)context;
+    native_membership *state=context;
+    ntvwm_console_guard_stop(state->guard);state->guard=NULL;
     return ntvwm_console_close();
 }
 /* A GetNext cancellation or failed final-I/O RPC may race the close watcher.
@@ -163,7 +168,7 @@ static void input_failure(void *context,DWORD error)
     ntvwm_trace_error("input",0,error);
     EnterCriticalSection(state->lock);
     SetEvent(state->stop_requested);
-    (void)ntvwm_console_close();
+    (void)close_console(state);
     TerminateProcess(GetCurrentProcess(),error);
     LeaveCriticalSection(state->lock);
 }
@@ -251,7 +256,7 @@ static DWORD WINAPI presentation_pump(void *context)
      * longer consume the broker's Console-session close, even while idle. */
     EnterCriticalSection(state->lock);
     SetEvent(state->stop_requested);
-    (void)ntvwm_console_close();
+    (void)close_console(state);
     /* Main can be blocked in GetNextCommand; do not wait on that RPC
      * to report an unrecoverable worker-side presentation failure. */
     TerminateProcess(GetCurrentProcess(),error);
@@ -264,6 +269,7 @@ static void membership_close(native_membership *state)
     if(state->quit)SetEvent(state->quit);
     if(state->thread){WaitForSingleObject(state->thread,INFINITE);CloseHandle(state->thread);}
     worker_base_input_watch_destroy(state->input_watch);
+    ntvwm_console_guard_stop(state->guard);state->guard=NULL;
     ntvwm_presentation_close(state->presentation);
     if(state->pipe)CloseHandle(state->pipe);
     if(state->frontend)CloseHandle(state->frontend);
@@ -360,6 +366,11 @@ int wmain(int argc,WCHAR **argv)
     if(!CsrPortHeap)return GetLastError();
     error=worker_base_connect();
     if(!error) error=ntvwm_console_initialize();
+    if(!error) {
+        membership.carrier=GetConsoleWindow();
+        ntvwm_trace_error("carrier-start",0,
+            ntvwm_console_guard_start(membership.carrier,&membership.guard));
+    }
     if(!error) error=membership_initialize(&membership);
     if(!error) error=ntvwm_executions_open(&requests);
     if(!error) {

@@ -55,6 +55,17 @@ Original DOS/WOW execution and cleanup remain with NTVDM's original mirrors.
 
 ## Handoff and lifetime
 
+The private carrier has one event-driven visibility guard in console_state.c.
+Its dedicated thread installs an out-of-context SHOW hook and filters the exact
+borrowed carrier HWND, OBJID_WINDOW and child zero. The callback only requests
+an asynchronous hide; it has no I/O lock, frame capture or RPC. The thread
+waits indefinitely for messages or its stop event and unhooks on that same
+thread. Main stops/joins it before every managed Console close, and performs
+one best-effort hide after final presentation and before release/completion.
+Missing HWND is a no-op; cosmetic errors cannot replace the target result.
+Transient visibility before event delivery is not an anti-flicker guarantee.
+This is project-owned hidden-carrier policy, not recovered OpenNT scheduling.
+
 A DOS activation waits for native final capture and release before importing
 the common screen. NTVWM seeds its actual Console on activation and publishes
 only text frames. A direct native target's completion is not its descendants'

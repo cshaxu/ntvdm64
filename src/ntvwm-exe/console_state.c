@@ -4,6 +4,112 @@
 #include <string.h>
 #include <stdio.h>
 
+struct ntvwm_console_guard {
+    HWND window;
+    HANDLE stop,ready,thread;
+    DWORD start_error,error;
+};
+/* WinEvent delivers OUTOFCONTEXT callbacks on the installing thread. Each
+ * guard owns that thread; TLS binds only its callback, not worker policy. */
+static __declspec(thread) ntvwm_console_guard *event_guard;
+
+DWORD ntvwm_console_hide(HWND window)
+{
+    if(!window)return ERROR_SUCCESS;
+    SetLastError(ERROR_SUCCESS);
+    if(ShowWindowAsync(window,SW_HIDE))return ERROR_SUCCESS;
+    { DWORD error=GetLastError();return error ? error : ERROR_GEN_FAILURE; }
+}
+
+static void CALLBACK carrier_shown(HWINEVENTHOOK hook,DWORD event,HWND window,
+    LONG object,LONG child,DWORD thread,DWORD time)
+{
+    ntvwm_console_guard *guard=event_guard;
+    (void)hook;(void)thread;(void)time;
+    if(guard && event==EVENT_OBJECT_SHOW && window==guard->window &&
+        object==OBJID_WINDOW && child==0) {
+        /* No I/O lock, capture, RPC or wait in this callback. Report a hide
+         * failure only after joining, never through the capture logger here. */
+        DWORD error=ntvwm_console_hide(window);
+        if(error)guard->error=error;
+    }
+}
+
+static DWORD WINAPI carrier_guard_thread(void *context)
+{
+    ntvwm_console_guard *guard=context;
+    HWINEVENTHOOK hook;
+    MSG message;
+    event_guard=guard;
+    PeekMessageW(&message,NULL,0,0,PM_NOREMOVE);
+    SetLastError(ERROR_SUCCESS);
+    /* The Console window belongs to conhost, not this worker's PID. */
+    hook=SetWinEventHook(EVENT_OBJECT_SHOW,EVENT_OBJECT_SHOW,NULL,
+        carrier_shown,0,0,WINEVENT_OUTOFCONTEXT);
+    if(!hook) {
+        guard->start_error=GetLastError();
+        if(!guard->start_error)guard->start_error=ERROR_GEN_FAILURE;
+    }
+    SetEvent(guard->ready);
+    if(hook) {
+        for(;;) {
+            DWORD wait=MsgWaitForMultipleObjectsEx(1,&guard->stop,INFINITE,
+                QS_ALLINPUT,MWMO_INPUTAVAILABLE);
+            if(wait==WAIT_OBJECT_0)break;
+            if(wait!=WAIT_OBJECT_0+1) {
+                guard->error=wait==WAIT_FAILED ? GetLastError() : ERROR_INVALID_STATE;
+                break;
+            }
+            while(WaitForSingleObject(guard->stop,0)==WAIT_TIMEOUT &&
+                PeekMessageW(&message,NULL,0,0,PM_REMOVE)) {
+                TranslateMessage(&message);DispatchMessageW(&message);
+            }
+        }
+        UnhookWinEvent(hook); /* Must run on the installing thread. */
+    }
+    event_guard=NULL;
+    return 0;
+}
+
+void ntvwm_console_guard_stop(ntvwm_console_guard *guard)
+{
+    if(!guard)return;
+    if(guard->thread) {
+        SetEvent(guard->stop);
+        WaitForSingleObject(guard->thread,INFINITE);
+        CloseHandle(guard->thread);
+    }
+    if(guard->ready)CloseHandle(guard->ready);
+    if(guard->stop)CloseHandle(guard->stop);
+    ntvwm_trace_error("carrier-guard",0,guard->error);
+    HeapFree(GetProcessHeap(),0,guard);
+}
+
+DWORD ntvwm_console_guard_start(HWND window,ntvwm_console_guard **result)
+{
+    ntvwm_console_guard *guard;DWORD error;
+    if(!result)return ERROR_INVALID_PARAMETER;
+    *result=NULL;
+    if(!window)return ERROR_SUCCESS;
+    guard=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*guard));
+    if(!guard)return ERROR_NOT_ENOUGH_MEMORY;
+    guard->window=window;
+    guard->stop=CreateEventW(NULL,TRUE,FALSE,NULL);
+    guard->ready=CreateEventW(NULL,TRUE,FALSE,NULL);
+    if(!guard->stop || !guard->ready){error=GetLastError();goto fail;}
+    guard->thread=CreateThread(NULL,0,carrier_guard_thread,guard,0,NULL);
+    if(!guard->thread){error=GetLastError();goto fail;}
+    WaitForSingleObject(guard->ready,INFINITE);
+    error=guard->start_error;
+    if(error)goto fail;
+    *result=guard;
+    /* Close the initialization interval after the hook is installed. */
+    ntvwm_trace_error("carrier-initial-hide",0,ntvwm_console_hide(window));
+    return ERROR_SUCCESS;
+fail:
+    ntvwm_console_guard_stop(guard);return error;
+}
+
 BOOL ntvwm_console_quiescent(DWORD completed_target)
 {
     DWORD count,index,*members=NULL;

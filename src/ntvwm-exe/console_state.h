@@ -15,6 +15,12 @@ DWORD ntvwm_capture_begin(ntvwm_capture *);
 /* One-time invisible carrier setup, before targets exist. Fixed font metrics
  * keep ordinary native resize APIs independent of inherited host font size. */
 DWORD ntvwm_console_initialize(void);
+/* Exact borrowed carrier HWND only; no process/window discovery. Cosmetic
+ * errors never replace execution results. Stop must precede Console detach. */
+typedef struct ntvwm_console_guard ntvwm_console_guard;
+DWORD ntvwm_console_guard_start(HWND,ntvwm_console_guard **);
+void ntvwm_console_guard_stop(ntvwm_console_guard *);
+DWORD ntvwm_console_hide(HWND);
 void ntvwm_trace_error(const char *stage,DWORD operation,DWORD error);
 /* Explicit process-local buffer; no HANDLE is serialized. */
 DWORD ntvwm_capture_begin_output(ntvwm_capture *,HANDLE);

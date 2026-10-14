@@ -2,8 +2,9 @@
 
 ## Status and objective
 
-This is an unadmitted candidate package, placed first in the Queue. It has no
-numeric T/S identifier and does not authorize implementation.
+Owner admits this package as T446. Current owns its sole active S1 brief.
+The proposed three-step sequence below is consolidated into one end-to-end
+implementation/integration/verification delivery; scope and acceptance remain.
 
 NTVWM owns a private execution Console for native text targets. NTSRV starts
 the worker with `CREATE_NEW_CONSOLE` and `SW_HIDE`; the carrier is not a

@@ -290,6 +290,15 @@ coherent recovery package, and verify the final eight-file set. This does not
 authorize terminating unrelated host applications or changing product task-
 termination semantics.
 
+Owner extends this permanent approval during T446: agents may close relevant
+project processes both for replacing published files and for autonomous
+testing, without requesting approval again. Resolve and verify each exact
+executable path and process identity first; restrict closure to the required
+project installation or owned test package. Record targets and preserve
+recoverable publication inputs. This does not authorize closing unrelated
+host applications, broad name-only process kills, or changing product
+lifecycle semantics. Notify the owner when existing project sessions are ended.
+
 Owner exception dated 2026-09-26 for the active T423 frontend work and its
 subsequent S stages: physical desktop interaction, foreground activation and
 pointer clipping/release observation may be skipped when source-logic review
