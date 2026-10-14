@@ -129,7 +129,7 @@ $objects = @([regex]::Matches($link, '(?<!\S)obj/[^\s"]+\.obj') |
 if ($objects.Count -lt 77) { throw 'Incomplete production provider object selection' }
 & $lib /nologo "/out:$out\provider.lib" @objects >> "$out\build.log" 2>&1
 if ($LASTEXITCODE) { throw 'Provider archive failed' }
-Invoke-Build ('link /nologo /force:multiple /NODEFAULTLIB:ntvdm.lib /out:"'+$out+'\fixture.exe" /map:"'+$out+'\fixture.map" "'+$out+'\fixture.obj" '+(($parentObjects | ForEach-Object { '"'+$_+'"' }) -join ' ')+' "'+$out+'\provider.lib" '+((@($workerObjects)+@($fixtureSupportObjects)+@($fixtureLibraries) | ForEach-Object { '"'+$_+'"' }) -join ' ')+' rpcrt4.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
+Invoke-Build ('link /nologo /force:multiple /NODEFAULTLIB:ntvdm.lib /out:"'+$out+'\fixture.exe" /map:"'+$out+'\fixture.map" "'+$out+'\fixture.obj" '+(($parentObjects | ForEach-Object { '"'+$_+'"' }) -join ' ')+' "'+$out+'\provider.lib" '+((@($workerObjects)+@($fixtureSupportObjects)+@($fixtureLibraries) | ForEach-Object { '"'+$_+'"' }) -join ' ')+' rpcrt4.lib kernel32.lib user32.lib gdi32.lib shell32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
 if (!(Test-Path -LiteralPath "$out\fixture.exe" -PathType Leaf)) {
     throw "Task cleanup fixture link produced no executable: $out\fixture.exe"
 }

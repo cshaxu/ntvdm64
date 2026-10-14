@@ -132,3 +132,123 @@ verified release and evidence; owner visual acceptance remains pending.
 Fixed host About client layout can still clip enlarged
 text; S9 does not authorize an application-layout engine or falsified version
 content. No claim that SOL/WRITE's known startup errors are repaired.
+
+## P2 owner-requested demo proportions
+
+Owner accepts P1 then requests one additional commit: restore the smaller20px
+demo appearance before T closure. P1 is266067264. Only W16Style's authored
+geometry changes:16px grid multiplication3/2 becomes5/4, associated list
+columns/extents, viewport padding/line step and default frame size follow it.
+The extra tabbed list uses original grid coordinates rather than24px-derived
+absolute values. Both the overview and focused-control pages are included.
+No renderer, Hook, WOW, guest or arbitrary-application layout changes.
+
+r025 builds both demo widths using the dependency cache and snapshots a new
+package from r008; every other release image is hash-identical to P1. r026
+checks the exact release candidate; r027 checks both-width standalone demos.
+Both pass27 pages, real scrolling, normal exit and DLL boundaries. The
+regression now requires page01's push button145x50, tabbed list310x45 and
+20px content movement. It captures the actual shipped demo by PrintWindow;
+visual inspection confirms the reduced three-column layout. This is an
+off-screen layout capture, not new physical-pointer evidence. P1's physical
+hover and font proofs apply to unchanged DLL inputs.
+
+Background PID49148 (20:56:13,1800s deadline) reaches the product gate but is
+blocked by an existing unowned deployed broker; no product failure is inferred.
+After authorized closure of exact deployed project processes21160/28444,
+PID43744 (20:58:33,1200s) resumes serial Product/Control gates with new logs
+r030/r031. r030 Product passes all gates (161432ms), but stage cleanup fails
+on a retained nthook64.dll handle; Control is not reached. This is not a
+successful complete delivery. Preserve that run, not a silent retry/pass.
+
+### Owner-retired caption witness
+
+Before P2 delivery the owner additionally requests removal of every generated
+`(Win16 Style) ` prefix. This supersedes the earlier marker requirement, not
+the two style options or propagation policy. The sole automatic caller is
+NTW16S attachment. Remove its title-state/calls and the now-unused151-line
+module/header and diagnostic exports, rather than changing the prefix to an
+empty string or stripping application text. No Hook/WOW routing change,
+guest/mirror edit, global state mutation or application geometry change.
+
+Caption tests now exercise unchanged initial/dynamic A/W text, empty titles,
+Get/Set roundtrips, genuine application-supplied prefix text, rejection,
+reentry, removal and destruction. Native integration separately checks actual
+Ntw16sWindowAttached state; cross-process immutable-WOW probes check exact
+module identity and per-window DWM NC policy, plus captures and caption
+absence. These are test-only observations, not new production witness state.
+The first r039 cross-process observer mistakenly queried the set-only DWM
+NC policy attribute. Its first Off case failed the observation, not a product
+caption assertion. r048/r049 use the queryable NCRENDERING_ENABLED Boolean,
+report HRESULT and compare native/custom frame state independently of text;
+the initial Off case now proves S_OK and enabled native rendering. No product
+or guest changed for this probe correction.
+r033 initially exposed an incorrect fixture assertion on SetWindowText's API
+return rather than the window procedure result; the test now uses WM_SETTEXT
+as its predecessor did. The fresh r043 run retains this failed run honestly.
+
+Owner explicitly permits retaining the unstyled native-menu animation
+fresh-login investigation in TODO and closing the T after this delivery.
+That issue remains unproved/unfixed; styled menu tests do not discharge it.
+
+### P2 final candidate verification
+
+Candidate r034/package retains P1's ten core images and replaces only both
+NTW16S DLLs and W16Style.exe. Background runs12964 (2400s) and18544 (1800s)
+execute serially with the probe correction above, not simultaneous UI tests.
+
+- r043: both-width actual DLL caption-preservation cases pass, including
+  explicit absence of the retired exports.
+- r035: complete both-width controls/menu/scroll/font/lifetime regression and
+  shipped-demo boundary pass. Its injected painter leak still fails as
+  expected; that deliberate negative is not a product regression.
+- r036: both native widths, A/W, modal/modeless, dynamic captions, later GUI
+  threads, six MessageBox APIs and cross-width child propagation pass; actual
+  Ntw16sWindowAttached state is checked separately from unchanged text.
+- r037/r038: exact candidate attachment/lifetime/unload and DLL/demo boundary
+  pass; GDI3/3 over30 lifetimes,27 demo pages and20px viewport movement.
+  r038's actual demo capture has the restored compact three-column geometry.
+- r048: all18 real Win16/native/Win16 shared/independent and A/W relay chains
+  pass. r049: five shared-task/direct-child policy variants pass with captures.
+- r041 Product:159275ms, all WOW-frontier, Console17 and Window17 gates pass.
+- r042 Control:213114ms, all11 gates pass, including version negatives,
+  strict directory, EDIT/cooked returns, rapid/interactive relaunch,
+  session isolation, retirement wiring and nested window handoff.
+
+All runs retain source/fixture identities and process-owned cleanup.
+
+- r044 finds the lifecycle fixture's link list missing shell32.lib after
+  P1's ShellAbout integration. Add the same host import used by the product;
+  no production modification. r050 then passes task policy, A/W dialogs,
+  dynamic captions, same-runtime Off peer and parent retention with errors=0.
+- r046: actual WINMINE About with Off/Win16/All passes; styled title is exactly
+  About Minesweeper, known module path and custom NC state are verified, and
+  closing About leaves the game alive. Off-screen captures and message-only
+  menu checks are not represented as physical mouse tests.
+- r047-Off/Win16/All: ordinary real-game flag/counter changes, F2 reset, open
+  cell, WM_CLOSE and Run16 completion all pass. The observer checks unchanged
+  caption plus the independent frame state, not a textual style marker.
+
+Extra probes run in background PID17560 with900s owned deadline. No product
+input changed after r034; the last fixes affect test assertions/link inputs.
+
+### Publication and closure
+
+r045, background PID5072 with300s deadline, first preserves all13 destination
+images and the old release manifest. It copies only changed hashes, verifies
+all13 against tested inputs at both assets/release and O:/winnt/system32,
+then passes deployed both-width DLL boundaries and27-page demo checks.
+Its exit.txt is0 and verified-manifest.json records exact identities. The
+only changed release images are W16Style.exe and ntw16s32/64.dll; the ten
+core images remain P1-identical. No deployed project process was running
+at publication preflight. Recoverable backups remain in r045.
+
+Sequential review confirms the requested20px demo correction and removal of
+automatic caption rewriting, unchanged policy propagation, no guest/mirror
+diff and no new application-layout engine. Documentation governance and
+diff checks precede the final commit/push. The owner-directed
+[T closure](../../history/m0-t445-window-style-closure.md) retains known
+limitations and leaves no active packet or automatic next admission.
+The final documentation/link governance and diff checks pass. The previous
+32KiB status chronology is preserved in history, not deleted; Queue order
+is unchanged and CURRENT explicitly records task intermission.

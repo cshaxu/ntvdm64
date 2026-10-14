@@ -70,7 +70,7 @@ static BOOL is_attached(HWND window)
 static void title(HWND window,PCWSTR expected)
 {
     WCHAR actual[256],wanted[256];CHECK(window);GetWindowTextW(window,actual,256);
-    swprintf_s(wanted,256,L"%ls%ls",enabled?L"(Win16 Style) ":L"",expected);
+    wcscpy_s(wanted,256,expected);
     if(wcscmp(actual,wanted))fwprintf(stderr,L"actual=[%ls] wanted=[%ls]\n",actual,wanted);
     CHECK(!wcscmp(actual,wanted));
     CHECK(is_attached(window)==enabled);

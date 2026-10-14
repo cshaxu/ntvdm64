@@ -22,7 +22,7 @@ try {
 @echo off
 call "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat" -arch=x64 -host_arch=x64 >nul
 if errorlevel 1 exit /b %errorlevel%
-cl /nologo /MT /O2 /W4 /WX "$repo/tests/observation/wow_style_isolation_test.c" /Fo"$out/observer.obj" /Fe"$out/observer.exe" /link user32.lib gdi32.lib
+cl /nologo /MT /O2 /W4 /WX "$repo/tests/observation/wow_style_isolation_test.c" /Fo"$out/observer.obj" /Fe"$out/observer.exe" /link user32.lib gdi32.lib dwmapi.lib
 "@ | Set-Content "$out/build.cmd" -Encoding ascii
  & $env:ComSpec /d /c "$out/build.cmd" *> "$out/build.txt"
  if($LASTEXITCODE){throw 'Observer build failed'}

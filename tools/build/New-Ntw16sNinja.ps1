@@ -26,7 +26,7 @@ rule w16style_link
   command = link.exe /nologo /subsystem:windows /manifest:embed /out:`$out /map:W16Style.map `$in user32.lib gdi32.lib comctl32.lib
 
 "@
-$units=@('layout','scroll_layout','scroll_track','win16_style','menu_paint','menu_layout','menu_bar','menu_bar_paint','menu_items','menu_scope','controls','control_scope','font','dllmain','title_marker','attachment','theme','native_api')
+$units=@('layout','scroll_layout','scroll_track','win16_style','menu_paint','menu_layout','menu_bar','menu_bar_paint','menu_items','menu_scope','controls','control_scope','font','dllmain','attachment','theme','native_api')
 foreach($unit in $units){$graph+="build dll-$unit.obj: ntw16s_cc $r/src/ntw16s-dll/$unit.c`n"}
 $objects=($units|ForEach-Object {"dll-$_.obj"}) -join ' '
 $graph+="build $name.dll $name.lib: ntw16s_link $objects`n"

@@ -1,5 +1,10 @@
 # NTW16S Win3.x window-style DLL
 
+S9 owner-directed cleanup retires the temporary title-marker module and its
+two diagnostic exports. Attachment never adds or strips caption text; initial,
+dynamic A/W and dialog titles remain application-owned. Policy is verified by
+actual attachment, frame state and drawing, not a title prefix.
+
 T445 S5 moves the entire S4 owner-accepted core here. One source family builds
 ntw16s32.dll and ntw16s64.dll; ntw16s.h is the public same-thread C API.
 W16Style.exe imports the matching DLL, not a static renderer. The public
@@ -17,7 +22,7 @@ control scopes and font leases are released on their owner threads, with no
 outstanding calls/callbacks. DllMain never enumerates windows, installs hooks,
 creates fonts or performs cleanup under loader lock. No guest/WOW/Hook or
 process-selection dependency is introduced. A 16-bit guest cannot load this
-PE DLL; future WOW integration calls the x86 DLL from its native host.
+PE DLL; WOW32 integration calls the x86 DLL from its native host.
 
 The following S3/S4 design and limitations remain applicable to presentation;
 references to experiment-only packaging are superseded by S5 publication.

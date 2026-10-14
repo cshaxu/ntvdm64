@@ -1,5 +1,15 @@
 # T445 Windows 3.1 window-style working plan
 
+## Final disposition
+
+Owner-directed T445 closure is recorded in the
+[closure record](../../history/m0-t445-window-style-closure.md). The entries
+below retain the historical planning sequence, not live admission. Final
+policy uses --win16-style/--win16-style-all, the complete NTW16S DLL engine,
+WOW32/native-Hook attachment and20px type/demo proportions. The temporary
+caption marker is retired. Native animation investigation remains TODO by
+owner approval. No next task is automatically admitted.
+
 ## Authority and stage boundary
 
 Owner advances from delivered S7 (292664b02) without manual acceptance
@@ -11,8 +21,8 @@ S7 automated evidence is retained, not converted into a manual pass.
 S8 r075 publishes the exact r059 thirteen-image candidate after native/UI,
 WOW propagation, Product/Control and unload tests. Both release locations match
 the tested hashes; deployed DLL/demo gates pass. See [S8 evidence](../evidence/m0-t445-s8-style-integration.md).
-Owner acceptance remains pending; S9 is not admitted. Retained initialization
-errors and physical visual/interaction limits are not declared repaired.
+That was the S8 pre-S9 disposition, now superseded by the closure above.
+Retained initialization errors and physical limits are not declared repaired.
 
 Owner inserts S7 on 2026-10-13: separate Base RPC core and launch-style
 source/link closures, replacing the frontend-only conditional experiment.

@@ -17,12 +17,20 @@ static unsigned native_direct_calls;
 DWORD WINAPI NtvdmSeparateWowStyle(DWORD *style);
 extern BOOL fSeparateWow;
 static BOOL title_expected;
+static BOOL style_attached(HWND window)
+{
+    typedef BOOL (__cdecl *attached_fn)(HWND);
+    HMODULE module=GetModuleHandleW(L"ntw16s32.dll");
+    attached_fn query=module?(attached_fn)(void *)GetProcAddress(module,"Ntw16sWindowAttached"):NULL;
+    return query && query(window);
+}
 static HWND style_window(DWORD policy,LPCWSTR title)
 {
     void *scope=NULL;HWND window;
     CHECK(wow_style_creation_begin(policy,&scope));
     window=CreateWindowExW(0,L"STATIC",title,WS_OVERLAPPEDWINDOW,0,0,400,240,NULL,NULL,NULL,NULL);
-    CHECK(!wow_style_creation_end(scope));return window;
+    CHECK(!wow_style_creation_end(scope));
+    CHECK(style_attached(window)==(policy!=WINDOW_STYLE_OFF));return window;
 }
 typedef struct style_peer {
     session *owner;wow_user_runtime *runtime;wow_user_task_lifecycle *lifecycle;HDESK desktop;
@@ -47,7 +55,8 @@ static INT_PTR CALLBACK style_dialog(HWND w,UINT m,WPARAM wp,LPARAM lp)
     if(m==WM_INITDIALOG){CHECK(SetTimer(w,1,10,NULL));return TRUE;}
     if(m==WM_TIMER){
         GetWindowTextW(w,title,100);
-        CHECK(!wcscmp(title,title_expected?L"(Win16 Style) dialog":L"dialog"));
+        CHECK(!wcscmp(title,L"dialog"));
+        CHECK(style_attached(w)==title_expected);
         KillTimer(w,1);EndDialog(w,49);return TRUE;
     }
     return FALSE;
@@ -65,9 +74,9 @@ static void verify_task_title(void)
     CHECK(wow_title_policy(&policy) && policy==WINDOW_STYLE_WIN16);
     w=style_window(policy,L"task");
     CHECK(w);GetWindowTextW(w,title,100);
-    CHECK(!wcscmp(title,L"(Win16 Style) task"));
+    CHECK(!wcscmp(title,L"task"));
     CHECK(SetWindowTextW(w,L"changed"));GetWindowTextW(w,title,100);
-    CHECK(!wcscmp(title,L"(Win16 Style) changed"));CHECK(DestroyWindow(w));
+    CHECK(!wcscmp(title,L"changed"));CHECK(DestroyWindow(w));
     w=style_window(WINDOW_STYLE_OFF,L"off");
     CHECK(w);GetWindowTextW(w,title,100);
     CHECK(!wcscmp(title,L"off"));CHECK(DestroyWindow(w));

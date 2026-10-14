@@ -84,7 +84,7 @@ static DWORD WINAPI run_test(void *parameter)
     printf("ATTACH first created tick=%llu\n",GetTickCount64());fflush(stdout);
     if(result.failure)fprintf(stderr,"scope failure=%lu installed=%lu unsupported=%lu\n",result.failure,result.installed,result.unsupported);
     CHECK(!result.failure && result.installed==5 && attached(w) && attached(button) && attached(edit) && attached(list) && attached(combo) && !attached(plain));
-    CHECK(GetWindowTextW(w,title,128) && !wcscmp(title,L"(Win16 Style) Caption"));
+    CHECK(GetWindowTextW(w,title,128) && !wcscmp(title,L"Caption"));
     CHECK(SendMessageW(edit,WM_GETTEXT,128,(LPARAM)title) && !wcscmp(title,L"Original"));
     watched=list;theme_calls=0;
     CHECK(SUCCEEDED(set_theme(list,L"Application",L"Identifiers")));
@@ -121,7 +121,7 @@ static DWORD WINAPI run_test(void *parameter)
             printf("INITIAL STATE restored=%d tick=%llu\n",i,GetTickCount64());fflush(stdout);
             CHECK(GetWindowPlacement(w,&after_place));
             CHECK(EqualRect(&before_place.rcNormalPosition,&after_place.rcNormalPosition));
-            CHECK(GetWindowTextW(w,title,128) && !wcscmp(title,L"(Win16 Style) Initial state"));
+            CHECK(GetWindowTextW(w,title,128) && !wcscmp(title,L"Initial state"));
             CHECK(DestroyWindow(w));
         }
     }

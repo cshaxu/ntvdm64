@@ -3,6 +3,7 @@
  * Pixel changes are operation-specific and captured for independent review. */
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#include <dwmapi.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -125,11 +126,12 @@ int main(int argc,char **argv)
     printf("owned-window=%p pid=%lu\n",mine,owner_pid);
     if(argc==5){
         WCHAR caption[256];
-        BOOL marked;
+        BOOL native_frame=FALSE;
         if(!GetWindowTextW(mine,caption,256))return 15;
-        marked=wcsncmp(caption,L"(Win16 Style) ",14)==0;
-        if(marked!=(argv[4][0]=='1'))return 16;
-        printf("PASS title marker=%d\n",marked);
+        if(!wcsncmp(caption,L"(Win16 Style) ",14))return 16;
+        if(FAILED(DwmGetWindowAttribute(mine,DWMWA_NCRENDERING_ENABLED,&native_frame,sizeof(native_frame))) ||
+           (!native_frame)!=(argv[4][0]=='1'))return 16;
+        printf("PASS unchanged title and native frame=%u\n",native_frame);
     }
     if(!wait_board(process,&before,&counter) || !capture(mine,argv[3],"before"))return 5;
     if(!click(WM_RBUTTONDOWN,WM_RBUTTONUP,MK_RBUTTON) || !wait_cell(process,before,FALSE,"flag"))return 6;

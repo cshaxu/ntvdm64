@@ -2,7 +2,7 @@
 
 This is the authoritative ordered queue of unnumbered candidate packages.
 Only [Current Work](CURRENT.md) admits an active task. The window-appearance
-package is now admitted and absent here. Owner-approved priority is basic
+package is now closed and absent here. Owner-approved priority is basic
 functionality, basic display, comprehensive interaction, comprehensive display,
 then comprehensive functionality. Actual proved blockers take priority through
 explicit admission, not guessed dependencies. The WOW phases are candidates

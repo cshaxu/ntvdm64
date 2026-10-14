@@ -24,7 +24,7 @@ cl.exe /nologo /MT /O2 /W4 /WX /utf-8 /D_WIN32_WINNT=0x0A00 /DUNICODE /D_UNICODE
   $wrong=if($System32){Join-Path $System32 (Split-Path $other -Leaf)}else{"$candidate/$other"}
   $demo=if($System32){Join-Path $System32 W16Style.exe}else{"$candidate/$arch/W16Style.exe"}
   Get-FileHash $dll,$wrong,$demo,"$repo/tests/app/ntw16s_dll.c"|ConvertTo-Json|Set-Content "$dir/inputs.json"
-  $p=Start-Process "$dir/test.exe" -ArgumentList @($dll,$wrong,$demo) -WindowStyle Hidden -PassThru -RedirectStandardOutput "$dir/test.txt" -RedirectStandardError "$dir/test.err"
+  $p=Start-Process "$dir/test.exe" -ArgumentList @($dll,$wrong,$demo,"$dir/showcase.bmp") -WindowStyle Hidden -PassThru -RedirectStandardOutput "$dir/test.txt" -RedirectStandardError "$dir/test.err"
   $null=$p.Handle
   @{pid=$p.Id;start=$p.StartTime;deadline=$p.StartTime.AddSeconds(90)}|ConvertTo-Json|Set-Content "$dir/owner.json"
   if(!$p.WaitForExit(90000)){$p.Kill();$null=$p.WaitForExit(5000);throw "Boundary timeout $arch"}

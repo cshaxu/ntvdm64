@@ -2,7 +2,13 @@
 
 ## Status and objective
 
-This proposal has been admitted for ownership/API audit and design through
+The admitted implementation is now closed by owner direction; see the
+[closure](../history/m0-t445-window-style-closure.md). Retained planning below
+is historical: final ownership is NTW16S32/64 DLLs plus thin W16Style.exe,
+WOW32/native-Hook integration and20px type. The temporary caption-prefix
+requirement is explicitly retired; application titles remain unchanged.
+
+This proposal was admitted for ownership/API audit and design through
 [Current Work](../states/CURRENT.md). It is no longer queued. Current Work
 alone allocates the active packet; the sequence below remains its scope
 reference, not permission to skip review or change live window behavior.

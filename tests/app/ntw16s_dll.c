@@ -18,6 +18,24 @@ static HWND parent_window;
 static HFONT other_font;
 static HANDLE ready,finish;
 static HDESK desktop;
+static const WCHAR *capture_path;
+static void capture_showcase(HWND window)
+{
+    RECT r;BITMAPINFO info={0};BITMAPFILEHEADER header={0};void *bits;
+    HDC dc=CreateCompatibleDC(NULL);HBITMAP bitmap,previous;HANDLE file;DWORD bytes,written;
+    CHECK(dc && GetWindowRect(window,&r));
+    info.bmiHeader.biSize=sizeof(BITMAPINFOHEADER);info.bmiHeader.biWidth=r.right-r.left;
+    info.bmiHeader.biHeight=-(r.bottom-r.top);info.bmiHeader.biPlanes=1;info.bmiHeader.biBitCount=32;
+    bytes=(DWORD)(r.right-r.left)*(DWORD)(r.bottom-r.top)*4;
+    bitmap=CreateDIBSection(dc,&info,DIB_RGB_COLORS,&bits,NULL,0);CHECK(bitmap);
+    previous=(HBITMAP)SelectObject(dc,bitmap);CHECK(previous && PrintWindow(window,dc,0));GdiFlush();
+    header.bfType=0x4d42;header.bfOffBits=sizeof(header)+sizeof(info.bmiHeader);header.bfSize=header.bfOffBits+bytes;
+    file=CreateFileW(capture_path,GENERIC_WRITE,0,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);CHECK(file!=INVALID_HANDLE_VALUE);
+    CHECK(WriteFile(file,&header,sizeof(header),&written,NULL) && written==sizeof(header));
+    CHECK(WriteFile(file,&info.bmiHeader,sizeof(info.bmiHeader),&written,NULL) && written==sizeof(info.bmiHeader));
+    CHECK(WriteFile(file,bits,bytes,&written,NULL) && written==bytes && CloseHandle(file));
+    SelectObject(dc,previous);CHECK(DeleteObject(bitmap) && DeleteDC(dc));
+}
 static LRESULT CALLBACK window_proc(HWND w,UINT m,WPARAM a,LPARAM b)
 {if(m==WM_APP+7)return 456;return DefWindowProcW(w,m,a,b);}
 static DWORD WINAPI other_thread(void *unused)
@@ -93,10 +111,15 @@ static void demo_boundary(const WCHAR *path,WCHAR *desktop_name)
         found_sample=NULL;EnumDesktopWindows(desktop,find_demo,0);CHECK(found_sample);
         if(n==0){HWND button=GetDlgItem(found_sample,1201);RECT before,after;SCROLLINFO info={sizeof(info),SIF_ALL};
             CHECK(button && GetWindowRect(button,&before));
+            CHECK(before.right-before.left==145 && before.bottom-before.top==50);
+            {RECT tab;HWND tablist=GetDlgItem(found_sample,1510);
+                CHECK(tablist && GetWindowRect(tablist,&tab));
+                CHECK(tab.right-tab.left==310 && tab.bottom-tab.top==45);}
+            if(capture_path)capture_showcase(found_sample);
             CHECK(SetWindowPos(found_sample,NULL,0,0,620,380,SWP_NOZORDER|SWP_NOACTIVATE));
             CHECK(GetWindowRect(button,&before));send_owned(found_sample,WM_VSCROLL,SB_LINEDOWN,0);
-            CHECK(GetScrollInfo(found_sample,SB_VERT,&info) && info.nPos==24);
-            CHECK(GetWindowRect(button,&after) && after.top==before.top-24);
+            CHECK(GetScrollInfo(found_sample,SB_VERT,&info) && info.nPos==20);
+            CHECK(GetWindowRect(button,&after) && after.top==before.top-20);
         }
         send_owned(found_controller,WM_COMMAND,2,0);found_sample=NULL;EnumDesktopWindows(desktop,find_demo,0);CHECK(!found_sample);
     }
@@ -109,7 +132,7 @@ static void demo_boundary(const WCHAR *path,WCHAR *desktop_name)
 int wmain(int argc,WCHAR **argv)
 {
     WCHAR name[64];WNDCLASSW cls={0};HDESK previous;HMODULE wrong;
-    CHECK(argc==4);SetErrorMode(SEM_FAILCRITICALERRORS|SEM_NOOPENFILEERRORBOX);
+    CHECK(argc==4 || argc==5);if(argc==5)capture_path=argv[4];SetErrorMode(SEM_FAILCRITICALERRORS|SEM_NOOPENFILEERRORBOX);
     CHECK(SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2));
     swprintf_s(name,64,L"Ntw16sTest-%lu",GetCurrentProcessId());previous=GetThreadDesktop(GetCurrentThreadId());
     desktop=CreateDesktopW(name,NULL,NULL,0,DESKTOP_CREATEWINDOW|DESKTOP_READOBJECTS|DESKTOP_WRITEOBJECTS|DESKTOP_ENUMERATE,NULL);

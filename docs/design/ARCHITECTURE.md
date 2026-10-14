@@ -16,8 +16,11 @@ frontend-only preprocessor variant or a change to copied RPC contracts.
 NTW16S owns the complete local Win3.x presentation engine, compiled as
 ntw16s32.dll and ntw16s64.dll. W16Style.exe owns only demonstration content,
 layout and application behavior and calls its public C interface. Hook launch
-propagation and WOW task/window policy remain outside the DLL and are not yet
-integrated. Win16 uses the x86 host DLL through WOW, never a guest DLL import.
+propagation and WOW task/window policy remain outside the DLL; S8 integrates
+the native Hooks and WOW32-owned creation scopes. Win16 uses the x86 host DLL
+through WOW32, never a guest DLL import or ntvdm.exe appearance hook.
+The temporary diagnostic caption prefix is retired; application titles remain
+unchanged regardless of style policy.
 Borrowed HWNDs belong to the calling GUI thread; allocated state/resources
 are released by the DLL. DLL entry does not install hooks or draw windows.
 

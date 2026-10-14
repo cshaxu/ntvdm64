@@ -16,7 +16,7 @@ struct ntw16s_creation_scope {
 };
 typedef struct attachment {
     unsigned calls;
-    BOOL detached,frame,control,title;
+    BOOL detached,frame,control;
     HWND themed;
 } attachment;
 static __declspec(thread) ntw16s_creation_scope *current;
@@ -73,7 +73,6 @@ BOOL __cdecl Ntw16sWindowRemove(HWND w)
     RemoveWindowSubclass(w,attachment_proc,(UINT_PTR)attachment_proc);
     a->detached=TRUE;
     /* Existing owners handle reentrant destruction/removal independently. */
-    if(a->title)Ntw16sTitleRemove(w);
     if(a->frame)win16_style_remove(w);
     if(a->control)win16_style_control_remove(w);
     if(a->themed)ntw16s_theme_remove(a->themed,a);
@@ -127,10 +126,6 @@ static BOOL install_created(HWND w,DWORD original_style)
                 error=GetLastError();
             }
         }
-        if(installed && !control && (original_style&WS_CAPTION)==WS_CAPTION){
-            installed=Ntw16sTitleInstall(w);error=GetLastError();
-            if(installed && !a->detached)a->title=TRUE;
-        }
     }
     if(a->detached){installed=FALSE;error=ERROR_CANCELLED;}
     if(!installed && !a->detached)Ntw16sWindowRemove(w);
@@ -170,8 +165,8 @@ static LRESULT CALLBACK creation_return(int code,WPARAM p,LPARAM l)
         const CWPRETSTRUCT *m=(const CWPRETSTRUCT *)l;
         BOOL created=m->message==WM_CREATE && m->lResult!=-1;
         /* Dialog managers finish layout and format their caption during
-         * WM_INITDIALOG. Attaching a marker at WM_CREATE contaminates that
-         * GetWindowText/format/SetWindowText sequence (e.g. ShellAbout).
+         * WM_INITDIALOG. Attach after that native initialization (ShellAbout
+         * also formats its caption there); never rewrite application text.
          * Keep its pending style until the real dialog initialization exits. */
         if(created && class_is(m->hwnd,L"#32770")){
             SetLastError(saved);return result;

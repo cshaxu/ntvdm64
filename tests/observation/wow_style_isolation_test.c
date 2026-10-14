@@ -2,6 +2,7 @@
  * baseline reaches an error dialog; that is a title witness, not gameplay. */
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#include <dwmapi.h>
 #include <tlhelp32.h>
 #include <stdio.h>
 #include <wchar.h>
@@ -113,11 +114,13 @@ static BOOL await_window(HDESK desktop,int kind)
 }
 static BOOL marked_owner(HWND window,BOOL expected,DWORD owner)
 {
-    WCHAR title[256];DWORD pid;
+    WCHAR title[256];DWORD pid;BOOL native_frame=FALSE;
     if(!window || !GetWindowTextW(window,title,256))title[0]=0;
     GetWindowThreadProcessId(window,&pid);
-    wprintf(L"WITNESS pid=%lu hwnd=%p title=[%ls] expected-marker=%u\n",pid,window,title,expected);fflush(stdout);
-    return window && pid==owner && (!wcsncmp(title,L"(Win16 Style) ",14))==expected &&
+    HRESULT status=DwmGetWindowAttribute(window,DWMWA_NCRENDERING_ENABLED,&native_frame,sizeof(native_frame));
+    wprintf(L"WITNESS pid=%lu hwnd=%p title=[%ls] expected-style=%u native-frame=%u status=%08lx\n",pid,window,title,expected,native_frame,(DWORD)status);fflush(stdout);
+    return window && pid==owner && wcsncmp(title,L"(Win16 Style) ",14)!=0 &&
+        SUCCEEDED(status) && (!native_frame)==expected &&
         (!expected || style_module(pid)) && capture_window(window);
 }
 static BOOL marked(HWND window,BOOL expected){return marked_owner(window,expected,worker);}
@@ -183,7 +186,7 @@ int wmain(int argc,WCHAR **argv)
         CHECK(PostMessageW(mine,WM_COMMAND,about,0));CHECK(await_window(desktop,TRUE));
         CHECK(marked(dialog,enabled));
         {WCHAR title[256];CHECK(GetWindowTextW(dialog,title,256));
-            if(enabled)CHECK(!wcsstr(title+14,L"(Win16 Style) "));}
+            CHECK(!wcsstr(title,L"(Win16 Style) "));}
         CHECK(PostMessageW(dialog,WM_COMMAND,IDOK,0));
         {DWORD until=GetTickCount()+5000;while(IsWindow(dialog) && (LONG)(until-GetTickCount())>0)Sleep(50);
             CHECK(!IsWindow(dialog) && IsWindow(mine));}

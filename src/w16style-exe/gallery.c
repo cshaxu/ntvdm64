@@ -126,9 +126,9 @@ static void showcase_extent(HWND w)
         GetWindowRect(child,&r);MapWindowPoints(NULL,w,(POINT *)&r,2);
         right=max(right,r.right+x);bottom=max(bottom,r.bottom+y);
     }
-    GetClientRect(w,&client);info.nMax=right+18-1;info.nPage=(UINT)client.right;info.nPos=x;
+    GetClientRect(w,&client);info.nMax=right+15-1;info.nPage=(UINT)client.right;info.nPos=x;
     win16_style_set_scroll_info(w,SB_HORZ,&info,TRUE);
-    info.nMax=bottom+18-1;info.nPage=(UINT)client.bottom;info.nPos=y;
+    info.nMax=bottom+15-1;info.nPage=(UINT)client.bottom;info.nPos=y;
     win16_style_set_scroll_info(w,SB_VERT,&info,TRUE);
     showcase_move(w,x-GetScrollPos(w,SB_HORZ),y-GetScrollPos(w,SB_VERT));
 }
@@ -182,7 +182,7 @@ static LRESULT CALLBACK sample_proc(HWND w,UINT m,WPARAM a,LPARAM b)
     if(s && s->special==BASICS && m==WM_COMMAND && LOWORD(a)==600 && HIWORD(a)==BN_CLICKED){++control_commands;return 0;}
     if(s && s->special==LISTS && m==WM_COMMAND && HIWORD(a)==LBN_SELCHANGE){++control_commands;return 0;}
     if(s && (s->special==SCROLL || s->special==SHOWCASE) && (m==WM_HSCROLL || m==WM_VSCROLL) && !b){
-        int bar=m==WM_HSCROLL?SB_HORZ:SB_VERT,old,step=s->special==SHOWCASE?24:1;SCROLLINFO info={sizeof(info),SIF_ALL};
+        int bar=m==WM_HSCROLL?SB_HORZ:SB_VERT,old,step=s->special==SHOWCASE?20:1;SCROLLINFO info={sizeof(info),SIF_ALL};
         REQUIRE(win16_style_get_scroll_info(w,bar,&info));
         old=info.nPos;
         switch(LOWORD(a)){
@@ -377,7 +377,7 @@ static void create_showcase(HWND w)
         BOOL sizebox=!lstrcmpW(items[n].cls,L"SCROLLBAR") && (items[n].style&SBS_SIZEBOX);
         BOOL tab=lstrcmpW(items[n].cls,L"STATIC") && !group && !sizebox;
         HWND control=CreateWindowW(items[n].cls,items[n].text,WS_CHILD|WS_VISIBLE|(tab?WS_TABSTOP:0)|(group?WS_GROUP:0)|items[n].style,
-            MulDiv(items[n].x,3,2),MulDiv(items[n].y,3,2),MulDiv(items[n].cx,3,2),MulDiv(items[n].cy,3,2),
+            MulDiv(items[n].x,5,4),MulDiv(items[n].y,5,4),MulDiv(items[n].cx,5,4),MulDiv(items[n].cy,5,4),
             w,(HMENU)(INT_PTR)(1200+n),GetModuleHandleW(NULL),NULL);
         REQUIRE(control);SendMessageW(control,WM_SETFONT,(WPARAM)GetStockObject(SYSTEM_FONT),FALSE);
         if(!lstrcmpW(items[n].cls,L"STATIC") && (items[n].style&SS_TYPEMASK)==SS_ICON)
@@ -386,9 +386,9 @@ static void create_showcase(HWND w)
             SendMessageW(control,STM_SETIMAGE,IMAGE_BITMAP,(LPARAM)bitmap);
         if(!lstrcmpW(items[n].cls,L"LISTBOX") || !lstrcmpW(items[n].cls,L"COMBOBOX")){
             BOOL list=!lstrcmpW(items[n].cls,L"LISTBOX");int k;
-            if(list && (items[n].style&LBS_MULTICOLUMN))SendMessageW(control,LB_SETCOLUMNWIDTH,168,0);
+            if(list && (items[n].style&LBS_MULTICOLUMN))SendMessageW(control,LB_SETCOLUMNWIDTH,140,0);
             if(list && (items[n].style&WS_HSCROLL) && !(items[n].style&LBS_MULTICOLUMN))
-                SendMessageW(control,LB_SETHORIZONTALEXTENT,240,0);
+                SendMessageW(control,LB_SETHORIZONTALEXTENT,200,0);
             for(k=0;k<16;++k){WCHAR label[32];swprintf_s(label,32,L"Item %02d",k+1);
                 REQUIRE(SendMessageW(control,list?LB_ADDSTRING:CB_ADDSTRING,0,(LPARAM)label)>=0);}
             SendMessageW(control,list?LB_SETCURSEL:CB_SETCURSEL,1,0);
@@ -408,7 +408,7 @@ static void create_showcase(HWND w)
      * Explicit attachment does not guess opaque state in arbitrary lists. */
     {HWND list;int item,stop=40;
         list=CreateWindowW(L"LISTBOX",L"",WS_CHILD|WS_VISIBLE|WS_TABSTOP|WS_BORDER|WS_VSCROLL|LBS_USETABSTOPS|LBS_NOINTEGRALHEIGHT,
-            909,324,372,54,w,(HMENU)(INT_PTR)1510,GetModuleHandleW(NULL),NULL);REQUIRE(list);
+            MulDiv(606,5,4),MulDiv(216,5,4),MulDiv(248,5,4),MulDiv(36,5,4),w,(HMENU)(INT_PTR)1510,GetModuleHandleW(NULL),NULL);REQUIRE(list);
         REQUIRE(win16_style_tabbed_list_install(list,NULL,0,NULL));
         REQUIRE(SendMessageW(list,LB_SETTABSTOPS,1,(LPARAM)&stop));
         for(item=0;item<16;++item){WCHAR text[40];swprintf_s(text,40,L"Item %02d\tValue %02d",item+1,item+1);
@@ -420,7 +420,9 @@ static void create_showcase(HWND w)
 static void layout_focused_typography(HWND w)
 {
     HWND child;RECT outer;REQUIRE(GetWindowRect(w,&outer));
-    REQUIRE(SetWindowPos(w,NULL,0,0,MulDiv(outer.right-outer.left,3,2),MulDiv(outer.bottom-outer.top,3,2),
+    /* Authored coordinates use the original16px demo grid; match20px type,
+     * not the superseded24px expansion. No application layout is changed. */
+    REQUIRE(SetWindowPos(w,NULL,0,0,MulDiv(outer.right-outer.left,5,4),MulDiv(outer.bottom-outer.top,5,4),
         SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE));
     for(child=GetWindow(w,GW_CHILD);child;child=GetWindow(child,GW_HWNDNEXT)){
         WCHAR cls[32];RECT r;REQUIRE(GetClassNameW(child,cls,32));
@@ -431,8 +433,8 @@ static void layout_focused_typography(HWND w)
         if(!lstrcmpiW(cls,L"COMBOBOX") && (GetWindowLongPtrW(child,GWL_STYLE)&3)!=CBS_SIMPLE)
             REQUIRE(SendMessageW(child,CB_GETDROPPEDCONTROLRECT,0,(LPARAM)&r));
         MapWindowPoints(NULL,w,(POINT *)&r,2);
-        REQUIRE(SetWindowPos(child,NULL,MulDiv(r.left,3,2),MulDiv(r.top,3,2),
-            MulDiv(r.right-r.left,3,2),MulDiv(r.bottom-r.top,3,2),SWP_NOZORDER|SWP_NOACTIVATE));
+        REQUIRE(SetWindowPos(child,NULL,MulDiv(r.left,5,4),MulDiv(r.top,5,4),
+            MulDiv(r.right-r.left,5,4),MulDiv(r.bottom-r.top,5,4),SWP_NOZORDER|SWP_NOACTIVATE));
     }
 }
 
@@ -455,7 +457,7 @@ static HWND create_sample(int index,HWND owner,BOOL state)
         p.x=p.y=0;GetClientRect(w,&after);ClientToScreen(w,&p);OffsetRect(&after,p.x,p.y);
         REQUIRE(EqualRect(&before,&after));}
     if(s->special==SHOWCASE){
-        int width=1395,height=945,x=40,y=40;
+        int width=MulDiv(930,5,4),height=MulDiv(630,5,4),x=40,y=40;
         {MONITORINFO monitor={sizeof(monitor)};
             if(GetMonitorInfoW(MonitorFromWindow(w,MONITOR_DEFAULTTONEAREST),&monitor)){
                 width=min(width,monitor.rcWork.right-monitor.rcWork.left);
