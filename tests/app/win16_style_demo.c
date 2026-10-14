@@ -341,7 +341,7 @@ static void title_clip_test(void)
      * one logical pixel inside the left edge. No fitting/ellipsis algorithm.
      * The bitmap boundary clips its tail. Compare the whole title, including
      * the right edge where a modern ellipsis used to replace original glyphs. */
-    CHECK(TextOutW(base,1,max(0,(height-24)/2),title,120));
+    CHECK(TextOutW(base,1,max(0,(height-20)/2),title,120));
     CHECK(BitBlt(expected,0,0,width,height,base,0,0,SRCCOPY));
     for(y=0;y<height;++y)for(x=0;x<width;++x)
         CHECK(GetPixel(actual,l.title.left+x,l.title.top+y)==GetPixel(expected,x,y));
@@ -513,10 +513,10 @@ static void layout_tests(void)
         for(caption=0;caption<2;++caption){
             CHECK(win16_style_measure(600,400,96,caption?WS_OVERLAPPEDWINDOW:WS_POPUP|WS_THICKFRAME,0,FALSE,&l));
             for(i=0;i<sizeof(edges)/sizeof(edges[0]);++i){POINT p={edges[i].x,edges[i].y};
-                /* A caption now needs24 rows for owner-selected type rather
-                 * than18. Its side corner bands follow that six-row growth;
+                /* A caption now needs20 rows for owner-selected type rather
+                 * than18. Its side corner bands follow that two-row growth;
                  * captionless VGA boundaries stay unchanged. */
-                if(caption && i>=8)p.y+=p.y<200?6:-6;
+                if(caption && i>=8)p.y+=p.y<200?2:-2;
                 CHECK(win16_style_hit(&l,p)==edges[i].hit);}
         }
     }

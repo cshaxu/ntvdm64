@@ -107,6 +107,10 @@ non-client menu handling, including disabled-close and cancellation tests.
 
 ## S4 unified typography requirement
 
+S9 owner follow-up supersedes only the24px size below with20px for all three
+surfaces, retaining the same System bitmap scaling and ownership contract.
+See [S9 evidence](../evidence/m0-t445-s9-integrated-acceptance.md).
+
 Owner now requires the title, all menus and standard controls to use the same
 font and actual24-pixel size, and explicitly chooses retaining the host System
 bitmap appearance with identical scaling for all three surfaces. This

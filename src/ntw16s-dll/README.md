@@ -22,7 +22,7 @@ PE DLL; future WOW integration calls the x86 DLL from its native host.
 The following S3/S4 design and limitations remain applicable to presentation;
 references to experiment-only packaging are superseded by S5 publication.
 
-Owner-selected typography now uses one actual24-pixel System bitmap font for
+S9 owner-selected typography uses one actual20-pixel System bitmap font for
 styled captions, menus and supported standard controls. font.c rasterizes the
 host's16-row System glyphs, scales them once with COLORONCOLOR and registers
 a process-private in-memory FNT. There is no embedded VGASYS.FON, global font
@@ -32,9 +32,9 @@ the application's latest borrowed WM_SETFONT value; native EDIT/list/combo
 layout, caret, selection and font-driven integral-height changes remain native.
 The current exact-glyph inventory is CP1252 characters32..255; wider Unicode
 fallback and non-ANSI System realizations are not certified by this fixture.
-The title grows to at least24 rows at low DPI; captionless resize geometry
+The title grows to at least20 rows at low DPI; captionless resize geometry
 does not grow. This is the owner's explicit typography adaptation, not a claim
-that original VGA caption metrics were24. Sample01 has larger control spacing
+that original VGA caption metrics were20. Sample01 has larger control spacing
 to expose the entire inventory at this size.
 
 S4 owns presentation for the six standard-control families listed below.
@@ -147,7 +147,7 @@ This is not a creation/Hook adapter or real title-prefix implementation.
 
 The supplied reference palette is a preset, not a universal Win3.1 default.
 High contrast reads host colors; no global settings are written. The shared
-24-pixel System bitmap font described above supersedes the earlier separate
+20-pixel System bitmap font described above supersedes the earlier separate
 caption scaling and clipped text canvas. Its process-private FNT is generated
 from the host font, not an embedded original font. Exact VGA glyph fidelity,
 wider Unicode and non-ANSI System realization are not claimed.
@@ -345,7 +345,7 @@ the public thumb message must not silently truncate them. The both-axis fixture
 checks horizontal movement does not change the vertical origin or bar pixels.
 
 Menu bars, popup/system-menu text, titles and supported controls use the shared
-actual24-pixel font. Measurement, hit testing and drawing use that same font;
+actual20-pixel font. Measurement, hit testing and drawing use that same font;
 there is no separate title stretch. The older r162 stock-font comparison is
 historical evidence for the small-File defect, not the current font contract.
 win16_style_font.c verifies realized metrics and CP1252 raster coverage;

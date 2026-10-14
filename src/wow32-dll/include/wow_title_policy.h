@@ -11,6 +11,12 @@ BOOL WINAPI wow_style_enable_scroll_bar(HWND,UINT,UINT);
 INT_PTR WINAPI wow_title_modal(HINSTANCE module,LPCDLGTEMPLATEW resource,HWND owner,
     DLGPROC procedure,LPARAM parameter,BOOL ansi,DWORD policy);
 int WINAPI wow_title_message_box_a(HWND owner,LPCSTR text,LPCSTR caption,UINT type);
+int WINAPI wow_style_shell_about_a(HWND owner,LPCSTR application,LPCSTR text,HICON icon);
+#ifdef WOW_STYLE_SHELL_BINDING
+#include <shellapi.h>
+#undef ShellAbout
+#define ShellAbout wow_style_shell_about_a
+#endif
 #ifdef WOW_TITLE_MESSAGE_BINDING
 #undef MessageBox
 #define MessageBox wow_title_message_box_a

@@ -378,6 +378,8 @@ foreach ($source in $sources) {
         $ninja.Add('  cflags = $cflags /DWOW_TITLE_MESSAGE_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_title_policy.h')) + '"')
     } elseif ($source -in @('wuser.c','wuser31.c','wuwind.c')) {
         $ninja.Add('  cflags = $cflags /DWOW_STYLE_SCROLL_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_title_policy.h')) + '"')
+    } elseif ($source -eq 'wshell.c') {
+        $ninja.Add('  cflags = $cflags /DWOW_STYLE_SHELL_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_title_policy.h')) + '"')
     }
 }
 $supportObjects = [System.Collections.Generic.List[string]]::new()

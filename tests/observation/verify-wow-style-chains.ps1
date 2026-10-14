@@ -5,7 +5,8 @@ param(
  [Parameter(Mandatory)][string]$BuildRoot,
  [string[]]$Architectures=@('x86','x64'),
  [string[]]$Variants=@('separate-off','separate-on','separate-all','separate-a-off','separate-a-on','separate-a-all','relay-off','relay-on','relay-all'),
- [switch]$Capture
+ [switch]$Capture,
+ [switch]$ActivateDesktop
 )
 $ErrorActionPreference='Stop'
 Import-Module Microsoft.PowerShell.Utility
@@ -37,11 +38,12 @@ cl /nologo /MT /O2 /W4 /WX "$repo/tests/observation/wow_style_isolation_test.c" 
   Copy-Item "$fixtures/$arch/system32/native-title-gui.exe" "$stage/tests/STYLENAT.EXE" -Force
   $scope.Paths+=(Resolve-Path "$stage/tests/STYLENAT.EXE").Path
   foreach($variant in $Variants){
-   if($variant -notmatch '^(off-on|on-off|(separate(-a)?|relay|child)-(off|on|all))$'){throw 'Invalid variant'}
+   if($variant -notmatch '^(ui(-off|-all)?|off-on|on-off|(separate(-a)?|relay|child)-(off|on|all))$'){throw 'Invalid variant'}
    $case="$out/$arch-$variant";$null=New-Item -ItemType Directory $case
    $parent=if($variant.StartsWith('child-')){'STYLEPAR.EXE'}else{'STYLERET.EXE'}
    Copy-Item "$guests/$parent" "$stage/tests/STYLEPAR.EXE" -Force
    if($Capture){$env:MVDM_STYLE_CAPTURE_DIR=$case}
+   if($ActivateDesktop){$env:MVDM_STYLE_ACTIVATE_DESKTOP='1'}
    $p=Start-Process "$out/observer.exe" -ArgumentList ('"'+$stage+'" '+$variant) -WindowStyle Hidden -PassThru -RedirectStandardOutput "$case/result.txt" -RedirectStandardError "$case/error.txt"
    $null=$p.Handle
    if(!$p.WaitForExit(180000)){$p.Kill();$p.WaitForExit();throw "Observer deadline $arch/$variant"}

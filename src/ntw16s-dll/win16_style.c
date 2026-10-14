@@ -364,7 +364,7 @@ static void paint(HWND w,style_window *s,HDC target)
         r=l.title;
         SelectObject(dc,s->title_font);SetBkMode(dc,TRANSPARENT);
         SetTextColor(dc,s->active?p.active_text:p.inactive_text);
-        /* Shared24-pixel glyphs are already scaled. Never scale the title a
+        /* Shared20-pixel glyphs are already scaled. Never scale the title a
          * second time; retain original centered-or-clipped, no-ellipsis text. */
         if(GetTextExtentPoint32W(dc,title,len,&extent))
             ExtTextOutW(dc,r.left+max(1,(r.right-r.left-extent.cx)/2),
@@ -693,6 +693,14 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
      * merged-control retro painting is a separate S4 menu surface. */
     if((GetWindowLongPtr(w,GWL_EXSTYLE)&WS_EX_MDICHILD) && IsZoomed(w) &&
        msg!=WM_NCDESTROY)goto forward;
+    /* Our menu bar is custom nonclient chrome. USER hot-tracks HTMENU before
+     * NC mouse dispatch (classic/WOW has no UAH draw callback to intercept).
+     * Expose neutral nonclient hit-test ownership and route clicks by our
+     * measured menu rectangle; never alter the application's HMENU. */
+    if((msg==WM_NCLBUTTONDOWN || msg==WM_NCLBUTTONDBLCLK) && wp==HTBORDER && layout(w,s,&l)){
+        GetWindowRect(w,&r);point.x=GET_X_LPARAM(lp)-r.left;point.y=GET_Y_LPARAM(lp)-r.top;
+        if(PtInRect(&l.menu,point))wp=HTMENU;
+    }
     switch(msg){
     case WM_MEASUREITEM:
         if(win16_style_menu_size(s->menu_items,(MEASUREITEMSTRUCT *)lp,s->menu_font,s->dpi)){result=TRUE;break;}
@@ -794,7 +802,7 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
             if((flags&WS_VSCROLL) && GetScrollBarInfo(w,OBJID_VSCROLL,&scroll) && PtInRect(&scroll.rcScrollBar,screen)){
                 result=HTVSCROLL;break;}
             GetWindowRect(w,&r);point.x=GET_X_LPARAM(lp)-r.left;point.y=GET_Y_LPARAM(lp)-r.top;
-            result=PtInRect(&l.menu,point)?HTMENU:win16_style_hit(&l,point);break;
+            result=PtInRect(&l.menu,point)?HTBORDER:win16_style_hit(&l,point);break;
         }
         goto forward;
     case WM_INITMENUPOPUP:

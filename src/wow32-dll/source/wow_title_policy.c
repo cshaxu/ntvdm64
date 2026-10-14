@@ -3,6 +3,7 @@
 #include "common/protocol/window_style.h"
 #include "ntw16s-dll/attachment.h"
 #include <wchar.h>
+#include <shellapi.h>
 
 static INIT_ONCE title_once=INIT_ONCE_STATIC_INIT;
 typedef ntw16s_creation_scope *(__cdecl *creation_begin_fn)(BOOL);
@@ -94,6 +95,20 @@ int WINAPI wow_title_message_box_a(HWND owner,LPCSTR text,LPCSTR caption,UINT ty
     if(!wow_style_creation_begin(policy,&scope))return 0;
     __try {
         result=MessageBoxA(owner,text,caption,type);error=GetLastError();
+    } __finally {failure=wow_style_creation_end(scope);}
+    if(failure){result=0;error=failure;}
+    SetLastError(error);return result;
+}
+
+/* ShellAbout is a native dialog on behalf of the current Win16 task, not a
+ * separately launched native application. Retain the host's version content
+ * and return contract while covering its internal dialog/control creation. */
+int WINAPI wow_style_shell_about_a(HWND owner,LPCSTR application,LPCSTR text,HICON icon)
+{
+    DWORD policy,error,failure=ERROR_SUCCESS;int result;void *scope;
+    if(!wow_title_policy(&policy) || !wow_style_creation_begin(policy,&scope))return 0;
+    __try {
+        result=ShellAboutA(owner,application,text,icon);error=GetLastError();
     } __finally {failure=wow_style_creation_end(scope);}
     if(failure){result=0;error=failure;}
     SetLastError(error);return result;

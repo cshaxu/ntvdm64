@@ -11,6 +11,7 @@ static DWORD shell_worker;
 static HANDLE retained_launcher;
 static DWORD retained_pid;
 static const WCHAR *runtime_root;
+static BOOL capture_live,capture_repeat,capture_compare;
 static BOOL style_module(DWORD pid)
 {
     HANDLE snapshot;MODULEENTRY32W entry={sizeof(entry)};BOOL found=FALSE;
@@ -33,10 +34,11 @@ static BOOL capture_window(HWND window)
     HDC dc;HBITMAP bitmap,previous;BITMAPINFO info={0};BITMAPFILEHEADER header={0};
     void *pixels;HANDLE file;DWORD size,written;BOOL ok;static unsigned sequence;
     static HWND captured[8];unsigned i;
+    static BYTE *hover_before;static DWORD hover_bytes;
     if(!GetEnvironmentVariableW(L"MVDM_STYLE_CAPTURE_DIR",directory,MAX_PATH))return TRUE;
     /* Capture each owned window before launching the next task. A later
      * modal guest may legitimately block synchronous painting of its peer. */
-    for(i=0;i<sequence;++i)if(captured[i]==window)return TRUE;
+    for(i=0;!capture_repeat && i<sequence;++i)if(captured[i]==window)return TRUE;
     if(sequence==ARRAYSIZE(captured))return FALSE;
     if(IsIconic(window)){
         DWORD_PTR ignored;
@@ -53,10 +55,25 @@ static BOOL capture_window(HWND window)
     bitmap=CreateDIBSection(dc,&info,DIB_RGB_COLORS,&pixels,NULL,0);
     if(!bitmap){DeleteDC(dc);return FALSE;}
     previous=SelectObject(dc,bitmap);ZeroMemory(pixels,size);
-    ok=PrintWindow(window,dc,0);GdiFlush();
+    if(capture_live){HDC live=GetWindowDC(window);
+        ok=live && BitBlt(dc,0,0,r.right-r.left,r.bottom-r.top,live,0,0,SRCCOPY);
+        if(live)ReleaseDC(window,live);
+    }else ok=PrintWindow(window,dc,0);
+    GdiFlush();
+    if(capture_live && capture_compare){
+        DWORD frame_bytes=(r.right-r.left)*(client.y-r.top)*4;
+        if(!hover_before){hover_before=HeapAlloc(GetProcessHeap(),0,frame_bytes);ok=ok && hover_before!=NULL;
+            if(hover_before){memcpy(hover_before,pixels,frame_bytes);hover_bytes=frame_bytes;}}
+        else {DWORD changed=0,offset;
+            if(frame_bytes==hover_bytes)for(offset=0;offset<frame_bytes;offset+=4)
+                if(memcmp(hover_before+offset,(BYTE *)pixels+offset,3))++changed;
+            printf("HOVER PIXELS before-bytes=%lu after-bytes=%lu changed=%lu\n",hover_bytes,frame_bytes,changed);
+            ok=ok && frame_bytes==hover_bytes && !changed;HeapFree(GetProcessHeap(),0,hover_before);hover_before=NULL;
+        }
+    }
     {DWORD offset;BOOL changed=FALSE;
         for(offset=0;offset<size;++offset)if(((BYTE *)pixels)[offset]){changed=TRUE;break;}
-        printf("CAPTURE print=%u nonblank=%u\n",ok,changed);fflush(stdout);
+        printf("CAPTURE live=%u success=%u nonblank=%u\n",capture_live,ok,changed);fflush(stdout);
         ok=ok && changed;
     }
     captured[sequence]=window;
@@ -133,13 +150,45 @@ static BOOL launch(PCWSTR root,PCWSTR options,PCWSTR guest,PWSTR desktop,DWORD w
 #define CHECK(x) do {if(!(x)){fprintf(stderr,"FAIL line=%d error=%lu %s\n",__LINE__,GetLastError(),#x);result=1;goto done;}}while(0)
 int wmain(int argc,WCHAR **argv)
 {
-    WCHAR name[80];HDESK desktop=NULL,original=GetThreadDesktop(GetCurrentThreadId());int result=0;BOOL reverse;
+    WCHAR name[80];HDESK desktop=NULL,input=NULL,original=GetThreadDesktop(GetCurrentThreadId());int result=0;BOOL reverse;
     CHECK(argc==2 || argc==3);
     runtime_root=argv[1];
     reverse=argc==3 && !wcscmp(argv[2],L"off-on");
     swprintf_s(name,80,L"WowStyle-%lu",GetCurrentProcessId());
     desktop=CreateDesktopW(name,NULL,NULL,0,GENERIC_ALL,NULL);CHECK(desktop);
     CHECK(SetThreadDesktop(desktop));
+    if(argc==3 && !wcsncmp(argv[2],L"ui",2)){
+        HMENU menu,help;DWORD_PTR reply;RECT r;POINT client={0};int n,count;UINT about=0;
+        BOOL enabled=wcscmp(argv[2],L"ui-off")!=0;
+        CHECK(launch(argv[1],enabled?(!wcscmp(argv[2],L"ui-all")?L"--win16-style-all":L"--win16-style"):L"",L"WINMINE.EXE",name,20000));
+        CHECK(await_window(desktop,FALSE) && marked(mine,enabled));
+        menu=GetMenu(mine);CHECK(menu);count=GetMenuItemCount(menu);CHECK(count>0);
+        help=GetSubMenu(menu,count-1);CHECK(help);
+        for(n=0;n<GetMenuItemCount(help);++n){
+            WCHAR text[128]={0};UINT id=GetMenuItemID(help,n);GetMenuStringW(help,(UINT)n,text,128,MF_BYPOSITION);
+            wprintf(L"HELP ITEM index=%d id=%u text=%ls\n",n,id,text);
+            if(wcsstr(text,L"About"))about=id;
+        }
+        CHECK(about && about!=(UINT)-1);
+        if(GetEnvironmentVariableW(L"MVDM_STYLE_ACTIVATE_DESKTOP",name,80)){
+            input=OpenInputDesktop(0,FALSE,DESKTOP_SWITCHDESKTOP);CHECK(input && SwitchDesktop(desktop));
+            SetForegroundWindow(mine);Sleep(300);
+        }
+        CHECK(GetWindowRect(mine,&r) && ClientToScreen(mine,&client));
+        capture_repeat=TRUE;capture_live=input!=NULL;capture_compare=enabled && input!=NULL;CHECK(capture_window(mine));
+        if(input){CHECK(SetCursorPos(r.left+12,client.y-10));Sleep(500);}
+        CHECK(SendMessageTimeoutW(mine,WM_NCMOUSEMOVE,HTMENU,MAKELPARAM(r.left+12,client.y-10),SMTO_BLOCK|SMTO_ABORTIFHUNG,5000,&reply));
+        CHECK(SendMessageTimeoutW(mine,WM_SETCURSOR,(WPARAM)mine,MAKELPARAM(HTMENU,WM_MOUSEMOVE),SMTO_BLOCK|SMTO_ABORTIFHUNG,5000,&reply));
+        Sleep(200);CHECK(capture_window(mine));capture_repeat=FALSE;capture_live=FALSE;
+        CHECK(PostMessageW(mine,WM_COMMAND,about,0));CHECK(await_window(desktop,TRUE));
+        CHECK(marked(dialog,enabled));
+        {WCHAR title[256];CHECK(GetWindowTextW(dialog,title,256));
+            if(enabled)CHECK(!wcsstr(title+14,L"(Win16 Style) "));}
+        CHECK(PostMessageW(dialog,WM_COMMAND,IDOK,0));
+        {DWORD until=GetTickCount()+5000;while(IsWindow(dialog) && (LONG)(until-GetTickCount())>0)Sleep(50);
+            CHECK(!IsWindow(dialog) && IsWindow(mine));}
+        printf("PASS real WINMINE task-owned About; menu input=%s\n",input?"physical":"messages only");goto done;
+    }
     if(argc==3 && (!wcsncmp(argv[2],L"child-",6) || !wcsncmp(argv[2],L"relay-",6) ||
         !wcsncmp(argv[2],L"separate-",9) || !wcsncmp(argv[2],L"separate-a-",11))){
         BOOL separate=!wcsncmp(argv[2],L"separate-",9);
@@ -204,6 +253,7 @@ int wmain(int argc,WCHAR **argv)
     CHECK(await_window(desktop,TRUE) && marked(dialog,reverse) && marked(mine,!reverse));
     puts("PASS real shared WOW: launcher retirement, mixed task policies and modal title");
 done:
+    if(input){SwitchDesktop(input);CloseDesktop(input);}
     if(retained_launcher){
         if(WaitForSingleObject(retained_launcher,0)!=WAIT_OBJECT_0)TerminateProcess(retained_launcher,98);
         CloseHandle(retained_launcher);

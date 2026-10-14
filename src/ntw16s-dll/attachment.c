@@ -169,6 +169,13 @@ static LRESULT CALLBACK creation_return(int code,WPARAM p,LPARAM l)
     if(code>=0 && scope && scope->enabled){
         const CWPRETSTRUCT *m=(const CWPRETSTRUCT *)l;
         BOOL created=m->message==WM_CREATE && m->lResult!=-1;
+        /* Dialog managers finish layout and format their caption during
+         * WM_INITDIALOG. Attaching a marker at WM_CREATE contaminates that
+         * GetWindowText/format/SetWindowText sequence (e.g. ShellAbout).
+         * Keep its pending style until the real dialog initialization exits. */
+        if(created && class_is(m->hwnd,L"#32770")){
+            SetLastError(saved);return result;
+        }
         if(m->message==WM_NCDESTROY){pending_window *pending=take_pending(scope,m->hwnd);free(pending);}
         if((created || m->message==WM_INITDIALOG) && IsWindow(m->hwnd)){
             pending_window *pending=take_pending(scope,m->hwnd);

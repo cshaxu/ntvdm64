@@ -1691,14 +1691,14 @@ static void test_focused_typography(HWND w,int special)
         REQUIRE(bounds.left>=0 && bounds.top>=0 && bounds.right<=parent.right && bounds.bottom<=parent.bottom);
         REQUIRE(GetClientRect(child,&client));dc=GetDC(child);REQUIRE(dc);
         old=SelectObject(dc,(HFONT)SendMessageW(child,WM_GETFONT,0,0));
-        REQUIRE(GetTextMetricsW(dc,&tm) && tm.tmHeight==24);
+        REQUIRE(GetTextMetricsW(dc,&tm) && tm.tmHeight==20);
         DrawTextW(dc,label,-1,&text,DT_CALCRECT|DT_SINGLELINE);
         if(button)padding=MulDiv(kind==BS_PUSHBUTTON || kind==BS_DEFPUSHBUTTON || kind==BS_GROUPBOX?8:18,(int)GetDpiForWindow(child),96);
-        printf("FONT24 FIT sample=%d id=%d text=%ld available=%ld height=%ld\n",special,GetDlgCtrlID(child),text.right,client.right-padding,client.bottom);
+        printf("FONT20 FIT sample=%d id=%d text=%ld available=%ld height=%ld\n",special,GetDlgCtrlID(child),text.right,client.right-padding,client.bottom);
         SelectObject(dc,old);ReleaseDC(child,dc);
         REQUIRE(text.right+padding<=client.right && tm.tmHeight<=client.bottom);++checked;
     }
-    printf("FONT24 FOCUSED PASS special=%d labels=%u bounds and actual text extents\n",special,checked);
+    printf("FONT20 FOCUSED PASS special=%d labels=%u bounds and actual text extents\n",special,checked);
 }
 
 static void test_showcase_viewport(HWND w)
@@ -1959,7 +1959,7 @@ static HWND create_sample(int index,HWND owner,BOOL state)
         if(test_mode){
             REQUIRE((HFONT)SendMessageW(list,WM_GETFONT,0,0)==gallery_font);
             for(n=0;n<30;++n){REQUIRE(SendMessageW(list,LB_GETITEMRECT,n,(LPARAM)&styled_rects[n])!=LB_ERR);
-                REQUIRE(styled_rects[n].bottom-styled_rects[n].top==24);}
+                REQUIRE(styled_rects[n].bottom-styled_rects[n].top==20);}
             {HDC dc=CreateCompatibleDC(NULL);BITMAPINFO info={0};HBITMAP bitmap,old;void *pixels;
                 win16_style_palette palette;win16_style_default_palette(&palette);
                 info.bmiHeader.biSize=sizeof(BITMAPINFOHEADER);info.bmiHeader.biWidth=440;
@@ -2182,7 +2182,7 @@ static HWND create_sample(int index,HWND owner,BOOL state)
                 point.x=wr.left+(bar.rects[2].left+bar.rects[2].right)/2;
                 point.y=wr.top+(bar.rects[2].top+bar.rects[2].bottom)/2;
                 win16_style_bar_free(&bar);
-                REQUIRE(SendMessageW(w,WM_NCHITTEST,0,MAKELPARAM(point.x,point.y))==HTMENU);
+                REQUIRE(SendMessageW(w,WM_NCHITTEST,0,MAKELPARAM(point.x,point.y))==HTBORDER);
                 SendMessageW(w,WM_NCLBUTTONDOWN,HTMENU,MAKELPARAM(point.x,point.y));
                 while(PeekMessageW(&msg,w,WM_COMMAND,WM_COMMAND,PM_REMOVE))DispatchMessageW(&msg);
                 REQUIRE(!IsZoomed(child) && !IsZoomed(w));
@@ -2549,7 +2549,7 @@ static void test_menu_font(HWND w)
     UINT dpi=GetDpiForWindow(w);
     REQUIRE(control && old_title && dc);
     saved=SelectObject(dc,old_title);REQUIRE(GetTextMetricsW(dc,&old_tm));
-    SelectObject(dc,control);REQUIRE(GetTextMetricsW(dc,&tm) && tm.tmHeight==24 && control==gallery_font);
+    SelectObject(dc,control);REQUIRE(GetTextMetricsW(dc,&tm) && tm.tmHeight==20 && control==gallery_font);
     SelectObject(dc,saved);DeleteDC(dc);DeleteObject(old_title);
     REQUIRE(GetWindowRect(w,&outer));
     REQUIRE(win16_style_measure(outer.right-outer.left,outer.bottom-outer.top,dpi,
@@ -2561,7 +2561,7 @@ static void test_menu_font(HWND w)
      * unscaled title raster. Otherwise both text and its hit cell shrink. */
     REQUIRE(client.y-outer.top==origin.y+bar.height+frame.unit);
     {POINT p={outer.left+bar.rects[0].right-1,outer.top+bar.rects[0].bottom-1};
-        REQUIRE(SendMessageW(w,WM_NCHITTEST,0,MAKELPARAM(p.x,p.y))==HTMENU);}
+        REQUIRE(SendMessageW(w,WM_NCHITTEST,0,MAKELPARAM(p.x,p.y))==HTBORDER);}
     printf("MENU FONT PASS dpi=%u control/menu-height=%ld former-title-height=%ld bar-height=%d\n",
         dpi,tm.tmHeight,old_tm.tmHeight,bar.height);
     win16_style_bar_free(&bar);
@@ -2574,7 +2574,7 @@ static void test_menu_font(HWND w)
         REQUIRE(win16_style_control_remove(button));
         REQUIRE((HFONT)SendMessageW(button,WM_GETFONT,0,0)==borrowed);
         REQUIRE(GetObjectW(borrowed,sizeof(after),&after)==sizeof(after) && !memcmp(&before,&after,sizeof(before)));
-        DestroyWindow(button);puts("FONT24 BINDING PASS effective font remains24; latest borrowed application font restored intact");}
+        DestroyWindow(button);puts("FONT20 BINDING PASS effective font remains20; latest borrowed application font restored intact");}
 }
 
 void win16_style_viewport_test(const WCHAR *path)
@@ -2758,7 +2758,7 @@ void win16_style_gallery_test(const WCHAR *path)
                     REQUIRE(win16_style_measure(outer.right-outer.left,outer.bottom-outer.top,
                         GetDpiForWindow(w),samples[i].style,samples[i].ex,FALSE,&base));
                     hit.x=outer.left+base.client.left+10;hit.y=outer.top+base.client.top+2;
-                    REQUIRE(SendMessageW(w,WM_NCHITTEST,0,MAKELPARAM(hit.x,hit.y))==HTMENU);
+                    REQUIRE(SendMessageW(w,WM_NCHITTEST,0,MAKELPARAM(hit.x,hit.y))==HTBORDER);
                     REQUIRE(SetTimer(w,97,1000,NULL));menu_test_action=1;menu_test_timeout=FALSE;
                     menu_test_bar=TRUE;
                     SendMessageW(w,WM_NCLBUTTONDOWN,HTMENU,MAKELPARAM(hit.x,hit.y));

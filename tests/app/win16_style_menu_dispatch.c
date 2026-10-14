@@ -77,7 +77,10 @@ int main(void)
         dc=GetWindowDC(w);CHECK(dc);original=GetPixel(dc,x,y);
         CHECK(SetPixel(dc,x,y,RGB(37,83,119))!=CLR_INVALID);ReleaseDC(w,dc);
         ClientToScreen(w,&click);click.y-=12;damage_probe=TRUE;CHECK(SetTimer(w,998,1000,NULL));
-        SendMessageW(w,WM_NCLBUTTONDOWN,HTMENU,MAKELPARAM(click.x,click.y));KillTimer(w,998);
+        {LRESULT hit=SendMessageW(w,WM_NCHITTEST,0,MAKELPARAM(click.x,click.y));
+            CHECK(hit==HTBORDER);
+            SendMessageW(w,WM_NCLBUTTONDOWN,(WPARAM)hit,MAKELPARAM(click.x,click.y));}
+        KillTimer(w,998);
         UpdateWindow(w);UpdateWindow(button);damage_probe=FALSE;
         printf("MENU CLICK DAMAGE idle=%u clientPaint=%u erase=%u updateUIState=%u\n",idles,client_paints,erases,ui_updates);
         dc=GetWindowDC(w);CHECK(dc);observed=GetPixel(dc,x,y);SetPixel(dc,x,y,original);ReleaseDC(w,dc);

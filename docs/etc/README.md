@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T445 S9 integrated acceptance](evidence/m0-t445-s9-integrated-acceptance.md)
+records20px typography, real menu hover and About ownership investigation.
+
 [T445 S8 integration evidence](evidence/m0-t445-s8-style-integration.md)
 records implementation attempts, focused tests and remaining delivery gates.
 

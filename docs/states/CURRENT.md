@@ -1,6 +1,6 @@
 # Project Status
 
-**Active: M0 T445 S8**
+**Active: M0 T445 S9**
 
 S4 r261 is accepted; propagation/core split/integration/final acceptance are S6/S7/S8/S9.
 Owner explicitly closes S5 without manual acceptance on 2026-10-13.
@@ -11,39 +11,34 @@ See the [S1 closure design](../etc/evidence/m0-t445-s1-installation-design.md).
 
 ## Active Packet
 
-### NTW16S product integration implementation
+### Integrated style acceptance and owner-reported corrections
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T445 S8, Ordinary Mode; implementation then sequential review. |
+| Identifier Mode | M0 T445 S9, Ordinary Mode; single-person implementation then sequential review. |
 | Candidate Proposal | [Window appearance](../proposals/proposal-win31-window-appearance-001.md). |
-| Admission And Approval | Owner approves the S8 design and explicitly selects WOW32.DLL, not ntvdm.exe or Windows WOW64, as the Win16 integration owner; implementation may begin. S7 manual acceptance was not performed. |
-| Objective | Integrate the dual NTW16S DLLs through native Hooks and WOW32 per-task window creation, controls and finite API bindings, preserving one renderer. |
+| Admission And Approval | Owner confirms style activation, admits S9 and requests20px uniform type, WINMINE native-hover repair and About/winver ownership investigation. |
+| Objective | Unify title/menu/control System bitmap type at20px; reproduce and repair integrated menu leakage; classify and correct task-owned About style gaps. |
 | Non-goals | No guest/mirror edits, new public option, RPC redesign, global theme mutation, NTCON styling, ntvdm.exe appearance owner or unrelated WOW recovery. |
-| Reference Baseline | Delivered/pushed S7 292664b02; thirteen published images and automated gates retained. S7 manual acceptance was not performed. |
+| Reference Baseline | Delivered/pushed S8 466d816bc, thirteen published images. Owner confirms activation, not complete visual acceptance. |
 | Files And ABI Surface | src/ntw16s-dll, src/nthook32-dll (both widths), src/wow32-dll, thin W16Style consumer as needed, tests/build/publication and documents; local DLL ABI only, no wire changes. |
 | Applicable Rules | All authorities; background owned build/tests; preserve unrelated changes; no security bypass. |
-| Verification | Both-width real creation/control/scroll/lifecycle tests; mixed shared and separate WOW policy; retained S7 propagation and package gates; background builds/tests, coherent thirteen-image publication and hashes, governance/diff review. |
-| Expected Markers | One renderer, two installation entries; Off/Win16/All policy table; explicit creation, dynamic children, failure, teardown and API gaps. |
+| Verification | Original S8 gates plus20px raster/metrics checks, actual WINMINE hover and About window/process/call evidence; background probes, coherent thirteen-image publication, governance and review. |
+| Expected Markers |20px title/menu/controls; no host menu-item overlay; About producer and policy are proved, unchanged version content; no guest/mirror diff. |
 | Asset Needs | Existing admitted NTW16S resources and source; no new import. |
 | Reporting Requirements | Actual installed DLL and HWND policy, source owners, test results, retained WOW frontiers, publication hashes and remaining physical-acceptance limits. |
 | Stop Conditions | Guest/mirror or global settings change; new resource import or broader application-layout engine; security block or unexplained product regression. |
 | Exit Criteria | Approved implementation and required tests complete; coherent release/system32 publication verified, reviewed, committed/pushed, then owner acceptance. |
-| Original Owner Request | Approve the design and begin; Win16 integrates through WOW32.DLL calling ntw16s32.dll, not ntvdm.exe or Windows WOW64. |
+| Original Owner Request | “准入S9”;24px is too large, use20px everywhere; hover leaks native menu items; is the non-Win16 About/winver interface reasonable? |
 | Similar-Issue Sweep | Native A/W and both widths; WOW shared/separate tasks; modal/modeless/MDI/dynamic controls; scroll, theme, font and destruction boundaries. |
 
-S8 design is recorded in the [integration draft](../etc/operations/t445-s8-style-integration-design.md).
-S7 is delivered at 292664b02, including Queue/proposal edits. Owner directs
-the transition without manual acceptance; this is not a manual passing result.
-r107 publishes r090; r111 CUI, r129 DOS leaf, r131 full DOS chains and r132
-observer checks remain automated evidence. The approved S8 implementation is
-now completes its automated delivery gates; S8 r075 publishes the tested r059 package.
-Owner requires single-person implementation and separate-role review through
-publication, test, commit/push and then manual acceptance. The
-[S8 evidence](../etc/evidence/m0-t445-s8-style-integration.md) records both-width
-attachment, UI, propagation, Product/Control and deployed thirteen-image hash
-checks. Await owner acceptance; S9 is not admitted. SOL/WRITE remain at their
-known initialization-error frontiers, not functional success.
+S8 delivered466d816bc and its [evidence](../etc/evidence/m0-t445-s8-style-integration.md)
+remain the baseline. Owner confirms activation and admits S9 corrections, not
+full visual acceptance. [S9 evidence](../etc/evidence/m0-t445-s9-integrated-acceptance.md)
+records passing local/integration/Product/Control gates and r023 physical hover
+(zero changed pixels). r024 publishes13 matching images to both release targets;
+S9 P1 carries this verified release. Owner visual acceptance remains pending.
+SOL/WRITE retain known initialization errors, not functional success.
 
 S7 DIV-331's approved environment repair is verified by real guest resize
 1184->1200 for1185 bytes, without arena damage. The next failure was bootstrap

@@ -18,9 +18,9 @@ BOOL win16_style_measure(int width,int height,UINT dpi,DWORD style,DWORD ex_styl
     top=l->border;
     /* Original VGA: 18-pixel artwork, 19-pixel button pitch. USER's
      * 20-pixel CYCAPTION includes both boundary lines, not 20 content rows. */
-    /* Owner's unified24-pixel type must also fit on a96-DPI display. */
+    /* Owner's unified20-pixel type must also fit on a96-DPI display. */
     caption_height=MulDiv(18,(int)dpi,96);
-    if(caption)caption_height=max(24,caption_height);
+    if(caption)caption_height=max(20,caption_height);
     l->corner.cx=l->border+button;
     l->corner.cy=l->border+caption_height+l->unit;
     SetRect(&l->outer,0,0,width,height);
