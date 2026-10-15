@@ -3869,3 +3869,210 @@ guest direct queries inside enumeration, nested creation/destruction, early
 stop, discovery failure and retirement. Existing CBT acceptance alone does
 not prove these routes. This audit changes no runtime or guest and does not
 claim the new group implemented.
+
+### Discovery group implementation contract
+
+Use an owned native-call seam for the three synchronous enumeration APIs and
+the HWND query families, including active/foreground fallback producers.
+The original thunks and W32EnumWindowFunc remain unchanged. Each enumeration
+callback first publishes the exact full HWND through the existing graph
+owner, then invokes the original callback exactly once with its unchanged
+parameter. Do not infer guest execution ownership from the enumerated window:
+the enumerating task owns execution. Acquire/release only the existing USER
+data lock around graph publication, never around the guest callback.
+
+Native NULL/failure stays native NULL/failure with its last error; no invented
+window is published. Successful discovery must publish before returning. If
+publication fails, return the API failure value with the publication error;
+enumeration stops without calling that guest callback, and a remembered
+publication failure overrides EnumChildWindows' native return convention.
+Do not retry native enumeration or replay guest callbacks. Callback exceptions
+propagate without a persistent callback context (the context is call-local).
+On normal enumeration return refresh the graph to retire objects removed by
+callbacks; preserve native result/error when publication succeeds. Existing
+full-identity sampling rejects observed disappearance/reuse with no partial
+graph commit. This does not promise a cross-process native USER tree lock.
+
+The registered WOWFindWindow slot must reuse this same seam instead of keeping
+its raw FindWindow wrapper. No original algorithm is replaced or duplicated;
+modern USER remains native search/enumeration owner, original WOW owns its
+conversion and compatibility cases. Mutation wrappers already doing return
+publication stay separate and unchanged. The complete group requires native
+and guest callback/direct-reader acceptance before any publication.
+
+### Discovery candidate and first grouped acceptance
+
+Owned wow_user_discovery.c supplies query/enumeration publication seams;
+the private header selects them for original thunks, registered FindWindow
+reuses the seam, and the provider build selects the new unit. No original
+mirror or guest changes. The graph-snapshot CCPU fixture adds discovery
+after a prior snapshot, child-ID reads inside callbacks, nesting, early stop,
+exceptions, missing-owner publication failure and recovery. Native callbacks
+are publication witnesses, not real Win16 discovery acceptance.
+
+Hidden supervisor26204 (2026-10-15T13:33:55Z;45-minute deadline) owns
+discovery-group-r1. Build child11080 completes0. Graph-snapshot child31936
+reports WOW_DISCOVERY_CCPU errors=0 and WOW_PAGE_DOMAIN_LIFECYCLE_OK,
+including retained native-slot reuse. Adjacent checks continue under the
+same supervisor; no runtime candidate is published or committed yet.
+
+Second-role source review requires another entry-state case: enumeration
+with exclusive_held already TRUE. The current publication helper preserves
+that incoming lock, but native/guest callout must release and restore it,
+including exceptions. Reuse existing leave_for_callout/reenter_after_callout
+or the established native-call boundary, not another lock or task selection
+based on the enumerated window. Add held/unheld entry tests to this group.
+The passing unheld fixture does not establish that additional contract.
+
+Real-guest acceptance source now pairs independently authored
+win16_discovery_probe.asm with wow_discovery_peer.c and the hidden runner
+verify-win16-discovery.ps1. After InitTask/InitApp, the guest creates READY.DAT
+and waits using original KERNEL _lopen (ordinal85), not a USER message loop.
+Only then does the native peer on the observer's private desktop create a
+STATIC window and signal GO.DAT. The guest uses original FindWindow50,
+EnumWindows54 and GetClassName58, checks callback LPARAM and class bytes,
+stops at the matched window, frees its MakeProcInstance and emits a14-byte
+report. The runner requires zero errors, one match, two queries, cleanup and
+normal launcher completion. Neither source edits nor replaces guest media.
+This test is prepared, not yet accepted; the CCPU negative-space assertion
+remains necessary because unrelated runtime activity might independently
+refresh a desktop snapshot before a real-guest query.
+
+The first supervisor completes0: all12 selected boundary cases pass, including
+graph-snapshot, window-borrow/reclaim, process-retirement, dialog-lifecycle,
+menu-resource/cleanup, thunk-scope, native-send/nested, task-lifecycle and
+native-creation. Only after its terminal result are shared inputs revised.
+Enumeration now brackets the complete native call with the existing runtime
+callout unlock/restore pair, using finally for normal and exceptional returns.
+The three APIs share that bounded spelling; they neither switch tasks nor
+interpret callback handles as execution owners. Query publication preserves
+its caller's existing lock. The CCPU fixture runs both held and unheld entry
+states and asserts callbacks are unlocked and return/exception restores entry.
+
+Second hidden supervisor29740 starts2026-10-15T13:48:10Z with45-minute bound
+at discovery-group-r2. It builds the complete revised candidate, repeats the
+affected real-CCPU graph group, then runs real Win16 discovery and three-mode
+SOL/WINMINE acceptance. Package construction retains P11's other twelve
+images and original companions, replacing only WOW32.DLL. Runtime delivery
+is still pending; no stage or test outcome is inferred from launching it.
+
+R2 stops at provider link: leave_for_callout/reenter_after_callout are worker
+internal spellings, absent from its DLL exports. Their bodies simply call
+the existing exported runtime leave/enter functions. The correction uses
+those existing functions directly, preserving the same finally-based scope
+without adding ABI exports or another implementation. No guest ran in r2.
+R3 supervisor26428 starts2026-10-15T13:51:05Z with the same complete test
+sequence and a fresh evidence directory; its build completes0. R2 failure
+logs remain unchanged. Remaining acceptance and publication are not claimed.
+
+R3 graph-snapshot passes both held=0/1 with errors0, including callback
+unlock, normal/exception restoration, nested discovery, failure and recovery.
+Real Win16 discovery also passes: report errors0, found1350, matched1,
+queries2, freed1; native peer creates full HWND01290546 only after READY,
+and guest/launcher complete normally. This adds a real original USER16
+FindWindow/EnumWindows/GetClassName witness to the CCPU publication tests.
+
+The same sealed candidate passes SOL Off/Win16 and WINMINE Off. WINMINE
+Win16 then fails probe9: right-click changes cell/counter, but F2 reset keeps
+the flagged cell hash62c0567b rather than covered3cc8733b for five seconds.
+All-mode cases have not run because the supervisor stops at that failure.
+Observer later reports exitFFFFFFFF, but runner finally forcibly cleans the
+owned package after the failed probe; that is not independent crash evidence.
+Do not attribute the timeout to a particular query without source/trace or
+controlled baseline evidence. The complete application gate fails and the
+candidate remains unpublished. P11 remains the runtime baseline.
+
+### Owner-directed discovery delivery review
+
+Owner requires preserving a compiled, tested, published and pushed baseline
+before the next wiring group. Controlled comparison discovery-compare-r1
+(hidden PID17992) runs the unchanged gameplay probe against sealed P11 and
+the sealed r3 candidate with the same environment whitelist and Win16 mode.
+Both pass flag/counter, F2 reset, cell opening and normal launcher exit;
+reset takes62ms and63ms respectively. No production or probe change is made
+to obtain these results. Original WU32TranslateAccelerator still forwards
+the converted MSG to native TranslateAccelerator; the style menu filter only
+consumes left/right navigation during active menu tracking, not F2.
+These facts do not explain the earlier timeout or establish its root cause.
+Retain that failure rather than describing a repaired accelerator defect.
+
+Fresh hidden supervisor27256 starts2026-10-15T14:02:07Z, with45-minute bound,
+at discovery-delivery-r1. It repeats all12 boundary cases on the revised
+held/unheld implementation, then all three SOL/WINMINE style modes, three
+WRITE initialization frontiers, real guest CBT and both DOS17 matrices.
+The sealed r3 package is the only candidate; neither subsequent cache objects
+nor diagnostic images replace its binaries. Acceptance/publication results
+are recorded below only after terminal completion.
+
+Second-role scope review: the three enumeration seams retain native callback
+selection, original WOW conversion and task ownership. Only the existing
+shared-view publisher is inserted before returning an HWND to USER16.
+Stack-local callback state cannot survive the synchronous native call;
+finally restores an incoming data lock even when a callback raises. Native
+failure and adapter publication failure remain distinct, with no callback
+replay or invented success. The registered FindWindow consumer is included.
+No mirror, guest, wire or worker-export change is present. The independently
+authored NE is a disposable test, not a replacement guest image.
+
+This bounded P does not certify every HWND-producing API. In particular,
+SetCapture's previous-handle result and GetWindowLong(GWL_HWNDPARENT) need
+their mutation/relationship-owner audit before extending this seam; neither
+is silently marked covered by a FindWindow test. Full callback-family,
+WRITE editing/saving and later message/task obligations remain open in S2
+and the existing working plan. Do not expand this delivery while its gates run.
+
+The fresh twelve-case boundary sequence completes with exit0 for every case.
+Graph-snapshot again reports errors0 for held=0/1, and its original CCPU
+backing/reuse/retirement checks pass. Candidate WOW32.DLL is x86 Release
+/O2 /MT /Gz, SHA256
+5E782BC02845ABC20A908CB79C03A18EC851A3E68B0FA7537913A95391191A16.
+The shared cache is reused under Ninja dependencies; the r3 sealed DLL,
+not a later incidental link, remains the application/publication input.
+
+The application sequence stops at SOL Win16 readiness (probe5): native menu
+command1000 is enabled, but the sampled tableau never reaches the required
+stable patterned pixels. SOL/WINMINE Off already pass. Keep this failed run;
+the subsequent forced fixture cleanup does not prove a guest crash. The SOL
+probe now logs last sampled hash/pattern and captures a readiness-failure
+bitmap; success assertions, time bounds and input sequence are unchanged.
+No production code is changed in response to either intermittent failure.
+
+Controlled SOL comparison discovery-sol-compare-r1 (hidden PID10340) runs
+the same diagnostic probe against P11 and sealed r3, both Win16 mode: both
+pass readiness, deal, stock draw and normal exit. This is a successful
+comparison, not a causal explanation or proof that intermittent failure is
+fixed. The earlier WINMINE F2 and SOL readiness failures remain unresolved
+acceptance reliability observations inside active S2; neither is attributed
+to the original guest or waived as an original-media limitation.
+
+Remaining checks run serially in discovery-remaining-r1 (hidden PID33192,
+15-minute bound). All-mode SOL and WINMINE pass gameplay and normal exit.
+The final gate composes unchanged Off results from discovery-delivery-r1,
+Win16 results from the two explicit baseline/candidate comparisons, and All
+results here, checking each run's input hashes against the same sealed r3
+package. It does not relabel either aborted suite as an all-pass run, remove
+failure logs, or claim a deterministic repeated-run reliability guarantee.
+
+### S2 P12 publication and acceptance boundary
+
+Remaining supervisor33192 completes apps-result0: All-mode games pass;
+WRITE Off/Win16/All expose visible MSWRITE_MENU, MSWRITE_DOC and
+MSWRITE_PAGEINFO; real guest CBT completes0. Console17 and Window17 each
+contain17 expected/actual matches. WRITE is an initialization frontier,
+not editing/saving or normal-exit acceptance. All twelve revised boundary
+cases and real guest discovery retain the evidence described above.
+
+Hidden publication supervisor33696, discovery-publish-r1, completes0 after
+independently checking those results, input identities and documentation.
+It preserves recoverable backups, copies the complete thirteen-image set to
+assets/release and O:/winnt/system32, and verifies every SHA256 and PE machine.
+WOW32.DLL is the sole changed image (5E782BC0...191A16 above); the other twelve
+images and all46 original guest/configuration companions match sealed P11.
+The release manifest records the full set. assets/winnt.zip remains unchanged
+from the owner-owned dirty input and is excluded from this delivery.
+
+P12 is a bounded discovery/publication baseline, not S2/T447 closure. The
+two intermittent application-test failures remain explicitly unresolved;
+the successful controlled comparisons and final per-mode results do not prove
+their absence. Subsequent source-led work must preserve this baseline while
+addressing the retained callback/object inventory and unexplained failures.

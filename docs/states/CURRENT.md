@@ -50,14 +50,14 @@ gaps and tests accept newly connected code, not select successive patches.
 Proven-composable original logic must replace its autonomous counterpart in
 the same repair, deleting that counterpart rather than deferring migration.
 Owner requires grouped implementation/testing and delivery before more wiring.
-P9 is6fe4272fa. S2 P10 bitmap registration now publishes the scoped original
-converter instead of the uninitialized-context wrapper; exception cleanup is
-paired. Bitmap tests,14 boundary cases, three-mode WINMINE gameplay, guest CBT
-and both DOS17 matrices pass. Coherent13 images are published to both locations;
-final checks pass. P11 repairs premature style-driven WM_SIZE during hidden
-creation. SOL deal/draw/normal exit now pass in Off/Win16/All; both style DLLs
-are published. WRITE editing/saving and other callback coverage remain open.
-Additional mirror/guest diff is zero. Preserve assets/winnt.zip. S2 stays open.
+P10 restores bitmap registration; P11 repairs premature hidden-window WM_SIZE.
+S2 P12 now publishes discovered HWNDs before original USER16 direct queries
+and enumeration callbacks. Twelve boundary groups, real Win16 discovery/CBT,
+three-mode SOL/WINMINE gameplay and both DOS17 matrices pass; WRITE retains
+its initialization frontier. Earlier intermittent F2/readiness timeouts remain
+unexplained in the graph audit, not claimed fixed by subsequent passing runs.
+All13 images match both publication locations. No new mirror/guest or public
+ABI diff. Preserve assets/winnt.zip. Other callback/WRITE gaps keep S2 open.
 
 ## Active Packet
 
@@ -347,7 +347,7 @@ actual provider event/object ownership. This is not abnormal task termination.
 | Objective | Deliver original callback execution and dependency-complete W02 object/shared-view foundations: creation, first callbacks, updates, rollback and normal retirement. Retain the whole-T audit; S3 owns basic controls/menus, S4 full C01/C02 messaging, S5 task termination. No patch-by-patch discovery. |
 | Non-goals | No guest patches, global re-audit, second scheduler, broad USER-server import or assumed heap diagnosis; no silent absorption of other W owners. Original same-worker WOW SMS delivery is admitted for design evaluation only. |
 | Reference Baseline | f950ffd38 S1 source audit; accepted ca0abb7c4 thirteen-image release; T422 E91/E92/E93 and S3 checklist; T430 G03 handoff. |
-| Files And ABI Surface | First repair: mvdm/wow32/wcall16.c DIV-178, wow32-dll callback-frame lease source/header and focused tests, registered provenance/evidence. Reuse original wow32.c resolver without rewriting it. Message binding changes require their exact source design before implementation. No wire/guest ABI change. |
+| Files And ABI Surface | Next reviewed group: native HWND discovery/query and enumeration publication in owned WOW provider seams, redirect header, registration, build and tests; graph audit defines failure/lifetime gates. Reuse original thunks and existing graph owner. Expected additional mirror/guest and public ABI diff: zero. |
 | Applicable Rules | Execution, architecture, coding, documentation, source policy and WOW program gates; original x86 /MT CCPU40; background-only test/build runs. |
 | Verification | Source design and independent diff review; after code connection test actual CallBack16 ordering/rollback, ordinary and nonpresent/remapped resolution, nested callback and lease failure; then affected production gates, DOS17, independent WINMINE/SOL/WRITE and coherent thirteen-image publication. No discovery test loop. |
 | Expected Markers | Original resolver really owns the mapped result; no autonomous mode-dependent callback resolver remains; each acquired frame released on failure, no pre-entry state drift, no alias across CPU reentry; explicit outstanding message/lifetime results. |
@@ -386,12 +386,13 @@ lookup stays separate. Native desktop identity, retained observed/managed WW
 aliases and paired host/guest word updates pass the grouped foundation tests.
 P5 connects the prepared graph at the reviewed callback/native-return boundaries.
 
-S2 P11 builds on P10 (5edea33bb) and c5c09ea26: NTW16S defers automatic hidden
-frame geometry until first show, preserving creation order and explicit install.
-Both-width lifetime/negative-control tests, SOL/WINMINE three-mode gameplay,
-WRITE frontier, guest CBT and Console17/Window17 pass. Only both style DLLs
-change; all13 published identities match in release and system32. No new ABI,
-mirror or guest diff. Graph audit retains logs and limitations. S2 stays open.
+S2 P12 builds on P11 (7c01a09be): owned HWND discovery/enumeration seams
+publish through the existing graph owner, preserving original thunks and
+callback ownership. Only WOW32.DLL changes; other12 images retain P11 identity.
+Real guest discovery,12 boundary groups, SOL/WINMINE three modes, WRITE
+frontier, CBT and Console17/Window17 have passing evidence. Earlier transient
+timeouts are retained, not explained away. Both publication locations match
+the sealed package. No new ABI, mirror or guest diff; S2 remains open.
 T445/T446 release history remains in their linked closure records below.
 
 | Architecture | Images |

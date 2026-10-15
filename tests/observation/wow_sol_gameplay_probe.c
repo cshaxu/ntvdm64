@@ -104,12 +104,13 @@ static BOOL wait_pixels(HANDLE process, int x, int y, int w, int h,
     DWORD before, BOOL changed, const char *phase, DWORD *out)
 {
     ULONGLONG deadline=GetTickCount64()+10000;
-    DWORD previous=0;
+    DWORD previous=0, last=0; BOOL last_pattern=FALSE;
     do {
         BOOL pattern=FALSE;
         DWORD current;
         if(WaitForSingleObject(process,0)!=WAIT_TIMEOUT || !IsWindow(game))return FALSE;
         current=region_hash_detail(game,x,y,w,h,&pattern);
+        last=current;last_pattern=pattern;
         if(current && pattern && (!changed || current!=before)) {
             if(current==previous) {
                 *out=current;printf("phase=%s pixels=%08lx reference=%08lx\n",phase,current,before);
@@ -119,7 +120,7 @@ static BOOL wait_pixels(HANDLE process, int x, int y, int w, int h,
         } else previous=0;
         Sleep(30);
     }while(GetTickCount64()<deadline);
-    printf("phase=%s TIMEOUT\n",phase);
+    printf("phase=%s TIMEOUT pixels=%08lx pattern=%d previous=%08lx\n",phase,last,last_pattern,previous);
     EnumDesktopWindows(GetThreadDesktop(GetCurrentThreadId()),report_window,0);
     return FALSE;
 }
@@ -145,7 +146,9 @@ int main(int argc,char **argv)
     /* Sample the tableau, excluding the status child and non-client menu. */
     if(!wait_deal_ready(process) ||
        !wait_pixels(process,0,120,rect.right,rect.bottom-144,0,FALSE,"ready",&initial) ||
-       !capture(game,argv[3],"before"))return 5;
+       !capture(game,argv[3],"before")) {
+        (void)capture(game,argv[3],"ready-failure");return 5;
+    }
     /* SOL 1:09c7 calls entry 11 (8:00fc), time(NULL): DOS AH=2c
      * uses seconds DH, not hundredths DL. Entry 10 reseeds rand(). A deal
      * in the same second legitimately repeats the initial board. */

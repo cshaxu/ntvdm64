@@ -46,6 +46,19 @@ LRESULT WINAPI wow_native_DefDlgProcA(HWND, UINT, WPARAM, LPARAM);
 LRESULT WINAPI wow_native_DefMDIChildProcA(HWND, UINT, WPARAM, LPARAM);
 LRESULT WINAPI wow_native_DefFrameProcA(HWND, HWND, UINT, WPARAM, LPARAM);
 LRESULT WINAPI wow_native_DispatchMessageA(const MSG *);
+HWND WINAPI wow_native_FindWindowA(LPCSTR, LPCSTR);
+HWND WINAPI wow_native_ChildWindowFromPoint(HWND, POINT);
+HWND WINAPI wow_native_WindowFromPoint(POINT);
+HWND WINAPI wow_native_GetCapture(void);
+HWND WINAPI wow_native_GetFocus(void);
+HWND WINAPI wow_native_GetActiveWindow(void);
+HWND WINAPI wow_native_GetForegroundWindow(void);
+HWND WINAPI wow_native_GetLastActivePopup(HWND);
+HWND WINAPI wow_native_GetNextDlgGroupItem(HWND, HWND, BOOL);
+HWND WINAPI wow_native_GetNextDlgTabItem(HWND, HWND, BOOL);
+BOOL WINAPI wow_native_EnumWindows(WNDENUMPROC, LPARAM);
+BOOL WINAPI wow_native_EnumChildWindows(HWND, WNDENUMPROC, LPARAM);
+BOOL WINAPI wow_native_EnumThreadWindows(DWORD, WNDENUMPROC, LPARAM);
 /* Include only after SDK declarations in the selected original provider.
  * The implementation itself must call native USER without these mappings. */
 #ifdef WOW_USER_PRIVATE_REDIRECT
@@ -92,5 +105,18 @@ LRESULT WINAPI wow_native_DispatchMessageA(const MSG *);
 #define DefMDIChildProcA wow_native_DefMDIChildProcA
 #define DefFrameProcA wow_native_DefFrameProcA
 #define DispatchMessageA wow_native_DispatchMessageA
+#define FindWindowA wow_native_FindWindowA
+#define ChildWindowFromPoint wow_native_ChildWindowFromPoint
+#define WindowFromPoint wow_native_WindowFromPoint
+#define GetCapture wow_native_GetCapture
+#define GetFocus wow_native_GetFocus
+#define GetActiveWindow wow_native_GetActiveWindow
+#define GetForegroundWindow wow_native_GetForegroundWindow
+#define GetLastActivePopup wow_native_GetLastActivePopup
+#define GetNextDlgGroupItem wow_native_GetNextDlgGroupItem
+#define GetNextDlgTabItem wow_native_GetNextDlgTabItem
+#define EnumWindows wow_native_EnumWindows
+#define EnumChildWindows wow_native_EnumChildWindows
+#define EnumThreadWindows wow_native_EnumThreadWindows
 #endif
 #endif

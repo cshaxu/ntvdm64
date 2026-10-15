@@ -10,6 +10,7 @@
 #include "wow_task_parent.h"
 #include "wow_title_policy.h"
 #include "wow_user_object_bindings.h"
+#include "wow_user_private_access.h"
 #include "wow_user_borrow_scope.h"
 #include "wow_menu_native_bindings.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
@@ -424,7 +425,7 @@ static BOOL WINAPI registered_wait_for_message(HANDLE event)
 
 static HWND WINAPI registered_find_window(LPCSTR class_name, LPCSTR window_name)
 {
-    return FindWindowA(class_name, window_name);
+    return wow_native_FindWindowA(class_name, window_name);
 }
 
 static VOID WINAPI registered_fill_window(HWND parent, HWND window, HDC dc,

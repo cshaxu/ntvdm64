@@ -1214,6 +1214,105 @@ cleanup:
         borrow_errors - before, attempts, old_full, new_full, held, fresh);
 }
 
+typedef struct discovery_fixture {
+    HWND parent, child;
+    unsigned calls, children;
+    BOOL stop, raise;
+} discovery_fixture;
+
+static BOOL CALLBACK discovery_child(HWND window, LPARAM parameter)
+{
+    discovery_fixture *scope = (discovery_fixture *)parameter;
+    ULONG backing = mvdm_softpc_wow_page_domain_borrow_window((ULONG)(ULONG_PTR)window);
+    BORROW_CHECK(!wow_user_runtime_current()->exclusive_held);
+    BORROW_CHECK(window == scope->child && backing != 0);
+    if (backing) {
+        BORROW_CHECK(c_sas_dw_at(backing + 104u) == 173u);
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(backing));
+    }
+    ++scope->children;
+    if (scope->raise) RaiseException(0xE0470012u, 0, 0, NULL);
+    return !scope->stop;
+}
+
+static BOOL CALLBACK discovery_window(HWND window, LPARAM parameter)
+{
+    discovery_fixture *scope = (discovery_fixture *)parameter;
+    BORROW_CHECK(!wow_user_runtime_current()->exclusive_held);
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_window_handle(LOWORD(window)) ==
+        (ULONG)(ULONG_PTR)window);
+    if (window != scope->parent) return TRUE;
+    ++scope->calls;
+    scope->child = CreateWindowExA(0, "STATIC", "Discovered child", WS_CHILD,
+        0, 0, 16, 16, window, (HMENU)173, GetModuleHandle(NULL), NULL);
+    BORROW_CHECK(scope->child != NULL);
+    if (scope->child) {
+        (void)wow_native_EnumChildWindows(window, discovery_child, parameter);
+        BORROW_CHECK(DestroyWindow(scope->child));
+        scope->child = NULL;
+    }
+    return TRUE;
+}
+
+static void verify_native_discovery(BOOL held)
+{
+    static wow_user_object_table objects;
+    wow_task_order_process process = {0};
+    wow_task_order_thread thread = {0};
+    wow_user_runtime runtime = WOW_USER_RUNTIME_INITIALIZER;
+    wow_user_runtime_thread binding = {0};
+    discovery_fixture scope = {0};
+    HWND desktop = GetDesktopWindow();
+    DWORD native_error;
+    BOOL caught = FALSE;
+    unsigned before = borrow_errors;
+    ZeroMemory(&objects, sizeof(objects));
+    process.objects = &objects; thread.ppi = &process;
+    BORROW_CHECK(wow_user_runtime_bind(&binding, &runtime, &thread, NULL));
+    BORROW_CHECK(wow_user_window_project_graph(&desktop, 1));
+    scope.parent = CreateWindowExA(0, "STATIC", "S2 discovery after snapshot",
+        WS_POPUP, 0, 0, 32, 32, NULL, NULL, GetModuleHandle(NULL), NULL);
+    BORROW_CHECK(scope.parent != NULL);
+    if (!scope.parent) goto cleanup;
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_window_handle(LOWORD(scope.parent)) !=
+        (ULONG)(ULONG_PTR)scope.parent);
+    if (held) BORROW_CHECK(wow_user_runtime_enter(&binding));
+    SetLastError(0x1234);
+    BORROW_CHECK(wow_native_FindWindowA("STATIC", "S2 discovery after snapshot") == scope.parent);
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_window_handle(LOWORD(scope.parent)) ==
+        (ULONG)(ULONG_PTR)scope.parent && binding.exclusive_held == held);
+    BORROW_CHECK(wow_native_EnumWindows(discovery_window, (LPARAM)&scope));
+    BORROW_CHECK(scope.calls == 1 && scope.children == 1 && binding.exclusive_held == held);
+    BORROW_CHECK(wow_native_EnumThreadWindows(GetCurrentThreadId(), discovery_window, (LPARAM)&scope));
+    BORROW_CHECK(scope.calls == 2 && scope.children == 2 && binding.exclusive_held == held);
+    scope.child = CreateWindowExA(0, "STATIC", "Stop child", WS_CHILD,
+        0, 0, 16, 16, scope.parent, (HMENU)173, GetModuleHandle(NULL), NULL);
+    BORROW_CHECK(scope.child != NULL); scope.stop = TRUE;
+    (void)wow_native_EnumChildWindows(scope.parent, discovery_child, (LPARAM)&scope);
+    BORROW_CHECK(scope.children == 3);
+    scope.raise = TRUE;
+    __try { (void)wow_native_EnumChildWindows(scope.parent, discovery_child, (LPARAM)&scope); }
+    __except(GetExceptionCode() == 0xE0470012u ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) { caught = TRUE; }
+    BORROW_CHECK(caught && binding.exclusive_held == held);
+    scope.raise = FALSE;
+    thread.ppi = NULL; /* Deliberate publication failure, not a native failure. */
+    BORROW_CHECK(!wow_native_EnumChildWindows(scope.parent, discovery_child, (LPARAM)&scope));
+    BORROW_CHECK(GetLastError() == ERROR_INVALID_STATE && scope.children == 4);
+    BORROW_CHECK(!wow_native_FindWindowA("STATIC", "S2 discovery after snapshot"));
+    BORROW_CHECK(GetLastError() == ERROR_INVALID_STATE);
+    thread.ppi = &process;
+    SetLastError(0x1234); BORROW_CHECK(!FindWindowA("S2 absent class", NULL)); native_error = GetLastError();
+    SetLastError(0x1234); BORROW_CHECK(!wow_native_FindWindowA("S2 absent class", NULL));
+    BORROW_CHECK(GetLastError() == native_error);
+    BORROW_CHECK(wow_native_FindWindowA("STATIC", "S2 discovery after snapshot") == scope.parent);
+cleanup:
+    if (binding.exclusive_held) BORROW_CHECK(wow_user_runtime_leave(&binding));
+    if (scope.parent) BORROW_CHECK(DestroyWindow(scope.parent));
+    BORROW_CHECK(wow_user_window_project_graph(&desktop, 1));
+    BORROW_CHECK(wow_user_runtime_unbind(&binding));
+    fprintf(stderr, "WOW_DISCOVERY_CCPU errors=%u held=%d fresh=1 nested=1 stop=1 exception=1 failure=1 recovery=1\n", borrow_errors - before, held);
+}
+
 static void verify_graph_snapshot_commit(ULONG teb)
 {
     HWND desktop = GetDesktopWindow(), window = NULL, child = NULL;
@@ -2680,6 +2779,8 @@ guest_window_failure:
     stage = "whole-graph-snapshot";
     verify_graph_snapshot_commit(teb);
     verify_native_slot_reuse();
+    verify_native_discovery(FALSE);
+    verify_native_discovery(TRUE);
     if (borrow_errors) goto done;
 #endif
 #endif
