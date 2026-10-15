@@ -244,15 +244,14 @@ changes, native identity restoration, class lifetime and new-window snapshots.
 This remains staged with the standard-control group until creation/projection
 and retirement are connected; no guest or additional mirror diff.
 
-Shared class projection prerequisite: move the existing completed-class
-projection into its class-storage owner so prepared native controls use the
-same name/CLS allocation and retirement path. Keep original registration
-ordering and rollback. Native procedures/CPD carriers must not enter guest
-CLS; only encoded WOW procedure values are projected. Selected USER16's
-GetClassLong/GetClassWord remain host thunks, while GetClassName reads the
-copied name through WND.pcls. Verify both registration and all nine native
-class projections in real CCPU memory, original rebase, shared identity,
-duplicate-publication rejection and complete release. No mirror/guest change.
+Shared class projection reconciliation after P7: the class-storage publisher
+exists, but production calls it only for application registration. Prepared
+native classes still have zero guest_server; the nine-class fixture manually
+publishes them. The graph audit records resulting observed-class substitution
+and rejected promotion. Complete the first-managed-creation projection,
+serialization and paired retirement group; preserve original class ownership,
+native-only preparation and existing observed aliases. Resolve lock/domain
+admission before implementation. No new class table or mirror/guest change.
 
 The subsequent [window graph audit](../etc/evidence/m0-t447-s2-window-graph-audit.md)
 confirms missing next/parent/child/owner writes in shared WND publication and

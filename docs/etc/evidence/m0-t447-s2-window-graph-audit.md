@@ -3172,3 +3172,75 @@ are recorded in original-companion-identities.json. Commit scope is the eight
 owned production files, their checked-in regression sources/runners, current
 state/evidence and coherent release assets/manifest; the unrelated ZIP is
 excluded. Commit title: Deliver T447 S2 P7 implicit creation baseline.
+
+### Post-P7 production standard-class projection audit
+
+Input is delivered ff6d74dba; only the preserved unrelated ZIP was dirty.
+This is source tracing, not a fresh application experiment. The next complete
+dependency group is prepared standard-class metadata -> first managed HWND ->
+shared CLS identity -> observation promotion -> normal/veto retirement.
+
+Concrete production gap:
+
+1. wow_user_task_lifecycle_initialize calls wow_standard_classes_prepare and
+   binds cleanup. prepare imports nine native class records; import_native
+   sets the original FNID/procedure/module metadata but does not publish CLS.
+2. The only production caller of wow_class_words_publish_guest is
+   publish_completed_class in wow_class_client_bindings.c, reached by original
+   application registration. No production standard-class caller exists.
+3. enroll_created_window passes its acquired class to WW attachment, then
+   wow_user_window_publish forwards object->pcls->guest_server to the worker.
+   For those prepared controls that field is therefore zero.
+4. project_window_graph compensates for a zero WND.pcls by allocating an
+   observed class from native name/style/extra, with FNID and WOW words zero.
+   That is an appropriate read-only observation for an unowned foreign HWND,
+   not the prepared managed class identity. Distinct windows may obtain
+   separate observed CLS allocations instead of their existing shared owner.
+5. If discovery already published the HWND, publish_handle's promotion branch
+   requires an existing non-observed next_class. A zero class_server cannot
+   satisfy it; promotion fails rather than preserving the existing alias.
+   This is a source-derived failure condition, not an attributed SOL cause.
+
+Why existing coverage did not establish production connection:
+verify_native_class_projection explicitly calls wow_class_words_publish_guest
+inside its nine-class loop before verify_native_class_creation. It proves the
+storage implementation, field layout and retirement, not the missing caller.
+Keep those assertions and add production-path acceptance without that manual
+preparation; do not weaken the publisher or permit zero managed CLS identity.
+
+Pinned original createw.c at150--192 selects GetClassPtr, stores pwnd->pcls and
+references that selected class before callbacks. Preserve that ownership;
+original class selection, native registration and native control procedures
+are not candidates for replacement. The existing class publisher already
+copies the name, original metadata and encoded guest procedure policy, while
+forget_native already owns paired projected-class retirement. Reconnect those
+owners, not a new atom table or per-window substitute class factory.
+
+Implementation boundary under S2: ensure the selected prepared native class
+has its shared projection before managed enrollment publishes any WND. Reuse
+the existing class publisher and preserve already-published application
+classes. Lazy publication is a candidate because process preparation also
+runs in native-only fixtures before a CCPU domain exists; unconditionally
+publishing during that preparation would change its contract. Resolve domain
+admission and metadata serialization first. wow_user_runtime_enter is
+non-recursive and callback/native-call boundaries can already hold or release
+its lock: preserve caller lock ownership and never hold it across CallNextHook
+or guest callbacks. No new scheduler or generic publication subsystem.
+
+The verification group must cover multiple windows sharing one prepared CLS,
+correct original FNID/name/words, observed-to-managed promotion retaining WND
+aliases, explicit/internal creation, allocation failure before publication,
+CBT veto, terminal cleanup and final borrowed-native-class retirement without
+UnregisterClass. Remove the test-only manual preparation from at least one
+real CCPU production-entrance case. Then run the existing coherent delivery
+gate once after the entire group is connected. Expected additional mirror and
+guest diff: zero. No runtime modification or build is admitted by this note
+alone until the source/lock review is completed in the current packet.
+
+Rejected premature lead: task->classes.resolve_callproc is NULL, but original
+WU32RegisterClass always encodes a Win16 callback, and WU32GetClassInfo returns
+the original guest/native thunk representation. The original server CPD branch
+therefore cannot be declared this ordinary registration failure just from the
+NULL callback. Native/CPD restoration is already separately handled by the
+window/class procedure owners. Do not invent a CPD registry or claim this
+unsupported native-only input is the observed application root cause.
