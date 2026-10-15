@@ -7,6 +7,7 @@ HBITMAP WOWLoadBitmapA(HINSTANCE module, LPCSTR name, LPBYTE bytes, DWORD count)
     (void)module; (void)name; (void)count;
     ++conversions;
     if (bytes && !wow_bitmap_current) ++conversion_errors;
+    if (fail_at == 4) RaiseException(0xe0447001u, 0, 0, NULL);
     return (HBITMAP)7;
 }
 static BOOL WINAPI test_initialize(LPCRITICAL_SECTION lock, DWORD spin, DWORD flags)
@@ -65,6 +66,26 @@ int __cdecl main(void)
     wow_bitmap_bindings_leave(&outer);
     CHECK(!wow_bitmap_current && screen_acquired == screen_released);
     CHECK(!conversion_errors && conversions == 2);
+    /* The original converter can unwind. Its caller must restore TLS and
+     * release the DC/critical-section even when no HBITMAP is returned. */
+    {
+        BYTE resource = 0;
+        BOOL caught = FALSE;
+        CHECK(wow_bitmap_bindings_enter(&outer));
+        fail_at = 4;
+        __try {
+            (void)wow_bitmap_load(NULL, NULL, &resource, 1);
+        } __except (GetExceptionCode() == 0xe0447001u ?
+                EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
+            caught = TRUE;
+        }
+        CHECK(caught && wow_bitmap_current == &outer);
+        fail_at = 0;
+        CHECK(wow_bitmap_load(NULL, NULL, &resource, 1) == (HBITMAP)7);
+        wow_bitmap_bindings_leave(&outer);
+        CHECK(!wow_bitmap_current && screen_acquired == screen_released);
+        CHECK(!conversion_errors && conversions == 4);
+    }
     wow_bitmap_bindings_shutdown();
     printf("WOW_BITMAP_BINDING_FAILURE_OK locks=%u screen=%u/%u\n",
         locks, screen_acquired, screen_released);

@@ -41,6 +41,9 @@ if (-not $bridgeText.Contains('output->dwBldInfo = 0x84000000u;')) { throw 'Prov
 if (-not $bridgeText.Contains('output->pfnGetFullUserHandle = registered_full_handle;')) {
     throw 'The full-handle output is not bound to the worker-local window association.'
 }
+if (-not $bridgeText.Contains('output->pfnWOWLoadBitmapA = wow_bitmap_load;')) {
+    throw 'The bitmap output must use the context-owning converter exercised by the bitmap fixtures.'
+}
 foreach ($entry in @(
     @('registered_directed_yield', 'wow_user_task_lifecycle_directed_yield'),
     @('registered_yield_task', 'wow_user_task_lifecycle_yield'),

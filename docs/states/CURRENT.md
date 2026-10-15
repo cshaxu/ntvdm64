@@ -50,14 +50,13 @@ gaps and tests accept newly connected code, not select successive patches.
 Proven-composable original logic must replace its autonomous counterpart in
 the same repair, deleting that counterpart rather than deferring migration.
 Owner requires grouped implementation/testing and delivery before more wiring.
-P7 is ff6d74dba. P8 publishes prepared standard classes at task admission,
-reusing existing class storage/retirement before managed HWND creation.
-All14 boundary cases, both DOS17 routes and three-mode WINMINE gameplay/exit
-pass. standard-class-delivery-r1 records coherent13-image publication to both
-locations. This P8 delivery does not close S2's remaining coverage gaps.
-WRITE shows main/document/page-info windows; editing/saving is unverified.
-SOL still reports Out of memory. Additional mirror/guest diff is zero.
-P9 published; guest reuse/S2 open. Preserve assets/winnt.zip.
+P9 is6fe4272fa. S2 P10 bitmap registration now publishes the scoped original
+converter instead of the uninitialized-context wrapper; exception cleanup is
+paired. Bitmap tests,14 boundary cases, three-mode WINMINE gameplay, guest CBT
+and both DOS17 matrices pass. Coherent13 images are published to both locations;
+final checks pass. SOL now shows Solitaire/Stat windows without
+Out of memory. SOL gameplay/normal exit and WRITE editing/saving remain open.
+Additional mirror/guest diff is zero. Preserve assets/winnt.zip. S2 stays open.
 
 ## Active Packet
 

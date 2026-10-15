@@ -422,13 +422,6 @@ static BOOL WINAPI registered_wait_for_message(HANDLE event)
     return result;
 }
 
-static HBITMAP WINAPI registered_load_bitmap(HINSTANCE module, LPCSTR name,
-    LPBYTE bits, DWORD bytes)
-{
-    if (!wow_bitmap_current) { unsupported_void(); return NULL; }
-    return WOWLoadBitmapA(module, name, bits, bytes);
-}
-
 static HWND WINAPI registered_find_window(LPCSTR class_name, LPCSTR window_name)
 {
     return FindWindowA(class_name, window_name);
@@ -476,7 +469,7 @@ DWORD WINAPI UserRegisterWowHandlers(APFNWOWHANDLERSIN input,
     output->pfnWOWCleanup = registered_cleanup;
     output->pfnWOWFindWindow = registered_find_window;
     output->pfnWOWGetIdFromDirectory = wow_private_user_get_id_from_directory;
-    output->pfnWOWLoadBitmapA = registered_load_bitmap;
+    output->pfnWOWLoadBitmapA = wow_bitmap_load;
     output->pfnWowWaitForMsgAndEvent = registered_wait_for_message;
     output->pfnYieldTask = registered_yield_task;
     output->pfnGetFullUserHandle = registered_full_handle;

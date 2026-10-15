@@ -3466,3 +3466,160 @@ exercises both creator and null-class storage forms. This is not proof of all
 guest callback families or closure of S2/SOL initialization. Final governance,
 relative-link, diff and complete package/companion identity gates precede the
 P9 commit; assets/winnt.zip remains an unrelated excluded modification.
+
+### Post-P9 source review: production bitmap registration gap
+
+The next group is selected by the production callback graph, not another
+application retry. WU32LoadBitmap calls pfnOut.pfnWOWLoadBitmapA; registration
+currently selects registered_load_bitmap, which refuses a NULL
+wow_bitmap_current. The only production initializer of that TLS context is
+wow_bitmap_bindings_enter, called by wow_bitmap_load; the rejecting wrapper
+does not call it. A source-wide reference search finds no enclosing production
+initializer. In contrast, wow_bitmap_thunk_integration_fixture.c explicitly
+sets its private pfnOut slot to wow_bitmap_load. Its successful conversion
+therefore did not verify actual production registration.
+
+Read-only static inspection of the sealed P9 SOL.EXE (SHA256
+68B196C6FD496BAC0E2F30F162EE0B4B4D6EB5BFEC1AF086C8EA759222211F31)
+narrows the application consequence without modifying/running the guest.
+NE startup 8:0083 calls movable entry85, resolved to1:0000. Its first-instance
+initialization at1:00f0 calls movable entry12 (10:0000); that routine calls
+USER ordinal175 (LoadBitmap) for resources53,67,68 at10:0017/0029/003b,
+returns zero if any handle is zero, and cleans the acquired handles. The caller
+then takes1:0121 ->1:0144 ->1:0404. Other failures (GetDC, RegisterClass,
+CreateWindow, SetTimer) also join this exit; it calls entry15 (2:07c1), which
+passes the string buffer at DS:0534 to2:05cc's MessageBox call. That buffer
+was loaded with string resource300 by1:010b. A subsequent read-only NE resource
+table inspection resolves RT_STRING block19/index12 to `Out of memory`.
+Thus bitmap refusal is a concrete startup error path, but its runtime execution
+has not yet been independently verified by this static record. No general
+heap-failure attribution or successful SOL initialization is claimed.
+
+Existing inspect-win31-ne-segment.ps1 produced build/M0-T447/S2/
+sol-static-entry-r2 and sol-static-segment1-r1, segment2-r1, segment10-r1,
+segment11-r1 (each latter name prefixed sol-static-). All exit-code.txt values
+are0. Background PIDs19868,15248,29100,29028,29392 began between
+2026-10-15T11:56:53Z and11:58:34Z; commands select immutable SOL, the named
+segment and fresh build output, with a120-second observation deadline. Earlier
+sol-static-entry-r1/PID32780 is retained as failed: Windows PowerShell lacked
+Get-FileHash; PowerShell7 completed the unchanged script. These are static
+analysis results, not product runtime tests. Unrelocated operands are resolved
+using the recorded NE relocation chains and movable entry table, not treated
+as executable native addresses.
+
+Recovery decision: retain selected original clres.c::WOWLoadBitmapA and its
+ConvertDIBBitmap algorithm (OPENNT-HOST-033), using existing ADAPTER-WOW-025
+for unavailable native conversion environment. Direct original global USER
+scratch/DC state is not supplied by modern USER32; the already selected scoped
+adapter supplies that finite dependency. No additional mirror intrusion or
+new converter is justified. Delete registered_load_bitmap and bind the existing
+wow_bitmap_load directly. Protect its acquired context with finally so original
+conversion unwind cannot leave TLS pointing into an expired stack or leak its
+DC/lock. The registration transaction, input lease and alias conversion remain
+their original/existing owners. Additional mirror and guest diff: zero.
+
+Candidate edits implement that connection and exception unwind; the existing
+failure fixture now injects a converter exception and verifies outer TLS
+restoration and subsequent conversion. Production-registration acceptance,
+full bitmap group build/test, ordinary three-application comparison and
+coherent publication remain pending. No candidate binary is published.
+
+Background bitmap-registration-r1 supervisor31832/build29560 starts
+2026-10-15T12:04:21Z; worker/provider builds finish0. The first native fixture
+link fails1120 on printf and the unrelated W32FindResource dependency in the
+shared clres translation unit. Preserve bitmap/failure.txt. The test runner
+now links the standard legacy_stdio_definitions library and compiles the
+identical clres source with /Gy for test-only function-section elimination;
+no missing provider stub or product build change is introduced. Continuation
+supervisor13736 starts12:06:45Z after the first supervisor exits. It reuses the
+completed product build, runs fresh bitmap-r2 tests, then the14 existing
+boundary cases serially. Pending results are not passes. The tracked
+verify-wow-bitmap-bindings.ps1 also checks the actual registration assignment;
+this static guard supplements, not replaces, ordinary guest acceptance.
+
+bitmap-r2 still fails linking W32FindResource despite function sections;
+bitmap-r3 uses the already existing WOW_BITMAP_FIXTURE_BINDINGS selection but
+fails compilation because that selection expects its caller to supply the
+bitmap environment header. Neither failure changes the production candidate.
+bitmap-r4 supplies that same production header explicitly and retains the
+existing bitmap-only selection; it is not a new mirror conditional or stub.
+Supervisor30924 starts2026-10-15T12:08:43Z after19208 has exited. Fresh run
+directories retain all failed attempts. Subsequent14-case execution is serial
+and starts only after the bitmap group passes.
+
+bitmap-r4 completes0: WOW_BITMAP_BINDING_OK records30 nested conversions,
+4x50 parallel conversions, two named/ordinal resources, two missing resources
+and unchanged GDI count0/0; WOW_BITMAP_BINDING_FAILURE_OK records locks2 and
+screen acquisitions/releases10/10 including the injected converter exception.
+The registration assignment audit reports21 input/20 output slots. These
+are native/structural acceptance, not guest execution proof. Supervisor30924
+continues the14 boundary cases. Application supervisor29340 starts
+2026-10-15T12:10:49Z, waiting on that exact process and successful group result
+before sealing bitmap-apps-r1 from P9 with the new worker/provider images.
+Delivery supervisor21632 starts12:14:49Z and waits for29340 before running
+bitmap-delivery-r1's three-mode gameplay, real guest CBT and DOS17 matrices.
+Neither supervisor publishes; each consumer rejects a failed prerequisite.
+
+The14-case continuation completes0. Application observation completes0:
+bitmap-apps-r1 records visible Solitaire/Stat windows at all four samples,
+with no Out of memory dialog; WRITE retains MSWRITE_MENU, MSWRITE_DOC and
+MSWRITE_PAGEINFO. This improves SOL's initialization frontier, not proof of
+card gameplay or normal SOL shutdown. The observer's final cleanup remains
+explicit fixture cleanup. The unchanged guest's static bitmap failure path,
+the production registration defect and this bounded before/after result
+support attribution of that initialization failure to the missing bitmap
+context binding, not to guest heap exhaustion.
+
+bitmap-delivery-r1 checks child13736 starts2026-10-15T12:21:53.8661284Z with
+1800-second deadline. All three WINMINE modes pass flag/counter/reset/open-cell,
+WM_CLOSE and run16 completion. Real Win16 CBT probe passes. DOS matrices and
+publication remain pending. Candidate images are ntvdm.exe SHA256
+5F069FB4CBADC9CB14C4F70B80574AE655082DC5B1ABEB4C8858BE90A4370027 and WOW32.DLL
+5B0D03A9DB0295E9961999F20391339A49FCC72EDDD5AC24670593527E74D2CA. The worker
+build recompiles generated base_vdm_config.c and relinks; its1579520-byte .text
+section matches P9 byte-for-byte. No worker production source was changed.
+
+### S2 P10 bitmap registration delivery
+
+bitmap-delivery-r1 checks.exit and run.exit both finish0. Console17 and
+Window17 each have17 expected/actual matches. The original CBT guest probe
+and all three WINMINE gameplay modes pass. The static registration assertion
+is explicitly only a wiring check; ordinary SOL's improved main-window
+frontier supplies independent execution evidence through the real registrar.
+
+Publication supervisor32240 starts2026-10-15T12:25:32Z and completes0, as does
+publication/exit.txt. Its recoverable backups and verified13-image manifest
+cover assets/release and O:/winnt/system32. Candidate hashes above are the
+published identities; the other11 host images remain unchanged. Worker .text
+SHA256 is11ED6E602660B1EDC05DE1B62FC03A141FDD2B1E3668E7D284E600CD679F3C26 in
+both P9 and P10. All source changes remain in the two owned WOW32 files;
+git diff lists no mvdm/opennt-host mirror changes. Final governance, relative
+links, full guest/configuration identity and source review precede commit.
+
+Independent role review: the obsolete rejecting wrapper is removed, not
+retained as a fallback; the selected original WOWLoadBitmapA/ConvertDIBBitmap
+still owns bitmap interpretation. Existing TLS nesting and critical-section
+ownership are paired with finally, without catching or translating original
+exceptions. Native no-resource loading retains its original separate path.
+The retained fixture failures are harness configuration failures, not waived
+runtime failures. No guest binary/source, graphics algorithm, allocator or
+message policy was changed. Remaining T447 obligations are not closed by this
+P: SOL gameplay/normal exit, WRITE editing/saving, EDIT's original memory and
+word-break consumers, full message/reply semantics and individual task exit
+retain their planned acceptance gates. The unrelated assets/winnt.zip change
+is excluded from delivery.
+
+Final supervisor23396 completes0: documentation governance (including relative
+links), diff checks, all13 PE/hash identities in tested/release/system32 paths,
+and all46 remaining original guest/configuration files compared to P9 pass.
+CURRENT remains below32KiB. assets/winnt.zip retains the excluded SHA256
+539A910247C5478BDE19FB2A431CD4C5AB26355CDC46F8160F49B23F060B495B.
+
+Separate EDIT audit confirms another unmet contract, not the SOL attribution:
+wmsgem.c encodes EM_SETHANDLE as guest DS/handle and EM_SETWORDBREAKPROC as a
+WOW-tagged procedure. Current standard-class enrollment retains modern native
+EDIT's procedure. Original client globals.h LOCAL* macros invoke registered
+W32Local* callbacks; usercli.h CALLWORDBREAKPROC invokes W32EditNextWord for
+tagged targets. No such consumption follows merely from copying registration
+inputs. Treat original EDIT storage, callbacks, dialog DS and lifecycle as one
+dependency group; do not bridge only one message or infer WRITE usability.

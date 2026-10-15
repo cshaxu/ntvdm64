@@ -52,8 +52,11 @@ HBITMAP WINAPI wow_bitmap_load(HINSTANCE module, LPCSTR name,
     HBITMAP result;
     if (!resource) return WOWLoadBitmapA(module, name, NULL, resource_size);
     if (!wow_bitmap_bindings_enter(&context)) return NULL;
-    result = WOWLoadBitmapA(module, name, resource, resource_size);
-    wow_bitmap_bindings_leave(&context);
+    __try {
+        result = WOWLoadBitmapA(module, name, resource, resource_size);
+    } __finally {
+        wow_bitmap_bindings_leave(&context);
+    }
     return result;
 }
 
