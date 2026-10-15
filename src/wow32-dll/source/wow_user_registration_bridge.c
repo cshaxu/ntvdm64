@@ -78,6 +78,7 @@ static LRESULT call_previous_window_proc(WNDPROC procedure, HWND window,
         __try {
             result = unicode ? CallWindowProcW(procedure, window, message, wp, lp) :
                 CallWindowProcA(procedure, window, message, wp, lp);
+            wow_user_native_call_result(&call, message, wp, lp, result);
         } __finally {
             error = GetLastError();
             restored = wow_user_native_call_end(&call);
@@ -100,7 +101,8 @@ static LRESULT call_previous_window_proc(WNDPROC procedure, HWND window,
          * original subclass contract while publishing a menu carried by
          * the message before the original callback converts its handle. */
         result = 0;
-        if (wow_menu_native_refresh_message(message, wp, lp))
+        if (wow_user_window_refresh_message(window, message, wp, lp) &&
+                wow_menu_native_refresh_message(message, wp, lp))
             result = wow_input_handlers.pfnWowWndProcEx(window, message, wp, lp,
                 (DWORD)(ULONG_PTR)procedure, NULL);
     } __finally {

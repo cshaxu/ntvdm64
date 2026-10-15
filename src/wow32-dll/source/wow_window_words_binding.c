@@ -458,7 +458,7 @@ static BOOL dispatch_bound(HWND window, UINT message, WPARAM wp,
          * This is not a replacement for direct-access/callback scope binding. */
         if (!wow_window_words_refresh(window, binding)) return FALSE;
         if (binding->objects) {
-            if (!wow_user_window_refresh_graph(window)) return FALSE;
+            if (!wow_user_window_refresh_message(window, message, wp, lp)) return FALSE;
             if (!mvdm_softpc_wow_page_domain_callback_window(
                     (unsigned long)(ULONG_PTR)window, saved_callback)) return FALSE;
             callback_published = TRUE;

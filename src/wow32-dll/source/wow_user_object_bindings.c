@@ -1,4 +1,5 @@
 #include "wow_user_object_bindings.h"
+#include <dde.h>
 #include "wow_window_dispatch_bindings.h"
 #include "wow_class_lookup_bindings.h"
 #include "wow_user_runtime.h"
@@ -67,9 +68,9 @@ BOOL WINAPI wow_user_window_sample_links(HWND window, wow_user_window_links *out
     return TRUE;
 }
 
-static BOOL project_graph(const HWND *, ULONG, HWND);
+static BOOL project_graph(const HWND *, ULONG, const HWND *, ULONG);
 
-static BOOL refresh_graph(HWND callback_window, HWND returned_window)
+static BOOL refresh_graph(HWND callback_window, const HWND *payload, ULONG payload_count)
 {
     wow_user_runtime_thread *binding;
     wow_user_object_table *objects;
@@ -77,6 +78,9 @@ static BOOL refresh_graph(HWND callback_window, HWND returned_window)
     ULONG count = 0, i;
     BOOL result;
     DWORD error, saved = GetLastError();
+    if (payload_count && !payload) {
+        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
+    }
     /* Native-only callers outside a guest page domain have no copied view.
      * An active domain, however, must have its real process owner. */
     if (!mvdm_softpc_wow_page_domain_active()) return TRUE;
@@ -103,7 +107,7 @@ static BOOL refresh_graph(HWND callback_window, HWND returned_window)
                 window == desktop || window == callback_window) continue;
         roots[count++] = window;
     }
-    result = project_graph(roots, count, returned_window);
+    result = project_graph(roots, count, payload, payload_count);
     error = result ? saved : GetLastError();
     HeapFree(GetProcessHeap(), 0, roots);
     SetLastError(error);
@@ -112,15 +116,191 @@ static BOOL refresh_graph(HWND callback_window, HWND returned_window)
 
 BOOL WINAPI wow_user_window_refresh_graph(HWND callback_window)
 {
-    return refresh_graph(callback_window, NULL);
+    return refresh_graph(callback_window, NULL, 0);
 }
 
 BOOL WINAPI wow_user_window_refresh_return(HWND returned_window)
 {
-    return refresh_graph(NULL, returned_window);
+    return refresh_graph(NULL, &returned_window, 1);
+}
+
+BOOL WINAPI wow_user_window_refresh_payload(HWND callback_window,
+    const HWND *payload, ULONG count)
+{
+    return refresh_graph(callback_window, payload, count);
 }
 
 typedef mvdm_softpc_wow_window_observation window_observation;
+
+static HWND full_payload_window(HWND window)
+{
+    wow_user_runtime_thread *binding;
+    if (!window || ((ULONG)(ULONG_PTR)window != LOWORD(window) &&
+            (LONG)(LONG_PTR)window != (LONG)(SHORT)LOWORD(window))) return window;
+    binding = wow_user_runtime_current();
+    if (!binding || !binding->thread || !binding->thread->ppi ||
+            !binding->thread->ppi->objects) {
+        SetLastError(ERROR_INVALID_STATE); return NULL;
+    }
+    /* Original HWND32 is a signed SHORT. Use the same retained table owner
+     * as discovery; never sample a short carrier as a full generation. */
+    return (HWND)(ULONG_PTR)wow_user_full_handle(
+        binding->thread->ppi->objects, LOWORD(window));
+}
+
+static ULONG position_roots(const WINDOWPOS *position, HWND *roots)
+{
+    ULONG count = 0;
+    if (!position) return 0;
+    roots[count++] = position->hwnd;
+    /* putwindowpos16 copies this typed field even with SWP_NOZORDER. */
+    if (position->hwndInsertAfter != HWND_TOP &&
+            position->hwndInsertAfter != HWND_BOTTOM &&
+            position->hwndInsertAfter != HWND_TOPMOST &&
+            position->hwndInsertAfter != HWND_NOTOPMOST)
+        roots[count++] = position->hwndInsertAfter;
+    return count;
+}
+
+/* wmdisp32.c/wstruc.c own the actual thunk, copyback and guest allocation.
+ * This seam describes only their native window operands for shared-view
+ * publication. In particular owner-draw hwndItem can be an HMENU, and
+ * WM_PARENTNOTIFY mouse coordinates are not an HWND. No type guessing from
+ * numeric validity and no recursion through arbitrary pointer payloads. */
+ULONG WINAPI wow_user_message_window_roots(UINT message, WPARAM wp,
+    LPARAM lp, HWND roots[4])
+{
+    ULONG count = 0;
+    /* Original winuserp.h private message numbers, absent from modern SDK
+     * message defines. DROPSTRUCT itself remains the SDK's exact ABI type. */
+    enum { original_winhelp = 0x0038, original_dropobject = 0x022a,
+        original_querydropobject = 0x022b, original_dragloop = 0x022d,
+        original_dragselect = 0x022e, original_dragmove = 0x022f };
+    switch (message) {
+    case original_dropobject: case original_querydropobject:
+    case original_dragloop: case original_dragselect: case original_dragmove:
+        if (lp) {
+            roots[count++] = ((const DROPSTRUCT *)lp)->hwndSource;
+            roots[count++] = ((const DROPSTRUCT *)lp)->hwndSink;
+        }
+        break;
+    case WM_CREATE: case WM_NCCREATE:
+        if (lp) roots[count++] = ((const CREATESTRUCTA *)lp)->hwndParent;
+        break;
+    case WM_ACTIVATE: case WM_VKEYTOITEM: case WM_CHARTOITEM:
+    case WM_COMMAND: case WM_HSCROLL: case WM_VSCROLL:
+    case WM_CTLCOLORMSGBOX: case WM_CTLCOLOREDIT: case WM_CTLCOLORLISTBOX:
+    case WM_CTLCOLORBTN: case WM_CTLCOLORDLG: case WM_CTLCOLORSCROLLBAR:
+    case WM_CTLCOLORSTATIC:
+        roots[count++] = (HWND)lp;
+        break;
+    case WM_SETFOCUS: case WM_KILLFOCUS: case WM_SETCURSOR: case WM_INITDIALOG:
+    case WM_MOUSEACTIVATE: case WM_MDIDESTROY: case WM_MDIRESTORE:
+    case WM_MDINEXT: case WM_MDIMAXIMIZE: case WM_SIZECLIPBOARD:
+    case WM_PAINTCLIPBOARD: case WM_HSCROLLCLIPBOARD: case WM_VSCROLLCLIPBOARD:
+    case WM_PALETTEISCHANGING: case WM_PALETTECHANGED:
+    case WM_COPYDATA: case original_winhelp:
+    case WM_DDE_INITIATE: case WM_DDE_TERMINATE: case WM_DDE_ADVISE:
+    case WM_DDE_UNADVISE: case WM_DDE_ACK: case WM_DDE_DATA:
+    case WM_DDE_REQUEST: case WM_DDE_POKE: case WM_DDE_EXECUTE:
+        roots[count++] = (HWND)wp;
+        break;
+    case WM_NEXTDLGCTL:
+        if (lp) roots[count++] = (HWND)wp;
+        break;
+    case WM_ENTERIDLE:
+        if (wp == MSGF_DIALOGBOX || wp == MSGF_MENU) roots[count++] = (HWND)lp;
+        break;
+    case WM_PARENTNOTIFY:
+        if (LOWORD(wp) == WM_CREATE || LOWORD(wp) == WM_DESTROY)
+            roots[count++] = (HWND)lp;
+        break;
+    case WM_MDIACTIVATE: case WM_CHANGECBCHAIN:
+        roots[count++] = (HWND)wp;
+        roots[count++] = (HWND)lp;
+        break;
+    case WM_DRAWITEM:
+        if (lp && ((const DRAWITEMSTRUCT *)lp)->CtlType != ODT_MENU)
+            roots[count++] = ((const DRAWITEMSTRUCT *)lp)->hwndItem;
+        break;
+    case WM_DELETEITEM:
+        if (lp && ((const DELETEITEMSTRUCT *)lp)->CtlType != ODT_MENU)
+            roots[count++] = ((const DELETEITEMSTRUCT *)lp)->hwndItem;
+        break;
+    case WM_COMPAREITEM:
+        if (lp && ((const COMPAREITEMSTRUCT *)lp)->CtlType != ODT_MENU)
+            roots[count++] = ((const COMPAREITEMSTRUCT *)lp)->hwndItem;
+        break;
+    case WM_WINDOWPOSCHANGING: case WM_WINDOWPOSCHANGED:
+        count = position_roots((const WINDOWPOS *)lp, roots);
+        break;
+    case WM_NCCALCSIZE:
+        if (wp && lp)
+            count = position_roots(((const NCCALCSIZE_PARAMS *)lp)->lppos, roots);
+        break;
+    case WM_GETDLGCODE:
+        if (lp) {
+            const MSG *nested = (const MSG *)lp;
+            roots[count++] = nested->hwnd;
+            /* putmsg16 converts only COMMAND, DDE and DROPFILES here.
+             * DROPFILES has an HDROP, not another window. */
+            if (nested->message == WM_COMMAND) roots[count++] = (HWND)nested->lParam;
+            else if (nested->message >= WM_DDE_FIRST && nested->message <= WM_DDE_LAST)
+                roots[count++] = (HWND)nested->wParam;
+        }
+        break;
+    }
+    return count;
+}
+
+ULONG WINAPI wow_user_queue_window_roots(const MSG *message, HWND roots[4])
+{
+    ULONG count = 0;
+    if (!message) return 0;
+    roots[count++] = message->hwnd;
+    /* wstruc.c putmsg16 does not follow arbitrary posted pointer payloads. */
+    if (message->message == WM_COMMAND) roots[count++] = (HWND)message->lParam;
+    else if (message->message >= WM_DDE_FIRST && message->message <= WM_DDE_LAST)
+        roots[count++] = (HWND)message->wParam;
+    return count;
+}
+
+ULONG WINAPI wow_user_message_return_roots(UINT message, WPARAM wp, LPARAM lp,
+    LRESULT result, HWND roots[4])
+{
+    /* wmsg16.c unthunkwmmsg16: these results/copyback fields, not an
+     * arbitrary nonzero LRESULT, are converted to guest window identities.
+     * Read the native output synchronously before restoring execution. */
+    switch (message) {
+    case WM_DRAWITEM: case WM_DELETEITEM: case WM_COMPAREITEM:
+        return wow_user_message_window_roots(message, wp, lp, roots);
+    case WM_MDICREATE: case WM_MDIGETACTIVE:
+        roots[0] = (HWND)result;
+        return 1;
+    case WM_NEXTMENU:
+        if (lp) { roots[0] = ((const MDINEXTMENU *)lp)->hwndNext; return 1; }
+        break;
+    case WM_WINDOWPOSCHANGING: case WM_WINDOWPOSCHANGED:
+        return position_roots((const WINDOWPOS *)lp, roots);
+    case WM_NCCALCSIZE:
+        if (wp && lp)
+            return position_roots(((const NCCALCSIZE_PARAMS *)lp)->lppos, roots);
+        break;
+    }
+    return 0;
+}
+
+BOOL WINAPI wow_user_window_refresh_message(HWND window, UINT message,
+    WPARAM wp, LPARAM lp)
+{
+    HWND roots[4];
+    ULONG count = wow_user_message_window_roots(message, wp, lp, roots);
+    if (window) {
+        window = full_payload_window(window);
+        if (!window) return FALSE;
+    }
+    return wow_user_window_refresh_payload(window, roots, count);
+}
 
 /* A public USER sample has no desktop lock. Capture a single identity and
  * its fields; only the identity itself is checked again, never neighbours. */
@@ -256,7 +436,8 @@ static BOOL normalize_observation_chains(window_observation *rows, ULONG count,
     return TRUE;
 }
 
-static BOOL project_graph(const HWND *roots, ULONG root_count, HWND returned_window)
+static BOOL project_graph(const HWND *roots, ULONG root_count,
+    const HWND *payload, ULONG payload_count)
 {
     window_observation *rows = NULL, captured;
     ULONG *index = NULL, count = 0, capacity = 0, i, used;
@@ -293,14 +474,19 @@ static BOOL project_graph(const HWND *roots, ULONG root_count, HWND returned_win
         if (!capture_window(roots[i], &captured) ||
                 !put_observation(&rows, &count, &capacity, index, &captured)) goto done;
     }
-    /* A native setter returns its previous window, not its new target. It
-     * may disappear during native callbacks or the ownership handoff. Root
-     * a still-live full identity in this same transaction; never resurrect
-     * a dead return or bind its low word to a replacement generation. */
-    if (returned_window) {
-        if (capture_window(returned_window, &captured)) {
+    /* Typed secondary identities can be unlinked or disappear during a
+     * native call. Sample live full identities in this same transaction;
+     * never revive dead values or bind their low words to new generations.
+     * Unlike a required receiver, a dead payload remains a numeric value
+     * for the original converter and guest to interpret. */
+    for (i = 0; i < payload_count; ++i) {
+        HWND window;
+        if (!payload[i]) continue;
+        window = full_payload_window(payload[i]);
+        if (!window) goto done;
+        if (capture_window(window, &captured)) {
             if (!put_observation(&rows, &count, &capacity, index, &captured)) goto done;
-        } else if (IsWindow(returned_window)) goto done;
+        } else if (IsWindow(window)) goto done;
     }
     for (i = 0; i < count; ++i) {
         unsigned edge;
@@ -348,7 +534,7 @@ done:
 
 BOOL WINAPI wow_user_window_project_graph(const HWND *roots, ULONG root_count)
 {
-    return project_graph(roots, root_count, NULL);
+    return project_graph(roots, root_count, NULL, 0);
 }
 
 BOOL WINAPI wow_user_window_publish(wow_user_object_table *table, HWND window,

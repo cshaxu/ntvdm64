@@ -51,10 +51,10 @@ Proven-composable original logic must replace its autonomous counterpart in
 the same repair, deleting that counterpart rather than deferring migration.
 Owner requires grouped implementation/testing and delivery before more wiring.
 P10 restores bitmap registration; P11 repairs premature hidden-window WM_SIZE.
-S2 P14 adds parent/owner and previous-HWND publication, capture boundaries
-and EnumProps through retained original short-handle conversion. All12
-foundation groups, real Win16 discovery/CBT, three-mode SOL/WINMINE and
-both DOS17 matrices pass; WRITE retains its initialization frontier only.
+S2 P15 publishes typed message/Hook operands and native return objects.
+All12 foundation groups, Hook ordering, real Win16 discovery/CBT,
+three-mode SOL/WINMINE and both DOS17 matrices pass; WRITE retains
+only its initialization frontier, not editing acceptance.
 All13 images match both publication locations. Zero new mirror/guest diff.
 Earlier unexplained timeouts and remaining callback/WRITE gaps keep S2 open.
 Owner-approved assets/winnt.zip is committed in 6275809e0, unchanged here.
@@ -386,8 +386,8 @@ lookup stays separate. Native desktop identity, retained observed/managed WW
 aliases and paired host/guest word updates pass the grouped foundation tests.
 P5 connects the prepared graph at the reviewed callback/native-return boundaries.
 
-S2 P14 builds on P13 (cf2ac9520): returned HWND and property callback
-publication, preserving approved E observation and native-result contracts.
+S2 P15 builds on P14 (d97e09a2a): message/Hook payload and result publication,
+preserving original conversion, approved E and native-result contracts.
 Worker/WOW32 rebuilt; only ntvdm.exe/WOW32.DLL change among release images.
 All12 boundary groups, real guest discovery/CBT, SOL/WINMINE three modes,
 WRITE frontier and Console17/Window17 pass. Both release locations match

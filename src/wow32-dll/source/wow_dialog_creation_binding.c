@@ -212,7 +212,7 @@ static INT_PTR CALLBACK dialog_proc(HWND window, UINT message, WPARAM wp,
         entered = TRUE;
         if (!wow_user_borrow_enter(&scope)) __leave;
         borrowed = TRUE;
-        if (!wow_user_window_refresh_graph(window)) __leave;
+        if (!wow_user_window_refresh_message(window, message, wp, lp)) __leave;
         if (creation->procedure) {
             /* Original ssend LOCKPWND retains the current WND and saves the
              * caller's CallbackWnd before entering WOW. A nested destroy can

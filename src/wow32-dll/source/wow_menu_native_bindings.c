@@ -70,6 +70,22 @@ BOOL WINAPI wow_menu_native_refresh_message(UINT message, WPARAM wp, LPARAM lp)
     case WM_MENUCHAR:
         menu = (HMENU)lp;
         break;
+    case WM_DRAWITEM:
+        if (!lp || ((const DRAWITEMSTRUCT *)lp)->CtlType != ODT_MENU) return TRUE;
+        menu = (HMENU)((const DRAWITEMSTRUCT *)lp)->hwndItem;
+        break;
+    case WM_DELETEITEM:
+        if (!lp || ((const DELETEITEMSTRUCT *)lp)->CtlType != ODT_MENU) return TRUE;
+        menu = (HMENU)((const DELETEITEMSTRUCT *)lp)->hwndItem;
+        break;
+    case WM_COMPAREITEM:
+        if (!lp || ((const COMPAREITEMSTRUCT *)lp)->CtlType != ODT_MENU) return TRUE;
+        menu = (HMENU)((const COMPAREITEMSTRUCT *)lp)->hwndItem;
+        break;
+    case WM_NEXTMENU:
+        if (!lp) return TRUE;
+        menu = ((const MDINEXTMENU *)lp)->hmenuIn;
+        break;
     default:
         return TRUE;
     }

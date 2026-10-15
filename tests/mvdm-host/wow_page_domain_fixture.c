@@ -257,9 +257,76 @@ static void verify_native_mutation_group(ULONG delta)
         borrow_errors - errors_before);
 }
 
+#include <dde.h>
+static void verify_message_window_operands(void)
+{
+    HWND roots[4], first = (HWND)0x12340112u, second = (HWND)0x56780224u;
+    WINDOWPOS position = {0};
+    NCCALCSIZE_PARAMS bounds = {0};
+    DRAWITEMSTRUCT draw = {0};
+    DELETEITEMSTRUCT deleted = {0};
+    COMPAREITEMSTRUCT compare = {0};
+    MSG nested = {0};
+    DROPSTRUCT drop = {0};
+    MDINEXTMENU next = {0};
+    unsigned before = borrow_errors;
+    ULONG count;
+    count = wow_user_message_window_roots(WM_SETFOCUS, (WPARAM)first, 0, roots);
+    BORROW_CHECK(count == 1 && roots[0] == first);
+    count = wow_user_message_window_roots(WM_MDIACTIVATE, (WPARAM)first, (LPARAM)second, roots);
+    BORROW_CHECK(count == 2 && roots[0] == first && roots[1] == second);
+    BORROW_CHECK(!wow_user_message_window_roots(WM_USER + 3, (WPARAM)first, (LPARAM)second, roots));
+    BORROW_CHECK(!wow_user_message_window_roots(WM_PARENTNOTIFY, WM_LBUTTONDOWN, (LPARAM)first, roots));
+    BORROW_CHECK(!wow_user_message_window_roots(WM_NEXTDLGCTL, (WPARAM)first, 0, roots));
+    BORROW_CHECK(wow_user_message_window_roots(WM_PARENTNOTIFY, WM_CREATE, (LPARAM)first, roots) == 1 && roots[0] == first);
+    draw.CtlType = deleted.CtlType = compare.CtlType = ODT_MENU;
+    draw.hwndItem = deleted.hwndItem = compare.hwndItem = first;
+    BORROW_CHECK(!wow_user_message_window_roots(WM_DRAWITEM, 0, (LPARAM)&draw, roots));
+    BORROW_CHECK(!wow_user_message_window_roots(WM_DELETEITEM, 0, (LPARAM)&deleted, roots));
+    BORROW_CHECK(!wow_user_message_window_roots(WM_COMPAREITEM, 0, (LPARAM)&compare, roots));
+    draw.CtlType = deleted.CtlType = compare.CtlType = ODT_LISTBOX;
+    BORROW_CHECK(wow_user_message_window_roots(WM_DRAWITEM, 0, (LPARAM)&draw, roots) == 1 && roots[0] == first);
+    BORROW_CHECK(wow_user_message_window_roots(WM_DELETEITEM, 0, (LPARAM)&deleted, roots) == 1 && roots[0] == first);
+    BORROW_CHECK(wow_user_message_window_roots(WM_COMPAREITEM, 0, (LPARAM)&compare, roots) == 1 && roots[0] == first);
+    position.hwnd = first; position.hwndInsertAfter = HWND_TOPMOST;
+    BORROW_CHECK(wow_user_message_window_roots(WM_WINDOWPOSCHANGING, 0, (LPARAM)&position, roots) == 1);
+    position.hwndInsertAfter = second;
+    BORROW_CHECK(wow_user_message_window_roots(WM_WINDOWPOSCHANGED, 0, (LPARAM)&position, roots) == 2 && roots[1] == second);
+    position.flags = SWP_NOZORDER;
+    BORROW_CHECK(wow_user_message_window_roots(WM_WINDOWPOSCHANGING, 0, (LPARAM)&position, roots) == 2);
+    bounds.lppos = &position;
+    BORROW_CHECK(!wow_user_message_window_roots(WM_NCCALCSIZE, 0, (LPARAM)&bounds, roots));
+    BORROW_CHECK(wow_user_message_window_roots(WM_NCCALCSIZE, 1, (LPARAM)&bounds, roots) == 2);
+    nested.hwnd = first; nested.message = WM_COMMAND; nested.lParam = (LPARAM)second;
+    BORROW_CHECK(wow_user_message_window_roots(WM_GETDLGCODE, 0, (LPARAM)&nested, roots) == 2 && roots[1] == second);
+    nested.message = WM_GETDLGCODE; nested.lParam = 1; /* Never recursively dereference. */
+    BORROW_CHECK(wow_user_message_window_roots(WM_GETDLGCODE, 0, (LPARAM)&nested, roots) == 1);
+    drop.hwndSource = first; drop.hwndSink = second;
+    BORROW_CHECK(wow_user_message_window_roots(0x022a, 0, (LPARAM)&drop, roots) == 2 && roots[1] == second);
+    BORROW_CHECK(wow_user_message_window_roots(0x0038, (WPARAM)first, 0, roots) == 1 && roots[0] == first);
+    BORROW_CHECK(wow_user_queue_window_roots(&nested, roots) == 1); /* No lp=1 dereference. */
+    nested.message = WM_DDE_ACK; nested.wParam = (WPARAM)second;
+    BORROW_CHECK(wow_user_queue_window_roots(&nested, roots) == 2 && roots[1] == second);
+    next.hwndNext = second;
+    BORROW_CHECK(wow_user_message_return_roots(WM_NEXTMENU, 0, (LPARAM)&next, 0, roots) == 1 && roots[0] == second);
+    BORROW_CHECK(wow_user_message_return_roots(WM_MDIGETACTIVE, 0, 0, (LRESULT)first, roots) == 1 && roots[0] == first);
+    BORROW_CHECK(!wow_user_message_return_roots(WM_USER, 0, 1, (LRESULT)first, roots));
+    fprintf(stderr, "WOW_MESSAGE_OPERANDS_CCPU errors=%u typed=1 numeric=1 menu=1 position=1 nested=1\n", borrow_errors - before);
+}
+
+static HWND returned_message_window;
+static LRESULT CALLBACK returned_message_proc(HWND window, UINT message, WPARAM wp, LPARAM lp)
+{
+    if (message == WM_MDIGETACTIVE) return (LRESULT)returned_message_window;
+    return DefWindowProcA(window, message, wp, lp);
+}
+
 static void verify_returned_windows(void)
 {
-    HWND first, second, child, old, dead;
+    HWND first, second, child, old, dead, message_window;
+    HWND payload[4];
+    WNDCLASSA message_class = {0};
+    DWORD_PTR message_result = 0;
     ULONG backing;
     unsigned before = borrow_errors;
     first = CreateWindowA("STATIC", "Return owner", WS_POPUP,
@@ -286,10 +353,32 @@ static void verify_returned_windows(void)
         BORROW_CHECK(backing != 0);
         if (backing) BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(backing));
         BORROW_CHECK(wow_native_ReleaseCapture() && !GetCapture());
+        message_class.lpfnWndProc = returned_message_proc;
+        message_class.hInstance = GetModuleHandle(NULL);
+        message_class.lpszClassName = "T447ReturnedMessage";
+        BORROW_CHECK(RegisterClassA(&message_class));
+        message_window = CreateWindowA(message_class.lpszClassName, "", WS_POPUP,
+            0, 0, 10, 10, NULL, NULL, message_class.hInstance, NULL);
+        BORROW_CHECK(message_window != NULL);
+        if (message_window) {
+            returned_message_window = second;
+            BORROW_CHECK((HWND)wow_native_SendMessageA(message_window, WM_MDIGETACTIVE, 0, 0) == second);
+            BORROW_CHECK(wow_native_SendMessageTimeoutA(message_window, WM_MDIGETACTIVE,
+                0, 0, SMTO_ABORTIFHUNG, 1000, &message_result) && (HWND)message_result == second);
+            BORROW_CHECK(DestroyWindow(message_window));
+        }
+        BORROW_CHECK(UnregisterClassA(message_class.lpszClassName, message_class.hInstance));
         dead = first;
         BORROW_CHECK(wow_native_DestroyWindow(first)); first = NULL;
         BORROW_CHECK(wow_user_window_refresh_return(dead));
         BORROW_CHECK(!mvdm_softpc_wow_page_domain_borrow_window((ULONG)(ULONG_PTR)dead));
+        payload[0] = dead; payload[1] = second;
+        payload[2] = (HWND)(LONG)(SHORT)LOWORD(child); payload[3] = NULL;
+        BORROW_CHECK(wow_user_window_refresh_payload(NULL, payload, 4));
+        backing = mvdm_softpc_wow_page_domain_borrow_window((ULONG)(ULONG_PTR)child);
+        BORROW_CHECK(backing != 0);
+        if (backing) BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(backing));
+        BORROW_CHECK(!wow_user_window_refresh_payload(NULL, NULL, 1));
     }
     if (child) BORROW_CHECK(wow_native_DestroyWindow(child));
     if (second) BORROW_CHECK(wow_native_DestroyWindow(second));
@@ -322,6 +411,7 @@ static int verify_callback_borrow(ULONG teb)
     callback_teb = teb;
     verify_native_mutation_group(c_sas_dw_at(teb + 0x60u));
     verify_returned_windows();
+    verify_message_window_operands();
     {
         HWND first = CreateWindowA("STATIC", "Mutation parent", WS_POPUP,
             10, 20, 80, 80, NULL, NULL, GetModuleHandle(NULL), NULL);

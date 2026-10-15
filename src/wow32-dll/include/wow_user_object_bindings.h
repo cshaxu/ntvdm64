@@ -50,4 +50,13 @@ BOOL WINAPI wow_user_window_project_graph(const HWND *, ULONG);
 BOOL WINAPI wow_user_window_refresh_graph(HWND);
 /* Completed native setter's previous HWND; dead results are not revived. */
 BOOL WINAPI wow_user_window_refresh_return(HWND);
+/* Typed callback payload identities, sampled in the same graph transaction.
+ * Caller excludes insertion-order constants and non-window union members. */
+BOOL WINAPI wow_user_window_refresh_payload(HWND, const HWND *, ULONG);
+/* Native SDK message operands only; original WOW retains all conversion.
+ * Caller supplies four slots. No window queries or guest allocation occur. */
+ULONG WINAPI wow_user_message_window_roots(UINT, WPARAM, LPARAM, HWND [4]);
+BOOL WINAPI wow_user_window_refresh_message(HWND, UINT, WPARAM, LPARAM);
+ULONG WINAPI wow_user_queue_window_roots(const MSG *, HWND [4]);
+ULONG WINAPI wow_user_message_return_roots(UINT, WPARAM, LPARAM, LRESULT, HWND [4]);
 #endif

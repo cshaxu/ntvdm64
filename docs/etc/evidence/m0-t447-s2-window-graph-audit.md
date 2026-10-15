@@ -2363,6 +2363,122 @@ must exercise off-graph identities and numeric/menu negative cases, not only
 normal windows already reachable from desktop. This checkpoint does not
 assert a complete design or authorize a guest modification.
 
+Implementation checkpoint after7dfe56391: reuse the same project_graph
+transaction for an optional array of typed payload identities; the P14
+returned-window entry now calls it with one element. Required receiver
+validation is unchanged, dead secondary values are not resurrected and live
+publication failures abort the transaction. No independent table or per-field
+graph refresh is introduced. Hook extraction follows original hook type/code
+and retains all original thunk bodies, excluding insertion-order constants
+and negative-code payload dereferences. The tagged CallWindowProc branch now
+also refreshes its receiver before entering the original registered procedure.
+The SDK message operand seam now follows wmdisp32/wstruc native field layout
+and feeds window/dialog/tagged-CallWindowProc and CWP/MSG Hook entries. It does
+not convert or write guest data. Original putmsg16 handles a nested MSG only
+for COMMAND/DDE/DROPFILES; GETDLGCODE collection follows that restriction,
+never recursively walking arbitrary message pointers. New fixture assertions
+cover numeric/owner-draw-menu exclusions, insertion constants, SWP_NOZORDER,
+NCCALCSIZE discriminant and non-recursive nested MSG. All are unrun candidates.
+
+This operand metadata is a bounded facade rather than a replacement thunk:
+the original thunk owns guest allocations, message-specific result behavior
+and cleanup, but cannot emit observation roots without a new mirror hook or
+running the guest conversion twice. Neither is justified for collecting host
+identities. Retain every original converter and one observation transaction.
+The short native carrier again uses retained GetFullUserHandle, not an added
+alias table. No original-source function is replaced by the operand seam.
+
+Still pending in this same group: private WINHELP/DROPSTRUCT operands (reuse
+their existing exact ABI declarations, not pointer-prefix guessing), queue
+Get/Peek result fields, native message result/copyback HWNDs, owner-draw menu
+publication through the existing menu owner, off-graph identity/lifetime and
+real callback acceptance. No partial build/test or runtime publication yet.
+
+Grouped implementation review before payload-r1: SDK DROPSTRUCT is present
+in WinUser.h and retains both named HWND fields; private message numbers match
+the already retained OpenNT winuserp.h, with no new ABI structure copy. The
+original aw32Msg rows also identify INITDIALOG, scroll-clipboard and palette
+notifications as WM32SetFocus consumers; those are included. Original
+putwindowpos16 copies hwndInsertAfter even with SWP_NOZORDER, so the candidate
+and fixture were corrected to preserve that typed value, excluding only the
+four insertion constants. Earlier wording about excluding the flag is not
+the final implementation contract.
+
+unthunkwmmsg16 copies back owner-draw, WINDOWPOS/NCCALCSIZE and NEXTMENU data,
+and converts MDICREATE/MDIGETACTIVE window results. Native-call records now
+copy these identities before owner restoration, including typed menu outputs;
+they never retain the caller's structure pointer across the handoff. The
+existing graph/menu owners publish them afterward. SendMessageTimeout reads
+outputs only on success. PeekMessage copies only putmsg16's receiver and
+COMMAND/DDE identities on an available message; no arbitrary posted pointer
+is dereferenced. WU32DispatchMessage uses GETLONG16, so its numeric return is
+deliberately unchanged. Window/dialog/CallWindowProc and Hook menu ingress use
+the same existing menu publication owner for owner-draw and NEXTMENU roots.
+
+Second-role review: all source changes remain project-owned; original thunk
+dispatch, atom/structure conversion, guest allocations, copyback and callback
+scheduler remain selected. The added roots are stack-owned, copied before
+handoff, bounded by the documented four-slot interface and validated by the
+same graph transaction. Fixtures add typed negatives, native SendMessage and
+SendMessageTimeout returns, mixed dead/live/short payloads and invalid-array
+failure. Hook ordering fixture bindings are updated without pretending that
+its stubs test publication (the real CCPU group owns that evidence). Grouped
+payload-r1 builds once and runs hook-order plus all12 foundation cases; product
+regression follows only if that complete gate passes. No test result yet.
+
+payload-r1 (supervisor29024, start18:27:02Z on2026-10-15) terminates at build:
+the project-owned operand source lacked dde.h, so WM_DDE_* declarations were
+not visible. Other changed provider units compile. No fixture or application
+acceptance is claimed; payload-apps-r1 refuses staging after the failed gate.
+Add the declaration include to source and operand fixture, without changing
+runtime semantics. payload-r2 (supervisor10052, start18:28:39Z) reruns the
+complete group; payload-apps-r2 (supervisor31780) waits on that exact gate.
+Both terminal identities and earlier logs remain preserved. The publication
+wrapper additionally requires hook-order.exit0 before the existing13-image
+publication checks, so the added ordering case cannot be silently omitted.
+
+payload-r2 progress checkpoint: worker/provider builds and hook-order exit0;
+graph-snapshot, window-borrow and window-reclaim exit0. Their real CCPU output
+includes WOW_MESSAGE_OPERANDS_CCPU and WOW_RETURNED_WINDOWS_CCPU errors0,
+plus normal/exception borrow, delayed retirement, slot-reuse and retained
+reader assertions. The inspected graph/borrrow fixture link logs contain no
+LNK2001/LNK2019 unresolved symbols; historical duplicate-symbol warnings are
+not treated as proof of a new unresolved provider. Supervisors10052/31780
+remain live with their recorded start identities. This is partial acceptance,
+not completion of the12-case gate, product regression or publication.
+
+### S2 P15 payload publication delivery
+
+payload-r2 completes exit0 at18:43:01Z on2026-10-15 (about862s including
+incremental worker/provider generation/build, Hook ordering and12 foundation
+cases). Every case exit file is0; native creation records51 callbacks, nested
+creation, rejection/veto,7 destroyed windows and an empty final table.
+payload-apps-r2 completes exit0 at18:47:11Z. The real authored Win16 probe
+reports errors0, matched1, queries3, freed2, properties1 and signed result-7.
+The real CBT probe passes query/nested creation/veto/recovery/unhook/launcher
+completion. SOL and WINMINE pass actual interaction and normal exit in all
+three modes. WRITE's MENU/DOC/PAGEINFO classes are visible in each mode;
+editing remains unaccepted. Console17 and Window17 each match17 expected
+exit codes, with zero mismatches. No repeated application discovery runs
+selected this group; acceptance follows the source-derived grouped repair.
+
+payload-publish-r1, supervisor34580 started18:35:11Z, waits for those exact
+gates and completes exit0 at18:47:30Z. The verified manifest, source/input
+seals, rollback backups and unchanged-inputs record establish13 correct-width
+images matching assets/release and O:/winnt/system32. Only two images change:
+
+- ntvdm.exe: A9290D99DD2B2E36DFE97856B35CB9B8E2036911FC76C3D3C45C41FDB654356A
+- WOW32.DLL: 548670A8B417681B2E6152D114A41DD997E67699E9978C99D6E848A8847FA985
+
+Other11 host images and46 guest/config files remain identical. The committed
+owner-approved ZIP remains unchanged. No changed paths under src/mvdm or
+src/opennt-host, no guest rebuild/hot patch, no new exported ABI or second
+scheduler/object registry. Original message converters and cleanup remain
+selected; the new facade only publishes their typed host identities.
+Partial checkpoints and the r1 missing-header failure remain above rather
+than being rewritten as successes. Final documentation/diff review and the
+reviewed main commit/push complete this bounded delivery; S2 remains open.
+
 ### Post-P13 returned-object production closure audit
 
 Baseline cf2ac9520 is pushed and published. This continuation is source

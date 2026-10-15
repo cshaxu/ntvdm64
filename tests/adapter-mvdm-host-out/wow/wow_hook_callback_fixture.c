@@ -32,6 +32,25 @@ BOOL WINAPI wow_user_window_refresh_graph(HWND window)
     CHECK(task_depth == borrow_depth && borrow_depth);
     return !deny_graph;
 }
+/* This fixture checks owner/unwind order only; production operand selection
+ * and graph publication are checked by the separate real CCPU fixture. */
+BOOL WINAPI wow_user_window_refresh_payload(HWND window, const HWND *roots, ULONG count)
+{
+    CHECK(!count || roots != NULL);
+    return wow_user_window_refresh_graph(window);
+}
+ULONG WINAPI wow_user_message_window_roots(UINT message, WPARAM wp, LPARAM lp, HWND roots[4])
+{
+    (void)message; (void)wp; (void)lp; (void)roots;
+    CHECK(task_depth == borrow_depth && borrow_depth);
+    return 0;
+}
+BOOL WINAPI wow_menu_native_refresh_message(UINT message, WPARAM wp, LPARAM lp)
+{
+    (void)message; (void)wp; (void)lp;
+    CHECK(task_depth == borrow_depth && borrow_depth);
+    return TRUE;
+}
 BOOL WINAPI wow_window_creation_enroll_internal(wow_task_order_thread *thread,
     HWND window, const CREATESTRUCTA *request, wow_window_creation_enrollment *scope)
 {

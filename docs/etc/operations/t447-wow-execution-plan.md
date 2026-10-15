@@ -2,6 +2,39 @@
 
 ## Admission and boundaries
 
+### S2 P15: typed callback payload publication
+
+The post-P14 source audit selects the existing window graph as the sole
+publication owner. Extend its single transaction to accept multiple explicitly
+typed secondary HWND roots, retaining the required receiver separately. Dead
+secondary identities are not revived or rebound to another generation; live
+required publication failures retain the existing boundary contract. No alias
+macro interception, new registry, guest conversion or guest change is allowed.
+This generalizes P14's previous-HWND root without changing that API's behavior.
+
+The complete group must connect window/dialog callbacks, tagged CallWindowProc,
+original hook entry and message-specific result publication. Original aw32Msg,
+ThunkCbtHook/ThunkCallWndProcHook/ThunkMsgFilterHook and structure converters
+remain selected. Typed operand extraction must follow those original owners,
+excluding menu-valued owner-draw unions and insertion-order constants. Resolve
+all remaining operand/lifetime cases before calling this design complete.
+The previous tagged CallWindowProc branch published only message menus;
+its receiver/payload publication now matches the other guest callback entries.
+
+Current candidate extends the project-owned graph helper, adds typed primary
+Hook operands and SDK message operands to window/dialog/tagged-CallWindowProc
+and message-Hook entries. It retains original short-handle normalization and
+adds negative operand fixtures. Private WINHELP/DROPSTRUCT operands, queued
+message return and message-result/copyback integration are now connected.
+Native output structures are read before task restoration; only copied HWND/
+HMENU values survive that boundary. Timeout failure does not inspect output.
+DispatchMessage retains its original numeric GETLONG16 return, not an invented
+HWND conversion. payload-r2 passes all12 foundation groups plus hook-order;
+payload-apps-r2 passes real guest discovery/CBT, three-mode SOL/WINMINE,
+WRITE initialization and both DOS17 matrices. payload-publish-r1 verifies the
+13-image package at both release locations. Additional mirror/guest diff is
+zero. This delivers P15, not S2/T447 closure or WRITE editing acceptance.
+
 ### S2 P14 after E: returned-object publication
 
 The post-P13 source audit in the window-graph evidence identifies the bounded

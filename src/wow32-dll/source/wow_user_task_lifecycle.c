@@ -6,6 +6,7 @@
 #include "wow_window_creation_binding.h"
 #include "wow_user_object_bindings.h"
 #include "wow_menu_client_bindings.h"
+#include "wow_menu_native_bindings.h"
 #include "wow_task_profile_bindings.h"
 #include "wow_user_session_binding.h"
 #include "opennt-abi/host-compat/include/thread_start_compat.h"
@@ -679,7 +680,11 @@ static BOOL peek_message_published(LPMSG message, HWND window, UINT first,
      * callbacks even when it returns FALSE, so publish on both outcomes. */
     if (!wow_user_native_call_begin(&call, NULL)) return FALSE;
     SetLastError(error);
-    __try { *available = PeekMessageA(message, window, first, last, flags); }
+    __try {
+        *available = PeekMessageA(message, window, first, last, flags);
+        if (*available) call.returned_count =
+            wow_user_queue_window_roots(message, call.returned_payload);
+    }
     __finally {
         error = GetLastError();
         restored = wow_user_native_call_end(&call);
@@ -826,6 +831,36 @@ BOOL WINAPI wow_user_native_call_begin(wow_user_native_call *call, HWND window)
     return TRUE;
 }
 
+void WINAPI wow_user_native_call_result(wow_user_native_call *call,
+    UINT message, WPARAM wp, LPARAM lp, LRESULT result)
+{
+    call->returned_count = wow_user_message_return_roots(message, wp, lp,
+        result, call->returned_payload);
+    /* wmsg16.c returns a previous menu, or NEXTMENU's output pair. Copy
+     * identities now, not native structure pointers across task handoff. */
+    if (message == WM_MDISETMENU) call->returned_menu = (HMENU)result;
+    else if (message == WM_NEXTMENU && lp)
+        call->returned_menu = ((const MDINEXTMENU *)lp)->hmenuNext;
+    else if (message == WM_DRAWITEM && lp && ((const DRAWITEMSTRUCT *)lp)->CtlType == ODT_MENU)
+        call->returned_menu = (HMENU)((const DRAWITEMSTRUCT *)lp)->hwndItem;
+    else if (message == WM_DELETEITEM && lp && ((const DELETEITEMSTRUCT *)lp)->CtlType == ODT_MENU)
+        call->returned_menu = (HMENU)((const DELETEITEMSTRUCT *)lp)->hwndItem;
+    else if (message == WM_COMPAREITEM && lp && ((const COMPAREITEMSTRUCT *)lp)->CtlType == ODT_MENU)
+        call->returned_menu = (HMENU)((const COMPAREITEMSTRUCT *)lp)->hwndItem;
+}
+
+static BOOL publish_call_windows(const wow_user_native_call *call)
+{
+    HWND roots[5];
+    ULONG count = call->returned_count;
+    if (count > 4) { SetLastError(ERROR_INVALID_DATA); return FALSE; }
+    CopyMemory(roots, call->returned_payload, count * sizeof(*roots));
+    roots[count++] = call->returned_window;
+    return wow_user_window_refresh_payload(NULL, roots, count) &&
+        (!call->returned_menu || !IsMenu(call->returned_menu) ||
+            wow_menu_native_refresh_menu(call->returned_menu));
+}
+
 BOOL WINAPI wow_user_native_call_end(wow_user_native_call *call)
 {
     wow_user_runtime_thread *binding = call->binding;
@@ -837,7 +872,7 @@ BOOL WINAPI wow_user_native_call_end(wow_user_native_call *call)
         wow_user_native_call_failed("restore-native-owner", GetLastError());
     if (!call->receiver_id) {
         call->binding = NULL;
-        published = wow_user_window_refresh_return(call->returned_window) &&
+        published = publish_call_windows(call) &&
             wow_menu_client_refresh_all(binding->thread->ppi);
         error = GetLastError();
         if (!published) wow_user_native_call_failed("publish-native-return", error);
@@ -858,7 +893,7 @@ BOOL WINAPI wow_user_native_call_end(wow_user_native_call *call)
     }
     sender->psmsSent = call->previous;
     call->binding = NULL;
-    published = wow_user_window_refresh_return(call->returned_window) &&
+    published = publish_call_windows(call) &&
         wow_menu_client_refresh_all(sender->ppi);
     error = GetLastError();
     if (!published) wow_user_native_call_failed("publish-native-return", error);
@@ -886,14 +921,14 @@ __declspec(noreturn) void WINAPI wow_user_native_call_failed(const char *stage, 
 
 /* ADAPTER-WOW-051: candidate target-aware native call edge. Same-thread
  * calls retain their direct execution. Native transport/result is unchanged. */
-#define WOW_NATIVE_CALL_RESULT(type, name, params, args, failed, target, window_result) \
+#define WOW_NATIVE_CALL_AFTER(type, name, params, args, failed, target, after) \
 type WINAPI wow_native_##name params \
 { \
     wow_user_native_call call; \
     type result; BOOL restored; DWORD error = GetLastError(); \
     if (!wow_user_native_call_begin(&call, target)) return failed; \
     SetLastError(error); \
-    __try { result = name args; call.returned_window = (window_result); } \
+    __try { result = name args; after; } \
     __finally { \
         error = GetLastError(); \
         restored = wow_user_native_call_end(&call); \
@@ -901,6 +936,8 @@ type WINAPI wow_native_##name params \
     } \
     return restored ? result : failed; \
 }
+#define WOW_NATIVE_CALL_RESULT(type, name, params, args, failed, target, window_result) \
+    WOW_NATIVE_CALL_AFTER(type, name, params, args, failed, target, call.returned_window = (window_result))
 #define WOW_NATIVE_CALL_TARGET(type, name, params, args, failed, target) \
     WOW_NATIVE_CALL_RESULT(type, name, params, args, failed, target, NULL)
 #define WOW_NATIVE_CALL(type, name, params, args, failed) \
@@ -938,16 +975,22 @@ WOW_NATIVE_CALL(DWORD, SetClassLongA, (HWND w, int index, LONG value), (w, index
 WOW_NATIVE_CALL(int, GetWindowTextA, (HWND w, LPSTR text, int count), (w, text, count), 0)
 WOW_NATIVE_CALL(int, GetWindowTextLengthA, (HWND w), (w), 0)
 WOW_NATIVE_CALL(BOOL, SetWindowTextA, (HWND w, LPCSTR text), (w, text), FALSE)
-WOW_NATIVE_CALL(LRESULT, SendMessageA, (HWND w, UINT message, WPARAM wp, LPARAM lp), (w, message, wp, lp), 0)
-WOW_NATIVE_CALL(LRESULT, SendMessageTimeoutA, (HWND w, UINT message, WPARAM wp, LPARAM lp, UINT flags, UINT timeout, PDWORD_PTR value), (w, message, wp, lp, flags, timeout, value), 0)
-WOW_NATIVE_CALL(LRESULT, DefWindowProcA, (HWND w, UINT message, WPARAM wp, LPARAM lp), (w, message, wp, lp), 0)
-WOW_NATIVE_CALL(LRESULT, DefDlgProcA, (HWND w, UINT message, WPARAM wp, LPARAM lp), (w, message, wp, lp), 0)
-WOW_NATIVE_CALL(LRESULT, DefMDIChildProcA, (HWND w, UINT message, WPARAM wp, LPARAM lp), (w, message, wp, lp), 0)
-WOW_NATIVE_CALL(LRESULT, DefFrameProcA, (HWND w, HWND client, UINT message, WPARAM wp, LPARAM lp), (w, client, message, wp, lp), 0)
+#define WOW_NATIVE_MESSAGE(name, params, args) \
+    WOW_NATIVE_CALL_AFTER(LRESULT, name, params, args, 0, w, \
+        wow_user_native_call_result(&call, message, wp, lp, result))
+WOW_NATIVE_MESSAGE(SendMessageA, (HWND w, UINT message, WPARAM wp, LPARAM lp), (w, message, wp, lp))
+WOW_NATIVE_CALL_AFTER(LRESULT, SendMessageTimeoutA, (HWND w, UINT message, WPARAM wp, LPARAM lp, UINT flags, UINT timeout, PDWORD_PTR value), (w, message, wp, lp, flags, timeout, value), 0, w,
+    if (result && value) wow_user_native_call_result(&call, message, wp, lp, (LRESULT)*value))
+WOW_NATIVE_MESSAGE(DefWindowProcA, (HWND w, UINT message, WPARAM wp, LPARAM lp), (w, message, wp, lp))
+WOW_NATIVE_MESSAGE(DefDlgProcA, (HWND w, UINT message, WPARAM wp, LPARAM lp), (w, message, wp, lp))
+WOW_NATIVE_MESSAGE(DefMDIChildProcA, (HWND w, UINT message, WPARAM wp, LPARAM lp), (w, message, wp, lp))
+WOW_NATIVE_MESSAGE(DefFrameProcA, (HWND w, HWND client, UINT message, WPARAM wp, LPARAM lp), (w, client, message, wp, lp))
+#undef WOW_NATIVE_MESSAGE
 WOW_NATIVE_CALL_TARGET(LRESULT, DispatchMessageA, (const MSG *message), (message), 0, message ? message->hwnd : NULL)
 #undef WOW_NATIVE_CALL
 #undef WOW_NATIVE_CALL_TARGET
 #undef WOW_NATIVE_CALL_RESULT
+#undef WOW_NATIVE_CALL_AFTER
 
 static BOOL retire_task(wow_user_task_lifecycle *owner, DWORD task_id,
     HANDLE instance, PNEMODULESEG selectors, DWORD count)

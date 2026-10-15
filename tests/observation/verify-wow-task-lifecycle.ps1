@@ -260,6 +260,9 @@ if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource
     throw 'Native mutation return did not synchronize child ID, parent or deferred geometry'
 }
 if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource')) {
+    if (!($fixtureOutput -match '^WOW_MESSAGE_OPERANDS_CCPU errors=0 typed=1 numeric=1 menu=1 position=1 nested=1$')) {
+        throw 'Typed message window operands or numeric/menu/structure exclusions failed'
+    }
     if (!($fixtureOutput -match '^WOW_RETURNED_WINDOWS_CCPU errors=0 parent=1 owner=1 numeric=1 previous=1 capture=1 dead=1$')) {
         throw 'Returned window identities, parent/owner distinction or capture publication failed'
     }
