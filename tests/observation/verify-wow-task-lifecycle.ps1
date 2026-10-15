@@ -232,6 +232,10 @@ if ($Case -eq 'graph-snapshot' -and
     !($fixtureOutput -match '^WOW_GRAPH_SNAPSHOT_CCPU errors=0 fresh=1 child_id=1 dead_withdrawal=1 retained_reader=1$')) {
     throw 'Whole snapshot failed fresh publication, relation copying or retained-reader retirement'
 }
+if ($Case -eq 'graph-snapshot' -and
+    !($fixtureOutput -match '^WOW_NATIVE_SLOT_REUSE_CCPU errors=0 attempts=[1-9][0-9]* old=[0-9a-f]{8} new=[0-9a-f]{8} old_backing=[0-9a-f]{8} new_backing=[0-9a-f]{8}$')) {
+    throw 'Real native handle-slot reuse and retained-generation isolation were not verified'
+}
 $fixtureOutput | Write-Output
 if ($Case -eq 'native-creation' -and
     !($fixtureOutput -match '^WOW_NATIVE_CREATION_BINDING errors=0 .* table_empty=1$')) {

@@ -3317,3 +3317,45 @@ has one retirement owner and retry skips existing projections. Final gates
 cover documentation/links/diff,13 PE/hash identities and unchanged companions.
 Unrelated assets/winnt.zip stays excluded. Commit title: Deliver T447 S2 P8
 standard class admission baseline. S2 remains active; no whole-WOW closure.
+
+### Post-P8 real native slot reuse acceptance
+
+Source review distinguishes shared-view publication from managed creation.
+Original OpenNT windows/core/ntuser/kernel/handtabl.c HMFreeObject clears the
+entry and advances uniqueness; HMMarkObjectDestroy retains locked objects.
+The retained GetFullUserHandle reads type/uniqueness, not cleanup ownership.
+Current page_domain_project_window_graph prepares a new backing before
+withdrawing a dead observed generation. Existing borrow records retain the
+old backing. This calls for real native reuse acceptance, not another handle
+registry or a change to the original resolver.
+
+The checked-in graph-snapshot case now runs verify_native_slot_reuse in
+tests/mvdm-host/wow_page_domain_fixture.c. It projects a real STATIC HWND,
+borrows its CCPU WND, writes a sentinel WOW word, destroys the native window,
+and creates/destroys hidden windows until native USER returns the same slot
+with a different full handle. Both131072 attempts and30 seconds bound this
+witness acquisition; absence is a failed assertion, never a passing skip.
+The old publication stays intact until the normal graph projector replaces
+it. Assertions require current GetFullUserHandle identity, refusal of a fresh
+old-handle borrow, separate backing, preserved old sentinel, zero new words,
+and release of both generations after native destruction. No synthetic
+handle is substituted for this case.
+
+Run: build/M0-T447/S2/native-reuse-r1, graph-snapshot through the existing
+verify-wow-task-lifecycle.ps1 entrypoint, provider cache M0-T445/S6/provider
+and worker cache M0-T445/S6/r003. Background supervisor17592 owns child32800,
+started2026-10-15T11:13:59.3867306Z with600-second outer deadline; fixture has
+its existing60-second deadline. Both return0. Marker:
+WOW_NATIVE_SLOT_REUSE_CCPU errors=0 attempts=1 old=029c0d64 new=029d0d64
+old_backing=00225000 new_backing=0022a000. The complete graph-snapshot fixture
+also returns WOW_PAGE_DOMAIN_LIFECYCLE_OK. This is real native USER plus
+real CCPU storage evidence, not a Win16 guest-program reuse witness.
+
+Separate review keeps the managed-creation case open: CBT enrollment calls
+publish_owner before native_call_end refreshes the graph. A stale observed
+generation can therefore still be present when an internal creation needs
+that slot. The passing graph-return case does not prove that earlier entrance
+or justify adding a graph refresh inside a callback without its lock review.
+Next acceptance must cover observed-to-managed reuse inside a native call,
+including existing borrows and rollback. No production/mirror/guest source
+changed in this test delivery; P8 remains the published runtime baseline.

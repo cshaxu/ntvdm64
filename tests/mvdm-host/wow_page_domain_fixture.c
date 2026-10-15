@@ -1071,6 +1071,64 @@ cleanup:
 }
 
 #ifdef WOW_GRAPH_SNAPSHOT_FIXTURE
+static void verify_native_slot_reuse(void)
+{
+    static wow_user_object_table no_cleanup_owner;
+    HWND old_window = NULL, replacement = NULL, desktop = GetDesktopWindow();
+    ULONG old_full = 0, new_full = 0, held = 0, fresh = 0, previous, words[3];
+    unsigned attempts = 0, before = borrow_errors;
+    ULONGLONG started;
+    old_window = CreateWindowExA(0, "STATIC", "Reuse old", WS_POPUP,
+        0, 0, 24, 24, NULL, NULL, GetModuleHandleA(NULL), NULL);
+    BORROW_CHECK(old_window != NULL);
+    if (!old_window) goto cleanup;
+    old_full = (ULONG)(ULONG_PTR)old_window;
+    BORROW_CHECK(wow_user_window_project_graph(&old_window, 1));
+    held = mvdm_softpc_wow_page_domain_borrow_window(old_full);
+    BORROW_CHECK(held != 0);
+    if (!held) goto cleanup;
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_exchange_window_word(
+        held, 0, 0x76543210u, &previous));
+    BORROW_CHECK(DestroyWindow(old_window)); old_window = NULL;
+    /* Keep the old publication and its actual CCPU-backed borrow until USER
+     * supplies a different generation in the same slot. Never manufacture a
+     * handle, and never count failure to witness reuse as a passing skip. */
+    started = GetTickCount64();
+    while (attempts < 131072u && GetTickCount64() - started < 30000u) {
+        ++attempts;
+        replacement = CreateWindowExA(0, "STATIC", "Reuse new", WS_POPUP,
+            0, 0, 24, 24, NULL, NULL, GetModuleHandleA(NULL), NULL);
+        if (!replacement) break;
+        new_full = (ULONG)(ULONG_PTR)replacement;
+        if (LOWORD(new_full) == LOWORD(old_full) && new_full != old_full) break;
+        BORROW_CHECK(DestroyWindow(replacement)); replacement = NULL;
+    }
+    BORROW_CHECK(replacement && LOWORD(new_full) == LOWORD(old_full) &&
+        new_full != old_full && !IsWindow((HWND)(ULONG_PTR)old_full));
+    if (!replacement || LOWORD(new_full) != LOWORD(old_full) ||
+            new_full == old_full) goto cleanup;
+    BORROW_CHECK(wow_user_window_project_graph(&replacement, 1));
+    BORROW_CHECK(wow_user_full_handle(&no_cleanup_owner, LOWORD(old_full)) == new_full);
+    BORROW_CHECK(!mvdm_softpc_wow_page_domain_borrow_window(old_full));
+    fresh = mvdm_softpc_wow_page_domain_borrow_window(new_full);
+    BORROW_CHECK(fresh && fresh != held);
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_words(held, words) &&
+        words[0] == 0x76543210u && c_sas_dw_at(held) == old_full);
+    BORROW_CHECK(fresh && mvdm_softpc_wow_page_domain_read_window_words(fresh, words) &&
+        words[0] == 0 && c_sas_dw_at(fresh) == new_full);
+cleanup:
+    if (old_window) BORROW_CHECK(DestroyWindow(old_window));
+    if (replacement) BORROW_CHECK(DestroyWindow(replacement));
+    BORROW_CHECK(wow_user_window_project_graph(&desktop, 1));
+    if (fresh) BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(fresh));
+    if (held) BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(held));
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_collect_observed_classes());
+    if (fresh) BORROW_CHECK(!mvdm_softpc_wow_page_domain_read_window_words(fresh, words));
+    if (held) BORROW_CHECK(!mvdm_softpc_wow_page_domain_read_window_words(held, words));
+    fprintf(stderr, "WOW_NATIVE_SLOT_REUSE_CCPU errors=%u attempts=%u old=%08lx new=%08lx old_backing=%08lx new_backing=%08lx\n",
+        borrow_errors - before, attempts, old_full, new_full, held, fresh);
+}
+
 static void verify_graph_snapshot_commit(ULONG teb)
 {
     HWND desktop = GetDesktopWindow(), window = NULL, child = NULL;
@@ -2536,6 +2594,7 @@ guest_window_failure:
 #ifdef WOW_GRAPH_SNAPSHOT_FIXTURE
     stage = "whole-graph-snapshot";
     verify_graph_snapshot_commit(teb);
+    verify_native_slot_reuse();
     if (borrow_errors) goto done;
 #endif
 #endif
