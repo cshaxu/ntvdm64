@@ -56,7 +56,10 @@ All12 foundation groups, Hook ordering, real Win16 discovery/CBT,
 three-mode SOL/WINMINE and both DOS17 matrices pass; WRITE retains
 only its initialization frontier, not editing acceptance.
 All13 images match both publication locations. Zero new mirror/guest diff.
-Earlier unexplained timeouts and remaining callback/WRITE gaps keep S2 open.
+The owner's safe-pause audit freezes S2 at F01--F12 and A1--A4 in the
+[scope audit](../etc/evidence/m0-t447-s2-scope-freeze.md). S2 remains open for
+callback restoration, non-WND entry proof, terminal refusal and native-return
+completion safety. WRITE editing is S3, not an unlimited S2 closure gate.
 Owner-approved assets/winnt.zip is committed in 6275809e0, unchanged here.
 
 ## Active Packet
@@ -346,15 +349,15 @@ actual provider event/object ownership. This is not abnormal task termination.
 | Admission And Approval | Owner's continued instruction to restore WOW32, original-source priority and minimal mirror diff; clean project implementation is allowed where original integration is excessively complex/error-prone, with equivalent semantics and explicit source/design justification. Sequential admission after S1 delivery f950ffd38. |
 | Objective | Deliver original callback execution and dependency-complete W02 object/shared-view foundations: creation, first callbacks, updates, rollback and normal retirement. Retain the whole-T audit; S3 owns basic controls/menus, S4 full C01/C02 messaging, S5 task termination. No patch-by-patch discovery. |
 | Non-goals | No guest patches, global re-audit, second scheduler, broad USER-server import or assumed heap diagnosis; no silent absorption of other W owners. Original same-worker WOW SMS delivery is admitted for design evaluation only. |
-| Reference Baseline | f950ffd38 S1 source audit; accepted ca0abb7c4 thirteen-image release; T422 E91/E92/E93 and S3 checklist; T430 G03 handoff. |
+| Reference Baseline | Published P15 01cb95ad9; fixed F01--F12 inventory and E1--E7 evidence in the scope audit. Inherited C/W/G obligations remain. |
 | Files And ABI Surface | Owner-approved E observation-view group; full design and gates in the working plan. Owned WOW graph/callback/discovery/menu/return bindings, worker page-domain/header/exports and tests. Private copied view ABI only; rebuild worker/provider together. External data may be stale; own mutations remain synchronous. No guest edits; target zero mirror/public ABI diff. |
 | Applicable Rules | Execution, architecture, coding, documentation, source policy and WOW program gates; original x86 /MT CCPU40; background-only test/build runs. |
 | Verification | Source design and independent diff review; after code connection test actual CallBack16 ordering/rollback, ordinary and nonpresent/remapped resolution, nested callback and lease failure; then affected production gates, DOS17, independent WINMINE/SOL/WRITE and coherent thirteen-image publication. No discovery test loop. |
 | Expected Markers | Original resolver really owns the mapped result; no autonomous mode-dependent callback resolver remains; each acquired frame released on failure, no pre-entry state drift, no alias across CPU reentry; explicit outstanding message/lifetime results. |
 | Asset Needs | Existing sealed package, immutable guest images, retained MSVC/Ninja and fixtures; new outputs only below build/M0-T447/S2 and approved isolated stages. |
 | Reporting Requirements | Keep stable C/W/E/G IDs; report expected/actual results and confidence independently per app; inherited failures remain open. |
-| Stop Conditions | Each implementation group requires source-based dependency and mirror-budget review; unresolved dependencies block that group, not unrelated reviewed groups. Existing callback edits are unverified candidates. No discarded resolver result, guest mutation, fake SMS identity or unapproved cross-owner scope. |
-| Exit Criteria | Production-connected callback and object foundations, including paired startup/teardown and real guest boundary evidence; source/diff review, per-P non-regression gates, hash-verified publication to assets/release and configured system32, commit/push. Full C01/C02 remains mandatory at S4, with earlier prerequisites promoted when needed. The owner-directed development checkpoint does not meet this exit. |
+| Stop Conditions | Remaining work is the integrated A1--A4 group in the scope audit, not new features. No guest change, fake SMS identity or new semantic waiver; any necessary mirror hook requires source justification and minimal-diff review. |
+| Exit Criteria | Resolve A1--A4 with per-entry proof, paired startup/teardown and real guest evidence; required grouped build/regression, thirteen-image publication/hash verification, reviewed commit/push and closure record. S3 controls/WRITE and S4 full messaging remain mandatory there, not additional S2 scope. |
 | Original Owner Request | 单人双角色模式 复通wow32；原版可接入则立即替换自主实现；以代码追溯找缺口，测试只作接通后验收。 |
 | Similar-Issue Sweep | Normal/early/duplicate replies; same/cross-task reentry; sender/receiver/task loss; callback frame/lease release; original init/yield/hung/wait paths. |
 

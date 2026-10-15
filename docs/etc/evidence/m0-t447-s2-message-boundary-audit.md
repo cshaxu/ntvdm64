@@ -1,5 +1,11 @@
 # T447 S2 message boundary audit
 
+Current disposition: the P15
+[scope-freeze audit](m0-t447-s2-scope-freeze.md) supersedes this chronological
+record's coverage status and stage allocation. Keep its source findings as
+evidence, but do not treat obsolete callback candidates or later-fixed graph
+gaps as current defects. Ordinary retirement is S2; targeted deletion is S5.
+
 ## Inputs and method
 
 Source-only follow-through on f950ffd38 and the uncommitted S2 callback

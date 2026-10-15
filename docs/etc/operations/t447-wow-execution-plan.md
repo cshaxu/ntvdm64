@@ -396,7 +396,7 @@ dependencies before declaring that condition satisfied.
 | S | Scope | Required result |
 | --- | --- | --- |
 | S1 | Source-first recovery-gap inventory and dependency design. | Finite C01--C03/C09/execution-C10 original-owner/production-binding/implementation/cleanup matrix; classified missing or divergent edges, dependency order and acceptance cases. Existing E91/E92/E93 and application observations are auxiliary evidence. No production repair. |
-| S2 | Callback and object/shared-view foundations. | Production creation/first callback/update/rollback/normal retirement, original resolver and entry scopes; paired startup/teardown and real guest evidence. |
+| S2 | Callback and object/shared-view foundations; fixed F01--F12. | Resolve A1--A4 in the scope-freeze audit: callback restoration, non-WND execution-context proof, terminal refusal and native-return safety; retain object lifecycle and real guest evidence. |
 | S3 | Basic standard controls/dialogs/menu dependencies. | Internal children, original EDIT storage/word-break/dialog DS and MENU-01 parser/graph/mutations; normal SOL/WRITE initialization, retained WINMINE. Promote prerequisite message work before this exit. |
 | S4 | Full message identity/reply/reentry. | Real Win16/Win16 and both native directions, explicit/implicit mixed messages, early/duplicate reply, waits and nested execution; no semantic waiver. |
 | S5 | Task lifetime and NT Monitor per-task termination. | Original hung/exit ownership, request-to-HTASK identity and reuse protection, sibling remains usable; explicit worker termination stays separate. Earlier cleanup is not deferred here. |
@@ -405,6 +405,23 @@ dependencies before declaring that condition satisfied.
 Only S2 is currently active. Later stages require sequential admission with
 exact files, source recovery decision and acceptance cases. Replanning must
 preserve all obligations rather than move unfinished implementation to S6.
+
+### Owner-requested S2 scope freeze at P15
+
+The [closure audit](../evidence/m0-t447-s2-scope-freeze.md) is the controlling
+remaining-work inventory, superseding vague historical "callback/WRITE gaps"
+as an S2 exit condition. P15 is delivered; the audit changes no runtime bytes.
+S2 cannot close: A1/A3 expose unchecked recovery/terminal edges, A2/A4 require
+specific execution-context and completion-class proof. Implement their common
+failure/lifetime boundary as one dependency-complete group, then test together.
+The audit records exact source owners, evidence limitations and acceptance for
+each blocker; no added feature or whole-subsystem rewrite is admitted.
+
+S3 retains concrete EDIT/dialog/control/menu behavior and application functional
+progression. S4 retains full message identity/reply/mixed-task reentry. S5
+retains targeted termination, not ordinary teardown safety. S6 reconciles
+completed work and does not receive implementation debt. A common execution
+defect stays S2 regardless of which successor uses it or which file contains it.
 
 ## S1 inherited inputs and proof levels
 

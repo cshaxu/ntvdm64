@@ -1,5 +1,9 @@
 # Supporting Material
 
+[T447 S2 scope freeze](evidence/m0-t447-s2-scope-freeze.md) fixes the
+entry/exit inventory, evidence limits, four finite closure blockers and
+S3--S6 handoffs at published P15. It does not claim runtime closure.
+
 [T447 S2 window graph audit](evidence/m0-t447-s2-window-graph-audit.md)
 traces original relationship readers to missing shared-data publication and
 defines the paired creation/update/retirement requirements before repair.

@@ -43,6 +43,15 @@ earliest consumer, not only S5. Each production P retains non-regression and
 publication gates; S3 additionally requires normal application initialization.
 The owner-directed source checkpoint is not a delivered P or S closure.
 
+At delivered P15 the owner requests a finite S2 freeze. The
+[scope audit](../etc/evidence/m0-t447-s2-scope-freeze.md) fixes F01--F12 and
+four remaining blockers A1--A4: callback restoration, remaining callback
+execution contexts, terminal refusal and native-return completion safety.
+S2 remains active; these public-contract gaps cannot be deferred to S3/S4/S5.
+Concrete controls/EDIT/dialog/menu functionality stays S3; complete message
+identity/reply/cross-task behavior stays S4; targeted termination stays S5.
+The complete C/W scope is retained, with no new semantic waiver or guest change.
+
 ## Verification, boundaries and handoff
 
 The program's [architecture and immutable-input rules](proposal-wow32-production-completion-002.md#architecture-and-immutable-inputs),
