@@ -500,6 +500,11 @@ BOOL WINAPI wow_user_task_lifecycle_init_style(wow_user_task_lifecycle *owner,
      * CLIENTINFO value. Publish it before the original init can return to
      * guest code; undo it if that initialization rejects the task. */
     if (!mvdm_softpc_wow_page_domain_set_expected_windows_version(version)) goto done;
+    /* Prepared native controls share their original class owner just like
+     * registered WOW classes. Publish before any admitted task can create a
+     * WND, under the existing exclusive runtime lock and active page domain.
+     * Never manufacture an observed per-window class for a managed control. */
+    if (!wow_standard_classes_publish(&owner->classes)) goto done;
     RtlInitUnicodeString(&name, wide);
     status = xxxInitTask(version, &name, task_id, hotkey, shared_id, x, y,
         width, height, show, &task->thread);

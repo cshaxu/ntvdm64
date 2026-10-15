@@ -11,6 +11,7 @@
 
 static unsigned errors;
 static unsigned native_direct_calls;
+extern unsigned wow_task_class_publications, wow_task_class_fail_at;
 #define CHECK(value) do { if (!(value)) { ++errors; \
     fprintf(stderr, "FAIL line=%d error=%lu\n", __LINE__, GetLastError()); } } while (0)
 
@@ -618,10 +619,31 @@ int __cdecl main(int argc,char **argv)
     CHECK(!wow_user_task_lifecycle_init_style(&lifecycle, 0x0400, "APP.EXE",
         0x1234, 0, 0, 0, 0, 1, 1, SW_HIDE, WINDOW_STYLE_OFF, 0x4321));
     CHECK(!binding.thread && GetLastError() == ERROR_NOT_FOUND);
+    {
+        wow_class_lookup_entry *entry;
+        unsigned published = 0;
+        wow_task_class_fail_at = 3;
+        CHECK(!wow_user_task_lifecycle_init_style(&lifecycle, 0x0400, "APP.EXE",
+            0x1234, 0, 0, 0, 0, 1, 1, SW_HIDE, WINDOW_STYLE_OFF, 0));
+        CHECK(!binding.thread && !binding.exclusive_held && !lifecycle.threads);
+        for (entry = lifecycle.classes.pclsPublicList; entry; entry = entry->next)
+            if (entry->guest_server) ++published;
+        CHECK(published == 2 && wow_task_class_publications == 3);
+        wow_task_class_fail_at = 0;
+    }
     CHECK(wow_user_task_lifecycle_init_style(&lifecycle, 0x0400, "APP.EXE",
         0x1234, 0, FIXTURE_LAUNCH_REQUEST,
         (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT,
         (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT, SW_SHOW, WINDOW_STYLE_WIN16, 0));
+    {
+        wow_class_lookup_entry *entry;
+        unsigned published = 0;
+        for (entry = lifecycle.classes.pclsPublicList; entry; entry = entry->next)
+            if (entry->guest_server) ++published;
+        CHECK(published == 9 && wow_task_class_publications == 10);
+        fprintf(stderr, "WOW_STANDARD_CLASS_ADMISSION projected=%u calls=%u retry=1 errors=%u\n",
+            published, wow_task_class_publications, errors);
+    }
 #ifdef WOW_START_NOTIFICATION_FIXTURE
     {
         unsigned retry;

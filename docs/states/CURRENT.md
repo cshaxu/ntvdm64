@@ -50,12 +50,11 @@ gaps and tests accept newly connected code, not select successive patches.
 Proven-composable original logic must replace its autonomous counterpart in
 the same repair, deleting that counterpart rather than deferring migration.
 Owner requires grouped implementation/testing and delivery before more wiring.
-P5 is 984ee0441; P6 is e97345404. P7 connects implicit native creation through
-shared enrollment/rollback and original-hook identity, with per-window menu
-initialization before sizing callbacks. All14 boundary cases, both DOS17
-routes and three-mode WINMINE gameplay/exit pass. creation-delivery-r6 records
-publication of the tested13 images to both locations;40 companions unchanged.
-This reviewed P7 baseline does not close S2's remaining coverage gaps.
+P7 is ff6d74dba. P8 publishes prepared standard classes at task admission,
+reusing existing class storage/retirement before managed HWND creation.
+All14 boundary cases, both DOS17 routes and three-mode WINMINE gameplay/exit
+pass. standard-class-delivery-r1 records coherent13-image publication to both
+locations. This P8 delivery does not close S2's remaining coverage gaps.
 WRITE shows main/document/page-info windows; editing/saving is unverified.
 SOL still reports Out of memory. Additional mirror/guest diff is zero.
 Native slot reuse/S2 closure remain open; preserve assets/winnt.zip.
@@ -244,14 +243,13 @@ changes, native identity restoration, class lifetime and new-window snapshots.
 This remains staged with the standard-control group until creation/projection
 and retirement are connected; no guest or additional mirror diff.
 
-Shared class projection reconciliation after P7: the class-storage publisher
-exists, but production calls it only for application registration. Prepared
-native classes still have zero guest_server; the nine-class fixture manually
-publishes them. The graph audit records resulting observed-class substitution
-and rejected promotion. Complete the first-managed-creation projection,
-serialization and paired retirement group; preserve original class ownership,
-native-only preparation and existing observed aliases. Resolve lock/domain
-admission before implementation. No new class table or mirror/guest change.
+Shared class projection after P7: source/lock review selects task admission,
+already exclusive and inside the active CCPU domain, before xxxInitTask.
+Publish prepared native classes there through the existing class owner;
+reuse process projections on retries/tasks and existing final retirement.
+P8 tests and publication pass; the graph audit records failure/retry, shared
+CLS and native-only fixture boundaries. No new class table or mirror/guest
+change. Application frontiers remain unchanged from P7.
 
 The subsequent [window graph audit](../etc/evidence/m0-t447-s2-window-graph-audit.md)
 confirms missing next/parent/child/owner writes in shared WND publication and

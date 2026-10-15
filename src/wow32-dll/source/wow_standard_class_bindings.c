@@ -109,6 +109,25 @@ BOOL WINAPI wow_standard_class_describe(LPCSTR name,
     return TRUE;
 }
 
+BOOL WINAPI wow_standard_classes_publish(wow_class_lookup_context *classes)
+{
+    wow_class_lookup_entry *entry;
+    if (!classes || !classes->client_module) {
+        SetLastError(ERROR_INVALID_STATE); return FALSE;
+    }
+    for (entry = classes->pclsPublicList; entry; entry = entry->next) {
+        wow_standard_class_view view;
+        if (!wow_class_words_native_registration((wow_class_words_binding *)entry) ||
+                entry->guest_server) continue;
+        if (!wow_standard_class_describe(MAKEINTATOM(entry->atomClassName), &view) ||
+                !wow_class_words_publish_guest(entry, &view.native)) return FALSE;
+    }
+    /* Successful members remain owned by the process on failure. No task
+     * enters guest code until the entire group is available; retry fills
+     * only missing members, and normal process disposal releases all of them. */
+    return TRUE;
+}
+
 BOOL WINAPI wow_standard_classes_prepare(wow_class_lookup_context *classes,
     wow_window_callback callback)
 {

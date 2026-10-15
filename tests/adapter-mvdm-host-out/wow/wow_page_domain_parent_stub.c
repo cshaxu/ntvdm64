@@ -53,8 +53,29 @@ unsigned long __cdecl mvdm_softpc_wow_page_domain_publish_named_class(
 }
 #endif
 
-/* The task-lifecycle fixture does not enter the CCPU page domain or publish a
- * class.  It nevertheless pulls the original class-cleanup body, which has a
+/* Native lifecycle tests replace only the class storage leaf. Production
+ * task admission and its locking/retry logic remain selected; real CCPU
+ * layout and class retirement are verified in the page-domain fixture. */
+#ifdef WOW_TASK_CLASS_PROJECTION_FIXTURE
+unsigned wow_task_class_publications;
+unsigned wow_task_class_fail_at;
+unsigned long __cdecl mvdm_softpc_wow_page_domain_publish_named_class(
+    unsigned short atom, unsigned short fnid, unsigned long flags,
+    unsigned long wow0, unsigned long wow1, unsigned long task,
+    unsigned long style, unsigned long procedure, unsigned long extra,
+    unsigned long module, const char *class_name, unsigned long name_bytes)
+{
+    (void)flags; (void)wow0; (void)wow1; (void)task;
+    (void)style; (void)procedure; (void)extra; (void)module;
+    ++wow_task_class_publications;
+    if (wow_task_class_publications == wow_task_class_fail_at) return 0u;
+    return atom && fnid && class_name && name_bytes && !class_name[name_bytes-1u] ?
+        0x10000u + 4u * atom : 0u;
+}
+#endif
+
+/* The task-lifecycle fixture does not enter the CCPU page domain. It
+ * nevertheless pulls the original class-cleanup body, which has a
  * parent ABI reference for the production class record retirement.  Keep the
  * parent boundary explicit here so this fixture neither links a second
  * session/CCPU image nor pretends to test page-domain publication.  The real

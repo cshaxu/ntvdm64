@@ -3244,3 +3244,76 @@ therefore cannot be declared this ordinary registration failure just from the
 NULL callback. Native/CPD restoration is already separately handled by the
 window/class procedure owners. Do not invent a CPD registry or claim this
 unsupported native-only input is the observed application root cause.
+
+### Standard-class admission implementation review
+
+Source/lock review resolves the candidate above in favor of task admission,
+not per-window lazy publication. wow_user_task_lifecycle_init_style already
+holds the runtime exclusive lock and validates the active page domain through
+set_expected_windows_version before xxxInitTask. publish_named_class requires
+that same session owner, CR0 paging and CR3 directory. Initialization of the
+process remains native-only; no hook or guest callback is called by the class
+publication loop. This avoids adding lock recursion or storage mutation in a
+native creation hook which can run outside the guest execution epoch.
+
+The existing public class list is the sole owner. Publish only borrowed native
+entries missing guest_server; application registration is unchanged. On a
+partial allocation failure, task admission fails and existing task cleanup
+removes its context/hook. Successfully projected classes remain process-owned;
+retry fills missing members. forget_native is already paired with process
+disposal after all tasks/windows, refusing live associations. Worker domain
+teardown is its exceptional backstop. No new rollback registry, class table,
+native registration or guest image mutation is needed.
+
+Implementation adds this bounded call before xxxInitTask. Real CCPU coverage
+now calls the same group publisher instead of manually publishing each class,
+checks inactive-domain rejection, idempotence and two native BUTTON windows
+sharing the selected CLS, retaining original layout/creation/veto/retirement
+checks. Native lifecycle fixtures explicitly mock only the storage leaf and
+exercise failure on the third class, removed task context, and retry without
+republishing the first two. Those mocks do not prove CCPU or guest behavior.
+Grouped build/runtime gates and publication are still pending; P7 remains the
+published baseline. This is not evidence that SOL's failure has been repaired.
+
+### S2 P8 standard-class admission delivery
+
+The preceding pending statement describes the pre-verification state. The
+complete group is now built and tested under standard-class-r1; supervisor
+29788 started 2026-10-15T10:29:14Z, with each child command/PID/deadline and
+exit recorded. Build and all14 cases return0: window-borrow, window-reclaim,
+graph-snapshot, process-retirement, dialog-lifecycle, menu-resource,
+thunk-scope, menu-cleanup, native-send, native-nested, task-lifecycle,
+native-creation, hook and menu. No failed row was waived. The task marker is
+WOW_STANDARD_CLASS_ADMISSION projected=9 calls=10 retry=1 errors=0; real CCPU
+reports WOW_NATIVE_CLASS_CCPU errors=0 projected=9 native_pointers=0 released=1.
+The ten calls include the deliberately failed third allocation. Existing
+native creation reports callbacks51/nested1/rejected1/vetoed1/destroyed7,
+table_empty1/errors0; those are not a full original guest-hook acceptance.
+
+standard-class-apps-r1 seals the candidate derived from the exact P7 package,
+not the user's installed tree. Ordinary WINMINE retains its main window;
+WRITE retains visible MSWRITE_MENU/DOC/PAGEINFO; SOL still shows Out of memory.
+The SOL root cause remains open and WRITE editing/saving is not verified.
+standard-class-delivery-r1 records three-mode WINMINE flag/counter/reset/open
+cell/WM_CLOSE/run16 completion PASS and Console17/Window17 each17 matches,
+zero mismatches. Application supervisor33056 and checks30204 have recorded
+commands, deadlines and successful exit codes; preparation also returns0.
+
+Publication supervisor596 starts at10:45:03Z and completes with exit0. Its
+recoverable backup/verified manifest records coherent publication to both
+assets/release and O:/winnt/system32. Changed image SHA-256 identities:
+
+- ntvdm.exe: 558BC70257B7187F96C99CA921335D43580717BF53D489CF94876236AF15C711
+- WOW32.DLL: 47192B315AB6543E3A16EE1E4349F901D3E8CA9CA94D81E91B5253411E30A585
+
+The other11 release images retain P7 identities. Production changes are only
+the standard-class binding source/header and task-lifecycle call site:
+30 additions/2 removals, including comments/declarations. No mirror or guest
+source/binary change; existing class owners displace the wrong observed-class
+fallback for managed controls, while foreign native observation remains.
+The same implementer reviews separately: lock ownership stays at admission,
+no lock is added around native hooks/callbacks, process-owned partial success
+has one retirement owner and retry skips existing projections. Final gates
+cover documentation/links/diff,13 PE/hash identities and unchanged companions.
+Unrelated assets/winnt.zip stays excluded. Commit title: Deliver T447 S2 P8
+standard class admission baseline. S2 remains active; no whole-WOW closure.

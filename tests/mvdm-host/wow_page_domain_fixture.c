@@ -539,6 +539,24 @@ static void verify_native_class_creation(wow_class_lookup_context *classes)
     BORROW_CHECK(window != NULL);
     if (window) {
         BORROW_CHECK(GetWindowLongA(window, GWL_WNDPROC) == (LONG)wow_window_native_proc);
+        {
+            HWND peer = wow_window_create_boundA(&thread, native_class.atom,
+                &request, &words, NULL);
+            wow_class_words_binding *owner = wow_class_words_acquire(classes,
+                native_class.atom, request.hInstance);
+            ULONG first = mvdm_softpc_wow_page_domain_borrow_window((ULONG)window);
+            ULONG second = peer ? mvdm_softpc_wow_page_domain_borrow_window((ULONG)peer) : 0;
+            BORROW_CHECK(peer && owner && first && second);
+            if (owner && first && second) {
+                ULONG shared = wow_class_words_entry(owner)->guest_server;
+                BORROW_CHECK(shared && c_sas_dw_at(first + 76u) == shared &&
+                    c_sas_dw_at(second + 76u) == shared);
+            }
+            if (second) BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(second));
+            if (first) BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(first));
+            wow_class_words_release(owner);
+            if (peer) BORROW_CHECK(DestroyWindow(peer));
+        }
         BORROW_CHECK(SetWindowSubclass(window, native_chain, 1, 0));
         SendMessageA(window, WM_APP + 65, 0, 0);
         BORROW_CHECK(native_chain_calls == 1);
@@ -1213,6 +1231,12 @@ static int verify_native_class_projection(ULONG teb)
     }
     BORROW_CHECK(VdmQueryFreeVirtualMemory(&free_before, &largest) >= 0);
     BORROW_CHECK(wow_standard_classes_prepare(&classes, class_projection_callback));
+    mvdm_softpc_wow_page_domain_leave_protected();
+    BORROW_CHECK(!wow_standard_classes_publish(&classes));
+    for (entry = classes.pclsPublicList; entry; entry = entry->next)
+        BORROW_CHECK(entry->guest_server == 0);
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_reenter_protected());
+    BORROW_CHECK(wow_standard_classes_publish(&classes));
     for (entry = classes.pclsPublicList; entry; entry = entry->next) {
         wow_standard_class_view native_class, by_name;
         wow_class_words_binding *again;
@@ -1220,7 +1244,6 @@ static int verify_native_class_projection(ULONG teb)
         char text[64] = {0};
         unsigned i;
         BORROW_CHECK(wow_standard_class_describe(MAKEINTATOM(entry->atomClassName), &native_class));
-        BORROW_CHECK(wow_class_words_publish_guest(entry, &native_class.native));
         server = entry->guest_server;
         BORROW_CHECK(server != 0);
         if (!server) continue;
@@ -1253,6 +1276,13 @@ static int verify_native_class_projection(ULONG teb)
         ++projected;
     }
     BORROW_CHECK(projected == 9);
+    {
+        ULONG remaining_before = 0, remaining_after = 0;
+        BORROW_CHECK(VdmQueryFreeVirtualMemory(&remaining_before, &largest) >= 0);
+        BORROW_CHECK(wow_standard_classes_publish(&classes));
+        BORROW_CHECK(VdmQueryFreeVirtualMemory(&remaining_after, &largest) >= 0 &&
+            remaining_after == remaining_before);
+    }
     verify_native_class_creation(&classes);
     BORROW_CHECK(wow_class_words_forget_native(&classes));
     BORROW_CHECK(classes.pclsPublicList == NULL);

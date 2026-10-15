@@ -199,6 +199,7 @@ if ($Case -notin @('window-borrow','window-reclaim','graph-snapshot','menu-resou
 $parentStub = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\parent-stub.obj" "'+$repo+'\tests\adapter-mvdm-host-out\wow\wow_page_domain_parent_stub.c"')
 if ($parentStub -eq $compile) { throw 'Parent-stub substitution failed' }
 if ($Case -in @('class-client','class-query')) { $parentStub += ' /DWOW_CLASS_CLIENT_FIXTURE' }
+else { $parentStub += ' /DWOW_TASK_CLASS_PROJECTION_FIXTURE' }
 if ($Case -eq 'menu-cleanup') { $parentStub += ' /DWOW_MENU_CLEANUP_FIXTURE' }
 Invoke-Build ($parentStub.Replace('/Gz', '/Gd'))
 $parentObjects = @((Join-Path $out 'parent-stub.obj'))
