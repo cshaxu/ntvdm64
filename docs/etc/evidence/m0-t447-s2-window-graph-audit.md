@@ -2316,6 +2316,53 @@ copies under delivery-r3/publication. No installed project process required
 termination. The original WINSPOOL companion is unchanged. The unrelated
 assets/winnt.zip remains excluded, SHA-256
 539A910247C5478BDE19FB2A431CD4C5AB26355CDC46F8160F49B23F060B495B.
+
+### Post-P13 returned-object production closure audit
+
+Baseline cf2ac9520 is pushed and published. This continuation is source
+research, not another runtime test loop. The preceding E group is progress;
+neither its12 fixtures nor the three applications prove all HWND producers.
+
+Inputs: selected src/mvdm/wow32/wuser.c, wuwind.c, wudlg.c, wuser31.c,
+wuclip.c, wusercli.c, wmdisp32.c, wmsg16.c, wowhooks.c, wstruc.c; current
+wow_user_private_access.h/.c, wow_user_discovery.c and
+wow_user_task_lifecycle.c. Canonical OpenNT revision remains
+5c5b979ec08c17d3ca2eb70e8aad62d26515d01c. Read-only original references:
+windows/core/ntuser/kernel/capture.c (SHA-256
+4381EC478161E8F74E2AC6E86F662AB5919FEBAF02A8C8C44C4C197B64AEC335),
+rtl/getset.c (4A2CB2067F5DD776676D7F808F40F6468082DB018E16BCF9A77DAF00BDDB34C9),
+and kernel/focusact.c xxxSetFocus. No source is imported.
+
+| Complete return/callback family | Actual producer and disposition |
+| --- | --- |
+| Pure HWND queries and window enumerations | P12 discovery seam plus P13 graph owner; retained original thunks convert the native result. Keep that implementation. |
+| Parent/owner-valued GetWindowLong/Word | WU32GetWindowLong/Word reaches wow_user_get_window_longA, which currently returns public indices directly. rtl/getset.c GetWindowData deliberately returns owner for top-level windows and parent for children. Preserve that native policy; enroll only the HWND-valued result of GWL_HWNDPARENT, never arbitrary LONG/extra words or procedure tokens. |
+| SetCapture/ReleaseCapture | wuser.c calls native APIs without the selected native-call boundary. capture.c xxxCapture can notify the OLD capture window; the new capture target is not that receiver. Pair both entries with the existing native-call ownership/restoration seam, using the previous capture as its target. Preserve native queue restrictions and native result; no substitute capture manager. |
+| SetFocus/SetActiveWindow/SetParent and parent-index setter | Already use native_call_end, but return the previous HWND without explicitly rooting it. Refreshing current relationships does not prove every previous result is represented. Extend that same return transaction, not a second native call or duplicate graph pass. |
+| EnumProps callback | W32EnumPropsFunc in wuser.c truncates hwnd then calls original CallBack16. WU32EnumProps owns string allocation, atom/string conversion and the original callback state. Missing explicit target publication at this native enumeration boundary; do not replace its property policy, string conversion or RET_ENUMPROPSPROC body. |
+| PMODE32 direct local readers | wusercli/usercli queries consume the graph; adding same-name host wrappers would not wire their actual path. No change. |
+| Message/hook/structure HWND payloads | wmdisp32/wmsg16/wowhooks/wstruc contain distinct payload converters, including HWND-valued message results. Keep them in their explicit callback/message owner audit; this return group cannot certify their complete conversion coverage. |
+| Clipboard, common-dialog, multimedia/fax returns | Preserve W10/W18/W16/W15 boundaries and original converters. The shared-view prerequisite remains recorded, not family acceptance or permission for blanket handle rewriting. |
+
+Important original lifetime evidence: xxxSetCapture saves the previous HWND,
+performs capture change, then RevalidateHwnd before returning it. xxxSetFocus
+likewise revalidates the previous HWND after callbacks and ThreadUnlock.
+Therefore the input HWND, current GetCapture/GetFocus result and actual
+returned previous HWND are different values. Never replace the returned value
+with a later getter. A destroyed/reused native return must not manufacture a
+new guest object or alias another generation.
+
+The next complete S2 group will pair these query, mutation-result and
+property-callback entrances with required local publication, error/result
+preservation, implicit callback reentry, cancellation, exception restoration
+and terminal/reuse tests. Reuse original thunk/conversion bodies and the
+existing E graph transaction; expected additional mirror/guest diff is zero.
+The selected native USER queue/server implementation remains the stopping
+boundary: capture.c depends on private PQ/PTI, locks, tracking and server sends,
+not an independently composable algorithm to duplicate in WOW32.
+
+This audit proves missing selected seams, not a failure attribution for SOL
+or WRITE. No production source or released binary changes in this audit.
 Final documentation/link, diff, PE/hash and mirror-expression checks precede
 the reviewed commit/push. This is a usable P3 baseline, not S2 completion,
 SOL recovery, WRITE editing acceptance or full message-contract recovery.

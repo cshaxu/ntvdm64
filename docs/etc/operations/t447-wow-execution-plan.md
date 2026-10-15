@@ -2,6 +2,19 @@
 
 ## Admission and boundaries
 
+### Next S2 group after E: returned-object publication
+
+The post-P13 source audit in the window-graph evidence identifies the bounded
+next group: parent/owner-valued window-word queries, SetCapture/ReleaseCapture,
+previous-HWND mutation results and EnumProps callback publication. Preserve
+original thunks, native result/last-error and existing callback conversion.
+Use the same graph transaction and native-call owner; do not add a second
+capture manager, blanket integer-to-HWND conversion or query algorithm.
+All affected positive/negative/reentrant/lifetime cases must be connected
+before one grouped build and the full per-P release gate. Current P13 remains
+the verified runtime baseline. This source-audit checkpoint is not runtime
+completion and does not close S2 or admit S3.
+
 ### Approved E observation-view repair group
 
 Owner explicitly approves route E and the external-window observation
