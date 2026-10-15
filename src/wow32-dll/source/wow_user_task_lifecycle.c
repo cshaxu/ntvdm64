@@ -3,6 +3,7 @@
 #include "wow_class_words_binding.h"
 #include "wow_standard_class_bindings.h"
 #include "wow_window_words_binding.h"
+#include "wow_window_creation_binding.h"
 #include "wow_user_object_bindings.h"
 #include "wow_menu_client_bindings.h"
 #include "wow_task_profile_bindings.h"
@@ -46,6 +47,7 @@ typedef struct wow_user_task_lifecycle_thread {
     wow_class_client_context classes;
     wow_user_message_bridge messages;
     HANDLE queue_event;
+    HHOOK creation_hook;
     DWORD thread_id;
     DWORD message_wakes;
     DWORD window_style;
@@ -491,6 +493,9 @@ BOOL WINAPI wow_user_task_lifecycle_init_style(wow_user_task_lifecycle *owner,
     task->next = owner->threads;
     owner->threads = task;
     if (!wow_user_runtime_set_context(binding, &task->thread, &task->classes)) goto done;
+    task->creation_hook = SetWindowsHookExA(WH_CBT,
+        wow_window_creation_observer, NULL, task->thread_id);
+    if (!task->creation_hook) goto done;
     /* USER16 directly reads this counterpart of queue.c's THREADINFO and
      * CLIENTINFO value. Publish it before the original init can return to
      * guest code; undo it if that initialization rejects the task. */
@@ -510,6 +515,7 @@ done:
     if (wide) HeapFree(GetProcessHeap(), 0, wide);
     if (task) {
         wow_user_task_lifecycle_thread **link = &owner->threads;
+        if (task->creation_hook) UnhookWindowsHookEx(task->creation_hook);
         while (*link && *link != task) link = &(*link)->next;
         if (*link) *link = task->next;
         if (task->thread.PtiLink.Flink) list_remove(&task->thread.PtiLink);
@@ -935,6 +941,9 @@ static BOOL retire_task(wow_user_task_lifecycle *owner, DWORD task_id,
         owner->cleanup.thread = &task->thread;
         if (!wow_user_cleanup_bound(instance, task_id, selectors, count,
                 &owner->cleanup)) __leave;
+        if (task->creation_hook && !UnhookWindowsHookEx(task->creation_hook))
+            __leave;
+        task->creation_hook = NULL;
         /* The original USER cleanup has now completed.  Its page-domain
          * counterpart may already have been withdrawn during worker teardown;
          * that cannot retain a dead provider task/queue record. */

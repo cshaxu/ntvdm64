@@ -23,6 +23,7 @@ struct wow_window_words_binding {
     LONG references;
     BOOL enrolled;
     BOOL terminal_pending;
+    wow_window_creation_menu_state creation_menu;
     WW words;
     wow_class_words_binding *class_words;
     wow_cleanup_window cleanup;
@@ -104,6 +105,8 @@ BOOL WINAPI wow_window_words_attach_target(HWND window, const WW *words,
         if (observed) InterlockedIncrement(&binding->references); /* Property. */
         binding->enrolled = TRUE;
         binding->words = *words;
+        ZeroMemory(&binding->creation_menu, sizeof(binding->creation_menu));
+        binding->creation_menu.checked = TRUE; /* Not necessarily a new HWND. */
         binding->class_words = class_words;
         ZeroMemory(&binding->cleanup, sizeof(binding->cleanup));
         binding->cleanup.storage = binding;
@@ -141,6 +144,31 @@ wow_window_words_binding *WINAPI wow_window_words_acquire(HWND window)
 WW *WINAPI wow_window_words_value(wow_window_words_binding *binding)
 {
     return binding ? &binding->words : NULL;
+}
+
+void WINAPI wow_window_words_begin_creation(wow_window_words_binding *binding,
+    HMENU menu)
+{
+    ZeroMemory(&binding->creation_menu, sizeof(binding->creation_menu));
+    binding->creation_menu.input_menu = menu;
+}
+
+static BOOL prepare_creation_menu(HWND window, UINT message, LPARAM lp,
+    wow_window_words_binding *binding)
+{
+    if (message == WM_GETMINMAXINFO && !binding->creation_menu.checked) {
+        CREATESTRUCTA creation = {0};
+        /* Original createw.c associates the menu before sizing callbacks.
+         * Retain the caller's explicit menu even before USER exposes it. */
+        creation.style = binding->words.dwStyle;
+        creation.hMenu = binding->creation_menu.input_menu;
+        return wow_window_creation_menu(window, &creation, binding->cleanup.pcls,
+            &binding->creation_menu);
+    }
+    if (message == WM_NCCREATE || message == WM_CREATE)
+        return wow_window_creation_menu(window, (CREATESTRUCTA *)lp,
+            binding->cleanup.pcls, &binding->creation_menu);
+    return TRUE;
 }
 
 BOOL WINAPI wow_window_words_refresh(HWND window, wow_window_words_binding *binding)
@@ -400,6 +428,7 @@ static BOOL dispatch_bound(HWND window, UINT message, WPARAM wp,
      * guest CPU or publish a guest callback window it does not consume. */
     if (!(procedure & WNDPROC_WOW)) {
         __try {
+            if (!prepare_creation_menu(window, message, lp, binding)) return FALSE;
             *result = DispatchClientMessage(&view, message, wp, lp, procedure);
         } __finally {
             if (terminal_owner && message == WM_NCDESTROY)
@@ -416,6 +445,9 @@ static BOOL dispatch_bound(HWND window, UINT message, WPARAM wp,
         wow_window_words_release(binding); return FALSE;
     }
     __try {
+        /* Resource conversion may enter the guest. Establish the same task
+         * and alias scope as the callback before loading the class menu. */
+        if (!prepare_creation_menu(window, message, lp, binding)) return FALSE;
         /* Original wowuserp.h WW aliases WND's live style/ExStyle/hModule;
          * rtl/getset.c exposes those same fields through public indices.
          * Refresh before dispatch, preserving all WOW-owned words and flags.
@@ -561,9 +593,6 @@ LRESULT CALLBACK wow_window_native_proc(HWND window, UINT message, WPARAM wp, LP
         return result;
     }
     __try {
-        if ((message == WM_NCCREATE || message == WM_CREATE) &&
-                !wow_window_creation_menu(window, (CREATESTRUCTA *)lp))
-            __leave;
         dispatch_bound(window, message, wp, lp,
             (DWORD)InterlockedCompareExchange((LONG *)&binding->cleanup.lpfnWndProc, 0, 0),
             binding->callback, &result, TRUE);

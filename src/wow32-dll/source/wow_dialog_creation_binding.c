@@ -75,66 +75,72 @@ static void discard_creation(wow_dialog_creation *creation)
     release_creation(creation);
 }
 
-static LRESULT CALLBACK dialog_create_hook(int code, WPARAM wp, LPARAM lp)
+void WINAPI wow_dialog_creation_cancel(HWND window, wow_window_words_binding *borrow)
+{
+    wow_dialog_creation *creation = GetPropW(window, dialog_property);
+    if (creation && creation->window == window && creation->borrow == borrow)
+        rollback_window(creation);
+}
+
+BOOL WINAPI wow_dialog_creation_claim(HWND window, const CREATESTRUCTA *request,
+    wow_task_order_thread *thread, wow_window_creation_enrollment *enrollment,
+    BOOL *claimed)
 {
     wow_dialog_creation *creation = current_creation;
-    BOOL enrolled = FALSE, accepted = FALSE;
-    LRESULT result;
 
-    if (code == HCBT_CREATEWND && creation && !creation->window) {
-        CBT_CREATEWNDA *cbt = (CBT_CREATEWNDA *)lp;
-        CREATESTRUCTA *request = cbt ? cbt->lpcs : NULL;
+    *claimed = FALSE;
+    if (creation && creation->thread == thread && !creation->window) {
         char class_name[16] = {0};
         WW words = {0};
 
         if (request && !(request->style & WS_CHILD) &&
-                GetClassNameA((HWND)wp, class_name, ARRAYSIZE(class_name)) &&
+                GetClassNameA(window, class_name, ARRAYSIZE(class_name)) &&
                 !lstrcmpiA(class_name, "#32770")) {
             words.dwStyle = request->style;
             words.dwExStyle = request->dwExStyle;
             words.hInstance = request->hInstance;
-            if (!wow_window_words_attach((HWND)wp, &words)) {
+            if (!wow_window_words_attach(window, &words)) {
                 creation->failure = GetLastError();
-                return 1;
+                return FALSE;
             }
-            creation->window = (HWND)wp;
-            creation->borrow = wow_window_words_acquire((HWND)wp);
+            creation->window = window;
+            creation->borrow = wow_window_words_acquire(window);
             if (!creation->borrow) {
                 creation->failure = GetLastError();
-                wow_window_words_detach((HWND)wp);
+                wow_window_words_detach(window);
                 creation->window = NULL;
-                return 1;
+                return FALSE;
             }
-            if (!wow_window_words_publish_owner((HWND)wp,
+            if (!wow_window_words_publish_owner(window,
                     creation->borrow, creation->thread)) {
                 creation->failure = GetLastError();
                 rollback_window(creation);
-                return 1;
+                return FALSE;
             }
-            if (!SetPropW((HWND)wp, dialog_property, creation)) {
+            if (!SetPropW(window, dialog_property, creation)) {
                 creation->failure = GetLastError();
                 rollback_window(creation);
-                return 1;
+                return FALSE;
             }
             retain_creation(creation); /* native window property ownership */
-            enrolled = TRUE;
+            enrollment->window = window;
+            enrollment->borrow = wow_window_words_acquire(window);
+            enrollment->dialog_root = TRUE;
+            if (!enrollment->borrow) {
+                creation->failure = GetLastError();
+                rollback_window(creation);
+                return FALSE;
+            }
+            *claimed = TRUE;
         }
     }
-    __try {
-        result = enrolled ? CallNextHookEx(NULL, code, wp, lp) :
-            wow_window_creation_forward_internal(creation ? creation->thread : NULL,
-                code, wp, lp);
-        accepted = result == 0;
-    } __finally {
-        /* A later CBT hook can veto or raise before native USER sends any
-         * dialog messages. Withdraw our metadata before HWND destruction. */
-        if (enrolled && !accepted) {
-            DWORD error = GetLastError();
-            rollback_window(creation);
-            SetLastError(error);
-        }
-    }
-    return result;
+    return TRUE;
+}
+
+static LRESULT CALLBACK dialog_create_hook(int code, WPARAM wp, LPARAM lp)
+{
+    return wow_window_creation_forward_internal(
+        current_creation ? current_creation->thread : NULL, code, wp, lp);
 }
 
 static LRESULT CALLBACK dialog_return_hook(int code, WPARAM wp, LPARAM lp)

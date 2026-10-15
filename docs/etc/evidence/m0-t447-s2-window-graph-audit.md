@@ -2946,3 +2946,229 @@ as at later callbacks. This source audit identifies requirements, not passing
 tests, an SOL cause, or permission to change guest binaries. Additional mirror
 diff remains zero; production implementation and its grouped acceptance remain
 pending.
+
+### Creation-group implementation in progress
+
+After the ordering audit in 3f55fbce9, implementation starts in project-owned
+creation/window-word bindings only. This is an unverified worktree, not P7 or
+a replacement for the published P6 package. No compile/test/publication has
+been run for these partial changes; the owner requires group acceptance.
+
+The class-menu helper now receives the enrolled window's retained class and
+per-window checked/attached state. This removes the explicit-creation TLS
+dependency while keeping the original resource client and native association.
+The window callback already retains that binding across resource-loading
+reentry. Attachment resets the state, including observed-storage adoption.
+The former creation-scope menu state and duplicate ownership are removed.
+
+Internal enrollment and its ownership-aware finish are separated from native
+CallNextHookEx. Known application classes can use their retained class target;
+borrowed native classes still require a managed parent/owner. Existing
+attachments are not stolen and downstream veto/exception retires only the
+borrow acquired by this enrollment. No explicit W32CreateWindow WW flags are
+fabricated for implicit creation. This does not yet supply a general observer
+or resolve explicit/dialog priority before a newer guest hook.
+
+The menu fixture follows the new per-window state contract. The native creation
+fixture adds actual WM_MDICREATE-driven creation using the production internal
+enrollment helper through a fixture CBT observer, with its application target
+registered on the class. That is deliberately not claimed as production
+observer-lifetime or guest-hook ordering proof. Next: connect those remaining
+entrances, strengthen veto/nested/dialog and real CCPU coverage, review the
+whole group, then perform one build/test/delivery cycle. Original guest and
+mirror files remain unchanged; assets/winnt.zip remains excluded.
+
+The next implementation pass connects the task-owned CBT observer and original
+hook entrance to that transaction. Explicit and dialog hooks now delegate to
+the shared entrance, which first checks existing ownership, then asks the
+pending explicit/dialog creator, then considers known implicit classes. The
+creator retains its original WW input/dialog property; the hook transaction
+holds a separate borrow for veto/exception rollback. Native procedure restore
+also checks that the current property is still the same borrowed identity.
+The hook wrapper includes the original precomp declarations and uses unchanged
+W32GetHookStateData before the original converter, not a copied hook table.
+Task initialization installs a thread-only observer, failed initialization
+unhooks it, and retirement unhooks after original object cleanup before freeing
+the task carrier. The test scope fixture adds enrollment rejection, graph
+failure, CBT veto/exception and non-CBT overlapping-code assertions.
+
+Whole-group build/regression has started under creation-batch-r1/run.ps1:
+supervisor33752, build child29392, started2026-10-15T09:20:55Z with1800s build
+deadline. Existing11 boundary cases follow serially with600s per-case bounds.
+No result is claimed at launch. New-case runner integration and lifecycle
+failure review remain required before publication; ordinary app/DOS delivery
+gates still follow. This is not a delivered P and no installed image changed.
+
+creation-batch-r1 built successfully but failed window-borrow/window-reclaim.
+The real CCPU fixture reached WOW_DIALOG_CACHE_CCPU with one error: its dialog
+creation at wow_page_domain_fixture.c:384 returned NULL/error5023. Earlier
+native creation, class, graph, menu and mutation markers were all zero-error.
+Source review identifies the introduced prerequisite error: generic enrollment
+required ppi->classes before asking the pending dialog creator, while original
+dialog-root storage needs only its existing object owner. Move that requirement
+after explicit/dialog claiming and retain it only for generic class lookup.
+Do not weaken the fixture or add a class table just to satisfy the new gate.
+
+Stopped the failed r1 supervisor33752 and its identified child tree. taskkill
+reported an exit race for5616/33724; elevated CIM recheck found neither process
+nor supervisor alive before reusing build caches. r1 remains failed/aborted,
+not an11-case pass. No installed or release artifact was replaced.
+
+New tracked verify-wow-creation-boundaries.ps1 runs the production hook wrapper
+with ordering-only mocks and the exact production menu-helper prefix with a
+resource-only mock; its scope limitations are explicit. The lifecycle runner
+adds native-creation, linking the production owner objects. creation-batch-r2
+supervisor26436 started2026-10-15T09:26:41Z: full affected build, previous11
+cases plus native-creation/hook/menu (14 total), same bounded background model.
+Runtime results, hook installation-order and callback-exit failure review,
+ordinary app/DOS gates and publication are still pending.
+
+While r2 runs, source review keeps two ordering obligations explicit rather
+than treating green fixtures as whole-group closure. Pinned createw.c loads
+the class menu at640 and associates it at664--670, before xxxAdjustSize /
+WM_GETMINMAXINFO around800 and WM_NCCREATE at841. The existing helper's
+WM_NCCREATE entrance supplies the menu before that callback, but does not
+prove menu visibility during an earlier sizing callback. Moving state to the
+window removes the scope dependency, not this inherited adapter timing gap.
+Do not claim exact earliest-callback equivalence from the menu fixture alone.
+
+Also review task-scope failure after a successful CBT chain: current wrapper
+finishes its enrollment before task_callback_leave, yet changes the result to
+a creation veto if leaving fails. That last failure would need ownership-aware
+withdrawal too; do not release the identity and then guess it from a possibly
+reused HWND. Preserve final-borrow/alias retirement ordering while resolving
+this, and verify the observer does not unnecessarily acquire WOW execution for
+an otherwise native-only callback. These are source-review obligations, not
+newly observed app failures or reasons to modify the guest.
+
+Original createw.c's MemError path at843--873 calls xxxFreeWindow, whose body
+sends WM_NCDESTROY at1872 before releasing the object. This supports retaining
+terminal ownership through normal post-CBT creation failure; it does not remove
+the explicit veto cleanup requirement at the public hook boundary. At the last
+r2 observation, window-borrow, window-reclaim, graph-snapshot and
+process-retirement all exit0; supervisor26436 and dialog-lifecycle child29200
+remain the same active batch, not a restarted run.
+
+r2 is terminal: all previous11 cases and the new hook guard passed; failures
+are native-creation and menu. The hook marker proves enrollment5/accepted1/
+rollback3, including failure, veto and exception, not real guest execution.
+The menu runner truncated the production source before claim_explicit's
+definition (C2129); it now includes the exact translation unit with function
+section elimination rather than copying a truncated algorithm. Native-creation
+returned3 without diagnostics because its printf resolves to the linked
+original host output route. Its checks now use stderr, like the other combined
+fixtures. Its cause remains unproved; no assertion or runtime behavior is
+changed to make it pass.
+
+The post-r2 review corrections retain the creation borrow until the task-scope
+return determines the final CBT veto. A nested finally still finishes that
+transaction before alias collection, including task-leave failure/exception.
+The scope fixture now asserts the leave-failure rollback (enrollment6,
+accepted1, rollback4). Ordinary native creation observation no longer enters
+WOW scheduling; original guest hooks and tagged procedures own their existing
+task entrances. The observer retains only its bounded private-data borrow.
+
+New enrollment arms per-window menu initialization; ordinary existing-window
+attachment starts already checked so a later sizing query cannot replay
+creation. The original helper is invoked before the first WM_GETMINMAXINFO,
+using the retained explicit menu input, and still propagates the associated
+handle to fresh WM_NCCREATE/WM_CREATE structures. Association failure remains
+latched so an early sizing failure rejects the later creation callback.
+Loading is now inside the selected native/tagged dispatch branch; guest resource
+conversion therefore has the existing task/alias scope before it runs. The
+menu fixture checks early sizing and subsequent native ownership, including
+explicit menus, child IDs, missing resources and rejected creation.
+
+creation-batch-r3 supervisor28696 started2026-10-15T09:43:28Z for the same14
+cases after r2 was confirmed terminal. Build and tests remain pending at launch.
+No candidate image has been published or committed; P6 remains the release.
+
+Owner requires delivery of this reviewed group before further wiring. r3
+finished with the existing11 cases and hook guard passing; native-creation
+and menu failed. The former old native-only fixture omitted the now-required
+real page domain; wow_user_window_publish correctly rejected publication.
+After sharing the existing CCPU setup, r4 reached enrollment/veto but still
+rejected callbacks: wow_menu_native_refresh_window requires a bound task even
+when the window has no menu. The fixture now uses the existing callback-borrow
+test's task/runtime setup and actual class projection, not success-only storage
+stubs. Its WM_MDICREATE case also installs the production creation observer.
+No production check was relaxed. The menu harness's whole translation unit
+still required unrelated external symbols; it now extracts only the exact
+standalone production menu function, with checked delimiters and resource mock.
+
+creation-batch-r5 supervisor724 started2026-10-15T10:01:42Z. Only the two
+corrected test cases rerun; production inputs remain unchanged from r3's full
+build and12 passes. The affected native case includes the real CCPU foundation
+checks too. Application/DOS gates and publication remain required; neither
+failed harness run changes installed binaries or proves S2 completion.
+
+r5 stopped at a fixture-only duplicate wowuserp.h inclusion after lifecycle
+types were added; remove that redundant include, not the original header.
+r6 supervisor31092 started2026-10-15T10:03:03Z and passed both corrected
+cases. Native creation uses real CCPU storage and the production observer:
+errors0, callbacks51, nested1, rejected1, vetoed1, destroyed7, table_empty1.
+The shared CCPU lifecycle and earlier foundation assertions also pass in that
+same executable. Menu ownership/ordering reports errors0, sizing callbacks6,
+resource loads4. Together with r3's unchanged-production12 passes, the group
+has14 passing cases. No failed run has been relabelled as a pass.
+
+Delivery supervisor26020 started the sealed P6-based candidate/application
+stage at2026-10-15T10:04:11Z (child21024,900s deadline), followed by three-mode
+WINMINE gameplay and both DOS17 matrices. Evidence root is
+build/M0-T447/S2/creation-delivery-r6; candidate is creation-apps-r6/package.
+Only NTVDM/WOW32 are eligible replacements; the other11 images and original
+companions must match P6. This launch record is not a publication claim.
+
+### S2 P7 creation baseline delivery
+
+The grouped runtime gate completed successfully under creation-delivery-r6:
+
+- r3's11 original boundary cases and hook guard plus r6's real CCPU native
+  creation and native menu ownership cases pass (14 total). Reproduce through
+  tests/observation/verify-wow-task-lifecycle.ps1 with the recorded Case and
+  provider/worker roots, and verify-wow-creation-boundaries.ps1 for hook/menu.
+- Ordinary isolated WINMINE, SOL and WRITE observations are retained under
+  creation-apps-r6/frontiers. WRITE retains visible MSWRITE_MENU, MSWRITE_DOC
+  and MSWRITE_PAGEINFO; editing/saving remains unverified. SOL still shows
+  Out of memory and is explicitly not a functionality pass.
+- verify-wow-mine-gameplay.ps1 passes Off, Win16 and All: flag/counter, reset,
+  open cell, WM_CLOSE and launcher completion. Each records exact input hashes.
+- Verify-CommandExitStatus.ps1 passes Console17 and Window17, each17 rows,
+  zero expected/actual mismatches. Source/fixture/runtime timeouts remain
+  unchanged; no failed gate was waived or replaced by an exit-code-only claim.
+
+Publication child27808 started2026-10-15T10:08:39Z with180s deadline and
+exited0. Its publication/exit.txt is0. Candidate, assets/release and configured
+O:/winnt/system32 agree for all13 images. Only these two identities change:
+
+| Image | SHA-256 |
+| --- | --- |
+| ntvdm.exe | 792A0DED9DE25381B4AA02CEA54CF9E23A39AC0FD50C6C265B4FD303424389EB |
+| WOW32.DLL | 186BCACC3B357AB99B02281356AE34C56548B6E534D618E91F0029DF0FDD281E |
+
+The candidate is built from the sealed P6 package, never a wholesale installed
+tree copy. All40 non-release system32 companions retain their P6 hashes.
+publication/backups.json retains prior asset/system32 identities and recovery
+copies. No original guest source or binary was modified/rebuilt. The unrelated
+assets/winnt.zip keeps SHA256539A910247C5478BDE19FB2A431CD4C5AB26355CDC46F8160F49B23F060B495B
+and remains outside this delivery.
+
+Second-role review checked shared explicit/dialog/implicit enrollment, existing
+owner preservation, native-chain restoration by matching identity, callback
+exception and final task-return veto cleanup, native-only observer scope,
+original W32GetHookStateData identity and per-window menu lifetime. Production
+changes are299 added/117 removed lines across eight owned files; zero additional
+mirror/guest diff. No second hook table, scheduler or class registry is added.
+Original hook conversion, class selection, resource conversion and MDI behavior
+remain their retained owners. The hook guard uses ordering mocks, while native
+creation uses real CCPU storage and production observer with controlled task
+and callback inputs; neither is proof of arbitrary original guest CBT programs.
+Those broader coverage obligations and full S2 closure remain open. This P
+preserves a usable reviewed baseline before additional integration work.
+
+Final identity/PE checks, documentation/link governance and diff checks pass
+(creation-delivery-r6/final-checks.exit0). All40 original companion identities
+are recorded in original-companion-identities.json. Commit scope is the eight
+owned production files, their checked-in regression sources/runners, current
+state/evidence and coherent release assets/manifest; the unrelated ZIP is
+excluded. Commit title: Deliver T447 S2 P7 implicit creation baseline.

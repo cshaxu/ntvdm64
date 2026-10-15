@@ -50,16 +50,15 @@ gaps and tests accept newly connected code, not select successive patches.
 Proven-composable original logic must replace its autonomous counterpart in
 the same repair, deleting that counterpart rather than deferring migration.
 Owner requires grouped implementation/testing and delivery before more wiring.
-S2 P5 is 984ee0441. P6 extends its native-return boundary to ten audited
-mutation/callout APIs and native class setters; existing CLS style/extra fields
-now refresh in the whole-graph commit without replacing their identities.
-mutation-batch-r2 passes all11 cases, including actual CCPU popup, scrolling,
-iconic, frame and class updates. mutation-delivery-r2 passes both DOS17 routes
-and WINMINE gameplay/exit in three modes. The tested13-image set is published
-and hash-verified at both locations;40 package companions remain unchanged.
-WRITE retains visible main/document/page-info windows, not verified editing/
-saving; SOL still reports Out of memory. Additional mirror/guest diff is zero.
-Same-slot reuse and broader S2 closure stay open. Preserve assets/winnt.zip.
+P5 is 984ee0441; P6 is e97345404. P7 connects implicit native creation through
+shared enrollment/rollback and original-hook identity, with per-window menu
+initialization before sizing callbacks. All14 boundary cases, both DOS17
+routes and three-mode WINMINE gameplay/exit pass. creation-delivery-r6 records
+publication of the tested13 images to both locations;40 companions unchanged.
+This reviewed P7 baseline does not close S2's remaining coverage gaps.
+WRITE shows main/document/page-info windows; editing/saving is unverified.
+SOL still reports Out of memory. Additional mirror/guest diff is zero.
+Native slot reuse/S2 closure remain open; preserve assets/winnt.zip.
 
 ## Active Packet
 
@@ -385,12 +384,11 @@ lookup stays separate. Native desktop identity, retained observed/managed WW
 aliases and paired host/guest word updates pass the grouped foundation tests.
 P5 connects the prepared graph at the reviewed callback/native-return boundaries.
 
-S2 P6 e97345404 is published to both locations with matching tested13-image
-hashes. Only NTVDM/WOW32 change from P5; mutation-delivery-r2 retains coherent
-P5 recovery copies. Numeric class/window mutations and paired reclamation pass.
+S2 P7 is published to both locations with matching tested13-image hashes.
+Only NTVDM/WOW32 change from P6; creation-delivery-r6 retains coherent P6
+recovery copies. Implicit creation, class-menu timing and paired rollback pass
+the bounded fixtures; full guest-hook and S2 coverage remain open.
 Original guest files remain unchanged; additional mirror diff is zero.
-The window-graph audit now traces message-driven native creation outside the
-temporary creation scopes; its enrollment/cleanup design remains open.
 S9 P1 is266067264 and P2 is4f8c181487; S10 P1 is e046ee3d7;
 owner-accepted S11 P1 is b39ceb7e6, acceptance record cbd0f7832.
 The preceding T445 final closure changed documentation only; T446 S1 updates

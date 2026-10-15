@@ -2509,6 +2509,13 @@ guest_window_failure:
     if (borrow_errors) goto done;
 #endif
 #endif
+#ifdef WOW_NATIVE_CREATION_FIXTURE
+    {
+        extern int __cdecl wow_native_creation_fixture(void);
+        stage = "native-creation-owner";
+        if (wow_native_creation_fixture()) goto done;
+    }
+#endif
     stage = "wow-gdt";
     if (!mvdm_softpc_wow_page_domain_activate_wow_context() ||
         (wow_gdt = c_getGDT_BASE()) == dosx_gdt) goto done;

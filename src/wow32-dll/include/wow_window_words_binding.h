@@ -40,6 +40,9 @@ BOOL WINAPI wow_window_class_procedure_exchange(HWND, DWORD, DWORD *);
 BOOL WINAPI wow_window_procedure_exchange(HWND, DWORD, DWORD *);
 wow_window_words_binding *WINAPI wow_window_words_acquire(HWND);
 struct _WW *WINAPI wow_window_words_value(wow_window_words_binding *);
+/* CBT has identified a new window. Existing-window promotion must not
+ * accidentally replay class-menu creation on a later sizing message. */
+void WINAPI wow_window_words_begin_creation(wow_window_words_binding *, HMENU);
 /* Refresh only native WND fields aliased by WW, preserving original WOW
  * classification/procedure words. Caller retains the matching binding. */
 BOOL WINAPI wow_window_words_refresh(HWND, wow_window_words_binding *);

@@ -1,13 +1,9 @@
 #include "wow_window_creation_binding.h"
 #include "wow_creation_owner_fixture.h"
 #include "wow_user_borrow_scope.h"
+#include "wow_user_runtime.h"
+#include "wow_user_task_lifecycle.h"
 #include <stdio.h>
-typedef VOID (APIENTRY *PFNW32ET)(VOID);
-#pragma warning(push)
-#pragma warning(disable:4201)
-#include "opennt-abi/source/public/internal/windows/inc/wowuserp.h"
-#pragma warning(pop)
-
 static unsigned errors, callbacks, nested, rejected, destroyed, vetoed;
 static wow_class_lookup_context context;
 static ATOM atom;
@@ -29,7 +25,7 @@ static DWORD WINAPI raising_callback(HWND window, UINT message, UINT wp,
     return 0;
 }
 static DWORD WINAPI callback(HWND, UINT, UINT, LONG, DWORD, PVOID);
-#define CHECK(x) do { if (!(x)) { ++errors; printf("FAIL line=%d error=%lu\n", __LINE__, GetLastError()); } } while (0)
+#define CHECK(x) do { if (!(x)) { ++errors; fprintf(stderr,"FAIL line=%d error=%lu\n", __LINE__, GetLastError()); } } while (0)
 static void verify_gateway_failure_cleanup(void)
 {
     HWND window = CreateWindowExA(0, "STATIC", "", 0, 0, 0, 8, 8,
@@ -145,6 +141,8 @@ static LRESULT CALLBACK reject_hook(int code, WPARAM wp, LPARAM lp)
 static void verify_mdi_creation(void)
 {
     HWND frame, client, child;
+    HHOOK observer;
+    MDICREATESTRUCTA implicit = {0};
     CLIENTCREATESTRUCT mdi = {NULL, 100};
     CREATESTRUCTA request = {0};
     CREATESTRUCTW wide;
@@ -171,23 +169,68 @@ static void verify_mdi_creation(void)
     child = wow_window_create_boundW(wow_fixture_creation_owner(&context), atom, &wide, &words, &target);
     CHECK(child != NULL);
     if (child) { CHECK(GetParent(child) == client); CHECK(DestroyWindow(child)); }
-    CHECK(mdi_created == 2);
+    observer = SetWindowsHookExA(WH_CBT, wow_window_creation_observer, NULL,
+        GetCurrentThreadId());
+    CHECK(observer != NULL);
+    if (observer) {
+        implicit.szClass = name;
+        implicit.szTitle = "";
+        implicit.hOwner = instance;
+        implicit.cx = implicit.cy = 24;
+        implicit.style = WS_CHILD | WS_OVERLAPPEDWINDOW;
+        implicit.lParam = 0x12345678;
+        /* USER creates this HWND, not wow_window_create_boundA/W. */
+        child = (HWND)SendMessageA(client, WM_MDICREATE, 0, (LPARAM)&implicit);
+        CHECK(child != NULL);
+        if (child) {
+            CHECK(GetParent(child) == client);
+            CHECK(GetWindowLongA(child, GWL_USERDATA) == 0);
+            CHECK(DestroyWindow(child));
+        }
+        CHECK(UnhookWindowsHookEx(observer));
+    }
+    CHECK(mdi_created == 3);
     CHECK(DestroyWindow(frame));
 }
 int __cdecl main(void)
 {
+    wow_user_runtime runtime = WOW_USER_RUNTIME_INITIALIZER;
+    wow_user_runtime_thread binding = {0};
+    wow_user_task_lifecycle lifecycle = {0};
+    wow_task_order_state task_state = {0};
+    wow_task_order_entry task = {0};
     WNDCLASSEXA cls = {sizeof(cls)};
+    wow_window_dispatch_target target = {0x81234567, callback};
     UNICODE_STRING captured_name;
     HWND window;
     ULONG slot;
+    /* Same controlled task setup as the CCPU callback-borrow fixture. Native
+     * menu publication requires a task identity even with no attached menu.
+     * This is not execution of original guest instructions. */
+    fixture_creation_process.pwpi = &task_state;
+    task_state.CSOwningThread = &fixture_creation_thread;
+    fixture_creation_thread.ptdb = &task;
+    task.hTaskWow = 0x4321u;
+    runtime.lifecycle = &lifecycle;
+    CHECK(wow_user_runtime_bind(&binding, &runtime,
+        wow_fixture_creation_owner(&context), NULL));
+    if (!binding.runtime) return 3;
     verify_gateway_failure_cleanup();
     instance = (HINSTANCE)0x23451234;
     cls.hInstance = instance; cls.lpszClassName = name; cls.lpfnWndProc = wow_window_native_proc;
     RtlInitUnicodeString(&captured_name, L"S40_NATIVE_CREATE_BINDING");
-    atom = wow_class_words_register(&context, &cls, &captured_name, class_words, NULL);
-    CHECK(atom != 0); if (!atom) return 3;
+    atom = wow_class_words_register_target(&context, &cls, &captured_name,
+        class_words, NULL, &target);
+    CHECK(atom != 0); if (!atom) goto done;
+    {
+        wow_class_words_binding *registered = wow_class_words_acquire(
+            &context, atom, instance);
+        CHECK(registered != NULL);
+        CHECK(wow_class_words_publish_guest(wow_class_words_entry(registered), &cls));
+        wow_class_words_release(registered);
+    }
     veto_hook = SetWindowsHookExA(WH_CBT, reject_hook, NULL, GetCurrentThreadId());
-    CHECK(veto_hook != NULL); if (!veto_hook) return 3;
+    CHECK(veto_hook != NULL); if (!veto_hook) goto done;
     window = create(1); CHECK(window != NULL);
     if (window) CHECK(DestroyWindow(window));
     window = create(3); CHECK(window == NULL);
@@ -209,7 +252,9 @@ int __cdecl main(void)
     CHECK(nested == 1 && rejected == 1 && vetoed == 1 && destroyed >= 4);
     for (slot=0;slot<=fixture_creation_objects.last_handle;++slot)
         CHECK(fixture_creation_objects.entries[slot].bType==TYPE_FREE);
-    printf("WOW_NATIVE_CREATION_BINDING errors=%u callbacks=%u nested=%u rejected=%u vetoed=%u destroyed=%u table_empty=1\n",
+done:
+    CHECK(wow_user_runtime_unbind(&binding));
+    fprintf(stderr,"WOW_NATIVE_CREATION_BINDING errors=%u callbacks=%u nested=%u rejected=%u vetoed=%u destroyed=%u table_empty=1\n",
         errors, callbacks, nested, rejected, vetoed, destroyed);
     return errors ? 3 : 0;
 }

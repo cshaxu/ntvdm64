@@ -22,12 +22,38 @@ HWND WINAPI wow_window_create_boundW(wow_task_order_thread *, ATOM,
  * creation/callback ordering to the bounded gateway above. */
 HWND WINAPI wow_user_create_window_ex(DWORD, LPCTSTR, LPCTSTR, DWORD, int,
     int, int, int, HWND, HMENU, HANDLE, LPVOID, DWORD, LPDWORD);
-/* Creation-only missing class-resource boundary, after CBT and before the
- * first guest WM_NCCREATE. Outside an enrolled creation this is a no-op. */
-BOOL WINAPI wow_window_creation_menu(HWND, CREATESTRUCTA *);
-/* Forward a scoped CBT notification, enrolling native internal controls whose
- * class and parent already have metadata. Unknown classes remain outside the
- * staged standard-class capability. Does not infer a complete window graph. */
+/* Per-window creation state, retained with WW rather than an explicit
+ * CreateWindow call. Native internal creation has no such call scope.
+ * The caller borrows the window/class through resource-loading reentry. */
+typedef struct wow_window_creation_menu_state {
+    BOOL checked;
+    BOOL attached;
+    HMENU input_menu;
+    DWORD failure;
+} wow_window_creation_menu_state;
+/* Missing class-resource boundary after CBT, before guest WM_NCCREATE.
+ * Keep resource conversion in the original menu client. */
+BOOL WINAPI wow_window_creation_menu(HWND, CREATESTRUCTA *,
+    wow_class_lookup_entry *, wow_window_creation_menu_state *);
+/* One callback-local enrollment transaction. A missing borrow means that
+ * another creation scope already owns the HWND, or the class is outside the
+ * admitted closure. Leaving must never retire that other scope's storage.
+ * These operations do not advance the native hook chain. */
+typedef struct wow_window_creation_enrollment {
+    HWND window;
+    wow_window_words_binding *borrow;
+    WNDPROC previous_native;
+    BOOL dialog_root;
+} wow_window_creation_enrollment;
+BOOL WINAPI wow_window_creation_enroll_internal(wow_task_order_thread *, HWND,
+    const CREATESTRUCTA *, wow_window_creation_enrollment *);
+void WINAPI wow_window_creation_finish(wow_window_creation_enrollment *, BOOL);
+/* Installed only on an initialized WOW task's native thread. Runtime TLS
+ * supplies that task; no process-wide hook or extra task registry. */
+LRESULT CALLBACK wow_window_creation_observer(int, WPARAM, LPARAM);
+/* Forward a scoped CBT notification. Known application classes inherit their
+ * logical class target; borrowed native controls require an enrolled parent.
+ * Unknown classes remain outside this boundary. */
 LRESULT WINAPI wow_window_creation_forward_internal(wow_task_order_thread *,
     int, WPARAM, LPARAM);
 #endif

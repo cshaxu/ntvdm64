@@ -2,7 +2,7 @@ param(
     [Parameter(Mandatory=$true)][string]$ProviderBuildRoot,
     [Parameter(Mandatory=$true)][string]$WorkerBuildRoot,
     [string]$BuildRoot,
-    [ValidateSet('task-lifecycle','process-retirement','menu-cleanup','menu-resource','native-dispatch-gate','window-procedure','standard-class','class-query','dialog-lifecycle','init-notification','start-notification','style-policy','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','task-order','class-client','window-borrow','window-reclaim','graph-snapshot','thunk-scope')] [string]$Case = 'task-lifecycle',
+    [ValidateSet('task-lifecycle','process-retirement','menu-cleanup','menu-resource','native-dispatch-gate','window-procedure','standard-class','class-query','dialog-lifecycle','init-notification','start-notification','style-policy','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','task-order','class-client','window-borrow','window-reclaim','graph-snapshot','thunk-scope','native-creation')] [string]$Case = 'task-lifecycle',
     [string]$StyleDll,
     [string]$Ninja = 'ninja.exe',
     [string]$VsDevCmd = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
@@ -121,10 +121,13 @@ if ($Case -eq 'init-notification') {
 }
 if ($Case -eq 'task-order') { $fixtureName = 'wow_task_order_fixture.c' }
 if ($Case -eq 'thunk-scope') { $fixtureName = 'wow_user_thunk_scope_fixture.c' }
+if ($Case -eq 'native-creation') { $fixtureName = 'wow_native_creation_binding_fixture.c' }
 $fixturePath = Join-Path $repo ('tests/adapter-mvdm-host-out/wow/' + $fixtureName)
 if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource')) { $fixturePath = Join-Path $repo 'tests/mvdm-host/wow_page_domain_fixture.c' }
+if ($Case -eq 'native-creation') { $fixturePath = Join-Path $repo 'tests/mvdm-host/wow_page_domain_fixture.c' }
 $fixture = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\fixture.obj" "'+$fixturePath+'"')
 if ($fixture -eq $compile) { throw 'Fixture substitution failed' }
+if ($Case -eq 'native-creation') { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE /DWOW_NATIVE_CREATION_FIXTURE' }
 if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource')) { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE' }
 if ($Case -eq 'window-reclaim') { $fixture += ' /DWOW_RECLAIM_FAILURE_FIXTURE' }
 if ($Case -eq 'graph-snapshot') { $fixture += ' /DWOW_GRAPH_SNAPSHOT_FIXTURE' }
@@ -157,6 +160,14 @@ $workerObjects += Join-Path $out 'worker-static-imports.obj'
 $workerObjects += Join-Path $provider 'obj/wow32-system-import-abi-aliases.obj'
 $workerObjects += Join-Path $provider 'obj/wow32-parent-import-abi-aliases.obj'
 $parentObjects = @()
+if ($Case -eq 'native-creation') {
+    # Real CCPU session/storage setup is shared with the page-domain fixture;
+    # publication may not be replaced by a success-only parent stub.
+    $creationFixture = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\native-creation.obj" "'+$repo+'\tests\adapter-mvdm-host-out\wow\wow_native_creation_binding_fixture.c"')
+    if ($creationFixture -eq $compile) { throw 'Native creation substitution failed' }
+    Invoke-Build ($creationFixture.Replace('/Gz', '/Gd') + ' /Dmain=wow_native_creation_fixture')
+    $parentObjects += Join-Path $out 'native-creation.obj'
+}
 if ($Case -eq 'window-reclaim') {
     # Separate negative row: the ordinary window-borrow row still selects the
     # unmodified production object. Replace only its free leaf in this row.
@@ -184,7 +195,7 @@ if ($Case -eq 'menu-resource') {
     Invoke-Build ($thunkFixture + ' /DWOW_MENU_THUNK_BOUND_FIXTURE /I"'+$out+'"')
     $parentObjects += Join-Path $out 'menu-thunk-fixture.obj'
 }
-if ($Case -notin @('window-borrow','window-reclaim','graph-snapshot','menu-resource')) {
+if ($Case -notin @('window-borrow','window-reclaim','graph-snapshot','menu-resource','native-creation')) {
 $parentStub = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\parent-stub.obj" "'+$repo+'\tests\adapter-mvdm-host-out\wow\wow_page_domain_parent_stub.c"')
 if ($parentStub -eq $compile) { throw 'Parent-stub substitution failed' }
 if ($Case -in @('class-client','class-query')) { $parentStub += ' /DWOW_CLASS_CLIENT_FIXTURE' }
@@ -221,6 +232,10 @@ if ($Case -eq 'graph-snapshot' -and
     throw 'Whole snapshot failed fresh publication, relation copying or retained-reader retirement'
 }
 $fixtureOutput | Write-Output
+if ($Case -eq 'native-creation' -and
+    !($fixtureOutput -match '^WOW_NATIVE_CREATION_BINDING errors=0 .* table_empty=1$')) {
+    throw 'Native creation failed explicit/implicit enrollment or final ownership cleanup'
+}
 if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource') -and
     !($fixtureOutput -match '^WOW_GRAPH_NATIVE_MUTATION_CCPU errors=0 child_id=1 reparent=1 deferred_geometry=1$')) {
     throw 'Native mutation return did not synchronize child ID, parent or deferred geometry'

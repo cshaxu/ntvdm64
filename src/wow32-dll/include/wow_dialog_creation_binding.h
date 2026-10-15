@@ -11,4 +11,13 @@
 HWND WINAPI wow_user_server_create_dialog(HANDLE, LPDLGTEMPLATE, DWORD, HWND,
     DLGPROC, LONG, UINT);
 
+struct wow_task_order_thread;
+struct wow_window_creation_enrollment;
+struct wow_window_words_binding;
+/* Shared creation entrance asks the active dialog scope first, before
+ * generic class enrollment. Neither operation advances the hook chain. */
+BOOL WINAPI wow_dialog_creation_claim(HWND, const CREATESTRUCTA *,
+    struct wow_task_order_thread *, struct wow_window_creation_enrollment *, BOOL *);
+void WINAPI wow_dialog_creation_cancel(HWND, struct wow_window_words_binding *);
+
 #endif
