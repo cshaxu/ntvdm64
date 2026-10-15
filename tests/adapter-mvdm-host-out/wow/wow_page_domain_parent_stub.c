@@ -5,6 +5,19 @@
  * selector and native destruction, not CCPU publication; the real combined
  * native-menu/page-domain fixture covers that separate boundary. */
 LONG wow_menu_fixture_retire_fail;
+int __cdecl mvdm_softpc_wow_page_domain_publish_menus(unsigned long count,
+    const mvdm_softpc_wow_menu_observation *menus, unsigned long item_count,
+    const mvdm_softpc_wow_menu_query_item *items)
+{
+    (void)item_count; (void)items;
+#ifdef WOW_MENU_CLEANUP_FIXTURE
+    return count && menus;
+#else
+    (void)count; (void)menus;
+    SetLastError(ERROR_INVALID_STATE);
+    return 0;
+#endif
+}
 unsigned long __cdecl mvdm_softpc_wow_page_domain_publish_menu(
     unsigned long menu, unsigned long task, unsigned long count,
     const mvdm_softpc_wow_menu_query_item *items)

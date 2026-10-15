@@ -44,7 +44,7 @@ DWORD WINAPI wow_user_full_handle(wow_user_object_table *table, WORD handle)
 BOOL WINAPI wow_user_window_sample_links(HWND window, wow_user_window_links *output)
 {
     wow_user_window_links links = {0};
-    WINDOWINFO before = {sizeof(before)}, after = {sizeof(after)};
+    WINDOWINFO before = {sizeof(before)};
     DWORD saved = GetLastError();
     if (!window || !output) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
@@ -60,111 +60,11 @@ BOOL WINAPI wow_user_window_sample_links(HWND window, wow_user_window_links *out
         links.owner = GetWindow(window, GW_OWNER);
     }
     links.child = GetWindow(window, GW_CHILD);
-    /* Public USER exposes no NT4 thread lock over the native tree. Reject
-     * an observed disappearance/change rather than publish a successful
-     * empty node. This is a bounded sample, not a desktop-wide atomicity
-     * promise; the graph owner must resolve every sampled full identity. */
-    if (!GetWindowInfo(window, &after)) return FALSE;
-    if (before.atomWindowType != after.atomWindowType ||
-            before.dwStyle != after.dwStyle ||
-            links.child != GetWindow(window, GW_CHILD) ||
-            (window != GetDesktopWindow() &&
-             (links.next != GetWindow(window, GW_HWNDNEXT) ||
-              links.parent != GetAncestor(window, GA_PARENT) ||
-              links.owner != GetWindow(window, GW_OWNER)))) {
-        SetLastError(ERROR_RETRY); return FALSE;
-    }
+    /* These are observations, not a native desktop lock. The composed
+     * transaction validates references/chains, not later external freshness. */
     *output = links;
     SetLastError(saved);
     return TRUE;
-}
-
-/* The index is traversal scratch only. It uses USER's existing low-word
- * namespace and rejects differing generations; it neither allocates handles
- * nor survives the call as another object registry. */
-static BOOL append_sample(HWND window, ULONG *seen,
-    wow_user_window_links **rows, ULONG *count, ULONG *capacity)
-{
-    ULONG index = LOWORD(window), previous;
-    wow_user_window_links *grown;
-    if (!window) return TRUE;
-    previous = seen[index];
-    if (previous) {
-        if ((*rows)[previous - 1].window == window) return TRUE;
-        SetLastError(ERROR_RETRY); return FALSE;
-    }
-    if (*count == *capacity) {
-        ULONG size = *capacity ? *capacity * 2u : 64u;
-        if (size > 0x10000u) size = 0x10000u;
-        if (size == *capacity) {
-            SetLastError(ERROR_INVALID_DATA); return FALSE;
-        }
-        grown = *rows ? HeapReAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
-            *rows, size * sizeof(**rows)) :
-            HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, size * sizeof(**rows));
-        if (!grown) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return FALSE; }
-        *rows = grown;
-        *capacity = size;
-    }
-    (*rows)[*count].window = window;
-    seen[index] = ++*count;
-    return TRUE;
-}
-
-static BOOL sampled_links_match(const wow_user_window_links *row)
-{
-    wow_user_window_links links;
-    if (!wow_user_window_sample_links(row->window, &links)) return FALSE;
-    if (links.next != row->next || links.parent != row->parent ||
-            links.child != row->child || links.owner != row->owner) {
-        SetLastError(ERROR_RETRY); return FALSE;
-    }
-    return TRUE;
-}
-
-BOOL WINAPI wow_user_window_sample_graph(const HWND *roots, ULONG root_count,
-    wow_user_window_links **output, ULONG *output_count)
-{
-    wow_user_window_links *rows = NULL;
-    ULONG *seen, count = 0, capacity = 0, i;
-    DWORD error, saved = GetLastError();
-    if (!output || !output_count || !roots || !root_count ||
-            root_count > 0x10000u) {
-        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
-    }
-    seen = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, 0x10000u * sizeof(*seen));
-    if (!seen) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return FALSE; }
-    for (i = 0; i < root_count; ++i) {
-        if (!roots[i]) { SetLastError(ERROR_INVALID_WINDOW_HANDLE); goto fail; }
-        if (!append_sample(roots[i], seen, &rows, &count, &capacity)) goto fail;
-    }
-    for (i = 0; i < count; ++i) {
-        wow_user_window_links links;
-        if (!wow_user_window_sample_links(rows[i].window, &links)) goto fail;
-        rows[i] = links;
-        /* append_sample can move rows. Never retain a pointer into it. */
-        if (!append_sample(links.next, seen, &rows, &count, &capacity) ||
-            !append_sample(links.parent, seen, &rows, &count, &capacity) ||
-            !append_sample(links.child, seen, &rows, &count, &capacity) ||
-            !append_sample(links.owner, seen, &rows, &count, &capacity)) goto fail;
-    }
-    /* Native USER may change while the closure is collected. Recheck every
-     * edge, without executing callbacks or guest code, before handing it to
-     * the publisher. This detects observed races, not a substitute USER lock. */
-    for (i = 0; i < count; ++i) {
-        if (!sampled_links_match(&rows[i])) goto fail;
-    }
-    HeapFree(GetProcessHeap(), 0, seen);
-    *output = rows;
-    *output_count = count;
-    SetLastError(saved);
-    return TRUE;
-fail:
-    error = GetLastError();
-    if (rows) HeapFree(GetProcessHeap(), 0, rows);
-    HeapFree(GetProcessHeap(), 0, seen);
-    SetLastError(error);
-    return FALSE;
 }
 
 BOOL WINAPI wow_user_window_refresh_graph(HWND callback_window)
@@ -208,54 +108,219 @@ BOOL WINAPI wow_user_window_refresh_graph(HWND callback_window)
     return result;
 }
 
+typedef mvdm_softpc_wow_window_observation window_observation;
+
+/* A public USER sample has no desktop lock. Capture a single identity and
+ * its fields; only the identity itself is checked again, never neighbours. */
+static BOOL capture_window(HWND window, window_observation *row)
+{
+    WINDOWINFO info = {sizeof(info)};
+    wow_user_window_links links;
+    DWORD pid = 0, tid;
+    int length;
+    ZeroMemory(row, sizeof(*row));
+    row->thread_id = GetWindowThreadProcessId(window, &row->process_id);
+    if (!row->thread_id || !GetWindowInfo(window, &info) ||
+            !wow_user_window_sample_links(window, &links)) return FALSE;
+    row->links.window = (ULONG)(ULONG_PTR)window;
+    row->links.next = (ULONG)(ULONG_PTR)links.next;
+    row->links.parent = (ULONG)(ULONG_PTR)links.parent;
+    row->links.child = (ULONG)(ULONG_PTR)links.child;
+    row->links.owner = (ULONG)(ULONG_PTR)links.owner;
+    CopyMemory(row->window_rect, &info.rcWindow, sizeof(RECT));
+    CopyMemory(row->client_rect, &info.rcClient, sizeof(RECT));
+    row->style = info.dwStyle; row->exstyle = info.dwExStyle;
+    row->control_id = (row->style & WS_CHILD) ? GetWindowLongA(window, GWL_ID) : 0;
+    row->descriptor.atom = info.atomWindowType;
+    length = GetClassNameA(window, row->descriptor.name, sizeof(row->descriptor.name));
+    if (!length) return FALSE;
+    if (length >= sizeof(row->descriptor.name) - 1) {
+        SetLastError(ERROR_INSUFFICIENT_BUFFER); return FALSE;
+    }
+    row->descriptor.name_bytes = (ULONG)length + 1u;
+    SetLastError(ERROR_SUCCESS);
+    row->descriptor.class_style = GetClassLongA(window, GCL_STYLE);
+    if (!row->descriptor.class_style && GetLastError()) return FALSE;
+    SetLastError(ERROR_SUCCESS);
+    row->descriptor.window_extra = GetClassLongA(window, GCL_CBWNDEXTRA);
+    if (!row->descriptor.window_extra && GetLastError()) return FALSE;
+    tid = GetWindowThreadProcessId(window, &pid);
+    if (tid != row->thread_id || pid != row->process_id) {
+        SetLastError(ERROR_INVALID_WINDOW_HANDLE); return FALSE;
+    }
+    return TRUE;
+}
+
+/* This index/array is transaction scratch; the page-domain remains the sole
+ * retained observation owner. Full generations never alias on a low word. */
+static BOOL put_observation(window_observation **rows, ULONG *count,
+    ULONG *capacity, ULONG *index, const window_observation *value)
+{
+    ULONG slot = LOWORD(value->links.window), at = index[slot];
+    window_observation *grown;
+    if (!slot || slot == 0xffffu) { SetLastError(ERROR_INVALID_DATA); return FALSE; }
+    if (at) {
+        window_observation *previous = &(*rows)[at - 1u];
+        if (previous->links.window != value->links.window &&
+                previous->process_id == GetCurrentProcessId() &&
+                IsWindow((HWND)(ULONG_PTR)previous->links.window)) {
+            SetLastError(ERROR_INVALID_STATE); return FALSE;
+        }
+        *previous = *value;
+        return TRUE;
+    }
+    if (*count == *capacity) {
+        ULONG size = *capacity ? *capacity * 2u : 64u;
+        if (size > 0xfffeu) size = 0xfffeu;
+        if (size <= *capacity) { SetLastError(ERROR_INVALID_DATA); return FALSE; }
+        grown = *rows ? HeapReAlloc(GetProcessHeap(), 0, *rows, size * sizeof(**rows)) :
+            HeapAlloc(GetProcessHeap(), 0, size * sizeof(**rows));
+        if (!grown) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return FALSE; }
+        *rows = grown; *capacity = size;
+    }
+    (*rows)[*count] = *value;
+    index[slot] = ++*count;
+    return TRUE;
+}
+
+static ULONG *observation_edge(window_observation *row, unsigned edge)
+{
+    if (edge == 0) return &row->links.next;
+    if (edge == 1) return &row->links.parent;
+    if (edge == 2) return &row->links.owner;
+    return &row->links.child;
+}
+
+/* Native concurrent sampling can join an old external edge to a new local
+ * chain. Break only an external edge of such a cycle. Local-only cycles are
+ * integration errors. Gray/black traversal is linear, not a stability retry. */
+static BOOL normalize_observation_chains(window_observation *rows, ULONG count,
+    const ULONG *index)
+{
+    BYTE *state = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, count);
+    ULONG start, at, next, cut;
+    unsigned edge;
+    DWORD pid = GetCurrentProcessId();
+    if (!state) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return FALSE; }
+    for (edge = 0; edge < 3u; ++edge) {
+        ZeroMemory(state, count);
+        for (start = 0; start < count; ++start) {
+            at = start;
+            while (!state[at]) {
+                state[at] = 1;
+                next = *observation_edge(&rows[at], edge);
+                if (!next) break;
+                at = index[LOWORD(next)] - 1u;
+            }
+            if (state[at] == 1 && *observation_edge(&rows[at], edge)) {
+                cut = at;
+                do {
+                    if (rows[cut].process_id != pid) break;
+                    cut = index[LOWORD(*observation_edge(&rows[cut], edge))] - 1u;
+                } while (cut != at);
+                if (rows[cut].process_id == pid) {
+                    HeapFree(GetProcessHeap(), 0, state);
+                    SetLastError(ERROR_INVALID_DATA); return FALSE;
+                }
+                /* Mark the whole cycle before cutting it; the now-detached
+                 * remainder must not be mistaken for another gray cycle. */
+                next = at;
+                do {
+                    state[next] = 2;
+                    next = index[LOWORD(*observation_edge(&rows[next], edge))] - 1u;
+                } while (next != at);
+                *observation_edge(&rows[cut], edge) = 0;
+            }
+            at = start;
+            while (state[at] == 1) {
+                state[at] = 2;
+                next = *observation_edge(&rows[at], edge);
+                if (!next) break;
+                at = index[LOWORD(next)] - 1u;
+            }
+        }
+    }
+    HeapFree(GetProcessHeap(), 0, state);
+    return TRUE;
+}
+
 BOOL WINAPI wow_user_window_project_graph(const HWND *roots, ULONG root_count)
 {
-    wow_user_window_links *rows = NULL;
-    mvdm_softpc_wow_window_links *links = NULL;
-    mvdm_softpc_wow_window_descriptor *nodes = NULL;
-    ULONG count = 0, i;
+    window_observation *rows = NULL, captured;
+    ULONG *index = NULL, count = 0, capacity = 0, i, used;
     BOOL result = FALSE;
-    DWORD error, saved = GetLastError();
-    if (!wow_user_window_sample_graph(roots, root_count, &rows, &count)) return FALSE;
-    nodes = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, count * sizeof(*nodes));
-    links = HeapAlloc(GetProcessHeap(), 0, count * sizeof(*links));
-    if (!nodes || !links) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); goto done; }
-    /* Sample every descriptor before publishing any new node. These are
-     * public native queries, not class registration or procedure ownership. */
+    DWORD error, pid = GetCurrentProcessId(), saved = GetLastError();
+    if (!roots || !root_count || root_count >= 0x10000u) {
+        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
+    }
+    for (i = 0; i < root_count; ++i) if (!roots[i]) {
+        SetLastError(ERROR_INVALID_WINDOW_HANDLE); return FALSE;
+    }
+    if (!mvdm_softpc_wow_page_domain_copy_window_view(0, NULL, &count)) return FALSE;
+    capacity = count;
+    rows = HeapAlloc(GetProcessHeap(), 0, (count ? count : 1u) * sizeof(*rows));
+    index = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, 0x10000u * sizeof(*index));
+    if (!rows || !index) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); goto done; }
+    if (!mvdm_softpc_wow_page_domain_copy_window_view(capacity, rows, &count)) goto done;
+    for (i = used = 0; i < count; ++i) {
+        HWND window = (HWND)(ULONG_PTR)rows[i].links.window;
+        if (capture_window(window, &captured)) rows[i] = captured;
+        else if (!IsWindow(window)) {
+            /* Withdraw expired observations with their incoming links. This
+             * includes local native controls without a WW cleanup owner. */
+            continue;
+        } else if (rows[i].process_id == pid) {
+            goto done; /* Live local state must not fall back to old fields. */
+        } else if (!rows[i].descriptor.atom) goto done; /* Cold desktop. */
+        rows[used] = rows[i];
+        index[LOWORD(rows[used].links.window)] = used + 1u;
+        ++used;
+    }
+    count = used;
+    for (i = 0; i < root_count; ++i) {
+        if (!capture_window(roots[i], &captured) ||
+                !put_observation(&rows, &count, &capacity, index, &captured)) goto done;
+    }
     for (i = 0; i < count; ++i) {
-        int length;
-        WINDOWINFO info = {sizeof(info)};
-        if (!GetWindowInfo(rows[i].window, &info)) goto done;
-        nodes[i].atom = info.atomWindowType;
-        length = GetClassNameA(rows[i].window, nodes[i].name, sizeof(nodes[i].name));
-        if (!length) goto done;
-        if (length >= sizeof(nodes[i].name) - 1) {
-            SetLastError(ERROR_INSUFFICIENT_BUFFER); goto done;
+        unsigned edge;
+        for (edge = 0; edge < 4u; ++edge) {
+            ULONG target = *observation_edge(&rows[i], edge), found;
+            if (!target) continue;
+            found = index[LOWORD(target)];
+            if (found && rows[found - 1u].links.window == target) continue;
+            if (capture_window((HWND)(ULONG_PTR)target, &captured)) {
+                if (!put_observation(&rows, &count, &capacity, index, &captured)) goto done;
+            } else {
+                /* A vanished external endpoint is unavailable, not an alias
+                 * for a reused slot. No native hierarchy is mutated here. */
+                if (IsWindow((HWND)(ULONG_PTR)target)) {
+                    DWORD owner = 0;
+                    GetWindowThreadProcessId((HWND)(ULONG_PTR)target, &owner);
+                    if (owner == pid) goto done;
+                }
+                *observation_edge(&rows[i], edge) = 0;
+            }
         }
-        nodes[i].name_bytes = (ULONG)length + 1u;
-        SetLastError(ERROR_SUCCESS);
-        nodes[i].class_style = GetClassLongA(rows[i].window, GCL_STYLE);
-        if (!nodes[i].class_style && GetLastError() != ERROR_SUCCESS) goto done;
-        SetLastError(ERROR_SUCCESS);
-        nodes[i].window_extra = GetClassLongA(rows[i].window, GCL_CBWNDEXTRA);
-        if (!nodes[i].window_extra && GetLastError() != ERROR_SUCCESS) goto done;
-        links[i].window = (ULONG)(ULONG_PTR)rows[i].window;
-        links[i].next = (ULONG)(ULONG_PTR)rows[i].next;
-        links[i].parent = (ULONG)(ULONG_PTR)rows[i].parent;
-        links[i].child = (ULONG)(ULONG_PTR)rows[i].child;
-        links[i].owner = (ULONG)(ULONG_PTR)rows[i].owner;
     }
-    /* The worker prepares all storage and revalidates native relationships
-     * before one commit. Do not publish nodes sequentially in this caller. */
-    if (!mvdm_softpc_wow_page_domain_project_window_graph(count, links, nodes)) {
-        SetLastError(ERROR_INVALID_STATE); goto done;
+    /* A replacement generation may have displaced an earlier observation
+     * during closure. Only observation edges may retain that old identity. */
+    for (i = 0; i < count; ++i) {
+        unsigned edge;
+        for (edge = 0; edge < 4u; ++edge) {
+            ULONG *target = observation_edge(&rows[i], edge), found;
+            if (!*target) continue;
+            found = index[LOWORD(*target)];
+            if (found && rows[found - 1u].links.window == *target) continue;
+            if (rows[i].process_id == pid) { SetLastError(ERROR_INVALID_STATE); goto done; }
+            *target = 0;
+        }
     }
-    result = TRUE;
+    if (!normalize_observation_chains(rows, count, index)) goto done;
+    result = mvdm_softpc_wow_page_domain_project_window_graph(count, rows);
 done:
     error = result ? saved : GetLastError();
-    if (links) HeapFree(GetProcessHeap(), 0, links);
-    if (nodes) HeapFree(GetProcessHeap(), 0, nodes);
-    HeapFree(GetProcessHeap(), 0, rows);
+    if (index) HeapFree(GetProcessHeap(), 0, index);
+    if (rows) HeapFree(GetProcessHeap(), 0, rows);
     SetLastError(error);
     return result;
 }

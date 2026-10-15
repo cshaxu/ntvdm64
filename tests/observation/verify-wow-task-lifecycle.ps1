@@ -229,6 +229,16 @@ $fixtureOutput = @(Get-Content "$out/stdout.txt"; Get-Content "$out/stderr.txt")
 $fixtureExitCode = $process.ExitCode
 $fixtureExitCode | Set-Content -LiteralPath "$out/fixture-exit.txt"
 if ($Case -eq 'graph-snapshot' -and
+    (!($fixtureOutput -match '^WOW_EXTERNAL_OBSERVATION_CCPU errors=0 separate_process=1 local_updates=32$') -or
+     !($fixtureOutput -match '^WOW_EXTERNAL_CAPTURE_CCPU errors=0 dead_native=1 committed_observation=1$') -or
+     !($fixtureOutput -match '^WOW_POST_NATIVE_FAILURE_CCPU errors=0 consumed_once=1 worker_exit=c0000420$'))) {
+    throw 'External churn or post-native consumed-message failure boundary was not verified'
+}
+if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource') -and
+    !($fixtureOutput -match '^WOW_REMOVED_MESSAGE_CCPU consumed_once=1 restored=1 no_replay=1$')) {
+    throw 'Native removed-message result was lost or replayed'
+}
+if ($Case -eq 'graph-snapshot' -and
     !($fixtureOutput -match '^WOW_GRAPH_SNAPSHOT_CCPU errors=0 fresh=1 child_id=1 dead_withdrawal=1 retained_reader=1$')) {
     throw 'Whole snapshot failed fresh publication, relation copying or retained-reader retirement'
 }
@@ -256,6 +266,10 @@ if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource
 if ($Case -eq 'window-reclaim' -and
     !($fixtureOutput -match '^WOW_DEFERRED_RECLAIM_CCPU errors=0 consumed_once=1 class_guard=1 retry=1 retained_owner=1 released=1$')) {
     throw 'Failed physical release lost its reclamation owner or consumed a reference twice'
+}
+if ($Case -eq 'window-reclaim' -and
+    !($fixtureOutput -match '^WOW_MENU_DEFERRED_RECLAIM_CCPU errors=0 atomic_update=1 logical_retirement=1 retry=1 released=1$')) {
+    throw 'Menu publication/retirement lost deferred physical storage or failed atomicity'
 }
 if ($Case -eq 'process-retirement' -and
     !($fixtureOutput -match '^WOW_PROCESS_RETIREMENT errors=0 ')) {
@@ -362,7 +376,7 @@ if ($Case -eq 'window-borrow' -and
     throw 'Terminal failure lost its table-owned cleanup obligation after native destruction'
 }
 if ($Case -eq 'window-borrow' -and
-    !($fixtureOutput -match '^WOW_GRAPH_PREPARATION_CCPU errors=0 descriptor_failure=1 stale_snapshot=1 unpublished=1 released=1$')) {
+    !($fixtureOutput -match '^WOW_GRAPH_PREPARATION_CCPU errors=0 descriptor_failure=1 missing_desktop=1 unpublished=1 released=1$')) {
     throw 'Graph preparation exposed a partial window or lost rollback ownership'
 }
 if ($Case -eq 'window-borrow' -and

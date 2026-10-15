@@ -79,6 +79,7 @@ typedef struct wow_user_native_call {
 } wow_user_native_call;
 BOOL WINAPI wow_user_native_call_begin(wow_user_native_call *, HWND);
 BOOL WINAPI wow_user_native_call_end(wow_user_native_call *);
+__declspec(noreturn) void WINAPI wow_user_native_call_failed(const char *, DWORD);
 /* Original pfnWOWCleanup resource operation, including task==0 module calls.
  * The task carrier survives until the runtime's native-thread unbind edge. */
 BOOL WINAPI wow_user_task_lifecycle_exit(wow_user_task_lifecycle *, HANDLE,

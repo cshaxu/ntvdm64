@@ -431,18 +431,22 @@ static BOOL dispatch_bound(HWND window, UINT message, WPARAM wp,
             if (!prepare_creation_menu(window, message, lp, binding)) return FALSE;
             *result = DispatchClientMessage(&view, message, wp, lp, procedure);
         } __finally {
+            DWORD error = GetLastError();
             if (terminal_owner && message == WM_NCDESTROY)
                 (void)wow_window_words_terminal(window, binding);
             wow_window_words_release(binding);
+            SetLastError(error);
         }
         return TRUE;
     }
     if (!wow_task_callback_enter(&task_scope)) {
-        wow_window_words_release(binding); return FALSE;
+        DWORD error = GetLastError();
+        wow_window_words_release(binding); SetLastError(error); return FALSE;
     }
     if (!wow_user_borrow_enter(&scope)) {
+        DWORD error = GetLastError();
         (void)wow_task_callback_leave(&task_scope);
-        wow_window_words_release(binding); return FALSE;
+        wow_window_words_release(binding); SetLastError(error); return FALSE;
     }
     __try {
         /* Resource conversion may enter the guest. Establish the same task
@@ -468,6 +472,7 @@ static BOOL dispatch_bound(HWND window, UINT message, WPARAM wp,
         }
         *result = DispatchClientMessage(&view, message, wp, lp, procedure);
     } __finally {
+        DWORD error = GetLastError();
         if (terminal_owner && message == WM_NCDESTROY)
             (void)wow_window_words_terminal(window, binding);
         if (callback_published)
@@ -478,6 +483,7 @@ static BOOL dispatch_bound(HWND window, UINT message, WPARAM wp,
         wow_window_words_release(binding);
         wow_user_borrow_leave(&scope);
         (void)wow_task_callback_leave(&task_scope);
+        SetLastError(error);
     }
     return TRUE;
 }
@@ -554,7 +560,7 @@ LRESULT CALLBACK wow_window_call_native_previous(HWND window, UINT message,
  * an integration test can distinguish USER delivery from WOW callback work.
  * It neither retains the HWND nor affects message ownership. */
 static VOID window_trace(HWND window, UINT message, LONG result,
-    const char *stage)
+    const char *stage, DWORD error)
 {
     char path[MAX_PATH], line[176];
     DWORD bytes, written;
@@ -568,11 +574,11 @@ static VOID window_trace(HWND window, UINT message, LONG result,
     if (file == INVALID_HANDLE_VALUE) return;
     native_procedure = GetWindowLongA(window, GWL_WNDPROC);
     bytes = (DWORD)sprintf_s(line, sizeof(line),
-        "%lu %s hwnd=%08lX message=%04X native=%08lX result=%08lX tid=%lu\r\n",
+        "%lu %s hwnd=%08lX message=%04X native=%08lX result=%08lX tid=%lu error=%lu\r\n",
         (unsigned long)GetCurrentProcessId(), stage,
         (unsigned long)(ULONG_PTR)window, (unsigned)message,
         (unsigned long)native_procedure, (unsigned long)result,
-        (unsigned long)GetCurrentThreadId());
+        (unsigned long)GetCurrentThreadId(), (unsigned long)error);
     if (bytes) (void)WriteFile(file, line, bytes, &written, NULL);
     CloseHandle(file);
 }
@@ -584,29 +590,34 @@ LRESULT CALLBACK wow_window_native_proc(HWND window, UINT message, WPARAM wp, LP
     wow_window_words_binding *binding = wow_window_words_acquire(window);
     LONG result = message == WM_CREATE ? -1 : 0;
     DWORD saved = GetLastError();
+    BOOL dispatched = FALSE;
 
-    window_trace(window, message, 0, "WindowEntry");
+    window_trace(window, message, 0, "WindowEntry", saved);
     SetLastError(saved);
     if (!binding) {
         if (message == WM_NCDESTROY) return DefWindowProcA(window, message, wp, lp);
+        window_trace(window, message, result, "WindowRejected", ERROR_INVALID_DATA);
         SetLastError(ERROR_INVALID_DATA);
         return result;
     }
     __try {
-        dispatch_bound(window, message, wp, lp,
+        dispatched = dispatch_bound(window, message, wp, lp,
             (DWORD)InterlockedCompareExchange((LONG *)&binding->cleanup.lpfnWndProc, 0, 0),
             binding->callback, &result, TRUE);
     } __finally {
+        saved = GetLastError();
         /* Also cover denied callback entry. The table retains any deferred
          * withdrawal; normal dispatch already retired before task leave. */
         if (message == WM_NCDESTROY) (void)wow_window_words_terminal(window, binding);
         wow_window_words_release(binding);
+        SetLastError(saved);
     }
     /* Default-off production witness: observe the original dispatch result
      * after the call has already completed, without changing its callback or
      * destruction ordering. */
     saved = GetLastError();
-    window_trace(window, message, result, "WindowDispatch");
+    window_trace(window, message, result,
+        dispatched ? "WindowDispatch" : "WindowRejected", saved);
     SetLastError(saved);
     return result;
 }

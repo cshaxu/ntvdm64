@@ -34,8 +34,6 @@ static void verify_native_relationships(void)
         0, 0, 10, 10, parent, NULL, NULL, NULL);
     CHECK(popup && first && second);
     if (popup && first && second) {
-        wow_user_window_links *graph = NULL;
-        ULONG count = 0, i, found = 0;
         HWND roots[2] = {first, first};
         CHECK(wow_user_window_sample_links(popup, &links));
         CHECK(links.parent == GetDesktopWindow() && links.owner == parent);
@@ -55,30 +53,9 @@ static void verify_native_relationships(void)
         CHECK(links.parent == popup && !links.owner);
         CHECK(wow_user_window_sample_links(GetDesktopWindow(), &links));
         CHECK(!links.parent && !links.owner && !links.next);
-        CHECK(wow_user_window_sample_graph(roots, 2, &graph, &count));
-        for (i = 0; graph && i < count; ++i) {
-            if (graph[i].window == first) {
-                CHECK(graph[i].parent == parent && !graph[i].next);
-                ++found;
-            }
-            if (graph[i].window == second) {
-                CHECK(graph[i].parent == popup);
-                ++found;
-            }
-            if (graph[i].window == popup) {
-                CHECK(graph[i].owner == parent);
-                ++found;
-            }
-            if (graph[i].window == parent || graph[i].window == GetDesktopWindow())
-                ++found;
-        }
-        CHECK(found == 5); /* Duplicate roots must not duplicate nodes. */
-        if (graph) HeapFree(GetProcessHeap(), 0, graph);
-        graph = NULL;
-        count = 123;
+        /* Complete graph composition now belongs to the real page-domain
+         * fixture, not a second unused production sampling implementation. */
         roots[1] = NULL;
-        CHECK(!wow_user_window_sample_graph(roots, 2, &graph, &count));
-        CHECK(!graph && count == 123); /* Failed closure leaves outputs intact. */
         CHECK(!wow_user_window_project_graph(roots, 2));
         CHECK(GetLastError() == ERROR_INVALID_WINDOW_HANDLE);
         FillMemory(&links, sizeof(links), 0x5a);

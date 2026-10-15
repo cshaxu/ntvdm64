@@ -118,8 +118,9 @@ int __cdecl mvdm_softpc_wow_page_domain_collect_observed_windows(void);
  * returning to guest code. Top-level menu graph publication is separate.
  * Reject retired/reused identities; retain the existing guest allocation. */
 int __cdecl mvdm_softpc_wow_page_domain_refresh_window(unsigned long window);
-/* Caller supplies one quiesced native relationship snapshot, including every
- * affected record. Resolve all full identities before changing guest memory.
+/* Caller supplies one structurally consistent observation view, including
+ * every affected record, with guest entry excluded. This is not an atomic
+ * native desktop snapshot. Resolve full identities before changing guest memory.
  * NULL links are explicit; an unknown identity is never silently omitted.
  * This copies relationships, not native tree policy. In particular parent
  * and child links need not be symmetric during original window creation. */
@@ -133,9 +134,22 @@ typedef struct mvdm_softpc_wow_window_descriptor {
     unsigned long class_style, window_extra, name_bytes;
     char name[256];
 } mvdm_softpc_wow_window_descriptor;
+/* Call-local copy of the committed view. Numeric rectangles/styles retain
+ * the original x86 meaning, not a modern USER pointer/layout. The caller
+ * serializes two-pass sizing/copy with guest execution and owns the arrays.
+ * An empty class descriptor denotes the not-yet-observed desktop root. */
+typedef struct mvdm_softpc_wow_window_observation {
+    mvdm_softpc_wow_window_links links;
+    mvdm_softpc_wow_window_descriptor descriptor;
+    long window_rect[4], client_rect[4];
+    unsigned long style, exstyle, control_id;
+    unsigned long process_id, thread_id;
+} mvdm_softpc_wow_window_observation;
+int __cdecl mvdm_softpc_wow_page_domain_copy_window_view(
+    unsigned long capacity, mvdm_softpc_wow_window_observation *rows,
+    unsigned long *count);
 int __cdecl mvdm_softpc_wow_page_domain_project_window_graph(
-    unsigned long count, const mvdm_softpc_wow_window_links *links,
-    const mvdm_softpc_wow_window_descriptor *descriptors);
+    unsigned long count, const mvdm_softpc_wow_window_observation *rows);
 int __cdecl mvdm_softpc_wow_page_domain_publish_window_links(
     unsigned long count, const mvdm_softpc_wow_window_links *links);
 /* Replace edges and withdraw confirmed-dead observed generations together.
@@ -172,11 +186,19 @@ int __cdecl mvdm_softpc_wow_page_domain_retire_class(unsigned long server);
 typedef struct mvdm_softpc_wow_menu_query_item {
     unsigned long type, state, id, submenu;
 } mvdm_softpc_wow_menu_query_item;
+typedef struct mvdm_softpc_wow_menu_observation {
+    unsigned long menu, task, first_item, item_count;
+    unsigned long local_state; /* Required local state, independent of creator ownership. */
+} mvdm_softpc_wow_menu_observation;
+/* Complete child-before-parent trees, copied in one non-reentrant commit. */
+int __cdecl mvdm_softpc_wow_page_domain_publish_menus(unsigned long count,
+    const mvdm_softpc_wow_menu_observation *menus, unsigned long item_count,
+    const mvdm_softpc_wow_menu_query_item *items);
 unsigned long __cdecl mvdm_softpc_wow_page_domain_publish_menu(
     unsigned long menu, unsigned long task, unsigned long count,
     const mvdm_softpc_wow_menu_query_item *items);
-/* Refuses with ERROR_BUSY while copied WND/ITEM edges still reference MENU;
- * the producer must publish the native unlink before retrying. */
+/* Refuses while required local WND/ITEM edges still reference MENU. External
+ * observation edges may be cleared in the same retirement transaction. */
 int __cdecl mvdm_softpc_wow_page_domain_retire_menu(unsigned long menu);
 int __cdecl mvdm_softpc_wow_page_domain_window_menu(unsigned long window,
     unsigned long menu);

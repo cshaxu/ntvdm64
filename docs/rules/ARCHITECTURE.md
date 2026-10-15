@@ -1,5 +1,14 @@
 # Architecture Rules
 
+## Owner-approved T447 external observation semantics
+
+Route E expressly permits boundary-updated external USER object observations
+under the [copied-view contract](../design/ARCHITECTURE.md#wow-copied-user-observation-boundary-t447).
+Do not claim native live-heap equivalence, use external freshness as a global
+callback admission gate, or extend this exception to stale required local
+mutations. It does not authorize guest changes, a second object authority,
+private USER-server reconstruction or a new scheduler.
+
 ## Owner-approved T445 S5 style DLL components
 
 After accepting S4, owner replaces the static-library arrangement below:

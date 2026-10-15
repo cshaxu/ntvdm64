@@ -2,6 +2,212 @@
 
 ## Admission and boundaries
 
+### Approved E observation-view repair group
+
+Owner explicitly approves route E and the external-window observation
+semantics, and requests complete design, grouped implementation, build/test,
+coherent publication, commit and push. This supersedes the pending-choice
+record in the graph audit, not its evidence or the full S2/T447 obligations.
+No new S is admitted. Guest images/code/data hot patches are prohibited;
+the intended additional original-mirror diff is zero.
+
+#### Retained owners and representation
+
+Original USER16 local query algorithms and layouts, original WOW conversion,
+callback execution and task scheduling remain unchanged. Modern USER owns
+native windows and menus. The existing worker page-domain owns the copied
+NT4-layout view, identities, references and delayed physical reclamation.
+WOW32 owns observation and admission at existing execution boundaries. No
+new scheduler, periodic publisher, global WinEvent hook, CPU interception,
+native window manager or second persistent object registry is introduced.
+
+The unavailable original dependency is desktop.c's server-owned desktop-heap
+section and its lifetime contract. usercli.asm proves the relevant compiled
+local readers have no runtime fallback. The preceding graph audit records
+why original mapping, query-only refresh and memory-interception alternatives
+are not the selected bounded route. This owner-approved view is an explicit
+compatibility exception, not a claim to have recreated original live memory.
+
+#### Observable contract
+
+External existence, relationships, geometry/style and published menu data
+are observations, not a synchronous live mirror. They can remain unchanged
+between serviced host boundaries, with no millisecond freshness promise.
+Native operations still use full native handles and native failure results;
+copied-memory retention never grants ownership or pins a native HWND.
+Actual PID/thread identity classifies observations; observed-versus-managed
+storage ownership is not a process-identity test. Desktop and mixed-process
+relations are observation boundaries, not a promise of native global atomicity.
+
+Worker-owned creation, destruction, callback targets, menu attachments and
+native mutations must publish their required state before guest resumption.
+Preserve pre-link creation and post-unlink terminal windows, owner visibility,
+class/WOW words and original task ownership. An observed native control in
+the worker is not exempt from this synchronous requirement.
+
+#### Capture, merge, validation and commit
+
+1. At an existing serialized host/guest boundary, obtain a call-local copy
+   of the already committed view through the page-domain owner. This is
+   transaction scratch, not another retained cache. A cold view has the
+   existing desktop root and required enrolled objects, not a fabricated
+   successful full desktop enumeration.
+2. An external refresh is optional observation work. A failed/disappearing
+   external sample cannot reject an otherwise valid local callback. Retain
+   the committed external view when a replacement cannot be formed; do not
+   retry until the desktop becomes stable. Required local state is refreshed
+   separately and must not fall back to stale local data.
+3. Merge all live worker objects plus current creation/terminal/discovery
+   roots into transaction scratch. Refresh affected local parent/child/next/
+   owner links and properties, not only the callback WND. Newly referenced
+   external identities require a readable observation before their address
+   is exposed; vanished external identities are unavailable observations,
+   not a successful native window. Do not alias a different full generation.
+4. Validate the composed view structurally, independently of later native
+   desktop changes: valid represented targets, unique low-word generations,
+   terminating next/parent/owner chains and desktop termination. Do not
+   impose symmetric child membership on unlinked creation/terminal nodes.
+   A conflict involving stale external edges must discard/repair those
+   observation edges in scratch, never change a required local edge or
+   fabricate a native mutation. Replacing an observation list is one
+   structural transaction; no half-old/half-new published chain is allowed.
+5. Prepare all new WND/CLS backing and retention before commit. Commit full
+   identities, links and copied fields together with guest execution excluded.
+   The worker consumes captured external descriptors without re-querying
+   every external object as a final global freshness gate. Required local
+   object identity/state checks remain. Dispose of uncommitted scratch on
+   failure; preserve prior publication and the original failure code.
+6. Withdraw replaced/expired observations only after surviving incoming
+   edges have been redirected or removed in that transaction. Managed
+   objects retain their terminal owner. Retain borrowed backing until the
+   last reader releases it; successful logical withdrawal is not undone by
+   a deferred physical free. Preserve original dead-window terminal fields.
+
+Structural consistency is not proof of one simultaneous native snapshot.
+In a mixed relation, external edges may lag or be unavailable under this
+approved model. Persistent local inconsistency is an actual adapter error,
+not an external-observation excuse. Local-only cycles are rejected rather
+than repaired by inventing hierarchy.
+
+#### All consuming boundaries, menus and completed operations
+
+Apply the same required-local/optional-external boundary to window and dialog
+callbacks, W32InitDlg admission, WU32StdHookProc, tagged CallWindowProc,
+discovery/enum callbacks and native-call returns. Do not leave a second
+whole-desktop gate in an adjacent entrance. Original callback code executes
+once; a real denied admission is distinct from a successful zero result.
+
+Keep call-end responsible for restoring task/execution ownership. Keep native
+result/error and a removed MSG as separate captured values until restoration
+and required publication finish. Optional observation failure does not replace
+them. No replay of PeekMessage, native mutation or application callback.
+
+Menu trees require a complete prepare/commit transaction too: recursively
+prepare referenced items/submenus, preserve attachment versus ownership,
+publish before original direct readers and retire only after unlinking.
+Current sequential publish_tree success on children is not whole-tree
+atomicity. Refactor that path within this same group rather than silently
+claiming the window transaction already covers menus. External menu refresh
+may lag; own mutation and callback menu payloads remain required.
+
+Menu responsibility is not inferred from cleanup ownership: public USER has
+no HMENU-to-PID query. Creator enrollment, known local window attachment and
+local GetSystemMenu establish required freshness; descendants inherit it.
+The existing menu entry and page-domain index retain this responsibility,
+without acquiring native destruction ownership. Observed native windows are
+included, not only managed WW windows. Unavailable external incoming menu
+references are cleared in the same logical retirement commit; required local
+references instead block retirement until their unlink is published. Original
+readers guard a null submenu. Failed physical MENU/ITEM frees retain a retry
+obligation after logical withdrawal, never a half-cleared published object.
+
+Pre-operation resource failure returns the existing failed admission/result.
+After an irreversible native side effect, a required-local publication or
+execution-restoration failure must not be reported as an ordinary native
+failure and must not resume guest against unsafe state: use the existing
+worker fatal-error/termination boundary with the captured operation/error
+diagnostic. No automatic retry, native rollback guess, silent callback drop
+or continuation with stale required-local state. Deferred physical freeing
+alone is not this fatal condition. Tests must distinguish all these cases.
+
+#### Files, ABI and replacement inventory
+
+WOW32: wow_user_object_bindings, wow_window_words_binding,
+wow_user_discovery, wow_user_task_lifecycle, wow_dialog_creation_binding,
+wow_hook_callback, wow_user_registration_bridge, wow_menu_client_bindings
+and wow_menu_native_bindings with their headers as required.
+Worker: mvdm_softpc_wow_page_domain and its private header/export selection.
+Extend only the synchronous copied view contract, never pass host pointers
+into guest state. Rebuild worker/WOW32 together. Remove superseded global
+stability rechecks and post-result failure coupling in the same delivery;
+do not retain parallel legacy/new routing switches. Keep original algorithms
+and existing ownership tables. No guest, broker wire or public CLI change.
+
+#### Group acceptance and delivery
+
+Checked-in fixture cases must cover fresh/cold view, external churn and
+disappearance, mixed relations, local native controls, local mutation while
+external refresh fails, generation replacement, structural cycle rejection,
+creation veto/unlinked windows, nested destruction, deferred frees and
+allocation failures before/after native side effects. Cover menu subtree
+rollback/attachment/destroy, callback exactly-once/zero-result distinction,
+and a removed message retained exactly once. Tests use the selected real
+provider and CCPU backing; independent synthetic NE probes do not modify
+original media. A separate native churn process proves the external boundary.
+
+Only after the complete group is connected, run owned background incremental
+build and grouped regressions. Then real Win16 discovery/CBT, independent
+WINMINE/SOL/WRITE frontiers, three style modes where applicable and Console17/
+Window17. Retain prior failed SOL/F2 evidence; do not treat later passes as
+causal explanations. Build/runtime artifacts stay under build, isolated
+execution stages under the approved O:/tmp owner. Preserve assets/winnt.zip.
+
+Perform the second-role diff/source review, documentation/link gates and
+guest/mirror-diff audit. Seal one tested thirteen-image package; preserve
+recoverable previous binaries, publish to assets/release and configured
+O:/winnt/system32, verify hashes/PE identities and unchanged guest/config
+companions, then commit/push reviewed main changes. Do not publish a partial
+or regressed package. This delivers the repair group, not the remaining
+WRITE/control/message/task-termination obligations of the complete T447.
+
+#### E implementation and verified delivery
+
+The candidate now copies the committed WND view through its existing owner,
+refreshes local rows and explicit roots, and resolves new references in
+call-local scratch. PID/TID observation metadata is attached to the existing
+backing-lifetime record, not a second identity registry. Dead observations
+are withdrawn with incoming edges; a disappeared external endpoint is
+unavailable rather than rebound to another generation. Boundary edges to
+such endpoints can become null without mutating native USER. Only external
+edges can be cut to resolve a mixed sampled cycle; local-only cycles fail.
+The worker independently validates full identities and terminating chains,
+then commits captured fields without a second native-desktop stability scan.
+
+Menu capture prepares complete child-before-parent trees and their cleanup
+records before publishing any child. A copied batch contract resolves all
+submenus and prepares storage before a non-fallible commit. Deferred physical
+free records retain failed release obligations. Required local attachments,
+owned menus and explicit mutation/callback roots remain synchronous; failure
+of an unattached borrowed observation can retain its preceding complete tree.
+
+The post-native failure boundary is explicitly worker fail-fast, using the
+existing product convention for broken ownership, not opennt_exit_thread:
+that latter path only exits a task and cannot protect the shared worker view.
+The diagnostic records the publication/restoration stage and error, with
+STATUS_ASSERTION_FAILURE and the error parameter in the fail-fast record.
+It does not replay or turn an already consumed MSG/native result into a
+normal API failure. This is a project adaptation failure policy, not a claim
+that original NT4 failed this way or an original-source algorithm change.
+
+The completed E group is S2 P13. observation-e-r5 passes the worker/WOW32
+build and all12 boundary cases; observation-e-apps-r4 passes independent
+guest discovery/CBT, SOL/WINMINE three modes, WRITE's existing frontier and
+both17-route DOS matrices. observation-e-publish-r1 synchronizes and verifies
+the13-image package at both prescribed locations. Only ntvdm/WOW32 change;
+the46 guest/config files remain identical. Earlier r1--r4 failures and the
+second-role review remain in the window graph audit. This delivers E, not
+full S2/T447 closure or a claim that WRITE editing is complete.
+
 Current implementation disposition: the continuation recorded at the end of
 this plan supersedes the older blanket-freeze chronology below. Dependency-
 complete repairs may proceed after their source review. The InitTask group

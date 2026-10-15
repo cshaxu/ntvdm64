@@ -2620,6 +2620,43 @@ implementation is not justified. Their full consumer still requires the
 original dialog ownership and failure edges, so no unused helper import is
 made at this stage.
 
+Additional whole-control dependency review (research only, no new S admission
+or imported source): editec.c EditWndProcWorker allocates and reads PED through
+INITCONTROLLOOKASIDE before ANSI/Wide dispatch selection. usercli.h's macro
+stores the pointer at window extra offset0, retains pwnd, and marks FNID cleaned
+before destroying the window on allocation failure. edecrare.c ECNcCreate also
+frees the PED and marks cleaned when original LOCALALLOC fails. Therefore a
+generic extra-byte passthrough is not sufficient to bind the original control:
+private storage publication, cleaned-state rejection and nested destruction
+must be designed together, without aliasing a modern EDIT's private storage.
+
+The allocator itself has usable original logic: client/rtlinit.c
+InitLookaside/AllocLookasideEntry/FreeLookasideEntry implement the small zone,
+zeroed allocation, fallback UserLocalAlloc and matching free under
+gcsLookaside. Its direct whole unit includes unrelated initialization; audit
+the bounded original subset and same-shaped allocation/critical-section seam
+before proposing any project-created PED pool. These are host control objects,
+distinct from the guest text heap retained through W32Local*.
+
+ECNcDestroyHandler's final branch rebases the parent and directly invokes
+ComboBoxWndProcWorker for FNID_COMBOBOX, passing WM_PARENTNOTIFY/WM_DESTROY and
+the child ID. The only such direct composite-control call in the seven ed*
+units is at edecrare.c:396 (edslrare.c also recognizes ES_COMBOBOX). A native
+modern ComboBox has no original private CBOX storage for that direct call.
+The group must explicitly compose the original composite-control dependency
+or justify its same-shaped native notification boundary; blindly casting the
+modern parent's storage, or simply dropping the notification, is not valid.
+Likewise CsSendMessage's A/W conversion cannot be replaced by recursively
+calling the same public window procedure. No per-EM message workaround is
+selected. These concrete dependencies extend the earlier seven-unit audit;
+they do not establish WRITE's failure cause or claim EDIT is integrated.
+
+Read-only canonical OpenNT source SHA256 identities for this review:
+
+- client/editec.c: 13e3aa26649c7b21a49a3f3114a73bc06fdfc6472b782663bb10879cabc0ddb6
+- client/edecrare.c: b50e0f8f305f6456b3a952ddd63c815357136f222328c6d83dd0e76e697b5634
+- client/rtlinit.c: d8841bd2f13e5825a84f670ec7cc60923977bf80618d737cbac2208f94c6523c
+
 ### Shared native/application CLS projection: verified prerequisite
 
 Background run native-class-projection used

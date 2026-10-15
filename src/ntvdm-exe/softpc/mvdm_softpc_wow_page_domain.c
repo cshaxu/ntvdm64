@@ -149,6 +149,7 @@ typedef struct mvdm_softpc_wow_page_domain {
     ULONG guest_windows[MVDM_SOFTPC_HANDLE_ENTRY_COUNT];
     ULONG guest_menus[MVDM_SOFTPC_HANDLE_ENTRY_COUNT];
     ULONG guest_menu_items[MVDM_SOFTPC_HANDLE_ENTRY_COUNT];
+    BYTE local_menu_state[MVDM_SOFTPC_HANDLE_ENTRY_COUNT];
     ULONG wow_gdt;
     ULONG dosx_gdt;
     USHORT dosx_gdt_limit;
@@ -165,13 +166,42 @@ typedef struct mvdm_softpc_wow_class_allocation {
 static mvdm_softpc_wow_page_domain domain;
 static mvdm_softpc_wow_class_allocation *class_allocations;
 
-/* Outstanding synchronous borrows and deferred retired allocations share
- * these records. Live publication remains indexed by guest_windows; these
- * records own no native HWND/task. Zero readers on a retired record means
- * physical reclamation is pending, not an invented caller reference. */
+/* Failed physical frees after an atomic menu commit are lifetime obligations,
+ * not published menu identities or an alternate observation cache. */
+typedef struct page_domain_retired_storage {
+    struct page_domain_retired_storage *next;
+    ULONG address;
+} page_domain_retired_storage;
+static page_domain_retired_storage *retired_menu_storage;
+
+static void page_domain_collect_menu_storage(void)
+{
+    page_domain_retired_storage **link = &retired_menu_storage, *record;
+    while ((record = *link) != NULL) {
+        if (record->address && VdmFreeVirtualMemory(record->address) < 0) {
+            link = &record->next;
+            continue;
+        }
+        *link = record->next;
+        HeapFree(GetProcessHeap(), 0, record);
+    }
+}
+
+static void page_domain_defer_menu_storage(page_domain_retired_storage *record)
+{
+    if (!record) return;
+    record->next = retired_menu_storage;
+    retired_menu_storage = record;
+}
+
+/* Live observation metadata, synchronous borrows and deferred retired
+ * allocations share these backing-lifetime records. Publication remains
+ * indexed by guest_windows; these records own no native HWND/task. A live
+ * zero-reader record retains PID/TID, not an invented caller reference. */
 typedef struct mvdm_softpc_wow_window_borrow {
     struct mvdm_softpc_wow_window_borrow *next;
     ULONG backing, references;
+    DWORD process_id, thread_id;
     int retired, retained_owner;
 } mvdm_softpc_wow_window_borrow;
 static mvdm_softpc_wow_window_borrow *window_borrows;
@@ -215,9 +245,15 @@ static void page_domain_dispose(void *context)
     mvdm_softpc_wow_page_domain *value = context;
     mvdm_softpc_wow_class_allocation *class_allocation;
     mvdm_softpc_wow_window_borrow *borrow;
+    page_domain_retired_storage *storage;
     unsigned index;
 
     mvdm_softpc_wow_page_domain_leave_protected();
+    page_domain_collect_menu_storage();
+    while ((storage = retired_menu_storage) != NULL) {
+        retired_menu_storage = storage->next;
+        HeapFree(GetProcessHeap(), 0, storage); /* VDM allocation domain tears down next. */
+    }
     if (value->clock_stop != NULL) SetEvent(value->clock_stop);
     if (value->clock_thread != NULL) {
         WaitForSingleObject(value->clock_thread, INFINITE);
@@ -870,7 +906,8 @@ static mvdm_softpc_wow_class_allocation *page_domain_class_allocation(ULONG serv
  * abort. This permits a replacement generation without overwriting readers
  * of the previous generation, and uses no second storage registry. */
 static ULONG page_domain_prepare_window(ULONG full, HWND window,
-    ULONG class_server, const ULONG words[3], const WINDOWINFO *info)
+    ULONG class_server, const ULONG words[3], const WINDOWINFO *info,
+    const LONG *captured_id)
 {
     mvdm_softpc_wow_window_borrow *pending;
     ULONG backing = 0, server;
@@ -884,6 +921,8 @@ static ULONG page_domain_prepare_window(ULONG full, HWND window,
     c_sas_fills(backing, 0u, MVDM_SOFTPC_WND_BYTES);
     pending->backing = backing;
     pending->references = 1;
+    if (!captured_id)
+        pending->thread_id = GetWindowThreadProcessId(window, &pending->process_id);
     pending->next = window_borrows;
     window_borrows = pending;
     if (backing > 0xffffffffu - domain.client_delta - MVDM_SOFTPC_WND_BYTES)
@@ -892,7 +931,8 @@ static ULONG page_domain_prepare_window(ULONG full, HWND window,
     c_sas_storedw(backing + MVDM_SOFTPC_WND_HEAD_HANDLE, full);
     c_sas_storedw(backing + MVDM_SOFTPC_WND_HEAD_SELF, server);
     c_sas_storedw(backing + MVDM_SOFTPC_WND_CLASS, class_server);
-    if (!page_domain_window_info(backing, info, window)) goto fail;
+    if (captured_id) page_domain_window_fields(backing, info, *captured_id);
+    else if (!page_domain_window_info(backing, info, window)) goto fail;
     if (words)
         for (i = 0; i < 3u; ++i)
             c_sas_storedw(backing + MVDM_SOFTPC_WND_WOW_WORDS + i * 4u, words[i]);
@@ -950,7 +990,7 @@ int mvdm_softpc_wow_page_domain_publish_handle(unsigned short index,
                 !previous_class || !previous_class->observed ||
                 IsWindow((HWND)(ULONG_PTR)c_sas_dw_at(guest_window))) return 0;
         replacement = page_domain_prepare_window(window, (HWND)(ULONG_PTR)window,
-            class_server, words, &info);
+            class_server, words, &info, NULL);
         if (!replacement) return 0;
         if (!mvdm_softpc_wow_page_domain_retire_handle(index, &retained)) {
             (*window_borrow_link(replacement))->retired = 1;
@@ -989,7 +1029,7 @@ int mvdm_softpc_wow_page_domain_publish_handle(unsigned short index,
         return 1;
     }
     guest_window = page_domain_prepare_window(((ULONG)uniqueness << 16) | index,
-        (HWND)(ULONG_PTR)window, class_server, words, &info);
+        (HWND)(ULONG_PTR)window, class_server, words, &info, NULL);
     if (!guest_window) return 0;
     page_domain_commit_window(index, guest_window, type, flags);
     (void)mvdm_softpc_wow_page_domain_release_window(guest_window);
@@ -1017,109 +1057,198 @@ static ULONG page_domain_menu_lookup(ULONG menu)
     return client && c_sas_dw_at(client) == menu ? client : 0u;
 }
 
-unsigned long mvdm_softpc_wow_page_domain_publish_menu(unsigned long menu,
-    unsigned long task, unsigned long count,
-    const mvdm_softpc_wow_menu_query_item *items)
+typedef struct page_domain_menu_prepared {
+    ULONG client, storage;
+    page_domain_retired_storage *fresh_client, *fresh_items, *old_items;
+    int changed;
+} page_domain_menu_prepared;
+
+static BOOL page_domain_prepare_menu_storage(ULONG bytes,
+    page_domain_retired_storage **output)
 {
-    WORD index = LOWORD(menu);
-    ULONG client, storage = 0u, old_storage, entry, i, bytes;
-    int created;
-    if (!page_domain_menu_context() || !index ||
-            index == LOWORD(domain.desktop_handle) || index == 0xffffu ||
-            (count && !items) || count > 0xffffffffu / MVDM_SOFTPC_MENU_ITEM_BYTES ||
-            domain.guest_windows[index]) return 0u;
-    client = domain.guest_menus[index];
-    if (client && (c_sas_dw_at(client) != menu ||
-            c_sas_dw_at(client + MVDM_SOFTPC_MENU_TASK) != task)) return 0u;
-    for (i = 0; i < count; ++i)
-        if (items[i].submenu && (items[i].submenu == menu ||
-                !page_domain_menu_lookup(items[i].submenu))) return 0u;
-    /* Native-call return publication also visits unchanged menus. Reuse the
-     * existing validated view rather than allocating/freeing ITEM storage on
-     * every message-pump pass. Compare the fields USER16 actually consumes;
-     * no additional cache, dirty flag or native lifetime inference is needed. */
-    old_storage = domain.guest_menu_items[index];
-    if (client && c_sas_dw_at(client + MVDM_SOFTPC_MENU_COUNT) == count &&
-            (!count || old_storage)) {
-        for (i = 0; i < count; ++i) {
-            ULONG item = old_storage + i * MVDM_SOFTPC_MENU_ITEM_BYTES;
-            ULONG submenu = items[i].submenu ?
-                page_domain_menu_lookup(items[i].submenu) + domain.client_delta : 0u;
-            if (c_sas_dw_at(item) != items[i].type ||
-                    c_sas_dw_at(item + 4u) != items[i].state ||
-                    c_sas_dw_at(item + 8u) != items[i].id ||
-                    c_sas_dw_at(item + 12u) != submenu) break;
-        }
-        if (i == count) return client + domain.client_delta;
+    page_domain_retired_storage *record = HeapAlloc(GetProcessHeap(),
+        HEAP_ZERO_MEMORY, sizeof(*record));
+    if (!record) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return FALSE; }
+    *output = record;
+    if (VdmAllocateVirtualMemory(&record->address, bytes, TRUE) < 0) {
+        SetLastError(ERROR_NOT_ENOUGH_MEMORY); return FALSE;
     }
-    created = client == 0u;
-    if (created) {
-        if (VdmAllocateVirtualMemory(&client, MVDM_SOFTPC_MENU_BYTES, TRUE) < 0)
-            return 0u;
-        if (client > 0xffffffffu - domain.client_delta - MVDM_SOFTPC_MENU_BYTES)
-            goto fail;
+    if (bytes > 0xffffffffu - domain.client_delta ||
+            record->address > 0xffffffffu - domain.client_delta - bytes) {
+        SetLastError(ERROR_ARITHMETIC_OVERFLOW); return FALSE;
     }
-    bytes = count * MVDM_SOFTPC_MENU_ITEM_BYTES;
-    if (bytes) {
-        if (VdmAllocateVirtualMemory(&storage, bytes, TRUE) < 0) goto fail;
-        if (bytes > 0xffffffffu - domain.client_delta ||
-                storage > 0xffffffffu - domain.client_delta - bytes) goto fail;
-        c_sas_fills(storage, 0u, bytes);
-        for (i = 0; i < count; ++i) {
-            ULONG item = storage + i * MVDM_SOFTPC_MENU_ITEM_BYTES;
-            ULONG submenu = items[i].submenu ?
-                page_domain_menu_lookup(items[i].submenu) + domain.client_delta : 0u;
-            c_sas_storedw(item, items[i].type);
-            c_sas_storedw(item + 4u, items[i].state);
-            c_sas_storedw(item + 8u, items[i].id);
-            c_sas_storedw(item + 12u, submenu);
-        }
-    }
-    if (created) {
-        c_sas_fills(client, 0u, MVDM_SOFTPC_MENU_BYTES);
-        c_sas_storedw(client, menu);
-        c_sas_storedw(client + 12u, client + domain.client_delta);
-        c_sas_storedw(client + MVDM_SOFTPC_MENU_TASK, task);
-    }
-    old_storage = domain.guest_menu_items[index];
-    if (old_storage && VdmFreeVirtualMemory(old_storage) < 0)
-        goto fail;
-    if (storage) page_domain_include_object(storage + domain.client_delta, bytes);
-    page_domain_include_object(client + domain.client_delta, MVDM_SOFTPC_MENU_BYTES);
-    c_sas_storedw(client + MVDM_SOFTPC_MENU_ITEMS,
-        storage ? storage + domain.client_delta : 0u);
-    c_sas_storedw(client + MVDM_SOFTPC_MENU_CAPACITY, count);
-    c_sas_storedw(client + MVDM_SOFTPC_MENU_COUNT, count);
-    entry = domain.guest_handle_table + (ULONG)index * MVDM_SOFTPC_HANDLE_ENTRY_BYTES;
-    c_sas_storedw(entry, client + domain.client_delta);
-    c_sas_storedw(entry + 4u, 0u);
-    c_sas_storedw(entry + 8u, (menu & 0xffff0000u) | 2u); /* original TYPE_MENU */
-    domain.guest_menus[index] = client;
-    domain.guest_menu_items[index] = storage;
-    return client + domain.client_delta;
-fail:
-    if (storage) (void)VdmFreeVirtualMemory(storage);
-    if (created) (void)VdmFreeVirtualMemory(client);
-    return 0u;
+    c_sas_fills(record->address, 0u, bytes);
+    return TRUE;
 }
 
-static int page_domain_menu_referenced(ULONG server)
+int mvdm_softpc_wow_page_domain_publish_menus(ULONG count,
+    const mvdm_softpc_wow_menu_observation *menus, ULONG item_count,
+    const mvdm_softpc_wow_menu_query_item *items)
+{
+    page_domain_menu_prepared *prepared = NULL;
+    ULONG *index = NULL, i, j;
+    DWORD error, saved = GetLastError();
+    int result = 0;
+    if (!page_domain_menu_context()) { SetLastError(ERROR_INVALID_STATE); return 0; }
+    if (!count || count >= 0x10000u || !menus || (item_count && !items) ||
+            item_count > 0xffffffffu / MVDM_SOFTPC_MENU_ITEM_BYTES) {
+        SetLastError(ERROR_INVALID_PARAMETER); return 0;
+    }
+    prepared = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, count * sizeof(*prepared));
+    index = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, 0x10000u * sizeof(*index));
+    if (!prepared || !index) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); goto done; }
+    for (i = 0; i < count; ++i) {
+        const mvdm_softpc_wow_menu_observation *row = &menus[i];
+        page_domain_menu_prepared *value = &prepared[i];
+        WORD slot = LOWORD(row->menu);
+        if (!slot || slot == LOWORD(domain.desktop_handle) || slot == 0xffffu ||
+                index[slot] || domain.guest_windows[slot] ||
+                row->local_state > 1u ||
+                row->first_item > item_count || row->item_count > item_count - row->first_item) {
+            SetLastError(ERROR_INVALID_PARAMETER); goto done;
+        }
+        index[slot] = i + 1u;
+        value->client = domain.guest_menus[slot];
+        value->storage = domain.guest_menu_items[slot];
+        if (value->client && (c_sas_dw_at(value->client) != row->menu ||
+                c_sas_dw_at(value->client + MVDM_SOFTPC_MENU_TASK) != row->task)) {
+            SetLastError(ERROR_INVALID_MENU_HANDLE); goto done;
+        }
+        if (!value->client) {
+            if (!page_domain_prepare_menu_storage(MVDM_SOFTPC_MENU_BYTES,
+                    &value->fresh_client)) goto done;
+            value->client = value->fresh_client->address;
+        }
+    }
+    for (i = 0; i < count; ++i) {
+        const mvdm_softpc_wow_menu_observation *row = &menus[i];
+        page_domain_menu_prepared *value = &prepared[i];
+        value->changed = value->fresh_client ||
+            c_sas_dw_at(value->client + MVDM_SOFTPC_MENU_COUNT) != row->item_count;
+        /* First resolve the entire row, even if its contents are unchanged. */
+        for (j = 0; j < row->item_count; ++j) {
+            const mvdm_softpc_wow_menu_query_item *item = &items[row->first_item + j];
+            ULONG submenu = 0, child = index[LOWORD(item->submenu)];
+            if (item->submenu) {
+                if (child) {
+                    if (child > i || menus[child - 1u].menu != item->submenu) {
+                        SetLastError(ERROR_INVALID_DATA); goto done;
+                    }
+                    submenu = prepared[child - 1u].client;
+                } else submenu = page_domain_menu_lookup(item->submenu);
+                if (!submenu) { SetLastError(ERROR_INVALID_MENU_HANDLE); goto done; }
+                submenu += domain.client_delta;
+            }
+            if (!value->changed) {
+                ULONG old = value->storage + j * MVDM_SOFTPC_MENU_ITEM_BYTES;
+                if (!value->storage || c_sas_dw_at(old) != item->type ||
+                        c_sas_dw_at(old + 4u) != item->state ||
+                        c_sas_dw_at(old + 8u) != item->id ||
+                        c_sas_dw_at(old + 12u) != submenu) value->changed = 1;
+            }
+        }
+        if (!value->changed) continue;
+        if (value->storage) {
+            value->old_items = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
+                sizeof(*value->old_items));
+            if (!value->old_items) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); goto done; }
+            value->old_items->address = value->storage;
+        }
+        value->storage = 0;
+        if (row->item_count) {
+            if (!page_domain_prepare_menu_storage(row->item_count * MVDM_SOFTPC_MENU_ITEM_BYTES,
+                    &value->fresh_items)) goto done;
+            value->storage = value->fresh_items->address;
+        }
+        for (j = 0; j < row->item_count; ++j) {
+            const mvdm_softpc_wow_menu_query_item *item = &items[row->first_item + j];
+            ULONG at = value->storage + j * MVDM_SOFTPC_MENU_ITEM_BYTES;
+            ULONG child = index[LOWORD(item->submenu)];
+            ULONG submenu = item->submenu ? (child ? prepared[child - 1u].client :
+                page_domain_menu_lookup(item->submenu)) + domain.client_delta : 0;
+            c_sas_storedw(at, item->type); c_sas_storedw(at + 4u, item->state);
+            c_sas_storedw(at + 8u, item->id); c_sas_storedw(at + 12u, submenu);
+        }
+    }
+    /* No allocation, USER call, guest entry or fallible release below here. */
+    for (i = 0; i < count; ++i) {
+        const mvdm_softpc_wow_menu_observation *row = &menus[i];
+        page_domain_menu_prepared *value = &prepared[i];
+        ULONG entry, slot = LOWORD(row->menu);
+        if (row->local_state) domain.local_menu_state[slot] = 1;
+        if (!value->changed) continue;
+        if (value->fresh_client) {
+            c_sas_storedw(value->client, row->menu);
+            c_sas_storedw(value->client + 12u, value->client + domain.client_delta);
+            c_sas_storedw(value->client + MVDM_SOFTPC_MENU_TASK, row->task);
+        }
+        if (value->storage) page_domain_include_object(value->storage + domain.client_delta,
+            row->item_count * MVDM_SOFTPC_MENU_ITEM_BYTES);
+        page_domain_include_object(value->client + domain.client_delta, MVDM_SOFTPC_MENU_BYTES);
+        c_sas_storedw(value->client + MVDM_SOFTPC_MENU_ITEMS,
+            value->storage ? value->storage + domain.client_delta : 0u);
+        c_sas_storedw(value->client + MVDM_SOFTPC_MENU_CAPACITY, row->item_count);
+        c_sas_storedw(value->client + MVDM_SOFTPC_MENU_COUNT, row->item_count);
+        entry = domain.guest_handle_table + slot * MVDM_SOFTPC_HANDLE_ENTRY_BYTES;
+        c_sas_storedw(entry, value->client + domain.client_delta);
+        c_sas_storedw(entry + 4u, 0u);
+        c_sas_storedw(entry + 8u, (row->menu & 0xffff0000u) | 2u);
+        domain.guest_menus[slot] = value->client;
+        domain.guest_menu_items[slot] = value->storage;
+    }
+    result = 1;
+done:
+    error = result ? saved : GetLastError();
+    if (prepared) for (i = 0; i < count; ++i) {
+        page_domain_menu_prepared *value = &prepared[i];
+        if (result) {
+            page_domain_defer_menu_storage(value->old_items);
+            if (value->fresh_client) HeapFree(GetProcessHeap(), 0, value->fresh_client);
+            if (value->fresh_items) HeapFree(GetProcessHeap(), 0, value->fresh_items);
+        } else {
+            page_domain_defer_menu_storage(value->fresh_client);
+            page_domain_defer_menu_storage(value->fresh_items);
+            if (value->old_items) HeapFree(GetProcessHeap(), 0, value->old_items);
+        }
+    }
+    page_domain_collect_menu_storage();
+    if (index) HeapFree(GetProcessHeap(), 0, index);
+    if (prepared) HeapFree(GetProcessHeap(), 0, prepared);
+    SetLastError(error);
+    return result;
+}
+
+unsigned long mvdm_softpc_wow_page_domain_publish_menu(ULONG menu, ULONG task,
+    ULONG count, const mvdm_softpc_wow_menu_query_item *items)
+{
+    mvdm_softpc_wow_menu_observation row = {menu, task, 0, count, 1};
+    return mvdm_softpc_wow_page_domain_publish_menus(1, &row, count, items) ?
+        page_domain_menu_lookup(menu) + domain.client_delta : 0;
+}
+
+static int page_domain_menu_referenced(ULONG server, int clear_external)
 {
     ULONG i, j;
-    /* Inspect the existing copied graph, not a second reference registry.
-     * Native USER owns unlinking; freeing this backing cannot repair a
-     * producer that has not yet published its completed unlink. */
+    /* Inspect the existing copied graph. Required local unlinking must have
+     * committed first. External observations may lag: withdraw their copied
+     * references in the retirement commit, never change native ownership. */
     for (i = 1u; i < MVDM_SOFTPC_HANDLE_ENTRY_COUNT; ++i) {
         ULONG window = domain.guest_windows[i];
         ULONG menu = domain.guest_menus[i];
         ULONG items = domain.guest_menu_items[i];
         if (window && !(c_sas_dw_at(window + MVDM_SOFTPC_WND_STYLE) & WS_CHILD) &&
-                c_sas_dw_at(window + MVDM_SOFTPC_WND_MENU_OR_ID) == server)
-            return 1;
+                c_sas_dw_at(window + MVDM_SOFTPC_WND_MENU_OR_ID) == server) {
+            mvdm_softpc_wow_window_borrow *record = *window_borrow_link(window);
+            if (!record || !record->process_id || record->process_id == GetCurrentProcessId())
+                return 1;
+            if (clear_external) c_sas_storedw(window + MVDM_SOFTPC_WND_MENU_OR_ID, 0);
+        }
         if (!menu || !items) continue;
         for (j = 0u; j < c_sas_dw_at(menu + MVDM_SOFTPC_MENU_COUNT); ++j)
-            if (c_sas_dw_at(items + j * MVDM_SOFTPC_MENU_ITEM_BYTES + 12u) == server)
-                return 1;
+            if (c_sas_dw_at(items + j * MVDM_SOFTPC_MENU_ITEM_BYTES + 12u) == server) {
+                if (domain.local_menu_state[i]) return 1;
+                if (clear_external) c_sas_storedw(items + j * MVDM_SOFTPC_MENU_ITEM_BYTES + 12u, 0);
+            }
     }
     return 0;
 }
@@ -1127,26 +1256,40 @@ static int page_domain_menu_referenced(ULONG server)
 int mvdm_softpc_wow_page_domain_retire_menu(unsigned long menu)
 {
     ULONG client, storage, entry;
+    page_domain_retired_storage *old_client, *old_items = NULL;
+    DWORD saved = GetLastError();
     if (!page_domain_menu_context() || !(client = page_domain_menu_lookup(menu)))
         return 0;
-    if (page_domain_menu_referenced(client + domain.client_delta)) {
+    if (page_domain_menu_referenced(client + domain.client_delta, 0)) {
         SetLastError(ERROR_BUSY);
         return 0;
     }
     storage = domain.guest_menu_items[LOWORD(menu)];
-    if (storage) {
-        if (VdmFreeVirtualMemory(storage) < 0) return 0;
-        domain.guest_menu_items[LOWORD(menu)] = 0u;
-        c_sas_storedw(client + MVDM_SOFTPC_MENU_ITEMS, 0u);
-        c_sas_storedw(client + MVDM_SOFTPC_MENU_COUNT, 0u);
-        c_sas_storedw(client + MVDM_SOFTPC_MENU_CAPACITY, 0u);
+    old_client = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, sizeof(*old_client));
+    if (storage) old_items = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, sizeof(*old_items));
+    if (!old_client || (storage && !old_items)) {
+        if (old_client) HeapFree(GetProcessHeap(), 0, old_client);
+        if (old_items) HeapFree(GetProcessHeap(), 0, old_items);
+        SetLastError(ERROR_NOT_ENOUGH_MEMORY); return 0;
     }
-    if (VdmFreeVirtualMemory(client) < 0) return 0;
+    old_client->address = client;
+    if (storage) {
+        old_items->address = storage;
+    }
+    /* Withdraw identity atomically; failed physical release is retained,
+     * never a partially emptied published MENU or a false native result. */
+    (void)page_domain_menu_referenced(client + domain.client_delta, 1);
     entry = domain.guest_handle_table + (ULONG)LOWORD(menu) * MVDM_SOFTPC_HANDLE_ENTRY_BYTES;
     c_sas_storedw(entry, (ULONG)LOWORD(menu) + 1u);
     c_sas_storedw(entry + 4u, 0u);
     c_sas_storedw(entry + 8u, 0x00010000u);
     domain.guest_menus[LOWORD(menu)] = 0u;
+    domain.guest_menu_items[LOWORD(menu)] = 0u;
+    domain.local_menu_state[LOWORD(menu)] = 0;
+    page_domain_defer_menu_storage(old_items);
+    page_domain_defer_menu_storage(old_client);
+    page_domain_collect_menu_storage();
+    SetLastError(saved);
     return 1;
 }
 
@@ -1233,6 +1376,7 @@ static int release_window_backing(ULONG backing, int retained_owner)
      * in this existing list, not behind a caller that has already vanished. */
     if (retained_owner) borrow->retained_owner = 0;
     else --borrow->references;
+    if (!borrow->retired) return 1; /* Identity metadata lives until withdrawal. */
     if (!borrow->references && !borrow->retained_owner) {
         if (borrow->retired && (page_domain_window_referenced(backing + domain.client_delta) ||
                 VdmFreeVirtualMemory(backing) < 0)) return 1;
@@ -1308,6 +1452,7 @@ typedef struct page_domain_window_update {
     ULONG class_style, window_extra;
     WINDOWINFO info;
     LONG control_id;
+    DWORD process_id, thread_id;
     int fresh;
 } page_domain_window_update;
 
@@ -1339,10 +1484,16 @@ static int page_domain_replace_window_links(ULONG count,
     BYTE *withdrawn = NULL;
     mvdm_softpc_wow_window_borrow *prepared = NULL, *borrow;
     int result = 0;
-    if (!page_domain_menu_context() || !count || !links ||
+    DWORD error, saved = GetLastError();
+    if (!count || !links ||
             count >= MVDM_SOFTPC_HANDLE_ENTRY_COUNT ||
             retired_count >= MVDM_SOFTPC_HANDLE_ENTRY_COUNT ||
-            (retired_count && !retired)) return 0;
+            (retired_count && !retired)) {
+        SetLastError(ERROR_INVALID_PARAMETER); return 0;
+    }
+    if (!page_domain_menu_context()) {
+        SetLastError(ERROR_INVALID_STATE); return 0;
+    }
     /* Snapshot addresses in call-local storage. No guest callback/native
      * call can run between validation and publication. Failed allocation or
      * stale/unpublished identity leaves every previous edge unchanged. */
@@ -1351,33 +1502,45 @@ static int page_domain_replace_window_links(ULONG count,
         MVDM_SOFTPC_HANDLE_ENTRY_COUNT * sizeof(*updated));
     withdrawn = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
         MVDM_SOFTPC_HANDLE_ENTRY_COUNT);
-    if (!resolved || !updated || !withdrawn) goto done;
+    if (!resolved || !updated || !withdrawn) {
+        SetLastError(ERROR_NOT_ENOUGH_MEMORY); goto done;
+    }
     for (i = 0; i < retired_count; ++i) {
         ULONG backing = page_domain_window_lookup(retired[i]);
         WORD index = LOWORD(retired[i]);
         mvdm_softpc_wow_class_allocation *cls;
-        if (!backing || retired[i] == domain.desktop_handle || withdrawn[index]) goto done;
+        if (!backing) { SetLastError(ERROR_INVALID_STATE); goto done; }
+        if (retired[i] == domain.desktop_handle || withdrawn[index]) {
+            SetLastError(ERROR_INVALID_PARAMETER); goto done;
+        }
         cls = page_domain_class_allocation(
             c_sas_dw_at(backing + MVDM_SOFTPC_WND_CLASS));
-        if (!cls || !cls->observed || IsWindow((HWND)(ULONG_PTR)retired[i])) goto done;
+        if (!cls || !cls->observed ||
+                (!updates && IsWindow((HWND)(ULONG_PTR)retired[i]))) {
+            SetLastError(ERROR_INVALID_STATE); goto done;
+        }
         withdrawn[index] = 1;
         /* Reserve retention before commit so retirement cannot allocate or
          * decommit between edge replacement and handle withdrawal. */
         if (!*window_borrow_link(backing)) {
             borrow = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, sizeof(*borrow));
-            if (!borrow) goto done;
+            if (!borrow) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); goto done; }
             borrow->backing = backing;
             borrow->next = prepared;
             prepared = borrow;
         }
     }
     for (i = 0; i < count; ++i) {
-        if (updated[LOWORD(links[i].window)]) goto done;
+        if (updated[LOWORD(links[i].window)]) {
+            SetLastError(ERROR_INVALID_PARAMETER); goto done;
+        }
         updated[LOWORD(links[i].window)] = i + 1u;
     }
     if (updates) for (i = 0; i < retired_count; ++i) {
         ULONG row = updated[LOWORD(retired[i])];
-        if (row && links[row - 1u].window == retired[i]) goto done;
+        if (row && links[row - 1u].window == retired[i]) {
+            SetLastError(ERROR_INVALID_PARAMETER); goto done;
+        }
     }
     for (i = 0; i < count; ++i) {
         ULONG identities[5];
@@ -1394,7 +1557,9 @@ static int page_domain_replace_window_links(ULONG count,
             if (replacement) client = updates[row - 1u].backing;
             if (((!j || identities[j]) && !client) ||
                     (identities[j] && withdrawn[LOWORD(identities[j])] &&
-                     !replacement)) goto done;
+                     !replacement)) {
+                SetLastError(ERROR_INVALID_STATE); goto done;
+            }
             resolved[i * 5u + j] = client ? client + domain.client_delta : 0u;
         }
     }
@@ -1408,8 +1573,9 @@ static int page_domain_replace_window_links(ULONG count,
             ULONG server = c_sas_dw_at(client + MVDM_SOFTPC_WND_NEXT + j * 4u);
             ULONG k;
             for (k = 0; server && k < retired_count; ++k)
-                if (server == page_domain_window_lookup(retired[k]) + domain.client_delta)
-                    goto done;
+                if (server == page_domain_window_lookup(retired[k]) + domain.client_delta) {
+                    SetLastError(ERROR_INVALID_STATE); goto done;
+                }
         }
     }
     /* Commit: no native queries, allocation, free or guest callback below. */
@@ -1449,9 +1615,13 @@ static int page_domain_replace_window_links(ULONG count,
         c_sas_storedw(update->class_server - domain.client_delta +
             MVDM_SOFTPC_CLS_WINDOW_EXTRA, update->window_extra);
         page_domain_window_fields(update->backing, &update->info, update->control_id);
+        borrow = *window_borrow_link(update->backing);
+        borrow->process_id = update->process_id;
+        borrow->thread_id = update->thread_id;
     }
     result = 1;
 done:
+    error = result ? saved : GetLastError();
     while ((borrow = prepared) != NULL) {
         prepared = borrow->next;
         HeapFree(GetProcessHeap(), 0, borrow);
@@ -1459,6 +1629,7 @@ done:
     if (withdrawn) HeapFree(GetProcessHeap(), 0, withdrawn);
     if (updated) HeapFree(GetProcessHeap(), 0, updated);
     if (resolved) HeapFree(GetProcessHeap(), 0, resolved);
+    SetLastError(error);
     return result;
 }
 
@@ -1539,6 +1710,11 @@ int mvdm_softpc_wow_page_domain_retire_handle(unsigned short index,
     if (!retained_backing && !borrow && VdmFreeVirtualMemory(guest_window) < 0) return 0;
     page_domain_withdraw_window(index, guest_window, borrow, retained_backing != NULL);
     if (retained_backing) *retained_backing = guest_window;
+    else if (borrow && !borrow->references) {
+        DWORD saved = GetLastError();
+        (void)mvdm_softpc_wow_page_domain_collect_retired_windows();
+        SetLastError(saved);
+    }
     return 1;
 }
 
@@ -1705,50 +1881,208 @@ int mvdm_softpc_wow_page_domain_observe_window(unsigned long window,
     return 1;
 }
 
-/* Native USER remains the relationship owner. All queries and allocations
- * precede copied publication, including stale-generation withdrawal. */
+int mvdm_softpc_wow_page_domain_copy_window_view(ULONG capacity,
+    mvdm_softpc_wow_window_observation *rows, ULONG *count)
+{
+    ULONG i, needed = 0, copied = 0;
+    DWORD saved = GetLastError();
+    if (!count || (capacity && !rows)) {
+        SetLastError(ERROR_INVALID_PARAMETER); return 0;
+    }
+    if (!page_domain_menu_context()) {
+        SetLastError(ERROR_INVALID_STATE); return 0;
+    }
+    for (i = 1; i < MVDM_SOFTPC_HANDLE_ENTRY_COUNT - 1u; ++i)
+        if (i == LOWORD(domain.desktop_handle) || domain.guest_windows[i]) ++needed;
+    *count = needed;
+    if (!rows && !capacity) { SetLastError(saved); return 1; }
+    if (capacity < needed) { SetLastError(ERROR_INSUFFICIENT_BUFFER); return 0; }
+    for (i = 1; i < MVDM_SOFTPC_HANDLE_ENTRY_COUNT - 1u; ++i) {
+        ULONG backing = i == LOWORD(domain.desktop_handle) ?
+            domain.guest_desktop_window : domain.guest_windows[i];
+        ULONG cls, targets[4], j, name;
+        mvdm_softpc_wow_window_observation *row;
+        if (!backing) continue;
+        row = &rows[copied++];
+        ZeroMemory(row, sizeof(*row));
+        {
+            mvdm_softpc_wow_window_borrow *borrow = *window_borrow_link(backing);
+            if (borrow) {
+                row->process_id = borrow->process_id;
+                row->thread_id = borrow->thread_id;
+            }
+        }
+        row->links.window = c_sas_dw_at(backing + MVDM_SOFTPC_WND_HEAD_HANDLE);
+        for (j = 0; j < 4u; ++j) {
+            ULONG server = c_sas_dw_at(backing + MVDM_SOFTPC_WND_NEXT + j * 4u);
+            /* Incoming links can retain terminal backing. Report its full
+             * historical identity; the merge owner must resolve withdrawal,
+             * never silently bind this address to a newly reused slot. */
+            targets[j] = server ? c_sas_dw_at(server - domain.client_delta) : 0u;
+            row->window_rect[j] = (LONG)c_sas_dw_at(backing + MVDM_SOFTPC_WND_RECT + j * 4u);
+            row->client_rect[j] = (LONG)c_sas_dw_at(backing + MVDM_SOFTPC_WND_CLIENT_RECT + j * 4u);
+        }
+        row->links.next = targets[0]; row->links.parent = targets[1];
+        row->links.child = targets[2]; row->links.owner = targets[3];
+        row->style = c_sas_dw_at(backing + MVDM_SOFTPC_WND_STYLE);
+        row->exstyle = c_sas_dw_at(backing + MVDM_SOFTPC_WND_EXSTYLE);
+        if (row->style & WS_CHILD)
+            row->control_id = c_sas_dw_at(backing + MVDM_SOFTPC_WND_MENU_OR_ID);
+        cls = c_sas_dw_at(backing + MVDM_SOFTPC_WND_CLASS);
+        if (!cls) continue; /* Cold desktop; descriptor observation is still required. */
+        cls -= domain.client_delta;
+        row->descriptor.atom = (WORD)c_sas_dw_at(cls + MVDM_SOFTPC_CLS_ATOM);
+        row->descriptor.class_style = c_sas_dw_at(cls + MVDM_SOFTPC_CLS_STYLE);
+        row->descriptor.window_extra = c_sas_dw_at(cls + MVDM_SOFTPC_CLS_WINDOW_EXTRA);
+        name = c_sas_dw_at(cls + MVDM_SOFTPC_CLS_ANSI_NAME);
+        if (!name) { SetLastError(ERROR_INVALID_DATA); return 0; }
+        name -= domain.client_delta;
+        for (j = 0; j < sizeof(row->descriptor.name); ++j) {
+            c_sas_loads(name + j, (BYTE *)&row->descriptor.name[j], 1u);
+            if (!row->descriptor.name[j]) break;
+        }
+        if (j == sizeof(row->descriptor.name)) {
+            SetLastError(ERROR_INSUFFICIENT_BUFFER); return 0;
+        }
+        row->descriptor.name_bytes = j + 1u;
+    }
+    SetLastError(saved);
+    return 1;
+}
+
+/* Validate copied reader structure, not whether native USER stayed unchanged.
+ * Parent/child symmetry is deliberately not required: original creation and
+ * destruction expose unlinked WNDs. Scratch belongs only to this transaction. */
+static int page_domain_validate_window_graph(ULONG count,
+    const mvdm_softpc_wow_window_links *links)
+{
+    ULONG *index, i, edge, row, next;
+    BYTE *state;
+    DWORD error = ERROR_INVALID_DATA, saved = GetLastError();
+    int result = 0;
+    index = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
+        MVDM_SOFTPC_HANDLE_ENTRY_COUNT * sizeof(*index));
+    state = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, count);
+    if (!index || !state) { error = ERROR_NOT_ENOUGH_MEMORY; goto done; }
+    for (i = 0; i < count; ++i) {
+        WORD slot = LOWORD(links[i].window);
+        if (!slot || slot == 0xffffu || index[slot]) {
+            error = ERROR_INVALID_PARAMETER; goto done;
+        }
+        index[slot] = i + 1u;
+    }
+    for (i = 0; i < count; ++i) {
+        ULONG targets[4];
+        if (links[i].window == domain.desktop_handle &&
+                (links[i].next || links[i].parent || links[i].owner)) goto done;
+        targets[0] = links[i].next; targets[1] = links[i].parent;
+        targets[2] = links[i].child; targets[3] = links[i].owner;
+        for (edge = 0; edge < 4u; ++edge) if (targets[edge]) {
+            row = index[LOWORD(targets[edge])];
+            if (!row || links[row - 1u].window != targets[edge]) goto done;
+        }
+    }
+    /* Each relation is a functional graph. Mark a path grey, then black;
+     * encountering grey is a cycle. This is linear, with no recursive stack
+     * or per-node desktop traversal. Child-list traversal follows next. */
+    for (edge = 0; edge < 3u; ++edge) {
+        ZeroMemory(state, count);
+        for (i = 0; i < count; ++i) {
+            row = i + 1u;
+            while (row && !state[row - 1u]) {
+                const mvdm_softpc_wow_window_links *node = &links[row - 1u];
+                state[row - 1u] = 1;
+                next = edge == 0 ? node->next : edge == 1 ? node->parent : node->owner;
+                row = next ? index[LOWORD(next)] : 0;
+            }
+            if (row && state[row - 1u] == 1) goto done;
+            row = i + 1u;
+            while (row && state[row - 1u] == 1) {
+                const mvdm_softpc_wow_window_links *node = &links[row - 1u];
+                state[row - 1u] = 2;
+                next = edge == 0 ? node->next : edge == 1 ? node->parent : node->owner;
+                row = next ? index[LOWORD(next)] : 0;
+            }
+        }
+    }
+    result = 1;
+done:
+    if (state) HeapFree(GetProcessHeap(), 0, state);
+    if (index) HeapFree(GetProcessHeap(), 0, index);
+    SetLastError(result ? saved : error);
+    return result;
+}
+
+/* Commit a captured observation view. Native observation belongs to WOW32;
+ * a concurrent external mutation cannot invalidate this structural commit. */
 int mvdm_softpc_wow_page_domain_project_window_graph(ULONG count,
-    const mvdm_softpc_wow_window_links *links,
-    const mvdm_softpc_wow_window_descriptor *descriptors)
+    const mvdm_softpc_wow_window_observation *rows)
 {
     page_domain_window_update *updates = NULL;
-    ULONG *retired = NULL, retired_count = 0, i;
+    mvdm_softpc_wow_window_links *links = NULL;
+    ULONG *retired = NULL, *present = NULL, retired_count = 0, i;
     int result = 0;
     DWORD error, saved = GetLastError();
-    if (!page_domain_menu_context() || !count || !links || !descriptors ||
-            count >= MVDM_SOFTPC_HANDLE_ENTRY_COUNT) return 0;
+    if (!count || !rows ||
+            count >= MVDM_SOFTPC_HANDLE_ENTRY_COUNT) {
+        SetLastError(ERROR_INVALID_PARAMETER); return 0;
+    }
+    if (!page_domain_menu_context()) {
+        SetLastError(ERROR_INVALID_STATE); return 0;
+    }
+    links = HeapAlloc(GetProcessHeap(), 0, count * sizeof(*links));
+    present = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
+        MVDM_SOFTPC_HANDLE_ENTRY_COUNT * sizeof(*present));
     updates = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, count * sizeof(*updates));
     retired = HeapAlloc(GetProcessHeap(), 0, MVDM_SOFTPC_HANDLE_ENTRY_COUNT * sizeof(*retired));
-    if (!updates || !retired) goto done;
+    if (!links || !present || !updates || !retired) {
+        SetLastError(ERROR_NOT_ENOUGH_MEMORY); goto done;
+    }
     for (i = 0; i < count; ++i) {
-        const mvdm_softpc_wow_window_descriptor *descriptor = &descriptors[i];
+        links[i] = rows[i].links;
+        present[LOWORD(links[i].window)] = links[i].window;
+    }
+    if (!page_domain_validate_window_graph(count, links)) goto done;
+    for (i = 0; i < count; ++i) {
+        const mvdm_softpc_wow_window_descriptor *descriptor = &rows[i].descriptor;
         page_domain_window_update *update = &updates[i];
         ULONG window = links[i].window, existing;
         WORD index = LOWORD(window);
         mvdm_softpc_wow_class_allocation *cls;
         if (!index || index == 0xffffu || !descriptor->atom ||
                 !descriptor->name_bytes || descriptor->name_bytes > sizeof(descriptor->name) ||
-                descriptor->name[descriptor->name_bytes - 1u]) goto done;
+                descriptor->name[descriptor->name_bytes - 1u]) {
+            SetLastError(ERROR_INVALID_PARAMETER); goto done;
+        }
         update->info.cbSize = sizeof(update->info);
+        CopyMemory(&update->info.rcWindow, rows[i].window_rect, sizeof(RECT));
+        CopyMemory(&update->info.rcClient, rows[i].client_rect, sizeof(RECT));
+        update->info.dwStyle = rows[i].style;
+        update->info.dwExStyle = rows[i].exstyle;
+        update->info.atomWindowType = descriptor->atom;
+        update->control_id = (LONG)rows[i].control_id;
+        update->process_id = rows[i].process_id;
+        update->thread_id = rows[i].thread_id;
         update->class_style = descriptor->class_style;
         update->window_extra = descriptor->window_extra;
-        if (!GetWindowInfo((HWND)(ULONG_PTR)window, &update->info) ||
-                update->info.atomWindowType != descriptor->atom) goto done;
         existing = window == domain.desktop_handle ?
             domain.guest_desktop_window : domain.guest_windows[index];
         if (existing && c_sas_dw_at(existing + MVDM_SOFTPC_WND_HEAD_HANDLE) != window) {
             cls = page_domain_class_allocation(c_sas_dw_at(existing + MVDM_SOFTPC_WND_CLASS));
-            if (!cls || !cls->observed ||
-                    IsWindow((HWND)(ULONG_PTR)c_sas_dw_at(existing + MVDM_SOFTPC_WND_HEAD_HANDLE)))
-                goto done;
+            if (!cls || !cls->observed)
+            {
+                SetLastError(ERROR_INVALID_STATE); goto done;
+            }
             existing = 0; /* Old backing stays published until commit. */
         }
         if (existing) {
+            SetLastError(ERROR_INVALID_STATE);
             update->backing = mvdm_softpc_wow_page_domain_borrow_window(window);
             if (!update->backing) goto done;
             update->class_server = c_sas_dw_at(existing + MVDM_SOFTPC_WND_CLASS);
         }
         if (!update->class_server) {
+            SetLastError(ERROR_INVALID_STATE);
             update->class_server = mvdm_softpc_wow_page_domain_publish_named_class(
                 descriptor->atom, 0u, 0u, 0u, 0u, 0u, descriptor->class_style,
                 0u, descriptor->window_extra, 0u, descriptor->name, descriptor->name_bytes);
@@ -1758,51 +2092,28 @@ int mvdm_softpc_wow_page_domain_project_window_graph(ULONG count,
         }
         if (!existing) {
             update->fresh = 1;
+            SetLastError(ERROR_INVALID_STATE);
             update->backing = page_domain_prepare_window(window,
-                (HWND)(ULONG_PTR)window, update->class_server, NULL, &update->info);
+                (HWND)(ULONG_PTR)window, update->class_server, NULL, &update->info,
+                &update->control_id);
             if (!update->backing) goto done;
         }
     }
-    /* Snapshot dead observations without changing their publication. Managed
-     * windows can only be withdrawn by their terminal ownership boundary. */
+    /* An observation absent from the complete new view is withdrawn, whether
+     * native USER has already destroyed it or merely changed our visibility.
+     * This relinquishes copied storage only, never destroys a native window. */
     for (i = 1u; i < MVDM_SOFTPC_HANDLE_ENTRY_COUNT - 1u; ++i) {
         ULONG backing = domain.guest_windows[i], window;
         mvdm_softpc_wow_class_allocation *cls;
         if (!backing) continue;
         cls = page_domain_class_allocation(c_sas_dw_at(backing + MVDM_SOFTPC_WND_CLASS));
-        if (!cls || !cls->observed) continue;
         window = c_sas_dw_at(backing + MVDM_SOFTPC_WND_HEAD_HANDLE);
-        if (!IsWindow((HWND)(ULONG_PTR)window)) retired[retired_count++] = window;
+        if (present[i] == window) continue;
+        if (!cls || !cls->observed) { SetLastError(ERROR_INVALID_STATE); goto done; }
+        retired[retired_count++] = window;
     }
-    /* Revalidate after preparation. A public snapshot detects observed
-     * races; it never claims to hold native USER's desktop lock. */
-    for (i = 0; i < count; ++i) {
-        HWND window = (HWND)(ULONG_PTR)links[i].window;
-        page_domain_window_update *update = &updates[i];
-        DWORD value;
-        if (!GetWindowInfo(window, &update->info) ||
-                update->info.atomWindowType != descriptors[i].atom ||
-                (ULONG)(ULONG_PTR)GetWindow(window, GW_CHILD) != links[i].child)
-            goto done;
-        if (links[i].window == domain.desktop_handle) {
-            if (links[i].next || links[i].parent || links[i].owner) goto done;
-        } else if ((ULONG)(ULONG_PTR)GetWindow(window, GW_HWNDNEXT) != links[i].next ||
-                (ULONG)(ULONG_PTR)GetAncestor(window, GA_PARENT) != links[i].parent ||
-                (ULONG)(ULONG_PTR)GetWindow(window, GW_OWNER) != links[i].owner)
-            goto done;
-        SetLastError(ERROR_SUCCESS);
-        value = GetClassLongA(window, GCL_STYLE);
-        if (value != update->class_style ||
-                (!value && GetLastError() != ERROR_SUCCESS)) goto done;
-        SetLastError(ERROR_SUCCESS);
-        value = GetClassLongA(window, GCL_CBWNDEXTRA);
-        if (value != update->window_extra ||
-                (!value && GetLastError() != ERROR_SUCCESS)) goto done;
-        if (update->info.dwStyle & WS_CHILD) {
-            SetLastError(ERROR_SUCCESS);
-            update->control_id = GetWindowLongA(window, GWL_ID);
-            if (!update->control_id && GetLastError() != ERROR_SUCCESS) goto done;
-        }
+    if (present[LOWORD(domain.desktop_handle)] != domain.desktop_handle) {
+        SetLastError(ERROR_INVALID_DATA); goto done;
     }
     result = page_domain_replace_window_links(count, links, retired_count, retired, updates);
 done:
@@ -1819,6 +2130,8 @@ done:
      * P3's domain records retain that obligation for subsequent collection. */
     (void)mvdm_softpc_wow_page_domain_collect_observed_classes();
     if (retired) HeapFree(GetProcessHeap(), 0, retired);
+    if (present) HeapFree(GetProcessHeap(), 0, present);
+    if (links) HeapFree(GetProcessHeap(), 0, links);
     SetLastError(error);
     return result;
 }

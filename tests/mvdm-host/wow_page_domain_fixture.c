@@ -71,6 +71,8 @@ extern PWW WINAPI FindPWW(HANDLE, INT);
 extern INT WINAPI GetStdClassNumber(LPSTR);
 static unsigned borrow_errors;
 static ULONG callback_backing, callback_teb;
+static unsigned callback_zero_count;
+static const char *native_failure_signal;
 #define BORROW_CHECK(value) do { if (!(value)) { ++borrow_errors; \
     fprintf(stderr, "WINDOW_BORROW_FAIL line=%d error=%lu\n", __LINE__, GetLastError()); } } while (0)
 
@@ -78,6 +80,11 @@ static DWORD WINAPI destroy_in_callback(HWND window, UINT message, UINT wp,
     LONG lp, DWORD procedure, PVOID words)
 {
     BORROW_CHECK(procedure == 0x81234567u && words != NULL);
+    if (message == WM_APP + 70) {
+        ++callback_zero_count;
+        SetLastError(0x55bbu);
+        return 0;
+    }
     if (message == WM_APP + 71 || message == WM_APP + 72) {
         callback_backing = c_sas_dw_at(callback_teb + 0x70u);
         BORROW_CHECK(c_sas_dw_at(callback_teb + 0x6cu) == (ULONG)(ULONG_PTR)window);
@@ -344,6 +351,20 @@ static int verify_callback_borrow(ULONG teb)
         }
         wow_window_words_release(borrow);
         BORROW_CHECK(SetWindowLongA(window, GWL_WNDPROC, (LONG)wow_window_native_proc) != 0);
+        if (mode == 0) {
+            /* Force only the graph owner lookup to fail. A zero native result
+             * must not be evidence that the original callback ran. */
+            callback_zero_count = 0;
+            process.objects = NULL;
+            SetLastError(0x1234);
+            BORROW_CHECK(wow_window_native_proc(window, WM_APP + 70, 0, 0) == 0);
+            BORROW_CHECK(GetLastError() == ERROR_INVALID_STATE);
+            BORROW_CHECK(callback_zero_count == 0 && IsWindow(window));
+            process.objects = &objects;
+            BORROW_CHECK(wow_window_native_proc(window, WM_APP + 70, 0, 0) == 0);
+            BORROW_CHECK(GetLastError() == 0x55bbu);
+            BORROW_CHECK(callback_zero_count == 1 && IsWindow(window));
+        }
         callback_backing = 0u;
         __try {
             BORROW_CHECK(wow_window_dispatch_bound(window, WM_APP + 71 + mode,
@@ -1038,6 +1059,37 @@ static void verify_failed_window_reclamation(void)
     fprintf(stderr, "WOW_DEFERRED_RECLAIM_CCPU errors=%u consumed_once=1 class_guard=1 retry=1 retained_owner=1 released=1\n",
         borrow_errors - before);
 }
+
+static void verify_failed_menu_reclamation(ULONG delta)
+{
+    mvdm_softpc_wow_menu_query_item item = {0, 0, 71, 0};
+    ULONG server, client, old_items, metadata, before_free, after_free, largest;
+    unsigned before = borrow_errors;
+    BORROW_CHECK(VdmQueryFreeVirtualMemory(&before_free, &largest) >= 0);
+    server = mvdm_softpc_wow_page_domain_publish_menu(0x45670003u, 0x4321u, 1, &item);
+    BORROW_CHECK(server != 0);
+    if (!server) return;
+    client = server - delta;
+    old_items = c_sas_dw_at(client + 56u) - delta;
+    wow_fixture_fail_window_free(old_items);
+    item.id = 72;
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_publish_menu(0x45670003u, 0x4321u, 1, &item) == server);
+    BORROW_CHECK(wow_fixture_window_free_failures() == 1 && c_sas_dw_at(old_items + 8u) == 71);
+    BORROW_CHECK(c_sas_dw_at(c_sas_dw_at(client + 56u) - delta + 8u) == 72);
+    wow_fixture_fail_window_free(0);
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_publish_menu(0x45670003u, 0x4321u, 1, &item) == server);
+    wow_fixture_fail_window_free(client);
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_retire_menu(0x45670003u));
+    BORROW_CHECK(wow_fixture_window_free_failures() == 1 && c_sas_dw_at(client) == 0x45670003u);
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_handle_metadata(3, &metadata) && !(metadata & 0xffu));
+    BORROW_CHECK(!mvdm_softpc_wow_page_domain_retire_menu(0x45670003u));
+    wow_fixture_fail_window_free(0);
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_publish_menu(0x98760003u, 0x4321u, 0, NULL));
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_retire_menu(0x98760003u));
+    BORROW_CHECK(VdmQueryFreeVirtualMemory(&after_free, &largest) >= 0 && before_free == after_free);
+    fprintf(stderr, "WOW_MENU_DEFERRED_RECLAIM_CCPU errors=%u atomic_update=1 logical_retirement=1 retry=1 released=1\n",
+        borrow_errors - before);
+}
 #endif
 
 static void verify_dead_graph_retirement(ULONG teb)
@@ -1070,8 +1122,16 @@ static void verify_dead_graph_retirement(ULONG teb)
     root = mvdm_softpc_wow_page_domain_borrow_window(desktop);
     BORROW_CHECK(root != 0);
     replacement.window = desktop;
+    SetLastError(0x1234);
+    BORROW_CHECK(!mvdm_softpc_wow_page_domain_replace_window_links(0, &replacement, 0, NULL));
+    BORROW_CHECK(GetLastError() == ERROR_INVALID_PARAMETER);
+    BORROW_CHECK(!mvdm_softpc_wow_page_domain_replace_window_links(1, &replacement, 1, NULL));
+    BORROW_CHECK(GetLastError() == ERROR_INVALID_PARAMETER);
+    BORROW_CHECK(root && c_sas_dw_at(root + 28u) == held + delta);
     /* Live native identities cannot be withdrawn even with a valid new tree. */
+    SetLastError(0x1234);
     BORROW_CHECK(!mvdm_softpc_wow_page_domain_replace_window_links(1, &replacement, 2, dead));
+    BORROW_CHECK(GetLastError() == ERROR_INVALID_STATE);
     BORROW_CHECK(root && c_sas_dw_at(root + 28u) == held + delta);
     BORROW_CHECK(DestroyWindow(a)); a = NULL;
     BORROW_CHECK(DestroyWindow(b)); b = NULL;
@@ -1081,16 +1141,23 @@ static void verify_dead_graph_retirement(ULONG teb)
         duplicate[0] = duplicate[1] = replacement;
         /* Failure after an earlier valid retirement must discard only its
          * prepared retention node, not consume the actual publication. */
+        SetLastError(0x1234);
         BORROW_CHECK(!mvdm_softpc_wow_page_domain_replace_window_links(1, &replacement, 2, stale));
+        BORROW_CHECK(GetLastError() == ERROR_INVALID_STATE);
         BORROW_CHECK(!mvdm_softpc_wow_page_domain_replace_window_links(2, duplicate, 2, dead));
+        BORROW_CHECK(GetLastError() == ERROR_INVALID_PARAMETER);
         BORROW_CHECK(mvdm_softpc_wow_page_domain_window_handle(LOWORD(dead[0])) == dead[0] &&
             mvdm_softpc_wow_page_domain_window_handle(LOWORD(dead[1])) == dead[1]);
         BORROW_CHECK(root && c_sas_dw_at(root + 28u) == held + delta);
     }
     /* A source outside the replacement still points at B: refuse atomically. */
+    SetLastError(0x1234);
     BORROW_CHECK(!mvdm_softpc_wow_page_domain_replace_window_links(1, &replacement, 1, &dead[1]));
+    BORROW_CHECK(GetLastError() == ERROR_INVALID_STATE);
     BORROW_CHECK(root && c_sas_dw_at(root + 28u) == held + delta);
+    SetLastError(0x55bb);
     BORROW_CHECK(mvdm_softpc_wow_page_domain_replace_window_links(1, &replacement, 2, dead));
+    BORROW_CHECK(GetLastError() == 0x55bb);
     BORROW_CHECK(root && c_sas_dw_at(root + 28u) == 0);
     BORROW_CHECK(!mvdm_softpc_wow_page_domain_window_handle(LOWORD(dead[0])) &&
         !mvdm_softpc_wow_page_domain_window_handle(LOWORD(dead[1])));
@@ -1112,6 +1179,7 @@ static void verify_graph_preparation_rollback(void)
     HWND windows[2];
     mvdm_softpc_wow_window_links links[2] = {0};
     mvdm_softpc_wow_window_descriptor descriptors[2] = {0};
+    mvdm_softpc_wow_window_observation observations[2] = {0};
     ULONG free_before = 0, free_after = 0, largest, i;
     unsigned before = borrow_errors;
     windows[0] = CreateWindowExA(0, "STATIC", "Prepare A", WS_POPUP,
@@ -1133,29 +1201,195 @@ static void verify_graph_preparation_rollback(void)
         length = GetClassNameA(windows[i], descriptors[i].name, sizeof(descriptors[i].name));
         BORROW_CHECK(length > 0);
         descriptors[i].name_bytes = (ULONG)length + 1u;
+        CopyMemory(observations[i].window_rect, &info.rcWindow, sizeof(RECT));
+        CopyMemory(observations[i].client_rect, &info.rcClient, sizeof(RECT));
+        observations[i].style = info.dwStyle;
+        observations[i].exstyle = info.dwExStyle;
+        observations[i].thread_id = GetWindowThreadProcessId(windows[i],
+            &observations[i].process_id);
     }
     {
         WORD atom = descriptors[1].atom;
         descriptors[1].atom = 0; /* Fail after the first WND/CLS preparation. */
-        BORROW_CHECK(!mvdm_softpc_wow_page_domain_project_window_graph(2, links, descriptors));
+        SetLastError(0x1234);
+        observations[0].links = links[0]; observations[1].links = links[1];
+        observations[0].descriptor = descriptors[0]; observations[1].descriptor = descriptors[1];
+        BORROW_CHECK(!mvdm_softpc_wow_page_domain_project_window_graph(2, observations));
+        BORROW_CHECK(GetLastError() == ERROR_INVALID_PARAMETER);
         descriptors[1].atom = atom;
     }
     for (i = 0; i < 2u; ++i)
         BORROW_CHECK(!mvdm_softpc_wow_page_domain_window_handle(LOWORD(windows[i])));
     BORROW_CHECK(VdmQueryFreeVirtualMemory(&free_after, &largest) >= 0 && free_after == free_before);
-    /* Both descriptors are valid, but a top-level native parent cannot be
-     * NULL. Reject the stale snapshot after preparing both unpublished WNDs. */
-    BORROW_CHECK(!mvdm_softpc_wow_page_domain_project_window_graph(2, links, descriptors));
+    /* Native stability cannot prove copied traversal safety. Reject cycles
+     * in each reader chain before allocating/publishing any guest object. */
+    for (i = 0; i < 3u; ++i) {
+        if (i == 0) { links[0].next = links[1].window; links[1].next = links[0].window; }
+        if (i == 1) { links[0].parent = links[1].window; links[1].parent = links[0].window; }
+        if (i == 2) { links[0].owner = links[1].window; links[1].owner = links[0].window; }
+        observations[0].links = links[0]; observations[1].links = links[1];
+        observations[0].descriptor = descriptors[0]; observations[1].descriptor = descriptors[1];
+        BORROW_CHECK(!mvdm_softpc_wow_page_domain_project_window_graph(2, observations));
+        BORROW_CHECK(GetLastError() == ERROR_INVALID_DATA);
+        links[0].next = links[1].next = 0;
+        links[0].parent = links[1].parent = 0;
+        links[0].owner = links[1].owner = 0;
+    }
+    links[0].child = 0x12340001u;
+    observations[0].links = links[0]; observations[1].links = links[1];
+    BORROW_CHECK(!mvdm_softpc_wow_page_domain_project_window_graph(2, observations));
+    BORROW_CHECK(GetLastError() == ERROR_INVALID_DATA);
+    links[0].child = 0;
+    BORROW_CHECK(VdmQueryFreeVirtualMemory(&free_after, &largest) >= 0 && free_after == free_before);
+    /* Both descriptors are valid, but a complete view must include desktop.
+     * Reject after preparation, without testing later native freshness. */
+    SetLastError(0x1234);
+    observations[0].links = links[0]; observations[1].links = links[1];
+    BORROW_CHECK(!mvdm_softpc_wow_page_domain_project_window_graph(2, observations));
+    BORROW_CHECK(GetLastError() == ERROR_INVALID_DATA);
     for (i = 0; i < 2u; ++i)
         BORROW_CHECK(!mvdm_softpc_wow_page_domain_window_handle(LOWORD(windows[i])));
     BORROW_CHECK(VdmQueryFreeVirtualMemory(&free_after, &largest) >= 0 && free_after == free_before);
 cleanup:
     for (i = 0; i < 2u; ++i) if (windows[i]) DestroyWindow(windows[i]);
-    fprintf(stderr, "WOW_GRAPH_PREPARATION_CCPU errors=%u descriptor_failure=1 stale_snapshot=1 unpublished=1 released=1\n",
+    fprintf(stderr, "WOW_GRAPH_PREPARATION_CCPU errors=%u descriptor_failure=1 missing_desktop=1 unpublished=1 released=1\n",
         borrow_errors - before);
 }
 
 #ifdef WOW_GRAPH_SNAPSHOT_FIXTURE
+static void verify_post_native_failure(void)
+{
+    char exe[MAX_PATH], command[2 * MAX_PATH], name[96];
+    HANDLE event;
+    STARTUPINFOA startup = {sizeof(startup)};
+    PROCESS_INFORMATION process = {0};
+    DWORD code = 0;
+    unsigned before = borrow_errors;
+    sprintf_s(name, sizeof(name), "Local\\T447RemovedMessage-%lu", GetCurrentProcessId());
+    event = CreateEventA(NULL, TRUE, FALSE, name);
+    BORROW_CHECK(event != NULL);
+    if (!event) return;
+    GetModuleFileNameA(NULL, exe, sizeof(exe));
+    sprintf_s(command, sizeof(command), "\"%s\" --post-native-failure %s", exe, name);
+    BORROW_CHECK(CreateProcessA(exe, command, NULL, NULL, FALSE, CREATE_NO_WINDOW,
+        NULL, NULL, &startup, &process));
+    if (process.hProcess) {
+        if (WaitForSingleObject(process.hProcess, 20000) != WAIT_OBJECT_0) {
+            BORROW_CHECK(FALSE); TerminateProcess(process.hProcess, 4);
+            WaitForSingleObject(process.hProcess, 10000);
+        }
+        GetExitCodeProcess(process.hProcess, &code);
+        BORROW_CHECK(code == 0xc0000420u && WaitForSingleObject(event, 0) == WAIT_OBJECT_0);
+        CloseHandle(process.hThread); CloseHandle(process.hProcess);
+    }
+    CloseHandle(event);
+    fprintf(stderr, "WOW_POST_NATIVE_FAILURE_CCPU errors=%u consumed_once=1 worker_exit=%08lx\n",
+        borrow_errors - before, code);
+}
+
+static int external_window_churn(const char *stop_name, const char *ready_name, BOOL hold)
+{
+    HANDLE stop = OpenEventA(SYNCHRONIZE, FALSE, stop_name);
+    HANDLE ready = OpenEventA(EVENT_MODIFY_STATE, FALSE, ready_name);
+    ULONGLONG deadline = GetTickCount64() + 120000u;
+    if (!stop || !ready) return 2;
+    do {
+        HWND window = CreateWindowExA(0, "STATIC", "External observation churn",
+            WS_POPUP, 0, 0, 24, 24, NULL, NULL, GetModuleHandle(NULL), NULL);
+        HWND child;
+        if (!window) return 3;
+        child = CreateWindowExA(0, "STATIC", "External child", WS_CHILD,
+            0, 0, 8, 8, window, (HMENU)19, GetModuleHandle(NULL), NULL);
+        SetEvent(ready);
+        if (hold) WaitForSingleObject(stop, 120000);
+        SetWindowPos(window, HWND_TOP, 4, 6, 32, 32, SWP_NOACTIVATE);
+        if (child) DestroyWindow(child);
+        DestroyWindow(window);
+    } while (WaitForSingleObject(stop, 1) == WAIT_TIMEOUT && GetTickCount64() < deadline);
+    CloseHandle(ready); CloseHandle(stop);
+    return 0;
+}
+
+static void verify_external_observation_churn(BOOL hold)
+{
+    char exe[MAX_PATH], command[2 * MAX_PATH + 256], desktop[128], stop_name[96], ready_name[96];
+    STARTUPINFOA startup = {sizeof(startup)};
+    PROCESS_INFORMATION process = {0};
+    HANDLE stop = NULL, ready = NULL;
+    HWND local = NULL, root = GetDesktopWindow();
+    DWORD needed, exit_code = 1;
+    unsigned before = borrow_errors, iteration;
+    sprintf_s(stop_name, sizeof(stop_name), "Local\\T447ObservationStop-%lu", GetCurrentProcessId());
+    sprintf_s(ready_name, sizeof(ready_name), "Local\\T447ObservationReady-%lu", GetCurrentProcessId());
+    stop = CreateEventA(NULL, TRUE, FALSE, stop_name);
+    ready = CreateEventA(NULL, TRUE, FALSE, ready_name);
+    BORROW_CHECK(stop && ready);
+    if (!stop || !ready) goto cleanup;
+    BORROW_CHECK(GetModuleFileNameA(NULL, exe, sizeof(exe)) != 0);
+    BORROW_CHECK(GetUserObjectInformationA(GetThreadDesktop(GetCurrentThreadId()),
+        UOI_NAME, desktop, sizeof(desktop), &needed));
+    startup.lpDesktop = desktop;
+    sprintf_s(command, sizeof(command), "\"%s\" %s %s %s", exe,
+        hold ? "--external-window-hold" : "--external-window-churn", stop_name, ready_name);
+    BORROW_CHECK(CreateProcessA(exe, command, NULL, NULL, FALSE, CREATE_NO_WINDOW,
+        NULL, NULL, &startup, &process));
+    if (!process.hProcess) goto cleanup;
+    BORROW_CHECK(WaitForSingleObject(ready, 10000) == WAIT_OBJECT_0);
+    local = CreateWindowExA(0, "STATIC", "Required local observation", WS_POPUP,
+        0, 0, 24, 24, NULL, NULL, GetModuleHandle(NULL), NULL);
+    BORROW_CHECK(local != NULL);
+    if (!local) goto cleanup;
+    for (iteration = 0; iteration < 32u; ++iteration) {
+        ULONG backing;
+        BORROW_CHECK(SetWindowPos(local, NULL, 10 + iteration, 20, 24, 24,
+            SWP_NOZORDER | SWP_NOACTIVATE));
+        BORROW_CHECK(wow_user_window_project_graph(&local, 1));
+        backing = mvdm_softpc_wow_page_domain_borrow_window((ULONG)(ULONG_PTR)local);
+        BORROW_CHECK(backing && c_sas_dw_at(backing + 40u) == 10u + iteration);
+        if (backing) BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(backing));
+    }
+    if (hold) {
+        mvdm_softpc_wow_window_observation *view;
+        ULONG count = 0, at, external = 0;
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_copy_window_view(0, NULL, &count));
+        view = HeapAlloc(GetProcessHeap(), 0, count * sizeof(*view));
+        BORROW_CHECK(view != NULL);
+        if (view) {
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_copy_window_view(count, view, &count));
+            for (at = 0; at < count; ++at) if (view[at].process_id == process.dwProcessId)
+                ++external;
+            BORROW_CHECK(external >= 2u);
+            SetEvent(stop);
+            BORROW_CHECK(WaitForSingleObject(process.hProcess, 10000) == WAIT_OBJECT_0);
+            /* Every captured external HWND is now dead. Committing this
+             * observation must not query native USER and deny the local view. */
+            for (at = 0; at < count; ++at) if (view[at].process_id == process.dwProcessId)
+                BORROW_CHECK(!IsWindow((HWND)(ULONG_PTR)view[at].links.window));
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_project_window_graph(count, view));
+            HeapFree(GetProcessHeap(), 0, view);
+        }
+    }
+cleanup:
+    if (stop) SetEvent(stop);
+    if (process.hProcess) {
+        if (WaitForSingleObject(process.hProcess, 10000) != WAIT_OBJECT_0) {
+            BORROW_CHECK(FALSE); TerminateProcess(process.hProcess, 4);
+            WaitForSingleObject(process.hProcess, 10000);
+        }
+        GetExitCodeProcess(process.hProcess, &exit_code);
+        BORROW_CHECK(exit_code == 0);
+        CloseHandle(process.hThread); CloseHandle(process.hProcess);
+    }
+    if (local) DestroyWindow(local);
+    BORROW_CHECK(wow_user_window_project_graph(&root, 1));
+    if (stop) CloseHandle(stop);
+    if (ready) CloseHandle(ready);
+    if (hold) fprintf(stderr, "WOW_EXTERNAL_CAPTURE_CCPU errors=%u dead_native=1 committed_observation=1\n",
+        borrow_errors - before);
+    else fprintf(stderr, "WOW_EXTERNAL_OBSERVATION_CCPU errors=%u separate_process=1 local_updates=32\n",
+        borrow_errors - before);
+}
+
 static void verify_native_slot_reuse(void)
 {
     static wow_user_object_table no_cleanup_owner;
@@ -1169,6 +1403,38 @@ static void verify_native_slot_reuse(void)
     if (!old_window) goto cleanup;
     old_full = (ULONG)(ULONG_PTR)old_window;
     BORROW_CHECK(wow_user_window_project_graph(&old_window, 1));
+    {
+        mvdm_softpc_wow_window_observation *view, sentinel;
+        ULONG count = 0, returned = 0, row;
+        BOOL found = FALSE;
+        SetLastError(0x55bbu);
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_copy_window_view(0, NULL, &count));
+        BORROW_CHECK(count > 1 && GetLastError() == 0x55bbu);
+        ZeroMemory(&sentinel, sizeof(sentinel));
+        sentinel.links.window = 0x76543210u;
+        BORROW_CHECK(!mvdm_softpc_wow_page_domain_copy_window_view(1, &sentinel, &returned));
+        BORROW_CHECK(GetLastError() == ERROR_INSUFFICIENT_BUFFER && returned == count &&
+            sentinel.links.window == 0x76543210u);
+        view = HeapAlloc(GetProcessHeap(), 0, count * sizeof(*view));
+        BORROW_CHECK(view != NULL);
+        if (view) {
+            SetLastError(0x55bbu);
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_copy_window_view(count, view, &returned));
+            BORROW_CHECK(returned == count && GetLastError() == 0x55bbu);
+            for (row = 0; row < returned; ++row) if (view[row].links.window == old_full) {
+                found = TRUE;
+                BORROW_CHECK(view[row].descriptor.atom != 0 &&
+                    _stricmp(view[row].descriptor.name, "STATIC") == 0);
+                BORROW_CHECK(view[row].style & WS_POPUP);
+                BORROW_CHECK(view[row].process_id == GetCurrentProcessId() &&
+                    view[row].thread_id == GetCurrentThreadId());
+                BORROW_CHECK(view[row].links.parent == (ULONG)(ULONG_PTR)desktop);
+                BORROW_CHECK(view[row].window_rect[2] - view[row].window_rect[0] == 24);
+            }
+            BORROW_CHECK(found);
+            HeapFree(GetProcessHeap(), 0, view);
+        }
+    }
     held = mvdm_softpc_wow_page_domain_borrow_window(old_full);
     BORROW_CHECK(held != 0);
     if (!held) goto cleanup;
@@ -1329,7 +1595,10 @@ static void verify_graph_snapshot_commit(ULONG teb)
     BORROW_CHECK(child != NULL);
     if (!child) goto cleanup;
     full = (ULONG)(ULONG_PTR)window;
-    BORROW_CHECK(wow_user_window_project_graph(&window, 1));
+    {
+        HWND roots[2] = {window, window};
+        BORROW_CHECK(wow_user_window_project_graph(roots, 2));
+    }
     held = mvdm_softpc_wow_page_domain_borrow_window(full);
     child_backing = mvdm_softpc_wow_page_domain_borrow_window((ULONG)(ULONG_PTR)child);
     root = mvdm_softpc_wow_page_domain_borrow_window((ULONG)(ULONG_PTR)desktop);
@@ -1537,6 +1806,7 @@ static int verify_native_class_projection(ULONG teb)
     verify_graph_preparation_rollback();
 #ifdef WOW_RECLAIM_FAILURE_FIXTURE
     verify_failed_window_reclamation();
+    verify_failed_menu_reclamation(c_sas_dw_at(teb + 0x60u));
 #endif
     verify_observed_words_enrollment();
     fprintf(stderr, "WOW_NATIVE_CLASS_CCPU errors=%u projected=%u native_pointers=0 released=1\n",
@@ -1687,6 +1957,26 @@ static BOOL verify_native_menu_entry(wow_task_order_process *process,
     task.hTaskWow = 0x4321u;
     runtime.lifecycle = &native_owner; /* No second task/handoff in this fixture. */
     if (!wow_user_runtime_bind(&binding, &runtime, &thread, NULL)) return FALSE;
+    {
+        wow_user_native_call call;
+        MSG message;
+        step = "native-removed-message";
+        PeekMessageA(&message, NULL, WM_APP + 93, WM_APP + 93, PM_NOREMOVE);
+        if (!PostThreadMessageA(GetCurrentThreadId(), WM_APP + 93, 173u, 97u) ||
+                !wow_user_native_call_begin(&call, NULL)) goto cleanup;
+        if (!PeekMessageA(&message, NULL, WM_APP + 93, WM_APP + 93, PM_REMOVE) ||
+                message.wParam != 173u || message.lParam != 97u) goto cleanup;
+        if (PeekMessageA(&message, NULL, WM_APP + 93, WM_APP + 93, PM_NOREMOVE)) goto cleanup;
+        if (native_failure_signal) {
+            HANDLE signal = OpenEventA(EVENT_MODIFY_STATE, FALSE, native_failure_signal);
+            if (!signal) goto cleanup;
+            SetEvent(signal); CloseHandle(signal);
+            thread.ppi = NULL; /* Deliberate required-publication fault after consumption. */
+        }
+        if (!wow_user_native_call_end(&call) || native_failure_signal) goto cleanup;
+        if (PeekMessageA(&message, NULL, WM_APP + 93, WM_APP + 93, PM_NOREMOVE)) goto cleanup;
+        fprintf(stderr, "WOW_REMOVED_MESSAGE_CCPU consumed_once=1 restored=1 no_replay=1\n");
+    }
     {
         wow_user_native_call call;
         BOOL accepted;
@@ -2301,6 +2591,24 @@ static int run_fixture(void)
         if (c_sas_dw_at(server_window) != 0x23450002u)
             goto guest_window_failure;
     }
+    {
+        mvdm_softpc_wow_menu_observation rows[2] = {
+            {0x98760004u, 0u, 0u, 0u, 1u},
+            {0x98760003u, 0u, 0u, 1u, 0u}
+        };
+        mvdm_softpc_wow_menu_query_item item = {0u, 0u, 4u, 0x98760004u};
+        ULONG parent, child, items, delta = c_sas_dw_at(teb + 0x60u);
+        stage = "guest-menu-external-edge-withdrawal";
+        if (!mvdm_softpc_wow_page_domain_publish_menus(2, rows, 1, &item)) goto done;
+        parent = c_sas_dw_at(handles + 3u * 16u) - delta;
+        child = c_sas_dw_at(handles + 4u * 16u);
+        items = c_sas_dw_at(parent + 56u) - delta;
+        if (c_sas_dw_at(items + 12u) != child ||
+                !mvdm_softpc_wow_page_domain_retire_menu(0x98760004u) ||
+                c_sas_dw_at(items + 12u) != 0u ||
+                !mvdm_softpc_wow_page_domain_retire_menu(0x98760003u)) goto done;
+        fprintf(stderr, "WOW_MENU_EXTERNAL_EDGE_CCPU external_unlink=1 local_guard=1\n");
+    }
     stage = "guest-window-retirement";
     {
         mvdm_softpc_wow_window_links links[4] = {
@@ -2469,6 +2777,26 @@ static int run_fixture(void)
         if (mvdm_softpc_wow_page_domain_publish_menu(0x45670003u,
                 0x4321u, 2u, entries) ||
                 c_sas_dw_at(item_array + 12u) != child_menu) goto done;
+        {
+            mvdm_softpc_wow_menu_observation trees[2] = {
+                {0x45670004u, 0x4321u, 0u, 1u}, {0x45670003u, 0x4321u, 1u, 1u}
+            };
+            mvdm_softpc_wow_menu_query_item batch[2] = {
+                {0u, MF_DISABLED, 17u, 0u}, {0u, 0u, 4u, 0x98760004u}
+            };
+            ULONG child_items = c_sas_dw_at(child_menu - delta + 56u) - delta;
+            stage = "guest-menu-whole-tree-rollback";
+            if (mvdm_softpc_wow_page_domain_publish_menus(2, trees, 2, batch) ||
+                    c_sas_dw_at(child_items + 8u) != 7u ||
+                    c_sas_dw_at(root_client + 56u) != item_array + delta) goto done;
+            batch[1].submenu = 0x45670004u;
+            stage = "guest-menu-whole-tree-commit";
+            if (!mvdm_softpc_wow_page_domain_publish_menus(2, trees, 2, batch)) goto done;
+            child_items = c_sas_dw_at(child_menu - delta + 56u) - delta;
+            item_array = c_sas_dw_at(root_client + 56u) - delta;
+            if (c_sas_dw_at(child_items + 8u) != 17u ||
+                    c_sas_dw_at(item_array + 12u) != child_menu) goto done;
+        }
         stage = "guest-menu-update-and-detach";
         /* Detached submenu remains independently published, as RemoveMenu
          * requires. This fixture checks carrier lifetime, not native policy. */
@@ -2779,6 +3107,9 @@ guest_window_failure:
     stage = "whole-graph-snapshot";
     verify_graph_snapshot_commit(teb);
     verify_native_slot_reuse();
+    verify_external_observation_churn(FALSE);
+    verify_external_observation_churn(TRUE);
+    verify_post_native_failure();
     verify_native_discovery(FALSE);
     verify_native_discovery(TRUE);
     if (borrow_errors) goto done;
@@ -2944,8 +3275,17 @@ static DWORD WINAPI run_graph_desktop(void *desktop)
 }
 #endif
 
-int main(void)
+int main(int argc, char **argv)
 {
+#ifdef WOW_GRAPH_SNAPSHOT_FIXTURE
+    if (argc == 4 && (strcmp(argv[1], "--external-window-churn") == 0 ||
+            strcmp(argv[1], "--external-window-hold") == 0))
+        return external_window_churn(argv[2], argv[3], strcmp(argv[1], "--external-window-hold") == 0);
+    if (argc == 3 && strcmp(argv[1], "--post-native-failure") == 0) {
+        native_failure_signal = argv[2];
+        SetErrorMode(SEM_NOGPFAULTERRORBOX | SEM_FAILCRITICALERRORS);
+    }
+#endif
 #ifdef WOW_WINDOW_BORROW_FIXTURE
     WCHAR name[64];
     HDESK desktop;

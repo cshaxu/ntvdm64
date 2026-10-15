@@ -4128,3 +4128,642 @@ graph failure-atomicity tests only prove that invalid snapshots are not
 committed; they do not prove preservation of the pending original callback.
 Original USER lock/shared-memory ownership is the reference contract; its
 unavailable private server boundary must remain explicit in the design.
+
+### Failure-contract implementation prerequisite
+
+Canonical kernel/ssend.c LOCKPWND retains the target and callback-window slot;
+MAKECALL releases the USER critical section during KeUserModeCallback and
+restores it afterward. It does not require whole-desktop quiescence. Do not
+equate a sampled-graph race with a failed original callback or solve it by
+holding the project data lock across arbitrary guest execution.
+
+Before selecting delivery recovery, restore meaningful failure evidence as
+one owned provider/worker group. project_window_graph currently preserves
+possibly stale last-error values on its Boolean validation branches; the
+provider then overwrites every worker failure with ERROR_INVALID_STATE.
+Classify invalid input, allocation failure, observed native changes and
+structural/publication failures without changing atomic commit or retrying
+native calls. Preserve the actual error through cleanup. Native window trace
+must distinguish callback refusal from an executed callback returning zero.
+Deterministic rollback tests assert both error class and unchanged storage.
+This prerequisite changes neither scheduling nor failure recovery; it cannot
+be reported as fixing the two application timeouts or the suppression risk.
+No mirror, guest or new public/private export is needed. Complete this group
+before grouped compilation; P12 remains the published runtime meanwhile.
+
+The owned candidate now assigns explicit worker graph failures, preserves
+them through provider rollback and callback cleanup, and emits WindowRejected
+instead of WindowDispatch when the original dispatch did not execute.
+An executed callback returning zero retains WindowDispatch and its own error.
+The real-CCPU fixture forces a missing graph owner: callback count stays zero,
+the window remains live, and ERROR_INVALID_STATE survives cleanup. Restoring
+the owner invokes the zero-return callback exactly once; its0x55bb error
+survives. Descriptor failure and stale relationship batches assert distinct
+INVALID_PARAMETER/RETRY results with unchanged allocation/publication.
+
+Hidden supervisor28692 starts2026-10-15T14:35:43Z with45-minute bound at
+failure-contract-r1. Combined worker/provider compilation completes0;
+graph-snapshot completes0, including both discovery lock states, rollback,
+callback ownership and reuse. Adjacent boundary cases continue under the same
+live supervisor; no restart or completed-suite claim is made. No candidate is
+published or committed, and neither original mirror has changed.
+
+Second-role recheck corrects the preceding allocation-review note: both HEAD
+and the current provider already set ERROR_NOT_ENOUGH_MEMORY when descriptor
+array allocation fails. No additional source change or rebuild is needed for
+that branch. Preserve the larger callback-recovery decision: truthful rejection
+evidence alone does not prevent transient publication failure from suppressing
+a callback.
+
+### Queue consumer and original-reader cross-check
+
+Source review also identifies a post-operation failure boundary in
+wow_user_task_lifecycle.c:672--722. peek_message_published executes native
+PeekMessageA, possibly with PM_REMOVE, before native_call_end refreshes both
+window and menu views. If that restoration fails, lifecycle_message returns
+FALSE (Peek) or -1 (Get) even when native USER already removed a message and
+wrote it into the supplied MSG. This is a source-proved loss-of-result path,
+not a runtime witness attributing the earlier application timeouts. Retrying
+PeekMessage is not recovery of that same operation; it can consume the next
+message. The native-call macro similarly substitutes its failure value after
+an already executed native operation. Window and menu failure must remain
+distinguishable from the native operation's own result.
+
+Canonical OpenNT windows/core/ntuser/kernel/input.c xxxInternalGetMessage
+passes fRemove to xxxReadPostMessage, then invokes WH_GETMESSAGE and returns
+the selected message (with WM_QUIT's distinct GetMessage result). There is no
+subsequent whole-desktop snapshot gate. rtl/wow.c _GetWindow directly follows
+the requested shared relationship and rebases it; _GetParent selects the
+parent/owner by original style. Neither establishes a desktop-wide immutable
+snapshot. These bodies are reference evidence, not permission to remove
+generation checks or publish dangling copied relationships: original server
+storage/lifetime is precisely the unavailable dependency.
+
+The next recovery design must cover pre-callback admission and post-native
+completion separately, retain the original operation exactly once, and retain
+safe guest-visible object lifetime. It must not create a second message queue,
+replay native operations, silently convert graph errors into successful calls,
+or claim whole-desktop sampling provides original USER locking. Current tests
+validate rejection/error reporting only; they do not establish this recovery.
+
+The direct refresh consumers have now been reviewed together (owned sources,
+not a claim that every message payload conversion is closed):
+
+| Consumer | Operation boundary and current failure effect | Recovery constraint |
+| --- | --- | --- |
+| Window dispatch_bound | Refresh before original DispatchClientMessage; rejection substitutes zero or creation failure. | Retain target/borrow and terminal cleanup; no replay of the original procedure. |
+| dialog_return_hook | After successful native WM_CREATE, refresh can prevent W32InitDlg and record creation failure. | Initialization must remain once-only; native creation already happened. |
+| dialog_proc | Refresh before supplied original procedure; failure returns FALSE. | FALSE is also a legitimate unhandled-dialog result, not evidence of successful delivery. Preserve independent WND borrow and callback slot. |
+| WU32StdHookProc | Refresh before retained hook body; ordinary failure returns zero, CBT creation failure vetoes. | A zero may affect hook-chain/notification behavior; preserve the existing enrollment rollback and real hook result separately. |
+| publish_discovery/discovered | Native query already selected a full HWND; publication failure returns NULL. | Do not publish a truncated or unregistered HWND; distinguish absence from publication failure. |
+| discovered_callback/enumeration_return | Entry can stop before one callback; final refresh can return failure after earlier callbacks already ran. | Never restart enumeration as though earlier callbacks had no side effects. |
+| native_call_end and WOW_NATIVE_CALL_TARGET | Native operation has completed; window/menu refresh can substitute the wrapper's failure value. | Restore execution/lock ownership independently from data projection; neither implies permission to repeat the native operation. |
+| peek_message_published | Native queue operation may already have removed MSG before the same return boundary. | Preserve exact message/result semantics without re-posting or a second queue. |
+
+The existing callback scopes already retain owned WND/backing across nested
+destruction. That proves local storage lifetime only, not that an arbitrary
+last-good desktop graph is semantically current or safe for every direct
+USER16 relationship reader. The recovery cannot simply remove all refresh
+calls or downgrade every error to success. First separate required target and
+payload publication from unrelated desktop reconciliation, with generation and
+relationship lifetime accounted for; keep the original procedures and USER16
+readers, not replacement per-message behavior.
+
+The follow-up poll confirms the same boundary supervisor28692 remains live,
+with ten completed case exits0: graph-snapshot, window-borrow, window-reclaim,
+process-retirement, dialog-lifecycle, menu-resource, thunk-scope, menu-cleanup,
+native-send and native-nested. Build/result exits are not additional test cases;
+the earlier conversational count included the build and was one case too high.
+The follow-on hidden supervisor23436 starts2026-10-15T14:45:28Z under
+failure-contract-apps-r1 with a90-minute child bound. It waits for the existing
+suite's successful terminal result without restarting it, then seals P12 media
+plus the rebuilt ntvdm.exe and WOW32.DLL. Planned gates are real guest discovery,
+SOL/WINMINE Off/Win16/All gameplay, WRITE's separate three-mode frontier,
+guest CBT and both DOS17 routes. It neither publishes nor commits on success;
+results, coherent image identity and the original failures still require review.
+
+Boundary suite failure-contract-r1 is now terminal with exit.txt=0; all twelve
+case exits are0, including task-lifecycle and native-creation. The checked trace
+contains both WindowRejected/message8046/error5023 and the later actual
+WindowDispatch/message8046/result0/error21947, matching the forced refusal
+and executed-zero fixture assertions. This proves the diagnostic distinction,
+not callback recovery. The follow-on application runner has advanced to package
+staging; no application pass, runtime publication or commit is inferred yet.
+
+Application suite failure-contract-apps-r1 is now terminal1 (supervisor and
+child result agree; both process identities are absent). Real Win16 discovery
+passes, as do SOL Off deal/draw/close and WINMINE Off flag/reset/open/close.
+SOL Win16 fails the unchanged readiness assertion with probe exit5:
+owned window00570DEC, PID18204, client585x384, enabled Deal menu;
+phase=ready TIMEOUT pixels=1f13dc85 pattern=0. The retained
+sol-Win16/sol-ready-failure.bmp shows a green client area with the bottom
+Score/Time strip but no dealt cards. This is not evidence of a completely
+uncreated window or a missing menu. No guest patch or probe weakening occurred.
+Later modes, WRITE, CBT and DOS17 in this suite were not executed and are not
+passing gates. Preserve the failure instead of restarting the same suite.
+
+The candidate package differs from sealed P12 only in SYSTEM32/ntvdm.exe
+(34b622deef8b5fb38064e7e41c3227c4ae07443adb6c1b7b8560e8b075d6b197)
+and SYSTEM32/WOW32.DLL
+(450f1548fc4bf4b9076db718bbd929653070e2cccd54cc683be945496c391690).
+The remaining images/media/configuration compare identically. This failure
+resembles the retained P12 styled SOL readiness failure, but similarity is
+not attribution and no callback-rejection trace was enabled in this ordinary
+application gate. P12 remains published. A subsequent diagnostic comparison
+must hold environment/trace conditions explicit and capture actual callback
+outcomes; a later pass cannot erase or explain this failed gate.
+
+One bounded diagnostic pair failure-contract-sol-trace-r1 is now terminal0,
+supervisor3144 (start2026-10-15T14:51:32Z), child9584. This is diagnostic
+completion, not conversion of the ordinary failed gate into a pass. Both
+sealed P12 and candidate complete the unchanged styled SOL gameplay probe.
+Both use the same explicit standard-environment whitelist and the identical
+MVDM_WOW_WINDOW_TRACE_PATH text; each resulting file is retained separately.
+The added tracing changes timing/environment relative to the failed ordinary
+run, so it is not evidence that the failure disappeared or was repaired.
+
+Candidate PID8092 records95 WindowDispatch outcomes and one real rejection:
+WindowRejected hwnd015804EC message0018 result0 error1237. The rejected HWND
+is not the main game HWND005A0260 identified by the probe. Message0018 is
+WM_SHOWWINDOW; error1237 is ERROR_RETRY. Earlier/later messages for015804EC
+execute successfully, including creation, positioning, erase, paint and
+terminal destruction. Its class is not captured by this trace; do not invent
+an identity. Source search locates explicit ERROR_RETRY production in graph
+sampling/revalidation. This is the first retained real-application witness of
+the already source-proved callback suppression risk, even though this gameplay
+run passes. The exact changed edge/stage and causality for the previous blank
+tableau remain unproved. A passing visual probe therefore cannot certify the
+callback delivery contract. Do not add more retries of the ordinary gameplay
+gate as a substitute for repairing that contract.
+
+Style-source review also confirms the P11 delayed-frame branch remains in
+NTW16S: initially hidden normal frames postpone forced positioning until
+WM_SHOWWINDOW, then activate_frame performs frame_changed/restore_client and
+forwards. No new early-WM_CREATE positioning or SOL-specific branch was added
+by this candidate. Those nested calls expose the existing callback boundary;
+this review is not proof that all style ordering is correct or that the
+recorded ERROR_RETRY originated from that particular nested call.
+
+Second-role inspection of the final page_domain_replace_window_links boundary
+finds an incomplete error contract in the candidate: validation/allocation
+failure and cleanup in that helper can still leave stale last-error, even
+though its caller now preserves errors. The owned source now classifies
+malformed batches as INVALID_PARAMETER, absent/conflicting publication or
+unsafe retirement as INVALID_STATE, and host allocation failures as
+NOT_ENOUGH_MEMORY, preserving the chosen error through rollback. Success
+restores the incoming error. The caller's obsolete blanket error seed is
+removed. Retirement and atomic commit policy are unchanged; stale native
+sampling remains a separate ERROR_RETRY category, not a generic recoverable
+classification for generation/ownership failures.
+
+The existing dead-graph CCPU fixture now asserts live-retirement rejection,
+stale generation, duplicate rows, retained incoming edges and successful
+commit error preservation alongside its allocation/alias atomicity checks.
+No new test run is started for this isolated review correction: collect the
+remaining complete failure/delivery group before rebuilding. The prior twelve
+passing cases and sealed candidate describe the earlier inputs, not this new
+source revision. No original mirror or guest changes are introduced.
+
+### Reconciliation design review: reject an unsafe shortcut
+
+Original client/wow.c GetWindow validates the input handle, calls retained
+rtl/wow.c _GetWindow and converts its returned object to a handle. There is
+no whole-desktop equality check. However GetPrevPwnd walks parent.child and
+then next until NULL or the sought object; it has no cycle bound. Removing
+the sampler's revalidation without replacing its consistency protection is
+therefore not justified: independently sampled sibling rows can form a frozen
+cycle which the unchanged guest reader cannot escape. Original shared native
+storage and a copied guest snapshot are not interchangeable lifetime models.
+Do not implement a blanket ignore-ERROR_RETRY or remove all edge checks on
+the strength of the no-desktop-lock observation alone.
+
+Original enumeration provides a more precise comparison boundary:
+client/clenum.c BuildHwndList obtains a copied handle list from
+NtUserBuildHwndList; its bounded retry is exclusively buffer sizing.
+InternalEnumWindows revalidates each full handle immediately before invoking
+its callback and skips disappeared objects. It does not demand unchanged
+z-order after building the list. kernel/enumwin.c InternalBuildHwndList walks
+the server child/next tree while ntstubs.c supplies the server receive scope,
+then copies out only HWNDs. Neither callback replay nor a desktop-stability
+retry policy appears in that contract.
+
+Recovery ladder disposition at this point: the original client list iteration
+is reusable for enumeration, but it does not supply parent/owner metadata or
+the unlinked creation/terminal WNDs required by direct USER16 readers. The
+server builder requires private PWND, desktop and USER serialization and is
+outside the admitted server-import boundary. A public native enumeration
+binding can supply a handle list, but cannot yet be claimed to supply an
+atomic complete relationship graph. Investigate that narrower list boundary
+before any sampler replacement; do not invent a second authoritative window
+tree or silently drop callback targets absent from enumeration. This rejects
+an unsafe candidate design, not the already admitted need to repair delivery.
+
+Read-only source identities, relative to canonical windows/core/ntuser:
+
+- client/wow.c: 1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a
+- client/clenum.c: 4ea923b41085e2fefbf0c65a18f4af7ecbb60d2e0f0dc652302ba31ab668c1ff
+- kernel/enumwin.c: 1a28d712de37da806ad532ec5f60b08dda5af94abd29db3f32f15e55ce30664c
+
+### Commit-level attribution of the added failure boundary
+
+Git patch inspection, not a runtime binary bisect, identifies the relevant
+introduction points:
+
+- 6096f1b2c (S2 P2) already contains sample_links/sample_graph edge-change
+  rejection. This identifies the sampler's origin, not yet the production
+  callback gate.
+- cef8ce2cb (S2 P4) moves descriptor preparation and final revalidation into
+  the worker's atomic graph transaction. A pickaxe hit here for
+  sampled_links_match reflects removed calls, not that helper's first origin.
+- 984ee0441 (S2 P5) explicitly adds
+  `if (!wow_user_window_refresh_graph(window)) return FALSE;` inside
+  dispatch_bound before original dispatch. Its native_call_end changes also
+  prepend graph refresh to both menu-publication paths. This is the direct
+  introducing diff for graph-publication failure gating callback/native-result
+  delivery; P12 adds discovery consumers but did not originate that gate.
+- 32876c415 (S2 P1) introduces peek_message_published and its dependence on
+  native_call_end after PeekMessage. At that point the publication failure
+  already includes menus; P5 subsequently adds graph failure. Removing only
+  P5's graph calls would leave the same post-consumption result-loss pattern
+  possible on menu failure.
+
+These are precise source attribution boundaries, not a claim that a particular
+historical binary reproduces SOL's blank tableau. The original callbacks,
+query readers and guest are not the added policy's owners. The complete repair
+must separate restored execution ownership, safe view publication and completed
+native operation results across both window and menu consumers. Reverting P12,
+adding a SOL name check, or dropping only one callback gate cannot close it.
+
+Menu-side closure review extends the direct-consumer inventory: the tagged
+CallWindowProc branch in wow_user_registration_bridge.c bypasses
+dispatch_bound and gates the original pfnWowWndProcEx on
+wow_menu_native_refresh_message. Its native branch uses native_call_end.
+wow_menu_native_bindings.c MENU_MUTATION and SetMenu similarly combine an
+already completed mutation with publication/retirement in their return status.
+wow_menu_client_refresh_all scans managed window menu associations, live menu
+trees, then retires destroyed views; its failure need not precede all writes.
+Thus the existing window graph's atomicity cannot be generalized to menu
+publication, and a completed mutation cannot safely be replayed on FALSE.
+The recovery review must include this direct subclass-call path and distinguish
+menu association/tree commit from retirement, not only native_call_end.
+
+The unresolved design boundary is now explicit: modern public USER calls do
+not expose original desktop-wide lock/shared-heap retention. The current copy
+producer cannot promise both a globally current native graph and unconditional
+finite callback admission while unrelated processes mutate that graph. A
+replacement that uses a structurally coherent older external-window snapshot
+would need an explicit observable contract for those external readers; it must
+not be silently described as identical to original live shared-memory reads.
+Same-process creation, mutation, callback payload and terminal identity must
+remain synchronous regardless. No relaxation or snapshot fallback has been
+implemented or authorized by this review. Original guest readers remain intact.
+
+The owner has been asked whether a coherent external-window snapshot may
+replace exact live external relationship visibility while same-worker state
+remains synchronous. Automatic goal continuation is not that choice. Pending
+the answer, do not implement this semantic relaxation or claim it necessary
+before exhausting equivalent bindings. Independent error-contract verification
+continues without changing the pending choice.
+
+The complete error-propagation revision, including final transaction rollback
+and malformed-input assertions, is launched as hidden failure-contract-r2,
+PID11364 start2026-10-15T15:02:14Z. Earlier suites are terminal before this
+launch. Its owned children have30-minute build/10-minute per-case bounds;
+the recorded150-minute supervisor budget covers the12-case sequence. It reuses
+the existing dependency-tracked worker/provider caches, retains fresh evidence
+and does not overwrite the sealed prior package. The new suite is not yet a
+pass and does not publish. Shared build inputs remain frozen during execution.
+
+### Original callback failure contract clarification
+
+Read-only expansion of canonical ntuser/inc/ntcb.h SfnDWORD, together with
+kernel/ssend.c and kernel/userk.h, distinguishes a real callback transport
+failure from the added graph-stability prerequisite. SfnDWORD executes
+LOCKPWND, MAKECALL, UNLOCKPWND, then CHECKRETURN. MAKECALL leaves the USER
+critical section for KeUserModeCallback and reenters afterwards; UNLOCKPWND
+restores CallbackWnd and releases the retained window before status checking.
+CHECKRETURN rejects unsuccessful transport status, a wrong result size or an
+unreadable result. ENDSEND(DWORD,0) supplies zero on that failure. Capture
+variants also have allocation-failure and paired pool-release paths.
+
+Consequently, original USER does not guarantee callback execution despite
+resource/transport failure, and zero alone cannot prove execution. This does
+not justify rejecting a callback because unrelated desktop relationships
+changed: the inspected original path has no such prerequisite. Keep actual
+zero results, structural/resource failures and added ERROR_RETRY conflicts
+distinct. Do not replay callbacks or turn every failure into success. This
+is source-contract evidence, not attribution of SOL's blank-tableau failure.
+
+Procedure: inspect ntcb.h lines619--666, ssend.c LOCKPWND through
+ENDSENDCAPTURE and userk.h CallClientProcA/W/ScSendMessageSMS. Same canonical
+OpenNT revision as above; SHA-256 identities:
+
+- inc/ntcb.h: eb09b59f4ab36bfbdda4f579a91f255ce8b011d533bb197e3e9c5ae95111adad
+- kernel/ssend.c: e4b9600381683902a05ff8ba3e7e0f6876246a97960482f8b0bf6e51da601844
+- kernel/userk.h: 9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c
+
+No original code is imported or modified by this clarification. The pending
+external-view contract remains unresolved; this evidence does not approve a
+stale-view fallback or weaken the required safe guest-reader lifetime.
+
+### Owner-requested design decision audit: reject query-only refresh
+
+Owner requires the hard dependency to be resolved before approving a repair,
+not a design with direct-reader lifetime and failure behavior left for later.
+The following findings invalidate the earlier proposed query-only refresh
+as a complete equivalent solution; they do not authorize implementation of
+an external-snapshot relaxation.
+
+Source inspection: wow16/user/usercli.asm USER16CLIENTTHUNK emits a WOW32
+fallback only when its callserver macro argument is present. The local
+GETWINDOW, GETPARENT, GETTOPWINDOW, GETDLGITEM, GETMENU, GETSUBMENU,
+GETMENUITEMCOUNT/ID/STATE and ISWINDOW declarations have no such argument.
+The existing _wow16CsrFlag therefore cannot redirect them. PMODE32 is a
+compile-time branch, not an available runtime switch. Historical generated
+wowasmk.asm corroborates the local ValidateHwnd -> _GetWindow -> head.h path;
+this additional inspection is source evidence, not a fresh guest disassembly.
+
+Original rtl/wow.c further establishes that GetPrevPwnd traverses the
+parent's child/next chain; _IsChild follows parents; _IsWindowVisible walks
+parents until FNID_DESKTOP. Thus publishing only the callback WND is not a
+closed reader dependency. A callback can perform these local reads without
+another transition into WOW32. No callback-specific query list can predict
+which foreign windows an arbitrary guest application will inspect.
+
+The copied data necessarily has a visibility interval: if another process
+changes a window after the last host observation and the guest next reads
+only local memory, no existing transition communicates that change. Removing
+the global recheck fixes one rejection policy but does not supply the missing
+observation or retention capability. Calling this fully equivalent live data
+would be incorrect. Likewise, borrowed projected memory does not pin native
+HWND lifetime, and repeated IsWindow checks cannot supply that guarantee.
+
+Modern API checks, read 2026-10-15:
+
+- [EnumWindows](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-enumwindows)
+  is preferable to repeated GetWindow traversal; it does not provide a
+  documented atomic parent/owner/class/menu graph or retain every HWND.
+- [EnumChildWindows](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-enumchildwindows)
+  handles reordered children and excludes children destroyed before their
+  enumeration or created during enumeration. This is list-enumeration
+  behavior, not a live shared-memory contract.
+- [IsWindow](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindow)
+  explicitly warns of destruction after the check and recycled handles.
+- [SetWinEventHook](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwineventhook)
+  out-of-context delivery is asynchronous. It cannot close the direct-read
+  visibility interval; adding it is not an equivalence proof.
+
+Design dispositions: reject simple global-check deletion, query-wrapper-only
+refresh, blanket ERROR_RETRY suppression, repeated native-operation execution,
+and treating WinEvent delivery as synchronous shared memory. Original server
+tree/locking is still outside the admitted composition boundary. A different
+guest build or redirecting its compiled local queries violates guest
+immutability. A snapshot design must explicitly specify its observation
+semantics, including stale IsWindow results; excluding only relationship
+freshness would understate the difference. It is not approved by an instruction
+to finish this audit. The earlier no-new-thread/query-only outline is not an
+implementation-ready design and must not be used as one.
+
+Independent verification has now completed: failure-contract-r2 exit.txt=0,
+build.exit=0 and all twelve named fixture exit files=0. Supervisor11364 is
+absent on the elevated process check. This verifies the error-classification
+candidate, not callback suppression repair or ordinary SOL non-regression.
+The existing failed ordinary application run remains a failed gate; no new
+runtime publication or delivery is made by this result.
+
+### Comparative architecture research requested by owner
+
+Question: resolve the alternatives rather than repeat that further design is
+needed. This is an architecture feasibility report, not approval of changed
+external-observation semantics or a runtime implementation.
+
+Additional source evidence:
+
+- Canonical ntuser/kernel/desktop.c, desktop-open mapping around1970--2041,
+  maps pdesk->hsectionDesktop into the client with MmMapViewOfSection and
+  records ulClientDelta. The original client is not periodically reconstructing
+  a public-API copy. Private desktop section ownership and original layout
+  are prerequisites, not simply a missing MapViewOfFile call.
+- Current wow_user_client_view_layout.h asserts NT4 x86 WND176, CLS108,
+  MENU64 and ITEM64 and exact field offsets. The page-domain converts object
+  references into guest server-form addresses. Reusing arbitrary modern USER
+  pages would not establish this ABI, even if those pages were readable.
+- Original ccpu386/ccpusas4.c contains phyR/phy_r32, linear byte/word/dword
+  reads, cross-page splitting, block loads and raw physical-address access.
+  c_mem.h also routes CPU dword reads through phy_r32. Intercepting only the
+  host c_sas_dw_at helper would not establish complete guest-read coverage.
+  The existing SAS video dispatch is a device path, not an original USER
+  metadata provider. Reusing its type for USER would conflate unrelated owners.
+- Current lifecycle peek_message_published runs PeekMessage before
+  native_call_end. Its caller returns FALSE/-1 when restoration/publication
+  fails, even after PM_REMOVE. Retaining an already obtained message/result
+  and refusing replay is mandatory independently of the selected view model.
+
+Route dispositions:
+
+| Route | Feasibility and decision |
+| --- | --- |
+| Original desktop heap mapped directly | Original algorithm is real, but depends on private server-owned section, object layout and lifetime. No supported same-shaped mapping provider has been established for this host. Reject as current implementation plan; do not claim all hypothetical private Windows mechanisms impossible. |
+| Existing USER16 fallback/configuration | Source proves the needed local queries lack a callserver branch. No runtime toggle supplies it. Rebuilding/patching the guest is prohibited. Reject. |
+| Intercept USER memory reads in CCPU | Can in principle observe accesses without editing guest bytes, so the earlier blanket impossibility claim must be limited to existing WOW entrypoints. It would require field/range conversion, scalar/block/cross-page/raw-access coverage, coherent split reads, lifetime, recursion and allocation-failure contracts. This is a new memory-provider profile, not a small callback adapter; no complete reusable original USER provider was found in the inspected SAS path. Do not admit under the current zero-mirror-diff repair. |
+| WinEvent/polling refresh | Can accelerate observations, not guarantee synchronous direct-read visibility or HWND retention. Adds machinery without resolving the hard contract. Reject as correctness foundation. |
+| Boundary-updated copied view | Compatible with the existing guest ABI and page-domain ownership, with zero intended mirror/guest changes. Recommend only as an explicit bounded compatibility model, not as identical live shared memory. Requires owner decision on that semantic model before implementation. |
+
+The recommended model's declared differences must include direct-read
+existence, relationship, geometry/style and menu observations of external
+objects, not only window order. Freshness cannot be promised in milliseconds
+without an additional execution/notification mechanism. A guest loop making
+only local reads can remain on the same published external view until its
+next serviced boundary. Public enumeration is neither an atomic full graph
+nor a documented universal z-order producer; it must not be advertised as
+solving that problem by itself.
+
+Classification must use actual window/thread ownership and relation scope,
+not the current observed-versus-managed storage flag. A native control in our
+process can be observed; a mixed-process sibling list cannot be split into
+independent authoritative trees. Same-thread owned state at synchronous
+creation/mutation/callback boundaries is distinguishable from cross-thread
+or external mutation. A promise that every same-process property is always
+current would be too broad without all producer coverage.
+
+For any future snapshot design, structural consistency means no dangling
+guest addresses, valid representation/identity rules and terminating reader
+chains. It is not proof that all fields coexisted at one native instant.
+Safe copied-memory retention does not pin native objects. Actual operations
+must still go through native USER and accept its invalid-handle result;
+full HWND values help detect reuse but are not immortal identity tokens.
+Any merge/reconstruction policy, external observation failure policy and
+post-side-effect unsafe-state policy must be explicitly included in its
+implementation admission, not hidden behind the word snapshot.
+
+Research recommendation: reject the prior claim of a simple semantically
+equivalent callback-only repair. Choose the bounded observation model rather
+than broaden into private USER/server or CPU memory virtualization if the
+owner accepts its explicit differences. Preserve original guest readers,
+WOW conversion/scheduling and current backing lifetime mechanisms. No code
+is changed by this comparative report; the equivalence requirement has not
+been silently waived and S2 remains open.
+
+### Route E approved and implementation begun
+
+Owner now explicitly approves E's external observation semantics and directs
+grouped implementation/test/publication/commit/push. The complete group design
+is recorded in the existing T447 working plan under Approved E observation-view
+repair group; Current's files/ABI field admits it. This supersedes pending
+approval statements above, not retained failed evidence or the guest prohibition.
+
+First connected structural boundary validates exact target identities and
+acyclic next/parent/owner chains before guest allocation/commit. It does not
+require symmetric parent/child membership. A new private copied-view export
+reads the existing committed page-domain into caller-owned transaction scratch,
+including retained historical target identities, class names and numeric
+geometry/styles. It creates no persistent cache or native ownership. The
+export is selected in the worker generator and paired fixture assertions cover
+two-pass sizing, untouched insufficient output, values and error preservation.
+The local/external merge and menu/result consumers are not yet connected;
+this is not a functional E implementation or delivery. No incremental build
+is launched for these substeps; rebuild/test the completed group together.
+Existing r2 results apply to the preceding candidate, not these changed inputs.
+
+### E connected group: initial verification
+
+The earlier partial-implementation paragraph is superseded: window capture/
+merge, copied-view commit, menu-tree preparation and post-native result
+handling are now connected in the host candidate. No guest or original
+mirror source changed. Complete design and file/ABI disposition remain in
+the working plan's Approved E section.
+
+`observation-e-r1` (supervisor19780, start2026-10-15T16:11:47.3938708Z)
+completed with exit1. Both production builds and graph-snapshot passed.
+Window-borrow's executable returned success with zero assertion failures,
+but its PowerShell gate still expected the removed `stale_snapshot` marker.
+The new contract tests missing desktop/structural rejection instead of later
+native freshness; its emitted `missing_desktop` marker did not match that
+old gate. Preserve this failed run; it was a checker migration defect, not
+evidence of partial publication or a passing whole suite.
+
+`observation-e-r2` (supervisor1956, start2026-10-15T16:19:05Z) rebuilds the
+affected inputs with that gate corrected, plus independently asserted
+external-churn and consumed-message failure cases. Its graph-snapshot case
+passes:32 local position updates during a separate native process's window
+creation/destruction; real low-word handle reuse with retained old backing;
+and a child-process failure after exactly one PM_REMOVE consumption. The
+last case deliberately removes required publication context after the native
+operation and requires worker exit0xc0000420, not an ordinary returned false,
+task-only exit or message replay. The normal path verifies restoration and
+that the message is absent after return. These assertions exercise the
+selected real worker/provider boundary, not replacement storage stubs.
+
+The remainder of r2 and the separately owned, serial-dependent
+`observation-e-apps-r1` product suite are pending at this checkpoint. No
+publication or new P is claimed. Earlier ordinary styled-SOL failure and
+diagnostic paired passes remain unresolved evidence, not silently erased
+by these focused checks.
+
+### E grouped verification follow-up (not a delivery)
+
+r2 subsequently failed process-retirement's null-root error assertion: the
+provider consulted an inactive page domain before validating its input.
+Input validation now precedes that lookup. Its dependent apps-r1 correctly
+refused staging. r3 failed the new retained-observation PID/TID assertion:
+last reader release freed the identity record while WND remained published.
+The existing backing record now lives until withdrawal, then follows the
+same delayed-free owner. apps-r2 refused staging. r4 exposed a consequent
+allocation-balance failure: zero-reader retirement deferred reclamation until
+an unrelated class collection. Retirement now attempts eligible reclamation
+immediately, retaining failures without reversing logical withdrawal.
+apps-r3 refused staging. These failures are preserved under build/M0-T447/S2.
+
+r5 (supervisor32756, start2026-10-15T16:47:03.6784226Z) rebuilds and runs the
+whole boundary group with those changes and completed menu observation/
+retirement handling. Dependent apps-r4 (supervisor30384,
+start2026-10-15T16:47:20.5072627Z) only stages after boundary success. Results
+are pending here. The new CCPU menu fault test distinguishes logical update/
+retirement from failed physical reclamation and verifies retry releases all
+storage. An external-parent/local-child copied menu test verifies safe null
+edge withdrawal; existing local incoming-reference tests retain ERROR_BUSY.
+No guest or original mirror diff and no publication is claimed.
+
+### E boundary-group completion and second-role source review
+
+observation-e-r5 now terminates exit0: worker/WOW32 incremental production
+builds and all12 boundary cases pass. Reproduce with
+tests/observation/verify-wow-task-lifecycle.ps1, ProviderBuildRoot
+build/M0-T445/S6/provider, WorkerBuildRoot build/M0-T445/S6/r003, a fresh
+BuildRoot and each Case below. Production uses MSVC Win32/x86 /MT CCPU40;
+the selected generator/build logs and commands are retained in r5.
+
+| Case | Observed boundary evidence |
+| --- | --- |
+| graph-snapshot | Separate-process churn/local32 updates; captured external objects destroyed before commit; actual slot reuse; structural failure rollback; PM_REMOVE exactly once and explicit post-native fatal boundary. |
+| window-borrow | Native/control shared backing, nested/exception borrow, original class words and allocation balance. |
+| window-reclaim | Fault-injected physical window/menu free: consumed once, logical commit intact, retry and complete reclamation. |
+| process-retirement | Startup rollback, task/object/class refusal/retry, event and native release. |
+| dialog-lifecycle | Selected dialog callback ownership, nesting and cleanup. |
+| menu-resource | Original resource/menu producer, tree rollback, native tracking, system-menu observation and copied attachment retirement. |
+| thunk-scope | Selected retained callback thunk and scope cleanup. |
+| menu-cleanup | Original task/process cleanup ownership; borrowed observations not destroyed. |
+| native-send | Native result114 and original task ownership restoration. |
+| native-nested | Nested native-send restoration without duplicated dispatch. |
+| task-lifecycle | Standard-class admission/retry and native-direct lifecycle. |
+| native-creation |51 callbacks; nested/rejected/vetoed creation;7 destroyed; object table empty. |
+
+These cases are host/CCPU foundation evidence, not substitutes for real
+guest acceptance. apps-r4 has begun after r5 success; product publication
+remains gated on its results. Documentation governance and diff/mirror check
+pass in observation-e-docs-r2; r1's sandbox supervisor disappeared before
+starting the check and is explicitly recorded as a failed launch.
+
+Separate review pass checked the actual source diff: normal WND/dialog,
+hook, enum/discovery, tagged procedure and native-return callers converge
+on the existing graph boundary. The obsolete global freshness sampler is
+removed, not retained behind a mode switch. Captured view and menu batches
+prepare before non-fallible commit; identity responsibility remains distinct
+from native destruction ownership. Deferred frees use backing lifetime
+records rather than phantom reader references. Original algorithms, guest
+code, message transport and task scheduler are unchanged. New private worker
+exports require paired ntvdm/WOW32 deployment; no broker/public CLI ABI change.
+Additional mirror diff remains zero; unrelated assets/winnt.zip is excluded.
+
+### S2 P13 E delivery
+
+Baseline runtime is P12 (0581fe60ec31f2f21697dcdd873650ebe3ceecec), with
+subsequent design-only HEAD c685b1bc0. Complete group builds/verification:
+
+- observation-e-r5 starts16:47:03Z, ends16:59:15Z (about732s), supervisor32756,
+  exit0. Both production builds and all12 boundary cases pass. All compiler,
+  linker and case invocations are background-owned with individual deadlines.
+- observation-e-apps-r4 waits for that exact successful owner, then tests its
+  sealed59-file package; exit0 at17:03:17Z, about242s after boundary completion.
+  Real guest discovery and CBT both pass. SOL Off/Win16/All verifies deal,
+  stock/waste mutation and WM_CLOSE; WINMINE Off/Win16/All verifies flags/
+  counter, reset, open cell, WM_CLOSE and launcher completion. WRITE in all
+  three modes retains visible MSWRITE_MENU/MSWRITE_DOC/MSWRITE_PAGEINFO,
+  not proven editing. Console17 and Window17 each have17 expected=actual rows.
+- No production tracing variables are enabled in this application suite.
+  Its recorded sanitized child environment and physical O:/tmp stages match
+  the previous controlled acceptance conditions; user/global environment is
+  untouched. Existing intermittent failed SOL evidence is not erased or
+  assigned a new causal explanation merely because this candidate passes.
+- observation-e-publish-r1, supervisor29980 start17:04:03.7865598Z, exit0,
+  validates source/package hashes and individual runtime gates, backs up the
+  complete release set, publishes both assets/release and O:/winnt/system32,
+  and verifies13 SHA-256/PE identities. The unchanged57 package inputs comprise
+  11 host images and46 original guest/config companions. Recoverable backups
+  and verified-manifest.json are retained. Documentation/link/diff gates pass.
+
+Changed release identities:
+
+| Image | SHA-256 |
+| --- | --- |
+| ntvdm.exe |0A8D766FE358CFF42BF947C0993B8355B831D4772B30C0838D64CE8BAAC50B2D|
+| WOW32.DLL |C373342072F546DC716BD28EA0012D17666C7366AED60DD574067FCF8BDFB6EE|
+
+The full design is the working plan's Approved E section, adopted by the
+architecture/rules contract. No original mirror or guest change; only the
+private paired page-domain interface changes. Original USER16 readers and
+WOW conversions/scheduler are retained. External observations explicitly
+remain boundary-updated rather than original live shared-heap equivalents.
+This is the bounded E group delivery, not S2 or T447 closure. The unrelated
+assets/winnt.zip modification remains excluded and unchanged at SHA-256
+539A910247C5478BDE19FB2A431CD4C5AB26355CDC46F8160F49B23F060B495B.

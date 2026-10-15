@@ -834,13 +834,15 @@ BOOL WINAPI wow_user_native_call_end(wow_user_native_call *call)
     DWORD error;
     if (!binding) return TRUE;
     if (wow_user_runtime_current() != binding || !wow_user_runtime_enter(binding))
-        return FALSE;
+        wow_user_native_call_failed("restore-native-owner", GetLastError());
     if (!call->receiver_id) {
         call->binding = NULL;
         published = wow_user_window_refresh_graph(NULL) &&
             wow_menu_client_refresh_all(binding->thread->ppi);
         error = GetLastError();
-        if (!call->held && !wow_user_runtime_leave(binding)) return FALSE;
+        if (!published) wow_user_native_call_failed("publish-native-return", error);
+        if (!call->held && !wow_user_runtime_leave(binding))
+            wow_user_native_call_failed("release-native-owner", GetLastError());
         SetLastError(error);
         return published; /* Same task; preserve the caller's original lock state. */
     }
@@ -859,9 +861,27 @@ BOOL WINAPI wow_user_native_call_end(wow_user_native_call *call)
     published = wow_user_window_refresh_graph(NULL) &&
         wow_menu_client_refresh_all(sender->ppi);
     error = GetLastError();
-    if (!call->held && !wow_user_runtime_leave(binding)) return FALSE;
+    if (!published) wow_user_native_call_failed("publish-native-return", error);
+    if (!call->held && !wow_user_runtime_leave(binding))
+        wow_user_native_call_failed("release-native-owner", GetLastError());
     SetLastError(error);
     return published;
+}
+
+/* A native operation may already have consumed a MSG or mutated USER. It
+ * cannot be replayed, reported as an ordinary false result or followed by
+ * unsafe guest execution. Fail the worker, not merely the current WOW task.
+ * Use the product's existing fail-fast convention for broken ownership. */
+__declspec(noreturn) void WINAPI wow_user_native_call_failed(const char *stage, DWORD error)
+{
+    EXCEPTION_RECORD record = {0};
+    retirement_trace(stage, 0, error);
+    record.ExceptionCode = 0xc0000420u; /* STATUS_ASSERTION_FAILURE */
+    record.ExceptionFlags = EXCEPTION_NONCONTINUABLE;
+    record.NumberParameters = 1;
+    record.ExceptionInformation[0] = error;
+    RaiseFailFastException(&record, NULL, 0);
+    __assume(0);
 }
 
 /* ADAPTER-WOW-051: candidate target-aware native call edge. Same-thread

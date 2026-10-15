@@ -549,6 +549,8 @@ foreach ($entry in @(
     'mvdm_softpc_wow_page_domain_collect_observed_classes',
     'mvdm_softpc_wow_page_domain_publish_window_links',
     'mvdm_softpc_wow_page_domain_project_window_graph',
+    'mvdm_softpc_wow_page_domain_copy_window_view',
+    'mvdm_softpc_wow_page_domain_publish_menus',
     'mvdm_softpc_wow_page_domain_release_window',
     'mvdm_softpc_wow_page_domain_release_retained_window',
     'mvdm_softpc_wow_page_domain_read_window_words',

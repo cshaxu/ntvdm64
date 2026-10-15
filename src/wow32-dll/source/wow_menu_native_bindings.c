@@ -14,7 +14,8 @@ static wow_user_runtime_thread *menu_context(void)
     return binding;
 }
 
-static BOOL menu_publish(wow_user_runtime_thread *binding, HMENU menu, BOOL created)
+static BOOL menu_publish(wow_user_runtime_thread *binding, HMENU menu, BOOL created,
+    BOOL local_state)
 {
     BOOL entered = !binding->exclusive_held, result = FALSE;
     DWORD error;
@@ -28,7 +29,8 @@ static BOOL menu_publish(wow_user_runtime_thread *binding, HMENU menu, BOOL crea
         if (result && menu)
             result = created ? wow_menu_client_register_created(binding->thread->ppi,
                 binding->thread->ptdb->hTaskWow, menu) :
-                wow_menu_client_publish_tree(binding->thread->ppi, menu);
+                (local_state ? wow_menu_client_publish_local_tree(binding->thread->ppi, menu) :
+                    wow_menu_client_publish_tree(binding->thread->ppi, menu));
         if (result && !created)
             result = wow_menu_client_retire_destroyed(binding->thread->ppi);
     } __finally {
@@ -41,7 +43,7 @@ static BOOL menu_publish(wow_user_runtime_thread *binding, HMENU menu, BOOL crea
 
 static BOOL menu_refresh(wow_user_runtime_thread *binding, HMENU menu)
 {
-    return menu_publish(binding, menu, FALSE);
+    return menu_publish(binding, menu, FALSE, FALSE);
 }
 
 BOOL WINAPI wow_menu_native_refresh_menu(HMENU menu)
@@ -97,7 +99,7 @@ static HMENU menu_create(BOOL popup)
     menu = popup ? CreatePopupMenu() : CreateMenu();
     if (!menu) return NULL;
     error = GetLastError();
-    if (!menu_publish(binding, menu, TRUE)) {
+    if (!menu_publish(binding, menu, TRUE, TRUE)) {
         DWORD failure = GetLastError();
         DestroyMenu(menu);
         (void)menu_refresh(binding, NULL);
@@ -127,7 +129,12 @@ HMENU WINAPI wow_menu_native_GetSystemMenu(HWND window, BOOL revert)
         if (restored) SetLastError(error);
     }
     if (!restored) return NULL;
-    if (!menu_refresh(binding, result)) return NULL;
+    {
+        DWORD owner = 0;
+        GetWindowThreadProcessId(window, &owner);
+        if (!menu_publish(binding, result, FALSE, owner == GetCurrentProcessId()))
+            wow_user_native_call_failed("publish-system-menu", GetLastError());
+    }
     SetLastError(error);
     return result;
 }
@@ -195,6 +202,8 @@ type WINAPI wow_menu_native_##name args \
         if (restored) SetLastError(error); \
     } \
     if (!restored) return failed; \
+    if (IsMenu(menu) && !menu_refresh(binding, menu)) \
+        wow_user_native_call_failed("publish-menu-mutation", GetLastError()); \
     SetLastError(error); return result; \
 }
 MENU_MUTATION(BOOL, DestroyMenu, (HMENU menu), (menu), FALSE, NULL)
@@ -241,7 +250,7 @@ BOOL WINAPI wow_menu_native_refresh_window(HWND window)
         /* Commit the WND edge before collecting detached menus. Calling
          * menu_refresh here would collect while the old WND still refers
          * to the old menu. */
-        if (menu && !wow_menu_client_publish_tree(binding->thread->ppi, menu)) __leave;
+        if (menu && !wow_menu_client_publish_local_tree(binding->thread->ppi, menu)) __leave;
         result = mvdm_softpc_wow_page_domain_window_menu(
             (ULONG)(ULONG_PTR)full, (ULONG)(ULONG_PTR)menu);
         if (result) result = wow_menu_client_retire_destroyed(binding->thread->ppi);

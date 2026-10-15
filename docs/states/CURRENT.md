@@ -347,7 +347,7 @@ actual provider event/object ownership. This is not abnormal task termination.
 | Objective | Deliver original callback execution and dependency-complete W02 object/shared-view foundations: creation, first callbacks, updates, rollback and normal retirement. Retain the whole-T audit; S3 owns basic controls/menus, S4 full C01/C02 messaging, S5 task termination. No patch-by-patch discovery. |
 | Non-goals | No guest patches, global re-audit, second scheduler, broad USER-server import or assumed heap diagnosis; no silent absorption of other W owners. Original same-worker WOW SMS delivery is admitted for design evaluation only. |
 | Reference Baseline | f950ffd38 S1 source audit; accepted ca0abb7c4 thirteen-image release; T422 E91/E92/E93 and S3 checklist; T430 G03 handoff. |
-| Files And ABI Surface | Post-P12 review: shared-graph sampling failure versus callback delivery, then remaining HWND return producers. Graph audit records the proven control-flow risk and unproved application attribution. Review the complete failure contract before implementation; expected mirror/guest and public ABI diff remains zero. |
+| Files And ABI Surface | Owner-approved E observation-view group; full design and gates in the working plan. Owned WOW graph/callback/discovery/menu/return bindings, worker page-domain/header/exports and tests. Private copied view ABI only; rebuild worker/provider together. External data may be stale; own mutations remain synchronous. No guest edits; target zero mirror/public ABI diff. |
 | Applicable Rules | Execution, architecture, coding, documentation, source policy and WOW program gates; original x86 /MT CCPU40; background-only test/build runs. |
 | Verification | Source design and independent diff review; after code connection test actual CallBack16 ordering/rollback, ordinary and nonpresent/remapped resolution, nested callback and lease failure; then affected production gates, DOS17, independent WINMINE/SOL/WRITE and coherent thirteen-image publication. No discovery test loop. |
 | Expected Markers | Original resolver really owns the mapped result; no autonomous mode-dependent callback resolver remains; each acquired frame released on failure, no pre-entry state drift, no alias across CPU reentry; explicit outstanding message/lifetime results. |
@@ -386,13 +386,14 @@ lookup stays separate. Native desktop identity, retained observed/managed WW
 aliases and paired host/guest word updates pass the grouped foundation tests.
 P5 connects the prepared graph at the reviewed callback/native-return boundaries.
 
-S2 P12 builds on P11 (7c01a09be): owned HWND discovery/enumeration seams
-publish through the existing graph owner, preserving original thunks and
-callback ownership. Only WOW32.DLL changes; other12 images retain P11 identity.
-Real guest discovery,12 boundary groups, SOL/WINMINE three modes, WRITE
-frontier, CBT and Console17/Window17 have passing evidence. Earlier transient
-timeouts are retained, not explained away. Both publication locations match
-the sealed package. No new ABI, mirror or guest diff; S2 remains open.
+S2 P13 builds on P12 (0581fe60e): approved E external observation semantics,
+atomic window/menu publication and completed-native-result protection.
+Paired private worker/WOW ABI rebuilt; only ntvdm.exe/WOW32.DLL change.
+All12 boundary groups, real guest discovery/CBT, SOL/WINMINE three modes,
+WRITE frontier and Console17/Window17 pass. Both release locations match
+the sealed package; other11 host images and46 guest/config files unchanged.
+Earlier failures remain recorded in the graph audit. Zero additional mirror
+or guest diff; WRITE editing and remaining S2/T447 obligations stay open.
 T445/T446 release history remains in their linked closure records below.
 
 | Architecture | Images |

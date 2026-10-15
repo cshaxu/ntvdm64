@@ -13,6 +13,8 @@
  * publishes views, never assigns the observer as an object's owner. */
 BOOL WINAPI wow_menu_client_register_created(wow_task_order_process *, DWORD, HMENU);
 BOOL WINAPI wow_menu_client_publish_tree(wow_task_order_process *, HMENU);
+/* Known local attachment/system-menu state; still no creator ownership. */
+BOOL WINAPI wow_menu_client_publish_local_tree(wow_task_order_process *, HMENU);
 BOOL WINAPI wow_menu_client_retire_destroyed(wow_task_order_process *);
 /* Completed native call: refresh known live views and their window edges,
  * then release dead views. Caller holds the existing USER data lock. */

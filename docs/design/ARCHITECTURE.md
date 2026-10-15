@@ -1,5 +1,31 @@
 # System Architecture
 
+## WOW copied USER observation boundary — T447
+
+Owner-approved route E retains immutable USER16 readers and original WOW
+conversion/scheduling. Modern USER owns native objects; the existing worker
+page-domain owns their copied NT4-layout backing and reader lifetimes.
+WOW32 captures observations at serviced execution boundaries and commits
+structurally valid views with guest execution excluded. This is not native
+desktop-heap mapping or a claim of one atomic native-desktop snapshot.
+
+External existence, relationships, geometry/style and menu data may lag until
+a later boundary, without a millisecond freshness guarantee. Failure to
+refresh an external observation must not veto an unrelated local callback.
+Required worker creation, destruction, callback objects and native mutations
+remain synchronous; observed storage does not imply external process ownership.
+Full native identity does not pin HWND lifetime. Actual native operations
+continue to use native USER; old copied fields do not authorize native access.
+
+The page-domain is the sole retained view owner. Transaction scratch is not
+a second registry, and no periodic publisher, CPU read interception or new
+scheduler is admitted. Window and menu preparation must preserve old valid
+publication on failure. After an irreversible native operation, failure to
+restore execution ownership or publish required local state is a terminal
+worker adaptation failure, not a normal false result or a reason to replay
+the operation. See the [complete design](../etc/operations/t447-wow-execution-plan.md#approved-e-observation-view-repair-group);
+[Current](../states/CURRENT.md) owns implementation and delivery status.
+
 ## Base RPC client split — T445 S7
 
 The NTSRV-owned client has separately selected core and launch-style archives.
