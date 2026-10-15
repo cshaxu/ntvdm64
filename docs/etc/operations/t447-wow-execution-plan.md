@@ -11,7 +11,9 @@ the full WOW startup closure). This is a test-harness gap, not a runtime pass
 or proven runtime failure. Do not add production stubs to make it pass.
 The callback resolver group now removes the autonomous current-mode lease
 route and compiles successfully; see the boundary-design implementation
-update for its exact budget and remaining acceptance. No package is published.
+update for its exact budget and remaining acceptance. S2 P1 32876c415 now
+publishes the bounded menu/lifetime baseline; this does not close S2. The
+window-graph audit records WRITE's improved startup and remaining contracts.
 
 The owner accepts/closes T446 and admits the former queue head. Current
 owns the sole active S2 brief after S1 delivery f950ffd38. This plan inherits W01 from the

@@ -1638,3 +1638,51 @@ new original-host subset is OPENNT-HOST-069, unchanged GetFullUserHandle;
 original function-body edits and guest source/image edits are zero. Remaining
 graph/semantic gaps stay open. This is a usable incremental baseline, not
 SOL acceptance, WRITE editing/saving acceptance or full WOW recovery.
+
+### Post-P1 source review: shared-view integration must precede activation
+
+P1 is32876c415, pushed to origin/main; both release locations and the clean
+worktree were verified. This next review changes no runtime or guest image.
+
+Re-read canonical rtl/wow.c GetPrevPwnd, _GetWindow, _GetParent, _IsChild and
+_IsWindowVisible alongside the current page-domain producer. These original
+queries traverse copied links directly; they need not invoke a WOW32 thunk.
+_IsWindowVisible follows parents until FNID_DESKTOP, and does not accept a
+missing parent as a valid visible-window terminal. Therefore refreshing only
+the named host query APIs, or only at thunk entry, is insufficient. Do not
+replace these existing guest algorithms with host query wrappers. Publish
+their data at every applicable return-to-guest boundary instead.
+
+The concrete integration obligations are now:
+
+| Boundary | Current evidence | Required connected behavior |
+| --- | --- | --- |
+| Identity/root | create_desktop_root reserves synthetic handle00010001/index1; native sampler returns GetDesktopWindow's real identity; publish_handle rejects index1. | Resolve the existing root consistently in both graph edges and handle conversion; never publish native desktop as an ordinary observed node or invent a second root. Audit possible native low-word collision before selecting the binding. |
+| Projection versus cleanup | guest_windows contains shared backing; objects.entries is task cleanup ownership. Original cleanup dereferences TYPE_WINDOW pOwner. | Keep observed windows out of task cleanup. Full-handle conversion must consume the complete shared-view identity domain while strict WOWEXEC ownership lookup stays strict. |
+| Creation and promotion | observed publication occupies guest_windows[index]; managed publish_handle rejects any occupied slot. | Observed-to-managed transition must preserve the same live identity and outstanding words/borrows, replace the class association safely and reject a different generation. Merely calling observe before the existing creator would break creation. |
+| Callback and native return | Window, dialog, tagged CallWindowProc and hook paths enter task/borrow scopes; original CallBack16 ultimately calls host_simulate. | Review each guest-capable boundary, including non-window hooks and implicit native callbacks. Publish before the immutable guest can traverse relations, not only after a native operation completes. CPU mode restoration alone is not a USER graph boundary. |
+| Terminal unlink | createw.c unlinks from parent before WM_NCDESTROY; preserves owner during that message; clears owner/child and substitutes desktop parent only afterward. | Publish native intermediate links without normalizing them to a guessed symmetric tree; retain callback backing through nested destruction and pair final withdrawal/release. |
+| Observed class release | forget_observed_window collects unreferenced classes, but a retained WND borrow postpones eligibility; final release currently does not trigger collection. | Complete a paired final-class collection boundary before enabling discovery. Do not mistake process-exit reclamation for completed per-view retirement. |
+
+Exact original teardown references are kernel/createw.c lines1558--1569,
+1584--1592,1750--1764,1872 and2310--2338 at the pinned revision. They show
+why owner cannot be cleared at WM_DESTROY entry and why a borrowed retired
+WND can still need its class. Current producers reviewed are
+mvdm_softpc_wow_page_domain_publish_handle/retire_handle,
+observe_window/forget_observed_window/release_window_backing,
+wow_user_window_publish/retire and wow_user_borrow_enter/leave.
+
+The current native sample_graph fixture proves a call-local closure on an
+isolated desktop; the CCPU links fixture proves a manually supplied copied
+graph. Neither proves the missing producer-to-consumer wiring above. The
+unowned-view test likewise does not call observe_window; its prior pass must
+not be reused as automatic-discovery acceptance.
+
+Next build unit remains the complete shared-view group, not six independently
+published fixes. Add assertions for desktop mapping, observed-to-managed
+promotion, native handle reuse, callback-time relation reads, owner retained
+through WM_NCDESTROY, final-borrow class release and failure rollback, using
+the existing real CCPU fixture. Preserve P1 gameplay/DOS17/WRITE startup.
+No guest rebuild, new scheduler or copied replacement traversal algorithm is
+authorized by this review. Root mapping and guest-resume synchronization are
+not yet implementation-complete; do not activate the dormant helpers early.
