@@ -225,6 +225,10 @@ if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource
     !($fixtureOutput -match '^WOW_GRAPH_NATIVE_MUTATION_CCPU errors=0 child_id=1 reparent=1 deferred_geometry=1$')) {
     throw 'Native mutation return did not synchronize child ID, parent or deferred geometry'
 }
+if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource') -and
+    !($fixtureOutput -match '^WOW_GRAPH_MUTATION_GROUP_CCPU errors=0 class=1 scroll=1 bars=1 iconic=1 popups=1 invalid=1$')) {
+    throw 'Native mutation group failed numeric class, scrolling, frame or iconic publication'
+}
 if ($Case -eq 'window-reclaim' -and
     !($fixtureOutput -match '^WOW_DEFERRED_RECLAIM_CCPU errors=0 consumed_once=1 class_guard=1 retry=1 retained_owner=1 released=1$')) {
     throw 'Failed physical release lost its reclamation owner or consumed a reference twice'

@@ -25,6 +25,17 @@ HWND WINAPI wow_native_SetParent(HWND w, HWND parent);
 BOOL WINAPI wow_native_SetWindowPlacement(HWND w, const WINDOWPLACEMENT *placement);
 LONG WINAPI wow_native_SetWindowLongA(HWND w, int index, LONG value);
 BOOL WINAPI wow_native_EndDeferWindowPos(HDWP positions);
+UINT WINAPI wow_native_ArrangeIconicWindows(HWND w);
+BOOL WINAPI wow_native_CloseWindow(HWND w);
+BOOL WINAPI wow_native_OpenIcon(HWND w);
+BOOL WINAPI wow_native_ShowOwnedPopups(HWND w, BOOL show);
+BOOL WINAPI wow_native_ScrollWindow(HWND w, int dx, int dy, const RECT *area, const RECT *clip);
+int WINAPI wow_native_ScrollWindowEx(HWND w, int dx, int dy, const RECT *area, const RECT *clip, HRGN update, LPRECT bounds, UINT flags);
+BOOL WINAPI wow_native_ShowScrollBar(HWND w, int bar, BOOL show);
+BOOL WINAPI wow_native_SetScrollRange(HWND w, int bar, int minimum, int maximum, BOOL redraw);
+int WINAPI wow_native_SetScrollPos(HWND w, int bar, int position, BOOL redraw);
+BOOL WINAPI wow_native_EnableScrollBar(HWND w, UINT bar, UINT arrows);
+DWORD WINAPI wow_native_SetClassLongA(HWND w, int index, LONG value);
 int WINAPI wow_native_GetWindowTextA(HWND w, LPSTR text, int count);
 int WINAPI wow_native_GetWindowTextLengthA(HWND w);
 BOOL WINAPI wow_native_SetWindowTextA(HWND w, LPCSTR text);
@@ -61,6 +72,16 @@ LRESULT WINAPI wow_native_DispatchMessageA(const MSG *);
 #define SetParent wow_native_SetParent
 #define SetWindowPlacement wow_native_SetWindowPlacement
 #define EndDeferWindowPos wow_native_EndDeferWindowPos
+#define ArrangeIconicWindows wow_native_ArrangeIconicWindows
+#define CloseWindow wow_native_CloseWindow
+#define OpenIcon wow_native_OpenIcon
+#define ShowOwnedPopups wow_native_ShowOwnedPopups
+#define ScrollWindow wow_native_ScrollWindow
+#define ScrollWindowEx wow_native_ScrollWindowEx
+#define ShowScrollBar wow_native_ShowScrollBar
+#define SetScrollRange wow_native_SetScrollRange
+#define SetScrollPos wow_native_SetScrollPos
+#define EnableScrollBar wow_native_EnableScrollBar
 #define GetWindowTextA wow_native_GetWindowTextA
 #define GetWindowTextLengthA wow_native_GetWindowTextLengthA
 #define SetWindowTextA wow_native_SetWindowTextA

@@ -119,6 +119,137 @@ static INT_PTR CALLBACK dialog_cache_callback(HWND window, UINT message,
     return FALSE;
 }
 
+static ULONG verify_mutated_window(HWND window, ULONG delta)
+{
+    ULONG backing = mvdm_softpc_wow_page_domain_borrow_window((ULONG)(ULONG_PTR)window);
+    ULONG cls = 0;
+    WINDOWINFO info = {sizeof(info)};
+    BORROW_CHECK(backing && GetWindowInfo(window, &info));
+    if (backing) {
+        BORROW_CHECK(c_sas_dw_at(backing + 168u) == info.dwStyle);
+        BORROW_CHECK(c_sas_dw_at(backing + 164u) == info.dwExStyle);
+        BORROW_CHECK(c_sas_dw_at(backing + 40u) == (ULONG)info.rcWindow.left &&
+            c_sas_dw_at(backing + 44u) == (ULONG)info.rcWindow.top &&
+            c_sas_dw_at(backing + 48u) == (ULONG)info.rcWindow.right &&
+            c_sas_dw_at(backing + 52u) == (ULONG)info.rcWindow.bottom);
+        BORROW_CHECK(c_sas_dw_at(backing + 56u) == (ULONG)info.rcClient.left &&
+            c_sas_dw_at(backing + 60u) == (ULONG)info.rcClient.top &&
+            c_sas_dw_at(backing + 64u) == (ULONG)info.rcClient.right &&
+            c_sas_dw_at(backing + 68u) == (ULONG)info.rcClient.bottom);
+        cls = c_sas_dw_at(backing + 76u);
+        BORROW_CHECK(cls > delta);
+        if (cls > delta) {
+            BORROW_CHECK(c_sas_dw_at(cls - delta + 64u) == GetClassLongA(window, GCL_STYLE));
+            BORROW_CHECK(c_sas_dw_at(cls - delta + 76u) == GetClassLongA(window, GCL_CBWNDEXTRA));
+        }
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(backing));
+    }
+    return cls;
+}
+
+static void verify_native_mutation_group(ULONG delta)
+{
+    WNDCLASSA wc = {0};
+    HWND parent = NULL, child = NULL, peer = NULL, scrollbar = NULL, popup = NULL;
+    ULONG child_class, peer_class;
+    DWORD previous_style;
+    RECT before, after;
+    unsigned errors_before = borrow_errors;
+    wc.lpfnWndProc = DefWindowProcA;
+    wc.hInstance = GetModuleHandle(NULL);
+    wc.lpszClassName = "T447NumericClassMutation";
+    wc.cbWndExtra = 16;
+    BORROW_CHECK(RegisterClassA(&wc));
+    parent = CreateWindowA(wc.lpszClassName, "Mutation frame", WS_OVERLAPPEDWINDOW,
+        0, 0, 240, 180, NULL, NULL, wc.hInstance, NULL);
+    if (parent) {
+        child = CreateWindowA(wc.lpszClassName, "Child", WS_CHILD | WS_VISIBLE,
+            10, 12, 24, 26, parent, (HMENU)51, wc.hInstance, NULL);
+        peer = CreateWindowA(wc.lpszClassName, "Peer", WS_CHILD | WS_VISIBLE,
+            50, 12, 24, 26, parent, (HMENU)52, wc.hInstance, NULL);
+        scrollbar = CreateWindowA("SCROLLBAR", "", WS_CHILD | WS_VISIBLE,
+            10, 90, 120, 18, parent, (HMENU)53, wc.hInstance, NULL);
+        popup = CreateWindowA(wc.lpszClassName, "Owned popup", WS_POPUP | WS_VISIBLE,
+            260, 0, 80, 80, parent, NULL, wc.hInstance, NULL);
+    }
+    BORROW_CHECK(parent && child && peer && scrollbar && popup);
+    if (parent && child && peer && scrollbar && popup) {
+        (void)wow_native_ShowWindow(parent, SW_SHOWNOACTIVATE);
+        child_class = verify_mutated_window(child, delta);
+        peer_class = verify_mutated_window(peer, delta);
+        previous_style = GetClassLongA(child, GCL_STYLE);
+        BORROW_CHECK(wow_user_set_class_longA(child, GCL_STYLE,
+            previous_style ^ CS_DBLCLKS) == previous_style);
+        BORROW_CHECK(GetClassLongA(child, GCL_STYLE) == (previous_style ^ CS_DBLCLKS));
+        BORROW_CHECK(verify_mutated_window(child, delta) == child_class);
+        BORROW_CHECK(verify_mutated_window(peer, delta) == peer_class);
+
+        BORROW_CHECK(wow_native_ShowOwnedPopups(parent, FALSE));
+        BORROW_CHECK(!IsWindowVisible(popup));
+        (void)verify_mutated_window(popup, delta);
+        BORROW_CHECK(wow_native_ShowOwnedPopups(parent, TRUE));
+        BORROW_CHECK(IsWindowVisible(popup));
+        (void)verify_mutated_window(popup, delta);
+        BORROW_CHECK(wow_user_set_class_longA(child, GCL_STYLE, previous_style) ==
+            (previous_style ^ CS_DBLCLKS));
+        BORROW_CHECK(verify_mutated_window(peer, delta) == peer_class);
+
+        BORROW_CHECK(GetWindowRect(child, &before));
+        BORROW_CHECK(wow_native_ScrollWindow(parent, 3, 4, NULL, NULL));
+        BORROW_CHECK(GetWindowRect(child, &after));
+        BORROW_CHECK(after.left == before.left + 3 && after.top == before.top + 4);
+        (void)verify_mutated_window(child, delta);
+        before = after;
+        BORROW_CHECK(wow_native_ScrollWindowEx(parent, -2, 5, NULL, NULL, NULL,
+            NULL, SW_SCROLLCHILDREN | SW_INVALIDATE) != ERROR);
+        BORROW_CHECK(GetWindowRect(child, &after));
+        BORROW_CHECK(after.left == before.left - 2 && after.top == before.top + 5);
+        (void)verify_mutated_window(child, delta);
+
+        BORROW_CHECK(wow_native_ShowScrollBar(parent, SB_BOTH, TRUE));
+        BORROW_CHECK((GetWindowLongA(parent, GWL_STYLE) & (WS_HSCROLL | WS_VSCROLL)) ==
+            (WS_HSCROLL | WS_VSCROLL));
+        (void)verify_mutated_window(parent, delta);
+        BORROW_CHECK(wow_native_SetScrollRange(parent, SB_HORZ, 0, 100, FALSE));
+        (void)wow_native_SetScrollPos(parent, SB_HORZ, 7, FALSE);
+        BORROW_CHECK(GetScrollPos(parent, SB_HORZ) == 7);
+        BORROW_CHECK(wow_native_SetScrollRange(parent, SB_HORZ, 0, 0, FALSE));
+        BORROW_CHECK(!(GetWindowLongA(parent, GWL_STYLE) & WS_HSCROLL));
+        (void)verify_mutated_window(parent, delta);
+        BORROW_CHECK(wow_native_ShowScrollBar(parent, SB_BOTH, FALSE));
+        (void)verify_mutated_window(parent, delta);
+        BORROW_CHECK(wow_native_SetScrollRange(scrollbar, SB_CTL, 0, 50, FALSE));
+        (void)wow_native_SetScrollPos(scrollbar, SB_CTL, 8, FALSE);
+        BORROW_CHECK(GetScrollPos(scrollbar, SB_CTL) == 8);
+        BORROW_CHECK(wow_native_EnableScrollBar(scrollbar, SB_CTL, ESB_DISABLE_BOTH));
+        BORROW_CHECK(!IsWindowEnabled(scrollbar));
+        (void)verify_mutated_window(scrollbar, delta);
+        BORROW_CHECK(wow_native_EnableScrollBar(scrollbar, SB_CTL, ESB_ENABLE_BOTH));
+        BORROW_CHECK(IsWindowEnabled(scrollbar));
+        (void)verify_mutated_window(scrollbar, delta);
+        BORROW_CHECK(wow_native_CloseWindow(parent));
+        BORROW_CHECK(IsIconic(parent));
+        (void)verify_mutated_window(parent, delta);
+        (void)wow_native_ArrangeIconicWindows(GetDesktopWindow());
+        (void)verify_mutated_window(parent, delta);
+        BORROW_CHECK(wow_native_OpenIcon(parent));
+        BORROW_CHECK(!IsIconic(parent));
+        (void)verify_mutated_window(parent, delta);
+        BORROW_CHECK(wow_native_OpenIcon(parent)); /* Already restored. */
+        BORROW_CHECK(!wow_native_SetScrollRange(NULL, SB_HORZ, 0, 10, FALSE));
+        BORROW_CHECK(wow_native_ScrollWindowEx(NULL, 1, 1, NULL, NULL, NULL, NULL, 0) == ERROR);
+        BORROW_CHECK(verify_mutated_window(child, delta) == child_class);
+    }
+    if (popup) BORROW_CHECK(wow_native_DestroyWindow(popup));
+    if (scrollbar) BORROW_CHECK(wow_native_DestroyWindow(scrollbar));
+    if (peer) BORROW_CHECK(wow_native_DestroyWindow(peer));
+    if (child) BORROW_CHECK(wow_native_DestroyWindow(child));
+    if (parent) BORROW_CHECK(wow_native_DestroyWindow(parent));
+    BORROW_CHECK(UnregisterClassA(wc.lpszClassName, wc.hInstance));
+    fprintf(stderr, "WOW_GRAPH_MUTATION_GROUP_CCPU errors=%u class=1 scroll=1 bars=1 iconic=1 popups=1 invalid=1\n",
+        borrow_errors - errors_before);
+}
+
 static int verify_callback_borrow(ULONG teb)
 {
     static wow_user_object_table objects;
@@ -141,6 +272,7 @@ static int verify_callback_borrow(ULONG teb)
     if (!wow_user_runtime_bind(&runtime_binding, &runtime, &thread, NULL)) return 0;
     BORROW_CHECK(wow_user_window_refresh_graph(NULL));
     callback_teb = teb;
+    verify_native_mutation_group(c_sas_dw_at(teb + 0x60u));
     {
         HWND first = CreateWindowA("STATIC", "Mutation parent", WS_POPUP,
             10, 20, 80, 80, NULL, NULL, GetModuleHandle(NULL), NULL);

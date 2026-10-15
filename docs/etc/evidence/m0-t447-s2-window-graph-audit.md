@@ -2737,3 +2737,98 @@ the registered USER-server stopping boundary and require private desktop,
 window locks, drawing and positioning machinery. No such import, new window
 policy, mirror intrusion or guest change is proposed. New runtime edits and
 tests are not yet made; P5 remains the only published baseline.
+
+#### Group implementation admission
+
+The next group connects all ten audited public mutation/callout entries plus
+the already-native SetClassLongA branches through the existing task-return
+owner. Original guest thunks and their BOOL/void/region/previous-value conversion
+remain unchanged. Private WOW words and logical class-procedure mutation keep
+their existing owner, not the native public setter. The worker stages and
+revalidates numeric class style/window-extra with the existing window graph,
+then updates these two existing CLS fields only at the common commit. Retain
+the allocation, name, procedure, task, WOW words and retirement obligations.
+Original kernel/class.c InitClassOffsets/xxxSetClassData establish those
+numeric fields and clone-wide mutation; native USER still performs that policy.
+No additional mirror diff or guest modification is required.
+
+Acceptance must inspect actual CCPU WND/CLS fields after scrolling children,
+minimize/restore, arranging, bar show/range/position/enable changes and class
+style mutation across existing windows. Include unchanged/invalid operations,
+preserved class identity and cleanup. Then rerun the complete P5 group and
+application/DOS frontiers before publication. No new P is delivered yet.
+
+Completeness review of the selected wuwind/wuser/wuser31 mutation calls adds
+WU32ShowOwnedPopups: original showwin.c xxxShowOwnedWindows sends WM_SHOWWINDOW
+to the owned popup set; native default handling changes visibility. Native-only
+popup handling need not enter a WOW callback, so the original API return also
+needs the same whole-graph boundary. Verify an actual owned popup hidden and
+shown and its CCPU style after each operation. SetSysModalWindow's apparent
+entry is inside NEVER and returns zero; Begin/DeferWindowPos only prepare the
+batch whose End boundary is already connected. ScrollDC affects DC pixels,
+not child WND geometry. Redraw/UpdateWindow painting and capture/input callbacks
+remain distinct from this numeric window-mutation group; do not claim the
+entire message/input contract audited or closed.
+
+mutation-batch-r1 compiled successfully and all11 cases passed, including the
+new numeric mutation checks. Source completeness review found the popup entry
+before delivery; its waiting delivery supervisor33352 was stopped by exact
+owned command-line identity before staging. This earlier result is retained
+as partial evidence only. The popup-inclusive source requires a new frozen
+group run; neither version has replaced the published P5 package.
+
+### P6 verified mutation baseline
+
+The subsequent frozen mutation-batch-r2/run.ps1 (supervisor24460,
+build33088) passed the full x86 /MT CCPU40 worker/provider build in49.2s.
+The unchanged valid dependency caches remain build/M0-T445/S6/r003 and
+provider. All11 cases pass with suite.exit=0 and failures.json=[]:
+window-borrow, window-reclaim, graph-snapshot, process-retirement,
+dialog-lifecycle, menu-resource, thunk-scope, menu-cleanup, native-send,
+native-nested and task-lifecycle. Build plus group completed in619.5s.
+The strengthened runner requires the new mutation marker, including popups=1,
+for all four real-CCPU window cases, not merely the preceding P5 marker.
+
+The custom native-class fixture checks existing class identities and numeric
+fields across two windows, ScrollWindow/Ex child coordinates, scrollbar range/
+position/presence and disabled state, owned popup visibility, minimize/restore,
+arrangement snapshots and invalid/no-op calls against real native state and
+actual CCPU memory. Existing exceptional callback, retained-reader, failed
+preparation, retirement/retry and exact allocator tests remain enabled.
+This is boundary/CCPU fixture evidence, not a claim that every application
+has passed all original guest thunks or that native concurrent snapshots are
+equivalent to holding USER's private desktop lock.
+
+mutation-delivery-r2/prepare.ps1 (supervisor8396) then ran application observer
+4060 and checks26592. Candidate mutation-apps-r2/package was copied from the
+manifest-verified sealed P5 graph-apps-r2/package, replacing only the two
+freshly built host images. No installed-tree or modified ZIP staging input.
+Application observation completed in86.8s and gameplay/DOS checks in123.3s.
+
+- WINMINE Off/Win16/All each passes flag/counter, reset, open cell, WM_CLOSE
+  and launcher completion.
+- WRITE preserves visible MSWRITE_MENU, MSWRITE_DOC and MSWRITE_PAGEINFO;
+  editing and saving are still unverified.
+- SOL retains the previously observed Out of memory failure, not a functional
+  pass or proof of its cause.
+- Console17/17 and Window17/17 match expected guest output, including the
+  retained interactive/nested routes. None was accepted by exit code alone.
+
+Publication supervisor9504 / child19484 and publication/exit.txt report0.
+The full13 images are hash-verified in the sealed candidate, assets/release
+and O:/winnt/system32; coherent P5 backups and verified-manifest.json remain
+under mutation-delivery-r2/publication. Changed images:
+
+- ntvdm.exe:70B0AB1270DDA65CCFA6B981C9D8C1E602E68BC9C911E01772D6B2BC5506449F.
+- WOW32.DLL:A4CDE8418BC095B50DA341A14136AC0FDEDB4F66390DE67D0AC4F7F69F5AD4C4.
+
+The other11 runtime images and all40 other system32 package files match P5.
+WINSPOOL remains the original hash recorded above. No guest, configuration,
+mirror, private cross-component ABI or public CLI changes. The independent
+review retains original thunk conversions and native failure/previous-value
+results; public setters use the existing task-return owner, while logical
+procedures/private words keep their prior owner. Class field writes occur only
+after graph validation, use the existing allocation, and cannot overwrite its
+procedure, task, name or WOW words. No new object registry or native mutation
+algorithm is introduced. Governance/link/diff and final PE/hash checks gate
+the reviewed P6 commit/push. This is not S2 closure or full WOW32 recovery.

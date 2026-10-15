@@ -1281,6 +1281,7 @@ int mvdm_softpc_wow_page_domain_exchange_window_word(unsigned long backing,
  * retain their backing; fresh generations remain unpublished until commit. */
 typedef struct page_domain_window_update {
     ULONG backing, class_server;
+    ULONG class_style, window_extra;
     WINDOWINFO info;
     LONG control_id;
     int fresh;
@@ -1416,6 +1417,13 @@ static int page_domain_replace_window_links(ULONG count,
         if (update->fresh)
             page_domain_commit_window(LOWORD(links[i].window), update->backing, 1u, 0u);
         c_sas_storedw(update->backing + MVDM_SOFTPC_WND_CLASS, update->class_server);
+        /* Original SetClassData updates the existing CLS, including its
+         * clones. Refresh only these numeric public fields in the same
+         * commit; preserve class identity, logical procedure and WOW words. */
+        c_sas_storedw(update->class_server - domain.client_delta +
+            MVDM_SOFTPC_CLS_STYLE, update->class_style);
+        c_sas_storedw(update->class_server - domain.client_delta +
+            MVDM_SOFTPC_CLS_WINDOW_EXTRA, update->window_extra);
         page_domain_window_fields(update->backing, &update->info, update->control_id);
     }
     result = 1;
@@ -1698,6 +1706,8 @@ int mvdm_softpc_wow_page_domain_project_window_graph(ULONG count,
                 !descriptor->name_bytes || descriptor->name_bytes > sizeof(descriptor->name) ||
                 descriptor->name[descriptor->name_bytes - 1u]) goto done;
         update->info.cbSize = sizeof(update->info);
+        update->class_style = descriptor->class_style;
+        update->window_extra = descriptor->window_extra;
         if (!GetWindowInfo((HWND)(ULONG_PTR)window, &update->info) ||
                 update->info.atomWindowType != descriptor->atom) goto done;
         existing = window == domain.desktop_handle ?
@@ -1745,6 +1755,7 @@ int mvdm_softpc_wow_page_domain_project_window_graph(ULONG count,
     for (i = 0; i < count; ++i) {
         HWND window = (HWND)(ULONG_PTR)links[i].window;
         page_domain_window_update *update = &updates[i];
+        DWORD value;
         if (!GetWindowInfo(window, &update->info) ||
                 update->info.atomWindowType != descriptors[i].atom ||
                 (ULONG)(ULONG_PTR)GetWindow(window, GW_CHILD) != links[i].child)
@@ -1755,6 +1766,14 @@ int mvdm_softpc_wow_page_domain_project_window_graph(ULONG count,
                 (ULONG)(ULONG_PTR)GetAncestor(window, GA_PARENT) != links[i].parent ||
                 (ULONG)(ULONG_PTR)GetWindow(window, GW_OWNER) != links[i].owner)
             goto done;
+        SetLastError(ERROR_SUCCESS);
+        value = GetClassLongA(window, GCL_STYLE);
+        if (value != update->class_style ||
+                (!value && GetLastError() != ERROR_SUCCESS)) goto done;
+        SetLastError(ERROR_SUCCESS);
+        value = GetClassLongA(window, GCL_CBWNDEXTRA);
+        if (value != update->window_extra ||
+                (!value && GetLastError() != ERROR_SUCCESS)) goto done;
         if (update->info.dwStyle & WS_CHILD) {
             SetLastError(ERROR_SUCCESS);
             update->control_id = GetWindowLongA(window, GWL_ID);

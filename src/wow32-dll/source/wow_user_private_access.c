@@ -111,10 +111,10 @@ DWORD WINAPI wow_user_set_class_longA(HWND window, int index, LONG value)
             SetLastError(ERROR_INVALID_STATE); return 0;
         }
         SetLastError(error);
-        return SetClassLongA(window, index, value);
+        return wow_native_SetClassLongA(window, index, value);
     }
     if (index != GCL_WOWDWORD1 && index != GCL_WOWDWORD2)
-        return SetClassLongA(window, index, value);
+        return wow_native_SetClassLongA(window, index, value);
     words = wow_user_borrow_window_class(window);
     if (!words) return 0;
     /* Same deterministic previous-value boundary as the private WW setter. */

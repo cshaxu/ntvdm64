@@ -50,15 +50,16 @@ gaps and tests accept newly connected code, not select successive patches.
 Proven-composable original logic must replace its autonomous counterpart in
 the same repair, deleting that counterpart rather than deferring migration.
 Owner requires grouped implementation/testing and delivery before more wiring.
-S2 P4 is cef8ce2cb. P5 connects window snapshots at callback/native-return
-boundaries, including deferred positioning and native window-long changes;
-final callback release now drains retained WND and sampled CLS together.
-Eleven graph-batch-r5 cases and the delivery-r5 terminal fixture pass. Both
-DOS17 routes and WINMINE gameplay/exit in three modes pass; the tested13-image
-set is published and hash-verified at both locations. WRITE retains visible
-main/document/page-info windows, not verified editing/saving; SOL still reports
-Out of memory. Remaining mutation inventory and real same-slot reuse acceptance
-stay open; this is a grouped P baseline, not S2 closure. Preserve assets/winnt.zip.
+S2 P5 is 984ee0441. P6 extends its native-return boundary to ten audited
+mutation/callout APIs and native class setters; existing CLS style/extra fields
+now refresh in the whole-graph commit without replacing their identities.
+mutation-batch-r2 passes all11 cases, including actual CCPU popup, scrolling,
+iconic, frame and class updates. mutation-delivery-r2 passes both DOS17 routes
+and WINMINE gameplay/exit in three modes. The tested13-image set is published
+and hash-verified at both locations;40 package companions remain unchanged.
+WRITE retains visible main/document/page-info windows, not verified editing/
+saving; SOL still reports Out of memory. Additional mirror/guest diff is zero.
+Same-slot reuse and broader S2 closure stay open. Preserve assets/winnt.zip.
 
 ## Active Packet
 
