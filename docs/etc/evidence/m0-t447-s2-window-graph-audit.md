@@ -3816,3 +3816,56 @@ All57 other package files remain identical to P10: eleven product images plus
 28-page thin-client test passes against each newly built DLL. The publication
 does not replace unrelated assets/winnt.zip. This is a bounded S2 baseline,
 not S2/T447 closure, complete WOW recovery, or proof of WRITE editing/saving.
+
+## Post-P11 discovery-to-direct-reader audit
+
+Baseline7c01a09be is published. This pass performs source tracing only, not
+another application failure search. Re-reading the post-P8 callback review
+avoids repeating its rejected timer/enumeration scheduler proposal: ordinary
+enumeration inherits the initiating execution context. The corrected
+CallBack16 already uses the original protected resolver and no longer has
+the obsolete acquire_vp failure branch; do not repair that historical finding
+again. Native modal timer coverage remains path-dependent and unproved.
+
+A separate object-publication boundary is still absent in current source:
+
+| Native discovery producer | Selected path | Missing proof/edge |
+| --- | --- | --- |
+| EnumWindows, EnumChildWindows, EnumThreadWindows | Original wuwind.c thunks call native USER with original W32EnumWindowFunc. That callback truncates hwnd via GETHWND16 and calls original CallBack16. | No publication of the just-delivered native window before guest callback/direct reads. Inherited task ownership is not publication. |
+| FindWindow | Original WU32FindWindow retains its Progman compatibility and calls native FindWindow; registered_find_window separately returns raw FindWindowA. | Neither path projects a newly discovered HWND before returning it to USER16. Keep the original compatibility logic; repair a shared boundary rather than duplicate the search. |
+| Point/capture/focus/popup discovery | ChildWindowFromPoint and WindowFromPoint in wuwind.c; GetCapture, GetFocus, GetLastActivePopup in wuser.c | Same native HWND-to-GETHWND16 return pattern; classify together rather than patching FindWindow alone. |
+| Dialog navigation | GetNextDlgGroupItem/GetNextDlgTabItem in wudlg.c | Native internal children may have changed since a previous graph snapshot. Include discovery/direct-reader visibility in the same census. |
+| Already wrapped mutations | SetActiveWindow, SetParent, SetFocus and window-word setters | Existing native-call end refresh must be reviewed, not duplicated. A returned previous HWND needs explicit lifetime/return-value analysis. |
+
+Source facts: walias.h USER16/GETHWND16 is a numeric WORD truncation, not an
+enrollment call. wow_user_invoke_thunk establishes a borrow scope only;
+wow_user_borrow_enter does not refresh the graph, and leave explicitly avoids
+rescanning relationships. wow_user_window_refresh_graph is connected at WND,
+dialog, hook and wrapped native-return boundaries, but the discovery APIs
+above are absent from wow_user_private_access.h. Therefore an intervening
+native/external window creation can be discovered after the previous snapshot
+without a producer at its first guest-visible handle boundary. This establishes
+the missing connection, not a measured application failure or a claim that
+every discovery presently fails; existing snapshots can mask the omission.
+
+Original owners remain canonical OpenNT base/mvdm/wow32/wuwind.c
+(SHA256 AB270E2669CFD383DA4BAAC471BB63E7C9C603581F4F7592AD447E8A783953DC)
+and wutmr.c
+(E42BC0C7E9DC199AE19414461D65ECF86B7ACC55C6D7523792812D73F158BEF5).
+Production /Gz/STD_CALL selection preserves W32EnumWindowFunc's callback ABI;
+its absence of an explicit CALLBACK spelling is not an ABI defect.
+
+Next dependency-complete group: enumerate all native HWND discovery and
+callback returns, retain original search/enumeration/conversion algorithms,
+and connect the existing single graph publication owner before the handle
+becomes observable. No new window registry, low-word identity heuristic,
+guest GetClassName replacement, scheduler or blanket CallBack16 interception.
+Prefer owned native-call seams (expected new mirror diff zero), preserving
+callback stop/result/last-error behavior and exception unwind. Before code,
+resolve vanished-window/reuse races and publication failure disposition for
+each return shape; do not invent successful NULL results or replay callbacks.
+Acceptance must include native-created windows absent from the last snapshot,
+guest direct queries inside enumeration, nested creation/destruction, early
+stop, discovery failure and retirement. Existing CBT acceptance alone does
+not prove these routes. This audit changes no runtime or guest and does not
+claim the new group implemented.
