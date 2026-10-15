@@ -250,6 +250,10 @@ reuse process projections on retries/tasks and existing final retirement.
 P8 tests and publication pass; the graph audit records failure/retry, shared
 CLS and native-only fixture boundaries. No new class table or mirror/guest
 change. Application frontiers remain unchanged from P7.
+Next S2 acceptance group: independently authored Win16 Hook/creation probe
+through original registration, conversion and CallBack16, including nested
+creation, veto and recovery. No original guest rebuild; source contract is
+recorded in the message-boundary audit. Native slot reuse also remains open.
 
 The subsequent [window graph audit](../etc/evidence/m0-t447-s2-window-graph-audit.md)
 confirms missing next/parent/child/owner writes in shared WND publication and

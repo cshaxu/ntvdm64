@@ -2765,3 +2765,70 @@ one reviewed group. Keep original wumenu conversion/fallback and parser
 bodies, use the existing single object/page owner, and remove displaced
 adapter paths in the same connection. This finding adds no mirror/guest
 change and is not new application acceptance.
+
+## Post-P8 callback acceptance source review
+
+Baseline c44d33939 is delivered. No new production failure is inferred from
+the remaining checklist. Review first rejects two tempting extra changes:
+public SetClassLong already routes through wow_native_SetClassLongA and its
+return graph update writes CLS style/window-extra; absence of publication in
+the private getter is not proof that those native mutations are disconnected.
+Synchronous W32EnumWindowFunc is called by its original enumeration thunk on
+the initiating thread and inherits that execution context. It does not need
+another scheduler simply because it calls CallBack16 outside the WND wrapper.
+Private class WOW words/procedure direct-reader completeness and exceptional
+callback failure contracts still require their existing broader audit; the
+above observations do not certify them.
+
+W32TimerFunc likewise needs path-sensitive reasoning. Explicit guest
+DispatchMessage is selected through the target-aware native wrapper;
+dialog creation passes NULL to native_call_begin, retaining execution while
+dropping the data lock. TrackPopupMenu supplies its owner HWND. These facts
+do not prove all modal timer callbacks lack execution ownership, nor do they
+prove complete modal coverage. Do not add a timer wrapper on that assumption.
+Original wutmr.c still owns timer slots, killed-timer lookup and callback
+conversion; no replacement timer registry or mirror edit is proposed.
+
+The next concrete S2 gap is evidence at the real guest entrance. Existing
+hook fixtures use controlled original-call mocks and native creation fixtures
+use real CCPU storage, but neither executes a Win16-created WH_CBT hook through
+all original conversion and guest callback frames. An independently authored
+disposable NE probe is admitted by the existing S2 real-guest acceptance
+contract; it is not a replacement, rebuild or modification of USER/KERNEL.
+
+Source-shaped probe boundary:
+
+- user.def ordinals: InitApp5, CreateWindow41, DestroyWindow53,
+  GetClassName58, SetWindowsHookEx291, UnhookWindowsHookEx292,
+  CallNextHookEx293. kernel.def retains InitTask91, GetCurrentTask36,
+  MakeProcInstance51, FreeProcInstance52 and original file-output APIs.
+- wowusr.h SETWINDOWSHOOKEX16 stores f4 as HTASK16, f3 module, f2 far
+  callback and f1 hook kind. WU32SetWindowsHookEx resolves THREADID32(f4),
+  uses the original native stub/state table and returns MAKEHHOOK(index).
+  HHOOK16 is DWORD, not WORD. Use the current task, never a global hook.
+- Original ldaux.asm IMakeProcInstance emits mov ax,hInstance followed by
+  a far jump. A probe callback must establish its data segment from AX,
+  preserve callee state and obey the far Pascal callback stack contract;
+  no guessed native pointer or host callback may bypass this entrance.
+- Hook creation must query the new window from inside HCBT_CREATEWND,
+  then recursively create/destroy one second window. A separate case vetoes
+  creation and a final ordinary creation must still succeed. Chain unrelated
+  hook codes through original CallNextHookEx. Unhook/free the instance thunk
+  and destroy every accepted window before writing a completion record.
+- Preserve explicit guest phase/result counters and expected assertions in
+  the host runner. Check callback query data, nesting, veto, recovery, normal
+  launcher completion and package/guest identities. A missing report, forced
+  observer cleanup or only a visible window cannot pass. Use a fresh physical
+  stage under O:/tmp and build-owned output, not the older directory probe's
+  SUBST runner. No computer-use or original guest changes.
+
+This is acceptance of P7/P8's connected group, not a speculative runtime
+repair or an SOL diagnosis. If it fails, distinguish probe ABI correctness
+from product conversion/entry failure by source before changing production.
+Native same-slot handle reuse remains a separate open S2 acceptance item.
+Source hashes read this pass: wuhook.c
+A4F31EE8CC2258FB177471647066238F7BB406B2466DCA0249F4D6E6A98022B2;
+wutmr.c E42BC0C7E9DC199AE19414461D65ECF86B7ACC55C6D7523792812D73F158BEF5;
+kernel31/ldaux.asm
+AAE64AC7B0DB29F348E43D04B220FDCB0324A7EAF66AE9BE316D4974F2037360.
+No fresh application launch, runtime edit or new acceptance pass in this review.
