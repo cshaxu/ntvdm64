@@ -2317,6 +2317,52 @@ termination. The original WINSPOOL companion is unchanged. The unrelated
 assets/winnt.zip remains excluded, SHA-256
 539A910247C5478BDE19FB2A431CD4C5AB26355CDC46F8160F49B23F060B495B.
 
+### Post-P14 payload-publication source audit
+
+Input baseline d97e09a2a is clean and synchronized with origin/main. The
+preceding goal turn delivered a verified runtime group; this continuation
+selects work from source, not additional application runs. P14 does not prove
+message/hook payload completeness. No production change is admitted by this
+checkpoint and no additional guest/mirror diff is proposed yet.
+
+The selected original converters already exist and must remain the owners:
+
+| Entry/family | Original conversion and cleanup | Current publication boundary / finding |
+| --- | --- | --- |
+| Guest window procedure | wmdisp32.c W32Win16WndProc and aw32Msg dispatch; original thunk/unthunk retains temporary guest structures. | wow_window_words_binding.c publishes the receiver and its relationship graph before DispatchClientMessage; it does not name every HWND carried by the message. |
+| WH_CALLWNDPROC | wowhooks.c ThunkCallWndProcHook reuses aw32Msg, constructs CWPSTRUCT16, invokes RET_HOOKPROC and unthunks. | wow_hook_callback.c refreshes with NULL except CBT creation. CWPSTRUCT.hwnd and secondary message objects have no explicit root at this entrance. |
+| CBT | ThunkCbtHook handles MOVESIZE, MINMAX, CREATEWND, DESTROYWND, ACTIVATE and SETFOCUS with original conversion/copyback. | Only HCBT_CREATEWND explicitly enrolls and roots wp. SETFOCUS carries two HWNDs; ACTIVATE additionally carries hwndActive in CBTACTIVATESTRUCT. Numeric keyboard/system-command codes must not be treated as handles. |
+| Mouse and skipped mouse | Original PUTMOUSEHOOKSTRUCT16/GETMOUSEHOOKSTRUCT16 in wowhooks.h retain layout and copyback. | Structure HWND is not the generic hook wp; identify the structure through the original hook type/code, never by numeric code alone. |
+| Message filters / GETMESSAGE | ThunkMsgFilterHook retains its original recursive-message identity, malloc/free and MSG16 conversion. | MSG.hwnd and converted message payloads require the same lifetime review; do not replace this with a second message converter. |
+| Shell | ThunkShellHook converts wp only for WINDOWCREATED/WINDOWDESTROYED. | Terminal HWND may already be unlinked; desktop traversal alone is not a completeness proof. Do not resurrect a dead identity merely to satisfy publication. |
+| Native result and copied-back structures | wmsg16.c converts WM_MDICREATE, WM_MDIGETACTIVE, WM_NEXTMENU and WINDOWPOS return data. | P14's native-call returned_window field covers API setters, not these message-dependent results or structure members. Retain these in the same ingress/egress inventory. |
+| Owner-draw / control structures | wstruc.c putdrawitem16, putdeleteitem16 and putcompareitem16; wmdisp32.c WM32DeleteItem. | GETHWND16 is also used for hwndItem, whose interpretation depends on control type. A blanket macro interception cannot safely infer TYPE_WINDOW. |
+
+Concrete contract distinction: walias.h USER16/GETHWND16 is only a WORD
+conversion; it is not an original object-publishing algorithm to be repaired.
+GETHWNDIA16 also carries special insertion-order values. Replacing every
+GETHWND16 use with IsWindow/publication would misinterpret polymorphic values,
+introduce repeated graph transactions during one conversion and create new
+failure policy inside otherwise numeric macros. Reject that shortcut.
+
+Current graph refresh roots desktop, the supplied callback HWND and managed
+windows; it follows next/parent/owner/child links. This covers many ordinary
+payloads incidentally, but cannot establish that an unlinked, external or
+terminal payload has the required retained identity. This is a source-proved
+coverage gap, not a claim that each listed normal application message fails.
+Original structure allocation, alias conversion, thunk tables, callback
+dispatch and copyback remain selected and must not be duplicated.
+
+Before implementing the entire group, resolve the finite typed-root entrance
+and exit placement against every original converter, including special HWND
+values, menu-valued owner-draw fields, dead terminal objects, negative hook
+codes, callback mutation and message-specific HWND returns. Preserve one
+graph owner and the approved external observation boundary; no generic payload
+scanner, numeric-to-handle heuristic or global callback registry. Acceptance
+must exercise off-graph identities and numeric/menu negative cases, not only
+normal windows already reachable from desktop. This checkpoint does not
+assert a complete design or authorize a guest modification.
+
 ### Post-P13 returned-object production closure audit
 
 Baseline cf2ac9520 is pushed and published. This continuation is source
