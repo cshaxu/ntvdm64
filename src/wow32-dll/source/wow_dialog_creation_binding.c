@@ -1,16 +1,16 @@
 #include "wow_dialog_creation_binding.h"
 
 #include "wow_user_runtime.h"
+#include "wow_user_task_lifecycle.h"
+#include "wow_user_private_access.h"
 #include "wow_user_borrow_scope.h"
 #include "wow_window_words_binding.h"
+#include "wow_window_creation_binding.h"
+#include "wow_menu_native_bindings.h"
 #include "wow_task_order_bindings.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 #include "opennt-abi/host-compat/include/wow32_provider_private.h"
 
-typedef VOID (WINAPI *PFNW32ET)(VOID);
-#pragma warning(push)
-#pragma warning(disable:4201)
-#include "opennt-abi/source/public/internal/windows/inc/wowuserp.h"
-#pragma warning(pop)
 
 /* This is the original WOW32 input callback, retained in wcall32.c.  Its
  * private WW reads/writes are already redirected to the scoped binding by
@@ -120,7 +120,9 @@ static LRESULT CALLBACK dialog_create_hook(int code, WPARAM wp, LPARAM lp)
         }
     }
     __try {
-        result = CallNextHookEx(NULL, code, wp, lp);
+        result = enrolled ? CallNextHookEx(NULL, code, wp, lp) :
+            wow_window_creation_forward_internal(creation ? creation->thread : NULL,
+                code, wp, lp);
         accepted = result == 0;
     } __finally {
         /* A later CBT hook can veto or raise before native USER sends any
@@ -184,6 +186,9 @@ static INT_PTR CALLBACK dialog_proc(HWND window, UINT message, WPARAM wp,
     wow_user_borrow_scope scope;
     wow_task_callback_scope task_scope;
     BOOL entered = FALSE, borrowed = FALSE;
+    BOOL callback_published = FALSE;
+    ULONG saved_callback[2];
+    wow_window_words_binding *window_borrow = NULL;
 
     if (!creation || (!creation->initialized && message != WM_NCDESTROY)) {
         SetLastError(ERROR_INVALID_STATE);
@@ -197,6 +202,15 @@ static INT_PTR CALLBACK dialog_proc(HWND window, UINT message, WPARAM wp,
         if (!wow_user_borrow_enter(&scope)) __leave;
         borrowed = TRUE;
         if (creation->procedure) {
+            /* Original ssend LOCKPWND retains the current WND and saves the
+             * caller's CallbackWnd before entering WOW. A nested destroy can
+             * clear creation->borrow; retain an independent local reference. */
+            window_borrow = wow_window_words_acquire(window);
+            if (!window_borrow || !mvdm_softpc_wow_page_domain_callback_window(
+                    (ULONG)(ULONG_PTR)window, saved_callback)) __leave;
+            callback_published = TRUE;
+            if (!wow_menu_native_refresh_window(window) ||
+                    !wow_menu_native_refresh_message(message, wp, lp)) __leave;
             result = creation->procedure(window, message, wp,
                 message == WM_INITDIALOG ? creation->init_parameter : lp);
         }
@@ -215,6 +229,9 @@ static INT_PTR CALLBACK dialog_proc(HWND window, UINT message, WPARAM wp,
             wow_window_words_release(creation->borrow);
             creation->borrow = NULL;
         }
+        if (callback_published)
+            (void)mvdm_softpc_wow_page_domain_restore_callback(saved_callback);
+        wow_window_words_release(window_borrow);
         if (borrowed) (void)wow_user_borrow_leave(&scope);
         if (entered && !wow_task_callback_leave(&task_scope)) result = FALSE;
         release_creation(creation);
@@ -233,6 +250,8 @@ HWND WINAPI wow_user_server_create_dialog(HANDLE module,
     DWORD error = ERROR_SUCCESS;
     BOOL failed = FALSE;
     BOOL completed = FALSE;
+    wow_user_native_call call;
+    BOOL call_started = FALSE;
 
     if (!dialog_template || bytes == 0 || !binding || !binding->thread ||
             !binding->thread->ppi || !binding->thread->ppi->objects ||
@@ -263,6 +282,11 @@ HWND WINAPI wow_user_server_create_dialog(HANDLE module,
     current_creation = creation;
     previous = creation->previous;
     __try {
+        if (!wow_user_native_call_begin(&call, NULL)) {
+            error = GetLastError();
+            __leave;
+        }
+        call_started = TRUE;
         if (flags & SCDLG_ANSI) {
             result = CreateDialogIndirectParamA((HINSTANCE)module,
                 (LPCDLGTEMPLATEA)dialog_template, owner, dialog_proc,
@@ -288,6 +312,11 @@ HWND WINAPI wow_user_server_create_dialog(HANDLE module,
             UnhookWindowsHookEx(creation->return_hook);
         if (!completed || failed) discard_creation(creation);
         else release_creation(creation);
+        if (call_started && !wow_user_native_call_end(&call)) {
+            error = GetLastError();
+            if (result) (void)wow_native_DestroyWindow(result);
+            result = NULL;
+        }
     }
     SetLastError(error);
     return result;

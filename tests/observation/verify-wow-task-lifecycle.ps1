@@ -2,7 +2,7 @@ param(
     [Parameter(Mandatory=$true)][string]$ProviderBuildRoot,
     [Parameter(Mandatory=$true)][string]$WorkerBuildRoot,
     [string]$BuildRoot,
-    [ValidateSet('task-lifecycle','menu-cleanup','native-dispatch-gate','window-procedure','standard-class','class-query','dialog-lifecycle','init-notification','start-notification','style-policy','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','task-order','class-client','window-borrow','thunk-scope')] [string]$Case = 'task-lifecycle',
+    [ValidateSet('task-lifecycle','process-retirement','menu-cleanup','menu-resource','native-dispatch-gate','window-procedure','standard-class','class-query','dialog-lifecycle','init-notification','start-notification','style-policy','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','task-order','class-client','window-borrow','thunk-scope')] [string]$Case = 'task-lifecycle',
     [string]$StyleDll,
     [string]$Ninja = 'ninja.exe',
     [string]$VsDevCmd = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
@@ -16,6 +16,9 @@ $provider = (Resolve-Path -LiteralPath $ProviderBuildRoot).Path
 $worker = (Resolve-Path -LiteralPath $WorkerBuildRoot).Path
 if (!$BuildRoot) { $BuildRoot = Join-Path $repo ('build/M0-T422/S2/' + $Case) }
 $out = [IO.Path]::GetFullPath($BuildRoot)
+if (!$out.StartsWith(($repo + '\build\'), [StringComparison]::OrdinalIgnoreCase)) {
+    throw 'Lifecycle fixture output must be under repository build.'
+}
 New-Item -ItemType Directory -Path $out -Force | Out-Null
 function Invoke-Build([string]$command) {
     & cmd.exe /d /s /c ('call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cd /d "'+$provider+'" && '+$command) >> "$out\build.log" 2>&1
@@ -89,8 +92,9 @@ foreach ($library in $fixtureLibraries) {
 $commands = & $ninja -C $provider -t commands wow32.dll
 $compile = $commands | Where-Object { $_ -match 'wow_user_task_lifecycle\.c$' } | Select-Object -Last 1
 if (!$compile) { throw 'Missing production compile command' }
-Invoke-Build $compile
+Invoke-NinjaTarget $provider 'obj/wow32-dll/wow_user_task_lifecycle.obj'
 $fixtureName = if ($Case -eq 'class-client') { 'wow_class_client_fixture.c' } else { 'wow_user_task_lifecycle_fixture.c' }
+if ($Case -eq 'process-retirement') { $fixtureName = 'wow_process_retirement_fixture.c' }
 if ($Case -eq 'native-dispatch-gate') {
     Invoke-NinjaTarget $provider 'obj/wow32-dll/wow_window_words_binding.obj'
     $fixtureName = 'wow_native_dispatch_gate_fixture.c'
@@ -118,10 +122,11 @@ if ($Case -eq 'init-notification') {
 if ($Case -eq 'task-order') { $fixtureName = 'wow_task_order_fixture.c' }
 if ($Case -eq 'thunk-scope') { $fixtureName = 'wow_user_thunk_scope_fixture.c' }
 $fixturePath = Join-Path $repo ('tests/adapter-mvdm-host-out/wow/' + $fixtureName)
-if ($Case -eq 'window-borrow') { $fixturePath = Join-Path $repo 'tests/mvdm-host/wow_page_domain_fixture.c' }
+if ($Case -in @('window-borrow','menu-resource')) { $fixturePath = Join-Path $repo 'tests/mvdm-host/wow_page_domain_fixture.c' }
 $fixture = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\fixture.obj" "'+$fixturePath+'"')
 if ($fixture -eq $compile) { throw 'Fixture substitution failed' }
-if ($Case -eq 'window-borrow') { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE' }
+if ($Case -in @('window-borrow','menu-resource')) { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE' }
+if ($Case -eq 'menu-resource') { $fixture += ' /DWOW_RESOURCE_CLIENT_FIXTURE' }
 if ($Case -eq 'start-notification') { $fixture += ' /DWOW_START_NOTIFICATION_FIXTURE' }
 if ($Case -eq 'menu-cleanup') { $fixture += ' /DWOW_MENU_CLEANUP_FIXTURE' }
 if ($Case -eq 'task-order') { $fixture += ' /we4113 /we4047' }
@@ -136,7 +141,11 @@ if ($Case -eq 'native-nested') { $fixture += ' /DWOW_NATIVE_NESTED_FIXTURE' }
 if ($Case -eq 'native-seen') { $fixture += ' /DWOW_NATIVE_SEEN_FIXTURE' }
 if ($Case -eq 'native-identity') { $fixture += ' /DWOW_NATIVE_IDENTITY_FIXTURE' }
 if ($Case -eq 'native-foreign') { $fixture += ' /DWOW_NATIVE_FOREIGN_FIXTURE' }
-Invoke-Build ($fixture.Replace('/Gz', '/Gd'))
+# The thunk fixture supplies original LPFNW32 callbacks. With this profile's
+# FASTCALL definition they inherit /Gz, exactly like the production provider.
+# Compiling those callbacks as /Gd corrupts the stack at the first invocation.
+if ($Case -eq 'thunk-scope') { Invoke-Build ($fixture + ' /we4113 /we4047') }
+else { Invoke-Build ($fixture.Replace('/Gz', '/Gd')) }
 $staticImports = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\worker-static-imports.obj" "'+$repo+'\tests\adapter-mvdm-host-out\wow\wow_worker_static_imports.c"')
 if ($staticImports -eq $compile) { throw 'Static import substitution failed' }
 Invoke-Build ($staticImports.Replace('/Gz', '/Gd'))
@@ -146,7 +155,22 @@ $workerObjects += Join-Path $out 'worker-static-imports.obj'
 $workerObjects += Join-Path $provider 'obj/wow32-system-import-abi-aliases.obj'
 $workerObjects += Join-Path $provider 'obj/wow32-parent-import-abi-aliases.obj'
 $parentObjects = @()
-if ($Case -ne 'window-borrow') {
+if ($Case -eq 'menu-resource') {
+    # Controlled W32 resource inputs only in this separate executable. Ordinary
+    # window-borrow acceptance continues to link production resource callbacks.
+    $resourceFixture = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\resource-fixture.obj" "'+$repo+'\tests\adapter-mvdm-host-out\wow\wow_original_menu_resource_fixture.c"')
+    if ($resourceFixture -eq $compile) { throw 'Resource fixture substitution failed' }
+    Invoke-Build ($resourceFixture.Replace('/Gz', '/Gd') + ' /DWOW_RESOURCE_BOUND_FIXTURE')
+    $parentObjects += Join-Path $out 'resource-fixture.obj'
+    & (Join-Path $repo 'tests/observation/extract-wow-menu-fixture.ps1') -BuildRoot $out.Substring($repo.Length + 1) >> "$out\build.log" 2>&1
+    $thunkFixture = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\menu-thunk-fixture.obj" "'+$repo+'\tests\adapter-mvdm-host-out\wow\wow_original_menu_thunk_fixture.c"')
+    if ($thunkFixture -eq $compile) { throw 'Menu thunk fixture substitution failed' }
+    # Extracted original bodies call the production /Gz helpers (including
+    # MBToWCSEx). Keep that ABI; the fixture entry explicitly uses __cdecl.
+    Invoke-Build ($thunkFixture + ' /DWOW_MENU_THUNK_BOUND_FIXTURE /I"'+$out+'"')
+    $parentObjects += Join-Path $out 'menu-thunk-fixture.obj'
+}
+if ($Case -notin @('window-borrow','menu-resource')) {
 $parentStub = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\parent-stub.obj" "'+$repo+'\tests\adapter-mvdm-host-out\wow\wow_page_domain_parent_stub.c"')
 if ($parentStub -eq $compile) { throw 'Parent-stub substitution failed' }
 if ($Case -in @('class-client','class-query')) { $parentStub += ' /DWOW_CLASS_CLIENT_FIXTURE' }
@@ -179,6 +203,10 @@ $fixtureOutput = @(Get-Content "$out/stdout.txt"; Get-Content "$out/stderr.txt")
 $fixtureExitCode = $process.ExitCode
 $fixtureExitCode | Set-Content -LiteralPath "$out/fixture-exit.txt"
 $fixtureOutput | Write-Output
+if ($Case -eq 'process-retirement' -and
+    !($fixtureOutput -match '^WOW_PROCESS_RETIREMENT errors=0 ')) {
+    throw 'Production session/provider retirement did not prove release and refusal/retry'
+}
 if ($Case -eq 'native-dispatch-gate' -and
     (!($fixtureOutput -match '^WOW_NATIVE_DISPATCH_GATE errors=0 native=3 guest-entry=1$') -or
      !($fixtureOutput -match '^WOW_NATIVE_CALLPROC token=FFFF[0-9A-F]{4} calls=2 restored=1$'))) {
@@ -220,6 +248,65 @@ if ($Case -eq 'class-query' -and
     !($fixtureOutput -match '^WOW_CLASS_COMMIT errors=0 publications=3 rollback=1 original_task=1$')) {
     throw 'Class projection did not commit the completed original registration or roll back failure'
 }
+if ($Case -eq 'menu-resource' -and
+    (!($fixtureOutput -match '^WOW_ORIGINAL_MENU_RESOURCE errors=0 resource_cases=16 parser_cases=7 invalid_repeats=64$') -or
+     !($fixtureOutput -match '^WOW_OWNER_DRAW_RESOURCE errors=0$') -or
+     !($fixtureOutput -match '^WOW_ORIGINAL_MENU_THUNKS errors=0 cases=6 allocations=0$') -or
+     !($fixtureOutput -match '^WOW_NATIVE_MENU_ENTRY_CCPU result=1$'))) {
+    throw 'Bound original resource-client acceptance did not complete all resource/parser/ownerdraw cases'
+}
+if ($Case -eq 'window-borrow' -and
+    !($fixtureOutput -match '^WOW_RESOURCE_MENU_CCPU registered=1 nested=1 rollback=1$')) {
+    throw 'Original menu parser did not register and publish its tree or retire failed creation'
+}
+if ($Case -eq 'window-borrow' -and
+    !($fixtureOutput -match '^WOW_MENU_MESSAGE_CCPU borrowed=1 detached=1 terminal=1 invalid_passthrough=1$')) {
+    throw 'Message-carried menu publication lost detached views or changed invalid/terminal dispatch'
+}
+if ($Case -eq 'window-borrow' -and
+    !($fixtureOutput -match '^WOW_SYSTEM_MENU_CCPU borrowed=1 observer_preserved=1 revert_retired=1$')) {
+    throw 'System-menu observation invented creator ownership or failed native revert retirement'
+}
+if ($Case -eq 'window-borrow' -and
+    !($fixtureOutput -match '^WOW_MENU_TRACKING_CCPU cancelled=1 reentered=1 unlocked=1 mutation_published=1 detached_published=1$')) {
+    throw 'Cancelled native popup tracking lost callback mutation or inherited-lock restoration'
+}
+if ($Case -eq 'window-borrow' -and
+    !($fixtureOutput -match '^WOW_MENU_NATIVE_RETURN_CCPU default_close=1 dispatch_close=1 retired=1 lock_restored=1$')) {
+    throw 'Native default processing or dispatch returned with a stale destroyed-menu view'
+}
+if ($Case -eq 'window-borrow' -and
+    !($fixtureOutput -match '^WOW_MENU_CREATION_ROLLBACK_CCPU result=1 modes=2$')) {
+    throw 'Implicit failed creation did not retire menu views and restore both caller lock states'
+}
+if ($Case -eq 'window-borrow' -and
+    !($fixtureOutput -match '^WOW_ORIGINAL_MENU_ENTRY_CCPU create=1 popup=1 registered=1$')) {
+    throw 'Original WOW menu creation thunks bypassed task-associated publication'
+}
+if ($Case -eq 'window-borrow' -and
+    !($fixtureOutput -match '^WOW_MENU_OBSERVATION_CCPU unowned=1 cleanup_skips=1 native_survives=1 released=1$')) {
+    throw 'Menu observation acquired native destruction ownership or leaked its view'
+}
+if ($Case -eq 'window-borrow' -and
+    !($fixtureOutput -match '^WOW_NATIVE_CREATE_CCPU errors=0 forward=1 subclass=1 veto=1 retired=1 internal_combo=1 internal_dialog=1$')) {
+    throw 'Native-class enrollment lost forwarding, subclass chain, internal controls or creation rollback'
+}
+if ($Case -eq 'window-borrow' -and
+    !($fixtureOutput -match '^WOW_UNOWNED_VIEW_CCPU errors=0 foreign=1 class_guard=1 native_untouched=1 released=1$')) {
+    throw 'Unowned shared view changed native ownership or left a dangling class/allocation'
+}
+if ($Case -eq 'window-borrow' -and
+    !($fixtureOutput -match '^WOW_DIALOG_CACHE_CCPU errors=0 nested_destroy=1 released=1$')) {
+    throw 'Dialog provider did not preserve real CCPU callback backing across nested destruction'
+}
+if ($Case -eq 'window-borrow' -and
+    !($fixtureOutput -match '^WOW_WINDOW_LINKS_CCPU atomic=1 rebase=1 intermediate=1 retirement=1 reuse=1$')) {
+    throw 'Window relationship transport lost atomicity, identity or retirement protection'
+}
+if ($Case -eq 'window-borrow' -and
+    !($fixtureOutput -match '^WOW_WINDOW_VIEW_BORROWS_CCPU retained_class=1 release_orders=2 duplicate=1 words=1$')) {
+    throw 'Shared window borrow lost retained class/words or released storage prematurely'
+}
 if ($Case -eq 'window-borrow' -and
     !($fixtureOutput -match '^WOW_NATIVE_CLASS_CCPU errors=0 projected=9 native_pointers=0 released=1$')) {
     throw 'Native class shared projection leaked native identities, duplicated storage or failed release'
@@ -227,6 +314,10 @@ if ($Case -eq 'window-borrow' -and
 if ($Case -eq 'window-borrow' -and
     !($fixtureOutput -match '^WOW_CLASS_COMMIT_CCPU errors=0 cases=2 original_words=1 original_task=1 released=1$')) {
     throw 'Completed original class registration did not reach real CCPU memory and release it'
+}
+if ($Case -eq 'dialog-lifecycle' -and
+    !($fixtureOutput -match '^WOW_DIALOG_CALLBACK_CACHE errors=0 paired=1 exceptions=1$')) {
+    throw 'Dialog callback cache did not restore across nesting, failure and exception'
 }
 if ($Case -eq 'dialog-lifecycle' -and
     !($fixtureOutput -match '^WOW_CREATION_ROLLBACK cases=4 errors=0$')) {

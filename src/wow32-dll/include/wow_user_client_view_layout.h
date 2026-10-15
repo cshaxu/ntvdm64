@@ -65,6 +65,7 @@ WOW_VIEW_ASSERT(wow_view_menu, offsetof(WND, spmenu) == 104);
 WOW_VIEW_ASSERT(wow_view_fnid, offsetof(WND, fnid) == 122);
 WOW_VIEW_ASSERT(wow_view_exstyle, offsetof(WND, ExStyle) == 164);
 WOW_VIEW_ASSERT(wow_view_style, offsetof(WND, style) == 168);
+WOW_VIEW_ASSERT(wow_view_window_wow_words, offsetof(WND, adwWOW) == 144);
 WOW_VIEW_ASSERT(wow_view_desktop_window, offsetof(DESKTOPINFO, spwnd) == 8);
 #undef WOW_VIEW_ASSERT
 

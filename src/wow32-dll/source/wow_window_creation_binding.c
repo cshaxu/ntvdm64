@@ -1,12 +1,9 @@
 #include "wow_window_creation_binding.h"
 #include "wow_user_runtime.h"
+#include "wow_user_task_lifecycle.h"
+#include "wow_user_private_access.h"
 #include "wow_menu_resource_bindings.h"
 #include <stdio.h>
-typedef VOID (APIENTRY *PFNW32ET)(VOID);
-#pragma warning(push)
-#pragma warning(disable:4201)
-#include "opennt-abi/source/public/internal/windows/inc/wowuserp.h"
-#pragma warning(pop)
 
 /* ADAPTER-WOW-031: original createw.c binds class and WW before CBT/WNDPROC.
  * Public USER owns creation, message order and failure; a thread-local CBT
@@ -29,8 +26,126 @@ typedef struct creation_scope {
     wow_class_lookup_entry *menu_class;
     BOOL menu_checked;
     BOOL menu_attached;
+    WNDPROC previous_native;
 } creation_scope;
 static __declspec(thread) creation_scope *current_scope;
+
+static void rollback_enrollment(HWND window, wow_window_words_binding *borrow,
+    WNDPROC previous)
+{
+    DWORD error = GetLastError();
+    if (previous && GetWindowLongA(window, GWL_WNDPROC) == (LONG)wow_window_native_proc)
+        SetWindowLongA(window, GWL_WNDPROC, (LONG)previous);
+    (void)wow_window_words_detach_if(window, borrow);
+    SetLastError(error);
+}
+
+/* One WW/class/object ownership boundary for explicit and internal creation.
+ * The native class remains registered with USER. Its existing per-window
+ * procedure is retained below our entrance, including opaque CallProc values. */
+static BOOL enroll_created_window(HWND window, const CREATESTRUCTA *request,
+    const WW *input, wow_class_words_binding **class_words,
+    const wow_window_dispatch_target *selected, wow_task_order_thread *thread,
+    wow_window_words_binding **borrow, WNDPROC *previous)
+{
+    WW words = *input;
+    wow_window_dispatch_target target = {0};
+    BOOL native = wow_class_words_native_registration(*class_words);
+    DWORD error;
+    *borrow = NULL;
+    *previous = NULL;
+    if (selected) target = *selected;
+    if (native && (HIWORD(target.procedure) == WNDPROC_HANDLE ||
+            !(target.procedure & WNDPROC_WOW))) {
+        target.procedure = (DWORD)GetWindowLongA(window, GWL_WNDPROC);
+        if (!target.procedure) {
+            SetLastError(ERROR_INVALID_WINDOW_HANDLE); return FALSE;
+        }
+    }
+    words.dwStyle = request->style;
+    words.dwExStyle = request->dwExStyle;
+    words.hInstance = request->hInstance;
+    if (!wow_window_words_attach_target(window, &words, *class_words,
+            target.procedure ? &target : NULL)) return FALSE;
+    *class_words = NULL; /* Attachment owns this acquired reference. */
+    *borrow = wow_window_words_acquire(window);
+    if (!*borrow) {
+        error = GetLastError();
+        wow_window_words_detach(window);
+        SetLastError(error); return FALSE;
+    }
+    if (!wow_window_words_publish_owner(window, *borrow, thread)) goto failed;
+    if (native) {
+        SetLastError(ERROR_SUCCESS);
+        *previous = (WNDPROC)SetWindowLongA(window, GWL_WNDPROC,
+            (LONG)wow_window_native_proc);
+        if (!*previous) {
+            if (!GetLastError()) SetLastError(ERROR_INVALID_STATE);
+            goto failed;
+        }
+    }
+    return TRUE;
+failed:
+    error = GetLastError();
+    rollback_enrollment(window, *borrow, *previous);
+    wow_window_words_release(*borrow);
+    *borrow = NULL;
+    SetLastError(error);
+    return FALSE;
+}
+
+LRESULT WINAPI wow_window_creation_forward_internal(wow_task_order_thread *thread,
+    int code, WPARAM wp, LPARAM lp)
+{
+    wow_window_words_binding *existing = NULL, *parent = NULL, *borrow = NULL;
+    wow_class_words_binding *class_words = NULL;
+    WNDPROC previous = NULL;
+    wow_window_dispatch_target target = {0};
+    WW words = {0};
+    CREATESTRUCTA *request;
+    BOOL accepted = FALSE;
+    LRESULT result;
+    DWORD error = GetLastError();
+
+    if (code != HCBT_CREATEWND || !lp || !thread || !thread->ppi ||
+            !thread->ppi->classes) return CallNextHookEx(NULL, code, wp, lp);
+    request = ((CBT_CREATEWNDA *)lp)->lpcs;
+    if (!request || !request->hwndParent)
+        return CallNextHookEx(NULL, code, wp, lp);
+    /* Nested explicit scopes may already own this HWND. Never steal their
+     * metadata or retire it when a later hook rejects creation. */
+    existing = wow_window_words_acquire((HWND)wp);
+    if (!existing) parent = wow_window_words_acquire(request->hwndParent);
+    if (parent)
+        class_words = wow_class_words_acquire(thread->ppi->classes,
+            (ATOM)GetClassLongA((HWND)wp, GCW_ATOM), request->hInstance);
+    wow_window_words_release(existing);
+    wow_window_words_release(parent);
+    if (!class_words || !wow_class_words_native_registration(class_words)) {
+        wow_class_words_release(class_words);
+        SetLastError(error);
+        return CallNextHookEx(NULL, code, wp, lp);
+    }
+    (void)wow_class_words_target(class_words, &target);
+    if (!enroll_created_window((HWND)wp, request, &words, &class_words,
+            &target, thread, &borrow, &previous)) {
+        error = GetLastError();
+        wow_class_words_release(class_words);
+        SetLastError(error);
+        return 1;
+    }
+    SetLastError(error);
+    __try {
+        result = CallNextHookEx(NULL, code, wp, lp);
+        accepted = result == 0;
+    } __finally {
+        error = GetLastError();
+        if (!accepted) rollback_enrollment((HWND)wp, borrow, previous);
+        wow_window_words_release(borrow);
+        SetLastError(error);
+    }
+    return result;
+}
 
 BOOL WINAPI wow_window_creation_menu(HWND window, CREATESTRUCTA *creation)
 {
@@ -121,44 +236,28 @@ static LRESULT CALLBACK creation_hook(int code, WPARAM wp, LPARAM lp)
         if (cs->hInstance == scope->request->hInstance &&
                 (ATOM)GetClassLongA((HWND)wp, GCW_ATOM) == scope->atom &&
                 application_parameter(scope, cs) == scope->request->lpCreateParams) {
-            WW words = *scope->words;
             scope->claimed = TRUE;
-            words.dwStyle = cs->style;
-            words.dwExStyle = cs->dwExStyle;
-            words.hInstance = cs->hInstance;
             scope->menu_class = wow_class_words_entry(scope->class_words);
-            if (!wow_window_words_attach_target((HWND)wp, &words,
-                    scope->class_words, scope->target)) {
+            if (!enroll_created_window((HWND)wp, cs, scope->words,
+                    &scope->class_words, scope->target, scope->thread,
+                    &scope->borrow, &scope->previous_native)) {
                 scope->failure = GetLastError();
                 return 1;
             }
-            scope->class_words = NULL; /* Ownership moved to the window. */
             scope->window = (HWND)wp;
-            scope->borrow = wow_window_words_acquire(scope->window);
-            if (!scope->borrow) {
-                scope->failure = GetLastError();
-                wow_window_words_detach(scope->window);
-                return 1;
-            }
-            if (!wow_window_words_publish_owner(scope->window,scope->borrow,scope->thread)) {
-                scope->failure=GetLastError();
-                (void)wow_window_words_detach_if(scope->window, scope->borrow);
-                return 1;
-            }
             enrolled = TRUE;
         }
     }
     __try {
-        result = CallNextHookEx(NULL, code, wp, lp);
+        result = enrolled ? CallNextHookEx(NULL, code, wp, lp) :
+            wow_window_creation_forward_internal(scope ? scope->thread : NULL, code, wp, lp);
         accepted = result == 0;
     } __finally {
         /* USER may destroy a vetoed HWND without entering our WNDPROC.
          * Retire its publication while the native handle is still valid.
          * The creator's borrow remains alive until CreateWindow unwinds. */
         if (enrolled && !accepted) {
-            DWORD error = GetLastError();
-            (void)wow_window_words_detach_if(scope->window, scope->borrow);
-            SetLastError(error);
+            rollback_enrollment(scope->window, scope->borrow, scope->previous_native);
         }
     }
     return result;
@@ -169,6 +268,8 @@ static HWND create_bound(wow_task_order_thread *thread,
     const wow_window_dispatch_target *target, BOOL unicode)
 {
     creation_scope scope = {0};
+    wow_user_native_call call;
+    BOOL call_started = FALSE;
     HWND result = NULL;
     DWORD error = ERROR_SUCCESS;
     wow_class_lookup_context *context;
@@ -195,6 +296,13 @@ static HWND create_bound(wow_task_order_thread *thread,
     }
     current_scope = &scope;
     __try {
+        /* Creation can destroy a partially built window internally. Cover
+         * the complete native operation, not only explicit rollback calls. */
+        if (!wow_user_native_call_begin(&call, NULL)) {
+            error = GetLastError();
+            __leave;
+        }
+        call_started = TRUE;
         if (unicode)
             result = CreateWindowExW(request->dwExStyle, (LPCWSTR)request->lpszClass,
                 (LPCWSTR)request->lpszName, request->style, request->x, request->y,
@@ -216,6 +324,13 @@ static HWND create_bound(wow_task_order_thread *thread,
         UnhookWindowsHookEx(scope.hook);
         wow_window_words_release(scope.borrow);
         wow_class_words_release(scope.class_words);
+        /* Retire vetoed/failed enrollment before publishing the final native
+         * graph. Native USER has now finished any implicit destruction. */
+        if (call_started && !wow_user_native_call_end(&call)) {
+            error = GetLastError();
+            if (result) (void)wow_native_DestroyWindow(result);
+            result = NULL;
+        }
     }
     trace_creation(&scope, result, error);
     SetLastError(error);

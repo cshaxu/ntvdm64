@@ -1,7 +1,11 @@
 #include "wow_menu_resource_bindings.h"
 #include "wow_private_user_compat.h"
+#include "wow_menu_native_bindings.h"
+#include "wow_user_runtime.h"
 #include <stdio.h>
 #include <string.h>
+
+#define DestroyMenu wow_menu_native_DestroyMenu
 
 /* Controlled resource callbacks; real original USER client and native menu
  * construction. This is not a guest resource/CPU acceptance test. */
@@ -11,9 +15,20 @@ static BOOL string_name;
 static WORD resource[] = {0, 0, MF_END, 23, 'T', 'e', 's', 't', 0};
 static WORD owner_resource[] = {0, 0, MF_END | MF_OWNERDRAW, 23, 0x5678, 0x1234, 0};
 static BOOL owner_probe;
-#define CHECK(x) do { if (!(x)) { ++errors; printf("FAIL line=%d\n", __LINE__); } } while (0)
+#ifdef WOW_RESOURCE_BOUND_FIXTURE
+static BOOL callbacks_active;
+#define main wow_original_menu_resource_main
+#endif
+
+#if defined(WOW_RESOURCE_BOUND_FIXTURE) && !defined(WOW_RESOURCE_CALLBACKS_ONLY)
+int __cdecl wow_original_menu_resource_fixture(void);
+#endif
+#define CHECK(x) do { if (!(x)) { ++errors; fprintf(stderr, "FAIL line=%d\n", __LINE__); } } while (0)
 HANDLE APIENTRY W32FindResource(HANDLE mod, LPCSTR type, LPCSTR name, WORD lang)
 {
+#ifdef WOW_RESOURCE_BOUND_FIXTURE
+    if (!callbacks_active) RaiseException(0xe0420036, EXCEPTION_NONCONTINUABLE, 0, NULL);
+#endif
 #ifdef WOW_RESOURCE_CALLBACKS_ONLY
     RaiseException(0xe0420036, EXCEPTION_NONCONTINUABLE, 0, NULL);
 #endif
@@ -100,6 +115,10 @@ static void parser_cases(void)
 int __cdecl main(int argc, char **argv)
 {
     unsigned wide, named, failure;
+    if (!wow_user_runtime_current()) {
+        fprintf(stderr, "Resource menu fixture requires the bound CCPU harness\n");
+        return 1;
+    }
     if (argc == 2 && !strcmp(argv[1], "--owner-draw")) {
         MENUITEMINFOW item = {0};
         HMENU menu;
@@ -112,7 +131,7 @@ int __cdecl main(int argc, char **argv)
         item.fMask = MIIM_DATA | MIIM_FTYPE | MIIM_ID;
         if (menu) {
             CHECK(GetMenuItemInfoW(menu, 0, TRUE, &item));
-            printf("OWNER_DRAW expected=12345678 actual=%08lX type=%08X id=%u\n",
+            fprintf(stderr, "OWNER_DRAW expected=12345678 actual=%08lX type=%08X id=%u\n",
                 (DWORD)item.dwItemData, item.fType, item.wID);
             CHECK(item.dwItemData == 0x12345678 &&
                 (item.fType & MFT_OWNERDRAW) && item.wID == 23);
@@ -133,7 +152,7 @@ int __cdecl main(int argc, char **argv)
             CHECK(item.dwItemData == 0x12345678);
             CHECK(DestroyMenu(menu));
         }
-        printf("WOW_OWNER_DRAW_RESOURCE errors=%u\n", errors);
+        fprintf(stderr, "WOW_OWNER_DRAW_RESOURCE errors=%u\n", errors);
         return errors != 0;
     }
     for (wide = 0; wide != 2; ++wide) {
@@ -159,7 +178,28 @@ int __cdecl main(int argc, char **argv)
         }
     }
     parser_cases();
-    printf("WOW_ORIGINAL_MENU_RESOURCE errors=%u resource_cases=16 parser_cases=7 invalid_repeats=64\n", errors);
+    fprintf(stderr, "WOW_ORIGINAL_MENU_RESOURCE errors=%u resource_cases=16 parser_cases=7 invalid_repeats=64\n", errors);
     return errors != 0;
 }
+#ifdef WOW_RESOURCE_BOUND_FIXTURE
+#undef main
+int __cdecl wow_original_menu_resource_fixture(void)
+{
+    char *ordinary[] = {"resource-menu", NULL};
+    char *ownerdraw[] = {"resource-menu", "--owner-draw", NULL};
+    int result;
+    errors = step = fail_at = 0;
+    owner_probe = string_name = FALSE;
+    callbacks_active = TRUE;
+    __try {
+        result = wow_original_menu_resource_main(1, ordinary);
+        step = fail_at = 0;
+        string_name = FALSE;
+        if (wow_original_menu_resource_main(2, ownerdraw)) result = 1;
+    } __finally {
+        callbacks_active = FALSE;
+    }
+    return result;
+}
+#endif
 #endif

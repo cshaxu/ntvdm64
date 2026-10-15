@@ -25,4 +25,9 @@ HWND WINAPI wow_user_create_window_ex(DWORD, LPCTSTR, LPCTSTR, DWORD, int,
 /* Creation-only missing class-resource boundary, after CBT and before the
  * first guest WM_NCCREATE. Outside an enrolled creation this is a no-op. */
 BOOL WINAPI wow_window_creation_menu(HWND, CREATESTRUCTA *);
+/* Forward a scoped CBT notification, enrolling native internal controls whose
+ * class and parent already have metadata. Unknown classes remain outside the
+ * staged standard-class capability. Does not infer a complete window graph. */
+LRESULT WINAPI wow_window_creation_forward_internal(wow_task_order_thread *,
+    int, WPARAM, LPARAM);
 #endif

@@ -1,6 +1,21 @@
+#ifdef WOW_MENU_THUNK_BOUND_FIXTURE
+/* Namespace the extracted original bodies and their controlled inputs. Never
+ * override the provider's real guest-memory/resource functions at link time. */
+#define GetPModeVDMPointerAssert menu_fixture_GetPModeVDMPointerAssert
+#define GetExePtr16 menu_fixture_GetExePtr16
+#define malloc_w menu_fixture_malloc_w
+#define free_w menu_fixture_free_w
+#define pfnOut menu_fixture_pfnOut
+#define ConvertMenu16 menu_fixture_ConvertMenu16
+#define ConvertMenuItems16 menu_fixture_ConvertMenuItems16
+#define WU32LoadMenu menu_fixture_WU32LoadMenu
+#define WU32LoadMenuIndirect menu_fixture_WU32LoadMenuIndirect
+#define main wow_original_menu_thunk_fixture
+#endif
 #include "precomp.h"
 #include "wow_private_user_compat.h"
 #include "wow_menu_parser_bindings.h"
+#include "wow_user_runtime.h"
 
 /* Actual original thunks and conversion bodies; only guest address lookup,
  * allocation failure and final handle observation are controlled here. */
@@ -11,7 +26,7 @@ static DWORD guest_base = 0x12340020;
 static char guest_name[] = "MENU";
 static BOOL named;
 PFNWOWHANDLERSOUT pfnOut;
-#define CHECK(x) do { if (!(x)) { ++errors; printf("FAIL line=%d\n", __LINE__); } } while (0)
+#define CHECK(x) do { if (!(x)) { ++errors; fprintf(stderr, "FAIL line=%d\n", __LINE__); } } while (0)
 
 PVOID FASTCALL GetPModeVDMPointerAssert(DWORD address)
 {
@@ -88,9 +103,13 @@ static void run(BOOL indirect, BOOL fail)
 }
 int __cdecl main(void)
 {
+    if (!wow_user_runtime_current()) {
+        fprintf(stderr, "Menu thunk fixture requires the bound CCPU harness\n");
+        return 1;
+    }
     pfnOut.pfnServerLoadCreateMenu = observe_resource;
     run(FALSE,FALSE); run(TRUE,FALSE); run(FALSE,TRUE); run(TRUE,TRUE);
     named=TRUE; run(FALSE,FALSE); run(FALSE,TRUE);
-    printf("WOW_ORIGINAL_MENU_THUNKS errors=%u cases=6 allocations=%u\n",errors,allocations);
+    fprintf(stderr, "WOW_ORIGINAL_MENU_THUNKS errors=%u cases=6 allocations=%u\n",errors,allocations);
     return errors != 0;
 }

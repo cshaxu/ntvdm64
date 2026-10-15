@@ -29,4 +29,20 @@ BOOL WINAPI wow_user_window_publish(wow_user_object_table *, HWND,
 BOOL WINAPI wow_user_window_retire(wow_user_object_table *, HWND,
     struct wow_cleanup_window *, ULONG *retained_backing);
 HWND WINAPI wow_user_window_full_handle(wow_user_object_table *, WORD);
+/* Original message-conversion contract, including dead/non-window fallback.
+ * Not a replacement for the strict lookup above at ownership boundaries. */
+DWORD WINAPI wow_user_full_handle(wow_user_object_table *, WORD);
+/* Call-local public-USER relationship sample. No WW, task association or
+ * native ownership is created. Identities remain native until publication;
+ * the desktop must be translated by the existing guest-view owner. */
+typedef struct wow_user_window_links {
+    HWND window, next, parent, child, owner;
+} wow_user_window_links;
+BOOL WINAPI wow_user_window_sample_links(HWND, wow_user_window_links *);
+/* Complete reachable relation closure from explicit live roots. The returned
+ * array is call-local HeapAlloc storage, released by the caller with HeapFree.
+ * Failure never publishes a partial array. No native window is locked or
+ * owned; ERROR_RETRY reports an observed change, not an internal retry loop. */
+BOOL WINAPI wow_user_window_sample_graph(const HWND *, ULONG,
+    wow_user_window_links **, ULONG *);
 #endif

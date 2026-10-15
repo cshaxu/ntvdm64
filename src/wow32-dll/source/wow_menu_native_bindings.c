@@ -1,6 +1,7 @@
 #include "wow_menu_native_bindings.h"
 #include "wow_menu_client_bindings.h"
 #include "wow_user_runtime.h"
+#include "wow_user_task_lifecycle.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 
 static wow_user_runtime_thread *menu_context(void)
@@ -13,16 +14,23 @@ static wow_user_runtime_thread *menu_context(void)
     return binding;
 }
 
-static BOOL menu_refresh(wow_user_runtime_thread *binding, HMENU menu)
+static BOOL menu_publish(wow_user_runtime_thread *binding, HMENU menu, BOOL created)
 {
     BOOL entered = !binding->exclusive_held, result = FALSE;
     DWORD error;
     if (entered && !wow_user_runtime_enter(binding)) return FALSE;
     __try {
-        result = wow_menu_client_retire_destroyed(binding->thread->ppi);
+        result = TRUE;
+        /* A completed mutation must replace its parent ITEM edges before
+         * invalid native submenus can release their copied backing. */
+        if (created)
+            result = wow_menu_client_retire_destroyed(binding->thread->ppi);
         if (result && menu)
-            result = wow_menu_client_publish_tree(binding->thread->ppi,
-                binding->thread->ptdb->hTaskWow, menu);
+            result = created ? wow_menu_client_register_created(binding->thread->ppi,
+                binding->thread->ptdb->hTaskWow, menu) :
+                wow_menu_client_publish_tree(binding->thread->ppi, menu);
+        if (result && !created)
+            result = wow_menu_client_retire_destroyed(binding->thread->ppi);
     } __finally {
         error = GetLastError();
         if (entered) (void)wow_user_runtime_leave(binding);
@@ -31,10 +39,42 @@ static BOOL menu_refresh(wow_user_runtime_thread *binding, HMENU menu)
     return result;
 }
 
+static BOOL menu_refresh(wow_user_runtime_thread *binding, HMENU menu)
+{
+    return menu_publish(binding, menu, FALSE);
+}
+
 BOOL WINAPI wow_menu_native_refresh_menu(HMENU menu)
 {
     wow_user_runtime_thread *binding = menu_context();
     return binding && menu_refresh(binding, menu);
+}
+
+BOOL WINAPI wow_menu_native_refresh_message(UINT message, WPARAM wp, LPARAM lp)
+{
+    HMENU menu;
+    DWORD error = GetLastError();
+    /* Original wmdisp32.c converts these native menu identities to short
+     * guest handles. The menu need not be GetMenu(callback_window): popup
+     * tracking and system menus have their own roots. Observe, never claim
+     * allocation ownership. Preserve synthetic/terminal messages as well;
+     * validating their contents is not a new dispatch policy. */
+    switch (message) {
+    case WM_INITMENU:
+    case WM_INITMENUPOPUP:
+        menu = (HMENU)wp;
+        break;
+    case WM_MENUSELECT:
+    case WM_MENUCHAR:
+        menu = (HMENU)lp;
+        break;
+    default:
+        return TRUE;
+    }
+    if (menu && IsMenu(menu) && !wow_menu_native_refresh_menu(menu))
+        return FALSE;
+    SetLastError(error);
+    return TRUE;
 }
 
 static HMENU menu_resolve(wow_user_runtime_thread *binding, HMENU menu)
@@ -57,7 +97,7 @@ static HMENU menu_create(BOOL popup)
     menu = popup ? CreatePopupMenu() : CreateMenu();
     if (!menu) return NULL;
     error = GetLastError();
-    if (!menu_refresh(binding, menu)) {
+    if (!menu_publish(binding, menu, TRUE)) {
         DWORD failure = GetLastError();
         DestroyMenu(menu);
         (void)menu_refresh(binding, NULL);
@@ -74,12 +114,62 @@ HMENU WINAPI wow_menu_native_CreatePopupMenu(void) { return menu_create(TRUE); }
 HMENU WINAPI wow_menu_native_GetSystemMenu(HWND window, BOOL revert)
 {
     wow_user_runtime_thread *binding = menu_context();
-    HMENU result;
+    wow_user_native_call call;
+    HMENU result = NULL;
+    BOOL restored;
     DWORD error;
     if (!binding) return NULL;
-    result = GetSystemMenu(window, revert);
-    error = GetLastError();
+    if (!wow_user_native_call_begin(&call, window)) return NULL;
+    __try { result = GetSystemMenu(window, revert); }
+    __finally {
+        error = GetLastError();
+        restored = wow_user_native_call_end(&call);
+        if (restored) SetLastError(error);
+    }
+    if (!restored) return NULL;
     if (!menu_refresh(binding, result)) return NULL;
+    SetLastError(error);
+    return result;
+}
+
+BOOL WINAPI wow_menu_native_TrackPopupMenu(HMENU menu, UINT flags,
+    int x, int y, int reserved, HWND window, const RECT *exclude)
+{
+    wow_user_runtime_thread *binding = menu_context();
+    wow_user_native_call call;
+    BOOL result = FALSE, restored;
+    DWORD error;
+    if (!binding || !(menu = menu_resolve(binding, menu)) ||
+            !menu_refresh(binding, menu)) return FALSE;
+    if (!wow_user_native_call_begin(&call, window)) return FALSE;
+    __try { result = TrackPopupMenu(menu, flags, x, y, reserved, window, exclude); }
+    __finally {
+        error = GetLastError();
+        restored = wow_user_native_call_end(&call);
+        if (restored) SetLastError(error);
+    }
+    if (!restored) return FALSE;
+    /* The common return boundary publishes all callback mutations, even on
+     * cancellation or destruction of the tracked menu/owner window. */
+    SetLastError(error);
+    return result;
+}
+
+BOOL WINAPI wow_menu_native_DrawMenuBar(HWND window)
+{
+    wow_user_runtime_thread *binding = menu_context();
+    wow_user_native_call call;
+    BOOL result = FALSE, restored;
+    DWORD error;
+    if (!binding) return FALSE;
+    if (!wow_user_native_call_begin(&call, window)) return FALSE;
+    __try { result = DrawMenuBar(window); }
+    __finally {
+        error = GetLastError();
+        restored = wow_user_native_call_end(&call);
+        if (restored) SetLastError(error);
+    }
+    if (!restored) return FALSE;
     SetLastError(error);
     return result;
 }
@@ -90,47 +180,46 @@ HMENU WINAPI wow_menu_native_GetSystemMenu(HWND window, BOOL revert)
  * owner-drawn item. Release an inherited USER data lock around native calls;
  * retaining WOW execution ownership is independent of that data lock.
  * Publication itself invokes no guest callback. */
-#define MENU_MUTATION(type, name, args, call, failed, view) \
+#define MENU_MUTATION(type, name, args, native_args, failed, target) \
 type WINAPI wow_menu_native_##name args \
 { \
     wow_user_runtime_thread *binding = menu_context(); \
-    type result = failed; DWORD error; BOOL held, restored = TRUE; \
+    wow_user_native_call call; \
+    type result = failed; DWORD error; BOOL restored; \
     if (!binding || !(menu = menu_resolve(binding, menu))) return failed; \
-    held = binding->exclusive_held; \
-    if (held && !wow_user_runtime_leave(binding)) return failed; \
-    __try { result = name call; } \
+    if (!wow_user_native_call_begin(&call, target)) return failed; \
+    __try { result = name native_args; } \
     __finally { \
         error = GetLastError(); \
-        if (held) restored = wow_user_runtime_enter(binding); \
+        restored = wow_user_native_call_end(&call); \
         if (restored) SetLastError(error); \
     } \
     if (!restored) return failed; \
-    if (result != failed && !menu_refresh(binding, view)) return failed; \
     SetLastError(error); return result; \
 }
 MENU_MUTATION(BOOL, DestroyMenu, (HMENU menu), (menu), FALSE, NULL)
 MENU_MUTATION(BOOL, AppendMenuA, (HMENU menu, UINT flags, UINT_PTR id, LPCSTR text),
-    (menu, flags, id, text), FALSE, menu)
+    (menu, flags, id, text), FALSE, NULL)
 MENU_MUTATION(BOOL, InsertMenuA, (HMENU menu, UINT item, UINT flags, UINT_PTR id, LPCSTR text),
-    (menu, item, flags, id, text), FALSE, menu)
+    (menu, item, flags, id, text), FALSE, NULL)
 MENU_MUTATION(BOOL, ModifyMenuA, (HMENU menu, UINT item, UINT flags, UINT_PTR id, LPCSTR text),
-    (menu, item, flags, id, text), FALSE, menu)
+    (menu, item, flags, id, text), FALSE, NULL)
 MENU_MUTATION(BOOL, ChangeMenuA, (HMENU menu, UINT item, LPCSTR text, UINT id, UINT flags),
-    (menu, item, text, id, flags), FALSE, menu)
+    (menu, item, text, id, flags), FALSE, NULL)
 MENU_MUTATION(BOOL, InsertMenuItemW, (HMENU menu, UINT item, BOOL position, LPCMENUITEMINFOW info),
-    (menu, item, position, info), FALSE, menu)
+    (menu, item, position, info), FALSE, NULL)
 MENU_MUTATION(BOOL, DeleteMenu, (HMENU menu, UINT item, UINT flags),
-    (menu, item, flags), FALSE, menu)
+    (menu, item, flags), FALSE, NULL)
 MENU_MUTATION(BOOL, RemoveMenu, (HMENU menu, UINT item, UINT flags),
-    (menu, item, flags), FALSE, menu)
+    (menu, item, flags), FALSE, NULL)
 MENU_MUTATION(DWORD, CheckMenuItem, (HMENU menu, UINT item, UINT flags),
-    (menu, item, flags), (DWORD)-1, menu)
+    (menu, item, flags), (DWORD)-1, NULL)
 MENU_MUTATION(BOOL, EnableMenuItem, (HMENU menu, UINT item, UINT flags),
-    (menu, item, flags), (BOOL)-1, menu)
+    (menu, item, flags), (BOOL)-1, NULL)
 MENU_MUTATION(BOOL, HiliteMenuItem, (HWND window, HMENU menu, UINT item, UINT flags),
-    (window, menu, item, flags), FALSE, menu)
+    (window, menu, item, flags), FALSE, window)
 MENU_MUTATION(BOOL, SetMenuItemBitmaps, (HMENU menu, UINT item, UINT flags, HBITMAP off, HBITMAP on),
-    (menu, item, flags, off, on), FALSE, menu)
+    (menu, item, flags, off, on), FALSE, NULL)
 #undef MENU_MUTATION
 
 BOOL WINAPI wow_menu_native_refresh_window(HWND window)
@@ -149,9 +238,13 @@ BOOL WINAPI wow_menu_native_refresh_window(HWND window)
         if (!full || !GetWindowInfo(window, &info)) __leave;
         if (info.dwStyle & WS_CHILD) { result = TRUE; __leave; }
         menu = GetMenu(window);
-        if (!menu_refresh(binding, menu)) __leave;
+        /* Commit the WND edge before collecting detached menus. Calling
+         * menu_refresh here would collect while the old WND still refers
+         * to the old menu. */
+        if (menu && !wow_menu_client_publish_tree(binding->thread->ppi, menu)) __leave;
         result = mvdm_softpc_wow_page_domain_window_menu(
             (ULONG)(ULONG_PTR)full, (ULONG)(ULONG_PTR)menu);
+        if (result) result = wow_menu_client_retire_destroyed(binding->thread->ppi);
     } __finally {
         error = GetLastError();
         if (entered) (void)wow_user_runtime_leave(binding);
@@ -163,7 +256,8 @@ BOOL WINAPI wow_menu_native_refresh_window(HWND window)
 BOOL WINAPI wow_menu_native_SetMenu(HWND window, HMENU menu)
 {
     wow_user_runtime_thread *binding = menu_context();
-    BOOL result = FALSE, held, restored = TRUE;
+    wow_user_native_call call;
+    BOOL result = FALSE, restored;
     DWORD error;
     if (!binding || (menu && !(menu = menu_resolve(binding, menu)))) return FALSE;
     /* Original mnapi.c::xxxSetMenu associates the menu before
@@ -171,17 +265,15 @@ BOOL WINAPI wow_menu_native_SetMenu(HWND window, HMENU menu)
      * recalculating its frame. Follow the existing USER callout contract:
      * release only an inherited data lock, never WOW task ownership, and
      * restore it even when the native call unwinds. */
-    held = binding->exclusive_held;
-    if (held && !wow_user_runtime_leave(binding)) return FALSE;
+    if (!wow_user_native_call_begin(&call, window)) return FALSE;
     __try {
         result = SetMenu(window, menu);
     } __finally {
         error = GetLastError();
-        if (held) restored = wow_user_runtime_enter(binding);
+        restored = wow_user_native_call_end(&call);
         if (restored) SetLastError(error);
     }
     if (!restored) return FALSE;
-    if (result && !wow_menu_native_refresh_window(window)) return FALSE;
     SetLastError(error);
     return result;
 }

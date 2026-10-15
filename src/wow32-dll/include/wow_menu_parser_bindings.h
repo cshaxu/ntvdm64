@@ -9,6 +9,9 @@ HMENU WINAPI CreateMenuFromResource(LPBYTE, BOOL);
 HMENU WINAPI wow_user_load_menu_indirect(const MENUTEMPLATEW *);
 
 #ifdef WOW_ORIGINAL_MENU_CLIENT
+/* The retained parser's allocation, insertion and failure destruction must
+ * use the same task-associated native boundary as the WOW menu thunks. */
+#include "wow_menu_native_bindings.h"
 /* Exact private declarations from OpenNT public/internal/windows/inc/winuserp.h
  * and ntuser/client/usercli.h. Native menu objects remain USER32-owned. */
 #define MF_CHANGE_VALID (MF_INSERT | MF_CHANGE | MF_APPEND | MF_DELETE | \

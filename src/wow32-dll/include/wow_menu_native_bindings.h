@@ -18,8 +18,11 @@ BOOL WINAPI wow_menu_native_EnableMenuItem(HMENU, UINT, UINT);
 BOOL WINAPI wow_menu_native_HiliteMenuItem(HWND, HMENU, UINT, UINT);
 BOOL WINAPI wow_menu_native_SetMenuItemBitmaps(HMENU, UINT, UINT, HBITMAP, HBITMAP);
 BOOL WINAPI wow_menu_native_SetMenu(HWND, HMENU);
+BOOL WINAPI wow_menu_native_DrawMenuBar(HWND);
+BOOL WINAPI wow_menu_native_TrackPopupMenu(HMENU, UINT, int, int, int, HWND, const RECT *);
 BOOL WINAPI wow_menu_native_refresh_window(HWND);
 BOOL WINAPI wow_menu_native_refresh_menu(HMENU);
+BOOL WINAPI wow_menu_native_refresh_message(UINT, WPARAM, LPARAM);
 
 /* Selected only at original WOW/menu-client compile boundaries. The owned
  * implementation includes this header without redirects and calls USER32. */
@@ -40,5 +43,7 @@ BOOL WINAPI wow_menu_native_refresh_menu(HMENU);
 #define HiliteMenuItem wow_menu_native_HiliteMenuItem
 #define SetMenuItemBitmaps wow_menu_native_SetMenuItemBitmaps
 #define SetMenu wow_menu_native_SetMenu
+#define DrawMenuBar wow_menu_native_DrawMenuBar
+#define TrackPopupMenu wow_menu_native_TrackPopupMenu
 #endif
 #endif

@@ -16,6 +16,8 @@ typedef struct wow_user_session_binding {
 
 BOOL WINAPI wow_user_session_attach(wow_user_session_binding *, session *,
     wow_user_runtime *);
+/* Stop thread producers and join other bound threads first. Failed task or
+ * process release retains this registration for a same-owner retry. */
 BOOL WINAPI wow_user_session_detach(wow_user_session_binding *);
 
 /* Narrow parent-ABI query for a late-loaded WOW32 target.  It prevents the

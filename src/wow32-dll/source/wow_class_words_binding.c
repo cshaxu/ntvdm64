@@ -115,6 +115,11 @@ BOOL WINAPI wow_class_words_publish_guest(wow_class_lookup_entry *entry,
     return entry->guest_server != 0;
 }
 
+BOOL WINAPI wow_class_words_native_registration(wow_class_words_binding *binding)
+{
+    return binding && binding->native_registration_borrowed;
+}
+
 void WINAPI wow_class_words_release(wow_class_words_binding *binding)
 {
     if (binding && InterlockedDecrement(&binding->references) == 0)

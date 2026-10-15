@@ -8,8 +8,6 @@
 
 #include <stdio.h>
 
-extern LONG __cdecl VdmFreeVirtualMemory(ULONG address);
-
 typedef VOID (APIENTRY *PFNW32ET)(VOID);
 #pragma warning(push)
 #pragma warning(disable:4201)
@@ -125,6 +123,31 @@ WW *WINAPI wow_window_words_value(wow_window_words_binding *binding)
     return binding ? &binding->words : NULL;
 }
 
+BOOL WINAPI wow_window_words_refresh(HWND window, wow_window_words_binding *binding)
+{
+    WINDOWINFO info = { sizeof(info) };
+    LONG instance;
+    DWORD saved = GetLastError();
+    if (!binding) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
+    if (!GetWindowInfo(window, &info)) return FALSE;
+    SetLastError(ERROR_SUCCESS);
+    instance = GetWindowLongA(window, GWL_HINSTANCE);
+    if (!instance && GetLastError() != ERROR_SUCCESS) return FALSE;
+    AcquireSRWLockExclusive(&publication_lock);
+    if (GetPropW(window, property_name) != binding) {
+        ReleaseSRWLockExclusive(&publication_lock);
+        SetLastError(ERROR_INVALID_WINDOW_HANDLE); return FALSE;
+    }
+    /* wowuserp.h aliases these live WND fields after the three WOW words.
+     * Preserve cached classification and guest procedures during refresh. */
+    binding->words.dwStyle = info.dwStyle;
+    binding->words.dwExStyle = info.dwExStyle;
+    binding->words.hInstance = (HANDLE)(ULONG_PTR)(DWORD)instance;
+    ReleaseSRWLockExclusive(&publication_lock);
+    SetLastError(saved);
+    return TRUE;
+}
+
 wow_cleanup_window *WINAPI wow_window_words_cleanup_value(wow_window_words_binding *binding)
 {
     return binding ? &binding->cleanup : NULL;
@@ -157,7 +180,8 @@ void WINAPI wow_window_words_release(wow_window_words_binding *binding)
          * discarded its entire guest address space. */
         if (binding->retired_guest_backing &&
                 mvdm_softpc_wow_page_domain_active())
-            (void)VdmFreeVirtualMemory(binding->retired_guest_backing);
+            (void)mvdm_softpc_wow_page_domain_release_retained_window(
+                binding->retired_guest_backing);
         wow_class_words_release(binding->class_words);
         HeapFree(GetProcessHeap(), 0, binding);
     }
@@ -277,19 +301,11 @@ BOOL WINAPI wow_window_dispatch_bound(HWND window, UINT message, WPARAM wp,
         wow_window_words_release(binding); return FALSE;
     }
     __try {
-        WINDOWINFO info = { sizeof(info) };
-        LONG instance;
         /* Original wowuserp.h WW aliases WND's live style/ExStyle/hModule;
          * rtl/getset.c exposes those same fields through public indices.
          * Refresh before dispatch, preserving all WOW-owned words and flags.
          * This is not a replacement for direct-access/callback scope binding. */
-        if (!GetWindowInfo(window, &info)) return FALSE;
-        SetLastError(ERROR_SUCCESS);
-        instance = GetWindowLongA(window, GWL_HINSTANCE);
-        if (!instance && GetLastError() != ERROR_SUCCESS) return FALSE;
-        binding->words.dwStyle = info.dwStyle;
-        binding->words.dwExStyle = info.dwExStyle;
-        binding->words.hInstance = (HANDLE)(ULONG_PTR)(DWORD)instance;
+        if (!wow_window_words_refresh(window, binding)) return FALSE;
         if (binding->objects) {
             if (!mvdm_softpc_wow_page_domain_callback_window(
                     (unsigned long)(ULONG_PTR)window, saved_callback)) return FALSE;
@@ -300,6 +316,7 @@ BOOL WINAPI wow_window_dispatch_bound(HWND window, UINT message, WPARAM wp,
              * only after the native API returns is too late. A failed view
              * refresh must not dispatch this callback with stale fields. */
             if (!wow_menu_native_refresh_window(window)) return FALSE;
+            if (!wow_menu_native_refresh_message(message, wp, lp)) return FALSE;
         }
         *result = DispatchClientMessage(&view, message, wp, lp, procedure);
     } __finally {

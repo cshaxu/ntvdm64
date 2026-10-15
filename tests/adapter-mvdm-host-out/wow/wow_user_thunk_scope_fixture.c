@@ -30,6 +30,18 @@ static ULONG FASTCALL outer_thunk(PVDMFRAME frame)
     ULONG result;
     ++calls;
     CHECK(words != NULL);
+    CHECK(words && words->dwStyle == (DWORD)GetWindowLongA(window, GWL_STYLE));
+    CHECK(words && words->dwExStyle == (DWORD)GetWindowLongA(window, GWL_EXSTYLE));
+    CHECK(words && words->hInstance == (HANDLE)GetWindowLongA(window, GWL_HINSTANCE));
+    /* No WOW window callback occurs between native mutation and this getter.
+     * Original control message conversion must see live style bits anyway. */
+    SetWindowLongA(window, GWL_STYLE, GetWindowLongA(window, GWL_STYLE) | WS_DISABLED);
+    SetWindowLongA(window, GWL_EXSTYLE,
+        GetWindowLongA(window, GWL_EXSTYLE) | WS_EX_TOOLWINDOW);
+    CHECK(wow_user_borrow_window(window) == words);
+    CHECK(words && (words->dwStyle & WS_DISABLED));
+    CHECK(words && (words->dwExStyle & WS_EX_TOOLWINDOW));
+    CHECK(words && words->adwWOW[0] == 0x12345678);
     result = wow_user_invoke_thunk(nested_thunk, frame);
     CHECK(words && words->adwWOW[0] == 0x12345678);
     return result;

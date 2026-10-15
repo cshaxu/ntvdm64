@@ -13,14 +13,33 @@
 static unsigned errors;
 static unsigned init_messages;
 static unsigned terminal_messages;
-static unsigned short published_index;
+static unsigned published_count;
+static ULONG published_windows[65536];
 static BOOL fail_publication, veto_creation;
 static wow_window_words_binding *failed_borrow;
 static BOOL failed_reference;
 static unsigned rollback_cases;
+static ULONG callback_cache;
+static unsigned cache_publications, cache_restorations;
+static unsigned raised_callbacks;
+static BOOL fail_callback_publication, raise_callback;
 
 #define CHECK(value) do { if (!(value)) { ++errors; \
     fprintf(stderr, "FAIL line=%d error=%lu\n", __LINE__, GetLastError()); } } while (0)
+
+/* Explicit page-domain mock: verifies caller pairing only, not guest memory. */
+int __cdecl mvdm_softpc_wow_page_domain_callback_window(ULONG window, ULONG saved[2])
+{
+    if (fail_callback_publication) return 0;
+    saved[0] = callback_cache; saved[1] = 0;
+    callback_cache = window; ++cache_publications;
+    return 1;
+}
+int __cdecl mvdm_softpc_wow_page_domain_restore_callback(const ULONG saved[2])
+{
+    callback_cache = saved[0]; ++cache_restorations;
+    return 1;
+}
 
 /* This native lifecycle fixture has no CCPU page domain. Keep that boundary
  * explicit: real publication is covered by page-domain and guest tests.
@@ -30,7 +49,8 @@ int __cdecl mvdm_softpc_wow_page_domain_publish_handle(unsigned short index,
     unsigned long window, unsigned long class_server)
 {
     (void)uniqueness; (void)type; (void)flags; (void)class_server;
-    CHECK(index && !published_index && index == LOWORD(window));
+    CHECK(index && !published_windows[index] && index == LOWORD(window));
+    if (!index || published_windows[index] || index != LOWORD(window)) return 0;
     if (fail_publication) {
         /* publish_handle runs under the production publication lock. Do not
          * reenter acquire here. Observe only the allocation identity; never
@@ -42,8 +62,18 @@ int __cdecl mvdm_softpc_wow_page_domain_publish_handle(unsigned short index,
         SetLastError(ERROR_NOT_ENOUGH_MEMORY);
         return 0;
     }
-    published_index = index;
+    published_windows[index] = window;
+    ++published_count;
     return 1;
+}
+
+/* The fixture's dialogs have no menu. Verify the paired no-menu publication
+ * without pretending this mock covers real guest MENU/WND storage. */
+int __cdecl mvdm_softpc_wow_page_domain_window_menu(unsigned long window,
+    unsigned long menu)
+{
+    CHECK(published_windows[LOWORD(window)] == window && window && menu == 0);
+    return window && published_windows[LOWORD(window)] == window && menu == 0;
 }
 
 static BOOL allocation_live(PVOID address)
@@ -87,7 +117,7 @@ static LRESULT CALLBACK veto_hook(int code, WPARAM wp, LPARAM lp)
             failed_borrow = wow_window_words_acquire((HWND)wp);
             failed_reference = TRUE;
             CHECK(failed_borrow != NULL);
-            CHECK(published_index == LOWORD(wp));
+            CHECK(published_windows[LOWORD(wp)] == (ULONG)wp);
             return 1;
         }
     }
@@ -120,18 +150,18 @@ static void window_rollback_contract(wow_user_runtime_thread *binding)
     request.style = WS_POPUP;
     request.cx = request.cy = 16;
     window = wow_window_create_boundA(binding->thread, atom, &request, &words, NULL);
-    CHECK(window != NULL && published_index == LOWORD(window));
-    CHECK(DestroyWindow(window) && !published_index);
+    CHECK(window != NULL && published_windows[LOWORD(window)] == (ULONG)window);
+    CHECK(DestroyWindow(window) && !published_count);
     fail_publication = TRUE;
     window = wow_window_create_boundA(binding->thread, atom, &request, &words, NULL);
-    CHECK(!window && !published_index);
+    CHECK(!window && !published_count);
     verify_failed_borrow();
     fail_publication = FALSE;
     veto = SetWindowsHookExA(WH_CBT, veto_hook, NULL, GetCurrentThreadId());
     CHECK(veto != NULL);
     veto_creation = TRUE;
     window = wow_window_create_boundA(binding->thread, atom, &request, &words, NULL);
-    CHECK(!window && !published_index);
+    CHECK(!window && !published_count);
     verify_failed_borrow();
     veto_creation = FALSE;
     CHECK(UnhookWindowsHookEx(veto));
@@ -140,8 +170,10 @@ static void window_rollback_contract(wow_user_runtime_thread *binding)
 int __cdecl mvdm_softpc_wow_page_domain_retire_handle(unsigned short index,
     unsigned long *retained_backing)
 {
-    CHECK(index && index == published_index);
-    published_index = 0;
+    CHECK(index && published_windows[index] && published_count);
+    if (!index || !published_windows[index] || !published_count) return 0;
+    published_windows[index] = 0;
+    --published_count;
     if (retained_backing) *retained_backing = 0;
     return 1;
 }
@@ -201,6 +233,7 @@ static INT_PTR CALLBACK dialog_proc(HWND window, UINT message, WPARAM wp,
     wow_user_runtime_thread *binding = wow_user_runtime_current();
     UNREFERENCED_PARAMETER(wp);
     CHECK(binding && binding->thread && !binding->exclusive_held);
+    CHECK(callback_cache == (ULONG)(ULONG_PTR)window);
     CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
     if (message == WM_INITDIALOG) {
         ++init_messages;
@@ -218,7 +251,14 @@ static INT_PTR CALLBACK dialog_proc(HWND window, UINT message, WPARAM wp,
         CHECK(borrow != NULL);
         wow_window_words_release(borrow);
     }
-    if (message == WM_APP + 2) CHECK(DestroyWindow(window));
+    if (message == WM_APP + 2) {
+        CHECK(DestroyWindow(window));
+        CHECK(callback_cache == (ULONG)(ULONG_PTR)window);
+    }
+    if (message == WM_APP + 3 && raise_callback) {
+        ++raised_callbacks;
+        RaiseException(0xe0420058u, 0, 0, NULL);
+    }
     return FALSE;
 }
 
@@ -285,20 +325,35 @@ int __cdecl main(void)
     CHECK(DestroyWindow(window));
     CHECK(terminal_messages == 1);
     CHECK(wow_window_words_acquire(window) == NULL);
-    CHECK(!published_index);
+    CHECK(!published_count);
     window = wow_user_server_create_dialog(GetModuleHandleA(NULL), dialog,
         (DWORD)((BYTE *)next - (BYTE *)dialog), NULL, dialog_proc,
         (LONG)dialog_data, SCDLG_CLIENT | SCDLG_ANSI | SCDLG_NOREVALIDATE);
     CHECK(window && init_messages == 2);
+    {
+        unsigned calls = cache_publications;
+        fail_callback_publication = TRUE;
+        SendMessageA(window, WM_APP + 1, 0, 0);
+        fail_callback_publication = FALSE;
+        CHECK(cache_publications == calls && callback_cache == 0u);
+        raise_callback = TRUE;
+        __try { SendMessageA(window, WM_APP + 3, 0, 0); }
+        __except (GetExceptionCode() == 0xe0420058u ?
+            EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) { }
+        raise_callback = FALSE;
+        CHECK(raised_callbacks == 1u && callback_cache == 0u &&
+            cache_publications == cache_restorations);
+    }
     SendMessageA(window, WM_APP + 2, 0, 0);
     CHECK(!IsWindow(window) && terminal_messages == 2);
-    CHECK(!published_index);
+    CHECK(!published_count);
     CHECK(wow_window_words_acquire(window) == NULL);
+    CHECK(callback_cache == 0u && cache_publications == cache_restorations);
     fail_publication = TRUE;
     window = wow_user_server_create_dialog(GetModuleHandleA(NULL), dialog,
         (DWORD)((BYTE *)next - (BYTE *)dialog), NULL, dialog_proc,
         (LONG)dialog_data, SCDLG_CLIENT | SCDLG_ANSI | SCDLG_NOREVALIDATE);
-    CHECK(!window && !published_index);
+    CHECK(!window && !published_count);
     CHECK(init_messages == 2 && terminal_messages == 2);
     verify_failed_borrow();
     fail_publication = FALSE;
@@ -308,7 +363,7 @@ int __cdecl main(void)
     window = wow_user_server_create_dialog(GetModuleHandleA(NULL), dialog,
         (DWORD)((BYTE *)next - (BYTE *)dialog), NULL, dialog_proc,
         (LONG)dialog_data, SCDLG_CLIENT | SCDLG_ANSI | SCDLG_NOREVALIDATE);
-    CHECK(!window && !published_index);
+    CHECK(!window && !published_count);
     CHECK(init_messages == 2 && terminal_messages == 2);
     verify_failed_borrow();
     veto_creation = FALSE;
@@ -322,6 +377,9 @@ int __cdecl main(void)
     CHECK(session_thread_unbind(&owner));
     CHECK(session_dispose(&owner));
     if (wowexec) CloseHandle(wowexec);
+    CHECK(cache_publications && cache_publications == cache_restorations);
+    fprintf(stderr, "WOW_DIALOG_CALLBACK_CACHE errors=%u paired=%u exceptions=%u\n",
+        errors, cache_publications == cache_restorations, raised_callbacks);
     fprintf(stderr, "WOW_USER_TASK_DIALOG_LIFECYCLE errors=%u init=%u terminal=%u\n",
         errors, init_messages, terminal_messages);
     return errors ? 1 : 0;

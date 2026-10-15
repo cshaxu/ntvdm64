@@ -540,6 +540,12 @@ foreach ($entry in @(
     'mvdm_softpc_wow_page_domain_clear_client_desktop',
     'mvdm_softpc_wow_page_domain_publish_handle',
     'mvdm_softpc_wow_page_domain_retire_handle',
+    'mvdm_softpc_wow_page_domain_borrow_window',
+    'mvdm_softpc_wow_page_domain_window_handle',
+    'mvdm_softpc_wow_page_domain_release_window',
+    'mvdm_softpc_wow_page_domain_release_retained_window',
+    'mvdm_softpc_wow_page_domain_read_window_words',
+    'mvdm_softpc_wow_page_domain_exchange_window_word',
     'mvdm_softpc_wow_page_domain_active',
     'mvdm_softpc_wow_page_domain_refresh_window',
     'mvdm_softpc_wow_page_domain_callback_window',
@@ -1069,7 +1075,9 @@ $graph.Add('build ' + $object + ': cc_host ' + (NinjaPath (Join-Path $hostRoot $
         # selected opennt-host subset after nt.h so the original timer's
         # declarations stay visible on both architectures.
         $ntexapiSubset = NinjaPath (Join-Path $root 'src/opennt-host/public/sdk/inc/ntexapi.h')
-        $threadAbiFlag = if ($name -eq 'nt_thred.c') { ' /DOPENNT_HOST_CREATE_THREAD_ABI' } else { '' }
+        # Both entry points already use WINAPI; a cdecl thunk double-pops
+        # their callback argument on x86 when the thread routine returns.
+        $threadAbiFlag = if ($name -in @('nt_thred.c', 'nt_error.c')) { ' /DOPENNT_HOST_CREATE_THREAD_ABI' } else { '' }
         $graph.Add('  host_cflags = ' + $hostFlags + $threadAbiFlag + ' /FI "' + $ntexapiSubset + '" /FI "' + $threadCompat + '"')
     }
     $object

@@ -36,6 +36,9 @@ BOOL WINAPI wow_window_class_procedure_exchange(HWND, DWORD, DWORD *);
 BOOL WINAPI wow_window_procedure_exchange(HWND, DWORD, DWORD *);
 wow_window_words_binding *WINAPI wow_window_words_acquire(HWND);
 struct _WW *WINAPI wow_window_words_value(wow_window_words_binding *);
+/* Refresh only native WND fields aliased by WW, preserving original WOW
+ * classification/procedure words. Caller retains the matching binding. */
+BOOL WINAPI wow_window_words_refresh(HWND, wow_window_words_binding *);
 /* Live WND cleanup fields, not a copy. Caller retains this window borrow and
  * serializes membership/cleanup against dispatch; no thread is synthesized.
  * The procedure is the very field read by wow_window_native_proc. */

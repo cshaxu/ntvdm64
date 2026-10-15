@@ -1,5 +1,21 @@
 # opennt-host
 
+T447 S2 registers OPENNT-HOST-069: the unchanged GetFullUserHandle function
+from windows/core/ntuser/client/handles.c, canonical OpenNT revision
+5c5b979ec08c17d3ca2eb70e8aad62d26515d01c, source SHA-256
+29742B05EC55182515971CA67B54E3E0C4AD724FEECD482FD50EA2E398E9C2F2.
+The subset retains its Microsoft notice. Direct consumers are original
+WOW32 FULLHWND32 message/DDE conversions through pfnGetFullUserHandle.
+The existing object table supplies type/uniqueness through a call-local
+selection of thread-local view pointers; there is no new handle allocator.
+The original absent/non-window short-handle fallback replaces the owned
+registered callback's zero-on-missing behavior. Strict internal lookup is
+retained for WOWEXEC registration and menu publication. The surrounding
+DDEML handle manager, allocation and callback machinery are rejected as
+unneeded outgoing closure. Function-body edits: zero; guest edits: zero.
+Tests/evidence: T447 S2 process-retirement fixture and window-graph audit;
+built and published in the bounded S2 P1 baseline, not complete WOW recovery.
+
 T433 S5 registers OPENNT-HOST-065 in base/win32/client/vdm.c: byte distances
 are computed before narrowing; STARTF_USEHOTKEY and UndoCreation retain their
 original DWORD/ULONG numeric carriers through ULONG_PTR. The unused config

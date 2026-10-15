@@ -16,6 +16,7 @@ typedef struct wow_user_borrow_scope {
 BOOL WINAPI wow_user_borrow_enter(wow_user_borrow_scope *);
 BOOL WINAPI wow_user_borrow_leave(wow_user_borrow_scope *);
 struct _WW *WINAPI wow_user_borrow_window(HWND);
+BOOL WINAPI wow_user_borrow_window_exchange(HWND, unsigned, DWORD, DWORD *);
 DWORD *WINAPI wow_user_borrow_window_class(HWND);
 DWORD *WINAPI wow_user_borrow_class(wow_class_lookup_context *, ATOM, HANDLE);
 DWORD *WINAPI wow_user_borrow_named_class(HINSTANCE, const UNICODE_STRING *);

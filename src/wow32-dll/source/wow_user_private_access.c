@@ -48,7 +48,7 @@ LONG WINAPI wow_user_get_window_longA(HWND window, int index)
 
 LONG WINAPI wow_user_set_window_longA(HWND window, int index, LONG value)
 {
-    PWW words;
+    DWORD previous_word;
     if (index == GWL_WNDPROC) {
         DWORD previous, current, error = GetLastError();
         BOOL bound;
@@ -74,12 +74,12 @@ LONG WINAPI wow_user_set_window_longA(HWND window, int index, LONG value)
     }
     if (index > GWL_WOWDWORD1 || index < GWL_WOWDWORD3)
         return SetWindowLongA(window, index, value);
-    words = wow_user_borrow_window(window);
-    if (!words) return 0;
     /* Original private branches store the word but leave dwOld uninitialized.
      * Selected SETWL callers discard it. Return the actual previous word,
      * never reproduce an indeterminate native return register. */
-    return InterlockedExchange((LONG *)&words->adwWOW[GWL_WOWDWORD1 - index], value);
+    if (!wow_user_borrow_window_exchange(window, GWL_WOWDWORD1 - index,
+            (DWORD)value, &previous_word)) return 0;
+    return (LONG)previous_word;
 }
 
 DWORD WINAPI wow_user_get_class_longA(HWND window, int index)

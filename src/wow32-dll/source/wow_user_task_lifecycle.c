@@ -1,6 +1,7 @@
 #include "wow_user_task_lifecycle.h"
 
 #include "wow_class_words_binding.h"
+#include "wow_standard_class_bindings.h"
 #include "wow_window_words_binding.h"
 #include "wow_menu_client_bindings.h"
 #include "wow_task_profile_bindings.h"
@@ -306,6 +307,11 @@ static BOOL WINAPI cleanup_destroy_class(wow_cleanup_context *context,
 
 static BOOL WINAPI retire_current_thread(PVOID context);
 
+static BOOL WINAPI dispose_process(PVOID context)
+{
+    return wow_user_task_lifecycle_dispose(context);
+}
+
 static PVOID WINAPI cleanup_allocate(SIZE_T size)
 {
     return HeapAlloc(GetProcessHeap(), 0, size);
@@ -356,8 +362,23 @@ BOOL WINAPI wow_user_task_lifecycle_initialize(wow_user_task_lifecycle *owner,
     owner->cleanup.destroy_object = wow_menu_client_cleanup;
     owner->cleanup.allocate = cleanup_allocate;
     owner->cleanup.release = cleanup_release;
+    /* Original USER process initialization supplies the public control
+     * classes before application lookup; original cleanup needs the matching
+     * restore table. Native USER owns the actual registrations. Prepare their
+     * existing metadata and cleanup binding as one unpublished transaction. */
+    if (!wow_standard_classes_prepare(&owner->classes, callbacks->callback) ||
+            !wow_standard_classes_bind_cleanup(&owner->cleanup)) {
+        DWORD error = GetLastError();
+        if (!wow_class_words_forget_native(&owner->classes)) return FALSE;
+        HeapFree(GetProcessHeap(), 0, owner->objects);
+        owner->objects = NULL;
+        owner->process.objects = NULL;
+        SetLastError(error);
+        return FALSE;
+    }
     runtime->lifecycle = owner;
     runtime->retire_thread = retire_current_thread;
+    runtime->dispose_process = dispose_process;
     owner->initialized = TRUE;
     return TRUE;
 }
@@ -636,6 +657,25 @@ static BOOL sleep_message_task(wow_user_task_lifecycle *owner)
     return TRUE;
 }
 
+static BOOL peek_message_published(LPMSG message, HWND window, UINT first,
+    UINT last, UINT flags, BOOL *available)
+{
+    wow_user_native_call call;
+    BOOL restored;
+    DWORD error = GetLastError();
+    /* A queue filter is not a send target. PeekMessage can dispatch sent
+     * callbacks even when it returns FALSE, so publish on both outcomes. */
+    if (!wow_user_native_call_begin(&call, NULL)) return FALSE;
+    SetLastError(error);
+    __try { *available = PeekMessageA(message, window, first, last, flags); }
+    __finally {
+        error = GetLastError();
+        restored = wow_user_native_call_end(&call);
+        if (restored) SetLastError(error);
+    }
+    return restored;
+}
+
 BOOL WINAPI wow_user_task_lifecycle_message(wow_user_task_lifecycle *owner,
     LPMSG message, HWND window, UINT first, UINT last, UINT flags, BOOL get)
 {
@@ -650,14 +690,19 @@ BOOL WINAPI wow_user_task_lifecycle_message(wow_user_task_lifecycle *owner,
         return get ? -1 : FALSE;
     }
     for (;;) {
+        BOOL available;
         /* Suppress native WOW yielding: this process owns the admitted
          * original taskman state, not modern USER's historical WOW state. */
-        if (PeekMessageA(message, window, first, last,
-                (flags & PM_REMOVE) | PM_NOYIELD | early))
+        if (!peek_message_published(message, window, first, last,
+                (flags & PM_REMOVE) | PM_NOYIELD | early, &available))
+            return get ? -1 : FALSE;
+        if (available)
             return get ? message->message != WM_QUIT : TRUE;
         if (!(flags & PM_NOYIELD) && !wow_user_task_lifecycle_yield(owner))
             return get ? -1 : FALSE;
-        if (PeekMessageA(message, window, first, last, flags | PM_NOYIELD))
+        if (!peek_message_published(message, window, first, last,
+                flags | PM_NOYIELD, &available)) return get ? -1 : FALSE;
+        if (available)
             return get ? message->message != WM_QUIT : TRUE;
         if (!get) return FALSE;
         if (!sleep_message_task(owner)) return -1;
@@ -720,6 +765,7 @@ BOOL WINAPI wow_task_callback_leave(wow_task_callback_scope *scope)
 
 BOOL WINAPI wow_user_native_call_begin(wow_user_native_call *call, HWND window)
 {
+    DWORD error = GetLastError();
     wow_user_runtime_thread *binding = wow_user_runtime_current();
     wow_task_order_thread *sender, *receiver;
     wow_window_words_binding *words;
@@ -730,6 +776,10 @@ BOOL WINAPI wow_user_native_call_begin(wow_user_native_call *call, HWND window)
      * Use the already-published WND owner, including original short HWNDs;
      * GetWindowThreadProcessId does not accept that historical carrier. */
     if (!binding || !(sender = binding->thread) || !sender->ptdb) return TRUE;
+    if (!binding->runtime->lifecycle) {
+        SetLastError(ERROR_INVALID_STATE);
+        return FALSE;
+    }
     call->held = binding->exclusive_held;
     if (!call->held && !wow_user_runtime_enter(binding)) return FALSE;
     words = wow_window_words_acquire(window);
@@ -741,8 +791,10 @@ BOOL WINAPI wow_user_native_call_begin(wow_user_native_call *call, HWND window)
     if (!target || receiver == sender || !receiver->ptdb || sender->ppi->pwpi->nTaskLock) {
         /* ssend.c MAKECALL drops USER data protection, not WOW execution
          * ownership. Only a caller-held lock needs restoring after callout. */
-        if (call->held) call->binding = binding;
-        return wow_user_runtime_leave(binding);
+        call->binding = binding;
+        if (!wow_user_runtime_leave(binding)) return FALSE;
+        SetLastError(error);
+        return TRUE;
     }
     call->binding = binding;
     call->receiver_id = target->thread_id;
@@ -754,19 +806,30 @@ BOOL WINAPI wow_user_native_call_begin(wow_user_native_call *call, HWND window)
      * queue.c's external-wait path only deschedules here. Scheduling a send
      * before native USER publishes it makes the still-waiting sender ready. */
     (void)xxxSleepTask(FALSE, (HANDLE)-1, sender);
-    return wow_user_runtime_leave(binding);
+    if (!wow_user_runtime_leave(binding)) return FALSE;
+    /* Owner lookup is bookkeeping, not the native operation. In particular
+     * a NULL target must not replace a parser's pending error with the
+     * window lookup's ERROR_INVALID_WINDOW_HANDLE during menu rollback. */
+    SetLastError(error);
+    return TRUE;
 }
 
 BOOL WINAPI wow_user_native_call_end(wow_user_native_call *call)
 {
     wow_user_runtime_thread *binding = call->binding;
     wow_task_order_thread *sender, *receiver;
+    BOOL published;
+    DWORD error;
     if (!binding) return TRUE;
     if (wow_user_runtime_current() != binding || !wow_user_runtime_enter(binding))
         return FALSE;
     if (!call->receiver_id) {
         call->binding = NULL;
-        return TRUE; /* Restored the caller-held data lock; no task handoff. */
+        published = wow_menu_client_refresh_all(binding->thread->ppi);
+        error = GetLastError();
+        if (!call->held && !wow_user_runtime_leave(binding)) return FALSE;
+        SetLastError(error);
+        return published; /* Same task; preserve the caller's original lock state. */
     }
     sender = binding->thread;
     /* Resolve again under the owner lock: the native operation may have
@@ -780,17 +843,21 @@ BOOL WINAPI wow_user_native_call_end(wow_user_native_call *call)
     }
     sender->psmsSent = call->previous;
     call->binding = NULL;
-    return call->held || wow_user_runtime_leave(binding);
+    published = wow_menu_client_refresh_all(sender->ppi);
+    error = GetLastError();
+    if (!call->held && !wow_user_runtime_leave(binding)) return FALSE;
+    SetLastError(error);
+    return published;
 }
 
 /* ADAPTER-WOW-051: candidate target-aware native call edge. Same-thread
  * calls retain their direct execution. Native transport/result is unchanged. */
-#define WOW_NATIVE_CALL(type, name, params, args, failed) \
+#define WOW_NATIVE_CALL_TARGET(type, name, params, args, failed, target) \
 type WINAPI wow_native_##name params \
 { \
     wow_user_native_call call; \
     type result; BOOL restored; DWORD error = GetLastError(); \
-    if (!wow_user_native_call_begin(&call, w)) return failed; \
+    if (!wow_user_native_call_begin(&call, target)) return failed; \
     SetLastError(error); \
     __try { result = name args; } \
     __finally { \
@@ -800,6 +867,8 @@ type WINAPI wow_native_##name params \
     } \
     return restored ? result : failed; \
 }
+#define WOW_NATIVE_CALL(type, name, params, args, failed) \
+    WOW_NATIVE_CALL_TARGET(type, name, params, args, failed, w)
 WOW_NATIVE_CALL(BOOL, BringWindowToTop, (HWND w), (w), FALSE)
 WOW_NATIVE_CALL(BOOL, SetWindowPos, (HWND w, HWND after, int x, int y, int cx, int cy, UINT flags), (w, after, x, y, cx, cy, flags), FALSE)
 WOW_NATIVE_CALL(BOOL, MoveWindow, (HWND w, int x, int y, int cx, int cy, BOOL paint), (w, x, y, cx, cy, paint), FALSE)
@@ -815,7 +884,13 @@ WOW_NATIVE_CALL(int, GetWindowTextLengthA, (HWND w), (w), 0)
 WOW_NATIVE_CALL(BOOL, SetWindowTextA, (HWND w, LPCSTR text), (w, text), FALSE)
 WOW_NATIVE_CALL(LRESULT, SendMessageA, (HWND w, UINT message, WPARAM wp, LPARAM lp), (w, message, wp, lp), 0)
 WOW_NATIVE_CALL(LRESULT, SendMessageTimeoutA, (HWND w, UINT message, WPARAM wp, LPARAM lp, UINT flags, UINT timeout, PDWORD_PTR value), (w, message, wp, lp, flags, timeout, value), 0)
+WOW_NATIVE_CALL(LRESULT, DefWindowProcA, (HWND w, UINT message, WPARAM wp, LPARAM lp), (w, message, wp, lp), 0)
+WOW_NATIVE_CALL(LRESULT, DefDlgProcA, (HWND w, UINT message, WPARAM wp, LPARAM lp), (w, message, wp, lp), 0)
+WOW_NATIVE_CALL(LRESULT, DefMDIChildProcA, (HWND w, UINT message, WPARAM wp, LPARAM lp), (w, message, wp, lp), 0)
+WOW_NATIVE_CALL(LRESULT, DefFrameProcA, (HWND w, HWND client, UINT message, WPARAM wp, LPARAM lp), (w, client, message, wp, lp), 0)
+WOW_NATIVE_CALL_TARGET(LRESULT, DispatchMessageA, (const MSG *message), (message), 0, message ? message->hwnd : NULL)
 #undef WOW_NATIVE_CALL
+#undef WOW_NATIVE_CALL_TARGET
 
 static BOOL retire_task(wow_user_task_lifecycle *owner, DWORD task_id,
     HANDLE instance, PNEMODULESEG selectors, DWORD count)
@@ -912,18 +987,48 @@ static BOOL WINAPI retire_current_thread(PVOID context)
     }
 }
 
-void WINAPI wow_user_task_lifecycle_dispose(wow_user_task_lifecycle *owner)
+BOOL WINAPI wow_user_task_lifecycle_dispose(wow_user_task_lifecycle *owner)
 {
-    if (!owner || !owner->initialized || owner->threads) return;
+    wow_class_lookup_entry *entry;
+    if (!owner || !owner->initialized || !owner->runtime ||
+            owner->runtime->lifecycle != owner) {
+        SetLastError(ERROR_INVALID_STATE); return FALSE;
+    }
+    if (owner->threads || owner->runtime->owner_thread_id) {
+        SetLastError(ERROR_BUSY); return FALSE;
+    }
+    /* Refuse application classes/live control associations before releasing
+     * any borrowed menu or class storage. A rejected last-owner detach must
+     * retain the standard classes needed by a subsequent cleanup retry. */
+    if (owner->classes.pclsPrivateList || owner->classes.system_classes) {
+        SetLastError(ERROR_BUSY); return FALSE;
+    }
+    for (entry = owner->classes.pclsPublicList; entry; entry = entry->next) {
+        if (!wow_class_words_native_registration((wow_class_words_binding *)entry) ||
+                entry->cWndReferenceCount) {
+            SetLastError(ERROR_BUSY); return FALSE;
+        }
+    }
+    /* Original DestroyProcessInfo runs after thread/object cleanup. This
+     * owner releases only its finite carrier, never live USER objects or a
+     * class registration. Their original cleanup remains the prerequisite. */
+    if (!wow_menu_client_forget_borrowed(&owner->process)) return FALSE;
+    if (!wow_class_words_forget_native(&owner->classes)) return FALSE;
+    if (owner->classes.pclsPrivateList || owner->classes.pclsPublicList ||
+            owner->classes.system_classes) {
+        SetLastError(ERROR_BUSY); return FALSE;
+    }
     if (owner->process.pwpi) {
-        if (owner->process.pwpi->pEventWowExec)
-            CloseHandle(owner->process.pwpi->pEventWowExec);
+        if (owner->process.pwpi->pEventWowExec &&
+                !CloseHandle(owner->process.pwpi->pEventWowExec)) return FALSE;
         HeapFree(GetProcessHeap(), 0, owner->process.pwpi);
     }
     if (owner->objects) HeapFree(GetProcessHeap(), 0, owner->objects);
     if (owner->runtime && owner->runtime->lifecycle == owner) {
         owner->runtime->retire_thread = NULL;
+        owner->runtime->dispose_process = NULL;
         owner->runtime->lifecycle = NULL;
     }
     ZeroMemory(owner, sizeof(*owner));
+    return TRUE;
 }

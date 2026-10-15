@@ -47,9 +47,19 @@ BOOL WINAPI wow_user_session_attach(wow_user_session_binding *binding,
 
 BOOL WINAPI wow_user_session_detach(wow_user_session_binding *binding)
 {
+    session_binding_diagnostic threads;
     if (!binding || !binding->registered || !binding->session ||
             session_thread_current() != binding->session) {
         SetLastError(ERROR_INVALID_STATE);
+        return FALSE;
+    }
+    /* The owner stops thread producers before detach, as it must before
+     * session_dispose. Do not remove hooks or provider state while another
+     * bound thread can still return through them. This is a precondition
+     * check, not a replacement thread join or a new shutdown scheduler. */
+    if (!session_binding_diagnostic_snapshot(binding->session, &threads) ||
+            threads.total != 1u) {
+        SetLastError(ERROR_BUSY);
         return FALSE;
     }
     /* Explicit detach is fallible: retain the registration when USER still
@@ -57,6 +67,12 @@ BOOL WINAPI wow_user_session_detach(wow_user_session_binding *binding)
     if (wow_user_runtime_current() == &current_binding &&
             !wow_user_runtime_unbind(&current_binding))
         return FALSE;
+    if (binding->runtime->lifecycle &&
+            (!binding->runtime->dispose_process ||
+             !binding->runtime->dispose_process(binding->runtime->lifecycle))) {
+        if (!binding->runtime->dispose_process) SetLastError(ERROR_INVALID_STATE);
+        return FALSE;
+    }
     if (!session_unregister_thread_hook(binding->session, bind_current,
             unbind_current, binding)) {
         SetLastError(ERROR_INVALID_STATE);

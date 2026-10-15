@@ -10,6 +10,20 @@ static volatile LONG errors, child_bound;
 static BOOL refuse_retirement;
 static unsigned retirement_calls;
 static char task_identity;
+static BOOL refuse_disposal;
+static unsigned disposal_calls;
+static HANDLE child_ready, child_release;
+
+static BOOL WINAPI dispose_fixture(PVOID context)
+{
+    if (context != &task_identity) return FALSE;
+    ++disposal_calls;
+    if (refuse_disposal) { SetLastError(ERROR_BUSY); return FALSE; }
+    runtime.lifecycle = NULL;
+    runtime.retire_thread = NULL;
+    runtime.dispose_process = NULL;
+    return TRUE;
+}
 
 static BOOL WINAPI retire_fixture(PVOID context)
 {
@@ -40,6 +54,8 @@ static DWORD WINAPI child(LPVOID ignored)
         CHECK(wow_user_runtime_leave(binding));
     }
     InterlockedIncrement(&child_bound);
+    CHECK(SetEvent(child_ready));
+    CHECK(WaitForSingleObject(child_release, 5000) == WAIT_OBJECT_0);
     CHECK(session_thread_unbind(&owner));
     return errors ? 1 : 0;
 }
@@ -53,18 +69,29 @@ int __cdecl main(void)
     CHECK(session_thread_bind_owned(&owner, SESSION_THREAD_BINDING_SOFTPC_ENTRY));
     CHECK(wow_user_session_attach(&registration, &owner, &runtime));
     CHECK(wow_user_runtime_current() != NULL);
+    child_ready = CreateEventW(NULL, TRUE, FALSE, NULL);
+    child_release = CreateEventW(NULL, TRUE, FALSE, NULL);
+    CHECK(child_ready && child_release);
     thread = CreateThread(NULL, 0, child, NULL, 0, NULL);
     CHECK(thread != NULL);
     if (thread) {
+        CHECK(WaitForSingleObject(child_ready, 5000) == WAIT_OBJECT_0);
+        CHECK(!wow_user_session_detach(&registration));
+        CHECK(GetLastError() == ERROR_BUSY && registration.registered);
+        CHECK(wow_user_runtime_current() != NULL && owner.thread_hook_count == 1);
+        CHECK(SetEvent(child_release));
         CHECK(WaitForSingleObject(thread, 5000) == WAIT_OBJECT_0);
         CHECK(GetExitCodeThread(thread, &exit_code) && exit_code == 0);
         CHECK(CloseHandle(thread));
     }
     CHECK(child_bound == 1);
+    CloseHandle(child_ready);
+    CloseHandle(child_release);
     /* The production unbind callback is fallible. Explicit session detach
      * must not hide rejection, drop the hook, or make a retry impossible. */
     runtime.lifecycle = &task_identity;
     runtime.retire_thread = retire_fixture;
+    runtime.dispose_process = dispose_fixture;
     wow_user_runtime_current()->thread =
         (struct wow_task_order_thread *)&task_identity;
     refuse_retirement = TRUE;
@@ -97,7 +124,15 @@ int __cdecl main(void)
     CHECK(session_thread_current() == NULL && wow_user_runtime_current() == NULL);
     CHECK(owner.binding_count == 0 && registration.registered);
     CHECK(session_thread_bind_owned(&owner, SESSION_THREAD_BINDING_SOFTPC_ENTRY));
+    refuse_disposal = TRUE;
+    CHECK(!wow_user_session_detach(&registration));
+    CHECK(GetLastError() == ERROR_BUSY && disposal_calls == 1);
+    CHECK(registration.registered && runtime.lifecycle == &task_identity);
+    CHECK(owner.thread_hook_count == 1 && wow_user_runtime_current() == NULL);
+    CHECK(session_thread_current() == &owner);
+    refuse_disposal = FALSE;
     CHECK(wow_user_session_detach(&registration));
+    CHECK(disposal_calls == 2 && runtime.lifecycle == NULL);
     CHECK(retirement_calls == 3);
     CHECK(!registration.registered && owner.thread_hook_count == 0);
     CHECK(wow_user_runtime_current() == NULL);

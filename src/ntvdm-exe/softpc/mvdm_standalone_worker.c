@@ -56,6 +56,15 @@ static int mvdm_standalone_worker_cleanup(int result)
         session_disarm_termination_escape(&worker_session);
         worker_escape=FALSE;
     }
+    /* USER retirement may still need the guest-memory service. Do not drop
+     * its registration, or free backing state under a live thread, when the
+     * bounded provider rejects release. The process-exit caller receives
+     * failure; a same-owner cleanup retry retains the necessary state. */
+    if (worker_wow_attached) {
+        if (!wow_user_session_detach(&worker_wow_binding))
+            return ERROR_BUSY;
+        worker_wow_attached=FALSE;
+    }
     if (worker_memory) {
         mvdm_softpc_guest_memory_end(&worker_session);
         worker_memory=FALSE;
@@ -63,10 +72,6 @@ static int mvdm_standalone_worker_cleanup(int result)
     if (worker_shadow_registry) {
         ntvdm_shadow_registry_shutdown();
         worker_shadow_registry=FALSE;
-    }
-    if (worker_wow_attached) {
-        (void)wow_user_session_detach(&worker_wow_binding);
-        worker_wow_attached=FALSE;
     }
     if (worker_thread) {
         (void)session_thread_unbind(&worker_session);

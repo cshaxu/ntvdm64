@@ -846,8 +846,8 @@ int __cdecl main(int argc,char **argv)
         HMENU selected = CreateMenu(), other = CreateMenu();
         CHECK(selected && other);
         CHECK(wow_user_runtime_enter(&binding));
-        CHECK(wow_menu_client_publish_tree(&lifecycle.process, 0x1234, selected));
-        CHECK(wow_menu_client_publish_tree(&lifecycle.process, 0x5678, other));
+        CHECK(wow_menu_client_register_created(&lifecycle.process, 0x1234, selected));
+        CHECK(wow_menu_client_register_created(&lifecycle.process, 0x5678, other));
         CHECK(wow_user_runtime_leave(&binding));
         CHECK(wow_user_task_lifecycle_exit(&lifecycle, (HANDLE)(ULONG_PTR)0x1234,
             0x1234, NULL, 0));

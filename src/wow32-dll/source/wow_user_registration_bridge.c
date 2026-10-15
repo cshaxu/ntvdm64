@@ -11,6 +11,7 @@
 #include "wow_title_policy.h"
 #include "wow_user_object_bindings.h"
 #include "wow_user_borrow_scope.h"
+#include "wow_menu_native_bindings.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 
 #include <stdio.h>
@@ -67,9 +68,22 @@ static LRESULT call_previous_window_proc(WNDPROC procedure, HWND window,
      * Modern USER owns native/CPD translation but cannot interpret this
      * worker's WOW target. Keep the original registered callback as owner. */
     if (HIWORD(procedure) == WNDPROC_HANDLE ||
-            !((DWORD)(ULONG_PTR)procedure & WNDPROC_WOW))
-        return unicode ? CallWindowProcW(procedure, window, message, wp, lp) :
-            CallWindowProcA(procedure, window, message, wp, lp);
+            !((DWORD)(ULONG_PTR)procedure & WNDPROC_WOW)) {
+        wow_user_native_call call;
+        BOOL restored;
+        DWORD error = GetLastError();
+        if (!wow_user_native_call_begin(&call, window)) return 0;
+        SetLastError(error);
+        __try {
+            result = unicode ? CallWindowProcW(procedure, window, message, wp, lp) :
+                CallWindowProcA(procedure, window, message, wp, lp);
+        } __finally {
+            error = GetLastError();
+            restored = wow_user_native_call_end(&call);
+            if (restored) SetLastError(error);
+        }
+        return restored ? result : 0;
+    }
     if (!wow_input_handlers.pfnWowWndProcEx) {
         SetLastError(ERROR_INVALID_STATE);
         return 0;
@@ -80,8 +94,14 @@ static LRESULT call_previous_window_proc(WNDPROC procedure, HWND window,
         return 0;
     }
     __try {
-        result = wow_input_handlers.pfnWowWndProcEx(window, message, wp, lp,
-            (DWORD)(ULONG_PTR)procedure, NULL);
+        /* CallWindowProc's tagged-WOW branch deliberately passes NULL WW;
+         * it does not traverse wow_window_dispatch_bound. Preserve that
+         * original subclass contract while publishing a menu carried by
+         * the message before the original callback converts its handle. */
+        result = 0;
+        if (wow_menu_native_refresh_message(message, wp, lp))
+            result = wow_input_handlers.pfnWowWndProcEx(window, message, wp, lp,
+                (DWORD)(ULONG_PTR)procedure, NULL);
     } __finally {
         wow_user_borrow_leave(&scope);
         (void)wow_task_callback_leave(&task_scope);
@@ -344,7 +364,7 @@ static DWORD WINAPI registered_full_handle(WORD handle)
         unsupported_void();
         return 0;
     }
-    window = wow_user_window_full_handle(binding->thread->ppi->objects, handle);
+    window = (HWND)(ULONG_PTR)wow_user_full_handle(binding->thread->ppi->objects, handle);
     registration_trace("GetFullUserHandle", (DWORD)(ULONG_PTR)window);
     return (DWORD)(ULONG_PTR)window;
 }
@@ -352,7 +372,16 @@ static DWORD WINAPI registered_full_handle(WORD handle)
 VOID WINAPI wow_user_register_wow_exec(HANDLE window)
 {
     VOID WINAPI RegisterWowExec(HANDLE);
-    DWORD full = registered_full_handle(LOWORD(window));
+    wow_user_runtime_thread *binding = wow_user_runtime_current();
+    DWORD full;
+    if (!binding || !binding->thread || !binding->thread->ppi ||
+            !binding->thread->ppi->objects) {
+        unsupported_void(); return;
+    }
+    /* Registration requires a live owned window, unlike original message
+     * conversion's intentional fallback for a departed DDE peer. */
+    full = (DWORD)(ULONG_PTR)wow_user_window_full_handle(
+        binding->thread->ppi->objects, LOWORD(window));
     /* WK32RegisterShellWindowHandle supplies HWND32, a sign-extended WORD.
      * Resolve it through the existing USER handle owner before the original
      * BaseClient sends it to BaseSrv. Never weaken broker PID validation. */

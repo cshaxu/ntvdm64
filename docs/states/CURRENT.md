@@ -49,6 +49,13 @@ authored substitutes for original connectable logic; source tracing identifies
 gaps and tests accept newly connected code, not select successive patches.
 Proven-composable original logic must replace its autonomous counterpart in
 the same repair, deleting that counterpart rather than deferring migration.
+Owner requires grouped implementation/testing and delivery before more wiring.
+S2 P1 freezes the r10/r11 nine-case foundation batch. delivery-r1 passes both
+DOS17 input routes and WINMINE gameplay/normal exit in all three style modes.
+WRITE now reaches its visible main/document windows; editing/saving is unproved.
+SOL still shows Out of memory. Both release locations have the verified13-image
+package; commit/push completes this bounded baseline, not S2 closure. External
+shared-view graph wiring and the remaining S2 contracts stay open.
 
 ## Active Packet
 
@@ -61,8 +68,8 @@ S5 task termination, and S6 final acceptance. Necessary earlier cleanup and
 message dependencies cannot be deferred merely to match this sequence.
 Owner also directs review and commit of all dirty files before continuing.
 The [reviewed checkpoint](../etc/evidence/m0-t447-s2-checkpoint-review.md)
-is an explicitly labelled development checkpoint, not a delivered P,
-S2 closure, runtime acceptance or publication. Existing release stays intact.
+was a development checkpoint, not a delivered P or S2 closure. The later S2 P1
+baseline below supersedes its publication status without closing S2.
 The staged menu/standard-control helpers remain incomplete and must not be
 mistaken for production-connected capabilities. Preserve their evidence and
 finish their dependency-complete integration in S3 after S2 foundations.
@@ -244,6 +251,90 @@ copied name through WND.pcls. Verify both registration and all nine native
 class projections in real CCPU memory, original rebase, shared identity,
 duplicate-publication rejection and complete release. No mirror/guest change.
 
+The subsequent [window graph audit](../etc/evidence/m0-t447-s2-window-graph-audit.md)
+confirms missing next/parent/child/owner writes in shared WND publication and
+missing desktop FNID termination. Preserve original direct-reader algorithms;
+resolve enrollment, mutation and retirement as one producer group before
+implementation. No attribution of SOL/WRITE OOM or graph acceptance is made.
+The first implementation prerequisite writes the existing original desktop
+FNID into the root projection and checks its exact CCPU-backed field without
+altering neighbouring words. Files: worker page-domain producer and its
+checked-in fixture; no ABI or mirror/guest changes. This does not complete
+relationship enrollment, updates or retirement; those remain the same group.
+Next within that group, stage a copied relationship batch at the existing
+page-domain boundary: resolve complete handle generations before any writes,
+publish only guest server-form addresses, and refuse retirement while incoming
+links remain. Files: page-domain source/header and real CCPU fixture. This is
+transport preparation, not production native-child enrollment or graph
+acceptance; do not export/wire it until native discovery/update ownership is
+complete. Original reader and native relationship policies remain unchanged.
+Adjacent S2 dialog callback repair: original W32DialogFunc calls CallBack16,
+whereas W32InitDlg only initializes WW. Bind the existing callback-window
+publication/restore pair around the former's project DLGPROC entrance, keeping
+a local WW borrow through nested destruction and finally. Do not modify
+W32InitDlg or original wudlg.c. Verify publish failure, nesting, exception and
+terminal cleanup through the selected dialog provider plus explicit fixture
+page-domain stand-ins; real CCPU/guest proof remains separately required.
+Native-class creation prerequisite: NTW16S installs its subclass after
+WM_CREATE returns, while create_bound's CBT enrollment runs before that
+message. For an explicitly borrowed native registration, install the existing
+WOW window entrance at that early boundary and retain its native target;
+preserve later subclasses. Veto restores the prior procedure only if this
+entrance still owns the slot, then retires publication. Scope: class ownership
+query, creation binding and CCPU creation/terminal tests. No class-init toggle,
+guest/mirror edit or new permanent hook is admitted by this prerequisite.
+Internal-control creation extension: reuse the same enrollment/rollback
+helper from explicit creation and the two existing scoped CBT entrances.
+Enroll already-prepared native classes related to an enrolled parent; leave
+unprepared classes explicitly outside this staged capability, not mapped to
+NULL in a guest graph. Zero the original WW prefix and retain native control
+policy and the actual creating task. Verify combo list/edit membership,
+native reparenting without metadata loss, veto and terminal release. Files:
+creation source/header, dialog entrance and CCPU fixture. No permanent hook,
+class-bootstrap toggle, guest/mirror change or claim of completed graph
+updates; those remain gates before production activation.
+The graph audit additionally confirms that local PMODE32 readers can follow
+native external siblings/owners. Read-only shared-view publication must be
+distinct from managed WW/task cleanup; do not subclass or assign ownership to
+foreign HWNDs, filter them out, or substitute non-PMODE32 fallback thunks.
+Original GWL_WNDPROC privacy does not apply wholesale to GWL_WOWWORDS reads.
+Resolve that consumer and paired sampled-view retirement before wiring the
+relationship batch. Existing local control tests do not waive this boundary.
+Shared-view class lifetime prerequisite: the existing page-domain publisher
+already samples public HWND data without attaching native WW or ownership.
+Reuse it rather than add an external-window registration system. Original
+class.c DestroyClass requires zero WND references; enforce that condition at
+the shared CLS retirement boundary too. Verify a non-owned native window's
+copied class/name view, failed early class retirement, withdrawal without
+native destruction and complete allocation release. Scope: page-domain
+retirement and CCPU fixture; no new ABI, native hooks or mirror/guest edits.
+
+Menu prerequisite progress is recorded in the existing window-graph audit:
+original resource and ordinary menu creators now reach the native binding;
+creator registration is separate from observation, and last-owner disposal
+releases borrowed views without native destruction. CCPU verification is
+local only. The complete menu batch is in integrated acceptance; native
+call/creation/queue returns now synchronize views before retirement.
+Latest run evidence and failures remain in the window-graph audit. Exact
+lazy-system-menu cleanup and broader S2 closure remain open; fixture markers
+do not authorize guest changes or establish production acceptance.
+
+Process-retirement group: original queue.c DestroyProcessInfo releases WOW
+process state after thread retirement. The existing owned lifecycle dispose
+has no production caller, and worker cleanup ignores failed USER detach.
+Connect that existing release through a provider callback in the worker-local
+runtime, not DllMain or a copied USER server destructor. Detach requires the
+caller to have stopped thread producers and no other session bindings; failed
+task/process retirement preserves registration for retry. Reject live tasks,
+objects or application classes rather than silently dropping their storage.
+Release borrowed native-class metadata through its existing owner. Perform
+USER detach before ending guest-memory services, and preserve failure in the
+worker result. Files: runtime/session binding, standalone worker cleanup,
+provider lifecycle and focused session/provider tests. Rebuild worker and
+WOW32 together for the appended private runtime callback. Zero mirror/guest
+diff; test live peers, task failure, process failure, successful retry and
+actual provider event/object ownership. This is not abnormal task termination.
+
 | Field | Contract |
 | --- | --- |
 | Identifier Mode | M0 T447 S2, Ordinary Mode; one implementer and subsequent separate review pass. |
@@ -282,11 +373,20 @@ bounded promotion. Full production gates apply to subsequent runtime changes.
 
 ## Current Technical Baseline
 
-The coherent13-image T446 S1 package is published to assets/release and
-O:/winnt/system32. release-manifest.json records exact identities; T446 S1
-publication verifies all tested/copy/deployed hashes and published-byte guard
-behavior. Twelve unchanged images retain the T445 S11 baseline and its style
-boundary evidence.
+S2 P1 restores the unchanged GetFullUserHandle body
+from original client/handles.c over the existing native object table. Its
+missing-window short-handle return is required by original DDE termination;
+the prior registered callback incorrectly substituted zero. Retain strict
+lookup for WOWEXEC registration and internal menu publication. Import only
+this body/header notice (OPENNT-HOST-069), not the surrounding DDE manager;
+zero guest or original function-body edits. Live, free, non-window, boundary
+and retired-entry tests pass in the integrated batch.
+
+S2 P1 publishes the coherent13-image package to assets/release and
+O:/winnt/system32. release-manifest.json records tested/deployed identities;
+only NTVDM/WOW32 change from T446. delivery-r1 retains recovery backups and
+hash equality. The missing original WINSPOOL companion is copied unchanged;
+no guest image is rebuilt or patched. See the indexed window-graph evidence.
 S9 P1 is266067264 and P2 is4f8c181487; S10 P1 is e046ee3d7;
 owner-accepted S11 P1 is b39ceb7e6, acceptance record cbd0f7832.
 The preceding T445 final closure changed documentation only; T446 S1 updates

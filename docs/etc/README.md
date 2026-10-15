@@ -1,5 +1,13 @@
 # Supporting Material
 
+[T447 S2 window graph audit](evidence/m0-t447-s2-window-graph-audit.md)
+traces original relationship readers to missing shared-data publication and
+defines the paired creation/update/retirement requirements before repair.
+
+[T447 S2 process retirement](evidence/m0-t447-s2-process-retirement.md)
+records the production lifecycle connection, quiescence/refusal boundaries
+and focused verification, without claiming abnormal-task or guest acceptance.
+
 [T447 audited development checkpoint](evidence/m0-t447-s2-checkpoint-review.md)
 records the approved cross-T adoption, dirty-file disposition, verification
 limits and remaining production gates; it is not a runtime release.

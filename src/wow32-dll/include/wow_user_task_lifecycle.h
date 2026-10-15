@@ -83,6 +83,9 @@ BOOL WINAPI wow_user_native_call_end(wow_user_native_call *);
  * The task carrier survives until the runtime's native-thread unbind edge. */
 BOOL WINAPI wow_user_task_lifecycle_exit(wow_user_task_lifecycle *, HANDLE,
     DWORD, PNEMODULESEG, DWORD);
-void WINAPI wow_user_task_lifecycle_dispose(wow_user_task_lifecycle *);
+/* Quiesced process release, after task/object/application-class retirement.
+ * Refuses live ownership instead of discarding it. Native registrations are
+ * borrowed and survive release of their project metadata. */
+BOOL WINAPI wow_user_task_lifecycle_dispose(wow_user_task_lifecycle *);
 
 #endif

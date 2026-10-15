@@ -28,9 +28,15 @@ int WINAPI wow_native_GetWindowTextLengthA(HWND w);
 BOOL WINAPI wow_native_SetWindowTextA(HWND w, LPCSTR text);
 LRESULT WINAPI wow_native_SendMessageA(HWND w, UINT message, WPARAM wp, LPARAM lp);
 LRESULT WINAPI wow_native_SendMessageTimeoutA(HWND w, UINT message, WPARAM wp, LPARAM lp, UINT flags, UINT timeout, PDWORD_PTR value);
+LRESULT WINAPI wow_native_DefWindowProcA(HWND, UINT, WPARAM, LPARAM);
+LRESULT WINAPI wow_native_DefDlgProcA(HWND, UINT, WPARAM, LPARAM);
+LRESULT WINAPI wow_native_DefMDIChildProcA(HWND, UINT, WPARAM, LPARAM);
+LRESULT WINAPI wow_native_DefFrameProcA(HWND, HWND, UINT, WPARAM, LPARAM);
+LRESULT WINAPI wow_native_DispatchMessageA(const MSG *);
 /* Include only after SDK declarations in the selected original provider.
  * The implementation itself must call native USER without these mappings. */
 #ifdef WOW_USER_PRIVATE_REDIRECT
+#include "wow_menu_native_bindings.h"
 #define GetWindowLongA wow_user_get_window_longA
 #define SetWindowLongA wow_user_set_window_longA
 #define GetClassLongA wow_user_get_class_longA
@@ -57,5 +63,10 @@ LRESULT WINAPI wow_native_SendMessageTimeoutA(HWND w, UINT message, WPARAM wp, L
 #define SetWindowTextA wow_native_SetWindowTextA
 #define SendMessageA wow_native_SendMessageA
 #define SendMessageTimeoutA wow_native_SendMessageTimeoutA
+#define DefWindowProcA wow_native_DefWindowProcA
+#define DefDlgProcA wow_native_DefDlgProcA
+#define DefMDIChildProcA wow_native_DefMDIChildProcA
+#define DefFrameProcA wow_native_DefFrameProcA
+#define DispatchMessageA wow_native_DispatchMessageA
 #endif
 #endif
