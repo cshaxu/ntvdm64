@@ -385,12 +385,12 @@ lookup stays separate. Native desktop identity, retained observed/managed WW
 aliases and paired host/guest word updates pass the grouped foundation tests.
 P5 connects the prepared graph at the reviewed callback/native-return boundaries.
 
-S2 P5 is published to assets/release and O:/winnt/system32 with matching
-tested13-image hashes. Only NTVDM/WOW32 change from P4; delivery-r5 retains
-coherent P4 recovery copies. Callback/native-return graph synchronization and
-paired WND/CLS reclamation pass the grouped tests. Original WINSPOOL and all
-guest images are unchanged; no additional mirror diff. The indexed window-graph
-evidence records tests and remaining integration/acceptance gaps.
+S2 P6 e97345404 is published to both locations with matching tested13-image
+hashes. Only NTVDM/WOW32 change from P5; mutation-delivery-r2 retains coherent
+P5 recovery copies. Numeric class/window mutations and paired reclamation pass.
+Original guest files remain unchanged; additional mirror diff is zero.
+The window-graph audit now traces message-driven native creation outside the
+temporary creation scopes; its enrollment/cleanup design remains open.
 S9 P1 is266067264 and P2 is4f8c181487; S10 P1 is e046ee3d7;
 owner-accepted S11 P1 is b39ceb7e6, acceptance record cbd0f7832.
 The preceding T445 final closure changed documentation only; T446 S1 updates

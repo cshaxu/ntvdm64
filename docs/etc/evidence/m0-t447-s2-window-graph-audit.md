@@ -2832,3 +2832,53 @@ after graph validation, use the existing allocation, and cannot overwrite its
 procedure, task, name or WOW words. No new object registry or native mutation
 algorithm is introduced. Governance/link/diff and final PE/hash checks gate
 the reviewed P6 commit/push. This is not S2 closure or full WOW32 recovery.
+
+### Post-P6 creation-boundary reconciliation
+
+Input is delivered e97345404; the worktree initially contained only the
+preserved unrelated ZIP. Source review, not a new application failure, selects
+the following remaining work. Earlier pending-startup statements in this
+chronological record must not be interpreted as the current implementation.
+
+| Responsibility | Current source / evidence | Disposition |
+| --- | --- | --- |
+| Standard-class startup and cleanup | wow_user_task_lifecycle.c initializes the original-table-derived metadata with wow_standard_classes_prepare and binds its matching cleanup table before publishing runtime->lifecycle. | Connected; do not redo the old startup repair. Full standard-control behavior remains S3 work. |
+| Explicit creation and initial native children | create_bound installs creation_hook, and dialog creation installs dialog_create_hook. Both forward otherwise-unclaimed children to wow_window_creation_forward_internal. | Connected only while those temporary scopes exist; not a universal native creation boundary. |
+| Existing object updates | P5 callback/native-return graph publication and P6 mutation/CLS updates. | Delivered, with bounded snapshot/failure limitations retained. |
+| Native same-slot generation reuse | wow_page_domain_fixture's window-links-reused-slot explicitly publishes synthetic 0x34560005/0x34570005 identities into real CCPU storage. | Real storage proof, not actual native allocator reuse; acceptance still missing. |
+| Message-driven application-class creation | Original MDI client creates its child while handling WM_MDICREATE, outside an explicit W32CreateWindow request. Existing internal enrollment additionally rejects non-borrowed application classes. | Source-confirmed missing enrollment closure; design it as one creation group, not an MDI-specific route. |
+
+Concrete original chain: wumsg.c WU32SendMessage uses retained ThunkMsg16;
+wmsg16.c ThunkWMMDICreate16 converts the MDI structure; native USER receives
+SendMessage. Pinned OpenNT windows/core/ntuser/client/mdiwin.c, WM_MDICREATE
+at1563, calls CreateWindowExA/W with WS_EX_MDICHILD and the selected application
+class. That internal call does not reenter WOW's pfnCsCreateWindowEx binding.
+The current source selects no general thread creation hook: the only WH_CBT
+installations under wow32-dll are inside explicit create_bound and dialog
+creation. Even if another creation scope is active, forward_internal rejects
+a class for which wow_class_words_native_registration is false. A registered
+WOW application class uses wow_window_native_proc, which rejects an HWND
+without its WW binding before dispatch. Thus merely having a valid native
+class registration or post-call shared snapshot cannot supply the missing
+pre-callback owner and private storage.
+
+Original kernel/createw.c provides WND/WOW storage before HCBT_CREATEWND
+(hook call at394); its later xxxAdjustSize/WM_GETMINMAXINFO is around796--800.
+Existing original walias.c FindPWW initializes classification in available
+WOW words but does not create missing storage. Retain that initializer rather
+than invent another native-versus-Win16 classifier. For implicit creation,
+original lpWOW may be NULL; do not fabricate explicit W32CreateWindow's WW
+flags or copy a parent's procedure merely to make a callback execute.
+
+Next group must reconcile explicit requests, native-created children and
+owned popups, both registered application and borrowed standard classes,
+first callback/CBT order, veto/exception unwind and terminal cleanup through
+one enrollment owner. Thread-lifetime versus bounded-native-call hook placement
+still needs review: a permanently installed older CBT hook alone does not
+prove metadata exists before a subsequently installed guest CBT hook executes.
+Do not silently accept that ordering change. No filename, WM_MDICREATE-only
+replacement path, second class registry, rewritten MDI implementation or
+guest mutation is admitted. Original MDI/message conversion remains selected;
+the missing seam is private window-storage ownership before original callbacks.
+This does not establish causality for SOL's OOM or complete S2/S3. No new
+runtime code, build, test or publication is part of this audit continuation.
