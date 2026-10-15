@@ -2832,3 +2832,56 @@ wutmr.c E42BC0C7E9DC199AE19414461D65ECF86B7ACC55C6D7523792812D73F158BEF5;
 kernel31/ldaux.asm
 AAE64AC7B0DB29F348E43D04B220FDCB0324A7EAF66AE9BE316D4974F2037360.
 No fresh application launch, runtime edit or new acceptance pass in this review.
+
+### Real Win16 CBT acceptance result
+
+Implemented independent tests/observation/win16_hook_probe.asm and
+verify-win16-hook-probe.ps1. No original guest is built or modified. The
+probe imports the audited original APIs, uses current-task WH_CBT and
+MakeProcInstance, queries class names before creation callbacks finish,
+recursively creates one button, vetoes another and checks a later creation.
+It writes four phase records plus all observed class names. The runner checks
+phase order, every error count, exact query/nesting/veto/destruction counts,
+unhook/thunk cleanup and normal run16 completion; observer exit alone is
+insufficient. Cleanup of its physical stage is unconditional even if evidence
+copying fails. No foreground desktop use or SUBST mapping.
+
+Preserved failed attempts, not product regressions:
+
+- guest-hook-r1 stopped at NASM syntax errors before guest launch. Explicit
+  relocation identifiers and whitespace around the modulo operator fixed the
+  independently authored test, with no production changes.
+- guest-hook-r2 completed but failed its counters: the thread-local hook also
+  observed native auxiliary window creation. The final probe retains every
+  class name and applies its button-specific actions only to BUTTON events;
+  unrelated creation chains normally. guest-hook-r3 records BUTTON, BUTTON,
+  IME, IME, BUTTON, BUTTON, IME. Thus the extra events are not treated as an
+  unexplained WOW defect or suppressed in a production hook.
+- guest-hook-r3 passes the complete group. guest-hook-r4 repeats only this
+  independent probe after hardening the runner's nested-finally cleanup,
+  without rebuilding or changing any production image or guest input.
+
+Final runner child26272 starts2026-10-15T11:04:23.2687417Z with180s outer
+deadline,35s observer deadline and recorded command; run.exit and result.exit
+are0. The retained command uses PackageRoot
+build/M0-T447/S2/standard-class-apps-r1/package, Observer
+build/M0-T445/S5/console-startup-observer.exe and fresh BuildRoot
+build/M0-T447/S2/guest-hook-r4/case. Sources/inputs/NE/listing/dispatch trace,
+observer report,600-byte guest report and parsed records are retained there.
+Final phase4 has errors0/created4/queried4/nested1/vetoed1/destroyed3/
+unhooked1/freed1. The observer reports result=exited and exit=0x00000000;
+forced package cleanup afterward is not proof of normal worker retirement.
+
+Input identities (also in each run's inputs.json): independent probe source
+CC89955F01E4AB5ECC192B5F9DA0861F84FFE352C2165B0EBC4B1EF8D91DF142;
+probe NE C133EEF5D498F91D2C06B80DB83DEA480129D2CECD24DFFC516141EBD8E4A7B6.
+NTVDM/WOW32 are unchanged published P8 identities. Original KRNL386 is
+D404576899CC11D23F368F2B30554E6108657CD37809837B341FD37E6B1A7AF4 and USER is
+6746088F2A87CD366E4FF5DA424B39B5BD91586D5F7570AFBF3C05BCA94E935C.
+
+This closes this specific real-guest CBT normal/nested/veto/recovery witness,
+not all original hook kinds, callback exceptions, native handle-slot reuse or
+S2. It neither fixes SOL nor verifies WRITE editing. This delivery changes
+only checked-in acceptance sources and evidence; runtime stays P8 in both
+release locations, with zero additional mirror/guest diff. No redundant
+full product build/publication is claimed or required for test-only delivery.
