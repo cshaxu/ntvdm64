@@ -3623,3 +3623,87 @@ W32Local* callbacks; usercli.h CALLWORDBREAKPROC invokes W32EditNextWord for
 tagged targets. No such consumption follows merely from copying registration
 inputs. Treat original EDIT storage, callbacks, dialog DS and lifecycle as one
 dependency group; do not bridge only one message or infer WRITE usability.
+
+## P10 SOL operation acceptance supplement
+
+This test-only continuation retains published runtime5edea33bb. The purpose
+is to distinguish a visible main window from actual deal/draw/close behavior;
+it does not close S2 or change the runtime. Entrypoints are
+`tests/observation/verify-wow-sol-gameplay.ps1` and its
+`wow_sol_gameplay_probe.c`. The runner compiles only the probe, uses a fresh
+owned physical stage and isolated desktop, and verifies Run16's actual exit
+before fixture cleanup. No guest memory access, patch, injected procedure,
+desktop switch or computer-use is involved.
+
+Inputs: sealed `build/M0-T447/S2/bitmap-apps-r1/package`, existing observer
+`build/M0-T445/S5/console-startup-observer.exe`, x86 MSVC compiler driver
+`build/M0-T445/S6/provider/msvc-x86.cmd`. Probe flags are /O2 /MT /W4 /WX.
+The machine is the unchanged x86 CCPU40 product. SOL SHA256 is
+68B196C6FD496BAC0E2F30F162EE0B4B4D6EB5BFEC1AF086C8EA759222211F31.
+Final runners record all13 host-image and SOL hashes in inputs.json. Product
+source, build inputs and release artifacts are unchanged, so the P10 build,
+DOS17, WINMINE and other boundary evidence remain applicable; this supplement
+does not claim a new production build or repeat unchanged publication.
+
+### Static acceptance contract
+
+Read-only NE inspection in sol-static-segment1-r1 and sol-static-entry-r2
+retains raw disassembly, relocation chains and exact input hash. SOL's
+1:0462 window procedure routes WM_COMMAND1000 through1:06e0 to1:09b4;
+the same command initializes the game at1:03fa. WM_INITMENU (0116) reaches
+1:075e and updates command1000 from its busy state. The test checks this
+native menu state before issuing the command. WM_LBUTTONDOWN/UP at1:0833/
+084c retain original capture and game callbacks. WM_CLOSE uses the default
+close path, with WM_DESTROY timer/procedure cleanup and PostQuitMessage.
+The test checks a changed tableau, changed waste pile, destroyed main window,
+and `result=exited`, `exit=0x00000000` from the waiting launcher. These are
+bounded ordinary-message checks, not physical-pointer or full-game acceptance.
+
+The first probe assumed immediate redeal must change cards. Relocations prove
+1:09c8 calls movable entry11, segment8:00fc; this time routine reads DOS AH2A/
+2C and uses DH seconds, discarding DL hundredths, before converting the date.
+Entry10, segment8:01ca, seeds the original random state. Two deals in one
+second legitimately repeat the board. The corrected probe waits1100ms between
+the initial sample and redeal; this is a fixture input precondition, not a
+product timing change or a relaxed pixel assertion. A menu-ready check alone
+does not solve the equal-seed test error.
+
+### Runs and results
+
+All roots below are under build/M0-T447/S2. Each background supervisor records
+the actual child PID/start/command/deadline in its `.process.json`; child bounds
+are150s, observer bound60s, individual image/window checks10s.
+
+| Run | Background supervisor / start UTC | Result |
+| --- | --- | --- |
+| sol-gameplay-r1 |33788 /12:40:22 | Probe6, redeal image assertion timed out; retained, not a pass. |
+| sol-gameplay-r2 |9180 /12:42:13 | Deal/draw/WM_CLOSE and launcher0 pass; diagnostic-only change, no runtime change. |
+| sol-gameplay-r3-Off |15528 /12:44:31 | Probe6 despite menu enabled; visible Solitaire, no modal confirmation. Group stopped before style cases. |
+| sol-gameplay-r4-Off |25764 /12:46:40 | Corrected seed precondition: all four assertions pass. |
+| sol-gameplay-r4-Win16 |same supervisor | Probe4, expected main window absent; group stopped before All. |
+| sol-gameplay-r5-Win16, -All |4976 /12:48:39 | Both probe4; diagnostic enumeration proves visible class #32770 titled SOL (330x146), WOWExec still alive, no visible Solitaire main window. Neither is a gameplay pass. |
+
+Off r4 has ready/deal hashes76ea77d5/97359d34, waste65174fed/b644f519;
+its main client is585x384. The r2 and r4 BMPs show actual cards and waste
+updates. They are not a pixel-correctness or complete drag/drop-game verdict.
+Raw failures, probe stdout, observer reports and captures are retained; no
+failed run was overwritten or relabelled as success.
+
+### Review and next owner boundary
+
+The two failed immediate-deal assertions are consistent with the now-proved
+seconds-granularity seed contract; no trace captured their seed values, so
+the precise per-run seed equality remains an inference. Corrected Off passes.
+Style-enabled startup is a separate unresolved result, not that seed issue:
+it fails before the test sends a deal command. Do not claim P10 universally
+fixed SOL initialization or infer a heap problem from the dialog's existence.
+
+Source review identifies the bounded propagation to audit next:
+registered_create_window_ex wraps native/original creation in the existing
+WOW style scope; any style-scope failure destroys an otherwise created HWND
+and returns NULL. NTW16S attachment.c accumulates per-window installation
+failures, while deliberately unsupported custom children are nonfatal.
+Review that full creation/return/cleanup group and the original SOL startup
+failure joins before selecting a repair. The current evidence does not yet
+identify which operation failed or establish a regression-introducing commit.
+No new mirror diff, runtime patch, guest change or style workaround is made.
