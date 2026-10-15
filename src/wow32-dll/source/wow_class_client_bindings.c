@@ -5,6 +5,7 @@
 
 ATOM WINAPI wow_original_register_class(WNDCLASSA *, DWORD *);
 BOOL WINAPI wow_original_unregister_class(LPCSTR, HINSTANCE);
+BOOL WINAPI wow_original_get_class_info(HINSTANCE, LPCSTR, WNDCLASSA *);
 extern unsigned short __cdecl getCS(void);
 extern unsigned short __cdecl getIP(void);
 static __declspec(thread) wow_class_client_context *current;
@@ -43,10 +44,88 @@ BOOL WINAPI wow_class_client_unregister(wow_class_client_context *context,
     return result;
 }
 
+BOOL WINAPI wow_class_client_query(wow_class_client_context *context,
+    HINSTANCE module, LPCSTR name, WNDCLASSA *output)
+{
+    wow_class_client_context *previous = current;
+    BOOL result;
+    current = context;
+    __try { result = wow_original_get_class_info(module, name, output); }
+    __finally { current = previous; }
+    return result;
+}
+
+BOOL WINAPI wow_class_client_query_native(HINSTANCE module, PUNICODE_STRING name,
+    WNDCLASSEXW *output, LPWSTR *menu, BOOL ansi)
+{
+    wow_class_words_binding *binding = NULL;
+    wow_class_lookup_entry *entry = NULL;
+    wow_window_dispatch_target target;
+    WNDCLASSEXA native_class = {sizeof(native_class)};
+    ANSI_STRING native_name = {0};
+    LPCSTR query;
+    BOOL result = FALSE;
+    DWORD error;
+    ATOM atom;
+    C_ASSERT(sizeof(WNDCLASSEXA) == sizeof(WNDCLASSEXW));
+    if (!name || !output || !menu || !ansi) {
+        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
+    }
+    /* Preserve original _GetClassInfoEx's NULL-module lookup on hModClient,
+     * not _InnerGetClassPtr's NULL wildcard. Native queries use the exact
+     * module retained by the selected class, not the caller's low instance. */
+    if (current && current->classes) {
+        HANDLE selected_module = module ? module : current->classes->client_module;
+        if (selected_module) {
+            atom = wow_class_words_find_atom(current->classes, name);
+            if (atom) binding = wow_class_words_acquire(current->classes, atom, selected_module);
+        }
+    }
+    entry = wow_class_words_entry(binding);
+    if (entry) query = MAKEINTATOM(entry->atomClassName);
+    else if (!HIWORD(name->Buffer)) query = (LPCSTR)name->Buffer;
+    else {
+        if (RtlUnicodeStringToAnsiString(&native_name, name, TRUE) < 0) {
+            SetLastError(ERROR_NOT_ENOUGH_MEMORY); return FALSE;
+        }
+        query = native_name.Buffer;
+    }
+    __try {
+        result = GetClassInfoExA(entry ? entry->hModule : module, query, &native_class);
+        if (!result) __leave;
+        if (!entry && native_class.lpfnWndProc == wow_window_native_proc) {
+            /* Original lookup may have rejected a deferred/different-owner
+             * class still registered in USER. Do not bypass that decision
+             * through native fallback and expose our transport entrance. */
+            result = FALSE;
+            SetLastError(ERROR_CLASS_DOES_NOT_EXIST);
+            __leave;
+        }
+        if (entry) {
+            if (!wow_class_words_target(binding, &target)) {
+                result = FALSE;
+                SetLastError(ERROR_INVALID_STATE);
+                __leave;
+            }
+            native_class.lpfnWndProc = (WNDPROC)target.procedure;
+            native_class.lpszMenuName = entry->lpszClientAnsiMenuName;
+        }
+        CopyMemory(output, &native_class, sizeof(native_class));
+        *menu = (LPWSTR)native_class.lpszMenuName;
+    } __finally {
+        error = GetLastError();
+        if (native_name.Buffer) RtlFreeAnsiString(&native_name);
+        wow_class_words_release(binding);
+        SetLastError(error);
+    }
+    return result;
+}
+
 typedef struct class_publication {
     wow_class_client_context *client;
     PUNICODE_STRING name;
     PCLSMENUNAME menu;
+    wow_class_lookup_entry *entry;
 } class_publication;
 
 /* A default-off witness for the original WU32RegisterClass hand-off.  It
@@ -118,29 +197,36 @@ static wow_class_lookup_entry *WINAPI publish_native(wow_class_register_context 
     }
     entry->fnid = fnid;
     entry->flags = flags;
-    entry->hTaskWow = publication->client->thread->ptdb ?
-        publication->client->thread->ptdb->hTaskWow : 0u;
-    entry->guest_server = mvdm_softpc_wow_page_domain_publish_class(atom, fnid,
-        entry->flags, entry->adwWOW[0], entry->adwWOW[1], entry->hTaskWow,
-        native_class.style, (DWORD)(ULONG_PTR)entry->lpfnWndProc,
-        (DWORD)native_class.cbWndExtra, 0u);
-    if (!entry->guest_server) {
-        wow_class_lookup_entry **link = (native_class.style & CS_GLOBALCLASS) ?
+    publication->entry = entry;
+    return entry;
+}
+
+static BOOL publish_completed_class(class_publication *publication,
+    const WNDCLASSEXA *native_class)
+{
+    wow_class_lookup_entry *entry = publication->entry;
+    wow_class_lookup_context *classes = publication->client->classes;
+    /* InternalRegisterClassEx returns before the original _RegisterClassEx
+     * copies adwWOW and chooses hTaskWow. Project only the completed original
+     * result, not the zero-initialized allocation returned by publish_native. */
+    if (!wow_class_words_publish_guest(entry, native_class)) {
+        wow_class_lookup_entry **link = (native_class->style & CS_GLOBALCLASS) ?
             &classes->pclsPublicList : &classes->pclsPrivateList;
 
-        (void)wow_class_words_destroy_native(link, native_class.hInstance,
+        (void)wow_class_words_destroy_native(link, native_class->hInstance,
             TRUE);
         SetLastError(ERROR_INVALID_STATE);
-        return NULL;
+        return FALSE;
     }
-    return entry;
+    return TRUE;
 }
 
 ATOM WINAPI wow_class_client_publish(WNDCLASSEXA *wc, PUNICODE_STRING name,
     PCLSMENUNAME menu, PROC worker, WORD fnid, DWORD flags, DWORD *words)
 {
-    class_publication publication;
+    class_publication publication = {0};
     wow_class_register_context context;
+    ATOM atom;
     /* Preserve the selected ANSI entry profile. Do not fabricate a CPD owner. */
     if (!current || !current->thread || worker || fnid || flags != 2 ||
             (HIWORD(wc->lpfnWndProc) == 0xffff && !current->resolve_callproc)) {
@@ -149,7 +235,9 @@ ATOM WINAPI wow_class_client_publish(WNDCLASSEXA *wc, PUNICODE_STRING name,
     publication.client=current; publication.name=name; publication.menu=menu;
     context.thread=current->thread; context.register_class=publish_native;
     context.resolve_callproc=resolve_callproc; context.binding=&publication;
-    return _RegisterClassEx(wc,worker,menu,fnid,flags,words,&context);
+    atom = _RegisterClassEx(wc,worker,menu,fnid,flags,words,&context);
+    if (atom && !publish_completed_class(&publication, wc)) return 0;
+    return atom;
 }
 
 BOOL WINAPI wow_class_client_remove(PUNICODE_STRING name, HINSTANCE module,

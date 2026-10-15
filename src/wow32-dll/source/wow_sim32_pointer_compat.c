@@ -8,8 +8,8 @@
  *
  * WOW32's historical declaration remains an external function spelling, so a
  * late-loaded DLL needs one concrete cdecl definition.  It owns no pointer,
- * mapping, guest state or cache; callback-frame writes use the separate
- * bounded `wow_callback_frame_lease` before this source-shaped completion.
+ * mapping, guest state or cache; CallBack16 writes its original resolved
+ * native mapping before this source-shaped completion.
  */
 
 #include <windows.h>

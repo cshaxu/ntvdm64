@@ -6,17 +6,9 @@
 static unsigned address_calls, acquire_calls, release_calls, errors;
 static uint8_t data[8];
 
+/* Only the remaining resource lease ABI is tested. CallBack16 no longer
+ * consumes this helper or a current-CPU-mode address conversion. */
 int __cdecl mvdm_softpc_protected_address(uint16_t selector, uint32_t offset,
-    uint32_t *address_out)
-{
-    (void)selector;
-    (void)offset;
-    (void)address_out;
-    ++errors; /* This existing frame fixture must keep current-mode lookup. */
-    return 0;
-}
-
-int __cdecl mvdm_softpc_effective_address(uint16_t selector, uint32_t offset,
     uint32_t *address_out)
 {
     ++address_calls;
@@ -49,15 +41,15 @@ int __cdecl main(void)
     unsigned before, after;
     int good, released, bad_selector, failed_acquire;
     __asm mov before, esp
-    good = wow_callback_frame_acquire_vp(0x12340020u, 8,
+    good = wow_callback_frame_acquire_protected_vp(0x12340020u, 8,
         GUEST_MEMORY_ACCESS_WRITE, &view);
     if (!good || view.bytes != data || view.guest_address != 0x1020u ||
         view.byte_count != 8) ++errors;
     released = wow_callback_frame_release(&view, 1);
     if (view.lease || view.bytes || view.byte_count) ++errors;
-    bad_selector = wow_callback_frame_acquire_vp(0x43210020u, 8,
+    bad_selector = wow_callback_frame_acquire_protected_vp(0x43210020u, 8,
         GUEST_MEMORY_ACCESS_WRITE, &view);
-    failed_acquire = wow_callback_frame_acquire_vp(0x12340020u, 9,
+    failed_acquire = wow_callback_frame_acquire_protected_vp(0x12340020u, 9,
         GUEST_MEMORY_ACCESS_WRITE, &view);
     __asm mov after, esp
     __asm mov esp, before

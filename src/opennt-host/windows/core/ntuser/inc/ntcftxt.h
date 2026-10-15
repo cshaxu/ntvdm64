@@ -17,6 +17,54 @@
  * The consuming translation unit supplies the original-shaped declarations,
  * call/capture macros and finite host bindings; no server engine is imported. */
 
+/* DIVERGENCE(OPENNT-HOST-046): also retain the original ANSI GetClassInfo
+ * client body. The private server query is supplied by its finite binding. */
+BOOL GetClassInfo(
+    HINSTANCE hmod OPTIONAL,
+    LPCTSTR pszClassName,
+    LPWNDCLASS pwc)
+{
+    IN_STRING strClassName;
+    LPWSTR pszMenuName;
+    WNDCLASSEXW WndClass;
+
+    /*
+     * Make sure cleanup will work successfully
+     */
+    strClassName.fAllocated = FALSE;
+
+    BEGINCALL()
+
+        FIRSTCOPYLPTSTRID(&strClassName, pszClassName);
+
+        retval = (DWORD)NtUserGetClassInfo(
+                hmod,
+                strClassName.pstr,
+                &WndClass,
+                &pszMenuName,
+                IS_ANSI);
+
+        if (retval) {
+
+            /*
+             * Move the info from the WNDCLASSEX to the WNDCLASS structure
+             */
+            RtlCopyMemory(pwc, &WndClass.style, sizeof(*pwc));
+
+            /*
+             * Update these pointers so they point to something real.
+             * pszMenuName is actually just the pointer the app originally
+             * passed to us.
+             */
+            pwc->lpszMenuName = (LPTSTR)pszMenuName;
+            pwc->lpszClassName = pszClassName;
+        }
+
+    ERRORTRAP(0);
+    CLEANUPLPTSTR(strClassName);
+    ENDCALL(BOOL);
+}
+
 /**************************************************************************\
 * StringDuplicate
 *

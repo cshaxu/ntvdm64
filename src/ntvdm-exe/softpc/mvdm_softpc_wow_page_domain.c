@@ -78,9 +78,19 @@ extern LONG VdmRemoveVirtualMemory(ULONG intel_address);
  * wow_user_client_view_layout.h.  This worker carrier writes only the fields
  * immutable USER16 directly consumes before it can enter an ordinary thunk. */
 #define MVDM_SOFTPC_WND_BYTES 176u
+#define MVDM_SOFTPC_MENU_BYTES 64u
+#define MVDM_SOFTPC_MENU_ITEM_BYTES 64u
+#define MVDM_SOFTPC_MENU_TASK 20u
+#define MVDM_SOFTPC_MENU_CAPACITY 36u
+#define MVDM_SOFTPC_MENU_COUNT 40u
+#define MVDM_SOFTPC_MENU_ITEMS 56u
 #define MVDM_SOFTPC_DESKTOP_INFO_BYTES 100u
 #define MVDM_SOFTPC_CLIENT_OBJECT_BYTES MVDM_SOFTPC_PAGE_BYTES
-#define MVDM_SOFTPC_CLIENT_DELTA 0x70000000u
+/* Original USER16 REBASEPTR tests against 0x7ffeffff before subtracting
+ * head.pSelf. A server-form value below that boundary is instead treated as
+ * an already-client pointer (GetMenu then dereferences it directly). Keep
+ * every projected server object in the original high address domain. */
+#define MVDM_SOFTPC_CLIENT_DELTA 0x80000000u
 #define MVDM_SOFTPC_DESKTOP_HANDLE 0x00010001u
 #define MVDM_SOFTPC_WND_HEAD_HANDLE 0u
 #define MVDM_SOFTPC_WND_HEAD_SELF 12u
@@ -89,6 +99,7 @@ extern LONG VdmRemoveVirtualMemory(ULONG intel_address);
 #define MVDM_SOFTPC_WND_EXSTYLE 164u
 #define MVDM_SOFTPC_WND_STYLE 168u
 #define MVDM_SOFTPC_WND_CLASS 76u
+#define MVDM_SOFTPC_WND_MENU_OR_ID 104u
 #define MVDM_SOFTPC_DESKTOP_BASE 0u
 #define MVDM_SOFTPC_DESKTOP_LIMIT 4u
 #define MVDM_SOFTPC_DESKTOP_WINDOW 8u
@@ -104,6 +115,7 @@ extern LONG VdmRemoveVirtualMemory(ULONG intel_address);
 #define MVDM_SOFTPC_CLS_PROCEDURE 68u
 #define MVDM_SOFTPC_CLS_WINDOW_EXTRA 76u
 #define MVDM_SOFTPC_CLS_MODULE 80u
+#define MVDM_SOFTPC_CLS_ANSI_NAME 100u
 
 typedef struct mvdm_softpc_wow_page_domain {
     session *owner;
@@ -127,6 +139,8 @@ typedef struct mvdm_softpc_wow_page_domain {
     ULONG guest_desktop_window;
     ULONG client_delta;
     ULONG guest_windows[MVDM_SOFTPC_HANDLE_ENTRY_COUNT];
+    ULONG guest_menus[MVDM_SOFTPC_HANDLE_ENTRY_COUNT];
+    ULONG guest_menu_items[MVDM_SOFTPC_HANDLE_ENTRY_COUNT];
     ULONG wow_gdt;
     ULONG dosx_gdt;
     USHORT dosx_gdt_limit;
@@ -188,6 +202,13 @@ static void page_domain_dispose(void *context)
      * Worker teardown is the exceptional backstop: no outstanding client
      * object may survive this worker's VDM allocation domain. */
     for (index = 0u; index < MVDM_SOFTPC_HANDLE_ENTRY_COUNT; ++index) {
+        if (value->guest_menus[index] != 0u) {
+            ULONG items = value->guest_menu_items[index];
+            if (items) (void)VdmFreeVirtualMemory(items);
+            (void)VdmFreeVirtualMemory(value->guest_menus[index]);
+            value->guest_menus[index] = 0u;
+            value->guest_menu_items[index] = 0u;
+        }
         if (value->guest_windows[index] != 0u) {
             (void)VdmFreeVirtualMemory(value->guest_windows[index]);
             value->guest_windows[index] = 0u;
@@ -697,11 +718,22 @@ int mvdm_softpc_wow_page_domain_clear_client_desktop(void)
     return page_domain_client_desktop(0u, 0u);
 }
 
-static void page_domain_window_info(ULONG guest_window, const WINDOWINFO *info)
+static int page_domain_window_info(ULONG guest_window, const WINDOWINFO *info,
+    HWND window)
 {
     const LONG *rect = &info->rcWindow.left;
     const LONG *client = &info->rcClient.left;
     unsigned i;
+    LONG control_id = 0;
+
+    /* Original WND.spmenu is a numeric ID for WS_CHILD, not a MENU pointer.
+     * USER16's local GetMenu returns that ID directly. Keep the native
+     * sample outside guest memory; zero is a valid control ID. */
+    if (info->dwStyle & WS_CHILD) {
+        SetLastError(ERROR_SUCCESS);
+        control_id = GetWindowLongA(window, GWL_ID);
+        if (!control_id && GetLastError() != ERROR_SUCCESS) return 0;
+    }
 
     /* Original rtl/wow.c::_ClientToScreen and _GetClientRect consume a
      * screen-relative WND.rcClient, not GetClientRect's zero-origin result.
@@ -715,6 +747,10 @@ static void page_domain_window_info(ULONG guest_window, const WINDOWINFO *info)
     }
     c_sas_storedw(guest_window + MVDM_SOFTPC_WND_STYLE, info->dwStyle);
     c_sas_storedw(guest_window + MVDM_SOFTPC_WND_EXSTYLE, info->dwExStyle);
+    if (info->dwStyle & WS_CHILD)
+        c_sas_storedw(guest_window + MVDM_SOFTPC_WND_MENU_OR_ID,
+            (ULONG)control_id);
+    return 1;
 }
 
 int mvdm_softpc_wow_page_domain_refresh_window(unsigned long window)
@@ -731,8 +767,8 @@ int mvdm_softpc_wow_page_domain_refresh_window(unsigned long window)
     if (!guest_window || c_sas_dw_at(guest_window + MVDM_SOFTPC_WND_HEAD_HANDLE)
             != window || !GetWindowInfo((HWND)(ULONG_PTR)window, &info))
         return 0;
-    page_domain_window_info(guest_window, &info);
-    return 1;
+    return page_domain_window_info(guest_window, &info,
+        (HWND)(ULONG_PTR)window);
 }
 
 int mvdm_softpc_wow_page_domain_callback_window(unsigned long window,
@@ -792,7 +828,8 @@ int mvdm_softpc_wow_page_domain_publish_handle(unsigned short index,
             !domain.client_delta || domain.owner != session_thread_current() ||
             !(c_getCR0() & MVDM_SOFTPC_CR0_PG) || c_getCR3() != domain.directory)
         return 0;
-    if (domain.guest_windows[index] != 0u) return 0;
+    if (domain.guest_windows[index] != 0u || domain.guest_menus[index] != 0u)
+        return 0;
     /* A native lookup failure must not publish a successful empty WND.
      * Complete sampling before allocating or exposing the guest record. */
     if (window != 0u && !GetWindowInfo((HWND)(ULONG_PTR)window, &info))
@@ -815,13 +852,140 @@ int mvdm_softpc_wow_page_domain_publish_handle(unsigned short index,
         ((ULONG)uniqueness << 16) | index);
     c_sas_storedw(guest_window + MVDM_SOFTPC_WND_HEAD_SELF, server_window);
     c_sas_storedw(guest_window + MVDM_SOFTPC_WND_CLASS, class_server);
-    page_domain_window_info(guest_window, &info);
+    if (!page_domain_window_info(guest_window, &info, (HWND)(ULONG_PTR)window)) {
+        (void)VdmFreeVirtualMemory(guest_window);
+        return 0;
+    }
     page_domain_include_object(server_window, MVDM_SOFTPC_WND_BYTES);
     c_sas_storedw(entry, server_window);
     c_sas_storedw(entry + 4u, 0u);
     c_sas_storedw(entry + 8u, ((ULONG)uniqueness << 16) |
         ((ULONG)flags << 8) | type);
     domain.guest_windows[index] = guest_window;
+    return 1;
+}
+
+/* The public USER owner supplies a complete copied node. No native API or
+ * guest callback runs between validation and publication. Original MENU and
+ * ITEM offsets are asserted by wow_user_client_view_layout.h; unused server
+ * drawing/locking fields are not synthesized. The unchanged USER16 query
+ * routines consume head.h/pSelf, cItems/rgItems and the first four ITEM words. */
+static int page_domain_menu_context(void)
+{
+    return domain.active && domain.client_delta &&
+        domain.owner == session_thread_current() &&
+        (c_getCR0() & MVDM_SOFTPC_CR0_PG) && c_getCR3() == domain.directory;
+}
+
+static ULONG page_domain_menu_lookup(ULONG menu)
+{
+    WORD index = LOWORD(menu);
+    ULONG client;
+    if (!index || index == 1u || index == 0xffffu) return 0u;
+    client = domain.guest_menus[index];
+    return client && c_sas_dw_at(client) == menu ? client : 0u;
+}
+
+unsigned long mvdm_softpc_wow_page_domain_publish_menu(unsigned long menu,
+    unsigned long task, unsigned long count,
+    const mvdm_softpc_wow_menu_query_item *items)
+{
+    WORD index = LOWORD(menu);
+    ULONG client, storage = 0u, old_storage, entry, i, bytes;
+    int created;
+    if (!page_domain_menu_context() || !index || index == 1u || index == 0xffffu ||
+            (count && !items) || count > 0xffffffffu / MVDM_SOFTPC_MENU_ITEM_BYTES ||
+            domain.guest_windows[index]) return 0u;
+    client = domain.guest_menus[index];
+    if (client && (c_sas_dw_at(client) != menu ||
+            c_sas_dw_at(client + MVDM_SOFTPC_MENU_TASK) != task)) return 0u;
+    for (i = 0; i < count; ++i)
+        if (items[i].submenu && (items[i].submenu == menu ||
+                !page_domain_menu_lookup(items[i].submenu))) return 0u;
+    created = client == 0u;
+    if (created) {
+        if (VdmAllocateVirtualMemory(&client, MVDM_SOFTPC_MENU_BYTES, TRUE) < 0)
+            return 0u;
+        if (client > 0xffffffffu - domain.client_delta - MVDM_SOFTPC_MENU_BYTES)
+            goto fail;
+    }
+    bytes = count * MVDM_SOFTPC_MENU_ITEM_BYTES;
+    if (bytes) {
+        if (VdmAllocateVirtualMemory(&storage, bytes, TRUE) < 0) goto fail;
+        if (bytes > 0xffffffffu - domain.client_delta ||
+                storage > 0xffffffffu - domain.client_delta - bytes) goto fail;
+        c_sas_fills(storage, 0u, bytes);
+        for (i = 0; i < count; ++i) {
+            ULONG item = storage + i * MVDM_SOFTPC_MENU_ITEM_BYTES;
+            ULONG submenu = items[i].submenu ?
+                page_domain_menu_lookup(items[i].submenu) + domain.client_delta : 0u;
+            c_sas_storedw(item, items[i].type);
+            c_sas_storedw(item + 4u, items[i].state);
+            c_sas_storedw(item + 8u, items[i].id);
+            c_sas_storedw(item + 12u, submenu);
+        }
+    }
+    if (created) {
+        c_sas_fills(client, 0u, MVDM_SOFTPC_MENU_BYTES);
+        c_sas_storedw(client, menu);
+        c_sas_storedw(client + 12u, client + domain.client_delta);
+        c_sas_storedw(client + MVDM_SOFTPC_MENU_TASK, task);
+    }
+    old_storage = domain.guest_menu_items[index];
+    if (old_storage && VdmFreeVirtualMemory(old_storage) < 0)
+        goto fail;
+    if (storage) page_domain_include_object(storage + domain.client_delta, bytes);
+    page_domain_include_object(client + domain.client_delta, MVDM_SOFTPC_MENU_BYTES);
+    c_sas_storedw(client + MVDM_SOFTPC_MENU_ITEMS,
+        storage ? storage + domain.client_delta : 0u);
+    c_sas_storedw(client + MVDM_SOFTPC_MENU_CAPACITY, count);
+    c_sas_storedw(client + MVDM_SOFTPC_MENU_COUNT, count);
+    entry = domain.guest_handle_table + (ULONG)index * MVDM_SOFTPC_HANDLE_ENTRY_BYTES;
+    c_sas_storedw(entry, client + domain.client_delta);
+    c_sas_storedw(entry + 4u, 0u);
+    c_sas_storedw(entry + 8u, (menu & 0xffff0000u) | 2u); /* original TYPE_MENU */
+    domain.guest_menus[index] = client;
+    domain.guest_menu_items[index] = storage;
+    return client + domain.client_delta;
+fail:
+    if (storage) (void)VdmFreeVirtualMemory(storage);
+    if (created) (void)VdmFreeVirtualMemory(client);
+    return 0u;
+}
+
+int mvdm_softpc_wow_page_domain_retire_menu(unsigned long menu)
+{
+    ULONG client, storage, entry;
+    if (!page_domain_menu_context() || !(client = page_domain_menu_lookup(menu)))
+        return 0;
+    storage = domain.guest_menu_items[LOWORD(menu)];
+    if (storage) {
+        if (VdmFreeVirtualMemory(storage) < 0) return 0;
+        domain.guest_menu_items[LOWORD(menu)] = 0u;
+        c_sas_storedw(client + MVDM_SOFTPC_MENU_ITEMS, 0u);
+        c_sas_storedw(client + MVDM_SOFTPC_MENU_COUNT, 0u);
+        c_sas_storedw(client + MVDM_SOFTPC_MENU_CAPACITY, 0u);
+    }
+    if (VdmFreeVirtualMemory(client) < 0) return 0;
+    entry = domain.guest_handle_table + (ULONG)LOWORD(menu) * MVDM_SOFTPC_HANDLE_ENTRY_BYTES;
+    c_sas_storedw(entry, (ULONG)LOWORD(menu) + 1u);
+    c_sas_storedw(entry + 4u, 0u);
+    c_sas_storedw(entry + 8u, 0x00010000u);
+    domain.guest_menus[LOWORD(menu)] = 0u;
+    return 1;
+}
+
+int mvdm_softpc_wow_page_domain_window_menu(unsigned long window,
+    unsigned long menu)
+{
+    ULONG client, menu_client = 0u;
+    if (!page_domain_menu_context() || !LOWORD(window) ||
+            !(client = domain.guest_windows[LOWORD(window)]) ||
+            c_sas_dw_at(client) != window ||
+            (c_sas_dw_at(client + MVDM_SOFTPC_WND_STYLE) & WS_CHILD)) return 0;
+    if (menu && !(menu_client = page_domain_menu_lookup(menu))) return 0;
+    c_sas_storedw(client + MVDM_SOFTPC_WND_MENU_OR_ID,
+        menu_client ? menu_client + domain.client_delta : 0u);
     return 1;
 }
 
@@ -851,24 +1015,31 @@ int mvdm_softpc_wow_page_domain_retire_handle(unsigned short index,
     return 1;
 }
 
-unsigned long mvdm_softpc_wow_page_domain_publish_class(unsigned short atom,
+unsigned long mvdm_softpc_wow_page_domain_publish_named_class(unsigned short atom,
     unsigned short fnid, unsigned long flags, unsigned long wow0, unsigned long wow1,
     unsigned long task, unsigned long style, unsigned long procedure,
-    unsigned long window_extra, unsigned long module)
+    unsigned long window_extra, unsigned long module,
+    const char *class_name, unsigned long name_bytes)
 {
     ULONG client = 0u;
     ULONG server;
+    ULONG size;
     mvdm_softpc_wow_class_allocation *allocation;
 
     if (!domain.active || !atom || !domain.client_delta ||
             domain.owner != session_thread_current() ||
             !(c_getCR0() & MVDM_SOFTPC_CR0_PG) || c_getCR3() != domain.directory)
         return 0u;
+    if (!class_name || !HIWORD((ULONG_PTR)class_name) || !name_bytes ||
+            name_bytes > 0xffffffffu - MVDM_SOFTPC_CLS_BYTES) return 0u;
+    size = MVDM_SOFTPC_CLS_BYTES + name_bytes;
+    if (size > 0xffffffffu - domain.client_delta ||
+            class_name[name_bytes - 1u] != '\0') return 0u;
     allocation = HeapAlloc(GetProcessHeap(), 0u, sizeof(*allocation));
     if (allocation == NULL) return 0u;
-    if (VdmAllocateVirtualMemory(&client, MVDM_SOFTPC_CLS_BYTES, TRUE) < 0)
+    if (VdmAllocateVirtualMemory(&client, size, TRUE) < 0)
         goto fail;
-    if (client > 0xffffffffu - domain.client_delta - MVDM_SOFTPC_CLS_BYTES) {
+    if (client > 0xffffffffu - domain.client_delta - size) {
         (void)VdmFreeVirtualMemory(client);
         goto fail;
     }
@@ -891,7 +1062,14 @@ unsigned long mvdm_softpc_wow_page_domain_publish_class(unsigned short atom,
      * this provider has no source-proven 16-bit module conversion yet. */
     (void)module;
     c_sas_storedw(client + MVDM_SOFTPC_CLS_MODULE, 0u);
-    page_domain_include_object(server, MVDM_SOFTPC_CLS_BYTES);
+    /* Original USER16 GetClassNameA rebases this pointer through WND.pSelf,
+     * just as it rebases WND.pcls. Keep the bytes with CLS so existing class
+     * retirement releases both; no native string pointer crosses the ABI. */
+    c_sas_stores(client + MVDM_SOFTPC_CLS_BYTES,
+        (uint8_t *)class_name, name_bytes);
+    c_sas_storedw(client + MVDM_SOFTPC_CLS_ANSI_NAME,
+        server + MVDM_SOFTPC_CLS_BYTES);
+    page_domain_include_object(server, size);
     allocation->client = client;
     allocation->next = class_allocations;
     class_allocations = allocation;

@@ -6,8 +6,8 @@ The owner assigns known WOW-side contract gaps to this program's existing
 candidate packages, while non-WOW completion proceeds separately. The
 [current handoff ledger](../etc/operations/t430-non-wow-contract-plan.md#known-wow-handoff)
 is a required input at recipient admission: W01 owns dispatch/task/callback
-return proof, W02 shared-view proof, W03 the initial WRITE first-provider
-investigation (not a presumed heap fix), W05 a resource discrepancy only if
+return proof; the approved T447 transfer below assigns required W02 shared-view
+foundations and startup-failure coordination there. W05 owns a resource discrepancy only if
 proved, and W16 the original SOUND ordinal limitation. Each recipient's
 admitted S checklist must carry its normal/failure/cleanup evidence obligation.
 No unfinished WOW implementation is absorbed into non-WOW audit closure or
@@ -26,9 +26,9 @@ startup prerequisites. A demonstrated dependency may be promoted explicitly.
 
 | Phase | Observable milestone and retained owners |
 | --- | --- |
-| Basic functionality | W01--W05: execute/return, valid objects, load modules/resources and access required files. Prioritize the first actual startup failure, not exhaustive unrelated API completion. |
+| Basic functionality | T447 W01 plus bounded W02 object, W03 EDIT storage, W06 basic control/dialog and W09 menu dependencies; residual W02--W05 retain their own scope. Execute/return, valid objects and normal SOL/WRITE initialization with retained WINMINE; no exhaustive unrelated API prerequisite. |
 | Basic display | W07/W08: usable windows, client content, bitmaps and readable text. Provide the resource conversion needed for these cases without waiting for every advanced drawing family. |
-| Comprehensive interaction | W06, W09, ordinary W18, W10 and W12: input/focus/caret, timers, menus/accelerators, dialogs, open/save, clipboard and everyday Shell operations with cancellation and cleanup. |
+| Comprehensive interaction | Residual W06/W09, ordinary W18, W10 and W12: input/focus/caret, timers, accelerators, advanced dialog/menu interaction, open/save, clipboard and Shell operations. Reuse T447's foundational controls/menus and cleanup rather than reimplement them. |
 | Comprehensive display | Complete retained W07/W08/W09 display stages: fonts/metrics, colours/palettes, transforms, bitmap/icon/cursor conversion, metafile rendering and repaint/geometry fidelity; investigate the residual-pixel report, then run the three-app usability checkpoint. Repairs remain at their existing owners, not inside the acceptance task. |
 | Comprehensive functionality | Residual W19 plus DDE, OLE, multimedia, network, printing, COMM and inspection/debugging; finish with W20 whole-provider acceptance. Error handling required for earlier phases is never delayed here. |
 
@@ -119,6 +119,25 @@ application's actual artifact/profile frontier; do not restart the global
 audit or assume that earlier successful artifacts equal the current package.
 
 ## Complete proposed S sequence and transfer
+
+### Approved cross-T ownership refinement, 2026-10-14
+
+The [T447 audit](../etc/operations/t447-wow-execution-plan.md#owner-requested-cross-t-planning-audit)
+refines the historical table below. W IDs remain provenance; delivery ownership
+is T447 for W01 and dependency-complete W02 object foundations, W03 reached
+EDIT storage/dialog DS, W06 basic controls/dialogs plus hook callback entry,
+and W09 MENU-01 graph/parser/mutation/retirement. Their residual proposals
+remain queued and must reconcile broad C04--C08/C10 and DATA rows, not claim
+whole-family completion. T447 S2--S6 split foundations, basic initialization,
+full messaging, task termination and final acceptance respectively.
+
+T447 coordinates SOL/WRITE failure attribution without assuming heap failure.
+W19 required terminal handling travels with its earliest consumer; general
+error response reuses that mechanism and retains DOS work. NT Monitor's
+approved per-task delete is T447 S5, not completion of W17 ToolHelp/debugger.
+W04/W05 and all other families retain their scope unless a concrete dependency
+is traced and explicitly promoted. W20 receives completed owner evidence,
+not deferred implementation. No candidate is removed by this refinement.
 
 The former successor S1--S20 sequence is now a historical transfer index:
 T422 S3--S22 -> former successor S1--S20 -> W01--W20 below. W keys are stable

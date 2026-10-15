@@ -20,11 +20,16 @@ BOOL WINAPI wow_window_words_attach_class(HWND, const struct _WW *,
 BOOL WINAPI wow_window_words_attach_target(HWND, const struct _WW *,
     wow_class_words_binding *, const wow_window_dispatch_target *);
 LRESULT CALLBACK wow_window_native_proc(HWND, UINT, WPARAM, LPARAM);
+/* Shared normalized native CPD entry for WND/CLS cleanup fields. A window
+ * snapshots the logical class target into its own CPD storage before calling
+ * this entry; this is never an externally visible procedure identity. */
+LRESULT CALLBACK wow_window_call_native_previous(HWND, UINT, WPARAM, LPARAM);
 /* Storage boundary for an already validated procedure, not full USER
  * SetWindowLong policy (CPD/ANSI conversion and zombie checks belong above).
  * Encoded WOW addresses remain opaque; exchange does not alter WW words.
- * CallProc handles must be resolved by that policy before storage/dispatch;
- * their FFFF tag is not a callable WOW procedure. */
+ * Public CallProc identities are kept separately from the cleanup procedure
+ * and forwarded through CallWindowProcA. Reads/exchanges return the original
+ * identity, never the forwarding address; FFFF is not a WOW procedure tag. */
 BOOL WINAPI wow_window_procedure_read(HWND, DWORD *);
 BOOL WINAPI wow_window_class_procedure_read(HWND, DWORD *);
 BOOL WINAPI wow_window_class_procedure_exchange(HWND, DWORD, DWORD *);

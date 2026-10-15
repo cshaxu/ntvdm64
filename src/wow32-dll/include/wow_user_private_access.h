@@ -5,6 +5,7 @@ LONG WINAPI wow_user_get_window_longA(HWND, int);
 LONG WINAPI wow_user_set_window_longA(HWND, int, LONG);
 DWORD WINAPI wow_user_get_class_longA(HWND, int);
 DWORD WINAPI wow_user_set_class_longA(HWND, int, LONG);
+BOOL WINAPI wow_user_get_class_infoA(HINSTANCE, LPCSTR, LPWNDCLASSA);
 LRESULT WINAPI wow_user_call_window_procA(WNDPROC, HWND, UINT, WPARAM, LPARAM);
 LRESULT WINAPI wow_user_call_window_procW(WNDPROC, HWND, UINT, WPARAM, LPARAM);
 VOID WINAPI wow_user_register_wow_exec(HANDLE);
@@ -34,6 +35,7 @@ LRESULT WINAPI wow_native_SendMessageTimeoutA(HWND w, UINT message, WPARAM wp, L
 #define SetWindowLongA wow_user_set_window_longA
 #define GetClassLongA wow_user_get_class_longA
 #define SetClassLongA wow_user_set_class_longA
+#define GetClassInfoA wow_user_get_class_infoA
 #define CallWindowProcA wow_user_call_window_procA
 #define CallWindowProcW wow_user_call_window_procW
 #define RegisterWowExec wow_user_register_wow_exec

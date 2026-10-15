@@ -34,7 +34,7 @@ void c_sas_stores(uint32_t address, uint8_t *bytes, uint32_t byte_count)
     cpu_memory->writes++;
 }
 
-int mvdm_softpc_effective_address(uint16_t selector, uint32_t offset,
+int mvdm_softpc_protected_address(uint16_t selector, uint32_t offset,
     uint32_t *address_out)
 {
     if (address_out == NULL || selector != 0x1234u) return 0;
@@ -84,15 +84,14 @@ int main(void)
     if (!session_activate(&owner) ||
         !session_guest_memory_begin(&owner, &memory, read_memory, write_memory) ||
         !session_thread_bind(&owner) ||
-        !wow_callback_frame_acquire_vp(0x12340008u, 4u,
+        !wow_callback_frame_acquire_protected_vp(0x12340008u, 4u,
         GUEST_MEMORY_ACCESS_READ, &source_frame) ||
         source_frame.bytes[0] != 0x42u ||
         !wow_callback_frame_acquire_linear(16u, 4u,
         GUEST_MEMORY_ACCESS_WRITE, &callback_frame)) return 1;
-    /* Original CallBack16 observes its caller VDMFRAME while preparing a
-     * separate writable CBVDMFRAME.  They must be two bounded aliases from
-     * the one session guest-memory lease context, not a replacement mapper
-     * or a retained native SoftPC pointer. */
+    /* Remaining resource consumers may hold separate read/write leases.
+     * This is no longer a CallBack16 mapping test: that body uses the
+     * original protected-mode resolver and native descriptor mapping. */
     callback_frame.bytes[0] = 0x99u;
     if (!wow_callback_frame_release(&callback_frame, 1) ||
         !wow_callback_frame_release(&source_frame, 0) ||

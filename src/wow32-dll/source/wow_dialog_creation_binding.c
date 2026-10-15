@@ -47,15 +47,18 @@ static void release_creation(wow_dialog_creation *creation)
     HeapFree(GetProcessHeap(), 0, creation);
 }
 
-static void discard_creation(wow_dialog_creation *creation)
+static void rollback_window(wow_dialog_creation *creation)
 {
     wow_dialog_creation *property;
 
     if (!creation) return;
     if (creation->window) {
-        property = (wow_dialog_creation *)RemovePropW(creation->window,
+        property = (wow_dialog_creation *)GetPropW(creation->window,
             dialog_property);
-        if (property) release_creation(property);
+        if (property == creation) {
+            RemovePropW(creation->window, dialog_property);
+            release_creation(property);
+        }
         if (creation->borrow)
             (void)wow_window_words_detach_if(creation->window,
                 creation->borrow);
@@ -63,12 +66,19 @@ static void discard_creation(wow_dialog_creation *creation)
     creation->window = NULL;
     wow_window_words_release(creation->borrow);
     creation->borrow = NULL;
+}
+
+static void discard_creation(wow_dialog_creation *creation)
+{
+    rollback_window(creation);
     release_creation(creation);
 }
 
 static LRESULT CALLBACK dialog_create_hook(int code, WPARAM wp, LPARAM lp)
 {
     wow_dialog_creation *creation = current_creation;
+    BOOL enrolled = FALSE, accepted = FALSE;
+    LRESULT result;
 
     if (code == HCBT_CREATEWND && creation && !creation->window) {
         CBT_CREATEWNDA *cbt = (CBT_CREATEWNDA *)lp;
@@ -82,22 +92,46 @@ static LRESULT CALLBACK dialog_create_hook(int code, WPARAM wp, LPARAM lp)
             words.dwStyle = request->style;
             words.dwExStyle = request->dwExStyle;
             words.hInstance = request->hInstance;
-            if (!wow_window_words_attach((HWND)wp, &words) ||
-                    !(creation->borrow = wow_window_words_acquire((HWND)wp)) ||
-                    !wow_window_words_publish_owner((HWND)wp,
-                        creation->borrow, creation->thread)) {
+            if (!wow_window_words_attach((HWND)wp, &words)) {
                 creation->failure = GetLastError();
+                return 1;
+            }
+            creation->window = (HWND)wp;
+            creation->borrow = wow_window_words_acquire((HWND)wp);
+            if (!creation->borrow) {
+                creation->failure = GetLastError();
+                wow_window_words_detach((HWND)wp);
+                creation->window = NULL;
+                return 1;
+            }
+            if (!wow_window_words_publish_owner((HWND)wp,
+                    creation->borrow, creation->thread)) {
+                creation->failure = GetLastError();
+                rollback_window(creation);
                 return 1;
             }
             if (!SetPropW((HWND)wp, dialog_property, creation)) {
                 creation->failure = GetLastError();
+                rollback_window(creation);
                 return 1;
             }
             retain_creation(creation); /* native window property ownership */
-            creation->window = (HWND)wp;
+            enrolled = TRUE;
         }
     }
-    return CallNextHookEx(NULL, code, wp, lp);
+    __try {
+        result = CallNextHookEx(NULL, code, wp, lp);
+        accepted = result == 0;
+    } __finally {
+        /* A later CBT hook can veto or raise before native USER sends any
+         * dialog messages. Withdraw our metadata before HWND destruction. */
+        if (enrolled && !accepted) {
+            DWORD error = GetLastError();
+            rollback_window(creation);
+            SetLastError(error);
+        }
+    }
+    return result;
 }
 
 static LRESULT CALLBACK dialog_return_hook(int code, WPARAM wp, LPARAM lp)
@@ -110,20 +144,30 @@ static LRESULT CALLBACK dialog_return_hook(int code, WPARAM wp, LPARAM lp)
         if (message && message->hwnd == creation->window &&
                 message->message == WM_CREATE && message->lResult != -1) {
             wow_user_borrow_scope scope;
+            wow_task_callback_scope task_scope;
 
             /* W32InitDlg is original WOW32 code.  Its GWL_WOW* accessors
              * intentionally require a bounded worker-local borrow scope;
              * establish it at the native callback boundary rather than
              * weakening the private access contract. */
-            if (!wow_user_borrow_enter(&scope)) {
+            if (!wow_task_callback_enter(&task_scope)) {
                 creation->failure = GetLastError();
             } else {
                 __try {
-                    creation->init_parameter = (LONG)W32InitDlg(
-                        creation->window, creation->input_parameter);
-                    creation->initialized = TRUE;
+                    if (!wow_user_borrow_enter(&scope)) {
+                        creation->failure = GetLastError();
+                    } else {
+                        __try {
+                            creation->init_parameter = (LONG)W32InitDlg(
+                                creation->window, creation->input_parameter);
+                            creation->initialized = TRUE;
+                        } __finally {
+                            (void)wow_user_borrow_leave(&scope);
+                        }
+                    }
                 } __finally {
-                    (void)wow_user_borrow_leave(&scope);
+                    if (!wow_task_callback_leave(&task_scope))
+                        creation->failure = GetLastError();
                 }
             }
         }
@@ -137,39 +181,44 @@ static INT_PTR CALLBACK dialog_proc(HWND window, UINT message, WPARAM wp,
     wow_dialog_creation *creation = (wow_dialog_creation *)GetPropW(window,
         dialog_property);
     INT_PTR result = FALSE;
+    wow_user_borrow_scope scope;
+    wow_task_callback_scope task_scope;
+    BOOL entered = FALSE, borrowed = FALSE;
 
-    if (!creation || !creation->initialized) {
+    if (!creation || (!creation->initialized && message != WM_NCDESTROY)) {
         SetLastError(ERROR_INVALID_STATE);
         return FALSE;
     }
     retain_creation(creation); /* survive a nested terminal callback */
-    {
-        wow_user_borrow_scope scope;
-
-        if (!wow_user_borrow_enter(&scope)) {
-            release_creation(creation);
-            return FALSE;
+    __try {
+        if (!creation->initialized) __leave;
+        if (!wow_task_callback_enter(&task_scope)) __leave;
+        entered = TRUE;
+        if (!wow_user_borrow_enter(&scope)) __leave;
+        borrowed = TRUE;
+        if (creation->procedure) {
+            result = creation->procedure(window, message, wp,
+                message == WM_INITDIALOG ? creation->init_parameter : lp);
         }
-        __try {
-            if (creation->procedure) {
-                result = creation->procedure(window, message, wp,
-                    message == WM_INITDIALOG ? creation->init_parameter : lp);
-            }
-            if (message == WM_NCDESTROY) {
+    } __finally {
+        /* Terminal ownership must be released even if guest entry fails or
+         * the callback raises. A nested destroy may already have removed it. */
+        if (message == WM_NCDESTROY) {
+            if (GetPropW(window, dialog_property) == creation) {
                 wow_dialog_creation *property =
                     (wow_dialog_creation *)RemovePropW(window, dialog_property);
                 if (property) release_creation(property);
-                if (creation->borrow)
-                    (void)wow_window_words_detach_if(window, creation->borrow);
-                creation->window = NULL;
-                wow_window_words_release(creation->borrow);
-                creation->borrow = NULL;
             }
-        } __finally {
-            (void)wow_user_borrow_leave(&scope);
+            if (creation->borrow)
+                (void)wow_window_words_detach_if(window, creation->borrow);
+            creation->window = NULL;
+            wow_window_words_release(creation->borrow);
+            creation->borrow = NULL;
         }
+        if (borrowed) (void)wow_user_borrow_leave(&scope);
+        if (entered && !wow_task_callback_leave(&task_scope)) result = FALSE;
+        release_creation(creation);
     }
-    release_creation(creation);
     return result;
 }
 
@@ -183,6 +232,7 @@ HWND WINAPI wow_user_server_create_dialog(HANDLE module,
     HWND result = NULL;
     DWORD error = ERROR_SUCCESS;
     BOOL failed = FALSE;
+    BOOL completed = FALSE;
 
     if (!dialog_template || bytes == 0 || !binding || !binding->thread ||
             !binding->thread->ppi || !binding->thread->ppi->objects ||
@@ -222,21 +272,23 @@ HWND WINAPI wow_user_server_create_dialog(HANDLE module,
                 dialog_template, owner, dialog_proc, init_parameter);
         }
         error = creation->failure ? creation->failure : GetLastError();
-        if (!result || !creation->window || !creation->initialized) {
+        if (!result || !creation->window || !creation->initialized ||
+                creation->failure) {
             if (result) DestroyWindow(result);
             result = NULL;
             if (!error) error = ERROR_INVALID_DATA;
             failed = TRUE;
         }
+        completed = TRUE;
     } __finally {
         current_creation = previous;
         if (creation->create_hook)
             UnhookWindowsHookEx(creation->create_hook);
         if (creation->return_hook)
             UnhookWindowsHookEx(creation->return_hook);
+        if (!completed || failed) discard_creation(creation);
+        else release_creation(creation);
     }
-    if (failed) discard_creation(creation);
-    else release_creation(creation);
     SetLastError(error);
     return result;
 }

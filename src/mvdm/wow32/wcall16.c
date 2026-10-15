@@ -14,10 +14,7 @@
 
 
 #include "precomp.h"
-/* DIVERGENCE(MVDM-HOST-DIV-178): the original FlatAddress macros return
- * process aliases.  The selected non-GUI callback slice instead takes
- * bounded, synchronous frame leases through adapter-softpc; its callback
- * order and CCPU40 `host_simulate` ownership remain in this original body. */
+/* DIVERGENCE(MVDM-HOST-DIV-304): default-off callback observation only. */
 #include "wow_callback_frame_lease.h"
 #pragma hdrstop
 
@@ -653,8 +650,7 @@ BOOL CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVOID pvpReturn)
     register PTD ptd;
     register PVDMFRAME pFrame;
     register PCBVDMFRAME pCBFrame;
-    wow_callback_frame_lease caller_frame_lease;
-    wow_callback_frame_lease callback_frame_lease;
+    VDMFRAME callerFrame;
     WORD wAX;
 #if FASTBOPPING
 #else
@@ -669,11 +665,15 @@ BOOL CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVOID pvpReturn)
 
     ptd = CURRENTPTD();
 
-    /* DIVERGENCE(MVDM-HOST-DIV-178): retain the source frame ordering while
-     * replacing only its raw process alias with a bounded SoftPC lease. */
-    if (!wow_callback_frame_acquire_vp(ptd->vpStack, sizeof(VDMFRAME),
-        GUEST_MEMORY_ACCESS_READ, &caller_frame_lease)) return FALSE;
-    pFrame = (PVDMFRAME)caller_frame_lease.bytes;
+    GETFRAMEPTR(ptd->vpStack, pFrame);
+    /* DIVERGENCE(MVDM-HOST-DIV-178): snapshot the only caller fields used
+     * below before the second original resolution can fault in a segment.
+     * Consume the original FlatAddress result, never retranslate through SAS;
+     * do not write this snapshot back over guest changes made by WOW16Done. */
+    callerFrame.wTDB = pFrame->wTDB;
+    callerFrame.wLocalBP = pFrame->wLocalBP;
+    FREEVDMPTR(pFrame);
+    pFrame = &callerFrame;
 
     // Just making sure that this thread matches the current 16-bit task
 
@@ -691,12 +691,7 @@ BOOL CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVOID pvpReturn)
         ptd->dwFlags |= TDF_INITCALLBACKSTACK;
         ptd->vpCBStack = (ptd->vpCBStack - sizeof(CBVDMFRAME)) & (~0x1);
     }
-    if (!wow_callback_frame_acquire_vp(ptd->vpCBStack, sizeof(CBVDMFRAME),
-        GUEST_MEMORY_ACCESS_WRITE, &callback_frame_lease)) {
-        (void)wow_callback_frame_release(&caller_frame_lease, 0);
-        return FALSE;
-    }
-    pCBFrame = (PCBVDMFRAME)callback_frame_lease.bytes;
+    pCBFrame = CBFRAMEPTR(ptd->vpCBStack);
     pCBFrame->vpStack = ptd->vpStack;
     pCBFrame->wRetID = (WORD)iRetID;
     pCBFrame->wTDB       = pFrame->wTDB;
@@ -770,14 +765,13 @@ BOOL CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVOID pvpReturn)
     }
 #endif
 
-    /* Commit and release both aliases before the original recursive CPU call:
-     * no host pointer may survive `host_simulate`. */
     wow_callback_frame_trace("before", (DWORD)iRetID, ptd->vpStack,
-        ptd->vpCBStack, callback_frame_lease.guest_address, pFrame->wTDB,
+        ptd->vpCBStack, 0, pFrame->wTDB,
         (DWORD)vpfnProc, pParm16 ? pParm16->WndProc.wMsg : 0,
         pParm16 ? pParm16->WndProc.lParam : 0);
-    if (!wow_callback_frame_release(&caller_frame_lease, 0) ||
-        !wow_callback_frame_release(&callback_frame_lease, 1)) return FALSE;
+    FREEVDMPTR(pFrame);
+    FLUSHVDMPTR(ptd->vpCBStack, sizeof(CBVDMFRAME), pCBFrame);
+    FREEVDMPTR(pCBFrame);
 
     // Set up to use the right 16-bit stack for this thread
 
@@ -821,9 +815,7 @@ BOOL CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVOID pvpReturn)
     WOW32ASSERT(ptd->vpStack == vpCBStackT);
 
     ptd->vpCBStack = ptd->vpStack;
-    if (!wow_callback_frame_acquire_vp(ptd->vpCBStack, sizeof(CBVDMFRAME),
-        GUEST_MEMORY_ACCESS_READ, &callback_frame_lease)) return FALSE;
-    pCBFrame = (PCBVDMFRAME)callback_frame_lease.bytes;
+    pCBFrame = CBFRAMEPTR(ptd->vpCBStack);
 
     // Just making sure that this thread matches the current 16-bit task
 
@@ -848,7 +840,7 @@ BOOL CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVOID pvpReturn)
 
     ptd->vpStack = pCBFrame->vpStack;
 
-    if (!wow_callback_frame_release(&callback_frame_lease, 0)) return FALSE;
+    FREEVDMPTR(pCBFrame);
 
     return TRUE;
 }

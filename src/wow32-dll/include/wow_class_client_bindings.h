@@ -18,6 +18,8 @@ typedef struct wow_class_client_context {
 } wow_class_client_context;
 ATOM WINAPI wow_class_client_register(wow_class_client_context *, WNDCLASSA *, DWORD *);
 BOOL WINAPI wow_class_client_unregister(wow_class_client_context *, LPCSTR, HINSTANCE);
+BOOL WINAPI wow_class_client_query(wow_class_client_context *, HINSTANCE,
+    LPCSTR, WNDCLASSA *);
 
 #ifdef WOW_ORIGINAL_CLASS_CLIENT
 #include <tchar.h>
@@ -27,6 +29,8 @@ wow_class_client_context *WINAPI wow_class_client_current(void);
 ATOM WINAPI wow_class_client_publish(WNDCLASSEXA *, PUNICODE_STRING,
     PCLSMENUNAME, PROC, WORD, DWORD, DWORD *);
 BOOL WINAPI wow_class_client_remove(PUNICODE_STRING, HINSTANCE, PCLSMENUNAME);
+BOOL WINAPI wow_class_client_query_native(HINSTANCE, PUNICODE_STRING,
+    WNDCLASSEXW *, LPWSTR *, BOOL);
 int MBToWCSEx(WORD, LPCSTR, int, LPWSTR *, int, BOOL);
 #define TEXT_FN(x) x##A
 #define GetClientInfo() wow_class_client_current()
@@ -45,6 +49,10 @@ int MBToWCSEx(WORD, LPCSTR, int, LPWSTR *, int, BOOL);
 #define MBToWCS(text,count,out,cap,alloc) MBToWCSEx(0,text,count,out,cap,alloc)
 #define NtUserRegisterClassExWOW wow_class_client_publish
 #define NtUserUnregisterClass wow_class_client_remove
+#define NtUserGetClassInfo wow_class_client_query_native
+#define IS_ANSI TRUE
+#undef GetClassInfo
+#define GetClassInfo wow_original_get_class_info
 #undef UnregisterClass
 #define UnregisterClass wow_original_unregister_class
 #define RegisterClassWOWA wow_original_register_class

@@ -12,6 +12,15 @@ are inherited rather than reset. No new global source audit is required.
 
 ## Complete scope and dependencies
 
+Approved T447 transfer (2026-10-14): basic dialog lifecycle, standard controls
+and internal children, original EDIT callbacks/shared DS and their release
+belong to T447 S3; the already admitted hook callback-entry foundation stays
+with T447 S2. Broader input/caret/keyboard, complete hook registration/removal
+and timer families remain here. C08 is not closed by entry-scope fixtures.
+The local S table below covers residual cases and consumes T447 evidence,
+not another implementation of its transferred paths. See the approved
+[transfer audit](../etc/operations/t447-wow-execution-plan.md#owner-requested-cross-t-planning-audit).
+
 C08 and inherited USER families: real dialog init/control/procedure/cancel/release; selected input, caret, keyboard, hook and timer operation families, callbacks and task-loss cleanup. Reuse W01/W02, never a second input router or scheduler.
 
 Expected reuse boundaries: [Messages, callbacks and task execution](proposal-wow32-message-task-execution-001.md), [USER objects and shared view](proposal-wow32-user-objects-shared-view-001.md), [Resource discovery and loading foundation](proposal-wow32-resource-loading-001.md).

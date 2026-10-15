@@ -206,6 +206,14 @@ static BOOL WINAPI registered_init_task(UINT version, LPCSTR app_name,
     DWORD init_error;
     DWORD style = WINDOW_STYLE_OFF;
     WORD parent = 0;
+    if (!ensure_lifecycle()) return FALSE;
+    if (wow_user_runtime_current()->thread) {
+        DWORD error = wow_user_task_lifecycle_notify_start(&wow_lifecycle,
+            task_id, shared_id, OpenNtBaseClientWowStarted);
+        registration_trace("InitTaskNotificationRetry", error);
+        SetLastError(error);
+        return error == ERROR_SUCCESS;
+    }
     if (shared_id && shared_id != (DWORD)-1) {
         DWORD error = OpenNtBaseClientWowStyle(shared_id, &style);
         if (error) {
@@ -245,11 +253,12 @@ static BOOL WINAPI registered_init_task(UINT version, LPCSTR app_name,
     if(!result)registration_trace("InitTaskError",init_error);
     SetLastError(init_error);
     if (result && shared_id && shared_id!=(DWORD)-1) {
-        DWORD error=OpenNtBaseClientWowStarted(shared_id);
+        DWORD error=wow_user_task_lifecycle_notify_start(&wow_lifecycle,
+            task_id, shared_id, OpenNtBaseClientWowStarted);
         registration_trace("InitTaskNotification",error);
         if (error) {
             /* Original W32Thread owns bounded retry and W32DestroyTask.
-             * The lifecycle rejects reinitializing an already-bound task. */
+             * A retry resumes notification, not the committed InitTask. */
             SetLastError(error);
             return FALSE;
         }

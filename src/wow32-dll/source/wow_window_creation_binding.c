@@ -1,5 +1,6 @@
 #include "wow_window_creation_binding.h"
 #include "wow_user_runtime.h"
+#include "wow_menu_resource_bindings.h"
 #include <stdio.h>
 typedef VOID (APIENTRY *PFNW32ET)(VOID);
 #pragma warning(push)
@@ -25,8 +26,55 @@ typedef struct creation_scope {
     wow_class_words_binding *class_words;
     wow_window_words_binding *borrow;
     wow_task_order_thread *thread;
+    wow_class_lookup_entry *menu_class;
+    BOOL menu_checked;
+    BOOL menu_attached;
 } creation_scope;
 static __declspec(thread) creation_scope *current_scope;
+
+BOOL WINAPI wow_window_creation_menu(HWND window, CREATESTRUCTA *creation)
+{
+    creation_scope *scope = current_scope;
+    wow_class_lookup_entry *entry;
+    HMENU menu;
+    if (!scope || scope->window != window)
+        return TRUE;
+    if (scope->menu_checked) {
+        /* Native USER supplies a fresh CREATESTRUCT for WM_CREATE; the
+         * earlier callback's temporary structure is not retained. */
+        if (scope->menu_attached && creation)
+            creation->hMenu = GetMenu(window);
+        return TRUE;
+    }
+    scope->menu_checked = TRUE; /* Resource loading can reenter creation. */
+    if (!creation || creation->hMenu || (creation->style & WS_CHILD))
+        return TRUE;
+    entry = scope->menu_class;
+    if (!entry || !entry->lpszClientUnicodeMenuName) return TRUE;
+    /* Original createw.c loads the class module's menu after CBT, before
+     * WM_NCCREATE. Native registration intentionally has no menu name.
+     * Reuse the original resource client/converter/parser, not USER32's
+     * PE loader. The enrolled window retains the class across this callback. */
+    menu = wow_user_load_menuW(entry->hModule,
+        entry->lpszClientUnicodeMenuName);
+    if (!menu) return TRUE; /* Original creation tolerates load failure. */
+    /* Original getset.c's non-child GWL_ID branch performs the same menu
+     * association as createw.c, without xxxSetMenu's frame recalculation.
+     * SetMenu here would send size/move messages before guest WM_CREATE. */
+    SetLastError(ERROR_SUCCESS);
+    SetWindowLongPtrA(window, GWLP_ID, (LONG_PTR)menu);
+    if (GetMenu(window) != menu) {
+        scope->failure = GetLastError();
+        if (!scope->failure) scope->failure = ERROR_INVALID_WINDOW_HANDLE;
+        DestroyMenu(menu);
+        return FALSE;
+    }
+    /* USER now owns destruction of the attached menu, including rejected
+     * creation. Both the original guest message and GetMenu see this handle. */
+    creation->hMenu = menu;
+    scope->menu_attached = TRUE;
+    return TRUE;
+}
 
 /* Default-off creation-boundary witness. Do not replace USER's failure or
  * change the callback sequence merely to make creation succeed. */
@@ -41,10 +89,11 @@ static void trace_creation(const creation_scope *scope, HWND result, DWORD error
         NULL,OPEN_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
     if (file==INVALID_HANDLE_VALUE) return;
     size=(DWORD)sprintf_s(line,sizeof(line),
-        "%lu WindowCreate atom=%04X result=%p error=%lu bindingError=%lu claimed=%d menu=%p instance=%p style=%08lX tid=%lu\r\n",
+        "%lu WindowCreate atom=%04X result=%p error=%lu bindingError=%lu claimed=%d menu=%p instance=%p style=%08lX tid=%lu menuChecked=%d menuAttached=%d actualMenu=%p\r\n",
         GetCurrentProcessId(),scope->atom,result,error,scope->failure,
         scope->claimed,scope->request->hMenu,scope->request->hInstance,
-        scope->request->style,GetCurrentThreadId());
+        scope->request->style,GetCurrentThreadId(),scope->menu_checked,
+        scope->menu_attached,result ? GetMenu(result) : NULL);
     if (size) (void)WriteFile(file,line,size,&written,NULL);
     CloseHandle(file);
 }
@@ -64,6 +113,8 @@ static LPVOID application_parameter(const creation_scope *scope,
 static LRESULT CALLBACK creation_hook(int code, WPARAM wp, LPARAM lp)
 {
     creation_scope *scope = current_scope;
+    BOOL enrolled = FALSE, accepted = FALSE;
+    LRESULT result;
     if (code == HCBT_CREATEWND && scope && !scope->claimed) {
         CBT_CREATEWNDA *creation = (CBT_CREATEWNDA *)lp;
         CREATESTRUCTA *cs = creation->lpcs;
@@ -75,6 +126,7 @@ static LRESULT CALLBACK creation_hook(int code, WPARAM wp, LPARAM lp)
             words.dwStyle = cs->style;
             words.dwExStyle = cs->dwExStyle;
             words.hInstance = cs->hInstance;
+            scope->menu_class = wow_class_words_entry(scope->class_words);
             if (!wow_window_words_attach_target((HWND)wp, &words,
                     scope->class_words, scope->target)) {
                 scope->failure = GetLastError();
@@ -90,11 +142,26 @@ static LRESULT CALLBACK creation_hook(int code, WPARAM wp, LPARAM lp)
             }
             if (!wow_window_words_publish_owner(scope->window,scope->borrow,scope->thread)) {
                 scope->failure=GetLastError();
+                (void)wow_window_words_detach_if(scope->window, scope->borrow);
                 return 1;
             }
+            enrolled = TRUE;
         }
     }
-    return CallNextHookEx(NULL, code, wp, lp);
+    __try {
+        result = CallNextHookEx(NULL, code, wp, lp);
+        accepted = result == 0;
+    } __finally {
+        /* USER may destroy a vetoed HWND without entering our WNDPROC.
+         * Retire its publication while the native handle is still valid.
+         * The creator's borrow remains alive until CreateWindow unwinds. */
+        if (enrolled && !accepted) {
+            DWORD error = GetLastError();
+            (void)wow_window_words_detach_if(scope->window, scope->borrow);
+            SetLastError(error);
+        }
+    }
+    return result;
 }
 
 static HWND create_bound(wow_task_order_thread *thread,

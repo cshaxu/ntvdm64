@@ -6,10 +6,8 @@
 #include "ntvdm-exe/session/guest_memory_lease.h"
 
 /*
- * A source-shaped replacement for the temporary `GETFRAMEPTR` mappings used
- * by original WOW CallBack16.  It owns no WOW task, callback, CPU or guest
- * control semantics: it makes a single numeric VDM frame address available
- * only during the original source's read/write/flush/free interval.
+ * Bounded copied memory for the remaining resource and task-parent callers.
+ * CallBack16 uses its original protected-mode resolver, not this SAS path.
  */
 typedef struct wow_callback_frame_lease {
     guest_memory_lease *lease;
@@ -18,12 +16,6 @@ typedef struct wow_callback_frame_lease {
     uint32_t byte_count;
     uint32_t access;
 } wow_callback_frame_lease;
-
-/* The `vp` form is the source-facing entry: it receives the original packed
- * 16:16 stack value and resolves it through the selected CCPU40 segment
- * contract before acquiring a session lease. */
-int wow_callback_frame_acquire_vp(uint32_t vp, uint32_t byte_count,
-    uint32_t access, wow_callback_frame_lease *view_out);
 
 /* Resource pointers use explicit protected addressing even during a real-mode
  * WOW entry. The original caller must first resolve/lock the selector and

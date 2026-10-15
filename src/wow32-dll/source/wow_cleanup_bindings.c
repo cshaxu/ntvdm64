@@ -64,8 +64,10 @@ BOOL WINAPI wow_user_cleanup_bound(HANDLE instance, DWORD task, PNEMODULESEG sel
     context->handles.aheList=objects->entries;
     context->last_handle=objects->last_handle;
     desktop->spwnd=&root;
+    context->object_release_failed=FALSE;
     __try {
         result=_WOWCleanup(instance,task,selectors,count,context);
+        if (context->object_release_failed) result=FALSE;
     } __finally {
         desktop->spwnd=previous_root;
         clear_tree(objects);

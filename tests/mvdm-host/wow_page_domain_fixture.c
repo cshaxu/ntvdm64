@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <stdio.h>
+#include <string.h>
 #include <windows.h>
 
 #include "ntvdm-exe/session/session.h"
@@ -9,6 +10,10 @@
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 #include "wow32-dll/include/wow_user_object_bindings.h"
 #include "wow32-dll/include/wow_window_dispatch_bindings.h"
+#include "wow32-dll/include/wow_menu_client_bindings.h"
+#include "wow32-dll/include/wow_menu_native_bindings.h"
+#include "ntvdm-exe/wow/include/wow_user_runtime.h"
+#include "wow32-dll/include/wow_cleanup_bindings.h"
 
 extern void sas_init(uint32_t size);
 extern void sas_term(void);
@@ -29,6 +34,7 @@ extern int32_t c_getCPL(void);
 extern int xtrn2phy(uint32_t linear, uint32_t access, uint32_t *physical);
 extern uint32_t c_sas_dw_at(uint32_t address);
 extern void c_sas_fills(uint32_t address, uint8_t value, uint32_t byte_count);
+extern void c_sas_loads(uint32_t source, uint8_t *destination, uint32_t byte_count);
 extern void phy_w32(uint32_t address, uint32_t value);
 extern uint32_t c_getGDT_BASE(void);
 extern uint16_t c_getGDT_LIMIT(void);
@@ -51,9 +57,8 @@ extern LONG VdmQueryFreeVirtualMemory(ULONG *bytes, ULONG *largest);
 #ifdef WOW_WINDOW_BORROW_FIXTURE
 #include "wow32-dll/include/wow_window_words_binding.h"
 #include "wow32-dll/include/wow_task_order_bindings.h"
-typedef VOID (APIENTRY *PFNW32ET)(VOID);
-#include "opennt-abi/source/public/internal/windows/inc/wowuserp.h"
-
+#include "wow32-dll/include/wow_class_client_bindings.h"
+#include "wow32-dll/include/wow_standard_class_bindings.h"
 static unsigned borrow_errors;
 static ULONG callback_backing, callback_teb;
 #define BORROW_CHECK(value) do { if (!(value)) { ++borrow_errors; \
@@ -67,6 +72,13 @@ static DWORD WINAPI destroy_in_callback(HWND window, UINT message, UINT wp,
         callback_backing = c_sas_dw_at(callback_teb + 0x70u);
         BORROW_CHECK(c_sas_dw_at(callback_teb + 0x6cu) == (ULONG)(ULONG_PTR)window);
         BORROW_CHECK(callback_backing != 0u);
+        {
+            ULONG menu = c_sas_dw_at(callback_backing + 104u);
+            ULONG delta = c_sas_dw_at(callback_teb + 0x60u);
+            BORROW_CHECK(menu && c_sas_dw_at(menu - delta) ==
+                (ULONG)(ULONG_PTR)GetMenu(window));
+            BORROW_CHECK(menu && c_sas_dw_at(menu - delta + 40u) == 1u);
+        }
         BORROW_CHECK(DestroyWindow(window));
         /* WM_DESTROY/WM_NCDESTROY recursively dispatch through production
          * bindings. Their restoration must preserve this outer borrow. */
@@ -85,10 +97,19 @@ static int verify_callback_borrow(ULONG teb)
     static wow_user_object_table objects;
     wow_task_order_process process = {0};
     wow_task_order_thread thread = {0};
+    wow_task_order_entry task = {0};
+    wow_task_order_state task_state = {0};
+    wow_user_runtime runtime = WOW_USER_RUNTIME_INITIALIZER;
+    wow_user_runtime_thread runtime_binding = {0};
     wow_window_dispatch_target target = { 0x81234567u, destroy_in_callback };
     unsigned mode;
     process.objects = &objects;
     thread.ppi = &process;
+    process.pwpi = &task_state;
+    task_state.CSOwningThread = &thread;
+    thread.ptdb = &task;
+    task.hTaskWow = 0x4321u;
+    if (!wow_user_runtime_bind(&runtime_binding, &runtime, &thread, NULL)) return 0;
     callback_teb = teb;
     for (mode = 0; mode < 2; ++mode) {
         HWND window = CreateWindowExA(0, "STATIC", "S2 callback borrow",
@@ -98,9 +119,16 @@ static int verify_callback_borrow(ULONG teb)
         LONG result = 0x123456;
         ULONG free_before, free_after, largest;
         BOOL caught = FALSE;
+        HMENU menu;
         words.adwWOW[1] = 0x12345678u;
-        if (!window) return 0;
+        if (!window) {
+            (void)wow_user_runtime_unbind(&runtime_binding);
+            return 0;
+        }
         BORROW_CHECK(VdmQueryFreeVirtualMemory(&free_before, &largest) >= 0);
+        menu = CreateMenu();
+        BORROW_CHECK(menu && AppendMenuA(menu, MF_STRING, 17u, "Callback menu"));
+        BORROW_CHECK(SetMenu(window, menu));
         BORROW_CHECK(wow_window_words_attach_target(window, &words, NULL, &target));
         borrow = wow_window_words_acquire(window);
         BORROW_CHECK(borrow != NULL);
@@ -128,6 +156,8 @@ static int verify_callback_borrow(ULONG teb)
         }
         BORROW_CHECK(caught == (mode != 0));
         BORROW_CHECK(!IsWindow(window));
+        BORROW_CHECK(!IsMenu(menu));
+        BORROW_CHECK(wow_menu_native_refresh_menu(NULL));
         BORROW_CHECK(objects.entries[LOWORD(window)].bType == TYPE_FREE);
         BORROW_CHECK(c_sas_dw_at(teb + 0x6cu) == 0u &&
             c_sas_dw_at(teb + 0x70u) == 0u);
@@ -138,10 +168,260 @@ static int verify_callback_borrow(ULONG teb)
             free_after == free_before);
         if (IsWindow(window)) DestroyWindow(window);
     }
+    BORROW_CHECK(wow_user_runtime_unbind(&runtime_binding));
     fprintf(stderr, "WOW_WINDOW_BORROW_CCPU errors=%u normal=1 exception=1\n", borrow_errors);
     return borrow_errors == 0;
 }
+
+static DWORD WINAPI class_projection_version(HANDLE module)
+{
+    (void)module;
+    return 0x030au;
+}
+
+static DWORD WINAPI class_projection_callback(HWND window, UINT message,
+    UINT wp, LONG lp, DWORD procedure, PVOID words)
+{
+    (void)window; (void)message; (void)wp; (void)lp;
+    (void)procedure; (void)words;
+    BORROW_CHECK(FALSE); /* Register/query/unregister must not call a WNDPROC. */
+    return 0;
+}
+
+static int verify_class_registration(ULONG teb)
+{
+    wow_class_lookup_context classes = {0};
+    wow_task_order_thread thread = {0};
+    wow_task_order_entry task = {0};
+    wow_class_client_context context = {&classes, 0x030a,
+        class_projection_version, class_projection_callback, &thread, NULL};
+    WNDCLASSA wc = {0}, native_view;
+    DWORD words[2] = {0x12345678u, 0x87654321u};
+    unsigned mode, before = borrow_errors;
+    classes.client_module = GetModuleHandleW(L"user32.dll");
+    thread.ptdb = &task;
+    task.hTaskWow = 0x4321u;
+    wc.hInstance = (HINSTANCE)0x43211234u;
+    wc.lpfnWndProc = (WNDPROC)0x81234567u;
+    wc.lpszClassName = "S2_CCPU_CLASS_COMMIT";
+    for (mode = 0; mode < 2; ++mode) {
+        wow_class_words_binding *binding;
+        wow_class_lookup_entry *entry;
+        ULONG free_before = 0, free_after = 0, largest = 0;
+        ATOM atom;
+        thread.TIF_flags = mode ? 0 : WOW_TASK_TIF_16BIT;
+        wc.style = mode ? CS_GLOBALCLASS : 0;
+        BORROW_CHECK(VdmQueryFreeVirtualMemory(&free_before, &largest) >= 0);
+        atom = wow_class_client_register(&context, &wc, words);
+        BORROW_CHECK(atom != 0);
+        if (!atom) continue;
+        binding = wow_class_words_acquire(&classes, atom, wc.hInstance);
+        BORROW_CHECK(binding != NULL);
+        entry = wow_class_words_entry(binding);
+        BORROW_CHECK(entry && entry->guest_server);
+        if (entry && entry->guest_server) {
+            ULONG client = entry->guest_server - c_sas_dw_at(teb + 0x60u);
+            /* Real CCPU reads of original CLS.adwWOW / hTaskWow. No mocked
+             * parent export: this case links the selected worker page owner. */
+            BORROW_CHECK(c_sas_dw_at(client + 36u) == words[0]);
+            BORROW_CHECK(c_sas_dw_at(client + 40u) == words[1]);
+            BORROW_CHECK(c_sas_dw_at(client + 44u) == (mode ? 0u : task.hTaskWow));
+            BORROW_CHECK(c_sas_dw_at(client + 68u) == (ULONG)wc.lpfnWndProc);
+            BORROW_CHECK(entry->adwWOW[0] == words[0] && entry->adwWOW[1] == words[1]);
+        }
+        wow_class_words_release(binding);
+        BORROW_CHECK(wow_class_client_unregister(&context, wc.lpszClassName, wc.hInstance));
+        BORROW_CHECK(!classes.pclsPrivateList && !classes.pclsPublicList);
+        BORROW_CHECK(!GetClassInfoA(wc.hInstance, wc.lpszClassName, &native_view));
+        BORROW_CHECK(VdmQueryFreeVirtualMemory(&free_after, &largest) >= 0 &&
+            free_after == free_before);
+    }
+    fprintf(stderr, "WOW_CLASS_COMMIT_CCPU errors=%u cases=2 original_words=1 original_task=1 released=1\n",
+        borrow_errors - before);
+    return borrow_errors == before;
+}
+
+static int verify_native_class_projection(ULONG teb)
+{
+    wow_class_lookup_context classes = {0};
+    wow_class_lookup_entry *entry;
+    ULONG free_before = 0, free_after = 0, largest = 0;
+    ULONG delta = c_sas_dw_at(teb + 0x60u);
+    unsigned before = borrow_errors, projected = 0;
+    classes.client_module = GetModuleHandleW(L"user32.dll");
+    BORROW_CHECK(VdmQueryFreeVirtualMemory(&free_before, &largest) >= 0);
+    BORROW_CHECK(wow_standard_classes_prepare(&classes, class_projection_callback));
+    for (entry = classes.pclsPublicList; entry; entry = entry->next) {
+        wow_standard_class_view native_class, by_name;
+        wow_class_words_binding *again;
+        ULONG server, client, name, remaining_before = 0, remaining_after = 0;
+        char text[64] = {0};
+        unsigned i;
+        BORROW_CHECK(wow_standard_class_describe(MAKEINTATOM(entry->atomClassName), &native_class));
+        BORROW_CHECK(wow_class_words_publish_guest(entry, &native_class.native));
+        server = entry->guest_server;
+        BORROW_CHECK(server != 0);
+        if (!server) continue;
+        client = server - delta;
+        BORROW_CHECK((WORD)c_sas_dw_at(client + 4u) == entry->atomClassName);
+        BORROW_CHECK((WORD)(c_sas_dw_at(client + 4u) >> 16) == entry->fnid);
+        BORROW_CHECK(c_sas_dw_at(client + 36u) == 0 && c_sas_dw_at(client + 40u) == 0);
+        BORROW_CHECK(c_sas_dw_at(client + 44u) == 0);
+        BORROW_CHECK(c_sas_dw_at(client + 64u) == native_class.native.style);
+        BORROW_CHECK(c_sas_dw_at(client + 68u) == 0); /* No native/CPD address. */
+        BORROW_CHECK(c_sas_dw_at(client + 76u) == (ULONG)native_class.native.cbWndExtra);
+        BORROW_CHECK(c_sas_dw_at(client + 80u) == 0); /* No native module. */
+        name = c_sas_dw_at(client + 100u);
+        BORROW_CHECK(name == server + 108u);
+        for (i = 0; i < sizeof(text) - 1u; ++i) {
+            c_sas_loads(name - delta + i, (uint8_t *)&text[i], 1);
+            if (!text[i]) break;
+        }
+        BORROW_CHECK(i < sizeof(text) - 1u);
+        BORROW_CHECK(wow_standard_class_describe(text, &by_name));
+        BORROW_CHECK(by_name.atom == entry->atomClassName);
+        again = wow_class_words_acquire(&classes, entry->atomClassName, (HANDLE)0x12345678u);
+        BORROW_CHECK(wow_class_words_entry(again) == entry);
+        wow_class_words_release(again);
+        BORROW_CHECK(VdmQueryFreeVirtualMemory(&remaining_before, &largest) >= 0);
+        BORROW_CHECK(!wow_class_words_publish_guest(entry, &native_class.native));
+        BORROW_CHECK(GetLastError() == ERROR_ALREADY_EXISTS && entry->guest_server == server);
+        BORROW_CHECK(VdmQueryFreeVirtualMemory(&remaining_after, &largest) >= 0 &&
+            remaining_after == remaining_before);
+        ++projected;
+    }
+    BORROW_CHECK(projected == 9);
+    BORROW_CHECK(wow_class_words_forget_native(&classes));
+    BORROW_CHECK(classes.pclsPublicList == NULL);
+    BORROW_CHECK(VdmQueryFreeVirtualMemory(&free_after, &largest) >= 0 && free_after == free_before);
+    fprintf(stderr, "WOW_NATIVE_CLASS_CCPU errors=%u projected=%u native_pointers=0 released=1\n",
+        borrow_errors - before, projected);
+    return borrow_errors == before;
+}
 #endif
+
+static unsigned menu_callouts, menu_locked_callouts;
+
+static LRESULT CALLBACK menu_callout_window(HWND window, UINT message,
+    WPARAM wp, LPARAM lp)
+{
+    if (message == WM_NCCALCSIZE) {
+        wow_user_runtime_thread *binding = wow_user_runtime_current();
+        ++menu_callouts;
+        if (binding && binding->exclusive_held) ++menu_locked_callouts;
+    }
+    return DefWindowProcA(window, message, wp, lp);
+}
+
+static BOOL verify_native_menu_entry(wow_task_order_process *process,
+    ULONG handles, ULONG delta)
+{
+    wow_user_runtime runtime = WOW_USER_RUNTIME_INITIALIZER;
+    wow_user_runtime_thread binding = {0};
+    wow_task_order_thread thread = {0};
+    wow_task_order_entry task = {0};
+    HMENU root = NULL, child = NULL, alias;
+    HWND window = NULL;
+    wow_cleanup_window window_record = {0};
+    WNDCLASSA window_class = {0};
+    BOOL published = FALSE;
+    ULONG root_client, child_client, items;
+    BOOL result = FALSE;
+    const char *step = "bind";
+    thread.ppi = process;
+    thread.ptdb = &task;
+    task.hTaskWow = 0x4321u;
+    if (!wow_user_runtime_bind(&binding, &runtime, &thread, NULL)) return FALSE;
+    step = "create";
+    root = wow_menu_native_CreateMenu();
+    child = wow_menu_native_CreatePopupMenu();
+    if (!root || !child) goto cleanup;
+    alias = (HMENU)(LONG_PTR)(SHORT)LOWORD(child);
+    /* Original HMENU32 sign-extends, including popup operands, not just roots. */
+    step = "append";
+    if (!wow_menu_native_AppendMenuA(alias, MF_STRING, 71u, "Leaf") ||
+            !wow_menu_native_AppendMenuA(root, MF_POPUP, (UINT_PTR)alias, "Root"))
+        goto cleanup;
+    root_client = c_sas_dw_at(handles + LOWORD(root) * 16u) - delta;
+    child_client = c_sas_dw_at(handles + LOWORD(child) * 16u) - delta;
+    items = c_sas_dw_at(root_client + 56u) - delta;
+    step = "published-tree-and-check";
+    if (c_sas_dw_at(root_client + 40u) != 1u ||
+            c_sas_dw_at(items + 12u) != child_client + delta ||
+            wow_menu_native_CheckMenuItem(alias, 71u, MF_CHECKED) == (DWORD)-1)
+        goto cleanup;
+    step = "set-menu-callout";
+    window_class.lpfnWndProc = menu_callout_window;
+    window_class.hInstance = GetModuleHandle(NULL);
+    window_class.lpszClassName = "T447MenuCallout";
+    if (!RegisterClassA(&window_class)) goto cleanup;
+    window = CreateWindowA(window_class.lpszClassName, "Menu callout",
+        WS_OVERLAPPEDWINDOW, 0, 0, 240, 160, NULL, NULL,
+        window_class.hInstance, NULL);
+    if (!window) goto cleanup;
+    published = wow_user_window_publish(process->objects, window, &window_record, &thread);
+    if (!published || !wow_user_runtime_enter(&binding)) goto cleanup;
+    menu_callouts = menu_locked_callouts = 0;
+    if (!wow_menu_native_SetMenu(window, root) || !binding.exclusive_held ||
+            !menu_callouts || menu_locked_callouts ||
+            c_sas_dw_at(c_sas_dw_at(handles + LOWORD(window) * 16u) - delta + 104u)
+                != root_client + delta) goto cleanup;
+    {
+        ULONG wnd = c_sas_dw_at(handles + LOWORD(window) * 16u) - delta;
+        ULONG query = c_sas_dw_at(wnd + 104u);
+        /* USER16 _GetMenu@4 uses REBASEPTR, not an unconditional delta
+         * subtraction. Compare before dereference so a bad projection
+         * fails here rather than faulting the fixture's CCPU data access. */
+        if (query > 0x7ffeffffu) query = query - c_sas_dw_at(wnd + 12u) + wnd;
+        if (query != root_client || c_sas_dw_at(query) != (ULONG)(ULONG_PTR)root)
+            goto cleanup;
+    }
+    /* Mutation wrappers must also preserve an inherited lock on success
+     * and a native lookup failure, without changing task ownership. */
+    if (wow_menu_native_CheckMenuItem(alias, 71u, MF_UNCHECKED) == (DWORD)-1 ||
+            !binding.exclusive_held ||
+            wow_menu_native_CheckMenuItem(alias, 999u, MF_CHECKED) != (DWORD)-1 ||
+            !binding.exclusive_held ||
+            wow_menu_native_CheckMenuItem(alias, 71u, MF_CHECKED) == (DWORD)-1 ||
+            !binding.exclusive_held) goto cleanup;
+    if (!wow_menu_native_SetMenu(window, NULL) || !binding.exclusive_held ||
+            !wow_user_runtime_leave(&binding)) goto cleanup;
+    if (!wow_user_window_retire(process->objects, window, &window_record, NULL))
+        goto cleanup;
+    published = FALSE;
+    DestroyWindow(window);
+    window = NULL;
+    UnregisterClassA(window_class.lpszClassName, window_class.hInstance);
+    items = c_sas_dw_at(child_client + 56u) - delta;
+    step = "remove-and-destroy";
+    if (!(c_sas_dw_at(items + 4u) & MF_CHECKED) ||
+            wow_menu_native_CheckMenuItem(alias, 999u, MF_CHECKED) != (DWORD)-1 ||
+            !(c_sas_dw_at(items + 4u) & MF_CHECKED) ||
+            !wow_menu_native_RemoveMenu(root, 0u, MF_BYPOSITION) ||
+            c_sas_dw_at(root_client + 40u) != 0u || !IsMenu(child) ||
+            !wow_menu_native_DestroyMenu(root)) goto cleanup;
+    root = NULL;
+    if (!wow_menu_native_DestroyMenu(alias) || IsMenu(child) ||
+            process->objects->entries[LOWORD(child)].bType != TYPE_FREE)
+        goto cleanup;
+    child = NULL;
+    result = TRUE;
+cleanup:
+    if (!result) fprintf(stderr, "WOW_NATIVE_MENU_ENTRY_FAILED step=%s error=%lu\n",
+        step, GetLastError());
+    if (binding.exclusive_held && !wow_user_runtime_leave(&binding)) result = FALSE;
+    if (published && !wow_user_window_retire(process->objects, window,
+            &window_record, NULL)) result = FALSE;
+    if (window) DestroyWindow(window);
+    if (window_class.lpszClassName)
+        UnregisterClassA(window_class.lpszClassName, window_class.hInstance);
+    if (root && IsMenu(root)) DestroyMenu(root);
+    if (child && IsMenu(child)) DestroyMenu(child);
+    if (!wow_menu_client_retire_destroyed(process)) result = FALSE;
+    if (!wow_user_runtime_unbind(&binding)) result = FALSE;
+    fprintf(stderr, "WOW_NATIVE_MENU_ENTRY_CCPU result=%u\n", result);
+    return result;
+}
 
 int main(void)
 {
@@ -160,9 +440,12 @@ int main(void)
     uint32_t server_info;
     uint32_t saved_cr3;
     uint32_t guest_class = 0u;
-    HWND geometry_window = NULL;
+    char class_name[] = "S2 Class Name";
+    HWND geometry_window = NULL, id_window = NULL;
+    HMENU native_root = NULL, native_submenu = NULL;
     static ULONG native_bases[0x1fff];
     static wow_user_object_table object_table;
+    wow_task_order_process menu_process = { 0 };
     static wow_cleanup_window object_storage;
     static BYTE thread_storage;
     int sas_started = 0;
@@ -318,9 +601,20 @@ int main(void)
         c_sas_dw_at(c_sas_dw_at(handles + 16u) - c_sas_dw_at(teb + 0x60u)) !=
             0x00010001u) goto done;
     stage = "guest-window-publication";
-    guest_class = (uint32_t)mvdm_softpc_wow_page_domain_publish_class(
+    if (mvdm_softpc_wow_page_domain_publish_named_class(
+            0xc123u, 0u, 0u, 0u, 0u, 0u, 0u, 0u, 0u, 0u, NULL, 1u) ||
+        mvdm_softpc_wow_page_domain_publish_named_class(
+            0xc123u, 0u, 0u, 0u, 0u, 0u, 0u, 0u, 0u, 0u, class_name, 0u) ||
+        mvdm_softpc_wow_page_domain_publish_named_class(
+            0xc123u, 0u, 0u, 0u, 0u, 0u, 0u, 0u, 0u, 0u, class_name, 2u) ||
+        mvdm_softpc_wow_page_domain_publish_named_class(
+            0xc123u, 0u, 0u, 0u, 0u, 0u, 0u, 0u, 0u, 0u, class_name, 0xffffffffu))
+        goto done;
+    guest_class = (uint32_t)mvdm_softpc_wow_page_domain_publish_named_class(
         0xc123u, 0x0042u, 0x00000002u, 0x11223344u, 0x55667788u,
-        0x00004321u, 0x10000000u, 0x0000f00du, 8u, 0u);
+        0x00004321u, 0x10000000u, 0x0000f00du, 8u, 0u,
+        class_name, sizeof(class_name));
+    class_name[0] = 'X'; /* Call-local source must no longer own guest bytes. */
     stage = "guest-class-fields";
     if (!guest_class ||
         (c_sas_dw_at(guest_class - c_sas_dw_at(teb + 0x60u) + 4u) & 0xffffu) !=
@@ -350,6 +644,21 @@ int main(void)
     /* Original HMValidateHandle rebases only pointers inside pDeskInfo's
      * server interval. Unconditionally subtracting delta above hid a broken
      * general (non-callback-cache) USER16 lookup. */
+    stage = "guest-class-name-rebase";
+    {
+        uint32_t window = c_sas_dw_at(handles + 32u) - c_sas_dw_at(teb + 0x60u);
+        uint32_t self = c_sas_dw_at(window + 12u);
+        /* Exact original GetClassNameA pointer chain, not an assumed delta
+         * subtraction: WND.pcls-self+WND, then CLS.name-self+WND. */
+        uint32_t cls = c_sas_dw_at(window + 76u) - self + window;
+        uint32_t name = c_sas_dw_at(cls + 100u) - self + window;
+        char copied[sizeof(class_name)];
+        if (name != cls + 108u) goto guest_window_failure;
+        c_sas_loads(name, (uint8_t *)copied, sizeof(copied));
+        if (memcmp(copied, "S2 Class Name", sizeof(copied))) goto guest_window_failure;
+        fprintf(stderr, "WOW_CLASS_NAME_CCPU copied=1 rebase=1 bytes=%u\n",
+            (unsigned)sizeof(copied));
+    }
     stage = "guest-window-desktop-membership";
     {
         uint32_t desktop = c_sas_dw_at(teb + 0x5cu);
@@ -366,6 +675,68 @@ int main(void)
             server_window -= c_sas_dw_at(teb + 0x60u);
         if (c_sas_dw_at(server_window) != 0x23450002u)
             goto guest_window_failure;
+    }
+    stage = "guest-window-retirement";
+    {
+        mvdm_softpc_wow_menu_query_item leaf = { 0u, MF_CHECKED, 7u, 0u };
+        mvdm_softpc_wow_menu_query_item entries[2] = {
+            { 0u, 0u, 4u, 0x45670004u }, { MF_SEPARATOR, MF_DISABLED, 8u, 0u }
+        };
+        ULONG child_menu, root_menu, root_client, item_array, window_client;
+        ULONG delta = c_sas_dw_at(teb + 0x60u);
+        stage = "guest-menu-graph-publication";
+        child_menu = mvdm_softpc_wow_page_domain_publish_menu(0x45670004u,
+            0x4321u, 1u, &leaf);
+        root_menu = mvdm_softpc_wow_page_domain_publish_menu(0x45670003u,
+            0x4321u, 2u, entries);
+        if (!child_menu || !root_menu) goto done;
+        root_client = root_menu - delta;
+        item_array = c_sas_dw_at(root_client + 56u) - delta;
+        window_client = c_sas_dw_at(handles + 32u) - delta;
+        if (!child_menu || !root_menu || c_sas_dw_at(root_client) != 0x45670003u ||
+                c_sas_dw_at(root_client + 12u) != root_menu ||
+                c_sas_dw_at(root_client + 20u) != 0x4321u ||
+                c_sas_dw_at(root_client + 40u) != 2u ||
+                c_sas_dw_at(item_array + 12u) != child_menu ||
+                c_sas_dw_at(item_array + 64u) != MF_SEPARATOR ||
+                c_sas_dw_at(item_array + 68u) != MF_DISABLED ||
+                c_sas_dw_at(handles + 48u) != root_menu ||
+                c_sas_dw_at(handles + 56u) != 0x45670002u ||
+                !mvdm_softpc_wow_page_domain_window_menu(0x23450002u, 0x45670003u) ||
+                c_sas_dw_at(window_client + 104u) != root_menu) goto done;
+        stage = "guest-menu-rejection-preserves-graph";
+        entries[0].submenu = 0x98760004u; /* stale identity, same slot */
+        if (mvdm_softpc_wow_page_domain_publish_menu(0x45670003u, 0x4321u, 2u, entries) ||
+                mvdm_softpc_wow_page_domain_publish_menu(0x45670003u, 1u, 0u, NULL) ||
+                mvdm_softpc_wow_page_domain_publish_menu(0x98760003u, 0x4321u, 0u, NULL) ||
+                mvdm_softpc_wow_page_domain_publish_menu(0x23450002u, 0x4321u, 0u, NULL) ||
+                mvdm_softpc_wow_page_domain_publish_handle(3u, 0x4567u, 1u, 0u, 0u, 0u) ||
+                mvdm_softpc_wow_page_domain_publish_menu(0x45670003u, 0x4321u, 0x4000000u, entries) ||
+                mvdm_softpc_wow_page_domain_window_menu(0x98760002u, 0x45670003u) ||
+                mvdm_softpc_wow_page_domain_window_menu(0x23450002u, 0x98760003u) ||
+                c_sas_dw_at(root_client + 40u) != 2u ||
+                c_sas_dw_at(root_client + 56u) != item_array + delta ||
+                c_sas_dw_at(item_array + 12u) != child_menu) goto done;
+        entries[0].submenu = 0x45670003u;
+        if (mvdm_softpc_wow_page_domain_publish_menu(0x45670003u,
+                0x4321u, 2u, entries) ||
+                c_sas_dw_at(item_array + 12u) != child_menu) goto done;
+        stage = "guest-menu-update-and-detach";
+        /* Detached submenu remains independently published, as RemoveMenu
+         * requires. This fixture checks carrier lifetime, not native policy. */
+        if (mvdm_softpc_wow_page_domain_publish_menu(0x45670003u, 0x4321u, 0u, NULL)
+                    != root_menu || c_sas_dw_at(root_client + 40u) != 0u ||
+                c_sas_dw_at(root_client + 56u) != 0u ||
+                c_sas_dw_at(child_menu - delta) != 0x45670004u ||
+                !mvdm_softpc_wow_page_domain_window_menu(0x23450002u, 0u) ||
+                c_sas_dw_at(window_client + 104u) != 0u ||
+                !mvdm_softpc_wow_page_domain_retire_menu(0x45670003u) ||
+                !mvdm_softpc_wow_page_domain_retire_menu(0x45670004u)) goto done;
+        stage = "guest-menu-slot-reuse";
+        if (!mvdm_softpc_wow_page_domain_publish_menu(0x98760003u, 0x4321u, 0u, NULL) ||
+                mvdm_softpc_wow_page_domain_retire_menu(0x45670003u) ||
+                !mvdm_softpc_wow_page_domain_retire_menu(0x98760003u) ||
+                c_sas_dw_at(handles + 56u) != 0x00010000u) goto done;
     }
     stage = "guest-window-retirement";
     if (!mvdm_softpc_wow_page_domain_retire_handle(2u, NULL) ||
@@ -398,6 +769,102 @@ guest_window_failure:
             (unsigned long)c_sas_dw_at(handles + 32u + 8u));
         goto done;
     }
+    stage = "native-menu-entry-publication";
+    menu_process.objects = &object_table;
+    if (!verify_native_menu_entry(&menu_process, handles,
+            c_sas_dw_at(teb + 0x60u))) goto done;
+    stage = "native-menu-graph-enrollment";
+    native_root = CreateMenu();
+    native_submenu = CreatePopupMenu();
+    if (!native_root || !native_submenu ||
+            !AppendMenuA(native_submenu, MF_STRING | MF_CHECKED, 71u, "Leaf") ||
+            !AppendMenuA(native_root, MF_POPUP, (UINT_PTR)native_submenu, "Root") ||
+            !wow_menu_client_publish_tree(&menu_process, 0x4321u, native_root))
+        goto done;
+    {
+        ULONG delta = c_sas_dw_at(teb + 0x60u);
+        ULONG root_client = c_sas_dw_at(handles + LOWORD(native_root) * 16u) - delta;
+        ULONG sub_client = c_sas_dw_at(handles + LOWORD(native_submenu) * 16u) - delta;
+        ULONG sub_items = c_sas_dw_at(sub_client + 56u) - delta;
+        if (object_table.entries[LOWORD(native_root)].bType != TYPE_MENU ||
+                object_table.entries[LOWORD(native_root)].pOwner != &menu_process ||
+                c_sas_dw_at(root_client + 40u) != 1u ||
+                c_sas_dw_at(sub_client + 40u) != 1u ||
+                c_sas_dw_at(sub_items + 8u) != 71u ||
+                !(c_sas_dw_at(sub_items + 4u) & MF_CHECKED) ||
+                wow_menu_client_full_handle(&object_table,
+                    (HMENU)(LONG_PTR)(SHORT)LOWORD(native_submenu)) != native_submenu)
+            goto done;
+        stage = "native-menu-mutation";
+        if (CheckMenuItem(native_submenu, 71u, MF_BYCOMMAND | MF_UNCHECKED) == (DWORD)-1 ||
+                !wow_menu_client_publish_tree(&menu_process, 0x9999u, native_root))
+            goto done;
+        sub_items = c_sas_dw_at(sub_client + 56u) - delta;
+        if ((c_sas_dw_at(sub_items + 4u) & MF_CHECKED) ||
+                c_sas_dw_at(sub_client + 20u) != 0x4321u) goto done;
+        stage = "native-menu-remove-retains-submenu";
+        if (!RemoveMenu(native_root, 0, MF_BYPOSITION) ||
+                !wow_menu_client_publish_tree(&menu_process, 0x4321u, native_root) ||
+                !wow_menu_client_destroy_object(&menu_process,
+                    &object_table.entries[LOWORD(native_root)])) goto done;
+        native_root = NULL;
+        if (!IsMenu(native_submenu) ||
+                object_table.entries[LOWORD(native_submenu)].bType != TYPE_MENU ||
+                !wow_menu_client_destroy_object(&menu_process,
+                    &object_table.entries[LOWORD(native_submenu)])) goto done;
+        native_submenu = NULL;
+        stage = "native-menu-recursive-destruction";
+        native_root = CreateMenu();
+        native_submenu = CreatePopupMenu();
+        if (!native_root || !native_submenu ||
+                !AppendMenuA(native_root, MF_POPUP, (UINT_PTR)native_submenu, "Sub") ||
+                !wow_menu_client_publish_tree(&menu_process, 0x4321u, native_root) ||
+                !wow_menu_client_destroy_object(&menu_process,
+                    &object_table.entries[LOWORD(native_root)])) goto done;
+        native_root = NULL;
+        if (IsMenu(native_submenu) ||
+                object_table.entries[LOWORD(native_submenu)].bType != TYPE_FREE)
+            goto done;
+        native_submenu = NULL;
+    }
+    stage = "original-menu-cleanup-phases";
+    {
+        wow_class_lookup_context classes = {0};
+        wow_task_order_thread thread = {0};
+        wow_task_order_entry task = {0};
+        wow_input_desktop desktop = {0};
+        wow_cleanup_desktop_info deskinfo = {0};
+        wow_cleanup_shared cleanup_shared = {0};
+        wow_cleanup_context cleanup = {0};
+        menu_process.classes = &classes;
+        thread.ppi = &menu_process;
+        thread.ptdb = &task;
+        task.hTaskWow = 0x4321u;
+        thread.rpdesk = &desktop;
+        desktop.pDeskInfo = &deskinfo;
+        cleanup.thread = &thread;
+        cleanup.shared = &cleanup_shared;
+        cleanup.destroy_object = wow_menu_client_cleanup;
+        native_root = CreateMenu();
+        native_submenu = CreateMenu(); /* Independent other-task menu. */
+        if (!native_root || !native_submenu ||
+                !wow_menu_client_publish_tree(&menu_process, 0x4321u, native_root) ||
+                !wow_menu_client_publish_tree(&menu_process, 0x9876u, native_submenu) ||
+                !wow_user_cleanup_bound((HANDLE)0x4321u, 0x4321u, NULL, 0, &cleanup) ||
+                !IsMenu(native_root) || !IsMenu(native_submenu) ||
+                !wow_user_cleanup_bound(NULL, 0x4321u, NULL, 0, &cleanup) ||
+                IsMenu(native_root) || !IsMenu(native_submenu) ||
+                object_table.entries[LOWORD(native_root)].bType != TYPE_FREE ||
+                object_table.entries[LOWORD(native_submenu)].bType != TYPE_MENU)
+            goto done;
+        native_root = NULL;
+        if (!wow_user_cleanup_bound(NULL, 0x9876u, NULL, 0, &cleanup) ||
+                IsMenu(native_submenu) ||
+                object_table.entries[LOWORD(native_submenu)].bType != TYPE_FREE)
+            goto done;
+        native_submenu = NULL;
+        menu_process.classes = NULL;
+    }
     stage = "live-window-geometry";
     geometry_window = CreateWindowExA(0, "STATIC", "S2 geometry fixture",
         WS_OVERLAPPEDWINDOW, 120, 140, 280, 190, NULL, NULL,
@@ -405,6 +872,39 @@ guest_window_failure:
     if (!geometry_window || !mvdm_softpc_wow_page_domain_publish_handle(
             LOWORD(geometry_window), HIWORD(geometry_window), 1u, 0u,
             (ULONG)(ULONG_PTR)geometry_window, 0u)) goto done;
+    stage = "child-control-id-publication";
+    id_window = CreateWindowExA(0, "STATIC", "S2 control ID fixture",
+        WS_CHILD, 0, 0, 20, 20, geometry_window, (HMENU)(ULONG_PTR)0x8123u,
+        GetModuleHandle(NULL), NULL);
+    if (!id_window || !mvdm_softpc_wow_page_domain_publish_handle(
+            LOWORD(id_window), HIWORD(id_window), 1u, 0u,
+            (ULONG)(ULONG_PTR)id_window, 0u)) goto done;
+    {
+        ULONG projection = c_sas_dw_at(handles + LOWORD(id_window) * 16u)
+            - c_sas_dw_at(teb + 0x60u);
+        ULONG parent_projection = c_sas_dw_at(
+            handles + LOWORD(geometry_window) * 16u) - c_sas_dw_at(teb + 0x60u);
+        ULONG saved[2];
+        if (c_sas_dw_at(projection + 104u) != 0x8123u ||
+                mvdm_softpc_wow_page_domain_window_menu((ULONG)(ULONG_PTR)id_window, 0u) ||
+                c_sas_dw_at(parent_projection + 104u) != 0u) goto done;
+        /* Control IDs are DWORD data: neither server relocation nor handle
+         * alias conversion applies, including zero and high-bit values. */
+        SetWindowLongA(id_window, GWL_ID, (LONG)0xfedcba98u);
+        if (!mvdm_softpc_wow_page_domain_callback_window(
+                (ULONG)(ULONG_PTR)id_window, saved) ||
+                c_sas_dw_at(projection + 104u) != 0xfedcba98u ||
+                !mvdm_softpc_wow_page_domain_restore_callback(saved)) goto done;
+        SetWindowLongA(id_window, GWL_ID, 0);
+        if (!mvdm_softpc_wow_page_domain_refresh_window(
+                (ULONG)(ULONG_PTR)id_window) ||
+                c_sas_dw_at(projection + 104u) != 0u ||
+                !mvdm_softpc_wow_page_domain_retire_handle(
+                    LOWORD(id_window), NULL)) goto done;
+    }
+    if (!DestroyWindow(id_window)) goto done;
+    id_window = NULL;
+    stage = "live-window-geometry";
     {
         WINDOWINFO info = { sizeof(info) };
         ULONG projection = c_sas_dw_at(handles + LOWORD(geometry_window) * 16u)
@@ -434,6 +934,7 @@ guest_window_failure:
     stage = "window-publication-lifecycle";
     {
     WORD index = LOWORD(geometry_window);
+    ULONG expected_last = object_table.last_handle > index ? object_table.last_handle : index;
     ULONG entry = handles + index * 16u;
     ULONG retained_backing = 0u;
     ULONG outer_callback[2], inner_callback[2];
@@ -448,7 +949,7 @@ guest_window_failure:
         object_table.entries[index].bType != 1u ||
         object_table.entries[index].wUniq != HIWORD(geometry_window) ||
         wow_user_window_full_handle(&object_table, index) != geometry_window ||
-        object_table.last_handle != index ||
+        object_table.last_handle != expected_last ||
         c_sas_dw_at(entry + 8u) != ((ULONG)HIWORD(geometry_window) << 16 | 1u) ||
         !mvdm_softpc_wow_page_domain_callback_window(
             (ULONG)(ULONG_PTR)geometry_window, outer_callback) ||
@@ -494,6 +995,10 @@ guest_window_failure:
     geometry_window = NULL;
     }
 #ifdef WOW_WINDOW_BORROW_FIXTURE
+    stage = "production-class-registration";
+    if (!verify_class_registration(teb)) goto done;
+    stage = "native-class-projection";
+    if (!verify_native_class_projection(teb)) goto done;
     stage = "production-window-borrow";
     if (!verify_callback_borrow(teb)) goto done;
 #endif
@@ -615,6 +1120,9 @@ guest_window_failure:
         c_getGDT_BASE() != wow_gdt) goto done;
     passed = 1;
 done:
+    if (native_root && IsMenu(native_root)) DestroyMenu(native_root);
+    if (native_submenu && IsMenu(native_submenu)) DestroyMenu(native_submenu);
+    if (id_window) DestroyWindow(id_window);
     if (geometry_window) DestroyWindow(geometry_window);
     mvdm_softpc_wow_page_domain_leave_protected();
     if (original_gdt != 0u) c_setGDT_BASE_LIMIT(original_gdt, original_gdt_limit);

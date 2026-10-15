@@ -25,14 +25,23 @@ a temporary provider or silently absorb another candidate's implementation.
 Necessary error and fatal-cleanup paths belong to the earliest consuming owner,
 with stable-ID handoff, even when general hard-error recovery is later.
 
-## Proposed S tasks
+## Adopted S tasks (2026-10-14)
 
 | S | Scope | Work | Required closure |
 | --- | --- | --- | --- |
 | S1 | Inherited boundary and failing execution cases | Bind C01--C03/C09 and execution C10 to production callers; reproduce E92 and reuse E91/E93 with their original evidence limits. | A finite caller/test matrix distinguishes real guest, native peer and mock evidence. |
-| S2 | Message delivery, replies and reentry | Complete native send/post/reply, early and duplicate reply, nested callbacks and original execution handoff through modern USER. | Real Win16/Win16 and both Win16/Win32 directions prove correct results and execution ordering. |
-| S3 | Task execution and cancellation | Complete init/yield/hung registration, waits, cancellation, task loss and callback frame/lease retirement. | Normal, failed and interrupted execution leave no blocked sender, stale callback or live lease. |
-| S4 | Package acceptance and handoff | Run the execution matrix, retained application frontiers and production regression; hand exact execution contracts to USER consumers. | All owned rows pass or retain an explicitly approved non-pass disposition; no local SMS transport or second scheduler remains. |
+| S2 | Callback and object foundations | Original callback entry/resolver plus required W02 identity, publication, update, rollback and normal retirement. | Production-connected first callbacks and direct readers; paired startup/teardown and real guest evidence. |
+| S3 | Basic controls/dialogs/menu dependencies | Required W03 EDIT local-memory/dialog DS, W06 internal children/dialog lifecycle and W09 MENU-01 parser/graph/mutations. | Normal SOL/WRITE initialization with retained WINMINE; promote earlier message prerequisites when needed. |
+| S4 | Full message identity/reply/reentry | Complete original handoff, explicit/implicit mixed sends, early/duplicate replies and waits. | Real Win16/Win16 and both native directions prove results and execution ordering; no semantic waiver. |
+| S5 | Task lifetime and individual termination | Original hung/exit/cancellation and approved NT Monitor request-to-HTASK deletion, with reuse protection. | Delete either real task while its sibling stays usable; explicit worker termination remains separate. |
+| S6 | Package acceptance and handoff | Reconcile all owned rows, source/diff minimization and residual candidate scopes; retain same-package regression/publication gates. | No unfinished implementation transferred to acceptance; exact evidence and remaining limitations are handed off. |
+
+The approved [cross-T audit](../etc/operations/t447-wow-execution-plan.md#owner-requested-cross-t-planning-audit)
+assigns only dependency-complete portions of W02/W03/W06/W09 here, not their
+whole families. Stable W/C/DATA IDs survive. Basic cleanup belongs to each
+earliest consumer, not only S5. Each production P retains non-regression and
+publication gates; S3 additionally requires normal application initialization.
+The owner-directed source checkpoint is not a delivered P or S closure.
 
 ## Verification, boundaries and handoff
 
@@ -57,5 +66,5 @@ regression. C11/C12 apply locally, not only at final program acceptance.
 Close only this candidate's complete owner scope, with exact artifacts, test
 entrypoints, remaining approved limitations and stable handoff IDs for consumers.
 Do not defer unfinished implementation, errors or cleanup to integrated acceptance.
-This planning split itself modifies no runtime, admits no active packet and
-requires no commit or publication; the owner requested working-tree edits only.
+The approved planning adoption and development checkpoint do not imply runtime
+acceptance or publication; Current remains the sole active packet authority.

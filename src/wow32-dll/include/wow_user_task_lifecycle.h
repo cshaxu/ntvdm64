@@ -53,6 +53,10 @@ BOOL WINAPI wow_user_task_lifecycle_init(wow_user_task_lifecycle *, UINT,
 BOOL WINAPI wow_user_task_lifecycle_init_style(wow_user_task_lifecycle *, UINT,
     LPCSTR, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, WORD, DWORD, WORD);
 BOOL WINAPI wow_user_task_lifecycle_style(wow_user_task_lifecycle *, DWORD *);
+/* Retry only the launcher notification after original InitTask committed.
+ * The callback runs outside the USER lock; task/request identity must match. */
+DWORD WINAPI wow_user_task_lifecycle_notify_start(wow_user_task_lifecycle *,
+    DWORD, DWORD, DWORD (WINAPI *)(ULONG));
 BOOL WINAPI wow_user_task_lifecycle_yield(wow_user_task_lifecycle *);
 VOID WINAPI wow_user_task_lifecycle_directed_yield(wow_user_task_lifecycle *,
     DWORD);

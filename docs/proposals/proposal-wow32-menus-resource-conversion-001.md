@@ -12,6 +12,15 @@ are inherited rather than reset. No new global source audit is required.
 
 ## Complete scope and dependencies
 
+Approved T447 transfer (2026-10-14): MENU-01 and associated DATA-07/08/09/10/13
+creation/direct reads, original parser, mutations, reached owner-draw callbacks,
+failure coherence and graph retirement belong to T447 S3. Unrelated
+icon/cursor/bitmap conversion, accelerators and display refinements remain
+here. The local S table below covers those residual cases and consumes
+T447's menu evidence, without building another graph or mutation provider.
+See the approved
+[transfer audit](../etc/operations/t447-wow-execution-plan.md#owner-requested-cross-t-planning-audit).
+
 Inherited: conversion, icon/cursor/bitmap loading, menu graph/owner-draw mutation, accelerators, partial-load rollback and release. Consume W02 publication and W07 bitmap services, not duplicate providers.
 
 Expected reuse boundaries: [USER objects and shared view](proposal-wow32-user-objects-shared-view-001.md), [Resource discovery and loading foundation](proposal-wow32-resource-loading-001.md), [Dialogs, input, hooks and timers](proposal-wow32-dialogs-input-hooks-timers-001.md), [GDI identity, DC and drawing](proposal-wow32-gdi-dc-drawing-001.md), [Fonts, text and metafiles](proposal-wow32-fonts-text-metafiles-001.md).

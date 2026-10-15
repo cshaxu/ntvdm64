@@ -13,6 +13,21 @@
 #define TYPE_THREADINFO     6           // thread specific info structure
 #define TYPE_CLIPDATA       7           // clipboard data
 #define TYPE_CALLPROC       8
+/* Original FNID subset for the admitted standard-class client view.
+ * Declaration-only extension from this same original user.h owner. */
+#define FNID_SCROLLBAR              0x0000029A      // xxxSBWndProc;
+#define FNID_ICONTITLE              0x0000029B      // xxxTitleWndProc;
+#define FNID_MENU                   0x0000029C      // xxxMenuWindowProc;
+#define FNID_DESKTOP                0x0000029D      // xxxDesktopWndProc;
+#define FNID_BUTTON                 0x0000029F      // No server side proc
+#define FNID_COMBOBOX               0x000002A0      // No server side proc
+#define FNID_COMBOLISTBOX           0x000002A1      // No server side proc
+#define FNID_DIALOG                 0x000002A2      // No server side proc
+#define FNID_EDIT                   0x000002A3      // No server side proc
+#define FNID_LISTBOX                0x000002A4      // No server side proc
+#define FNID_MDICLIENT              0x000002A5      // No server side proc
+#define FNID_STATIC                 0x000002A6      // No server side proc
+#define FNID_SWITCH                 0x000002B4      // Just used by GetTopMostInserAfter
 #define TYPE_ACCELTABLE     9
 #define TYPE_DDEACCESS      10
 #define TYPE_DDECONV        11
@@ -56,6 +71,66 @@ typedef struct _THROBJHEAD {
     SHROBJHEAD;
     PTHREADINFO pti;
 } THROBJHEAD, *PTHROBJHEAD;
+
+typedef struct _PROCOBJHEAD {
+    SHROBJHEAD;
+    struct tagPROCESSINFO *ppi;
+    DWORD hTaskWow;
+} PROCOBJHEAD, *PPROCOBJHEAD;
+
+/* Original MENU/ITEM declarations, selected for the immutable USER16 client
+ * view under OPENNT-HOST-063. No menu-server implementation is imported. */
+typedef struct tagITEM {
+    UINT    fType;          // Item Type  Flags
+    UINT    fState;         // Item State Flags
+    UINT    wID;
+    struct tagMENU *spSubMenu;  /* Handle to a popup */
+    HANDLE  hbmpChecked;    /* Bitmap for an on  check */
+    HANDLE  hbmpUnchecked;   /* Bitmap for an off check */
+#ifdef MEMPHIS_MENUS
+    LPWSTR  lpstr;          //item's text
+#endif // MEMPHIS_MENUS
+    HANDLE  hTypeData;     // if ownerdraw, MAKELONG(width, height)
+                            // if bitmap,    hBitmap
+                            // if separator, 0L
+                            // if string,    LPWSTR
+    DWORD   cch;                /* String: WCHAR count */
+    DWORD   dwItemData;
+    DWORD   xItem;
+    DWORD   yItem;
+    DWORD   cxItem;
+
+    DWORD   cyItem;
+    DWORD   dxTab;
+    DWORD   ulX;                /* String: Underline start */
+    DWORD   ulWidth;            /* String: underline width */
+#ifdef MEMPHIS_MENUS
+    HBITMAP hbmp;           // item's bitmap
+    int     cxBmp;          // bitmap width
+    int     cyBmp;          // bitmap height
+#endif // MEMPHIS_MENUS
+} ITEM, *PITEM, *LPITEM;
+
+typedef struct tagMENU {
+    PROCOBJHEAD     head;
+    DWORD           fFlags;         /* Menu Flags */
+    int             iItem;          /* Contains the position of the selected
+                                       item in the menu. -1 if no selection */
+    int             iPopupMenuItem; /* Contains the position of the hierarchical
+                                       item menu popup */
+    UINT            cAlloced;       // Number of items that can fit in rgItems
+    UINT            cItems;         /* Number of items in rgItems */
+
+    DWORD           cxMenu;
+    DWORD           cyMenu;
+    struct tagWND *spwndNotify;     /* The owner hwnd of this menu */
+    PITEM           rgItems;        /* The list of items in this menu */
+    DWORD           dwContextHelpId;// Context help Id for the whole menu
+#ifdef MEMPHIS_MENU_WATERMARKS
+    HBRUSH          hbrBack;        // background brush for menu
+#endif // MEMPHIS_MENU_WATERMARKS
+
+} MENU, *PMENU;
 
 typedef struct tagWND {          // wnd
     THROBJHEAD    head;

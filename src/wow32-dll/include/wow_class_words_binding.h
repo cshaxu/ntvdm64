@@ -7,6 +7,11 @@
 typedef struct wow_class_words_binding wow_class_words_binding;
 /* Same borrowed lifetime as class words; no new lookup or copied entry. */
 wow_class_lookup_entry *WINAPI wow_class_words_entry(wow_class_words_binding *);
+/* Project a completed owned entry once. The caller retains the class and
+ * serializes its domain. Native procedures/modules stay host-local; named
+ * guest CLS storage is retired with this same registration. */
+BOOL WINAPI wow_class_words_publish_guest(wow_class_lookup_entry *,
+    const WNDCLASSEXA *);
 /* Bottom native release for an already selected, locked class link. Cleanup
  * must not repeat ordinary GetClassPtr, which excludes deferred classes.
  * TRUE in the last argument means the caller has accounted for client menu
@@ -26,8 +31,8 @@ typedef struct tagCLSMENUNAME
  * associations; acquire/release independently counts storage borrowers.
  * Register receives an already validated native WNDCLASSEXA, not a tagged
  * guest procedure. Original client policy/version/capture runs before this
- * boundary. All context entries must originate from register; do not mix raw
- * lookup views with owned bindings. No raw words survive release. */
+ * boundary. All context entries must originate from register/import_native;
+ * do not mix raw lookup views with owned bindings. No raw words survive release. */
 ATOM WINAPI wow_class_words_register(wow_class_lookup_context *,
     const WNDCLASSEXA *, const UNICODE_STRING *, const DWORD words[2],
     const CLSMENUNAME *);
@@ -37,10 +42,26 @@ ATOM WINAPI wow_class_words_register(wow_class_lookup_context *,
 ATOM WINAPI wow_class_words_register_target(wow_class_lookup_context *,
     const WNDCLASSEXA *, const UNICODE_STRING *, const DWORD words[2],
     const CLSMENUNAME *, const wow_window_dispatch_target *);
+/* Native USER already owns the original standard-control registrations.
+ * Import only their per-process shared WC storage into the public list;
+ * no RegisterClass/SetClassLong or guest publication is performed here.
+ * Caller supplies the source-audited native descriptor and canonical name. */
+BOOL WINAPI wow_class_words_import_native(wow_class_lookup_context *,
+    const WNDCLASSEXA *, const UNICODE_STRING *, ATOM, WORD,
+    wow_window_callback);
+/* Paired process-storage teardown, not guest UnregisterClass. Retains
+ * application registrations; refuses to forget any live native-control WND.
+ * Outstanding scoped borrows remain valid until their ordinary release. */
+BOOL WINAPI wow_class_words_forget_native(wow_class_lookup_context *);
+/* Native standard-class restoration target for original _WOWCleanup's
+ * procedure table. Logical reads resolve it to the borrowed original USER
+ * identity; an opaque CPD is never installed as a raw cleanup procedure. */
+LRESULT CALLBACK wow_class_call_original_native(HWND, UINT, WPARAM, LPARAM);
 BOOL WINAPI wow_class_words_target(wow_class_words_binding *,
     wow_window_dispatch_target *);
-/* Snapshot/replace only an enrolled class's raw target. The HWND gateway
- * boundary excludes recursion; CPD conversion stays in public USER policy.
+/* Snapshot/replace only an enrolled class's logical target. The HWND gateway
+ * boundary excludes recursion; native CPD identities are normalized only in
+ * the original cleanup field and returned unchanged to original WOW callers.
  * Callback identity is immutable. Neither operation changes existing WNDs. */
 BOOL WINAPI wow_class_words_exchange_procedure(wow_class_words_binding *,
     DWORD, DWORD *);

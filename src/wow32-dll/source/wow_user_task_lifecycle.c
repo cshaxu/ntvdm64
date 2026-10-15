@@ -2,6 +2,7 @@
 
 #include "wow_class_words_binding.h"
 #include "wow_window_words_binding.h"
+#include "wow_menu_client_bindings.h"
 #include "wow_task_profile_bindings.h"
 #include "wow_user_session_binding.h"
 #include "opennt-abi/host-compat/include/thread_start_compat.h"
@@ -46,6 +47,9 @@ typedef struct wow_user_task_lifecycle_thread {
     DWORD thread_id;
     DWORD message_wakes;
     DWORD window_style;
+    DWORD launch_request;
+    BOOL start_pending;
+    const void *start_attempt;
 } wow_user_task_lifecycle_thread;
 
 static wow_user_task_lifecycle_thread *current_task(
@@ -302,20 +306,6 @@ static BOOL WINAPI cleanup_destroy_class(wow_cleanup_context *context,
 
 static BOOL WINAPI retire_current_thread(PVOID context);
 
-static void WINAPI cleanup_destroy_object(wow_cleanup_context *context,
-    wow_cleanup_handle *entry)
-{
-    /* No process-owned object producer is enrolled yet.  The selected
-     * lifecycle publishes only native windows, which original handtabl.c
-     * classifies as thread-owned and therefore never routes here.  A future
-     * producer must install its own release operation before publishing a
-     * PROCESSOWNED type; silently releasing an opaque object would violate
-     * original ownership. */
-    UNREFERENCED_PARAMETER(context);
-    UNREFERENCED_PARAMETER(entry);
-    SetLastError(ERROR_INVALID_STATE);
-}
-
 static PVOID WINAPI cleanup_allocate(SIZE_T size)
 {
     return HeapAlloc(GetProcessHeap(), 0, size);
@@ -334,6 +324,11 @@ BOOL WINAPI wow_user_task_lifecycle_initialize(wow_user_task_lifecycle *owner,
         return FALSE;
     }
     ZeroMemory(owner, sizeof(*owner));
+    /* Original InitializeClientPfnArrays binds hModClient to hModUser.
+     * GetClassPtr's fallback must not receive NULL: _InnerGetClassPtr treats
+     * it as a wildcard and would select an unrelated private module. */
+    owner->classes.client_module = GetModuleHandleW(L"user32.dll");
+    if (!owner->classes.client_module) return FALSE;
     owner->runtime = runtime;
     owner->callbacks = *callbacks;
     owner->process.shared = &owner->shared;
@@ -358,7 +353,7 @@ BOOL WINAPI wow_user_task_lifecycle_initialize(wow_user_task_lifecycle *owner,
     owner->cleanup_shared.apfnClientW.pfnDefWindowProc = (PROC)DefWindowProcW;
     owner->cleanup.shared = &owner->cleanup_shared;
     owner->cleanup.destroy_class = cleanup_destroy_class;
-    owner->cleanup.destroy_object = cleanup_destroy_object;
+    owner->cleanup.destroy_object = wow_menu_client_cleanup;
     owner->cleanup.allocate = cleanup_allocate;
     owner->cleanup.release = cleanup_release;
     runtime->lifecycle = owner;
@@ -482,6 +477,8 @@ BOOL WINAPI wow_user_task_lifecycle_init_style(wow_user_task_lifecycle *owner,
     status = xxxInitTask(version, &name, task_id, hotkey, shared_id, x, y,
         width, height, show, &task->thread);
     if (status == STATUS_SUCCESS) {
+        task->launch_request = shared_id;
+        task->start_pending = shared_id && shared_id != (DWORD)-1;
         result = TRUE;
         task = NULL;
     } else SetLastError(RtlNtStatusToDosError(status));
@@ -502,6 +499,43 @@ done:
     }
     (void)wow_user_runtime_leave(binding);
     return result;
+}
+
+DWORD WINAPI wow_user_task_lifecycle_notify_start(wow_user_task_lifecycle *owner,
+    DWORD task_id, DWORD shared_id, DWORD (WINAPI *notify)(ULONG))
+{
+    wow_user_runtime_thread *binding = wow_user_runtime_current();
+    wow_user_task_lifecycle_thread *task;
+    DWORD error = ERROR_OPERATION_ABORTED;
+    char attempt;
+    if (!notify || !owner || !binding || binding->runtime != owner->runtime ||
+            !wow_user_runtime_enter(binding)) return ERROR_INVALID_STATE;
+    task = current_task(owner);
+    if (!task || !task->thread.ptdb || task->thread.ptdb->hTaskWow != task_id ||
+            task->launch_request != shared_id || !task->start_pending ||
+            task->start_attempt) {
+        (void)wow_user_runtime_leave(binding);
+        return ERROR_INVALID_STATE;
+    }
+    /* A live call-frame token also distinguishes retirement/reallocation.
+     * Never retain/dereference the old task pointer across the RPC. */
+    task->start_attempt = &attempt;
+    (void)wow_user_runtime_leave(binding);
+    __try {
+        error = notify(shared_id);
+    } __finally {
+        binding = wow_user_runtime_current();
+        if (binding && binding->runtime == owner->runtime &&
+                wow_user_runtime_enter(binding)) {
+            task = current_task(owner);
+            if (task && task->start_attempt == &attempt) {
+                task->start_attempt = NULL;
+                if (!error) task->start_pending = FALSE;
+            } else error = ERROR_OPERATION_ABORTED;
+            (void)wow_user_runtime_leave(binding);
+        } else error = ERROR_OPERATION_ABORTED;
+    }
+    return error;
 }
 
 BOOL WINAPI wow_user_task_lifecycle_yield(wow_user_task_lifecycle *owner)

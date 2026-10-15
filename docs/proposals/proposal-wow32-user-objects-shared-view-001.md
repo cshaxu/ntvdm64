@@ -12,6 +12,16 @@ are inherited rather than reset. No new global source audit is required.
 
 ## Complete scope and dependencies
 
+Approved T447 transfer (2026-10-14): T447 S2 delivers the dependency-complete
+WND/CLS/desktop/handle foundation used by execution, including direct readers,
+first callbacks, updates, reuse, rollback and destruction. This candidate
+retains only independent residual system/native/external-object and geometry
+cases after reconciliation. C04--C07/object-C10 remain broad, open rows until
+all their cases are assigned and verified; narrow projections cannot close
+them. The local S table below applies to those residual cases, not duplicate
+implementation of T447's foundation. See the approved
+[transfer audit](../etc/operations/t447-wow-execution-plan.md#owner-requested-cross-t-planning-audit).
+
 C04--C07 plus object-related C10: desktop/WND/CLS/handles, registration, publication/update/direct reads, stale reuse, geometry, mutation, nested destruction and rollback. Own-created, system/native and other-task object contracts are explicit. Objects do not close without their cleanup.
 
 Expected reuse boundaries: [Messages, callbacks and task execution](proposal-wow32-message-task-execution-001.md).

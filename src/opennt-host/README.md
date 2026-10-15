@@ -228,6 +228,18 @@ unaccepted.
 
 ### S40 original ANSI class client composition
 
+T447 S2 extends OPENNT-HOST-046's existing ntcftxt.h subset with the unchanged
+GetClassInfo body from canonical OpenNT (SHA-256
+`E7F3D42CE8939BBE0B14EA34BC693107334C19F8B2D7862EC15B75A501D11DAB`).
+It reuses the selected capture/copy/cleanup macros and original client.c
+compilation. The owned NtUserGetClassInfo boundary queries actual native
+class fields, using retained GetClassPtr for enrolled identities, and returns
+their logical procedure/client menu instead of the gateway/cleared menu.
+No private USER cursor/CPD server or GetClassInfoEx API is imported. Native
+unenrolled classes retain host behavior; original server version-policy and
+standard-class metadata recovery are not claimed by this bounded connection.
+The T447 S2 evidence records source-body equality and query/runtime limits.
+
 OPENNT-HOST-046 compiles the retained ntcftxt.h ANSI class operations in a
 second composition of original client.c, alongside its unchanged original
 RegisterClassWOWA wrapper (client.c SHA-256

@@ -12,12 +12,15 @@ are inherited rather than reset. No new global source audit is required.
 
 ## Complete scope and dependencies
 
-Under the owner's functional-priority gate, diagnose and repair the first
-actual SOL/WRITE initialization failure during basic functionality. This is
-initial diagnostic ownership, not a claim that an OOM dialog proves a heap
-defect. Route a demonstrated different provider failure to its named owner
-with explicit early admission; neither error frontier may be deferred to
-comprehensive interaction or final acceptance.
+Under the approved 2026-10-14 cross-T replan, T447 coordinates actual
+SOL/WRITE startup-failure attribution and owns the reached original EDIT
+local-memory/dialog shared-DS integration in S3. W03 retains general module,
+loader, allocation and unrelated alias families. An OOM dialog is not proof
+of heap failure. Promote a demonstrated missing dependency to its earliest
+consumer, without duplicating the memory owner or deferring failed startup
+to comprehensive interaction/final acceptance. The local S table below
+applies to the residual scope. See the approved
+[transfer audit](../etc/operations/t447-wow-execution-plan.md#owner-requested-cross-t-planning-audit).
 
 Inherited: loader/memory slice: original module/loader-facing services, allocation/rollback and alias lifetimes, module release without live-task destruction. Consume W01 execution and W02 identities.
 

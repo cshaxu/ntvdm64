@@ -43,6 +43,7 @@ typedef struct wow_cleanup_context {
     void (WINAPI *destroy_object)(struct wow_cleanup_context *, wow_cleanup_handle *);
     PVOID (WINAPI *allocate)(SIZE_T);
     void (WINAPI *release)(PVOID);
+    BOOL object_release_failed;
 } wow_cleanup_context;
 BOOL WINAPI _WOWCleanup(HANDLE, DWORD, PNEMODULESEG, DWORD, wow_cleanup_context *);
 /* Native composition of the original non-xxx cleanup operation. The USER

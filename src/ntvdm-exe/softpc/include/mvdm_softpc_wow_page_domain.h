@@ -71,7 +71,8 @@ int __cdecl mvdm_softpc_wow_page_domain_publish_handle(unsigned short index,
  * the final borrow. NULL retains immediate physical release. */
 int __cdecl mvdm_softpc_wow_page_domain_retire_handle(unsigned short index,
     unsigned long *retained_backing);
-/* Sample the live native geometry/styles before returning to guest code.
+/* Sample live native geometry/styles and numeric child control IDs before
+ * returning to guest code. Top-level menu graph publication is separate.
  * Reject retired/reused identities; retain the existing guest allocation. */
 int __cdecl mvdm_softpc_wow_page_domain_refresh_window(unsigned long window);
 int __cdecl mvdm_softpc_wow_page_domain_callback_window(unsigned long window,
@@ -79,12 +80,30 @@ int __cdecl mvdm_softpc_wow_page_domain_callback_window(unsigned long window,
 int __cdecl mvdm_softpc_wow_page_domain_restore_callback(const unsigned long saved[2]);
 /* A selected original CLS is represented in the same worker client/server
  * address space. The returned value is its server-form address; zero means
- * publication did not occur. All inputs are fixed-width original fields. */
-unsigned long __cdecl mvdm_softpc_wow_page_domain_publish_class(
+ * publication did not occur. Fields are fixed-width original values; the
+ * counted ANSI name includes its NUL and is copied synchronously. Its host
+ * pointer is never retained or published to guest memory. */
+unsigned long __cdecl mvdm_softpc_wow_page_domain_publish_named_class(
     unsigned short atom, unsigned short fnid, unsigned long flags, unsigned long wow0,
     unsigned long wow1, unsigned long task, unsigned long style,
     unsigned long procedure, unsigned long window_extra,
-    unsigned long module);
+    unsigned long module, const char *class_name, unsigned long name_bytes);
 int __cdecl mvdm_softpc_wow_page_domain_retire_class(unsigned long server);
+
+/* Copied query fields consumed by USER16's unchanged local menu walkers.
+ * This is not a native MENU/ITEM layout. Submenu values are full identities,
+ * resolved to already published guest objects here; never host pointers.
+ * The USER owner serializes graph updates with CCPU entry and must complete
+ * every affected node/attachment/retirement before resuming guest execution.
+ * Native menu policy, graph discovery and task cleanup remain with that owner. */
+typedef struct mvdm_softpc_wow_menu_query_item {
+    unsigned long type, state, id, submenu;
+} mvdm_softpc_wow_menu_query_item;
+unsigned long __cdecl mvdm_softpc_wow_page_domain_publish_menu(
+    unsigned long menu, unsigned long task, unsigned long count,
+    const mvdm_softpc_wow_menu_query_item *items);
+int __cdecl mvdm_softpc_wow_page_domain_retire_menu(unsigned long menu);
+int __cdecl mvdm_softpc_wow_page_domain_window_menu(unsigned long window,
+    unsigned long menu);
 
 #endif

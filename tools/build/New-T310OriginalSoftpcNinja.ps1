@@ -544,8 +544,11 @@ foreach ($entry in @(
     'mvdm_softpc_wow_page_domain_refresh_window',
     'mvdm_softpc_wow_page_domain_callback_window',
     'mvdm_softpc_wow_page_domain_restore_callback',
-    'mvdm_softpc_wow_page_domain_publish_class',
+    'mvdm_softpc_wow_page_domain_publish_named_class',
     'mvdm_softpc_wow_page_domain_retire_class',
+    'mvdm_softpc_wow_page_domain_publish_menu',
+    'mvdm_softpc_wow_page_domain_retire_menu',
+    'mvdm_softpc_wow_page_domain_window_menu',
     'ntvdm_shadow_reg_open_key_ex',
     'ntvdm_shadow_reg_query_value_ex',
     'ntvdm_shadow_reg_query_info_key',
@@ -1844,6 +1847,9 @@ $graph.Add('build ' + $boundedExecutionFixtureSeamsObject + ': cc ' + (NinjaPath
 $graph.Add('rule event_test_link')
 $graph.Add('  command = link.exe /nologo /force:multiple /map:$out.map /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
 $fixtureHostLibraries = 'worker-base.lib worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib vdmredir-dll-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res'
+# The shared native-child binding now reaches Hook installation and DOS style
+# queries even in the fixture closure. Link the real selected providers.
+$fixtureHostLibraries += ' nthook-installer.lib nthook-context.lib base-rpc-client-core.lib base-rpc-client-launch-style.lib obj/worker/stub.obj opennt-base-bindings.lib broker-transport.lib common-rpc.lib'
 $graph.Add('build ccpu-halt-reset-test.exe: event_test_link obj/tests/ccpu_halt_reset_test.obj ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $ccpuThroughputFixtureObject = 'obj/tests/ccpu_throughput_fixture.obj'
 $graph.Add('build ' + $ccpuThroughputFixtureObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_throughput_fixture.c')))
@@ -1899,7 +1905,7 @@ $graph.Add('build ' + $ccpuThreadLifecycleFixtureObject + ': cc ' + (NinjaPath $
 $graph.Add('build ccpu-thread-lifecycle-test.exe: event_test_link ' + $ccpuThreadLifecycleFixtureObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 # Same production libraries; only the entry is a source-shaped memory test.
 $graph.Add('rule memory_test_link')
-$graph.Add('  command = link.exe /nologo /force:multiple /map:$out.map /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib')
+$graph.Add('  command = link.exe /nologo /force:multiple /map:$out.map /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib rpcrt4.lib libcmt.lib libvcruntime.lib libucrt.lib')
 $graph.Add('build obj/tests/original_external_memory_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/original_external_memory_test.c')))
 $graph.Add('build original-external-memory-test.exe: memory_test_link obj/tests/original_external_memory_test.obj ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $highLinearPageFixtureObject = 'obj/tests/ccpu_bounded_execution_fixture.obj'
@@ -1911,9 +1917,25 @@ $graph.Add('build obj/tests/keyboard_controller_pic_test.obj: cc ' + (NinjaPath 
 $graph.Add('build keyboard-controller-pic-test.exe: memory_test_link obj/tests/keyboard_controller_pic_test.obj ' + $boundedExecutionFixtureSeamsObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $wowPageDomainFixtureObject = 'obj/tests/wow_page_domain_fixture.obj'
 $wowUserObjectFixtureObject = 'obj/adapter-wow/wow_user_object_bindings.obj'
+$wowMenuClientFixtureObject = 'obj/adapter-wow/wow_menu_client_bindings.obj'
+$wowMenuCleanupFixtureObjects = @(
+    @('obj/adapter-wow/wow_menu_native_bindings.obj', 'src/wow32-dll/source/wow_menu_native_bindings.c'),
+    @('obj/tests/wow_menu_runtime.obj', 'src/ntvdm-exe/wow/wow_user_runtime.c'),
+    @('obj/tests/wow_original_cleanup.obj', 'src/opennt-host/windows/core/ntuser/kernel/cleanup.c'),
+    @('obj/tests/wow_original_handtabl.obj', 'src/opennt-host/windows/core/ntuser/kernel/handtabl.c'),
+    @('obj/tests/wow_original_probe.obj', 'src/opennt-host/base/ntos/ex/probe.c'),
+    @('obj/adapter-wow/wow_cleanup_bindings.obj', 'src/wow32-dll/source/wow_cleanup_bindings.c')
+)
+foreach ($pair in $wowMenuCleanupFixtureObjects) {
+    $graph.Add('build ' + $pair[0] + ': cc ' + (NinjaPath (Join-Path $root $pair[1])))
+    if ($pair[0] -eq 'obj/tests/wow_original_cleanup.obj') {
+        $graph.Add('  cflags = $cflags /Gz')
+    }
+}
 $graph.Add('build ' + $wowPageDomainFixtureObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/wow_page_domain_fixture.c')))
 $graph.Add('build ' + $wowUserObjectFixtureObject + ': cc ' + (NinjaPath (Join-Path $wow32DllRoot 'source/wow_user_object_bindings.c')))
-$graph.Add('build wow-page-domain-test.exe: memory_test_link ' + $wowPageDomainFixtureObject + ' ' + $wowUserObjectFixtureObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
+$graph.Add('build ' + $wowMenuClientFixtureObject + ': cc ' + (NinjaPath (Join-Path $wow32DllRoot 'source/wow_menu_client_bindings.c')))
+$graph.Add('build wow-page-domain-test.exe: memory_test_link ' + $wowPageDomainFixtureObject + ' ' + $wowUserObjectFixtureObject + ' ' + $wowMenuClientFixtureObject + ' ' + (($wowMenuCleanupFixtureObjects | ForEach-Object { $_[0] }) -join ' ') + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 # INT 2Ah publication now exercises the production native FlatAddress cache
 # and its original DIB mapping owner, not just an isolated LDT word copy.
 $graph.Add('build cpu40-descriptor-domain-fixture.exe: memory_test_link ' + $cpu40DescriptorDomainFixtureObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)

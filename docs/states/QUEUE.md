@@ -14,16 +14,24 @@ and their normal main interfaces verified in basic display, before advancing
 to comprehensive interaction. Historical error-dialog frontiers do not pass
 this phase gate; promote actual missing owner dependencies when necessary.
 
+The approved [cross-package transfer](../proposals/proposal-wow32-production-completion-002.md#approved-cross-t-ownership-refinement-2026-10-14)
+moves execution-required object foundations, EDIT storage/dialog DS, basic
+controls/dialogs and MENU-01 into the active execution package. The candidates below
+retain residual coverage, not duplicate implementation. No entire W family
+has been declared complete or removed. The active package coordinates SOL/WRITE startup
+failure attribution and owns the approved NT Monitor per-task termination;
+ToolHelp and general error-response candidates reuse its mechanisms.
+
 | Next order | Candidate implementation package | Proposal |
 | --- | --- | --- |
-| 1 | WOW32 USER objects and shared view — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-user-objects-shared-view-001.md) |
-| 2 | WOW32 modules, memory and resource aliases — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-modules-memory-aliases-001.md) |
+| 1 | WOW32 residual USER objects/shared view — reconcile C04--C07/object-C10 after execution foundations; retain independent system/native/external-object and geometry coverage, with guest/failure/cleanup evidence. | [Proposal](../proposals/proposal-wow32-user-objects-shared-view-001.md) |
+| 2 | WOW32 modules, memory and aliases — retain general loader/allocation/alias coverage; reached EDIT/dialog DS and startup-failure coordination transfer to the active execution package. | [Proposal](../proposals/proposal-wow32-modules-memory-aliases-001.md) |
 | 3 | WOW32 files, directories, environment and OEM — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-files-environment-oem-001.md) |
 | 4 | WOW32 resource discovery and loading foundation — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-resource-loading-001.md) |
 | 5 | WOW32 GDI identity, DC and drawing — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-gdi-dc-drawing-001.md) |
 | 6 | WOW32 fonts, text and metafiles — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-fonts-text-metafiles-001.md) |
-| 7 | WOW32 dialogs, input, hooks and timers — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-dialogs-input-hooks-timers-001.md) |
-| 8 | WOW32 resource conversion, menus and accelerators — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-menus-resource-conversion-001.md) |
+| 7 | WOW32 residual dialogs/input/hooks/timers — reuse execution-owned basic controls/dialogs and hook entry; complete broader input/caret/keyboard, hook registration/removal and timers. | [Proposal](../proposals/proposal-wow32-dialogs-input-hooks-timers-001.md) |
+| 8 | WOW32 residual resource conversion/accelerators — reuse execution-owned MENU-01 graph/parser/mutation/retirement; retain unrelated icon/cursor/bitmap conversion and display refinements. | [Proposal](../proposals/proposal-wow32-menus-resource-conversion-001.md) |
 | 9 | WOW32 common dialogs and related OLE interfaces — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-common-dialogs-ole-001.md) |
 | 10 | WOW32 clipboard — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-clipboard-001.md) |
 | 11 | WOW32 shell and layered Registry — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-shell-registry-001.md) |

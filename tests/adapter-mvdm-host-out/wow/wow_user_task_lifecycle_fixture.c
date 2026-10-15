@@ -5,6 +5,7 @@
 #include "wow_native_process.h"
 #include "nthook32-dll/hook.h"
 #include "wow_title_policy.h"
+#include "wow_menu_client_bindings.h"
 
 #include <stdio.h>
 
@@ -12,6 +13,24 @@ static unsigned errors;
 static unsigned native_direct_calls;
 #define CHECK(value) do { if (!(value)) { ++errors; \
     fprintf(stderr, "FAIL line=%d error=%lu\n", __LINE__, GetLastError()); } } while (0)
+
+#ifdef WOW_START_NOTIFICATION_FIXTURE
+#define FIXTURE_LAUNCH_REQUEST 0x5678
+static wow_user_task_lifecycle *notification_owner;
+static unsigned notification_calls;
+static DWORD WINAPI notify_start(ULONG request)
+{
+    wow_user_runtime_thread *binding = wow_user_runtime_current();
+    CHECK(request == 0x5678);
+    CHECK(binding && !binding->exclusive_held);
+    CHECK(wow_user_task_lifecycle_notify_start(notification_owner,
+        0x1234, request, notify_start) == ERROR_INVALID_STATE);
+    ++notification_calls;
+    return notification_calls <= 7 ? ERROR_RETRY : ERROR_SUCCESS;
+}
+#else
+#define FIXTURE_LAUNCH_REQUEST 0
+#endif
 
 #ifdef WOW_TITLE_POLICY_FIXTURE
 DWORD WINAPI NtvdmSeparateWowStyle(DWORD *style);
@@ -572,6 +591,25 @@ int __cdecl main(int argc,char **argv)
     CHECK(wow_user_runtime_initialize(&runtime));
     CHECK(wow_user_runtime_bind(&binding, &runtime, NULL, NULL));
     CHECK(wow_user_task_lifecycle_initialize(&lifecycle, &runtime, &callbacks));
+    {
+        wow_class_lookup_entry private_class = {0}, user_class = {0};
+        HANDLE module = (HANDLE)0x23451234, outside = (HANDLE)0x45671234;
+        CHECK(lifecycle.classes.client_module == GetModuleHandleW(L"user32.dll"));
+        CHECK(lifecycle.classes.client_module != NULL);
+        CHECK(HIWORD(lifecycle.classes.client_module) != HIWORD(module));
+        private_class.atomClassName = user_class.atomClassName = 0xc123;
+        private_class.hModule = module;
+        user_class.hModule = lifecycle.classes.client_module;
+        lifecycle.classes.pclsPrivateList = &private_class;
+        CHECK(GetClassPtr(0xc123, &lifecycle.classes, module) ==
+            &lifecycle.classes.pclsPrivateList);
+        CHECK(GetClassPtr(0xc123, &lifecycle.classes, (HANDLE)0x23455678) ==
+            &lifecycle.classes.pclsPrivateList);
+        CHECK(GetClassPtr(0xc123, &lifecycle.classes, outside) == NULL);
+        private_class.next = &user_class;
+        CHECK(GetClassPtr(0xc123, &lifecycle.classes, outside) == &private_class.next);
+        lifecycle.classes.pclsPrivateList = NULL;
+    }
     CHECK(wow_user_task_lifecycle_register(&lifecycle, end_task, wowexec));
     CHECK(lifecycle.registered && lifecycle.process.pwpi != NULL);
     CHECK(!wow_user_task_lifecycle_init_style(&lifecycle, 0x0400, "APP.EXE",
@@ -581,8 +619,32 @@ int __cdecl main(int argc,char **argv)
         0x1234, 0, 0, 0, 0, 1, 1, SW_HIDE, WINDOW_STYLE_OFF, 0x4321));
     CHECK(!binding.thread && GetLastError() == ERROR_NOT_FOUND);
     CHECK(wow_user_task_lifecycle_init_style(&lifecycle, 0x0400, "APP.EXE",
-        0x1234, 0, 0, (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT,
+        0x1234, 0, FIXTURE_LAUNCH_REQUEST,
+        (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT,
         (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT, SW_SHOW, WINDOW_STYLE_WIN16, 0));
+#ifdef WOW_START_NOTIFICATION_FIXTURE
+    {
+        unsigned retry;
+        void *committed = binding.thread;
+        notification_owner = &lifecycle;
+        CHECK(wow_user_task_lifecycle_notify_start(&lifecycle, 0x1235,
+            0x5678, notify_start) == ERROR_INVALID_STATE);
+        CHECK(wow_user_task_lifecycle_notify_start(&lifecycle, 0x1234,
+            0x5679, notify_start) == ERROR_INVALID_STATE);
+        CHECK(notification_calls == 0);
+        for (retry = 0; retry < 7; ++retry) {
+            CHECK(wow_user_task_lifecycle_notify_start(&lifecycle, 0x1234,
+                0x5678, notify_start) == ERROR_RETRY);
+            CHECK(binding.thread == committed);
+        }
+        CHECK(wow_user_task_lifecycle_notify_start(&lifecycle, 0x1234,
+            0x5678, notify_start) == ERROR_SUCCESS);
+        CHECK(wow_user_task_lifecycle_notify_start(&lifecycle, 0x1234,
+            0x5678, notify_start) == ERROR_INVALID_STATE);
+        CHECK(notification_calls == 8 && binding.thread == committed);
+        fprintf(stderr, "WOW_START_NOTIFICATION identity/reentry/unlocked/retry/commit checked errors=%u\n", errors);
+    }
+#endif
     CHECK(wow_user_task_lifecycle_style(&lifecycle, &window_style) &&
         window_style == WINDOW_STYLE_WIN16);
 #ifdef WOW_TITLE_POLICY_FIXTURE
@@ -778,6 +840,37 @@ int __cdecl main(int argc,char **argv)
         ZeroMemory(entry, sizeof(*entry));
         lifecycle.objects->last_handle = 0;
     }
+#ifdef WOW_MENU_CLEANUP_FIXTURE
+    {
+        extern LONG wow_menu_fixture_retire_fail;
+        HMENU selected = CreateMenu(), other = CreateMenu();
+        CHECK(selected && other);
+        CHECK(wow_user_runtime_enter(&binding));
+        CHECK(wow_menu_client_publish_tree(&lifecycle.process, 0x1234, selected));
+        CHECK(wow_menu_client_publish_tree(&lifecycle.process, 0x5678, other));
+        CHECK(wow_user_runtime_leave(&binding));
+        CHECK(wow_user_task_lifecycle_exit(&lifecycle, (HANDLE)(ULONG_PTR)0x1234,
+            0x1234, NULL, 0));
+        CHECK(IsMenu(selected) && IsMenu(other));
+        wow_menu_fixture_retire_fail = 1;
+        CHECK(!wow_user_runtime_unbind(&binding));
+        CHECK(lifecycle.cleanup.object_release_failed);
+        CHECK(!binding.exclusive_held && binding.thread != NULL);
+        CHECK(!IsMenu(selected) && IsMenu(other));
+        CHECK(lifecycle.objects->entries[LOWORD(selected)].bType == TYPE_MENU);
+        CHECK(wow_user_task_lifecycle_exit(&lifecycle, NULL,
+            0x1234, NULL, 0));
+        CHECK(!lifecycle.cleanup.object_release_failed);
+        CHECK(lifecycle.objects->entries[LOWORD(selected)].bType == TYPE_FREE);
+        CHECK(IsMenu(other) && lifecycle.objects->entries[LOWORD(other)].bType == TYPE_MENU);
+        CHECK(wow_user_runtime_enter(&binding));
+        CHECK(wow_menu_client_destroy_object(&lifecycle.process,
+            &lifecycle.objects->entries[LOWORD(other)]));
+        CHECK(wow_user_runtime_leave(&binding));
+        CHECK(!IsMenu(other));
+        fprintf(stderr, "WOW_MENU_CLEANUP errors=%u\n", errors);
+    }
+#endif
     CHECK(wow_user_task_lifecycle_exit(&lifecycle, (HANDLE)(ULONG_PTR)0x1234,
         0x1234, NULL, 0));
     CHECK(binding.thread != NULL && lifecycle.threads != NULL);

@@ -455,7 +455,8 @@ BOOL W32GetHookParams(LPHOOKPARAMS lpHookParams)
 //
 //*****************************************************************************
 
-LONG APIENTRY WU32StdHookProc(INT nCode, LONG wParam, LONG lParam, INT iFunc)
+/* DIVERGENCE(MVDM-HOST-DIV-332): original stubs enter the scoped host wrapper. */
+LONG APIENTRY WowOriginalStdHookProc(INT nCode, LONG wParam, LONG lParam, INT iFunc)
 {
     //
     // USER will call us in WOW context. Just Verify.

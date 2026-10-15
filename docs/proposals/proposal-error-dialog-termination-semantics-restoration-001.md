@@ -2,6 +2,12 @@
 
 ## Objective
 
+Approved 2026-10-14 ownership refinement: T447 delivers terminal handling
+needed by each active WOW execution path and the S5 original hung/task-exit
+mechanism. This candidate reuses those verified results; residual DOS and
+other error-response contracts remain here. No second WOW terminator or
+deferral of unsafe execution cleanup is authorized by the queue boundary.
+
 Recover and prove the selected OpenNT error-dialog contract for the standalone
 worker.  A visible button must have one source-defined outcome: terminate the
 affected DOS/VDM execution, retry its documented operation, or return control

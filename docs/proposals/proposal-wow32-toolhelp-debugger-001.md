@@ -12,6 +12,11 @@ are inherited rather than reset. No new global source audit is required.
 
 ## Complete scope and dependencies
 
+The approved 2026-10-14 cross-T audit assigns NT Monitor's individual Win16
+task deletion to T447 S5. Reuse its verified request/HTASK/incarnation and
+original hung/exit mechanism; do not create another terminator here. That
+product operation does not complete this package's ToolHelp/debugger APIs.
+
 Inherited: ToolHelp/debugger slice: enumerate/query and selected callbacks/notifications, OEM-DBG-PATH WOW receiver, stale identity, task loss and release; preserve completed non-WOW debugger evidence.
 
 Expected reuse boundaries: [Messages, callbacks and task execution](proposal-wow32-message-task-execution-001.md), [USER objects and shared view](proposal-wow32-user-objects-shared-view-001.md), [Modules, memory and resource aliases](proposal-wow32-modules-memory-aliases-001.md), [Files, directories, environment and OEM](proposal-wow32-files-environment-oem-001.md).

@@ -1,5 +1,17 @@
 # Supporting Material
 
+[T447 audited development checkpoint](evidence/m0-t447-s2-checkpoint-review.md)
+records the approved cross-T adoption, dirty-file disposition, verification
+limits and remaining production gates; it is not a runtime release.
+
+[T447 S2 message boundary audit](evidence/m0-t447-s2-message-boundary-audit.md)
+records original reply ordering, timeout information loss and remaining
+receive-identity/reentry obligations without claiming runtime closure.
+
+[T447 native execution boundary design](operations/t447-native-execution-boundary-design.md)
+records the owner-approved design investigation, retained original scheduler,
+native-boundary transition model and counterexamples that block implementation.
+
 [T447 S1 execution baseline](evidence/m0-t447-s1-execution-baseline.md)
 tracks current app frontiers, inherited task/reply probes and proof gaps.
 

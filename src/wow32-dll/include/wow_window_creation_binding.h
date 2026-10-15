@@ -22,4 +22,7 @@ HWND WINAPI wow_window_create_boundW(wow_task_order_thread *, ATOM,
  * creation/callback ordering to the bounded gateway above. */
 HWND WINAPI wow_user_create_window_ex(DWORD, LPCTSTR, LPCTSTR, DWORD, int,
     int, int, int, HWND, HMENU, HANDLE, LPVOID, DWORD, LPDWORD);
+/* Creation-only missing class-resource boundary, after CBT and before the
+ * first guest WM_NCCREATE. Outside an enrolled creation this is a no-op. */
+BOOL WINAPI wow_window_creation_menu(HWND, CREATESTRUCTA *);
 #endif
