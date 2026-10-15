@@ -837,7 +837,7 @@ BOOL WINAPI wow_user_native_call_end(wow_user_native_call *call)
         wow_user_native_call_failed("restore-native-owner", GetLastError());
     if (!call->receiver_id) {
         call->binding = NULL;
-        published = wow_user_window_refresh_graph(NULL) &&
+        published = wow_user_window_refresh_return(call->returned_window) &&
             wow_menu_client_refresh_all(binding->thread->ppi);
         error = GetLastError();
         if (!published) wow_user_native_call_failed("publish-native-return", error);
@@ -858,7 +858,7 @@ BOOL WINAPI wow_user_native_call_end(wow_user_native_call *call)
     }
     sender->psmsSent = call->previous;
     call->binding = NULL;
-    published = wow_user_window_refresh_graph(NULL) &&
+    published = wow_user_window_refresh_return(call->returned_window) &&
         wow_menu_client_refresh_all(sender->ppi);
     error = GetLastError();
     if (!published) wow_user_native_call_failed("publish-native-return", error);
@@ -886,14 +886,14 @@ __declspec(noreturn) void WINAPI wow_user_native_call_failed(const char *stage, 
 
 /* ADAPTER-WOW-051: candidate target-aware native call edge. Same-thread
  * calls retain their direct execution. Native transport/result is unchanged. */
-#define WOW_NATIVE_CALL_TARGET(type, name, params, args, failed, target) \
+#define WOW_NATIVE_CALL_RESULT(type, name, params, args, failed, target, window_result) \
 type WINAPI wow_native_##name params \
 { \
     wow_user_native_call call; \
     type result; BOOL restored; DWORD error = GetLastError(); \
     if (!wow_user_native_call_begin(&call, target)) return failed; \
     SetLastError(error); \
-    __try { result = name args; } \
+    __try { result = name args; call.returned_window = (window_result); } \
     __finally { \
         error = GetLastError(); \
         restored = wow_user_native_call_end(&call); \
@@ -901,6 +901,8 @@ type WINAPI wow_native_##name params \
     } \
     return restored ? result : failed; \
 }
+#define WOW_NATIVE_CALL_TARGET(type, name, params, args, failed, target) \
+    WOW_NATIVE_CALL_RESULT(type, name, params, args, failed, target, NULL)
 #define WOW_NATIVE_CALL(type, name, params, args, failed) \
     WOW_NATIVE_CALL_TARGET(type, name, params, args, failed, w)
 WOW_NATIVE_CALL(BOOL, BringWindowToTop, (HWND w), (w), FALSE)
@@ -908,12 +910,16 @@ WOW_NATIVE_CALL(BOOL, SetWindowPos, (HWND w, HWND after, int x, int y, int cx, i
 WOW_NATIVE_CALL(BOOL, MoveWindow, (HWND w, int x, int y, int cx, int cy, BOOL paint), (w, x, y, cx, cy, paint), FALSE)
 WOW_NATIVE_CALL(BOOL, ShowWindow, (HWND w, int show), (w, show), FALSE)
 WOW_NATIVE_CALL(BOOL, EnableWindow, (HWND w, BOOL enable), (w, enable), FALSE)
-WOW_NATIVE_CALL(HWND, SetActiveWindow, (HWND w), (w), NULL)
-WOW_NATIVE_CALL(HWND, SetFocus, (HWND w), (w), NULL)
+WOW_NATIVE_CALL_RESULT(HWND, SetActiveWindow, (HWND w), (w), NULL, w, result)
+WOW_NATIVE_CALL_RESULT(HWND, SetFocus, (HWND w), (w), NULL, w, result)
+/* capture.c sends WM_CAPTURECHANGED to the previous capture, not w. */
+WOW_NATIVE_CALL_RESULT(HWND, SetCapture, (HWND w), (w), NULL, GetCapture(), result)
+WOW_NATIVE_CALL_TARGET(BOOL, ReleaseCapture, (void), (), FALSE, GetCapture())
 WOW_NATIVE_CALL(BOOL, DestroyWindow, (HWND w), (w), FALSE)
-WOW_NATIVE_CALL(HWND, SetParent, (HWND w, HWND parent), (w, parent), NULL)
+WOW_NATIVE_CALL_RESULT(HWND, SetParent, (HWND w, HWND parent), (w, parent), NULL, w, result)
 WOW_NATIVE_CALL(BOOL, SetWindowPlacement, (HWND w, const WINDOWPLACEMENT *placement), (w, placement), FALSE)
-WOW_NATIVE_CALL(LONG, SetWindowLongA, (HWND w, int index, LONG value), (w, index, value), 0)
+WOW_NATIVE_CALL_RESULT(LONG, SetWindowLongA, (HWND w, int index, LONG value),
+    (w, index, value), 0, w, index == GWL_HWNDPARENT ? (HWND)result : NULL)
 WOW_NATIVE_CALL_TARGET(BOOL, EndDeferWindowPos, (HDWP positions), (positions), FALSE, NULL)
 /* Original WOW thunks retain conversion and return policy. These public
  * USER calls can mutate children, frame geometry or disabled state without
@@ -941,6 +947,7 @@ WOW_NATIVE_CALL(LRESULT, DefFrameProcA, (HWND w, HWND client, UINT message, WPAR
 WOW_NATIVE_CALL_TARGET(LRESULT, DispatchMessageA, (const MSG *message), (message), 0, message ? message->hwnd : NULL)
 #undef WOW_NATIVE_CALL
 #undef WOW_NATIVE_CALL_TARGET
+#undef WOW_NATIVE_CALL_RESULT
 
 static BOOL retire_task(wow_user_task_lifecycle *owner, DWORD task_id,
     HANDLE instance, PNEMODULESEG selectors, DWORD count)

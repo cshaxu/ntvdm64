@@ -67,7 +67,9 @@ BOOL WINAPI wow_user_window_sample_links(HWND window, wow_user_window_links *out
     return TRUE;
 }
 
-BOOL WINAPI wow_user_window_refresh_graph(HWND callback_window)
+static BOOL project_graph(const HWND *, ULONG, HWND);
+
+static BOOL refresh_graph(HWND callback_window, HWND returned_window)
 {
     wow_user_runtime_thread *binding;
     wow_user_object_table *objects;
@@ -101,11 +103,21 @@ BOOL WINAPI wow_user_window_refresh_graph(HWND callback_window)
                 window == desktop || window == callback_window) continue;
         roots[count++] = window;
     }
-    result = wow_user_window_project_graph(roots, count);
+    result = project_graph(roots, count, returned_window);
     error = result ? saved : GetLastError();
     HeapFree(GetProcessHeap(), 0, roots);
     SetLastError(error);
     return result;
+}
+
+BOOL WINAPI wow_user_window_refresh_graph(HWND callback_window)
+{
+    return refresh_graph(callback_window, NULL);
+}
+
+BOOL WINAPI wow_user_window_refresh_return(HWND returned_window)
+{
+    return refresh_graph(NULL, returned_window);
 }
 
 typedef mvdm_softpc_wow_window_observation window_observation;
@@ -244,7 +256,7 @@ static BOOL normalize_observation_chains(window_observation *rows, ULONG count,
     return TRUE;
 }
 
-BOOL WINAPI wow_user_window_project_graph(const HWND *roots, ULONG root_count)
+static BOOL project_graph(const HWND *roots, ULONG root_count, HWND returned_window)
 {
     window_observation *rows = NULL, captured;
     ULONG *index = NULL, count = 0, capacity = 0, i, used;
@@ -280,6 +292,15 @@ BOOL WINAPI wow_user_window_project_graph(const HWND *roots, ULONG root_count)
     for (i = 0; i < root_count; ++i) {
         if (!capture_window(roots[i], &captured) ||
                 !put_observation(&rows, &count, &capacity, index, &captured)) goto done;
+    }
+    /* A native setter returns its previous window, not its new target. It
+     * may disappear during native callbacks or the ownership handoff. Root
+     * a still-live full identity in this same transaction; never resurrect
+     * a dead return or bind its low word to a replacement generation. */
+    if (returned_window) {
+        if (capture_window(returned_window, &captured)) {
+            if (!put_observation(&rows, &count, &capacity, index, &captured)) goto done;
+        } else if (IsWindow(returned_window)) goto done;
     }
     for (i = 0; i < count; ++i) {
         unsigned edge;
@@ -323,6 +344,11 @@ done:
     if (rows) HeapFree(GetProcessHeap(), 0, rows);
     SetLastError(error);
     return result;
+}
+
+BOOL WINAPI wow_user_window_project_graph(const HWND *roots, ULONG root_count)
+{
+    return project_graph(roots, root_count, NULL);
 }
 
 BOOL WINAPI wow_user_window_publish(wow_user_object_table *table, HWND window,

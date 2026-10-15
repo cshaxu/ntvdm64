@@ -48,4 +48,6 @@ BOOL WINAPI wow_user_window_project_graph(const HWND *, ULONG);
  * native mutations. Includes live unlinked creation/terminal windows from
  * the managed table; does not acquire execution or native USER ownership. */
 BOOL WINAPI wow_user_window_refresh_graph(HWND);
+/* Completed native setter's previous HWND; dead results are not revived. */
+BOOL WINAPI wow_user_window_refresh_return(HWND);
 #endif

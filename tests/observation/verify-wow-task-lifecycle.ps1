@@ -259,6 +259,18 @@ if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource
     !($fixtureOutput -match '^WOW_GRAPH_NATIVE_MUTATION_CCPU errors=0 child_id=1 reparent=1 deferred_geometry=1$')) {
     throw 'Native mutation return did not synchronize child ID, parent or deferred geometry'
 }
+if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource')) {
+    if (!($fixtureOutput -match '^WOW_RETURNED_WINDOWS_CCPU errors=0 parent=1 owner=1 numeric=1 previous=1 capture=1 dead=1$')) {
+        throw 'Returned window identities, parent/owner distinction or capture publication failed'
+    }
+}
+if ($Case -eq 'graph-snapshot') {
+    foreach ($held in 0,1) {
+        if (!($fixtureOutput -match "^WOW_PROPERTY_DISCOVERY_CCPU errors=0 held=$held atom=1 string=1 signed=1 stop=1 exception=1 removal=1 invalid=1$")) {
+            throw "Property callback publication or entry lock restoration failed (held=$held)"
+        }
+    }
+}
 if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource') -and
     !($fixtureOutput -match '^WOW_GRAPH_MUTATION_GROUP_CCPU errors=0 class=1 scroll=1 bars=1 iconic=1 popups=1 invalid=1$')) {
     throw 'Native mutation group failed numeric class, scrolling, frame or iconic publication'

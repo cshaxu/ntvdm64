@@ -39,7 +39,7 @@ LONG WINAPI wow_user_get_window_longA(HWND window, int index)
     }
     if (index != GWL_WOWWORDS &&
             (index > GWL_WOWDWORD1 || index < GWL_WOWDWORD3))
-        return GetWindowLongA(window, index);
+        return wow_native_GetWindowLongA(window, index);
     words = wow_user_borrow_window(window);
     if (!words) return 0;
     if (index == GWL_WOWWORDS) return (LONG)words;

@@ -43,14 +43,14 @@ try {
  if($peer.ExitCode){throw "Native peer failed $($peer.ExitCode)"}
  Copy-Item "$tests/RESULT.BIN" "$root/guest-report.bin"
  $bytes=[IO.File]::ReadAllBytes("$root/guest-report.bin")
- if($bytes.Length -ne 14 -or [Text.Encoding]::ASCII.GetString($bytes,0,4) -ne 'DSC1'){throw 'Invalid guest report'}
- $row=[ordered]@{};$names=@('errors','found','matched','queries','freed')
- for($i=0;$i -lt 5;$i++){$row[$names[$i]]=[BitConverter]::ToUInt16($bytes,4+2*$i)}
+ if($bytes.Length -ne 18 -or [Text.Encoding]::ASCII.GetString($bytes,0,4) -ne 'DSC1'){throw 'Invalid guest report'}
+ $row=[ordered]@{};$names=@('errors','found','matched','queries','freed','properties','property_result')
+ for($i=0;$i -lt 7;$i++){$row[$names[$i]]=[BitConverter]::ToUInt16($bytes,4+2*$i)}
  $row|ConvertTo-Json|Set-Content "$root/guest-report.json"
- if($row.errors -or !$row.found -or $row.matched -ne 1 -or $row.queries -ne 2 -or $row.freed -ne 1){throw 'Guest discovery/query assertions failed'}
+ if($row.errors -or !$row.found -or $row.matched -ne 1 -or $row.queries -ne 3 -or $row.freed -ne 2 -or $row.properties -ne 1 -or $row.property_result -ne 65529){throw 'Guest discovery/query/property assertions failed'}
  $report=Get-Content "$root/observer.txt" -Raw
  if($process.ExitCode -or $report -notmatch 'result=exited' -or $report -notmatch 'exit=0x00000000'){throw 'Guest/launcher did not exit normally'}
- 'PASS real Win16 FindWindow, EnumWindows callback/direct class queries, early stop and cleanup'|Set-Content "$root/result.txt"
+ 'PASS real Win16 FindWindow, EnumWindows/EnumProps callbacks and direct class queries, signed property result, early stop and cleanup'|Set-Content "$root/result.txt"
  '0'|Set-Content "$root/result.exit"
 }catch{$_|Out-String|Set-Content "$root/failure.txt";'1'|Set-Content "$root/result.exit";throw}
 finally {

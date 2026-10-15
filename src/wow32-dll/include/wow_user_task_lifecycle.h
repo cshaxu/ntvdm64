@@ -76,6 +76,7 @@ typedef struct wow_user_native_call {
     wow_task_order_message *previous;
     DWORD receiver_id;
     BOOL held;
+    HWND returned_window;
 } wow_user_native_call;
 BOOL WINAPI wow_user_native_call_begin(wow_user_native_call *, HWND);
 BOOL WINAPI wow_user_native_call_end(wow_user_native_call *);

@@ -257,6 +257,47 @@ static void verify_native_mutation_group(ULONG delta)
         borrow_errors - errors_before);
 }
 
+static void verify_returned_windows(void)
+{
+    HWND first, second, child, old, dead;
+    ULONG backing;
+    unsigned before = borrow_errors;
+    first = CreateWindowA("STATIC", "Return owner", WS_POPUP,
+        0, 0, 40, 40, NULL, NULL, GetModuleHandle(NULL), NULL);
+    second = CreateWindowA("STATIC", "Return owned", WS_POPUP,
+        0, 0, 40, 40, first, NULL, GetModuleHandle(NULL), NULL);
+    child = CreateWindowA("STATIC", "Return child", WS_CHILD,
+        0, 0, 10, 10, first, (HMENU)189, GetModuleHandle(NULL), NULL);
+    BORROW_CHECK(first && second && child);
+    if (first && second && child) {
+        BORROW_CHECK((HWND)wow_user_get_window_longA(second, GWL_HWNDPARENT) == first);
+        BORROW_CHECK((HWND)wow_user_get_window_longA(child, GWL_HWNDPARENT) == first);
+        BORROW_CHECK(wow_user_get_window_longA(child, GWL_ID) == 189);
+        BORROW_CHECK(wow_native_SetParent(child, second) == first);
+        BORROW_CHECK((HWND)wow_user_get_window_longA(child, GWL_HWNDPARENT) == second);
+        BORROW_CHECK((HWND)wow_user_set_window_longA(second, GWL_HWNDPARENT, 0) == first);
+        BORROW_CHECK(!wow_user_get_window_longA(second, GWL_HWNDPARENT));
+        BORROW_CHECK(wow_native_ReleaseCapture());
+        BORROW_CHECK(!wow_native_SetCapture(first));
+        BORROW_CHECK(GetCapture() == first);
+        old = wow_native_SetCapture(second);
+        BORROW_CHECK(old == first && GetCapture() == second);
+        backing = mvdm_softpc_wow_page_domain_borrow_window((ULONG)(ULONG_PTR)old);
+        BORROW_CHECK(backing != 0);
+        if (backing) BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(backing));
+        BORROW_CHECK(wow_native_ReleaseCapture() && !GetCapture());
+        dead = first;
+        BORROW_CHECK(wow_native_DestroyWindow(first)); first = NULL;
+        BORROW_CHECK(wow_user_window_refresh_return(dead));
+        BORROW_CHECK(!mvdm_softpc_wow_page_domain_borrow_window((ULONG)(ULONG_PTR)dead));
+    }
+    if (child) BORROW_CHECK(wow_native_DestroyWindow(child));
+    if (second) BORROW_CHECK(wow_native_DestroyWindow(second));
+    if (first) BORROW_CHECK(wow_native_DestroyWindow(first));
+    fprintf(stderr, "WOW_RETURNED_WINDOWS_CCPU errors=%u parent=1 owner=1 numeric=1 previous=1 capture=1 dead=1\n",
+        borrow_errors - before);
+}
+
 static int verify_callback_borrow(ULONG teb)
 {
     static wow_user_object_table objects;
@@ -280,6 +321,7 @@ static int verify_callback_borrow(ULONG teb)
     BORROW_CHECK(wow_user_window_refresh_graph(NULL));
     callback_teb = teb;
     verify_native_mutation_group(c_sas_dw_at(teb + 0x60u));
+    verify_returned_windows();
     {
         HWND first = CreateWindowA("STATIC", "Mutation parent", WS_POPUP,
             10, 20, 80, 80, NULL, NULL, GetModuleHandle(NULL), NULL);
@@ -1520,6 +1562,80 @@ static BOOL CALLBACK discovery_window(HWND window, LPARAM parameter)
     return TRUE;
 }
 
+typedef struct property_fixture {
+    HWND window;
+    unsigned calls, atoms, strings;
+    BOOL stop, raise, remove;
+} property_fixture;
+
+static int CALLBACK property_callback(HWND window, LPCSTR name, HANDLE data)
+{
+    property_fixture *scope = (property_fixture *)data;
+    BORROW_CHECK(!wow_user_runtime_current()->exclusive_held);
+    BORROW_CHECK(LOWORD(window) == LOWORD(scope->window));
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_window_handle(LOWORD(window)) ==
+        (ULONG)(ULONG_PTR)scope->window);
+    ++scope->calls;
+    if (HIWORD(name)) {
+        BORROW_CHECK(strcmp(name, "T447 property string") == 0);
+        ++scope->strings;
+    } else {
+        BORROW_CHECK(LOWORD(name) == 0x1234);
+        ++scope->atoms;
+    }
+    if (scope->remove) BORROW_CHECK(RemovePropA(window, name) == data);
+    if (scope->raise) RaiseException(0xE0470014u, 0, 0, NULL);
+    return scope->stop ? 0 : -7;
+}
+
+static void verify_property_discovery(BOOL held)
+{
+    property_fixture scope = {0};
+    unsigned before = borrow_errors;
+    BOOL caught = FALSE;
+    DWORD error;
+    int native;
+    scope.window = CreateWindowA("STATIC", "Property discovery", WS_POPUP,
+        0, 0, 32, 32, NULL, NULL, GetModuleHandle(NULL), NULL);
+    BORROW_CHECK(scope.window != NULL);
+    if (!scope.window) return;
+    SetLastError(0x4567);
+    native = EnumPropsA(scope.window, property_callback); error = GetLastError();
+    SetLastError(0x4567);
+    BORROW_CHECK(wow_native_EnumPropsA(scope.window, property_callback) == native);
+    BORROW_CHECK(GetLastError() == error && scope.calls == 0);
+    BORROW_CHECK(SetPropA(scope.window, "T447 property string", (HANDLE)&scope));
+    BORROW_CHECK(SetPropA(scope.window, MAKEINTATOM(0x1234), (HANDLE)&scope));
+    BORROW_CHECK(wow_native_EnumPropsA(scope.window, property_callback) == -7);
+    BORROW_CHECK(scope.calls == 2 && scope.atoms == 1 && scope.strings == 1);
+    BORROW_CHECK(wow_user_runtime_current()->exclusive_held == held);
+    /* Negative witness: a short carrier cannot itself be a full graph root.
+     * The discovery entrance must recover its already-published identity. */
+    BORROW_CHECK(!wow_user_window_refresh_graph((HWND)(LONG_PTR)(SHORT)LOWORD(scope.window)));
+    scope.stop = TRUE;
+    BORROW_CHECK(wow_native_EnumPropsA((HWND)(LONG_PTR)(SHORT)LOWORD(scope.window), property_callback) == 0);
+    BORROW_CHECK(scope.calls == 3 && wow_user_runtime_current()->exclusive_held == held);
+    scope.stop = FALSE; scope.raise = TRUE;
+    __try { (void)wow_native_EnumPropsA(scope.window, property_callback); }
+    __except(GetExceptionCode() == 0xE0470014u ?
+        EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) { caught = TRUE; }
+    BORROW_CHECK(caught && scope.calls == 4 &&
+        wow_user_runtime_current()->exclusive_held == held);
+    scope.raise = FALSE; scope.remove = TRUE;
+    BORROW_CHECK(wow_native_EnumPropsA(scope.window, property_callback) == -7);
+    BORROW_CHECK(scope.calls == 6 && !GetPropA(scope.window, "T447 property string") &&
+        !GetPropA(scope.window, MAKEINTATOM(0x1234)));
+    BORROW_CHECK(DestroyWindow(scope.window));
+    SetLastError(0x4567);
+    native = EnumPropsA(scope.window, property_callback); error = GetLastError();
+    SetLastError(0x4567);
+    BORROW_CHECK(wow_native_EnumPropsA(scope.window, property_callback) == native);
+    BORROW_CHECK(GetLastError() == error && scope.calls == 6 &&
+        wow_user_runtime_current()->exclusive_held == held);
+    fprintf(stderr, "WOW_PROPERTY_DISCOVERY_CCPU errors=%u held=%d atom=1 string=1 signed=1 stop=1 exception=1 removal=1 invalid=1\n",
+        borrow_errors - before, held);
+}
+
 static void verify_native_discovery(BOOL held)
 {
     static wow_user_object_table objects;
@@ -1543,6 +1659,7 @@ static void verify_native_discovery(BOOL held)
     BORROW_CHECK(mvdm_softpc_wow_page_domain_window_handle(LOWORD(scope.parent)) !=
         (ULONG)(ULONG_PTR)scope.parent);
     if (held) BORROW_CHECK(wow_user_runtime_enter(&binding));
+    verify_property_discovery(held);
     SetLastError(0x1234);
     BORROW_CHECK(wow_native_FindWindowA("STATIC", "S2 discovery after snapshot") == scope.parent);
     BORROW_CHECK(mvdm_softpc_wow_page_domain_window_handle(LOWORD(scope.parent)) ==

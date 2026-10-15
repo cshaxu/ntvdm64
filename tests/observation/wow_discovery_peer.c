@@ -31,6 +31,9 @@ int wmain(int argc, WCHAR **argv)
     window = CreateWindowExA(0, "STATIC", "S2 late native discovery", WS_POPUP,
         0, 0, 80, 40, NULL, NULL, GetModuleHandleW(NULL), NULL);
     if (!window) { CloseDesktop(desktop); return 5; }
+    if (!SetPropA(window, "T447PROP", (HANDLE)(ULONG_PTR)0x4567)) {
+        DestroyWindow(window); CloseDesktop(desktop); return 8;
+    }
     printf("native-created-after-ready hwnd=%p pid=%lu\n", (void *)window, GetCurrentProcessId());
     fflush(stdout);
     file = CreateFileW(go, GENERIC_WRITE, FILE_SHARE_READ, NULL,
@@ -47,12 +50,13 @@ int wmain(int argc, WCHAR **argv)
         file = CreateFileW(result, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE,
             NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
         if (file != INVALID_HANDLE_VALUE) {
-            complete = GetFileSize(file, NULL) == 14;
+            complete = GetFileSize(file, NULL) == 18;
             CloseHandle(file);
         }
         if (complete) break;
         Sleep(20);
     } while (GetTickCount64() < deadline);
+    RemovePropA(window, "T447PROP");
     DestroyWindow(window); CloseDesktop(desktop);
     printf("native-peer report-complete=%d\n", complete);
     return complete ? 0 : 7;

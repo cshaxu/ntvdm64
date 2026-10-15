@@ -2363,6 +2363,109 @@ not an independently composable algorithm to duplicate in WOW32.
 
 This audit proves missing selected seams, not a failure attribution for SOL
 or WRITE. No production source or released binary changes in this audit.
+
+### Returned-object group implementation and verification in progress
+
+Starting source is6275809e0 (owner-approved unchanged ZIP committed after the
+fe68af10a audit); published runtime remains P13 cf2ac9520. The whole identified
+group now has candidate source, not a delivered runtime. Existing call_end
+receives the actual previous HWND in its stack record and includes it in the
+same graph transaction. A dead full identity is not republished. Only the
+parent/owner-valued GetWindowLong index uses discovery; numeric indices retain
+native behavior. Capture calls use the old capture's execution receiver.
+
+EnumProps retains WU32EnumProps/W32EnumPropsFunc and original guest allocation,
+atom/string conversion and callback. The native ExA form carries only a
+stack-local callback context, not new enumeration policy. Canonical reference:
+windows/core/ntuser/client/clenum.c, same pinned OpenNT revision, SHA-256
+4EA923B41085E2FEFBF0C65A18F4AF7ECBB60D2E0F0DC652302BA31AB668C1FF.
+Its A/ExA entries use the same InternalEnumProps; that body requires private
+NtUserBuildPropList/global atom facilities, so native USER remains its existing
+stopping boundary. No original function is copied or modified. The original
+callback's documented no-yield restriction remains, not a claim to support
+recursive use of its static guest callback state.
+
+The existing CCPU fixture now asserts parent/owner/numeric distinctions,
+previous capture/parent publication, dead return withdrawal, property string/
+atom/data forwarding, signed last callback result, stop, exception restoration,
+callback-side removal and invalid-window results with both entry lock states.
+The independently authored NE discovery probe additionally invokes original
+EnumProps/CallBack16 on a native peer's property and performs USER16's direct
+GetClassName reader inside that callback. It is a test input, not a modified
+original guest. All added marker assertions are required by their gate scripts.
+
+Background returned-object-r1 (supervisor21712, start17:22:47Z) runs the full
+12-case foundation group after worker/provider incremental builds. Those
+builds and graph-snapshot/window-borrow have passed at this checkpoint.
+returned-object-apps-r1 (supervisor32132, start17:25:29Z) waits for that exact
+owner's successful terminal result before staging and running guest/application/
+DOS gates. Remaining results and delivery are pending. No mirror/guest changes
+or new public/worker export ABI; no publication or S2 closure claimed.
+
+r1's fixture completed window-borrow with zero errors, but its gate then
+incorrectly required property markers outside the graph-snapshot compilation
+profile. The suite correctly failed and apps-r1 refused staging. Restricting
+those property assertions to their actual graph-snapshot case corrects the
+test selection without changing or dropping any assertion. Production source
+and fixture bodies are unchanged. returned-object-r2 (supervisor15504,
+start17:26:59Z) reruns the complete group; apps-r2 (supervisor32032,
+start17:27:17Z) waits for it. These are pending, not passing delivery evidence.
+
+r2 subsequently passes all12 foundation groups. apps-r2 fails the new real
+guest property gate: errors=0, matched=1, queries=2, freed=2, properties=0,
+property_result=0xffff. Publication correctly refuses it. One bounded existing
+callback-trace run (returned-property-diagnostic-r1, supervisor31416,
+start17:41:30Z) reproduces the missing property callback; it is diagnostic,
+not ordinary acceptance or a new production trace hook.
+
+Source attribution: walias.h HWND32 is USER32, a sign-extension of SHORT,
+not FULLHWND32. Native property enumeration echoes its HWND argument into the
+callback. The new publication entrance consequently received a short HWND,
+unlike EnumWindows' full identities, and could reject it as a conflicting
+zero/FFFF generation. Under the existing USER lock, discovery now restores
+that input through retained GetFullUserHandle and the existing shared metadata
+owner before graph publication. Full inputs remain unchanged. No new alias
+table, native enumeration policy, original converter or mirror edit is added.
+The CCPU property test now includes the original sign-extended input and an
+explicit negative assertion against treating it as a full graph root.
+
+returned-object-r3 (supervisor1232, start17:44:52Z) rebuilds and reruns the
+entire group with that source-derived correction. This checkpoint is not a
+successful real-guest result or publication; the failed r2 evidence remains.
+
+r3 finishes exit0 at17:58:00Z (about787s): both builds and all12 foundation
+groups pass, including the explicit short-carrier negative/normalized-positive
+case. apps-r3 fails only its supervisor's terminal race before staging: the
+owner writes exit0 and exits between the loop's file check and PID inspection.
+Both terminal files have17:58:00Z timestamps. Re-read the terminal file after
+process inspection before treating absence as failure. apps-r4, supervisor27952
+start18:00:08Z, reuses that successful unchanged candidate and runs only the
+pending product gates; no repeated foundation build/test is required.
+
+P14 completion: apps-r4 finishes exit0 at18:04:04Z on2026-10-15, about236s.
+Real Win16 discovery reports errors0, matched1, queries3, freed2, properties1,
+signed property result65529 (-7). Real guest CBT passes query, nested creation,
+veto/recovery, unhook and launcher completion. SOL and WINMINE pass actual
+interaction and normal exit in Off/Win16/All modes; WRITE exposes its three
+expected visible classes in each mode, not editing acceptance. Console17 and
+Window17 both match all17 expected exit codes.
+
+returned-object-publish-r3 (supervisor27224, start18:06:50Z) completes exit0.
+Its input seals, backups, unchanged-inputs and verified-manifest records prove
+all13 images match assets/release and O:/winnt/system32 with correct PE widths.
+Only ntvdm.exe and WOW32.DLL change; other11 host and46 guest/config inputs
+match the prior baseline. Candidate SHA256 identities:
+
+- ntvdm.exe: 3A72ABDDE933EFC391728EC81E4F5741FED3BEF1CAABB1AB44B798F0859A7C46
+- WOW32.DLL: E6EF8D78F61FDD504473A969B7F0A9BCD08A6B8C60F22AEDE6EB15F8E1EA703B
+
+Separate source review confirms no new graph owner, property registry,
+scheduler, guest conversion or native enumeration policy. Added bindings are
+project-owned and selected through the existing provider header. Zero changed
+paths in src/mvdm or src/opennt-host; no guest image is rebuilt or patched.
+The owner-approved ZIP remains exactly the committed6275809e0 payload.
+This closes only the returned-object group, not S2 or T447; message payload,
+reply identity and WRITE editing remain outside this delivery's acceptance.
 Final documentation/link, diff, PE/hash and mirror-expression checks precede
 the reviewed commit/push. This is a usable P3 baseline, not S2 completion,
 SOL recovery, WRITE editing acceptance or full message-contract recovery.

@@ -2,7 +2,7 @@
 
 ## Admission and boundaries
 
-### Next S2 group after E: returned-object publication
+### S2 P14 after E: returned-object publication
 
 The post-P13 source audit in the window-graph evidence identifies the bounded
 next group: parent/owner-valued window-word queries, SetCapture/ReleaseCapture,
@@ -11,9 +11,47 @@ original thunks, native result/last-error and existing callback conversion.
 Use the same graph transaction and native-call owner; do not add a second
 capture manager, blanket integer-to-HWND conversion or query algorithm.
 All affected positive/negative/reentrant/lifetime cases must be connected
-before one grouped build and the full per-P release gate. Current P13 remains
-the verified runtime baseline. This source-audit checkpoint is not runtime
-completion and does not close S2 or admit S3.
+before one grouped build and the full per-P release gate. P14 now passes
+those gates and is published at both release locations. This bounded
+delivery does not close S2 or admit S3.
+
+Implementation review for this group: extend the existing native-call stack
+record with its actual returned HWND. After restoring the same execution
+owner, add that value to the existing graph transaction, not another refresh.
+Capture a live full identity; a result destroyed during native callbacks or
+ownership restoration is not resurrected. Failure to represent a still-live
+required result uses the already admitted post-native fatal boundary. Numeric
+window words and procedure tokens never enter this path. Query-only parent/
+owner results use the existing discovery failure contract.
+
+SetCapture/ReleaseCapture select the prior GetCapture receiver for the existing
+native call boundary, without changing native queue/capture policy. EnumProps
+uses native EnumPropsExA only to carry a stack-local callback context: original
+clenum.c routes A and ExA to the same InternalEnumProps, differing only in the
+extra callback argument. Original W32EnumPropsFunc and WU32EnumProps remain
+unchanged, including atom/string conversion, callback result and guest buffer
+ownership. No new TLS callback registry or property-list implementation is
+needed. Their documented no-yield callback restriction is retained; this
+does not claim to repair original static guest callback state for unsupported
+recursive/yielding EnumProps. Required publication occurs before each callback;
+restore the entry USER-lock state on normal return and exceptions.
+
+The original HWND32 input is sign-extended, not a full native identity.
+EnumProps echoes it into its callback, so discovery must recover short inputs
+through the retained GetFullUserHandle/shared-table owner under the existing
+lock before graph publication. Preserve the callback's own input value and
+the original converter; never publish a short carrier as a new generation.
+
+Verification extends the existing CCPU discovery/mutation fixtures, covering
+parent versus owner queries, numeric words, previous capture/parent results,
+dead full identities, property atom/string/data forwarding, negative callback
+results, cancellation, exception restoration and callback-side removal. Run the
+entire affected foundation group and existing real-guest/application/DOS gates
+after this group is complete. No guest, mirror or worker export change is
+introduced. returned-object-r3 passes all12 foundation groups;
+returned-object-apps-r4 passes real guest discovery/CBT, three-mode SOL and
+WINMINE, WRITE initialization and both DOS17 matrices. Publication evidence
+is returned-object-publish-r3. WRITE editing and later S2 groups remain open.
 
 ### Approved E observation-view repair group
 

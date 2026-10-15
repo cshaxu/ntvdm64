@@ -20,6 +20,9 @@ BOOL WINAPI wow_native_ShowWindow(HWND w, int show);
 BOOL WINAPI wow_native_EnableWindow(HWND w, BOOL enable);
 HWND WINAPI wow_native_SetActiveWindow(HWND w);
 HWND WINAPI wow_native_SetFocus(HWND w);
+HWND WINAPI wow_native_SetCapture(HWND);
+BOOL WINAPI wow_native_ReleaseCapture(void);
+LONG WINAPI wow_native_GetWindowLongA(HWND, int);
 BOOL WINAPI wow_native_DestroyWindow(HWND w);
 HWND WINAPI wow_native_SetParent(HWND w, HWND parent);
 BOOL WINAPI wow_native_SetWindowPlacement(HWND w, const WINDOWPLACEMENT *placement);
@@ -59,6 +62,7 @@ HWND WINAPI wow_native_GetNextDlgTabItem(HWND, HWND, BOOL);
 BOOL WINAPI wow_native_EnumWindows(WNDENUMPROC, LPARAM);
 BOOL WINAPI wow_native_EnumChildWindows(HWND, WNDENUMPROC, LPARAM);
 BOOL WINAPI wow_native_EnumThreadWindows(DWORD, WNDENUMPROC, LPARAM);
+int WINAPI wow_native_EnumPropsA(HWND, PROPENUMPROCA);
 /* Include only after SDK declarations in the selected original provider.
  * The implementation itself must call native USER without these mappings. */
 #ifdef WOW_USER_PRIVATE_REDIRECT
@@ -81,6 +85,8 @@ BOOL WINAPI wow_native_EnumThreadWindows(DWORD, WNDENUMPROC, LPARAM);
 #define EnableWindow wow_native_EnableWindow
 #define SetActiveWindow wow_native_SetActiveWindow
 #define SetFocus wow_native_SetFocus
+#define SetCapture wow_native_SetCapture
+#define ReleaseCapture wow_native_ReleaseCapture
 #define DestroyWindow wow_native_DestroyWindow
 #define SetParent wow_native_SetParent
 #define SetWindowPlacement wow_native_SetWindowPlacement
@@ -118,5 +124,6 @@ BOOL WINAPI wow_native_EnumThreadWindows(DWORD, WNDENUMPROC, LPARAM);
 #define EnumWindows wow_native_EnumWindows
 #define EnumChildWindows wow_native_EnumChildWindows
 #define EnumThreadWindows wow_native_EnumThreadWindows
+#define EnumPropsA wow_native_EnumPropsA
 #endif
 #endif

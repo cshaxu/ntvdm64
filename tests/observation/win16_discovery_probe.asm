@@ -90,6 +90,23 @@ push word [proc-data+2]
 push word [proc-data]
 api 10                        ; FreeProcInstance
 mov word [freed-data],1
+push cs
+push word property_proc-code
+push word [instance-data]
+api 15                        ; MakeProcInstance for original EnumProps callback
+mov [proc-data],ax
+mov [proc-data+2],dx
+or ax,dx
+jz failed
+push word [found-data]
+push dx
+push word [proc-data]
+api 16                        ; EnumProps -> W32EnumPropsFunc -> CallBack16
+mov [property_result-data],ax
+push word [proc-data+2]
+push word [proc-data]
+api 17                        ; FreeProcInstance
+inc word [freed-data]
 jmp finish
 failed:
 inc word [errors-data]
@@ -114,7 +131,11 @@ cmp word [errors-data],0
 jne fatal
 cmp word [matched-data],1
 jne fatal
-cmp word [queries-data],2
+cmp word [queries-data],3
+jne fatal
+cmp word [properties-data],1
+jne fatal
+cmp word [property_result-data],-7
 jne fatal
 mov ax,0x4c00
 int 0x21
@@ -187,8 +208,52 @@ pop bx
 pop ds
 pop bp
 retf 6
+property_proc:
+push bp
+mov bp,sp
+push ds
+mov ds,ax
+push bx
+push si
+push di
+push es
+cmp word [bp+6],0x4567        ; property data, far string, HWND (Pascal)
+jne .bad
+mov ax,[bp+12]
+cmp ax,[found-data]
+jne .bad
+call query_class
+mov es,[bp+10]
+mov si,[bp+8]
+mov di,property_name-data
+push cx
+mov cx,9
+.compare:
+mov al,[es:si]
+cmp al,[di]
+jne .mismatch
+inc si
+inc di
+loop .compare
+pop cx
+inc word [properties-data]
+jmp .return
+.mismatch:
+pop cx
+.bad:
+inc word [errors-data]
+.return:
+mov ax,-7
+cwd
+pop es
+pop di
+pop si
+pop bx
+pop ds
+pop bp
+retf 8
 code_end:
-dw 14
+dw 17
 %macro fixup 3
 db 3,1
 dw ..@call_%1-code+1,%2,%3
@@ -207,6 +272,9 @@ fixup 11,1,83
 fixup 12,1,86
 fixup 13,1,81
 fixup 14,2,58
+fixup 15,1,51
+fixup 16,2,27
+fixup 17,1,52
 align 16,db 0
 data:
 times 32 db 0
@@ -216,6 +284,8 @@ found: dw 0
 matched: dw 0
 queries: dw 0
 freed: dw 0
+properties: dw 0
+property_result: dw 0
 report_end:
 instance: dw 0
 file: dw 0
@@ -223,6 +293,7 @@ proc: dd 0
 query: times 16 db 0
 cls: db 'STATIC',0
 expected: db 'static'
+property_name: db 'T447PROP',0
 title: db 'S2 late native discovery',0
 ready_name: db 'READY.DAT',0
 go_name: db 'GO.DAT',0
