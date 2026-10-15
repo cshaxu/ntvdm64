@@ -2,7 +2,7 @@ param(
     [Parameter(Mandatory=$true)][string]$ProviderBuildRoot,
     [Parameter(Mandatory=$true)][string]$WorkerBuildRoot,
     [string]$BuildRoot,
-    [ValidateSet('task-lifecycle','process-retirement','menu-cleanup','menu-resource','native-dispatch-gate','window-procedure','standard-class','class-query','dialog-lifecycle','init-notification','start-notification','style-policy','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','task-order','class-client','window-borrow','thunk-scope')] [string]$Case = 'task-lifecycle',
+    [ValidateSet('task-lifecycle','process-retirement','menu-cleanup','menu-resource','native-dispatch-gate','window-procedure','standard-class','class-query','dialog-lifecycle','init-notification','start-notification','style-policy','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','task-order','class-client','window-borrow','window-reclaim','thunk-scope')] [string]$Case = 'task-lifecycle',
     [string]$StyleDll,
     [string]$Ninja = 'ninja.exe',
     [string]$VsDevCmd = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
@@ -122,10 +122,11 @@ if ($Case -eq 'init-notification') {
 if ($Case -eq 'task-order') { $fixtureName = 'wow_task_order_fixture.c' }
 if ($Case -eq 'thunk-scope') { $fixtureName = 'wow_user_thunk_scope_fixture.c' }
 $fixturePath = Join-Path $repo ('tests/adapter-mvdm-host-out/wow/' + $fixtureName)
-if ($Case -in @('window-borrow','menu-resource')) { $fixturePath = Join-Path $repo 'tests/mvdm-host/wow_page_domain_fixture.c' }
+if ($Case -in @('window-borrow','window-reclaim','menu-resource')) { $fixturePath = Join-Path $repo 'tests/mvdm-host/wow_page_domain_fixture.c' }
 $fixture = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\fixture.obj" "'+$fixturePath+'"')
 if ($fixture -eq $compile) { throw 'Fixture substitution failed' }
-if ($Case -in @('window-borrow','menu-resource')) { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE' }
+if ($Case -in @('window-borrow','window-reclaim','menu-resource')) { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE' }
+if ($Case -eq 'window-reclaim') { $fixture += ' /DWOW_RECLAIM_FAILURE_FIXTURE' }
 if ($Case -eq 'menu-resource') { $fixture += ' /DWOW_RESOURCE_CLIENT_FIXTURE' }
 if ($Case -eq 'start-notification') { $fixture += ' /DWOW_START_NOTIFICATION_FIXTURE' }
 if ($Case -eq 'menu-cleanup') { $fixture += ' /DWOW_MENU_CLEANUP_FIXTURE' }
@@ -155,6 +156,18 @@ $workerObjects += Join-Path $out 'worker-static-imports.obj'
 $workerObjects += Join-Path $provider 'obj/wow32-system-import-abi-aliases.obj'
 $workerObjects += Join-Path $provider 'obj/wow32-parent-import-abi-aliases.obj'
 $parentObjects = @()
+if ($Case -eq 'window-reclaim') {
+    # Separate negative row: the ordinary window-borrow row still selects the
+    # unmodified production object. Replace only its free leaf in this row.
+    $workerCommands = & $ninja -C $worker -t commands softpc-bindings.lib
+    $pageCompile = $workerCommands | Where-Object { $_ -match 'mvdm_softpc_wow_page_domain\.c$' } | Select-Object -Last 1
+    if (!$pageCompile) { throw 'Missing production page-domain compile command' }
+    $faultCompile = $pageCompile -replace '/Fo\S+\s+\S+mvdm_softpc_wow_page_domain\.c$', ('/Fo"'+$out+'\page-reclaim.obj" "'+$repo+'\tests\mvdm-host\wow_page_domain_reclaim_fixture.c"')
+    if ($faultCompile -eq $pageCompile) { throw 'Reclaim boundary substitution failed' }
+    & cmd.exe /d /s /c ('call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cd /d "'+$worker+'" && '+$faultCompile) >> "$out\build.log" 2>&1
+    if ($LASTEXITCODE) { throw 'Reclaim boundary build failed' }
+    $parentObjects += Join-Path $out 'page-reclaim.obj'
+}
 if ($Case -eq 'menu-resource') {
     # Controlled W32 resource inputs only in this separate executable. Ordinary
     # window-borrow acceptance continues to link production resource callbacks.
@@ -170,7 +183,7 @@ if ($Case -eq 'menu-resource') {
     Invoke-Build ($thunkFixture + ' /DWOW_MENU_THUNK_BOUND_FIXTURE /I"'+$out+'"')
     $parentObjects += Join-Path $out 'menu-thunk-fixture.obj'
 }
-if ($Case -notin @('window-borrow','menu-resource')) {
+if ($Case -notin @('window-borrow','window-reclaim','menu-resource')) {
 $parentStub = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\parent-stub.obj" "'+$repo+'\tests\adapter-mvdm-host-out\wow\wow_page_domain_parent_stub.c"')
 if ($parentStub -eq $compile) { throw 'Parent-stub substitution failed' }
 if ($Case -in @('class-client','class-query')) { $parentStub += ' /DWOW_CLASS_CLIENT_FIXTURE' }
@@ -203,6 +216,10 @@ $fixtureOutput = @(Get-Content "$out/stdout.txt"; Get-Content "$out/stderr.txt")
 $fixtureExitCode = $process.ExitCode
 $fixtureExitCode | Set-Content -LiteralPath "$out/fixture-exit.txt"
 $fixtureOutput | Write-Output
+if ($Case -eq 'window-reclaim' -and
+    !($fixtureOutput -match '^WOW_DEFERRED_RECLAIM_CCPU errors=0 consumed_once=1 class_guard=1 retry=1 retained_owner=1 released=1$')) {
+    throw 'Failed physical release lost its reclamation owner or consumed a reference twice'
+}
 if ($Case -eq 'process-retirement' -and
     !($fixtureOutput -match '^WOW_PROCESS_RETIREMENT errors=0 ')) {
     throw 'Production session/provider retirement did not prove release and refusal/retry'
@@ -302,6 +319,10 @@ if ($Case -eq 'window-borrow' -and
 if ($Case -eq 'window-borrow' -and
     !($fixtureOutput -match '^WOW_VIEW_RETIREMENT_CCPU errors=0 nested_borrow=1 class_guard=1 consumed_once=1 released=1$')) {
     throw 'Observed retirement lost nested backing/class lifetime or consumed a release twice'
+}
+if ($Case -eq 'window-borrow' -and
+    !($fixtureOutput -match '^WOW_DEAD_GRAPH_CCPU errors=0 atomic=1 live_guard=1 retained=1 released=1$')) {
+    throw 'Dead graph replacement partially changed surviving edges or lost retained backing'
 }
 if ($Case -eq 'window-borrow' -and
     !($fixtureOutput -match '^WOW_VIEW_WORDS_CCPU errors=0 same_alias=1 creator_words=1 duplicate_safe=1 nested_retirement=1$')) {

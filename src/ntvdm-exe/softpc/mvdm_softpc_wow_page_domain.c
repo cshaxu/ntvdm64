@@ -165,14 +165,19 @@ typedef struct mvdm_softpc_wow_class_allocation {
 static mvdm_softpc_wow_page_domain domain;
 static mvdm_softpc_wow_class_allocation *class_allocations;
 
-/* Only outstanding synchronous borrows need records. Live publication is
- * still indexed by guest_windows; these records own no native HWND/task. */
+/* Outstanding synchronous borrows and deferred retired allocations share
+ * these records. Live publication remains indexed by guest_windows; these
+ * records own no native HWND/task. Zero readers on a retired record means
+ * physical reclamation is pending, not an invented caller reference. */
 typedef struct mvdm_softpc_wow_window_borrow {
     struct mvdm_softpc_wow_window_borrow *next;
     ULONG backing, references;
     int retired, retained_owner;
 } mvdm_softpc_wow_window_borrow;
 static mvdm_softpc_wow_window_borrow *window_borrows;
+static mvdm_softpc_wow_window_borrow **window_borrow_link(ULONG backing);
+static void page_domain_withdraw_window(WORD index, ULONG guest_window,
+    mvdm_softpc_wow_window_borrow *borrow, int retained_owner);
 
 static int page_domain_client_desktop(ULONG desktop_info, ULONG delta);
 
@@ -856,15 +861,65 @@ static mvdm_softpc_wow_class_allocation *page_domain_class_allocation(ULONG serv
     return NULL;
 }
 
+/* Prepare a WND without publishing its handle slot. The ordinary borrow list
+ * owns one temporary reference, keeping allocation/CLS alive until commit or
+ * abort. This permits a replacement generation without overwriting readers
+ * of the previous generation, and uses no second storage registry. */
+static ULONG page_domain_prepare_window(ULONG full, HWND window,
+    ULONG class_server, const ULONG words[3], const WINDOWINFO *info)
+{
+    mvdm_softpc_wow_window_borrow *pending;
+    ULONG backing = 0, server;
+    unsigned i;
+    pending = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, sizeof(*pending));
+    if (!pending) return 0;
+    if (VdmAllocateVirtualMemory(&backing, MVDM_SOFTPC_WND_BYTES, TRUE) < 0) {
+        HeapFree(GetProcessHeap(), 0, pending);
+        return 0;
+    }
+    c_sas_fills(backing, 0u, MVDM_SOFTPC_WND_BYTES);
+    pending->backing = backing;
+    pending->references = 1;
+    pending->next = window_borrows;
+    window_borrows = pending;
+    if (backing > 0xffffffffu - domain.client_delta - MVDM_SOFTPC_WND_BYTES)
+        goto fail;
+    server = backing + domain.client_delta;
+    c_sas_storedw(backing + MVDM_SOFTPC_WND_HEAD_HANDLE, full);
+    c_sas_storedw(backing + MVDM_SOFTPC_WND_HEAD_SELF, server);
+    c_sas_storedw(backing + MVDM_SOFTPC_WND_CLASS, class_server);
+    if (!page_domain_window_info(backing, info, window)) goto fail;
+    if (words)
+        for (i = 0; i < 3u; ++i)
+            c_sas_storedw(backing + MVDM_SOFTPC_WND_WOW_WORDS + i * 4u, words[i]);
+    return backing;
+fail:
+    pending->retired = 1;
+    (void)mvdm_softpc_wow_page_domain_release_window(backing);
+    return 0;
+}
+
+/* Publishing consumes no allocation and leaves temporary-reference release
+ * to the caller. It may follow withdrawal of an older generation's slot. */
+static void page_domain_commit_window(WORD index, ULONG backing, BYTE type,
+    BYTE flags)
+{
+    ULONG entry = domain.guest_handle_table + (ULONG)index * MVDM_SOFTPC_HANDLE_ENTRY_BYTES;
+    ULONG full = c_sas_dw_at(backing + MVDM_SOFTPC_WND_HEAD_HANDLE);
+    page_domain_include_object(backing + domain.client_delta, MVDM_SOFTPC_WND_BYTES);
+    c_sas_storedw(entry, backing + domain.client_delta);
+    c_sas_storedw(entry + 4u, 0u);
+    c_sas_storedw(entry + 8u, (full & 0xffff0000u) | ((ULONG)flags << 8) | type);
+    domain.guest_windows[index] = backing;
+}
+
 int mvdm_softpc_wow_page_domain_publish_handle(unsigned short index,
     unsigned short uniqueness, unsigned char type, unsigned char flags,
     unsigned long window, unsigned long class_server, const unsigned long words[3])
 {
     ULONG guest_window;
-    ULONG server_window;
     ULONG entry;
     WINDOWINFO info = { sizeof(info) };
-    NTSTATUS status;
     mvdm_softpc_wow_class_allocation *previous_class, *next_class;
     unsigned i;
 
@@ -905,37 +960,11 @@ int mvdm_softpc_wow_page_domain_publish_handle(unsigned short index,
          * Do not discard its allocation record on a failed release. */
         return 1;
     }
-    guest_window = 0u;
-    status = VdmAllocateVirtualMemory(&guest_window, MVDM_SOFTPC_WND_BYTES,
-        TRUE);
-    if (status < 0) return 0;
-    if (guest_window > 0xffffffffu - domain.client_delta - MVDM_SOFTPC_WND_BYTES) {
-        (void)VdmFreeVirtualMemory(guest_window);
-        return 0;
-    }
-    server_window = guest_window + domain.client_delta;
-    entry = domain.guest_handle_table + (ULONG)index *
-        MVDM_SOFTPC_HANDLE_ENTRY_BYTES;
-    c_sas_fills(guest_window, 0u, MVDM_SOFTPC_WND_BYTES);
-    /* The host HWND is sampled only while this call runs. No native pointer
-     * is retained in the original-layout client view. */
-    c_sas_storedw(guest_window + MVDM_SOFTPC_WND_HEAD_HANDLE,
-        ((ULONG)uniqueness << 16) | index);
-    c_sas_storedw(guest_window + MVDM_SOFTPC_WND_HEAD_SELF, server_window);
-    c_sas_storedw(guest_window + MVDM_SOFTPC_WND_CLASS, class_server);
-    if (!page_domain_window_info(guest_window, &info, (HWND)(ULONG_PTR)window)) {
-        (void)VdmFreeVirtualMemory(guest_window);
-        return 0;
-    }
-    page_domain_include_object(server_window, MVDM_SOFTPC_WND_BYTES);
-    if (words)
-        for (i = 0; i < 3u; ++i)
-            c_sas_storedw(guest_window + MVDM_SOFTPC_WND_WOW_WORDS + i * 4u, words[i]);
-    c_sas_storedw(entry, server_window);
-    c_sas_storedw(entry + 4u, 0u);
-    c_sas_storedw(entry + 8u, ((ULONG)uniqueness << 16) |
-        ((ULONG)flags << 8) | type);
-    domain.guest_windows[index] = guest_window;
+    guest_window = page_domain_prepare_window(((ULONG)uniqueness << 16) | index,
+        (HWND)(ULONG_PTR)window, class_server, words, &info);
+    if (!guest_window) return 0;
+    page_domain_commit_window(index, guest_window, type, flags);
+    (void)mvdm_softpc_wow_page_domain_release_window(guest_window);
     return 1;
 }
 
@@ -1171,19 +1200,38 @@ static int release_window_backing(ULONG backing, int retained_owner)
     if (!borrow) return 0;
     if (retained_owner ? (!borrow->retired || !borrow->retained_owner) :
             !borrow->references) return 0;
-    /* Free first on the final release: failed nt_mem release preserves a
-     * retryable reference, rather than losing its last allocation owner. */
-    if (borrow->retired &&
-            borrow->references == (retained_owner ? 0u : 1u) &&
-            borrow->retained_owner == retained_owner &&
-            VdmFreeVirtualMemory(backing) < 0) return 0;
+    /* Native scope/WW owners end here even if physical decommit fails.
+     * Consume their reference exactly once and retain a failed allocation
+     * in this existing list, not behind a caller that has already vanished. */
     if (retained_owner) borrow->retained_owner = 0;
     else --borrow->references;
     if (!borrow->references && !borrow->retained_owner) {
+        if (borrow->retired && VdmFreeVirtualMemory(backing) < 0) return 1;
         *link = borrow->next;
         HeapFree(GetProcessHeap(), 0, borrow);
     }
     return 1;
+}
+
+int mvdm_softpc_wow_page_domain_collect_retired_windows(void)
+{
+    mvdm_softpc_wow_window_borrow **link, *borrow;
+    int complete = 1;
+    if (!page_domain_menu_context()) return 0;
+    for (link = &window_borrows; (borrow = *link) != NULL;) {
+        if (!borrow->retired || borrow->references || borrow->retained_owner) {
+            link = &borrow->next;
+            continue;
+        }
+        if (VdmFreeVirtualMemory(borrow->backing) < 0) {
+            complete = 0;
+            link = &borrow->next;
+            continue;
+        }
+        *link = borrow->next;
+        HeapFree(GetProcessHeap(), 0, borrow);
+    }
+    return complete;
 }
 
 int mvdm_softpc_wow_page_domain_release_window(unsigned long backing)
@@ -1226,17 +1274,54 @@ int mvdm_softpc_wow_page_domain_exchange_window_word(unsigned long backing,
 int mvdm_softpc_wow_page_domain_publish_window_links(ULONG count,
     const mvdm_softpc_wow_window_links *links)
 {
-    ULONG i, j;
-    ULONG *resolved;
+    return mvdm_softpc_wow_page_domain_replace_window_links(count, links, 0, NULL);
+}
+
+int mvdm_softpc_wow_page_domain_replace_window_links(ULONG count,
+    const mvdm_softpc_wow_window_links *links, ULONG retired_count,
+    const ULONG *retired)
+{
+    ULONG i, j, *resolved = NULL;
+    /* These are call-local validation indexes, not another object registry. */
+    BYTE *updated = NULL, *withdrawn = NULL;
+    mvdm_softpc_wow_window_borrow *prepared = NULL, *borrow;
+    int result = 0;
     if (!page_domain_menu_context() || !count || !links ||
-            count >= MVDM_SOFTPC_HANDLE_ENTRY_COUNT) return 0;
+            count >= MVDM_SOFTPC_HANDLE_ENTRY_COUNT ||
+            retired_count >= MVDM_SOFTPC_HANDLE_ENTRY_COUNT ||
+            (retired_count && !retired)) return 0;
     /* Snapshot addresses in call-local storage. No guest callback/native
      * call can run between validation and publication. Failed allocation or
      * stale/unpublished identity leaves every previous edge unchanged. */
     resolved = HeapAlloc(GetProcessHeap(), 0, count * 5u * sizeof(ULONG));
-    if (!resolved) return 0;
+    updated = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
+        MVDM_SOFTPC_HANDLE_ENTRY_COUNT);
+    withdrawn = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
+        MVDM_SOFTPC_HANDLE_ENTRY_COUNT);
+    if (!resolved || !updated || !withdrawn) goto done;
+    for (i = 0; i < retired_count; ++i) {
+        ULONG backing = page_domain_window_lookup(retired[i]);
+        WORD index = LOWORD(retired[i]);
+        mvdm_softpc_wow_class_allocation *cls;
+        if (!backing || retired[i] == domain.desktop_handle || withdrawn[index]) goto done;
+        cls = page_domain_class_allocation(
+            c_sas_dw_at(backing + MVDM_SOFTPC_WND_CLASS));
+        if (!cls || !cls->observed || IsWindow((HWND)(ULONG_PTR)retired[i])) goto done;
+        withdrawn[index] = 1;
+        /* Reserve retention before commit so retirement cannot allocate or
+         * decommit between edge replacement and handle withdrawal. */
+        if (!*window_borrow_link(backing)) {
+            borrow = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, sizeof(*borrow));
+            if (!borrow) goto done;
+            borrow->backing = backing;
+            borrow->next = prepared;
+            prepared = borrow;
+        }
+    }
     for (i = 0; i < count; ++i) {
         ULONG identities[5];
+        if (updated[LOWORD(links[i].window)]) goto done;
+        updated[LOWORD(links[i].window)] = 1;
         identities[0] = links[i].window;
         identities[1] = links[i].next;
         identities[2] = links[i].parent;
@@ -1244,11 +1329,30 @@ int mvdm_softpc_wow_page_domain_publish_window_links(ULONG count,
         identities[4] = links[i].owner;
         for (j = 0; j < 5u; ++j) {
             ULONG client = identities[j] ? page_domain_window_lookup(identities[j]) : 0u;
-            if ((!j || identities[j]) && !client) {
-                HeapFree(GetProcessHeap(), 0, resolved); return 0;
-            }
+            if (((!j || identities[j]) && !client) ||
+                    (identities[j] && withdrawn[LOWORD(identities[j])])) goto done;
             resolved[i * 5u + j] = client ? client + domain.client_delta : 0u;
         }
+    }
+    /* Check future, not stale, incoming edges. Changed source rows are
+     * already fully resolved above; retiring rows cease to be readers. */
+    if (retired_count) for (i = 1; i < MVDM_SOFTPC_HANDLE_ENTRY_COUNT; ++i) {
+        ULONG client = i == LOWORD(domain.desktop_handle) ?
+            domain.guest_desktop_window : domain.guest_windows[i];
+        if (!client || updated[i] || withdrawn[i]) continue;
+        for (j = 0; j < 4u; ++j) {
+            ULONG server = c_sas_dw_at(client + MVDM_SOFTPC_WND_NEXT + j * 4u);
+            ULONG k;
+            for (k = 0; server && k < retired_count; ++k)
+                if (server == page_domain_window_lookup(retired[k]) + domain.client_delta)
+                    goto done;
+        }
+    }
+    /* Commit: no native queries, allocation, free or guest callback below. */
+    while ((borrow = prepared) != NULL) {
+        prepared = borrow->next;
+        borrow->next = window_borrows;
+        window_borrows = borrow;
     }
     for (i = 0; i < count; ++i) {
         ULONG client = resolved[i * 5u] - domain.client_delta;
@@ -1256,8 +1360,28 @@ int mvdm_softpc_wow_page_domain_publish_window_links(ULONG count,
             c_sas_storedw(client + MVDM_SOFTPC_WND_NEXT + (j - 1u) * 4u,
                 resolved[i * 5u + j]);
     }
-    HeapFree(GetProcessHeap(), 0, resolved);
-    return 1;
+    /* Dead observed nodes can reference each other. Drop only their outgoing
+     * copied links after all surviving incoming links have been validated. */
+    for (i = 0; i < retired_count; ++i) {
+        ULONG client = page_domain_window_lookup(retired[i]);
+        for (j = 0; j < 4u; ++j)
+            c_sas_storedw(client + MVDM_SOFTPC_WND_NEXT + j * 4u, 0u);
+    }
+    for (i = 0; i < retired_count; ++i) {
+        ULONG client = page_domain_window_lookup(retired[i]);
+        page_domain_withdraw_window(LOWORD(retired[i]), client,
+            *window_borrow_link(client), 0);
+    }
+    result = 1;
+done:
+    while ((borrow = prepared) != NULL) {
+        prepared = borrow->next;
+        HeapFree(GetProcessHeap(), 0, borrow);
+    }
+    if (withdrawn) HeapFree(GetProcessHeap(), 0, withdrawn);
+    if (updated) HeapFree(GetProcessHeap(), 0, updated);
+    if (resolved) HeapFree(GetProcessHeap(), 0, resolved);
+    return result;
 }
 
 static int page_domain_window_referenced(ULONG server)
@@ -1273,36 +1397,14 @@ static int page_domain_window_referenced(ULONG server)
     return 0;
 }
 
-int mvdm_softpc_wow_page_domain_retire_handle(unsigned short index,
-    unsigned long *retained_backing)
+/* Non-failing copied-state commit. Caller has already validated incoming
+ * references and either reserved retention or physically freed the backing.
+ * Both single retirement and graph replacement use this same disposition. */
+static void page_domain_withdraw_window(WORD index, ULONG guest_window,
+    mvdm_softpc_wow_window_borrow *borrow, int retained_owner)
 {
     ULONG entry;
-    ULONG guest_window;
-    mvdm_softpc_wow_window_borrow *borrow;
-
-    if (!domain.active || !index || index == 0xffffu ||
-            index == LOWORD(domain.desktop_handle) ||
-            domain.owner != session_thread_current() ||
-            !(c_getCR0() & MVDM_SOFTPC_CR0_PG) || c_getCR3() != domain.directory)
-        return 0;
-    guest_window = domain.guest_windows[index];
-    if (!guest_window) return 0;
-    borrow = *window_borrow_link(guest_window);
-    /* The native owner must first withdraw incoming links at its original
-     * unlink boundary. Do not free or reuse backing still visible through
-     * another projected WND. */
-    if (page_domain_window_referenced(guest_window + domain.client_delta)) return 0;
-    if (retained_backing && !borrow) {
-        borrow = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, sizeof(*borrow));
-        if (!borrow) return 0;
-        borrow->backing = guest_window;
-        *window_borrow_link(guest_window) = borrow;
-    }
-    /* Original HMMarkObjectDestroy defers physical destruction while the
-     * caller retains a WND borrow. Transfer that backing to the existing WW
-     * owner, not to a second object registry. Unborrowed callers free here. */
-    if (!retained_backing && !borrow && VdmFreeVirtualMemory(guest_window) < 0) return 0;
-    if (retained_backing || borrow) {
+    if (borrow) {
         /* Original createw.c post-WM_NCDESTROY cleanup clears child/owner
          * and keeps the desktop parent until the final WND unlock. The
          * existing borrow owns this backing, not another object registry. */
@@ -1325,8 +1427,35 @@ int mvdm_softpc_wow_page_domain_retire_handle(unsigned short index,
     domain.guest_windows[index] = 0u;
     if (borrow) {
         borrow->retired = 1;
-        borrow->retained_owner = retained_backing != NULL;
+        borrow->retained_owner = retained_owner;
     }
+}
+
+int mvdm_softpc_wow_page_domain_retire_handle(unsigned short index,
+    unsigned long *retained_backing)
+{
+    ULONG guest_window;
+    mvdm_softpc_wow_window_borrow *borrow;
+    if (!domain.active || !index || index == 0xffffu ||
+            index == LOWORD(domain.desktop_handle) ||
+            domain.owner != session_thread_current() ||
+            !(c_getCR0() & MVDM_SOFTPC_CR0_PG) || c_getCR3() != domain.directory)
+        return 0;
+    guest_window = domain.guest_windows[index];
+    if (!guest_window) return 0;
+    borrow = *window_borrow_link(guest_window);
+    /* Never discard backing still reachable through a published WND. */
+    if (page_domain_window_referenced(guest_window + domain.client_delta)) return 0;
+    if (retained_backing && !borrow) {
+        borrow = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, sizeof(*borrow));
+        if (!borrow) return 0;
+        borrow->backing = guest_window;
+        *window_borrow_link(guest_window) = borrow;
+    }
+    /* Original HMMarkObjectDestroy defers physical destruction while the
+     * caller retains a WND borrow. The existing owner retains that backing. */
+    if (!retained_backing && !borrow && VdmFreeVirtualMemory(guest_window) < 0) return 0;
+    page_domain_withdraw_window(index, guest_window, borrow, retained_backing != NULL);
     if (retained_backing) *retained_backing = guest_window;
     return 1;
 }
@@ -1421,6 +1550,9 @@ int mvdm_softpc_wow_page_domain_retire_class(unsigned long server)
             !(c_getCR0() & MVDM_SOFTPC_CR0_PG) || c_getCR3() != domain.directory)
         return 0;
     client = server - domain.client_delta;
+    /* A consumed final WW reference may leave physical reclamation pending.
+     * Retry before checking CLS reachability; failures retain the WND/CLS. */
+    (void)mvdm_softpc_wow_page_domain_collect_retired_windows();
     for (link = &class_allocations; (allocation = *link) != NULL;
             link = &allocation->next) {
         if (allocation->client == client) {
@@ -1442,6 +1574,7 @@ int mvdm_softpc_wow_page_domain_collect_observed_classes(void)
 {
     mvdm_softpc_wow_class_allocation *allocation, *next;
     if (!page_domain_menu_context()) return 0;
+    if (!mvdm_softpc_wow_page_domain_collect_retired_windows()) return 0;
     for (allocation = class_allocations; allocation; allocation = next) {
         ULONG server = allocation->client + domain.client_delta;
         next = allocation->next;

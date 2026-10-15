@@ -14,6 +14,8 @@ typedef struct wow_user_borrow_scope {
  * leave in finally. No alias survives its scope; no guest address is stored.
  * Class lookup still requires the caller's class-publication synchronization. */
 BOOL WINAPI wow_user_borrow_enter(wow_user_borrow_scope *);
+/* A valid leave always consumes the scope. FALSE can also report deferred
+ * physical reclamation failure; retry collection, never leave that scope twice. */
 BOOL WINAPI wow_user_borrow_leave(wow_user_borrow_scope *);
 /* Borrowed from the current nested scopes, not a transferred reference.
  * Enrollment must retain it before exposing a native property. */

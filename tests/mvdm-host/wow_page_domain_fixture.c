@@ -678,6 +678,131 @@ static void verify_observed_window_retirement(void)
         borrow_errors - before);
 }
 
+#ifdef WOW_RECLAIM_FAILURE_FIXTURE
+extern void __cdecl wow_fixture_fail_window_free(ULONG);
+extern unsigned __cdecl wow_fixture_window_free_failures(void);
+static void verify_failed_window_reclamation_case(BOOL retained_owner)
+{
+    HWND window = CreateWindowExA(0, "STATIC", "Deferred reclaim", WS_POPUP,
+        0, 0, 24, 24, NULL, NULL, GetModuleHandleA(NULL), NULL);
+    WINDOWINFO info = {sizeof(info)};
+    ULONG full = (ULONG)(ULONG_PTR)window, backing, cls, words[3], retained = 0;
+    ULONG before_free = 0, after_free = 0, largest;
+    BORROW_CHECK(window != NULL);
+    if (!window) return;
+    BORROW_CHECK(GetWindowInfo(window, &info));
+    BORROW_CHECK(VdmQueryFreeVirtualMemory(&before_free, &largest) >= 0);
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_observe_window(full,
+        info.atomWindowType, 0, 0, "Static", sizeof("Static")));
+    backing = mvdm_softpc_wow_page_domain_borrow_window(full);
+    BORROW_CHECK(backing != 0);
+    if (backing) {
+        cls = c_sas_dw_at(backing + 76u);
+        if (retained_owner) {
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_retire_handle(LOWORD(full), &retained));
+            BORROW_CHECK(retained == backing);
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(backing));
+        } else {
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_forget_observed_window(full));
+        }
+        wow_fixture_fail_window_free(backing);
+        BORROW_CHECK(retained_owner ?
+            mvdm_softpc_wow_page_domain_release_retained_window(backing) :
+            mvdm_softpc_wow_page_domain_release_window(backing));
+        BORROW_CHECK(wow_fixture_window_free_failures() == 1);
+        BORROW_CHECK(!mvdm_softpc_wow_page_domain_release_window(backing));
+        BORROW_CHECK(!mvdm_softpc_wow_page_domain_release_retained_window(backing));
+        BORROW_CHECK(!mvdm_softpc_wow_page_domain_read_window_words(backing, words));
+        BORROW_CHECK(!mvdm_softpc_wow_page_domain_collect_retired_windows());
+        BORROW_CHECK(!mvdm_softpc_wow_page_domain_retire_class(cls));
+        BORROW_CHECK(c_sas_dw_at(backing) == full);
+        wow_fixture_fail_window_free(0);
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_collect_retired_windows());
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_collect_retired_windows());
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_collect_observed_classes());
+    }
+    BORROW_CHECK(VdmQueryFreeVirtualMemory(&after_free, &largest) >= 0 &&
+        before_free == after_free);
+    BORROW_CHECK(DestroyWindow(window));
+}
+
+static void verify_failed_window_reclamation(void)
+{
+    unsigned before = borrow_errors;
+    verify_failed_window_reclamation_case(FALSE);
+    verify_failed_window_reclamation_case(TRUE);
+    fprintf(stderr, "WOW_DEFERRED_RECLAIM_CCPU errors=%u consumed_once=1 class_guard=1 retry=1 retained_owner=1 released=1\n",
+        borrow_errors - before);
+}
+#endif
+
+static void verify_dead_graph_retirement(ULONG teb)
+{
+    HWND a = CreateWindowExA(0, "STATIC", "Dead graph A", WS_POPUP,
+        0, 0, 24, 24, NULL, NULL, GetModuleHandleA(NULL), NULL);
+    HWND b = CreateWindowExA(0, "STATIC", "Dead graph B", WS_POPUP,
+        0, 0, 24, 24, NULL, NULL, GetModuleHandleA(NULL), NULL);
+    ULONG dead[2] = {(ULONG)(ULONG_PTR)a, (ULONG)(ULONG_PTR)b};
+    ULONG desktop = (ULONG)(ULONG_PTR)GetDesktopWindow();
+    ULONG held = 0, free_before = 0, free_after = 0, largest;
+    ULONG delta = c_sas_dw_at(teb + 0x60u), root, i;
+    mvdm_softpc_wow_window_links links[3] = {0}, replacement = {0};
+    unsigned before = borrow_errors;
+    BORROW_CHECK(a && b);
+    if (!a || !b) goto cleanup;
+    BORROW_CHECK(VdmQueryFreeVirtualMemory(&free_before, &largest) >= 0);
+    for (i = 0; i < 2; ++i) {
+        WINDOWINFO info = {sizeof(info)};
+        BORROW_CHECK(GetWindowInfo((HWND)(ULONG_PTR)dead[i], &info));
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_observe_window(dead[i],
+            info.atomWindowType, 0, 0, "Static", sizeof("Static")));
+    }
+    links[0].window = desktop; links[0].child = dead[0];
+    links[1].window = dead[0]; links[1].parent = desktop; links[1].next = dead[1];
+    links[2].window = dead[1]; links[2].parent = desktop; links[2].owner = dead[0];
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_publish_window_links(3, links));
+    held = mvdm_softpc_wow_page_domain_borrow_window(dead[0]);
+    BORROW_CHECK(held != 0);
+    root = mvdm_softpc_wow_page_domain_borrow_window(desktop);
+    BORROW_CHECK(root != 0);
+    replacement.window = desktop;
+    /* Live native identities cannot be withdrawn even with a valid new tree. */
+    BORROW_CHECK(!mvdm_softpc_wow_page_domain_replace_window_links(1, &replacement, 2, dead));
+    BORROW_CHECK(root && c_sas_dw_at(root + 28u) == held + delta);
+    BORROW_CHECK(DestroyWindow(a)); a = NULL;
+    BORROW_CHECK(DestroyWindow(b)); b = NULL;
+    {
+        ULONG stale[2] = {dead[0], dead[1] ^ 0x10000u};
+        mvdm_softpc_wow_window_links duplicate[2];
+        duplicate[0] = duplicate[1] = replacement;
+        /* Failure after an earlier valid retirement must discard only its
+         * prepared retention node, not consume the actual publication. */
+        BORROW_CHECK(!mvdm_softpc_wow_page_domain_replace_window_links(1, &replacement, 2, stale));
+        BORROW_CHECK(!mvdm_softpc_wow_page_domain_replace_window_links(2, duplicate, 2, dead));
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_window_handle(LOWORD(dead[0])) == dead[0] &&
+            mvdm_softpc_wow_page_domain_window_handle(LOWORD(dead[1])) == dead[1]);
+        BORROW_CHECK(root && c_sas_dw_at(root + 28u) == held + delta);
+    }
+    /* A source outside the replacement still points at B: refuse atomically. */
+    BORROW_CHECK(!mvdm_softpc_wow_page_domain_replace_window_links(1, &replacement, 1, &dead[1]));
+    BORROW_CHECK(root && c_sas_dw_at(root + 28u) == held + delta);
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_replace_window_links(1, &replacement, 2, dead));
+    BORROW_CHECK(root && c_sas_dw_at(root + 28u) == 0);
+    BORROW_CHECK(!mvdm_softpc_wow_page_domain_window_handle(LOWORD(dead[0])) &&
+        !mvdm_softpc_wow_page_domain_window_handle(LOWORD(dead[1])));
+    BORROW_CHECK(held && c_sas_dw_at(held) == dead[0] &&
+        c_sas_dw_at(held + 24u) == root + delta && c_sas_dw_at(held + 20u) == 0);
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(held));
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(root));
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_collect_observed_classes());
+    BORROW_CHECK(VdmQueryFreeVirtualMemory(&free_after, &largest) >= 0 && free_after == free_before);
+cleanup:
+    if (a) DestroyWindow(a);
+    if (b) DestroyWindow(b);
+    fprintf(stderr, "WOW_DEAD_GRAPH_CCPU errors=%u atomic=1 live_guard=1 retained=1 released=1\n",
+        borrow_errors - before);
+}
+
 static void verify_observed_words_enrollment(void)
 {
     HWND window = CreateWindowExA(0, "STATIC", "Observed words", WS_POPUP,
@@ -827,6 +952,10 @@ static int verify_native_class_projection(ULONG teb)
     verify_unowned_window_projection(teb);
     verify_observed_window_promotion(teb);
     verify_observed_window_retirement();
+    verify_dead_graph_retirement(teb);
+#ifdef WOW_RECLAIM_FAILURE_FIXTURE
+    verify_failed_window_reclamation();
+#endif
     verify_observed_words_enrollment();
     fprintf(stderr, "WOW_NATIVE_CLASS_CCPU errors=%u projected=%u native_pointers=0 released=1\n",
         borrow_errors - before, projected);

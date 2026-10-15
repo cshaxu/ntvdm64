@@ -87,6 +87,10 @@ unsigned long __cdecl mvdm_softpc_wow_page_domain_window_handle(unsigned short i
  * the shared query domain, including observations, not task-cleanup ownership. */
 int __cdecl mvdm_softpc_wow_page_domain_handle_metadata(unsigned short index,
     unsigned long *metadata);
+/* Valid release consumes its reference even if physical decommit fails.
+ * The existing domain list then owns pending reclamation; caller must not
+ * retry the consumed reference. Collection reports outstanding free failures. */
+int __cdecl mvdm_softpc_wow_page_domain_collect_retired_windows(void);
 int __cdecl mvdm_softpc_wow_page_domain_release_window(unsigned long backing);
 int __cdecl mvdm_softpc_wow_page_domain_release_retained_window(unsigned long backing);
 /* Original three WW DWORDs persist in the projected WND. Reads require an
@@ -124,6 +128,13 @@ typedef struct mvdm_softpc_wow_window_links {
 } mvdm_softpc_wow_window_links;
 int __cdecl mvdm_softpc_wow_page_domain_publish_window_links(
     unsigned long count, const mvdm_softpc_wow_window_links *links);
+/* Replace edges and withdraw confirmed-dead observed generations together.
+ * Every surviving incoming edge must be replaced by this snapshot. Managed
+ * task objects are never retired here. Failure leaves links/identities intact;
+ * successful logical commit may leave domain-owned physical reclamation. */
+int __cdecl mvdm_softpc_wow_page_domain_replace_window_links(
+    unsigned long count, const mvdm_softpc_wow_window_links *links,
+    unsigned long retired_count, const unsigned long *retired);
 int __cdecl mvdm_softpc_wow_page_domain_callback_window(unsigned long window,
     unsigned long saved[2]);
 int __cdecl mvdm_softpc_wow_page_domain_restore_callback(const unsigned long saved[2]);

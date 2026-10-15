@@ -102,6 +102,7 @@ static void release_binding(PVOID binding, BOOL is_class)
 BOOL WINAPI wow_user_borrow_leave(wow_user_borrow_scope *scope)
 {
     wow_user_borrow *p;
+    BOOL reclaimed = TRUE;
     DWORD error = GetLastError();
     if (!scope || current_scope != scope) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
@@ -114,6 +115,14 @@ BOOL WINAPI wow_user_borrow_leave(wow_user_borrow_scope *scope)
     }
     scope->previous = NULL;
     scope->classes = NULL;
+    /* Do not rescan or mutate native window relationships here. Only drain
+     * already-retired allocations after releasing this scope's aliases. */
+    if (mvdm_softpc_wow_page_domain_active())
+        reclaimed = mvdm_softpc_wow_page_domain_collect_retired_windows();
+    if (!reclaimed) {
+        SetLastError(ERROR_INVALID_STATE);
+        return FALSE; /* Scope is consumed; domain still owns pending frees. */
+    }
     SetLastError(error);
     return TRUE;
 }

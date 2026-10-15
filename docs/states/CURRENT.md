@@ -50,14 +50,14 @@ gaps and tests accept newly connected code, not select successive patches.
 Proven-composable original logic must replace its autonomous counterpart in
 the same repair, deleting that counterpart rather than deferring migration.
 Owner requires grouped implementation/testing and delivery before more wiring.
-S2 P1 is delivered in32876c415; P2 now freezes the shared-view foundations.
-Nine foundation cases pass across shared-view-batch-r1/r2; the first dialog
-failure and corrected mock are retained in the window-graph evidence.
-delivery-r2 passes both DOS17 routes and WINMINE gameplay/exit in three modes;
-the sealed13-image candidate is published and hash-verified at both locations.
-WRITE reaches main/document windows, not verified editing/saving; SOL still
-reports Out of memory. Full relationship-graph wiring remains open. This
-bounded delivery does not close S2; no new implementation precedes delivery.
+S2 P1 is32876c415, P2 is6096f1b2c; P3 freezes reclamation and dead-observation
+transaction foundations. Ten cases pass across reclaim-batch-r1/r2, retaining
+the first fault-fixture link failure and corrected selection in the evidence.
+delivery-r3 passes both DOS17 routes and WINMINE gameplay/exit in three modes.
+The tested13-image set is published/hash-verified at both locations. WRITE
+retains visible main/document/page-info windows, not verified editing/saving;
+SOL still reports Out of memory. Full graph wiring and same-slot replacement
+remain open; this bounded delivery does not close S2.
 
 ## Active Packet
 
@@ -302,14 +302,14 @@ foreign HWNDs, filter them out, or substitute non-PMODE32 fallback thunks.
 Original GWL_WNDPROC privacy does not apply wholesale to GWL_WOWWORDS reads.
 Resolve that consumer and paired sampled-view retirement before wiring the
 relationship batch. Existing local control tests do not waive this boundary.
-Shared-view class lifetime prerequisite: the existing page-domain publisher
-already samples public HWND data without attaching native WW or ownership.
-Reuse it rather than add an external-window registration system. Original
-class.c DestroyClass requires zero WND references; enforce that condition at
-the shared CLS retirement boundary too. Verify a non-owned native window's
-copied class/name view, failed early class retirement, withdrawal without
-native destruction and complete allocation release. Scope: page-domain
-retirement and CCPU fixture; no new ABI, native hooks or mirror/guest edits.
+Shared-view lifetime group continues under the indexed graph audit: terminal
+unlink, same-slot generation replacement and final-release ownership must be
+paired before callback activation. A valid release consumes its reference;
+failed physical free stays in the existing page-domain borrow list with zero
+readers, retryable at scope/class cleanup and worker teardown. Never leave a
+phantom caller reference after freeing its native owner. Scope: page-domain,
+borrow-scope and terminal bindings, matching private exports and CCPU fixtures.
+No new registry, guest or mirror change. Build/test the completed group only.
 
 Menu prerequisite progress is recorded in the existing window-graph audit:
 original resource and ordinary menu creators now reach the native binding;
@@ -383,9 +383,10 @@ lookup stays separate. Native desktop identity, retained observed/managed WW
 aliases and paired host/guest word updates pass the grouped foundation tests.
 Graph projection remains prepared, not production callback/return wiring.
 
-S2 P2 is published to assets/release and O:/winnt/system32 with matching
-tested13-image hashes. Only NTVDM/WOW32 change from P1; delivery-r2 retains
-coherent P1 recovery copies. The original WINSPOOL
+S2 P3 is published to assets/release and O:/winnt/system32 with matching
+tested13-image hashes. Only NTVDM/WOW32 change from P2; delivery-r3 retains
+coherent P2 recovery copies. P3 repairs consumed-reference/deferred-free
+ownership; full relationship integration remains unconnected. The original WINSPOOL
 companion stays unchanged; no guest image is rebuilt or patched. See the
 indexed window-graph evidence for results and remaining integration gaps.
 S9 P1 is266067264 and P2 is4f8c181487; S10 P1 is e046ee3d7;

@@ -545,6 +545,7 @@ foreach ($entry in @(
     'mvdm_softpc_wow_page_domain_handle_metadata',
     'mvdm_softpc_wow_page_domain_observe_window',
     'mvdm_softpc_wow_page_domain_collect_observed_windows',
+    'mvdm_softpc_wow_page_domain_collect_retired_windows',
     'mvdm_softpc_wow_page_domain_publish_window_links',
     'mvdm_softpc_wow_page_domain_release_window',
     'mvdm_softpc_wow_page_domain_release_retained_window',

@@ -2112,3 +2112,210 @@ No running installed project process required termination during publication.
 The immutable WINSPOOL companion and external ZIP remain unchanged by this
 delivery. Final governance, mirror-expression, PE/hash and diff checks precede
 the reviewed commit/push; this preserves a bounded baseline, not full S2 closure.
+
+### P2 successor: terminal and final-release closure audit
+
+P2 is committed/pushed as6096f1b2c. Rechecked the current source after delivery;
+only the unrelated ZIP was dirty. The following findings are source-proved
+integration requirements, not attribution of SOL's initialization failure.
+
+| Boundary | Actual current behavior | Required grouped correction |
+| --- | --- | --- |
+| wow_window_native_proc terminal finally | Ignores detach_if failure, then releases its local binding. | Resolve incoming projected edges before terminal withdrawal; do not lose cleanup ownership if withdrawal fails. |
+| dialog_proc terminal finally | Removes creation property, ignores detach_if failure, clears creation window/borrow. | Apply the same terminal contract as ordinary windows, including denied entry and callback exceptions. |
+| rollback_enrollment | Restores native procedure then ignores detach_if failure. | Creation veto/rollback must share terminal release mechanics; it cannot rely on a later callback reaching the removed gateway. |
+| release_window_backing | A failed final VdmFreeVirtualMemory preserves the numeric borrow reference for retry. | The upper owner must actually retain or transfer that retry obligation. |
+| release_binding sampled branch | Ignores release_window failure and frees sample/WW reference. | Currently loses the only upper-level retry handle on that failure. Do not confuse allocation tracking with a reachable retry owner. |
+| wow_window_words_release | At native reference zero, ignores release_retained_window failure and frees binding/class reference. | Same failure-contract mismatch for managed backing; repair both paths together. |
+| wow_user_invoke_thunk | Releases private aliases, with no relationship synchronization. | Full return-boundary integration cannot be replaced by selected native API wrappers alone. |
+| WU32StdHookProc | Has task/borrow scopes, but no relationship synchronization. | Preserve original hook conversion/dispatch; include this pre-guest entry in the same synchronization design. |
+
+Original evidence: kernel/createw.c unlinks the parent chain before
+xxxFreeWindow, retains owner through WM_NCDESTROY, then clears child/owner and
+uses the desktop parent for retained backing. kernel/handtabl.c
+HMMarkObjectDestroy sets HANDLEF_DESTROY even with outstanding locks and
+returns false until final unlock. This separates logical destruction from
+physical release; it does not permit forgetting a failed final release.
+Public native USER owns these native algorithms already. Importing server
+destruction/handle management would duplicate that owner and require private
+desktop heaps/locks; the selected route remains a same-layout copied view
+with existing project storage and borrow owners. No guest algorithm or
+original source expression needs changing for these lifetime repairs.
+
+The graph helper remains deliberately uncalled. Enabling it now would make
+retire_handle's incoming-reference refusal reachable from the ignored-failure
+paths above. Without relationships the refusal is generally absent; this is
+not evidence of a newly observed P2 runtime leak or justification for reverting
+the verified baseline. Likewise, failed physical free is a source-confirmed
+negative path, not a measured normal-run leak.
+
+Grouped implementation requirements, before the next build:
+
+1. Prepare storage and replacement edges without exposing partially changed
+   relationships; preserve exact full-handle generations. A linked stale
+   observation cannot be reclaimed first merely to make a reused slot fit.
+2. Commit replacement edges and logical withdrawal in the existing guest
+   execution interval, with no callback/native query/allocation inside commit.
+   Terminal owner stays readable through the callback; post-terminal backing
+   receives the original cleared-link/desktop-parent disposition.
+3. Define consumed-reference versus physical-free failure explicitly at both
+   existing release callers. Reuse the existing backing allocation/borrow list
+   for any deferred physical reclamation, not a second task/window registry.
+   Final scope/process cleanup must have a concrete retry/drain owner.
+4. Connect window/dialog/tagged-procedure/hook entry and thunk/native return
+   boundaries as one group, including veto and exception unwind. No CPU-loop
+   hook, arbitrary polling, global desktop lock claim or guest modification.
+5. Extend the existing CCPU fixtures for failed final free, linked generation
+   replacement and retained aliases; cover production terminal/veto paths,
+   then run one grouped build/acceptance and the ordinary publication gates.
+
+This audit narrows the next implementation to the complete dependency group;
+no new runtime edits, tests or publication are represented by this section.
+
+### Successor implementation: consumed borrows and deferred physical free
+
+Implemented the first part of the admitted lifetime group without building
+or publishing it. A valid page-domain release now consumes exactly one caller
+reference. If the final decommit fails, its existing retired borrow record
+remains with zero references/retained-owner; the domain, not a vanished WW or
+sample, owns reclamation. Duplicate release and borrowed reads are rejected.
+The collector traverses only this existing list and preserves failed entries;
+no new registry or native-window enumeration is added. Scope leave retries
+after aliases have been released, class retirement retries before checking
+reachability, and full worker teardown remains the final domain backstop.
+Scope leave failure does not mean that an already-consumed scope may be left
+twice. These contracts are documented in both private headers.
+
+Prepared a separate window-reclaim fixture selection: it compiles the same
+page-domain source with only VdmFreeVirtualMemory redirected through a
+test-owned exact-address failure leaf. Other frees still reach original nt_mem.
+The ordinary window-borrow case retains the unmodified production object.
+The negative case requires consumed-once, denied access after release, class
+retention, failed collection, successful retry and exact allocation recovery.
+Both sampled-reader and retained-WW-owner release modes execute that matrix.
+No production fault switch or guest change is added. This test is not run yet;
+the terminal/graph transaction still needs the rest of the grouped
+implementation and acceptance before delivery.
+
+### Successor implementation: relationship replacement and dead-node withdrawal
+
+Extended the existing relationship producer with one bounded replacement
+operation. The old publication entry delegates to it with no withdrawals;
+there is no parallel publisher. Its caller supplies full identities of
+confirmed-dead observations and replacement relationships. The producer
+rejects managed classes, the desktop, live native windows, duplicate source
+rows, duplicate withdrawals, missing generations and new edges into a
+withdrawn node. It checks unchanged sources for surviving incoming references.
+This is copied-view validation, not a reimplementation of native UnlinkWindow.
+
+All edge resolution and missing borrow-record allocation precede commit.
+Only after validation does it link the prepared retention records, write
+replacement edges, clear outgoing edges of withdrawn dead nodes, and perform
+the existing handle retirement. Every withdrawn node already has a retention
+record, so that commit performs neither allocation nor physical free. The
+collector added above owns subsequent reclamation. Existing outer readers
+retain their original backing and the post-terminal desktop-parent state.
+Failed preparation frees only call-local scratch and leaves graph/identity
+publication unchanged. The producer does not claim a native desktop lock.
+
+Added a real-window/CCPU fixture for two mutually related dead observations:
+live-window refusal, surviving unmodified incoming-edge refusal, unchanged
+graph on each failure, successful edge replacement plus both withdrawals,
+retained outer-reader data and exact final allocation recovery. Acceptance
+requires WOW_DEAD_GRAPH_CCPU errors=0; this candidate has not been compiled
+or run yet. Same-slot old/new-generation storage preparation and production
+terminal/callback integration remain unfinished. The replacement interface
+is not yet exported to the production provider, and no new release is made.
+
+Second-role review removed the transaction's ignored call to fallible
+retire_handle. Both that public entry and the transaction now share one
+non-failing copied-state withdrawal body. The public entry performs its
+original validation/allocation/free first; the transaction uses its already
+validated and retained nodes. This eliminates a misleading ignored failure
+inside commit without duplicating terminal field policy. Added stale-generation
+and duplicate-row negatives after native destruction, asserting both old
+identities and the desktop edge remain unchanged on rejection.
+
+Rechecked the actual original allocation owner, softpc.new/host/src/nt_mem.c
+VdmFreeVirtualMemory: STATUS_UNABLE_TO_DECOMMIT_VM returns before header-list
+coalescing, clearing HDR_ALLOC_FLAG and incrementing totalFree. Therefore the
+decommit-failure allocation remains tracked for retry. The separately handled
+HDR_REMAP_FLAG success path is not used for these ordinary allocated WNDs;
+this is not a general remapped-memory reclamation mechanism. No original
+allocator rewrite or assertion of real failure-injection execution is made.
+
+### P3 delivery boundary and review
+
+Owner directs delivery of existing progress before further integration. This
+supersedes the earlier requirement to finish all successor wiring before the
+next build, not the full S2 exit criteria. Freeze the current bounded lifetime
+foundation; do not activate the graph helper or claim same-slot replacement.
+
+Fresh WND allocation now prepares an unpublished backing under one temporary
+reference in the existing borrow list, then publishes the handle slot and
+releases that reference. Preparation failure marks it retired and consumes
+the reference through the same deferred-free owner. This removes the former
+ignored physical-free failure during allocation rollback. It prepares, but
+does not yet implement, atomic replacement of a linked stale generation.
+
+Second-role review: all changed production files are project-owned. There is
+no new original-source or guest diff, new registry, scheduler or native window
+policy. The replacement operation remains unexported to WOW32; production
+relationship activation and terminal/veto integration are still open. Its
+existing publication wrapper delegates without withdrawals. Actual production
+changes are fresh-allocation ownership and final-release/collection behavior.
+
+Build/test roots are reclaim-batch-r1/r2, reclaim-apps-r1 and delivery-r3 under
+build/M0-T447/S2. Reuse the validated worker/provider Ninja caches from P2;
+rebuild their dependency closure and seal new outputs before runtime tests.
+The first window-reclaim run exposed a test-driver selection mistake: its
+fault object was replaced by the generic parent-stub object list, producing
+two unresolved fixture symbols. Exclude this CCPU case from that stub branch,
+retain the failed log, and rerun in r2; no runtime code changed for this repair.
+Other foundation cases continue in r1. Published P2 remains untouched until
+all gates and independent application comparisons pass.
+
+P3 runtime observations: reclaim-apps-r1 reproduces the P2 frontier independently
+for each original guest. WINMINE has its visible main window; SOL still shows
+Out of memory; WRITE has visible MSWRITE_MENU, MSWRITE_DOC and MSWRITE_PAGEINFO.
+SOL is an inherited failure, not a functional pass; WRITE editing/saving is
+still unproved. delivery-r3 then passes WINMINE flag/counter, reset, open-cell,
+WM_CLOSE and launcher-completion checks in Off/Win16/All style modes, plus
+Console17/17 and Window17/17 DOS text-gated routes. Observation uses isolated
+stages and private desktops, no owner interaction or guest modification.
+
+The window-reclaim r2 case passes the exact-address failure injection for
+both sampled and retained-owner releases: consumed once, no read/duplicate
+release afterward, CLS still retained, failed collection, successful retry
+and exact allocation recovery. The ordinary window-borrow r1 case separately
+uses the production object and passes dead-node graph atomicity and lifetime
+checks. This controlled failure proves the release boundary, not a real OS
+decommit fault or complete production relationship synchronization.
+
+### P3 verified publication
+
+All ten foundation cases pass: window-borrow, window-reclaim,
+process-retirement, dialog-lifecycle, menu-resource, thunk-scope, menu-cleanup,
+native-send, native-nested and task-lifecycle. Nine use reclaim-batch-r1;
+window-reclaim uses corrected r2. The r1 suite failure is intentionally kept,
+not rewritten as a passing first attempt. Full worker/provider builds pass;
+the fixtures retain their established /FORCE duplicate-symbol warnings and
+are not substituted for real product DLL acceptance.
+
+delivery-r3 publication passes after the per-case, application-frontier,
+gameplay and DOS gates. All13 candidate/release/installed hashes agree;
+only the following images changed from P2:
+
+| Image | P3 SHA-256 |
+| --- | --- |
+| ntvdm.exe | B4C7AA63078D2E0438750CC48064B828E45D08F550C758CFD539A7E76BAD5AAF |
+| WOW32.DLL | 9FC7159AFBBEF7AAF7C3958B2B0F4A55DD386BBBD57F1652CBF4D71E0458184B |
+
+Both previous13-image destinations and the release manifest have recovery
+copies under delivery-r3/publication. No installed project process required
+termination. The original WINSPOOL companion is unchanged. The unrelated
+assets/winnt.zip remains excluded, SHA-256
+539A910247C5478BDE19FB2A431CD4C5AB26355CDC46F8160F49B23F060B495B.
+Final documentation/link, diff, PE/hash and mirror-expression checks precede
+the reviewed commit/push. This is a usable P3 baseline, not S2 completion,
+SOL recovery, WRITE editing acceptance or full message-contract recovery.
