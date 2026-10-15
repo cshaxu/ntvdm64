@@ -45,4 +45,7 @@ BOOL WINAPI wow_user_window_sample_links(HWND, wow_user_window_links *);
  * owned; ERROR_RETRY reports an observed change, not an internal retry loop. */
 BOOL WINAPI wow_user_window_sample_graph(const HWND *, ULONG,
     wow_user_window_links **, ULONG *);
+/* Prepare all query nodes and publish one validated relation closure. Does
+ * not acquire task ownership or retire nodes outside the supplied closure. */
+BOOL WINAPI wow_user_window_project_graph(const HWND *, ULONG);
 #endif

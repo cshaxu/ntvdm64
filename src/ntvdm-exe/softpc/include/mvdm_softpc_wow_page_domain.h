@@ -65,9 +65,13 @@ int __cdecl mvdm_softpc_wow_page_domain_clear_client_desktop(void);
  * or own the native HWND. The caller owns projection lifetime: managed
  * associations retire at their destruction boundary; sampled unowned views
  * may be withdrawn without destroying the native window. */
+/* An existing observed projection may become managed only for the same full
+ * native identity and a registered non-observed class. Keep its WND backing,
+ * links; supplied creator WOW words replace observation values. NULL retains
+ * existing words (or zero for a new view). Duplicate management is an error. */
 int __cdecl mvdm_softpc_wow_page_domain_publish_handle(unsigned short index,
     unsigned short uniqueness, unsigned char type, unsigned char flags,
-    unsigned long window, unsigned long class_server);
+    unsigned long window, unsigned long class_server, const unsigned long words[3]);
 /* Non-NULL retained_backing transfers the unpublished allocation to the
  * caller's existing borrow; that owner calls release_retained_window after
  * its final borrow. Shared-view borrows can independently defer physical
@@ -79,6 +83,10 @@ int __cdecl mvdm_softpc_wow_page_domain_retire_handle(unsigned short index,
  * until its final release; it is not a native pointer or another handle ID. */
 unsigned long __cdecl mvdm_softpc_wow_page_domain_borrow_window(unsigned long window);
 unsigned long __cdecl mvdm_softpc_wow_page_domain_window_handle(unsigned short index);
+/* Copy HANDLEENTRY's type/flags/uniqueness DWORD, not phead/pOwner. This is
+ * the shared query domain, including observations, not task-cleanup ownership. */
+int __cdecl mvdm_softpc_wow_page_domain_handle_metadata(unsigned short index,
+    unsigned long *metadata);
 int __cdecl mvdm_softpc_wow_page_domain_release_window(unsigned long backing);
 int __cdecl mvdm_softpc_wow_page_domain_release_retained_window(unsigned long backing);
 /* Original three WW DWORDs persist in the projected WND. Reads require an
@@ -93,8 +101,15 @@ int __cdecl mvdm_softpc_wow_page_domain_exchange_window_word(unsigned long backi
 int __cdecl mvdm_softpc_wow_page_domain_observe_window(unsigned long window,
     unsigned short atom, unsigned long class_style, unsigned long window_extra,
     const char *class_name, unsigned long name_bytes);
+/* Withdrawal and class collection have separate completion results. A failed
+ * class free must not report an already-consumed window withdrawal/borrow as
+ * retryable. After withdrawal and final borrow release, the caller must sweep;
+ * failed class frees stay in the existing allocation list for a later sweep. */
 int __cdecl mvdm_softpc_wow_page_domain_forget_observed_window(unsigned long window);
 int __cdecl mvdm_softpc_wow_page_domain_collect_observed_classes(void);
+/* Reclaim only dead, unlinked query nodes. Live observations, managed nodes
+ * and nodes still referenced by the published graph remain untouched. */
+int __cdecl mvdm_softpc_wow_page_domain_collect_observed_windows(void);
 /* Sample live native geometry/styles and numeric child control IDs before
  * returning to guest code. Top-level menu graph publication is separate.
  * Reject retired/reused identities; retain the existing guest allocation. */

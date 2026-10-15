@@ -5,6 +5,16 @@
 #include <string.h>
 
 static unsigned errors;
+/* Explicit shared-row mock: this case tests the original conversion algorithm,
+ * not CCPU memory. The page-domain fixture checks actual published rows. */
+static ULONG shared_metadata;
+static BOOL fail_shared_read;
+int __cdecl mvdm_softpc_wow_page_domain_handle_metadata(WORD index, ULONG *value)
+{
+    if (fail_shared_read || !value) return 0;
+    *value = index == 2 ? shared_metadata : 0;
+    return 1;
+}
 #define CHECK(x) do { if (!(x)) { ++errors; fprintf(stderr, "FAIL line=%d error=%lu\n", __LINE__, GetLastError()); } } while (0)
 static void WINAPI end_task(void) {}
 
@@ -69,6 +79,8 @@ static void verify_native_relationships(void)
         roots[1] = NULL;
         CHECK(!wow_user_window_sample_graph(roots, 2, &graph, &count));
         CHECK(!graph && count == 123); /* Failed closure leaves outputs intact. */
+        CHECK(!wow_user_window_project_graph(roots, 2));
+        CHECK(GetLastError() == ERROR_INVALID_WINDOW_HANDLE);
         FillMemory(&links, sizeof(links), 0x5a);
         unchanged = links;
         CHECK(!wow_user_window_sample_links(NULL, &links));
@@ -172,14 +184,18 @@ int __cdecl main(void)
     CHECK(wow_user_full_handle(lifecycle.objects, 0) == 0);
     CHECK(wow_user_full_handle(lifecycle.objects, 0xffff) == 0xffff);
     CHECK(wow_user_full_handle(lifecycle.objects, 2) == 2);
-    lifecycle.objects->entries[2].bType = TYPE_WINDOW;
-    lifecycle.objects->entries[2].wUniq = 0x4567;
+    shared_metadata = 0x45670000u | TYPE_WINDOW;
     CHECK(wow_user_full_handle(lifecycle.objects, 2) == 0x45670002u);
     CHECK(!wow_user_window_full_handle(lifecycle.objects, 2));
-    lifecycle.objects->entries[2].bType = TYPE_MENU;
+    CHECK(lifecycle.objects->entries[2].bType == TYPE_FREE);
+    shared_metadata = 0x45670000u | TYPE_MENU;
     CHECK(wow_user_full_handle(lifecycle.objects, 2) == 2);
-    ZeroMemory(&lifecycle.objects->entries[2], sizeof(lifecycle.objects->entries[2]));
+    shared_metadata = 0;
     CHECK(wow_user_full_handle(lifecycle.objects, 2) == 2);
+    fail_shared_read = TRUE;
+    CHECK(wow_user_full_handle(lifecycle.objects, 2) == 0 &&
+        GetLastError() == ERROR_INVALID_STATE);
+    fail_shared_read = FALSE;
     public_classes = lifecycle.classes.pclsPublicList;
     for (entry = public_classes; entry; entry = entry->next) {
         CHECK(entry->fnid && !entry->hTaskWow);

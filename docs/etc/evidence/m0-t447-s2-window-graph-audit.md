@@ -1686,3 +1686,429 @@ the existing real CCPU fixture. Preserve P1 gameplay/DOS17/WRITE startup.
 No guest rebuild, new scheduler or copied replacement traversal algorithm is
 authorized by this review. Root mapping and guest-resume synchronization are
 not yet implementation-complete; do not activate the dormant helpers early.
+
+### Shared-view candidate: native desktop identity
+
+Read-only confirmation in USER16 k/daytona/wowasmk.asm GetDesktopWindow
+shows it follows CLIENTINFO.pDeskInfo->spwnd, rebases, then returns WND.head.h;
+it does not require handle00010001 or slot1. The prior synthetic identity is
+therefore removed from the owned page-domain carrier. Domain initialization
+now samples GetDesktopWindow once, publishes that identity at its real low-word
+slot, and all window/menu retirement and lookup guards reserve that actual
+slot. Shared backing stays guest-linear; no native pointer enters the WND.
+Existing root storage and FNID_DESKTOP remain, with no second translation
+table or changes to the original getter, handle algorithm or guest module.
+
+The CCPU fixture follows the actual root slot, asserts duplicate publication
+and retirement rejection, and verifies slot1 is ordinary when it is not the
+desktop. Relationship fixtures now use that same native root identity. The
+old unowned-view test fabricated a second desktop WND; it now checks the
+foreign desktop as the real root and exercises ordinary unowned projection
+with a separate native STATIC window. Its marker explicitly distinguishes
+foreign-root identity from local unowned borrowing. This is not yet proof of
+ordinary foreign-process window borrowing; add that coverage with the full
+discovery group, rather than relabel the local window as foreign.
+
+No build/test/publication is performed for this partial edit. Promotion,
+complete shared-table handle lookup, root class/query fields, callback-return
+synchronization and final observed-class collection remain in the same
+uncompleted build unit. P1 release images are unchanged. The externally
+modified assets/winnt.zip is preserved and excluded from these changes.
+
+### Shared-view candidate: observed-to-managed backing handoff
+
+The existing publish_handle boundary now distinguishes an observed class
+projection from an already managed WND. It permits adoption only when the
+full native HWND, supplied index/uniqueness and retained WND.head.h agree,
+and the replacement class is an existing non-observed allocation. Native
+geometry sampling precedes writes. The same WND allocation and relationships
+survive; its three stored WOW words and outstanding backing borrows are not
+reinitialized. Only the existing managed caller installs cleanup ownership.
+Duplicate managed publication, stale uniqueness and an observed replacement
+class are rejected. The original guest algorithms and native HWND remain
+unchanged. The superseded query-class descriptor stays in the existing
+allocation list until the observed-class sweep can release it; no second
+allocation registry is introduced.
+
+The real CCPU fixture now calls observe_window itself, checks idempotent
+observation, borrows the WND, writes a sentinel WOW word, rejects stale and
+invalid-class adoption, adopts the identical window, checks retained backing
+and words, rejects observer withdrawal/duplicate adoption, then verifies
+class guarding and exact guest free-memory recovery after final release.
+This supplements the earlier manually published view case, rather than
+calling that older case automatic-discovery proof. The verifier requires a
+separate WOW_VIEW_PROMOTION_CCPU marker with zero errors.
+
+These edits remain unbuilt parts of the same integration group. The managed
+host WW versus existing sampled scope representation still needs its caller
+review before discovery is activated; this backing test alone cannot prove
+that higher-level handoff. Final observed-class collection, complete handle
+lookup, callback publication and native destruction ordering remain open.
+
+### Shared-view candidate: separate withdrawal and collection completion
+
+Source review of selected original nt_mem.c VdmFreeVirtualMemory confirms a
+real STATUS_UNABLE_TO_DECOMMIT_VM return when VirtualFree fails, in addition
+to invalid-allocation failures. Collection cannot therefore be treated as an
+infallible suffix to a consumed reference. The former observer withdrawal
+returned `retire_handle && collect_observed_classes`: collection failure could
+report failure after withdrawal had already succeeded, although retrying that
+same withdrawal necessarily fails. The owned observer boundary now reports
+withdrawal only. Its header requires explicit collection after withdrawal and
+the final borrow release; failed class frees remain owned by the existing
+allocation list. No extra retry registry, original allocator edit or guest
+change is introduced. Production discovery remains disabled until its caller
+implements that separate result/cleanup boundary.
+
+Added a real-CCPU fixture case for two simultaneous borrows of an automatically
+observed native STATIC window. It destroys the native window, withdraws the
+view, rejects duplicate withdrawal, sweeps while each borrow still protects
+CLS, reads retained words, releases the final borrow, rejects double release,
+then sweeps twice and requires exact free-memory recovery. The verifier now
+requires WOW_VIEW_RETIREMENT_CCPU with zero errors. This is unbuilt candidate
+coverage, not a passing result or injected allocation-failure proof.
+
+Callback review also confirms that the original nt_cpu.c host_simulate wrapper
+is shared with BIOS/DPMI consumers, while CPU_40_STYLE header callers can use
+the vector macro. It is not a suitable universal USER synchronization hook:
+instrumenting just that external wrapper would miss macro callers and burden
+non-USER execution. Existing WOW thunk, hook and callback boundaries remain
+the integration owners to inspect. No new CPU-loop or mirror hook was added.
+
+### Shared-view candidate: original full-handle query reads shared identity
+
+The P1 facade pointed original GetFullUserHandle at objects.entries, which is
+the managed cleanup table. An observed native window and the desktop can have
+a valid shared HANDLEENTRY while that ownership table correctly remains empty.
+Source audit therefore rejects populating fake cleanup rows as a remedy.
+
+OPENNT-HOST-070 changes one original executable line: acquiring the selected
+entry address becomes WowSharedHandleEntry(index). The original bounds/type,
+uniqueness reconstruction and missing/dead-handle fallback remain unchanged.
+The owned facade reads one metadata DWORD from the actual CCPU shared table,
+decodes it into a synchronous local entry and invokes the retained body. It
+never copies phead/pOwner or inserts the entry into cleanup. A failed carrier
+read returns ERROR_INVALID_STATE/zero before invoking the algorithm; it is
+not reported as the original successful short-handle fallback. The worker
+export list includes the new numeric metadata read. Strict WOWEXEC ownership
+lookup remains untouched.
+
+Alternatives reviewed: an unchanged body over a lease of the entire table
+would copy 1 MiB per query through the existing copy-backed guest-memory seam;
+a persistent duplicate query table would introduce another synchronization
+owner. Rewriting the original predicate would duplicate connectable logic.
+The one-line, registered storage accessor avoids all three. Same canonical
+source provenance as OPENNT-HOST-069; zero guest edits. Original function-body
+identity assertions used for P1 must not be reused unchanged for this candidate.
+
+The process-retirement fixture now explicitly mocks the shared metadata source,
+not cleanup entries; it covers free/live/non-window/retired and read failure.
+The real CCPU observation-retirement case checks live observed and desktop
+conversion with an empty cleanup table, strict ownership rejection, then
+short-handle fallback after withdrawal. No test has run yet. Production
+discovery, callback synchronization and complete observed-class finalization
+remain open in the same build unit; publication remains P1.
+
+### Shared-view audit: WW alias coherence is a prerequisite, not a copy fix
+
+Question: does preserving the observed WND allocation also preserve the
+original PWW alias contract when managed enrollment occurs inside a borrow?
+Source inspection says no. Current wow_user_borrow_window first tries the
+managed property, and only otherwise searches enclosing sampled borrows.
+An outer call can therefore retain &sample->words while a nested call returns
+&binding->words for the identical HWND. The managed SETWL path changes only
+binding->words via InterlockedExchange; the sampled path changes the copied
+guest WND and sample->words. Neither path updates the other existing alias.
+Managed publish_owner also does not publish its input adwWOW into that guest
+WND. Stable backing/handle identity alone does not fix these three views.
+
+Original evidence, canonical revision already pinned above:
+
+- kernel/createw.c lines229--234 copies lpWOW into pwnd->adwWOW, before
+  HCBT_CREATEWND at line394. The caller's initial WOW fields are authoritative
+  creation data, not optional values to overwrite with a discovery snapshot.
+- wow32/walias.c FindPWW keeps its returned PWW across SETWL and returns that
+  same alias. wow32/wumsg.c SetFakeDialogClass also retains PWW while writing
+  classification/procedure words through SETWL. Those routines must continue
+  to see the same storage semantics; replacing these original algorithms with
+  copied classification logic would violate the recovery objective.
+- Current wow_window_dispatch_bound directly passes binding->words.adwWOW to
+  retained DispatchClientMessage. Correcting the private getter alone would
+  leave this callback consumer divergent.
+
+This refines the earlier promotion candidate: preserving backing and words
+is valid for the low-level storage handoff test, but is not acceptance of the
+complete creation contract. Do not make guest copied words override the
+creator's lpWOW, reject a valid promotion merely because an outer alias exists,
+or solve it by adding a persistent per-HWND shadow registry. The next binding
+change must carry one retained WW identity through observation/enrollment,
+private getters/setters and dispatch, then publish its numeric words at the
+guest boundary. Existing scope borrows must retain that same storage after
+window retirement. No new original-source or guest edits have been made by
+this audit; discovery must remain inactive until this dependency is connected.
+
+Required integrated regression is now explicit: acquire an observed PWW in
+an outer scope; enroll the same native window with creator-supplied WOW words;
+query/set inside a nested scope; verify outer PWW, nested PWW, callback input
+and copied guest fields agree; destroy in the nested scope, retain the outer
+alias through return, and release the final storage exactly once. Include
+creation veto/rollback without inventing a second classification policy.
+
+### Shared-view candidate: reuse the existing WW binding on enrollment
+
+Removed the separate WW value from wow_sampled_words. A sampled scope now
+owns one reference to an unpublished wow_window_words_binding, alongside its
+existing guest-backing borrow. Nested scopes find that same storage. Attachment
+looks for this existing scoped binding before allocating; only successful
+property publication takes its own reference and installs creator-supplied
+words/class/procedure. Duplicate attachment fails before mutating fields.
+An ever-enrolled marker prevents recycling a detached binding retained by an
+outer alias into a different attachment. This is a lifetime flag, not another
+window registry or handle identity. Foreign observation still attaches no
+native property, class association or cleanup entry.
+
+Getters and DispatchClientMessage now naturally address the same WW value
+once attachment succeeds, rather than copying updates into old snapshots.
+The original FindPWW/SETWL classification and callback algorithms are retained.
+Scope release drops its existing binding reference; property detach and final
+borrow release retain their separate reference ownership. No mirror edits
+were added for this change.
+
+New WOW_VIEW_WORDS_CCPU candidate coverage observes a real native STATIC,
+holds an outer PWW, attaches creator fields, checks identical nested PWW,
+sets a word, rejects duplicate attachment without overwriting creator fields,
+detaches/destroys inside nested borrowing and reads the retained outer alias
+before final release. Exact guest-memory recovery is required. This fixture
+tests WW attachment/alias lifetime, not managed task enrollment or completed
+guest word synchronization. It has not run yet. The remaining integration
+must publish creator/subclass words into the guest WND and handle final class
+collection at actual production boundaries before discovery is enabled.
+
+### Shared-view candidate: publish creator words with the WND
+
+The existing publish_handle private ABI now accepts an optional three-DWORD
+input. All validation/allocation occurs before publishing; both fresh WND
+creation and observed-to-managed adoption copy explicit creator fields into
+the same guest WND. NULL remains the query-only/storage-test input and leaves
+existing words intact. The retained managed WW exposes its words through its
+existing cleanup companion to the publication caller, not through a second
+copy or registry. No host pointer is written into guest state. Updated every
+direct fixture call and the explicit dialog publication mock for this private
+ABI; both worker and provider must be rebuilt together.
+
+Managed SETWL now pairs a temporary borrow of its already published WND with
+the existing numeric guest-word exchange, then changes the canonical host WW.
+A failed guest update does not change the host value. Unpublished native-only
+bindings retain their host-only behavior. Sampled scopes still use their
+already retained backing and shared WW. Original classification/subclass
+algorithms are unchanged. The adoption fixture now checks all three explicit
+creator words replace observation values and survive retirement; its earlier
+word-preservation assertion applied only to the NULL-input storage contract.
+
+These are unbuilt changes. The managed setter's new backing dependency needs
+coverage in native lifecycle mocks as well as the real CCPU test. Callback
+graph synchronization, root descriptor completeness and production collection
+remain open; no claim of complete integration or fresh release is made.
+
+### Shared-view candidate: query the existing desktop root
+
+The normal refresh/borrow paths now resolve the native desktop identity to
+the existing root allocation, including callback-cache publication. Observation
+of that root adds its missing copied class/name through the same class producer
+as other observations; it never creates a second WND or handle. Subsequent
+observation refreshes native geometry/styles without allocating another class.
+The existing class reference scan protects the root's descriptor and ordinary
+retirement still rejects the desktop. Its allocation survives until the page
+domain teardown, matching the root's lifetime rather than individual scopes.
+
+Added WOW_DESKTOP_QUERY_CCPU assertions for the original two-step WND.pcls /
+CLS.lpszAnsiClassName rebase, unchanged identity/class on repeated observation,
+borrow release without root destruction, and rejection of premature class/root
+retirement. Root initialization precedes per-window free-memory baselines so
+the test does not incorrectly require desktop-lifetime storage to disappear
+when a shorter-lived window is released. The fixture remains unrun.
+
+Also corrected the sampled SETWL return boundary after host enrollment: return
+the canonical WW's previous value, not an older copied guest value. The numeric
+guest update must still succeed first. The alias fixture now checks that exact
+creator-value return before proceeding with nested updates. No original body
+or guest image changed in this step. Automatic graph discovery and its complete
+callback/withdrawal/collection wiring remain the next integration work.
+
+### Shared-view candidate: bounded graph publication operation
+
+Connected the existing native relationship sampler to the query-node producer
+and numeric relationship publisher in wow_user_window_project_graph. It first
+collects the reachable closure, captures native class descriptors for every
+node, then prepares existing/new query projections and rechecks every native
+edge before publishing links. The final producer resolves all identities into
+guest addresses before changing any edge. A shared sampled_links_match helper
+replaces duplicated sampler checks. Added worker exports for the two producer
+operations now directly referenced by WOW32; no native pointer is serialized.
+
+All scratch rows/descriptors/links are call-local and released on success or
+failure. No task cleanup membership or native ownership is acquired. A failed
+preparation can leave newly allocated query nodes in the existing page-domain
+allocation lists, but never claims that the relationship update succeeded;
+rollback/withdrawal belongs to the still-open complete synchronization owner.
+This operation does not yet retire nodes outside its closure or run at a
+production callback boundary. Do not enable it there until stale-generation,
+terminal unlink, retained-borrow and collection handling are paired.
+
+Public USER calls cannot establish a global desktop lock. Double checking
+detects observed races, not atomicity against concurrent native processes.
+The desktop parent may expand a closure to other desktop windows; acceptance
+must include that scope/cost and race behavior, not only a three-window fixture.
+The existing isolated relationship test now rejects a NULL-root projection
+before any producer call. Real CCPU graph publication remains untested and
+requires an isolated desktop plus paired withdrawal, not the active desktop.
+
+### Shared-view candidate: collect confirmed dead unlinked observations
+
+Added a sweep over the existing guest_windows allocation domain, not a second
+registry. It selects only observed-class nodes whose exact native HWND is no
+longer valid and whose backing has no incoming published relationship. Live
+windows and managed task-owned windows are never removed. Existing retirement
+retains backing/class storage while outer borrows exist; class collection runs
+after the sweep. Failure preserves the allocation that could not be freed and
+can be retried without recreating a successfully removed node.
+
+Graph preparation calls this reclamation before preparing/publishing the new
+closure, keeping cleanup failure separate from successful graph commit. The
+real CCPU retirement case now verifies a sweep preserves a live observation,
+automatically withdraws it after native destruction, protects the class during
+two borrows, and releases the class on the sweep after final release. No build
+or test has run for this candidate.
+
+This intentionally does not clear incoming edges merely because their target
+is dead. Doing so before a successful replacement snapshot would turn a failed
+sync into a partially rewritten graph. Consequently dead nodes still linked
+from an old snapshot, including a reused low-word slot, remain an explicit
+integration gap: they require replacement-edge publication and generation
+retirement in one bounded operation. The sweep is not claimed as complete
+handle-reuse repair, and production callback activation remains pending.
+
+### Shared-view batch r1: first grouped verification
+
+After the accumulated storage/identity/root/reclamation and projection-interface
+changes, froze runtime/test sources and started the hidden supervised batch at
+build/M0-T447/S2/shared-view-batch-r1. It regenerates and incrementally builds
+both existing x86 Release caches, then runs nine foundation cases sequentially.
+Supervisor PID19216 and build child7796 were verified live; each stage records
+its actual PID, command, deadline, stdout/stderr and exit. Build deadline is
+1800 seconds, each fixture deadline600 seconds, with owned-subtree cleanup.
+
+Worker and provider builds/link both pass (build.exit0, result.exit0). The real
+CCPU window-borrow case also passes (window-borrow.exit0): desktop query,
+observed promotion, borrowed retirement and same-WW enrollment markers all
+report errors=0, followed by WOW_PAGE_DOMAIN_LIFECYCLE_OK. Existing menu,
+native-control and callback borrow markers pass in that same executable.
+These supersede the earlier unrun status only for the exercised paths; graph
+publication/generation replacement and production callback activation are
+not covered by those markers. The remaining eight cases are still running
+under the same supervisor; no full-suite, real-guest or publication success
+is claimed. Release assets and installed binaries remain the P1 baseline.
+
+### Shared-view batch r1: process pass and dialog boundary failure
+
+process-retirement.exit is0 with WOW_PROCESS_RETIREMENT errors=0. The dialog
+case exits1: exactly four failures at fixture lines243/245 (two dialogs), which
+assert classification/state and dialog-procedure words after WM_INITDIALOG.
+Original wcall32.c W32InitDlg lines244--246 sets those fields through SETWL.
+The current owned setter first borrows/writes the published guest WND, but this
+native-only fixture mocks publish_handle/retire_handle and stores only HWNDs;
+it supplies no corresponding borrow/read/write storage. The real page-domain
+fallback is inactive in this fixture and the errors are5023 (INVALID_STATE).
+This establishes an incomplete mock at the changed boundary, not a passing
+dialog regression. Real CCPU callback markers alone do not prove this native
+case's original W32InitDlg assertions.
+
+Correction required after the frozen batch: the explicit dialog mock must
+retain initial three-word inputs per published identity, implement paired
+borrow/exchange/release for those same identities, and assert reference/word
+cleanup at retirement. Preserve the existing WM_INITDIALOG expectations and
+failure/veto cases. Do not add a production fallback that skips synchronization
+when the real page domain is absent. Remaining cases continue under the same
+supervisor; source/test files have not been edited during this run.
+
+### Shared-view batch r1: further gates and isolated guest observation
+
+menu-resource, thunk-scope and menu-cleanup also exit0. With window-borrow
+and process-retirement, five of nine foundation cases have passed; dialog
+remains a recorded failure and the last three cases continue. Runtime and
+fixture sources remain frozen.
+
+Prepared an isolated candidate observer using the sealed S2 P1 package as
+its input, instead of the obsolete T446 package or the live installed tree.
+The first attempt, shared-view-apps-r1, stopped before guest execution because
+the isolation guard detected installed broker PID31952. Read-only process
+identity checks found only that NTSRV and its NTVWM PID26096 under the exact
+O:/WINNT/system32 project paths. Under the owner's standing test-termination
+authorization, closed those two verified processes and preserved their records
+in closed-project-processes.log. No release files or guest binaries changed.
+
+Retried in a fresh shared-view-apps-r2 directory (supervisor14360, child28896,
+900-second deadline), retaining the failed attempt. Both the original fixture
+supervisor19216 and the new observation supervisor were verified alive. Actual
+WINMINE/SOL/WRITE results are pending; a successfully started observer is not
+application acceptance or permission to publish the candidate.
+
+### S2 P2 delivery freeze and grouped results
+
+Owner directs build, test, publish, commit and push of the current progress
+before further wiring. This freezes the shared-view foundation candidate as
+S2 P2, not completion of S2 or activation of the full relationship graph.
+The externally modified assets/winnt.zip is excluded and preserved.
+
+The first foundation batch completed: eight cases passed; dialog-lifecycle
+failed for the explicit mock mismatch recorded above. Once that case had
+finished, its test-only provider was corrected to copy creator words and
+model exact-identity borrow/exchange/release. Its original assertions were
+retained, with new word-value and zero-borrow assertions. No remaining case
+used that fixture; production sources stayed frozen. shared-view-batch-r2
+then passed dialog-lifecycle: creation rollback cases=4 errors=0, callback
+cache errors=0 paired=1 exceptions=1, lifecycle errors=0 init=2 terminal=2.
+The accepted foundation result is eight r1 cases plus one r2 case, not a
+claim that the original r1 suite passed. Both complete host links passed.
+
+shared-view-apps-r2 completed with runner/result exit0. Independent windows
+show WINMINE main, WRITE main/document/page-information, and SOL's existing
+Out of memory dialog. These match P1's initialization frontiers; WRITE
+editing/saving and SOL initialization remain open. Observer cleanup does
+not establish normal application exit. No guest image was rebuilt or patched.
+
+delivery-r2 runs the separate actual-gameplay/normal-exit gates and both
+DOS17 input matrices against that exact sealed candidate package. Its
+supervisor is26464, child2576, deadline1800 seconds, with captured logs and
+exit files. No further implementation is admitted before this delivery.
+
+Second-role diff review distinguishes active repairs (native desktop identity,
+shared handle metadata and paired host/guest WOW words) from prepared graph
+projection. Observation does not create task/class ownership; promotion keeps
+the borrowed backing/WW identity. Withdrawal and class reclamation retain
+separate results. Only OPENNT-HOST-070 changes original executable text:
+one handle-entry-address expression, with the original type/uniqueness and
+missing-handle return algorithm retained. Complete callback/return graph
+synchronization, linked stale-generation replacement and final collection
+remain open; the graph helper is not activated at production boundaries.
+
+delivery-r2 completes with checks/runner exit0:17/17 DOS text/output gates
+pass on each Console and Window input route. WINMINE passes flag/counter,
+reset, open-cell, WM_CLOSE and launcher completion in Off, Win16 and All.
+The unchanged original guest inputs and candidate image hashes are captured
+by the individual observers. The wider SOL/WRITE limitations above remain.
+
+Publication supervisor23404 completes with exit0. Recovery copies of both
+13-image destinations and the prior release manifest are retained under
+delivery-r2/publication. The candidate, assets/release and installed system32
+match all13 SHA-256 identities. Only these two images change from P1:
+
+| Image | P2 SHA-256 |
+| --- | --- |
+| ntvdm.exe | BD4AA3C1FD263C5DFE960E299863E5FC146F06129EFE99EBD39E5EAD721D30D3 |
+| WOW32.DLL | 53183D2FBD03D9381464D2ED02D1781F7FF803D25380A88F545D08C71EDC07BC |
+
+No running installed project process required termination during publication.
+The immutable WINSPOOL companion and external ZIP remain unchanged by this
+delivery. Final governance, mirror-expression, PE/hash and diff checks precede
+the reviewed commit/push; this preserves a bounded baseline, not full S2 closure.

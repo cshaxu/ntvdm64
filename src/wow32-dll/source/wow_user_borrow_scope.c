@@ -21,13 +21,13 @@ typedef struct wow_user_borrow {
 } wow_user_borrow;
 static __declspec(thread) wow_user_borrow_scope *current_scope;
 
-/* Scope-owned snapshot of a retained shared WND, never a native property or
- * a cleanup object. Nested scopes reuse the outer snapshot, so original
- * FindPWW/SETWL see the same classification words during reentry. */
+/* Scope owns a reference to unpublished WW storage plus shared WND backing.
+ * Enrollment reuses that same WW, so previously returned PWW aliases remain
+ * live. Observation alone never attaches a property or cleanup ownership. */
 typedef struct wow_sampled_words {
     HWND window;
     ULONG backing;
-    WW words;
+    wow_window_words_binding *binding;
 } wow_sampled_words;
 #define WOW_BORROW_SAMPLED 2
 
@@ -92,6 +92,7 @@ static void release_binding(PVOID binding, BOOL is_class)
     if (is_class == WOW_BORROW_SAMPLED) {
         wow_sampled_words *sample = binding;
         (void)mvdm_softpc_wow_page_domain_release_window(sample->backing);
+        wow_window_words_release(sample->binding);
         HeapFree(GetProcessHeap(), 0, sample);
     }
     else if (is_class) wow_class_words_release(binding);
@@ -146,6 +147,19 @@ static wow_window_words_binding *borrow_window(HWND window)
     return retain(binding, FALSE) ? binding : NULL;
 }
 
+wow_window_words_binding *WINAPI wow_user_borrow_observed_binding(HWND window)
+{
+    wow_user_borrow_scope *scope;
+    wow_user_borrow *borrow;
+    for (scope = current_scope; scope; scope = scope->previous)
+        for (borrow = scope->borrows; borrow; borrow = borrow->next)
+            if (borrow->is_class == WOW_BORROW_SAMPLED) {
+                wow_sampled_words *sample = borrow->binding;
+                if (sample->window == window) return sample->binding;
+            }
+    return NULL;
+}
+
 struct _WW *WINAPI wow_user_borrow_window(HWND window)
 {
     wow_window_words_binding *binding = borrow_window(window);
@@ -155,6 +169,7 @@ struct _WW *WINAPI wow_user_borrow_window(HWND window)
     WINDOWINFO info = {sizeof(info)};
     ULONG full;
     LONG instance;
+    WW *words;
     if (binding) {
         if (!wow_window_words_refresh(window, binding)) return NULL;
         return wow_window_words_value(binding);
@@ -185,14 +200,19 @@ struct _WW *WINAPI wow_user_borrow_window(HWND window)
         if (!sample->backing) {
             HeapFree(GetProcessHeap(), 0, sample); return NULL;
         }
+        sample->binding = wow_window_words_allocate();
+        if (!sample->binding) {
+            release_binding(sample, WOW_BORROW_SAMPLED); return NULL;
+        }
         if (!retain(sample, WOW_BORROW_SAMPLED)) return NULL;
     }
+    words = wow_window_words_value(sample->binding);
     if (!mvdm_softpc_wow_page_domain_read_window_words(sample->backing,
-            sample->words.adwWOW)) return NULL;
-    sample->words.dwStyle = info.dwStyle;
-    sample->words.dwExStyle = info.dwExStyle;
-    sample->words.hInstance = (HANDLE)(ULONG_PTR)(DWORD)instance;
-    return &sample->words;
+            words->adwWOW)) return NULL;
+    words->dwStyle = info.dwStyle;
+    words->dwExStyle = info.dwExStyle;
+    words->hInstance = (HANDLE)(ULONG_PTR)(DWORD)instance;
+    return words;
 }
 
 BOOL WINAPI wow_user_borrow_window_exchange(HWND window, unsigned index,
@@ -209,14 +229,15 @@ BOOL WINAPI wow_user_borrow_window_exchange(HWND window, unsigned index,
         for (borrow = scope->borrows; borrow; borrow = borrow->next)
             if (borrow->is_class == WOW_BORROW_SAMPLED) {
                 wow_sampled_words *sample = borrow->binding;
-                if (&sample->words != words) continue;
+                DWORD ignored;
+                if (wow_window_words_value(sample->binding) != words) continue;
                 if (!mvdm_softpc_wow_page_domain_exchange_window_word(
-                        sample->backing, index, value, previous)) return FALSE;
-                words->adwWOW[index] = value;
+                        sample->backing, index, value, &ignored)) return FALSE;
+                *previous = (DWORD)InterlockedExchange(
+                    (LONG *)&words->adwWOW[index], value);
                 return TRUE;
             }
-    *previous = (DWORD)InterlockedExchange((LONG *)&words->adwWOW[index], value);
-    return TRUE;
+    return wow_window_words_exchange(window, index, value, previous);
 }
 
 DWORD *WINAPI wow_user_borrow_window_class(HWND window)

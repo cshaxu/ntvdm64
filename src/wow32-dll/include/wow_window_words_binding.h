@@ -6,6 +6,9 @@
 
 struct _WW;
 typedef struct wow_window_words_binding wow_window_words_binding;
+/* Unpublished storage owns one reference only: no HWND property, class
+ * association or cleanup membership. A scope may later enroll this identity. */
+wow_window_words_binding *WINAPI wow_window_words_allocate(void);
 
 /* Native storage only. The caller initializes the complete original WW,
  * publishes before the first callback, and detaches on creation rollback or
@@ -39,6 +42,7 @@ struct _WW *WINAPI wow_window_words_value(wow_window_words_binding *);
 /* Refresh only native WND fields aliased by WW, preserving original WOW
  * classification/procedure words. Caller retains the matching binding. */
 BOOL WINAPI wow_window_words_refresh(HWND, wow_window_words_binding *);
+BOOL WINAPI wow_window_words_exchange(HWND, unsigned, DWORD, DWORD *);
 /* Live WND cleanup fields, not a copy. Caller retains this window borrow and
  * serializes membership/cleanup against dispatch; no thread is synthesized.
  * The procedure is the very field read by wow_window_native_proc. */

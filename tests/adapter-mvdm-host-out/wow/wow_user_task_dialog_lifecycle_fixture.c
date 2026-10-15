@@ -15,6 +15,8 @@ static unsigned init_messages;
 static unsigned terminal_messages;
 static unsigned published_count;
 static ULONG published_windows[65536];
+static ULONG published_words[65536][3];
+static ULONG published_borrows[65536];
 static BOOL fail_publication, veto_creation;
 static wow_window_words_binding *failed_borrow;
 static BOOL failed_reference;
@@ -46,7 +48,7 @@ int __cdecl mvdm_softpc_wow_page_domain_restore_callback(const ULONG saved[2])
  * Check paired publication/retirement rather than pretending to map memory. */
 int __cdecl mvdm_softpc_wow_page_domain_publish_handle(unsigned short index,
     unsigned short uniqueness, unsigned char type, unsigned char flags,
-    unsigned long window, unsigned long class_server)
+    unsigned long window, unsigned long class_server, const unsigned long words[3])
 {
     (void)uniqueness; (void)type; (void)flags; (void)class_server;
     CHECK(index && !published_windows[index] && index == LOWORD(window));
@@ -63,7 +65,44 @@ int __cdecl mvdm_softpc_wow_page_domain_publish_handle(unsigned short index,
         return 0;
     }
     published_windows[index] = window;
+    CHECK(published_borrows[index] == 0);
+    if (words) CopyMemory(published_words[index], words, sizeof(published_words[index]));
+    else ZeroMemory(published_words[index], sizeof(published_words[index]));
     ++published_count;
+    return 1;
+}
+
+/* Explicit numeric storage mock for the private SETWL transport. A token is
+ * a live row index, not an HWND or actual guest address. Real SAS storage and
+ * retained terminal backing remain covered by the separate CCPU fixture. */
+ULONG __cdecl mvdm_softpc_wow_page_domain_borrow_window(ULONG window)
+{
+    WORD index = LOWORD(window);
+    CHECK(index && published_windows[index] == window);
+    if (!index || published_windows[index] != window) return 0;
+    ++published_borrows[index];
+    return index;
+}
+
+int __cdecl mvdm_softpc_wow_page_domain_exchange_window_word(ULONG backing,
+    ULONG index, ULONG value, ULONG *previous)
+{
+    CHECK(backing && backing < 65536u && index < 3u && previous);
+    if (!backing || backing >= 65536u || index >= 3u || !previous) return 0;
+    CHECK(published_windows[backing] && published_borrows[backing]);
+    if (!published_windows[backing] || !published_borrows[backing]) return 0;
+    *previous = published_words[backing][index];
+    published_words[backing][index] = value;
+    return 1;
+}
+
+int __cdecl mvdm_softpc_wow_page_domain_release_window(ULONG backing)
+{
+    CHECK(backing && backing < 65536u);
+    if (!backing || backing >= 65536u) return 0;
+    CHECK(published_borrows[backing] != 0);
+    if (!published_borrows[backing]) return 0;
+    --published_borrows[backing];
     return 1;
 }
 
@@ -172,7 +211,10 @@ int __cdecl mvdm_softpc_wow_page_domain_retire_handle(unsigned short index,
 {
     CHECK(index && published_windows[index] && published_count);
     if (!index || !published_windows[index] || !published_count) return 0;
+    CHECK(published_borrows[index] == 0);
+    if (published_borrows[index]) return 0;
     published_windows[index] = 0;
+    ZeroMemory(published_words[index], sizeof(published_words[index]));
     --published_count;
     if (retained_backing) *retained_backing = 0;
     return 1;
@@ -242,6 +284,9 @@ static INT_PTR CALLBACK dialog_proc(HWND window, UINT message, WPARAM wp,
             (LONG)MAKELONG(10, 1));
         CHECK(wow_user_get_window_longA(window, GWL_WOWDWORD3) ==
             (LONG)0x43210076);
+        CHECK(published_words[LOWORD(window)][0] == MAKELONG(10, 1));
+        CHECK(published_words[LOWORD(window)][2] == 0x43210076);
+        CHECK(published_borrows[LOWORD(window)] == 0);
         CHECK(GetDlgItem(window, 100) != NULL);
     }
     if (message == WM_NCDESTROY) {

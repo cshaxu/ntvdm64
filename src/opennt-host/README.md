@@ -1,5 +1,22 @@
 # opennt-host
 
+T447 S2 P2 registers OPENNT-HOST-070 against the same
+handles.c source/revision/hash as OPENNT-HOST-069 below. One executable line
+in GetFullUserHandle replaces `&gSharedInfo.aheList[dwHandle]` with
+`WowSharedHandleEntry(dwHandle)`. The bounded adapter copies only the selected
+shared HANDLEENTRY's type/flags/uniqueness DWORD through the existing CCPU
+page-domain owner; the accessor exposes that call-local row. Index bounds,
+TYPE_WINDOW selection, MAKELONG reconstruction and dead/non-window fallback
+remain original. The prior cleanup-table view is removed from this query;
+strict ownership lookup and cleanup still use it. Direct guest pointer access
+is prohibited; leasing/copying the complete 1 MiB table per query is rejected.
+No parallel table, native object registration, guest change or DDEML import
+is added. shared-view-batch-r1 verifies observed and desktop identities with
+an empty cleanup table, retired/free/non-window fallback and transport failure
+separately from an absent handle. delivery-r2 verifies and publishes the paired
+worker/provider; full relationship-graph activation remains open. The P1
+evidence below describes the prior baseline, not the P2 storage accessor.
+
 T447 S2 registers OPENNT-HOST-069: the unchanged GetFullUserHandle function
 from windows/core/ntuser/client/handles.c, canonical OpenNT revision
 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c, source SHA-256

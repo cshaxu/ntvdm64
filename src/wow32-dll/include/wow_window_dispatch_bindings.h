@@ -28,6 +28,7 @@ typedef struct wow_cleanup_window {
     struct wow_task_order_thread *thread;
     WNDPROC lpfnWndProc;
     BOOL serverSideProc;
+    DWORD *adwWOW; /* Alias into the containing retained WW, never guest data. */
 } wow_cleanup_window;
 
 /* One synchronous call view, never a guest WND, kernel pointer, persistent

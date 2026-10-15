@@ -50,12 +50,14 @@ gaps and tests accept newly connected code, not select successive patches.
 Proven-composable original logic must replace its autonomous counterpart in
 the same repair, deleting that counterpart rather than deferring migration.
 Owner requires grouped implementation/testing and delivery before more wiring.
-S2 P1 freezes the r10/r11 nine-case foundation batch. delivery-r1 passes both
-DOS17 input routes and WINMINE gameplay/normal exit in all three style modes.
-WRITE now reaches its visible main/document windows; editing/saving is unproved.
-SOL still shows Out of memory. Both release locations have the verified13-image
-package; commit/push completes this bounded baseline, not S2 closure. External
-shared-view graph wiring and the remaining S2 contracts stay open.
+S2 P1 is delivered in32876c415; P2 now freezes the shared-view foundations.
+Nine foundation cases pass across shared-view-batch-r1/r2; the first dialog
+failure and corrected mock are retained in the window-graph evidence.
+delivery-r2 passes both DOS17 routes and WINMINE gameplay/exit in three modes;
+the sealed13-image candidate is published and hash-verified at both locations.
+WRITE reaches main/document windows, not verified editing/saving; SOL still
+reports Out of memory. Full relationship-graph wiring remains open. This
+bounded delivery does not close S2; no new implementation precedes delivery.
 
 ## Active Packet
 
@@ -373,20 +375,19 @@ bounded promotion. Full production gates apply to subsequent runtime changes.
 
 ## Current Technical Baseline
 
-S2 P1 restores the unchanged GetFullUserHandle body
-from original client/handles.c over the existing native object table. Its
-missing-window short-handle return is required by original DDE termination;
-the prior registered callback incorrectly substituted zero. Retain strict
-lookup for WOWEXEC registration and internal menu publication. Import only
-this body/header notice (OPENNT-HOST-069), not the surrounding DDE manager;
-zero guest or original function-body edits. Live, free, non-window, boundary
-and retired-entry tests pass in the integrated batch.
+P1 restores original GetFullUserHandle's missing-window short-handle return.
+P2 corrects its storage source to shared HANDLEENTRY metadata, not cleanup
+ownership. OPENNT-HOST-070 replaces one table-entry-address expression;
+original type/uniqueness/fallback logic remains. Strict WOWEXEC ownership
+lookup stays separate. Native desktop identity, retained observed/managed WW
+aliases and paired host/guest word updates pass the grouped foundation tests.
+Graph projection remains prepared, not production callback/return wiring.
 
-S2 P1 publishes the coherent13-image package to assets/release and
-O:/winnt/system32. release-manifest.json records tested/deployed identities;
-only NTVDM/WOW32 change from T446. delivery-r1 retains recovery backups and
-hash equality. The missing original WINSPOOL companion is copied unchanged;
-no guest image is rebuilt or patched. See the indexed window-graph evidence.
+S2 P2 is published to assets/release and O:/winnt/system32 with matching
+tested13-image hashes. Only NTVDM/WOW32 change from P1; delivery-r2 retains
+coherent P1 recovery copies. The original WINSPOOL
+companion stays unchanged; no guest image is rebuilt or patched. See the
+indexed window-graph evidence for results and remaining integration gaps.
 S9 P1 is266067264 and P2 is4f8c181487; S10 P1 is e046ee3d7;
 owner-accepted S11 P1 is b39ceb7e6, acceptance record cbd0f7832.
 The preceding T445 final closure changed documentation only; T446 S1 updates

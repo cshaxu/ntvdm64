@@ -3,30 +3,38 @@
 #include "wow_class_lookup_bindings.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 
-/* Original client handle query over the existing object domain. The source
- * owns missing/dead-handle policy; this context supplies storage only. */
+/* Original query reads shared publication, never the cleanup ownership table.
+ * One copied metadata row suffices; no native pointer, table-sized copy or
+ * additional handle registry is required. The original body cannot reenter. */
 typedef wow_cleanup_handle *PHE;
 static const struct { ULONG cHandleEntries; } original_handle_limits = {0x10000u};
-static __declspec(thread) struct { PHE aheList; } original_shared_handles;
+static __declspec(thread) PHE original_shared_entry;
 #define gpsi (&original_handle_limits)
-#define gSharedInfo original_shared_handles
+#define WowSharedHandleEntry(index) (original_shared_entry)
 #define HMIndexFromHandle(handle) ((DWORD)(WORD)(handle))
 #define GetFullUserHandle wow_original_full_user_handle
 #include "opennt-host/windows/core/ntuser/client/handles.c"
 #undef GetFullUserHandle
 #undef HMIndexFromHandle
-#undef gSharedInfo
+#undef WowSharedHandleEntry
 #undef gpsi
 
 DWORD WINAPI wow_user_full_handle(wow_user_object_table *table, WORD handle)
 {
     PHE previous;
-    DWORD result;
+    wow_cleanup_handle entry = {0};
+    DWORD result, metadata;
     if (!table) { SetLastError(ERROR_INVALID_PARAMETER); return 0; }
-    previous = original_shared_handles.aheList;
-    original_shared_handles.aheList = table->entries;
+    if (!mvdm_softpc_wow_page_domain_handle_metadata(handle, &metadata)) {
+        SetLastError(ERROR_INVALID_STATE); return 0;
+    }
+    entry.bType = (BYTE)metadata;
+    entry.bFlags = (BYTE)(metadata >> 8);
+    entry.wUniq = HIWORD(metadata);
+    previous = original_shared_entry;
+    original_shared_entry = &entry;
     result = wow_original_full_user_handle(handle);
-    original_shared_handles.aheList = previous;
+    original_shared_entry = previous;
     return result;
 }
 
@@ -100,6 +108,17 @@ static BOOL append_sample(HWND window, ULONG *seen,
     return TRUE;
 }
 
+static BOOL sampled_links_match(const wow_user_window_links *row)
+{
+    wow_user_window_links links;
+    if (!wow_user_window_sample_links(row->window, &links)) return FALSE;
+    if (links.next != row->next || links.parent != row->parent ||
+            links.child != row->child || links.owner != row->owner) {
+        SetLastError(ERROR_RETRY); return FALSE;
+    }
+    return TRUE;
+}
+
 BOOL WINAPI wow_user_window_sample_graph(const HWND *roots, ULONG root_count,
     wow_user_window_links **output, ULONG *output_count)
 {
@@ -130,12 +149,7 @@ BOOL WINAPI wow_user_window_sample_graph(const HWND *roots, ULONG root_count,
      * edge, without executing callbacks or guest code, before handing it to
      * the publisher. This detects observed races, not a substitute USER lock. */
     for (i = 0; i < count; ++i) {
-        wow_user_window_links links;
-        if (!wow_user_window_sample_links(rows[i].window, &links)) goto fail;
-        if (links.next != rows[i].next || links.parent != rows[i].parent ||
-            links.child != rows[i].child || links.owner != rows[i].owner) {
-            SetLastError(ERROR_RETRY); goto fail;
-        }
+        if (!sampled_links_match(&rows[i])) goto fail;
     }
     HeapFree(GetProcessHeap(), 0, seen);
     *output = rows;
@@ -148,6 +162,78 @@ fail:
     HeapFree(GetProcessHeap(), 0, seen);
     SetLastError(error);
     return FALSE;
+}
+
+BOOL WINAPI wow_user_window_project_graph(const HWND *roots, ULONG root_count)
+{
+    typedef struct query_node {
+        WINDOWINFO info;
+        DWORD style, extra;
+        ULONG name_bytes;
+        char name[256];
+    } query_node;
+    wow_user_window_links *rows = NULL;
+    mvdm_softpc_wow_window_links *links = NULL;
+    query_node *nodes = NULL;
+    ULONG count = 0, i;
+    BOOL result = FALSE;
+    DWORD error, saved = GetLastError();
+    if (!wow_user_window_sample_graph(roots, root_count, &rows, &count)) return FALSE;
+    /* Separate from the commit result below: a failed reclamation must not
+     * report that an already-published graph was not published. */
+    if (!mvdm_softpc_wow_page_domain_collect_observed_windows()) {
+        SetLastError(ERROR_INVALID_STATE); goto done;
+    }
+    nodes = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, count * sizeof(*nodes));
+    links = HeapAlloc(GetProcessHeap(), 0, count * sizeof(*links));
+    if (!nodes || !links) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); goto done; }
+    /* Sample every descriptor before publishing any new node. These are
+     * public native queries, not class registration or procedure ownership. */
+    for (i = 0; i < count; ++i) {
+        int length;
+        nodes[i].info.cbSize = sizeof(WINDOWINFO);
+        if (!GetWindowInfo(rows[i].window, &nodes[i].info)) goto done;
+        length = GetClassNameA(rows[i].window, nodes[i].name, sizeof(nodes[i].name));
+        if (!length) goto done;
+        if (length >= sizeof(nodes[i].name) - 1) {
+            SetLastError(ERROR_INSUFFICIENT_BUFFER); goto done;
+        }
+        nodes[i].name_bytes = (ULONG)length + 1u;
+        SetLastError(ERROR_SUCCESS);
+        nodes[i].style = GetClassLongA(rows[i].window, GCL_STYLE);
+        if (!nodes[i].style && GetLastError() != ERROR_SUCCESS) goto done;
+        SetLastError(ERROR_SUCCESS);
+        nodes[i].extra = GetClassLongA(rows[i].window, GCL_CBWNDEXTRA);
+        if (!nodes[i].extra && GetLastError() != ERROR_SUCCESS) goto done;
+        links[i].window = (ULONG)(ULONG_PTR)rows[i].window;
+        links[i].next = (ULONG)(ULONG_PTR)rows[i].next;
+        links[i].parent = (ULONG)(ULONG_PTR)rows[i].parent;
+        links[i].child = (ULONG)(ULONG_PTR)rows[i].child;
+        links[i].owner = (ULONG)(ULONG_PTR)rows[i].owner;
+    }
+    for (i = 0; i < count; ++i) {
+        if (!sampled_links_match(&rows[i])) goto done;
+        if (!mvdm_softpc_wow_page_domain_observe_window(links[i].window,
+                nodes[i].info.atomWindowType, nodes[i].style, nodes[i].extra,
+                nodes[i].name, nodes[i].name_bytes)) {
+            SetLastError(ERROR_INVALID_STATE); goto done;
+        }
+    }
+    /* Descriptor APIs may run while other native threads mutate USER. Do
+     * not commit stale relation edges merely because the first sample passed. */
+    for (i = 0; i < count; ++i)
+        if (!sampled_links_match(&rows[i])) goto done;
+    if (!mvdm_softpc_wow_page_domain_publish_window_links(count, links)) {
+        SetLastError(ERROR_INVALID_STATE); goto done;
+    }
+    result = TRUE;
+done:
+    error = result ? saved : GetLastError();
+    if (links) HeapFree(GetProcessHeap(), 0, links);
+    if (nodes) HeapFree(GetProcessHeap(), 0, nodes);
+    HeapFree(GetProcessHeap(), 0, rows);
+    SetLastError(error);
+    return result;
 }
 
 BOOL WINAPI wow_user_window_publish(wow_user_object_table *table, HWND window,
@@ -167,7 +253,7 @@ BOOL WINAPI wow_user_window_publish(wow_user_object_table *table, HWND window,
     entry->bType=TYPE_WINDOW;
     if (!mvdm_softpc_wow_page_domain_publish_handle(index, entry->wUniq,
             entry->bType, entry->bFlags, (unsigned long)(ULONG_PTR)window,
-            object->pcls ? object->pcls->guest_server : 0u)) {
+            object->pcls ? object->pcls->guest_server : 0u, object->adwWOW)) {
         ZeroMemory(entry,sizeof(*entry));
         SetLastError(ERROR_INVALID_STATE); return FALSE;
     }

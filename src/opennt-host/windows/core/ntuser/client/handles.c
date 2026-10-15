@@ -9,7 +9,9 @@
 * 10-28-91 Sanfords Created
 \***************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-069): true subset, unchanged GetFullUserHandle.
+/* DIVERGENCE(OPENNT-HOST-069): true subset, GetFullUserHandle.
+ * OPENNT-HOST-070 replaces only the table-entry address operation with a
+ * bounded copied-entry accessor; the lookup and fallback algorithm is intact.
  * The including host binding supplies the existing handle-table view;
  * unrelated DDEML allocation, callbacks and manager state are not selected. */
 
@@ -22,7 +24,7 @@ DWORD GetFullUserHandle(WORD wHandle)
 
     if (dwHandle < gpsi->cHandleEntries) {
 
-        phe = &gSharedInfo.aheList[dwHandle];
+        phe = WowSharedHandleEntry(dwHandle);
 
         if (phe->bType == TYPE_WINDOW)
             return(MAKELONG(dwHandle, phe->wUniq));

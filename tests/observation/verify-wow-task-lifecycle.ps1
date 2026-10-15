@@ -292,8 +292,24 @@ if ($Case -eq 'window-borrow' -and
     throw 'Native-class enrollment lost forwarding, subclass chain, internal controls or creation rollback'
 }
 if ($Case -eq 'window-borrow' -and
-    !($fixtureOutput -match '^WOW_UNOWNED_VIEW_CCPU errors=0 foreign=1 class_guard=1 native_untouched=1 released=1$')) {
+    !($fixtureOutput -match '^WOW_UNOWNED_VIEW_CCPU errors=0 foreign_root=1 local_unowned=1 class_guard=1 native_untouched=1 released=1$')) {
     throw 'Unowned shared view changed native ownership or left a dangling class/allocation'
+}
+if ($Case -eq 'window-borrow' -and
+    !($fixtureOutput -match '^WOW_VIEW_PROMOTION_CCPU errors=0 same_backing=1 words=1 stale_rejected=1 ownership=1 released=1$')) {
+    throw 'Observed-to-managed projection lost identity, retained words or ownership separation'
+}
+if ($Case -eq 'window-borrow' -and
+    !($fixtureOutput -match '^WOW_VIEW_RETIREMENT_CCPU errors=0 nested_borrow=1 class_guard=1 consumed_once=1 released=1$')) {
+    throw 'Observed retirement lost nested backing/class lifetime or consumed a release twice'
+}
+if ($Case -eq 'window-borrow' -and
+    !($fixtureOutput -match '^WOW_VIEW_WORDS_CCPU errors=0 same_alias=1 creator_words=1 duplicate_safe=1 nested_retirement=1$')) {
+    throw 'Observed WW enrollment replaced a live alias or lost creation/retirement state'
+}
+if ($Case -eq 'window-borrow' -and
+    !($fixtureOutput -match '^WOW_DESKTOP_QUERY_CCPU errors=0 single_root=1 class_name=1 retained=1 idempotent=1$')) {
+    throw 'Desktop query projection duplicated its root or lost its retained class/name'
 }
 if ($Case -eq 'window-borrow' -and
     !($fixtureOutput -match '^WOW_DIALOG_CACHE_CCPU errors=0 nested_destroy=1 released=1$')) {

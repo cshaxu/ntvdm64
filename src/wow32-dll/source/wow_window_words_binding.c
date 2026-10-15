@@ -21,6 +21,7 @@ typedef VOID (APIENTRY *PFNW32ET)(VOID);
  * One worker per process; the lock covers only property/ref publication. */
 struct wow_window_words_binding {
     LONG references;
+    BOOL enrolled;
     WW words;
     wow_class_words_binding *class_words;
     wow_cleanup_window cleanup;
@@ -58,6 +59,15 @@ BOOL WINAPI wow_window_words_attach(HWND window, const WW *words)
     return wow_window_words_attach_class(window, words, NULL);
 }
 
+wow_window_words_binding *WINAPI wow_window_words_allocate(void)
+{
+    wow_window_words_binding *binding = HeapAlloc(GetProcessHeap(),
+        HEAP_ZERO_MEMORY, sizeof(*binding));
+    if (!binding) SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+    else binding->references = 1;
+    return binding;
+}
+
 BOOL WINAPI wow_window_words_attach_class(HWND window, const WW *words,
     wow_class_words_binding *class_words)
 {
@@ -69,6 +79,7 @@ BOOL WINAPI wow_window_words_attach_target(HWND window, const WW *words,
 {
     wow_window_words_binding *binding;
     BOOL attached = FALSE;
+    BOOL observed;
     DWORD error;
     if (!words) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
     if (target && (!target->procedure ||
@@ -79,29 +90,36 @@ BOOL WINAPI wow_window_words_attach_target(HWND window, const WW *words,
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     if (!own_window(window)) return FALSE;
-    binding = HeapAlloc(GetProcessHeap(), 0, sizeof(*binding));
-    if (!binding) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return FALSE; }
-    binding->references = 1; /* Property ownership. */
-    binding->words = *words;
-    binding->class_words = class_words;
-    ZeroMemory(&binding->cleanup, sizeof(binding->cleanup));
-    binding->cleanup.pcls = wow_class_words_entry(class_words);
-    binding->cleanup.lpfnWndProc = target ? (WNDPROC)target->procedure : NULL;
-    binding->native_callproc = NULL;
-    if (target && HIWORD(target->procedure) == WNDPROC_HANDLE) {
-        binding->native_callproc = (WNDPROC)target->procedure;
-        binding->cleanup.lpfnWndProc = wow_window_call_native_previous;
-    }
-    binding->callback = target ? target->callback : NULL;
-    binding->objects = NULL;
-    binding->retired_guest_backing = 0u;
+    binding = wow_user_borrow_observed_binding(window);
+    observed = binding != NULL;
+    if (!binding) binding = wow_window_words_allocate();
+    if (!binding) return FALSE;
     AcquireSRWLockExclusive(&publication_lock);
-    if (GetPropW(window, property_name)) SetLastError(ERROR_ALREADY_EXISTS);
+    if (binding->enrolled || GetPropW(window, property_name))
+        SetLastError(ERROR_ALREADY_EXISTS);
     else attached = SetPropW(window, property_name, binding);
     error = GetLastError();
-    if (attached) wow_class_words_window_association(class_words, TRUE);
+    if (attached) {
+        if (observed) InterlockedIncrement(&binding->references); /* Property. */
+        binding->enrolled = TRUE;
+        binding->words = *words;
+        binding->class_words = class_words;
+        ZeroMemory(&binding->cleanup, sizeof(binding->cleanup));
+        binding->cleanup.pcls = wow_class_words_entry(class_words);
+        binding->cleanup.adwWOW = binding->words.adwWOW;
+        binding->cleanup.lpfnWndProc = target ? (WNDPROC)target->procedure : NULL;
+        binding->native_callproc = NULL;
+        if (target && HIWORD(target->procedure) == WNDPROC_HANDLE) {
+            binding->native_callproc = (WNDPROC)target->procedure;
+            binding->cleanup.lpfnWndProc = wow_window_call_native_previous;
+        }
+        binding->callback = target ? target->callback : NULL;
+        binding->objects = NULL;
+        binding->retired_guest_backing = 0u;
+        wow_class_words_window_association(class_words, TRUE);
+    }
     ReleaseSRWLockExclusive(&publication_lock);
-    if (!attached) HeapFree(GetProcessHeap(), 0, binding);
+    if (!attached && !observed) wow_window_words_release(binding);
     SetLastError(error);
     return attached;
 }
@@ -151,6 +169,36 @@ BOOL WINAPI wow_window_words_refresh(HWND window, wow_window_words_binding *bind
 wow_cleanup_window *WINAPI wow_window_words_cleanup_value(wow_window_words_binding *binding)
 {
     return binding ? &binding->cleanup : NULL;
+}
+
+BOOL WINAPI wow_window_words_exchange(HWND window, unsigned index,
+    DWORD value, DWORD *previous)
+{
+    wow_window_words_binding *binding;
+    ULONG backing = 0, ignored;
+    BOOL result = FALSE;
+    if (index >= WND_CNT_WOWDWORDS || !previous) {
+        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
+    }
+    binding = wow_window_words_acquire(window);
+    if (!binding) return FALSE;
+    AcquireSRWLockExclusive(&publication_lock);
+    if (GetPropW(window, property_name) != binding) goto done;
+    if (binding->objects) {
+        ULONG full = (ULONG)(ULONG_PTR)binding->objects->windows[LOWORD(window)];
+        backing = mvdm_softpc_wow_page_domain_borrow_window(full);
+        if (!backing || !mvdm_softpc_wow_page_domain_exchange_window_word(
+                backing, index, value, &ignored)) goto done;
+    }
+    *previous = (DWORD)InterlockedExchange((LONG *)&binding->words.adwWOW[index], value);
+    result = TRUE;
+done:
+    /* A live published WND cannot be freed by this temporary release. */
+    if (backing) (void)mvdm_softpc_wow_page_domain_release_window(backing);
+    ReleaseSRWLockExclusive(&publication_lock);
+    wow_window_words_release(binding);
+    if (!result) SetLastError(ERROR_INVALID_STATE);
+    return result;
 }
 
 BOOL WINAPI wow_window_words_publish_owner(HWND window, wow_window_words_binding *binding,

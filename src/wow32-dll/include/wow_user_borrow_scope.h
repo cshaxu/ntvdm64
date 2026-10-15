@@ -15,6 +15,9 @@ typedef struct wow_user_borrow_scope {
  * Class lookup still requires the caller's class-publication synchronization. */
 BOOL WINAPI wow_user_borrow_enter(wow_user_borrow_scope *);
 BOOL WINAPI wow_user_borrow_leave(wow_user_borrow_scope *);
+/* Borrowed from the current nested scopes, not a transferred reference.
+ * Enrollment must retain it before exposing a native property. */
+wow_window_words_binding *WINAPI wow_user_borrow_observed_binding(HWND);
 struct _WW *WINAPI wow_user_borrow_window(HWND);
 BOOL WINAPI wow_user_borrow_window_exchange(HWND, unsigned, DWORD, DWORD *);
 DWORD *WINAPI wow_user_borrow_window_class(HWND);
