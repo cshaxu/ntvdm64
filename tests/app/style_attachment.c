@@ -32,6 +32,54 @@ static window_fn attached,remove_style;
 static BOOL CALLBACK detach_child(HWND window,LPARAM unused)
 {(void)unused;if(attached(window))CHECK(remove_style(window));return TRUE;}
 static HWND button,edit,plain,list,combo;
+static BOOL creator_ready,destroy_on_size;
+static unsigned early_sizes,late_sizes;
+static LRESULT CALLBACK ordered_proc(HWND w,UINT m,WPARAM p,LPARAM l)
+{
+    if(m==WM_SIZE){
+        if(!creator_ready)++early_sizes;else ++late_sizes;
+        if(destroy_on_size){destroy_on_size=FALSE;CHECK(DestroyWindow(w));return 0;}
+    }
+    return DefWindowProcW(w,m,p,l);
+}
+static void verify_creation_order(HINSTANCE module)
+{
+    WNDCLASSW cls={0};HWND w;RECT before,after;
+    ntw16s_creation_scope *scope;ntw16s_creation_result result;unsigned count;
+    cls.hInstance=module;cls.lpfnWndProc=ordered_proc;cls.lpszClassName=L"StyleCreationOrder";
+    CHECK(RegisterClassW(&cls));
+    /* Native control, then automatic styled hidden creation. The caller may
+     * initialize state after CreateWindow and before ShowWindow, like SOL. */
+    creator_ready=FALSE;early_sizes=late_sizes=0;
+    w=CreateWindowW(cls.lpszClassName,L"Native",WS_OVERLAPPEDWINDOW,20,20,600,400,NULL,NULL,module,NULL);
+    CHECK(w && !early_sizes);CHECK(DestroyWindow(w));
+    scope=begin_scope(TRUE);CHECK(scope);
+    w=CreateWindowW(cls.lpszClassName,L"Styled",WS_OVERLAPPEDWINDOW,20,20,600,400,NULL,NULL,module,NULL);
+    CHECK(w && !early_sizes && attached(w));
+    CHECK(end_scope(scope,&result) && !result.failure && result.installed==1);
+    CHECK(!early_sizes && GetClientRect(w,&before));
+    creator_ready=TRUE;ShowWindow(w,SW_SHOWNOACTIVATE);
+    CHECK(IsWindowVisible(w) && late_sizes && GetClientRect(w,&after));
+    CHECK(EqualRect(&before,&after));count=late_sizes;
+    ShowWindow(w,SW_HIDE);ShowWindow(w,SW_SHOWNOACTIVATE);
+    CHECK(late_sizes==count && attached(w));CHECK(DestroyWindow(w));
+    /* No geometry side effect when an unseen attachment is removed. */
+    creator_ready=FALSE;early_sizes=0;scope=begin_scope(TRUE);CHECK(scope);
+    w=CreateWindowW(cls.lpszClassName,L"Remove hidden",WS_OVERLAPPEDWINDOW,20,20,600,400,NULL,NULL,module,NULL);
+    CHECK(w && end_scope(scope,&result) && !result.failure);
+    CHECK(remove_style(w) && !early_sizes);CHECK(DestroyWindow(w));
+    scope=begin_scope(TRUE);CHECK(scope);
+    w=CreateWindowW(cls.lpszClassName,L"Destroy hidden",WS_OVERLAPPEDWINDOW,20,20,600,400,NULL,NULL,module,NULL);
+    CHECK(w && end_scope(scope,&result) && !result.failure);
+    CHECK(DestroyWindow(w) && !early_sizes);
+    /* First-show resizing may destroy the window reentrantly. */
+    scope=begin_scope(TRUE);CHECK(scope);
+    w=CreateWindowW(cls.lpszClassName,L"Destroy on show",WS_OVERLAPPEDWINDOW,20,20,600,400,NULL,NULL,module,NULL);
+    CHECK(w && end_scope(scope,&result) && !result.failure && !early_sizes);
+    creator_ready=TRUE;destroy_on_size=TRUE;ShowWindow(w,SW_SHOWNOACTIVATE);
+    CHECK(!IsWindow(w) && !destroy_on_size);CHECK(UnregisterClassW(cls.lpszClassName,module));
+    puts("ATTACH PASS hidden creation ordering, first-show client size, repeated show, hidden detach/destroy and reentrant destruction");
+}
 static LRESULT CALLBACK proc(HWND w,UINT m,WPARAM p,LPARAM l)
 {
     if(m==WM_NCCREATE && ((CREATESTRUCTW *)l)->lpCreateParams==(void *)1)return FALSE;
@@ -77,6 +125,7 @@ static DWORD WINAPI run_test(void *parameter)
     CHECK(bind(&api) && bind(&api));api.get_scroll_info=alternate_get;
     CHECK(!bind(&api) && GetLastError()==ERROR_INVALID_STATE);
     printf("ATTACH bound tick=%llu\n",GetTickCount64());fflush(stdout);
+    verify_creation_order(GetModuleHandleW(NULL));
     cls.hInstance=GetModuleHandleW(NULL);cls.lpfnWndProc=proc;cls.lpszClassName=L"StyleAttachment";CHECK(RegisterClassW(&cls));
     scope=begin_scope(TRUE);CHECK(scope);nested=begin_scope(FALSE);CHECK(nested);
     CHECK(!end_scope(scope,NULL) && GetLastError()==ERROR_INVALID_STATE);CHECK(end_scope(nested,NULL));

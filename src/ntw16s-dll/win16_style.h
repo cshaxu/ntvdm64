@@ -19,6 +19,9 @@ typedef struct win16_style_palette {
 
 NTW16S_API void win16_style_default_palette(win16_style_palette *palette);
 NTW16S_API BOOL win16_style_install(HWND window, const win16_style_palette *palette);
+/* DLL-private automatic-creation entry. Hidden normal frames must not force
+ * WM_SIZE before their creator has returned and initialized client state. */
+BOOL win16_style_install_created(HWND window, const win16_style_palette *palette);
 NTW16S_API BOOL win16_style_remove(HWND window);
 NTW16S_API BOOL win16_style_set_palette(HWND window, const win16_style_palette *palette);
 /* Explicit standalone frame-scroll API binding. A subclass alone cannot

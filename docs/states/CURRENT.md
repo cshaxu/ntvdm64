@@ -54,9 +54,9 @@ P9 is6fe4272fa. S2 P10 bitmap registration now publishes the scoped original
 converter instead of the uninitialized-context wrapper; exception cleanup is
 paired. Bitmap tests,14 boundary cases, three-mode WINMINE gameplay, guest CBT
 and both DOS17 matrices pass. Coherent13 images are published to both locations;
-final checks pass. SOL now shows Solitaire/Stat windows without
-Out of memory. SOL Off-mode deal/draw/normal exit now pass; style-enabled SOL
-instead shows a SOL dialog and remains open. WRITE editing/saving remain open.
+final checks pass. P11 repairs premature style-driven WM_SIZE during hidden
+creation. SOL deal/draw/normal exit now pass in Off/Win16/All; both style DLLs
+are published. WRITE editing/saving and other callback coverage remain open.
 Additional mirror/guest diff is zero. Preserve assets/winnt.zip. S2 stays open.
 
 ## Active Packet
@@ -386,16 +386,13 @@ lookup stays separate. Native desktop identity, retained observed/managed WW
 aliases and paired host/guest word updates pass the grouped foundation tests.
 P5 connects the prepared graph at the reviewed callback/native-return boundaries.
 
-S2 P10 (5edea33bb) is published in both locations with matching13-image hashes.
-The graph audit retains P9/P10 gates and SOL's subsequent scoped acceptance:
-Off-mode deal/draw/close pass; Win16/All show a SOL dialog, not the main window.
-No runtime change accompanies that test supplement. Other callbacks and S2
-coverage remain open. Original guests and additional mirror diff are unchanged.
-S9 P1 is266067264 and P2 is4f8c181487; S10 P1 is e046ee3d7;
-owner-accepted S11 P1 is b39ceb7e6, acceptance record cbd0f7832.
-The preceding T445 final closure changed documentation only; T446 S1 updates
-NTVWM's private-carrier guard without changing the other components.
-Guest media and ordinary runtime configuration remain unchanged.
+S2 P11 builds on P10 (5edea33bb) and c5c09ea26: NTW16S defers automatic hidden
+frame geometry until first show, preserving creation order and explicit install.
+Both-width lifetime/negative-control tests, SOL/WINMINE three-mode gameplay,
+WRITE frontier, guest CBT and Console17/Window17 pass. Only both style DLLs
+change; all13 published identities match in release and system32. No new ABI,
+mirror or guest diff. Graph audit retains logs and limitations. S2 stays open.
+T445/T446 release history remains in their linked closure records below.
 
 | Architecture | Images |
 | --- | --- |

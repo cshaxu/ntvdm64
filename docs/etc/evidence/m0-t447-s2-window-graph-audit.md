@@ -3707,3 +3707,112 @@ Review that full creation/return/cleanup group and the original SOL startup
 failure joins before selecting a repair. The current evidence does not yet
 identify which operation failed or establish a regression-introducing commit.
 No new mirror diff, runtime patch, guest change or style workaround is made.
+
+## SOL style creation-order diagnosis and admitted group
+
+Post-c5c09ea26 source review and one bounded Off/Win16 creation-boundary
+comparison refine the failure: the dialog says an application error occurred,
+not Out of memory. `sol-style-boundary-r2` supervisor32844 started
+2026-10-15T12:57:19Z and completes0 (observation only, not gameplay). Off shows
+Solitaire/Stat and a successful final WindowCreate; Win16 enters WM_CREATE,
+then additional WINDOWPOSCHANGING/NCCALCSIZE/WINDOWPOSCHANGED/MOVE/SIZE. SIZE
+never returns before the application-error dialog, while the main window
+remains hidden and the final WindowCreate record has not occurred.
+
+The preceding r1 supervisor19056 completed observation but both modes failed
+earlier with illegal instructions and no creation trace. Unlike P10 it retained
+the agent's inherited environment. Keep that non-comparable failure; do not
+attribute it to style or silently turn it into a pass. R2 reuses the same
+explicit standard-environment whitelist as the P10 baseline, with only the
+two existing trace variables added. Environment sensitivity remains unresolved.
+
+Static proof uses the immutable SOL and retained relocation-aware segments in
+sol-creation-source-r1 (background PID26552,12:59:23Z): after CreateWindow at
+1:0352 returns, 1:03a2 calls entry18 (3:0263), whose relocation026e calls
+entry36, the game initialization. Segment4:0020 publishes DS:0028 only during
+that initialization. Earlier WM_SIZE calls entry22 (4:01c8), which reads that
+game pointer and traverses its card arrays unconditionally. The style engine
+invokes frame_changed/restore_client from its WM_CREATE-return attachment;
+these issue SetWindowPos and force the premature SIZE before initialization.
+The defect is project-added presentation timing, not a reason to patch SOL.
+
+Recovery choice: original application/USER creation and later ShowWindow
+ordering stay unchanged. NTW16S is already an admitted autonomous local
+presentation engine, not an alternative original WOW implementation. Keep
+its resource allocation/subclass attachment at the existing creation boundary,
+but defer forced geometry for an automatically attached initially hidden
+normal frame until its first show. Explicit install on an already constructed
+window retains its immediate contract; initially minimized/maximized paths
+retain native placement. Removal/destruction before first show must not force
+an otherwise unnecessary resize. No timer, posted-work queue, process-name
+test, guest patch, mirror change or new exported ABI is needed.
+
+This bounded prerequisite is admitted under S2's first-callback ordering
+contract. The complete group covers creation attachment, first-show/client
+preservation, hide/show reuse, hidden removal/destruction, reentrant destruction
+and existing initial-state/nested-Off behavior. Add a native caller whose data
+becomes ready only after CreateWindow returns; it must reject premature SIZE.
+Then verify the immutable SOL's operation/normal exit in all three styles,
+retained WINMINE/WRITE frontiers and the standard coherent publication gates.
+Neither this design nor the observation run claims the repair is implemented.
+
+## Creation-order repair acceptance
+
+The candidate implements the admitted boundary in NTW16S only: automatic
+initially-hidden normal frames retain eager allocation/subclass attachment,
+but their forced frame geometry activates on first WM_SHOWWINDOW. Explicit
+installation remains immediate. Pending removal skips geometry restoration;
+existing callback lifetime pins protect first-show reentrant destruction.
+Initially minimized/maximized creation keeps its previous placement contract.
+There is no new exported API, guest change, OpenNT mirror diff, timer, posted
+work item, application-name branch or swallowed attachment failure.
+
+Read-only NE entry-table verification additionally confirms entry18=3:0263,
+entry22=4:01c8 and entry36=4:0000. This resolves the initialization target
+directly rather than guessing from unrelocated far-call operands.
+
+Background `style-order-build-r1` (PID27516,2026-10-15T13:10:08Z) builds both
+Release/O2 widths and passes the extended actual-DLL attachment fixture.
+`tests/app/style_attachment.c:verify_creation_order` tests native negative
+space, no premature styled SIZE, preserved first-show client dimensions,
+repeat hide/show, unseen detach/destruction and destruction during first SIZE.
+Existing nested-Off, failed creation, initial minimized/maximized placement,
+30 lifetimes and GDI balance also pass in both widths.
+
+`style-order-checks-r1` (PID21748,13:12:15Z) runs that new fixture against
+both published old DLLs: each fails exactly the early_sizes assertion at
+line58, whereas both candidates pass. Actual DLL binding/unloading,
+opposite-width rejection, 28-page demo, title marker, default button and
+dialog/control tests pass in x86 and x64. The unchanged immutable SOL passes
+deal, stock draw, window destruction and launcher exit0 in Off/Win16/All;
+WINMINE likewise passes its gameplay and normal-exit checks in all modes.
+Exact inputs, captures and output are retained in the per-mode directories.
+These bounded actions do not establish arbitrary gameplay or WRITE editing.
+
+The same supervisor then stopped on a missing WRITE log directory, before
+that observation started. Its exit1 and error remain intact. It is neither
+a runtime failure nor a passing complete suite. `style-order-remaining-r1`
+(PID14080,13:15:36Z) resumes only WRITE observation, real guest CBT and the
+two DOS17 matrices with a fresh log directory and the same sealed package.
+Both runs use the previously recorded controlled environment; the unrelated
+full inherited-environment startup failure remains unresolved.
+
+The remaining supervisor completes0: WRITE retains visible MSWRITE_MENU,
+MSWRITE_DOC and MSWRITE_PAGEINFO (observation, not editing acceptance), real
+Win16 CBT completes0, and both Console/Window matrices pass all17 expected
+results. No guest image is rebuilt or changed. The reviewed production diff
+is three NTW16S files (+33/-9 lines), plus the49-line native ordering fixture;
+original-source/mirror additional diff is zero. No other runtime fix is mixed in.
+
+P11 publication `style-order-publish-r1` (PID32840,13:18:08Z) completes0 with
+recoverable backups and all13 hashes equal across the sealed candidate,
+assets/release and O:\winnt\system32. Only ntw16s32.dll and ntw16s64.dll change:
+
+- x86 SHA256 C635871FD6E1A3CC3376D8200C8E4246591CA4119301FB7920E88162D03AF74D
+- x64 SHA256 DC9A1B8195C3DB880E149106C8067F6E0454915234FEAA1996F6489560D00CB3
+
+All57 other package files remain identical to P10: eleven product images plus
+46 original guest/configuration companions. W16Style.exe is unchanged; its
+28-page thin-client test passes against each newly built DLL. The publication
+does not replace unrelated assets/winnt.zip. This is a bounded S2 baseline,
+not S2/T447 closure, complete WOW recovery, or proof of WRITE editing/saving.

@@ -32,7 +32,7 @@ typedef struct style_window {
     menu_loop *menus;
     unsigned menu_depth;
     DWORD old_policy;
-    BOOL policy_saved;
+    BOOL policy_saved, pending_frame;
 } style_window;
 
 static LRESULT CALLBACK style_proc(HWND,UINT,WPARAM,LPARAM,UINT_PTR,DWORD_PTR);
@@ -607,13 +607,21 @@ static void dispose(style_window *s)
     free(s);
 }
 
-BOOL win16_style_install(HWND w,const win16_style_palette *p)
+static void activate_frame(HWND w,style_window *s,const RECT *client,BOOL normal)
+{
+    DWORD policy=DWMNCRP_DISABLED;
+    if(!(GetWindowLongPtr(w,GWL_STYLE)&WS_CHILD))
+        DwmSetWindowAttribute(w,DWMWA_NCRENDERING_POLICY,&policy,sizeof(policy));
+    if(!s->detached)frame_changed(w);
+    if(!s->detached && normal)restore_client(w,client);
+}
+
+static BOOL install_frame(HWND w,const win16_style_palette *p,BOOL creating)
 {
     style_window *s;
     DWORD style,ex;
     BOOL normal;
     RECT client;
-    DWORD policy=DWMNCRP_DISABLED;
     if(!local_window(w))return FALSE;
     if(state(w)){SetLastError(ERROR_ALREADY_EXISTS);return FALSE;}
     style=(DWORD)GetWindowLongPtr(w,GWL_STYLE);ex=(DWORD)GetWindowLongPtr(w,GWL_EXSTYLE);
@@ -624,6 +632,7 @@ BOOL win16_style_install(HWND w,const win16_style_palette *p)
     s=(style_window *)calloc(1,sizeof(*s));
     if(!s){SetLastError(ERROR_NOT_ENOUGH_MEMORY);return FALSE;}
     s->bar_selected=-1;
+    s->pending_frame=creating && normal && !(style&WS_VISIBLE);
     {WCHAR name[32];s->dialog=GetClassNameW(w,name,ARRAYSIZE(name)) && !lstrcmpW(name,L"#32770");}
     if(p)s->palette=*p;else win16_style_default_palette(&s->palette);
     s->active=(ex&WS_EX_MDICHILD)?
@@ -639,17 +648,21 @@ BOOL win16_style_install(HWND w,const win16_style_palette *p)
      * one frame tracker ready instead of conditionally installing it later. */
     if(!win16_style_frame_scrollbars_install(w,&s->palette)){
         RemoveWindowSubclass(w,style_proc,STYLE_ID);dispose(s);return FALSE;}
-    if(!(style&WS_CHILD))DwmSetWindowAttribute(w,DWMWA_NCRENDERING_POLICY,&policy,sizeof(policy));
     ++s->calls;
-    frame_changed(w);
     /* Initial minimized/maximized creation is valid too. Native USER owns
      * its saved normal placement; never resize that state to preserve the
      * transient icon/maximized client rectangle. Restore uses normal layout. */
-    if(!s->detached && normal)restore_client(w,&client);
+    if(!s->pending_frame)activate_frame(w,s,&client,normal);
     --s->calls;
     if(s->detached){dispose(s);SetLastError(ERROR_INVALID_WINDOW_HANDLE);return FALSE;}
     return TRUE;
 }
+
+BOOL win16_style_install(HWND w,const win16_style_palette *p)
+{return install_frame(w,p,FALSE);}
+
+BOOL win16_style_install_created(HWND w,const win16_style_palette *p)
+{return install_frame(w,p,TRUE);}
 
 BOOL win16_style_remove(HWND w)
 {
@@ -665,9 +678,9 @@ BOOL win16_style_remove(HWND w)
     win16_style_menu_restore(&s->menu_items);
     if(s->bar_keyboard)leave_bar(w,s,TRUE);
     if(s->pressed && GetCapture()==w)ReleaseCapture();
-    if(IsWindow(w) && s->policy_saved)DwmSetWindowAttribute(w,DWMWA_NCRENDERING_POLICY,
+    if(IsWindow(w) && !s->pending_frame && s->policy_saved)DwmSetWindowAttribute(w,DWMWA_NCRENDERING_POLICY,
         &s->old_policy,sizeof(s->old_policy));
-    if(IsWindow(w)){frame_changed(w);if(normal && IsWindow(w))restore_client(w,&client);}
+    if(IsWindow(w) && !s->pending_frame){frame_changed(w);if(normal && IsWindow(w))restore_client(w,&client);}
     if(!--s->calls)dispose(s);
     return TRUE;
 }
@@ -703,6 +716,14 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
         if(PtInRect(&l.menu,point))wp=HTMENU;
     }
     switch(msg){
+    case WM_SHOWWINDOW:
+        if(wp && s->pending_frame){
+            RECT client;BOOL normal=!IsIconic(w)&&!IsZoomed(w);
+            client_screen(w,&client);s->pending_frame=FALSE;
+            activate_frame(w,s,&client,normal);
+            if(s->detached)break;
+        }
+        goto forward;
     case WM_CTLCOLORDLG:
     case WM_CTLCOLORSTATIC:
         if(s->dialog){

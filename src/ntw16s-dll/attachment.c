@@ -107,7 +107,7 @@ static BOOL install_created(HWND w,DWORD original_style)
     if(edit)installed=win16_style_edit_install(w,(original_style&WS_BORDER)!=0,NULL);
     else if(control && class_is(w,L"LISTBOX") && (original_style&LBS_USETABSTOPS))
         installed=win16_style_tabbed_list_install(w,NULL,0,NULL);
-    else installed=control?win16_style_control_install(w,NULL):win16_style_install(w,NULL);
+    else installed=control?win16_style_control_install(w,NULL):win16_style_install_created(w,NULL);
     error=GetLastError();
     if(installed && !a->detached){
         a->control=control;a->frame=!control;
