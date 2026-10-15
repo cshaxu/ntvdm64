@@ -2882,3 +2882,67 @@ guest mutation is admitted. Original MDI/message conversion remains selected;
 the missing seam is private window-storage ownership before original callbacks.
 This does not establish causality for SOL's OOM or complete S2/S3. No new
 runtime code, build, test or publication is part of this audit continuation.
+
+### Creation callback ordering and existing original hook identity
+
+Further source tracing at 527984cbf resolves one proposed design dependency,
+without changing the delivered P6 runtime. Inputs are the same pinned OpenNT
+tree and current wow_window_creation_binding.c, wow_dialog_creation_binding.c,
+wow_hook_callback.c, wow_user_task_lifecycle.c and original wowhooks.c/.h.
+Procedure: inspect the creation hook, original hook dispatcher and converter,
+then enumerate all native-call scopes and compare original createw.c ordering.
+
+- Original wowhooks.c already exposes W32GetHookStateData. Its caller supplies
+  iIndex; the original function checks the original hook-table bounds and
+  returns HOOKSTATEDATA, including InUse and iHook. The existing project
+  WU32StdHookProc entrance receives that same index. A future creation guard
+  can therefore distinguish an actual WH_CBT/HCBT_CREATEWND using the existing
+  original accessor and declaration, without another hook registry, guessed
+  message identity, direct unchecked array access or a new mirror edit.
+- Original ThunkCbtHook's HCBT_CREATEWND branch reads GWL_WOWWORDS and explicitly
+  returns FALSE without calling the guest when that storage is absent. Its
+  WM32Create conversion and subsequent CallBack16 must remain unchanged.
+  Publishing only at the first WNDPROC or native return is too late. Merely
+  adding a long-lived CBT hook does not establish ordering against newer hooks.
+- Original createw.c copies lpWOW at232, initializes the module/procedure
+  around298--307, and calls HCBT_CREATEWND at394. Its comment about an unset
+  procedure describes the older Windows bug, not the NT4 implementation.
+  Preserve class-procedure selection before CBT; do not postpone it based on
+  that comment. lpWOW being NULL is not permission to omit window storage.
+- Existing native-call scopes already cover SendMessage, DispatchMessage,
+  DefWindowProc, DefMDIChildProc, DefFrameProc, queue peeking and explicit
+  window/dialog creation. They are useful operation boundaries, not proof
+  that every native-origin callback necessarily has such a caller scope.
+- Explicit creation installs its CBT hook before native_call_begin; dialog
+  creation does likewise. Adding a hook in native_call_begin without changing
+  that ownership order could enroll their root HWND first and prevent the
+  existing explicit WW input or dialog initialization property from attaching.
+  The correction must share enrollment selection, not stack two competing
+  root owners. A borrowed standard class must retain its native procedure;
+  an application class must retain its already registered logical procedure.
+- A third existing scope dependency is wow_window_creation_menu: it does
+  nothing unless current_scope owns the HWND. General enrollment alone would
+  still omit an implicit application-class window's original class-resource
+  menu. Include this in the same group; retain the existing original resource
+  client/parser and native menu association, not a new menu loader.
+
+Implementation review requirements are now concrete: one idempotent enrollment
+selection shared by explicit creation, dialog roots and implicit known-class
+creation; an original-hook entrance guard before conversion regardless of
+hook installation order; one ownership-aware veto/exception rollback; matching
+first-callback menu handling and terminal release. A guard must not call the
+next hook twice, retire another scope's attachment, classify by HWND spelling,
+or enroll arbitrary unrelated host windows. Reuse W32GetHookStateData rather
+than alter the original dispatcher. Whether the generic native observer lives
+for the thread or the bounded call remains a lifecycle design decision; neither
+placement alone substitutes for the original-hook entrance guard.
+
+The coherent acceptance group must cover explicit custom/standard windows,
+dialog root plus controls, message-created application windows, child/owned
+popup creation, both hook-installation orders, hook veto/exception, early
+WM_GETMINMAXINFO/WM_NCCREATE, nested creation, class menus and destruction.
+Verify real CCPU-visible owner/class/words before guest hook conversion as well
+as at later callbacks. This source audit identifies requirements, not passing
+tests, an SOL cause, or permission to change guest binaries. Additional mirror
+diff remains zero; production implementation and its grouped acceptance remain
+pending.
