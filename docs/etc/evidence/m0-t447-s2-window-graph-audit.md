@@ -2698,3 +2698,42 @@ collector export linkage. Existing generic-thunk failure/foreign-tree race
 limits are not waived. Full original-reader mutation closure and real native
 same-slot reuse remain future S2 gates. Final governance/link/diff and all
 three-location PE/hash checks precede the reviewed P5 main commit/push.
+
+### Post-P5 native mutation inventory (source review, not acceptance)
+
+Input is committed P5 984ee0441 and the same pinned read-only OpenNT tree.
+No application run selected these findings. Trace original WOW thunks through
+their native USER owners and compare the selected private redirect header,
+native-return wrapper and worker snapshot commit. This is an incomplete
+inventory for the next coherent group, not a declaration of S2 completion.
+
+| Original caller / native owner | Proven effect and current disposition |
+| --- | --- |
+| wuwind.c WU32CloseWindow / kernel/showwin.c xxxCloseWindow; wuser.c WU32OpenIcon / xxxOpenIcon | Original owners use xxxShowWindow to minimize/restore. These two direct native calls bypass the existing native-return wrapper even though ShowWindow itself is redirected. A redirect at a caller does not intercept USER's internal calls. Retain original thunks and native return distinctions; connect their existing callout boundary. |
+| wuwind.c WU32ArrangeIconicWindows / kernel/icons.c xxxArrangeIconicWindows | Operates on the parent's minimized children and their positions, not just the passed HWND. Needs the existing whole-graph return update, not a target-only rectangle copy. Zero is also the legitimate no-icons result. |
+| wuwind.c WU32ScrollWindow; wuser31.c WU32ScrollWindowEx / client/client.c and kernel/scrollw.c xxxScrollWindowEx | SW_SCROLLCHILDREN reaches OffsetChildren and subsequent child move messages. Child geometry therefore changes even though no selected MoveWindow thunk ran. Preserve the original flag/rectangle conversion and native implementation; connect both entry names. ScrollWindowEx has a region-complexity result, not a BOOL contract. |
+| wuwind.c WU32ShowScrollBar / kernel/sbapi.c xxxShowScrollBar | SB_CTL calls xxxShowWindow; ordinary bars directly change WS_HSCROLL/WS_VSCROLL and redraw the frame. WND style/client geometry publication must follow the complete call, including callback paths. |
+| wuser.c WU32SetScrollRange / client/sbapi.c SetScrollRange and kernel/sbctl.c xxxSetScrollBar | SIF_RANGE can change scrollbar presence, clear/set WND flags and redraw the frame. This is not merely thumb-position storage. Preserve the original thunk's void guest return and native range validation. |
+| wuser.c WU32SetScrollPos | client/sbapi.c selects SIF_POS and SBSetParms does not change scrollbar presence for that mask. However SB_CTL reaches xxxSendMessage(SBM_SETSCROLLINFO), so retain it in the callout audit rather than classify every branch as painting-only. |
+| wuser31.c WU32EnableScrollBar / kernel/sbctl.c xxxEnableScrollBar | SB_CTL with ESB_DISABLE_BOTH calls xxxEnableWindow; restoring both arrows can enable the entire control. Other changes send SBM_ENABLE_ARROWS. Thus it can change WND disabled state and requires the same boundary as EnableWindow, which caller-level macros cannot intercept inside USER. |
+| wuwind.c WU32SetWindowWord | Negative instance/parent/ID indices already call SetWindowLong and thus the selected P5 wrapper. Positive extra-word writes remain a distinct extra-storage contract; do not replace the original thunk with a second index dispatcher. |
+| wuclass.c WU32SetClassLong / WU32SetClassWord | GCL_STYLE and GCL_CBWNDEXTRA reach SetClassLong through the existing private access facade, whose public branches still call native USER directly. This is a separate shared-CLS data obligation, not fixed merely by wrapping the API. |
+
+The last row exposes a second concrete gap: wow_user_window_project_graph
+samples class_style/window_extra, but
+mvdm_softpc_wow_page_domain_project_window_graph uses those descriptors only
+when allocating a missing class. Existing WND.pcls is reused without updating
+the existing CLS fields. Thus simply adding SetClassLong to the return-wrapper
+list would still leave stale shared class data. Audit original class setters,
+guest direct readers and managed/observed class ownership together before
+designing that update; do not allocate replacement classes on each mutation or
+overwrite logical procedure/private WOW words with native carrier values.
+
+Recovery ladder: retain the already composed original wuwind/wuser/wuser31/
+wuclass bodies. The unavailable boundary is native USER's private shared WND/
+CLS storage, not the public mutation algorithm. Reuse the admitted callout and
+copied-state boundary; importing kernel showwin/icons/scrollw/sbctl would cross
+the registered USER-server stopping boundary and require private desktop,
+window locks, drawing and positioning machinery. No such import, new window
+policy, mirror intrusion or guest change is proposed. New runtime edits and
+tests are not yet made; P5 remains the only published baseline.
