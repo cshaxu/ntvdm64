@@ -4076,3 +4076,55 @@ two intermittent application-test failures remain explicitly unresolved;
 the successful controlled comparisons and final per-mode results do not prove
 their absence. Subsequent source-led work must preserve this baseline while
 addressing the retained callback/object inventory and unexplained failures.
+
+### Post-P12 producer and callback-failure audit
+
+Baseline0581fe60e is published and pushed. Read-only source tracing, not a
+new application test loop, classifies remaining HWND producers:
+
+| Producer | Current path | Disposition |
+| --- | --- | --- |
+| SetFocus, SetActiveWindow, SetParent, SetWindowLong | Original thunk calls existing WOW_NATIVE_CALL; native_call_end refreshes the graph and menus. | Do not add a duplicate return wrapper. Review previous-handle lifetime separately from current graph reachability. |
+| SetCapture | wuser.c WU32SetCapture directly truncates native SetCapture's previous HWND; no existing native-call seam selected. | Missing return-publication boundary; capture-change implicit callbacks also require owner review before wiring. |
+| GetWindowLong/Word parent index | wuwind.c calls GetWindowLong(GWL_HWNDPARENT), then GETHWND16; owned private-access function passes public indices straight to native USER. | A returned external owner can be absent from the current view. Bind only this HWND-valued index, not arbitrary LONG values or procedure identities. |
+| GetDesktopWindow/GetDlgItem/GetParent/GetWindow/GetTopWindow/GetNextWindow | wusercli.h selects LOCALAPI under PMODE32; usercli.asm uses original client code. | A host same-name wrapper is not a repair for these direct readers. Keep relationship producer completeness as their dependency; do not revive fallback thunks. |
+| Clipboard owner/viewer/open-window and viewer-chain return | wuclip.c/wuser31.c also use GETHWND16 on native results. | Record shared-view prerequisite for W10; this is not clipboard-family acceptance or permission to replace its policy. |
+| HWNDs inside messages/hooks/structures | wmdisp32, wstruc, wowhooks and other family owners convert them. | A query-only sweep cannot certify callback payload closure. Retain the owner-specific inventory and entry-boundary gates. |
+
+More urgent source finding: callback delivery currently depends on a fresh
+whole-desktop graph, not just the live target. In wow_user_object_bindings.c,
+refresh_graph always roots the desktop; sample_graph follows parent, sibling,
+child and owner edges, then rechecks every row. A changed sampled edge yields
+ERROR_RETRY; disappearance or failed native metadata query also fails the
+whole publication. This conservative behavior protects graph consistency,
+but it is not a native desktop-wide lock.
+
+In wow_window_words_binding.c dispatch_bound, refresh failure returns FALSE
+before retained DispatchClientMessage. wow_window_native_proc ignores that
+BOOL and returns its default result (zero, except WM_CREATE=-1). Its later
+trace still labels the event WindowDispatch regardless of whether the
+original callback executed. The hook entrance similarly skips the original
+hook body on failed refresh. Original client.c DispatchClientMessage contains
+neither this desktop sampling prerequisite nor this suppression policy.
+
+Thus the code demonstrably permits a transient unrelated-window graph change
+to suppress a valid target callback, and the present trace cannot distinguish
+that outcome from a legitimate original callback returning zero. This is a
+project integration/failure-contract risk, not an original guest defect.
+It is a plausible contributor to the retained F2/readiness failures, **not
+their established cause**: no failure-time error/branch witness was captured.
+P12 remains the release baseline; no new runtime patch is made in this audit.
+
+Next complete group must resolve publication consistency, transient failure,
+callback execution and observation together before expanding the query seam.
+Trace success must mean actual original callback execution, with failure stage
+and error distinguished. Acceptance must force the failure boundary and prove
+no replay, stale-generation access, silent callback loss or changed creation
+veto/terminal cleanup. Native and guest branches, hook entry, native-return
+and queue-publication consumers must be reviewed together. Do not fix this
+by ignoring all publication failures, delivering arbitrary stale pointers,
+blind message replay, fixed sleeps or unbounded sampling retries. The existing
+graph failure-atomicity tests only prove that invalid snapshots are not
+committed; they do not prove preservation of the pending original callback.
+Original USER lock/shared-memory ownership is the reference contract; its
+unavailable private server boundary must remain explicit in the design.
