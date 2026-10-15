@@ -3359,3 +3359,110 @@ or justify adding a graph refresh inside a callback without its lock review.
 Next acceptance must cover observed-to-managed reuse inside a native call,
 including existing borrows and rollback. No production/mirror/guest source
 changed in this test delivery; P8 remains the published runtime baseline.
+
+### Managed reuse source design after a0cfa71b3
+
+The collision is source-proven: both ordinary and dialog CBT enrollment call
+wow_window_words_publish_owner, then wow_user_window_publish, then the worker
+publish_handle. Its existing-slot branch accepts only identical full identity;
+the graph replacement which can retire the old observed generation occurs at
+native_call_end, too late for this entrance. borrow_enter does not refresh it.
+Do not insert a callback-wide graph refresh: dialog roots deliberately have
+no managed CLS, and observed-to-managed promotion requires a managed CLS.
+
+Selected repair stays in the existing worker publication owner. Validate full
+new identity and native liveness as before. A conflicting slot may be replaced
+only if its class identifies an observation and its old full HWND is dead.
+Prepare new WND/words first; retire the old slot with the existing retained
+backing operation; commit the prepared new WND; release both temporary
+references. Existing graph edges and reader references defer old physical
+release until the ordinary graph return and borrow cleanup. A failed prepare
+or retirement leaves the old publication intact. Never discard a live or
+managed identity. A null class on a fresh dialog remains valid, unlike an
+attempt to promote an already observed identical HWND without a class owner.
+
+Recovery ladder: original handtabl.c HMMarkObjectDestroy/HMFreeObject and
+createw.c provide the lifetime/order contract but operate on kernel-owned
+handle pages, pool and USER locks, which cannot replace public USER's native
+allocator. The existing registered page-domain storage seam retains copied
+WND/handle layouts and original guest readers. Reuse that seam's retirement
+and borrow operations; no new allocator, registry, policy interface or mirror
+intrusion. Zero additional mirror/guest diff. Gate the whole group with real
+native managed reuse, null-class publication, retained old readers, collision
+refusal and existing creation/veto/rollback/graph tests; then the full runtime
+P gates and coherent publication. Candidate changes are not a delivered P.
+
+Implementation is24 lines in the existing worker publisher, using existing
+prepare/commit/retire/release functions and no new private ABI. Separate review
+checks that fresh storage is allocated before old publication changes; failed
+retirement marks only the fresh temporary allocation retired; after successful
+withdrawal the remaining commit cannot allocate or call native USER. Existing
+incoming links keep old physical storage until normal graph synchronization.
+No new lock, callback, subclass, class registry or original-source diff.
+
+Grouped acceptance managed-reuse-r1 runs under supervisor19040; build child
+32952 starts2026-10-15T11:22:23.0287133Z with1800-second deadline and returns0.
+The first window-borrow case returns0: managed creation reuses039400da as
+039500da and the null-class storage case reuses039600da as039700da, each on
+attempt1. Marker WOW_MANAGED_SLOT_REUSE_CCPU reports errors0, creation1,
+null_class1, retained1, released1. The null-class case is explicitly storage
+acceptance, not a real guest-dialog witness. The other foundation cases and
+runtime publication gates remain pending at this checkpoint.
+Preparation supervisor12672 waits for the complete14-case suite, then runs
+managed-reuse-apps-r1 against sealed P8 inputs and managed-reuse-delivery-r1
+gameplay, real guest CBT and DOS gates. It does not publish automatically.
+
+All14 foundation cases complete with exit0 and an empty failures.json.
+Application child19484 starts11:34:22Z and returns0 with the P8 frontiers:
+WINMINE main window, visible WRITE menu/document/page-info, SOL Out of memory.
+WRITE editing/saving and SOL successful initialization remain unverified.
+
+The first gameplay gate in managed-reuse-delivery-r1 fails: Off mode probe
+returns6 after posting a right-button click; the sampled covered-cell hash
+remains3cc8733b for5 seconds. Board readiness and native frame checks succeeded.
+The runner then cleans its own package; its forced cleanup is not a normal
+application-exit result. This failed attempt is retained, not waived or
+described as a repaired defect.
+
+Bounded follow-up uses identical sealed P8/candidate packages and unchanged
+probe assertions. managed-reuse-gameplay-review runs both with existing thunk
+tracing enabled: both pass. Because tracing changes timing, a predeclared
+six-run clean-environment sequence follows without tracing, under supervisor
+15248: baseline, candidate, candidate, baseline, baseline, candidate. All six
+pass full flag/counter/reset/open/close/launcher assertions. The prior timeout
+remains unexplained; these observations establish neither an inherited defect
+nor a repaired one. WOW32 .text is identical in the two packages:371712 bytes,
+SHA256 8DACFC82F3A9DBFCF2BF7CB8D888CC133BCA1777A0DF42684BF631C3833FB4A6.
+
+A single complete untraced gate, managed-reuse-delivery-r2, starts under
+supervisor17184 against the unchanged candidate (no rebuild or weakened
+assertions). Its three WINMINE modes and real Win16 CBT pass. DOS and final
+publication checks remain pending at this checkpoint. Preserve the first
+failure and exact source/input evidence alongside the final gate; do not
+claim the intermittent observation is solved by the slot-reuse repair.
+
+### S2 P9 managed reuse delivery
+
+The complete r2 gate (child7420, started2026-10-15T11:41:42.7291916Z,
+1800-second deadline) returns0. Console17 and Window17 each contain17 matched
+results; all three WINMINE modes and the real guest CBT report PASS. This
+supersedes only the pending gate statement, not the retained failed attempt
+or the remaining application/coverage limitations above.
+
+Publication supervisor19108 / child28956 starts11:45:07.6269866Z and returns0.
+managed-reuse-delivery-r2/publication retains recoverable P8 backups and the
+verified13-image manifest for assets/release and O:/winnt/system32. No existing
+project session needed closure. Changed image SHA256 identities:
+
+- ntvdm.exe: 884B275A704A02F312B7F3137E45E790935354CBF228BF67E4928D2D25CFBBA4
+- WOW32.DLL: D4EA48E50362CD320CBF2F7C6C4AC61BF5BABBA8F2BADEE04B43F051C14787BB
+
+The other11 host images are unchanged. Source change is confined to24 added
+lines in the project-owned page-domain publisher; WOW32's unchanged code was
+relinked against the rebuilt worker import library. No original mirror or
+guest source/binary change. Existing retired backing and graph-reference
+owners prevent reuse from overwriting live aliases; the real native test
+exercises both creator and null-class storage forms. This is not proof of all
+guest callback families or closure of S2/SOL initialization. Final governance,
+relative-link, diff and complete package/companion identity gates precede the
+P9 commit; assets/winnt.zip remains an unrelated excluded modification.

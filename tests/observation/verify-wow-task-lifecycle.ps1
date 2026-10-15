@@ -237,6 +237,10 @@ if ($Case -eq 'graph-snapshot' -and
     throw 'Real native handle-slot reuse and retained-generation isolation were not verified'
 }
 $fixtureOutput | Write-Output
+if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource') -and
+    !($fixtureOutput -match '^WOW_MANAGED_SLOT_REUSE_CCPU errors=0 creation=1 null_class=1 retained=1 released=1$')) {
+    throw 'Managed creation or null-class slot reuse failed retained-reader isolation/cleanup'
+}
 if ($Case -eq 'native-creation' -and
     !($fixtureOutput -match '^WOW_NATIVE_CREATION_BINDING errors=0 .* table_empty=1$')) {
     throw 'Native creation failed explicit/implicit enrollment or final ownership cleanup'

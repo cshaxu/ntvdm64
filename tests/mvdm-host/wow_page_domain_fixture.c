@@ -518,6 +518,90 @@ static LRESULT CALLBACK veto_native_creation(int code, WPARAM wp, LPARAM lp)
     }
     return CallNextHookEx(NULL, code, wp, lp);
 }
+static void verify_managed_slot_reuse(wow_class_lookup_context *classes)
+{
+    static wow_user_object_table objects;
+    wow_task_order_process process = {0};
+    wow_task_order_thread thread = {0};
+    wow_standard_class_view descriptor;
+    CREATESTRUCTA request = {0};
+    WW words = {0};
+    unsigned mode, before = borrow_errors;
+    process.classes = classes; process.objects = &objects; thread.ppi = &process;
+    BORROW_CHECK(wow_standard_class_describe("BUTTON", &descriptor));
+    request.lpszClass = "BUTTON"; request.lpszName = "Managed reuse";
+    request.hInstance = GetModuleHandle(NULL); request.style = WS_POPUP;
+    request.cx = 24; request.cy = 24;
+    words.adwWOW[0] = 0x13572468u;
+    for (mode = 0; mode < 2; ++mode) {
+        HWND old = NULL, window = NULL, desktop = GetDesktopWindow();
+        ULONG old_full = 0, full = 0, held = 0, fresh = 0, previous, actual[3];
+        ULONG retired = 0;
+        unsigned attempts = 0;
+        ULONGLONG started;
+        old = CreateWindowExA(0, "STATIC", "Observed before creation", WS_POPUP,
+            0, 0, 24, 24, NULL, NULL, GetModuleHandle(NULL), NULL);
+        BORROW_CHECK(old != NULL);
+        if (!old) continue;
+        old_full = (ULONG)(ULONG_PTR)old;
+        BORROW_CHECK(wow_user_window_project_graph(&old, 1));
+        held = mvdm_softpc_wow_page_domain_borrow_window(old_full);
+        BORROW_CHECK(held != 0);
+        if (!held) { DestroyWindow(old); continue; }
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_exchange_window_word(
+            held, 0, 0xabcdef12u, &previous));
+        BORROW_CHECK(DestroyWindow(old));
+        started = GetTickCount64();
+        while (attempts < 131072u && GetTickCount64() - started < 15000u) {
+            ++attempts;
+            window = mode ? CreateWindowExA(0, "STATIC", "Null class carrier", WS_POPUP,
+                0, 0, 24, 24, NULL, NULL, GetModuleHandle(NULL), NULL) :
+                wow_window_create_boundA(&thread, descriptor.atom, &request, &words, NULL);
+            if (!window) break;
+            full = (ULONG)(ULONG_PTR)window;
+            if (LOWORD(full) == LOWORD(old_full) && full != old_full) break;
+            BORROW_CHECK(DestroyWindow(window)); window = NULL;
+        }
+        BORROW_CHECK(window && LOWORD(full) == LOWORD(old_full) && full != old_full);
+        if (window && LOWORD(full) == LOWORD(old_full) && full != old_full) {
+            /* Dialog roots reach this same producer with no CLS. This mode
+             * tests that storage contract, not a guest dialog implementation. */
+            if (mode) BORROW_CHECK(mvdm_softpc_wow_page_domain_publish_handle(
+                LOWORD(full), HIWORD(full), 1, 0, full, 0, words.adwWOW));
+            else BORROW_CHECK(objects.windows[LOWORD(full)] == window &&
+                objects.entries[LOWORD(full)].bType == TYPE_WINDOW);
+            fresh = mvdm_softpc_wow_page_domain_borrow_window(full);
+            BORROW_CHECK(fresh && fresh != held);
+            BORROW_CHECK(wow_user_full_handle(&objects, LOWORD(full)) == full);
+            BORROW_CHECK(!mvdm_softpc_wow_page_domain_borrow_window(old_full));
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_words(held, actual) &&
+                actual[0] == 0xabcdef12u && c_sas_dw_at(held) == old_full);
+            BORROW_CHECK(fresh && mvdm_softpc_wow_page_domain_read_window_words(fresh, actual) &&
+                actual[0] == words.adwWOW[0] && c_sas_dw_at(fresh) == full);
+            if (mode && fresh) BORROW_CHECK(c_sas_dw_at(fresh + 76u) == 0);
+            /* An existing managed/null-class publication is not replaceable
+             * merely because the caller presents a different generation. */
+            BORROW_CHECK(!mvdm_softpc_wow_page_domain_publish_handle(LOWORD(full),
+                HIWORD(full) ^ 1u, 1, 0, full, 0, NULL));
+            if (mode) {
+                BORROW_CHECK(mvdm_softpc_wow_page_domain_retire_handle(LOWORD(full), &retired));
+                if (retired) BORROW_CHECK(mvdm_softpc_wow_page_domain_release_retained_window(retired));
+            }
+        }
+        if (window) BORROW_CHECK(DestroyWindow(window));
+        BORROW_CHECK(wow_user_window_project_graph(&desktop, 1));
+        if (fresh) BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(fresh));
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(held));
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_collect_observed_classes());
+        BORROW_CHECK(!mvdm_softpc_wow_page_domain_read_window_words(held, actual));
+        if (fresh) BORROW_CHECK(!mvdm_softpc_wow_page_domain_read_window_words(fresh, actual));
+        fprintf(stderr, "WOW_MANAGED_REUSE_CASE mode=%u attempts=%u old=%08lx new=%08lx\n",
+            mode, attempts, old_full, full);
+    }
+    fprintf(stderr, "WOW_MANAGED_SLOT_REUSE_CCPU errors=%u creation=1 null_class=1 retained=1 released=1\n",
+        borrow_errors - before);
+}
+
 static void verify_native_class_creation(wow_class_lookup_context *classes)
 {
     static wow_user_object_table objects;
@@ -531,6 +615,7 @@ static void verify_native_class_creation(wow_class_lookup_context *classes)
     char text[32] = {0};
     unsigned before = borrow_errors;
     process.classes = classes; process.objects = &objects; thread.ppi = &process;
+    verify_managed_slot_reuse(classes);
     BORROW_CHECK(wow_standard_class_describe("BUTTON", &native_class));
     request.lpszClass = "BUTTON"; request.lpszName = "Native original";
     request.hInstance = GetModuleHandle(NULL); request.style = WS_POPUP;

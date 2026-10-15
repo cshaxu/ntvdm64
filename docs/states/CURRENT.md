@@ -57,7 +57,7 @@ pass. standard-class-delivery-r1 records coherent13-image publication to both
 locations. This P8 delivery does not close S2's remaining coverage gaps.
 WRITE shows main/document/page-info windows; editing/saving is unverified.
 SOL still reports Out of memory. Additional mirror/guest diff is zero.
-Observed native slot reuse passes; managed reentry/S2 remain open. Preserve assets/winnt.zip.
+P9 published; guest reuse/S2 open. Preserve assets/winnt.zip.
 
 ## Active Packet
 
@@ -243,17 +243,18 @@ changes, native identity restoration, class lifetime and new-window snapshots.
 This remains staged with the standard-control group until creation/projection
 and retirement are connected; no guest or additional mirror diff.
 
-Shared class projection after P7: source/lock review selects task admission,
-already exclusive and inside the active CCPU domain, before xxxInitTask.
-Publish prepared native classes there through the existing class owner;
-reuse process projections on retries/tasks and existing final retirement.
-P8 tests and publication pass; the graph audit records failure/retry, shared
-CLS and native-only fixture boundaries. No new class table or mirror/guest
-change. Application frontiers remain unchanged from P7.
+P8 publishes prepared native classes before xxxInitTask under its existing
+exclusive lock/CCPU domain. The graph audit records retry, shared CLS,
+retirement and delivered tests. No new table or mirror/guest change;
+application frontiers remain unchanged from P7.
 Real Win16 CBT acceptance now passes: callback-time query, nested creation,
 veto/recovery, unhook and launcher exit. guest-hook-r4 runs unchanged P8;
 the message-boundary audit records source, failures and exact limits. Other
-callback families/exceptions and managed slot reuse remain open; S2 not closed.
+callback families/exceptions and real guest slot reuse remain open; S2 not closed.
+Managed reuse uses existing publish/retire ownership, only for dead observed
+generations; retain old borrows/links, prepare before withdrawal, and reject
+live or managed collisions. Include null-class dialogs and failure rollback.
+No mirror/guest change; details and gates remain in the window graph audit.
 
 The subsequent [window graph audit](../etc/evidence/m0-t447-s2-window-graph-audit.md)
 confirms missing next/parent/child/owner writes in shared WND publication and
@@ -385,10 +386,11 @@ lookup stays separate. Native desktop identity, retained observed/managed WW
 aliases and paired host/guest word updates pass the grouped foundation tests.
 P5 connects the prepared graph at the reviewed callback/native-return boundaries.
 
-S2 P8 is published to both locations with matching tested13-image hashes.
-Only NTVDM/WOW32 change from P7; standard-class-delivery-r1 retains recovery
-copies. Native observed-slot reuse and bounded guest CBT pass; managed-slot
-reentry, other callbacks and complete S2 coverage remain open.
+S2 P9 is published to both locations with matching tested13-image hashes.
+Only NTVDM/WOW32 change from P8; managed-reuse-delivery-r2 retains recovery
+copies. Native managed-slot reuse and bounded guest CBT pass. The graph audit
+retains an unexplained initial gameplay timeout plus passing fixed controls
+and full gates. Other callbacks and complete S2 coverage remain open.
 Original guest files remain unchanged; additional mirror diff is zero.
 S9 P1 is266067264 and P2 is4f8c181487; S10 P1 is e046ee3d7;
 owner-accepted S11 P1 is b39ceb7e6, acceptance record cbd0f7832.

@@ -938,6 +938,30 @@ int mvdm_softpc_wow_page_domain_publish_handle(unsigned short index,
     if (window != 0u && !GetWindowInfo((HWND)(ULONG_PTR)window, &info))
         return 0;
     guest_window = domain.guest_windows[index];
+    if (guest_window && window && c_sas_dw_at(guest_window) != window) {
+        ULONG replacement, retained = 0u;
+        previous_class = page_domain_class_allocation(
+            c_sas_dw_at(guest_window + MVDM_SOFTPC_WND_CLASS));
+        /* Native USER may reuse a dead observation during creation, before
+         * the outer native return refreshes copied links. Never overwrite a
+         * live HWND or managed owner. Prepare first, then use the existing
+         * retained retirement so old readers/links still own old storage. */
+        if (type != 1u || window != (((ULONG)uniqueness << 16) | index) ||
+                !previous_class || !previous_class->observed ||
+                IsWindow((HWND)(ULONG_PTR)c_sas_dw_at(guest_window))) return 0;
+        replacement = page_domain_prepare_window(window, (HWND)(ULONG_PTR)window,
+            class_server, words, &info);
+        if (!replacement) return 0;
+        if (!mvdm_softpc_wow_page_domain_retire_handle(index, &retained)) {
+            (*window_borrow_link(replacement))->retired = 1;
+            (void)mvdm_softpc_wow_page_domain_release_window(replacement);
+            return 0;
+        }
+        page_domain_commit_window(index, replacement, type, flags);
+        (void)mvdm_softpc_wow_page_domain_release_window(replacement);
+        (void)mvdm_softpc_wow_page_domain_release_retained_window(retained);
+        return 1;
+    }
     if (guest_window) {
         /* Native discovery can precede the existing managed creation owner.
          * Adopt only that identical observed WND, never a reused slot or an
