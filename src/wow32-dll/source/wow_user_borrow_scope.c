@@ -1,6 +1,7 @@
 #include "wow_user_borrow_scope.h"
 #include "wow_user_runtime.h"
 #include "wow_class_client_bindings.h"
+#include "wow_task_order_bindings.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 
 typedef VOID (APIENTRY *PFNW32ET)(VOID);
@@ -102,6 +103,7 @@ static void release_binding(PVOID binding, BOOL is_class)
 BOOL WINAPI wow_user_borrow_leave(wow_user_borrow_scope *scope)
 {
     wow_user_borrow *p;
+    wow_user_runtime_thread *runtime;
     BOOL reclaimed = TRUE;
     DWORD error = GetLastError();
     if (!scope || current_scope != scope) {
@@ -115,10 +117,14 @@ BOOL WINAPI wow_user_borrow_leave(wow_user_borrow_scope *scope)
     }
     scope->previous = NULL;
     scope->classes = NULL;
+    runtime = wow_user_runtime_current();
+    if (runtime && runtime->thread && runtime->thread->ppi)
+        reclaimed = wow_window_words_collect_retired(runtime->thread->ppi->objects);
     /* Do not rescan or mutate native window relationships here. Only drain
      * already-retired allocations after releasing this scope's aliases. */
-    if (mvdm_softpc_wow_page_domain_active())
-        reclaimed = mvdm_softpc_wow_page_domain_collect_retired_windows();
+    if (mvdm_softpc_wow_page_domain_active() &&
+            !mvdm_softpc_wow_page_domain_collect_retired_windows())
+        reclaimed = FALSE;
     if (!reclaimed) {
         SetLastError(ERROR_INVALID_STATE);
         return FALSE; /* Scope is consumed; domain still owns pending frees. */

@@ -5,6 +5,7 @@
 #include "wow_class_words_binding.h"
 
 struct _WW;
+struct wow_user_object_table;
 typedef struct wow_window_words_binding wow_window_words_binding;
 /* Unpublished storage owns one reference only: no HWND property, class
  * association or cleanup membership. A scope may later enroll this identity. */
@@ -56,6 +57,11 @@ void WINAPI wow_window_words_detach(HWND);
 /* Rollback only its own publication; expected must remain borrowed through
  * this call. A replaced property is untouched, even on the same HWND. */
 BOOL WINAPI wow_window_words_detach_if(HWND, wow_window_words_binding *);
+/* Terminal/veto paths consume the native property even if copied retirement
+ * must wait for the original execution context. The existing object-table
+ * reference retains storage; collection retries only such pending owners. */
+BOOL WINAPI wow_window_words_terminal(HWND, wow_window_words_binding *);
+BOOL WINAPI wow_window_words_collect_retired(struct wow_user_object_table *);
 /* Tagged procedures require the registered WOW callback; native procedures
  * do not. FALSE means no dispatch occurred; result is untouched. Exceptions propagate after
  * releasing the borrowed WW. The original owner performs actual dispatch. */

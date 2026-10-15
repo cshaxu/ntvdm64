@@ -2319,3 +2319,218 @@ assets/winnt.zip remains excluded, SHA-256
 Final documentation/link, diff, PE/hash and mirror-expression checks precede
 the reviewed commit/push. This is a usable P3 baseline, not S2 completion,
 SOL recovery, WRITE editing acceptance or full message-contract recovery.
+
+### Post-P3 source review: transaction and terminal ordering
+
+Input baseline is e15193485, synchronized with origin/main; only the excluded
+ZIP was dirty. This is source review, not another runtime experiment. Original
+reference remains pinned OpenNT windows/core/ntuser/kernel/createw.c:
+xxxDestroyWindow unlinks the parent chain at1569, preserves owner at1587,
+and enters xxxFreeWindow. xxxFreeWindow destroys children before sending
+WM_NCDESTROY at1872; after that callback its2312ff cleanup clears child/owner
+and substitutes the desktop parent for retained WND storage. The callback
+therefore must not see an already-cleared owner. Conversely, retaining its
+old incoming parent link after terminal completion is not equivalent.
+
+The current source review identifies the following complete transaction
+boundary, beyond P3's already-verified physical-free mechanics:
+
+| Current site | Proven gap | Required placement/contract |
+| --- | --- | --- |
+| wow_user_window_project_graph descriptor/observe loop | Each observe publishes immediately; a later descriptor/native recheck failure leaves earlier publications changed. The preliminary collector can also retire objects before snapshot success. | Prepare all missing WND/CLS and generation replacements before publishing any handle or relation; abort keeps old identities/edges. Remove the sequential publish/collect path when the transaction replaces it. |
+| observe_window existing-slot branch | A different full identity in the same low-word slot is rejected, even when the old native identity is dead. | Resolve snapshot edges against prepared new backing while keeping old backing for outstanding readers. Never overwrite the old allocation or free it to make preparation possible. |
+| wow_window_dispatch_bound finally then wow_window_native_proc finally | Task callback leave runs before the outer terminal detach. | Terminal copied-state work must be placed while the appropriate original execution context is still established; an outer finally is not evidence of guest-access authority. Preserve native-only dispatch's no-WOW-entry branch. |
+| dialog_proc finally | Its terminal detach precedes task leave, unlike ordinary windows, but property and creation references are dropped even when detach fails. | One common terminal contract, with idempotence under nested destruction and an explicit retained cleanup owner on failure. |
+| rollback_enrollment | Restores the native procedure before ignoring detach failure. | Creation veto cannot depend on a later callback reaching a gateway it has already removed. Pair unlink/withdrawal and restoration while HWND remains valid. |
+| wow_user_invoke_thunk and WU32StdHookProc | Existing borrow scopes cover aliases, not graph synchronization. | Include pre-guest hook entry and thunk/native return in the group, preserving original conversion, dispatch and exception policy. |
+
+Execution evidence for the placement constraint is
+wow_user_task_lifecycle.c::wow_task_callback_leave: a resumed callback may call
+original xxxSleepTask before restoring the suspended native wait. The page
+domain checks session binding, CR0.PG and CR3; publication_lock alone is not
+that authority. Do not move all work into a generic scope destructor or add
+another lock/scheduler to bypass the original handoff.
+
+Four-rung disposition remains: original native USER already owns destruction
+and linking; importing createw.c's body would require its private server heap,
+thread locks, input queues and desktop ownership, duplicating the existing
+native owner. Keep original guest readers and original WOW task ordering;
+the minimal adapter supplies only the unavailable copied shared view. No new
+mirror expression is required. Explicit transaction scratch is call-local,
+not a second persistent object registry.
+
+Grouped verification must distinguish callback-time owner visibility from
+post-terminal retained backing; ordinary/dialog terminal callbacks, denied
+entry, callback exception, nested destroy, CBT veto and native-only forwarding
+are separate rows. Transaction negatives include second-node preparation
+failure, native revalidation failure, stale linked generation, surviving
+incoming edges and retained readers. P3's dead-observation test alone cannot
+prove these production boundaries. Do not activate project_graph until this
+whole closure is implemented. No runtime source or published binary changes
+are made by this review.
+
+### Post-P3 implementation: whole-snapshot preparation
+
+The subsequent candidate replaces project_graph's preliminary collector and
+sequential observe loop with one worker-owned snapshot operation. Provider
+sampling still supplies copied class descriptors and full native identities;
+it does not publish intermediate nodes. The worker prepares missing classes
+and WNDs under existing borrow records, retains existing backing, and rejects
+replacement of live or managed generations. Native revalidation and control-ID
+sampling precede the shared non-failing copied-field commit.
+
+The existing relationship transaction now resolves edges against its
+call-local prepared rows before the old published table. Old observed dead
+generations are withdrawn without physical freeing; fresh handles publish
+only after that withdrawal. Existing callbacks can retain the old allocation.
+No second persistent table or native relationship policy is introduced. The
+old relationship-only API delegates to the same transaction without prepared
+rows. Native geometry/ID querying is separated from copied field writes so
+the commit itself cannot fail on a native query.
+
+Abort consumes temporary borrows, marks unpublished fresh allocations retired,
+and uses P3's reclamation owner and existing class reference checks. Existing
+window words, class links and published relationships are not updated during
+preparation. The heap-containing interval may grow as allocations are reserved,
+as it already did for ordinary allocation; that is not node publication.
+Successful logical commit does not become a reported failure merely because
+subsequent physical reclamation is deferred.
+
+Added CCPU fixture assertions for a second-descriptor failure after first-node
+preparation and for native relationship revalidation failure after both
+preparations. Both require unpublished identities and exact allocation
+recovery. These tests are authored, not yet executed. Successful fresh/reused
+generation coverage and all terminal/callback integration rows remain part
+of this same unfinished group. No incremental compile/test or publication
+has been performed; P3 remains the installed baseline. Mechanical diff check
+passes, which is not compilation or runtime evidence.
+
+### Snapshot acceptance and terminal-owner follow-through
+
+Added graph-snapshot as a separate production-object CCPU case. It runs the
+existing fixture body on a dedicated thread attached to a newly created,
+unswitched private desktop; after thread termination the fixture closes that
+desktop. The test does not manipulate the owner's visible desktop. It calls
+the real provider snapshot entry, creates a native parent/child pair, verifies
+parent/child guest rebasing and numeric control ID71, destroys the native
+pair, publishes a new desktop snapshot, and checks that the held old parent
+backing survives handle withdrawal until its last release. This is not yet
+executed and does not substitute for same-slot generation-reuse coverage.
+
+Further original-source review examined createw.c::UnlinkWindow itself
+(2439ff), not merely its callers. It walks the original parent/next chain and
+updates links through original Lock/Unlock. It cannot be called directly on
+the copied guest WND: those links are server-form guest addresses, not native
+PWND pointers. Translating an entire parallel native WND tree merely to call
+it would add a second graph owner. Native USER already executes its native
+equivalent. Keep the adapter limited to sampling that result; do not author
+a competing native unlink policy or import the kernel destruction package.
+
+The terminal failure path is still a required unresolved part of this group:
+moving detach earlier alone does not solve callback-entry denial or allocation
+failure, and restoring the native procedure before a failed CBT rollback can
+remove the only future gateway. Existing WW/property/object-table ownership
+must retain a concrete cleanup obligation until logical withdrawal completes.
+The publication SRW lock is not a replacement for the original task execution
+context. No terminal integration or runtime acceptance is claimed yet; P3
+remains installed and the full S2 objective remains open.
+
+### Owner-directed P4 delivery boundary
+
+The owner requires build, tests, publication, commit and push before further
+wiring. Freeze this delivery at the prepared snapshot transaction and terminal
+storage ownership; do not activate graph projection at additional production
+callback/return sites. Same-slot generation-reuse acceptance and complete
+pre-guest synchronization remain open, not silently claimed by this P.
+
+The terminal implementation now gives the existing object-table publication
+one WW storage reference. Its cleanup view points back to that same storage;
+there is no additional pending registry. WM_NCDESTROY and creation rollback
+remove the property even if guest withdrawal is temporarily unavailable.
+The table retains the failed obligation, class association and thread identity
+until its existing cleanup/scope boundary can retry successfully. Successful
+withdrawal consumes the table reference exactly once. Ordinary tagged-window
+dispatch performs terminal withdrawal before callback/task leave; the outer
+finally covers denied entry. Dialog and CBT rollback use this same owner.
+Native-only dispatch still bypasses WOW callback entry.
+
+Retired guest backing with incoming copied links stays in the existing borrow
+list until those links disappear; it is never freed out from under a reader.
+This retention is not proof of graph synchronization: that still-unconnected
+production contract remains a subsequent group. No original source or guest
+image is changed in this candidate.
+
+Build/test run roots are graph-batch-r1 and delivery-r4. The first group builds
+the affected worker/provider closures using the existing validated Ninja
+caches, then exercises eleven foundation cases. A supplemental window-borrow
+run adds the explicit terminal failure test: leave protected execution,
+withdraw the property, fail collection, release the caller, destroy the native
+HWND, reenter protected execution, collect through the retained table and
+require exact guest allocation recovery. Repeated collection must be harmless.
+This is real CCPU-backed host-fixture evidence, not Win16 application acceptance.
+All runs are hidden background processes with recorded PID, deadline, logs
+and exit status; the user's desktop is never switched or manipulated.
+
+Publication is conditional on these fixtures and independent ordinary
+WINMINE/SOL/WRITE frontiers, WINMINE gameplay in all three style modes and
+both seventeen-case DOS frontend matrices. Reuse only P3's unchanged eleven
+host images and original package inputs; rebuild NTVDM/WOW32 together. Keep
+the unrelated assets/winnt.zip outside the delivery.
+
+Grouped verification result: graph-batch-r1 built both production images and
+passed all eleven cases: window-borrow, window-reclaim, graph-snapshot,
+process-retirement, dialog-lifecycle, menu-resource, thunk-scope, menu-cleanup,
+native-send, native-nested and task-lifecycle. Its initial window-borrow and
+graph-snapshot binaries precede the supplemental terminal assertion; do not
+attribute that later assertion to those earlier runs. The final checked-in
+window-borrow source additionally passes in delivery-r4/terminal, with
+WOW_TERMINAL_RETRY_CCPU errors=0 and exact allocation recovery after the native
+window and property are gone. Production inputs did not change between runs.
+The complete worker and provider links pass; retained fixture link warnings
+are not represented as warning-free builds. Actual elapsed times are derived
+from each process.json start and its corresponding exit-file timestamp.
+
+### P4 verification and publication result
+
+On2026-10-15, the grouped worker/provider build passed in40.9seconds;
+the eleven foundation cases took587.8seconds in total. Supplemental terminal
+coverage passed in50.8seconds. Each case retains its own PID, start/deadline,
+stdout/stderr, link log and exit code; no build was truncated by a foreground
+tool observation deadline. Reproduction uses
+tests/observation/verify-wow-task-lifecycle.ps1 with the recorded Case,
+ProviderBuildRoot=build/M0-T445/S6/provider,
+WorkerBuildRoot=build/M0-T445/S6/r003 and a fresh BuildRoot under build.
+
+The sealed graph-apps-r1/package is derived from P3's sealed package, never
+from an unrestricted installed-directory copy. Its83.8second isolated
+frontier run independently reproduces WINMINE's main window, WRITE's visible
+MSWRITE_MENU/MSWRITE_DOC/MSWRITE_PAGEINFO windows and SOL's inherited Out of
+memory dialog. WRITE editing/saving and SOL normal initialization remain
+unverified/failed respectively, not newly passing capabilities.
+
+delivery-r4/checks passed in123.6seconds: verify-wow-mine-gameplay.ps1 in
+Off/Win16/All modes checks flag/counter, reset, an open cell, WM_CLOSE and
+launcher completion; Verify-CommandExitStatus.ps1 checks all17 existing
+text-gated routes separately for Console and Window. Both matrices contain17
+rows with expected=actual; no earlier application frontier regressed.
+
+The publication gate validates all preceding results and package identities,
+backs up both complete destinations and the manifest, and publishes the same
+thirteen host images to assets/release and O:/winnt/system32. Both locations
+match the sealed candidate. Only these two images change from P3:
+
+| Image | P4 SHA-256 |
+| --- | --- |
+| ntvdm.exe | BCC9AB026DE1333A3D934082FEA3FA662D7725F2CFA6001E05510908126A448E |
+| WOW32.DLL | D1BC524B72D72F79A23BC5BCE0A66C4A7305BDA6C4275356D36EEAF0838AF433 |
+
+delivery-r4/publication retains coherent P3 recovery copies and the verified
+manifest. No installed project process required termination. Original
+WINSPOOL.EXE retains E4E787340F124476090ED0F22837D7D7ACAB37FD7BBE49DB46CAE9AC4944D535.
+No guest, original-source mirror, wire protocol or user configuration changes.
+The independent review checks property/table/caller reference consumption,
+failure-retained class/thread association, non-failing graph commit, rollback,
+and the unchanged original-owner boundaries. Remaining production graph entry/
+return synchronization and real same-slot-generation reuse remain explicit
+next work, not hidden P4 completion claims. Final governance/link/diff and
+three-location PE/hash checks precede the reviewed main commit and push.

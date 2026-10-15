@@ -166,24 +166,13 @@ fail:
 
 BOOL WINAPI wow_user_window_project_graph(const HWND *roots, ULONG root_count)
 {
-    typedef struct query_node {
-        WINDOWINFO info;
-        DWORD style, extra;
-        ULONG name_bytes;
-        char name[256];
-    } query_node;
     wow_user_window_links *rows = NULL;
     mvdm_softpc_wow_window_links *links = NULL;
-    query_node *nodes = NULL;
+    mvdm_softpc_wow_window_descriptor *nodes = NULL;
     ULONG count = 0, i;
     BOOL result = FALSE;
     DWORD error, saved = GetLastError();
     if (!wow_user_window_sample_graph(roots, root_count, &rows, &count)) return FALSE;
-    /* Separate from the commit result below: a failed reclamation must not
-     * report that an already-published graph was not published. */
-    if (!mvdm_softpc_wow_page_domain_collect_observed_windows()) {
-        SetLastError(ERROR_INVALID_STATE); goto done;
-    }
     nodes = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, count * sizeof(*nodes));
     links = HeapAlloc(GetProcessHeap(), 0, count * sizeof(*links));
     if (!nodes || !links) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); goto done; }
@@ -191,8 +180,9 @@ BOOL WINAPI wow_user_window_project_graph(const HWND *roots, ULONG root_count)
      * public native queries, not class registration or procedure ownership. */
     for (i = 0; i < count; ++i) {
         int length;
-        nodes[i].info.cbSize = sizeof(WINDOWINFO);
-        if (!GetWindowInfo(rows[i].window, &nodes[i].info)) goto done;
+        WINDOWINFO info = {sizeof(info)};
+        if (!GetWindowInfo(rows[i].window, &info)) goto done;
+        nodes[i].atom = info.atomWindowType;
         length = GetClassNameA(rows[i].window, nodes[i].name, sizeof(nodes[i].name));
         if (!length) goto done;
         if (length >= sizeof(nodes[i].name) - 1) {
@@ -200,30 +190,20 @@ BOOL WINAPI wow_user_window_project_graph(const HWND *roots, ULONG root_count)
         }
         nodes[i].name_bytes = (ULONG)length + 1u;
         SetLastError(ERROR_SUCCESS);
-        nodes[i].style = GetClassLongA(rows[i].window, GCL_STYLE);
-        if (!nodes[i].style && GetLastError() != ERROR_SUCCESS) goto done;
+        nodes[i].class_style = GetClassLongA(rows[i].window, GCL_STYLE);
+        if (!nodes[i].class_style && GetLastError() != ERROR_SUCCESS) goto done;
         SetLastError(ERROR_SUCCESS);
-        nodes[i].extra = GetClassLongA(rows[i].window, GCL_CBWNDEXTRA);
-        if (!nodes[i].extra && GetLastError() != ERROR_SUCCESS) goto done;
+        nodes[i].window_extra = GetClassLongA(rows[i].window, GCL_CBWNDEXTRA);
+        if (!nodes[i].window_extra && GetLastError() != ERROR_SUCCESS) goto done;
         links[i].window = (ULONG)(ULONG_PTR)rows[i].window;
         links[i].next = (ULONG)(ULONG_PTR)rows[i].next;
         links[i].parent = (ULONG)(ULONG_PTR)rows[i].parent;
         links[i].child = (ULONG)(ULONG_PTR)rows[i].child;
         links[i].owner = (ULONG)(ULONG_PTR)rows[i].owner;
     }
-    for (i = 0; i < count; ++i) {
-        if (!sampled_links_match(&rows[i])) goto done;
-        if (!mvdm_softpc_wow_page_domain_observe_window(links[i].window,
-                nodes[i].info.atomWindowType, nodes[i].style, nodes[i].extra,
-                nodes[i].name, nodes[i].name_bytes)) {
-            SetLastError(ERROR_INVALID_STATE); goto done;
-        }
-    }
-    /* Descriptor APIs may run while other native threads mutate USER. Do
-     * not commit stale relation edges merely because the first sample passed. */
-    for (i = 0; i < count; ++i)
-        if (!sampled_links_match(&rows[i])) goto done;
-    if (!mvdm_softpc_wow_page_domain_publish_window_links(count, links)) {
+    /* The worker prepares all storage and revalidates native relationships
+     * before one commit. Do not publish nodes sequentially in this caller. */
+    if (!mvdm_softpc_wow_page_domain_project_window_graph(count, links, nodes)) {
         SetLastError(ERROR_INVALID_STATE); goto done;
     }
     result = TRUE;

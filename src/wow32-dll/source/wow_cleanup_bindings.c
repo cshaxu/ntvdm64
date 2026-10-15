@@ -1,4 +1,5 @@
 #include "wow_cleanup_bindings.h"
+#include "wow_window_words_binding.h"
 
 static void clear_tree(wow_user_object_table *table)
 {
@@ -58,6 +59,7 @@ BOOL WINAPI wow_user_cleanup_bound(HANDLE instance, DWORD task, PNEMODULESEG sel
         SetLastError(ERROR_INVALID_STATE); return FALSE;
     }
     objects=context->thread->ppi->objects;
+    if (!wow_window_words_collect_retired(objects)) return FALSE;
     desktop=context->thread->rpdesk->pDeskInfo;
     if (!build_tree(objects,&root)) { clear_tree(objects); return FALSE; }
     previous_root=desktop->spwnd;

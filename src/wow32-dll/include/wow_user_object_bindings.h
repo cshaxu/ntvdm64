@@ -46,6 +46,8 @@ BOOL WINAPI wow_user_window_sample_links(HWND, wow_user_window_links *);
 BOOL WINAPI wow_user_window_sample_graph(const HWND *, ULONG,
     wow_user_window_links **, ULONG *);
 /* Prepare all query nodes and publish one validated relation closure. Does
- * not acquire task ownership or retire nodes outside the supplied closure. */
+ * not acquire task ownership. Dead observed generations can be withdrawn
+ * only if no unchanged published source still points to their backing;
+ * managed objects remain exclusively with their terminal owner. */
 BOOL WINAPI wow_user_window_project_graph(const HWND *, ULONG);
 #endif

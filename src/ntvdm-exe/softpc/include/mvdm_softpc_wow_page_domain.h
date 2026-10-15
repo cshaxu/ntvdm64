@@ -126,6 +126,16 @@ int __cdecl mvdm_softpc_wow_page_domain_refresh_window(unsigned long window);
 typedef struct mvdm_softpc_wow_window_links {
     unsigned long window, next, parent, child, owner;
 } mvdm_softpc_wow_window_links;
+/* Counted class query bytes are copied during this synchronous call. They
+ * neither register native classes nor carry native pointers into guest state. */
+typedef struct mvdm_softpc_wow_window_descriptor {
+    unsigned short atom;
+    unsigned long class_style, window_extra, name_bytes;
+    char name[256];
+} mvdm_softpc_wow_window_descriptor;
+int __cdecl mvdm_softpc_wow_page_domain_project_window_graph(
+    unsigned long count, const mvdm_softpc_wow_window_links *links,
+    const mvdm_softpc_wow_window_descriptor *descriptors);
 int __cdecl mvdm_softpc_wow_page_domain_publish_window_links(
     unsigned long count, const mvdm_softpc_wow_window_links *links);
 /* Replace edges and withdraw confirmed-dead observed generations together.

@@ -36,7 +36,7 @@ static void rollback_enrollment(HWND window, wow_window_words_binding *borrow,
     DWORD error = GetLastError();
     if (previous && GetWindowLongA(window, GWL_WNDPROC) == (LONG)wow_window_native_proc)
         SetWindowLongA(window, GWL_WNDPROC, (LONG)previous);
-    (void)wow_window_words_detach_if(window, borrow);
+    (void)wow_window_words_terminal(window, borrow);
     SetLastError(error);
 }
 
@@ -319,7 +319,7 @@ static HWND create_bound(wow_task_order_thread *thread,
         }
     } __finally {
         if (!result && scope.borrow)
-            wow_window_words_detach_if(scope.window, scope.borrow);
+            (void)wow_window_words_terminal(scope.window, scope.borrow);
         current_scope = scope.previous;
         UnhookWindowsHookEx(scope.hook);
         wow_window_words_release(scope.borrow);

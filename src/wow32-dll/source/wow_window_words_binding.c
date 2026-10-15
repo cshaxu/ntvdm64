@@ -22,6 +22,7 @@ typedef VOID (APIENTRY *PFNW32ET)(VOID);
 struct wow_window_words_binding {
     LONG references;
     BOOL enrolled;
+    BOOL terminal_pending;
     WW words;
     wow_class_words_binding *class_words;
     wow_cleanup_window cleanup;
@@ -105,6 +106,7 @@ BOOL WINAPI wow_window_words_attach_target(HWND window, const WW *words,
         binding->words = *words;
         binding->class_words = class_words;
         ZeroMemory(&binding->cleanup, sizeof(binding->cleanup));
+        binding->cleanup.storage = binding;
         binding->cleanup.pcls = wow_class_words_entry(class_words);
         binding->cleanup.adwWOW = binding->words.adwWOW;
         binding->cleanup.lpfnWndProc = target ? (WNDPROC)target->procedure : NULL;
@@ -214,6 +216,7 @@ BOOL WINAPI wow_window_words_publish_owner(HWND window, wow_window_words_binding
     } else if (wow_user_window_publish(thread->ppi->objects,window,&binding->cleanup,thread)) {
         binding->cleanup.thread=thread;
         binding->objects=thread->ppi->objects;
+        InterlockedIncrement(&binding->references); /* Published table owner. */
         result=TRUE;
     }
     ReleaseSRWLockExclusive(&publication_lock);
@@ -275,6 +278,7 @@ BOOL WINAPI wow_window_class_procedure_exchange(HWND window, DWORD procedure,
 static BOOL detach_matching(HWND window, wow_window_words_binding *expected)
 {
     wow_window_words_binding *binding;
+    BOOL table_reference;
     if (!own_window(window)) return FALSE;
     AcquireSRWLockExclusive(&publication_lock);
     binding = (wow_window_words_binding *)GetPropW(window, property_name);
@@ -282,6 +286,7 @@ static BOOL detach_matching(HWND window, wow_window_words_binding *expected)
         ReleaseSRWLockExclusive(&publication_lock);
         return FALSE;
     }
+    table_reference = binding->objects != NULL;
     if (binding->objects && !wow_user_window_retire(binding->objects, window,
             &binding->cleanup, &binding->retired_guest_backing)) {
         ReleaseSRWLockExclusive(&publication_lock);
@@ -289,6 +294,7 @@ static BOOL detach_matching(HWND window, wow_window_words_binding *expected)
     }
     binding = (wow_window_words_binding *)RemovePropW(window, property_name);
     if (binding) {
+        binding->enrolled = FALSE;
         if (binding->objects) {
             binding->objects=NULL;
         }
@@ -296,6 +302,7 @@ static BOOL detach_matching(HWND window, wow_window_words_binding *expected)
         binding->cleanup.thread = NULL; /* Retired borrows no longer own a thread. */
     }
     ReleaseSRWLockExclusive(&publication_lock);
+    if (table_reference) wow_window_words_release(binding);
     wow_window_words_release(binding);
     return binding != NULL;
 }
@@ -311,8 +318,66 @@ BOOL WINAPI wow_window_words_detach_if(HWND window, wow_window_words_binding *ex
     return detach_matching(window, expected);
 }
 
-BOOL WINAPI wow_window_dispatch_bound(HWND window, UINT message, WPARAM wp,
-    LPARAM lp, DWORD procedure, wow_window_callback callback, LONG *result)
+BOOL WINAPI wow_window_words_terminal(HWND window, wow_window_words_binding *binding)
+{
+    BOOL retired = TRUE, property_reference = FALSE, table_reference = FALSE;
+    if (!binding) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
+    AcquireSRWLockExclusive(&publication_lock);
+    if (!binding->enrolled && !binding->terminal_pending) {
+        ReleaseSRWLockExclusive(&publication_lock);
+        return TRUE; /* Nested destruction already consumed this owner. */
+    }
+    table_reference = binding->objects != NULL;
+    if (table_reference)
+        retired = wow_user_window_retire(binding->objects, window,
+            &binding->cleanup, &binding->retired_guest_backing);
+    if (binding->enrolled) {
+        if (GetPropW(window, property_name) == binding)
+            RemovePropW(window, property_name);
+        binding->enrolled = FALSE;
+        property_reference = TRUE;
+    }
+    binding->terminal_pending = !retired;
+    if (retired) {
+        binding->objects = NULL;
+        binding->cleanup.thread = NULL;
+        wow_class_words_window_association(binding->class_words, FALSE);
+    }
+    ReleaseSRWLockExclusive(&publication_lock);
+    if (retired && table_reference) wow_window_words_release(binding);
+    if (property_reference) wow_window_words_release(binding);
+    return retired;
+}
+
+BOOL WINAPI wow_window_words_collect_retired(wow_user_object_table *objects)
+{
+    ULONG i;
+    BOOL complete = TRUE;
+    if (!objects) return TRUE;
+    for (i = 1u; i <= objects->last_handle; ++i) {
+        wow_window_words_binding *binding = NULL;
+        HWND window = NULL;
+        AcquireSRWLockShared(&publication_lock);
+        if (objects->entries[i].bType == TYPE_WINDOW) {
+            wow_cleanup_window *view = objects->entries[i].phead;
+            if (view && view->storage && view->storage->terminal_pending) {
+                binding = view->storage;
+                window = objects->windows[i];
+                InterlockedIncrement(&binding->references);
+            }
+        }
+        ReleaseSRWLockShared(&publication_lock);
+        if (binding) {
+            if (!wow_window_words_terminal(window, binding)) complete = FALSE;
+            wow_window_words_release(binding);
+        }
+    }
+    return complete;
+}
+
+static BOOL dispatch_bound(HWND window, UINT message, WPARAM wp,
+    LPARAM lp, DWORD procedure, wow_window_callback callback, LONG *result,
+    BOOL terminal_owner)
 {
     wow_window_words_binding *binding;
     wow_window_dispatch_view view;
@@ -337,6 +402,8 @@ BOOL WINAPI wow_window_dispatch_bound(HWND window, UINT message, WPARAM wp,
         __try {
             *result = DispatchClientMessage(&view, message, wp, lp, procedure);
         } __finally {
+            if (terminal_owner && message == WM_NCDESTROY)
+                (void)wow_window_words_terminal(window, binding);
             wow_window_words_release(binding);
         }
         return TRUE;
@@ -368,6 +435,8 @@ BOOL WINAPI wow_window_dispatch_bound(HWND window, UINT message, WPARAM wp,
         }
         *result = DispatchClientMessage(&view, message, wp, lp, procedure);
     } __finally {
+        if (terminal_owner && message == WM_NCDESTROY)
+            (void)wow_window_words_terminal(window, binding);
         if (callback_published)
             (void)mvdm_softpc_wow_page_domain_restore_callback(saved_callback);
         wow_user_borrow_leave(&scope);
@@ -375,6 +444,12 @@ BOOL WINAPI wow_window_dispatch_bound(HWND window, UINT message, WPARAM wp,
         wow_window_words_release(binding);
     }
     return TRUE;
+}
+
+BOOL WINAPI wow_window_dispatch_bound(HWND window, UINT message, WPARAM wp,
+    LPARAM lp, DWORD procedure, wow_window_callback callback, LONG *result)
+{
+    return dispatch_bound(window, message, wp, lp, procedure, callback, result, FALSE);
 }
 
 BOOL WINAPI wow_window_procedure_read(HWND window, DWORD *procedure)
@@ -485,11 +560,13 @@ LRESULT CALLBACK wow_window_native_proc(HWND window, UINT message, WPARAM wp, LP
         if ((message == WM_NCCREATE || message == WM_CREATE) &&
                 !wow_window_creation_menu(window, (CREATESTRUCTA *)lp))
             __leave;
-        wow_window_dispatch_bound(window, message, wp, lp,
+        dispatch_bound(window, message, wp, lp,
             (DWORD)InterlockedCompareExchange((LONG *)&binding->cleanup.lpfnWndProc, 0, 0),
-            binding->callback, &result);
+            binding->callback, &result, TRUE);
     } __finally {
-        if (message == WM_NCDESTROY) wow_window_words_detach_if(window, binding);
+        /* Also cover denied callback entry. The table retains any deferred
+         * withdrawal; normal dispatch already retired before task leave. */
+        if (message == WM_NCDESTROY) (void)wow_window_words_terminal(window, binding);
         wow_window_words_release(binding);
     }
     /* Default-off production witness: observe the original dispatch result

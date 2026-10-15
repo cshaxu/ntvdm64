@@ -176,6 +176,7 @@ typedef struct mvdm_softpc_wow_window_borrow {
 } mvdm_softpc_wow_window_borrow;
 static mvdm_softpc_wow_window_borrow *window_borrows;
 static mvdm_softpc_wow_window_borrow **window_borrow_link(ULONG backing);
+static int page_domain_window_referenced(ULONG server);
 static void page_domain_withdraw_window(WORD index, ULONG guest_window,
     mvdm_softpc_wow_window_borrow *borrow, int retained_owner);
 
@@ -755,22 +756,12 @@ int mvdm_softpc_wow_page_domain_clear_client_desktop(void)
     return page_domain_client_desktop(0u, 0u);
 }
 
-static int page_domain_window_info(ULONG guest_window, const WINDOWINFO *info,
-    HWND window)
+static void page_domain_window_fields(ULONG guest_window, const WINDOWINFO *info,
+    LONG control_id)
 {
     const LONG *rect = &info->rcWindow.left;
     const LONG *client = &info->rcClient.left;
     unsigned i;
-    LONG control_id = 0;
-
-    /* Original WND.spmenu is a numeric ID for WS_CHILD, not a MENU pointer.
-     * USER16's local GetMenu returns that ID directly. Keep the native
-     * sample outside guest memory; zero is a valid control ID. */
-    if (info->dwStyle & WS_CHILD) {
-        SetLastError(ERROR_SUCCESS);
-        control_id = GetWindowLongA(window, GWL_ID);
-        if (!control_id && GetLastError() != ERROR_SUCCESS) return 0;
-    }
 
     /* Original rtl/wow.c::_ClientToScreen and _GetClientRect consume a
      * screen-relative WND.rcClient, not GetClientRect's zero-origin result.
@@ -787,6 +778,19 @@ static int page_domain_window_info(ULONG guest_window, const WINDOWINFO *info,
     if (info->dwStyle & WS_CHILD)
         c_sas_storedw(guest_window + MVDM_SOFTPC_WND_MENU_OR_ID,
             (ULONG)control_id);
+}
+
+static int page_domain_window_info(ULONG guest_window, const WINDOWINFO *info,
+    HWND window)
+{
+    LONG control_id = 0;
+    /* Sample native state before the non-failing copied-field commit. */
+    if (info->dwStyle & WS_CHILD) {
+        SetLastError(ERROR_SUCCESS);
+        control_id = GetWindowLongA(window, GWL_ID);
+        if (!control_id && GetLastError() != ERROR_SUCCESS) return 0;
+    }
+    page_domain_window_fields(guest_window, info, control_id);
     return 1;
 }
 
@@ -1206,7 +1210,8 @@ static int release_window_backing(ULONG backing, int retained_owner)
     if (retained_owner) borrow->retained_owner = 0;
     else --borrow->references;
     if (!borrow->references && !borrow->retained_owner) {
-        if (borrow->retired && VdmFreeVirtualMemory(backing) < 0) return 1;
+        if (borrow->retired && (page_domain_window_referenced(backing + domain.client_delta) ||
+                VdmFreeVirtualMemory(backing) < 0)) return 1;
         *link = borrow->next;
         HeapFree(GetProcessHeap(), 0, borrow);
     }
@@ -1219,7 +1224,8 @@ int mvdm_softpc_wow_page_domain_collect_retired_windows(void)
     int complete = 1;
     if (!page_domain_menu_context()) return 0;
     for (link = &window_borrows; (borrow = *link) != NULL;) {
-        if (!borrow->retired || borrow->references || borrow->retained_owner) {
+        if (!borrow->retired || borrow->references || borrow->retained_owner ||
+                page_domain_window_referenced(borrow->backing + domain.client_delta)) {
             link = &borrow->next;
             continue;
         }
@@ -1271,6 +1277,19 @@ int mvdm_softpc_wow_page_domain_exchange_window_word(unsigned long backing,
     return 1;
 }
 
+/* Call-owned preparation, never a persistent handle table. Existing WNDs
+ * retain their backing; fresh generations remain unpublished until commit. */
+typedef struct page_domain_window_update {
+    ULONG backing, class_server;
+    WINDOWINFO info;
+    LONG control_id;
+    int fresh;
+} page_domain_window_update;
+
+static int page_domain_replace_window_links(ULONG count,
+    const mvdm_softpc_wow_window_links *links, ULONG retired_count,
+    const ULONG *retired, const page_domain_window_update *updates);
+
 int mvdm_softpc_wow_page_domain_publish_window_links(ULONG count,
     const mvdm_softpc_wow_window_links *links)
 {
@@ -1281,9 +1300,18 @@ int mvdm_softpc_wow_page_domain_replace_window_links(ULONG count,
     const mvdm_softpc_wow_window_links *links, ULONG retired_count,
     const ULONG *retired)
 {
+    return page_domain_replace_window_links(count, links, retired_count,
+        retired, NULL);
+}
+
+static int page_domain_replace_window_links(ULONG count,
+    const mvdm_softpc_wow_window_links *links, ULONG retired_count,
+    const ULONG *retired, const page_domain_window_update *updates)
+{
     ULONG i, j, *resolved = NULL;
     /* These are call-local validation indexes, not another object registry. */
-    BYTE *updated = NULL, *withdrawn = NULL;
+    ULONG *updated = NULL;
+    BYTE *withdrawn = NULL;
     mvdm_softpc_wow_window_borrow *prepared = NULL, *borrow;
     int result = 0;
     if (!page_domain_menu_context() || !count || !links ||
@@ -1295,7 +1323,7 @@ int mvdm_softpc_wow_page_domain_replace_window_links(ULONG count,
      * stale/unpublished identity leaves every previous edge unchanged. */
     resolved = HeapAlloc(GetProcessHeap(), 0, count * 5u * sizeof(ULONG));
     updated = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
-        MVDM_SOFTPC_HANDLE_ENTRY_COUNT);
+        MVDM_SOFTPC_HANDLE_ENTRY_COUNT * sizeof(*updated));
     withdrawn = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
         MVDM_SOFTPC_HANDLE_ENTRY_COUNT);
     if (!resolved || !updated || !withdrawn) goto done;
@@ -1319,18 +1347,29 @@ int mvdm_softpc_wow_page_domain_replace_window_links(ULONG count,
         }
     }
     for (i = 0; i < count; ++i) {
-        ULONG identities[5];
         if (updated[LOWORD(links[i].window)]) goto done;
-        updated[LOWORD(links[i].window)] = 1;
+        updated[LOWORD(links[i].window)] = i + 1u;
+    }
+    if (updates) for (i = 0; i < retired_count; ++i) {
+        ULONG row = updated[LOWORD(retired[i])];
+        if (row && links[row - 1u].window == retired[i]) goto done;
+    }
+    for (i = 0; i < count; ++i) {
+        ULONG identities[5];
         identities[0] = links[i].window;
         identities[1] = links[i].next;
         identities[2] = links[i].parent;
         identities[3] = links[i].child;
         identities[4] = links[i].owner;
         for (j = 0; j < 5u; ++j) {
+            ULONG row = updated[LOWORD(identities[j])];
             ULONG client = identities[j] ? page_domain_window_lookup(identities[j]) : 0u;
+            int replacement = updates && row &&
+                links[row - 1u].window == identities[j];
+            if (replacement) client = updates[row - 1u].backing;
             if (((!j || identities[j]) && !client) ||
-                    (identities[j] && withdrawn[LOWORD(identities[j])])) goto done;
+                    (identities[j] && withdrawn[LOWORD(identities[j])] &&
+                     !replacement)) goto done;
             resolved[i * 5u + j] = client ? client + domain.client_delta : 0u;
         }
     }
@@ -1371,6 +1410,13 @@ int mvdm_softpc_wow_page_domain_replace_window_links(ULONG count,
         ULONG client = page_domain_window_lookup(retired[i]);
         page_domain_withdraw_window(LOWORD(retired[i]), client,
             *window_borrow_link(client), 0);
+    }
+    if (updates) for (i = 0; i < count; ++i) {
+        const page_domain_window_update *update = &updates[i];
+        if (update->fresh)
+            page_domain_commit_window(LOWORD(links[i].window), update->backing, 1u, 0u);
+        c_sas_storedw(update->backing + MVDM_SOFTPC_WND_CLASS, update->class_server);
+        page_domain_window_fields(update->backing, &update->info, update->control_id);
     }
     result = 1;
 done:
@@ -1444,8 +1490,12 @@ int mvdm_softpc_wow_page_domain_retire_handle(unsigned short index,
     guest_window = domain.guest_windows[index];
     if (!guest_window) return 0;
     borrow = *window_borrow_link(guest_window);
-    /* Never discard backing still reachable through a published WND. */
-    if (page_domain_window_referenced(guest_window + domain.client_delta)) return 0;
+    /* Terminal WW ownership can withdraw its identity while copied incoming
+     * links still retain backing, just as original USER locks delay physical
+     * destruction. The next relationship commit removes those stale links.
+     * Unowned retirement cannot silently acquire that terminal authority. */
+    if (!retained_backing &&
+            page_domain_window_referenced(guest_window + domain.client_delta)) return 0;
     if (retained_backing && !borrow) {
         borrow = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, sizeof(*borrow));
         if (!borrow) return 0;
@@ -1621,6 +1671,113 @@ int mvdm_softpc_wow_page_domain_observe_window(unsigned long window,
         return 0;
     }
     return 1;
+}
+
+/* Native USER remains the relationship owner. All queries and allocations
+ * precede copied publication, including stale-generation withdrawal. */
+int mvdm_softpc_wow_page_domain_project_window_graph(ULONG count,
+    const mvdm_softpc_wow_window_links *links,
+    const mvdm_softpc_wow_window_descriptor *descriptors)
+{
+    page_domain_window_update *updates = NULL;
+    ULONG *retired = NULL, retired_count = 0, i;
+    int result = 0;
+    DWORD error, saved = GetLastError();
+    if (!page_domain_menu_context() || !count || !links || !descriptors ||
+            count >= MVDM_SOFTPC_HANDLE_ENTRY_COUNT) return 0;
+    updates = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, count * sizeof(*updates));
+    retired = HeapAlloc(GetProcessHeap(), 0, MVDM_SOFTPC_HANDLE_ENTRY_COUNT * sizeof(*retired));
+    if (!updates || !retired) goto done;
+    for (i = 0; i < count; ++i) {
+        const mvdm_softpc_wow_window_descriptor *descriptor = &descriptors[i];
+        page_domain_window_update *update = &updates[i];
+        ULONG window = links[i].window, existing;
+        WORD index = LOWORD(window);
+        mvdm_softpc_wow_class_allocation *cls;
+        if (!index || index == 0xffffu || !descriptor->atom ||
+                !descriptor->name_bytes || descriptor->name_bytes > sizeof(descriptor->name) ||
+                descriptor->name[descriptor->name_bytes - 1u]) goto done;
+        update->info.cbSize = sizeof(update->info);
+        if (!GetWindowInfo((HWND)(ULONG_PTR)window, &update->info) ||
+                update->info.atomWindowType != descriptor->atom) goto done;
+        existing = window == domain.desktop_handle ?
+            domain.guest_desktop_window : domain.guest_windows[index];
+        if (existing && c_sas_dw_at(existing + MVDM_SOFTPC_WND_HEAD_HANDLE) != window) {
+            cls = page_domain_class_allocation(c_sas_dw_at(existing + MVDM_SOFTPC_WND_CLASS));
+            if (!cls || !cls->observed ||
+                    IsWindow((HWND)(ULONG_PTR)c_sas_dw_at(existing + MVDM_SOFTPC_WND_HEAD_HANDLE)))
+                goto done;
+            existing = 0; /* Old backing stays published until commit. */
+        }
+        if (existing) {
+            update->backing = mvdm_softpc_wow_page_domain_borrow_window(window);
+            if (!update->backing) goto done;
+            update->class_server = c_sas_dw_at(existing + MVDM_SOFTPC_WND_CLASS);
+        }
+        if (!update->class_server) {
+            update->class_server = mvdm_softpc_wow_page_domain_publish_named_class(
+                descriptor->atom, 0u, 0u, 0u, 0u, 0u, descriptor->class_style,
+                0u, descriptor->window_extra, 0u, descriptor->name, descriptor->name_bytes);
+            if (!update->class_server) goto done;
+            cls = page_domain_class_allocation(update->class_server);
+            cls->observed = 1;
+        }
+        if (!existing) {
+            update->fresh = 1;
+            update->backing = page_domain_prepare_window(window,
+                (HWND)(ULONG_PTR)window, update->class_server, NULL, &update->info);
+            if (!update->backing) goto done;
+        }
+    }
+    /* Snapshot dead observations without changing their publication. Managed
+     * windows can only be withdrawn by their terminal ownership boundary. */
+    for (i = 1u; i < MVDM_SOFTPC_HANDLE_ENTRY_COUNT - 1u; ++i) {
+        ULONG backing = domain.guest_windows[i], window;
+        mvdm_softpc_wow_class_allocation *cls;
+        if (!backing) continue;
+        cls = page_domain_class_allocation(c_sas_dw_at(backing + MVDM_SOFTPC_WND_CLASS));
+        if (!cls || !cls->observed) continue;
+        window = c_sas_dw_at(backing + MVDM_SOFTPC_WND_HEAD_HANDLE);
+        if (!IsWindow((HWND)(ULONG_PTR)window)) retired[retired_count++] = window;
+    }
+    /* Revalidate after preparation. A public snapshot detects observed
+     * races; it never claims to hold native USER's desktop lock. */
+    for (i = 0; i < count; ++i) {
+        HWND window = (HWND)(ULONG_PTR)links[i].window;
+        page_domain_window_update *update = &updates[i];
+        if (!GetWindowInfo(window, &update->info) ||
+                update->info.atomWindowType != descriptors[i].atom ||
+                (ULONG)(ULONG_PTR)GetWindow(window, GW_CHILD) != links[i].child)
+            goto done;
+        if (links[i].window == domain.desktop_handle) {
+            if (links[i].next || links[i].parent || links[i].owner) goto done;
+        } else if ((ULONG)(ULONG_PTR)GetWindow(window, GW_HWNDNEXT) != links[i].next ||
+                (ULONG)(ULONG_PTR)GetAncestor(window, GA_PARENT) != links[i].parent ||
+                (ULONG)(ULONG_PTR)GetWindow(window, GW_OWNER) != links[i].owner)
+            goto done;
+        if (update->info.dwStyle & WS_CHILD) {
+            SetLastError(ERROR_SUCCESS);
+            update->control_id = GetWindowLongA(window, GWL_ID);
+            if (!update->control_id && GetLastError() != ERROR_SUCCESS) goto done;
+        }
+    }
+    result = page_domain_replace_window_links(count, links, retired_count, retired, updates);
+done:
+    error = result ? saved : GetLastError();
+    if (updates) {
+        for (i = 0; i < count; ++i) if (updates[i].backing) {
+            if (!result && updates[i].fresh)
+                (*window_borrow_link(updates[i].backing))->retired = 1;
+            (void)mvdm_softpc_wow_page_domain_release_window(updates[i].backing);
+        }
+        HeapFree(GetProcessHeap(), 0, updates);
+    }
+    /* Failure to physically free does not undo a completed logical commit.
+     * P3's domain records retain that obligation for subsequent collection. */
+    (void)mvdm_softpc_wow_page_domain_collect_observed_classes();
+    if (retired) HeapFree(GetProcessHeap(), 0, retired);
+    SetLastError(error);
+    return result;
 }
 
 int mvdm_softpc_wow_page_domain_forget_observed_window(unsigned long window)

@@ -60,7 +60,7 @@ static void rollback_window(wow_dialog_creation *creation)
             release_creation(property);
         }
         if (creation->borrow)
-            (void)wow_window_words_detach_if(creation->window,
+            (void)wow_window_words_terminal(creation->window,
                 creation->borrow);
     }
     creation->window = NULL;
@@ -224,7 +224,7 @@ static INT_PTR CALLBACK dialog_proc(HWND window, UINT message, WPARAM wp,
                 if (property) release_creation(property);
             }
             if (creation->borrow)
-                (void)wow_window_words_detach_if(window, creation->borrow);
+                (void)wow_window_words_terminal(window, creation->borrow);
             creation->window = NULL;
             wow_window_words_release(creation->borrow);
             creation->borrow = NULL;
