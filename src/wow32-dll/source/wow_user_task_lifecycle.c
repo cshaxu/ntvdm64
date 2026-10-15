@@ -3,6 +3,7 @@
 #include "wow_class_words_binding.h"
 #include "wow_standard_class_bindings.h"
 #include "wow_window_words_binding.h"
+#include "wow_user_object_bindings.h"
 #include "wow_menu_client_bindings.h"
 #include "wow_task_profile_bindings.h"
 #include "wow_user_session_binding.h"
@@ -825,7 +826,8 @@ BOOL WINAPI wow_user_native_call_end(wow_user_native_call *call)
         return FALSE;
     if (!call->receiver_id) {
         call->binding = NULL;
-        published = wow_menu_client_refresh_all(binding->thread->ppi);
+        published = wow_user_window_refresh_graph(NULL) &&
+            wow_menu_client_refresh_all(binding->thread->ppi);
         error = GetLastError();
         if (!call->held && !wow_user_runtime_leave(binding)) return FALSE;
         SetLastError(error);
@@ -843,7 +845,8 @@ BOOL WINAPI wow_user_native_call_end(wow_user_native_call *call)
     }
     sender->psmsSent = call->previous;
     call->binding = NULL;
-    published = wow_menu_client_refresh_all(sender->ppi);
+    published = wow_user_window_refresh_graph(NULL) &&
+        wow_menu_client_refresh_all(sender->ppi);
     error = GetLastError();
     if (!call->held && !wow_user_runtime_leave(binding)) return FALSE;
     SetLastError(error);
@@ -879,6 +882,8 @@ WOW_NATIVE_CALL(HWND, SetFocus, (HWND w), (w), NULL)
 WOW_NATIVE_CALL(BOOL, DestroyWindow, (HWND w), (w), FALSE)
 WOW_NATIVE_CALL(HWND, SetParent, (HWND w, HWND parent), (w, parent), NULL)
 WOW_NATIVE_CALL(BOOL, SetWindowPlacement, (HWND w, const WINDOWPLACEMENT *placement), (w, placement), FALSE)
+WOW_NATIVE_CALL(LONG, SetWindowLongA, (HWND w, int index, LONG value), (w, index, value), 0)
+WOW_NATIVE_CALL_TARGET(BOOL, EndDeferWindowPos, (HDWP positions), (positions), FALSE, NULL)
 WOW_NATIVE_CALL(int, GetWindowTextA, (HWND w, LPSTR text, int count), (w, text, count), 0)
 WOW_NATIVE_CALL(int, GetWindowTextLengthA, (HWND w), (w), 0)
 WOW_NATIVE_CALL(BOOL, SetWindowTextA, (HWND w, LPCSTR text), (w, text), FALSE)

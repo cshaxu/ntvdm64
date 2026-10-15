@@ -1,6 +1,9 @@
 #include "wow_user_object_bindings.h"
 #include "wow_window_dispatch_bindings.h"
 #include "wow_class_lookup_bindings.h"
+#include "wow_user_runtime.h"
+#include "wow_task_order_bindings.h"
+#include "wow_window_words_binding.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 
 /* Original query reads shared publication, never the cleanup ownership table.
@@ -162,6 +165,47 @@ fail:
     HeapFree(GetProcessHeap(), 0, seen);
     SetLastError(error);
     return FALSE;
+}
+
+BOOL WINAPI wow_user_window_refresh_graph(HWND callback_window)
+{
+    wow_user_runtime_thread *binding;
+    wow_user_object_table *objects;
+    HWND *roots, desktop;
+    ULONG count = 0, i;
+    BOOL result;
+    DWORD error, saved = GetLastError();
+    /* Native-only callers outside a guest page domain have no copied view.
+     * An active domain, however, must have its real process owner. */
+    if (!mvdm_softpc_wow_page_domain_active()) return TRUE;
+    binding = wow_user_runtime_current();
+    if (!binding || !binding->thread || !binding->thread->ppi ||
+            !(objects = binding->thread->ppi->objects) ||
+            objects->last_handle >= 0x10000u) {
+        SetLastError(ERROR_INVALID_STATE); return FALSE;
+    }
+    if (!wow_window_words_collect_retired(objects)) return FALSE;
+    roots = HeapAlloc(GetProcessHeap(), 0,
+        (objects->last_handle + 3u) * sizeof(*roots));
+    if (!roots) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return FALSE; }
+    desktop = GetDesktopWindow();
+    roots[count++] = desktop;
+    if (callback_window && callback_window != desktop)
+        roots[count++] = callback_window;
+    /* createw.c links the window after WM_NCCREATE, and unlinks it before
+     * WM_NCDESTROY. Preserve those native intermediate states rather than
+     * inventing an incoming parent edge just to make the window reachable. */
+    for (i = 1; i <= objects->last_handle; ++i) {
+        HWND window = objects->windows[i];
+        if (objects->entries[i].bType != TYPE_WINDOW || !window ||
+                window == desktop || window == callback_window) continue;
+        roots[count++] = window;
+    }
+    result = wow_user_window_project_graph(roots, count);
+    error = result ? saved : GetLastError();
+    HeapFree(GetProcessHeap(), 0, roots);
+    SetLastError(error);
+    return result;
 }
 
 BOOL WINAPI wow_user_window_project_graph(const HWND *roots, ULONG root_count)

@@ -422,6 +422,7 @@ static BOOL dispatch_bound(HWND window, UINT message, WPARAM wp,
          * This is not a replacement for direct-access/callback scope binding. */
         if (!wow_window_words_refresh(window, binding)) return FALSE;
         if (binding->objects) {
+            if (!wow_user_window_refresh_graph(window)) return FALSE;
             if (!mvdm_softpc_wow_page_domain_callback_window(
                     (unsigned long)(ULONG_PTR)window, saved_callback)) return FALSE;
             callback_published = TRUE;
@@ -439,9 +440,12 @@ static BOOL dispatch_bound(HWND window, UINT message, WPARAM wp,
             (void)wow_window_words_terminal(window, binding);
         if (callback_published)
             (void)mvdm_softpc_wow_page_domain_restore_callback(saved_callback);
+        /* Release this WND owner while the alias/task scope is still live.
+         * Its final retained backing can then be reclaimed by scope leave,
+         * including the sampled CLS it kept alive during nested destruction. */
+        wow_window_words_release(binding);
         wow_user_borrow_leave(&scope);
         (void)wow_task_callback_leave(&task_scope);
-        wow_window_words_release(binding);
     }
     return TRUE;
 }

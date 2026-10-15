@@ -50,13 +50,15 @@ gaps and tests accept newly connected code, not select successive patches.
 Proven-composable original logic must replace its autonomous counterpart in
 the same repair, deleting that counterpart rather than deferring migration.
 Owner requires grouped implementation/testing and delivery before more wiring.
-S2 P3 is e15193485. P4 freezes snapshot preparation and retained terminal
-ownership before further wiring. Eleven graph-batch-r1 cases and the final
-delivery-r4 terminal-failure fixture pass. Both DOS17 routes and WINMINE
-gameplay/exit in three modes pass; the tested13-image set is published and
-hash-verified at both locations. WRITE retains visible main/document/page-info
-windows, not verified editing/saving; SOL still reports Out of memory.
-Full graph wiring and same-slot reuse acceptance remain open; P4 is not S2 closure.
+S2 P4 is cef8ce2cb. P5 connects window snapshots at callback/native-return
+boundaries, including deferred positioning and native window-long changes;
+final callback release now drains retained WND and sampled CLS together.
+Eleven graph-batch-r5 cases and the delivery-r5 terminal fixture pass. Both
+DOS17 routes and WINMINE gameplay/exit in three modes pass; the tested13-image
+set is published and hash-verified at both locations. WRITE retains visible
+main/document/page-info windows, not verified editing/saving; SOL still reports
+Out of memory. Remaining mutation inventory and real same-slot reuse acceptance
+stay open; this is a grouped P baseline, not S2 closure. Preserve assets/winnt.zip.
 
 ## Active Packet
 
@@ -380,14 +382,14 @@ ownership. OPENNT-HOST-070 replaces one table-entry-address expression;
 original type/uniqueness/fallback logic remains. Strict WOWEXEC ownership
 lookup stays separate. Native desktop identity, retained observed/managed WW
 aliases and paired host/guest word updates pass the grouped foundation tests.
-Graph projection remains prepared, not production callback/return wiring.
+P5 connects the prepared graph at the reviewed callback/native-return boundaries.
 
-S2 P4 is published to assets/release and O:/winnt/system32 with matching
-tested13-image hashes. Only NTVDM/WOW32 change from P3; delivery-r4 retains
-coherent P3 recovery copies. Prepared snapshots commit together; failed terminal
-withdrawal retains its existing table owner for retry. Full relationship
-integration remains unconnected. Original WINSPOOL and all guest images are
-unchanged. The indexed window-graph evidence records tests and remaining gaps.
+S2 P5 is published to assets/release and O:/winnt/system32 with matching
+tested13-image hashes. Only NTVDM/WOW32 change from P4; delivery-r5 retains
+coherent P4 recovery copies. Callback/native-return graph synchronization and
+paired WND/CLS reclamation pass the grouped tests. Original WINSPOOL and all
+guest images are unchanged; no additional mirror diff. The indexed window-graph
+evidence records tests and remaining integration/acceptance gaps.
 S9 P1 is266067264 and P2 is4f8c181487; S10 P1 is e046ee3d7;
 owner-accepted S11 P1 is b39ceb7e6, acceptance record cbd0f7832.
 The preceding T445 final closure changed documentation only; T446 S1 updates

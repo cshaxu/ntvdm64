@@ -120,10 +120,11 @@ BOOL WINAPI wow_user_borrow_leave(wow_user_borrow_scope *scope)
     runtime = wow_user_runtime_current();
     if (runtime && runtime->thread && runtime->thread->ppi)
         reclaimed = wow_window_words_collect_retired(runtime->thread->ppi->objects);
-    /* Do not rescan or mutate native window relationships here. Only drain
-     * already-retired allocations after releasing this scope's aliases. */
+    /* Do not rescan or mutate native window relationships here. Drain
+     * retired WND allocations and their now-unreferenced sampled CLS after
+     * releasing this scope's aliases; the existing collector owns both. */
     if (mvdm_softpc_wow_page_domain_active() &&
-            !mvdm_softpc_wow_page_domain_collect_retired_windows())
+            !mvdm_softpc_wow_page_domain_collect_observed_classes())
         reclaimed = FALSE;
     if (!reclaimed) {
         SetLastError(ERROR_INVALID_STATE);

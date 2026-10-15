@@ -70,10 +70,10 @@ LONG WINAPI wow_user_set_window_longA(HWND window, int index, LONG value)
             SetLastError(ERROR_INVALID_STATE); return 0;
         }
         SetLastError(error);
-        return SetWindowLongA(window, index, value);
+        return wow_native_SetWindowLongA(window, index, value);
     }
     if (index > GWL_WOWDWORD1 || index < GWL_WOWDWORD3)
-        return SetWindowLongA(window, index, value);
+        return wow_native_SetWindowLongA(window, index, value);
     /* Original private branches store the word but leave dwOld uninitialized.
      * Selected SETWL callers discard it. Return the actual previous word,
      * never reproduce an indeterminate native return register. */

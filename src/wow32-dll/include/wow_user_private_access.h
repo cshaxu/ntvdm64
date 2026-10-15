@@ -23,6 +23,8 @@ HWND WINAPI wow_native_SetFocus(HWND w);
 BOOL WINAPI wow_native_DestroyWindow(HWND w);
 HWND WINAPI wow_native_SetParent(HWND w, HWND parent);
 BOOL WINAPI wow_native_SetWindowPlacement(HWND w, const WINDOWPLACEMENT *placement);
+LONG WINAPI wow_native_SetWindowLongA(HWND w, int index, LONG value);
+BOOL WINAPI wow_native_EndDeferWindowPos(HDWP positions);
 int WINAPI wow_native_GetWindowTextA(HWND w, LPSTR text, int count);
 int WINAPI wow_native_GetWindowTextLengthA(HWND w);
 BOOL WINAPI wow_native_SetWindowTextA(HWND w, LPCSTR text);
@@ -58,6 +60,7 @@ LRESULT WINAPI wow_native_DispatchMessageA(const MSG *);
 #define DestroyWindow wow_native_DestroyWindow
 #define SetParent wow_native_SetParent
 #define SetWindowPlacement wow_native_SetWindowPlacement
+#define EndDeferWindowPos wow_native_EndDeferWindowPos
 #define GetWindowTextA wow_native_GetWindowTextA
 #define GetWindowTextLengthA wow_native_GetWindowTextLengthA
 #define SetWindowTextA wow_native_SetWindowTextA

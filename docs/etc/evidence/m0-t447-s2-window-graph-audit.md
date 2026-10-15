@@ -2534,3 +2534,167 @@ and the unchanged original-owner boundaries. Remaining production graph entry/
 return synchronization and real same-slot-generation reuse remain explicit
 next work, not hidden P4 completion claims. Final governance/link/diff and
 three-location PE/hash checks precede the reviewed main commit and push.
+
+### Post-P4 source boundary review: creation roots and failure semantics
+
+Verified baseline is cef8ce2cb, matching origin/main; only the unrelated ZIP
+was dirty before this review. No new experiment, compilation or production
+activation is used to discover the following gaps.
+
+Pinned original createw.c sends WM_NCCREATE at841, calls LinkWindow at945,
+then sends WM_NCCALCSIZE at957 and WM_CREATE at963. Its earlier xxxAdjustSize
+can send WM_GETMINMAXINFO before WM_NCCREATE. The failure path explicitly
+preserves owner until WM_NCDESTROY because clients call GetParent in callbacks.
+Consequently a desktop-root-only snapshot is insufficient during creation or
+terminal dispatch: an enrolled, still-live callback window can be unlinked.
+Use the existing managed object-table identities as additional sample roots,
+alongside the desktop and explicit callback HWND where applicable. Do not
+manufacture a parent-child edge to force an unlinked window into the tree.
+The native sample must retain the actual intermediate state. Dead pending
+terminal owners are cleanup obligations, not native query roots.
+
+Original rtl/wow.c GetPrevPwnd/_GetWindow (493--604) follows parent->child and
+sibling links, while _GetParent (616ff) selects child-parent versus popup-owner
+and preserves tiled-window behavior. Retain these readers and their rebase
+rules; neither filtering external siblings nor replacing them with host query
+thunks is an equivalent repair. The existing sampler already supplies their
+four distinct fields; production activation must supply complete roots.
+
+| Boundary | Required synchronization and ownership |
+| --- | --- |
+| Tagged dispatch_bound | After original task entry and bounded alias entry, before callback-window publication/DispatchClientMessage; include the actual callback window, not just desktop children. Keep native-only forwarding outside WOW admission. |
+| dialog_return_hook/W32InitDlg and dialog_proc | Same pre-guest synchronization at both existing entrances; W32InitDlg has private WW reads even though W32DialogFunc owns CallBack16. Preserve terminal-before-task-leave ordering. |
+| WU32StdHookProc wrapper | Synchronize after the existing task/alias entry but before original hook conversion and guest-stack allocation. Do not decode individual hook message layouts or replace original stubs. |
+| wow_user_native_call_end | Restore original sender execution ownership first; synchronize copied window state before menu refresh/retirement and before releasing the caller's USER protection. Cover both same-task and resumed cross-task branches. |
+| Creation veto and WM_NCDESTROY | P4 retains logical withdrawal responsibility. Subsequent successful publication must remove stale incoming links before guest readers resume; physical retention alone is not that publication. |
+| wow_user_invoke_thunk | Audit direct mutations not already enclosed by native-call/creation bindings before adding a blanket return synchronizer. This wrapper has no universal BOOL failure result. |
+
+The last distinction is a source-proved integration constraint, not permission
+to ignore a failed snapshot. Original wow32.c W32TryCall initializes its API
+result to zero and delegates exceptions to W32Exception; the latter's Ignore
+choice can fail the API and continue, while Close sets RET_FORCETASKEXIT.
+Therefore inventing a generic exception after an already successful mutating
+API neither rolls back the operation nor guarantees that stale guest readers
+cannot resume. Likewise, returning zero for every thunk would corrupt varied
+API return contracts. Do not add either shortcut. Complete the actual mutation/
+callback boundary inventory and retain each source-defined error owner.
+
+The next integrated fixture group must assert early unlinked creation,
+WM_CREATE linkage, callback-time owner visibility, native reparent/z-order
+mutation, nested destruction, failed entry, veto, exception unwind, pending
+terminal collection and same-slot generation replacement. Compare native
+query state with the actual CCPU-backed fields at each boundary, not merely
+the final window count. P4's published artifacts remain unchanged while this
+source-defined activation/failure contract is completed.
+
+Mutation sweep found two concrete omissions in the existing native-call
+closure, not a speculative need to intercept every thunk:
+
+- Original wuwind.c WU32EndDeferWindowPos (1088ff) calls EndDeferWindowPos
+  directly. wow_user_private_access.h has no redirect and the lifecycle
+  native-call group has no wrapper. Begin/Defer only construct the batch;
+  End applies the geometry/z-order mutations and is the required callout/
+  return boundary. Reuse the existing begin/end adapter with no target HWND,
+  preserving the original HDWP conversion and BOOL result.
+- Original WU32SetWindowLong and the word-sized setter's negative-index
+  branches reach wow_user_set_window_longA, but its public-index branches
+  return native SetWindowLongA directly. Style, ExStyle, child ID and owner
+  changes therefore bypass the existing native return synchronization.
+  Keep logical WNDPROC and private WOW-word handling exactly where it is;
+  wrap only the already-native operation through the existing task callout.
+  Do not add per-application tests, alter original selector conversion or
+  route positive extra-byte storage through a new policy engine.
+
+These bindings belong to the same pending graph activation group. Their
+source owners and API results provide explicit error boundaries, unlike a
+blanket arbitrary-thunk return override. Check the remaining original USER
+mutation imports against the actual redirect selection before claiming the
+inventory complete. No new runtime implementation is claimed by this audit.
+
+### Post-P4 activation candidate and delivery gate
+
+Owner requests a compiled, exercised, published, committed and pushed grouped
+baseline before further recovery. The candidate connects the existing complete
+snapshot at tagged window callbacks, dialog initialization/dispatch, the common
+original Hook entry and both native-call return branches. Roots comprise the
+desktop, explicit callback HWND and existing managed-table windows; no second
+registry, foreign-window subclass or invented parent link is introduced.
+EndDeferWindowPos and the already-native SetWindowLongA branches join the
+existing callout/return owner. Logical WNDPROC and private WOW words are unchanged.
+
+The first graph-batch-r2 build passed, but three CCPU cases stopped at the
+native menu test. graph-focus-r1's refined failure label identifies direct
+fixture retirement, not menu data corruption: it used a NULL retained owner
+despite newly published incoming links. The fixture now consumes the same
+retained-backing contract as production. Graph tests run on an unswitched
+private desktop. Fixture native destruction while bound now crosses the
+production native-return wrapper; bypassing it left stale incoming references.
+Allocator assertions remain exact, not relaxed or removed.
+
+graph-focus-r4 then passed menu/creation, all nine native class projections,
+observed promotion/retirement and the new child-ID/reparent/deferred-geometry
+checks, but found final nested-callback reclamation incomplete. Source review
+confirms the last dispatch-owned WW was released after alias scope leave, and
+that scope collected retired WND but not their now-unreferenced sampled CLS.
+Release dispatch's reference inside its existing scope and use the existing
+observed-class collector (which includes retired-WND collection). Dialog
+dispatch already releases its window borrow before scope leave. Native-only
+dispatch retains its separate, no-WOW-entry branch. One existing worker-local
+collector is added to the private host export selection; rebuild both host
+images. No new lifetime list, guest change or original-source mirror diff.
+
+graph-batch-r3 was cancelled during review; graph-batch-r4 failed linking the
+newly reached collector before its export selection was added. Neither is
+acceptance or published output. graph-batch-r5 is the frozen full build and
+eleven-case acceptance run. The tests retain native-only forwarding, creation
+veto, exception, denied entry, pending terminal retry and precise allocator
+checks. Actual same-slot USER generation reuse and the remaining direct-reader
+mutation inventory are still open; this bounded baseline is not S2 closure.
+
+### P5 verified baseline
+
+Frozen production build: graph-batch-r5/run.ps1, supervisor PID11852,
+build PID31524, MSVC x86 /MT CCPU40, dependency-selected worker/provider caches
+under build/M0-T445/S6; build exit0 in40.6s. Full group took612.9s, all11
+case exits0: window-borrow, window-reclaim, graph-snapshot, process-retirement,
+dialog-lifecycle, menu-resource, thunk-scope, menu-cleanup, native-send,
+native-nested, task-lifecycle. Entrypoint remains
+tests/observation/verify-wow-task-lifecycle.ps1 with -Case and the two build
+roots; case evidence is beneath build/M0-T447/S2/graph-batch-r5/<case>.
+The empty failures pipeline produces no failures.json; individual exits and
+suite.exit=0, not that file's absence, establish the passing result.
+
+delivery-r5/prepare.ps1 supervisor PID8184 then ran the supplemental terminal
+fixture PID19356 (46.3s, pass), candidate application observation PID33156
+(84.0s), and checks PID29280 (124.6s, pass). Candidate graph-apps-r2/package
+starts from the hash-verified sealed P4 graph-apps-r1/package, replacing only
+the freshly built NTVDM and WOW32; it does not copy the installed O:/winnt
+tree or consume the unrelated modified ZIP. Probes use the existing isolated
+package/desktop ownership and clean only their own processes.
+
+| Gate | Actual result and limit |
+| --- | --- |
+| Graph/native mutation | Child ID91, actual reparented WND.parent and all four deferred-position rectangle coordinates match real CCPU memory. Normal/exception nested destruction, retained-reader removal, retry and exact class/window allocator balances pass. |
+| WINMINE | Main window preserved; Off/Win16/All each pass flag/counter, reset, open cell, WM_CLOSE and launcher completion. |
+| WRITE | MSWRITE_MENU, MSWRITE_DOC and MSWRITE_PAGEINFO remain visible as in P4. This is not editing/saving acceptance. |
+| SOL | Existing Out of memory dialog reproduced, still unresolved; no functionality pass claimed. |
+| DOS | Console17/17 and Window17/17 expected/actual text-gated results match, including interactive and nested COMMAND/MEM/EDIT routes. |
+
+Publication supervisor PID31604 / child22936 exits0. Both assets/release and
+O:/winnt/system32 match the tested thirteen-image set. delivery-r5/publication
+retains coherent P4 backups and verified-manifest.json. No installed project
+process required termination. Changed identities:
+
+- ntvdm.exe:188CAF403E6612B43A5EF60AA21982B4E9F6E25C63125F34562C94560271CAC4.
+- WOW32.DLL:8CE7B2D66C599EE459C4E483719A82898CE49E796D5B5E2E13559778E76D5B98.
+
+The other11 images retain P4 identities. Original WINSPOOL.EXE remains
+E4E787340F124476090ED0F22837D7D7ACAB37FD7BBE49DB46CAE9AC4944D535.
+Original guest/configuration and mirror code are unchanged. Independent
+review checks native-only dispatch exclusion, original task/alias ownership,
+no partial snapshot commit, managed versus observed retirement, final borrow
+release before scope cleanup, original mutation return shapes and private
+collector export linkage. Existing generic-thunk failure/foreign-tree race
+limits are not waived. Full original-reader mutation closure and real native
+same-slot reuse remain future S2 gates. Final governance/link/diff and all
+three-location PE/hash checks precede the reviewed P5 main commit/push.

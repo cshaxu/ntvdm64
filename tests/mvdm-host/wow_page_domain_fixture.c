@@ -89,7 +89,7 @@ static DWORD WINAPI destroy_in_callback(HWND window, UINT message, UINT wp,
                 (ULONG)(ULONG_PTR)GetMenu(window));
             BORROW_CHECK(menu && c_sas_dw_at(menu - delta + 40u) == 1u);
         }
-        BORROW_CHECK(DestroyWindow(window));
+        BORROW_CHECK(wow_native_DestroyWindow(window));
         /* WM_DESTROY/WM_NCDESTROY recursively dispatch through production
          * bindings. Their restoration must preserve this outer borrow. */
         BORROW_CHECK(!IsWindow(window));
@@ -110,7 +110,7 @@ static INT_PTR CALLBACK dialog_cache_callback(HWND window, UINT message,
     BORROW_CHECK(c_sas_dw_at(callback_teb + 0x6cu) == (ULONG)(ULONG_PTR)window);
     BORROW_CHECK(backing && c_sas_dw_at(backing) == (ULONG)(ULONG_PTR)window);
     if (message == WM_APP + 99) {
-        BORROW_CHECK(DestroyWindow(window));
+        BORROW_CHECK(wow_native_DestroyWindow(window));
         BORROW_CHECK(c_sas_dw_at(callback_teb + 0x70u) == backing);
         BORROW_CHECK(c_sas_dw_at(backing) == (ULONG)(ULONG_PTR)window);
         BORROW_CHECK(c_sas_dw_at(backing + 28u) == 0u &&
@@ -139,7 +139,45 @@ static int verify_callback_borrow(ULONG teb)
     task.hTaskWow = 0x4321u;
     runtime.lifecycle = &native_owner;
     if (!wow_user_runtime_bind(&runtime_binding, &runtime, &thread, NULL)) return 0;
+    BORROW_CHECK(wow_user_window_refresh_graph(NULL));
     callback_teb = teb;
+    {
+        HWND first = CreateWindowA("STATIC", "Mutation parent", WS_POPUP,
+            10, 20, 80, 80, NULL, NULL, GetModuleHandle(NULL), NULL);
+        HWND second = CreateWindowA("STATIC", "New parent", WS_POPUP,
+            100, 120, 80, 80, NULL, NULL, GetModuleHandle(NULL), NULL);
+        HWND child = CreateWindowA("STATIC", "Child", WS_CHILD,
+            1, 2, 16, 16, first, (HMENU)71, GetModuleHandle(NULL), NULL);
+        ULONG held = 0, parent = 0, delta = c_sas_dw_at(teb + 0x60u);
+        RECT rect;
+        HDWP positions;
+        unsigned before = borrow_errors;
+        BORROW_CHECK(first && second && child);
+        if (first && second && child) {
+            BORROW_CHECK(wow_user_set_window_longA(child, GWL_ID, 91) == 71);
+            held = mvdm_softpc_wow_page_domain_borrow_window((ULONG)(ULONG_PTR)child);
+            BORROW_CHECK(held && c_sas_dw_at(held + 104u) == 91u);
+            BORROW_CHECK(wow_native_SetParent(child, second) == first);
+            parent = mvdm_softpc_wow_page_domain_borrow_window((ULONG)(ULONG_PTR)second);
+            BORROW_CHECK(parent && held && c_sas_dw_at(held + 24u) == parent + delta);
+            positions = BeginDeferWindowPos(1);
+            if (positions) positions = DeferWindowPos(positions, child, NULL,
+                7, 9, 28, 30, SWP_NOZORDER | SWP_NOACTIVATE);
+            BORROW_CHECK(positions && wow_native_EndDeferWindowPos(positions));
+            BORROW_CHECK(GetWindowRect(child, &rect));
+            BORROW_CHECK(held && c_sas_dw_at(held + 40u) == (ULONG)rect.left &&
+                c_sas_dw_at(held + 44u) == (ULONG)rect.top &&
+                c_sas_dw_at(held + 48u) == (ULONG)rect.right &&
+                c_sas_dw_at(held + 52u) == (ULONG)rect.bottom);
+        }
+        if (held) BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(held));
+        if (parent) BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(parent));
+        if (child) BORROW_CHECK(wow_native_DestroyWindow(child));
+        if (first) BORROW_CHECK(wow_native_DestroyWindow(first));
+        if (second) BORROW_CHECK(wow_native_DestroyWindow(second));
+        fprintf(stderr, "WOW_GRAPH_NATIVE_MUTATION_CCPU errors=%u child_id=1 reparent=1 deferred_geometry=1\n",
+            borrow_errors - before);
+    }
     for (mode = 0; mode < 2; ++mode) {
         HWND window = CreateWindowExA(0, "STATIC", "S2 callback borrow",
             0, 20, 30, 180, 120, NULL, NULL, GetModuleHandle(NULL), NULL);
@@ -482,7 +520,7 @@ static void verify_native_class_creation(wow_class_lookup_context *classes)
                 BORROW_CHECK(wow_window_class_words_value(child) != NULL);
             }
             wow_window_words_release(child);
-            BORROW_CHECK(DestroyWindow(window));
+            BORROW_CHECK(wow_native_DestroyWindow(window));
             BORROW_CHECK(objects.entries[LOWORD(window)].bType == TYPE_FREE);
             BORROW_CHECK(button && !IsWindow(button) &&
                 objects.entries[LOWORD(button)].bType == TYPE_FREE);
@@ -1034,6 +1072,13 @@ static int verify_native_class_projection(ULONG teb)
     unsigned before = borrow_errors, projected = 0;
     classes.client_module = GetModuleHandleW(L"user32.dll");
     verify_desktop_query_projection(teb);
+    {
+        HWND desktop = GetDesktopWindow();
+        /* Prior native menu tests leave observations, not managed owners.
+         * Reconcile those completed native destructions before measuring
+         * this independent class-allocation lifetime. */
+        BORROW_CHECK(wow_user_window_project_graph(&desktop, 1));
+    }
     BORROW_CHECK(VdmQueryFreeVirtualMemory(&free_before, &largest) >= 0);
     BORROW_CHECK(wow_standard_classes_prepare(&classes, class_projection_callback));
     for (entry = classes.pclsPublicList; entry; entry = entry->next) {
@@ -1080,6 +1125,7 @@ static int verify_native_class_projection(ULONG teb)
     BORROW_CHECK(wow_class_words_forget_native(&classes));
     BORROW_CHECK(classes.pclsPublicList == NULL);
     BORROW_CHECK(VdmQueryFreeVirtualMemory(&free_after, &largest) >= 0 && free_after == free_before);
+    fprintf(stderr, "WOW_CLASS_ALLOCATION before=%lu after=%lu\n", free_before, free_after);
     verify_unowned_window_projection(teb);
     verify_observed_window_promotion(teb);
     verify_observed_window_retirement();
@@ -1102,6 +1148,16 @@ static HMENU menu_tracking_other;
 static wow_user_object_table *terminal_menu_objects;
 static wow_cleanup_window *terminal_menu_window;
 static BOOL terminal_menu_failed;
+/* This low-level fixture owns the published WND directly rather than WW.
+ * Match the production terminal owner's retained-backing contract now that
+ * desktop relationships actually reference the published node. */
+static BOOL retire_menu_fixture_window(wow_user_object_table *objects,
+    HWND window, wow_cleanup_window *record)
+{
+    ULONG backing = 0;
+    if (!wow_user_window_retire(objects, window, record, &backing)) return FALSE;
+    return mvdm_softpc_wow_page_domain_release_retained_window(backing);
+}
 
 #ifdef WOW_WINDOW_BORROW_FIXTURE
 static HWND rejected_menu_window;
@@ -1200,8 +1256,8 @@ static LRESULT CALLBACK menu_callout_window(HWND window, UINT message,
         return 0;
     }
     if (message == WM_NCDESTROY && terminal_menu_objects) {
-        if (!wow_user_window_retire(terminal_menu_objects, window,
-                terminal_menu_window, NULL)) terminal_menu_failed = TRUE;
+        if (!retire_menu_fixture_window(terminal_menu_objects, window,
+                terminal_menu_window)) terminal_menu_failed = TRUE;
     }
     return DefWindowProcA(window, message, wp, lp);
 }
@@ -1451,6 +1507,7 @@ static BOOL verify_native_menu_entry(wow_task_order_process *process,
         menu_tracking_other = NULL;
         fprintf(stderr, "WOW_MENU_TRACKING_CCPU cancelled=1 reentered=1 unlocked=1 mutation_published=1 detached_published=1\n");
     }
+    step = "post-tracking-window-menu";
     {
         ULONG wnd = c_sas_dw_at(handles + LOWORD(window) * 16u) - delta;
         ULONG query = c_sas_dw_at(wnd + 104u);
@@ -1463,18 +1520,21 @@ static BOOL verify_native_menu_entry(wow_task_order_process *process,
     }
     /* Mutation wrappers must also preserve an inherited lock on success
      * and a native lookup failure, without changing task ownership. */
+    step = "post-tracking-mutation-lock";
     if (wow_menu_native_CheckMenuItem(alias, 71u, MF_UNCHECKED) == (DWORD)-1 ||
             !binding.exclusive_held ||
             wow_menu_native_CheckMenuItem(alias, 999u, MF_CHECKED) != (DWORD)-1 ||
             !binding.exclusive_held ||
             wow_menu_native_CheckMenuItem(alias, 71u, MF_CHECKED) == (DWORD)-1 ||
             !binding.exclusive_held) goto cleanup;
+    step = "post-tracking-detach";
     if (!wow_menu_native_SetMenu(window, NULL) || !binding.exclusive_held ||
             !wow_user_runtime_leave(&binding)) goto cleanup;
-    if (!wow_user_window_retire(process->objects, window, &window_record, NULL))
+    step = "post-tracking-retirement";
+    if (!retire_menu_fixture_window(process->objects, window, &window_record))
         goto cleanup;
     published = FALSE;
-    DestroyWindow(window);
+    if (!wow_native_DestroyWindow(window)) goto cleanup;
     window = NULL;
     items = c_sas_dw_at(child_client + 56u) - delta;
     step = "delete-submenu-publication-before-retirement";
@@ -1544,9 +1604,9 @@ cleanup:
     if (!result) fprintf(stderr, "WOW_NATIVE_MENU_ENTRY_FAILED step=%s error=%lu\n",
         step, GetLastError());
     if (binding.exclusive_held && !wow_user_runtime_leave(&binding)) result = FALSE;
-    if (published && !wow_user_window_retire(process->objects, window,
-            &window_record, NULL)) result = FALSE;
-    if (window) DestroyWindow(window);
+    if (published && !retire_menu_fixture_window(process->objects, window,
+            &window_record)) result = FALSE;
+    if (window && !wow_native_DestroyWindow(window)) result = FALSE;
     if (window_class.lpszClassName)
         UnregisterClassA(window_class.lpszClassName, window_class.hInstance);
     if (root && IsMenu(root)) DestroyMenu(root);
@@ -2462,7 +2522,7 @@ done:
     return 0;
 }
 
-#ifdef WOW_GRAPH_SNAPSHOT_FIXTURE
+#ifdef WOW_WINDOW_BORROW_FIXTURE
 static DWORD WINAPI run_graph_desktop(void *desktop)
 {
     if (!SetThreadDesktop((HDESK)desktop)) return 2;
@@ -2472,7 +2532,7 @@ static DWORD WINAPI run_graph_desktop(void *desktop)
 
 int main(void)
 {
-#ifdef WOW_GRAPH_SNAPSHOT_FIXTURE
+#ifdef WOW_WINDOW_BORROW_FIXTURE
     WCHAR name[64];
     HDESK desktop;
     HANDLE thread;

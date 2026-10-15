@@ -50,4 +50,8 @@ BOOL WINAPI wow_user_window_sample_graph(const HWND *, ULONG,
  * only if no unchanged published source still points to their backing;
  * managed objects remain exclusively with their terminal owner. */
 BOOL WINAPI wow_user_window_project_graph(const HWND *, ULONG);
+/* Existing execution owner calls this before guest callbacks and after
+ * native mutations. Includes live unlinked creation/terminal windows from
+ * the managed table; does not acquire execution or native USER ownership. */
+BOOL WINAPI wow_user_window_refresh_graph(HWND);
 #endif

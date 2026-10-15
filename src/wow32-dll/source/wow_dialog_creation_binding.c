@@ -8,6 +8,7 @@
 #include "wow_window_creation_binding.h"
 #include "wow_menu_native_bindings.h"
 #include "wow_task_order_bindings.h"
+#include "wow_user_object_bindings.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 #include "opennt-abi/host-compat/include/wow32_provider_private.h"
 
@@ -160,9 +161,13 @@ static LRESULT CALLBACK dialog_return_hook(int code, WPARAM wp, LPARAM lp)
                         creation->failure = GetLastError();
                     } else {
                         __try {
-                            creation->init_parameter = (LONG)W32InitDlg(
-                                creation->window, creation->input_parameter);
-                            creation->initialized = TRUE;
+                            if (!wow_user_window_refresh_graph(creation->window)) {
+                                creation->failure = GetLastError();
+                            } else {
+                                creation->init_parameter = (LONG)W32InitDlg(
+                                    creation->window, creation->input_parameter);
+                                creation->initialized = TRUE;
+                            }
                         } __finally {
                             (void)wow_user_borrow_leave(&scope);
                         }
@@ -201,6 +206,7 @@ static INT_PTR CALLBACK dialog_proc(HWND window, UINT message, WPARAM wp,
         entered = TRUE;
         if (!wow_user_borrow_enter(&scope)) __leave;
         borrowed = TRUE;
+        if (!wow_user_window_refresh_graph(window)) __leave;
         if (creation->procedure) {
             /* Original ssend LOCKPWND retains the current WND and saves the
              * caller's CallbackWnd before entering WOW. A nested destroy can
