@@ -19,5 +19,8 @@ struct wow_window_words_binding;
 BOOL WINAPI wow_dialog_creation_claim(HWND, const CREATESTRUCTA *,
     struct wow_task_order_thread *, struct wow_window_creation_enrollment *, BOOL *);
 void WINAPI wow_dialog_creation_cancel(HWND, struct wow_window_words_binding *);
+/* Terminal thread cleanup suppresses guest DLGPROC, retaining the native
+ * dialog procedure and its WM_NCDESTROY property-release path. */
+void WINAPI wow_dialog_creation_prepare_exit(HWND, struct wow_window_words_binding *);
 
 #endif

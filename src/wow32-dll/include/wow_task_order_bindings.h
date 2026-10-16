@@ -3,6 +3,9 @@
 #include <windows.h>
 #include <winternl.h>
 
+/* Shared terminal outcome when an acquired execution scope cannot unwind. */
+__declspec(noreturn) void WINAPI wow_user_native_call_failed(const char *, DWORD);
+
 /* ADAPTER-WOW-039: finite view of original TDB/WOWPROCESSINFO/PROCESSINFO
  * fields used by the recovered scheduler/registration owners, not private
  * NT4 structure layouts or guest data.
@@ -133,10 +136,18 @@ typedef struct wow_task_callback_scope {
     BOOL held, resumed;
 } wow_task_callback_scope;
 BOOL WINAPI wow_task_callback_enter(wow_task_callback_scope *);
+/* Original modeless COMMDLG WM_DESTROY resource branch only, never an app
+ * hook. During termination it requires the early resource-live phase. */
+BOOL WINAPI wow_task_resource_cleanup_enter(wow_task_callback_scope *);
+/* A rejected entry has acquired no execution scope. Once entered, leave
+ * restores ownership or terminates at the existing worker invariant boundary;
+ * it must not convert failed restoration into a guest callback result. Both
+ * successful operations preserve the caller's last-error value. */
 BOOL WINAPI wow_task_callback_leave(wow_task_callback_scope *);
 typedef VOID (WINAPI *wow_task_end_callback)(VOID);
 BOOL WINAPI xxxRegisterUserHungAppHandlers(wow_task_end_callback, HANDLE, wow_task_order_process *);
 BOOL WINAPI wow_task_reference_event(HANDLE, HANDLE *);
+#define WOW_TASK_TIF_INCLEANUP 0x00000001u
 #define WOW_TASK_TIF_16BIT 0x00000002u
 #define WOW_TASK_TIF_FIRSTIDLE 0x00002000u
 #define WOW_TASK_SMF_RECEIVE 0x1000u

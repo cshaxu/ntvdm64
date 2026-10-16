@@ -35,6 +35,8 @@
 #undef MVDM_WOW32_RESTORE_X86_FOR_VDMDBG
 #endif
 #include "wowfax.h"
+/* DIVERGENCE(MVDM-HOST-DIV-338): lifecycle-owned thread idle observer. */
+#include "wow_idle_hook_binding.h"
 /* Keep this completed registry-reader family isolated from the uncompleted
  * original registry writer families selected for their later owner packets. */
 #include <mvdm_shadow_registry.h>
@@ -730,7 +732,8 @@ ULONG FASTCALL WK32OldYield(PVDMFRAME pFrame)
 
 --*/
 
-LRESULT CALLBACK WK32ForegroundIdleHook(int code, WPARAM wParam, LPARAM lParam)
+/* DIVERGENCE(MVDM-HOST-DIV-336): scope native idle entry before guest access. */
+LRESULT CALLBACK WowOriginalForegroundIdleHook(int code, WPARAM wParam, LPARAM lParam)
 {
     PARM16  Parm16;
 
@@ -779,10 +782,9 @@ ULONG FASTCALL WK32WowSetIdleHook(PVDMFRAME pFrame)
         // It is important to set a GlobalHook otherwise we will not
         // Get accurate timing results with a LocalHook.
 
-        ptd->hIdleHook = SetWindowsHookEx(WH_FOREGROUNDIDLE,
-                                          WK32ForegroundIdleHook,
-                                          hmodWOW32,
-                                          0);
+        /* DIVERGENCE(MVDM-HOST-DIV-338): all WOW task threads are observed;
+         * this TD borrows its observer as the original registration intent. */
+        ptd->hIdleHook = wow_user_idle_hook_for_current();
 
         if (ptd->hIdleHook == NULL) {
             OutputDebugString("\nWK32WowSetIdleHook : ERROR failed to Set Idle Hook Proc\n\n");
@@ -1464,7 +1466,8 @@ DWORD W32RemoteThread(VOID)
  *  None
  *
  */
-VOID W32FreeTask( PTD ptd )
+/* DIVERGENCE(MVDM-HOST-DIV-334): retire native windows before resource cleanup. */
+VOID WowOriginalFreeTask( PTD ptd )
 {
     PWOAINST pWOA, pWOANext;
 
@@ -1527,7 +1530,8 @@ VOID W32FreeTask( PTD ptd )
     // Remove idle hook, if any has been installed.
 
     if (ptd->hIdleHook != NULL) {
-        UnhookWindowsHookEx(ptd->hIdleHook);
+        /* DIVERGENCE(MVDM-HOST-DIV-338): lifecycle retires the borrowed
+         * observer; this original branch withdraws only the task's intent. */
         ptd->hIdleHook = NULL;
     }
 

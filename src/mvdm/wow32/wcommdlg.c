@@ -545,7 +545,8 @@ BOOL FASTCALL WM32msgCHOOSEFONTGETLOGFONT(LPWM32MSGPARAMEX lpwm32mpex)
 //
 
 UINT APIENTRY
-WCD32DialogProc(
+/* DIVERGENCE(MVDM-HOST-DIV-335): scoped native callback entrance. */
+WowOriginalDialogProc(
     HWND hdlg,
     UINT uMsg,
     WPARAM uParam,
@@ -577,7 +578,8 @@ Routine Description:
 
 
 UINT APIENTRY
-WCD32PrintSetupDialogProc(
+/* DIVERGENCE(MVDM-HOST-DIV-335): scoped native callback entrance. */
+WowOriginalPrintSetupDialogProc(
     HWND hdlg,
     UINT uMsg,
     WPARAM uParam,
@@ -2376,7 +2378,8 @@ Error:
 }
 
 UINT APIENTRY
-WCD32FindReplaceDialogProc(
+/* DIVERGENCE(MVDM-HOST-DIV-335): preserve original resource-only destroy branch. */
+WowOriginalFindReplaceDialogProc(
     HWND hdlg,
     UINT uMsg,
     WPARAM uParam,

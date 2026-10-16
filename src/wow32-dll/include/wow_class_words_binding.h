@@ -8,6 +8,9 @@ typedef struct wow_class_words_binding wow_class_words_binding;
 /* Same borrowed lifetime as class words; no new lookup or copied entry. */
 wow_class_lookup_entry *WINAPI wow_class_words_entry(wow_class_words_binding *);
 BOOL WINAPI wow_class_words_native_registration(wow_class_words_binding *);
+/* Match the actually called target under the USER lock, not its HWND class. */
+BOOL WINAPI wow_class_words_match_native(wow_class_lookup_context *, WNDPROC,
+    BOOL, WORD *, WNDPROC *);
 /* Project a completed owned entry once. The caller retains the class and
  * serializes its domain. Native procedures/modules stay host-local; named
  * guest CLS storage is retired with this same registration. */

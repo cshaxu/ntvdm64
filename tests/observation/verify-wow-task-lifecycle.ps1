@@ -4,11 +4,13 @@ param(
     [string]$BuildRoot,
     [ValidateSet('task-lifecycle','process-retirement','menu-cleanup','menu-resource','native-dispatch-gate','window-procedure','standard-class','class-query','dialog-lifecycle','init-notification','start-notification','style-policy','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','task-order','class-client','window-borrow','window-reclaim','graph-snapshot','thunk-scope','native-creation')] [string]$Case = 'task-lifecycle',
     [string]$StyleDll,
+    [switch]$InitRollback,
     [string]$Ninja = 'ninja.exe',
     [string]$VsDevCmd = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 )
 # Links current production owner objects; this is not real-Win16 acceptance.
 $ErrorActionPreference = 'Stop'
+if ($InitRollback -and $Case -ne 'task-lifecycle') { throw 'InitRollback requires task-lifecycle' }
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $vs = (Resolve-Path -LiteralPath $VsDevCmd).Path
 
@@ -127,6 +129,7 @@ if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource
 if ($Case -eq 'native-creation') { $fixturePath = Join-Path $repo 'tests/mvdm-host/wow_page_domain_fixture.c' }
 $fixture = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\fixture.obj" "'+$fixturePath+'"')
 if ($fixture -eq $compile) { throw 'Fixture substitution failed' }
+if ($InitRollback) { $fixture += ' /DWOW_INIT_ROLLBACK_FIXTURE' }
 if ($Case -eq 'native-creation') { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE /DWOW_NATIVE_CREATION_FIXTURE' }
 if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource')) { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE' }
 if ($Case -eq 'window-reclaim') { $fixture += ' /DWOW_RECLAIM_FAILURE_FIXTURE' }
@@ -204,6 +207,13 @@ if ($Case -eq 'menu-cleanup') { $parentStub += ' /DWOW_MENU_CLEANUP_FIXTURE' }
 Invoke-Build ($parentStub.Replace('/Gz', '/Gd'))
 $parentObjects = @((Join-Path $out 'parent-stub.obj'))
 }
+if ($Case -eq 'init-notification') {
+    $startupTd = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\startup-td.obj" "'+$repo+'\tests\adapter-mvdm-host-out\wow\wow_startup_td_fixture.c"')
+    if ($startupTd -eq $compile) { throw 'Startup TD fixture substitution failed' }
+    Invoke-NinjaTarget $provider 'obj/wow32-dll/wow_task_cleanup_entry.obj'
+    Invoke-Build $startupTd
+    $parentObjects += Join-Path $out 'startup-td.obj'
+}
 $lib = & cmd.exe /d /s /c ('call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && where lib.exe')
 $lib = @($lib | Where-Object { Test-Path -LiteralPath $_ })[0]
 $link = $commands | Where-Object { $_ -match '/out:wow32\.dll' } | Select-Object -Last 1
@@ -212,6 +222,17 @@ if (!$link) { throw 'Missing production provider link command' }
 $objects = @([regex]::Matches($link, '(?<!\S)obj/[^\s"]+\.obj') |
     ForEach-Object { Join-Path $provider $_.Value } | Select-Object -Unique)
 if ($objects.Count -lt 77) { throw 'Incomplete production provider object selection' }
+if ($InitRollback) {
+    $queueCompile = $commands | Where-Object { $_ -match '/kernel/queue\.c$' } | Select-Object -Last 1
+    if (!$queueCompile) { throw 'Missing original InitTask compile command' }
+    $queueFixture = $queueCompile -replace '/Fo\S+\s+\S+queue\.c$', ('/Fo"'+$out+'\init-allocation.obj" "'+$repo+'\tests\adapter-mvdm-host-out\wow\wow_init_allocation_fixture.c"')
+    $releaseFixture = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\init-release.obj" "'+$repo+'\tests\adapter-mvdm-host-out\wow\wow_init_release_fixture.c"')
+    if ($queueFixture -eq $queueCompile -or $releaseFixture -eq $compile) { throw 'Init fixture substitution failed' }
+    Invoke-Build $queueFixture
+    Invoke-Build $releaseFixture
+    $objects = @($objects | Where-Object { $_ -notmatch '[\\/]opennt-user[\\/]queue\.obj$|[\\/]wow32-dll[\\/]wow_user_task_lifecycle\.obj$' })
+    $parentObjects += @("$out/init-allocation.obj", "$out/init-release.obj")
+}
 & $lib /nologo "/out:$out\provider.lib" @objects >> "$out\build.log" 2>&1
 if ($LASTEXITCODE) { throw 'Provider archive failed' }
 Invoke-Build ('link /nologo /force:multiple /NODEFAULTLIB:ntvdm.lib /out:"'+$out+'\fixture.exe" /map:"'+$out+'\fixture.map" "'+$out+'\fixture.obj" '+(($parentObjects | ForEach-Object { '"'+$_+'"' }) -join ' ')+' "'+$out+'\provider.lib" '+((@($workerObjects)+@($fixtureSupportObjects)+@($fixtureLibraries) | ForEach-Object { '"'+$_+'"' }) -join ' ')+' legacy-wow-user32.lib legacy-wow-kernel32.lib legacy-wow-ntdll.lib version.lib comdlg32.lib rpcrt4.lib kernel32.lib user32.lib gdi32.lib shell32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
@@ -228,6 +249,15 @@ $process.Refresh()
 $fixtureOutput = @(Get-Content "$out/stdout.txt"; Get-Content "$out/stderr.txt")
 $fixtureExitCode = $process.ExitCode
 $fixtureExitCode | Set-Content -LiteralPath "$out/fixture-exit.txt"
+if ($Case -eq 'init-notification' -and !($fixtureOutput -match '^WOW_INIT_PRECOMMIT_CLEANUP errors=0 retries=7 registered_cleanup=1$')) {
+    throw 'Precommit original-task registered cleanup was not verified'
+}
+if ($InitRollback -and !($fixtureOutput -match '^WOW_INIT_ROLLBACK errors=0 failed_allocations=2 name_releases=2$')) {
+    throw 'Original InitTask rollback/name release/error preservation was not verified'
+}
+if ($InitRollback -and !($fixtureOutput -match '^WOW_IDLE_OBSERVER_LIFECYCLE errors=0 install_failures=2 live=0$')) {
+    throw 'Observer installation failure, rollback or retirement leaked hooks'
+}
 if ($Case -eq 'graph-snapshot' -and
     (!($fixtureOutput -match '^WOW_EXTERNAL_OBSERVATION_CCPU errors=0 separate_process=1 local_updates=32$') -or
      !($fixtureOutput -match '^WOW_EXTERNAL_CAPTURE_CCPU errors=0 dead_native=1 committed_observation=1$') -or
@@ -247,6 +277,14 @@ if ($Case -eq 'graph-snapshot' -and
     throw 'Real native handle-slot reuse and retained-generation isolation were not verified'
 }
 $fixtureOutput | Write-Output
+if ($Case -eq 'graph-snapshot') {
+    foreach ($marker in @('WOW_NATIVE_ENTRY_FAILURE_CCPU','WOW_CALLBACK_OWNER_FAILURE_CCPU','WOW_CALLBACK_BORROW_FAILURE_CCPU',
+            'WOW_WINDOW_CACHE_FAILURE_CCPU','WOW_DIALOG_CACHE_FAILURE_CCPU')) {
+        if (!($fixtureOutput -match ('^' + $marker + ' errors=0 consumed_once=1 worker_exit=c0000420$'))) {
+            throw "Missing production callback restoration rejection: $marker"
+        }
+    }
+}
 if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource') -and
     !($fixtureOutput -match '^WOW_MANAGED_SLOT_REUSE_CCPU errors=0 creation=1 null_class=1 retained=1 released=1$')) {
     throw 'Managed creation or null-class slot reuse failed retained-reader isolation/cleanup'
@@ -375,6 +413,10 @@ if ($Case -eq 'window-borrow' -and
     throw 'Native-class enrollment lost forwarding, subclass chain, internal controls or creation rollback'
 }
 if ($Case -eq 'window-borrow' -and
+    !($fixtureOutput -match '^WOW_TERMINAL_PREPARE_CCPU errors=0 dialog_suppressed=1 native_button=1 creation_denied=1 callback_denied=1$')) {
+    throw 'Terminal preparation failed native control cleanup or guest-entry suppression'
+}
+if ($Case -eq 'window-borrow' -and
     !($fixtureOutput -match '^WOW_UNOWNED_VIEW_CCPU errors=0 foreign_root=1 local_unowned=1 class_guard=1 native_untouched=1 released=1$')) {
     throw 'Unowned shared view changed native ownership or left a dangling class/allocation'
 }
@@ -454,5 +496,28 @@ if ($Case -eq 'menu-cleanup' -and
 if ($Case -eq 'task-order' -and
     !($fixtureOutput -match '^WOW_ORIGINAL_TASK_ORDER errors=0(?:\s|$)')) {
     throw 'Task order fixture exited without its successful completion marker'
+}
+if ($Case -eq 'graph-snapshot' -and
+    !($fixtureOutput -match '^WOW_EXPORTED_CALLBACK_REJECT errors=0 output_untouched=1 no_guest_entry=1$')) {
+    throw 'Original exported callback argument rejection did not preserve its output contract'
+}
+if ($Case -eq 'native-nested') {
+    foreach ($held in 0,1) {
+        if (!($fixtureOutput -match ("^WOW_NATIVE_RECEIVER_EXIT_RETURN held="+$held+" error=(0|1400|1460) retired=1 owner=1$"))) {
+            throw 'Actual native send did not restore ownership after receiver thread retirement'
+        }
+        if (!($fixtureOutput -match ("^WOW_NATIVE_EXCEPTION_RETURN held="+$held+" caught=1 owner=1$"))) {
+            throw 'Native exception did not unwind through the actual wrapper with its original owner'
+        }
+        if (!($fixtureOutput -match ("^WOW_NATIVE_TIMEOUT_RETURN held="+$held+" error=(0|1460) callbacks="+($held+1)+"$"))) {
+            throw 'Native timeout did not preserve callback completion and caller lock state'
+        }
+    }
+    if (!($fixtureOutput -match '^WOW_NATIVE_DEAD_TARGET_RETURN error=1400 owner=1$')) {
+        throw 'Destroyed native receiver did not preserve failure and execution ownership'
+    }
+    if (!($fixtureOutput -match '^WOW_NATIVE_DESTROY_DURING_RETURN result=116 dead=1 owner=1$')) {
+        throw 'Receiver window destroyed during the native call did not preserve return ownership'
+    }
 }
 Write-Output ("WOW_FIXTURE_OK case=" + $Case)

@@ -137,6 +137,14 @@ BOOL WINAPI wow_dialog_creation_claim(HWND window, const CREATESTRUCTA *request,
     return TRUE;
 }
 
+void WINAPI wow_dialog_creation_prepare_exit(HWND window,
+    wow_window_words_binding *borrow)
+{
+    wow_dialog_creation *creation = GetPropW(window, dialog_property);
+    if (creation && creation->window == window && creation->borrow == borrow)
+        creation->initialized = FALSE;
+}
+
 static LRESULT CALLBACK dialog_create_hook(int code, WPARAM wp, LPARAM lp)
 {
     return wow_window_creation_forward_internal(
@@ -175,7 +183,7 @@ static LRESULT CALLBACK dialog_return_hook(int code, WPARAM wp, LPARAM lp)
                                 creation->initialized = TRUE;
                             }
                         } __finally {
-                            (void)wow_user_borrow_leave(&scope);
+                            wow_user_borrow_leave_required(&scope);
                         }
                     }
                 } __finally {
@@ -241,10 +249,11 @@ static INT_PTR CALLBACK dialog_proc(HWND window, UINT message, WPARAM wp,
             wow_window_words_release(creation->borrow);
             creation->borrow = NULL;
         }
-        if (callback_published)
-            (void)mvdm_softpc_wow_page_domain_restore_callback(saved_callback);
+        if (callback_published &&
+                !mvdm_softpc_wow_page_domain_restore_callback(saved_callback))
+            wow_user_native_call_failed("restore-dialog-callback-cache", ERROR_INVALID_STATE);
         wow_window_words_release(window_borrow);
-        if (borrowed) (void)wow_user_borrow_leave(&scope);
+        if (borrowed) wow_user_borrow_leave_required(&scope);
         if (entered && !wow_task_callback_leave(&task_scope)) result = FALSE;
         release_creation(creation);
     }
@@ -270,6 +279,10 @@ HWND WINAPI wow_user_server_create_dialog(HANDLE module,
             (flags & ~(SCDLG_CLIENT | SCDLG_ANSI | SCDLG_NOREVALIDATE |
                 SCDLG_16BIT))) {
         SetLastError(ERROR_INVALID_PARAMETER);
+        return NULL;
+    }
+    if (binding->thread->TIF_flags & WOW_TASK_TIF_INCLEANUP) {
+        SetLastError(ERROR_INVALID_STATE);
         return NULL;
     }
     creation = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, sizeof(*creation));

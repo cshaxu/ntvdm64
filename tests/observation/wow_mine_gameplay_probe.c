@@ -9,6 +9,26 @@
 #include <string.h>
 static DWORD owner_pid;
 static HWND mine;
+static BOOL exception_sibling, error_selected;
+static BOOL ignore_exception;
+static const char *startup_identity_path;
+static BOOL CALLBACK close_owned_probe_error(HWND window, LPARAM unused)
+{
+    DWORD pid; WCHAR name[64], message[2048], label[64];
+    HWND button;
+    UINT response=ignore_exception?41003:41001;
+    const WCHAR *expected=ignore_exception?L"Ignore":L"Close";
+    (void)unused;
+    GetWindowThreadProcessId(window,&pid);
+    if(pid!=owner_pid || !GetClassNameW(window,name,64) || wcscmp(name,L"#32770"))return TRUE;
+    if(!GetDlgItemTextW(window,40999,message,2048) ||
+       (!wcsstr(message,L"e4470004") && !wcsstr(message,L"E4470004")))return TRUE;
+    button=GetDlgItem(window,response);
+    if(!button || !GetWindowTextW(button,label,64) || wcscmp(label,expected))return TRUE;
+    printf("original-exception-dialog=%p worker=%lu response=%s\n",window,pid,ignore_exception?"Ignore":"Close");
+    error_selected=PostMessageW(window,WM_COMMAND,MAKEWPARAM(response,BN_CLICKED),(LPARAM)button);
+    return FALSE;
+}
 static BOOL CALLBACK find_mine(HWND w, LPARAM unused)
 {
     DWORD pid; WCHAR name[128]; RECT r;
@@ -111,11 +131,80 @@ static BOOL click(UINT down, UINT up, WPARAM held)
 {
     return PostMessageW(mine,down,held,MAKELPARAM(19,61)) && PostMessageW(mine,up,0,MAKELPARAM(19,61));
 }
+/* Launch a second ordinary Win16 task on the same unswitched desktop.
+ * The script separately proves its worker/task identity from runtime traces;
+ * launcher success alone is not proof of shared-worker retirement. */
+static BOOL retire_sibling(const char *desktop, const char *launcher, const char *guest)
+{
+    STARTUPINFOA si = {0}; PROCESS_INFORMATION pi = {0};
+    char command[2048], directory[MAX_PATH]; char *slash;
+    DWORD status = STILL_ACTIVE, wait;
+    HANDLE startup_thread = NULL;
+    DWORD startup_tid = 0, startup_status = STILL_ACTIVE;
+    if (sprintf_s(command, sizeof(command), "\"%s\" --wait \"%s\"", launcher, guest)<0 ||
+        strcpy_s(directory, sizeof(directory), guest)) return FALSE;
+    slash=strrchr(directory, '\\'); if(!slash)return FALSE; *slash=0;
+    si.cb=sizeof(si); si.lpDesktop=(LPSTR)desktop;
+    if(!CreateProcessA(launcher,command,NULL,NULL,FALSE,CREATE_NO_WINDOW,NULL,directory,&si,&pi)) {
+        printf("sibling-launch-error=%lu\n",GetLastError());return FALSE;
+    }
+    printf("sibling-launcher=%lu command=%s\n",pi.dwProcessId,command);fflush(stdout);
+    CloseHandle(pi.hThread);
+    if (startup_identity_path) {
+        ULONGLONG until = GetTickCount64()+5000;
+        do {
+            FILE *identity = NULL; DWORD pid = 0, task = 0;
+            if (!fopen_s(&identity,startup_identity_path,"r")) {
+                if (fscanf_s(identity,"%lu %lu %lu",&pid,&startup_tid,&task)==3 &&
+                    pid==owner_pid && task && task<=0xffff) {
+                    startup_thread=OpenThread(SYNCHRONIZE|THREAD_QUERY_LIMITED_INFORMATION,FALSE,startup_tid);
+                    if (startup_thread && (GetProcessIdOfThread(startup_thread)!=owner_pid ||
+                        WaitForSingleObject(startup_thread,0)!=WAIT_TIMEOUT)) {
+                        CloseHandle(startup_thread);startup_thread=NULL;
+                    }
+                }
+                fclose(identity);
+            }
+            if (startup_thread) break;
+            Sleep(10);
+        } while (GetTickCount64()<until && WaitForSingleObject(pi.hProcess,0)==WAIT_TIMEOUT);
+        if (!startup_thread) {CloseHandle(pi.hProcess);return FALSE;}
+        printf("startup-thread-live=%lu worker=%lu\n",startup_tid,owner_pid);
+    }
+    if(exception_sibling){
+        ULONGLONG deadline=GetTickCount64()+10000;
+        do {
+            if(!error_selected)EnumDesktopWindows(GetThreadDesktop(GetCurrentThreadId()),close_owned_probe_error,0);
+            wait=WaitForSingleObject(pi.hProcess,25);
+        }while(wait==WAIT_TIMEOUT && GetTickCount64()<deadline);
+    }else wait=WaitForSingleObject(pi.hProcess,10000);
+    if(wait==WAIT_OBJECT_0)GetExitCodeProcess(pi.hProcess,&status);
+    /* The owning package supervisor handles a timed-out child; never count
+     * forced cleanup as ordinary task exit. */
+    CloseHandle(pi.hProcess);
+    if (startup_thread) {
+        DWORD thread_wait=WaitForSingleObject(startup_thread,5000);
+        if (thread_wait==WAIT_OBJECT_0)GetExitCodeThread(startup_thread,&startup_status);
+        CloseHandle(startup_thread);
+        printf("startup-thread-exit=%lu wait=%lu code=%lu\n",startup_tid,thread_wait,startup_status);
+        if (thread_wait!=WAIT_OBJECT_0 || startup_status!=EXIT_FAILURE)return FALSE;
+    }
+    printf("sibling-wait=%lu exit=%lu survivor=%p worker=%lu\n",wait,status,mine,owner_pid);
+    /* Original guest ForceTaskExit uses DOS 4CFF, but WK32KillTask explicitly
+     * ends the host thread with EXIT_SUCCESS. Do not equate those contracts. */
+    return wait==WAIT_OBJECT_0 && status==0 &&
+        (!exception_sibling || error_selected) && IsWindow(mine);
+}
 int main(int argc,char **argv)
 {
     HANDLE process; HDESK desk; ULONGLONG deadline; DWORD before, counter; DWORD_PTR reply;
-    if((argc!=4 && argc!=5) || strncmp(argv[2],"NTVDMConsoleTest-",17))return 2;
-    if(argc==5 && strcmp(argv[4],"0") && strcmp(argv[4],"1"))return 2;
+    if((argc!=4 && argc!=5 && argc!=7 && argc!=8) || strncmp(argv[2],"NTVDMConsoleTest-",17))return 2;
+    if(argc==8){
+        if(!strcmp(argv[7],"exception"))exception_sibling=TRUE;
+        else if(!strcmp(argv[7],"exception-ignore"))exception_sibling=ignore_exception=TRUE;
+        else startup_identity_path=argv[7];
+    }
+    if(argc>=5 && strcmp(argv[4],"0") && strcmp(argv[4],"1"))return 2;
     owner_pid=strtoul(argv[1],NULL,10);
     process=OpenProcess(SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,FALSE,owner_pid);
     desk=OpenDesktopA(argv[2],0,FALSE,DESKTOP_READOBJECTS|DESKTOP_WRITEOBJECTS|DESKTOP_ENUMERATE);
@@ -124,7 +213,7 @@ int main(int argc,char **argv)
     do {EnumDesktopWindows(desk,find_mine,0);if(mine)break;Sleep(25);}while(GetTickCount64()<deadline && WaitForSingleObject(process,0)==WAIT_TIMEOUT);
     if(!mine || !SendMessageTimeoutW(mine,WM_NULL,0,0,SMTO_ABORTIFHUNG,2000,&reply))return 4;
     printf("owned-window=%p pid=%lu\n",mine,owner_pid);
-    if(argc==5){
+    if(argc>=5){
         WCHAR caption[256];
         BOOL native_frame=FALSE;
         if(!GetWindowTextW(mine,caption,256))return 15;
@@ -134,6 +223,12 @@ int main(int argc,char **argv)
         printf("PASS unchanged title and native frame=%u\n",native_frame);
     }
     if(!wait_board(process,&before,&counter) || !capture(mine,argv[3],"before"))return 5;
+    if(argc>=7) {
+        if(!retire_sibling(argv[2],argv[5],argv[6]) ||
+           WaitForSingleObject(process,0)!=WAIT_TIMEOUT ||
+           !SendMessageTimeoutW(mine,WM_NULL,0,0,SMTO_ABORTIFHUNG,2000,&reply))return 17;
+        if(!wait_board(process,&before,&counter))return 18;
+    }
     if(!click(WM_RBUTTONDOWN,WM_RBUTTONUP,MK_RBUTTON) || !wait_cell(process,before,FALSE,"flag"))return 6;
     if(!capture(mine,argv[3],"flag"))return 7;
     printf("counter-before=%08lx counter-flag=%08lx\n",counter,region_hash(mine,16,16,40,24));

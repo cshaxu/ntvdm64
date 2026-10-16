@@ -1,5 +1,76 @@
 # mvdm
 
+MVDM-HOST-DIV-338 (T447 S2, owner-selected thread idle observers):
+wkman.c WK32WowSetIdleHook borrows the current lifecycle task's native observer
+handle instead of creating a global Hook. W32FreeTask clears that intent but
+does not unhook the borrowed observer; task lifecycle rollback/retirement owns
+its single release. Preserve original TD registration and RET_FOREGROUNDIDLE
+body. Original OpenNT wkman.c, kernel hooks.c and taskman.c are provenance:
+NT4's private registering-process filter is unavailable in public modern USER.
+Owner accepts thread-before-global ordering, not lost worker-wide coverage.
+Owned lifecycle/idle bindings supply thread coverage and native chain forwarding.
+No guest changes; verification pending in the S2 scope audit. This supersedes
+DIV-336's unchanged global-registration/cleanup statement only.
+
+MVDM-HOST-DIV-337 (T447 S2, owner-approved original-host exception):
+wow32/wow32.c W32Dispatch records when its original TD stack is established
+and completes CallBack16's deferred CPU-stack restoration on handled exception
+return. Original successful return, W32Exception disposition and CallBack16
+remain intact; early setup failure does not read an uninitialized TD, and
+CONTINUE_SEARCH/CONTINUE_EXECUTION never execute the handler body. Pinned
+OpenNT base/mvdm/wow32/wow32.c and wcall16.c contain this non-fast-path gap;
+no matching SoftPC correction was found. FastWOW is comparison evidence, not
+a newly selected provider. Owner explicitly approves this minimal correction
+and standing registration-first treatment of similar original-host defects;
+see the [source policy](../../docs/etc/operations/policy/source-policy.md)
+and the [S2 audit](../../docs/etc/evidence/m0-t447-s2-scope-freeze.md).
+Added state is one BOOL, one establishment assignment and one guarded use
+of the existing SETVDMSTACK macro. Guest unchanged. Runtime acceptance and
+publication remain subject to the S2 gates, not implied by this registration.
+
+MVDM-HOST-DIV-336 (T447 S2): rename only wkman.c's
+WK32ForegroundIdleHook definition to WowOriginalForegroundIdleHook. Its
+original body, registration, TD list and hIdleHook cleanup remain unchanged.
+The owned wow_idle_hook_binding.c supplies the original entry name, enforcing
+existing WOW task/borrow scopes and local registration before guest access.
+Original taskman's IsHooked/xxxCallHook bindings now query that same original
+TD registration and invoke this original callback instead of constant absence.
+No second registry, scheduler, hook-server import or guest change. This
+candidate requires ordering, taskman, guest and worker-isolation acceptance;
+see the [S2 audit](../../docs/etc/evidence/m0-t447-s2-scope-freeze.md).
+
+MVDM-HOST-DIV-335 (T447 S2): rename only wcommdlg.c's three native Hook
+definitions to WowOriginalDialogProc, WowOriginalPrintSetupDialogProc and
+WowOriginalFindReplaceDialogProc. Original declarations/registrations still
+name WCD32 entries supplied by wow32-dll/wow_common_dialog_callback.c. Enter
+the existing task/borrow scopes before guest access; preserve original message
+conversion and resource cleanup. The modeless WM_DESTROY branch performs
+resource cleanup, not an app Hook, and during task exit requires the explicit
+resource-live phase at original SG_EXIT's task-specific pfnWOWCleanup.
+No COMMDLG algorithm or resource registry is replaced. This unverified group
+requires modal/modeless, ordinary/terminal and failure evidence before release.
+
+MVDM-HOST-DIV-334 (T447 S2): rename only wow32/wkman.c's W32FreeTask
+definition to WowOriginalFreeTask. Both original exit callers still call
+W32FreeTask, supplied by wow32-dll/wow_task_cleanup_entry.c. This fallback
+precedes the unchanged resource/timer/Hook cleanup for remote/startup paths.
+Normal windows instead retire at existing SG_EXIT/pfnWOWCleanup, before
+guest GlobalFreeAll; W32FreeTask alone proved too late for modeless resources.
+Late session unbind cannot safely run guest-capable window destruction.
+No guest change, copied task cleanup or new scheduler. The source trace and
+rejected late-only ordering are in the
+[S2 audit](../../docs/etc/evidence/m0-t447-s2-scope-freeze.md#a2a3-integration-review-resource-ordering-corrects-late-only-teardown).
+Unverified candidate; original cleanup and normal/sibling exit tests required.
+
+MVDM-HOST-DIV-333 (T447 S2): rename only wow32/wutmr.c's W32TimerFunc
+definition to WowOriginalTimerFunc. All 27 original timer stubs retain their
+W32TimerFunc calls and original identities, including WM_TIMER conversion
+through TMR.dwTimerProc32. wow32-dll/wow_timer_callback.c supplies the scoped
+entry and invokes the unchanged body. The existing task/borrow owners replace
+the unavailable NT4 USER callback ownership, not timer policy or scheduling.
+See the [A2 source review](../../docs/etc/evidence/m0-t447-s2-scope-freeze.md#a2-timer-entry-selection-implementation-admission).
+This candidate requires grouped provider/guest validation before delivery.
+
 MVDM-HOST-DIV-332 (T447 S2): rename only wow32/wowhooks.c's central
 WU32StdHookProc definition to WowOriginalStdHookProc. All 32 original stubs
 retain their original target name, now supplied by wow32-dll's

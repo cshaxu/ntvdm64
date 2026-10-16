@@ -1,18 +1,15 @@
 #include "wow_window_words_binding.h"
 #include "wow_window_creation_binding.h"
+#include "wow_dialog_creation_binding.h"
 #include "wow_user_borrow_scope.h"
+#include "wow_user_task_lifecycle.h"
+#include "wow_user_runtime.h"
 #include "wow_user_object_bindings.h"
 #include "wow_task_order_bindings.h"
 #include "wow_menu_native_bindings.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 
 #include <stdio.h>
-
-typedef VOID (APIENTRY *PFNW32ET)(VOID);
-#pragma warning(push)
-#pragma warning(disable:4201)
-#include "opennt-abi/source/public/internal/windows/inc/wowuserp.h"
-#pragma warning(pop)
 
 /* DIVERGENCE(ADAPTER-WOW-027): original kernel WND/thread locks retain WW
  * across callbacks, even if a callback destroys the window. Public HWND does
@@ -403,6 +400,80 @@ BOOL WINAPI wow_window_words_collect_retired(wow_user_object_table *objects)
     return complete;
 }
 
+void WINAPI wow_window_note_native_procedure(HWND window, WNDPROC procedure,
+    BOOL unicode)
+{
+    DWORD error = GetLastError();
+    wow_user_runtime_thread *runtime = wow_user_runtime_current();
+    wow_window_words_binding *binding;
+    BOOL held;
+    BOOL matched = FALSE;
+    WORD fnid;
+    WNDPROC canonical;
+    if (!runtime || !runtime->thread) return;
+    binding = wow_window_words_acquire(window);
+    if (!binding) { SetLastError(error); return; }
+    held = runtime->exclusive_held;
+    if (!held && !wow_user_runtime_enter(runtime))
+        wow_user_native_call_failed("record-native-cleanup-owner", GetLastError());
+    if (runtime->thread->ppi)
+        matched = wow_class_words_match_native(runtime->thread->ppi->classes,
+            procedure, unicode, &fnid, &canonical);
+    /* GetClassInfo's process lookup need not identify the native class
+     * attached to this HWND. For an imported native registration, compare
+     * the procedure actually being called with this window's class target,
+     * not with a name or the current process-wide lookup winner. Logical
+     * application classes are excluded; cross-class standard calls above
+     * still select the called standard target, as PatchThreadWindows needs. */
+    if (!matched && wow_class_words_native_registration(binding->class_words)) {
+        WNDPROC actual = (WNDPROC)(unicode ? GetClassLongW(window, GCL_WNDPROC) :
+            GetClassLongA(window, GCL_WNDPROC));
+        if (actual && actual == procedure) {
+            canonical = (WNDPROC)GetClassLongA(window, GCL_WNDPROC);
+            fnid = wow_class_words_entry(binding->class_words)->fnid;
+            matched = canonical != NULL && fnid != 0;
+        }
+    }
+    if (matched) {
+        binding->cleanup.fnid = fnid;
+        binding->cleanup.native_cleanup = canonical;
+    }
+    if (!held && !wow_user_runtime_leave(runtime))
+        wow_user_native_call_failed("release-native-cleanup-owner", GetLastError());
+    wow_window_words_release(binding);
+    SetLastError(error);
+}
+
+BOOL WINAPI wow_window_words_prepare_exit(HWND window,
+    wow_window_words_binding *binding)
+{
+    wow_user_runtime_thread *runtime = wow_user_runtime_current();
+    /* Preserve the original cleanup boundary's invalid-HWND diagnosis.
+     * A disappeared native object is not a lock/owner-state failure. */
+    if (!IsWindow(window)) {
+        SetLastError(ERROR_INVALID_WINDOW_HANDLE);
+        return FALSE;
+    }
+    if (!runtime || !runtime->exclusive_held || !runtime->thread || !binding ||
+            binding->cleanup.thread != runtime->thread ||
+            !(runtime->thread->TIF_flags & WOW_TASK_TIF_INCLEANUP) ||
+            GetPropW(window, property_name) != binding) {
+        SetLastError(ERROR_INVALID_STATE);
+        return FALSE;
+    }
+    /* createw.c PatchThreadWindows chooses the actually exercised standard
+     * target, not the creation class or an arbitrary application subclass.
+     * Public USER retains native control state; use its existing target via
+     * the CPD forwarder rather than interpreting a procedure token here. */
+    binding->native_callproc = binding->cleanup.native_cleanup ?
+        binding->cleanup.native_cleanup : DefWindowProcA;
+    binding->cleanup.lpfnWndProc = wow_window_call_native_previous;
+    binding->cleanup.serverSideProc = TRUE;
+    binding->callback = NULL;
+    wow_dialog_creation_prepare_exit(window, binding);
+    return TRUE;
+}
+
 static BOOL dispatch_bound(HWND window, UINT message, WPARAM wp,
     LPARAM lp, DWORD procedure, wow_window_callback callback, LONG *result,
     BOOL terminal_owner)
@@ -429,6 +500,7 @@ static BOOL dispatch_bound(HWND window, UINT message, WPARAM wp,
     if (!(procedure & WNDPROC_WOW)) {
         __try {
             if (!prepare_creation_menu(window, message, lp, binding)) return FALSE;
+            wow_window_note_native_procedure(window, (WNDPROC)procedure, FALSE);
             *result = DispatchClientMessage(&view, message, wp, lp, procedure);
         } __finally {
             DWORD error = GetLastError();
@@ -475,13 +547,14 @@ static BOOL dispatch_bound(HWND window, UINT message, WPARAM wp,
         DWORD error = GetLastError();
         if (terminal_owner && message == WM_NCDESTROY)
             (void)wow_window_words_terminal(window, binding);
-        if (callback_published)
-            (void)mvdm_softpc_wow_page_domain_restore_callback(saved_callback);
+        if (callback_published &&
+                !mvdm_softpc_wow_page_domain_restore_callback(saved_callback))
+            wow_user_native_call_failed("restore-window-callback-cache", ERROR_INVALID_STATE);
         /* Release this WND owner while the alias/task scope is still live.
          * Its final retained backing can then be reclaimed by scope leave,
          * including the sampled CLS it kept alive during nested destruction. */
         wow_window_words_release(binding);
-        wow_user_borrow_leave(&scope);
+        wow_user_borrow_leave_required(&scope);
         (void)wow_task_callback_leave(&task_scope);
         SetLastError(error);
     }
@@ -548,7 +621,10 @@ LRESULT CALLBACK wow_window_call_native_previous(HWND window, UINT message,
         previous = binding->native_callproc;
         ReleaseSRWLockShared(&publication_lock);
         if (!previous) SetLastError(ERROR_INVALID_STATE);
-        else result = CallWindowProcA(previous, window, message, wp, lp);
+        else {
+            wow_window_note_native_procedure(window, previous, FALSE);
+            result = CallWindowProcA(previous, window, message, wp, lp);
+        }
     } __finally {
         wow_window_words_release(binding);
     }

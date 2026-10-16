@@ -5,6 +5,9 @@ BOOL WINAPI wow_native_create_process_a(LPCSTR,LPSTR,LPSECURITY_ATTRIBUTES,
     LPSECURITY_ATTRIBUTES,BOOL,DWORD,LPVOID,LPCSTR,LPSTARTUPINFOA,LPPROCESS_INFORMATION);
 DWORD WINAPI wow_user_msg_wait(DWORD,const HANDLE *,BOOL,DWORD,DWORD);
 #ifdef WOW_NATIVE_PROCESS_BINDING
+/* Definition-only cleanup interposition retains the original callers.
+ * PTD is opaque at this forced compile boundary; preserve its /Gz ABI. */
+VOID W32FreeTask(PVOID);
 /* Forced only into original wkman.c, preserving WK32LoadModule32's existing
  * command construction, show state, wait and error mapping. */
 #undef CreateProcess

@@ -6,6 +6,7 @@
 #include "wow_cleanup_bindings.h"
 #include "wow_user_message_bridge.h"
 #include "wow_user_runtime.h"
+#include "wow_task_cleanup_entry.h"
 #include "wow_class_client_bindings.h"
 #include "common/protocol/window_style.h"
 
@@ -84,7 +85,6 @@ typedef struct wow_user_native_call {
 BOOL WINAPI wow_user_native_call_begin(wow_user_native_call *, HWND);
 BOOL WINAPI wow_user_native_call_end(wow_user_native_call *);
 void WINAPI wow_user_native_call_result(wow_user_native_call *, UINT, WPARAM, LPARAM, LRESULT);
-__declspec(noreturn) void WINAPI wow_user_native_call_failed(const char *, DWORD);
 /* Original pfnWOWCleanup resource operation, including task==0 module calls.
  * The task carrier survives until the runtime's native-thread unbind edge. */
 BOOL WINAPI wow_user_task_lifecycle_exit(wow_user_task_lifecycle *, HANDLE,

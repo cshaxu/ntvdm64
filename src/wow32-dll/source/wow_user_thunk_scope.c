@@ -1,6 +1,7 @@
 #include "precomp.h"
 #include "wow_user_borrow_scope.h"
 #include "wow_user_thunk_scope.h"
+#include "wow_task_order_bindings.h"
 
 #include <stdio.h>
 
@@ -128,11 +129,12 @@ ULONG WINAPI wow_user_invoke_thunk(LPFNW32 thunk, PVDMFRAME frame)
     DWORD trace_error = GetLastError();
     trace_thunk(frame, thunk);
     SetLastError(trace_error);
-    wow_user_borrow_enter(&scope);
+    if (!wow_user_borrow_enter(&scope))
+        wow_user_native_call_failed("enter-thunk-borrow", GetLastError());
     __try {
         result = (*thunk)(frame);
     } __finally {
-        wow_user_borrow_leave(&scope);
+        wow_user_borrow_leave_required(&scope);
     }
     trace_error = GetLastError();
     trace_return(frame, result);

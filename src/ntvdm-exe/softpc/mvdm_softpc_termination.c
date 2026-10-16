@@ -61,6 +61,7 @@ void mvdm_softpc_report_nt_transition(unsigned short cs, unsigned long ip,
 void mvdm_softpc_report_termination(char const *stage,
     void const *return_address)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     DWORD bytes;
     HANDLE file;
@@ -69,17 +70,20 @@ void mvdm_softpc_report_termination(char const *stage,
 
     bytes = GetEnvironmentVariableA("MVDM_TERMINATE_VDM_REPORT_PATH", path,
         (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
         OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line), "%s return=%p\r\n", stage, return_address);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_virtual_memory_failure(unsigned long status)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     DWORD bytes;
     HANDLE file;
@@ -88,13 +92,15 @@ void mvdm_softpc_report_virtual_memory_failure(unsigned long status)
 
     bytes = GetEnvironmentVariableA("MVDM_TERMINATE_VDM_REPORT_PATH", path,
         (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
         OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line), "vdm-allocate status=%08lx\r\n", status);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_setup_hardware_probe(char const *stage,
@@ -324,6 +330,7 @@ void mvdm_softpc_report_dpmi_table_address(char const *stage,
     unsigned long source_address, unsigned long gdt_shadow_address,
     unsigned long ldt_shadow_address)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char line[224];
     unsigned long source[2] = {0, 0};
@@ -335,7 +342,7 @@ void mvdm_softpc_report_dpmi_table_address(char const *stage,
 
     bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_TRACE_PATH", path,
         (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     /* The callback selector is an ordinary LDT entry.  Sampling its two
      * words at the pre-existing PassTableAddress observation boundary
      * distinguishes an initial source-table publication from a later DOSX
@@ -350,19 +357,22 @@ void mvdm_softpc_report_dpmi_table_address(char const *stage,
             ldt_shadow_address) + 0x83b0u, sizeof(ldt));
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
         NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "dpmi-table-address stage=%s source=%08lx gdt=%08lx ldt=%08lx selector=83b7 source=%08lx:%08lx gdt=%08lx:%08lx ldt=%08lx:%08lx\\r\\n",
         stage, source_address, gdt_shadow_address, ldt_shadow_address,
         source[0], source[1], gdt[0], gdt[1], ldt[0], ldt[1]);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_wow_bop_state(unsigned long cr0, unsigned long cr3,
     unsigned short cs, unsigned short ip, unsigned long ds_base,
     unsigned long ds_limit)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char line[144];
     DWORD bytes;
@@ -371,20 +381,23 @@ void mvdm_softpc_report_wow_bop_state(unsigned long cr0, unsigned long cr3,
 
     bytes = GetEnvironmentVariableA("MVDM_S41_WOW_BOP_REPORT_PATH", path,
         (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
         OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "wow-bop cr0=%08lx cr3=%08lx csip=%04x:%04x dsbase=%08lx dslimit=%08lx\r\n",
         cr0, cr3, (unsigned int)cs, (unsigned int)ip, ds_base, ds_limit);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_wow_dispatch_return_state(unsigned long cr0,
     unsigned long cr3, unsigned short cs, unsigned short ip)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char line[112];
     DWORD bytes;
@@ -393,66 +406,75 @@ void mvdm_softpc_report_wow_dispatch_return_state(unsigned long cr0,
 
     bytes = GetEnvironmentVariableA("MVDM_S42_WOW_RETURN_REPORT_PATH", path,
         (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
         OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "wow-dispatch-return cr0=%08lx cr3=%08lx csip=%04x:%04x\r\n",
         cr0, cr3, (unsigned int)cs, (unsigned int)ip);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_wow_stage(char const *stage, unsigned long cr0,
     unsigned long cr3, unsigned short cs, unsigned short ip)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char line[144];
     DWORD bytes;
     HANDLE file;
     DWORD written;
 
-    if (stage == NULL) return;
+    if (stage == NULL) goto restore_error;
     bytes = GetEnvironmentVariableA("MVDM_S42_WOW_RETURN_REPORT_PATH", path,
         (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
         OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "wow-stage stage=%s cr0=%08lx cr3=%08lx csip=%04x:%04x\\r\\n",
         stage, cr0, cr3, (unsigned int)cs, (unsigned int)ip);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_wow_fast_callback_binding(char const *stage,
     unsigned long address)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char line[128];
     DWORD bytes;
     DWORD written;
     HANDLE file;
 
-    if (stage == NULL) return;
+    if (stage == NULL) goto restore_error;
     bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_TRACE_PATH", path,
         (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
         NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line), "wow-fast-binding stage=%s address=%08lx\\r\\n",
         stage, address);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_dpmi_mode_state(char const *stage, unsigned long cr0,
     unsigned long cr3, unsigned short cs, unsigned short ip,
     unsigned long ds_base, unsigned long ds_limit)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char line[112];
     DWORD bytes;
@@ -461,15 +483,17 @@ void mvdm_softpc_report_dpmi_mode_state(char const *stage, unsigned long cr0,
 
     bytes = GetEnvironmentVariableA("MVDM_S41_DPMI_MODE_REPORT_PATH", path,
         (DWORD)sizeof(path));
-    if (stage == NULL || bytes == 0u || bytes >= sizeof(path)) return;
+    if (stage == NULL || bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
         OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "%s cr0=%08lx cr3=%08lx csip=%04x:%04x dsbase=%08lx dslimit=%08lx\r\n",
         stage, cr0, cr3, (unsigned int)cs, (unsigned int)ip, ds_base, ds_limit);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_dpmi_descriptor(unsigned short selector,
@@ -477,6 +501,7 @@ void mvdm_softpc_report_dpmi_descriptor(unsigned short selector,
     unsigned long gdt_low, unsigned long gdt_high, unsigned long ldt_low,
     unsigned long ldt_high)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char line[208];
     DWORD bytes;
@@ -485,16 +510,18 @@ void mvdm_softpc_report_dpmi_descriptor(unsigned short selector,
 
     bytes = GetEnvironmentVariableA("MVDM_S42_DPMI_DESCRIPTOR_REPORT_PATH",
         path, (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
         OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "selector=%04x source=%08lx:%08lx gdt=%08lx:%08lx ldt=%08lx:%08lx\r\n",
         (unsigned int)selector, source_low, source_high, gdt_low, gdt_high,
         ldt_low, ldt_high);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_cpu40_descriptor_publish(unsigned short selector,
@@ -502,6 +529,7 @@ void mvdm_softpc_report_cpu40_descriptor_publish(unsigned short selector,
     unsigned long gdt_low, unsigned long gdt_high, unsigned long ldt_low,
     unsigned long ldt_high)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH], filter[32], line[224];
     DWORD bytes, written;
     unsigned long selected;
@@ -509,27 +537,30 @@ void mvdm_softpc_report_cpu40_descriptor_publish(unsigned short selector,
 
     bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_TRACE_PATH", path,
         (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_SELECTOR", filter,
         (DWORD)sizeof(filter));
-    if (bytes == 0u || bytes >= sizeof(filter)) return;
+    if (bytes == 0u || bytes >= sizeof(filter)) goto restore_error;
     selected = strtoul(filter, NULL, 16);
-    if ((unsigned short)selected != selector) return;
+    if ((unsigned short)selected != selector) goto restore_error;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
         OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "descriptor-publish selector=%04x source=%08lx:%08lx gdt=%08lx:%08lx ldt=%08lx:%08lx\r\n",
         (unsigned int)selector, source_low, source_high, gdt_low, gdt_high,
         ldt_low, ldt_high);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_dpmi_set_descriptor(unsigned short es,
     unsigned short bx, unsigned short ax, unsigned short cx,
     unsigned long descriptor_pointer, unsigned long protected_mode)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char line[176];
     DWORD bytes;
@@ -538,21 +569,24 @@ void mvdm_softpc_report_dpmi_set_descriptor(unsigned short es,
 
     bytes=GetEnvironmentVariableA("MVDM_S42_DPMI_SET_DESCRIPTOR_REPORT_PATH",
         path, (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     file=CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
         OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "dpmi-setdesc esbx=%04x:%04x ax=%04x cx=%04x ptr=%08lx pm=%lu\r\n",
         (unsigned int)es, (unsigned int)bx, (unsigned int)ax,
         (unsigned int)cx, descriptor_pointer, protected_mode);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_dpmi_set_descriptor_entry(unsigned short ax,
     unsigned short bx, unsigned short cx)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char line[96];
     DWORD bytes;
@@ -561,21 +595,24 @@ void mvdm_softpc_report_dpmi_set_descriptor_entry(unsigned short ax,
 
     bytes=GetEnvironmentVariableA("MVDM_S42_DPMI_SET_DESCRIPTOR_ENTRY_REPORT_PATH",
         path, (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     file=CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
         OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "dpmi-setdesc-entry ax=%04x bx=%04x cx=%04x aligned=%u\r\n",
         (unsigned int)ax, (unsigned int)bx, (unsigned int)cx,
         (unsigned int)((ax % 8u) == 0u));
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_dpmi_bop(unsigned long index, unsigned short ax,
     unsigned short bx, unsigned short cx)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char line[112];
     DWORD bytes;
@@ -584,19 +621,22 @@ void mvdm_softpc_report_dpmi_bop(unsigned long index, unsigned short ax,
 
     bytes=GetEnvironmentVariableA("MVDM_S42_DPMI_BOP_REPORT_PATH", path,
         (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     file=CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
         OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line), "dpmi-bop index=%02lx ax=%04x bx=%04x cx=%04x\r\n",
         index, (unsigned int)ax, (unsigned int)bx, (unsigned int)cx);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_dpmi_fast_bop_result(unsigned short bx,
     unsigned short dx, unsigned short es)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char line[96];
     DWORD bytes;
@@ -605,19 +645,22 @@ void mvdm_softpc_report_dpmi_fast_bop_result(unsigned short bx,
 
     bytes = GetEnvironmentVariableA("MVDM_S42_DPMI_BOP_REPORT_PATH", path,
         (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
         OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line), "dpmi-fast-bop-result bx=%04x dx=%04x es=%04x\\r\\n",
         (unsigned int)bx, (unsigned int)dx, (unsigned int)es);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_virtual_device_control(unsigned long eax,
     unsigned short bx, unsigned short cx, unsigned short dx)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char line[128];
     DWORD bytes;
@@ -626,21 +669,24 @@ void mvdm_softpc_report_virtual_device_control(unsigned long eax,
 
     bytes = GetEnvironmentVariableA("MVDM_S42_VXD_BOP_REPORT_PATH", path,
         (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
         OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "vxd-control eax=%08lx bx=%04x cx=%04x dx=%04x\r\n", eax,
         (unsigned int)bx, (unsigned int)cx, (unsigned int)dx);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_dpmi_swint(unsigned long interrupt_number,
     unsigned short ax, unsigned short bx, unsigned short cx,
     unsigned short caller_cs, unsigned long caller_eip)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char line[112];
     DWORD bytes;
@@ -649,16 +695,18 @@ void mvdm_softpc_report_dpmi_swint(unsigned long interrupt_number,
 
     bytes=GetEnvironmentVariableA("MVDM_S42_DPMI_SWINT_REPORT_PATH", path,
         (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     file=CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
         OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "dpmi-swint int=%02lx ax=%04x bx=%04x cx=%04x caller=%04x:%08lx\r\n",
         interrupt_number, (unsigned int)ax, (unsigned int)bx, (unsigned int)cx,
         (unsigned int)caller_cs, caller_eip);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_dpmi_swint_target(unsigned long interrupt_number,
@@ -666,19 +714,20 @@ void mvdm_softpc_report_dpmi_swint_target(unsigned long interrupt_number,
     unsigned short handler_flags, unsigned char const *code,
     unsigned long code_size)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char line[192];
     DWORD bytes;
     DWORD written;
     HANDLE file;
 
-    if (interrupt_number != 0x31u) return;
+    if (interrupt_number != 0x31u) goto restore_error;
     bytes = GetEnvironmentVariableA("MVDM_S42_DPMI_SWINT_REPORT_PATH", path,
         (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
         OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "dpmi-swint-target int=%02lx handler=%04x:%08lx flags=%04x code=%02x%02x%02x%02x%02x%02x%02x%02x\\r\\n",
         interrupt_number, (unsigned int)handler_cs, handler_eip,
@@ -692,6 +741,8 @@ void mvdm_softpc_report_dpmi_swint_target(unsigned long interrupt_number,
         (unsigned int)(code_size > 7u ? code[7] : 0u));
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_wow_allocsel_instruction(unsigned short cs,
@@ -699,6 +750,7 @@ void mvdm_softpc_report_wow_allocsel_instruction(unsigned short cs,
     unsigned short cx, unsigned short dx, unsigned short bp,
     unsigned long eflags)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char line[160];
     DWORD bytes;
@@ -708,13 +760,13 @@ void mvdm_softpc_report_wow_allocsel_instruction(unsigned short cs,
     /* DOSX's source map assigns i31_WOW_AllocSel to 0A8D:4F6A.  The
      * selector relocates at runtime, but this routine's 30-byte code range
      * is fixed inside the original DOSX image. */
-    if (eip < 0x4f6au || eip >= 0x4f88u) return;
+    if (eip < 0x4f6au || eip >= 0x4f88u) goto restore_error;
     bytes = GetEnvironmentVariableA("MVDM_S42_DPMI_ALLOCSEL_TRACE_PATH",
         path, (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
         OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "dpmi-allocsel csip=%04x:%08lx ax=%04x bx=%04x cx=%04x dx=%04x bp=%04x cf=%u\\r\\n",
         (unsigned int)cs, eip, (unsigned int)ax, (unsigned int)bx,
@@ -722,6 +774,8 @@ void mvdm_softpc_report_wow_allocsel_instruction(unsigned short cs,
         (unsigned int)(eflags & 1u));
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_wow_setdescriptor_instruction(unsigned short cs,
@@ -729,6 +783,7 @@ void mvdm_softpc_report_wow_setdescriptor_instruction(unsigned short cs,
     unsigned short cx, unsigned short dx, unsigned short bp,
     unsigned long eflags)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char line[168];
     DWORD bytes;
@@ -740,13 +795,13 @@ void mvdm_softpc_report_wow_setdescriptor_instruction(unsigned short cs,
      * 0001:3947..3A5F before it asks the NT kernel to publish a selector.
      * Both ranges are observation-only; neither is an emulation route. */
     if (!((eip >= 0x4f88u && eip < 0x4fa4u) ||
-          (eip >= 0x3947u && eip < 0x3a60u))) return;
+          (eip >= 0x3947u && eip < 0x3a60u))) goto restore_error;
     bytes = GetEnvironmentVariableA("MVDM_S42_DPMI_SETDESCRIPTOR_TRACE_PATH",
         path, (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
         OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "dpmi-setdescriptor csip=%04x:%08lx ax=%04x bx=%04x cx=%04x dx=%04x bp=%04x cf=%u\\r\\n",
         (unsigned int)cs, eip, (unsigned int)ax, (unsigned int)bx,
@@ -754,12 +809,15 @@ void mvdm_softpc_report_wow_setdescriptor_instruction(unsigned short cs,
         (unsigned int)(eflags & 1u));
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_wow_getsel_instruction(unsigned short cs,
     unsigned long eip, unsigned short ax, unsigned short cx,
     unsigned short si, unsigned short ds, unsigned long eflags)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char line[152];
     DWORD bytes;
@@ -768,13 +826,13 @@ void mvdm_softpc_report_wow_getsel_instruction(unsigned short cs,
 
     /* KRNL386's retail map places get_sel at 0001:2C26 and the following
      * routine at 2D3E.  Only record entry plus its final instruction. */
-    if (eip != 0x2c26u && eip != 0x2d3du) return;
+    if (eip != 0x2c26u && eip != 0x2d3du) goto restore_error;
     bytes = GetEnvironmentVariableA("MVDM_S42_KRNL_GETSEL_TRACE_PATH",
         path, (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
         OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "krnl-getsel stage=%s csip=%04x:%08lx ax=%04x cx=%04x si=%04x ds=%04x cf=%u\\r\\n",
         eip == 0x2c26u ? "entry" : "return", (unsigned int)cs, eip,
@@ -782,6 +840,8 @@ void mvdm_softpc_report_wow_getsel_instruction(unsigned short cs,
         (unsigned int)ds, (unsigned int)(eflags & 1u));
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_wow_longptradd_instruction(unsigned short cs,
@@ -789,25 +849,28 @@ void mvdm_softpc_report_wow_longptradd_instruction(unsigned short cs,
     unsigned short cx, unsigned short dx, unsigned short ss,
     unsigned long esp)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char line[176];
     DWORD bytes;
     DWORD written;
     HANDLE file;
 
-    if (eip < 0x3482u || eip >= 0x3492u) return;
+    if (eip < 0x3482u || eip >= 0x3492u) goto restore_error;
     bytes = GetEnvironmentVariableA("MVDM_S42_WOW_LONGPTRADD_TRACE_PATH",
         path, (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
         OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "wow-longptradd csip=%04x:%08lx ax=%04x bx=%04x cx=%04x dx=%04x ss=%04x esp=%08lx\\r\\n",
         (unsigned int)cs, eip, (unsigned int)ax, (unsigned int)bx,
         (unsigned int)cx, (unsigned int)dx, (unsigned int)ss, esp);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_dpmi_iret16(unsigned short frame_bits,
@@ -815,6 +878,7 @@ void mvdm_softpc_report_dpmi_iret16(unsigned short frame_bits,
     unsigned short result_bx, unsigned short continuation_cs,
     unsigned long continuation_eip, unsigned long eflags)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char line[128];
     DWORD bytes;
@@ -827,13 +891,13 @@ void mvdm_softpc_report_dpmi_iret16(unsigned short frame_bits,
     if (service_ax != 0x04f1u && service_ax != 0x04f2u &&
             service_ax != 0x04f3u &&
             !(service_ax == 0x0000u && (result_ax & 0x8000u)))
-        return;
+        goto restore_error;
     bytes = GetEnvironmentVariableA("MVDM_S42_DPMI_IRET16_REPORT_PATH", path,
         (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
         OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "dpmi-iret frame=%u service=%04x ax=%04x bx=%04x next=%04x:%08lx cf=%u\\r\\n",
         (unsigned int)frame_bits, (unsigned int)service_ax,
@@ -842,6 +906,8 @@ void mvdm_softpc_report_dpmi_iret16(unsigned short frame_bits,
         (unsigned int)(eflags & 1u));
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_dpmi_iret16_state(unsigned short frame_bits,
@@ -851,6 +917,7 @@ void mvdm_softpc_report_dpmi_iret16_state(unsigned short frame_bits,
     unsigned short ss, unsigned long sp, unsigned short return_ip,
     unsigned short return_cs, unsigned short return_flags)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char line[256];
     DWORD bytes;
@@ -858,13 +925,13 @@ void mvdm_softpc_report_dpmi_iret16_state(unsigned short frame_bits,
     HANDLE file;
 
     if (ax != 0x04f1u && ax != 0x04f2u && ax != 0x04f3u)
-        return;
+        goto restore_error;
     bytes = GetEnvironmentVariableA("MVDM_S42_DPMI_IRET16_STATE_REPORT_PATH",
         path, (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
         OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "dpmi-iret-state frame=%u ax=%04x bx=%04x cx=%04x dx=%04x si=%04x di=%04x bp=%04x ds=%04x es=%04x ss=%04x sp=%08lx return=%04x:%04x flags=%04x\\r\\n",
         (unsigned int)frame_bits, (unsigned int)ax, (unsigned int)bx,
@@ -874,11 +941,14 @@ void mvdm_softpc_report_dpmi_iret16_state(unsigned short frame_bits,
         (unsigned int)return_ip, (unsigned int)return_flags);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_wow_code_segment_load(unsigned short selector,
     unsigned long base, unsigned long limit, unsigned long access_rights)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char filter[16];
     char line[256];
@@ -889,20 +959,22 @@ void mvdm_softpc_report_wow_code_segment_load(unsigned short selector,
 
     bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_TRACE_PATH", path,
         (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_SELECTOR", filter,
         (DWORD)sizeof(filter));
-    if (bytes == 0u || bytes >= sizeof(filter)) return;
+    if (bytes == 0u || bytes >= sizeof(filter)) goto restore_error;
     selected = strtoul(filter, NULL, 16);
-    if (selector != (unsigned short)selected) return;
+    if (selector != (unsigned short)selected) goto restore_error;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
         NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "cs-load selector=%04x base=%08lx limit=%08lx ar=%08lx\r\n",
         (unsigned int)selector, base, limit, access_rights);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_wow_far_call_attempt(unsigned short selector,
@@ -910,6 +982,7 @@ void mvdm_softpc_report_wow_far_call_attempt(unsigned short selector,
     unsigned short ldt_selector, unsigned long ldt_base,
     unsigned long ldt_limit)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char filter[16];
     char line[256];
@@ -928,12 +1001,12 @@ void mvdm_softpc_report_wow_far_call_attempt(unsigned short selector,
 
     bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_TRACE_PATH", path,
         (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_SELECTOR", filter,
         (DWORD)sizeof(filter));
-    if (bytes == 0u || bytes >= sizeof(filter)) return;
+    if (bytes == 0u || bytes >= sizeof(filter)) goto restore_error;
     selected = strtoul(filter, NULL, 16);
-    if (selector != (unsigned short)selected) return;
+    if (selector != (unsigned short)selected) goto restore_error;
     if (Ldt != NULL) {
         caller_offset = (unsigned long)(caller_cs & 0xfff8u);
         CopyMemory(caller_source, (unsigned char *)Ldt + caller_offset,
@@ -954,7 +1027,7 @@ void mvdm_softpc_report_wow_far_call_attempt(unsigned short selector,
     }
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
         NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "far-call selector=%04x offset=%08lx caller=%04x:%08lx ldt=%04x:%08lx/%08lx source=%08lx:%08lx shadow=%08lx:%08lx code=%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x\r\n",
         (unsigned int)selector, offset, (unsigned int)caller_cs, caller_eip,
@@ -966,12 +1039,15 @@ void mvdm_softpc_report_wow_far_call_attempt(unsigned short selector,
         caller_bytes[12], caller_bytes[13], caller_bytes[14], caller_bytes[15]);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_wow_far_call_validation(unsigned short selector,
     unsigned long descriptor_address, unsigned long access_rights,
     unsigned long current_privilege)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char filter[16];
     char line[144];
@@ -982,21 +1058,23 @@ void mvdm_softpc_report_wow_far_call_validation(unsigned short selector,
 
     bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_TRACE_PATH", path,
         (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_SELECTOR", filter,
         (DWORD)sizeof(filter));
-    if (bytes == 0u || bytes >= sizeof(filter)) return;
+    if (bytes == 0u || bytes >= sizeof(filter)) goto restore_error;
     selected = strtoul(filter, NULL, 16);
-    if (selector != (unsigned short)selected) return;
+    if (selector != (unsigned short)selected) goto restore_error;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
         NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "far-validate selector=%04x descriptor=%08lx ar=%02lx cpl=%lu\r\n",
         (unsigned int)selector, descriptor_address, access_rights,
         current_privilege);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_wow_descriptor_domains(unsigned short selector,
@@ -1004,6 +1082,7 @@ void mvdm_softpc_report_wow_descriptor_domains(unsigned short selector,
     unsigned long ldt_limit, unsigned short ldt_selector,
     unsigned long descriptor_low, unsigned long descriptor_high)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char filter[16];
     char line[192];
@@ -1017,20 +1096,20 @@ void mvdm_softpc_report_wow_descriptor_domains(unsigned short selector,
 
     bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_TRACE_PATH", path,
         (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_SELECTOR", filter,
         (DWORD)sizeof(filter));
-    if (bytes == 0u || bytes >= sizeof(filter)) return;
+    if (bytes == 0u || bytes >= sizeof(filter)) goto restore_error;
     selected = strtoul(filter, NULL, 16);
     if (selector != (unsigned short)selected || Ldt == NULL ||
-            Cpu40LdtShadowAddress == 0u) return;
+            Cpu40LdtShadowAddress == 0u) goto restore_error;
     offset = (unsigned long)(selector & 0xfff8u);
     CopyMemory(source, (unsigned char *)Ldt + offset, sizeof(source));
     CopyMemory(shadow, (unsigned char *)(uintptr_t)(IntelBase +
         Cpu40LdtShadowAddress) + offset, sizeof(shadow));
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
         NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "far-domains selector=%04x observed=%08lx ldt=%04x:%08lx/%08lx actual=%08lx:%08lx source=%08lx:%08lx shadow=%08lx:%08lx flat=%08lx\\r\\n",
         (unsigned int)selector, descriptor_address, (unsigned int)ldt_selector,
@@ -1038,12 +1117,15 @@ void mvdm_softpc_report_wow_descriptor_domains(unsigned short selector,
         source[1], shadow[0], shadow[1], FlatAddress[(selector & 0xfff8u) >> 3]);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_wow_fetch_translation(unsigned short selector,
     unsigned long offset, unsigned long linear, unsigned long physical,
     unsigned long mapped)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char filter[16];
     char line[256];
@@ -1054,25 +1136,28 @@ void mvdm_softpc_report_wow_fetch_translation(unsigned short selector,
 
     bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_TRACE_PATH", path,
         (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_SELECTOR", filter,
         (DWORD)sizeof(filter));
-    if (bytes == 0u || bytes >= sizeof(filter)) return;
+    if (bytes == 0u || bytes >= sizeof(filter)) goto restore_error;
     selected = strtoul(filter, NULL, 16);
-    if (selector != (unsigned short)selected) return;
+    if (selector != (unsigned short)selected) goto restore_error;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
         NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "far-fetch selector=%04x offset=%08lx linear=%08lx mapped=%lu physical=%08lx\\r\\n",
         (unsigned int)selector, offset, linear, mapped, physical);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_wow_int2a_ldt(unsigned short selector,
     unsigned long descriptor_low, unsigned long descriptor_high)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char line[128];
     DWORD bytes;
@@ -1081,20 +1166,23 @@ void mvdm_softpc_report_wow_int2a_ldt(unsigned short selector,
 
     bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_TRACE_PATH", path,
         (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
         NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "int2a-setldt selector=%04x descriptor=%08lx:%08lx\\r\\n",
         (unsigned int)selector, descriptor_low, descriptor_high);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_wow_int2a(unsigned long eax, unsigned long ebx,
     unsigned long ecx, unsigned long edx, unsigned long ebp)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char line[160];
     DWORD bytes;
@@ -1103,21 +1191,24 @@ void mvdm_softpc_report_wow_int2a(unsigned long eax, unsigned long ebx,
 
     bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_TRACE_PATH", path,
         (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
         NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "int2a eax=%08lx ebx=%08lx ecx=%08lx edx=%08lx ebp=%08lx\\r\\n",
         eax, ebx, ecx, edx, ebp);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_wow_exception_hook(unsigned long exception_number,
     unsigned long error_code, unsigned long handler_installed,
     unsigned long handled)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char line[128];
     DWORD bytes;
@@ -1126,15 +1217,17 @@ void mvdm_softpc_report_wow_exception_hook(unsigned long exception_number,
 
     bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_TRACE_PATH", path,
         (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
         NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "exception-hook vector=%02lx error=%04lx installed=%lu handled=%lu\r\n",
         exception_number, error_code, handler_installed, handled);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_dpmi_fault_dispatch(unsigned long exception_number,
@@ -1143,6 +1236,7 @@ void mvdm_softpc_report_dpmi_fault_dispatch(unsigned long exception_number,
     unsigned short resulting_ss, unsigned long resulting_esp,
     unsigned long frame32, unsigned short source_cs, unsigned long source_eip)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char line[320];
     DWORD bytes;
@@ -1158,7 +1252,7 @@ void mvdm_softpc_report_dpmi_fault_dispatch(unsigned long exception_number,
 
     bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_TRACE_PATH", path,
         (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     if (Ldt != NULL) {
         source_offset = (unsigned long)(source_cs & 0xfff8u);
         CopyMemory(source_descriptor, (unsigned char *)Ldt + source_offset,
@@ -1173,7 +1267,7 @@ void mvdm_softpc_report_dpmi_fault_dispatch(unsigned long exception_number,
     }
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
         NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "dpmi-fault vector=%02lx error=%04lx source=%04x:%08lx base=%08lx linear=%08lx mapped=%d physical=%08lx code=%02x%02x%02x%02x%02x%02x%02x%02x handler=%04x:%08lx result=%04x:%08lx stack=%04x:%08lx frame32=%lu\r\n",
         exception_number, error_code, (unsigned int)source_cs, source_eip,
@@ -1184,6 +1278,8 @@ void mvdm_softpc_report_dpmi_fault_dispatch(unsigned long exception_number,
         resulting_eip, (unsigned int)resulting_ss, resulting_esp, frame32);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_dpmi_fault_stack(char const *stage,
@@ -1191,6 +1287,7 @@ void mvdm_softpc_report_dpmi_fault_stack(char const *stage,
     unsigned short active_ss, unsigned long active_esp,
     unsigned short const *words, unsigned long word_count)
 {
+    DWORD saved_error = GetLastError();
     char path[MAX_PATH];
     char line[256];
     char word_text[128];
@@ -1202,10 +1299,10 @@ void mvdm_softpc_report_dpmi_fault_stack(char const *stage,
 
     bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_TRACE_PATH", path,
         (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) return;
+    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
         NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     word_text[0] = '\0';
     for (index = 0u; index < word_count && index < 8u; ++index) {
         used = strlen(word_text);
@@ -1218,6 +1315,8 @@ void mvdm_softpc_report_dpmi_fault_stack(char const *stage,
         active_esp, word_text);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 volatile LONG mvdm_softpc_wow_source_descriptor_trace_active;
@@ -1226,6 +1325,7 @@ static char wow_source_descriptor_trace_filter[16];
 
 void mvdm_softpc_initialize_default_off_traces(void)
 {
+    DWORD saved_error = GetLastError();
     DWORD path_bytes;
     DWORD filter_bytes;
 
@@ -1244,15 +1344,18 @@ void mvdm_softpc_initialize_default_off_traces(void)
         wow_source_descriptor_trace_path[0] = 0;
         wow_source_descriptor_trace_filter[0] = 0;
         InterlockedExchange(&mvdm_softpc_wow_source_descriptor_trace_active, 0);
-        return;
+        goto restore_error;
     }
     InterlockedExchange(&mvdm_softpc_wow_source_descriptor_trace_active, 1);
+restore_error:
+    SetLastError(saved_error);
 }
 
 void mvdm_softpc_report_wow_source_descriptor_store(unsigned long address,
     unsigned long value, unsigned long width, unsigned short cs,
     unsigned long eip, unsigned short ss, unsigned long esp)
 {
+    DWORD saved_error = GetLastError();
     char line[288];
     HANDLE file;
     DWORD written;
@@ -1272,7 +1375,7 @@ void mvdm_softpc_report_wow_source_descriptor_store(unsigned long address,
     unsigned char writer_bytes[8] = {0};
 
     if (!mvdm_softpc_wow_source_descriptor_trace_active || Ldt == NULL ||
-        IntelBase == 0u) return;
+        IntelBase == 0u) goto restore_error;
     selected = strtoul(wow_source_descriptor_trace_filter, NULL, 16);
     source_address = (unsigned long)((unsigned char *)Ldt -
         (unsigned char *)(uintptr_t)IntelBase);
@@ -1284,7 +1387,7 @@ void mvdm_softpc_report_wow_source_descriptor_store(unsigned long address,
         !(address + width > gdt_shadow_address &&
             address < gdt_shadow_address + sizeof(LDT_ENTRY)) &&
         !(address + width > ldt_shadow_address &&
-            address < ldt_shadow_address + sizeof(LDT_ENTRY))) return;
+            address < ldt_shadow_address + sizeof(LDT_ENTRY))) goto restore_error;
     domain = (address + width > ldt_shadow_address &&
         address < ldt_shadow_address + sizeof(LDT_ENTRY)) ? "ldt" :
         ((address + width > gdt_shadow_address &&
@@ -1309,7 +1412,7 @@ void mvdm_softpc_report_wow_source_descriptor_store(unsigned long address,
     file = CreateFileA(wow_source_descriptor_trace_path, FILE_APPEND_DATA,
         FILE_SHARE_READ | FILE_SHARE_WRITE,
         NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) return;
+    if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
         "%s-descriptor-store selector=%04lx address=%08lx width=%lu value=%08lx writer=%04x:%08lx stack=%04x:%08lx source=%08lx:%08lx shadow=%08lx:%08lx linear=%08lx mapped=%d physical=%08lx code=%02x%02x%02x%02x%02x%02x%02x%02x\\r\\n",
         domain, selected, address, width, value, (unsigned int)cs, eip,
@@ -1320,6 +1423,8 @@ void mvdm_softpc_report_wow_source_descriptor_store(unsigned long address,
         writer_bytes[6], writer_bytes[7]);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
+restore_error:
+    SetLastError(saved_error);
 }
 
 int mvdm_softpc_terminate_current_session(uint32_t vdm_for_wow,

@@ -1,0 +1,189 @@
+#include "precomp.h"
+#include "wow_idle_hook_binding.h"
+#include "wow_user_runtime.h"
+#include "wow_task_order_bindings.h"
+#include "wow_user_borrow_scope.h"
+#include <stdio.h>
+
+/* The witness pumps a native window, not a WOW window projection. */
+#undef GetMessageA
+#undef ShowWindow
+#undef DestroyWindow
+#undef DispatchMessageA
+#undef GetForegroundWindow
+
+PTD gptdTaskHead;
+CRITICAL_SECTION gcsWOW;
+static wow_user_runtime_thread runtime;
+static wow_task_order_thread thread;
+static wow_task_order_entry entry;
+static unsigned errors, task_depth, borrow_depth, calls;
+static BOOL foreign_context, deny_task, deny_borrow, nested, exceptional;
+static unsigned next_calls;
+#define CHECK(x) do { if (!(x)) { ++errors; fprintf(stderr, "FAIL line=%d\n", __LINE__); } } while (0)
+
+/* Bounded order/registration witness only: no global native hook is installed,
+ * and mocked scope helpers do not prove production scheduler ownership. */
+wow_user_runtime_thread *WINAPI wow_user_runtime_current(void)
+{
+    return foreign_context ? NULL : &runtime;
+}
+BOOL WINAPI wow_task_callback_enter(wow_task_callback_scope *scope)
+{
+    ZeroMemory(scope, sizeof(*scope));
+    if (deny_task) return FALSE;
+    ++task_depth;
+    return TRUE;
+}
+BOOL WINAPI wow_task_callback_leave(wow_task_callback_scope *scope)
+{
+    (void)scope;
+    CHECK(task_depth == borrow_depth + 1);
+    --task_depth;
+    return TRUE;
+}
+BOOL WINAPI wow_user_borrow_enter(wow_user_borrow_scope *scope)
+{
+    (void)scope;
+    CHECK(task_depth == borrow_depth + 1);
+    if (deny_borrow) return FALSE;
+    ++borrow_depth;
+    return TRUE;
+}
+VOID WINAPI wow_user_borrow_leave_required(wow_user_borrow_scope *scope)
+{
+    (void)scope;
+    CHECK(task_depth && task_depth == borrow_depth);
+    --borrow_depth;
+}
+LRESULT CALLBACK WowOriginalForegroundIdleHook(int code, WPARAM wp, LPARAM lp)
+{
+    ++calls;
+    CHECK(code == HC_ACTION && wp == 0 && lp == 0);
+    CHECK(task_depth && task_depth == borrow_depth);
+    if (nested && task_depth == 1) wow_user_idle_hook_dispatch();
+    if (exceptional) RaiseException(0xe0447014, 0, 0, NULL);
+    SetLastError(0xe0447015);
+    return 93;
+}
+
+static LRESULT CALLBACK next_idle(int code, WPARAM wp, LPARAM lp)
+{
+    if (code >= 0) ++next_calls;
+    return CallNextHookEx(NULL, code, wp, lp);
+}
+
+/* Real USER chain, not a direct HookProc call. Only a fresh owned desktop is
+ * activated, and its prior input desktop is restored before destruction. */
+static void native_chain(TD *registered)
+{
+    HDESK previous = OpenInputDesktop(0, FALSE, DESKTOP_SWITCHDESKTOP);
+    HDESK original = GetThreadDesktop(GetCurrentThreadId()), desktop;
+    HWND window = NULL;
+    HHOOK first = NULL, next = NULL;
+    char name[64];
+    unsigned phase, before, after;
+    BOOL switched = FALSE;
+    sprintf_s(name, sizeof(name), "wow-idle-chain-%lu", GetCurrentProcessId());
+    desktop = CreateDesktopA(name, NULL, NULL, 0, GENERIC_ALL, NULL);
+    CHECK(previous && desktop);
+    if (!previous || !desktop) goto done;
+    CHECK(SetThreadDesktop(desktop));
+    window = CreateWindowA("STATIC", "owned idle chain", WS_OVERLAPPEDWINDOW,
+        0, 0, 240, 140, NULL, NULL, GetModuleHandle(NULL), NULL);
+    CHECK(window != NULL);
+    if (!window) goto done;
+    next = SetWindowsHookExA(WH_FOREGROUNDIDLE, next_idle, NULL, GetCurrentThreadId());
+    first = SetWindowsHookExA(WH_FOREGROUNDIDLE, WK32ForegroundIdleHook, NULL, GetCurrentThreadId());
+    CHECK(first && next);
+    switched = SwitchDesktop(desktop);
+    CHECK(switched);
+    if (!switched || !first || !next) goto done;
+    ShowWindow(window, SW_SHOW);
+    SetForegroundWindow(window);
+    CHECK(GetForegroundWindow() == window);
+    for (phase = 0; phase != 2; ++phase) {
+        unsigned ticks = 0;
+        MSG message;
+        registered->hIdleHook = phase ? NULL : first;
+        before = calls; after = next_calls;
+        CHECK(SetTimer(window, 1, 40, NULL) != 0);
+        while (ticks < 6 && GetMessage(&message, NULL, 0, 0) > 0) {
+            if (message.message == WM_TIMER) ++ticks;
+            TranslateMessage(&message); DispatchMessage(&message);
+        }
+        KillTimer(window, 1);
+        CHECK(next_calls > after);
+        CHECK(phase ? calls == before : calls - before == next_calls - after);
+    }
+    before = next_calls;
+    registered->hIdleHook = first;
+    wow_user_idle_hook_dispatch();
+    CHECK(next_calls == before);
+done:
+    registered->hIdleHook = NULL;
+    if (first) CHECK(UnhookWindowsHookEx(first));
+    if (next) CHECK(UnhookWindowsHookEx(next));
+    if (switched) CHECK(SwitchDesktop(previous));
+    if (window) DestroyWindow(window);
+    CHECK(SetThreadDesktop(original));
+    if (desktop) CloseDesktop(desktop);
+    if (previous) CloseDesktop(previous);
+    fprintf(stderr, "WOW_IDLE_NATIVE_CHAIN errors=%u next=%u registered_and_unregistered=1 direct_not_forwarded=1\n", errors, next_calls);
+}
+
+int __cdecl main(void)
+{
+    TD first = {0}, second = {0};
+    BOOL caught = FALSE;
+    InitializeCriticalSection(&gcsWOW);
+    runtime.thread = &thread;
+    thread.ptdb = &entry;
+    SetLastError(0xe0447015);
+    CHECK(!wow_user_idle_hook_registered());
+    CHECK(GetLastError() == 0xe0447015);
+    gptdTaskHead = &first;
+    first.ptdNext = &second;
+    CHECK(!wow_user_idle_hook_registered());
+    second.hIdleHook = (HHOOK)(ULONG_PTR)1; /* Mock original TD state only. */
+    CHECK(!wow_user_idle_hook_registered()); /* Published but not initialized. */
+    CHECK(GetLastError() == 0xe0447015);
+    second.hThread = (HANDLE)(ULONG_PTR)1;
+    CHECK(wow_user_idle_hook_registered());
+    (void)WK32ForegroundIdleHook(HC_ACTION, 0, 0);
+    CHECK(GetLastError() == 0xe0447015);
+    nested = TRUE;
+    wow_user_idle_hook_dispatch();
+    nested = FALSE;
+    exceptional = TRUE;
+    __try { wow_user_idle_hook_dispatch(); }
+    __except (GetExceptionCode() == 0xe0447014 ?
+            EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
+        caught = TRUE;
+    }
+    exceptional = FALSE;
+    CHECK(caught && calls == 4 && !task_depth && !borrow_depth);
+    deny_task = TRUE;
+    wow_user_idle_hook_dispatch();
+    deny_task = FALSE;
+    deny_borrow = TRUE;
+    wow_user_idle_hook_dispatch();
+    deny_borrow = FALSE;
+    foreign_context = TRUE;
+    (void)WK32ForegroundIdleHook(HC_ACTION, 0, 0);
+    foreign_context = FALSE;
+    thread.ptdb = NULL;
+    (void)WK32ForegroundIdleHook(HC_ACTION, 0, 0);
+    CHECK(calls == 4 && !task_depth && !borrow_depth);
+    second.hIdleHook = NULL;
+    CHECK(!wow_user_idle_hook_registered());
+    thread.ptdb = &entry;
+    (void)WK32ForegroundIdleHook(HC_ACTION, 0, 0);
+    CHECK(calls == 4 && !task_depth && !borrow_depth);
+    fprintf(stderr, "WOW_IDLE_HOOK_GUARD errors=%u calls=%u nested=1 exception=1 denied=2 foreign=2 retired=1\n",
+        errors, calls);
+    native_chain(&second);
+    gptdTaskHead = NULL;
+    DeleteCriticalSection(&gcsWOW);
+    return errors ? 1 : 0;
+}

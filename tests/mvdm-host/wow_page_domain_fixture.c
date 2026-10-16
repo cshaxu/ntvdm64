@@ -17,6 +17,8 @@
 #include "wow32-dll/include/wow_user_task_lifecycle.h"
 #include "wow32-dll/include/wow_user_private_access.h"
 
+extern BOOL WINAPI WOWCallback16Ex(DWORD, DWORD, DWORD, PVOID, PDWORD);
+
 extern void sas_init(uint32_t size);
 extern void sas_term(void);
 extern void c_sas_enable_20_bit_wrapping(void);
@@ -73,6 +75,9 @@ static unsigned borrow_errors;
 static ULONG callback_backing, callback_teb;
 static unsigned callback_zero_count;
 static const char *native_failure_signal;
+static const char *callback_failure_kind;
+static const char *callback_cache_signal;
+static BOOL dialog_cache_failure;
 #define BORROW_CHECK(value) do { if (!(value)) { ++borrow_errors; \
     fprintf(stderr, "WINDOW_BORROW_FAIL line=%d error=%lu\n", __LINE__, GetLastError()); } } while (0)
 
@@ -81,6 +86,14 @@ static DWORD WINAPI destroy_in_callback(HWND window, UINT message, UINT wp,
 {
     BORROW_CHECK(procedure == 0x81234567u && words != NULL);
     if (message == WM_APP + 70) {
+        if (callback_cache_signal && !dialog_cache_failure) {
+            HANDLE signal = OpenEventA(EVENT_MODIFY_STATE, FALSE, callback_cache_signal);
+            if (!signal) ExitProcess(7);
+            SetEvent(signal); CloseHandle(signal);
+            /* Break only the domain identity checked by the actual WND
+             * finally; do not access guest memory again in this child. */
+            c_setCR3(c_getCR3() ^ 0x1000u);
+        }
         ++callback_zero_count;
         SetLastError(0x55bbu);
         return 0;
@@ -116,6 +129,13 @@ static INT_PTR CALLBACK dialog_cache_callback(HWND window, UINT message,
     (void)wp; (void)lp;
     BORROW_CHECK(c_sas_dw_at(callback_teb + 0x6cu) == (ULONG)(ULONG_PTR)window);
     BORROW_CHECK(backing && c_sas_dw_at(backing) == (ULONG)(ULONG_PTR)window);
+    if (callback_cache_signal && dialog_cache_failure) {
+        HANDLE signal = OpenEventA(EVENT_MODIFY_STATE, FALSE, callback_cache_signal);
+        if (!signal) ExitProcess(7);
+        SetEvent(signal); CloseHandle(signal);
+        c_setCR3(c_getCR3() ^ 0x1000u);
+        return FALSE; /* Production dialog finally must reject this return. */
+    }
     if (message == WM_APP + 99) {
         BORROW_CHECK(wow_native_DestroyWindow(window));
         BORROW_CHECK(c_sas_dw_at(callback_teb + 0x70u) == backing);
@@ -755,6 +775,18 @@ static void verify_managed_slot_reuse(wow_class_lookup_context *classes)
         borrow_errors - before);
 }
 
+static unsigned terminal_dialog_callbacks;
+static INT_PTR CALLBACK terminal_dialog_witness(HWND window, UINT message,
+    WPARAM wp, LPARAM lp)
+{
+    UNREFERENCED_PARAMETER(window);
+    UNREFERENCED_PARAMETER(wp);
+    UNREFERENCED_PARAMETER(lp);
+    if (message == WM_DESTROY || message == WM_NCDESTROY)
+        ++terminal_dialog_callbacks;
+    return FALSE;
+}
+
 static void verify_native_class_creation(wow_class_lookup_context *classes)
 {
     static wow_user_object_table objects;
@@ -884,6 +916,7 @@ static void verify_native_class_creation(wow_class_lookup_context *classes)
         wow_user_runtime_thread binding = {0};
         HWND button = NULL;
         wow_window_words_binding *child;
+        unsigned terminal_case;
         task.hTaskWow = 0x4321;
         runtime.lifecycle = &native_owner; /* Single-task native callback fixture. */
         thread.ptdb = &task; process.pwpi = &task_state;
@@ -895,8 +928,9 @@ static void verify_native_class_creation(wow_class_lookup_context *classes)
         tail[0] = 0xffff; tail[1] = 0x0080; /* Standard BUTTON ordinal. */
         tail[2] = 'O'; tail[3] = 'K'; /* NUL title and zero extra bytes follow. */
         BORROW_CHECK(wow_user_runtime_bind(&binding, &runtime, &thread, NULL));
+        for (terminal_case = 0; terminal_case != 2; ++terminal_case) {
         window = wow_user_server_create_dialog(GetModuleHandle(NULL), dialog,
-            sizeof(template_words), NULL, NULL, 0,
+            sizeof(template_words), NULL, terminal_dialog_witness, 0,
             SCDLG_CLIENT | SCDLG_ANSI | SCDLG_NOREVALIDATE);
         BORROW_CHECK(window != NULL);
         if (window) {
@@ -907,14 +941,80 @@ static void verify_native_class_creation(wow_class_lookup_context *classes)
                 BORROW_CHECK(wow_window_words_cleanup_value(child)->thread == &thread);
                 BORROW_CHECK(wow_window_class_words_value(child) != NULL);
             }
+            if (terminal_case) {
+                wow_window_words_binding *root = wow_window_words_acquire(window);
+                wow_task_callback_scope rejected;
+                unsigned callbacks = terminal_dialog_callbacks;
+                BORROW_CHECK(root != NULL);
+                BORROW_CHECK(wow_user_runtime_enter(&binding));
+                thread.TIF_flags |= WOW_TASK_TIF_INCLEANUP;
+                if (child) {
+                    DWORD target = 0;
+                    WNDCLASSEXA narrow = {sizeof(narrow)};
+                    WNDCLASSEXW wide = {sizeof(wide)};
+                    HMODULE provider = NULL;
+                    char provider_path[MAX_PATH] = {0};
+                    wow_window_procedure_read(button, &target);
+                    if (GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS |
+                            GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
+                            (LPCSTR)(ULONG_PTR)target, &provider))
+                        GetModuleFileNameA(provider, provider_path, sizeof(provider_path));
+                    GetClassInfoExA(NULL, "BUTTON", &narrow);
+                    GetClassInfoExW(NULL, L"BUTTON", &wide);
+                    fprintf(stderr, "WOW_TERMINAL_NATIVE_TARGET hwnd=%p target=%08lx classA=%p classW=%p fnid=%04x cleanup=%p\n",
+                        button, target, narrow.lpfnWndProc, wide.lpfnWndProc,
+                        wow_window_words_cleanup_value(child)->fnid,
+                        wow_window_words_cleanup_value(child)->native_cleanup);
+                    fprintf(stderr, "WOW_TERMINAL_NATIVE_PROVIDER module=%s rva=%08lx\n",
+                        provider_path, provider ? target - (DWORD)(ULONG_PTR)provider : 0);
+                    BORROW_CHECK(wow_window_words_cleanup_value(child)->native_cleanup != NULL);
+                    {
+                        WNDPROC retained = wow_window_words_cleanup_value(child)->native_cleanup;
+                        WORD retained_fnid = wow_window_words_cleanup_value(child)->fnid;
+                        SetLastError(0x447a3002);
+                        wow_window_note_native_procedure(button, (WNDPROC)(ULONG_PTR)1, FALSE);
+                        BORROW_CHECK(GetLastError() == 0x447a3002 && binding.exclusive_held);
+                        BORROW_CHECK(wow_window_words_cleanup_value(child)->native_cleanup == retained &&
+                            wow_window_words_cleanup_value(child)->fnid == retained_fnid);
+                    }
+                    BORROW_CHECK(wow_window_words_prepare_exit(button, child));
+                }
+                if (root) BORROW_CHECK(wow_window_words_prepare_exit(window, root));
+                BORROW_CHECK(wow_user_runtime_leave(&binding));
+                BORROW_CHECK(!wow_task_callback_enter(&rejected));
+                BORROW_CHECK(GetLastError() == ERROR_INVALID_STATE && !binding.exclusive_held);
+                BORROW_CHECK(!wow_task_resource_cleanup_enter(&rejected));
+                BORROW_CHECK(GetLastError() == ERROR_INVALID_STATE);
+                binding.resource_cleanup_live = TRUE;
+                BORROW_CHECK(!wow_task_callback_enter(&rejected));
+                BORROW_CHECK(wow_task_resource_cleanup_enter(&rejected));
+                BORROW_CHECK(wow_task_callback_leave(&rejected));
+                binding.resource_cleanup_live = FALSE;
+                BORROW_CHECK(!wow_task_resource_cleanup_enter(&rejected));
+                BORROW_CHECK(!wow_window_create_boundA(&thread, native_class.atom,
+                    &request, &words, NULL));
+                BORROW_CHECK(GetLastError() == ERROR_INVALID_STATE);
+                BORROW_CHECK(wow_native_DestroyWindow(window));
+                BORROW_CHECK(terminal_dialog_callbacks == callbacks);
+                wow_window_words_release(root);
+                thread.TIF_flags &= ~WOW_TASK_TIF_INCLEANUP;
+            } else {
+                unsigned callbacks = terminal_dialog_callbacks;
+                BORROW_CHECK(wow_native_DestroyWindow(window));
+                BORROW_CHECK(terminal_dialog_callbacks == callbacks + 2);
+            }
             wow_window_words_release(child);
-            BORROW_CHECK(wow_native_DestroyWindow(window));
+            BORROW_CHECK(wow_window_words_collect_retired(&objects));
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_collect_observed_classes());
             BORROW_CHECK(objects.entries[LOWORD(window)].bType == TYPE_FREE);
             BORROW_CHECK(button && !IsWindow(button) &&
                 objects.entries[LOWORD(button)].bType == TYPE_FREE);
         }
+        }
         BORROW_CHECK(wow_user_runtime_unbind(&binding));
         thread.ptdb = NULL; process.pwpi = NULL;
+        fprintf(stderr, "WOW_TERMINAL_PREPARE_CCPU errors=%u dialog_suppressed=1 native_button=1 creation_denied=1 callback_denied=1\n",
+            borrow_errors - before);
     }
     fprintf(stderr, "WOW_NATIVE_CREATE_CCPU errors=%u forward=1 subclass=1 veto=1 retired=1 internal_combo=1 internal_dialog=1\n",
         borrow_errors - before);
@@ -1389,7 +1489,7 @@ cleanup:
 }
 
 #ifdef WOW_GRAPH_SNAPSHOT_FIXTURE
-static void verify_post_native_failure(void)
+static void verify_terminal_failure(const char *option, const char *marker)
 {
     char exe[MAX_PATH], command[2 * MAX_PATH], name[96];
     HANDLE event;
@@ -1402,7 +1502,7 @@ static void verify_post_native_failure(void)
     BORROW_CHECK(event != NULL);
     if (!event) return;
     GetModuleFileNameA(NULL, exe, sizeof(exe));
-    sprintf_s(command, sizeof(command), "\"%s\" --post-native-failure %s", exe, name);
+    sprintf_s(command, sizeof(command), "\"%s\" %s %s", exe, option, name);
     BORROW_CHECK(CreateProcessA(exe, command, NULL, NULL, FALSE, CREATE_NO_WINDOW,
         NULL, NULL, &startup, &process));
     if (process.hProcess) {
@@ -1415,8 +1515,8 @@ static void verify_post_native_failure(void)
         CloseHandle(process.hThread); CloseHandle(process.hProcess);
     }
     CloseHandle(event);
-    fprintf(stderr, "WOW_POST_NATIVE_FAILURE_CCPU errors=%u consumed_once=1 worker_exit=%08lx\n",
-        borrow_errors - before, code);
+    fprintf(stderr, "%s errors=%u consumed_once=1 worker_exit=%08lx\n",
+        marker, borrow_errors - before, code);
 }
 
 static int external_window_churn(const char *stop_name, const char *ready_name, BOOL hold)
@@ -1931,6 +2031,24 @@ static void verify_desktop_query_projection(ULONG teb)
         borrow_errors - before);
 }
 
+static void trace_class_lifetime_view(const char *phase)
+{
+    ULONG count = 0, i;
+    mvdm_softpc_wow_window_observation *rows;
+    if (!mvdm_softpc_wow_page_domain_copy_window_view(0, NULL, &count)) return;
+    rows = HeapAlloc(GetProcessHeap(), 0, count * sizeof(*rows));
+    if (!rows) return;
+    if (mvdm_softpc_wow_page_domain_copy_window_view(count, rows, &count)) {
+        for (i = 0; i < count; ++i)
+            fprintf(stderr, "WOW_CLASS_LIFETIME_VIEW phase=%s hwnd=%08lx live=%d class=%s next=%08lx parent=%08lx child=%08lx owner=%08lx\n",
+                phase, rows[i].links.window,
+                IsWindow((HWND)(ULONG_PTR)rows[i].links.window),
+                rows[i].descriptor.name, rows[i].links.next,
+                rows[i].links.parent, rows[i].links.child, rows[i].links.owner);
+    }
+    HeapFree(GetProcessHeap(), 0, rows);
+}
+
 static int verify_native_class_projection(ULONG teb)
 {
     wow_class_lookup_context classes = {0};
@@ -1948,6 +2066,7 @@ static int verify_native_class_projection(ULONG teb)
         BORROW_CHECK(wow_user_window_project_graph(&desktop, 1));
     }
     BORROW_CHECK(VdmQueryFreeVirtualMemory(&free_before, &largest) >= 0);
+    trace_class_lifetime_view("before-native-classes");
     BORROW_CHECK(wow_standard_classes_prepare(&classes, class_projection_callback));
     mvdm_softpc_wow_page_domain_leave_protected();
     BORROW_CHECK(!wow_standard_classes_publish(&classes));
@@ -1962,6 +2081,25 @@ static int verify_native_class_projection(ULONG teb)
         char text[64] = {0};
         unsigned i;
         BORROW_CHECK(wow_standard_class_describe(MAKEINTATOM(entry->atomClassName), &native_class));
+        {
+            WORD matched = 0;
+            WNDPROC canonical = NULL;
+            WNDCLASSEXW wide = {sizeof(wide)};
+            SetLastError(0x447a3001);
+            BORROW_CHECK(wow_class_words_match_native(&classes,
+                native_class.native.lpfnWndProc, FALSE, &matched, &canonical));
+            BORROW_CHECK(GetLastError() == 0x447a3001 && matched == entry->fnid &&
+                canonical == native_class.native.lpfnWndProc);
+            BORROW_CHECK(GetClassInfoExW(NULL, MAKEINTATOM(entry->atomClassName), &wide));
+            BORROW_CHECK(wow_class_words_match_native(&classes,
+                wide.lpfnWndProc, TRUE, &matched, &canonical));
+            BORROW_CHECK(matched == entry->fnid && canonical == native_class.native.lpfnWndProc);
+            matched = 0x1234;
+            canonical = (WNDPROC)(ULONG_PTR)1;
+            BORROW_CHECK(!wow_class_words_match_native(&classes,
+                (WNDPROC)(ULONG_PTR)1, FALSE, &matched, &canonical));
+            BORROW_CHECK(matched == 0x1234 && canonical == (WNDPROC)(ULONG_PTR)1);
+        }
         server = entry->guest_server;
         BORROW_CHECK(server != 0);
         if (!server) continue;
@@ -2006,6 +2144,7 @@ static int verify_native_class_projection(ULONG teb)
     BORROW_CHECK(classes.pclsPublicList == NULL);
     BORROW_CHECK(VdmQueryFreeVirtualMemory(&free_after, &largest) >= 0 && free_after == free_before);
     fprintf(stderr, "WOW_CLASS_ALLOCATION before=%lu after=%lu\n", free_before, free_after);
+    if (free_before != free_after) trace_class_lifetime_view("after-native-classes");
     verify_unowned_window_projection(teb);
     verify_observed_window_promotion(teb);
     verify_observed_window_retirement();
@@ -2164,6 +2303,35 @@ static BOOL verify_native_menu_entry(wow_task_order_process *process,
     task.hTaskWow = 0x4321u;
     runtime.lifecycle = &native_owner; /* No second task/handoff in this fixture. */
     if (!wow_user_runtime_bind(&binding, &runtime, &thread, NULL)) return FALSE;
+    if (callback_failure_kind) {
+        HANDLE signal = OpenEventA(EVENT_MODIFY_STATE, FALSE, native_failure_signal);
+        if (!signal) goto cleanup;
+        if (!strcmp(callback_failure_kind, "--native-entry-failure")) {
+            wow_user_native_call call;
+            if (!wow_user_runtime_enter(&binding)) { CloseHandle(signal); goto cleanup; }
+            runtime.owner_thread_id ^= 1u;
+            SetEvent(signal); CloseHandle(signal);
+            (void)wow_user_native_call_begin(&call, NULL);
+        } else if (!strcmp(callback_failure_kind, "--callback-owner-failure")) {
+            wow_task_callback_scope scope = {0};
+            /* Inject a lock already held at the actual return boundary.
+             * Production leave must not report a normal callback result.
+             * This tests restoration rejection, not entry/scheduler policy. */
+            scope.binding = &binding;
+            if (!wow_user_runtime_enter(&binding)) { CloseHandle(signal); goto cleanup; }
+            SetEvent(signal); CloseHandle(signal);
+            (void)wow_task_callback_leave(&scope);
+        } else {
+            wow_user_borrow_scope outer, inner;
+            if (!wow_user_borrow_enter(&outer) || !wow_user_borrow_enter(&inner)) {
+                CloseHandle(signal); goto cleanup;
+            }
+            SetEvent(signal); CloseHandle(signal);
+            wow_user_borrow_leave_required(&outer);
+        }
+        /* Reaching this point is failure even if ordinary cleanup succeeds. */
+        return FALSE;
+    }
     {
         wow_user_native_call call;
         MSG message;
@@ -3316,7 +3484,12 @@ guest_window_failure:
     verify_native_slot_reuse();
     verify_external_observation_churn(FALSE);
     verify_external_observation_churn(TRUE);
-    verify_post_native_failure();
+    verify_terminal_failure("--post-native-failure", "WOW_POST_NATIVE_FAILURE_CCPU");
+    verify_terminal_failure("--native-entry-failure", "WOW_NATIVE_ENTRY_FAILURE_CCPU");
+    verify_terminal_failure("--callback-owner-failure", "WOW_CALLBACK_OWNER_FAILURE_CCPU");
+    verify_terminal_failure("--callback-borrow-failure", "WOW_CALLBACK_BORROW_FAILURE_CCPU");
+    verify_terminal_failure("--window-cache-failure", "WOW_WINDOW_CACHE_FAILURE_CCPU");
+    verify_terminal_failure("--dialog-cache-failure", "WOW_DIALOG_CACHE_FAILURE_CCPU");
     verify_native_discovery(FALSE);
     verify_native_discovery(TRUE);
     if (borrow_errors) goto done;
@@ -3485,11 +3658,37 @@ static DWORD WINAPI run_graph_desktop(void *desktop)
 int main(int argc, char **argv)
 {
 #ifdef WOW_GRAPH_SNAPSHOT_FIXTURE
+    {
+        DWORD result = 0x447a2001, error;
+        BOOL accepted;
+        /* Exercise the actual exported original's pre-frame rejection.
+         * Invalid size must be refused before reading even a NULL argument
+         * buffer, changing the output, or requiring any guest context. */
+        SetLastError(ERROR_SUCCESS);
+        accepted = WOWCallback16Ex(0, 0, MAXDWORD, NULL, &result);
+        error = GetLastError();
+        if (accepted || error != ERROR_INVALID_PARAMETER || result != 0x447a2001)
+            return 12;
+        fprintf(stderr, "WOW_EXPORTED_CALLBACK_REJECT errors=0 output_untouched=1 no_guest_entry=1\n");
+    }
     if (argc == 4 && (strcmp(argv[1], "--external-window-churn") == 0 ||
             strcmp(argv[1], "--external-window-hold") == 0))
         return external_window_churn(argv[2], argv[3], strcmp(argv[1], "--external-window-hold") == 0);
     if (argc == 3 && strcmp(argv[1], "--post-native-failure") == 0) {
         native_failure_signal = argv[2];
+        SetErrorMode(SEM_NOGPFAULTERRORBOX | SEM_FAILCRITICALERRORS);
+    }
+    if (argc == 3 && (!strcmp(argv[1], "--native-entry-failure") ||
+            !strcmp(argv[1], "--callback-owner-failure") ||
+            !strcmp(argv[1], "--callback-borrow-failure"))) {
+        native_failure_signal = argv[2];
+        callback_failure_kind = argv[1];
+        SetErrorMode(SEM_NOGPFAULTERRORBOX | SEM_FAILCRITICALERRORS);
+    }
+    if (argc == 3 && (!strcmp(argv[1], "--window-cache-failure") ||
+            !strcmp(argv[1], "--dialog-cache-failure"))) {
+        callback_cache_signal = argv[2];
+        dialog_cache_failure = !strcmp(argv[1], "--dialog-cache-failure");
         SetErrorMode(SEM_NOGPFAULTERRORBOX | SEM_FAILCRITICALERRORS);
     }
 #endif

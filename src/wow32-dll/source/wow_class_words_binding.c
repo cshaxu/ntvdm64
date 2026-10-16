@@ -120,6 +120,34 @@ BOOL WINAPI wow_class_words_native_registration(wow_class_words_binding *binding
     return binding && binding->native_registration_borrowed;
 }
 
+BOOL WINAPI wow_class_words_match_native(wow_class_lookup_context *context,
+    WNDPROC procedure, BOOL unicode, WORD *fnid, WNDPROC *canonical)
+{
+    wow_class_lookup_entry *entry;
+    DWORD error = GetLastError();
+    WORD found = 0;
+    WNDPROC target = NULL;
+    if (!context || !procedure || !fnid || !canonical) return FALSE;
+    for (entry = context->pclsPublicList; entry; entry = entry->next) {
+        wow_class_words_binding *binding = (wow_class_words_binding *)entry;
+        WNDPROC candidate;
+        WNDCLASSEXW native = {sizeof(native)};
+        if (!binding->native_registration_borrowed || !entry->fnid) continue;
+        candidate = binding->original_native_procedure;
+        if (unicode) {
+            if (!GetClassInfoExW(NULL, MAKEINTATOM(entry->atomClassName), &native)) continue;
+            candidate = native.lpfnWndProc;
+        }
+        if (candidate != procedure) continue;
+        if (found && found != entry->fnid) { found = 0; break; }
+        found = entry->fnid;
+        target = binding->original_native_procedure;
+    }
+    if (found) { *fnid = found; *canonical = target; }
+    SetLastError(error);
+    return found != 0;
+}
+
 void WINAPI wow_class_words_release(wow_class_words_binding *binding)
 {
     if (binding && InterlockedDecrement(&binding->references) == 0)
@@ -241,6 +269,7 @@ LRESULT CALLBACK wow_class_call_original_native(HWND window, UINT message,
         if (!binding || !binding->original_native_procedure) {
             SetLastError(ERROR_INVALID_STATE); __leave;
         }
+        wow_window_note_native_procedure(window, binding->original_native_procedure, FALSE);
         result = CallWindowProcA(binding->original_native_procedure,
             window, message, wp, lp);
     } __finally {

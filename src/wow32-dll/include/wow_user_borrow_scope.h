@@ -17,6 +17,9 @@ BOOL WINAPI wow_user_borrow_enter(wow_user_borrow_scope *);
 /* A valid leave always consumes the scope. FALSE can also report deferred
  * physical reclamation failure; retry collection, never leave that scope twice. */
 BOOL WINAPI wow_user_borrow_leave(wow_user_borrow_scope *);
+/* Production finally: require a matching pop, but allow the existing
+ * collector to retain deferred physical frees. Preserve callback last-error. */
+VOID WINAPI wow_user_borrow_leave_required(wow_user_borrow_scope *);
 /* Borrowed from the current nested scopes, not a transferred reference.
  * Enrollment must retain it before exposing a native property. */
 wow_window_words_binding *WINAPI wow_user_borrow_observed_binding(HWND);

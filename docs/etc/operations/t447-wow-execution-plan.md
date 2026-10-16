@@ -2,6 +2,20 @@
 
 ## Admission and boundaries
 
+S2 P16 closes the frozen foundation scope with owner-approved retention of
+the isolated unlocated common-dialog witness. See the
+[closure](../../history/m0-t447-s2-foundation-closure.md). Earlier pending S2
+statements below are historical. S3--S6 remain unchanged and no successor is
+admitted by closure alone. The whole WOW32 objective remains unfinished.
+
+Owner now explicitly requests completing assets/winnt.zip with required guest
+files. This supersedes the pending test-only WINSOCK input admission: include
+the byte-identical carried original module and audited original support/app
+dependencies in the archive, without rebuilding or patching guest code.
+The archive audit/manifest records27 additions, retained baseline members and
+static NE closure. This is input availability, not completed Winsock/multimedia
+functionality or S2 closure; the frozen callback acceptance remains required.
+
 ### S2 P15: typed callback payload publication
 
 The post-P14 source audit selects the existing window graph as the sole
@@ -416,6 +430,54 @@ specific execution-context and completion-class proof. Implement their common
 failure/lifetime boundary as one dependency-complete group, then test together.
 The audit records exact source owners, evidence limitations and acceptance for
 each blocker; no added feature or whole-subsystem rewrite is admitted.
+
+The r10 review discharges A1's local proof gap, not its delivery gates.
+r12 and early-exit-r2 now repair and prove the modeless-resource counterexample:
+task-specific pfnWOWCleanup releases both dialog resources before original
+guest resource release and exactly-once retirement. The late fallback is not
+the normal cleanup owner. r13 and early-exit-r3 completed naturally with all
+four ordering/twelve foundation/four guest cases passing. A4 receiver-thread
+loss now passes held/unheld with error1400 and restored ownership. A1/A4 local
+proof is complete, not delivered. Remaining blockers are A2 F07 context/frame
+proof and A3 startup/exception/terminal ordering. frozen-sibling-r1 proves
+normal modeless exit and same-worker WINMINE gameplay survival. The original TD
+initialization guard is corrected after that safe pause; its focused rebuild
+and guest rerun are tracked separately, not silently attributed to r13.
+Finish only these assertions and existing delivery gates before S3; no new
+subsystem feature is admitted.
+
+At the naturally completed frozen-shell-r1 safe pause, the scope audit's
+finite acceptance units supersede generic pending-context wording:
+A2-I two-worker idle isolation; A2-S actual original guest Shell callback and
+adapter exception unwind; A2-P selected print/network callback-provider
+dispositions; A3-S real startup failure cleanup; A3-X original exception exit
+and pre-CCPU retirement. Their owners, dependencies and exact exit assertions
+are in the audit. Original-frame-r3 now proves controlled stale-alias/remap
+and resolver-failure behavior; terminal-entry-r2 proves host-entry rejection
+and the actual pre-CCPU adapter with a controlled CPU witness. Neither is
+misrepresented as real guest failure acceptance. Shell native ABI/nesting,
+incremental build and three guest regressions pass; publication remains P15.
+Complete these bounded units as one remaining foundation acceptance group,
+then the existing package delivery gates. No further feature admission or
+semantic waiver is implied. S3/S4/S5 retain B/C/D respectively; S6 reconciles
+completion rather than inheriting these remaining foundation defects.
+
+shell-guest-r2 discharges A2-S's real guest success/failure/child/continuation
+case through original RET_WINEXEC, not its exception-unwind obligation.
+The scoped evidence records exact task/thread return identity. A3-S follows
+original W32Thread InitTask retry exhaustion; A3-X follows W32Exception's
+frame RET_FORCETASKEXIT policy, not the separate S5 hung-task entry.
+frozen-exception-r2 now proves A3-X through the real original exception Close
+response, exactly-once retirement/no later callback and surviving WINMINE
+gameplay. Its original host EXIT_SUCCESS is distinct from guest DOS4CFF.
+frozen-startup-guest-r2 now proves A3-S's seven original initialization
+allocation failures, registered cleanup, actual native-thread exit1 and
+surviving same-worker WINMINE gameplay. Native rollback/identity witnesses
+cover the associated allocation and rejection assertions. A2-P now also has
+actual print and Winsock callback/cleanup proof; the scope audit records the
+observer last-error repair and its worker-only guest contrast. Two local units
+remain: A2-I/A2-S, then existing delivery gates. This is bounded candidate
+acceptance, not publication or a universal startup-failure claim.
 
 S3 retains concrete EDIT/dialog/control/menu behavior and application functional
 progression. S4 retains full message identity/reply/mixed-task reentry. S5

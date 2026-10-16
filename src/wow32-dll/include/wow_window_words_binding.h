@@ -38,6 +38,10 @@ BOOL WINAPI wow_window_procedure_read(HWND, DWORD *);
 BOOL WINAPI wow_window_class_procedure_read(HWND, DWORD *);
 BOOL WINAPI wow_window_class_procedure_exchange(HWND, DWORD, DWORD *);
 BOOL WINAPI wow_window_procedure_exchange(HWND, DWORD, DWORD *);
+void WINAPI wow_window_note_native_procedure(HWND, WNDPROC, BOOL);
+/* Caller holds USER domain lock, retains storage, and has marked the owning
+ * thread INCLEANUP. Prepare every window before destroying any window. */
+BOOL WINAPI wow_window_words_prepare_exit(HWND, wow_window_words_binding *);
 wow_window_words_binding *WINAPI wow_window_words_acquire(HWND);
 struct _WW *WINAPI wow_window_words_value(wow_window_words_binding *);
 /* CBT has identified a new window. Existing-window promotion must not

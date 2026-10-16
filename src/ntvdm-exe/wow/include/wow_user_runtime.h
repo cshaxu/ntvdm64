@@ -30,6 +30,10 @@ typedef struct wow_user_runtime_thread {
     struct wow_task_order_thread *thread;
     struct wow_class_client_context *classes;
     BOOL exclusive_held;
+    /* Terminal thread cleanup, not retryable detach or module unload. */
+    BOOL terminal_exit;
+    /* Only while early window destruction precedes original resource frees. */
+    BOOL resource_cleanup_live;
 } wow_user_runtime_thread;
 
 #define WOW_USER_RUNTIME_INITIALIZER { INIT_ONCE_STATIC_INIT, SRWLOCK_INIT, 0, 0, NULL, NULL, NULL }

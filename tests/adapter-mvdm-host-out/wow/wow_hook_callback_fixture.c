@@ -96,6 +96,12 @@ BOOL WINAPI wow_user_borrow_leave(wow_user_borrow_scope *scope)
     CHECK((task_depth == borrow_depth || task_depth + 1 == borrow_depth) && borrow_depth);
     --borrow_depth; return TRUE;
 }
+VOID WINAPI wow_user_borrow_leave_required(wow_user_borrow_scope *scope)
+{
+    /* Ordering mock only; real collector/fatal behavior belongs to the
+     * production page-domain fixture, never this success-only callback. */
+    CHECK(wow_user_borrow_leave(scope));
+}
 LONG WINAPI WowOriginalStdHookProc(INT code, LONG wp, LONG lp, INT index)
 {
     CHECK(task_depth && task_depth == borrow_depth);

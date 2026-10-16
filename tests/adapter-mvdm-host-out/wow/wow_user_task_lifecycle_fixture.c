@@ -6,11 +6,18 @@
 #include "nthook32-dll/hook.h"
 #include "wow_title_policy.h"
 #include "wow_menu_client_bindings.h"
+#include "wow_idle_hook_binding.h"
 
 #include <stdio.h>
 
 static unsigned errors;
 static unsigned native_direct_calls;
+#ifdef WOW_INIT_ROLLBACK_FIXTURE
+extern unsigned wow_init_alloc_calls, wow_init_fail_at, wow_init_name_live;
+extern unsigned wow_init_name_releases;
+extern int wow_init_hook_fail;
+extern unsigned wow_init_hooks_live, wow_init_hook_failures;
+#endif
 extern unsigned wow_task_class_publications, wow_task_class_fail_at;
 #define CHECK(value) do { if (!(value)) { ++errors; \
     fprintf(stderr, "FAIL line=%d error=%lu\n", __LINE__, GetLastError()); } } while (0)
@@ -250,6 +257,12 @@ typedef struct cross_callout {
     HWND window, sender_window;
     DWORD receiver_id;
     unsigned delivered;
+#ifdef WOW_NATIVE_NESTED_FIXTURE
+    unsigned timed_callbacks;
+    BOOL destroyed_during_send;
+    BOOL retired_during_send;
+    wow_window_words_binding *receiver_borrow;
+#endif
 #ifdef WOW_NATIVE_REPLY_FIXTURE
     volatile LONG native_returned;
 #endif
@@ -365,6 +378,51 @@ static LRESULT cross_receive_body(HWND window, UINT message, WPARAM wp, LPARAM l
         CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
         return 113;
     }
+#ifdef WOW_NATIVE_NESTED_FIXTURE
+    if (message == WM_APP + 67) {
+        wow_user_runtime_thread *binding = wow_user_runtime_current();
+        CHECK(InSendMessage() && !binding->exclusive_held);
+        CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
+        /* Deliberate native callback delay, not a product pacing change.
+         * The sender's 250ms API deadline expires before this callback
+         * gives execution back through the actual callback finalizer. */
+        Sleep(500);
+        ++test->timed_callbacks;
+        return 115;
+    }
+    if (message == WM_APP + 68) {
+        wow_user_runtime_thread *binding = wow_user_runtime_current();
+        CHECK(InSendMessage() && !binding->exclusive_held);
+        CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
+        CHECK(wow_native_DestroyWindow(window));
+        CHECK(!IsWindow(window));
+        test->destroyed_during_send = TRUE;
+        SetLastError(0x447a4001);
+        return 116;
+    }
+    if (message == WM_APP + 69) {
+        SetLastError(0x447a4002);
+        RaiseException(0xe0447402, 0, 0, NULL);
+        CHECK(FALSE); /* The native call must not continue past this throw. */
+    }
+    if (message == WM_APP + 71) {
+        wow_user_runtime_thread *binding = wow_user_runtime_current();
+        CHECK(InSendMessage() && binding && !binding->exclusive_held);
+        CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
+        /* Exit this native receiver normally, while the sender's actual USER
+         * call is active. Release the fixture's persistent borrow exactly as
+         * cross_receiver's ordinary return path does. No forced termination,
+         * fabricated scheduler fields or stale receiver dereference. */
+        wow_window_words_detach(window);
+        wow_window_words_release(test->receiver_borrow);
+        test->receiver_borrow = NULL;
+        CHECK(DestroyWindow(window));
+        if (!wow_user_runtime_unbind(binding)) ExitProcess(94);
+        if (!session_thread_unbind(test->session_owner)) ExitProcess(94);
+        test->retired_during_send = TRUE;
+        ExitThread(0);
+    }
+#endif
     return DefWindowProcW(window, message, wp, lp);
 }
 
@@ -372,7 +430,9 @@ static LRESULT CALLBACK cross_receive(HWND window, UINT message, WPARAM wp, LPAR
 {
     wow_task_callback_scope scope;
     LRESULT result;
-    if (message != WM_APP + 65 && message != WM_APP + 66)
+    if (message != WM_APP + 65 && message != WM_APP + 66 &&
+            message != WM_APP + 67 && message != WM_APP + 68 &&
+            message != WM_APP + 69 && message != WM_APP + 71)
         return cross_receive_body(window, message, wp, lp);
 #ifdef WOW_NATIVE_FOREIGN_FIXTURE
     if (message == WM_APP + 65) {
@@ -385,9 +445,15 @@ static LRESULT CALLBACK cross_receive(HWND window, UINT message, WPARAM wp, LPAR
         }
     }
 #endif
+    SetLastError(0xe044700au);
     CHECK(wow_task_callback_enter(&scope));
+    CHECK(GetLastError() == 0xe044700au);
     __try { result = cross_receive_body(window, message, wp, lp); }
-    __finally { CHECK(wow_task_callback_leave(&scope)); }
+    __finally {
+        DWORD callback_error = GetLastError();
+        CHECK(wow_task_callback_leave(&scope));
+        CHECK(GetLastError() == callback_error);
+    }
     return result;
 }
 
@@ -413,13 +479,20 @@ static DWORD WINAPI cross_receiver(void *parameter)
     if (!borrow) ExitProcess(94);
     /* Native-only owner association, as in the same-thread production test. */
     wow_window_words_cleanup_value(borrow)->thread = binding.thread;
+#ifdef WOW_NATIVE_NESTED_FIXTURE
+    test->receiver_borrow = borrow;
+#endif
     SetEvent(test->ready);
     while (wow_user_task_lifecycle_message(test->lifecycle, &message, NULL,
             0, 0, PM_REMOVE, TRUE) > 0)
         DispatchMessageW(&message);
     wow_window_words_detach(test->window);
     wow_window_words_release(borrow);
+#ifdef WOW_NATIVE_NESTED_FIXTURE
+    CHECK(test->destroyed_during_send && !IsWindow(test->window));
+#else
     CHECK(DestroyWindow(test->window));
+#endif
     CHECK(wow_user_runtime_unbind(&binding));
     CHECK(session_thread_unbind(test->session_owner));
     return 0;
@@ -525,10 +598,79 @@ static void verify_cross_callout(session *owner, wow_user_runtime_thread *bindin
         fprintf(stderr, "WOW_NATIVE_SEND_RETURN early=%u result=%lu\n", reply, result);
         if (reply) SetEvent(test.returned);
     }
+#ifdef WOW_NATIVE_NESTED_FIXTURE
+    for (early = 0; early < 2; ++early) {
+        DWORD_PTR result = 0;
+        DWORD error;
+        LRESULT sent;
+        wow_task_order_message *previous = binding->thread->psmsSent;
+        if (early) CHECK(wow_user_runtime_enter(binding));
+        SetLastError(ERROR_SUCCESS);
+        sent = wow_native_SendMessageTimeoutA(test.window, WM_APP + 67,
+            0, 0, SMTO_ABORTIFHUNG | SMTO_BLOCK, 250, &result);
+        error = GetLastError();
+        CHECK(sent == 0);
+        /* Native USER can report failure without an extended error. Do not
+         * manufacture an error or treat the output result as valid. */
+        CHECK(error == ERROR_TIMEOUT || error == ERROR_SUCCESS);
+        CHECK(binding->exclusive_held == (BOOL)early);
+        CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
+        CHECK(binding->thread->psmsSent == previous);
+        CHECK(test.timed_callbacks == early + 1);
+        fprintf(stderr, "WOW_NATIVE_TIMEOUT_RETURN held=%u error=%lu callbacks=%u\n",
+            early, error, test.timed_callbacks);
+        if (early) CHECK(wow_user_runtime_leave(binding));
+    }
+    for (early = 0; early < 2; ++early) {
+        BOOL caught = FALSE;
+        wow_task_order_message *previous = binding->thread->psmsSent;
+        if (early) CHECK(wow_user_runtime_enter(binding));
+        __try {
+            (void)wow_native_SendMessageA(test.sender_window, WM_APP + 69, 0, 0);
+            CHECK(FALSE);
+        } __except (GetExceptionCode() == 0xe0447402 ?
+                EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
+            caught = TRUE;
+            CHECK(GetLastError() == 0x447a4002);
+        }
+        CHECK(caught && binding->exclusive_held == (BOOL)early);
+        CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
+        CHECK(binding->thread->psmsSent == previous);
+        fprintf(stderr, "WOW_NATIVE_EXCEPTION_RETURN held=%u caught=%u owner=1\n",
+            early, caught);
+        if (early) CHECK(wow_user_runtime_leave(binding));
+    }
+    {
+        DWORD_PTR result = 0;
+        wow_task_order_message *previous = binding->thread->psmsSent;
+        CHECK(wow_native_SendMessageTimeoutA(test.window, WM_APP + 68,
+            0, 0, SMTO_ABORTIFHUNG, 3000, &result) != 0);
+        CHECK(result == 116 && test.destroyed_during_send && !IsWindow(test.window));
+        CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
+        CHECK(binding->thread->psmsSent == previous && !binding->exclusive_held);
+        fprintf(stderr, "WOW_NATIVE_DESTROY_DURING_RETURN result=%lu dead=1 owner=1\n",
+            (DWORD)result);
+    }
+#endif
     CHECK(PostThreadMessageW(test.receiver_id, WM_QUIT, 0, 0));
     wow_user_task_lifecycle_directed_yield(lifecycle, test.receiver_id);
     CHECK(WaitForSingleObject(helper, 3000) == WAIT_OBJECT_0);
     CHECK(GetExitCodeThread(helper, &code) && !code);
+#ifdef WOW_NATIVE_NESTED_FIXTURE
+    {
+        DWORD_PTR result = 0;
+        DWORD error;
+        CHECK(!IsWindow(test.window));
+        SetLastError(ERROR_SUCCESS);
+        CHECK(wow_native_SendMessageTimeoutA(test.window, WM_APP + 65,
+            0, 0, SMTO_ABORTIFHUNG, 250, &result) == 0);
+        error = GetLastError();
+        CHECK(error == ERROR_INVALID_WINDOW_HANDLE);
+        CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
+        CHECK(!binding->thread->psmsSent && !binding->exclusive_held);
+        fprintf(stderr, "WOW_NATIVE_DEAD_TARGET_RETURN error=%lu owner=1\n", error);
+    }
+#endif
 #ifdef WOW_NATIVE_FOREIGN_FIXTURE
     CHECK(WaitForSingleObject(foreign, 3000) == WAIT_OBJECT_0);
     CHECK(GetExitCodeThread(foreign, &code) && !code);
@@ -547,6 +689,52 @@ static void verify_cross_callout(session *owner, wow_user_runtime_thread *bindin
         wow_window_words_release(sender_borrow);
         CHECK(DestroyWindow(test.sender_window));
     }
+    #ifdef WOW_NATIVE_NESTED_FIXTURE
+    for (early = 0; early < 2; ++early) {
+        cross_callout dying = {0};
+        DWORD_PTR result = 0;
+        LRESULT sent;
+        DWORD error;
+        wow_task_order_message *previous = binding->thread->psmsSent;
+        dying.session_owner = owner;
+        dying.runtime = binding->runtime;
+        dying.lifecycle = lifecycle;
+        dying.sender_thread = binding->thread;
+        dying.ready = CreateEventW(NULL, TRUE, FALSE, NULL);
+        dying.complete = CreateEventW(NULL, TRUE, FALSE, NULL);
+        watchdog = CreateThread(NULL, 0, cross_watchdog, dying.complete, 0, NULL);
+        helper = CreateThread(NULL, 0, cross_receiver, &dying, 0, &dying.receiver_id);
+        CHECK(helper && watchdog);
+        if (WaitForSingleObject(dying.ready, 3000) != WAIT_OBJECT_0) ExitProcess(96);
+        CHECK(wow_user_task_lifecycle_yield(lifecycle));
+        if (early) CHECK(wow_user_runtime_enter(binding));
+        SetLastError(ERROR_SUCCESS);
+        sent = wow_native_SendMessageTimeoutA(dying.window, WM_APP + 71,
+            0, 0, SMTO_ABORTIFHUNG | SMTO_ERRORONEXIT, 3000, &result);
+        error = GetLastError();
+        CHECK(sent == 0 && dying.retired_during_send);
+        /* USER may report no extended error for failure; retain the actual
+         * code instead of manufacturing a task/owner error. */
+        CHECK(error == ERROR_SUCCESS || error == ERROR_TIMEOUT ||
+            error == ERROR_INVALID_WINDOW_HANDLE);
+        CHECK(binding->exclusive_held == (BOOL)early);
+        CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
+        CHECK(binding->thread->psmsSent == previous);
+        if (early) CHECK(wow_user_runtime_leave(binding));
+        CHECK(WaitForSingleObject(helper, 3000) == WAIT_OBJECT_0);
+        CHECK(GetExitCodeThread(helper, &code) && code == 0);
+        CHECK(!IsWindow(dying.window) && !dying.receiver_borrow);
+        CHECK(wow_user_runtime_enter(binding));
+        CHECK(!binding->thread->host->find_thread(binding->thread, dying.receiver_id));
+        CHECK(wow_user_runtime_leave(binding));
+        fprintf(stderr, "WOW_NATIVE_RECEIVER_EXIT_RETURN held=%u error=%lu retired=1 owner=1\n",
+            early, error);
+        SetEvent(dying.complete);
+        CHECK(WaitForSingleObject(watchdog, 3000) == WAIT_OBJECT_0);
+        CloseHandle(helper); CloseHandle(watchdog);
+        CloseHandle(dying.ready); CloseHandle(dying.complete);
+    }
+    #endif
     CHECK(UnregisterClassW(cls.lpszClassName, cls.hInstance));
 }
 #endif
@@ -619,6 +807,7 @@ int __cdecl main(int argc,char **argv)
     CHECK(!wow_user_task_lifecycle_init_style(&lifecycle, 0x0400, "APP.EXE",
         0x1234, 0, 0, 0, 0, 1, 1, SW_HIDE, WINDOW_STYLE_OFF, 0x4321));
     CHECK(!binding.thread && GetLastError() == ERROR_NOT_FOUND);
+    CHECK(wow_user_idle_hook_for_current() == NULL);
     {
         wow_class_lookup_entry *entry;
         unsigned published = 0;
@@ -626,15 +815,57 @@ int __cdecl main(int argc,char **argv)
         CHECK(!wow_user_task_lifecycle_init_style(&lifecycle, 0x0400, "APP.EXE",
             0x1234, 0, 0, 0, 0, 1, 1, SW_HIDE, WINDOW_STYLE_OFF, 0));
         CHECK(!binding.thread && !binding.exclusive_held && !lifecycle.threads);
+        CHECK(wow_user_idle_hook_for_current() == NULL);
         for (entry = lifecycle.classes.pclsPublicList; entry; entry = entry->next)
             if (entry->guest_server) ++published;
         CHECK(published == 2 && wow_task_class_publications == 3);
         wow_task_class_fail_at = 0;
     }
+#ifdef WOW_INIT_ROLLBACK_FIXTURE
+    {
+        unsigned failure;
+        const int hook_ids[] = {WH_CBT, WH_FOREGROUNDIDLE};
+        for (failure = 0; failure < 2; ++failure) {
+            wow_init_hook_fail = hook_ids[failure];
+            CHECK(!wow_user_task_lifecycle_init_style(&lifecycle, 0x0400,
+                "APP.EXE", 0x1234, 0, 0, 0, 0, 1, 1, SW_HIDE,
+                WINDOW_STYLE_OFF, 0));
+            CHECK(GetLastError() == ERROR_ACCESS_DENIED);
+            CHECK(!wow_init_hooks_live && !binding.thread &&
+                !binding.exclusive_held && !lifecycle.threads);
+            CHECK(!lifecycle.process.pwpi->ptdbHead);
+        }
+        wow_init_hook_fail = 0;
+        for (failure = 1; failure <= 2; ++failure) {
+            wow_init_alloc_calls = 0;
+            wow_init_fail_at = failure;
+            CHECK(!wow_user_task_lifecycle_init_style(&lifecycle, 0x0400,
+                "APP.EXE", 0x1234, 0, 0, 0, 0, 1, 1, SW_HIDE,
+                WINDOW_STYLE_OFF, 0));
+            CHECK(GetLastError() == (failure == 1 ?
+                ERROR_INVALID_NAME : ERROR_NOT_ENOUGH_MEMORY));
+            CHECK(wow_init_alloc_calls == failure && !wow_init_name_live);
+            CHECK(!binding.thread && !binding.exclusive_held && !lifecycle.threads);
+            CHECK(!lifecycle.process.pwpi->ptdbHead);
+            CHECK(!wow_init_hooks_live);
+        }
+        CHECK(wow_init_name_releases == 1);
+        wow_init_alloc_calls = wow_init_fail_at = 0;
+    }
+#endif
     CHECK(wow_user_task_lifecycle_init_style(&lifecycle, 0x0400, "APP.EXE",
         0x1234, 0, FIXTURE_LAUNCH_REQUEST,
         (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT,
         (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT, SW_SHOW, WINDOW_STYLE_WIN16, 0));
+    {
+        HHOOK observer = wow_user_idle_hook_for_current();
+        CHECK(observer != NULL);
+        CHECK(wow_user_runtime_enter(&binding));
+        CHECK(wow_user_idle_hook_for_current() == observer);
+        CHECK(binding.exclusive_held);
+        CHECK(wow_user_runtime_leave(&binding));
+        CHECK(wow_user_idle_hook_for_current() == observer);
+    }
     {
         wow_class_lookup_entry *entry;
         unsigned published = 0;
@@ -902,6 +1133,15 @@ int __cdecl main(int argc,char **argv)
     CHECK(!binding.exclusive_held);
     CHECK(wow_user_runtime_unbind(&binding));
     CHECK(binding.thread == NULL && lifecycle.threads == NULL);
+    CHECK(wow_user_idle_hook_for_current() == NULL);
+#ifdef WOW_INIT_ROLLBACK_FIXTURE
+    CHECK(!wow_init_name_live && wow_init_name_releases == 2);
+    CHECK(!wow_init_hooks_live && wow_init_hook_failures == 2);
+    fprintf(stderr, "WOW_IDLE_OBSERVER_LIFECYCLE errors=%u install_failures=%u live=%u\n",
+        errors, wow_init_hook_failures, wow_init_hooks_live);
+    fprintf(stderr, "WOW_INIT_ROLLBACK errors=%u failed_allocations=2 name_releases=%u\n",
+        errors, wow_init_name_releases);
+#endif
     CHECK(!wow_user_task_lifecycle_style(&lifecycle, &window_style));
     wow_user_task_lifecycle_dispose(&lifecycle);
     CHECK(session_thread_unbind(&owner));

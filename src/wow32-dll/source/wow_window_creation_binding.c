@@ -113,6 +113,10 @@ BOOL WINAPI wow_window_creation_enroll_internal(wow_task_order_thread *thread,
     ZeroMemory(enrollment, sizeof(*enrollment));
     if (!request || !thread || !thread->ppi)
         return TRUE;
+    if (thread->TIF_flags & WOW_TASK_TIF_INCLEANUP) {
+        SetLastError(ERROR_INVALID_STATE);
+        return FALSE;
+    }
     /* Nested explicit scopes may already own this HWND. Never steal their
      * metadata or retire it when a later hook rejects creation. */
     existing = wow_window_words_acquire(window);
@@ -206,7 +210,7 @@ LRESULT CALLBACK wow_window_creation_observer(int code, WPARAM wp, LPARAM lp)
         borrowed = TRUE;
         result = wow_window_creation_forward_internal(binding->thread, code, wp, lp);
     } __finally {
-        if (borrowed) (void)wow_user_borrow_leave(&borrow);
+        if (borrowed) wow_user_borrow_leave_required(&borrow);
     }
     return result;
 }
@@ -341,6 +345,9 @@ static HWND create_bound(wow_task_order_thread *thread,
         SetLastError(ERROR_INVALID_PARAMETER); return NULL;
     }
     context = thread->ppi->classes;
+    if (thread->TIF_flags & WOW_TASK_TIF_INCLEANUP) {
+        SetLastError(ERROR_INVALID_STATE); return NULL;
+    }
     scope.thread = thread;
     scope.class_words = wow_class_words_acquire(context, atom, request->hInstance);
     if (!scope.class_words) return NULL;

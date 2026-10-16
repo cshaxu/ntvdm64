@@ -144,7 +144,7 @@ LONG WINAPI WU32StdHookProc(INT code, LONG wp, LONG lp, INT index)
             wow_window_creation_finish(&enrollment, completed && result == 0);
             /* Final window/class references still retire before alias
              * collection, including a failed task-scope return. */
-            if (borrowed) (void)wow_user_borrow_leave(&borrow);
+            if (borrowed) wow_user_borrow_leave_required(&borrow);
             if (!task_left && !wow_task_callback_leave(&task)) result = 0;
         }
     }

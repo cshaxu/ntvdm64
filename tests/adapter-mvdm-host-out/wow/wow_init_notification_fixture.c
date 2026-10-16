@@ -16,6 +16,9 @@ static PFNWOWHANDLERSOUT output;
 static unsigned errors, notifications, styles;
 static unsigned fail_count;
 static BOOL raise_notification, retire_notification;
+static BOOL reject_style;
+void WINAPI wow_fixture_startup_td_begin(WORD);
+void WINAPI wow_fixture_startup_td_end(void);
 #define CHECK(x) do { if (!(x)) { ++errors; fprintf(stderr, \
     "FAIL line=%d error=%lu\n", __LINE__, GetLastError()); } } while (0)
 
@@ -27,6 +30,7 @@ DWORD WINAPI OpenNtBaseClientWowStyle(ULONG request, DWORD *style)
 {
     CHECK(request == 0x5678);
     ++styles;
+    if (reject_style) return ERROR_NOT_ENOUGH_MEMORY;
     *style = WINDOW_STYLE_OFF;
     return ERROR_SUCCESS;
 }
@@ -67,6 +71,19 @@ int __cdecl main(void)
     CHECK(output.pfnRegisterUserHungAppHandlers(end_task, event));
     lifecycle = runtime.lifecycle;
 
+    /* The actual registered cleanup must accept exactly the still-linked,
+     * never-committed original task after all initialization attempts fail. */
+    wow_fixture_startup_td_begin(0x1234);
+    reject_style = TRUE;
+    for (i = 0; i < 7; ++i)
+        CHECK(!initialize_task() && GetLastError() == ERROR_NOT_ENOUGH_MEMORY);
+    CHECK(!binding.thread && !lifecycle->threads && styles == 7 && !notifications);
+    CHECK(output.pfnWOWCleanup((HANDLE)0x1234, 0x1234, NULL, 0));
+    CHECK(!binding.thread && !lifecycle->threads);
+    wow_fixture_startup_td_end();
+    reject_style = FALSE; styles = 0;
+    fprintf(stderr,"WOW_INIT_PRECOMMIT_CLEANUP errors=%u retries=7 registered_cleanup=1\n",errors);
+
     fail_count = 2;
     CHECK(!initialize_task() && GetLastError() == ERROR_RETRY);
     committed = binding.thread;
@@ -85,6 +102,8 @@ int __cdecl main(void)
     for (i = 0; i < 7; ++i)
         CHECK(!initialize_task() && GetLastError() == ERROR_RETRY);
     CHECK(styles == 1 && notifications == 7);
+    CHECK(output.pfnWOWCleanup((HANDLE)0x1234, 0x1234, NULL, 0));
+    CHECK(binding.thread != NULL); /* Committed case retains normal retirement. */
     CHECK(wow_user_runtime_unbind(&binding));
     CHECK(lifecycle->threads == NULL);
 

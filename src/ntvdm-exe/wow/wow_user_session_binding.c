@@ -15,8 +15,16 @@ static int bind_current(void *context)
 static int unbind_current(void *context)
 {
     wow_user_session_binding *binding = context;
-    if (binding && wow_user_runtime_current() == &current_binding)
-        return wow_user_runtime_unbind(&current_binding);
+    if (binding && wow_user_runtime_current() == &current_binding) {
+        int result = 0;
+        current_binding.terminal_exit = session_thread_is_finishing();
+        __try {
+            result = wow_user_runtime_unbind(&current_binding);
+        } __finally {
+            current_binding.terminal_exit = FALSE;
+        }
+        return result;
+    }
     return 1;
 }
 

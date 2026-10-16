@@ -1,14 +1,9 @@
 #include "wow_user_borrow_scope.h"
 #include "wow_user_runtime.h"
+#include "wow_user_task_lifecycle.h"
 #include "wow_class_client_bindings.h"
 #include "wow_task_order_bindings.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
-
-typedef VOID (APIENTRY *PFNW32ET)(VOID);
-#pragma warning(push)
-#pragma warning(disable:4201)
-#include "opennt-abi/source/public/internal/windows/inc/wowuserp.h"
-#pragma warning(pop)
 
 #include <stdio.h>
 
@@ -132,6 +127,20 @@ BOOL WINAPI wow_user_borrow_leave(wow_user_borrow_scope *scope)
     }
     SetLastError(error);
     return TRUE;
+}
+
+VOID WINAPI wow_user_borrow_leave_required(wow_user_borrow_scope *scope)
+{
+    DWORD error = GetLastError();
+    /* The low-level diagnostic API must still reject an unmatched leave
+     * without consuming either scope. A production finally cannot continue
+     * after that rejection: current_scope would point into an unwound stack.
+     * After this check FALSE means only deferred collector work, whose owner
+     * and backing remain live; never pop the already consumed scope again. */
+    if (!scope || current_scope != scope)
+        wow_user_native_call_failed("restore-callback-borrow", ERROR_INVALID_STATE);
+    (void)wow_user_borrow_leave(scope);
+    SetLastError(error);
 }
 
 /* Consumes the incoming reference on every path. */

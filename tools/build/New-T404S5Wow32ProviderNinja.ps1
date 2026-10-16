@@ -94,6 +94,11 @@ $providerSupportSources = @(
     (Join-Path $adapterWow 'wow_user_task_lifecycle.c'),
     (Join-Path $adapterWow 'wow_dialog_creation_binding.c'),
       (Join-Path $adapterWow 'wow_hook_callback.c'),
+    (Join-Path $adapterWow 'wow_timer_callback.c'),
+    (Join-Path $adapterWow 'wow_idle_hook_binding.c'),
+    (Join-Path $adapterWow 'wow_shell_callback.c'),
+    (Join-Path $adapterWow 'wow_task_cleanup_entry.c'),
+    (Join-Path $adapterWow 'wow_common_dialog_callback.c'),
     (Join-Path $adapterWow 'wow_user_thunk_scope.c'),
     (Join-Path $adapterWow 'wow_user_private_access.c'),
     (Join-Path $adapterWow 'wow_window_creation_binding.c'),
@@ -384,7 +389,7 @@ foreach ($source in $sources) {
     } elseif ($source -in @('wuser.c','wuser31.c','wuwind.c')) {
         $ninja.Add('  cflags = $cflags /DWOW_STYLE_SCROLL_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_title_policy.h')) + '"')
     } elseif ($source -eq 'wshell.c') {
-        $ninja.Add('  cflags = $cflags /DWOW_STYLE_SHELL_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_title_policy.h')) + '"')
+        $ninja.Add('  cflags = $cflags /DWOWShellExecute=wow_shell_execute /DWOW_STYLE_SHELL_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_title_policy.h')) + '"')
     }
 }
 $supportObjects = [System.Collections.Generic.List[string]]::new()

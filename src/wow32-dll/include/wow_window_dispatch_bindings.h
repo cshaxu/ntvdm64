@@ -30,6 +30,8 @@ typedef struct wow_cleanup_window {
     BOOL serverSideProc;
     DWORD *adwWOW; /* Alias into the containing retained WW, never guest data. */
     struct wow_window_words_binding *storage; /* Existing local storage owner. */
+    WORD fnid; /* Standard procedure actually exercised, not creation class. */
+    WNDPROC native_cleanup; /* Existing USER32 target, no guest resolver. */
 } wow_cleanup_window;
 
 /* One synchronous call view, never a guest WND, kernel pointer, persistent

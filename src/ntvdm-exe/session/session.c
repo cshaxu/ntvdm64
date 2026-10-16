@@ -6,6 +6,7 @@
 
 static __declspec(thread) session *thread_instance;
 static __declspec(thread) uint32_t thread_binding_owner;
+static __declspec(thread) int thread_finishing;
 
 static uint32_t session_binding_count(const session *instance)
 {
@@ -355,6 +356,25 @@ int session_thread_unbind(session *instance)
     _InterlockedDecrement(owner_counter);
     _InterlockedDecrement(&instance->binding_count);
     return 1;
+}
+
+int session_thread_finish(session *instance)
+{
+    int result = 0;
+    if (instance == NULL || thread_instance != instance || thread_finishing)
+        return 0;
+    thread_finishing = 1;
+    __try {
+        result = session_thread_unbind(instance);
+    } __finally {
+        thread_finishing = 0;
+    }
+    return result;
+}
+
+int session_thread_is_finishing(void)
+{
+    return thread_finishing;
 }
 
 session *session_thread_current(void)

@@ -3,6 +3,10 @@
 
 #include <windows.h>
 
+/* Terminal-only release: refusal cannot be ignored by a native exit caller.
+ * The SoftPC host exit binding invokes this before releasing its CPU stack. */
+VOID WINAPI opennt_prepare_thread_exit(VOID);
+
 /* DIVERGENCE(ADAPTER-WIN32-019): Original SoftPC nt_timer.c declares the
  * HeartBeatThread entry with the historical cdecl form.  That is ABI-safe on
  * x64 but incompatible with modern x86 CreateThread's WINAPI callback form.

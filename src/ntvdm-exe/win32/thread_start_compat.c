@@ -32,10 +32,24 @@ typedef struct _OPENNT_VOID_CDECL_PARAMETER_THREAD_CONTEXT {
     const char *source_name;
 } OPENNT_VOID_CDECL_PARAMETER_THREAD_CONTEXT;
 
-VOID WINAPI opennt_exit_thread(DWORD exit_code)
+VOID WINAPI opennt_prepare_thread_exit(VOID)
 {
     session *owner = session_thread_current();
-    if (owner != NULL) (void)session_thread_unbind(owner);
+    if (owner != NULL && !session_thread_finish(owner)) {
+        EXCEPTION_RECORD record = {0};
+        /* This is a terminal caller, not a retryable detach operation.
+         * Never abandon live owner references and continue native exit. */
+        record.ExceptionCode = 0xc0000420; /* Existing broken-owner convention. */
+        record.ExceptionFlags = EXCEPTION_NONCONTINUABLE;
+        record.NumberParameters = 1;
+        record.ExceptionInformation[0] = GetLastError();
+        RaiseFailFastException(&record, NULL, 0);
+    }
+}
+
+VOID WINAPI opennt_exit_thread(DWORD exit_code)
+{
+    opennt_prepare_thread_exit();
     ExitThread(exit_code);
 }
 
@@ -58,8 +72,8 @@ static DWORD WINAPI opennt_cdecl_thread_thunk(LPVOID parameter)
                 SESSION_THREAD_BINDING_ORIGINAL_WORKER, source_name)) return ERROR_INVALID_STATE;
         did_bind = 1;
     }
-    result = start_routine(start_parameter);
-    if (did_bind) (void)session_thread_unbind(owner);
+    __try { result = start_routine(start_parameter); }
+    __finally { if (did_bind) opennt_prepare_thread_exit(); }
     return result;
 }
 
@@ -82,8 +96,8 @@ static DWORD WINAPI opennt_winapi_thread_thunk(LPVOID parameter)
         }
         did_bind = 1;
     }
-    result = start_routine(start_parameter);
-    if (did_bind) (void)session_thread_unbind(owner);
+    __try { result = start_routine(start_parameter); }
+    __finally { if (did_bind) opennt_prepare_thread_exit(); }
     return result;
 }
 
@@ -103,8 +117,8 @@ static DWORD WINAPI opennt_void_cdecl_thread_thunk(LPVOID parameter)
                 SESSION_THREAD_BINDING_ORIGINAL_WORKER, source_name)) return ERROR_INVALID_STATE;
         did_bind = 1;
     }
-    start_routine();
-    if (did_bind) (void)session_thread_unbind(owner);
+    __try { start_routine(); }
+    __finally { if (did_bind) opennt_prepare_thread_exit(); }
     return 0;
 }
 
@@ -125,8 +139,8 @@ static DWORD WINAPI opennt_void_cdecl_parameter_thread_thunk(LPVOID parameter)
                 SESSION_THREAD_BINDING_ORIGINAL_WORKER, source_name)) return ERROR_INVALID_STATE;
         did_bind = 1;
     }
-    start_routine(start_parameter);
-    if (did_bind) (void)session_thread_unbind(owner);
+    __try { start_routine(start_parameter); }
+    __finally { if (did_bind) opennt_prepare_thread_exit(); }
     return 0;
 }
 

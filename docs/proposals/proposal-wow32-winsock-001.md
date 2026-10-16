@@ -25,6 +25,17 @@ with stable-ID handoff, even when general hard-error recovery is later.
 
 ## Proposed S tasks
 
+Source handoff from the callback-foundation audit: selected wsext.c
+WWS32WSAUnhookBlockingHook tests the nonnull WOW_WSAISBLOCKING function
+pointer rather than calling it. The same expression exists in pinned OpenNT
+base/mvdm/wow32/wsext.c (5c5b979ec08c17d3ca2eb70e8aad62d26515d01c).
+This is a source-established unhook-operation concern, not evidence of an
+unbound callback thread or a newly introduced integration regression. Retain
+it for this candidate's hook removal/failure/cleanup acceptance; no runtime
+reproducer or correction is claimed. Original host-fix source policy still
+applies. Do not transfer generic callback ownership defects here, nor expand
+the foundation task into full network functionality for this expression.
+
 | S | Scope | Work | Required closure |
 | --- | --- | --- | --- |
 | S1 | Socket and notification surface | Map selected calls, structures, async notifications and original errors. | Real guest/local controlled-peer cases cover every selected operation family. |

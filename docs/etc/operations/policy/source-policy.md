@@ -81,6 +81,18 @@ triggers it; establish causality before applying this disposition.
 
 ### Canonical source ownership
 
+Owner superseding clarification during T447 S2: the demonstrated non-fast
+W32Dispatch handled-exception stack restoration defect is approved for a
+minimal host correction. Similar source-proven original-host corrections may
+be designed, exception-registered and implemented without repeated approval,
+even when no matching existing SoftPC patch is available. Every retained
+mirror diff needs its local DIVERGENCE marker and exception/provenance record,
+original contract, rejected reuse alternatives, bounded diff budget and
+positive/negative/lifecycle evidence. Prefer composable original logic and
+existing matching corrections; this is not permission for guest changes,
+silent semantic relaxations, wholesale rewrites or unverified publication.
+This supersedes only the no-new-original-host-correction restriction below.
+
 Owner clarification dated 2026-10-04 distinguishes defect cause, not location:
 
 - Defects in unchanged original guest media remain recorded and unmodified.

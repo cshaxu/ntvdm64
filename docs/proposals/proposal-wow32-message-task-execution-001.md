@@ -2,6 +2,12 @@
 
 ## Objective and admission
 
+Current disposition: S2 P16 closes the frozen foundations with the owner's
+explicit isolated common-dialog risk acceptance; see
+[closure](../history/m0-t447-s2-foundation-closure.md). Earlier pending S2
+candidate descriptions below retain chronology, not current blockers.
+S3--S6 and the complete C/W scope remain unchanged.
+
 Owner-directed split dated 2026-09-28. Following accepted T446 closure, this
 package is admitted as T447 in [Current](../states/CURRENT.md) and removed
 from Queue. Current owns the active brief; the
@@ -51,6 +57,42 @@ S2 remains active; these public-contract gaps cannot be deferred to S3/S4/S5.
 Concrete controls/EDIT/dialog/menu functionality stays S3; complete message
 identity/reply/cross-task behavior stays S4; targeted termination stays S5.
 The complete C/W scope is retained, with no new semantic waiver or guest change.
+
+The integrated candidate is judged against this fixed denominator at its
+next safe pause. Build or individual fixture passes cannot replace the audit's
+per-entry implementation/evidence/remaining-boundary matrix. No additional
+subsystem feature is admitted by the remaining A1--A4 repair.
+
+The candidate review retains S2. A1 has bounded proof, not delivery. r12 and
+early-exit-r2 prove the repaired modeless-resource cleanup at the existing
+task-specific pfnWOWCleanup boundary before guest resource release. A2 retains
+the finite F07 context/resolver ledger; A3 retains normal/startup/exception and
+sibling terminal safety. Completed r13 now also proves active receiver-thread
+loss, completing A4's local evidence; its four guest probes pass too. The TD
+initialization guard is corrected after that safe pause and has a separate
+focused verification run. None of these candidates is published. Do not patch
+guest, add subsystem features, or transfer a remaining
+foundation defect to S3/S4/S5 to manufacture closure. frozen-sibling-r1 now
+proves normal modeless task exit with same-worker WINMINE gameplay surviving;
+A3 retains startup-failure/exception and remaining terminal-order assertions.
+
+The completed Shell ABI repair group reaches the next safe audit pause without
+closing S2. The linked scope audit now fixes five remaining acceptance units
+under A2/A3: foreign-worker idle isolation, actual guest Shell callback and
+exception unwind, selected print/network provider-context disposition, real
+startup-failure cleanup, and original exception retirement. Controlled frame
+alias/failure and host-thread terminal proofs are recorded with their limits;
+they are not silently expanded into real guest failure acceptance. The
+production package is still P15. No whole subsystem, concrete control/menu
+feature or S4 message-identity work is added to this fixed S2 denominator.
+
+The subsequent real exception and startup witnesses discharge A3-X and A3-S
+locally. startup-guest-r2 observes the actual failed task's live native thread,
+seven original InitTask failures, registered cleanup and thread exit1 while
+same-worker WINMINE remains playable. The fixed remaining units are A2-I
+foreign-worker idle isolation, A2-S Shell exception disposition and A2-P
+print/network callback context. Full delivery gates remain; no candidate
+publication or universal startup/exception capability is claimed.
 
 ## Verification, boundaries and handoff
 

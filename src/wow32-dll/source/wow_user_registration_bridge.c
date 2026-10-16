@@ -73,6 +73,7 @@ static LRESULT call_previous_window_proc(WNDPROC procedure, HWND window,
         wow_user_native_call call;
         BOOL restored;
         DWORD error = GetLastError();
+        wow_window_note_native_procedure(window, procedure, unicode);
         if (!wow_user_native_call_begin(&call, window)) return 0;
         SetLastError(error);
         __try {
@@ -106,7 +107,7 @@ static LRESULT call_previous_window_proc(WNDPROC procedure, HWND window,
             result = wow_input_handlers.pfnWowWndProcEx(window, message, wp, lp,
                 (DWORD)(ULONG_PTR)procedure, NULL);
     } __finally {
-        wow_user_borrow_leave(&scope);
+        wow_user_borrow_leave_required(&scope);
         (void)wow_task_callback_leave(&task_scope);
     }
     return result;
@@ -351,9 +352,24 @@ static BOOL WINAPI registered_hung_handlers(PFNW32ET callback, HANDLE event)
 static BOOL WINAPI registered_cleanup(HANDLE instance, DWORD task,
     PNEMODULESEG selectors, DWORD count)
 {
-    BOOL result = ensure_lifecycle() && wow_user_task_lifecycle_exit(
-        &wow_lifecycle, instance, task, selectors, count);
+    BOOL result = FALSE;
+    if (ensure_lifecycle()) {
+        /* Original W32DestroyTask also calls here after InitTask rollback.
+         * No USER task was admitted, so there are no task-owned USER objects
+         * to destroy. Module unload and committed-task failures still require
+         * the full original cleanup; absence alone is never success. */
+        if (task && !selectors && !count &&
+                wow_user_task_cleanup_uninitialized(task))
+            result = TRUE;
+        else
+            result = wow_user_task_lifecycle_exit(&wow_lifecycle,
+                instance, task, selectors, count);
+    }
+    DWORD error = result ? ERROR_SUCCESS : GetLastError();
     registration_trace("WOWCleanup", result);
+    /* Original ModuleUnload does not consume this BOOL. Never let guest
+     * GlobalFreeAll invalidate resources after rejected task cleanup. */
+    if (!result) wow_user_native_call_failed("registered-task-cleanup", error);
     return result;
 }
 

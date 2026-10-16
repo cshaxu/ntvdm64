@@ -198,6 +198,10 @@ int session_thread_bind_owned(session *instance, uint32_t binding_owner);
 int session_thread_bind_owned_source(session *instance, uint32_t binding_owner,
     const char *source_name);
 int session_thread_unbind(session *instance);
+/* Terminal intent is visible only while the existing reverse hooks run.
+ * Ordinary detach and bind rollback remain retryable operations. */
+int session_thread_finish(session *instance);
+int session_thread_is_finishing(void);
 /* This worker-private accessor is consumed by the /Gz WOW32 provider, while
  * session.c deliberately retains the original C ABI.  State it explicitly so
  * the import remains cdecl rather than inheriting the provider's default. */

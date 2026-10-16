@@ -277,7 +277,7 @@ if (!(Test-Path -LiteralPath $hostEntryResourceSource)) { throw "Original SoftPC
 if (!(Test-Path -LiteralPath $hostExportDefinition)) { throw "Original SoftPC export definition missing: $hostExportDefinition" }
 if (!(Test-Path -LiteralPath $redirResourceSource)) { throw "Original Redirector resource missing: $redirResourceSource" }
 if (!(Test-Path -LiteralPath $redirExportDefinition)) { throw "Original Redirector export definition missing: $redirExportDefinition" }
-$adapterWin32Names = @('ntioapi_facade.c', 'thread_start_compat.c',
+$adapterWin32Names = @('ntioapi_facade.c', 'thread_start_compat.c', 'ccpu_thread_exit_compat.c',
                           'nt_thread_alert_compat.c',
                           'console_compat.c', 'console_client.c', 'console_bitmap.c', 'console_graphics.c', 'console_text.c', 'crt_compat.c',
                            'command_process_compat.c', 'native_child_style.c', 'wow_private_unavailable.c',
@@ -1087,6 +1087,10 @@ $graph.Add('build ' + $object + ': cc_host ' + (NinjaPath (Join-Path $hostRoot $
         # Both entry points already use WINAPI; a cdecl thunk double-pops
         # their callback argument on x86 when the thread routine returns.
         $threadAbiFlag = if ($name -in @('nt_thred.c', 'nt_error.c')) { ' /DOPENNT_HOST_CREATE_THREAD_ABI' } else { '' }
+        # Preserve original CPU release, but finish WOW/session retirement
+        # before its simulation stack disappears. Never rename ntthread.c's
+        # definition or other callers by making this a global compiler flag.
+        if ($name -eq 'nt_thred.c') { $threadAbiFlag += ' /Dccpu386exitthread=opennt_ccpu_exit_thread' }
         $graph.Add('  host_cflags = ' + $hostFlags + $threadAbiFlag + ' /FI "' + $ntexapiSubset + '" /FI "' + $threadCompat + '"')
     }
     $object
