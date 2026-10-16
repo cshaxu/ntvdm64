@@ -1,5 +1,9 @@
 # Supporting Material
 
+[T447 S3 control source audit](evidence/m0-t447-s3-control-source-audit.md)
+records the finite control/EDIT/dialog/menu consumer audit and source gaps;
+registration alone is not runtime acceptance.
+
 [T447 S2 scope freeze](evidence/m0-t447-s2-scope-freeze.md) fixes the
 entry/exit inventory, evidence limits, four finite closure blockers and
 S3--S6 handoffs at published P15. It does not claim runtime closure.

@@ -1,19 +1,48 @@
 # Project Status
 
-**No active M/T/S packet.**
+**Active: M0 T447 S3 — controls, EDIT, dialogs and menu dependencies.**
 
 ## Current Work
 
 T447 remains unfinished. Owner approves closing S2 callback/object foundations
 with the isolated unexplained common-dialog witness retained in [TODO](TODO.md),
 not claimed repaired. [S2 closure](../history/m0-t447-s2-foundation-closure.md)
-records the fixed scope and P16 delivery. No S3 packet is admitted here.
+records the fixed scope and P16 delivery (f47d951b0). Continued goal execution
+now admits the next planned S3; S2 is not reopened.
 
 The [working plan](../etc/operations/t447-wow-execution-plan.md) retains S3
 controls/EDIT/dialog/menu dependencies, S4 message identity/reply/reentry,
 S5 individual task termination and S6 whole-T acceptance. No scope is dropped.
 Original-source-first, minimum registered host diff, immutable guest,
 single-person dual-role and grouped verification remain binding.
+
+S3 source audit confirms original menu parsers are already selected. EDIT's
+original seven-unit consumer is absent; its registered memory callbacks alone
+do not supply the control contract. Canonical class/subclass dispatch, dialog
+DS, combo-child retirement, A/W conversion and private scroll timers must be
+wired as one dependency group. Selected WOWFASTEDIT/FlatAddress memory owners
+are reusable; no second text heap or lock table is proposed. Detailed evidence
+is in the packet's source ledger. No S3 runtime edits or new release yet.
+
+## Active Packet
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T447 S3; single-person implementer/reviewer, no subagents. |
+| Admission And Approval | Continuing owner goal after S2 closure; existing approved cross-T S3 scope. |
+| Objective | Connect standard/internal controls, EDIT memory/word-break, dialog data-segment lifetime and MENU-01 through original owners. |
+| Non-goals | Guest changes/rebuild, second heap/editor/scheduler, broad graphics/network/printing, S4 full messaging or S5 termination. |
+| Reference Baseline | Clean f47d951b0, P16 all13 publication; SOL/WINMINE gameplay, WRITE initialization only; retained common-dialog risk. |
+| Files And ABI Surface | Existing wow32-dll controls/dialog/menu owners and original MVDM callbacks; finite USER client slices only after source audit; no wire ABI change. |
+| Applicable Rules | Source recovery ladder, registered minimal host diffs, immutable guest, background grouped verification and coherent release. |
+| Verification | Complete consumer/build audit before runtime edits; grouped positive/negative/lifecycle and real Win16 control/dialog/menu probes, then app/DOS regressions. |
+| Expected Markers | Original callbacks consumed; EDIT DS paired lifetime; child/menu mutation, rollback and teardown; retained app behavior. |
+| Asset Needs | Pinned read-only OpenNT, existing original guest ZIP and independently authored probes. |
+| Reporting Requirements | [Source ledger](../etc/evidence/m0-t447-s3-control-source-audit.md): caller/provider, recovery alternatives, mirror budget, proof and gaps. |
+| Stop Conditions | No speculative rewrite, semantic waiver, recursive USER server import or scope expansion; register necessary diffs first. |
+| Exit Criteria | Complete dependency group and source/guest verification; normal SOL/WRITE initialization with WINMINE retained; build, publish all13, commit/push. |
+| Original Owner Request | 单人双角色复通wow32；原版可接入逻辑优先、最小diff；源码追溯而非测试找补丁；整批接通再验收。 |
+| Similar-Issue Sweep | Direct/template/internal controls, single/multiline EDIT, shared/private dialog DS, menu mutation/rollback, callback and exit lifetimes. |
 
 ## Current Technical Baseline
 
