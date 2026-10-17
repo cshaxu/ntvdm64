@@ -5,7 +5,7 @@
 ## Current Work
 
 Native dialog slots retain original algorithms; no helper HWND or guest edits.
-P17 publication verified; commit pending. Frozen core20/20 passes with real CCPU/
+P17 source ead0aa64a, publication verified. Frozen core20/20 passes with real CCPU/
 registered-owner cases; source/artifact hashes retained. Original
 four WU32 callers pass; native CPD
 source retirement/restoration now passes both encodings. Real DLL terminal
@@ -15,7 +15,7 @@ identically with P16/candidate at both widths; not fixed or silently waived.
 Candidate r12/r13 passes WINMINE/SOL gameplay/exit in all3 modes; WRITE r3
 passes4 startup samples/mode, not editing/exit. Console17/Window17 and original30 pass.
 Dedicated registered-owner modal r6 passes Off/A/W/all styles and cleanup.
-S3/T447 remain open; guest/ZIP unchanged. Complete13 published; commit pending.
+S3/T447 remain open; guest/ZIP unchanged. Complete13 published.
 Source ledger retains earlier failures and input identities.
 
 Dialog-context-r2 passes scoped metrics/class atoms, temporary font lifetime,
@@ -415,7 +415,7 @@ is not established by these handle macros.
 P17 recovery publication changes ntvdm/WOW32 and the3 style/demo images.
 All13 are hash-verified against the tested candidate at assets/release and
 O:/winnt/system32. Prior coherent P16 plus publication evidence is retained
-under build/M0-T447/S3/published-recovery-baseline-r1; source commit pending.
+under build/M0-T447/S3/published-recovery-baseline-r1; source ead0aa64a.
 
 P17 passes core20, original30, Console17/Window17, SOL/WINMINE gameplay/exit
 Off/Win16/All and WRITE initialization only. WRITE editing/save/full exit,

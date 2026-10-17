@@ -13673,3 +13673,24 @@ the actual published x86/x64 DLLs and running published W16Style.exe on an
 owned isolated desktop. This tests deployed paths in addition to byte identity.
 Final documentation governance/diff review and commit/push remain. No guest change,
 new mirror diff or unapproved semantic reduction accompanies this checkpoint.
+
+P17 source delivery is ead0aa64a0854ec5cd3f9469c161740443618777, retaining
+the complete admitted S3 implementation, original slices, reproducible tests
+and synchronized release images. Independent second-role review checked the
+typed original callers and their registered mirror budget, native procedure
+entry identity, exact-generation terminal observation, original finalizer
+ordering and NTW16S inflight disposal. Remaining finite audit rows are not
+closed by this progress delivery; their requirements remain in the plan.
+
+Final documentation audit r1's sandbox-launched supervisor44296 produced no
+terminal result and is not a pass. Normal-user owned background r2 supervisor
+14900 completes governance, relative links and diff checks with exit0. Staging
+then exposes one previously untracked source EOF-only blank line not seen by
+unstaged git diff --check. Removed that blank from wow_edit_state_bindings.c;
+the staged diff is exactly one removed empty EOF line, with all executable
+tokens and line numbers unchanged. No behavior repair, build-graph change or
+different runtime image is hidden in this formatting-only post-freeze change.
+The source snapshot inventory from the frozen tests remains historical rather
+than being rewritten to match the commit. Staged diff --check then passes.
+The final documentation-only delivery records this source hash and the passing
+deployed-boundary result; final documentation gates are rerun before push.
