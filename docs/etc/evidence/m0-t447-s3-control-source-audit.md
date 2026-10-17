@@ -13976,3 +13976,212 @@ all dialog cases. Full mixed messaging/reply/reentry remains S4, individual
 task termination S5. Earlier unexplained common-dialog/default-GDI anomalies
 retain their recorded limits; these two source-attributed repairs do not
 retroactively prove those unrelated old anomalies fixed.
+
+### Post-P18 direct original-dialog DS guest verification
+
+Source audit confirms original client.c WOWDlgInit/GetEditDS/ReleaseEditDS,
+dlgbegin.c shared/private EDIT selection and dlgmgr.c final destruction are
+selected. WU32DialogBoxParam selects the same original creator/modal manager;
+WU32EndDialog's built object references wow_user_end_dialog, not native USER's
+EndDialog import. Existing memory/creator fixtures mostly use explicit callback
+doubles; the registered CCPU modal test uses a native callback. Neither proves
+the real USER16 resource-dialog callback through EndDialog.
+
+The independently authored win16_dialog_probe.asm and the verifier's dialog
+case cover shared/private modeless and modal dialogs, two actual original EDIT
+children, full init parameter, replacement/CRLF, bad-child rollback, original
+SCDLG_NOREVALIDATE init-destroy compatibility and shared-dialog task exit.
+These are existing S3 obligations, not guest replacements or new scope.
+Dialog-ds-guest-r1 stages the exact published P18 thirteen images over the
+original ZIP and freezes source/artifact/media identities; background each
+guest case has180s supervisor and30s observer contracts, isolated desktop.
+
+Off fails at the30s observer deadline. Target17BF completes both modeless
+creations/text operations/destruction; then the modal creation enters its real
+WM_INITDIALOG callback, completes two child queries, replacement and line count,
+and calls WU32EndDialog (P18 map RVA21750, matching frozen object import). That
+thunk returns, but the enclosing modal WU32DialogBoxParam does not. Only the
+Off case runs; Win16/All are unrun. No runtime fix or new publication follows
+this failure. Investigate same-object identity/retained PDLG fEnd and scoped
+EndDialog refusal before proposing any behavior replacement or timing change.
+An opt-in temporary diagnostic at the existing owned dialog boundary will
+record the exact selected state and original EndDialog result before/after;
+it is not a product change or original/guest diff and must not be published.
+
+Diagnostic-build-r1 and diagnostic-guest-r1 are terminal, not publication.
+The exact trace shows selected hwnd=00000A22,FNID02A2,pdlg00F7C358,fEnd0,
+recovered1; returned fEnd0,result0,error1400. No original-before marker occurs:
+the adapter refuses before calling original EndDialog. WU32 HWND32 intentionally
+passes a signed SHORT, while Native GetProp/GetWindowLong accepts it and finds
+the correct binding. dialog_entry then sends that short identity to strict
+graph publication, which needs its full native generation. Source confirms
+the source-class CCPU witness previously only supplied full HWND, explaining
+why the real Win16 failure escaped it. Do not change original EndDialog or
+the modal loop; neither has been reached incorrectly by a faithful caller.
+
+ADAPTER-WOW-076: canonicalize at the shared original-dialog entry, after native
+property acquisition has validated and retained the binding, using its existing
+WND head.h. This covers EndDialog, original A/W dialog/default processing and
+MapDialogRect/directory dialog API wrappers using this same entry. Do not
+canonicalize inside the graph owner or relax its raw-short rejection; the
+existing property-discovery negative explicitly proves that distinction.
+Full stale handles still fail native binding acquisition, not rebound by low
+word. No new handle table, source behavior algorithm, mirror or guest delta.
+Original ValidateHwnd, PDLG flags, resource release and modal dispatch stay.
+The temporary diagnostic function/calls are removed before candidate build.
+
+Test group: extend the exact boundary fixture to full/zero16/signed16 input
+across EndDialog, MapDialogRect, A/W dispatch and finalization, plus stale-full
+rejection; preserve all existing failure/error/scope assertions. Its explicit
+retained-state double now supplies actual head.h rather than zero placeholder.
+The actual registered CCPU original modal witness adds both short forms to
+its existing full/A/W/style cases. The real guest resource probe posts its
+completion command during initialization, requiring original modal queue /
+dispatch before its EndDialog callback (two recorded deferred deliveries).
+Private/shared text state, rollback, init-destroy non-revalidation and terminal
+segment release remain strict; the earlier30s failure is retained, not waived.
+Complete grouped build/runtime/app/DOS/publication gates remain pending.
+
+Dialog-carrier-build-r1 passes (candidate WOW32 SHA256
+76223EB44B9463BB189DE3AEA9F4E4680650410FA8B7DF549EF2DB075ABEA241).
+Acceptance-r1 completes native20/20, including real registered modal A/W /
+Off/Win16/All and all3 carrier forms. Original30 then stops at the
+finalization boundary model's30s deadline; product-r1 refuses its prerequisite
+without running guest product tests. Windows Application Error1000 at
+2026-10-17 16:14:30 local identifies that model's deliberately injected
+0xe0424475, not access violation or an original-body failure. The added
+positive cases inherited api_raise=TRUE from the preceding caught-injection
+case because reset omitted it. Reset now clears only that injection flag;
+old failure assertions remain. No successful actual guest proof follows that
+interrupted group, and the candidate remains unpublished.
+
+Similar-entry source sweep, still this same076 carrier boundary:
+WU32CallWindowProc uses ThunkMsg16's HWND32 short and the saved standard target;
+original clmsg.c::CallWindowProcAorW forwards the supplied HWND unchanged to
+CALLPROC_WOWCHECK. Our selected original control wrappers likewise called strict
+graph/callback owners with the raw carrier. The immutable native entry for a
+saved guest target also forwarded raw carrier directly to the page-domain
+callback cache even though its message graph refresh canonicalized separately.
+Normalize from each acquired binding's retained WND at those two behavior
+entrances as well. Do not normalize the native-procedure pass-through branch:
+its caller argument is an original native contract, not a copied-view key.
+Keyboard entry invokes original ValidateHwnd, whose existing retained reader
+already accepts signed/zero16 forms; no separate keyboard replacement needed.
+Strict raw-short graph rejection and stale-full identity assertions stay.
+
+The complete group adds actual USER16 GetWindowLong(GWL_WNDPROC)/CallWindowProc
+on the original Button; the existing immutable-entry CCPU case retains its
+full positive/failed-publication assertions and adds both short forms with
+exact callback counts/error propagation. This is three finite entrances,
+not an expanded handle manager, modified original HWND32 macro or new API.
+No original or guest source/binary changed. The new full group must pass
+before any P19 delivery; the earlier diagnostic and boundary-model failure
+are retained independently, never relabelled as product acceptance.
+
+Dialog-carrier-build-r2 passes, WOW32 SHA256
+2A6615092CFB4B44C36620B05AC13621140B11A820647E5393DD8048127FB45C.
+Acceptance-r2 runs all20 rows; seven containing the common immutable-entry
+matrix fail only its new callback-count assertion at line667. Other original
+modal carrier/scope cases pass. All seven retain the same failure, not seven
+independent inferred defects. Source shows an ordinary guest window may have
+published native/guest identity but no host original WND at all: graph capture
+does not allocate that behavior state. The first normal callback therefore
+does not make client_state available to the initial head.h-only selection.
+
+Native-short-call-research-r1, an independently authored public-API-only x86
+probe on an isolated desktop, confirms CallWindowProcA forwards full and
+short values unchanged and invokes its native callback once per call (42,
+LastError55BB, window remains live). This excludes a host-native short-carrier
+refusal; no Windows/private-layout workaround is selected. Its source/binary/
+output are build-owned evidence, not a product dependency.
+
+Complete076's guest entrance under its existing task/borrow scopes: use the
+already published cleanup owner's full HWND when present and verify the
+native property still names this exact binding. Without that owner, retain
+the existing original WND identity if available. Do not invent host original
+state for an ordinary guest window. Native-procedure passthrough is unchanged.
+Lookup failure returns the existing invalid-window contract and unwinds the
+existing finally. Exact callback-count/LastError/liveness assertions remain;
+a success marker now prints their actual values. R2/product-r2 stop without
+guest product tests or publication. Build-r3 and the complete final group
+are pending; there is still no newly published package after P18.
+
+Final carrier build-r3 passes, WOW32 SHA256
+CAF36F8581D3FC2EC027C18C51A849A21B8D6DA88087ED2648C612992032E5C8.
+Acceptance-r3 completes20 native rows:18 pass; standard-class and
+creation-unwind fail only the unchanged15s OS HWND lowword acquisition
+prerequisite (line895, attempts708/695 respectively). The new immutable
+carrier case prints callbacks3/full/zero16/signed16/live1 and passes wherever
+reached. No other original behavior assertion fails in those two rows.
+Acceptance-r4 validates identical source/artifact identities and reruns both
+complete rows with unchanged limits/assertions; both pass. Its coverage record
+explicitly says18 original passes plus2 complete strict replays, not one
+uninterrupted20/20. This inherited allocator-dependent prerequisite remains
+unstable; neither an external culprit nor a production defect is inferred.
+
+Original30 in r4 exposes one final boundary-model-only assertion mistake:
+the new stale-full negative compared cumulative graph_calls with zero after
+prior positive cases. It now compares the counter before/after the rejected
+call, still requiring zero new graph calls, unchanged invalid-window error
+and no callbacks/references/scopes. No old assertion is removed. The sole
+changed TU is not included/linked in native20; r5 validates the exact former
+SHA2569A0A3A0ACEAA4C0C4B61F3070D7012A506EEC560474BF2200F99EFF0955C61A4,
+current replacement and every other native input plus frozen artifacts. It
+reuses qualified native coverage and the passed both-width DLL boundary;
+rebuilds/reruns all original30, which now pass, including dialog-carriers0.
+
+Acceptance-r5 finishes exit0 with all nine actual USER16 probes. Controls in
+all3 modes additionally prove saved original Button GetWindowLong/CallWindowProc
+return1. The direct-dialog witness has8 records per mode,6 initializations,
+6 successful text/CRLF checks,4 shared and2 private instances,2 modal returns,
+2 deferred command deliveries,1 bad-child rollback,1 init destruction with
+original nonzero stale return and1 live dialog deliberately left to task exit.
+Each mode reaches exactly5 original global allocation and5 unlock/free
+callbacks before exact-once task retirement. Initializer LPARAM12344473 is
+asserted in the actual16-bit callback. Native model/main/callback fixtures
+supplement, not replace, this real guest proof.
+
+Original source research: pinned OpenNT clmsg.c SHA256
+2F87967A05E730E2C95B8CE0B92443D323F76BAEC97446D3C4F8C9DC163710FD,
+read-only O:/repos.external/OpenNT/windows/core/ntuser/client/clmsg.c,
+CallWindowProcAorW at line1230. No import, binary host-layout reader or source
+modification. P17 ead0aa64a owns dialog_entry's new original-graph call at
+lines96--108 (blame on P18); a prior real-guest modal pass is not inferred.
+Production debug traces are removed. Current only-owned boundary repair
+preserves original input/body/return policy and uses already retained identity.
+Product-r5 is now running against this immutable staged candidate; P19
+publication/commit remain pending here, not implied by focused acceptance.
+
+P19 final delivery supersedes that pending marker, not its retained failures.
+Dialog-carrier-product-r5 exits0: WINMINE and SOL gameplay/normal exit pass
+Off/Win16/All, WRITE passes four startup samples per mode only, and both DOS
+Console/Window summaries contain17 exact Expected==Actual outcomes each.
+WRITE editing/save/full exit remains unproved. Direct-dialog evidence above
+supersedes P18's previously unproved shared/private real guest DS boundary;
+it does not prove every dialog API, physical keyboard or owner-draw behavior.
+
+Dialog-carrier-delivery-r2 exits0. Publisher PID29156, start
+2026-10-17T23:44:19.7846312Z, publishes only changed WOW32 to assets/release
+and O:/winnt/system32, then verifies all13 against the immutable candidate.
+Published-dialog-carrier-r1 retains27 hashed backups of P18 source828dd54f9
+and records no processes requiring forced closure. WOW32 SHA256 is
+CAF36F8581D3FC2EC027C18C51A849A21B8D6DA88087ED2648C612992032E5C8;
+other12 image hashes are unchanged. The deployed both-width boundary process
+PID13432, start2026-10-17T23:44:24.8733312Z, exits0 and checks DLL import,
+negative/lifetime/font and28-page demo normal-exit contracts. These are DLL
+boundary assertions, not all-pixel acceptance. Guest media, ZIP, mirror source
+and wire ABI have zero changes in this delivery;076 registers the owned
+adapter changes. No temporary product diagnostic remains selected.
+
+Single-person second-role review: normalization is limited to acquired
+original behavior/guest entries; native arbitrary procedure passthrough and
+strict full-generation graph rejection remain unchanged. Existing identity
+and task/borrow/finally owners are reused; no new table, hidden window or
+guest modification. The two native acquisition failures and both strict
+whole-row replays remain explicit, not claimed uninterrupted20/20. The new
+model corrections reset an intentional exception injection between cases and
+assert zero additional graph calls for rejected stale identity, without
+removing prior assertions. Original30 and actual nine guest groups provide
+distinct proof levels. S3/T447 remain open for finite fixed-chain evidence
+reconciliation; S4 mixed message/reply/reentry and S5 per-task termination
+remain assigned to their existing stages, not silently accepted here.

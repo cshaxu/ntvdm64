@@ -4,15 +4,15 @@
 
 ## Current Work
 
-Post-P17: combo input/resource-exit repair (ADAPTER-WOW-074/075). Build-r5 and
-acceptance-r7/product-r5 pass; P18 all13 published and deployment-verified.
-Native coverage:19 unchanged passing rows plus one full dialog-row replay
-after fixture-only enrollment repair, not uninterrupted20/20. Original30,
-both-width DLL boundaries and real controls/template probes in all3 modes pass.
-Each template witness records17 unlock/free pairs before one task retirement.
+P19 repairs short-HWND dialog/control/guest entries (ADAPTER-WOW-076).
+All13 are published/hash-matched; only WOW32 changes from P18.
+Native coverage:18 unchanged passes plus2 strict complete row replays after
+OS slot-acquisition failures, not uninterrupted20/20. Original30 and nine
+real guest probes pass. Direct dialogs prove shared/private EDIT DS, deferred
+modal exit, rollback and5 allocation/free pairs per mode before task retirement.
 Latest old/new default GDI16/16 passes do not prove earlier16/19 cause fixed.
-P17 WINMINE/SOL gameplay/exit, WRITE startup only and DOS17x2 remain the
-delivery floor. WRITE editing/save/normal exit remains unproved.
+P19 WINMINE/SOL gameplay/exit, WRITE startup and DOS17x2 pass;
+both-width deployed DLL boundaries pass. WRITE editing/save/full exit unproved.
 S3/T447 open; guest/ZIP/mirror unchanged. See the source ledger for exact runs.
 Chronology below is historical; later evidence supersedes intermediate unrun
 markers, not whole-S3 proof obligations.
@@ -411,13 +411,13 @@ is not established by these handle macros.
 
 ## Current Technical Baseline
 
-P18 changes WOW32 and the3 style/demo images; ntvdm and other8 stay P17.
+P19 changes only WOW32; the other12 images retain P18 identities.
 All13 match the tested candidate at assets/release and O:/winnt/system32.
-Prior P17 (ead0aa64a) and27 recoverable backups are retained under
-build/M0-T447/S3/published-control-info-r1; deployed boundary passes both widths.
+Prior P18 (828dd54f9) and27 recoverable backups are retained under
+build/M0-T447/S3/published-dialog-carrier-r1; deployed boundary passes both widths.
 
-P18 covers native20 (19 retained + repaired full row), original30, DOS17x2,
-controls/template witnesses and SOL/WINMINE gameplay/exit Off/Win16/All;
+P19 covers native20 (18 retained +2 strict whole-row replays), original30,
+DOS17x2, controls/template/direct-dialog witnesses and app checks Off/Win16/All;
 WRITE initialization only. WRITE editing/save/full exit,
 arbitrary inherited environments, full S4 messaging and S5 termination remain
 unproved. P16 foundation/guest history is retained in its

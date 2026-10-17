@@ -138,6 +138,24 @@ create button_name,0x40010002,button,owner
 send button,0x401,1,0,0         ; BM_SETCHECK
 send button,0x400,0,0,0         ; BM_GETCHECK
 expect 1,0x11
+; GetWindowLong exposes the saved original control target as a Win16 thunk.
+; CallWindowProc must handle its original HWND32 short carrier, too.
+push word [button-data]
+push word -4
+api 2,135
+mov [saved_proc-data],ax
+mov [saved_proc-data+2],dx
+or ax,dx
+require 0x12
+push word [saved_proc-data+2]
+push word [saved_proc-data]
+push word [button-data]
+push word 0x400
+push word 0
+push word 0
+push word 0
+api 2,122
+expect 1,0x13
 inc word [button_ok-data]
 mov word [phase-data],1
 call checkpoint
@@ -354,6 +372,7 @@ leaving: dw 0
 task: dw 0
 report_end:
 instance: dw 0
+saved_proc: dd 0
 file: dw -1
 null_window: dw 0
 owner: dw 0

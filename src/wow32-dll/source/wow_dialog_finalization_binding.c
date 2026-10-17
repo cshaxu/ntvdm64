@@ -67,6 +67,12 @@ static LRESULT dialog_entry(HWND window, UINT message, WPARAM wp, LPARAM lp,
     if (!finalize && !wow_edit_lookaside_ready()) return FALSE;
     words = wow_window_words_acquire(window);
     if (!words) return FALSE;
+    /* ADAPTER-WOW-076: HWND32 deliberately supplies a signed16 carrier.
+     * Native property lookup has already validated its current binding;
+     * graph/callback publication requires that binding's full identity.
+     * Keep strict full-handle rejection in the graph owner unchanged. */
+    state = wow_window_words_client_state_value(words);
+    if (state) window = state->head.h;
     owner = wow_window_words_cleanup_value(words);
     cleanup = (runtime->thread->TIF_flags & WOW_TASK_TIF_INCLEANUP) != 0;
     if (!owner || (cleanup && (owner->thread != runtime->thread || !finalize))) {

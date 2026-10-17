@@ -1,5 +1,18 @@
 # WOW32 DLL target component
 
+ADAPTER-WOW-076 canonicalizes the original signed16 HWND carrier at shared
+original-dialog/control entries and immutable guest entries using the exact
+binding's retained identity. Ordinary guest windows without original host
+state use their existing published window
+owner's full identity instead; no original state is fabricated. Native
+property lookup validates the input first; strict graph/callback publication
+still consumes full generation identities and rejects stale full handles.
+This covers original EndDialog, dialog/default handling, dialog API callers
+and saved control/guest procedure invocation. Native-procedure pass-through
+keeps its caller's original argument; only retained behavior entries normalize
+without changing original bodies, native fallback, original scheduling or
+the lifetime owner. No new table, handle policy or guest/mirror change.
+
 ADAPTER-WOW-075 retains a trusted resource-only destroy association in the
 existing exact HWND binding. Original Find/Replace callback initialization
 registers its existing DIV335 wrapper; normal destruction consumes it, and

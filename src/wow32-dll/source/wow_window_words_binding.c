@@ -1254,6 +1254,18 @@ static BOOL dispatch_bound(HWND window, UINT message, WPARAM wp,
         wow_window_words_release(binding); SetLastError(error); return FALSE;
     }
     __try {
+        /* ADAPTER-WOW-076: ordinary guest windows need not have an original
+         * host WND. Their existing published owner still has the exact full
+         * native identity. Normalize only this retained guest entry; native
+         * procedure pass-through above keeps its original input argument. */
+        if (binding->objects) {
+            HWND full = wow_user_window_full_handle(binding->objects, LOWORD(window));
+            if (!full || GetPropW(full, property_name) != binding) {
+                SetLastError(ERROR_INVALID_WINDOW_HANDLE); return FALSE;
+            }
+            window = full;
+        } else if (binding->client_state) window = binding->client_state->head.h;
+        view.window = window;
         /* Resource conversion may enter the guest. Establish the same task
          * and alias scope as the callback before loading the class menu. */
         if (!prepare_creation_menu(window, message, lp, binding)) return FALSE;

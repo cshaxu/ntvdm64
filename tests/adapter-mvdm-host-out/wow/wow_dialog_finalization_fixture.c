@@ -34,7 +34,7 @@ static unsigned captures;
 static wow_dialog_context outer_context;
 __declspec(thread) wow_dialog_context *wow_dialog_current;
 #define NATIVE_EXCEPTION ((DWORD)0xe0424475)
-#define WINDOW ((HWND)(ULONG_PTR)0x1234)
+#define WINDOW ((HWND)(ULONG_PTR)0x004f9234)
 #define WORDS ((wow_window_words_binding *)(ULONG_PTR)0x5678)
 #define CHECK(c) do { if (!(c)) { ++errors; printf("FAIL line=%d\n", __LINE__); } } while (0)
 
@@ -61,7 +61,13 @@ BOOL WINAPI wow_edit_lookaside_ready(void)
     return TRUE;
 }
 wow_window_words_binding *WINAPI wow_window_words_acquire(HWND window)
-{ CHECK(window == WINDOW); ++references; return WORDS; }
+{
+    if(window!=WINDOW && window!=(HWND)(ULONG_PTR)LOWORD(WINDOW) &&
+            window!=(HWND)(LONG_PTR)(SHORT)LOWORD(WINDOW)){
+        SetLastError(ERROR_INVALID_WINDOW_HANDLE);return NULL;
+    }
+    ++references;return WORDS;
+}
 void WINAPI wow_window_words_release(wow_window_words_binding *words)
 { CHECK(words == WORDS && references); --references; }
 wow_cleanup_window *WINAPI wow_window_words_cleanup_value(wow_window_words_binding *words)
@@ -163,6 +169,7 @@ static void reset(void)
 {
     CHECK(!references && !tasks && !borrows);
     ZeroMemory(&dialog, sizeof(dialog));
+    dialog.wnd.head.h = WINDOW;
     dialog.wnd.fnid = FNID_DIALOG;
     dialog.wnd.cbwndExtra = DLGWINDOWEXTRA;
     SetWF(&dialog.wnd, WFDIALOGWINDOW);
@@ -172,6 +179,7 @@ static void reset(void)
     owner.thread = &thread;
     fail_borrow = fail_worker = fail_ready = FALSE;
     native_success = native_raise = FALSE;
+    api_raise = FALSE;
     fail_context = FALSE; captures = 0;
     calls = cleanup_entries = ensures = end_calls = native_begins = 0;
 }
@@ -290,6 +298,23 @@ int main(void)
         __except(GetExceptionCode() == NATIVE_EXCEPTION ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) { caught = TRUE; }
         CHECK(caught && api_calls == 6 && GetLastError() == 0x4474);
         CHECK(!references && !tasks && !borrows && !wow_dialog_current);
+    }
+    {
+        unsigned form,graph_before;HWND input[3]={WINDOW,(HWND)(ULONG_PTR)LOWORD(WINDOW),
+            (HWND)(LONG_PTR)(SHORT)LOWORD(WINDOW)};
+        for(form=0;form<3;++form){
+            RECT rect={0};reset();
+            CHECK(wow_user_end_dialog(input[form],-49) && end_calls==1 && !native_begins);
+            CHECK(wow_user_map_dialog_rect(input[form],&rect)==37);
+            CHECK(wow_dialog_window_procA(input[form],WM_USER,17,29)==0x1234);
+            CHECK(wow_dialog_finalize_bound(input[form]));
+            CHECK(!references && !tasks && !borrows);
+        }
+        reset();graph_before=graph_calls;
+        CHECK(!wow_dialog_window_procA((HWND)(ULONG_PTR)0x00509234,WM_USER,17,29) &&
+            GetLastError()==ERROR_INVALID_WINDOW_HANDLE && !calls && graph_calls==graph_before &&
+            !references && !tasks && !borrows);
+        printf("dialog-carriers failures=%u full=1 zero16=1 signed16=1 stale_full_rejected=1\n",errors);
     }
     printf("dialog-finalization failures=%u\n", errors);
     return errors ? 1 : 0;

@@ -660,6 +660,13 @@ static int verify_callback_scope(ULONG teb)
             BORROW_CHECK(CallWindowProcA(entry,window, WM_APP + 70, 0, 0) == 0);
             BORROW_CHECK(GetLastError() == 0x55bbu);
             BORROW_CHECK(callback_zero_count == 1 && IsWindow(window));
+            BORROW_CHECK(CallWindowProcA(entry,(HWND)(ULONG_PTR)LOWORD(window),
+                WM_APP+70,0,0)==0 && GetLastError()==0x55bbu);
+            BORROW_CHECK(CallWindowProcA(entry,(HWND)(LONG_PTR)(SHORT)LOWORD(window),
+                WM_APP+70,0,0)==0 && GetLastError()==0x55bbu);
+            BORROW_CHECK(callback_zero_count==3 && IsWindow(window));
+            fprintf(stderr,"WOW_IMMUTABLE_CARRIERS callbacks=%u full=1 zero16=1 signed16=1 live=%d\n",
+                callback_zero_count,IsWindow(window));
         }
         callback_backing = 0u;
         __try {
@@ -929,6 +936,7 @@ static unsigned terminal_dialog_callbacks;
 static unsigned modal_dialog_calls;
 static BOOL modal_style_expected;
 static wow_window_words_binding *modal_retained;
+static unsigned modal_handle_form;
 static INT_PTR CALLBACK original_modal_witness(HWND window,UINT message,
     WPARAM wp,LPARAM lp)
 {
@@ -951,7 +959,9 @@ static INT_PTR CALLBACK original_modal_witness(HWND window,UINT message,
             (BOOL (__cdecl *)(HWND))(void *)GetProcAddress(module,"Ntw16sWindowAttached"):NULL;
         BORROW_CHECK((attached && attached(window))==modal_style_expected);
         BORROW_CHECK(KillTimer(window,1));
-        BORROW_CHECK(wow_user_end_dialog(window,49));
+        HWND carrier=modal_handle_form==1?(HWND)(ULONG_PTR)LOWORD(window):
+            modal_handle_form==2?(HWND)(LONG_PTR)(SHORT)LOWORD(window):window;
+        BORROW_CHECK(wow_user_end_dialog(carrier,49));
         return TRUE;
     }
     return FALSE;
@@ -980,7 +990,7 @@ static void verify_original_modal_task(void)
     PFNWOWHANDLERSOUT outputs={0};
     DWORD resource[32]={0};DLGTEMPLATE *dialog=(DLGTEMPLATE *)resource;
     HANDLE wake=CreateEventW(NULL,FALSE,FALSE,NULL);
-    unsigned before=borrow_errors,mode,encoding,modes=1;
+    unsigned before=borrow_errors,mode,encoding,carrier,modes=1;
     /* Modal Peek/Wait require InitTask's actual host_context/owner, not just
      * the controlled task words used by the native creation-only matrix. */
     BORROW_CHECK(wake && wow_user_runtime_initialize(&runtime));
@@ -1012,9 +1022,10 @@ static void verify_original_modal_task(void)
     modes=3;
 #endif
     dialog->style=WS_POPUP|WS_CAPTION|DS_MODALFRAME;dialog->cx=100;dialog->cy=40;
-    for(mode=0;mode<modes;++mode)for(encoding=0;encoding<2;++encoding){
+    for(mode=0;mode<modes;++mode)for(encoding=0;encoding<2;++encoding)for(carrier=0;carrier<3;++carrier){
         INT_PTR result;PWND state;unsigned calls=modal_dialog_calls;
         modal_retained=NULL;modal_style_expected=mode!=WINDOW_STYLE_OFF;
+        modal_handle_form=carrier;
         fprintf(stderr,"WOW_MODAL_STAGE enter mode=%u encoding=%u\n",mode,encoding);
         result=wow_title_modal(GetModuleHandleW(NULL),dialog,NULL,
             original_modal_witness,0,encoding?0:SCDLG_ANSI,mode);
@@ -1032,10 +1043,11 @@ static void verify_original_modal_task(void)
     BORROW_CHECK(wow_user_task_lifecycle_dispose(lifecycle));
     BORROW_CHECK(CloseHandle(wake));
 #ifndef WOW_REAL_DIALOG_LIFECYCLE_FIXTURE
+    fprintf(stderr,"WOW_ORIGINAL_MODAL_CARRIERS errors=%u full=1 zero16=1 signed16=1 original_end=1\n",borrow_errors-before);
     fprintf(stderr,"WOW_ORIGINAL_MODAL_CCPU errors=%u modes=%u aw=2 returned=49 pdlg_retired=1\n",
         borrow_errors-before,modes);
 #else
-    (void)before;(void)mode;(void)encoding;(void)modes;
+    (void)before;(void)mode;(void)encoding;(void)modes;(void)carrier;
 #endif
 }
 

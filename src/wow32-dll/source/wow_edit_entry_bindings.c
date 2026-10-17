@@ -123,6 +123,7 @@ static LRESULT edit_entry(HWND window, UINT message, WPARAM wp, LPARAM lp,
     DWORD entry_error = GetLastError();
     wow_user_runtime_thread *runtime = wow_user_runtime_current();
     wow_window_words_binding *words;
+    PWND state;
     wow_cleanup_window *owner;
     wow_task_callback_scope task_scope;
     wow_user_borrow_scope borrow_scope;
@@ -172,6 +173,11 @@ static LRESULT edit_entry(HWND window, UINT message, WPARAM wp, LPARAM lp,
     }
     words = wow_window_words_acquire(window);
     if (!words) return 0;
+    /* ADAPTER-WOW-076: saved control procedures may be called with HWND32's
+     * short carrier. Retain native validation, then publish the binding's
+     * full WND identity to the strict graph/callback owners. */
+    state = wow_window_words_client_state_value(words);
+    if (state) window = state->head.h;
     owner = wow_window_words_cleanup_value(words);
     cleanup = (runtime->thread->TIF_flags & WOW_TASK_TIF_INCLEANUP) != 0;
     if (!owner || (cleanup && (owner->thread != runtime->thread ||

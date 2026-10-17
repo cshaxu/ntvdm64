@@ -4,7 +4,7 @@ param(
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$BuildRoot,
     [string]$Nasm='nasm.exe',
-    [ValidateSet('hook','timer','idle','common-dialog','generic','shell','print','winsock','controls')][string]$Case='hook',
+    [ValidateSet('hook','timer','idle','common-dialog','generic','shell','print','winsock','controls','dialog')][string]$Case='hook',
     [ValidateSet('Off','Win16','All')][string]$Win16Style='Off',
     [ValidateRange(1,32)][int]$CommonDialogRounds=1
 )
@@ -22,6 +22,7 @@ $probe=if($Case -eq 'timer'){'TMRPROBE'}elseif($Case -eq 'idle'){'IDLPROBE'}else
 $process=$null;$runtime=$null;$scope=$null
 if($Case -eq 'winsock'){$probe='WSKPROBE'}
 if($Case -eq 'controls'){$probe='CTLPROBE'}
+if($Case -eq 'dialog'){$probe='DLGPROBE'}
 $saved=@{}
 foreach($name in @('TEMP','TMP','PATH','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_WOW_DISPATCH_TRACE_PATH',
         'MVDM_WOW_CALLBACK_FRAME_TRACE_PATH','MVDM_WOW_WINDOW_TRACE_PATH')){
@@ -77,7 +78,7 @@ try {
         Get-FileHash "$runtime/system32/COMMDLG.DLL" | Select-Object Path,Hash |
             ConvertTo-Json | Set-Content "$root/commdlg-input.json"
     }
-    if($Case -in @('common-dialog','controls')){
+    if($Case -in @('common-dialog','controls','dialog')){
         # Existing default-off traces share one chronological stream. No
         # probe-specific runtime behavior or replacement guest is selected.
         $env:MVDM_WOW_CALLBACK_FRAME_TRACE_PATH="$root/lifetime.txt"
@@ -125,11 +126,48 @@ try {
         }
         $controlRecords|ConvertTo-Json|Set-Content "$root/guest-report.json"
     }
+    if($Case -eq 'dialog' -and (Test-Path "$root/guest-report.bin")){
+        $dialogBytes=[IO.File]::ReadAllBytes("$root/guest-report.bin")
+        if($dialogBytes.Length % 34){throw 'Incomplete dialog DS report'}
+        $dialogRecords=@()
+        $names=@('phase','errors','initialized','terminated','text','shared','local','modal','failed','killed','leaving','task','ds1','ds2','deferred')
+        for($offset=0;$offset -lt $dialogBytes.Length;$offset+=34){
+            if([Text.Encoding]::ASCII.GetString($dialogBytes,$offset,4) -ne 'DLG1'){throw 'Bad dialog DS signature'}
+            $row=[ordered]@{}
+            for($i=0;$i -lt $names.Count;$i++){$row[$names[$i]]=[BitConverter]::ToUInt16($dialogBytes,$offset+4+2*$i)}
+            $dialogRecords+=[pscustomobject]$row
+        }
+        $dialogRecords|ConvertTo-Json|Set-Content "$root/guest-report.json"
+    }
     if($process.ExitCode -or $report -notmatch 'result=exited' -or $report -notmatch 'exit=0x00000000'){
         throw 'Guest/launcher did not complete normally'
     }
     $bytes=[IO.File]::ReadAllBytes("$root/guest-report.bin")
-    if($Case -eq 'controls'){
+    if($Case -eq 'dialog'){
+        if($bytes.Length -ne 272 -or ($dialogRecords.phase -join ',') -ne '0,1,2,3,4,5,6,7' -or
+                @($dialogRecords|Where-Object errors -ne 0).Count){throw 'Original dialog guest phase/assertion failure'}
+        $last=$dialogRecords[-1]
+        if($last.initialized -ne 6 -or $last.text -ne 6 -or $last.shared -ne 4 -or
+            $last.local -ne 2 -or $last.modal -ne 2 -or $last.failed -ne 1 -or
+            $last.killed -ne 1 -or $last.leaving -ne 1 -or $last.deferred -ne 2 -or !$last.task -or !$last.ds1 -or
+            $last.ds1 -ne $last.ds2 -or @($dialogRecords|Where-Object task -ne $last.task).Count){
+            throw 'Original resource dialog/EDIT DS/modal/rollback/destruction contract incomplete'
+        }
+        $trace=Get-Content "$root/lifetime.txt" -Raw
+        $task4='{0:X4}' -f [int]$last.task;$task8='{0:X8}' -f [int]$last.task
+        $complete=[regex]::Matches($trace,'(?m)^\d+ TaskRetirement .*task='+$task8+' stage=complete status=0\r?$')
+        if($complete.Count -ne 1){throw 'Dialog probe task did not retire exactly once'}
+        # Four valid shared dialogs plus the failed-child rollback allocate
+        # through original GetEditDS/W32GlobalAlloc16; all must retire before
+        # task completion, including the one deliberately left alive.
+        foreach($ret in @('000C','000F')){
+            $callbacks=[regex]::Matches($trace,'(?m)^\d+ after ret='+$ret+' .*task='+$task4+' .*\r?$')
+            if($callbacks.Count -lt 5 -or @($callbacks|Where-Object Index -gt $complete[0].Index).Count){
+                throw 'Original shared dialog segment allocation/release callbacks missing or late'
+            }
+        }
+        "PASS real Win16 resource modeless/modal dialogs, shared/private EDIT DS, initialization parameter, text/CRLF, failed-child rollback, init destruction compatibility and task exit ($Win16Style)"|Set-Content "$root/result.txt"
+    }elseif($Case -eq 'controls'){
         if($bytes.Length -ne 252 -or ($controlRecords.phase -join ',') -ne '0,1,2,3,4,5,6,7,8' -or
                 @($controlRecords|Where-Object errors -ne 0).Count){throw 'Control guest phase/assertion failure'}
         $last=$controlRecords[-1]

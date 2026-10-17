@@ -38,6 +38,21 @@ test-only owner-enrollment repair. Template witnesses verify17 resource pairs
 and exact task retirement in all3 modes; app/DOS floors remain. This is a
 safe S3 baseline, not whole-S3/T447 closure or S4/S5 acceptance.
 
+P19 follow-up is the finite076 original-entry carrier group: Win16 HWND32
+short forms reach dialog/control and saved guest-procedure entries, while
+the copied graph/callback owner requires full identities. Canonicalize from
+the acquired binding's original WND or already published native-window owner;
+do not relax the strict graph owner, rewrite HWND32 or alter native arbitrary
+procedure pass-through. The direct shared/private DS dialog witness now
+passes all3 modes, including deferred modal EndDialog, init-destroy return,
+rollback and exact resource/task retirement. Original30 passes. Native20
+coverage is18 passes plus2 strict complete unchanged-input replays after OS
+slot acquisition failures; it is not uninterrupted20/20. Product-r5 passes
+app/DOS floors; delivery-r2 publishes all13 with matching hashes and passes
+the deployed both-width DLL boundary. Only WOW32 changes from P18. See the
+source ledger; this
+neither closes S3 nor transfers its remaining evidence reconciliation to S4.
+
 Owner clarification: exhaust source reuse and bounded semantic-preserving
 adaptation before proposing a compatibility exception. Difficulty, missing
 proof or a simpler reduced implementation is not evidence of impossibility.

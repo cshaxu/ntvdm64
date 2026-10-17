@@ -543,6 +543,7 @@ if ($OriginalModalOnly) {
         return
     }
     if ($fixtureExitCode -ne 0 -or
+        !($fixtureOutput -match '^WOW_ORIGINAL_MODAL_CARRIERS errors=0 full=1 zero16=1 signed16=1 original_end=1$') -or
         !($fixtureOutput -match ('^WOW_ORIGINAL_MODAL_CCPU errors=0 modes='+$modalModes+' aw=2 returned=49 pdlg_retired=1$')) -or
         !($fixtureOutput -match '^WOW_ORIGINAL_MODAL_SCOPE real_ccpu=1 registered_owner=1 normal_cleanup=1$') -or
         !($fixtureOutput -match '^WOW_PAGE_DOMAIN_LIFECYCLE_OK$')) {
