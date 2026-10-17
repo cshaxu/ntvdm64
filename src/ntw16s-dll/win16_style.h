@@ -23,7 +23,13 @@ NTW16S_API BOOL win16_style_install(HWND window, const win16_style_palette *pale
  * WM_SIZE before their creator has returned and initialized client state. */
 BOOL win16_style_install_created(HWND window, const win16_style_palette *palette);
 NTW16S_API BOOL win16_style_remove(HWND window);
+/* Private terminal leaf, shared with the native NCDESTROY handler. */
+BOOL win16_style_frame_terminal(HWND window);
 NTW16S_API BOOL win16_style_set_palette(HWND window, const win16_style_palette *palette);
+/* Same-thread geometry query, with exactly the subclass's WM_NCHITTEST
+ * result. FALSE leaves result untouched and means use the native default.
+ * Does not send messages, draw or install style on an unstyled window. */
+NTW16S_API BOOL win16_style_hit_test(HWND window, LPARAM point, LRESULT *result);
 /* Explicit standalone frame-scroll API binding. A subclass alone cannot
  * replace USER's non-message SB_HORZ/SB_VERT query/update entry points.
  * No process hooks are installed here; unstyled windows delegate unchanged. */

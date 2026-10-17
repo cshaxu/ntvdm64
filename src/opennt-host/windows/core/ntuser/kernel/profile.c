@@ -8,10 +8,43 @@
 * History:
 * 30-Nov-1993 SanfordS  Created.
 \***************************************************************************/
-/* DIVERGENCE(OPENNT-HOST-055): exact compatibility string reader subset.
- * ADAPTER-WOW-042 binds only PMAP_COMPAT to read-only native registry access. */
+/* DIVERGENCE(OPENNT-HOST-055): exact string/integer reader subset.
+ * ADAPTER-WOW-042 binds PMAP_COMPAT and EDIT's PMAP_DESKTOP read-only access. */
 #define WOW_ORIGINAL_PROFILE
 #include "wow_task_profile_bindings.h"
+
+UINT FastGetProfileIntW(
+    UINT    idSection,
+    LPCWSTR lpKeyName,
+    UINT    nDefault)
+{
+    WCHAR          ValueBuf[40];
+    UNICODE_STRING Value;
+    UINT           ReturnValue;
+
+    UserAssert(idSection <= PMAP_LAST);
+
+    Value.Length        = 0;
+    Value.MaximumLength = sizeof(ValueBuf);
+    Value.Buffer        = ValueBuf;
+
+    RtlIntegerToUnicodeString(nDefault, 10, &Value);
+    if (!FastGetProfileStringW(idSection,
+                               lpKeyName,
+                               (LPWSTR)Value.Buffer,
+                               Value.Buffer,
+                               sizeof(ValueBuf) / sizeof(WCHAR))) {
+        return nDefault;
+    }
+
+    /*
+     * Convert string to int.
+     */
+    Value.Length = wcslen(Value.Buffer) * sizeof(WCHAR);
+    RtlUnicodeStringToInteger(&Value, 10, &ReturnValue);
+
+    return ReturnValue;
+}
 
 DWORD FastGetProfileStringW(
     UINT    idSection,

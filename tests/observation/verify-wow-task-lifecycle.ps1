@@ -2,33 +2,154 @@ param(
     [Parameter(Mandatory=$true)][string]$ProviderBuildRoot,
     [Parameter(Mandatory=$true)][string]$WorkerBuildRoot,
     [string]$BuildRoot,
-    [ValidateSet('task-lifecycle','process-retirement','menu-cleanup','menu-resource','native-dispatch-gate','window-procedure','standard-class','class-query','dialog-lifecycle','init-notification','start-notification','style-policy','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','task-order','class-client','window-borrow','window-reclaim','graph-snapshot','thunk-scope','native-creation')] [string]$Case = 'task-lifecycle',
+    [ValidateSet('task-lifecycle','process-retirement','menu-cleanup','menu-resource','native-dispatch-gate','window-procedure','standard-class','class-query','class-procedure','class-lifetime','dialog-lifecycle','init-notification','start-notification','style-policy','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','task-order','class-client','window-borrow','window-reclaim','graph-snapshot','thunk-scope','native-creation')] [string]$Case = 'task-lifecycle',
     [string]$StyleDll,
     [switch]$InitRollback,
+    [switch]$CreationUnwind,
+    [switch]$OriginalModalOnly,
+    [switch]$RealDialogLifecycleOnly,
     [string]$Ninja = 'ninja.exe',
     [string]$VsDevCmd = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 )
 # Links current production owner objects; this is not real-Win16 acceptance.
 $ErrorActionPreference = 'Stop'
+# Preserve the public case name, but select actual CCPU storage and the
+# registered original-owner lifetime. No numeric page-domain stand-in remains.
+$requestedCase = $Case
+if ($Case -eq 'dialog-lifecycle') { $Case='window-borrow'; $RealDialogLifecycleOnly=$true }
 if ($InitRollback -and $Case -ne 'task-lifecycle') { throw 'InitRollback requires task-lifecycle' }
+if ($CreationUnwind -and $Case -ne 'native-creation') { throw 'CreationUnwind requires native-creation' }
+if ($RealDialogLifecycleOnly) { $OriginalModalOnly = $true }
+if ($OriginalModalOnly -and $Case -ne 'window-borrow') { throw 'OriginalModalOnly requires window-borrow' }
+if ($StyleDll -and $Case -notin @('style-policy','window-borrow')) { throw 'StyleDll requires style-policy or window-borrow' }
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $vs = (Resolve-Path -LiteralPath $VsDevCmd).Path
 
 $provider = (Resolve-Path -LiteralPath $ProviderBuildRoot).Path
 $worker = (Resolve-Path -LiteralPath $WorkerBuildRoot).Path
-if (!$BuildRoot) { $BuildRoot = Join-Path $repo ('build/M0-T422/S2/' + $Case) }
+if (!$BuildRoot) { $BuildRoot = Join-Path $repo ('build/M0-T422/S2/' + $requestedCase) }
 $out = [IO.Path]::GetFullPath($BuildRoot)
 if (!$out.StartsWith(($repo + '\build\'), [StringComparison]::OrdinalIgnoreCase)) {
     throw 'Lifecycle fixture output must be under repository build.'
 }
 New-Item -ItemType Directory -Path $out -Force | Out-Null
+if ($requestedCase -eq 'style-policy') {
+    if (!$StyleDll) { throw 'style-policy requires a matching style DLL' }
+    # One process-level registration lifetime per executable. Keep policy/peer
+    # model assertions and require real original-modal acceptance separately.
+    $shell=(Get-Process -Id $PID).Path
+    $line='-NoProfile -File "'+$PSCommandPath+'" -ProviderBuildRoot "'+$provider+'" -WorkerBuildRoot "'+$worker+'" -BuildRoot "'+$out+'/original-modal" -Case window-borrow -OriginalModalOnly -StyleDll "'+(Resolve-Path $StyleDll).Path+'" -VsDevCmd "'+$vs+'" -Ninja "'+$Ninja+'"'
+    $modal=Start-Process $shell -ArgumentList $line -WindowStyle Hidden -PassThru -WorkingDirectory $repo -RedirectStandardOutput "$out/original-modal.stdout.txt" -RedirectStandardError "$out/original-modal.stderr.txt"
+    $null=$modal.Handle
+    @{pid=$modal.Id;start=$modal.StartTime.ToUniversalTime().ToString('o');command=$line;timeoutSeconds=300} |
+        ConvertTo-Json | Set-Content "$out/original-modal.process.json"
+    if (!$modal.WaitForExit(300000)) { & taskkill.exe /PID $modal.Id /T /F; throw 'Original modal prerequisite deadline' }
+    $modal.WaitForExit();$code=$modal.ExitCode;$code|Set-Content "$out/original-modal.exit.txt";$modal.Dispose()
+    if ($code) { throw 'Actual original modal/AW/style/lifetime prerequisite failed' }
+}
+# Initialize the compiler shell once. Only compiler children receive the
+# resulting environment; the verifier and acceptance children never inherit it.
+$environmentStart = [DateTimeOffset]::UtcNow
+$environmentInfo = New-Object Diagnostics.ProcessStartInfo
+$environmentInfo.FileName = 'cmd.exe'
+$environmentInfo.Arguments = '/u /d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && set"'
+$environmentInfo.UseShellExecute = $false
+$environmentInfo.CreateNoWindow = $true
+$environmentInfo.RedirectStandardOutput = $true
+$environmentInfo.RedirectStandardError = $true
+$environmentInfo.StandardOutputEncoding = [Text.Encoding]::Unicode
+$environmentInfo.StandardErrorEncoding = [Text.Encoding]::Unicode
+$environmentProcess = New-Object Diagnostics.Process
+$environmentProcess.StartInfo = $environmentInfo
+if (!$environmentProcess.Start()) { throw 'Compiler environment start failed' }
+$null = $environmentProcess.Handle
+@{pid=$environmentProcess.Id;started=$environmentStart.ToString('o');timeoutSeconds=120;
+    command=$environmentInfo.FileName+' '+$environmentInfo.Arguments} |
+    ConvertTo-Json | Set-Content "$out/compiler-environment.process.json"
+$environmentOutput = $environmentProcess.StandardOutput.ReadToEndAsync()
+$environmentError = $environmentProcess.StandardError.ReadToEndAsync()
+if (!$environmentProcess.WaitForExit(120000)) {
+    & taskkill.exe /PID $environmentProcess.Id /T /F
+    throw 'Compiler environment deadline exceeded'
+}
+$environmentProcess.WaitForExit()
+$environmentCode = $environmentProcess.ExitCode
+$compilerLines = $environmentOutput.GetAwaiter().GetResult() -split "`r?`n"
+$null = $environmentError.GetAwaiter().GetResult()
+$environmentProcess.Dispose()
+$environmentCode | Set-Content "$out/compiler-environment.exit.txt"
+if ($environmentCode) { throw 'Compiler environment initialization failed' }
+$compilerEnvironment = @{}
+# These are build-tool inputs, not arbitrary inherited application variables.
+# In particular do not round-trip multiline secrets or unrelated settings
+# through CMD's textual SET output. /u retains non-ASCII compiler paths.
+$compilerNames = '^(PATH|INCLUDE|LIB|LIBPATH|EXTERNAL_INCLUDE|DevEnvDir|ExtensionSdkDir|CommandPromptType|Platform|PreferredToolArchitecture|VisualStudioVersion|VSINSTALLDIR|VCINSTALLDIR|NETFXSDKDir|UCRTVersion)$|^(VCTools|VSCMD_|__VSCMD_|WindowsSDK|UniversalCRT|Framework)'
+foreach ($line in $compilerLines) {
+    $equals = $line.IndexOf('=')
+    if ($equals -gt 0 -and $line.Substring(0,$equals) -match $compilerNames) {
+        $compilerEnvironment[$line.Substring(0,$equals)] = $line.Substring($equals+1)
+    }
+}
+if (!$compilerEnvironment.ContainsKey('VCToolsInstallDir')) { throw 'Missing compiler toolchain environment' }
+@{script=$vs;sha256=(Get-FileHash $vs).Hash;architecture='x86';host='x64';
+    toolset=$compilerEnvironment['VCToolsVersion'];started=$environmentStart.ToString('o');
+    elapsedSeconds=([DateTimeOffset]::UtcNow-$environmentStart).TotalSeconds} |
+    ConvertTo-Json | Set-Content "$out/compiler-environment.json"
+function Invoke-CompilerCommand([string]$directory,[string]$command,[switch]$Capture) {
+    $originalEnvironment = [Environment]::GetEnvironmentVariables('Process')
+    $info = New-Object Diagnostics.ProcessStartInfo
+    $info.FileName = 'cmd.exe'
+    $info.Arguments = '/d /s /c "'+$command+'"'
+    $info.WorkingDirectory = $directory
+    $info.UseShellExecute = $false
+    $info.CreateNoWindow = $true
+    $info.RedirectStandardOutput = $true
+    $info.RedirectStandardError = $true
+    foreach ($name in $compilerEnvironment.Keys) { $info.Environment[$name] = $compilerEnvironment[$name] }
+    $process = New-Object Diagnostics.Process
+    $process.StartInfo = $info
+    $script:compilerCommandNumber++
+    $prefix = "$out/compiler-command-$($script:compilerCommandNumber)"
+    try {
+        if (!$process.Start()) { throw 'Compiler command start failed' }
+        $null = $process.Handle
+        @{pid=$process.Id;start=$process.StartTime.ToUniversalTime().ToString('o');
+            directory=$directory;command=$command;timeoutSeconds=1200} |
+            ConvertTo-Json | Set-Content "$prefix.process.json"
+        $stdout = $process.StandardOutput.ReadToEndAsync()
+        $stderr = $process.StandardError.ReadToEndAsync()
+        if (!$process.WaitForExit(1200000)) {
+            & taskkill.exe /PID $process.Id /T /F
+            throw 'Compiler command deadline exceeded'
+        }
+        $process.WaitForExit()
+        $code = $process.ExitCode
+        $outputText = $stdout.GetAwaiter().GetResult()
+        $errorText = $stderr.GetAwaiter().GetResult()
+        $code | Set-Content "$prefix.exit.txt"
+        if (!$Capture) { $outputText | Add-Content "$out/build.log" }
+        if ($errorText) { $errorText | Add-Content "$out/build.log" }
+        if ($code) {
+            Get-Content "$out\build.log" -Tail 25
+            throw "Compiler command failed: exit=$code"
+        }
+        if ($Capture) { $outputText.TrimEnd() -split "`r?`n" }
+    } finally {
+        $process.Dispose()
+        $restoredEnvironment = [Environment]::GetEnvironmentVariables('Process')
+        if ($restoredEnvironment.Count -ne $originalEnvironment.Count) { throw 'Build scope changed runtime environment' }
+        foreach ($name in $originalEnvironment.Keys) {
+            if ($restoredEnvironment[$name] -cne $originalEnvironment[$name]) {
+                throw 'Build scope failed exact runtime-environment restoration'
+            }
+        }
+    }
+}
 function Invoke-Build([string]$command) {
-    & cmd.exe /d /s /c ('call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cd /d "'+$provider+'" && '+$command) >> "$out\build.log" 2>&1
-    if ($LASTEXITCODE) { Get-Content "$out\build.log" -Tail 25; throw 'Build command failed' }
+    Invoke-CompilerCommand $provider $command
 }
 function Invoke-NinjaTarget([string]$directory, [string]$target) {
-    & cmd.exe /d /s /c ('call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cd /d "'+$directory+'" && "'+$Ninja+'" '+$target) >> "$out\build.log" 2>&1
-    if ($LASTEXITCODE) { Get-Content "$out\build.log" -Tail 25; throw "Ninja target failed: $target" }
+    Invoke-CompilerCommand $directory ('"'+$Ninja+'" '+$target)
 }
 # T422 owns these worker-local objects. Build exactly those selected objects;
 # do not rely on a provider-only build or on an incidental aggregate archive.
@@ -51,7 +172,6 @@ foreach ($object in $workerObjects) {
     }
 }
 $fixtureSupportObjects = @(
-    (Join-Path $worker 'obj/tests/ccpu_host_fixture_seams.obj'),
     (Join-Path $worker 'obj/host/softpc-resource.res')
 )
 Invoke-NinjaTarget $worker (($fixtureSupportObjects | ForEach-Object {
@@ -94,8 +214,13 @@ foreach ($library in $fixtureLibraries) {
 $commands = & $ninja -C $provider -t commands wow32.dll
 $compile = $commands | Where-Object { $_ -match 'wow_user_task_lifecycle\.c$' } | Select-Object -Last 1
 if (!$compile) { throw 'Missing production compile command' }
+$combinedSeams = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\combined-seams.obj" "'+$repo+'\tests\adapter-mvdm-host-out\wow\wow_combined_fixture_seams.c"')
+if ($combinedSeams -eq $compile) { throw 'Combined fixture seam substitution failed' }
+Invoke-Build ($combinedSeams.Replace('/Gz', '/Gd'))
+$fixtureSupportObjects += Join-Path $out 'combined-seams.obj'
 Invoke-NinjaTarget $provider 'obj/wow32-dll/wow_user_task_lifecycle.obj'
 $fixtureName = if ($Case -eq 'class-client') { 'wow_class_client_fixture.c' } else { 'wow_user_task_lifecycle_fixture.c' }
+if ($Case -eq 'class-lifetime') { $fixtureName = 'wow_window_class_lifetime_fixture.c' }
 if ($Case -eq 'process-retirement') { $fixtureName = 'wow_process_retirement_fixture.c' }
 if ($Case -eq 'native-dispatch-gate') {
     Invoke-NinjaTarget $provider 'obj/wow32-dll/wow_window_words_binding.obj'
@@ -113,10 +238,6 @@ if ($Case -eq 'class-query') {
     Invoke-NinjaTarget $provider 'obj/wow32-dll/wow_class_client_bindings.obj obj/wow32-dll/wow_user_private_access.obj'
     $fixtureName = 'wow_class_query_fixture.c'
 }
-if ($Case -eq 'dialog-lifecycle') {
-    Invoke-NinjaTarget $provider 'obj/wow32-dll/wow_dialog_creation_binding.obj obj/wow32-dll/wow_window_creation_binding.obj'
-    $fixtureName = 'wow_user_task_dialog_lifecycle_fixture.c'
-}
 if ($Case -eq 'init-notification') {
     Invoke-NinjaTarget $provider 'obj/wow32-dll/wow_user_registration_bridge.obj'
     $fixtureName = 'wow_init_notification_fixture.c'
@@ -127,10 +248,16 @@ if ($Case -eq 'native-creation') { $fixtureName = 'wow_native_creation_binding_f
 $fixturePath = Join-Path $repo ('tests/adapter-mvdm-host-out/wow/' + $fixtureName)
 if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource')) { $fixturePath = Join-Path $repo 'tests/mvdm-host/wow_page_domain_fixture.c' }
 if ($Case -eq 'native-creation') { $fixturePath = Join-Path $repo 'tests/mvdm-host/wow_page_domain_fixture.c' }
+if ($Case -eq 'class-procedure') { $fixturePath = Join-Path $repo 'tests/mvdm-host/wow_page_domain_fixture.c' }
+if ($Case -eq 'standard-class') { $fixturePath = Join-Path $repo 'tests/mvdm-host/wow_page_domain_fixture.c' }
 $fixture = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\fixture.obj" "'+$fixturePath+'"')
 if ($fixture -eq $compile) { throw 'Fixture substitution failed' }
 if ($InitRollback) { $fixture += ' /DWOW_INIT_ROLLBACK_FIXTURE' }
 if ($Case -eq 'native-creation') { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE /DWOW_NATIVE_CREATION_FIXTURE' }
+if ($Case -eq 'class-procedure') { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE /DWOW_CLASS_PROCEDURE_FIXTURE' }
+if ($OriginalModalOnly) { $fixture += ' /DWOW_ORIGINAL_MODAL_FIXTURE' }
+if ($RealDialogLifecycleOnly) { $fixture += ' /DWOW_REAL_DIALOG_LIFECYCLE_FIXTURE' }
+if ($Case -eq 'standard-class') { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE /DWOW_STANDARD_CLASS_FIXTURE' }
 if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource')) { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE' }
 if ($Case -eq 'window-reclaim') { $fixture += ' /DWOW_RECLAIM_FAILURE_FIXTURE' }
 if ($Case -eq 'graph-snapshot') { $fixture += ' /DWOW_GRAPH_SNAPSHOT_FIXTURE' }
@@ -143,9 +270,34 @@ if ($Case -eq 'style-policy') {
     Copy-Item -LiteralPath (Resolve-Path $StyleDll).Path -Destination "$out/ntw16s32.dll"
     $fixture += ' /DWOW_TITLE_POLICY_FIXTURE'
 }
+if ($Case -eq 'window-borrow' -and $StyleDll) {
+    Copy-Item -LiteralPath (Resolve-Path $StyleDll).Path -Destination "$out/ntw16s32.dll"
+    $fixture += ' /DWOW_STYLED_TERMINAL_FIXTURE'
+}
 if ($Case -in @('native-send','native-reply','native-nested','native-seen','native-identity','native-foreign')) { $fixture += ' /DWOW_NATIVE_SEND_FIXTURE' }
 if ($Case -eq 'native-reply') { $fixture += ' /DWOW_NATIVE_REPLY_FIXTURE' }
-if ($Case -eq 'native-nested') { $fixture += ' /DWOW_NATIVE_NESTED_FIXTURE' }
+if ($Case -eq 'native-nested') {
+    $fixture += ' /DWOW_NATIVE_NESTED_FIXTURE /I"'+$out+'"'
+    # Compile the actual current production macro, not a handwritten copy of
+    # its exception/finally algorithm. Only the native throwing leaf differs.
+    $nativeOwner = Join-Path $repo 'src/wow32-dll/source/wow_user_task_lifecycle.c'
+    $nativeText = [IO.File]::ReadAllText($nativeOwner).Replace("`r`n","`n")
+    $afterStart = $nativeText.IndexOf('#define WOW_NATIVE_CALL_AFTER(')
+    $afterEnd = $nativeText.IndexOf('#define WOW_NATIVE_CALL_RESULT(', $afterStart)
+    $messageStart = $nativeText.IndexOf('#define WOW_NATIVE_MESSAGE(')
+    $messageEnd = $nativeText.IndexOf('WOW_NATIVE_MESSAGE(SendMessageA,', $messageStart)
+    if ($afterStart -lt 0 -or $afterEnd -le $afterStart -or
+            $messageStart -lt 0 -or $messageEnd -le $messageStart) {
+        throw 'Production native-call macro source shape changed'
+    }
+    $macroText = $nativeText.Substring($afterStart,$afterEnd-$afterStart) +
+        $nativeText.Substring($messageStart,$messageEnd-$messageStart)
+    $macroPath = "$out/wow_native_fixture_call.h"
+    Set-Content -LiteralPath $macroPath -Value $macroText -Encoding ascii
+    @{source=$nativeOwner;sourceSha256=(Get-FileHash $nativeOwner).Hash;
+        macrosSha256=(Get-FileHash $macroPath).Hash;nativeLeaf='native_service_fault'} |
+        ConvertTo-Json | Set-Content "$out/native-exception-source.json"
+}
 if ($Case -eq 'native-seen') { $fixture += ' /DWOW_NATIVE_SEEN_FIXTURE' }
 if ($Case -eq 'native-identity') { $fixture += ' /DWOW_NATIVE_IDENTITY_FIXTURE' }
 if ($Case -eq 'native-foreign') { $fixture += ' /DWOW_NATIVE_FOREIGN_FIXTURE' }
@@ -163,12 +315,43 @@ $workerObjects += Join-Path $out 'worker-static-imports.obj'
 $workerObjects += Join-Path $provider 'obj/wow32-system-import-abi-aliases.obj'
 $workerObjects += Join-Path $provider 'obj/wow32-parent-import-abi-aliases.obj'
 $parentObjects = @()
+if ($RealDialogLifecycleOnly) {
+    $workerCommands = & $ninja -C $worker -t commands softpc-bindings.lib
+    $pageCompile = @($workerCommands | Where-Object { $_ -match 'mvdm_softpc_wow_page_domain\.c$' })
+    if ($pageCompile.Count -ne 1) { throw 'Expected exact real page-domain compile command' }
+    $faultCompile = $pageCompile[0] -replace '/Fo\S+\s+\S+mvdm_softpc_wow_page_domain\.c$', ('/Fo"'+$out+'\dialog-page-faults.obj" "'+$repo+'\tests\mvdm-host\wow_dialog_page_faults.c"')
+    if ($faultCompile -eq $pageCompile[0]) { throw 'Dialog fault output/source substitution failed' }
+    Invoke-CompilerCommand $worker $faultCompile
+    $parentObjects += Join-Path $out 'dialog-page-faults.obj'
+}
+if ($Case -eq 'class-procedure') {
+    # Real creation publishes page-domain WND/CLS storage. Keep the same
+    # active CCPU driver as other creation rows, not a class-only storage mock.
+    $classFixture = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\class-procedure.obj" "'+$repo+'\tests\adapter-mvdm-host-out\wow\wow_class_procedure_fixture.c"')
+    if ($classFixture -eq $compile) { throw 'Class procedure substitution failed' }
+    Invoke-Build ($classFixture.Replace('/Gz', '/Gd') + ' /Dmain=wow_class_procedure_fixture')
+    $parentObjects += Join-Path $out 'class-procedure.obj'
+    $typedFixture = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\typed-procedure-callers.obj" "'+$repo+'\tests\adapter-mvdm-host-out\wow\wow_typed_procedure_callers.c"')
+    if ($typedFixture -eq $compile) { throw 'Typed original caller substitution failed' }
+    Invoke-Build $typedFixture
+    $parentObjects += Join-Path $out 'typed-procedure-callers.obj'
+}
+if ($Case -eq 'standard-class') {
+    # Same real page-domain owner as the creation and callback suites. Do not
+    # link parent-stub definitions beside the selected real CCPU implementation.
+    $standardFixture = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\standard-class.obj" "'+$repo+'\tests\adapter-mvdm-host-out\wow\wow_standard_class_fixture.c"')
+    if ($standardFixture -eq $compile) { throw 'Standard-class substitution failed' }
+    Invoke-Build ($standardFixture.Replace('/Gz', '/Gd') + ' /Dmain=wow_standard_class_fixture')
+    $parentObjects += Join-Path $out 'standard-class.obj'
+}
 if ($Case -eq 'native-creation') {
     # Real CCPU session/storage setup is shared with the page-domain fixture;
     # publication may not be replaced by a success-only parent stub.
     $creationFixture = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\native-creation.obj" "'+$repo+'\tests\adapter-mvdm-host-out\wow\wow_native_creation_binding_fixture.c"')
     if ($creationFixture -eq $compile) { throw 'Native creation substitution failed' }
-    Invoke-Build ($creationFixture.Replace('/Gz', '/Gd') + ' /Dmain=wow_native_creation_fixture')
+    $creationFlags = ' /Dmain=wow_native_creation_fixture'
+    if ($CreationUnwind) { $creationFlags += ' /DWOW_CREATION_UNWIND_FIXTURE' }
+    Invoke-Build ($creationFixture.Replace('/Gz', '/Gd') + $creationFlags)
     $parentObjects += Join-Path $out 'native-creation.obj'
 }
 if ($Case -eq 'window-reclaim') {
@@ -179,8 +362,7 @@ if ($Case -eq 'window-reclaim') {
     if (!$pageCompile) { throw 'Missing production page-domain compile command' }
     $faultCompile = $pageCompile -replace '/Fo\S+\s+\S+mvdm_softpc_wow_page_domain\.c$', ('/Fo"'+$out+'\page-reclaim.obj" "'+$repo+'\tests\mvdm-host\wow_page_domain_reclaim_fixture.c"')
     if ($faultCompile -eq $pageCompile) { throw 'Reclaim boundary substitution failed' }
-    & cmd.exe /d /s /c ('call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cd /d "'+$worker+'" && '+$faultCompile) >> "$out\build.log" 2>&1
-    if ($LASTEXITCODE) { throw 'Reclaim boundary build failed' }
+    Invoke-CompilerCommand $worker $faultCompile
     $parentObjects += Join-Path $out 'page-reclaim.obj'
 }
 if ($Case -eq 'menu-resource') {
@@ -198,14 +380,33 @@ if ($Case -eq 'menu-resource') {
     Invoke-Build ($thunkFixture + ' /DWOW_MENU_THUNK_BOUND_FIXTURE /I"'+$out+'"')
     $parentObjects += Join-Path $out 'menu-thunk-fixture.obj'
 }
-if ($Case -notin @('window-borrow','window-reclaim','graph-snapshot','menu-resource','native-creation')) {
+if ($Case -notin @('window-borrow','window-reclaim','graph-snapshot','menu-resource','native-creation','class-procedure','standard-class','window-procedure')) {
 $parentStub = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\parent-stub.obj" "'+$repo+'\tests\adapter-mvdm-host-out\wow\wow_page_domain_parent_stub.c"')
 if ($parentStub -eq $compile) { throw 'Parent-stub substitution failed' }
-if ($Case -in @('class-client','class-query')) { $parentStub += ' /DWOW_CLASS_CLIENT_FIXTURE' }
+if ($Case -in @('class-client','class-query','class-lifetime')) { $parentStub += ' /DWOW_CLASS_CLIENT_FIXTURE' }
 else { $parentStub += ' /DWOW_TASK_CLASS_PROJECTION_FIXTURE' }
 if ($Case -eq 'menu-cleanup') { $parentStub += ' /DWOW_MENU_CLEANUP_FIXTURE' }
 Invoke-Build ($parentStub.Replace('/Gz', '/Gd'))
 $parentObjects = @((Join-Path $out 'parent-stub.obj'))
+    # These native-only fixtures deliberately replace seven storage leaves.
+    # Current provider dependencies also reach the real page-domain module;
+    # select it explicitly, with only the replaced definitions renamed. Do
+    # not allow archive order or /FORCE:MULTIPLE to choose their owners.
+    # No CCPU-layout acceptance is claimed by a parent-stub fixture.
+    $workerCommands = & $ninja -C $worker -t commands softpc-bindings.lib
+    $pageCompile = $workerCommands | Where-Object { $_ -match 'mvdm_softpc_wow_page_domain\.c$' } | Select-Object -Last 1
+    if (!$pageCompile) { throw 'Missing production page-domain compile command' }
+    $pageFixture = $pageCompile -replace '/Fo\S+', ('/Fo"'+$out+'\page-native-fixture.obj"')
+    if ($pageFixture -eq $pageCompile) { throw 'Native page-domain output substitution failed' }
+    $replacedLeaves = @('publish_menu','publish_menus','retire_menu',
+        'publish_named_class','retire_class','release_class','set_expected_windows_version')
+    if ($Case -eq 'process-retirement') { $replacedLeaves += 'handle_metadata' }
+    foreach ($leaf in $replacedLeaves) {
+        $symbol = 'mvdm_softpc_wow_page_domain_' + $leaf
+        $pageFixture += ' /D' + $symbol + '=wow_fixture_real_page_' + $leaf
+    }
+    Invoke-CompilerCommand $worker $pageFixture
+    $parentObjects += Join-Path $out 'page-native-fixture.obj'
 }
 if ($Case -eq 'init-notification') {
     $startupTd = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\startup-td.obj" "'+$repo+'\tests\adapter-mvdm-host-out\wow\wow_startup_td_fixture.c"')
@@ -214,14 +415,80 @@ if ($Case -eq 'init-notification') {
     Invoke-Build $startupTd
     $parentObjects += Join-Path $out 'startup-td.obj'
 }
-$lib = & cmd.exe /d /s /c ('call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && where lib.exe')
+$lib = Invoke-CompilerCommand $provider 'where lib.exe' -Capture
 $lib = @($lib | Where-Object { Test-Path -LiteralPath $_ })[0]
 $link = $commands | Where-Object { $_ -match '/out:wow32\.dll' } | Select-Object -Last 1
 if (!$link) { throw 'Missing production provider link command' }
 # Only objects actually selected by the DLL graph, never stale directory objects.
 $objects = @([regex]::Matches($link, '(?<!\S)obj/[^\s"]+\.obj') |
     ForEach-Object { Join-Path $provider $_.Value } | Select-Object -Unique)
+if ($RealDialogLifecycleOnly) {
+    $scopeCompile = @($commands | Where-Object { $_ -match 'wow_dialog_finalization_binding\.c$' })
+    $scopeObject = @($objects | Where-Object { $_ -match 'wow_dialog_finalization_binding\.obj$' })
+    if ($scopeCompile.Count -ne 1 -or $scopeObject.Count -ne 1) { throw 'Expected exact production dialog scope owner' }
+    $copy = $scopeCompile[0] -replace '/Fo\S+\s+\S+wow_dialog_finalization_binding\.c$', ('/Fo"'+$out+'\dialog-scope-faults.obj" "'+$repo+'\tests\adapter-mvdm-host-out\wow\wow_dialog_scope_faults.c"')
+    if ($copy -eq $scopeCompile[0]) { throw 'Dialog scope source/output substitution failed' }
+    Invoke-Build $copy
+    $objects = @($objects | Where-Object { $_ -notin $scopeObject })
+    $parentObjects += Join-Path $out 'dialog-scope-faults.obj'
+}
 if ($objects.Count -lt 77) { throw 'Incomplete production provider object selection' }
+# A selected path is not evidence that its existing object is current. The
+# support group can change outside the few case-specific targets above.
+# Refresh every selected production object before assembling provider.lib;
+# otherwise a fixture silently combines the new caller with stale owners.
+# Keep command lines below cmd.exe's limit without forcing a DLL link or
+# adding unselected source files. Ninja retains normal incremental caching.
+$selectedTargets = @($objects | ForEach-Object {
+    $_.Substring($provider.Length + 1).Replace('\', '/')
+})
+for ($first = 0; $first -lt $selectedTargets.Count; $first += 32) {
+    $last = [Math]::Min($first + 31, $selectedTargets.Count - 1)
+    Invoke-NinjaTarget $provider ($selectedTargets[$first..$last] -join ' ')
+}
+foreach ($object in $objects) {
+    if (!(Test-Path -LiteralPath $object -PathType Leaf)) {
+        throw "Missing current selected provider object: $object"
+    }
+}
+# EXE and DLL each own this variable in production. A combined executable
+# must preserve two distinct cells, not merge their independent load state.
+# Recompile only the provider TU with a private test linkage spelling; its
+# original algorithms and all references in that TU remain unchanged.
+$redirCompile = $commands | Where-Object { $_ -match '[/\\]wkfileio\.c$' } | Select-Object -Last 1
+if (!$redirCompile) { throw 'Missing original provider file-I/O compile command' }
+$redirFixture = $redirCompile -replace '/Fo\S+', ('/Fo"'+$out+'\provider-wkfileio.obj"')
+if ($redirFixture -eq $redirCompile) { throw 'Provider state namespace substitution failed' }
+Invoke-Build ($redirFixture + ' /DVdmRedirLoaded=wow_fixture_provider_VdmRedirLoaded')
+$redirObjects = @($objects | Where-Object { $_ -match '[/\\]wkfileio\.obj$' })
+if ($redirObjects.Count -ne 1) { throw 'Expected exactly one provider redirector state owner' }
+$objects = @($objects | Where-Object { $_ -notin $redirObjects })
+$objects += Join-Path $out 'provider-wkfileio.obj'
+if ($CreationUnwind) {
+    # Same production translation unit, only native-create/terminal leaves
+    # are wrapped in this separate fault row. Normal native-creation is intact.
+    $creationCompile = $commands | Where-Object { $_ -match 'wow_window_creation_binding\.c$' } | Select-Object -Last 1
+    if (!$creationCompile) { throw 'Missing production creation compile command' }
+    $unwindCompile = $creationCompile -replace '/Fo\S+\s+\S+wow_window_creation_binding\.c$', ('/Fo"'+$out+'\creation-unwind.obj" "'+$repo+'\tests\adapter-mvdm-host-out\wow\wow_creation_unwind_injection.c"')
+    if ($unwindCompile -eq $creationCompile) { throw 'Creation unwind substitution failed' }
+    Invoke-Build $unwindCompile
+    $originalCreationObjects = @($objects | Where-Object { $_ -match '[\\/]wow32-dll[\\/]wow_window_creation_binding\.obj$' })
+    if ($originalCreationObjects.Count -ne 1) { throw 'Expected exactly one production creation owner' }
+    $objects = @($objects | Where-Object { $_ -notin $originalCreationObjects })
+    $parentObjects += Join-Path $out 'creation-unwind.obj'
+}
+if ($Case -in @('window-procedure','native-dispatch-gate')) {
+    # Keep one real lifecycle provider and one real (inactive here) page domain.
+    # Instrument scope entries without overriding their behavior or linking
+    # the partial parent storage mock beside the actual CCPU owner.
+    $scopeCompile = $compile -replace '/Fo\S+\s+', ('/Fo"'+$out+'\procedure-scope.obj" ')
+    if ($scopeCompile -eq $compile) { throw 'Procedure scope substitution failed' }
+    Invoke-Build ($scopeCompile + ' /Dwow_task_callback_enter=wow_fixture_real_callback_enter /Dwow_task_callback_leave=wow_fixture_real_callback_leave')
+    $scopeObjects = @($objects | Where-Object { $_ -match '[\\/]wow32-dll[\\/]wow_user_task_lifecycle\.obj$' })
+    if ($scopeObjects.Count -ne 1) { throw 'Expected exactly one lifecycle owner' }
+    $objects = @($objects | Where-Object { $_ -notin $scopeObjects })
+    $parentObjects += Join-Path $out 'procedure-scope.obj'
+}
 if ($InitRollback) {
     $queueCompile = $commands | Where-Object { $_ -match '/kernel/queue\.c$' } | Select-Object -Last 1
     if (!$queueCompile) { throw 'Missing original InitTask compile command' }
@@ -235,7 +502,10 @@ if ($InitRollback) {
 }
 & $lib /nologo "/out:$out\provider.lib" @objects >> "$out\build.log" 2>&1
 if ($LASTEXITCODE) { throw 'Provider archive failed' }
-Invoke-Build ('link /nologo /force:multiple /NODEFAULTLIB:ntvdm.lib /out:"'+$out+'\fixture.exe" /map:"'+$out+'\fixture.map" "'+$out+'\fixture.obj" '+(($parentObjects | ForEach-Object { '"'+$_+'"' }) -join ' ')+' "'+$out+'\provider.lib" '+((@($workerObjects)+@($fixtureSupportObjects)+@($fixtureLibraries) | ForEach-Object { '"'+$_+'"' }) -join ' ')+' legacy-wow-user32.lib legacy-wow-kernel32.lib legacy-wow-ntdll.lib version.lib comdlg32.lib rpcrt4.lib kernel32.lib user32.lib gdi32.lib shell32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
+# Duplicate providers invalidate the claimed production-owner selection.
+# Fault rows above explicitly exclude replaced objects; never let link order
+# silently choose a test stub or stale owner over a recovered original body.
+Invoke-Build ('link /nologo /NODEFAULTLIB:ntvdm.lib /out:"'+$out+'\fixture.exe" /map:"'+$out+'\fixture.map" "'+$out+'\fixture.obj" '+(($parentObjects | ForEach-Object { '"'+$_+'"' }) -join ' ')+' "'+$out+'\provider.lib" '+((@($workerObjects)+@($fixtureSupportObjects)+@($fixtureLibraries) | ForEach-Object { '"'+$_+'"' }) -join ' ')+' legacy-wow-user32.lib legacy-wow-kernel32.lib legacy-wow-ntdll.lib version.lib comdlg32.lib rpcrt4.lib kernel32.lib user32.lib gdi32.lib shell32.lib advapi32.lib ntdll.lib oldnames.lib libcmt.lib libvcruntime.lib libucrt.lib')
 if (!(Test-Path -LiteralPath "$out\fixture.exe" -PathType Leaf)) {
     throw "Task cleanup fixture link produced no executable: $out\fixture.exe"
 }
@@ -245,17 +515,54 @@ if(!$process.WaitForExit(60000)) {
     & taskkill /PID $process.Id /T /F
     throw "Task cleanup fixture timeout: case=$Case"
 }
+$process.WaitForExit()
 $process.Refresh()
 $fixtureOutput = @(Get-Content "$out/stdout.txt"; Get-Content "$out/stderr.txt")
 $fixtureExitCode = $process.ExitCode
 $fixtureExitCode | Set-Content -LiteralPath "$out/fixture-exit.txt"
+if ($requestedCase -eq 'style-policy' -and
+    (!($fixtureOutput -match '^WOW_TITLE_POLICY bound task, Off isolation and dynamic caption checked$') -or
+     !($fixtureOutput -match '^WOW_TITLE_POLICY same-runtime Off peer and parent policy retention checked$'))) {
+    throw 'Style policy/peer isolation contract failed after real modal prerequisite'
+}
+if ($OriginalModalOnly) {
+    # Dedicated scope, not a substitute pass for the independent whole CCPU
+    # window/class/menu matrices. The actual registered lifetime gets its own
+    # process so its legitimate process cleanup cannot perturb their baselines.
+    $modalModes = if ($StyleDll) {3} else {1}
+    if ($RealDialogLifecycleOnly) {
+        if ($fixtureExitCode -ne 0 -or
+            !($fixtureOutput -match '^WOW_REAL_DIALOG_SCOPE errors=0 callback_reject=1 capture_exception=1 exact_production_finally=1 cache_restored=1 context_restored=1 owner_restored=1$') -or
+            !($fixtureOutput -match '^WOW_REAL_DIALOG_ROLLBACK errors=0 cases=4 physical_free=1 publications=2 vetoes=2 no_app_callback=1$') -or
+            !($fixtureOutput -match '^WOW_REAL_DIALOG_LIFECYCLE errors=0 init=3 terminal=2 nested=1 exception_local=1 callback_cache=1 pdlg_retired=1 dying_callback_denied=1$') -or
+            !($fixtureOutput -match '^WOW_PAGE_DOMAIN_LIFECYCLE_OK$')) {
+            throw 'Real registered-owner dialog lifecycle/physical rollback contract failed'
+        }
+        return
+    }
+    if ($fixtureExitCode -ne 0 -or
+        !($fixtureOutput -match ('^WOW_ORIGINAL_MODAL_CCPU errors=0 modes='+$modalModes+' aw=2 returned=49 pdlg_retired=1$')) -or
+        !($fixtureOutput -match '^WOW_ORIGINAL_MODAL_SCOPE real_ccpu=1 registered_owner=1 normal_cleanup=1$') -or
+        !($fixtureOutput -match '^WOW_PAGE_DOMAIN_LIFECYCLE_OK$')) {
+        throw 'Dedicated original modal manager/registered-owner lifecycle contract failed'
+    }
+    return
+}
+if ($Case -eq 'class-client' -and
+    !($fixtureOutput -match '^WOW_CLASS_CLIENT errors=0 version_calls=[0-9]+ version_domains=5 server_owner=1 cpd=[0-9]+$')) {
+    throw 'Class-client assertions completed without the actual captured marker'
+}
+if ($Case -eq 'class-lifetime' -and
+    !($fixtureOutput -match '^WOW_WINDOW_CLASS_SHARED_LIFETIME errors=0 callbacks=1 native_failure_retains_node=32$')) {
+    throw 'Window/class retained storage, replacement or rollback was not verified'
+}
 if ($Case -eq 'init-notification' -and !($fixtureOutput -match '^WOW_INIT_PRECOMMIT_CLEANUP errors=0 retries=7 registered_cleanup=1$')) {
     throw 'Precommit original-task registered cleanup was not verified'
 }
 if ($InitRollback -and !($fixtureOutput -match '^WOW_INIT_ROLLBACK errors=0 failed_allocations=2 name_releases=2$')) {
     throw 'Original InitTask rollback/name release/error preservation was not verified'
 }
-if ($InitRollback -and !($fixtureOutput -match '^WOW_IDLE_OBSERVER_LIFECYCLE errors=0 install_failures=2 live=0$')) {
+if ($InitRollback -and !($fixtureOutput -match '^WOW_IDLE_OBSERVER_LIFECYCLE errors=0 install_failures=3 live=0$')) {
     throw 'Observer installation failure, rollback or retirement leaked hooks'
 }
 if ($Case -eq 'graph-snapshot' -and
@@ -277,6 +584,10 @@ if ($Case -eq 'graph-snapshot' -and
     throw 'Real native handle-slot reuse and retained-generation isolation were not verified'
 }
 $fixtureOutput | Write-Output
+if ($Case -eq 'window-borrow' -and $StyleDll -and
+    !($fixtureOutput -match '^WOW_STYLED_TERMINAL_CCPU errors=0 style_before=1 neutralized=1 dialog=1 button=1 gdi=[0-9]+/[0-9]+$')) {
+    throw 'Styled real-CCPU terminal cleanup did not prove actual attachment, neutralization and GDI retirement'
+}
 if ($Case -eq 'graph-snapshot') {
     foreach ($marker in @('WOW_NATIVE_ENTRY_FAILURE_CCPU','WOW_CALLBACK_OWNER_FAILURE_CCPU','WOW_CALLBACK_BORROW_FAILURE_CCPU',
             'WOW_WINDOW_CACHE_FAILURE_CCPU','WOW_DIALOG_CACHE_FAILURE_CCPU')) {
@@ -293,11 +604,18 @@ if ($Case -eq 'native-creation' -and
     !($fixtureOutput -match '^WOW_NATIVE_CREATION_BINDING errors=0 .* table_empty=1$')) {
     throw 'Native creation failed explicit/implicit enrollment or final ownership cleanup'
 }
+if ($CreationUnwind -and
+    !($fixtureOutput -match '^WOW_CREATION_UNWIND errors=0 tls=1 hooks=0 scope_release=1 restored=1 retry=1$')) {
+    throw 'Creation exception did not prove scope, hook, reference and execution restoration'
+}
 if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource') -and
     !($fixtureOutput -match '^WOW_GRAPH_NATIVE_MUTATION_CCPU errors=0 child_id=1 reparent=1 deferred_geometry=1$')) {
     throw 'Native mutation return did not synchronize child ID, parent or deferred geometry'
 }
 if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource')) {
+    if (!($fixtureOutput -match '^WOW_CONTROL_NATIVE_RETURN_CCPU errors=0 paint=1 scroll=1 caret=1 lock=1$')) {
+        throw 'Recovered-control native paint/scroll/caret return ownership failed'
+    }
     if (!($fixtureOutput -match '^WOW_MESSAGE_OPERANDS_CCPU errors=0 typed=1 numeric=1 menu=1 position=1 nested=1$')) {
         throw 'Typed message window operands or numeric/menu/structure exclusions failed'
     }
@@ -338,16 +656,28 @@ if ($Case -eq 'window-procedure' -and
     throw 'Class CallProc restoration or window snapshot isolation failed'
 }
 if ($Case -eq 'window-procedure' -and
-    !($fixtureOutput -match '^WOW_WINDOW_PROCEDURE errors=0 tagged_calls=3$')) {
+    !($fixtureOutput -match '^WOW_WINDOW_PROCEDURE errors=0 tagged_calls=7$')) {
     throw 'Window procedure fixture exited without its successful completion marker'
 }
 if ($Case -eq 'window-procedure' -and
-    !($fixtureOutput -match '^WOW_NATIVE_SUBCLASS errors=0 forwarded=3 preserved=1 missing_owner_rejected=1$')) {
-    throw 'Native subclass carrier replaced or bypassed the logical WOW procedure owner'
+    !($fixtureOutput -match '^WOW_NATIVE_SUBCLASS errors=0 forwarded=2 preserved=1 missing_owner_rejected=1$')) {
+    throw 'Actual native subclass forwarding/restoration or saved guest identity failed'
+}
+if ($Case -eq 'window-procedure') {
+    foreach ($encoding in 0,1) {
+        if (!($fixtureOutput -match "^WOW_TRANSFERRED_CALLPROC_LIVE unicode=$encoding text_calls=4 errors=0$") -or
+            !($fixtureOutput -match "^WOW_TRANSFERRED_CALLPROC unicode=$encoding source_retired=1 independent_destinations=2 text_calls=4 errors=0$")) {
+            throw 'Native CPD encoding, source retirement or independent destination lifetime was not proved'
+        }
+    }
 }
 if ($Case -eq 'standard-class' -and
     !($fixtureOutput -match '^WOW_STANDARD_PRIVATE_CLEANUP errors=0$')) {
     throw 'Standard-named private class did not follow original cleanup restoration'
+}
+if ($Case -eq 'native-creation' -and
+    !($fixtureOutput -match '^WOW_CLASS_TOKEN_ORIGIN errors=0 guest_native_same_word=1 native_replaced=1 guest_restored=1$')) {
+    throw 'A live native CPD word was not distinguished from the same explicitly guest-typed word'
 }
 if ($Case -eq 'standard-class' -and
     !($fixtureOutput -match '^WOW_STANDARD_CLEANUP errors=0 restored=9 original_policy=1$')) {
@@ -364,6 +694,14 @@ if ($Case -eq 'standard-class' -and
 if ($Case -eq 'class-query' -and
     !($fixtureOutput -match '^WOW_CLASS_QUERY errors=0 queries=6 logical=1 native=1$')) {
     throw 'Original GetClassInfo client did not preserve logical and native query contracts'
+}
+if ($Case -eq 'class-procedure' -and
+    !($fixtureOutput -match '^WOW_CLASS_PROCEDURE errors=0 callbacks=[0-9]+$')) {
+    throw 'Class-only mutation, existing-window isolation or nested future creation failed'
+}
+if ($Case -eq 'class-procedure' -and
+    !($fixtureOutput -match '^WOW_TYPED_PROCEDURE_CALLERS errors=0 actual_wu32=4 guest_ffff=1 setters=4 getters=4$')) {
+    throw 'Actual original WU32 get/set callers did not preserve typed guest procedure identity'
 }
 if ($Case -eq 'class-query' -and
     !($fixtureOutput -match '^WOW_CLASS_COMMIT errors=0 publications=3 rollback=1 original_task=1$')) {
@@ -465,20 +803,12 @@ if ($Case -eq 'window-borrow' -and
     throw 'Native class shared projection leaked native identities, duplicated storage or failed release'
 }
 if ($Case -eq 'window-borrow' -and
+    !($fixtureOutput -match '^WOW_CLASS_RELEASE_CCPU errors=0 live_rejected=1 borrowed_safe=1 no_resurrection=1 reclaimed=1$')) {
+    throw 'Released copied class lost retained readers, allowed resurrection or leaked backing'
+}
+if ($Case -eq 'window-borrow' -and
     !($fixtureOutput -match '^WOW_CLASS_COMMIT_CCPU errors=0 cases=2 original_words=1 original_task=1 released=1$')) {
     throw 'Completed original class registration did not reach real CCPU memory and release it'
-}
-if ($Case -eq 'dialog-lifecycle' -and
-    !($fixtureOutput -match '^WOW_DIALOG_CALLBACK_CACHE errors=0 paired=1 exceptions=1$')) {
-    throw 'Dialog callback cache did not restore across nesting, failure and exception'
-}
-if ($Case -eq 'dialog-lifecycle' -and
-    !($fixtureOutput -match '^WOW_CREATION_ROLLBACK cases=4 errors=0$')) {
-    throw 'Dialog creation rollback did not release its owned WW allocation'
-}
-if ($Case -eq 'dialog-lifecycle' -and
-    !($fixtureOutput -match '^WOW_USER_TASK_DIALOG_LIFECYCLE errors=0 init=2 terminal=2$')) {
-    throw 'Dialog fixture exited without its successful completion marker'
 }
 if ($Case -eq 'init-notification' -and
     !($fixtureOutput -match '^WOW_INIT_NOTIFICATION errors=0 ')) {
@@ -506,7 +836,10 @@ if ($Case -eq 'native-nested') {
         if (!($fixtureOutput -match ("^WOW_NATIVE_RECEIVER_EXIT_RETURN held="+$held+" error=(0|1400|1460) retired=1 owner=1$"))) {
             throw 'Actual native send did not restore ownership after receiver thread retirement'
         }
-        if (!($fixtureOutput -match ("^WOW_NATIVE_EXCEPTION_RETURN held="+$held+" caught=1 owner=1$"))) {
+        if (!($fixtureOutput -match ("^WOW_NATIVE_CALLBACK_EXCEPTION_RETURN held="+$held+" caught_in_callback=1 result=117 owner=1$"))) {
+            throw 'Native callback-local exception handling lost result/error/execution ownership'
+        }
+        if (!($fixtureOutput -match ("^WOW_NATIVE_EXCEPTION_RETURN held="+$held+" caught=1 owner=1 production_macro=1$"))) {
             throw 'Native exception did not unwind through the actual wrapper with its original owner'
         }
         if (!($fixtureOutput -match ("^WOW_NATIVE_TIMEOUT_RETURN held="+$held+" error=(0|1460) callbacks="+($held+1)+"$"))) {

@@ -1,6 +1,9 @@
 #include "precomp.h"
 #include "wow_user_borrow_scope.h"
 #include "wow_user_thunk_scope.h"
+#include "wow_user_runtime.h"
+#include "wow_class_client_bindings.h"
+#include "wow_creation_owner_fixture.h"
 #include "original-alias.inc"
 #include "original-getprocedure.inc"
 #include "original-subclass.inc"
@@ -37,7 +40,7 @@ DWORD GetThunkWindowProc(DWORD proc, LPSTR cls, PWW value, HWND hwnd)
 DWORD IsThunkWindowProc(DWORD proc, PINT cls)
 {
     if (cls) *cls = WOWCLASS_WIN16;
-    if (proc == 0x24680012) return (DWORD)wow_window_native_proc;
+    if (proc == 0x24680012) return (DWORD)wow_window_class_creation_proc;
     return proc == 0x24680010 ? (DWORD)procedure : 0;
 }
 LONG W32DialogFunc(HWND hwnd, UINT msg, DWORD wp, LONG lp)
@@ -128,14 +131,21 @@ static ULONG FASTCALL consumer(PVDMFRAME frame)
     CHECK(words->vpfnWndProc == 0 && query(window) == 0x24680010);
     CHECK(thunk_input == (DWORD)procedure);
     CHECK(SendMessageA(window, WM_USER, 0, 0) == 42);
-    CHECK(GetWindowLongA(window, GWL_WNDPROC) == (LONG)wow_window_native_proc);
+    CHECK(GetWindowLongA(window, GWL_WNDPROC) == (LONG)procedure);
     {
         DWORD previous;
-        CHECK(wow_window_procedure_exchange(window, 0x92340056, &previous));
-        CHECK(wow_window_procedure_exchange(window, 0x92300056, &previous));
-        CHECK(previous == 0x92340056);
+        BOOL previous_guest;
+        previous = wow_user_set_procedure(window, FALSE, 0x92340056, TRUE, &previous_guest);
+        CHECK(previous == (DWORD)procedure && !previous_guest);
+        previous = wow_user_set_procedure(window, FALSE, 0x92300056, TRUE, &previous_guest);
+        CHECK(previous == 0x92340056 && previous_guest);
         CHECK(query(window) == 0x92340056 && !thunk_input);
-        CHECK(wow_window_procedure_exchange(window, (DWORD)procedure, &previous));
+        previous = wow_user_set_procedure(window, FALSE, (DWORD)procedure, FALSE, &previous_guest);
+        CHECK(previous == 0x92300056 && previous_guest);
+        CHECK(query(window) == 0x24680010 && thunk_input == (DWORD)procedure);
+        CHECK(update(window, 0x7fff0b98u) == 0x24680010);
+        CHECK(query(window) == 0x7fff0b98u && !thunk_input);
+        CHECK(update(window, 0x24680010) == 0x7fff0b98u);
         CHECK(query(window) == 0x24680010 && thunk_input == (DWORD)procedure);
         CHECK(query(standard) == 0x24680010 && thunk_input != 0);
     }
@@ -156,8 +166,12 @@ int __cdecl main(void)
     WW words = {0};
     VDMFRAME frame = {0};
     wow_class_words_binding *class_borrow;
-    wow_window_dispatch_target target = {0x92340056, callback};
-    wow_window_dispatch_target class_target = {0x92345678, callback};
+    wow_window_dispatch_target target = {0x92340056, callback, TRUE};
+    wow_window_dispatch_target class_target = {0x92345678, callback, TRUE};
+    wow_user_runtime runtime = WOW_USER_RUNTIME_INITIALIZER;
+    wow_user_runtime_thread binding = {0};
+    wow_class_client_context client = {0};
+    HHOOK terminal;
     teb.WOW32Reserved = &task;
     module = (HINSTANCE)0x23451234;
     cls.hInstance = module; cls.lpfnWndProc = procedure;
@@ -166,6 +180,12 @@ int __cdecl main(void)
     RtlInitUnicodeString(&name, L"S40_ORIGINAL_ALIAS");
     atom = wow_class_words_register_target(&context, &cls, &name, wc, NULL, &class_target);
     CHECK(atom != 0); if (!atom) return 3;
+    client.classes = &context; client.callback = callback;
+    client.thread = wow_fixture_creation_owner(&context);
+    CHECK(wow_user_runtime_bind(&binding, &runtime, client.thread, &client));
+    terminal = SetWindowsHookExA(WH_CALLWNDPROCRET, wow_window_terminal_observer,
+        NULL, GetCurrentThreadId());
+    CHECK(terminal != NULL);
     window = CreateWindowExA(0, cls.lpszClassName, "", 0, 0, 0, 16, 16,
         NULL, NULL, module, NULL);
     standard = CreateWindowExA(0, "STATIC", "", 0, 0, 0, 16, 16,
@@ -176,8 +196,7 @@ int __cdecl main(void)
         IsWindow((HWND)(DWORD)LOWORD(window)), IsWindow(HWND32(GETHWND16(window))));
     class_borrow = wow_class_words_acquire(&context, atom, module);
     CHECK(wow_window_words_attach_target(window, &words, class_borrow, &target));
-    CHECK(SetWindowLongA(window, GWL_WNDPROC, (LONG)wow_window_native_proc) != 0);
-    CHECK(SetClassLongA(window, GCL_WNDPROC, (LONG)wow_window_native_proc) != 0);
+    CHECK(SetWindowLongA(window, GWL_WNDPROC, (LONG)wow_window_entry_for_guest(&target)) != 0);
     CHECK(wow_window_words_attach(standard, &words));
     {
         HWND short_window = HWND32(GETHWND16(window));
@@ -192,6 +211,8 @@ int __cdecl main(void)
     CHECK(wow_user_invoke_thunk(consumer, &frame) == 0x76543210);
     CHECK(wow_user_borrow_window(NULL) == NULL && GetLastError() == ERROR_INVALID_STATE);
     CHECK(!context.pclsPrivateList && !context.pclsPublicList);
+    CHECK(UnhookWindowsHookEx(terminal));
+    CHECK(wow_user_runtime_unbind(&binding));
     printf("WOW_ORIGINAL_ALIAS errors=%u calls=%u\n", errors, calls);
     return errors ? 3 : 0;
 }

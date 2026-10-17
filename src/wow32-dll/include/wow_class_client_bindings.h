@@ -13,10 +13,13 @@ typedef struct wow_class_client_context {
     DWORD (WINAPI *get_version)(HANDLE);
     wow_window_callback callback;
     wow_task_order_thread *thread;
-    /* Required only when accepting a CPD; actual owner retains the result. */
+    /* Optional scoped provider override. NULL uses the native class owner. */
     wow_class_callproc *(WINAPI *resolve_callproc)(HANDLE);
 } wow_class_client_context;
 ATOM WINAPI wow_class_client_register(wow_class_client_context *, WNDCLASSA *, DWORD *);
+/* WU32RegisterClass's callback supplies an already encoded guest procedure,
+ * not a native CPD candidate. Keep that origin through original registration. */
+ATOM WINAPI wow_class_client_register_guest(wow_class_client_context *, WNDCLASSA *, DWORD *);
 BOOL WINAPI wow_class_client_unregister(wow_class_client_context *, LPCSTR, HINSTANCE);
 BOOL WINAPI wow_class_client_query(wow_class_client_context *, HINSTANCE,
     LPCSTR, WNDCLASSA *);
@@ -41,7 +44,6 @@ int MBToWCSEx(WORD, LPCSTR, int, LPWSTR *, int, BOOL);
 #define VER40 0x0400
 #define CS_VALID40 0x0801feeb
 #define FNID_DDE_BIT 0x2000
-#define CSF_ANSIPROC 2
 #define COLOR_MAX (COLOR_INFOBK + 1)
 #define RIPMSG1(level,text,arg) ((void)0)
 #define RIPERR0(code,level,text) SetLastError(code)

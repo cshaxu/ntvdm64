@@ -230,6 +230,26 @@ static BOOL layout(HWND w,style_window *s,win16_style_layout *l)
     return GetWindowRect(w,&r) && measure_window(w,s,&r,l);
 }
 
+BOOL win16_style_hit_test(HWND w,LPARAM lp,LRESULT *result)
+{
+    style_window *s;win16_style_layout l;RECT r;POINT point;
+    SCROLLBARINFO scroll={sizeof(scroll)};
+    POINT screen={GET_X_LPARAM(lp),GET_Y_LPARAM(lp)};
+    DWORD flags;
+    if(!result || !local_window(w))return FALSE;
+    s=state(w);
+    if(!s || !layout(w,s,&l))return FALSE;
+    flags=(DWORD)GetWindowLongPtrW(w,GWL_STYLE);
+    if((flags&WS_HSCROLL) && GetScrollBarInfo(w,OBJID_HSCROLL,&scroll) && PtInRect(&scroll.rcScrollBar,screen)){
+        *result=HTHSCROLL;return TRUE;}
+    if((flags&WS_VSCROLL) && GetScrollBarInfo(w,OBJID_VSCROLL,&scroll) && PtInRect(&scroll.rcScrollBar,screen)){
+        *result=HTVSCROLL;return TRUE;}
+    if(!GetWindowRect(w,&r))return FALSE;
+    point.x=screen.x-r.left;point.y=screen.y-r.top;
+    *result=PtInRect(&l.menu,point)?HTBORDER:win16_style_hit(&l,point);
+    return TRUE;
+}
+
 static void colors(style_window *s,win16_style_palette *p)
 {
     HIGHCONTRASTW hc={sizeof(hc)};
@@ -695,6 +715,18 @@ BOOL win16_style_set_palette(HWND w,const win16_style_palette *p)
     if(!--s->calls && s->detached)dispose(s);
     return TRUE;
 }
+BOOL win16_style_frame_terminal(HWND w)
+{
+    style_window *s;
+    s=state(w);if(!s)return TRUE;
+    if(!RemoveWindowSubclass(w,style_proc,STYLE_ID)){
+        SetLastError(ERROR_INVALID_STATE);return FALSE;
+    }
+    ++s->calls;s->detached=TRUE;
+    while(s->menus)end_menu_scope(s);
+    if(!--s->calls && s->detached)dispose(s);
+    return TRUE;
+}
 
 static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
     UINT_PTR id,DWORD_PTR data)
@@ -829,16 +861,7 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
          * TRUE permits deactivation; WM_ACTIVATE/focus still go downstream. */
         result=TRUE;paint(w,s,NULL);break;
     case WM_NCHITTEST:
-        if(layout(w,s,&l)){
-            SCROLLBARINFO scroll={sizeof(scroll)};POINT screen={GET_X_LPARAM(lp),GET_Y_LPARAM(lp)};
-            DWORD flags=(DWORD)GetWindowLongPtrW(w,GWL_STYLE);
-            if((flags&WS_HSCROLL) && GetScrollBarInfo(w,OBJID_HSCROLL,&scroll) && PtInRect(&scroll.rcScrollBar,screen)){
-                result=HTHSCROLL;break;}
-            if((flags&WS_VSCROLL) && GetScrollBarInfo(w,OBJID_VSCROLL,&scroll) && PtInRect(&scroll.rcScrollBar,screen)){
-                result=HTVSCROLL;break;}
-            GetWindowRect(w,&r);point.x=GET_X_LPARAM(lp)-r.left;point.y=GET_Y_LPARAM(lp)-r.top;
-            result=PtInRect(&l.menu,point)?HTBORDER:win16_style_hit(&l,point);break;
-        }
+        if(win16_style_hit_test(w,lp,&result))break;
         goto forward;
     case WM_INITMENUPOPUP:
         /* The owner must see its original item data when it refreshes a
@@ -1008,8 +1031,7 @@ static LRESULT CALLBACK style_proc(HWND w,UINT msg,WPARAM wp,LPARAM lp,
         result=DefSubclassProc(w,msg,wp,lp);
         if(!s->detached)paint(w,s,NULL);break;
     case WM_NCDESTROY:
-        RemoveWindowSubclass(w,style_proc,STYLE_ID);s->detached=TRUE;
-        while(s->menus)end_menu_scope(s);
+        (void)win16_style_frame_terminal(w);
         result=DefSubclassProc(w,msg,wp,lp);break;
     default:
 forward:

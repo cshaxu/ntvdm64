@@ -22,6 +22,8 @@ NTW16S_API BOOL win16_style_tabbed_list_install(HWND window,const win16_style_pa
  * supply the original bit; current GWL_STYLE cannot recover it reliably. */
 NTW16S_API BOOL win16_style_edit_install(HWND window,BOOL original_border,const win16_style_palette *palette);
 NTW16S_API BOOL win16_style_control_remove(HWND window);
+/* Private terminal leaf: release owned state without gesture/font notices. */
+BOOL win16_style_control_terminal(HWND window);
 NTW16S_API BOOL win16_style_frame_scrollbars_install(HWND window,const win16_style_palette *palette);
 NTW16S_API void win16_style_frame_scrollbars_remove(HWND window);
 NTW16S_API void win16_style_frame_scrollbars_palette(HWND window,const win16_style_palette *palette);

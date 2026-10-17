@@ -57,7 +57,7 @@ static void verify_callproc(void)
 {
     WNDCLASSW wc = {0};
     WW words = {0};
-    wow_window_dispatch_target target;
+    wow_window_dispatch_target target = {0};
     wow_window_words_binding *binding;
     DWORD token, current, previous;
     HWND window;
@@ -80,20 +80,20 @@ static void verify_callproc(void)
     binding = wow_window_words_acquire(window);
     CHECK(binding != NULL);
     if (binding) {
-        CHECK(!((DWORD)wow_window_words_cleanup_value(binding)->lpfnWndProc & WNDPROC_WOW));
+        CHECK(!wow_window_words_cleanup_value(binding)->procedure_is_guest);
         wow_window_words_release(binding);
     }
-    CHECK(wow_window_native_proc(window, WM_SETTEXT, 0,
+    CHECK(SendMessageA(window, WM_SETTEXT, 0,
         (LPARAM)"native CPD text") == 0x3141);
     CHECK(unicode_calls == 1 && enters == old_enters && leaves == old_leaves);
-    CHECK(wow_window_procedure_exchange(window, (DWORD)native_callback, &previous));
+    previous = (DWORD)SetWindowLongA(window, GWL_WNDPROC, (LONG)native_callback);
     CHECK(previous == token);
-    CHECK(wow_window_native_proc(window, WM_APP, 7, 9) == 0x5678);
-    CHECK(wow_window_procedure_exchange(window, token, &previous));
+    CHECK(SendMessageA(window, WM_APP, 7, 9) == 0x5678);
+    previous = (DWORD)SetWindowLongA(window, GWL_WNDPROC, (LONG)token);
     CHECK(previous == (DWORD)native_callback);
     CHECK(wow_window_procedure_read(window, &current) && current == token);
     destroy_unicode = TRUE;
-    CHECK(wow_window_native_proc(window, WM_SETTEXT, 0,
+    CHECK(SendMessageA(window, WM_SETTEXT, 0,
         (LPARAM)"native CPD text") == 0x3141);
     CHECK(unicode_calls == 2 && !IsWindow(window));
     CHECK(enters == old_enters && leaves == old_leaves);

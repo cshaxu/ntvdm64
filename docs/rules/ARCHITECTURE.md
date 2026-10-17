@@ -1,6 +1,103 @@
 # Architecture Rules
 
+## Original behavior and modern host responsibility — T447
+
+This owner-approved rule applies retrospectively to all T447 implementations,
+not only to new code. It does not admit a complete NT4 USER port or wholesale
+replacement of selected original WOW behavior by native controls.
+
+- Original code owns the explicitly retained WOW conversion, scheduling and
+  selected control, menu and dialog algorithms. Calling native drawing,
+  timers, window or message services does not itself replace those algorithms.
+- Modern Windows owns real HWNDs, actual object existence, host geometry,
+  message facilities and desktop resources. Never interpret an opaque native
+  token/pointer as an NT4 private object or infer private flags from an
+  approximate public observation.
+- The adapter owns necessary identity/representation/encoding conversion,
+  references and invalidation, rollback, callback nesting and execution
+  restoration, and result/error/state transfer. It is not a third control
+  engine. Each state has one authoritative owner; derived projections require
+  explicit publication/invalidation rules and cannot override native reality.
+  Original behavior-private state may remain in original structures.
+- NTW16S owns its approved custom appearance and the corresponding geometry
+  and hit testing. Ordinary nonclient hit testing uses native Windows; custom
+  regions use NTW16S. Exact NT4 legacy border return values are not promised.
+
+For every functional chain, first attempt direct original reuse, then bounded
+service/data adaptation. Identify the precise unavailable private mechanism
+and dependency closure before considering a smaller public-host or authored
+replacement. Record preserved and changed observable semantics and evidence.
+Neither original provenance nor native availability alone proves suitability.
+Do not recursively import the kernel/USER server for an auxiliary function,
+or bypass an original behavior merely to simplify its adapter. Existing
+approval covers registered corrections, not additional semantic concessions
+outside the bounded exception below.
+
+Owner subsequently approves the S3 observed-recipient default-color boundary
+and applying the same principle to equivalent cases: when required native
+private state has no reliable supported producer, delegate only the smallest
+dependent default operation to its modern host owner. Retain the original
+algorithm, application-callback selection and owned behavior state. Record
+the unavailable input, exact substituted operation, observable difference and
+positive/negative/lifecycle verification before delivery; do not invent an
+NT4 flag from approximate observations. This is not permission to replace
+whole controls, alter message/callback ordering, or broaden guest access.
+The admitted color instance is WM_CTLCOLORSTATIC default handling for the
+different-thread recipient lacking recovered creation facts; recipients with
+those facts and other messages retain original processing. Equivalent narrow
+host-default cases need no repeated approval; materially different behavior
+changes still require a separate decision.
+
+Audit existing historical compatibility code, imports, replacements and host
+delegations by functional entry/call chain. Each row records original owner
+and dependencies, actual owner of every key state, identity/lifetime/nesting/
+destroy/failure rules, retain/remove/merge/restructure disposition, test
+evidence and unproved boundaries, and mirror diff/exception accounting.
+Use a finite remediation list within existing S boundaries. Foundation defects
+remain foundation obligations even when discovered in a control; do not move
+them to a later feature merely to close the current S. Guest modification or
+recompilation remains prohibited. Grouped background verification and coherent
+publication gates remain unchanged.
+
+Native callback exceptions follow that same ownership boundary: modern USER
+defines the handling of an exception not caught inside a native WNDPROC.
+WOW64 does not guarantee that an application's outer SendMessage exception
+handler executes. Do not change process exception policy to force that
+fast-path-dependent result. Exceptions actually propagated to the project
+native-service boundary must still run its complete original cleanup and
+restore execution, errors and object state. Preserve original WOW guest
+exception handling; this clarification never authorizes swallowing adapter
+failures, removing exception assertions or treating process exit as recovery.
+Test supported native callback-local handling and separately inject a
+propagating service exception to prove the actual boundary's unwind.
+
+## Owner-approved T447 dialog procedure boundary
+
+For recovered dialogs, the actual HWND's modern USER dialog-procedure slot
+and message-result slot are authoritative. Use supported A/W procedure
+save/restore and invocation, and native WM_NOTIFYFORMAT dispatch/default
+handling. Exact NT4 procedure-token representation and old notification
+default details are not guaranteed. This narrowly approved boundary does not
+delegate original creation, modal loops, focus, default-button/navigation,
+controls or original resource cleanup to the host.
+
+Do not create helper windows, decode private host layouts or retain competing
+procedure/result storage. Initialize and retire native storage on the actual
+dialog; task teardown must not call guest callbacks. Prove exactly-once
+callbacks, A/W restore, nested destruction, creation rollback, normal/task
+cleanup and handle reuse before delivery. Guest changes remain prohibited.
+
 ## Owner-approved T447 external observation semantics
+
+Owner additionally approves the S3 style-mutation service boundary: modern
+USER performs the real window style mutation and may send WM_STYLECHANGING
+and WM_STYLECHANGED even for pre-4.0 windows. The NT4 version-gated absence
+of these notifications is not promised. Retain original client validation
+(including initialized ListBox guards), private-word policy, and the existing
+execution/lifetime/result/publication boundary. Do not filter these messages,
+add helper windows, mutate guest state or maintain a second authoritative
+style. This approval does not waive unrelated original behavior or authorize
+opaque CPD decoding through a helper window.
 
 Route E expressly permits boundary-updated external USER object observations
 under the [copied-view contract](../design/ARCHITECTURE.md#wow-copied-user-observation-boundary-t447).

@@ -1,5 +1,7 @@
 #include "wow_standard_class_bindings.h"
 #include "wow_user_capture_bindings.h"
+#include "wow_dialog_state_bindings.h"
+#include "wow_edit_entry_bindings.h"
 #include "opennt-host/windows/core/ntuser/inc/user.h"
 #include <stddef.h>
 
@@ -59,13 +61,15 @@ BOOL WINAPI wow_standard_classes_bind_cleanup(wow_cleanup_context *context)
     }
     shared.apfnClientA.pfnDefWindowProc = (PROC)DefWindowProcA;
     shared.apfnClientW.pfnDefWindowProc = (PROC)DefWindowProcW;
-    shared.apfnClientW.pfnButtonWndProc = restore;
+    shared.apfnClientW.pfnButtonWndProc = (PROC)wow_control_client_procedure(FNID_BUTTON, TRUE);
     shared.apfnClientW.pfnStaticWndProc = restore;
-    shared.apfnClientW.pfnListBoxWndProc = restore;
-    shared.apfnClientW.pfnComboBoxWndProc = restore;
-    shared.apfnClientW.pfnDialogWndProc = restore;
+    shared.apfnClientW.pfnListBoxWndProc = (PROC)wow_control_client_procedure(FNID_LISTBOX, TRUE);
+    shared.apfnClientW.pfnComboBoxWndProc = (PROC)wow_control_client_procedure(FNID_COMBOBOX, TRUE);
+    /* Recovered dialog state must keep its canonical original owner after
+     * a guest module unload; modern USER has no corresponding PDLG. */
+    shared.apfnClientW.pfnDialogWndProc = (PROC)wow_dialog_window_procW;
     shared.apfnClientW.pfnMDIClientWndProc = restore;
-    shared.apfnClientW.pfnComboListBoxProc = restore;
+    shared.apfnClientW.pfnComboListBoxProc = (PROC)wow_control_client_procedure(FNID_COMBOLISTBOX, TRUE);
     *context->shared = shared;
     context->scroll_proc = restore;
     return TRUE;

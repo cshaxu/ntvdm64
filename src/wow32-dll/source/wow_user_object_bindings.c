@@ -322,7 +322,20 @@ static BOOL capture_window(HWND window, window_observation *row)
     CopyMemory(row->window_rect, &info.rcWindow, sizeof(RECT));
     CopyMemory(row->client_rect, &info.rcClient, sizeof(RECT));
     row->style = info.dwStyle; row->exstyle = info.dwExStyle;
-    row->control_id = (row->style & WS_CHILD) ? GetWindowLongA(window, GWL_ID) : 0;
+    SetLastError(ERROR_SUCCESS);
+    row->module = (DWORD)GetWindowLongA(window, GWL_HINSTANCE);
+    if (!row->module && GetLastError() != ERROR_SUCCESS) return FALSE;
+    /* Public native property, not an NT4 private atom or inferred flag.
+     * Zero denotes no local ID; original help.c owns ancestor inheritance. */
+    row->context_help_id = GetWindowContextHelpId(window);
+    /* Match original TestwndChild: WS_POPUP excludes the child-ID role.
+     * A real ID zero is valid; a failed native query is not a zero ID that
+     * may be committed and then copied into recovered WND.spmenu. */
+    if ((row->style & (WS_CHILD | WS_POPUP)) == WS_CHILD) {
+        SetLastError(ERROR_SUCCESS);
+        row->control_id = (DWORD)GetWindowLongA(window, GWL_ID);
+        if (!row->control_id && GetLastError() != ERROR_SUCCESS) return FALSE;
+    }
     row->descriptor.atom = info.atomWindowType;
     length = GetClassNameA(window, row->descriptor.name, sizeof(row->descriptor.name));
     if (!length) return FALSE;
@@ -523,7 +536,9 @@ static BOOL project_graph(const HWND *roots, ULONG root_count,
         }
     }
     if (!normalize_observation_chains(rows, count, index)) goto done;
-    result = mvdm_softpc_wow_page_domain_project_window_graph(count, rows);
+    /* Prepare local names/references before the existing graph commit.
+     * No fallible per-window refresh may follow that irreversible commit. */
+    result = wow_window_words_project_observed(count, rows);
 done:
     error = result ? saved : GetLastError();
     if (index) HeapFree(GetProcessHeap(), 0, index);
@@ -559,7 +574,27 @@ BOOL WINAPI wow_user_window_publish(wow_user_object_table *table, HWND window,
         SetLastError(ERROR_INVALID_STATE); return FALSE;
     }
     table->windows[index]=window;
+    object->native_window=window;
     if (index>table->last_handle) table->last_handle=index;
+    return TRUE;
+}
+
+BOOL WINAPI wow_user_window_cancel_native_adoption(wow_user_object_table *table,
+    HWND window, struct wow_cleanup_window *object, ULONG backing)
+{
+    wow_cleanup_handle *entry;
+    if (!table || !object) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
+    entry = &table->entries[LOWORD(window)];
+    if (entry->bType != TYPE_WINDOW || entry->wUniq != HIWORD(window) ||
+            entry->phead != object || table->windows[LOWORD(window)] != window) {
+        SetLastError(ERROR_INVALID_STATE); return FALSE;
+    }
+    if (!mvdm_softpc_wow_page_domain_cancel_native_adoption(
+            (ULONG)(ULONG_PTR)window, backing)) {
+        SetLastError(ERROR_INVALID_STATE); return FALSE;
+    }
+    ZeroMemory(entry, sizeof(*entry));
+    table->windows[LOWORD(window)] = NULL;
     return TRUE;
 }
 

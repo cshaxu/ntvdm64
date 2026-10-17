@@ -1,6 +1,10 @@
 #include <windows.h>
 #include <stdio.h>
-#include "wow_private_user_compat.h"
+#include "wow_edit_native_bindings.h"
+/* Native pixel/identity witness only. Task ownership and reentry are tested
+ * by wow_edit_call_fixture and must also pass through the real registered
+ * guest callback in grouped acceptance. This standalone fixture has no WOW
+ * task and therefore must not call the scoped production entry directly. */
 
 static unsigned color_calls;
 static HBRUSH reply;
@@ -55,7 +59,7 @@ int __cdecl main(void)
     FillRect(dc, &whole, (HBRUSH)GetStockObject(BLACK_BRUSH));
     SetBrushOrgEx(dc, 3, 7, NULL);
     reply = red;
-    if (!wow_private_user_fill_window(parent, child, dc,
+    if (!wow_edit_native_NtUserFillWindow(parent, child, dc,
             (HBRUSH)CTLCOLOR_STATIC) || color_calls != 1 ||
         callback_origin.x != -10 || callback_origin.y != -12 ||
         GetPixel(dc, 19, 23) != RGB(255, 0, 0) ||
@@ -64,7 +68,7 @@ int __cdecl main(void)
     if (!GetBrushOrgEx(dc, &origin) || origin.x != 3 || origin.y != 7)
         goto done;
     reply = (HBRUSH)(ULONG_PTR)0x12345678;
-    if (!wow_private_user_fill_window(NULL, child, dc,
+    if (!wow_edit_native_NtUserFillWindow(NULL, child, dc,
             (HBRUSH)CTLCOLOR_STATIC) || color_calls != 2 ||
         callback_origin.x != 0 || callback_origin.y != 0) goto done;
     /* Original GreGetClipBox(TRUE) returns logical coordinates. Preserve
@@ -75,7 +79,7 @@ int __cdecl main(void)
     SetWindowExtEx(dc, 32, 32, NULL);
     SetViewportExtEx(dc, 64, 64, NULL);
     reply = red;
-    if (!wow_private_user_fill_window(parent, child, dc,
+    if (!wow_edit_native_NtUserFillWindow(parent, child, dc,
             (HBRUSH)CTLCOLOR_STATIC) || color_calls != 3) goto done;
     SetMapMode(dc, MM_TEXT);
     if (GetPixel(dc, 39, 47) != RGB(255, 0, 0) ||
@@ -85,12 +89,12 @@ int __cdecl main(void)
         goto done;
     puts("WOW_FILL_WINDOW_NONUNIT_DC_OK");
     SelectClipRgn(dc, empty);
-    if (!wow_private_user_fill_window(parent, child, dc,
+    if (!wow_edit_native_NtUserFillWindow(parent, child, dc,
             (HBRUSH)CTLCOLOR_STATIC) || color_calls != 3) goto done;
-    if (wow_private_user_fill_window(parent, child, NULL, red)) goto done;
+    if (wow_edit_native_NtUserFillWindow(parent, child, NULL, red)) goto done;
     SelectClipRgn(dc, NULL);
     destroy_on_color = TRUE;
-    if (!wow_private_user_fill_window(NULL, child, dc,
+    if (!wow_edit_native_NtUserFillWindow(NULL, child, dc,
             (HBRUSH)CTLCOLOR_STATIC) || color_calls != 4 || IsWindow(child) ||
         !GetBrushOrgEx(dc, &origin) || origin.x != 3 || origin.y != 7)
         goto done;

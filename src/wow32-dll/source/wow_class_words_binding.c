@@ -1,10 +1,52 @@
 #include "wow_class_words_binding.h"
 #include "wow_class_remove_bindings.h"
 #include "wow_window_words_binding.h"
+#include "wow_window_creation_binding.h"
 #include "wow_standard_class_bindings.h"
+#include "wow_edit_entry_bindings.h"
+#include "wow_dialog_state_bindings.h"
+#include "wow_user_client_view_layout.h"
+#include "opennt-host/windows/core/ntuser/inc/user.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 
 #include <stdio.h>
+
+BOOL WINAPI wow_native_class_resolve_procedure(DWORD procedure, DWORD *resolved)
+{
+    WNDCLASSEXA request = {sizeof(request)}, observed = {sizeof(observed)};
+    char name[96];
+    ATOM atom;
+    DWORD saved = GetLastError(), error;
+    BOOL result = FALSE;
+    if (!resolved) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
+    if (HIWORD(procedure) != 0xffff) { *resolved = procedure; return TRUE; }
+    /* ADAPTER-WOW-071: kernel/class.c needs only pfnClientPrevious. Let
+     * native USER validate its own token through a scoped class registration.
+     * Register/query cannot dispatch a window procedure; no HWND is created.
+     * Thread plus live stack identity separates concurrent/nested operations.
+     * A namespace collision fails without touching the existing class. */
+    sprintf_s(name, sizeof(name), "NTVDM.ClassAddress.%08lx.%p",
+        GetCurrentThreadId(), (void *)&request);
+    request.hInstance = GetModuleHandleW(NULL);
+    request.lpszClassName = name;
+    request.lpfnWndProc = (WNDPROC)procedure;
+    atom = RegisterClassExA(&request);
+    if (!atom) return FALSE;
+    __try {
+        result = GetClassInfoExA(request.hInstance, MAKEINTATOM(atom), &observed);
+    } __finally {
+        error = GetLastError();
+        if (!UnregisterClassA(MAKEINTATOM(atom), request.hInstance)) {
+            result = FALSE;
+            error = GetLastError();
+        }
+        SetLastError(error);
+    }
+    if (!result) return FALSE;
+    *resolved = (DWORD)observed.lpfnWndProc;
+    SetLastError(saved);
+    return TRUE;
+}
 
 #ifndef OPENNT_HOST_NTRTL_SUBSET_H
 NTSYSAPI BOOLEAN NTAPI RtlEqualUnicodeString(const UNICODE_STRING *,
@@ -19,6 +61,7 @@ NTSYSAPI BOOLEAN NTAPI RtlEqualUnicodeString(const UNICODE_STRING *,
  * graph, USER server or task policy is introduced. */
 struct wow_class_words_binding {
     wow_class_lookup_entry entry; /* Must remain first. */
+    CLS client_identity; /* Immutable atom-only original dialog input. */
     /* Storage lifetime: registration plus borrowers (including window aliases).
      * Not original CLS.cWndReferenceCount; cleanup must not infer live windows
      * or task ownership from this number. */
@@ -26,8 +69,8 @@ struct wow_class_words_binding {
     UNICODE_STRING name;
     BOOL has_client_menu;
     wow_window_callback callback;
+    BOOL procedure_is_guest;
     SRWLOCK procedure_lock;
-    WNDPROC native_callproc;
     WNDPROC original_native_procedure;
     BOOL native_registration_borrowed;
 };
@@ -56,6 +99,7 @@ static void publish(wow_class_lookup_entry **list,
     wow_class_words_binding *binding, ATOM atom, HANDLE module)
 {
     binding->entry.atomClassName = atom;
+    binding->client_identity.atomClassName = atom;
     binding->entry.hModule = module;
     /* Original class.c registration's head insertion; list selection belongs
      * to the registration owner, not the mutable CS_GLOBALCLASS style. */
@@ -84,6 +128,11 @@ wow_class_lookup_entry *WINAPI wow_class_words_entry(wow_class_words_binding *bi
     return binding ? &binding->entry : NULL;
 }
 
+struct tagCLS *WINAPI wow_class_words_client_identity(wow_class_words_binding *binding)
+{
+    return binding ? &binding->client_identity : NULL;
+}
+
 BOOL WINAPI wow_class_words_publish_guest(wow_class_lookup_entry *entry,
     const WNDCLASSEXA *native_class)
 {
@@ -100,7 +149,7 @@ BOOL WINAPI wow_class_words_publish_guest(wow_class_lookup_entry *entry,
      * Native callback/CPD identities are not guest addresses. USER16's class
      * procedure queries use the retained host thunks, not this sparse field. */
     procedure = (DWORD)entry->lpfnWndProc;
-    if (!(procedure & 0x80000000u) || HIWORD(procedure) == 0xffffu)
+    if (!binding->procedure_is_guest)
         procedure = 0;
     if (RtlUnicodeStringToAnsiString(&name, &binding->name, TRUE) < 0) {
         SetLastError(ERROR_NOT_ENOUGH_MEMORY); return FALSE;
@@ -130,18 +179,25 @@ BOOL WINAPI wow_class_words_match_native(wow_class_lookup_context *context,
     if (!context || !procedure || !fnid || !canonical) return FALSE;
     for (entry = context->pclsPublicList; entry; entry = entry->next) {
         wow_class_words_binding *binding = (wow_class_words_binding *)entry;
-        WNDPROC candidate;
+        WNDPROC candidate, recovered;
         WNDCLASSEXW native = {sizeof(native)};
         if (!binding->native_registration_borrowed || !entry->fnid) continue;
         candidate = binding->original_native_procedure;
-        if (unicode) {
+        recovered = wow_control_client_procedure(entry->fnid, unicode);
+        if (recovered) {
+            candidate = recovered;
+        } else if (entry->fnid == FNID_DIALOG) {
+            candidate = unicode ? wow_dialog_window_procW : wow_dialog_window_procA;
+        } else if (unicode) {
             if (!GetClassInfoExW(NULL, MAKEINTATOM(entry->atomClassName), &native)) continue;
             candidate = native.lpfnWndProc;
         }
         if (candidate != procedure) continue;
         if (found && found != entry->fnid) { found = 0; break; }
         found = entry->fnid;
-        target = binding->original_native_procedure;
+        target = wow_control_client_procedure(entry->fnid, FALSE);
+        if (!target) target = entry->fnid == FNID_DIALOG ? wow_dialog_window_procA :
+            binding->original_native_procedure;
     }
     if (found) { *fnid = found; *canonical = target; }
     SetLastError(error);
@@ -180,9 +236,8 @@ BOOL WINAPI wow_class_words_import_native(wow_class_lookup_context *context,
     wow_class_words_binding *binding;
     if (!context || !context->client_module || !native_class || !atom || !fnid ||
             !native_class->lpfnWndProc ||
-            native_class->lpfnWndProc == wow_window_native_proc ||
-            native_class->lpfnWndProc == wow_class_call_original_native ||
-            native_class->lpfnWndProc == wow_window_call_native_previous) {
+            native_class->lpfnWndProc == wow_window_class_creation_proc ||
+            native_class->lpfnWndProc == wow_class_call_original_native) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     if (_InnerGetClassPtr(atom, &context->pclsPublicList, NULL)) {
@@ -195,9 +250,18 @@ BOOL WINAPI wow_class_words_import_native(wow_class_lookup_context *context,
     binding->callback = callback;
     binding->native_registration_borrowed = TRUE;
     binding->original_native_procedure = native_class->lpfnWndProc;
-    if (HIWORD(native_class->lpfnWndProc) == 0xffff) {
-        binding->native_callproc = native_class->lpfnWndProc;
-        binding->entry.lpfnWndProc = wow_window_call_native_previous;
+    if (!wow_native_class_resolve_procedure((DWORD)native_class->lpfnWndProc,
+            (DWORD *)&binding->entry.lpfnWndProc)) {
+        wow_class_words_release(binding); return FALSE;
+    }
+    /* Original clinit.c selects the client control implementations. The native
+     * registration supplies the HWND/class identity, not the control body.
+     * Existing logical class queries and WALIAS cache consume this target. */
+    if (wow_control_client_procedure(fnid, FALSE)) {
+        binding->entry.lpfnWndProc = wow_control_client_procedure(fnid, FALSE);
+    }
+    if (fnid == FNID_DIALOG) {
+        binding->entry.lpfnWndProc = wow_dialog_window_procA;
     }
     /* Original clinit.c RW_RegisterControls registers CS_GLOBALCLASS;
      * init.c's per-process ScrollBar is also public via CSF_SERVERSIDEPROC.
@@ -248,8 +312,6 @@ ATOM WINAPI wow_class_words_register(wow_class_lookup_context *context,
 static DWORD logical_class_procedure(wow_class_words_binding *binding)
 {
     DWORD procedure = (DWORD)binding->entry.lpfnWndProc;
-    if (procedure == (DWORD)wow_window_call_native_previous)
-        return (DWORD)binding->native_callproc;
     if (procedure == (DWORD)wow_class_call_original_native)
         return (DWORD)binding->original_native_procedure;
     return procedure;
@@ -283,8 +345,13 @@ BOOL WINAPI wow_class_words_target(wow_class_words_binding *binding,
 {
     DWORD procedure;
     if (!binding || !target) return FALSE;
+    /* This is original CLS behavior, not a cached native GCL_WNDPROC.
+     * Original module cleanup can restore it with zero HWNDs. The native
+     * class is only its resource/creation carrier; CBT snapshots this target
+     * into each WND's real immutable/native procedure before first dispatch. */
     AcquireSRWLockShared(&binding->procedure_lock);
     procedure = logical_class_procedure(binding);
+    target->wow_encoded = binding->procedure_is_guest;
     ReleaseSRWLockShared(&binding->procedure_lock);
     if (!procedure) return FALSE;
     target->procedure = procedure;
@@ -293,17 +360,17 @@ BOOL WINAPI wow_class_words_target(wow_class_words_binding *binding,
 }
 
 BOOL WINAPI wow_class_words_exchange_procedure(wow_class_words_binding *binding,
-    DWORD procedure, DWORD *previous)
+    DWORD procedure, BOOL guest, DWORD *previous, BOOL *previous_guest)
 {
-    DWORD old;
-    if (!binding || !previous || !procedure ||
-            procedure == (DWORD)wow_window_call_native_previous ||
+    DWORD old, resolved;
+    if (!binding || !previous || !previous_guest || !procedure ||
             procedure == (DWORD)wow_class_call_original_native ||
-            procedure == (DWORD)wow_window_native_proc ||
-            (HIWORD(procedure) != 0xffff &&
-             (procedure & 0x80000000) && !binding->callback)) {
+            procedure == (DWORD)wow_window_class_creation_proc ||
+            (guest && (!(procedure & WOW_WINDOW_PROC_TAG) || !binding->callback))) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
+    resolved = procedure;
+    if (!guest && !wow_native_class_resolve_procedure(procedure, &resolved)) return FALSE;
     AcquireSRWLockExclusive(&binding->procedure_lock);
     old = logical_class_procedure(binding);
     if (!old) {
@@ -311,17 +378,24 @@ BOOL WINAPI wow_class_words_exchange_procedure(wow_class_words_binding *binding,
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     *previous = old;
-    /* Original _RegisterClassEx/GetClassData resolve/map native procedures.
-     * Public USER supplies only a CallProc identity. Keep it outside the
-     * original WOW-tagged cleanup field, as the WND storage already does.
-     * New WNDs snapshot target(); existing WND procedures remain unchanged. */
-    if (HIWORD(procedure) == 0xffff) {
-        binding->native_callproc = (WNDPROC)procedure;
-        procedure = (DWORD)wow_window_call_native_previous;
-    }
-    binding->entry.lpfnWndProc = (WNDPROC)procedure;
+    *previous_guest = binding->procedure_is_guest;
+    /* Original class.c::_SetClassData consumes the resolved address only,
+     * and records the setter's ANSI entry, unlike GWL_WNDPROC restoration.
+     * Do not preserve a source-owned CPD past its native class lifetime. */
+    binding->entry.lpfnWndProc = (WNDPROC)resolved;
+    binding->procedure_is_guest = guest;
+    binding->entry.flags |= CSF_ANSIPROC;
     ReleaseSRWLockExclusive(&binding->procedure_lock);
     return TRUE;
+}
+
+void WINAPI wow_class_words_restore_procedure(wow_class_words_binding *binding,
+    WNDPROC procedure)
+{
+    AcquireSRWLockExclusive(&binding->procedure_lock);
+    binding->entry.lpfnWndProc = procedure;
+    binding->procedure_is_guest = FALSE;
+    ReleaseSRWLockExclusive(&binding->procedure_lock);
 }
 
 ATOM WINAPI wow_class_words_register_target(wow_class_lookup_context *context,
@@ -336,13 +410,13 @@ ATOM WINAPI wow_class_words_register_target(wow_class_lookup_context *context,
         SetLastError(ERROR_INVALID_PARAMETER);
         return 0;
     }
-    /* Original WNDPROC_HANDLE (FFFF) is a CPD, not a callable WOW target.
-     * Original WNDPROC_WOW requires the registered WOW callback. */
+    /* The original register owner has already attempted CPD validation.
+     * An unresolved encoded selector7fff is still a WOW procedure. */
     if (target && (!target->procedure ||
             target->procedure == (DWORD)wow_class_call_original_native ||
-            target->procedure == (DWORD)native_class->lpfnWndProc ||
-            HIWORD(target->procedure) == 0xffff ||
-            ((target->procedure & 0x80000000) && !target->callback))) {
+            (target->wow_encoded && target->procedure == (DWORD)native_class->lpfnWndProc) ||
+            (target->wow_encoded && (!(target->procedure & WOW_WINDOW_PROC_TAG) ||
+                !target->callback)))) {
         SetLastError(ERROR_INVALID_PARAMETER); return 0;
     }
     binding = prepare(name, words);
@@ -361,7 +435,8 @@ ATOM WINAPI wow_class_words_register_target(wow_class_lookup_context *context,
     if (target) {
         binding->entry.lpfnWndProc = (WNDPROC)target->procedure;
         binding->callback = target->callback;
-    }
+        binding->procedure_is_guest = target->wow_encoded;
+    } else binding->entry.lpfnWndProc = native_class->lpfnWndProc;
     /* Original CLS retains the two client names, not pcmn->pusMenuName.
      * Failure frees metadata only: original RegisterClassExWOW owns cleanup. */
     if (menu) {
@@ -440,7 +515,23 @@ BOOL WINAPI wow_class_words_destroy_native(wow_class_lookup_entry **link,
     if (!UnregisterClassA(MAKEINTATOM(binding->entry.atomClassName), module)) return FALSE;
     error = GetLastError();
     if (binding->entry.guest_server &&
-            !mvdm_softpc_wow_page_domain_retire_class(binding->entry.guest_server)) {
+            !mvdm_softpc_wow_page_domain_release_class(binding->entry.guest_server)) {
+        /* Default-off evidence at the failed release, not a retry or waiver. */
+        char path[MAX_PATH], line[192];
+        if (GetEnvironmentVariableA("MVDM_WOW_WINDOW_TRACE_PATH", path, sizeof(path))) {
+            DWORD written;
+            HANDLE file = CreateFileA(path, FILE_APPEND_DATA,
+                FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_ALWAYS, 0, NULL);
+            if (file != INVALID_HANDLE_VALUE) {
+                int bytes = sprintf_s(line, sizeof(line),
+                    "%lu ClassRetirement atom=%04X server=%08lX live=%lu refs=%ld native-unregistered=1\r\n",
+                    GetCurrentProcessId(), binding->entry.atomClassName,
+                    binding->entry.guest_server, binding->entry.cWndReferenceCount,
+                    binding->references);
+                if (bytes > 0) (void)WriteFile(file, line, (DWORD)bytes, &written, NULL);
+                CloseHandle(file);
+            }
+        }
         SetLastError(ERROR_INVALID_STATE);
         return FALSE;
     }

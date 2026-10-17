@@ -1700,11 +1700,25 @@ ULONG FASTCALL WU32GetWindowLong(PVDMFRAME pFrame)
         case GWL_WNDPROC:
             if (pww = FindPWW(HWND32(parg16->f1), WOWCLASS_UNKNOWN)) {
                 DWORD dwWndProc32Cur;
+#ifdef WOW_USER_PRIVATE_REDIRECT
+                BOOL procedureIsGuest;
 
+                /* MVDM-HOST-DIV-339: keep explicit decoded-entry origin. */
+                dwWndProc32Cur = wow_user_get_procedure(HWND32(parg16->f1), FALSE, &procedureIsGuest);
+#else
                 dwWndProc32Cur = GetWindowLong(HWND32(parg16->f1), GWL_WNDPROC);
+#endif
 
-                if ( dwWndProc32Cur & WNDPROC_WOW ) {
-                    if ( HIWORD(dwWndProc32Cur) == WNDPROC_HANDLE ) {
+                if ( (dwWndProc32Cur & WNDPROC_WOW)
+#ifdef WOW_USER_PRIVATE_REDIRECT
+                     && (procedureIsGuest || HIWORD(dwWndProc32Cur) == WNDPROC_HANDLE)
+#endif
+                   ) {
+                    if ( HIWORD(dwWndProc32Cur) == WNDPROC_HANDLE
+#ifdef WOW_USER_PRIVATE_REDIRECT
+                         && !procedureIsGuest
+#endif
+                       ) {
                         /*
                         ** Has a 32-bit WindowProc that is a handle-based value
                         ** (if it needs a 32-bit Ansi-Unicode transition, or
@@ -2448,6 +2462,9 @@ ULONG FASTCALL WU32SetWindowLong(PVDMFRAME pFrame)
         if (pww = FindPWW(HWND32(parg16->f1), WOWCLASS_UNKNOWN)) {
             DWORD dwWndProc32Old;
             DWORD dwWndProc32New;
+#ifdef WOW_USER_PRIVATE_REDIRECT
+            BOOL previousIsGuest;
+#endif
 
             // Look to see if the new 16:16 proc is a thunk for a 32-bit proc.
             dwWndProc32New = IsThunkWindowProc(LONG32(parg16->f3), &iClass );
@@ -2458,7 +2475,11 @@ ULONG FASTCALL WU32SetWindowLong(PVDMFRAME pFrame)
                 // 16-bit thunk that is really just a thunk for a 32-bit
                 // routine.  We can just set it back to the 32-bit routine.
                 //
+#ifdef WOW_USER_PRIVATE_REDIRECT
+                dwWndProc32Old = wow_user_set_procedure(HWND32(parg16->f1), FALSE, dwWndProc32New, FALSE, &previousIsGuest);
+#else
                 dwWndProc32Old = SetWindowLong(HWND32(parg16->f1), GWL_WNDPROC, dwWndProc32New);
+#endif
 
                 // If the 32 bit set failed, perhaps because its another process,
                 // then we want to fail too
@@ -2490,7 +2511,11 @@ ULONG FASTCALL WU32SetWindowLong(PVDMFRAME pFrame)
                     l &= ~WOWCLASS_VIRTUAL_NOT_BIT31;
                 }
 
+#ifdef WOW_USER_PRIVATE_REDIRECT
+                dwWndProc32Old = wow_user_set_procedure(HWND32(parg16->f1), FALSE, l | WNDPROC_WOW, TRUE, &previousIsGuest);
+#else
                 dwWndProc32Old = SetWindowLong(HWND32(parg16->f1), GWL_WNDPROC, l | WNDPROC_WOW);
+#endif
 
                 // If the 32 bit set failed, perhaps because its another process,
                 // then we want to fail too
@@ -2500,8 +2525,16 @@ ULONG FASTCALL WU32SetWindowLong(PVDMFRAME pFrame)
                 SETWL(HWND32(parg16->f1), GWL_WOWvpfnWndProc, LONG32(parg16->f3));
             }
 
-            if ( dwWndProc32Old & WNDPROC_WOW ) {
-                if ( HIWORD(dwWndProc32Old) == WNDPROC_HANDLE ) {
+            if ( (dwWndProc32Old & WNDPROC_WOW)
+#ifdef WOW_USER_PRIVATE_REDIRECT
+                 && (previousIsGuest || HIWORD(dwWndProc32Old) == WNDPROC_HANDLE)
+#endif
+               ) {
+                if ( HIWORD(dwWndProc32Old) == WNDPROC_HANDLE
+#ifdef WOW_USER_PRIVATE_REDIRECT
+                     && !previousIsGuest
+#endif
+                   ) {
                     //
                     // If the return value was a handle to a proc (due to
                     // the need for unicode-ansi transitions, or vice versa)

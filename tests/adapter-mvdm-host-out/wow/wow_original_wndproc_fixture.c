@@ -54,7 +54,7 @@ static DWORD WINAPI selected_callback(HWND window, UINT message, UINT wp,
 static HWND create_case(DWORD procedure, const WW *words)
 {
     CREATESTRUCTA request = {0};
-    wow_window_dispatch_target target = {procedure, selected_callback};
+    wow_window_dispatch_target target = {procedure, selected_callback, TRUE};
     request.hInstance = (HINSTANCE)words->hInstance;
     request.lpszClass = class_name; request.lpszName = "";
     request.cx = request.cy = 32;
@@ -68,11 +68,15 @@ int __cdecl main(void)
     UNICODE_STRING capture = {sizeof(wide_name) - sizeof(WCHAR), sizeof(wide_name), wide_name};
     DWORD class_words[2] = {0x12340056, 0};
     unsigned before;
+    HHOOK terminal = SetWindowsHookExA(WH_CALLWNDPROCRET,
+        wow_window_terminal_observer, NULL, GetCurrentThreadId());
+    CHECK(terminal != NULL);
+    if (!terminal) return 3;
     teb.WOW32Reserved = &task;
     words.iClass = WOWCLASS_WIN16; words.flState = WWSTATE_ICLASSISSET;
     words.hInstance = (HANDLE)0x23455678;
     cls.hInstance = (HINSTANCE)words.hInstance; cls.lpszClassName = class_name;
-    cls.lpfnWndProc = wow_window_native_proc;
+    cls.lpfnWndProc = wow_window_class_creation_proc;
     class_atom = wow_class_words_register(&class_context, &cls, &capture, class_words, NULL);
     CHECK(class_atom != 0); if (!class_atom) return 3;
     test_window = create_case(0x92340056, &words);
@@ -98,6 +102,7 @@ int __cdecl main(void)
     CHECK(DestroyWindow(test_window));
     CHECK(wow_class_words_unregister(&class_context, class_atom, cls.hInstance, NULL));
     CHECK(class_context.pclsPrivateList == NULL);
+    CHECK(UnhookWindowsHookEx(terminal));
     printf("WOW_ORIGINAL_WNDPROC errors=%u callbacks=%u idle_pairs=%u\n", errors, calls, blocks);
     return errors ? 3 : 0;
 }

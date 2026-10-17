@@ -40,11 +40,7 @@ static LRESULT CALLBACK attachment_proc(HWND w,UINT m,WPARAM p,LPARAM l,UINT_PTR
 {
     attachment *a=(attachment *)data;LRESULT result;(void)id;
     ++a->calls;
-    if(m==WM_NCDESTROY){
-        RemoveWindowSubclass(w,attachment_proc,(UINT_PTR)attachment_proc);
-        a->detached=TRUE;
-        if(a->themed)ntw16s_theme_remove(a->themed,a);
-    }
+    if(m==WM_NCDESTROY)(void)Ntw16sWindowTerminal(w);
     result=DefSubclassProc(w,m,p,l);
     release(a);return result;
 }
@@ -78,6 +74,29 @@ BOOL __cdecl Ntw16sWindowRemove(HWND w)
     if(a->themed)ntw16s_theme_remove(a->themed,a);
     ntw16s_theme_remove(w,NULL);
     release(a);return TRUE;
+}
+BOOL __cdecl Ntw16sWindowTerminal(HWND w)
+{
+    attachment *a;
+    DWORD saved=GetLastError(),error=ERROR_SUCCESS;
+    if(GetWindowThreadProcessId(w,NULL)!=GetCurrentThreadId()){
+        SetLastError(ERROR_INVALID_THREAD_ID);return FALSE;
+    }
+    a=lookup(w);
+    if(a){
+        ++a->calls;
+        if(RemoveWindowSubclass(w,attachment_proc,(UINT_PTR)attachment_proc))a->detached=TRUE;
+        else error=ERROR_INVALID_STATE;
+    }
+    /* These leaves only retire our exact nodes. They do not restore native
+     * appearance, send application messages, or call a saved procedure. */
+    if(!win16_style_frame_terminal(w) && !error)error=GetLastError();
+    if(!win16_style_control_terminal(w) && !error)error=GetLastError();
+    if(a && a->themed && a->themed!=w &&
+            !ntw16s_theme_terminal(a->themed,a) && !error)error=GetLastError();
+    if(!ntw16s_theme_terminal(w,NULL) && !error)error=GetLastError();
+    if(a)release(a);
+    SetLastError(error?error:saved);return !error;
 }
 
 static BOOL install_created(HWND w,DWORD original_style)

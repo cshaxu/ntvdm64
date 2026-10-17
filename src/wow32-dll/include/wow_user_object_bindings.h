@@ -28,6 +28,8 @@ BOOL WINAPI wow_user_window_publish(wow_user_object_table *, HWND,
     struct wow_cleanup_window *, struct wow_task_order_thread *);
 BOOL WINAPI wow_user_window_retire(wow_user_object_table *, HWND,
     struct wow_cleanup_window *, ULONG *retained_backing);
+BOOL WINAPI wow_user_window_cancel_native_adoption(wow_user_object_table *, HWND,
+    struct wow_cleanup_window *, ULONG);
 HWND WINAPI wow_user_window_full_handle(wow_user_object_table *, WORD);
 /* Original message-conversion contract, including dead/non-window fallback.
  * Not a replacement for the strict lookup above at ownership boundaries. */

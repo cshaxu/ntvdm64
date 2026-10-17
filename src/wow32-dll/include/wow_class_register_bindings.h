@@ -4,7 +4,8 @@
 #include "wow_task_order_bindings.h"
 
 /* ADAPTER-WOW-044: original registration state, not a second class registry.
- * Both callbacks are required; a CPD is resolved by its actual owner or fails.
+ * Both callbacks are required; a CPD is validated by its actual owner.
+ * Unrecognized values retain original _RegisterClassEx's unchanged-input rule.
  * Native registration supplies an existing owned entry in the class lists. */
 typedef struct wow_class_callproc { ULONG_PTR pfnClientPrevious; } wow_class_callproc;
 typedef struct wow_class_register_context {

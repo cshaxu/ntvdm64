@@ -82,7 +82,7 @@ VOID PseudoDestroyClassWindows(PWND pwndParent, PCLS pcls, wow_cleanup_context *
                     "USER: Wow Window not destroyed: %lX", pwnd);
 
             if (!TestWF(pwnd, WFSERVERSIDEPROC)) {
-                pwnd->lpfnWndProc = (WNDPROC_PWND)gpsi->apfnClientA.pfnDefWindowProc;
+                wow_cleanup_set_window_procedure(context, pwnd, (WNDPROC_PWND)gpsi->apfnClientA.pfnDefWindowProc);
             }
         }
 
@@ -243,13 +243,13 @@ static BOOL sbFirstCall = TRUE;
                 if (pheT->bType == TYPE_WINDOW) {
                     PWND pwnd = (PWND) pheT->phead;
 
-                    if ((WNDPROC_WOW & (ULONG)pwnd->lpfnWndProc) &&
+                    if (pwnd->procedure_is_guest && (WNDPROC_WOW & (ULONG)pwnd->lpfnWndProc) &&
                         ((PTHREADINFO)pheT->pOwner)->ppi == ppi &&
                         WowWndProcInSelList(pwnd->lpfnWndProc, SelListTemp))
                     {
                         RIPMSG1(RIP_WARNING,
                             "USER: Wow Window not destroyed: %lX", pwnd);
-                        pwnd->lpfnWndProc = (WNDPROC_PWND)gpsi->apfnClientA.pfnDefWindowProc;
+                        wow_cleanup_set_window_procedure(context, pwnd, (WNDPROC_PWND)gpsi->apfnClientA.pfnDefWindowProc);
                     }
                 }
             }
@@ -321,12 +321,12 @@ static BOOL sbFirstCall = TRUE;
                     atom = (*ppcls)->atomClassName;
                     for (iSel = 0; iSel < sizeof(spfnwp) / sizeof(spfnwp[0]); iSel++) {
                         if (atom == gpsi->atomSysClass[iSel]) {
-                            (*ppcls)->lpfnWndProc = (WNDPROC_PWND)spfnwp[iSel];
+                            wow_cleanup_set_class_procedure(*ppcls, (WNDPROC_PWND)spfnwp[iSel]);
                             break;
                         }
                     }
                     if (iSel == sizeof(spfnwp) / sizeof(spfnwp[0]))
-                        (*ppcls)->lpfnWndProc = (WNDPROC_PWND)gpsi->apfnClientW.pfnDefWindowProc;
+                        wow_cleanup_set_class_procedure(*ppcls, (WNDPROC_PWND)gpsi->apfnClientW.pfnDefWindowProc);
                 }
 
                 ppcls = &((*ppcls)->pclsNext);
@@ -364,7 +364,7 @@ static BOOL sbFirstCall = TRUE;
 
                 pwnd = (PWND) pheT->phead;
                 if (!TestWF(pwnd, WFSERVERSIDEPROC)) {
-                    pwnd->lpfnWndProc = (WNDPROC_PWND)gpsi->apfnClientA.pfnDefWindowProc;
+                    wow_cleanup_set_window_procedure(context, pwnd, (WNDPROC_PWND)gpsi->apfnClientA.pfnDefWindowProc);
                 }
             }
         }

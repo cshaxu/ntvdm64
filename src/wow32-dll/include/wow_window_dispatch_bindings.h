@@ -7,6 +7,9 @@ typedef DWORD (WINAPI *wow_window_callback)(HWND, UINT, UINT, LONG, DWORD, PVOID
 typedef struct wow_window_dispatch_target {
     DWORD procedure; /* Original encoded WNDPROC, never decoded here. */
     wow_window_callback callback;
+    /* Call-local projection of the authoritative stored target, not another
+     * persistent state. Distinguishes encoded selector7fff from a native CPD. */
+    BOOL wow_encoded;
 } wow_window_dispatch_target;
 
 /* OpenNT represents a 16-bit WNDPROC in a 32-bit USER word by setting bit
@@ -27,6 +30,8 @@ typedef struct wow_cleanup_window {
     struct wow_class_lookup_entry *pcls;
     struct wow_task_order_thread *thread;
     WNDPROC lpfnWndProc;
+    HWND native_window; /* Immutable native identity of this enrolled view. */
+    BOOL procedure_is_guest; /* Typed call-local cleanup projection. */
     BOOL serverSideProc;
     DWORD *adwWOW; /* Alias into the containing retained WW, never guest data. */
     struct wow_window_words_binding *storage; /* Existing local storage owner. */

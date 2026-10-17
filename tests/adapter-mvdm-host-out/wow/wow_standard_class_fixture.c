@@ -1,5 +1,7 @@
 #include "wow_standard_class_bindings.h"
 #include "wow_window_words_binding.h"
+#include "wow_edit_entry_bindings.h"
+#include "wow_dialog_state_bindings.h"
 #include "opennt-host/windows/core/ntuser/inc/user.h"
 #include <stdio.h>
 #include <string.h>
@@ -11,6 +13,53 @@ static PVOID WINAPI allocate(SIZE_T size)
 { return HeapAlloc(GetProcessHeap(), 0, size); }
 static void WINAPI release(PVOID memory)
 { HeapFree(GetProcessHeap(), 0, memory); }
+
+static void verify_recovered_targets(wow_class_lookup_context *classes)
+{
+    static const WORD cases[] = {
+        FNID_EDIT, FNID_COMBOBOX, FNID_LISTBOX, FNID_COMBOLISTBOX, FNID_DIALOG,
+        FNID_BUTTON
+    };
+    unsigned i;
+    for (i = 0; i < ARRAYSIZE(cases); ++i) {
+        WORD fnid = 0;
+        WNDPROC canonical = NULL;
+        WNDPROC ansi = cases[i] == FNID_DIALOG ? wow_dialog_window_procA :
+            wow_control_client_procedure(cases[i], FALSE);
+        WNDPROC wide = cases[i] == FNID_DIALOG ? wow_dialog_window_procW :
+            wow_control_client_procedure(cases[i], TRUE);
+        CHECK(ansi != NULL && wide != NULL && ansi != wide);
+        SetLastError(0x2468);
+        /* Optimized product links may fold identical original list bodies
+         * and wrappers. No FNID may be guessed from an ambiguous address. */
+        if ((cases[i] == FNID_LISTBOX || cases[i] == FNID_COMBOLISTBOX) &&
+                wow_control_client_procedure(FNID_LISTBOX, FALSE) ==
+                wow_control_client_procedure(FNID_COMBOLISTBOX, FALSE)) {
+            CHECK(wow_control_client_procedure(FNID_LISTBOX, TRUE) ==
+                wow_control_client_procedure(FNID_COMBOLISTBOX, TRUE));
+            CHECK(!wow_class_words_match_native(classes, ansi, FALSE,
+                &fnid, &canonical));
+            CHECK(!wow_class_words_match_native(classes, wide, TRUE,
+                &fnid, &canonical));
+            CHECK(fnid == 0 && canonical == NULL && GetLastError() == 0x2468);
+            continue;
+        }
+        CHECK(wow_class_words_match_native(classes, ansi, FALSE,
+            &fnid, &canonical));
+        CHECK(fnid == cases[i] && canonical == ansi);
+        CHECK(GetLastError() == 0x2468);
+        fnid = 0; canonical = NULL;
+        CHECK(wow_class_words_match_native(classes, wide, TRUE,
+            &fnid, &canonical));
+        CHECK(fnid == cases[i] && canonical == ansi);
+        CHECK(GetLastError() == 0x2468);
+        fnid = 0; canonical = NULL;
+        CHECK(!wow_class_words_match_native(classes, wide, FALSE,
+            &fnid, &canonical));
+        CHECK(fnid == 0 && canonical == NULL);
+        CHECK(GetLastError() == 0x2468);
+    }
+}
 
 static void verify_original_cleanup(wow_class_lookup_context *classes)
 {
@@ -25,7 +74,7 @@ static void verify_original_cleanup(wow_class_lookup_context *classes)
     WNDCLASSEXA shadow = {sizeof(shadow)};
     UNICODE_STRING shadow_name;
     DWORD shadow_words[2] = {0x12370056u, 0};
-    wow_window_dispatch_target shadow_target = {0x92370056u, unexpected_callback};
+    wow_window_dispatch_target shadow_target = {0x92370056u, unexpected_callback, TRUE};
     wow_class_words_binding *private_class;
     ATOM shadow_atom;
     unsigned restored = 0;
@@ -39,6 +88,12 @@ static void verify_original_cleanup(wow_class_lookup_context *classes)
     CHECK(!wow_standard_classes_bind_cleanup(NULL));
     CHECK(wow_standard_classes_bind_cleanup(&context));
     CHECK(wow_standard_class_describe("EDIT", &other));
+    CHECK(shared.atomSysClass[ICLS_EDIT] == other.atom);
+    {
+        wow_standard_class_view combo_list;
+        CHECK(wow_standard_class_describe("COMBOLBOX", &combo_list));
+        CHECK(shared.atomSysClass[ICLS_COMBOLISTBOX] == combo_list.atom);
+    }
     shadow.hInstance = GetModuleHandleA(NULL);
     shadow.lpfnWndProc = DefWindowProcA;
     shadow.lpszClassName = "BUTTON";
@@ -51,13 +106,15 @@ static void verify_original_cleanup(wow_class_lookup_context *classes)
         wow_class_words_binding *binding = wow_class_words_acquire(classes,
             entry->atomClassName, classes->client_module);
         DWORD old;
+        BOOL previous_guest;
         CHECK(binding != NULL);
         if (!binding) continue;
         /* A previously installed native CPD must not overwrite the immutable
          * original standard-class target used after module unload. */
         CHECK(wow_class_words_exchange_procedure(binding,
-            (DWORD)other.native.lpfnWndProc, &old));
-        CHECK(wow_class_words_exchange_procedure(binding, 0x92370056u, &old));
+            (DWORD)other.native.lpfnWndProc, FALSE, &old, &previous_guest));
+        CHECK(wow_class_words_exchange_procedure(binding, 0x92370056u, TRUE,
+            &old, &previous_guest));
         entry->adwWOW[0] = 0x12370056u;
         wow_class_words_release(binding);
     }
@@ -70,7 +127,11 @@ static void verify_original_cleanup(wow_class_lookup_context *classes)
         CHECK(wow_class_words_value(private_class)[0] == 0);
         CHECK(wow_standard_class_describe("BUTTON", &button));
         CHECK(wow_class_words_target(private_class, &restored_target));
-        CHECK(restored_target.procedure == (DWORD)button.native.lpfnWndProc);
+        /* cleanup.c selects by atom for both private and public classes.
+         * A private BUTTON shadow restores the same recovered W procedure,
+         * not a second native-control behavior owner. */
+        CHECK(restored_target.procedure ==
+            (DWORD)wow_control_client_procedure(FNID_BUTTON, TRUE));
         wow_class_words_release(private_class);
     }
     if (shadow_atom)
@@ -81,29 +142,42 @@ static void verify_original_cleanup(wow_class_lookup_context *classes)
         wow_standard_class_view expected;
         wow_window_dispatch_target snapshot;
         DWORD previous;
+        BOOL previous_guest;
         CHECK(binding != NULL);
         if (!binding) continue;
         CHECK(entry->adwWOW[0] == 0);
         CHECK(wow_standard_class_describe(MAKEINTATOM(entry->atomClassName), &expected));
         CHECK(wow_class_words_target(binding, &snapshot));
         CHECK(snapshot.procedure == (entry->fnid == FNID_EDIT ?
-            (DWORD)DefWindowProcW : (DWORD)expected.native.lpfnWndProc));
+            (DWORD)DefWindowProcW : entry->fnid == FNID_DIALOG ?
+            (DWORD)wow_dialog_window_procW : wow_control_client_procedure(entry->fnid, TRUE) ?
+            (DWORD)wow_control_client_procedure(entry->fnid, TRUE) : (DWORD)expected.native.lpfnWndProc));
         if (entry->fnid == FNID_BUTTON) {
             WW words = {0};
             HWND window = CreateWindowExA(0, "BUTTON", "", BS_CHECKBOX,
                 0, 0, 16, 16, NULL, NULL, GetModuleHandleA(NULL), NULL);
             CHECK(window != NULL);
             if (window) {
+                /* This row checks immutable native-class forwarding on an
+                 * implicitly native-created control, not recovered BUTTON
+                 * behavior. Recovered cleanup targets are asserted above;
+                 * their real creation/retirement is covered by the CCPU
+                 * driver's original-control group. Never attach an original
+                 * private-state procedure to this native BUTTON state. */
+                wow_window_dispatch_target native_target = {
+                    (DWORD)expected.native.lpfnWndProc, NULL
+                };
                 wow_class_words_binding *window_class = wow_class_words_acquire(
                     classes, entry->atomClassName, classes->client_module);
                 CHECK(window_class != NULL);
-                if (wow_window_words_attach_target(window, &words, window_class, &snapshot)) {
-                    CHECK(SetWindowLongA(window, GWL_WNDPROC, (LONG)wow_window_native_proc) != 0);
+                if (wow_window_words_attach_target(window, &words, window_class, &native_target)) {
                     SendMessageA(window, BM_SETCHECK, BST_CHECKED, 0);
                     CHECK(SendMessageA(window, BM_GETCHECK, 0, 0) == BST_CHECKED);
-                    CHECK(wow_class_words_exchange_procedure(binding, (DWORD)DefWindowProcA, &previous));
+                    CHECK(wow_class_words_exchange_procedure(binding, (DWORD)DefWindowProcA,
+                        FALSE, &previous, &previous_guest));
                     CHECK(wow_class_call_original_native(window, BM_GETCHECK, 0, 0) == BST_CHECKED);
-                    CHECK(wow_class_words_exchange_procedure(binding, snapshot.procedure, &previous));
+                    CHECK(wow_class_words_exchange_procedure(binding, snapshot.procedure,
+                        snapshot.wow_encoded, &previous, &previous_guest));
                 } else {
                     CHECK(FALSE);
                     wow_class_words_release(window_class);
@@ -112,10 +186,11 @@ static void verify_original_cleanup(wow_class_lookup_context *classes)
                 CHECK(entry->cWndReferenceCount == 0);
             }
         }
-        CHECK(wow_class_words_exchange_procedure(binding, (DWORD)DefWindowProcA, &previous));
+        CHECK(wow_class_words_exchange_procedure(binding, (DWORD)DefWindowProcA,
+            FALSE, &previous, &previous_guest));
         CHECK(previous == snapshot.procedure);
         CHECK(wow_class_words_exchange_procedure(binding,
-            (DWORD)expected.native.lpfnWndProc, &previous));
+            (DWORD)expected.native.lpfnWndProc, FALSE, &previous, &previous_guest));
         wow_class_words_release(binding);
         ++restored;
     }
@@ -140,7 +215,11 @@ int __cdecl main(void)
     UNICODE_STRING app_name;
     DWORD app_words[2] = {0x12345678u, 0};
     ATOM app_atom;
+    HHOOK terminal = SetWindowsHookExA(WH_CALLWNDPROCRET,
+        wow_window_terminal_observer, NULL, GetCurrentThreadId());
     unsigned i, resolved = 0;
+    CHECK(terminal != NULL);
+    if (!terminal) return 1;
     memset(&unchanged, 0x5a, sizeof(unchanged));
     named = unchanged;
     CHECK(!wow_standard_class_describe("Not a standard class", &named));
@@ -164,6 +243,7 @@ int __cdecl main(void)
     CHECK(public_head != NULL);
     CHECK(!wow_standard_classes_prepare(&classes, NULL));
     CHECK(classes.pclsPublicList == public_head);
+    verify_recovered_targets(&classes);
     for (i = 0; i < ARRAYSIZE(cases); ++i) {
         wow_class_words_binding *binding, *again;
         wow_window_dispatch_target target;
@@ -179,7 +259,9 @@ int __cdecl main(void)
         CHECK(wow_class_words_entry(binding)->fnid == named.fnid);
         CHECK(wow_class_words_entry(binding)->hTaskWow == 0);
         CHECK(wow_class_words_target(binding, &target));
-        CHECK(target.procedure == (DWORD)named.native.lpfnWndProc);
+        CHECK(target.procedure == (DWORD)(wow_control_client_procedure(named.fnid, FALSE) ?
+            wow_control_client_procedure(named.fnid, FALSE) : named.fnid == FNID_DIALOG ?
+            wow_dialog_window_procA : named.native.lpfnWndProc));
         CHECK(HIWORD(wow_class_words_entry(binding)->lpfnWndProc) != 0xffff);
         wow_class_words_release(again);
         if (!i) retained = binding;
@@ -230,5 +312,6 @@ int __cdecl main(void)
         CHECK(wow_standard_class_describe(cases[i].name, &named));
     fprintf(stderr, "WOW_STANDARD_CLASS errors=%u resolved=%u original_table=1\n", errors, resolved);
     fprintf(stderr, "WOW_STANDARD_STORAGE errors=%u classes=9 precedence=1 retirement=1\n", errors);
+    CHECK(UnhookWindowsHookEx(terminal));
     return errors ? 1 : 0;
 }

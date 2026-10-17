@@ -2,6 +2,332 @@
 
 ## Admission and boundaries
 
+Owner approves native real-window style mutation with host style notifications,
+including pre-4.0 windows. Keep original client/private-word validation and
+the existing native callout/return publication boundary. Do not add notification
+filters, helper windows or guest modifications. This resolves only the style
+service decision. Owner now additionally approves native ownership of the
+actual dialog procedure/result slots and WM_NOTIFYFORMAT, retaining original
+creation/modal/focus/control/resource algorithms. No helper HWND or private
+decoder. Implement creation through normal/task teardown together; A/W restore,
+exactly-once callbacks, result propagation, rollback and handle reuse remain
+acceptance requirements. Other fixed S3 groups remain open. See the source ledger.
+
+### Responsibility audit and finite remediation
+
+Owner clarification: exhaust source reuse and bounded semantic-preserving
+adaptation before proposing a compatibility exception. Difficulty, missing
+proof or a simpler reduced implementation is not evidence of impossibility.
+The proposed blanket refusal of native CPD restoration is not selected.
+Group3 retains its full original restoration contract; any proposed reduction
+needs concrete source/evidence, affected behavior and explicit owner approval.
+This does not authorize guest changes or an unbounded USER replacement.
+
+Current grouped verification keeps original WND/CLS behavior distinct from
+native WND-slot/CPD storage and adds restoration-free NTW16S terminal disposal.
+Core-r4 environment failures are not product passes; core-r6 plus focused
+repairs pass17/19 with the same production inputs, not one fully passing
+cohort. Full formal-task CCPU modal verification is being added rather than
+adapting production to the older partial models. Those two public test cases
+now pass using actual CCPU/registered-owner producers; final frozen core20/20
+and Console17/Window17/original30 pass. A coherent13 recovery publication is
+verified at assets/release and O:/winnt/system32; source delivery is P17.
+Both-width terminal passes;
+the old default-button GDI assertion fails with both old/new DLLs and remains
+explicitly unresolved. App/DOS/coherent13 recovery-baseline gates now pass;
+do not transfer a genuine foundation defect to S4 or claim S3 delivery from
+these supplemental cases. See the source ledger for exact runs and hashes.
+
+Owner requires retrospective audit and implementation, under the
+[architecture rule](../../rules/ARCHITECTURE.md#original-behavior-and-modern-host-responsibility-t447).
+This section is the fixed functional inventory, not a claim that all rows
+have completed source/runtime review. Preserve all existing work. The current
+S3 delivery must resolve its integration dependencies and any public-contract
+defects it exposes; unrelated functional expansion remains outside this T.
+
+| Chain / actual entry | Authority and original owner | Disposition / remaining proof | S ownership |
+| --- | --- | --- | --- |
+| Guest thunk and registered window/dialog/Hook callbacks → task/borrow scopes → native call → return | Original MVDM conversion and task scheduling; adapter owns execution boundary, native USER owns message delivery | Retain original algorithms and common native-call owner. Audit every entry/exception/return; do not equate a native call's success with restored ownership. | S2 foundation contract; defects found now block affected S3; full message semantics S4 |
+| HWND discovery/mutation/returned objects → project_graph → page-domain publication | Windows owns existence/geometry; page-domain owns retained copied views; original guest readers remain immutable | Retain route E. Finish atomic host-WND relationship publication and exact-generation lifetime; no guessed private presence flags or external freshness callback veto. | S3 prerequisite, not deferrable as S4 functionality |
+| Native procedure/CPD → CallWindowProc and dialog get/thunk/set/dispatch | Native HWND owns dialog procedure/result and notification encoding; original WOW thunks and dialog behavior remain | Approved public native-slot implementation staged. Complete integrated getter/setter selection, callback/lifecycle/rollback and class-token closure without NT4 casts or another authority. Native probe alone is insufficient. | S3 blocker |
+| Explicit/template/internal control creation → original creator → first callback | Creation inputs are facts from the creator; Windows owns HWND; original WND owns behavior-private storage | Remove native creator approximation where original InternalCreateDialog is selected. Complete provenance for internal children and failure rollback before group selection. Do not infer creator encoding from mutable subclass encoding. | S3 |
+| EDIT → original memory/word-break/drawing owners → native resource leaves | Original EDIT owns its algorithm; original WOW/guest leases own guest DS conversion; Windows owns DC/timer resources | Select all seven staged bodies together with dependencies; verify single/multiline, conversion, DS lifetime, failure and exit. Staged bodies are not production proof. | S3 |
+| ComboBox ↔ ListBox ↔ EDIT, cached PWND and child retirement | Original PCBOX/LBIV state and algorithms; shared allocation owner protects host WND; native USER owns actual children | No original-PCBOX/native-LBIV mixture. Finish retained pointer validity, child-first destruction and rollback as one group; no independently maintained inferred initialization flags. | S3 blocker |
+| Dialog creation/modal loop/default handler/getset/finalization | Original owns behavior/resource PDLG; native owns actual HWND procedure/result slots; adapter transfers execution and identities | No mirrored procedure/result authority. Shared getset preserves ordinary control extra-word policy. Validate normal/nested/failed creation, default result, A/W and both original/native final destruction together. | S3 |
+| Menu parse/mutation/attach/rollback/retirement | Original parsers/conversion; native USER owns actual HMENU; page-domain owns observation | Retain selected original parsers. Staged mixed CHILD/POPUP role fixes align all consumers with TestwndChild. Verify native failure leaves valid publication and menu reference retirement agrees. | S3 MENU-01 |
+| Default nonclient dispatch and combo captured-list FindNCHit | Native Windows for ordinary regions; NTW16S for styled geometry; original control flow retained | Approved delegation staged for both original callers; compare real query/subclass paths and capture/scroll/dropdown behavior. No broader default-handler replacement approved. | S3 |
+| Native/guest send, post, reply and cross-task reentry | Original WOW scheduling/conversion; approved modern transport boundary; adapter carries identity | Reconcile against existing approvals without adding a waiver. Full mixed-message identity/reply/reentry remains S4; current callback return safety cannot be deferred. | S4, with foundation obligations retained |
+| Task normal exit/worker shutdown and requested per-task terminate | Original WOW task lifecycle; broker owns request identity; monitor only selects/reports | Audit normal cleanup as an S3 prerequisite; new individual-task termination and its identity/authorization remain S5. No PID/launch-request substitution for task identity. | S3 cleanup / S5 feature |
+| Whole package source selection, mirrors and publication | Audited manifests select runtime; source provenance registers imports/diffs | Resolve private-precomp/full link as a group; count normalized mirror additions/removals against pinned originals and register each exception. Verify 13-image package and unchanged guest before release. | Each delivery; S6 whole-T acceptance |
+
+Finite current S3 remediation remains six groups: (1) creation provenance;
+(2) host relationship/lifetime transaction; (3) dialog CPD normalization,
+invocation and A/W ownership, plus the class-registration address-only
+normalization consumer; (4) default/nonclient service closure within the
+approved boundary; (5) original private-precomp/full source selection;
+(6) grouped real-guest/lifecycle and coherent delivery. Review of earlier
+foundations is mandatory for these chains, not permission to add unrelated
+features. New findings must attach to a concrete contract/row; any material
+scope or semantic change follows the existing admission rule.
+
+CPD group3 must not close on opaque-token invocation alone. The published
+f47d951b0 baseline rejects tagged class procedures when its optional resolver
+is NULL. Staged ADAPTER-WOW-071 now supplies public native class-address
+resolution for that NULL case; composite r20 exercises the selected edge.
+This resolves the class address/guest-tag distinction, not WND procedure
+encoding or source-class-independent lifetime. Resolve dialog get/set/restore,
+class registration and WND token lifetime together; never treat modern USER
+tokens as original CALLPROCDATA. The identity-contract gap predates S3;
+the staged resolver is not yet published.
+The same group must resolve the WOW selector/tag collision: WU32RegisterClass
+maps selector7fff to a ffff-tagged word. Original _RegisterClassEx validates
+CPD identity before replacing it and otherwise retains the input. Audit the
+register, class projection, WND attachment and get/set/dispatch consumers as
+one identity chain; neither blanket ffff rejection nor blanket guest treatment
+closes it. Composite r20 covers the guest7fff registration/window roundtrip
+and native CPD/class distinction. The separate class-client procedure_encoding
+cases and real-guest selector-allocation proof must not be inferred from that
+composite result.
+
+WND lifetime review remains within group3, not a new feature: original
+GetThunkWindowProc accepts same-process nonstandard native windows, and
+IsThunkWindowProc permits restoring their native procedures through
+WU32SetWindowLong. Standard-class-only support therefore cannot close this
+contract. A retained project CLS reference does not retain a native class or
+its CPDs. Do not defer successful native UnregisterClass or temporarily swap
+the actual WNDPROC under a project lock and claim native atomicity. Required
+proof includes destination use after source-class retirement, correct A/W
+conversion, independent destination retirement, failure rollback, concurrent
+native subclass safety and preservation of callback/terminal ownership.
+
+The transient destination transaction's concurrency cost also includes native
+message delivery. Its actual WNDPROC and Unicode flag change before restore;
+an uncoordinated native owner can dispatch directly to that temporary target.
+The barrier-controlled transient-observability-r1 probe demonstrates this
+alongside visible reads and overwritten native updates. A hypothetical waiver
+for reads/writes/destruction alone would therefore be insufficient. No such
+waiver or runtime transaction is admitted. Preserve the existing WOW execution,
+original-control finalization and outer-style boundaries when choosing the
+complete WND restoration implementation.
+
+#### WND ownership replacement cohort — source-led implementation
+
+The transient counterexample rules out install/query/restore as the normal
+binding. Implement the native ownership route as one dependency group, retaining
+the original MVDM algorithms and task/borrow/publication owners. The actual
+WND native slot selects the current window procedure; do not keep another
+current WND value in its property. Decoded native entry metadata is immutable.
+Source review of cleanup.c corrects the earlier attempt to treat CLS the same:
+original class behavior remains owned by its original CLS record. Module
+cleanup writes that record even with no HWND, whereas public SetClassLong
+requires an HWND. The native registration is its resource/creation carrier,
+not a competing behavior owner. CBT snapshots the original class target into
+each real WND before first dispatch. No helper window, registration recreation,
+native class-private write or skipped original unload restoration is admitted.
+
+Original wuwind.c::WU32SetWindowLong and wuclass.c::WU32SetClassLong already
+separate IsThunkWindowProc's native result from their real guest branch. Carry
+that distinction through the service boundary instead of merging both into
+an ambiguous DWORD. Native targets, including both CPD directions, go through
+one native SetWindowLongA. Guest WND targets map to an immutable native entry
+and use the same setter. Original owned CLS mutation instead retains original
+_SetClassData's address-only CPD normalization and ANSI behavior; its typed
+guest entrance does not normalize an encoded selector as native CPD.
+Decode a returned WND entry to its original
+encoded guest value; pass a foreign native procedure/CPD unchanged to the
+original GetThunkWindowProc path. The original encoding, WW/WC updates and old
+procedure return algorithms remain at their original callers.
+
+The selected original RegisterClassWOW output callback is likewise a guest
+registration boundary. Keep the generic class-registration CPD resolver for
+native input and provide a typed guest entrance for that callback. Explicit
+origin prevents selector7fff from accidentally becoming a foreign native CPD.
+This is the source-proven original host carrier-collision correction covered
+by the owner's standing original-host repair authority: the original comments
+identify that branch as a real16:16 procedure. Do not reject native CPDs or
+infer their direction from their numerical bits. The same word must be tested
+under each distinct guest/native input contract.
+
+Recover native subclass semantics too: original WU32GetWindowLong turns a
+non-WOW native procedure into a guest thunk. An NTW16S/comctl procedure is a real
+native subclass, whereas our machine entry is an adapter for a guest procedure.
+Decode only our own immutable entry. Do not bypass an outer native subclass
+to read or mutate its hidden leaf; that can make a saved previous procedure
+reenter the newly installed guest procedure. Original CallWindowProc must receive
+the actual previous native chain when one exists.
+
+Finite files/changes:
+
+- New wow_window_procedure_entry owner supplies only immutable native ABI
+  entries and reverse identity lookup. Reuse original dispatch/scopes for the
+  saved target, including a saved previous guest procedure after replacement.
+- wow_window_words_binding and wow_user_private_access replace logical
+  current-value selection with native get/set plus typed entry translation;
+  first adoption retains its existing allocation/publication rollback.
+- wow_class_client_bindings, wow_class_words_binding and the registration
+  bridge retain original CLS behavior, explicit guest/native origin and native
+  registration lifetime. Its resource carrier cannot dispatch a stale guest
+  target: CBT always installs the resolved immutable/native WND procedure.
+  Existing WNDs retain their old procedure after a class-only mutation.
+- Original cleanup's three WND and two CLS procedure assignments use registered
+  storage leaves. WND leaves mutate actual native selection; CLS leaves update
+  original behavior with explicit native origin. Keep the original selection,
+  selector iteration, class destruction/deferred destruction and ordering.
+- At the original WND/CLS callers, register MVDM-HOST-DIV-339's six typed
+  service selections in the two host files (four setters, two getters).
+  Carry returned origin into the four CPD-versus-guest return tests too:
+  decoding our entry to selector7fff must not reinterpret it as native CPD.
+  Keep local guards, original tail algorithms and no guest changes.
+- Task/window lifetime binds a per-owner-thread post-message terminal observer
+  before native entries can bypass the former fixed gateway. Canonical original
+  control/dialog cleanup and identity withdrawal remain one owner. Preserve
+  the existing native-call and callback failure/cleanup boundaries; record
+  synthetic terminal-message behavior separately from actual destruction.
+- Update production and fixture composition together, then run the entire
+  affected identity/creation/terminal/style/guest dependency cohort.
+
+Acceptance keeps all earlier assertions: unknown native input, both CPD
+directions, complete text encoding, source and independent destination
+retirement, old-target immutability, real native subclass forwarding/restoration,
+cross-task invocation, class-only versus existing-WND selection, native failure,
+allocation failure, creation veto/failure, swallowed terminal notification,
+normal/task cleanup, handle reuse and native concurrent mutation. Do not use
+the immutable-entry module alone as evidence for these properties. It is
+staged outside the selected build until the dependency group is connected.
+
+Current native-identity core selection now includes the immutable entry and
+the original cleanup leaves. Freeze source inputs and build worker/provider,
+then verify the native identity/creation/cleanup dependency cohort together.
+This is not whole S3 acceptance: styled cleanup additionally needs an owned
+NTW16S retirement audit. Forced original procedure neutralization can bypass
+its comctl subclass WM_NCDESTROY callbacks. attachment/control/theme/frame
+state releases are currently in those callbacks, while creation observers only
+retire pending records/scopes. Resolve that owned-resource edge before styled
+product delivery; it remains S3 lifecycle work, not a transferred S4 feature.
+
+The native-subclass-retirement-r1 public-API probe confirms the missing edge:
+after replacing GWLP_WNDPROC with DefWindowProcA, GetWindowSubclass still
+finds the old owned node and RemoveWindowSubclass removes it without changing
+the replacement native procedure; actual destruction calls the bypassed
+subclass zero times. Thus use an explicit same-thread terminal resource leaf,
+not a fabricated WM_NCDESTROY or ordinary appearance-removal operation.
+The leaf must share existing attachment/frame/control/theme disposal owners,
+retain in-flight calls, cancel owned timers and remove only its own subclass
+nodes. It must not restore fonts/geometry/theme or notify a dead application.
+Invoke it from the established native terminal observer even when original
+cleanup neutralized the current procedure. Native USER remains the HWND
+lifetime authority; this leaf adds no helper window or alternate dispatcher.
+This is the bounded design to implement after the frozen core cohort ends,
+not a claim of completed styled-retirement acceptance.
+
+Core r3 has now terminated:6 of16 fixture cases pass;10 fail. Full worker/
+provider link succeeds and the frozen source check completes unchanged. Its
+ledger separates stale-driver compilation, explicit duplicate test owners,
+missing captured printf markers and the native callback exception-policy
+finding. Do not count those failed rows as runtime acceptance. No new P exists.
+
+Native policy review corrects the initial inference that the post-message
+observer must be removed: Microsoft documents host-dependent handling of
+uncaught WNDPROC exceptions on WOW64, not guaranteed outer-handler execution.
+The generic observer uses that public host contract; do not modify exception
+policy to force an optimized same-thread accident. Keep original WOW guest
+exception handling and test the adapter's actually propagated exceptions with
+the exact production native-call macro plus a throwing native leaf. Separately
+test a real WNDPROC which catches its exception locally and returns normally.
+Both held/unheld execution states, LastError, owner and previous-message state
+remain required. This is not permission to swallow errors or omit unwind tests.
+
+The source-traced alternative WinEvent DESTROY notification was probed through
+an actual same-width DLL, with both console and GUI EXEs: it arrives before
+WM_NCDESTROY on this host. Therefore it cannot replace the original post-
+NCDESTROY canonical cleanup. No WinEvent path is selected in production.
+Ntw16sWindowTerminal and the existing canonical terminal integration are now
+applied in source after that owner registration; actual DLL/CCPU acceptance,
+remaining fixture migration and coherent delivery are still pending.
+
+Concrete terminal integration and acceptance, within this same S3 group:
+
+- Add one public same-width Ntw16sWindowTerminal(HWND) entry. Its caller owns
+  the native terminal edge and module reference; wrong GUI thread rejects,
+  already absent attachments succeed. It is not ordinary WindowRemove.
+- Frame/control/theme/automatic-attachment owners factor their existing
+  NCDESTROY disposal into shared private terminal leaves. These remove their
+  exact subclass node, mark detached and defer allocation release until the
+  existing in-flight call count reaches zero. Frame menu scopes and temporary
+  item projections retain their existing restoration/free owner. Cancel owned
+  scroll timers/caret resources, but do not finish a gesture through application
+  notifications, send WM_SETFONT or change geometry/theme on a dying HWND.
+- Combo internal-list retirement checks the existing owner association before
+  removing anything; an independently removed/reinstalled attachment is not
+  ours. Normal explicit appearance removal keeps its existing restoration
+  and notification contract; do not replace it with the terminal operation.
+- WOW loads the endpoint with the matching style DLL and invokes it from
+  canonical terminal cleanup after original control/dialog finalization and
+  outside the publication lock. Off/unloaded style has no DLL dependency.
+  Preserve existing LastError, native-return and exact-generation ownership.
+  Failure uses the existing terminal-adapter failure boundary, not silent
+  resource loss or a fabricated native success.
+- Extend the existing real-DLL fixture in both widths: normal destruction,
+  real native procedure neutralization then destruction, repeated terminal
+  cleanup, foreign-thread rejection and in-flight removal. Cover automatic
+  frame attachment plus Button/Static/Edit/ListBox/ComboBox/Scrollbar resources.
+  Require no stale subclass attachments, no overwrite of the neutralized native
+  procedure, font/GDI retirement and safe unload after actual destruction.
+- Run the real CCPU task/window/style cleanup row with the matching DLL as
+  a distinct integration proof. Native fixture success alone cannot close
+  original task-exit or Win16 app gates. Preserve independent app/DOS and
+  coherent publication gates; neither this design nor the native primitive
+  probe is evidence that those gates already passed.
+
+Initial source-review result: the apparent false-return fallback in
+wow_user_registration_bridge.c is not by itself a restoration defect.
+wow_user_native_call_end in wow_user_task_lifecycle.c fail-fasts on lost
+ownership or required publication failure before returning. Retain that
+single terminal owner rather than adding duplicate caller-side policy.
+Its established S2 evidence must be revalidated against changed inputs in
+the group run; this inspection is not fresh runtime evidence.
+
+The source ledger supplies detailed provenance and staged fixture names.
+Before closure, each row needs exact executable cases/results and explicit
+uncovered edges; neither this inventory nor earlier P16 passes certify the
+new S3 implementation. This policy/plan update adds no mirror or guest diff.
+
+### S3 approved USER collaboration boundary
+
+Owner additionally approves a bounded nonclient semantic exception: native
+Windows determines ordinary host-frame hit positions, while NTW16S retains
+its existing custom-layout hit owner. Original control execution remains;
+NT4-specific legacy border return values need not be identical. Cover both
+clmsg.c and the direct lboxctl2.c FindNCHit consumer without recursive message
+dispatch or bypassing styled geometry. Record implementation and ordinary/
+styled frame, scrollbar, capture and dropdown acceptance before delivery.
+This does not authorize replacing other default-handler algorithms or guest.
+
+Owner approves recovery of the necessary non-MVDM OpenNT USER control group
+under src/opennt-host after the option-two/three comparison. This supersedes
+the pending private-native-reader choice, not the six open S3 integration
+groups in Current. Version-bound native-layout readers are rejected. Original
+guest USER.EXE and all other guest inputs remain immutable and unrebuilt.
+
+Audit the ComboBox/EDIT/ListBox producer-consumer group together: internal
+creation facts, direct list-state accesses, internal messages, rollback and
+EDIT-to-combo retirement. Do not combine an original PCBOX with native LBIV
+storage or infer creator encoding from the current subclass. Record required
+original files and outgoing dependencies before source selection; this is not
+directory-wide USER, server or Win32k admission.
+
+Modern saved-procedure values remain opaque at the host boundary. Importing
+the control group does not normalize those values. Dialog procedure get/set,
+dispatch, encoding queries and lifetime require one authoritative owner;
+neither dual native/original state nor a guessed raw callback is accepted.
+The selected design must account for these consumers before enabling the
+staged original dialog group. No new semantic restriction is approved here.
+
+Retain single-person implementer/reviewer execution. Complete the bounded
+dependency group, then perform the grouped build, guest/lifecycle regression
+and coherent thirteen-image delivery gates; partial source preparation is
+not a released capability. Existing uncommitted S3 work is preserved.
+
 S2 P16 closes the frozen foundation scope with owner-approved retention of
 the isolated unlocated common-dialog witness. See the
 [closure](../../history/m0-t447-s2-foundation-closure.md). Earlier pending S2

@@ -1,5 +1,12 @@
 # win32 family
 
+T447 S3 places its declaration-only WOW control/resource and character
+conversion facades in include/wow_control_resource_abi.h and
+include/wow_char_conversion_abi.h. They replace the invented controlabi.h and
+chartranapi.h filenames formerly placed in the OpenNT mirror. OPENNT-HOST-105
+provenance and original layout assertions remain; the conversion service
+signatures and bindings are unchanged. These files introduce no runtime owner.
+
 Same-shaped historical Win32/NTDLL/OEM facade used by imported `mvdm-host`
 source. It uses public modern Windows APIs where the original private NT4
 product composition no longer exists.

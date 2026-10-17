@@ -117,7 +117,7 @@ static HWND native_create(DWORD ex, PLARGE_STRING cls, PLARGE_STRING title,
     ATOM atom;
     WW words = {0};
     CREATESTRUCTA request = {0};
-    wow_window_dispatch_target target = {0x81234567, native_callback};
+    wow_window_dispatch_target target = {0x81234567, native_callback, TRUE};
     /* Test-only ordinary A/W composition, not an installed output slot.
      * MDI and ordinal titles are exercised separately above. */
     CHECK(!(ex & WS_EX_MDICHILD));
@@ -200,9 +200,13 @@ static void verify_native_chain(void)
     LPDWORD prefix;
     HWND window;
     ATOM atom;
+    HHOOK terminal = SetWindowsHookExA(WH_CALLWNDPROCRET,
+        wow_window_terminal_observer, NULL, GetCurrentThreadId());
+    CHECK(terminal != NULL);
+    if (!terminal) return;
     cls.hInstance = (HINSTANCE)0x23451234;
     cls.lpszClassName = "S40_ORIGINAL_CREATE_NATIVE";
-    cls.lpfnWndProc = wow_window_native_proc;
+    cls.lpfnWndProc = wow_window_class_creation_proc;
     RtlInitUnicodeString(&name, L"S40_ORIGINAL_CREATE_NATIVE");
     atom = wow_class_words_register(&native_context, &cls, &name, wc, NULL);
     CHECK(atom != 0); if (!atom) return;
@@ -252,6 +256,7 @@ static void verify_native_chain(void)
     printf("WOW_ORIGINAL_CREATE_NATIVE created=%u destroyed=%u messages=%u captures=%u frees=%u\n",
         native_created, native_destroyed, native_messages, captures, frees);
     native_backend = FALSE;
+    CHECK(UnhookWindowsHookEx(terminal));
 }
 #endif
 int __cdecl main(void)

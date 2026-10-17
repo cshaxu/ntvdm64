@@ -7,6 +7,7 @@
 #include "wow_title_policy.h"
 #include "wow_menu_client_bindings.h"
 #include "wow_idle_hook_binding.h"
+#include "opennt-abi/host-compat/include/wow32_provider_private.h"
 
 #include <stdio.h>
 
@@ -21,6 +22,26 @@ extern unsigned wow_init_hooks_live, wow_init_hook_failures;
 extern unsigned wow_task_class_publications, wow_task_class_fail_at;
 #define CHECK(value) do { if (!(value)) { ++errors; \
     fprintf(stderr, "FAIL line=%d error=%lu\n", __LINE__, GetLastError()); } } while (0)
+
+#ifdef WOW_NATIVE_NESTED_FIXTURE
+/* The generated header retains the exact production native-call macros.
+ * Only their native service leaf throws: no uncaught exception crosses a
+ * Windows WNDPROC boundary, whose handling is owned by modern USER/WOW64. */
+static unsigned native_service_fault_calls;
+static LRESULT WINAPI native_service_fault(HWND w,UINT message,WPARAM wp,LPARAM lp)
+{
+    (void)w;(void)message;(void)wp;(void)lp;
+    ++native_service_fault_calls;
+    SetLastError(0x447a4002);
+    RaiseException(0xe0447402,0,0,NULL);
+    return 0;
+}
+#include "wow_native_fixture_call.h"
+WOW_NATIVE_MESSAGE(native_service_fault,
+    (HWND w,UINT message,WPARAM wp,LPARAM lp),(w,message,wp,lp))
+#undef WOW_NATIVE_MESSAGE
+#undef WOW_NATIVE_CALL_AFTER
+#endif
 
 #ifdef WOW_START_NOTIFICATION_FIXTURE
 #define FIXTURE_LAUNCH_REQUEST 0x5678
@@ -43,7 +64,6 @@ static DWORD WINAPI notify_start(ULONG request)
 #ifdef WOW_TITLE_POLICY_FIXTURE
 DWORD WINAPI NtvdmSeparateWowStyle(DWORD *style);
 extern BOOL fSeparateWow;
-static BOOL title_expected;
 static BOOL style_attached(HWND window)
 {
     typedef BOOL (__cdecl *attached_fn)(HWND);
@@ -76,22 +96,9 @@ static DWORD WINAPI off_title_peer(void *argument)
     CHECK(!wcscmp(text,L"other task"));CHECK(DestroyWindow(window));
     CHECK(wow_user_runtime_unbind(&binding));CHECK(session_thread_unbind(peer->owner));return 0;
 }
-static INT_PTR CALLBACK style_dialog(HWND w,UINT m,WPARAM wp,LPARAM lp)
-{
-    WCHAR title[100];(void)wp;(void)lp;
-    if(m==WM_INITDIALOG){CHECK(SetTimer(w,1,10,NULL));return TRUE;}
-    if(m==WM_TIMER){
-        GetWindowTextW(w,title,100);
-        CHECK(!wcscmp(title,L"dialog"));
-        CHECK(style_attached(w)==title_expected);
-        KillTimer(w,1);EndDialog(w,49);return TRUE;
-    }
-    return FALSE;
-}
 static void verify_task_title(void)
 {
     DWORD policy;HWND w;WCHAR title[100];
-    struct {DLGTEMPLATE header;WORD menu,cls;WCHAR text[7];} resource={0};
     CHECK(!fSeparateWow);
     CHECK(NtvdmSeparateWowStyle(NULL)==ERROR_INVALID_PARAMETER);
     CHECK(NtvdmSeparateWowStyle(&policy)==ERROR_NOT_FOUND);
@@ -107,14 +114,10 @@ static void verify_task_title(void)
     w=style_window(WINDOW_STYLE_OFF,L"off");
     CHECK(w);GetWindowTextW(w,title,100);
     CHECK(!wcscmp(title,L"off"));CHECK(DestroyWindow(w));
-    resource.header.style=WS_POPUP|WS_CAPTION;resource.header.cx=100;resource.header.cy=80;
-    wcscpy_s(resource.text,7,L"dialog");
-    title_expected=TRUE;
-    CHECK(wow_title_modal(NULL,&resource.header,NULL,style_dialog,0,TRUE,policy)==49);
-    CHECK(wow_title_modal(NULL,&resource.header,NULL,style_dialog,0,FALSE,policy)==49);
-    title_expected=FALSE;
-    CHECK(wow_title_modal(NULL,&resource.header,NULL,style_dialog,0,TRUE,WINDOW_STYLE_OFF)==49);
-    fprintf(stderr,"WOW_TITLE_POLICY bound task, A/W modal, Off isolation and dynamic caption checked\n");
+    /* Original modal A/W and Off/Win16/All live in the required real-CCPU
+     * registered-owner sibling process. This model owns only policy/peer
+     * isolation and dynamic caption tests, not a second modal lifetime. */
+    fprintf(stderr,"WOW_TITLE_POLICY bound task, Off isolation and dynamic caption checked\n");
 }
 #endif
 
@@ -130,9 +133,29 @@ static DWORD WINAPI delayed_input(void *parameter)
         ? 0 : 1;
 }
 
+static BOOL control_callout_active;
+static unsigned control_paints, control_texts;
 static LRESULT CALLBACK reentrant_receive(HWND window, UINT message,
     WPARAM wp, LPARAM lp)
 {
+    if (control_callout_active && (message == WM_PAINT || message == WM_SETTEXT ||
+            message == WM_CHAR)) {
+        wow_user_runtime_thread *binding = wow_user_runtime_current();
+        CHECK(binding && !binding->exclusive_held);
+        CHECK(binding && binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
+        if (message == WM_CHAR) return (LRESULT)wp;
+        if (message == WM_PAINT) {
+            PAINTSTRUCT paint;
+            ++control_paints;
+            BeginPaint(window, &paint);
+            EndPaint(window, &paint);
+            /* Exercise a nested public text call during synchronous paint. */
+            CHECK(wow_native_SetWindowTextW(window, L"\x4e2d\x6587"));
+            CHECK(!binding->exclusive_held);
+            return 0;
+        }
+        ++control_texts;
+    }
     if (message == WM_APP + 62) {
         wow_user_runtime_thread *binding = wow_user_runtime_current();
         wow_user_task_lifecycle *lifecycle = binding->runtime->lifecycle;
@@ -170,6 +193,71 @@ static DWORD WINAPI send_reentrant(void *window)
 #ifdef WOW_NATIVE_SEEN_FIXTURE
 static DWORD WINAPI cross_watchdog(void *done);
 #endif
+static void verify_control_callouts(wow_user_runtime_thread *binding,
+    const WNDCLASSW *cls)
+{
+    HWND parent, child;
+    WW words = {0};
+    wow_window_words_binding *parent_words, *child_words;
+    unsigned paints, texts;
+    WCHAR text[16] = {0};
+    /* A real visible test-owned window is required: message-only windows
+     * cannot prove synchronous UpdateWindow/RDW_UPDATENOW delivery. */
+    parent = CreateWindowExW(WS_EX_TOOLWINDOW, cls->lpszClassName, L"", WS_POPUP | WS_VISIBLE,
+        0, 0, 32, 32, NULL, NULL, cls->hInstance, NULL);
+    CHECK(parent != NULL);
+    if (!parent) return;
+    child = CreateWindowExW(0, cls->lpszClassName, L"", WS_CHILD | WS_VISIBLE,
+        0, 0, 16, 16, parent, (HMENU)(INT_PTR)17, cls->hInstance, NULL);
+    CHECK(child != NULL);
+    if (!child) { DestroyWindow(parent); return; }
+    CHECK(wow_window_words_attach(parent, &words));
+    CHECK(wow_window_words_attach(child, &words));
+    parent_words = wow_window_words_acquire(parent);
+    child_words = wow_window_words_acquire(child);
+    CHECK(parent_words && child_words);
+    if (parent_words && child_words) {
+        wow_window_words_cleanup_value(parent_words)->thread = binding->thread;
+        wow_window_words_cleanup_value(child_words)->thread = binding->thread;
+        CHECK(wow_user_runtime_enter(binding));
+        control_callout_active = TRUE;
+        paints = control_paints; texts = control_texts;
+        CHECK(InvalidateRect(child, NULL, FALSE));
+        CHECK(wow_native_UpdateWindow(child));
+        CHECK(control_paints > paints && control_texts > texts);
+        CHECK(binding->exclusive_held);
+        paints = control_paints;
+        CHECK(wow_native_RedrawWindow(child, NULL, NULL, RDW_INVALIDATE | RDW_UPDATENOW));
+        CHECK(control_paints > paints && binding->exclusive_held);
+        texts = control_texts;
+        CHECK(wow_native_SetDlgItemTextW(parent, 17, L"\x4e00\x4e8c"));
+        CHECK(control_texts == texts + 1 && binding->exclusive_held);
+        CHECK(!wow_native_SetDlgItemTextW(parent, 18, L"missing"));
+        CHECK(control_texts == texts + 1 && binding->exclusive_held);
+        CHECK(wow_native_SetWindowContextHelpId(child, 0x4473));
+        CHECK(GetWindowContextHelpId(child) == 0x4473 && binding->exclusive_held);
+        CHECK(wow_native_SetWindowContextHelpId(child, 0));
+        CHECK(GetWindowContextHelpId(child) == 0 && binding->exclusive_held);
+        {
+            int increased = wow_native_ShowCursor(TRUE);
+            int restored = wow_native_ShowCursor(FALSE);
+            CHECK(restored == increased - 1 && binding->exclusive_held);
+        }
+        control_callout_active = FALSE;
+        CHECK(wow_user_runtime_leave(binding));
+        CHECK(GetWindowTextW(child, text, ARRAYSIZE(text)) == 2);
+        CHECK(text[0] == 0x4e00 && text[1] == 0x4e8c);
+    }
+    wow_window_words_detach(child);
+    wow_window_words_detach(parent);
+    if (child_words) wow_window_words_release(child_words);
+    if (parent_words) wow_window_words_release(parent_words);
+    CHECK(DestroyWindow(parent));
+    CHECK(!IsWindow(child));
+    fprintf(stderr, "WOW_CONTROL_CALLOUT paints=%u texts=%u errors=%u\n",
+        control_paints, control_texts, errors);
+}
+
 static void verify_receive_callout(wow_user_runtime_thread *binding)
 {
     WNDCLASSW cls = {0};
@@ -180,6 +268,7 @@ static void verify_receive_callout(wow_user_runtime_thread *binding)
     cls.hInstance = GetModuleHandleW(NULL);
     cls.lpszClassName = L"WOW_RECEIVE_REENTRY";
     CHECK(RegisterClassW(&cls) != 0);
+    verify_control_callouts(binding, &cls);
     window = CreateWindowExW(0, cls.lpszClassName, L"", 0, 0, 0, 1, 1,
         HWND_MESSAGE, NULL, cls.hInstance, NULL);
     CHECK(window != NULL);
@@ -208,6 +297,40 @@ static void verify_receive_callout(wow_user_runtime_thread *binding)
             CHECK(binding->exclusive_held);
             CHECK(wow_user_runtime_leave(binding));
             CHECK(native_direct_calls == 4);
+            CHECK(wow_native_SendMessageW(window, WM_APP + 63, 0, 114) == 114);
+            CHECK(GetLastError() == 0x5678 && native_direct_calls == 5);
+            {
+                WCHAR text[16] = {0};
+                /* Non-ANSI payload must survive the actual W entry; no
+                 * codec or source-level W-to-A substitution is permitted. */
+                CHECK(wow_native_DefWindowProcW(window, WM_SETTEXT, 0,
+                    (LPARAM)L"\x4e2d\x6587") != 0);
+                CHECK(wow_native_SendMessageW(window, WM_GETTEXT,
+                    ARRAYSIZE(text), (LPARAM)text) == 2);
+                CHECK(text[0] == 0x4e2d && text[1] == 0x6587 && !text[2]);
+            }
+            {
+                MSG unicode_message;
+                wow_user_task_lifecycle *owner = binding->runtime->lifecycle;
+                /* The original USER modal loop is Unicode, unlike WOW's
+                 * ANSI thunk pump. Do not lose WM_CHAR through PeekMessageA. */
+                CHECK(PostMessageW(window, WM_CHAR, 0x4e2d, 1));
+                CHECK(wow_user_runtime_enter(binding));
+                CHECK(wow_user_task_lifecycle_messageW(owner, &unicode_message,
+                    window, WM_CHAR, WM_CHAR, PM_NOREMOVE | PM_NOYIELD, FALSE));
+                CHECK(unicode_message.message == WM_CHAR && unicode_message.wParam == 0x4e2d);
+                CHECK(binding->exclusive_held);
+                CHECK(wow_user_task_lifecycle_messageW(owner, &unicode_message,
+                    window, WM_CHAR, WM_CHAR, PM_REMOVE | PM_NOYIELD, TRUE));
+                CHECK(unicode_message.wParam == 0x4e2d && binding->exclusive_held);
+                control_callout_active = TRUE;
+                CHECK(wow_native_DispatchMessageW(&unicode_message) == 0x4e2d);
+                control_callout_active = FALSE;
+                CHECK(binding->exclusive_held);
+                CHECK(!wow_user_task_lifecycle_messageW(owner, &unicode_message,
+                    window, WM_CHAR, WM_CHAR, PM_NOREMOVE | PM_NOYIELD, FALSE));
+                CHECK(wow_user_runtime_leave(binding));
+            }
             CHECK(state->ptiScheduled == binding->thread &&
                 state->CSOwningThread == binding->thread);
             CHECK(binding->thread->ptdb->nEvents == events &&
@@ -304,6 +427,9 @@ static LRESULT cross_receive_body(HWND window, UINT message, WPARAM wp, LPARAM l
     }
     if (message == WM_APP + 65) {
         wow_user_runtime_thread *binding = wow_user_runtime_current();
+        CHECK(GetCurrentThreadId() == test->receiver_id);
+        CHECK(binding->thread != test->sender_thread);
+        CHECK(binding->thread->ptdb && binding->thread->ptdb->hTaskWow == 0x1235);
         CHECK(InSendMessage() && !binding->exclusive_held);
         CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
         ++test->delivered;
@@ -401,9 +527,15 @@ static LRESULT cross_receive_body(HWND window, UINT message, WPARAM wp, LPARAM l
         return 116;
     }
     if (message == WM_APP + 69) {
+        BOOL caught = FALSE;
+        __try { RaiseException(0xe0447402,0,0,NULL); }
+        __except (GetExceptionCode() == 0xe0447402 ?
+                EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
+            caught = TRUE;
+        }
+        CHECK(caught);
         SetLastError(0x447a4002);
-        RaiseException(0xe0447402, 0, 0, NULL);
-        CHECK(FALSE); /* The native call must not continue past this throw. */
+        return 117;
     }
     if (message == WM_APP + 71) {
         wow_user_runtime_thread *binding = wow_user_runtime_current();
@@ -537,6 +669,24 @@ static void verify_cross_callout(session *owner, wow_user_runtime_thread *bindin
     CHECK(helper && watchdog);
     if (WaitForSingleObject(test.ready, 3000) != WAIT_OBJECT_0) ExitProcess(96);
     CHECK(wow_user_task_lifecycle_yield(lifecycle));
+    /* Adoption resolves the HWND's native TID through this same production
+     * relation. Check it under the USER lock, without inventing an owner or
+     * retaining the returned pointer across a native callout. */
+    CHECK(wow_user_runtime_enter(binding));
+    {
+        DWORD pid = 0;
+        DWORD tid = GetWindowThreadProcessId(test.window, &pid);
+        wow_task_order_thread *resolved = binding->thread->host->find_thread(
+            binding->thread, tid);
+        wow_window_words_binding *words = wow_window_words_acquire(test.window);
+        CHECK(pid == GetCurrentProcessId() && tid == test.receiver_id);
+        CHECK(resolved && resolved != binding->thread);
+        CHECK(resolved && resolved->ppi == binding->thread->ppi &&
+            resolved->ptdb && resolved->ptdb->hTaskWow == 0x1235);
+        CHECK(words && wow_window_words_cleanup_value(words)->thread == resolved);
+        if (words) wow_window_words_release(words);
+    }
+    CHECK(wow_user_runtime_leave(binding));
 #ifdef WOW_NATIVE_FOREIGN_FIXTURE
     test.foreign_entered = CreateEventW(NULL, TRUE, FALSE, NULL);
     test.foreign_first = TRUE;
@@ -625,8 +775,14 @@ static void verify_cross_callout(session *owner, wow_user_runtime_thread *bindin
         BOOL caught = FALSE;
         wow_task_order_message *previous = binding->thread->psmsSent;
         if (early) CHECK(wow_user_runtime_enter(binding));
+        CHECK(wow_native_SendMessageA(test.sender_window, WM_APP + 69, 0, 0) == 117);
+        CHECK(GetLastError() == 0x447a4002);
+        CHECK(binding->exclusive_held == (BOOL)early);
+        CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
+        CHECK(binding->thread->psmsSent == previous);
+        fprintf(stderr,"WOW_NATIVE_CALLBACK_EXCEPTION_RETURN held=%u caught_in_callback=1 result=117 owner=1\n",early);
         __try {
-            (void)wow_native_SendMessageA(test.sender_window, WM_APP + 69, 0, 0);
+            (void)wow_native_native_service_fault(test.sender_window, WM_APP + 69, 0, 0);
             CHECK(FALSE);
         } __except (GetExceptionCode() == 0xe0447402 ?
                 EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
@@ -636,10 +792,11 @@ static void verify_cross_callout(session *owner, wow_user_runtime_thread *bindin
         CHECK(caught && binding->exclusive_held == (BOOL)early);
         CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
         CHECK(binding->thread->psmsSent == previous);
-        fprintf(stderr, "WOW_NATIVE_EXCEPTION_RETURN held=%u caught=%u owner=1\n",
+        fprintf(stderr, "WOW_NATIVE_EXCEPTION_RETURN held=%u caught=%u owner=1 production_macro=1\n",
             early, caught);
         if (early) CHECK(wow_user_runtime_leave(binding));
     }
+    CHECK(native_service_fault_calls == 2);
     {
         DWORD_PTR result = 0;
         wow_task_order_message *previous = binding->thread->psmsSent;
@@ -824,8 +981,8 @@ int __cdecl main(int argc,char **argv)
 #ifdef WOW_INIT_ROLLBACK_FIXTURE
     {
         unsigned failure;
-        const int hook_ids[] = {WH_CBT, WH_FOREGROUNDIDLE};
-        for (failure = 0; failure < 2; ++failure) {
+        const int hook_ids[] = {WH_CALLWNDPROCRET, WH_CBT, WH_FOREGROUNDIDLE};
+        for (failure = 0; failure < ARRAYSIZE(hook_ids); ++failure) {
             wow_init_hook_fail = hook_ids[failure];
             CHECK(!wow_user_task_lifecycle_init_style(&lifecycle, 0x0400,
                 "APP.EXE", 0x1234, 0, 0, 0, 0, 1, 1, SW_HIDE,
@@ -1016,6 +1173,13 @@ int __cdecl main(int argc,char **argv)
         0, 0, PM_REMOVE, TRUE) == -1);
     CHECK(GetLastError() == ERROR_INVALID_PARAMETER);
     CHECK(!binding.exclusive_held);
+    CHECK(PostThreadMessageW(GetCurrentThreadId(), WM_QUIT, 42, 0));
+    CHECK(!wow_user_task_lifecycle_messageW(&lifecycle, &message, NULL,
+        0, 0, PM_REMOVE, TRUE));
+    CHECK(message.message == WM_QUIT && message.wParam == 42);
+    CHECK(wow_user_task_lifecycle_messageW(&lifecycle, NULL, NULL,
+        0, 0, PM_REMOVE, TRUE) == -1);
+    CHECK(GetLastError() == ERROR_INVALID_PARAMETER && !binding.exclusive_held);
     {
         HANDLE input;
         DWORD result;
@@ -1136,7 +1300,7 @@ int __cdecl main(int argc,char **argv)
     CHECK(wow_user_idle_hook_for_current() == NULL);
 #ifdef WOW_INIT_ROLLBACK_FIXTURE
     CHECK(!wow_init_name_live && wow_init_name_releases == 2);
-    CHECK(!wow_init_hooks_live && wow_init_hook_failures == 2);
+    CHECK(!wow_init_hooks_live && wow_init_hook_failures == 3);
     fprintf(stderr, "WOW_IDLE_OBSERVER_LIFECYCLE errors=%u install_failures=%u live=%u\n",
         errors, wow_init_hook_failures, wow_init_hooks_live);
     fprintf(stderr, "WOW_INIT_ROLLBACK errors=%u failed_allocations=2 name_releases=%u\n",

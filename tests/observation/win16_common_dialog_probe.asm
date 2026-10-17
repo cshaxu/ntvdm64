@@ -97,6 +97,7 @@ mov [fr_instance-data],ax
 mov [fr_find-data+2],ds
 mov [fr_replace-data+2],ds
 mov word [phase-data],1
+call checkpoint               ; Distinguish owner success from FindText failure.
 destroy_round:
 call create_find
 push word [dialog-data]

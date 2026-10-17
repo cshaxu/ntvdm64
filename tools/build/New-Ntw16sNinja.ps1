@@ -52,6 +52,9 @@ if($IncludeTests){
     $graph+="rule style_dialog_link`n  command = link.exe /nologo /manifest:embed /subsystem:console /out:`$out `$in user32.lib gdi32.lib comctl32.lib`n"
     $graph+="build style-dialog-test.exe: style_dialog_link style-dialog-test.obj`n"
     $graph+="default style-dialog-test.exe`n"
+    $graph+="build style-terminal-test.obj: w16style_cc $r/tests/app/ntw16s_terminal.c`n"
+    $graph+="build style-terminal-test.exe: style_dialog_link style-terminal-test.obj`n"
+    $graph+="default style-terminal-test.exe`n"
 }
 if($Append){Add-Content "$root/build.ninja" $graph -Encoding ascii}else{Set-Content "$root/build.ninja" $graph -Encoding ascii}
 $ninja=(Get-Command ninja.exe -ErrorAction Stop).Source

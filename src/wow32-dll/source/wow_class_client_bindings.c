@@ -1,5 +1,6 @@
 #include "wow_class_client_bindings.h"
 #include "wow_window_words_binding.h"
+#include "wow_window_creation_binding.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 #include <stdio.h>
 
@@ -9,6 +10,7 @@ BOOL WINAPI wow_original_get_class_info(HINSTANCE, LPCSTR, WNDCLASSA *);
 extern unsigned short __cdecl getCS(void);
 extern unsigned short __cdecl getIP(void);
 static __declspec(thread) wow_class_client_context *current;
+static __declspec(thread) BOOL current_guest_registration;
 
 wow_class_client_context *WINAPI wow_class_client_current(void) { return current; }
 
@@ -20,16 +22,37 @@ static BOOL valid(wow_class_client_context *context)
     return FALSE;
 }
 
-ATOM WINAPI wow_class_client_register(wow_class_client_context *context,
-    WNDCLASSA *wc, DWORD *words)
+static ATOM register_class(wow_class_client_context *context,
+    WNDCLASSA *wc, DWORD *words, BOOL guest)
 {
     wow_class_client_context *previous;
+    BOOL previous_guest;
     ATOM result;
     if (!valid(context) || !wc || !words) return 0;
     previous = current; current = context;
+    previous_guest = current_guest_registration;
+    current_guest_registration = guest;
     __try { result = wow_original_register_class(wc, words); }
-    __finally { current = previous; }
+    __finally {
+        current_guest_registration = previous_guest;
+        current = previous;
+    }
     return result;
+}
+
+ATOM WINAPI wow_class_client_register(wow_class_client_context *context,
+    WNDCLASSA *wc, DWORD *words)
+{
+    return register_class(context, wc, words, FALSE);
+}
+
+ATOM WINAPI wow_class_client_register_guest(wow_class_client_context *context,
+    WNDCLASSA *wc, DWORD *words)
+{
+    if (!wc || !((DWORD)wc->lpfnWndProc & WOW_WINDOW_PROC_TAG)) {
+        SetLastError(ERROR_INVALID_PARAMETER); return 0;
+    }
+    return register_class(context, wc, words, TRUE);
 }
 
 BOOL WINAPI wow_class_client_unregister(wow_class_client_context *context,
@@ -93,7 +116,7 @@ BOOL WINAPI wow_class_client_query_native(HINSTANCE module, PUNICODE_STRING name
     __try {
         result = GetClassInfoExA(entry ? entry->hModule : module, query, &native_class);
         if (!result) __leave;
-        if (!entry && native_class.lpfnWndProc == wow_window_native_proc) {
+        if (!entry && native_class.lpfnWndProc == wow_window_class_creation_proc) {
             /* Original lookup may have rejected a deferred/different-owner
              * class still registered in USER. Do not bypass that decision
              * through native fallback and expose our transport entrance. */
@@ -126,6 +149,8 @@ typedef struct class_publication {
     PUNICODE_STRING name;
     PCLSMENUNAME menu;
     wow_class_lookup_entry *entry;
+    wow_class_callproc native_callproc;
+    BOOL normalization_failed;
 } class_publication;
 
 /* A default-off witness for the original WU32RegisterClass hand-off.  It
@@ -158,7 +183,19 @@ static wow_class_callproc *WINAPI resolve_callproc(wow_class_register_context *c
     HANDLE handle)
 {
     class_publication *publication = context->binding;
-    return publication->client->resolve_callproc(handle);
+    DWORD procedure;
+    /* Original WU32RegisterClass encoded a known guest target. Its FFFF
+     * selector pattern is not permission to validate it as a native token. */
+    if (current_guest_registration) return NULL;
+    if (publication->client->resolve_callproc)
+        return publication->client->resolve_callproc(handle);
+    if (!wow_native_class_resolve_procedure((DWORD)handle, &procedure)) {
+        publication->normalization_failed = TRUE;
+        return NULL;
+    }
+    if (procedure == (DWORD)handle) return NULL;
+    publication->native_callproc.pfnClientPrevious = procedure;
+    return &publication->native_callproc;
 }
 
 static wow_class_lookup_entry *WINAPI publish_native(wow_class_register_context *context,
@@ -176,11 +213,14 @@ static wow_class_lookup_entry *WINAPI publish_native(wow_class_register_context 
      * tag a valid guest far address is mistaken for a native host function. */
     /* WU32RegisterClass has already encoded both the WOW tag and the
      * virtual high selector bit. Encoding again corrupts low selectors. */
+    if (publication->normalization_failed) return NULL;
     target.procedure = (DWORD)wc->lpfnWndProc;
+    target.wow_encoded = current_guest_registration;
     trace_publication(wc->lpszClassName, (DWORD)wc->lpfnWndProc,
         target.procedure, wc->hInstance);
     target.callback = publication->client->callback;
-    native_class.lpfnWndProc = wow_window_native_proc;
+    native_class.lpfnWndProc = wow_window_class_creation_proc;
+    if (!native_class.lpfnWndProc) return NULL;
     /* Native USER cannot load resources from a packed WOW module. Original
      * client names remain owned by the class; creation must load through
      * the recovered resource client, not native automatic menu loading. */
@@ -227,9 +267,8 @@ ATOM WINAPI wow_class_client_publish(WNDCLASSEXA *wc, PUNICODE_STRING name,
     class_publication publication = {0};
     wow_class_register_context context;
     ATOM atom;
-    /* Preserve the selected ANSI entry profile. Do not fabricate a CPD owner. */
-    if (!current || !current->thread || worker || fnid || flags != 2 ||
-            (HIWORD(wc->lpfnWndProc) == 0xffff && !current->resolve_callproc)) {
+    /* Preserve the selected ANSI entry profile. Native USER owns CPDs. */
+    if (!current || !current->thread || worker || fnid || flags != 2) {
         SetLastError(ERROR_INVALID_PARAMETER); return 0;
     }
     publication.client=current; publication.name=name; publication.menu=menu;

@@ -13,13 +13,160 @@
 * 05-14-92 GregoryW      Modified to use the Rtl translation routines.
 \***************************************************************************/
 
-#include "chartranapi.h"
-#ifdef _USERK_
-#define THREAD_CODEPAGE() (PtiCurrent()->pClientInfo->CodePage)
-#else
-#define THREAD_CODEPAGE() (GetClientInfo()->CodePage)
-#endif // _USERK_
+#include "opennt-abi/host-compat/include/wow_char_conversion_abi.h"
+/* DIVERGENCE(OPENNT-HOST-119): current layout input, no native CLIENTINFO cast. */
+#define THREAD_CODEPAGE() OpenNtUserThreadCodePage()
 #define IS_ACP(cp) (((cp) == NlsAnsiCodePage) || ((cp) == CP_ACP))
+
+/* DIVERGENCE(OPENNT-HOST-119): restore the original message converter. */
+BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
+{
+    DWORD dwUni;
+    NTSTATUS Status;
+#ifdef FE_SB // RtlMBMessageWParamCharToWCS()
+    BOOL  bWmCrIrDbcsChar = FALSE;
+    WORD  wAnsi = LOWORD(*pWParam);
+#endif // FE_SB
+    WORD CodePage = THREAD_CODEPAGE();
+
+    /*
+     * Only these messages have CHARs: others are passed through
+     */
+
+    switch(msg) {
+#ifdef FE_SB // RtlMBMessageWParamCharToWCS()
+    case WM_CHAR:
+        //
+        // WM_CHAR's wParam format for WM_IME_REPORT:IR_DBCSCHAR
+        //
+        if (*pWParam & WMCR_IR_DBCSCHAR) {
+            //
+            // Mark this message is sent as IR_DBCSCHAR format.
+            //
+            bWmCrIrDbcsChar = TRUE;
+        }
+
+        //
+        // Fall through....
+        //
+    case WM_IME_CHAR:
+    case WM_IME_COMPOSITION:
+        //
+        // We need to re-align for Unicode convertsion..
+        // WM_CHAR/WM_IME_CHAR/WM_IME_COMPOSITION's wParam format :
+        //
+        // ReAlign IR_DBCS char format to regular sequence.
+        //
+        // From:
+        //
+        //  HIWORD(wParam)         = 0;
+        //  HIBYTE(LOWORD(wParam)) = DBCS LeadingByte.
+        //  LOBYTE(LOWORD(wParan)) = DBCS TrailingByte or SBCS character.
+        //
+        // To:
+        //  HIWORD(wParam)         = 0;
+        //  HIBYTE(LOWORD(wParam)) = DBCS TrailingByte.
+        //  LOBYTE(LOWORD(wParam)) = DBCS LeadingByte or SBCS character.
+        //
+        *pWParam = MAKE_WPARAM_DBCSCHAR(wAnsi);
+
+        //
+        // Fall through...
+        //
+#else
+    case WM_CHAR:
+#endif // FE_SB
+    case WM_CHARTOITEM:
+    case EM_SETPASSWORDCHAR:
+    case WM_DEADCHAR:
+    case WM_SYSCHAR:
+    case WM_SYSDEADCHAR:
+    case WM_MENUCHAR:
+
+        dwUni = 0;
+
+        if (IS_ACP(CodePage)) {
+            Status = RtlMultiByteToUnicodeN((LPWSTR)&dwUni, sizeof(dwUni),
+                    NULL, (LPSTR)pWParam, 2 * sizeof(CHAR));
+            if (!NT_SUCCESS(Status))
+                return FALSE;
+        } else {
+            int cwch;
+#ifdef _USERK_
+            cwch = EngMultiByteToWideChar(CodePage,
+                    (LPWSTR)&dwUni, sizeof(dwUni) / sizeof(WCHAR),
+                    (LPSTR)pWParam, 2);
+#else
+            cwch = MultiByteToWideChar(CodePage, 0,
+                    (LPSTR)pWParam, 2,
+                    (LPWSTR)&dwUni, sizeof(dwUni) / sizeof(WCHAR));
+#endif // _USERK_
+            // KdPrint(("0x%02x -> 0x%04x (%d)\n", *pWParam, dwUni, CodePage));
+            if (cwch == 0) {
+                return FALSE;
+            }
+        }
+
+#ifdef FE_SB // RtlMBMessageWParamCharToWCS
+        //
+        // if this character is sent for WM_IME_REPORT:IR_DBCSCHAR, we mark it.
+        //
+        if (bWmCrIrDbcsChar)
+            dwUni |= WMCR_IR_DBCSCHAR;
+#else
+#ifdef DEBUG
+        if ((dwUni == 0) || (dwUni > 0xFF)) {
+            RIPMSG1(RIP_VERBOSE, "msgA -> msgW: wchar = 0x%lX\n", dwUni);
+        }
+#endif
+#endif // FE_SB
+        *pWParam = dwUni;
+        break;
+    }
+
+    return TRUE;
+}
+
+/* DIVERGENCE(OPENNT-HOST-118): recover unchanged companion ANSI constructor. */
+VOID RtlInitLargeAnsiString(
+    PLARGE_ANSI_STRING plstr,
+    LPCSTR psz,
+    UINT cchLimit)
+{
+    ULONG Length;
+
+    plstr->Buffer = (PSTR)psz;
+    plstr->bAnsi = TRUE;
+    if (ARGUMENT_PRESENT( psz )) {
+        Length = strlen( psz );
+        plstr->Length = min(Length, cchLimit);
+        plstr->MaximumLength = min((Length + 1), cchLimit);
+    } else {
+        plstr->MaximumLength = 0;
+        plstr->Length = 0;
+    }
+}
+
+/* DIVERGENCE(OPENNT-HOST-105): restore this complete original leaf from
+ * the same source unit; the previously selected conversion subset omitted it. */
+VOID RtlInitLargeUnicodeString(
+    PLARGE_UNICODE_STRING plstr,
+    LPCWSTR psz,
+    UINT cchLimit)
+{
+    ULONG Length;
+
+    plstr->Buffer = (PWSTR)psz;
+    plstr->bAnsi = FALSE;
+    if (ARGUMENT_PRESENT( psz )) {
+        Length = wcslen( psz ) * sizeof( WCHAR );
+        plstr->Length = min(Length, cchLimit);
+        plstr->MaximumLength = min((Length + sizeof(UNICODE_NULL)), cchLimit);
+    } else {
+        plstr->MaximumLength = 0;
+        plstr->Length = 0;
+    }
+}
 
 /***************************************************************************\
 * WCSToMBEx (API)

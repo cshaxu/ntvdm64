@@ -1,5 +1,24 @@
 # NTW16S Win3.x window-style DLL
 
+T447 S3 / ADAPTER-WOW-073 registers the additive ABI-2
+Ntw16sWindowTerminal(HWND) resource boundary. Its same-thread caller owns the
+native terminal edge, including a deliberately neutralized window procedure.
+It shares attachment/frame/control/theme NCDESTROY disposal, retains in-flight
+calls and guards owned combo-list peers. It removes only owned subclass nodes
+and releases their resources without sending font/gesture notices or restoring
+native geometry/theme. Normal explicit WindowRemove remains distinct and
+keeps its restoration contract. Repeated terminal cleanup is harmless; a
+foreign thread rejects. No native private structure, helper HWND, original
+resource/code import or guest change is added. DLL/CCPU acceptance remains
+pending; do not claim the new endpoint delivered until coherent publication.
+
+T447 S3 stages the additive ABI-2 win16_style_hit_test query for WOW's approved
+nonclient boundary. It reuses the subclass's frame/scrollbar/menu geometry and
+sends no window message. It is same-GUI-thread only; an unhandled query leaves
+the result untouched. Both the subclass and WOW use this single implementation.
+The matching WOW loader requires the new export when loading style support;
+coherent rebuild and real-DLL/grouped acceptance are pending, not delivered.
+
 S9 owner-directed cleanup retires the temporary title-marker module and its
 two diagnostic exports. Attachment never adds or strips caption text; initial,
 dynamic A/W and dialog titles remain application-owned. Policy is verified by

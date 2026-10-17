@@ -3,24 +3,13 @@
 
 #include <windows.h>
 
-/* ADAPTER-WOW-052: public-USER carrier for the one original
- * InternalCreateDialog responsibility that has no modern public equivalent:
- * publish a WOW WW, invoke the unchanged W32InitDlg after WM_CREATE, and
- * retain it through the dialog's terminal message.  It is deliberately not a
- * replacement dialog-template parser or USER server. */
+/* ADAPTER-WOW-063: scoped entry to original InternalCreateDialog. Native
+ * HWND creation uses the common explicit enrollment owner; no separate
+ * dialog property, hook, parser or callback scheduler is retained. */
 HWND WINAPI wow_user_server_create_dialog(HANDLE, LPDLGTEMPLATE, DWORD, HWND,
     DLGPROC, LONG, UINT);
-
-struct wow_task_order_thread;
-struct wow_window_creation_enrollment;
-struct wow_window_words_binding;
-/* Shared creation entrance asks the active dialog scope first, before
- * generic class enrollment. Neither operation advances the hook chain. */
-BOOL WINAPI wow_dialog_creation_claim(HWND, const CREATESTRUCTA *,
-    struct wow_task_order_thread *, struct wow_window_creation_enrollment *, BOOL *);
-void WINAPI wow_dialog_creation_cancel(HWND, struct wow_window_words_binding *);
-/* Terminal thread cleanup suppresses guest DLGPROC, retaining the native
- * dialog procedure and its WM_NCDESTROY property-release path. */
-void WINAPI wow_dialog_creation_prepare_exit(HWND, struct wow_window_words_binding *);
+/* Original modal/modeless keyboard processing shares one scoped entry. */
+BOOL WINAPI wow_dialog_messageA(HWND, LPMSG);
+BOOL WINAPI wow_dialog_messageW(HWND, LPMSG);
 
 #endif

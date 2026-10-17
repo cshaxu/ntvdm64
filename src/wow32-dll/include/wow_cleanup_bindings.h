@@ -6,11 +6,7 @@
 #include "wow_user_probe_bindings.h"
 #include "wow_user_object_bindings.h"
 extern const BYTE gabObjectCreateFlags[TYPE_CTYPES];
-typedef VOID (APIENTRY *PFNW32ET)(VOID);
-#pragma warning(push)
-#pragma warning(disable:4201)
-#include "opennt-abi/source/public/internal/windows/inc/wowuserp.h"
-#pragma warning(pop)
+#include "wow_shared_user_abi.h"
 
 /* ADAPTER-WOW-047: borrowed, serialized original cleanup fields. These are
  * live owner views, not native NT4 layouts or enumeration snapshots. Native
@@ -51,6 +47,11 @@ BOOL WINAPI _WOWCleanup(HANDLE, DWORD, PNEMODULESEG, DWORD, wow_cleanup_context 
  * call out or pump messages. Tree links are derived only for this invocation;
  * no native parenting, z-order or ordinary USER tree policy is implemented. */
 BOOL WINAPI wow_user_cleanup_bound(HANDLE, DWORD, PNEMODULESEG, DWORD, wow_cleanup_context *);
+/* Original cleanup selects targets; these leaves own only their storage.
+ * No application callbacks, pumping or new class behavior is introduced. */
+void WINAPI wow_cleanup_set_window_procedure(wow_cleanup_context *,
+    wow_cleanup_window *, WNDPROC);
+void WINAPI wow_cleanup_set_class_procedure(wow_class_lookup_entry *, WNDPROC);
 
 #ifdef WOW_ORIGINAL_CLEANUP
 #define WOW_USER_OBJECT_FLAGS_ONLY

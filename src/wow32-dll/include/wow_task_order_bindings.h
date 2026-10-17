@@ -136,8 +136,9 @@ typedef struct wow_task_callback_scope {
     BOOL held, resumed;
 } wow_task_callback_scope;
 BOOL WINAPI wow_task_callback_enter(wow_task_callback_scope *);
-/* Original modeless COMMDLG WM_DESTROY resource branch only, never an app
- * hook. During termination it requires the early resource-live phase. */
+/* Original modeless COMMDLG WM_DESTROY and recovered EDIT terminal resource
+ * branches only, never an app hook. Termination requires the early
+ * resource-live phase; each consumer admits only its own resource messages. */
 BOOL WINAPI wow_task_resource_cleanup_enter(wow_task_callback_scope *);
 /* A rejected entry has acquired no execution scope. Once entered, leave
  * restores ownership or terminates at the existing worker invariant boundary;

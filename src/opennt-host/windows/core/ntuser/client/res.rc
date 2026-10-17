@@ -1,0 +1,32 @@
+/****************************** Module Header ******************************\
+* Module Name: res.rc
+*
+* Copyright (c) 1985-91, Microsoft Corporation
+*
+* Constants
+*
+* History:
+* 09-18-90 DarrinM      Created.
+\***************************************************************************/
+
+/* DIVERGENCE(OPENNT-HOST-087): retain the original EDIT menu only.
+ * Exclude USER version/strings/bitmap resources. Windows RC supplies the
+ * message constants; ID_EC_PROPERTY_MENU is original usercli.h's value. */
+#include <windows.h>
+#define ID_EC_PROPERTY_MENU 1
+
+// Edit field menu
+ID_EC_PROPERTY_MENU MENU LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    POPUP ""
+    BEGIN
+        MENUITEM "&Undo",       WM_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "Cu&t",        WM_CUT
+        MENUITEM "&Copy",       WM_COPY
+        MENUITEM "&Paste",      WM_PASTE
+        MENUITEM "&Delete",     WM_CLEAR
+        MENUITEM SEPARATOR
+        MENUITEM "Select &All", EM_SETSEL
+    END
+END

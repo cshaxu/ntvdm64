@@ -1,5 +1,22 @@
 # System Architecture
 
+## WOW behavior and resource ownership — T447
+
+The [responsibility rule](../rules/ARCHITECTURE.md#original-behavior-and-modern-host-responsibility-t447)
+governs existing and new implementations. Original WOW/selected USER client
+algorithms own retained behavior; native Windows owns actual windows, desktop
+resources and system messaging; WOW adapters translate identities/data and
+preserve execution and lifetime boundaries; NTW16S owns approved presentation
+and matching custom hit geometry. A host call is a service edge, not permission
+to replace its caller's behavior. Copied WND/menu fields are projections, not
+another native window manager. Original control-private data is distinct from
+those resource observations and must have one retained allocation owner.
+
+The active [working plan](../etc/operations/t447-wow-execution-plan.md#responsibility-audit-and-finite-remediation)
+owns the chain inventory and remediation disposition; evidence distinguishes
+staged source, selected production code and exercised behavior. No private
+native-layout reader or additional semantic waiver follows from this design.
+
 ## WOW copied USER observation boundary — T447
 
 Owner-approved route E retains immutable USER16 readers and original WOW

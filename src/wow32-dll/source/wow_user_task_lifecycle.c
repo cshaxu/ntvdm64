@@ -3,7 +3,9 @@
 #include "wow_class_words_binding.h"
 #include "wow_standard_class_bindings.h"
 #include "wow_window_words_binding.h"
+#include "wow_user_borrow_scope.h"
 #include "wow_window_creation_binding.h"
+#include "wow_dialog_state_bindings.h"
 #include "wow_user_object_bindings.h"
 #include "wow_menu_client_bindings.h"
 #include "wow_menu_native_bindings.h"
@@ -50,6 +52,7 @@ typedef struct wow_user_task_lifecycle_thread {
     wow_user_message_bridge messages;
     HANDLE queue_event;
     HHOOK creation_hook;
+    HHOOK terminal_observer;
     HHOOK idle_observer;
     DWORD thread_id;
     DWORD message_wakes;
@@ -510,8 +513,8 @@ BOOL WINAPI wow_user_task_lifecycle_init_style(wow_user_task_lifecycle *owner,
     task->thread.host_context = task;
     /* The recovered class-client body requires the exact WOW32 callbacks
      * captured at registration plus this task's original class list.  A
-     * NULL callproc resolver deliberately leaves only CPD classes unsupported;
-     * ordinary WOW classes take the original client.c path. */
+     * NULL override selects the class adapter's native address owner; test
+     * overrides are not required for production CPD registration. */
     task->classes.classes = &owner->classes;
     task->classes.dwExpWinVer = version;
     task->classes.get_version = owner->callbacks.get_version;
@@ -522,6 +525,12 @@ BOOL WINAPI wow_user_task_lifecycle_init_style(wow_user_task_lifecycle *owner,
     task->next = owner->threads;
     owner->threads = task;
     if (!wow_user_runtime_set_context(binding, &task->thread, &task->classes)) goto done;
+    /* Native WND/CLS slots may contain a real native subclass, not our fixed
+     * gateway. Observe terminal return independently before admitting any
+     * window creation, including a subclass swallowing WM_NCDESTROY. */
+    task->terminal_observer = SetWindowsHookExA(WH_CALLWNDPROCRET,
+        wow_window_terminal_observer, NULL, task->thread_id);
+    if (!task->terminal_observer) goto done;
     task->creation_hook = SetWindowsHookExA(WH_CBT,
         wow_window_creation_observer, NULL, task->thread_id);
     if (!task->creation_hook) goto done;
@@ -557,6 +566,7 @@ done:
         wow_user_task_lifecycle_thread **link = &owner->threads;
         if (task->idle_observer) UnhookWindowsHookEx(task->idle_observer);
         if (task->creation_hook) UnhookWindowsHookEx(task->creation_hook);
+        if (task->terminal_observer) UnhookWindowsHookEx(task->terminal_observer);
         while (*link && *link != task) link = &(*link)->next;
         if (*link) *link = task->next;
         if (task->thread.PtiLink.Flink) list_remove(&task->thread.PtiLink);
@@ -711,7 +721,7 @@ static BOOL sleep_message_task(wow_user_task_lifecycle *owner)
 }
 
 static BOOL peek_message_published(LPMSG message, HWND window, UINT first,
-    UINT last, UINT flags, BOOL *available)
+    UINT last, UINT flags, BOOL unicode, BOOL *available)
 {
     wow_user_native_call call;
     BOOL restored;
@@ -721,7 +731,8 @@ static BOOL peek_message_published(LPMSG message, HWND window, UINT first,
     if (!wow_user_native_call_begin(&call, NULL)) return FALSE;
     SetLastError(error);
     __try {
-        *available = PeekMessageA(message, window, first, last, flags);
+        *available = unicode ? PeekMessageW(message, window, first, last, flags) :
+            PeekMessageA(message, window, first, last, flags);
         if (*available) call.returned_count =
             wow_user_queue_window_roots(message, call.returned_payload);
     }
@@ -733,8 +744,9 @@ static BOOL peek_message_published(LPMSG message, HWND window, UINT first,
     return restored;
 }
 
-BOOL WINAPI wow_user_task_lifecycle_message(wow_user_task_lifecycle *owner,
-    LPMSG message, HWND window, UINT first, UINT last, UINT flags, BOOL get)
+static BOOL lifecycle_message(wow_user_task_lifecycle *owner,
+    LPMSG message, HWND window, UINT first, UINT last, UINT flags, BOOL get,
+    BOOL unicode)
 {
     UINT early = (QS_POSTMESSAGE | QS_HOTKEY | QS_INPUT | QS_PAINT |
         QS_SENDMESSAGE) << 16;
@@ -751,19 +763,34 @@ BOOL WINAPI wow_user_task_lifecycle_message(wow_user_task_lifecycle *owner,
         /* Suppress native WOW yielding: this process owns the admitted
          * original taskman state, not modern USER's historical WOW state. */
         if (!peek_message_published(message, window, first, last,
-                (flags & PM_REMOVE) | PM_NOYIELD | early, &available))
+                (flags & PM_REMOVE) | PM_NOYIELD | early, unicode, &available))
             return get ? -1 : FALSE;
         if (available)
             return get ? message->message != WM_QUIT : TRUE;
         if (!(flags & PM_NOYIELD) && !wow_user_task_lifecycle_yield(owner))
             return get ? -1 : FALSE;
         if (!peek_message_published(message, window, first, last,
-                flags | PM_NOYIELD, &available)) return get ? -1 : FALSE;
+                flags | PM_NOYIELD, unicode, &available)) return get ? -1 : FALSE;
         if (available)
             return get ? message->message != WM_QUIT : TRUE;
         if (!get) return FALSE;
         if (!sleep_message_task(owner)) return -1;
     }
+}
+
+/* Original WOW thunks use ANSI; the recovered USER dialog/control island
+ * is Unicode. Both retain exactly the same scheduler/publication sequence.
+ * Encoding belongs to native queue retrieval, not a second message codec. */
+BOOL WINAPI wow_user_task_lifecycle_message(wow_user_task_lifecycle *owner,
+    LPMSG message, HWND window, UINT first, UINT last, UINT flags, BOOL get)
+{
+    return lifecycle_message(owner, message, window, first, last, flags, get, FALSE);
+}
+
+BOOL WINAPI wow_user_task_lifecycle_messageW(wow_user_task_lifecycle *owner,
+    LPMSG message, HWND window, UINT first, UINT last, UINT flags, BOOL get)
+{
+    return lifecycle_message(owner, message, window, first, last, flags, get, TRUE);
 }
 
 BOOL WINAPI wow_user_task_lifecycle_wait_message(wow_user_task_lifecycle *owner)
@@ -943,6 +970,7 @@ BOOL WINAPI wow_user_native_call_end(wow_user_native_call *call)
     if (!call->receiver_id) {
         call->binding = NULL;
         published = publish_call_windows(call) &&
+            wow_user_borrow_client_graph(NULL, GetDesktopWindow()) &&
             wow_menu_client_refresh_all(binding->thread->ppi);
         error = GetLastError();
         if (!published) wow_user_native_call_failed("publish-native-return", error);
@@ -964,6 +992,7 @@ BOOL WINAPI wow_user_native_call_end(wow_user_native_call *call)
     sender->psmsSent = call->previous;
     call->binding = NULL;
     published = publish_call_windows(call) &&
+        wow_user_borrow_client_graph(NULL, GetDesktopWindow()) &&
         wow_menu_client_refresh_all(sender->ppi);
     error = GetLastError();
     if (!published) wow_user_native_call_failed("publish-native-return", error);
@@ -1018,11 +1047,19 @@ WOW_NATIVE_CALL(BOOL, MoveWindow, (HWND w, int x, int y, int cx, int cy, BOOL pa
 WOW_NATIVE_CALL(BOOL, ShowWindow, (HWND w, int show), (w, show), FALSE)
 WOW_NATIVE_CALL(BOOL, EnableWindow, (HWND w, BOOL enable), (w, enable), FALSE)
 WOW_NATIVE_CALL_RESULT(HWND, SetActiveWindow, (HWND w), (w), NULL, w, result)
+WOW_NATIVE_CALL(BOOL, SetForegroundWindow, (HWND w), (w), FALSE)
+WOW_NATIVE_CALL(BOOL, SetWindowContextHelpId, (HWND w, DWORD id), (w, id), FALSE)
+WOW_NATIVE_CALL_TARGET(BOOL, SetCursorPos, (int x, int y), (x, y), FALSE, NULL)
+WOW_NATIVE_CALL_TARGET(int, ShowCursor, (BOOL show), (show), 0, NULL)
+/* Original ListBox keeps selection/WM_BEGINDRAG policy. Native USER owns
+ * capture and the modal input wait; callbacks use this shared boundary. */
+WOW_NATIVE_CALL(BOOL, DragDetect, (HWND w, POINT point), (w, point), FALSE)
 WOW_NATIVE_CALL_RESULT(HWND, SetFocus, (HWND w), (w), NULL, w, result)
 /* capture.c sends WM_CAPTURECHANGED to the previous capture, not w. */
 WOW_NATIVE_CALL_RESULT(HWND, SetCapture, (HWND w), (w), NULL, GetCapture(), result)
 WOW_NATIVE_CALL_TARGET(BOOL, ReleaseCapture, (void), (), FALSE, GetCapture())
 WOW_NATIVE_CALL(BOOL, DestroyWindow, (HWND w), (w), FALSE)
+WOW_NATIVE_CALL(BOOL, EndDialog, (HWND w, INT_PTR result_value), (w, result_value), FALSE)
 WOW_NATIVE_CALL_RESULT(HWND, SetParent, (HWND w, HWND parent), (w, parent), NULL, w, result)
 WOW_NATIVE_CALL(BOOL, SetWindowPlacement, (HWND w, const WINDOWPLACEMENT *placement), (w, placement), FALSE)
 WOW_NATIVE_CALL_RESULT(LONG, SetWindowLongA, (HWND w, int index, LONG value),
@@ -1041,22 +1078,77 @@ WOW_NATIVE_CALL(BOOL, ShowScrollBar, (HWND w, int bar, BOOL show), (w, bar, show
 WOW_NATIVE_CALL(BOOL, SetScrollRange, (HWND w, int bar, int minimum, int maximum, BOOL redraw), (w, bar, minimum, maximum, redraw), FALSE)
 WOW_NATIVE_CALL(int, SetScrollPos, (HWND w, int bar, int position, BOOL redraw), (w, bar, position, redraw), 0)
 WOW_NATIVE_CALL(BOOL, EnableScrollBar, (HWND w, UINT bar, UINT arrows), (w, bar, arrows), FALSE)
+/* Original EDIT's NtUser calls can synchronously paint, notify or reenter.
+ * Keep these in the same native-call family, not a second control scheduler.
+ * No returned HDC/HBITMAP/HCURSOR is a returned window identity. */
+WOW_NATIVE_CALL(HDC, BeginPaint, (HWND w, LPPAINTSTRUCT paint), (w, paint), NULL)
+WOW_NATIVE_CALL(BOOL, EndPaint, (HWND w, const PAINTSTRUCT *paint), (w, paint), FALSE)
+WOW_NATIVE_CALL(int, SetScrollInfo, (HWND w, int bar, LPCSCROLLINFO info, BOOL redraw), (w, bar, info, redraw), 0)
+WOW_NATIVE_CALL(BOOL, CreateCaret, (HWND w, HBITMAP bitmap, int width, int height), (w, bitmap, width, height), FALSE)
+WOW_NATIVE_CALL_TARGET(BOOL, DestroyCaret, (void), (), FALSE, NULL)
+WOW_NATIVE_CALL_TARGET(BOOL, SetCaretPos, (int x, int y), (x, y), FALSE, NULL)
+WOW_NATIVE_CALL(BOOL, HideCaret, (HWND w), (w), FALSE)
+WOW_NATIVE_CALL(BOOL, ShowCaret, (HWND w), (w), FALSE)
+WOW_NATIVE_CALL(BOOL, InvalidateRect, (HWND w, const RECT *area, BOOL erase), (w, area, erase), FALSE)
+/* ADAPTER-WOW-061: original EDIT/combo/list/modal code also enters USER
+ * through public paint APIs. UpdateWindow and RDW_UPDATENOW can synchronously
+ * call application procedures; invalidation-only calls keep the same owner.
+ * Do not implement a separate control paint pump or bypass return publication. */
+WOW_NATIVE_CALL(BOOL, UpdateWindow, (HWND w), (w), FALSE)
+WOW_NATIVE_CALL(BOOL, RedrawWindow, (HWND w, const RECT *area, HRGN region, UINT flags), (w, area, region, flags), FALSE)
+WOW_NATIVE_CALL_TARGET(HCURSOR, SetCursor, (HCURSOR cursor), (cursor), NULL, NULL)
 WOW_NATIVE_CALL(DWORD, SetClassLongA, (HWND w, int index, LONG value), (w, index, value), 0)
 WOW_NATIVE_CALL(int, GetWindowTextA, (HWND w, LPSTR text, int count), (w, text, count), 0)
+/* Original mnemonic lookup requests Unicode text and may reenter a control.
+ * Dialog message filters likewise execute application Hooks. Both use the
+ * existing native-call ownership/return boundary, not direct USER calls. */
+WOW_NATIVE_CALL(int, GetWindowTextW, (HWND w, LPWSTR text, int count), (w, text, count), 0)
+WOW_NATIVE_CALL_TARGET(BOOL, CallMsgFilterW, (LPMSG message, int code),
+    (message, code), FALSE, message ? message->hwnd : NULL)
 WOW_NATIVE_CALL(int, GetWindowTextLengthA, (HWND w), (w), 0)
 WOW_NATIVE_CALL(BOOL, SetWindowTextA, (HWND w, LPCSTR text), (w, text), FALSE)
+WOW_NATIVE_CALL(BOOL, SetWindowTextW, (HWND w, LPCWSTR text), (w, text), FALSE)
+/* lboxctl3.c supplies the dialog and item ID, but WM_SETTEXT calls the
+ * selected child. Target that child for the existing execution handoff;
+ * keep native USER's lookup, failure and text semantics unchanged. */
+WOW_NATIVE_CALL_TARGET(BOOL, SetDlgItemTextW, (HWND w, int id, LPCWSTR text), (w, id, text), FALSE, GetDlgItem(w, id))
 #define WOW_NATIVE_MESSAGE(name, params, args) \
     WOW_NATIVE_CALL_AFTER(LRESULT, name, params, args, 0, w, \
         wow_user_native_call_result(&call, message, wp, lp, result))
 WOW_NATIVE_MESSAGE(SendMessageA, (HWND w, UINT message, WPARAM wp, LPARAM lp), (w, message, wp, lp))
+/* Recovered original controls select A/W themselves. The Unicode branch
+ * needs the same execution-return owner, not an ANSI conversion detour. */
+WOW_NATIVE_MESSAGE(SendMessageW, (HWND w, UINT message, WPARAM wp, LPARAM lp), (w, message, wp, lp))
 WOW_NATIVE_CALL_AFTER(LRESULT, SendMessageTimeoutA, (HWND w, UINT message, WPARAM wp, LPARAM lp, UINT flags, UINT timeout, PDWORD_PTR value), (w, message, wp, lp, flags, timeout, value), 0, w,
     if (result && value) wow_user_native_call_result(&call, message, wp, lp, (LRESULT)*value))
 WOW_NATIVE_MESSAGE(DefWindowProcA, (HWND w, UINT message, WPARAM wp, LPARAM lp), (w, message, wp, lp))
-WOW_NATIVE_MESSAGE(DefDlgProcA, (HWND w, UINT message, WPARAM wp, LPARAM lp), (w, message, wp, lp))
+WOW_NATIVE_MESSAGE(DefWindowProcW, (HWND w, UINT message, WPARAM wp, LPARAM lp), (w, message, wp, lp))
+LRESULT WINAPI wow_native_DefDlgProcA(HWND w, UINT message, WPARAM wp, LPARAM lp)
+{
+    wow_user_native_call call;
+    LONG result;
+    BOOL restored;
+    DWORD error = GetLastError();
+    if (wow_dialog_default_message(w, message, wp, lp, &result)) return result;
+    /* Untouched native dialogs keep modern USER ownership. Recovered state
+     * must never fall through here after a handled zero/error result. */
+    if (!wow_user_native_call_begin(&call, w)) return 0;
+    SetLastError(error);
+    __try {
+        result = DefDlgProcA(w, message, wp, lp);
+        wow_user_native_call_result(&call, message, wp, lp, result);
+    } __finally {
+        error = GetLastError();
+        restored = wow_user_native_call_end(&call);
+        if (restored) SetLastError(error);
+    }
+    return restored ? result : 0;
+}
 WOW_NATIVE_MESSAGE(DefMDIChildProcA, (HWND w, UINT message, WPARAM wp, LPARAM lp), (w, message, wp, lp))
 WOW_NATIVE_MESSAGE(DefFrameProcA, (HWND w, HWND client, UINT message, WPARAM wp, LPARAM lp), (w, client, message, wp, lp))
 #undef WOW_NATIVE_MESSAGE
 WOW_NATIVE_CALL_TARGET(LRESULT, DispatchMessageA, (const MSG *message), (message), 0, message ? message->hwnd : NULL)
+WOW_NATIVE_CALL_TARGET(LRESULT, DispatchMessageW, (const MSG *message), (message), 0, message ? message->hwnd : NULL)
 #undef WOW_NATIVE_CALL
 #undef WOW_NATIVE_CALL_TARGET
 #undef WOW_NATIVE_CALL_RESULT
@@ -1092,6 +1184,9 @@ static BOOL retire_task(wow_user_task_lifecycle *owner, DWORD task_id,
         if (task->creation_hook && !UnhookWindowsHookEx(task->creation_hook))
             __leave;
         task->creation_hook = NULL;
+        if (task->terminal_observer && !UnhookWindowsHookEx(task->terminal_observer))
+            __leave;
+        task->terminal_observer = NULL;
         /* The original USER cleanup has now completed.  Its page-domain
          * counterpart may already have been withdrawn during worker teardown;
          * that cannot retain a dead provider task/queue record. */
@@ -1125,6 +1220,7 @@ BOOL WINAPI wow_user_task_lifecycle_exit(wow_user_task_lifecycle *owner,
     BOOL result = FALSE;
     if (!task || (task_id && (!task->thread.ptdb ||
             task->thread.ptdb->hTaskWow != task_id))) {
+        retirement_trace("cleanup-task-identity", task_id, ERROR_INVALID_STATE);
         SetLastError(ERROR_INVALID_STATE); return FALSE;
     }
     /* wuser.c::ModuleUnload calls the task branch and then task==0 module
@@ -1139,6 +1235,7 @@ BOOL WINAPI wow_user_task_lifecycle_exit(wow_user_task_lifecycle *owner,
         owner->cleanup.thread = &task->thread;
         result = wow_user_cleanup_bound(instance, task_id, selectors, count,
             &owner->cleanup);
+        if (!result) retirement_trace("cleanup-original-boundary", task_id, GetLastError());
     } __finally {
         owner->cleanup.thread = NULL;
         (void)wow_user_runtime_leave(binding);

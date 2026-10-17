@@ -15,7 +15,5 @@ HMENU WINAPI wow_private_user_load_create_menu(HANDLE module,
     LPTSTR name, CONST LPMENUTEMPLATE menu_template, DWORD resource_size,
     BOOL call_client);
 DWORD WINAPI wow_private_user_get_menu_index(HMENU menu, HMENU submenu);
-BOOL WINAPI wow_private_user_fill_window(HWND brush_window, HWND paint_window,
-    HDC dc, HBRUSH brush);
 
 #endif /* ADAPTER_MVDM_HOST_OUT_WOW_PRIVATE_USER_COMPAT_H */

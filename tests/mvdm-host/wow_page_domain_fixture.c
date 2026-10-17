@@ -3,6 +3,14 @@
 #include <string.h>
 #include <windows.h>
 
+#ifdef WOW_WINDOW_BORROW_FIXTURE
+/* Original header assumes its /Gz compilation environment. This CCPU
+ * fixture uses /Gd; spell the existing provider ABI on that declaration. */
+#define UserRegisterWowHandlers WINAPI UserRegisterWowHandlers
+#include "wow32-dll/include/wow_shared_user_abi.h"
+#undef UserRegisterWowHandlers
+#endif
+
 #include "ntvdm-exe/session/session.h"
 #include "ntvdm-exe/softpc/include/mvdm_cvidc_vector_binding.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h"
@@ -16,6 +24,10 @@
 #include "wow32-dll/include/wow_cleanup_bindings.h"
 #include "wow32-dll/include/wow_user_task_lifecycle.h"
 #include "wow32-dll/include/wow_user_private_access.h"
+#ifdef WOW_WINDOW_BORROW_FIXTURE
+#include "wow32-dll/include/wow_title_policy.h"
+#include "common/protocol/window_style.h"
+#endif
 
 extern BOOL WINAPI WOWCallback16Ex(DWORD, DWORD, DWORD, PVOID, PDWORD);
 
@@ -37,6 +49,7 @@ extern void c_setCPL(uint32_t value);
 extern int32_t c_getCPL(void);
 extern int xtrn2phy(uint32_t linear, uint32_t access, uint32_t *physical);
 extern uint32_t c_sas_dw_at(uint32_t address);
+extern void c_sas_storedw(uint32_t address, uint32_t value);
 extern void c_sas_fills(uint32_t address, uint8_t value, uint32_t byte_count);
 extern void c_sas_loads(uint32_t source, uint8_t *destination, uint32_t byte_count);
 extern void phy_w32(uint32_t address, uint32_t value);
@@ -65,10 +78,33 @@ extern LONG VdmQueryFreeVirtualMemory(ULONG *bytes, ULONG *largest);
 #pragma comment(lib, "comctl32.lib")
 #include "opennt-abi/host-compat/include/wow32_provider_private.h"
 #include "wow32-dll/include/wow_window_words_binding.h"
+#include "wow32-dll/include/wow_window_procedure_entry.h"
 #include "wow32-dll/include/wow_task_order_bindings.h"
 #include "wow32-dll/include/wow_class_client_bindings.h"
 #include "wow32-dll/include/wow_standard_class_bindings.h"
 #include "wow32-dll/include/wow_user_borrow_scope.h"
+#include "wow32-dll/include/wow_window_client_state_bindings.h"
+#include "wow32-dll/include/wow_edit_entry_bindings.h"
+#include "wow32-dll/include/wow_dialog_state_bindings.h"
+#include "wow32-dll/include/wow_edit_lookaside_bindings.h"
+#define WOW_ORIGINAL_COMBO_STATE_LAYOUT
+#define WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
+#include "opennt-host/windows/core/ntuser/client/usercli.h"
+#undef WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
+#undef WOW_ORIGINAL_COMBO_STATE_LAYOUT
+#include "wow32-dll/include/wow_user_registered_callbacks.h"
+extern HANDLE WINAPI W32LocalAlloc(UINT, UINT, HANDLE);
+extern HANDLE WINAPI W32LocalReAlloc(HANDLE, UINT, UINT, HANDLE, PVOID *);
+extern LPSTR WINAPI W32LocalLock(HANDLE, HANDLE);
+extern BOOL WINAPI W32LocalUnlock(HANDLE, HANDLE);
+extern DWORD WINAPI W32LocalSize(HANDLE, HANDLE);
+extern HANDLE WINAPI W32LocalFree(HANDLE, HANDLE);
+extern ULONG WINAPI W32GetExpWinVer(HANDLE);
+extern DWORD WINAPI W32InitDlg(HWND, LONG);
+extern WORD WINAPI W32GlobalAlloc16(UINT, DWORD);
+extern VOID WINAPI W32GlobalFree16(WORD);
+extern VOID WINAPI W32EmptyClipboard(void);
+extern int WINAPI W32EditNextWord(LPSTR, int, int, int, DWORD);
 extern PWW WINAPI FindPWW(HANDLE, INT);
 extern INT WINAPI GetStdClassNumber(LPSTR);
 static unsigned borrow_errors;
@@ -174,6 +210,27 @@ static ULONG verify_mutated_window(HWND window, ULONG delta)
     return cls;
 }
 
+static BOOL mutation_callout_expected;
+static unsigned mutation_erase_calls, mutation_scroll_calls;
+static LRESULT CALLBACK mutation_window_proc(HWND window, UINT message,
+    WPARAM wp, LPARAM lp)
+{
+    if (mutation_callout_expected &&
+            (message == WM_ERASEBKGND || message == SBM_SETSCROLLINFO)) {
+        wow_user_runtime_thread *runtime = wow_user_runtime_current();
+        BORROW_CHECK(runtime && !runtime->exclusive_held);
+        if (message == SBM_SETSCROLLINFO) {
+            const SCROLLINFO *info = (const SCROLLINFO *)lp;
+            BORROW_CHECK(info && info->cbSize == sizeof(*info) && info->nPos == 17);
+            ++mutation_scroll_calls;
+            SetLastError(0x7448);
+            return 77;
+        }
+        ++mutation_erase_calls;
+    }
+    return DefWindowProcA(window, message, wp, lp);
+}
+
 static void verify_native_mutation_group(ULONG delta)
 {
     WNDCLASSA wc = {0};
@@ -182,7 +239,7 @@ static void verify_native_mutation_group(ULONG delta)
     DWORD previous_style;
     RECT before, after;
     unsigned errors_before = borrow_errors;
-    wc.lpfnWndProc = DefWindowProcA;
+    wc.lpfnWndProc = mutation_window_proc;
     wc.hInstance = GetModuleHandle(NULL);
     wc.lpszClassName = "T447NumericClassMutation";
     wc.cbWndExtra = 16;
@@ -245,6 +302,50 @@ static void verify_native_mutation_group(ULONG delta)
         (void)verify_mutated_window(parent, delta);
         BORROW_CHECK(wow_native_ShowScrollBar(parent, SB_BOTH, FALSE));
         (void)verify_mutated_window(parent, delta);
+        {
+            SCROLLINFO info = {sizeof(info), SIF_RANGE | SIF_PAGE | SIF_POS,
+                0, 100, 10, 17, 0};
+            SCROLLINFO observed = {sizeof(observed), SIF_RANGE | SIF_PAGE | SIF_POS};
+            PAINTSTRUCT paint = {0};
+            HDC dc;
+            POINT caret;
+            wow_user_runtime_thread *runtime = wow_user_runtime_current();
+            BOOL held = runtime->exclusive_held;
+            unsigned erase_before = mutation_erase_calls;
+            unsigned scroll_before = mutation_scroll_calls;
+            mutation_callout_expected = TRUE;
+            BORROW_CHECK(wow_native_SetScrollInfo(child, SB_CTL, &info, FALSE) == 77);
+            BORROW_CHECK(GetLastError() == 0x7448);
+            BORROW_CHECK(mutation_scroll_calls == scroll_before + 1);
+            BORROW_CHECK(wow_native_SetScrollInfo(scrollbar, SB_CTL, &info, FALSE) == 17);
+            BORROW_CHECK(GetScrollInfo(scrollbar, SB_CTL, &observed) &&
+                observed.nMin == 0 && observed.nMax == 100 &&
+                observed.nPage == 10 && observed.nPos == 17);
+            BORROW_CHECK(wow_native_InvalidateRect(child, NULL, TRUE));
+            dc = wow_native_BeginPaint(child, &paint);
+            BORROW_CHECK(dc != NULL && mutation_erase_calls > erase_before);
+            if (dc) BORROW_CHECK(wow_native_EndPaint(child, &paint));
+            mutation_callout_expected = FALSE;
+            BORROW_CHECK(!GetUpdateRect(child, NULL, FALSE));
+            BORROW_CHECK(wow_native_CreateCaret(child, NULL, 1, 8));
+            BORROW_CHECK(wow_native_SetCaretPos(2, 3));
+            BORROW_CHECK(GetCaretPos(&caret) && caret.x == 2 && caret.y == 3);
+            BORROW_CHECK(wow_native_ShowCaret(child));
+            BORROW_CHECK(wow_native_HideCaret(child));
+            BORROW_CHECK(wow_native_DestroyCaret());
+            {
+                HCURSOR cursor = GetCursor();
+                BORROW_CHECK(wow_native_SetCursor(cursor) == cursor && GetCursor() == cursor);
+            }
+            SetLastError(ERROR_SUCCESS);
+            BORROW_CHECK(wow_native_SetScrollInfo(NULL, SB_CTL, &info, FALSE) == 0 &&
+                GetLastError() == ERROR_INVALID_WINDOW_HANDLE);
+            BORROW_CHECK(runtime->exclusive_held == held);
+            (void)verify_mutated_window(child, delta);
+            (void)verify_mutated_window(scrollbar, delta);
+            fprintf(stderr, "WOW_CONTROL_NATIVE_RETURN_CCPU errors=%u paint=1 scroll=1 caret=1 lock=1\n",
+                borrow_errors - errors_before);
+        }
         BORROW_CHECK(wow_native_SetScrollRange(scrollbar, SB_CTL, 0, 50, FALSE));
         (void)wow_native_SetScrollPos(scrollbar, SB_CTL, 8, FALSE);
         BORROW_CHECK(GetScrollPos(scrollbar, SB_CTL) == 8);
@@ -407,7 +508,38 @@ static void verify_returned_windows(void)
         borrow_errors - before);
 }
 
-static int verify_callback_borrow(ULONG teb)
+/* Original dialog creator requires the same initialized task/class/resource
+ * context as controls. Keep this assertion in that fixture scope, not in the
+ * generic callback fixture which intentionally has only an object table. */
+static void verify_dialog_cache(ULONG teb, wow_user_object_table *objects)
+{
+    DWORD template_words[16] = {0};
+    DLGTEMPLATE *dialog = (DLGTEMPLATE *)template_words;
+    HWND window;
+    ULONG before, after, largest;
+    unsigned errors_before = borrow_errors;
+    callback_teb = teb;
+    dialog->style = WS_POPUP;
+    dialog->cx = 100; dialog->cy = 40;
+    BORROW_CHECK(VdmQueryFreeVirtualMemory(&before, &largest) >= 0);
+    window = wow_user_server_create_dialog(GetModuleHandle(NULL), dialog,
+        sizeof(template_words), NULL, dialog_cache_callback, 0,
+        SCDLG_CLIENT | SCDLG_ANSI | SCDLG_NOREVALIDATE);
+    BORROW_CHECK(window != NULL);
+    if (window) {
+        SendMessageA(window, WM_APP + 99, 0, 0);
+        BORROW_CHECK(!IsWindow(window));
+        BORROW_CHECK(objects->entries[LOWORD(window)].bType == TYPE_FREE);
+        if (IsWindow(window)) DestroyWindow(window);
+    }
+    BORROW_CHECK(c_sas_dw_at(teb + 0x6cu) == 0u &&
+        c_sas_dw_at(teb + 0x70u) == 0u);
+    BORROW_CHECK(VdmQueryFreeVirtualMemory(&after, &largest) >= 0 && after == before);
+    fprintf(stderr, "WOW_DIALOG_CACHE_CCPU errors=%u nested_destroy=1 released=1\n",
+        borrow_errors - errors_before);
+}
+
+static int verify_callback_scope(ULONG teb)
 {
     static wow_user_object_table objects;
     wow_task_order_process process = {0};
@@ -417,7 +549,9 @@ static int verify_callback_borrow(ULONG teb)
     wow_user_runtime runtime = WOW_USER_RUNTIME_INITIALIZER;
     wow_user_task_lifecycle native_owner = {0};
     wow_user_runtime_thread runtime_binding = {0};
-    wow_window_dispatch_target target = { 0x81234567u, destroy_in_callback };
+    wow_window_dispatch_target target = { 0x81234567u, destroy_in_callback, TRUE };
+    WNDPROC entry;
+    HHOOK terminal;
     unsigned mode;
     process.objects = &objects;
     thread.ppi = &process;
@@ -427,6 +561,15 @@ static int verify_callback_borrow(ULONG teb)
     task.hTaskWow = 0x4321u;
     runtime.lifecycle = &native_owner;
     if (!wow_user_runtime_bind(&runtime_binding, &runtime, &thread, NULL)) return 0;
+    terminal = SetWindowsHookExA(WH_CALLWNDPROCRET,
+        wow_window_terminal_observer,NULL,GetCurrentThreadId());
+    entry = wow_window_entry_for_guest(&target);
+    BORROW_CHECK(terminal && entry);
+    if (!terminal || !entry) {
+        if (terminal) BORROW_CHECK(UnhookWindowsHookEx(terminal));
+        BORROW_CHECK(wow_user_runtime_unbind(&runtime_binding));
+        return 0;
+    }
     BORROW_CHECK(wow_user_window_refresh_graph(NULL));
     callback_teb = teb;
     verify_native_mutation_group(c_sas_dw_at(teb + 0x60u));
@@ -480,6 +623,7 @@ static int verify_callback_borrow(ULONG teb)
         HMENU menu;
         words.adwWOW[1] = 0x12345678u;
         if (!window) {
+            BORROW_CHECK(UnhookWindowsHookEx(terminal));
             (void)wow_user_runtime_unbind(&runtime_binding);
             return 0;
         }
@@ -502,18 +646,18 @@ static int verify_callback_borrow(ULONG teb)
             BORROW_CHECK(mvdm_softpc_wow_page_domain_reenter_protected());
         }
         wow_window_words_release(borrow);
-        BORROW_CHECK(SetWindowLongA(window, GWL_WNDPROC, (LONG)wow_window_native_proc) != 0);
+        BORROW_CHECK(SetWindowLongA(window, GWL_WNDPROC, (LONG)entry) != 0);
         if (mode == 0) {
             /* Force only the graph owner lookup to fail. A zero native result
              * must not be evidence that the original callback ran. */
             callback_zero_count = 0;
             process.objects = NULL;
             SetLastError(0x1234);
-            BORROW_CHECK(wow_window_native_proc(window, WM_APP + 70, 0, 0) == 0);
+            BORROW_CHECK(CallWindowProcA(entry,window, WM_APP + 70, 0, 0) == 0);
             BORROW_CHECK(GetLastError() == ERROR_INVALID_STATE);
             BORROW_CHECK(callback_zero_count == 0 && IsWindow(window));
             process.objects = &objects;
-            BORROW_CHECK(wow_window_native_proc(window, WM_APP + 70, 0, 0) == 0);
+            BORROW_CHECK(CallWindowProcA(entry,window, WM_APP + 70, 0, 0) == 0);
             BORROW_CHECK(GetLastError() == 0x55bbu);
             BORROW_CHECK(callback_zero_count == 1 && IsWindow(window));
         }
@@ -539,32 +683,6 @@ static int verify_callback_borrow(ULONG teb)
             VdmQueryFreeVirtualMemory(&free_after, &largest) >= 0 &&
             free_after == free_before);
         if (IsWindow(window)) DestroyWindow(window);
-    }
-    {
-        DWORD template_words[16] = {0};
-        DLGTEMPLATE *dialog = (DLGTEMPLATE *)template_words;
-        HWND window;
-        ULONG before, after, largest;
-        dialog->style = WS_POPUP;
-        dialog->cx = 100; dialog->cy = 40;
-        /* Empty native template: menu, class and title are zero WORDs.
-         * Production dialog provider, real page domain, explicit native
-         * callback witness; this is not a substituted Win16 program. */
-        BORROW_CHECK(VdmQueryFreeVirtualMemory(&before, &largest) >= 0);
-        window = wow_user_server_create_dialog(GetModuleHandle(NULL), dialog,
-            sizeof(template_words), NULL, dialog_cache_callback, 0,
-            SCDLG_CLIENT | SCDLG_ANSI | SCDLG_NOREVALIDATE);
-        BORROW_CHECK(window != NULL);
-        if (window) {
-            SendMessageA(window, WM_APP + 99, 0, 0);
-            BORROW_CHECK(!IsWindow(window));
-            BORROW_CHECK(objects.entries[LOWORD(window)].bType == TYPE_FREE);
-            if (IsWindow(window)) DestroyWindow(window);
-        }
-        BORROW_CHECK(c_sas_dw_at(teb + 0x6cu) == 0u &&
-            c_sas_dw_at(teb + 0x70u) == 0u);
-        BORROW_CHECK(VdmQueryFreeVirtualMemory(&after, &largest) >= 0 && after == before);
-        fprintf(stderr, "WOW_DIALOG_CACHE_CCPU errors=%u nested_destroy=1 released=1\n", borrow_errors);
     }
     {
         HWND window = CreateWindowExA(0, "STATIC", "Deferred terminal owner",
@@ -598,6 +716,7 @@ static int verify_callback_borrow(ULONG teb)
             borrow_errors - errors_before);
     }
     BORROW_CHECK(wow_user_runtime_unbind(&runtime_binding));
+    BORROW_CHECK(UnhookWindowsHookEx(terminal));
     fprintf(stderr, "WOW_WINDOW_BORROW_CCPU errors=%u normal=1 exception=1\n", borrow_errors);
     return borrow_errors == 0;
 }
@@ -641,7 +760,7 @@ static int verify_class_registration(ULONG teb)
         thread.TIF_flags = mode ? 0 : WOW_TASK_TIF_16BIT;
         wc.style = mode ? CS_GLOBALCLASS : 0;
         BORROW_CHECK(VdmQueryFreeVirtualMemory(&free_before, &largest) >= 0);
-        atom = wow_class_client_register(&context, &wc, words);
+        atom = wow_class_client_register_guest(&context, &wc, words);
         BORROW_CHECK(atom != 0);
         if (!atom) continue;
         binding = wow_class_words_acquire(&classes, atom, wc.hInstance);
@@ -673,6 +792,21 @@ static int verify_class_registration(ULONG teb)
 static unsigned native_chain_calls;
 static HWND vetoed_native;
 static ATOM veto_native_atom;
+static BOOL selected_native_control(HWND window)
+{
+    DWORD saved=GetLastError();
+    wow_window_words_binding *binding=wow_window_words_acquire(window);
+    wow_cleanup_window *view=binding?wow_window_words_cleanup_value(binding):NULL;
+    PWND state=binding?wow_window_words_client_state_value(binding):NULL;
+    WNDPROC actual=(WNDPROC)GetWindowLongA(window,GWL_WNDPROC);
+    WNDPROC narrow=state?wow_control_client_procedure(GETFNID(state),FALSE):NULL;
+    WNDPROC wide=state?wow_control_client_procedure(GETFNID(state),TRUE):NULL;
+    BOOL matches=view && !view->procedure_is_guest && actual &&
+        actual==view->lpfnWndProc && (!(narrow || wide) || actual==narrow || actual==wide);
+    wow_window_words_release(binding);
+    SetLastError(saved);
+    return matches;
+}
 static LRESULT CALLBACK native_chain(HWND w, UINT m, WPARAM p, LPARAM l,
     UINT_PTR id, DWORD_PTR data)
 {
@@ -686,21 +820,29 @@ static LRESULT CALLBACK veto_native_creation(int code, WPARAM wp, LPARAM lp)
     if (code == HCBT_CREATEWND && (!veto_native_atom ||
             (ATOM)GetClassLongA((HWND)wp, GCW_ATOM) == veto_native_atom)) {
         vetoed_native = (HWND)wp;
-        BORROW_CHECK(GetWindowLongA((HWND)wp, GWL_WNDPROC) == (LONG)wow_window_native_proc);
+        BORROW_CHECK(selected_native_control((HWND)wp));
         return 1;
     }
     return CallNextHookEx(NULL, code, wp, lp);
 }
-static void verify_managed_slot_reuse(wow_class_lookup_context *classes)
+static BOOL CALLBACK trace_reuse_owner(HWND window,LPARAM original)
 {
-    static wow_user_object_table objects;
-    wow_task_order_process process = {0};
-    wow_task_order_thread thread = {0};
+    if(LOWORD((ULONG_PTR)window)==LOWORD(original)){
+        char name[80]={0};GetClassNameA(window,name,sizeof(name));
+        fprintf(stderr,"WOW_REUSE_SLOT_OWNER old=%08lx current=%p class=%s thread=%lu\n",
+            (ULONG)original,window,name,GetWindowThreadProcessId(window,NULL));
+    }
+    return TRUE;
+}
+static BOOL CALLBACK trace_reuse_tree(HWND window,LPARAM original)
+{trace_reuse_owner(window,original);EnumChildWindows(window,trace_reuse_owner,original);return TRUE;}
+static void verify_managed_slot_reuse(wow_task_order_thread *thread)
+{
+    wow_user_object_table *objects = thread->ppi->objects;
     wow_standard_class_view descriptor;
     CREATESTRUCTA request = {0};
     WW words = {0};
     unsigned mode, before = borrow_errors;
-    process.classes = classes; process.objects = &objects; thread.ppi = &process;
     BORROW_CHECK(wow_standard_class_describe("BUTTON", &descriptor));
     request.lpszClass = "BUTTON"; request.lpszName = "Managed reuse";
     request.hInstance = GetModuleHandle(NULL); request.style = WS_POPUP;
@@ -729,9 +871,11 @@ static void verify_managed_slot_reuse(wow_class_lookup_context *classes)
             ++attempts;
             window = mode ? CreateWindowExA(0, "STATIC", "Null class carrier", WS_POPUP,
                 0, 0, 24, 24, NULL, NULL, GetModuleHandle(NULL), NULL) :
-                wow_window_create_boundA(&thread, descriptor.atom, &request, &words, NULL);
+                wow_window_create_boundA(thread, descriptor.atom, &request, &words, NULL);
             if (!window) break;
             full = (ULONG)(ULONG_PTR)window;
+            if(attempts==1 && LOWORD(full)!=LOWORD(old_full))
+                EnumDesktopWindows(GetThreadDesktop(GetCurrentThreadId()),trace_reuse_tree,old_full);
             if (LOWORD(full) == LOWORD(old_full) && full != old_full) break;
             BORROW_CHECK(DestroyWindow(window)); window = NULL;
         }
@@ -741,11 +885,11 @@ static void verify_managed_slot_reuse(wow_class_lookup_context *classes)
              * tests that storage contract, not a guest dialog implementation. */
             if (mode) BORROW_CHECK(mvdm_softpc_wow_page_domain_publish_handle(
                 LOWORD(full), HIWORD(full), 1, 0, full, 0, words.adwWOW));
-            else BORROW_CHECK(objects.windows[LOWORD(full)] == window &&
-                objects.entries[LOWORD(full)].bType == TYPE_WINDOW);
+            else BORROW_CHECK(objects->windows[LOWORD(full)] == window &&
+                objects->entries[LOWORD(full)].bType == TYPE_WINDOW);
             fresh = mvdm_softpc_wow_page_domain_borrow_window(full);
             BORROW_CHECK(fresh && fresh != held);
-            BORROW_CHECK(wow_user_full_handle(&objects, LOWORD(full)) == full);
+            BORROW_CHECK(wow_user_full_handle(objects, LOWORD(full)) == full);
             BORROW_CHECK(!mvdm_softpc_wow_page_domain_borrow_window(old_full));
             BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_words(held, actual) &&
                 actual[0] == 0xabcdef12u && c_sas_dw_at(held) == old_full);
@@ -776,6 +920,36 @@ static void verify_managed_slot_reuse(wow_class_lookup_context *classes)
 }
 
 static unsigned terminal_dialog_callbacks;
+static unsigned modal_dialog_calls;
+static BOOL modal_style_expected;
+static wow_window_words_binding *modal_retained;
+static INT_PTR CALLBACK original_modal_witness(HWND window,UINT message,
+    WPARAM wp,LPARAM lp)
+{
+    (void)wp;(void)lp;
+    if(message==WM_INITDIALOG){
+        PWND state;
+        fprintf(stderr,"WOW_MODAL_STAGE init hwnd=%p\n",window);
+        ++modal_dialog_calls;
+        modal_retained=wow_window_words_acquire(window);
+        state=wow_window_words_client_state_value(modal_retained);
+        BORROW_CHECK(state && GETFNID(state)==FNID_DIALOG &&
+            TestWF(state,WFDIALOGWINDOW) && ((PDIALOG)state)->pdlg);
+        BORROW_CHECK(SetTimer(window,1,10,NULL)!=0);
+        return TRUE;
+    }
+    if(message==WM_TIMER){
+        fprintf(stderr,"WOW_MODAL_STAGE timer hwnd=%p\n",window);
+        HMODULE module=GetModuleHandleW(L"ntw16s32.dll");
+        BOOL (__cdecl *attached)(HWND)=module?
+            (BOOL (__cdecl *)(HWND))(void *)GetProcAddress(module,"Ntw16sWindowAttached"):NULL;
+        BORROW_CHECK((attached && attached(window))==modal_style_expected);
+        BORROW_CHECK(KillTimer(window,1));
+        BORROW_CHECK(wow_user_end_dialog(window,49));
+        return TRUE;
+    }
+    return FALSE;
+}
 static INT_PTR CALLBACK terminal_dialog_witness(HWND window, UINT message,
     WPARAM wp, LPARAM lp)
 {
@@ -787,20 +961,145 @@ static INT_PTR CALLBACK terminal_dialog_witness(HWND window, UINT message,
     return FALSE;
 }
 
-static void verify_native_class_creation(wow_class_lookup_context *classes)
+static VOID WINAPI modal_task_ended(void) { BORROW_CHECK(FALSE); }
+#ifdef WOW_REAL_DIALOG_LIFECYCLE_FIXTURE
+#include "wow_dialog_real_lifecycle.h"
+#endif
+static void verify_original_modal_task(void)
+{
+    wow_user_runtime runtime=WOW_USER_RUNTIME_INITIALIZER;
+    wow_user_runtime_thread binding={0};
+    wow_user_task_lifecycle *lifecycle;
+    PFNWOWHANDLERSIN inputs=*wow_user_registered_callbacks();
+    PFNWOWHANDLERSOUT outputs={0};
+    DWORD resource[32]={0};DLGTEMPLATE *dialog=(DLGTEMPLATE *)resource;
+    HANDLE wake=CreateEventW(NULL,FALSE,FALSE,NULL);
+    unsigned before=borrow_errors,mode,encoding,modes=1;
+    /* Modal Peek/Wait require InitTask's actual host_context/owner, not just
+     * the controlled task words used by the native creation-only matrix. */
+    BORROW_CHECK(wake && wow_user_runtime_initialize(&runtime));
+    fprintf(stderr,"WOW_MODAL_STAGE runtime\n");
+    BORROW_CHECK(wow_user_runtime_bind(&binding,&runtime,NULL,NULL));
+    /* The original modal queue calls the registered bridge. Its owner must
+     * be that bridge's lifecycle, not an unrelated directly-created model. */
+    inputs.pfnLocalAlloc=W32LocalAlloc;inputs.pfnLocalReAlloc=W32LocalReAlloc;
+    inputs.pfnLocalLock=W32LocalLock;inputs.pfnLocalUnlock=W32LocalUnlock;
+    inputs.pfnLocalSize=W32LocalSize;inputs.pfnLocalFree=W32LocalFree;
+    inputs.pfnGetExpWinVer=W32GetExpWinVer;inputs.pfnInitDlgCb=W32InitDlg;
+    inputs.pfn16GlobalAlloc=W32GlobalAlloc16;inputs.pfn16GlobalFree=W32GlobalFree16;
+    inputs.pfnEmptyCB=W32EmptyClipboard;inputs.pfnWowEditNextWord=W32EditNextWord;
+    inputs.pfnWowWndProcEx=destroy_in_callback;
+    BORROW_CHECK(UserRegisterWowHandlers(&inputs,&outputs)!=0);
+    BORROW_CHECK(outputs.pfnRegisterUserHungAppHandlers(modal_task_ended,wake));
+    lifecycle=runtime.lifecycle;
+    BORROW_CHECK(lifecycle && lifecycle->initialized);
+    fprintf(stderr,"WOW_MODAL_STAGE registered\n");
+    /* Launcher metadata is outside this native-only modal row. Enter the
+     * actual registered owner's original InitTask without inventing a launch. */
+    BORROW_CHECK(wow_user_task_lifecycle_init(lifecycle,0x0400,"MODAL.EXE",
+        0x4323,0,0,0,0,200,100,SW_HIDE));
+    fprintf(stderr,"WOW_MODAL_STAGE admitted\n");
+#ifdef WOW_REAL_DIALOG_LIFECYCLE_FIXTURE
+    verify_real_dialog_lifecycle(lifecycle);
+#else
+#ifdef WOW_STYLED_TERMINAL_FIXTURE
+    modes=3;
+#endif
+    dialog->style=WS_POPUP|WS_CAPTION|DS_MODALFRAME;dialog->cx=100;dialog->cy=40;
+    for(mode=0;mode<modes;++mode)for(encoding=0;encoding<2;++encoding){
+        INT_PTR result;PWND state;unsigned calls=modal_dialog_calls;
+        modal_retained=NULL;modal_style_expected=mode!=WINDOW_STYLE_OFF;
+        fprintf(stderr,"WOW_MODAL_STAGE enter mode=%u encoding=%u\n",mode,encoding);
+        result=wow_title_modal(GetModuleHandleW(NULL),dialog,NULL,
+            original_modal_witness,0,encoding?0:SCDLG_ANSI,mode);
+        fprintf(stderr,"WOW_MODAL_STAGE returned result=%ld error=%lu\n",(LONG)result,GetLastError());
+        BORROW_CHECK(result==49 && modal_dialog_calls==calls+1 && modal_retained);
+        state=wow_window_words_client_state_value(modal_retained);
+        BORROW_CHECK(state && (state->fnid&FNID_CLEANEDUP_BIT) &&
+            TestWF(state,WFDESTROYED) && !TestWF(state,WFDIALOGWINDOW) &&
+            ((PDIALOG)state)->pdlg==NULL && !IsWindow(state->head.h));
+        wow_window_words_release(modal_retained);modal_retained=NULL;
+    }
+#endif
+    BORROW_CHECK(outputs.pfnWOWCleanup((HANDLE)0x4323,0x4323,NULL,0));
+    BORROW_CHECK(wow_user_runtime_unbind(&binding));
+    BORROW_CHECK(wow_user_task_lifecycle_dispose(lifecycle));
+    BORROW_CHECK(CloseHandle(wake));
+#ifndef WOW_REAL_DIALOG_LIFECYCLE_FIXTURE
+    fprintf(stderr,"WOW_ORIGINAL_MODAL_CCPU errors=%u modes=%u aw=2 returned=49 pdlg_retired=1\n",
+        borrow_errors-before,modes);
+#else
+    (void)before;(void)mode;(void)encoding;(void)modes;
+#endif
+}
+
+static void verify_native_class_creation(wow_class_lookup_context *classes, ULONG teb)
 {
     static wow_user_object_table objects;
-    wow_task_order_process process = {0};
+    wow_user_task_lifecycle native_owner = {0};
+    wow_user_runtime runtime = WOW_USER_RUNTIME_INITIALIZER;
+    wow_user_runtime_thread binding = {0};
+    wow_task_order_entry task = {0};
+    wow_task_order_state task_state = {0};
+    wow_task_client_info client = {0};
+    wow_class_client_context class_client = {0};
+    PFNWOWHANDLERSIN callbacks = *wow_user_registered_callbacks();
+    PFNWOWHANDLERSIN saved_callbacks = callbacks;
+    PFNWOWHANDLERSOUT outputs = {0};
     wow_task_order_thread thread = {0};
     wow_standard_class_view native_class;
     CREATESTRUCTA request = {0};
     WW words = {0};
     HWND window;
-    HHOOK veto;
+    HHOOK veto, terminal;
     char text[32] = {0};
     unsigned before = borrow_errors;
-    process.classes = classes; process.objects = &objects; thread.ppi = &process;
-    verify_managed_slot_reuse(classes);
+    /* Supplemental native-module row: use the real original W32 callbacks,
+     * not guest task initialization or native replacement control bodies. */
+    callbacks.pfnLocalAlloc = W32LocalAlloc;
+    callbacks.pfnLocalReAlloc = W32LocalReAlloc;
+    callbacks.pfnLocalLock = W32LocalLock;
+    callbacks.pfnLocalUnlock = W32LocalUnlock;
+    callbacks.pfnLocalSize = W32LocalSize;
+    callbacks.pfnLocalFree = W32LocalFree;
+    callbacks.pfnGetExpWinVer = W32GetExpWinVer;
+    callbacks.pfnInitDlgCb = W32InitDlg;
+    callbacks.pfn16GlobalAlloc = W32GlobalAlloc16;
+    callbacks.pfn16GlobalFree = W32GlobalFree16;
+    callbacks.pfnEmptyCB = W32EmptyClipboard;
+    callbacks.pfnWowEditNextWord = W32EditNextWord;
+    BORROW_CHECK(UserRegisterWowHandlers(&callbacks, &outputs) != 0);
+    native_owner.process.classes = classes;
+    native_owner.process.objects = &objects;
+    native_owner.process.pwpi = &task_state;
+    native_owner.cleanup.shared = &native_owner.cleanup_shared;
+    BORROW_CHECK(wow_standard_classes_bind_cleanup(&native_owner.cleanup));
+    native_owner.initialized = TRUE;
+    runtime.lifecycle = &native_owner;
+    task.hTaskWow = 0x4321;
+    thread.ppi = &native_owner.process;
+    thread.ptdb = &task;
+    thread.pClientInfo = &client;
+    thread.dwExpWinVer = client.dwExpWinVer = W32GetExpWinVer(GetModuleHandle(NULL));
+    task_state.CSOwningThread = &thread;
+    class_client.classes = classes;
+    class_client.thread = &thread;
+    class_client.dwExpWinVer = thread.dwExpWinVer;
+    class_client.get_version = W32GetExpWinVer;
+    if (!wow_user_runtime_bind(&binding, &runtime, &thread, &class_client)) {
+        BORROW_CHECK(FALSE);
+        BORROW_CHECK(UserRegisterWowHandlers(&saved_callbacks, &outputs) != 0);
+        return;
+    }
+    terminal = SetWindowsHookExA(WH_CALLWNDPROCRET,
+        wow_window_terminal_observer,NULL,GetCurrentThreadId());
+    BORROW_CHECK(terminal != NULL);
+    if (!terminal) {
+        BORROW_CHECK(wow_user_runtime_unbind(&binding));
+        BORROW_CHECK(UserRegisterWowHandlers(&saved_callbacks,&outputs) != 0);
+        return;
+    }
+    verify_managed_slot_reuse(&thread);
     BORROW_CHECK(wow_standard_class_describe("BUTTON", &native_class));
     request.lpszClass = "BUTTON"; request.lpszName = "Native original";
     request.hInstance = GetModuleHandle(NULL); request.style = WS_POPUP;
@@ -808,7 +1107,7 @@ static void verify_native_class_creation(wow_class_lookup_context *classes)
     window = wow_window_create_boundA(&thread, native_class.atom, &request, &words, NULL);
     BORROW_CHECK(window != NULL);
     if (window) {
-        BORROW_CHECK(GetWindowLongA(window, GWL_WNDPROC) == (LONG)wow_window_native_proc);
+        BORROW_CHECK(selected_native_control(window));
         {
             HWND peer = wow_window_create_boundA(&thread, native_class.atom,
                 &request, &words, NULL);
@@ -835,7 +1134,6 @@ static void verify_native_class_creation(wow_class_lookup_context *classes)
         {
             wow_standard_class_view combo_class;
             CREATESTRUCTA combo_request = {0};
-            COMBOBOXINFO info = {sizeof(info)};
             HWND combo;
             wow_window_words_binding *child;
             unsigned i;
@@ -850,8 +1148,24 @@ static void verify_native_class_creation(wow_class_lookup_context *classes)
                 &combo_request, &words, NULL);
             BORROW_CHECK(combo != NULL);
             if (combo) {
-                BORROW_CHECK(GetComboBoxInfo(combo, &info));
-                children[0] = info.hwndItem; children[1] = info.hwndList;
+                wow_task_callback_scope scope;
+                BOOL entered = wow_task_callback_enter(&scope);
+                BORROW_CHECK(entered);
+                if (entered) {
+                    wow_window_words_binding *root = wow_window_words_acquire(combo);
+                    PCOMBOWND state = root ? (PCOMBOWND)
+                        wow_window_words_client_state_value(root) : NULL;
+                    BORROW_CHECK(state && state->pcbox &&
+                        state->pcbox->spwndEdit && state->pcbox->spwndList);
+                    if (state && state->pcbox) {
+                        if (state->pcbox->spwndEdit)
+                            children[0] = (HWND)state->pcbox->spwndEdit->head.h;
+                        if (state->pcbox->spwndList)
+                            children[1] = (HWND)state->pcbox->spwndList->head.h;
+                    }
+                    wow_window_words_release(root);
+                    BORROW_CHECK(wow_task_callback_leave(&scope));
+                }
                 for (i = 0; i < ARRAYSIZE(children); ++i) {
                     child = wow_window_words_acquire(children[i]);
                     BORROW_CHECK(children[i] != NULL && child != NULL);
@@ -861,8 +1175,7 @@ static void verify_native_class_creation(wow_class_lookup_context *classes)
                             view->adwWOW[1] == 0 && view->adwWOW[2] == 0);
                         BORROW_CHECK(wow_window_words_cleanup_value(child)->thread == &thread);
                         BORROW_CHECK(wow_window_class_words_value(child) != NULL);
-                        BORROW_CHECK(GetWindowLongA(children[i], GWL_WNDPROC) ==
-                            (LONG)wow_window_native_proc);
+                        BORROW_CHECK(selected_native_control(children[i]));
                     }
                     wow_window_words_release(child);
                 }
@@ -870,7 +1183,7 @@ static void verify_native_class_creation(wow_class_lookup_context *classes)
                  * Its metadata is retained independently of parent membership. */
                 BORROW_CHECK(SendMessageA(combo, CB_ADDSTRING, 0, (LPARAM)"item") == 0);
                 BORROW_CHECK(SendMessageA(combo, CB_GETCOUNT, 0, 0) == 1);
-                veto_native_atom = (ATOM)GetClassLongA(info.hwndList, GCW_ATOM);
+                veto_native_atom = (ATOM)GetClassLongA(children[1], GCW_ATOM);
                 BORROW_CHECK(DestroyWindow(combo));
                 BORROW_CHECK(objects.entries[LOWORD(combo)].bType == TYPE_FREE);
                 for (i = 0; i < ARRAYSIZE(children); ++i)
@@ -909,34 +1222,43 @@ static void verify_native_class_creation(wow_class_lookup_context *classes)
         DLGITEMTEMPLATE *item = (DLGITEMTEMPLATE *)((BYTE *)dialog +
             ((sizeof(*dialog) + 3 * sizeof(WORD) + 3) & ~3u));
         WORD *tail = (WORD *)(item + 1);
-        wow_task_order_entry task = {0};
-        wow_task_order_state task_state = {0};
-        wow_user_runtime runtime = WOW_USER_RUNTIME_INITIALIZER;
-        wow_user_task_lifecycle native_owner = {0};
-        wow_user_runtime_thread binding = {0};
         HWND button = NULL;
         wow_window_words_binding *child;
         unsigned terminal_case;
-        task.hTaskWow = 0x4321;
-        runtime.lifecycle = &native_owner; /* Single-task native callback fixture. */
-        thread.ptdb = &task; process.pwpi = &task_state;
-        task_state.CSOwningThread = &thread;
         dialog->style = WS_POPUP; dialog->cdit = 1;
         dialog->cx = 100; dialog->cy = 40;
         item->style = WS_CHILD | BS_PUSHBUTTON;
         item->x = 5; item->y = 5; item->cx = 30; item->cy = 12; item->id = 101;
         tail[0] = 0xffff; tail[1] = 0x0080; /* Standard BUTTON ordinal. */
         tail[2] = 'O'; tail[3] = 'K'; /* NUL title and zero extra bytes follow. */
-        BORROW_CHECK(wow_user_runtime_bind(&binding, &runtime, &thread, NULL));
         for (terminal_case = 0; terminal_case != 2; ++terminal_case) {
+#ifdef WOW_STYLED_TERMINAL_FIXTURE
+        void *style_scope=NULL;
+        DWORD style_gdi=0;
+        BOOL (__cdecl *query_style)(HWND)=NULL;
+        if (terminal_case) {
+            HMODULE style;
+            BORROW_CHECK(wow_style_creation_begin(WINDOW_STYLE_WIN16,&style_scope));
+            style=GetModuleHandleW(L"ntw16s32.dll");
+            query_style=style?(BOOL (__cdecl *)(HWND))(void *)GetProcAddress(style,"Ntw16sWindowAttached"):NULL;
+            BORROW_CHECK(style_scope && query_style);
+            style_gdi=GetGuiResources(GetCurrentProcess(),GR_GDIOBJECTS);
+        }
+#endif
         window = wow_user_server_create_dialog(GetModuleHandle(NULL), dialog,
             sizeof(template_words), NULL, terminal_dialog_witness, 0,
             SCDLG_CLIENT | SCDLG_ANSI | SCDLG_NOREVALIDATE);
+#ifdef WOW_STYLED_TERMINAL_FIXTURE
+        if (terminal_case) BORROW_CHECK(wow_style_creation_end(style_scope)==ERROR_SUCCESS);
+#endif
         BORROW_CHECK(window != NULL);
         if (window) {
             button = GetDlgItem(window, 101);
             child = wow_window_words_acquire(button);
             BORROW_CHECK(button != NULL && child != NULL);
+#ifdef WOW_STYLED_TERMINAL_FIXTURE
+            if (terminal_case) BORROW_CHECK(query_style && query_style(window) && query_style(button));
+#endif
             if (child) {
                 BORROW_CHECK(wow_window_words_cleanup_value(child)->thread == &thread);
                 BORROW_CHECK(wow_window_class_words_value(child) != NULL);
@@ -967,7 +1289,11 @@ static void verify_native_class_creation(wow_class_lookup_context *classes)
                         wow_window_words_cleanup_value(child)->native_cleanup);
                     fprintf(stderr, "WOW_TERMINAL_NATIVE_PROVIDER module=%s rva=%08lx\n",
                         provider_path, provider ? target - (DWORD)(ULONG_PTR)provider : 0);
-                    BORROW_CHECK(wow_window_words_cleanup_value(child)->native_cleanup != NULL);
+                    /* Original controls clean up by retained client FNID;
+                     * only native owners require the native fallback. */
+                    BORROW_CHECK(wow_control_client_procedure(GETFNID(
+                        wow_window_words_client_state_value(child)),FALSE) != NULL ||
+                        wow_window_words_cleanup_value(child)->native_cleanup != NULL);
                     {
                         WNDPROC retained = wow_window_words_cleanup_value(child)->native_cleanup;
                         WORD retained_fnid = wow_window_words_cleanup_value(child)->fnid;
@@ -980,6 +1306,9 @@ static void verify_native_class_creation(wow_class_lookup_context *classes)
                     BORROW_CHECK(wow_window_words_prepare_exit(button, child));
                 }
                 if (root) BORROW_CHECK(wow_window_words_prepare_exit(window, root));
+#ifdef WOW_STYLED_TERMINAL_FIXTURE
+                BORROW_CHECK(query_style && query_style(window) && query_style(button));
+#endif
                 BORROW_CHECK(wow_user_runtime_leave(&binding));
                 BORROW_CHECK(!wow_task_callback_enter(&rejected));
                 BORROW_CHECK(GetLastError() == ERROR_INVALID_STATE && !binding.exclusive_held);
@@ -994,7 +1323,12 @@ static void verify_native_class_creation(wow_class_lookup_context *classes)
                 BORROW_CHECK(!wow_window_create_boundA(&thread, native_class.atom,
                     &request, &words, NULL));
                 BORROW_CHECK(GetLastError() == ERROR_INVALID_STATE);
-                BORROW_CHECK(wow_native_DestroyWindow(window));
+                /* Match prepare_exit's whole destruction scope. Application
+                 * callbacks remain denied, but original resource finalizers
+                 * must run before their owning task storage disappears. */
+                binding.resource_cleanup_live = TRUE;
+                __try { BORROW_CHECK(wow_native_DestroyWindow(window)); }
+                __finally { binding.resource_cleanup_live = FALSE; }
                 BORROW_CHECK(terminal_dialog_callbacks == callbacks);
                 wow_window_words_release(root);
                 thread.TIF_flags &= ~WOW_TASK_TIF_INCLEANUP;
@@ -1009,13 +1343,24 @@ static void verify_native_class_creation(wow_class_lookup_context *classes)
             BORROW_CHECK(objects.entries[LOWORD(window)].bType == TYPE_FREE);
             BORROW_CHECK(button && !IsWindow(button) &&
                 objects.entries[LOWORD(button)].bType == TYPE_FREE);
+#ifdef WOW_STYLED_TERMINAL_FIXTURE
+            if (terminal_case) {
+                DWORD after;
+                GdiFlush();after=GetGuiResources(GetCurrentProcess(),GR_GDIOBJECTS);
+                BORROW_CHECK(after==style_gdi);
+                fprintf(stderr,"WOW_STYLED_TERMINAL_CCPU errors=%u style_before=1 neutralized=1 dialog=1 button=1 gdi=%lu/%lu\n",
+                    borrow_errors-before,style_gdi,after);
+            }
+#endif
         }
         }
-        BORROW_CHECK(wow_user_runtime_unbind(&binding));
-        thread.ptdb = NULL; process.pwpi = NULL;
         fprintf(stderr, "WOW_TERMINAL_PREPARE_CCPU errors=%u dialog_suppressed=1 native_button=1 creation_denied=1 callback_denied=1\n",
             borrow_errors - before);
     }
+    verify_dialog_cache(teb, &objects);
+    BORROW_CHECK(UnhookWindowsHookEx(terminal));
+    BORROW_CHECK(wow_user_runtime_unbind(&binding));
+    BORROW_CHECK(UserRegisterWowHandlers(&saved_callbacks, &outputs) != 0);
     fprintf(stderr, "WOW_NATIVE_CREATE_CCPU errors=%u forward=1 subclass=1 veto=1 retired=1 internal_combo=1 internal_dialog=1\n",
         borrow_errors - before);
 }
@@ -1076,10 +1421,29 @@ static void verify_unowned_window_projection(ULONG teb)
             {
                 wow_user_borrow_scope outer = {0}, inner = {0};
                 PWW words;
-                BOOL entered = wow_user_borrow_enter(&outer);
+                PWW previous_words = NULL;
+                ULONG held;
+                wow_window_words_binding *stored;
+                BOOL entered;
+                BOOL first_scope = wow_user_borrow_enter(&inner);
+                BORROW_CHECK(first_scope);
+                if (first_scope) {
+                    previous_words = FindPWW(window, 0);
+                    BORROW_CHECK(previous_words != NULL);
+                    BORROW_CHECK(wow_user_borrow_leave(&inner));
+                }
+                held = mvdm_softpc_wow_page_domain_borrow_window((ULONG)(ULONG_PTR)window);
+                BORROW_CHECK(held != 0);
+                if (held) {
+                    stored = mvdm_softpc_wow_page_domain_window_host_storage(held);
+                    BORROW_CHECK(stored && wow_window_words_value(stored) == previous_words);
+                    BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(held));
+                }
+                entered = wow_user_borrow_enter(&outer);
                 BORROW_CHECK(entered);
                 if (entered) {
                     words = FindPWW(window, 0); /* Retained original classifier. */
+                    BORROW_CHECK(words == previous_words);
                     BORROW_CHECK(words && words->iClass == GetStdClassNumber(class_name));
                     BORROW_CHECK(words && words->dwStyle == info.dwStyle &&
                         words->dwExStyle == info.dwExStyle);
@@ -1108,6 +1472,15 @@ static void verify_unowned_window_projection(ULONG teb)
         borrow_errors - before);
 }
 
+static unsigned host_storage_disposals;
+static unsigned host_storage_cookie;
+static void __cdecl dispose_host_storage_witness(void *storage)
+{
+    BORROW_CHECK(storage == &host_storage_cookie);
+    ++host_storage_disposals;
+    SetLastError(0x7447); /* Deallocation must not replace caller error. */
+}
+
 static void verify_observed_window_promotion(ULONG teb)
 {
     HWND window = CreateWindowExA(0, "STATIC", "Observed promotion", WS_POPUP,
@@ -1117,9 +1490,12 @@ static void verify_observed_window_promotion(ULONG teb)
     int length;
     ULONG full = (ULONG)(ULONG_PTR)window, before_free = 0, after_free = 0, largest;
     ULONG backing, observed_class, managed_class, previous, words[3];
+    ULONG identity_process = 0, identity_thread = 0;
+    mvdm_softpc_wow_window_words_view view, sentinel;
     const ULONG creator_words[3] = {0x87654321u, 0x11112222u, 0x33334444u};
     ULONG delta = c_sas_dw_at(teb + 0x60u);
     unsigned before = borrow_errors;
+    unsigned disposals_before = host_storage_disposals;
     BORROW_CHECK(window != NULL);
     if (!window) return;
     BORROW_CHECK(GetWindowInfo(window, &info));
@@ -1136,13 +1512,52 @@ static void verify_observed_window_promotion(ULONG teb)
     backing = mvdm_softpc_wow_page_domain_borrow_window(full);
     BORROW_CHECK(backing != 0);
     if (backing) {
+        BORROW_CHECK(!mvdm_softpc_wow_page_domain_window_host_storage(backing));
+        BORROW_CHECK(!mvdm_softpc_wow_page_domain_bind_window_host_storage(backing,
+            NULL, dispose_host_storage_witness));
+        BORROW_CHECK(!mvdm_softpc_wow_page_domain_bind_window_host_storage(backing,
+            &host_storage_cookie, NULL));
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_bind_window_host_storage(backing,
+            &host_storage_cookie, dispose_host_storage_witness));
+        BORROW_CHECK(!mvdm_softpc_wow_page_domain_retain_host_window(backing, NULL));
+        BORROW_CHECK(!mvdm_softpc_wow_page_domain_retain_host_window(backing, &host_storage_disposals));
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_retain_host_window(backing, &host_storage_cookie));
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(backing));
+        BORROW_CHECK(!mvdm_softpc_wow_page_domain_bind_window_host_storage(backing,
+            &host_storage_cookie, dispose_host_storage_witness));
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_window_host_storage(backing) ==
+            &host_storage_cookie && host_storage_disposals == disposals_before);
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(backing));
+        BORROW_CHECK(!mvdm_softpc_wow_page_domain_window_host_storage(backing));
+        BORROW_CHECK(host_storage_disposals == disposals_before);
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_borrow_window(full) == backing);
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_window_host_storage(backing) ==
+            &host_storage_cookie);
         observed_class = c_sas_dw_at(backing + 76u);
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_identity(backing,
+            &identity_process, &identity_thread));
+        BORROW_CHECK(identity_process == GetCurrentProcessId() &&
+            identity_thread == GetCurrentThreadId());
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_words_view(backing, &view));
+        BORROW_CHECK(view.style == info.dwStyle && view.exstyle == info.dwExStyle &&
+            view.module == (ULONG)(ULONG_PTR)GetModuleHandleA(NULL));
+        /* Native mutation is not a new committed observation. Reading the
+         * retained carrier must not secretly resample half of the fields. */
+        SetLastError(ERROR_SUCCESS);
+        BORROW_CHECK(SetWindowLongA(window, GWL_EXSTYLE,
+            info.dwExStyle | WS_EX_TOOLWINDOW) != 0 || GetLastError() == ERROR_SUCCESS);
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_words_view(backing, &view));
+        BORROW_CHECK(view.exstyle == info.dwExStyle);
         BORROW_CHECK(mvdm_softpc_wow_page_domain_exchange_window_word(
             backing, 0, 0x12345678u, &previous) && previous == 0);
         BORROW_CHECK(mvdm_softpc_wow_page_domain_observe_window(full, info.atomWindowType,
             GetClassLongA(window, GCL_STYLE), GetClassLongA(window, GCL_CBWNDEXTRA),
             name, (ULONG)length + 1u));
         BORROW_CHECK(c_sas_dw_at(backing + 76u) == observed_class);
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_words_view(backing, &view));
+        BORROW_CHECK(view.exstyle == (info.dwExStyle | WS_EX_TOOLWINDOW) &&
+            view.module == (ULONG)(ULONG_PTR)GetModuleHandleA(NULL) &&
+            view.words[0] == 0x12345678u);
         managed_class = mvdm_softpc_wow_page_domain_publish_named_class(
             info.atomWindowType, 0, 0, 0, 0, 0,
             GetClassLongA(window, GCL_STYLE), 0, 0, 0,
@@ -1151,7 +1566,7 @@ static void verify_observed_window_promotion(ULONG teb)
         BORROW_CHECK(!mvdm_softpc_wow_page_domain_publish_handle(LOWORD(full),
             (WORD)(HIWORD(full) ^ 1u), 1, 0, full, managed_class, NULL));
         BORROW_CHECK(!mvdm_softpc_wow_page_domain_publish_handle(LOWORD(full),
-            HIWORD(full), 1, 0, full, observed_class, NULL));
+            HIWORD(full), 1, 0, full, 0xdeadbeefu, NULL));
         BORROW_CHECK(c_sas_dw_at(backing + 76u) == observed_class);
         BORROW_CHECK(mvdm_softpc_wow_page_domain_publish_handle(LOWORD(full),
             HIWORD(full), 1, 0, full, managed_class, creator_words));
@@ -1165,10 +1580,43 @@ static void verify_observed_window_promotion(ULONG teb)
             memcmp(words, creator_words, sizeof(words)) == 0);
         BORROW_CHECK(mvdm_softpc_wow_page_domain_collect_observed_classes());
         BORROW_CHECK(mvdm_softpc_wow_page_domain_retire_handle(LOWORD(full), NULL));
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_retain_host_window(backing, &host_storage_cookie));
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_window_host_storage(backing) ==
+            &host_storage_cookie && host_storage_disposals == disposals_before);
+        BORROW_CHECK(!mvdm_softpc_wow_page_domain_bind_window_host_storage(backing,
+            &host_storage_cookie, dispose_host_storage_witness));
         BORROW_CHECK(!mvdm_softpc_wow_page_domain_retire_class(managed_class));
+        identity_process = identity_thread = 0;
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_identity(backing,
+            &identity_process, &identity_thread));
+        BORROW_CHECK(identity_process == GetCurrentProcessId() &&
+            identity_thread == GetCurrentThreadId());
         BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_words(backing, words) &&
             memcmp(words, creator_words, sizeof(words)) == 0);
+        SetLastError(0x4473);
         BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(backing));
+        /* The independent host scope pin must outlive the earlier ordinary
+         * backing borrow, even after logical retirement. */
+        BORROW_CHECK(host_storage_disposals == disposals_before);
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_window_host_storage(backing) ==
+            &host_storage_cookie);
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_words(backing, words));
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(backing));
+        BORROW_CHECK(host_storage_disposals == disposals_before + 1 &&
+            GetLastError() != 0x7447);
+        BORROW_CHECK(!mvdm_softpc_wow_page_domain_retain_host_window(backing, &host_storage_cookie));
+        BORROW_CHECK(!mvdm_softpc_wow_page_domain_window_host_storage(backing));
+        BORROW_CHECK(!mvdm_softpc_wow_page_domain_release_window(backing));
+        BORROW_CHECK(host_storage_disposals == disposals_before + 1);
+        FillMemory(&sentinel, sizeof(sentinel), 0xa5);
+        view = sentinel;
+        BORROW_CHECK(!mvdm_softpc_wow_page_domain_read_window_words_view(backing, &view));
+        BORROW_CHECK(memcmp(&view, &sentinel, sizeof(view)) == 0);
+        identity_process = 0x1234;
+        identity_thread = 0x5678;
+        BORROW_CHECK(!mvdm_softpc_wow_page_domain_read_window_identity(backing,
+            &identity_process, &identity_thread));
+        BORROW_CHECK(identity_process == 0x1234 && identity_thread == 0x5678);
         BORROW_CHECK(mvdm_softpc_wow_page_domain_retire_class(managed_class));
     }
     BORROW_CHECK(GetPropW(window, L"NTVDM.WOW.WindowWords") == NULL && IsWindow(window));
@@ -1176,6 +1624,237 @@ static void verify_observed_window_promotion(ULONG teb)
         before_free == after_free);
     BORROW_CHECK(DestroyWindow(window));
     fprintf(stderr, "WOW_VIEW_PROMOTION_CCPU errors=%u same_backing=1 words=1 stale_rejected=1 ownership=1 released=1\n",
+        borrow_errors - before);
+}
+
+static unsigned adopted_callback_calls;
+static DWORD WINAPI adopted_guest_callback(HWND window, UINT message, UINT wp,
+    LONG lp, DWORD procedure, PVOID words)
+{
+    /* Explicit guest callback double. Real CCPU publication and original
+     * dispatch boundary are exercised, not execution of guest instructions. */
+    if (message == WM_APP + 47) {
+        BORROW_CHECK(((PWW)words)->vpfnWndProc == 0x12340056u);
+        ++adopted_callback_calls;
+        return procedure;
+    }
+    return (DWORD)DefWindowProcA(window, message, wp, lp);
+}
+static LRESULT CALLBACK adoption_native_proc(HWND window, UINT message, WPARAM wp, LPARAM lp)
+{
+    if (message == WM_APP + 47) return 73;
+    return DefWindowProcA(window, message, wp, lp);
+}
+static void verify_native_window_first_subclass_case(BOOL existing_subclass)
+{
+    static wow_user_object_table objects;
+    wow_user_runtime runtime = WOW_USER_RUNTIME_INITIALIZER;
+    wow_user_runtime_thread runtime_binding = {0};
+    wow_task_order_process process = {0};
+    wow_task_order_thread thread = {0};
+    wow_task_order_entry task = {0};
+    wow_task_order_state task_state = {0};
+    wow_user_task_lifecycle native_owner = {0};
+    wow_class_client_context context = {0};
+    wow_user_borrow_scope scope;
+    WNDCLASSEXA cls = {sizeof(cls)};
+    HWND window;
+    PWW words;
+    ULONG backing, class_server, previous, native_predecessor;
+    BOOL previous_guest;
+    HHOOK terminal = NULL;
+    unsigned before = borrow_errors, callbacks = adopted_callback_calls;
+    cls.lpfnWndProc = adoption_native_proc;
+    cls.hInstance = GetModuleHandleA(NULL);
+    cls.lpszClassName = "S3_NATIVE_FIRST_SUBCLASS";
+    BORROW_CHECK(RegisterClassExA(&cls));
+    window = CreateWindowExA(0, cls.lpszClassName, "", 0, 0, 0, 16, 16,
+        NULL, NULL, cls.hInstance, NULL);
+    BORROW_CHECK(window != NULL);
+    if (!window) goto class_cleanup;
+    if (existing_subclass) BORROW_CHECK(SetWindowSubclass(window, native_chain, 47, 0));
+    native_predecessor = (ULONG)GetWindowLongA(window, GWL_WNDPROC);
+    BORROW_CHECK(native_predecessor != 0);
+    process.objects = &objects;
+    /* Match the real callback/menu boundary: an enrolled WOW thread owns a
+     * task and execution state, not just an object table. */
+    process.pwpi = &task_state;
+    task_state.CSOwningThread = &thread;
+    thread.ppi = &process;
+    thread.ptdb = &task;
+    task.hTaskWow = 0x4321u;
+    runtime.lifecycle = &native_owner;
+    context.thread = &thread;
+    context.callback = adopted_guest_callback;
+    if (!wow_user_runtime_bind(&runtime_binding, &runtime, &thread, &context)) {
+        BORROW_CHECK(FALSE); goto window_cleanup;
+    }
+    terminal = SetWindowsHookExA(WH_CALLWNDPROCRET,
+        wow_window_terminal_observer,NULL,GetCurrentThreadId());
+    BORROW_CHECK(terminal != NULL);
+    if (!terminal) goto unbind;
+    BORROW_CHECK(wow_user_window_refresh_return(window));
+    if (!wow_user_borrow_enter(&scope)) {
+        BORROW_CHECK(FALSE); goto unbind;
+    }
+    words = wow_user_borrow_window(window);
+    backing = mvdm_softpc_wow_page_domain_borrow_window((ULONG)(ULONG_PTR)window);
+    BORROW_CHECK(words && backing);
+    if (words && backing) {
+        class_server = c_sas_dw_at(backing + 76u);
+        /* Fail ownership publication before native installation. The same
+         * borrowed WW and observed identity must remain usable for retry. */
+        objects.entries[LOWORD(window)].bType = TYPE_MENU;
+        BORROW_CHECK(!wow_user_set_procedure(window,FALSE,0x92340056u,TRUE,&previous_guest));
+        ZeroMemory(&objects.entries[LOWORD(window)], sizeof(objects.entries[0]));
+        BORROW_CHECK(!GetPropW(window, L"NTVDM.WOW.WindowWords"));
+        BORROW_CHECK((ULONG)GetWindowLongA(window, GWL_WNDPROC) == native_predecessor);
+        BORROW_CHECK(c_sas_dw_at(backing + 76u) == class_server);
+        BORROW_CHECK(wow_user_borrow_window(window) == words);
+        previous = wow_user_set_procedure(window,FALSE,0x92340056u,TRUE,&previous_guest);
+        BORROW_CHECK(previous == native_predecessor && !previous_guest);
+        BORROW_CHECK(wow_user_borrow_window(window) == words);
+        BORROW_CHECK(c_sas_dw_at(backing + 76u) == class_server);
+        BORROW_CHECK(objects.entries[LOWORD(window)].pOwner == &thread);
+        /* Original walias.h: GWL_WOWvpfnWndProc aliases GWL_WOWDWORD2. */
+        (void)wow_user_set_window_longA(window, GWL_WOWDWORD2, 0x12340056u);
+        BORROW_CHECK((ULONG)SendMessageA(window, WM_APP + 47, 0, 0) == 0x92340056u);
+        BORROW_CHECK(adopted_callback_calls == callbacks + 1);
+        BORROW_CHECK(wow_user_set_procedure(window,FALSE,previous,FALSE,
+            &previous_guest) == 0x92340056u && previous_guest);
+        BORROW_CHECK(SendMessageA(window, WM_APP + 47, 0, 0) == 73);
+        if (existing_subclass) {
+            DWORD_PTR data = 1;
+            unsigned chain_calls = native_chain_calls;
+            /* Retaining the comctl predecessor must retain its chain, not
+             * substitute the raw leaf procedure. This is a carrier test;
+             * it does not claim NTW16S rendering or guest execution. */
+            BORROW_CHECK(GetWindowSubclass(window, native_chain, 47, &data) && data == 0);
+            (void)SendMessageA(window, WM_APP + 65, 0, 0);
+            BORROW_CHECK(native_chain_calls == chain_calls + 1);
+        }
+    }
+    BORROW_CHECK(DestroyWindow(window));
+    BORROW_CHECK(objects.entries[LOWORD(window)].bType == TYPE_FREE);
+    window = NULL;
+    if (backing) BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(backing));
+    BORROW_CHECK(wow_user_borrow_leave(&scope));
+    /* Native destruction completed outside a native-call wrapper. Reconcile
+     * its copied graph before the next independent allocation-balance case. */
+    BORROW_CHECK(wow_user_window_refresh_graph(NULL));
+unbind:
+    BORROW_CHECK(wow_user_runtime_unbind(&runtime_binding));
+window_cleanup:
+    if (window) BORROW_CHECK(DestroyWindow(window));
+    if (terminal) BORROW_CHECK(UnhookWindowsHookEx(terminal));
+class_cleanup:
+    BORROW_CHECK(UnregisterClassA(cls.lpszClassName, cls.hInstance));
+    fprintf(stderr, "WOW_NATIVE_FIRST_SUBCLASS_CCPU errors=%u existing_subclass=%u callback_double=1 rollback_retry=1 identity_retained=1\n",
+        borrow_errors - before, existing_subclass);
+}
+
+static void verify_native_window_first_subclass(void)
+{
+    verify_native_window_first_subclass_case(FALSE);
+    verify_native_window_first_subclass_case(TRUE);
+}
+
+static void verify_native_class_window_ownership(void)
+{
+    unsigned mode, before = borrow_errors;
+    /* Both explicit native CLS and preserve-current-CLS publication must
+     * retain the same WND generation. This is not a WNDPROC dispatch test. */
+    for (mode = 0; mode != 2; ++mode) {
+        HWND window = CreateWindowExA(0, "STATIC", "Native class owner", WS_POPUP,
+            0, 0, 24, 24, NULL, NULL, GetModuleHandleA(NULL), NULL);
+        WINDOWINFO info = {sizeof(info)};
+        ULONG full = (ULONG)(ULONG_PTR)window, backing, cls, words[3];
+        const ULONG replacement[3] = {0x12345678u, 0x23456789u, 0x34567890u};
+        char name[256];
+        int length;
+        BORROW_CHECK(window != NULL);
+        if (!window) continue;
+        BORROW_CHECK(GetWindowInfo(window, &info));
+        length = GetClassNameA(window, name, sizeof(name));
+        BORROW_CHECK(length > 0);
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_observe_window(full, info.atomWindowType,
+            GetClassLongA(window, GCL_STYLE), GetClassLongA(window, GCL_CBWNDEXTRA),
+            name, (ULONG)length + 1u));
+        backing = mvdm_softpc_wow_page_domain_borrow_window(full);
+        BORROW_CHECK(backing != 0);
+        if (backing) {
+            cls = c_sas_dw_at(backing + 76u);
+            BORROW_CHECK(cls != 0);
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_publish_handle(LOWORD(full),
+                HIWORD(full), 1, 0, full, mode ? cls : 0, replacement));
+            BORROW_CHECK(c_sas_dw_at(backing + 76u) == cls);
+            BORROW_CHECK(GetClassLongA(window, GCW_ATOM) == info.atomWindowType);
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_window_handle(LOWORD(full)) == full);
+            BORROW_CHECK(!mvdm_softpc_wow_page_domain_forget_observed_window(full));
+            BORROW_CHECK(!mvdm_softpc_wow_page_domain_publish_handle(LOWORD(full),
+                HIWORD(full), 1, 0, full, cls, NULL));
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_words(backing, words) &&
+                memcmp(words, replacement, sizeof(words)) == 0);
+            BORROW_CHECK(!mvdm_softpc_wow_page_domain_cancel_native_adoption(full, backing + 4));
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_cancel_native_adoption(full, backing));
+            BORROW_CHECK(!mvdm_softpc_wow_page_domain_cancel_native_adoption(full, backing));
+            BORROW_CHECK(c_sas_dw_at(backing + 76u) == cls);
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_words(backing, words) &&
+                memcmp(words, replacement, sizeof(words)) == 0);
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_publish_handle(LOWORD(full),
+                HIWORD(full), 1, 0, full, 0, NULL));
+            BORROW_CHECK(DestroyWindow(window));
+            window = NULL;
+            /* Even after native destruction the explicit managed owner,
+             * not an observation sweep, must retire the shared identity. */
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_collect_observed_windows());
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_window_handle(LOWORD(full)) == full);
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_retire_handle(LOWORD(full), NULL));
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_words(backing, words));
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(backing));
+            BORROW_CHECK(!mvdm_softpc_wow_page_domain_read_window_words(backing, words));
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_collect_observed_classes());
+        }
+        if (window) BORROW_CHECK(DestroyWindow(window));
+    }
+    fprintf(stderr, "WOW_NATIVE_CLASS_WND_OWNER_CCPU errors=%u same_class=1 same_generation=1 managed_retirement=1 modes=2\n",
+        borrow_errors - before);
+}
+
+static void verify_released_class_borrow(ULONG teb)
+{
+    HWND window = CreateWindowExA(0, "STATIC", "Class release", WS_POPUP,
+        0, 0, 24, 24, NULL, NULL, GetModuleHandleA(NULL), NULL);
+    WINDOWINFO info = {sizeof(info)};
+    ULONG full = (ULONG)(ULONG_PTR)window, cls, backing;
+    ULONG delta = c_sas_dw_at(teb + 0x60u), free_before, free_after, largest;
+    unsigned before = borrow_errors;
+    BORROW_CHECK(window && GetWindowInfo(window, &info));
+    if (!window) return;
+    BORROW_CHECK(VdmQueryFreeVirtualMemory(&free_before, &largest) >= 0);
+    cls = mvdm_softpc_wow_page_domain_publish_named_class(info.atomWindowType,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, "STATIC", 7);
+    BORROW_CHECK(cls != 0);
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_publish_handle(LOWORD(full),
+        HIWORD(full), 1, 0, full, cls, NULL));
+    backing = mvdm_softpc_wow_page_domain_borrow_window(full);
+    BORROW_CHECK(backing != 0);
+    BORROW_CHECK(!mvdm_softpc_wow_page_domain_release_class(cls));
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_retire_handle(LOWORD(full), NULL));
+    BORROW_CHECK(!mvdm_softpc_wow_page_domain_retire_class(cls));
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_release_class(cls));
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_collect_observed_classes());
+    BORROW_CHECK(c_sas_dw_at(backing + 76u) == cls &&
+        (WORD)c_sas_dw_at(cls - delta + 4u) == info.atomWindowType);
+    BORROW_CHECK(!mvdm_softpc_wow_page_domain_publish_handle(LOWORD(full),
+        HIWORD(full), 1, 0, full, cls, NULL));
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(backing));
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_collect_observed_classes());
+    BORROW_CHECK(!mvdm_softpc_wow_page_domain_release_class(cls));
+    BORROW_CHECK(VdmQueryFreeVirtualMemory(&free_after, &largest) >= 0 &&
+        free_before == free_after);
+    BORROW_CHECK(DestroyWindow(window));
+    fprintf(stderr, "WOW_CLASS_RELEASE_CCPU errors=%u live_rejected=1 borrowed_safe=1 no_resurrection=1 reclaimed=1\n",
         borrow_errors - before);
 }
 
@@ -1187,6 +1866,7 @@ static void verify_observed_window_retirement(void)
     WINDOWINFO info = {sizeof(info)};
     ULONG full = (ULONG)(ULONG_PTR)window, first, second, cls, previous, words[3];
     ULONG before_free = 0, after_free = 0, largest;
+    mvdm_softpc_wow_window_words_view view;
     unsigned before = borrow_errors;
     BORROW_CHECK(window != NULL);
     if (!window) return;
@@ -1222,6 +1902,10 @@ static void verify_observed_window_retirement(void)
         BORROW_CHECK(!mvdm_softpc_wow_page_domain_retire_class(cls));
         BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_words(second, words) &&
             words[0] == 0xabcdef12u);
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_words_view(second, &view));
+        BORROW_CHECK(view.words[0] == 0xabcdef12u && view.style == info.dwStyle &&
+            view.exstyle == info.dwExStyle &&
+            view.module == (ULONG)(ULONG_PTR)GetModuleHandleA(NULL));
         BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(second));
         BORROW_CHECK(!mvdm_softpc_wow_page_domain_release_window(second));
         BORROW_CHECK(mvdm_softpc_wow_page_domain_collect_observed_windows());
@@ -1245,6 +1929,7 @@ static void verify_failed_window_reclamation_case(BOOL retained_owner)
     WINDOWINFO info = {sizeof(info)};
     ULONG full = (ULONG)(ULONG_PTR)window, backing, cls, words[3], retained = 0;
     ULONG before_free = 0, after_free = 0, largest;
+    unsigned disposals_before = host_storage_disposals;
     BORROW_CHECK(window != NULL);
     if (!window) return;
     BORROW_CHECK(GetWindowInfo(window, &info));
@@ -1255,6 +1940,8 @@ static void verify_failed_window_reclamation_case(BOOL retained_owner)
     BORROW_CHECK(backing != 0);
     if (backing) {
         cls = c_sas_dw_at(backing + 76u);
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_bind_window_host_storage(backing,
+            &host_storage_cookie, dispose_host_storage_witness));
         if (retained_owner) {
             BORROW_CHECK(mvdm_softpc_wow_page_domain_retire_handle(LOWORD(full), &retained));
             BORROW_CHECK(retained == backing);
@@ -1267,15 +1954,19 @@ static void verify_failed_window_reclamation_case(BOOL retained_owner)
             mvdm_softpc_wow_page_domain_release_retained_window(backing) :
             mvdm_softpc_wow_page_domain_release_window(backing));
         BORROW_CHECK(wow_fixture_window_free_failures() == 1);
+        BORROW_CHECK(host_storage_disposals == disposals_before);
         BORROW_CHECK(!mvdm_softpc_wow_page_domain_release_window(backing));
         BORROW_CHECK(!mvdm_softpc_wow_page_domain_release_retained_window(backing));
         BORROW_CHECK(!mvdm_softpc_wow_page_domain_read_window_words(backing, words));
         BORROW_CHECK(!mvdm_softpc_wow_page_domain_collect_retired_windows());
+        BORROW_CHECK(host_storage_disposals == disposals_before);
         BORROW_CHECK(!mvdm_softpc_wow_page_domain_retire_class(cls));
         BORROW_CHECK(c_sas_dw_at(backing) == full);
         wow_fixture_fail_window_free(0);
         BORROW_CHECK(mvdm_softpc_wow_page_domain_collect_retired_windows());
+        BORROW_CHECK(host_storage_disposals == disposals_before + 1);
         BORROW_CHECK(mvdm_softpc_wow_page_domain_collect_retired_windows());
+        BORROW_CHECK(host_storage_disposals == disposals_before + 1);
         BORROW_CHECK(mvdm_softpc_wow_page_domain_collect_observed_classes());
     }
     BORROW_CHECK(VdmQueryFreeVirtualMemory(&after_free, &largest) >= 0 &&
@@ -1336,6 +2027,7 @@ static void verify_dead_graph_retirement(ULONG teb)
     ULONG delta = c_sas_dw_at(teb + 0x60u), root, i;
     mvdm_softpc_wow_window_links links[3] = {0}, replacement = {0};
     unsigned before = borrow_errors;
+    unsigned disposals_before = host_storage_disposals;
     BORROW_CHECK(a && b);
     if (!a || !b) goto cleanup;
     BORROW_CHECK(VdmQueryFreeVirtualMemory(&free_before, &largest) >= 0);
@@ -1351,6 +2043,8 @@ static void verify_dead_graph_retirement(ULONG teb)
     BORROW_CHECK(mvdm_softpc_wow_page_domain_publish_window_links(3, links));
     held = mvdm_softpc_wow_page_domain_borrow_window(dead[0]);
     BORROW_CHECK(held != 0);
+    if (held) BORROW_CHECK(mvdm_softpc_wow_page_domain_bind_window_host_storage(held,
+        &host_storage_cookie, dispose_host_storage_witness));
     root = mvdm_softpc_wow_page_domain_borrow_window(desktop);
     BORROW_CHECK(root != 0);
     replacement.window = desktop;
@@ -1395,7 +2089,10 @@ static void verify_dead_graph_retirement(ULONG teb)
         !mvdm_softpc_wow_page_domain_window_handle(LOWORD(dead[1])));
     BORROW_CHECK(held && c_sas_dw_at(held) == dead[0] &&
         c_sas_dw_at(held + 24u) == root + delta && c_sas_dw_at(held + 20u) == 0);
+    BORROW_CHECK(host_storage_disposals == disposals_before &&
+        mvdm_softpc_wow_page_domain_window_host_storage(held) == &host_storage_cookie);
     BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(held));
+    BORROW_CHECK(host_storage_disposals == disposals_before + 1);
     BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(root));
     BORROW_CHECK(mvdm_softpc_wow_page_domain_collect_observed_classes());
     BORROW_CHECK(VdmQueryFreeVirtualMemory(&free_after, &largest) >= 0 && free_after == free_before);
@@ -1573,12 +2270,23 @@ static void verify_external_observation_churn(BOOL hold)
     if (!local) goto cleanup;
     for (iteration = 0; iteration < 32u; ++iteration) {
         ULONG backing;
+        mvdm_softpc_wow_window_observation help_view;
+        BORROW_CHECK(SetWindowContextHelpId(local, 1000u + iteration));
         BORROW_CHECK(SetWindowPos(local, NULL, 10 + iteration, 20, 24, 24,
             SWP_NOZORDER | SWP_NOACTIVATE));
         BORROW_CHECK(wow_user_window_project_graph(&local, 1));
         backing = mvdm_softpc_wow_page_domain_borrow_window((ULONG)(ULONG_PTR)local);
         BORROW_CHECK(backing && c_sas_dw_at(backing + 40u) == 10u + iteration);
-        if (backing) BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(backing));
+        if (backing) {
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_view(backing, &help_view));
+            BORROW_CHECK(help_view.context_help_id == 1000u + iteration);
+            BORROW_CHECK(SetWindowContextHelpId(local, 2000u + iteration));
+            /* A retained read cannot requery native HWND behind the
+             * transaction. Only the next publication changes this value. */
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_view(backing, &help_view));
+            BORROW_CHECK(help_view.context_help_id == 1000u + iteration);
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(backing));
+        }
     }
     if (hold) {
         mvdm_softpc_wow_window_observation *view;
@@ -1601,6 +2309,21 @@ static void verify_external_observation_churn(BOOL hold)
             HeapFree(GetProcessHeap(), 0, view);
         }
     }
+    {
+        ULONG backing = mvdm_softpc_wow_page_domain_borrow_window((ULONG)(ULONG_PTR)local);
+        mvdm_softpc_wow_window_observation help_view;
+        BORROW_CHECK(backing != 0);
+        BORROW_CHECK(DestroyWindow(local));
+        local = NULL;
+        BORROW_CHECK(wow_user_window_project_graph(&root, 1));
+        if (backing) {
+            /* Old generation remains readable after native destruction and
+             * withdrawal; there is no native lookup in this retained read. */
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_view(backing, &help_view));
+            BORROW_CHECK(help_view.context_help_id == 1031u);
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(backing));
+        }
+    }
 cleanup:
     if (stop) SetEvent(stop);
     if (process.hProcess) {
@@ -1619,6 +2342,79 @@ cleanup:
     if (hold) fprintf(stderr, "WOW_EXTERNAL_CAPTURE_CCPU errors=%u dead_native=1 committed_observation=1\n",
         borrow_errors - before);
     else fprintf(stderr, "WOW_EXTERNAL_OBSERVATION_CCPU errors=%u separate_process=1 local_updates=32\n",
+        borrow_errors - before);
+}
+
+static void verify_local_observation_commit(void)
+{
+    HWND windows[2] = {0}, desktop = GetDesktopWindow();
+    wow_window_words_binding *bindings[2] = {0};
+    ULONG backings[2] = {0}, indices[2] = {~0u, ~0u};
+    DWORD styles[2] = {0}, modules[2] = {0};
+    mvdm_softpc_wow_window_observation *view = NULL;
+    ULONG count = 0, i, j;
+    WW words = {0};
+    unsigned before = borrow_errors;
+    for (i = 0; i < 2; ++i) {
+        windows[i] = CreateWindowExA(0, "STATIC", "Local commit", WS_POPUP,
+            0, 0, 24, 24, NULL, NULL, GetModuleHandleA(NULL), NULL);
+        BORROW_CHECK(windows[i] != NULL);
+        if (!windows[i]) goto done;
+        BORROW_CHECK(wow_window_words_attach(windows[i], &words));
+        bindings[i] = wow_window_words_acquire(windows[i]);
+        BORROW_CHECK(bindings[i] != NULL);
+        if (!bindings[i]) goto done;
+    }
+    BORROW_CHECK(wow_user_window_project_graph(windows, 2));
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_copy_window_view(0, NULL, &count));
+    if (!count) goto done;
+    view = HeapAlloc(GetProcessHeap(), 0, count * sizeof(*view));
+    BORROW_CHECK(view != NULL);
+    if (!view) goto done;
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_copy_window_view(count, view, &count));
+    for (i = 0; i < 2; ++i) {
+        for (j = 0; j < count; ++j)
+            if (view[j].links.window == (ULONG)(ULONG_PTR)windows[i]) indices[i] = j;
+        BORROW_CHECK(indices[i] != ~0u);
+        if (indices[i] == ~0u) goto done;
+        styles[i] = wow_window_words_value(bindings[i])->dwStyle;
+        modules[i] = (DWORD)(ULONG_PTR)wow_window_words_value(bindings[i])->hInstance;
+        backings[i] = mvdm_softpc_wow_page_domain_borrow_window((ULONG)(ULONG_PTR)windows[i]);
+        BORROW_CHECK(backings[i] != 0);
+        if (!backings[i]) goto done;
+        /* Synthetic observations test the commit, not native style policy. */
+        view[indices[i]].style ^= WS_DISABLED;
+        view[indices[i]].module = 0x12340000u + i;
+    }
+    {
+        WORD atom = view[indices[1]].descriptor.atom;
+        view[indices[1]].descriptor.atom = 0;
+        BORROW_CHECK(!wow_window_words_project_observed(count, view));
+        for (i = 0; i < 2; ++i) {
+            BORROW_CHECK(wow_window_words_value(bindings[i])->dwStyle == styles[i]);
+            BORROW_CHECK((DWORD)(ULONG_PTR)wow_window_words_value(bindings[i])->hInstance == modules[i]);
+            BORROW_CHECK(c_sas_dw_at(backings[i] + 168u) == styles[i]);
+        }
+        view[indices[1]].descriptor.atom = atom;
+    }
+    SetLastError(0x4473);
+    BORROW_CHECK(wow_window_words_project_observed(count, view));
+    BORROW_CHECK(GetLastError() == 0x4473);
+    for (i = 0; i < 2; ++i) {
+        BORROW_CHECK(wow_window_words_value(bindings[i])->dwStyle == view[indices[i]].style);
+        BORROW_CHECK((DWORD)(ULONG_PTR)wow_window_words_value(bindings[i])->hInstance == view[indices[i]].module);
+        BORROW_CHECK(c_sas_dw_at(backings[i] + 168u) == view[indices[i]].style);
+    }
+done:
+    if (view) HeapFree(GetProcessHeap(), 0, view);
+    for (i = 0; i < 2; ++i) {
+        if (windows[i]) wow_window_words_detach(windows[i]);
+        wow_window_words_release(bindings[i]);
+        if (backings[i]) BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(backings[i]));
+        if (windows[i]) BORROW_CHECK(DestroyWindow(windows[i]));
+    }
+    BORROW_CHECK(wow_user_window_project_graph(&desktop, 1));
+    fprintf(stderr, "WOW_LOCAL_OBSERVATION_COMMIT_CCPU errors=%u rows=2 rollback=1 commit=1\n",
         borrow_errors - before);
 }
 
@@ -1660,8 +2456,31 @@ static void verify_native_slot_reuse(void)
                 BORROW_CHECK(view[row].style & WS_POPUP);
                 BORROW_CHECK(view[row].process_id == GetCurrentProcessId() &&
                     view[row].thread_id == GetCurrentThreadId());
+                BORROW_CHECK(view[row].module == (ULONG)(ULONG_PTR)GetModuleHandleA(NULL));
                 BORROW_CHECK(view[row].links.parent == (ULONG)(ULONG_PTR)desktop);
                 BORROW_CHECK(view[row].window_rect[2] - view[row].window_rect[0] == 24);
+                {
+                    DWORD original_style = view[row].style;
+                    ULONG backing;
+                    /* Synthetic copied observation, not a mutation of native
+                     * window styles: original TestwndChild excludes a popup
+                     * even when WS_CHILD is also set. Its menu slot must not
+                     * be overwritten or exported as an arbitrary child ID. */
+                    view[row].style |= WS_CHILD | WS_POPUP;
+                    view[row].control_id = 0xfedcba98u;
+                    BORROW_CHECK(mvdm_softpc_wow_page_domain_project_window_graph(returned, view));
+                    backing = mvdm_softpc_wow_page_domain_borrow_window(old_full);
+                    BORROW_CHECK(backing != 0);
+                    if (backing) {
+                        BORROW_CHECK(c_sas_dw_at(backing + 104u) == 0u);
+                        BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(backing));
+                    }
+                    BORROW_CHECK(mvdm_softpc_wow_page_domain_window_menu(old_full, 0));
+                    BORROW_CHECK(mvdm_softpc_wow_page_domain_copy_window_view(count, view, &returned));
+                    BORROW_CHECK(view[row].links.window == old_full && view[row].control_id == 0);
+                    view[row].style = original_style;
+                    BORROW_CHECK(mvdm_softpc_wow_page_domain_project_window_graph(returned, view));
+                }
             }
             BORROW_CHECK(found);
             HeapFree(GetProcessHeap(), 0, view);
@@ -1940,8 +2759,11 @@ cleanup:
 }
 #endif
 
+static BOOL verify_callback_borrow(HWND window, ULONG expected);
 static void verify_observed_words_enrollment(void)
 {
+    wow_user_runtime runtime = WOW_USER_RUNTIME_INITIALIZER;
+    wow_user_runtime_thread runtime_binding = {0};
     HWND window = CreateWindowExA(0, "STATIC", "Observed words", WS_POPUP,
         0, 0, 24, 24, NULL, NULL, GetModuleHandleA(NULL), NULL);
     WINDOWINFO info = {sizeof(info)};
@@ -1952,6 +2774,14 @@ static void verify_observed_words_enrollment(void)
     unsigned before = borrow_errors;
     BORROW_CHECK(window != NULL);
     if (!window) return;
+    /* Public validation requires the same real execution-domain carrier
+     * as its production caller. This row has no original task/callback,
+     * so do not invent a TDB or register a success-only control provider. */
+    if (!wow_user_runtime_bind(&runtime_binding, &runtime, NULL, NULL)) {
+        BORROW_CHECK(FALSE);
+        DestroyWindow(window);
+        return;
+    }
     BORROW_CHECK(GetWindowInfo(window, &info));
     BORROW_CHECK(VdmQueryFreeVirtualMemory(&before_free, &largest) >= 0);
     BORROW_CHECK(mvdm_softpc_wow_page_domain_observe_window(full,
@@ -1961,9 +2791,55 @@ static void verify_observed_words_enrollment(void)
     alias = wow_user_borrow_window(window);
     BORROW_CHECK(alias != NULL);
     BORROW_CHECK(GetPropW(window, L"NTVDM.WOW.WindowWords") == NULL);
+    {
+        struct tagWND *state;
+        ULONG stale = ((HIWORD(full) == 1u ? 2u : 1u) << 16) | LOWORD(full);
+        SetLastError(0x7654);
+        state = wow_user_borrow_window_state(window);
+        BORROW_CHECK(state != NULL && GetLastError() == 0x7654);
+        BORROW_CHECK(wow_window_client_validate_window(window) == state);
+        BORROW_CHECK(GetLastError() == 0x7654);
+        BORROW_CHECK(wow_window_client_validate_window_no_rip(window) == state);
+        BORROW_CHECK(wow_window_client_desktop() != NULL);
+        BORROW_CHECK(wow_window_client_desktop() ==
+            wow_window_client_validate_window(GetDesktopWindow()));
+        BORROW_CHECK(!wow_window_words_owns_client_state(
+            wow_user_borrow_observed_binding(window), state));
+        BORROW_CHECK(wow_user_borrow_window_state((HWND)(ULONG_PTR)LOWORD(full)) == state);
+        BORROW_CHECK(wow_user_borrow_window_state(
+            (HWND)(ULONG_PTR)(0xffff0000u | LOWORD(full))) == state);
+        BORROW_CHECK(wow_user_borrow_window_state((HWND)(ULONG_PTR)stale) == NULL);
+        BORROW_CHECK(GetLastError() == ERROR_INVALID_WINDOW_HANDLE);
+        BORROW_CHECK(wow_user_borrow_window_state(NULL) == NULL);
+        BORROW_CHECK(GetLastError() == ERROR_INVALID_WINDOW_HANDLE);
+        SetLastError(0x7654);
+        BORROW_CHECK(wow_window_client_validate_window_no_rip((HWND)(ULONG_PTR)stale) == NULL);
+        BORROW_CHECK(GetLastError() == 0x7654);
+        BORROW_CHECK(wow_window_client_validate_window((HWND)(ULONG_PTR)stale) == NULL);
+        BORROW_CHECK(GetLastError() == ERROR_INVALID_WINDOW_HANDLE);
+    }
     initial.adwWOW[0] = 0x12345678u;
     BORROW_CHECK(wow_window_words_attach(window, &initial));
     BORROW_CHECK(alias && alias->adwWOW[0] == initial.adwWOW[0]);
+    {
+        wow_user_borrow_scope callback_outer = {0}, callback_inner = {0};
+        ULONG backing = mvdm_softpc_wow_page_domain_borrow_window(full);
+        BORROW_CHECK(backing != 0);
+        BORROW_CHECK(wow_user_borrow_enter(&callback_outer));
+        SetLastError(0x7654);
+        BORROW_CHECK(wow_user_borrow_set_callback(window));
+        BORROW_CHECK(GetLastError() == 0x7654 && verify_callback_borrow(window, backing));
+        BORROW_CHECK(!wow_user_borrow_set_callback(window) &&
+            GetLastError() == ERROR_ALREADY_EXISTS);
+        BORROW_CHECK(wow_user_borrow_enter(&callback_inner));
+        BORROW_CHECK(verify_callback_borrow(window, backing));
+        BORROW_CHECK(wow_user_borrow_set_callback(window));
+        BORROW_CHECK(wow_user_borrow_leave(&callback_inner));
+        BORROW_CHECK(verify_callback_borrow(window, backing));
+        BORROW_CHECK(wow_user_borrow_leave(&callback_outer));
+        BORROW_CHECK(verify_callback_borrow(window, 0));
+        if (backing) BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(backing));
+    }
     BORROW_CHECK(wow_user_borrow_enter(&inner));
     nested = wow_user_borrow_window(window);
     BORROW_CHECK(alias && nested == alias);
@@ -1983,6 +2859,7 @@ static void verify_observed_words_enrollment(void)
     BORROW_CHECK(mvdm_softpc_wow_page_domain_collect_observed_classes());
     BORROW_CHECK(VdmQueryFreeVirtualMemory(&after_free, &largest) >= 0 &&
         before_free == after_free);
+    BORROW_CHECK(wow_user_runtime_unbind(&runtime_binding));
     fprintf(stderr, "WOW_VIEW_WORDS_CCPU errors=%u same_alias=1 creator_words=1 duplicate_safe=1 nested_retirement=1\n",
         borrow_errors - before);
 }
@@ -2084,16 +2961,46 @@ static int verify_native_class_projection(ULONG teb)
         {
             WORD matched = 0;
             WNDPROC canonical = NULL;
+            WNDPROC selected_a = wow_control_client_procedure(entry->fnid, FALSE);
+            WNDPROC selected_w = wow_control_client_procedure(entry->fnid, TRUE);
+            BOOL list_alias = (entry->fnid == FNID_LISTBOX ||
+                entry->fnid == FNID_COMBOLISTBOX) &&
+                wow_control_client_procedure(FNID_LISTBOX, FALSE) ==
+                wow_control_client_procedure(FNID_COMBOLISTBOX, FALSE);
             WNDCLASSEXW wide = {sizeof(wide)};
+            if (entry->fnid == FNID_DIALOG) {
+                selected_a = wow_dialog_window_procA;
+                selected_w = wow_dialog_window_procW;
+            }
+            BORROW_CHECK(GetClassInfoExW(NULL, MAKEINTRESOURCEW(entry->atomClassName), &wide));
+            if (!selected_a) selected_a = native_class.native.lpfnWndProc;
+            if (!selected_w) selected_w = wide.lpfnWndProc;
             SetLastError(0x447a3001);
+            /* /OPT:ICF may fold the two original identical list procedures
+             * and their wrappers. An address alone then has no unique FNID;
+             * rejection must leave both outputs and last-error unchanged. */
+            if (list_alias) {
+                BORROW_CHECK(wow_control_client_procedure(FNID_LISTBOX, TRUE) ==
+                    wow_control_client_procedure(FNID_COMBOLISTBOX, TRUE));
+                BORROW_CHECK(!wow_class_words_match_native(&classes,
+                    selected_a, FALSE, &matched, &canonical));
+                BORROW_CHECK(!wow_class_words_match_native(&classes,
+                    selected_w, TRUE, &matched, &canonical));
+                BORROW_CHECK(!matched && !canonical && GetLastError() == 0x447a3001);
+            } else {
             BORROW_CHECK(wow_class_words_match_native(&classes,
-                native_class.native.lpfnWndProc, FALSE, &matched, &canonical));
+                selected_a, FALSE, &matched, &canonical));
             BORROW_CHECK(GetLastError() == 0x447a3001 && matched == entry->fnid &&
-                canonical == native_class.native.lpfnWndProc);
-            BORROW_CHECK(GetClassInfoExW(NULL, MAKEINTATOM(entry->atomClassName), &wide));
+                canonical == selected_a);
             BORROW_CHECK(wow_class_words_match_native(&classes,
-                wide.lpfnWndProc, TRUE, &matched, &canonical));
-            BORROW_CHECK(matched == entry->fnid && canonical == native_class.native.lpfnWndProc);
+                selected_w, TRUE, &matched, &canonical));
+            BORROW_CHECK(matched == entry->fnid && canonical == selected_a);
+            }
+            /* Recovering a control must not silently classify its unrelated
+             * modern implementation as the original canonical owner. */
+            if (selected_a != native_class.native.lpfnWndProc)
+                BORROW_CHECK(!wow_class_words_match_native(&classes,
+                    native_class.native.lpfnWndProc, FALSE, &matched, &canonical));
             matched = 0x1234;
             canonical = (WNDPROC)(ULONG_PTR)1;
             BORROW_CHECK(!wow_class_words_match_native(&classes,
@@ -2139,7 +3046,7 @@ static int verify_native_class_projection(ULONG teb)
         BORROW_CHECK(VdmQueryFreeVirtualMemory(&remaining_after, &largest) >= 0 &&
             remaining_after == remaining_before);
     }
-    verify_native_class_creation(&classes);
+    verify_native_class_creation(&classes, teb);
     BORROW_CHECK(wow_class_words_forget_native(&classes));
     BORROW_CHECK(classes.pclsPublicList == NULL);
     BORROW_CHECK(VdmQueryFreeVirtualMemory(&free_after, &largest) >= 0 && free_after == free_before);
@@ -2147,6 +3054,9 @@ static int verify_native_class_projection(ULONG teb)
     if (free_before != free_after) trace_class_lifetime_view("after-native-classes");
     verify_unowned_window_projection(teb);
     verify_observed_window_promotion(teb);
+    verify_native_class_window_ownership();
+    verify_native_window_first_subclass();
+    verify_released_class_borrow(teb);
     verify_observed_window_retirement();
     verify_dead_graph_retirement(teb);
     verify_graph_preparation_rollback();
@@ -2213,7 +3123,7 @@ static BOOL verify_menu_creation_rollback(wow_user_runtime_thread *binding)
     BOOL result = FALSE;
     process->classes = &classes;
     cls.hInstance = GetModuleHandleA(NULL);
-    cls.lpfnWndProc = wow_window_native_proc;
+    cls.lpfnWndProc = wow_window_class_creation_proc;
     cls.lpszClassName = "S2MenuCreationRollback";
     atom = wow_class_words_register_target(&classes, &cls, &name,
         class_words, NULL, &target);
@@ -2686,6 +3596,18 @@ cleanup:
     return result;
 }
 
+static BOOL verify_callback_borrow(HWND window, ULONG expected)
+{
+    ULONG backing = 0xdeadbeefu;
+    BOOL matched;
+    SetLastError(0x7654);
+    if (!mvdm_softpc_wow_page_domain_borrow_callback_window(
+            (ULONG)(ULONG_PTR)window, &backing)) return FALSE;
+    matched = backing == expected && GetLastError() == 0x7654;
+    if (backing && !mvdm_softpc_wow_page_domain_release_window(backing)) return FALSE;
+    return matched;
+}
+
 static int run_fixture(void)
 {
     session owner;
@@ -2716,6 +3638,11 @@ static int run_fixture(void)
     int physical_mapping_started = 0;
     int passed = 0;
     char const *stage = "initial";
+#ifdef WOW_WINDOW_BORROW_FIXTURE
+    unsigned shutdown_disposals = 0;
+    BOOL shutdown_storage_armed = FALSE;
+    HWND shutdown_window = NULL;
+#endif
 
     /* A worker domain is never a process-global fallback: without a bound
      * session or protected mode, admission must leave no published view. */
@@ -2997,6 +3924,8 @@ static int run_fixture(void)
         ULONG native_desktop = (ULONG)(ULONG_PTR)GetDesktopWindow();
         ULONG root = c_sas_dw_at(handles + LOWORD(native_desktop) * 16u) - delta;
         ULONG child, sibling, retired = 0u;
+        mvdm_softpc_wow_window_observation retained_view;
+        ULONG relation_backing;
         links[0].window = links[1].parent = native_desktop;
         stage = "window-links-publication";
         if (!mvdm_softpc_wow_page_domain_publish_handle(5u, 0x3456u, 1u, 0u, 0u, 0u, NULL) ||
@@ -3014,6 +3943,22 @@ static int run_fixture(void)
             mvdm_softpc_wow_page_domain_borrow_window(0x34560006u) != sibling ||
             mvdm_softpc_wow_page_domain_borrow_window(0x99990005u)) goto done;
         stage = "window-links-failure-atomicity";
+        relation_backing = 0x12345678u;
+        if (!mvdm_softpc_wow_page_domain_borrow_window_relation(child, 0, &relation_backing) ||
+                relation_backing != sibling ||
+                !mvdm_softpc_wow_page_domain_release_window(relation_backing) ||
+                !mvdm_softpc_wow_page_domain_borrow_window_relation(child, 1, &relation_backing) ||
+                relation_backing != parent ||
+                !mvdm_softpc_wow_page_domain_release_window(relation_backing) ||
+                !mvdm_softpc_wow_page_domain_borrow_window_relation(child, 2, &relation_backing) ||
+                relation_backing) goto done;
+        relation_backing = 0x12345678u;
+        if (mvdm_softpc_wow_page_domain_borrow_window_relation(child, 4, &relation_backing) ||
+                relation_backing != 0x12345678u) goto done;
+        if (!mvdm_softpc_wow_page_domain_read_window_view(child, &retained_view) ||
+                retained_view.links.window != 0x34560005u ||
+                retained_view.links.parent != 0x23450002u ||
+                retained_view.links.next != 0x34560006u) goto done;
         links[0].child = 0u; /* Earlier valid change must not commit on failure. */
         links[3].owner = 0x98760002u; /* Full generation, not just slot. */
         if (mvdm_softpc_wow_page_domain_publish_window_links(4u, links) ||
@@ -3041,12 +3986,22 @@ static int run_fixture(void)
             !mvdm_softpc_wow_page_domain_release_window(retired)) goto done;
         stage = "window-links-reused-slot";
         if (!mvdm_softpc_wow_page_domain_publish_handle(5u, 0x3457u, 1u, 0u, 0u, 0u, NULL)) goto done;
+        /* A retained old generation must not resolve the newly reused slot.
+         * Its terminal links come from the existing withdrawal owner. */
+        if (!mvdm_softpc_wow_page_domain_read_window_view(child, &retained_view) ||
+                retained_view.links.window != 0x34560005u ||
+                retained_view.links.parent != native_desktop ||
+                retained_view.links.next || retained_view.links.child ||
+                retained_view.links.owner) goto done;
         if (c_sas_dw_at(handles + 5u * 16u) - delta == child ||
             c_sas_dw_at(child) != 0x34560005u ||
             !mvdm_softpc_wow_page_domain_release_window(child) ||
             c_sas_dw_at(child) != 0x34560005u ||
             !mvdm_softpc_wow_page_domain_release_window(child) ||
             mvdm_softpc_wow_page_domain_release_window(child)) goto done;
+        retained_view.links.window = 0x12345678u;
+        if (mvdm_softpc_wow_page_domain_read_window_view(child, &retained_view) ||
+                retained_view.links.window != 0x12345678u) goto done;
         links[1].child = 0x34560005u;
         if (mvdm_softpc_wow_page_domain_publish_window_links(2u, links) ||
             c_sas_dw_at(parent + 28u) != 0u) goto done;
@@ -3126,6 +4081,24 @@ static int run_fixture(void)
                 c_sas_dw_at(handles + 56u) != 0x45670002u ||
                 !mvdm_softpc_wow_page_domain_window_menu(0x23450002u, 0x45670003u) ||
                 c_sas_dw_at(window_client + 104u) != root_menu) goto done;
+        stage = "guest-menu-incoming-reference-retention";
+        {
+            ULONG original_style = c_sas_dw_at(window_client + 168u);
+            /* Synthetic carrier WND, not a live guest window: preserve the
+             * original TestwndChild distinction for a nonempty menu edge. */
+            c_sas_storedw(window_client + 168u,
+                original_style | WS_CHILD | WS_POPUP);
+            stage = "guest-menu-mixed-style-reference-retention";
+            if (!mvdm_softpc_wow_page_domain_window_menu(0x23450002u, 0x45670003u) ||
+                    mvdm_softpc_wow_page_domain_retire_menu(0x45670003u) ||
+                    GetLastError() != ERROR_BUSY ||
+                    c_sas_dw_at(window_client + 104u) != root_menu ||
+                    !mvdm_softpc_wow_page_domain_window_menu(0x23450002u, 0u) ||
+                    c_sas_dw_at(window_client + 104u) != 0u ||
+                    !mvdm_softpc_wow_page_domain_window_menu(0x23450002u, 0x45670003u))
+                goto done;
+            c_sas_storedw(window_client + 168u, original_style);
+        }
         stage = "guest-menu-incoming-reference-retention";
         if (mvdm_softpc_wow_page_domain_retire_menu(0x45670003u) ||
                 GetLastError() != ERROR_BUSY ||
@@ -3300,6 +4273,13 @@ guest_window_failure:
         cleanup.thread = &thread;
         cleanup.shared = &cleanup_shared;
         cleanup.destroy_object = wow_menu_client_cleanup;
+#ifdef WOW_WINDOW_BORROW_FIXTURE
+        /* Original cleanup caches its process-wide restore table on first
+         * entry, including menu-only cleanup. Supply the production table
+         * before that entry; a zeroed fixture table would poison later
+         * original-control module-unload tests in this same process. */
+        if (!wow_standard_classes_bind_cleanup(&cleanup)) goto done;
+#endif
         native_root = CreateMenu();
         native_submenu = CreateMenu(); /* Independent other-task menu. */
         if (!native_root || !native_submenu ||
@@ -3438,6 +4418,8 @@ guest_window_failure:
     stage = "retired-window-borrow";
     if (!retained_backing || c_sas_dw_at(retained_backing) !=
             (ULONG)(ULONG_PTR)geometry_window ||
+        !verify_callback_borrow(geometry_window, retained_backing) ||
+        !verify_callback_borrow(NULL, 0) ||
         c_sas_dw_at(teb + 0x6cu) != (ULONG)(ULONG_PTR)geometry_window ||
         c_sas_dw_at(teb + 0x70u) != retained_backing ||
         !wow_user_window_publish(&object_table, geometry_window,
@@ -3446,13 +4428,16 @@ guest_window_failure:
         !mvdm_softpc_wow_page_domain_callback_window(
             (ULONG)(ULONG_PTR)geometry_window, inner_callback) ||
         c_sas_dw_at(teb + 0x70u) == retained_backing ||
+        !verify_callback_borrow(geometry_window, c_sas_dw_at(teb + 0x70u)) ||
         !mvdm_softpc_wow_page_domain_restore_callback(inner_callback) ||
         c_sas_dw_at(teb + 0x70u) != retained_backing ||
+        !verify_callback_borrow(geometry_window, retained_backing) ||
         !wow_user_window_retire(&object_table, geometry_window,
             &object_storage, NULL) ||
         c_sas_dw_at(retained_backing) != (ULONG)(ULONG_PTR)geometry_window ||
         !mvdm_softpc_wow_page_domain_restore_callback(outer_callback) ||
         c_sas_dw_at(teb + 0x6cu) != 0u || c_sas_dw_at(teb + 0x70u) != 0u ||
+        !verify_callback_borrow(geometry_window, 0) ||
         !mvdm_softpc_wow_page_domain_release_retained_window(retained_backing)) goto done;
     stage = "dead-window-publication-rejection";
     desktop_base = c_sas_dw_at(desktop);
@@ -3472,15 +4457,25 @@ guest_window_failure:
     geometry_window = NULL;
     }
 #ifdef WOW_WINDOW_BORROW_FIXTURE
+#ifdef WOW_ORIGINAL_MODAL_FIXTURE
+    /* One process-level registered owner per test process. Do not insert a
+     * fresh process lifetime inside the unrelated class-allocation matrix. */
+    stage="registered-original-modal";
+    verify_original_modal_task();
+    if(borrow_errors)goto done;
+    fprintf(stderr,"WOW_ORIGINAL_MODAL_SCOPE real_ccpu=1 registered_owner=1 normal_cleanup=1\n");
+    passed=1;goto done;
+#endif
     stage = "production-class-registration";
     if (!verify_class_registration(teb)) goto done;
     stage = "native-class-projection";
     if (!verify_native_class_projection(teb)) goto done;
     stage = "production-window-borrow";
-    if (!verify_callback_borrow(teb)) goto done;
+    if (!verify_callback_scope(teb)) goto done;
 #ifdef WOW_GRAPH_SNAPSHOT_FIXTURE
     stage = "whole-graph-snapshot";
     verify_graph_snapshot_commit(teb);
+    verify_local_observation_commit();
     verify_native_slot_reuse();
     verify_external_observation_churn(FALSE);
     verify_external_observation_churn(TRUE);
@@ -3500,6 +4495,20 @@ guest_window_failure:
         extern int __cdecl wow_native_creation_fixture(void);
         stage = "native-creation-owner";
         if (wow_native_creation_fixture()) goto done;
+    }
+#endif
+#ifdef WOW_STANDARD_CLASS_FIXTURE
+    {
+        extern int __cdecl wow_standard_class_fixture(void);
+        stage = "standard-class-owner";
+        if (wow_standard_class_fixture()) goto done;
+    }
+#endif
+#ifdef WOW_CLASS_PROCEDURE_FIXTURE
+    {
+        extern int __cdecl wow_class_procedure_fixture(void);
+        stage = "class-procedure-owner";
+        if (wow_class_procedure_fixture()) goto done;
     }
 #endif
     stage = "wow-gdt";
@@ -3618,6 +4627,46 @@ guest_window_failure:
     if (c_getGDT_BASE() != dosx_gdt ||
         !mvdm_softpc_wow_page_domain_reenter_protected() ||
         c_getGDT_BASE() != wow_gdt) goto done;
+#ifdef WOW_WINDOW_BORROW_FIXTURE
+    {
+        ULONG backing;
+        stage = "host-storage-domain-exit";
+        /* Original control graph traversal now owns the desktop's host WND.
+         * Do not overwrite that owner with a disposal witness. A standalone
+         * observed HWND supplies unused storage for the same domain-exit
+         * assertion, remaining live until after session disposal. */
+        shutdown_window = CreateWindowExA(0, "STATIC", "Domain exit witness",
+            WS_POPUP, 0, 0, 24, 24, NULL, NULL, GetModuleHandle(NULL), NULL);
+        if (!shutdown_window) goto done;
+        stage = "host-storage-domain-exit-project";
+        fprintf(stderr, "WOW_DOMAIN_EXIT_WITNESS hwnd=%08lx prior=%08lx\n",
+            (ULONG)shutdown_window,
+            mvdm_softpc_wow_page_domain_window_handle(LOWORD(shutdown_window)));
+        /* Native-only test windows may have retired since the last callback
+         * boundary and USER may reuse their slot. Use the production graph
+         * transaction to reconcile generations, not the low-level observation
+         * helper whose precondition is an empty or same-generation slot. */
+        if (!wow_user_window_project_graph(&shutdown_window, 1) ||
+                mvdm_softpc_wow_page_domain_window_handle(LOWORD(shutdown_window)) !=
+                    (ULONG)shutdown_window) goto done;
+        stage = "host-storage-domain-exit-borrow";
+        backing = mvdm_softpc_wow_page_domain_borrow_window((ULONG)shutdown_window);
+        if (!backing) goto done;
+        stage = "host-storage-domain-exit-bind";
+        fprintf(stderr, "WOW_DOMAIN_EXIT_STORAGE backing=%08lx existing=%p\n",
+            backing, mvdm_softpc_wow_page_domain_window_host_storage(backing));
+        if (!mvdm_softpc_wow_page_domain_bind_window_host_storage(backing,
+                &host_storage_cookie, dispose_host_storage_witness)) {
+            (void)mvdm_softpc_wow_page_domain_release_window(backing);
+            goto done;
+        }
+        shutdown_disposals = host_storage_disposals;
+        shutdown_storage_armed = TRUE;
+        stage = "host-storage-domain-exit-release";
+        if (!mvdm_softpc_wow_page_domain_release_window(backing) ||
+                host_storage_disposals != shutdown_disposals) goto done;
+    }
+#endif
     passed = 1;
 done:
     if (native_root && IsMenu(native_root)) DestroyMenu(native_root);
@@ -3629,6 +4678,11 @@ done:
     if (guest_memory_started) mvdm_softpc_guest_memory_end(&owner);
     if (session_thread_current() == &owner) (void)session_thread_unbind(&owner);
     if (session_valid(&owner) && !session_dispose(&owner)) passed = 0;
+#ifdef WOW_WINDOW_BORROW_FIXTURE
+    if (shutdown_storage_armed && host_storage_disposals != shutdown_disposals + 1)
+        passed = 0;
+    if (shutdown_window && !DestroyWindow(shutdown_window)) passed = 0;
+#endif
     if (mvdm_softpc_wow_page_domain_active() ||
         mvdm_softpc_wow_page_domain_guest_shared_info() != 0u ||
         mvdm_softpc_wow_page_domain_clear_client_desktop() ||
@@ -3692,7 +4746,34 @@ int main(int argc, char **argv)
         SetErrorMode(SEM_NOGPFAULTERRORBOX | SEM_FAILCRITICALERRORS);
     }
 #endif
-#ifdef WOW_WINDOW_BORROW_FIXTURE
+#ifdef WOW_ORIGINAL_MODAL_FIXTURE
+    {
+        WCHAR name[80];PROCESS_INFORMATION child={0};
+        HDESK desktop;DWORD result=3;
+        if(argc==2 && !strcmp(argv[1],"--modal-worker"))return run_fixture();
+        wsprintfW(name,L"T447Modal-%lu",GetCurrentProcessId());
+        desktop=CreateDesktopW(name,NULL,NULL,0,GENERIC_ALL,NULL);
+        if(!desktop)return 2;
+        /* The parent never joins the test desktop. A complete child-process
+         * lifetime also bounds USER/UxTheme's auxiliary GUI threads. */
+        {
+            STARTUPINFOW wide={sizeof(wide)};WCHAR executable[MAX_PATH],command[MAX_PATH+40];
+            if(!GetModuleFileNameW(NULL,executable,MAX_PATH)){CloseDesktop(desktop);return 3;}
+            swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" --modal-worker",executable);
+            wide.lpDesktop=name;wide.dwFlags=STARTF_USESTDHANDLES|STARTF_USESHOWWINDOW;
+            wide.wShowWindow=SW_HIDE;wide.hStdInput=GetStdHandle(STD_INPUT_HANDLE);
+            wide.hStdOutput=GetStdHandle(STD_OUTPUT_HANDLE);wide.hStdError=GetStdHandle(STD_ERROR_HANDLE);
+            if(CreateProcessW(executable,command,NULL,NULL,TRUE,CREATE_NO_WINDOW,NULL,NULL,&wide,&child)){
+                if(WaitForSingleObject(child.hProcess,55000)!=WAIT_OBJECT_0){
+                    TerminateProcess(child.hProcess,ERROR_TIMEOUT);WaitForSingleObject(child.hProcess,5000);
+                }
+                GetExitCodeProcess(child.hProcess,&result);CloseHandle(child.hThread);CloseHandle(child.hProcess);
+            }
+        }
+        if(!CloseDesktop(desktop))result=4;
+        return (int)result;
+    }
+#elif defined(WOW_WINDOW_BORROW_FIXTURE)
     WCHAR name[64];
     HDESK desktop;
     HANDLE thread;

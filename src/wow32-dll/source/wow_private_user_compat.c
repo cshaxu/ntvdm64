@@ -1,120 +1,23 @@
 #include "wow_private_user_compat.h"
 #include "wow_menu_parser_bindings.h"
+#include "wow_default_message_bindings.h"
 
 #include <string.h>
 
-/* DIVERGENCE(ADAPTER-WOW-022): Original USER paint.c:xxxFillWindow,
- * xxxPaintRect and UT_GetParentDCClipBox,
- * random.c:xxxGetControlColor. USER server PWND/DC locking is unavailable;
- * bind its observable operations to public USER/GDI, without importing the
- * server or reducing FillWindow to an unconditional FillRect. */
-BOOL WINAPI wow_private_user_fill_window(HWND brush_window, HWND paint_window,
-    HDC dc, HBRUSH brush)
-{
-    WINDOWINFO paint_info, brush_info;
-    RECT clip, client;
-    POINT old_origin;
-    LONG brush_procedure;
-    UINT message;
-    int clip_type;
 
-    if (dc == NULL || GetObjectType(dc) == 0) {
-        SetLastError(ERROR_INVALID_HANDLE);
-        return FALSE;
-    }
-    paint_info.cbSize = sizeof(paint_info);
-    if (!GetWindowInfo(paint_window, &paint_info)) return FALSE;
-    if (brush_window == NULL) brush_window = paint_window;
-    brush_info.cbSize = sizeof(brush_info);
-    if (!GetWindowInfo(brush_window, &brush_info)) return FALSE;
-    clip_type = GetClipBox(dc, &clip);
-    if (clip_type == ERROR) return FALSE;
-    if (clip_type == NULLREGION) return TRUE;
-    if (GetClassLongA(paint_window, GCL_STYLE) & CS_PARENTDC) {
-        client = paint_info.rcClient;
-        OffsetRect(&client, -client.left, -client.top);
-        if (!IntersectRect(&clip, &clip, &client)) return TRUE;
-    }
-    if (!SetBrushOrgEx(dc,
-            brush_info.rcClient.left - paint_info.rcClient.left,
-            brush_info.rcClient.top - paint_info.rcClient.top, &old_origin))
-        return FALSE;
-    if ((ULONG_PTR)brush < CTLCOLOR_MAX) {
-        message = (UINT)(ULONG_PTR)brush + WM_CTLCOLORMSGBOX;
-        /* Original xxxGetControlColor tests the process, not the thread.
-         * The native procedure query enforces this and accepts short HWNDs. */
-        SetLastError(ERROR_SUCCESS);
-        brush_procedure = GetWindowLongA(brush_window, GWL_WNDPROC);
-        if (!brush_procedure && GetLastError() != ERROR_ACCESS_DENIED) {
-            SetBrushOrgEx(dc, old_origin.x, old_origin.y, NULL);
-            return FALSE;
-        }
-        if (!brush_procedure) {
-            brush = (HBRUSH)DefWindowProcA(brush_window, message,
-                (WPARAM)dc, (LPARAM)paint_window);
-        } else {
-            brush = (HBRUSH)SendMessageA(brush_window, message,
-                (WPARAM)dc, (LPARAM)paint_window);
-            if (brush == NULL || GetObjectType(brush) != OBJ_BRUSH)
-                brush = (HBRUSH)DefWindowProcA(brush_window, message,
-                    (WPARAM)dc, (LPARAM)paint_window);
-        }
-    }
-    FillRect(dc, &clip, brush);
-    SetBrushOrgEx(dc, old_origin.x, old_origin.y, NULL);
-    return TRUE;
-}
-
-/* DIVERGENCE(ADAPTER-WOW-013): source-derived message data from OpenNT
- * windows/core/ntuser/kernel/server.c, gawDefWindowMsgs/gawDefWindowSpecMsgs
- * (Copyright (c) Microsoft Corporation). The private USER shared bitmap is
- * unavailable. Preserve its complete non-FE_IME message union rather than a
- * trace-selected subset. Private message values come from winuserp.h.
- * The original merge owner is client/client.c::WowGetDefWindowProcBits.
- * This publishes the guest dispatch filter, not replacement message policy. */
-static const WORD wow_def_window_messages[] = {
-    WM_GETHOTKEY, WM_SETHOTKEY, WM_SETREDRAW, WM_SETTEXT, WM_PAINT,
-    WM_CLOSE, WM_ERASEBKGND, WM_CANCELMODE, WM_SETCURSOR, WM_PAINTICON,
-    WM_ICONERASEBKGND, WM_DRAWITEM, 0x004d /* WM_KEYF1 */,
-    0x0035 /* WM_ISACTIVEICON */, WM_QUERYDRAGICON, WM_NCCREATE,
-    WM_SETICON, WM_NCCALCSIZE, WM_NCPAINT, WM_NCACTIVATE, WM_NCMOUSEMOVE,
-    WM_NCRBUTTONDOWN, WM_NCLBUTTONDOWN, WM_NCLBUTTONUP, WM_NCLBUTTONDBLCLK,
-    WM_KEYUP, WM_SYSKEYUP, WM_SYSCHAR, WM_SYSCOMMAND,
-    0x022b /* WM_QUERYDROPOBJECT */, 0x003b /* WM_CLIENTSHUTDOWN */,
-    WM_SYNCPAINT, WM_PRINT, WM_GETICON, WM_QUERYDRAGICON, WM_CONTEXTMENU,
-    0x0313 /* WM_SYSMENU */, WM_INPUTLANGCHANGEREQUEST, WM_INPUTLANGCHANGE
-};
-static const WORD wow_def_window_special_messages[] = {
-    WM_ACTIVATE, WM_GETTEXT, WM_GETTEXTLENGTH, WM_RBUTTONUP,
-    WM_QUERYENDSESSION, WM_QUERYOPEN, WM_SHOWWINDOW, WM_MOUSEACTIVATE,
-    WM_HELP, WM_VKEYTOITEM, WM_CHARTOITEM, WM_KEYDOWN, WM_SYSKEYDOWN,
-    0x022a /* WM_DROPOBJECT */, WM_WINDOWPOSCHANGING, WM_WINDOWPOSCHANGED,
-    0x008b /* WM_KLUDGEMINRECT */, 0x0019 /* WM_CTLCOLOR */,
-    WM_CTLCOLORMSGBOX, WM_CTLCOLOREDIT, WM_CTLCOLORLISTBOX, WM_CTLCOLORBTN,
-    WM_CTLCOLORDLG, WM_CTLCOLORSCROLLBAR, WM_NCHITTEST, WM_CTLCOLORSTATIC,
-    WM_NOTIFYFORMAT, WM_DEVICECHANGE, WM_POWERBROADCAST, WM_MOUSEWHEEL
-};
-
+/* Original client.c owns the bitmap merge. The boundary retains the existing
+ * invalid-span contract and supplies the zeroed buffer required by USER16. */
 WORD WINAPI wow_private_user_get_def_window_proc_bits(PBYTE bits,
     WORD byte_count)
 {
-    WORD maximum = WM_PRINT;
-    size_t index;
-
-    /* Unlike the original assertion-only caller precondition, refuse an
-     * invalid span before changing it. USER16 supplies a zeroed 101-byte
-     * array; keep bytes beyond the original merged extent untouched. */
-    if (bits == NULL || byte_count <= maximum / 8u) return 0u;
+    UINT maximum;
+    if (!bits) return 0;
+    if (!wow_default_messages_ready()) return 0;
+    maximum = max(wow_default_message_state.DefWindowMsgs.maxMsgs,
+        wow_default_message_state.DefWindowSpecMsgs.maxMsgs);
+    if (maximum > MAXWORD || byte_count <= maximum / 8u) return 0;
     memset(bits, 0, maximum / 8u + 1u);
-    for (index = 0; index < ARRAYSIZE(wow_def_window_messages); ++index) {
-        WORD message = wow_def_window_messages[index];
-        bits[message >> 3] |= (BYTE)(1u << (message & 7u));
-    }
-    for (index = 0; index < ARRAYSIZE(wow_def_window_special_messages); ++index) {
-        WORD message = wow_def_window_special_messages[index];
-        bits[message >> 3] |= (BYTE)(1u << (message & 7u));
-    }
-    return maximum;
+    return WowGetDefWindowProcBits(bits, byte_count);
 }
 
 int WINAPI wow_private_user_get_id_from_directory(PBYTE resource_bits,

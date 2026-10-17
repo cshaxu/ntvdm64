@@ -31,6 +31,7 @@ typedef struct wow_class_lookup_context {
     HANDLE client_module;
 } wow_class_lookup_context;
 
+#define CSF_ANSIPROC 0x00000002 /* Original user.h; shared class flags. */
 #define CSF_WOWDEFERDESTROY 0x00000004 /* Original user.h. */
 wow_class_lookup_entry **WINAPI _InnerGetClassPtr(ATOM,
     wow_class_lookup_entry **, HANDLE);

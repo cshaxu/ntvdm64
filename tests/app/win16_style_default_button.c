@@ -69,7 +69,7 @@ lifetime:
     GdiFlush();before=GetGuiResources(GetCurrentProcess(),GR_GDIOBJECTS);
     for(iteration=0;iteration<30;++iteration){CHECK(install(button,NULL));paint(button,dc);CHECK(remove(button));}
     GdiFlush();after=GetGuiResources(GetCurrentProcess(),GR_GDIOBJECTS);
-    printf("LIFETIME GDI=%lu/%lu\n",before,after);
+    fprintf(stderr,"LIFETIME GDI=%lu/%lu\n",before,after);
     if(!diagnostic){CHECK(after==before);CHECK(remove(other));}
     CHECK(DestroyWindow(w));SelectObject(dc,old);CHECK(DeleteObject(bitmap) && DeleteDC(dc));
     CHECK(FreeLibrary(dll));CHECK(SetThreadDesktop(original) && CloseDesktop(desktop));

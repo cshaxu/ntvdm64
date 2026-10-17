@@ -24,7 +24,7 @@ static HRESULT native_theme(HWND w,LPCWSTR application,LPCWSTR ids)
 static LRESULT CALLBACK theme_proc(HWND w,UINT m,WPARAM p,LPARAM l,UINT_PTR id,DWORD_PTR data)
 {
     theme_state *s=(theme_state *)data;LRESULT result;(void)id;++s->calls;
-    if(m==WM_NCDESTROY){RemoveWindowSubclass(w,theme_proc,(UINT_PTR)theme_proc);s->detached=TRUE;}
+    if(m==WM_NCDESTROY)(void)ntw16s_theme_terminal(w,NULL);
     result=DefSubclassProc(w,m,p,l);
     release(s);return result;
 }
@@ -37,6 +37,16 @@ BOOL ntw16s_theme_capture(HWND w)
     if(state(w))return TRUE;
     s=calloc(1,sizeof(*s));if(!s){SetLastError(ERROR_NOT_ENOUGH_MEMORY);return FALSE;}
     if(!SetWindowSubclass(w,theme_proc,(UINT_PTR)theme_proc,(DWORD_PTR)s)){free(s);return FALSE;}
+    return TRUE;
+}
+BOOL ntw16s_theme_terminal(HWND w,const void *owner)
+{
+    theme_state *s;
+    s=state(w);if(!s || (owner && s->owner!=owner))return TRUE;
+    if(!RemoveWindowSubclass(w,theme_proc,(UINT_PTR)theme_proc)){
+        SetLastError(ERROR_INVALID_STATE);return FALSE;
+    }
+    ++s->calls;s->detached=TRUE;release(s);
     return TRUE;
 }
 BOOL ntw16s_theme_enable(HWND w,const void *owner)

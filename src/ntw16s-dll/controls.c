@@ -356,6 +356,14 @@ static void detach_combo_list(control_style *s)
     if(list && GetWindowSubclass(list,control_proc,(UINT_PTR)control_proc,&data) &&
         ((control_style *)data)->owner==s)win16_style_control_remove(list);
 }
+static BOOL terminal_combo_list(control_style *s)
+{
+    DWORD_PTR data;HWND list=s->combo_list;s->combo_list=NULL;
+    /* An independently removed/reinstalled child is no longer ours. */
+    if(list && GetWindowSubclass(list,control_proc,(UINT_PTR)control_proc,&data) &&
+        ((control_style *)data)->owner==s)return win16_style_control_terminal(list);
+    return TRUE;
+}
 
 static void scroll_arrow(HDC dc,RECT r,const char bits[17][18],const win16_style_palette *p)
 {
@@ -831,10 +839,7 @@ static LRESULT CALLBACK control_proc(HWND w,UINT m,WPARAM a,LPARAM b,UINT_PTR id
         if((HFONT)a!=s->font)s->original_font=(HFONT)a;
         a=(WPARAM)s->font;
     }
-    if(m==WM_NCDESTROY){RemoveWindowSubclass(w,control_proc,(UINT_PTR)control_proc);s->detached=TRUE;
-        scroll_caret_destroy(w,s);
-        scroll_stop_timer(w,s);
-        detach_combo_list(s);
+    if(m==WM_NCDESTROY){(void)win16_style_control_terminal(w);
         result=DefSubclassProc(w,m,a,b);}
     else if(is_link(w)){
         /* Preserve native markup, hit testing, focus and NM_CLICK/NM_RETURN.
@@ -1155,4 +1160,20 @@ BOOL win16_style_control_remove(HWND w)
     if(!--s->calls)dispose_control(s);RedrawWindow(w,NULL,NULL,RDW_INVALIDATE|RDW_FRAME);
     if(is_scroll(w) && GetFocus()==w)SendMessageW(w,WM_SETFOCUS,0,0);
     return TRUE;
+}
+BOOL win16_style_control_terminal(HWND w)
+{
+    DWORD_PTR data;control_style *s;
+    BOOL result;
+    if(!GetWindowSubclass(w,control_proc,(UINT_PTR)control_proc,&data))return TRUE;
+    s=(control_style *)data;
+    if(!RemoveWindowSubclass(w,control_proc,(UINT_PTR)control_proc)){
+        SetLastError(ERROR_INVALID_STATE);return FALSE;
+    }
+    ++s->calls;s->detached=TRUE;
+    scroll_caret_destroy(w,s);
+    scroll_stop_timer(w,s);
+    result=terminal_combo_list(s);
+    if(!--s->calls)dispose_control(s);
+    return result;
 }

@@ -3,6 +3,7 @@
 
 #include <windows.h>
 #include <wingdip.h>
+#include "wow_control_message_abi.h"
 
 /* Exact OpenNT WOW public handle taxonomy; its function prototypes are not
  * included because WOW32's retained internal header has distinct FASTCALL
@@ -30,8 +31,6 @@ typedef enum _WOW_HANDLE_TYPE {
 #define SCDLG_ANSI 0x0002
 #define SCDLG_NOREVALIDATE 0x0004
 #define SCDLG_16BIT 0x0008
-#define CBEC_SETCOMBOFOCUS (CB_MSGMAX + 1)
-#define CBEC_KILLCOMBOFOCUS (CB_MSGMAX + 2)
 #define WM_WINHELP 0x0038
 #define WM_CLIENTSHUTDOWN 0x003B
 #define MM_CALCSCROLL 0x003F
@@ -39,8 +38,6 @@ typedef enum _WOW_HANDLE_TYPE {
 #define MN_FINDMENUWINDOWFROMPOINT (MN_FIRST + 11)
 #define COLOR_ENDCOLORS COLOR_INFOBK
 #define WMNW_UPDATEFINDREPLACE 0
-#define LBCB_CARETON 0x01A3
-#define LBCB_CARETOFF 0x01A4
 #define EWX_NOTIFY 0x8000
 #define DDL_VALID (DDL_READWRITE | DDL_READONLY | DDL_HIDDEN | DDL_SYSTEM | \
                    DDL_DIRECTORY | DDL_ARCHIVE | DDL_POSTMSGS | DDL_DRIVES | \

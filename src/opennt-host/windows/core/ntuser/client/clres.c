@@ -11,6 +11,173 @@
 \***************************************************************************/
 
 
+#if defined(WOW_ORIGINAL_DIALOG_TEMPLATE)
+/* DIVERGENCE(OPENNT-HOST-079): retain the original template-size walker
+ * and modal entry as an isolated source selection. The complete dialog
+ * producer/manager supplies the private precomp environment; no alternate
+ * parser or native-modal fallback is introduced. Not yet product-selected. */
+#include "precomp.h"
+
+PBYTE SkipIDorString(
+    LPBYTE pb)
+{
+    if (*((LPWORD)pb) == 0xFFFF)
+        return (pb + 4);
+
+    while (*((PWCHAR)pb)++ != 0);
+
+    return pb;
+}
+
+DWORD GetSizeDialogTemplate(
+    HINSTANCE      hmod,
+    LPCDLGTEMPLATE pdt)
+{
+    UINT           cdit;
+    LPBYTE         pb;
+    BOOL           fChicago;
+    LPDLGTEMPLATE2 pdt2;
+
+    if (HIWORD(pdt->style) == 0xFFFF) {
+
+        /*
+         * Chicago style - version better be 1!
+         */
+        if (LOWORD(pdt->style) != 1)
+            return 0;
+
+        pdt2 = (LPDLGTEMPLATE2)pdt;
+        fChicago = TRUE;
+
+        /*
+         * Fail if the app is passing invalid style bits.
+         */
+        if (pdt2->style & ~(DS_VALID40 | 0xffff0000)) {
+            RIPMSG0(RIP_WARNING, "Bad dialog style bits - please remove");
+            return 0;
+        }
+
+        pb = (LPBYTE)(((LPDLGTEMPLATE2)pdt) + 1);
+
+    } else {
+
+        fChicago = FALSE;
+
+        /*
+         * Check if invalid style bits are being passed. Fail if the app
+         * is a new app ( >= VER40).
+         * This is to ensure that we are compatible with Chicago.
+         */
+        if ((pdt->style & ~(DS_VALID40 | 0xffff0000)) &&
+                (GETEXPWINVER(hmod) >= VER40)) {
+
+            /*
+             * It's a new app with invalid style bits - fail.
+             */
+            RIPMSG0(RIP_WARNING, "Bad dialog style bits - please remove");
+            return 0;
+        }
+
+        pb = (LPBYTE)(pdt + 1);
+    }
+
+    /*
+     * If there is a menu ordinal, add 4 bytes skip it. Otherwise it is a
+     * string or just a 0.
+     */
+    pb = SkipIDorString(pb);
+
+    /*
+     * Skip window class and window text, adjust to next word boundary.
+     */
+    pb = SkipIDorString(pb);
+    pb = SkipIDorString(pb);
+
+    /*
+     * Skip font type, size and name, adjust to next dword boundary.
+     */
+    if ((fChicago ? pdt2->style : pdt->style) & DS_SETFONT) {
+        pb = (LPBYTE)((DWORD)pb + (fChicago ? sizeof(DWORD) + sizeof(WORD): sizeof(WORD)));
+        pb = SkipIDorString(pb);
+    }
+    pb = (LPBYTE)(((DWORD)pb + 3) & ~3);
+
+    /*
+     * Loop through dialog items now...
+     */
+    cdit = fChicago ? pdt2->cDlgItems : pdt->cdit;
+
+    while (cdit-- != 0) {
+
+        UINT cbCreateParams;
+
+        pb += fChicago ? sizeof(DLGITEMTEMPLATE2) : sizeof(DLGITEMTEMPLATE);
+
+        /*
+         * Skip the dialog control class name.
+         */
+        pb = SkipIDorString(pb);
+
+        /*
+         * Look at window text now.
+         */
+        pb = SkipIDorString(pb);
+
+        cbCreateParams = *((LPWORD)pb);
+
+        /*
+         * skip any CreateParams which include the generated size WORD.
+         */
+        if (cbCreateParams)
+            pb += cbCreateParams;
+
+        pb += sizeof(WORD);
+
+        /*
+         * Point at the next dialog item. (DWORD aligned)
+         */
+        pb = (LPBYTE)(((DWORD)pb + 3) & ~3);
+    }
+
+    /*
+     * Return template size.
+     */
+    return (pb - (LPBYTE)pdt);
+}
+
+int WINAPI DialogBoxIndirectParamAorW(
+    HINSTANCE       hmod,
+    LPCDLGTEMPLATEW lpDlgTemplate,
+    HWND            hwndOwner,
+    DLGPROC         lpDialogFunc,
+    LPARAM          dwInitParam,
+    UINT            fAnsiFlags)
+{
+    DWORD cb;
+    int   iRetCode;
+
+    /*
+     * The server routine destroys the menu if it fails.
+     */
+    cb = GetSizeDialogTemplate(hmod, lpDlgTemplate);
+
+    if (!cb) {
+        RIPMSG0(RIP_WARNING, "DialogBoxIndirectParam: Invalid Paramter");
+        return -1;
+    }
+
+    iRetCode = InternalDialogBox(hmod,
+                                 (LPDLGTEMPLATE)lpDlgTemplate,
+                                 cb,
+                                 hwndOwner,
+                                 lpDialogFunc,
+                                 dwInitParam,
+                                 SCDLG_CLIENT | (fAnsiFlags & (SCDLG_ANSI | SCDLG_16BIT)));
+
+    return iRetCode;
+}
+
+#else
 /* DIVERGENCE(OPENNT-HOST-033): original bitmap conversion closure only.
  * The consuming binding supplies the USER precompiled environment;
  * unrelated resource families are omitted. */
@@ -901,3 +1068,4 @@ HBITMAP WOWLoadBitmapA(
     return hRet;
 }
 
+#endif /* WOW_ORIGINAL_DIALOG_TEMPLATE */

@@ -49,10 +49,11 @@ static LRESULT CALLBACK test_proc(HWND window, UINT message, WPARAM wp, LPARAM l
         CHECK(wow_window_creation_menu(window, (CREATESTRUCTA *)lp,
             &creation->entry, &creation->menu));
         CHECK(((CREATESTRUCTA *)lp)->hMenu == GetMenu(window) ||
-            (((CREATESTRUCTA *)lp)->style & WS_CHILD));
+            ((((CREATESTRUCTA *)lp)->style & (WS_CHILD | WS_POPUP)) == WS_CHILD));
         if (reject_create) return FALSE;
     }
-    if (message == WM_CREATE && !(GetWindowLongA(window,GWL_STYLE)&WS_CHILD)) {
+    if (message == WM_CREATE &&
+            (GetWindowLongA(window,GWL_STYLE) & (WS_CHILD | WS_POPUP)) != WS_CHILD) {
         /* Public USER may use a different CREATESTRUCT for the two messages. */
         menu_fixture_creation *creation =
             ((CREATESTRUCTA *)lp)->lpCreateParams;
@@ -69,7 +70,8 @@ static void run_case(DWORD style, HMENU explicit_menu, HWND parent,
     menu_fixture_creation creation = {0};
     menu_fixture_creation *previous = pending_creation;
     unsigned before = loads;
-    BOOL should_load = !(style & WS_CHILD) && !explicit_menu && resource;
+    BOOL should_load = (style & (WS_CHILD | WS_POPUP)) != WS_CHILD &&
+        !explicit_menu && resource;
     HWND window;
     creation.entry.hModule = expected_module = (HANDLE)0x13570001;
     expected_name = resource;
@@ -84,7 +86,7 @@ static void run_case(DWORD style, HMENU explicit_menu, HWND parent,
     CHECK(loads == before + (should_load ? 1u : 0u));
     CHECK(reject ? !window : !!window);
     if (window) {
-        if (!(style&WS_CHILD)) CHECK(GetMenu(window) ==
+        if ((style & (WS_CHILD | WS_POPUP)) != WS_CHILD) CHECK(GetMenu(window) ==
             (explicit_menu ? explicit_menu : last_menu));
         CHECK(DestroyWindow(window));
     }
@@ -111,6 +113,8 @@ int __cdecl main(void)
     parent=CreateWindowExA(0,"STATIC","",0,0,0,100,100,NULL,NULL,wc.hInstance,NULL);
     CHECK(parent);
     run_case(WS_CHILD,(HMENU)23,parent,L"IGNORED",FALSE,FALSE);
+    run_case(WS_CHILD | WS_POPUP,NULL,parent,L"MIXED_TYPE_MENU",FALSE,FALSE);
+    run_case(WS_CHILD | WS_POPUP,NULL,parent,L"MIXED_TYPE_REJECT",FALSE,TRUE);
     CHECK(DestroyWindow(parent));
     CHECK(UnregisterClassA(wc.lpszClassName,wc.hInstance));
     CHECK(sizing_callbacks != 0);

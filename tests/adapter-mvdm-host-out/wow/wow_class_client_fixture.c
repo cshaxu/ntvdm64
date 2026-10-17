@@ -14,7 +14,7 @@ static unsigned errors, version_calls;
 static DWORD version = 0x030a;
 static BOOL raise_version;
 static HINSTANCE module = (HINSTANCE)0x23451234;
-#define CHECK(x) do { if (!(x)) { ++errors; printf("FAIL line=%d error=%lu\n",__LINE__,GetLastError()); } } while (0)
+#define CHECK(x) do { if (!(x)) { ++errors; fprintf(stderr,"FAIL line=%d error=%lu\n",__LINE__,GetLastError()); } } while (0)
 static DWORD WINAPI get_version(HANDLE value)
 {
     CHECK(value == module);
@@ -44,7 +44,7 @@ static void version_domains(void)
         for(module_version=0;module_version<2;++module_version) {
             version=module_version ? 0x0400 : 0x030a;
             wc.style=0x40000000;
-            atom=wow_class_client_register(&context,&wc,words);
+            atom=wow_class_client_register_guest(&context,&wc,words);
             if(module_version) {
                 CHECK(!atom && GetLastError()==ERROR_INVALID_PARAMETER);
             } else {
@@ -62,15 +62,20 @@ static void version_domains(void)
     version=0x030a;context.dwExpWinVer=0x0400;
     wc.style=0;wc.hInstance=GetModuleHandleA("user32.dll");
     calls=version_calls;
-    CHECK(!wow_class_client_register(&context,&wc,words));
+    CHECK(!wow_class_client_register_guest(&context,&wc,words));
     CHECK(GetLastError()==ERROR_INVALID_PARAMETER && calls==version_calls);
     CHECK(classes.pclsPrivateList==NULL && wow_class_client_current()==NULL);
 }
 static void procedure_encoding(void)
 {
-    static const DWORD guest[] = {0x03b70b98u, 0x83b70b98u};
+    /* Include the selector/tag boundary: 7fff encodes to ffff, whereas
+     * ffff encodes to fffb through the original virtual-LDT-bit rule.
+     * A CPD-shaped bit pattern alone cannot establish native ownership. */
+    static const DWORD guest[] = {
+        0x03b70b98u, 0x83b70b98u, 0x7fff0b98u, 0xffff0b98u
+    };
     unsigned i;
-    for (i=0; i<2; ++i) {
+    for (i=0; i<ARRAYSIZE(guest); ++i) {
         wow_class_lookup_context classes={0};
         wow_task_order_thread thread={0};
         wow_class_client_context context={&classes,0x030a,get_version,callback,&thread,NULL};
@@ -87,7 +92,7 @@ static void procedure_encoding(void)
             encoded &= ~WOW_WINDOW_SELECTOR_VIRTUAL_BIT;
         wc.lpfnWndProc=(WNDPROC)encoded;wc.hInstance=module;
         wc.lpszClassName="S2_WOW_PROC_ENCODING";
-        atom=wow_class_client_register(&context,&wc,words);
+        atom=wow_class_client_register_guest(&context,&wc,words);
         CHECK(atom!=0);
         if (!atom) continue;
         binding=wow_class_words_acquire(&classes,atom,module);
@@ -118,12 +123,12 @@ int __cdecl main(void)
     wow_window_dispatch_target target;
     wc.lpfnWndProc=(WNDPROC)0x92340020; wc.hInstance=module;
     wc.lpszClassName="S40_REAL_CLASS_CLIENT"; wc.lpszMenuName="MENU";
-    CHECK(!wow_class_client_register(NULL,&wc,words));
+    CHECK(!wow_class_client_register_guest(NULL,&wc,words));
     context.thread=NULL;
-    CHECK(!wow_class_client_register(&context,&wc,words) && GetLastError()==ERROR_INVALID_STATE);
+    CHECK(!wow_class_client_register_guest(&context,&wc,words) && GetLastError()==ERROR_INVALID_STATE);
     context.thread=&thread;
     thread.TIF_flags=WOW_TASK_TIF_16BIT;thread.ptdb=&task;task.hTaskWow=0x4321;
-    atom=wow_class_client_register(&context,&wc,words);
+    atom=wow_class_client_register_guest(&context,&wc,words);
     CHECK(atom && version_calls==2 && wow_class_client_current()==NULL);
     CHECK(classes.pclsPrivateList && classes.pclsPrivateList->hTaskWow==0x4321);
     binding=wow_class_words_acquire(&classes,atom,module);
@@ -136,18 +141,18 @@ int __cdecl main(void)
     native_class.cbSize=sizeof(native_class);
     CHECK(GetClassInfoExA(module,wc.lpszClassName,&native_class));
     CHECK(native_class.lpszMenuName==NULL);
-    CHECK(!wow_class_client_register(&context,&wc,words));
+    CHECK(!wow_class_client_register_guest(&context,&wc,words));
     CHECK(wow_class_client_unregister(&context,wc.lpszClassName,module));
     CHECK(classes.pclsPrivateList==NULL && wow_class_client_current()==NULL);
     version=0x0300;
-    CHECK(wow_class_client_register(&context,&wc,words)==1);
+    CHECK(wow_class_client_register_guest(&context,&wc,words)==1);
     CHECK(wow_class_client_unregister(&context,wc.lpszClassName,module));
     version=0x0400; wc.style=0x40000000;
-    CHECK(!wow_class_client_register(&context,&wc,words));
+    CHECK(!wow_class_client_register_guest(&context,&wc,words));
     CHECK(GetLastError()==ERROR_INVALID_PARAMETER);
     wc.style=0; raise_version=TRUE;
     __try {
-        (void)wow_class_client_register(&context,&wc,words);
+        (void)wow_class_client_register_guest(&context,&wc,words);
         CHECK(FALSE);
     } __except(GetExceptionCode()==0xe0420038 ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
         CHECK(wow_class_client_current()==NULL);
@@ -156,9 +161,13 @@ int __cdecl main(void)
     raise_version=FALSE;
     version_domains();
     version=0x030a;wc.style=0;wc.hInstance=module;wc.lpfnWndProc=(WNDPROC)0xffff1234;
-    CHECK(!wow_class_client_register(&context,&wc,words) && cpd_calls==0);
+    atom=wow_class_client_register(&context,&wc,words);
+    CHECK(atom && cpd_calls==0);
+    if(atom) CHECK(wow_class_client_unregister(&context,wc.lpszClassName,module));
     context.resolve_callproc=resolve_cpd;
-    CHECK(!wow_class_client_register(&context,&wc,words) && cpd_calls==1);
+    atom=wow_class_client_register(&context,&wc,words);
+    CHECK(atom && cpd_calls==1);
+    if(atom) CHECK(wow_class_client_unregister(&context,wc.lpszClassName,module));
     CHECK(classes.pclsPrivateList==NULL && wow_class_client_current()==NULL);
     cpd_available=TRUE;
     atom=wow_class_client_register(&context,&wc,words);
@@ -170,6 +179,6 @@ int __cdecl main(void)
         CHECK(wow_class_client_unregister(&context,wc.lpszClassName,module));
     }
     procedure_encoding();
-    printf("WOW_CLASS_CLIENT errors=%u version_calls=%u version_domains=5 server_owner=1 cpd=%u\n",errors,version_calls,cpd_calls);
+    fprintf(stderr,"WOW_CLASS_CLIENT errors=%u version_calls=%u version_domains=5 server_owner=1 cpd=%u\n",errors,version_calls,cpd_calls);
     return errors != 0;
 }

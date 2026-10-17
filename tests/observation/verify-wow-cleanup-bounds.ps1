@@ -91,6 +91,15 @@ if ([regex]::Matches($cleanupBody,'return FALSE;').Count -ne 4 -or
     !$cleanupBody.Contains("UserFreePool(SelListTemp);`n            return FALSE;")) {
     throw 'Cleanup failure/result contract changed'
 }
+$windowWrites = [regex]::Matches($body, 'wow_cleanup_set_window_procedure\(context, pwnd, ([^\n]+)\);')
+$classWrites = [regex]::Matches($body, 'wow_cleanup_set_class_procedure\(\*ppcls, ([^\n]+)\);')
+$guestGuards = [regex]::Matches($body, 'pwnd->procedure_is_guest && ')
+if ($windowWrites.Count -ne 3 -or $classWrites.Count -ne 2 -or $guestGuards.Count -ne 1) {
+    throw 'OPENNT-HOST-122 storage seam inventory changed'
+}
+$body = [regex]::Replace($body, 'wow_cleanup_set_window_procedure\(context, pwnd, ([^\n]+)\);', 'pwnd->lpfnWndProc = $1;')
+$body = [regex]::Replace($body, 'wow_cleanup_set_class_procedure\(\*ppcls, ([^\n]+)\);', '(*ppcls)->lpfnWndProc = $1;')
+$body = $body.Replace('pwnd->procedure_is_guest && ', '')
 $body = $body.Replace(', wow_cleanup_context *context)', ')')
 $body = $body.Replace('PseudoDestroyClassWindows(pwnd, pcls, context);', 'PseudoDestroyClassWindows(pwnd, pcls);')
 $body = $body.Replace('PseudoDestroyClassWindows(PtiCurrent()->rpdesk->pDeskInfo->spwnd, *ppcls, context);',
@@ -104,7 +113,7 @@ $body = $body.Substring(0,$body.Length-"    return TRUE;`n}".Length) + '}'
 $cleanupStart = $body.IndexOf('VOID _WOWCleanup(')
 $body = $body.Substring(0,$cleanupStart) + $body.Substring($cleanupStart).Replace('return FALSE;', 'return;').Replace('return TRUE;', 'return;')
 if ($body -cne $original.Substring($original.IndexOf($marker)).TrimEnd()) {
-    throw 'Cleanup owner differs outside registered OPENNT-HOST-062 changes'
+    throw 'Cleanup owner differs outside registered OPENNT-HOST-062/122 changes'
 }
 [pscustomobject]@{
     SourceHash = $hash
@@ -120,4 +129,6 @@ if ($body -cne $original.Substring($original.IndexOf($marker)).TrimEnd()) {
     NativeReleaseFailure = 'requires-explicit-integration-handling-not-infinite-retry'
     RecoveredWholeBody = 'matches-pinned-source-with-registered-adaptations'
     ObjectClassification = 'original-handtabl-and-original-type-and-flag-declarations'
+    ProcedureStorageWrites = $windowWrites.Count + $classWrites.Count
+    TypedGuestGuards = $guestGuards.Count
 } | Format-List

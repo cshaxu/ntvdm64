@@ -100,6 +100,12 @@ int __cdecl mvdm_softpc_wow_page_domain_retire_class(unsigned long server)
     return 1;
 }
 
+int __cdecl mvdm_softpc_wow_page_domain_release_class(unsigned long server)
+{
+    UNREFERENCED_PARAMETER(server);
+    return 1; /* Explicit no-page-domain boundary double, as above. */
+}
+
 /* Task-lifecycle fixtures intentionally have no CCPU PMODE32 page domain.
  * They verify only that the original cleanup order retains and releases the
  * native task carrier.  The dedicated page-domain fixture verifies the

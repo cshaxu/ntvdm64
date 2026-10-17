@@ -92,7 +92,7 @@ static void live_dispatch_cleanup(wow_cleanup_context *ctx, int cleanup_mode)
     UNICODE_STRING name;
     DWORD class_words[2]={0x12350020,0}, procedure;
     WW words={0};
-    wow_window_dispatch_target target={0x92350020,live_callback};
+    wow_window_dispatch_target target={0x92350020,live_callback,TRUE};
     wow_window_words_binding *borrow;
     wow_cleanup_window *live;
     HWND window;
@@ -102,7 +102,7 @@ static void live_dispatch_cleanup(wow_cleanup_context *ctx, int cleanup_mode)
     NEMODULESEG segment={0};
     ATOM atom;
     unsigned before;
-    wc.lpfnWndProc=wow_window_native_proc; wc.hInstance=(HINSTANCE)0x34561234;
+    wc.lpfnWndProc=wow_window_class_creation_proc; wc.hInstance=(HINSTANCE)0x34561234;
     wc.lpszClassName="S40_CLEANUP_LIVE";
     RtlInitUnicodeString(&name,L"S40_CLEANUP_LIVE");
     atom=wow_class_words_register_target(ctx->thread->ppi->classes,&wc,&name,
@@ -186,7 +186,7 @@ static void live_dispatch_cleanup(wow_cleanup_context *ctx, int cleanup_mode)
     }
     CHECK(live->lpfnWndProc==DefWindowProcA);
     CHECK(wow_window_procedure_read(window,&procedure) && procedure==(DWORD)DefWindowProcA);
-    CHECK((WNDPROC)GetWindowLongA(window,GWL_WNDPROC)==wow_window_native_proc);
+    CHECK((WNDPROC)GetWindowLongA(window,GWL_WNDPROC)==DefWindowProcA);
     CHECK(SendMessageA(window,WM_USER+42,0,0)==0 && live_callbacks==before);
     CHECK(live->spwndChild==NULL && live->spwndNext==NULL);
     if (parent) CHECK(DestroyWindow(parent));
@@ -225,6 +225,10 @@ int __cdecl main(void)
     wow_class_lookup_entry *entry;
     PVOID inaccessible;
     unsigned before, i;
+    HHOOK terminal = SetWindowsHookExA(WH_CALLWNDPROCRET,
+        wow_window_terminal_observer, NULL, GetCurrentThreadId());
+    CHECK(terminal != NULL);
+    if (!terminal) return 3;
     verify_native_identity_binding();
     process.classes=&classes;
     process.objects=&objects;
@@ -262,6 +266,7 @@ int __cdecl main(void)
     /* Controlled owner views exercise original policy, not production HWND
      * enumeration or a claim that live worker object publication exists. */
     root.spwndChild=&window_view; window_view.pcls=entry; window_view.thread=&thread;
+    window_view.native_window=window;
     window_view.lpfnWndProc=(WNDPROC)0x92350020;
     entry->cWndReferenceCount=1;
     CHECK(_WOWCleanup((HANDLE)0x2345,0,NULL,0,&ctx));
@@ -275,6 +280,7 @@ int __cdecl main(void)
     handles[1].bType=1; handles[1].phead=&foreign_view; handles[1].pOwner=&foreign;
     window_view.lpfnWndProc=(WNDPROC)0x92350020;
     foreign_view.lpfnWndProc=(WNDPROC)0x92350020;
+    window_view.procedure_is_guest=TRUE; foreign_view.procedure_is_guest=TRUE;
     CHECK(_WOWCleanup((HANDLE)0x9999,0,&segment,1,&ctx));
     CHECK(window_view.lpfnWndProc==DefWindowProcA);
     CHECK(foreign_view.lpfnWndProc==(WNDPROC)0x92350020);
@@ -328,6 +334,7 @@ int __cdecl main(void)
     live_dispatch_cleanup(&ctx,TRUE);
     live_dispatch_cleanup(&ctx,2);
     CHECK(tree_checks==2);
+    CHECK(UnhookWindowsHookEx(terminal));
     printf("WOW_CLEANUP errors=%u module=1 task=1 thread=1 native_failure=2 bound=13 probe_failure=1 live_dispatch=%u resource_kinds=3 native_membership=1 stale_retire=1 native_tree=%u\n",errors,live_callbacks,tree_checks);
     return errors ? 3 : 0;
 }

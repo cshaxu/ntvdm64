@@ -29,6 +29,7 @@ int __cdecl main(void)
     wow_class_words_binding *binding;
     const DWORD tagged = 0x92340056;
     DWORD words[2] = {0x12340056,0x789a}, old;
+    BOOL previous_guest;
     HINSTANCE module = (HINSTANCE)0x23451234;
     ATOM atom;
     classes.client_module = GetModuleHandleW(L"user32.dll");
@@ -42,13 +43,13 @@ int __cdecl main(void)
     original.lpszMenuName = "S2_CLIENT_MENU";
     original.cbClsExtra = 12;
     original.cbWndExtra = 18;
-    atom = wow_class_client_register(&context, &original, words);
+    atom = wow_class_client_register_guest(&context, &original, words);
     CHECK(atom != 0);
     CHECK(wow_class_fixture_publications == 1);
     CHECK(wow_class_fixture_words[0] == words[0] && wow_class_fixture_words[1] == words[1]);
     CHECK(wow_class_fixture_task == task.hTaskWow);
     CHECK(GetClassInfoA(module, original.lpszClassName, &native_view));
-    CHECK(native_view.lpfnWndProc == wow_window_native_proc);
+    CHECK(native_view.lpfnWndProc == wow_window_class_creation_proc);
     CHECK(native_view.lpszMenuName == NULL);
     CHECK(wow_user_get_class_infoA(module, original.lpszClassName, &output));
     ++queries;
@@ -62,13 +63,15 @@ int __cdecl main(void)
     binding = wow_class_words_acquire(&classes, atom, module);
     CHECK(binding != NULL);
     if (binding) {
-        CHECK(wow_class_words_exchange_procedure(binding, (DWORD)native, &old));
-        CHECK(old == tagged);
+        CHECK(wow_class_words_exchange_procedure(binding, (DWORD)native, FALSE,
+            &old, &previous_guest));
+        CHECK(old == tagged && previous_guest);
         CHECK(wow_user_get_class_infoA(module, "s2_query", &output));
         ++queries;
         CHECK(output.lpfnWndProc == native);
-        CHECK(wow_class_words_exchange_procedure(binding, tagged, &old));
-        CHECK(old == (DWORD)native);
+        CHECK(wow_class_words_exchange_procedure(binding, tagged, TRUE,
+            &old, &previous_guest));
+        CHECK(old == (DWORD)native && !previous_guest);
         wow_class_words_release(binding);
     }
     memset(&unchanged, 0x5a, sizeof(unchanged));
@@ -82,7 +85,7 @@ int __cdecl main(void)
     if (binding) {
         wow_class_words_entry(binding)->flags |= CSF_WOWDEFERDESTROY;
         CHECK(GetClassInfoA(module, original.lpszClassName, &native_view));
-        CHECK(native_view.lpfnWndProc == wow_window_native_proc);
+        CHECK(native_view.lpfnWndProc == wow_window_class_creation_proc);
         CHECK(!wow_user_get_class_infoA(module, original.lpszClassName, &output));
         CHECK(GetLastError() == ERROR_CLASS_DOES_NOT_EXIST);
         CHECK(!memcmp(&output, &unchanged, sizeof(output)));
@@ -99,7 +102,7 @@ int __cdecl main(void)
      * withdraw the native registration before the original client frees its
      * menu names. A subsequent registration must not find a stale class. */
     wow_class_fixture_publication_fail = TRUE;
-    CHECK(!wow_class_client_register(&context, &original, words));
+    CHECK(!wow_class_client_register_guest(&context, &original, words));
     CHECK(classes.pclsPrivateList == NULL);
     CHECK(!GetClassInfoA(module, original.lpszClassName, &output));
     CHECK(wow_class_fixture_publications == 2);
@@ -107,7 +110,7 @@ int __cdecl main(void)
     /* Original _RegisterClassEx, not mere existence of ptdb, decides whether
      * the class belongs to a WOW task. Do not retain the old duplicate rule. */
     thread.TIF_flags = 0;
-    CHECK(wow_class_client_register(&context, &original, words));
+    CHECK(wow_class_client_register_guest(&context, &original, words));
     CHECK(wow_class_fixture_task == 0 && wow_class_fixture_publications == 3);
     CHECK(wow_class_client_unregister(&context, original.lpszClassName, module));
     CHECK(classes.pclsPrivateList == NULL);

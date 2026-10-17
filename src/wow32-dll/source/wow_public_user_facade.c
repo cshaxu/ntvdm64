@@ -10,19 +10,17 @@
 #include "opennt-abi/host-compat/include/wow32_provider_private.h"
 #include "opennt-abi/source/public/internal/windows/inc/wingdip.h"
 
-/* DIVERGENCE(ADAPTER-WIN32-051): the selected WOW32 call supplies a converted
- * 16-bit dialog template and `SCDLG_ANSI`; the original ntuser helper then
- * chooses its ANSI client-dialog path.  Public USER32 supplies the matching
- * A/W modal APIs and their -1 failure direction.  No private template parser,
- * server registration, or callback policy is introduced. */
-int WINAPI DialogBoxIndirectParamAorW(HINSTANCE module,
+/* ADAPTER-WOW-063 supersedes ADAPTER-WIN32-051's native modal substitution.
+ * Keep product style policy outside original clres/dlgmgr; preserve the
+ * complete input flags so the original entry owns their interpretation. */
+int WINAPI wow_user_dialog_box_indirect_param(HINSTANCE module,
     LPCDLGTEMPLATEW dialog_template, HWND owner, DLGPROC dialog_proc,
     LPARAM init_param, UINT flags)
 {
     DWORD policy;
     if (dialog_template == NULL || !wow_title_policy(&policy)) return -1;
     return (int)wow_title_modal(module,dialog_template,owner,dialog_proc,
-        init_param,(flags&SCDLG_ANSI)!=0,policy);
+        init_param,flags,policy);
 }
 
 /* DIVERGENCE(ADAPTER-WIN32-052): OpenNT's GetHFONT retrieves the font

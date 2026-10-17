@@ -1,0 +1,77 @@
+/* Copyright (c) 1985-95, Microsoft Corporation.
+ * DIVERGENCE(OPENNT-HOST-113): original read-only sysBmpStyles data only;
+ * external linkage supplies the bounded button resource carrier. No kernel
+ * factory, caption cache or system-settings behavior is imported. */
+#include "precomp.h"
+
+CONST WORD sysBmpStyles[OBI_COUNT][2] = {
+
+    DFC_CAPTION,   DFCS_CAPTIONCLOSE,                               // OBI_CLOSE
+    DFC_CAPTION,   DFCS_CAPTIONCLOSE | DFCS_PUSHED,                 // OBI_CLOSE_D
+    DFC_CAPTION,   DFCS_CAPTIONCLOSE | DFCS_INACTIVE,               // OBI_CLOSE_I
+    DFC_CAPTION,   DFCS_CAPTIONMIN,                                 // OBI_REDUCE
+    DFC_CAPTION,   DFCS_CAPTIONMIN | DFCS_PUSHED,                   // OBI_REDUCE_D
+    DFC_CAPTION,   DFCS_CAPTIONMIN | DFCS_INACTIVE,                 // OBI_REDUCE_I
+    DFC_CAPTION,   DFCS_CAPTIONRESTORE,                             // OBI_RESTORE
+    DFC_CAPTION,   DFCS_CAPTIONRESTORE | DFCS_PUSHED,               // OBI_RESTORE_D
+    DFC_CAPTION,   DFCS_CAPTIONHELP,                                // OBI_HELP
+    DFC_CAPTION,   DFCS_CAPTIONHELP | DFCS_PUSHED,                  // OBI_HELP_D
+    DFC_CAPTION,   DFCS_CAPTIONMAX,                                 // OBI_ZOOM
+    DFC_CAPTION,   DFCS_CAPTIONMAX | DFCS_PUSHED,                   // OBI_ZOOM_D
+    DFC_CAPTION,   DFCS_CAPTIONMAX | DFCS_INACTIVE,                 // OBI_ZOOM_I
+    DFC_CAPTION,   DFCS_CAPTIONCLOSE | DFCS_INMENU,                 // OBI_CLOSE_MBAR
+    DFC_CAPTION,   DFCS_CAPTIONCLOSE | DFCS_INMENU | DFCS_PUSHED,   // OBI_CLOSE_MBAR_D
+    DFC_CAPTION,   DFCS_CAPTIONCLOSE | DFCS_INMENU | DFCS_INACTIVE, // OBI_CLOSE_MBAR_I
+    DFC_CAPTION,   DFCS_CAPTIONMIN | DFCS_INMENU,                   // OBI_REDUCE_MBAR
+    DFC_CAPTION,   DFCS_CAPTIONMIN | DFCS_INMENU | DFCS_PUSHED,     // OBI_REDUCE_MBAR_D
+    DFC_CAPTION,   DFCS_CAPTIONMIN | DFCS_INMENU | DFCS_INACTIVE,   // OBI_REDUCE_MBAR_I
+    DFC_CAPTION,   DFCS_CAPTIONRESTORE | DFCS_INMENU,               // OBI_RESTORE_MBAR
+    DFC_CAPTION,   DFCS_CAPTIONRESTORE | DFCS_INMENU | DFCS_PUSHED, // OBI_RESTORE_MBAR_D
+    DFC_CACHE,     DFCS_CACHEICON,                                  // OBI_CAPICON1
+    DFC_CACHE,     DFCS_CACHEICON | DFCS_INACTIVE,                  // OBI_CAPICON1_I
+    DFC_CACHE,     DFCS_CACHEICON,                                  // OBI_CAPICON2
+    DFC_CACHE,     DFCS_CACHEICON | DFCS_INACTIVE,                  // OBI_CAPICON2_I
+    DFC_CACHE,     DFCS_CACHEICON,                                  // OBI_CAPICON3
+    DFC_CACHE,     DFCS_CACHEICON | DFCS_INACTIVE,                  // OBI_CAPICON3_I
+    DFC_CACHE,     DFCS_CACHEICON,                                  // OBI_CAPICON4
+    DFC_CACHE,     DFCS_CACHEICON | DFCS_INACTIVE,                  // OBI_CAPICON4_I
+    DFC_CACHE,     DFCS_CACHEICON,                                  // OBI_CAPICON5
+    DFC_CACHE,     DFCS_CACHEICON | DFCS_INACTIVE,                  // OBI_CAPICON5_I
+    DFC_CACHE,     DFCS_CACHEBUTTONS,                               // OBI_CAPBTNS
+    DFC_CACHE,     DFCS_CACHEBUTTONS | DFCS_INACTIVE,               // OBI_CAPBTNS_I
+    DFC_CAPTION,   DFCS_CAPTIONCLOSE | DFCS_INSMALL,                // OBI_CLOSE_PAL
+    DFC_CAPTION,   DFCS_CAPTIONCLOSE | DFCS_INSMALL | DFCS_PUSHED,  // OBI_CLOSE_PAL_D
+    DFC_CAPTION,   DFCS_CAPTIONCLOSE | DFCS_INSMALL | DFCS_INACTIVE,// OBI_CLOSE_PAL_I
+    DFC_SCROLL,    DFCS_SCROLLSIZEGRIP,                             // OBI_NCGRIP
+    DFC_SCROLL,    DFCS_SCROLLUP,                                   // OBI_UPARROW
+    DFC_SCROLL,    DFCS_SCROLLUP | DFCS_PUSHED | DFCS_FLAT,         // OBI_UPARROW_D
+    DFC_SCROLL,    DFCS_SCROLLUP | DFCS_INACTIVE,                   // OBI_UPARROW_I
+    DFC_SCROLL,    DFCS_SCROLLDOWN,                                 // OBI_DNARROW
+    DFC_SCROLL,    DFCS_SCROLLDOWN | DFCS_PUSHED | DFCS_FLAT,       // OBI_DNARROW_D
+    DFC_SCROLL,    DFCS_SCROLLDOWN | DFCS_INACTIVE,                 // OBI_DNARROW_I
+    DFC_SCROLL,    DFCS_SCROLLRIGHT,                                // OBI_RGARROW
+    DFC_SCROLL,    DFCS_SCROLLRIGHT | DFCS_PUSHED | DFCS_FLAT,      // OBI_RGARROW_D
+    DFC_SCROLL,    DFCS_SCROLLRIGHT | DFCS_INACTIVE,                // OBI_RGARROW_I
+    DFC_SCROLL,    DFCS_SCROLLLEFT,                                 // OBI_LFARROW
+    DFC_SCROLL,    DFCS_SCROLLLEFT | DFCS_PUSHED | DFCS_FLAT,       // OBI_LFARROW_D
+    DFC_SCROLL,    DFCS_SCROLLLEFT | DFCS_INACTIVE,                 // OBI_LFARROW_I
+    DFC_MENU,      DFCS_MENUARROW,                                  // OBI_MENUARROW
+    DFC_MENU,      DFCS_MENUCHECK,                                  // OBI_MENUCHECK
+    DFC_MENU,      DFCS_MENUBULLET,                                 // OBI_MENUBULLET
+    DFC_BUTTON,    DFCS_BUTTONRADIOMASK,                            // OBI_RADIOMASK
+    DFC_BUTTON,    DFCS_BUTTONCHECK,                                // OBI_CHECK
+    DFC_BUTTON,    DFCS_BUTTONCHECK | DFCS_CHECKED,                 // OBI_CHECK_C
+    DFC_BUTTON,    DFCS_BUTTONCHECK | DFCS_PUSHED,                  // OBI_CHECK_D
+    DFC_BUTTON,    DFCS_BUTTONCHECK | DFCS_CHECKED | DFCS_PUSHED,   // OBI_CHECK_CD
+    DFC_BUTTON,    DFCS_BUTTONCHECK | DFCS_CHECKED | DFCS_INACTIVE, // OBI_CHECK_CDI
+    DFC_BUTTON,    DFCS_BUTTONRADIOIMAGE,                                // OBI_RADIO
+    DFC_BUTTON,    DFCS_BUTTONRADIOIMAGE | DFCS_CHECKED,                 // OBI_RADIO_C
+    DFC_BUTTON,    DFCS_BUTTONRADIOIMAGE | DFCS_PUSHED,                  // OBI_RADIO_D
+    DFC_BUTTON,    DFCS_BUTTONRADIOIMAGE | DFCS_CHECKED | DFCS_PUSHED,   // OBI_RADIO_CD
+    DFC_BUTTON,    DFCS_BUTTONRADIOIMAGE | DFCS_CHECKED | DFCS_INACTIVE,  // OBI_RADIO_CDI
+    DFC_BUTTON,    DFCS_BUTTON3STATE,                               // OBI_3STATE
+    DFC_BUTTON,    DFCS_BUTTON3STATE | DFCS_CHECKED,                // OBI_3STATE_C
+    DFC_BUTTON,    DFCS_BUTTON3STATE | DFCS_PUSHED,                 // OBI_3STATE_D
+    DFC_BUTTON,    DFCS_BUTTON3STATE | DFCS_CHECKED | DFCS_PUSHED,   // OBI_3STATE_CD
+    DFC_BUTTON,    DFCS_BUTTON3STATE | DFCS_CHECKED | DFCS_INACTIVE,  // OBI_3STATE_CDI
+};

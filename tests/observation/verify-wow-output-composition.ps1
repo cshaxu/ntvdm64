@@ -55,11 +55,12 @@ $bindings = @{
     pfnWOWGetIdFromDirectory = 'wow_private_user_get_id_from_directory'
     pfnGetMenuIndex = 'wow_private_user_get_menu_index'
     pfnWowGetDefWindowProcBits = 'wow_private_user_get_def_window_proc_bits'
-    pfnFillWindow = 'wow_private_user_fill_window'
+    pfnFillWindow = 'wow_edit_FillWindow'
 }
 # A recovered core has a different ABI from the output-table callback. Its
 # presence is useful recovery evidence, never permission to assign the slot.
 $cores = @{
+    pfnWowGetDefWindowProcBits = 'WowGetDefWindowProcBits'
     pfnDirectedYield = 'xxxDirectedYield'
     pfnYieldTask = 'xxxUserYield'
     pfnWowWaitForMsgAndEvent = 'xxxSleepTask'

@@ -1,9 +1,11 @@
 #include "wow_user_runtime.h"
+#include "wow_user_registered_callbacks.h"
 #include "wow_window_creation_binding.h"
 #include "wow_dialog_creation_binding.h"
 #include "wow_class_query_bindings.h"
 #include "wow_class_lookup_bindings.h"
 #include "wow_private_user_compat.h"
+#include "wow_edit_call_bindings.h"
 #include "wow_bitmap_bindings.h"
 #include "wow_task_order_bindings.h"
 #include "wow_user_task_lifecycle.h"
@@ -38,6 +40,10 @@ DWORD WINAPI NtvdmSeparateWowStyle(DWORD *style);
 static PFNWOWHANDLERSIN wow_input_handlers;
 static wow_user_task_lifecycle wow_lifecycle;
 
+const struct tagAPFNWOWHANDLERSIN *WINAPI wow_user_registered_callbacks(void)
+{
+    return &wow_input_handlers;
+}
 
 
 BOOL WINAPI wow_user_get_messageA(LPMSG message, HWND window, UINT first, UINT last)
@@ -58,17 +64,32 @@ BOOL WINAPI wow_user_wait_message(void)
     return wow_user_task_lifecycle_wait_message(&wow_lifecycle);
 }
 
+BOOL WINAPI wow_user_get_messageW(LPMSG message, HWND window, UINT first, UINT last)
+{
+    return wow_user_task_lifecycle_messageW(&wow_lifecycle, message, window,
+        first, last, PM_REMOVE, TRUE);
+}
+
+BOOL WINAPI wow_user_peek_messageW(LPMSG message, HWND window, UINT first,
+    UINT last, UINT flags)
+{
+    return wow_user_task_lifecycle_messageW(&wow_lifecycle, message, window,
+        first, last, flags, FALSE);
+}
+
 static LRESULT call_previous_window_proc(WNDPROC procedure, HWND window,
     UINT message, WPARAM wp, LPARAM lp, BOOL unicode)
 {
     wow_user_borrow_scope scope;
     wow_task_callback_scope task_scope;
     LRESULT result;
+    DWORD resolved;
     /* Original clmsg.c::CallWindowProcAorW resolves CPD first, then
      * usercli.h::CALLPROC_WOWCHECK forwards tagged WOW targets with NULL WW.
      * Modern USER owns native/CPD translation but cannot interpret this
      * worker's WOW target. Keep the original registered callback as owner. */
-    if (HIWORD(procedure) == WNDPROC_HANDLE ||
+    if (!wow_native_class_resolve_procedure((DWORD)procedure, &resolved)) return 0;
+    if (resolved != (DWORD)procedure ||
             !((DWORD)(ULONG_PTR)procedure & WNDPROC_WOW)) {
         wow_user_native_call call;
         BOOL restored;
@@ -333,7 +354,7 @@ static ATOM WINAPI registered_register_class(PVOID a, LPDWORD b)
     {
         ATOM result;
         registration_trace_context(binding->classes->classes);
-        result = wow_class_client_register(binding->classes, (WNDCLASSA *)a, b);
+        result = wow_class_client_register_guest(binding->classes, (WNDCLASSA *)a, b);
         registration_trace_context(binding->classes->classes);
         registration_trace("RegisterClass", result);
         registration_trace_class(((WNDCLASSA *)a)->lpszClassName, result);
@@ -449,7 +470,7 @@ static HWND WINAPI registered_find_window(LPCSTR class_name, LPCSTR window_name)
 static VOID WINAPI registered_fill_window(HWND parent, HWND window, HDC dc,
     HANDLE brush)
 {
-    (void)wow_private_user_fill_window(parent, window, dc, (HBRUSH)brush);
+    (void)wow_edit_FillWindow(parent, window, dc, (HBRUSH)brush);
 }
 
 DWORD WINAPI UserRegisterWowHandlers(APFNWOWHANDLERSIN input,

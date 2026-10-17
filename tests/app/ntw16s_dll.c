@@ -10,6 +10,8 @@ typedef BOOL (__cdecl *remove_fn)(HWND);
 typedef HFONT (__cdecl *font_fn)(void);
 typedef void (__cdecl *release_fn)(HFONT);
 typedef DWORD (__cdecl *version_fn)(void);
+typedef BOOL (__cdecl *hit_fn)(HWND,LPARAM,LRESULT *);
+static hit_fn hit_test;
 static install_fn install_window,install_control;
 static remove_fn remove_window,remove_control;
 static font_fn acquire_font;
@@ -40,9 +42,10 @@ static LRESULT CALLBACK window_proc(HWND w,UINT m,WPARAM a,LPARAM b)
 {if(m==WM_APP+7)return 456;return DefWindowProcW(w,m,a,b);}
 static DWORD WINAPI other_thread(void *unused)
 {
-    HWND w;(void)unused;
+    HWND w;LRESULT hit=123;(void)unused;
     CHECK(SetThreadDesktop(desktop));
     CHECK(!install_window(parent_window,NULL) && GetLastError()==ERROR_INVALID_THREAD_ID);
+    CHECK(!hit_test(parent_window,0,&hit) && GetLastError()==ERROR_INVALID_THREAD_ID && hit==123);
     w=CreateWindowW(L"DllBoundary",L"second thread",WS_OVERLAPPEDWINDOW,0,0,400,240,NULL,NULL,GetModuleHandleW(NULL),NULL);
     CHECK(w && install_window(w,NULL));other_font=acquire_font();CHECK(other_font);
     CHECK(SetEvent(ready));CHECK(WaitForSingleObject(finish,10000)==WAIT_OBJECT_0);
@@ -60,10 +63,24 @@ static void load_boundary(const WCHAR *path)
     remove_control=(remove_fn)(void *)GetProcAddress(dll,"win16_style_control_remove");
     acquire_font=(font_fn)(void *)GetProcAddress(dll,"win16_style_font_acquire");
     release_font=(release_fn)(void *)GetProcAddress(dll,"win16_style_font_release");
+    hit_test=(hit_fn)(void *)GetProcAddress(dll,"win16_style_hit_test");
+    CHECK(hit_test);
     CHECK(install_window && remove_window && install_control && remove_control && acquire_font && release_font);
     parent_window=CreateWindowW(L"DllBoundary",L"DLL test",WS_OVERLAPPEDWINDOW,0,0,400,240,NULL,NULL,GetModuleHandleW(NULL),NULL);
     CHECK(parent_window && install_window(parent_window,NULL));
     CHECK(!install_window(parent_window,NULL) && GetLastError()==ERROR_ALREADY_EXISTS);
+    {
+        RECT r;int x,y;LRESULT hit;
+        CHECK(GetWindowRect(parent_window,&r));
+        /* Query and subclass must use the same frame owner, including
+         * borders, caption cells and client space. No window messages are
+         * sent by the exported query itself. */
+        for(y=0;y<r.bottom-r.top;y+=7)for(x=0;x<r.right-r.left;x+=7){
+            LPARAM point=MAKELPARAM(r.left+x,r.top+y);
+            CHECK(hit_test(parent_window,point,&hit));
+            CHECK(hit==SendMessageW(parent_window,WM_NCHITTEST,0,point));
+        }
+    }
     child=CreateWindowW(L"BUTTON",L"Button",WS_CHILD|BS_PUSHBUTTON,10,10,100,32,parent_window,NULL,GetModuleHandleW(NULL),NULL);
     CHECK(child);original=(HFONT)GetStockObject(SYSTEM_FONT);SendMessageW(child,WM_SETFONT,(WPARAM)original,0);
     CHECK(install_control(child,NULL));font=acquire_font();CHECK(font);
@@ -75,6 +92,7 @@ static void load_boundary(const WCHAR *path)
     CHECK(GetExitCodeThread(thread,&code) && code==0);CloseHandle(thread);CloseHandle(ready);CloseHandle(finish);
     CHECK(remove_control(child) && (HFONT)SendMessageW(child,WM_GETFONT,0,0)==original);
     CHECK(remove_window(parent_window));CHECK(SendMessageW(parent_window,WM_APP+7,0,0)==456);
+    {LRESULT hit=123;CHECK(!hit_test(parent_window,0,&hit) && hit==123);}
     CHECK(DestroyWindow(parent_window));release_font(font);
     /* No remaining HWND subclasses, creation scopes, font leases or active
      * callbacks: the caller's explicit unload precondition is now satisfied. */

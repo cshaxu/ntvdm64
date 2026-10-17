@@ -289,7 +289,7 @@ BOOL WINAPI wow_menu_client_refresh_all(wow_task_order_process *process)
         HMENU menu;
         if (table->entries[i].bType != TYPE_WINDOW || !window) continue;
         if (!GetWindowInfo(window, &info)) return FALSE;
-        if (info.dwStyle & WS_CHILD) continue;
+        if ((info.dwStyle & (WS_CHILD | WS_POPUP)) == WS_CHILD) continue;
         menu = GetMenu(window);
         if (menu && !publish_tree(process, 0, menu, FALSE, TRUE)) return FALSE;
         if (!mvdm_softpc_wow_page_domain_window_menu((ULONG)(ULONG_PTR)window,
@@ -310,7 +310,8 @@ BOOL WINAPI wow_menu_client_refresh_all(wow_task_order_process *process)
             HWND window = (HWND)(ULONG_PTR)view[i].links.window;
             BOOL local_state = view[i].process_id == GetCurrentProcessId();
             HMENU menu;
-            if (window == GetDesktopWindow() || (view[i].style & WS_CHILD) ||
+            if (window == GetDesktopWindow() ||
+                    (view[i].style & (WS_CHILD | WS_POPUP)) == WS_CHILD ||
                     table->windows[LOWORD(window)] == window) continue;
             /* Covers observed native controls/windows as well as other
              * processes. Storage enrollment is not a process-ownership test. */

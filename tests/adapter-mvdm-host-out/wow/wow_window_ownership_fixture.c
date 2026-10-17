@@ -1,5 +1,9 @@
 #include "wow_window_words_binding.h"
-#include "wow_private_user_compat.h"
+#include "wow_edit_native_bindings.h"
+/* Native pixel/identity witness only. Task ownership and reentry are tested
+ * by wow_edit_call_fixture and must also pass through the real registered
+ * guest callback in grouped acceptance. This standalone fixture has no WOW
+ * task and therefore must not call the scoped production entry directly. */
 #include <stdio.h>
 #include <stdlib.h>
 typedef VOID (APIENTRY *PFNW32ET)(VOID);
@@ -86,7 +90,7 @@ int __cdecl main(int argc, char **argv)
             CHECK(GetPropW(variants[i], L"NTVDM.WOW.WindowWords") == (HANDLE)1);
             /* Child is waiting, not pumping sent messages. The original
              * foreign-process branch must use DefWindowProc, not send HDC. */
-            CHECK(wow_private_user_fill_window(variants[i], paint_window, dc,
+            CHECK(wow_edit_native_NtUserFillWindow(variants[i], paint_window, dc,
                 (HBRUSH)CTLCOLOR_STATIC));
         }
     } else { CHECK(FALSE); }

@@ -245,13 +245,16 @@ try {
         $records|ConvertTo-Json|Set-Content "$root/guest-report.json"
         # Decode short failure reports before enforcing the successful shape.
         # 0101: guest DestroyWindow returned FALSE; 0102: IsWindow stayed TRUE.
-        if($bytes.Length -ne 24*($CommonDialogRounds+2)){throw 'Unexpected COMMDLG lifetime record count; see guest-report.json'}
+        if($bytes.Length -ne 24*($CommonDialogRounds+3)){throw 'Unexpected COMMDLG lifetime record count; see guest-report.json'}
+        if($records[1].phase -ne 1 -or $records[1].created -ne 0 -or
+                $records[1].closed -ne 0 -or $records[1].hooks -ne 0 -or
+                $records[1].task -ne $records[0].task){throw 'COMMDLG owner creation checkpoint failed'}
         $last=$records[-1]
         if($records[0].phase -ne 0 -or $last.phase -ne 2 -or @($records|Where-Object errors -ne 0).Count -or
                 $last.created -ne $CommonDialogRounds+1 -or $last.closed -ne $CommonDialogRounds -or
                 $last.hooks -ne $CommonDialogRounds+1 -or $last.leaving -ne 1 -or !$last.task){throw 'COMMDLG normal/exit phase assertions failed'}
         for($round=1;$round -le $CommonDialogRounds;$round++){
-            $row=$records[$round]
+            $row=$records[$round+1]
             if($row.phase -ne 1 -or $row.created -ne $round -or $row.closed -ne $round -or
                     $row.hooks -ne $round -or !$row.dialog -or !$row.destroyAX -or $row.isWindowAX -ne 0 -or
                     $row.task -ne $last.task){throw "COMMDLG destruction round $round failed"}

@@ -11,6 +11,231 @@
 * 14-Jan-1991 mikeke
 \***************************************************************************/
 
+#if defined(WOW_ORIGINAL_EDIT_LOOKASIDE)
+/* DIVERGENCE(OPENNT-HOST-074): unchanged original control lookaside bodies;
+ * only their private USER environment is supplied by the finite binding. */
+#include "wow_edit_lookaside_bindings.h"
+
+//++
+//
+// PVOID
+// AllocateFromZone(
+//     IN PZONE_HEADER Zone
+//     )
+//
+// Routine Description:
+//
+//     This routine removes an entry from the zone and returns a pointer to it.
+//
+// Arguments:
+//
+//     Zone - Pointer to the zone header controlling the storage from which the
+//         entry is to be allocated.
+//
+// Return Value:
+//
+//     The function value is a pointer to the storage allocated from the zone.
+//
+/***************************************************************************\
+\***************************************************************************/
+
+#define AllocateFromZone(Zone) \
+    (PVOID)((Zone)->FreeList.Next); \
+    if ( (Zone)->FreeList.Next ) (Zone)->FreeList.Next = (Zone)->FreeList.Next->Next
+
+
+//++
+//
+// PVOID
+// FreeToZone(
+//     IN PZONE_HEADER Zone,
+//     IN PVOID Block
+//     )
+//
+// Routine Description:
+//
+//     This routine places the specified block of storage back onto the free
+//     list in the specified zone.
+//
+// Arguments:
+//
+//     Zone - Pointer to the zone header controlling the storage to which the
+//         entry is to be inserted.
+//
+//     Block - Pointer to the block of storage to be freed back to the zone.
+//
+// Return Value:
+//
+//     Pointer to previous block of storage that was at the head of the free
+//         list.  NULL implies the zone went from no available free blocks to
+//         at least one free block.
+//
+/***************************************************************************\
+\***************************************************************************/
+
+#define FreeToZone(Zone,Block)                                    \
+    ( ((PSINGLE_LIST_ENTRY)(Block))->Next = (Zone)->FreeList.Next,  \
+      (Zone)->FreeList.Next = ((PSINGLE_LIST_ENTRY)(Block)),        \
+      ((PSINGLE_LIST_ENTRY)(Block))->Next                           \
+    )
+
+/***************************************************************************\
+* InitLookaside
+*
+* Initializes the lookaside list. This improves control locality
+* by keeping control entries in a single page
+*
+* 05-04-95 JimA         Created.
+\***************************************************************************/
+
+NTSTATUS
+InitLookaside(
+    PLOOKASIDE pla,
+    DWORD cbEntry,
+    DWORD cEntries)
+{
+    ULONG i;
+    PCH p;
+    ULONG BlockSize;
+    PZONE_HEADER Zone;
+    PVOID InitialSegment;
+    ULONG InitialSegmentSize;
+
+    InitialSegmentSize = (cEntries * cbEntry) + sizeof(ZONE_SEGMENT_HEADER);
+
+    p = (PCH)UserLocalAlloc(0, InitialSegmentSize);
+
+    if ( !p ) {
+        return STATUS_NO_MEMORY;
+        }
+
+    RtlEnterCriticalSection(&gcsLookaside);
+
+    //
+    // If the lookaside list has already been initialized, we're done.
+    //
+
+    if (pla->LookasideBase != NULL && pla->EntrySize == cbEntry) {
+        RtlLeaveCriticalSection(&gcsLookaside);
+        UserLocalFree(p);
+        return STATUS_SUCCESS;
+    }
+
+    pla->LookasideBase = (PVOID)p;
+    pla->LookasideBounds = (PVOID)(p + InitialSegmentSize);
+    pla->EntrySize = cbEntry;
+
+    //
+    // Using the ExZone-like code, slice up the page into QMSG's
+    //
+
+    Zone = &pla->LookasideZone;
+    BlockSize = cbEntry;
+    InitialSegment = pla->LookasideBase;
+
+    Zone->BlockSize = BlockSize;
+
+    Zone->SegmentList.Next = &((PZONE_SEGMENT_HEADER) InitialSegment)->SegmentList;
+    ((PZONE_SEGMENT_HEADER) InitialSegment)->SegmentList.Next = NULL;
+    ((PZONE_SEGMENT_HEADER) InitialSegment)->Reserved = NULL;
+
+    Zone->FreeList.Next = NULL;
+
+    p = (PCH)InitialSegment + sizeof(ZONE_SEGMENT_HEADER);
+
+    for (i = sizeof(ZONE_SEGMENT_HEADER);
+         i <= InitialSegmentSize - BlockSize;
+         i += BlockSize
+        ) {
+        ((PSINGLE_LIST_ENTRY)p)->Next = Zone->FreeList.Next;
+        Zone->FreeList.Next = (PSINGLE_LIST_ENTRY)p;
+        p += BlockSize;
+    }
+    Zone->TotalSegmentSize = i;
+
+    RtlLeaveCriticalSection(&gcsLookaside);
+
+    return STATUS_SUCCESS;
+
+}
+
+/***************************************************************************\
+* AllocLookasideEntry
+*
+* Allocates an entry from the lookaside list.
+*
+* 05-04-95 JimA         Created.
+\***************************************************************************/
+
+PVOID AllocLookasideEntry(
+    PLOOKASIDE pla)
+{
+    PVOID pEntry;
+
+    //
+    // Attempt to get an entry from the zone. If this fails, then
+    // LocalAlloc the entry
+    //
+
+    RtlEnterCriticalSection(&gcsLookaside);
+    pEntry = AllocateFromZone(&pla->LookasideZone);
+    RtlLeaveCriticalSection(&gcsLookaside);
+
+    if ( !pEntry ) {
+
+        /*
+         * Allocate a local structure.
+         */
+#if DBG
+        pla->AllocSlowCalls++;
+#endif // DBG
+        if ((pEntry = UserLocalAlloc(0, pla->EntrySize)) == NULL)
+            return NULL;
+        }
+    RtlZeroMemory(pEntry, pla->EntrySize);
+#if DBG
+    pla->AllocCalls++;
+
+    if (pla->AllocCalls - pla->DelCalls > pla->AllocHiWater ) {
+        pla->AllocHiWater = pla->AllocCalls - pla->DelCalls;
+        }
+#endif // DBG
+
+    return pEntry;
+}
+
+/***************************************************************************\
+* FreeLookasideEntry
+*
+* Returns a qmsg to the lookaside buffer or free the memory.
+*
+* 05-04-95 JimA         Created.
+\***************************************************************************/
+
+void FreeLookasideEntry(
+    PLOOKASIDE pla,
+    PVOID pEntry)
+{
+#if DBG
+    pla->DelCalls++;
+#endif // DBG
+
+    //
+    // If the pEntry was from zone, then free to zone
+    //
+    if ( (PVOID)pEntry >= pla->LookasideBase && (PVOID)pEntry < pla->LookasideBounds ) {
+        RtlEnterCriticalSection(&gcsLookaside);
+        FreeToZone(&pla->LookasideZone,pEntry);
+        RtlLeaveCriticalSection(&gcsLookaside);
+    } else {
+#if DBG
+        pla->DelSlowCalls++;
+#endif // DBG
+        UserLocalFree(pEntry);
+    }
+}
+
+#else
 /* DIVERGENCE(OPENNT-HOST-040): retain original RtlCaptureAnsiString.
  * Other USER initialization/capture routines and private precompiled headers
  * are excluded. The existing worker TLS/heap boundary supplies resources. */
@@ -72,3 +297,4 @@ BOOL RtlCaptureAnsiString(
     return TRUE;
 }
 
+#endif /* WOW_ORIGINAL_EDIT_LOOKASIDE */

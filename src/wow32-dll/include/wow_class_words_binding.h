@@ -5,8 +5,16 @@
 #include "wow_window_dispatch_bindings.h"
 
 typedef struct wow_class_words_binding wow_class_words_binding;
+/* Public native class owner resolves recognized CPDs and preserves unknown
+ * values, matching original _RegisterClassEx. No HWND or token cache.
+ * FALSE is a resource/query/cleanup failure; output is then unchanged. */
+BOOL WINAPI wow_native_class_resolve_procedure(DWORD, DWORD *);
 /* Same borrowed lifetime as class words; no new lookup or copied entry. */
 wow_class_lookup_entry *WINAPI wow_class_words_entry(wow_class_words_binding *);
+struct tagCLS;
+/* Immutable original-layout atom projection, retained by this class binding.
+ * Only atomClassName is an admitted consumer; no native private CLS access. */
+struct tagCLS *WINAPI wow_class_words_client_identity(wow_class_words_binding *);
 BOOL WINAPI wow_class_words_native_registration(wow_class_words_binding *);
 /* Match the actually called target under the USER lock, not its HWND class. */
 BOOL WINAPI wow_class_words_match_native(wow_class_lookup_context *, WNDPROC,
@@ -63,12 +71,15 @@ BOOL WINAPI wow_class_words_forget_native(wow_class_lookup_context *);
 LRESULT CALLBACK wow_class_call_original_native(HWND, UINT, WPARAM, LPARAM);
 BOOL WINAPI wow_class_words_target(wow_class_words_binding *,
     wow_window_dispatch_target *);
-/* Snapshot/replace only an enrolled class's logical target. The HWND gateway
- * boundary excludes recursion; native CPD identities are normalized only in
- * the original cleanup field and returned unchanged to original WOW callers.
+/* Snapshot/replace the original owned CLS behavior. New WNDs snapshot this
+ * selection before first callback. Original SetClassLongA resolves a native CPD
+ * to its address and selects ANSI; it must not retain the source-owned token.
  * Callback identity is immutable. Neither operation changes existing WNDs. */
 BOOL WINAPI wow_class_words_exchange_procedure(wow_class_words_binding *,
-    DWORD, DWORD *);
+    DWORD, BOOL guest, DWORD *, BOOL *previous_guest);
+/* Original module cleanup's already selected native/default target. No
+ * native class recreation or HWND-dependent setter belongs to this leaf. */
+void WINAPI wow_class_words_restore_procedure(wow_class_words_binding *, WNDPROC);
 /* Name is the original client's captured Unicode class name. This maps
  * retained names to native class atoms, never allocates another atom ID. */
 ATOM WINAPI wow_class_words_find_atom(wow_class_lookup_context *,

@@ -64,7 +64,7 @@ static DWORD WINAPI child_task(void *parameter)
     child_task_context *context = parameter;
     wow_user_runtime_thread binding = {0};
     wow_task_order_thread *thread;
-    wow_window_dispatch_target target = { 0x92350021u, child_window_callback };
+    wow_window_dispatch_target target = { 0x92350021u, child_window_callback, TRUE };
     WNDCLASSEXA window_class = { sizeof(window_class) };
     CREATESTRUCTA request = {0};
     UNICODE_STRING name;
@@ -81,7 +81,7 @@ static DWORD WINAPI child_task(void *parameter)
                 (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT,
                 (DWORD)CW_USEDEFAULT, SW_SHOW)) goto done;
     thread = wow_user_runtime_current()->thread;
-    window_class.lpfnWndProc = wow_window_native_proc;
+    window_class.lpfnWndProc = wow_window_class_creation_proc;
     window_class.hInstance = GetModuleHandleA(NULL);
     window_class.lpszClassName = "S40_CHILD_WINDOW";
     RtlInitUnicodeString(&name, L"S40_CHILD_WINDOW");
@@ -126,7 +126,7 @@ int __cdecl main(void)
     wow_user_runtime_thread binding = {0};
     wow_user_task_lifecycle lifecycle = {0};
     wow_user_task_lifecycle_callbacks callbacks = {0};
-    wow_window_dispatch_target target = { 0x92350020u, window_callback };
+    wow_window_dispatch_target target = { 0x92350020u, window_callback, TRUE };
     WNDCLASSEXA window_class = { sizeof(window_class) };
     CREATESTRUCTA request = {0};
     UNICODE_STRING name;
@@ -156,7 +156,7 @@ int __cdecl main(void)
         (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT, SW_SHOW));
 
     thread = wow_user_runtime_current()->thread;
-    window_class.lpfnWndProc = wow_window_native_proc;
+    window_class.lpfnWndProc = wow_window_class_creation_proc;
     window_class.hInstance = GetModuleHandleA(NULL);
     window_class.lpszClassName = "S40_TASK_WINDOW";
     RtlInitUnicodeString(&name, L"S40_TASK_WINDOW");

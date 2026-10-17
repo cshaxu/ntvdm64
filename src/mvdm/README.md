@@ -1,5 +1,28 @@
 # mvdm
 
+MVDM-HOST-DIV-339 reserves the S3 typed procedure-service correction at six
+call sites in wow32/wuwind.c::WU32Get/SetWindowLong and
+wow32/wuclass.c::WU32Get/SetClassLong, pinned to OpenNT
+5c5b979ec08c17d3ca2eb70e8aad62d26515d01c. IsThunkWindowProc already identifies
+the native-thunk versus real16:16 branches; preserve that fact at the host
+service seam. Modern USER cannot execute an original WNDPROC_WOW word, so the
+guest WND branch needs ADAPTER-WOW-072's native ABI entry, while the native WND
+branch lets USER normalize its opaque CPD in one assignment. Owned CLS retains
+original address-only normalization and zero-window unload restoration.
+A DWORD-only
+facade cannot recover this source intent after guest selectors and native
+CPDs acquire colliding bit patterns. Keep original encoding, return/thunk,
+WW/WC update and class-versus-existing-WND algorithms. The decoded result
+also carries guest/native origin: an encoded selector7fff can have the same
+FFFF high word as a native CPD. Four local return conversions therefore use
+origin at both tagged/native and CPD selection, rather than reinterpreting
+the decoded guest identity as CPD or a high native address as guest code.
+Class setter failure
+must stop before publishing its WOW words, matching the existing WND caller's
+failure ordering. Budget: six service selections and local guards in these
+two original host files; no guest edits. This is registered before those
+mirror call sites are changed, not a claim that they are implemented or tested.
+
 MVDM-HOST-DIV-338 (T447 S2, owner-selected thread idle observers):
 wkman.c WK32WowSetIdleHook borrows the current lifecycle task's native observer
 handle instead of creating a global Hook. W32FreeTask clears that intent but

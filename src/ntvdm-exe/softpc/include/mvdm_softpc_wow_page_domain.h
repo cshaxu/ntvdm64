@@ -65,13 +65,20 @@ int __cdecl mvdm_softpc_wow_page_domain_clear_client_desktop(void);
  * or own the native HWND. The caller owns projection lifetime: managed
  * associations retire at their destruction boundary; sampled unowned views
  * may be withdrawn without destroying the native window. */
-/* An existing observed projection may become managed only for the same full
- * native identity and a registered non-observed class. Keep its WND backing,
- * links; supplied creator WOW words replace observation values. NULL retains
- * existing words (or zero for a new view). Duplicate management is an error. */
+/* Managed publication is per WND, independent of class provenance. An
+ * existing observation may be adopted only for the same full native identity;
+ * zero class_server preserves its CLS, as native-window subclassing requires.
+ * Keep its WND backing/links; supplied creator WOW words replace observation
+ * values. NULL words retain existing words (or zero for a new view).
+ * Duplicate management is an error. Observation retirement cannot remove a
+ * managed WND even when its class remains an observed native-class view. */
 int __cdecl mvdm_softpc_wow_page_domain_publish_handle(unsigned short index,
     unsigned short uniqueness, unsigned char type, unsigned char flags,
     unsigned long window, unsigned long class_server, const unsigned long words[3]);
+/* Roll back only a managed adoption that retained its observed native CLS.
+ * Caller supplies its pinned exact generation; observation/words remain live. */
+int __cdecl mvdm_softpc_wow_page_domain_cancel_native_adoption(unsigned long,
+    unsigned long);
 /* Non-NULL retained_backing transfers the unpublished allocation to the
  * caller's existing borrow; that owner calls release_retained_window after
  * its final borrow. Shared-view borrows can independently defer physical
@@ -93,11 +100,38 @@ int __cdecl mvdm_softpc_wow_page_domain_handle_metadata(unsigned short index,
 int __cdecl mvdm_softpc_wow_page_domain_collect_retired_windows(void);
 int __cdecl mvdm_softpc_wow_page_domain_release_window(unsigned long backing);
 int __cdecl mvdm_softpc_wow_page_domain_release_retained_window(unsigned long backing);
+/* ADAPTER-WOW-069: one host-only storage owner per existing WND generation.
+ * Success transfers storage to the generation; failure transfers nothing.
+ * Bind/read require an outstanding borrow. Binding is single-assignment and
+ * only allowed while live; reads remain valid during retained retirement.
+ * dispose must only release host storage without throwing, never enter guest/USER or reenter
+ * this domain. It runs once at physical reclamation or quiesced domain exit.
+ * Storage must not hold a reference back to this backing (no owner cycle).
+ * Neither pointer is written to guest memory or used as a handle identity. */
+typedef void (__cdecl *mvdm_softpc_wow_host_window_dispose)(void *);
+int __cdecl mvdm_softpc_wow_page_domain_bind_window_host_storage(unsigned long,
+    void *, mvdm_softpc_wow_host_window_dispose);
+void *__cdecl mvdm_softpc_wow_page_domain_window_host_storage(unsigned long);
+/* Scope-only pin of an exact existing generation/storage pair. Unlike an
+ * HWND lookup this may retain withdrawn backing still alive for a borrower.
+ * Pair with release_window; storage itself must not own this reference. */
+int __cdecl mvdm_softpc_wow_page_domain_retain_host_window(unsigned long, void *);
 /* Original three WW DWORDs persist in the projected WND. Reads require an
  * outstanding borrow; setters additionally require a still-published WND.
  * Native style/module sampling and original classification remain above. */
 int __cdecl mvdm_softpc_wow_page_domain_read_window_words(unsigned long backing,
     unsigned long words[3]);
+/* Identity belongs to the retained backing generation, not a fresh HWND
+ * query. Requires a live borrow; zero/unknown metadata is not synthesized. */
+int __cdecl mvdm_softpc_wow_page_domain_read_window_identity(unsigned long backing,
+    unsigned long *process_id, unsigned long *thread_id);
+typedef struct mvdm_softpc_wow_window_words_view {
+    unsigned long words[3], style, exstyle, module;
+} mvdm_softpc_wow_window_words_view;
+/* All fields come from the committed retained generation, without a USER
+ * query. Module remains host metadata, never a new pointer in guest WND. */
+int __cdecl mvdm_softpc_wow_page_domain_read_window_words_view(unsigned long backing,
+    mvdm_softpc_wow_window_words_view *view);
 int __cdecl mvdm_softpc_wow_page_domain_exchange_window_word(unsigned long backing,
     unsigned long index, unsigned long value, unsigned long *previous);
 /* Sampled native view, separate from managed task/WW ownership. Only copied
@@ -143,8 +177,21 @@ typedef struct mvdm_softpc_wow_window_observation {
     mvdm_softpc_wow_window_descriptor descriptor;
     long window_rect[4], client_rect[4];
     unsigned long style, exstyle, control_id;
-    unsigned long process_id, thread_id;
+    unsigned long process_id, thread_id, module;
+    unsigned long context_help_id; /* Native scalar, retained with this generation. */
 } mvdm_softpc_wow_window_observation;
+/* Read an exact retained generation, including after logical retirement.
+ * Requires an outstanding borrow and the existing execution owner. Returned
+ * links are historical identities, not permission to resolve reused HWNDs.
+ * Failure leaves output unchanged. No native observation is performed. */
+int __cdecl mvdm_softpc_wow_page_domain_read_window_view(unsigned long backing,
+    mvdm_softpc_wow_window_observation *row);
+/* Pin a relationship's exact target allocation under the same execution
+ * owner. relation: 0 next, 1 parent, 2 child, 3 owner. Success with target=0
+ * means no edge; nonzero target owns one release_window reference. Failure
+ * leaves output unchanged. The source must already have an active borrow. */
+int __cdecl mvdm_softpc_wow_page_domain_borrow_window_relation(
+    unsigned long backing, unsigned long relation, unsigned long *target);
 int __cdecl mvdm_softpc_wow_page_domain_copy_window_view(
     unsigned long capacity, mvdm_softpc_wow_window_observation *rows,
     unsigned long *count);
@@ -162,6 +209,11 @@ int __cdecl mvdm_softpc_wow_page_domain_replace_window_links(
 int __cdecl mvdm_softpc_wow_page_domain_callback_window(unsigned long window,
     unsigned long saved[2]);
 int __cdecl mvdm_softpc_wow_page_domain_restore_callback(const unsigned long saved[2]);
+/* Read the existing callback pair, not the current handle slot. Success with
+ * zero means no exact HWND match. Nonzero transfers one backing borrow;
+ * failure leaves output untouched. Caller owns the active execution domain. */
+int __cdecl mvdm_softpc_wow_page_domain_borrow_callback_window(
+    unsigned long window, unsigned long *backing);
 /* A selected original CLS is represented in the same worker client/server
  * address space. The returned value is its server-form address; zero means
  * publication did not occur. Fields are fixed-width original values; the
@@ -176,6 +228,10 @@ unsigned long __cdecl mvdm_softpc_wow_page_domain_publish_named_class(
  * retained WND borrows must also retain the class until their final release;
  * this carrier does not replace the existing native class-reference owner. */
 int __cdecl mvdm_softpc_wow_page_domain_retire_class(unsigned long server);
+/* Native registration has ended: transfer copied storage to the existing
+ * collector. Published WND associations still reject release; retired
+ * borrowers keep the bytes until their final release. No new WND may use it. */
+int __cdecl mvdm_softpc_wow_page_domain_release_class(unsigned long server);
 
 /* Copied query fields consumed by USER16's unchanged local menu walkers.
  * This is not a native MENU/ITEM layout. Submenu values are full identities,

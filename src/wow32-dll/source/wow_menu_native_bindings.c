@@ -155,28 +155,36 @@ HMENU WINAPI wow_menu_native_GetSystemMenu(HWND window, BOOL revert)
     return result;
 }
 
-BOOL WINAPI wow_menu_native_TrackPopupMenu(HMENU menu, UINT flags,
-    int x, int y, int reserved, HWND window, const RECT *exclude)
-{
-    wow_user_runtime_thread *binding = menu_context();
-    wow_user_native_call call;
-    BOOL result = FALSE, restored;
-    DWORD error;
-    if (!binding || !(menu = menu_resolve(binding, menu)) ||
-            !menu_refresh(binding, menu)) return FALSE;
-    if (!wow_user_native_call_begin(&call, window)) return FALSE;
-    __try { result = TrackPopupMenu(menu, flags, x, y, reserved, window, exclude); }
-    __finally {
-        error = GetLastError();
-        restored = wow_user_native_call_end(&call);
-        if (restored) SetLastError(error);
-    }
-    if (!restored) return FALSE;
-    /* The common return boundary publishes all callback mutations, even on
-     * cancellation or destruction of the tracked menu/owner window. */
-    SetLastError(error);
-    return result;
+/* Both original menu tracking interfaces use the same ownership boundary.
+ * Preserve each native argument list and the numeric TPM_RETURNCMD result;
+ * do not translate Ex to TrackPopupMenu or normalize the return to TRUE. */
+#define MENU_TRACK(name, args, native_args) \
+BOOL WINAPI wow_menu_native_##name args \
+{ \
+    wow_user_runtime_thread *binding = menu_context(); \
+    wow_user_native_call call; \
+    BOOL result = FALSE, restored; DWORD error; \
+    if (!binding || !(menu = menu_resolve(binding, menu)) || \
+            !menu_refresh(binding, menu)) return FALSE; \
+    if (!wow_user_native_call_begin(&call, window)) return FALSE; \
+    __try { result = name native_args; } \
+    __finally { \
+        error = GetLastError(); \
+        restored = wow_user_native_call_end(&call); \
+        if (restored) SetLastError(error); \
+    } \
+    if (!restored) return FALSE; \
+    SetLastError(error); return result; \
 }
+/* The common return boundary publishes callback mutations, including when
+ * tracking is cancelled or its menu/owner is destroyed. */
+MENU_TRACK(TrackPopupMenu,
+    (HMENU menu, UINT flags, int x, int y, int reserved, HWND window, const RECT *exclude),
+    (menu, flags, x, y, reserved, window, exclude))
+MENU_TRACK(TrackPopupMenuEx,
+    (HMENU menu, UINT flags, int x, int y, HWND window, LPTPMPARAMS parameters),
+    (menu, flags, x, y, window, parameters))
+#undef MENU_TRACK
 
 BOOL WINAPI wow_menu_native_DrawMenuBar(HWND window)
 {
@@ -261,7 +269,9 @@ BOOL WINAPI wow_menu_native_refresh_window(HWND window)
     __try {
         full = wow_user_window_full_handle(binding->thread->ppi->objects, LOWORD(window));
         if (!full || !GetWindowInfo(window, &info)) __leave;
-        if (info.dwStyle & WS_CHILD) { result = TRUE; __leave; }
+        if ((info.dwStyle & (WS_CHILD | WS_POPUP)) == WS_CHILD) {
+            result = TRUE; __leave;
+        }
         menu = GetMenu(window);
         /* Commit the WND edge before collecting detached menus. Calling
          * menu_refresh here would collect while the old WND still refers

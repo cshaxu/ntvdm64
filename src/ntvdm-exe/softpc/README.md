@@ -14,6 +14,14 @@ Source-recovery rationale and red/green evidence are recorded in the
 
 ## Registered divergences
 
+T447 S3 copied-class release uses the existing page-domain allocation list:
+successful native unregister transfers CLS backing to that collector while
+retired WND borrowers still read it. Live published associations reject the
+transfer; released classes cannot acquire new WNDs. Strict physical retirement
+still rejects references. No guest format, original source or machine change.
+The [S3 ledger](../../../docs/etc/evidence/m0-t447-s3-control-source-audit.md)
+records the real application exit failure and pending reclamation verification.
+
 ADAPTER-SOFTPC-KEYBOARD-RESET (`mvdm_keyboard_reset.c`) owns only retirement
 of the standalone host's delayed keyboard IRQ and PIC request for a filled,
 user-originated 8042 output slot at the original reset boundary, via DIV-321.

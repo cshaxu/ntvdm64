@@ -1,5 +1,47 @@
 #include "wow_cleanup_bindings.h"
 #include "wow_window_words_binding.h"
+#include "wow_window_procedure_entry.h"
+
+void WINAPI wow_cleanup_set_class_procedure(wow_class_lookup_entry *entry,
+    WNDPROC procedure)
+{
+    wow_class_words_restore_procedure((wow_class_words_binding *)entry, procedure);
+}
+
+void WINAPI wow_cleanup_set_window_procedure(wow_cleanup_context *context,
+    wow_cleanup_window *view, WNDPROC procedure)
+{
+    DWORD error = GetLastError(), pid;
+    wow_window_words_binding *binding = NULL;
+    BOOL valid;
+    if (!view || !view->native_window || !procedure ||
+            !GetWindowThreadProcessId(view->native_window, &pid) ||
+            pid != GetCurrentProcessId()) {
+        context->object_release_failed = TRUE;
+        SetLastError(ERROR_INVALID_WINDOW_HANDLE); return;
+    }
+    if (view->storage) {
+        binding = wow_window_words_acquire(view->native_window);
+        valid = binding == view->storage;
+        wow_window_words_release(binding);
+        if (!valid) {
+            context->object_release_failed = TRUE;
+            SetLastError(ERROR_INVALID_STATE); return;
+        }
+    }
+    /* The non-xxx original cleanup cannot call application code. Native
+     * GWL_WNDPROC assignment is the finite no-callout storage operation;
+     * style/layout/message services do not belong in this leaf. */
+    SetLastError(ERROR_SUCCESS);
+    if (!SetWindowLongA(view->native_window, GWL_WNDPROC, (LONG)procedure)) {
+        if (!GetLastError()) SetLastError(ERROR_INVALID_STATE);
+        context->object_release_failed = TRUE;
+        return;
+    }
+    view->lpfnWndProc = procedure;
+    view->procedure_is_guest = FALSE;
+    SetLastError(error);
+}
 
 static void clear_tree(wow_user_object_table *table)
 {
@@ -25,6 +67,15 @@ static BOOL build_tree(wow_user_object_table *table, wow_cleanup_window *root)
         window_handle=(HWND)(ULONG_PTR)(i|((DWORD)entry->wUniq<<16));
         if (!IsWindow(window_handle)) {
             SetLastError(ERROR_INVALID_WINDOW_HANDLE); return FALSE;
+        }
+        {
+            wow_window_dispatch_target target;
+            WNDPROC native = (WNDPROC)GetWindowLongA(window_handle, GWL_WNDPROC);
+            if (!native) return FALSE;
+            window->procedure_is_guest = wow_window_entry_guest_target(native, &target);
+            window->lpfnWndProc = window->procedure_is_guest ?
+                (WNDPROC)target.procedure : native;
+            window->native_window = window_handle;
         }
         /* GetAncestor(GA_PARENT), unlike GetParent, does not treat the owner
          * of a popup as its parent. Contract away native-only intermediate

@@ -10,6 +10,36 @@
 #include <string.h>
 static DWORD owner_pid;
 static HWND game;
+static void report_geometry(const char *phase)
+{
+    DWORD saved=GetLastError();
+    RECT client={0}, outer={0};
+    MONITORINFO monitor={sizeof(monitor)};
+    HMONITOR screen=MonitorFromWindow(game,MONITOR_DEFAULTTONEAREST);
+    DPI_AWARENESS_CONTEXT observer=GetThreadDpiAwarenessContext();
+    DPI_AWARENESS_CONTEXT target=GetWindowDpiAwarenessContext(game);
+    BOOL have_client=GetClientRect(game,&client);
+    BOOL have_outer=GetWindowRect(game,&outer);
+    BOOL have_monitor=GetMonitorInfoW(screen,&monitor);
+    /* Observe only: do not change DPI, display mode, window styles or the
+     * application's min/max response to make the pixel contract pass. These
+     * system metrics are caller-context values, not measured WM_GETMINMAXINFO
+     * output from the target's actual resize transaction. */
+    printf("geometry phase=%s client_ok=%d client=%ldx%ld outer_ok=%d outer=%ld,%ld,%ld,%ld style=%08lx exstyle=%08lx\n",
+        phase,have_client,client.right-client.left,client.bottom-client.top,
+        have_outer,outer.left,outer.top,outer.right,outer.bottom,
+        (DWORD)GetWindowLongW(game,GWL_STYLE),(DWORD)GetWindowLongW(game,GWL_EXSTYLE));
+    printf("geometry-context observer_awareness=%d target_awareness=%d equal=%d target_dpi=%u screen=%dx%d maxtrack=%dx%d monitor_ok=%d monitor=%ld,%ld,%ld,%ld work=%ld,%ld,%ld,%ld\n",
+        (int)GetAwarenessFromDpiAwarenessContext(observer),
+        (int)GetAwarenessFromDpiAwarenessContext(target),
+        AreDpiAwarenessContextsEqual(observer,target),GetDpiForWindow(game),
+        GetSystemMetrics(SM_CXSCREEN),GetSystemMetrics(SM_CYSCREEN),
+        GetSystemMetrics(SM_CXMAXTRACK),GetSystemMetrics(SM_CYMAXTRACK),
+        have_monitor,monitor.rcMonitor.left,monitor.rcMonitor.top,
+        monitor.rcMonitor.right,monitor.rcMonitor.bottom,
+        monitor.rcWork.left,monitor.rcWork.top,monitor.rcWork.right,monitor.rcWork.bottom);
+    SetLastError(saved);
+}
 static BOOL CALLBACK report_window(HWND window, LPARAM unused)
 {
     DWORD pid; WCHAR name[128], title[256]; RECT rect={0};
@@ -24,12 +54,11 @@ static BOOL CALLBACK report_window(HWND window, LPARAM unused)
 }
 static BOOL CALLBACK find_game(HWND window, LPARAM unused)
 {
-    DWORD pid; WCHAR name[128]; RECT rect;
+    DWORD pid; WCHAR name[128];
     (void)unused;
     GetWindowThreadProcessId(window, &pid);
     if (pid == owner_pid && IsWindowVisible(window) &&
-        GetClassNameW(window, name, 128) && !wcscmp(name,L"Solitaire") &&
-        GetClientRect(window,&rect) && rect.right >= 500 && rect.bottom >= 250)
+        GetClassNameW(window, name, 128) && !wcscmp(name,L"Solitaire"))
         game=window;
     return TRUE;
 }
@@ -142,6 +171,30 @@ int main(int argc,char **argv)
         EnumDesktopWindows(desktop,report_window,0);return 4;
     }
     printf("owned-window=%p pid=%lu client=%ldx%ld\n",game,owner_pid,rect.right,rect.bottom);
+    report_geometry("before");
+    /* The original pixel assertions require space for seven 71px cards.
+     * Identify the owned app independently of desktop-dependent initial size.
+     * Resize only this test subject through ordinary USER, never change the
+     * desktop mode or silently skip gameplay on a smaller initial window. */
+    if (rect.right < 500 || rect.bottom < 250) {
+        RECT outer;
+        if (!GetWindowRect(game, &outer) ||
+            !SetWindowPos(game, NULL, 0, 0,
+                585 + (outer.right - outer.left) - rect.right,
+                384 + (outer.bottom - outer.top) - rect.bottom,
+                SWP_NOMOVE | SWP_NOZORDER | SWP_NOACTIVATE) ||
+            !SendMessageTimeoutW(game, WM_NULL, 0, 0, SMTO_ABORTIFHUNG, 2000, &reply) ||
+            !GetClientRect(game, &rect)) {
+            printf("gameplay-geometry-setup-failure error=%lu\n", GetLastError());
+            return 4;
+        }
+        printf("gameplay-geometry requested=585x384 actual=%ldx%ld\n",rect.right,rect.bottom);
+        report_geometry("after-resize");
+        if (rect.right != 585 || rect.bottom != 384) {
+            (void)capture(game,argv[3],"geometry-failure");
+            return 4;
+        }
+    }
     gap=(rect.right-7*71)/8;if(gap<11)gap=11;
     /* Sample the tableau, excluding the status child and non-client menu. */
     if(!wait_deal_ready(process) ||

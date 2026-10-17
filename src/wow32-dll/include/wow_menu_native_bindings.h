@@ -20,6 +20,7 @@ BOOL WINAPI wow_menu_native_SetMenuItemBitmaps(HMENU, UINT, UINT, HBITMAP, HBITM
 BOOL WINAPI wow_menu_native_SetMenu(HWND, HMENU);
 BOOL WINAPI wow_menu_native_DrawMenuBar(HWND);
 BOOL WINAPI wow_menu_native_TrackPopupMenu(HMENU, UINT, int, int, int, HWND, const RECT *);
+BOOL WINAPI wow_menu_native_TrackPopupMenuEx(HMENU, UINT, int, int, HWND, LPTPMPARAMS);
 BOOL WINAPI wow_menu_native_refresh_window(HWND);
 BOOL WINAPI wow_menu_native_refresh_menu(HMENU);
 BOOL WINAPI wow_menu_native_refresh_message(UINT, WPARAM, LPARAM);
@@ -45,5 +46,6 @@ BOOL WINAPI wow_menu_native_refresh_message(UINT, WPARAM, LPARAM);
 #define SetMenu wow_menu_native_SetMenu
 #define DrawMenuBar wow_menu_native_DrawMenuBar
 #define TrackPopupMenu wow_menu_native_TrackPopupMenu
+#define TrackPopupMenuEx wow_menu_native_TrackPopupMenuEx
 #endif
 #endif

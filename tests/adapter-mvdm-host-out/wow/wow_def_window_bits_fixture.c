@@ -30,6 +30,17 @@ int main(void)
         if (absent[index] <= max_message &&
             (bits[absent[index] >> 3] & (1u << (absent[index] & 7)))) return 6;
     if (storage[0] != 0xa5 || storage[102] != 0xa5) return 7;
+    /* The original merge assumes zeroed input; the boundary establishes
+     * that precondition and preserves the caller's trailing bytes. */
+    memset(storage, 0xa5, sizeof(storage));
+    if (wow_private_user_get_def_window_proc_bits(bits, 101) != WM_PRINT)
+        return 8;
+    if (storage[0] != 0xa5 || storage[102] != 0xa5) return 9;
+    for (index = WM_PRINT / 8u + 1u; index < 101; ++index)
+        if (bits[index] != 0xa5) return 10;
+    for (index = 0; index < ARRAYSIZE(absent); ++index)
+        if (absent[index] <= max_message &&
+            (bits[absent[index] >> 3] & (1u << (absent[index] & 7)))) return 11;
     puts("WOW_DEF_WINDOW_BITS_BOUNDARY_OK");
     return 0;
 }

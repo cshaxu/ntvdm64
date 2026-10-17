@@ -8,21 +8,24 @@
  * the original structure bodies in their original mirror owner. This header
  * supplies only their compile boundary; it owns no objects or handles. */
 typedef struct tagDESKTOP *PDESKTOP;
-typedef struct tagTHREADINFO *PTHREADINFO;
+typedef struct tagTHREADINFO *PWOW_CLIENT_THREADINFO;
 typedef struct tagCLS *PCLS;
 typedef struct tagSBINFO *PSBINFO;
 typedef struct tagWND *PWND;
 typedef LONG (APIENTRY *WNDPROC_PWND)(PWND, UINT, DWORD, LONG);
-typedef VOID (APIENTRY *PFNW32ET)(VOID);
 
 #pragma warning(push)
 #pragma warning(disable:4201)
-#include "opennt-abi/source/public/internal/windows/inc/wowuserp.h"
+#include "wow_shared_user_abi.h"
 /* Original Win4 profile: winuser.h WH_MIN=-1, WH_MAX=12. The modern SDK
  * adds hook types and must not silently enlarge the immutable guest ABI. */
 #define CWINHOOKS 14
 #define WOW_ORIGINAL_CLIENT_VIEW_LAYOUT
+/* The original-layout opaque pointer is not the cleanup/input adapter's
+ * PTHREADINFO typedef. Restrict this spelling to the retained layout body. */
+#define PTHREADINFO PWOW_CLIENT_THREADINFO
 #include "opennt-host/windows/core/ntuser/inc/user.h"
+#undef PTHREADINFO
 #undef WOW_ORIGINAL_CLIENT_VIEW_LAYOUT
 #undef CWINHOOKS
 #pragma warning(pop)

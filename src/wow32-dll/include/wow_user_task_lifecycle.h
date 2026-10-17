@@ -67,6 +67,8 @@ VOID WINAPI wow_user_task_lifecycle_directed_yield(wow_user_task_lifecycle *,
 BOOL WINAPI wow_user_task_lifecycle_wait(wow_user_task_lifecycle *, HANDLE);
 BOOL WINAPI wow_user_task_lifecycle_message(wow_user_task_lifecycle *, LPMSG,
     HWND, UINT, UINT, UINT, BOOL);
+BOOL WINAPI wow_user_task_lifecycle_messageW(wow_user_task_lifecycle *, LPMSG,
+    HWND, UINT, UINT, UINT, BOOL);
 BOOL WINAPI wow_user_task_lifecycle_wait_message(wow_user_task_lifecycle *);
 DWORD WINAPI wow_user_msg_wait(DWORD, const HANDLE *, BOOL, DWORD, DWORD);
 /* Borrowed call edge only. Native USER owns the operation and its result;

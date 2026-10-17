@@ -268,11 +268,25 @@ ULONG FASTCALL WU32GetClassLong(PVDMFRAME pFrame)
         case GCL_WNDPROC:
             {
                 DWORD   dwProc32;
+#ifdef WOW_USER_PRIVATE_REDIRECT
+                BOOL procedureIsGuest;
 
+                /* MVDM-HOST-DIV-339: decoded entry is not a native CPD. */
+                dwProc32 = wow_user_get_procedure(hwnd, TRUE, &procedureIsGuest);
+#else
                 dwProc32 = GetClassLong(hwnd, iOffset);
+#endif
 
-                if ( dwProc32 & WNDPROC_WOW ) {
-                    if ( HIWORD(dwProc32) == WNDPROC_HANDLE ) {
+                if ( (dwProc32 & WNDPROC_WOW)
+#ifdef WOW_USER_PRIVATE_REDIRECT
+                     && (procedureIsGuest || HIWORD(dwProc32) == WNDPROC_HANDLE)
+#endif
+                   ) {
+                    if ( HIWORD(dwProc32) == WNDPROC_HANDLE
+#ifdef WOW_USER_PRIVATE_REDIRECT
+                         && !procedureIsGuest
+#endif
+                       ) {
                         //
                         // Class has a window proc which is really a handle
                         // to a proc.  This happens when there is some
@@ -717,6 +731,9 @@ ULONG FASTCALL WU32SetClassLong(PVDMFRAME pFrame)
                 DWORD   dwWndProc32Old;
                 DWORD   dwWndProc32New;
                 PWW     pww;
+#ifdef WOW_USER_PRIVATE_REDIRECT
+                BOOL previousIsGuest;
+#endif
 
                 // Look to see if the new 16:16 proc is a thunk for a 32-bit proc.
                 dwWndProc32New = IsThunkWindowProc(LONG32(parg16->f3), NULL );
@@ -727,7 +744,12 @@ ULONG FASTCALL WU32SetClassLong(PVDMFRAME pFrame)
                     // 16-bit thunk that is really just a thunk for a 32-bit
                     // routine.  We can just set it back to the 32-bit routine.
                     //
+#ifdef WOW_USER_PRIVATE_REDIRECT
+                    dwWndProc32Old = wow_user_set_procedure(HWND32(parg16->f1), TRUE, dwWndProc32New, FALSE, &previousIsGuest);
+                    if (!dwWndProc32Old) break;
+#else
                     dwWndProc32Old = SetClassLong(HWND32(parg16->f1), GCL_WNDPROC, (LONG)dwWndProc32New);
+#endif
                     SETWC(HWND32(parg16->f1), GCL_WOWvpfnWndProc, 0);
                 } else {
                     //
@@ -750,12 +772,25 @@ ULONG FASTCALL WU32SetClassLong(PVDMFRAME pFrame)
                         l &= ~WOWCLASS_VIRTUAL_NOT_BIT31;
                     }
 
+#ifdef WOW_USER_PRIVATE_REDIRECT
+                    dwWndProc32Old = wow_user_set_procedure(HWND32(parg16->f1), TRUE, l | WNDPROC_WOW, TRUE, &previousIsGuest);
+                    if (!dwWndProc32Old) break;
+#else
                     dwWndProc32Old = SetClassLong(HWND32(parg16->f1), GCL_WNDPROC, l | WNDPROC_WOW );
+#endif
                     SETWC(HWND32(parg16->f1), GCL_WOWvpfnWndProc, LONG32(parg16->f3));
                 }
 
-                if ( dwWndProc32Old & WNDPROC_WOW ) {
-                    if ( HIWORD(dwWndProc32Old) == WNDPROC_HANDLE ) {
+                if ( (dwWndProc32Old & WNDPROC_WOW)
+#ifdef WOW_USER_PRIVATE_REDIRECT
+                     && (previousIsGuest || HIWORD(dwWndProc32Old) == WNDPROC_HANDLE)
+#endif
+                   ) {
+                    if ( HIWORD(dwWndProc32Old) == WNDPROC_HANDLE
+#ifdef WOW_USER_PRIVATE_REDIRECT
+                         && !previousIsGuest
+#endif
+                       ) {
                         //
                         // If the return value is a handle, then just thunk it.
                         //

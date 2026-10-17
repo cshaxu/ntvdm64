@@ -9,8 +9,12 @@
 
 #include <nt.h>
 #include "opennt-abi/source/public/sdk/inc/ntrtl_wow32.h"
+#define WOW_ORIGINAL_LARGE_STRING_LAYOUT
+#include "opennt-host/windows/core/ntuser/inc/user.h"
+#undef WOW_ORIGINAL_LARGE_STRING_LAYOUT
 
 USHORT WINAPI OpenNtUserNlsAnsiCodePage(VOID);
+USHORT WINAPI OpenNtUserThreadCodePage(VOID);
 PVOID WINAPI OpenNtUserRtlAllocMem(SIZE_T bytes);
 VOID WINAPI OpenNtUserRtlFreeMem(PVOID value);
 

@@ -7,7 +7,11 @@
  * These callbacks must not invent task selection or compatibility policy. */
 typedef struct wow_task_client_info {
     DWORD dwTIFlags, dwExpWinVer, dwCompatFlags;
+    /* Read-only projection for retained client consumers, refreshed from
+     * the bound task on access. Not a native TEB CLIENTINFO layout. */
+    DWORD CI_flags;
 } wow_task_client_info;
+#define WOW_TASK_CI_16BIT 0x00000004u
 typedef struct wow_task_init_ops {
     BOOL (WINAPI *journal_hooked)(wow_task_order_process *, BOOL playback);
     BOOL (WINAPI *reattach)(wow_task_order_process *, BOOL journal);
