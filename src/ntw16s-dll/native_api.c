@@ -26,3 +26,18 @@ int ntw16s_native_set_scroll_info(HWND w,int bar,LPCSCROLLINFO info,BOOL redraw)
 {return native.set_scroll_info(w,bar,info,redraw);}
 HRESULT ntw16s_native_set_window_theme(HWND w,LPCWSTR application,LPCWSTR ids)
 {return native.set_window_theme(w,application,ids);}
+static PVOID volatile combo_info_api;
+BOOL __cdecl Ntw16sBindComboInfoApi(ntw16s_combo_info_fn query)
+{
+    DWORD error=GetLastError();PVOID previous;
+    if(!query){SetLastError(ERROR_INVALID_PARAMETER);return FALSE;}
+    previous=InterlockedCompareExchangePointer(&combo_info_api,(PVOID)query,NULL);
+    if(previous && previous!=(PVOID)query){SetLastError(ERROR_INVALID_STATE);return FALSE;}
+    SetLastError(error);return TRUE;
+}
+BOOL ntw16s_native_get_combo_info(HWND w,PCOMBOBOXINFO info)
+{
+    ntw16s_combo_info_fn query=(ntw16s_combo_info_fn)
+        InterlockedCompareExchangePointer(&combo_info_api,NULL,NULL);
+    return query?query(w,info):GetComboBoxInfo(w,info);
+}

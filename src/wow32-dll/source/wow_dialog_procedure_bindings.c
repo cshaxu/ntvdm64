@@ -1,5 +1,6 @@
 #include "wow_dialog_procedure_bindings.h"
 #include "wow_user_task_lifecycle.h"
+#include "wow_window_words_binding.h"
 
 LRESULT WINAPI wow_user_call_window_procA(WNDPROC, HWND, UINT, WPARAM, LPARAM);
 LRESULT WINAPI wow_user_call_window_procW(WNDPROC, HWND, UINT, WPARAM, LPARAM);
@@ -87,6 +88,11 @@ VOID WINAPI wow_dialog_host_retire(HWND w)
 
 LRESULT CALLBACK wow_dialog_host_terminal_proc(HWND w, UINT m, WPARAM a, LPARAM b)
 {
+    if(m==WM_DESTROY){
+        if(!wow_window_words_consume_resource_destroy(w,NULL,TRUE))
+            wow_user_native_call_failed("dialog-exit-resource-owner",GetLastError());
+        return 0;
+    }
     if (m == WM_NCDESTROY) {
         SetLastError(0);
         if (!SetWindowLongW(w, DWL_DLGPROC, 0) && GetLastError())

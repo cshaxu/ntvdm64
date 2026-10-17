@@ -534,6 +534,8 @@ if ($OriginalModalOnly) {
         if ($fixtureExitCode -ne 0 -or
             !($fixtureOutput -match '^WOW_REAL_DIALOG_SCOPE errors=0 callback_reject=1 capture_exception=1 exact_production_finally=1 cache_restored=1 context_restored=1 owner_restored=1$') -or
             !($fixtureOutput -match '^WOW_REAL_DIALOG_ROLLBACK errors=0 cases=4 physical_free=1 publications=2 vetoes=2 no_app_callback=1$') -or
+            !($fixtureOutput -match '^WOW_REAL_DIALOG_RESOURCE_OWNER errors=0 normal_consume=1 exit_invoke=1 conflict_rejected=1 reentrant_once=1$') -or
+            !($fixtureOutput -match '^WOW_NATIVE_DIALOG_RESOURCE_OWNER errors=0 no_original_fnid=1 resource_once=1$') -or
             !($fixtureOutput -match '^WOW_REAL_DIALOG_LIFECYCLE errors=0 init=3 terminal=2 nested=1 exception_local=1 callback_cache=1 pdlg_retired=1 dying_callback_denied=1$') -or
             !($fixtureOutput -match '^WOW_PAGE_DOMAIN_LIFECYCLE_OK$')) {
             throw 'Real registered-owner dialog lifecycle/physical rollback contract failed'

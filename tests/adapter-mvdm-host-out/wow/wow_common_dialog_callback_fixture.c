@@ -3,6 +3,7 @@
 #include "wow_user_runtime.h"
 #include "wow_task_order_bindings.h"
 #include "wow_user_borrow_scope.h"
+#include "wow_window_words_binding.h"
 #include <stdio.h>
 
 UINT WINAPI WCD32DialogProc(HWND, UINT, WPARAM, LPARAM);
@@ -20,9 +21,27 @@ static OPENNT_SUPPORT_TEB startup_teb;
 POPENNT_SUPPORT_TEB NTAPI opennt_support_current_teb(VOID)
 { return &startup_teb; }
 static BOOL unbound;
+static BOOL deny_resource;
+static unsigned resource_bound,resource_consumed;
+static wow_window_resource_destroy resource_owner;
 wow_user_runtime_thread *WINAPI wow_user_runtime_current(void)
 { return unbound ? NULL : &startup_binding; }
 #define CHECK(x) do { if (!(x)) { ++errors; fprintf(stderr, "FAIL line=%d\n", __LINE__); } } while (0)
+/* Ordering-only boundary doubles, not HWND or original-resource models. */
+BOOL WINAPI wow_window_words_bind_resource_destroy(HWND w,wow_window_resource_destroy owner)
+{
+    CHECK(w==(HWND)0x1234 && owner==WCD32FindReplaceDialogProc && depth==borrowed && depth);
+    if(deny_resource){SetLastError(ERROR_INVALID_STATE);return FALSE;}
+    resource_owner=owner;++resource_bound;return TRUE;
+}
+BOOL WINAPI wow_window_words_consume_resource_destroy(HWND w,
+    wow_window_resource_destroy expected,BOOL invoke)
+{
+    CHECK(w==(HWND)0x1234 && expected==WCD32FindReplaceDialogProc && !invoke &&
+        depth==borrowed && depth && (!resource_owner || resource_owner==expected));
+    if(deny_resource){SetLastError(ERROR_INVALID_STATE);return FALSE;}
+    resource_owner=NULL;++resource_consumed;return TRUE;
+}
 
 /* Ordering-only test: real production wrappers, explicitly mocked original
  * bodies and execution owners. Real guest/provider tests remain mandatory. */
@@ -88,7 +107,10 @@ UINT WINAPI WowOriginalDialogProc(HWND w, UINT m, WPARAM p, LPARAM l)
 UINT WINAPI WowOriginalPrintSetupDialogProc(HWND w, UINT m, WPARAM p, LPARAM l)
 { return original(w, m, p, l, 42); }
 UINT WINAPI WowOriginalFindReplaceDialogProc(HWND w, UINT m, WPARAM p, LPARAM l)
-{ return original(w, m, p, l, 43); }
+{
+    CHECK(m==WM_DESTROY ? resource_owner==NULL : resource_owner==WCD32FindReplaceDialogProc);
+    return original(w, m, p, l, 43);
+}
 BOOL WINAPI wow_user_task_prepare_exit(void)
 {
     ++prepared;
@@ -176,6 +198,16 @@ int __cdecl main(void)
         CHECK(caught && calls == 7 && !depth && !borrowed);
     }
     deny_task = deny_borrow = deny_graph = FALSE;
+    deny_resource=TRUE;
+    for(failure=0;failure<2;++failure){
+        caught=FALSE;
+        __try {WCD32FindReplaceDialogProc((HWND)0x1234,failure?WM_DESTROY:WM_INITDIALOG,17,23);}
+        __except(GetExceptionCode()==0xe0447034?EXCEPTION_EXECUTE_HANDLER:EXCEPTION_CONTINUE_SEARCH){caught=TRUE;}
+        CHECK(caught && calls==7 && !depth && !borrowed);
+    }
+    deny_resource=FALSE;
+    CHECK(resource_bound==1 && resource_consumed==1);
+    fprintf(stderr,"WOW_COMMDLG_RESOURCE_ASSOCIATION errors=%u bound_before_callback=1 consumed_before_release=1 failures_fatal=2\n",errors);
     fprintf(stderr, "WOW_COMMDLG_RESOURCE_FAILURE errors=%u fatal_edges=3 skipped_free=0\n", errors);
     W32FreeTask((PVOID)0x5678);
     CHECK(prepared == 1 && freed == 1);

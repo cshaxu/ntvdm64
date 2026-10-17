@@ -64,6 +64,9 @@ if($Case -eq 'idle' -and !($output -match '^WOW_IDLE_NATIVE_CHAIN errors=0 next=
 if($Case -eq 'common-dialog' -and !($output -match '^WOW_COMMDLG_RESOURCE_FAILURE errors=0 fatal_edges=3 skipped_free=0$')) {
     throw 'Common-dialog resource failure assertions missing'
 }
+if($Case -eq 'common-dialog' -and !($output -match '^WOW_COMMDLG_RESOURCE_ASSOCIATION errors=0 bound_before_callback=1 consumed_before_release=1 failures_fatal=2$')) {
+    throw 'Common-dialog resource-owner registration/consumption assertions missing'
+}
 if($Case -eq 'common-dialog' -and !($output -match '^WOW_UNINITIALIZED_CLEANUP errors=0 exact_td=1 foreign_rejected=1 committed_rejected=1 retired_rejected=1$')) {
     throw 'Uninitialized original TD identity assertions missing'
 }

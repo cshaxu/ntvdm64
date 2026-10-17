@@ -7,6 +7,36 @@ extern unsigned wow_dialog_throw_capture,wow_dialog_capture_exceptions;
 extern void *wow_dialog_failed_allocation;
 static unsigned real_dialog_init,real_dialog_terminal,real_dialog_nested,real_dialog_exceptions;
 static BOOL real_dialog_veto;
+static unsigned real_resource_calls;
+static INT_PTR CALLBACK real_resource_native_dialog(HWND w,UINT m,WPARAM p,LPARAM l)
+{(void)w;(void)m;(void)p;(void)l;return FALSE;}
+static UINT WINAPI real_resource_other(HWND w,UINT m,WPARAM p,LPARAM l)
+{(void)w;(void)m;(void)p;(void)l;BORROW_CHECK(FALSE);return 0;}
+static UINT WINAPI real_resource_callback(HWND w,UINT m,WPARAM p,LPARAM l)
+{
+    wow_user_runtime_thread *runtime=wow_user_runtime_current();
+    wow_task_callback_scope scope,application;
+    BOOL entered=wow_task_resource_cleanup_enter(&scope),allowed;
+    ++real_resource_calls;
+    BORROW_CHECK(entered && IsWindow(w) && m==WM_DESTROY && !p && !l &&
+        runtime && runtime->resource_cleanup_live && runtime->thread &&
+        (runtime->thread->TIF_flags&WOW_TASK_TIF_INCLEANUP));
+    BORROW_CHECK(!wow_window_words_bind_resource_destroy(w,real_resource_callback) &&
+        GetLastError()==ERROR_INVALID_STATE);
+    SetLastError(0x44730075);
+    BORROW_CHECK(wow_window_words_consume_resource_destroy(w,NULL,TRUE) &&
+        GetLastError()==0x44730075 && real_resource_calls==1);
+    allowed=wow_task_callback_enter(&application);
+    BORROW_CHECK(!allowed);
+    if(allowed)BORROW_CHECK(wow_task_callback_leave(&application));
+    if(entered)BORROW_CHECK(wow_task_callback_leave(&scope));
+    SetLastError(0x44730075);return 0;
+}
+static DWORD WINAPI real_resource_foreign(void *window)
+{
+    return !wow_window_words_bind_resource_destroy((HWND)window,real_resource_callback) &&
+        GetLastError()==ERROR_INVALID_THREAD_ID ? 0 : 1;
+}
 static wow_window_words_binding *real_dialog_veto_borrow;
 static BOOL real_allocation_live(void *pointer)
 {
@@ -75,10 +105,62 @@ static void verify_real_dialog_lifecycle(wow_user_task_lifecycle *lifecycle)
     tail=(WORD *)(item+1);*tail++=0xffff;*tail++=0x0081;*tail++=0;*tail++=0;
     BORROW_CHECK(!wow_user_server_create_dialog(GetModuleHandleA(NULL),NULL,0,NULL,
         real_dialog_callback,0,SCDLG_CLIENT|SCDLG_ANSI) && GetLastError()==ERROR_INVALID_PARAMETER);
+    /* Native COMMDLG-like resource window: actual host dialog, no recovered
+     * original FNID/PDLG. Enrollment is real, not a fabricated type marker. */
+    window=CreateDialogIndirectParamA(GetModuleHandleA(NULL),dialog,NULL,
+        real_resource_native_dialog,0);
+    BORROW_CHECK(window!=NULL);
+    if(window){
+        wow_window_words_binding *retained;
+        BORROW_CHECK(wow_window_words_attach(window,&ww));
+        retained=wow_window_words_acquire(window);
+        BORROW_CHECK(retained && (!wow_window_words_client_state_value(retained) ||
+            !GETFNID(wow_window_words_client_state_value(retained))));
+        BORROW_CHECK(!wow_window_words_bind_resource_destroy(window,real_resource_callback) &&
+            GetLastError()==ERROR_INVALID_STATE);
+        BORROW_CHECK(wow_user_runtime_enter(runtime));
+        BORROW_CHECK(wow_window_words_publish_owner(window,retained,runtime->thread));
+        BORROW_CHECK(wow_user_runtime_leave(runtime));
+        BORROW_CHECK(wow_window_words_bind_resource_destroy(window,real_resource_callback));
+        /* Prepare only this exact target; full task cleanup below still
+         * exercises the original dialog plus its children. */
+        BORROW_CHECK(wow_user_runtime_enter(runtime));
+        runtime->thread->TIF_flags|=WOW_TASK_TIF_INCLEANUP;
+        runtime->resource_cleanup_live=TRUE;
+        BORROW_CHECK(wow_window_words_prepare_exit(window,retained));
+        BORROW_CHECK(wow_user_runtime_leave(runtime));
+        BORROW_CHECK(wow_native_DestroyWindow(window) && !IsWindow(window) && real_resource_calls==1);
+        runtime->resource_cleanup_live=FALSE;
+        runtime->thread->TIF_flags&=~WOW_TASK_TIF_INCLEANUP;
+        wow_window_words_release(retained);
+        real_resource_calls=0;
+    }
+    fprintf(stderr,"WOW_NATIVE_DIALOG_RESOURCE_OWNER errors=%u no_original_fnid=1 resource_once=1\n",borrow_errors-before);
     window=wow_user_server_create_dialog(GetModuleHandleA(NULL),dialog,sizeof(storage),NULL,
         real_dialog_callback,0x4473,SCDLG_CLIENT|SCDLG_ANSI|SCDLG_NOREVALIDATE);
     BORROW_CHECK(window && real_dialog_init==1);
+    if(window){
+        HANDLE other;DWORD code=1;
+        SetLastError(0x44730075);
+        BORROW_CHECK(wow_window_words_bind_resource_destroy(window,real_resource_callback) &&
+            GetLastError()==0x44730075);
+        BORROW_CHECK(wow_window_words_bind_resource_destroy(window,real_resource_callback));
+        BORROW_CHECK(!wow_window_words_bind_resource_destroy(window,real_resource_other) &&
+            GetLastError()==ERROR_INVALID_STATE);
+        BORROW_CHECK(!wow_window_words_consume_resource_destroy(window,real_resource_other,FALSE) &&
+            GetLastError()==ERROR_INVALID_STATE);
+        BORROW_CHECK(!wow_window_words_consume_resource_destroy(window,NULL,TRUE) &&
+            GetLastError()==ERROR_INVALID_STATE && !real_resource_calls);
+        other=CreateThread(NULL,0,real_resource_foreign,window,0,NULL);
+        BORROW_CHECK(other!=NULL);
+        if(other){BORROW_CHECK(WaitForSingleObject(other,5000)==WAIT_OBJECT_0 &&
+            GetExitCodeThread(other,&code) && !code);CloseHandle(other);}
+        BORROW_CHECK(wow_window_words_consume_resource_destroy(window,real_resource_callback,FALSE));
+        BORROW_CHECK(!wow_window_words_bind_resource_destroy(window,real_resource_callback) &&
+            GetLastError()==ERROR_INVALID_STATE);
+    }
     BORROW_CHECK(wow_native_DestroyWindow(window) && real_dialog_terminal==1);
+    BORROW_CHECK(!real_resource_calls);
     window=wow_user_server_create_dialog(GetModuleHandleA(NULL),dialog,sizeof(storage),NULL,
         real_dialog_callback,0x4473,SCDLG_CLIENT|SCDLG_ANSI|SCDLG_NOREVALIDATE);
     BORROW_CHECK(window && real_dialog_init==2);
@@ -135,12 +217,17 @@ static void verify_real_dialog_lifecycle(wow_user_task_lifecycle *lifecycle)
         wow_window_words_binding *retained=wow_window_words_acquire(window);
         PWND state=wow_window_words_client_state_value(retained);unsigned calls=real_dialog_terminal;
         BORROW_CHECK(state && ((PDIALOG)state)->pdlg);
+        BORROW_CHECK(wow_window_words_bind_resource_destroy(window,real_resource_callback));
         BORROW_CHECK(wow_user_task_prepare_exit());
         BORROW_CHECK(!IsWindow(window) && calls==real_dialog_terminal && state &&
             (state->fnid&FNID_CLEANEDUP_BIT) && TestWF(state,WFDESTROYED) &&
             !TestWF(state,WFDIALOGWINDOW) && ((PDIALOG)state)->pdlg==NULL);
+        BORROW_CHECK(real_resource_calls==1 &&
+            !wow_window_words_consume_resource_destroy(window,real_resource_callback,FALSE) &&
+            real_resource_calls==1);
         wow_window_words_release(retained);
     }
+    fprintf(stderr,"WOW_REAL_DIALOG_RESOURCE_OWNER errors=%u normal_consume=1 exit_invoke=1 conflict_rejected=1 reentrant_once=1\n",borrow_errors-before);
     BORROW_CHECK(lifecycle==runtime->runtime->lifecycle);
     fprintf(stderr,"WOW_REAL_DIALOG_LIFECYCLE errors=%u init=3 terminal=2 nested=1 exception_local=1 callback_cache=1 pdlg_retired=1 dying_callback_denied=1\n",borrow_errors-before);
 }

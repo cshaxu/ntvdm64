@@ -31,6 +31,8 @@ struct wow_window_words_binding {
     BOOL creation_encoding_known;
     BOOL creation_ansi;
     BOOL creation_facts_known;
+    wow_window_resource_destroy resource_destroy;
+    BOOL resource_destroy_consumed;
     DWORD native_thread_id;
     wow_window_creation_facts creation_facts;
     wow_window_creation_menu_state creation_menu;
@@ -53,6 +55,63 @@ struct wow_window_words_binding {
 static SRWLOCK publication_lock = SRWLOCK_INIT;
 static const WCHAR property_name[] = L"NTVDM.WOW.WindowWords";
 static VOID window_trace(HWND, UINT, LONG, const char *, DWORD);
+
+/* ADAPTER-WOW-075: registration fact only. Original deferred resource
+ * owners retain all their data, release algorithms and guest conversions. */
+BOOL WINAPI wow_window_words_bind_resource_destroy(HWND window,
+    wow_window_resource_destroy callback)
+{
+    DWORD error=GetLastError();BOOL result=FALSE;
+    wow_user_runtime_thread *runtime=wow_user_runtime_current();
+    wow_window_words_binding *binding;
+    if(!callback){SetLastError(ERROR_INVALID_PARAMETER);return FALSE;}
+    binding=wow_window_words_acquire(window);
+    if(!binding)return FALSE;
+    AcquireSRWLockExclusive(&publication_lock);
+    if(binding->native_thread_id!=GetCurrentThreadId())error=ERROR_INVALID_THREAD_ID;
+    else if(!runtime || !runtime->thread || binding->cleanup.thread!=runtime->thread ||
+        (runtime->thread->TIF_flags&WOW_TASK_TIF_INCLEANUP) ||
+        !binding->enrolled || binding->terminal_pending || binding->resource_destroy_consumed ||
+        GetPropW(window,property_name)!=binding ||
+        (binding->resource_destroy && binding->resource_destroy!=callback))error=ERROR_INVALID_STATE;
+    else {binding->resource_destroy=callback;result=TRUE;}
+    ReleaseSRWLockExclusive(&publication_lock);
+    wow_window_words_release(binding);SetLastError(error);return result;
+}
+
+BOOL WINAPI wow_window_words_consume_resource_destroy(HWND window,
+    wow_window_resource_destroy expected,BOOL invoke)
+{
+    DWORD error=GetLastError();BOOL result=FALSE;
+    wow_user_runtime_thread *runtime=wow_user_runtime_current();
+    wow_window_resource_destroy callback=NULL;
+    if(invoke ? expected!=NULL : expected==NULL){
+        SetLastError(ERROR_INVALID_PARAMETER);return FALSE;
+    }
+    wow_window_words_binding *binding=wow_window_words_acquire(window);
+    if(!binding)return FALSE;
+    AcquireSRWLockExclusive(&publication_lock);
+    if(binding->native_thread_id!=GetCurrentThreadId())error=ERROR_INVALID_THREAD_ID;
+    else if(!runtime || !runtime->thread || binding->cleanup.thread!=runtime->thread ||
+        !binding->enrolled || GetPropW(window,property_name)!=binding ||
+        (expected && binding->resource_destroy && binding->resource_destroy!=expected) ||
+        (invoke && binding->resource_destroy &&
+            (!runtime->resource_cleanup_live || !(runtime->thread->TIF_flags&WOW_TASK_TIF_INCLEANUP))))
+        error=ERROR_INVALID_STATE;
+    else {
+        callback=binding->resource_destroy;
+        binding->resource_destroy=NULL;
+        if(callback || expected)binding->resource_destroy_consumed=TRUE;
+        result=TRUE;
+    }
+    ReleaseSRWLockExclusive(&publication_lock);
+    SetLastError(error);
+    __try {if(result && invoke && callback)(void)callback(window,WM_DESTROY,0,0);}
+    __finally {
+        error=GetLastError();wow_window_words_release(binding);SetLastError(error);
+    }
+    return result;
+}
 
 BOOL WINAPI wow_window_words_set_creation_facts(wow_window_words_binding *binding,
     const wow_window_creation_facts *facts)
@@ -1124,7 +1183,11 @@ BOOL WINAPI wow_window_words_prepare_exit(HWND window,
      * early task-resource scope is still available. Recovered controls retain their existing
      * resource-aware entry. Keep prepare-all before any DestroyWindow. */
     fnid = binding->client_state ? GETFNID(binding->client_state) : 0;
-    terminal = wow_control_client_procedure(fnid, FALSE);
+    /* A native COMMDLG window may have no original client FNID. Its
+     * explicitly registered resource owner is sufficient authority for the
+     * resource-only terminal edge; never manufacture an original dialog. */
+    terminal = binding->resource_destroy ? wow_dialog_host_terminal_proc :
+        wow_control_client_procedure(fnid, FALSE);
     if (!terminal)
         terminal = fnid == FNID_DIALOG ? wow_dialog_host_terminal_proc :
             binding->cleanup.native_cleanup ? binding->cleanup.native_cleanup : DefWindowProcA;

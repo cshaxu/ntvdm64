@@ -15,4 +15,10 @@ NTW16S_API BOOL __cdecl Ntw16sBindNativeApi(const ntw16s_native_api *);
 BOOL ntw16s_native_get_scroll_info(HWND,int,LPSCROLLINFO);
 int ntw16s_native_set_scroll_info(HWND,int,LPCSCROLLINFO,BOOL);
 HRESULT ntw16s_native_set_window_theme(HWND,LPCWSTR,LPCWSTR);
+/* Optional original-control resource projection. Native USER cannot query
+ * private state owned by a recovered control. The caller retains its code
+ * module for the DLL lifetime; one immutable, same-width binding, no policy. */
+typedef BOOL (WINAPI *ntw16s_combo_info_fn)(HWND,PCOMBOBOXINFO);
+NTW16S_API BOOL __cdecl Ntw16sBindComboInfoApi(ntw16s_combo_info_fn);
+BOOL ntw16s_native_get_combo_info(HWND,PCOMBOBOXINFO);
 #endif

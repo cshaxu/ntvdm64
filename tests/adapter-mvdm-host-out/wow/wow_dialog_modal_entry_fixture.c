@@ -2,6 +2,7 @@
 #include "wow_dialog_context_bindings.h"
 #include "wow_user_task_lifecycle.h"
 #include "wow_user_borrow_scope.h"
+#include "wow_edit_entry_bindings.h"
 #include "opennt-abi/host-compat/include/wow32_provider_private.h"
 #include "common/protocol/window_style.h"
 #include <stdio.h>
@@ -20,6 +21,11 @@ wow_user_runtime_thread *WINAPI wow_user_runtime_current(void) { return NULL; }
 BOOL WINAPI wow_user_task_lifecycle_style(wow_user_task_lifecycle *p, DWORD *v)
 { (void)p; (void)v; CHECK(FALSE); return FALSE; }
 BOOL WINAPI wow_edit_lookaside_ready(void) { return TRUE; }
+/* This isolated manager/context fixture never enables style or queries a
+ * control. Actual CBOX projection is tested with production owners/CCPU.
+ * Reject an accidental call rather than supplying a fake successful view. */
+BOOL WINAPI wow_control_get_combo_info(HWND window, PCOMBOBOXINFO info)
+{ (void)window; (void)info; CHECK(FALSE); SetLastError(ERROR_INVALID_STATE); return FALSE; }
 BOOL WINAPI wow_task_callback_enter(wow_task_callback_scope *p)
 { (void)p; ++tasks; return TRUE; }
 BOOL WINAPI wow_task_callback_leave(wow_task_callback_scope *p)

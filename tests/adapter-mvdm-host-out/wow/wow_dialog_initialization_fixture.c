@@ -3,6 +3,7 @@
 #include <string.h>
 #include "wow_dialog_procedure_bindings.h"
 #include "wow_user_task_lifecycle.h"
+#include "wow_window_words_binding.h"
 
 /* Actual subject HWND/slots and A/W tokens; scheduler/publication and setter
  * failure injection are explicit doubles. Not guest acceptance. */
@@ -14,6 +15,10 @@ static const char *fatal_reason;
 #define CHECK(x) do { if (!(x)) { ++errors; printf("FAIL line=%d error=%lu\n", __LINE__, GetLastError()); } } while (0)
 #define TEST_EXCEPTION 0xe0447301u
 #define TEST_FATAL 0xe0447302u
+/* Initialization/unwind fixture, never a terminal-resource substitute. */
+BOOL WINAPI wow_window_words_consume_resource_destroy(HWND w,
+    wow_window_resource_destroy expected,BOOL invoke)
+{(void)w;(void)expected;(void)invoke;CHECK(FALSE);return FALSE;}
 
 LONG WINAPI fixture_dialog_set_window_longW(HWND w, int index, LONG value)
 {

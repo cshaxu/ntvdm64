@@ -1,5 +1,24 @@
 # WOW32 DLL target component
 
+ADAPTER-WOW-075 retains a trusted resource-only destroy association in the
+existing exact HWND binding. Original Find/Replace callback initialization
+registers its existing DIV335 wrapper; normal destruction consumes it, and
+neutralized task-terminal WM_DESTROY invokes it once under early resource
+cleanup permission, outside publication locks. It is not a second COMMDLGTD
+registry or a saved application-procedure fallback. Original resource/PDLG
+cleanup stays with its existing owner; no guest or mirror delta is added.
+
+ADAPTER-WOW-074 binds NTW16S's optional ComboBox information query to a scoped
+copy of the actual original CBOX. Native USER's GetComboBoxInfo owns only native
+control data and cannot supply this recovered control's children or rectangles.
+Original editrc/buttonrc and retained spwndEdit/spwndList remain authoritative;
+no new control algorithm, persistent projection or native-private cast exists.
+The query rejects cleanup, stale child identity and foreign GUI threads, restores
+task/borrow/error state and invokes no application callback. Untouched native
+controls keep GetComboBoxInfo. Bind the additive DLL export before style readiness;
+retain WOW's code for the existing DLL/callback lifetime. Mirror/guest delta0.
+Whole control/template/native/style acceptance remains required before delivery.
+
 ADAPTER-WOW-073 binds canonical terminal cleanup to the matching NTW16S
 Ntw16sWindowTerminal endpoint after original control/dialog finalization.
 Recheck the exact binding/property generation after those reentrant finalizers;

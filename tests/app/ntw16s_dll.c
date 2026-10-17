@@ -21,6 +21,34 @@ static HFONT other_font;
 static HANDLE ready,finish;
 static HDESK desktop;
 static const WCHAR *capture_path;
+static LONG combo_info_calls;
+static BOOL WINAPI combo_info_query(HWND w,PCOMBOBOXINFO info)
+{InterlockedIncrement(&combo_info_calls);return GetComboBoxInfo(w,info);}
+static BOOL WINAPI other_combo_query(HWND w,PCOMBOBOXINFO info)
+{return GetComboBoxInfo(w,info);}
+static void combo_info_boundary(HMODULE dll)
+{
+    typedef BOOL (__cdecl *bind_fn)(ntw16s_combo_info_fn);
+    bind_fn bind=(bind_fn)(void *)GetProcAddress(dll,"Ntw16sBindComboInfoApi");
+    HWND combo;LONG before;int form;
+    CHECK(bind);
+    /* Native default remains usable before any optional binding. */
+    combo=CreateWindowW(L"COMBOBOX",NULL,WS_CHILD|CBS_DROPDOWN,0,0,100,100,
+        parent_window,NULL,GetModuleHandleW(NULL),NULL);
+    CHECK(combo && install_control(combo,NULL) && remove_control(combo) && DestroyWindow(combo));
+    CHECK(!bind(NULL) && GetLastError()==ERROR_INVALID_PARAMETER);
+    SetLastError(0x44730074);CHECK(bind(combo_info_query) && GetLastError()==0x44730074);
+    CHECK(bind(combo_info_query));
+    CHECK(!bind(other_combo_query) && GetLastError()==ERROR_INVALID_STATE);
+    for(form=CBS_SIMPLE;form<=CBS_DROPDOWNLIST;++form){
+        before=combo_info_calls;
+        combo=CreateWindowW(L"COMBOBOX",NULL,WS_CHILD|form,0,0,100,100,
+            parent_window,NULL,GetModuleHandleW(NULL),NULL);
+        CHECK(combo && install_control(combo,NULL) && combo_info_calls>before);
+        CHECK(remove_control(combo) && DestroyWindow(combo));
+    }
+    puts("DLL PASS combo input native default, all3 forms, immutable bind and conflicting/null rejection");
+}
 static void capture_showcase(HWND window)
 {
     RECT r;BITMAPINFO info={0};BITMAPFILEHEADER header={0};void *bits;
@@ -91,6 +119,7 @@ static void load_boundary(const WCHAR *path)
     CHECK(SetEvent(finish) && WaitForSingleObject(thread,10000)==WAIT_OBJECT_0);
     CHECK(GetExitCodeThread(thread,&code) && code==0);CloseHandle(thread);CloseHandle(ready);CloseHandle(finish);
     CHECK(remove_control(child) && (HFONT)SendMessageW(child,WM_GETFONT,0,0)==original);
+    combo_info_boundary(dll);
     CHECK(remove_window(parent_window));CHECK(SendMessageW(parent_window,WM_APP+7,0,0)==456);
     {LRESULT hit=123;CHECK(!hit_test(parent_window,0,&hit) && hit==123);}
     CHECK(DestroyWindow(parent_window));release_font(font);

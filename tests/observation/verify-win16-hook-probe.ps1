@@ -4,7 +4,8 @@ param(
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$BuildRoot,
     [string]$Nasm='nasm.exe',
-    [ValidateSet('hook','timer','idle','common-dialog','generic','shell','print','winsock')][string]$Case='hook',
+    [ValidateSet('hook','timer','idle','common-dialog','generic','shell','print','winsock','controls')][string]$Case='hook',
+    [ValidateSet('Off','Win16','All')][string]$Win16Style='Off',
     [ValidateRange(1,32)][int]$CommonDialogRounds=1
 )
 # Invoke in an owned background process; this runner never activates a desktop.
@@ -20,6 +21,7 @@ $source=Join-Path $PSScriptRoot ('win16_'+$Case.Replace('-','_')+'_probe.asm')
 $probe=if($Case -eq 'timer'){'TMRPROBE'}elseif($Case -eq 'idle'){'IDLPROBE'}elseif($Case -eq 'common-dialog'){'CDLPROBE'}elseif($Case -eq 'generic'){'GENPROBE'}elseif($Case -eq 'shell'){'SHLPROBE'}elseif($Case -eq 'print'){'PRNPROBE'}else{'CBTPROB'}
 $process=$null;$runtime=$null;$scope=$null
 if($Case -eq 'winsock'){$probe='WSKPROBE'}
+if($Case -eq 'controls'){$probe='CTLPROBE'}
 $saved=@{}
 foreach($name in @('TEMP','TMP','PATH','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_WOW_DISPATCH_TRACE_PATH',
         'MVDM_WOW_CALLBACK_FRAME_TRACE_PATH','MVDM_WOW_WINDOW_TRACE_PATH')){
@@ -74,6 +76,8 @@ try {
     if($Case -eq 'common-dialog'){
         Get-FileHash "$runtime/system32/COMMDLG.DLL" | Select-Object Path,Hash |
             ConvertTo-Json | Set-Content "$root/commdlg-input.json"
+    }
+    if($Case -in @('common-dialog','controls')){
         # Existing default-off traces share one chronological stream. No
         # probe-specific runtime behavior or replacement guest is selected.
         $env:MVDM_WOW_CALLBACK_FRAME_TRACE_PATH="$root/lifetime.txt"
@@ -86,8 +90,11 @@ try {
     $env:MVDM_WOW_DISPATCH_TRACE_PATH="$root/dispatch.txt"
     $start=[Diagnostics.ProcessStartInfo]::new((Resolve-Path $Observer).Path)
     $start.UseShellExecute=$false;$start.CreateNoWindow=$true
-    foreach($arg in @("$runtime\system32\run16.exe",$tests,"$root\observer.txt",
-            '--wait',"$tests\$probe.EXE",'--observation-timeout-ms','30000')){
+    $launchArguments=@('--wait')
+    if($Win16Style -eq 'Win16'){$launchArguments+='--win16-style'}
+    elseif($Win16Style -eq 'All'){$launchArguments+='--win16-style-all'}
+    foreach($arg in (@("$runtime\system32\run16.exe",$tests,"$root\observer.txt")+
+            $launchArguments+@("$tests\$probe.EXE",'--observation-timeout-ms','30000'))){
         $start.ArgumentList.Add($arg)
     }
     $process=[Diagnostics.Process]::Start($start)
@@ -98,11 +105,56 @@ try {
     $process.Refresh()
     if(Test-Path "$tests/$probe.BIN"){Copy-Item "$tests/$probe.BIN" "$root/guest-report.bin"}
     $report=Get-Content "$root/observer.txt" -Raw
+    if($Case -eq 'controls' -and (Test-Path "$root/guest-report.bin")){
+        # Decode short failure reports too: the last guest phase and exact
+        # assertion identify the boundary, not an observer timeout guess.
+        $controlBytes=[IO.File]::ReadAllBytes("$root/guest-report.bin")
+        if($controlBytes.Length % 28){throw 'Truncated control witness record'}
+        $controlRecords=@()
+        $controlNames=@('phase','errors','created','button','single','multi','list',
+            'combos','menus','destroyed','leaving','task')
+        for($offset=0;$offset -lt $controlBytes.Length;$offset+=28){
+            if([Text.Encoding]::ASCII.GetString($controlBytes,$offset,4) -ne 'CTL1'){
+                throw 'Bad control witness signature'
+            }
+            $row=[ordered]@{}
+            for($i=0;$i -lt $controlNames.Count;$i++){
+                $row[$controlNames[$i]]=[BitConverter]::ToUInt16($controlBytes,$offset+4+2*$i)
+            }
+            $controlRecords+=[pscustomobject]$row
+        }
+        $controlRecords|ConvertTo-Json|Set-Content "$root/guest-report.json"
+    }
     if($process.ExitCode -or $report -notmatch 'result=exited' -or $report -notmatch 'exit=0x00000000'){
         throw 'Guest/launcher did not complete normally'
     }
     $bytes=[IO.File]::ReadAllBytes("$root/guest-report.bin")
-    if($Case -eq 'winsock'){
+    if($Case -eq 'controls'){
+        if($bytes.Length -ne 252 -or ($controlRecords.phase -join ',') -ne '0,1,2,3,4,5,6,7,8' -or
+                @($controlRecords|Where-Object errors -ne 0).Count){throw 'Control guest phase/assertion failure'}
+        $last=$controlRecords[-1]
+        if($last.created -ne 10 -or $last.button -ne 1 -or $last.single -ne 1 -or
+                $last.multi -ne 1 -or $last.list -ne 1 -or $last.combos -ne 3 -or
+                $last.menus -ne 1 -or $last.destroyed -ne 8 -or $last.leaving -ne 2 -or
+                !$last.task -or @($controlRecords|Where-Object task -ne $last.task).Count){
+            throw 'Actual Win16 control/normal-destroy/task-exit contract incomplete'
+        }
+        $trace=Get-Content "$root/lifetime.txt" -Raw
+        $task4='{0:X4}' -f [int]$last.task
+        $task8='{0:X8}' -f [int]$last.task
+        $complete=[regex]::Matches($trace,'(?m)^\d+ TaskRetirement .*task='+$task8+' stage=complete status=0\r?$')
+        if($complete.Count -ne 1){throw 'Control witness task did not retire exactly once'}
+        # Actual original EDIT LOCAL*16 callbacks, not merely native controls
+        # with a similar appearance. Original wow.h RET_LOCALALLOC/FREE=6/11.
+        foreach($ret in @('0006','000B')){
+            $callbacks=[regex]::Matches($trace,'(?im)^\d+ after ret='+$ret+' .*task='+$task4+' .*\r?$')
+            if(!$callbacks.Count -or @($callbacks|Where-Object Index -gt $complete[0].Index).Count){
+                throw 'Original EDIT LocalAlloc/Free callback absent or after task retirement'
+            }
+        }
+        "PASS actual Win16 original controls, all3 combo forms, EDIT replacement/CRLF, menu mutation, ordinary destruction and task exit ($Win16Style)"|
+            Set-Content "$root/result.txt"
+    }elseif($Case -eq 'winsock'){
         $size=28
         if($bytes.Length % $size){throw 'Truncated Winsock report'}
         $records=@();$names=@('phase','errors','startup','calls','cancelled','cancelError','selected','restored','closed','freed','cleaned','task')

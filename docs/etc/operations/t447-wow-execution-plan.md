@@ -15,6 +15,29 @@ acceptance requirements. Other fixed S3 groups remain open. See the source ledge
 
 ### Responsibility audit and finite remediation
 
+P17-followup within the existing control collaboration group: actual USER16
+controls pass Off but styled CBS_SIMPLE creation fails. Native GetComboBoxInfo
+cannot read original CBOX. ADAPTER-WOW-074 projects only original rectangles,
+child handles and flags through an optional immutable NTW16S native-service
+binding; no original algorithm, mirror or guest change. Complete all query,
+paint/attachment and cleanup consumers plus negative/lifecycle and true guest
+three-mode/template acceptance as one group. Exact failed and passing runs
+remain in the source ledger; this is not a new S or overall closure.
+
+ADAPTER-WOW-075 retains the original deferred Find/Replace resource-only
+destructor through terminal application-procedure neutralization. The native
+COMMDLG dialog has no original client FNID; explicit resource registration,
+not a fabricated type marker, selects that terminal edge. Ordinary destruction
+consumes the same owner before original release. Strict actual template cleanup
+and native/original-dialog lifetime tests are required before delivery.
+
+P18 satisfies that bounded repair group: build-r5, acceptance-r7 and product-r5
+pass; all13 are published/hash-verified with deployed both-width boundary checks.
+The native20 record is19 unchanged passes plus one full row rebuilt after a
+test-only owner-enrollment repair. Template witnesses verify17 resource pairs
+and exact task retirement in all3 modes; app/DOS floors remain. This is a
+safe S3 baseline, not whole-S3/T447 closure or S4/S5 acceptance.
+
 Owner clarification: exhaust source reuse and bounded semantic-preserving
 adaptation before proposing a compatibility exception. Difficulty, missing
 proof or a simpler reduced implementation is not evidence of impossibility.

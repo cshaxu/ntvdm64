@@ -134,7 +134,7 @@ static BOOL install_created(HWND w,DWORD original_style)
             HWND themed=NULL;BOOL list=FALSE;
             if(class_is(w,L"COMBOBOX")){
                 COMBOBOXINFO info={sizeof(info)};
-                if(GetComboBoxInfo(w,&info)){themed=info.hwndList;list=TRUE;}
+                if(ntw16s_native_get_combo_info(w,&info)){themed=info.hwndList;list=TRUE;}
             }else if(class_is(w,L"LISTBOX")){themed=w;list=TRUE;}
             else if(edit && (original_style&ES_MULTILINE))themed=w;
             if(themed){
@@ -205,7 +205,7 @@ static LRESULT CALLBACK creation_return(int code,WPARAM p,LPARAM l)
                     ++scope->result.unsupported;ntw16s_theme_remove(m->hwnd,NULL);
                     if(class_is(m->hwnd,L"COMBOBOX")){
                         COMBOBOXINFO info={sizeof(info)};
-                        if(GetComboBoxInfo(m->hwnd,&info))ntw16s_theme_remove(info.hwndList,NULL);
+                        if(ntw16s_native_get_combo_info(m->hwnd,&info))ntw16s_theme_remove(info.hwndList,NULL);
                     }
                 }
                 else if(!scope->result.failure)scope->result.failure=error?error:ERROR_GEN_FAILURE;

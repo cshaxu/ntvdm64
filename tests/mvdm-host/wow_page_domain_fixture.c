@@ -790,6 +790,12 @@ static int verify_class_registration(ULONG teb)
 }
 
 static unsigned native_chain_calls;
+static DWORD WINAPI combo_query_wrong_thread(void *parameter)
+{
+    COMBOBOXINFO info={sizeof(info)};
+    return !wow_control_get_combo_info((HWND)parameter,&info) &&
+        GetLastError()==ERROR_INVALID_THREAD_ID ? 0 : 1;
+}
 static HWND vetoed_native;
 static ATOM veto_native_atom;
 static BOOL selected_native_control(HWND window)
@@ -1158,6 +1164,30 @@ static void verify_native_class_creation(wow_class_lookup_context *classes, ULON
                     BORROW_CHECK(state && state->pcbox &&
                         state->pcbox->spwndEdit && state->pcbox->spwndList);
                     if (state && state->pcbox) {
+                        COMBOBOXINFO info={sizeof(info)},unchanged;
+                        HANDLE other;DWORD code=1;WORD fnid=state->wnd.fnid;
+                        SetLastError(0x44730074);
+                        BORROW_CHECK(wow_control_get_combo_info(combo,&info) &&
+                            GetLastError()==0x44730074 && info.hwndCombo==combo &&
+                            EqualRect(&info.rcItem,&state->pcbox->editrc) &&
+                            EqualRect(&info.rcButton,&state->pcbox->buttonrc) &&
+                            info.hwndItem==state->pcbox->spwndEdit->head.h &&
+                            info.hwndList==state->pcbox->spwndList->head.h);
+                        unchanged=info;info.cbSize=0;
+                        BORROW_CHECK(!wow_control_get_combo_info(combo,&info) &&
+                            GetLastError()==ERROR_INVALID_PARAMETER && !info.cbSize);
+                        info=unchanged;state->wnd.fnid|=FNID_CLEANEDUP_BIT;
+                        BORROW_CHECK(!wow_control_get_combo_info(combo,&info) &&
+                            GetLastError()==ERROR_INVALID_STATE &&
+                            !memcmp(&info,&unchanged,sizeof(info)));
+                        state->wnd.fnid=fnid;
+                        other=CreateThread(NULL,0,combo_query_wrong_thread,combo,0,NULL);
+                        BORROW_CHECK(other!=NULL);
+                        if(other){
+                            BORROW_CHECK(WaitForSingleObject(other,5000)==WAIT_OBJECT_0 &&
+                                GetExitCodeThread(other,&code) && !code);
+                            CloseHandle(other);
+                        }
                         if (state->pcbox->spwndEdit)
                             children[0] = (HWND)state->pcbox->spwndEdit->head.h;
                         if (state->pcbox->spwndList)

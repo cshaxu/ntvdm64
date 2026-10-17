@@ -13694,3 +13694,285 @@ The source snapshot inventory from the frozen tests remains historical rather
 than being rewritten to match the commit. Staged diff --check then passes.
 The final documentation-only delivery records this source hash and the passing
 deployed-boundary result; final documentation gates are rerun before push.
+
+### Post-P17 selected control-chain audit and actual Win16 acceptance group
+
+The previous goal turn made delivery progress: ead0aa64a plus c1c97ce80 are
+pushed, both publication destinations match all13 images, and the worktree
+was clean. Re-read the fixed S3 inventory against those actual sources before
+selecting more work. Earlier staged/pending statements are chronology, not
+proof that a selected implementation is still disconnected.
+
+| Actual chain | Original behavior and selected provider | Authority/lifetime and remaining acceptance |
+| --- | --- | --- |
+| USER16 CreateWindow -> WU32CreateWindow/W32CreateWindow -> canonical creation | walias.c standard-class classification; wow_class_words_import_native replaces behavior target with wow_control_client_procedure for Button/EDIT/ListBox/ComboBox/ComboLBox | Native class is resource identity; retained original CLS selects behavior. Explicit/internal enrollment precedes dispatch. Real Win16 multi-control interaction needs a grouped witness; original bodies are already selected, so do not add a second editor/control. |
+| Control message -> scoped edit_entry -> original client body | btnctl.c; editec/editsl/editml/edecrare/edmlonce/edmlrare/edslrare; combo/comboini/combodir; lb1/lboxctl1/2/3/lboxmult/lboxrare/lboxvar | Shared task/borrow/native-return scopes; original PED/PCBOX/LBIV own behavior-private data. W32Local* and original guest DS callbacks remain the only Win16 allocation path. Native/CCPU tests supplement rather than replace actual USER16 SendMessage assertions. |
+| Ordinary DestroyWindow or task prepare_exit -> terminal observer -> canonical finalizer | Original control WM_FINALDESTROY/cleanup and registered WOW lifecycle | Original finalization precedes exact-generation withdrawal and NTW16S terminal disposal. Need real guest ordinary-destroy and live-composite-on-exit evidence with exactly one task retirement, not observer cleanup. |
+| USER16 menu APIs -> original WOW conversion/parser -> menu native service/publication | Existing original MVDM menu thunks and clmenu resource parser; native owns actual HMENU | Existing native/CCPU graph tests cover identity/reuse/rollback. Add a real guest create/attach/check/detach/RemoveMenu-preserves-child/destroy sequence; do not replace parser or native resource owner. |
+
+No new production omission or source replacement is established in these
+four chains. This group addresses a concrete evidence gap in fixed C1/C2/C4,
+not feature expansion, a new S or whole-S3 completion. Remaining dialog-template,
+rollback, nonclient and whole-audit obligations retain their previous scope.
+
+Add independently authored win16_controls_probe.asm and a controls case to the
+existing owned-isolation runner. It calls genuine USER16/KERNEL ordinal APIs,
+checks Button state, single-line selection/replacement, multiline CRLF/line
+indices, ListBox strings/selection, all3 ComboBox forms and menu lifecycle.
+It verifies eight ordinary destructions, then leaves a fresh owner/composite
+for normal guest task exit. Nine binary phase records, actual LocalAlloc/Free
+callback traces and exact-once target-task retirement are required. Failure
+reports are decoded before launcher success checks. Run Off/Win16/All serially
+on the same published P17 images; unchanged original guests remain immutable.
+No product hook, failure policy, mirror diff or guest binary is modified by
+this test-only group. No build/runtime pass is claimed before execution.
+
+Actual-controls-group-r1 supervisor8052 fails before runtime: NASM reads the
+unspaced modulo token as a macro name. Fix only that assembler spelling and
+retain r1. Group-r2 supervisor30120 then assembles/runs the whole new witness.
+Off passes all nine phases, ten creations, eight ordinary destructions,
+all3 combo forms, original EDIT allocation/free callbacks and normal retirement.
+Win16 mode fails at first CBS_SIMPLE creation: guest phase4, error014c,
+created5, combos0. The launcher exits0 despite the guest assertion, so the
+strict binary-report check correctly rejects the case. All mode did not run.
+
+Source attribution: controls.c install calls GetComboBoxInfo and rejects
+failure before it can attach the combo list. attachment.c and draw_combo use
+the same API. The recovered combo.c has no CB_GETCOMBOBOXINFO branch, and
+modern USER does not own its PCBOX. Read-only analysis of this actual host's
+SysWOW64/user32.dll export RVA3a800 finds an indirect jump through import
+RVAef0c8, identified as win32u!NtUserGetComboBoxInfo. Thus adding a message
+handler or expecting this public query to discover original private data
+would not establish a fix. No binary is modified or selected as source.
+
+ADAPTER-WOW-074 design registration: supply only this missing renderer input.
+Keep original CBOX, editrc/buttonrc, spwndEdit/spwndList and interaction flags
+as the sole behavior authority. A same-thread scoped WOW query copies those
+fields into public COMBOBOXINFO, with exact retained WND/child identity,
+cleanup rejection, task/borrow/error restoration and no application callout.
+Native controls without original ComboBox state retain GetComboBoxInfo.
+Do not read modern PCBOX, synthesize a competing child registry, replace the
+original combo or add modern messages to its algorithm.
+
+Add optional same-width Ntw16sBindComboInfoApi to the existing NTW16S native
+service boundary, independently of Hook's scroll/theme trampoline binding.
+One immutable function binding per DLL lifetime; conflicting rebind rejects.
+All four renderer/attachment queries use this single service. Native/Demo
+consumers need no binding and retain their public native default. WOW binds
+its query after validating all required exports and before publishing style
+readiness. Its code module already outlives installed style callbacks. No
+shared CRT objects, guest pointers, process policy or new window is introduced.
+The additive export leaves existing ABI2 layouts/functions unchanged; the
+new WOW consumer explicitly requires it from the coherent matching package.
+
+Finite repair/acceptance: query and all renderer consumers, cleanup/invalid
+size/wrong-thread/state rejection and native fallback; true original CCPU
+ComboBox field/child projection; both-width DLL default/bind/rebind behavior;
+whole actual Win16 controls Off/Win16/All plus template dialog lifetime;
+affected source/body/native/style/app/DOS/coherent publication gates. Original
+MVDM/OpenNT mirror budget is zero for this binding. This is the existing S3
+control/style collaboration contract, not an application-name special case,
+semantic reduction or new feature. No pass/publication is claimed yet.
+
+Read-only native-boundary input identity: C:/Windows/SysWOW64/user32.dll,
+version10.0.26100.8117, SHA256
+56F3BC77020E21EBEEF825965929DC0D0BD87F9CAFBB08DBCD477043E4342D2E.
+Its import/jump observation is diagnosis only: no RVA, syscall number, version
+check or private host layout enters the implementation. The runtime uses the
+public native default for native controls and original CBOX for recovered ones.
+
+The entire repair is applied before building: optional immutable service,
+all four consumers, exact-state WOW query, required-export/style-ready binding,
+both-width native default/rebind tests, and real CCPU original-child/rect/error/
+cleanup/foreign-thread assertions. No standalone leaf compile was started.
+Control-info-build-r1 supervisor24932 passes both33-step style builds but
+fails provider compilation: original extent declarations were selected before
+WND existed, and importing oleacc.h's full COM/RPC declarations collided with
+the retained NT4 ABI. Fix include order using the existing extent-owner
+pattern; retain only three named public state-bit scalars rather than importing
+an unrelated COM/RPC closure. No original header or algorithm changes.
+
+Control-info-build-r2 supervisor14200 verifies exact unchanged style source
+identities and reuses those two passed builds; provider14596 recompiles the
+affected state unit and links successfully, worker32936 reports no work.
+Its complete output manifest records WOW32
+13B8CCBC857DA632F9B40C3C559203F1C483254061F7E8F178DB9F8216FB0C57,
+ntw16s32 BDDCB9D1FCFD111D4C0B9885502FD30F48BC558A23A5D8EA7D3DF546722DBD54,
+ntw16s64 1AA8D4D22FCD196A671AA8F5F99B5D6C90CF47CB43B6673FA41D0AC3D1C8235F,
+W16Style577162D28BDD97D18E8005C2B7BAFB6F2898098DAF49E9127666954C1A25DEBD;
+ntvdm remains the exact P17 E60645E8... image. Existing provider DEF warnings
+remain recorded. No older DLL is mixed into the new candidate.
+
+Control-info-acceptance-r1 supervisor13408 runs frozen native/CCPU20, real
+both-width DLL/demo boundary (including new binding assertions), original30,
+then independently staged real controls and16-round template dialogs in each
+Off/Win16/All mode. Window-borrow already passes the added actual CBOX and
+child-identity tests; no aggregate pass is inferred from partial results.
+Control-info-product-r1 supervisor42636 verifies13408's actual PID/start time
+and waits on that live handle before any app/DOS endpoint test. It will require
+the entire acceptance result0 before proceeding to WINMINE/SOL gameplay/exit,
+WRITE startup and Console17/Window17 on the exact same package. WRITE editing
+and normal exit are still not claimed. Current published baseline remains P17.
+
+Acceptance-r1 completes native20/20 and both-width DLL/demo binding tests.
+Original30 compilation then exposes a single isolated OFF-only modal model's
+unresolved wow_control_get_combo_info dependency in load_titles. Add an explicit
+rejecting/unreached boundary double to that model, never a successful fake
+query. Actual CBOX projection remains proved by real CCPU. Acceptance-r2
+supervisor9576 verifies unchanged production/artifact and DLL-test identities,
+reuses those passed groups and reruns original30; all30 pass. The sole changed
+model source is not a selected TU in any native20 compile/link command.
+
+Actual controls Off/Win16/All now all pass, including previously failing
+CBS_SIMPLE and the other two forms. The16-round common-dialog Off witness
+completes all19 guest records without error:17 created,16 ordinary closes,
+17 hooks, one intentionally live dialog and one successful normal task exit.
+But resource unlock/free callbacks each occur16 rather than17 times. The
+strict verifier rejects this; do not lower that assertion or reclassify the
+failure as the old unlocated common-dialog exception. Product-r1/r2 therefore
+stop at their prerequisite; no product regressions have been launched yet.
+
+Source root: ead0aa64a introduces original ComboBox/other control selection
+in wow_class_words_import_native (confirmed blame lines257--264), explaining
+the newly exposed native-info mismatch. Its task-exit dialog terminal procedure
+also replaces all dialog WM_DESTROY delivery with DefWindowProc. This bypasses
+existing original wcommdlg.c::WowOriginalFindReplaceDialogProc's resource-only
+WM_DESTROY branch. The MVDM-HOST-DIV-335 wrapper already supplies exactly the
+early resource-cleanup scope that this original owner needs; it is no longer
+reached after native dialog delivery is neutralized. Reuse it, do not invent
+resource-free logic or allow dying application callbacks.
+
+ADAPTER-WOW-075 registration, same finite C3/exit group: associate a trusted
+resource-only destructor with the existing exact HWND binding when its known
+callback receives WM_INITDIALOG. Common-dialog modal stack records already
+unwind through their original synchronous callers; persistent Find/Replace
+records own the original deferred WM_DESTROY release. No class-name, filename,
+TD-layout guessing or second resource registry is admitted. Ordinary WM_DESTROY
+consumes this association before the original callback; task-terminal
+WM_DESTROY consumes/invokes it once, outside publication locks and under the
+existing early cleanup permission. Clear before reentry, retain the exact old
+binding, reject conflicting owners/foreign threads/late registration, preserve
+errors and propagate failure. Native destruction, original PDLG finalization
+and NTW16S terminal disposal retain their existing ordering. No guest or new
+MVDM/OpenNT mirror diff; existing DIV335 body and resource algorithms remain.
+
+Style-life-r1 independently passes all8 title/attachment/dialog/terminal cases
+on these exact new DLLs. P17/current raw-default comparisons both report
+GDI16/16 and exit0 at both widths in this run. Earlier16/19 failures remain
+unresolved historical risk, not a defect claimed fixed by this query repair.
+
+### ADAPTER-WOW-075 real native-dialog selection correction
+
+Combined build-r3 passed (supervisor33580); WOW32 SHA256
+277788111B0B86318F16ED0437F2575228192548DA786F4C5A7AC6D0CF2B586A.
+Acceptance-r3 passed19/20 native rows. Creation-unwind's unchanged15-second
+native HWND lowword reacquisition prerequisite failed (688 attempts), not a
+proved product assertion. Acceptance-r4 reran the complete strict row with
+unchanged inputs/assertions/deadline and passed. Its native-coverage.json
+records19 initial passes plus one full-row replay, not uninterrupted20/20.
+Original30, resource-guard and both-width DLL boundaries pass in r4; the new
+real-original-dialog resource-owner negative/reentry/cleanup assertions pass.
+The first guest attempt in r4 was rejected before guest execution because
+release NTSRV36932 occupied the global endpoint. Under permanent owner
+authorization, exact path/PID/start verified closure stopped NTSRV36932,
+NTCON23824, NTVWM29836 and NTVDM19420. Evidence:
+build/M0-T447/S3/control-info-live-release-close-r1/identities.json.
+
+Acceptance-r5 reused validated prerequisites and again passed actual controls
+in all3 modes, but its common-dialog Off16-round witness still had only16
+unlock/free callbacks each despite all19 guest records and task retirement.
+No product regression or publication ran after this failed prerequisite.
+Resource-exit-trace-r1 could not create O:/tmp's physical stage in the sandbox;
+it is not runtime evidence. Escalated background resource-exit-trace-r2 ran
+the one-round witness, retaining a temporary diagnostic-only TerminalOwner
+trace. The final registered resource owner has original FNID0, while another
+window has original FNID029F; the resource owner therefore bypassed the new
+terminal procedure. The diagnostic source/build-r4 and trace remain sealed.
+That temporary trace is removed from production source after attribution.
+
+Correction within the registered075 boundary: an explicitly registered trusted
+resource owner selects the resource-only terminal procedure regardless of
+whether the host-native dialog has original client behavior state. Do not
+fabricate FNID/PDLG, classify by title/class name, or substitute an authored
+COMMDLG resource-free algorithm. The existing original resource-only callback
+retains its guest template/context release and runs before guest resource
+teardown. Other standard control/dialog finalizers remain unchanged. An added
+real host dialog fixture has no recovered FNID and must release its registered
+owner exactly once; the earlier original-dialog and negative assertions remain.
+Build-r5 and complete acceptance on this corrected source are pending, not
+claimed passing. No guest, assets/winnt.zip or MVDM/OpenNT mirror change.
+
+Build-r5 passes; final candidate WOW32 SHA256
+8C7561AB54159DC02E0ACC374949A9C34C8A50CA80293E0A58AA03C8649BF121.
+Acceptance-r6 completed all20 native rows with19 passes. The added native
+dialog fixture initially attached WW but omitted task-owner publication;
+bind/prepare correctly rejected it with ERROR_INVALID_STATE. This is a test
+setup defect, not permission to relax the production owner check. The fixture
+now first asserts that rejection, then publishes the real existing owner and
+performs the same prepare/destroy/reentry assertions. Only this guarded header
+changed; wow_page_domain_fixture.c includes it exclusively under
+WOW_REAL_DIALOG_LIFECYCLE_FIXTURE, set only for this row by the verifier.
+All19 other row inputs and production images are unchanged.
+
+Acceptance-r7 validates that exact one-header difference (prior SHA256
+9CDE26584100AE13ADF9717475BE09011D46AB9EE65F9259A0AD2FDBFC91E1E0),
+rebuilds/replays the complete dialog-lifecycle row, and passes. Its
+WOW_NATIVE_DIALOG_RESOURCE_OWNER, WOW_REAL_DIALOG_RESOURCE_OWNER, scope,
+rollback, physical-free, cache and original lifecycle markers all report0
+errors. native-coverage.json explicitly distinguishes19 reused rows plus
+one repaired full row from uninterrupted20/20. Original30 also passes on
+this source. Actual guest and product gates remain pending here; prerequisite
+failures in product-r3/r4 ran no product guest tests. Product-r5 is queued
+behind acceptance-r7, never concurrently using its isolation endpoint.
+
+### P18 bounded repair delivery and proof limits
+
+Acceptance-r7 completes with exit0: native20 coverage as qualified above,
+original30, common-dialog resource guard, DLL boundaries at both widths and
+six actual USER16 witnesses. Each controls probe has all9 phases,10 created,
+8 explicit destroys, original EDIT LocalAlloc/Free callbacks and one task exit.
+Each common-dialog mode has19 records,17 creations,16 explicit closes,17
+unlock callbacks,17 free callbacks and one target task retirement; the final
+dialog is deliberately left live for original resource-only exit cleanup.
+
+Product-r5 passes WINMINE flag/counter/reset/open-cell and SOL deal/stock-draw,
+WM_CLOSE and normal run16 completion in Off/Win16/All independently. WRITE
+passes4 startup samples in each mode (main/document/pageinfo), not editing,
+save or normal full exit. Console and Window17-row DOS matrices have17/17
+Expected==Actual each, including COMMAND/MEM/EDIT and nested execution. The
+controlled environment profile is preserved; arbitrary inherited environments
+are not claimed. No endpoint-sharing real guest tests ran concurrently.
+
+Publication39192 (2026-10-17T22:51:23.7554661Z) verifies all gates and source/
+artifact identities, retains27 prior assets/target/manifest backups under
+build/M0-T447/S3/published-control-info-r1, and synchronizes13 named host images
+to assets/release and O:/winnt/system32. All three sets' SHA256 match. Only
+WOW32.DLL,ntw16s32.dll,ntw16s64.dll,W16Style.exe change from P17; ntvdm and the
+other8 stay byte-identical. No release processes needed closure at publication.
+The earlier exact four-process closure is retained separately above.
+
+Post-deployment boundary29244 (2026-10-17T22:51:29.9797596Z) passes both actual
+published DLL widths, opposite-width rejection, duplicate/foreign-thread
+rejection, immutable query binding, font restoration/unload, plus published
+W16Style's28 pages, viewport movement and normal process exit. Full evidence:
+build/M0-T447/S3/control-info-delivery-r1. Original guest/ZIP unchanged;
+src/mvdm and src/opennt-host diff is empty. Existing075 reuses DIV335 without
+adding another mirror exception;074/075 owned seams are registered in README.
+
+Second-role review: registration metadata is not another resource registry;
+original CBOX and original COMMDLGTD remain authoritative for behavior/data.
+Native USER remains HWND/lifetime owner. No modern private structure cast,
+helper window, callback-enabling cleanup exception, alternate resource free,
+test relaxation, original guest change or additional semantic waiver is used.
+The fixture-only enrollment repair adds its previously missing prerequisite
+and negative assertion; it does not alter production or omit the old checks.
+Boundary tests supplement real guest proofs, not substitute for them.
+
+This P is not whole S3/T447 closure. The finite S3 chain inventory and remaining
+shared/private dialog DS/full creation/behavior proof obligations must still
+be reconciled against actual guest coverage. Hidden control message probes do
+not prove pixels, physical keyboard navigation, every owner-draw control, or
+all dialog cases. Full mixed messaging/reply/reentry remains S4, individual
+task termination S5. Earlier unexplained common-dialog/default-GDI anomalies
+retain their recorded limits; these two source-attributed repairs do not
+retroactively prove those unrelated old anomalies fixed.

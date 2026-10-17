@@ -9,6 +9,14 @@ struct _WW;
 struct tagWND;
 struct wow_user_object_table;
 typedef struct wow_window_words_binding wow_window_words_binding;
+/* Trusted resource-only WM_DESTROY owner, not an application procedure.
+ * Registration/consumption is same-GUI-thread and exact-generation scoped. */
+typedef UINT (WINAPI *wow_window_resource_destroy)(HWND,UINT,WPARAM,LPARAM);
+BOOL WINAPI wow_window_words_bind_resource_destroy(HWND,wow_window_resource_destroy);
+/* Ordinary owner clears with expected!=NULL/invoke=FALSE. The terminal
+ * edge invokes with expected=NULL only under early task-cleanup permission. */
+BOOL WINAPI wow_window_words_consume_resource_destroy(HWND,
+    wow_window_resource_destroy expected,BOOL invoke);
 /* Unpublished storage owns one reference only: no HWND property, class
  * association or cleanup membership. A scope may later enroll this identity. */
 wow_window_words_binding *WINAPI wow_window_words_allocate(void);

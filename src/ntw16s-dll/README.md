@@ -1,5 +1,15 @@
 # NTW16S Win3.x window-style DLL
 
+T447 S3 / ADAPTER-WOW-074 adds optional Ntw16sBindComboInfoApi for a caller
+whose original ComboBox owns its own private state. All attachment and drawing
+queries share this immutable native-service binding; ordinary native consumers
+keep GetComboBoxInfo. No private control layout or callback-owned allocation
+crosses the ABI, no new layout/interaction algorithm exists in the DLL, and
+Hook's existing scroll/theme trampoline binding remains independent. Caller code
+must outlive every installed callback. Conflicting rebind and null input reject;
+the additive export does not change ABI2 structure layouts or existing exports.
+This registration alone is not grouped acceptance or a new publication.
+
 T447 S3 / ADAPTER-WOW-073 registers the additive ABI-2
 Ntw16sWindowTerminal(HWND) resource boundary. Its same-thread caller owns the
 native terminal edge, including a deliberately neutralized window procedure.

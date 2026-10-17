@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "wow_dialog_procedure_bindings.h"
 #include "wow_user_task_lifecycle.h"
+#include "wow_window_words_binding.h"
 #include "dialog-getset/precomp.h"
 
 /* Real dialog contract research for the approved S3 owner split. These are
@@ -13,6 +14,11 @@ static unsigned native_depth;
 static DIALOG recovered;
 static DLG recovered_data;
 #define CHECK(c) do { if (!(c)) { ++failures; printf("FAIL line=%d error=%lu\n", __LINE__, GetLastError()); } } while (0)
+/* This slot/encoding fixture invokes terminal NCDESTROY only. Real retained
+ * resource-owner dispatch is tested by the registered CCPU lifecycle. */
+BOOL WINAPI wow_window_words_consume_resource_destroy(HWND w,
+    wow_window_resource_destroy expected,BOOL invoke)
+{(void)w;(void)expected;(void)invoke;CHECK(FALSE);return FALSE;}
 
 /* Original get/set bodies use a retained-view double; actual HWND slots,
  * opaque tokens and native A/W conversion are real. No GetWindowData or

@@ -305,7 +305,7 @@ static void draw_combo(HWND w,control_style *s,HDC dc)
 {
     COMBOBOXINFO info={sizeof(info)};RECT client,button,text,pixel;HFONT font;
     WCHAR *label;int length,saved,x,y,left,top,u;BOOL selected,pressed,editable,simple;
-    if(!dc || !GetComboBoxInfo(w,&info))return;
+    if(!dc || !ntw16s_native_get_combo_info(w,&info))return;
     length=GetWindowTextLengthW(w);label=calloc((size_t)length+1,sizeof(WCHAR));if(!label)return;
     GetWindowTextW(w,label,length+1);font=(HFONT)SendMessageW(w,WM_GETFONT,0,0);
     pressed=SendMessageW(w,CB_GETDROPPEDSTATE,0,0)!=0;
@@ -1053,7 +1053,7 @@ static BOOL install(HWND w,const win16_style_palette *palette,BOOL edit,BOOL ori
     ++s->calls;
     if(!frame_bars && is_combo(w)){
         COMBOBOXINFO info={sizeof(info)};
-        if(!GetComboBoxInfo(w,&info) || !win16_style_control_install(info.hwndList,palette)){
+        if(!ntw16s_native_get_combo_info(w,&info) || !win16_style_control_install(info.hwndList,palette)){
             if(!s->detached)win16_style_control_remove(w);result=FALSE;goto installed;}
         if(s->detached){win16_style_control_remove(info.hwndList);goto installed;}
         s->combo_list=info.hwndList;

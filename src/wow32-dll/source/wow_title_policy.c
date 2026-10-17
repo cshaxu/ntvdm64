@@ -1,11 +1,13 @@
 #include "wow_title_policy.h"
 #include "wow_edit_lookaside_bindings.h"
+#include "wow_edit_entry_bindings.h"
 #include "wow_user_task_lifecycle.h"
 #include "wow_user_borrow_scope.h"
 #include "wow_dialog_context_bindings.h"
 #include "opennt-abi/host-compat/include/wow32_provider_private.h"
 #include "common/protocol/window_style.h"
 #include "ntw16s-dll/attachment.h"
+#include "ntw16s-dll/native_api.h"
 #include <wchar.h>
 #include <shellapi.h>
 
@@ -26,7 +28,9 @@ static BOOL CALLBACK load_titles(PINIT_ONCE once,void *parameter,void **context)
 {
     WCHAR path[MAX_PATH],*name;DWORD length;HMODULE module;
     typedef DWORD (__cdecl *version_fn)(void);
+    typedef BOOL (__cdecl *bind_combo_fn)(ntw16s_combo_info_fn);
     version_fn version;creation_begin_fn begin;creation_end_fn end;
+    bind_combo_fn bind_combo;
     FARPROC attached,changed,hit_test,terminal;
     (void)once;(void)parameter;(void)context;
     length=GetModuleFileNameW(NULL,path,ARRAYSIZE(path));
@@ -44,8 +48,12 @@ static BOOL CALLBACK load_titles(PINIT_ONCE once,void *parameter,void **context)
     attached=GetProcAddress(module,"Ntw16sWindowAttached");changed=GetProcAddress(module,"Ntw16sScrollChanged");
     hit_test=GetProcAddress(module,"win16_style_hit_test");
     terminal=GetProcAddress(module,"Ntw16sWindowTerminal");
-    if(!version || version()!=NTW16S_ABI_VERSION || !begin || !end || !attached || !changed || !hit_test || !terminal){
+    bind_combo=(bind_combo_fn)(void *)GetProcAddress(module,"Ntw16sBindComboInfoApi");
+    if(!version || version()!=NTW16S_ABI_VERSION || !begin || !end || !attached || !changed || !hit_test || !terminal || !bind_combo){
         FreeLibrary(module);SetLastError(ERROR_REVISION_MISMATCH);return FALSE;
+    }
+    if(!bind_combo(wow_control_get_combo_info)){
+        DWORD error=GetLastError();FreeLibrary(module);SetLastError(error);return FALSE;
     }
     creation_begin=begin;creation_end=end;
     style_attached=(BOOL (__cdecl *)(HWND))(void *)attached;

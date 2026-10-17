@@ -44,4 +44,6 @@ UINT WINAPI wow_control_set_timer(HWND, UINT, DWORD, WNDPROC);
 BOOL WINAPI wow_control_finalize_bound(HWND);
 /* Internal scoped operation, declared without exposing private WND layout. */
 BOOL WINAPI wow_control_finalize_window(HWND);
+/* Same-thread original CBOX -> public renderer input, never native PCBOX. */
+BOOL WINAPI wow_control_get_combo_info(HWND,PCOMBOBOXINFO);
 #endif

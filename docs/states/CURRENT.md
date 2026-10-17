@@ -4,19 +4,18 @@
 
 ## Current Work
 
-Native dialog slots retain original algorithms; no helper HWND or guest edits.
-P17 source ead0aa64a, publication verified. Frozen core20/20 passes with real CCPU/
-registered-owner cases; source/artifact hashes retained. Original
-four WU32 callers pass; native CPD
-source retirement/restoration now passes both encodings. Real DLL terminal
-cleanup passes56callbacks/GDI1:1 at both widths; styled CCPU dialog/button
-neutralization/retirement passes GDI6:6. Raw default-button GDI16/19 fails
-identically with P16/candidate at both widths; not fixed or silently waived.
-Candidate r12/r13 passes WINMINE/SOL gameplay/exit in all3 modes; WRITE r3
-passes4 startup samples/mode, not editing/exit. Console17/Window17 and original30 pass.
-Dedicated registered-owner modal r6 passes Off/A/W/all styles and cleanup.
-S3/T447 remain open; guest/ZIP unchanged. Complete13 published.
-Source ledger retains earlier failures and input identities.
+Post-P17: combo input/resource-exit repair (ADAPTER-WOW-074/075). Build-r5 and
+acceptance-r7/product-r5 pass; P18 all13 published and deployment-verified.
+Native coverage:19 unchanged passing rows plus one full dialog-row replay
+after fixture-only enrollment repair, not uninterrupted20/20. Original30,
+both-width DLL boundaries and real controls/template probes in all3 modes pass.
+Each template witness records17 unlock/free pairs before one task retirement.
+Latest old/new default GDI16/16 passes do not prove earlier16/19 cause fixed.
+P17 WINMINE/SOL gameplay/exit, WRITE startup only and DOS17x2 remain the
+delivery floor. WRITE editing/save/normal exit remains unproved.
+S3/T447 open; guest/ZIP/mirror unchanged. See the source ledger for exact runs.
+Chronology below is historical; later evidence supersedes intermediate unrun
+markers, not whole-S3 proof obligations.
 
 Dialog-context-r2 passes scoped metrics/class atoms, temporary font lifetime,
 outer-context restoration and cleanup without preference capture. These
@@ -412,13 +411,14 @@ is not established by these handle macros.
 
 ## Current Technical Baseline
 
-P17 recovery publication changes ntvdm/WOW32 and the3 style/demo images.
-All13 are hash-verified against the tested candidate at assets/release and
-O:/winnt/system32. Prior coherent P16 plus publication evidence is retained
-under build/M0-T447/S3/published-recovery-baseline-r1; source ead0aa64a.
+P18 changes WOW32 and the3 style/demo images; ntvdm and other8 stay P17.
+All13 match the tested candidate at assets/release and O:/winnt/system32.
+Prior P17 (ead0aa64a) and27 recoverable backups are retained under
+build/M0-T447/S3/published-control-info-r1; deployed boundary passes both widths.
 
-P17 passes core20, original30, Console17/Window17, SOL/WINMINE gameplay/exit
-Off/Win16/All and WRITE initialization only. WRITE editing/save/full exit,
+P18 covers native20 (19 retained + repaired full row), original30, DOS17x2,
+controls/template witnesses and SOL/WINMINE gameplay/exit Off/Win16/All;
+WRITE initialization only. WRITE editing/save/full exit,
 arbitrary inherited environments, full S4 messaging and S5 termination remain
 unproved. P16 foundation/guest history is retained in its
 [scope audit](../etc/evidence/m0-t447-s2-scope-freeze.md).
