@@ -199,6 +199,43 @@ The pure-native modal reference is reused only with exact-input proof.
 input-membership lifetime blocker, not every S4 message obligation or stutter.
 No physical-input or WRITE editing/save/full-exit proof is claimed.
 
+After reviewed main/origin7dd8fa32b and a clean worktree,085 admits one bounded
+owned-view traversal group under the continuing owner performance request.
+The authoritative published slot table and existing borrow lifetime list remain
+unchanged. Copy using already known borrow metadata, enumerate only records
+whose backing is the current slot, handle the cold desktop separately, and
+retain ascending slot order, table-derived required count/capacity, exact
+generation filtering and LastError. No persistent index/cache, native refresh
+reduction, scheduler/guest change or new mirror diff. Review original direct
+shared-view ownership, extend real CCPU order/capacity/reuse evidence, then
+compose the whole worker/provider and paired timing before every-P delivery.
+Do not infer material UI improvement from an asymptotic reduction alone.
+window-copy-build-r2 passes the complete composed source/build group (exit0),
+including fresh native extension/callback/input supplements, original memory/
+alias services and actual CCPU borrow/reclaim/graph/nested/notification cases.
+New order/capacity/cold-desktop/retired-generation assertions pass alongside
+existing original assertions. Restricted-context build-r1's native keyboard
+precondition failure and dependent supervisor refusals remain non-pass records;
+the normal-context rerun does not relax their assertions. Paired performance,
+full every-P acceptance and delivery are still pending; installed P4 remains.
+Paired window-copy-performance-r3 passes all6 cases and real EMS controls,
+but shows no material speedup: ordinary60.949->62.069ms, sampled61.349->
+61.425ms, private30.2675->30.243ms; ordinary p95 is worse63.838->93.846ms
+in these12 samples. This is not a stable tail conclusion or stutter solution.
+The exact P4/P5 native nested repeats both pass8/8; full acceptance continues.
+
+085 P5 now completes window-copy-acceptance-r2 exit0: fresh native20/original30,
+12 real S3 guest groups,6 actual message policies, application/DOS/modal/logon
+floors as above. window-copy-delivery-r1 publishes the coherent13 to both
+destinations and passes deployed both-width style, installed-logon/gameplay3
+and final13 hashes (exit0). No source expansion during this frozen group.
+No new mirror or original guest diff. The traversal optimization is retained
+as bounded ownership-safe mechanics, not evidence that it fixes stutter; the
+reported flat medians and worse ordinary small-sample tail remain explicit.
+The complete source-defined class-reachability lead is recorded in the audit;
+do not edit it until this baseline is reviewed/committed. All S4 groups and
+S5/S6 remain open as before.
+
 ## Active Packet
 
 | Field | Required record |
@@ -221,9 +258,10 @@ No physical-input or WRITE editing/save/full-exit proof is claimed.
 
 ## Current Technical Baseline
 
-S4 P4 publishes the bounded empty-alias/input-membership lifetime baseline.
-NTVDM SHA-256 is3AEB087A3485D885A6C8B59EED4C8908EEAA42362389550980A12EE50A752542;
-WOW32 is4CE877E6E9370992F1BE06F79E68735639FADB6816C3F7312B333547F887F411.
+S4 P5 publishes the bounded owned-window traversal baseline, retaining P4's
+empty-alias/input-membership lifetime repair.
+NTVDM SHA-256 isDA32FCE789F3964DF5F8AA7938A8ED823A5323C56674700BD3D625B4588AA628;
+WOW32 is2259617984A63A651DACDA8366F1CB34D1386BB018C5AD6A3B7264BDFAEC0237.
 The release manifest owns exact identities of all13 images. Both
 assets/release and O:/winnt/system32 match the tested package; original guest,
 user configuration and assets/winnt.zip are unchanged by this delivery.

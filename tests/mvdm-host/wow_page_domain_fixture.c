@@ -2734,6 +2734,8 @@ static void verify_native_slot_reuse(void)
             SetLastError(0x55bbu);
             BORROW_CHECK(mvdm_softpc_wow_page_domain_copy_window_view(count, view, &returned));
             BORROW_CHECK(returned == count && GetLastError() == 0x55bbu);
+            for (row = 1; row < returned; ++row)
+                BORROW_CHECK(LOWORD(view[row - 1u].links.window) < LOWORD(view[row].links.window));
             for (row = 0; row < returned; ++row) if (view[row].links.window == old_full) {
                 found = TRUE;
                 BORROW_CHECK(view[row].descriptor.atom != 0 &&
@@ -2803,6 +2805,32 @@ static void verify_native_slot_reuse(void)
         words[0] == 0x76543210u && c_sas_dw_at(held) == old_full);
     BORROW_CHECK(fresh && mvdm_softpc_wow_page_domain_read_window_words(fresh, words) &&
         words[0] == 0 && c_sas_dw_at(fresh) == new_full);
+    {
+        mvdm_softpc_wow_window_observation *view;
+        ULONG count = 0, returned = 0, row;
+        BOOL found = FALSE;
+        /* Pinned retired storage must not appear beside its replacement in
+         * the copied live view, even though both lifetime records still exist. */
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_copy_window_view(0, NULL, &count));
+        view = HeapAlloc(GetProcessHeap(), 0, (count + 1u) * sizeof(*view));
+        BORROW_CHECK(view != NULL);
+        if (view) {
+            ZeroMemory(&view[count], sizeof(*view));
+            view[count].links.window = 0x76543210u;
+            SetLastError(0x55bbu);
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_copy_window_view(count, view, &returned));
+            BORROW_CHECK(returned == count && GetLastError() == 0x55bbu &&
+                view[count].links.window == 0x76543210u);
+            for (row = 0; row < returned; ++row) {
+                BORROW_CHECK(view[row].links.window != old_full);
+                if (view[row].links.window == new_full) found = TRUE;
+                if (row) BORROW_CHECK(LOWORD(view[row - 1u].links.window) <
+                    LOWORD(view[row].links.window));
+            }
+            BORROW_CHECK(found);
+            HeapFree(GetProcessHeap(), 0, view);
+        }
+    }
 cleanup:
     if (old_window) BORROW_CHECK(DestroyWindow(old_window));
     if (replacement) BORROW_CHECK(DestroyWindow(replacement));
@@ -4043,6 +4071,16 @@ static int run_fixture(void)
                 (unsigned long)first_physical, (unsigned long)second_physical);
             goto done;
         }
+    }
+    stage = "cold-window-copy";
+    {
+        mvdm_softpc_wow_window_observation cold;
+        ULONG count = 0;
+        SetLastError(0x55bbu);
+        if (!mvdm_softpc_wow_page_domain_copy_window_view(1, &cold, &count) ||
+                count != 1 || GetLastError() != 0x55bbu ||
+                cold.links.window != (ULONG)(ULONG_PTR)GetDesktopWindow() ||
+                cold.descriptor.atom != 0) goto done;
     }
     stage = "client-view";
     shared = (uint32_t)mvdm_softpc_wow_page_domain_guest_shared_info();

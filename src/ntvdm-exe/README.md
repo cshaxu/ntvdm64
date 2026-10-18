@@ -1,5 +1,20 @@
 # NTVDM worker owner
 
+ADAPTER-WOW-085 removes repeated metadata searches during owned-view copying.
+The published slot table remains authoritative. The existing borrow lifetime
+list supplies candidate storage; only the current backing for its full handle
+is copied. A cold desktop is copied separately. Table-derived required count,
+capacity refusal, ascending slot order and LastError remain. No new persistent
+index/cache or native-state freshness policy is introduced. Original NT4 USER
+reads its shared WND directly (ntuser/rtl/getset.c GetWindowData); it has no
+standalone copied-view traversal to import. Reconstructing that private shared
+heap is outside the approved host boundary; optimize the existing bounded
+projection instead, retaining original CCPU reads and ownership. No mirror
+intrusion or guest change is needed. Verify current/retired generations,
+capacity/order, original CCPU graph lifetime and actual paired input plus
+the full retained release floors before delivery. This is not independently
+claimed as the principal stutter cause.
+
 ADAPTER-WOW-080 bounds copied-view reads to the existing page-domain owner.
 The original CCPU40 c_GetLinAdd service is reused for immediate copies of
 known allocated WND/CLS RAM that fits one translated page. This removes

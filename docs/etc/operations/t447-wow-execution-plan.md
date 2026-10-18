@@ -68,6 +68,20 @@ it does not turn its overall exit1 into a pass. Paired performance is flat,
 not the owner's requested final stutter solution. The next performance lead
 is source review of copied-window traversal/repeated metadata searches, after
 this safe baseline is reviewed and committed. No six-group/S5/S6 scope drops.
+That handoff is now clean main/origin7dd8fa32b.085 selects only the existing
+owned-view copy traversal: borrow metadata is reused, current published
+generations are enumerated through the existing lifetime list and sorted to
+the same slot order; table-derived required capacity and cold desktop remain.
+No persistent index, new state authority, lower freshness or guest/mirror edit.
+Whole CCPU lifecycle plus paired timing and retained release gates are required;
+an asymptotic improvement alone is not the owner's requested UI improvement.
+085's full composed build, paired six-case performance/EMS controls, P4/P5
+eight-repeat native lifetimes, complete runtime acceptance and coherent13
+publication/installed verification now pass (window-copy-acceptance-r2 and
+delivery-r1 exit0). Paired medians are flat, ordinary small-sample p95 worse;
+this does not solve stutter. Source-defined class reachability/temporary-table
+closure is the next lead after reviewed P5 handoff, not an edit to its frozen
+candidate. No original guest/mirror change or S4/S5/S6 scope reduction.
 
 S3 is closed at the P22 runtime/P23 interaction baseline after the
 [fixed-chain exit review](../../history/m0-t447-s3-control-dependency-closure.md).

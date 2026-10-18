@@ -1428,3 +1428,133 @@ pure-native modal control reuse is recorded in reused-native-control.json;
 original guest, installed configuration and assets/winnt.zip are unchanged.
 Paired posted-input performance remains essentially flat (ordinary61.961 to
 61.073ms), not a stutter fix, physical-input measurement or stable tail claim.
+
+### Owned-view traversal085 source-complete batch
+
+Following clean main/origin7dd8fa32b, the owner requests continued improvement.
+The exact P4 sampled-input run has25 active observations, including3 nearest
+copy_window_observation symbols,1 copy_window_view and1 graph validation.
+These are statistical addresses, not stacks or weighted time; they do not
+prove this is the principal remaining hotspot. Source proves the avoidable
+quadratic metadata search: each published slot invokes window_borrow_link,
+which walks the same lifetime list. The caller also already holds that borrow
+when reading a single retained view. No test-driven feature expansion follows.
+
+Four-rung disposition: pinned OpenNT ntuser/rtl/getset.c GetWindowData reads
+the original shared WND directly; selected original CCPU still owns guest RAM
+reads. There is no original standalone copied-view enumeration to import.
+Composing the entire NT4 private USER shared heap would violate the approved
+modern resource boundary. Keep the already admitted copied projection and
+optimize its traversal; no original mirror intrusion or new behavior engine
+is needed. Source paths prepare_window/commit_window prove every ordinary
+published backing has an existing borrow record. withdraw_window clears the
+slot and marks retirement under the same exclusive context; final reclamation
+unlinks the record. The cold desktop is the explicit record-free exception.
+
+085 passes the already known borrow to row copying. A whole view retains its
+table-derived required count/capacity refusal, copies the desktop separately,
+then walks existing records and accepts only the currently published backing.
+Retired records are skipped before any guest storage read (failed reclamation
+must not make that read safe by assumption). Exact copy count is checked, and
+qsort restores the original ascending-low-word row order. No new allocation,
+persistent index/cache, native query suppression, timestamp, scheduler change
+or guest/mirror edit. The original publication/lifetime table remains the
+authority; the list is only an enumeration path. Existing failed-capacity
+untouched-output and LastError checks remain. Added actual CCPU checks cover
+the record-free cold desktop, ascending output and a pinned old generation
+beside its current replacement, including output-end sentinel preservation.
+Existing graph/retirement/rollback cases remain mandatory, not replaced by
+these new assertions. Full worker/provider composition, paired ordinary/
+sampled/private timing and every-P release gates are required before delivery.
+
+window-copy-build-r1 links worker/provider and passes extension boundaries,
+but its unchanged input supplement fails the native prerequisite own_Z=128
+with own_Z=0 before grouping on the restricted desktop. It is not a passing
+build or evidence that the input algorithm failed. The first performance
+supervisor cannot observe the prior process from its restricted job; r2 can
+observe it but correctly refuses runtime because build-r1 failed. Their
+failures remain recorded. Complete build-r2 runs under the already authorized
+normal user context with unchanged source/keyboard assertions and sealed P4
+baseline images/maps from r1. It deliberately verifies the source manifest
+before reusing the stable production build roots; no clean rebuild or test
+condition weakening is required. Later results are not yet implied.
+
+The full normal-context window-copy-build-r2 now completes exit0. It composes
+worker/provider, fresh extension/original-frame/input supplements, physical
+alias service and original external memory, actual CCPU window borrow/reclaim/
+graph snapshots, native-nested and start-notification. The same old/full slot
+reuse witness passes with attempts1 and distinct backings, including the added
+no-old-row/current-row/output-sentinel/order checks. Local observation commit
+and32 external-process/local-update iterations also pass; native held0/held1
+receiver retirement restores ownership, final lifecycle errors0. The new cold
+desktop copy runs before any descriptor publication. No completed whole
+runtime acceptance/publication or speedup is inferred from this build group.
+The legacy paired pixel observer polls20ms between unchanged cells, so its
+small differences are quantized and cannot establish a few-ms latency gain.
+
+window-copy-performance-r3 completes exit0 with both real EMS controls and all
+six actual input/final-board/normal-exit cases. Baseline P4 versus candidate:
+ordinary median60.949/62.069ms and p9563.838/93.846ms, sampled median61.349/
+61.425ms, private30.2675/30.243ms. No material overall improvement is proved;
+the ordinary tail is worse in this small observation set, not suppressed from
+the report. Source-level removal of repeated searches is not promoted to a
+principal-stutter diagnosis or a stable physical-input/tail claim. Statistical
+addresses still include class reachability collection and SAS/native services;
+their complete ownership paths require source review before another batch.
+The exact P4/P5 nested debugger group completes exit0: each8/8 passes required
+held0/held1 receiver retirement and normal fixture exit, with zero observed
+heap corruption. Unlike P4's earlier failing P3 control, this diagnostic's
+overall result is actually passing. Full retained runtime acceptance remains
+required before publishing085; P4 stays installed until then.
+The paired timing workload is12 right-button flag-state changes of one cell,
+not a measurement of left-button multi-cell reveal or physical mouse delivery.
+The separate application floor does exercise left-button open and reset, but
+its success alone is not a latency distribution for those operations.
+
+#### Next source lead, not another mutation of the frozen085 candidate
+
+The complete class reachability path is borrow_leave, class unregister/release,
+task teardown, observed-window creation/graph commit and final WND collection.
+collect_observed_classes first retries retired WNDs, then allocates capacity
+65536 plus the record count on every applicable call, scans the full slot table
+and scans all borrow records again, sorts class pointers and performs final
+strict retirement. class_is_referenced repeats the slot scan before the same
+record scan; release_class must distinguish published WNDs from retired pins.
+This is a source-proved duplicate traversal/allocation, not yet a measured
+whole-UI bottleneck. The exact original class.c at the pinned OpenNT revision
+uses cWndReferenceCount and DestroyClass's zero-association precondition; native
+NT4 shared-heap reference ownership is not a usable extra authority for these
+owned copied generations. Do not add a duplicate independently updated count.
+
+The finite next design is to derive reachability from the existing lifetime
+list plus the record-free desktop. All ordinary published/prepared and pinned
+retired backings already belong to that list. A temporary reference array
+therefore needs at most one plus the record count, not65536 plus that count.
+Keep every retired/prepared record for final CLS reachability; unlike live-view
+copying, skipping them would be wrong. Keep the existing initial WND reclamation,
+qsort/search, final strict retirement, allocation/failure retention and errors.
+Only release_class's existing published-association refusal filters current
+slot ownership; retired pins still retain a released descriptor physically.
+Review class_is_referenced, collect_observed_classes and release_class as one
+closure. Existing managed-class, retained old-generation, release/free failure,
+rollback and teardown assertions plus real CCPU and paired-input floors must
+all remain. This is neither implemented nor admitted by this read-only lead;
+finish085's current verification/delivery safe point before another source edit.
+
+#### 085 P5 delivery verdict
+
+window-copy-acceptance-r2 exit0 completes fresh native20/20, original30,12
+actual S3 guest groups,6 default/extension message policies, WINMINE/SOL
+gameplay/normal exit3, WRITE's retained startup3, Console17/Window17, native
+modal3 and complete-logon gameplay3. Source registration remains278 selected,
+192 byte-exact/86 registered differences/issues0. window-copy-delivery-r1
+exit0 publishes coherent13 to both assets/release and O:/winnt/system32,
+passes deployed both-width style and installed-logon/gameplay3 and verifies
+all final identities. The input service reference and pure native modal
+reference are reused only with exact-input checks; fresh input lifetime and
+new exact P4/P5 nested candidate repeats also pass. No original mirror, guest,
+installed configuration or ZIP changes. The reviewed source/floors and flat
+paired timing are separate conclusions; neither full S4/T closure nor a
+stutter/physical-left-click improvement is claimed. NTVDM SHA-256
+DA32FCE789F3964DF5F8AA7938A8ED823A5323C56674700BD3D625B4588AA628;
+WOW32 SHA-2562259617984A63A651DACDA8366F1CB34D1386BB018C5AD6A3B7264BDFAEC0237.
