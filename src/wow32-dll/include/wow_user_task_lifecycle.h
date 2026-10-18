@@ -2,6 +2,7 @@
 #define WOW_USER_TASK_LIFECYCLE_H
 
 #include "wow_input_group_bindings.h"
+#include "wow_input_group_lifetime.h"
 #include "wow_task_init_bindings.h"
 #include "wow_cleanup_bindings.h"
 #include "wow_user_message_bridge.h"
@@ -32,6 +33,7 @@ typedef struct wow_user_task_lifecycle {
     wow_task_order_state state;
     wow_task_order_process process;
     wow_input_desktop desktop;
+    wow_input_group_owner input;
     wow_class_lookup_context classes;
     wow_user_object_table *objects;
     wow_cleanup_shared cleanup_shared;

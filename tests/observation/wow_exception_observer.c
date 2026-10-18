@@ -4,6 +4,7 @@
 #include <tlhelp32.h>
 #include <stdio.h>
 #include <stdint.h>
+#include <string.h>
 
 static void address_owner(FILE *log, DWORD pid, DWORD address)
 {
@@ -59,14 +60,24 @@ int main(int argc, char **argv)
     ULONGLONG deadline;
     FILE *log;
     unsigned processes = 0;
-    if (argc != 4) return 2; /* runtime-root, guest name, log path */
-    if (sprintf_s(launcher, sizeof(launcher), "%s\\run16.exe", argv[1]) < 0 ||
-        sprintf_s(command, sizeof(command), "\"%s\" \"%s\"", launcher, argv[2]) < 0) return 2;
-    if (fopen_s(&log, argv[3], "w") || !log) return 3;
+    const char *directory, *log_path;
+    if (argc == 5 && !strcmp(argv[1], "--exe")) {
+        /* Diagnose a sealed native fixture under its real image name. Some
+         * fixtures copy themselves to run16.exe for child-launch assertions. */
+        if (strcpy_s(launcher, sizeof(launcher), argv[2]) ||
+            sprintf_s(command, sizeof(command), "\"%s\" %s", launcher, argv[3]) < 0) return 2;
+        directory = NULL; log_path = argv[4];
+    } else {
+        if (argc != 4) return 2; /* runtime-root, guest name, log path */
+        if (sprintf_s(launcher, sizeof(launcher), "%s\\run16.exe", argv[1]) < 0 ||
+            sprintf_s(command, sizeof(command), "\"%s\" \"%s\"", launcher, argv[2]) < 0) return 2;
+        directory = argv[1]; log_path = argv[3];
+    }
+    if (fopen_s(&log, log_path, "w") || !log) return 3;
     startup.dwFlags = STARTF_USESHOWWINDOW;
     startup.wShowWindow = SW_HIDE;
     if (!CreateProcessA(launcher, command, NULL, NULL, FALSE, DEBUG_PROCESS,
-            NULL, argv[1], &startup, &parent)) {
+            NULL, directory, &startup, &parent)) {
         fprintf(log, "launch failed=%lu\n", GetLastError()); fclose(log); return 4;
     }
     CloseHandle(parent.hThread); CloseHandle(parent.hProcess);
@@ -98,7 +109,8 @@ int main(int argc, char **argv)
             EXCEPTION_RECORD *record = &event.u.Exception.ExceptionRecord;
             if (record->ExceptionCode != EXCEPTION_BREAKPOINT && record->ExceptionCode != 0x40000005u)
                 disposition = DBG_EXCEPTION_NOT_HANDLED;
-            if (record->ExceptionCode == EXCEPTION_ACCESS_VIOLATION || !event.u.Exception.dwFirstChance) {
+            if (record->ExceptionCode == EXCEPTION_ACCESS_VIOLATION ||
+                    record->ExceptionCode == 0xc0000374u || !event.u.Exception.dwFirstChance) {
                 fprintf(log, "exception pid=%lu first=%lu code=%08lx operation=%lu address=%08lx\n",
                     event.dwProcessId, event.u.Exception.dwFirstChance, record->ExceptionCode,
                     (DWORD)record->ExceptionInformation[0], (DWORD)record->ExceptionInformation[1]);

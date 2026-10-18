@@ -7,6 +7,7 @@
 #include "wow_window_creation_binding.h"
 #include "wow_dialog_state_bindings.h"
 #include "wow_user_object_bindings.h"
+#include "wow_native_gui_thread.h"
 #include "wow_menu_client_bindings.h"
 #include "wow_menu_native_bindings.h"
 #include "wow_task_profile_bindings.h"
@@ -46,7 +47,8 @@ typedef struct wow_user_task_lifecycle_thread {
     struct wow_user_task_lifecycle_thread *next;
     wow_user_task_lifecycle *owner;
     wow_task_order_thread thread;
-    wow_task_order_queue queue;
+    wow_task_order_queue client_queue;
+    wow_input_group_plan *input_plan;
     wow_task_client_info client;
     wow_class_client_context classes;
     wow_user_message_bridge messages;
@@ -54,7 +56,6 @@ typedef struct wow_user_task_lifecycle_thread {
     HHOOK creation_hook;
     HHOOK terminal_observer;
     HHOOK idle_observer;
-    DWORD thread_id;
     DWORD message_wakes;
     DWORD window_style;
     DWORD launch_request;
@@ -88,7 +89,7 @@ HHOOK WINAPI wow_user_idle_hook_for_current(void)
     held = binding->exclusive_held;
     if (!held && !wow_user_runtime_enter(binding)) return NULL;
     task = current_task(binding->runtime->lifecycle);
-    if (task && task->thread_id == GetCurrentThreadId())
+    if (task && task->thread.native_thread_id == GetCurrentThreadId())
         result = task->idle_observer;
     if (!held) (void)wow_user_runtime_leave(binding);
     SetLastError(result ? error : ERROR_INVALID_STATE);
@@ -270,7 +271,7 @@ static wow_task_order_thread *WINAPI find_thread(wow_task_order_thread *thread,
     if (!thread || !(owner = ((wow_user_task_lifecycle_thread *)
             thread->host_context)->owner)) return NULL;
     for (task = owner->threads; task; task = task->next) {
-        if (task->thread_id == id) return &task->thread;
+        if (task->thread.native_thread_id == id) return &task->thread;
     }
     return NULL;
 }
@@ -279,20 +280,6 @@ static const wow_task_host_ops host_ops = {
     release_lock, acquire_lock, check_death, deliver_apc, idle_hooked,
     idle_hook, wake_input_idle, receive, wait_for_task_or_message, find_thread
 };
-
-static wow_task_order_queue *WINAPI allocate_queue(wow_input_desktop *desktop)
-{
-    (void)desktop;
-    return HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
-        sizeof(wow_task_order_queue));
-}
-
-static void WINAPI destroy_queue(wow_task_order_queue *queue,
-    wow_task_order_thread *thread)
-{
-    (void)thread;
-    if (queue && queue->cThreads == 0) HeapFree(GetProcessHeap(), 0, queue);
-}
 
 static BOOL WINAPI journal_hooked(wow_task_order_process *process, BOOL playback)
 {
@@ -309,8 +296,9 @@ static BOOL WINAPI reattach(wow_task_order_process *process, BOOL journal)
     wow_user_task_lifecycle_thread *task;
     if (!process || journal || !(task = current_task(
             (wow_user_task_lifecycle *)process->init_context))) return FALSE;
-    RecalcThreadAttachment(&task->thread);
-    return task->thread.pqAttach != NULL;
+    wow_input_group_commit(&((wow_user_task_lifecycle *)process->init_context)->input,
+        task->input_plan, &task->thread);
+    return TRUE;
 }
 
 static void WINAPI start_cursor(wow_task_order_process *process, DWORD timeout)
@@ -383,8 +371,7 @@ BOOL WINAPI wow_user_task_lifecycle_initialize(wow_user_task_lifecycle *owner,
     owner->process.classes = &owner->classes;
     owner->process.objects = owner->objects;
     list_initialize(&owner->desktop.PtiList);
-    owner->desktop.allocate_queue = allocate_queue;
-    owner->desktop.destroy_queue = destroy_queue;
+    wow_input_group_initialize(&owner->input, &owner->desktop);
     owner->desktop.pDeskInfo = &owner->cleanup_desktop;
     /* Original task cleanup replaces a departed task's client WOW procedure
      * with USER's client DefWindowProc.  Public USER32 is the native owner of
@@ -498,14 +485,19 @@ BOOL WINAPI wow_user_task_lifecycle_init_style(wow_user_task_lifecycle *owner,
         if (!parent) { SetLastError(ERROR_NOT_FOUND); goto done; }
         task->window_style = parent->window_style;
     }
-    task->thread_id = GetCurrentThreadId();
+    /* Creates the current USER queue without pumping input or creating a
+     * hidden window. A task owns its native thread capability until all of
+     * this binding's input links have been retired. */
+    if (!wow_edit_native_ensure_gui_thread()) goto done;
+    task->thread.native_thread_id = GetCurrentThreadId();
+    task->thread.native_thread = OpenThread(SYNCHRONIZE | THREAD_QUERY_LIMITED_INFORMATION,
+        FALSE, task->thread.native_thread_id);
+    if (!task->thread.native_thread) goto done;
     task->queue_event = CreateEventW(NULL, FALSE, FALSE, NULL);
     if (!task->queue_event || !wow_user_message_bridge_initialize(&task->messages))
         goto done;
-    task->queue.cThreads = 1;
     task->thread.ppi = &owner->process;
-    task->thread.pcti = &task->queue;
-    task->thread.pq = &task->queue;
+    task->thread.pcti = &task->client_queue;
     task->thread.rpdesk = &owner->desktop;
     task->thread.pClientInfo = &task->client;
     task->thread.pEventQueueServer = task->queue_event;
@@ -529,15 +521,15 @@ BOOL WINAPI wow_user_task_lifecycle_init_style(wow_user_task_lifecycle *owner,
      * gateway. Observe terminal return independently before admitting any
      * window creation, including a subclass swallowing WM_NCDESTROY. */
     task->terminal_observer = SetWindowsHookExA(WH_CALLWNDPROCRET,
-        wow_window_terminal_observer, NULL, task->thread_id);
+        wow_window_terminal_observer, NULL, task->thread.native_thread_id);
     if (!task->terminal_observer) goto done;
     task->creation_hook = SetWindowsHookExA(WH_CBT,
-        wow_window_creation_observer, NULL, task->thread_id);
+        wow_window_creation_observer, NULL, task->thread.native_thread_id);
     if (!task->creation_hook) goto done;
     /* Install on every task, not just the INT2F registrar: another task may
      * be the last one to wait. The original TD list still owns intent. */
     task->idle_observer = SetWindowsHookExA(WH_FOREGROUNDIDLE,
-        WK32ForegroundIdleHook, NULL, task->thread_id);
+        WK32ForegroundIdleHook, NULL, task->thread.native_thread_id);
     if (!task->idle_observer) goto done;
     /* USER16 directly reads this counterpart of queue.c's THREADINFO and
      * CLIENTINFO value. Publish it before the original init can return to
@@ -548,9 +540,16 @@ BOOL WINAPI wow_user_task_lifecycle_init_style(wow_user_task_lifecycle *owner,
      * WND, under the existing exclusive runtime lock and active page domain.
      * Never manufacture an observed per-window class for a managed control. */
     if (!wow_standard_classes_publish(&owner->classes)) goto done;
+    task->input_plan = wow_input_group_prepare(&owner->input);
+    if (!task->input_plan) goto done;
     RtlInitUnicodeString(&name, wide);
-    status = xxxInitTask(version, &name, task_id, hotkey, shared_id, x, y,
-        width, height, show, &task->thread);
+    __try {
+        status = xxxInitTask(version, &name, task_id, hotkey, shared_id, x, y,
+            width, height, show, &task->thread);
+    } __finally {
+        wow_input_group_release_plan(task->input_plan);
+        task->input_plan = NULL;
+    }
     if (status == STATUS_SUCCESS) {
         task->launch_request = shared_id;
         task->start_pending = shared_id && shared_id != (DWORD)-1;
@@ -574,6 +573,7 @@ done:
             (void)wow_user_runtime_set_context(binding, NULL, NULL);
         wow_user_message_bridge_dispose(&task->messages);
         if (task->queue_event) CloseHandle(task->queue_event);
+        if (task->thread.native_thread) CloseHandle(task->thread.native_thread);
         /* queue.c DeleteThreadInfo owns this final release in original USER.
          * xxxInitTask may allocate the name and then reject TDB allocation;
          * this project carrier must release it on rollback as well. */
@@ -1271,6 +1271,7 @@ static BOOL retire_task(wow_user_task_lifecycle *owner, DWORD task_id,
          * abandon its native frames; withdraw the borrowed top only now,
          * immediately before removing the original task under this lock. */
         task->thread.execution = NULL;
+        wow_input_group_retire(&owner->input, &task->thread);
         *link = task->next;
         DestroyTask(&owner->process, &task->thread);
         if (binding->thread == &task->thread)
@@ -1278,6 +1279,7 @@ static BOOL retire_task(wow_user_task_lifecycle *owner, DWORD task_id,
         list_remove(&task->thread.PtiLink);
         wow_user_message_bridge_dispose(&task->messages);
         CloseHandle(task->queue_event);
+        CloseHandle(task->thread.native_thread);
         /* DestroyTask releases the TDB, not THREADINFO's application name.
          * Retain DeleteThreadInfo's separate final-release responsibility. */
         cleanup_release(task->thread.pstrAppName);
@@ -1454,7 +1456,7 @@ BOOL WINAPI wow_user_task_lifecycle_dispose(wow_user_task_lifecycle *owner)
             owner->runtime->lifecycle != owner) {
         SetLastError(ERROR_INVALID_STATE); return FALSE;
     }
-    if (owner->threads || owner->runtime->owner_thread_id) {
+    if (owner->threads || owner->runtime->owner_thread_id || owner->input.links) {
         SetLastError(ERROR_BUSY); return FALSE;
     }
     /* Refuse application classes/live control associations before releasing

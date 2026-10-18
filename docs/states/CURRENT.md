@@ -127,6 +127,78 @@ handoff, not S4/T closure. The inherited-
 environment startup failure remains a different known failing control, not
 the owner's clarified symptom. See the [active-input evidence](../etc/evidence/m0-t447-s4-message-source-audit.md#clarified-owner-symptom-active-input-latency).
 
+After the clean P3 main/origin handoff5133c97f2, the next bounded work is
+read-only diagnosis of the existing EMS-alias lookup on the native memory
+access path. Verify actual ready WINMINE alias presence using the exact P3
+image/MAP and a caller-owned host-word observation, before selecting any
+empty-alias fast-negative change. The exact P3 diagnostic now observes NULL
+after the real board is ready and before its last measured click; all three
+timing/lifecycle cases pass.083 admits one empty-list early-negative guard,
+retaining default output and every nonempty owner/session/range check, with
+no new cache, mirror/guest edit or CPU instruction change. Complete service
+empty/invalid/multi-owner/remap/teardown and actual EMS/memory/DOS/WOW floors
+plus paired performance are required before another release. P3 remains the
+installed baseline and all S4/S5/S6 obligations remain unchanged.
+
+083 build-r2 passes physical/session matrices, original SAS/external-memory
+and copied-window lifecycle groups. Performance-r2 passes real EMS controls
+and all6 WINMINE cases. Ordinary median81.794->74.160ms, sampled65.318->65.616ms,
+private31.478->31.989ms: not a stable overall speedup or principal-stutter
+solution. Existing test PIF producer enables EMS only in isolated test profiles;
+no original guest or installed config changes. Full empty-alias-acceptance-r1
+fails its native20 floor (19/20): native-nested heap corruption0xC0000374.
+Eight sealed-fixture debugger controls reproduce it on P3 (2/8) and candidate
+(3/8), with the failure frame in the existing destroy_queue callback. Source
+traces shared pqAttach to task-embedded queue memory surviving task retirement;
+the recalc-only path also omits original queue commit/reference disposition.
+This is the working plan's existing task-init/input-membership group, now a
+proved S4 blocker, not an083 regression or an approved waiver. Repair its full
+initialization/grouping/retirement/rollback closure before delivery; do not
+hide the free or retry away the failure. Owned-view performance work waits.
+No new publication/commit/push; installed P3 and all S4/S5/S6 scope remain.
+
+084 admits that complete input-membership repair under existing S4 authority.
+Keep original AddAttachment/Recalc2's component algorithm. Drop retained
+synthetic Q ownership: call-local labels serve only that pure computation,
+never native queue state; modern USER owns real queues. Preallocate plans and
+owned native-link records before original InitTask; its actual16-bit flags
+select membership during reattach. Maintain an owned all-pairs closure, so
+departure of any member cannot strand surviving input sharing. Per-thread
+wake observations stay independent. Normal pre-init failure frees its plan;
+notification retry must not reattach; thread retirement removes owned links
+before freeing its carrier. Native mutation failure uses the existing terminal
+adaptation-failure boundary, never false success or replay. Zero new mirror
+or guest diff is planned. Whole-group source/tests must precede any rebuild.
+
+084 source and supplementary tests are staged as one group. Build-r1's first
+keyboard witness fails on a nonactive private desktop; its native pre-group
+control also reads0. Reusing the existing test-owned current-desktop keyboard
+scope passes without changing any shared-state assertion. Build-r2 worker/
+provider links, fresh extensions and real native membership/lifetime/LastError
+supplements pass; borrow/reclaim/graph/nested/notification gates now pass too
+(complete build-r2 exit0, actual receiver-exit held0/1 and lifecycle errors0).
+The retained native input/focus/original-membership service group also passes,
+including private-desktop capture/caret and callbacks0. Dependency-waiting
+performance/complete-acceptance supervisors do not constitute test passes.
+Paired performance is now complete: ordinary61.961->61.073ms, sampled61.836->
+61.460ms, private30.3645->30.347ms, both real EMS controls pass. This is flat,
+not stutter resolution. Full retained acceptance and repeat diagnostics run.
+Those partial gates are superseded only by the complete P4 results below.
+
+P4 completes input-lifetime-acceptance-r1 exit0: native20/20, original30,
+12 real S3 guest groups,6 default/extension message policies, WINMINE/SOL
+gameplay/normal exit3, WRITE's retained startup frontier3, Console17/Window17,
+direct native modal3 and complete-logon gameplay3. The strict nested A/B
+diagnostic retains its exit1 because the old baseline fails3/8; the candidate
+passes8/8 with both required receiver-exit paths, not merely debugger exit0.
+Delivery-r1 publishes the coherent13 to both destinations, then passes deployed
+both-width style and installed-logon/gameplay3 and final hashes (exit0).
+The pure-native modal reference is reused only with exact-input proof.
+083/084 add zero original mirror or guest changes; registration remains
+278 selected/192 exact/86 differences/issues0. These results repair the proved
+input-membership lifetime blocker, not every S4 message obligation or stutter.
+No physical-input or WRITE editing/save/full-exit proof is claimed.
+
 ## Active Packet
 
 | Field | Required record |
@@ -149,9 +221,9 @@ the owner's clarified symptom. See the [active-input evidence](../etc/evidence/m
 
 ## Current Technical Baseline
 
-S4 P3 publishes the bounded native-extension/owned-view performance baseline.
-NTVDM SHA-256 is8171A66D17AC51420CB58299675DD654EED9A64947C3E3597C1B2FE1C47584BA;
-WOW32 is5AA564051EE87A3815FC03A751F06A4FAD57A53B44C499733A9F0FF0ED63EB6D.
+S4 P4 publishes the bounded empty-alias/input-membership lifetime baseline.
+NTVDM SHA-256 is3AEB087A3485D885A6C8B59EED4C8908EEAA42362389550980A12EE50A752542;
+WOW32 is4CE877E6E9370992F1BE06F79E68735639FADB6816C3F7312B333547F887F411.
 The release manifest owns exact identities of all13 images. Both
 assets/release and O:/winnt/system32 match the tested package; original guest,
 user configuration and assets/winnt.zip are unchanged by this delivery.

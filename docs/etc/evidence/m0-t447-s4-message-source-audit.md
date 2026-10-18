@@ -657,6 +657,364 @@ remain explicit. This bounded P3 hands off source, reproducible tests,
 registered mirror/adapter exceptions and matching release assets together;
 S4, S5, S6 and the full owner goal stay open.
 
+#### After P3: inactive EMS-alias service
+
+Previous goal turn is progress:5133c97f2 commits/pushes the full verified P3
+and leaves main/origin clean, with all13 installed/release hashes matched.
+The full WOW goal remains open. Subsequent work starts from that baseline,
+not an unfinished or mixed package.
+
+Source chain ccpusas4.c:c_GetPhyAdd -> existing097 alias translator -> normal/
+external physical lookup executes on every physical access. The translator
+initializes its output to the input address, validates the whole session
+(including an interlocked binding-count read and lease-shape checks), then
+walks aliases even when that list is NULL. session_thread_current itself is
+only TLS; no candidate cache or session-validation removal is selected.
+The actual physical page resolver is indexed by page; do not incorrectly
+attribute this cost to a per-allocation linear physical-page search.
+
+The read-only diagnostic adds one optional native DWORD RVA to the existing
+PC sampler, resolved from one unambiguous symbol in the exact matching worker
+MAP. No remote writes or private USER decoding. Both map hashes and images
+are checked/captured. The observation precedes statistical thread sampling;
+its QPC must be after the actual patterned board is ready and before the last
+of12 measured inputs, not at process startup/retirement. Presence-r1 exits0
+for ordinary/sampled/private timing and normal close. P3 worker8171 remains
+unchanged: native _aliases RVA002F3BE4, observed address00553BE4,
+value00000000, QPC1134071841221; ready1134069295157,
+last input1134081095790, frequency10000000. This is one read during that
+actual input interval, not an atomic global-lifetime snapshot. The unchanged
+P3 ordinary timing varies with desktop conditions; this diagnostic is not
+evidence of another runtime speedup.
+
+083 is the finite early-negative profile: after preserving the same default
+output, an empty authoritative alias list returns the already inevitable0
+without session_valid. Nonempty owner/session/range checks and map/remap/
+unmap/free/teardown are unchanged. Other range APIs keep their existing
+validation/status contracts; no broad mapping rewrite is selected. The
+existing original host_map_page/host_unmap_page -> VdmMapDosMemory seam and
+original CCPU fallback remain. Direct NT4 kernel VDM physical aliasing is not
+a composable modern host service; the already registered source-shaped
+adapter remains the first usable boundary. No additional original import,
+mirror intrusion, generic pointer manager, enabled cache, guest change or
+new behavior engine is needed. ADAPTER-WOW-083 is registered before editing.
+
+Access-family review: scalar reads/writes, RMW, string moves, stack and fetch/
+control all retain the identical original c_GetPhyAdd path when translation
+returns0; the physical address and subsequent external/normal lookup are
+unchanged. No opcode, access width, read/write permission, A/D handling,
+interrupt, timing calibration or CPU profile setting changes. An active EMS
+list still reaches every original check. Existing same-owner CPU/ICA mapping
+serialization is unchanged; session_valid's interlocked counter read is not
+an alias publication protocol. No claim of arbitrary concurrent unsynchronised
+same-owner mapping visibility is introduced.
+
+The complete supplementary fixture retains the earlier actual adapter/
+session physical-observation matrix, then covers empty/unbound/invalid/null,
+first/last/one-past addresses, nonempty unbound/different owner, two owners,
+remap, teardown removing only its owner, final empty state and LastError/errno.
+It links the selected production object/archive, never a successful mock.
+Baseline-r1 passes all of these against the untouched P3 object; its2,000,000
+empty calls take28225.100us (14.113ns/call), invalid results0. Exact object,
+archive, source copy, compiler/graph and fixture inputs are retained below
+build/. This microbenchmark is not CCPU/guest or overall performance proof.
+Candidate verification must additionally run original external-memory/SAS/
+EMS leases, real independent EMS COM, copied-view lifetimes and the retained
+every-P WOW/DOS/application/modal/logon and paired input gates. No release or
+candidate speedup is claimed yet; P3 remains installed.
+
+The real EMS control initially fails on unchanged P3 with EMS NOT INSTALLED,
+not a candidate regression. Original nt_pif.h defaults EMS limit/request to0;
+config.c obtains the DOS allocation from PIFEMSMemSize, while WOW deliberately
+uses0. Reuse tests/observation/ems_pif_builder.c to request1MiB in a private
+E30.PIF/E30.NT/E30AUTO.NT profile. The existing memory-transition runner uses
+SUBST and foreground tools, so the new observer runner reuses its producer,
+not that obsolete orchestration. No installed profile or original guest is
+changed. Control-r2 records sandbox stage denial; r3 records a compiler-driver
+invocation error before any guest execution. Neither is a runtime verdict.
+Control-r4 passes the actual original INT67 map/switch/alias/unmap/move/
+exchange/window/free COM marker and normal launcher exit0. Fresh build-r2
+refreezes the corrected runner and passes the production-object physical
+matrix, original external-memory/SAS/EMS lease group, window borrowing,
+reclaim and graph snapshots; performance-r2 and complete acceptance remain
+required before publication. Preserve the exact P3 baseline maps from
+build-r1/before rather than substituting mutable candidate maps.
+
+Performance-r2 completes both versions' real EMS controls and all six actual
+WINMINE cases with12 pixel changes/final board restore/normal launcher exit.
+P3 ->083 medians: ordinary81.7935 ->74.1595ms; sampled65.3175 ->65.6155ms;
+private31.478 ->31.989ms. Candidate service fixture is5.032ns/call versus
+baseline14.113ns, invalid results0. The ordinary difference alone is not proof
+of a stable end-to-end gain: the other comparisons are essentially flat and
+desktop conditions vary.083 is a correct minimal negative-path improvement,
+not the principal stutter fix. Full acceptance-r1 starts only after this
+successful group and is still pending; installed/assets remain P3. Quality-r1
+passes scripts/diff/document governance before this evidence append; final
+documentation requires a fresh quality gate before delivery.
+
+The next source lead remains repeated owned-view projection work, not guest
+CPU pacing: collect_window_view counts and copies across the full65536-entry
+identity table, copy_window_observation copies each retained WND/CLS, and
+graph validation allocates its full slot index per transaction. Existing P3
+active-input samples hit these functions; nearest-PC attribution is not an
+exclusive-CPU or causal proof. Audit their entire publication/borrow/reentry/
+retirement closure before selecting another finite optimization. No cache,
+stale local view, identity truncation or validation removal is approved here.
+
+##### Continuing source review while083 acceptance runs
+
+Previous goal turn is progress (real EMS profile/control, complete composed
+build and paired input evidence), not a blocked wait. This turn reobserves
+the same live owned acceptance session25825; no mutable rebuild is started.
+
+copy_window_observation calls window_borrow_link(backing), a linear list search,
+for every copied published row. Thus a complete view repeats backing searches
+quadratically, in addition to its fixed slot scans. The source-shaped original
+shared-desktop reader has no counterpart for this project-owned metadata
+search; no additional original import solves a duplicate adapter traversal.
+page_domain_prepare_window creates the existing lifetime record before every
+ordinary/replacement publication; page_domain_commit_window exposes that
+backing only afterward. Retirement first clears the slot, then marks the same
+record retired; final free unlinks it. Desktop backing is separate and can
+lack a record. Pending/replaced/retired records therefore must never be
+enumerated as live merely because they remain in window_borrows.
+
+A finite next design is to use the existing list only as an iterator, with
+the current full-handle/backing table still deciding publication. Preserve
+the current table-derived required count/capacity gate; copy desktop explicitly,
+then only exact currently published backing generations, passing each
+already-known metadata record to the row copier. Sort resulting rows by slot
+to preserve the existing ascending order and reject any count disagreement.
+This removes repeated list lookup without another registry/cache, lifetime
+owner, relaxed identity or native freshness change. Required proof includes
+sparse/high slots, desktop without/with metadata, unpublished preparation,
+retired pinned old generation beside a replacement, row order/count/capacity,
+rollback and current metadata. No production edit or speed claim for this
+design yet; finish083 delivery and audit all callers before admission.
+
+Separate duplicate native captures are also source-visible: project_graph
+captures every local retained row, then refresh_graph's roots resample managed
+locals, and typed payloads can sample them again. Deduplication is not silently
+selected: a required root's failure/liveness and cross-thread native mutation
+must remain correct, not just its apparent field equality. Keep that question
+separate from the purely owned-metadata traversal above.
+
+#####083 acceptance refusal and inherited input-membership defect
+
+empty-alias-acceptance-r1 terminates1: its native20 cohort reports19/20,
+native-nested exits0xC0000374 after receiver-exit held0 and before held1.
+No original30, actual guest, application or publication result may be inferred
+from this aborted coordinator.083 has not been released or committed; installed
+P3 is unchanged. Do not retry the whole cohort to replace this failure.
+
+Reuse wow_exception_observer.c for a sealed-fixture control. Initial debug-r1
+renames the fixture to run16.exe and causes a separate CopyFileA self-image
+sharing violation at fixture line1132; retain this invalid probe outcome.
+The new explicit --exe mode preserves fixture.exe and the fixture's separate
+run16.exe self-copy child assertion. Exception handling/disposition stays
+unchanged; heap-corruption first chance is now logged as well as second chance.
+The tracked verify-native-fixture-exceptions.ps1 successor requires actual root
+process exit plus all lifecycle/held0/held1 markers, not debugger exit0.
+
+Debug-r2 runs8 sealed P3 fixture trials and8 candidate trials. P3 fails heap
+corruption on rounds2/8 (2 of8); candidate on3/7/8 (3 of8). Other trials finish
+the unchanged lifecycle marker errors0. These are debugger-perturbed native
+fixture frequencies, not population probabilities or actual guest proof.
+P3's image/MAP is from mine-release-foundations-r1-guest-floors/native-core/
+native-nested; candidate from empty-alias-foundations-r1-guest-floors. Both
+copies are hash-recorded, not recompiled against current source. This proves
+the defect predates083; it does not waive the failed gate.
+
+Both captured P3 failures place the last fixture frame at RVA0xD8CE, inside
+destroy_queue (start RVA0xD8B0) calling HeapFree. Source/blame links the unsafe
+embedded queue/ctype sharing and destroy callback to79051a8ada (2026-09-21),
+not the one-OR083 change. init_style assigns both pcti and pq to task->queue;
+RecalcThreadAttachment/Recalc2 shares a pqAttach among16-bit threads; retirement
+frees the containing task without releasing or republishing queue membership.
+A surviving attachment can then reference a freed embedded field, and the
+destroy callback may pass that interior pointer to HeapFree. The callback
+also omits original DestroyQueue's reference decrement. Do not merely ignore
+an invalid free: that retains stale cross-task membership.
+
+Pinned original queue.c distinguishes embedded THREADINFO.cti from separately
+allocated Q: lines991,1286--1300 establish those owners; DestroyQueue1511ff
+decrements cThreads and defers physical FreeQueue until cLockCount permits it;
+thread destruction/deletion releases queue references before final THREADINFO
+free. Original input.c RecalcThreadAttachment is only preparation: ReattachThreads
+5701ff consumes/clears pqAttach, AttachToQueue5493ff transfers membership and
+releases old Q references. Current reattach calls only preparation and reports
+success. The working plan already names this exact integrated task-init/input
+membership gap; it is now a demonstrated S4 foundation blocker, not a newly
+invented performance feature or an S5 deferral.
+
+Next bounded source group must reconcile CTI versus Q, original preparation/
+commit, shared-reference and queue/task retirement plus init rollback together.
+Trace the real native input/resource boundary before selecting any original
+subset/service adapter; full NT4 RIT/desktop machinery is not imported just to
+satisfy an auxiliary symbol. Required evidence includes two/three live tasks,
+every retirement order, failure before/after grouping preparation, surviving
+task reuse, original refcounts and zero dangling/double/interior free, plus
+the same native-nested and actual guest/application floors. The owned-view
+optimization design above waits; no production quick-fix or waiver is selected.
+
+#####084 finite implementation selection
+
+The previous turn is progress: it reproduces the identical failure on sealed
+P3, captures the actual failing release frame, and ties it to the prior input
+membership inventory. All its background coordinators are terminal; no live
+run is restarted or mutable build changed merely because of an observation
+timeout. The current group restores native input membership, not performance
+alone. Source inputs also include the retained S2 boundary audit's Input
+attachment repair and Native input boundary sections; do not rediscover its
+middle-exit and duplicate-reference counterexamples through ad-hoc tests.
+
+Source selection: keep unchanged AddAttachment/Recalc2 for the actual explicit
+edge and same-process TIF_16BIT fixed point. Modern USER owns actual input
+queues. There is no public native Q pointer/cThreads snapshot; retaining fake
+native Q storage or restoring full RIT/PWND/message redistribution would
+violate the ownership boundary. RecalcThreadAttachment's private old-Q reuse
+strategy is not a necessary observable grouping algorithm; its production
+facade is replaced, not falsely certified as real native attachment. The
+complete component calculation instead uses preallocated call-local labels
+and original AddAttachment/Recalc2, then erases every pqAttach pointer before
+native calls. No retained source-shaped Q is another system-resource owner.
+Original allocation-path unit tests remain original tests, not a claim that
+their private allocator owns real modern input queues.
+
+wow_input_group_lifetime.c owns only native attachment increments acquired by
+this provider. Desired component pairs are fully connected: surviving members
+retain explicit edges regardless of which member departs. Existing desired
+edges are not attached again; only this owner's obsolete/departing edges are
+detached. Application-owned duplicate attachments remain untouched. Plans and
+all potential missing edge records are allocated before original InitTask;
+its reattach callback uses the original function's actual newly set16-bit
+flags. Thus ordinary memory/identity preflight failure returns through the
+existing pre-init retry path, not an ignored reattach FALSE after TDB creation.
+Original scheduler insertion and committed startup-notification retry stay
+unchanged. No allocation/native mutation occurs during the pure fixed point.
+
+The real thread ID and query/synchronization handle belong to the existing
+task carrier. Plan validation rejects stale/dead/duplicate members, nonmember
+explicit edges and orphaned owned links before entering original InitTask.
+No private ETHREAD interpretation or new task table is introduced. Retire
+owned links before freeing the carrier/closing its thread handle. A signaled
+old native thread capability means USER has already removed its links; never
+target a recycled numeric TID in that case. Native attach/detach failure uses
+the established noncontinuable adaptation-failure owner, not partial success,
+input replay or restoration of a guessed keyboard/focus snapshot. This is
+not a claim that public USER offers an atomic rollback of multiple operations.
+
+Native service contract is public AttachThreadInput (Microsoft Learn,
+https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-attachthreadinput,
+read2026-10-18). Original no-callback membership computation is retained;
+modern native input/focus/capture behavior is supplied by USER. Historical
+private-desktop focus/capture/caret and callback-count cases remain required
+service gates, not universal host-version equivalence proof. SendMessageTimeout
+documentation describes a same-message-queue fast path; sharing input state
+does not by itself prove that separate native message threads take that
+path. Existing nested timeout assertions are not preemptively weakened.
+
+Deletion set: embedded shared queue, zero-count HeapFree substitute and
+recalc-only success; retained per-thread queue masks are now explicitly client
+observations. Reuse the existing ConnectIfNecessary native leaf through a
+narrow header; it already handles IsGUIThread(TRUE)'s nonzero error8 result.
+No duplicate GUI-thread conversion implementation is added. Actual source
+changes are WOW32's lifecycle/native-resource group, its native identity view,
+and generator selection. No additional original mirror/guest diff or import.
+083 remains pending in the same undelivered worktree, not discarded or
+published in isolation. No084 build/result is claimed before grouped tests.
+
+Supplementary verification source links original input.c and includes the
+current production input owner with only actual-call counters and fault
+injection. Private native threads prove real keyboard sharing, origin/middle/
+last departure, newcomer, repeated idempotent membership, independent client
+masks, no escaped label pointer, three allocation cutpoints and external
+duplicate reference preservation. A separate injected third native attach
+refuses after an earlier successful new attach; its test failure callback is
+explicitly not the product fail-fast implementation. The existing full native
+lifecycle/nested callback and actual guest/message/application/publication
+gates remain mandatory. Source/tool identities and process deadlines are
+recorded by verify-wow-input-lifetime.ps1; no computer use or guest changes.
+
+#####084 first composition and native-control correction
+
+input-lifetime-build-r1 links the real worker/provider and passes a freshly
+rebuilt native-extension/original-frame supplement. It then refuses publication
+at the new input test: all five positive keyboard-sharing checks read0, while
+native attach/detach returnTRUE and final allocated storage is0. Diagnostic-r2
+logs exact original components (all expected members in group1) and successful
+real native pair operations. Diagnostic-r3 adds the retained probe's explicit
+PeekMessage queue initialization and a pre-group native control: SetKeyboardState
+then GetKeyboardState already reports own_Z=0 before any new group function.
+This separates the nonactive-private-desktop observation prerequisite from
+the production membership algorithm. All three failed roots remain non-passes.
+
+The keyboard witness now follows the retained wow_native_input_group_fixture
+scope: only newly created fixture threads' USER tables on their current
+desktop, no visible windows, SendInput, external thread attachment or global
+keyboard configuration. --private-desktop retains the failed-control path;
+it is not silently passed or removed. Diagnostic-r4 obtains own_Z=128 before
+grouping and passes every original-component/real-native membership, rejoin,
+origin/middle/last departure, external-reference, allocation and lifetime
+assertion, live allocations0. The injected third attach reaches exactly
+INPUT_TERMINAL/input-native-attach/error5/attaches3 after an earlier successful
+new native connection; its test callback exits91 as documented.
+
+Second-role review preserves LastError explicitly on successful plan prepare,
+commit, disposal and retirement; supplementary assertions now independently
+set/check each sentinel. Existing ConnectIfNecessary conversion is reused,
+including its explicit check after IsGUIThread(TRUE), rather than duplicating
+the incorrect nonzero-success assumption. input-lifetime-build-r2 refreezes
+this complete source/test group; worker/provider link and extension supplements
+pass, and its input-lifetime group passes with the new LastError assertions.
+Borrow/reclaim/graph, actual nested callback and notification groups remain
+running; no final build/guest/publication verdict follows from the earlier
+service pass.
+
+The tracked verify-native-input-services.ps1 reuses the three existing source
+fixtures instead of another custom input/focus model. input-native-services-r1
+passes original explicit/implicit fixed-point membership and allocation failure,
+native duplicate-reference and middle-exit/rejoin counterexamples, plus the
+invisible private-desktop focus/capture/caret witness. The latter reports
+callbacks0 and equal merged state for both argument orders, with complete
+thread/desktop cleanup. This does not prove every NT4 foreground winner or
+universal callback absence on untested host paths. Service fixture source/
+tool hashes and real owned process deadlines are retained under build/.
+
+input-lifetime-performance-r1 and input-lifetime-acceptance-r1 are owned
+dependency-waiting supervisors, not passing tests: they start actual package
+execution only after the exact live composed build and then paired EMS/input
+groups finish0. The every-P native20/original30, actual guests, three-app/DOS/
+modal/logon and coherent13 publication obligations remain unchanged. No
+additional mirror or guest changes, publication, commit or push yet.
+
+The refreshed composed build-r2 is now terminal0. Actual native-nested emits
+both held0/held1 receiver-exit retirement markers, all callback-local/native
+exception, destroyed-target and timeout ownership markers, and final lifecycle
+errors0. start-notification, CCPU borrow/reclaim/graph, original external-memory,
+physical alias and fresh extension/original-frame groups also pass. The old
+timeout assertions were retained unchanged; no hypothesis about attached
+input queues was used to lower their bar.
+
+Paired performance-r1 is terminal0: P3 ->083/084 median ordinary61.961 ->
+61.073ms; sampled61.836 ->61.460ms; private30.3645 ->30.347ms. Both real EMS
+controls and all six12-change/final-restore/normal-exit input groups pass.
+This is essentially flat, not a meaningful stutter solution. Peak/tail values
+from12 inputs do not establish a stable tail improvement, and background
+diagnostics/system load are not a controlled CPU benchmark. Retain correctness
+without attributing latency changes to queue repair. Full acceptance is now
+running its retained foundations; the sealed-fixture repeat diagnostic is
+separately owned. No acceptance or publication result is inferred yet.
+
+The strict sealed-fixture repeat diagnostic completes all16 trials: P3 has
+5 complete/3 heap-corruption exits;084 candidate has8 complete/0 heap failures,
+including held0/held1 normal retirement each time. Overall diagnostic exit1
+is retained because its baseline really fails; do not relabel that root as
+a passing acceptance group. Candidate rows/identities and unchanged mandatory
+markers independently show8 successful repetitions. This supports the source
+lifetime correction, not a statistical universal guarantee or full product
+closure. The main every-P cohort still requires its own full native20 result.
+
 ### Execution-frame ownership review during grouped acceptance
 
 Execution-build-r1 and its r2 no-work refresh exit0. Acceptance-r2 passes
@@ -1044,3 +1402,29 @@ added-file/diff count or proof of untouched branches. Native extension/callback/
 explicit-yield composition remains the next finite, source-defined S4 group;
 cross-worker/external-native/implicit/converted-lifetime coverage and S5/S6 are
 not closed or transferred to manufacture P2/T completion.
+### Input-membership P4 complete candidate acceptance
+
+`input-lifetime-acceptance-r1` completes exit0 against the frozen
+`input-lifetime-build-r2` sources and outputs: fresh native20/20, original30,
+12 real S3 guest groups, default/extension message groups in all3 policies,
+WINMINE/SOL gameplay and normal exits, WRITE's existing startup frontier,
+Console17/Window17, direct native modal3 and complete-logon gameplay3.
+The WRITE floor does not prove editing/save/normal exit. Source registration
+remains278 selected files,192 byte-exact/86 registered differences, issues0;
+083/084 add no original mirror or guest change. The retained old-baseline
+diagnostic's exit1 is not rewritten: its old3/8 heap failures are negative
+controls, while all8 candidate trials and their mandatory lifecycle markers
+pass. The production native-failure terminal path is source-reviewed; the
+focused injected native-call failure proves its callback seam, not an actual
+production fail-fast process exit.
+
+The P4 delivery supervisor requires these complete gates, successful native
+input services, sealed candidate repeat inputs and exact package identities.
+It does not use a passing debugger supervisor as fixture success. Publication
+and installed validation are separately recorded: input-lifetime-delivery-r1
+exit0, coherent13 in both destinations, both-width deployed style and installed
+logon/gameplay3 pass, final13 hashes match the release manifest. Its exact
+pure-native modal control reuse is recorded in reused-native-control.json;
+original guest, installed configuration and assets/winnt.zip are unchanged.
+Paired posted-input performance remains essentially flat (ordinary61.961 to
+61.073ms), not a stutter fix, physical-input measurement or stable tail claim.

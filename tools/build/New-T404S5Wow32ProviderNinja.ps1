@@ -93,6 +93,7 @@ $providerSupportSources = @(
     (Join-Path $adapterWow 'wow_title_policy.c'),
     (Join-Path $adapterWow 'wow_user_message_bridge.c'),
     (Join-Path $adapterWow 'wow_user_task_lifecycle.c'),
+    (Join-Path $adapterWow 'wow_input_group_lifetime.c'),
     (Join-Path $adapterWow 'wow_dialog_creation_binding.c'),
     (Join-Path $adapterWow 'wow_dialog_keyboard_binding.c'),
     # T447 S3 shared retained state and original-control dependency bindings.

@@ -29,6 +29,20 @@ Required checks include fresh geometry/style/links, untouched private fields,
 trace fallback, wrong-directory refusal, rollback/retirement/reuse and the
 same actual-input comparison. This registers a candidate, not delivery.
 
+ADAPTER-WOW-083 short-circuits only an empty EMS-alias list in the existing
+checked physical-translation service. The list itself remains the authority;
+there is no cached enabled flag or new memory manager. Default output is still
+the input address, and all nonempty-list owner/session/range validation,
+map/remap/unmap/teardown, physical-page lookup and original CCPU accesses stay
+unchanged. Original CCPU's existing097 seam and normal-RAM fallback are reused;
+no additional mirror or guest change. Verify empty/unbound/invalid/null cases,
+nonempty multi-owner identity/range/remap/teardown, retained physical mapping,
+original EMS and every-P DOS/WOW floors, plus a same-input timing comparison.
+The inactive-alias predicate applies identically to scalar, RMW/string, stack
+and fetch/control accesses through unchanged c_GetPhyAdd; there is no new
+instruction profile, device path or per-family compensation. Registration
+alone is not a passing test or measured speedup.
+
 The Console input adapter bounds each original five-record read by available
 relative-mouse FIFO capacity under the original ICA lock. Only the event
 thread produces these samples; the CPU consumer frees slots. At capacity it

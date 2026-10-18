@@ -1,5 +1,31 @@
 # WOW32 DLL target component
 
+ADAPTER-WOW-084 removes retained synthetic input queues from task carriers.
+Original input.c AddAttachment/Recalc2 remains the exact membership algorithm;
+preallocated call-local Q labels are its scratch graph, not sampled or invented
+native USER queue state. RecalcThreadAttachment's private kernel-Q allocation
+strategy cannot describe public USER resources and is no longer a production
+initialization provider; its original unit coverage remains. Native USER owns
+input/focus/capture via AttachThreadInput. This owner records only its acquired
+pair increments and maintains every pair in each computed component, avoiding
+an anchor/middle-exit dependency. Repeated membership does not attach twice.
+Per-task wake observations remain separate; no label pointer survives commit.
+
+Original input.c AttachToQueue/ReattachThreads/queue.c DestroyQueue additionally
+own unavailable kernel message lists, PWND/RIT state, journal and foreground
+queues. Importing those entire functions would require a second USER subsystem;
+copying only a pointer assignment would omit native input sharing. Reuse their
+component owner, supply native resource operations, and delete embedded shared
+queue/zero-count-free/recalc-only substitutes together. Prepare all fallible
+plan storage before original InitTask; preserve its original scheduling and
+notification retry. Partial native mutation failure uses existing terminal
+adaptation failure, never replay or false success. Retire only owned links
+before closing the task's native thread capability/freeing the carrier.
+No guest, mirror, message-transport or scheduler change is introduced.
+Verification must cover complete native membership/focus, every departure,
+rejoin, plan failure, owned versus third-party link references, native failure,
+no scratch escapes and current full lifecycle/guest/application gates.
+
 ADAPTER-WOW-082 applies the already approved route-E external observation
 boundary to repeated publication. A committed, live external full HWND with
 a complete descriptor reuses its existing page-domain snapshot instead of

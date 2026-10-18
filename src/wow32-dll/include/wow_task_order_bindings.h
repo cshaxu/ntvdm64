@@ -127,6 +127,10 @@ typedef struct wow_task_order_thread {
     /* Borrowed native stack top belongs to this bound thread, independently
      * of the lifecycle allocation that may contain its original TDB. */
     wow_task_execution_scope *execution;
+    /* Modern thread capability, owned by the lifecycle carrier, not an
+     * NT4 ETHREAD pointer or a native queue token. */
+    DWORD native_thread_id;
+    HANDLE native_thread;
 } wow_task_order_thread;
 static __inline BOOL wow_task_execution_ready(wow_task_order_thread *thread)
 {

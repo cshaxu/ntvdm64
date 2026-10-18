@@ -34,6 +34,41 @@ The read-only empty-EMS-alias translation lead is not implemented or a reason
 to expand the frozen delivery. Continuing performance work must begin from
 this coherent baseline without losing the six S4 groups or subsequent S.
 
+After that P3 freeze,083 is admitted as the next bounded performance group:
+return the inevitable negative when the authoritative physical-alias list is
+empty, without its redundant per-access session fence. Nonempty owner/range/
+mapping validation and existing concurrency rules remain unchanged. Exact
+P3 input-period observation sees the list empty; service matrices, original
+SAS/external-memory and real EMS map/remap/unmap/move/free controls are required
+alongside copied-window lifetime, paired gameplay timing and every-P gates.
+The independent EMS probe uses the existing test PIF producer, not installed
+config changes or SUBST. A local microbenchmark is not a whole-UI speed claim;
+P3 remains installed until the complete next delivery passes. No S4 group,
+individual-task termination or whole-T reconciliation is removed.
+
+083's every-P gate now exposes the pre-existing task-init/input-membership
+defect named in the integrated repair table below: native-nested heap
+corruption reproduces on sealed P3 and candidate fixtures. The failure frame
+is destroy_queue; shared pqAttach can outlive its task-embedded backing, while
+the current facade executes RecalcThreadAttachment without original queue
+commit/reference retirement. Treat that complete initialization/grouping/
+rollback/retirement group as a blocking S4 foundation, not an S5 transfer or
+a performance waiver. Source/design its full finite closure before another
+runtime batch; owned-view traversal optimization waits. P3 remains installed
+until the subsequent complete P4 delivery below.
+
+084 implements that complete source-defined closure: original AddAttachment/
+Recalc2 compute membership using call-local labels, native USER owns input,
+and task capabilities plus owned pair increments retire before carriers free.
+No retained fake Q or second native queue authority remains. The composed
+build-r2, native services, whole input-lifetime-acceptance-r1 and delivery-r1
+all pass; P4's coherent13 is installed/hash-verified in both destinations.
+The repeat diagnostic retains old-baseline3/8 failures and candidate8/8 passes;
+it does not turn its overall exit1 into a pass. Paired performance is flat,
+not the owner's requested final stutter solution. The next performance lead
+is source review of copied-window traversal/repeated metadata searches, after
+this safe baseline is reviewed and committed. No six-group/S5/S6 scope drops.
+
 S3 is closed at the P22 runtime/P23 interaction baseline after the
 [fixed-chain exit review](../../history/m0-t447-s3-control-dependency-closure.md).
 S4 is now the sole sequential admission under the continuing owner goal.

@@ -2,6 +2,7 @@
 #define WOW_EDIT_NATIVE_BINDINGS_H
 #include <windows.h>
 #include <winternl.h>
+#include "wow_native_gui_thread.h"
 #define WOW_ORIGINAL_LARGE_STRING_LAYOUT
 #include "opennt-host/windows/core/ntuser/inc/user.h"
 #undef WOW_ORIGINAL_LARGE_STRING_LAYOUT
@@ -12,7 +13,6 @@
  * No HWND, text pointer, timer or CallProc identity is retained here. */
 BOOL WINAPI wow_edit_native_ready(void);
 BOOL WINAPI wow_edit_native_NtUserDefSetText(HWND, const LARGE_STRING *);
-BOOL WINAPI wow_edit_native_ensure_gui_thread(void);
 PVOID WINAPI wow_edit_native_highest_user_address(void);
 int WINAPI wow_edit_native_GdiGetCharDimensions(HDC, TEXTMETRICW *, LPINT);
 BOOL WINAPI wow_edit_native_GetCharWidthInfo(HDC, PCHWIDTHINFO);

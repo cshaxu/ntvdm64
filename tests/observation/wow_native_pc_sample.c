@@ -5,6 +5,7 @@
 #include <tlhelp32.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 typedef struct entry { DWORD id; HANDLE handle; ULONGLONG cpu; } entry;
 static ULONGLONG cpu(HANDLE thread) {
     FILETIME create, exit, kernel, user;
@@ -17,15 +18,28 @@ static ULONGLONG cpu(HANDLE thread) {
 int main(int argc,char **argv) {
     DWORD target,round,n=0,i,rounds=100;entry threads[64];HANDLE snapshot,process;
     ULONGLONG started;
+    DWORD word_rva=0,word_address=0;
     THREADENTRY32 thread={sizeof(thread)};MODULEENTRY32 module={sizeof(module)};
-    if((argc!=2 && argc!=3) || !(target=strtoul(argv[1],NULL,10)))return 2;
-    if(argc==3 && (!(rounds=strtoul(argv[2],NULL,10)) || rounds>2000))return 2;
+    if((argc<2 || argc>4) || !(target=strtoul(argv[1],NULL,10)))return 2;
+    if(argc>=3 && (!(rounds=strtoul(argv[2],NULL,10)) || rounds>2000))return 2;
+    if(argc==4){char *end;word_rva=strtoul(argv[3],&end,16);if(!word_rva || *end)return 2;}
     process=OpenProcess(PROCESS_VM_READ|PROCESS_QUERY_INFORMATION,FALSE,target);
     if(!process)return 3;
     snapshot=CreateToolhelp32Snapshot(TH32CS_SNAPMODULE,target);
     if(snapshot!=INVALID_HANDLE_VALUE){
-        if(Module32First(snapshot,&module))do{printf("module=%s base=%08lX size=%08lX\n",module.szModule,(DWORD)(ULONG_PTR)module.modBaseAddr,module.modBaseSize);}while(Module32Next(snapshot,&module));
+        if(Module32First(snapshot,&module))do{
+            printf("module=%s base=%08lX size=%08lX\n",module.szModule,(DWORD)(ULONG_PTR)module.modBaseAddr,module.modBaseSize);
+            if(word_rva && !_stricmp(module.szModule,"ntvdm.exe") &&
+                    module.modBaseSize>=sizeof(DWORD) && word_rva<=module.modBaseSize-sizeof(DWORD))
+                word_address=(DWORD)(ULONG_PTR)module.modBaseAddr+word_rva;
+        }while(Module32Next(snapshot,&module));
         CloseHandle(snapshot);
+    }
+    if(word_rva){
+        DWORD value;SIZE_T bytes=0;LARGE_INTEGER at;
+        if(!word_address || !ReadProcessMemory(process,(PVOID)(ULONG_PTR)word_address,&value,sizeof(value),&bytes) || bytes!=sizeof(value)){CloseHandle(process);return 6;}
+        QueryPerformanceCounter(&at);
+        printf("host-word rva=%08lX address=%08lX value=%08lX qpc=%lld non-atomic=1\n",word_rva,word_address,value,at.QuadPart);
     }
     snapshot=CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD,0);
     if(snapshot==INVALID_HANDLE_VALUE){CloseHandle(process);return 4;}

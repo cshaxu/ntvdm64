@@ -203,7 +203,10 @@ int mvdm_softpc_physical_mapping_translate(uint32_t intel_address,
     physical_alias_record *record;
 
     if (translated_address_out != NULL) *translated_address_out = intel_address;
-    if (owner == NULL || !session_valid(owner) || translated_address_out == NULL)
+    /* ADAPTER-WOW-083: no alias can match an empty list. Preserve the
+     * negative output without a per-access session fence; active alias
+     * lookup still uses every original owner/session/range check below. */
+    if (aliases == NULL || owner == NULL || !session_valid(owner) || translated_address_out == NULL)
         return 0;
     for (record = aliases; record != NULL; record = record->next) {
         uint32_t offset;
