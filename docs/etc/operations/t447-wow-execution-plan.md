@@ -1294,6 +1294,38 @@ without the other. This avoids both the current unbounded S2 and a sequence
 of one-helper S tasks. Current now carries the adopted S2 exit; no
 retroactive closure or runtime acceptance is implied.
 
+### S4 P2 dependency checkpoint and remaining closure
+
+The bounded execution/identity group reuses original task selection, full-HWND
+conversion and class-unregister clients; it removes target-based pseudo-SMS
+identity. Its source/positive/negative/normal-retirement evidence and coherent
+publication are in the [S4 audit](../evidence/m0-t447-s4-message-source-audit.md#p2-native-modal-proof-final-delivery-and-second-role-review).
+This group does not satisfy the complete six-family S4 exit by itself.
+
+The remaining dependency order is unchanged in scope:
+
+1. Pair native extension/generic thunk calls, original CallBack16 frame entry,
+   explicit native Yield and fault/resource/terminal reentry as the next complete
+   M3/M4 group. Retain original argument conversion, callpr32 assembly, FPU and
+   callback algorithms; do not add descheduling before raw arguments are safe.
+2. Complete implicit sends plus cross-worker and external-native process/both-
+   bitness interaction. The passing native peer is another thread inside the
+   same worker, not evidence for those external boundaries.
+3. Complete converted-data, reply/wait/timeout, failure/death and nested lifetime
+   obligations against the original converters and native USER contract. Two
+   string copybacks and native scalar reply cases cannot close every structure
+   or interrupted call.
+4. Reconcile M1--M6 row by row against exact production callers and actual guest
+   evidence, preserving ordinary application/DOS/logon floors. Only then close
+   S4 and admit S5's separate individual-termination/NT Monitor work. Basic
+   startup/callback/normal-retirement defects remain S4 prerequisites, not S5
+   deferrals.
+
+These are dependency groups inside the admitted S, not new task allocations,
+semantic waivers or replacements for the full WOW32 objective. Original guest
+immutability, approved modern delivery/reply and every recorded limitation
+remain in force. No new private layout, helper window or transport is selected.
+
 ### Adoption checklist and independent review
 
 The single-person second-role review checks this recommendation against the

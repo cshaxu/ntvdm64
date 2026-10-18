@@ -112,6 +112,7 @@ static ULONG callback_backing, callback_teb;
 static unsigned callback_zero_count;
 static const char *native_failure_signal;
 static const char *callback_failure_kind;
+static const char *class_failure_signal;
 static const char *callback_cache_signal;
 static BOOL dialog_cache_failure;
 #define BORROW_CHECK(value) do { if (!(value)) { ++borrow_errors; \
@@ -759,6 +760,39 @@ static int verify_class_registration(ULONG teb)
     wc.hInstance = (HINSTANCE)0x43211234u;
     wc.lpfnWndProc = (WNDPROC)0x81234567u;
     wc.lpszClassName = "S2_CCPU_CLASS_COMMIT";
+    if (class_failure_signal) {
+        /* Test-owned stale publication after native destruction. Do not
+         * mutate an original guest or insert a production failure hook. */
+        WNDCLASSEXA native = {sizeof(native)};
+        WCHAR class_name[] = L"T447_CLASS_RELEASE_FAILURE";
+        UNICODE_STRING name = {sizeof(class_name) - sizeof(WCHAR),
+            sizeof(class_name), class_name};
+        wow_class_words_binding *storage;
+        wow_class_lookup_entry *entry;
+        HWND window;
+        HANDLE signal;
+        ATOM atom;
+        native.hInstance = GetModuleHandleA(NULL);
+        native.lpfnWndProc = DefWindowProcA;
+        native.lpszClassName = "T447_CLASS_RELEASE_FAILURE";
+        atom = wow_class_words_register(&classes, &native, &name, words, NULL);
+        if (!atom) return FALSE;
+        storage = wow_class_words_acquire(&classes, atom, native.hInstance);
+        entry = wow_class_words_entry(storage);
+        if (!entry || !wow_class_words_publish_guest(entry, &native)) return FALSE;
+        window = CreateWindowExA(0, MAKEINTATOM(atom), "", WS_POPUP,
+            0, 0, 16, 16, NULL, NULL, native.hInstance, NULL);
+        if (!window || !mvdm_softpc_wow_page_domain_publish_handle(LOWORD(window),
+                HIWORD(window), 1, 0, (ULONG)(ULONG_PTR)window,
+                entry->guest_server, NULL) || !DestroyWindow(window)) return FALSE;
+        wow_class_words_release(storage);
+        signal = OpenEventA(EVENT_MODIFY_STATE, FALSE, class_failure_signal);
+        if (!signal) return FALSE;
+        SetEvent(signal); CloseHandle(signal);
+        (void)wow_class_words_destroy_native(&classes.pclsPrivateList,
+            native.hInstance, TRUE);
+        return FALSE; /* Native success plus failed release cannot return. */
+    }
     for (mode = 0; mode < 2; ++mode) {
         wow_class_words_binding *binding;
         wow_class_lookup_entry *entry;
@@ -2310,6 +2344,34 @@ static void verify_terminal_failure(const char *option, const char *marker)
         marker, borrow_errors - before, code);
 }
 
+static void verify_class_retirement_failure(void)
+{
+    char path[MAX_PATH + 32], previous[32768], line[256];
+    DWORD count;
+    FILE *trace = NULL;
+    BOOL native_removed = FALSE, terminal_release = FALSE;
+    unsigned before = borrow_errors;
+    if (!GetModuleFileNameA(NULL, path, MAX_PATH)) { BORROW_CHECK(FALSE); return; }
+    strcat_s(path, sizeof(path), ".class-retirement.txt");
+    DeleteFileA(path); /* This executable's disposable diagnostic only. */
+    count = GetEnvironmentVariableA("MVDM_WOW_WINDOW_TRACE_PATH", previous, sizeof(previous));
+    BORROW_CHECK(count < sizeof(previous));
+    if (count >= sizeof(previous)) return;
+    BORROW_CHECK(SetEnvironmentVariableA("MVDM_WOW_WINDOW_TRACE_PATH", path));
+    verify_terminal_failure("--class-retirement-failure", "WOW_CLASS_RETIREMENT_TERMINAL_CCPU");
+    BORROW_CHECK(SetEnvironmentVariableA("MVDM_WOW_WINDOW_TRACE_PATH", count ? previous : NULL));
+    if (!fopen_s(&trace, path, "r") && trace) {
+        while (fgets(line, sizeof(line), trace)) {
+            if (strstr(line, "ClassRetirement") && strstr(line, "native-unregistered=1")) native_removed = TRUE;
+            if (strstr(line, "stage=release-class-after-native-unregister")) terminal_release = TRUE;
+        }
+        fclose(trace);
+    }
+    BORROW_CHECK(native_removed && terminal_release);
+    fprintf(stderr, "WOW_CLASS_RETIREMENT_FAILURE_CCPU errors=%u native_removed=1 stale_projection_rejected=1 terminal=1\n",
+        borrow_errors - before);
+}
+
 static int external_window_churn(const char *stop_name, const char *ready_name, BOOL hold)
 {
     HANDLE stop = OpenEventA(SYNCHRONIZE, FALSE, stop_name);
@@ -2739,6 +2801,29 @@ static void verify_property_discovery(BOOL held)
         borrow_errors - before, held);
 }
 
+static void verify_native_window_thread_query(HWND window, BOOL dead, BOOL held)
+{
+    HWND forms[3] = {window, (HWND)(ULONG_PTR)LOWORD(window),
+        (HWND)(LONG_PTR)(SHORT)LOWORD(window)};
+    DWORD expected_pid = 0xcccccccc, expected_tid, expected_error;
+    unsigned i, before = borrow_errors;
+    SetLastError(0x4567);
+    expected_tid = GetWindowThreadProcessId(window, &expected_pid);
+    expected_error = GetLastError();
+    if (dead) BORROW_CHECK(!expected_tid && expected_pid == 0xcccccccc);
+    else BORROW_CHECK(expected_tid == GetCurrentThreadId() &&
+        expected_pid == GetCurrentProcessId());
+    for (i = 0; i < 3; ++i) {
+        DWORD process = 0xcccccccc;
+        SetLastError(0x4567);
+        BORROW_CHECK(wow_native_GetWindowThreadProcessId(forms[i], &process) == expected_tid);
+        BORROW_CHECK(process == expected_pid && GetLastError() == expected_error &&
+            wow_user_runtime_current()->exclusive_held == held);
+    }
+    fprintf(stderr, "WOW_WINDOW_THREAD_QUERY_CCPU errors=%u held=%d dead=%d full=1 unsigned16=1 signed16=1 native_output=1\n",
+        borrow_errors - before, held, dead);
+}
+
 static void verify_native_discovery(BOOL held)
 {
     static wow_user_object_table objects;
@@ -2791,9 +2876,15 @@ static void verify_native_discovery(BOOL held)
     SetLastError(0x1234); BORROW_CHECK(!wow_native_FindWindowA("S2 absent class", NULL));
     BORROW_CHECK(GetLastError() == native_error);
     BORROW_CHECK(wow_native_FindWindowA("STATIC", "S2 discovery after snapshot") == scope.parent);
+    verify_native_window_thread_query(scope.parent, FALSE, held);
 cleanup:
     if (binding.exclusive_held) BORROW_CHECK(wow_user_runtime_leave(&binding));
-    if (scope.parent) BORROW_CHECK(DestroyWindow(scope.parent));
+    if (scope.parent) {
+        BORROW_CHECK(DestroyWindow(scope.parent));
+        if (held) BORROW_CHECK(wow_user_runtime_enter(&binding));
+        verify_native_window_thread_query(scope.parent, TRUE, held);
+        if (binding.exclusive_held) BORROW_CHECK(wow_user_runtime_leave(&binding));
+    }
     BORROW_CHECK(wow_user_window_project_graph(&desktop, 1));
     BORROW_CHECK(wow_user_runtime_unbind(&binding));
     fprintf(stderr, "WOW_DISCOVERY_CCPU errors=%u held=%d fresh=1 nested=1 stop=1 exception=1 failure=1 recovery=1\n", borrow_errors - before, held);
@@ -3344,6 +3435,8 @@ static BOOL verify_native_menu_entry(wow_task_order_process *process,
         PeekMessageA(&message, NULL, WM_APP + 93, WM_APP + 93, PM_NOREMOVE);
         if (!PostThreadMessageA(GetCurrentThreadId(), WM_APP + 93, 173u, 97u) ||
                 !wow_user_native_call_begin(&call, NULL)) goto cleanup;
+        if (thread.execution != &call.execution || wow_task_execution_ready(&thread) ||
+                call.execution_held) goto cleanup;
         if (!PeekMessageA(&message, NULL, WM_APP + 93, WM_APP + 93, PM_REMOVE) ||
                 message.wParam != 173u || message.lParam != 97u) goto cleanup;
         if (PeekMessageA(&message, NULL, WM_APP + 93, WM_APP + 93, PM_NOREMOVE)) goto cleanup;
@@ -3354,8 +3447,10 @@ static BOOL verify_native_menu_entry(wow_task_order_process *process,
             thread.ppi = NULL; /* Deliberate required-publication fault after consumption. */
         }
         if (!wow_user_native_call_end(&call) || native_failure_signal) goto cleanup;
+        if (thread.execution || !wow_task_execution_ready(&thread)) goto cleanup;
         if (PeekMessageA(&message, NULL, WM_APP + 93, WM_APP + 93, PM_NOREMOVE)) goto cleanup;
         fprintf(stderr, "WOW_REMOVED_MESSAGE_CCPU consumed_once=1 restored=1 no_replay=1\n");
+        fprintf(stderr, "WOW_RESOURCE_EXECUTION_SCOPE ready=1 restored=1 no_scheduler=1\n");
     }
     {
         wow_user_native_call call;
@@ -4580,6 +4675,7 @@ guest_window_failure:
     verify_terminal_failure("--callback-borrow-failure", "WOW_CALLBACK_BORROW_FAILURE_CCPU");
     verify_terminal_failure("--window-cache-failure", "WOW_WINDOW_CACHE_FAILURE_CCPU");
     verify_terminal_failure("--dialog-cache-failure", "WOW_DIALOG_CACHE_FAILURE_CCPU");
+    verify_class_retirement_failure();
     verify_native_discovery(FALSE);
     verify_native_discovery(TRUE);
     if (borrow_errors) goto done;
@@ -4825,6 +4921,10 @@ int main(int argc, char **argv)
         return external_window_churn(argv[2], argv[3], strcmp(argv[1], "--external-window-hold") == 0);
     if (argc == 3 && strcmp(argv[1], "--post-native-failure") == 0) {
         native_failure_signal = argv[2];
+        SetErrorMode(SEM_NOGPFAULTERRORBOX | SEM_FAILCRITICALERRORS);
+    }
+    if (argc == 3 && !strcmp(argv[1], "--class-retirement-failure")) {
+        class_failure_signal = argv[2];
         SetErrorMode(SEM_NOGPFAULTERRORBOX | SEM_FAILCRITICALERRORS);
     }
     if (argc == 3 && (!strcmp(argv[1], "--native-entry-failure") ||

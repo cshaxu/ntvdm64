@@ -75,16 +75,18 @@ DWORD WINAPI wow_user_msg_wait(DWORD, const HANDLE *, BOOL, DWORD, DWORD);
  * original taskman owns the two registered tasks. No pending-message queue. */
 typedef struct wow_user_native_call {
     wow_user_runtime_thread *binding;
-    wow_task_order_message message;
-    wow_task_order_message *previous;
-    DWORD receiver_id;
-    BOOL held;
+    wow_task_execution_scope execution;
+    BOOL held, execution_held;
     HWND returned_window;
     HWND returned_payload[4];
     ULONG returned_count;
     HMENU returned_menu;
 } wow_user_native_call;
 BOOL WINAPI wow_user_native_call_begin(wow_user_native_call *, HWND);
+/* Nonblocking synchronous native dispatch (Peek/Enum/CallNextHook).
+ * Retain the inherited owner; actual cross-task callback entry can park
+ * that native frame without inventing a send/reply association. */
+BOOL WINAPI wow_user_native_call_begin_inline(wow_user_native_call *);
 BOOL WINAPI wow_user_native_call_end(wow_user_native_call *);
 void WINAPI wow_user_native_call_result(wow_user_native_call *, UINT, WPARAM, LPARAM, LRESULT);
 /* Original pfnWOWCleanup resource operation, including task==0 module calls.

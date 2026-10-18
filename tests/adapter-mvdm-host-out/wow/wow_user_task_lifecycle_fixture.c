@@ -135,7 +135,7 @@ static DWORD WINAPI delayed_input(void *parameter)
 
 static BOOL control_callout_active;
 static unsigned control_paints, control_texts;
-static LRESULT CALLBACK reentrant_receive(HWND window, UINT message,
+static LRESULT reentrant_receive_body(HWND window, UINT message,
     WPARAM wp, LPARAM lp)
 {
     if (control_callout_active && (message == WM_PAINT || message == WM_SETTEXT ||
@@ -181,6 +181,23 @@ static LRESULT CALLBACK reentrant_receive(HWND window, UINT message,
         return lp;
     }
     return DefWindowProcW(window, message, wp, lp);
+}
+
+static LRESULT CALLBACK reentrant_receive(HWND window, UINT message, WPARAM wp, LPARAM lp)
+{
+    wow_task_callback_scope scope;
+    LRESULT result;
+    /* These bodies invoke original WOW services, just as the production
+     * registered callback does. Native resource-only messages need no guest
+     * entry. Do not model guest code by bypassing the common callback gate. */
+    if (message != WM_APP + 62 && message != WM_APP + 63 &&
+            !(control_callout_active && (message == WM_PAINT ||
+                message == WM_SETTEXT || message == WM_CHAR)))
+        return reentrant_receive_body(window, message, wp, lp);
+    CHECK(wow_task_callback_enter(&scope));
+    __try { result = reentrant_receive_body(window, message, wp, lp); }
+    __finally { CHECK(wow_task_callback_leave(&scope)); }
+    return result;
 }
 
 static DWORD WINAPI send_reentrant(void *window)
@@ -269,6 +286,28 @@ static void verify_receive_callout(wow_user_runtime_thread *binding)
     cls.lpszClassName = L"WOW_RECEIVE_REENTRY";
     CHECK(RegisterClassW(&cls) != 0);
     verify_control_callouts(binding, &cls);
+    {
+        wow_user_native_call outer, inner;
+        wow_task_order_thread *thread = binding->thread;
+        CHECK(wow_task_execution_ready(thread));
+        CHECK(wow_user_native_call_begin_inline(&outer));
+        CHECK(!wow_task_execution_ready(thread));
+        CHECK(thread->ppi->pwpi->CSOwningThread == thread);
+        CHECK(wow_user_native_call_begin_inline(&inner));
+        CHECK(inner.execution.previous == &outer.execution);
+        CHECK(wow_user_native_call_end(&inner));
+        CHECK(!wow_task_execution_ready(thread) && outer.execution.active);
+        CHECK(!wow_user_runtime_unbind(binding) && GetLastError() == ERROR_BUSY);
+        CHECK(wow_user_runtime_current() == binding && binding->thread == thread);
+        CHECK(wow_user_native_call_end(&outer));
+        CHECK(wow_task_execution_ready(thread) && !outer.execution.active);
+        CHECK(wow_user_native_call_begin(&outer, NULL));
+        CHECK(!wow_task_execution_ready(thread));
+        CHECK(thread->ppi->pwpi->CSOwningThread != thread);
+        CHECK(wow_user_native_call_end(&outer));
+        CHECK(wow_task_execution_ready(thread) && thread->ppi->pwpi->CSOwningThread == thread);
+        fprintf(stderr, "WOW_NATIVE_EXECUTION_SCOPES errors=%u inline=1 nested=1 wait=1 unbind_rejected=1\n", errors);
+    }
     window = CreateWindowExW(0, cls.lpszClassName, L"", 0, 0, 0, 1, 1,
         HWND_MESSAGE, NULL, cls.hInstance, NULL);
     CHECK(window != NULL);
@@ -438,7 +477,7 @@ static LRESULT cross_receive_body(HWND window, UINT message, WPARAM wp, LPARAM l
             wow_task_order_message *pending;
             CHECK(wow_user_runtime_enter(binding));
             pending = test->sender_thread->psmsSent;
-            CHECK(pending && pending->ptiReceiver == binding->thread);
+            CHECK(!pending && !binding->thread->psmsCurrent);
             CHECK(wp == 0 && lp == 0);
             fprintf(stderr, "WOW_NATIVE_FOREIGN_ALIAS pending=%p current=%p flags=%lu\n",
                 pending, binding->thread->psmsCurrent, InSendMessageEx(NULL));
@@ -450,12 +489,12 @@ static LRESULT cross_receive_body(HWND window, UINT message, WPARAM wp, LPARAM l
             wow_task_order_message *sent;
             CHECK(wow_user_runtime_enter(binding));
             sent = test->sender_thread->psmsSent;
-            CHECK(sent != NULL);
-            CHECK(sent && sent->ptiSender == test->sender_thread &&
-                sent->ptiReceiver == binding->thread);
-            fprintf(stderr, "WOW_NATIVE_SMS_IDENTITY sent=%p current=%p\n",
-                sent, binding->thread->psmsCurrent);
-            CHECK(binding->thread->psmsCurrent == sent);
+            /* Approved native USER identity, not NT4 private pointer equality.
+             * An unrelated pending local call is not this receive's sender. */
+            CHECK(!sent && !binding->thread->psmsCurrent);
+            CHECK((InSendMessageEx(NULL) & (ISMEX_SEND | ISMEX_REPLIED)) == ISMEX_SEND);
+            fprintf(stderr, "WOW_NATIVE_RECEIVE_IDENTITY sent=%p current=%p flags=%lu\n",
+                sent, binding->thread->psmsCurrent, InSendMessageEx(NULL));
             CHECK(wow_user_runtime_leave(binding));
         }
 #endif
@@ -471,11 +510,16 @@ static LRESULT cross_receive_body(HWND window, UINT message, WPARAM wp, LPARAM l
             return nested_result + 1;
         }
         if (wp == 1) {
+            BOOL duplicate;
             CHECK(ReplyMessage(114));
-            /* Native ReplyMessage returns without performing NT4 WOW's
-             * receiver yield. This rendezvous exposes concurrent ownership;
-             * it does not substitute a product scheduling operation. */
-            if (WaitForSingleObject(test->returned, 3000) != WAIT_OBJECT_0) {
+            CHECK(InSendMessageEx(NULL) & ISMEX_REPLIED);
+            duplicate = ReplyMessage(115);
+            CHECK(InSendMessageEx(NULL) & ISMEX_REPLIED);
+            fprintf(stderr, "WOW_NATIVE_DUPLICATE_REPLY result=%u first_value=114\n", duplicate);
+            /* Native reply completion and the original cooperative WOW
+             * execution reacquisition are separate. Yield through the actual
+             * product wait, never require a non-yielding NT4-only rendezvous. */
+            if (wow_user_msg_wait(1, &test->returned, FALSE, 3000, 0) != WAIT_OBJECT_0) {
 #ifdef WOW_NATIVE_REPLY_FIXTURE
                 CHECK(wow_user_runtime_enter(binding));
                 fprintf(stderr, "WOW_NATIVE_REPLY_STALLED native_returned=%ld sender=%p receiver=%p scheduled=%p owner=%p current=%p\n",
@@ -496,7 +540,7 @@ static LRESULT cross_receive_body(HWND window, UINT message, WPARAM wp, LPARAM l
     if (message == WM_APP + 66) {
         wow_user_runtime_thread *binding = wow_user_runtime_current();
         CHECK(InSendMessage() && !binding->exclusive_held);
-        CHECK(binding->thread->psmsSent != NULL);
+        CHECK(binding->thread->psmsSent == NULL);
         fprintf(stderr, "WOW_NATIVE_NESTED_CALLBACK scheduled=%u owner=%u\n",
             binding->thread->ppi->pwpi->ptiScheduled == binding->thread,
             binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
@@ -549,6 +593,11 @@ static LRESULT cross_receive_body(HWND window, UINT message, WPARAM wp, LPARAM l
         wow_window_words_release(test->receiver_borrow);
         test->receiver_borrow = NULL;
         CHECK(DestroyWindow(window));
+        /* This row exits the thread from inside its callback, not a
+         * retryable detach. Production's session finish hook supplies this
+         * terminal intent; this directly bound native fixture supplies the
+         * same explicit input before abandoning its callback stack. */
+        binding->terminal_exit = TRUE;
         if (!wow_user_runtime_unbind(binding)) ExitProcess(94);
         if (!session_thread_unbind(test->session_owner)) ExitProcess(94);
         test->retired_during_send = TRUE;
@@ -696,7 +745,7 @@ static void verify_cross_callout(session *owner, wow_user_runtime_thread *bindin
     CHECK(wow_user_native_call_begin(&pending_call, test.window));
     CHECK(wow_user_runtime_enter(binding));
     fprintf(stderr, "WOW_NATIVE_FOREIGN_BEGIN sender=%p receiver=%p scheduled=%p owner=%p held=%u\n",
-        binding->thread, pending_call.message.ptiReceiver,
+        binding->thread, binding->thread->host->find_thread(binding->thread, test.receiver_id),
         binding->thread->ppi->pwpi->ptiScheduled,
         binding->thread->ppi->pwpi->CSOwningThread, pending_call.held);
     CHECK(wow_user_runtime_leave(binding));
@@ -708,7 +757,7 @@ static void verify_cross_callout(session *owner, wow_user_runtime_thread *bindin
             binding->thread->ppi->pwpi->ptiScheduled,
             binding->thread->ppi->pwpi->CSOwningThread,
             binding->thread->ptdb->nEvents,
-            pending_call.message.ptiReceiver->ptdb->nEvents);
+            binding->thread->host->find_thread(binding->thread, test.receiver_id)->ptdb->nEvents);
         CHECK(wow_user_runtime_leave(binding));
         ExitProcess(97);
     }

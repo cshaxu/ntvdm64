@@ -679,23 +679,17 @@ DWORD WINAPI wow_user_msg_wait(DWORD count, const HANDLE *handles, BOOL all,
 {
     wow_user_runtime_thread *binding = wow_user_runtime_current();
     DWORD result, error = GetLastError();
+    wow_user_native_call call;
     if (!timeout || !binding || !binding->thread || !binding->thread->ptdb)
         return MsgWaitForMultipleObjects(count, handles, all, timeout, wake_mask);
-    if (!wow_user_runtime_enter(binding)) return WAIT_FAILED;
-    __try {
-        (void)xxxSleepTask(FALSE, (HANDLE)-1, binding->thread);
-    } __finally {
-        (void)wow_user_runtime_leave(binding);
-    }
+    if (!wow_user_native_call_begin(&call, NULL)) return WAIT_FAILED;
     SetLastError(error);
     __try {
         result = MsgWaitForMultipleObjects(count, handles, all, timeout, wake_mask);
     } __finally {
         error = GetLastError();
-        if (!wow_user_runtime_enter(binding))
-            lifecycle_failure("msg-wait-reenter", ERROR_INVALID_STATE);
-        __try { (void)xxxDirectedYield((DWORD)-1, binding->thread); }
-        __finally { (void)wow_user_runtime_leave(binding); }
+        if (!wow_user_native_call_end(&call))
+            wow_user_native_call_failed("msg-wait-return", GetLastError());
         SetLastError(error);
     }
     return result;
@@ -728,7 +722,7 @@ static BOOL peek_message_published(LPMSG message, HWND window, UINT first,
     DWORD error = GetLastError();
     /* A queue filter is not a send target. PeekMessage can dispatch sent
      * callbacks even when it returns FALSE, so publish on both outcomes. */
-    if (!wow_user_native_call_begin(&call, NULL)) return FALSE;
+    if (!wow_user_native_call_begin_inline(&call)) return FALSE;
     SetLastError(error);
     __try {
         *available = unicode ? PeekMessageW(message, window, first, last, flags) :
@@ -814,6 +808,39 @@ BOOL WINAPI wow_user_task_lifecycle_wait_message(wow_user_task_lifecycle *owner)
     return TRUE;
 }
 
+static void execution_push(wow_task_order_thread *thread,
+    wow_task_execution_scope *scope, BOOL ready)
+{
+    scope->previous = thread->execution;
+    scope->ready = ready;
+    scope->active = TRUE;
+    thread->execution = scope;
+}
+
+static void execution_pop(wow_task_order_thread *thread,
+    wow_task_execution_scope *scope)
+{
+    if (!thread || thread->execution != scope || !scope->active)
+        wow_user_native_call_failed("execution-scope-order", ERROR_INVALID_STATE);
+    thread->execution = scope->previous;
+    scope->previous = NULL;
+    scope->active = FALSE;
+}
+
+/* A synchronous inline native operation may keep its inherited WOW owner.
+ * If another task actually receives a callback, that owner is inside native
+ * code, not running guest instructions. Park it through the original bounded
+ * HEVENT_REMOVEME branch; persistent eligibility prevents later reselection.
+ * No send/reply identity or nominated receiver is inferred here. */
+static void park_native_owner(wow_task_order_thread *receiver)
+{
+    wow_task_order_state *state = receiver->ppi->pwpi;
+    wow_task_order_thread *thread = state ? state->CSOwningThread : NULL;
+    if (!thread || state->nTaskLock) return;
+    if (!wow_task_execution_ready(thread))
+        (void)xxxSleepTask(FALSE, (HANDLE)-1, thread);
+}
+
 static BOOL callback_enter(wow_task_callback_scope *scope, BOOL resource_cleanup)
 {
     DWORD error = GetLastError();
@@ -821,6 +848,10 @@ static BOOL callback_enter(wow_task_callback_scope *scope, BOOL resource_cleanup
     wow_task_order_thread *thread;
     ZeroMemory(scope, sizeof(*scope));
     if (!binding || !(thread = binding->thread) || !thread->ptdb) return TRUE;
+    if (!thread->ppi || !thread->ppi->pwpi) {
+        SetLastError(ERROR_INVALID_STATE);
+        return FALSE;
+    }
     if ((thread->TIF_flags & WOW_TASK_TIF_INCLEANUP) &&
             !(resource_cleanup && binding->resource_cleanup_live)) {
         SetLastError(ERROR_INVALID_STATE);
@@ -829,6 +860,9 @@ static BOOL callback_enter(wow_task_callback_scope *scope, BOOL resource_cleanup
     scope->held = binding->exclusive_held;
     if (!scope->held && !wow_user_runtime_enter(binding)) return FALSE;
     scope->binding = binding;
+    execution_push(thread, &scope->execution, TRUE);
+    if (thread->ppi->pwpi->CSOwningThread != thread)
+        park_native_owner(thread);
     /* queue.c xxxSleepThread resumes taskman before receiving callbacks.
      * Native USER can instead deliver inside its own SendMessage wait. */
     if (thread->ppi->pwpi->CSOwningThread != thread) {
@@ -838,6 +872,8 @@ static BOOL callback_enter(wow_task_callback_scope *scope, BOOL resource_cleanup
         xxxDirectedYield((DWORD)-1, thread);
         scope->resumed = TRUE;
     }
+    if (thread->ppi->pwpi->CSOwningThread != thread)
+        wow_user_native_call_failed("callback-execution-owner", ERROR_INVALID_STATE);
     /* Once execution was acquired, a failed lock release is not a rejected
      * callback. Returning FALSE would leave an acquired scope to a caller
      * which never entered its finally block. */
@@ -866,6 +902,7 @@ BOOL WINAPI wow_task_callback_leave(wow_task_callback_scope *scope)
         wow_user_native_call_failed("restore-callback-binding", ERROR_INVALID_STATE);
     if (!wow_user_runtime_enter(binding))
         wow_user_native_call_failed("restore-callback-owner", GetLastError());
+    execution_pop(binding->thread, &scope->execution);
     /* Return to the suspended native wait, not to guest execution. */
     if (scope->resumed) (void)xxxSleepTask(FALSE, (HANDLE)-1, binding->thread);
     scope->binding = NULL;
@@ -875,50 +912,54 @@ BOOL WINAPI wow_task_callback_leave(wow_task_callback_scope *scope)
     return TRUE;
 }
 
-BOOL WINAPI wow_user_native_call_begin(wow_user_native_call *call, HWND window)
+static BOOL native_call_begin(wow_user_native_call *call, HWND window,
+    BOOL inline_call)
 {
     DWORD error = GetLastError();
     wow_user_runtime_thread *binding = wow_user_runtime_current();
-    wow_task_order_thread *sender, *receiver;
+    wow_task_order_thread *sender;
     wow_window_words_binding *words;
-    wow_user_task_lifecycle_thread *target;
     wow_cleanup_window *view;
     ZeroMemory(call, sizeof(*call));
-    /* sendmsg.c keeps its same-thread direct branch outside inter-send.
-     * Use the already-published WND owner, including original short HWNDs;
-     * GetWindowThreadProcessId does not accept that historical carrier. */
-    if (!binding || !(sender = binding->thread) || !sender->ptdb) return TRUE;
+    if (!binding) return TRUE;
+    sender = binding->thread;
+    call->held = binding->exclusive_held;
+    /* USER resource/enumeration entry can precede original InitTask. There
+     * is no guest execution frame yet, but native callbacks still require
+     * the caller's data lock to be released and restored on every exit. */
+    if (!sender || !sender->ptdb) {
+        if (call->held && !wow_user_runtime_leave(binding)) return FALSE;
+        call->binding = binding;
+        SetLastError(error);
+        return TRUE;
+    }
     if (!binding->runtime->lifecycle) {
         SetLastError(ERROR_INVALID_STATE);
         return FALSE;
     }
-    call->held = binding->exclusive_held;
+    /* Native resource-only bindings need no WOW scheduler. A real original
+     * WOW task may not silently lose its registered process state. */
+    if ((sender->TIF_flags & WOW_TASK_TIF_16BIT) &&
+            (!sender->ppi || !sender->ppi->pwpi)) {
+        SetLastError(ERROR_INVALID_STATE);
+        return FALSE;
+    }
     if (!call->held && !wow_user_runtime_enter(binding)) return FALSE;
+    call->binding = binding;
+    call->execution_held = sender->ppi && sender->ppi->pwpi &&
+        sender->ppi->pwpi->CSOwningThread == sender;
+    /* Preserve the original direct same-task path, including short HWND
+     * carriers. This is only an inline execution optimization, never the
+     * identity of a message received during the native operation. */
     words = wow_window_words_acquire(window);
     view = words ? wow_window_words_cleanup_value(words) : NULL;
-    receiver = view ? view->thread : NULL;
-    for (target = ((wow_user_task_lifecycle *)binding->runtime->lifecycle)->threads;
-            target && &target->thread != receiver; target = target->next) {}
+    inline_call = inline_call || (view && view->thread == sender);
     if (words) wow_window_words_release(words);
-    if (!target || receiver == sender || !receiver->ptdb || sender->ppi->pwpi->nTaskLock) {
-        /* ssend.c MAKECALL drops USER data protection, not WOW execution
-         * ownership. Only a caller-held lock needs restoring after callout. */
-        call->binding = binding;
-        if (!wow_user_runtime_leave(binding))
-            wow_user_native_call_failed("release-native-entry", GetLastError());
-        SetLastError(error);
-        return TRUE;
-    }
-    call->binding = binding;
-    call->receiver_id = target->thread_id;
-    call->message.ptiSender = sender;
-    call->message.ptiReceiver = receiver;
-    call->previous = sender->psmsSent;
-    sender->psmsSent = &call->message;
-    /* This is an outer native call, not an already-enqueued NT4 SMS.
-     * queue.c's external-wait path only deschedules here. Scheduling a send
-     * before native USER publishes it makes the still-waiting sender ready. */
-    (void)xxxSleepTask(FALSE, (HANDLE)-1, sender);
+    execution_push(sender, &call->execution, FALSE);
+    /* Actual native waits/modal calls are excluded persistently. Task lock
+     * is not overridden; actual same-thread callbacks inherit execution. */
+    if (call->execution_held && !inline_call && !sender->ppi->pwpi->nTaskLock)
+        (void)xxxSleepTask(FALSE, (HANDLE)-1, sender);
     if (!wow_user_runtime_leave(binding))
         wow_user_native_call_failed("release-native-handoff", GetLastError());
     /* Owner lookup is bookkeeping, not the native operation. In particular
@@ -926,6 +967,34 @@ BOOL WINAPI wow_user_native_call_begin(wow_user_native_call *call, HWND window)
      * window lookup's ERROR_INVALID_WINDOW_HANDLE during menu rollback. */
     SetLastError(error);
     return TRUE;
+}
+
+BOOL WINAPI wow_user_native_call_begin(wow_user_native_call *call, HWND window)
+{
+    return native_call_begin(call, window, FALSE);
+}
+
+BOOL WINAPI wow_user_native_call_begin_inline(wow_user_native_call *call)
+{
+    return native_call_begin(call, NULL, TRUE);
+}
+
+LRESULT WINAPI wow_native_CallNextHookEx(HHOOK hook, int code, WPARAM wp, LPARAM lp)
+{
+    wow_user_native_call call;
+    LRESULT result;
+    DWORD error = GetLastError();
+    if (!wow_user_native_call_begin_inline(&call)) return 0;
+    __try {
+        SetLastError(error);
+        result = CallNextHookEx(hook, code, wp, lp);
+    } __finally {
+        error = GetLastError();
+        if (!wow_user_native_call_end(&call))
+            wow_user_native_call_failed("next-hook-return", GetLastError());
+        SetLastError(error);
+    }
+    return result;
 }
 
 void WINAPI wow_user_native_call_result(wow_user_native_call *call,
@@ -961,35 +1030,31 @@ static BOOL publish_call_windows(const wow_user_native_call *call)
 BOOL WINAPI wow_user_native_call_end(wow_user_native_call *call)
 {
     wow_user_runtime_thread *binding = call->binding;
-    wow_task_order_thread *sender, *receiver;
+    wow_task_order_thread *sender;
     BOOL published;
     DWORD error;
     if (!binding) return TRUE;
-    if (wow_user_runtime_current() != binding || !wow_user_runtime_enter(binding))
-        wow_user_native_call_failed("restore-native-owner", GetLastError());
-    if (!call->receiver_id) {
+    if (wow_user_runtime_current() != binding)
+        wow_user_native_call_failed("restore-native-binding", ERROR_INVALID_STATE);
+    if (!call->execution.active) {
+        if (binding->exclusive_held || (call->held && !wow_user_runtime_enter(binding)))
+            wow_user_native_call_failed("restore-resource-owner", ERROR_INVALID_STATE);
         call->binding = NULL;
-        published = publish_call_windows(call) &&
-            wow_user_borrow_client_graph(NULL, GetDesktopWindow()) &&
-            wow_menu_client_refresh_all(binding->thread->ppi);
-        error = GetLastError();
-        if (!published) wow_user_native_call_failed("publish-native-return", error);
-        if (!call->held && !wow_user_runtime_leave(binding))
-            wow_user_native_call_failed("release-native-owner", GetLastError());
-        SetLastError(error);
-        return published; /* Same task; preserve the caller's original lock state. */
+        return TRUE;
     }
+    if (!wow_user_runtime_enter(binding))
+        wow_user_native_call_failed("restore-native-owner", GetLastError());
     sender = binding->thread;
-    /* Resolve again under the owner lock: the native operation may have
-     * destroyed its target. Never dereference a retained receiver pointer. */
-    receiver = find_thread(sender, call->receiver_id);
-    if (receiver && receiver->ptdb) {
-        DirectedScheduleTask(receiver, sender, FALSE, &call->message);
-        (void)xxxSleepTask(TRUE, NULL, sender);
-    } else {
+    if (!sender || sender->execution != &call->execution)
+        wow_user_native_call_failed("native-return-scope", ERROR_INVALID_STATE);
+    /* Native completion makes this caller ready. It proves no receiver or
+     * private SMS relation. Reacquire only execution owned on entry. */
+    call->execution.ready = TRUE;
+    if (call->execution_held && sender->ppi->pwpi->CSOwningThread != sender)
         (void)xxxDirectedYield((DWORD)-1, sender);
-    }
-    sender->psmsSent = call->previous;
+    if (call->execution_held && sender->ppi->pwpi->CSOwningThread != sender)
+        wow_user_native_call_failed("native-return-execution", ERROR_INVALID_STATE);
+    execution_pop(sender, &call->execution);
     call->binding = NULL;
     published = publish_call_windows(call) &&
         wow_user_borrow_client_graph(NULL, GetDesktopWindow()) &&
@@ -1193,6 +1258,10 @@ static BOOL retire_task(wow_user_task_lifecycle *owner, DWORD task_id,
         (void)mvdm_softpc_wow_page_domain_set_expected_windows_version(0u);
         /* Keep the task and its window-owner references alive if the finite
          * native boundary cannot complete original object cleanup. */
+        /* All refusing cleanup edges have completed. A terminal thread may
+         * abandon its native frames; withdraw the borrowed top only now,
+         * immediately before removing the original task under this lock. */
+        task->thread.execution = NULL;
         *link = task->next;
         DestroyTask(&owner->process, &task->thread);
         if (binding->thread == &task->thread)
@@ -1338,6 +1407,14 @@ static BOOL WINAPI retire_current_thread(PVOID context)
     wow_user_runtime_thread *binding = wow_user_runtime_current();
     ULONG index;
     if (!task) { SetLastError(ERROR_INVALID_STATE); return FALSE; }
+    if (!wow_user_runtime_enter(binding)) return FALSE;
+    if (task->thread.execution && !binding->terminal_exit) {
+        (void)wow_user_runtime_leave(binding);
+        SetLastError(ERROR_BUSY);
+        return FALSE;
+    }
+    if (!wow_user_runtime_leave(binding))
+        wow_user_native_call_failed("retire-execution-scope", GetLastError());
     retirement_trace("enter", task->thread.ptdb->hTaskWow, 0);
     /* Window destruction belongs before original resource teardown, not
      * here. Late finalization retains/refuses any surviving object owner. */

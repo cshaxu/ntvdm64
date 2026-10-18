@@ -1,6 +1,7 @@
 #include "wow_user_message_bridge.h"
 #include "wow_task_order_bindings.h"
 #include "wow_user_runtime.h"
+#include "wow_user_task_lifecycle.h"
 
 /* ADAPTER-WOW-050: ssend.c MAKECALL releases the USER data lock across a
  * client callback, independently of WOW task execution ownership. Native
@@ -8,14 +9,17 @@
  * even on unwind, before the caller touches its original queue view again. */
 static BOOL native_peek(MSG *message, UINT flags)
 {
-    wow_user_runtime_thread *binding = wow_user_runtime_current();
-    BOOL held = binding && binding->exclusive_held;
     BOOL restored = TRUE;
-    if (held && !wow_user_runtime_leave(binding)) return FALSE;
+    wow_user_native_call call;
+    DWORD error = GetLastError();
+    if (!wow_user_native_call_begin_inline(&call)) return FALSE;
     __try {
+        SetLastError(error);
         (void)PeekMessageW(message, NULL, 0, 0, flags);
     } __finally {
-        if (held) restored = wow_user_runtime_enter(binding);
+        error = GetLastError();
+        restored = wow_user_native_call_end(&call);
+        if (restored) SetLastError(error);
     }
     return restored;
 }

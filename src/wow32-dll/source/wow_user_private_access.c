@@ -164,3 +164,26 @@ BOOL WINAPI wow_user_get_class_infoA(HINSTANCE module, LPCSTR name, LPWNDCLASSA 
     return wow_class_client_query(runtime ? runtime->classes : NULL,
         module, name, output);
 }
+
+BOOL WINAPI wow_user_unregister_classA(LPCSTR name, HINSTANCE module)
+{
+    wow_user_runtime_thread *binding = wow_user_runtime_current();
+    BOOL held, result = FALSE;
+    DWORD error;
+    if (!binding || !binding->classes) {
+        SetLastError(ERROR_INVALID_STATE); return FALSE;
+    }
+    held = binding->exclusive_held;
+    if (!held && !wow_user_runtime_enter(binding)) return FALSE;
+    /* Original ntcftxt owns capture, _UnregisterClass selection and returned
+     * menu-name release. Unregister cannot call a window procedure: a live
+     * class reference is rejected by the original owner and native USER. */
+    __try { result = wow_class_client_unregister(binding->classes, name, module); }
+    __finally {
+        error = GetLastError();
+        if (!held && !wow_user_runtime_leave(binding))
+            wow_user_native_call_failed("restore-unregister-owner", GetLastError());
+        SetLastError(error);
+    }
+    return result;
+}

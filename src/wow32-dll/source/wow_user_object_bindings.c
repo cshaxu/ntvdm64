@@ -132,7 +132,7 @@ BOOL WINAPI wow_user_window_refresh_payload(HWND callback_window,
 
 typedef mvdm_softpc_wow_window_observation window_observation;
 
-static HWND full_payload_window(HWND window)
+HWND WINAPI wow_user_window_native_handle(HWND window)
 {
     wow_user_runtime_thread *binding;
     if (!window || ((ULONG)(ULONG_PTR)window != LOWORD(window) &&
@@ -296,7 +296,7 @@ BOOL WINAPI wow_user_window_refresh_message(HWND window, UINT message,
     HWND roots[4];
     ULONG count = wow_user_message_window_roots(message, wp, lp, roots);
     if (window) {
-        window = full_payload_window(window);
+        window = wow_user_window_native_handle(window);
         if (!window) return FALSE;
     }
     return wow_user_window_refresh_payload(window, roots, count);
@@ -495,7 +495,7 @@ static BOOL project_graph(const HWND *roots, ULONG root_count,
     for (i = 0; i < payload_count; ++i) {
         HWND window;
         if (!payload[i]) continue;
-        window = full_payload_window(payload[i]);
+        window = wow_user_window_native_handle(payload[i]);
         if (!window) goto done;
         if (capture_window(window, &captured)) {
             if (!put_observation(&rows, &count, &capacity, index, &captured)) goto done;

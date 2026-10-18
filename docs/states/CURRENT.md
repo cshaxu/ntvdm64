@@ -11,13 +11,13 @@ retains every scope limit, accepted boundary and successor obligation.
 The [snapshot](../history/m0-t447-s3-pre-closure-status.md) preserves old staged
 chronology; it is not another active packet or a new runtime backlog.
 
-S4 is sequentially admitted under the continuing owner goal. Start with the
-complete original-to-production message chain audit before selecting runtime
-changes. Original wumsg.c already calls native InSendMessage/ReplyMessage;
-their existence is not proof of cross-task execution handoff. The lifecycle
-native-call carrier temporarily links psmsSent for original taskman scheduling;
-it is not an actual received native SMS identity. Trace all consumers before
-retaining, removing or changing it. Do not build a parallel message transport.
+S4 was sequentially admitted under the continuing owner goal, beginning with
+the complete original-to-production message chain audit. Original wumsg.c
+already calls native InSendMessage/ReplyMessage; their existence is not proof
+of cross-task execution handoff. The superseded lifecycle carrier temporarily
+linked psmsSent for taskman scheduling without an actual received SMS identity.
+P2 removes that pseudo-identity after the consumer audit. Native USER remains
+the sole delivery/reply owner; do not build a parallel message transport.
 
 The [S4 fixed inventory](../etc/operations/t447-wow-execution-plan.md#s4-message-closure-admission-and-fixed-source-inventory)
 covers six complete groups, including implicit messages, reply/wait and
@@ -33,7 +33,44 @@ real events. Review all eight selection/transition entries before freezing
 the minimal seam. Native receive/reply remains the sole message authority.
 Old private-SMS pointer-equality and non-yielding NT4 early-handoff test
 assertions are not the approved modern contract; no field fabrication or
-hidden waiver is selected. No new runtime test/build or production edit yet.
+hidden waiver is selected. The eight-entry review now stages the registered
+077/123 execution group: original selection consumes a persistent readiness
+input; existing native/callback scopes own LIFO state, and old target-based
+pseudo-reply bookkeeping is removed. Native wait/modal and inline queue/
+enumeration/Hook entries plus failure/retirement must compose together before
+grouped verification. Candidate execution-build-r1 and its no-work r2 input
+refresh exit0. Execution-build-r3 also passes after moving the single borrowed
+frame top onto the existing THREADINFO carrier, removing private-task lookup
+and the added readiness vtable. Acceptance-r6 completes original30 and12
+real S3 guest groups, with explicit hash-checked reuse of r4 native20/style
+passes. Actual USER16 message r5 reaches zero-error send/reply/text counters
+but fails receiver retirement and reports a wrong peer task identity. The
+registered078 group reconnects the existing original class-unregister client
+and existing original full-HWND resolver before native thread-ID queries.
+Native full/short/dead query and irreversible class-release failure assertions
+join the unchanged real identity/retirement requirements. Fresh build-r5 passes;
+acceptance-r7 passes native20, both-width style, original30 and all12 real S3
+guest groups. Actual-message-r6 passes all3 styles: queried peer6031 equals
+receiver self6031, both tasks retire exactly once, launcher exit0. WINMINE/SOL
+gameplay and WRITE's retained startup depth pass all3 styles; DOS17/17 in both
+frontends and ordinary-logon/installed gameplay also pass. Final review adds
+direct MessageBox/ShellAbout acceptance: failed early probes assumed internal
+native button/command layout. A pure native control and actual guest group-r4
+now pass the same public-close protocol, both native results1, guest phases0/1/2
+and one normal task retirement in every policy. Delivery-r2 republishes the
+coherent13 with this extra gate and passes installed verification. This is the
+bounded S4 P2 baseline, not full message-family or T closure. Full
+M1--M6 remains required, not replaced by the native fixture denominator.
+
+Owner's renewed installed WINMINE slowdown report received diagnostic priority
+before further S4 expansion. Installed-mine-regression-r1 verified then-P22
+identities, passed actual gameplay/normal exit in all3 policies with
+the complete logon environment, and reproduces an illegal-instruction startup
+failure with the inherited developer environment. Its observation runner's
+exit0 is not a pass for that failed launch. The owner's actual terminal
+environment and first-bad version are unobserved; do not equate this control
+with causal proof of the owner's instance. See the appended
+[diagnostic evidence](../etc/evidence/m0-t447-s4-message-source-audit.md#renewed-installed-winmine-startup-report).
 
 ## Active Packet
 
@@ -57,12 +94,12 @@ hidden waiver is selected. No new runtime test/build or production edit yet.
 
 ## Current Technical Baseline
 
-P22 runtime remains unchanged. NTVDM SHA-256 is
+S4 P2 publishes the verified bounded execution/identity baseline. NTVDM SHA-256 is
 12DA2E8FCFFB35B724791F7356C1A9A87A5208442928C29127415AE8DC812705;
-WOW32 is3D2CEB931C6E43E097FA72185049B626332F346407A94A007ADDB7259411D3A9.
+WOW32 isF3FD174A25B72EC17274979B6F24A1C5C5314A9E025BD233847356F9F45680F2.
 The release manifest owns exact identities of all13 images. Both
 assets/release and O:/winnt/system32 match the tested package; original guest,
-user configuration and assets/winnt.zip are unchanged by S3 closeout.
+user configuration and assets/winnt.zip are unchanged by this delivery.
 
 | Architecture | Images |
 | --- | --- |

@@ -99,6 +99,12 @@ typedef struct wow_task_host_ops {
      * live in the same USER domain while the caller holds its lock. */
     struct wow_task_order_thread *(WINAPI *find_thread)(struct wow_task_order_thread *, DWORD);
 } wow_task_host_ops;
+/* ADAPTER-WOW-077: caller-owned LIFO state, never a message identity or queue.
+ * All reads/writes are under the existing USER runtime lock. */
+typedef struct wow_task_execution_scope {
+    struct wow_task_execution_scope *previous;
+    BOOL ready, active;
+} wow_task_execution_scope;
 typedef struct wow_task_order_thread {
     wow_task_order_process *ppi;
     wow_task_order_entry *ptdb;
@@ -118,7 +124,14 @@ typedef struct wow_task_order_thread {
     struct wow_input_desktop *rpdesk;
     wow_task_order_queue *pqAttach;
     wow_task_order_queue *pq;
+    /* Borrowed native stack top belongs to this bound thread, independently
+     * of the lifecycle allocation that may contain its original TDB. */
+    wow_task_execution_scope *execution;
 } wow_task_order_thread;
+static __inline BOOL wow_task_execution_ready(wow_task_order_thread *thread)
+{
+    return thread && (!thread->execution || thread->execution->ready);
+}
 void WINAPI InsertTask(wow_task_order_process *, wow_task_order_entry *);
 void WINAPI WakeWowTask(wow_task_order_thread *);
 void WINAPI DirectedScheduleTask(wow_task_order_thread *, wow_task_order_thread *,
@@ -134,6 +147,7 @@ void WINAPI xxxDirectedYield(DWORD, wow_task_order_thread *);
 typedef struct wow_task_callback_scope {
     struct wow_user_runtime_thread *binding;
     BOOL held, resumed;
+    wow_task_execution_scope execution;
 } wow_task_callback_scope;
 BOOL WINAPI wow_task_callback_enter(wow_task_callback_scope *);
 /* Original modeless COMMDLG WM_DESTROY and recovered EDIT terminal resource

@@ -9,6 +9,7 @@
 static BOOL publish_discovery(HWND window)
 {
     wow_user_runtime_thread *binding = wow_user_runtime_current();
+    HWND full;
     BOOL held, result = FALSE;
     DWORD error = ERROR_SUCCESS;
     if (!binding) return wow_user_window_refresh_graph(window);
@@ -20,14 +21,11 @@ static BOOL publish_discovery(HWND window)
          * which supplies full handles). Recover its existing shared-table
          * identity with retained GetFullUserHandle before publishing a WND;
          * a short carrier is not a new zero/FFFF generation. */
-        if (window && ((ULONG)(ULONG_PTR)window == LOWORD(window) ||
-                (LONG)(LONG_PTR)window == (LONG)(SHORT)LOWORD(window))) {
-            if (binding->thread && binding->thread->ppi && binding->thread->ppi->objects) {
-                DWORD full = wow_user_full_handle(binding->thread->ppi->objects, LOWORD(window));
-                if (!full) { error = GetLastError(); __leave; }
-                window = (HWND)(ULONG_PTR)full;
-            }
+        full = wow_user_window_native_handle(window);
+        if (window && !full) {
+            error = GetLastError(); __leave;
         }
+        window = full;
         result = wow_user_window_refresh_graph(window);
         error = GetLastError();
     } __finally {
@@ -37,6 +35,37 @@ static BOOL publish_discovery(HWND window)
         }
     }
     SetLastError(error);
+    return result;
+}
+
+/* ADAPTER-WOW-078: modern USER's thread query, unlike IsWindow/SendMessage,
+ * rejects historical short HWNDs. Reuse the already-published original full
+ * handle, then let native USER validate the generation and return real IDs.
+ * Do not walk or synthesize a WOW task identity here. */
+DWORD WINAPI wow_native_GetWindowThreadProcessId(HWND window, LPDWORD process)
+{
+    wow_user_runtime_thread *binding;
+    HWND full;
+    BOOL held;
+    DWORD result = 0, error, saved = GetLastError();
+    if (!window || ((ULONG)(ULONG_PTR)window != LOWORD(window) &&
+            (LONG)(LONG_PTR)window != (LONG)(SHORT)LOWORD(window)))
+        return GetWindowThreadProcessId(window, process);
+    binding = wow_user_runtime_current();
+    if (!binding) { SetLastError(ERROR_INVALID_STATE); return 0; }
+    held = binding->exclusive_held;
+    if (!held && !wow_user_runtime_enter(binding)) return 0;
+    __try {
+        full = wow_user_window_native_handle(window);
+        if (!full) __leave;
+        SetLastError(saved);
+        result = GetWindowThreadProcessId(full, process);
+    } __finally {
+        error = GetLastError();
+        if (!held && !wow_user_runtime_leave(binding))
+            wow_user_native_call_failed("restore-window-query-owner", GetLastError());
+        SetLastError(error);
+    }
     return result;
 }
 
@@ -104,26 +133,26 @@ static BOOL enumeration_return(discovery_enumeration *scope, BOOL result)
     return result;
 }
 
-/* Release only caller-held USER data protection, never WOW execution.
- * Native enumeration and arbitrary nested callbacks run outside that lock.
- * The existing callout pair restores the entry state even on an exception. */
+/* Synchronous enumeration inherits execution, while the native stack scope
+ * permits an actual cross-task callback to park it safely. */
 #define ENUM_DISCOVERY(name, parameters, native_args, wrapped_args) \
 BOOL WINAPI wow_native_##name parameters \
 { \
     discovery_enumeration scope = {callback, parameter, FALSE, 0, FALSE}; \
-    wow_user_runtime_thread *binding = wow_user_runtime_current(); \
-    BOOL held = binding && binding->exclusive_held, result = FALSE; \
+    wow_user_native_call call; \
+    BOOL result = FALSE; \
     DWORD error = GetLastError(); \
-    if (held && !wow_user_runtime_leave(binding)) return FALSE; \
+    if (!wow_user_native_call_begin_inline(&call)) return FALSE; \
     SetLastError(error); \
     __try { \
         result = callback ? name wrapped_args : name native_args; \
-        if (callback) result = enumeration_return(&scope, result); \
     } __finally { \
         error = GetLastError(); \
-        if (held && !wow_user_runtime_enter(binding)) result = FALSE; \
-        else SetLastError(error); \
+        if (!wow_user_native_call_end(&call)) \
+            wow_user_native_call_failed("enumeration-return", GetLastError()); \
+        SetLastError(error); \
     } \
+    if (callback) result = enumeration_return(&scope, result); \
     return result; \
 }
 ENUM_DISCOVERY(EnumWindows, (WNDENUMPROC callback, LPARAM parameter),
@@ -159,11 +188,10 @@ static int CALLBACK discovered_property(HWND window, LPSTR name, HANDLE data,
 int WINAPI wow_native_EnumPropsA(HWND window, PROPENUMPROCA callback)
 {
     property_enumeration scope = {callback, FALSE, FALSE, 0};
-    wow_user_runtime_thread *binding = wow_user_runtime_current();
-    BOOL held = binding && binding->exclusive_held;
+    wow_user_native_call call;
     int result = -1;
     DWORD error = GetLastError();
-    if (held && !wow_user_runtime_leave(binding)) return -1;
+    if (!wow_user_native_call_begin_inline(&call)) return -1;
     SetLastError(error);
     __try {
         /* Original clenum.c uses the same InternalEnumProps for A and ExA;
@@ -172,15 +200,15 @@ int WINAPI wow_native_EnumPropsA(HWND window, PROPENUMPROCA callback)
         result = callback ? EnumPropsExA(window, discovered_property,
             (LPARAM)&scope) : EnumPropsA(window, callback);
         error = GetLastError();
-        if (scope.invoked && !publish_discovery(NULL))
-            wow_user_native_call_failed("publish-property-return", GetLastError());
-        if (scope.failed) { result = -1; error = scope.error; }
-        SetLastError(error);
     } __finally {
         error = GetLastError();
-        if (held && !wow_user_runtime_enter(binding))
+        if (!wow_user_native_call_end(&call))
             wow_user_native_call_failed("restore-property-owner", GetLastError());
         SetLastError(error);
     }
+    if (scope.invoked && !publish_discovery(NULL))
+        wow_user_native_call_failed("publish-property-return", GetLastError());
+    if (scope.failed) { result = -1; error = scope.error; }
+    SetLastError(error);
     return result;
 }

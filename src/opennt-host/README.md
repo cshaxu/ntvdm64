@@ -1,5 +1,24 @@
 # opennt-host
 
+OPENNT-HOST-123 registers the native-stack eligibility input at five selection
+conditions in kernel/taskman.c (normal event scan, idle-hook temporary owner,
+WOWEXEC hardware selection, task-locked self wake and final wait completion).
+Pinned original: OpenNT5c5b979ec08c17d3ca2eb70e8aad62d26515d01c, taskman.c
+E37F4D724650D5758EE05C54E181771AA584AEAD15F5A1376B322ECB7016E64E.
+Original event counts, priority/list algorithms, task-lock policy and native
+wait transport stay unchanged. Modern USER does not supply NT4 SMS/wake-mask
+eligibility; HEVENT_REMOVEME's one-scan exclusion cannot supply that persistent
+input. The existing bound THREADINFO carrier supplies only whether its native
+stack is at an actual guest callback/continuation. This is not a new ready
+queue, guessed private object or clearing of original events. The
+non-scan source entries are guarded rather than silently assuming eligibility.
+InitTask's newly allocated task is ready by construction; retirement removes
+the existing original TDB under the same lock. Adapter077 owns LIFO boundary
+state and replaces target-based pseudo-SMS handoff. Planned added mirror body:
+five predicate operands plus local provenance, no standalone algorithm.
+Grouped scheduler/callback/native/guest/lifecycle acceptance is pending; no
+runtime delivery is claimed by this registration. No guest change is allowed.
+
 Retrospective OPENNT-HOST-027 register completion: ntrtl.h's existing
 RtlNtStatusToDosError/NoTeb aliases select the private symbol domain of the
 already admitted OPENNT-HOST-016 original error.c/error.h mapping owner.

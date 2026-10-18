@@ -532,8 +532,8 @@ BOOL WINAPI wow_class_words_destroy_native(wow_class_lookup_entry **link,
                 CloseHandle(file);
             }
         }
-        SetLastError(ERROR_INVALID_STATE);
-        return FALSE;
+        wow_user_native_call_failed("release-class-after-native-unregister",
+            ERROR_INVALID_STATE);
     }
     binding->entry.guest_server = 0u;
     binding->entry.lpszClientAnsiMenuName = NULL;

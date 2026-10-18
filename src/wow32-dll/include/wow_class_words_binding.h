@@ -27,7 +27,8 @@ BOOL WINAPI wow_class_words_publish_guest(wow_class_lookup_entry *,
 /* Bottom native release for an already selected, locked class link. Cleanup
  * must not repeat ordinary GetClassPtr, which excludes deferred classes.
  * TRUE in the last argument means the caller has accounted for client menu
- * names before release; failure preserves the link and all metadata. */
+ * names before release. Native rejection preserves the link and metadata;
+ * failure to release required storage after native success is terminal. */
 BOOL WINAPI wow_class_words_destroy_native(wow_class_lookup_entry **,
     HINSTANCE, BOOL);
 /* Original windows/core/ntuser/inc/user.h declaration. The captured Unicode

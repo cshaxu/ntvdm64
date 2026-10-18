@@ -15,6 +15,8 @@ DWORD WINAPI wow_user_get_procedure(HWND, BOOL class_procedure, BOOL *guest);
 DWORD WINAPI wow_user_set_procedure(HWND, BOOL class_procedure, DWORD,
     BOOL guest, BOOL *previous_guest);
 BOOL WINAPI wow_user_get_class_infoA(HINSTANCE, LPCSTR, LPWNDCLASSA);
+BOOL WINAPI wow_user_unregister_classA(LPCSTR, HINSTANCE);
+DWORD WINAPI wow_native_GetWindowThreadProcessId(HWND, LPDWORD);
 LRESULT WINAPI wow_user_call_window_procA(WNDPROC, HWND, UINT, WPARAM, LPARAM);
 LRESULT WINAPI wow_user_call_window_procW(WNDPROC, HWND, UINT, WPARAM, LPARAM);
 VOID WINAPI wow_user_register_wow_exec(HANDLE);
@@ -24,6 +26,7 @@ BOOL WINAPI wow_user_peek_messageA(LPMSG, HWND, UINT, UINT, UINT);
 BOOL WINAPI wow_user_get_messageW(LPMSG, HWND, UINT, UINT);
 BOOL WINAPI wow_user_peek_messageW(LPMSG, HWND, UINT, UINT, UINT);
 BOOL WINAPI wow_user_wait_message(void);
+LRESULT WINAPI wow_native_CallNextHookEx(HHOOK, int, WPARAM, LPARAM);
 BOOL WINAPI wow_native_BringWindowToTop(HWND w);
 BOOL WINAPI wow_native_SetWindowPos(HWND w, HWND after, int x, int y, int cx, int cy, UINT flags);
 BOOL WINAPI wow_native_MoveWindow(HWND w, int x, int y, int cx, int cy, BOOL paint);
@@ -117,6 +120,8 @@ int WINAPI wow_native_EnumPropsA(HWND, PROPENUMPROCA);
 #define GetClassLongA wow_user_get_class_longA
 #define SetClassLongA wow_user_set_class_longA
 #define GetClassInfoA wow_user_get_class_infoA
+#define UnregisterClassA wow_user_unregister_classA
+#define GetWindowThreadProcessId wow_native_GetWindowThreadProcessId
 #define CallWindowProcA wow_user_call_window_procA
 #define CallWindowProcW wow_user_call_window_procW
 #define RegisterWowExec wow_user_register_wow_exec
@@ -159,6 +164,7 @@ int WINAPI wow_native_EnumPropsA(HWND, PROPENUMPROCA);
 #define SendMessageA wow_native_SendMessageA
 #define SendMessageW wow_native_SendMessageW
 #define SendMessageTimeoutA wow_native_SendMessageTimeoutA
+#define CallNextHookEx wow_native_CallNextHookEx
 #define DefWindowProcA wow_native_DefWindowProcA
 #define DefDlgProcA wow_native_DefDlgProcA
 #define DialogBoxIndirectParamAorW wow_user_dialog_box_indirect_param

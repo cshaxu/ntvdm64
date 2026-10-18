@@ -74,6 +74,9 @@ $units = @(
     @('dialog_end_fixture', 'tests/adapter-mvdm-host-out/wow/wow_dialog_end_original_fixture.c', ''),
     @('dialog_modal_fixture', 'tests/adapter-mvdm-host-out/wow/wow_dialog_modal_entry_fixture.c', ''),
     @('dialog_modal_adapter', 'src/wow32-dll/source/wow_title_policy.c', ''),
+    # The modal/context unit has no native execution transport. Accidental
+    # selection of the unused native-dialog paths must fail, never succeed.
+    @('dialog_modal_native_unreached', 'tests/adapter-mvdm-host-out/wow/wow_modal_native_unreached.c', ''),
     @('cpd_class_probe', 'tests/adapter-mvdm-host-out/wow/wow_cpd_class_normalization_probe.c', ''),
     @('class_address_probe', 'tests/adapter-mvdm-host-out/wow/wow_class_address_owner_probe.c', ''),
     @('destroy_event_probe', 'tests/adapter-mvdm-host-out/wow/wow_window_destroy_event_probe.c', ''),
@@ -226,7 +229,7 @@ $lines.Add('build original-dialog-modal-lifetime: phony bin/wow_dialog_lifetime_
 $lines.Add('build bin/wow_dialog_creator_lifetime_fixture.exe: link obj/creator_lifetime_fixture.obj obj/original_dlgbegin.obj obj/string_owner.obj obj/string_conversion.obj obj/string_services.obj')
 $lines.Add('  libs = ntdll.lib')
 $lines.Add('build original-dialog-creator-lifetime: phony bin/wow_dialog_creator_lifetime_fixture.exe')
-$lines.Add('build bin/wow_dialog_modal_entry_fixture.exe: link obj/dialog_modal_fixture.obj obj/dialog_modal_adapter.obj')
+$lines.Add('build bin/wow_dialog_modal_entry_fixture.exe: link obj/dialog_modal_fixture.obj obj/dialog_modal_adapter.obj obj/dialog_modal_native_unreached.obj')
 $lines.Add('  libs = shell32.lib')
 $lines.Add('build dialog-modal-boundary: phony bin/wow_dialog_modal_entry_fixture.exe')
 $lines.Add('build bin/wow_control_string_fixture.exe: link obj/string_fixture.obj obj/string_owner.obj obj/string_conversion.obj obj/string_services.obj obj/string_prefix.obj obj/string_extent.obj')

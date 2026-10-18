@@ -337,7 +337,8 @@ BOOL xxxSleepTask(
 rescan:
             if (pwpi->nRecvLock >= pwpi->nSendLock) {
                 for (ptdb = pwpi->ptdbHead; ptdb; ptdb = ptdb->ptdbNext) {
-                    if (ptdb->nEvents > 0 &&
+                    /* DIVERGENCE(OPENNT-HOST-123): native-stack readiness. */
+                    if (ptdb->nEvents > 0 && wow_task_execution_ready(ptdb->pti) &&
                             !(hEvent == HEVENT_REMOVEME && ptdb->pti == pti)) {
                         pwpi->ptiScheduled = ptdb->pti;
                         break;
@@ -359,7 +360,9 @@ rescan:
                     // idle if no tasks are ready to run. Call the idle
                     // hook if there is one.
                     //
-                    if (fInputIdle &&
+                    /* DIVERGENCE(OPENNT-HOST-123): do not enter guest idle
+                     * hooks on a suspended native stack. */
+                    if (fInputIdle && wow_task_execution_ready(pti) &&
                             pwpi->ptiScheduled == NULL &&
                             IsHooked(pti, WHF_FOREGROUNDIDLE)) {
 
@@ -401,7 +404,9 @@ rescan:
              *  wowexec to service virtual hardware interrupts
              */
             } else if (ppi->W32PF_Flags & W32PF_WAKEWOWEXEC) {
-                if (pwpi->hEventWowExecClient == hEvent) {
+                /* DIVERGENCE(OPENNT-HOST-123): retain the real hardware
+                 * branch only on a ready continuation. */
+                if (pwpi->hEventWowExecClient == hEvent && wow_task_execution_ready(pti)) {
                     pwpi->ptiScheduled = pti;
                     ppi->W32PF_Flags &= ~W32PF_WAKEWOWEXEC;
                     InsertTask(ppi, pti->ptdb);
@@ -422,7 +427,8 @@ rescan:
             }
 
         } else if (pwpi->nTaskLock > 0 && pwpi->ptiScheduled == pti
-                   && pti->ptdb->nEvents > 0) {
+                   /* DIVERGENCE(OPENNT-HOST-123): no false self wake. */
+                   && pti->ptdb->nEvents > 0 && wow_task_execution_ready(pti)) {
              KeSetEvent(pwpi->ptiScheduled->pEventQueueServer,
                     EVENT_INCREMENT, FALSE);
         }
@@ -491,7 +497,9 @@ rescan:
             ClientDeliverUserApc();
         }
 
-    } while (pwpi->ptiScheduled != pti);
+    /* DIVERGENCE(OPENNT-HOST-123): selection alone cannot admit a still
+     * suspended native frame after a nested callback. */
+    } while (pwpi->ptiScheduled != pti || !wow_task_execution_ready(pti));
 
 
     /*

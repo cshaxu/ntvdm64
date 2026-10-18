@@ -143,12 +143,21 @@ INT_PTR WINAPI wow_title_modal(HINSTANCE module,LPCDLGTEMPLATEW resource,HWND ow
 }
 int WINAPI wow_title_message_box_a(HWND owner,LPCSTR text,LPCSTR caption,UINT type)
 {
-    DWORD policy,error,failure=ERROR_SUCCESS;int result;void *scope;
+    DWORD policy,error,failure=ERROR_SUCCESS;int result=0;void *scope;
+    wow_user_native_call call;BOOL entered=FALSE;
     if(!wow_title_policy(&policy))return 0;
     if(!wow_style_creation_begin(policy,&scope))return 0;
     __try {
+        if(!wow_user_native_call_begin(&call,NULL)){error=GetLastError();__leave;}
+        entered=TRUE;
         result=MessageBoxA(owner,text,caption,type);error=GetLastError();
-    } __finally {failure=wow_style_creation_end(scope);}
+    } __finally {
+        DWORD unwind_error=GetLastError();
+        __try {
+            if(entered && !wow_user_native_call_end(&call))
+                wow_user_native_call_failed("message-box-return",GetLastError());
+        } __finally {failure=wow_style_creation_end(scope);SetLastError(unwind_error);}
+    }
     if(failure){result=0;error=failure;}
     SetLastError(error);return result;
 }
@@ -158,11 +167,20 @@ int WINAPI wow_title_message_box_a(HWND owner,LPCSTR text,LPCSTR caption,UINT ty
  * and return contract while covering its internal dialog/control creation. */
 int WINAPI wow_style_shell_about_a(HWND owner,LPCSTR application,LPCSTR text,HICON icon)
 {
-    DWORD policy,error,failure=ERROR_SUCCESS;int result;void *scope;
+    DWORD policy,error,failure=ERROR_SUCCESS;int result=0;void *scope;
+    wow_user_native_call call;BOOL entered=FALSE;
     if(!wow_title_policy(&policy) || !wow_style_creation_begin(policy,&scope))return 0;
     __try {
+        if(!wow_user_native_call_begin(&call,NULL)){error=GetLastError();__leave;}
+        entered=TRUE;
         result=ShellAboutA(owner,application,text,icon);error=GetLastError();
-    } __finally {failure=wow_style_creation_end(scope);}
+    } __finally {
+        DWORD unwind_error=GetLastError();
+        __try {
+            if(entered && !wow_user_native_call_end(&call))
+                wow_user_native_call_failed("shell-about-return",GetLastError());
+        } __finally {failure=wow_style_creation_end(scope);SetLastError(unwind_error);}
+    }
     if(failure){result=0;error=failure;}
     SetLastError(error);return result;
 }

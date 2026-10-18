@@ -1,5 +1,41 @@
 # WOW32 DLL target component
 
+ADAPTER-WOW-078 reconnects the selected original class-unregistration client
+and the historical HWND input of the native thread/process query. Original
+wuclass/wuwind/walias bodies remain unchanged: UnregisterClassA enters the
+already imported ntcftxt/class removal chain, including client-menu release,
+instead of deleting only the native registration. GetWindowThreadProcessId
+normalizes short inputs with the existing original handles.c owner, then asks
+native USER for real identities; it neither invents task IDs nor walks a new
+registry. Caller data locking/last-error/output failure behavior is preserved.
+Published class-release failure after native unregister is terminal, not an
+ordinary retry of a consumed operation. Source audit and native-ABI evidence
+are in the T447 S4 record; whole-group verification/publication are pending.
+
+ADAPTER-WOW-077 stages the complete native-stack execution boundary: the
+existing bound THREADINFO carrier retains only a LIFO pointer to call/callback
+stack scopes, independently of its lifecycle allocator. No readiness vtable
+or second private task lookup is retained.
+The same call boundary restores caller-held USER locking even before InitTask;
+no guest execution frame is fabricated for resource-only entry. Queue setup
+uses this common path instead of retaining another lock-release pair.
+Native USER is the sole message/reply owner; no scope claims received SMS
+identity. Original taskman consumes the persistent eligibility input through
+OPENNT-HOST-123 and retains its original scheduling/event/lock algorithms.
+Native return and actual callback entry make that stack ready; callback return
+restores the previous native state. Synchronous same-thread calls inherit
+execution, while an actual different-task callback can park an owner already
+inside a native frame through original nonblocking SleepTask. The USER data
+lock protects all transitions; no pointer survives the matching call/retirement.
+Remove the old nominated-receiver/psmsSent pseudo-reply implementation in the
+same group. Pair nonblocking queue/enumeration/next-hook scopes, native modal
+calls, wait, exceptions and terminal cleanup. Original conversions are retained;
+there is no universal marshaller, hidden window, timer or new transport.
+Original sendmsg's private kernel delivery cannot be imported without creating
+a second transport; directly selected original taskman plus this finite host
+input is the first usable recovery rung. Group verification and publication
+are pending, not a proven S4 capability or new semantic exception.
+
 ADAPTER-WOW-032 / MVDM-HOST-DIV-340 relocates the existing default-off
 W32WndProc entry/return diagnostics into wow_user_thunk_scope.c. The original
 caller retains only raw scalar capture and two calls at the same boundaries.

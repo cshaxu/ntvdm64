@@ -197,6 +197,8 @@ typedef struct wait_test {
     DWORD target_id;
     wow_task_order_thread *target;
     unsigned lookups;
+    BOOL unblock_on_wait, want_idle_hook;
+    unsigned idle_calls;
 } wait_test;
 static void WINAPI release_lock(wow_task_order_thread *t)
 {
@@ -214,7 +216,10 @@ static void WINAPI check_death(wow_task_order_thread *t)
     wait_test *v=t->host_context;++v->checked;
 }
 static void WINAPI unexpected(wow_task_order_thread *t) { (void)t;CHECK(FALSE); }
-static BOOL WINAPI no_hook(wow_task_order_thread *t) { (void)t;return FALSE; }
+static BOOL WINAPI no_hook(wow_task_order_thread *t)
+{ wait_test *v=t->host_context;return v->want_idle_hook; }
+static void WINAPI observe_idle(wow_task_order_thread *t)
+{ wait_test *v=t->host_context;++v->idle_calls; }
 static void WINAPI receive(wow_task_order_thread *t)
 {
     wait_test *v=t->host_context;++v->received;
@@ -229,7 +234,14 @@ static NTSTATUS WINAPI wait_events(wow_task_order_thread *thread, DWORD count,
     const HANDLE *events, BOOL alertable)
 {
     DWORD result;
-    (void)thread;
+    wait_test *v=thread->host_context;
+    if(v->unblock_on_wait){
+        CHECK(thread->ppi->pwpi->ptiScheduled==NULL);
+        CHECK(thread->ppi->pwpi->CSOwningThread==NULL);
+        CHECK(thread->execution && !thread->execution->ready);
+        thread->execution->ready=TRUE;v->unblock_on_wait=FALSE;
+        CHECK(SetEvent(events[0]));
+    }
     /* Event-only mock for original scheduler mechanics, not the production
      * native message-queue bridge or a guest acceptance provider. */
     result = WaitForMultipleObjectsEx(count, events, FALSE, 3000, alertable);
@@ -239,7 +251,93 @@ static NTSTATUS WINAPI wait_events(wow_task_order_thread *thread, DWORD count,
     ExitProcess(98);
 }
 static const wow_task_host_ops test_ops={release_lock,acquire_lock,check_death,unexpected,
-    no_hook,unexpected,unexpected,receive,wait_events,find_thread};
+    no_hook,observe_idle,unexpected,receive,wait_events,find_thread};
+
+/* Real original selection with explicit readiness input. These stack-owned
+ * task records model scheduling only; native/guest integration is separate. */
+static void persistent_eligibility(void)
+{
+    wait_test test={0};
+    wow_task_order_shared shared={0};
+    wow_task_order_state state={0};
+    wow_task_order_process process={&state,&shared};
+    wow_task_order_entry a={NULL,1,3},b={NULL,10,1},c={NULL,10,1};
+    wow_task_order_thread ta={0},tb={0},tc={0};
+    wow_task_order_queue queues[3]={{0}};
+    wow_task_execution_scope native={0};
+    wow_task_order_thread *threads[3]={&ta,&tb,&tc};
+    wow_task_order_entry *entries[3]={&a,&b,&c};
+    unsigned i,mode;
+    state.pEventWowExec=state.hEventWowExecClient=CreateEventW(NULL,FALSE,FALSE,NULL);
+    CHECK(state.pEventWowExec!=NULL);
+    InitializeCriticalSection(&test.lock);
+    for(i=0;i<3;++i){
+        threads[i]->ppi=&process;threads[i]->ptdb=entries[i];
+        threads[i]->pcti=&queues[i];
+        threads[i]->host=&test_ops;threads[i]->host_context=&test;
+        threads[i]->TIF_flags=WOW_TASK_TIF_16BIT;
+        threads[i]->pEventQueueServer=CreateEventW(NULL,FALSE,FALSE,NULL);
+        CHECK(threads[i]->pEventQueueServer!=NULL);
+        entries[i]->pti=threads[i];InsertTask(&process,entries[i]);
+    }
+    shared.nEvents=5;ta.execution=&native;
+    state.ptiScheduled=state.CSOwningThread=&tb;
+    EnterCriticalSection(&test.lock);
+    CHECK(!xxxSleepTask(FALSE,(HANDLE)-1,&tb));
+    CHECK(state.ptiScheduled==&tc && a.nEvents==3 && shared.nEvents==5);
+    state.CSOwningThread=&tc;state.CSLockCount=0;
+    CHECK(!xxxSleepTask(FALSE,(HANDLE)-1,&tc));
+    CHECK(state.ptiScheduled==&tb && a.nEvents==3 && shared.nEvents==5);
+    native.ready=TRUE;state.CSOwningThread=&tb;state.CSLockCount=0;
+    CHECK(!xxxSleepTask(FALSE,(HANDLE)-1,&tb));
+    CHECK(state.ptiScheduled==&ta && a.nEvents==3 && shared.nEvents==5);
+    /* Task locking retains its selected owner, but a suspended native
+     * stack must not receive a fabricated self wake. */
+    native.ready=FALSE;state.nTaskLock=1;
+    state.CSOwningThread=&ta;state.CSLockCount=0;
+    CHECK(ResetEvent(ta.pEventQueueServer));
+    CHECK(!xxxSleepTask(FALSE,(HANDLE)-1,&ta));
+    CHECK(state.ptiScheduled==&ta && state.nTaskLock==1 && a.nEvents==3);
+    CHECK(WaitForSingleObject(ta.pEventQueueServer,0)==WAIT_TIMEOUT);
+    native.ready=TRUE;xxxDirectedYield((DWORD)-1,&ta);
+    CHECK(state.CSOwningThread==&ta && state.nTaskLock==1 && shared.nEvents==5);
+    LeaveCriticalSection(&test.lock);
+    for(i=0;i<3;++i){
+        CHECK(CloseHandle(threads[i]->pEventQueueServer));
+        if(threads[i]->apEvent)CHECK(HeapFree(GetProcessHeap(),0,threads[i]->apEvent));
+    }
+    DeleteCriticalSection(&test.lock);
+    CHECK(CloseHandle(state.pEventWowExec));
+    for(mode=0;mode<2;++mode){
+        wait_test wait={0};wow_task_order_shared globals={0};
+        wow_task_order_state scheduler={0};
+        wow_task_order_process p={&scheduler,&globals};
+        wow_task_order_entry entry={NULL,10,1};
+        wow_task_order_queue queue={0};wow_task_order_thread thread={0};
+        wow_task_execution_scope frame={0};
+        HANDLE hardware=CreateEventW(NULL,FALSE,FALSE,NULL);
+        InitializeCriticalSection(&wait.lock);
+        thread.ppi=&p;thread.ptdb=&entry;thread.pcti=&queue;
+        thread.host=&test_ops;thread.host_context=&wait;
+        thread.TIF_flags=WOW_TASK_TIF_16BIT;
+        thread.pEventQueueServer=CreateEventW(NULL,FALSE,FALSE,NULL);
+        entry.pti=&thread;scheduler.ptdbHead=&entry;
+        scheduler.ptiScheduled=scheduler.CSOwningThread=&thread;
+        scheduler.pEventWowExec=scheduler.hEventWowExecClient=hardware;
+        globals.nEvents=1;thread.execution=&frame;wait.unblock_on_wait=TRUE;
+        wait.want_idle_hook=TRUE;
+        if(mode)p.W32PF_Flags=0x10000;
+        EnterCriticalSection(&wait.lock);
+        CHECK(!xxxSleepTask(mode?FALSE:TRUE,mode?hardware:NULL,&thread));
+        CHECK(wait.released==1 && wait.acquired==1 && wait.idle_calls==0);
+        CHECK(entry.nEvents==0 && globals.nEvents==0 && scheduler.CSOwningThread==&thread);
+        LeaveCriticalSection(&wait.lock);
+        CHECK(CloseHandle(thread.pEventQueueServer));CHECK(CloseHandle(hardware));
+        CHECK(HeapFree(GetProcessHeap(),0,thread.apEvent));
+        DeleteCriticalSection(&wait.lock);
+    }
+    printf("WOW_ORIGINAL_TASK_ELIGIBILITY errors=%u persistent=1 events_preserved=1 lock=1 idle=1 hardware=1\n",errors);
+}
 static DWORD WINAPI interrupt_thread(void *arg)
 {
     wait_test *v=arg;
@@ -710,6 +808,7 @@ int __cdecl main(void)
     same_worker_messages();
     destruction();
     sleeping();
+    persistent_eligibility();
     directed();
     native_synchronous_send(FALSE, FALSE);
     native_synchronous_send(TRUE, FALSE);

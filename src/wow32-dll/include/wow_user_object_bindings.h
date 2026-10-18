@@ -34,6 +34,9 @@ HWND WINAPI wow_user_window_full_handle(wow_user_object_table *, WORD);
 /* Original message-conversion contract, including dead/non-window fallback.
  * Not a replacement for the strict lookup above at ownership boundaries. */
 DWORD WINAPI wow_user_full_handle(wow_user_object_table *, WORD);
+/* Typed native HWND input. Short forms consume the same original handle
+ * publication, never a new native sample; caller serializes the USER view. */
+HWND WINAPI wow_user_window_native_handle(HWND);
 /* Call-local public-USER relationship sample. No WW, task association or
  * native ownership is created. Identities remain native until publication;
  * the desktop must be translated by the existing guest-view owner. */

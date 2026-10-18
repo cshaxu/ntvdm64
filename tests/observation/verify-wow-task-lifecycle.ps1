@@ -581,6 +581,10 @@ if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource
     !($fixtureOutput -match '^WOW_REMOVED_MESSAGE_CCPU consumed_once=1 restored=1 no_replay=1$')) {
     throw 'Native removed-message result was lost or replayed'
 }
+if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource') -and
+    !($fixtureOutput -match '^WOW_RESOURCE_EXECUTION_SCOPE ready=1 restored=1 no_scheduler=1$')) {
+    throw 'Native resource-only execution scope was not preserved independently of InitTask'
+}
 if ($Case -eq 'graph-snapshot' -and
     !($fixtureOutput -match '^WOW_GRAPH_SNAPSHOT_CCPU errors=0 fresh=1 child_id=1 dead_withdrawal=1 retained_reader=1$')) {
     throw 'Whole snapshot failed fresh publication, relation copying or retained-reader retirement'
@@ -595,6 +599,9 @@ if ($Case -eq 'window-borrow' -and $StyleDll -and
     throw 'Styled real-CCPU terminal cleanup did not prove actual attachment, neutralization and GDI retirement'
 }
 if ($Case -eq 'graph-snapshot') {
+    if (!($fixtureOutput -match '^WOW_CLASS_RETIREMENT_FAILURE_CCPU errors=0 native_removed=1 stale_projection_rejected=1 terminal=1$')) {
+        throw 'Irreversible native class removal did not reject stale projection as terminal'
+    }
     foreach ($marker in @('WOW_NATIVE_ENTRY_FAILURE_CCPU','WOW_CALLBACK_OWNER_FAILURE_CCPU','WOW_CALLBACK_BORROW_FAILURE_CCPU',
             'WOW_WINDOW_CACHE_FAILURE_CCPU','WOW_DIALOG_CACHE_FAILURE_CCPU')) {
         if (!($fixtureOutput -match ('^' + $marker + ' errors=0 consumed_once=1 worker_exit=c0000420$'))) {
@@ -633,6 +640,11 @@ if ($Case -eq 'graph-snapshot') {
     foreach ($held in 0,1) {
         if (!($fixtureOutput -match "^WOW_PROPERTY_DISCOVERY_CCPU errors=0 held=$held atom=1 string=1 signed=1 stop=1 exception=1 removal=1 invalid=1$")) {
             throw "Property callback publication or entry lock restoration failed (held=$held)"
+        }
+        foreach ($dead in 0,1) {
+            if (!($fixtureOutput -match "^WOW_WINDOW_THREAD_QUERY_CCPU errors=0 held=$held dead=$dead full=1 unsigned16=1 signed16=1 native_output=1$")) {
+                throw "Historical window identity query/output/lock contract failed (held=$held dead=$dead)"
+            }
         }
     }
 }
@@ -836,6 +848,14 @@ if ($Case -eq 'menu-cleanup' -and
 if ($Case -eq 'task-order' -and
     !($fixtureOutput -match '^WOW_ORIGINAL_TASK_ORDER errors=0(?:\s|$)')) {
     throw 'Task order fixture exited without its successful completion marker'
+}
+if ($Case -eq 'task-order' -and
+    !($fixtureOutput -match '^WOW_ORIGINAL_TASK_ELIGIBILITY errors=0 persistent=1 events_preserved=1 lock=1 idle=1 hardware=1$')) {
+    throw 'Persistent native-stack eligibility did not preserve original selection/count/lock/hardware behavior'
+}
+if ($Case -in @('native-send','native-reply','native-nested','native-seen','native-identity','native-foreign') -and
+    !($fixtureOutput -match '^WOW_NATIVE_EXECUTION_SCOPES errors=0 inline=1 nested=1 wait=1 unbind_rejected=1$')) {
+    throw 'Actual native execution scopes did not preserve nested eligibility and retirement refusal'
 }
 if ($Case -eq 'graph-snapshot' -and
     !($fixtureOutput -match '^WOW_EXPORTED_CALLBACK_REJECT errors=0 output_untouched=1 no_guest_entry=1$')) {
