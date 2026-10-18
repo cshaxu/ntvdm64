@@ -4,22 +4,21 @@
 
 ## Current Work
 
-P19 repairs short-HWND dialog/control/guest entries (ADAPTER-WOW-076).
-All13 are published/hash-matched; only WOW32 changes from P18.
-Native coverage:18 unchanged passes plus2 strict complete row replays after
-OS slot-acquisition failures, not uninterrupted20/20. Original30 and nine
-real guest probes pass. Direct dialogs prove shared/private EDIT DS, deferred
-modal exit, rollback and5 allocation/free pairs per mode before task retirement.
+P20 retains P19's published13 runtime identities; both destinations hash-match.
+Current native20/20, original30, dedicated menu-resource and all9 real guest
+groups pass with documented dependency reuse. Word-break/nested USER16 calls
+and original dialog TAB/self-dispatch/default/Escape now have actual proof.
+Direct dialogs retain shared/private DS, modal exit, rollback and5 resource
+pairs per mode before task retirement.19 newline-only mirrors are restored.
 Latest old/new default GDI16/16 passes do not prove earlier16/19 cause fixed.
-P19 WINMINE/SOL gameplay/exit, WRITE startup and DOS17x2 pass;
+P20 WINMINE/SOL gameplay/exit, WRITE startup and DOS17x2 pass;
 both-width deployed DLL boundaries pass. WRITE editing/save/full exit unproved.
-S3/T447 open; guest/ZIP/mirror unchanged. See the source ledger for exact runs.
-Chronology below is historical; later evidence supersedes intermediate unrun
-markers, not whole-S3 proof obligations.
+S3/T447 open; guest/ZIP unchanged; no added logical mirror diff.
+Selected278-file audit has191 exact/87 content-review rows, no format-only
+rows. Remaining register/local-marker/minimal-placement review is finite.
+Chronology below is historical; see the source ledger for superseding proof.
 
-Dialog-context-r2 passes scoped metrics/class atoms, temporary font lifetime,
-outer-context restoration and cleanup without preference capture. These
-boundary doubles supplement, not replace, real original-body/guest evidence.
+Dialog-context-r2's scoped boundary-double evidence remains in the source ledger.
 Production call tracing additionally found the modal title-policy entry
 bypasses the tested creation wrapper. Its original clres/manager path now
 establishes/restores the same dialog context across the modal loop; this
@@ -411,7 +410,7 @@ is not established by these handle macros.
 
 ## Current Technical Baseline
 
-P19 changes only WOW32; the other12 images retain P18 identities.
+P20 source/test reconciliation retains P19's13 runtime image identities.
 All13 match the tested candidate at assets/release and O:/winnt/system32.
 Prior P18 (828dd54f9) and27 recoverable backups are retained under
 build/M0-T447/S3/published-dialog-carrier-r1; deployed boundary passes both widths.

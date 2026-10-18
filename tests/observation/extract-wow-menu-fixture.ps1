@@ -33,4 +33,22 @@ if ($start -lt 0 -or $end -le $start) { throw 'Menu converter boundary changed.'
     $macros + $resource.Substring($start, $end-$start), [Text.Encoding]::ASCII)
 [IO.File]::WriteAllText((Join-Path $output 'original-menu-thunks.inc'),
     ($parts -join "`r`n"), [Text.Encoding]::ASCII)
+# Controlled resource inputs are namespaced together with only their original
+# clients. Never shadow the provider's real W32 callbacks at archive link time.
+$clientPath=Join-Path $root 'src/opennt-host/windows/core/ntuser/client/clmenu.c'
+$coverPath=Join-Path $root 'src/opennt-host/windows/core/ntuser/client/clres.c'
+$client=[IO.File]::ReadAllText($clientPath)
+$cover=[IO.File]::ReadAllText($coverPath)
+$start=$client.IndexOf('HMENU CommonLoadMenu(')
+if($start -lt 0){throw 'Original menu resource-client boundary changed'}
+$clientBodies=$client.Substring($start)
+$start=$cover.IndexOf('HANDLE WOWFindResourceExWCover(')
+if($start -lt 0){throw 'Original Unicode resource-cover boundary changed'}
+$end=[regex]::Match($cover.Substring($start),'(?m)^#endif\r?$')
+if(!$end.Success){throw 'Original resource-cover closing boundary changed'}
+$coverBody=$cover.Substring($start,$end.Index)
+[IO.File]::WriteAllText((Join-Path $output 'original-menu-resource-inputs.inc'),
+    "/* Microsoft OpenNT source-owned bodies; see source-inputs below. */`r`n"+$coverBody+$clientBodies,[Text.Encoding]::ASCII)
+Get-FileHash -LiteralPath $clientPath,$coverPath|
+    Export-Csv -NoTypeInformation (Join-Path $output 'menu-resource-input-source-sha256.csv')
 'WOW_MENU_THUNKS_AND_CONVERTER_EXACT_ORIGINAL'

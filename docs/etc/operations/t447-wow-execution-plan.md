@@ -53,6 +53,24 @@ the deployed both-width DLL boundary. Only WOW32 changes from P18. See the
 source ledger; this
 neither closes S3 nor transfers its remaining evidence reconciliation to S4.
 
+Post-P19 reconciliation stays within that fixed inventory: add actual EDIT
+word-break/nested callback/removal and original dialog keyboard/default-button
+producer assertions to the existing probes, reconcile MENU-01's dedicated
+resource/owner-draw fixture, and pair selected translation units plus their
+Ninja header dependencies with pinned originals. Restore newline-only mirror
+differences to exact bytes; content changes still require individual register
+and source review. The source ledger's fixed-chain map names the remaining
+selected-pair/local-marker review, rather than an open-ended new foundation.
+Current grouped runtime acceptance does not by itself close that source audit.
+
+P20's complete acceptance/product/deployed-boundary gates pass with unchanged
+P19 images at both release destinations.19 files are restored to pinned exact
+newline bytes; the full selected278-file audit has191 exact and87 content-review
+rows. New real callbacks/navigation and the dedicated parser/owner-draw fixture
+are verified without replacing production algorithms. S3 remains active for
+the specifically named register/local-marker/minimal-placement review; this
+is not S3 closure, a new S admission or transfer of a foundation defect to S4.
+
 Owner clarification: exhaust source reuse and bounded semantic-preserving
 adaptation before proposing a compatibility exception. Difficulty, missing
 proof or a simpler reduced implementation is not evidence of impossibility.

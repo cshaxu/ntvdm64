@@ -110,11 +110,11 @@ try {
         # Decode short failure reports too: the last guest phase and exact
         # assertion identify the boundary, not an observer timeout guess.
         $controlBytes=[IO.File]::ReadAllBytes("$root/guest-report.bin")
-        if($controlBytes.Length % 28){throw 'Truncated control witness record'}
+        if($controlBytes.Length % 34){throw 'Truncated control witness record'}
         $controlRecords=@()
         $controlNames=@('phase','errors','created','button','single','multi','list',
-            'combos','menus','destroyed','leaving','task')
-        for($offset=0;$offset -lt $controlBytes.Length;$offset+=28){
+            'combos','menus','destroyed','leaving','task','wordCalls','wordNested','wordActions')
+        for($offset=0;$offset -lt $controlBytes.Length;$offset+=34){
             if([Text.Encoding]::ASCII.GetString($controlBytes,$offset,4) -ne 'CTL1'){
                 throw 'Bad control witness signature'
             }
@@ -128,10 +128,10 @@ try {
     }
     if($Case -eq 'dialog' -and (Test-Path "$root/guest-report.bin")){
         $dialogBytes=[IO.File]::ReadAllBytes("$root/guest-report.bin")
-        if($dialogBytes.Length % 34){throw 'Incomplete dialog DS report'}
+        if($dialogBytes.Length % 42){throw 'Incomplete dialog DS report'}
         $dialogRecords=@()
-        $names=@('phase','errors','initialized','terminated','text','shared','local','modal','failed','killed','leaving','task','ds1','ds2','deferred')
-        for($offset=0;$offset -lt $dialogBytes.Length;$offset+=34){
+        $names=@('phase','errors','initialized','terminated','text','shared','local','modal','failed','killed','leaving','task','ds1','ds2','deferred','tabFocus','defaultCommands','cancelCommands','editKeys')
+        for($offset=0;$offset -lt $dialogBytes.Length;$offset+=42){
             if([Text.Encoding]::ASCII.GetString($dialogBytes,$offset,4) -ne 'DLG1'){throw 'Bad dialog DS signature'}
             $row=[ordered]@{}
             for($i=0;$i -lt $names.Count;$i++){$row[$names[$i]]=[BitConverter]::ToUInt16($dialogBytes,$offset+4+2*$i)}
@@ -144,12 +144,13 @@ try {
     }
     $bytes=[IO.File]::ReadAllBytes("$root/guest-report.bin")
     if($Case -eq 'dialog'){
-        if($bytes.Length -ne 272 -or ($dialogRecords.phase -join ',') -ne '0,1,2,3,4,5,6,7' -or
+        if($bytes.Length -ne 336 -or ($dialogRecords.phase -join ',') -ne '0,1,2,3,4,5,6,7' -or
                 @($dialogRecords|Where-Object errors -ne 0).Count){throw 'Original dialog guest phase/assertion failure'}
         $last=$dialogRecords[-1]
         if($last.initialized -ne 6 -or $last.text -ne 6 -or $last.shared -ne 4 -or
             $last.local -ne 2 -or $last.modal -ne 2 -or $last.failed -ne 1 -or
-            $last.killed -ne 1 -or $last.leaving -ne 1 -or $last.deferred -ne 2 -or !$last.task -or !$last.ds1 -or
+            $last.killed -ne 1 -or $last.leaving -ne 1 -or $last.deferred -ne 2 -or
+            $last.tabFocus -ne 2 -or $last.defaultCommands -ne 2 -or $last.cancelCommands -ne 2 -or $last.editKeys -ne 2 -or !$last.task -or !$last.ds1 -or
             $last.ds1 -ne $last.ds2 -or @($dialogRecords|Where-Object task -ne $last.task).Count){
             throw 'Original resource dialog/EDIT DS/modal/rollback/destruction contract incomplete'
         }
@@ -168,12 +169,13 @@ try {
         }
         "PASS real Win16 resource modeless/modal dialogs, shared/private EDIT DS, initialization parameter, text/CRLF, failed-child rollback, init destruction compatibility and task exit ($Win16Style)"|Set-Content "$root/result.txt"
     }elseif($Case -eq 'controls'){
-        if($bytes.Length -ne 252 -or ($controlRecords.phase -join ',') -ne '0,1,2,3,4,5,6,7,8' -or
+        if($bytes.Length -ne 306 -or ($controlRecords.phase -join ',') -ne '0,1,2,3,4,5,6,7,8' -or
                 @($controlRecords|Where-Object errors -ne 0).Count){throw 'Control guest phase/assertion failure'}
         $last=$controlRecords[-1]
         if($last.created -ne 10 -or $last.button -ne 1 -or $last.single -ne 1 -or
                 $last.multi -ne 1 -or $last.list -ne 1 -or $last.combos -ne 3 -or
                 $last.menus -ne 1 -or $last.destroyed -ne 8 -or $last.leaving -ne 2 -or
+                !$last.wordCalls -or $last.wordNested -ne $last.wordCalls -or ($last.wordActions -band 3) -ne 3 -or
                 !$last.task -or @($controlRecords|Where-Object task -ne $last.task).Count){
             throw 'Actual Win16 control/normal-destroy/task-exit contract incomplete'
         }
@@ -182,6 +184,10 @@ try {
         $task8='{0:X8}' -f [int]$last.task
         $complete=[regex]::Matches($trace,'(?m)^\d+ TaskRetirement .*task='+$task8+' stage=complete status=0\r?$')
         if($complete.Count -ne 1){throw 'Control witness task did not retire exactly once'}
+        $words=[regex]::Matches($trace,'(?im)^\d+ after ret=0036 .*task='+$task4+' .*\r?$')
+        if($words.Count -ne $last.wordCalls -or @($words|Where-Object Index -gt $complete[0].Index).Count){
+            throw 'Original W32EditNextWord callbacks disagree with guest execution or retirement'
+        }
         # Actual original EDIT LOCAL*16 callbacks, not merely native controls
         # with a similar appearance. Original wow.h RET_LOCALALLOC/FREE=6/11.
         foreach($ret in @('0006','000B')){

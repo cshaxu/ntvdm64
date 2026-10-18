@@ -165,6 +165,43 @@ settext single,alpha_beta
 send single,0x401,0,5,0         ; EM_SETSEL, MAKELONG(start,end)
 send single,0x412,0,ds,new_text-data ; EM_REPLACESEL
 gettext single,new_beta
+; Real original EDIT -> W32EditNextWord -> Win16 callback, with reentry.
+push cs
+push word word_break-code
+push word [instance-data]
+api 1,51                       ; MakeProcInstance
+mov [word_proc-data],ax
+mov [word_proc-data+2],dx
+or ax,dx
+require 0x21
+send single,0x420,0,[word_proc-data+2],[word_proc-data]
+send single,0x421,0,0,0
+cmp dx,[word_proc-data+2]
+jne failed
+cmp ax,[word_proc-data]
+jne failed
+send single,0x203,0,1,1         ; WM_LBUTTONDBLCLK selects callback's word
+send single,0x202,0,1,1         ; release original mouse capture
+send single,0x400,0,0,0         ; EM_GETSEL => [0,7]
+expect 0,0x22
+cmp dx,7
+jne failed
+cmp word [word_calls-data],0
+je failed
+mov ax,[word_calls-data]
+cmp ax,[word_nested-data]
+jne failed
+mov ax,[word_actions-data]
+and ax,3
+expect 3,0x23                  ; WB_LEFT and WB_RIGHT
+send single,0x420,0,0,0
+send single,0x421,0,0,0
+expect 0,0x24
+test dx,dx
+jnz failed
+push word [word_proc-data+2]
+push word [word_proc-data]
+api 1,52                       ; FreeProcInstance after removal
 inc word [single_ok-data]
 mov word [phase-data],2
 call checkpoint
@@ -346,6 +383,65 @@ mov ax,0x4c02
 int 0x21
 .ok:
 ret
+; Win16 EDITWORDBREAKPROC: far text, int start, int count, int action.
+word_break:
+push bp
+mov bp,sp
+push ds
+push es
+push si
+push di
+push bx
+mov ds,ax
+inc word [word_calls-data]
+cmp word [bp+8],7
+jne .bad
+cmp word [bp+10],7
+ja .bad
+les di,[bp+12]
+mov si,new_beta-data
+mov cx,7
+.text:
+mov al,[es:di]
+cmp al,[si]
+jne .bad
+inc si
+inc di
+loop .text
+send button,0x400,0,0,0         ; nested USER16 query inside original EDIT
+cmp ax,1
+jne .bad
+inc word [word_nested-data]
+mov ax,[bp+6]
+cmp ax,0
+je .left
+cmp ax,1
+je .right
+cmp ax,2
+jne .bad
+or word [word_actions-data],4
+xor ax,ax
+jmp .return
+.left:
+or word [word_actions-data],1
+xor ax,ax
+jmp .return
+.right:
+or word [word_actions-data],2
+mov ax,7
+jmp .return
+.bad:
+or word [errors-data],0x2000
+xor ax,ax
+.return:
+xor dx,dx
+pop bx
+pop di
+pop si
+pop es
+pop ds
+pop bp
+retf 10
 code_end:
 dw calls
 %assign call_number 1
@@ -370,9 +466,13 @@ menus_ok: dw 0
 destroyed: dw 0
 leaving: dw 0
 task: dw 0
+word_calls: dw 0
+word_nested: dw 0
+word_actions: dw 0
 report_end:
 instance: dw 0
 saved_proc: dd 0
+word_proc: dd 0
 file: dw -1
 null_window: dw 0
 owner: dw 0

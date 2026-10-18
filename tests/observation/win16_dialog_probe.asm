@@ -107,9 +107,10 @@ require 0x11
 mov [dialog-data],ax
 cmp word [errors-data],0
 jne failed
+call validate_keyboard
 mov bx,[terminated-data]
 mov [before_term-data],bx
-push ax
+push word [dialog-data]         ; validation APIs may overwrite AX
 api 2,53
 require 0x12
 push word [dialog-data]
@@ -227,6 +228,18 @@ jmp .done
 .init:
 cmp word [bp+12],0x111
 jne .initialize
+cmp word [mode-data],2
+ja .modal_command
+cmp word [bp+10],1
+je .default_command
+cmp word [bp+10],2
+jne .done
+inc word [cancel_commands-data]
+jmp .handled
+.default_command:
+inc word [default_commands-data]
+jmp .handled
+.modal_command:
 cmp word [bp+10],1
 jne .done
 cmp word [mode-data],3
@@ -277,14 +290,111 @@ jmp .done
 .bad:
 or word [errors-data],0x4000
 .done:
+xor ax,ax
+jmp .return
+.handled:
+mov ax,1
+.return:
+xor dx,dx
 pop bx
 pop di
 pop si
 pop ds
 pop bp
-xor ax,ax
-xor dx,dx
 retf 10
+
+; MSG16 -> original IsDialogMessage/default-button, no physical input.
+validate_keyboard:
+push word [dialog-data]
+push word 8                    ; SW_SHOWNA on private observer desktop
+api 2,42
+push word [dialog-data]
+push word 1
+api 2,91
+test ax,ax
+jz .bad
+mov [default_button-data],ax
+push word [dialog-data]
+push word 0x400                ; DM_GETDEFID
+push word 0
+push word 0
+push word 0
+api 2,111
+cmp ax,1
+jne .bad
+cmp dx,0x534b
+jne .bad
+push word [edit1-data]
+api 2,22
+api 2,23
+cmp ax,[edit1-data]
+jne .bad
+mov [message-data],ax
+mov word [message-data+4],9
+push word [dialog-data]
+push ds
+push word message-data
+api 2,90
+test ax,ax
+jz .bad
+api 2,23
+cmp ax,[edit2-data]
+jne .bad
+inc word [tab_focus-data]
+push word [edit2-data]
+push word 0x87                 ; original ML EDIT: DLGC_WANTALLKEYS
+push word 0
+push word 0
+push word 0
+api 2,111
+and ax,4
+cmp ax,4
+jne .bad
+mov ax,[edit2-data]
+mov [message-data],ax
+mov word [message-data+4],13
+push word [dialog-data]
+push ds
+push word message-data
+api 2,90
+; Original manager translates/dispatches this key itself and returns TRUE,
+; without invoking the default button (dlgmgr2.c's final return path).
+test ax,ax
+jz .bad
+mov ax,[default_commands-data]
+inc ax
+cmp ax,[mode-data]
+jne .bad
+inc word [edit_keys-data]
+push word [edit1-data]
+api 2,22
+api 2,23
+cmp ax,[edit1-data]
+jne .bad
+mov [message-data],ax
+push word [dialog-data]
+push ds
+push word message-data
+api 2,90
+test ax,ax
+jz .bad
+mov ax,[default_commands-data]
+cmp ax,[mode-data]
+jne .bad
+mov word [message-data+4],27
+push word [dialog-data]
+push ds
+push word message-data
+api 2,90
+test ax,ax
+jz .bad
+mov ax,[cancel_commands-data]
+cmp ax,[mode-data]
+jne .bad
+ret
+.bad:
+or word [errors-data],0x1000
+jmp failed
 
 validate_dialog:
 push word [dialog-data]
@@ -385,12 +495,17 @@ task: dw 0
 ds1: dw 0
 ds2: dw 0
 deferred: dw 0
+tab_focus: dw 0
+default_commands: dw 0
+cancel_commands: dw 0
+edit_keys: dw 0
 report_end:
 instance: dw 0
 procedure: dd 0
 dialog: dw 0
 edit1: dw 0
 edit2: dw 0
+default_button: dw 0
 before_init: dw 0
 before_term: dw 0
 mode: dw 0
@@ -398,10 +513,13 @@ file: dw -1
 filename: db 'DLGPROBE.BIN',0
 replacement: db 'Edited',0
 buffer: times 32 db 0
+message: dw 0,0x100,9
+dd 1,0
+dw 0,0
 data_end:
 %macro template_body 2
 dd 0x80c80080+%1
-db 2
+db 3
 dw 0,0,160,60
 db 0,0,'Original dialog DS',0
 dw 5,5,140,14,100
@@ -415,6 +533,9 @@ db 'NoSuchDialogControl447',0
 db 0x81
 %endif
 db 'one',13,10,'two',0,0
+dw 5,50,50,10,1
+dd 0x50010001                 ; child visible tabstop default pushbutton
+db 0x80,'OK',0,0
 %endmacro
 align 16,db 0
 shared_template:

@@ -1,3 +1,15 @@
+#ifdef WOW_RESOURCE_BOUND_FIXTURE
+/* Controlled inputs may not replace real callbacks pulled from wres32.obj.
+ * Only the original resource-client copies below consume these names. The
+ * production parser/native-menu/runtime owners remain selected unchanged. */
+#define W32FindResource menu_resource_FindResource
+#define W32LoadResource menu_resource_LoadResource
+#define W32LockResource menu_resource_LockResource
+#define W32UnlockResource menu_resource_UnlockResource
+#define WOWFindResourceExWCover menu_resource_FindResourceExWCover
+#define wow_user_load_menuA menu_resource_LoadMenuA
+#define wow_user_load_menuW menu_resource_LoadMenuW
+#endif
 #include "wow_menu_resource_bindings.h"
 #include "wow_private_user_compat.h"
 #include "wow_menu_native_bindings.h"
@@ -202,4 +214,20 @@ int __cdecl wow_original_menu_resource_fixture(void)
     return result;
 }
 #endif
+#endif
+
+#ifdef WOW_RESOURCE_BOUND_FIXTURE
+/* Exact source-selected clients/Unicode cover, generated with provenance by
+ * extract-wow-menu-fixture.ps1; no test-defined resource-loading algorithm. */
+#include "wow_bitmap_bindings.h"
+#define LoadMenuA wow_user_load_menuA
+#define LoadMenuW wow_user_load_menuW
+#define CommonLoadMenu menu_resource_CommonLoadMenu
+#define FINDRESOURCEA(module, name, type) W32FindResource(module, type, name, 0)
+#define FINDRESOURCEW(module, name, type) WOWFindResourceExWCover(module, (LPCWSTR)(type), name, 0)
+#define LOADRESOURCE W32LoadResource
+#define LOCKRESOURCE W32LockResource
+#define UNLOCKRESOURCE W32UnlockResource
+#define WCSToMB(text, count, output, capacity, allocate) WCSToMBEx(0, text, count, output, capacity, allocate)
+#include "original-menu-resource-inputs.inc"
 #endif

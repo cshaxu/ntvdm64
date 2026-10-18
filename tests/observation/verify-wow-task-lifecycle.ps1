@@ -366,13 +366,16 @@ if ($Case -eq 'window-reclaim') {
     $parentObjects += Join-Path $out 'page-reclaim.obj'
 }
 if ($Case -eq 'menu-resource') {
-    # Controlled W32 resource inputs only in this separate executable. Ordinary
-    # window-borrow acceptance continues to link production resource callbacks.
+    # Namespace controlled W32 inputs and their exact original resource-client
+    # copies. Both this executable and ordinary window-borrow keep production
+    # callbacks linked, with no archive-order replacement or FORCE:MULTIPLE.
+    & (Join-Path $repo 'tests/observation/extract-wow-menu-fixture.ps1') -BuildRoot $out.Substring($repo.Length + 1) >> "$out\build.log" 2>&1
     $resourceFixture = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\resource-fixture.obj" "'+$repo+'\tests\adapter-mvdm-host-out\wow\wow_original_menu_resource_fixture.c"')
     if ($resourceFixture -eq $compile) { throw 'Resource fixture substitution failed' }
-    Invoke-Build ($resourceFixture.Replace('/Gz', '/Gd') + ' /DWOW_RESOURCE_BOUND_FIXTURE')
+    # Original cover is /Gz like its WINAPI declaration; the fixture's
+    # externally called entry already declares __cdecl.
+    Invoke-Build ($resourceFixture + ' /DWOW_RESOURCE_BOUND_FIXTURE /I"'+$out+'"')
     $parentObjects += Join-Path $out 'resource-fixture.obj'
-    & (Join-Path $repo 'tests/observation/extract-wow-menu-fixture.ps1') -BuildRoot $out.Substring($repo.Length + 1) >> "$out\build.log" 2>&1
     $thunkFixture = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\menu-thunk-fixture.obj" "'+$repo+'\tests\adapter-mvdm-host-out\wow\wow_original_menu_thunk_fixture.c"')
     if ($thunkFixture -eq $compile) { throw 'Menu thunk fixture substitution failed' }
     # Extracted original bodies call the production /Gz helpers (including

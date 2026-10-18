@@ -14185,3 +14185,214 @@ removing prior assertions. Original30 and actual nine guest groups provide
 distinct proof levels. S3/T447 remain open for finite fixed-chain evidence
 reconciliation; S4 mixed message/reply/reentry and S5 per-task termination
 remain assigned to their existing stages, not silently accepted here.
+
+### Post-P19 fixed S3 evidence reconciliation: behavior callback entrances
+
+Previous goal turn delivered progress:56f8288e1 is pushed and all13 published
+images match. Reconcile the fixed S3 inventory against selected sources,
+not historical staged/unrun prose. Two concrete proof gaps remain in the
+existing EDIT/dialog row, with no production omission established:
+
+- Word-break: original wmsgem.c encodes/decodes EM_SET/GETWORDBREAKPROC;
+  editec.c ECWord/NextWordCallBack and usercli.h CALLWORDBREAKPROC select
+  the one registered W32EditNextWord callback. Original wcall32.c marshals
+  PARMWBP, CallBack16 RET_SETWORDBREAKPROC54 enters kernel31/wow16cal.asm's
+  WOW16WordBreakProc, then returns through the existing execution owner.
+  The original-memory fixture proves macro arguments with mocks only.
+  Existing actual controls probe changes text but never installs that callback.
+- Keyboard: original WU32IsDialogMessage converts MSG16, the scoped
+  wow_dialog_messageA/W entry invokes original dlgmgr2.c. Its TAB/default-ID/
+  RETURN/ESCAPE branches retain original navigation/default-button behavior.
+  Existing original fixtures prove boundary/lifetime cases, while the actual
+  resource dialog probe posts WM_COMMAND directly; that does not prove the
+  keyboard/default-button producer.
+
+Extend the two independently authored probes as one bounded acceptance group:
+real MakeProcInstance/EM_SET/GETWORDBREAKPROC, copied text/action validation,
+nested USER16 Button query inside the callback, resulting selection and removal;
+resource default Button plus modeless MSG16 TAB/RETURN/ESCAPE and exact focus/
+command assertions. Keep all prior controls/dialog/report/lifetime assertions.
+Run the complete nine real guest groups in all3 modes on immutable P19, with
+source/artifact identity freezes; do not rebuild unchanged production. This
+is missing proof for existing S3 requirements, not permission to replace the
+original algorithms, change guest media, expand S4 or claim all keyboard input.
+
+S3-behavior-guest-r1 does not execute products: all nine attempts stop on
+sandbox denial creating the established O:/tmp isolated stage. R2 runs with
+that existing directory authorization. Actual controls pass all3 modes,
+each recording3 word callbacks,3 nested Button queries, action mask7 and
+correct selection/removal. Dialogs pass TAB but reject the witness's expected
+Return-to-default from multiline EDIT. Source editml.c WM_GETDLGCODE always
+includes DLGC_WANTALLKEYS; dlgmgr2.c correctly returns FALSE in that branch.
+This is a test-contract mistake, not a broken original keyboard route. Retain
+r2 and assert that exact rejection before moving to single-line focus to
+verify default/escape commands. No production fix or semantic waiver.
+
+Selected-mirror-r1 derives221 compile owners and their current Ninja dependency
+files, then pairs140 selected original files.61 are byte-exact,62 have content
+differences requiring existing-registration review,17 differ only in CRLF/LF.
+The old Measure-OpenNtMirrorCoverage still addresses pre-T414 mvdm-host paths,
+so its empty-host result cannot satisfy this closure. Restore only those17
+newline-only files from their hash-verified pinned original after bytewise
+single-byte newline-normalized equality, with recoverable before copies.
+Do not treat this formatting restoration as17 semantic fixes or new imports.
+
+Second-role review corrects the initial mirror sweep: Ninja dependency names
+are relative to the provider build root, not the repository. R1/r2 therefore
+cover direct translation units and absolute dependencies only, not all headers.
+R3 resolves that base and inventories278 selected mirrors:189 byte-exact,
+87 content differences,2 additional newline-only headers dossvc.h/wudlg.h.
+The first17 restoration remains valid; the two headers must be restored at
+the next safe boundary, not modified during frozen acceptance. The87 content
+classification means "requires registry/source review", not automatic proof
+that every retained intrusion satisfies the minimal-diff rule.
+
+#### Fixed-chain reconciliation map and finite remaining review
+
+| Fixed entry/chain | Current selected ownership and exact acceptance entry | Proof boundary / remaining disposition |
+| --- | --- | --- |
+| C1 direct/template/internal creation | walias.c / original control bodies; wow_window_creation_binding.c enrolls native resource/creator facts; verify-wow-task-lifecycle.ps1 native-creation, standard-class, CreationUnwind; actual controls/dialog probes | Native HWND is resource authority; retained original WND owns behavior. Internal ComboBox EDIT/list creation and ordinary/task exit are actual guest assertions, not merely class-name matches. |
+| C2 EDIT state/memory/word-break | Seven original EDIT units; usercli.h callback macros; registered wcall32.c; controls probe and wow_edit_memory_callbacks_fixture | Actual local allocation/free/text/CRLF covered. New true word callback/reentry/removal must pass the complete current cohort; macro doubles alone do not close it. |
+| C3 shared/private dialog DS | Original GetEditDS/ReleaseEditDS, dlgbegin/dlgmgr; dialog probe; original creator/end/modal lifetime fixtures | P19 actual shared/private/deferred-end/rollback/init-destroy/task-exit passes; new keyboard/default producer assertions are separate. No second segment allocator. |
+| Dialog keyboard/default behavior | Original dlgmgr2.c via wow_dialog_keyboard_binding; dialog probe; original keyboard/mnemonic lifetime fixtures | Preserve multiline DLGC_WANTALLKEYS rejection, then verify single-line default command/escape. Not physical input, every accelerator or all keyboard behavior. |
+| C4 menu hierarchy/resources | Original MVDM menu thunks/clmenu plus wow_menu native/publication owners; controls probe menu sequence; verify-wow-task-lifecycle.ps1 menu-resource | Native HMENU owns resources, retained graph is observation only. Current controls prove string hierarchy/check/detach/remove-preserves-child/destroy. Reconcile the dedicated original resource-parser row's source/artifact identity explicitly; do not substitute app startup for that whole fixture. |
+| C5 actual applications | verify-wow-mine-gameplay.ps1, verify-wow-sol-gameplay.ps1; observe-wow-frontiers.ps1 + verify-wow-write-frontier.ps1 | Three-mode WINMINE/SOL gameplay and normal exit; WRITE initialization only as the S3 milestone. Editing/save/full normal WRITE exit is not an accepted claim. |
+| Window identity and graph lifetime | Existing graph transaction/page domain and wow_window_words_binding; native window-borrow, native-creation, creation-unwind, graph-negative | Host existence/geometry authoritative, exact-generation copied views retained through scopes. No external freshness veto, second HWND registry or private native WND cast. |
+| Saved WND/CLS procedures and A/W | Native slots, immutable guest entry, original getset/thunk conversion; class-client/query/procedure/lifetime, window-procedure, dialog-lifecycle | P19 adds full/zero16/signed16 carriers without weakening stale-full rejection. Native arbitrary pass-through is unchanged; source-class-independent restoration remains covered by the named lifetime cases. |
+| Nonclient/control geometry | Native ordinary hit testing; NTW16S styled geometry; wow_default_window_bindings and combo capture-list original consumer | Both-width DLL boundary and original default/nonclient fixture prove the approved split, not complete NT4 border compatibility. No independent geometry authority is introduced. |
+| Callback/native-return ownership | Existing task/borrow/native-call owners and original callback conversion; native-dispatch-gate/native-send/native-nested/native-foreign, actual guest nested word callback | Return/error/exception/lifecycle safety remains S3 prerequisite; full mixed-message reply/order/reentry scope remains S4, not implied by these passes. |
+| Normal retirement | Original WOW preparation/cleanup plus canonical control/dialog finalizers and NTW16S terminal disposal; process-retirement/task-lifecycle, actual all9 guest retirement witnesses | Identity withdrawn after original resource cleanup; owner termination is not successful normal exit. Per-task monitor termination remains S5. |
+| Selection/provenance/minimum diff | Provider build.ninja and its selected Ninja dependencies; selected-mirror-r3 and current registers | Restore final2 format-only headers; review87 content pairs against their admitted subsets/hooks. In particular9 files lack a literal DIVERGENCE marker: three historical headers, walias/wkfileio/wmdisp32, typed339 wuclass/wuwind, and server.c's090 subset. Establish existing registration and minimal placement; this is finite review debt, not87 newly inferred behavior bugs. |
+
+This map preserves the original five C groups and required foundational
+dependencies. The remaining source-review obligations are specific: complete
+the selected278-file pair/register reconciliation (including those9 local
+marker cases), final2 exact-format restorations, and dedicated MENU-01 parser
+evidence identity. No new control engine, functionality family, S4 ordering
+waiver or S5 feature is admitted by this audit. Current whole acceptance may
+deliver a safe P without manufacturing S3 closure before these facts exist.
+
+Reconciliation-acceptance-r1 completes native20/20, original30 and both-width
+style/resource guards; controls/common-dialog all3 pass. Its dialog-Off stops
+at the new keyboard assertion. A complete source trace, including dlgmgr2.c's
+final TranslateMessage/DispatchMessage/return TRUE, corrects the earlier
+partial-source inference: DLGC_WANTALLKEYS skips default-button navigation
+but the original manager itself dispatches that key and still returns TRUE.
+It is not modern caller-dispatch FALSE. The probe now requires the original
+multiline WANTALLKEYS flag, TRUE result and no default command, then tests
+single-line default/escape separately. No runtime correction or semantic
+relaxation is appropriate; preserve both failed witnesses and this correction.
+
+Menu-resource-r1 fails linking before runtime: controlled W32 resource
+definitions collide with production wres32.obj, independently required by
+the complete provider. Namespace controlled inputs and only their exact
+original CommonLoadMenu/LoadMenuA/W and Unicode-cover copies together; retain
+the production resource/parser/native owners. The extractor records selected
+source hashes. No FORCE:MULTIPLE, renamed production provider or fake resource
+table in product. R2 identifies the copied cover's /Gz contract against its
+WINAPI declaration; compile that fixture with production /Gz while its entry
+remains explicit __cdecl. Only the menu-resource test branch changes, not
+any of the twenty current passing native-case selections or production code.
+
+Menu-resource-r3 passes all retained markers:16 resource cases,7 parser cases,
+64 invalid repeats, owner-draw resource data,6 original thunk cases with zero
+outstanding allocations and real CCPU native-menu entry. Its isolated clients
+use the production parser and native/resource graph, not link-time replacement
+of W32 callbacks. The selected original client/cover source hashes are retained
+beside their generated exact test-only copies. No product source or guest change.
+
+Behavior-guest-r3 proves actual TAB focus, multiline WANTALLKEYS and original
+self-dispatch, single-line default and Escape commands in all3 modes. It then
+fails the old ordinary DestroyWindow assertion: the added validation call
+overwrites AX with its last command count, whereas the old probe assumed AX
+still held the just-created HWND. Use its already saved dialog handle there;
+retain exactly-once destruction, shared/private DS and task-exit assertions.
+This is an authored probe input defect, not a production destroy failure.
+
+Behavior-guest-r4 exits0 with all9 complete real guest cases. Each controls
+mode has3 real RET0036 word-break callbacks,3 nested USER16 Button queries,
+action mask7, expected [0,7] selection, callback removal and ordinary/task
+retirement. Each dialog mode retains all P19 DS/lifetime counts and adds
+2 TAB focus changes,2 multiline self-dispatch outcomes,2 default commands and
+2 Escape commands. All6 dialog initializations/terminations,4 shared/2 private
+DS instances,2 deferred modal ends, failed-child rollback, init destruction
+compatibility and live-on-exit cleanup still pass. No production hook or
+guest workaround is selected by this proof.
+
+After frozen acceptance-r1 ends, restore the additional2 headers with
+hash-verified, single-byte newline-normalized equality and recoverable copies
+in s3-mirror-format-headers-before. Selected-mirror-r4 now inventories all278
+selected mirrors from221 compile owners plus dependency files:191 byte-exact,
+87 content-different review rows, zero format-only. Total19 files restored
+to original bytes, zero additional logical code diff. Reconciliation-build-r2
+is an incremental Release check, not a claimed clean rebuild; Ninja reuses
+the unchanged translated inputs/objects and WOW32 remains byte-identical
+CAF36F8581D3FC2EC027C18C51A849A21B8D6DA88087ED2648C612992032E5C8.
+
+Reconciliation-acceptance-r2 exits0 and records explicit dependency reuse:
+the current native20 run and original30 are retained, not run again for a
+menu-only fixture edit. AST comparison strips exactly the menu-resource
+compile arm and proves every other verifier byte unchanged after newline
+normalization. The controlled resource fixture is not selected by those20
+case vectors or original30 target graph; its whole replacement is separately
+accepted in menu-resource-r3. Wudlg.h's sole newline-only change is proved
+against its exact before bytes and pinned after hash; all other frozen input
+and artifact identities must match. The real9 source/package inputs and
+both-width DLL prerequisite hashes are checked independently. This is not
+reuse justified merely by elapsed time or a blanket skip of changed inputs.
+Product-r2 is the next gate; no new P delivery is claimed here yet.
+
+New research source identities (pinned read-only OpenNT, no new import):
+wcall32.c 0F72AE39E691F3EF672DF4F1AEB3EBB6443E87F091FB6322EF1C13604AB3D571;
+wmsgem.c 88D05E4770453621472704E90EDCEFD6AD18B618528B4166DA3A9BA1EA1A3619;
+dlgmgr2.c A3E9286C40E4E11EC872FD9B2D7B23CBA640F09FB4840C4E6130E301D5277B9E;
+editml.c 5F65E9AFF922918240243C3D91AEEC4C0317010C80A01AF43626F828B0F95DEC.
+
+The9 local-marker cases are now source-attributed, not9 unknown regressions:
+isvwow.h adds APIENTRY to the declaration whose original wmmedia.c definition
+already has it; walias.h/c replace only the unavailable original GDI shared
+table with the admitted worker alias carrier (T422 E8/E9 records a real
+GdiQueryTable=NULL and positive alias lifecycle evidence); wow32.h adds the
+original WOWGetVDMPointer declaration lost with the excluded incompatible SDK
+header; wkfileio.c calls an existing owned, error-preserving default-off trace;
+wmdisp32.c embeds two default-off diagnostic blocks around unchanged CallBack16;
+wuclass/wuwind carry registered339 typed procedure boundaries; server.c retains
+registered090 message tables and initialization as a source subset. None of
+those observations proves every placement minimal. Remaining concrete review:
+register/mark the historical ABI/GDI/trace seams, move the over-three-line
+embedded diagnostic bodies to their existing owned trace component while
+retaining original callback/error policy, and mark090/339's existing subset/
+seams locally. Evaluate declaration recovery before retaining a header diff;
+do not remove needed ABI/alias behavior solely to reduce a count. No need for
+a private modern GDI-table reader, guest patch or new behavior engine follows.
+
+#### P20 delivery checkpoint and independent review
+
+Product-r2 exits0. Supervisor PID23528 starts2026-10-18T00:11:57.7170587Z;
+WINMINE/SOL gameplay and normal exit pass Off/Win16/All, WRITE passes four
+startup samples per mode only, Console17 and Window17 each have zero exact
+Expected/Actual mismatches. Reconciliation-delivery-r2 exits0, rechecking the
+entire immutable tested package against assets/release and O:/winnt/system32.
+All13 identities remain P19; there is no changed runtime image to replace,
+no forced user-process closure and no cosmetic recopy/manifest rewrite.
+Deployed boundary PID42744, start2026-10-18T00:16:39.4974262Z, exits0 with
+both-width DLL import/negative/lifetime/font and28-page normal demo exit checks.
+This is not full WRITE editing/save/normal-exit or all-control/pixel acceptance.
+
+Second-role review checks all changed files:19 mirror restorations have zero
+delta under git diff --ignore-cr-at-eol and exact pinned after hashes; unchanged
+Ninja/Release outputs retain their prior binary hashes. All new executable
+test inputs are independently authored NE probes, not replacement original
+guests. The menu fixture scopes controlled inputs together with extracted
+source-owned client/cover bodies; real provider W32 functions/parser/native
+resources remain linked. All prior menu assertions and strict control/dialog
+retirement assertions are retained; new callback/keyboard counters and trace
+checks add proof. No new product policy, public ABI, private host reader,
+guest modification, hidden window or semantic exception is introduced.
+
+The fixed-chain map above is the remaining S3 closure boundary:87 selected
+content pairs still require final register/minimal-placement reconciliation,
+including9 specifically attributed local-marker cases. MENU-01's dedicated
+parser proof and all19 format restorations are now complete, not pending.
+Do not call a source-registration review finished merely because every runtime
+gate passes. S4/S5 remain assigned as before; this P does not close S3/T447.
