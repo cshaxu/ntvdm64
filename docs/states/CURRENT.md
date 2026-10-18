@@ -4,8 +4,8 @@
 
 ## Current Work
 
-P21 publishes coherent13 to assets/release and O:/winnt/system32 with matching
-hashes; only WOW32/NTVDM change. Current native20/20, original30, menu-resource,
+Ordinary WINMINE regression blocks S3: inherited-env illegal CPU plus desktop
+view-processing CPU cost. P16 also reproduces. P21 isolated native20/original30,
 resource/style guards and all12 actual guest groups pass without row reuse.
 WINMINE/SOL gameplay/exit, WRITE startup and DOS17x2 pass. WRITE editing/save/
 full exit remains unproved. Actual hook callbacks witness the relocated

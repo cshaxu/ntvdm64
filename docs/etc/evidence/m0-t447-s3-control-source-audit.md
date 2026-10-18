@@ -14548,3 +14548,75 @@ from the accumulated source and actual behavior evidence, not from a marker
 count. S4 mixed messages/replies/reentry, S5 single-task termination and S6
 whole-T acceptance stay assigned. WRITE editing/save/full normal exit and
 the previously approved unexplained common-dialog risk are not newly proved.
+
+### Ordinary installed WINMINE regression: post-P21 diagnosis
+
+Owner reports severe slowdown/hang. This blocks S3 closure and supersedes
+any inference that private-desktop gameplay proves ordinary desktop launch.
+No new production repair, rollback or guest/configuration replacement is
+delivered here. Current P21 release hashes remain installed.
+
+Installed-mine-regression-r1 reproduces a persistent illegal-instruction
+dialog at three seconds: CS05e3:20a1, bytes63/68/61/69/6e; CPU0.15625 seconds.
+Its redirected hidden launcher differs from an actual interactive Console.
+Installed-console-mine-r1 therefore repeats through the unchanged Console-
+owning observer on the normal desktop. Inherited and short TEMP both fail
+with the same opcode bytes and layout-dependent IP2221/21e1. A timeout is
+failed startup evidence, not a pass or proof of a performance-only problem.
+
+Installed-input-audit-r1 compares selected package files without copying the
+installation. Host13 and WINMINE match. The existing Windows1.01 SETVER
+CONFIG.NT/AUTOEXEC.NT additions and15 absent companion files differ; canonical
+media still reproduces, so neither difference is established as the cause.
+No profile or guest is overwritten. Mine-environment-baseline-r1 tests the
+same canonical media with actual Console startup: both current P21 and the
+verified S2/P16 pair encounter illegal instructions. P16 identities come
+from published-recovery-baseline-r1's backup manifest and match the S2
+closure record. This proves the symptom predates P21, not its first commit.
+R1's cleanup correctly refuses a binary substitution made after enrollment;
+the stage is preserved. R2 constructs P16 inputs before stage enrollment,
+retains the guard, and completes its four remaining controls. Short-PATH,
+small-environment, small-plus-long-PATH and P16-small cases avoid the opcode
+error but show only WOW initialization windows at four seconds, not the
+Minesweeper main window. No individual offending variable/writer is proved.
+The earlier S2 ledgers already retain inherited-environment failures; their
+controlled-environment passes did not fix or cover that ordinary contract.
+
+Mine-desktop-stacks-r1 and mine-desktop-profile-r1 hold current binaries,
+canonical media and controlled environment fixed, varying normal/private
+desktop. Existing context capture and a bounded x86 PC sampler inspect only
+owned worker threads, pairing suspend/resume. No input, foreground switch,
+computer use, guest-memory patch or production trace hook is used.
+Two normal-desktop sampling windows each collect100 busy-thread PCs and
+consume1500000/1640625 CPU microseconds. Private controls consume31250/46875.
+Normal histograms place80/88 PCs in phyR/session validation/guest-lease/
+physical-translation/read functions; private controls each have96 in win32u
+and3/4 in ntdll. These are sampled locations and cumulative thread CPU, not
+exact wall-time percentages or proof of a unique caller for every read.
+Matching P21 link maps and recorded module bases provide symbol attribution.
+
+Independent stack capture resolves DefWindowProc -> native_call_end and
+physical reads. Source follows publish_call_windows, copied desktop graph
+and menu refresh. refresh_graph roots the desktop and known local windows;
+project_graph resamples the view and closes all four relation edges. Its
+page-domain class collector separately scans published/borrowed windows for
+each class. This is project adaptation cost, not the original NT4 direct
+shared-memory access. Blame dates desktop-root activation to984ee0441/P5
+and the current full transaction tocf2ac9520/P13. That source history plus
+the P16 comparison is not a completed first-bad-binary bisect.
+
+Finite S3 blocking group:
+
+1. Attribute and repair the inherited-environment startup writer/length/
+   original contract. Preserve DIV331 and immutable guest. Filtering host
+   environment is a diagnostic control, never the product repair.
+2. Remove redundant reference/whole-view work at its existing owners. Prefer
+   call-local derived data under current exclusive execution ownership;
+   preserve live/retired-borrow references, failed-free retry and generation
+   checks. No persistent second registry, Sleep/polling, stale required local
+   state or broader external-state waiver. Add ordinary-desktop gameplay and
+   timing checks alongside existing negative/lifecycle/private controls.
+
+These are startup/public-return prerequisites, not scope to transfer to S4
+or a later performance package to manufacture S3 completion. Neither defect
+is claimed fixed, introduced by P21, or attributable to original guest code.

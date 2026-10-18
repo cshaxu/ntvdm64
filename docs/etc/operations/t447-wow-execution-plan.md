@@ -83,6 +83,15 @@ This finite remediation cohort is complete. Do not substitute registration
 coverage for fixed-chain semantic/lifetime closure or declare S3/T447 closed
 from it. WRITE remains initialization-only; S4/S5 obligations remain unchanged.
 
+Owner subsequently reports ordinary WINMINE startup regression. Normal-desktop
+Console reproduction and P16/current comparisons expose inherited-environment
+illegal instructions plus copied-view CPU cost absent from private controls.
+The source ledger fixes the two blocking chains and measured sample limits.
+Keep these S3 public-startup/native-return prerequisites here; no environment
+filter, hidden helper, guest change or new compatibility waiver is approved.
+The next repair group must preserve lifetime semantics and add normal-desktop
+acceptance, not repeat private-only gates and claim the report resolved.
+
 Owner clarification: exhaust source reuse and bounded semantic-preserving
 adaptation before proposing a compatibility exception. Difficulty, missing
 proof or a simpler reduced implementation is not evidence of impossibility.
