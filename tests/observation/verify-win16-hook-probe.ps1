@@ -112,11 +112,11 @@ try {
         # Decode short failure reports too: the last guest phase and exact
         # assertion identify the boundary, not an observer timeout guess.
         $controlBytes=[IO.File]::ReadAllBytes("$root/guest-report.bin")
-        if($controlBytes.Length % 34){throw 'Truncated control witness record'}
+        if($controlBytes.Length % 38){throw 'Truncated control witness record'}
         $controlRecords=@()
         $controlNames=@('phase','errors','created','button','single','multi','list',
-            'combos','menus','destroyed','leaving','task','wordCalls','wordNested','wordActions')
-        for($offset=0;$offset -lt $controlBytes.Length;$offset+=34){
+            'combos','menus','destroyed','leaving','task','wordCalls','wordNested','wordActions','scroll','dropdown')
+        for($offset=0;$offset -lt $controlBytes.Length;$offset+=38){
             if([Text.Encoding]::ASCII.GetString($controlBytes,$offset,4) -ne 'CTL1'){
                 throw 'Bad control witness signature'
             }
@@ -171,12 +171,13 @@ try {
         }
         "PASS real Win16 resource modeless/modal dialogs, shared/private EDIT DS, initialization parameter, text/CRLF, failed-child rollback, init destruction compatibility and task exit ($Win16Style)"|Set-Content "$root/result.txt"
     }elseif($Case -eq 'controls'){
-        if($bytes.Length -ne 306 -or ($controlRecords.phase -join ',') -ne '0,1,2,3,4,5,6,7,8' -or
+        if($bytes.Length -ne 342 -or ($controlRecords.phase -join ',') -ne '0,1,2,3,4,5,6,7,8' -or
                 @($controlRecords|Where-Object errors -ne 0).Count){throw 'Control guest phase/assertion failure'}
         $last=$controlRecords[-1]
         if($last.created -ne 10 -or $last.button -ne 1 -or $last.single -ne 1 -or
                 $last.multi -ne 1 -or $last.list -ne 1 -or $last.combos -ne 3 -or
                 $last.menus -ne 1 -or $last.destroyed -ne 8 -or $last.leaving -ne 2 -or
+                $last.scroll -ne 1 -or $last.dropdown -ne 2 -or
                 !$last.wordCalls -or $last.wordNested -ne $last.wordCalls -or ($last.wordActions -band 3) -ne 3 -or
                 !$last.task -or @($controlRecords|Where-Object task -ne $last.task).Count){
             throw 'Actual Win16 control/normal-destroy/task-exit contract incomplete'
@@ -198,7 +199,7 @@ try {
                 throw 'Original EDIT LocalAlloc/Free callback absent or after task retirement'
             }
         }
-        "PASS actual Win16 original controls, all3 combo forms, EDIT replacement/CRLF, menu mutation, ordinary destruction and task exit ($Win16Style)"|
+        "PASS actual Win16 original controls, all3 combo forms, dropdown capture/release/persistence, list scrolling, EDIT replacement/CRLF, menu mutation, ordinary destruction and task exit ($Win16Style)"|
             Set-Content "$root/result.txt"
     }elseif($Case -eq 'winsock'){
         $size=28

@@ -14756,3 +14756,83 @@ demo exit. Final documentation/clean-push gates remain separate.
 S3/T447 are not closed, WRITE editing/save/full exit is not proved and S4/S5
 scope is unchanged. The original large-environment failure stays recorded,
 not silently promoted to a passing ordinary-runtime capability.
+
+### Post-P22 fixed-chain review: bounded control-interaction proof gap
+
+Previous goal turn is progress: eba5fcfc7 publishes the proved copied-class
+collector repair and is clean/synchronized. Current S3 admission/exit and
+the C1--C5 map remain unchanged. Re-read current original combo.c and
+lboxctl2.c against the actual control witness and its verifier, rather than
+inferring completeness from the passing group count.
+
+The selected original combo.c WM_LBUTTONDOWN/UP branch establishes mouse
+capture while opening a dropdown, then releases capture without closing the
+list on button-up; a second button click closes it. CB_SHOWDROPDOWN has its
+own programmatic open/close path. The real witness presently checks all3
+combo data forms but none of those branches. Original lboxctl2.c
+xxxLBoxCtlScroll computes iTop from line/top/thumb commands; the current list
+witness proves selection/text only, not that scrolling changes iTop.
+The nonclient/captured-list integration row explicitly requires interaction,
+so these are S3 evidence gaps, not newly discovered runtime defects or S4 work.
+
+Finite group: extend the independent NE witness to check ListBox top-index
+changes through original scroll commands, both droppable combo forms'
+programmatic open/close and mouse down/capture/up/persistent-list/second-click
+closure, followed by unchanged ordinary/task retirement. Derive the button
+point from the actual client rectangle, not hard-coded screen coordinates.
+Run Off/Win16/All against the current coherent P22 package in owned background
+processes. No physical computer use, product input injection, guest rewrite,
+original mirror change or new semantic concession is selected. This does not
+claim physical pointer tracking, every scrollbar hit or arbitrary UI coverage.
+
+#### Complete control-interaction group and identity review
+
+All run roots below are build/M0-T447/S3. The first detached launch leaves
+no live process or result directory and is not a test. The owned r1 runner
+then records actual child failures before runtime: O:/tmp staging is denied
+inside the sandbox. Authorized r2 uses the existing isolated-package owner
+and reaches the guest in all3 modes; ListBox scrolling passes but the first
+combo capture assertion fails with guest error174 (0xAE). Source review of
+comboini.c establishes that width-2 is the exclusive right edge of buttonrc,
+not inside the button. Change the authored input to client-width minus half
+SM_CXVSCROLL, retaining the actual client-height midpoint. Do not change the
+original PtInRect, enlarge its target or remove the capture assertion.
+
+Control-interaction-r3 supervisor44380 starts2026-10-18T02:03:07.9432508Z
+(exact start is in its process.json), completes exit0. All3 whole control
+cases pass. Each last guest record has errors0, scroll1, dropdown2, three
+word callbacks and three nested callbacks,8 ordinarily destroyed controls
+and2 deliberately left for exact-once task retirement. The added list row
+checks top10, line-down11, line-up10, thumb-position5 and top0. Both droppable
+combo forms check programmatic show/hide, button-down capture, button-up
+release with list still open, second click closes and no capture remains.
+No old callback, menu, destruction or retirement assertion is removed.
+
+Reproducer: in an owned background process run
+tests/observation/verify-win16-hook-probe.ps1 with -Case controls,
+-Win16Style Off (then Win16, All), -PackageRoot pointing to the ZIP-derived
+P22 coherent13 package, -Observer pointing to the retained native
+frozen-print-observer-r1/observer.exe, and a fresh -BuildRoot under build/.
+The tracked assembly and verifier are the complete reproducible test inputs;
+the runner builds an independent NE probe, not an original guest replacement.
+
+Control-interaction-identity-r1 exits0, rehashing872 production/build inputs
+against class-reference-build-r2, all278 selected mirrors against the sealed
+source-registers-r6 inventory, current production outputs and all13 images
+at assets/release and O:/winnt/system32 against the release manifest. None
+changes. This is a test/evidence-only P; no pointless product rebuild,
+republication or unrelated runtime replay is performed. The verifier diff
+changes only the controls record/branch; other case behavior is unchanged.
+Current P22 native20, original30, MENU/resource/style, other9 real guest cases,
+application/DOS and ordinary installed-logon results retain their explicit
+input identities and limitations, not new passes attributed to this test run.
+
+Second-role review: the supplied input follows original combo.c/lboxctl2.c
+and original USER16 message/ordinal contracts. No physical cursor movement,
+computer use, native private-object reader, new scheduler, guest/media change,
+mirror diff, runtime policy or source-derived algorithm replacement occurs.
+This is stronger actual consumer/lifecycle proof, not universal mouse/scroll
+interaction or whole-WOW acceptance. Final C1--C5 exit adjudication remains
+the finite S3 closeout action; no additional runtime defect is inferred from
+these previously missing tests. S4 full mixed messages and S5 task termination
+remain unproved and unchanged in scope.

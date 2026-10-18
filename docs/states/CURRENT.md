@@ -4,6 +4,13 @@
 
 ## Current Work
 
+Post-P22 fixed-chain review closes the explicit control-interaction proof gap:
+true Win16 dropdown capture/release/persistence and ListBox scroll-position
+changes pass Off/Win16/All, with existing callback/retirement assertions intact.
+872 frozen production/build inputs,278 selected mirrors and all13 deployed
+images are unchanged. S3 stays active for the final fixed-chain exit decision,
+not an unspecified new implementation group; S4/S5 remain assigned separately.
+
 P22 publishes coherent13 with only NTVDM changed; both destinations hash-match.
 Class collection now derives one call-local reference set, retaining strict
 retirement. Native20/original30, resource/style/MENU and actual guest12 pass;
@@ -17,25 +24,10 @@ WRITE edit/save/full exit remains unproved. S3/T447 stay open for fixed-chain
 closure; S4/S5 unchanged. Guest/ZIP/mirrors unchanged in this repair. Selected
 278 mirror rows remain192 exact/86 content, zero format-only/register gaps.
 Older GDI16/19/common-dialog risks remain. Deployed DLL/demo checks pass.
-Chronology below is historical; see the source ledger for superseding proof.
 
-Dialog-context-r2's scoped boundary-double evidence remains in the source ledger.
-Production call tracing additionally found the modal title-policy entry
-bypasses the tested creation wrapper. Its original clres/manager path now
-establishes/restores the same dialog context across the modal loop; this
-additional change is not covered by r2.
-Subsequent modal-cpd-r1 verifies that modal wrapper with explicit manager
-doubles, including nesting and error-preserving unwind; full modal behavior
-is still unproven. A native public class-registration CPD probe recovers the
-target address but not original encoding, rejecting it as a complete dialog
-normalizer. No product CPD resolver has been installed.
-Whole-group original-bodies-r5 now builds the24-unit original control/dialog
-cohort and passes all12 supplemental fixtures; build elapsed141.16 seconds.
-No implicit-function warnings remain in that run. Original string, navigation,
-help inheritance, default-button and border algorithms are exercised with
-explicit boundary inputs; creation/modal geometry restoration is also tested.
-This supersedes failed r2/r4 compilation, not real HWND/guest acceptance.
-Full product selection/link and WND lifecycle verification remain open.
+The source ledger retains historical dialog-context-r2/modal-cpd-r1 and
+original-bodies-r5 chronology. Those early staged/body-double results do not
+supersede P22's selected production and actual guest evidence above.
 Resource WND construction, promotion and control-entry/native-return graph
 wiring are staged; positive lifecycle tests remain open. Default-worker callers
 share those entries; its exact-state retention is now uniform across messages.

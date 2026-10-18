@@ -115,6 +115,15 @@ COMMAND EndInit INIT-variable reuse, with independent inert-padding proof;
 standing guest-policy disposition is recorded in TODO without workaround.
 Only NTVDM changes; S3/T447 closure and S4/S5 obligations remain separate.
 
+Post-P22 fixed-chain source/acceptance review additionally checks the previously
+unexercised combo dropdown capture/release/persistence and ListBox line/thumb/
+top scrolling paths. The independent Win16 control witness now passes the
+whole added group in Off/Win16/All against unchanged P22, retaining existing
+callback, ordinary destruction and task-retirement assertions. This closes
+that named proof gap without product, mirror or original guest changes.
+The final S3 exit decision must reconcile the existing C1--C5 map and explicit
+limitations; it must not reopen an unspecified foundation or absorb S4/S5.
+
 Owner clarification: exhaust source reuse and bounded semantic-preserving
 adaptation before proposing a compatibility exception. Difficulty, missing
 proof or a simpler reduced implementation is not evidence of impossibility.

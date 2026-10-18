@@ -239,6 +239,29 @@ expect 4,0x46
 mov si,buffer-data
 mov di,beta-data
 call equal_text
+; Original lboxctl2.c xxxLBoxCtlScroll, not a cosmetic scrollbar check.
+; More rows than fit the 140px list, independent of host font metrics.
+%rep 24
+send list,0x401,0,ds,alpha-data
+require 0x47
+%endrep
+send list,0x418,10,0,0          ; LB_SETTOPINDEX
+expect 0,0x48
+send list,0x40f,0,0,0          ; LB_GETTOPINDEX
+expect 10,0x49
+send list,0x115,1,0,0          ; WM_VSCROLL / SB_LINEDOWN
+send list,0x40f,0,0,0
+expect 11,0x4a
+send list,0x115,0,0,0          ; SB_LINEUP
+send list,0x40f,0,0,0
+expect 10,0x4b
+send list,0x115,4,0,5          ; SB_THUMBPOSITION, low word position
+send list,0x40f,0,0,0
+expect 5,0x4c
+send list,0x115,6,0,0          ; SB_TOP
+send list,0x40f,0,0,0
+expect 0,0x4d
+inc word [scroll_ok-data]
 inc word [list_ok-data]
 mov word [phase-data],4
 call checkpoint
@@ -262,6 +285,58 @@ expect 4,0x64+form
 mov si,buffer-data
 mov di,beta-data
 call equal_text
+%if form > 1
+; Source combo.c owns fLBoxVisible and capture, queried through real USER16.
+send combo_%[form],0x417,0,0,0 ; CB_GETDROPPEDSTATE
+expect 0,0xa0+form
+send combo_%[form],0x40f,1,0,0 ; CB_SHOWDROPDOWN
+send combo_%[form],0x417,0,0,0
+expect 1,0xa4+form
+send combo_%[form],0x40f,0,0,0
+send combo_%[form],0x417,0,0,0
+expect 0,0xa8+form
+; Mouse-path focus/capture requires a visible hierarchy. SW_SHOWNOACTIVATE
+; affects only this owned private-desktop probe, not the owner's desktop.
+push word [owner-data]
+push word 4
+api 2,42
+push word [combo_%[form]-data]
+push ds
+push word client_rect-data
+api 2,33                      ; GetClientRect
+; comboini.c excludes the outer edge from buttonrc (PtInRect's right edge
+; is exclusive). Aim inside its metric-sized button, not width-2 on edge.
+push word 2                   ; SM_CXVSCROLL
+api 2,179                     ; GetSystemMetrics
+shr ax,1
+mov bx,[client_rect-data+4]
+sub bx,ax
+mov [click_x-data],bx
+mov ax,[client_rect-data+6]
+shr ax,1
+mov [click_y-data],ax
+send combo_%[form],0x201,1,[click_y-data],[click_x-data]
+api 2,236                     ; GetCapture
+cmp ax,[combo_%[form]-data]
+je ..@captured_%[form]
+mov word [errors-data],0xac+form
+jmp failed
+..@captured_%[form]:
+send combo_%[form],0x417,0,0,0
+expect 1,0xb0+form
+send combo_%[form],0x202,0,[click_y-data],[click_x-data]
+api 2,236
+expect 0,0xb4+form
+send combo_%[form],0x417,0,0,0
+expect 1,0xb8+form              ; releasing the button does not dismiss list
+send combo_%[form],0x201,1,[click_y-data],[click_x-data]
+send combo_%[form],0x202,0,[click_y-data],[click_x-data]
+send combo_%[form],0x417,0,0,0
+expect 0,0xbc+form
+api 2,236
+expect 0,0xc0+form
+inc word [drop_ok-data]
+%endif
 inc word [combos_ok-data]
 %assign form form+1
 %endrep
@@ -469,7 +544,12 @@ task: dw 0
 word_calls: dw 0
 word_nested: dw 0
 word_actions: dw 0
+scroll_ok: dw 0
+drop_ok: dw 0
 report_end:
+client_rect: times 4 dw 0
+click_x: dw 0
+click_y: dw 0
 instance: dw 0
 saved_proc: dd 0
 word_proc: dd 0
