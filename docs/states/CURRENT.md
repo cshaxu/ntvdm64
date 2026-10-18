@@ -342,9 +342,9 @@ closure. The witness includes20ms pixel polling. Local-hook-delivery-r1
 publishes coherent13 to both destinations and passes deployed style/installed
 logon3 plus final hashes. Source/assets form bounded P9, with reviewed
 main/origin delivery evidence retained; full M1--M6/S5/S6 remains open.
-Observer-cost-r2 passes60 actual/native/API cases: roughly30ms includes28ms
-observer sleep, not guest CPU time. P10 default/quality passes; runtime P9
-and full M1--M6 remain. Next attribution needs actual callback timestamps.
+Callback-cost-r2 passes90 actual callbacks and native/parser guards. Ordinary
+mouse-up dispatch is roughly15ms; final cleanup sub-ms. P11 is diagnostic-only;
+runtime P9/full M1--M6 stay. Source finds a discarded prepared-graph lookup.
 088's P7 seal,32 rollback/7 terminal negatives and complete delivery evidence
 remain in the source audit. Old child exit1 is unlocated, not repaired by a
 diagnostic pass. P7 timing is flat, not a physical-click/stutter fix. All

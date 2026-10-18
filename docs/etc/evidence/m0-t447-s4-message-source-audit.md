@@ -2961,3 +2961,125 @@ No deployment is needed because no runtime image changed. The normal native
 reference is slower than the project sample within observation noise; that
 does not prove the emulator is faster than native code. The supported
 conclusion remains measurement-floor attribution, not stutter resolution.
+
+### P11 callback source boundary, immutable recording and phase attribution
+
+Question: where does actual mouse handling spend time, independently of the
+observer's20ms wait? Source chain is native immutable entry ->
+wow_window_dispatch_immutable -> dispatch_bound -> original
+DispatchClientMessage/W32Win16WndProcEx/CallBack16, with existing task/borrow/
+projection scopes. Original WU32DispatchMessage routes the guest message
+through native DispatchMessage. Trace this actual production entry, not a
+test-supplied WNDPROC or an inferred receiver identity.
+
+verify-wow-callback-cost mechanically copies only the owned words-binding
+translation unit, renames its one public entrance to a private body and
+adds a transparent wrapper. Version2 additionally brackets only the existing
+guest DispatchClientMessage statement; marker removal and name restoration
+must exactly recover normalized original text. No original statement, mirror,
+guest, production source, stable object or published image changes. The exact
+Ninja compile/link commands and all selected inputs/dependencies are sealed;
+only the copied object replaces its original in an isolated diagnostic DLL.
+
+Native data is append-only64 slots, uniquely reserved atomically with no
+reuse. Each writer publishes immutable native HWND/message/thread/QPC/result/
+error/normal-return fields with a final interlocked completion. Frequency is
+atomically initialized. The diagnostic TLS active slot is masked/restored
+through every nested wrapper, including untracked messages; phases have one
+writer and must occur once in order before accepted actual rows are used.
+The finally path preserves the exact BOOL result, original output, native
+LastError and propagated exception. It never dereferences rejected/exceptional
+output pointers. This is diagnostic state, not a production object owner,
+message transport or scheduling input.
+
+The reader opens only the pinned worker read-only, locates the exact WOW32
+module/RVA inside its image range and checks ABI/version/capacity/frequency,
+stable reservation count, complete records and phase ordering. Readiness
+waits occur after all timed intervals. Twelve right-button pairs plus three
+left-button reveals (F2/reset outside each interval) require30 callbacks,
+actual observed full HWND/native thread and fifteen matched stopwatches per
+environment. Unexpected identities/counts/order are failures, not filtered
+into a pass. The existing default flag witness remains unchanged when the
+new switches are absent. Native Windows owns all message delivery and drawing.
+
+QPC cross-thread/process comparison follows the supported host guidance with
+one-tick ordering uncertainty, not CPU-affinity changes or RDTSC. See
+[Microsoft's QPC guidance](https://learn.microsoft.com/en-us/windows/win32/sysinfo/acquiring-high-resolution-time-stamps).
+Same-thread phase intervals partition the wrapper; they are inclusive wall
+times, not exclusive guest CPU. Observation-after-return may be negative:
+pixels can change before mouse-up/callback completion. Preserve those values.
+
+Callback-cost-r1 completes0 with90 actual rows/45 pairs and recorder/reader
+controls plus parser15 positive/seven negative cases. The normal flag median
+queue-to-entry is17.885ms, callback span26.911ms, and nine of twelve pixel
+observations precede mouse-up completion. This is a new execution-level fact,
+not a causal speedup. Before version2, callback-cost-source-seal-r1 preserves
+every changed test input with original/sealed/hash mapping. R1 is not rerun
+against newer headers or relabelled as phase evidence.
+
+Fresh callback-cost-r2 completes0 with reversible phase marks, native unit
+nested/rejected/exception/untracked/result/error/overflow controls, nine
+rejected record states, three rejected module/process/range identities and
+equal133/133 handle counts. Parser controls prove fifteen matched pairs,
+signed negative lag, nested intervals and ten rejected identity/state/phase
+cases. Exact P9 and diagnostic copies run the same45 input pairs across
+ordinary/sampled/private environments; all90 diagnostic callbacks match
+their real HWND/thread, one complete phase and input stopwatch. Normal task/
+window/launcher completion and board restoration pass. Separate per-component
+medians below are milliseconds, not additive CPU shares:
+
+| Environment/input | Before callback entry | Down pre / dispatch / post | Up pre / dispatch / post |
+| --- | ---: | --- | --- |
+| Ordinary flag (12) | 18.126 | 3.683 / 3.151 / 0.308 | 3.530 / 15.220 / 0.312 |
+| Ordinary reveal (3) | 23.422 | 3.432 / 7.728 / 0.263 | 3.234 / 17.190 / 0.284 |
+| Sampled flag (12) | 21.059 | 3.076 / 3.434 / 0.315 | 3.274 / 12.655 / 0.276 |
+| Sampled reveal (3) | 25.680 | 3.525 / 9.033 / 0.374 | 3.983 / 15.017 / 0.279 |
+| Private flag (12) | 3.627 | 1.006 / 1.923 / 0.181 | 1.023 / 5.010 / 0.182 |
+| Private reveal (3) | 3.306 | 1.221 / 3.046 / 0.182 | 0.894 / 13.605 / 0.182 |
+
+Thus final callback cleanup is sub-millisecond here, not the dominant tail.
+The dispatch phase includes original WOW/guest work AND native-service
+adaptation/publication within those calls; this is not evidence blaming the
+unchanged Microsoft algorithm. Random reveal depth, small sample size,
+desktop differences and tracing overhead prohibit causal performance claims.
+Pure pixel timing is especially insufficient because it can precede completion.
+Source follow-up targets the repeated copied-window transaction inside native
+returns, retaining all six message groups and M4 original converter obligations.
+
+### Source-proved prepared-graph redundant lookup (successor, not runtime repair)
+
+Current page_domain_replace_window_links builds its call-local updated index
+from the complete captured graph and owns prepared/backing pins before edge
+commit. In every five-identity row, it nevertheless calls the old published
+page_domain_window_lookup first, then overwrites that result whenever the
+same full identity has a prepared update. The lookup's only ordinary work is
+slot validation plus c_sas_dw_at of the published handle; it owns no lifetime
+or mutation. The staged identity/backing already won by design, including
+fresh replacement generations. The discarded read repeats for self and every
+known relation at every publication; its individual cost is not yet measured.
+
+The smallest successor design computes the existing replacement predicate
+first and selects prepared backing directly; only a genuinely unstaged/legacy
+operand calls the unchanged original lookup. Keep all prior full-generation,
+duplicate/withdrawn/graph validation, acquired pins, rollback and atomic commit.
+Do not add a cache/index/counter or alter freshness/scheduling/guest. Original
+USER's retained-object validation likewise does not rediscover a known locked
+object; importing more USER code cannot remove this project-owned redundant
+lookup. This is source-proved unnecessary work, not yet a proved stutter cause
+or permission to change unrelated SAS/class stores. Seal and deliver the P11
+diagnostic group first, then admit and verify this complete graph-resolution
+group against the existing real CCPU generation/partial rollback/retirement
+and fallback contracts, paired timing and every-P gates. Runtime stays P9 now.
+
+Callback-cost-final-r1 completes0 after the complete r2 group: the current
+default observer, without any new switches, recompiles and passes all three
+environments, twelve flags, restoration and normal exit with no callback/open/
+observer instrumentation output. Frozen current inputs and sealed r1 sources
+remain exact. Parser/diff/documentation quality passes. Single-person second-
+role review retains this P11 as diagnostic-only: one bounded native recorder,
+transparent scopes, strict read-only identity/phase validation, preserved
+signed/nested timing and unchanged default protocol; no runtime capability
+or stutter closure is inferred. Final record checks and main/origin delivery
+are retained in callback-cost-final-quality-r1 and callback-cost-git-delivery-r1,
+including live remote equality, clean status and unchanged13 images at both
+destinations. No test-only DLL is published. Full S4/M1--M6 and S5/S6 remain.

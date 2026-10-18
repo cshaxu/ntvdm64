@@ -14,6 +14,12 @@
 #ifdef T447_PAGE_COST_PROFILE
 #include "wow_page_cost_probe.h"
 #endif
+#ifdef T447_CALLBACK_COST
+#include "wow_callback_cost_probe.h"
+#ifdef T447_PAGE_COST_PROFILE
+#error Separate callback and page instrumentation
+#endif
+#endif
 
 int main(int argc, char **argv)
 {
@@ -24,6 +30,11 @@ int main(int argc, char **argv)
     char ready[MAX_PATH];
     FILE *file;
     BOOL inherited;
+#ifdef T447_CALLBACK_COST
+    DWORD callback_rva;
+    if(argc!=6 || !(callback_rva=strtoul(argv[5],NULL,16)))return 64;
+    argc=5;
+#endif
 #ifdef T447_PAGE_COST_PROFILE
     if (argc != 6 || !(page_cost_rva = strtoul(argv[5], NULL, 16))) return 64;
     argc = 5;
@@ -56,6 +67,9 @@ int main(int argc, char **argv)
     if (!gate || sprintf_s(ready, sizeof(ready), "%s.ready", argv[3]) < 0 ||
         fopen_s(&file, ready, "w")) return 67;
     fprintf(file, "worker=%lu window=%p\n", owner_pid, mine);
+#ifdef T447_CALLBACK_COST
+    fprintf(file,"callback-thread=%lu\n",GetWindowThreadProcessId(mine,NULL));
+#endif
     fclose(file);
     if (WaitForSingleObject(gate, 20000) != WAIT_OBJECT_0) return 68;
     CloseHandle(gate);
@@ -100,6 +114,28 @@ int main(int argc, char **argv)
         previous = current;
     }
     if (previous != before || !capture(mine, argv[3], "final")) return 71;
+#ifdef T447_CALLBACK_WORKLOAD
+    /* Separate opt-in reveal workload; F2/reset is outside each stopwatch.
+     * The default twelve-flag acceptance above remains unchanged. */
+    for(operation=0;operation<3;++operation){
+        LARGE_INTEGER start,stop,frequency;
+        QueryPerformanceFrequency(&frequency);QueryPerformanceCounter(&start);
+        if(!click(WM_LBUTTONDOWN,WM_LBUTTONUP,MK_LBUTTON) ||
+                !wait_cell(process,before,FALSE,"reveal"))return 77;
+        QueryPerformanceCounter(&stop);
+        printf("callback-open operation=%lu microseconds=%llu start-qpc=%lld stop-qpc=%lld frequency=%lld\n",
+            operation,(unsigned long long)((stop.QuadPart-start.QuadPart)*
+                1000000/frequency.QuadPart),start.QuadPart,stop.QuadPart,frequency.QuadPart);
+        fflush(stdout);
+        if(!PostMessageW(mine,WM_KEYDOWN,VK_F2,1) ||
+                !PostMessageW(mine,WM_KEYUP,VK_F2,0xc0000001) ||
+                !wait_cell(process,before,TRUE,"reveal-reset"))return 78;
+    }
+    if(!capture(mine,argv[3],"reveals-final"))return 79;
+#endif
+#ifdef T447_CALLBACK_COST
+    if(!callback_cost_dump(owner_pid,mine,callback_rva))return 76;
+#endif
     if (!PostMessageW(mine, WM_CLOSE, 0, 0)) return 72;
     deadline = GetTickCount64() + 10000;
     while (IsWindow(mine) && GetTickCount64() < deadline) Sleep(20);

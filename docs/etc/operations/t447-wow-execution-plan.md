@@ -213,6 +213,53 @@ quality without instrumentation leakage. Retain exact P9 release bytes.
 The next source-designed attribution uses
 test-only callback entry/return timestamps, not runtime waits or busy polling.
 
+Clean P10 196cd5260 now admits that finite diagnostic only: mechanically
+rename wow_window_dispatch_immutable in a copy of its owned translation unit,
+prove exact reversal, add a bounded append-only native timestamp record and
+transparent finally wrapper, and relink only an isolated WOW32 copy. Native
+receive/task/borrow/publication/converter bodies remain unchanged. Test nested,
+rejected/exceptional/nontracked calls, result/LastError, overflow and invalid/
+incomplete/read-only record identities before actual gameplay. Seal P9 and
+all compile/link inputs. Use unchanged posted twelve-toggle/20ms observers,
+read complete records after the input interval, validate exact HWND/thread/
+down-up identity, and correlate QPC with a one-tick cross-thread uncertainty.
+Retain negative observation-after-return intervals if painting precedes return;
+inclusive callback time is not exclusive CPU time. No private USER decoder,
+new production registry, guest/mirror change, runtime wait change or S4 waiver.
+
+The fixed diagnostic workload adds three timed left-button reveals, resetting
+with the existing F2 protocol outside each interval, alongside the original
+twelve right-button flag cycles. Both P9 and diagnostic copies run this same
+opt-in test workload; ordinary acceptance defaults remain unchanged. This
+avoids treating cheap flag changes as proof of the owner's left-click symptom.
+Require all30 actual callback identities,15 corresponding timed pairs, exact
+normal retirement and initial-board restoration; no guest memory modification.
+
+First callback-cost-r1 proves the whole callback interval includes substantial
+ordinary/private differences and may finish after observed pixels. Seal its
+test sources before extending the same diagnostic group. Version2 adds TLS-
+scoped phase marks around only the existing guest DispatchClientMessage call,
+with exact reversible marker removal; original statements remain. Mask and
+restore the diagnostic slot across all nested entries, including untracked
+messages. Require one completed dispatch per accepted actual input before
+partitioning pre/dispatch/post; reject ambiguous phase counts or ordering.
+
+Callback-cost-r2 now passes its complete90-callback/45-pair actual matrix,
+recorder/reader controls and parser15-positive/ten-negative cases. Ordinary
+mouse-up dispatch medians roughly15--17ms include original work AND native
+adaptation; final cleanup is sub-ms, so it is not the dominant callback tail.
+Source finds published lookups whose results are discarded for already pinned
+prepared graph identities. The source audit fixes the successor design and
+scope; do not implement it until the P11 diagnostic is sealed/clean-delivered.
+Complete the unchanged default observer protocol and final quality first.
+No production image, original statement, mirror or guest change is delivered.
+
+Callback-cost-final-r1 passes the unchanged default three-environment observer
+and quality, with no diagnostic leakage and exact current/r1-sealed inputs.
+The source/tests and final delivery review form diagnostic P11; installed
+runtime stays P9 and all full-goal obligations remain. The prepared-graph
+resolution repair above is the next finite source group, not yet implemented.
+
 S3 is closed at the P22 runtime/P23 interaction baseline after the
 [fixed-chain exit review](../../history/m0-t447-s3-control-dependency-closure.md).
 S4 is now the sole sequential admission under the continuing owner goal.
