@@ -192,6 +192,27 @@ physical-stutter closure; its pixel witness includes20ms polling. Retain the
 earlier failed089 runs. Bounded P9 source/assets and reviewed main/origin
 delivery preserve the complete remaining M1--M6, S5 and S6 obligations.
 
+After clean P9 2a01c0e5b, the next finite diagnostic resolves the source-proved
+observer blind spot before another runtime optimization: opt-in QPC brackets
+around existing BitBlt/GdiFlush/Sleep and posting calls, plus native API/error
+unit controls and an independent native-window reference. Default12-toggle
+acceptance,20ms polling and all product/guest images remain unchanged. Seal
+P9 image/MAP/source identities; retain raw per-operation counts/durations and
+all failures. Do not subtract overlapping native capture time as guest CPU
+cost, equate posted messages to physical input, or close M1--M6 from this
+diagnostic. No production/mirror/guest edit or new semantic boundary is admitted.
+
+Observer-cost-r2 completes its60-operation actual/native matrix and leaf unit
+controls; r1's native-readiness failure remains failed, with corrected owned
+visibility/startup evidence in the source audit. Both native and P9 ordinary
+medians are roughly30ms with roughly28ms observer sleep. This rules out using
+that floor as guest execution time, not the reported physical stutter. Complete
+the default noninstrumented protocol and final diagnostic-only delivery first;
+observer-cost-final-r1 now passes that default three-environment protocol and
+quality without instrumentation leakage. Retain exact P9 release bytes.
+The next source-designed attribution uses
+test-only callback entry/return timestamps, not runtime waits or busy polling.
+
 S3 is closed at the P22 runtime/P23 interaction baseline after the
 [fixed-chain exit review](../../history/m0-t447-s3-control-dependency-closure.md).
 S4 is now the sole sequential admission under the continuing owner goal.

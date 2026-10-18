@@ -2878,3 +2878,86 @@ close S4/T447 or the persistent goal. Next source-led attribution must separate
 observer/capture time from actual input/conversion/rendering; full remaining
 implicit/cross-process messages, converted-data/reply lifetime, failure/death
 and M1--M6 reconciliation remain in this S, with S5/S6 unchanged.
+
+### P10 observer-cost source audit and fixed native/guest attribution
+
+Question: does the P9 witness's roughly31ms floor measure WOW work? Source
+shows wait_cell captures through BitBlt/GdiFlush then sleeps20ms after a
+nonmatching hash. Add test-only T447_OBSERVER_COST leaf brackets, reset per
+operation and snapshot immediately at the original stopwatch end, before the
+extra verification capture. Original helper bodies, pixel coordinates,
+twelve posted down/up pairs,20ms request and normal-exit assertions remain.
+Default compilation has no new instrumentation. Native API arguments,
+success/failure results and incoming/native-return LastError are preserved;
+five mock leaf calls assert exact QPC accounting and reset. This is observer
+unit evidence, not a native USER or original converter replacement.
+
+verify-wow-observer-cost seals exact P9 thirteen images and paired MAPs,
+canonical guest ZIP, observer/compiler and all diagnostic sources. Actual
+project ordinary/sampled/private observations use the same installed P9 bytes
+in isolated packages and complete logon environment, never a diagnostic
+runtime DLL. The independently authored native control is only a repaint/
+posted-pair reference for the same sampled rectangles, not an implementation
+of WINMINE or an equivalent CPU workload. It requires all12 paired inputs,
+twelve visible changes, restored initial pixels, at least13 paints and normal
+close. Per-operation original and diagnostic QPC totals must agree, native
+leaf intervals are nonnegative/nonoverlapping, capture/flush counts agree and
+sleep count equals capture count minus one. No timer resolution or system
+animation setting changes; all objects/build outputs stay in owned test roots.
+
+Observer-cost-r1 passes native-leaf controls and all36 actual project samples,
+but fails before native control readiness; its aggregate remains1. Do not
+reuse it as a completed comparison. Source review identifies inherited
+STARTUPINFO hide policy as a possible test-window visibility issue. The
+reference now explicitly shows only its own window with no activation through
+SetWindowPos(SWP_SHOWWINDOW), records before/after visibility/startup facts,
+and reports both owned process exits on readiness failure. Fresh r2 proves
+the cause: both native controls report visible-before0, visible-after1,
+startup-flags257 and startup-show0. Both finish down12/up12/paints14/flag0.
+No product/window behavior is changed by this test-fixture correction.
+
+Observer-cost-r2 completes0: unit controls,36 actual P9 and24 native
+observations, all original twelve-toggle/pattern/normal-exit checks, exact
+source and both deployed13 identities. Median values are microseconds:
+
+| Reference/environment | Total | Sleep call wall time | BitBlt wall time | GdiFlush wall time |
+| --- | ---: | ---: | ---: | ---: |
+| Native ordinary | 30232.30 | 28247.40 | 1339.75 | 16.55 |
+| Native private | 30261.35 | 28423.20 | 1102.60 | 16.50 |
+| P9 ordinary | 30090.55 | 28506.75 | 943.65 | 15.10 |
+| P9 ordinary sampled | 34810.25 | 31819.80 | 1596.85 | 22.10 |
+| P9 private | 30651.15 | 28503.05 | 1061.05 | 15.50 |
+
+These are separate medians, not additive CPU shares. A capture leaf can wait
+for painter/compositor; guest work can run while the observer sleeps. Thus
+do not subtract28ms to claim a measured2ms guest response, or infer physical
+mouse smoothness. Strong conclusion: this witness's approximately30ms floor
+also exists without WOW and is dominated by observation sleep. It cannot
+resolve the remaining cost below that window. Preserve P9's actual timing
+values and every failed aggregate; no past speedup conclusion is rewritten.
+
+Second-role review selects a bounded next measurement, not a runtime Sleep
+change or guessed optimization: timestamp the existing native-to-WOW callback
+entry/return in a reversible, test-only project-provider copy, correlating
+the exact input HWND/message/QPC with the external posted-input stopwatch.
+Keep production/original bodies untouched, validate nested/failed/error
+instrumentation and read-only record identity, then compare exact P9 against
+the diagnostic copy. This can separate queue-to-entry, callback and later
+observation intervals without a faster busy-poll loop; it does not replace
+M4's full original data-lifetime audit or other M1--M6/S5/S6 obligations.
+No callback instrumentation runtime is admitted or claimed by this P10
+diagnostic delivery. First complete the default-observer noninstrumented
+protocol and final quality/clean main-origin delivery; runtime stays P9.
+
+Observer-cost-final-r1 completes0: the default (no instrumentation switch)
+observer recompiles and passes normal/sampled/private twelve-toggle and
+normal-retirement protocol against the sealed P9 package, without diagnostic
+output leaking into the default witness. Parser/diff/documentation quality
+passes. Final record updates require observer-cost-final-quality-r2; the
+reviewed nine source/test/document paths are the diagnostic-only S4 P10,
+not product changes. Observer-cost-git-delivery-r1 records committed/live-
+remote equality, clean status and unchanged13 images at both release targets.
+No deployment is needed because no runtime image changed. The normal native
+reference is slower than the project sample within observation noise; that
+does not prove the emulator is faster than native code. The supported
+conclusion remains measurement-floor attribution, not stutter resolution.

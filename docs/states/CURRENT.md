@@ -20,9 +20,8 @@ P2 removes that pseudo-identity after the consumer audit. Native USER remains
 the sole delivery/reply owner; do not build a parallel message transport.
 
 The [S4 fixed inventory](../etc/operations/t447-wow-execution-plan.md#s4-message-closure-admission-and-fixed-source-inventory)
-covers six complete groups, including implicit messages, reply/wait and
-converted-data lifetime, not just explicit SendMessage. No S4 runtime edit,
-new test result or new release is claimed by admission.
+defines all six groups, including implicit delivery, reply/wait and
+converted-data lifetime; explicit SendMessage alone cannot close S4.
 
 The [S4 source audit](../etc/evidence/m0-t447-s4-message-source-audit.md)
 now reconciles original sendmsg/focus/taskman consumers and retained native
@@ -114,18 +113,13 @@ including fresh fields, private sentinels, external snapshot/explicit refresh/
 native mutation, retirement and reuse. Final paired performance-r2 passes all
 six timing/normal-exit cases: ordinary median299.871ms P2 versus131.725ms
 candidate; sampled296.888ms versus131.884ms; private31.691ms versus32.257ms.
-This2.28x improvement is not stutter elimination. Frozen P3 passes
-mine-release-acceptance-r1: fresh native20, original30,12 actual S3 guest
-groups,6 actual default/extension message groups, WINMINE/SOL gameplay and
-normal exit in all3 styles, WRITE's retained startup frontier, Console17/
-Window17, direct native modal3 and complete-logon gameplay3. Delivery-r1
-publishes coherent13 to both destinations, verifies both-width deployed style
-and installed logon/gameplay3, and rechecks all hashes. No existing project
-process needed closure. No further source expansion during that delivery gate;
-the reviewed source, tests, evidence and release assets form this bounded P3
-handoff, not S4/T closure. The inherited-
-environment startup failure remains a different known failing control, not
-the owner's clarified symptom. See the [active-input evidence](../etc/evidence/m0-t447-s4-message-source-audit.md#clarified-owner-symptom-active-input-latency).
+This2.28x improvement is not stutter elimination. Frozen P3 passes the full
+native/original/actual-guest/message/application/DOS/modal/logon gates;
+delivery-r1 publishes coherent13 and verifies installed gameplay3/hashes.
+It is a bounded handoff, not S4/T closure. The inherited-environment startup
+failure is a distinct known control, not the owner's clarified symptom.
+Complete inputs, assertions, failures and delivery remain in the indexed
+[active-input evidence](../etc/evidence/m0-t447-s4-message-source-audit.md#clarified-owner-symptom-active-input-latency).
 
 After the clean P3 main/origin handoff5133c97f2, the next bounded work is
 read-only diagnosis of the existing EMS-alias lookup on the native memory
@@ -348,6 +342,9 @@ closure. The witness includes20ms pixel polling. Local-hook-delivery-r1
 publishes coherent13 to both destinations and passes deployed style/installed
 logon3 plus final hashes. Source/assets form bounded P9, with reviewed
 main/origin delivery evidence retained; full M1--M6/S5/S6 remains open.
+Observer-cost-r2 passes60 actual/native/API cases: roughly30ms includes28ms
+observer sleep, not guest CPU time. P10 default/quality passes; runtime P9
+and full M1--M6 remain. Next attribution needs actual callback timestamps.
 088's P7 seal,32 rollback/7 terminal negatives and complete delivery evidence
 remain in the source audit. Old child exit1 is unlocated, not repaired by a
 diagnostic pass. P7 timing is flat, not a physical-click/stutter fix. All

@@ -7,6 +7,7 @@ param([Parameter(Mandatory)][string]$PackageRoot,
  [Parameter(Mandatory)][string]$WowMap,
  [string]$HostWordSymbol,
  [string]$PageCostRva,
+ [switch]$ObserverCost,
  [switch]$Installed)
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
@@ -32,6 +33,7 @@ function Finish-Owned($p,$name,$seconds){
 }
 $stage=$null;$scope=$null;$observerProcess=$null;$game=$null;$sampler=$null;$gate=$null
 try{
+ if($ObserverCost -and $PageCostRva){throw 'Separate observer and target instrumentation; do not mix diagnostic overheads'}
  if($PageCostRva -and ($PageCostRva -notmatch '^[0-9A-Fa-f]{1,8}$' -or [Convert]::ToUInt32($PageCostRva,16) -eq 0)){throw 'Diagnostic page-cost RVA must be nonzero hexadecimal'}
  foreach($pair in @(@('ntvdm.exe',$WorkerMap),@('WOW32.DLL',$WowMap))){
   $image=Join-Path (Split-Path $pair[1]) $pair[0]
@@ -51,8 +53,10 @@ try{
  }
  Get-FileHash "$package/system32/ntvdm.exe","$package/system32/WOW32.DLL",$WorkerMap,$WowMap,$Observer,$CompilerDriver,$PSCommandPath,"$PSScriptRoot/wow_mine_latency_probe.c","$PSScriptRoot/wow_mine_gameplay_probe.c","$PSScriptRoot/wow_native_pc_sample.c"|Export-Csv -NoTypeInformation "$root/inputs.csv"
  if($PageCostRva){Get-FileHash "$PSScriptRoot/wow_page_cost_data.h","$PSScriptRoot/wow_page_cost_probe.h"|Export-Csv -NoTypeInformation -Append "$root/inputs.csv"}
+ if($ObserverCost){Get-FileHash "$PSScriptRoot/wow_observer_cost.h"|Export-Csv -NoTypeInformation -Append "$root/inputs.csv"}
  foreach($spec in @(@('latency','wow_mine_latency_probe.c','user32.lib gdi32.lib dwmapi.lib'),@('sample','wow_native_pc_sample.c','user32.lib'))){
   $costFlags=if($PageCostRva -and $spec[0] -eq 'latency'){' /DT447_PAGE_COST_PROFILE'}else{''}
+  if($ObserverCost -and $spec[0] -eq 'latency'){$costFlags+=' /DT447_OBSERVER_COST'}
   $line='/d /s /c "call "'+$CompilerDriver+'" cl.exe /nologo /MT /O2 /W3 /D_CRT_SECURE_NO_WARNINGS'+$costFlags+' /Fo"'+$root+'/'+$spec[0]+'.obj" /Fe"'+$root+'/'+$spec[0]+'.exe" "'+$PSScriptRoot+'/'+$spec[1]+'" /link '+$spec[2]+'"'
   $p=Start-Owned ('compile-'+$spec[0]) $env:ComSpec $line 120
   Finish-Owned $p ('compile-'+$spec[0]) 120

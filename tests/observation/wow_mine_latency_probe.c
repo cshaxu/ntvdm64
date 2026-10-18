@@ -2,6 +2,12 @@
  * Reuse the existing pixel/identity helpers; no guest/runtime hook or patch.
  * Wall time includes posted input, its handling, drawing and pixel polling.
  * Statistical sampling is optional and must be reported separately. */
+#ifdef T447_OBSERVER_COST
+#include "wow_observer_cost.h"
+#define BitBlt observer_cost_BitBlt
+#define GdiFlush observer_cost_GdiFlush
+#define Sleep observer_cost_Sleep
+#endif
 #define main wow_mine_gameplay_not_run
 #include "wow_mine_gameplay_probe.c"
 #undef main
@@ -56,14 +62,25 @@ int main(int argc, char **argv)
     previous = before;
     for (operation = 0; operation < 12; ++operation) {
         LARGE_INTEGER start, stop, frequency;
+#ifdef T447_OBSERVER_COST
+        LARGE_INTEGER posted;
+        observer_cost_sample cost;
+        ZeroMemory(&observer_cost,sizeof(observer_cost));
+#endif
         QueryPerformanceFrequency(&frequency);
 #ifdef T447_PAGE_COST_PROFILE
         if (!page_cost_snapshot("before", operation)) return 74;
 #endif
         QueryPerformanceCounter(&start);
-        if (!click(WM_RBUTTONDOWN, WM_RBUTTONUP, MK_RBUTTON) ||
-            !wait_cell(process, previous, FALSE, "toggle")) return 69;
+        if (!click(WM_RBUTTONDOWN, WM_RBUTTONUP, MK_RBUTTON)) return 69;
+#ifdef T447_OBSERVER_COST
+        QueryPerformanceCounter(&posted);
+#endif
+        if (!wait_cell(process, previous, FALSE, "toggle")) return 69;
         QueryPerformanceCounter(&stop);
+#ifdef T447_OBSERVER_COST
+        cost=observer_cost;
+#endif
 #ifdef T447_PAGE_COST_PROFILE
         if (!page_cost_snapshot("after", operation)) return 75;
 #endif
@@ -73,6 +90,12 @@ int main(int argc, char **argv)
             operation, (unsigned long long)((stop.QuadPart - start.QuadPart) *
             1000000 / frequency.QuadPart), previous, current,
             start.QuadPart, stop.QuadPart, frequency.QuadPart);
+#ifdef T447_OBSERVER_COST
+        printf("observer-cost operation=%lu total-qpc=%lld post-qpc=%lld blit-qpc=%lld flush-qpc=%lld sleep-qpc=%lld blit-calls=%lu flush-calls=%lu sleep-calls=%lu frequency=%lld\n",
+            operation,stop.QuadPart-start.QuadPart,posted.QuadPart-start.QuadPart,
+            cost.blit_ticks,cost.flush_ticks,cost.sleep_ticks,cost.blit_calls,
+            cost.flush_calls,cost.sleep_calls,frequency.QuadPart);
+#endif
         fflush(stdout);
         previous = current;
     }
