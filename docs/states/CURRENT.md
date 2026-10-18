@@ -4,18 +4,18 @@
 
 ## Current Work
 
-P20 retains P19's published13 runtime identities; both destinations hash-match.
-Current native20/20, original30, dedicated menu-resource and all9 real guest
-groups pass with documented dependency reuse. Word-break/nested USER16 calls
-and original dialog TAB/self-dispatch/default/Escape now have actual proof.
-Direct dialogs retain shared/private DS, modal exit, rollback and5 resource
-pairs per mode before task retirement.19 newline-only mirrors are restored.
-Latest old/new default GDI16/16 passes do not prove earlier16/19 cause fixed.
-P20 WINMINE/SOL gameplay/exit, WRITE startup and DOS17x2 pass;
-both-width deployed DLL boundaries pass. WRITE editing/save/full exit unproved.
-S3/T447 open; guest/ZIP unchanged; no added logical mirror diff.
-Selected278-file audit has191 exact/87 content-review rows, no format-only
-rows. Remaining register/local-marker/minimal-placement review is finite.
+P21 publishes coherent13 to assets/release and O:/winnt/system32 with matching
+hashes; only WOW32/NTVDM change. Current native20/20, original30, menu-resource,
+resource/style guards and all12 actual guest groups pass without row reuse.
+WINMINE/SOL gameplay/exit, WRITE startup and DOS17x2 pass. WRITE editing/save/
+full exit remains unproved. Actual hook callbacks witness the relocated
+diagnostics; enabled/disabled/failure/error and /Gd ABI checks pass separately.
+The selected278 mirror audit has192 exact,86 content, zero format-only or
+missing-register rows. wow32.h is exact original; wmdisp32 loses50 net lines.
+The finite ABI/GDI/subset placement/registration cohort is complete, not proof
+of every dormant path. S3/T447 remain open for fixed-chain closure review;
+S4 message and S5 per-task obligations unchanged. Guest/ZIP unchanged.
+Older default GDI16/19 and approved common-dialog risks are not claimed fixed.
 Chronology below is historical; see the source ledger for superseding proof.
 
 Dialog-context-r2's scoped boundary-double evidence remains in the source ledger.

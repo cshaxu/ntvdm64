@@ -119,6 +119,54 @@ VOID WINAPI wow_user_trace_file_open_failure(LPCSTR source, LPCSTR normalized,
     SetLastError(saved);
 }
 
+/* MVDM-HOST-DIV-340: existing observation moved out of the original caller.
+ * Keep both payloads, opt-in and LastError contract, including I/O failure.
+ * These copied scalars neither enter the guest nor select a callback. */
+VOID WINAPI wow_user_trace_wndproc_enter(UINT message, DWORD raw, DWORD procedure)
+{
+    CHAR path[MAX_PATH];
+    CHAR line[184];
+    HANDLE file;
+    DWORD bytes, written;
+    DWORD saved = GetLastError();
+    if (GetEnvironmentVariableA("MVDM_WOW_CALLBACK_TRACE_PATH", path, sizeof(path))) {
+        file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
+            NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+        if (file != INVALID_HANDLE_VALUE) {
+            bytes = (DWORD)sprintf_s(line, sizeof(line),
+                "%lu W32WndProc-enter message=%04X raw=%08lX proc=%08lX\r\n",
+                (unsigned long)GetCurrentProcessId(), (unsigned)message,
+                (unsigned long)raw, (unsigned long)procedure);
+            if (bytes) (void)WriteFile(file, line, bytes, &written, NULL);
+            CloseHandle(file);
+        }
+    }
+    SetLastError(saved);
+}
+
+VOID WINAPI wow_user_trace_wndproc_return(UINT message, DWORD procedure,
+    BOOL success, LONG result)
+{
+    CHAR path[MAX_PATH];
+    CHAR line[160];
+    HANDLE file;
+    DWORD bytes, written;
+    DWORD saved = GetLastError();
+    if (GetEnvironmentVariableA("MVDM_WOW_CALLBACK_TRACE_PATH", path, sizeof(path))) {
+        file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
+            NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+        if (file != INVALID_HANDLE_VALUE) {
+            bytes = (DWORD)sprintf_s(line, sizeof(line),
+                "%lu W32WndProc message=%04X proc=%08lX success=%u result=%08lX\r\n",
+                (unsigned long)GetCurrentProcessId(), (unsigned)message,
+                (unsigned long)procedure, (unsigned)success, (unsigned long)result);
+            if (bytes) (void)WriteFile(file, line, bytes, &written, NULL);
+            CloseHandle(file);
+        }
+    }
+    SetLastError(saved);
+}
+
 /* ADAPTER-WOW-032: retain private USER aliases only for the original thunk
  * invocation. Do not catch/translate exceptions or alter frame/result state;
  * original W32Dispatch/W32TryCall remain the exception-policy owners. */

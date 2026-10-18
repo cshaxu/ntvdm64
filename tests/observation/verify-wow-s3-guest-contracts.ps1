@@ -23,6 +23,7 @@ try {
         'tests/observation/verify-wow-s3-guest-contracts.ps1',
         'tests/observation/win16_controls_probe.asm',
         'tests/observation/win16_dialog_probe.asm',
+        'tests/observation/win16_hook_probe.asm',
         'tests/observation/win16_common_dialog_probe.asm')
     $paths=@(& git -C $repo ls-files -co --exclude-standard -- @sourceRoots)|Sort-Object -Unique
     if($LASTEXITCODE){throw 'Source enumeration failed'}
@@ -39,7 +40,7 @@ try {
         Export-Csv -NoTypeInformation -LiteralPath "$out/package-sha256.csv"
     Get-FileHash -LiteralPath $observerPath|Export-Csv -NoTypeInformation "$out/observer-sha256.csv"
     $rows=@()
-    foreach($case in @('controls','dialog','common-dialog')){
+    foreach($case in @('controls','dialog','common-dialog','hook')){
         foreach($mode in @('Off','Win16','All')){
             $name="$case-$mode"
             $line='-NoProfile -ExecutionPolicy Bypass -File "'+$PSScriptRoot+'/verify-win16-hook-probe.ps1" -PackageRoot "'+$package+'" -Observer "'+$observerPath+'" -BuildRoot "'+$out+'/'+$name+'" -Case '+$case+' -Win16Style '+$mode

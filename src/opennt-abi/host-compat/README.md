@@ -1,5 +1,16 @@
 # win32 family
 
+ADAPTER-WIN32-042 declaration recovery extension (T447 S3): expose only the
+existing original public/sdk/inc/wownt32.h WOWGetVDMPointer declaration in
+wow_user_declarations.h, already selected by nt.h. Preserve WINAPI and the
+DWORD/DWORD/BOOL inputs. The incompatible modern WOW header remains excluded;
+the original WOW32 body remains the provider. This removes the project-added
+prototype from original wow32.h instead of retaining an unnecessary mirror
+intrusion. No source body, memory lease, mapping owner or runtime policy is
+introduced. Pinned OpenNT5c5b979ec08c17d3ca2eb70e8aad62d26515d01c and the
+existing exact ABI carrier supply provenance; grouped /Gz builds and original
+callback/guest acceptance remain required before delivery.
+
 T447 S3 places its declaration-only WOW control/resource and character
 conversion facades in include/wow_control_resource_abi.h and
 include/wow_char_conversion_abi.h. They replace the invented controlabi.h and

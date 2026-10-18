@@ -271,7 +271,7 @@ ULONG FASTCALL WU32GetClassLong(PVDMFRAME pFrame)
 #ifdef WOW_USER_PRIVATE_REDIRECT
                 BOOL procedureIsGuest;
 
-                /* MVDM-HOST-DIV-339: decoded entry is not a native CPD. */
+                /* DIVERGENCE(MVDM-HOST-DIV-339): decoded entry is not a native CPD. */
                 dwProc32 = wow_user_get_procedure(hwnd, TRUE, &procedureIsGuest);
 #else
                 dwProc32 = GetClassLong(hwnd, iOffset);
@@ -745,6 +745,7 @@ ULONG FASTCALL WU32SetClassLong(PVDMFRAME pFrame)
                     // routine.  We can just set it back to the 32-bit routine.
                     //
 #ifdef WOW_USER_PRIVATE_REDIRECT
+                    /* DIVERGENCE(MVDM-HOST-DIV-339): explicit native origin. */
                     dwWndProc32Old = wow_user_set_procedure(HWND32(parg16->f1), TRUE, dwWndProc32New, FALSE, &previousIsGuest);
                     if (!dwWndProc32Old) break;
 #else
@@ -773,6 +774,7 @@ ULONG FASTCALL WU32SetClassLong(PVDMFRAME pFrame)
                     }
 
 #ifdef WOW_USER_PRIVATE_REDIRECT
+                    /* DIVERGENCE(MVDM-HOST-DIV-339): explicit guest origin. */
                     dwWndProc32Old = wow_user_set_procedure(HWND32(parg16->f1), TRUE, l | WNDPROC_WOW, TRUE, &previousIsGuest);
                     if (!dwWndProc32Old) break;
 #else

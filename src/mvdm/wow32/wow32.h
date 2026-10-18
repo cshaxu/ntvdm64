@@ -109,8 +109,6 @@
  */
 typedef ULONG   (FASTCALL *LPFNW32)(PVDMFRAME);
 
-void *WOWGetVDMPointer(VPVOID Address, DWORD Count, BOOL ProtectedMode);
-
 
 /* Dispatch table entry   DO NOT CHANGE THE SIZES OF THESE TABLES WITHOUT
 **                        CHANGING I386\FASTWOW.ASM!

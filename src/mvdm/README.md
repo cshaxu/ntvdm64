@@ -1,5 +1,47 @@
 # mvdm
 
+Retrospective MVDM-HOST-DIV-304 register completion: wcall16.c's existing
+before/simulate/after callback-frame observations call the already owned
+wow_callback_frame_trace. Original resolver, stack selection, host_simulate,
+return/unwind and failure policies remain unchanged. Copied scalar CPU/frame
+values go only to the existing process-local opt-in log; no alternate
+dispatcher, guest-memory read, CPU-register write or new logging interface is
+introduced. This fills the missing canonical row for the existing local ID,
+not a new mirror edit. Actual callback/lifetime traces remain acceptance data.
+
+MVDM-HOST-DIV-340 registers relocation of the existing default-off window
+callback diagnostics from wow32/wmdisp32.c to wow32-dll's existing
+wow_user_thunk_scope owner. Keep the raw-procedure scalar capture and two
+named scalar-only calls around unchanged CallBack16/BlockWOWIdle. Preserve
+the existing environment opt-in, record text/order and LastError on enabled,
+disabled and failed-output paths. The same registration marks wkfileio.c's
+existing owned file-open-failure trace; it does not change open/error policy.
+No callback dispatcher, guest-memory reader or new tracing subsystem is added.
+Original pinned owners: OpenNT base/mvdm/wow32/{wmdisp32.c,wkfileio.c}.
+Budget: declaration include, scalar capture and two calls instead of the two
+embedded diagnostic bodies; existing file trace call unchanged. Focused
+actual-owner trace tests and real Win16 callbacks plus grouped regression
+are required before delivery. This registration precedes the relocation.
+
+MVDM-HOST-DIV-341 retrospectively registers the already selected GDI handle
+boundary in wow32/walias.c/h. Original ENTRYWOW/GdiQueryTable shared state is
+unavailable: T422 E8 records native GdiQueryTable returning NULL for a real
+bitmap. Existing worker-owned wow_gdi_alias remains the one bounded carrier,
+with native GDI still validating real resources; no second drawing engine,
+private modern table reader or change to the existing alias policy. Retain
+the public conversion/retirement seams and mark the omitted obsolete layout
+locally. Pinned OpenNT walias.c/h and T422 E8/E9 retain source/positive and
+negative evidence; this adds registration, not a new runtime implementation.
+
+MVDM-HOST-DIV-342 retrospectively registers the one-word APIENTRY correction
+in wow32/isvwow.h. Original wmmedia.c already defines WOW32ResolveMemory as
+APIENTRY; the original default-/Gz build masked the incomplete declaration.
+Keep explicit ABI for callers compiled with another default convention.
+No function body or public signature changes. The unnecessary local
+WOWGetVDMPointer declaration in wow32.h instead returns to byte-exact source:
+ADAPTER-WIN32-042's existing declaration carrier recovers the exact original
+public/sdk/inc/wownt32.h prototype. No new memory mapping implementation.
+
 MVDM-HOST-DIV-339 reserves the S3 typed procedure-service correction at six
 call sites in wow32/wuwind.c::WU32Get/SetWindowLong and
 wow32/wuclass.c::WU32Get/SetClassLong, pinned to OpenNT

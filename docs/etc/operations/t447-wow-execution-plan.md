@@ -71,6 +71,18 @@ are verified without replacing production algorithms. S3 remains active for
 the specifically named register/local-marker/minimal-placement review; this
 is not S3 closure, a new S admission or transfer of a foundation defect to S4.
 
+The post-P20 finite source-boundary cohort relocates existing callback
+diagnostics out of wmdisp32, restores wow32.h exactly, recovers its excluded
+SDK declaration in the existing declaration carrier, and registers the
+historical ABI/GDI/subset seams. The selected278 inventory now has192 exact,
+86 content-different and zero format-only or missing-registration rows.
+P21 build, focused diagnostic/ABI checks, current native20/20, original30,
+MENU-01, all12 actual guest groups and app/DOS floors pass. Coherent13 is
+published/hash-matched at both destinations; only WOW32/NTVDM change.
+This finite remediation cohort is complete. Do not substitute registration
+coverage for fixed-chain semantic/lifetime closure or declare S3/T447 closed
+from it. WRITE remains initialization-only; S4/S5 obligations remain unchanged.
+
 Owner clarification: exhaust source reuse and bounded semantic-preserving
 adaptation before proposing a compatibility exception. Difficulty, missing
 proof or a simpler reduced implementation is not evidence of impossibility.

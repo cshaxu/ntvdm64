@@ -1703,7 +1703,7 @@ ULONG FASTCALL WU32GetWindowLong(PVDMFRAME pFrame)
 #ifdef WOW_USER_PRIVATE_REDIRECT
                 BOOL procedureIsGuest;
 
-                /* MVDM-HOST-DIV-339: keep explicit decoded-entry origin. */
+                /* DIVERGENCE(MVDM-HOST-DIV-339): keep explicit decoded-entry origin. */
                 dwWndProc32Cur = wow_user_get_procedure(HWND32(parg16->f1), FALSE, &procedureIsGuest);
 #else
                 dwWndProc32Cur = GetWindowLong(HWND32(parg16->f1), GWL_WNDPROC);
@@ -2476,6 +2476,7 @@ ULONG FASTCALL WU32SetWindowLong(PVDMFRAME pFrame)
                 // routine.  We can just set it back to the 32-bit routine.
                 //
 #ifdef WOW_USER_PRIVATE_REDIRECT
+                /* DIVERGENCE(MVDM-HOST-DIV-339): explicit native origin. */
                 dwWndProc32Old = wow_user_set_procedure(HWND32(parg16->f1), FALSE, dwWndProc32New, FALSE, &previousIsGuest);
 #else
                 dwWndProc32Old = SetWindowLong(HWND32(parg16->f1), GWL_WNDPROC, dwWndProc32New);
@@ -2512,6 +2513,7 @@ ULONG FASTCALL WU32SetWindowLong(PVDMFRAME pFrame)
                 }
 
 #ifdef WOW_USER_PRIVATE_REDIRECT
+                /* DIVERGENCE(MVDM-HOST-DIV-339): explicit guest origin. */
                 dwWndProc32Old = wow_user_set_procedure(HWND32(parg16->f1), FALSE, l | WNDPROC_WOW, TRUE, &previousIsGuest);
 #else
                 dwWndProc32Old = SetWindowLong(HWND32(parg16->f1), GWL_WNDPROC, l | WNDPROC_WOW);

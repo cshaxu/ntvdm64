@@ -1,5 +1,14 @@
 # WOW32 DLL target component
 
+ADAPTER-WOW-032 / MVDM-HOST-DIV-340 relocates the existing default-off
+W32WndProc entry/return diagnostics into wow_user_thunk_scope.c. The original
+caller retains only raw scalar capture and two calls at the same boundaries.
+Keep exact text, environment opt-in, success/result observation and LastError
+on disabled/failed-output paths. No callback, policy, heap or lifetime owner
+is added; the existing original procedure and scopes remain authoritative.
+Direct production-owner diagnostics and real Win16 Hook/window callbacks are
+required alongside the complete affected cohort before publication.
+
 ADAPTER-WOW-076 canonicalizes the original signed16 HWND carrier at shared
 original-dialog/control entries and immutable guest entries using the exact
 binding's retained identity. Ordinary guest windows without original host

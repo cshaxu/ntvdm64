@@ -1,5 +1,14 @@
 # opennt-host
 
+Retrospective OPENNT-HOST-027 register completion: ntrtl.h's existing
+RtlNtStatusToDosError/NoTeb aliases select the private symbol domain of the
+already admitted OPENNT-HOST-016 original error.c/error.h mapping owner.
+The modern NTDLL names cannot select that exact NT4 table. Only symbol
+binding changes; the original status table, fallback/order and source-shaped
+TLS LastStatusValue carrier remain unchanged. No new mapping implementation
+or TEB-layout cast is introduced. This records the existing local027 marker,
+not a new source change or a second mapping policy.
+
 OPENNT-HOST-122 registers five storage assignments in kernel/cleanup.c,
 pinned to OpenNT5c5b979ec08c17d3ca2eb70e8aad62d26515d01c: three WND procedure
 writes and two CLS procedure writes use named adaptation leaves. One WND

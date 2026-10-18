@@ -1,9 +1,10 @@
-/* OPENNT-HOST-090: original default-window message tables and initializer. */
+/* DIVERGENCE(OPENNT-HOST-090): retain original message tables/initializer;
+ * omit the unrelated USER server. SharedAlloc binds their local storage. */
 #if defined(WOW_ORIGINAL_DEFAULT_MESSAGES)
 #include "wow_default_message_bindings.h"
 #define SharedAlloc(bytes) HeapAlloc(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, (bytes))
 
-/* OPENNT-HOST-117: unchanged original Button dispatch membership. */
+/* DIVERGENCE(OPENNT-HOST-117): unchanged original Button dispatch membership. */
 CONST WORD gawButtonWndProc[] = {
     WM_NCHITTEST,
     WM_ERASEBKGND,

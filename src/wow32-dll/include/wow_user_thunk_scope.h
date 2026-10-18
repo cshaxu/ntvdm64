@@ -4,4 +4,6 @@
  * including the selected profile's FASTCALL definition, without a cast. */
 ULONG WINAPI wow_user_invoke_thunk(LPFNW32, PVDMFRAME);
 VOID WINAPI wow_user_trace_file_open_failure(LPCSTR, LPCSTR, WORD, DWORD);
+VOID WINAPI wow_user_trace_wndproc_enter(UINT, DWORD, DWORD);
+VOID WINAPI wow_user_trace_wndproc_return(UINT, DWORD, BOOL, LONG);
 #endif

@@ -82,6 +82,7 @@ VOID PseudoDestroyClassWindows(PWND pwndParent, PCLS pcls, wow_cleanup_context *
                     "USER: Wow Window not destroyed: %lX", pwnd);
 
             if (!TestWF(pwnd, WFSERVERSIDEPROC)) {
+                /* DIVERGENCE(OPENNT-HOST-122): actual native procedure slot. */
                 wow_cleanup_set_window_procedure(context, pwnd, (WNDPROC_PWND)gpsi->apfnClientA.pfnDefWindowProc);
             }
         }
@@ -243,12 +244,14 @@ static BOOL sbFirstCall = TRUE;
                 if (pheT->bType == TYPE_WINDOW) {
                     PWND pwnd = (PWND) pheT->phead;
 
+                    /* DIVERGENCE(OPENNT-HOST-122): a native CPD is not a guest selector. */
                     if (pwnd->procedure_is_guest && (WNDPROC_WOW & (ULONG)pwnd->lpfnWndProc) &&
                         ((PTHREADINFO)pheT->pOwner)->ppi == ppi &&
                         WowWndProcInSelList(pwnd->lpfnWndProc, SelListTemp))
                     {
                         RIPMSG1(RIP_WARNING,
                             "USER: Wow Window not destroyed: %lX", pwnd);
+                        /* DIVERGENCE(OPENNT-HOST-122): actual native procedure slot. */
                         wow_cleanup_set_window_procedure(context, pwnd, (WNDPROC_PWND)gpsi->apfnClientA.pfnDefWindowProc);
                     }
                 }
@@ -321,11 +324,13 @@ static BOOL sbFirstCall = TRUE;
                     atom = (*ppcls)->atomClassName;
                     for (iSel = 0; iSel < sizeof(spfnwp) / sizeof(spfnwp[0]); iSel++) {
                         if (atom == gpsi->atomSysClass[iSel]) {
+                            /* DIVERGENCE(OPENNT-HOST-122): original CLS storage owner. */
                             wow_cleanup_set_class_procedure(*ppcls, (WNDPROC_PWND)spfnwp[iSel]);
                             break;
                         }
                     }
                     if (iSel == sizeof(spfnwp) / sizeof(spfnwp[0]))
+                        /* DIVERGENCE(OPENNT-HOST-122): original CLS storage owner. */
                         wow_cleanup_set_class_procedure(*ppcls, (WNDPROC_PWND)gpsi->apfnClientW.pfnDefWindowProc);
                 }
 
@@ -364,6 +369,7 @@ static BOOL sbFirstCall = TRUE;
 
                 pwnd = (PWND) pheT->phead;
                 if (!TestWF(pwnd, WFSERVERSIDEPROC)) {
+                    /* DIVERGENCE(OPENNT-HOST-122): actual native procedure slot. */
                     wow_cleanup_set_window_procedure(context, pwnd, (WNDPROC_PWND)gpsi->apfnClientA.pfnDefWindowProc);
                 }
             }

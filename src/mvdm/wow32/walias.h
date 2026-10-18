@@ -17,6 +17,7 @@ typedef HANDLE HAND32;
 #define _WALIAS_
 #include "wspool.h"
 #include "wowuserp.h"
+/* DIVERGENCE(MVDM-HOST-DIV-341): original GDI table's existing carrier. */
 #include "ntvdm-exe/wow/include/wow_gdi_alias.h"
 
 
@@ -187,6 +188,8 @@ typedef struct _HDW {
 
 #define SERVERHANDLE(h)            (HIWORD(h))
 
+/* DIVERGENCE(MVDM-HOST-DIV-341): conversion and FREE* retire the same alias;
+ * modern GDI remains the real resource/type/lifetime authority. */
 #define GDI32(h16)                 mvdm_wow_gdi_handle_to_native((HAND16)(h16))
 #define GDI16(h32)                 ((HAND16)mvdm_wow_gdi_handle_from_native((HANDLE)(h32)))
 

@@ -14396,3 +14396,155 @@ including9 specifically attributed local-marker cases. MENU-01's dedicated
 parser proof and all19 format restorations are now complete, not pending.
 Do not call a source-registration review finished merely because every runtime
 gate passes. S4/S5 remain assigned as before; this P does not close S3/T447.
+
+### Post-P20: finite mirror-boundary remediation cohort
+
+Previous goal turn is progress:76111b308 is pushed, both published13 sets
+are P19-identical, real callback/navigation/parser proof is stronger and19
+format-only files are now exact originals. The worktree is clean at admission
+of this continuation, still S3 single-person implementer/reviewer.
+
+Complete the specifically identified9 local-marker cases as one group.
+Register340 moves the existing two wmdisp32 diagnostic blocks into the
+already selected wow_user_thunk_scope owner, retaining scalar arguments,
+placement around unchanged CallBack16, output spelling/order and LastError.
+Register341 attributes existing walias GDI conversion/retirement to the proved
+unavailable NT4 shared-table boundary and its existing bounded worker carrier.
+Register342 retains isvwow.h's necessary explicit APIENTRY, matching original
+wmmedia.c. Recover the exact original SDK WOWGetVDMPointer prototype through
+existing ADAPTER-WIN32-042 and delete the unnecessary wow32.h intrusion.
+Existing339 procedure identity and090 source-subset boundaries acquire their
+local DIVERGENCE labels without changing selection or algorithm.
+
+This is not a new scheduler, native USER replacement or semantic exception.
+The original public SDK declaration has DWORD/DWORD/BOOL and WINAPI, so it
+does not need the private VPVOID typedef or a second host header/interface.
+The existing carrier is already included before original wow32.h. Retaining
+APIENTRY on ResolveMemory is necessary for external/default-/Gd callers; do
+not remove it solely because the product's /Gz masks that mismatch.
+
+Before any build, finish the whole source placement group and its focused
+tests: direct production trace owner enabled/disabled/failed-output/error/
+exact-text checks, plus existing actual Win16 window/hook callbacks with
+paired trace records. Then run the complete affected source/native/original/
+guest/app/DOS/coherent13 cohort once. No guest source or binary change,
+private GDI table reconstruction, new public wire ABI or computer use.
+
+Source-registers-r1 cannot read the external reference Git directory inside
+the initial sandbox, so it is not a source-version result. R2 under the
+existing source-research authority verifies pinned HEAD and no tracked
+original modifications, then reports five finite metadata issues. Three are
+valid older marker syntax/family that the first parser omitted: SUPPORT006,
+plain007 and same-comment104. Accept those existing local registrations rather
+than changing source merely to suit a parser. Two are real missing canonical
+rows: existing local027 names the already registered016 original RTL error
+symbol domain, and local304 is the existing source-shaped frame observation
+around original callback/simulator transitions. Complete those rows after
+source attribution; no error table, guest, callback or timing change follows.
+
+Source-registers-r4 is the final pre-build inventory:278 selected mirrors,
+192 byte-exact,86 content-different, zero format-only/missing local identities
+or missing canonical rows. Function-level review additionally catches122's
+five cleanup storage calls/origin guard and117's retained Button table inside
+files already marked for other slices. Add their existing IDs locally;
+a file having any one marker is not proof of every seam. Ordinary comment
+references are inventoried separately, not automatically relabelled as changed
+expressions or used to invent source edits.
+
+Source-owner-build-r1 passes222 provider steps and487 worker steps with
+Release/MT/Gz/CCPU40; unchanged style outputs reuse their verified inputs.
+The worker import library is rebuilt in that group, so settle the final
+coherent build in dependency order worker then provider, not provider before
+its newly written implicit import dependency. This is an incremental final
+link/check, not a second unrelated clean rebuild. No source behavior changed
+after the cohort was wired.
+
+Thunk-trace-r1 compiles the real diagnostic owner and the explicit-/Gd public
+ABI check successfully, but its standalone executable fails linking _printf:
+production's _NO_CRT_STDIO_INLINE requires the MSVC legacy_stdio_definitions
+library for this fixture's print marker. Supply that toolchain library in
+the fixture link only. No production dependency or original function change.
+The diagnostic runtime assertions have not yet run in r1; retain that failure.
+
+Source-owner-build-r2 settles worker before provider and exits0; both Ninja
+checks report no work after r1's complete rebuild. The final WOW32 hash is
+3D2CEB931C6E43E097FA72185049B626332F346407A94A007ADDB7259411D3A9;
+NTVDM is95FC7B6290066C0561D102045E1BB287544AE5443B76151E7B231DC49D3497A0.
+The three style images remain byte-identical. Thunk-trace-r2 exits0: the real
+owner preserves exact four-line text and LastError when disabled, enabled or
+unable to create its output; the fixture never enters a callback scope.
+Its separate /Gd object validates both public memory-function conventions.
+These are diagnostic/ABI proofs, not guest behavior or release delivery.
+
+Second-role source review resolves the eight reference-only-ID inventories:
+globals.h and userk.h add unchanged original declarations/constants;
+user.h/usercli.h retain unchanged types, operands and collaborator signatures;
+ntstubs.c retains original client wrappers around its already locally marked121
+native-procedure seam; client/winmgrc.c and rtl/winmgr.c/wow.c retain unchanged
+geometry/traversal bodies under078's declared source-subset selection.
+The091 geometry facade selects the existing default-window context, not a new
+geometry authority. File-level crop registrations and the per-body provenance
+references describe these subsets; no executable expression is changed by
+this reconciliation. Registration coverage alone does not prove all functions
+semantically equivalent. The fixed-chain behavioral matrix and native/guest
+assertions remain separate gates, including the previously approved boundaries.
+
+Source-owner-acceptance-r1 is the fresh grouped candidate run: native20,
+both-width style boundary, original30, resource guard, dedicated MENU-01,
+then twelve actual guest groups (controls/dialog/common-dialog/hook times
+Off/Win16/All). Source-owner-product-r1 waits for its exact owned supervisor
+before running application/DOS floors. No failed-row reuse or old native
+acquisition exemption is selected for this run. Both are pending at this
+recording point; published assets and installed files still remain P20.
+
+Source-owner-acceptance-r1 now exits0. Current uninterrupted native20/20,
+both-width style boundary, original30, common-dialog resource guard and
+dedicated MENU-01 all pass. All twelve real guest groups pass, including
+the added hook case in each policy mode; original callback entry/return
+observations are23/23 with23 matching witnesses per mode. This proves actual
+use of the relocated observer, not global atomic callback pairing. Existing
+hook query/nested creation/veto/recovery/unhook and exact cleanup assertions
+remain enabled. Source/artifact hashes are rechecked after the full cohort.
+Post-build source-registers-r5 independently reproduces278/192/86 with zero
+format-only/missing-registration rows. Product floors and publication remain
+pending here; no guest or ZIP is changed by these tests.
+
+#### P21 product/publication checkpoint and second-role review
+
+Source-owner-product-r1 exits0. WINMINE and SOL each pass gameplay and normal
+exit Off/Win16/All; WRITE passes its established startup samples in each mode
+only. Console17 and Window17 have zero Expected/Actual mismatches, preserving
+interactive/nested COMMAND, errorlevels, native streams and EDIT exit.
+Source-owner-acceptance-r1 supervisor24944 starts2026-10-18T00:46:52.6480423Z;
+product supervisor26940 starts2026-10-18T00:47:27.3265273Z and waits for the
+exact owned acceptance identity. No computer use or manual owner action.
+
+Published-source-owner-r1 exits0 after verifying current20/20, original30,
+all12 actual guest groups, exact diagnostics, all17x2 DOS expectations and
+frozen source/artifact/package inputs. It preserves27 recoverable image/
+manifest backups, finds no installed project process requiring closure,
+publishes WOW32 and NTVDM only and verifies candidate/assets/installed13
+hash equality. The other11 images remain P20-identical. Exact new identities
+are in source-owner-build-r2/output-sha256.csv and the release manifest.
+Deployed DLL/demo boundary verification subsequently exits0, with both widths'
+actual import/negative/lifetime/font and28-page demo normal-exit assertions.
+It is not a claim of complete pixel/control interaction or WRITE usability.
+Final documentation and clean pushed-commit checks remain separate gates.
+
+Second-role diff review confirms the only executable mirror change is the
+registered340 two-call diagnostic relocation; CallBack16, its original
+arguments/order, failure fallback and BlockWOWIdle pairing stay unchanged.
+wow32.h loses its unnecessary two-line intrusion and becomes exact upstream;
+its public SDK declaration moves to existing042. wmdisp32 is+8/-58 normalized
+lines. The remaining modified mirror lines are provenance comments, including
+necessary existing342 APIENTRY/GDI341/typed339 and cleanup122 boundaries.
+No guest input, ZIP, original algorithm, public wire ABI, modern private
+layout reader or duplicate state owner is added. Keep every failed fixture/
+registration attempt as evidence; none is silently rewritten as a pass.
+
+This P completes the admitted finite placement/register cohort. It does not
+close S3 or T447 automatically: the final fixed-chain exit review must decide
+from the accumulated source and actual behavior evidence, not from a marker
+count. S4 mixed messages/replies/reentry, S5 single-task termination and S6
+whole-T acceptance stay assigned. WRITE editing/save/full normal exit and
+the previously approved unexplained common-dialog risk are not newly proved.

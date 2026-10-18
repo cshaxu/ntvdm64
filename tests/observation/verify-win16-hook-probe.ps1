@@ -25,7 +25,8 @@ if($Case -eq 'controls'){$probe='CTLPROBE'}
 if($Case -eq 'dialog'){$probe='DLGPROBE'}
 $saved=@{}
 foreach($name in @('TEMP','TMP','PATH','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_WOW_DISPATCH_TRACE_PATH',
-        'MVDM_WOW_CALLBACK_FRAME_TRACE_PATH','MVDM_WOW_WINDOW_TRACE_PATH')){
+        'MVDM_WOW_CALLBACK_FRAME_TRACE_PATH','MVDM_WOW_WINDOW_TRACE_PATH',
+        'MVDM_WOW_CALLBACK_TRACE_PATH')){
     $saved[$name]=[Environment]::GetEnvironmentVariable($name)
 }
 try {
@@ -88,6 +89,7 @@ try {
     if($Case -eq 'idle'){$env:MVDM_WOW_WINDOW_TRACE_PATH="$root/lifetime.txt"}
     $env:PATH="$runtime\system32;"+$env:SystemRoot+'\System32'
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
+    if($Case -eq 'hook'){$env:MVDM_WOW_CALLBACK_TRACE_PATH="$root/wndproc.txt"}
     $env:MVDM_WOW_DISPATCH_TRACE_PATH="$root/dispatch.txt"
     $start=[Diagnostics.ProcessStartInfo]::new((Resolve-Path $Observer).Path)
     $start.UseShellExecute=$false;$start.CreateNoWindow=$true
@@ -408,6 +410,21 @@ try {
         throw 'Guest callback/nesting/veto/recovery/cleanup assertions failed'
     }
     'PASS real Win16 CBT query/nested creation/veto/recovery/unhook and launcher completion'|Set-Content "$root/result.txt"
+    if($Case -eq 'hook'){
+        $trace=Get-Content "$root/wndproc.txt" -Raw
+        $entered=[regex]::Matches($trace,'(?m)^\d+ W32WndProc-enter message=([0-9A-F]{4}) raw=[0-9A-F]{8} proc=([0-9A-F]{8})\r?$')
+        $returned=[regex]::Matches($trace,'(?m)^\d+ W32WndProc message=([0-9A-F]{4}) proc=([0-9A-F]{8}) success=[01] result=[0-9A-F]{8}\r?$')
+        $pairs=@($returned|Where-Object {
+            $return=$_
+            @($entered|Where-Object {$_.Index -lt $return.Index -and
+                $_.Groups[1].Value -eq $return.Groups[1].Value -and
+                $_.Groups[2].Value -eq $return.Groups[2].Value}).Count
+        })
+        if(!$pairs.Count){throw 'Actual original window callback did not reach both owned diagnostics'}
+        @{entries=$entered.Count;returns=$returned.Count;matchingWitnesses=$pairs.Count;
+          limit='Matching actual invocation witnesses, not whole-process atomic trace pairing'}|
+            ConvertTo-Json|Set-Content "$root/wndproc-witness.json"
+    }
     }
     0|Set-Content "$root/result.exit"
 } catch {

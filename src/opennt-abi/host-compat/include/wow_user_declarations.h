@@ -14,4 +14,9 @@ typedef VOID (APIENTRY *PFNW32ET)(VOID);
 #define WCB16_CDECL (0x1)
 #endif
 
+/* ADAPTER-WIN32-042: exact original public/sdk/inc/wownt32.h declaration.
+ * Recover the excluded SDK endpoint here, not inside original wow32.h. */
+LPVOID WINAPI WOWGetVDMPointer(DWORD vp, DWORD dwBytes,
+                               BOOL fProtectedMode);
+
 #endif
