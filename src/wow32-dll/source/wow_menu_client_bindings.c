@@ -298,16 +298,16 @@ BOOL WINAPI wow_menu_client_refresh_all(wow_task_order_process *process)
         }
     }
     if (mvdm_softpc_wow_page_domain_active()) {
-        mvdm_softpc_wow_window_observation *view;
+        mvdm_softpc_wow_window_menu_observation *view;
         ULONG count = 0;
         BOOL complete = TRUE;
         DWORD error;
-        if (!mvdm_softpc_wow_page_domain_copy_window_view(0, NULL, &count)) return FALSE;
+        if (!mvdm_softpc_wow_page_domain_copy_window_menu_view(0, NULL, &count)) return FALSE;
         view = HeapAlloc(GetProcessHeap(), 0, count * sizeof(*view));
         if (!view) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return FALSE; }
-        if (!mvdm_softpc_wow_page_domain_copy_window_view(count, view, &count)) complete = FALSE;
+        if (!mvdm_softpc_wow_page_domain_copy_window_menu_view(count, view, &count)) complete = FALSE;
         for (i = 0; complete && i < count; ++i) {
-            HWND window = (HWND)(ULONG_PTR)view[i].links.window;
+            HWND window = (HWND)(ULONG_PTR)view[i].window;
             BOOL local_state = view[i].process_id == GetCurrentProcessId();
             HMENU menu;
             if (window == GetDesktopWindow() ||
@@ -320,7 +320,7 @@ BOOL WINAPI wow_menu_client_refresh_all(wow_task_order_process *process)
                 if (local_state) complete = FALSE;
                 continue; /* Retain a complete external tree/attachment. */
             }
-            if (!mvdm_softpc_wow_page_domain_window_menu(view[i].links.window,
+            if (!mvdm_softpc_wow_page_domain_window_menu(view[i].window,
                     (ULONG)(ULONG_PTR)menu)) {
                 SetLastError(ERROR_INVALID_STATE); complete = FALSE;
             }

@@ -2448,3 +2448,433 @@ All compiler/linker/probe objects are build-owned hidden background outputs;
 no product profiling switch, helper HWND or recurring runtime file is added.
 Final governance, reviewed test-only commit/push and unchanged coherent13
 hash verification complete this diagnostic handoff, not S4/T447 closure.
+
+###089 typed menu projection: complete source/entry design and admission
+
+Clean P8 main/live origin3aa4ff054 follows P7 installed runtime. The finite
+089 group changes only the data transferred to wow_menu_client_refresh_all,
+not its original/native menu tree policy, callbacks or lifecycle. The existing
+menu refresh discards full view relations/rectangles/class descriptors and
+uses exactly full HWND, style (including original child+popup interpretation)
+and generation PID. Native GetMenu remains the attachment authority; existing
+local/external publication and error rules remain byte-identical after the
+new row field spelling. There is no equivalent original cross-process copied
+window table transfer to import: NT4's menu getter reads WND.spmenu directly;
+its server object/desktop heap is not a modern HWND or CCPU backing record.
+
+Add a private three-ULONG window-menu row and copy_window_menu_view export.
+Factor existing current-publication enumeration/sizing into a private typed
+helper used by old full view and this row, not a generic behavior engine.
+Both retain table-derived count, cold desktop, full current WND backing and
+PID from its lifetime record, ascending slot order, insufficient-buffer count
+and untouched output, invalid arguments/context errors and saved LastError.
+No native/guest callout or lifetime transition may occur between sizing/copy.
+Pinned retired/prepared WND records are not published rows. The menu projection
+does not parse CLS/name/relationship fields its consumer does not use; errors
+from those unrelated full-view descriptors remain in their actual full-view
+consumers, not new menu dependencies. No persistent index or added allocation
+is needed inside the parent copy. Actual row storage remains caller-owned.
+
+Extend only the existing private header/export generator and menu consumer,
+then independent actual-CCPU fixtures for cold desktop, exact full-view subset
+equivalence, sentinel/capacity/LastError and invalid-pointer arguments, old pin
+exclusion after real native slot reuse. Retain all full-view/rollback/cycle/
+class/failure tests. Register089 in worker README; no mirror/guest delta.
+One complete stable-root build (including dependency-required header consumers)
+precedes grouped acceptance and paired P7/current ready-board timing. Publish
+only the coherent13 tested group to both destinations with installed checks;
+review/commit/push as P9 only after actual gates. No full M1--M6/S5/S6 scope
+is removed and visible stutter improvement remains an evidence question.
+
+089 source implementation is now complete: old full copy and the new typed
+menu copy share one private enumeration helper; their field copiers/comparators
+remain explicit. The menu path reads only exact backing handle/style and the
+same lifetime-record PID. All old full descriptor/name/relationship handling
+is unchanged. Native client/wow.c GetMenu confirms direct validated WND style/
+spmenu access, not a class descriptor dependency. Menu consumer diff is only
+row type, copier name and full HWND field spelling; native tree/refresh/error
+code is unchanged. New actual-CCPU checks cover all three subset fields in
+three live/reused/retired-pin phases, order, sentinel/capacity and argument
+refusals, plus cold desktop and unbound context in every fixture.
+
+Build source graph has no new object or flag: the only generator change is
+one private export name. Generate canonical exports in a fresh configure-only
+root and verify its definition differs by exactly that line before copying
+the generated .def into the stable worker. Do not overwrite stable Ninja or
+regenerate unrelated provider generated C files just to add the export.
+Existing header dependencies and parent import-library dependency drive the
+complete required rebuild/link. Seal source/image/MAP/import/Ninja first and
+record actual work, not a forced clean211-object provider rebuild.
+
+089 second-role source review: full and menu views share sizing/context/
+current-generation/order mechanics, while each typed copier spells out its
+required fields. The full route still calls copy_window_observation with the
+same known record; no descriptor semantics change. The menu route has no
+class pointer/name/relations dependency and cannot introduce an owner or pin.
+Nullable sizing, invalid arguments, insufficient-capacity untouched output,
+saved success error and generation exclusion remain common. No extra parent
+allocation or whole-table index is added. Comparator uses the same low-slot
+ordering only after exact publication selection. Caller remains serialized
+against guest/publication, with no native callout during copy; this projection
+does not assert a frozen native desktop. Menu refresh consumer changes five
+type/API/member lines only; native calls, child+popup test, local PID policy,
+tree failures/attachment updates and final retirement are unchanged.
+
+Cold/unbound and full-view equality fixtures exercise the actual CCPU body,
+not a fake numeric table. Real native HWND reuse proves the old retained
+backing can coexist without becoming another copied row. New helper failure
+returns remain test failures; the existing30-second reuse bound and all
+terminal/rollback assertions are unchanged. Private export is additive with
+paired parent/provider; no public command, broker wire, original mirror or
+guest ABI changed. Coherent13 production publication is still mandatory.
+
+089 menu-projection-build-r1 completes0: generated .def differs by exactly
+one export, stable worker/provider Ninja hashes are unchanged; worker11 and
+provider13 dependency-selected targets build/link. The whole original task/
+reply/process, extension/input/alias/external memory, actual CCPU borrowed/
+retained/reclaim/graph/class/menu-resource/native-nested/start and init/modal
+rollback group passes. Graph marker reports errors0 phases3 fields3 capacity1
+retired1; old/new actual HWND06be0fca/06bf0fca share a slot with distinct
+backings00226000/0022a000. All32 partial rollbacks and7 reachedC0000420
+terminal negatives remain passing. No historical failed aggregate is relabeled.
+NTVDM35A7CBBBE10E82C928D9A228A1E81C9534D623114263D3050C12E8419E622307,
+MAP5B987527F14CF7A21F437FBE671AF0973EDE0EBA480E1EAB01C8E44CD50339AA;
+WOW325AD48DBA7F44C6E4F10ABF1A81759DA80C4908580047FB1739B468C7B207CAE9,
+MAP3DE1A5753E5348144B6BBE191C57C79B6B1984F549239D284A53538827381FCD.
+Menu-projection-verify-r1 now runs paired ready-board timing, eight-repeat
+native controls and complete fresh acceptance; no publication/speedup claim yet.
+
+089 first paired timing completes0 but contradicts a speedup claim: ordinary
+P7/candidate median30.3815/61.7125ms, sampled32.520/61.143ms,
+private30.253/30.1045ms. Both ordinary p95 remain approximately62.6ms.
+Sampled thread CPU406.250/453.125ms over active wall530.327/624.596ms.
+These twelve-operation runs are not physical click latency or causal proof,
+but the regression cannot be silently accepted. Identity-checked delivery
+controller11236 is explicitly stopped before any publication child starts;
+independent full verification continues. P7 remains installed, no rollback or
+runtime change is made. Retain this failed performance expectation as evidence.
+Source/instrumentation review and a bounded same-input cost/control comparison
+must distinguish candidate cost from environment/observer quantization before
+any performance disposition or publication. No repeat-until-green gate.
+
+The first stop check correctly refuses because the controller owns a conhost,
+not a publication child. Follow-up reads exact PID/start, confirms only its
+conhost and no delivery.process.json, then stops only controller11236. Recorded
+held-for-performance.json proves no publication; independent verification and
+its runtime children are not stopped. One predeclared four-run sequence
+candidate-1/baseline-1/baseline-2/candidate-2 waits that actual verification
+identity and exit0 before it starts. It uses sealed exact P7 and candidate
+image/MAP pairs, identical public input probe/all12 operations and all3 desktop
+environments, no test/runtime source edits or changed assertion. Every run is
+retained whatever its timing; no automatic publication or acceptance-by-retry.
+
+Full acceptance subsequently fails hook-Win16, not timing: guest-report556
+bytes instead of600 decodes complete phase0 and4 only. Final errors1,
+freed1, zero created/queried/nested/veto/destroy/unhook. Original authored NE
+source shows exactly this path when SetWindowsHookEx returnsNULL; report and
+class-history writes complete and launcher exits0. Exact paired MAP dispatch
+shows WU32SetWindowsHookEx rva21A50 returns0 for task17BF/native thread43336.
+This is not a window callback crash or a menu-capacity assertion. Native20,
+original30, control/dialog/common-dialog3-policy and hook-Off passed before
+the failure. Full verification exit1 remains failed; fixed-order controller
+correctly refuses to start any control because that prerequisite failed.
+
+Original wuhook.c WU32SetWindowsHookEx has two failure owners: original hook
+stub allocation (W32GetThunkHookProc), or native SetWindowsHookEx with module
+and THREADID32 target. The existing trace retains neither result stage nor
+native error/target identity. Next finite diagnosis is one copied original
+host thunk object with transparent imported-call wrappers around those two
+owners, logging actual return/LastError/target/current identities to the
+existing dispatch trace's sibling file. Original function bodies, arguments,
+native call/return and error are preserved; copied diagnostic DLL only,
+original mirror/guest and production outputs remain unchanged. One complete
+Off/Win16/All group, exact image/MAP/source identities, no assertion relaxation,
+no repeated-until-green or attribution of old common-dialog risk is admitted.
+
+Hook diagnostic-r1 captures all3 failures: original stub succeeds with
+module6a180000, callback6a1a69b0; native WH_CBT target equals current thread
+44024/50136/21064 respectively, returnsNULL/error126. Task17BF is consistent.
+This rules out full original stub slots or a wrong numeric target in those
+runs; it does not establish why the named module registration fails. Copied
+DLL FAAF0679173A83293E0E0496BD1CD1EA411CD4182C7F1580570FDF1EC963C02C,
+MAPBE62D9021242BD1E3276C183F7D2883DA4656F37825A374ABB2E17951145E83B.
+All current production/source/object hashes remain unchanged.
+
+Independent menu-hook-native-control-r1 succeeds with current-thread WH_CBT
+both NULL module and named own module (actual file path79chars); its own
+global/local atom add/delete also succeeds. Thus broad host Hook/atom resource
+failure is not established. Original client/clhook.c queries a nonNULL hmod's
+filename; kernel/hooks.c registers that module via GetHmodTableIndex and maps
+failure to ERROR_MOD_NOT_FOUND. This is a source lead, not a claim that modern
+USER internals have identical implementation or that a hook should drop its
+module argument. No replacement is selected.
+
+Follow-up module-identity observer keeps native call/return unchanged and adds
+GetModuleFileNameW, GetModuleHandleExW(FROM_ADDRESS|UNCHANGED_REFCOUNT) and file
+attributes after it. Diagnostic-r2 controller fails before compilation due to
+empty PSCommandPath under a dynamic ScriptBlock; retained as runner failure,
+not product evidence. R3 invokes the saved mechanical generated script instead
+and runs a fresh three-policy capture. Original mirror/guest and production
+outputs stay frozen; no module load/global hook or helper window is introduced.
+
+R3 captures3/3 native errors126 again. From-address lookup succeeds and returns
+the same6A180000 module as original HkData; GetModuleFileNameW succeeds with
+the actual30-character staged WOW32.DLL path, and file attributes20 prove
+the file exists at that instant. Target=current27200/2732/48220 and original
+stub allocation succeeds. Diagnostic DLLFEBCE4F4E7AB39CFC8DB48A9FA98D979026D71B1BE0A30DB5C38C50045D13CEE,
+MAP463BFFF45E50B3877549C7ECFCF25FF0D5CCAD1B095B6AA1FDD3D6C394A1179A.
+Thus neither missing file, wrong callback-module identity nor wrong target
+explains the error. Current native control success is not proof that all
+module/loader paths are healthy. The failure stage is established, its deeper
+cause and whether089 introduced it are not. Do not label a passing P7 history
+or diagnostic perturbation as a bisect. Next comparison must keep immutable
+P7/candidate image identity and separately test named DLL registration without
+the WOW dependency closure; no production hMod=NULL workaround is selected.
+
+At this safe pending state, menu-projection-verify-r1 is terminal failed,
+fixed order control terminal refused (no measurements), publication controller
+explicitly stopped before publishing, and both scoped diagnostic groups are
+terminal captures, not acceptance passes. Product source remains the complete
+unpublished089 candidate; installed/release13 remain exact P7. No original
+guest/mirror modification, new semantic concession or goal closure is claimed.
+
+###090 native Hook module boundary: source and controlled diagnosis
+
+Menu-hook-identity-controls-r1 runs the predeclared alternating six image
+cases; exact P7 NTVDM03261634/WOW32A8E5C8F8 and089 NTVDM35A7CBBB/
+WOW325AD48DBA all fail the same556-byte phase0/4 contract in Off/Win16/All.
+This proves the current failure is not exclusive to089, not its introduction
+date or the cause of an older isolated failure. Menu-hook-dll-control-r1 then
+loads the same independently authored native DLL as probe.dll and WOW32.DLL:
+both native WH_CBT installations fail126 without any VDM dependency. Canonical
+backslash path control also fails; exact same EXE/DLL bytes copied to an owned
+C-volume temporary directory fail too. Only those three copies and the empty
+directory are removed; original build evidence is retained. O: is a physical
+fixed NTFS volume, not a SUBST/network mapping. No matching project module
+block appears in scoped CI/Defender logs. Loader census examines409 processes,
+finds no project WOW32/test DLL host; this is not a kernel table inspection.
+
+Original ntuser/client/clhook.c obtains a nonNULL module's full filename;
+kernel/hooks.c always calls GetHmodTableIndex for it, even for a local thread.
+kernel/libmgmt.c uses the CLIBS32 session module table and outstanding process/
+Hook dependencies. An archived Microsoft-authored diagnosis identifies error126
+when32 distinct Hook DLL paths occupy that resource, with retirement requiring
+all dependencies and loads released. Original URL is unavailable; author/date
+and mirror provenance are explicit, no executable source is imported:
+[Alejandro Campos Magencio, 2010-04-09](https://www.sysadmins.lv/retired-msft-blogs/alejacma/setwindowshookex-fails-with-error-errormodnotfound.aspx).
+This supports a historical mechanism, NOT proof that current Windows has
+exactly32 occupied entries or the same private layout. No kernel decoder,
+resource reset, unrelated process kill or relogin is selected.
+
+The modern public [SetWindowsHookEx contract](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowshookexa)
+specifies NULL module for callbacks associated with the current process's
+threads. Original WOW always supplies its fixed stub DLL, even for those local
+requests. Select a clean input-boundary adaptation, not retry-on126: for a
+verified current-process target and callback in the binding's own permanently
+loaded provider module, passNULL to native USER. Keep every other parameter,
+original Hook state/stub/conversion/order/retirement and native result/error.
+Global target0, foreign/unknown/dead threads, mismatched callback/module and
+NULL original module forward unchanged. No filename/program special case.
+
+The binding validates module identity through public GetModuleHandleEx
+FROM_ADDRESS|UNCHANGED_REFCOUNT, comparing actual module handles for callback,
+supplied module and binding. Current thread needs no lookup; another target
+uses an owned query-only native thread handle/GetProcessIdOfThread through the
+one native call, then closes it without changing that call's LastError.
+Failed metadata queries do not manufacture errors: forward original inputs.
+Original nt_bop.c retains hWOWDll after successful initialization and frees
+only failed initialization paths; hooks belong to tasks retired before worker
+exit. Thus this specific provider code lifetime is already owned, not a new
+module cache or untracked unloaded callback. Other modules never lose native
+module validation/retention. No new cross-process priority/semantics waiver.
+
+Admit090 as the finite existing S4 Hook/native-resource boundary gap paired
+with unpublished089. Expected group: one narrow native binding/header, existing
+private redirect header and provider source manifest, source registration,
+independent argument/lifetime/error controls plus actual Win16 hook3-policy
+and retained native/guest/runtime floors. No guest/mirror/wire change. Seal089
+source/images/MAP/imports before rebuilding; pending P9 remains unpublished.
+This supersedes the earlier no-selected-hMod-change investigation status only
+for the source-defined local provider boundary, not global/foreign requests.
+
+090 complete source group is implemented before compiling: narrow owned C/
+header, existing private API redirect, provider source manifest and independent
+24-call boundary fixture. The original wuhook.c/wowhooks.c bodies are unchanged.
+Same-module native identities, current/live sibling thread ownership and
+query+synchronize handle lifetime are verified before normalization. A dead
+held thread forwards unchanged; native USER remains final liveness authority.
+No atomic native-desktop snapshot is claimed. Temporary query handles close
+after the single native registration with its returned error restored.
+Original hMod remains in HOOKSTATEDATA; only that one native API argument is
+adapted, so original conversion/CallNext/unhook/task cleanup still see their
+real original module/stub identity. Process-owned provider lifetime remains
+the original successful nt_bop load. No repeated failure fallback is added.
+
+Pre-hook089 source/images/MAP/imports are sealed. Local-hook-build-r1 starts
+one owned complete group; native-boundary passes errors0/calls24, current+
+sibling17, global/invalid/null/mismatch/null-callback/dead/foreign one each,
+saved/native error propagation and handles172/172. This unit uses a recording
+native-call seam, not a USER implementation; actual Hook3-policy and complete
+native/guest lifecycle remain required before a runtime claim or delivery.
+
+Local-hook-build-r1 worker/provider link succeeds (provider135 actual required
+targets after the private-header/source-list change). Actual unchanged CBT
+guest passes Off/Win16/All with original phase0/1/2/4, errors0, created/queried4,
+nested1, vetoed1, destroyed3, unhooked1 and freed1. This proves local provider
+Hook execution/conversion and retirement under the actual three-policy entry,
+not global module-table capacity, all cross-task Hook forms, historical error
+causality or complete S4. Full composed checks remain live; performance and
+remaining release gates must run after this new source group completes.
+
+Local-hook-build-r1 then completes0, including original task/reply/process,
+extension/input/alias/external-memory, borrowed/reclaim/graph/class/native-
+nested/start/menu-resource and init/modal rollback. NTVDM remains exact089
+35A7CBBBE10E82C928D9A228A1E81C9534D623114263D3050C12E8419E622307,
+MAP5B987527F14CF7A21F437FBE671AF0973EDE0EBA480E1EAB01C8E44CD50339AA.
+WOW32 is510E9DAC0CA8E01FB908D85F82A77B90E9EED7BC13F3EE4D764E3A7A8FD7B79C,
+MAP113092864703158E5F8E6D178DB89C399FAC0D167DD4AD308C78DC7D80E976AD.
+No diagnostic logging object is in that production DLL. Actual group is0;
+prior089 acceptance/performance expectations remain failed and are not waived.
+
+Local-hook-verify-r1 is the fresh owned complete controller. After exact build
+identity/source/image checks it copies a sealed candidate image/MAP pair,
+then uses verify-wow-paired-latency's predeclared baseline/composed/composed-
+repeat/baseline-repeat ABBA order:12 actual posted flags in ordinary, sampled
+and private desktop per run, unchanged pixel polling/retirement assertions,
+EMS control per run and all source/image identities. Every result is retained;
+completion does not decide speedup or authorize publication. It then requires
+both8/8 nested controls, fresh full native20/original30/actual-guest/application/
+DOS/modal/logon and distinct-version thread-extension3-policy plus quality.
+No automatic publisher is running. Original fixed-order089 controller remains
+refused, not restarted against changed sources. P9 requires explicit actual
+performance review and complete delivery/installed/commit/push gates afterward.
+
+090 second-role review confirms same native resource/Hook chain owner and
+original callback state remain. The public ownership check is call-local,
+not another task registry. Callback and binding must inhabit the same actual
+provider; arbitrary DLLs keep original native module retention. Sibling native
+thread queries are read-only plus zero-time synchronization, with one native
+registration and exact error restoration. Global/foreign/unknown/dead inputs
+are unchanged, not replaced by process-wide listener emulation. The source
+contract and observed local failure justify the adapter independently of an
+unproved modern32-slot-table diagnosis. No mirror/guest diff or new observable
+semantic waiver is selected. Full mixed/cross-task Hook and message evidence
+is still part of the unchanged S4 inventory, not inferred from the CBT3 pass.
+
+### Source-only M4 reconciliation while090 verifies (no runtime admission)
+
+Retain the full original conversion group rather than substitute a universal
+marshaller: wmdisp32.c W32Win16WndProcEx selects aw32Msg, calls the original
+THUNKMSG body, executes CallBack16, then calls UNTHUNKMSG even when that callback
+returnsFALSE, before its existing fallback. The selected window entry validates
+its immutable callback/target before reaching that body. A source branch with
+zero vpWndProc16 is not itself proof of an integration leak; trace the actual
+caller contract before changing it. Original WM32GetMinMaxInfo and
+WM32WindowPosChanging own stackalloc16/copyback/stackfree16. WM32CopyData instead
+owns GlobalAllocLock16 and original CopyDataAddNode/Find/Delete pairing; its
+reverse wmsg16 path owns separate free_w storage and COPYDATA_16 provenance.
+
+The existing wow_callback_frame_lease only bounds a guest-memory alias and
+commit, not these converter allocations. Native-call/borrow finally scopes
+restore execution and object references, not automatically every original
+message allocation. Do not use their passing fixture as proof of M4's entire
+buffer-retirement contract or add a competing allocation registry. Original
+WU32ReplyMessage explicitly warns that flat16-bit aliases can be invalid after
+reply and releases its parg alias accordingly. That warning alone does not
+prove any specific native lParam owner is lost: message-specific input/output,
+early reply, source direction and converter provenance must be reconciled.
+
+Thus preserve the imported converter bodies; M4's complete structure/movement/
+reply/timeout/failure group remains an explicit successor source-and-real-guest
+obligation within S4 after this safe baseline. Current text tests prove only
+their named strings/results. No converter fix, original-host defect attribution,
+new mirror diff or M4 completion is inferred by this source-only review.
+
+### Fixed ABBA timing disposition for089/090 (not a stutter-closure claim)
+
+Local-hook-performance-r1 completes its predeclared four runs, all twelve
+posted flag toggles per environment, EMS and normal window/task retirement.
+Normal medians in baseline/candidate/candidate/baseline order are30.858,
+30.901,30.6135 and61.3985ms; sampled medians30.8635,34.006,34.4335 and46.121ms;
+private medians30.3285,30.394,30.380 and30.5485ms. Normal per-run maxima
+(the12-sample p95 convention) are62.778,63.808,63.628 and94.153ms.
+The two candidate runs do not reproduce089's earlier ordinary62ms result,
+but the two baseline runs differ substantially. These observations establish
+neither a causal speedup nor elimination of the owner's physical-input stutter.
+Retain every earlier result, including the failed089 expectation.
+
+Second-role performance disposition permits continuing the remaining release
+gates:089 removes demonstrably unused copied fields while preserving the
+original refresh points/generation/order/errors;090 repairs a separately
+reproduced native registration boundary. The fixed comparison shows no
+consistent candidate regression; it is not a speedup acceptance criterion.
+The owner's authorization to retain correct optimizations that are not the
+principal bottleneck applies. Publication still requires the fresh complete
+regression, installed verification and reviewed commit/push, not this table.
+
+Source review also bounds the witness itself: wow_mine_latency_probe calls
+the existing wait_cell, which reads pixels through BitBlt/GdiFlush and sleeps
+20ms between failed observations. It posts paired messages rather than
+physical input. Its roughly31ms floor cannot be treated as measured guest
+execution time or evidence that all remaining physical delay is in WOW.
+Keep this unchanged acceptance witness for comparison; any finer attribution
+must independently account for capture/polling and native controls, not alter
+runtime waits or re-label the current samples. No additional runtime edit,
+new timing result or full M6 completion follows from this source observation.
+
+After that explicit performance review, owned local-hook-release-r1 waits
+the pinned local-hook-verify-r1 PID/start and requires its whole-group exit0,
+including the later thread-extension and quality gates, before invoking the
+existing coherent13 publisher and installed checks. It cannot publish from
+the earlier089 failed aggregate or just the four timing passes. Review is
+recorded separately in local-hook-release-r1/performance-review.json; original
+sealed performance evidence is unchanged. Delivery remains pending while
+those prerequisites run; current installed images are still P7.
+
+### P9 complete grouped verification, publication and second-role review
+
+Local-hook-verify-r1 completes0 after local-hook-build-r1's native24 and
+composed checks. Fresh foundations pass native20, original30, both-width
+style/MENU/resource boundaries and all12 real Win16 control/dialog/common-
+dialog/Hook groups. Common-dialog retains16 rounds in every policy. Default,
+native-extension and task-version/thread-extension messages pass all3 styles
+(nine groups), with normal retirement. WINMINE and SOL gameplay/normal exit
+pass3 policies each; WRITE's four-sample main/document/page-info startup
+frontier passes3 policies, not editing/save/normal exit. Console17/Window17,
+direct modal3 and complete-token logon/gameplay3 also pass. Nested baseline
+and candidate8/8 controls pass; source/MAP/image identities remain frozen.
+The fresh documentation/parser/diff quality gate passes. These are bounded
+runtime floors, not proof of all M1--M6 or S4 completion.
+
+The separately recorded fixed ABBA disposition authorizes retention without
+claiming a speedup. Local-hook-release-r1 waits for the whole verification
+exit0, then local-hook-delivery-r1 completes0: publication, both-width deployed
+NTW16S boundary and installed ordinary-logon/gameplay Off/Win16/All pass.
+Publication preserves27 recoverable prior files; stopped-processes.json is
+empty, so no existing owner session needed closure. Exact13-image hashes
+agree at assets/release and O:/winnt/system32. Only ntvdm.exe and WOW32.DLL
+change; the other11 retain P7 identities. NTVDM is
+35A7CBBBE10E82C928D9A228A1E81C9534D623114263D3050C12E8419E622307;
+WOW32 is510E9DAC0CA8E01FB908D85F82A77B90E9EED7BC13F3EE4D764E3A7A8FD7B79C.
+Original guest, assets/winnt.zip and user configuration are not replaced.
+
+Single-person second-role review covers the actual source/test/build diff:
+089 shares the old traversal and full-view implementation; only the existing
+menu consumer selects12-byte rows. No fresh-state suppression, parallel
+index or menu algorithm is added.090 performs one unchanged native registration,
+after verifying actual module and live local-thread ownership; its temporary
+query handle closes with native return/error preserved. Native USER remains
+Hook/resource authority; original WOW stubs, state and conversion remain.
+The seam fixture is explicitly not a replacement for real USER16 acceptance.
+No new mirror file/content difference or guest mutation: selected192 exact/
+86 registered content differences (278 total) are unchanged. Old0102, prior
+child-exit and GDI16/19 risks remain unlocated, not erased by these passes.
+
+Reviewed source/tests, coherent release assets and manifest constitute bounded
+S4 P9. Final documentation quality and main/origin synchronization are recorded
+by local-hook-final-quality-r1 and local-hook-git-delivery-r1, including live
+remote equality, clean worktree and both deployed13 identities. This does not
+close S4/T447 or the persistent goal. Next source-led attribution must separate
+observer/capture time from actual input/conversion/rendering; full remaining
+implicit/cross-process messages, converted-data/reply lifetime, failure/death
+and M1--M6 reconciliation remain in this S, with S5/S6 unchanged.

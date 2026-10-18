@@ -604,6 +604,9 @@ if ($Case -eq 'window-borrow' -and $StyleDll -and
     throw 'Styled real-CCPU terminal cleanup did not prove actual attachment, neutralization and GDI retirement'
 }
 if ($Case -eq 'graph-snapshot') {
+    if (!($fixtureOutput -match '^WOW_MENU_PROJECTION_CCPU errors=0 phases=3 fields=3 capacity=1 retired=1$')) {
+        throw 'Typed menu projection failed full-view equivalence, capacity refusal or retained/reused generation isolation'
+    }
     if (!($fixtureOutput -match '^WOW_KNOWN_RECORD_ROLLBACK_CCPU errors=0 failures=32 positions=2 retained=2$')) {
         throw 'Known-record association consumed unowned pins or failed atomic partial-batch rollback'
     }

@@ -3,6 +3,7 @@
 #include <windows.h>
 #include "wow_dialog_creation_binding.h"
 #include "wow_dialog_api_bindings.h"
+#include "wow_hook_native_binding.h"
 LONG WINAPI wow_user_get_window_longA(HWND, int);
 LONG WINAPI wow_user_set_window_longA(HWND, int, LONG);
 DWORD WINAPI wow_user_get_class_longA(HWND, int);
@@ -165,6 +166,7 @@ int WINAPI wow_native_EnumPropsA(HWND, PROPENUMPROCA);
 #define SendMessageW wow_native_SendMessageW
 #define SendMessageTimeoutA wow_native_SendMessageTimeoutA
 #define CallNextHookEx wow_native_CallNextHookEx
+#define SetWindowsHookExA wow_native_SetWindowsHookExA
 #define DefWindowProcA wow_native_DefWindowProcA
 #define DefDlgProcA wow_native_DefDlgProcA
 #define DialogBoxIndirectParamAorW wow_user_dialog_box_indirect_param

@@ -161,6 +161,37 @@ behavior or permanent state. Design/verify its full-generation/current-record,
 cold-desktop/order/capacity/error/retirement contract before implementation.
 Full M1--M6 and S5/S6 are unchanged; this is not a runtime release or closure.
 
+After clean P8 3aa4ff054,089 admits that single transfer group in S4: one
+typed window-menu row (full HWND/style/PID), common existing live-generation
+enumeration with unchanged full-view behavior and ordered sizing/copy errors,
+private worker export and the existing WOW menu consumer. No menu algorithm,
+refresh point, local/external policy, native call, cache or guest/mirror edit.
+Seal P7 source/images/MAP/imports before the stable dependency-selected build;
+verify cold desktop, complete subset equivalence, capacity/invalid arguments,
+retired pin exclusion/full generation reuse, real menu/native/guest lifecycle,
+paired timing and complete coherent13 publication/installed gates. No P9 or
+UI speedup is claimed by admission.
+
+089 composed checks pass but full hook-Win16 fails (native error126); exact
+P7 controls and independent native DLLs also fail. Publication is held, fixed
+performance controls refuse the failed prerequisite.090 is the finite S4
+native-resource binding repair: documented NULL module only for verified
+same-process target and callback/supplied module equal to our owned provider;
+all global/foreign/unknown or mismatched inputs forward unchanged. Original
+Hook algorithms/stubs/order/retirement and native LastError remain. No guest,
+mirror, hidden window, filename special case or retry-on-error. Seal089 before
+the entire new group, real Hook3-policy and complete release gates; no claim
+of the modern private32-slot table being proved or historical failures fixed.
+
+090 source/native24 controls, actual original Hook3 and composed lifecycle
+checks pass. Local-hook-verify-r1 completes fixed ABBA, full fresh runtime
+floors, thread extensions and quality; local-hook-delivery-r1 publishes
+coherent13 to both destinations and passes deployed style/installed logon3.
+ABBA shows no consistent candidate regression, but not causal speedup or
+physical-stutter closure; its pixel witness includes20ms polling. Retain the
+earlier failed089 runs. Bounded P9 source/assets and reviewed main/origin
+delivery preserve the complete remaining M1--M6, S5 and S6 obligations.
+
 S3 is closed at the P22 runtime/P23 interaction baseline after the
 [fixed-chain exit review](../../history/m0-t447-s3-control-dependency-closure.md).
 S4 is now the sole sequential admission under the continuing owner goal.

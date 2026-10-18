@@ -331,26 +331,27 @@ assertion is retained and current16-round/3-policy tests pass; M5 stays open.
 Second-role review permits this bounded correctness baseline, not S4 closure,
 a semantic concession, a successful diagnostic replay or an unproved speedup.
 
-P8 is diagnostic-only over P7 cf0f33ddf: page-cost-profile-r1 and independent
-observer controls pass. Read-only stable counters bracket twelve posted flags.
-Normal320-window copy484 calls/314ms, graph143/236ms, class327/44ms are
-inclusive, not additive or physical-click latency. Source identifies99 menu
-refreshes copying full descriptors only to use handle/PID/style. Next finite
-candidate is a typed minimal menu projection with unchanged refresh/algorithm,
-not a class-counter rewrite. P7 images remain deployed; full S4 stays open.
-ADAPTER-WOW-088 reuses call-local records and one row-index scratch while
-preserving public validation, pin/generation/retirement and failure contracts.
-P6 is sealed in known-record-sealed-r1. Composed-r2 passes32 rollback cases
-and7 terminal negatives with retained readers/reuse. R1 child exit1 remains
-unlocated, not repaired by a passing diagnostic. No mirror/guest/wire/cache
-change. Stable Ninja is no-op. Known-record-verify-r2/delivery-r1 pass: fresh
-native/original/guest/application/DOS/modal/logon, distinct-version extensions,
-coherent13 publication to both targets and installed checks. Ordinary paired
-median61.7765/61.574ms is flat; twelve posted operations do not prove a tail
-or physical-click improvement. P7 retains this bounded optimization, not a
-stutter-resolution or S4 closure claim. The class-vector shortcut is unproved:
-sampled CLS count may scale with WND count. Audit actual ownership/cost before
-another optimization. Full M1--M6/S5/S6 and historical risks remain open.
+P8's diagnostic-only3aa4ff054 identifies99 menu refreshes copying complete
+descriptors only for handle/PID/style. P9's089 uses a typed three-field view,
+preserving generation, sizing/order/errors and refresh. Earlier089 timing and
+hook-Win16 failures remain evidence, not passing results. Sealed P7 and native
+DLL controls also fail Hook registration with126.090 binds only verified local
+callbacks in our owned provider to the documented NULL-module native contract;
+global/foreign/unknown inputs and original Hook state/order/lifetime remain.
+No retry, filename test, helper, guest/mirror edit or semantic waiver.
+Local-hook-build-r1 passes native24, actual Hook3 and the composed lifecycle
+group. Fresh local-hook-verify-r1 passes native20/original30,12 real guest
+groups,9 message groups, application/DOS/modal/logon floors and quality.
+Fixed ABBA ordinary medians P7/candidate/candidate/P7 are30.858/30.901/30.6135/
+61.3985ms: no consistent regression, but no causal speedup or physical-stutter
+closure. The witness includes20ms pixel polling. Local-hook-delivery-r1
+publishes coherent13 to both destinations and passes deployed style/installed
+logon3 plus final hashes. Source/assets form bounded P9, with reviewed
+main/origin delivery evidence retained; full M1--M6/S5/S6 remains open.
+088's P7 seal,32 rollback/7 terminal negatives and complete delivery evidence
+remain in the source audit. Old child exit1 is unlocated, not repaired by a
+diagnostic pass. P7 timing is flat, not a physical-click/stutter fix. All
+historical risks and full M1--M6/S5/S6 remain open.
 
 ## Active Packet
 
@@ -374,9 +375,9 @@ another optimization. Full M1--M6/S5/S6 and historical risks remain open.
 
 ## Current Technical Baseline
 
-S4 P7 retains P6 and adds088's private known-record/scratch transaction reuse.
-NTVDM SHA-256 is032616347AB793F234E9F2DB338A73285E32563139956DB0884321BD403DD87A;
-WOW32 isA8E5C8F84960720F505E05D6EC1F4F238D44C6BD7CBAFF6F7CE11906F90C7672.
+S4 P9 retains P7 and adds089's minimal menu projection and090's local Hook binding.
+NTVDM SHA-256 is35A7CBBBE10E82C928D9A228A1E81C9534D623114263D3050C12E8419E622307;
+WOW32 is510E9DAC0CA8E01FB908D85F82A77B90E9EED7BC13F3EE4D764E3A7A8FD7B79C.
 The release manifest owns exact identities of all13 images. Both
 assets/release and O:/winnt/system32 match the tested package; original guest,
 user configuration and assets/winnt.zip are unchanged by this delivery.

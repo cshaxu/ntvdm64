@@ -1,5 +1,22 @@
 # NTVDM worker owner
 
+ADAPTER-WOW-090 binds original WOW Hook registration to the documented native
+local-thread contract. Only a live same-process thread and callback/module
+matching the permanently loaded provider may use NULL native module; original
+state/stubs/conversion/ordering/retirement remain. Global, foreign, unknown,
+dead and mismatched inputs forward unchanged. One native call, exact returned
+error, no filename test, retry, helper window, guest/mirror change or hook
+transport. Query-only/synchronize thread handles close after the native call.
+
+ADAPTER-WOW-089 separates the three-field committed window projection needed
+by menu attachment refresh from full graph/class descriptors. Original menu
+behavior, native GetMenu, refresh boundaries and local/external error policy
+stay unchanged. One private typed export reuses current-generation traversal,
+two-pass sizing, ascending order, errors and LastError; no extra parent heap
+allocation, cache/registry, guest/mirror edit or reduced freshness. Test full
+subset equivalence, cold desktop, capacity/refusal and retired/reused identity,
+then the entire composed native/guest/menu/lifetime and release closure.
+
 ADAPTER-WOW-088 carries an existing window lifetime record through the private
 captured-graph transaction instead of repeatedly finding it by backing. The
 original USER HMUnlockObject/ThreadUnlock1 use their already-known object; a

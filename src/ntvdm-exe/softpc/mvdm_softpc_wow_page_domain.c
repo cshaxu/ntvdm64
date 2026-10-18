@@ -2379,13 +2379,36 @@ static int __cdecl compare_window_observation_slot(const void *left, const void 
     return (a > b) - (a < b);
 }
 
-int mvdm_softpc_wow_page_domain_copy_window_view(ULONG capacity,
-    mvdm_softpc_wow_window_observation *rows, ULONG *count)
+static int __cdecl compare_window_menu_slot(const void *left, const void *right)
+{
+    WORD a = LOWORD(((const mvdm_softpc_wow_window_menu_observation *)left)->window);
+    WORD b = LOWORD(((const mvdm_softpc_wow_window_menu_observation *)right)->window);
+    return (a > b) - (a < b);
+}
+
+static int copy_window_projection(ULONG backing,
+    const mvdm_softpc_wow_window_borrow *borrow, ULONG index,
+    mvdm_softpc_wow_window_observation *rows,
+    mvdm_softpc_wow_window_menu_observation *menus)
+{
+    if (!menus) return copy_window_observation(backing, borrow, &rows[index]);
+    /* ADAPTER-WOW-089: read this exact committed generation, not its CLS or
+     * unrelated relations/name. Guest execution and publication are excluded
+     * for the entire two-pass call, as for the full observation view. */
+    menus[index].window = page_domain_read_owned_word(backing + MVDM_SOFTPC_WND_HEAD_HANDLE);
+    menus[index].style = page_domain_read_owned_word(backing + MVDM_SOFTPC_WND_STYLE);
+    menus[index].process_id = borrow ? borrow->process_id : 0u;
+    return 1;
+}
+
+static int copy_current_window_view(ULONG capacity,
+    mvdm_softpc_wow_window_observation *rows,
+    mvdm_softpc_wow_window_menu_observation *menus, ULONG *count)
 {
     ULONG i, needed = 0, copied = 0;
     mvdm_softpc_wow_window_borrow *borrow;
     DWORD saved = GetLastError();
-    if (!count || (capacity && !rows)) {
+    if (!count || (capacity && !rows && !menus)) {
         SetLastError(ERROR_INVALID_PARAMETER); return 0;
     }
     if (!page_domain_menu_context()) {
@@ -2394,25 +2417,38 @@ int mvdm_softpc_wow_page_domain_copy_window_view(ULONG capacity,
     for (i = 1; i < MVDM_SOFTPC_HANDLE_ENTRY_COUNT - 1u; ++i)
         if (i == LOWORD(domain.desktop_handle) || domain.guest_windows[i]) ++needed;
     *count = needed;
-    if (!rows && !capacity) { SetLastError(saved); return 1; }
+    if (!rows && !menus && !capacity) { SetLastError(saved); return 1; }
     if (capacity < needed) { SetLastError(ERROR_INSUFFICIENT_BUFFER); return 0; }
     /* ADAPTER-WOW-085: every ordinary published WND was prepared with a
      * lifetime record. Reuse it instead of searching the whole list for
      * each slot. Preparation and pinned retired generations coexist here;
      * only the slot's current backing is a published observation. */
-    if (!copy_window_observation(domain.guest_desktop_window,
-            *window_borrow_link(domain.guest_desktop_window), &rows[copied++])) return 0;
+    if (!copy_window_projection(domain.guest_desktop_window,
+            *window_borrow_link(domain.guest_desktop_window), copied++, rows, menus)) return 0;
     for (borrow = window_borrows; borrow; borrow = borrow->next) {
         if (!window_borrow_is_current(borrow)) continue;
         if (copied >= needed) { SetLastError(ERROR_INVALID_STATE); return 0; }
-        if (!copy_window_observation(borrow->backing, borrow, &rows[copied++])) return 0;
+        if (!copy_window_projection(borrow->backing, borrow, copied++, rows, menus)) return 0;
     }
     if (copied != needed) { SetLastError(ERROR_INVALID_STATE); return 0; }
     /* Existing callers retain row positions across a round trip. Preserve
      * the old ascending-slot order, without a second persistent index. */
-    qsort(rows, copied, sizeof(*rows), compare_window_observation_slot);
+    if (menus) qsort(menus, copied, sizeof(*menus), compare_window_menu_slot);
+    else qsort(rows, copied, sizeof(*rows), compare_window_observation_slot);
     SetLastError(saved);
     return 1;
+}
+
+int mvdm_softpc_wow_page_domain_copy_window_view(ULONG capacity,
+    mvdm_softpc_wow_window_observation *rows, ULONG *count)
+{
+    return copy_current_window_view(capacity, rows, NULL, count);
+}
+
+int mvdm_softpc_wow_page_domain_copy_window_menu_view(ULONG capacity,
+    mvdm_softpc_wow_window_menu_observation *rows, ULONG *count)
+{
+    return copy_current_window_view(capacity, NULL, rows, count);
 }
 
 /* Validate copied reader structure, not whether native USER stayed unchanged.

@@ -202,6 +202,15 @@ int __cdecl mvdm_softpc_wow_page_domain_borrow_window_relation(
 int __cdecl mvdm_softpc_wow_page_domain_copy_window_view(
     unsigned long capacity, mvdm_softpc_wow_window_observation *rows,
     unsigned long *count);
+/* Menu attachment refresh consumes only these committed numeric fields.
+ * Same current-generation, sizing/order/LastError rules as the full view;
+ * no class/relationship parsing, native sampling or new retained state. */
+typedef struct mvdm_softpc_wow_window_menu_observation {
+    unsigned long window, style, process_id;
+} mvdm_softpc_wow_window_menu_observation;
+int __cdecl mvdm_softpc_wow_page_domain_copy_window_menu_view(
+    unsigned long capacity, mvdm_softpc_wow_window_menu_observation *rows,
+    unsigned long *count);
 int __cdecl mvdm_softpc_wow_page_domain_project_window_graph(
     unsigned long count, const mvdm_softpc_wow_window_observation *rows);
 int __cdecl mvdm_softpc_wow_page_domain_publish_window_links(
