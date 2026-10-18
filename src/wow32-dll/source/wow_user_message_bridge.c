@@ -7,7 +7,7 @@
  * client callback, independently of WOW task execution ownership. Native
  * PeekMessage may call the client before returning. Restore the data lock
  * even on unwind, before the caller touches its original queue view again. */
-static BOOL native_peek(MSG *message, UINT flags)
+static BOOL native_peek(MSG *message, UINT flags, BOOL scheduler_wait)
 {
     BOOL restored = TRUE;
     wow_user_native_call call;
@@ -18,7 +18,8 @@ static BOOL native_peek(MSG *message, UINT flags)
         (void)PeekMessageW(message, NULL, 0, 0, flags);
     } __finally {
         error = GetLastError();
-        restored = wow_user_native_call_end(&call);
+        restored = scheduler_wait ? wow_user_native_call_end_wait(&call) :
+            wow_user_native_call_end(&call);
         if (restored) SetLastError(error);
     }
     return restored;
@@ -45,7 +46,7 @@ BOOL WINAPI wow_user_message_bridge_initialize(wow_user_message_bridge *bridge)
     }
     /* PeekMessage creates this thread's real USER32 queue without consuming a
      * posted message.  This is the only queue state the bridge owns. */
-    if (!native_peek(&ignored, PM_NOREMOVE)) return FALSE;
+    if (!native_peek(&ignored, PM_NOREMOVE, FALSE)) return FALSE;
     bridge->owner_thread_id = GetCurrentThreadId();
     bridge->initialized = TRUE;
     return TRUE;
@@ -54,13 +55,10 @@ BOOL WINAPI wow_user_message_bridge_initialize(wow_user_message_bridge *bridge)
 BOOL WINAPI wow_user_message_bridge_sync(wow_user_message_bridge *bridge,
     wow_task_order_thread *thread)
 {
-    MSG ignored;
-
     if (!verify_owner(bridge, thread)) return FALSE;
-    /* USER32 exposes no non-consuming "pending SendMessage" probe. A
-     * non-removing peek is still useful to create/observe this thread's real
-     * queue, but W2's receive entry below performs actual delivery. */
-    if (!native_peek(&ignored, PM_NOREMOVE)) return FALSE;
+    /* ADAPTER-WOW-093: queue creation belongs to initialize, and receive
+     * already dispatched sends. An extra unfiltered peek observes posted
+     * messages/Hooks and repeats the entire native-return publication. */
     thread->pcti->fsWakeBits &= (WORD)~QS_SENDMESSAGE;
     return TRUE;
 }
@@ -75,8 +73,19 @@ BOOL WINAPI wow_user_message_bridge_receive(wow_user_message_bridge *bridge,
      * dispatches pending nonqueued sends during PeekMessage; do not remove
      * posted messages or WM_QUIT from the original guest Get/PeekMessage loop.
      * In particular, there is no autonomous Translate/DispatchMessage loop. */
-    if (!native_peek(&message, PM_NOREMOVE | PM_QS_SENDMESSAGE)) return FALSE;
+    if (!native_peek(&message, PM_NOREMOVE | PM_QS_SENDMESSAGE, FALSE)) return FALSE;
     return wow_user_message_bridge_sync(bridge, thread);
+}
+
+BOOL WINAPI wow_user_message_bridge_receive_wait(wow_user_message_bridge *bridge,
+    wow_task_order_thread *thread)
+{
+    MSG message;
+    if (!verify_owner(bridge, thread)) return FALSE;
+    /* No posted removal, unfiltered second peek, native WOW yield or fake
+     * receive identity. Actual callbacks retain their ordinary entry scope. */
+    return native_peek(&message,
+        PM_NOREMOVE | PM_QS_SENDMESSAGE | PM_NOYIELD, TRUE);
 }
 
 void WINAPI wow_user_message_bridge_dispose(wow_user_message_bridge *bridge)

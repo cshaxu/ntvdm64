@@ -1,5 +1,22 @@
 # NTVDM worker owner
 
+ADAPTER-WOW-092 derives owned-CLS membership once per complete observation
+copy in call-local sorted addresses. It replaces repeated list walks, not
+class storage/identity/lifetime or descriptor authority. Single reads and
+non-owned/noncanonical data keep their scalar path; allocation failure falls
+back to the existing lookup. Menu projection has no added class dependency.
+Scratch is released on normal, failed and exceptional exits without catching
+or replacing the original exception.
+No persistent index, original source, guest, private export or wire change.
+
+ADAPTER-WOW-091 resolves complete captured-graph identities from their already
+acquired prepared backing before considering the published-slot lookup. Full
+generation/graph validation, pins, withdrawals, rollback and commit order stay;
+unstaged/public link callers keep the original lookup. No cache, counter,
+freshness, private-export, guest or mirror change. Real CCPU whole-view five-
+field readback joins existing legacy links, stale generation/retained reuse,
+32 partial rollbacks and terminal negatives before full delivery.
+
 ADAPTER-WOW-090 binds original WOW Hook registration to the documented native
 local-thread contract. Only a live same-process thread and callback/module
 matching the permanently loaded provider may use NULL native module; original

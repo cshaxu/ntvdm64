@@ -53,6 +53,7 @@ extern void c_sas_storedw(uint32_t address, uint32_t value);
 extern volatile LONG mvdm_softpc_wow_source_descriptor_trace_active;
 extern void c_sas_fills(uint32_t address, uint8_t value, uint32_t byte_count);
 extern void c_sas_loads(uint32_t source, uint8_t *destination, uint32_t byte_count);
+extern void c_sas_stores(uint32_t destination, uint8_t *source, uint32_t byte_count);
 extern void phy_w32(uint32_t address, uint32_t value);
 extern uint32_t c_getGDT_BASE(void);
 extern uint16_t c_getGDT_LIMIT(void);
@@ -118,6 +119,36 @@ static const char *callback_cache_signal;
 static BOOL dialog_cache_failure;
 #define BORROW_CHECK(value) do { if (!(value)) { ++borrow_errors; \
     fprintf(stderr, "WINDOW_BORROW_FAIL line=%d error=%lu\n", __LINE__, GetLastError()); } } while (0)
+
+/* Compare the optimized whole-copy path to an independently pinned scalar
+ * read of the same actual CCPU backing, not a duplicate membership model. */
+static void verify_full_class_projection(ULONG backing, BOOL valid)
+{
+    mvdm_softpc_wow_window_observation scalar = {0}, *rows = NULL;
+    ULONG count = 0, i, matches = 0;
+    BOOL copied;
+    SetLastError(0x447492u);
+    copied = mvdm_softpc_wow_page_domain_read_window_view(backing, &scalar);
+    BORROW_CHECK(copied == valid);
+    BORROW_CHECK(GetLastError() == (valid ? 0x447492u : ERROR_INSUFFICIENT_BUFFER));
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_copy_window_view(0, NULL, &count));
+    if (!count) { BORROW_CHECK(count != 0); return; }
+    rows = HeapAlloc(GetProcessHeap(), 0, count * sizeof(*rows));
+    BORROW_CHECK(rows != NULL);
+    if (!rows) return;
+    SetLastError(0x447492u);
+    copied = mvdm_softpc_wow_page_domain_copy_window_view(count, rows, &count);
+    BORROW_CHECK(copied == valid);
+    BORROW_CHECK(GetLastError() == (valid ? 0x447492u : ERROR_INSUFFICIENT_BUFFER));
+    if (valid && copied) {
+        for (i = 0; i < count; ++i) if (rows[i].links.window == scalar.links.window) {
+            BORROW_CHECK(!memcmp(&scalar, &rows[i], sizeof(scalar)));
+            ++matches;
+        }
+        BORROW_CHECK(matches == 1);
+    }
+    HeapFree(GetProcessHeap(), 0, rows);
+}
 
 static DWORD WINAPI destroy_in_callback(HWND window, UINT message, UINT wp,
     LONG lp, DWORD procedure, PVOID words)
@@ -1679,9 +1710,11 @@ static void verify_observed_window_promotion(ULONG teb)
             ULONG cls = observed_class - delta, directory = c_getCR3();
             ULONG old_left = c_sas_dw_at(backing + 40u);
             ULONG old_name = c_sas_dw_at(cls + 100u), alternate = 0;
+            unsigned membership_before = borrow_errors, membership_phases = 0;
             BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_view(backing, &row));
             BORROW_CHECK(row.links.window == full && row.process_id == GetCurrentProcessId() &&
                 row.descriptor.atom == info.atomWindowType && !strcmp(row.descriptor.name, name));
+            verify_full_class_projection(backing, TRUE); ++membership_phases;
             c_sas_storedw(backing + 40u, 0x74478080u);
             SetLastError(0x74478001u);
             BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_view(backing, &row));
@@ -1698,9 +1731,26 @@ static void verify_observed_window_promotion(ULONG teb)
                 BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_view(backing, &row));
                 BORROW_CHECK(row.descriptor.name_bytes == 4u && !strcmp(row.descriptor.name, "XYZ") &&
                     row.descriptor.name[4] == 0);
+                verify_full_class_projection(backing, TRUE); ++membership_phases;
+                {
+                    BYTE foreign_class[108];
+                    /* Independently allocated fixture CLS is deliberately
+                     * absent from the production ownership list. Preserve
+                     * the non-owned scalar route, including a name that
+                     * crosses a real CCPU page, without changing any guest. */
+                    c_sas_loads(cls, foreign_class, sizeof(foreign_class));
+                    c_sas_stores(alternate, foreign_class, sizeof(foreign_class));
+                    c_sas_storedw(backing + 76u, alternate + delta);
+                    verify_full_class_projection(backing, TRUE); ++membership_phases;
+                    c_sas_fills(alternate + 4094u, 'X', sizeof(row.descriptor.name));
+                    verify_full_class_projection(backing, FALSE); ++membership_phases;
+                    c_sas_storedw(backing + 76u, observed_class);
+                }
                 c_sas_storedw(cls + 100u, old_name);
                 BORROW_CHECK(VdmFreeVirtualMemory(alternate) >= 0);
             }
+            fprintf(stderr, "WOW_CLASS_MEMBERSHIP_COPY_CCPU errors=%u phases=%u owned=2 nonowned=2 page_crossing=1 invalid_name=1\n",
+                borrow_errors - membership_before, membership_phases);
             memset(&untouched, 0xa5, sizeof(untouched));rejected = untouched;
             c_setCR3(0);
             BORROW_CHECK(!mvdm_softpc_wow_page_domain_read_window_view(backing, &rejected));
@@ -2769,6 +2819,27 @@ static void verify_local_observation_commit(void)
     SetLastError(0x4473);
     BORROW_CHECK(wow_window_words_project_observed(count, view));
     BORROW_CHECK(GetLastError() == 0x4473);
+    {
+        ULONG row, checked = 0;
+        unsigned resolved_before = borrow_errors;
+        /* Read the actual CCPU publication, not a second resolver double.
+         * The completed prepared batch must retain every full identity and
+         * rebased next/parent/child/owner field, including the desktop. */
+        for (row = 0; row < count; ++row) {
+            mvdm_softpc_wow_window_observation actual = {0};
+            ULONG backing = mvdm_softpc_wow_page_domain_borrow_window(view[row].links.window);
+            BORROW_CHECK(backing != 0);
+            if (backing) {
+                BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_view(backing, &actual));
+                BORROW_CHECK(!memcmp(&actual.links, &view[row].links, sizeof(actual.links)));
+                BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(backing));
+                ++checked;
+            }
+        }
+        BORROW_CHECK(count && checked == count);
+        fprintf(stderr, "WOW_PREPARED_EDGE_RESOLUTION_CCPU errors=%u rows=%lu fields=5 staged=1 full_generation=1\n",
+            borrow_errors - resolved_before, checked);
+    }
     for (i = 0; i < 2; ++i) {
         BORROW_CHECK(wow_window_words_value(bindings[i])->dwStyle == view[indices[i]].style);
         BORROW_CHECK((DWORD)(ULONG_PTR)wow_window_words_value(bindings[i])->hInstance == view[indices[i]].module);
@@ -2825,6 +2896,14 @@ static int verify_menu_projection(ULONG expected, ULONG excluded)
         BORROW_CHECK(returned == count && GetLastError() == 0x55bbu &&
             !memcmp(&menus[count], &sentinel, sizeof(sentinel)));
         for (row = 0; row < count; ++row) {
+            ULONG backing = mvdm_softpc_wow_page_domain_borrow_window(full[row].links.window);
+            mvdm_softpc_wow_window_observation scalar = {0};
+            BORROW_CHECK(backing != 0);
+            if (backing) {
+                BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_view(backing, &scalar));
+                BORROW_CHECK(!memcmp(&scalar, &full[row], sizeof(scalar)));
+                BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(backing));
+            }
             BORROW_CHECK(menus[row].window == full[row].links.window &&
                 menus[row].style == full[row].style &&
                 menus[row].process_id == full[row].process_id);

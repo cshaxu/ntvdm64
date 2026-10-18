@@ -1,5 +1,26 @@
 # WOW32 DLL target component
 
+ADAPTER-WOW-094 removes an overwritten first sample of exact required roots
+inside the existing copied-window transaction. Its temporary index marks full
+identities only during observation compaction, then is cleared/rebuilt before
+normal row lookup. Every required root still receives its ordered final fresh
+native capture; other local rows, payloads, generation conflicts, validation,
+failure atomicity and original guest-return boundaries remain unchanged.
+No persistent cache, allocation, mirror/guest change or speedup claim is added.
+
+ADAPTER-WOW-093 receives native sent notifications at the scheduler wait
+boundary, before task selection can gate their arrival. Existing native
+frames and original callback scheduling retain execution ownership. A native
+wait continuation is not a guest return; selected guest returns keep the
+existing full publication only if an omitted native-wait publication remains
+outstanding. A successful ordinary return discharges it; failure/unwind does
+not. No-wait or already-published scheduler returns do no extra work.
+Initialization uses the existing input-plan lifetime as its no-receive
+boundary, without maintaining a duplicate initialization flag.
+Receive synchronization no longer does a second unfiltered native peek.
+Posted/quit messages, original scheduling and task locks remain with their
+existing owners. No hidden window, parallel queue, mirror or guest change.
+
 ADAPTER-WOW-087 restores the original per-thread client projection when
 taskman/InitTask transfers execution (OPENNT-HOST-124), not when a native
 thread merely acquires the USER resource lock. Original pClientInfo owns

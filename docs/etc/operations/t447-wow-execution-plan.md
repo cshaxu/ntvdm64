@@ -260,6 +260,96 @@ The source/tests and final delivery review form diagnostic P11; installed
 runtime stays P9 and all full-goal obligations remain. The prepared-graph
 resolution repair above is the next finite source group, not yet implemented.
 
+After clean main/origin ad7da140e,091 admits that complete prepared-identity
+resolution group inside S4. Only the existing page-domain selection expression
+changes: staged full-identity matches use their already acquired backing;
+unstaged/legacy operands keep the original lookup. No private export, wire,
+guest/mirror, scheduler, freshness or new state. Add exact full-view link
+readback after the existing prepared commit; retain legacy link/generation
+checks,32 partial rollbacks, retirement/reuse and seven terminal negatives.
+Seal P9 source/images/MAP/imports and the baseline provider link inputs before
+editing. Reuse stable dependency-selected Ninja roots. Private diagnostic
+image-root selection may consume only a coherent hash-manifested build/release
+set, with the corresponding parent import library; deployed images must stay
+unchanged throughout measurement. Fixed P9/candidate/candidate/P9 callback
+comparisons include original uninstrumented workloads plus the reversible
+phase observer; preserve signed timing and all failures, no speedup-by-exit0.
+Then require the full every-P/runtime/installed13 publication gates and
+reviewed main/origin delivery. No S4/M1--M6/S5/S6 scope reduction follows.
+
+091's complete gate now fails common-dialog-All0102 and refuses publication;
+the source audit preserves all results and the bounded non-reproducing control.
+No identical retry loop or speculative cache/destroy-bit repair is admitted.
+Within the existing S4 M4 inventory, implement one complete independently
+authored structure-witness group: MINMAXINFO, WINDOWPOS and COPYDATA through
+original converters in Win16-to-Win16 and both native directions, nested
+stack-backed conversion/copyback and normal retirement under all3 policies.
+Use the existing two-task/native peer protocol behind an opt-in test switch;
+default reports and assertions stay unchanged. No product ABI, production,
+mirror or original guest edit. Source proves stackfree16 is an empty macro:
+CallBack16's original frame restoration owns that temporary stack lifetime,
+not a new allocator registry. COPYDATA uses its original independent provenance
+nodes/GlobalAllocLock16/free_w paths. This group does not close movement,
+early-reply/timeout/exception, cross-worker or full M4 obligations, and cannot
+override the failed091 publication gate. Implement the whole witness before
+one grouped background validation; preserve any exposed gap as a real failure.
+
+message-structures-r1 now passes all six oldP9/candidate three-policy combined
+groups and both default controls. Review-r1 proves identical default NE bytes
+and expected real-guest rejection of one deliberately wrong native copyback.
+This establishes the named synchronous/nested structure paths without changing
+original converters. It neither repairs0102 nor completes movement/reply/
+timeout/exception/allocation-failure/receiver-death or all M4;091 publication
+remains refused and the complete M1--M6/S5/S6 goal remains active.
+The source audit now fixes the next M4 input-only COPYDATA early-reply lifetime
+group: native-first control, consumed-before-reply guest input, deterministic
+sender-owned page/barrier protocol, normal/nested provenance and unchanged
+default controls. This is test/source work, not a selected runtime change;
+source policy still governs any inherited original defect. Avoid inferring
+native captured-buffer lifetime or adapter failure from the ReplyMessage
+documentation alone, and preserve the refused091 gate independently.
+
+The early-reply leg passes message-reply-payload-r1's pure native positive/
+wrong-result controls and nine actual guest/default cases. Source review
+extends the same group to exact guest far-buffer identity through original
+CallWindowProc's real16-bit-procedure branch; a native procedure-thunk branch
+is not inferred covered. r2 fails because the new probe carries a reply flag
+in BX across CallWindowProc; source/trace review removes that assumption and
+preserves the failed source/run. r3's complete native controls and nine cases
+now pass, including nested buffer identity, sender-page protection before
+receiver continuation, exact replies, normal retirement and default NE byte
+equivalence. No converter/runtime repair is delivered. Original sendmsg.c's
+capture/RECEIVERFREE lifecycle explains the intended original ownership;
+modern private USER capture lifetime is not decoded or universally proved.
+Timeout/failure/physical movement, remaining structure and procedure-thunk
+paths, cross-worker/native-process boundaries and0102 remain existing S4 work.
+
+Continue M4 with the complete input-only timeout-return lifetime group.
+Original sendmsg.c's timed-out/busy receiver retains SMS/capture until receiver
+completion. Do not port SMS/private modern USER state; the existing native
+message owner remains authoritative. Extend the authored shared protocol:
+receiver consumes/nests before waiting without ReplyMessage; separate native
+sender uses the real1000ms SMTO_BLOCK|SMTO_ERRORONEXIT deadline, requires an
+already entered/live receiver, records native return0 and ERROR_TIMEOUT, then
+protects only its owned input and signals. Receiver continuation/full unthunk
+and normal retirement remain mandatory. A generic error0 is not classified
+as timeout. Native-first timeout/normal/wrong-reply controls precede actual
+P9/candidate three-policy combined cases, retained early-only/normal structure
+and unchanged default controls. Keep normal RPLY84-byte reports unchanged;
+timeout TMOP adds explicit mode/status/error/after-flags rather than changing
+failure into success. Seal all seven prior authored sources before editing.
+This admits no product, mirror or original guest change, new wait policy or
+waiver of0102; broader receiver death/exception/movement remains S4 work.
+M5 source audit additionally finds capture_window/sample_links relying on
+GetWindowInfo/class/thread queries without explicit logical-liveness checks.
+Before selecting a fix, run one native-only owned-window diagnostic across
+WM_DESTROY, both sides of default WM_NCDESTROY, self-destruction while an outer
+message is active and final return. Record IsWindow and the complete existing
+capture predicate separately. Queryability alone is not authority to declare
+logical life, but this source lead is not yet0102 causality. No mirror/guest/
+runtime change; a positive condition still needs actual CCPU/caller/terminal-
+callback closure before implementation. Do not clear caches speculatively.
+
 S3 is closed at the P22 runtime/P23 interaction baseline after the
 [fixed-chain exit review](../../history/m0-t447-s3-control-dependency-closure.md).
 S4 is now the sole sequential admission under the continuing owner goal.
@@ -1554,6 +1644,90 @@ retroactive closure or runtime acceptance is implied.
 
 ### S4 P2 dependency checkpoint and remaining closure
 
+ADAPTER-WOW-092 is the finite performance implementation after the provider
+profile: derive sorted owned-CLS addresses once per complete full-view copy,
+then binary-search that call-local input instead of walking class_allocations
+per WND. Existing list/backing remains authoritative. Single/retained reads,
+cold/empty class lists, non-owned CLS and noncanonical names keep the original
+scalar route. Allocation failure falls back to that same route, not a new
+failure or weaker validation. Menu-only copy must not acquire this dependency.
+Seal the current091 source/objects/images first. Implement all full-copy and
+scalar callers together; compare actual CCPU full rows against independent
+single reads, including canonical/noncanonical/non-owned inputs, invalid names,
+retirement/reuse and LastError, before one grouped build/regression/performance
+decision. No original algorithm, mirror, guest, private export or wire change.
+The prior0102 failed whole gate remains a delivery blocker, not a waived risk.
+
+092's fresh whole gate now stops earlier at actual controls-Off: phase4/errors0
+then a native SetFocus wait from original combo WM_LBUTTONDOWN times out.
+Preserve the exact candidate/trace/listing/MAP and failed whole result. Audit
+the original taskman queue-wait/receive order against modern native system/
+sent-message delivery and existing callback owner parking before selecting
+the finite M1 repair. Do not raise the timeout, patch original combo, remove
+focus/capture assertions, infer sender identity from a target or retry until
+green. Required proof distinguishes a scheduling wait cycle from a sampled
+stack alone, covers pending native notifications while another task is inside
+native code, and retains posted/filter/WaitMessage semantics, task locks,
+nested returns, original scheduling, local publication and failure cleanup.
+This is an existing M1/M3 foundation defect investigation, not a new S or
+permission to alter the frozen candidate before preserving it.
+
+ADAPTER-WOW-093 implements that finite native wait/notification group. On a
+native queue wake, dispatch sent notifications outside the USER data lock
+before the original scheduler rescan. Reuse the existing borrowed native
+execution frame and callback admission/parking; a frame entered without WOW
+execution returns to the scheduler without publishing as if guest execution
+had resumed. Publish through existing graph/client/menu owners when original
+DirectedYield, WaitForMsgAndEvent or WaitMessage actually returns to an owned
+guest continuation. GetMessage already does a full native peek before return;
+UserYield already performs original ReceiveMessages. Do not duplicate them.
+Keep startup's original no-receive boundary explicit during xxxInitTask.
+Remove receive->sync's redundant unfiltered peek: production has no other
+sync consumer, queue creation is initialization-owned, and received-bit sync
+is metadata only. Keep PM_QS_SENDMESSAGE/PM_NOREMOVE/PM_NOYIELD, original wait
+flags, posted/filter/change-bit semantics, task locks and all native results.
+Add a registered two-task indirect native-send witness while the sender
+retains inline ownership, plus posted/quit/hook and wait-return tests. Link
+the same new witness against sealed old owner objects for a fixed negative
+control, without rebuilding or modifying those objects. Include092 SEH cleanup
+and actual controls/dialogs/common-dialog/application/DOS floors in one fresh
+grouped build and verification. No mirror, guest, wire or private export change.
+
+The first complete093 cohort passes correctness but its fixed ABBA timing does
+not improve. Hold publication and let its current owned product run finish.
+Seal it before revising the finite return boundary: record an outstanding
+native-wait publication only when end_wait actually omitted it, discharge on
+successful full publication, and refresh at an owned scheduler return only if
+that obligation remains. This is control-flow bookkeeping, not a second
+window authority or guessed dirty cache. Preserve exception/LastError, LIFO,
+startup, original task locks, current guest-return visibility and the proven
+indirect-send/posted-Hook fix. Rebuild and verify the whole changed closure;
+retain the unsuccessful timing cohort as evidence, not a publishable win.
+
+The original input_plan is nonnull exactly across xxxInitTask/finally; reuse
+that lifetime instead of a duplicate initializing flag. The terminal r4
+product group fails at the new scheduler publication site during native modal
+teardown. Failure-only copies narrow it to the late own_window/GWL_WNDPROC
+check inside local projection; do not bypass that security/lifetime check.
+The selected refinement only avoids publication when no omitted wait work is
+outstanding; failure still refuses guest return. Preserve the complete r4
+failure seal. Test exact old/new publication-helper bodies for no-obligation,
+native continuation, successful ordinary discharge, failure and SEH retention.
+After the whole changed closure and focused execution checks, run controls3
+and the formerly failed modal3 FIRST. Only if they pass, run fixed P9/new/new/P9
+timing, then remaining full release gates. Do not spend the full DOS/application
+matrix again before checking the known failure or treat measurement exit0 as
+a performance verdict. This changes verification order, not required gates.
+
+The owner performance follow-up profiles the existing P9 provider graph path
+as one named diagnostic: capture, chain normalization, full projection, root
+refresh and commit. Reversible source copies and inclusive counters must not
+change original algorithms, refresh boundaries or production outputs. Require
+ordinary/sampled/private actual input and normal-retirement controls; retain
+observer brackets and nested-cost limits. M4 timeout ten-case completion and
+M5 eleven-row native death-query negative evidence are recorded in the S4
+audit, not substituted for remaining M1--M6 proof or091's failed whole gate.
+
 The bounded execution/identity group reuses original task selection, full-HWND
 conversion and class-unregister clients; it removes target-based pseudo-SMS
 identity. Its source/positive/negative/normal-retirement evidence and coherent
@@ -1585,6 +1759,16 @@ immutability, approved modern delivery/reply and every recorded limitation
 remain in force. No new private layout, helper window or transport is selected.
 
 ### Adoption checklist and independent review
+
+The continuing S4 performance lane admits ADAPTER-WOW-094 only after sealing
+the terminal093 candidate: remove the overwritten initial native sample of
+exact required roots inside project_graph. Reuse its existing transaction
+index as full-identity marks, then clear/rebuild it before normal graph use.
+Final ordered required captures, non-root local refresh, explicit payloads,
+closure validation, failure rollback and guest-return publication remain.
+No new cache, mirror/guest diff, concurrency promise or release waiver. The
+source audit records exact-body negatives and the composed acceptance scope;
+prior WRITE-Off failure stays unlocated and strict release gates remain.
 
 The single-person second-role review checks this recommendation against the
 original request: original code first, minimum mirror diff, source-led gap

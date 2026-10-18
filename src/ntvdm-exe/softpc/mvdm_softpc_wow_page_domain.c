@@ -1817,10 +1817,14 @@ static int page_domain_replace_window_links(ULONG count,
         identities[4] = links[i].owner;
         for (j = 0; j < 5u; ++j) {
             ULONG row = updated[LOWORD(identities[j])];
-            ULONG client = identities[j] ? page_domain_window_lookup(identities[j]) : 0u;
+            ULONG client;
             int replacement = updates && row &&
                 links[row - 1u].window == identities[j];
-            if (replacement) client = updates[row - 1u].backing;
+            /* ADAPTER-WOW-091: this exact full generation already owns its
+             * prepared pin. Do not read the old published slot only to
+             * discard it; unstaged/public link callers retain that lookup. */
+            client = replacement ? updates[row - 1u].backing :
+                identities[j] ? page_domain_window_lookup(identities[j]) : 0u;
             if (((!j || identities[j]) && !client) ||
                     (identities[j] && withdrawn[LOWORD(identities[j])] &&
                      !replacement)) {
@@ -2211,7 +2215,8 @@ int mvdm_softpc_wow_page_domain_observe_window(unsigned long window,
 
 static int copy_window_observation(ULONG backing,
     const mvdm_softpc_wow_window_borrow *borrow,
-    mvdm_softpc_wow_window_observation *row)
+    mvdm_softpc_wow_window_observation *row,
+    const ULONG *classes, ULONG class_count)
 {
     ULONG cls, targets[4], j, name;
     ULONG fields[MVDM_SOFTPC_WND_BYTES / sizeof(ULONG)];
@@ -2243,7 +2248,9 @@ static int copy_window_observation(ULONG backing,
         row->control_id = fields[MVDM_SOFTPC_WND_MENU_OR_ID / 4u];
     cls = fields[MVDM_SOFTPC_WND_CLASS / 4u];
     if (!cls) return 1; /* Cold desktop has no observed descriptor yet. */
-    owned_class = page_domain_class_allocation(cls) != NULL;
+    owned_class = classes ? bsearch(&cls, classes, class_count,
+        sizeof(*classes), compare_class_reference) != NULL :
+        page_domain_class_allocation(cls) != NULL;
     cls -= domain.client_delta;
     if (owned_class) {
         page_domain_copy_owned_ram(cls, class_fields, sizeof(class_fields));
@@ -2293,7 +2300,7 @@ int mvdm_softpc_wow_page_domain_read_window_view(ULONG backing,
             !(borrow = *window_borrow_link(backing)) || !borrow->references) {
         SetLastError(ERROR_INVALID_STATE); return 0;
     }
-    if (!copy_window_observation(backing, borrow, &value)) return 0;
+    if (!copy_window_observation(backing, borrow, &value, NULL, 0)) return 0;
     *row = value;
     SetLastError(saved);
     return 1;
@@ -2389,9 +2396,11 @@ static int __cdecl compare_window_menu_slot(const void *left, const void *right)
 static int copy_window_projection(ULONG backing,
     const mvdm_softpc_wow_window_borrow *borrow, ULONG index,
     mvdm_softpc_wow_window_observation *rows,
-    mvdm_softpc_wow_window_menu_observation *menus)
+    mvdm_softpc_wow_window_menu_observation *menus,
+    const ULONG *classes, ULONG class_count)
 {
-    if (!menus) return copy_window_observation(backing, borrow, &rows[index]);
+    if (!menus) return copy_window_observation(backing, borrow, &rows[index],
+        classes, class_count);
     /* ADAPTER-WOW-089: read this exact committed generation, not its CLS or
      * unrelated relations/name. Guest execution and publication are excluded
      * for the entire two-pass call, as for the full observation view. */
@@ -2405,9 +2414,11 @@ static int copy_current_window_view(ULONG capacity,
     mvdm_softpc_wow_window_observation *rows,
     mvdm_softpc_wow_window_menu_observation *menus, ULONG *count)
 {
-    ULONG i, needed = 0, copied = 0;
+    ULONG i, needed = 0, copied = 0, class_count = 0, *classes = NULL;
+    mvdm_softpc_wow_class_allocation *allocation;
     mvdm_softpc_wow_window_borrow *borrow;
-    DWORD saved = GetLastError();
+    DWORD error, saved = GetLastError();
+    int result = 0;
     if (!count || (capacity && !rows && !menus)) {
         SetLastError(ERROR_INVALID_PARAMETER); return 0;
     }
@@ -2419,24 +2430,51 @@ static int copy_current_window_view(ULONG capacity,
     *count = needed;
     if (!rows && !menus && !capacity) { SetLastError(saved); return 1; }
     if (capacity < needed) { SetLastError(ERROR_INSUFFICIENT_BUFFER); return 0; }
-    /* ADAPTER-WOW-085: every ordinary published WND was prepared with a
-     * lifetime record. Reuse it instead of searching the whole list for
-     * each slot. Preparation and pinned retired generations coexist here;
-     * only the slot's current backing is a published observation. */
-    if (!copy_window_projection(domain.guest_desktop_window,
-            *window_borrow_link(domain.guest_desktop_window), copied++, rows, menus)) return 0;
-    for (borrow = window_borrows; borrow; borrow = borrow->next) {
-        if (!window_borrow_is_current(borrow)) continue;
-        if (copied >= needed) { SetLastError(ERROR_INVALID_STATE); return 0; }
-        if (!copy_window_projection(borrow->backing, borrow, copied++, rows, menus)) return 0;
+    __try {
+        /* ADAPTER-WOW-092: membership is derived once for this full copy,
+         * while guest execution/class mutation is excluded. No descriptor
+         * is cached. Unavailable scratch retains the original linear lookup;
+         * menu-only and single readers acquire no new dependency. */
+        if (!menus) {
+            for (allocation = class_allocations; allocation; allocation = allocation->next) {
+                if (class_count == MAXDWORD / sizeof(*classes)) break;
+                ++class_count;
+            }
+            if (!allocation && class_count) {
+                classes = HeapAlloc(GetProcessHeap(), 0, class_count * sizeof(*classes));
+                if (classes) {
+                    for (i = 0, allocation = class_allocations; allocation;
+                            allocation = allocation->next)
+                        classes[i++] = allocation->client + domain.client_delta;
+                    qsort(classes, class_count, sizeof(*classes), compare_class_reference);
+                }
+            }
+        }
+        /* ADAPTER-WOW-085: every ordinary published WND was prepared with
+         * a lifetime record. Reuse it instead of searching for each slot.
+         * Preparation and pinned retired generations coexist here; only the
+         * slot's current backing is a published observation. */
+        if (!copy_window_projection(domain.guest_desktop_window,
+                *window_borrow_link(domain.guest_desktop_window), copied++, rows, menus,
+                classes, class_count)) __leave;
+        for (borrow = window_borrows; borrow; borrow = borrow->next) {
+            if (!window_borrow_is_current(borrow)) continue;
+            if (copied >= needed) { SetLastError(ERROR_INVALID_STATE); __leave; }
+            if (!copy_window_projection(borrow->backing, borrow, copied++, rows, menus,
+                    classes, class_count)) __leave;
+        }
+        if (copied != needed) { SetLastError(ERROR_INVALID_STATE); __leave; }
+        /* Preserve ascending-slot row positions across a round trip,
+         * without a second persistent index. */
+        if (menus) qsort(menus, copied, sizeof(*menus), compare_window_menu_slot);
+        else qsort(rows, copied, sizeof(*rows), compare_window_observation_slot);
+        result = 1;
+    } __finally {
+        error = result ? saved : GetLastError();
+        if (classes) HeapFree(GetProcessHeap(), 0, classes);
+        SetLastError(error);
     }
-    if (copied != needed) { SetLastError(ERROR_INVALID_STATE); return 0; }
-    /* Existing callers retain row positions across a round trip. Preserve
-     * the old ascending-slot order, without a second persistent index. */
-    if (menus) qsort(menus, copied, sizeof(*menus), compare_window_menu_slot);
-    else qsort(rows, copied, sizeof(*rows), compare_window_observation_slot);
-    SetLastError(saved);
-    return 1;
+    return result;
 }
 
 int mvdm_softpc_wow_page_domain_copy_window_view(ULONG capacity,

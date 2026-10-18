@@ -5,12 +5,46 @@
 #include <windows.h>
 #include <stdio.h>
 #include <string.h>
+#if defined(M4_TIMEOUT_PAYLOAD) && !defined(M4_REPLY_PAYLOAD)
+#error Timeout payload group requires the complete early-reply group.
+#endif
+#ifdef M4_REPLY_PAYLOAD
+#ifndef M4_STRUCTURES
+#error Reply payload group requires the full normal structure group.
+#endif
+#include "wow_reply_payload_lifetime.h"
+static reply_payload_lifetime reply_payload;
+static volatile LONG reply_driver_done;
+#endif
 
 static HANDLE peer_thread, peer_ready;
 static HWND sender_window, receiver_window, peer_window;
 static DWORD sender_thread, receiver_thread, peer_thread_id;
 static volatile LONG errors, received, nested, replied, text;
 static HMODULE peer_module;
+#ifdef M4_STRUCTURES
+static volatile LONG structure_received;
+static const LONG minmax_input[10] = {0x1234,2,3,4,5,6,-7,8,9,10};
+C_ASSERT(sizeof(MINMAXINFO) == sizeof(minmax_input));
+
+static void check_minmax(const MINMAXINFO *value, BOOL output)
+{
+    LONG words[10], expected[10];
+    memcpy(words,value,sizeof(words));
+    memcpy(expected,minmax_input,sizeof(expected));
+    if (output) { expected[0]=0x7abc; expected[9]=-11; }
+    if (memcmp(words,expected,sizeof(words))) InterlockedIncrement(&errors);
+}
+
+static void check_position(const WINDOWPOS *value, HWND target, BOOL output)
+{
+    if (LOWORD((DWORD_PTR)value->hwnd) != LOWORD((DWORD_PTR)target) ||
+        value->hwndInsertAfter != HWND_TOP || value->x != (output ? -23 : -12) ||
+        value->y != (output ? 45 : 34) || value->cx != (output ? 90 : 56) ||
+        value->cy != 78 || value->flags != (output ? 0x14u : 4u))
+        InterlockedIncrement(&errors);
+}
+#endif
 
 BOOL WINAPI DllMain(HINSTANCE instance, DWORD reason, PVOID reserved)
 {
@@ -34,6 +68,63 @@ static LRESULT CALLBACK peer_proc(HWND window, UINT message, WPARAM wp, LPARAM l
         InterlockedIncrement(&received);
     }
     switch (message) {
+#ifdef M4_REPLY_PAYLOAD
+    case 0x481:
+        {
+            BOOL sent;
+            check(GetCurrentThreadId() == peer_thread_id && reply_payload.page != NULL);
+            sent=reply_payload_send(&reply_payload,sender_window,window);
+            InterlockedExchange(&reply_driver_done,1);
+            return sent ? 0x447a0055 : 0;
+        }
+#endif
+#ifdef M4_STRUCTURES
+    case WM_GETMINMAXINFO:
+        if (wp != 0x4474) break;
+        check_minmax((const MINMAXINFO *)lp,FALSE);
+        ((MINMAXINFO *)lp)->ptReserved.x=0x7abc;
+        ((MINMAXINFO *)lp)->ptMaxTrackSize.y=-11;
+        InterlockedIncrement(&structure_received);
+        return 0x447a0024;
+    case WM_WINDOWPOSCHANGING:
+        if (wp != 0x4474) break;
+        check_position((const WINDOWPOS *)lp,window,FALSE);
+        ((WINDOWPOS *)lp)->x=-23; ((WINDOWPOS *)lp)->y=45;
+        ((WINDOWPOS *)lp)->cx=90; ((WINDOWPOS *)lp)->flags=0x14;
+        InterlockedIncrement(&structure_received);
+        return 0x447a0046;
+    case WM_COPYDATA:
+        if (((const COPYDATASTRUCT *)lp)->dwData != 0x456789ab) break;
+        check(wp != 0 && ((const COPYDATASTRUCT *)lp)->cbData == 8);
+        check(((const COPYDATASTRUCT *)lp)->lpData != NULL &&
+            !memcmp(((const COPYDATASTRUCT *)lp)->lpData,"M4copy!!",8));
+        InterlockedIncrement(&structure_received);
+        return 0x447a004a;
+    case 0x480:
+        {
+            MINMAXINFO limits;
+            WINDOWPOS position={sender_window,HWND_TOP,-12,34,56,78,4};
+            COPYDATASTRUCT copy={0x456789ab,8,(PVOID)"M4copy!!"};
+            memcpy(&limits,minmax_input,sizeof(limits));
+            check((InSendMessageEx(NULL) & ISMEX_SEND) != 0);
+            check(GetCurrentThreadId() == peer_thread_id);
+            check(SendMessageTimeoutA(sender_window,WM_GETMINMAXINFO,0x4474,
+                (LPARAM)&limits,SMTO_ABORTIFHUNG|SMTO_ERRORONEXIT,5000,&value) != 0);
+            check(value == 0x447a0024); check_minmax(&limits,TRUE);
+            InterlockedIncrement(&structure_received);
+            check(SendMessageTimeoutA(sender_window,WM_WINDOWPOSCHANGING,0x4474,
+                (LPARAM)&position,SMTO_ABORTIFHUNG|SMTO_ERRORONEXIT,5000,&value) != 0);
+            check(value == 0x447a0046); check_position(&position,sender_window,TRUE);
+            InterlockedIncrement(&structure_received);
+            check(SendMessageTimeoutA(sender_window,WM_COPYDATA,(WPARAM)window,
+                (LPARAM)&copy,SMTO_ABORTIFHUNG|SMTO_ERRORONEXIT,5000,&value) != 0);
+            check(value == 0x447a004a);
+            check(copy.dwData == 0x456789ab && copy.cbData == 8 &&
+                !memcmp(copy.lpData,"M4copy!!",8));
+            InterlockedIncrement(&structure_received);
+            return 0x447a0020;
+        }
+#endif
     case 0x470:
         check(wp == 0x1234 && (DWORD)lp == 0x56789abc);
         return 0x447a0010;
@@ -103,7 +194,13 @@ static DWORD WINAPI peer_main(PVOID argument)
 DWORD WINAPI MessagePeer(DWORD operation)
 {
     DWORD owner = 0, code = 1;
-    DWORD report[12] = {0};
+    DWORD report[
+#ifdef M4_STRUCTURES
+        13
+#else
+        12
+#endif
+    ] = {0};
     DWORD written;
     HANDLE output;
     if (operation == 0) {
@@ -130,6 +227,55 @@ DWORD WINAPI MessagePeer(DWORD operation)
         check(receiver_thread != sender_thread && receiver_thread != peer_thread_id);
         return errors ? 0 : 0x447a0002;
     }
+#ifdef M4_STRUCTURES
+    if (operation == 3) {
+        DWORD_PTR value=0;
+        check(peer_thread && GetCurrentThreadId() == sender_thread);
+        check(SendMessageTimeoutA(peer_window,0x480,0,0,
+            SMTO_ABORTIFHUNG|SMTO_ERRORONEXIT,15000,&value) != 0);
+        check(value == 0x447a0020 && structure_received == 6);
+        return errors ? 0 : 0x447a0020;
+    }
+#endif
+#ifdef M4_REPLY_PAYLOAD
+    if (operation == 5
+#ifdef M4_TIMEOUT_PAYLOAD
+        || operation == 8
+#endif
+    ) {
+        DWORD_PTR value=0;
+        LRESULT sent;
+        if (GetCurrentThreadId() != sender_thread || reply_payload.page ||
+            !reply_payload_create(&reply_payload)) return 0;
+#ifdef M4_TIMEOUT_PAYLOAD
+        if (operation == 8) {
+            reply_payload.timeout=TRUE;
+            ((COPYDATASTRUCT *)reply_payload.page)->dwData=TIMEOUT_PAYLOAD_DATA;
+        }
+#endif
+        InterlockedExchange(&reply_driver_done,0);
+        sent=SendMessageTimeoutA(peer_window,0x481,0,0,
+            SMTO_ABORTIFHUNG|SMTO_ERRORONEXIT,15000,&value);
+        /* An incomplete/late peer may still own input. Do not free it on a
+         * failed path; fail this test process instead of manufacturing cleanup. */
+        if (!sent || value != 0x447a0055 || !reply_driver_done || !reply_payload.continued)
+            return 0;
+        check(reply_payload_finish(&reply_payload,reply_payload.timeout ? "MSGTIME.BIN" : "MSGREPLY.BIN"));
+        check(!reply_payload.page && !reply_payload.acknowledgement);
+        return errors ? 0 : operation == 8 ? 0x447a0058 : 0x447a0055;
+    }
+    if (operation == 7) {
+        if (GetCurrentThreadId() != sender_thread || !reply_payload.page ||
+            !(InSendMessageEx(NULL) & ISMEX_SEND) ||
+            InterlockedCompareExchange(&reply_payload.accepted,1,0) != 0) return 0;
+        return 0x447a0057;
+    }
+    if (operation == 6) {
+        if (GetCurrentThreadId() != sender_thread || !reply_payload.page ||
+            !reply_payload.accepted) return 0;
+        return reply_payload_wait(&reply_payload) ? 0x447a0056 : 0;
+    }
+#endif
     if (operation != 2 || !peer_thread) return 0;
     check(PostMessageA(peer_window, WM_CLOSE, 0, 0));
     if (WaitForSingleObject(peer_thread, 5000) != WAIT_OBJECT_0) return 0;
@@ -147,6 +293,11 @@ DWORD WINAPI MessagePeer(DWORD operation)
     report[9] = (DWORD)text;
     report[10] = code;
     report[11] = IsWindow(peer_window);
+#ifdef M4_STRUCTURES
+    check(structure_received == 6);
+    report[12]=(DWORD)structure_received;
+    report[1]=(DWORD)errors;
+#endif
     output = CreateFileA("MSGHOST.BIN", GENERIC_WRITE, 0, NULL, CREATE_NEW,
         FILE_ATTRIBUTE_NORMAL, NULL);
     if (output == INVALID_HANDLE_VALUE) return 0;

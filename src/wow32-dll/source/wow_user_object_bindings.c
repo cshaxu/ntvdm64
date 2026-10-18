@@ -468,8 +468,17 @@ static BOOL project_graph(const HWND *roots, ULONG root_count,
     index = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, 0x10000u * sizeof(*index));
     if (!rows || !index) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); goto done; }
     if (!mvdm_softpc_wow_page_domain_copy_window_view(capacity, rows, &count)) goto done;
+    /* ADAPTER-WOW-094: these exact full identities are captured again below
+     * before any validation/publication. Do not first capture a value that
+     * will be overwritten. Reuse transaction scratch, not a retained cache. */
+    for (i = 0; i < root_count; ++i)
+        index[LOWORD(roots[i])] = (ULONG)(ULONG_PTR)roots[i];
     for (i = used = 0; i < count; ++i) {
         HWND window = (HWND)(ULONG_PTR)rows[i].links.window;
+        if (index[LOWORD(window)] == (ULONG)(ULONG_PTR)window) {
+            rows[used++] = rows[i];
+            continue; /* Mandatory ordered capture below must still succeed. */
+        }
         /* ADAPTER-WOW-082: route E already permits retained external
          * observations. This isn't another native desktop lock/freshness
          * gate. Local state stays synchronous; explicit roots/payloads below
@@ -486,10 +495,13 @@ static BOOL project_graph(const HWND *roots, ULONG root_count,
             goto done; /* Live local state must not fall back to old fields. */
         } else if (!rows[i].descriptor.atom) goto done; /* Cold desktop. */
         rows[used] = rows[i];
-        index[LOWORD(rows[used].links.window)] = used + 1u;
         ++used;
     }
     count = used;
+    /* Full-identity marks must never be consumed as observation offsets. */
+    ZeroMemory(index, 0x10000u * sizeof(*index));
+    for (i = 0; i < count; ++i)
+        index[LOWORD(rows[i].links.window)] = i + 1u;
     for (i = 0; i < root_count; ++i) {
         if (!capture_window(roots[i], &captured) ||
                 !put_observation(&rows, &count, &capacity, index, &captured)) goto done;

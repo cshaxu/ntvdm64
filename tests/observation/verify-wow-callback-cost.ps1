@@ -2,6 +2,7 @@
 param([Parameter(Mandatory)][string]$BuildRoot,
  [string]$WorkerBuildRoot='O:\repos.hobby\ntvdm64\build\M0-T445\S6\r003',
  [string]$ProviderBuildRoot='O:\repos.hobby\ntvdm64\build\M0-T447\S3\production-cohort-x86',
+ [string]$ImageRoot,
  [string]$Observer='O:\repos.hobby\ntvdm64\build\M0-T447\S2\frozen-print-observer-r1\observer.exe',
  [string]$CompilerDriver='O:\repos.hobby\ntvdm64\build\M0-T445\S6\provider\msvc-x86.cmd')
 $ErrorActionPreference='Stop'
@@ -16,17 +17,27 @@ function Owned($name,$exe,$line,$seconds,$working=$repo){
 }
 function Replace-One($text,$old,$replacement){if([regex]::Matches($text,[regex]::Escape($old)).Count -ne 1){throw "Expected one mechanical boundary $old"};return $text.Replace($old,$replacement)}
 try{
+ if(!$ImageRoot){$ImageRoot="$repo/assets/release"}
+ $ImageRoot=(Resolve-Path $ImageRoot).Path
+ if($ImageRoot -ne "$repo\assets\release" -and !$ImageRoot.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase)){throw 'Only manifest-coherent build/release image roots are admitted'}
  $source="$repo/src/wow32-dll/source/wow_window_words_binding.c"
  $inputs=@($PSCommandPath,$source,$Observer,$CompilerDriver,"$ProviderBuildRoot/build.ninja","$ProviderBuildRoot/wow32.dll","$ProviderBuildRoot/wow32.dll.map","$ProviderBuildRoot/wow32-x86.def","$WorkerBuildRoot/ntvdm.exe","$WorkerBuildRoot/ntvdm.exe.map","$WorkerBuildRoot/ntvdm.lib","$repo/assets/winnt.zip","$repo/assets/release/release-manifest.json","$PSScriptRoot/verify-wow-callback-cost-probe.ps1","$PSScriptRoot/wow_callback_cost_fixture.c","$PSScriptRoot/wow_callback_cost_data.h","$PSScriptRoot/wow_callback_cost_instrument.h","$PSScriptRoot/wow_callback_cost_dispatch.h","$PSScriptRoot/wow_callback_cost_probe.h","$PSScriptRoot/wow_observer_cost.h","$PSScriptRoot/verify-wow-mine-latency.ps1","$PSScriptRoot/wow_mine_latency_probe.c","$PSScriptRoot/wow_mine_gameplay_probe.c","$PSScriptRoot/summarize-wow-callback-cost.ps1")
- $images=@(Get-Content "$repo/assets/release/release-manifest.json" -Raw|ConvertFrom-Json);if($images.Count -ne 13){throw 'Coherent13 required'}
+ $published=@(Get-Content "$repo/assets/release/release-manifest.json" -Raw|ConvertFrom-Json)
+ $images=@(Get-Content "$ImageRoot/release-manifest.json" -Raw|ConvertFrom-Json)
+ if($images.Count -ne 13 -or $published.Count -ne 13 -or @(Compare-Object ($images.name|Sort-Object) ($published.name|Sort-Object)).Count){throw 'Coherent13 image identities required'}
+ $inputs+="$ImageRoot/release-manifest.json"
+ foreach($image in $published){$inputs+="$repo/assets/release/$($image.name)"}
  $null=New-Item -ItemType Directory "$root/sealed-images"
- foreach($image in $images){$path="$repo/assets/release/$($image.name)";if((Get-FileHash $path).Hash -ne $image.sha256){throw 'Release mismatch'};$inputs+=$path;Copy-Item $path "$root/sealed-images/$($image.name)"}
+ foreach($image in $images){$path="$ImageRoot/$($image.name)";if((Get-FileHash $path).Hash -ne $image.sha256){throw 'Selected image manifest mismatch'};$inputs+=$path;Copy-Item $path "$root/sealed-images/$($image.name)"}
  foreach($pair in @(@('ntvdm.exe',$WorkerBuildRoot),@('WOW32.DLL',$ProviderBuildRoot))){if((Get-FileHash "$($pair[1])/$($pair[0])").Hash -ne (Get-FileHash "$root/sealed-images/$($pair[0])").Hash){throw 'Image/MAP baseline mismatch'};Copy-Item "$($pair[1])/$($pair[0]).map" "$root/sealed-images/$($pair[0]).map"}
  $deps=@(& ninja.exe -C $ProviderBuildRoot -t deps obj/wow32-dll/wow_window_words_binding.obj);if($LASTEXITCODE){throw 'Cannot read original compile dependencies'}
  $deps|Set-Content "$root/original-deps.txt"
  $inputs+=@($deps|ForEach-Object {if($_ -match '^\s+([A-Za-z]:[/\\].*)$' -and (Test-Path $Matches[1])){$Matches[1]}})
  $cc=@(& ninja.exe -C $ProviderBuildRoot -t commands obj/wow32-dll/wow_window_words_binding.obj)[-1];if($LASTEXITCODE){throw 'Cannot read original compile rule'}
  $link=@(& ninja.exe -C $ProviderBuildRoot -t commands wow32.dll)[-1];if($LASTEXITCODE -or $link -notmatch '^link '){throw 'Cannot read original provider link rule'}
+ $parentReferences=[regex]::Matches($link,'(?<!\S)(?:"([^"]*[\\/]ntvdm\.lib)"|([^\s"]*[\\/]ntvdm\.lib))(?=\s|$)')
+ if($parentReferences.Count -ne 1){throw 'Expected one explicit parent import library'}
+ $link=Replace-One $link $parentReferences[0].Value ('"'+(Join-Path $WorkerBuildRoot 'ntvdm.lib').Replace('\','/')+'"')
  $inputs+=@([regex]::Matches($link,'(?:^|\s)(obj/[^\s"]+\.(?:obj|res))(?=\s|$)')|ForEach-Object {Join-Path $ProviderBuildRoot $_.Groups[1].Value})
  $inputs+=@(Get-ChildItem $ProviderBuildRoot -File -Filter '*.lib').FullName
  $inputs|Sort-Object -Unique|Get-FileHash|Export-Csv -NoTypeInformation "$root/inputs.csv"
@@ -67,7 +78,7 @@ try{
  Owned summary $shell ('-NoProfile -File "'+$PSScriptRoot+'/summarize-wow-callback-cost.ps1" -BuildRoot "'+$root+'"') 60
  foreach($input in Import-Csv "$root/inputs.csv"){if((Get-FileHash $input.Path).Hash -ne $input.Hash){throw 'Frozen source/runtime input changed'}}
  foreach($input in Import-Csv "$root/diagnostic-inputs.csv"){if((Get-FileHash $input.Path).Hash -ne $input.Hash){throw 'Diagnostic output changed'}}
- foreach($image in $images){foreach($dir in @("$repo/assets/release",'O:\winnt\system32')){if((Get-FileHash "$dir/$($image.name)").Hash -ne $image.sha256){throw 'Production changed during diagnostic'}}}
+ foreach($image in $published){foreach($dir in @("$repo/assets/release",'O:\winnt\system32')){if((Get-FileHash "$dir/$($image.name)").Hash -ne $image.sha256){throw 'Production changed during diagnostic'}}}
  @{sourceStatementsUnchanged=$true;phaseMarkersReversible=$true;productionChanged=$false;guestChanged=$false;callbackPairs=45;interpretationPending=$true}|ConvertTo-Json|Set-Content "$root/result.json"
  0|Set-Content "$root/exit.txt"
 }catch{$_|Out-String|Set-Content "$root/failure.txt";1|Set-Content "$root/exit.txt";exit 1}

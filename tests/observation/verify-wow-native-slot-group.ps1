@@ -36,7 +36,7 @@ try{
     $rows=@('window-borrow','native-dispatch-gate','window-procedure','class-client',
         'class-query','class-procedure','class-lifetime','native-creation',
         'standard-class','task-lifecycle','process-retirement','dialog-lifecycle',
-        'native-send','native-nested','native-foreign')|ForEach-Object {
+        'native-send','native-nested','native-foreign','native-indirect')|ForEach-Object {
         @{name=$_;case=$_;arguments=''}
     }
     $rows+=@(

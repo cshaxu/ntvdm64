@@ -2,7 +2,7 @@ param(
     [Parameter(Mandatory=$true)][string]$ProviderBuildRoot,
     [Parameter(Mandatory=$true)][string]$WorkerBuildRoot,
     [string]$BuildRoot,
-    [ValidateSet('task-lifecycle','process-retirement','menu-cleanup','menu-resource','native-dispatch-gate','window-procedure','standard-class','class-query','class-procedure','class-lifetime','dialog-lifecycle','init-notification','start-notification','style-policy','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','task-order','class-client','window-borrow','window-reclaim','graph-snapshot','thunk-scope','native-creation')] [string]$Case = 'task-lifecycle',
+    [ValidateSet('task-lifecycle','process-retirement','menu-cleanup','menu-resource','native-dispatch-gate','window-procedure','standard-class','class-query','class-procedure','class-lifetime','dialog-lifecycle','init-notification','start-notification','style-policy','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect','task-order','class-client','window-borrow','window-reclaim','graph-snapshot','thunk-scope','native-creation')] [string]$Case = 'task-lifecycle',
     [string]$StyleDll,
     [switch]$InitRollback,
     [switch]$CreationUnwind,
@@ -274,7 +274,8 @@ if ($Case -eq 'window-borrow' -and $StyleDll) {
     Copy-Item -LiteralPath (Resolve-Path $StyleDll).Path -Destination "$out/ntw16s32.dll"
     $fixture += ' /DWOW_STYLED_TERMINAL_FIXTURE'
 }
-if ($Case -in @('native-send','native-reply','native-nested','native-seen','native-identity','native-foreign')) { $fixture += ' /DWOW_NATIVE_SEND_FIXTURE' }
+if ($Case -in @('native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect')) { $fixture += ' /DWOW_NATIVE_SEND_FIXTURE' }
+if ($Case -eq 'native-indirect') { $fixture += ' /DWOW_NATIVE_INDIRECT_FIXTURE' }
 if ($Case -eq 'native-reply') { $fixture += ' /DWOW_NATIVE_REPLY_FIXTURE' }
 if ($Case -eq 'native-nested') {
     $fixture += ' /DWOW_NATIVE_NESTED_FIXTURE /I"'+$out+'"'
@@ -604,6 +605,13 @@ if ($Case -eq 'window-borrow' -and $StyleDll -and
     throw 'Styled real-CCPU terminal cleanup did not prove actual attachment, neutralization and GDI retirement'
 }
 if ($Case -eq 'graph-snapshot') {
+    if (!($fixtureOutput -match '^WOW_CLASS_MEMBERSHIP_COPY_CCPU errors=0 phases=4 owned=2 nonowned=2 page_crossing=1 invalid_name=1$')) {
+        throw 'Full-copy class membership changed scalar descriptor, lifetime or failure behavior'
+    }
+    if (!($fixtureOutput -match '^WOW_PREPARED_EDGE_RESOLUTION_CCPU errors=0 rows=[1-9][0-9]* fields=5 staged=1 full_generation=1$') -or
+        !($fixtureOutput -match '^WOW_WINDOW_LINKS_CCPU atomic=1 rebase=1 intermediate=1 retirement=1 reuse=1$')) {
+        throw 'Prepared full-view edge publication or legacy lookup fallback lost full-generation/atomic/rebase/retirement semantics'
+    }
     if (!($fixtureOutput -match '^WOW_MENU_PROJECTION_CCPU errors=0 phases=3 fields=3 capacity=1 retired=1$')) {
         throw 'Typed menu projection failed full-view equivalence, capacity refusal or retained/reused generation isolation'
     }
@@ -867,7 +875,7 @@ if ($Case -eq 'task-order' -and
     !($fixtureOutput -match '^WOW_ORIGINAL_TASK_ELIGIBILITY errors=0 persistent=1 events_preserved=1 lock=1 idle=1 hardware=1$')) {
     throw 'Persistent native-stack eligibility did not preserve original selection/count/lock/hardware behavior'
 }
-if ($Case -in @('native-send','native-reply','native-nested','native-seen','native-identity','native-foreign') -and
+if ($Case -in @('native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect') -and
     !($fixtureOutput -match '^WOW_NATIVE_EXECUTION_SCOPES errors=0 inline=1 nested=1 wait=1 unbind_rejected=1$')) {
     throw 'Actual native execution scopes did not preserve nested eligibility and retirement refusal'
 }
@@ -875,7 +883,15 @@ if ($Case -eq 'graph-snapshot' -and
     !($fixtureOutput -match '^WOW_EXPORTED_CALLBACK_REJECT errors=0 output_untouched=1 no_guest_entry=1$')) {
     throw 'Original exported callback argument rejection did not preserve its output contract'
 }
+if ($Case -eq 'native-indirect' -and
+    (!($fixtureOutput -match '^WOW_NATIVE_INDIRECT_WAIT errors=0 accepted=1 result=114 error=[0-9]+ owner=1$') -or
+     !($fixtureOutput -match '^WOW_SENT_ONLY_RECEIVE errors=0 posted_hook_once=1 posted_retained=1 quit_retained=1$'))) {
+    throw 'Indirect native notification or sent-only posted/quit preservation failed'
+}
 if ($Case -eq 'native-nested') {
+    if (!($fixtureOutput -match '^WOW_NATIVE_WAIT_UNWIND errors=0 lifo=1 native_continuation=1 last_error=1$')) {
+        throw 'Native scheduler-wait unwind lost its previous execution frame or error'
+    }
     foreach ($held in 0,1) {
         if (!($fixtureOutput -match ("^WOW_NATIVE_RECEIVER_EXIT_RETURN held="+$held+" error=(0|1400|1460) retired=1 owner=1$"))) {
             throw 'Actual native send did not restore ownership after receiver thread retirement'

@@ -210,6 +210,45 @@ static DWORD WINAPI send_reentrant(void *window)
 #ifdef WOW_NATIVE_SEEN_FIXTURE
 static DWORD WINAPI cross_watchdog(void *done);
 #endif
+#ifdef WOW_NATIVE_INDIRECT_FIXTURE
+static volatile LONG indirect_post_peeks;
+static LRESULT CALLBACK indirect_getmessage(int code, WPARAM wp, LPARAM lp)
+{
+    if (code >= 0 && ((MSG *)lp)->message == WM_APP + 81)
+        InterlockedIncrement(&indirect_post_peeks);
+    return CallNextHookEx(NULL, code, wp, lp);
+}
+
+static void verify_sent_only_receive(wow_user_runtime_thread *binding, HWND window)
+{
+    MSG message;
+    HHOOK hook;
+    unsigned before = errors;
+    hook = SetWindowsHookExW(WH_GETMESSAGE, indirect_getmessage, NULL, GetCurrentThreadId());
+    CHECK(hook != NULL);
+    CHECK(PostMessageW(window, WM_APP + 81, 447, 93));
+    CHECK(wow_user_runtime_enter(binding));
+    binding->thread->host->receive(binding->thread);
+    CHECK(binding->exclusive_held);
+    CHECK(wow_user_runtime_leave(binding));
+    CHECK(indirect_post_peeks == 0);
+    CHECK(PeekMessageW(&message, window, WM_APP + 81, WM_APP + 81,
+        PM_REMOVE | PM_NOYIELD));
+    CHECK(message.message == WM_APP + 81 && message.wParam == 447 &&
+        message.lParam == 93 && indirect_post_peeks == 1);
+    /* WM_QUIT is a public PeekMessage special case. Require retention, not
+     * an invented promise to suppress its native Hook observations. */
+    PostQuitMessage(41);
+    CHECK(wow_user_runtime_enter(binding));
+    binding->thread->host->receive(binding->thread);
+    CHECK(wow_user_runtime_leave(binding));
+    CHECK(PeekMessageW(&message, NULL, 0, 0, PM_REMOVE | PM_NOYIELD));
+    CHECK(message.message == WM_QUIT && message.wParam == 41);
+    if (hook) CHECK(UnhookWindowsHookEx(hook));
+    fprintf(stderr, "WOW_SENT_ONLY_RECEIVE errors=%u posted_hook_once=%ld posted_retained=1 quit_retained=1\n",
+        errors - before, indirect_post_peeks);
+}
+#endif
 static void verify_control_callouts(wow_user_runtime_thread *binding,
     const WNDCLASSW *cls)
 {
@@ -304,6 +343,30 @@ static void verify_receive_callout(wow_user_runtime_thread *binding)
         CHECK(wow_user_native_call_begin(&outer, NULL));
         CHECK(!wow_task_execution_ready(thread));
         CHECK(thread->ppi->pwpi->CSOwningThread != thread);
+#ifdef WOW_NATIVE_NESTED_FIXTURE
+        {
+            BOOL caught = FALSE;
+            unsigned before = errors;
+            CHECK(wow_user_native_call_begin_inline(&inner));
+            CHECK(!inner.execution_held && inner.execution.previous == &outer.execution);
+            __try {
+                __try {
+                    SetLastError(0x447a9301);
+                    RaiseException(0xe0447930, 0, 0, NULL);
+                } __finally {
+                    DWORD error = GetLastError();
+                    CHECK(wow_user_native_call_end_wait(&inner));
+                    SetLastError(error); /* Same boundary as native_peek. */
+                }
+            } __except(GetExceptionCode() == 0xe0447930 ?
+                    EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) { caught = TRUE; }
+            CHECK(caught && GetLastError() == 0x447a9301 && !inner.execution.active);
+            CHECK(thread->execution == &outer.execution && !wow_task_execution_ready(thread));
+            CHECK(thread->ppi->pwpi->CSOwningThread != thread && !binding->exclusive_held);
+            fprintf(stderr, "WOW_NATIVE_WAIT_UNWIND errors=%u lifo=1 native_continuation=1 last_error=1\n",
+                errors - before);
+        }
+#endif
         CHECK(wow_user_native_call_end(&outer));
         CHECK(wow_task_execution_ready(thread) && thread->ppi->pwpi->CSOwningThread == thread);
         fprintf(stderr, "WOW_NATIVE_EXECUTION_SCOPES errors=%u inline=1 nested=1 wait=1 unbind_rejected=1\n", errors);
@@ -326,6 +389,9 @@ static void verify_receive_callout(wow_user_runtime_thread *binding)
         CHECK(borrow != NULL);
         if (borrow) {
             wow_window_words_cleanup_value(borrow)->thread = binding->thread;
+#ifdef WOW_NATIVE_INDIRECT_FIXTURE
+            verify_sent_only_receive(binding, window);
+#endif
             CHECK(wow_native_SendMessageA(window, WM_APP + 63, 1, 113) == 114);
             CHECK(GetLastError() == 0x5678);
             CHECK(wow_native_SendMessageTimeoutA(window, WM_APP + 63, 0, 114,
@@ -736,6 +802,33 @@ static void verify_cross_callout(session *owner, wow_user_runtime_thread *bindin
         if (words) wow_window_words_release(words);
     }
     CHECK(wow_user_runtime_leave(binding));
+#ifdef WOW_NATIVE_INDIRECT_FIXTURE
+    {
+        wow_user_native_call call;
+        DWORD_PTR result = 0;
+        DWORD error;
+        LRESULT accepted;
+        unsigned before = errors;
+        /* This is an actual indirect native notification: an inline native
+         * frame retains the sender, but USER sends to the other real task.
+         * Do not edit ptiScheduled, CSOwningThread, events or SMS fields. */
+        CHECK(wow_user_native_call_begin_inline(&call));
+        CHECK(wow_user_runtime_enter(binding));
+        CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread &&
+            !wow_task_execution_ready(binding->thread) &&
+            !binding->thread->ppi->pwpi->nTaskLock);
+        CHECK(wow_user_runtime_leave(binding));
+        SetLastError(ERROR_SUCCESS);
+        accepted = SendMessageTimeoutA(test.window, WM_APP + 65, 0, 0,
+            SMTO_BLOCK | SMTO_ERRORONEXIT, 2000, &result);
+        error = GetLastError();
+        CHECK(accepted != 0 && result == 114);
+        CHECK(wow_user_native_call_end(&call));
+        CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
+        fprintf(stderr, "WOW_NATIVE_INDIRECT_WAIT errors=%u accepted=%u result=%lu error=%lu owner=1\n",
+            errors - before, accepted != 0, (DWORD)result, error);
+    }
+#endif
 #ifdef WOW_NATIVE_FOREIGN_FIXTURE
     test.foreign_entered = CreateEventW(NULL, TRUE, FALSE, NULL);
     test.foreign_first = TRUE;
@@ -895,7 +988,11 @@ static void verify_cross_callout(session *owner, wow_user_runtime_thread *bindin
     CloseHandle(foreign);
     CloseHandle(test.foreign_entered);
 #else
+#ifdef WOW_NATIVE_INDIRECT_FIXTURE
+    CHECK(test.delivered == 3);
+#else
     CHECK(test.delivered == 2);
+#endif
 #endif
     SetEvent(test.complete);
     CHECK(WaitForSingleObject(watchdog, 3000) == WAIT_OBJECT_0);

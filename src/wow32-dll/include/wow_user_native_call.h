@@ -23,5 +23,8 @@ BOOL WINAPI wow_user_native_call_begin(wow_user_native_call *, HWND);
  * that native frame without inventing a send/reply association. */
 BOOL WINAPI wow_user_native_call_begin_inline(wow_user_native_call *);
 BOOL WINAPI wow_user_native_call_end(wow_user_native_call *);
+/* Scheduler-wait entry did not necessarily own guest execution. Restore its
+ * borrowed native frame without pretending to return to guest in that case. */
+BOOL WINAPI wow_user_native_call_end_wait(wow_user_native_call *);
 void WINAPI wow_user_native_call_result(wow_user_native_call *, UINT, WPARAM, LPARAM, LRESULT);
 #endif

@@ -22,6 +22,10 @@ BOOL WINAPI wow_user_message_bridge_sync(wow_user_message_bridge *,
     struct wow_task_order_thread *);
 BOOL WINAPI wow_user_message_bridge_receive(wow_user_message_bridge *,
     struct wow_task_order_thread *);
+/* Original scheduler released its data lock. Sent-only native dispatch may
+ * admit actual callbacks through their existing execution owner. */
+BOOL WINAPI wow_user_message_bridge_receive_wait(wow_user_message_bridge *,
+    struct wow_task_order_thread *);
 void WINAPI wow_user_message_bridge_dispose(wow_user_message_bridge *);
 
 #endif

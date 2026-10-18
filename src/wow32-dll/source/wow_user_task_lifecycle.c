@@ -60,8 +60,11 @@ typedef struct wow_user_task_lifecycle_thread {
     DWORD window_style;
     DWORD launch_request;
     BOOL start_pending;
+    BOOL wait_publication_pending; /* Native wait omitted a guest publication. */
     const void *start_attempt;
 } wow_user_task_lifecycle_thread;
+
+static void publish_scheduled_return(wow_user_runtime_thread *binding);
 
 static wow_user_task_lifecycle_thread *current_task(
     wow_user_task_lifecycle *owner)
@@ -233,8 +236,8 @@ static NTSTATUS WINAPI wait_for_task_or_message(wow_task_order_thread *thread,
             binding->runtime != task->owner->runtime) return (NTSTATUS)0xC0000001;
     /* The original caller released its USER domain immediately before this
      * wait.  MsgWait is the finite public substitute for the unavailable
-     * kernel queue wake.  It does not dispatch here: the scheduled original
-     * xxxUserYield/xxxReceiveMessages path owns that operation. */
+     * kernel queue wake. Actual native sent callbacks must be admitted before
+     * the original rescan can wait for their suspended sender to return. */
     /* queue.c xxxSleepThread checks fsWakeBits for pending synchronous
      * sends, not just change bits. GetQueueStatus's high word retains old
      * unread sends; MsgWait alone would wait for another new message. Keep
@@ -247,7 +250,19 @@ static NTSTATUS WINAPI wait_for_task_or_message(wow_task_order_thread *thread,
     if (result < WAIT_OBJECT_0 + count) return (NTSTATUS)(result - WAIT_OBJECT_0);
     if (result == WAIT_IO_COMPLETION) return (NTSTATUS)0x000000C0;
     if (result == WAIT_OBJECT_0 + count) {
+        /* ADAPTER-WOW-093: receive under the existing callback scheduler,
+         * not by granting this native wait continuation guest execution.
+         * The existing input plan spans exactly the original InitTask call;
+         * startup defers receiving until that call/finally releases it. */
+        if (!task->input_plan &&
+                !wow_user_message_bridge_receive_wait(&task->messages, thread))
+            return (NTSTATUS)0xC0000001;
         if (!wow_user_runtime_enter(binding)) return (NTSTATUS)0xC0000001;
+        if (!task->input_plan &&
+                !wow_user_message_bridge_sync(&task->messages, thread)) {
+            (void)wow_user_runtime_leave(binding);
+            return (NTSTATUS)0xC0000001;
+        }
         ++task->message_wakes;
         /* A native queue wake is real work for this original task.  Retain
          * taskman's existing event-count/list scheduling; do not construct a
@@ -671,7 +686,10 @@ VOID WINAPI wow_user_task_lifecycle_directed_yield(wow_user_task_lifecycle *owne
     if (!task || !wow_user_runtime_enter(wow_user_runtime_current())) {
         SetLastError(ERROR_INVALID_STATE); return;
     }
-    __try { xxxDirectedYield(thread_id, &task->thread); }
+    __try {
+        xxxDirectedYield(thread_id, &task->thread);
+        publish_scheduled_return(wow_user_runtime_current());
+    }
     __finally { (void)wow_user_runtime_leave(wow_user_runtime_current()); }
 }
 
@@ -695,6 +713,7 @@ BOOL WINAPI wow_user_task_lifecycle_wait(wow_user_task_lifecycle *owner,
         task->thread.pcti->fsChangeBits = LOWORD(queue_status) |
             (HIWORD(queue_status) & QS_POSTMESSAGE);
         result = xxxSleepTask(FALSE, wowexec_event, &task->thread);
+        if (result) publish_scheduled_return(wow_user_runtime_current());
     }
     __finally { (void)wow_user_runtime_leave(wow_user_runtime_current()); }
     return result;
@@ -729,7 +748,7 @@ DWORD WINAPI wow_user_msg_wait(DWORD count, const HANDLE *handles, BOOL all,
  * before the WOW yield and timer scan; queue.c::xxxSleepThread blocks through
  * the original task scheduler. Native USER retains queue/filter ownership.
  * No guest pointer or native message is held across a cooperative switch. */
-static BOOL sleep_message_task(wow_user_task_lifecycle *owner)
+static BOOL sleep_message_task(wow_user_task_lifecycle *owner, BOOL publish)
 {
     wow_user_task_lifecycle_thread *task = current_task(owner);
     wow_user_runtime_thread *binding = wow_user_runtime_current();
@@ -740,6 +759,7 @@ static BOOL sleep_message_task(wow_user_task_lifecycle *owner)
     __try {
         wake_input_idle(&task->thread);
         (void)xxxSleepTask(TRUE, NULL, &task->thread);
+        if (publish) publish_scheduled_return(binding);
     } __finally { (void)wow_user_runtime_leave(binding); }
     return TRUE;
 }
@@ -798,7 +818,7 @@ static BOOL lifecycle_message(wow_user_task_lifecycle *owner,
         if (available)
             return get ? message->message != WM_QUIT : TRUE;
         if (!get) return FALSE;
-        if (!sleep_message_task(owner)) return -1;
+        if (!sleep_message_task(owner, FALSE)) return -1;
     }
 }
 
@@ -833,7 +853,7 @@ BOOL WINAPI wow_user_task_lifecycle_wait_message(wow_user_task_lifecycle *owner)
     /* ReceiveMessages can examine the queue before taskman returns. Retain
      * the native wait's wake observation, not a second queue or event count. */
     do {
-        if (!sleep_message_task(owner)) return FALSE;
+        if (!sleep_message_task(owner, TRUE)) return FALSE;
     } while (task->message_wakes == wakes);
     return TRUE;
 }
@@ -1066,7 +1086,36 @@ static BOOL publish_call_windows(const wow_user_native_call *call)
             wow_menu_native_refresh_menu(call->returned_menu));
 }
 
-BOOL WINAPI wow_user_native_call_end(wow_user_native_call *call)
+static BOOL publish_guest_return(wow_user_runtime_thread *binding,
+    const wow_user_native_call *call)
+{
+    wow_user_task_lifecycle_thread *task = current_task(binding->runtime->lifecycle);
+    BOOL published = (call ? publish_call_windows(call) : wow_user_window_refresh_graph(NULL)) &&
+        wow_user_borrow_client_graph(NULL, GetDesktopWindow()) &&
+        wow_menu_client_refresh_all(binding->thread->ppi);
+    /* An ordinary native return may have already discharged a prior wait.
+     * Do not clear on partial failure or unwind. This is a call-boundary
+     * obligation, not an independent HWND/graph dirty-state authority. */
+    if (published && task) task->wait_publication_pending = FALSE;
+    return published;
+}
+
+static void publish_scheduled_return(wow_user_runtime_thread *binding)
+{
+    DWORD saved = GetLastError();
+    wow_task_order_thread *thread = binding->thread;
+    wow_user_task_lifecycle_thread *task = current_task(binding->runtime->lifecycle);
+    /* Original HEVENT_REMOVEME can return to a native continuation instead.
+     * This helper publishes an acquired owner; it never grants execution. */
+    if (task && task->wait_publication_pending &&
+            thread && thread->ppi && thread->ppi->pwpi &&
+            thread->ppi->pwpi->CSOwningThread == thread &&
+            !publish_guest_return(binding, NULL))
+        wow_user_native_call_failed("publish-scheduler-return", GetLastError());
+    SetLastError(saved);
+}
+
+static BOOL native_call_end(wow_user_native_call *call, BOOL scheduler_wait)
 {
     wow_user_runtime_thread *binding = call->binding;
     wow_task_order_thread *sender;
@@ -1095,15 +1144,29 @@ BOOL WINAPI wow_user_native_call_end(wow_user_native_call *call)
         wow_user_native_call_failed("native-return-execution", ERROR_INVALID_STATE);
     execution_pop(sender, &call->execution);
     call->binding = NULL;
-    published = publish_call_windows(call) &&
-        wow_user_borrow_client_graph(NULL, GetDesktopWindow()) &&
-        wow_menu_client_refresh_all(sender->ppi);
+    if (scheduler_wait && !call->execution_held) {
+        wow_user_task_lifecycle_thread *task = current_task(binding->runtime->lifecycle);
+        if (!task)
+            wow_user_native_call_failed("native-wait-task", ERROR_INVALID_STATE);
+        task->wait_publication_pending = TRUE;
+        published = TRUE;
+    } else published = publish_guest_return(binding, call);
     error = GetLastError();
     if (!published) wow_user_native_call_failed("publish-native-return", error);
     if (!call->held && !wow_user_runtime_leave(binding))
         wow_user_native_call_failed("release-native-owner", GetLastError());
     SetLastError(error);
     return published;
+}
+
+BOOL WINAPI wow_user_native_call_end(wow_user_native_call *call)
+{
+    return native_call_end(call, FALSE);
+}
+
+BOOL WINAPI wow_user_native_call_end_wait(wow_user_native_call *call)
+{
+    return native_call_end(call, TRUE);
 }
 
 /* A native operation may already have consumed a MSG or mutated USER. It

@@ -356,6 +356,48 @@ result 0x12
 send native_window,0x473,0,0,0
 result 0x13
 mov word [native_count-data],4
+%ifdef M4_STRUCTURES
+; All three structure families, first across real Win16 tasks, then to the
+; native peer. Native operation3 exercises the reverse native->guest path.
+mov ax,[peer-data]
+call structure_inputs
+send peer,0x24,0x4474,ds,minmax-data
+result 0x24
+call check_minmax
+send peer,0x46,0x4474,ds,position-data
+result 0x46
+call check_position
+send peer,0x4a,[window-data],ds,copydata-data
+result 0x4a
+mov ax,[native_window-data]
+call structure_inputs
+send native_window,0x24,0x4474,ds,minmax-data
+result 0x24
+call check_minmax
+send native_window,0x46,0x4474,ds,position-data
+result 0x46
+call check_position
+send native_window,0x4a,[window-data],ds,copydata-data
+result 0x4a
+add word [native_count-data],3
+mov ax,3
+call native_operation
+result 0x20
+cmp word [structures-data],4
+jne failed
+%ifdef M4_REPLY_PAYLOAD
+; The native peer replies from another actual thread, protects only its own
+; input after the reply, then acknowledges. The receiver never rereads input.
+mov ax,5
+call native_operation
+result 0x55
+%ifdef M4_TIMEOUT_PAYLOAD
+mov ax,8
+call native_operation
+result 0x58
+%endif
+%endif
+%endif
 %ifdef EXTENSION_WITNESS
 ; Real original GetProcAddress32 failure followed by valid resolution.
 push32 module
@@ -538,6 +580,17 @@ push di
 push bx
 mov ds,ax
 client_view
+%ifdef M4_STRUCTURES
+cmp word [bp+12],0x4a
+je .copydata
+cmp word [bp+10],0x4474
+jne .ordinary
+cmp word [bp+12],0x24
+je .minmax
+cmp word [bp+12],0x46
+je .position
+.ordinary:
+%endif
 cmp word [bp+12],0x460
 je .basic
 cmp word [bp+12],0x461
@@ -562,6 +615,7 @@ je .extension_yield
 cmp word [bp+12],0x476
 je .extension_yield_ack
 %endif
+.default:
 push word [bp+14]
 push word [bp+12]
 push word [bp+10]
@@ -569,6 +623,185 @@ push word [bp+8]
 push word [bp+6]
 api 2,107
 jmp .return
+%ifdef M4_STRUCTURES
+.minmax:
+les di,[bp+6]
+cmp word [es:di],0x1234
+je .minmax_outer
+cmp word [es:di],0x2345
+jne .bad
+call check_minmax_input
+jmp .minmax_result
+.minmax_outer:
+call check_minmax_input
+mov word [es:di],0x2345
+; Nest a converted structure send while the outer original callback owns
+; its stack allocation. Reload the far pointer after reentry, not a flat alias.
+%ifdef RECEIVER
+push word [sender-data]
+%else
+push word [peer-data]
+%endif
+push word 0x24
+push word 0x4474
+push es
+push di
+api 2,111
+cmp ax,0x24
+jne .bad
+cmp dx,0x447a
+jne .bad
+les di,[bp+6]
+cmp word [es:di],0x7abc
+jne .bad
+cmp word [es:di+18],-11
+jne .bad
+.minmax_result:
+mov word [es:di],0x7abc
+mov word [es:di+18],-11
+inc word [structures-data]
+mov ax,0x24
+jmp .value
+.position:
+les di,[bp+6]
+mov ax,[window-data]
+cmp word [es:di],ax
+jne .bad
+cmp word [es:di+2],0
+jne .bad
+cmp word [es:di+4],-12
+jne .bad
+cmp word [es:di+6],34
+jne .bad
+cmp word [es:di+8],56
+jne .bad
+cmp word [es:di+10],78
+jne .bad
+cmp word [es:di+12],4
+jne .bad
+mov word [es:di+4],-23
+mov word [es:di+6],45
+mov word [es:di+8],90
+mov word [es:di+12],0x14
+inc word [structures-data]
+mov ax,0x46
+jmp .value
+.copydata:
+les di,[bp+6]
+%ifdef M4_TIMEOUT_PAYLOAD
+cmp dword [es:di],0x456789ad
+je .copydata_input
+%endif
+%ifdef M4_REPLY_PAYLOAD
+cmp dword [es:di],0x456789ac
+je .copydata_input
+%endif
+cmp dword [es:di],0x456789ab
+jne .default
+.copydata_input:
+cmp dword [es:di+4],8
+jne .bad
+les di,[es:di+8]
+cmp dword [es:di],0x6f63344d ; M4co
+jne .bad
+cmp dword [es:di+4],0x21217970 ; py!!
+jne .bad
+cmp word [copy_depth-data],0
+jne .copydata_inner
+mov word [copy_depth-data],1
+mov ax,[bp+6]
+mov [copy_far-data],ax
+mov ax,[bp+8]
+mov [copy_far+2-data],ax
+; Original CallWindowProc with a real16-bit procedure uses its existing
+; CallBack16 path. It must not replace/free this outer converted allocation.
+push32 procedure
+push word [window-data]
+push word 0x4a
+push word [bp+10]
+push word [bp+8]
+push word [bp+6]
+api 2,122
+cmp ax,0x4a
+jne .bad
+cmp dx,0x447a
+jne .bad
+mov word [copy_depth-data],0
+; Reacquire the far header/payload before inspecting them after reentry.
+les di,[bp+6]
+cmp dword [es:di+4],8
+jne .bad
+les di,[es:di+8]
+cmp dword [es:di],0x6f63344d
+jne .bad
+cmp dword [es:di+4],0x21217970
+jne .bad
+%ifdef M4_REPLY_PAYLOAD
+; BX is not our state across CallWindowProc. Classify from the read-only
+; header again before replying; no input is consulted after ReplyMessage.
+les di,[bp+6]
+%ifdef M4_TIMEOUT_PAYLOAD
+cmp dword [es:di],0x456789ad
+je .copydata_timeout
+%endif
+cmp dword [es:di],0x456789ac
+je .copydata_reply
+%endif
+inc word [structures-data]
+mov ax,0x4a
+jmp .value
+.copydata_inner:
+mov ax,[bp+6]
+cmp ax,[copy_far-data]
+jne .bad
+mov ax,[bp+8]
+cmp ax,[copy_far+2-data]
+jne .bad
+inc word [copy_nested-data]
+mov ax,0x4a
+jmp .value
+%ifdef M4_REPLY_PAYLOAD
+.copydata_reply:
+mov ax,7
+call native_operation
+cmp ax,0x57
+jne .bad
+cmp dx,0x447a
+jne .bad
+push word 0x447a
+push word 0x51
+api 2,115
+; No input pointer read after ReplyMessage. This original generic thunk
+; waits for the sender's event, not a guessed delay or guest polling loop.
+mov ax,6
+call native_operation
+cmp ax,0x56
+jne .bad
+cmp dx,0x447a
+jne .bad
+mov ax,0x53
+jmp .value
+%ifdef M4_TIMEOUT_PAYLOAD
+.copydata_timeout:
+mov ax,7
+call native_operation
+cmp ax,0x57
+jne .bad
+cmp dx,0x447a
+jne .bad
+; No ReplyMessage: the real native sender must reach its deadline while
+; this receiver has entered and waits for the sender's acknowledgement.
+mov ax,6
+call native_operation
+cmp ax,0x56
+jne .bad
+cmp dx,0x447a
+jne .bad
+mov ax,0x54
+jmp .value
+%endif
+%endif
+%endif
 .basic:
 cmp word [bp+10],0x1234
 jne .bad
@@ -705,6 +938,51 @@ pop es
 pop ds
 pop bp
 retf 10
+%ifdef M4_STRUCTURES
+; Caller-owned inputs; 16-bit ABI layouts are from original wowusr.h.
+structure_inputs:
+mov [position-data],ax
+mov word [minmax-data],0x1234
+mov word [minmax+18-data],10
+mov word [position+4-data],-12
+mov word [position+6-data],34
+mov word [position+8-data],56
+mov word [position+12-data],4
+mov [copydata+10-data],ds
+ret
+check_minmax:
+cmp word [minmax-data],0x7abc
+jne failed
+cmp word [minmax+18-data],-11
+jne failed
+ret
+check_position:
+cmp word [position+4-data],-23
+jne failed
+cmp word [position+6-data],45
+jne failed
+cmp word [position+8-data],90
+jne failed
+cmp word [position+10-data],78
+jne failed
+cmp word [position+12-data],0x14
+jne failed
+ret
+check_minmax_input:
+push si
+push di
+mov si,minmax_expected-data+2
+add di,2
+mov cx,9
+cld
+repe cmpsw
+pop di
+pop si
+je .valid
+or word [errors-data],0x2000
+.valid:
+ret
+%endif
 %ifdef EXTENSION_WITNESS
 extension_callback:
 push bp
@@ -760,10 +1038,18 @@ align 16,db 0
 data:
 times 32 db 0
 report:
+%ifdef M4_STRUCTURES
+%ifdef THREAD_CLIENT_VIEW
+db 'MSG6'
+%else
+db 'MSG5'
+%endif
+%else
 %ifdef THREAD_CLIENT_VIEW
 db 'MSG2'
 %else
 db 'MSG1'
+%endif
 %endif
 %ifdef RECEIVER
 role: dw 1
@@ -789,6 +1075,10 @@ client_version: dw 0
 client_expected: dw EXPECTED_VERSION
 client_checks: dw 0
 %endif
+%ifdef M4_STRUCTURES
+structures: dw 0
+copy_nested: dw 0
+%endif
 report_end:
 instance: dw 0
 window: dw 0
@@ -811,6 +1101,16 @@ absent_export: db 'T447AbsentExtension',0
 %endif
 message: times 18 db 0
 buffer: times 32 db 0
+%ifdef M4_STRUCTURES
+minmax: dw 0x1234,2,3,4,5,6,-7,8,9,10
+copy_far: dd 0
+copy_depth: dw 0
+minmax_expected: dw 0x1234,2,3,4,5,6,-7,8,9,10
+position: dw 0,0,-12,34,56,78,4
+copydata: dd 0x456789ab,8
+dw payload-data,0
+payload: db 'M4copy!!'
+%endif
 wndclass:
 dw 0
 dd 0
