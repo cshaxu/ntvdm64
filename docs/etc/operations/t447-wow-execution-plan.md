@@ -2,6 +2,13 @@
 
 ## Admission and boundaries
 
+S3 is closed at the P22 runtime/P23 interaction baseline after the
+[fixed-chain exit review](../../history/m0-t447-s3-control-dependency-closure.md).
+S4 is now the sole sequential admission under the continuing owner goal.
+Earlier staged/pending chronology below is retained evidence, not current
+admission authority; CURRENT.md owns the active packet. S5/S6 and residual
+queued capabilities are neither discarded nor concurrently active.
+
 Owner approves native real-window style mutation with host style notifications,
 including pre-4.0 windows. Keep original client/private-word validation and
 the existing native callout/return publication boundary. Do not add notification
@@ -12,6 +19,88 @@ creation/modal/focus/control/resource algorithms. No helper HWND or private
 decoder. Implement creation through normal/task teardown together; A/W restore,
 exactly-once callbacks, result propagation, rollback and handle reuse remain
 acceptance requirements. Other fixed S3 groups remain open. See the source ledger.
+
+### S4 message closure admission and fixed source inventory
+
+This is the complete source-led audit/implementation boundary, not six
+independent leaf-patch deliveries. Preserve S3's fixed functional floors and
+its recorded original-guest/host limitations. The binding approved transport
+contract is in design/ARCHITECTURE.md: modern USER owns message delivery and
+reply for all participating directions; original MVDM owns conversions and
+composable original taskman/queue code owns WOW scheduling. Exact NT4 private
+SMS pointers and unobservable NT4 early-reply execution order are not a
+promised host interface. Do not infer any further semantic concession.
+
+| Group and full entry set | Source owners / current boundary | Required complete proof |
+| --- | --- | --- |
+| M1 explicit send/post/retrieval | MVDM wumsg.c WU32SendMessage/SendDlgItemMessage/PostMessage/PostAppMessage/GetMessage/PeekMessage, wmsg16 and message-specific converters; existing native wrappers/queue bridge | Same-task, cross-task same-worker, cross-worker and native peers; preserve original 16/32 conversion, posted versus nonqueued distinction, filters, WM_QUIT and source failure/return values. No second queue. |
+| M2 receive identity and reply | wmdisp32 callback/CallBack16; wumsg.c WU32InSendMessage/WU32ReplyMessage; modern USER receive/reply state; existing execution scopes | Explicit and implicit sends, mixed nesting, early/duplicate/no-pending replies, sender result and receiver continuation. Public receive facts belong to the actual callback thread, not the outer API's nominated HWND or a fabricated SMS. |
+| M3 scheduling/wait/reentry | Original ntuser/kernel/taskman.c DirectedScheduleTask/xxxSleepTask and selected queue/input; lifecycle native-call/callback owners | Suspend/reacquire original execution correctly around native blocking calls, nested callbacks and post-reply work. Retain original runnable/priority/lock invariants where their required inputs exist; no new scheduler or private native decoder. |
+| M4 converted-message data and results | Original ThunkMsg16/UnThunkMsg16, wmsg16/message-specific converters, CallBack16 and existing guest leases | Input/output structures, strings, native/guest result conversion, movement across callback/yield, exactly-once cleanup and exceptions. Native/guest pointers may not survive outside their admitted lease; source-defined unsupported posted-pointer messages remain explicit. |
+| M5 failure and lifecycle | Existing window/task/runtime/borrow owners plus original cleanup; native USER owns actual target death | Destroy/reuse receiver or nested window, failed send/post/wait and terminal worker adaptation failures; no stale target/task, replay, fabricated success or leaked conversion buffers. New requested task termination remains S5, not a reason to omit normal failure cleanup. |
+| M6 integrated acceptance | Independent two-task Win16 witnesses and architecture-correct native test peers, production WOW/CCPU providers and canonical immutable original media | Actual Win16/Win16 and both native directions, implicit native send inside another API, nested/reply/wait/failure and normal retirement together. Original-body/native doubles are supplemental, not substitutes. Retain native20/original30, actual S3 groups, app/DOS, normal-desktop floors and coherent13 publication. |
+
+Before selecting a repair, produce one finite remediation table from these
+six groups: exact selected original entry/provider, available/missing input,
+single authority for each state, retained/replaced/removed implementation,
+source-recovery ladder, failures/lifetime and complete assertion entrypoints.
+Do not expand by test failures or runtime hot spots. Where original behavior
+already composes, retain it and remove displaced duplicate code immediately;
+do not reimplement the original converter or original task ordering in a
+new message manager. A full original USER/server/SMS subsystem import is not
+required or admitted merely because taskman names an SMS field.
+
+Initial source findings, not runtime conclusions:
+
+- Original WU32InSendMessage simply calls InSendMessage; WU32ReplyMessage calls
+  ReplyMessage and explicitly warns not to reuse flat guest pointers afterward.
+  Their presence does not establish reply-time WOW scheduling or nested lifetime.
+- Existing wow_user_native_call_begin/end links a call-local sender/receiver
+  carrier through psmsSent for original scheduling. The carrier is not native
+  USER's actual received SMS and cannot identify an implicit callback/message.
+  Audit all psmsSent/psmsCurrent/flags consumers before altering the carrier.
+- Original taskman DirectedScheduleTask compares psms with the waiting sender;
+  xxxSleepTask uses actual received flags and cross-process send/receive counts.
+  Public native completion and WOW execution resumption must be kept separate.
+  Do not populate those flags by approximate HWND/thread observations.
+- Existing native send/nested/foreign tests prove local execution-return safety,
+  not complete real guest early/duplicate replies or mixed message identity.
+
+This admission adds zero runtime/mirror diff and starts no new runtime test.
+The original/host/adapter/NTW16S responsibility rules and immutable guest policy
+remain binding. Once the entire selected repair group is connected, run its
+owned background acceptance, then formal floors/publication/commit/push.
+Any newly needed semantic relaxation still requires an explicit decision;
+ordinary registered implementation corrections need no repeated approval.
+
+#### S4 first source/import inventory result
+
+The owned read-only source-audit-r1 under build/M0-T447/S4 exits0. It hashes
+the actual original thunk, existing adapter/taskman/queue sources, selected
+provider generator and published binaries. dumpbin of the published WOW32
+establishes real USER32 imports InSendMessage, ReplyMessage, SendMessageA and
+PostMessageA; the import evidence is not a runtime reply/scheduling pass.
+
+The complete state-consumer inventory in the existing adapter and selected
+kernel slice finds psmsSent writes only at lifecycle native-call begin/end;
+psmsCurrent is declared and consumed by original taskman's cross-process
+sleep guard but has no producer in those selected bindings. nSendLock/
+nRecvLock mutations reside in original DirectedScheduleTask. Thus retaining
+original declarations/branches does not establish that their historical
+received-message inputs exist. M2/M3 must account for those paths under the
+already approved native transport contract rather than inventing an SMS or
+blindly deleting original scheduling. Current local send tests remain useful
+execution-ownership proof, not closure of this inventory.
+
+Original WU32SendMessage copies its input operands before ThunkMsg16 and
+releases guest argument pointers before native dispatch. WU32ReplyMessage
+warns that another task may invalidate flat pointers. WU32PostMessage also
+retains its source-specific same-WOW private-message retry after a native
+ERROR_INVALID_PARAMETER; do not replace that original compatibility branch
+with a blanket posted-pointer refusal. M4 must audit its exact same-address-
+space predicate, conversion/cleanup and native versus cross-worker boundary.
+No new pointer queue, transport, runtime edit or guest patch is selected by
+this observation. All six admitted groups remain required before S4 closure.
 
 ### Responsibility audit and finite remediation
 
@@ -851,9 +940,10 @@ dependencies before declaring that condition satisfied.
 | S5 | Task lifetime and NT Monitor per-task termination. | Original hung/exit ownership, request-to-HTASK identity and reuse protection, sibling remains usable; explicit worker termination stays separate. Earlier cleanup is not deferred here. |
 | S6 | Final acceptance and handoff. | Reconciled owned matrix, source/minimal-diff audit, same-package regressions, coherent publication and delivery; no unfinished implementation backlog. |
 
-Only S2 is currently active. Later stages require sequential admission with
-exact files, source recovery decision and acceptance cases. Replanning must
-preserve all obligations rather than move unfinished implementation to S6.
+At this historical planning point only S2 was active. Current sequential
+admission is recorded at the top of this plan and in CURRENT.md. Each stage
+retains exact files, source recovery decisions and acceptance cases; no
+unfinished implementation is moved to S6.
 
 ### Owner-requested S2 scope freeze at P15
 

@@ -14836,3 +14836,36 @@ interaction or whole-WOW acceptance. Final C1--C5 exit adjudication remains
 the finite S3 closeout action; no additional runtime defect is inferred from
 these previously missing tests. S4 full mixed messages and S5 task termination
 remain unproved and unchanged in scope.
+
+### Fixed S3 exit adjudication and sequential S4 admission
+
+The final review is in the [S3 closure](../../history/m0-t447-s3-control-dependency-closure.md).
+It maps C1--C5 and all six dependency groups to current production owners,
+actual test assertions and uncovered boundaries. Re-read production original
+control selection, creation/rollback, original dialog finalization, native
+procedure authority and nonclient entry; no additional identified S3 public
+execution defect is transferred to a successor. The early staged status is
+preserved as a historical snapshot, not left as the active packet's hundreds
+of superseded pending statements.
+
+Scope-closure-r1 is an evidence-parser failure: it expected a generic PASS
+word in WRITE's verdict. The retained verifier actually emits the stronger
+specific marker WOW_WRITE_STARTUP_FRONTIER samples=4 main=1 document=1
+pageinfo=1 editing=unverified exit=unverified. Select that exact marker;
+do not remove the editing/exit limitation or rerun WRITE just to change text.
+Scope-closure-r2 supervisor20796 exits0. It rechecks every sealed build input
+(only P23's two reviewed controls-test inputs differ), all278 current/pinned
+source pairs and pinned original HEAD, actual original-control source
+selection, current20/30/12 plus3 interaction results, precise menu/WRITE and
+DOS17x2 assertions, production output hashes and both published13-image sets.
+This is proof reconciliation against existing runs, not new runtime execution.
+
+S3's bounded scope is therefore closed; the persistent WOW32 goal is not.
+No product/source/guest/media/profile change is included in this closeout.
+The final governed documentation review/commit/push is required separately.
+CURRENT admits S4 under the continuing owner goal and the unchanged six-stage
+plan, with its complete M1--M6 source inventory before runtime implementation.
+Original wumsg already delegates InSendMessage/ReplyMessage to native USER;
+the current call-local scheduler carrier must not be mistaken for received
+native message identity. This is a successor audit requirement, not evidence
+that the S3-approved local execution-return tests have failed.
