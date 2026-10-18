@@ -92,6 +92,29 @@ filter, hidden helper, guest change or new compatibility waiver is approved.
 The next repair group must preserve lifetime semantics and add normal-desktop
 acceptance, not repeat private-only gates and claim the report resolved.
 
+The bounded class-collection repair retains the existing class/window backing
+owners and strict retire_class guard. At one collector call, after retired
+windows are collected, build a call-local sorted set of class addresses read
+from all published WNDs and retained borrowers. Probe that derived set for
+each class instead of repeating the whole reference walk. Native/guest
+callbacks remain excluded, so the set cannot become a second state authority;
+discard it before returning. Keep the strict final retirement recheck, free
+failure outcome and no-new-WND-on-released-CLS rules. The existing lifetime
+tests plus a many-class/mixed-borrow cohort and ordinary desktop performance
+are required. This changes no original mirror or guest algorithm and does not
+waive the independent inherited-environment startup defect.
+
+P22 completes that bounded collector group with32-class CCPU lifetime proof,
+current native20/original30/actual guest12 and app/DOS floors. Controlled
+ordinary-desktop gameplay passes all3 modes while exact P21 Off fails.
+Complete user-logon environments from CreateEnvironmentBlock (no filtering)
+also pass all3 modes in both the candidate and actual O:/winnt installation.
+This is a public supported logon block, not a snapshot of an already-running
+developer shell. The large-environment writer is attributed to the immutable
+COMMAND EndInit INIT-variable reuse, with independent inert-padding proof;
+standing guest-policy disposition is recorded in TODO without workaround.
+Only NTVDM changes; S3/T447 closure and S4/S5 obligations remain separate.
+
 Owner clarification: exhaust source reuse and bounded semantic-preserving
 adaptation before proposing a compatibility exception. Difficulty, missing
 proof or a simpler reduced implementation is not evidence of impossibility.

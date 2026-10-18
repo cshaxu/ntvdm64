@@ -14620,3 +14620,139 @@ Finite S3 blocking group:
 These are startup/public-return prerequisites, not scope to transfer to S4
 or a later performance package to manufacture S3 completion. Neither defect
 is claimed fixed, introduced by P21, or attributable to original guest code.
+
+### Follow-up: environment writer attribution and class-collection repair
+
+The previous goal turn is progress: diagnostic checkpoint4762cc22f is pushed
+with a clean worktree and two finite blockers. This continuation composes
+both existing environment-writer witnesses into one diagnostic-only host
+image from the exact P21 Release objects (startup-environment-trace-build-r1).
+No original guest is rebuilt, changed or hot-patched. The compilation uses
+formal /MT/CCPU40 release flags and the exact formal link command with only
+the two observed command-library members substituted. The image is marked
+nonpublishable and used only in an owned canonical-media stage.
+
+Startup-environment-trace-run-r1 catches the earlier initial-environment
+writer, before GetWowKernelCmdLine/DIV331 is reached. Guest DS05D8/ES0683
+first requests16 paragraphs, then correctly allocates017D paragraphs and
+passes BX017D. The original cmdGetInitEnvironment copy is within that
+6096-byte MCB. However that allocation spans DS:203C, which command.map
+identifies as INIT's EnvSiz. Before the copy its value is017D; after it is
+6853 (environment text). Immutable rdata.asm::EndInit shrinks/frees INIT,
+then still reads EnvSiz following SVC_GETINITENVIRONMENT. Its M027 comment
+already describes the danger of reading INIT after freeing it; the NT
+environment-service branch has retained those later reads.
+
+The independent inert-padding control uses only the controlled environment
+plus8192 bytes of X, not any suspect toolchain/path value. It requests024A
+paragraphs; the same in-range copy changes EnvSiz from024A to5858. Thus a
+particular environment variable, missing companion DLL, desktop or P21
+diagnostic move is not needed to reproduce the overwrite. The first four
+lines in that run's copied trace belong to the preceding full-env trial;
+the following four are this distinct padding process. Neither failed launch
+is a functional pass. COMMAND.COM in the installation and original mirror
+has SHA256908A77AC617C2D741F0AA1B73F73973DCF29ADC91F092E5BCB02173C8C732C43.
+Its retained map has EnvSiz203C in INIT1660--248F. The binary/source
+association and native writer span are
+retained; no universal numeric environment limit is inferred from one layout.
+
+This is an immutable COMMAND initialization limitation, distinct from the
+already repaired later host writer DIV331. Apply the standing source-policy
+disposition: retain the actual failed inherited-environment capability and
+register the original guest cause; do not filter variables, fake a smaller
+block or write back the guest's overwritten INIT word. The target/task
+environment is not silently reduced. The limitation is not claimed repaired.
+
+The class collector now derives one call-local sorted set of CLS server
+addresses from the same published WNDs and retained borrowers after its
+usual retirement sweep. It checks collectible classes against that scratch
+instead of repeating the complete source-domain reference walk per class.
+Strict retire_class revalidation, failed frees and the no-association rule
+remain. No persistent registry/refcount, mirror, guest or sampling-policy
+change is introduced. The original class.c rule remains selected; modern
+native USER cannot supply references to this project-owned copied backing.
+The32-class CCPU fixture exercises16 live and16 retired-borrowed references,
+repeated collection, no resurrection and exact final free-memory recovery.
+
+Class-reference-build-r1 exits0 after the dependency-selected worker rebuild
+and provider check; candidate NTVDM is
+12DA2E8FCFFB35B724791F7356C1A9A87A5208442928C29127415AE8DC812705;
+WOW32 and the style images remain P21-identical. Ordinary-desktop gameplay
+now passes Off/Win16/All through the same owned-window probe, without
+computer use. Off window-ready3875ms, subsequent board-ready1641ms; Win16
+window-ready4953ms, board-ready1890ms. These phase times begin inside the
+probe, not at the user's shell launch. The controlled guest environment is
+explicit, so these passes do not cover the original large-env limitation.
+The old exact P21 ordinary-desktop negative control, full native/original/
+guest/product acceptance and publication remain pending here.
+
+The exact old P21 negative control exits1 with gameplay probe4 (no responsive
+owned Minesweeper within its unchanged10-second window/2-second WM_NULL gate).
+Candidate ordinary-desktop Off/Win16/All all exit0 with gameplay and normal
+launcher completion. All mode window-ready4656ms, board-ready2016ms. The
+ordinary-desktop result is not just an image or hidden-process existence.
+The new32-class emitted marker is now mandatory in the window-borrow verifier;
+refresh the final build-input freeze before the native whole-group run.
+
+#### P22 full acceptance, ordinary user context and publication
+
+Class-reference-build-r2 refreshes the mandatory new assertion/script input
+freeze; both Ninja graphs report no work and retain r1's verified runtime
+identities. Class-reference-acceptance-r1 exits0: uninterrupted native20/20,
+including the required mixed32-class marker, original30, style/resource/MENU
+guards and all12 actual guest groups pass. Class-reference-product-r1 exits0:
+WINMINE/SOL gameplay and normal exit Off/Win16/All; WRITE retains four startup
+samples per mode only; Console17/Window17 each have zero Expected/Actual
+mismatches. No failed row or scope/assertion was dropped to obtain this result.
+
+Post-fix class-reference-profile-r1 waits for the exact product supervisor,
+then runs serial ordinary/private samples with matching current images and
+tracked wow_native_pc_sample.c. The current link maps are copied into the
+new summary root before attribution. Normal100-PC windows consume687500 and
+125000 CPU microseconds; the second has92 in win32u, compared to baseline
+1640625 and continuing mapping/validation work. Private totals46875/31250
+remain mostly waiting. These are phase-specific samples, not a universal FPS
+or wall-time acceleration promise. The sampling tool observes native PCs,
+stack words and thread time, pairing every successful suspend with resume;
+it does not rewrite guest/CPU state or touch other processes.
+
+Logon-environment-shape-r1 checks a separate important context: supported
+CreateEnvironmentBlock for the current token, inherit=false, produces45
+entries/3349 characters. This differs from the agent's77-entry developer
+environment. It is not a read of the owner's existing CMD process. The new
+verify-wow-logon-gameplay.ps1 passes that complete block without a name
+allowlist or PATH replacement to the ordinary-desktop Console-owning launch.
+Class-reference-logon-r1 passes all3 modes with bare winmine, own-window
+flag/reset/open, actual pixel changes, close and successful run16 completion.
+The original large-environment limitation remains explicit; these results
+are not an excuse to call it fixed or blame the owner's exact shell without
+having observed that shell's environment.
+
+Published-class-reference-r1 exits0 after all source/artifact/normal/logon/
+profile gates, keeps27 recoverable backups and finds no installed process to
+stop. Only NTVDM changes to12DA2E8FCFFB35B724791F7356C1A9A87A5208442928C29127415AE8DC812705;
+other12 images remain P21. Candidate/assets/release/O:/winnt/system32 hashes
+match. No original guest/profile or ZIP is copied over user data.
+Class-reference-installed-logon-r1 then passes the actual installation,
+without copying it: all3 style modes use its existing guest/configuration
+and the complete logon environment. Off window-ready3547ms and subsequent
+board-ready1375ms; Win16 values4172ms/1781ms. These probe-phase times are not
+an exact shell-to-first-frame metric. No computer use or manual input.
+
+Second-role source review checks the whole changed group: temporary
+reference-set ownership, bounded allocation/overflow and explicit cdecl CRT
+comparator, live/retired retention, strict final retirement recheck and
+error-preserving cleanup. The set is discarded before callbacks can resume.
+There is no persistent competing table/refcount or modern private-object cast.
+All production changes stay in the project-owned copied-page-domain carrier;
+source-registers-r6 retains278/192/86, zero format-only/register issues and zero
+new imported-source diff. Ordinary probes still filter the exact owned worker
+PID and reject sibling tests on the inherited desktop. Complete-token tests
+record only environment names/lengths and image hashes, not secret values.
+The32-class cohort uses independent copied CLS allocations over real native
+STATIC windows, not32 new native class registrations. Deployed DLL/demo
+boundary checks subsequently exit0 for both widths, including28-page normal
+demo exit. Final documentation/clean-push gates remain separate.
+S3/T447 are not closed, WRITE editing/save/full exit is not proved and S4/S5
+scope is unchanged. The original large-environment failure stays recorded,
+not silently promoted to a passing ordinary-runtime capability.

@@ -1900,6 +1900,58 @@ static void verify_released_class_borrow(ULONG teb)
         borrow_errors - before);
 }
 
+static void verify_class_collection_reference_set(ULONG teb)
+{
+    enum { count = 32 };
+    HWND windows[count] = {0};
+    ULONG classes[count] = {0}, backings[count] = {0};
+    ULONG delta = c_sas_dw_at(teb + 0x60u), before_free = 0, after_free = 0, largest;
+    unsigned i, before = borrow_errors;
+    BORROW_CHECK(VdmQueryFreeVirtualMemory(&before_free, &largest) >= 0);
+    for (i = 0; i < count; ++i) {
+        WINDOWINFO info = {sizeof(info)};
+        ULONG full;
+        windows[i] = CreateWindowExA(0, "STATIC", "Class set", WS_POPUP,
+            0, 0, 24, 24, NULL, NULL, GetModuleHandleA(NULL), NULL);
+        BORROW_CHECK(windows[i] && GetWindowInfo(windows[i], &info));
+        if (!windows[i]) break;
+        full = (ULONG)(ULONG_PTR)windows[i];
+        classes[i] = mvdm_softpc_wow_page_domain_publish_named_class(info.atomWindowType,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, "STATIC", 7);
+        BORROW_CHECK(classes[i] && (!i || classes[i] != classes[i - 1]));
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_publish_handle(LOWORD(full),
+            HIWORD(full), 1, 0, full, classes[i], NULL));
+        backings[i] = mvdm_softpc_wow_page_domain_borrow_window(full);
+        BORROW_CHECK(backings[i] != 0);
+    }
+    BORROW_CHECK(i == count);
+    for (i = 0; i < count; ++i) if (classes[i]) {
+        if (!(i & 1u)) {
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_retire_handle(LOWORD(windows[i]), NULL));
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_release_class(classes[i]));
+        } else BORROW_CHECK(!mvdm_softpc_wow_page_domain_release_class(classes[i]));
+    }
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_collect_observed_classes());
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_collect_observed_classes());
+    for (i = 0; i < count; ++i) if (backings[i]) {
+        BORROW_CHECK(c_sas_dw_at(backings[i] + 76u) == classes[i]);
+        BORROW_CHECK((WORD)c_sas_dw_at(classes[i] - delta + 4u) != 0);
+        if (i & 1u) {
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_retire_handle(LOWORD(windows[i]), NULL));
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_release_class(classes[i]));
+        }
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(backings[i]));
+    }
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_collect_observed_classes());
+    for (i = 0; i < count; ++i) {
+        if (classes[i]) BORROW_CHECK(!mvdm_softpc_wow_page_domain_release_class(classes[i]));
+        if (windows[i]) BORROW_CHECK(DestroyWindow(windows[i]));
+    }
+    BORROW_CHECK(VdmQueryFreeVirtualMemory(&after_free, &largest) >= 0 && before_free == after_free);
+    fprintf(stderr, "WOW_CLASS_REFERENCE_SET_CCPU errors=%u classes=32 live=16 retired_borrowed=16 retained=1 reclaimed=1\n",
+        borrow_errors - before);
+}
+
 static void verify_observed_window_retirement(void)
 {
     static wow_user_object_table no_cleanup_owner;
@@ -3099,6 +3151,7 @@ static int verify_native_class_projection(ULONG teb)
     verify_native_class_window_ownership();
     verify_native_window_first_subclass();
     verify_released_class_borrow(teb);
+    verify_class_collection_reference_set(teb);
     verify_observed_window_retirement();
     verify_dead_graph_retirement(teb);
     verify_graph_preparation_rollback();

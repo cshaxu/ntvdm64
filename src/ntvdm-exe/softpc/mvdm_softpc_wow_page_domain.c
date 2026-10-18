@@ -2,6 +2,7 @@
 #include "mvdm_softpc_effective_address.h"
 
 #include <windows.h>
+#include <stdlib.h>
 
 #include "ntvdm-exe/session/session.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
@@ -1970,18 +1971,62 @@ int mvdm_softpc_wow_page_domain_retire_class(unsigned long server)
     return 0;
 }
 
+static int __cdecl compare_class_reference(const void *left, const void *right)
+{
+    ULONG a = *(const ULONG *)left, b = *(const ULONG *)right;
+    return (a > b) - (a < b);
+}
+
 int mvdm_softpc_wow_page_domain_collect_observed_classes(void)
 {
     mvdm_softpc_wow_class_allocation *allocation, *next;
+    mvdm_softpc_wow_window_borrow *borrow;
+    ULONG *references, capacity = MVDM_SOFTPC_HANDLE_ENTRY_COUNT;
+    ULONG count = 0, index, server;
+    DWORD error;
+    int result = 0;
     if (!page_domain_menu_context()) return 0;
     if (!mvdm_softpc_wow_page_domain_collect_retired_windows()) return 0;
-    for (allocation = class_allocations; allocation; allocation = next) {
-        ULONG server = allocation->client + domain.client_delta;
-        next = allocation->next;
-        if ((allocation->observed || allocation->released) && !class_is_referenced(server) &&
-                !mvdm_softpc_wow_page_domain_retire_class(server)) return 0;
+    for (allocation = class_allocations; allocation; allocation = allocation->next)
+        if (allocation->observed || allocation->released) break;
+    if (!allocation) return 1;
+    /* Existing WND backing is the authority. Derive its referenced classes
+     * once for this call, not once per CLS. No native/guest callout can change
+     * WND.pcls or borrower ownership during this collection. Final retirement
+     * retains its independent strict reference check and failure behavior. */
+    for (borrow = window_borrows; borrow; borrow = borrow->next) {
+        if (capacity == MAXDWORD / sizeof(*references)) {
+            SetLastError(ERROR_ARITHMETIC_OVERFLOW); return 0;
+        }
+        ++capacity;
     }
-    return 1;
+    references = HeapAlloc(GetProcessHeap(), 0, capacity * sizeof(*references));
+    if (!references) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return 0; }
+    for (index = 1u; index < MVDM_SOFTPC_HANDLE_ENTRY_COUNT; ++index) {
+        ULONG window = index == LOWORD(domain.desktop_handle) ?
+            domain.guest_desktop_window : domain.guest_windows[index];
+        if (window && (server = c_sas_dw_at(window + MVDM_SOFTPC_WND_CLASS)) != 0)
+            references[count++] = server;
+    }
+    for (borrow = window_borrows; borrow; borrow = borrow->next) {
+        server = c_sas_dw_at(borrow->backing + MVDM_SOFTPC_WND_CLASS);
+        if (server) references[count++] = server;
+    }
+    qsort(references, count, sizeof(*references), compare_class_reference);
+    for (allocation = class_allocations; allocation; allocation = next) {
+        server = allocation->client + domain.client_delta;
+        next = allocation->next;
+        if ((allocation->observed || allocation->released) &&
+                !bsearch(&server, references, count, sizeof(*references),
+                    compare_class_reference) &&
+                !mvdm_softpc_wow_page_domain_retire_class(server)) goto done;
+    }
+    result = 1;
+done:
+    error = GetLastError();
+    HeapFree(GetProcessHeap(), 0, references);
+    SetLastError(error);
+    return result;
 }
 
 int mvdm_softpc_wow_page_domain_release_class(unsigned long server)

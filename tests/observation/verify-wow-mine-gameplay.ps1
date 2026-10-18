@@ -5,6 +5,7 @@ param(
     [Parameter(Mandatory)][string]$CompilerDriver,
     [Parameter(Mandatory)][string]$BuildRoot,
     [ValidateSet('Off','Win16','All')][string]$WindowStyle='Off',
+    [switch]$VisibleDesktop,
     [switch]$RetiringSibling,
     [switch]$ExceptionSibling,
     [switch]$StartupFailureSibling,
@@ -18,6 +19,7 @@ param(
 $ErrorActionPreference='Stop'
 if(([int]$RetiringSibling.IsPresent+[int]$ExceptionSibling.IsPresent+[int]$StartupFailureSibling.IsPresent+[int]$ShellExceptionSibling.IsPresent) -gt 1){throw 'Select one sibling contract'}
 $withSibling=$RetiringSibling -or $ExceptionSibling -or $StartupFailureSibling -or $ShellExceptionSibling
+if($VisibleDesktop -and $withSibling){throw 'Ordinary desktop acceptance selects only the exact owned game'}
 if($StartupFailureSibling -or $ShellExceptionSibling){
     $expectedTarget=if($ShellExceptionSibling){'SHLPROBE'}else{'GENPROBE'}
     $diagnostic=Get-Content $StartupDiagnosticManifest -Raw|ConvertFrom-Json
@@ -83,7 +85,8 @@ try {
         [pscustomobject]@{File=$_;SHA256=(Get-IsolatedFileSha256 (Join-Path $runtime $_))}
     } | ConvertTo-Json | Set-Content "$root\inputs.json"
     $env:TEMP=$runtime;$env:TMP=$runtime;$env:PATH="$runtime\system32;"+$env:SystemRoot+'\System32'
-    $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
+    if($VisibleDesktop){Remove-Item Env:MVDM_OBSERVER_PRIVATE_DESKTOP -ErrorAction SilentlyContinue}
+    else{$env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'}
     $start=[Diagnostics.ProcessStartInfo]::new($Observer)
     $start.UseShellExecute=$false;$start.CreateNoWindow=$true
     $styleArgument=if($WindowStyle -eq 'Win16'){' --win16-style'}elseif($WindowStyle -eq 'All'){' --win16-style-all'}else{''}
@@ -98,7 +101,8 @@ try {
     }while([DateTime]::UtcNow -lt $deadline)
     if(!$worker){throw 'No worker in this owned runtime'}
     $marked=if($WindowStyle -eq 'Off'){'0'}else{'1'}
-    $probeArguments=@($worker.ProcessId,"NTVDMConsoleTest-$($process.Id)","$root\mine",$marked)
+    $desktopName=if($VisibleDesktop){'-'}else{"NTVDMConsoleTest-$($process.Id)"}
+    $probeArguments=@($worker.ProcessId,$desktopName,"$root\mine",$marked)
     if($withSibling){$probeArguments+=@("$runtime\system32\run16.exe","$runtime\tests\$siblingName.EXE")}
     if($ShellExceptionSibling -and $ShellExceptionResponse -eq 'Ignore'){$probeArguments+='exception-ignore'}
     elseif($ExceptionSibling -or $ShellExceptionSibling){$probeArguments+='exception'}

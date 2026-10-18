@@ -4,18 +4,19 @@
 
 ## Current Work
 
-Ordinary WINMINE regression blocks S3: inherited-env illegal CPU plus desktop
-view-processing CPU cost. P16 also reproduces. P21 isolated native20/original30,
-resource/style guards and all12 actual guest groups pass without row reuse.
-WINMINE/SOL gameplay/exit, WRITE startup and DOS17x2 pass. WRITE editing/save/
-full exit remains unproved. Actual hook callbacks witness the relocated
-diagnostics; enabled/disabled/failure/error and /Gd ABI checks pass separately.
-The selected278 mirror audit has192 exact,86 content, zero format-only or
-missing-register rows. wow32.h is exact original; wmdisp32 loses50 net lines.
-The finite ABI/GDI/subset placement/registration cohort is complete, not proof
-of every dormant path. S3/T447 remain open for fixed-chain closure review;
-S4 message and S5 per-task obligations unchanged. Guest/ZIP unchanged.
-Older default GDI16/19 and approved common-dialog risks are not claimed fixed.
+P22 publishes coherent13 with only NTVDM changed; both destinations hash-match.
+Class collection now derives one call-local reference set, retaining strict
+retirement. Native20/original30, resource/style/MENU and actual guest12 pass;
+new32-class live/borrowed/reclaimed assertions pass. App/DOS17x2 floors pass.
+Ordinary-desktop WINMINE gameplay/exit passes all3 modes, including actual
+O:/winnt with the whole45-variable logon environment, not an allowlist.
+P21's identical ordinary test fails. Later100-PC window CPU falls1.64s to0.125s.
+Large developer-env failure is now attributed to immutable COMMAND EndInit's
+freed INIT/EnvSiz reuse; recorded in TODO, not filtered or claimed repaired.
+WRITE edit/save/full exit remains unproved. S3/T447 stay open for fixed-chain
+closure; S4/S5 unchanged. Guest/ZIP/mirrors unchanged in this repair. Selected
+278 mirror rows remain192 exact/86 content, zero format-only/register gaps.
+Older GDI16/19/common-dialog risks remain. Deployed DLL/demo checks pass.
 Chronology below is historical; see the source ledger for superseding proof.
 
 Dialog-context-r2's scoped boundary-double evidence remains in the source ledger.

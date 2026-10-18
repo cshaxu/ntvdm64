@@ -813,6 +813,10 @@ if ($Case -eq 'window-borrow' -and
     throw 'Released copied class lost retained readers, allowed resurrection or leaked backing'
 }
 if ($Case -eq 'window-borrow' -and
+    !($fixtureOutput -match '^WOW_CLASS_REFERENCE_SET_CCPU errors=0 classes=32 live=16 retired_borrowed=16 retained=1 reclaimed=1$')) {
+    throw 'Class collection lost its mixed live/retired reference-set or final reclamation proof'
+}
+if ($Case -eq 'window-borrow' -and
     !($fixtureOutput -match '^WOW_CLASS_COMMIT_CCPU errors=0 cases=2 original_words=1 original_task=1 released=1$')) {
     throw 'Completed original class registration did not reach real CCPU memory and release it'
 }

@@ -14,6 +14,17 @@ Source-recovery rationale and red/green evidence are recorded in the
 
 ## Registered divergences
 
+T447 S3 class-collection scaling repair: the copied-page-domain collector
+derives one call-local sorted reference set from its existing published WNDs
+and retained borrowers after the usual retirement sweep. Original class.c's
+no-associated-WND retirement rule and this carrier's strict final recheck
+remain. There is no native USER class-reference producer for this copied
+view; reading its own WND.pcls values is the admitted same-shaped boundary.
+The set is scratch under exclusive guest execution, not a second registry or
+persistent reference count. Failed allocation preserves all classes; failed
+physical retirement retains the existing obligation. No mirror/guest change,
+sampling cadence, scheduler or additional compatibility concession follows.
+
 T447 S3 copied-class release uses the existing page-domain allocation list:
 successful native unregister transfers CLS backing to that collector while
 retired WND borrowers still read it. Live published associations reject the

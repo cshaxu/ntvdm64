@@ -197,8 +197,12 @@ static BOOL retire_sibling(const char *desktop, const char *launcher, const char
 }
 int main(int argc,char **argv)
 {
-    HANDLE process; HDESK desk; ULONGLONG deadline; DWORD before, counter; DWORD_PTR reply;
-    if((argc!=4 && argc!=5 && argc!=7 && argc!=8) || strncmp(argv[2],"NTVDMConsoleTest-",17))return 2;
+    HANDLE process; HDESK desk; ULONGLONG deadline, started; DWORD before, counter; DWORD_PTR reply;
+    BOOL inherited_desktop;
+    if((argc!=4 && argc!=5 && argc!=7 && argc!=8) ||
+        (strcmp(argv[2],"-") && strncmp(argv[2],"NTVDMConsoleTest-",17)))return 2;
+    inherited_desktop=!strcmp(argv[2],"-");
+    if(inherited_desktop && argc>=7)return 2;
     if(argc==8){
         if(!strcmp(argv[7],"exception"))exception_sibling=TRUE;
         else if(!strcmp(argv[7],"exception-ignore"))exception_sibling=ignore_exception=TRUE;
@@ -207,11 +211,13 @@ int main(int argc,char **argv)
     if(argc>=5 && strcmp(argv[4],"0") && strcmp(argv[4],"1"))return 2;
     owner_pid=strtoul(argv[1],NULL,10);
     process=OpenProcess(SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,FALSE,owner_pid);
-    desk=OpenDesktopA(argv[2],0,FALSE,DESKTOP_READOBJECTS|DESKTOP_WRITEOBJECTS|DESKTOP_ENUMERATE);
-    if(!process || !desk || !SetThreadDesktop(desk))return 3;
-    deadline=GetTickCount64()+10000;
+    desk=inherited_desktop ? GetThreadDesktop(GetCurrentThreadId()) :
+        OpenDesktopA(argv[2],0,FALSE,DESKTOP_READOBJECTS|DESKTOP_WRITEOBJECTS|DESKTOP_ENUMERATE);
+    if(!process || !desk || (!inherited_desktop && !SetThreadDesktop(desk)))return 3;
+    started=GetTickCount64();deadline=started+10000;
     do {EnumDesktopWindows(desk,find_mine,0);if(mine)break;Sleep(25);}while(GetTickCount64()<deadline && WaitForSingleObject(process,0)==WAIT_TIMEOUT);
     if(!mine || !SendMessageTimeoutW(mine,WM_NULL,0,0,SMTO_ABORTIFHUNG,2000,&reply))return 4;
+    printf("window-ready elapsed=%llu inherited-desktop=%u\n",GetTickCount64()-started,inherited_desktop);
     printf("owned-window=%p pid=%lu\n",mine,owner_pid);
     if(argc>=5){
         WCHAR caption[256];
@@ -243,5 +249,5 @@ int main(int argc,char **argv)
     while(IsWindow(mine) && GetTickCount64()<deadline)Sleep(20);
     if(IsWindow(mine))return 14;
     printf("PASS owned game window closed after WM_CLOSE\n");
-    CloseHandle(process);CloseDesktop(desk);return 0;
+    CloseHandle(process);if(!inherited_desktop)CloseDesktop(desk);return 0;
 }
