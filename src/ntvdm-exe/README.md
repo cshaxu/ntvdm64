@@ -1,5 +1,17 @@
 # NTVDM worker owner
 
+ADAPTER-WOW-088 carries an existing window lifetime record through the private
+captured-graph transaction instead of repeatedly finding it by backing. The
+original USER HMUnlockObject/ThreadUnlock1 use their already-known object; a
+direct import would require NT4 private PHEAD/HANDLEENTRY/TL/kernel destruction
+state, not modern HWNDs. This existing copied-generation facade preserves pin,
+retired-reader and physical-failure ownership. Public arbitrary tokens still
+use safe lookup. A call-local row index replaces one duplicate scratch array;
+record association is not ownership until a pin succeeds. Constructor, commit
+and cleanup share that actual pin; no persistent index/cache, lower freshness,
+new mirror/guest/wire change or automatic UI-speed claim. Validate the entire
+success/failure/reuse/class/native/guest closure before delivery.
+
 ADAPTER-WOW-087 carries the original thread-private client view at the
 original USER execution handoffs, not at resource-lock entry. The original
 task pClientInfo owns compatibility version; suspended callback snapshots

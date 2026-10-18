@@ -335,11 +335,25 @@ Timing-r4 ordinary P5/new61.2445/61.761ms, sampled61.172/60.8055ms,
 private30.2555/30.262ms: no material speedup.12 posted flag operations with
 20ms polling are not physical left-click latency. Strict nested controls
 both pass8/8. P6 is now installed; no performance gain is inferred.
-After reviewed clean P6 main/origin handoff, the finite known-record transaction
-group in the source audit is the next performance candidate: private pinned
-record reuse and one existing scratch index, no new persistent authority,
-freshness reduction, guest change or mirror body rewrite. Keep all current
-normal/negative/lifetime and release gates and the full M1--M6 obligations.
+Clean main/origin d347d0594 now admits ADAPTER-WOW-088 as that one complete
+private transaction group: one row-index scratch, call-local record association,
+actual pin acquisition, constructor record return, direct metadata commit and
+known-record release. P6 source/images/MAP/imports and coherent13 are sealed
+in known-record-sealed-r1. Public arbitrary-token validation, cold construction,
+full identity/cycle checks, retired pins, final unlink, failed physical free,
+class lifetime and LastError remain. No mirror/guest/wire change or persistent
+counter/cache. Whole composed-r2 passes, including32 partial-batch rollbacks,
+retained readers, reuse and all7 terminal negatives with explicit reached/exit
+and child logs. R1's unlocated child exit1 remains failed; a captured direct
+diagnostic is not causal repair. Production source is unchanged in r2; stable
+Ninja is no-op. Full known-record-verify-r2 and delivery-r1 pass: fresh
+native/original/guest/application/DOS/modal/logon, distinct-version extensions,
+coherent13 publication to both targets and installed checks. Ordinary paired
+median61.7765/61.574ms is flat; twelve posted operations do not prove a tail
+or physical-click improvement. P7 retains this bounded optimization, not a
+stutter-resolution or S4 closure claim. The class-vector shortcut is unproved:
+sampled CLS count may scale with WND count. Audit actual ownership/cost before
+another optimization. Full M1--M6/S5/S6 and historical risks remain open.
 
 ## Active Packet
 
@@ -363,9 +377,8 @@ normal/negative/lifetime and release gates and the full M1--M6 obligations.
 
 ## Current Technical Baseline
 
-S4 P6 retains P5's bounded traversal and P4's input repair, adding physical
-class reachability and original execution-handoff client-view restoration.
-NTVDM SHA-256 is5217AEE26B1AA36D047E9982DFD7F627237676EB244ED69828ABF18D25656668;
+S4 P7 retains P6 and adds088's private known-record/scratch transaction reuse.
+NTVDM SHA-256 is032616347AB793F234E9F2DB338A73285E32563139956DB0884321BD403DD87A;
 WOW32 isA8E5C8F84960720F505E05D6EC1F4F238D44C6BD7CBAFF6F7CE11906F90C7672.
 The release manifest owns exact identities of all13 images. Both
 assets/release and O:/winnt/system32 match the tested package; original guest,

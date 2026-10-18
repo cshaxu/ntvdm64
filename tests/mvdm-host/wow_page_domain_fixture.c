@@ -2438,7 +2438,7 @@ cleanup:
 #ifdef WOW_GRAPH_SNAPSHOT_FIXTURE
 static void verify_terminal_failure(const char *option, const char *marker)
 {
-    char exe[MAX_PATH], command[2 * MAX_PATH], name[96];
+    char exe[MAX_PATH], command[4 * MAX_PATH], name[96], error_log[2 * MAX_PATH];
     HANDLE event;
     STARTUPINFOA startup = {sizeof(startup)};
     PROCESS_INFORMATION process = {0};
@@ -2449,7 +2449,9 @@ static void verify_terminal_failure(const char *option, const char *marker)
     BORROW_CHECK(event != NULL);
     if (!event) return;
     GetModuleFileNameA(NULL, exe, sizeof(exe));
-    sprintf_s(command, sizeof(command), "\"%s\" %s %s", exe, option, name);
+    sprintf_s(error_log, sizeof(error_log), "%s.%s.stderr.txt", exe, option + 2);
+    sprintf_s(command, sizeof(command), "\"%s\" --terminal-log \"%s\" %s %s",
+        exe, error_log, option, name);
     BORROW_CHECK(CreateProcessA(exe, command, NULL, NULL, FALSE, CREATE_NO_WINDOW,
         NULL, NULL, &startup, &process));
     if (process.hProcess) {
@@ -2458,6 +2460,8 @@ static void verify_terminal_failure(const char *option, const char *marker)
             WaitForSingleObject(process.hProcess, 10000);
         }
         GetExitCodeProcess(process.hProcess, &code);
+        fprintf(stderr, "WOW_TERMINAL_CHILD option=%s reached=%d exit=%08lx log=%s\n",
+            option, WaitForSingleObject(event, 0) == WAIT_OBJECT_0, code, error_log);
         BORROW_CHECK(code == 0xc0000420u && WaitForSingleObject(event, 0) == WAIT_OBJECT_0);
         CloseHandle(process.hThread); CloseHandle(process.hProcess);
     }
@@ -2734,6 +2738,33 @@ static void verify_local_observation_commit(void)
             BORROW_CHECK(c_sas_dw_at(backings[i] + 168u) == styles[i]);
         }
         view[indices[1]].descriptor.atom = atom;
+    }
+    {
+        unsigned position, repeat, pin_before = borrow_errors;
+        /* Direct parent entry, not the managed wrapper's own validation.
+         * Fail before any row is pinned and after earlier rows were pinned.
+         * Repetition exposes an accidental release of raw, unowned record
+         * associations by exhausting the independently held readers. */
+        for (position = 0; position < 2u; ++position) {
+            ULONG invalid = position ? count - 1u : 0u;
+            WORD atom = view[invalid].descriptor.atom;
+            view[invalid].descriptor.atom = 0;
+            for (repeat = 0; repeat < 16u; ++repeat) {
+                SetLastError(0x1234);
+                BORROW_CHECK(!mvdm_softpc_wow_page_domain_project_window_graph(count, view));
+                BORROW_CHECK(GetLastError() == ERROR_INVALID_PARAMETER);
+                for (i = 0; i < 2u; ++i) {
+                    mvdm_softpc_wow_window_observation held = {0};
+                    BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_view(backings[i], &held));
+                    BORROW_CHECK(held.links.window == (ULONG)(ULONG_PTR)windows[i] &&
+                        held.style == styles[i]);
+                    BORROW_CHECK(wow_window_words_value(bindings[i])->dwStyle == styles[i]);
+                }
+            }
+            view[invalid].descriptor.atom = atom;
+        }
+        fprintf(stderr, "WOW_KNOWN_RECORD_ROLLBACK_CCPU errors=%u failures=32 positions=2 retained=2\n",
+            borrow_errors - pin_before);
     }
     SetLastError(0x4473);
     BORROW_CHECK(wow_window_words_project_observed(count, view));
@@ -5171,6 +5202,14 @@ static DWORD WINAPI run_graph_desktop(void *desktop)
 
 int main(int argc, char **argv)
 {
+    if (argc == 5 && !strcmp(argv[1], "--terminal-log")) {
+        FILE *output;
+        /* Test-only log protocol: retain CreateProcess(FALSE), original
+         * fault event, injection and exit assertions without inheriting any
+         * unrelated parent handles. Capture startup failures as well. */
+        if (freopen_s(&output, argv[2], "w", stderr)) return 9;
+        argv[1] = argv[3]; argv[2] = argv[4]; argc = 3;
+    }
 #ifdef WOW_GRAPH_SNAPSHOT_FIXTURE
     {
         DWORD result = 0x447a2001, error;

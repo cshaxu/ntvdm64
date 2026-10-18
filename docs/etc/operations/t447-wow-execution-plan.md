@@ -128,6 +128,27 @@ already source-designed in the audit, without a new cache, lower freshness,
 guest change or loss of full normal/negative/lifetime gates. Historical0102
 and incomplete M1--M6/S5/S6 remain explicit, not moved or declared repaired.
 
+After verified clean main/origin d347d0594,088 is admitted as that complete
+known-record transaction group. Seal P6 source/image/MAP/import/coherent13,
+retain safe public input lookup and exact slot generations, use one existing
+row-index scratch and call-local record associations, acquire actual pins
+before cleanup ownership, return the constructor's known record and consume
+that pin in commit/release. No list reorder, persistent index/counter, guest,
+mirror or wire change. Preserve absent-record cold acquisition, overflow,
+invalid/cycle/full-identity errors, normal/failed physical retirement, class
+reachability and LastError. Whole grouped acceptance precedes delivery; a
+source asymptotic improvement is not proof of visible stutter improvement.
+
+088 now delivers bounded S4 P7: known-record-verify-r2, complete fresh
+foundations/product/message/modal/logon and thread-extension policies pass;
+known-record-delivery-r1 publishes coherent13 to both required destinations,
+then passes both-width style and installed-logon checks. Only NTVDM changes;
+WOW32 and the other eleven images retain P6 bytes. Ordinary paired median
+61.7765/61.574ms remains flat, not a resolved stutter claim. Class-vector
+sorting is not admitted: fresh sampled CLS allocation is per observation,
+so fewer class records cannot be assumed. Source-audit actual ownership and
+cost before the next finite optimization; full M1--M6/S5/S6 remains required.
+
 S3 is closed at the P22 runtime/P23 interaction baseline after the
 [fixed-chain exit review](../../history/m0-t447-s3-control-dependency-closure.md).
 S4 is now the sole sequential admission under the continuing owner goal.

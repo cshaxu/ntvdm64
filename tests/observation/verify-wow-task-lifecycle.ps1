@@ -604,6 +604,9 @@ if ($Case -eq 'window-borrow' -and $StyleDll -and
     throw 'Styled real-CCPU terminal cleanup did not prove actual attachment, neutralization and GDI retirement'
 }
 if ($Case -eq 'graph-snapshot') {
+    if (!($fixtureOutput -match '^WOW_KNOWN_RECORD_ROLLBACK_CCPU errors=0 failures=32 positions=2 retained=2$')) {
+        throw 'Known-record association consumed unowned pins or failed atomic partial-batch rollback'
+    }
     if (!($fixtureOutput -match '^WOW_CLASS_RETIREMENT_FAILURE_CCPU errors=0 native_removed=1 stale_projection_rejected=1 terminal=1$')) {
         throw 'Irreversible native class removal did not reject stale projection as terminal'
     }

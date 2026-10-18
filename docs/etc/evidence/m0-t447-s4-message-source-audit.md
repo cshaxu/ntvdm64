@@ -2215,3 +2215,137 @@ performance lead after that clean handoff, not a claim that unweighted sparse
 PC samples establish the sole cause. Retain all source-defined pin, generation,
 failure/rollback and collection rules; no permanent record index or weakened
 freshness. Current timing is flat and full WOW/M1--M6/S5/S6 remains unfinished.
+
+###088 complete private transaction implementation
+
+Clean P6 main/origin d347d0594 is verified before admission. The seal retains
+exact source, image/MAP/private import and all13 release bytes. Implement the
+entire previously specified group: caller-owned zeroed row+1 index supplied
+to the unchanged cycle/full-identity validator; one live-record association
+walk; private backing borrow that keeps unknown/cold safe lookup/allocation;
+constructor optional record return; exact pinned record for metadata commit
+and success/failure release. Only final physical unlink searches the list.
+
+Association does not set cleanup backing or acquire a reference. Invalid input
+may leave unprocessed raw associations, which cleanup must never decrement.
+Retired records are skipped before guest-memory reads; any cold/absent record
+still uses the old safe path, including ordinary absence rather than adding
+a desktop-only rejection. Full generation/current backing matches precede
+known pin use. Constructor output is NULL until success; failed preparation
+keeps its old physical-retention path. No native/guest callout occurs in the
+private commit or audited deallocation closure. LastError, overflow/refusal,
+class reachability, prepared/retired pins and safe public arbitrary input
+validation remain. Public relation/callback pins are not replaced by raw data.
+
+The direct CCPU rollback extension rejects32 transactions at first/last row
+descriptor positions, not just the managed wrapper's early preflight. Two
+independent held readers must remain readable with unchanged generation/style
+after every rejection; repetition exposes accidental consumption of unowned
+associations. Existing cold preparation, cycles, real native slot reuse,
+class matrices, failed physical release/retry and normal rollback remain.
+This is source-complete but not compiled or runtime-verified yet. No new
+public export, mirror or original guest change. Build stable Ninja roots
+without regeneration because no generator/header/export contract changed;
+record exact compiler/config identities rather than forcing all211 provider
+objects to rebuild. One complete composed group precedes timing and release.
+
+088 build-r1 compiles only page-domain C plus its two libraries/two links
+(five worker targets); provider reports no work. Alias/external memory,
+extension/input, original task/lifecycle/reply/process and CCPU borrow/reclaim
+pass. Graph's32 new direct rollback negatives, initial preparation, actual
+slot reuse and local/external snapshot cases pass, but its window-cache
+terminal child returns1 instead ofC0000420. Parent did not retain child stderr
+or report whether injection was reached. Other terminal negatives pass.
+Whole-r1 is failed and verify-r1 refuses timing/product/publication.
+
+One direct diagnostic invokes the exact same child binary/option with a fresh
+named event and redirected stderr. It reaches injection and fails fast with
+C0000420. This proves that captured run, not the cause or repair of the old
+failed group. Do not repeat identical children until green. The finite test
+observer correction adds an explicit --terminal-log private fixture protocol:
+child redirects its own CRT stderr before initialization and normalizes back
+to the existing option/event arguments. Parent still uses non-inheriting
+CreateProcess(FALSE), the same injection/event/deadline/exit assertion, and
+reports reached/exit/path. No unrelated handles are inherited, no product
+parameter/hidden HWND/runtime behavior is added, and failed startup now retains
+its original stage. Fresh composed-r2 uses unchanged088 production source and
+new fixtures; no performance or release claim is inferred from the diagnostic.
+
+088 composed-r2 completes0. Worker and provider Ninja both report no work;
+production source is unchanged, while all fixtures are freshly compiled with
+the explicit child-log protocol. All32 direct rollback cases, class/native
+reuse/retirement and7 terminal fault children pass; each terminal child reaches
+injection and exitsC0000420. No old failure is relabeled. Group covers original
+task/reply/process, extension/input/alias/external memory, actual CCPU borrowed/
+retained/failed-free/graph/class cases, initialization rollback and modal owner.
+NTVDM032616347AB793F234E9F2DB338A73285E32563139956DB0884321BD403DD87A;
+MAPAFA5019F64180E94643CED4B9513E83207175705E84978C2E26793657994E151.
+WOW32 remains exact P6 A8E5C8F84960720F505E05D6EC1F4F238D44C6BD7CBAFF6F7CE11906F90C7672.
+Known-record-verify-r2 now runs paired timing, strict repeated native lifetimes,
+full native/original/guest/application/DOS/modal/logon and distinct-version
+extension policies. No current performance or publication result is claimed.
+
+Source-only residual lead, not another edit to frozen088: every original thunk
+invocation leaves a scoped alias owner, whose leave calls collect_observed_classes
+even for GDI operations. That collector builds/sorts one class pointer per WND,
+including many duplicate classes, then asks membership for the much smaller
+allocation list. Actual sparse qsort PC samples do not distinguish this sorter
+from the window-view row sorter or establish its CPU weight. A future bounded
+candidate can derive candidate-class references in a small call-local class
+vector instead of sorting all WND references, preserving the independent final
+strict retire check and physical-failure ownership. No permanent mark/counter,
+managed-class reference reuse, skipped cleanup or new freshness rule is implied;
+original managed associations are not these copied physical readers. Review
+the complete collector closure after088's safe baseline, not a partial change
+or a claim that another local asymptotic improvement solves the UI symptom.
+
+088 performance-r2 paired ready-board measurements complete0: ordinary
+P6/candidate medians61.7765/61.574ms, sampled61.7185/60.780ms,
+private30.117/30.090ms. Ordinary p95 changes94.084/62.617ms and sampled
+93.089/65.094ms, but twelve operations do not establish a tail improvement.
+The observer includes20ms pixel polling and posted input, not physical mouse
+latency. Sparse active PCs include qsort but neither its invocation count nor
+CPU weight is established. Do not call088 the stutter fix. Both sealed/current
+native nested controls complete8/8. Complete foundations, original30 and12
+actual guest groups pass; remaining product/installed gates are still pending.
+
+Further source review corrects the proposed class-vector shortcut before any
+implementation: publish_named_class always allocates a new sampled CLS for
+each fresh observation; project_window_graph marks it observed. Therefore
+candidate CLS count need not be much smaller than WND count. Sorting a larger
+candidate record instead of ULONG references is not a proved improvement.
+Do not admit that edit on the duplicate-class assumption. Trace every WND.pcls
+writer and its physical lifetime before choosing a simpler source-grounded
+collection algorithm; no new counter or alternative authority is implemented.
+
+088 second-role source/requirement review checks the actual seven-file diff:
+association is distinct from acquired ownership on both first/last-row
+failure; fresh records retain their constructor pin; pinned existing records
+cannot disappear during commit/cleanup; the full slot generation and current
+backing must match before reusing an association. Shared scratch is zeroed
+before the same cycle validator. Public arbitrary backing resolution stays
+non-mutating/safe. Private deallocation has no application/guest/native USER
+callout; final unlink still searches the authoritative lifetime list.
+Failure preserves the original error and no unowned association is released.
+No original guest, selected mirror, ABI header, export, request transport,
+policy/freshness or runtime environment changes.088 is registered in the
+worker README. Existing192 exact/86 registered mirror differences remain278
+selected inputs with no new mirror delta. The fixture-log change affects only
+independent native tests, preserves non-inheritance and all terminal assertions.
+Publication and final source/manifest review still depend on complete gates;
+neither source review nor the paired timings closes S4 or its M1--M6 inventory.
+
+088 final runtime/publication evidence: known-record-verify-r2 exit0 includes
+paired timing, both8/8 native controls, full fresh foundations/native20/
+original30/resource/style and12 actual guest groups, default/extension and
+distinct-version thread-extension in all3 policies, WINMINE/SOL gameplay,
+WRITE startup, DOS17/17 in both frontends, modal3 and normal-logon3. Quality
+passes. Known-record-delivery-r1/known-record-published-r1 exit0 backs up27
+files, publishes coherent13 to assets/release and O:/winnt/system32, checks
+both-width deployed style and installed normal-logon3, and verifies all13
+hashes in both destinations. NTVDM is032616347AB793F234E9F2DB338A73285E32563139956DB0884321BD403DD87A;
+WOW32 remainsA8E5C8F84960720F505E05D6EC1F4F238D44C6BD7CBAFF6F7CE11906F90C7672.
+Only NTVDM and its manifest entry change. Original guest/ZIP, user environment,
+selected mirrors and other12 binaries are unchanged. Ordinary median remains
+flat; no material stutter improvement or historical-failure repair is claimed.
+P7 Git handoff awaits final governance and exact nine-file review/commit/push.

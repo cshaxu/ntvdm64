@@ -1025,12 +1025,13 @@ static mvdm_softpc_wow_class_allocation *page_domain_class_allocation(ULONG serv
  * of the previous generation, and uses no second storage registry. */
 static ULONG page_domain_prepare_window(ULONG full, HWND window,
     ULONG class_server, const ULONG words[3], const WINDOWINFO *info,
-    const LONG *captured_id)
+    const LONG *captured_id, mvdm_softpc_wow_window_borrow **record)
 {
     mvdm_softpc_wow_window_borrow *pending;
     ULONG backing = 0, server;
     unsigned i;
     mvdm_softpc_wow_class_allocation *cls = page_domain_class_allocation(class_server);
+    if (record) *record = NULL;
     if (cls && cls->released) return 0;
     pending = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, sizeof(*pending));
     if (!pending) return 0;
@@ -1056,6 +1057,7 @@ static ULONG page_domain_prepare_window(ULONG full, HWND window,
     if (words)
         for (i = 0; i < 3u; ++i)
             c_sas_storedw(backing + MVDM_SOFTPC_WND_WOW_WORDS + i * 4u, words[i]);
+    if (record) *record = pending;
     return backing;
 fail:
     pending->retired = 1;
@@ -1111,7 +1113,7 @@ static int page_domain_publish_handle(unsigned short index,
                 !page_domain_window_observed(guest_window) ||
                 IsWindow((HWND)(ULONG_PTR)c_sas_dw_at(guest_window))) return 0;
         replacement = page_domain_prepare_window(window, (HWND)(ULONG_PTR)window,
-            class_server, words, &info, NULL);
+            class_server, words, &info, NULL, NULL);
         if (!replacement) return 0;
         if (!mvdm_softpc_wow_page_domain_retire_handle(index, &retained)) {
             (*window_borrow_link(replacement))->retired = 1;
@@ -1154,7 +1156,7 @@ static int page_domain_publish_handle(unsigned short index,
         return 1;
     }
     guest_window = page_domain_prepare_window(((ULONG)uniqueness << 16) | index,
-        (HWND)(ULONG_PTR)window, class_server, words, &info, NULL);
+        (HWND)(ULONG_PTR)window, class_server, words, &info, NULL, NULL);
     if (!guest_window) return 0;
     (*window_borrow_link(guest_window))->managed = managed;
     page_domain_commit_window(index, guest_window, type, flags);
@@ -1505,32 +1507,42 @@ int mvdm_softpc_wow_page_domain_handle_metadata(unsigned short index,
     return 1;
 }
 
+/* ADAPTER-WOW-088: known is call-local metadata under excluded guest execution,
+ * not yet an owning reference. Unknown/cold storage keeps the safe list lookup
+ * and original allocation path; only a successful increment grants a pin. */
+static mvdm_softpc_wow_window_borrow *borrow_window_backing(ULONG backing,
+    mvdm_softpc_wow_window_borrow *known)
+{
+    if (!known) {
+        mvdm_softpc_wow_window_borrow **link = window_borrow_link(backing);
+        known = *link;
+        if (!known) {
+            known = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, sizeof(*known));
+            if (!known) return NULL;
+            known->backing = backing;
+            *link = known;
+        }
+    }
+    if (known->backing != backing || known->retired ||
+            known->references == 0xffffffffu) return NULL;
+    ++known->references;
+    return known;
+}
+
 unsigned long mvdm_softpc_wow_page_domain_borrow_window(unsigned long window)
 {
     ULONG backing;
-    mvdm_softpc_wow_window_borrow **link, *borrow;
     if (!page_domain_menu_context() ||
             !(backing = page_domain_window_lookup(window))) return 0u;
-    link = window_borrow_link(backing);
-    borrow = *link;
-    if (!borrow) {
-        borrow = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, sizeof(*borrow));
-        if (!borrow) return 0u;
-        borrow->backing = backing;
-        *link = borrow;
-    }
-    if (borrow->retired || borrow->references == 0xffffffffu) return 0u;
-    ++borrow->references;
-    return backing;
+    return borrow_window_backing(backing, NULL) ? backing : 0u;
 }
 
-static int release_window_backing(ULONG backing, int retained_owner)
+/* The private transaction holds this exact record's pin. Public arbitrary
+ * backing inputs still resolve below before reaching this helper. */
+static int release_window_record(mvdm_softpc_wow_window_borrow *borrow,
+    int retained_owner)
 {
-    mvdm_softpc_wow_window_borrow **link, *borrow;
-    if (!page_domain_menu_context() || !backing) return 0;
-    link = window_borrow_link(backing);
-    borrow = *link;
-    if (!borrow) return 0;
+    ULONG backing = borrow->backing;
     if (retained_owner ? (!borrow->retired || !borrow->retained_owner) :
             !borrow->references) return 0;
     /* Native scope/WW owners end here even if physical decommit fails.
@@ -1542,10 +1554,20 @@ static int release_window_backing(ULONG backing, int retained_owner)
     if (!borrow->references && !borrow->retained_owner) {
         if (borrow->retired && (page_domain_window_referenced(backing + domain.client_delta) ||
                 VdmFreeVirtualMemory(backing) < 0)) return 1;
-        *link = borrow->next;
+        /* Final physical unlink only. No native USER/guest/reentrant disposal
+         * can run through this already-audited deallocation closure. */
+        *window_borrow_link(backing) = borrow->next;
         dispose_window_borrow(borrow);
     }
     return 1;
+}
+
+static int release_window_backing(ULONG backing, int retained_owner)
+{
+    mvdm_softpc_wow_window_borrow *borrow;
+    if (!page_domain_menu_context() || !backing ||
+            !(borrow = *window_borrow_link(backing))) return 0;
+    return release_window_record(borrow, retained_owner);
 }
 
 int mvdm_softpc_wow_page_domain_collect_retired_windows(void)
@@ -1695,6 +1717,7 @@ int mvdm_softpc_wow_page_domain_read_window_words_view(unsigned long backing,
  * retain their backing; fresh generations remain unpublished until commit. */
 typedef struct page_domain_window_update {
     ULONG backing, class_server;
+    mvdm_softpc_wow_window_borrow *record;
     ULONG class_style, window_extra;
     WINDOWINFO info;
     LONG control_id;
@@ -1857,7 +1880,7 @@ static int page_domain_replace_window_links(ULONG count,
         c_sas_storedw(update->class_server - domain.client_delta +
             MVDM_SOFTPC_CLS_WINDOW_EXTRA, update->window_extra);
         page_domain_window_fields(update->backing, &update->info, update->control_id);
-        borrow = *window_borrow_link(update->backing);
+        borrow = update->record;
         borrow->process_id = update->process_id;
         borrow->thread_id = update->thread_id;
         borrow->module = update->module;
@@ -2396,16 +2419,14 @@ int mvdm_softpc_wow_page_domain_copy_window_view(ULONG capacity,
  * Parent/child symmetry is deliberately not required: original creation and
  * destruction expose unlinked WNDs. Scratch belongs only to this transaction. */
 static int page_domain_validate_window_graph(ULONG count,
-    const mvdm_softpc_wow_window_links *links)
+    const mvdm_softpc_wow_window_links *links, ULONG *index)
 {
-    ULONG *index, i, edge, row, next;
+    ULONG i, edge, row, next;
     BYTE *state;
     DWORD error = ERROR_INVALID_DATA, saved = GetLastError();
     int result = 0;
-    index = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
-        MVDM_SOFTPC_HANDLE_ENTRY_COUNT * sizeof(*index));
     state = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, count);
-    if (!index || !state) { error = ERROR_NOT_ENOUGH_MEMORY; goto done; }
+    if (!state) { error = ERROR_NOT_ENOUGH_MEMORY; goto done; }
     for (i = 0; i < count; ++i) {
         WORD slot = LOWORD(links[i].window);
         if (!slot || slot == 0xffffu || index[slot]) {
@@ -2450,7 +2471,6 @@ static int page_domain_validate_window_graph(ULONG count,
     result = 1;
 done:
     if (state) HeapFree(GetProcessHeap(), 0, state);
-    if (index) HeapFree(GetProcessHeap(), 0, index);
     SetLastError(result ? saved : error);
     return result;
 }
@@ -2462,6 +2482,7 @@ int mvdm_softpc_wow_page_domain_project_window_graph(ULONG count,
 {
     page_domain_window_update *updates = NULL;
     mvdm_softpc_wow_window_links *links = NULL;
+    mvdm_softpc_wow_window_borrow *record;
     ULONG *retired = NULL, *present = NULL, retired_count = 0, i;
     int result = 0;
     DWORD error, saved = GetLastError();
@@ -2482,9 +2503,20 @@ int mvdm_softpc_wow_page_domain_project_window_graph(ULONG count,
     }
     for (i = 0; i < count; ++i) {
         links[i] = rows[i].links;
-        present[LOWORD(links[i].window)] = links[i].window;
     }
-    if (!page_domain_validate_window_graph(count, links)) goto done;
+    if (!page_domain_validate_window_graph(count, links, present)) goto done;
+    /* Borrowed association, not cleanup ownership. Only backing!=0 below
+     * means an actual acquired pin. Match the published full generation. */
+    for (record = window_borrows; record; record = record->next) {
+        ULONG full, row, current;
+        if (record->retired) continue;
+        full = c_sas_dw_at(record->backing + MVDM_SOFTPC_WND_HEAD_HANDLE);
+        row = present[LOWORD(full)];
+        current = full == domain.desktop_handle ?
+            domain.guest_desktop_window : domain.guest_windows[LOWORD(full)];
+        if (row && !updates[row - 1u].record && links[row - 1u].window == full &&
+                record->backing == current) updates[row - 1u].record = record;
+    }
     for (i = 0; i < count; ++i) {
         const mvdm_softpc_wow_window_descriptor *descriptor = &rows[i].descriptor;
         page_domain_window_update *update = &updates[i];
@@ -2519,9 +2551,12 @@ int mvdm_softpc_wow_page_domain_project_window_graph(ULONG count,
             existing = 0; /* Old backing stays published until commit. */
         }
         if (existing) {
+            mvdm_softpc_wow_window_borrow *pinned;
             SetLastError(ERROR_INVALID_STATE);
-            update->backing = mvdm_softpc_wow_page_domain_borrow_window(window);
-            if (!update->backing) goto done;
+            pinned = borrow_window_backing(existing, update->record);
+            if (!pinned) goto done;
+            update->record = pinned;
+            update->backing = existing;
             update->class_server = c_sas_dw_at(existing + MVDM_SOFTPC_WND_CLASS);
         }
         if (!update->class_server) {
@@ -2538,7 +2573,7 @@ int mvdm_softpc_wow_page_domain_project_window_graph(ULONG count,
             SetLastError(ERROR_INVALID_STATE);
             update->backing = page_domain_prepare_window(window,
                 (HWND)(ULONG_PTR)window, update->class_server, NULL, &update->info,
-                &update->control_id);
+                &update->control_id, &update->record);
             if (!update->backing) goto done;
         }
     }
@@ -2549,11 +2584,12 @@ int mvdm_softpc_wow_page_domain_project_window_graph(ULONG count,
         ULONG backing = domain.guest_windows[i], window;
         if (!backing) continue;
         window = c_sas_dw_at(backing + MVDM_SOFTPC_WND_HEAD_HANDLE);
-        if (present[i] == window) continue;
+        if (present[i] && links[present[i] - 1u].window == window) continue;
         if (!page_domain_window_observed(backing)) { SetLastError(ERROR_INVALID_STATE); goto done; }
         retired[retired_count++] = window;
     }
-    if (present[LOWORD(domain.desktop_handle)] != domain.desktop_handle) {
+    if (!present[LOWORD(domain.desktop_handle)] ||
+            links[present[LOWORD(domain.desktop_handle)] - 1u].window != domain.desktop_handle) {
         SetLastError(ERROR_INVALID_DATA); goto done;
     }
     result = page_domain_replace_window_links(count, links, retired_count, retired, updates);
@@ -2562,8 +2598,8 @@ done:
     if (updates) {
         for (i = 0; i < count; ++i) if (updates[i].backing) {
             if (!result && updates[i].fresh)
-                (*window_borrow_link(updates[i].backing))->retired = 1;
-            (void)mvdm_softpc_wow_page_domain_release_window(updates[i].backing);
+                updates[i].record->retired = 1;
+            (void)release_window_record(updates[i].record, 0);
         }
         HeapFree(GetProcessHeap(), 0, updates);
     }
