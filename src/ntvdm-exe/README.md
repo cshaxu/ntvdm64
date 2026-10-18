@@ -1,5 +1,31 @@
 # NTVDM worker owner
 
+ADAPTER-WOW-087 carries the original thread-private client view at the
+original USER execution handoffs, not at resource-lock entry. The original
+task pClientInfo owns compatibility version; suspended callback snapshots
+borrow only already-retained generation storage. The one guest TEB exchanges
+version/callback fields atomically after validation; shared desktop/self/delta
+remain shared. No graph refresh, native HWND sampling, new cache registry,
+scheduler or guest patch is introduced. Failed restore leaves view/output
+unchanged; terminal thread abandonment cannot read a withdrawn CPU view.
+OPENNT-HOST-124 registers the two guarded helper-boundary calls. Validate
+actual CCPU field exchange, alias/failure/retired-pin behavior, original task
+handoffs and complete native/guest/retirement floors before delivery. This is
+not proof that the historical common-dialog0102 witness is repaired.
+
+ADAPTER-WOW-086 bounds physical copied-CLS reachability to existing WND
+lifetime records plus the desktop. These cover published/prepared and retained
+retired generations; do not confuse them with the original managed class
+association count, which remains unchanged. Native UnregisterClass still owns
+registration. Original class.c DestroyClass/DereferenceClass's no-associated-
+WND rule is retained; its private shared-heap references cannot directly own
+these copied generations. Keep the existing source-shaped physical retention
+mechanics, remove duplicate table scans and excess temporary capacity instead
+of adding a second counter or heap. No mirror intrusion or guest change.
+Verify live-class refusal, retired pins, repeat collection, failed free/retry,
+replacement identity and full runtime floors before delivery; no performance
+benefit is implied merely by the source reduction.
+
 ADAPTER-WOW-085 removes repeated metadata searches during owned-view copying.
 The published slot table remains authoritative. The existing borrow lifetime
 list supplies candidate storage; only the current backing for its full handle

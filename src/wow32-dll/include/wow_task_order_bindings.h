@@ -98,6 +98,11 @@ typedef struct wow_task_host_ops {
     /* Lookup uses the existing host thread identity; borrowed result remains
      * live in the same USER domain while the caller holds its lock. */
     struct wow_task_order_thread *(WINAPI *find_thread)(struct wow_task_order_thread *, DWORD);
+    /* Original execution-owner handoff, not a resource-lock notification.
+     * A projected production owner supplies this; native-only models with
+     * no host contract have no guest client view to transfer. */
+    void (WINAPI *client_context)(struct wow_task_order_thread *previous,
+        struct wow_task_order_thread *next);
 } wow_task_host_ops;
 /* ADAPTER-WOW-077: caller-owned LIFO state, never a message identity or queue.
  * All reads/writes are under the existing USER runtime lock. */

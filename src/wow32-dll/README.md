@@ -1,5 +1,18 @@
 # WOW32 DLL target component
 
+ADAPTER-WOW-087 restores the original per-thread client projection when
+taskman/InitTask transfers execution (OPENNT-HOST-124), not when a native
+thread merely acquires the USER resource lock. Original pClientInfo owns
+version; the inactive callback pair is a non-owning projection whose existing
+scope retains backing. Initial/failed initialization and unrelated task
+retirement no longer overwrite the running task's global guest TEB. A same-
+task entry retains its live callback view. Terminal abandonment discards only
+that dead thread's inactive snapshot without reading a withdrawn CPU view;
+the next execution owner restores before guest resume. The parent validates
+and exchanges only version/callback fields, preserving shared desktop state.
+This adds no scheduler, object owner, hidden HWND, guest patch or semantic
+waiver; the old unlocated0102 witness remains separately unproved.
+
 ADAPTER-WOW-084 removes retained synthetic input queues from task carriers.
 Original input.c AddAttachment/Recalc2 remains the exact membership algorithm;
 preallocated call-local Q labels are its scratch graph, not sampled or invented

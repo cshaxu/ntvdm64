@@ -153,10 +153,27 @@ static BOOL wait_pixels(HANDLE process, int x, int y, int w, int h,
     EnumDesktopWindows(GetThreadDesktop(GetCurrentThreadId()),report_window,0);
     return FALSE;
 }
+static BOOL wait_waste_cleared(HANDLE process, int x, DWORD empty)
+{
+    ULONGLONG deadline=GetTickCount64()+10000;
+    DWORD previous=0, current=0;
+    do {
+        if(WaitForSingleObject(process,0)!=WAIT_TIMEOUT || !IsWindow(game))return FALSE;
+        current=region_hash(game,x,20,71,70);
+        if(current && current==empty && current==previous){
+            printf("phase=deal-waste-cleared pixels=%08lx expected=%08lx\n",current,empty);
+            return TRUE;
+        }
+        previous=current;Sleep(30);
+    }while(GetTickCount64()<deadline);
+    printf("phase=deal-waste-cleared TIMEOUT pixels=%08lx expected=%08lx\n",current,empty);
+    EnumDesktopWindows(GetThreadDesktop(GetCurrentThreadId()),report_window,0);
+    return FALSE;
+}
 int main(int argc,char **argv)
 {
     HANDLE process; HDESK desktop; RECT rect; DWORD_PTR reply;
-    ULONGLONG deadline; DWORD initial, dealt, waste, drawn; int gap;
+    ULONGLONG deadline; DWORD initial, dealt, waste, drawn, empty_waste; int gap;
     if(argc!=4 || strncmp(argv[2],"NTVDMConsoleTest-",17))return 2;
     owner_pid=strtoul(argv[1],NULL,10);
     process=OpenProcess(SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,FALSE,owner_pid);
@@ -202,13 +219,18 @@ int main(int argc,char **argv)
        !capture(game,argv[3],"before")) {
         (void)capture(game,argv[3],"ready-failure");return 5;
     }
-    /* SOL 1:09c7 calls entry 11 (8:00fc), time(NULL): DOS AH=2c
-     * uses seconds DH, not hundredths DL. Entry 10 reseeds rand(). A deal
-     * in the same second legitimately repeats the initial board. */
-    Sleep(1100);
+    /* A random redeal need not differ. First dirty the game through ordinary
+     * stock input; Deal must clear that waste even if its seed repeats. */
+    empty_waste=region_hash(game,2*gap+71,20,71,70);
+    if(!empty_waste || !PostMessageW(game,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(gap+30,40)) ||
+       !PostMessageW(game,WM_LBUTTONUP,0,MAKELPARAM(gap+30,40)) ||
+       !wait_pixels(process,2*gap+71,20,71,70,empty_waste,TRUE,"pre-deal-draw",&waste) ||
+       !capture(game,argv[3],"pre-deal-draw"))return 5;
     if(!PostMessageW(game,WM_COMMAND,1000,0) ||
-       !wait_pixels(process,0,120,rect.right,rect.bottom-144,initial,TRUE,"deal",&dealt) ||
+       !wait_waste_cleared(process,2*gap+71,empty_waste) ||
+       !wait_pixels(process,0,120,rect.right,rect.bottom-144,0,FALSE,"deal",&dealt) ||
        !capture(game,argv[3],"deal"))return 6;
+    printf("deal-tableau same=%d old=%08lx new=%08lx not_a_randomness_assertion=1\n",initial==dealt,initial,dealt);
     waste=region_hash(game,2*gap+71,20,71,70);
     if(!waste || !PostMessageW(game,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(gap+30,40)) ||
        !PostMessageW(game,WM_LBUTTONUP,0,MAKELPARAM(gap+30,40)) ||
@@ -218,6 +240,6 @@ int main(int argc,char **argv)
     deadline=GetTickCount64()+10000;
     while(IsWindow(game) && GetTickCount64()<deadline)Sleep(25);
     if(IsWindow(game))return 9;
-    puts("PASS SOL deal changed tableau, stock click changed waste, WM_CLOSE destroyed owned window");
+    puts("PASS SOL stock draw, Deal cleared nonempty waste, redealt tableau present, second stock draw and normal owned window close");
     CloseHandle(process);CloseDesktop(desktop);return 0;
 }

@@ -402,7 +402,8 @@ $parentObjects = @((Join-Path $out 'parent-stub.obj'))
     $pageFixture = $pageCompile -replace '/Fo\S+', ('/Fo"'+$out+'\page-native-fixture.obj"')
     if ($pageFixture -eq $pageCompile) { throw 'Native page-domain output substitution failed' }
     $replacedLeaves = @('publish_menu','publish_menus','retire_menu',
-        'publish_named_class','retire_class','release_class','set_expected_windows_version')
+        'publish_named_class','retire_class','release_class','set_expected_windows_version',
+        'exchange_client_context')
     if ($Case -eq 'process-retirement') { $replacedLeaves += 'handle_metadata' }
     foreach ($leaf in $replacedLeaves) {
         $symbol = 'mvdm_softpc_wow_page_domain_' + $leaf
@@ -529,6 +530,9 @@ if ($requestedCase -eq 'style-policy' -and
     throw 'Style policy/peer isolation contract failed after real modal prerequisite'
 }
 if ($OriginalModalOnly) {
+    if (!($fixtureOutput -match '^WOW_CLIENT_CONTEXT_BINDING_CCPU errors=0 production_op=1 controlled_views=2 scheduling=separate$')) {
+        throw 'Original execution initialization or production thread-client projection operation failed'
+    }
     # Dedicated scope, not a substitute pass for the independent whole CCPU
     # window/class/menu matrices. The actual registered lifetime gets its own
     # process so its legitimate process cleanup cannot perturb their baselines.
@@ -627,6 +631,9 @@ if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource
     throw 'Native mutation return did not synchronize child ID, parent or deferred geometry'
 }
 if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource')) {
+    if (!($fixtureOutput -match '^WOW_CLIENT_CONTEXT_CCPU versions=2 suspended=1 retired=1 alias=1 rejected=2 shared=unchanged errors=0$')) {
+        throw 'Thread-client CCPU view, retained snapshot, atomic rejection or shared-field preservation failed'
+    }
     if (!($fixtureOutput -match '^WOW_CONTROL_NATIVE_RETURN_CCPU errors=0 paint=1 scroll=1 caret=1 lock=1$')) {
         throw 'Recovered-control native paint/scroll/caret return ownership failed'
     }

@@ -858,9 +858,20 @@ static void verify_cross_callout(session *owner, wow_user_runtime_thread *bindin
             (DWORD)result);
     }
 #endif
-    CHECK(PostThreadMessageW(test.receiver_id, WM_QUIT, 0, 0));
-    wow_user_task_lifecycle_directed_yield(lifecycle, test.receiver_id);
-    CHECK(WaitForSingleObject(helper, 3000) == WAIT_OBJECT_0);
+    {
+        wow_user_native_call join;
+        /* The helper's exit destroys its window and can reenter its WOW
+         * callback. Model the production native-wait boundary: do not keep
+         * the sender eligible for guest execution during a raw kernel join.
+         * A preceding DirectedYield is an opportunity, not a join barrier. */
+        CHECK(wow_user_native_call_begin(&join, test.window));
+        __try {
+            CHECK(PostThreadMessageW(test.receiver_id, WM_QUIT, 0, 0));
+            CHECK(WaitForSingleObject(helper, 3000) == WAIT_OBJECT_0);
+        } __finally {
+            CHECK(wow_user_native_call_end(&join));
+        }
+    }
     CHECK(GetExitCodeThread(helper, &code) && !code);
 #ifdef WOW_NATIVE_NESTED_FIXTURE
     {

@@ -10,6 +10,10 @@ typedef struct wow_task_client_info {
     /* Read-only projection for retained client consumers, refreshed from
      * the bound task on access. Not a native TEB CLIENTINFO layout. */
     DWORD CI_flags;
+    /* Inactive guest CLIENTINFO callback projection only. While executing,
+     * the guest TEB is authoritative; the existing callback borrow, never
+     * this scalar snapshot, owns the pointed-to generation. */
+    ULONG guest_callback[2];
 } wow_task_client_info;
 #define WOW_TASK_CI_16BIT 0x00000004u
 typedef struct wow_task_init_ops {

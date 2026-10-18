@@ -67,7 +67,9 @@ public static class MineLatencyEnvironment {
  }
 }
 '@
- $entries=[MineLatencyEnvironment]::Read([Security.Principal.WindowsIdentity]::GetCurrent().Token)
+ $logonIdentity=[Security.Principal.WindowsIdentity]::GetCurrent()
+ try{$entries=[MineLatencyEnvironment]::Read($logonIdentity.Token)}
+ finally{$logonIdentity.Dispose()}
  $entries|ForEach-Object {$at=$_.IndexOf('=',1);[pscustomobject]@{name=$_.Substring(0,$at);characters=$_.Length+1}}|Export-Csv -NoTypeInformation "$root/environment-shape.csv"
  foreach($case in @('normal','normal-sampled','private')){
   $out="$root/$case";$null=New-Item -ItemType Directory $out

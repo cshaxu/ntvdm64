@@ -34,6 +34,13 @@ unsigned long __cdecl mvdm_softpc_wow_page_domain_guest_teb(void);
  * current guest TEB before USER16 can take a version-sensitive branch. */
 int __cdecl mvdm_softpc_wow_page_domain_set_expected_windows_version(
     unsigned long version);
+/* Serialized original execution handoff. The inactive callback snapshot is
+ * not an owning reference; its existing scoped borrow must still be live.
+ * NULL next clears the pair. A failed validation leaves both view and output
+ * unchanged; shared desktop/self/delta fields are never transferred. */
+int __cdecl mvdm_softpc_wow_page_domain_exchange_client_context(
+    unsigned long *previous_callback, unsigned long version,
+    const unsigned long next_callback[2]);
 /* SoftPC's original host mouse boundary supplies the final guest virtual
  * coordinates before guest mouse processing. Publish only that already
  * transformed value into USER16's direct shared cursor field. */

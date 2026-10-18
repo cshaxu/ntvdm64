@@ -32,7 +32,10 @@ try{
  Add-Type -Path (Resolve-Path $LogonHelper).Path
  $info=[Diagnostics.ProcessStartInfo]::new((Resolve-Path $Observer).Path)
  $info.UseShellExecute=$false;$info.CreateNoWindow=$true;$info.EnvironmentVariables.Clear()
- foreach($entry in [WowMessageLogonEnvironment]::Read([Security.Principal.WindowsIdentity]::GetCurrent().Token)){
+ $logonIdentity=[Security.Principal.WindowsIdentity]::GetCurrent()
+ try{$entries=[WowMessageLogonEnvironment]::Read($logonIdentity.Token)}
+ finally{$logonIdentity.Dispose()}
+ foreach($entry in $entries){
   $split=$entry.IndexOf('=',1);$info.EnvironmentVariables[$entry.Substring(0,$split)]=$entry.Substring($split+1)
  }
  $info.EnvironmentVariables['TEMP']=$stage;$info.EnvironmentVariables['TMP']=$stage

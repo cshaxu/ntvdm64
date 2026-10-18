@@ -4,6 +4,15 @@
 ; string copyback. Native peer is a separately authored test DLL.
 bits 16
 org 0
+%ifdef THREAD_CLIENT_VIEW
+%ifdef RECEIVER
+%define EXPECTED_VERSION 0x0300
+%else
+%define EXPECTED_VERSION 0x030a
+%endif
+%else
+%define EXPECTED_VERSION 0x030a
+%endif
 db 'MZ'
 dw (image_end-$$) % 512,((image_end-$$)+511)/512
 dw 0,4,0,0xffff                 ; relocations, header paras, min/max allocation
@@ -22,7 +31,7 @@ dw segments-ne,resources-ne,resident-ne,modules-ne,imports-ne
 dd 0
 dw 0,4,0
 db 2,0
-dw 0,0,0,0x030a
+dw 0,0,0,EXPECTED_VERSION
 segments:
 dw (code-$$)/16,code_end-code,0x0150,code_end-code
 dw (data-$$)/16,data_end-data,0x0c51,0x4000
@@ -74,6 +83,7 @@ push word %3
 push word %4
 push word %5
 api 2,111
+client_view
 %endmacro
 %macro post 5
 push word [%1-data]
@@ -82,6 +92,7 @@ push word %3
 push word %4
 push word %5
 api 2,110
+client_view
 %endmacro
 %macro peek 3
 push ds
@@ -91,10 +102,30 @@ push word %1
 push word %2
 push word %3
 api 2,109
+client_view
 %endmacro
 %macro push32 1
 push word [%1+2-data]
 push word [%1-data]
+%endmacro
+%macro client_view 0
+%ifdef THREAD_CLIENT_VIEW
+; Independently authored read-only witness of USER16's own FLATFS contract.
+; Save the complete EAX and caller FS. No host call may refresh the view first.
+push eax
+push fs
+mov ax,0x3b
+mov fs,ax
+mov eax,[fs:0x50]
+pop fs
+mov [client_version-data],ax
+cmp ax,EXPECTED_VERSION
+je %%valid
+or word [errors-data],0x1000
+%%valid:
+inc word [client_checks-data]
+pop eax
+%endif
 %endmacro
 align 16,db 0
 code:
@@ -488,6 +519,7 @@ jne fatal
 pop bp
 ret
 checkpoint:
+client_view
 push word [file-data]
 push ds
 push word report-data
@@ -505,6 +537,7 @@ push si
 push di
 push bx
 mov ds,ax
+client_view
 cmp word [bp+12],0x460
 je .basic
 cmp word [bp+12],0x461
@@ -664,6 +697,7 @@ xor ax,ax
 .value:
 mov dx,0x447a
 .return:
+client_view
 pop bx
 pop di
 pop si
@@ -681,6 +715,7 @@ push si
 push di
 push bx
 mov ds,ax
+client_view
 cmp word [bp+6],0x5678
 jne .bad
 cmp word [bp+8],0x1234
@@ -704,6 +739,7 @@ or word [errors-data],0x2000
 xor ax,ax
 .done:
 mov dx,0x447a
+client_view
 pop bx
 pop di
 pop si
@@ -723,7 +759,12 @@ dw ..@call_%[call_number]-code+1,module_%[call_number],ordinal_%[call_number]
 align 16,db 0
 data:
 times 32 db 0
-report: db 'MSG1'
+report:
+%ifdef THREAD_CLIENT_VIEW
+db 'MSG2'
+%else
+db 'MSG1'
+%endif
 %ifdef RECEIVER
 role: dw 1
 %else
@@ -743,6 +784,11 @@ threadpost: dw 0
 text: dw 0
 native_count: dw 0
 destroyed: dw 0
+%ifdef THREAD_CLIENT_VIEW
+client_version: dw 0
+client_expected: dw EXPECTED_VERSION
+client_checks: dw 0
+%endif
 report_end:
 instance: dw 0
 window: dw 0

@@ -242,6 +242,7 @@ static void page_domain_withdraw_window(WORD index, ULONG guest_window,
     mvdm_softpc_wow_window_borrow *borrow, int retained_owner);
 
 static int page_domain_client_desktop(ULONG desktop_info, ULONG delta);
+static int page_domain_menu_context(void);
 
 static ULONG page_domain_round_page(ULONG bytes)
 {
@@ -951,6 +952,48 @@ int mvdm_softpc_wow_page_domain_restore_callback(const unsigned long saved[2])
     return 1;
 }
 
+/* ADAPTER-WOW-087: original USER has one CLIENTINFO per native thread. The
+ * serialized CCPU uses one guest TEB address, so move only its thread-private
+ * projection at the original execution handoff. Do not infer a new HWND,
+ * refresh a graph, acquire ownership or consult native USER here. */
+static int page_domain_callback_context_valid(const ULONG pair[2])
+{
+    mvdm_softpc_wow_window_borrow *borrow;
+    if (!pair[0] && !pair[1]) return 1;
+    if (!pair[0] || !pair[1] ||
+            !(borrow = *window_borrow_link(pair[1])) ||
+            (!borrow->references && !borrow->retained_owner) ||
+            c_sas_dw_at(pair[1] + MVDM_SOFTPC_WND_HEAD_HANDLE) != pair[0])
+        return 0;
+    return 1; /* Retired but pinned callbacks remain original locked readers. */
+}
+
+int mvdm_softpc_wow_page_domain_exchange_client_context(
+    unsigned long *previous_callback, unsigned long version,
+    const unsigned long next_callback[2])
+{
+    ULONG previous[2], next[2] = {0, 0};
+    DWORD saved = GetLastError();
+    if (!page_domain_menu_context()) {
+        SetLastError(ERROR_INVALID_STATE); return 0;
+    }
+    if (next_callback) CopyMemory(next, next_callback, sizeof(next));
+    previous[0] = c_sas_dw_at(domain.guest_teb + MVDM_SOFTPC_TEB_CACHED_HWND);
+    previous[1] = c_sas_dw_at(domain.guest_teb + MVDM_SOFTPC_TEB_CACHED_WND);
+    if (!page_domain_callback_context_valid(next) ||
+            (previous_callback && !page_domain_callback_context_valid(previous))) {
+        SetLastError(ERROR_INVALID_STATE); return 0;
+    }
+    /* Preflight above is read-only. No callout/allocation can intervene in
+     * this small commit; even aliased caller arrays were snapshotted first. */
+    c_sas_storedw(domain.guest_teb + MVDM_SOFTPC_TEB_EXPECTED_WINDOWS_VERSION, version);
+    c_sas_storedw(domain.guest_teb + MVDM_SOFTPC_TEB_CACHED_HWND, next[0]);
+    c_sas_storedw(domain.guest_teb + MVDM_SOFTPC_TEB_CACHED_WND, next[1]);
+    if (previous_callback) CopyMemory(previous_callback, previous, sizeof(previous));
+    SetLastError(saved);
+    return 1;
+}
+
 /* HMValidateHandle rebases only desktop-owned server pointers. All projected
  * WND/CLS allocations use this worker's one client delta, but nt_mem may put
  * them outside the initial desktop-root page. Publish the containing interval
@@ -1433,6 +1476,15 @@ static mvdm_softpc_wow_window_borrow **window_borrow_link(ULONG backing)
     mvdm_softpc_wow_window_borrow **link = &window_borrows;
     while (*link && (*link)->backing != backing) link = &(*link)->next;
     return link;
+}
+
+static int window_borrow_is_current(const mvdm_softpc_wow_window_borrow *borrow)
+{
+    WORD index;
+    if (borrow->retired) return 0;
+    index = LOWORD(c_sas_dw_at(borrow->backing + MVDM_SOFTPC_WND_HEAD_HANDLE));
+    return index && index != 0xffffu && index != LOWORD(domain.desktop_handle) &&
+        domain.guest_windows[index] == borrow->backing;
 }
 
 unsigned long mvdm_softpc_wow_page_domain_window_handle(unsigned short index)
@@ -1978,13 +2030,11 @@ fail:
 
 static int class_is_referenced(ULONG server)
 {
-    ULONG index;
     mvdm_softpc_wow_window_borrow *borrow;
-    for (index = 1u; index < MVDM_SOFTPC_HANDLE_ENTRY_COUNT; ++index) {
-        ULONG window = index == LOWORD(domain.desktop_handle) ?
-            domain.guest_desktop_window : domain.guest_windows[index];
-        if (window && page_domain_read_owned_word(window + MVDM_SOFTPC_WND_CLASS) == server) return 1;
-    }
+    if (page_domain_read_owned_word(domain.guest_desktop_window +
+            MVDM_SOFTPC_WND_CLASS) == server) return 1;
+    /* ADAPTER-WOW-086: all ordinary WNDs have a lifetime record. Include
+     * prepared and pinned retired storage, not just published identities. */
     for (borrow = window_borrows; borrow; borrow = borrow->next)
         if (page_domain_read_owned_word(borrow->backing + MVDM_SOFTPC_WND_CLASS) == server) return 1;
     return 0;
@@ -2031,8 +2081,8 @@ int mvdm_softpc_wow_page_domain_collect_observed_classes(void)
 {
     mvdm_softpc_wow_class_allocation *allocation, *next;
     mvdm_softpc_wow_window_borrow *borrow;
-    ULONG *references, capacity = MVDM_SOFTPC_HANDLE_ENTRY_COUNT;
-    ULONG count = 0, index, server;
+    ULONG *references, capacity = 1; /* Record-free desktop, plus all records. */
+    ULONG count = 0, server;
     DWORD error;
     int result = 0;
     if (!page_domain_menu_context()) return 0;
@@ -2052,12 +2102,8 @@ int mvdm_softpc_wow_page_domain_collect_observed_classes(void)
     }
     references = HeapAlloc(GetProcessHeap(), 0, capacity * sizeof(*references));
     if (!references) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return 0; }
-    for (index = 1u; index < MVDM_SOFTPC_HANDLE_ENTRY_COUNT; ++index) {
-        ULONG window = index == LOWORD(domain.desktop_handle) ?
-            domain.guest_desktop_window : domain.guest_windows[index];
-        if (window && (server = page_domain_read_owned_word(window + MVDM_SOFTPC_WND_CLASS)) != 0)
-            references[count++] = server;
-    }
+    server = page_domain_read_owned_word(domain.guest_desktop_window + MVDM_SOFTPC_WND_CLASS);
+    if (server) references[count++] = server;
     for (borrow = window_borrows; borrow; borrow = borrow->next) {
         server = page_domain_read_owned_word(borrow->backing + MVDM_SOFTPC_WND_CLASS);
         if (server) references[count++] = server;
@@ -2082,17 +2128,17 @@ done:
 int mvdm_softpc_wow_page_domain_release_class(unsigned long server)
 {
     mvdm_softpc_wow_class_allocation *allocation;
-    ULONG index;
+    mvdm_softpc_wow_window_borrow *borrow;
     if (!page_domain_menu_context() ||
             !(allocation = page_domain_class_allocation(server))) return 0;
     /* A native registration and a copied reader have distinct lifetimes.
      * Never hide a still-published association; only withdrawn generations
      * may retain the released class. The collector already scans those pins. */
-    for (index = 1u; index < MVDM_SOFTPC_HANDLE_ENTRY_COUNT; ++index) {
-        ULONG window = index == LOWORD(domain.desktop_handle) ?
-            domain.guest_desktop_window : domain.guest_windows[index];
-        if (window && page_domain_read_owned_word(window + MVDM_SOFTPC_WND_CLASS) == server) return 0;
-    }
+    if (page_domain_read_owned_word(domain.guest_desktop_window +
+            MVDM_SOFTPC_WND_CLASS) == server) return 0;
+    for (borrow = window_borrows; borrow; borrow = borrow->next)
+        if (window_borrow_is_current(borrow) &&
+                page_domain_read_owned_word(borrow->backing + MVDM_SOFTPC_WND_CLASS) == server) return 0;
     allocation->released = 1;
     /* Physical-free failure is retained by this allocation owner, just as
      * retired WND backing is. It cannot undo successful native unregister. */
@@ -2334,13 +2380,7 @@ int mvdm_softpc_wow_page_domain_copy_window_view(ULONG capacity,
     if (!copy_window_observation(domain.guest_desktop_window,
             *window_borrow_link(domain.guest_desktop_window), &rows[copied++])) return 0;
     for (borrow = window_borrows; borrow; borrow = borrow->next) {
-        ULONG full;
-        WORD index;
-        if (borrow->retired) continue;
-        full = c_sas_dw_at(borrow->backing + MVDM_SOFTPC_WND_HEAD_HANDLE);
-        index = LOWORD(full);
-        if (!index || index == 0xffffu || index == LOWORD(domain.desktop_handle) ||
-                domain.guest_windows[index] != borrow->backing) continue;
+        if (!window_borrow_is_current(borrow)) continue;
         if (copied >= needed) { SetLastError(ERROR_INVALID_STATE); return 0; }
         if (!copy_window_observation(borrow->backing, borrow, &rows[copied++])) return 0;
     }

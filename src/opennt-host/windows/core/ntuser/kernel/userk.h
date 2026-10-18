@@ -16,6 +16,8 @@ EnterWowCritSect(
     )
 {
    if (!++pwpi->CSLockCount) {
+       /* DIVERGENCE(OPENNT-HOST-124): transfer the projected client view. */
+       if (pti->host) pti->host->client_context(pwpi->CSOwningThread, pti);
        pwpi->CSOwningThread = pti;
        return;
        }
@@ -46,6 +48,8 @@ ExitWowCritSect(
     )
 {
    if (pti == pwpi->CSOwningThread) {
+       /* DIVERGENCE(OPENNT-HOST-124): suspend this thread's client view. */
+       if (pti->host) pti->host->client_context(pti, NULL);
        pwpi->CSOwningThread = NULL;
        pwpi->CSLockCount--;
        }

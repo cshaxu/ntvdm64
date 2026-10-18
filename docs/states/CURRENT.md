@@ -236,6 +236,111 @@ The complete source-defined class-reachability lead is recorded in the audit;
 do not edit it until this baseline is reviewed/committed. All S4 groups and
 S5/S6 remain open as before.
 
+After clean reviewed main/origin7c78d3019,086 admits the complete physical
+class-reachability group described in the source audit: class_is_referenced,
+collect_observed_classes and release_class, plus one shared current-record
+predicate used by the existing live-view copy. Replace duplicate slot/list
+traversal with the existing lifetime records plus desktop, size only the
+call-local reference array to that closure, retain prepared/retired pins and
+published-only refusal at unregister. Original managed association counters,
+native UnregisterClass, initial WND retry, final strict class retirement,
+failure retention and errors remain. No new counter/cache, original mirror or
+guest change. Existing32-class live/pinned/reclaim and actual CCPU failure/
+identity matrices precede paired timing and the full retained delivery gates.
+086 composed-r1/r2 and strict nested controls pass; actual32-class16-live/
+16-retired readers survive16 collections and reclaim correctly. Timing-r1
+shows no material speedup. Full-r1 fails a fixed native slot-reuse observer;
+native-only0/2048 versus128 freshly armed successful pairs proves the selected
+dead slot's reuse is not promised. Re-arming an actual old/pinned generation
+retains the deadline and every same-slot/new-generation/lifetime assertion.
+Fresh-r2 passes that observer and native20. This repairs only acquisition of
+the test precondition, not product identity or all acceptance. The complete
+[source audit](../etc/evidence/m0-t447-s4-message-source-audit.md) retains exact
+runs, old failures, timings, sealed images/MAP and the independent native
+controls. No failed row is promoted; both earlier deliveries refuse release.
+
+Class-reachability acceptance-r2 passes native20 but fails common-dialog-Win16 in the first round:
+guest phase0/1/1, error0102, DestroyWindow AX1 then local IsWindow AX1.
+Delivery-r2 refuses publication. This is neither the repaired slot observer
+nor a source-proved recurrence of the old S2 risk. Preserve the failed evidence
+and original assertions; no semantic waiver or performance successor yet.
+Original USER16 validates locally, so native full identity, copied slot and
+callback cache must be distinguished before attributing that failed row.
+The [source audit](../etc/evidence/m0-t447-s4-message-source-audit.md#failure-only-report-boundary-diagnostic)
+retains all diagnostic source/input/artifact identities, compile/link rejects
+and results: broad/narrow traces28 cases0; failure-only D001 negative control
+correctly rejected with complete state, unchanged P5/P6 pair0, one full
+S3-floor-prelude diagnostic replay0 (native20 and all12 guest policies).
+None reproduces or explains the failed boundary; none authorizes publication.
+No further identical replay is useful. Source-led M3/M5 follow-up establishes
+the independent per-thread projection gap below, not attribution of0102.
+
+The source handoff audit now establishes a separate M3/M5 restoration group,
+ADAPTER-WOW-087/OPENNT-HOST-124, inside S4 and the pending P6 delivery (not a
+new S or performance successor). Original CLIENTINFO is thread-private;
+userk.h centralizes three execution-acquire sites and two release sites.
+Restore the one guest TEB's task version and callback pair at those original
+handoffs. Original pClientInfo remains version authority; a suspended task
+retains only its copied callback pair, whose existing borrow owns backing.
+Shared desktop/self/delta state does not become per-task. Add a bounded parent
+projection exchange and one host operation at the existing original helpers;
+remove unconditional init/retirement version writes. No private native TEB,
+hidden object, new scheduler, cache registry or guest change. Native-only
+source fixtures without a host keep no guest projection. Live production
+carriers must supply the operation. Terminal abandonment must not read a
+withdrawn CPU view; another owner restores its own view before guest resume.
+Freeze/seal the prior P6 artifacts before rebuilding the stable build roots.
+Implement validation, same-task/nested switch, rejected restore atomicity,
+retained callback backing, initial/failed init and terminal teardown as one
+group, then fresh composed/native/original/real guest floors. Original mirror
+delta is two guarded projection calls at the existing helper boundaries,
+registered124; preserve original selection/event/return/cleanup algorithms.
+This does not explain or waive the retained0102 failure or authorize release
+from diagnostic passes. P6 class-reachability semantics remain unchanged.
+087 composed-r2/r3 completes0: actual CCPU exchange, retained/alias/atomic
+rejection, production operation, task order, rollback and terminal/nested
+cases. Production Ninja is no-op with exact image/MAP/ABI identities. Actual
+two-task USER16 isolates P5's wrong0300/0000 sender view; current keeps030A/
+0300 in all3 policies. Default four message probe images remain identical.
+Native-reply's raw test join is scoped through the existing native boundary;
+five environment observers retain their WindowsIdentity through Read. Native
+keyboard precondition, original failed runs, UTC identity-wait correction,
+forced-GC16/closed-token controls and evidence remain in the source audit.
+
+Full-r3 native20/original30, style/resource/menu and all12 guest groups pass;
+an observer token failure stops its aggregate before extension launch. R4's
+9 actual message groups, timing, modal3/logon3, mine3, WRITE startup3 and DOS
+17/17 pass, but random-tableau inequality fails SOL-Off. The isolated warm
+control proves command1000 completed with seed34A5/34A5 and busyFFFF/FFFF,
+unchanged board, responsive WM_NULL/later Deal/stock: the random inequality
+is not a universal behavior contract. The earlier1100ms row remains failed
+and unattributed; this does not prove a SOL runtime repair or crash.
+
+The stronger deterministic observer draws stock first, requires Deal to clear
+nonempty waste to its initial hash, verifies tableau presence, draws again
+and exits normally. Same deadlines apply; omitted-Deal control fails exactly
+the clear. Formal P5/current3-policy matrices pass without diagnostic DLLs.
+reconcile-r5 verifies unchanged source/image/MAP/fixture/package identities,
+retains every old failed aggregate, and assembles only actual passed evidence
+with explicit provenance. Delivery-r2 publishes coherent13 to both destinations,
+passes deployed both-width boundary and installed logon3, and verifies hashes.
+Reviewed commit/push and clean main/origin verification are required before
+handoff. Historical0102 is not proved fixed
+or the same cause as the older owner-accepted common-dialog risk. Its strict
+assertion is retained and current16-round/3-policy tests pass; M5 stays open.
+Second-role review permits this bounded correctness baseline, not S4 closure,
+a semantic concession, a successful diagnostic replay or an unproved speedup.
+
+Timing-r4 ordinary P5/new61.2445/61.761ms, sampled61.172/60.8055ms,
+private30.2555/30.262ms: no material speedup.12 posted flag operations with
+20ms polling are not physical left-click latency. Strict nested controls
+both pass8/8. P6 is now installed; no performance gain is inferred.
+After reviewed clean P6 main/origin handoff, the finite known-record transaction
+group in the source audit is the next performance candidate: private pinned
+record reuse and one existing scratch index, no new persistent authority,
+freshness reduction, guest change or mirror body rewrite. Keep all current
+normal/negative/lifetime and release gates and the full M1--M6 obligations.
+
 ## Active Packet
 
 | Field | Required record |
@@ -258,10 +363,10 @@ S5/S6 remain open as before.
 
 ## Current Technical Baseline
 
-S4 P5 publishes the bounded owned-window traversal baseline, retaining P4's
-empty-alias/input-membership lifetime repair.
-NTVDM SHA-256 isDA32FCE789F3964DF5F8AA7938A8ED823A5323C56674700BD3D625B4588AA628;
-WOW32 is2259617984A63A651DACDA8366F1CB34D1386BB018C5AD6A3B7264BDFAEC0237.
+S4 P6 retains P5's bounded traversal and P4's input repair, adding physical
+class reachability and original execution-handoff client-view restoration.
+NTVDM SHA-256 is5217AEE26B1AA36D047E9982DFD7F627237676EB244ED69828ABF18D25656668;
+WOW32 isA8E5C8F84960720F505E05D6EC1F4F238D44C6BD7CBAFF6F7CE11906F90C7672.
 The release manifest owns exact identities of all13 images. Both
 assets/release and O:/winnt/system32 match the tested package; original guest,
 user configuration and assets/winnt.zip are unchanged by this delivery.

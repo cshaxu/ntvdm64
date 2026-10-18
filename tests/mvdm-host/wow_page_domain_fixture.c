@@ -884,6 +884,34 @@ static BOOL CALLBACK trace_reuse_owner(HWND window,LPARAM original)
 }
 static BOOL CALLBACK trace_reuse_tree(HWND window,LPARAM original)
 {trace_reuse_owner(window,original);EnumChildWindows(window,trace_reuse_owner,original);return TRUE;}
+
+/* Native USER need not reuse one chosen dead slot. Re-arm the full observed
+ * old generation after a miss; a pass still requires actual same-slot reuse
+ * and every retained-generation assertion below, within the original bound. */
+static BOOL rearm_observed_reuse_source(ULONG *full, ULONG *held, ULONG tag)
+{
+    HWND desktop = GetDesktopWindow(), old = NULL;
+    ULONG previous;
+    BOOL result = FALSE;
+    if (*held) {
+        if (!wow_user_window_project_graph(&desktop, 1) ||
+                !mvdm_softpc_wow_page_domain_release_window(*held)) return FALSE;
+        *held = 0;
+        if (!mvdm_softpc_wow_page_domain_collect_observed_classes()) return FALSE;
+    }
+    old = CreateWindowExA(0, "STATIC", "Rearmed observed reuse source", WS_POPUP,
+        0, 0, 24, 24, NULL, NULL, GetModuleHandle(NULL), NULL);
+    if (!old) return FALSE;
+    *full = (ULONG)(ULONG_PTR)old;
+    if (!wow_user_window_project_graph(&old, 1)) goto done;
+    *held = mvdm_softpc_wow_page_domain_borrow_window(*full);
+    if (!*held || !mvdm_softpc_wow_page_domain_exchange_window_word(
+            *held, 0, tag, &previous)) goto done;
+    result = TRUE;
+done:
+    if (!DestroyWindow(old)) result = FALSE;
+    return result;
+}
 static void verify_managed_slot_reuse(wow_task_order_thread *thread)
 {
     wow_user_object_table *objects = thread->ppi->objects;
@@ -926,6 +954,9 @@ static void verify_managed_slot_reuse(wow_task_order_thread *thread)
                 EnumDesktopWindows(GetThreadDesktop(GetCurrentThreadId()),trace_reuse_tree,old_full);
             if (LOWORD(full) == LOWORD(old_full) && full != old_full) break;
             BORROW_CHECK(DestroyWindow(window)); window = NULL;
+            if (!rearm_observed_reuse_source(&old_full, &held, 0xabcdef12u)) {
+                BORROW_CHECK(FALSE); break;
+            }
         }
         BORROW_CHECK(window && LOWORD(full) == LOWORD(old_full) && full != old_full);
         if (window && LOWORD(full) == LOWORD(old_full) && full != old_full) {
@@ -1049,6 +1080,28 @@ static void verify_original_modal_task(void)
      * actual registered owner's original InitTask without inventing a launch. */
     BORROW_CHECK(wow_user_task_lifecycle_init(lifecycle,0x0400,"MODAL.EXE",
         0x4323,0,0,0,0,200,100,SW_HIDE));
+    {
+        wow_task_order_thread second = {0};
+        wow_task_client_info client = {0};
+        ULONG teb = mvdm_softpc_wow_page_domain_guest_teb();
+        unsigned before_context = borrow_errors;
+        /* Controlled second client view, not a second registered task or
+         * scheduler witness. Exercise the actual production host operation
+         * against the CCPU projection; original scheduling is tested apart. */
+        client.dwExpWinVer = 0x030au;
+        second.ppi = binding.thread->ppi;
+        second.pClientInfo = &client;
+        BORROW_CHECK(binding.thread->pClientInfo->dwExpWinVer == 0x0400u &&
+            c_sas_dw_at(teb + 0x50u) == 0x0400u);
+        BORROW_CHECK(wow_user_runtime_enter(&binding));
+        binding.thread->host->client_context(binding.thread, &second);
+        BORROW_CHECK(c_sas_dw_at(teb + 0x50u) == 0x030au);
+        binding.thread->host->client_context(&second, binding.thread);
+        BORROW_CHECK(c_sas_dw_at(teb + 0x50u) == 0x0400u);
+        BORROW_CHECK(wow_user_runtime_leave(&binding));
+        fprintf(stderr,"WOW_CLIENT_CONTEXT_BINDING_CCPU errors=%u production_op=1 controlled_views=2 scheduling=separate\n",
+            borrow_errors - before_context);
+    }
     fprintf(stderr,"WOW_MODAL_STAGE admitted\n");
 #ifdef WOW_REAL_DIALOG_LIFECYCLE_FIXTURE
     verify_real_dialog_lifecycle(lifecycle);
@@ -2009,7 +2062,7 @@ static void verify_class_collection_reference_set(ULONG teb)
     HWND windows[count] = {0};
     ULONG classes[count] = {0}, backings[count] = {0};
     ULONG delta = c_sas_dw_at(teb + 0x60u), before_free = 0, after_free = 0, largest;
-    unsigned i, before = borrow_errors;
+    unsigned i, iteration, before = borrow_errors;
     BORROW_CHECK(VdmQueryFreeVirtualMemory(&before_free, &largest) >= 0);
     for (i = 0; i < count; ++i) {
         WINDOWINFO info = {sizeof(info)};
@@ -2034,8 +2087,8 @@ static void verify_class_collection_reference_set(ULONG teb)
             BORROW_CHECK(mvdm_softpc_wow_page_domain_release_class(classes[i]));
         } else BORROW_CHECK(!mvdm_softpc_wow_page_domain_release_class(classes[i]));
     }
-    BORROW_CHECK(mvdm_softpc_wow_page_domain_collect_observed_classes());
-    BORROW_CHECK(mvdm_softpc_wow_page_domain_collect_observed_classes());
+    for (iteration = 0; iteration < 16u; ++iteration)
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_collect_observed_classes());
     for (i = 0; i < count; ++i) if (backings[i]) {
         BORROW_CHECK(c_sas_dw_at(backings[i] + 76u) == classes[i]);
         BORROW_CHECK((WORD)c_sas_dw_at(classes[i] - delta + 4u) != 0);
@@ -2791,6 +2844,9 @@ static void verify_native_slot_reuse(void)
         new_full = (ULONG)(ULONG_PTR)replacement;
         if (LOWORD(new_full) == LOWORD(old_full) && new_full != old_full) break;
         BORROW_CHECK(DestroyWindow(replacement)); replacement = NULL;
+        if (!rearm_observed_reuse_source(&old_full, &held, 0x76543210u)) {
+            BORROW_CHECK(FALSE); break;
+        }
     }
     BORROW_CHECK(replacement && LOWORD(new_full) == LOWORD(old_full) &&
         new_full != old_full && !IsWindow((HWND)(ULONG_PTR)old_full));
@@ -3955,6 +4011,51 @@ static BOOL verify_callback_borrow(HWND window, ULONG expected)
     return matched;
 }
 
+static BOOL verify_client_context_projection(ULONG teb, HWND window, ULONG backing)
+{
+    ULONG a[2] = {0}, b[2] = {0}, alias[2], rejected[2] = {0xdeadbeefu, 0xcafebabeu};
+    ULONG pair[2] = {(ULONG)(ULONG_PTR)window, backing};
+    ULONG bad[2] = {(ULONG)(ULONG_PTR)window ^ 0x10000u, backing};
+    ULONG version = c_sas_dw_at(teb + 0x50u), cr3 = c_getCR3();
+    ULONG self = c_sas_dw_at(teb + 0x18u), desktop = c_sas_dw_at(teb + 0x5cu);
+    ULONG delta = c_sas_dw_at(teb + 0x60u);
+    /* Actual CCPU/SAS view, including the currently retired but pinned WND.
+     * The context snapshot never acquires or substitutes for its owner. */
+    SetLastError(0x7654);
+    if (!mvdm_softpc_wow_page_domain_exchange_client_context(a, 0x030au, NULL) ||
+            GetLastError() != 0x7654 || a[0] != pair[0] || a[1] != pair[1] ||
+            c_sas_dw_at(teb + 0x50u) != 0x030au ||
+            c_sas_dw_at(teb + 0x6cu) || c_sas_dw_at(teb + 0x70u)) return FALSE;
+    if (!mvdm_softpc_wow_page_domain_exchange_client_context(b, 0x0400u, a) ||
+            b[0] || b[1] || c_sas_dw_at(teb + 0x50u) != 0x0400u ||
+            !verify_callback_borrow(window, backing)) return FALSE;
+    if (mvdm_softpc_wow_page_domain_exchange_client_context(rejected, 0x9999u, bad) ||
+            GetLastError() != ERROR_INVALID_STATE || rejected[0] != 0xdeadbeefu ||
+            rejected[1] != 0xcafebabeu || c_sas_dw_at(teb + 0x50u) != 0x0400u ||
+            !verify_callback_borrow(window, backing)) return FALSE;
+    if (!mvdm_softpc_wow_page_domain_exchange_client_context(a, 0x030au, b) ||
+            a[0] != pair[0] || a[1] != pair[1]) return FALSE;
+    CopyMemory(alias, a, sizeof(alias));
+    if (!mvdm_softpc_wow_page_domain_exchange_client_context(alias, 0x0400u, alias) ||
+            alias[0] || alias[1] || !verify_callback_borrow(window, backing)) return FALSE;
+    c_setCR3(cr3 ^ 0x1000u);
+    {
+        BOOL invalid = mvdm_softpc_wow_page_domain_exchange_client_context(
+            rejected, 0x9999u, NULL);
+        c_setCR3(cr3);
+        if (invalid || rejected[0] != 0xdeadbeefu || rejected[1] != 0xcafebabeu ||
+                c_sas_dw_at(teb + 0x50u) != 0x0400u ||
+                !verify_callback_borrow(window, backing)) return FALSE;
+    }
+    if (!mvdm_softpc_wow_page_domain_exchange_client_context(NULL, version, pair) ||
+            c_sas_dw_at(teb + 0x18u) != self ||
+            c_sas_dw_at(teb + 0x5cu) != desktop ||
+            c_sas_dw_at(teb + 0x60u) != delta ||
+            !verify_callback_borrow(window, backing)) return FALSE;
+    fprintf(stderr, "WOW_CLIENT_CONTEXT_CCPU versions=2 suspended=1 retired=1 alias=1 rejected=2 shared=unchanged errors=0\n");
+    return TRUE;
+}
+
 static int run_fixture(void)
 {
     session owner;
@@ -4788,6 +4889,7 @@ guest_window_failure:
         !verify_callback_borrow(geometry_window, c_sas_dw_at(teb + 0x70u)) ||
         !mvdm_softpc_wow_page_domain_restore_callback(inner_callback) ||
         c_sas_dw_at(teb + 0x70u) != retained_backing ||
+        !verify_client_context_projection(teb, geometry_window, retained_backing) ||
         !verify_callback_borrow(geometry_window, retained_backing) ||
         !wow_user_window_retire(&object_table, geometry_window,
             &object_storage, NULL) ||

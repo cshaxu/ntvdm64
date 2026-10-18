@@ -1,5 +1,17 @@
 # opennt-host
 
+OPENNT-HOST-124 adds only two guarded projection calls to the original
+kernel/userk.h EnterWowCritSect/ExitWowCritSect handoffs. The selected original
+SHA-256 is9260E0BA3CC89974E10B3804ED66D18B9864F4AE7D1175CCE6DDE8EE79D66E8C.
+Original CLIENTINFO is per native thread; a serialized CCPU cannot instead
+leave the last task's version/callback pair in its one guest TEB. The existing
+host contract transfers that bounded view before execution-owner assignment
+and before release, including InitTask's forced initial owner. Original
+selection, counts, waits, returns and destruction remain unchanged. Pure
+native source models without a host have no guest projection; a production
+host supplies the operation. No guest change or native private TEB decoding.
+See ADAPTER-WOW-087 and the T447 S4 source audit for ownership/terminal rules.
+
 OPENNT-HOST-123 registers the native-stack eligibility input at five selection
 conditions in kernel/taskman.c (normal event scan, idle-hook temporary owner,
 WOWEXEC hardware selection, task-locked self wake and final wait completion).

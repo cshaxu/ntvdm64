@@ -43,7 +43,9 @@ try{
  Get-FileHash "$PSScriptRoot/ems_pif_builder.c",$CompilerDriver,"$tests/E30.COM","$tests/E30.PIF","$tests/E30.NT","$tests/E30AUTO.NT"|Export-Csv -NoTypeInformation "$root/profile-inputs.csv"
  Get-ChildItem "$stage/system32" -File|Where-Object Name -in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll','ntw16s32.dll','ntw16s64.dll','W16Style.exe','COMMAND.COM')|Get-FileHash|Export-Csv -NoTypeInformation "$root/runtime-inputs.csv"
  Add-Type -Path (Resolve-Path $LogonHelper).Path
- $entries=[WowMessageLogonEnvironment]::Read([Security.Principal.WindowsIdentity]::GetCurrent().Token)
+ $logonIdentity=[Security.Principal.WindowsIdentity]::GetCurrent()
+ try{$entries=[WowMessageLogonEnvironment]::Read($logonIdentity.Token)}
+ finally{$logonIdentity.Dispose()}
  $info=[Diagnostics.ProcessStartInfo]::new((Resolve-Path $Observer).Path);$info.UseShellExecute=$false;$info.CreateNoWindow=$true
  $info.EnvironmentVariables.Clear()
  foreach($entry in $entries){$at=$entry.IndexOf('=',1);$info.EnvironmentVariables[$entry.Substring(0,$at)]=$entry.Substring($at+1)}

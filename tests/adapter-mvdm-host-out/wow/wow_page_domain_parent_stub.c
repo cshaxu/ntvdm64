@@ -116,3 +116,15 @@ int __cdecl mvdm_softpc_wow_page_domain_set_expected_windows_version(
     UNREFERENCED_PARAMETER(version);
     return 1;
 }
+
+int __cdecl mvdm_softpc_wow_page_domain_exchange_client_context(
+    unsigned long *previous, unsigned long version, const unsigned long next[2])
+{
+    UNREFERENCED_PARAMETER(previous);
+    UNREFERENCED_PARAMETER(version);
+    UNREFERENCED_PARAMETER(next);
+    /* This native-only fixture has no guest view. An accidental attempted
+     * exchange must fail, never pretend that projection was exercised. */
+    SetLastError(ERROR_INVALID_STATE);
+    return 0;
+}

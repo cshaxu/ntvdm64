@@ -82,6 +82,51 @@ delivery-r1 exit0). Paired medians are flat, ordinary small-sample p95 worse;
 this does not solve stutter. Source-defined class reachability/temporary-table
 closure is the next lead after reviewed P5 handoff, not an edit to its frozen
 candidate. No original guest/mirror change or S4/S5/S6 scope reduction.
+P5 is clean reviewed main/origin7c78d3019.086 now admits that complete physical
+class-reachability closure: all WND records including prepared/retired pins,
+separate desktop and published-only unregister refusal; shrink the temporary
+array and remove duplicate scans, never add a parallel counter or cache.
+Original logical association counts and native registration remain untouched.
+Compile/test the whole group before further source selection, retaining every
+normal/negative/lifetime and complete release gate. Existing paired flag timing
+is not physical-input or left-button reveal latency evidence.
+086 delivery is currently refused: corrected native20 passes, but actual
+common-dialog-Win16 reports DestroyWindow TRUE followed by local IsWindow TRUE.
+Resolve its full native identity/copied-slot/guest validation chain as an M5
+foundation obligation, not an S3 transfer or a risk waiver. Diagnostic-only
+copied project bindings may add passive identity traces in an isolated WOW32
+build; original and production source/guest remain untouched. Both full replay
+assertions and failed evidence remain. No performance successor mutation yet.
+Broad and narrow logging did not reproduce the failed row; that is not a
+repair. The now-validated failure-only report observer leaves ordinary native
+edges unlogged and records the failed guest result before its normal write
+thunk borrow. One source-owner S3-floor-prelude diagnostic replay retains all
+assertions and process/input identities. It cannot authorize publication or
+reduce M1--M6; see the source audit's failure-only boundary evidence.
+The source-led follow-up now admits087/124 as the complete per-thread guest
+client-view restoration at original execution acquire/release, covering
+InitTask, yields, callback/native returns and retirement. This is M3/M5 work
+within S4, not a new feature, S5 deferral or attribution of0102. The pending
+P6 class source remains unchanged; rebuild/verify the complete composed group
+before any delivery. Preserve every previously failed row and guest assertion.
+
+The complete087 group is now source/CCPU/actual-two-task proved; its current
+normal release contracts reconcile-r5 pass with exact unchanged runtime,
+source and fixture provenance. Observer corrections retain original deadlines
+and negative controls: native exit wait ownership, logon token lifetime and
+deterministic SOL nonempty-waste reset instead of unpromised random-board
+inequality. Old failed aggregates stay failed; the historical1100ms SOL row
+and0102 common-dialog cause are not inferred repaired. This supersedes the
+earlier diagnostic-only delivery hold for the current source-complete partial
+correctness baseline, not the original guest assertions, M5 source obligation
+or existing recorded risk. No new semantic concession or S4/S5/S6 scope drop.
+Quality and coherent13 publication/installed checks now pass in
+client-context-delivery-r2; reviewed commit/push remain required before handoff.
+Timing remains flat, not the requested final stutter solution. After clean
+reviewed P6 handoff, continue the finite private-known-record transaction group
+already source-designed in the audit, without a new cache, lower freshness,
+guest change or loss of full normal/negative/lifetime gates. Historical0102
+and incomplete M1--M6/S5/S6 remain explicit, not moved or declared repaired.
 
 S3 is closed at the P22 runtime/P23 interaction baseline after the
 [fixed-chain exit review](../../history/m0-t447-s3-control-dependency-closure.md).

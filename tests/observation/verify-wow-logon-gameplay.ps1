@@ -46,7 +46,9 @@ public static class WowLogonEnvironment {
 }
 '@
  Add-Type -Path "$root/logon-env.dll"
- $entries=[WowLogonEnvironment]::Read([Security.Principal.WindowsIdentity]::GetCurrent().Token)
+ $logonIdentity=[Security.Principal.WindowsIdentity]::GetCurrent()
+ try{$entries=[WowLogonEnvironment]::Read($logonIdentity.Token)}
+ finally{$logonIdentity.Dispose()}
  $shape=@($entries|ForEach-Object{$split=$_.IndexOf('=',1);[pscustomobject]@{name=$_.Substring(0,$split);characters=$_.Length+1}})
  $shape|Export-Csv -NoTypeInformation "$root/environment-shape.csv"
  @{source='CreateEnvironmentBlock current token inherit=false';entries=$shape.Count;characters=1+($shape|Measure-Object characters -Sum).Sum;filtering=$false;limit='Logon block, not a snapshot of an already-running shell'}|ConvertTo-Json|Set-Content "$root/environment-contract.json"

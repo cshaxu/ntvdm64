@@ -536,6 +536,7 @@ foreach ($entry in @(
     'mvdm_softpc_wow_page_domain_flat_address_array',
     'mvdm_softpc_wow_page_domain_guest_csr_flag',
     'mvdm_softpc_wow_page_domain_set_expected_windows_version',
+    'mvdm_softpc_wow_page_domain_exchange_client_context',
     'mvdm_softpc_wow_page_domain_publish_system_color',
     'mvdm_softpc_wow_page_domain_client_desktop_ready',
     'mvdm_softpc_wow_page_domain_set_client_desktop',

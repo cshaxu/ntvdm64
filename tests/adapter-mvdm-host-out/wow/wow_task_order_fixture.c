@@ -250,8 +250,16 @@ static NTSTATUS WINAPI wait_events(wow_task_order_thread *thread, DWORD count,
     CHECK(FALSE);
     ExitProcess(98);
 }
+static void WINAPI client_context(wow_task_order_thread *previous,
+    wow_task_order_thread *next)
+{
+    /* This native-only original scheduler model has no guest TEB. Verify the
+     * handoff boundary, not a fabricated projection or a production stub. */
+    if(previous) CHECK(previous->ppi->pwpi->CSOwningThread==previous);
+    if(previous && next) CHECK(previous->ppi==next->ppi);
+}
 static const wow_task_host_ops test_ops={release_lock,acquire_lock,check_death,unexpected,
-    no_hook,observe_idle,unexpected,receive,wait_events,find_thread};
+    no_hook,observe_idle,unexpected,receive,wait_events,find_thread,client_context};
 
 /* Real original selection with explicit readiness input. These stack-owned
  * task records model scheduling only; native/guest integration is separate. */

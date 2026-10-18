@@ -6,7 +6,8 @@ param(
  [Parameter(Mandatory)][string]$BuildRoot,
  [ValidateSet('Off','Win16','All')][string]$Win16Style='Off',
  [string]$Nasm='nasm.exe',
- [switch]$NativeExtension
+ [switch]$NativeExtension,
+ [switch]$ThreadClientView
 )
 # Entire actual-guest message group. Invoke as an owned hidden background run.
 # No original guest is changed or rebuilt; only independently authored probes.
@@ -23,11 +24,14 @@ $assembly="$PSScriptRoot/win16_message_probe.asm"
 $native="$PSScriptRoot/wow_message_peer.c"
 function Read-GuestReport([string]$path,[string]$name){
  $bytes=[IO.File]::ReadAllBytes($path)
- if(!$bytes.Length -or $bytes.Length%34){throw "Incomplete $name message records"}
+ $recordBytes=if($ThreadClientView){40}else{34}
+ $signature=if($ThreadClientView){'MSG2'}else{'MSG1'}
+ if(!$bytes.Length -or $bytes.Length%$recordBytes){throw "Incomplete $name message records"}
  $fields=@('role','phase','errors','task','peerTask','basic','nested','early','posted','same','filtered','threadpost','text','native','destroyed')
+ if($ThreadClientView){$fields+=@('clientVersion','clientExpected','clientChecks')}
  $rows=@()
- for($offset=0;$offset -lt $bytes.Length;$offset+=34){
-  if([Text.Encoding]::ASCII.GetString($bytes,$offset,4) -ne 'MSG1'){throw "Invalid $name signature"}
+ for($offset=0;$offset -lt $bytes.Length;$offset+=$recordBytes){
+  if([Text.Encoding]::ASCII.GetString($bytes,$offset,4) -ne $signature){throw "Invalid $name signature"}
   $row=[ordered]@{}
   for($i=0;$i -lt $fields.Count;$i++){$row[$fields[$i]]=[BitConverter]::ToUInt16($bytes,$offset+4+2*$i)}
   $rows+=[pscustomobject]$row
@@ -41,6 +45,7 @@ try{
   $arguments=@('-f','bin','-o',"$root/MSG$role.EXE",'-l',"$root/$role.lst")
   if($role -eq 'RECV'){$arguments+='-DRECEIVER'}
   if($NativeExtension){$arguments+='-DEXTENSION_WITNESS'}
+  if($ThreadClientView){$arguments+='-DTHREAD_CLIENT_VIEW'}
   & $assembler @arguments $assembly *> "$root/$role-assemble.txt"
   if($LASTEXITCODE){throw "Independent $role assembly failed"}
  }
@@ -76,7 +81,9 @@ public static class WowMessageLogonEnvironment {
 }
 '@
  Add-Type -Path "$root/logon-env.dll"
- $entries=[WowMessageLogonEnvironment]::Read([Security.Principal.WindowsIdentity]::GetCurrent().Token)
+ $logonIdentity=[Security.Principal.WindowsIdentity]::GetCurrent()
+ try{$entries=[WowMessageLogonEnvironment]::Read($logonIdentity.Token)}
+ finally{$logonIdentity.Dispose()}
  $info=[Diagnostics.ProcessStartInfo]::new((Resolve-Path $Observer).Path)
  $info.UseShellExecute=$false;$info.CreateNoWindow=$true;$info.EnvironmentVariables.Clear()
  foreach($entry in $entries){$split=$entry.IndexOf('=',1);$info.EnvironmentVariables[$entry.Substring(0,$split)]=$entry.Substring($split+1)}
@@ -99,11 +106,23 @@ public static class WowMessageLogonEnvironment {
  }
  $send=Read-GuestReport "$root/MSGSEND.bin" sender
  $receive=Read-GuestReport "$root/MSGRECV.bin" receiver
+ if($ThreadClientView){
+  @{sender=@($send|Select-Object phase,errors,task,clientVersion,clientExpected,clientChecks);
+    receiver=@($receive|Select-Object phase,errors,task,clientVersion,clientExpected,clientChecks);
+    source='Original USER16 FLATFS 003B, client version at50h; guest reads before any host query';
+    originalGuestChanged=$false}|ConvertTo-Json -Depth 5|Set-Content "$root/thread-client.json"
+ }
  $report=Get-Content "$root/observer.txt" -Raw
  if($process.ExitCode -or $report -notmatch 'result=exited' -or $report -notmatch 'exit=0x00000000'){throw 'Guest/launcher failed normal completion'}
  if(($send.phase -join ',') -ne '0,1,2,3,4,6' -or ($receive.phase -join ',') -ne '0,5,6' -or
     @(@($send)+@($receive)|Where-Object errors -ne 0).Count){throw 'Guest message phase/assertion failure'}
  $last=$send[-1];$peer=$receive[-1]
+ if($ThreadClientView -and
+    ($last.clientChecks -lt 12 -or $peer.clientChecks -lt 12 -or
+     @($send|Where-Object {$_.clientVersion -ne 0x030a -or $_.clientExpected -ne 0x030a}).Count -or
+     @($receive|Where-Object {$_.clientVersion -ne 0x0300 -or $_.clientExpected -ne 0x0300}).Count)){
+  throw 'Actual distinct-version task client views were not retained across message/native/callback returns'
+ }
  $expectedNative=if($NativeExtension){5}else{4}
  if(!$last.task -or !$peer.task -or $last.task -eq $peer.task -or $last.peerTask -ne $peer.task -or
     @($send|Where-Object task -ne $last.task).Count -or @($receive|Where-Object task -ne $peer.task).Count -or

@@ -276,9 +276,42 @@ static wow_task_order_thread *WINAPI find_thread(wow_task_order_thread *thread,
     return NULL;
 }
 
+static void WINAPI client_context(wow_task_order_thread *previous,
+    wow_task_order_thread *next)
+{
+    wow_user_runtime_thread *binding = wow_user_runtime_current();
+    wow_user_task_lifecycle *owner = binding && binding->runtime ?
+        binding->runtime->lifecycle : NULL;
+    DWORD error = GetLastError();
+    if (!binding || !binding->exclusive_held || !owner || (!previous && !next) ||
+            (previous && !previous->pClientInfo) || (next && !next->pClientInfo) ||
+            (previous && previous->ppi != &owner->process) ||
+            (next && next->ppi != &owner->process))
+        wow_user_native_call_failed("client-context-owner", ERROR_INVALID_STATE);
+    /* A quiesced native-thread unbind abandons its frames, not resumes them.
+     * The CPU view may already be withdrawn. No inactive scalar snapshot
+     * owns a borrow; the next execution owner replaces the view before use. */
+    if (previous && previous == binding->thread && !next && binding->terminal_exit) {
+        ZeroMemory(previous->pClientInfo->guest_callback,
+            sizeof(previous->pClientInfo->guest_callback));
+    } else if (mvdm_softpc_wow_page_domain_active()) {
+        if (previous == next && next) {
+            if (!mvdm_softpc_wow_page_domain_set_expected_windows_version(
+                    next->pClientInfo->dwExpWinVer))
+                wow_user_native_call_failed("client-context-version", ERROR_INVALID_STATE);
+        } else if (!mvdm_softpc_wow_page_domain_exchange_client_context(
+                previous ? previous->pClientInfo->guest_callback : NULL,
+                next ? next->pClientInfo->dwExpWinVer : 0,
+                next ? next->pClientInfo->guest_callback : NULL))
+            wow_user_native_call_failed("client-context-transfer", GetLastError());
+    }
+    SetLastError(error);
+}
+
 static const wow_task_host_ops host_ops = {
     release_lock, acquire_lock, check_death, deliver_apc, idle_hooked,
-    idle_hook, wake_input_idle, receive, wait_for_task_or_message, find_thread
+    idle_hook, wake_input_idle, receive, wait_for_task_or_message, find_thread,
+    client_context
 };
 
 static BOOL WINAPI journal_hooked(wow_task_order_process *process, BOOL playback)
@@ -531,10 +564,9 @@ BOOL WINAPI wow_user_task_lifecycle_init_style(wow_user_task_lifecycle *owner,
     task->idle_observer = SetWindowsHookExA(WH_FOREGROUNDIDLE,
         WK32ForegroundIdleHook, NULL, task->thread.native_thread_id);
     if (!task->idle_observer) goto done;
-    /* USER16 directly reads this counterpart of queue.c's THREADINFO and
-     * CLIENTINFO value. Publish it before the original init can return to
-     * guest code; undo it if that initialization rejects the task. */
-    if (!mvdm_softpc_wow_page_domain_set_expected_windows_version(version)) goto done;
+    /* Original InitTask initializes CLIENTINFO before acquiring execution.
+     * Its handoff publishes this task's guest view; do not overwrite another
+     * task's still-current TEB during preparation or a rejected init. */
     /* Prepared native controls share their original class owner just like
      * registered WOW classes. Publish before any admitted task can create a
      * WND, under the existing exclusive runtime lock and active page domain.
@@ -558,8 +590,6 @@ BOOL WINAPI wow_user_task_lifecycle_init_style(wow_user_task_lifecycle *owner,
     } else SetLastError(RtlNtStatusToDosError(status));
 done:
     failure_error = GetLastError();
-    if (!result)
-        (void)mvdm_softpc_wow_page_domain_set_expected_windows_version(0u);
     if (wide) HeapFree(GetProcessHeap(), 0, wide);
     if (task) {
         wow_user_task_lifecycle_thread **link = &owner->threads;
@@ -1261,10 +1291,8 @@ static BOOL retire_task(wow_user_task_lifecycle *owner, DWORD task_id,
         if (task->terminal_observer && !UnhookWindowsHookEx(task->terminal_observer))
             __leave;
         task->terminal_observer = NULL;
-        /* The original USER cleanup has now completed.  Its page-domain
-         * counterpart may already have been withdrawn during worker teardown;
-         * that cannot retain a dead provider task/queue record. */
-        (void)mvdm_softpc_wow_page_domain_set_expected_windows_version(0u);
+        /* DestroyTask releases only this task's execution view. Never clear
+         * another live task's compatibility version during retirement. */
         /* Keep the task and its window-owner references alive if the finite
          * native boundary cannot complete original object cleanup. */
         /* All refusing cleanup edges have completed. A terminal thread may
