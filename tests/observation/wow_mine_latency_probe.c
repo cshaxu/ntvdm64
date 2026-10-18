@@ -5,6 +5,9 @@
 #define main wow_mine_gameplay_not_run
 #include "wow_mine_gameplay_probe.c"
 #undef main
+#ifdef T447_PAGE_COST_PROFILE
+#include "wow_page_cost_probe.h"
+#endif
 
 int main(int argc, char **argv)
 {
@@ -15,6 +18,10 @@ int main(int argc, char **argv)
     char ready[MAX_PATH];
     FILE *file;
     BOOL inherited;
+#ifdef T447_PAGE_COST_PROFILE
+    if (argc != 6 || !(page_cost_rva = strtoul(argv[5], NULL, 16))) return 64;
+    argc = 5;
+#endif
     if (argc != 5 || !(owner_pid = strtoul(argv[1], NULL, 10))) return 64;
     inherited = !strcmp(argv[2], "-");
     process = OpenProcess(SYNCHRONIZE | PROCESS_QUERY_LIMITED_INFORMATION,
@@ -50,10 +57,16 @@ int main(int argc, char **argv)
     for (operation = 0; operation < 12; ++operation) {
         LARGE_INTEGER start, stop, frequency;
         QueryPerformanceFrequency(&frequency);
+#ifdef T447_PAGE_COST_PROFILE
+        if (!page_cost_snapshot("before", operation)) return 74;
+#endif
         QueryPerformanceCounter(&start);
         if (!click(WM_RBUTTONDOWN, WM_RBUTTONUP, MK_RBUTTON) ||
             !wait_cell(process, previous, FALSE, "toggle")) return 69;
         QueryPerformanceCounter(&stop);
+#ifdef T447_PAGE_COST_PROFILE
+        if (!page_cost_snapshot("after", operation)) return 75;
+#endif
         current = region_hash(mine, 12, 54, 14, 14);
         if (!current || current == previous) return 70;
         printf("latency operation=%lu microseconds=%llu old=%08lx new=%08lx start-qpc=%lld stop-qpc=%lld frequency=%lld\n",
@@ -70,6 +83,9 @@ int main(int argc, char **argv)
     if (IsWindow(mine)) return 73;
     puts("PASS twelve actual board changes, initial board restored, normal window close");
     CloseHandle(process);
+#ifdef T447_PAGE_COST_PROFILE
+    CloseHandle(page_cost_process);
+#endif
     if (!inherited) CloseDesktop(desk);
     return 0;
 }

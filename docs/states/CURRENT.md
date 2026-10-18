@@ -331,22 +331,19 @@ assertion is retained and current16-round/3-policy tests pass; M5 stays open.
 Second-role review permits this bounded correctness baseline, not S4 closure,
 a semantic concession, a successful diagnostic replay or an unproved speedup.
 
-Timing-r4 ordinary P5/new61.2445/61.761ms, sampled61.172/60.8055ms,
-private30.2555/30.262ms: no material speedup.12 posted flag operations with
-20ms polling are not physical left-click latency. Strict nested controls
-both pass8/8. P6 is now installed; no performance gain is inferred.
-Clean main/origin d347d0594 now admits ADAPTER-WOW-088 as that one complete
-private transaction group: one row-index scratch, call-local record association,
-actual pin acquisition, constructor record return, direct metadata commit and
-known-record release. P6 source/images/MAP/imports and coherent13 are sealed
-in known-record-sealed-r1. Public arbitrary-token validation, cold construction,
-full identity/cycle checks, retired pins, final unlink, failed physical free,
-class lifetime and LastError remain. No mirror/guest/wire change or persistent
-counter/cache. Whole composed-r2 passes, including32 partial-batch rollbacks,
-retained readers, reuse and all7 terminal negatives with explicit reached/exit
-and child logs. R1's unlocated child exit1 remains failed; a captured direct
-diagnostic is not causal repair. Production source is unchanged in r2; stable
-Ninja is no-op. Full known-record-verify-r2 and delivery-r1 pass: fresh
+P8 is diagnostic-only over P7 cf0f33ddf: page-cost-profile-r1 and independent
+observer controls pass. Read-only stable counters bracket twelve posted flags.
+Normal320-window copy484 calls/314ms, graph143/236ms, class327/44ms are
+inclusive, not additive or physical-click latency. Source identifies99 menu
+refreshes copying full descriptors only to use handle/PID/style. Next finite
+candidate is a typed minimal menu projection with unchanged refresh/algorithm,
+not a class-counter rewrite. P7 images remain deployed; full S4 stays open.
+ADAPTER-WOW-088 reuses call-local records and one row-index scratch while
+preserving public validation, pin/generation/retirement and failure contracts.
+P6 is sealed in known-record-sealed-r1. Composed-r2 passes32 rollback cases
+and7 terminal negatives with retained readers/reuse. R1 child exit1 remains
+unlocated, not repaired by a passing diagnostic. No mirror/guest/wire/cache
+change. Stable Ninja is no-op. Known-record-verify-r2/delivery-r1 pass: fresh
 native/original/guest/application/DOS/modal/logon, distinct-version extensions,
 coherent13 publication to both targets and installed checks. Ordinary paired
 median61.7765/61.574ms is flat; twelve posted operations do not prove a tail

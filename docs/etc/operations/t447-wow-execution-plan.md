@@ -149,6 +149,18 @@ sorting is not admitted: fresh sampled CLS allocation is per observation,
 so fewer class records cannot be assumed. Source-audit actual ownership and
 cost before the next finite optimization; full M1--M6/S5/S6 remains required.
 
+P8 diagnostic-only attribution over exact P7 now passes page-cost-profile-r1,
+stable native counter summary and independent positive/five-negative observer
+controls. Original bodies are reversible copies, production outputs/libraries
+and deployed13 remain unchanged. In the normal320-window bracket, copy costs
+314ms versus class collection44ms; both are inclusive, graph236ms may overlap.
+Source accounts for99 menu refreshes using full copied descriptors only to
+consume HWND/PID/style. The next bounded candidate is a distinct typed menu
+projection at that existing refresh boundary, not lowered freshness, new menu
+behavior or permanent state. Design/verify its full-generation/current-record,
+cold-desktop/order/capacity/error/retirement contract before implementation.
+Full M1--M6 and S5/S6 are unchanged; this is not a runtime release or closure.
+
 S3 is closed at the P22 runtime/P23 interaction baseline after the
 [fixed-chain exit review](../../history/m0-t447-s3-control-dependency-closure.md).
 S4 is now the sole sequential admission under the continuing owner goal.

@@ -6,6 +6,7 @@ param([Parameter(Mandatory)][string]$PackageRoot,
  [Parameter(Mandatory)][string]$WorkerMap,
  [Parameter(Mandatory)][string]$WowMap,
  [string]$HostWordSymbol,
+ [string]$PageCostRva,
  [switch]$Installed)
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
@@ -31,6 +32,7 @@ function Finish-Owned($p,$name,$seconds){
 }
 $stage=$null;$scope=$null;$observerProcess=$null;$game=$null;$sampler=$null;$gate=$null
 try{
+ if($PageCostRva -and ($PageCostRva -notmatch '^[0-9A-Fa-f]{1,8}$' -or [Convert]::ToUInt32($PageCostRva,16) -eq 0)){throw 'Diagnostic page-cost RVA must be nonzero hexadecimal'}
  foreach($pair in @(@('ntvdm.exe',$WorkerMap),@('WOW32.DLL',$WowMap))){
   $image=Join-Path (Split-Path $pair[1]) $pair[0]
   if((Get-FileHash $image).Hash -ne (Get-FileHash "$package/system32/$($pair[0])").Hash){throw "Map image mismatch: $image"}
@@ -48,8 +50,10 @@ try{
   @{symbol=$HostWordSymbol;rva=$wordRva;interpretation='One native DWORD read before statistical thread sampling; non-atomic, no remote writes or guest pointer decoding'}|ConvertTo-Json|Set-Content "$root/host-word.json"
  }
  Get-FileHash "$package/system32/ntvdm.exe","$package/system32/WOW32.DLL",$WorkerMap,$WowMap,$Observer,$CompilerDriver,$PSCommandPath,"$PSScriptRoot/wow_mine_latency_probe.c","$PSScriptRoot/wow_mine_gameplay_probe.c","$PSScriptRoot/wow_native_pc_sample.c"|Export-Csv -NoTypeInformation "$root/inputs.csv"
+ if($PageCostRva){Get-FileHash "$PSScriptRoot/wow_page_cost_data.h","$PSScriptRoot/wow_page_cost_probe.h"|Export-Csv -NoTypeInformation -Append "$root/inputs.csv"}
  foreach($spec in @(@('latency','wow_mine_latency_probe.c','user32.lib gdi32.lib dwmapi.lib'),@('sample','wow_native_pc_sample.c','user32.lib'))){
-  $line='/d /s /c "call "'+$CompilerDriver+'" cl.exe /nologo /MT /O2 /W3 /D_CRT_SECURE_NO_WARNINGS /Fo"'+$root+'/'+$spec[0]+'.obj" /Fe"'+$root+'/'+$spec[0]+'.exe" "'+$PSScriptRoot+'/'+$spec[1]+'" /link '+$spec[2]+'"'
+  $costFlags=if($PageCostRva -and $spec[0] -eq 'latency'){' /DT447_PAGE_COST_PROFILE'}else{''}
+  $line='/d /s /c "call "'+$CompilerDriver+'" cl.exe /nologo /MT /O2 /W3 /D_CRT_SECURE_NO_WARNINGS'+$costFlags+' /Fo"'+$root+'/'+$spec[0]+'.obj" /Fe"'+$root+'/'+$spec[0]+'.exe" "'+$PSScriptRoot+'/'+$spec[1]+'" /link '+$spec[2]+'"'
   $p=Start-Owned ('compile-'+$spec[0]) $env:ComSpec $line 120
   Finish-Owned $p ('compile-'+$spec[0]) 120
  }
@@ -93,6 +97,7 @@ public static class MineLatencyEnvironment {
   $gate=[Threading.EventWaitHandle]::new($false,[Threading.EventResetMode]::ManualReset,$gateName)
   $desktop=if($case -eq 'private'){'NTVDMConsoleTest-'+$observerProcess.Id}else{'-'}
   $line=$worker.ProcessId.ToString()+' "'+$desktop+'" "'+$out+'/mine" "'+$gateName+'"'
+  if($PageCostRva){$line+=' '+$PageCostRva}
   $game=Start-Owned ($case+'-game') "$root/latency.exe" $line 45
   $deadline=[DateTime]::UtcNow.AddSeconds(20)
   while(!(Test-Path "$out/mine.ready") -and !$game.HasExited -and [DateTime]::UtcNow -lt $deadline){Start-Sleep -Milliseconds 50}

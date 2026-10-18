@@ -2349,3 +2349,102 @@ Only NTVDM and its manifest entry change. Original guest/ZIP, user environment,
 selected mirrors and other12 binaries are unchanged. Ordinary median remains
 flat; no material stutter improvement or historical-failure repair is claimed.
 P7 Git handoff awaits final governance and exact nine-file review/commit/push.
+
+### P7 handoff and source-led residual cost attribution
+
+Known-record-git-delivery-r1 proves clean main/live origin cf0f33ddf and
+all13 hashes in both targets. Next source audit confirms original class.c
+ReferenceClass/DereferenceClass are creation/destruction ownership operations;
+their desktop-clone/kernel allocation closure is not a modern HWND facade.
+Current copied physical WND lifetime is distinct from original managed class
+association count. Do not substitute that count or a guessed small CLS vector.
+
+Admit only isolated diagnostic attribution before a new production candidate:
+mechanically copy the current project-owned page-domain C, preserve bodies,
+wrap class collection, retired-WND collection, view copy and graph projection
+with inclusive QPC counters, and wrap its two qsort sites separately. Link
+the copied object ahead of unchanged sealed production libraries into a
+build-owned diagnostic worker; do not overwrite the stable Ninja outputs.
+The native latency probe reads diagnostic counters via ReadProcessMemory,
+using the exact diagnostic MAP RVA, before/after its existing twelve posted
+inputs. No target memory write, private modern USER layout, original guest
+change, new runtime policy or production profiling overhead is selected.
+Counter snapshots require a stable even sequence; inclusive/nested durations
+must not be summed as disjoint costs. Observed instrumentation overhead and
+20ms pixel polling preclude claiming physical input latency. Retain actual
+call counts, rows/sort sizes and elapsed intervals; no hotspot conclusion from
+sparse nearest-symbol PCs alone. This diagnostic is not a new runtime release
+or a replacement for M1--M6. Original source remains read-only comparison.
+
+#### Reproduction and actual diagnostic results
+
+Run verify-wow-page-cost.ps1 -BuildRoot build/M0-T447/S4/page-cost-profile-r1,
+then summarize-wow-page-cost.ps1 with that root. Independent controls use
+verify-wow-page-cost-probe.ps1 -BuildRoot build/M0-T447/S4/page-cost-probe-control-r1.
+Both owned background groups and the summary exit0. Diagnostic image
+8B111B2626E42E6E4873CFA8B3B6069A2B4AB8FD23C2CA24F0E27693EC36227D;
+MAP C0299E3518FF70A8267139A3B1B2212D2E0411910F61C7EAD7250B2A5D651F82.
+The generated bodies reverse exactly to current adapter source, the old archive
+page-domain object is absent from the link, VdmTib ownership audit passes,
+EMS passes, normal uninstrumented controls and diagnostic ordinary/sampled/
+private twelve-input/normal-close cases pass. End-of-run hashes prove every
+original library/output/source/guest ZIP unchanged. This copied image is never
+deployed. Native controls prove nested inclusive totals, sorted results,
+LastError preservation, a real read-only even-sequence snapshot and refusal
+of wrong magic/version, busy sequence, out-of-image RVA and wrong PID.
+
+| Counter over12 inputs | Ordinary320 rows | Sampled320 rows | Private15--16 rows |
+| --- | --- | --- | --- |
+| View copy | 484 calls /313.536ms | 496 /328.489ms | 650 /57.442ms |
+| Graph projection | 143 /235.722ms | 143 /237.280ms | 179 /78.184ms |
+| Class collection | 327 /44.377ms | 313 /43.559ms | 370 /2.795ms |
+| Class sort (inside collection) | 327 /11.404ms | 313 /10.746ms | 370 /0.574ms |
+| View sort (inside copy) | 242 /73.256ms | 248 /78.305ms | 325 /2.747ms |
+
+Read exact totals in cost-summary.json/cost-operations.csv; displayed values
+are rounded. Ordinary counters bracket876ms while the posted-input stopwatch
+totals526ms. Waiting for a quiescent snapshot occurs outside that stopwatch
+but inside the counter bracket. No counter/stopwatch ratio is a CPU percentage.
+Baseline input total546ms, instrumented526ms; sampled589/453ms and private
+360/370ms show environmental/observer variation, not a new product speedup.
+Nested kinds cannot be added; lifetime maximum fields also include startup.
+The experiment changes priority: repeated full view copy/projection, not
+class-sort micro-optimization, is the source-grounded next cost closure.
+
+#### Source-defined next candidate, not implemented in P8
+
+Only project_graph and wow_menu_client_refresh_all call copy_window_view.
+Successful graph projection143 times explains286 count/copy calls; the other
+198 calls are99 menu refreshes. Each menu refresh allocates/copies/sorts320
+complete observations (relations, rectangles, class identity/style/extra/name)
+but reads only full HWND, style and process identity. Original menu attachment
+logic needs those fields, not a full window/class descriptor snapshot.
+Keep the existing refresh points, all original/native menu tree behavior,
+retirement/failure policy and ordered full generation identities. A separate
+typed three-field copied projection can remove this unnecessary dependency,
+without replacing menu behavior, weakening local synchronization or inventing
+another cache/registry. Native USER and the existing WND lifetime records stay
+authoritative. Review the complete cold desktop/current versus pinned-retired,
+capacity/order/LastError, native and independent guest lifecycle cases and the
+private export/build seam as one group before compiling a runtime candidate.
+
+Full graph copying also calls page_domain_class_allocation for every row,
+performing a class-list search each time. That is an actual source O(W*C)
+cost but its exclusive weight is not separately measured. Do not repeat the
+rejected assumption that fewer classes exist or treat a permanent native
+reference counter as free of lifetime obligations. Reassess only after the
+typed transfer group's composed evidence, without shrinking full S4 scope.
+P8 changes test/observation/governance only, no product source, ABI, mirror,
+guest, release bytes or accepted semantics. P7 remains the installed runtime.
+
+P8 second-role review checks all12 changed documentation/test files against
+the owner contract: original-source reasoning leads the experiment; the
+isolated copy preserves original adapter bodies; no original algorithm is
+replaced or modern USER token interpreted. Opt-in compilation leaves ordinary
+probe behavior unchanged and its actual three-case control passes. Stable
+sequence and image-range rejection are independently exercised, and recorded
+nested/observer limits prevent misrepresenting times as exclusive CPU shares.
+All compiler/linker/probe objects are build-owned hidden background outputs;
+no product profiling switch, helper HWND or recurring runtime file is added.
+Final governance, reviewed test-only commit/push and unchanged coherent13
+hash verification complete this diagnostic handoff, not S4/T447 closure.
