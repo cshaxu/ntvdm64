@@ -24,6 +24,17 @@ covers six complete groups, including implicit messages, reply/wait and
 converted-data lifetime, not just explicit SendMessage. No S4 runtime edit,
 new test result or new release is claimed by admission.
 
+The [S4 source audit](../etc/evidence/m0-t447-s4-message-source-audit.md)
+now reconciles original sendmsg/focus/taskman consumers and retained native
+boundary counterexamples. Target-based pseudo-reply bookkeeping must be
+replaced as one execution group. HEVENT_REMOVEME excludes a task for one scan
+only; native-suspended eligibility must survive other scans without clearing
+real events. Review all eight selection/transition entries before freezing
+the minimal seam. Native receive/reply remains the sole message authority.
+Old private-SMS pointer-equality and non-yielding NT4 early-handoff test
+assertions are not the approved modern contract; no field fabrication or
+hidden waiver is selected. No new runtime test/build or production edit yet.
+
 ## Active Packet
 
 | Field | Required record |

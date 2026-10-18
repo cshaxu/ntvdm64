@@ -2,6 +2,15 @@
 
 ## Authority and evidence level
 
+Current S4 clarification: the owner subsequently approved modern USER for all
+message delivery/reply paths, as recorded in design/ARCHITECTURE.md and the
+active S4 packet. The historical undecided/rejected decisions below remain
+evidence, not a competing current authority. Local-SMS/private-notification
+delivery is not selected. The persistent-eligibility, selection-entry and
+scope/lifetime counterexamples still apply; the full S4 source audit now
+reconciles them with current S3-delivered code before implementation. This
+clarification adds no runtime or guest change and does not claim completion.
+
 Latest owner clarification allows a clean project implementation where
 original integration creates excessive architectural complexity or error
 risk, with equivalent semantics mandatory. It resolves the implementation

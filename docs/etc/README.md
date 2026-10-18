@@ -1,5 +1,10 @@
 # Supporting Material
 
+[T447 S4 message source audit](evidence/m0-t447-s4-message-source-audit.md)
+records actual native receive/reply ownership, the implicit-send and persistent
+eligibility gaps, original reuse/removal boundaries and complete S4 acceptance
+denominator; no runtime repair or new test pass is implied.
+
 [T447 S3 control source audit](evidence/m0-t447-s3-control-source-audit.md)
 records the finite control/EDIT/dialog/menu consumer audit and source gaps;
 registration alone is not runtime acceptance.

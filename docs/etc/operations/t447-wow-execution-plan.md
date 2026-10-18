@@ -22,6 +22,12 @@ acceptance requirements. Other fixed S3 groups remain open. See the source ledge
 
 ### S4 message closure admission and fixed source inventory
 
+The [S4 source audit](../evidence/m0-t447-s4-message-source-audit.md) now records
+the implicit-send, transient-exclusion and mixed-message findings against
+current source, with the complete eight-entry eligibility/transition review
+and the obsolete private-SMS/early-handoff assertion disposition. It is source
+evidence, not a runtime repair or new semantic approval.
+
 This is the complete source-led audit/implementation boundary, not six
 independent leaf-patch deliveries. Preserve S3's fixed functional floors and
 its recorded original-guest/host limitations. The binding approved transport
