@@ -2,6 +2,38 @@
 
 ## Admission and boundaries
 
+The owner's clarified WINMINE report concerns active cell latency, not failed
+startup. Within S4's existing shared-view/native-return boundary, the finite
+080 copied-read group has diagnostic priority. The source-complete079/343
+extension group joins its acceptance composition because formal fixtures
+refresh all provider dependencies; do not mix its definition seam with an
+old graph lacking the facade.080 reuses original CCPU linear RAM access under existing
+domain/borrow lifetime, retaining all freshness/commit timing and failure
+contracts. Build the complete worker read closure once, verify real CCPU
+borrow/graph/retirement and the ordinary/private input comparison, then run
+the retained every-P/runtime/publication gates before delivery. A source or
+performance improvement alone neither closes S4 nor drops its six fixed
+message groups, S5, S6, or M1--M6.081 extends this same closure to existing
+field writes/reference reads, retaining original CCPU write access/diagnostic
+fallback and untouched private fields.082 applies the existing approved
+route-E external observation boundary rather than resampling every foreign
+window after each operation: required local state, cold/new identities,
+explicit roots and typed payloads still capture synchronously; full-identity
+death withdrawal and structural commit remain. No timer, second cache or new
+semantic concession. Their complete CCPU lifetime and paired input groups
+precede the retained every-P gates. See the
+[quantified source audit](../evidence/m0-t447-s4-message-source-audit.md#clarified-owner-symptom-active-input-latency).
+
+P3 completes this079/080/081/082 batch and the full retained delivery gates:
+fresh native20/original30,12 S3 guest cases,6 actual default/extension message
+cases, all3-policy application frontiers, DOS17/17, modal3 and logon3, coherent
+publication and installed verification. Paired ordinary input median improves
+299.871ms to131.725ms; do not call residual stutter solved or infer physical
+mouse latency. Exact identities and retained failed probes are in that audit.
+The read-only empty-EMS-alias translation lead is not implemented or a reason
+to expand the frozen delivery. Continuing performance work must begin from
+this coherent baseline without losing the six S4 groups or subsequent S.
+
 S3 is closed at the P22 runtime/P23 interaction baseline after the
 [fixed-chain exit review](../../history/m0-t447-s3-control-dependency-closure.md).
 S4 is now the sole sequential admission under the continuing owner goal.

@@ -156,3 +156,56 @@ DWORD WINAPI MessagePeer(DWORD operation)
     check(CloseHandle(peer_ready)); peer_ready = NULL;
     return errors ? 0 : 0x447a0003;
 }
+
+/* Actual generic-thunk caller on the sender's bound task thread. Function
+ * addresses come from the production DLL's public exports, never a fixture
+ * scope owner or fabricated PTD. No User32 calls from DllMain are added. */
+DWORD WINAPI MessageExtension(DWORD operation, DWORD procedure, DWORD receiver_task)
+{
+    typedef BOOL (WINAPI *callback_ex)(DWORD,DWORD,DWORD,PVOID,PDWORD);
+    typedef DWORD (WINAPI *callback_one)(DWORD,DWORD);
+    typedef VOID (WINAPI *yield_proc)(VOID);
+    typedef VOID (WINAPI *directed_proc)(WORD);
+    HMODULE wow = GetModuleHandleA("WOW32.DLL");
+    callback_ex extended;
+    callback_one simple;
+    yield_proc yield;
+    directed_proc directed_yield;
+    FARPROC raw;
+    DWORD arguments[8] = {0x12345678}; /* Original PARM16 capture extent. */
+    DWORD value = 0x447affff, first, second, report[10], written;
+    HANDLE output;
+    BOOL invalid;
+    if (!wow || operation != 0x79 || !procedure || !receiver_task ||
+            receiver_task > 0xffff || GetCurrentThreadId() != sender_thread) return 0;
+    raw = GetProcAddress(wow,"WOWCallback16Ex"); if (!raw) return 0;
+    memcpy(&extended,&raw,sizeof(extended));
+    raw = GetProcAddress(wow,"WOWCallback16"); if (!raw) return 0;
+    memcpy(&simple,&raw,sizeof(simple));
+    raw = GetProcAddress(wow,"WOWYield16"); if (!raw) return 0;
+    memcpy(&yield,&raw,sizeof(yield));
+    raw = GetProcAddress(wow,"WOWDirectedYield16"); if (!raw) return 0;
+    memcpy(&directed_yield,&raw,sizeof(directed_yield));
+    SetLastError(ERROR_SUCCESS);
+    invalid = !extended(procedure,0,MAXDWORD,NULL,&value) &&
+        GetLastError() == ERROR_INVALID_PARAMETER && value == 0x447affff;
+    check(invalid);
+    check(extended(procedure,0,sizeof(DWORD),arguments,&value));
+    first = value;
+    check(first == 0x447a0079);
+    second = simple(procedure,0x12345678);
+    check(second == 0x447a0079);
+    yield();
+    check(PostMessageA(receiver_window,0x475,0,0));
+    directed_yield((WORD)receiver_task);
+    report[0] = 0x54584547; /* GEXT */
+    report[1] = (DWORD)errors;
+    report[2] = GetCurrentProcessId();report[3] = GetCurrentThreadId();
+    report[4] = receiver_task;report[5] = first;report[6] = second;
+    report[7] = 1;report[8] = 1;report[9] = invalid;
+    output = CreateFileA("MSGEXT.BIN",GENERIC_WRITE,0,NULL,CREATE_NEW,FILE_ATTRIBUTE_NORMAL,NULL);
+    if(output == INVALID_HANDLE_VALUE) return 0;
+    check(WriteFile(output,report,sizeof(report),&written,NULL) && written == sizeof(report));
+    check(CloseHandle(output));
+    return errors ? 0 : 0x447a0079;
+}

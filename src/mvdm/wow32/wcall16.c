@@ -514,7 +514,9 @@ DWORD WOWCallback16(DWORD vpFn, DWORD dwParam)
 
     vp = (VPVOID) sizeof(dwParam);
 
-    CallBack16(RET_WOWCALLBACK16, &Parm16, (VPPROC)vpFn, &vp);
+    /* DIVERGENCE(MVDM-HOST-DIV-343): rejected admission did not call guest. */
+    if (!CallBack16(RET_WOWCALLBACK16, &Parm16, (VPPROC)vpFn, &vp))
+        return 0;
 
     return (DWORD)vp;
 }
@@ -574,13 +576,15 @@ BOOL WOWCallback16Ex(
 
     *pdwRetCode = cbArgs;
 
-    CallBack16(RET_WOWCALLBACK16, (PPARM16)pArgs, (VPPROC)vpFn, (PVPVOID)pdwRetCode);
-
-    return TRUE;
+    /* DIVERGENCE(MVDM-HOST-DIV-343): preserve the original argument/store
+     * order, but propagate the now-fallible execution admission. */
+    return CallBack16(RET_WOWCALLBACK16, (PPARM16)pArgs, (VPPROC)vpFn, (PVPVOID)pdwRetCode);
 }
 
 
-BOOL CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVOID pvpReturn)
+/* DIVERGENCE(MVDM-HOST-DIV-343): admit execution before original frame access;
+ * keep same-unit callers on the public-shaped entry and this body intact. */
+BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVOID pvpReturn)
 {
 #ifdef DEBUG
     static PSZ apszCallBacks[] = {

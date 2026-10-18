@@ -5,7 +5,8 @@ param(
  [Parameter(Mandatory)][string]$CompilerDriver,
  [Parameter(Mandatory)][string]$BuildRoot,
  [ValidateSet('Off','Win16','All')][string]$Win16Style='Off',
- [string]$Nasm='nasm.exe'
+ [string]$Nasm='nasm.exe',
+ [switch]$NativeExtension
 )
 # Entire actual-guest message group. Invoke as an owned hidden background run.
 # No original guest is changed or rebuilt; only independently authored probes.
@@ -39,12 +40,13 @@ try{
  foreach($role in @('SEND','RECV')){
   $arguments=@('-f','bin','-o',"$root/MSG$role.EXE",'-l',"$root/$role.lst")
   if($role -eq 'RECV'){$arguments+='-DRECEIVER'}
+  if($NativeExtension){$arguments+='-DEXTENSION_WITNESS'}
   & $assembler @arguments $assembly *> "$root/$role-assemble.txt"
   if($LASTEXITCODE){throw "Independent $role assembly failed"}
  }
  Push-Location $root
  try{
-  & $CompilerDriver cl.exe /nologo /LD /MT /O2 /W4 /WX /D_CRT_SECURE_NO_WARNINGS "/Fo$root/peer.obj" $native /link "/OUT:$root/MSGHOST.DLL" "/IMPLIB:$root/MSGHOST.lib" /EXPORT:MessagePeer=_MessagePeer@4 user32.lib *> "$root/native-build.txt"
+  & $CompilerDriver cl.exe /nologo /LD /MT /O2 /W4 /WX /D_CRT_SECURE_NO_WARNINGS "/Fo$root/peer.obj" $native /link "/OUT:$root/MSGHOST.DLL" "/IMPLIB:$root/MSGHOST.lib" /EXPORT:MessagePeer=_MessagePeer@4 /EXPORT:MessageExtension=_MessageExtension@12 user32.lib *> "$root/native-build.txt"
   if($LASTEXITCODE){throw 'Native peer build failed'}
  }finally{Pop-Location}
  Get-FileHash $assembly,$native,$PSCommandPath,"$root/MSGSEND.EXE","$root/MSGRECV.EXE","$root/MSGHOST.DLL"|Export-Csv -NoTypeInformation "$root/probe-inputs.csv"
@@ -92,7 +94,7 @@ public static class WowMessageLogonEnvironment {
  if(!$process.WaitForExit(70000)){throw 'Actual message group deadline'}
  $process.WaitForExit();$process.ExitCode|Set-Content "$root/observer-exit.txt"
  # Preserve short/failed reports before asserting success; no failed-row replay.
- foreach($name in @('MSGSEND','MSGRECV','MSGHOST')){
+ foreach($name in @('MSGSEND','MSGRECV','MSGHOST','MSGEXT')){
   if(Test-Path "$tests/$name.BIN"){Copy-Item "$tests/$name.BIN" "$root/$name.bin"}
  }
  $send=Read-GuestReport "$root/MSGSEND.bin" sender
@@ -102,11 +104,12 @@ public static class WowMessageLogonEnvironment {
  if(($send.phase -join ',') -ne '0,1,2,3,4,6' -or ($receive.phase -join ',') -ne '0,5,6' -or
     @(@($send)+@($receive)|Where-Object errors -ne 0).Count){throw 'Guest message phase/assertion failure'}
  $last=$send[-1];$peer=$receive[-1]
+ $expectedNative=if($NativeExtension){5}else{4}
  if(!$last.task -or !$peer.task -or $last.task -eq $peer.task -or $last.peerTask -ne $peer.task -or
     @($send|Where-Object task -ne $last.task).Count -or @($receive|Where-Object task -ne $peer.task).Count -or
     $last.role -ne 0 -or $peer.role -ne 1 -or $last.nested -ne 2 -or $last.same -ne 2 -or
     $last.early -ne 1 -or $last.posted -ne 1 -or $last.filtered -ne 1 -or $last.threadpost -ne 1 -or
-    $last.text -ne 1 -or $last.native -ne 4 -or $last.destroyed -ne 1 -or
+    $last.text -ne 1 -or $last.native -ne $expectedNative -or $last.destroyed -ne 1 -or
     $peer.basic -ne 1 -or $peer.nested -ne 1 -or $peer.early -ne 1 -or $peer.posted -ne 1){throw 'Incomplete actual Win16 message contract'}
  $bytes=[IO.File]::ReadAllBytes("$root/MSGHOST.bin")
  if($bytes.Length -ne 48 -or [Text.Encoding]::ASCII.GetString($bytes,0,4) -ne 'NMSG'){throw 'Missing native peer report'}
@@ -116,12 +119,23 @@ public static class WowMessageLogonEnvironment {
  if($nativeReport.errors -or !$nativeReport.pid -or $nativeReport.exit -or $nativeReport.windowAlive -or
     $nativeReport.received -ne 4 -or $nativeReport.nested -ne 1 -or $nativeReport.replied -ne 1 -or $nativeReport.text -ne 1 -or
     @(@($nativeReport.senderThread,$nativeReport.receiverThread,$nativeReport.nativeThread)|Where-Object {$_}|Sort-Object -Unique).Count -ne 3){throw 'Native peer identity/receive/result/lifetime failure'}
+ if($NativeExtension){
+  $ext=[IO.File]::ReadAllBytes("$root/MSGEXT.bin")
+  if($ext.Length -ne 40 -or [Text.Encoding]::ASCII.GetString($ext,0,4) -ne 'GEXT'){throw 'Missing original native-extension witness'}
+  $names=@('signature','errors','pid','thread','receiverTask','extendedCallback','simpleCallback','yield','directedYield','invalidSizeRejected');$extension=[ordered]@{}
+  for($i=0;$i -lt 10;$i++){$extension[$names[$i]]=[BitConverter]::ToUInt32($ext,4*$i)}
+  $extension|ConvertTo-Json|Set-Content "$root/extension.json"
+  if($extension.errors -or $extension.pid -ne $nativeReport.pid -or $extension.thread -ne $nativeReport.senderThread -or
+     $extension.receiverTask -ne $peer.task -or $extension.extendedCallback -ne 0x447a0079 -or $extension.simpleCallback -ne 0x447a0079 -or
+     $extension.yield -ne 1 -or $extension.directedYield -ne 1 -or $extension.invalidSizeRejected -ne 1){throw 'Native callback/yield/original-argument identity mismatch'}
+ }
  $trace=Get-Content "$root/lifetime.txt" -Raw
  foreach($task in @($last.task,$peer.task)){
   $identity='{0:X8}' -f [int]$task
   if([regex]::Matches($trace,'(?m)^'+$nativeReport.pid+' TaskRetirement .*task='+$identity+' stage=complete status=0\r?$').Count -ne 1){throw 'Each actual task must retire exactly once in the verified worker'}
  }
  'PASS actual USER16 two-task same-worker send/nesting/reply/post/filter/quit/string-copyback, native peer both directions and normal task retirement'|Set-Content "$root/result.txt"
+ if($NativeExtension){'PASS actual original generic thunk -> public WOWCallback16/Ex -> guest -> sibling send; WOWYield16/DirectedYield16; invalid Ex arguments; normal task retirement'|Set-Content "$root/extension-result.txt"}
  @{unproved='Cross-worker, external native process/bitness, implicit focus receive, full converted structures, SMTO_BLOCK and receiver death during pending send remain S4 obligations';largeEnvironment='Known original guest limitation not repaired by logon-block acceptance'}|ConvertTo-Json|Set-Content "$root/limits.json"
  0|Set-Content "$root/exit.txt"
 }catch{$_|Out-String|Set-Content "$root/failure.txt";1|Set-Content "$root/exit.txt";exit 1}

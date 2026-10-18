@@ -226,6 +226,437 @@ the first bad binary. Those limits prevent declaring the owner's particular
 failure causally solved. No guest patch, environment truncation, workaround,
 new production fix or publication is claimed.
 
+### Renewed owner report: installed P2 startup comparison
+
+The owner again reports that ordinary `run16 winmine` is extremely slow or
+frozen. This takes diagnostic priority over the unbuilt079/343 extension
+group; none of that group's source is installed. At observation start there
+were no surviving installed project processes to inspect. Installed WOW32 and
+assets/release both hash F3FD174A25B72EC17274979B6F24A1C5C5314A9E025BD233847356F9F45680F2;
+installed NTVDM matches the formal r003 image and its link map at
+12DA2E8FCFFB35B724791F7356C1A9A87A5208442928C29127415AE8DC812705.
+
+`build/M0-T447/S4/installed-mine-regression-r2` runs the same committed
+`verify-wow-logon-gameplay.ps1 -Installed` against O:/winnt, then
+`observe-wow-frontiers.ps1 -VisibleDesktop -WaitTarget -Guests WINMINE.EXE`.
+The hidden owned supervisor records PID/start/commands, deadlines,13 installed
+hashes, environment shapes, reports and captured game surfaces. The complete
+Userenv logon block has45 entries/3349 characters, without filtering. Off,
+Win16 and All pass flag/counter change, reset, opening a cell, WM_CLOSE and
+normal launcher exit0. Window-ready phase times are5922/6000/5704ms; the
+subsequent board-ready phases are2593/2391/1843ms. These are probe phase times,
+not end-to-end owner-shell measurements or acceptable-performance claims.
+
+The inherited developer shape is78 entries/5983 characters. At4236ms its
+worker has no Minesweeper main window and a hidden error dialog reporting
+`CS:05e3 IP:20c2 OP:63 61 6c 5c 54`. The launch times out with0x53504354.
+The observer's exit0 records completed observation/identity-pinned cleanup,
+not guest success. Hidden diagnostic dialog visibility is not evidence that
+the owner's ordinary CMD hides the same dialog. This independently repeats
+the earlier environment-dependent failure on P2; it does not establish the
+owner's exact environment, failed phase or first-bad release.
+
+A supplemental `installed-mine-cpu-r1` compiles the existing read-only
+`ccpu_worker_snapshot.c` using x86/MT/O2 in its own build directory, then uses
+the verified matching NTVDM link map. Three non-atomic samples at about5s
+remain in real mode (CR0=10h, CS0216/IP062E, `nt_init_called=0`); the window
+snapshot has no application/error window and this separate18s observation
+also times out. Do not interpret a timer-interrupt stack as an exception
+frame or its heuristic EnvSiz candidate as a proved COMMAND variable. This
+run establishes a pre-WOW stalled sample, not the writer cause. An earlier
+attempt to use a retained probe with the wrong map filename returned64 and
+produced no CPU evidence; it is not counted as a pass.
+
+No product/guest/profile/ZIP change, publication, rollback or repair is
+claimed. All diagnostics finish and clean their exact owned installed process
+identities. The prior source-proven discarded-INIT limitation remains relevant
+but is not automatically assigned to the owner's new instance. The remaining
+discriminator is whether the reported owner launch never presents a main
+window or presents one that stops responding; request that distinction rather
+than treating the passing controlled launch as resolution.
+
+### Clarified owner symptom: active-input latency
+
+The owner clarifies that WINMINE's window appears normally; clicking a cell
+responds slowly. This is not the inherited-environment failed-startup control.
+The previous diagnostic turn was progress (two distinct installed-startup
+controls and exact P2 identity), but it did not investigate this clarified
+symptom. No startup failure is used to dispose of this performance report.
+
+Source tracing identifies the complete existing hot path before measuring:
+native queue/dispatch/input/default-control call returns through
+`wow_user_native_call_end`, which calls `publish_call_windows`,
+`wow_user_borrow_client_graph`, and `wow_menu_client_refresh_all`.
+`project_graph` copies all committed window observations, samples them and
+closes their relationships before a complete graph commit. Borrowed client
+graphs and menu refresh then reread the same backing through
+`copy_window_observation`. WND rectangles/relationships/class fields and each
+class-name byte use separate CCPU SAS accesses. Original ccpu386/ccpusas4.c
+implements c_sas_loads as a byte loop; phy_r32 splits into word accesses.
+Each ultimately repeats the session/physical mapping path. This is not an
+original Win16 application algorithm or an NTVWM/NTCON frame transport.
+Blame attributes the copied observation reader to ead0aa64a0 and the complete
+native-return graph/menu chain to cf2ac95206/984ee0441a/01cb95ad9c and later
+borrow composition; those source attributions are not a first-bad runtime
+bisect or a claim that P2 alone introduced the slowdown.
+
+The new reproducible group is
+`tests/observation/verify-wow-mine-latency.ps1`, using the existing actual
+WINMINE identity/pixel helpers, plus `wow_mine_latency_probe.c` and the existing
+read-only `wow_native_pc_sample.c` with optional bounded rounds/QPC stamps.
+It posts twelve right-click down/up pairs, requires twelve actual cell-pixel
+changes, restoration of the initial board, WM_CLOSE and normal run16 exit.
+A test-owned event starts sampling only after the real board is ready.
+The summary filters native PCs to the QPC interval of those actual inputs;
+startup and later idle samples cannot dominate the active-input histogram.
+This is posted-input-to-pixel latency, not physical mouse-device latency.
+
+Installed P2 baseline `build/M0-T447/S4/mine-input-latency-r1` completes all
+three serial cases using the complete Userenv logon block, without filtering
+or product/guest/profile changes. Matching NTVDM and WOW32 maps and image
+hashes are checked before use and copied into the sealed evidence. Results:
+
+| Case | Inputs | Median | Mean | Min--max |
+| --- | --- | --- | --- | --- |
+| Ordinary desktop, no sampler | 12 | 480.635ms | 491.298ms | 296.918--626.532ms |
+| Ordinary desktop, sampler | 12 | 424.013ms | 436.531ms | 239.169--615.700ms |
+| Private desktop, no sampler | 12 | 31.594ms | 33.464ms | 30.497--50.970ms |
+
+The ordinary/private median ratio is15.21, with identical images and the same
+original application. There are296 PCs from the busiest task thread within
+the5.256s active-input interval.165/296 (55.7%) fall in scalar SAS/session/
+lease/physical translation helpers;74/296 (25%) are in win32u. Explicit
+copy_window_observation and other page-domain/graph routines also appear.
+These are unweighted statistical samples with nearest-MAP attribution,
+not complete call stacks or exact exclusive CPU percentages. Sampling
+perturbation/run variability is visible in the separate sampled case.
+The result demonstrates a severe ordinary-desktop-dependent adaptation cost,
+not a universal15x speedup promise for a proposed repair.
+
+ADAPTER-WOW-080 is the finite first remediation group: preserve every current
+native observation, structural validation, atomic commit and borrow lifetime;
+reuse the already selected original CCPU c_GetLinAdd for bounded immediate
+copies of the page-domain's known WND/CLS RAM. No cache, alternate state
+owner, reduced refresh rate, external-freshness waiver, scheduler replacement,
+guest edit or new mirror diff. The fixed copied-read closure comprises the
+committed observation reader and outstanding-borrow WW-view reader. All
+callers already require the active original domain/session/CR3 and committed
+or pinned allocation. Original nt_mem rounds these allocations to pages;
+the copied WND176/CLS108/inline-name256 spans fit the known RAM page. A
+non-fitting span and a noncanonical class-name pointer keep the original SAS
+path. Native aliases are consumed by immediate CopyMemory only and never
+stored, returned, serialized or used across callbacks/teardown. This is the
+first usable original service through the existing owner, not a new generic
+pointer manager. Registration precedes implementation in ntvdm-exe/README.
+
+The actual CCPU fixture adds immediate backing-edit visibility, exact class
+descriptor/name, caller error preservation, cross-page noncanonical name
+fallback, wrong-CR3 refusal with unchanged output, and recovery after restoring
+the directory. Existing retained-generation, reuse, failed-free, class and
+borrow tests remain required. Stage the whole read closure, then compile it
+once and run its lifecycle group and the identical latency comparison before
+deciding whether it sufficiently addresses the reported responsiveness.
+Two runner-composition failures are retained, not performance passes.
+Read-build-r1 links the optimized worker, but additionally selects an old
+unqualified page-domain test target that omits the current fixture's borrow
+profile; its undeclared test-only identifiers fail compilation. The formal
+window-borrow/reclaim/graph rows select the complete current CCPU fixture.
+Read-build-r2 uses those rows, but their intentional refresh of all provider
+objects picks up the preserved staged343 definition rename without regenerating
+the provider graph for its079 facade, so the fixture link correctly refuses
+missing CallBack16. Do not undo that seam, weaken the test refresh, or count
+old-object linkage as current-source verification.
+
+Consequently the source-complete079/343 group joins080's build/acceptance
+composition. This is the previously admitted extension group, not a new
+capability expansion or a reason to lose the input-latency priority. Its final
+kernel RET audit also traces GETCURDIR/SETCURDIR to the exact kernel
+drive/directory routines in read-only wow16cal.asm; those explicit service IDs
+may use the already restricted resource-live cleanup admission. Application,
+Hook, WinExec, task-exit and foreground-idle IDs remain refused during dying
+task cleanup. The supplementary fixture includes both directory IDs.
+Native extension units, actual original MM body/public refusal/frame checks,
+real extension guest witnesses and all retained floors remain required.
+Installed P2 is unchanged. No performance repair, release or S4 closure is
+claimed from the source or either failed runner.
+
+Read-build-r3 exposes a declaration-closure defect: lifecycle.h after original
+precomp repeats unguarded wowuserp.h. Unchanged native-call struct/prototypes
+now have one small wow_user_native_call.h owner, included transitively by
+lifecycle.h; the thunk facade needs only this closure. No ABI/mirror change.
+Read-build-r4 links both production images; the original-MM supplementary
+object link additionally needs three untested resolver references before dead
+stripping. Its MM-only fixture now makes those exact references ExitProcess98
+if reached, never a successful fake mapping. General memory/GDI resolution
+and MMSYSTEM16-family behavior are not proved by this selected-MM-body test.
+
+Read-build-r5 links worker/provider and passes all079 supplements: scoped
+wrappers, actual original MM arguments/directory ordering/zero target/exception,
+original public callback refusal and four original frame phases. The first
+window-borrow run fails real native-slot reuse:663 attempts within the existing
+15s deadline do not obtain the old slot; new copied-read assertions report0
+errors. This is a failed acceptance run. `mine-view-lifetime-r1` repeats the
+exact binary without source/timeout/assertion changes: both reuse modes obtain
+the old slot on attempt1 and the complete CCPU fixture exits0. Fresh formal
+window-reclaim and graph-snapshot also pass retained/reused generations,
+failed frees, irreversible class failure and cleanup. The first allocation
+witness failure is retained, not declared repaired by a later pass.
+
+`mine-view-read-performance-r3` is explicitly diagnostic/non-publishable while
+that gate is failed. Canonical ZIP staging uses all13 verified baseline images
+and complete logon environments, never a copy of the installed tree. Its
+worker-only sensitivity control replaces NTVDM with
+41ECBAC3E612B255CBB6015196C7F9A796F8875DC52DF06B332CFFF29631F971,
+keeping P2 F3 WOW32 and its sealed matching map. All three twelve-input cases
+and normal exits pass: ordinary median220.459ms, mean210.676ms,
+range91.832--250.662ms; sampled median231.076ms; private median30.457ms,
+range29.765--31.980ms. Ordinary median improves2.18x against480.635ms while
+the private floor hardly changes. This proves a contribution, not resolution:
+220ms remains slow and active samples retain mapping/view/graph/native costs.
+
+The composed-provider comparison does not pass. Initial readiness accepts a
+transient patterned cell1e192115; the first timed1.698ms change is actually the
+covered cell3cc8733b appearing. Later inputs follow flag/question/covered, so
+the retained final-restoration assertion correctly fails at exit71. Exclude
+that run from performance statistics; it does not establish broken game input.
+The next probe must establish completed owned-window painting before arming,
+use identical setup for compared versions and keep the final-cycle assertion.
+
+All above supervisors are terminal. Installed/assets P2, guest and configuration
+are unchanged. Actual079 guest extension evidence, corrected composed latency,
+remaining responsiveness work, every-P floors and coherent publication/review/
+commit/push remain outstanding. This dirty source is staged, not a delivered P
+or a request for owner testing. S4's six groups and S5/S6 remain intact.
+
+#### Continued latency group: paired measurement and owned-field publication
+
+The owner reports improvement but still noticeable latency and requests
+continued optimization. Installed P2 has not been replaced; that subjective
+improvement cannot be attributed to the unpublished080 candidate.
+
+Correction to the preceding terminal-supervisor statement: failed composed
+performance-r3 left its owned stage broker34976/worker7816 alive. The verifier
+disposed the failing probe before throwing, then its finally accessed the
+disposed process and aborted remaining cleanup. Finish-Owned now retains the
+process object on failure for its finally owner. Exact stage/path/start/report
+identities were recorded in performance-r3/late-owned-cleanup.json and those
+two owned processes closed; the original failed stage was retained. This was
+a harness cleanup defect, not evidence of normal product retirement.
+
+Performance-r4 correctly refuses that live old endpoint. R5's readiness fails
+because it checks an occluded board before raising the owned window. R6 raises
+and finishes painting the owned window before the unchanged patterned-board
+and twelve-change/final-cycle checks. Both baseline and candidate use this
+identical setup; force-paint completion is outside the measured input interval.
+R6 exits0 in all six cases with normal launcher exit0:
+
+| Image set | Ordinary median | Sampled median | Private median |
+| --- | --- | --- | --- |
+| Published P2 | 379.627ms | 293.202ms | 31.905ms |
+| Composed079/080 | 200.988ms | 199.250ms | 29.611ms |
+
+These are posted-input-to-pixel measurements, not physical mouse latency.
+The ordinary first input is an outlier in both sets:2190ms versus598ms;
+retain it in the mean/tail rather than dropping warmup. The paired ordinary
+median improvement is1.89x, not the earlier worker-only2.18x under a different
+run. A commentary estimate of approximately190ms preceded the completed
+summary; the exact candidate median is200.988ms. Runtime images remain local.
+
+The next finite081 group covers the same allocated view's field-write and
+reference-read closure. Source audit traces original ccpusas4.c
+bios_write_double and c_tlb.c xtrn2phy: original access request is PG_W,
+PG_U when CPL!=3, plus accessed/dirty handling in VM. Reuse that exact service
+and c_GetPhyAdd for immediate same-page WND field copies, retaining original
+scalar stores on failed translation, non-fitting spans or active descriptor
+diagnostics. Do not use read-only c_GetLinAdd to write or introduce a new page
+mapper/cache. The allocated nt_mem RAM is not VGA/device memory; no alias
+survives its synchronous copy or crosses a callback/native boundary.
+
+Only the existing rectangle/style fields and four relation fields are written;
+other original WND data remains untouched. The collector's existing allocated
+WND references use the same bounded read helper without changing reachability,
+sort/free/retry rules. No freshness reduction or external observation policy
+change is selected. The original service is directly available behind the
+existing adapter, so no mirror intrusion or new behavior engine is needed.
+ADAPTER-WOW-081 is registered before source implementation; added mirror and
+guest diff is0. Actual CCPU tests add both fast/trace-fallback refresh, exact
+native rectangles/styles and sentinels in four untouched private fields;
+existing wrong-directory, graph rollback, retained generation/reuse/free
+failures remain strict. Group compilation/lifecycle and paired timing are
+required before any publication claim.
+
+081 field-build-r1 links both images and passes the full079 supplements.
+Its window-borrow executable exits2 with empty output before run_fixture:
+the limited sandbox denies CreateDesktop in main, not a removed-message
+assertion failure. The high-level verifier's missing-marker error alone was
+misleading. Field-lifetime-r1 repeats that exact binary with required desktop
+permission, without source/assertion/budget changes: complete window-borrow
+exits0. Formal fresh reclaim/graph groups also exit0; frozen sources and
+linked outputs are captured. Later diagnostic launches use that permission.
+
+Field-performance-r1 refuses the failed original prerequisite and starts no
+runtime. Field-performance-r2 requires the passing complete lifetime group;
+all six timing/normal-exit cases pass. Candidate NTVDM is
+8171A66D17AC51420CB58299675DD654EED9A64947C3E3597C1B2FE1C47584BA,
+WOW32 BB7FE03A705D2E23B69299F8DB67262D7C062EDBA25CF1B5C61DE297BD00BFDD.
+Paired ordinary medians are294.484ms P2 and221.220ms candidate; sampled
+296.948ms versus94.796ms; private30.011ms versus32.359ms. This is substantial
+run/desktop variability, not proof that081 by itself improves on080's201ms
+ordinary measurement. Keep correct bounded mechanics without claiming an
+unsupported incremental speedup. All69 candidate active sampled PCs fall in
+win32u; suspension/context sampling has syscall bias and is not exclusive CPU
+profiling or proof of a specific native function's self time.
+
+Actual extension-guest-r1 passes the unchanged default message group in all3
+styles. Its extension-Off case fails a test ordering assumption: MSGEXT.BIN
+actually exists and records errors0, both real callbacks447A0079, correct
+receiver178F task and native thread, both original yield calls and invalid-size
+rejection. Sender then tests its acknowledgement before the receiver's posted
+475 has completed. Original WOWDirectedYield16 merely calls pfnDirectedYield;
+it is not a posted-message completion barrier. The independent probe now
+waits through original GetMessage for an explicit receiver completion478,
+which follows the existing synchronous476 acknowledgement, retaining exact
+callback/count/identity/retirement assertions. No runtime change or scheduling
+waiver is made for that failure. Extension-guest-r2 actual Off passes with
+errors0, both callbacks447A0079 and correct final retirement. R3 repeats the
+default and extension groups across all3 policies with this explicit protocol.
+
+082 follows the already approved route-E contract, not a new compatibility
+choice. Source project_graph currently re-queries every represented foreign
+window even though CURRENT/route E permit its committed consistent snapshot.
+Reuse only complete, live, nonzero-foreign-PID rows in the one page-domain
+view. Local PID rows, cold rows, explicit roots/typed payloads and new edge
+targets still capture at the current boundary. IsWindow and full identities
+still withdraw dead observations; structural normalization, replacement,
+retained readers and atomic commit are unchanged. No second cache, dirty flag,
+timer or private native state is added. Original shared-memory USER cannot be
+used as a modern cross-process state source; this is the smallest existing
+adapter application of the already accepted external-observation boundary.
+Registry row ADAPTER-WOW-082 precedes implementation; mirror/guest delta0.
+
+The actual cross-process hold fixture changes native help-ID via the public
+SetWindowContextHelpId service, proves native authority changed while local
+publication keeps the committed external row, then explicitly discovers that
+external full identity and requires its new ID. Existing32 local updates,
+dead-native copied commit, stale-edge normalization, generation reuse and
+retirement remain. New marker WOW_EXTERNAL_REFRESH_BOUNDARY_CCPU must be0 in
+the full graph verifier. Build waits for the earlier real-message cohort to
+finish before changing mutable images; timing waits for all lifetime gates.
+No082 acceptance result or publication is inferred from its source.
+
+Extension-guest-r3 completes all6 actual default/extension style cases with
+normal retirement. External-view-build-r1 passes its original-body/CCPU
+borrow/reclaim/graph checks, including the initial external snapshot marker.
+Its performance-r1 passes six timing/normal-exit cases: ordinary279.716ms P2
+versus133.558ms candidate; sampled299.854ms versus132.133ms; private32.076ms
+versus31.830ms. That is an intermediate082 input: source review identifies
+explicit foreign native mutation as another required root, not optional
+desktop observation. It cannot be delivered before this dependency composes.
+
+The existing native-call carrier now retains the explicit operand's known full
+HWND on entry, only when valid, then includes that identity with returned and
+typed roots on return. Invalid input keeps its native failure/result/error;
+dead full operands are not revived. The call-local value is not a new registry
+or native lifetime pin. The cross-process fixture additionally binds the real
+provider native-call boundary and requires SetWindowContextHelpId's foreign
+target to become visible immediately without a separate discovery. It uses
+the existing fixture's controlled resource task owner, not an actual Win16
+task-termination or mixed-process guest acceptance claim. The strict marker
+adds native_mutation=1.
+
+External-view-build-r2 passes the entire composed worker/provider/079 units
+and actual CCPU borrow, reclaim and graph groups, including this final marker.
+Frozen worker8171A66D17AC51420CB58299675DD654EED9A64947C3E3597C1B2FE1C47584BA
+and WOW32 5AA564051EE87A3815FC03A751F06A4FAD57A53B44C499733A9F0FF0ED63EB6D
+compose082's complete known-operand boundary. Performance-r2 passes all six
+cases with normal launcher exits and12 actual changes/restoration per case:
+
+| Final paired inputs | Ordinary median | Sampled median | Private median |
+| --- | --- | --- | --- |
+| Published P2 | 299.871ms | 296.888ms | 31.691ms |
+| Final079/080/081/082 | 131.725ms | 131.884ms | 32.257ms |
+
+This is2.28x paired ordinary improvement, still about4x the private floor.
+It is not a claim of fully eliminated stutter. Existing original-body/native/
+actual guest/application/DOS/modal/logon gates are now queued serially in
+mine-release-acceptance-r1 after these completed lifetime/performance gates.
+No source changes may invalidate its frozen build. Publication/review/main
+commit/push are still pending; installed/assets P2 remains unchanged.
+
+Read-only follow-up, not another admitted code expansion during these gates:
+CCPU c_GetPhyAdd enters the EMS-alias translator even when aliases is empty;
+that translator runs session_valid, including a binding-count interlocked
+read and lease-shape validation, before the empty traversal. The physical
+page resolver itself is indexed by page, not a per-allocation linear search;
+reject the initial quadratic-physical-map hypothesis. An empty-alias early
+negative may be worthwhile only after proving the same output/null/invalid-
+owner and alias lifecycle behavior. No change, measurement or speedup is
+claimed for that lead, and it does not expand or delay this frozen delivery.
+
+Second-role prepublication source review covers the actual staged079/080/081/
+082 diff, not only the green examples.079's per-TU aliases reach the retained
+original generic/MM bodies and native loader leaves; same-unit wkgthunk has
+no additional calls to its renamed Yield exports. The CallBack16 definition
+seam preserves its body/ASM/frame and propagates only denied admission at the
+two public entries. The narrow native-call header removes duplicate unguarded
+original declarations without changing the existing fields' meanings.
+080/081 aliases are immediate, same-page allocated-view operations under
+existing domain/session/CR3/lifetime prerequisites, never arbitrary guest RAM
+or a read mapping used to write. Trace/mapping fallback and untouched fields
+remain explicit.082 uses actual captured PID, not cleanup enrollment, to keep
+all worker-local objects synchronous; explicit known target/returned/payload
+identities refresh separately from optional foreign observations. IsWindow
+does not pin a native lifetime or promise future global freshness. Full
+structural preparation/commit/retention and native result/error restoration
+remain unchanged. No alternate message transport, scheduler, resource-state
+authority, permanent cache, helper HWND or guest-image edit is introduced.
+
+The fresh selected-source audit is278 files:192 exact,86 registered content
+differences,222 compile owners,0 gaps. This is the selected total, not a claim
+that343 adds86 differences.343 adds one registered host-source exception at
+three sites in an already divergent wcall16.c;080/081/082 add0 mirror files or
+guest diff. Controlled-scope/MM link supplements are not actual guest proof;
+the separate six real default/extension cases and retained floors are required.
+Actual MM arguments/zero/directory/exception evidence does not close the whole
+MMSYSTEM16 family. Remaining S4 M1--M6, S5 termination and WRITE editing/save/
+normal-exit frontiers remain open; this performance/native-extension delivery
+cannot be substituted for full WOW recovery.
+
+#### P3 verified runtime delivery
+
+Mine-release-acceptance-r1 exits0 after the frozen external-view-build-r2
+inputs: focused task-order/native identity/reply/seen, selected-source audit,
+fresh native20, both-width style boundary, original30, resource/menu guards,
+all12 actual S3 guest groups, all6 real default/extension message groups,
+WINMINE/SOL gameplay and normal close under Off/Win16/All, WRITE's same four
+startup samples per policy, Console17 and Window17, native modal3 and whole-
+logon gameplay3. WRITE editing/save/full exit and remaining S4 families are
+still not proved. The standalone pure-native modal reference r4 is reused
+only after its source/observer/executable hashes match; it has no WOW/worker
+dependency. These checks do not certify physical mouse input or every pixel.
+
+Mine-published-r1 backs up the prior coherent set and publishes the tested13
+to assets/release and O:/winnt/system32. Only NTVDM and WOW32 image hashes
+change; all13 and the manifest are verified. It requires the exact timed
+candidate, actual extension input images/original guests, modal image sets
+and frozen source/build identities, not an old passing cohort. Stopped-process
+list is empty: no existing project/user session was closed. Original guest,
+user configuration and assets/winnt.zip remain unchanged. Mine-release-
+delivery-r1 then passes deployed both-width style and installed whole-logon
+WINMINE gameplay/normal exit in all3 policies, rechecks both complete release
+destinations, and exits0; rollback was not needed. The recoverable P2 set is
+retained in the publication backups.
+
+Current NTVDM is8171A66D17AC51420CB58299675DD654EED9A64947C3E3597C1B2FE1C47584BA;
+WOW32 is5AA564051EE87A3815FC03A751F06A4FAD57A53B44C499733A9F0FF0ED63EB6D.
+The paired131.725ms ordinary median remains a partial responsiveness result,
+not a claim that all stutter or all WOW execution is fixed. No earlier failed
+probe is relabelled as a pass. The unlocated older common-dialog risk,
+unskinned-menu animation TODO and immutable large-environment COMMAND limit
+remain explicit. This bounded P3 hands off source, reproducible tests,
+registered mirror/adapter exceptions and matching release assets together;
+S4, S5, S6 and the full owner goal stay open.
+
 ### Execution-frame ownership review during grouped acceptance
 
 Execution-build-r1 and its r2 no-work refresh exit0. Acceptance-r2 passes

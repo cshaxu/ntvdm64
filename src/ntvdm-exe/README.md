@@ -1,5 +1,34 @@
 # NTVDM worker owner
 
+ADAPTER-WOW-080 bounds copied-view reads to the existing page-domain owner.
+The original CCPU40 c_GetLinAdd service is reused for immediate copies of
+known allocated WND/CLS RAM that fits one translated page. This removes
+per-field/per-character SAS translation for the same immutable-at-this-edge
+storage. It is not a new memory mapper or persistent observation cache.
+The exact current domain, session and outstanding backing/class lifetime
+remain prerequisites; aliases never escape the synchronous copy. Non-fitting
+spans retain the existing scalar SAS path. Native observation frequency,
+publication, original scheduling and guest bytes/layout remain unchanged.
+The copied observation and WW-view read closure is one verification group:
+fresh fields, stale-native/committed-view distinction, retirement/reuse,
+wrong-owner/directory refusal, failure and actual ordinary-desktop input
+latency must pass before publication. Source and quantified baseline are in
+the T447 S4 message-source evidence. This entry registers staged source, not
+a passing performance result or release.
+
+ADAPTER-WOW-081 extends that owned-view closure to field publication and
+reference scans. Reuse original CCPU xtrn2phy/c_GetPhyAdd with the exact
+bios_write_double access flags, only for a same-page range in the already
+validated allocated WND/CLS RAM. Write only the previously assigned fields;
+never overwrite other original private fields. Trace-enabled, cross-page or
+failed translations retain original scalar stores. No writable alias escapes
+the synchronous operation, no mapping or dirty-state cache is introduced,
+and no guest, original memory backend or mirror is changed. Reference scans
+use the same immediate read copy; original retention/free checks stay intact.
+Required checks include fresh geometry/style/links, untouched private fields,
+trace fallback, wrong-directory refusal, rollback/retirement/reuse and the
+same actual-input comparison. This registers a candidate, not delivery.
+
 The Console input adapter bounds each original five-record read by available
 relative-mouse FIFO capacity under the original ICA lock. Only the event
 thread produces these samples; the CPU consumer frees slots. At capacity it

@@ -15,9 +15,11 @@ static ULONGLONG cpu(HANDLE thread) {
     return k.QuadPart+u.QuadPart;
 }
 int main(int argc,char **argv) {
-    DWORD target,round,n=0,i;entry threads[64];HANDLE snapshot,process;
+    DWORD target,round,n=0,i,rounds=100;entry threads[64];HANDLE snapshot,process;
+    ULONGLONG started;
     THREADENTRY32 thread={sizeof(thread)};MODULEENTRY32 module={sizeof(module)};
-    if(argc!=2 || !(target=strtoul(argv[1],NULL,10)))return 2;
+    if((argc!=2 && argc!=3) || !(target=strtoul(argv[1],NULL,10)))return 2;
+    if(argc==3 && (!(rounds=strtoul(argv[2],NULL,10)) || rounds>2000))return 2;
     process=OpenProcess(PROCESS_VM_READ|PROCESS_QUERY_INFORMATION,FALSE,target);
     if(!process)return 3;
     snapshot=CreateToolhelp32Snapshot(TH32CS_SNAPMODULE,target);
@@ -34,18 +36,22 @@ int main(int argc,char **argv) {
         }
     }while(Thread32Next(snapshot,&thread));
     CloseHandle(snapshot);
-    for(round=0;round<100;++round){
+    started=GetTickCount64();
+    for(round=0;round<rounds;++round){
         for(i=0;i<n;++i){
             CONTEXT context={0};DWORD stack[8]={0};SIZE_T bytes=0;BOOL ok=FALSE;
+            LARGE_INTEGER timestamp;
             context.ContextFlags=CONTEXT_CONTROL;
             if(SuspendThread(threads[i].handle)==(DWORD)-1)continue;
             ok=GetThreadContext(threads[i].handle,&context);
+            QueryPerformanceCounter(&timestamp);
             if(ok)ReadProcessMemory(process,(PVOID)(ULONG_PTR)context.Esp,stack,sizeof(stack),&bytes);
             ResumeThread(threads[i].handle);
-            if(ok)printf("sample=%lu tid=%lu pc=%08lX stack=%08lX,%08lX,%08lX,%08lX,%08lX,%08lX,%08lX,%08lX\n",round,threads[i].id,context.Eip,stack[0],stack[1],stack[2],stack[3],stack[4],stack[5],stack[6],stack[7]);
+            if(ok)printf("sample=%lu tid=%lu pc=%08lX stack=%08lX,%08lX,%08lX,%08lX,%08lX,%08lX,%08lX,%08lX qpc=%lld\n",round,threads[i].id,context.Eip,stack[0],stack[1],stack[2],stack[3],stack[4],stack[5],stack[6],stack[7],timestamp.QuadPart);
         }
         Sleep(10);
     }
+    printf("sampling rounds=%lu elapsed-ms=%llu\n",rounds,GetTickCount64()-started);
     for(i=0;i<n;++i){printf("cpu tid=%lu microseconds=%llu\n",threads[i].id,(cpu(threads[i].handle)-threads[i].cpu)/10);CloseHandle(threads[i].handle);}
     CloseHandle(process);return 0;
 }

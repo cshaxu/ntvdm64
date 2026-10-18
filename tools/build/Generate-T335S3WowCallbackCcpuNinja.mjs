@@ -31,7 +31,8 @@ const baseFile = path => ninjaPath(join(base, path));
 
 const lines = [
   'ninja_required_version = 1.10',
-  `cflags = ${cflags}`,
+  // Original-frame/CCPU transaction only, not the production admission seam.
+  `cflags = ${cflags} /DCallBack16=wow_original_CallBack16`,
   '',
   'rule cc',
   `  command = cmd.exe /d /s /c call ${environment} cl.exe $cflags /Fo$out $in`,

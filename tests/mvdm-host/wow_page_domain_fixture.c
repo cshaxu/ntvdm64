@@ -50,6 +50,7 @@ extern int32_t c_getCPL(void);
 extern int xtrn2phy(uint32_t linear, uint32_t access, uint32_t *physical);
 extern uint32_t c_sas_dw_at(uint32_t address);
 extern void c_sas_storedw(uint32_t address, uint32_t value);
+extern volatile LONG mvdm_softpc_wow_source_descriptor_trace_active;
 extern void c_sas_fills(uint32_t address, uint8_t value, uint32_t byte_count);
 extern void c_sas_loads(uint32_t source, uint8_t *destination, uint32_t byte_count);
 extern void phy_w32(uint32_t address, uint32_t value);
@@ -1617,6 +1618,74 @@ static void verify_observed_window_promotion(ULONG teb)
         BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_words_view(backing, &view));
         BORROW_CHECK(view.style == info.dwStyle && view.exstyle == info.dwExStyle &&
             view.module == (ULONG)(ULONG_PTR)GetModuleHandleA(NULL));
+        {
+            /* Actual CCPU-owned projection, not a host observation mock.
+             * Bulk reads must see backing edits immediately and preserve
+             * retained identity/LastError and rejection output semantics. */
+            mvdm_softpc_wow_window_observation row, rejected, untouched;
+            ULONG cls = observed_class - delta, directory = c_getCR3();
+            ULONG old_left = c_sas_dw_at(backing + 40u);
+            ULONG old_name = c_sas_dw_at(cls + 100u), alternate = 0;
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_view(backing, &row));
+            BORROW_CHECK(row.links.window == full && row.process_id == GetCurrentProcessId() &&
+                row.descriptor.atom == info.atomWindowType && !strcmp(row.descriptor.name, name));
+            c_sas_storedw(backing + 40u, 0x74478080u);
+            SetLastError(0x74478001u);
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_view(backing, &row));
+            BORROW_CHECK((ULONG)row.window_rect[0] == 0x74478080u && GetLastError() == 0x74478001u);
+            c_sas_storedw(backing + 40u, old_left);
+            BORROW_CHECK(VdmAllocateVirtualMemory(&alternate, 8192u, TRUE) >= 0);
+            if (alternate) {
+                c_sas_loads(cls + 108u, (BYTE *)row.descriptor.name, (ULONG)length + 1u);
+                /* Noncanonical pointer crossing a page retains scalar SAS.
+                 * This test edits only its independently allocated view. */
+                { extern void c_sas_stores(uint32_t, uint8_t *, uint32_t);
+                    c_sas_stores(alternate + 4094u, (BYTE *)"XYZ", 4u); }
+                c_sas_storedw(cls + 100u, alternate + 4094u + delta);
+                BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_view(backing, &row));
+                BORROW_CHECK(row.descriptor.name_bytes == 4u && !strcmp(row.descriptor.name, "XYZ") &&
+                    row.descriptor.name[4] == 0);
+                c_sas_storedw(cls + 100u, old_name);
+                BORROW_CHECK(VdmFreeVirtualMemory(alternate) >= 0);
+            }
+            memset(&untouched, 0xa5, sizeof(untouched));rejected = untouched;
+            c_setCR3(0);
+            BORROW_CHECK(!mvdm_softpc_wow_page_domain_read_window_view(backing, &rejected));
+            BORROW_CHECK(!memcmp(&rejected, &untouched, sizeof(rejected)));
+            c_setCR3(directory);
+            BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_view(backing, &row));
+            BORROW_CHECK(row.window_rect[0] == (LONG)old_left && !strcmp(row.descriptor.name, name));
+        }
+        {
+            /* Publish exactly the original public fields, not an entire WND
+             * overwrite. Exercise immediate RAM stores and trace fallback
+             * using the actual original CCPU domain in this fixture. */
+            const ULONG offsets[4] = {36u, 72u, 160u, 172u};
+            ULONG saved_fields[4], pass, k;
+            LONG trace = mvdm_softpc_wow_source_descriptor_trace_active;
+            mvdm_softpc_wow_window_observation row;
+            for (k = 0; k < 4u; ++k) {
+                saved_fields[k] = c_sas_dw_at(backing + offsets[k]);
+                c_sas_storedw(backing + offsets[k], 0x74478100u + k);
+            }
+            for (pass = 0; pass < 2u; ++pass) {
+                InterlockedExchange(&mvdm_softpc_wow_source_descriptor_trace_active, pass);
+                BORROW_CHECK(SetWindowPos(window, NULL, 11 + pass, 21 + pass,
+                    31 + pass, 41 + pass, SWP_NOZORDER | SWP_NOACTIVATE));
+                BORROW_CHECK(GetWindowInfo(window, &info));
+                BORROW_CHECK(mvdm_softpc_wow_page_domain_refresh_window(full));
+                BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_view(backing, &row));
+                BORROW_CHECK(!memcmp(row.window_rect, &info.rcWindow, sizeof(RECT)) &&
+                    !memcmp(row.client_rect, &info.rcClient, sizeof(RECT)) &&
+                    row.style == info.dwStyle && row.exstyle == info.dwExStyle &&
+                    row.links.window == full && c_sas_dw_at(backing + 76u) == observed_class);
+                for (k = 0; k < 4u; ++k)
+                    BORROW_CHECK(c_sas_dw_at(backing + offsets[k]) == 0x74478100u + k);
+            }
+            InterlockedExchange(&mvdm_softpc_wow_source_descriptor_trace_active, trace);
+            for (k = 0; k < 4u; ++k)
+                c_sas_storedw(backing + offsets[k], saved_fields[k]);
+        }
         /* Native mutation is not a new committed observation. Reading the
          * retained carrier must not secretly resample half of the fields. */
         SetLastError(ERROR_SUCCESS);
@@ -2455,6 +2524,66 @@ static void verify_external_observation_churn(BOOL hold)
             for (at = 0; at < count; ++at) if (view[at].process_id == process.dwProcessId)
                 ++external;
             BORROW_CHECK(external >= 2u);
+            for (at = 0; at < count; ++at) {
+                HWND foreign;
+                ULONG backing, previous;
+                mvdm_softpc_wow_window_observation retained;
+                if (view[at].process_id != process.dwProcessId ||
+                        (view[at].style & WS_CHILD)) continue;
+                foreign = (HWND)(ULONG_PTR)view[at].links.window;
+                previous = view[at].context_help_id;
+                /* Original route-E contract: native resource authority may
+                 * change without becoming a global freshness gate. Local
+                 * publication retains the committed external observation;
+                 * explicit discovery then synchronously refreshes it. */
+                BORROW_CHECK(SetWindowContextHelpId(foreign, 0x74478201u));
+                BORROW_CHECK(GetWindowContextHelpId(foreign) == 0x74478201u);
+                BORROW_CHECK(wow_user_window_project_graph(&local, 1));
+                backing = mvdm_softpc_wow_page_domain_borrow_window((ULONG)(ULONG_PTR)foreign);
+                BORROW_CHECK(backing != 0);
+                if (backing) {
+                    BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_view(backing, &retained));
+                    BORROW_CHECK(retained.context_help_id == previous);
+                    BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(backing));
+                }
+                BORROW_CHECK(wow_user_window_project_graph(&foreign, 1));
+                backing = mvdm_softpc_wow_page_domain_borrow_window((ULONG)(ULONG_PTR)foreign);
+                BORROW_CHECK(backing != 0);
+                if (backing) {
+                    BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_view(backing, &retained));
+                    BORROW_CHECK(retained.context_help_id == 0x74478201u &&
+                        retained.process_id == process.dwProcessId);
+                    BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(backing));
+                }
+                {
+                    static wow_user_object_table objects;
+                    wow_task_order_process owner = {0};
+                    wow_task_order_thread thread = {0};
+                    wow_task_order_entry task = {0};
+                    wow_user_runtime runtime = WOW_USER_RUNTIME_INITIALIZER;
+                    wow_user_task_lifecycle lifecycle = {0};
+                    wow_user_runtime_thread binding = {0};
+                    ZeroMemory(&objects, sizeof(objects));
+                    owner.objects = &objects;thread.ppi = &owner;thread.ptdb = &task;
+                    task.hTaskWow = 0x4321u;runtime.lifecycle = &lifecycle;
+                    BORROW_CHECK(wow_user_runtime_bind(&binding, &runtime, &thread, NULL));
+                    /* Explicit native mutation of a foreign operand must
+                     * publish on return without a separate discovery call. */
+                    BORROW_CHECK(wow_native_SetWindowContextHelpId(foreign, 0x74478202u));
+                    backing = mvdm_softpc_wow_page_domain_borrow_window((ULONG)(ULONG_PTR)foreign);
+                    BORROW_CHECK(backing != 0);
+                    if (backing) {
+                        BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_view(backing, &retained));
+                        BORROW_CHECK(retained.context_help_id == 0x74478202u);
+                        BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(backing));
+                    }
+                    BORROW_CHECK(wow_user_runtime_unbind(&binding));
+                }
+                break;
+            }
+            BORROW_CHECK(at < count);
+            fprintf(stderr, "WOW_EXTERNAL_REFRESH_BOUNDARY_CCPU errors=%u retained=1 explicit_refresh=1 native_mutation=1 local_fresh=1\n",
+                borrow_errors - before);
             SetEvent(stop);
             BORROW_CHECK(WaitForSingleObject(process.hProcess, 10000) == WAIT_OBJECT_0);
             /* Every captured external HWND is now dead. Committing this

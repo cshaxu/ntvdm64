@@ -470,7 +470,14 @@ static BOOL project_graph(const HWND *roots, ULONG root_count,
     if (!mvdm_softpc_wow_page_domain_copy_window_view(capacity, rows, &count)) goto done;
     for (i = used = 0; i < count; ++i) {
         HWND window = (HWND)(ULONG_PTR)rows[i].links.window;
-        if (capture_window(window, &captured)) rows[i] = captured;
+        /* ADAPTER-WOW-082: route E already permits retained external
+         * observations. This isn't another native desktop lock/freshness
+         * gate. Local state stays synchronous; explicit roots/payloads below
+         * still capture even when an external row is already represented. */
+        if (rows[i].process_id && rows[i].process_id != pid &&
+                rows[i].descriptor.atom) {
+            if (!IsWindow(window)) continue;
+        } else if (capture_window(window, &captured)) rows[i] = captured;
         else if (!IsWindow(window)) {
             /* Withdraw expired observations with their incoming links. This
              * includes local native controls without a WW cleanup owner. */

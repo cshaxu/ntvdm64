@@ -1,5 +1,27 @@
 # mvdm
 
+MVDM-HOST-DIV-343 registers a definition-only name binding in
+wow32/wcall16.c::CallBack16, pinned to OpenNT
+5c5b979ec08c17d3ca2eb70e8aad62d26515d01c, original SHA256
+4875844ABFB8D22025480C14174481A194779D83759CE3A696E978B68C55A9F0.
+The unchanged original frame/CPU/return algorithm is named
+wow_original_CallBack16; ADAPTER-WOW-079 supplies its existing public-shaped
+entry and pairs the existing execution scope before guest frame resolution.
+The original body always returns TRUE, so its public WOWCallback16/Ex callers
+previously ignored that result. The newly fallible admission must propagate
+FALSE as DWORD0/BOOL FALSE instead of reporting an unexecuted callback as a
+success. Budget: definition identifier, those two failure-propagation guards
+and local comments; no frame, CPU, resolver, normal-result or guest change.
+Original Ex argument prevalidation and preparation order remain. A valid but
+rejected Ex call does not promise output preservation after its original
+cbArgs store; invalid-size output remains untouched as before.
+A whole-unit rename is rejected because
+it also redirects20 same-unit memory/resource/public callback calls around the
+entry. Late host_simulate gating is rejected because frame writes precede it.
+Original-body fixtures explicitly call the retained-body name; separate scope
+and real extension/callback/yield/resource/lifetime acceptance must prove the
+composed production entry. Registration precedes the mirror edit.
+
 Retrospective MVDM-HOST-DIV-304 register completion: wcall16.c's existing
 before/simulate/after callback-frame observations call the already owned
 wow_callback_frame_trace. Original resolver, stack selection, host_simulate,

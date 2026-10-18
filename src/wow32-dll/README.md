@@ -1,5 +1,40 @@
 # WOW32 DLL target component
 
+ADAPTER-WOW-082 applies the already approved route-E external observation
+boundary to repeated publication. A committed, live external full HWND with
+a complete descriptor reuses its existing page-domain snapshot instead of
+re-querying every property after each local/native operation. Local worker
+objects, cold rows, explicit roots/typed payloads and newly reached identities
+still capture native state before the same structural validation and atomic
+commit. Dead full identities are still withdrawn; copied retention does not
+pin a native HWND. No new cache, freshness timer, state owner or mirror/guest
+diff. Native USER remains the authority and required native calls still use
+its real identities/results. The existing call-local boundary also retains
+the explicit operand's known full HWND and publishes it on native return;
+this target is not optional background observation. Verification must show stale external observation
+does not hide local updates, explicit external discovery refreshes, and dead/
+reused identities and nested readers remain correct, plus paired input timing.
+This registers a candidate within the existing approved semantic boundary.
+
+ADAPTER-WOW-079 pairs original native-extension entry and callback return.
+The existing native/callback LIFO scopes remain the sole execution carrier;
+there is no new task table, borrowed-pointer manager or scheduler. Inline
+scopes enclose original WK32ICallProc32/WMM32CallProc32 without changing raw
+argument order, callpr32 assembly or its convention/stack recovery. Native
+LoadLibraryExA/FreeLibrary/GetProcAddress aliases are restricted to wkgthunk.c;
+LoadLibraryEx remains inside its original x87 save/restore. Original exported
+Yield/DirectedYield bodies run inside a READY scope and restore the caller's
+outer native state. DIV343's original-shaped CallBack16 facade admits before
+the first original guest frame access and always leaves on unwind. Existing
+earlier pre-marshalling callbacks keep their guards. During established dying-
+task cleanup only explicit kernel memory/resource RET entries may use the
+existing early resource-live admission; application/Hook/WinExec callbacks
+retain ordinary rejection. Normal RET behavior is unchanged. First usable
+recovery rung is original bodies through these bounded services; frame-only
+definition rebinding is the necessary minimal mirror seam, not a new callback
+engine. Whole-group unit, actual guest extension and retained runtime floors
+remain required before publication.
+
 ADAPTER-WOW-078 reconnects the selected original class-unregistration client
 and the historical HWND input of the native thread/process query. Original
 wuclass/wuwind/walias bodies remain unchanged: UnregisterClassA enters the

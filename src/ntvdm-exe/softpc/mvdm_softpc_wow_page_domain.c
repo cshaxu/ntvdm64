@@ -20,6 +20,11 @@ extern void c_sas_loads(uint32_t source, uint8_t *destination,
     uint32_t byte_count);
 extern void c_sas_stores(uint32_t destination, uint8_t *source,
     uint32_t byte_count);
+extern uint8_t *c_GetLinAdd(uint32_t address);
+extern uint8_t *c_GetPhyAdd(uint32_t address);
+extern int xtrn2phy(uint32_t address, uint8_t access, uint32_t *physical);
+extern uint32_t c_getCPL(void);
+extern int c_getVM(void);
 extern uint32_t c_getCR0(void);
 extern uint32_t c_getCR3(void);
 extern void c_setCR0(uint32_t value);
@@ -826,25 +831,48 @@ static int page_domain_child_style(DWORD style)
     return (style & (WS_CHILD | WS_POPUP)) == WS_CHILD;
 }
 
+static void page_domain_copy_owned_ram(ULONG address, void *output, ULONG bytes);
+
+/* ADAPTER-WOW-081: only the serialized page-domain's allocated WND/CLS
+ * fields, never arbitrary guest/device RAM. Match bios_write_double's
+ * original access request, including its CPL and VM rules. Failed mapping
+ * and descriptor diagnostics retain its scalar virtualisation/trace path. */
+static void page_domain_store_owned_words(ULONG address, const ULONG *words,
+    ULONG count)
+{
+    uint32_t physical;
+    uint8_t access = 1u; /* PG_W */
+    ULONG i, bytes = count * sizeof(*words);
+    if (!mvdm_softpc_wow_source_descriptor_trace_active &&
+            bytes <= MVDM_SOFTPC_PAGE_BYTES &&
+            (address & (MVDM_SOFTPC_PAGE_BYTES - 1u)) <=
+                MVDM_SOFTPC_PAGE_BYTES - bytes) {
+        if (c_getCPL() != 3u) access |= 2u; /* original PG_U */
+        if (c_getVM()) access |= 4u; /* original accessed/dirty handling */
+        if (xtrn2phy(address, access, &physical)) {
+            CopyMemory(c_GetPhyAdd(physical), words, bytes);
+            return;
+        }
+    }
+    for (i = 0; i < count; ++i)
+        c_sas_storedw(address + i * sizeof(*words), words[i]);
+}
+
 static void page_domain_window_fields(ULONG guest_window, const WINDOWINFO *info,
     LONG control_id)
 {
-    const LONG *rect = &info->rcWindow.left;
-    const LONG *client = &info->rcClient.left;
-    unsigned i;
+    ULONG rectangles[8], styles[2] = {info->dwExStyle, info->dwStyle};
 
     /* Original rtl/wow.c::_ClientToScreen and _GetClientRect consume a
      * screen-relative WND.rcClient, not GetClientRect's zero-origin result.
      * GetWindowInfo supplies both rectangles in that original coordinate
      * space. No native pointer or native WND layout enters guest memory. */
-    for (i = 0; i < 4u; ++i) {
-        c_sas_storedw(guest_window + MVDM_SOFTPC_WND_RECT + i * 4u,
-            (ULONG)rect[i]);
-        c_sas_storedw(guest_window + MVDM_SOFTPC_WND_CLIENT_RECT + i * 4u,
-            (ULONG)client[i]);
-    }
-    c_sas_storedw(guest_window + MVDM_SOFTPC_WND_STYLE, info->dwStyle);
-    c_sas_storedw(guest_window + MVDM_SOFTPC_WND_EXSTYLE, info->dwExStyle);
+    CopyMemory(rectangles, &info->rcWindow, sizeof(RECT));
+    CopyMemory(rectangles + 4u, &info->rcClient, sizeof(RECT));
+    page_domain_store_owned_words(guest_window + MVDM_SOFTPC_WND_RECT,
+        rectangles, 8u);
+    page_domain_store_owned_words(guest_window + MVDM_SOFTPC_WND_EXSTYLE,
+        styles, 2u);
     if (page_domain_child_style(info->dwStyle))
         c_sas_storedw(guest_window + MVDM_SOFTPC_WND_MENU_OR_ID,
             (ULONG)control_id);
@@ -1571,18 +1599,41 @@ int mvdm_softpc_wow_page_domain_read_window_identity(unsigned long backing,
     return 1;
 }
 
+/* ADAPTER-WOW-080: only for this domain's already validated allocated RAM.
+ * Original nt_mem allocates page-rounded storage; c_GetLinAdd is the existing
+ * original CCPU linear-to-native service. No guest/native callout or lifetime
+ * transition may occur between resolving and copying. Do not retain the
+ * alias, expose it to a caller, or use this for arbitrary guest/device spans.
+ * A non-fitting span retains the original byte-wise SAS semantics. */
+static void page_domain_copy_owned_ram(ULONG address, void *output, ULONG bytes)
+{
+    if (bytes <= MVDM_SOFTPC_PAGE_BYTES - (address & (MVDM_SOFTPC_PAGE_BYTES - 1u)))
+        CopyMemory(output, c_GetLinAdd(address), bytes);
+    else
+        c_sas_loads(address, output, bytes);
+}
+
+static ULONG page_domain_read_owned_word(ULONG address)
+{
+    ULONG value;
+    page_domain_copy_owned_ram(address, &value, sizeof(value));
+    return value;
+}
+
 int mvdm_softpc_wow_page_domain_read_window_words_view(unsigned long backing,
     mvdm_softpc_wow_window_words_view *view)
 {
     mvdm_softpc_wow_window_borrow *borrow;
     mvdm_softpc_wow_window_words_view value;
+    ULONG fields[(MVDM_SOFTPC_WND_BYTES - MVDM_SOFTPC_WND_WOW_WORDS) / sizeof(ULONG)];
     unsigned i;
     if (!page_domain_menu_context() || !view ||
             !(borrow = *window_borrow_link(backing)) || !borrow->references) return 0;
-    for (i = 0; i < 3u; ++i)
-        value.words[i] = c_sas_dw_at(backing + MVDM_SOFTPC_WND_WOW_WORDS + i * 4u);
-    value.style = c_sas_dw_at(backing + MVDM_SOFTPC_WND_STYLE);
-    value.exstyle = c_sas_dw_at(backing + MVDM_SOFTPC_WND_EXSTYLE);
+    page_domain_copy_owned_ram(backing + MVDM_SOFTPC_WND_WOW_WORDS,
+        fields, sizeof(fields));
+    for (i = 0; i < 3u; ++i) value.words[i] = fields[i];
+    value.style = fields[(MVDM_SOFTPC_WND_STYLE - MVDM_SOFTPC_WND_WOW_WORDS) / 4u];
+    value.exstyle = fields[(MVDM_SOFTPC_WND_EXSTYLE - MVDM_SOFTPC_WND_WOW_WORDS) / 4u];
     value.module = borrow->module;
     *view = value;
     return 1;
@@ -1726,16 +1777,15 @@ static int page_domain_replace_window_links(ULONG count,
     }
     for (i = 0; i < count; ++i) {
         ULONG client = resolved[i * 5u] - domain.client_delta;
-        for (j = 1; j < 5u; ++j)
-            c_sas_storedw(client + MVDM_SOFTPC_WND_NEXT + (j - 1u) * 4u,
-                resolved[i * 5u + j]);
+        page_domain_store_owned_words(client + MVDM_SOFTPC_WND_NEXT,
+            &resolved[i * 5u + 1u], 4u);
     }
     /* Dead observed nodes can reference each other. Drop only their outgoing
      * copied links after all surviving incoming links have been validated. */
     for (i = 0; i < retired_count; ++i) {
+        const ULONG empty[4] = {0};
         ULONG client = page_domain_window_lookup(retired[i]);
-        for (j = 0; j < 4u; ++j)
-            c_sas_storedw(client + MVDM_SOFTPC_WND_NEXT + j * 4u, 0u);
+        page_domain_store_owned_words(client + MVDM_SOFTPC_WND_NEXT, empty, 4u);
     }
     for (i = 0; i < retired_count; ++i) {
         ULONG client = page_domain_window_lookup(retired[i]);
@@ -1783,7 +1833,7 @@ static int page_domain_window_referenced(ULONG server)
             domain.guest_desktop_window : domain.guest_windows[i];
         if (!client || client + domain.client_delta == server) continue;
         for (offset = MVDM_SOFTPC_WND_NEXT; offset <= MVDM_SOFTPC_WND_OWNER; offset += 4u)
-            if (c_sas_dw_at(client + offset) == server) return 1;
+            if (page_domain_read_owned_word(client + offset) == server) return 1;
     }
     return 0;
 }
@@ -1933,10 +1983,10 @@ static int class_is_referenced(ULONG server)
     for (index = 1u; index < MVDM_SOFTPC_HANDLE_ENTRY_COUNT; ++index) {
         ULONG window = index == LOWORD(domain.desktop_handle) ?
             domain.guest_desktop_window : domain.guest_windows[index];
-        if (window && c_sas_dw_at(window + MVDM_SOFTPC_WND_CLASS) == server) return 1;
+        if (window && page_domain_read_owned_word(window + MVDM_SOFTPC_WND_CLASS) == server) return 1;
     }
     for (borrow = window_borrows; borrow; borrow = borrow->next)
-        if (c_sas_dw_at(borrow->backing + MVDM_SOFTPC_WND_CLASS) == server) return 1;
+        if (page_domain_read_owned_word(borrow->backing + MVDM_SOFTPC_WND_CLASS) == server) return 1;
     return 0;
 }
 
@@ -2005,11 +2055,11 @@ int mvdm_softpc_wow_page_domain_collect_observed_classes(void)
     for (index = 1u; index < MVDM_SOFTPC_HANDLE_ENTRY_COUNT; ++index) {
         ULONG window = index == LOWORD(domain.desktop_handle) ?
             domain.guest_desktop_window : domain.guest_windows[index];
-        if (window && (server = c_sas_dw_at(window + MVDM_SOFTPC_WND_CLASS)) != 0)
+        if (window && (server = page_domain_read_owned_word(window + MVDM_SOFTPC_WND_CLASS)) != 0)
             references[count++] = server;
     }
     for (borrow = window_borrows; borrow; borrow = borrow->next) {
-        server = c_sas_dw_at(borrow->backing + MVDM_SOFTPC_WND_CLASS);
+        server = page_domain_read_owned_word(borrow->backing + MVDM_SOFTPC_WND_CLASS);
         if (server) references[count++] = server;
     }
     qsort(references, count, sizeof(*references), compare_class_reference);
@@ -2041,7 +2091,7 @@ int mvdm_softpc_wow_page_domain_release_class(unsigned long server)
     for (index = 1u; index < MVDM_SOFTPC_HANDLE_ENTRY_COUNT; ++index) {
         ULONG window = index == LOWORD(domain.desktop_handle) ?
             domain.guest_desktop_window : domain.guest_windows[index];
-        if (window && c_sas_dw_at(window + MVDM_SOFTPC_WND_CLASS) == server) return 0;
+        if (window && page_domain_read_owned_word(window + MVDM_SOFTPC_WND_CLASS) == server) return 0;
     }
     allocation->released = 1;
     /* Physical-free failure is retained by this allocation owner, just as
@@ -2094,6 +2144,9 @@ static int copy_window_observation(ULONG backing,
     mvdm_softpc_wow_window_observation *row)
 {
     ULONG cls, targets[4], j, name;
+    ULONG fields[MVDM_SOFTPC_WND_BYTES / sizeof(ULONG)];
+    ULONG class_fields[MVDM_SOFTPC_CLS_BYTES / sizeof(ULONG)];
+    int owned_class;
     mvdm_softpc_wow_window_borrow *borrow = *window_borrow_link(backing);
     ZeroMemory(row, sizeof(*row));
     if (borrow) {
@@ -2102,32 +2155,56 @@ static int copy_window_observation(ULONG backing,
         row->module = borrow->module;
         row->context_help_id = borrow->context_help_id;
     }
-    row->links.window = c_sas_dw_at(backing + MVDM_SOFTPC_WND_HEAD_HANDLE);
+    /* Caller pins this exact backing, or enumerates the committed domain
+     * with guest execution excluded. Never re-resolve a retained HWND. */
+    page_domain_copy_owned_ram(backing, fields, sizeof(fields));
+    row->links.window = fields[MVDM_SOFTPC_WND_HEAD_HANDLE / 4u];
     for (j = 0; j < 4u; ++j) {
-        ULONG server = c_sas_dw_at(backing + MVDM_SOFTPC_WND_NEXT + j * 4u);
+        ULONG server = fields[MVDM_SOFTPC_WND_NEXT / 4u + j];
         /* Preserve full historical identity, not a fresh slot lookup. */
         targets[j] = server ? c_sas_dw_at(server - domain.client_delta) : 0u;
-        row->window_rect[j] = (LONG)c_sas_dw_at(backing + MVDM_SOFTPC_WND_RECT + j * 4u);
-        row->client_rect[j] = (LONG)c_sas_dw_at(backing + MVDM_SOFTPC_WND_CLIENT_RECT + j * 4u);
+        row->window_rect[j] = (LONG)fields[MVDM_SOFTPC_WND_RECT / 4u + j];
+        row->client_rect[j] = (LONG)fields[MVDM_SOFTPC_WND_CLIENT_RECT / 4u + j];
     }
     row->links.next = targets[0]; row->links.parent = targets[1];
     row->links.child = targets[2]; row->links.owner = targets[3];
-    row->style = c_sas_dw_at(backing + MVDM_SOFTPC_WND_STYLE);
-    row->exstyle = c_sas_dw_at(backing + MVDM_SOFTPC_WND_EXSTYLE);
+    row->style = fields[MVDM_SOFTPC_WND_STYLE / 4u];
+    row->exstyle = fields[MVDM_SOFTPC_WND_EXSTYLE / 4u];
     if (page_domain_child_style(row->style))
-        row->control_id = c_sas_dw_at(backing + MVDM_SOFTPC_WND_MENU_OR_ID);
-    cls = c_sas_dw_at(backing + MVDM_SOFTPC_WND_CLASS);
+        row->control_id = fields[MVDM_SOFTPC_WND_MENU_OR_ID / 4u];
+    cls = fields[MVDM_SOFTPC_WND_CLASS / 4u];
     if (!cls) return 1; /* Cold desktop has no observed descriptor yet. */
+    owned_class = page_domain_class_allocation(cls) != NULL;
     cls -= domain.client_delta;
-    row->descriptor.atom = (WORD)c_sas_dw_at(cls + MVDM_SOFTPC_CLS_ATOM);
-    row->descriptor.class_style = c_sas_dw_at(cls + MVDM_SOFTPC_CLS_STYLE);
-    row->descriptor.window_extra = c_sas_dw_at(cls + MVDM_SOFTPC_CLS_WINDOW_EXTRA);
-    name = c_sas_dw_at(cls + MVDM_SOFTPC_CLS_ANSI_NAME);
+    if (owned_class) {
+        page_domain_copy_owned_ram(cls, class_fields, sizeof(class_fields));
+        row->descriptor.atom = (WORD)class_fields[MVDM_SOFTPC_CLS_ATOM / 4u];
+        row->descriptor.class_style = class_fields[MVDM_SOFTPC_CLS_STYLE / 4u];
+        row->descriptor.window_extra = class_fields[MVDM_SOFTPC_CLS_WINDOW_EXTRA / 4u];
+        name = class_fields[MVDM_SOFTPC_CLS_ANSI_NAME / 4u];
+    } else {
+        row->descriptor.atom = (WORD)c_sas_dw_at(cls + MVDM_SOFTPC_CLS_ATOM);
+        row->descriptor.class_style = c_sas_dw_at(cls + MVDM_SOFTPC_CLS_STYLE);
+        row->descriptor.window_extra = c_sas_dw_at(cls + MVDM_SOFTPC_CLS_WINDOW_EXTRA);
+        name = c_sas_dw_at(cls + MVDM_SOFTPC_CLS_ANSI_NAME);
+    }
     if (!name) { SetLastError(ERROR_INVALID_DATA); return 0; }
     name -= domain.client_delta;
-    for (j = 0; j < sizeof(row->descriptor.name); ++j) {
-        c_sas_loads(name + j, (BYTE *)&row->descriptor.name[j], 1u);
-        if (!row->descriptor.name[j]) break;
+    /* The canonical inline name is inside the same page-rounded allocation.
+     * Keep the existing scalar route for a noncanonical class-name pointer;
+     * do not invent a new rejection or a host-side class-name authority. */
+    if (owned_class && name == cls + MVDM_SOFTPC_CLS_BYTES &&
+            (name & (MVDM_SOFTPC_PAGE_BYTES - 1u)) <=
+                MVDM_SOFTPC_PAGE_BYTES - sizeof(row->descriptor.name)) {
+        page_domain_copy_owned_ram(name, row->descriptor.name, sizeof(row->descriptor.name));
+        for (j = 0; j < sizeof(row->descriptor.name) && row->descriptor.name[j]; ++j) {}
+        if (j < sizeof(row->descriptor.name))
+            ZeroMemory(row->descriptor.name + j + 1u, sizeof(row->descriptor.name) - j - 1u);
+    } else {
+        for (j = 0; j < sizeof(row->descriptor.name); ++j) {
+            c_sas_loads(name + j, (BYTE *)&row->descriptor.name[j], 1u);
+            if (!row->descriptor.name[j]) break;
+        }
     }
     if (j == sizeof(row->descriptor.name)) {
         SetLastError(ERROR_INSUFFICIENT_BUFFER); return 0;

@@ -573,6 +573,7 @@ if ($InitRollback -and !($fixtureOutput -match '^WOW_IDLE_OBSERVER_LIFECYCLE err
 }
 if ($Case -eq 'graph-snapshot' -and
     (!($fixtureOutput -match '^WOW_EXTERNAL_OBSERVATION_CCPU errors=0 separate_process=1 local_updates=32$') -or
+     !($fixtureOutput -match '^WOW_EXTERNAL_REFRESH_BOUNDARY_CCPU errors=0 retained=1 explicit_refresh=1 native_mutation=1 local_fresh=1$') -or
      !($fixtureOutput -match '^WOW_EXTERNAL_CAPTURE_CCPU errors=0 dead_native=1 committed_observation=1$') -or
      !($fixtureOutput -match '^WOW_POST_NATIVE_FAILURE_CCPU errors=0 consumed_once=1 worker_exit=c0000420$'))) {
     throw 'External churn or post-native consumed-message failure boundary was not verified'

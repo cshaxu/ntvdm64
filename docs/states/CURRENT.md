@@ -62,6 +62,14 @@ coherent13 with this extra gate and passes installed verification. This is the
 bounded S4 P2 baseline, not full message-family or T closure. Full
 M1--M6 remains required, not replaced by the native fixture denominator.
 
+P3's registered079/343 group composes original generic/native-library
+calls with raw CallBack16, explicit native Yield and trusted resource/fault
+reentry. Its mirror seam is a definition name plus propagation of rejected
+callback admission through the two existing public exports; original algorithms,
+FPU protection, argument order and assembly remain. Original-body/scope/frame
+checks and real generic-thunk callbacks/yields pass in all3 styles. This is
+not whole MMSYSTEM16-family acceptance; the complete remaining S4 scope stays.
+
 Owner's renewed installed WINMINE slowdown report received diagnostic priority
 before further S4 expansion. Installed-mine-regression-r1 verified then-P22
 identities, passed actual gameplay/normal exit in all3 policies with
@@ -71,6 +79,53 @@ exit0 is not a pass for that failed launch. The owner's actual terminal
 environment and first-bad version are unobserved; do not equate this control
 with causal proof of the owner's instance. See the appended
 [diagnostic evidence](../etc/evidence/m0-t447-s4-message-source-audit.md#renewed-installed-winmine-startup-report).
+
+Owner clarification separates the reported regression from startup: WINMINE
+opens normally but each cell responds slowly. Source-led active-input
+profiling now reproduces median481ms on the ordinary desktop versus32ms on
+a private desktop, with identical P2 images and full logon environment.
+The source chain repeatedly copies the desktop view through scalar SAS;
+080 reuses bounded original c_GetLinAdd for owned copied-view reads,
+without reducing freshness or changing guest/scheduler behavior. Formal
+fixture refresh requires079/343 to compose with080; P3 includes their complete
+facades, not old-object substitutions. P2 was the comparison baseline.
+080 worker-only control improves ordinary median481ms to220ms
+(private30ms), not yet responsive enough. The first composed timing run's
+transient-board failure remains retained, excluded from performance claims.
+Corrected same-setup comparison verifies the composed candidate at201ms
+against380ms P2.079 unit/original-body/frame and actual default/extension
+Win16 message groups pass, including both public callbacks, yields and exact
+task retirement. DirectedYield is not an asynchronous completion barrier;
+the independent probe now waits for an explicit completion message without
+changing runtime scheduling. Earlier native-reuse and restricted-desktop
+admission failures remain recorded, not erased by later complete passes.
+The owner requests further optimization rather than accepting the remaining
+latency.081 admits only the complete owned-view field-write/reference-read
+closure: original CCPU translation and scalar fallback, no refresh reduction,
+new cache, scheduler or guest change.082 additionally applies the already
+approved route-E boundary: reuse committed complete external observations,
+while refreshing all local objects and explicit roots/payloads synchronously;
+keep exact full identities, death withdrawal and atomic graph validation.
+It adds no freshness timer, new state owner or semantic waiver. Explicit
+native foreign operands also retain their known full identity for synchronous
+return publication; they are not optional background observations.
+External-view-build-r2 passes079 and the real CCPU borrow/reclaim/graph group,
+including fresh fields, private sentinels, external snapshot/explicit refresh/
+native mutation, retirement and reuse. Final paired performance-r2 passes all
+six timing/normal-exit cases: ordinary median299.871ms P2 versus131.725ms
+candidate; sampled296.888ms versus131.884ms; private31.691ms versus32.257ms.
+This2.28x improvement is not stutter elimination. Frozen P3 passes
+mine-release-acceptance-r1: fresh native20, original30,12 actual S3 guest
+groups,6 actual default/extension message groups, WINMINE/SOL gameplay and
+normal exit in all3 styles, WRITE's retained startup frontier, Console17/
+Window17, direct native modal3 and complete-logon gameplay3. Delivery-r1
+publishes coherent13 to both destinations, verifies both-width deployed style
+and installed logon/gameplay3, and rechecks all hashes. No existing project
+process needed closure. No further source expansion during that delivery gate;
+the reviewed source, tests, evidence and release assets form this bounded P3
+handoff, not S4/T closure. The inherited-
+environment startup failure remains a different known failing control, not
+the owner's clarified symptom. See the [active-input evidence](../etc/evidence/m0-t447-s4-message-source-audit.md#clarified-owner-symptom-active-input-latency).
 
 ## Active Packet
 
@@ -94,9 +149,9 @@ with causal proof of the owner's instance. See the appended
 
 ## Current Technical Baseline
 
-S4 P2 publishes the verified bounded execution/identity baseline. NTVDM SHA-256 is
-12DA2E8FCFFB35B724791F7356C1A9A87A5208442928C29127415AE8DC812705;
-WOW32 isF3FD174A25B72EC17274979B6F24A1C5C5314A9E025BD233847356F9F45680F2.
+S4 P3 publishes the bounded native-extension/owned-view performance baseline.
+NTVDM SHA-256 is8171A66D17AC51420CB58299675DD654EED9A64947C3E3597C1B2FE1C47584BA;
+WOW32 is5AA564051EE87A3815FC03A751F06A4FAD57A53B44C499733A9F0FF0ED63EB6D.
 The release manifest owns exact identities of all13 images. Both
 assets/release and O:/winnt/system32 match the tested package; original guest,
 user configuration and assets/winnt.zip are unchanged by this delivery.

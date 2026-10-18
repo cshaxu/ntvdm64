@@ -11,6 +11,9 @@ $null=New-Item -ItemType Directory $root
 $graph=Get-Content "$ProviderBuildRoot/build.ninja" -Raw
 $flags=[regex]::Match($graph,'(?m)^cflags = (.*)\r?$').Groups[1].Value.Trim()
 $release=[regex]::Match($graph,'(?m)^release_cflags = (.*)\r?$').Groups[1].Value.Trim()
+# This fixture deliberately tests the retained frame body, not the separate
+# production execution-admission facade. Keep that declared scope explicit.
+$flags += ' /DCallBack16=wow_original_CallBack16'
 if(!$flags.Contains('/DCPU_40_STYLE') -or !$flags.Contains('/MT') -or !$release){throw 'Require selected CCPU40 provider graph'}
 $vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 function Run-Owned([string]$name,[string]$file,[string]$arguments,[int]$seconds){

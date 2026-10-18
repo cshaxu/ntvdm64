@@ -130,6 +130,7 @@ $providerSupportSources = @(
     (Join-Path $adapterWow 'wow_task_cleanup_entry.c'),
     (Join-Path $adapterWow 'wow_common_dialog_callback.c'),
     (Join-Path $adapterWow 'wow_user_thunk_scope.c'),
+    (Join-Path $adapterWow 'wow_user_native_extension.c'),
     (Join-Path $adapterWow 'wow_user_private_access.c'),
     (Join-Path $adapterWow 'wow_window_creation_binding.c'),
     (Join-Path $adapterWow 'wow_class_words_binding.c'),
@@ -432,6 +433,10 @@ foreach ($source in $sources) {
         $ninja.Add('  cflags = $cflags /DWOW_TITLE_MESSAGE_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_title_policy.h')) + '"')
     } elseif ($source -in @('wuser.c','wuser31.c','wuwind.c')) {
         $ninja.Add('  cflags = $cflags /DWOW_STYLE_SCROLL_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_title_policy.h')) + '"')
+    } elseif ($source -eq 'wkgthunk.c') {
+        $ninja.Add('  cflags = $cflags /DWK32ICallProc32=wow_original_WK32ICallProc32 /DWOWYield16=wow_original_WOWYield16 /DWOWDirectedYield16=wow_original_WOWDirectedYield16 /DWOW_NATIVE_EXTENSION_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_user_native_extension.h')) + '"')
+    } elseif ($source -eq 'wmmedia.c') {
+        $ninja.Add('  cflags = $cflags /DWMM32CallProc32=wow_original_WMM32CallProc32')
     } elseif ($source -eq 'wshell.c') {
         $ninja.Add('  cflags = $cflags /DWOWShellExecute=wow_shell_execute /DWOW_STYLE_SHELL_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_title_policy.h')) + '"')
     }

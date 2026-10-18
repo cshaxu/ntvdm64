@@ -170,6 +170,10 @@ push word message-data
 api 2,114
 jmp .pump
 .completed:
+%ifdef EXTENSION_WITNESS
+cmp word [extension_receives-data],2
+jne failed
+%endif
 cmp word [basic-data],1
 jne failed
 cmp word [nested-data],1
@@ -321,6 +325,68 @@ result 0x12
 send native_window,0x473,0,0,0
 result 0x13
 mov word [native_count-data],4
+%ifdef EXTENSION_WITNESS
+; Real original GetProcAddress32 failure followed by valid resolution.
+push32 module
+push ds
+push word absent_export-data
+api 1,515
+or ax,dx
+jnz failed
+push32 module
+push ds
+push word extension_export-data
+api 1,515
+mov [extension_native-data],ax
+mov [extension_native+2-data],dx
+or ax,dx
+jz failed
+push cs
+push word extension_callback-code
+push word [instance-data]
+api 1,51
+mov [extension_procedure-data],ax
+mov [extension_procedure+2-data],dx
+or ax,dx
+jz failed
+push bp
+mov bp,sp
+push word 0
+push word 0x79
+push32 extension_procedure
+push word 0
+push word [peer_task-data]
+push32 extension_native
+push word 0
+push word 0
+push word 0
+push word 3
+api 1,517
+cmp sp,bp
+jne fatal
+pop bp
+result 0x79
+cmp word [extension_calls-data],2
+jne failed
+; DirectedYield is a scheduling opportunity, not a posted-message barrier.
+; GetMessage pumps the receiver's synchronous acknowledgement and waits for
+; its explicit posted completion before inspecting the guest counter.
+push ds
+push word message-data
+push word 0
+push word 0x478
+push word 0x478
+api 2,108
+test ax,ax
+jz failed
+cmp word [message+2-data],0x478
+jne failed
+cmp word [extension_yielded-data],1
+jne failed
+push32 extension_procedure
+api 1,52
+inc word [native_count-data]
+%endif
 cmp word [nested-data],2
 jne failed
 cmp word [same-data],2
@@ -455,6 +521,14 @@ cmp word [bp+12],0x466
 je .ack
 cmp word [bp+12],0x46f
 je .quit
+%ifdef EXTENSION_WITNESS
+cmp word [bp+12],0x474
+je .extension_receive
+cmp word [bp+12],0x475
+je .extension_yield
+cmp word [bp+12],0x476
+je .extension_yield_ack
+%endif
 push word [bp+14]
 push word [bp+12]
 push word [bp+10]
@@ -551,6 +625,39 @@ push word 0
 api 2,6
 mov ax,0xf
 jmp .value
+%ifdef EXTENSION_WITNESS
+.extension_receive:
+api 2,192
+test ax,ax
+jz .bad
+inc word [extension_receives-data]
+mov ax,0x74
+jmp .value
+.extension_yield:
+send sender,0x476,0,0,0
+cmp ax,0x76
+jne .bad
+cmp dx,0x447a
+jne .bad
+push word [sender-data]
+push word 0x478
+push word 0
+push word 0
+push word 0
+api 2,110
+test ax,ax
+jz .bad
+api 1,29
+xor ax,ax
+jmp .value
+.extension_yield_ack:
+api 2,192
+test ax,ax
+jz .bad
+inc word [extension_yielded-data]
+mov ax,0x76
+jmp .value
+%endif
 .bad:
 or word [errors-data],0x4000
 xor ax,ax
@@ -564,6 +671,47 @@ pop es
 pop ds
 pop bp
 retf 10
+%ifdef EXTENSION_WITNESS
+extension_callback:
+push bp
+mov bp,sp
+push ds
+push es
+push si
+push di
+push bx
+mov ds,ax
+cmp word [bp+6],0x5678
+jne .bad
+cmp word [bp+8],0x1234
+jne .bad
+api 1,36
+cmp ax,[task-data]
+jne .bad
+api 2,192
+test ax,ax
+jnz .bad
+send peer,0x474,0,0,0
+cmp ax,0x74
+jne .bad
+cmp dx,0x447a
+jne .bad
+inc word [extension_calls-data]
+mov ax,0x79
+jmp .done
+.bad:
+or word [errors-data],0x2000
+xor ax,ax
+.done:
+mov dx,0x447a
+pop bx
+pop di
+pop si
+pop es
+pop ds
+pop bp
+retf 4
+%endif
 code_end:
 dw calls
 %assign call_number 1
@@ -606,6 +754,15 @@ file: dw -1
 procedure: dd 0
 module: dd 0
 native: dd 0
+%ifdef EXTENSION_WITNESS
+extension_native: dd 0
+extension_procedure: dd 0
+extension_calls: dw 0
+extension_receives: dw 0
+extension_yielded: dw 0
+extension_export: db 'MessageExtension',0
+absent_export: db 'T447AbsentExtension',0
+%endif
 message: times 18 db 0
 buffer: times 32 db 0
 wndclass:

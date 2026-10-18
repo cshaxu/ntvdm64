@@ -948,6 +948,14 @@ static BOOL native_call_begin(wow_user_native_call *call, HWND window,
     call->binding = binding;
     call->execution_held = sender->ppi && sender->ppi->pwpi &&
         sender->ppi->pwpi->CSOwningThread == sender;
+    /* ADAPTER-WOW-082: the explicit native operand is not background
+     * desktop observation. Retain its known full identity for return-time
+     * publication even if it belongs to another process. Invalid operands
+     * keep their native failure path; never enroll or revive one here. */
+    if (window) {
+        HWND full = wow_user_window_native_handle(window);
+        if (full && IsWindow(full)) call->target_window = full;
+    }
     /* Preserve the original direct same-task path, including short HWND
      * carriers. This is only an inline execution optimization, never the
      * identity of a message received during the native operation. */
@@ -1017,11 +1025,12 @@ void WINAPI wow_user_native_call_result(wow_user_native_call *call,
 
 static BOOL publish_call_windows(const wow_user_native_call *call)
 {
-    HWND roots[5];
+    HWND roots[6];
     ULONG count = call->returned_count;
     if (count > 4) { SetLastError(ERROR_INVALID_DATA); return FALSE; }
     CopyMemory(roots, call->returned_payload, count * sizeof(*roots));
     roots[count++] = call->returned_window;
+    roots[count++] = call->target_window;
     return wow_user_window_refresh_payload(NULL, roots, count) &&
         (!call->returned_menu || !IsMenu(call->returned_menu) ||
             wow_menu_native_refresh_menu(call->returned_menu));
