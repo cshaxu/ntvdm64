@@ -196,6 +196,20 @@ S4 does not close on this group: original-frame and protocol/output cohorts
 remain. Dispose only this owned scratch and G7 fixture after archived evidence
 and joined jobs; preserve both valid caches and the coherent release.
 
+The post-P20 frame audit is one existing M3/M4 dependency cohort, not a new
+performance or CPU-instruction task. Its source closure is W32Dispatch/filter,
+CallBack16 preparation/live/returned states, stackalloc16/SignalProc, original
+CCPU simulate/unsimulate TLS, existing execution/borrow scopes and terminal
+session escape. The indexed audit establishes three coupled obligations:
+preserve original exception disposition on the actual returning API frame,
+remove only a discarded simulator jump-frame level, and restore only the
+appropriate original continuation without rolling back shared machine state.
+Do not implement a pointer-only finally, copy private TLS layouts into an
+adapter, restore full c_getCpuState, or use AbnormalTermination alone as proof
+of a recoverable guest exception. Close the continuation-phase design and
+whole-group witnesses before changing/building the runtime. P20's installed
+13, guest and caches stay unchanged during this source investigation.
+
 The post-P18 source sweep fixes the next finite cohort346 before another
 build: all five reverse/native-buffer acquisition branches in wmsgem's
 EM_REPLACESEL/EM_SETTABSTOPS, wmsglb's LB_GETSELITEMS/LB_SETTABSTOPS and

@@ -6628,3 +6628,106 @@ disposal facts: documentation/links/diff, actual two-cache residual and all13
 both-destination hashes plus immutable ZIP pass. Only recorded review/cleanup
 facts change afterwards; runtime/source/test/artifact inputs remain frozen.
 Recheck documentation for this terminal record before reviewed commit/push.
+
+### Post-P20 original-frame and simulation-owner audit
+
+Question: what actually owns an interrupted original callback, beyond the
+execution/borrow finally already delivered? Baseline1122ab55d55b4d15699715ce1416b092b5887772
+is clean main/origin; P20 remains installed. This is new source attribution,
+not another runtime pass or a claimed completed repair. No compiler, running
+guest, diagnostic image or random test selected the following findings.
+
+| Actual chain / source | Established fact and consequence |
+| --- | --- |
+| wow_user_native_extension.c CallBack16 -> wow_original_CallBack16 | The public facade finally pairs execution/borrows only. It does not own TD frame fields, interpreter IP or simulator jump buffers. Keep that owner separation. |
+| wcall16.c original frame preparation | GETFRAMEPTR may itself enter RET_FORCESEGMENTFAULT. DIV178 snapshots only wTDB/wLocalBP before the second resolution; do not write that VDMFRAME snapshot over guest ES changes. After it, callback cursor/INIT state changes before CBFRAMEPTR can fail. A scope beginning only at host_simulate misses this acquired state. |
+| walloc16.c stackalloc16 / CallBack16 | INIT set means derive from vpStack; allocation clears it and reserves vpCBStack. CallBack16 sets it and pushes its own CBVDMFRAME. stackfree16 is intentionally empty. A blanket reset loses outer reserved arguments or changes the next callback's allocation base. |
+| wuser.c WU32SignalProc SG_EXIT/SG_GP_FAULT | Original teardown deliberately sets INITCALLBACKSTACK together with IGNOREINPUT before resource callbacks. Reinstating the entry flags wholesale would erase this legitimate teardown transition. Only actual call-owned progress can be reversed. |
+| wcall16.c normal simulation and return resolution | host_simulate precedes setIP(SaveIp), TD.vpStack=VDMSTACK, returned CBFRAMEPTR and output extraction. The third resolver can fail after simulation has already returned. Preparation failure, live simulation escape and returned-frame failure are different states; AbnormalTermination alone does not distinguish them. Normal result/guest writes stay original. |
+| nt_cprgs.c load_sw_cpu_access_functions | The selected host_simulate_func is c_cpu_simulate. nt_cpu.c's external wrapper delegates to the same selected body, not another executor or a wrapper with hidden exception cleanup. |
+| c_main.c c_cpu_simulate -> ntthread.c ccpu386SimulatePtr | NTVDM's TLS ThreadSimBuf.level increments when choosing the original jmp_buf. Only ccpu386Unsimulate decrements before longjmp. Escaping native SEH does not execute that ordinary pop. Fixing just TD/IP would leave a stale native return target in the original TLS owner. No adapter has the authority to recreate or reinterpret that private array. |
+| CCPU ccpu386ThrdExptnPtr / GotoThrdExptnPt | Exception/restart slots select level-1 from that same TLS level. An abandoned level affects subsequent original CPU exception handling too, not merely an observer's depth counter. Preserve the actual setjmp function's live native frame; a helper cannot call setjmp and return its stack frame. |
+| W32Dispatch / W32Exception | Windows searches filters before finally unwind. W32Exception CLOSE writes RET_FORCETASKEXIT through current TD.vpStack; IGNORE executes a handler, while invalid handles/alignment/debugger paths can continue execution/search. Restoring a callback cursor afterwards can discard the frame containing the already selected termination signal. Preserve the original decision on the API frame whose handler will actually resume; do not replace the policy or infer it from arbitrary native message fields. |
+| FastWOW comparison | Its PostExceptionHandler/W32SetExceptionContext explicitly targets ApiReturnAddress and the saved native monitor stack. It confirms that exception continuation belongs to a known API boundary, but depends on native VDM/private monitor context and is not an executable CCPU provider. Do not import that assembly as a shortcut. |
+| c_getset.c c_getCpuState/c_setCpuState | Full restoration changes CR0/CR2/CR3, descriptor tables, video latches, A20 wrapping and NPX-state ownership in addition to registers. It is not a callback-only rollback and can undo legitimate guest changes. Reject full-machine snapshot restore, even though original source exists. |
+| wkman.c remote callback context | Original source separately saves/restores bounded registers and selectors for its explicit remote continuation. This is relevant source precedent, not permission to copy its globals or treat an interrupted, possibly different-mode interpreter as an ordinary remote return. Segment setters call the actual CCPU segment loaders; selector identity alone is not proof of valid restored control state. |
+| session_terminate_current / mvdm_softpc_terminate_current_session | Whole-worker escape closes the original host, marks the session COMPLETED, then longjmps. It is not an API exception eligible for guest resumption. Retain terminal abandonment and existing lifecycle authority, with no access to withdrawn guest state. |
+| host_ExitThread / opennt_ccpu_exit_thread | Existing original CPU TLS retirement is followed by native ExitThread, not a recoverable callback return. Microsoft documents that ExitThread/ExitProcess bypass finally; do not fabricate missing callback returns or add manual task retirement from a new finally. |
+| Existing original callback fixture | Four phases test resolver failure1/2/3, propagation and output preservation. They do not assert restored TD cursor/flags, abandoned simulation TLS, W32Exception target or real-mode/protected continuation. The real CCPU fixture proves normal BOP/FE order only. Keep both, extend their actual assertions rather than counting their old PASS as full frame proof. |
+
+The current production graph is MSVC x86 /MT /O2 with CCPU/CPU_40_STYLE/NTVDM;
+the host vector selects the original TLS simulation branch. The exact graph
+and original headers, not the host architecture name, select non-fast WOW.
+No FASTWOW/native-monitor profile, guest change or CPU-instruction modification
+is admitted by this investigation.
+
+The findings rule out two tempting incomplete implementations: (1) a generic
+CallBack16 finally that restores entry pointers/IP, because it misses simulator
+ownership and exception target selection; (2) c_getCpuState restoration, because
+it rolls back unrelated authoritative state. The required architecture remains
+owner-paired cleanup: original CallBack16 owns its call record, original CCPU
+owns its exact jump-frame stack, original W32Exception owns disposition, existing
+scopes own execution/borrows. No second scheduler, TLS-frame registry, hidden
+window or generic CPU state manager is warranted.
+
+Implementation is not yet admitted merely by those negative conclusions.
+Three finite coupled design obligations remain in this same frame cohort:
+
+1. Define the caller continuation for preparation, active simulation and
+   returned-frame failures, including a legitimate moved backing and terminal
+   escape. Establish exactly which control fields may be restored and which
+   guest/shared changes must survive. Do not presume saved IP alone is enough.
+2. Preserve the selected original filter result/kill signal at the actual
+   resuming API boundary. Prefer that boundary's existing call-local identity
+   over another TLS manager; continue-execution/search must not run a synthetic
+   handler or prematurely roll back a live callback.
+3. Pair only the abandoned original TLS jump level, preserving ordinary FE,
+   same-level CPU exception continuation, nested callbacks and thread/session
+   retirement. The original owner must perform this operation, not an adapter
+   overlay of ThreadSimBuf. No new semantic concession has been chosen.
+
+These are concrete pre-implementation dependencies, not a request for owner
+approval or an excuse to absorb unrelated CPU repair. All selected owners and
+their combined normal/negative/lifetime witnesses must be completed before
+the next affected runtime build. Existing output/protocol rows remain S4 and
+are not silently closed or transferred to S5/S6. No runtime repair, build,
+publication or speedup is claimed by this audit-only progress record.
+
+Baseline SHA256s: wcall16 C44A3AE33014624B30A506A7620A06BB9AFF8B3B0611DC7224CF39C0A519776A;
+wow32 E00F224D9353C99F5884A8BC1B7ADA6CF797F5C67AC8FB2F056F6D0069DA8A24;
+wkman7F0E802CE413CF76235BBA8F2296B2DFFF4C4A69ED94CDD0216508DB88A214BF;
+walloc16 6A1111899ADF5351E03F9989325D2412EF0716DA307A36793DC35ABF585C81F2;
+wuser5BA9B920F7C5571CB17171D5DE123CC8FD27A2338B11B600B2057A72F23E3D96;
+c_main6039373F8614B77F66DFB8431A59957299048970A25D8B3E2DA5C05070CBDC4C;
+ntthread.c EE3EA7B12E544C9C34504D726256167DCE13E7A335F793250824F35D5C71E19D;
+ntthread.h A30D41E57C90BC0B27366DEBDAA1E6A23C214CC07D757E9F46C7B43FA636328E;
+c_getset02783213DEBC6B9A712ADECF37941B4FEA01C60C0CC86C0D3CDF526B1FF43374;
+immutable wow16cal441FCE7B100A5E4ECAAC173F190A02CE33CEE08340EA047037B0FAD3A681147C;
+native-extension93D840A9ECE0BE6FE0AFC6FA0597E23CFC2182359CE2BA4BE6E4848D97B6FA54;
+thunk-scope371CB5FE8AA52273A01085BADC3174F00CF0321814A62A1266A55D7F21E2A2F0.
+Original OpenNT wcall16 is4875844ABFB8D22025480C14174481A194779D83759CE3A696E978B68C55A9F0;
+wow32 1DFE9900E6DA3BF0E2984C3DF42BDD155B177CFE7707BB24E1324037147D292A;
+ntthread3FD33DC3055AC59E0958A8335C9F3D3155D36D76AC1E178C7DD1E4232DEB5528;
+c_main F6CD45A30B6575D38EF95083601594F1403A34EBEF1278DBB8362C19F4A14700.
+They retain these ordinary-return-only paths. The pinned comparison search
+finds no matching replacement body; this is not a claim that no historical
+patch has ever existed or admission to import an unaudited substitute.
+
+Public compiler/host-contract references, consulted2026-10-19:
+[termination-handler syntax](https://learn.microsoft.com/en-us/windows/win32/debug/termination-handler-syntax)
+documents native thread/process termination bypass;
+[exception timing](https://learn.microsoft.com/en-us/cpp/cpp/timing-of-exception-handling-a-summary?view=msvc-170)
+distinguishes filter selection and unwind; and
+[longjmp](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/longjmp?view=msvc-170)
+describes the separate nonlocal transfer. Installed MSVC14.43.34808/setjmp.h
+maps ordinary C setjmp to _setjmp unless setjmpex overrides it. Do not infer
+every callback exit's unwind behavior from a C++ example or the word exception.
+No external implementation or SDK text is imported into runtime source.
+
+Second-role review accepts these owner/dependency findings, not a completed
+continuation design or runtime correction. The source audit changes three
+documents only: zero original-host diff, zero guest diff, no build/runtime
+invocation or publication. P20 manifest/ZIP hashes remain unchanged. Mandatory
+documentation/links/diff, coherent installed13 and two-cache residual checks
+precede the audit commit; retained source findings do not substitute for the
+eventual whole-group normal, failure, nesting and terminal acceptance.

@@ -13,11 +13,11 @@ Earlier WRITE and unobserved0102 failures remain unlocated, not repaired by
 later passes. The [audit](../etc/evidence/m0-t447-s4-message-source-audit.md#p20-bounded-delivery)
 retains exact identities, failed controls and evidence limits. No guest change.
 
-M4 group347/098 pairs original parameter-map callers, optional-map failure,
-borrowed/heap/stack release and native-call unwind. Its full source matrix,
-immutable P19 reference and proof limits remain in the audit. No general
-unthunker-on-abort or stale CPU restore. Full M1--M6/S4, callback-frame and
-protocol/output reconciliation and S5/S6 remain open; this is not task closure.
+After P20, the active M4 source audit traces callback frames through original
+W32Dispatch, CallBack16, CCPU simulation TLS and normal/terminal returns.
+The [findings](../etc/evidence/m0-t447-s4-message-source-audit.md#post-p20-original-frame-and-simulation-owner-audit)
+reject a bare finally or whole-machine rollback. No runtime edit or new
+semantic waiver. Full M1--M6/S4, frame/protocol/output and S5/S6 remain open.
 
 Delivery cleanup refreshes stale enumeration metadata before unchanged guards;
 CleanupOnly22 and exact disposal pass. Build retains only the two valid caches.
