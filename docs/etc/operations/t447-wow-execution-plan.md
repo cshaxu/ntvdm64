@@ -174,6 +174,46 @@ new finalizer, payload manager or semantic relaxation follows. See the
 This test/research-only P17 does not complete actual Win16 M4, construction
 rollback, movement, mapping or exception paths.
 
+Post-P21 source review narrows neither the nineteen-owner inventory nor M4.
+Read the full native-output closure, not only the allocator sites: MDIGETACTIVE
+and NEXTMENU also write native payloads. Before the whole call-owned resource
+repair, extend the existing raw USER capture control with six forms:
+MEASUREITEM, NCCALCSIZE rectangle, NCCALCSIZE parameters including lppos,
+ASKCBFORMATNAME, MDIGETACTIVE BOOL and NEXTMENU. Preserve the original four
+cases/default invocation and run the complete extended ten in both widths.
+Observe actual reply/capture identity and post-reply outer/nested writability;
+never probe through a protected alias, synthesize a host capture or presume
+all standard messages marshal identically. Native observation success is not
+production ownership closure. Any new semantic concession still needs approval.
+Scratch build/t447-s4-output-contract belongs to S4,60min phase/180min retained,
+2GiB/15min no-progress; reuse stable message-probes trees and preserve P21.
+
+The complete prerequisite passes: retained default8 plus extended20, with
+24 actual post-reply output writes and two additional nested WINDOWPOS writes.
+The independent sender pages are NOACCESS before those writes. All six added
+forms have separate writable receiver captures in this observed USER build;
+none exposes a protected alias. Output is not already copied to the sender
+at early reply. This preserves the adopted modern USER contract, not NT4's
+early-copy/ordering guarantee. No runtime or guest source changes follow from
+this test/source-only checkpoint; P21 remains the published baseline.
+Reproduce with tests/observation/verify-wow-message-capture.ps1 -EvidenceRoot
+<fresh-build-evidence-root>, as an owned hidden background job. The producer
+reuses the existing two strict native Release/MT targets, preserves default
+invocation and records host/source/graph/artifact identities. See the
+[complete results and finite repair boundary](../evidence/m0-t447-s4-message-source-audit.md#complete-native-output-prerequisite-and-finite-transaction-boundary).
+
+Next production cohort is the existing call-owned conversion transaction,
+not additional message features: publish original release keys immediately,
+consume them exactly once on normal/failed paths, pair nested MDI and the
+independent CBT caller, and restore only a failed caller's callback-stack
+cursor/INIT bit. Preserve normal original conversion, output writes, return
+translation, allocator/global-lock policy and terminal cleanup admission.
+Protocol-owned DDE and M3 idle reconciliation remain distinct S4 owners;
+neither is silently freed or declared complete by this cohort. Register the
+minimal mirror/adapter exception before production edits, implement the whole
+cohort, then run original-body failure/lifecycle and real guest acceptance
+plus every-P floors. The native probe is not a substitute for these gates.
+
 ### M4 original construction and owned-release correction group
 
 After P19,347/098 is the finite parameter-map group, not just a CB_DIR guard:

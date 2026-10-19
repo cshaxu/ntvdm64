@@ -7124,3 +7124,205 @@ cleanup. Final CheckResidual returns only build/.ccache and build/.ninja;
 neither cache, installed package, canonical media nor user configuration is
 removed. Disposable evidence is deleted, not recoverable raw evidence; source
 tests, the retained conclusions/hashes and committed runtime baselines remain.
+
+### Post-P21 complete output and call-owned transaction source review
+
+Baseline is clean4b8a7c8ae6eaaca3350d640650dd9d57201fd581, with P21's exact
+installed13 and immutable guest ZIP. The preceding goal turn is verified
+progress, not a wait: the callback/CCPU/error-UI cohort was implemented,
+accepted, published and pushed. This continuation is source-first; no product
+test is run to discover the next defect and no new production code is selected
+merely because the old broad floors pass.
+
+Read actual wmdisp32/wmdisp32.h/wowhooks/walloc16/wcall16/wmsg16, the selected
+aw32Msg table, current message-lifetime/native-extension adapters, and the
+immutable wow16cal GlobalUnlockFree body. Source establishes these finite
+coupled obligations:
+
+| Original call-owned group | Concrete retained state and failure boundary |
+| --- | --- |
+| CREATE/MDICREATE | Class/title keys are published after copying; a throwing putstr16 can escape before the key is retained. Error labels cover ordinary NULL failures, not every escaped partial construction. Nested MDI needs ownership transfer and original title/class/record release, not another allocator. |
+| GETTEXT/ASKCBFORMATNAME/GETDLGCODE/DROPOBJECT | The returned malloc16 token is call-owned; normal unthunk frees it, but a constructor/copyback/callback escape or constructed request without a callback skips that release. GETTEXT's DS-based stack route must not be mistaken for heap. |
+| SIZECLIPBOARD/PAINTCLIPBOARD and WINHELP | Temporary original global handles/pointers are call-owned, unlike clipboard data or DDE transfers. Capture completed acquisition before copy/lock can fail; preserve normal lock/unlock and WinHelp foreground behavior. Abort cleanup must not rerun foreground activation. |
+| MINMAXINFO/DRAWITEM/MEASUREITEM/DELETEITEM/COMPAREITEM/NCCALCSIZE/WINDOWPOS | stackfree16 is deliberately empty; stackalloc16 changes TD.vpCBStack and INIT before CallBack16. P21 captures at callback entry, after converter allocations, so it cannot by itself roll back a constructor that never reaches that entry. Normal conversions, sign extension, padding and partial output writes remain original. |
+| Actual direct caller closure | W32Win16WndProcEx already has the selected finally; ThunkCbtHook's independent WM32Create record is not zero-initialized or paired by it. Nested WM32Create constructs another local MDI record. Both direct/nested call paths must be included, not only the table-dispatched path. |
+| DDE Advise/Execute and related packet owners | DDEFindPair16/DDEAddhandle transfers ownership into the original protocol list. A universal call-finally free is wrong; retain this separately enumerated protocol-owner obligation inside S4. |
+
+The guest GlobalUnlockFree entry resolves GlobalHandle from the selector,
+unlocks, and frees only at zero lock count. Thus an aborted global conversion
+cannot add an unconditional extra GlobalLock and expect one UnlockFree to
+release a still-locked allocation. This original kernel source is read-only
+behavior evidence, never rebuilt or patched. Original free16's pool versus
+global fallback and completed acquisition boundary stay authoritative.
+
+The smallest viable repair direction is call-local progress in the existing
+message record, immediate capture of original release keys, consume-before-
+release through original free16/global operations, and a separate failed-call
+callback-stack rollback. Do not add a per-task resource registry, replay
+normal output unthunkers on abort, roll back already-written native outputs,
+or copy a full CPU state. Pure input, output, temporary global and transferred
+protocol objects remain distinct. The original BlockWOWIdle owner is
+softpc.new/host/src/nt_eoi.c, not a native UI no-op: its bit affects interrupt
+wakeup. Do not insert a leaf idle toggle into one converter while ignoring
+the enclosing native-call pair; existing M3 reconciliation retains that owner.
+
+An additional prerequisite is now source-proven, not a guessed buffer bug:
+the full forward table has native output stores outside P17's three output
+controls. MEASUREITEM writes its native structure; NCCALCSIZE writes a RECT
+or three RECTs plus pointed WINDOWPOS; ASKCBFORMATNAME writes a string;
+MDIGETACTIVE writes native BOOL; NEXTMENU writes menu/window results. The
+last two have no malloc16 site and would be missed by an allocation-only
+inventory. The reverse original unthunker consumes the corresponding data.
+Do not infer their actual modern USER capture lifetime from GETTEXT alone.
+
+Extend only the existing native capture control and its opt-in ten-case
+matrix in both widths, preserving the old four-case default. Keep the same
+early reply, sender-page NOACCESS, explicit acknowledgement and full-return
+fence; observe the nested lppos identity independently. Attempt writes only
+to separately writable receiver storage. A noncaptured alias is an observed
+boundary requiring design, not a passing capture or a reason to dereference
+the protected sender. No product rewrite, new semantic waiver or runtime
+publication follows merely from this design-prerequisite observation.
+
+### Complete native output prerequisite and finite transaction boundary
+
+This is a test/source-only S4 checkpoint after P21, not a runtime P or S4
+closure. No production source, mirror, public/wire ABI, release binary,
+guest ZIP or configuration changes. The native observation supplies a missing
+input to the whole conversion design, not a source of trace-derived patches.
+
+Reproducer: tests/observation/verify-wow-message-capture.ps1 -EvidenceRoot
+<fresh build child>, launched hidden with recorded PID/arguments and a3000s
+outer budget. It builds the existing wow_capture_native_control target in
+each stable MSVC Release tree after explicit VsDevCmd -arch=x86/x64, proves
+actual /O2, /MT or -MT, /W4 /WX native-only commands and PE machine14c/8664,
+then runs MSGCAPTURE with no arguments and --extended. Each build has1200s,
+each native observation180s; all complete normally. No product provider,
+guest, style DLL or external-source executable is linked into this probe.
+
+The initial r1 exits1 before compilation: the new verifier recognized /MT
+but not CMake's equivalent -MT spelling. This is a harness failure, not a
+product or USER failure. Correcting only that check gives r2's complete
+passing group. After adding retained host and early-copy identities, frozen
+r3 repeats the same full group successfully. Both r3 incremental builds say
+no work to do; r2 compiled the changed probe in both stable trees. Do not
+count r1 as a passing test or treat the repeated build as a cold build.
+
+| Case per width | Native output contract observed after early reply |
+| --- | --- |
+| GETTEXT, GETMINMAXINFO, WINDOWPOSCHANGING | Old strict positives retained: distinct capture, actual output write after sender-page protection, normal full-return fence. |
+| COPYDATA | Old input-only header and nested-byte captures retained; no output write or output-copy claim. |
+| MEASUREITEM | Distinct captured MEASUREITEMSTRUCT; receiver writes itemWidth after sender protects its page. |
+| NCCALCSIZE, wParam0 | Distinct RECT capture; receiver writes left after protection. |
+| NCCALCSIZE, wParam1 | Distinct outer parameters and distinct nested lppos; receiver writes both after protection. Neither pointer aliases the corresponding sender storage. |
+| ASKCBFORMATNAME | Distinct writable string capture. |
+| MDIGETACTIVE | Distinct writable native BOOL, despite no original forward allocation site. |
+| NEXTMENU | Distinct writable MDINEXTMENU result fields, despite no original forward allocation site. |
+
+r3: build x86 PID22016 starts20:08:50.185Z,6.560s; x86 default26276,
+0.140s and extended49436,0.139s; build x64 PID38508 starts20:08:57.256Z,
+5.659s; x64 default43136,0.121s and extended4852,0.135s. All six exit0.
+Default8 plus extended20 gives28 protocol observations,24 actual outer
+output writes and two nested WINDOWPOS writes; all four executable runs
+report errors0. The extended set has18 outputs and two input-only COPYDATA
+cases, not20 output buffers. Each sender waits for ReplyMessage result6,
+protects its allocated page NOACCESS and proves ReadProcessMemory rejection,
+acknowledges, then fences full receiver return with a second synchronous
+message/result. The receiver queries protection before dereferencing and
+never writes a protected alias. A fault remains diagnostic failure.
+
+All24 output observations report output_at_reply0: the original before-reply
+mutation has not been copied to the sender at early return. This is evidence
+for the already approved modern USER delivery/reply boundary, not a restored
+NT4 early-copy/ordering guarantee. It does not justify delaying reply, adding
+a buffer engine, writing directly to sender memory, host-version gating or
+another semantic concession. Noncaptured aliases would remain explicitly
+unproved results, not silently safe or product passes.
+
+Recorded OS10.0.26300.0; native and WOW USER32 report10.0.26100.8117.
+Native USER32 SHA256 F285937030BCB325CAD39EE5BE4818F6666241229ADEADEA4FF1AE469DFD7EF3;
+WOW USER32 56F3BC77020E21EBEEF825965929DC0D0BD87F9CAFBB08DBCD477043E4342D2E.
+Current host/build only: other OS versions, cross-process capture, actual
+Win16 converters, ANSI/Unicode edge cases and abnormal guest return are not
+proved by these native same-process/cross-thread observations.
+
+Frozen C source CB537DDDA30EAF77815CB6F79146DA4F04509080D1A2963CD419A70581ECF429;
+producer D0CAAE0877FD0ACAF097B6E7EBABCA1CA36F8E96B92D89D6F2F6B7E8AD550DD8.
+Native x86 image0F95A0F355E893A1DA55347498B03E5C2488F2F7D07DF79812B8828DFC4C277C;
+x64 image711AEE7C56F49344CB96387CD442628F8D9F2DA2F1DA48F35601A65739ED2892.
+r3 result D5F6D21FF0B0A49FCDBC762BBA08B8F13480CB667611D93564390580D4012048;
+steps3AA7916049F47F1A28F928202CAB56C7C63E82A0EDEC0E225CB0C7C1A305DF5B;
+observations F8E2DDC9D300A61561F12060941C4AA9D644737ADCF42E9189BF4FFCC91C14DD.
+
+The finite production repair ledger remains these four coupled obligations,
+with source locations and causes in the preceding table, not an indefinite
+"foundation incomplete" category:
+
+1. Completed call-owned heap/global acquisitions must publish their original
+   release keys before any putstr16/GETVDMPTR/copy that can escape. Cover
+   CREATE, MDICREATE, GETTEXT's heap variant, GETDLGCODE, ASKCBFORMATNAME,
+   DROPOBJECT, SIZE/PAINTCLIPBOARD and WINHELP. Existing SETTEXT/CBDIR and
+   COPYDATA progress remain composed, not replaced. A failed acquisition
+   creates no key; class atoms are not allocations. Original allocators and
+   pool/global distinctions remain authoritative. Native GlobalLock success
+   must pair its own unlock on copy failure; it is not a guest global lock.
+2. Normal releases and abort cleanup consume those same keys exactly once,
+   before calling the original release operation. A callback FALSE still
+   executes normal original unthunk. Abnormal cleanup performs no output
+   copyback, HWND/HCURSOR return conversion or WinHelp foreground activation;
+   it does not roll back partial native writes. Preserve the global lock
+   count: do not add a fresh guest GlobalLock to an already locked temporary.
+3. Pair every actual owner: W32Win16WndProcEx, direct ThunkCbtHook CREATE and
+   nested WM32Create/WM32MDICreate construction/transfer. The nested owner
+   retains keys until complete transfer; an outer copy failure must release
+   the transferred keys too. Zero initialization alone cannot supply this
+   transaction, and normal unthunk cannot be replayed as an abort finalizer.
+4. Capture the original callback-stack cursor and INIT bit before converter
+   stackalloc16, restoring them only after failed-call cleanup while the
+   same original task/execution boundary remains live. Cover stack-only
+   MINMAXINFO/DRAWITEM/MEASUREITEM/DELETEITEM/COMPAREITEM/NCCALCSIZE/WINDOWPOS,
+   DS-based GETTEXT/SETTEXT and CBT stack temporaries. Preserve normal
+   stackfree16's deliberate no-op, other TD flags, SignalProc teardown and
+   P21's callback/CCPU continuation recovery. Never touch a retired TD or
+   enable application reentry after terminal withdrawal.
+
+Original-body acceptance must cover failure before acquisition, after each
+published key, nested transfer, missing/rejected callback, callback escape,
+normal output conversion failure, repeated cleanup, normal callback FALSE,
+global lock counts, DS/heap policy, stack cursor/INIT and terminal admission.
+Actual guest tests must exercise normal and escaped callbacks with surviving
+tasks and normal retirement; every-P retained floors/publication follow only
+after that entire cohort is implemented. These are required future gates,
+not passes supplied by this native probe. DDE Advise/Execute list ownership,
+other protocol packets and M3 BlockWOWIdle pairing remain separately named
+S4 obligations; they are not temporary objects to blanket-free, silently
+transferred to another S or closed here. No new exception ID is reserved or
+registered by this test/source-only change; any production seam is registered
+before implementation with its precise mirror budget.
+
+Second-role review compares the actual five-file diff and the original
+callers, not just the native exit codes. The no-argument four-case contract
+is retained; opt-in cases use fixed known structures, no automatic payload
+inference, protected-alias dereference or product exception swallowing.
+The new runner reports observation completion separately from runtime
+acceptance and unproved captures. Host capture observations do not discharge
+the four transaction obligations above. Added source is independently authored
+test code only; mirror diff increase0/decrease0, no new source import or ABI.
+
+Quality PID5548 starts20:10:14.882Z with240s deadline, exits0: documentation
+governance and relative links, PowerShell parse, whitespace, frozen native
+inputs, unchanged13 release/installed hashes and original guest ZIP all pass.
+Its retained stdout SHA256
+32C59BFD39560CFCEADE7C05449529430EDE89DE28FDBD00584A480F9B1701F7;
+owner/command receipt AE5E7899F39E43F0611D89DF3B08C16FC61164B44200FB7AF5028E21B894098A.
+No product rebuild, deployment, process kill, prune or cache clearing occurs.
+
+After actual owner/child start-identity quiescence checks, the sole cleanup
+tool's read-only inventory, preview and explicit Apply agree on62 generated
+files/51044 bytes (49.85KiB), membership
+B3AFD628846680E5E77EB9EBEEE4C2C06DE6BF799D712483FBBB02FC1D551D71.
+No media, user configuration, Git or unknown item requires an exception.
+The concise results/hashes and reproducible tests above replace disposable
+raw receipts; deleted raw output is not recoverable evidence. CheckResidual
+returns only build/.ccache and build/.ninja, both preserved. T447 S4 remains
+active with the finite transaction cohort next; S5/S6 and Queue unchanged.

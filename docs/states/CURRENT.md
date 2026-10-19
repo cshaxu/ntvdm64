@@ -13,13 +13,13 @@ Earlier WRITE and unobserved0102 failures remain unlocated, not repaired by
 later passes. The [audit](../etc/evidence/m0-t447-s4-message-source-audit.md#p21-bounded-callback-abort-delivery)
 retains exact identities, failed controls and evidence limits. No guest change.
 
-The failed Preparation/Close guest control is repaired through existing
-execution scopes, not a new scheduler or UI engine. The audit retains failed
-controls/scaffolds, original policy/shared state and evidence limits.
 Full M1--M6/S4, protocol/output and S5/S6 remain open.
+M4's complete native-output prerequisite now passes28 observations in both
+widths, including nested NCCALCSIZE storage. This test/source-only checkpoint
+does not repair call-owned conversion/CBT rollback; P21 stays installed.
 
-Delivery disposes only owned6101 temporary files/321.17MiB after hash retention
-and joined jobs. Build retains only the two valid caches; no prune or guest edit.
+Only the two build caches remain; disposal evidence stays in the audit.
+No prune or guest edit.
 
 ## Current Work
 

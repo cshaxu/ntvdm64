@@ -15,6 +15,49 @@ static void *received, *received_data;
 static DWORD protection, data_protection, receive_flags;
 static volatile LONG errors, continued;
 static LONG capture_write;
+static BOOL extended;
+static UINT current_variant;
+static LONG data_capture_write;
+static void *source_data;
+static HMENU menu;
+
+static BOOL writable(DWORD value)
+{
+    DWORD access=value & 0xff;
+    return !(value & PAGE_GUARD) && (access==PAGE_READWRITE ||
+        access==PAGE_WRITECOPY || access==PAGE_EXECUTE_READWRITE ||
+        access==PAGE_EXECUTE_WRITECOPY);
+}
+
+/* Fixed original output families, not an automatic payload-size inference. */
+static void write_output(UINT message,void *payload,BOOL after)
+{
+    int value=after ? 42 : 23;
+    if(message==WM_GETTEXT || message==WM_ASKCBFORMATNAME)
+        memcpy(payload,after ? "after!" : "before",7);
+    else if(message==WM_GETMINMAXINFO)
+        ((MINMAXINFO *)payload)->ptReserved.x=after ? 0x4321 : 0x1234;
+    else if(message==WM_WINDOWPOSCHANGING)((WINDOWPOS *)payload)->x=value;
+    else if(message==WM_MEASUREITEM)((MEASUREITEMSTRUCT *)payload)->itemWidth=(UINT)value;
+    else if(message==WM_NCCALCSIZE)((RECT *)payload)->left=value;
+    else if(message==WM_MDIGETACTIVE)*(BOOL *)payload=after ? FALSE : TRUE;
+    else if(message==WM_NEXTMENU){
+        ((MDINEXTMENU *)payload)->hmenuNext=after ? NULL : menu;
+        ((MDINEXTMENU *)payload)->hwndNext=after ? NULL : window;
+    }
+}
+
+static int output_before_reply(UINT message)
+{
+    if(message==WM_GETTEXT || message==WM_ASKCBFORMATNAME)return !memcmp(page,"before",7);
+    if(message==WM_GETMINMAXINFO)return ((MINMAXINFO *)page)->ptReserved.x==0x1234;
+    if(message==WM_WINDOWPOSCHANGING)return ((WINDOWPOS *)page)->x==23;
+    if(message==WM_MEASUREITEM)return ((MEASUREITEMSTRUCT *)page)->itemWidth==23;
+    if(message==WM_NCCALCSIZE)return ((RECT *)page)->left==23;
+    if(message==WM_MDIGETACTIVE)return *(BOOL *)page==TRUE;
+    if(message==WM_NEXTMENU)return ((MDINEXTMENU *)page)->hmenuNext==menu;
+    return -1;
+}
 
 static void check(BOOL condition){if(!condition)InterlockedIncrement(&errors);}
 
@@ -34,36 +77,37 @@ static LRESULT CALLBACK receive(HWND target,UINT message,WPARAM wp,LPARAM lp)
         received=(void *)lp;received_data=NULL;
         receive_flags=InSendMessageEx(NULL);
         check((receive_flags & ISMEX_SEND)!=0);
-        if(message==WM_GETTEXT){
-            check(wp==64);memcpy((void *)lp,"before",7);
-        }else if(message==WM_GETMINMAXINFO){
-            ((MINMAXINFO *)lp)->ptReserved.x=0x1234;
-        }else if(message==WM_WINDOWPOSCHANGING){
-            ((WINDOWPOS *)lp)->x=23;
-        }else{
+        if(message==WM_COPYDATA){
             const COPYDATASTRUCT *copy=(const COPYDATASTRUCT *)lp;
             check(copy->dwData==0x456789ab && copy->cbData==8 &&
                 !memcmp(copy->lpData,"M4copy!!",8));
             received_data=copy->lpData;
+        }else{
+            if(message==WM_GETTEXT || message==WM_ASKCBFORMATNAME)check(wp==64);
+            write_output(message,(void *)lp,FALSE);
+            if(message==WM_NCCALCSIZE && current_variant){
+                received_data=((NCCALCSIZE_PARAMS *)lp)->lppos;
+                check(received_data!=NULL);
+                if(received_data)((WINDOWPOS *)received_data)->x=23;
+            }
         }
         check(ReplyMessage(6));
         check(WaitForSingleObject(acknowledgement,5000)==WAIT_OBJECT_0);
         /* Observe without dereferencing first: an alias may be NOACCESS. */
         protection=query_protection(received);
         if(received_data)data_protection=query_protection(received_data);
-        capture_write=0;
+        capture_write=data_capture_write=0;
         if(message!=WM_COPYDATA && received!=page &&
-            !(protection & PAGE_GUARD) &&
-            ((protection & 0xff)==PAGE_READWRITE ||
-             (protection & 0xff)==PAGE_WRITECOPY ||
-             (protection & 0xff)==PAGE_EXECUTE_READWRITE ||
-             (protection & 0xff)==PAGE_EXECUTE_WRITECOPY)){
+            writable(protection)){
             __try {
-                if(message==WM_GETTEXT)memcpy(received,"after!",7);
-                else if(message==WM_GETMINMAXINFO)((MINMAXINFO *)received)->ptReserved.x=0x4321;
-                else ((WINDOWPOS *)received)->x=42;
+                write_output(message,received,TRUE);
                 capture_write=1;
             } __except(EXCEPTION_EXECUTE_HANDLER){check(FALSE);}
+        }
+        if(message==WM_NCCALCSIZE && current_variant && received_data &&
+                received_data!=source_data && writable(data_protection)){
+            __try {((WINDOWPOS *)received_data)->x=42;data_capture_write=1;}
+            __except(EXCEPTION_EXECUTE_HANDLER){check(FALSE);}
         }
         InterlockedExchange(&continued,1);
         return 0x447a0099;
@@ -73,37 +117,48 @@ static LRESULT CALLBACK receive(HWND target,UINT message,WPARAM wp,LPARAM lp)
 
 static DWORD WINAPI send_cases(PVOID ignored)
 {
-    const UINT messages[]={WM_GETTEXT,WM_GETMINMAXINFO,WM_WINDOWPOSCHANGING,WM_COPYDATA};
+    static const struct {UINT message;UINT wp;} cases[]={
+        {WM_GETTEXT,64},{WM_GETMINMAXINFO,0},{WM_WINDOWPOSCHANGING,0},{WM_COPYDATA,0},
+        {WM_MEASUREITEM,0},{WM_NCCALCSIZE,0},{WM_NCCALCSIZE,TRUE},
+        {WM_ASKCBFORMATNAME,64},{WM_MDIGETACTIVE,0},{WM_NEXTMENU,VK_LEFT}};
     unsigned i;DWORD old,unused;DWORD_PTR result=0;SIZE_T read;
     BYTE byte;
     (void)ignored;
-    for(i=0;i<sizeof(messages)/sizeof(messages[0]);++i){
-        WPARAM wp=messages[i]==WM_GETTEXT ? 64 : 0;
+    for(i=0;i<(extended ? sizeof(cases)/sizeof(cases[0]) : 4u);++i){
+        UINT message=cases[i].message;
+        WPARAM wp=cases[i].wp;
         LRESULT sent;DWORD send_error;DWORD_PTR reply_result;int output_at_reply=-1;
         check(ResetEvent(acknowledgement));
         page=VirtualAlloc(NULL,4096,MEM_RESERVE|MEM_COMMIT,PAGE_READWRITE);
         if(!page){check(FALSE);break;}
-        if(messages[i]==WM_COPYDATA){
+        source_data=NULL;
+        if(message==WM_COPYDATA){
             COPYDATASTRUCT *copy=(COPYDATASTRUCT *)page;
             copy->dwData=0x456789ab;copy->cbData=8;copy->lpData=page+64;
             memcpy(copy->lpData,"M4copy!!",8);
-        }else if(messages[i]==WM_WINDOWPOSCHANGING){
+            source_data=copy->lpData;
+        }else if(message==WM_WINDOWPOSCHANGING){
             WINDOWPOS *position=(WINDOWPOS *)page;
             position->hwnd=window;position->hwndInsertAfter=HWND_TOP;
             position->cx=100;position->cy=60;
+        }else if(message==WM_MEASUREITEM){
+            ((MEASUREITEMSTRUCT *)page)->CtlType=ODT_BUTTON;
+        }else if(message==WM_NCCALCSIZE && wp){
+            WINDOWPOS *position=(WINDOWPOS *)(page+128);
+            ((NCCALCSIZE_PARAMS *)page)->lppos=position;
+            position->hwnd=window;position->cx=100;position->cy=60;
+            source_data=position;
+        }else if(message==WM_NEXTMENU){
+            ((MDINEXTMENU *)page)->hmenuIn=menu;
         }
         received=NULL;received_data=NULL;protection=data_protection=0;
-        InterlockedExchange(&continued,0);current_message=messages[i];
+        InterlockedExchange(&continued,0);current_variant=(UINT)wp;current_message=message;
         SetLastError(ERROR_SUCCESS);
         sent=SendMessageTimeoutA(window,current_message,wp,(LPARAM)page,
             SMTO_ABORTIFHUNG|SMTO_ERRORONEXIT,5000,&result);
         send_error=GetLastError();reply_result=result;
         check(sent!=0 && result==6);
-        if(sent){
-            if(current_message==WM_GETTEXT)output_at_reply=!memcmp(page,"before",7);
-            else if(current_message==WM_GETMINMAXINFO)output_at_reply=((MINMAXINFO *)page)->ptReserved.x==0x1234;
-            else if(current_message==WM_WINDOWPOSCHANGING)output_at_reply=((WINDOWPOS *)page)->x==23;
-        }
+        if(sent)output_at_reply=output_before_reply(current_message);
         check(VirtualProtect(page,4096,PAGE_NOACCESS,&old));
         read=0;check(!ReadProcessMemory(GetCurrentProcess(),page,&byte,1,&read) && !read);
         check(SetEvent(acknowledgement));
@@ -113,10 +168,13 @@ static DWORD WINAPI send_cases(PVOID ignored)
             result!=0x447a0098 || continued!=1){check(FALSE);break;}
         printf("message=%04X bits=%u alias=%u data_alias=%u protection=%08lX data_protection=%08lX sender=%llX receiver=%llX data=%llX status=%lld error=%lu reply=%llX output_at_reply=%d capture_write=%ld full_return=1\n",
             current_message,(unsigned)(sizeof(void *)*8),received==page,
-            received_data==page+64,protection,data_protection,
+            source_data && received_data==source_data,protection,data_protection,
             (unsigned long long)(ULONG_PTR)page,(unsigned long long)(ULONG_PTR)received,
             (unsigned long long)(ULONG_PTR)received_data,(long long)sent,send_error,
             (unsigned long long)reply_result,output_at_reply,capture_write);
+        if(extended)printf("detail case=%u message=%04X wparam=%u nested_write=%ld nested_required=%u\n",
+            i,current_message,current_variant,data_capture_write,
+            current_message==WM_NCCALCSIZE && current_variant!=0);
         check(VirtualProtect(page,4096,PAGE_READWRITE,&unused));
         check(VirtualFree(page,0,MEM_RELEASE));page=NULL;
         if(errors)break;
@@ -125,9 +183,11 @@ static DWORD WINAPI send_cases(PVOID ignored)
     return errors ? 1 : 0;
 }
 
-int main(void)
+int main(int argc,char **argv)
 {
     WNDCLASSA cls={0};MSG msg;HANDLE sender;BOOL got;DWORD code=1;
+    if(argc>2 || (argc==2 && strcmp(argv[1],"--extended")))return 2;
+    extended=argc==2;
     cls.hInstance=GetModuleHandleA(NULL);cls.lpfnWndProc=receive;
     cls.lpszClassName="T447_CAPTURE_NATIVE_CONTROL";
     acknowledgement=CreateEventA(NULL,TRUE,FALSE,NULL);
@@ -135,6 +195,7 @@ int main(void)
     window=CreateWindowA(cls.lpszClassName,"Capture control",WS_POPUP,
         0,0,100,60,NULL,NULL,cls.hInstance,NULL);
     if(!window)return 3;
+    if(extended){menu=CreateMenu();if(!menu)return 5;}
     sender=CreateThread(NULL,0,send_cases,NULL,0,NULL);
     if(!sender)return 4;
     while((got=GetMessageA(&msg,NULL,0,0))>0)DispatchMessageA(&msg);
@@ -142,6 +203,7 @@ int main(void)
     check(WaitForSingleObject(sender,10000)==WAIT_OBJECT_0 &&
         GetExitCodeThread(sender,&code) && code==0);
     check(CloseHandle(sender));check(CloseHandle(acknowledgement));
+    if(menu)check(DestroyMenu(menu));
     check(UnregisterClassA(cls.lpszClassName,cls.hInstance));
     printf("errors=%ld\n",errors);
     return errors ? 1 : 0;
