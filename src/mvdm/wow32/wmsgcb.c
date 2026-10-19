@@ -14,6 +14,7 @@
 
 #include "precomp.h"
 #pragma hdrstop
+#include "wow_message_lifetime.h" /* DIVERGENCE(MVDM-HOST-DIV-347) */
 
 MODNAME(wmsgcb.c);
 
@@ -134,10 +135,15 @@ BOOL FASTCALL ThunkCBMsg16(LPMSGPARAMEX lpmpex)
                 break;
 	 
             case CB_DIR:
+                /* DIVERGENCE(MVDM-HOST-DIV-347): optional map acquisition. */
+                lpmpex->MsgBuffer->text.flags = 0;
                 GETPSZPTR(lpmpex->Parm16.WndProc.lParam, (LPSZ)lpmpex->lParam);
+                lpmpex->MsgBuffer->text.native = lpmpex->lParam;
+                if (lpmpex->lParam) lpmpex->MsgBuffer->text.flags = WOW_TEXT_ACTIVE;
 
                 if (W32CheckThunkParamFlag()) {
-                    AddParamMap(lpmpex->lParam, lpmpex->Parm16.WndProc.lParam);
+                    if (AddParamMap(lpmpex->lParam, lpmpex->Parm16.WndProc.lParam))
+                        lpmpex->MsgBuffer->text.flags |= WOW_TEXT_MAPPED;
                 }
                 break;
 
@@ -152,6 +158,15 @@ BOOL FASTCALL ThunkCBMsg16(LPMSGPARAMEX lpmpex)
 
 VOID FASTCALL UnThunkCBMsg16(LPMSGPARAMEX lpmpex)
 {
+    /* DIV-347: native filters may replace uMsg/lParam, not our acquisition. */
+    if (lpmpex->Parm16.WndProc.wMsg == OLDCB_DIR) {
+        DWORD owned = lpmpex->MsgBuffer->text.flags;
+        lpmpex->MsgBuffer->text.flags = 0;
+        if (owned & WOW_TEXT_MAPPED)
+            DeleteParamMap(lpmpex->Parm16.WndProc.lParam, PARAM_16, NULL);
+        if (owned & WOW_TEXT_ACTIVE) FREEPSZPTR((LPSZ)lpmpex->MsgBuffer->text.native);
+        return;
+    }
     switch(lpmpex->uMsg) {
 
         case CB_GETLBTEXT:
@@ -178,14 +193,6 @@ VOID FASTCALL UnThunkCBMsg16(LPMSGPARAMEX lpmpex)
         case CB_FINDSTRINGEXACT:
         case CB_INSERTSTRING:
         case CB_SELECTSTRING:
-            FREEPSZPTR((LPSZ)lpmpex->lParam);
-            break;
-
-        case CB_DIR:
-            if (W32CheckThunkParamFlag()) {
-                DeleteParamMap(lpmpex->lParam, PARAM_32, NULL);
-            }
-
             FREEPSZPTR((LPSZ)lpmpex->lParam);
             break;
 

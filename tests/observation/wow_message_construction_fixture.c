@@ -7,7 +7,7 @@
 #include <stddef.h>
 #define FASTCALL __stdcall
 typedef WORD HAND16,HMENU16,HWND16,HDC16,HTASK16,HMIDIIN16,HMIDIOUT16,HWAVEIN16,HWAVEOUT16;
-typedef DWORD VPVOID,VPBYTE,VPSZ;
+typedef DWORD VPVOID,VPBYTE,VPSZ,VPPROC;
 typedef LPSTR LPSZ;
 typedef struct {DWORD dwExStyle;} WW,*PWW;
 #include "message_construction_types.h"
@@ -17,7 +17,9 @@ typedef struct {DWORD unused;} BLKCACHE,*PBLKCACHE;
 #define PARAM_16 1
 #define PARAM_32 2
 #include "message_construction_map_types.h"
-typedef struct {PARM16 Parm16;LONG lParam;UINT uParam;} MSGPARAMEX,*LPMSGPARAMEX;
+#include "message_construction_messages.h"
+#include "../../src/wow32-dll/include/wow_message_lifetime.h"
+BOOL DeleteParamMap(DWORD,UINT,BOOL *);
 typedef struct {DWORD dwWOWCompatFlags;HAND16 htask16;} PTD_VALUE;
 typedef struct {WORD cbData;BYTE data[14];} HLP,*LPHLP;
 #define WOWCF_DSBASEDSTRINGPOINTERS 1

@@ -176,6 +176,26 @@ rollback, movement, mapping or exception paths.
 
 ### M4 original construction and owned-release correction group
 
+After P19,347/098 is the finite parameter-map group, not just a CB_DIR guard:
+the original wparam table/cache/alias algorithm stays; make NULL and failed
+existing-node refresh transactional, and pair three producers with their
+three normal/abnormal release paths. Original WM32SetText/WM32CBDir keep
+conversion/heap/DS-stack policy. Existing call scratch records acquisition,
+not a parallel table; only these input-only unthunkers join existing finally
+owners. WU32SetWindowText captures its guest key before the native call and
+uses local finally. No generic output copyback-on-abort, guest edit, new ABI,
+lock, generation manager, Hook or helper window. The source audit's complete
+matrix owns exact states/caller closure, tests and limits. Mirror347 budget180
+executable added/removed lines across seven named originals; adapter098 only
+extends the existing finalizer. Finish the whole group and exact-body/actual
+witnesses before one build cohort. Scratch build/t447-s4-parameter-map owns
+60min build/180min retained,2GiB/15min no-progress; stable caches are reused.
+P20 completes the whole group,54 exact-source scenarios, actual6, all retained
+and installed13 gates; the indexed audit retains failures and exact hashes.
+S4 does not close on this group: original-frame and protocol/output cohorts
+remain. Dispose only this owned scratch and G7 fixture after archived evidence
+and joined jobs; preserve both valid caches and the coherent release.
+
 The post-P18 source sweep fixes the next finite cohort346 before another
 build: all five reverse/native-buffer acquisition branches in wmsgem's
 EM_REPLACESEL/EM_SETTABSTOPS, wmsglb's LB_GETSELITEMS/LB_SETTABSTOPS and

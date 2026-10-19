@@ -1,5 +1,23 @@
 # mvdm
 
+MVDM-HOST-DIV-347 registers the complete S4 parameter-map ownership cohort
+against pinned OpenNT5c5b979ec08c17d3ca2eb70e8aad62d26515d01c and P19.
+Seven existing originals: walias.h, wparam.c, wmsg16.c, wmsgcb.c, wmdisp32.c,
+wcntl32.c and wuwind.c. Keep the original table, refcounts, alias lookup,
+relocation, cache and task teardown. Reject zero pairs; rollback an existing
+reference if refresh fails/escapes; do not publish a NULL refreshed pointer.
+Use existing call scratch to distinguish actually acquired map references
+from direct views/owned heap/DS-stack, clear it before original release and
+reuse only the input-only text/CB_DIR unthunkers on abort. Capture the direct
+SetWindowText guest key before reentry and release its actual acquisition in
+local finally. No generic finalizer, allocator/table replacement, guest edit
+or ABI size/layout change. These original consumers alone know acquisition
+and release progress; a lower allocator cannot repair ignored failure or an
+unconditional deletion of another call's node. Budget180 executable added/
+removed lines across these seven files; exact original-source normal/fault/
+nested/relocation/teardown witnesses and real guest/retained13 gates precede
+publication. The indexed S4 source audit records baseline hashes and scope.
+
 MVDM-HOST-DIV-346 registers the complete reverse/native-buffer constructor
 failure cohort against pinned OpenNT5c5b979ec08c17d3ca2eb70e8aad62d26515d01c.
 wmsgem.c and wmsglb.c are byte-exact before this cohort, SHA256 respectively

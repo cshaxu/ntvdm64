@@ -673,14 +673,18 @@ BOOL FASTCALL WM32SetFocus(LPWM32MSGPARAMEX lpwm32mpex)
 BOOL FASTCALL WM32SetText(LPWM32MSGPARAMEX lpwm32mpex)
 {
     INT cb;
+    DWORD owned; /* DIVERGENCE(MVDM-HOST-DIV-347): existing call scratch. */
 
 
     if (lpwm32mpex->fThunk) {
+        lpwm32mpex->dwParam = 0;
+        lpwm32mpex->Parm16.WndProc.lParam = 0;
         if (lpwm32mpex->lParam) {
 
             LONG lParam = (LONG)GetParam16(lpwm32mpex->lParam);
             if (lParam) {
                 lpwm32mpex->Parm16.WndProc.lParam = lParam;
+                lpwm32mpex->dwParam = WOW_TEXT_ACTIVE | WOW_TEXT_MAPPED;
                 return (TRUE);
             }
  
@@ -690,21 +694,27 @@ BOOL FASTCALL WM32SetText(LPWM32MSGPARAMEX lpwm32mpex)
             if (CURRENTPTD()->dwWOWCompatFlags & WOWCF_DSBASEDSTRINGPOINTERS) {
                 if (!(lpwm32mpex->Parm16.WndProc.lParam = stackalloc16(cb)))
                     return FALSE;
+                lpwm32mpex->dwParam = WOW_TEXT_ACTIVE | WOW_TEXT_STACK;
             } else {
                 if (!(lpwm32mpex->Parm16.WndProc.lParam = malloc16(cb)))
                     return FALSE;
+                lpwm32mpex->dwParam = WOW_TEXT_ACTIVE;
             }
             putstr16((VPSZ)lpwm32mpex->Parm16.WndProc.lParam, (LPSZ)lpwm32mpex->lParam, cb);
         }
     }
     else {
 // BUGBUG 09-Apr-91 -- Should I copy back?
-        if (DeleteParamMap(lpwm32mpex->Parm16.WndProc.lParam, PARAM_16, NULL)) {
+        owned = lpwm32mpex->dwParam;
+        lpwm32mpex->dwParam = 0;
+        if (owned & WOW_TEXT_MAPPED) {
+            DeleteParamMap(lpwm32mpex->Parm16.WndProc.lParam, PARAM_16, NULL);
             return TRUE;
         }
+        if (!(owned & WOW_TEXT_ACTIVE)) return TRUE;
 
         if (lpwm32mpex->Parm16.WndProc.lParam) {
-            if (CURRENTPTD()->dwWOWCompatFlags & WOWCF_DSBASEDSTRINGPOINTERS) {
+            if (owned & WOW_TEXT_STACK) {
                 stackfree16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);
             } else {
                 free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);

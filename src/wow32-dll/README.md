@@ -1,5 +1,13 @@
 # WOW32 DLL target component
 
+ADAPTER-WOW-098 extends the existing message-lifetime finally owner for only
+the original input-only text/CB_DIR acquisition records (mirror347). Invoke
+their original pure-release unthunkers only while this call still owns a
+reference/view/buffer. Do not add a map, allocator, output-copyback engine,
+callback/frame restorer, DDE transfer rule or new export. Normal paths clear
+progress before reentrant releases; exceptional cleanup preserves LastError.
+No guest or public ABI change. Full M4 and callback-frame closure are separate.
+
 ADAPTER-WOW-097 pairs all seven original GUI COMMDLG native leaves with the
 existing borrowed execution scope. Original wcommdlg conversion, COMMDLGTD,
 Hook/resource cleanup and results remain unchanged. Only that original owner

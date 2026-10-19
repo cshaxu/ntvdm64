@@ -296,6 +296,14 @@ call checkpoint
 %assign form 1
 %rep 3
 create combo_name,0x40a10000+form,combo_%[form],owner
+; Both CB_DIR pointer forms use the real original combo/list directory path.
+; Invalid drive syntax has no filesystem side effects or wildcard matches.
+send combo_%[form],0x405,0,ds,invalid_dir-data
+expect 0xffff,0x180+form
+send combo_%[form],0x405,0,0,0
+expect 0xffff,0x184+form
+send combo_%[form],0x406,0,0,0
+expect 0,0x188+form
 send combo_%[form],0x403,0,ds,alpha-data
 expect 0,0x50+form
 send combo_%[form],0x403,0,ds,beta-data
@@ -595,6 +603,7 @@ button_name: db 'BUTTON',0
 edit_name: db 'EDIT',0
 list_name: db 'LISTBOX',0
 combo_name: db 'COMBOBOX',0
+invalid_dir: db '?:\T447MAP.INVALID',0
 filename: db 'CTLPROBE.BIN',0
 empty: db 0
 alpha: db 'Alpha',0

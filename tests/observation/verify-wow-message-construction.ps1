@@ -42,7 +42,7 @@ function Owned($name,$file,$arguments,$seconds,$expected){
 }
 try{
  $fixture="$PSScriptRoot/wow_message_construction_fixture.c"
- Get-FileHash "$repo/src/mvdm/inc/wow.h","$repo/src/mvdm/wow32/wmdisp32.c","$repo/src/mvdm/wow32/wmdisp32.h","$repo/src/mvdm/wow32/wmsg16.c","$repo/src/mvdm/wow32/wparam.c",$fixture,$PSCommandPath,$CompilerDriver|Export-Csv -NoTypeInformation "$root/source-inputs.csv"
+ Get-FileHash "$repo/src/mvdm/inc/wow.h","$repo/src/mvdm/wow32/wmdisp32.c","$repo/src/mvdm/wow32/wmdisp32.h","$repo/src/mvdm/wow32/wmsg16.c","$repo/src/mvdm/wow32/wparam.c","$repo/src/mvdm/wow32/walias.h","$repo/src/wow32-dll/include/wow_message_lifetime.h",$fixture,$PSCommandPath,$CompilerDriver|Export-Csv -NoTypeInformation "$root/source-inputs.csv"
  foreach($kind in @('baseline','candidate')){
   $old=$kind -eq 'baseline';$dir="$root/$kind";$null=New-Item -ItemType Directory $dir
   $wow=Read-Source 'src/mvdm/inc/wow.h' $old
@@ -59,6 +59,12 @@ try{
    "`n#pragma pack(pop)`n" +
    (Region $header 'typedef struct _WM32MSGPARAMEX *LPWM32MSGPARAMEX;' '} WM32MSGPARAMEX;' 'message-record')
   [IO.File]::WriteAllText("$dir/message_construction_types.h",$types)
+  # The original current text owner now uses the actual inline call scratch.
+  $aliases=Read-Source 'src/mvdm/wow32/walias.h' $old
+  $start=$aliases.IndexOf('typedef struct _DLGDATA',[StringComparison]::Ordinal)
+  $end=$aliases.IndexOf('#define MSG16NEEDSTHUNKING',$start,[StringComparison]::Ordinal)
+  if($start -lt 0 -or $end -lt 0){throw 'Original message records missing'}
+  [IO.File]::WriteAllText("$dir/message_construction_messages.h",$aliases.Substring($start,$end-$start))
   [IO.File]::WriteAllText("$dir/message_construction_map_types.h",(Region $map 'typedef struct tagParamNode* LPPARAMNODE;' 'MAPPARAM gParamMap;' 'original-map-records'))
   $bodies=@();foreach($name in @('FindParamMap','GetParam16','AddParamMap','ParamMapUpdateNode','DeleteParamMap','FreeParamMap')){$bodies+=Body $map $name}
   foreach($name in @('WM32MDICreate','WM32Create','WM32GetText','WM32SetText','WM32GetDlgCode','WM32AskCBFormatName','WM32WinHelp')){$bodies+=Body $dispatch $name}

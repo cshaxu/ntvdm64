@@ -2769,16 +2769,21 @@ ULONG FASTCALL WU32SetWindowPos(PVDMFRAME pFrame)
 
 ULONG FASTCALL WU32SetWindowText(PVDMFRAME pFrame)
 {
-    PSZ psz2;
+    PSZ psz2 = NULL;
     register PSETWINDOWTEXT16 parg16;
     HANDLE handle;
+    /* DIVERGENCE(MVDM-HOST-DIV-347): capture before native/guest reentry. */
+    DWORD text16, error;
+    BOOL mapped = FALSE;
 
     GETARGPTR(pFrame, sizeof(SETWINDOWTEXT16), parg16);
+    text16 = FETCHDWORD(parg16->f2);
+    __try {
     GETPSZPTR(parg16->f2, psz2);
     handle = HWND32(parg16->f1);
 
     if (NULL != psz2) {
-        AddParamMap((DWORD)psz2, FETCHDWORD(parg16->f2));
+        mapped = AddParamMap((DWORD)psz2, text16) != NULL;
     }
 
     if (CURRENTPTD()->dwWOWCompatFlags & WOWCF_DBASEHANDLEBUG) {
@@ -2792,12 +2797,13 @@ ULONG FASTCALL WU32SetWindowText(PVDMFRAME pFrame)
 
     // if we used param map successfully - then nuke there
 
-    if (NULL != psz2) {
-        DeleteParamMap((DWORD)psz2, PARAM_32, NULL);
+    } __finally {
+        error = GetLastError();
+        if (mapped) DeleteParamMap(text16, PARAM_16, NULL);
+        FREEPSZPTR(psz2);
+        FREEARGPTR(parg16);
+        SetLastError(error);
     }
-
-    FREEPSZPTR(psz2);
-    FREEARGPTR(parg16);
     RETURN(0);
 }
 

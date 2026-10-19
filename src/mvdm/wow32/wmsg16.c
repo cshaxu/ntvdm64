@@ -222,13 +222,22 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
     case WM_WININICHANGE:   // 01Ah, <SLPre,       LS>
     case WM_DEVMODECHANGE:  // 01Bh, <SLPre,       LS>
         {
-            LONG lParamMap;
+            LONG lParamMap, mapped;
 
+            /* DIVERGENCE(MVDM-HOST-DIV-347): retain this call's acquisition. */
+            lpmpex->MsgBuffer->text.flags = 0;
             GETPSZPTR(lParam, (LPSZ)lParamMap);
+            *plParamNew = lParamMap;
+            lpmpex->MsgBuffer->text.native = lParamMap;
+            if (lParamMap) lpmpex->MsgBuffer->text.flags = WOW_TEXT_ACTIVE;
             /* DIVERGENCE(MVDM-HOST-DIV-345): NULL needs no map; on optional
              * map failure retain the original unmapped lease/free path. */
-            *plParamNew = lParamMap ? (LONG)AddParamMap(lParamMap, lParam) : 0;
-            if (!*plParamNew) *plParamNew = lParamMap;
+            mapped = lParamMap ? (LONG)AddParamMap(lParamMap, lParam) : 0;
+            if (mapped) {
+                *plParamNew = mapped;
+                lpmpex->MsgBuffer->text.native = mapped;
+                lpmpex->MsgBuffer->text.flags |= WOW_TEXT_MAPPED;
+            }
             if (lParamMap != *plParamNew) {
                 FREEPSZPTR((LPSZ)lParamMap);
             }
@@ -1209,10 +1218,15 @@ VOID FASTCALL UnThunkWMMsg16(LPMSGPARAMEX lpmpex)
     case WM_WININICHANGE:   // 01Ah, <SLPre,       LS>
     case WM_DEVMODECHANGE:  // 01Bh, <SLPre,       LS>
         {
-            BOOL fFreePtr;
-            DeleteParamMap(lpmpex->lParam, PARAM_32, &fFreePtr);
+            /* DIVERGENCE(MVDM-HOST-DIV-347): consume only our captured key. */
+            DWORD owned = lpmpex->MsgBuffer->text.flags;
+            BOOL fFreePtr = TRUE;
+            lpmpex->MsgBuffer->text.flags = 0;
+            if (!(owned & WOW_TEXT_ACTIVE)) break;
+            if (owned & WOW_TEXT_MAPPED)
+                DeleteParamMap(lpmpex->Parm16.WndProc.lParam, PARAM_16, &fFreePtr);
             if (fFreePtr) {
-                FREEPSZPTR((LPSZ)lpmpex->lParam);
+                FREEPSZPTR((LPSZ)lpmpex->MsgBuffer->text.native);
             }
         }
         break;

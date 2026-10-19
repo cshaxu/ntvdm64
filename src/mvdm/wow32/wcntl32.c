@@ -14,6 +14,7 @@
 
 #include "precomp.h"
 #pragma hdrstop
+#include "wow_message_lifetime.h" /* DIVERGENCE(MVDM-HOST-DIV-347) */
 
 MODNAME(wcntl32.c);
 
@@ -444,7 +445,10 @@ BOOL FASTCALL  WM32CBAddString (LPWM32MSGPARAMEX lpwm32mpex)
 
 BOOL FASTCALL  WM32CBDir (LPWM32MSGPARAMEX lpwm32mpex)
 {
+    DWORD owned; /* DIVERGENCE(MVDM-HOST-DIV-347): actual acquisition mode. */
     if (lpwm32mpex->fThunk) {
+        lpwm32mpex->dwParam = 0;
+        lpwm32mpex->Parm16.WndProc.lParam = 0;
         lpwm32mpex->Parm16.WndProc.wMsg = (WORD) (WM_USER + (lpwm32mpex->uMsg - CB_GETEDITSEL));
         if (lpwm32mpex->lParam) {
             INT cb;
@@ -453,6 +457,7 @@ BOOL FASTCALL  WM32CBDir (LPWM32MSGPARAMEX lpwm32mpex)
                 LONG lParam = (LONG)GetParam16(lpwm32mpex->lParam);
                 if (lParam) {
                     lpwm32mpex->Parm16.WndProc.lParam = lParam;
+                    lpwm32mpex->dwParam = WOW_TEXT_ACTIVE | WOW_TEXT_MAPPED;
                     return (TRUE);
                 }
             }
@@ -461,14 +466,17 @@ BOOL FASTCALL  WM32CBDir (LPWM32MSGPARAMEX lpwm32mpex)
             lpwm32mpex->Parm16.WndProc.lParam = malloc16(cb);
             if (!(lpwm32mpex->Parm16.WndProc.lParam))
                 return FALSE;
+            lpwm32mpex->dwParam = WOW_TEXT_ACTIVE;
             putstr16((VPSZ)lpwm32mpex->Parm16.WndProc.lParam, (LPSZ)lpwm32mpex->lParam, cb);
         }
     } else {
-        if (W32CheckThunkParamFlag()) {
-            if (DeleteParamMap(lpwm32mpex->Parm16.WndProc.lParam, PARAM_16, NULL)) {
-                return TRUE;
-            }
+        owned = lpwm32mpex->dwParam;
+        lpwm32mpex->dwParam = 0;
+        if (owned & WOW_TEXT_MAPPED) {
+            DeleteParamMap(lpwm32mpex->Parm16.WndProc.lParam, PARAM_16, NULL);
+            return TRUE;
         }
+        if (!(owned & WOW_TEXT_ACTIVE)) return TRUE;
         if (lpwm32mpex->Parm16.WndProc.lParam)
             free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);
     }

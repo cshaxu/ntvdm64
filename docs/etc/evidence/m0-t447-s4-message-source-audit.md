@@ -6346,3 +6346,285 @@ second-role review checks the complete changed files, original budgets,
 test-only provenance, unproved branches and unchanged guest against the owner
 contract; there is no S4/T closure or new semantic concession. Reviewed source,
 tests, tool dependency, authorities and coherent assets form sequential P19.
+
+### Post-P19 complete parameter-map ownership cohort
+
+Source baseline18d0ec060024912e6b03aec69bdded6c9181af03, clean main/origin;
+P19 remains released/installed. This is source-led audit/design, not a test
+result. No compiler or diagnostic runtime was used to select these defects.
+One original worker-local gParamMap owns references/aliases; there is no
+project substitute to retain or delete. Native USER owns actual delivery,
+original converters own representations, existing scopes own execution and
+the new per-call bits only record acquired cleanup work. No second authority.
+
+| Complete selected entry/caller | Current fact / disposition |
+| --- | --- |
+| InitParamMap / wow32 initialization | Original once-per-worker cache initialization; keep. Failed cache allocation already falls back to original malloc_w. |
+| AddParamMap: ThunkWMMsg16 text family | P18 preserves the direct view on optional allocation failure, but normal DeleteParamMap by native pointer can still consume a different active alias node when this call acquired no reference. Record successful acquisition; release by captured guest key, not merely matching a flat pointer. |
+| AddParamMap: ThunkCBMsg16 CB_DIR | Compatibility flag controls identity optimization; current code inserts zero pairs and ignores allocation failure. Zero return is the map API's not-found sentinel, so Add(0,0) creates an unretirable per-call node. Central zero-pair rejection plus actual-acquisition progress fixes all producers, not a filename/command exception. |
+| AddParamMap: WU32SetWindowText | Guarded non-NULL view but ignored map outcome; unconditional normal flat-key delete and no local exceptional release. Capture f2 before native reentry; finally release only acquired guest-key reference. Keep native SetWindowText and void guest result. |
+| GetParam16 / WM32SetText | Original mapped ref borrow, otherwise malloc16 or DS-compatible stackalloc16 and copy. Capture mode immediately after acquisition, before putstr16; normal and exceptional release must consume it once. Keep original conversion and compatibility selection. |
+| GetParam16 / WM32CBDir | Same borrow or owned heap fallback, no DS-stack branch; keep flag-controlled lookup and original CB_DIR translation. Input-only unthunk is a safe specific cleanup owner, not evidence other unthunkers are abort-safe. |
+| FindParamMap / GetParam16 / DeleteParamMap | Original exact/current/alias matching and refcounts remain. NULL input must not resolve to an unavailable selector's NULL current address. Actual callers pass FINDPARAM storage; the unused documented NULL-output form is not selected and needs no speculative ABI repair. |
+| Add existing-node refresh | Refcount increments before ParamMapUpdateNode, which can enter guest before returning. Preserve this pin; rollback through original DeleteParamMap on failed/abnormal refresh. Reordering increment after the callback would remove the pin and is rejected. New-node publication has no guest callback after linking. |
+| ParamMapUpdateNode / W32LocalReAlloc | Retain original selector refresh and alias history, including its16-alias policy. Reject absent current view before changing native identity/alias history; propagate NULL, never invent a valid old pointer as a successful refreshed result. |
+| GetPModeVDMPointerAssert | Original nonpresent selector calls RET_FORCESEGMENTFAULT. wow16cal invokes IsBadReadPtr; gpfix probes selector/data under the original fault trap. This is a real kernel callback, not pure lookup. Original CallBack16/scopes still own scheduling/frame behavior; no new lock held across it and no claim that outer borrow-finally restores CPU frames. |
+| FreeParamMap / WK32 task exit | Original task-owned residual purge, not normal per-call release. Keep exactly this owner and original call. Individual-task forced termination belongs to S5; do not claim new survival guarantees for an application invalidating/freing an active borrowed input. |
+| CacheBlockInit/Allocate/Free/IsCacheBlock | Keep complete original allocator. Descending free list, split/coalesce and malloc fallback are dependencies to exercise, not permission to replace it. The apparently suspicious right-merge/previous-neighbor case is unreachable for a valid ordered nonoverlapping list: the preceding iteration would already take its left-adjacency merge. Do not patch an invented reachable defect. |
+| AddParamMapEx / MAPPARAM_EXTRA | Compile-time disabled and no selected caller; retain original inactive source, no new extra-buffer feature. |
+| Alias/duplicate flat identities | Preserve original first-match native-to-guest selection. Cleanup uses this call's actual acquired guest key, so optional-map failure cannot remove an outer equal-flat node. No new identity preference or global generation manager. |
+
+Original flag producer sweep finds dwWOWCompatFlags assigned at WK32InitTask;
+normal reentry restores the calling task. Capturing acquisition mode is still
+required: rechecking a flag cannot prove allocation/map success. Reverse
+text and CB_DIR use flags/release address in existing MSGTHUNKBUFFER (84-byte capacity
+unchanged); forward records reuse original dwParam and their captured Parm16
+key, not a new struct field. Family identification follows the selected
+original unthunker/function, never an arbitrary numeric message alone.
+Clear progress before Delete/free to make the normal-plus-finally composition
+idempotent and safe against nested release callbacks. Heap versus DS-stack
+fallback release retains the original allocation kind; direct selected-x86
+views retain original FREEPSZPTR semantics, not fabricated heap ownership.
+
+Complete caller closure: existing wmdisp32 W32Win16WndProcEx, wudlg dialog
+gateway and CWP/CBT/WH_CALLWNDPROC/message-filter/send hooks already finally
+call wow_message_unwind32; wumsg send/dispatch/default/MDI/filter/callproc and
+wowhooks reverse paths already finally call wow_message_unwind16. Extend
+these existing finalizers only for WM32SetText/WM32CBDir and their reverse
+input-only counterparts; normal callback FALSE already reaches unthunk.
+Do not run GetText/output, EM_SETSEL, WinHelp/foreground or DDE unthunk on
+abort. Direct WU32SetWindowText lacks a message record, so local original-
+owner finally is smaller than constructing a fake message or adding an
+adapter registry. Original W32TryCall/W32Exception remains exception policy;
+service-abort cleanup does not claim every modern native WNDPROC exception
+propagates, nor solve the separate original CPU/frame reconciliation row.
+
+Four-rung disposition: direct original table/cache/conversion is selected;
+existing same-shaped adapter finally supplies only scope mechanics. A lower
+allocator/adapter cannot know which ignored map result this original call
+owns, and a normal unthunker lacks captured acquisition state. Thus register
+347 before minimal owner edits, and098 before extending the existing finalizer.
+Do not copy original mapping/conversion algorithms into a new adapter. No
+new guest/import/public export or message transport. Budget180 executable
+added/removed mirror lines across the seven registered files; target is a
+small conditional/progress/finally seam, not an allocator or mapper rewrite.
+
+P19 baseline SHA256s: walias85E9F0B98E2A00D6B1011CCF36F51EDBF636B8B41467B78021D85DAAB5327978;
+wmsg16805C9E1958CDA9474838F0ADD263396C79F9AAC505F5606F671DE75D1C9F199F;
+wmsgcbCA644A033B4ED5974F70FAD75615EF18C80466F3ED6D987554CE031CACAB1E13;
+wmdisp328EFE01255A083F7EDB11E24FCAA7AAD87CCED6D7C8B99DECD8D9BA3334031F6E;
+wcntl3236C8CB9A46F13998D0459BC4869DC6DD4191423C0429A7335EBD26F68C804B59;
+wuwind010E533C8CA043469E1BAB389D39ACD89DFAEB6A50F9926F3E07815C5A4B9F7A;
+wparam939785D0AEE348459E02136EFAFDCBDAC7AA1D7612F4BFCF8C4F21ACF677271A.
+
+Verification is designed before edits: exact complete original map/cache and
+text/CB_DIR bodies plus actual finalizer, old18d0ec060 versus current, with
+NULL, all acquisition failures, equal-flat outer reference survival, nested
+borrows, moved pointers/aliases, refresh FALSE/SEH, heap/stack fallback,
+interrupted input copy, repeated finalization, selective task purge and
+cache out-of-order release/fallback. Fault doubles supplement, not impersonate
+real guest acceptance. Update the existing345 fixture to consume the real
+MSGPARAMEX union rather than its old abbreviated test-only struct. Retain
+its36 cases and346's21, extend actual control/text/construction probes as
+appropriate, then run the complete retained/installed13 floors. Compatibility
+flag branches require exact-source proof with both flag values; do not claim
+actual flagged guest execution without an actual task/flag witness. No host
+global registry mutation is authorized for a probe. The completed source group
+and all probes precede one background build cohort; no partial runtime is
+published. Unmet real-boundary rows stay S4 obligations, not manufactured
+closure or new guest limitations. Scratch/budget/disposal are in the plan.
+
+The entire first implementation and model precede the first product build.
+Intermediate group evidence is retained, not relabelled as a passing release:
+r1's model compile lacks VPPROC; r2's WX compile rejects original WORD-to-HANDLE
+C4306 (tdb16.h confirms WORD, so retain that field and exclude only4306);
+r3 executes old16 failed assertions/current1 (UPDATE_FALSE_ROLLBACK). The new
+rollback returned inside try, then AbnormalTermination cleanup released the
+pin again. Move normal FALSE rollback outside try; finally handles only an
+escaped unwind. R4's WX catches updated possibly uninitialized across SEH;
+initialize FALSE. R5 executes current50/0 but cache equality detects Git's
+line-array transport dropping a terminal newline. Select the complete original
+cache through IsCacheBlock's closing brace, not transport-dependent EOF.
+No original cache algorithm or acceptance assertion is weakened.
+
+Group-r6 supervisor4336 runs17:13:52.734--17:15:24.492Z exit0: map50/0,
+retained345/346 and affected86-step MSVC Release /O2 /MT link pass. Its WOW32
+6568C7F6F7E8FF1AEDFAE96D36BC18E66D456D8454C6BA2477D11CADA8980671 is
+an internal pre-final-review build, not released or actual-guest acceptance.
+
+Final source closure reads every original normal/abnormal caller, including
+PostApp/PostMessage's normal unthunk and wowhooks' changed-message copyback.
+The native filter may overwrite reverse mpex.uMsg/lParam before unthunk, but
+its captured Parm16 remains original; the forward original wm32mpex record is
+not replaced by pMsg16 (a distinct mpex constructs modified output). Thus a
+reverse release must retain its acquisition address, and CB_DIR cleanup must
+select original OLDCB_DIR, never a mutable native message. Otherwise changed
+CB_DIR->CB_GETLBTEXT can interpret progress bits as output state or leave its
+map reference. Capture native release address in the already admitted union,
+keep its84-byte size, and move only original CB_DIR's pure release before the
+mutable-message switch. Other combo output branches retain original behavior.
+The adapter matches original unthunker plus captured original message before
+inspecting its progress; a RECT/owner-draw value is never assumed to be a lease.
+Add exact-source normal/abort mutation counterexamples, including preservation
+of an outer equal-flat node and rejection of another combo output as text.
+This is the same ownership cohort, not a new Hook routing/identity policy or
+a reason to retain a second allocation table. R6 inputs are superseded; rerun
+the completed group before sealing/actual acceptance. No partial publication.
+
+The real controls probe adds invalid-drive-string and NULL CB_DIR requests
+for all three combo forms, asserting original CB_ERR and unchanged item count
+before retaining every existing selection/drop/capture check. Source chain is
+combo.c -> xxxCBDir/combodir.c -> xxxLbDir/lboxctl3.c: the original guarded copy
+rejects NULL, and FindFirstFile rejects invalid drive syntax without filesystem
+mutation. This exercises actual caller/provider/error retirement, not proof of
+an activated compatibility flag, successful directory enumeration or every
+original control branch. The mapped/flagged paths remain exact-source witnesses.
+
+The added mutation negatives fail the pre-final r7 candidate twice: its capture
+was mistakenly inserted in the adjacent CB_GETLBTEXT branch. Restore that
+output branch and capture only CB_DIR's acquisition. R7 remains a failed
+internal control, never a published candidate. Frozen group-r8 supervisor49224
+runs17:20:58.010--17:22:04.025Z exit0. Exact-source map54 scenarios have zero
+failures; immutable P19 produces19 failed assertions, including all17 named
+required negatives. Actual structures remain reverse140/buffer84/forward72
+bytes. Retained construction345's36 and reverse-buffer346's21 scenarios pass;
+the affected production MSVC x86 /O2 /MT build also passes. These are not
+actual guest or native USER exception proofs. Foundations supervisor46340,
+started17:22:58.620Z, owns the continuing register/native21/original30 group;
+registration reports278 selected/177 exact/101 registered differences/issues0.
+P19's coherent installed/released13 remains unchanged pending actual acceptance.
+
+Frozen foundations46340 completes17:31:29.528Z exit0. Its native21 supervisor
+29372 completes17:31:16.794Z with21/21, then original30 supervisor26916
+completes17:31:29.439Z exit0; frozen source and artifact inventories match.
+Candidate actual supervisor43976 runs17:31:47.406--17:33:09.521Z exit0,
+all six actual control/construction groups, with the same tested
+WOW3290568B581F97821DB12A04E51661093B8E9DBE1744BD27EE3FBE6D8FDE189AD8
+and NTVDM76C739495D83A555702F43676FE563C8E517038CD5E76EB2F3AD9D7545EB5B2B.
+The other11 images are exact verified P19 reuse; staging derives only from
+the unchanged canonical ZIP. This is sealing, not publication or S4 closure.
+
+Immutable group-r8 result6DCB3D91396A1895A113345557B3924A31F64D3F041A9D3429D5C2073085BC95;
+frozen source/test inventory0EB1BA387B3E7EDA9173C1940EB8B421B957718DD50E1E31E083808973D1C6B8;
+map result17DE60BB1376CF10533463725B7169366A5BF609814FA7FF8DFB8A0DC2E1BE43;
+current54-scenario outputAA33544B969B12DF8D1C4A00A1EDC182BC58852AC151490C4B304F2DA9FE1A13;
+foundation resultA48623F5EE3B9D31113175CEE64B95BF5949F933C6ED52F2DB839C7BA989B04D;
+native21 summary2210112433A82DAEE66E0931A2FDB8C7699FC49B7C3F6F65355F02EBD825400F;
+actual6 resultDEB04AD4C9B1D6C02F8612951797C43EF5758A9A092D8E6E2539F8F57BF2C5BF;
+sealed candidate manifest3EC51D4E9618F8BF82DB0651FA059993EE67B462E306637ED55BCE0345CD340B.
+Retained supervisor25800 continues the unchanged admitted floors; no failure
+can be promoted by a later partial pass and no release occurs before its gate.
+
+Second-role source review: original AddParamMap's reference increment must
+precede the potentially faulting selector refresh, otherwise guest reentry can
+retire its node. Normal FALSE rollback is outside try; escaped unwind alone
+runs the finally rollback. Neither path duplicates the old reference. Optional
+map allocation failure must not delete an outer equal-flat node. Reverse
+release selects the original guest key and captured native address, not Hook
+copyback; forward release records borrowed/heap/DS-stack mode before fallible
+copy and consumes it before release. The original cache, alias cap, first-match
+lookup, task purge and stack-free convention are retained. Finalizers call
+only input-only text/CB_DIR original release bodies; there is no generic
+unthunk-on-abort, second allocator, table, mutex or stale CPU restore.
+Raw original runtime delta is101 additions/29 deletions including comments,
+seven files, below the admitted180-line budget; the adapter adds18 lines in
+its existing header/finalizer. No public export, wire or record-size change.
+Fault doubles prove the specified body/ownership transitions, not actual
+native USER exceptions, physical segment movement or complete callback-frame
+restoration. Those retained M4 boundaries are not closed by this review.
+
+### P20 bounded delivery
+
+All times UTC2026-10-19. Frozen retained supervisor25800 runs17:33:28.549--
+17:51:33.087Z exit0 with35/35 terminal rows. S3 twelve; eighteen message groups
+(normal/extension/structured/early-reply/timeout/Proc32 across3 policies);
+WINMINE/SOL gameplay and normal exit3 each; both-width style; pure-native modal
+reference and actual guest modal3; complete-logon3; WRITE four startup samples
+per policy and Console17/Window17 text/interaction/exit all pass. WRITE uses
+complete unfiltered Userenv, physical short TEMP/TMP and -WaitTarget, with no
+diagnostic runtime. It proves startup, not editing/save/full exit. External
+27344 runs17:44:14.134--17:46:57.372Z9/9; cross/shared45392 runs17:46:57.384--
+17:49:12.565Z6/6; pending22052 runs17:49:12.576--17:51:32.945Z6/6, including
+native destruction and the required nonblocking refusal (negative exits1).
+The original assertions and deadlines remain; no failed runtime aggregate
+is promoted, no runtime inputs change during acceptance and no performance
+claim follows. Historical0102/WRITE and original-guest limitations remain.
+
+Retained result024344A34447EFAEE33A9F5F5FBFD44EFD9DF4FCB72D38024F2CE76CFE8DF0F5;
+step inventoryB985FBFAE31ACD6A71E6634E0EA211D531B56E72F47816A8E46AAB1FE6D2EF38;
+S3 twelveEA79D94DE105F498928A3B915AA4CA741DB94F82C17A3CD8652B0E9EECE1C7E7;
+WRITE/DOSF7991A82C76DB960F21EB34BBDAB1A9BAB442EDC8B0F22BF69F27A6ED11A9F7E;
+external337B43BD9A102FE4D49AE7E3DCABD1151234EA09716CC102B9C5364E6819E563;
+crossD8415608493577F558B758B919B6EB240343956538FE0507A9859CCF17234200;
+pendingA833F53C8DD5754C1D88F9E0D9C1C5C6F17528746449E71240045BD6D06FEC4E.
+Reproduction entrypoints/arguments are the same P19 retained matrix above;
+new verify-wow-parameter-map.ps1 selects immutable18d0ec060 and current source,
+and actual controls include invalid/NULL CB_DIR in all3 combo forms. These
+named real boundaries and fault doubles do not close every M4 flag/protocol
+branch or callback-frame restoration; the complete M1--M6/S5/S6 stays open.
+
+Publication37688 starts17:52:00.336Z and completes17:52:35.770Z exit0. It verifies
+and backs up exact P19, publishes the same sealed13 to assets/release and
+O:/winnt/system32, then passes installed both-width style14772 (17:52:05.138--
+17:52:21.154Z) and complete-logon/gameplay3 13416 (17:52:21.177--17:52:35.687Z).
+Exact-path process closure count0; no owner session was ended. Final13 hashes
+match both destinations; recoverable rollback was available but not needed.
+NTVDM76C739495D83A555702F43676FE563C8E517038CD5E76EB2F3AD9D7545EB5B2B;
+WOW3290568B581F97821DB12A04E51661093B8E9DBE1744BD27EE3FBE6D8FDE189AD8;
+release manifestF9A5A315755919470F8C860A61A6F352EB9DB8E8FD1194DAEBC447E592C8B3F6.
+Other11 host images/add-ons and canonical ZIP7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7
+are unchanged. No original guest edit/rebuild, new import, semantic concession
+or public ABI change. Mirrors278 selected/177 exact/101 registered/issues0.
+This is a bounded P20 correctness baseline, not S4 or persistent-goal closure.
+
+Final second-role review40276 runs17:53:11.951--17:53:48.657Z exit0:
+documentation/relative links, diff whitespace, changed/new PowerShell parsing,
+frozen source inputs, all13 PE widths and both destination hashes, immutable
+ZIP and Current's32KiB ceiling pass. Publication result is
+20356ADB845C2A8AACA32E43F2DB3D5B09F6FDD2E42519DD193EC92764A51EF0.
+
+Disposal preview12424 runs17:54:06.613--17:54:12.884Z exit0, Applied=false.
+All owned supervisors have exited; actual CIM path/creation checks find no
+target users, not merely a TasksExited attestation. Exact targets are
+build/t447-s4-parameter-map (4423 files/250069066 bytes) and build/M0-T447
+(only the independently authored28-byte G7.COM and its empty parent tree).
+Their inventory digests are
+FDF6D9452D4C1DE9605FA885C5BBA9A956B519360405352F47D40CB5FDA33652 and
+A8798F0EB448A97B0E941614690B4E585468246E171D4A096191696B0AC58D44;
+360 sensitive/unknown-extension files are reviewed:70 byte-exact canonical
+ZIP copies,104 generated authored-probe listings,164 signed-format observation
+reports,21 terminal exit/PID markers and one authored COM. Review digest
+EC1A85FA2B7468B7C894F3505CF834723AE9BC079658463B6D231AE3FF4242E2.
+Necessary results, source/artifact hashes and failed-attempt interpretations
+above precede disposal. The sole Clear-BuildOutput tool owns preview/Apply/
+residual checks; do not duplicate its safety rules or delete the build root.
+Preserve both valid caches and published assets. The complete coherent P19
+recovery package remains in18d0ec060; no user configuration, unique media,
+Git data or other task output is approved for deletion. No prune/cache clear.
+
+First Apply16164 at17:54:44.512--17:54:48.414Z refuses before deletion:
+the scratch caller hashed unordered Hashtable JSON. Independent preview14200
+at17:55:01.987--17:55:07.885Z proves identical target membership/metadata hashes
+but a different review serialization digest. Fix only that disposable caller
+to sort fixed path/hash/reason lines, not the real cleaner or its guards.
+Canonical preview44296 runs17:55:20.335--17:55:26.205Z exit0, Applied=false;
+the59-byte caller correction makes the first target250069125 bytes, still4423
+files; G7 remains28 bytes. New first inventory digest
+F30DAE7BC3CABD4540A904C1AB94DDB3771F0D1A8B3507FA725BA51CA5296DA4;
+G7 digest remains A8798F0EB448A97B0E941614690B4E585468246E171D4A096191696B0AC58D44.
+The same360 exact reviews now canonically digest to
+843B20DA4DCCAF1C541B9491032C4EA57EA6887E45B6E671CE41FA808163169F.
+No product source, evidence assertion or publication input changed.
+
+Apply34980 runs17:55:41.045--17:55:52.489Z exit0 with those exact final digests.
+The real cleaner rechecks all targets before deleting4424 files/250069153
+bytes (238.48MiB), then CheckResidual reports only build/.ccache and .ninja.
+No process is killed for disposal; only generated copies/evidence are removed,
+including the temporary caller itself. User data, valid caches, Git and both
+published13 sets are retained. Final review result before disposal is
+5D294168ACAF4F10B59706A7E6D7BDFD777FE486E5FBFE9B39D3E47AFF632A76.
+Final gate32248 runs17:56:18.136--17:56:37.732Z exit0 after the recorded
+disposal facts: documentation/links/diff, actual two-cache residual and all13
+both-destination hashes plus immutable ZIP pass. Only recorded review/cleanup
+facts change afterwards; runtime/source/test/artifact inputs remain frozen.
+Recheck documentation for this terminal record before reviewed commit/push.

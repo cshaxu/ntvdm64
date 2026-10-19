@@ -346,6 +346,8 @@ typedef union _MSGTHUNKBUFFER {
     THUNKTEXTDWORD     thkdword;                            // LB_GETTEXT w/no HASSTRINGS
     /* DIVERGENCE(MVDM-HOST-DIV-344): synchronous COPYDATA release keys. */
     struct { DWORD header, data, flags; } copydata;
+    /* DIVERGENCE(MVDM-HOST-DIV-347): call progress, no union size change. */
+    struct { DWORD flags, native; } text;
 } MSGTHUNKBUFFER, *LPMSGTHUNKBUFFER;
 
 typedef struct _MSGPARAMEX *LPMSGPARAMEX;
