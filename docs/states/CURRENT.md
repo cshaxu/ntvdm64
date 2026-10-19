@@ -4,15 +4,23 @@
 
 Owner accepts and closes [Td build hygiene](../etc/operations/td-build-hygiene.md)
 at aadde21e8; S4 resumes with stable caches, immutable guest and frozen
-performance. P18 delivers registered345's bounded construction/release cohort:
-old-body13 failures/current36 passes, actual MDI/text/WinHelp3, native21,
-original30, S3 twelve groups, message18, external9/cross6/pending6, retained
-application/DOS/logon floors and installed verification pass. Coherent13 is
-hash-matched at both destinations. One captured0102 is legitimate low16 HWND
-reuse; corrected tests require old full-identity death and a proved new live
-generation before accepting guest TRUE. Historical unobserved0102 remains
-unattributed. The [audit](../etc/evidence/m0-t447-s4-message-source-audit.md#p18-bounded-delivery)
-retains failures, exact identities and limits. M4/S4 and S5/S6 remain open.
+performance. P19 adds registered346/125's bounded native-buffer failure,
+signed tab-release and original ListBox free-result corrections to P18.
+Old-body13 assertions fail; current21 scenarios and actual controls/construction6
+pass. Native21/original30, S3 twelve, message18, external9/cross6/pending6,
+application/DOS/logon and installed floors pass; both destinations match13.
+Earlier WRITE and unobserved0102 failures remain unlocated, not repaired by
+later passes. The [audit](../etc/evidence/m0-t447-s4-message-source-audit.md#p19-bounded-delivery)
+retains exact identities, failed controls and evidence limits. No guest change.
+
+Remaining M4 work includes parameter-map ownership (the source-proven zero-
+token CB_DIR node) and original callback/exception-frame reconciliation.
+Audit each complete caller/owner group before further changes; do not blindly
+invoke normal unthunkers on abort or restore stale CPU state. Full M1--M6/S4
+and S5/S6 remain open; this bounded P is not task closure.
+
+Delivery cleanup refreshes stale enumeration metadata before unchanged guards;
+CleanupOnly22 and exact disposal pass. Build retains only the two valid caches.
 
 ## Current Work
 
@@ -371,9 +379,9 @@ construction, mapping, failure and lifecycle closure remains required.
 
 ## Current Technical Baseline
 
-S4 P18 retains P13 and adds345's original construction/owned-release fixes.
-NTVDM SHA-256 isF615FD24F01B1CDDEF417588BEA39B6D00AD03174FBB6AC9677874252858BAA4;
-WOW32 is39B7AC68011109E05465572C8BC56F1668EF8DAA6E68C2EE0A10F51EA51D5777.
+S4 P19 retains P18 and adds346/125's bounded original buffer/storage fixes.
+NTVDM SHA-256 is304FA453A1A22728E143C99E1FD5549DC8AA3FB191AB27E988E9CD206310B35E;
+WOW32 is9A21275C4753F6D614F084CC7D148A1653E70C157370600312D1AB73422E9467.
 The coherent13 manifest matches assets/release and O:/winnt/system32.
 Original guest, user configuration and assets/winnt.zip are unchanged.
 
@@ -390,7 +398,7 @@ prove full S4 mixed-message/reply behavior, WRITE editing/save/full exit or
 S5 per-task termination. Physical control input and every drawing pixel are
 not inferred from message-driven probes.
 
-Selected278 mirror files retain183 exact/95 registered content differences,
+Selected278 mirror files retain180 exact/98 registered content differences,
 zero format-only/register gaps. This selected total is not an S3-added count
 or proof of dormant branches. Original CCPU40 /MT x86 remains the worker
 profile. NTW16S retains the integrated20px policy and approved custom geometry.

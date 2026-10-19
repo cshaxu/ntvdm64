@@ -207,6 +207,11 @@ mov word [phase-data],2
 call checkpoint
 
 create edit_name,0x40a10044,multi,owner
+; Exercise reverse native array construction, with heap-sized and reset forms.
+send multi,0x41b,64,ds,tabstops-data ; EM_SETTABSTOPS
+require 0x35
+send multi,0x41b,0,0,0
+require 0x36
 settext multi,two_lines
 send multi,0x40a,0,0,0          ; EM_GETLINECOUNT
 expect 2,0x31
@@ -262,6 +267,27 @@ send list,0x115,6,0,0          ; SB_TOP
 send list,0x40f,0,0,0
 expect 0,0x4d
 inc word [scroll_ok-data]
+; Keep the original single-selection/scrolling coverage above. A separate
+; multi-selection, tabbed list checks the actual array input/output paths.
+destroy list
+create list_name,0x40a10089,list,owner
+send list,0x413,64,ds,tabstops-data ; LB_SETTABSTOPS
+require 0x4e
+send list,0x413,0,0,0
+require 0x4f
+%rep 4
+send list,0x401,0,ds,alpha-data
+%endrep
+send list,0x406,1,0,1             ; LB_SETSEL index1
+expect 0,0x50
+send list,0x406,1,0,3             ; LB_SETSEL index3
+expect 0,0x51
+send list,0x412,64,ds,selection-data ; LB_GETSELITEMS heap-sized capacity
+expect 2,0x52
+cmp word [selection-data],1
+jne failed
+cmp word [selection+2-data],3
+jne failed
 inc word [list_ok-data]
 mov word [phase-data],4
 call checkpoint
@@ -580,6 +606,13 @@ two_lines: db 'one',13,10,'two',0
 three: db 'three',0
 three_lines: db 'three',13,10,'two',0
 buffer: times 32 db 0
+tabstops:
+%assign tab 1
+%rep 64
+dw tab*4
+%assign tab tab+1
+%endrep
+selection: times 64 dw 0
 data_end:
 align 16,db 0
 image_end:

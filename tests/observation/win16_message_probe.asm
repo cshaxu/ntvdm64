@@ -1312,6 +1312,9 @@ api 1,18
 or ax,dx
 jnz failed
 inc word [construction_help_freed-data]
+; Reverse private-help conversion must preserve a native-heap-sized payload.
+send native_window,0x38,0,ds,construction_reverse_help-data
+result 0x7e
 ret
 %endif
 %ifdef M4_STRUCTURES
@@ -1494,6 +1497,11 @@ construction_mode: dw 0
 construction_help_message: dw 0
 construction_help_handle: dw 0
 construction_help_name: db 'WM_WINHELP',0
+construction_reverse_help:
+dw 512,0
+dd 0x11223344
+times 500 db 0
+dd 0x55667788
 construction_client_class: db 'MDICLIENT',0
 construction_client_params: dw 0,1000
 construction_mdi: dw classname-data,0,construction_title-data,0,0

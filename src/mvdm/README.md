@@ -1,5 +1,27 @@
 # mvdm
 
+MVDM-HOST-DIV-346 registers the complete reverse/native-buffer constructor
+failure cohort against pinned OpenNT5c5b979ec08c17d3ca2eb70e8aad62d26515d01c.
+wmsgem.c and wmsglb.c are byte-exact before this cohort, SHA256 respectively
+88D05E4770453621472704E90EDCEFD6AD18B618528B4166DA3A9BA1EA1A3619 and
+5E1A7DD4140AE6538D4E728CA869013E8CD00D06D5339EE5682319D5FF4BF26E;
+prior registered wmsg16.c is
+BE05F88C0D422049D7308E5A6711E8E65181C8331A5405547BD547E9B1676B2C.
+Only reject missing LocalAlloc/STACKORHEAPALLOC/malloc_w outputs in
+EM_REPLACESEL, EM_SETTABSTOPS, LB_GETSELITEMS, LB_SETTABSTOPS and WM_WINHELP.
+Pair both tabs releases with their original signed construction predicate;
+negative counts acquire nothing and must not free the caller's guest token.
+Retain original allocation choice, converters, message/return representations
+and unthunkers. LocalAlloc failure currently reaches RtlCopyMemory(NULL);
+the other branches falsely report conversion success with no native buffer.
+The caller's existing ThunkMsg16 FALSE/fThunkSucceeded contract already
+rejects construction failure; no replacement control or cleanup registry.
+A lower allocator cannot repair ignored NULL at these original consumers.
+No original-source import or guest change. Budget20 executable added/removed
+lines across these three original files, with exact selected-source fault
+negatives and normal/inline/heap/zero-count/one-release evidence, actual control
+messages and retained coherent13 gates required before runtime delivery.
+
 MVDM-HOST-DIV-345 registers the S4 original construction/release cohort against
 the same pinned OpenNT5c5b979ec08c17d3ca2eb70e8aad62d26515d01c WOW32 owners.
 Pre-change canonical mirror hashes: wmdisp32.c

@@ -328,6 +328,8 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
                               (sizeof(((LPHLP)NULL)->cbData) == sizeof(WORD)));
                 *plParamNew = (LONG)((*lpT > sizeof(lpmpex->MsgBuffer)) ?
                                                 malloc_w(*lpT) : lpmpex->MsgBuffer);
+                /* DIVERGENCE(MVDM-HOST-DIV-346): preserve conversion failure. */
+                if (!*plParamNew) { FREEVDMPTR(lpT); return FALSE; }
                 if (*plParamNew) {
                     RtlCopyMemory((PVOID)*plParamNew, lpT, *lpT);
                 }

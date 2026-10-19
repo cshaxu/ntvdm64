@@ -1,5 +1,21 @@
 # opennt-host
 
+OPENNT-HOST-125 registers LBSetTabStops' one original release-result
+predicate in client/lboxrare.c, pinned OpenNT5c5b979ec08c17d3ca2eb70e8aad62d26515d01c,
+original SHA256 E8914F4761ADE70A1A7357B5DC8C17744CE1BC49379D03A99470F815EF85F64D.
+Original usercli.h UserLocalFree is HeapFree, BOOL TRUE on success. The old
+zero-count reset tested !UserLocalFree and retained a successfully freed
+iTabPixelPositions, later freed again by xxxDestroyLBox. Correct only that
+predicate, clearing ownership after success and retaining it on failure.
+EDMLSetTabStops' equivalent release already uses the BOOL correctly; keep it.
+The original client body, heap macro, allocation/layout/conversion and return
+behavior remain. No adapter can correct a local inverted success test without
+changing the correct shared heap contract. No new import/guest change or
+semantic waiver. Budget6 added/removed executable mirror lines in this one
+file; exact-body success/failure/reset/normal destruction and actual original
+control coverage plus full coherent13 gates precede delivery. This is a
+source-proven host correction under standing authority, not a new control.
+
 OPENNT-HOST-124 adds only two guarded projection calls to the original
 kernel/userk.h EnterWowCritSect/ExitWowCritSect handoffs. The selected original
 SHA-256 is9260E0BA3CC89974E10B3804ED66D18B9864F4AE7D1175CCE6DDE8EE79D66E8C.

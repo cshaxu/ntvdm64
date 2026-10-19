@@ -5890,3 +5890,459 @@ comparison; the cleanup tool's sorted inventory hashes are authoritative.
 CheckResidual passes with only .ccache/.ninja. A final document-only check
 uses an owned180-second/5MiB disposable root, then the same cleanup owner;
 it cannot change product inputs or hide outputs in caches.
+
+### Post-P18 complete allocation-owner disposition
+
+Source baseline049ae27da6fdae9121ca8f11876b8be9dc0f7804, clean main/origin.
+This is source/contract evidence, not a runtime pass. Read original selected
+wmdisp32.c, wmsg16.c and all dispatch delegates wmsgbm/cb/em/lb/sbm, plus
+wparam, walloc16, wcall16, wstruc, wumsg, wowhooks, wudlg and the selected
+project callback/native-call/message-lifetime boundaries. No test is run to
+select a defect. P18 is still both released/installed; no performance work.
+
+The previously broad19-owner obligation now has the following finite
+source dispositions. `Normal` means the actual original successful-call
+release is connected, not all failures/exceptions experimentally verified.
+
+| Forward original owner in wmdisp32 | State authority / normal release | Remaining fixed boundary |
+| --- | --- | --- |
+| WM32Create | call-owned class/name and nested MDI title/structure; original Error and WM32Create unthunk, P18 captures identities | Escaped exception during construction and success followed by absent callback; CBT owns another caller. |
+| WM32SetText | existing wparam map borrow/refcount or malloc16/compatibility stack; DeleteParamMap or original free | Abort before normal unthunk must retire exactly one borrow, never a task-wide FreeParamMap. |
+| WM32GetText | malloc16 or original DS-based stack; original output quirks and free | Escaped output copyback failure must not leak heap or fabricate completed output. Native capture prerequisite preserves early-reply normal logic. |
+| WM32GetMinMaxInfo | callback stack POINT16[5]; original conversion back | No independent heap lease. Interrupted copyback and callback-frame restoration, not a new free table. |
+| WM32GetDlgCode | malloc16 MSG16; original input-only free | Abort after acquisition, before normal unthunk. |
+| WM32DrawItem | callback stack; original input-only stackfree macro | Callback frame, not heap. |
+| WM32MeasureItem | callback stack and optional appended text; original compatibility padding and output copyback | Original padding/sign-extension/width quirks remain; interrupted output/frame. |
+| WM32DeleteItem | callback stack with original private-item conversion | Original object conversion and frame; no independent heap free. |
+| WM32CompareItem | callback stack and original result | Original frame lifetime. |
+| WM32NCCalcSize | callback stack rects/optional WINDOWPOS; original nested layout/copyback | Captured source layout, moving guest memory and interrupted nested copyback. |
+| WM32MDICreate | malloc16 class/title/structure, original partial Error and release; P18 captured title | Partial escaped exception and cleanup after successful construction without callback. |
+| WM32SizeClipBoard | temporary GlobalAllocLock16/handle, normal original unlock/free | Original SIZE/PAINT call-owned global, distinct from clipboard data ownership. Abort must not free original clipboard data. |
+| WM32AskCBFormatName | malloc16 output, original copyback/free | Interrupted output/free separation. |
+| WM32DDEAdvise | original DDE pair/list owns transferred h16; original packet unthunk depends on hook mode/result | Transfer commit, rejection and peer/task death require DDE owner, not generic call-finally. |
+| WM32DDEExecute | original DDE pair/list owns transferred command h16 | Same protocol distinction; normal callback return intentionally does not free it. |
+| WM32DropObject | malloc16 input, original free and optional cursor-result conversion | Aborted resource release must not manufacture a successful cursor result. |
+| WM32CopyData | original CPDATA list, captured acquisition flags and P13 finalizer | Existing proved synchronous group retained; does not supply ownership for other families. |
+| WM32WindowPosChanging | callback stack WINDOWPOS16 with original output conversion | Frame/output, not heap. |
+| WM32WinHelp | call-owned shared buffer; original GlobalUnlockFree16; P18 handle0 correction | Abort release is distinct from normal SetForegroundWindow side effect. |
+
+Concrete anti-overreach findings: stackalloc16 only moves TD.vpCBStack;
+stackfree16 is empty by original design. CallBack16's normal return restores
+TD.vpStack from its original CBVDMFRAME. This alone does not prove escaped
+host exceptions restore the frame: wcall16's selected body has no finally
+around host_simulate. That is a frame/execution obligation, not permission
+to add a second stack allocator. Most GETPSZPTR/GETVDMPTR reverse views are
+direct bounded selected-x86 pointers; FREEPSZPTR/FREEVDMPTR are no-ops in
+the free build, not omitted HeapFree calls. The independently implemented
+COPYDATA finalizers intentionally cover only their acquisition flags.
+
+Normal unthunk is not a generic abort API: GetText/MeasureItem/NCCalcSize/
+WindowPos write outputs, WinHelp activates a window, DDE advances protocol
+ownership, UnThunkEMMsg16(EM_SETSEL) can send EM_SCROLLCARET and create another
+callback. Blindly invoking every original unthunker from finally would alter
+behavior. Cleanup must stay paired to exact ownership/commit state, preserve
+normal original algorithms and omit uncommitted results. The absence of a
+universal unthunker is not itself a missing original control implementation.
+
+The entire reverse native-allocation sweep yields five concrete unchecked
+acquisition branches, selected together as DIV346:
+
+| Original reverse branch | Actual old failure and existing rejection path |
+| --- | --- |
+| ThunkEMMsg16 / EM_REPLACESEL | LocalAlloc returns NULL, immediately used by RtlCopyMemory. Return FALSE before copy; normal LocalFree unchanged. |
+| ThunkEMMsg16 / EM_SETTABSTOPS | STACKORHEAPALLOC returns NULL; getintarray16 quietly skips NULL destination, then TRUE permits native call with absent required array. Return FALSE at acquisition. |
+| ThunkLBMsg16 / LB_GETSELITEMS | Same allocator returns NULL; TRUE permits output call without acquired buffer. Original result/count copyback and STACKORHEAPFREE remain. |
+| ThunkLBMsg16 / LB_SETTABSTOPS | Same silent NULL conversion as EDIT tabs. Preserve original signed cItems>0 predicate; reject only actual attempted acquisition failure. |
+| ThunkWMMsg16 / WM_WINHELP | malloc_w returns NULL and copy is skipped, but TRUE submits a lost payload; unlike adjacent ASKCBFORMATNAME's existing FALSE rule. Release view and return FALSE, retain original private layout and normal free. |
+
+The macro STACKORHEAPALLOC already uses sizeof(MsgBuffer), an inline array
+of one original MSGTHUNKBUFFER union, not sizeof a pointer. Preserve this
+real capacity; no threshold or allocator rewrite. Both array conversion
+helpers explicitly test their native pointer, so tabs are a false-success
+bug, not a proved NULL write. Counts0/negative keep their original behavior.
+Other reverse allocations: ASKCBFORMATNAME already rejects NULL; COPYDATA
+uses P13 rollback; clipboard globals use original handle rules; DDE pairs
+have their protocol owner. BM/SBM/ST/MN create no extra native allocation;
+CB_DIR alone registers a compatibility parameter-map reference, whose abort
+lifetime remains in the fixed map group. No extra buffer ownership is
+invented for direct guest-pointer views.
+
+Original dispatch remains the behavior owner. ThunkMsg16 initializes
+fThunkSucceeded FALSE, records its delegate result and returns NULL on FALSE.
+Existing WU32SendMessage/SendDlgItem/CallWindowProc/default/MDI/Post paths test
+its returned target; HWND0-valid PostApp/Dispatch/IsDialogMessage and reverse
+Hook paths use the already admitted explicit success field. getmsg16's
+retained scalar route sets success itself; special original messages use
+ThunkMsg16. The proposed five checks therefore use a pre-existing rejection
+contract, not a new error protocol or delegated native control replacement.
+
+Four-rung decision for346: original translation units already compose and
+remain selected, no new import; a lower allocator/facade cannot fix original
+consumers ignoring NULL; minimal local guards in those exact owners are
+necessary, registered in README before source edits with20 executable-line
+budget. No new adapter behavior, global flag, helper HWND, registry, guest
+change, shell rule or semantic concession. Source-exact faults must prove all
+five old failures independently; selected normal/inline/heap/zero/count and
+one-release paths plus actual original control messages follow only after
+the complete group is implemented. This is an implementation admission,
+not another runtime pass or full M4 closure. All other table rows stay S4.
+
+Adjacent signed-count review finds one additional paired edge within this
+same array-constructor cohort, before product build: both EDIT/ListBox tabs
+construct using signed INT32(wParam)>0, but unthunk uses unsigned WORD>0.
+ForFFFF, no array is acquired and lParam still holds the original guest token;
+normal release would pass that token to STACKORHEAPFREE/free_w. Match the
+original signed construction predicate in both release sites. The submitted
+native negative-count request and original result behavior remain unchanged;
+only a free of storage never acquired is removed. Extend exact negatives to
+both signed cases; zero/inline/heap cases stay mandatory. This is paired
+ownership repair, not another control feature or a new semantic concession.
+
+### Reverse-construction dependency implementation and first evidence
+
+DIV346 is staged, not delivered. All five acquisition guards and both signed
+release predicates are complete before the first product composition. Raw
+MVDM delta14 additions/2 removals includes local provenance. The exact-source
+test keeps original PARM16/MSGPARAMEX/MSGTHUNKBUFFER, STACKORHEAP macros,
+complete Thunk/UnThunkEM/LB bodies and original integer array helpers; only
+lower memory/allocation services are doubles. The private-help acquisition/
+release case is an exact source slice, not claimed as a full WM dispatcher.
+The original union is84 bytes and complete MSGPARAMEX140 on selected x86.
+All normal inline/heap, zero count, signed negative count, text/array copy,
+selection result narrowing and one-release checks retain original behavior.
+
+The first fixture build incorrectly duplicates the public SDK DROPSTRUCT
+with a guest declaration and failsC2371. Remove only the duplicate: native
+DROPSTRUCT already comes from the same SDK as the product. R2 old bodies
+fail all five missing-allocation assertions; candidate16 scenarios pass.
+The signed-release sweep then extends the fixed group: r3 old9 assertions
+fail/current18 scenarios pass. R4 repeats the complete18 after restoring
+repository-native LF format for the two initially exact indexed sources;
+there is no whole-file newline diff. The old raw working/upstream SHA versus
+indexed normalized SHA is not misrepresented as a new semantic change.
+
+First source-complete product build PID8788 runs15:43:57.754--15:44:14.191Z,
+exit0, compiles all three changed MVDM units and links WOW32 through the
+stable Release/MT/CCPU40 graph. Canonical ZIP plus exact named release13,
+replacing only built WOW32, form the first isolated candidate, not installed
+O:/winnt material. Original unrelated compiler/linker warnings remain visible.
+
+Actual-r1 controls-Off PID17692 runs15:44:37.039--15:44:47.468. All9 phases,
+new tab/reset and multiple-selection array assertions, final created11/
+destroyed9/leaving2 and exactly-once retirement pass. The outer runner still
+fails while removing its stage: access denied on O:/tmp/n07e/SYSTEM32/ntvdm.exe.
+This is not aggregate acceptance. Later authoritative process inventory finds
+zero live stage executables;44 remaining files/5603413 bytes individually
+match canonical candidate or authored probe/report. The exact marked owned
+stage is removed, retaining all failed-run evidence. No antivirus cause or
+runtime regression is inferred from the temporary deletion error.
+
+Actual-r2 controls-Off PID32612 supervisor child identity is retained in its
+steps record (the observer report's root launcher is32116). It ends15:46:21.745
+with launcher1067 after phase6, at the list's DestroyWindow call. Earlier
+phases/errors0 and a prior normal return do not pass this destruction failure.
+Do not retry the failing group into green or revert independently valid guards.
+
+Source now proves the reached dependency, not guessed task scheduling:
+original client/usercli.h UserLocalFree expands to HeapFree(pUserHeap,0,p),
+BOOL nonzero on success. LBSetTabStops' zero-count reset in lboxrare.c tests
+!UserLocalFree and therefore leaves iTabPixelPositions dangling after a
+successful free; xxxDestroyLBox later frees that same member. Failed free
+incorrectly clears ownership instead. Its original file is byte-identical
+before correction, SHA E8914F4761ADE70A1A7357B5DC8C17744CE1BC49379D03A99470F815EF85F64D.
+Sweep every selected conditional UserLocalFree consumer: the only other
+one is EDMLSetTabStops, whose !UserLocalFree branches to FALSE before clearing,
+and is already correct. An initial verbal two-control attribution is explicitly
+corrected; no EDIT-native or shared allocator change follows. Bitmap-only
+LocalFree bindings are not the control-client macro contract.
+
+Register OPENNT-HOST-125 before changing only that ListBox predicate; preserve
+the original native heap macro and complete control behavior. Raw delta2/1
+including comment, under its6-line budget. No lower facade can fix this
+consumer-specific inversion without breaking the shared correct BOOL contract.
+This original host defect is independently source-proven and within the
+standing minimal-correction authorization; it is not a guest mutation, a new
+feature, a name-based exception or approval to rewrite control allocation.
+
+The expanded same-source fixture now includes the complete original
+LBSetTabStops, the exact original destructor's tab-resource slice and original
+MultDiv macro. Its first r5 build lacks that arithmetic macro and fails under
+WX before running; r6 adds the actual original macro, not an approximate
+MulDiv replacement. R6 at15:54:04.154--15:54:18.011 compiles old19484/current39164
+and runs old26420/current4532. Old returns1 with13 failed assertions (all named
+allocation/signed-release cases plus successful-reset dangling ownership,
+second destruction and failed-free loss); current returns0 with21 scenarios.
+It preserves failed native free ownership, normal tab conversion, allocation
+failure, repeated reset and normal destruction's one release. Neither model
+is actual guest/runtime acceptance or an injected real allocation failure.
+
+Model result24ABF7195FDB3DF71D5E3DBB69FA502E7A84DF63828BC0C5355A828D9067BFB9;
+fixtureEA9B9C84395EF24C46046E0E39547DAAAED5510F051BDD029C54F0CBBF574668;
+producerB3B428ED725C73092E2AA436036918D617C333499B22EEAF03D9DC93F37183F7.
+Current runtime source hashes:
+wmsgem251325307C9E698EE579E3493F15F93ABB6DAFE7D289F334AC3714C513566BE9;
+wmsglb9F5D3549B2E3C1FCAA4342DA0A04D37F74477DDA07903071291E74539AF426A2;
+wmsg16805C9E1958CDA9474838F0ADD263396C79F9AAC505F5606F671DE75D1C9F199F;
+lboxrareF5D1D03E2C274A67450DB71122A83BE73607441080DFB379EBD6A86466DF6797.
+
+Whole dependency build-r3 product24408 runs15:54:18.843--15:54:32.566, exit0;
+only the newly changed original ListBox unit recompiles before final link.
+Earlier candidates stay sealed. A fresh candidate-r3 also selects the matching
+newly linked worker; unchanged other11 host images come from the exact P18
+manifest, not mutable installed contents. Original ZIP/media/config stay
+unchanged. New actual-r3 runs all controls and forward/reverse construction
+under Off/Win16/All; full retained gates and publication are still required.
+No claim that the entire M4/exception/DDE/clipboard inventory is complete.
+
+Actual-r3 supervisor49876 runs15:55:06.455--15:56:20.141Z, exit0. Six complete
+serial cases, not a selected later phase, pass:
+
+| Case | PID/start--end UTC2026-10-19 | Required original-boundary result |
+| --- | --- | --- |
+| controls Off |46164/15:55:10.627--15:55:19.180|all9 phases; EDIT replacement/tabs, ListBox64 tabs/reset and64-capacity selection[1,3], all retained control checks; created11/destroyed9/leaving2 and one normal retirement. |
+| construction Off |34684/15:55:19.202--15:55:32.725|original MDI3 create/destroy, captured title/param, text3, forward private-help buffer/free and reverse512-byte private-help payload/native result. |
+| controls Win16 |36108/15:55:32.739--15:55:43.239|same strict control/lifecycle assertions. |
+| construction Win16 |9492/15:55:43.252--15:55:56.713|same forward/reverse assertions. |
+| controls All |44612/15:55:56.727--15:56:06.655|same strict control/lifecycle assertions. |
+| construction All |33508/15:56:06.668--15:56:20.122|same forward/reverse assertions. |
+
+Reverse-help assertions are in the authored source's ordered successful
+construction path and peer's errors0, not an invented second helpCalls count:
+the original forward report still reads helpCalls1/helpFreed1. The512-byte
+reverse input exceeds the original84-byte inline buffer; native peer checks
+size, leading/trailing payload sentinels and exact return447A007E. Normal
+original UnThunkWMMsg16 frees this transient native buffer. Actual allocation
+faults remain model-only. All six cases include strict stage cleanup success.
+The earlier access-denied and1067 runs remain failed aggregates; the latter
+has no saved native exception stack. Exact-source counterexamples prove the
+bad ownership and required dependency, not every past similar exit's cause.
+
+Sealed candidate-r3 NTVDM
+304FA453A1A22728E143C99E1FD5549DC8AA3FB191AB27E988E9CD206310B35E,
+WOW329A21275C4753F6D614F084CC7D148A1653E70C157370600312D1AB73422E9467,
+13-image manifest530EE7BC46EF65D7AB859B3821B9A9240811621F464F8459EFF5EB55D118152D.
+These do not yet replace the P18 release. Four runtime originals change:
+MVDM14 additions/2 removals plus USER2 additions/1 removal,19 raw lines
+including comments, no new authored runtime implementation or guest change.
+Source-register gate passes278 selected/180 byte-exact/98 registered content
+differences/issues0; three previously exact files become registered changes.
+The retained acceptance supervisor41556 starts15:57:50.680 with an actual
+10800-second ceiling and exact child phase deadlines; complete floors,
+installed verification and coherent publication are still pending.
+
+The frozen346/125 batch does not absorb another optional-map path. Within
+the already listed CB_DIR/map obligation, source now narrows a separate
+counterexample: when W32CheckThunkParamFlag is true and the guest pointer is0,
+ThunkCBMsg16 calls AddParamMap(0,0); that creates a node, but FindParamMap
+returns a numeric0 as its not-found sentinel, so normal DeleteParamMap cannot
+retire it. FreeParamMap on task death is not per-call cleanup. This is the
+remaining parameter-map cohort, not a direct native-buffer acquisition or
+permission to modify wmsgcb while current acceptance inputs are frozen.
+No new runtime code, branch waiver or full-map completion is claimed here.
+
+Similarly, actual CallBack16 is wrapped by wow_user_native_extension.c, whose
+finally restores callback execution/borrow ownership. It does not restore
+original TD.vpStack/vpCBStack or captured CPU IP; original wcall16 performs
+those normal-return writes itself. Therefore an outer scope's existence
+cannot be cited as exception-frame proof. The next frame/abort reconciliation
+must preserve the original W32TryCall/W32Exception disposition and task/stack
+identity, not blindly restore a stale whole-machine snapshot. This remains
+the existing fixed exception/frame row; no replacement exception policy is
+selected, and ordinary callback FALSE already takes the normal unthunker.
+
+The full retained-r1 supervisor41556 ends16:14:17.658Z exit1 at WRITE-Off:
+four4/8/12/16-second samples retain worker3488 but no MSWRITE_MENU/DOC/PAGEINFO.
+All preceding35 rows pass, including source registers, native21/original30,
+345's36-case fixture, S3 twelve, message18, MINE3/SOL3, style, modal reference3
+and complete-logon gameplay3. The failed WRITE aggregate is not acceptance;
+DOS/external/cross/pending have not run in that supervisor.
+
+Its controller incorrectly inherits the developer process environment rather
+than the retained supported Userenv block. A fixed single P18 exact13 control
+(33896,16:16:26--16:16:52Z) under the same inherited-environment policy also has no
+WRITE windows in all four samples, worker38844 still alive. Thus this observed
+startup failure is not unique to346/125. The control's overall exit1 also
+includes a test-controller cleanup error: it replaced two images after the
+physical-stage marker had sealed candidate identities. Normal cleanup correctly
+refuses n321. At16:18, after verifying all13 against P18 and no live stage
+process, the controller restores the recorded sealed candidate13 and uses
+unchanged identity-checked removal. No cleanup predicate is relaxed.
+
+This is consistent with the previously source-proven immutable COMMAND large-
+initial-environment limitation, not a fresh observation of guest EnvSiz writes:
+the inherited observer environment is not a supported Userenv launch proof.
+The preceding read-only host shape is78 entries/6159 characters and the
+baseline-control shape78/5982; no byte-identical inherited block is claimed.
+Supported
+CreateEnvironmentBlock current-token/inherit=false is45/3349, unfiltered.
+Do not claim exact failing guest instruction attribution from this comparison.
+The unchanged candidate's completion supervisor49044 starts16:18:20.712Z,
+real5400s deadline, reuses only frozen passed rows and exact13 identities.
+WRITE/DOS23088 starts16:18:22.965 with that complete Userenv, test-owned short
+TEMP/TMP, the same observer and unchanged four-sample assertions. Then run
+the unexecuted external/cross/pending groups. No source/guest or installed
+package changes are made to obtain this input-corrected acceptance.
+
+Completion-r3 is not a pass: WRITE-Off passes all four strict samples, but
+Win16 has a visible Write/#32770 dialog and original IDPMTCantRunM text in
+every sample, without the required document windows. Its23088 child exits1
+at16:19:12.883, supervisor49044 ends1 at16:19:13.263. DOS/external groups are
+still unexecuted. This second outcome is not explained away as the inherited-
+environment failure. Research-only original initwin.c FInitWinInfo/InzFailed
+uses this string for many failed startup operations; it does not itself
+prove an allocator failure. No guest code is rebuilt or patched.
+
+Predeclare one four-case comparison, P18/346-candidate under Win16, then
+P18/346-candidate under All, with complete supported Userenv and the same
+strict samples. Existing balanced dispatch/return, window and failed-file
+observers are enabled at short stage-local paths; no new product diagnostic.
+Supervisor41560 starts16:21:10.305Z with a600s actual deadline. P18 is sealed
+as a separate reference before physical-stage marking, avoiding the previous
+controller's identity mismatch. Preserve every outcome and first failing
+original API/return; this diagnostic does not convert any earlier failed
+aggregate to acceptance or authorize publication. No source change is made
+between these declared cases.
+
+All four declared diagnostic cases pass: P18-Win16 at16:21:19.243--16:21:42.747,
+candidate-Win16 at16:21:43.642--16:22:05.918, P18-All at16:22:06.830--16:22:29.325,
+candidate-All at16:22:30.195--16:22:52.536. Supervisor41560 exits0 at16:22:52.670.
+This leaves the prior nontraced Win16 initialization failure unlocated; no
+failed API can be inferred from traces of passing launches. Shared unsuccessful
+optional WFWNET/OLECLI/COMMDLG/WINSPOOL search probes occur in both passing
+versions and are not evidence of a new missing-file regression.
+
+The declared final ordinary gate, supervisor15496 at16:23:23.953 with5400s
+deadline, turns all diagnostic path variables off by selecting the complete
+supported Userenv anew. Child28936 starts16:23:25.652. It reuses the exact
+read-only observer and retains the4/8/12/16s main/document/pageinfo assertions
+for every policy, then DOS17/17 and the still-unexecuted external groups.
+All three ordinary WRITE policies now satisfy all four samples, without a
+source/binary change. The earlier inherited and Win16 failures remain failed
+records and existing unexplained WRITE risk, not repaired or waived assertions.
+
+### P19 bounded delivery
+
+All times below are UTC2026-10-19. Source/actual346/125 witnesses and failed
+intermediate runs above remain part of this delivery, not discarded retries.
+The final supervisor revalidates every frozen source/test input and sealed13
+image after the following terminal rows. Earlier passed35 retained-r1 rows
+are reused only with those unchanged identities, not elapsed-time arguments.
+
+| Group | PID/start--end UTC | Result and boundary |
+| --- | --- | --- |
+| final retained supervisor |15496/16:23:23.953--16:33:48.582|exit0, real5400s deadline, frozen inventories unchanged. |
+| ordinary WRITE/DOS |28936/16:23:25.652--16:26:13.279|complete unfiltered Userenv, diagnostic paths absent; WRITE3 four strict startup samples each; Console17/Window17 text/interaction/exit. Not WRITE editing/save/full exit. |
+| external/native |42696/16:26:13.315--16:29:10.892|9/9 local/native32/native64 across3 policies. |
+| cross/shared worker |41308/16:29:10.906--16:31:28.022|6/6 across3 policies. |
+| pending send |13728/16:31:28.034--16:33:48.035|6/6, native destruction controls, nonblocking forbidden-order negative exits1 as required. |
+| coherent publication |40792/16:34:33.609--16:35:11.053|exit0; backup exact P18, publish same13 to assets/release and O:/winnt/system32, final hashes equal; exact-path active process count0. |
+| installed style |23840/16:34:39.512--16:34:56.239|both-width boundary pass. |
+| installed ordinary logon |36804/16:34:56.259--16:35:10.916|three gameplay/normal-exit policies pass, full Userenv; no final identity drift. |
+
+Reproduction uses verify-wow-reverse-construction.ps1 -BuildRoot (fresh
+disposable directory) -CompilerDriver (stable wow32/msvc-x86.cmd), old049ae27da
+versus current selected bodies; verify-win16-message-probe.ps1 -Construction
+-StructuredPayloads -ThreadClientView and each -Win16Style, and the strengthened
+verify-win16-hook-probe.ps1 controls mode through verify-wow-s3-guest-contracts.
+Remaining entrypoints/arguments are the same retained native21/original30,
+six message modes, MINE/SOL, style, modal, complete-logon, read-only WRITE
+-WaitTarget and Verify-CommandExitStatus groups described in P18. External
+verification selects the sealed PackageRoot/ManifestPath with ordinary,
+-CrossWorkers and -PendingSend separately. Every invocation is hidden/owned;
+interactive observation slices never set a test deadline.
+
+Retained result A2728051D42A742FEF6F80AF6CFCE1C54332AF63CB0AA986846AF0405AC89813;
+final step inventory AC6DE2FA1D33367198DF0E5886550BDFC24ACABFCC1E10AE4A99D868D8D9D1F1;
+retained-r1 inventory D9AADC237F0EB793D6109A918E225C3A8F1E5FE4D5552AF7687C17D0E0386A52;
+S3 twelve FF3DBFC71B05237432D490C17226724FB736296F8923158135BD6C3E529CEC3C;
+WRITE/DOS 2B80C28A22C8DE6EFA7507EA98968C966269FD822B724B459EF92B56D51CBAD1;
+fixed diagnostic pair3F9F05C636E3785FD36862DED645237784302ECCB797429632634DFFAA69175E;
+external600A518C541B8EBF5C91C598B4DB4F1398920825F09F35F4AB88E4E9A7DFA67F;
+cross3816ED63C55DDA9309BE9FB528A2FD2F43171BA2281D91725DBF7DADA1E0C77C;
+pendingFF2B4A38060B16DC9C8ACDFB49B37F42B235A07D8F6422516E249F582E0E75EA.
+
+Published NTVDM304FA453A1A22728E143C99E1FD5549DC8AA3FB191AB27E988E9CD206310B35E,
+WOW329A21275C4753F6D614F084CC7D148A1653E70C157370600312D1AB73422E9467;
+release manifest C3948242A475E38C987B71D86D83326065555B178061A6E42E101FDD9E2F9EB6.
+Canonical guest ZIP remains7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7.
+Other11 host images and add-ons are unchanged from P18. Runtime original diff
+is16 added/3 removed raw lines including comments, four original host files,
+no new autonomous runtime implementation, import, guest edit or ABI change.
+The registers are346/125; selected278 becomes180 exact/98 registered content
+differences/issues0. This closes only that finite source group. Full M4/maps,
+exception/abort/frame and other M1--M6 obligations remain; older0102, WRITE
+and S3 risks are not retrospectively repaired. S5/S6 remain unadmitted.
+
+Final review35844 runs16:36:17.601--16:36:54.032Z, exit0, actual600s ceiling:
+documentation governance/links, changed and new PowerShell parsing, diff check,
+candidate13 PE widths/hashes, frozen source/test inventories, both publication
+destinations, unchanged guest ZIP and Current's32KiB ceiling all pass.
+Publication result42000B921D40AC32DF12A77E33F1A93E398F2EF9066F8B00EC3B729D945980D6;
+publication owner8BF8241D9316BFE5A4F88949DAAEB03264259FF5759A8ACEED8BB035668E2782.
+
+Disposal preview joins all background owners and checks actual CIM executable/
+command paths, not merely a TasksExited switch. Exact targets are only
+build/t447-s4-reverse-construction (4617 files/274801771 bytes) and
+build/M0-T447 (one independently authored28-byte G7.COM; no other contents).
+The real sole cleanup tool passes default preview with Applied=false. Its473
+sensitive-file reviews compare original copies to canonical ZIP entry SHA256,
+assembler listings to owned probe producers, signed mode-tagged binary reports
+to tracked runner formats and G7 to its exact authored bytes. Earlier
+previews correctly stop before deletion when a raw report is misclassified
+as an executable or an expected mode signature is too narrow; source identifies
+MSG2/6/7/8/9, not a weakened unknown-file rule. No Git/link/configuration/user-
+data exception remains. Ownership-manifest hash
+8FFFBFFA2557EBBDF80FB5A55B211AFBCC0DEC989828217C4C91BBCF83F016BC;
+exact tree digests9B5A884504F4CAD90C81F8101E8794742014675AC4441F59FC6DCA3A04A10C61
+and30949138D3EDB88D91923B95DFF48C41CD3DCB7CBA50FB5CE3D169FB60A55AA7.
+Necessary terminal evidence/source/artifact hashes are retained above before
+Apply. Preserve both valid cache roots and published assets; no prune.
+
+First Apply stops before any deletion: directory div346-g7 appears changed
+inside preflight, although both full tree digests above remain identical and
+CIM finds no writer. Direct experiment proves stale enumeration metadata:
+Get-ChildItem reports639280238769757164, Get-Item reports639280238769834470;
+DirectoryInfo.Refresh changes the former to the exact latter value. This is
+not a permitted tolerance or an actual ownership change. Clear-BuildOutput's
+existing enumeration loop now refreshes each item before link/Git/membership/
+metadata inspection (one executable line plus comment), preserving all guards.
+This bounded delivery dependency does not reopen compiler configuration or Td,
+introduce another cleaner, or affect already frozen production/test inputs.
+
+Existing Test-BuildHygiene.ps1 -CleanupOnly runs hidden47736 at16:41:23.504--
+16:41:25.586, exit0:22 assertions, including preview, all-target atomic refusal,
+new generated-looking content, ownership, media, Git, traversal, cache and
+junction refusal, and legal deletion. Only its deliberately authored refusal
+fixtures are created/removed. Extra build/td-build-audit contains only two
+generated JSON records (1781 bytes), now added to the exact disposal inventory.
+Re-preview against fresh actual metadata before Apply; no safety bypass or
+force-remove is used to get an empty build listing.
+
+Final dependency-inclusive review31628 runs16:41:55.355--16:42:18.441Z exit0:
+the same governance/links/PowerShell/diff/PE/source/dual-publication/guest gates
+pass. Cleaner sourceFBA473D06ED5A74598AAFDDD2F4B317E85B9AF98BF7CF4DB13EB6AFE03895D69;
+CleanupOnly resultABFEA5069B9CCDB80F3A2E1F8ADBE14969BCE616B09E2C5344F9E9CC9F8F2325.
+The new preview reviews the same473 sensitive copies/reports and all three
+exact roots. Ownership manifest879374BB424002D40433A41373722BD4DCA1137040BF95EA3E6974E74B3AAA80;
+final main-tree digestCF7836318DCBD5736ABEE06873950445F1C918C902C3A2EA404E12389C28C199;
+G7 digest unchanged above; safety-output digest9D1629E816689F7DAD8C4AB90C9B6DDBBF641C434F811AA355CCE2F964F371B7.
+
+After a fresh actual process-quiescence check, Apply succeeds at16:42:56.761Z:
+main4623 files/274804951 bytes, G7 one/28, safety records two/1781. The generated
+review manifest is separately previewed then removed by the same real tool,
+one file/148089 bytes, digest812179B1D8F909937AA197A147A3C9101D02D98B909BFF454919427965C3128C.
+Total4627 files/274954849 bytes (about262.22MiB) removed; final CheckResidual
+lists only .ninja/.ccache. No process is killed for cleanup, no cache/global
+cache/Git pruning or user/guest deletion occurs. Disposable raw evidence is
+removed only after the above necessary results/hashes are archived; published
+images, immutable ZIP and recoverable P18 Git baseline remain. No other build
+tree is retained as another task's unexplained exception.
+
+Post-disposal hidden review24072 runs16:43:27.795--16:43:54.454Z, exit0,
+180s real ceiling, stdout/stderr captured through owned in-memory pipes:
+governance/links/diff, actual final residual inspection, both published13 and
+immutable ZIP pass without creating another disposable tree. Single-person
+second-role review checks the complete changed files, original budgets,
+test-only provenance, unproved branches and unchanged guest against the owner
+contract; there is no S4/T closure or new semantic concession. Reviewed source,
+tests, tool dependency, authorities and coherent assets form sequential P19.

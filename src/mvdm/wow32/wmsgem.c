@@ -135,6 +135,8 @@ BOOL FASTCALL ThunkEMMsg16(LPMSGPARAMEX lpmpex)
                 if (psz) {
                     i = strlen(psz)+1;
                     lpmpex->lParam = (LONG) LocalAlloc (LMEM_FIXED, i);
+                    /* DIVERGENCE(MVDM-HOST-DIV-346): no absent native buffer. */
+                    if (!lpmpex->lParam) return FALSE;
                     RtlCopyMemory ((PSZ)lpmpex->lParam, psz, i);
                 }
                 FREEPSZPTR(psz);
@@ -155,6 +157,8 @@ BOOL FASTCALL ThunkEMMsg16(LPMSGPARAMEX lpmpex)
                 if (cItems > 0) {
                     (PVOID)lpmpex->lParam = STACKORHEAPALLOC(cItems * sizeof(INT),
                                    sizeof(lpmpex->MsgBuffer), lpmpex->MsgBuffer);
+                    /* DIVERGENCE(MVDM-HOST-DIV-346): reject failed acquisition. */
+                    if (!lpmpex->lParam) return FALSE;
                     getintarray16((VPINT16)lpmpex->Parm16.WndProc.lParam, cItems, (LPINT)lpmpex->lParam);
                 }
             }
@@ -240,7 +244,8 @@ VOID FASTCALL UnThunkEMMsg16(LPMSGPARAMEX lpmpex)
         break;
 
     case EM_SETTABSTOPS:
-        if (lpmpex->Parm16.WndProc.wParam > 0) {
+        /* DIVERGENCE(MVDM-HOST-DIV-346): same signed acquisition predicate. */
+        if (INT32(lpmpex->Parm16.WndProc.wParam) > 0) {
             STACKORHEAPFREE((LPINT)lParamNew, lpmpex->MsgBuffer);
         }
 

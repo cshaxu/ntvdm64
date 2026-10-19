@@ -176,6 +176,59 @@ rollback, movement, mapping or exception paths.
 
 ### M4 original construction and owned-release correction group
 
+The post-P18 source sweep fixes the next finite cohort346 before another
+build: all five reverse/native-buffer acquisition branches in wmsgem's
+EM_REPLACESEL/EM_SETTABSTOPS, wmsglb's LB_GETSELITEMS/LB_SETTABSTOPS and
+wmsg16's WM_WINHELP. Reject a missing buffer through existing FALSE and
+fThunkSucceeded; preserve zero/negative-count behavior, inline/heap selection,
+normal data/result conversion and original free operations. Both tab-array
+release predicates must match their
+signed constructor predicate, avoiding free of an unacquired guest token.
+No universal unthunker-on-exception or new resource manager. Register20-line mirror budget
+and two newly differing original files; retain guest and installed P18.
+Exact selected-source slices must fail independently on all five old
+acquisition failures, then pass normal/zero/inline/heap, unchanged inputs,
+no native call on failed conversion and one original release. Extend actual
+control witness for tabs/selection as well as existing replacement text;
+the WinHelp real boundary already has a distinct admitted private-message
+witness. Group implementation/tests before compile, followed by complete
+retained floors and coherent13 publication. Scratch
+build/t447-s4-reverse-construction is owned by this group with60-minute build
+and180-minute full-retained ceilings,2GiB and15-minute no-progress budgets,
+then sole-owner disposal. This is
+part of M4, not a closure of19 forward owners or protocol/exception paths.
+
+Its new real tab/reset witness exposes ListBox retirement, before broad
+regressions/publication. Source identifies LBSetTabStops' inverted BOOL free
+test under the actual original HeapFree macro, not a reason to weaken the
+witness. Add OPENNT-HOST-125 as the required paired control-storage dependency:
+one predicate in lboxrare.c,6-line budget. Sweep every selected UserLocalFree
+result consumer: edmlrare.c already handles BOOL correctly and stays unchanged.
+Prove old success/reset and failed-free counterexamples, current preserved
+allocation/failed-free/repeated-reset/destruction behavior, then rebuild this
+whole group. Earlier candidate and failed runs remain sealed/unpublished;
+new native storage dependency cannot inherit their acceptance. No guest change.
+
+P19 delivers this bounded346/125 group after21 exact-source scenarios,
+old13 failed assertions, actual control/construction6, full retained floors,
+coherent13 and installed checks. Runtime original diff is16 added/3 removed
+lines including comments in four files; no new authored runtime or guest diff.
+Three formerly exact selected files become registered differences (180/98).
+WRITE's inherited-environment failure and one unexplained Win16 initialization
+dialog remain failed records; declared P18/candidate controls and final ordinary
+three-policy startup pass do not claim those failures repaired. The indexed
+S4 source audit owns exact run identities and limits. Remaining zero-token
+CB_DIR map ownership and callback/abort/frame rows stay in the existing M4
+inventory, not absorbed into this frozen delivery or transferred out of S4.
+
+The delivery's sole cleanup tool falsely rejects an unchanged directory:
+enumerated timestamp639280238769757164 versus direct639280238769834470,
+with identical membership digest and no writer. Its bounded dependency fix
+refreshes enumeration metadata before the existing link/Git/membership/hash
+checks. No tolerance, bypass, policy/ABI/runtime change or second cleaner.
+Use existing Test-BuildHygiene -CleanupOnly, owned build/td-build-audit with
+300s/64MiB ceilings, then remove all disposable outputs via the same tool.
+
 After58fa75e55, the19-owner/reverse-thunk sweep identifies five finite source
 defects, to correct together as MVDM-HOST-DIV-345 (not a new scheduler or
 generic finalization engine):

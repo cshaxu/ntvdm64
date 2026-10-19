@@ -195,9 +195,9 @@ try {
         if($bytes.Length -ne 342 -or ($controlRecords.phase -join ',') -ne '0,1,2,3,4,5,6,7,8' -or
                 @($controlRecords|Where-Object errors -ne 0).Count){throw 'Control guest phase/assertion failure'}
         $last=$controlRecords[-1]
-        if($last.created -ne 10 -or $last.button -ne 1 -or $last.single -ne 1 -or
+        if($last.created -ne 11 -or $last.button -ne 1 -or $last.single -ne 1 -or
                 $last.multi -ne 1 -or $last.list -ne 1 -or $last.combos -ne 3 -or
-                $last.menus -ne 1 -or $last.destroyed -ne 8 -or $last.leaving -ne 2 -or
+                $last.menus -ne 1 -or $last.destroyed -ne 9 -or $last.leaving -ne 2 -or
                 $last.scroll -ne 1 -or $last.dropdown -ne 2 -or
                 !$last.wordCalls -or $last.wordNested -ne $last.wordCalls -or ($last.wordActions -band 3) -ne 3 -or
                 !$last.task -or @($controlRecords|Where-Object task -ne $last.task).Count){

@@ -113,6 +113,14 @@ static LRESULT CALLBACK peer_proc(HWND window, UINT message, WPARAM wp, LPARAM l
         InterlockedIncrement(&received);
     }
     switch (message) {
+#ifdef MESSAGE_CONSTRUCTION
+    case 0x0038: {
+        const DWORD *packet=(const DWORD *)lp;
+        check(packet!=NULL);
+        if(packet){check(LOWORD(packet[0])==512);check(packet[1]==0x11223344 && packet[127]==0x55667788);}
+        return errors ? 0 : 0x447a007e;
+    }
+#endif
 #ifdef MESSAGE_EXTERNAL_PROGRAM
     case 0x482:
         return structure_received; /* Test-only scalar completion query. */

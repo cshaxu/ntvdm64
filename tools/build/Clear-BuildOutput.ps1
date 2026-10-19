@@ -57,6 +57,8 @@ function Get-TreeItems([string]$Path) {
     $pending.Push((Get-Item -LiteralPath $Path -Force))
     while ($pending.Count) {
         $item = $pending.Pop()
+        # Enumeration can cache older directory-index times than direct reads.
+        $item.Refresh()
         Assert-NoLink $item
         if ($item.Name -in @('.git','.hg','.svn') -or $item.Extension -eq '.git') {
             throw "Version-control data refused: $($item.FullName)"
