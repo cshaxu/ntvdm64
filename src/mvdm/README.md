@@ -1,5 +1,26 @@
 # mvdm
 
+MVDM-HOST-DIV-349 registers the S4 call-owned conversion transaction against
+pinned OpenNT5c5b979ec08c17d3ca2eb70e8aad62d26515d01c and delivered P21/
+native prerequisite860785e88. Six existing originals: wmdisp32.c/.h,
+wcntl32.c, wcommdlg.c, wudlg.c and wowhooks.c. Keep original allocation,
+conversion, normal output/result and global-lock algorithms. Capture completed
+heap/global acquisitions in existing message scratch before any copy can
+escape; consume keys before the original release. Pair nested MDI transfer
+and the independent CBT creator. Existing outer finalizers include window,
+dialog and both message-hook consumers; stack-allocating CBT/journal/mouse
+hooks also retain a native call-local cursor/INIT snapshot. Restore only a
+failed invocation, while its original task/worker remains live; preserve normal
+stackfree16's no-op and SignalProc teardown. Explicitly exclude COPYDATA's
+already owned header/data and DDE protocol transfers from generic heap keys.
+No field/ABI size change, allocator/registry, output-copyback-on-abort,
+idle/scheduler change, guest edit or new original import. ADAPTER-WOW-101
+supplies only the finite captured-key release and stack pairing behind these
+original consumers; a lower allocator cannot fix their ignored copy failures.
+Budget300 executable added/removed lines across these six originals. Complete
+the entire original-body fault/normal/nested/lock-count/terminal group and
+actual guest plus every-P/coherent13 gates before production publication.
+
 MVDM-HOST-DIV-348 registers the S4 original callback-abort ownership group
 against the pinned OpenNT owners and P20/audit92a60fe38. Existing wcall16.c
 owns call-local cursor/INIT progress and deferred API-frame return; wow32.c

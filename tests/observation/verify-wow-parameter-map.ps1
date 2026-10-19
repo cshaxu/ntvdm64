@@ -11,7 +11,7 @@ $baseline='18d0ec060024912e6b03aec69bdded6c9181af03';$selections=@();$steps=@()
 function Read($path,$old){if($old){$s=(& git -C $repo show "${baseline}:$path") -join "`n";if($LASTEXITCODE){throw 'Missing baseline'};return $s};[IO.File]::ReadAllText("$repo/$path").Replace("`r`n","`n")}
 function Region($s,$begin,$end,$name){$a=$s.IndexOf($begin,[StringComparison]::Ordinal);$b=if($a -ge 0){$s.IndexOf($end,$a,[StringComparison]::Ordinal)}else{-1};if($a -lt 0 -or $b -lt 0){throw "Missing $name"};$length=$b+$end.Length-$a;$script:selections+=@{name=$name;offset=$a;length=$length};$s.Substring($a,$length)}
 function Body($s,$name){
- $m=[regex]::Matches($s,'(?m)^(?:BOOL|VOID|DWORD|PVOID|ULONG|void)\s+(?:(?:FASTCALL|WINAPI)\s+)?'+[regex]::Escape($name)+'\s*\([^;{}]*\)\s*\{')
+ $m=[regex]::Matches($s,'(?m)^(?:static\s+)?(?:BOOL|VOID|DWORD|PVOID|ULONG|void)\s+(?:(?:FASTCALL|WINAPI)\s+)?'+[regex]::Escape($name)+'\s*\([^;{}]*\)\s*\{')
  if($m.Count -ne 1){throw "Unique body required $name"};$a=$m[0].Index;$b=$a+$m[0].Length;$depth=1
  while($depth -and $b -lt $s.Length){if($s[$b] -eq '{'){++$depth}elseif($s[$b] -eq '}'){--$depth};++$b};if($depth){throw 'Unbalanced body'}
  $script:selections+=@{name=$name;offset=$a;length=$b-$a};$s.Substring($a,$b-$a)
@@ -53,7 +53,9 @@ try{
   $bodies+='BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex){LONG lParam=lpmpex->Parm16.WndProc.lParam;PLONG plParamNew=&lpmpex->lParam;switch(lpmpex->Parm16.WndProc.wMsg){'+"`n"+$case+"`n}return TRUE;}"
   $bodies+='VOID FASTCALL UnThunkWMMsg16(LPMSGPARAMEX lpmpex){switch(lpmpex->Parm16.WndProc.wMsg){'+"`n"+$release+"`n}}"
   $bodies+=Body (Read 'src/mvdm/wow32/wuwind.c' $old) 'WU32SetWindowText'
-  $lifetime=Read 'src/wow32-dll/source/wow_message_lifetime.c' $old;foreach($name in @('wow_message_unwind32','wow_message_unwind16')){$bodies+=Body $lifetime $name}
+  $lifetime=Read 'src/wow32-dll/source/wow_message_lifetime.c' $old
+  if(!$old){foreach($name in @('wow_message_free16','release_mdi','wow_message_release32')){$bodies+=Body $lifetime $name}}
+  foreach($name in @('wow_message_unwind32','wow_message_unwind16')){$bodies+=Body $lifetime $name}
   [IO.File]::WriteAllText("$dir/parameter_exact.h",($bodies -join "`n`n"))
   $define=if($old){'/DBASELINE_IMAGE'}else{''}
   [IO.File]::WriteAllText("$dir/build.cmd","@echo off`r`ncall `"$CompilerDriver`" cl.exe /nologo /TC /O2 /MT /W4 /WX /wd4706 /wd4127 /wd4213 /wd4306 $define /I`"$dir`" `"$PSScriptRoot/wow_parameter_map_fixture.c`" /Fo`"$dir/unit.obj`" /Fe`"$dir/unit.exe`"`r`nexit /b %errorlevel%`r`n")

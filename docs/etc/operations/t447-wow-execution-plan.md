@@ -214,6 +214,54 @@ minimal mirror/adapter exception before production edits, implement the whole
 cohort, then run original-body failure/lifecycle and real guest acceptance
 plus every-P floors. The native probe is not a substitute for these gates.
 
+The349/101 implementation includes the source-reached delegated heap closure:
+fourteen EDIT/ComboBox/ListBox owners and SHAREVIOLATION, not only wmdisp32's
+direct producers. CB_GETLBTEXT retains its slot0 copy-count;
+completed heap tokens use existing slot1. CREATE/MDICREATE/COPYDATA and temporary
+globals retain separately classified scratch contracts. Zero and pair the
+previously independent WCD32CommonDialogProc record as well as CBT; putmsg16's
+COMMAND/DDE/DROPFILES-only record does not acquire this heap/stack transaction
+and remains unchanged. All stack-allocating forward Hook owners are included;
+keyboard/shell hooks without such allocations are unchanged. This is one
+existing M4 ownership correction, not new control behavior or protocol policy.
+P22 scratch build/t447-s4-message-transaction had the S4 owner,180min phase/
+240min retained,2GiB and15min no-progress budgets. Its completed outputs are
+now removed through the sole cleanup owner after retaining results/hashes;
+both valid caches and the original guest remain unchanged.
+The legacy DOS verifier additionally requires its28-byte authored G7.COM at
+build/M0-T447/S4/transaction-dos: same S4 owner,15min phase/1KiB; that sole
+generated-input tree is also removed after actual process quiescence.
+The final review also marks native-only and intentionally filtered normal
+returns completed; they must not roll back nested callback effects. Preserve
+the167-case body/omission-control proof and rerun the sealed affected runtime
+floors. WRITE uses the complete supported Userenv logon block, not an allowlist;
+the differing inherited-development-environment failures stay unlocated.
+
+ADAPTER-WOW-102 is the finite same-cohort acquisition dependency, not a new
+message feature. A pure native control proves local next/parent/owner cycles
+can arise from valid interleaved public queries; PID does not provide a USER
+snapshot lock. Only that precommit normalization outcome may discard and
+reacquire once. Every other failure, identity/lifetime check and the second
+acquisition keep the existing strict boundary. No old local snapshot, sleep,
+native mutation, generic error retry or persistent state is permitted. Verify
+the unchanged P21 algorithm's failure and the whole corrected caller against
+the same native interleavings, entry error preservation, terminal second race
+and non-race/commit failure before rebuilding. Actual earlier Shell/error13
+attribution remains separate; normal real six-policy Shell floors must pass.
+
+P22 now delivers349/101/102 after the complete sealed final-r2 acceptance and
+both-target13/installed validation. The new source-only native capture
+counterfactual is reproducible through verify-wow-native-chain-capture.ps1
+(-Reacquire for21 transactions); the actual conversion fault entrypoint is
+verify-win16-message-probe.ps1 with Construction/StructuredPayloads/
+ThreadClientView and its diagnostic manifest/phase. Normal product images
+never contain diagnostic substitution. The [bounded delivery evidence](../evidence/m0-t447-s4-message-source-audit.md#p22-bounded-conversion-ownership-delivery)
+retains all failed controls and proof levels. Protocol-owned DDE Advise/
+Execute and the remaining packet transfers, M3 BlockWOWIdle pairing and the
+full M1--M6 reconciliation stay in S4, together with the unlocated historical
+Shell/error13 boundary. WRITE editing/save/normal exit is not claimed. S5/S6
+and Queue remain unchanged; this is not S4 or T447 closure.
+
 ### M4 original construction and owned-release correction group
 
 After P19,347/098 is the finite parameter-map group, not just a CB_DIR guard:

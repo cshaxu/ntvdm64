@@ -13,6 +13,9 @@ static PVOID WINAPI allocate(SIZE_T size)
 { return HeapAlloc(GetProcessHeap(), 0, size); }
 static void WINAPI release(PVOID memory)
 { HeapFree(GetProcessHeap(), 0, memory); }
+static BOOL WINAPI unexpected_destroy(wow_cleanup_context *context,
+    wow_class_lookup_entry **entry)
+{ (void)context; (void)entry; CHECK(FALSE); return FALSE; }
 
 static void verify_recovered_targets(wow_class_lookup_context *classes)
 {
@@ -77,6 +80,7 @@ static void verify_original_cleanup(wow_class_lookup_context *classes)
     wow_window_dispatch_target shadow_target = {0x92370056u, unexpected_callback, TRUE};
     wow_class_words_binding *private_class;
     ATOM shadow_atom;
+    DWORD unrelated_module = 0, module_attempt;
     unsigned restored = 0;
     process.classes = classes;
     thread.ppi = &process;
@@ -85,6 +89,7 @@ static void verify_original_cleanup(wow_class_lookup_context *classes)
     context.handles.aheList = handles;
     context.allocate = allocate;
     context.release = release;
+    context.destroy_class = unexpected_destroy;
     CHECK(!wow_standard_classes_bind_cleanup(NULL));
     CHECK(wow_standard_classes_bind_cleanup(&context));
     CHECK(wow_standard_class_describe("EDIT", &other));
@@ -118,7 +123,25 @@ static void verify_original_cleanup(wow_class_lookup_context *classes)
         entry->adwWOW[0] = 0x12370056u;
         wow_class_words_release(binding);
     }
-    CHECK(_WOWCleanup((HANDLE)1, 0, &selector, 1, &context));
+    /* This row tests selector/procedure restoration, not module destruction.
+     * A fixed module1 accidentally matches a native image relocated to10000h.
+     * Select a genuinely unrelated WORD from the actual retained class list. */
+    for (module_attempt = 0; module_attempt <= 0xffffu; ++module_attempt) {
+        BOOL conflict = FALSE;
+        unsigned list;
+        /* Start with the actual occupied value, exercising the avoidance
+         * even when ASLR does not place this particular image at10000h. */
+        unrelated_module = (HIWORD(shadow.hInstance) + module_attempt) & 0xffffu;
+        for (list = 0; list < 2; ++list)
+            for (entry = list ? classes->pclsPublicList : classes->pclsPrivateList;
+                    entry; entry = entry->next)
+                if (HIWORD(entry->hModule) == unrelated_module) conflict = TRUE;
+        if (!conflict) break;
+    }
+    CHECK(module_attempt > 0 && module_attempt <= 0xffffu);
+    CHECK(_WOWCleanup((HANDLE)(ULONG_PTR)unrelated_module, 0, &selector, 1, &context));
+    fprintf(stderr, "WOW_STANDARD_CLEANUP_MODULE image=%p excluded=%lu\n",
+        GetModuleHandleA(NULL), unrelated_module);
     private_class = wow_class_words_acquire(classes, shadow_atom, shadow.hInstance);
     CHECK(private_class != NULL);
     if (private_class) {

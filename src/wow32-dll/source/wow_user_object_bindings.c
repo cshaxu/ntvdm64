@@ -397,15 +397,17 @@ static ULONG *observation_edge(window_observation *row, unsigned edge)
 }
 
 /* Native concurrent sampling can join an old external edge to a new local
- * chain. Break only an external edge of such a cycle. Local-only cycles are
- * integration errors. Gray/black traversal is linear, not a stability retry. */
+ * chain. Break only an external edge of such a cycle. A local-only cycle
+ * rejects this acquisition; the caller may reacquire once before publication.
+ * Gray/black traversal itself remains linear. */
 static BOOL normalize_observation_chains(window_observation *rows, ULONG count,
-    const ULONG *index)
+    const ULONG *index, BOOL *capture_raced)
 {
     BYTE *state = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, count);
     ULONG start, at, next, cut;
     unsigned edge;
     DWORD pid = GetCurrentProcessId();
+    if (capture_raced) *capture_raced = FALSE;
     if (!state) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return FALSE; }
     for (edge = 0; edge < 3u; ++edge) {
         ZeroMemory(state, count);
@@ -424,6 +426,9 @@ static BOOL normalize_observation_chains(window_observation *rows, ULONG count,
                     cut = index[LOWORD(*observation_edge(&rows[cut], edge))] - 1u;
                 } while (cut != at);
                 if (rows[cut].process_id == pid) {
+                    /* ADAPTER-WOW-102: public local queries are not atomic.
+                     * This transaction has not published any captured state. */
+                    if (capture_raced) *capture_raced = TRUE;
                     HeapFree(GetProcessHeap(), 0, state);
                     SetLastError(ERROR_INVALID_DATA); return FALSE;
                 }
@@ -449,13 +454,14 @@ static BOOL normalize_observation_chains(window_observation *rows, ULONG count,
     return TRUE;
 }
 
-static BOOL project_graph(const HWND *roots, ULONG root_count,
-    const HWND *payload, ULONG payload_count)
+static BOOL project_graph_attempt(const HWND *roots, ULONG root_count,
+    const HWND *payload, ULONG payload_count, BOOL *capture_raced)
 {
     window_observation *rows = NULL, captured;
     ULONG *index = NULL, count = 0, capacity = 0, i, used;
     BOOL result = FALSE;
     DWORD error, pid = GetCurrentProcessId(), saved = GetLastError();
+    if (capture_raced) *capture_raced = FALSE;
     if (!roots || !root_count || root_count >= 0x10000u) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
@@ -554,7 +560,7 @@ static BOOL project_graph(const HWND *roots, ULONG root_count,
             *target = 0;
         }
     }
-    if (!normalize_observation_chains(rows, count, index)) goto done;
+    if (!normalize_observation_chains(rows, count, index, capture_raced)) goto done;
     /* Prepare local names/references before the existing graph commit.
      * No fallible per-window refresh may follow that irreversible commit. */
     result = wow_window_words_project_observed(count, rows);
@@ -564,6 +570,20 @@ done:
     if (rows) HeapFree(GetProcessHeap(), 0, rows);
     SetLastError(error);
     return result;
+}
+
+static BOOL project_graph(const HWND *roots, ULONG root_count,
+    const HWND *payload, ULONG payload_count)
+{
+    BOOL capture_raced = FALSE;
+    DWORD saved = GetLastError();
+    if (project_graph_attempt(roots, root_count, payload, payload_count, &capture_raced))
+        return TRUE;
+    if (!capture_raced) return FALSE;
+    /* ADAPTER-WOW-102: one fresh, fully validated acquisition, never a stale
+     * fallback or retry of a failed commit/identity/native operation. */
+    SetLastError(saved);
+    return project_graph_attempt(roots, root_count, payload, payload_count, NULL);
 }
 
 BOOL WINAPI wow_user_window_project_graph(const HWND *roots, ULONG root_count)

@@ -17,12 +17,21 @@ param(
  [string]$CrossWorkerCoordinator='',
  [switch]$SharedWorkerControl,
  [switch]$PendingSend,
- [switch]$Construction
+ [switch]$Construction,
+ [string]$TransactionDiagnosticManifest,
+ [ValidateSet('BeforeCallback','AfterCallback')][string]$TransactionPhase='BeforeCallback'
 )
 # Entire actual-guest message group. Invoke as an owned hidden background run.
 # No original guest is changed or rebuilt; only independently authored probes.
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
+if($TransactionDiagnosticManifest){
+ if(!$Construction -or $NativeHost){throw 'Transaction fault requires the whole normal construction group and freshly built peer'}
+ $transaction=Get-Content $TransactionDiagnosticManifest -Raw|ConvertFrom-Json
+ if($transaction.kind -ne 'diagnostic-only' -or $transaction.publishable -ne $false -or
+  $transaction.target -ne 'MSGSEND' -or $transaction.fault -ne 'original message callback BeforeCallback/AfterCallback' -or
+  (Get-FileHash "$PackageRoot/system32/WOW32.DLL").Hash -ne $transaction.diagnosticProvider){throw 'Exact transaction-only provider required'}
+}
 if($Construction -and (!$StructuredPayloads -or !$ThreadClientView -or $CrossWorkerCoordinator -or
  $ExternalNativePeer -or $NativeExtension -or $CopyDataProc32 -or $ReplyPayloadLifetime -or
  $TimeoutPayloadLifetime -or $PendingSend)){
@@ -97,6 +106,7 @@ try{
   if($CrossWorkerCoordinator){$arguments+='-DCROSS_WORKER'}
   if($PendingSend){$arguments+='-DPENDING_SEND'}
   if($Construction){$arguments+='-DCONSTRUCTION'}
+  if($TransactionDiagnosticManifest -and $role -eq 'SEND'){$arguments+='-DMESSAGE_TRANSACTION'}
   & $assembler @arguments $assembly *> "$root/$role-assemble.txt"
   if($LASTEXITCODE){throw "Independent $role assembly failed"}
  }
@@ -124,6 +134,7 @@ try{
   if($TimeoutPayloadLifetime){$nativeDefines+='/DM4_TIMEOUT_PAYLOAD'}
   if($CopyDataProc32){$nativeDefines+='/DM4_COPYDATA_PROC32'}
   if($Construction){$nativeDefines+='/DMESSAGE_CONSTRUCTION'}
+  if($TransactionDiagnosticManifest){$nativeDefines+='/DMESSAGE_TRANSACTION'}
   & $CompilerDriver cl.exe /nologo /LD /MT /O2 /W4 /WX /D_CRT_SECURE_NO_WARNINGS @nativeDefines "/Fo$root/peer.obj" $native /link "/OUT:$root/MSGHOST.DLL" "/IMPLIB:$root/MSGHOST.lib" /EXPORT:MessagePeer=_MessagePeer@4 /EXPORT:MessageExtension=_MessageExtension@12 user32.lib *> "$root/native-build.txt"
   if($LASTEXITCODE){throw 'Native peer build failed'}
  }finally{Pop-Location}
@@ -170,6 +181,11 @@ public static class WowMessageLogonEnvironment {
  $info.EnvironmentVariables['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'
  $info.EnvironmentVariables['MVDM_WOW_WINDOW_TRACE_PATH']="$root/lifetime.txt"
  $info.EnvironmentVariables['MVDM_WOW_CALLBACK_FRAME_TRACE_PATH']="$root/lifetime.txt"
+ if($TransactionDiagnosticManifest){
+  $info.EnvironmentVariables['MVDM_TEST_MESSAGE_TRANSACTION']="$root/transaction"
+  $info.EnvironmentVariables['MVDM_TEST_MESSAGE_PHASE']=$TransactionPhase
+  Get-FileHash $TransactionDiagnosticManifest|Export-Csv -NoTypeInformation "$root/transaction-provider-input.csv"
+ }
  $info.EnvironmentVariables.Keys|ForEach-Object {[pscustomobject]@{name=$_;characters=$_.Length+$info.EnvironmentVariables[$_].Length+2}}|Export-Csv -NoTypeInformation "$root/environment-shape.csv"
  $arguments=@("$runtime/system32/run16.exe",$tests,"$root/observer.txt",'--wait')
  if($Win16Style -eq 'Win16'){$arguments+='--win16-style'}elseif($Win16Style -eq 'All'){$arguments+='--win16-style-all'}
@@ -273,6 +289,26 @@ public static class WowMessageLogonEnvironment {
     $nativeReport.received -ne 4 -or $nativeReport.nested -ne 1 -or $nativeReport.replied -ne 1 -or $nativeReport.text -ne 1 -or
     @(@($nativeReport.senderThread,$nativeReport.receiverThread,$nativeReport.nativeThread)|Where-Object {$_}|Sort-Object -Unique).Count -ne 3){throw 'Native peer identity/receive/result/lifetime failure'}
  if($StructuredPayloads -and $nativeReport.structures -ne 6){throw 'Both native directions did not complete all three structure families'}
+ if($TransactionDiagnosticManifest){
+  $trace=@(Get-Content "$root/transaction.trace")
+  $pattern='^pid=(\d+) tid=(\d+) task=([0-9A-F]{4}) phase=(BeforeCallback|AfterCallback) key=([0-9A-F]{8}) slot=(\d+) before=(\d+) after=(\d+) cursor=([0-9A-F]{8})/([0-9A-F]{8}) init=(\d+)/(\d+) injected=(\d+) escaped=(\d+)$'
+  if($trace.Count -ne 1){throw 'One actual original transaction boundary required'}
+  $match=[regex]::Match($trace[0],$pattern)
+  $after=if($transaction.control){'1'}else{'0'}
+  if(!$match.Success -or [uint32]$match.Groups[1].Value -ne $nativeReport.pid -or
+   [uint32]$match.Groups[2].Value -ne $nativeReport.senderThread -or
+   [Convert]::ToUInt16($match.Groups[3].Value,16) -ne $last.task -or $match.Groups[4].Value -ne $TransactionPhase -or
+   [int]$match.Groups[6].Value -ge 32 -or $match.Groups[7].Value -ne '1' -or
+   $match.Groups[8].Value -ne $after -or $match.Groups[13].Value -ne '1' -or $match.Groups[14].Value -ne '1'){
+   throw 'Actual original heap/callback/identity outcome does not match the candidate or immutable causal control'
+  }
+  if(!$transaction.control -and ($match.Groups[9].Value -ne $match.Groups[10].Value -or
+   $match.Groups[11].Value -ne $match.Groups[12].Value)){throw 'Actual failed-call callback stack was not restored'}
+  @{passed=$true;control=[bool]$transaction.control;originalHeapBitBefore=1;originalHeapBitAfter=[int]$after;
+   repaired=(!$transaction.control);phase=$TransactionPhase;task=$last.task;normalGuestRetirement=$true;
+   scope='Real original window entry/allocator/callback and unchanged guest; test-owned caught SEH, not original hard-error UI policy'}|
+   ConvertTo-Json|Set-Content "$root/transaction-result.json"
+ }
  if($CopyDataProc32 -and ($nativeReport.proc32Fresh -ne 1 -or $nativeReport.proc32Borrowed -ne 1)){throw 'Actual original Proc32 fresh/active-borrow paths incomplete'}
  if($ReplyPayloadLifetime){
   . "$PSScriptRoot/wow_reply_payload_report.ps1"

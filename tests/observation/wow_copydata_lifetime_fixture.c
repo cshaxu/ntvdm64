@@ -8,21 +8,24 @@
 #include "wow_message_lifetime.h"
 /* Same effective x86 convention as original FASTCALL under /Gz. */
 #define FASTCALL __stdcall
-typedef WORD HAND16, HWND16;
+typedef WORD HAND16, HMEM16, HWND16;
 typedef DWORD VPVOID;
+#define GlobalLock16 WOWGlobalLockSize16
+#define GlobalUnlockFree16 WOWGlobalUnlockFree16
 typedef struct { struct { WORD hwnd,wMsg,wParam,hInst; LONG lParam; } WndProc;
     struct { SHORT nCode,wParam; DWORD lParam; } HookProc; } PARM16;
 typedef struct { int iClass; } WW, *PWW;
 typedef struct _WM32MSGPARAMEX {
     HWND hwnd; UINT uMsg,uParam; LONG lParam; PARM16 Parm16;
-    BOOL fThunk; DWORD dwParam; BOOL fFree; DWORD dwTmp[2]; PWW pww; LONG lReturn;
+    BOOL fThunk; DWORD dwParam; BOOL fFree; DWORD dwTmp[4]; PWW pww; LONG lReturn;
     BOOL (FASTCALL *lpfnM32)(struct _WM32MSGPARAMEX *);
 } WM32MSGPARAMEX,*LPWM32MSGPARAMEX;
 typedef struct _MSGPARAMEX {
     PARM16 Parm16; HWND hwnd; UINT uMsg,uParam; LONG lParam,lReturn;
     VOID (FASTCALL *lpfnUnThunk16)(struct _MSGPARAMEX *);
     PWW pww; int iMsgThunkClass,iClass;
-    union { struct { DWORD header,data,flags; } copydata; } MsgBuffer[1];
+    union { struct { DWORD header,data,flags; } copydata;
+        struct {DWORD flags,native;} text; } MsgBuffer[1];
     BOOL fThunkSucceeded;
 } MSGPARAMEX,*LPMSGPARAMEX;
 typedef struct { DWORD dwData,cbData,lpData; } COPYDATASTRUCT16,*PCOPYDATASTRUCT16;
@@ -93,7 +96,7 @@ static void *guest_pointer(DWORD value) {
     for(i=0;i<64;i++)if(allocations[i].pointer&&allocations[i].far_value==value)return allocations[i].pointer;
     return NULL;
 }
-static void GlobalUnlockFree16(VPVOID value){free_w(guest_pointer(value));}
+static HMEM16 WINAPI GlobalUnlockFree16(VPVOID value){free_w(guest_pointer(value));return 0;}
 static void copy_bytes(void *to,const void *from,SIZE_T bytes){if(copy_fault)RaiseException(0xe0420950,0,0,NULL);memcpy(to,from,bytes);}
 #undef RtlCopyMemory
 #define RtlCopyMemory copy_bytes
@@ -107,6 +110,23 @@ static void copy_bytes(void *to,const void *from,SIZE_T bytes){if(copy_fault)Rai
 #define FETCHLONG(v) ((LONG)(v))
 #define FETCHSHORT(v) ((SHORT)(v))
 #define RET_HOOKPROC 1
+#define OLDCB_DIR (WM_USER+5)
+#define TDF_INITCALLBACKSTACK 1u
+#define TDF_IGNOREINPUT 2u
+typedef struct _TD {DWORD vpCBStack,dwFlags;WORD htask16;} TD,*PTD;
+static TD task={0,0,1};
+#define CURRENTPTD() (&task)
+BOOL WINAPI wow_user_worker_active(void){return TRUE;}
+/* Other finalizer families are outside this COPYDATA fixture. Fail closed
+ * if one is ever called; address comparisons are not a mock behavior pass. */
+BOOL FASTCALL WM32Create(LPWM32MSGPARAMEX p){(void)p;CHECK(FALSE);return FALSE;}
+BOOL FASTCALL WM32MDICreate(LPWM32MSGPARAMEX p){(void)p;CHECK(FALSE);return FALSE;}
+BOOL FASTCALL WM32SizeClipBoard(LPWM32MSGPARAMEX p){(void)p;CHECK(FALSE);return FALSE;}
+BOOL FASTCALL WM32WinHelp(LPWM32MSGPARAMEX p){(void)p;CHECK(FALSE);return FALSE;}
+BOOL FASTCALL WM32SetText(LPWM32MSGPARAMEX p){(void)p;CHECK(FALSE);return FALSE;}
+BOOL FASTCALL WM32CBDir(LPWM32MSGPARAMEX p){(void)p;CHECK(FALSE);return FALSE;}
+VOID FASTCALL UnThunkCBMsg16(LPMSGPARAMEX p){(void)p;CHECK(FALSE);}
+static VPVOID WINAPI GlobalLock16(HMEM16 handle,LPDWORD size){(void)handle;(void)size;CHECK(FALSE);return 0;}
 BOOL FASTCALL WM32CopyData(LPWM32MSGPARAMEX);
 BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX);
 VOID FASTCALL UnThunkWMMsg16(LPMSGPARAMEX);

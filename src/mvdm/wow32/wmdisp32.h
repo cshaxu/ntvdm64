@@ -43,6 +43,8 @@ typedef struct _WM32MSGPARAMEX {
     DWORD dwParam;
     BOOL fFree;
     /* DIVERGENCE(MVDM-HOST-DIV-345): final slots own nested MDI title/struct. */
+    /* DIVERGENCE(MVDM-HOST-DIV-349): otherwise slot1 captures heap ownership;
+     * COPYDATA retains its original separate progress/slot contract. */
     DWORD dwTmp[4];
 } WM32MSGPARAMEX;
 

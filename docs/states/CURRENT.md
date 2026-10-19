@@ -4,22 +4,22 @@
 
 Owner accepts and closes [Td build hygiene](../etc/operations/td-build-hygiene.md)
 at aadde21e8; S4 resumes with stable caches, immutable guest and frozen
-performance. P21 retains P20 and adds348/099/100: original callback/CCPU
-abort pairing, correct API return identity and native error-UI handoff.
-Original-body/actual-CCPU controls, real callback12 and retained
+performance. P22 retains P21 and delivers349/101 conversion ownership plus
+102's bounded native-query acquisition. Source167/native3/transaction21,
 native21/original30/S3 twelve/message18/external9/cross6/pending6,
-application/DOS/logon and installed floors pass; both destinations match13.
-Earlier WRITE and unobserved0102 failures remain unlocated, not repaired by
-later passes. The [audit](../etc/evidence/m0-t447-s4-message-source-audit.md#p21-bounded-callback-abort-delivery)
-retains exact identities, failed controls and evidence limits. No guest change.
+actual faults14/Shell6, application/DOS/logon and installed floors pass.
+Both destinations match13. Earlier WRITE,0102 and Shell/error13 failures
+remain unlocated, not repaired by later passes. The
+[audit](../etc/evidence/m0-t447-s4-message-source-audit.md#p22-bounded-conversion-ownership-delivery)
+retains failed controls, exact identities and evidence limits. No guest change.
 
 Full M1--M6/S4, protocol/output and S5/S6 remain open.
-M4's complete native-output prerequisite now passes28 observations in both
-widths, including nested NCCALCSIZE storage. This test/source-only checkpoint
-does not repair call-owned conversion/CBT rollback; P21 stays installed.
+Native output28 passes at860785e88. P22 adds no protocol ownership policy,
+stale local fallback or weaker validation. Styled raw-fault recovery remains
+unproved. Complete M1--M6, DDE and M3 idle reconciliation remain in S4.
 
-Only the two build caches remain; disposal evidence stays in the audit.
-No prune or guest edit.
+P22 scratch is removed; build retains only .ninja and .ccache.
+No cache clear, prune or guest edit.
 
 ## Current Work
 
@@ -378,9 +378,9 @@ construction, mapping, failure and lifecycle closure remains required.
 
 ## Current Technical Baseline
 
-S4 P21 retains P20 and adds348/099/100's callback-abort/native-error group.
-NTVDM SHA-256 isAB9D1B8ABC54C47FE6AB16DA2912088ED8AEF28BEBB6CBBC2FAA1AE013F42DBF;
-WOW32 is59E008EC1F09A2228FCF87FDB346F205473EB7B6DEE55ED39983C866A96C263C.
+S4 P22 retains P21 and adds349/101/102's bounded conversion/acquisition group.
+NTVDM SHA-256 is1FC1F21AD1FBDC87151E4F836670A931BBEA1591E75AE4A4C0B7A0CDB5E641F2;
+WOW32 isACD234099C6B9B58A9AE5846181CE85E6AA9E2E58AB88BB8D07C1F554C907F0F.
 The coherent13 manifest matches assets/release and O:/winnt/system32.
 Original guest, user configuration and assets/winnt.zip are unchanged.
 

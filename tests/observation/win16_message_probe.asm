@@ -464,6 +464,13 @@ result 0x8a
 %ifdef CONSTRUCTION
 call construction_check
 %endif
+%ifdef MESSAGE_TRANSACTION
+; Real native entry/callback fault is caught only by the independent native
+; peer; the original guest then continues through the full existing group.
+mov ax,12
+call native_operation
+result 0x8c
+%endif
 %ifdef EXTENSION_WITNESS
 ; Real original GetProcAddress32 failure followed by valid resolution.
 push32 module

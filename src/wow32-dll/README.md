@@ -1,5 +1,38 @@
 # WOW32 DLL target component
 
+ADAPTER-WOW-102 handles one specific precommit native-observation race.
+Public HWND queries do not acquire NT4's USER lock, even for windows in this
+worker. Exact-source/pure-native next/parent/owner witnesses prove that two
+valid reads can form a transient local cycle. Mark only that normalization
+outcome, discard the uncommitted transaction, and reacquire once. Keep all
+existing identity, mandatory-root, graph and commit validation; other errors
+and a second raced acquisition retain the original failure boundary. Restore
+entry LastError before reacquisition. No sleep, stale local fallback, native
+mutation, persistent state, retry manager, mirror/guest or ABI change. This
+repairs acquisition, not an expanded snapshot compatibility contract, and
+does not by itself attribute the earlier Shell Ignore/error13 failure.
+Require immutable-source counterfactuals, all three real native interleavings,
+normal/error/second-race/commit disposition and full composed runtime floors.
+
+ADAPTER-WOW-101 pairs the finite call-owned conversion group (mirror349).
+Existing WM32MSGPARAMEX scratch retains completed original heap/global keys;
+normal releases and existing abort finalizers consume those same keys before
+calling original free16/GlobalLock16/GlobalUnlockFree16. CREATE/MDICREATE keep
+their exact nested class/title/record owners; clipboard temporaries distinguish
+locked from already-unlocked handles. No output copyback/result translation/
+foreground activation is replayed during abort, and DDE/COPYDATA retain their
+separate original protocol ownership. A call-local TD cursor/INIT snapshot
+covers constructor failure before CallBack16; only failed active same-task
+invocations restore it, preserving normal callbacks and terminal SignalProc.
+No new allocator/registry, task state, message transport, ABI layout, guest
+change or private modern USER object interpretation. The existing original
+conversion/stack owners cannot be replaced by a lower allocation wrapper;
+the adapter records acquisition/consumption only, not control/window behavior.
+All actual window/dialog/hook/nested callers and delegated control heap owners
+are one source-derived group, with original-body and real-guest verification
+required before a changed runtime is published. Native capture28 is a design
+prerequisite, not runtime acceptance for this correction.
+
 ADAPTER-WOW-100 completes the S4 callback-abort cohort's reached native
 hard-error boundary. The existing worker dialog's initialization SetFocus can
 synchronously enter another WOW task before first-pass exception unwind pops

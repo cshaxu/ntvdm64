@@ -29,6 +29,8 @@ LONG W32DialogFunc(HWND hdlg, UINT uMsg, DWORD uParam, LPARAM lParam)
     BOOL fSuccess;
     register PWW pww;
     WM32MSGPARAMEX wm32mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
+    wow_message_stack stack; /* DIVERGENCE(MVDM-HOST-DIV-349): before construction. */
+    wow_message_stack_enter(&stack);
     __try {
     BOOL   fMessageNeedsThunking;
 
@@ -153,6 +155,7 @@ LONG W32DialogFunc(HWND hdlg, UINT uMsg, DWORD uParam, LPARAM lParam)
     if (!fSuccess)
         goto Error;
 
+    stack.completed = TRUE; /* DIV-349: not the shared failure-return label. */
 Done:
 
     return wm32mpex.lReturn;
@@ -163,7 +166,9 @@ SilentError:
     wm32mpex.lReturn = 0;
     goto Done;
     } __finally {
-        wow_message_unwind32(&wm32mpex);
+        BOOL abnormal = !stack.completed; /* DIV-349: return is not a failed call. */
+        __try { wow_message_unwind32(&wm32mpex); }
+        __finally { wow_message_stack_leave(&stack, abnormal || AbnormalTermination()); }
     }
 }
 

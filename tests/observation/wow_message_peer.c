@@ -368,6 +368,32 @@ DWORD WINAPI MessagePeer(DWORD operation)
     ] = {0};
     DWORD written;
     HANDLE output;
+#ifdef MESSAGE_TRANSACTION
+    if(operation==12){
+        char prefix[MAX_PATH], arm[MAX_PATH], buffer[64]={0};
+        DWORD identity[2]={GetCurrentThreadId(),(DWORD)(ULONG_PTR)sender_window};
+        WNDPROC procedure=(WNDPROC)GetWindowLongPtrA(sender_window,GWLP_WNDPROC);
+        BOOL trapped=FALSE;
+        LONG result;
+        check(GetCurrentThreadId()==sender_thread && procedure!=NULL);
+        if(!GetEnvironmentVariableA("MVDM_TEST_MESSAGE_TRANSACTION",prefix,sizeof(prefix)) ||
+                strlen(prefix)+8>=sizeof(prefix))return 0;
+        strcpy_s(arm,sizeof(arm),prefix);strcat_s(arm,sizeof(arm),".arm");
+        output=CreateFileA(arm,GENERIC_WRITE,FILE_SHARE_READ,NULL,CREATE_NEW,FILE_ATTRIBUTE_NORMAL,NULL);
+        if(output==INVALID_HANDLE_VALUE)return 0;
+        check(WriteFile(output,identity,sizeof(identity),&written,NULL) && written==sizeof(identity));
+        check(CloseHandle(output));
+        /* Use the real native entry on its owning WOW task thread. No guessed
+         * provider address, private host layout, task bind or USER replacement. */
+        __try{(void)CallWindowProcA(procedure,sender_window,WM_GETTEXT,sizeof(buffer),(LPARAM)buffer);}
+        __except(GetExceptionCode()==0xe4470006 ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH){trapped=TRUE;}
+        check(trapped);
+        memset(buffer,0,sizeof(buffer));
+        result=(LONG)CallWindowProcA(procedure,sender_window,WM_GETTEXT,sizeof(buffer),(LPARAM)buffer);
+        check(result>0 && result<(LONG)sizeof(buffer) && result==(LONG)strlen(buffer));
+        return errors ? 0 : 0x447a008c;
+    }
+#endif
 #ifdef MESSAGE_CONSTRUCTION
     if(operation==11){
         DWORD packet[4]={16,0x11223344,0x55667788,0x12345678};

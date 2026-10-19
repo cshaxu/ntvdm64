@@ -5,8 +5,10 @@
 #include <stdio.h>
 #include <string.h>
 #define FASTCALL __fastcall
-typedef WORD HAND16,HWND16,HMENU16,HDC16,HTASK16,HMIDIIN16,HMIDIOUT16,HWAVEIN16,HWAVEOUT16;
+typedef WORD HAND16,HMEM16,HWND16,HMENU16,HDC16,HTASK16,HMIDIIN16,HMIDIOUT16,HWAVEIN16,HWAVEOUT16;
 typedef DWORD VPVOID,VPSZ,VPSTR,VPBYTE,VPRECT16,VPPROC;
+#define GlobalLock16 WOWGlobalLockSize16
+#define GlobalUnlockFree16 WOWGlobalUnlockFree16
 typedef LPSTR LPSZ,PSZ;
 typedef struct {DWORD dwStyle,dwExStyle;} WW,*PWW;
 #include "../../src/opennt-abi/host-compat/include/wow_control_message_abi.h"
@@ -14,6 +16,14 @@ typedef struct {DWORD dwStyle,dwExStyle;} WW,*PWW;
 #include "../../src/mvdm/wow32/wparam.h"
 #include "../../src/wow32-dll/include/wow_message_lifetime.h"
 #include "parameter_map_records.h"
+/* Address-only out-of-scope families; actual invocation is a fixture failure. */
+BOOL FASTCALL WM32Create(LPWM32MSGPARAMEX p){(void)p;ExitProcess(90);}
+BOOL FASTCALL WM32MDICreate(LPWM32MSGPARAMEX p){(void)p;ExitProcess(91);}
+BOOL FASTCALL WM32SizeClipBoard(LPWM32MSGPARAMEX p){(void)p;ExitProcess(92);}
+BOOL FASTCALL WM32WinHelp(LPWM32MSGPARAMEX p){(void)p;ExitProcess(93);}
+BOOL WINAPI wow_user_worker_active(void){return TRUE;}
+VPVOID WINAPI GlobalLock16(HMEM16 handle,LPDWORD size){(void)handle;(void)size;ExitProcess(94);}
+HMEM16 WINAPI GlobalUnlockFree16(VPVOID pointer){(void)pointer;ExitProcess(95);}
 typedef struct {DWORD dwWOWCompatFlags;HAND16 htask16;} TASK;
 typedef struct {WORD wTDB;} VDMFRAME,*PVDMFRAME;
 typedef struct {WORD TDB_CompatHandle;} TDB,*PTDB;

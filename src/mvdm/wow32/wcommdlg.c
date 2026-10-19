@@ -21,6 +21,7 @@ Revision History:
 
 --*/
 #include "precomp.h"
+#include "wow_message_lifetime.h" /* DIVERGENCE(MVDM-HOST-DIV-349): call-owned share message. */
 #pragma hdrstop
 #include <cderr.h>
 #include <dlgs.h>
@@ -491,14 +492,14 @@ BOOL FASTCALL WM32msgSHAREVIOLATION(LPWM32MSGPARAMEX lpwm32mpex)
     if (lpwm32mpex->fThunk) {
         if (lpwm32mpex->lParam) {
             cb = strlen((LPSZ)lpwm32mpex->lParam)+1;
-            if (!(*plParamNew = malloc16(cb))) {
+            if (!(*plParamNew = wow_message_heap32(lpwm32mpex, malloc16(cb)))) { /* DIV-349 */
                 return(FALSE);
             }
             putstr16((VPSZ)*plParamNew, (LPSZ)lpwm32mpex->lParam, cb);
         }
     } else {
         if (*plParamNew) {
-            free16((VPVOID) *plParamNew);
+            wow_message_release32(lpwm32mpex); /* DIV-349: consume once. */
         }
     }
 
@@ -649,9 +650,12 @@ Routine Description:
 {
     BOOL            fSuccess;
     LPFNM32         pfnThunkMsg;
-    WM32MSGPARAMEX  wm32mpex;
+    WM32MSGPARAMEX  wm32mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-349): actual common-dialog conversion owner. */
     BOOL            fMessageNeedsThunking;
     POPENFILENAME16 pStruct16;
+    wow_message_stack stack;
+    wow_message_stack_enter(&stack);
+    __try {
 
     // If the app has GP Faulted we don't want to pass it any more input
     // This should be removed when USER32 does clean up on task death so
@@ -769,6 +773,7 @@ Routine Description:
                 //
                 // no wow app will expect this, so don't send it.
                 //
+                stack.completed = TRUE; /* DIV-349: intentionally filtered, not failed. */
                 return(FALSE);
             } else {
                 pfnThunkMsg = WM32NoThunking;
@@ -787,6 +792,7 @@ Routine Description:
         wm32mpex.lParam = lParam;
         wm32mpex.pww = NULL;
         wm32mpex.lpfnM32 = pfnThunkMsg;
+        wm32mpex.fFree = TRUE; /* DIV-349: synchronous callback, not a DDE transfer. */
 
         if (!(pfnThunkMsg)(&wm32mpex)) {
             LOGDEBUG(LOG_ERROR,("    WCD32OpenFileDialog ERROR: cannot thunk 32-bit message %04x\n", uMsg));
@@ -833,6 +839,7 @@ Routine Description:
     if (!fSuccess)
         goto Error;
 
+    stack.completed = TRUE; /* DIV-349: after original callback/output conversion. */
 Done:
     // Uncomment to receive message on exit
     // LOGDEBUG(10, ("CommonDialogProc Out: Return %lX\n", wm32mpex.lReturn));
@@ -844,6 +851,11 @@ Error:
 SilentError:
     wm32mpex.lReturn = 0;
     goto Done;
+    } __finally {
+        BOOL abnormal = !stack.completed; /* DIV-349: return is not a failed call. */
+        __try { wow_message_unwind32(&wm32mpex); }
+        __finally { wow_message_stack_leave(&stack, abnormal || AbnormalTermination()); }
+    }
 }
 
 ULONG FASTCALL WCD32ChooseColor( PVDMFRAME pFrame )
