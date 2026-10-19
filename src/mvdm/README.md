@@ -1,5 +1,23 @@
 # mvdm
 
+MVDM-HOST-DIV-348 registers the S4 original callback-abort ownership group
+against the pinned OpenNT owners and P20/audit92a60fe38. Existing wcall16.c
+owns call-local cursor/INIT progress and deferred API-frame return; wow32.c
+keeps W32Exception but targets its handled return's actual API entry. Existing
+CCPU c_main.c/ntthread.c/.h own only the abandoned native simulation level;
+c_xtrn.c always clears its existing interface-active flag after an escaped
+native exception. No CPU opcode, guest, callback conversion, normal result,
+task-selection or exception-disposition algorithm is replaced. The original
+normal callback body and FE longjmp stay; source-owned finally and exact-frame
+cleanup pair only an interrupted invocation. Existing SignalProc teardown
+INIT/IGNOREINPUT transitions survive. Current descriptors and shared state
+remain authoritative: do not replay old VDMFRAME bytes or c_getCpuState.
+The bounded CPU-control facade uses original selectors/PE/VM/CPL setters,
+preserves LastError, and cannot turn unavailable continuation into success.
+Budget180 executable added/removed lines in these six original files. The
+indexed S4 audit owns full phase/disposition/terminal evidence and the source
+recovery ladder; complete source/tests before one affected build cohort.
+
 MVDM-HOST-DIV-347 registers the complete S4 parameter-map ownership cohort
 against pinned OpenNT5c5b979ec08c17d3ca2eb70e8aad62d26515d01c and P19.
 Seven existing originals: walias.h, wparam.c, wmsg16.c, wmsgcb.c, wmdisp32.c,

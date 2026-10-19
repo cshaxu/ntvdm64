@@ -73,6 +73,9 @@ cmp ax,32
 jbe .failed_expected
 inc word [errors-data]
 .failed_expected:
+%ifndef CALLBACK_ABORT
+; The resolver-abort witness must not assume its interrupted first request
+; successfully created a child. The following missing-target API still runs.
 mov word [remaining-data],1000
 .wait_child:
 api 7                         ; Yield, let the actual child finish
@@ -90,6 +93,7 @@ jmp .child_done
 push ax
 api 9                         ; _lclose
 .child_done:
+%endif
 mov word [phase-data],2
 %else
 mov word [phase-data],3
@@ -135,7 +139,11 @@ code_end:
 %ifdef CHILD
 dw 5
 %else
+%ifdef CALLBACK_ABORT
+dw 6
+%else
 dw 9
+%endif
 %endif
 %macro fixup 3
 db 3,1
@@ -148,9 +156,11 @@ fixup 4,1,81
 fixup 5,1,86
 %ifndef CHILD
 fixup 6,3,20
+%ifndef CALLBACK_ABORT
 fixup 7,1,29
 fixup 8,1,85
 fixup 9,1,81
+%endif
 %endif
 align 16,db 0
 data:

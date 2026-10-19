@@ -2,8 +2,51 @@
 #include "wow_user_borrow_scope.h"
 #include "wow_user_thunk_scope.h"
 #include "wow_task_order_bindings.h"
+#include "wow_user_native_call.h"
 
 #include <stdio.h>
+
+/* ADAPTER-WOW-100: the native modal service may synchronously activate a
+ * different WOW task even during first-pass exception handling. Existing
+ * native-call scopes own readiness/handoff; original error policy stays. */
+ULONG __cdecl wow_user_sys_error_box(LPSTR title, LPSTR message,
+    USHORT first, USHORT second, USHORT third)
+{
+    wow_user_native_call call;
+    ULONG response;
+    DWORD error = GetLastError();
+    if (!wow_user_native_call_begin(&call, NULL))
+        wow_user_native_call_failed("hard-error-native-entry", GetLastError());
+    __try {
+        SetLastError(error);
+        response = WOWSysErrorBox(title, message, first, second, third);
+    } __finally {
+        error = GetLastError();
+        if (!wow_user_native_call_end(&call))
+            wow_user_native_call_failed("hard-error-native-return", GetLastError());
+        SetLastError(error);
+    }
+    return response;
+}
+
+/* ADAPTER-WOW-099: filters run before unwind. Let the original policy write
+ * its kill signal on the API frame that its handler will actually resume,
+ * without prematurely replacing the still-live callback's frame identity. */
+INT WINAPI wow_user_dispatch_exception(DWORD code, PEXCEPTION_POINTERS info,
+    PTD task, VPVOID entry, BOOL established)
+{
+    VPVOID pending;
+    INT disposition;
+    if (!established) return W32Exception(code, info);
+    pending = task->vpStack;
+    __try {
+        task->vpStack = entry;
+        disposition = W32Exception(code, info);
+    } __finally {
+        task->vpStack = pending;
+    }
+    return disposition;
+}
 
 /* Both sides of a traced thunk must use the same bounded admission state.
  * The prior one-sided limit stopped entries after 128 but kept writing every

@@ -210,6 +210,50 @@ of a recoverable guest exception. Close the continuation-phase design and
 whole-group witnesses before changing/building the runtime. P20's installed
 13, guest and caches stay unchanged during this source investigation.
 
+348/099 now admits the complete repair after that audit. Use one call-local
+control tuple (CS/IP, PE/VM/CPL), refresh selectors through existing original
+CCPU interfaces on abort and preserve all current global/guest state. The
+original dispatcher entry identifies the handled API return; temporarily bind
+it only for the unchanged W32Exception filter, never for CONTINUE_EXECUTION.
+The original callback owns cursor/INIT rollback without erasing SignalProc's
+teardown transition. Original ntthread removes only the exact abandoned top
+simulation frame; original c_xtrn closes its own interface-active guard. No
+snapshot rollback, copied private jump-buffer layout or new state manager.
+The existing active-worker query prevents restoration after terminal escape.
+Source/tests for every phase, all dispositions, original FE/CPU restart,
+selector failure, preserved shared changes and actual guest recovery/retirement
+must be implemented before the whole affected build. Scratch owner is
+build/t447-s4-callback-abort,60min build/180min retained,2GiB/15min no-progress;
+stable caches stay reused and P20 remains installed until full acceptance.
+
+The real Preparation/Close counterexample closes the same-cohort native-error
+dependency before another build.100 binds exactly the three WOWSysErrorBox WOW
+consumers to a wrapper in the existing thunk scope owner. Reuse blocking native
+begin/end and original response/error policy; no new scheduler, hidden object,
+timer or task-lock override. Worker presentation/DOS callers stay unchanged.
+Capture original CallBack16 control/cursor state before its first resolver:
+error UI can run other tasks before even a preparation-fault unwind. Extend
+first-resolver/reserved cases and actual wrapper normal/throw/rejected-entry
+pairing before fresh guest Close/Ignore/style and retained normal floors.
+Raw CCPU evidence is reusable only with exact unchanged inputs; frame/filter/
+wrapper proofs must be refreshed. Retain all failed observations. No release
+or S4 closure follows from diagnosis or supplementary proof alone.
+
+The final DOS gate retains its legacy fixture-path contract. Its independent
+G7 input uses disposable build/M0-T447/S4/callback-abort-command solely for
+the existing verifier's authored COM bytes, not a Ninja/CMake tree or cache.
+S4 owns this extra temporary root under the same180min/2GiB/15min no-progress
+budget; remove it with the main callback-abort scratch after archived hashes
+and joined jobs. Do not weaken the path/provenance gate or allocate another
+compiler tree to satisfy it. The first missing-fixture preflight failed before
+any DOS launch and stays failed; rerun only the prerequisite-correct DOS group.
+
+P21 completes348/099/100's fixed cohort, r9 old/current/source/CCPU proof,
+actual resolver12 and old Shell6, all retained floors, and installed13/style/
+logon3 verification. Record failed preflights and actual coverage limits in
+the audit; preserve guest ZIP and performance. Output-copyback/protocol
+ownership and exact M1--M6 reconciliation remain S4; S5/S6 stay unadmitted.
+
 The post-P18 source sweep fixes the next finite cohort346 before another
 build: all five reverse/native-buffer acquisition branches in wmsgem's
 EM_REPLACESEL/EM_SETTABSTOPS, wmsglb's LB_GETSELITEMS/LB_SETTABSTOPS and

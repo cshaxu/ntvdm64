@@ -53,6 +53,8 @@ LOCAL ISM32     interface_error;
 GLOBAL ISM32
 call_cpu_function IFN4(CALL_CPU *, func, ISM32, type, ISM32, arg1, IU16, arg2)
    {
+   /* DIVERGENCE(MVDM-HOST-DIV-348): native SEH also leaves this interface. */
+   __try {
    if ( setjmp(interface_abort) == 0 )
       {
       interface_active = TRUE;
@@ -75,7 +77,9 @@ call_cpu_function IFN4(CALL_CPU *, func, ISM32, type, ISM32, arg1, IU16, arg2)
       interface_error = 0;   /* All went OK */
       }
 
-   interface_active = FALSE;
+   } __finally {
+      interface_active = FALSE;
+   }
 
    return interface_error;
    }

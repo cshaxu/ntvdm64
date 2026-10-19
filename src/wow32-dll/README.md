@@ -1,5 +1,35 @@
 # WOW32 DLL target component
 
+ADAPTER-WOW-100 completes the S4 callback-abort cohort's reached native
+hard-error boundary. The existing worker dialog's initialization SetFocus can
+synchronously enter another WOW task before first-pass exception unwind pops
+the current ready callback. Reuse blocking wow_user_native_call_begin/end in
+wow_user_thunk_scope around WOWSysErrorBox; preserve parameters, response,
+LastError and exception propagation. Bind all three actual WOW consumers
+(wow32.c, wuser.c, wudlg.c) through their compile-time service name. Worker
+presentation, original nt_error.c and DOS callers stay unchanged. No new
+window/thread/manager, invented response, task-lock override or guest change.
+Existing nTaskLock/native-call policy remains; no new compatibility waiver.
+Original348 captures bounded control/cursor state before its first resolver,
+since error UI can dispatch other tasks before a preparation-fault unwind.
+Complete service/failure/actual-guest/style proofs before the composed rebuild.
+
+ADAPTER-WOW-099 supplies only the original callback's bounded control-context
+facade and dispatch-filter binding. Capture code CS/IP and PE/VM/CPL in native
+call-local storage; abandoned-call restoration reloads CS/SS through original
+CCPU setters against CURRENT descriptors and restores the caller's SP/IP.
+Do not restore CR2/CR3, descriptor tables, general registers, device/paging/
+NPX/A20 state or guest bytes. The existing worker-active query distinguishes
+terminal abandonment before any guest/CPU restoration. Broken required
+selector restoration uses the existing no-resume adaptation-failure boundary,
+not false API success. Existing W32Exception chooses the disposition; its
+filter temporarily binds the known API entry, then restores the in-flight TD
+pointer until ordinary unwind finishes. No new TLS manager, queue or scheduler.
+The worker private import list exposes eight already selected original CCPU
+mode accessors, not new implementations or a guest/wire ABI. Mirror348 keeps
+actual frame and simulator ownership. Whole-group normal/fault/nested/terminal
+proof and retained13/installed acceptance remain mandatory before publication.
+
 ADAPTER-WOW-098 extends the existing message-lifetime finally owner for only
 the original input-only text/CB_DIR acquisition records (mirror347). Invoke
 their original pure-release unthunkers only while this call still owns a

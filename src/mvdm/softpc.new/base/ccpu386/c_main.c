@@ -4935,13 +4935,18 @@ LOCAL VOID
    GLOBAL VOID
    c_cpu_simulate IFN0()
       {
+#ifdef NTVDM
+      jmp_buf *frame; /* DIVERGENCE(MVDM-HOST-DIV-348): native frame identity. */
+#endif
       SYNCH_TICK();
       if (simulate_level >= FRAMES)
 	 fprintf(stderr, "Stack overflow in host_simulate()!\n");
 
       /* Save current context and invoke a new CPU level */
 #ifdef NTVDM
-      if ( setjmp(*ccpu386SimulatePtr()) == 0)
+      frame = ccpu386SimulatePtr();
+      __try {
+      if ( setjmp(*frame) == 0)
 #else
       if ( setjmp(longjmp_env_stack[simulate_level++]) == 0 )
 #endif
@@ -4949,6 +4954,11 @@ LOCAL VOID
 	 in_C = 0;
 	 ccpu(FALSE);
 	 }
+#ifdef NTVDM
+      } __finally {
+         if (AbnormalTermination()) ccpu386AbandonSimulate(frame);
+      }
+#endif
       }
 
    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

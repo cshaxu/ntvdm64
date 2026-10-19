@@ -505,6 +505,10 @@ foreach ($entry in @(
     'wow_user_runtime_reenter_after_callout=_wow_user_runtime_reenter_after_callout@4',
     'wow_user_runtime_set_context=_wow_user_runtime_set_context@12',
     'wow_user_worker_active=_wow_user_worker_active@0',
+    # ADAPTER-WOW-099: existing CCPU mode primitives for callback continuation.
+    'c_getPE', 'c_getVM', 'c_getCPL',
+    'c_setPE', 'c_setVM', 'c_setCPL',
+    'c_setCS', 'c_setSS',
     # Cdecl C object names are resolved by the linker from their undecorated
     # .def spelling.  Unlike the stdcall entries above, adding a leading
     # underscore here asks LINK for a second underscore and hides the body.

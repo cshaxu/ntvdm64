@@ -184,6 +184,22 @@ jmp_buf *ccpu386SimulatePtr()
     return(&simstack->sims[simstack->level++]);
 }
 
+/* DIVERGENCE(MVDM-HOST-DIV-348): no longjmp to an already unwound frame.
+ * Ordinary FE already removed its own level; never pop its parent again. */
+void ccpu386AbandonSimulate(jmp_buf *frame)
+{
+    DWORD error = GetLastError();
+    ThreadSimBufPtr simstack;
+    extern ISM32 in_C;
+    simstack = ccpuSimId == BADID ? NULL : (ThreadSimBufPtr)TlsGetValue(ccpuSimId);
+    if (simstack && simstack->level > 0 &&
+            frame == &simstack->sims[simstack->level - 1]) {
+        --simstack->level;
+        in_C = 1;
+    }
+    SetLastError(error);
+}
+
 void ccpu386Unsimulate()
 {
     ThreadSimBufPtr simstack;

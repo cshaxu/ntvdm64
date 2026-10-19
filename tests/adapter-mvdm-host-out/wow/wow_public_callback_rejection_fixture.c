@@ -6,6 +6,12 @@
 #undef main
 #include "wow_user_native_extension.h"
 static unsigned rejected;
+/* The complete original TU retains the frame body beside these public APIs.
+ * Rejected admission must not enter that body or either recovery service. */
+void __cdecl wow_callback_control_capture(wow_callback_control *control)
+{(void)control;ExitProcess(94);}
+int __cdecl wow_callback_control_restore(const wow_callback_control *control,uint32_t stack)
+{(void)control;(void)stack;ExitProcess(94);return 0;}
 BOOL WINAPI wow_test_reject_callback(INT id, PPARM16 args, VPPROC procedure, PVPVOID output)
 {
     (void)args;(void)procedure;

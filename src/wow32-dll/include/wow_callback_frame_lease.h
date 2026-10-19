@@ -17,6 +17,19 @@ typedef struct wow_callback_frame_lease {
     uint32_t access;
 } wow_callback_frame_lease;
 
+/* ADAPTER-WOW-099: only the abandoned call's control continuation, never a
+ * complete CPU/device snapshot. Storage belongs to the native call frame. */
+typedef struct wow_callback_control {
+    uint16_t cs, ip;
+    int32_t pe, vm, cpl;
+    int captured;
+} wow_callback_control;
+void __cdecl wow_callback_control_capture(wow_callback_control *control);
+/* Zero means terminal worker abandonment: do not touch even the old TD.
+ * An active but impossible restoration fails through the existing boundary. */
+int __cdecl wow_callback_control_restore(const wow_callback_control *control,
+    uint32_t caller_stack);
+
 /* Resource pointers use explicit protected addressing even during a real-mode
  * WOW entry. The original caller must first resolve/lock the selector and
  * supply its full resource size; this binding does not fault in segments. */

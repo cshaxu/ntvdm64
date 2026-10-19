@@ -2,6 +2,7 @@
 #include "wow_user_thunk_scope.h"
 #include "wow_user_borrow_scope.h"
 #include "wow_task_order_bindings.h"
+#include "wow_user_native_call.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -14,6 +15,22 @@ VOID WINAPI wow_user_borrow_leave_required(wow_user_borrow_scope *scope)
 { (void)scope; ExitProcess(92); }
 __declspec(noreturn) void WINAPI wow_user_native_call_failed(const char *name, DWORD error)
 { (void)name; (void)error; ExitProcess(93); }
+/* The production TU also owns filter/modal-service boundaries. They are
+ * outside this pure diagnostic test: fail closed if selected, and require
+ * the link map to discard them. TLS declarations match the actual owner. */
+__declspec(thread) BOOL fWhoCalled, fThunkDDEmsg;
+BOOL WINAPI wow_user_native_call_begin(wow_user_native_call *call, HWND target)
+{ (void)call; (void)target; ExitProcess(94); return FALSE; }
+BOOL WINAPI wow_user_native_call_end(wow_user_native_call *call)
+{ (void)call; ExitProcess(95); return FALSE; }
+ULONG __cdecl WOWSysErrorBox(LPSTR title, LPSTR text, USHORT first,
+    USHORT second, USHORT third)
+{
+    (void)title; (void)text; (void)first; (void)second; (void)third;
+    ExitProcess(96); return 0;
+}
+INT WINAPI W32Exception(DWORD code, PEXCEPTION_POINTERS info)
+{ (void)code; (void)info; ExitProcess(97); return EXCEPTION_CONTINUE_SEARCH; }
 
 static unsigned errors;
 #define CHECK(x) do { if (!(x)) { ++errors; fprintf(stderr,"FAIL line=%u error=%lu\n",__LINE__,GetLastError()); } } while (0)

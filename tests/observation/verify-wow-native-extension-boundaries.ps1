@@ -29,6 +29,9 @@ try{
   "$repo/tests/adapter-mvdm-host-out/wow/wow_native_extension_boundary_fixture.c",
   "$repo/tests/adapter-mvdm-host-out/wow/wow_public_callback_rejection_fixture.c",
   "$repo/tests/adapter-mvdm-host-out/wow/wow_original_callback_frame_fixture.c",
+  "$repo/tests/adapter-mvdm-host-out/wow/wow_callback_abort_fixture.c",
+  "$repo/src/wow32-dll/source/wow_callback_frame_lease.c",
+  "$repo/src/wow32-dll/include/wow_callback_frame_lease.h",
   "$repo/tests/observation/verify-wow-original-callback-frame.ps1","$repo/src/mvdm/wow32/wmmedia.c")
  Get-FileHash $inputs|Export-Csv -NoTypeInformation "$root/source-sha256.csv"
  foreach($case in @('extension','mm-body','rejection')){

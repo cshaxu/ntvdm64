@@ -4,23 +4,22 @@
 
 Owner accepts and closes [Td build hygiene](../etc/operations/td-build-hygiene.md)
 at aadde21e8; S4 resumes with stable caches, immutable guest and frozen
-performance. P20 adds registered347/098's complete original parameter-map
-acquisition/release group to P19. Old-body19 assertions fail; current54
-scenarios and actual controls/construction6 pass. Native21/original30,
-S3 twelve, message18, external9/cross6/pending6, application/DOS/logon and
-installed floors pass; both destinations match13.
+performance. P21 retains P20 and adds348/099/100: original callback/CCPU
+abort pairing, correct API return identity and native error-UI handoff.
+Original-body/actual-CCPU controls, real callback12 and retained
+native21/original30/S3 twelve/message18/external9/cross6/pending6,
+application/DOS/logon and installed floors pass; both destinations match13.
 Earlier WRITE and unobserved0102 failures remain unlocated, not repaired by
-later passes. The [audit](../etc/evidence/m0-t447-s4-message-source-audit.md#p20-bounded-delivery)
+later passes. The [audit](../etc/evidence/m0-t447-s4-message-source-audit.md#p21-bounded-callback-abort-delivery)
 retains exact identities, failed controls and evidence limits. No guest change.
 
-After P20, the active M4 source audit traces callback frames through original
-W32Dispatch, CallBack16, CCPU simulation TLS and normal/terminal returns.
-The [findings](../etc/evidence/m0-t447-s4-message-source-audit.md#post-p20-original-frame-and-simulation-owner-audit)
-reject a bare finally or whole-machine rollback. No runtime edit or new
-semantic waiver. Full M1--M6/S4, frame/protocol/output and S5/S6 remain open.
+The failed Preparation/Close guest control is repaired through existing
+execution scopes, not a new scheduler or UI engine. The audit retains failed
+controls/scaffolds, original policy/shared state and evidence limits.
+Full M1--M6/S4, protocol/output and S5/S6 remain open.
 
-Delivery cleanup refreshes stale enumeration metadata before unchanged guards;
-CleanupOnly22 and exact disposal pass. Build retains only the two valid caches.
+Delivery disposes only owned6101 temporary files/321.17MiB after hash retention
+and joined jobs. Build retains only the two valid caches; no prune or guest edit.
 
 ## Current Work
 
@@ -379,9 +378,9 @@ construction, mapping, failure and lifecycle closure remains required.
 
 ## Current Technical Baseline
 
-S4 P20 retains P19 and adds347/098's original parameter-map ownership fixes.
-NTVDM SHA-256 is76C739495D83A555702F43676FE563C8E517038CD5E76EB2F3AD9D7545EB5B2B;
-WOW32 is90568B581F97821DB12A04E51661093B8E9DBE1744BD27EE3FBE6D8FDE189AD8.
+S4 P21 retains P20 and adds348/099/100's callback-abort/native-error group.
+NTVDM SHA-256 isAB9D1B8ABC54C47FE6AB16DA2912088ED8AEF28BEBB6CBBC2FAA1AE013F42DBF;
+WOW32 is59E008EC1F09A2228FCF87FDB346F205473EB7B6DEE55ED39983C866A96C263C.
 The coherent13 manifest matches assets/release and O:/winnt/system32.
 Original guest, user configuration and assets/winnt.zip are unchanged.
 

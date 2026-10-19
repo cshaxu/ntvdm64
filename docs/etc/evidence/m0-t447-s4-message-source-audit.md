@@ -6731,3 +6731,396 @@ invocation or publication. P20 manifest/ZIP hashes remain unchanged. Mandatory
 documentation/links/diff, coherent installed13 and two-cache residual checks
 precede the audit commit; retained source findings do not substitute for the
 eventual whole-group normal, failure, nesting and terminal acceptance.
+
+### Admitted original callback-abort continuation group
+
+Successor to the three finite design obligations above, not a claim that their
+implementation has passed.348/099 is admitted in Current and the working plan;
+the P20 release and immutable guest remain the acceptance baseline.
+
+The continuation is the known original API frame, not a machine snapshot.
+CallBack16 retains call-local TD stack/callback cursor/INIT progress and a
+native20-byte CS/IP/PE/VM/CPL record. Capture precedes its CPU stack selection.
+On abnormal unwind, restore these control fields and caller SS:SP using the
+current original CCPU selector loaders. Current descriptor tables, CR3,
+device/video/A20/NPX state, guest writes and unrelated TD flags survive. In
+particular do not copy callerFrame back over WOW16Done's saved ES mutation.
+An original SignalProc IGNOREINPUT/INIT teardown transition is not rolled back.
+Before inspecting the control record or TD, existing wow_user_worker_active
+rejects terminal resumption. A rejected selector reload uses the already
+established no-resume adaptation-failure boundary, not a successful callback.
+
+The selected original c_reg.c exposes the required operations. The legacy
+softpc.h setCS/setSS declarations discard their status, whereas the actual
+c_setCS/c_setSS definitions return the original call_cpu_function status.
+The worker's private import library therefore exposes those two unchanged
+bodies plus six unchanged PE/VM/CPL accessors. No new CPU algorithm, published
+WOW export, guest/wire record, snapshot manager or private-layout cast is added.
+The earlier remote-continuation source is precedent for bounded selectors,
+not another state owner. Full c_getCpuState restoration remains rejected for
+the concrete shared-state rollback reasons above.
+
+Windows selects the filter before unwind. A private adapter temporarily binds
+the already known W32Dispatch entry to TD.vpStack only while the unchanged
+W32Exception evaluates its disposition; finally it restores the pending inner
+identity. CLOSE consequently writes RET_FORCETASKEXIT on the actual resuming
+API frame. Continue-execution/search do not run handler cleanup. After a
+handled disposition, W32Dispatch resumes that same entry. The filter does not
+invent a reply, translate an exception into success or replace original policy.
+
+CCPU owns its own exact simulation jmp_buf identity. Its original TLS owner
+removes an abandoned level only if that exact native frame is still the top;
+ordinary FE has already popped it and must not pop the parent again. The
+actual c_cpu_simulate setjmp stays in its live native frame. The same-level
+exception restart retains the original excepts[level-1] owner. An additional
+reached closure, c_reg selector loaders -> c_xtrn call_cpu_function, owns an
+interface_active flag and interface_abort jmp_buf. Its existing flag clear
+must also execute on native SEH, not just the ordinary/setjmp-return path.
+That finally is included in348's same six-file180-line budget; the original
+owner must clear its private state rather than exposing its layout to an
+adapter. These are registered original-owner correction seams under the
+standing source-proven host-correction authority, not newly imported files.
+
+Recovery ladder: compose the actual existing original CallBack16, W32Dispatch,
+CCPU simulation and selector/interface bodies; use the existing control and
+thunk adapters only for bounded host continuation/filter binding. An outer
+facade alone cannot repair the original private jump stack or original handler
+target. A registered owner-local correction is required at those exact state
+owners. No independently authored execution engine or global restoration
+registry is selected. No native/guest exception policy concession is added.
+
+Whole-group proof sources are prepared before the affected build:
+
+- verify-wow-original-callback-frame retains the prior four assertions and
+  adds nine preparation/reserved-stack/returned/live/teardown/terminal/selector
+  cases through the whole original body and actual control adapter. Service
+  doubles make these supplementary evidence, not actual CPU or guest proof.
+  Terminal PAGE_NOACCESS proves that the control record is not read; it does
+  not independently prove the lifetime of every possible TD allocation.
+- verify-wow-dispatch-exception keeps all prior dispositions/debugger controls,
+  adding nested logical-frame Ignore/Close with actual original W32Exception.
+  Immutable P20 full-TU controls must fail the new causal assertions.
+- verify-wow-callback-abort-ccpu executes actual BOP/FE and native escape,
+  nested same-level continuation, normal reuse and serial native-thread TLS
+  independence. Tests inspect the original owner by including its complete
+  source only in their TU, not by adding a production getter or copied layout.
+  Actual selector reload uses changed current GDT backing and preserves CR3;
+  this does not claim a test of every device or NPX mutation.
+- The diagnostic-only callback provider includes the whole selected wcall16
+  TU and injects at its Preparation or Returned resolver edge. The existing
+  independent SHLPROBE/observer tests original Ignore continuation/next API,
+  Close/no continuation, exact-once retirement and surviving WINMINE under
+  all three styles. Its images are isolated, hash-bound and never publishable.
+  Normal generic recursion and production guest floors remain mandatory.
+
+No build/runtime result is asserted by this source-design entry. Complete
+source freezes, old/current controls, actual CPU/guest failures and all retained
+floors must be recorded before publication. Arbitrary native catch-and-resume
+inside an outer provider remains the previously excluded boundary; this group
+does not silently broaden it. M1--M6/output/protocol/S5/S6 stay open.
+
+### Callback-abort build and boundary evidence
+
+All times UTC2026-10-19; source baseline remains92a60fe38 and runtime P20.
+Owned supervisor39712 starts18:34:36.306 with a3600s deadline. Its configure
+43300 starts18:34:38.111, and runtime40420 starts18:35:23.892 with a2400s
+deadline: stable actual CMake/Ninja/ccache x86 Release worker/WOW32 builds
+exit0. No task-specific Ninja tree, cache clear, guest mutation or publication.
+Candidate NTVDM5E47C078DC1456D71168CBD73A2866AC0ADBD71A97E366B6602006560104F374;
+WOW32 6639B7BEA89371F53F15CAF7A20751E94F2C21F351B371E5C27E39AAB80672F5;
+private import library64F399A6EDF054846817FEB241A8069BD8A992674D6D562707CE0CAD41D6ADF8;
+provider definition53B02FC055160E19492E23B59E357D17855677F7D10D3E8954B7B176594A233E.
+P20's13 and canonical ZIP remain the installed/release baseline, not this
+unaccepted candidate.11 image inputs are retained from verified P20 copies.
+
+Whole-group scripts retain r1--r8 failures/successes separately; no failed
+aggregate is renamed a pass. Runtime sources never change after this build.
+Initial frame link fails on three unrelated resource-copy dependencies of the
+complete control TU; its original CallBack16 path uses the protected resolver.
+The test supplies only exact fail-closed acquire/release/address edges, never
+fake success. R2 actual whole-body current retains the original four phases
+and passes nine abort scenarios; abort17500 starts18:37:35.591, exit0. All
+seven immutable P20 preparation/reserved/returned/live/teardown counterexamples
+fail their causal assertions (exit1), while terminal bypass remains unchanged.
+
+R2 dispatch link additionally requires the complete adapter's unrelated thunk
+borrow closure and two TLS flags. R3 supplies fail-closed test edges; its map
+gate requires them and the unused thunk facade to disappear. Actual original
+W32Dispatch/W32Exception plus the production filter helper12572 starts
+18:39:51.918, exit0: six phase assertions and the original debugger child pass.
+P20 Ignore leaves the inner logical/CPU stack; P20 Close writes its kill signal
+to that inner frame. Both new old-body assertions exit1; current targets the
+actual API entry. These are controlled-service original-body proofs, not guest
+acceptance or a substitute for the debugger/continue-execution cases.
+
+R3 actual-CPU setup fails before compilation because its fixture seam object
+was not a product-link prerequisite. The producer now builds its exact existing
+Ninja dependencies, not a new graph. R4 then correctly rejects repeated inclusion
+of original host_def.h's unguarded anonymous extern type. Keep ntthread and
+c_xtrn in separate test TUs, each including its complete original owner once;
+do not modify the original header or copy ThreadSimBuf into production. R5's
+CPU executable exits0 but required output is absent: the retained full host
+closure resolves printf/puts to original fprt.c's debugger output. This is a
+failed evidence gate, not a runtime pass. R6 writes test markers through its
+owned stdout HANDLE instead; no product output provider is replaced.
+
+R6 actual CCPU12212 starts18:45:20.040, exit0. It proves native escape level
+cleanup, nested/same-level CPU continuation, normal FE reuse, main plus two
+serial native threads, interface guard/architectural error13/normal reuse,
+current relocated GDT selectors, preserved CR3 and LastError. The test's TLS
+observation itself preserves LastError. Old full-owner controls8788 and37100
+start18:46:02.557/.712 and exit1 with escaped-level/stale-interface markers;
+they refuse to longjmp to the known dead frame. Actual symbol/MAP checks bind
+c_cpu_simulate to cpu.obj, ccpu386SimulatePtr to tls.obj and call_cpu_function
+to the inspected original fixture TU. These are real CPU/control observations,
+not claims about every device, paging mutation or immutable WOW16 trampoline.
+
+R6 extension/MM/rejection and repeated original-frame groups pass. Its
+diagnostic DLL5ABD9906EC207A894C4B55D02EE013CE188822C8A29A6A4E886DD23F64604B5C
+retains the complete selected wcall16 body and actual production cleanup; only
+resolver Preparation/Returned injection and copied-scalar logging differ. It
+is explicitly diagnostic-only and never publishable. R6's final source gate
+fails only because its sandbox cannot open the external pinned original Git
+root. Read-only reconciliation15556 and source gate7548 (18:48:51.386) run
+with that access and pass:278 selected/177 exact/101 registered/issues0.
+Reconciliation rechecks frozen current inputs, old counterexamples and actual
+compiled images; it does not rerun or promote the failed aggregates.
+
+The separately owned six-file paired source audit35672 passes: original
+provenance hashes match, no format-only difference,348 delta64 added/6 removed
+raw lines (70 total, including comments) within the180 executable-line budget.
+This adds no original file, guest diff or instruction/decoder algorithm. The
+278 provider-selection inventory does not pretend to include CCPU; this
+additional six-owner comparison covers that explicit boundary.
+
+Guest supervisor30060 starts18:49:09.906, real2700s deadline. It stages only
+canonical assets/winnt.zip and exact coherent13, then the diagnostic provider
+on a separately marked copy; installed files are untouched. Its first case
+fails before guest launch: the independent CALLBACK_ABORT probe omitted three
+call sites but retained their NE relocations. The corrected diagnostic-only
+count/table is recorded by r8 as the sole changed test input; all product and
+prior boundary inputs remain identical. No original guest is assembled.
+
+The next actual Preparation/Close/Off case is a real non-pass: WINMINE reaches
+its board, SHLPROBE enters actual RET_WINEXEC, and worker9056/thread26012/task5943
+logs entry170F53BC, CPU170F53BC, CS021F/IPAEB7. The original exception dialog
+appears and observer posts its offered Close response, but no unwind record
+arrives; the sibling receipt remains live at the ten-second deadline. Probe
+exit17 and aggregate exit1 are preserved. Cleanup is not normal retirement.
+No Ignore/Returned/other-style success or full retained floor is inferred.
+Source tracing now follows original WOWSysErrorBox -> NT4-shaped NtRaiseHardError
+-> the existing in-process native hard-error dialog, and its execution/wait
+ownership during first-pass filter evaluation. A bounded wait/IP observation
+using the existing worker_thread_snapshot is admitted before selecting a fix;
+an execution-ownership deadlock is a hypothesis until that observation/source
+chain proves it. Do not patch the dialog, weaken the timeout, replace original
+exception policy or claim the frame cohort delivered from unit/CPU results.
+All full S4 obligations and the retained0102/WRITE limitations remain open.
+
+### Native error initialization dependency within the frame cohort
+
+One bounded instrumented repeat, owned21816 from18:54:52.185, uses the
+existing worker_thread_snapshot, not a new window/control facility. It
+validates fresh worker41676's exact O:/tmp/n51f/system32/ntvdm.exe identity,
+creation18:55:06.757 and stage source before two short suspend/read/resume
+IP/stack/public-WCT observations. The case again fails exit1; capture success
+is not acceptance. WCT returns single-thread blocked nodes, no cycle: it does
+not itself prove a lock graph.
+
+Actual stacks and selected MAPs identify the missing boundary. SHLPROBE
+thread39256 is identically blocked at win32u+165Ch; its return010919B4 rebases
+with NTVDM00F20000 to preferred005719B4. Owned dumpbin7256 proves that address
+follows the SetFocus import005719AE, in the WM_INITDIALOG default-button branch
+of mvdm_wow_hard_error_dialog_proc. It is not EndDialog or an unrecognized
+Close ID: the queued Close has not been processed. WINMINE35596 waits at
+original xxxSleepTask/xxxDirectedYield from callback_enter, with captured
+6A1DF99F/6A1D2748/6A1D24C6/6A1DFCC3/6A1E478B, diagnostic WOW32 base6A180000
+and its exact MAP. Its trace ends on WM_NCACTIVATE for owned window0A62084C.
+The offered41001 Close is posted while initialization has not returned to its
+message pump. Both snapshots and unchanged images stay sealed.
+
+Source completes the explanation: callback_enter pushes ready execution and
+obtains original CSOwningThread; first-pass filters precede its finally/pop.
+WOWSysErrorBox -> WOWpSysErrorBox -> NtRaiseHardError reaches the existing
+in-process dialog without a blocking WOW native-call scope. The other task's
+park_native_owner cannot park a still-ready owner; xxxDirectedYield waits.
+The synchronous native focus operation waits for that callback. NT4's external
+hard-error server is a different resource boundary; the rehosted UI lacks its
+execution handoff. Earlier after-callback exception tests do not exercise this
+still-active ready scope.
+
+100 reuses blocking wow_user_native_call_begin/end around WOWSysErrorBox in
+the existing thunk-scope adapter, not around all W32Exception, which must read
+guest state while owned. Source-owner generator binding selects exactly three
+WOW consumers; original nt_error.c, worker UI, DOS and guest stay unchanged.
+Original offered responses/parameters/errors, selection and nTaskLock/native
+policy remain authoritative. No new task-lock or exception-policy waiver.
+Return reacquires ownership before W32Exception uses its disposition/kill
+frame. Move348 capture to whole-call entry before its first resolver: native
+error UI can dispatch another task even on preparation failure. Uncaptured
+preparation no longer establishes unchanged shared CPU state.
+
+Recovery ladder keeps original exception/frame/CCPU algorithms and uses an
+existing bounded native-service adapter, so no new engine or original UI
+import is justified. Rejected scope entry uses the established no-resume
+invariant boundary, not fake success. Whole service/LastError/throw/rejected
+entry, first/later resolver/cursor and real guest Close/Ignore/style/survivor
+proofs precede the next composed build. This design is admitted in the same
+finite cohort; no repaired runtime/guest pass is claimed by this entry.
+
+### Composed callback and native-error acceptance
+
+Fresh r9 supervisor47140 completes exit0 after the full100/348 change,
+including actual configure/affected build, original callback four plus11
+abort phases, original dispatcher six plus debugger and five native-error
+scope outcomes, real CCPU simulate/interface/current-descriptor tests,
+old-body counterexamples, extension boundaries and source registers. Native
+scope service doubles prove pairing/LastError/rejection, not a real scheduler
+handoff; actual guest evidence below supplies that separate boundary.
+
+Normal NTVDM SHA256 AB9D1B8ABC54C47FE6AB16DA2912088ED8AEF28BEBB6CBBC2FAA1AE013F42DBF;
+normal WOW32 SHA256 59E008EC1F09A2228FCF87FDB346F205473EB7B6DEE55ED39983C866A96C263C.
+The unchanged guest ZIP remains7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7.
+The coherent normal13 uses precisely these two and the sealed P20 other11;
+the independently marked resolver-injection DLL is never publishable.
+
+Guest supervisor46476 starts19:10:43.662UTC with2700s deadline and completes
+exit0: Preparation/Returned x Close/Ignore x Off/Win16/All, all12. Every case
+checks actual original CallBack16 entry/unwind TD and CPU return identity,
+exact-once task retirement, no post-retirement callback, and surviving
+WINMINE flag/reset/open/normal close. For the previously failing
+Preparation/Close/Off, worker17532/thread31376/task5943 logs matching
+entry/logical/CPU170F53BC and CS021F/IPAEB7 before and after resolver2's
+exception. The original Close path returns from the dialog, unwinds, and
+retires the sibling. This is the causal runtime counterexample's repair,
+not merely an observer cleanup or a native mocked pass. Returned uses
+resolver3; the preparation-only missing optional before-trace is not
+misclassified as a missing actual entry/unwind.
+
+Review confirms all three original WOWSysErrorBox consumers (wow32.c,
+wuser.c,wudlg.c) receive the same compile-time service binding; raw worker
+presentation and DOS calls remain unchanged. Only the native modal service
+releases/reacquires existing execution ownership. Original filter policy,
+KillTask re-resolution and original nTaskLock remain. Whole-filter/native
+UI replacement, rollback of shared CPU state, guest changes and performance
+changes are expressly absent. S4's full retained regression/publication and
+remaining M1--M6 obligations are not discharged by these12 outcomes.
+
+Supplementary closure review finds the existing pure thunk-trace test links
+the complete modified thunk-scope TU. Owned38476 exits1 at link1120: four
+new filter/modal dependencies and two earlier TLS dependencies are unresolved;
+no test executable ran. Refresh only its fixture with exact fail-closed service
+signatures and original TLS declarations. Explicit function packaging,
+OPT:REF and a map gate must discard all unrelated invocation/filter/modal/
+borrow/failure owners. Do not derive aliases from unresolved symbols or link
+a success-only execution substitute. Current supplementary25796 exits0:
+WOW_THUNK_TRACE errors0, disabled1/enabled2, failed output, exact text,
+LastError and no-scope all pass; the public ABI compile and discard gate pass.
+The first supplementary supervisor44600 failed to parse a scratch foreach
+pipeline before any test; it is retained, not a runtime failure or a pass.
+Documentation passes. Neither diagnostic test repair changes a product input.
+
+The final six-owner pairing48368 exits0: original provenance unchanged,
+65 added/6 removed raw lines,71 total within180, no format-only changes,
+zero guest changes. Source-register r9 retains278 selected/177 byte-exact/
+101 registered differences/issues0. Native21 and original30 floors complete
+exit0; S3's twelve control/dialog/common-dialog/hook groups complete exit0.
+The later trace-fixture-only source edit is not a compiled input to these
+floor rows; their production/provider and selected test owners are unchanged.
+Full actual message/external/application/DOS and publication gates remain
+pending at this evidence point. Do not promote the candidate from these
+partial retained-floor results or erase the old unlocated0102/WRITE risks.
+
+### P21 bounded callback-abort delivery
+
+Full floor supervisor30916 starts19:15:52UTC and completes exit0. Actual
+recorded child entrypoints, frozen r9 inputs and results cover native21,
+original control30, S3 twelve, six message modes x three policies (normal,
+native extension, construction, reply lifetime, timeout lifetime and Proc32),
+external9, cross-worker6, pending-send6, WINMINE3/SOL3 gameplay/normal exit,
+native modal reference plus guest3, both-width NTW16S boundaries, and complete
+Userenv current-token/non-inherited logon3. No test substitutes another thread
+for the external-process rows. Input pacing, assertions and deadlines remain.
+
+Supplementary frontier33492 passes the old after-Shell-callback Close/Ignore
+x three policies (6), and WRITE's four read-only startup observations in each
+policy. Its aggregate exits1 at DOS preflight: the orchestration omitted
+GuestFixturePath, so no DOS case launched. Preserve that failure. It is not
+evidence of product failure or permission to relax a gate. DOS supervisor39328
+then supplies the existing verifier's independent G7 COM input, ordinary
+frontend and canonical observed-input mode. Console17 and Window17 both pass,
+all actual exit codes equal their expected values. This uses only a28-byte
+authored artifact in the expressly owned legacy-compatible disposable path,
+not another compiler/cache tree. No verifier/product change was needed.
+Retain the individually successful Shell/WRITE rows, not a promoted failed
+frontier aggregate. The first continuation observer also rejected an incorrectly
+coerced UTC process timestamp before starting anything; reading the raw JSON
+stamp restores exact identity checking, not a PID-check waiver.
+
+Publication40296 verifies every prerequisite separately, preserves coherent
+P20 backups for both destinations, then copies the exact normal13 to
+assets/release and O:/winnt/system32. Installed both-width style and complete
+logon WINMINE3 pass; final13 hashes match the frozen candidate. No existing
+project owner had to be closed for this publication. Only NTVDM/WOW32 and
+release-manifest bytes change; other11 retain P20 identity. No diagnostic DLL
+is published. Manifest SHA256
+4EBD672E30F1606F3F02639AB6671E95DC5051BB949130B5C8628CED86FCE330.
+Normal NTVDM/WOW32 hashes are the r9 identities above. Canonical guest ZIP
+7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7 and
+installed SYSTEM.INI remain unchanged; absent NTVDM.REG paths are recorded,
+not created or replaced. Source registers retain278/177/101/issues0;
+mirror348's six-file65+/6- delta and099/100 are registered before delivery.
+
+Second-role review keeps original callback/exception/taskman/CCPU algorithms
+and policy, host USER resource/delivery authority and the existing adapter
+execution/data scopes. The new native UI edge pairs the established blocking
+service contract; no helper window, parallel scheduler, full CPU rollback,
+private modern-USER overlay, new public/wire ABI or guest change is introduced.
+Original normal returns, FE and same-level CPU continuation remain covered.
+Mocked failure endpoints, terminal guard-page evidence and real CPU/guest
+tests retain their distinct limits; no claim covers every device/NPX mutation,
+every task-lock/native-error combination or every possible terminal allocation.
+WRITE editing/save/normal exit and old unlocated0102/common-dialog risks remain
+unproved. This P closes the finite callback-abort cohort, not all S4: output
+conversion/protocol-owner obligations and exact M1--M6 reconciliation remain.
+S5 single-task termination/NT Monitor and S6 final-T audit are not admitted.
+
+Final quality38400 exits0: frozen runtime/test inputs, both installed/released
+13, unchanged canonical ZIP, PowerShell parsers, documentation, relative links
+and whitespace all pass. Six-source before/after normalized content comparison
+confirms four were already differing; c_xtrn.c and ntthread.h are two newly
+content-different original host files, not new imports. The additional native
+adapter/test changes do not alter a public/wire or guest ABI.
+
+Before disposal, retain SHA256 receipts: r9 source freeze
+ABE084E3C6AF3A5BA60F863FC57723618BD0C19C789613283721E76D0932FABD;
+full-floor PID/arguments/results
+4E0558F6A153D11D96F2AC54246043B7CD672FF53FBE3C022AB77A9DF3C99FF6;
+repaired Preparation/Close entry/unwind
+5DA87E79794C90776911689931970A78B05F7E8DE6F9B05A5E40FC43CA639A8E;
+six-owner before/after
+90723F299AA3D4BB956C1608770A74DA1E66B20BC1D74A60604D7B7B6016E420;
+pre-disposal final input inventory
+8AE50E798C9B7905C35B5C6850A0EBF05D6A40121255B506BF6D2D5C33D826F9.
+The corresponding assertions, commands/entrypoints, exact artifact identities,
+failed outcomes and limits remain above and in committed reproducible tests.
+This is a concise evidence retention policy, not a claim deleted raw logs
+remain available. P20's coherent recovery images remain recoverable from
+committed1122ab55d55b4d15699715ce1416b092b5887772 assets.
+
+Disposal20732 starts19:49:47.791UTC, exit0 after actual owner quiescence,
+read-only inventory and exact-source review. The unique Clear-BuildOutput
+preview and explicit Apply agree: callback-abort6100 files/336774197 bytes,
+and the G7 parent1 file/28 bytes, total6101 files/336774225 bytes (321.17MiB).
+Inventory digests respectively
+EAD8D7094A732685E1B3924DBE56B1CF5D6F3FEC35440915C081F95BCAD05C74 and
+DF9779C4E349214CA5BEB7A7F1107052F9423178E37C02C8C92978D62B6EE1FE.
+All866 sensitive entries have explicit hash/provenance review:245 canonical
+ZIP byte matches,26 verified P20 backup images,173 independent binary probe
+reports,421 owned receipts/traces/assembly listings, and the authored28-byte
+G7 witness86EBA64D5173C29B4749FE0F2472FC88AEF5CBF3C62FF9067DFC7CEF8EDD56C0.
+No unknown/user/Git data or link is discarded. No process is killed for
+cleanup. Final CheckResidual returns only build/.ccache and build/.ninja;
+neither cache, installed package, canonical media nor user configuration is
+removed. Disposable evidence is deleted, not recoverable raw evidence; source
+tests, the retained conclusions/hashes and committed runtime baselines remain.

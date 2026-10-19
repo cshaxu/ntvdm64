@@ -43,6 +43,7 @@ try {
     $command[0]|Set-Content "$out/production-command.txt"
     $inputs=@('src/wow32-dll/source/wow_user_thunk_scope.c',
         'src/wow32-dll/include/wow_user_thunk_scope.h',
+        'src/wow32-dll/include/wow_user_native_call.h',
         'src/opennt-abi/host-compat/include/wow_user_declarations.h',
         'src/mvdm/wow32/isvwow.h','src/mvdm/wow32/wow32.h',
         'tests/adapter-mvdm-host-out/wow/wow_thunk_trace_fixture.c',
@@ -51,16 +52,26 @@ try {
         Export-Csv -NoTypeInformation "$out/source-sha256.csv"
     $trace=$command[0] -replace '/Fo\S+',('/Fo"'+$out+'/trace.obj"')
     if($trace -eq $command[0]){throw 'Trace output substitution failed'}
-    Compile trace-owner $trace
+    Compile trace-owner ($trace+' /Gy')
     $fixture=$trace -replace '/Fo"[^"]+"',('/Fo"'+$out+'/fixture.obj"')
     $fixture=$fixture -replace '\S+wow_user_thunk_scope\.c$',('"'+$repo+'/tests/adapter-mvdm-host-out/wow/wow_thunk_trace_fixture.c"')
     if($fixture -eq $trace){throw 'Fixture source substitution failed'}
-    Compile trace-fixture $fixture
+    Compile trace-fixture ($fixture+' /Gy')
     $abi=$fixture.Replace('/Gz','/Gd') -replace '/Fo"[^"]+"',('/Fo"'+$out+'/abi.obj"')
     $abi=$abi -replace '"[^"]+wow_thunk_trace_fixture\.c"$',('"'+$repo+'/tests/adapter-mvdm-host-out/wow/wow_public_memory_abi_fixture.c"')
     if($abi -eq $fixture){throw 'ABI fixture substitution failed'}
     Compile public-abi ($abi+' /we4113 /we4047 /we4028 /we4273')
-    Compile link ('link /nologo /machine:x86 /subsystem:console /out:"'+$out+'/fixture.exe" "'+$out+'/fixture.obj" "'+$out+'/trace.obj" kernel32.lib user32.lib gdi32.lib legacy_stdio_definitions.lib')
+    Compile link ('link /nologo /machine:x86 /subsystem:console /OPT:REF /map:"'+$out+'/fixture.map" /out:"'+$out+'/fixture.exe" "'+$out+'/fixture.obj" "'+$out+'/trace.obj" kernel32.lib user32.lib gdi32.lib legacy_stdio_definitions.lib')
+    $map=Get-Content "$out/fixture.map" -Raw
+    foreach($unselected in @('_wow_user_invoke_thunk@8','_wow_user_dispatch_exception@20',
+            '_wow_user_sys_error_box','_wow_user_native_call_begin@8',
+            '_wow_user_native_call_end@4','_WOWSysErrorBox','_W32Exception@8',
+            '_wow_user_borrow_enter@4','_wow_user_borrow_leave_required@4',
+            '_wow_user_native_call_failed@8')){
+        if($map -match ('\s'+[regex]::Escape($unselected)+'\s')){
+            throw "Unrelated execution owner retained in diagnostic test: $unselected"
+        }
+    }
     Owned run "$out/fixture.exe" '' 30
     if((Get-Content "$out/run.stdout.txt" -Raw) -notmatch 'WOW_THUNK_TRACE errors=0 disabled=1 enabled=2 failed_output=1 exact_text=1 last_error=1 no_scope=1'){
         throw 'Trace contract markers absent'

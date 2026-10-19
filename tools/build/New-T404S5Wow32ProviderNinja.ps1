@@ -422,14 +422,17 @@ foreach ($source in $sources) {
     $object = 'obj/' + [IO.Path]::GetFileNameWithoutExtension($source) + '.obj'
     $objects.Add($object)
     $ninja.Add('build ' + $object + ': cc ' + (ConvertTo-NinjaPath (Join-Path $wow $source)))
-    if ($source -eq 'wkman.c') {
+    if ($source -eq 'wow32.c') {
+        $ninja.Add('  cflags = $cflags /DWOWSysErrorBox=wow_user_sys_error_box')
+    } elseif ($source -eq 'wkman.c') {
         $ninja.Add('  cflags = $cflags /DWOW_NATIVE_PROCESS_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_native_process.h')) + '"')
     } elseif ($source -eq 'wudlg.c') {
-        $ninja.Add('  cflags = $cflags /DWOW_TITLE_MESSAGE_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_title_policy.h')) + '"')
+        $ninja.Add('  cflags = $cflags /DWOWSysErrorBox=wow_user_sys_error_box /DWOW_TITLE_MESSAGE_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_title_policy.h')) + '"')
     } elseif ($source -eq 'wcommdlg.c') {
         $ninja.Add('  cflags = $cflags /DWOW_COMMON_DIALOG_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_common_dialog_calls.h')) + '"')
     } elseif ($source -in @('wuser.c','wuser31.c','wuwind.c')) {
-        $ninja.Add('  cflags = $cflags /DWOW_STYLE_SCROLL_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_title_policy.h')) + '"')
+        $hardErrorBinding = if ($source -eq 'wuser.c') {' /DWOWSysErrorBox=wow_user_sys_error_box'} else {''}
+        $ninja.Add('  cflags = $cflags' + $hardErrorBinding + ' /DWOW_STYLE_SCROLL_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_title_policy.h')) + '"')
     } elseif ($source -eq 'wkgthunk.c') {
         $ninja.Add('  cflags = $cflags /DWK32ICallProc32=wow_original_WK32ICallProc32 /DWOWYield16=wow_original_WOWYield16 /DWOWDirectedYield16=wow_original_WOWDirectedYield16 /DWOW_NATIVE_EXTENSION_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_user_native_extension.h')) + '"')
     } elseif ($source -eq 'wmmedia.c') {

@@ -982,8 +982,8 @@ VOID W32Dispatch()
     /* DIVERGENCE(MVDM-HOST-DIV-337): a handled exception must complete
      * CallBack16's deferred CPU-stack pop, but not before a stack exists. */
     BOOL fStackEstablished = FALSE;
-    VPVOID vpCurrentStack;
-    register PTD ptd;
+    VPVOID vpCurrentStack = 0; // DIV-348: filter arguments precede setup too
+    register PTD ptd = NULL;
     register PVDMFRAME pFrame;
 #ifdef DEBUG_OR_WOWPROFILE
     INT iFunT;
@@ -1092,9 +1092,13 @@ VOID W32Dispatch()
 
         SETVDMSTACK(ptd->vpStack);
 
-    } except (W32Exception(GetExceptionCode(), GetExceptionInformation())) {
+    } except (wow_user_dispatch_exception(GetExceptionCode(),
+            GetExceptionInformation(), ptd, vpCurrentStack, fStackEstablished)) { // DIV-348
         /* DIV-337: neither continue-search nor continue-execution comes here. */
-        if (fStackEstablished) SETVDMSTACK(ptd->vpStack);
+        if (fStackEstablished) { // DIVERGENCE(MVDM-HOST-DIV-348)
+            ptd->vpStack = vpCurrentStack;
+            SETVDMSTACK(ptd->vpStack);
+        }
     }
     //
     // WARNING: DO NOT ADD ANYTHING TO THIS FUNCTION UNLESS YOU ADD THE SAME

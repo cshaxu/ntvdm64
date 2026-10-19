@@ -5,6 +5,7 @@
 #include <string.h>
 
 #include "ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h"
+#include "wow_task_order_bindings.h"
 
 /* This is the fixed-width source contract exported by the SoftPC adapter.
  * Do not include the full historical SoftPC macro environment here: that
@@ -21,6 +22,48 @@ extern unsigned short __cdecl getBX(void);
 extern unsigned short __cdecl getBP(void);
 extern unsigned short __cdecl getSI(void);
 extern unsigned short __cdecl getDI(void);
+/* ADAPTER-WOW-099: existing original CCPU bodies, selected Win32 ABI. */
+extern int32_t __cdecl c_getPE(void);
+extern int32_t __cdecl c_getVM(void);
+extern int32_t __cdecl c_getCPL(void);
+extern void __cdecl c_setPE(int32_t value);
+extern void __cdecl c_setVM(int32_t value);
+extern void __cdecl c_setCPL(int32_t value);
+extern int32_t __cdecl c_setCS(uint16_t value);
+extern int32_t __cdecl c_setSS(uint16_t value);
+extern void __cdecl setSP(uint16_t value);
+extern void __cdecl setIP(uint16_t value);
+extern BOOL WINAPI wow_user_worker_active(void);
+
+void __cdecl wow_callback_control_capture(wow_callback_control *control)
+{
+    control->cs = getCS();
+    control->ip = getIP();
+    control->pe = c_getPE();
+    control->vm = c_getVM();
+    control->cpl = c_getCPL();
+    control->captured = 1;
+}
+
+int __cdecl wow_callback_control_restore(const wow_callback_control *control,
+    uint32_t caller_stack)
+{
+    DWORD error = GetLastError();
+    if (!wow_user_worker_active()) { SetLastError(error); return 0; }
+    if (control->captured) {
+        /* Reload against current descriptor/memory authorities. In particular
+         * no saved CR3, descriptor cache, video or NPX value is reinstated. */
+        c_setPE(control->pe);
+        c_setVM(control->vm);
+        c_setCPL(control->cpl);
+        if (c_setCS(control->cs) || c_setSS((uint16_t)(caller_stack >> 16)))
+            wow_user_native_call_failed("callback-control-selector", ERROR_INVALID_ADDRESS);
+        setSP((uint16_t)caller_stack);
+        setIP(control->ip);
+    }
+    SetLastError(error);
+    return 1;
+}
 
 int wow_callback_frame_acquire_linear(uint32_t guest_address, uint32_t byte_count,
     uint32_t access, wow_callback_frame_lease *view_out)

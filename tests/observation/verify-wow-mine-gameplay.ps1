@@ -11,6 +11,7 @@ param(
     [switch]$StartupFailureSibling,
     [switch]$ShellExceptionSibling,
     [ValidateSet('Close','Ignore')][string]$ShellExceptionResponse='Close',
+    [ValidateSet('Preparation','Returned')][string]$CallbackAbortPhase,
     [string]$StartupDiagnosticManifest,
     [string]$Nasm='nasm.exe',
     [ValidateSet('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe')]
@@ -20,12 +21,14 @@ $ErrorActionPreference='Stop'
 if(([int]$RetiringSibling.IsPresent+[int]$ExceptionSibling.IsPresent+[int]$StartupFailureSibling.IsPresent+[int]$ShellExceptionSibling.IsPresent) -gt 1){throw 'Select one sibling contract'}
 $withSibling=$RetiringSibling -or $ExceptionSibling -or $StartupFailureSibling -or $ShellExceptionSibling
 if($VisibleDesktop -and $withSibling){throw 'Ordinary desktop acceptance selects only the exact owned game'}
+if($CallbackAbortPhase -and !$ShellExceptionSibling){throw 'Callback abort requires the isolated Shell sibling contract'}
 if($StartupFailureSibling -or $ShellExceptionSibling){
     $expectedTarget=if($ShellExceptionSibling){'SHLPROBE'}else{'GENPROBE'}
     $diagnostic=Get-Content $StartupDiagnosticManifest -Raw|ConvertFrom-Json
     if($diagnostic.kind -ne 'diagnostic-only' -or $diagnostic.publishable -ne $false -or
         $diagnostic.target -ne $expectedTarget -or
         (Get-FileHash "$PackageRoot/system32/WOW32.DLL").Hash -ne $diagnostic.diagnosticProvider){throw 'Startup failure requires exact isolated diagnostic provider'}
+    if($CallbackAbortPhase -and $diagnostic.fault -ne 'actual CallBack16 resolver Preparation/Returned'){throw 'Require actual callback-body diagnostic'}
 }
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $root=[IO.Path]::GetFullPath($BuildRoot)
@@ -38,7 +41,7 @@ $process=$null;$runtime=$null;$scope=$null
 $saved=@{};foreach($name in @('TEMP','TMP','PATH','MVDM_OBSERVER_PRIVATE_DESKTOP',
     'MVDM_WOW_CALLBACK_FRAME_TRACE_PATH','MVDM_WOW_WINDOW_TRACE_PATH',
     'MVDM_WOW_REGISTRATION_TRACE_PATH','MVDM_TEST_STARTUP_IDENTITY',
-    'MVDM_TEST_SHELL_EXCEPTION')){$saved[$name]=[Environment]::GetEnvironmentVariable($name)}
+    'MVDM_TEST_SHELL_EXCEPTION','MVDM_TEST_CALLBACK_ABORT')){$saved[$name]=[Environment]::GetEnvironmentVariable($name)}
 try {
     Push-Location $root
     try {
@@ -54,6 +57,7 @@ try {
         $assemblyArgs=@('-f','bin','-o',"$root\$siblingName.EXE",'-l',"$root\sibling.lst")
         if($ExceptionSibling){$assemblyArgs+='-DFAULT'}
         if($ShellExceptionSibling -and $ShellExceptionResponse -eq 'Ignore'){$assemblyArgs+='-DIGNORE_EXCEPTION'}
+        if($CallbackAbortPhase){$assemblyArgs+='-DCALLBACK_ABORT'}
         & $Nasm @assemblyArgs $siblingSource *> "$root\assemble.txt"
         if($LASTEXITCODE){throw 'Independent sibling NE assembly failed'}
         $null=New-Item -ItemType Directory "$runtime\tests" -Force
@@ -63,6 +67,7 @@ try {
             if($LASTEXITCODE){throw 'Shell child assembly failed'}
             Copy-Item "$root/SHLCHILD.EXE" "$runtime/tests/SHLCHILD.EXE"
             $env:MVDM_TEST_SHELL_EXCEPTION="$root/shell-exception.txt"
+            if($CallbackAbortPhase){$env:MVDM_TEST_CALLBACK_ABORT=$CallbackAbortPhase}
         }
         if($ExceptionSibling){
             $nativeSource="$PSScriptRoot\wow_generic_callback_probe.c"
@@ -152,10 +157,23 @@ try {
             # Original handled-exception policy does not promise a successful
             # ShellExecute return. Verify continuation and the next API, not
             # an invented success return for the interrupted call.
-            Copy-Item "$runtime/tests/SHLCHILD.BIN" "$root/child-report.bin"
-            $child=[IO.File]::ReadAllBytes("$root/child-report.bin")
-            if($child.Length -ne 12 -or [BitConverter]::ToUInt16($child,4) -ne 3){throw 'Original Shell child did not complete'}
+            if(!$CallbackAbortPhase){
+                Copy-Item "$runtime/tests/SHLCHILD.BIN" "$root/child-report.bin"
+                $child=[IO.File]::ReadAllBytes("$root/child-report.bin")
+                if($child.Length -ne 12 -or [BitConverter]::ToUInt16($child,4) -ne 3){throw 'Original Shell child did not complete'}
+            }
         }
+        if($CallbackAbortPhase){
+            $boundary=@(Get-Content "$root/shell-exception.txt.frame")
+            $pattern='^(\d+) (\d+) (\d+) (enter|unwind) resolve=(\d+) entry=([0-9A-F]{8}) logical=([0-9A-F]{8}) cpu=([0-9A-F]{8}) entrycpu=([0-9A-F]{8}) cs=([0-9A-F]{4})/([0-9A-F]{4}) ip=([0-9A-F]{4})/([0-9A-F]{4})$'
+            if($boundary.Count -ne 2 -or $boundary[0] -notmatch $pattern -or $Matches[4] -ne 'enter'){throw 'Missing actual original callback entry'}
+            $pidValue=[int]$Matches[1];$tid=[int]$Matches[2];$task=[int]$Matches[3];$entry=$Matches[6]
+            if($pidValue -ne $worker.ProcessId -or !$task -or $boundary[1] -notmatch $pattern -or
+                $Matches[4] -ne 'unwind' -or [int]$Matches[1] -ne $pidValue -or [int]$Matches[2] -ne $tid -or [int]$Matches[3] -ne $task -or
+                [int]$Matches[5] -ne $(if($CallbackAbortPhase -eq 'Preparation'){2}else{3}) -or
+                $Matches[6] -ne $entry -or $Matches[7] -ne $entry -or $Matches[8] -ne $entry -or
+                $Matches[10] -ne $Matches[11] -or $Matches[12] -ne $Matches[13]){throw 'Actual callback frame/control was not restored at its unwind boundary'}
+        }else{
         $boundary=@(Get-Content "$root/shell-exception.txt")
         if(($ShellExceptionResponse -eq 'Close' -and $boundary.Count -ne 2) -or
             $boundary.Count -lt 2 -or $boundary[0] -notmatch '^(\d+) (\d+) (\d+) original-return (\d+)$'){throw 'Missing original Shell callback return identity'}
@@ -166,9 +184,14 @@ try {
             @($boundary[1..($boundary.Count-1)]|Where-Object {$_ -ne "$pidValue $tid $task tls-clear 1"}).Count)){
             throw 'Post-Ignore adapter call did not restore the same task TLS'
         }
+        }
         $trace=Get-Content "$root/lifetime.txt" -Raw
         $task4='{0:X4}' -f $task;$task8='{0:X8}' -f $task
-        if($trace -notmatch ('(?m)^'+$pidValue+' after ret=0037 .*task='+$task4+' ')){throw 'Original RET_WINEXEC not observed'}
+        $callbackStage=if($CallbackAbortPhase){'before'}else{'after'}
+        # Preparation fails before the original optional "before" trace edge;
+        # its exact whole-body entry/unwind identity is proved above instead.
+        if($CallbackAbortPhase -ne 'Preparation' -and
+            $trace -notmatch ('(?m)^'+$pidValue+' '+$callbackStage+' ret=0037 .*task='+$task4+' ')){throw 'Original RET_WINEXEC not observed'}
         $complete=[regex]::Matches($trace,'(?m)^'+$pidValue+' TaskRetirement tid='+$tid+' task='+$task8+' stage=complete status=0\r?$')
         if($complete.Count -ne 1){throw 'Shell exception task did not retire once'}
         $after=$trace.Substring($complete[0].Index+$complete[0].Length)

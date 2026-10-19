@@ -656,6 +656,10 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
     register PCBVDMFRAME pCBFrame;
     VDMFRAME callerFrame;
     WORD wAX;
+    /* DIVERGENCE(MVDM-HOST-DIV-348): progress of this original frame only. */
+    VPVOID callerStack, callerCallbackStack;
+    DWORD callerInit, error;
+    wow_callback_control control = {0};
 #if FASTBOPPING
 #else
     USHORT SaveIp;
@@ -669,6 +673,12 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
 
     ptd = CURRENTPTD();
 
+    // DIV-348: first-pass error UI can schedule even before preparation.
+    callerStack = ptd->vpStack;
+    callerCallbackStack = ptd->vpCBStack;
+    callerInit = ptd->dwFlags & TDF_INITCALLBACKSTACK;
+    wow_callback_control_capture(&control);
+    __try {
     GETFRAMEPTR(ptd->vpStack, pFrame);
     /* DIVERGENCE(MVDM-HOST-DIV-178): snapshot the only caller fields used
      * below before the second original resolution can fault in a segment.
@@ -846,5 +856,18 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
 
     FREEVDMPTR(pCBFrame);
 
+    } __finally {
+        if (AbnormalTermination()) {
+            error = GetLastError();
+            if (wow_callback_control_restore(&control, callerStack)) {
+                ptd->vpStack = callerStack;
+                ptd->vpCBStack = callerCallbackStack;
+                /* SignalProc deliberately reinitializes teardown callbacks. */
+                if (!(ptd->dwFlags & TDF_IGNOREINPUT))
+                    ptd->dwFlags = (ptd->dwFlags & ~TDF_INITCALLBACKSTACK) | callerInit;
+            }
+            SetLastError(error);
+        }
+    }
     return TRUE;
 }
