@@ -7788,3 +7788,105 @@ outputs are intentionally discarded, not recoverable logs masquerading as
 retained evidence; the concise observations/hashes and reproducible formal
 producers above remain. Prior published13 is recoverable from P21's Git
 baseline, not from another permanently retained disposable build tree.
+
+### Post-P22 DDE ownership source ledger
+
+Question: what remains outside P22's call-owned conversion transaction?
+Procedure: source-first trace of the complete nine WM_DDE_* dispatch entries,
+forward and reverse conversions, actual message/filter callers, alias-table
+insertion/removal and both global-free directions at29be71998, followed by
+bounded read-only inspection of the actual x86 BASE registration consumer. This is a
+read-only source checkpoint, not another runtime repair or DDEML admission.
+No build, guest execution, publication or runtime acceptance is inferred.
+
+| Entry family | Actual original chain | Resource authority and terminal edge |
+| --- | --- | --- |
+| INITIATE | wmsg16 ThunkWMMsg16 / wmdisp32 WM32DDEInitiate -> WI32DDEAddInitiator; normal unthunk -> WI32DDEDeleteInitiator | Original initiator list disambiguates synchronous initiation ACK from packed ACK; the conversion call owns only its matching initiation scope. |
+| TERMINATE / REQUEST / UNADVISE | wmsg16 scalar cases / WM32DDERequest | Convert peer HWND, retain scalar protocol arguments; do not invent a payload allocation or free. |
+| ACK | wmsg16 WM_DDE_ACK / WM32DDEAck -> DDEFindAckNode / DDEDeletehandle | Initiation ACK retains atoms; execute ACK resolves the reversed peer pair and original FREE_MEM/FREE_H16 policy. Packed native lParam is distinct from the acknowledged data handle. |
+| ADVISE | wmsg16 WM_DDE_ADVISE / WM32DDEAdvise -> DDEAddhandle | Payload copy, guest/native handle alias and packed lParam have separate ownership. Successful conversion is not authority to free an in-flight payload at callback return. |
+| DATA / POKE | wmsg16 cases / WM32DDEData / WM32DDEPoke -> DDECopyhData16/32 -> DDEAddhandle | Original format conversion includes indirect DIB/metafile aliases and protocol release bits; null-data behavior is message-specific. |
+| EXECUTE | wmsg16 WM_DDE_EXECUTE / WM32DDEExecute -> DDEAddhandle -> ACK/free path | Original duplicate-handle compatibility allocates a distinct guest alias when necessary. Retain its original h16 and flags until acknowledgement; FreeDDEData explicitly excludes EXECUTE. |
+
+The three lifetimes must not be merged:
+
+1. Native packed lParam: PackDDElParam/UnpackDDElParam/FreeDDElParam,
+   governed by queue removal, hook consumption and initiation/non-initiation.
+2. Native/guest payload and indirect objects: original HDDE list plus guest
+   global-arena mark; ownership can outlive a converter/callback and ends
+   through the protocol/free path, not a generic message finally.
+3. Call-local conversion context: fThunkDDEmsg and fWhoCalled are TLS, but
+   native or guest reentry can still nest on the same thread. Restoration
+   must respect the entering value, independently of packet lifetime.
+
+Source findings, deliberately not relabelled as passing tests:
+
+| ID | Concrete current source observation | Required correction/proof boundary |
+| --- | --- | --- |
+| D1 | WM32DDEAdvise and WM32DDEExecute allocate a guest copy only inside `if (vp)`, but return TRUE even when allocation failed; the prefilled lParam is then not the promised converted guest handle. DDEData/Poke already have explicit allocation-failure branches. | Reject incomplete construction before guest delivery. Cover allocation, lock and alias registration, not merely initialize a local handle or copy the Data branch mechanically. |
+| D2 | Primary send/receive converters and DDECopyhData16/32 ignore DDEAddhandle's FALSE result, including indirect DIB/metafile aliases. The inserter publishes its node before W32MarkDDEHandle's guest callback and does not propagate that callback's success. | Pair each newly acquired allocation/alias/arena mark through rollback or an explicit protocol transfer. Keep borrowed source objects and reused aliases distinct; test nested failure as well as outer packet failure. |
+| D3 | ThunkMsgFilterHook's failed forward converter and ThunkMsgFilterHook16's failed reverse converter return while fThunkDDEmsg is FALSE. Their existing finally blocks unwind conversion buffers but do not restore this selector. Normal paths force TRUE rather than restore an entering value. WU32PeekMessage also sets/removes this selector around putmsg16 without finally restoration. | Audit both filter directions and PeekMessage as one selector cohort; prove ordinary, failed and nested entry restoration. TLS alone is not a nesting/exception guarantee. |
+| D4 | WU32PostMessage sets fWhoCalled before its original scroll-compatibility return through WU32SendMessage; that early return bypasses its ordinary FALSE reset. WU32SendMessage has another explicit selector interval around unthunk. Existing finally blocks do not restore the entering value. | Pair every write in these two actual callers, including the retained compatibility branch and reentrant unthunk. Do not remove original application compatibility to conceal missing restoration. |
+| D5 | DDEDeletehandle dereferences phDDEFirst before checking for an empty list. ACK/free code retains PHDDE across W32UnMarkDDEHandle/GlobalLock16/GlobalUnlockFree16, which enter guest callbacks. INITIATE's list acquisition is void and normal-unthunk-only; P22 unwind helpers intentionally do not own it. | Establish exact key-based release and failed-scope pairing using the existing lists; prove empty/missing pair, callback reentry and partial initiation without reinterpreting a stale node. A possible reentrant stale node is a source hazard, not an observed crash attribution. |
+| D6 | wow32.c retains RegisterWowBaseHandlers(W32DDEFreeGlobalMem32); the provider imports the real KERNEL32 export, not a project substitute. The retained FreeDDEData uses WOWGLOBALFREE -> GlobalFree and is used by Get/Peek failure recovery. Actual host entry/consumer inspection below confirms the callback and veto branch still exist. | Retain the original registration and real native GlobalFree, not a substitute ownership manager. Static control flow does not prove a particular guest alias was retired; actual guest/free acceptance remains required. |
+
+Whole-cohort implementation boundary: preserve the nine original message
+algorithms and HDDE authority; add only source-proven acquisition/rollback,
+LIFO selector and release-key corrections. Before mirror edits, register
+the precise exception/budget and distinguish call failure from successful
+native ownership transfer. A successful post must not be undone by generic
+call cleanup; a failed native post must not strand a freshly created alias.
+The reviewed UnThunkWMMsg16 has INITIATE cleanup but no corresponding
+ADVISE/DATA/POKE/EXECUTE failure rollback, so this edge cannot be declared
+covered by P22's existing unwind16. Include Get/Peek/putmsg16, both filter
+directions and the retained SendMessage DDE compatibility path, not only
+WU32PostMessage. The accepted native USER delivery contract remains unchanged.
+
+Finite acceptance obligations for this cohort are original-body allocation/
+lock/registration/packing failure, absent/duplicate alias, same-thread nested
+selector scopes, valid ACK and malformed/missing ACK, guest/native free,
+native post failure and ordinary successful transfer/retirement. Indirect
+format branches require their own nested rollback proof. Actual Win16/native
+conversation evidence is additional to those source controls; existing MINE,
+Shell and message passes prove none of these DDE protocol lifetimes. D6's
+static BASE prerequisite is resolved below without a semantic waiver; its
+guest alias lifecycle remains in the same acceptance cohort. Broad DDEML
+transactions/features remain in their queued package.
+
+Actual host acquisition: x86 C:/Windows/SysWOW64/kernel32.dll,
+version10.0.26100.9711, SHA-256
+7F04765684DE5ECB702AFB5C4CFBFDE12A4E61A125389EE23166AA66430E62F0.
+MSVC dumpbin exports identify RegisterWowBaseHandlers RVA2E6D0 and GlobalFree
+RVA1D4F0. Read-only objdump at the PE's preferred base10000000 shows the former
+storing its sole argument into RVA B0E80 and returning ret4. GlobalFree reads
+the same slot; nonzero branches to RVA2D200, passes its original handle and
+calls the registered stdcall function. TRUE resumes the ordinary native free;
+FALSE returns0 without that free. This is a real consumer, not a no-op export.
+The provider's original /Gz and STD_CALL profile matches the original callback
+declaration; absence of a literal WINAPI in wdde.c is not an ABI defect.
+No addresses or host-version assumptions are added to product code. This is
+proof of the observed binary's control flow, not all Windows versions or
+actual guest retirement. Exact required ranges: registration2E6D0..2E6E1,
+GlobalFree1D4F0..1D50C and callback2D200..2D21A.
+
+Owned hidden inspections41060/41840 first fail respectively because the
+PATH-selected project dumpbin is not the MSVC tool and legacy PowerShell's
+inherited module path does not resolve Get-FileHash. The latter's disassembly
+is retained as observation, not an aggregate pass. Explicit MSVC export
+selection and .NET SHA-256 avoid those tool/environment assumptions.
+Inspection37288 at23:09:55.0929706Z and branch22948 at23:10:05.1602828Z
+both exit0 within their60-second deadlines; held handles and captured pipes
+leave no disposable output. Nothing is patched, injected or loaded into a
+product worker. No live registration is changed by static inspection.
+
+Input SHA-256 identities, unchanged since the delivered P22 source:
+wdde.c3661922FE2BB69E94E7FD393BA3B670B0A930E3533C459169D7B16AE85EF9AD6;
+wmsg16.c538AB82EF1DF744B0BEB6C6E3359C215283BA26D0C175155D3FB570034555ED6;
+wmdisp32.c8A9F47DE9B2966FF8809EE683F4AAB5403491D8130C36AEC00C287ED7D81E661;
+wumsg.c04CC694D659DF8F05FC7373455DAAAAA891971B100E0663A4AE6CF8DF6A9E364;
+wowhooks.c1B95EAF9F0C1C18E9628E21ACD7694CEEFA37557A7FCAFA9E3A0BB4C1F17246D.
+No mirror diff, imported source, guest change or product-binary change is
+made by this checkpoint. M3 idle pairing and complete M1--M6 reconciliation
+remain S4; historical Shell/error13 and the other P22 limitations remain
+unlocated. This ledger neither closes S4 nor transfers a foundational defect
+to S5/S6.

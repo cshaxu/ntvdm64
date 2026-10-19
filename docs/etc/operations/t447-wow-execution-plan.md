@@ -262,6 +262,15 @@ full M1--M6 reconciliation stay in S4, together with the unlocated historical
 Shell/error13 boundary. WRITE editing/save/normal exit is not claimed. S5/S6
 and Queue remain unchanged; this is not S4 or T447 closure.
 
+The [post-P22 DDE source ledger](../evidence/m0-t447-s4-message-source-audit.md#post-p22-dde-ownership-source-ledger)
+freezes this existing protocol cohort: all nine message entries, packed
+lParam, aliased payload/indirect objects and call-local conversion selectors.
+Reconcile construction, native transfer, ACK, both global-free directions and
+abnormal unwind together. Preserve original protocol/format algorithms; no
+generic call-finally free of transferred packets, second ownership registry,
+guest edit or broad DDEML feature admission. The ledger distinguishes source
+defects, observed BASE callback control flow and unproved guest retirement.
+
 ### M4 original construction and owned-release correction group
 
 After P19,347/098 is the finite parameter-map group, not just a CB_DIR guard:

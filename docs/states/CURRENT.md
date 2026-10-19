@@ -15,8 +15,10 @@ retains failed controls, exact identities and evidence limits. No guest change.
 
 Full M1--M6/S4, protocol/output and S5/S6 remain open.
 Native output28 passes at860785e88. P22 adds no protocol ownership policy,
-stale local fallback or weaker validation. Styled raw-fault recovery remains
-unproved. Complete M1--M6, DDE and M3 idle reconciliation remain in S4.
+stale local fallback or weaker validation. The post-P22
+[DDE source ledger](../etc/evidence/m0-t447-s4-message-source-audit.md#post-p22-dde-ownership-source-ledger)
+pins nine message entries and three resource lifetimes; it is not a runtime
+repair. Styled raw-fault recovery, full M1--M6 and M3 idle remain open.
 
 P22 scratch is removed; build retains only .ninja and .ccache.
 No cache clear, prune or guest edit.
