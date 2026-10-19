@@ -253,12 +253,21 @@ confirms only build/.ccache and build/.ninja, with no retained user exception.
 
 ### Limits and delivery disposition
 
-No full cold13-image rebuild, real device/guest sweep, user-desktop interaction
-or new publication is claimed: product sources/guest/images do not change.
-The custom worker/WOW/native/Hook targets retain original manifest composition;
-the actual exercised builds are the named dual-width style and selected
-libraries/fixture and five image-import targets, not every dormant target. Retired historical generators
-are reference tooling, not another supported task-copy cache policy.
+Owner supplement: continue this Td with all13 source-component builds and a
+second unchanged build, without clearing valid caches or running Git prune.
+Use tests/build/Test-FullComponentBuild.ps1 in an owned hidden background job;
+build/td-component-build belongs only to this supplement (40-minute total,
+25-minute per command,15-minute no-output and64MiB log budgets). Preserve
+component PE identities/hashes and intermediate timestamps before disposing
+the logs through the existing cleanup tool. Runtime publication/device tests
+remain excluded unless the build uncovers a runtime-affecting change.
+The previous partial builds alone do not close this supplementary requirement.
+
+The initial delivery did not exercise all13 source-component targets; the
+supplement below supersedes that limited build denominator. No cache-cleared
+cold-build, real device/guest sweep, user-desktop interaction or new runtime
+publication is claimed. Retired historical generators are reference tooling,
+not another supported task-copy cache policy.
 The cleanup attestation is not an automatic process detector or a global
 filesystem lock; callers must really quiesce target owners. Safe preflight
 does not promise race-proof deletion against a hostile concurrent writer.
@@ -266,3 +275,124 @@ does not promise race-proof deletion against a hostile concurrent writer.
 Final metadata verification, own-root disposal and the containing reviewed
 main/origin commit form this standalone Td delivery; owner acceptance remains
 required. S4 does not resume automatically and receives no new P or closure.
+
+## Owner-requested full-component supplement
+
+Source baseline f2af83fae156cd9ec9a3db8f71ade74ddf8ba2ea. Reproducible entry:
+tests/build/Test-FullComponentBuild.ps1, launched hidden with pwsh -NoProfile
+-ExecutionPolicy Bypass -File and -OutputRoot build/td-component-build/complete.
+The entry configures both existing Release/ccache presets, builds W16Style and
+wow32 (including worker), then the original x86 nthook32.dll/VDMREDIR.dll
+targets and all six native x64 worker/frontend/monitor/launcher/service/Hook
+targets. No guest target or imported published worker substitutes for these
+source builds. All products remain inside the two existing stable trees.
+
+The first restricted PID5072 exits without steps/results: not a pass. Actual
+owned background PID11136 starts03:49:49.874Z and fails03:53:20.619Z: CMake
+requested WOW32.DLL but the generated Ninja target is case-sensitive wow32.dll.
+NTVDM had linked; WOW32 compilation had not begun. Fix only the CMake target
+spelling. Failed-result hash
+C5875D1D3C24CB7146D7A5F0A5F611E868CB6A70032A70A47E99228DCB8FE80C.
+
+PID35600 starts03:53:58.303Z and fails03:56:44.385Z after successful WOW32
+compilation/link. VDMREDIR's existing thread_start_compat object now consumes
+session_thread_finish, added by the earlier S2 terminal-intent repair, but the
+worker's generated private export list still names only current/bind/unbind.
+LINK reports LNK2019/LNK1120. Failed-result hash
+962C78CD4DF5A70802764711BEC53F44D156A907A487DFB53D43EECF21D30A0F.
+Add the existing finish symbol to that same private export list and make the
+generated definition an implicit worker-link dependency. Do not link another
+session/TLS implementation into the DLL, alias finish to ordinary unbind,
+invent a stub or weaken the terminal contract. This is one extra generated
+private export, not a new function/signature, broker ABI or runtime algorithm.
+It changes future build wiring; the installed/released P13 images stay intact.
+Original host-mirror/guest differences added or removed by this supplement:0.
+
+The final unchanged-input run is PID38496, started03:58:52.463Z; its actual
+test starts03:58:53.267Z and passes04:03:19.922Z (UTC2026-10-19). All nine
+subcommands exit0, with their exact command/stdout/stderr in the saved step
+receipt before disposal:
+
+| Step | PID | Seconds | Exit |
+| --- | ---: | ---: | ---: |
+| configure-x86 | 46340 | 35.173 | 0 |
+| configure-x64 | 34092 | 44.225 | 0 |
+| first-x86 | 3656 | 15.041 | 0 |
+| first-x86-hook-redir | 28020 | 11.019 | 0 |
+| first-x64 | 11320 | 97.087 | 0 |
+| redirector-worker-import | 4108 | 5.800 | 0 |
+| second-x86 | 46564 | 11.518 | 0 |
+| second-x86-hook-redir | 31832 | 9.903 | 0 |
+| second-x64 | 36368 | 34.720 | 0 |
+
+The dumpbin /imports:ntvdm.exe check proves VDMREDIR imports the existing
+session_thread_finish from its worker. All13 final PEs have their required
+I386/AMD64 machine. The second whole build produces respectively2/1/6 nested
+Ninja no-work results. All1197 objects/libraries/resources retain exact path,
+length and UTC write timestamp; all13 final images retain SHA-256 and timestamp.
+No compilation, resource build or relink occurs. The timings include repeated
+developer-environment/runner startup; no-work does not mean zero wall time.
+Existing valid objects and ccache entries survive every run and both fixes.
+
+Final build identities (build-only candidates, not a new runtime release):
+
+| Image | SHA-256 |
+| --- | --- |
+| ntvdm.exe | F62686328FB25AC8CF6C84FA6D12EE3AA6042A28303A483AEC36D56E30AE0A0A |
+| WOW32.DLL | 6E1F504E68308C6A09449A5B149805E6DB98B688FD50D684BA6519E895AFEC72 |
+| VDMREDIR.DLL | F0E712AFFFDBA75CC9E40161FA603B25795C8882AD1F55147A23209B6A970DD8 |
+| nthook32.dll | 3EBE9D17FC585632FEAC7A1D837FC3B37995855440C4EDDFBAAC079F1F505000 |
+| ntw16s32.dll | A7BDB9724224764F82EC512659FD48E9883B2950007F2EA3E27E1A0E42695218 |
+| ntw16s64.dll | 3D0B171D8E064FD3120B4183C7FD65AF294276A4A8084F8C9131D625E83BA847 |
+| W16Style.exe | F41F787BEC8E355514A64F84C9365AE3169313536AD4DD590D0DE19CD9DEF0BD |
+| ntvwm.exe | 46BD6CD50B776C3AC8F3CD9FB93CB820BB3E298C5F8AACEB743752A243FF24F3 |
+| ntcon.exe | 107A195D5F7A4B30A213CA72815636BADC15F567A9BC4038B47A5294DCFC5181 |
+| ntmon.exe | D496BCA37FD0F13A55A6706FBEBFCAA71A2CF53A1F095DCB62B9342F7267EF8E |
+| run16.exe | DBEA1548702A464BCEC0F24AC3EEDF6A75C0CCFE5058A85B2966C4806FDAF589 |
+| ntsrv.exe | DEAF2EB9D62AC8044B5260A184E31C808FC495F58A84C3022FE4BDB29C1E829C |
+| nthook64.dll | BE3C8100035990A465A0BADD0249392D85B0F1C3B493817548417BA56ECEEDAE |
+
+Result hash4CD10ABA844FEDB603B6813DD1642D781D1EDDE379ED3DBA3BFEC7854AC174DD;
+steps13F700E35BAA19A7ABBEFD4AA864D9DEE5CD042F379A7571B04AEB7AB22A29CA;
+import proofEC4ADBEE7465756DB0A305718C7083B3585D3F1FF446FE7195C4D892B988C48C.
+Second-build log hashes in the table's order:
+3E26677CD854ABDAC19F9F37E5F6FE1C1517DD9F3FE49FB5A5897291F5A55F69,
+A9DB993D5E263BDCAC0CCC0EE952EAA438E3B0DD366BBAF508A1085FCD529960,
+5A0EF8C51730CFDE72363624B95BA9643803856B7DEA778B07D4644808E6F04C.
+Test-source hash3AEEF313ED5891916DF2540E0A1354066BDF459C8C32B646F25BF514EDFBF41B;
+CMakeA482C4B9268B1F7B1CBB01226D2F14A4A789D2D59AABBE2BA32194EEC9E64A2B;
+generator292D93C2FC7ADA3CA3DE2388FA797000E9CEEC1C55F6243DCC92EE7A7AD377A0.
+The earlier failed logs are retained as failures until disposal, not overwritten
+or counted as successful iterations. No Git prune or cache-clearing command ran.
+
+Background final-review PID25680 starts04:05:09.271Z with a180-second deadline
+and completes04:05:40.523Z exit0: documentation governance/relative links,
+diff whitespace, both changed PowerShell parses, the13 installed/release
+manifest hashes and immutable guest ZIP all pass. Explicit repository-cache
+statistics show1261 cacheable calls,234 direct hits and1027 misses, limit5G;
+these cumulative counts include initial compilation, not a promised hit ratio.
+
+The completed supplement owns66 disposable files/6716413 bytes (6.41MiB),
+all generated command/log/JSON evidence, with no media, configuration, Git or
+user-data exception. The real cleanup tool's default preview passes with
+Applied=false; exact membership digest before disposal is
+EB1E4C618BC9BB71F305906E0A32BA3C4557DFA717462DD1F0A5BEB22D7DFB9F.
+The above result, failure, import and incremental summaries precede disposal.
+Recheck actual process quiescence before Apply; do not infer it from a switch.
+
+At04:06:17.852Z, all owned supervisors/commands have exited and a fresh CIM
+inspection finds no active build executable or disposable-root user (excluding
+the read-only inspection command itself). Apply passes with the same digest,
+removes exactly those66 files/6716413 bytes, and final CheckResidual reports
+only build/.ccache and build/.ninja. No process is killed for cleanup and no
+valid cache is deleted. Only generated disposable evidence is removed; its
+hashes/conclusions above and reusable117-line test remain tracked.
+
+Supplement change accounting: scripts/config/test120 added,2 removed,net118
+(one new test, one CMake target correction and the private-export/dependency
+wiring). Documentation138 added,6 removed,net132; five changed/added files.
+No production-source, guest or release-asset file changes. No device/runtime
+acceptance is claimed for the new build outputs, which are not deployed.
+This completes the requested all-component/incremental build scope; reviewed
+commit/push and final clean-state verification deliver the Td supplement for
+owner acceptance. T447 S4 stays held at P13 with its unchanged obligations.

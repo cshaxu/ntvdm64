@@ -5,6 +5,8 @@
 S4 stays held at delivered P13 during standalone
 [Td build hygiene](../etc/operations/td-build-hygiene.md) delivery/acceptance;
 no numeric task, S4 P, runtime change or S4 closure follows from this Td.
+Owner-requested Td supplement passes all13 source-component builds and an
+unchanged second build (1197 intermediates); caches retained, no Git prune.
 
 ## Current Work
 

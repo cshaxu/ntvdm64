@@ -88,7 +88,7 @@ if(NTVDM_ARCHITECTURE STREQUAL "x86")
     VERBATIM)
   add_custom_target(wow32
     COMMAND cmd /d /c "${CMAKE_BINARY_DIR}/wow32/msvc-x86.cmd"
-      "${CMAKE_MAKE_PROGRAM}" -C "${CMAKE_BINARY_DIR}/wow32" WOW32.DLL
+      "${CMAKE_MAKE_PROGRAM}" -C "${CMAKE_BINARY_DIR}/wow32" wow32.dll
     DEPENDS worker "${CMAKE_BINARY_DIR}/wow32/build.ninja" USES_TERMINAL)
 else()
   foreach(_component Worker Frontend Monitor Launcher Service)
