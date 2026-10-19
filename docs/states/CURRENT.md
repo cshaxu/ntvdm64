@@ -4,8 +4,8 @@
 
 Owner accepts and closes [Td build hygiene](../etc/operations/td-build-hygiene.md)
 at aadde21e8; S4 resumes from delivered P13. Retain stable caches, immutable
-guest and frozen performance lane. Reconcile cross-worker/external-native
-message entry/data/lifetime boundaries before grouped implementation/tests.
+guest and frozen performance lane. Cross-worker work retains original local
+HTASK/shell fallback and existing separate-WOW launch; no runtime fix assumed.
 
 ## Current Work
 
@@ -351,9 +351,10 @@ P12's091--094 and unlocated0102/WRITE-Off failures remain in the S4 audit.
 P13 publishes095--097: COPYDATA/caller ownership, Proc32 and COMMDLG scopes.
 Full gates, coherent13 and installed3/hashes pass; performance remains frozen.
 Full M1--M6/S5/S6 remains open; original guest/configuration stay unchanged.
-Test-only S4 P14 external-native group passes9 actual guest cases: same-worker3,
-external I3863/AMD643 plus a local-substitution refusal. This is test-only
-evidence on P13, not cross-worker Win16, full M1--M6 or a new runtime release.
+Test-only P14 passes9 local/external32/64 cases and substitution refusal.
+P15 cross-worker group passes3 styles plus shared3 controls and shared-launch
+refusal; original shell fallback and PID/task pairs are verified. P13 remains
+the runtime release; full M1--M6/S5/S6 stay open. See the linked S4 audit.
 
 ## Active Packet
 

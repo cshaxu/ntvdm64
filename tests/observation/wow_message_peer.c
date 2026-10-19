@@ -24,6 +24,9 @@ static HANDLE peer_thread;
 static HANDLE peer_ready;
 static HWND sender_window, receiver_window, peer_window;
 static DWORD sender_thread, receiver_thread, peer_thread_id;
+#ifdef MESSAGE_CROSS_WORKER
+static DWORD receiver_process_id;
+#endif
 static volatile LONG errors;
 #ifndef MESSAGE_EXTERNAL_HOST
 static volatile LONG received, nested, replied, text;
@@ -284,6 +287,9 @@ DWORD WINAPI MessagePeer(DWORD operation)
 {
     DWORD owner = 0, code = 1;
     DWORD report[
+#ifdef MESSAGE_CROSS_WORKER
+        14
+#else
 #ifdef MESSAGE_EXTERNAL_HOST
         15
 #else
@@ -294,6 +300,7 @@ DWORD WINAPI MessagePeer(DWORD operation)
         13
 #else
         12
+#endif
 #endif
 #endif
 #endif
@@ -347,7 +354,12 @@ DWORD WINAPI MessagePeer(DWORD operation)
         receiver_window = FindWindowA("T447_MSG_RECV", NULL);
         if (!peer_thread || !receiver_window) return 0;
         receiver_thread = GetWindowThreadProcessId(receiver_window, &owner);
+#ifdef MESSAGE_CROSS_WORKER
+        receiver_process_id=owner;
+        check(owner && owner != GetCurrentProcessId());
+#else
         check(owner == GetCurrentProcessId());
+#endif
         check(receiver_thread != sender_thread && receiver_thread != peer_thread_id);
         return errors ? 0 : 0x447a0002;
     }
@@ -441,6 +453,9 @@ DWORD WINAPI MessagePeer(DWORD operation)
     check(proc32_fresh==1 && proc32_borrowed==1);
     report[13]=(DWORD)proc32_fresh;report[14]=(DWORD)proc32_borrowed;
     report[1]=(DWORD)errors;
+#endif
+#ifdef MESSAGE_CROSS_WORKER
+    report[13]=receiver_process_id;
 #endif
     output = CreateFileA("MSGHOST.BIN", GENERIC_WRITE, 0, NULL, CREATE_NEW,
         FILE_ATTRIBUTE_NORMAL, NULL);

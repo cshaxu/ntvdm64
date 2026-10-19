@@ -216,12 +216,27 @@ jne failed
 mov word [phase-data],5
 call checkpoint
 %else
+%ifdef CROSS_WORKER
+; A Hook-enabled native coordinator launches both separate WOW workers.
+; Keep this sender's HWND/task alive until its real PID/TID has been pinned.
+api 2,13
+mov [started-data],ax
+.wait_launch:
+cmp word [launch_ready-data],1
+je .launched
+peek 0,0,0
+call deadline
+api 1,29
+jmp .wait_launch
+.launched:
+%else
 push ds
 push word childname-data
 push word 0
 api 1,166
 cmp ax,32
 jbe failed
+%endif
 api 2,13
 mov [started-data],ax
 .find:
@@ -240,8 +255,24 @@ mov [peer-data],ax
 push ax
 api 2,224
 mov [peer_task-data],ax
+%ifdef CROSS_WORKER
+; Original GetWindowTask(foreign) returns this worker's shell, not remote HTASK.
+api 2,286
+push ax
+api 2,224
+mov [foreign_expected-data],ax
+cmp ax,[peer_task-data]
+jne failed
+require 22
+send peer,0x47a,0,0,0
+cmp dx,0x447a
+jne failed
+require 23
+mov [remote_task-data],ax
+%else
 cmp ax,[task-data]
 je failed
+%endif
 send peer,0x460,0x1234,0x5678,0x9abc
 result 1
 send peer,0x461,[window-data],0x2233,0x4455
@@ -629,6 +660,12 @@ cmp word [bp+12],0x466
 je .ack
 cmp word [bp+12],0x46f
 je .quit
+%ifdef CROSS_WORKER
+cmp word [bp+12],0x479
+je .launch_ready
+cmp word [bp+12],0x47a
+je .query_task
+%endif
 %ifdef EXTENSION_WITNESS
 cmp word [bp+12],0x474
 je .extension_receive
@@ -859,6 +896,25 @@ test ax,ax
 jz .bad
 mov ax,[bp+10]
 mov [sender-data],ax
+%ifdef CROSS_WORKER
+push ax
+api 2,224
+mov [peer_task-data],ax
+api 2,286
+push ax
+api 2,224
+mov [foreign_expected-data],ax
+cmp ax,[peer_task-data]
+jne .bad
+test ax,ax
+jz .bad
+send sender,0x47a,0,0,0
+cmp dx,0x447a
+jne .bad
+test ax,ax
+jz .bad
+mov [remote_task-data],ax
+%endif
 send sender,0x462,0,0x2233,0x4455
 cmp ax,2
 jne .bad
@@ -922,7 +978,11 @@ jnz .bad
 cmp word [bp+10],0xabcd
 jne .bad
 mov ax,[bp+6]
+%ifdef CROSS_WORKER
+cmp ax,[remote_task-data]
+%else
 cmp ax,[peer_task-data]
+%endif
 jne .bad
 inc word [posted-data]
 xor ax,ax
@@ -963,6 +1023,23 @@ test ax,ax
 jz .bad
 inc word [extension_yielded-data]
 mov ax,0x76
+jmp .value
+%endif
+%ifdef CROSS_WORKER
+.launch_ready:
+cmp word [bp+10],0x5341
+jne .bad
+cmp dword [bp+6],0x574f5732
+jne .bad
+cmp word [launch_ready-data],0
+jne .bad
+mov word [launch_ready-data],1
+mov ax,0x79
+jmp .value
+.query_task:
+api 1,36
+cmp ax,[task-data]
+jne .bad
 jmp .value
 %endif
 .bad:
@@ -1079,6 +1156,9 @@ align 16,db 0
 data:
 times 32 db 0
 report:
+%ifdef CROSS_WORKER
+db 'MSG7'
+%else
 %ifdef M4_STRUCTURES
 %ifdef THREAD_CLIENT_VIEW
 db 'MSG6'
@@ -1090,6 +1170,7 @@ db 'MSG5'
 db 'MSG2'
 %else
 db 'MSG1'
+%endif
 %endif
 %endif
 %ifdef RECEIVER
@@ -1119,6 +1200,11 @@ client_checks: dw 0
 %ifdef M4_STRUCTURES
 structures: dw 0
 copy_nested: dw 0
+%endif
+%ifdef CROSS_WORKER
+remote_task: dw 0
+foreign_expected: dw 0
+launch_ready: dw 0
 %endif
 report_end:
 instance: dw 0

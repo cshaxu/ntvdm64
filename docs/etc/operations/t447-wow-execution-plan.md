@@ -47,6 +47,56 @@ is correctly refused. The [source audit](../evidence/m0-t447-s4-message-source-a
 retains exact inputs, counters and unproved boundaries; this is test-only
 evidence, not a new runtime repair or S4 closure.
 
+### Cross-worker message and local-task identity group
+
+After clean P14/7185ae4eb, trace the original cross-worker contract as a whole.
+wuwind WU32GetWindowTask queries native PID/TID, calls the process-local
+ThreadProcID32toPTD list and falls back to gptdShell for a foreign thread.
+wkman W32Thread installs that first-thread shell; separate workers may have
+identical16-bit task values. PostAppMessage maps a local HTASK to a local
+thread, while HWND-based PostMessage/SendMessage can cross native processes.
+Do not create a global task-ID registry, return a remote pointer/HTASK or
+rewrite this original behavior to satisfy a same-worker test assertion.
+
+Reuse the actual Hook->Run16->BaseCheckVDM separate-WOW request, already
+exercised by the idle-workers producer. A test-only native coordinator launched
+through run16 submits both authored NE images with CREATE_SEPARATE_WOW_VDM.
+It pins actual HWND-derived worker PID/TID/image/creation and process handles,
+then releases an explicit sender-ready message. No private broker creation,
+new public option, helper in production or original guest change.
+
+Extend only the authored message probe: skip its internal WinExec in this mode,
+retain exact basic/nested/reply/post/text/structure/filter/local-thread-post
+checks, compare GetWindowTask(foreign) with the original desktop/shell fallback,
+and report the acknowledged remote task separately. The verifier correlates
+both PID/task pairs, not globally distinct HTASKs. The existing generic-thunk
+native peer remains in the sender worker; its real receiver PID is additional
+test evidence, not another routing input.
+
+Separate last-app ExitKernel may bypass shared-worker SG_EXIT, as the original
+idle-workers ledger already establishes. Require held real worker handles to
+signal exit0, dead windows and completed guest reports, not a fabricated task
+retirement marker or explicit cleanup. Shared-worker controls keep their
+existing exactly-once task-retirement assertions unchanged.
+
+Fixed implementation/verification group: tracked test coordinator, opt-in probe/
+native-host/runner and stable CMake fixture targets; all3 style policies with
+real two-worker scalar/nested/reply/posted/text/three-structure paths, original
+fallback identity, dead HWND failure and normal lifecycle. Retain shared3
+controls and exact default NE byte identities. A deliberately shared launch
+must fail the two-worker requirement. No runtime/mirror diff is anticipated;
+source-proven production gaps, if any, require a registered whole correction
+before runtime rebuild/publication. Pending receiver death/SMTO_BLOCK/other
+M4 families and full M1--M6 remain separate obligations within S4.
+Scratch owner is build/t447-s4-cross-worker, this group only:60-minute phase,
+2GiB,15-minute no-progress budgets; retain hashes/conclusions before exact
+cleanup, keep stable caches and the existing short-stage exception.
+
+Actual group-r1 passes cross3/shared3 on unchanged P13; the deliberately
+shared launch is rejected with worker-not-distinct. This test-only P15
+adds no runtime, mirror or guest change. The [cross-worker evidence](../evidence/m0-t447-s4-message-source-audit.md#resumed-s4-cross-worker-message-and-local-task-identity)
+records exact process/task/fallback identities and remaining S4 boundaries.
+
 ## Admission and boundaries
 
 The owner's clarified WINMINE report concerns active cell latency, not failed

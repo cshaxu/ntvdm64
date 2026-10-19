@@ -5185,3 +5185,109 @@ P13 remains the runtime/publication frontier; no untested binary is substituted
 and no source/mirror/guest/runtime completion is inferred. Next fixed S4 work
 remains cross-worker semantics and the remaining message/failure/reentry
 inventory, not another performance experiment or an early S5 admission.
+
+## Resumed S4 cross-worker message and local-task identity
+
+Question: do the original HWND message/conversion paths work between actual
+separate WOW workers, and is GetWindowTask a globally unique task identity?
+Scope is the finite group admitted in the working plan after P14/7185ae4eb;
+performance remains frozen. This is test-only P15, not S4 closure.
+
+Source trace: original wuwind.c WU32GetWindowTask obtains native PID/TID then
+calls walias.c's process-local ThreadProcID32toPTD lookup. A missing local
+record falls back to gptdShell. wkman.c W32Thread
+initializes that shell. PostAppMessage resolves a local task/thread; HWND
+SendMessage/PostMessage may cross processes. Thus a remote task must be
+identified by worker PID plus its own reported HTASK, not by assuming that
+GetWindowTask(foreign HWND) returns the remote HTASK. No global registry or
+replacement algorithm is warranted by this audit.
+
+Implementation is entirely in tracked observation sources/CMake fixtures.
+An independent native coordinator launched through Run16 receives the real
+Hook and launches authored SEND/RECV NE images with the existing native
+CREATE_SEPARATE_WOW_VDM flag. It pins HWND-derived PID/TID, exact staged
+ntvdm image, creation time and actual process handles before a scalar ready
+handshake. The sender skips its usual internal WinExec only in opt-in cross
+mode. MSG7 adds remote-task/local-shell/ready fields; default MSG6 binaries
+remain byte-identical to P14. The existing generic-thunk native endpoint
+still runs inside the sender worker; this does not claim a new external
+native endpoint. Original USER16 calls, converters and native USER perform
+all actual message delivery. There is no test provider in production.
+
+Reproducer: hidden owned pwsh -File tests/observation/verify-wow-external-native.ps1
+-CrossWorkers -BuildRoot <repo>/build/t447-s4-cross-worker/group-r1.
+Supervisor PID46596 starts 2026-10-19T04:46:16.286Z; group runs04:46:17.175Z
+through04:48:47.163Z and returns0. Stable x86/x64 fixture builds PID19772/
+37100 exit0. The six actual case processes all exit0:
+
+| Style | Shared case PID | Cross case PID | Sender worker/task | Receiver worker/task | Foreign lookup: sender/receiver |
+| --- | ---: | ---: | --- | --- | --- |
+| Off | 2492 | 14596 | 25272/6071 | 15464/6079 | 935/927 |
+| Win16 | 45576 | 27992 | 15716/6071 | 49032/6079 | 935/927 |
+| All | 36936 | 47604 | 37664/6071 | 5840/6079 | 935/927 |
+
+Each foreign lookup equals that worker's desktop/shell fallback, while the
+explicit receiver/sender acknowledgement reports6079/6071 respectively.
+Neither value is silently substituted for the other. Each cross case retains
+sender phases0/1/2/3/4/6 and receiver0/5/6, errors0, exact scalar/nested/reply/
+post/filter/local-thread-post/string results and client-version identity.
+MINMAXINFO, WINDOWPOS and COPYDATA retain four structured callbacks per
+guest and six native checks. Original last-app separate-WOW ExitKernel can
+bypass shared SG_EXIT: normal retirement here is proved by pinned actual
+process handles signaling exit0, completed guest reports and dead HWNDs,
+before cleanup. Shared controls still require exactly one original retirement
+marker per task in the shared worker. Cleanup is not this lifecycle proof.
+
+Adversarial control: same inputs with -SharedWorkerControl deliberately omit
+the separate flag. PID31968 starts04:52:34.049Z, returns1 by04:52:49.466Z;
+both HWNDs resolve to PID34364 (different threads14644/47404), flag00000000,
+and the coordinator records exact FAIL worker-not-distinct. The expected-
+failure check passes. This refuses the false cross-process proof, not a
+product regression. An earlier detached launch PID47440 produced no child
+owner, result or output; it is unproved infrastructure, not a test pass.
+
+Cross SEND SHA80150734BAD892AC034A02B3ED7BC08BDF597F83D6C5DDBB4ED2D7C046A3C5B9;
+RECV9B25D272EC7B548E9EF05971196AD6A234ED23E32BFB336B2BD6AB05C3485BAD.
+All shared controls retain P14's exact default pair. Original guest remains
+canonical ZIP7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7;
+all runtime inputs are released P13, not Td build-only outputs.
+Group result CA193BB94D9FD4ACD7CB46474A4871FA88EBF412BDAC1ACF662EF235DF5C1069;
+steps A10B77ECBBCAC70E5771D697554203AF489E1064A9A90C7E98767B89DD3C4153;
+negative7878201D3E05541DB004568E6BB58740F10E7A02C0340065C685D32F6E76A40F.
+Coordinator sourceFC3B564939AC2A05AD0C04ABA6553BB531DB68CB9F5728A1D8F6837E3039148D;
+probe C2D99CA3D278ECD5B9A8FD63F57814E7D5827C13835A5124B0BCA9BB28EF13B1;
+native source7557437F004A0D2CDACF6D249E40C6842EF4D7D4AD17D0F9A0FB3647A89741A7.
+
+Second-role review: no production source, mirror, guest, installed or release
+image change is intended; original-mirror diff increase/decrease0. No new
+semantic exception, global identity mechanism, guest rebuilding, runtime
+publication or performance claim. These six positive cases and one negative
+close only the selected cross-worker evidence gap. Pending receiver death,
+SMTO_BLOCK, implicit delivery, remaining M4 family/ownership/failure paths
+and full M1--M6 reconciliation remain finite S4 obligations; S5/S6 remain
+unstarted. Do not infer their completion from this group.
+
+Final quality job PID1656 runs04:54:21.162--04:54:37.154Z, exit0:
+all six runtime-input manifests match released13; source/probe/coordinator
+hashes match; installed13/released13/canonical guest ZIP are unchanged;
+both runner scripts parse and documentation, links and whitespace gates pass.
+The earlier detached quality launch PID49440 produced no result; it is not
+counted as verification. Held-handle execution supplies the actual result.
+
+Before disposal the sole cleanup owner inventories334 files/12086582 bytes,
+membership7659BB77ED100153626FDC94B1861751F1F4D19012F3D6AF24E7468DD4645015.
+All69 sensitive entries are reviewed individually:35 exact canonical ZIP
+duplicates,14 NASM listings tied to the tracked source hash and20 authored
+MSG6/MSG7/NMSG reports. No Git data, user configuration exception or unknown
+media is admitted. The six-case conclusions, failure control and hashes above
+are retained before removal. Actual process inspection finds no listed job,
+coordinator or product broker/worker alive; no process is killed for cleanup.
+The existing remover must preview then apply this exact reviewed membership;
+valid .ninja/.ccache are retained, no cache reset or Git prune is authorized.
+
+Preview Applied=false and subsequent Apply both confirm that membership;
+all334 generated/duplicate files (12086582 bytes) are removed. Final residual
+inspection returns only .ccache and .ninja. Raw results are no longer promised
+recoverable; tracked producers, canonical media and the summaries above
+remain. The containing reviewed main/origin commit delivers test-only P15;
+P13 remains the installed runtime frontier and S4 remains active.

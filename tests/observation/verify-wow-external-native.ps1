@@ -1,5 +1,5 @@
 [CmdletBinding()]
-param([Parameter(Mandatory)][string]$BuildRoot,[switch]$BuildOnly)
+param([Parameter(Mandatory)][string]$BuildRoot,[switch]$BuildOnly,[switch]$CrossWorkers)
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $root=[IO.Path]::GetFullPath($BuildRoot)
@@ -37,7 +37,7 @@ function Run-Owned([string]$Name,[string]$File,[string[]]$Arguments,[int]$Second
 }
 try{
  foreach($arch in @('x86','x64')){
-  $targets=if($arch -eq 'x86'){'wow_message_external_peer wow_message_external_host wow_message_host_structured'}else{'wow_message_external_peer wow_message_observer'}
+  $targets=if($CrossWorkers){if($arch -eq 'x86'){'wow_message_cross_host wow_message_host_structured'}else{'wow_cross_worker_probe wow_message_observer'}}else{if($arch -eq 'x86'){'wow_message_external_peer wow_message_external_host wow_message_host_structured'}else{'wow_message_external_peer wow_message_observer'}}
   $command="@echo off`r`ncall `"$vs`" -arch=$arch -host_arch=x64 >nul`r`nif errorlevel 1 exit /b %errorlevel%`r`n`"$cmake`" --preset msvc-$arch-release-ccache`r`nif errorlevel 1 exit /b %errorlevel%`r`n`"$cmake`" --build --preset msvc-$arch-release-ccache --target $targets --parallel 8`r`nexit /b %errorlevel%`r`n"
   [IO.File]::WriteAllText("$root/$arch.cmd",$command)
   Run-Owned "build-$arch" cmd.exe @('/d','/c',"`"$root/$arch.cmd`"") 1200
@@ -57,16 +57,22 @@ try{
   $driver=Join-Path $repo 'build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'
   $localHost=Join-Path $repo 'build/.ninja/msvc-x86-release/message-probes/MSGHOSTLOCAL.dll'
   $externalHost=Join-Path $repo 'build/.ninja/msvc-x86-release/message-probes/MSGHOST.dll'
+  $crossHost=Join-Path $repo 'build/.ninja/msvc-x86-release/message-probes/MSGHOSTCROSS.dll'
+  $coordinator=Join-Path $repo 'build/.ninja/msvc-x64-release/message-probes/MSGXHOST.exe'
   $script=Join-Path $PSScriptRoot 'verify-win16-message-probe.ps1'
-  foreach($kind in @('local','x86','x64')){foreach($style in @('Off','Win16','All')){
-   $name="$kind-$style";$hostImage=if($kind -eq 'local'){$localHost}else{$externalHost}
+  $kinds=if($CrossWorkers){@('local','cross')}else{@('local','x86','x64')}
+  foreach($kind in $kinds){foreach($style in @('Off','Win16','All')){
+   $name="$kind-$style";$hostImage=if($kind -eq 'local'){$localHost}elseif($kind -eq 'cross'){$crossHost}else{$externalHost}
    $arguments=@('-NoProfile','-ExecutionPolicy','Bypass','-File',"`"$script`"",'-PackageRoot',"`"$package`"",'-Observer',"`"$observer`"",'-CompilerDriver',"`"$driver`"",'-BuildRoot',"`"$root/$name`"",'-Win16Style',$style,'-StructuredPayloads','-ThreadClientView','-NativeHost',"`"$hostImage`"")
-   if($kind -ne 'local'){$peer=Join-Path $repo "build/.ninja/msvc-$kind-release/message-probes/MSGPEER.exe";$arguments+=@('-ExternalNativePeer',"`"$peer`"")}
+   if($kind -eq 'cross'){$arguments+=@('-CrossWorkerCoordinator',"`"$coordinator`"")}
+   elseif($kind -ne 'local'){$peer=Join-Path $repo "build/.ninja/msvc-$kind-release/message-probes/MSGPEER.exe";$arguments+=@('-ExternalNativePeer',"`"$peer`"")}
    Run-Owned $name $pwsh $arguments 120
    if(!(Test-Path "$root/$name/exit.txt") -or (Get-Content "$root/$name/exit.txt").Trim() -ne '0'){throw "Missing actual result: $name"}
+   if($kind -eq 'local' -and ((Get-FileHash "$root/$name/MSGSEND.EXE").Hash -ne 'B0692BB2A0948B2AAE4C4E98E703CEF39200C8FFEEABFFF8AA9038DC9CDF86BB' -or
+      (Get-FileHash "$root/$name/MSGRECV.EXE").Hash -ne '356AB86E785A1DF9F137B77D60B0D606CC450010F24F95729F44C99F9534DEF8')){throw 'Default authored NE images changed from P14'}
   }}
  }
- @{passed=$true;buildOnly=[bool]$BuildOnly;cases=$(if($BuildOnly){0}else{9});start=$started.ToString('o');end=[DateTime]::UtcNow.ToString('o')}|ConvertTo-Json|Set-Content "$root/result.json"
+ @{passed=$true;buildOnly=[bool]$BuildOnly;crossWorkers=[bool]$CrossWorkers;cases=$(if($BuildOnly){0}elseif($CrossWorkers){6}else{9});start=$started.ToString('o');end=[DateTime]::UtcNow.ToString('o')}|ConvertTo-Json|Set-Content "$root/result.json"
 }catch{
  @{passed=$false;error=$_.ToString();start=$started.ToString('o');end=[DateTime]::UtcNow.ToString('o')}|ConvertTo-Json|Set-Content "$root/result.json"
  Write-Error $_;exit 1

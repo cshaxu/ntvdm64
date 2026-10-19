@@ -10,6 +10,16 @@ target_link_libraries(wow_message_external_peer PRIVATE user32)
 set_target_properties(wow_message_external_peer PROPERTIES
   OUTPUT_NAME MSGPEER RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/message-probes")
 if(NTVDM_ARCHITECTURE STREQUAL "x86")
+  add_library(wow_message_cross_host SHARED EXCLUDE_FROM_ALL
+    "${CMAKE_SOURCE_DIR}/tests/observation/wow_message_peer.c")
+  target_compile_definitions(wow_message_cross_host PRIVATE
+    M4_STRUCTURES MESSAGE_CROSS_WORKER _CRT_SECURE_NO_WARNINGS)
+  target_compile_options(wow_message_cross_host PRIVATE /O2 /W4 /WX)
+  target_link_options(wow_message_cross_host PRIVATE
+    /EXPORT:MessagePeer=_MessagePeer@4 /EXPORT:MessageExtension=_MessageExtension@12)
+  target_link_libraries(wow_message_cross_host PRIVATE user32)
+  set_target_properties(wow_message_cross_host PROPERTIES
+    OUTPUT_NAME MSGHOSTCROSS RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/message-probes")
   add_library(wow_message_host_structured SHARED EXCLUDE_FROM_ALL
     "${CMAKE_SOURCE_DIR}/tests/observation/wow_message_peer.c")
   target_compile_definitions(wow_message_host_structured PRIVATE
@@ -31,6 +41,12 @@ if(NTVDM_ARCHITECTURE STREQUAL "x86")
   set_target_properties(wow_message_external_host PROPERTIES
     OUTPUT_NAME MSGHOST RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/message-probes")
 endif()
+add_executable(wow_cross_worker_probe EXCLUDE_FROM_ALL
+  "${CMAKE_SOURCE_DIR}/tests/observation/wow_cross_worker_probe.c")
+target_compile_options(wow_cross_worker_probe PRIVATE /O2 /W4 /WX)
+target_link_libraries(wow_cross_worker_probe PRIVATE user32)
+set_target_properties(wow_cross_worker_probe PROPERTIES
+  OUTPUT_NAME MSGXHOST RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/message-probes")
 add_executable(wow_message_observer EXCLUDE_FROM_ALL
   "${CMAKE_SOURCE_DIR}/tests/observation/console_startup_observer.c")
 target_include_directories(wow_message_observer PRIVATE "${CMAKE_SOURCE_DIR}/src/ntcon-exe")

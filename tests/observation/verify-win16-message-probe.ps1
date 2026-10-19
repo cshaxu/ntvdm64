@@ -13,12 +13,19 @@ param(
  [switch]$TimeoutPayloadLifetime,
  [switch]$CopyDataProc32,
  [string]$ExternalNativePeer='',
- [string]$NativeHost=''
+ [string]$NativeHost='',
+ [string]$CrossWorkerCoordinator='',
+ [switch]$SharedWorkerControl
 )
 # Entire actual-guest message group. Invoke as an owned hidden background run.
 # No original guest is changed or rebuilt; only independently authored probes.
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
+if($SharedWorkerControl -and !$CrossWorkerCoordinator){throw 'SharedWorkerControl requires the cross-worker negative setup'}
+if($CrossWorkerCoordinator -and (!$NativeHost -or !$StructuredPayloads -or !$ThreadClientView -or
+    $ExternalNativePeer -or $NativeExtension -or $CopyDataProc32 -or $ReplyPayloadLifetime -or $TimeoutPayloadLifetime)){
+ throw 'Cross-worker group requires normal structured/client-view probes and prebuilt native host/coordinator'
+}
 if($ReplyPayloadLifetime -and !$StructuredPayloads){throw 'ReplyPayloadLifetime requires the complete StructuredPayloads group'}
 if($TimeoutPayloadLifetime -and !$ReplyPayloadLifetime){throw 'TimeoutPayloadLifetime requires the complete ReplyPayloadLifetime group'}
 if($CopyDataProc32 -and (!$StructuredPayloads -or $ReplyPayloadLifetime -or $TimeoutPayloadLifetime)){throw 'Proc32 group requires normal structured mode without reply/timeout variants'}
@@ -44,10 +51,12 @@ function Read-GuestReport([string]$path,[string]$name){
  $recordBytes=if($ThreadClientView){40}else{34}
  $signature=if($ThreadClientView){'MSG2'}else{'MSG1'}
  if($StructuredPayloads){$recordBytes+=4;$signature=if($ThreadClientView){'MSG6'}else{'MSG5'}}
+ if($CrossWorkerCoordinator){$recordBytes+=6;$signature='MSG7'}
  if(!$bytes.Length -or $bytes.Length%$recordBytes){throw "Incomplete $name message records"}
  $fields=@('role','phase','errors','task','peerTask','basic','nested','early','posted','same','filtered','threadpost','text','native','destroyed')
  if($ThreadClientView){$fields+=@('clientVersion','clientExpected','clientChecks')}
  if($StructuredPayloads){$fields+=@('structures','copyNested')}
+ if($CrossWorkerCoordinator){$fields+=@('remoteTask','foreignExpected','launchReady')}
  $rows=@()
  for($offset=0;$offset -lt $bytes.Length;$offset+=$recordBytes){
   if([Text.Encoding]::ASCII.GetString($bytes,$offset,4) -ne $signature){throw "Invalid $name signature"}
@@ -69,15 +78,20 @@ try{
   if($ReplyPayloadLifetime){$arguments+='-DM4_REPLY_PAYLOAD'}
   if($TimeoutPayloadLifetime){$arguments+='-DM4_TIMEOUT_PAYLOAD'}
   if($CopyDataProc32){$arguments+='-DM4_COPYDATA_PROC32'}
+  if($CrossWorkerCoordinator){$arguments+='-DCROSS_WORKER'}
   & $assembler @arguments $assembly *> "$root/$role-assemble.txt"
   if($LASTEXITCODE){throw "Independent $role assembly failed"}
  }
  if($NativeHost){
-  foreach($image in @($ExternalNativePeer,$NativeHost)|Where-Object {$_}){
+  foreach($image in @($ExternalNativePeer,$NativeHost,$CrossWorkerCoordinator)|Where-Object {$_}){
    $path=(Resolve-Path $image).Path
    if(!$path.StartsWith((Join-Path $repo 'build/.ninja')+'\',[StringComparison]::OrdinalIgnoreCase)){throw 'External peer/host must come from stable Ninja fixture targets'}
   }
   Copy-Item $NativeHost "$root/MSGHOST.DLL"
+  if($CrossWorkerCoordinator){
+   Copy-Item $CrossWorkerCoordinator "$root/MSGXHOST.EXE"
+   Get-FileHash $CrossWorkerCoordinator,"$PSScriptRoot/wow_cross_worker_probe.c"|Export-Csv -NoTypeInformation "$root/cross-worker-inputs.csv"
+  }
   if($ExternalNativePeer){
   Copy-Item $ExternalNativePeer "$root/MSGPEER.EXE"
   $externalBytes=[IO.File]::ReadAllBytes("$root/MSGPEER.EXE")
@@ -101,7 +115,9 @@ try{
  $scope=New-IsolatedPackageScope $runtime
  $tests=Join-Path $runtime 'tests';$null=New-Item -ItemType Directory $tests -Force
  if($ExternalNativePeer){$scope.Paths+=Join-Path $tests 'MSGPEER.EXE'}
+ if($CrossWorkerCoordinator){$scope.Paths+=Join-Path $tests 'MSGXHOST.EXE'}
  Copy-Item "$root/MSGSEND.EXE","$root/MSGRECV.EXE","$root/MSGHOST.DLL" $tests
+ if($CrossWorkerCoordinator){Copy-Item "$root/MSGXHOST.EXE" $tests}
  if($ExternalNativePeer){Copy-Item "$root/MSGPEER.EXE" $tests;Get-FileHash "$root/MSGPEER.EXE"|Export-Csv -NoTypeInformation "$root/external-peer-input.csv"}
  Get-ChildItem "$runtime/system32" -File|Where-Object Name -in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll','ntw16s32.dll','ntw16s64.dll','W16Style.exe','KRNL386.EXE','USER.EXE','GDI.EXE')|Get-FileHash|Export-Csv -NoTypeInformation "$root/runtime-inputs.csv"
  @{machine='x86';cpu='original SoftPC CCPU40';guest='unchanged original package plus independent NE probes';style=$Win16Style}|ConvertTo-Json|Set-Content "$root/profile.json"
@@ -138,7 +154,10 @@ public static class WowMessageLogonEnvironment {
  $info.EnvironmentVariables.Keys|ForEach-Object {[pscustomobject]@{name=$_;characters=$_.Length+$info.EnvironmentVariables[$_].Length+2}}|Export-Csv -NoTypeInformation "$root/environment-shape.csv"
  $arguments=@("$runtime/system32/run16.exe",$tests,"$root/observer.txt",'--wait')
  if($Win16Style -eq 'Win16'){$arguments+='--win16-style'}elseif($Win16Style -eq 'All'){$arguments+='--win16-style-all'}
- $arguments+=@("$tests/MSGSEND.EXE",'--observation-timeout-ms','60000')
+ if($CrossWorkerCoordinator){
+  $arguments+=@("$tests/MSGXHOST.EXE","$tests/MSGSEND.EXE","$tests/MSGRECV.EXE","$tests/MSGXHOST.TXT","$runtime\system32\ntvdm.exe",$(if($SharedWorkerControl){'1'}else{'0'}))
+ }else{$arguments+="$tests/MSGSEND.EXE"}
+ $arguments+=@('--observation-timeout-ms','60000')
  foreach($argument in $arguments){$info.ArgumentList.Add($argument)}
  $process=[Diagnostics.Process]::Start($info);$null=$process.Handle
  @{pid=$process.Id;start=$process.StartTime.ToUniversalTime().ToString('o');arguments=$arguments;timeoutSeconds=70}|ConvertTo-Json|Set-Content "$root/observer-process.json"
@@ -149,6 +168,7 @@ public static class WowMessageLogonEnvironment {
   if(Test-Path "$tests/$name.BIN"){Copy-Item "$tests/$name.BIN" "$root/$name.bin"}
  }
  if(Test-Path "$tests/MSGPEER-FAIL.txt"){Copy-Item "$tests/MSGPEER-FAIL.txt" "$root/native-failures.txt"}
+ if($CrossWorkerCoordinator -and (Test-Path "$tests/MSGXHOST.TXT")){Copy-Item "$tests/MSGXHOST.TXT" "$root/cross-worker.txt"}
  if($ReplyPayloadLifetime -and (Test-Path "$tests/MSGREPLY.BIN")){Copy-Item "$tests/MSGREPLY.BIN" "$root/MSGREPLY.bin"}
  if($TimeoutPayloadLifetime -and (Test-Path "$tests/MSGTIME.BIN")){Copy-Item "$tests/MSGTIME.BIN" "$root/MSGTIME.bin"}
  $send=Read-GuestReport "$root/MSGSEND.bin" sender
@@ -172,7 +192,13 @@ public static class WowMessageLogonEnvironment {
  }
  $expectedNative=if($NativeExtension){5}else{4}
  if($StructuredPayloads){$expectedNative+=3}
- if(!$last.task -or !$peer.task -or $last.task -eq $peer.task -or $last.peerTask -ne $peer.task -or
+ $identityOk=if($CrossWorkerCoordinator){
+  $last.remoteTask -eq $peer.task -and $peer.remoteTask -eq $last.task -and
+  $last.foreignExpected -ne 0 -and $peer.foreignExpected -ne 0 -and
+  $last.peerTask -eq $last.foreignExpected -and $peer.peerTask -eq $peer.foreignExpected -and
+  $last.launchReady -eq 1 -and $peer.launchReady -eq 0
+ }else{$last.task -ne $peer.task -and $last.peerTask -eq $peer.task}
+ if(!$last.task -or !$peer.task -or !$identityOk -or
     @($send|Where-Object task -ne $last.task).Count -or @($receive|Where-Object task -ne $peer.task).Count -or
     $last.role -ne 0 -or $peer.role -ne 1 -or $last.nested -ne 2 -or $last.same -ne 2 -or
     $last.early -ne 1 -or $last.posted -ne 1 -or $last.filtered -ne 1 -or $last.threadpost -ne 1 -or
@@ -189,11 +215,13 @@ public static class WowMessageLogonEnvironment {
  $nativeBytes=if($StructuredPayloads){52}else{48}
  if($CopyDataProc32){$nativeBytes+=8}
  if($ExternalNativePeer){$nativeBytes+=8}
+ if($CrossWorkerCoordinator){$nativeBytes+=4}
  if($bytes.Length -ne $nativeBytes -or [Text.Encoding]::ASCII.GetString($bytes,0,4) -ne 'NMSG'){throw 'Missing native peer report'}
  $names=@('signature','errors','pid','senderThread','receiverThread','nativeThread','received','nested','replied','text','exit','windowAlive');$nativeReport=[ordered]@{}
  if($StructuredPayloads){$names+='structures'}
  if($CopyDataProc32){$names+=@('proc32Fresh','proc32Borrowed')}
  if($ExternalNativePeer){$names+=@('externalPid','externalBits')}
+ if($CrossWorkerCoordinator){$names+='receiverPid'}
  for($i=0;$i -lt $names.Count;$i++){$nativeReport[$names[$i]]=[BitConverter]::ToUInt32($bytes,4*$i)}
  $nativeReport|ConvertTo-Json|Set-Content "$root/native.json"
  if($ExternalNativePeer -and
@@ -230,11 +258,29 @@ public static class WowMessageLogonEnvironment {
      $extension.yield -ne 1 -or $extension.directedYield -ne 1 -or $extension.invalidSizeRejected -ne 1){throw 'Native callback/yield/original-argument identity mismatch'}
  }
  $trace=Get-Content "$root/lifetime.txt" -Raw
- foreach($task in @($last.task,$peer.task)){
+ if($CrossWorkerCoordinator){
+  $control=Get-Content "$root/cross-worker.txt" -Raw
+  foreach($role in @('sender','receiver')){
+   $rows=[regex]::Matches($control,'(?m)^worker role='+$role+' pid=(\d+) tid=(\d+) hwnd=([0-9A-F]+) created=([0-9A-F]{16}) image=(.+)\r?$')
+   $pidValue=if($role -eq 'sender'){$nativeReport.pid}else{$nativeReport.receiverPid}
+   $threadValue=if($role -eq 'sender'){$nativeReport.senderThread}else{$nativeReport.receiverThread}
+   if($rows.Count -ne 1 -or [uint32]$rows[0].Groups[1].Value -ne $pidValue -or
+      [uint32]$rows[0].Groups[2].Value -ne $threadValue -or
+      $rows[0].Groups[5].Value.TrimEnd("`r") -ne "$runtime\system32\ntvdm.exe" -or
+      [regex]::Matches($control,'(?m)^worker-exited role='+$role+' pid='+$pidValue+' exit=0 windowAlive=0\r?$').Count -ne 1){
+    throw 'Actual cross-worker HWND/process/thread/normal-exit identity mismatch'
+   }
+  }
+  if(!$nativeReport.receiverPid -or $nativeReport.receiverPid -eq $nativeReport.pid -or
+     $control -notmatch 'PASS cross-worker normal process retirement' -or
+     [regex]::Matches($control,'(?m)^launch role=(?:sender|receiver) returned_pid=\d+ flags=00000800\r?$').Count -ne 2){throw 'Two genuine separate-WOW launches were not verified'}
+  @(@{worker=$nativeReport.pid;task=$last.task;foreignGetWindowTask=$last.peerTask;expectedShell=$last.foreignExpected;remoteTask=$last.remoteTask},
+    @{worker=$nativeReport.receiverPid;task=$peer.task;foreignGetWindowTask=$peer.peerTask;expectedShell=$peer.foreignExpected;remoteTask=$peer.remoteTask})|ConvertTo-Json|Set-Content "$root/worker-task-pairs.json"
+ }else{foreach($task in @($last.task,$peer.task)){
   $identity='{0:X8}' -f [int]$task
   if([regex]::Matches($trace,'(?m)^'+$nativeReport.pid+' TaskRetirement .*task='+$identity+' stage=complete status=0\r?$').Count -ne 1){throw 'Each actual task must retire exactly once in the verified worker'}
- }
- 'PASS actual USER16 two-task same-worker send/nesting/reply/post/filter/quit/string-copyback, native peer both directions and normal task retirement'|Set-Content "$root/result.txt"
+ }}
+ $(if($CrossWorkerCoordinator){'PASS actual USER16 cross-worker messages, local shell fallback, exact PID/task pairs and normal separate-process retirement'}else{'PASS actual USER16 two-task same-worker send/nesting/reply/post/filter/quit/string-copyback, native peer both directions and normal task retirement'})|Set-Content "$root/result.txt"
  if($NativeExtension){'PASS actual original generic thunk -> public WOWCallback16/Ex -> guest -> sibling send; WOWYield16/DirectedYield16; invalid Ex arguments; normal task retirement'|Set-Content "$root/extension-result.txt"}
  if($StructuredPayloads){
   @{families=@('MINMAXINFO','WINDOWPOS','COPYDATA');directions=@('Win16-to-Win16','Win16-to-native','native-to-Win16');guestCallbacks=@($last.structures,$peer.structures);nativeChecks=$nativeReport.structures;nestedMinmaxStackCopyback=$true;nestedCopydataFarIdentity=@($last.copyNested,$peer.copyNested);converterIdentity='Package/source manifests, not inferred by this probe';originalGuestChanged=$false;limits='Named synchronous paths only; not physical memory movement, all procedure branches, allocation-failure retirement or all M4'}|ConvertTo-Json|Set-Content "$root/structures-result.json"
@@ -243,7 +289,7 @@ public static class WowMessageLogonEnvironment {
  if($ReplyPayloadLifetime){'PASS actual Win16 consumed COPYDATA before early reply; sender-owned header/payload protected and unreadable before receiver continuation; original unthunk/normal retirement completed; native captured-buffer lifetime not inferred'|Set-Content "$root/reply-payload-result.txt"}
  if($TimeoutPayloadLifetime){'PASS actual native SendMessageTimeout status0/error1460 after live Win16 receiver entered; owned input protected/unreadable before continuation; original unthunk and normal task retirement; not native API success or all M4'|Set-Content "$root/timeout-payload-result.txt"}
  if($ReplyPayloadLifetime){foreach($input in Import-Csv "$root/reply-source-inputs.csv"){if((Get-FileHash $input.Path).Hash -ne $input.Hash){throw 'Reply payload test source changed'}}}
- @{externalProcess=$(if($ExternalNativePeer){$nativeReport.externalPid}else{'not exercised'});unproved='Cross-worker, implicit focus receive, full converted structures, SMTO_BLOCK and receiver death during pending send remain S4 obligations; ordinary mode does not exercise an external native process';largeEnvironment='Known original guest limitation not repaired by logon-block acceptance'}|ConvertTo-Json|Set-Content "$root/limits.json"
+ @{crossWorker=[bool]$CrossWorkerCoordinator;externalProcess=$(if($ExternalNativePeer){$nativeReport.externalPid}else{'not exercised'});unproved='Implicit focus receive, full converted structures, SMTO_BLOCK and receiver death during pending send remain S4 obligations; ordinary mode does not exercise cross-worker or an external native process';largeEnvironment='Known original guest limitation not repaired by logon-block acceptance'}|ConvertTo-Json|Set-Content "$root/limits.json"
  0|Set-Content "$root/exit.txt"
 }catch{$_|Out-String|Set-Content "$root/failure.txt";1|Set-Content "$root/exit.txt";exit 1}
 finally{
