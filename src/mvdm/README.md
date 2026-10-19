@@ -1,5 +1,35 @@
 # mvdm
 
+MVDM-HOST-DIV-344 (bounded S4 P13 delivery) registers the COPYDATA/caller group
+against pinned OpenNT5c5b979ec08c17d3ca2eb70e8aad62d26515d01c, base/mvdm/wow32.
+Original per-file hashes/paths are retained in P12 required-root-foundations-r1
+source-registers evidence and its canonical topology manifest. The affected
+original owners are wdde.c/.h, wmdisp32.c/.h, wmsg16.c, wumsg.c/.h, walias.h,
+wudlg.c, wowhooks.c/.h and wstruc.c; no guest owner is modified.
+Retain conversion/layout/dispatch/list algorithms. Add checked acquisition and
+rollback through the original unthunk, an empty-list delete guard, call-owned
+COPYDATA scratch, explicit synchronous fFree initialization, rejection/status
+and finalizer hooks. MSGPARAMEX gains only an appended host-private success
+bit: a NULL HWND is not conversion failure. Existing member/PARM16 offsets and
+guest data formats stay unchanged; no assembly/worker/wire consumer owns it.
+Temporary conversion flags/Hook identity and filter recursion scratch belong
+to their native thread's nested call stack. Map the existing private variables
+to TLS and restore scoped values; do not make the shared CPDATA list TLS.
+Normal original cleanup/order stays in the original caller; new exception-only
+finalization mechanics live in wow32-dll under ADAPTER-WOW-095.
+Direct original composition exposes ignored allocation failure, missing
+initialization and unpaired unwind; neither native USER nor a facade can fix
+those omitted owner branches. Source-proven host correction is permanently
+authorized. No later source unit is imported; comparative Windows2000 evidence
+corroborates the two TRUE initializers only. Initial budget is guard/state/scope
+changes in these existing owners, at most300 executable added/removed lines;
+retain full functions, no algorithm crop, guest/public ABI or scheduler change.
+Review exact-body negatives, all fault stages, normal/nested/Proc32 and actual
+guest/caller lifetime tests as one group before coherent publication. Scope,
+source identities, limits and final accounting are in the active S4 audit.
+P13's conservative nontrivial changed-line upper bound is285 (budget300).
+Model27 and actual Proc32/whole caller gates pass; this is not all M4 closure.
+
 MVDM-HOST-DIV-343 registers a definition-only name binding in
 wow32/wcall16.c::CallBack16, pinned to OpenNT
 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c, original SHA256

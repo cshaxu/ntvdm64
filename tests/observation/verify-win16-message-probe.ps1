@@ -10,7 +10,8 @@ param(
  [switch]$ThreadClientView,
  [switch]$StructuredPayloads,
  [switch]$ReplyPayloadLifetime,
- [switch]$TimeoutPayloadLifetime
+ [switch]$TimeoutPayloadLifetime,
+ [switch]$CopyDataProc32
 )
 # Entire actual-guest message group. Invoke as an owned hidden background run.
 # No original guest is changed or rebuilt; only independently authored probes.
@@ -18,6 +19,7 @@ $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 if($ReplyPayloadLifetime -and !$StructuredPayloads){throw 'ReplyPayloadLifetime requires the complete StructuredPayloads group'}
 if($TimeoutPayloadLifetime -and !$ReplyPayloadLifetime){throw 'TimeoutPayloadLifetime requires the complete ReplyPayloadLifetime group'}
+if($CopyDataProc32 -and (!$StructuredPayloads -or $ReplyPayloadLifetime -or $TimeoutPayloadLifetime)){throw 'Proc32 group requires normal structured mode without reply/timeout variants'}
 $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){
  throw 'Fresh build-owned evidence required'
@@ -56,6 +58,7 @@ try{
   if($StructuredPayloads){$arguments+='-DM4_STRUCTURES'}
   if($ReplyPayloadLifetime){$arguments+='-DM4_REPLY_PAYLOAD'}
   if($TimeoutPayloadLifetime){$arguments+='-DM4_TIMEOUT_PAYLOAD'}
+  if($CopyDataProc32){$arguments+='-DM4_COPYDATA_PROC32'}
   & $assembler @arguments $assembly *> "$root/$role-assemble.txt"
   if($LASTEXITCODE){throw "Independent $role assembly failed"}
  }
@@ -64,6 +67,7 @@ try{
   $nativeDefines=@();if($StructuredPayloads){$nativeDefines+='/DM4_STRUCTURES'}
   if($ReplyPayloadLifetime){$nativeDefines+='/DM4_REPLY_PAYLOAD'}
   if($TimeoutPayloadLifetime){$nativeDefines+='/DM4_TIMEOUT_PAYLOAD'}
+  if($CopyDataProc32){$nativeDefines+='/DM4_COPYDATA_PROC32'}
   & $CompilerDriver cl.exe /nologo /LD /MT /O2 /W4 /WX /D_CRT_SECURE_NO_WARNINGS @nativeDefines "/Fo$root/peer.obj" $native /link "/OUT:$root/MSGHOST.DLL" "/IMPLIB:$root/MSGHOST.lib" /EXPORT:MessagePeer=_MessagePeer@4 /EXPORT:MessageExtension=_MessageExtension@12 user32.lib *> "$root/native-build.txt"
   if($LASTEXITCODE){throw 'Native peer build failed'}
  }finally{Pop-Location}
@@ -118,6 +122,7 @@ public static class WowMessageLogonEnvironment {
  foreach($name in @('MSGSEND','MSGRECV','MSGHOST','MSGEXT')){
   if(Test-Path "$tests/$name.BIN"){Copy-Item "$tests/$name.BIN" "$root/$name.bin"}
  }
+ if(Test-Path "$tests/MSGPEER-FAIL.txt"){Copy-Item "$tests/MSGPEER-FAIL.txt" "$root/native-failures.txt"}
  if($ReplyPayloadLifetime -and (Test-Path "$tests/MSGREPLY.BIN")){Copy-Item "$tests/MSGREPLY.BIN" "$root/MSGREPLY.bin"}
  if($TimeoutPayloadLifetime -and (Test-Path "$tests/MSGTIME.BIN")){Copy-Item "$tests/MSGTIME.BIN" "$root/MSGTIME.bin"}
  $send=Read-GuestReport "$root/MSGSEND.bin" sender
@@ -156,15 +161,18 @@ public static class WowMessageLogonEnvironment {
  }
  $bytes=[IO.File]::ReadAllBytes("$root/MSGHOST.bin")
  $nativeBytes=if($StructuredPayloads){52}else{48}
+ if($CopyDataProc32){$nativeBytes+=8}
  if($bytes.Length -ne $nativeBytes -or [Text.Encoding]::ASCII.GetString($bytes,0,4) -ne 'NMSG'){throw 'Missing native peer report'}
  $names=@('signature','errors','pid','senderThread','receiverThread','nativeThread','received','nested','replied','text','exit','windowAlive');$nativeReport=[ordered]@{}
  if($StructuredPayloads){$names+='structures'}
+ if($CopyDataProc32){$names+=@('proc32Fresh','proc32Borrowed')}
  for($i=0;$i -lt $names.Count;$i++){$nativeReport[$names[$i]]=[BitConverter]::ToUInt32($bytes,4*$i)}
  $nativeReport|ConvertTo-Json|Set-Content "$root/native.json"
  if($nativeReport.errors -or !$nativeReport.pid -or $nativeReport.exit -or $nativeReport.windowAlive -or
     $nativeReport.received -ne 4 -or $nativeReport.nested -ne 1 -or $nativeReport.replied -ne 1 -or $nativeReport.text -ne 1 -or
     @(@($nativeReport.senderThread,$nativeReport.receiverThread,$nativeReport.nativeThread)|Where-Object {$_}|Sort-Object -Unique).Count -ne 3){throw 'Native peer identity/receive/result/lifetime failure'}
  if($StructuredPayloads -and $nativeReport.structures -ne 6){throw 'Both native directions did not complete all three structure families'}
+ if($CopyDataProc32 -and ($nativeReport.proc32Fresh -ne 1 -or $nativeReport.proc32Borrowed -ne 1)){throw 'Actual original Proc32 fresh/active-borrow paths incomplete'}
  if($ReplyPayloadLifetime){
   . "$PSScriptRoot/wow_reply_payload_report.ps1"
   $replyPayload=Read-WowReplyPayloadReport "$root/MSGREPLY.bin"
@@ -196,8 +204,9 @@ public static class WowMessageLogonEnvironment {
  'PASS actual USER16 two-task same-worker send/nesting/reply/post/filter/quit/string-copyback, native peer both directions and normal task retirement'|Set-Content "$root/result.txt"
  if($NativeExtension){'PASS actual original generic thunk -> public WOWCallback16/Ex -> guest -> sibling send; WOWYield16/DirectedYield16; invalid Ex arguments; normal task retirement'|Set-Content "$root/extension-result.txt"}
  if($StructuredPayloads){
-  @{families=@('MINMAXINFO','WINDOWPOS','COPYDATA');directions=@('Win16-to-Win16','Win16-to-native','native-to-Win16');guestCallbacks=@($last.structures,$peer.structures);nativeChecks=$nativeReport.structures;nestedMinmaxStackCopyback=$true;nestedCopydataFarIdentity=@($last.copyNested,$peer.copyNested);originalConvertersUnchanged=$true;originalGuestChanged=$false;limits='Synchronous and named original CallWindowProc paths only; not physical memory movement, all native procedure-thunk provenance branches, interrupted/exceptional allocation retirement or all M4'}|ConvertTo-Json|Set-Content "$root/structures-result.json"
+  @{families=@('MINMAXINFO','WINDOWPOS','COPYDATA');directions=@('Win16-to-Win16','Win16-to-native','native-to-Win16');guestCallbacks=@($last.structures,$peer.structures);nativeChecks=$nativeReport.structures;nestedMinmaxStackCopyback=$true;nestedCopydataFarIdentity=@($last.copyNested,$peer.copyNested);converterIdentity='Package/source manifests, not inferred by this probe';originalGuestChanged=$false;limits='Named synchronous paths only; not physical memory movement, all procedure branches, allocation-failure retirement or all M4'}|ConvertTo-Json|Set-Content "$root/structures-result.json"
  }
+ if($CopyDataProc32){@{fresh=$nativeReport.proc32Fresh;activeBorrow=$nativeReport.proc32Borrowed;nativeCallerThread=$nativeReport.senderThread;ordinaryStructures=$nativeReport.structures;guestNormalRetirement=$true;limits='Original GetWindowLong/CallWindowProc native thunk; exact pointer identity additionally checked by source-body fixture, not inferred from native sender capture'}|ConvertTo-Json|Set-Content "$root/copydata-proc32-result.json"}
  if($ReplyPayloadLifetime){'PASS actual Win16 consumed COPYDATA before early reply; sender-owned header/payload protected and unreadable before receiver continuation; original unthunk/normal retirement completed; native captured-buffer lifetime not inferred'|Set-Content "$root/reply-payload-result.txt"}
  if($TimeoutPayloadLifetime){'PASS actual native SendMessageTimeout status0/error1460 after live Win16 receiver entered; owned input protected/unreadable before continuation; original unthunk and normal task retirement; not native API success or all M4'|Set-Content "$root/timeout-payload-result.txt"}
  if($ReplyPayloadLifetime){foreach($input in Import-Csv "$root/reply-source-inputs.csv"){if((Get-FileHash $input.Path).Hash -ne $input.Hash){throw 'Reply payload test source changed'}}}

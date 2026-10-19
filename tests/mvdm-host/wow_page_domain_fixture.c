@@ -943,6 +943,10 @@ done:
     if (!DestroyWindow(old)) result = FALSE;
     return result;
 }
+static LRESULT CALLBACK managed_reuse_reservation(int code, WPARAM wp, LPARAM lp)
+{
+    return CallNextHookEx(NULL, code, wp, lp);
+}
 static void verify_managed_slot_reuse(wow_task_order_thread *thread)
 {
     wow_user_object_table *objects = thread->ppi->objects;
@@ -950,6 +954,10 @@ static void verify_managed_slot_reuse(wow_task_order_thread *thread)
     CREATESTRUCTA request = {0};
     WW words = {0};
     unsigned mode, before = borrow_errors;
+    /* The caller's actual test window keeps native GUI/IME lifetime open.
+     * create_bound allocates a CBT Hook before its HWND; free a same-role
+     * Hook last so it does not consume the chosen old window slot. This is
+     * fixture setup only; real HWND-generation reuse remains mandatory. */
     BORROW_CHECK(wow_standard_class_describe("BUTTON", &descriptor));
     request.lpszClass = "BUTTON"; request.lpszName = "Managed reuse";
     request.hInstance = GetModuleHandle(NULL); request.style = WS_POPUP;
@@ -961,18 +969,24 @@ static void verify_managed_slot_reuse(wow_task_order_thread *thread)
         ULONG retired = 0;
         unsigned attempts = 0;
         ULONGLONG started;
+        HHOOK reservation = mode ? NULL : SetWindowsHookExA(WH_CBT,
+            managed_reuse_reservation, NULL, GetCurrentThreadId());
+        BORROW_CHECK(mode || reservation != NULL);
+        if (!mode && !reservation) continue;
         old = CreateWindowExA(0, "STATIC", "Observed before creation", WS_POPUP,
             0, 0, 24, 24, NULL, NULL, GetModuleHandle(NULL), NULL);
         BORROW_CHECK(old != NULL);
-        if (!old) continue;
+        if (!old) { UnhookWindowsHookEx(reservation); continue; }
         old_full = (ULONG)(ULONG_PTR)old;
         BORROW_CHECK(wow_user_window_project_graph(&old, 1));
         held = mvdm_softpc_wow_page_domain_borrow_window(old_full);
         BORROW_CHECK(held != 0);
-        if (!held) { DestroyWindow(old); continue; }
+        if (!held) { DestroyWindow(old); UnhookWindowsHookEx(reservation); continue; }
         BORROW_CHECK(mvdm_softpc_wow_page_domain_exchange_window_word(
             held, 0, 0xabcdef12u, &previous));
         BORROW_CHECK(DestroyWindow(old));
+        if (reservation) BORROW_CHECK(UnhookWindowsHookEx(reservation));
+        reservation = NULL;
         started = GetTickCount64();
         while (attempts < 131072u && GetTickCount64() - started < 15000u) {
             ++attempts;
@@ -985,9 +999,13 @@ static void verify_managed_slot_reuse(wow_task_order_thread *thread)
                 EnumDesktopWindows(GetThreadDesktop(GetCurrentThreadId()),trace_reuse_tree,old_full);
             if (LOWORD(full) == LOWORD(old_full) && full != old_full) break;
             BORROW_CHECK(DestroyWindow(window)); window = NULL;
-            if (!rearm_observed_reuse_source(&old_full, &held, 0xabcdef12u)) {
+            reservation = mode ? NULL : SetWindowsHookExA(WH_CBT,
+                managed_reuse_reservation, NULL, GetCurrentThreadId());
+            if ((!mode && !reservation) || !rearm_observed_reuse_source(&old_full, &held, 0xabcdef12u)) {
                 BORROW_CHECK(FALSE); break;
             }
+            if (reservation) BORROW_CHECK(UnhookWindowsHookEx(reservation));
+            reservation = NULL;
         }
         BORROW_CHECK(window && LOWORD(full) == LOWORD(old_full) && full != old_full);
         if (window && LOWORD(full) == LOWORD(old_full) && full != old_full) {
@@ -1015,6 +1033,7 @@ static void verify_managed_slot_reuse(wow_task_order_thread *thread)
                 if (retired) BORROW_CHECK(mvdm_softpc_wow_page_domain_release_retained_window(retired));
             }
         }
+        if (reservation) BORROW_CHECK(UnhookWindowsHookEx(reservation));
         if (window) BORROW_CHECK(DestroyWindow(window));
         BORROW_CHECK(wow_user_window_project_graph(&desktop, 1));
         if (fresh) BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(fresh));
@@ -1236,7 +1255,6 @@ static void verify_native_class_creation(wow_class_lookup_context *classes, ULON
         BORROW_CHECK(UserRegisterWowHandlers(&saved_callbacks,&outputs) != 0);
         return;
     }
-    verify_managed_slot_reuse(&thread);
     BORROW_CHECK(wow_standard_class_describe("BUTTON", &native_class));
     request.lpszClass = "BUTTON"; request.lpszName = "Native original";
     request.hInstance = GetModuleHandle(NULL); request.style = WS_POPUP;
@@ -1245,6 +1263,11 @@ static void verify_native_class_creation(wow_class_lookup_context *classes, ULON
     BORROW_CHECK(window != NULL);
     if (window) {
         BORROW_CHECK(selected_native_control(window));
+        /* Keep the actual test window live instead of repeatedly ending the
+         * thread's native GUI/IME lifetime before the reuse witness. Terminal
+         * children need owner setup, not another unrelated reuse matrix. */
+        if (!native_failure_signal && !class_failure_signal && !callback_cache_signal)
+            verify_managed_slot_reuse(&thread);
         {
             HWND peer = wow_window_create_boundA(&thread, native_class.atom,
                 &request, &words, NULL);

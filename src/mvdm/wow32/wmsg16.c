@@ -15,6 +15,8 @@
 #include "precomp.h"
 #pragma hdrstop
 #include "wmtbl32.h"
+/* DIVERGENCE(MVDM-HOST-DIV-344): call-owned rollback through original unthunk. */
+#include "wow_message_lifetime.h"
 
 MODNAME(wmsg16.c);
 
@@ -120,6 +122,9 @@ HWND FASTCALL ThunkMsg16(LPMSGPARAMEX lpmpex)
     INT iClass;
     WORD wMsg = lpmpex->Parm16.WndProc.wMsg;
 
+    /* DIVERGENCE(MVDM-HOST-DIV-344): distinguish failure from thread HWND0. */
+    lpmpex->fThunkSucceeded = FALSE;
+
     lpmpex->uMsg = wMsg;
     lpmpex->uParam = INT32(lpmpex->Parm16.WndProc.wParam);  // Sign extend
     lpmpex->lParam =lpmpex->Parm16.WndProc.lParam;
@@ -153,6 +158,8 @@ HWND FASTCALL ThunkMsg16(LPMSGPARAMEX lpmpex)
     }
 
     WOW32ASSERTMSG(f, "    WARNING Will Robinson: 16-bit message thunk failure\n");
+
+    lpmpex->fThunkSucceeded = f;
 
     return (f) ? lpmpex->hwnd : (HWND)NULL;
 
@@ -985,39 +992,69 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         PCOPYDATASTRUCT lpCDS32 = NULL;
         PCPDATA pTemp;
         HWND16 hwnd16 = lpmpex->Parm16.WndProc.hwnd;
+        DWORD data16, cbData, dwData;
+
+        /* DIVERGENCE(MVDM-HOST-DIV-344): this call owns only its acquisitions;
+         * native-procedure forwarding can borrow an already received pair. */
+        ZeroMemory(&lpmpex->MsgBuffer->copydata, sizeof(lpmpex->MsgBuffer->copydata));
+        if (!hwnd16 || !lParam) return FALSE;
 
         lpmpex->uParam = (LONG) HWND32(wParam);
 
-        if (fWhoCalled == WOWDDE_POSTMESSAGE) {
+        pTemp = CopyDataFindData32(hwnd16, wParam, lParam);
+        if (pTemp) {
+            lpCDS32 = (PCOPYDATASTRUCT)pTemp->Mem32;
+        }
+        else {
+          __try {
             GETMISCPTR(lParam, lpCDS16);
+            if (!lpCDS16) goto CopyData16Failed;
+            dwData = lpCDS16->dwData;
+            cbData = lpCDS16->cbData;
+            data16 = lpCDS16->lpData;
+            FREEMISCPTR(lpCDS16);
             if (lpCDS32 = (PCOPYDATASTRUCT) malloc_w(sizeof(COPYDATASTRUCT))) {
-                lpCDS32->dwData = lpCDS16->dwData;
-                if (lpCDS32->cbData = lpCDS16->cbData) {
+                lpmpex->MsgBuffer->copydata.header = (DWORD)lpCDS32;
+                lpmpex->MsgBuffer->copydata.flags = WOW_COPY_HEADER;
+                lpCDS32->dwData = dwData;
+                if (lpCDS32->cbData = cbData) {
                     if (lpMem32 = malloc_w(lpCDS32->cbData)) {
-                        GETMISCPTR(lpCDS16->lpData, lpMem16);
+                        lpmpex->MsgBuffer->copydata.data = (DWORD)lpMem32;
+                        lpmpex->MsgBuffer->copydata.flags |= WOW_COPY_DATA;
+                        if (!data16) goto CopyData16Failed;
+                        GETMISCPTR(data16, lpMem16);
+                      __try {
+                        if (!lpMem16) goto CopyData16Failed;
                         if (lpMem16) {
                             RtlCopyMemory(lpMem32, lpMem16, lpCDS32->cbData);
-                            CopyDataAddNode (hwnd16, wParam, (DWORD) lpMem16, (DWORD) lpMem32, COPYDATA_16);
+                            if (!CopyDataAddNode (hwnd16, wParam, data16, (DWORD) lpMem32, COPYDATA_16)) goto CopyData16Failed;
+                            lpmpex->MsgBuffer->copydata.flags |= WOW_COPY_DATA_NODE;
                         }
+                      } __finally {
                         FREEMISCPTR(lpMem16);
+                      }
                     }
+                    else goto CopyData16Failed;
                     lpCDS32->lpData = lpMem32;
                 }
                 else {
                     lpCDS32->lpData = NULL;
                 }
             }
-            FREEMISCPTR(lpCDS16);
-
-            CopyDataAddNode (hwnd16, wParam, (DWORD) lParam, (DWORD) lpCDS32, COPYDATA_16);
-        }
-        else {
-            pTemp = CopyDataFindData32 (hwnd16, wParam, lParam);
-            lpCDS32 = (PCOPYDATASTRUCT) pTemp->Mem32;
-            WOW32ASSERTMSGF(lpCDS32, ("WOW::WM_COPYDATA:Can't locate lpCDS32\n"));
+            else goto CopyData16Failed;
+            if (!CopyDataAddNode (hwnd16, wParam, (DWORD) lParam, (DWORD) lpCDS32, COPYDATA_16 | COPYDATA_HEADER)) goto CopyData16Failed;
+            lpmpex->MsgBuffer->copydata.flags |= WOW_COPY_HEADER_NODE;
+          } __finally {
+            if (AbnormalTermination()) wow_message_unwind16(lpmpex);
+          }
         }
 
         *plParamNew = (LONG)lpCDS32;
+        break;
+CopyData16Failed:
+        wow_message_unwind16(lpmpex);
+        SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+        return FALSE;
         }
         break;
 
@@ -1310,23 +1347,19 @@ VOID FASTCALL UnThunkWMMsg16(LPMSGPARAMEX lpmpex)
         break;
 
     case WM_COPYDATA:
-        if (fWhoCalled == WOWDDE_POSTMESSAGE) {
+        {
             HWND16 hwnd16 = lpmpex->Parm16.WndProc.hwnd;
             WORD wParam   = lpmpex->Parm16.WndProc.wParam;
-            LONG lParamNew = lpmpex->lParam;
-
-            if (((PCOPYDATASTRUCT)lParamNew)->lpData) {
-                free_w (((PCOPYDATASTRUCT)lParamNew)->lpData);
-                CopyDataDeleteNode (hwnd16, wParam, (DWORD) ((PCOPYDATASTRUCT)lParamNew)->lpData);
-            }
-
-            if (lParamNew) {
-                free_w ((PVOID)lParamNew);
-                CopyDataDeleteNode (hwnd16, wParam, lParamNew);
-            }
-            else {
-                LOGDEBUG (LOG_ALWAYS, ("WOW::WM_COPYDATA16:Unthunking - lpCDS32 is NULL\n"));
-            }
+            /* DIV-344: captured keys survive failed posting, reply and unwind;
+             * an active borrowed pair has no acquisition bits to release. */
+            DWORD owned = lpmpex->MsgBuffer->copydata.flags;
+            DWORD header = lpmpex->MsgBuffer->copydata.header;
+            DWORD data = lpmpex->MsgBuffer->copydata.data;
+            lpmpex->MsgBuffer->copydata.flags = 0;
+            if (owned & WOW_COPY_DATA_NODE) CopyDataDeleteNode(hwnd16, wParam, data);
+            if (owned & WOW_COPY_HEADER_NODE) CopyDataDeleteNode(hwnd16, wParam, header);
+            if (owned & WOW_COPY_DATA) free_w((PVOID)data);
+            if (owned & WOW_COPY_HEADER) free_w((PVOID)header);
         }
         break;
 

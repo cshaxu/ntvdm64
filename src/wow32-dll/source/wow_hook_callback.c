@@ -94,6 +94,10 @@ LONG WINAPI WU32StdHookProc(INT code, LONG wp, LONG lp, INT index)
     ULONG root_count;
     wow_window_creation_enrollment enrollment = {0};
     wow_user_runtime_thread *runtime;
+    /* ADAPTER-WOW-095: original DefHookProc context is per nested entry. */
+    HOOKPARAMS saved_hook = vHookParams;
+    INT saved_index = viCurrentHookStateDataIndex;
+    BOOL saved_dde = fThunkDDEmsg, saved_who = fWhoCalled;
     if (!wow_task_callback_enter(&task)) return 0;
     __try {
         /* Read identity through the original table owner, not the numerical
@@ -141,6 +145,10 @@ LONG WINAPI WU32StdHookProc(INT code, LONG wp, LONG lp, INT index)
                 else completed = accepted;
             }
         } __finally {
+            vHookParams = saved_hook;
+            viCurrentHookStateDataIndex = saved_index;
+            fThunkDDEmsg = saved_dde;
+            fWhoCalled = saved_who;
             wow_window_creation_finish(&enrollment, completed && result == 0);
             /* Final window/class references still retire before alias
              * collection, including a failed task-scope return. */

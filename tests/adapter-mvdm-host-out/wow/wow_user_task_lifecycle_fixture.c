@@ -10,6 +10,9 @@
 #include "opennt-abi/host-compat/include/wow32_provider_private.h"
 
 #include <stdio.h>
+#ifdef WOW_NATIVE_INDIRECT_FIXTURE
+#include "wow_common_dialog_calls.h"
+#endif
 
 static unsigned errors;
 static unsigned native_direct_calls;
@@ -22,6 +25,65 @@ extern unsigned wow_init_hooks_live, wow_init_hook_failures;
 extern unsigned wow_task_class_publications, wow_task_class_fail_at;
 #define CHECK(value) do { if (!(value)) { ++errors; \
     fprintf(stderr, "FAIL line=%d error=%lu\n", __LINE__, GetLastError()); } } while (0)
+
+/* Native window/callout setup can leave unrelated thread messages queued.
+ * Establish the empty-queue precondition before the hardware-only test;
+ * never remove a pending fixture command/quit to manufacture that state. */
+static void establish_empty_fixture_queue(void)
+{
+    MSG message;
+    unsigned count, before = errors;
+    for (count = 0; count < 64; ++count) {
+        if (!PeekMessageW(&message, NULL, 0, 0, PM_REMOVE | PM_NOYIELD)) break;
+        CHECK(message.message != WM_QUIT &&
+            !(message.message >= WM_APP + 51 && message.message <= WM_APP + 55));
+        fprintf(stderr, "WOW_NATIVE_QUEUE_PREFIX hwnd=%p message=%x wp=%lx lp=%lx\n",
+            message.hwnd, message.message, (ULONG)message.wParam, (ULONG)message.lParam);
+        if (message.hwnd) DispatchMessageW(&message);
+    }
+    CHECK(count < 64);
+    fprintf(stderr, "WOW_NATIVE_QUEUE_PRECONDITION errors=%u drained=%u own_preserved=1\n",
+        errors - before, count);
+}
+
+/* GetMessage is unfiltered here: native queued messages precede WM_QUIT.
+ * A deterministic fixture post proves that no implementation may skip them.
+ * Extra messages are processed, not special-cased by an undocumented ID. */
+static void verify_native_quit_order(wow_user_task_lifecycle *owner, BOOL wide,
+    WPARAM exit_code)
+{
+    MSG message;
+    unsigned count, seen = 0, before = errors;
+    UINT sentinel = WM_APP + 56 + (UINT)wide;
+    CHECK(wide ? PostThreadMessageW(GetCurrentThreadId(), sentinel, exit_code + 100, 0) :
+        PostThreadMessageA(GetCurrentThreadId(), sentinel, exit_code + 100, 0));
+    CHECK(wide ? PostThreadMessageW(GetCurrentThreadId(), WM_QUIT, exit_code, 0) :
+        PostThreadMessageA(GetCurrentThreadId(), WM_QUIT, exit_code, 0));
+    for (count = 0; count < 64; ++count) {
+        BOOL result = wide ? wow_user_task_lifecycle_messageW(owner, &message,
+            NULL, 0, 0, PM_REMOVE, TRUE) :
+            wow_user_task_lifecycle_message(owner, &message,
+            NULL, 0, 0, PM_REMOVE, TRUE);
+        if (result <= 0) {
+            CHECK(result == FALSE && message.message == WM_QUIT &&
+                message.wParam == exit_code && seen == 1);
+            break;
+        }
+        CHECK(message.message != WM_QUIT &&
+            !(message.message >= WM_APP + 51 && message.message <= WM_APP + 55));
+        if (message.message == sentinel) {
+            CHECK(!seen && !message.hwnd && message.wParam == exit_code + 100);
+            ++seen;
+        } else {
+            fprintf(stderr, "WOW_NATIVE_QUIT_PREFIX hwnd=%p message=%x wp=%lx lp=%lx\n",
+                message.hwnd, message.message, (ULONG)message.wParam, (ULONG)message.lParam);
+            if (message.hwnd) DispatchMessageW(&message);
+        }
+    }
+    CHECK(count < 64 && seen == 1);
+    fprintf(stderr, "WOW_NATIVE_QUIT_ORDER errors=%u wide=%u sentinel=%u exit=%lu bound=64\n",
+        errors - before, wide, seen, (ULONG)exit_code);
+}
 
 #ifdef WOW_NATIVE_NESTED_FIXTURE
 /* The generated header retains the exact production native-call macros.
@@ -223,6 +285,8 @@ static void verify_sent_only_receive(wow_user_runtime_thread *binding, HWND wind
 {
     MSG message;
     HHOOK hook;
+    unsigned prefix;
+    BOOL quit_retained = FALSE;
     unsigned before = errors;
     hook = SetWindowsHookExW(WH_GETMESSAGE, indirect_getmessage, NULL, GetCurrentThreadId());
     CHECK(hook != NULL);
@@ -242,8 +306,19 @@ static void verify_sent_only_receive(wow_user_runtime_thread *binding, HWND wind
     CHECK(wow_user_runtime_enter(binding));
     binding->thread->host->receive(binding->thread);
     CHECK(wow_user_runtime_leave(binding));
-    CHECK(PeekMessageW(&message, NULL, 0, 0, PM_REMOVE | PM_NOYIELD));
-    CHECK(message.message == WM_QUIT && message.wParam == 41);
+    for (prefix = 0; prefix < 64; ++prefix) {
+        if (!PeekMessageW(&message, NULL, 0, 0, PM_REMOVE | PM_NOYIELD)) break;
+        if (message.message == WM_QUIT) {
+            CHECK(message.wParam == 41);
+            quit_retained = TRUE;
+            break;
+        }
+        CHECK(message.message != WM_APP + 81); /* Already removed exactly once. */
+        fprintf(stderr, "WOW_SENT_ONLY_QUIT_PREFIX hwnd=%p message=%x\n",
+            message.hwnd, message.message);
+        if (message.hwnd) DispatchMessageW(&message);
+    }
+    CHECK(quit_retained && prefix < 64);
     if (hook) CHECK(UnhookWindowsHookEx(hook));
     fprintf(stderr, "WOW_SENT_ONLY_RECEIVE errors=%u posted_hook_once=%ld posted_retained=1 quit_retained=1\n",
         errors - before, indirect_post_peeks);
@@ -499,6 +574,26 @@ typedef struct cross_callout {
     BOOL foreign_first;
 #endif
 } cross_callout;
+
+#ifdef WOW_NATIVE_INDIRECT_FIXTURE
+static UINT_PTR CALLBACK common_dialog_cross_hook(HWND window, UINT message,
+    WPARAM wp, LPARAM lp)
+{
+    (void)window; (void)wp;
+    if (message == WM_INITDIALOG) {
+        FINDREPLACEA *request = (FINDREPLACEA *)lp;
+        cross_callout *test = (cross_callout *)request->lCustData;
+        DWORD_PTR result = 0;
+        /* Real COMMDLG invokes this hook. Raw USER then synchronously calls
+         * the other registered WOW task; only the outer production wrapper
+         * supplies its borrowed execution frame. */
+        CHECK(SendMessageTimeoutA(test->window, WM_APP + 65, 0, 0,
+            SMTO_BLOCK | SMTO_ERRORONEXIT, 2000, &result) != 0);
+        CHECK(result == 114);
+    }
+    return 0;
+}
+#endif
 
 #ifdef WOW_NATIVE_FOREIGN_FIXTURE
 static DWORD WINAPI cross_foreign_sender(void *parameter)
@@ -828,6 +923,41 @@ static void verify_cross_callout(session *owner, wow_user_runtime_thread *bindin
         fprintf(stderr, "WOW_NATIVE_INDIRECT_WAIT errors=%u accepted=%u result=%lu error=%lu owner=1\n",
             errors - before, accepted != 0, (DWORD)result, error);
     }
+    {
+        unsigned iteration, before = errors, delivered = test.delivered;
+        test.sender_window = CreateWindowExW(0, cls.lpszClassName, L"", 0,
+            0, 0, 1, 1, NULL, NULL, cls.hInstance, &test);
+        CHECK(test.sender_window != NULL);
+        /* A native host owner deliberately has no projected WW. This fixture
+         * substitutes page-storage leaves and cannot qualify implicit dialog
+         * enrollment. Actual CCPU/Win16 COMMDLG acceptance covers that path.
+         * The registered calling/receiving WOW tasks and native API are real. */
+        for (iteration = 0; iteration != 2; ++iteration) {
+            FINDREPLACEA request = {0};
+            char find[128] = "needle", replace[128] = "replacement";
+            HWND dialog;
+            request.lStructSize = sizeof(request);
+            request.hwndOwner = test.sender_window;
+            request.lpstrFindWhat = find; request.wFindWhatLen = sizeof(find);
+            request.lpstrReplaceWith = replace; request.wReplaceWithLen = sizeof(replace);
+            request.Flags = FR_DOWN | FR_ENABLEHOOK;
+            request.lpfnHook = common_dialog_cross_hook;
+            request.lCustData = (LPARAM)&test;
+            dialog = iteration ? wow_native_replace_text(&request) : wow_native_find_text(&request);
+            fprintf(stderr, "WOW_NATIVE_COMMDLG_RESULT mode=%u hwnd=%p error=%lu extended=%lu size=%lu owner=%p alive=%u\n",
+                iteration, dialog, GetLastError(), CommDlgExtendedError(),
+                request.lStructSize, request.hwndOwner, IsWindow(request.hwndOwner));
+            CHECK(dialog != NULL && IsWindow(dialog));
+            CHECK(test.delivered == delivered + iteration + 1);
+            CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
+            if (dialog) CHECK(DestroyWindow(dialog));
+            CHECK(!IsWindow(dialog));
+        }
+        fprintf(stderr, "WOW_NATIVE_COMMDLG_CROSS errors=%u modeless=2 cross_callbacks=%u owner=1 retired=2\n",
+            errors - before, test.delivered - delivered);
+        CHECK(DestroyWindow(test.sender_window));
+        test.sender_window = NULL;
+    }
 #endif
 #ifdef WOW_NATIVE_FOREIGN_FIXTURE
     test.foreign_entered = CreateEventW(NULL, TRUE, FALSE, NULL);
@@ -989,7 +1119,7 @@ static void verify_cross_callout(session *owner, wow_user_runtime_thread *bindin
     CloseHandle(test.foreign_entered);
 #else
 #ifdef WOW_NATIVE_INDIRECT_FIXTURE
-    CHECK(test.delivered == 3);
+    CHECK(test.delivered == 5);
 #else
     CHECK(test.delivered == 2);
 #endif
@@ -1307,6 +1437,7 @@ int __cdecl main(int argc,char **argv)
     CHECK(wow_user_task_lifecycle_message(&lifecycle, &message, NULL,
         WM_APP + 55, WM_APP + 55, PM_REMOVE | PM_NOYIELD, FALSE));
     CHECK(message.message == WM_APP + 55 && message.wParam == 55);
+    establish_empty_fixture_queue();
     CHECK(wow_user_runtime_enter(&binding));
     lifecycle.process.W32PF_Flags |= 0x00010000; /* hardware wake only */
     binding.thread->ptdb->nEvents = 0;
@@ -1322,18 +1453,12 @@ int __cdecl main(int argc,char **argv)
     CHECK(message.message == WM_APP + 51 && message.wParam == 73);
     CHECK(!wow_user_task_lifecycle_message(&lifecycle, &message, NULL,
         WM_APP + 51, WM_APP + 51, PM_NOREMOVE | PM_NOYIELD, FALSE));
-    CHECK(PostThreadMessageA(GetCurrentThreadId(), WM_QUIT, 41, 0));
-    CHECK(!wow_user_task_lifecycle_message(&lifecycle, &message, NULL,
-        0, 0, PM_REMOVE, TRUE));
-    CHECK(message.message == WM_QUIT && message.wParam == 41);
+    verify_native_quit_order(&lifecycle, FALSE, 41);
     CHECK(wow_user_task_lifecycle_message(&lifecycle, NULL, NULL,
         0, 0, PM_REMOVE, TRUE) == -1);
     CHECK(GetLastError() == ERROR_INVALID_PARAMETER);
     CHECK(!binding.exclusive_held);
-    CHECK(PostThreadMessageW(GetCurrentThreadId(), WM_QUIT, 42, 0));
-    CHECK(!wow_user_task_lifecycle_messageW(&lifecycle, &message, NULL,
-        0, 0, PM_REMOVE, TRUE));
-    CHECK(message.message == WM_QUIT && message.wParam == 42);
+    verify_native_quit_order(&lifecycle, TRUE, 42);
     CHECK(wow_user_task_lifecycle_messageW(&lifecycle, NULL, NULL,
         0, 0, PM_REMOVE, TRUE) == -1);
     CHECK(GetLastError() == ERROR_INVALID_PARAMETER && !binding.exclusive_held);

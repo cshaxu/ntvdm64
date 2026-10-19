@@ -759,6 +759,7 @@ VOID getmsg16(VPMSG16 vpmsg16, LPMSG lpmsg, LPMSGPARAMEX lpmpex)
         }
 
     } else if (message == WM_SYSCOMMAND || message == WM_COMMAND || message == WM_DROPFILES ||
+                  message == WM_COPYDATA || /* DIVERGENCE(MVDM-HOST-DIV-344). */
                   ( message >= WM_DDE_FIRST && message <= WM_DDE_LAST )) {
         HWND hwnd32;
 
@@ -789,6 +790,8 @@ VOID getmsg16(VPMSG16 vpmsg16, LPMSG lpmsg, LPMSGPARAMEX lpmpex)
     lpmsg->hwnd      = HWND32(hwnd16);
     lpmsg->message   = message;
     lpmsg->wParam    = uParam;
+    /* DIVERGENCE(MVDM-HOST-DIV-344): no converter was required on this path. */
+    lpmpex->fThunkSucceeded = TRUE;
 finish_up:
     lpmsg->lParam    = lParam;
     lpmsg->time      = FETCHLONG(pmsg16->time);

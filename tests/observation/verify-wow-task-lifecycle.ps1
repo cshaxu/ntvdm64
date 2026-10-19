@@ -863,6 +863,13 @@ if ($Case -eq 'start-notification' -and
     throw 'Start notification fixture exited without its successful completion marker'
 }
 if ($null -eq $fixtureExitCode -or $fixtureExitCode -ne 0) { throw "Task cleanup fixture failed: exit=$fixtureExitCode case=$Case" }
+if ($Case -in @('task-lifecycle','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect')) {
+    if (!($fixtureOutput -match '^WOW_NATIVE_QUEUE_PRECONDITION errors=0 drained=\d+ own_preserved=1$') -or
+        !($fixtureOutput -match '^WOW_NATIVE_QUIT_ORDER errors=0 wide=0 sentinel=1 exit=41 bound=64$') -or
+        !($fixtureOutput -match '^WOW_NATIVE_QUIT_ORDER errors=0 wide=1 sentinel=1 exit=42 bound=64$')) {
+        throw 'Native queue precondition or unfiltered ordinary-post/quit ordering was not proved'
+    }
+}
 if ($Case -eq 'menu-cleanup' -and
     !($fixtureOutput -match '^WOW_MENU_CLEANUP errors=0$')) {
     throw 'Menu cleanup fixture exited without its successful completion marker'
@@ -885,6 +892,7 @@ if ($Case -eq 'graph-snapshot' -and
 }
 if ($Case -eq 'native-indirect' -and
     (!($fixtureOutput -match '^WOW_NATIVE_INDIRECT_WAIT errors=0 accepted=1 result=114 error=[0-9]+ owner=1$') -or
+     !($fixtureOutput -match '^WOW_NATIVE_COMMDLG_CROSS errors=0 modeless=2 cross_callbacks=2 owner=1 retired=2$') -or
      !($fixtureOutput -match '^WOW_SENT_ONLY_RECEIVE errors=0 posted_hook_once=1 posted_retained=1 quit_retained=1$'))) {
     throw 'Indirect native notification or sent-only posted/quit preservation failed'
 }

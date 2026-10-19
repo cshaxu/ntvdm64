@@ -175,6 +175,7 @@ ULONG WINAPI wow_user_invoke_thunk(LPFNW32 thunk, PVDMFRAME frame)
     wow_user_borrow_scope scope;
     ULONG result;
     DWORD trace_error = GetLastError();
+    BOOL saved_who_called = fWhoCalled, saved_thunk_dde = fThunkDDEmsg;
     trace_thunk(frame, thunk);
     SetLastError(trace_error);
     if (!wow_user_borrow_enter(&scope))
@@ -182,6 +183,9 @@ ULONG WINAPI wow_user_invoke_thunk(LPFNW32 thunk, PVDMFRAME frame)
     __try {
         result = (*thunk)(frame);
     } __finally {
+        /* ADAPTER-WOW-095: nested original thunks cannot overwrite outer mode. */
+        fWhoCalled = saved_who_called;
+        fThunkDDEmsg = saved_thunk_dde;
         wow_user_borrow_leave_required(&scope);
     }
     trace_error = GetLastError();

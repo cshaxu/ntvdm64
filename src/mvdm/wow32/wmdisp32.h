@@ -56,7 +56,8 @@ typedef struct _M32 {   /* w32 */
 #endif
 } M32, *PM32;
 
-extern  BOOL fThunkDDEmsg;
+/* DIVERGENCE(MVDM-HOST-DIV-344): matches the operation-private TLS owner. */
+extern  __declspec(thread) BOOL fThunkDDEmsg;
 
 #define WIN31_MM_CALCSCROLL  0x10AC   // WM_USER+0xCAC
 

@@ -131,6 +131,8 @@ $providerSupportSources = @(
     (Join-Path $adapterWow 'wow_shell_callback.c'),
     (Join-Path $adapterWow 'wow_task_cleanup_entry.c'),
     (Join-Path $adapterWow 'wow_common_dialog_callback.c'),
+    (Join-Path $adapterWow 'wow_common_dialog_calls.c'),
+      (Join-Path $adapterWow 'wow_message_lifetime.c'),
     (Join-Path $adapterWow 'wow_user_thunk_scope.c'),
     (Join-Path $adapterWow 'wow_user_native_extension.c'),
     (Join-Path $adapterWow 'wow_user_private_access.c'),
@@ -433,6 +435,8 @@ foreach ($source in $sources) {
         $ninja.Add('  cflags = $cflags /DWOW_NATIVE_PROCESS_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_native_process.h')) + '"')
     } elseif ($source -eq 'wudlg.c') {
         $ninja.Add('  cflags = $cflags /DWOW_TITLE_MESSAGE_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_title_policy.h')) + '"')
+    } elseif ($source -eq 'wcommdlg.c') {
+        $ninja.Add('  cflags = $cflags /DWOW_COMMON_DIALOG_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_common_dialog_calls.h')) + '"')
     } elseif ($source -in @('wuser.c','wuser31.c','wuwind.c')) {
         $ninja.Add('  cflags = $cflags /DWOW_STYLE_SCROLL_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_title_policy.h')) + '"')
     } elseif ($source -eq 'wkgthunk.c') {

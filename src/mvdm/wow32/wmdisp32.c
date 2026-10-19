@@ -18,11 +18,14 @@
 #include "precomp.h"
 /* DIVERGENCE(MVDM-HOST-DIV-340): diagnostics belong to the owned observer. */
 #include "wow_user_thunk_scope.h"
+/* DIVERGENCE(MVDM-HOST-DIV-344): selected original rollback finalizers. */
+#include "wow_message_lifetime.h"
 #pragma hdrstop
 
 MODNAME(wmdisp32.c);
 
-BOOL fThunkDDEmsg = TRUE;
+/* DIVERGENCE(MVDM-HOST-DIV-344): temporary operation mode is thread-private. */
+__declspec(thread) BOOL fThunkDDEmsg = TRUE;
 BOOL fDDEAckFree = FALSE;
 
 extern WORD msgFINDREPLACE;  // see WCOMMDLG.C
@@ -40,7 +43,8 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
     LONG ulReturn;
     DWORD vpWndProc16Raw; /* DIVERGENCE(MVDM-HOST-DIV-340): trace scalar only. */
     register PTD ptd;
-    WM32MSGPARAMEX wm32mpex;
+    WM32MSGPARAMEX wm32mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
+    __try {
     BOOL   fMessageNeedsThunking;
 #ifdef DEBUG
     CHAR szClassName[80];
@@ -256,6 +260,9 @@ Error:
     LOGDEBUG(LOG_ALWAYS,("    W32Win16WndProc ERROR: cannot call back, using default message handling\n"));
 SilentError:
     return DefWindowProc(hwnd, uMsg, uParam, lParam);
+    } __finally {
+        wow_message_unwind32(&wm32mpex);
+    }
 }
 
 
@@ -2458,32 +2465,56 @@ BOOL FASTCALL WM32CopyData (LPWM32MSGPARAMEX lpwm32mpex)
     LPBYTE  lpMem16;
     PCOPYDATASTRUCT lpCDS32;
     PCOPYDATASTRUCT lpCDS16;
-    PCPDATA pTemp;
+    COPYDATASTRUCT captured;
+    DWORD owned, error;
 
 
     if (lpwm32mpex->fThunk) {
+        /* DIVERGENCE(MVDM-HOST-DIV-344): retain original construction/list,
+         * but publish only complete acquisitions and keep scalar release keys. */
+        lpwm32mpex->dwParam = 0;
+        lpwm32mpex->dwTmp[0] = lpwm32mpex->dwTmp[1] = 0;
+        lpwm32mpex->Parm16.WndProc.lParam = 0;
+        if (!lpwm32mpex->hwnd || !lpwm32mpex->lParam) return FALSE;
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
 
         if (vpCDS16 = CopyDataFindData16 (GETHWND16(lpwm32mpex->hwnd), lpwm32mpex->Parm16.WndProc.wParam, lpwm32mpex->lParam)) {
             lpwm32mpex->Parm16.WndProc.lParam = vpCDS16;
+            lpwm32mpex->fFree = FALSE; /* An active outer call owns this pair. */
         }
         else {
+          /* DIV-344: GlobalAllocLock16 can reenter guest through CallBack16. */
+          captured = *(PCOPYDATASTRUCT)lpwm32mpex->lParam;
+          lpCDS32 = &captured;
+          lpwm32mpex->dwTmp[1] = (DWORD)captured.lpData;
+          __try {
             vpCDS16 = GlobalAllocLock16(GMEM_DDESHARE, sizeof(COPYDATASTRUCT), &h16);
+            lpwm32mpex->Parm16.WndProc.lParam = vpCDS16;
+            if (!vpCDS16) goto CopyDataFailed;
+            lpwm32mpex->dwParam = WOW_COPY_HEADER;
+            lpwm32mpex->fFree = TRUE;
             if (vpCDS16) {
                 GETMISCPTR(vpCDS16, lpCDS16);
-                lpCDS32 = (PCOPYDATASTRUCT) lpwm32mpex->lParam;
                 lpCDS16->dwData = lpCDS32->dwData;
                 if (lpCDS16->cbData = lpCDS32->cbData) {
 
                     FREEMISCPTR(lpCDS16);
 
                     vpData16 = GlobalAllocLock16(GMEM_DDESHARE, lpCDS32->cbData, &hMem16);
+                    lpwm32mpex->dwTmp[0] = vpData16;
+                    if (!vpData16) goto CopyDataFailed;
+                    lpwm32mpex->dwParam |= WOW_COPY_DATA;
                     GETMISCPTR(vpData16, lpMem16);
+                  __try {
+                    if (!lpMem16 || !lpCDS32->lpData) goto CopyDataFailed;
                     if (lpMem16 && lpCDS32->lpData) {
                         RtlCopyMemory(lpMem16, lpCDS32->lpData, lpCDS32->cbData);
-                        CopyDataAddNode (GETHWND16(lpwm32mpex->hwnd), lpwm32mpex->Parm16.WndProc.wParam, vpData16, (DWORD) lpCDS32->lpData, 0);
+                        if (!CopyDataAddNode (GETHWND16(lpwm32mpex->hwnd), lpwm32mpex->Parm16.WndProc.wParam, vpData16, lpwm32mpex->dwTmp[1], 0)) goto CopyDataFailed;
+                        lpwm32mpex->dwParam |= WOW_COPY_DATA_NODE;
                     }
+                  } __finally {
                     FREEMISCPTR(lpMem16);
+                  }
 
                     GETMISCPTR(vpCDS16, lpCDS16);
                     lpCDS16->lpData = (PVOID) vpData16;
@@ -2495,24 +2526,33 @@ BOOL FASTCALL WM32CopyData (LPWM32MSGPARAMEX lpwm32mpex)
             }
 
             lpwm32mpex->Parm16.WndProc.lParam = vpCDS16;
-            CopyDataAddNode (GETHWND16(lpwm32mpex->hwnd), lpwm32mpex->Parm16.WndProc.wParam, vpCDS16, lpwm32mpex->lParam, 0);
+            if (!CopyDataAddNode (GETHWND16(lpwm32mpex->hwnd), lpwm32mpex->Parm16.WndProc.wParam, vpCDS16, lpwm32mpex->lParam, COPYDATA_HEADER)) goto CopyDataFailed;
+            lpwm32mpex->dwParam |= WOW_COPY_HEADER_NODE;
+          } __finally {
+            if (AbnormalTermination()) wow_message_unwind32(lpwm32mpex);
+          }
         }
     }
     else {
-        if (lpwm32mpex->fFree) {
-            pTemp = CopyDataFindData32 (GETHWND16(lpwm32mpex->hwnd), GETHWND16(lpwm32mpex->uParam), lpwm32mpex->Parm16.WndProc.lParam);
-            if (pTemp && (!(pTemp->Flags))) {
-                GETMISCPTR(lpwm32mpex->Parm16.WndProc.lParam, lpCDS16);
-                GlobalUnlockFree16 ((VPVOID)lpCDS16->lpData);
-                CopyDataDeleteNode (GETHWND16(lpwm32mpex->hwnd), lpwm32mpex->Parm16.WndProc.wParam, (DWORD) ((PCOPYDATASTRUCT)lpwm32mpex->lParam)->lpData);
-                GlobalUnlockFree16 ((VPVOID)lpwm32mpex->Parm16.WndProc.lParam);
-                CopyDataDeleteNode (GETHWND16(lpwm32mpex->hwnd), lpwm32mpex->Parm16.WndProc.wParam, (DWORD) lpwm32mpex->lParam);
-                FREEMISCPTR(lpCDS16);
-            }
-        }
+        /* DIV-344: consume this call's progress before reentrant frees.
+         * Borrowed pairs have no bits; never reread a returned input header. */
+        owned = lpwm32mpex->dwParam;
+        lpwm32mpex->dwParam = 0;
+        if (owned & WOW_COPY_DATA_NODE)
+            CopyDataDeleteNode(GETHWND16(lpwm32mpex->hwnd), lpwm32mpex->Parm16.WndProc.wParam, lpwm32mpex->dwTmp[1]);
+        if (owned & WOW_COPY_HEADER_NODE)
+            CopyDataDeleteNode(GETHWND16(lpwm32mpex->hwnd), lpwm32mpex->Parm16.WndProc.wParam, lpwm32mpex->lParam);
+        if (owned & WOW_COPY_DATA) GlobalUnlockFree16(lpwm32mpex->dwTmp[0]);
+        if (owned & WOW_COPY_HEADER) GlobalUnlockFree16(lpwm32mpex->Parm16.WndProc.lParam);
     }
 
     return (TRUE);
+
+CopyDataFailed:
+    error = ERROR_NOT_ENOUGH_MEMORY;
+    wow_message_unwind32(lpwm32mpex);
+    SetLastError(error);
+    return FALSE;
 }
 
 // This function thunks the message,

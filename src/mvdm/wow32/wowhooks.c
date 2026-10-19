@@ -10,6 +10,8 @@
 //*****************************************************************************
 
 #include "precomp.h"
+/* DIVERGENCE(MVDM-HOST-DIV-344): original conversion finalizers. */
+#include "wow_message_lifetime.h"
 #pragma hdrstop
 
 MODNAME(wowhooks.c);
@@ -75,9 +77,10 @@ HOOKSTATEDATA vaHookStateData[] = {
           };
 
 
-HOOKPARAMS vHookParams = {0, 0, 0};
+/* DIVERGENCE(MVDM-HOST-DIV-344): callbacks restore their native-thread context. */
+__declspec(thread) HOOKPARAMS vHookParams = {0, 0, 0};
 
-INT viCurrentHookStateDataIndex = 0;
+__declspec(thread) INT viCurrentHookStateDataIndex = 0;
                                  // this is used when 'DefHookProc' is called.
 
 
@@ -568,10 +571,11 @@ LONG APIENTRY WowOriginalStdHookProc(INT nCode, LONG wParam, LONG lParam, INT iF
 LONG ThunkCallWndProcHook(INT nCode, LONG wParam, LPCWPSTRUCT lpCwpStruct,
                                                      LPHOOKSTATEDATA lpHSData)
 {
-    VPVOID      vp;
+    VPVOID      vp = 0;
     PCWPSTRUCT16 pCwpStruct16;
     PARM16 Parm16;
-    WM32MSGPARAMEX wm32mpex;
+    WM32MSGPARAMEX wm32mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
+    __try {
     BOOL   fMessageNeedsThunking;
 
     wm32mpex.Parm16.WndProc.wMsg   = (WORD) lpCwpStruct->message;
@@ -591,13 +595,16 @@ LONG ThunkCallWndProcHook(INT nCode, LONG wParam, LPCWPSTRUCT lpCwpStruct,
         wm32mpex.lParam = lpCwpStruct->lParam;
         wm32mpex.lpfnM32 = aw32Msg[wm32mpex.uMsg].lpfnM32;
         wm32mpex.pww = (PWW)NULL;
+        wm32mpex.fFree = TRUE; /* DIV-344: callback owns newly constructed input. */
         if (!(wm32mpex.lpfnM32)(&wm32mpex)) {
             LOGDEBUG(LOG_ALWAYS,("ThunkCallWndProcHook: cannot thunk 32-bit message %04x\n",
                     lpCwpStruct->message));
+            return FALSE; /* DIV-344: never expose a partial conversion. */
         }
     }
 
     vp = stackalloc16(sizeof(CWPSTRUCT16));
+    if (!vp) return FALSE; /* DIV-344: converted input remains frame-owned. */
 
     GETMISCPTR(vp, pCwpStruct16);
 
@@ -631,8 +638,13 @@ LONG ThunkCallWndProcHook(INT nCode, LONG wParam, LPCWPSTRUCT lpCwpStruct,
     }
 
     stackfree16(vp);
+    vp = 0; /* DIV-344: finalizer consumes only this frame's remaining stack. */
 
     return (LONG)FALSE;   // return value doesn't matter
+    } __finally {
+        if (vp) stackfree16(vp);
+        wow_message_unwind32(&wm32mpex);
+    }
 }
 
 
@@ -882,18 +894,24 @@ LONG ThunkKeyBoardHook(INT nCode, LONG wParam, LONG lParam,
 LONG ThunkMsgFilterHook(INT nCode, LONG wParam, LPMSG lpMsg,
                                                      LPHOOKSTATEDATA lpHSData)
 {
-    VPVOID vp;
+    VPVOID vp = 0;
     PMSG16 pMsg16;
     PARM16 Parm16;
-    WM32MSGPARAMEX wm32mpex;
+    WM32MSGPARAMEX wm32mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
 
     BOOL fHookModifiedLpMsg;
-    HWND hwnd32;
-    MSGPARAMEX mpex;
-    BOOL fUseOld;
-    static MSG msgSave;
-    static int cRecurse = 0;
-    static PARM16 Parm16Save;
+    HWND hwnd32 = NULL; /* DIV-344: only successful conversion selects it. */
+    MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
+    /* DIV-344: preserve original same-message reuse across nested DIFFERENT
+     * messages too; no second recursion table or persistent owner is added. */
+    BOOL fUseOld = TRUE;
+    static __declspec(thread) MSG msgSave;
+    static __declspec(thread) int cRecurse = 0;
+    static __declspec(thread) PARM16 Parm16Save;
+    MSG savedMsg = msgSave;
+    int savedRecurse = cRecurse;
+    PARM16 savedParm = Parm16Save;
+    __try {
     BOOL   fMessageNeedsThunking;
 
     // This should be removed when all thunk functions appropiately fill these
@@ -924,6 +942,7 @@ LONG ThunkMsgFilterHook(INT nCode, LONG wParam, LPMSG lpMsg,
         if (!((wm32mpex.lpfnM32)(&wm32mpex))) {
             LOGDEBUG(LOG_ALWAYS,("ThunkMsgFilterHook: cannot thunk 32-bit message %04x\n",
                                                              lpMsg->message));
+            return FALSE; /* DIV-344: never expose a partial conversion. */
         }
     }
 
@@ -1061,7 +1080,11 @@ LONG ThunkMsgFilterHook(INT nCode, LONG wParam, LPMSG lpMsg,
 
         // reset flag if message thunking failed.
 
-        if (!hwnd32)
+        /* DIV-344: the native filter returns a MSG, not ownership of a newly
+         * allocated COPYDATA buffer. Keep only an existing active native pair;
+         * the old absent-pair branch dereferenced NULL, not a supported transfer. */
+        if (!mpex.fThunkSucceeded ||
+                (mpex.Parm16.WndProc.wMsg == WM_COPYDATA && mpex.MsgBuffer->copydata.flags))
             fHookModifiedLpMsg = FALSE;
     }
 
@@ -1096,11 +1119,20 @@ LONG ThunkMsgFilterHook(INT nCode, LONG wParam, LPMSG lpMsg,
 
     if (!fUseOld) {
         free16(vp);
+        vp = 0; /* DIV-344: no double free during finalization. */
     }
 
     // the value in LOWORD is the valid return value
 
     return (LONG)(BOOL)LOWORD(wm32mpex.lReturn);
+    } __finally {
+        if (vp && !fUseOld) free16(vp);
+        msgSave = savedMsg;
+        cRecurse = savedRecurse;
+        Parm16Save = savedParm;
+        wow_message_unwind16(&mpex);
+        wow_message_unwind32(&wm32mpex);
+    }
 }
 
 
@@ -1437,7 +1469,8 @@ LONG ThunkCallWndProcHook16(INT nCode, LONG wParam, VPVOID  vpCwpStruct,
 {
     CWPSTRUCT CwpStruct;
     PCWPSTRUCT16 pCwpStruct16;
-    MSGPARAMEX mpex;
+    MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
+    __try {
 
     GETMISCPTR(vpCwpStruct, pCwpStruct16);
 
@@ -1450,6 +1483,7 @@ LONG ThunkCallWndProcHook16(INT nCode, LONG wParam, VPVOID  vpCwpStruct,
     mpex.hwnd = ThunkMsg16(&mpex);
     // memory may have moved
     FREEVDMPTR(pCwpStruct16);
+    if (!mpex.fThunkSucceeded) return FALSE; /* DIV-344: HWND0 is not status. */
 
     CwpStruct.message = mpex.uMsg;
     CwpStruct.wParam  = mpex.uParam;
@@ -1466,6 +1500,9 @@ LONG ThunkCallWndProcHook16(INT nCode, LONG wParam, VPVOID  vpCwpStruct,
     }
 
     return mpex.lReturn;
+    } __finally {
+        wow_message_unwind16(&mpex);
+    }
 }
 
 
@@ -1483,7 +1520,8 @@ LONG ThunkCbtHook16(INT nCode, LONG wParam, VPVOID lParam,
     LONG lReturn = FALSE;
     WPARAM wParamNew;
     LPARAM lParamNew;
-    MSGPARAMEX mpex;
+    MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
+    __try {
 
     PMOUSEHOOKSTRUCT16 pMHStruct16;
     PCBTACTIVATESTRUCT16 pCbtAStruct16;
@@ -1548,6 +1586,7 @@ LONG ThunkCbtHook16(INT nCode, LONG wParam, VPVOID lParam,
             mpex.iMsgThunkClass = 0;
 
             ThunkMsg16(&mpex);
+            if (!mpex.fThunkSucceeded) return FALSE; /* DIV-344: reject before native. */
 
             //
             // Memory movement can occur on the 16-bit side.
@@ -1680,6 +1719,9 @@ LONG ThunkCbtHook16(INT nCode, LONG wParam, VPVOID lParam,
     // the value in LOWORD is the valid return value
 
     return (LONG)(BOOL)LOWORD(lReturn);
+    } __finally {
+        wow_message_unwind16(&mpex);
+    }
 }
 
 
@@ -1722,7 +1764,8 @@ LONG ThunkMsgFilterHook16(INT nCode, LONG wParam, VPVOID vpMsg,
 {
     PMSG16 pMsg16;
     MSG  Msg;
-    MSGPARAMEX mpex;
+    MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
+    __try {
 
 
 
@@ -1744,6 +1787,7 @@ LONG ThunkMsgFilterHook16(INT nCode, LONG wParam, VPVOID vpMsg,
 
     FREEVDMPTR(pMsg16);
     GETMISCPTR(vpMsg, pMsg16);
+    if (!mpex.fThunkSucceeded) { FREEVDMPTR(pMsg16); return FALSE; }
 
     fThunkDDEmsg = TRUE;
 
@@ -1779,6 +1823,9 @@ LONG ThunkMsgFilterHook16(INT nCode, LONG wParam, VPVOID vpMsg,
     // the value in LOWORD is the valid return value
 
     return (LONG)(BOOL)LOWORD(mpex.lReturn);
+    } __finally {
+        wow_message_unwind16(&mpex);
+    }
 }
 
 

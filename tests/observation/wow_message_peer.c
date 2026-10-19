@@ -24,6 +24,9 @@ static volatile LONG errors, received, nested, replied, text;
 static HMODULE peer_module;
 #ifdef M4_STRUCTURES
 static volatile LONG structure_received;
+#ifdef M4_COPYDATA_PROC32
+static volatile LONG proc32_fresh, proc32_borrowed;
+#endif
 static const LONG minmax_input[10] = {0x1234,2,3,4,5,6,-7,8,9,10};
 C_ASSERT(sizeof(MINMAXINFO) == sizeof(minmax_input));
 
@@ -53,10 +56,28 @@ BOOL WINAPI DllMain(HINSTANCE instance, DWORD reason, PVOID reserved)
     return TRUE;
 }
 
+#ifdef M4_COPYDATA_PROC32
+static void check_at(BOOL condition,int line)
+{
+    if(!condition){
+        DWORD error=GetLastError(),written;char record[256];int length;HANDLE output;
+        InterlockedIncrement(&errors);
+        length=_snprintf_s(record,sizeof(record),_TRUNCATE,
+            "line=%d tid=%lu sender=%lu peer=%lu sender_hwnd=%p peer_hwnd=%p structures=%ld fresh=%ld borrowed=%ld\r\n",
+            line,GetCurrentThreadId(),sender_thread,peer_thread_id,
+            (PVOID)sender_window,(PVOID)peer_window,structure_received,proc32_fresh,proc32_borrowed);
+        output=CreateFileA("MSGPEER-FAIL.txt",FILE_APPEND_DATA,FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
+        if(output!=INVALID_HANDLE_VALUE){if(length>0)WriteFile(output,record,(DWORD)length,&written,NULL);CloseHandle(output);}
+        SetLastError(error);
+    }
+}
+#define check(condition) check_at((condition),__LINE__)
+#else
 static void check(BOOL condition)
 {
     if (!condition) InterlockedIncrement(&errors);
 }
+#endif
 
 static LRESULT CALLBACK peer_proc(HWND window, UINT message, WPARAM wp, LPARAM lp)
 {
@@ -98,6 +119,15 @@ static LRESULT CALLBACK peer_proc(HWND window, UINT message, WPARAM wp, LPARAM l
         check(wp != 0 && ((const COPYDATASTRUCT *)lp)->cbData == 8);
         check(((const COPYDATASTRUCT *)lp)->lpData != NULL &&
             !memcmp(((const COPYDATASTRUCT *)lp)->lpData,"M4copy!!",8));
+#ifdef M4_COPYDATA_PROC32
+        if(GetCurrentThreadId()==sender_thread){
+            /* Original HWND32 sign-extends USER16's value; original/native
+             * CallWindowProc passes that argument to the procedure unchanged. */
+            if(window==(HWND)(LONG_PTR)(SHORT)LOWORD(sender_window))InterlockedIncrement(&proc32_borrowed);
+            else {check(window==(HWND)(LONG_PTR)(SHORT)LOWORD(peer_window));InterlockedIncrement(&proc32_fresh);}
+            return 0x447a004a;
+        }
+#endif
         InterlockedIncrement(&structure_received);
         return 0x447a004a;
     case 0x480:
@@ -195,10 +225,14 @@ DWORD WINAPI MessagePeer(DWORD operation)
 {
     DWORD owner = 0, code = 1;
     DWORD report[
+#ifdef M4_COPYDATA_PROC32
+        15
+#else
 #ifdef M4_STRUCTURES
         13
 #else
         12
+#endif
 #endif
     ] = {0};
     DWORD written;
@@ -296,6 +330,11 @@ DWORD WINAPI MessagePeer(DWORD operation)
 #ifdef M4_STRUCTURES
     check(structure_received == 6);
     report[12]=(DWORD)structure_received;
+    report[1]=(DWORD)errors;
+#endif
+#ifdef M4_COPYDATA_PROC32
+    check(proc32_fresh==1 && proc32_borrowed==1);
+    report[13]=(DWORD)proc32_fresh;report[14]=(DWORD)proc32_borrowed;
     report[1]=(DWORD)errors;
 #endif
     output = CreateFileA("MSGHOST.BIN", GENERIC_WRITE, 0, NULL, CREATE_NEW,

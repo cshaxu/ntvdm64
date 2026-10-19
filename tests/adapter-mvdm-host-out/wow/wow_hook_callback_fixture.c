@@ -11,6 +11,10 @@ static BOOL deny_task, deny_borrow, raise_original;
 static BOOL deny_enrollment, deny_graph, veto_creation;
 static BOOL deny_leave;
 static unsigned enrollments, rollbacks, accepted_creations;
+/* Original-context service doubles only; production globals stay in wowhooks. */
+__declspec(thread) HOOKPARAMS vHookParams;
+__declspec(thread) INT viCurrentHookStateDataIndex;
+__declspec(thread) BOOL fThunkDDEmsg, fWhoCalled;
 static wow_user_runtime_thread runtime;
 #define CHECK(x) do { if (!(x)) { ++errors; fprintf(stderr, "FAIL line=%d\n", __LINE__); } } while (0)
 
@@ -104,14 +108,21 @@ VOID WINAPI wow_user_borrow_leave_required(wow_user_borrow_scope *scope)
 }
 LONG WINAPI WowOriginalStdHookProc(INT code, LONG wp, LONG lp, INT index)
 {
+    HOOKPARAMS previous;
     CHECK(task_depth && task_depth == borrow_depth);
     ++original_calls;
+    vHookParams.nCode = code; vHookParams.wParam = wp; vHookParams.lParam = lp;
+    viCurrentHookStateDataIndex = index; fThunkDDEmsg = TRUE; fWhoCalled = TRUE;
     if (raise_original) RaiseException(0xe0447004u, 0, 0, NULL);
     if (index == 3) {
         CHECK(enrollments);
         return veto_creation ? 1 : 0;
     }
-    if (index == 2) CHECK(WU32StdHookProc(1, 2, 3, 1) == 7);
+    if (index == 2) {
+        previous = vHookParams;
+        CHECK(WU32StdHookProc(1, 2, 3, 1) == 7);
+        CHECK(viCurrentHookStateDataIndex == 2 && !memcmp(&previous, &vHookParams, sizeof(previous)));
+    }
     return code + wp + lp + index;
 }
 int __cdecl main(void)
@@ -130,6 +141,7 @@ int __cdecl main(void)
     __except (GetExceptionCode() == 0xe0447004u ?
             EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) { caught = TRUE; }
     CHECK(caught && !task_depth && !borrow_depth);
+    CHECK(!viCurrentHookStateDataIndex && !fThunkDDEmsg && !fWhoCalled);
     raise_original = FALSE;
     CHECK(WU32StdHookProc(1, 2, 3, 2) == 8 && original_calls == 4);
     CHECK(!task_depth && !borrow_depth);

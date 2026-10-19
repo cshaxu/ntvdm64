@@ -1,10 +1,12 @@
 [CmdletBinding()]
-param([Parameter(Mandatory)][string]$BuildRoot)
+param([Parameter(Mandatory)][string]$BuildRoot,
+ [string]$WorkerBuildRoot='O:\repos.hobby\ntvdm64\build\M0-T445\S6\r003',
+ [string]$ProviderBuildRoot='O:\repos.hobby\ntvdm64\build\M0-T447\S3\production-cohort-x86')
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'));$root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Fresh build-owned graph diagnostic required'}
 $null=New-Item -ItemType Directory $root;$shell=(Get-Process -Id $PID).Path
-$provider="$repo/build/M0-T447/S3/production-cohort-x86";$worker="$repo/build/M0-T447/S4/prepared-graph-sealed-r1/worker"
+$provider=[IO.Path]::GetFullPath($ProviderBuildRoot);$worker=[IO.Path]::GetFullPath($WorkerBuildRoot)
 $compiler="$repo/build/M0-T445/S6/provider/msvc-x86.cmd";$observer="$repo/build/M0-T447/S2/frozen-print-observer-r1/observer.exe"
 function Owned($name,$exe,$line,$seconds,$working=$repo){
  $p=Start-Process $exe -ArgumentList $line -WindowStyle Hidden -WorkingDirectory $working -PassThru -RedirectStandardOutput "$root/$name.stdout.txt" -RedirectStandardError "$root/$name.stderr.txt";$null=$p.Handle
@@ -52,8 +54,8 @@ try{
  $inputs+=@($deps|ForEach-Object {if($_ -match '^\s+([A-Za-z]:[/\\].*)$' -and (Test-Path $Matches[1])){$Matches[1]}})
  $images=@(Get-Content "$repo/assets/release/release-manifest.json" -Raw|ConvertFrom-Json)
  if($images.Count -ne 13){throw 'Coherent13 required'}
- foreach($image in $images){foreach($dir in @("$repo/assets/release",'O:\winnt\system32')){if((Get-FileHash "$dir/$($image.name)").Hash -ne $image.sha256){throw 'Installed P9 mismatch'};$inputs+="$dir/$($image.name)"}}
- foreach($pair in @(@('ntvdm.exe',$worker),@('WOW32.DLL',$provider))){if((Get-FileHash "$($pair[1])/$($pair[0])").Hash -ne (Get-FileHash "$repo/assets/release/$($pair[0])").Hash){throw 'P9 parent/provider mismatch'}}
+ foreach($image in $images){foreach($dir in @("$repo/assets/release",'O:\winnt\system32')){if((Get-FileHash "$dir/$($image.name)").Hash -ne $image.sha256){throw 'Installed manifest mismatch'};$inputs+="$dir/$($image.name)"}}
+ foreach($pair in @(@('ntvdm.exe',$worker),@('WOW32.DLL',$provider))){if((Get-FileHash "$($pair[1])/$($pair[0])").Hash -ne (Get-FileHash "$repo/assets/release/$($pair[0])").Hash){throw 'Selected parent/provider mismatch'}}
  $inputs|Sort-Object -Unique|Get-FileHash|Export-Csv -NoTypeInformation "$root/inputs.csv"
  $cc=Mark $cc '/Foobj/wow32-dll/wow_user_object_bindings.obj' ('/Fo"'+$root+'/graph-profile.obj"')
  $cc=Mark $cc $source.Replace('\','/') ('"'+$root+'/graph-profile.c"')

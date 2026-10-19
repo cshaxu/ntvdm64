@@ -1758,7 +1758,57 @@ semantic waivers or replacements for the full WOW32 objective. Original guest
 immutability, approved modern delivery/reply and every recorded limitation
 remain in force. No new private layout, helper window or transport is selected.
 
+### Residual stutter source-led priority
+
+Owner now accepts performance as stable and explicitly resumes S4 functional
+completion. Freeze the performance lane: no more timing/sort/cache experiments.
+P13 delivers the composed095/096/097 correctness cohort and coherent13 package;
+preserve the unexplained WRITE-All first snapshot and0102 risk. The bounded
+COPYDATA constructor/provenance/caller/finalizer group passes, not all M4.
+Continue cross-worker/native boundaries, remaining converted-data/failure
+coverage and the fixed M1--M6 reconciliation. S5/S6 remain unchanged.
+
+Earlier performance-lane admission below is historical, superseded by that
+owner freeze; it does not authorize another timing/sort/cache experiment.
+
+The renewed owner symptom takes priority over the admitted but unimplemented
+COPYDATA095 group.096 completes already-owned view reads via080's existing
+bounded synchronous RAM service; no boundary/freshness reduction or extra
+cache. Cover owned slot/borrow/graph preparation and retirement as one batch;
+arbitrary guest/link/class pointers retain scalar semantics. Exact-body
+operation/identity controls, actual CCPU graph/lifetime cases and fixed ABBA
+input timing precede full required gates/publication. Record actual results,
+including an inconclusive/no-speedup outcome; do not call a correct mechanism
+the residual-stutter cause merely because its tests pass.
+
 ### Adoption checklist and independent review
+
+097 is the bounded execution gap exposed by096's strict common-dialog gate:
+pair ChooseColor/ChooseFont/GetOpenFileName/GetSaveFileName/FindText/
+ReplaceText/PrintDlg native GUI leaves using the existing execution scope.
+Keep original conversions, hooks and cleanup; no mirror or guest modification.
+Both last-delivered P12 and096 hang at first FindText in a fixed four-run
+comparison. This excludes096 as the introducer in that experiment, not other
+causes. Native cross-task callback ownership, typed failure/SEH/LastError,
+original-object binding and unchanged real guest lifecycle form one group.
+Do not publish while this gate fails or claim a WINMINE speedup from its repair.
+
+After delivered P12/3ce9b7d0b, ADAPTER-WOW-095 is one bounded S4 M4 group:
+retain both original COPYDATA algorithms and their single CPDATA provenance
+list; pair header/data/node acquisition, nested borrowing, constructor failure,
+native-procedure forwarding, native-call/callback unwind and release. Complete
+the actual window/dialog/CWP/filter and guest API caller closure, including
+NULL-HWND-success versus converter-failure distinction. Original per-operation
+flags and Hook recursion state become thread-local/scoped private working
+state, not a new USER authority. Use existing call scratch for COPYDATA
+ownership and captured release identities. New adapter code owns only finalizer
+mechanics, not conversion or routing. Initialize synchronous fFree producers
+from the selected dispatcher contract, with comparative evidence already in
+the audit. No helper window, manager, guest edit or new semantic concession.
+New negative-code Hook policy, broad DDE behavior and unrelated converters are
+not absorbed; complete M1--M6 still remains required before S4 closure.
+Finish this whole source group and its unit/real-guest/fault witnesses before
+one background build/acceptance cohort; preserve P12 for rollback/comparison.
 
 The continuing S4 performance lane admits ADAPTER-WOW-094 only after sealing
 the terminal093 candidate: remove the overwritten initial native sample of

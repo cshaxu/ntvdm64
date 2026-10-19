@@ -4257,3 +4257,790 @@ runtime or an acceptance substitute. No additional timing rerun is selected
 to manufacture improvement. Final whitespace/parser/document governance and
 reviewed main/origin commit/push follow this runtime handoff; retain the full
 S4 objective, source audit and next complete M4 ownership/caller closure.
+
+###095 bounded implementation admission after the clean P12 handoff
+
+Baseline is reviewed main/origin3ce9b7d0bf2d50cca9aa38a0c0a0bd25eba5077a,
+clean worktree and published5001/E10 coherent13. Permanently authorized
+original-host correction is selected only after the complete caller sweep.
+Original WM32CopyData/ThunkWMMsg16/UnThunkWMMsg16 and CPDATA Add/Find/Delete stay
+the conversion/provenance owners. Private message fields, not a second map,
+carry constructor ownership and exact scalar release keys. A newly constructed
+COPYDATA view belongs to that synchronous conversion scope; a reused active
+view is borrowed. Filter and CWP have input valid through their callback,
+not a cross-callback promise of identical allocated far addresses. Preserve
+same-active-message nested reuse and native input/output identity; the later
+CWP TRUE producer corroborates this per-callback lifetime. Do not change DDE's
+FALSE filter producer or its algorithms to manage COPYDATA storage.
+
+Return FALSE before exposing any partial allocation, using the existing
+original unthunker for rollback. Helpers in the adapter supply only finalizer
+mechanics/LastError preservation. Capture release keys before native/guest
+reentry rather than reread caller buffers later. The empty original list must
+return FALSE, not dereference NULL. A native-procedure thunk may reuse an
+existing received mapping or construct the original native copy from valid
+guest input when no mapping exists; never dereference a missing node.
+
+There is an additional concrete caller distinction: ThunkMsg16 returns HWND,
+so a valid thread message returns NULL even when conversion succeeds. Append
+one host-private fThunkSucceeded bit to MSGPARAMEX, written by ThunkMsg16 and
+getmsg16, and check it at currently unchecked callers. Source search finds no
+assembly/worker/wire use, variable-size allocation or hard-coded offset of
+this native C record. Preserve every old field and PARM16 offset. getmsg16's
+existing selective conversion adds COPYDATA explicitly; do not replace it
+with generic all-message/class routing. A COPYDATA receiver requires a real
+window, unlike ordinary opaque thread messages. Preserve legitimate NULL-HWND
+thread success and reject failed conversion before native execution.
+
+Scope the original operation-private fWhoCalled/fThunkDDEmsg and Hook context
+to their native threads; keep the shared CPDATA provenance list process-wide
+under original execution exclusion. Save/restore original private modes at
+thunk/Hook boundaries. For MsgFilter, retain original same-message VP reuse,
+but save/restore recursion scratch across a different nested message or
+exception and release only this frame's allocated MSG16. No persistent manager,
+native queue replacement, helper HWND, original guest change or new scheduling
+contract is introduced. Negative-code Hook policy and broader DDE remain
+separate open M2/family boundaries, not claimed solved by095.
+
+Implement the complete selected constructors/list/callers/finalizers and
+independent exact-body plus actual guest/fault/nested/Proc32 witnesses before
+one composed background build. Keep prior source/binaries sealed and perform
+the full every-P gates only after this group is connected. MVDM-HOST-DIV-344
+registers the minimal original-host intrusion; new adapter helpers cannot take
+over the conversion algorithms. Actual line/diff/classification accounting and
+all unproved boundaries are required before delivery; this admission is not
+a runtime result, performance claim, or S4/goal closure.
+
+### Residual stutter priority and096 allocated-view read closure
+
+The owner's renewed report says improved, not smooth. COPYDATA095 remains
+admitted but not implemented and is not presented as a performance cause.
+residual-graph-profile-r1 uses the exact P12 worker5001/providerE10 and a
+reversible graph-only diagnostic DLL. All three baseline and three instrumented
+actual twelve-click/normal-close child groups pass. The outer run fails in
+the newly added summary invocation: it tries reading the not-yet-written
+outer exit.txt. This is an observer ordering defect, not a runtime failure;
+retain outer exit1, raw successful child results and partial summary, not a
+whole-run pass. Remove this premature call and retain the existing standalone
+post-terminal summary workflow. No product/guest/installation changes occur.
+
+The ordinary diagnostic brackets contain135 refreshes and45,900 committed
+window rows for12 clicks. Inclusive refresh328.9925ms/project302.227ms/
+commit152.7581ms overlap; they are not disjoint CPU percentages. Native field
+capture totals9.9746ms, so removing a duplicate GetWindowInfo alone cannot
+explain most remaining projection cost. The native observation domain has340
+rows versus about16 on the private desktop. Brackets include read-side
+quiescence and differ from the371.317ms actual input stopwatches; do not divide
+these overlapping values into a claimed input-time percentage.
+
+096's finite source scope reuses080's page_domain_read_owned_word helper for
+still-scalar reads whose addresses come from the domain's allocated handle
+table, published WND slots, or retained WND records. Cover slot lookup/menu
+identity, current-generation tests, public handle metadata, the already-pinned
+callback/relation source, and all graph prepare/retirement identity/class
+reads. Do not redirect arbitrary relationship targets, guest-provided backing,
+non-owned CLS/name, LDT/descriptor or general SAS calls. Current full reads,
+required local freshness, capture ordering, failures, generation checks and
+retention remain. No new cache/table/allocation, public ABI, mirror/guest
+delta or semantic concession. The existing reader remains page-bounded and
+uses original c_GetLinAdd synchronously; no pointer survives the call.
+
+Seal before editing: copydata-pre-edit-seal-r1, terminal0, P12 source, complete
+provider/worker objects/maps/libraries and coherent13 images verified. Exact
+body controls must distinguish unchanged results/identity from changed SAS
+operation counts, exercise invalid/dead/reused/retired/overflow cases and the
+page-crossing fallback. Whole CCPU graph/lifetime floors and fixed ABBA
+performance follow a grouped build; no success or publication is claimed yet.
+
+096 first implementation uses13 changed read expressions plus one private
+forward declaration, no new function, retained state or export. Only the
+already admitted080 reader is reused. The single-person reviewer checks the
+actual diff by address provenance: slot reads use domain.guest_windows;
+metadata uses the domain's allocated handle table; the callback/relation
+reads first find an existing retained record; graph preparation/retirement
+reads only a current slot or an existing borrow record. No native/guest
+callout can free those allocations while execution is excluded. Arbitrary
+relationship target reads, cold unregistered backing and non-owned CLS/name
+reads remain scalar. The post-load class pointer is still merely a value,
+not authority to map an arbitrary target. No original host/mirror diff is
+added and no original guest bytes are changed.
+
+owned-view-read-build-r1 passes the new exact-body fixture, then fails before
+starting its P12 control because the COPYDATA-oriented seal did not include
+the then-unmodified SoftPC source. Retain that setup failure, not a failed
+old implementation assertion or a pass. r2 reconstructs that file from
+Git3ce9b7d0b, matching the tested P12 source SHA256
+941044309B157296AD72D4CB3A2C8BE723C1839FEEDAEB62655F30E56A9B73E2 exactly.
+The old and new exact-body controls both pass;128 iterations preserve full
+identity/metadata while the selected640 scalar reads become640 existing
+bounded mapped reads. Invalid/withdrawn/replaced/retired/inactive cases and
+LastError/page-crossing fallback assertions pass. These lower-service
+stand-ins prove the local mechanism only, not real scheduling or latency.
+
+r2's complete production incremental build succeeds: worker5 actions,
+provider no-work. Actual CCPU graph-snapshot/window-borrow/window-reclaim pass;
+five selected-production-object fixtures (task-lifecycle with InitRollback,
+native-indirect/native-seen/native-nested and task-order), plus original
+external-memory, also pass. The native fixtures are not real guest scheduling
+proof. The CCPU tests include genuine
+generation reuse/retained storage/rollback and the existing exact execution
+scope assertions; it is not full S4 acceptance. Candidate NTVDM is
+0E924EF84528D05F0A6E2BF605973CEB4CC7ACCC9876057F4C1EA6035CE43CA3;
+provider remains P12 E10B0B8DEB15A619DD90DADD80AB4BC3A616C52E5C7DC45219DB5AB931D0DA36.
+Fresh WRITE startup3 also passes before the fixed performance sequence.
+Full foundations and every-P gates remain queued serially. Neither this
+mechanism result nor a zero test exit establishes a visible-stutter fix.
+
+owned-view-read-performance-r1 completes the fixed P12/candidate/candidate/
+P12 sequence, all30 callback records and actual15 input pairs per environment
+and run. The exact summary SHA256 is
+E8E73E38793CA6A0B25CBD7EF70927ED078B61D1CB532E5F2758E2ED49599FD6.
+Ordinary flag callback-span medians are47.57865/45.05605/26.30040/25.26835ms;
+posted-input/pixel medians60.81170/60.59290/29.68385/30.82905ms.
+The sampled and private observations remain in that exact JSON; their
+instrumentation/desktop differences are not pooled with ordinary inputs.
+The first ordinary callback comparison improves, the last does not; large
+temporal variation and mixed private results preclude a stable speedup,
+noninferiority or principal-stutter claim. Both versions retain the same
+twenty-millisecond polling observer and normal window-close assertion.
+The second-role review permits completing correctness gates for this small
+bounded reuse, not publishing it as a proven perceptual fix or declaring S4
+complete. Continue the larger observation copy/commit source investigation
+after the safe verified baseline; do not turn unrelated COPYDATA work into
+an explanation for measured input delay.
+
+### Native queue precondition failure: fixed old/new source attribution
+
+The first full foundation run stops at native-identity: the real cross-thread
+identity/send checks pass, but the later hardware-only wait and two unfiltered
+quit assertions fail (lines1315,1327--1328,1335--1336 of the frozen fixture).
+All-gates refuses that prerequisite; nothing is published. The local native
+fixture keeps the real page domain inactive; new096 owned-view reads do not
+explain a native posted-message ordering difference. Do not waive the gate
+or mark the failed full group green.
+
+native-queue-detail-r1 fails before compilation on mixed slash spelling; r2
+normalizes the two evidence roots. It makes a reversible copy of the original
+fixture with wrappers logging only existing wait/message return values and
+MSG fields, preserving LastError. No added PeekMessage/GetQueueStatus, queue
+removal, state repair or runtime edit. Exact failed fixture support objects
+are retained; only its page-native object changes between tested P12 and096.
+Fixed P12/new/new/P12 all fail identically with five assertions. Every run
+returns a pre-existing NULL-HWND message034A/wParam0/lParam0 ahead of the
+expected WM_QUIT on both ANSI and Unicode calls. Its producer/name is not
+proved and is not guessed. This is not evidence to filter that ID in runtime.
+
+The [native GetMessage contract](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getmessagew)
+retrieves unfiltered queued messages, returning nonzero for ordinary input
+and zero only when WM_QUIT is actually retrieved. The fixture incorrectly
+assumed its queue was empty after unrelated window/callout setup, and that
+the first retrieval after posting quit must be quit. Repair only that test
+precondition: a bounded64-message ordinary native pump establishes the
+hardware-only test's empty queue while explicitly failing on a leftover own
+command/quit. Retain the original hardware-only sleep assertion. Both quit
+tests remain unfiltered, add deterministic ordinary sentinels, process/log
+unrelated prefix messages and require the ordinary sentinel exactly once
+before the exact quit/exit value within64 calls. No numbered-message special
+case, new production discard policy or suppressed assertion is selected.
+Strict runner markers enforce the precondition plus both stronger order tests.
+An independently authored direct USER32 A/W reference additionally disproves
+the old first-call assumption with controlled ordinary posts before quit.
+
+Freeze this complete harness correction before the next grouped verification;
+do not repeat the already-completed ABBA sequence to seek improvement.096's
+production source/images and the performance probe are unchanged. Reuse its
+successful performance/WRITE child evidence only after exact recorded source,
+artifact and guest hashes revalidate. All failed outer gates remain failed
+records and cannot be reused as passes. Fresh native/whole runtime gates
+still have to pass before any publication.
+
+The first harness batch-r3 passes the native reference, both exact-body
+controls, three actual CCPU cases and task-lifecycle/InitRollback, then
+native-indirect exposes the same earlier first-queued assumption in
+verify_sent_only_receive's retention check. Its unfiltered PeekMessage reads
+an unrelated prefix instead of quit, leaving the owned quit pending; the new
+empty-queue guard correctly refuses to hide it. Retain that failed batch.
+The complete adjacent sweep checks every PostQuitMessage/PostThreadMessage
+quit producer and exact-quit assertion in the selected native/CCPU/observation
+fixtures. The existing wow_user_message_bridge_fixture already selects the
+quit filter for this retention-only purpose. Reuse that established test
+pattern in verify_sent_only_receive; keep the later A/W unfiltered
+sentinel/order tests. Other native peer/application message loops already
+consume ordinary messages until quit, and actual CCPU cases do not have this
+first-queued assumption. No production code is changed to pass these tests.
+The next grouped build covers all seven native send/identity/foreign/reply/
+indirect/seen/nested modes together, alongside three CCPU cases, InitRollback
+and task ordering, not just the first failing mode.
+
+r4 confirms the initial suggested quit-only filter is not sufficient for
+the PostQuitMessage retention producer: filtered Peek returns FALSE while
+a later unfiltered drain still sees exit41. Do not interpret that timing as
+a lost runtime quit, make up the opaque034A producer, or hide the leftover
+own quit in cleanup. Replace the retention check with a bounded ordinary
+native message pump until the exact quit, checking the earlier posted81
+never reappears. It preserves the retention assertion, leaves native Hook
+observation rules intact and does not assume immediate quit availability.
+The direct native reference covers both PostThreadMessage and PostQuitMessage
+in both A/W retrieval modes, with a deterministic ordinary sentinel first.
+The standalone tracked producer is verify-wow-native-queue-order-reference.ps1;
+its source/build inputs and result are independent of WOW/guest acceptance.
+This supersedes only the earlier proposed retention-test filter, not the
+unfiltered order/sentinel requirements or unchanged runtime queue contract.
+
+r5 freezes the complete correction: both quit producers/A-W direct reference,
+ordinary-post/quit order, empty-queue precondition and sent-only retention.
+All seven native message modes now pass together, as do the actual CCPU
+graph/borrow/reclaim cases and InitRollback; the full grouped result is12
+cases, with task-order/external-memory completing separately. No runtime
+message filter or producer-ID guess was introduced. The tracked standalone
+native reference also passes all4 modes. The performance source, worker0E92
+and providerE10 identities remain unchanged from the completed fixed ABBA.
+
+### Next source lead while full096 gates run: unchanged publication work
+
+#### ADAPTER-WOW-097: native COMMDLG execution boundary admission
+
+The fresh096 full gate passes native21/original30 and actual control/dialog
+groups but times out at first original COMMDLG.FindText. No gate waiver is
+selected. owned-view-commdlg-control-r1 fixes P12/096/096/P12: all four time
+out with CDL2 phases0/1, created0, before FindText returns. Experiment exit0
+means the comparison completed, not a regression pass or causal proof.
+The exact source/map show original wcommdlg.c directly imports SDK COMMDLG
+without the existing native execution scope. A synchronous native activation
+can call another WOW task while the caller is still recorded runnable.
+The retained last trace is WOWEXEC WM_NCACTIVATE; this supports a missing
+execution boundary, not a proven explanation of WINMINE click latency.
+
+Source owner is canonical OpenNT base/mvdm/wow32/wcommdlg.c at the pinned
+revision recorded above; selected original algorithms and source stay intact.
+097 budget: one typed private header, one same-family native-leaf adapter,
+one owner-specific build binding, tests and registers. All seven GUI entry
+points receive the existing begin/end/finally protocol, including exact native
+returns, output structures, LastError and modeless returned-window publication.
+Non-GUI GetFileTitle/CommDlgExtendedError remain direct. No new private USER
+state, transport, scheduler, helper window, mirror diff or guest mutation.
+Positive/negative/nested/unwind witnesses and the actual immutable guest
+FindText lifetime gate must validate before coherent delivery. Merely adding
+the scope is not a passed root-cause proof; retain any further failures.
+
+097's exact production wrapper bodies pass42 typed scenarios across seven
+leaves: success/cancel/rejection/native exception/nesting/terminal end failure,
+one native call and finalizer, exact owner/return/output/LastError and modeless
+return publication. common-dialog-boundary-build-r1 fails at compilation on
+uninitialized-result warnings; initialize the typed failure value, retaining
+exception propagation. r2 builds/links and proves all seven original wcommdlg
+references bind the wrappers, but its supplementary native UI test fails.
+r3 stops before guest execution because sandbox denies O:/tmp staging; r4
+uses the authorized normal context, without a new timeout or guest change.
+Its first FindText now returns and two destroy/IsWindow rounds pass, then
+the third reports the old0102 shape (destroyAX1/isWindowAX1). Whole gate exit1,
+not a pass, not attribution of the historical risk and no publication.
+
+The native supplement's pass-through begin/API diagnostic (build-owned
+common-dialog-boundary-diagnostic-r2, not production) shows successful begin,
+followed by native FindText/ReplaceText NULL with extended error0 and no app
+hook. Independent direct native reference passes both standard-template APIs.
+The model fixture substitutes page-storage leaves: manually attaching its
+owner WW incorrectly attempts real implicit-dialog enrollment through that
+incomplete storage closure. native-commdlg-host-owner-r1 instead uses a valid
+native host owner without projected WW. Both real APIs now create/destroy and
+their WM_INITDIALOG hooks synchronously enter the other registered WOW task:
+two callbacks/result114, restored caller ownership, errors0. This qualifies
+the native execution boundary, NOT implicit WOW dialog projection; the real
+immutable-guest gate remains responsible for that separate path. All existing
+native-indirect/sent-only/quit/order assertions remain. Retain the failed
+model/enrollment rows rather than interpreting them as production repair.
+
+commdlg-destroy-observation-r1 is an invalid build-only generator attempt;
+r2 derives the current lifecycle body and adds preserved-error read-only
+native/window-slot observations around DestroyWindow. It changes no selected
+production object and is not a release image. All16 rounds plus final live
+dialog/task retirement pass in that diagnostic: nativeLive0, mapped0 and free
+metadata after native destruction and after normal return publication.
+This does NOT reproduce or explain0102, and is not a replacement for the
+unmodified strict acceptance. No retry-until-green or hidden waiver follows.
+Freeze the corrected supplementary test group, then make one fresh strict
+cohort; preserve any failure. Installed/release remain P12 throughout.
+
+common-dialog-boundary-build-r5 freezes that corrected complete group (exit0):
+42 exact wrapper scenarios plus the independent direct native reference,
+all seven original-object aliases, unmodified sixteen-round actual guest
+COMMDLG in Off/Win16/All, native-indirect/seen/nested and original task order.
+Both receiver-exit held states pass; native indirect includes the two genuine
+COMMDLG cross-task calls. Worker remains0E924EF84528D05F0A6E2BF605973CEB4CC7ACCC9876057F4C1EA6035CE43CA3;
+WOW32 isB3FD3BC037414C5FF88B41D9E35AFA88C9B11F7DD7C35539D2376C4AEEE191FB.
+Reusing the verified generator/graph avoids rewriting identical generated
+inputs; worker/provider Ninja report no work. No diagnostics enter these images.
+This locally verified group is not complete package acceptance or delivery.
+
+common-dialog-boundary-first-runtime-r1 and its verification supervisor both
+exit1 at WRITE-All startup: Off and Win16 pass all four samples. All's first
+sample at4181ms contains WOWEXEC but not WRITE; at8149ms and the later samples
+MSWRITE_MENU/MSWRITE_DOC/MSWRITE_PAGEINFO are visible and the same worker is
+alive. This is startup lateness, not proof of a hang, introduced regression,
+or cause of WINMINE's cell latency. Keep the strict failed four-sample gate;
+do not extend it, waive it or rerun it until green. Full gates/publication
+were not reached. No assets, installed files, ZIP, commit or push changes.
+
+The separate common-dialog-boundary-diagnostic-verification-r1 explicitly
+retains that release blocker. Its fixed P12/new/new/P12 callback/gameplay
+comparison independently requires every real click/result/normal exit and
+all exact frozen inputs. Foundation diagnostics follow serially. Their results
+cannot override the failed WRITE gate or authorize publication.096's earlier
+E10-provider ABBA is not reused for this B3FD-provider candidate; all its
+no-stable-speedup limits remain. Do not alter source during these frozen runs.
+
+That B3FD-provider ABBA now completes all four fixed legs (exit0,360
+instrumented callbacks). Full summary SHA-256
+630E0203AA0280BA54D1D3AC76CFF6B2A032D3677E2D4C7C15E8BF228FE928ED.
+Ordinary flag posted-input/pixel medians ms are64.04/64.95/64.78/64.98;
+inclusive callback spans47.65/57.29/54.19/52.54. Private pixel medians
+31.60/32.06/31.53/32.10. These are rounded summaries of independently
+validated inputs and normal exits, not physical mouse latency. No stable
+overall speedup or noninferiority is proved; normal callback spans are higher
+for these candidate samples. Do not claim the correct096 allocated-read reuse
+or097 COMMDLG execution repair solves cell stutter. review.json explicitly
+denies release authorization and retains WRITE-All and0102 limitations.
+
+The source-defined window-publication lead needs a controlled workload:
+ordinary native desktop population can vary across fixed legs. The queued
+private-population-control experiment uses independently authored native
+windows (0 versus256, hidden on its owned private desktop), unchanged actual
+WinMine twelve-input/normal-exit assertions and fixed old/new/new/old order.
+The helper must prove exact native ownership, survival during measurement
+and normal destruction; original guest, timeouts and product images stay
+unchanged. This isolates dependence on native window population without
+closing or modifying unrelated applications. It is not another product cache
+or a proposed refresh reduction. It waits for the preceding runtime owner.
+Its r1 queued supervisor was cancelled before any compiler/test because
+pre-execution review found a nonunique derivation anchor; r2 corrects the
+anchor and retains that cancellation, not a failed product test. Probe source
+and derivation currently live only under build; no capability/publication claim
+or assertion weakening follows from this diagnostic setup.
+
+Keep this as a source lead, not another untested runtime change or speedup
+claim. project_window_graph prepares existing WND.pcls directly from its
+current backing; when that value is nonzero, replace_window_links writes
+that same value again for nonfresh rows, with guest execution/callback
+mutation excluded between them. An existing cold desktop can have pcls0:
+preparation then creates a class and must still write it. A fresh-only guard
+would therefore be wrong; compare the actual owned field or explicitly retain
+that missing-class transition. This lead does not justify such a guard.
+The complete captured view also rewrites rectangles/styles/class numerics
+when already identical. The same page-domain's publish_menus already derives
+a call-local changed decision from authoritative copied storage and retains
+unchanged content without a second cache. Audit that existing pattern before
+inventing a new mechanism. Any later window use must retain all validation,
+pin acquisition, full generations, rollback, retirement and local capture.
+Shared-CLS row ordering must still be last-writer correct: a preparation-time
+comparison alone is insufficient if an earlier commit changes the same CLS.
+Non-owned/noncanonical pointers keep their original service boundary. Do not
+trade correctness or freshness for a tick cap, background publisher, private
+USER interpretation or an unregistered object cache. Implement nothing from
+this lead until the current verified baseline reaches its safe handoff.
+
+The next source review finds a smaller alternative before adding no-op
+publication: replace_window_links still uses scalar SAS for WND.pcls and the
+two public CLS numerics on every row. Reuse081's existing bounded writable
+mapping for these known-owned fields first; it already preserves original
+write access/CPL/VM, trace and failed-map scalar fallback. Do not add a dirty
+cache, throttle, new publisher or preparation-time equality suppression.
+WND backing is held by the transaction. CLS needs actual allocation membership,
+not an address-range guess: retain scalar semantics for non-owned classes.
+Its style offset64 and window-extra offset76 are NOT contiguous; offsets68/72
+are private and must survive. Keep original row commit order/shared-CLS last
+writer, cold desktop/new class, validation, rollback and collection ordering.
+The class catalog is stable through commit; collection follows temporary-pin
+release in project_window_graph's done path. Avoid adding an O(rows*classes)
+lookup to each steady refresh: reuse092's existing call-local sorted membership
+construction, factoring it only if the second real consumer is implemented.
+New classes created after that snapshot have direct allocation provenance;
+an unknown earlier pointer remains on the scalar route even if later storage
+is allocated at that address. No new persistent class authority is needed.
+This is a candidate, NOT admitted implementation or measured speedup. Extend
+actual CCPU owned/non-owned/cross-page/trace/private-sentinel/rollback and
+shared-class order assertions as one group before any production build.
+
+### Residual click attribution: controlled population and source exclusions
+
+The owned private-population-control-r2 diagnostic completes its fixed
+P12/new/new/P12 order, each with0 and256 independently authored invisible
+native windows. All eight actual twelve-input/pixel/normal-exit cases pass;
+the native helper proves ownership, survival and normal destruction. Median
+posted-input/pixel times are31.0855/31.774,30.5875/32.0845,
+31.4115/32.152 and31.0015/31.1535ms (0/256 respectively). This does not
+reproduce the ordinary desktop's approximately65ms median or prove speedup.
+Source and runner remain build-owned diagnostic artifacts, not product helpers.
+
+population-page-cost-r1 and its cohort exit0. Its reversible private source
+instrumentation leaves production caches/images unchanged and also passes
+original EMS. Paired counters prove that the added windows actually enter
+the copied view: average copy rows15.795 becomes272.978. Inclusive copy cost
+20.0031 becomes101.8141ms; projection57.1046 becomes124.5228ms; window-row
+sorting1.0709 becomes34.9222ms across the respective whole measurements.
+Call counts differ (copy342/274, projection171/136, view sort303/240).
+These nested, quiescence-inclusive spans are neither additive nor CPU shares.
+The view has genuine population-dependent work, but that is not proof that
+it alone causes the ordinary/private latency difference.
+
+analyze-click-pc-r1 exits0 without running or suspending another application.
+It reconciles the saved exact MAPs with actual callback task-thread identity
+and the union of twelve flag input / twenty-four callback intervals; idle gaps
+are excluded. Exact local native-module export identities and sampled offsets
+are recorded. Samples repeatedly occur near qsort, physical mapping, session
+TLS, copied-view routines, memset and native allocation/free service entries.
+Only35/40/etc samples survive per leg: this is not a call stack, CPU percentage,
+or unique bottleneck proof. NtFreeVirtualMemory samples include offset12,
+both before callback dispatch and within original dispatch. The currently
+delivered/candidate images, raw observations and timing limitations stay frozen.
+
+Source exclusions: session_thread_current already returns direct thread-local
+thread_instance; physical_mapping_resolve finds this session's record and
+indexes its page array. It is NOT a per-window range search. A second TLS cache
+would add lifetime hazards, not fix a demonstrated search. Original phy_r32
+uses two phyR reads for the retained video/memory contract, not a wrong-build
+endian workaround; do not bypass arbitrary/device reads or edit that mirror.
+copy_current_window_view copies in lifetime-record order, then qsort moves
+complete observation records to preserve ascending slot order. Small-key sort
+is a possible bounded experiment, not an admitted fix: preserve read/failure
+order, full identities, sizing, allocation-failure behavior and both menu/full
+views. Neither persistent indexes nor weaker publication are justified.
+
+write-startup-attribution-r1 is a fixed four-leg P12/candidate/candidate/P12
+All-style diagnostic against the unchanged4/8/12/16s strict WRITE gate. It
+retains the first failed snapshot and every comparison outcome, without changing
+timeouts, the observer/parser, guest media or installed assets. Passing later
+legs alone cannot erase that failure, prove its cause or authorize release.
+All four fixed comparison legs now pass the unchanged strict gate; first
+samples are4228/4202/4156/4175ms. The one earlier4181ms missing-WRITE outcome
+remains unexplained, not a repaired or waived regression. No release follows.
+
+analyze-click-phases-r1 reuses the same frozen callback records (no application
+rerun):288 exact down/up callbacks across four legs and three environments,
+each accepted/normal with exactly one ordered DispatchClientMessage phase.
+For right-button-up, ordinary pre/dispatch/post medians are4.69/19.51/0.45ms
+in P12 and5.90/23.82/0.49ms in the candidate; private equivalents are
+1.14/6.44/0.19 and1.30/6.60/0.19ms. Repeat legs retain the same qualitative
+shape. Separate medians are not additive. Most of this sampled ordinary/private
+callback difference is within DispatchClientMessage, not final cleanup alone.
+That phase includes guest execution, nested host calls and their adaptation;
+it does not prove the original guest is slow or permit skipping publication.
+Retain this narrower boundary for the next source-led attribution rather than
+claiming that faster outer copies alone will resolve the reported stutter.
+
+### Owner resumes fixed S4 COPYDATA functional closure
+
+Owner accepts performance as stable, stops that lane and explicitly resumes
+S4 functionality. copydata-resume-seal-r1 exits0 before source edits: all
+then-uncommitted files, full original WOW source/provider/worker products and
+P12 delivered images are recoverably sealed.096/097 remain uncommitted,
+not secretly published; historical WRITE-All and0102 are not declared fixed.
+No new timing/sort/cache work is admitted by this functional continuation.
+
+095/344 source group is now staged, not accepted. Original converters retain
+their allocation, payload copying and sole CPDATA Add/Find/Delete algorithm.
+Their existing message scratch carries acquisition bits and scalar release
+keys; failed acquisitions/SEH unwind through the original unthunker. Reused
+active mappings have no owned bits. Unlink nodes before reentrant guest frees;
+release never dereferences a returned native/guest input header. Delete on an
+empty list returns FALSE. Reverse data nodes use the actual far input identity,
+not a transient mapped native address. No second map or guest change follows.
+
+All19 stack-record owners (11 USER message,2 dialog,5 Hook,1 window callback)
+are initialized and finally discharge outstanding COPYDATA only. Original
+normal unthunk remains; scratch is consumed once, so finally is idempotent.
+Unchecked ThunkMsg16/getmsg16 callers consult the appended private status,
+not HWND0. Existing required-window callers retain their original checks.
+Original dialog/CWP callers explicitly initialize the synchronous fFreeTRUE;
+filter FALSE remains for DDE. Original operation/Hook context becomes TLS and
+is restored at nested thunk/Hook boundaries. Filter same-message VP reuse
+remains, with prior different-message recursion scratch restored and only
+this frame's allocated MSG16 released on unwind.
+
+A source-defined unsafe filter output needs an explicit disposition: its
+old reverse path dereferences NULL when no native pair exists. Constructing
+that reverse fallback now permits ordinary native-procedure forwarding, but
+a native MSG returned by a filter has no consumer-owned release boundary for
+a new COPYDATA buffer. Such a modified-output conversion is rejected; leave
+the original MSG unchanged and roll back this frame's new storage. Existing
+active native-pair forwarding remains valid. This is not removal of a working
+old ownership transfer (the old path faults), a native-pointer lifetime claim
+or support for asynchronous pointer messages. Do not broaden DDE or negative
+Hook policy to implement this guard. Ownership lies with the synchronous
+converter, native USER with message transport and original taskman with WOW
+execution. All other M4/external/M1--M6 obligations remain in S4.
+
+Supplementary verify-wow-copydata-lifetime.ps1 extracts the complete selected
+CPDATA functions, WM32CopyData, ThunkMsg16, exact forward/reverse COPYDATA case
+fragments and actual adapter finalizers. Fake allocators independently fail
+each of four stages per direction, test nested ownership and mutable/noaccess
+release headers, zero data, exception rollback and NULL-HWND status. It is
+not original full-structure-layout, real guest or native transport proof.
+Existing original-object thunk/Hook fixtures additionally assert nested
+mode/context restoration. Actual verify-win16-message-probe gains opt-in
+CopyDataProc32 (normal structured mode only): real USER16 GetWindowLong135
+obtains a native-procedure thunk, CallWindowProc122 executes fresh and active
+received COPYDATA paths on the sender task thread, checks payload/results and
+retains the original nested far buffer plus both normal task retirements.
+Native report separately requires fresh1/borrowed1; ordinary six structure
+checks stay unchanged. Default independently authored NE bytes must remain
+unchanged when the new mode is off. Full real boundary/negative/lifecycle
+and every-P application/DOS/publication checks remain required.
+
+The first095 group build stops in the supplementary fixture, before provider
+compilation: its independent declarations omitted the profile's effective
+FASTCALL convention. R2 additionally exposes missing model lReturn and a
+function-pointer declaration; r3's W4/WX analysis requires explicit filter
+hwnd32 initialization. These failed compile cohorts remain evidence. R4's
+21-case exact source/Hook model, seven COMMDLG leaves, actual worker/provider
+build and Hook guard pass. Thunk-scope linking then correctly rejects the
+fixture's duplicate fWhoCalled/fThunkDDEmsg definitions: the full archive
+already supplies the original TLS owners. Remove those two fixture doubles,
+retain its restoration assertions against the real owners. No duplicate
+symbols are suppressed and no failed cohort is published.
+
+Adjacent source review also fixes CPDATA header/payload ambiguity as part of
+the same constructor group. Both Find routines have only header consumers;
+an embedded incoming header can numerically equal a still-live outer DATA
+node's key. That is not the existing header mapping. Add a header-role bit
+to the existing CPDATA.Flags and mark only the two original header producers;
+the original list/search algorithm and allocation owner remain. Two exact
+source cases require independent conversion of an embedded header in each
+direction, then inner cleanup must leave the outer pair alive. The modified
+filter-output negative separately requires original MSG preservation and
+complete rollback. No new table, guessed identity or pointer-range test.
+All24 model scenarios remain supplementary; actual guest Proc32 and complete
+release gates still decide runtime acceptance. Initial nontrivial mirror
+line upper-bound278 precedes these small guards, not a claimed final count;
+the registered300-executable-line budget must be checked before delivery.
+
+R5's complete24-case model, worker/provider build, actual original TLS thunk
+scope, Hook scope and native indirect/identity/nested/seen/task-order all pass.
+The first actual Proc32 Off case fails at native operation3, with normal
+COPYDATA values/results and guest structures4/nested1 already reached. Preserve
+that failure. Failure-only native-peer diagnostic r1 stops before runtime
+at its own W4 local-name-shadow warning; r2 records two failed exact-full-HWND
+comparisons on the sender thread, not a converter failure. Source confirms
+walias.h USER32 is (HAND32)(INT)(SHORT), and pinned clmsg.c CallWindowProcAorW
+ends at usercli.h CALLPROC_WOWCHECK, whose native branch calls the supplied
+procedure with the unchanged hwnd argument. The probe incorrectly expected
+a full native HWND here. Assert the exact sign-extended original USER16
+carrier for each known endpoint instead (not a loose low-word match), keeping
+payload, original-thread, fresh1/borrowed1, nesting and retirement checks.
+No product normalization or converter change is made to satisfy that probe.
+Failure-only logging preserves LastError and is absent from normal success.
+
+copydata-closure-build-r6 completes0. All24 exact source/Hook fault-lifetime
+cases,42 COMMDLG boundary scenarios plus direct native reference, actual
+original TLS thunk restoration, Hook/context restoration, native indirect/
+identity/nested/seen and original task order pass. Real USER16 Proc32 modes
+Off/Win16/All each report fresh1/activeBorrow1, ordinary native structures6,
+preserved original far nesting and both exact task retirements. Product source
+is unchanged since r5's build; only the source-proven probe contract correction
+and failure-only diagnostic changed. Prior r1--r5 outcomes remain retained.
+This is whole focused-group verification, NOT release/S4/T closure.
+copydata-closure-verification-r1 waits for that exact controller identity and
+serially runs early strict WRITE3, fresh native/original/S3 foundations, the
+existing15 message modes, application/DOS/modal/logon floors and final quality.
+The existing full-gate script is mechanically derived with exact source/hash/
+replacement evidence; performance experiments alone are omitted under the
+owner's explicit freeze. No functional assertion/deadline is removed.
+Installed/release stay P12 until complete reviewed publication succeeds.
+
+Second-role source review holds the unstarted full-gate continuation, without
+interrupting the running foundation tests. R6 is not delivery-ready: original
+WOWGlobalAllocLock16 (wcall16.c) calls CallBack16, while the current forward
+COPYDATA constructor first reads the native header after that reentry and
+rereads its data key after another allocation. Capture that header's scalars
+on the fresh-construction branch before the first guest allocation; borrowed
+active mappings still require no header read. Preserve original payload copy,
+allocation/list ownership and exception propagation, without another buffer.
+The release-only no-access witness is insufficient: add a supplementary
+allocation-boundary witness that revokes the native header on first guest
+allocation while its independent payload stays alive. Separately, reject a
+failed PostAppMessage conversion before both native posting and normal
+unthunk, rather than merely skipping the native call. Successful HWND0 thread
+messages remain valid. These are finite corrections within095's already
+registered acquisition/caller contract, not new functionality or a waiver.
+The queued-script hold retains its original bytes/hash and records that no
+running test or production source was changed. Foundation outcomes remain
+separate evidence; the corrected source requires a new frozen cohort.
+
+The allocation-boundary negative control reproduces an access violation with
+the r6 exact constructor (rollback_live0); it is supplementary fake-service
+evidence, not an original guest crash. The corrected constructor passes that
+witness. Exact WU32PostAppMessage extraction now additionally proves failed
+conversion reaches neither native posting nor normal unthunk, while a valid
+HWND0 opaque thread message reaches both once. Model denominator27 includes
+these three new cases. R7 stops only at the test's SDK macro redefinition;
+explicitly undefining the substituted PostThreadMessage macro fixes the model
+declaration, not runtime code. R8's full27 cases pass before product builds.
+
+The earlier full-foundation run fails, independently of the planned queued
+review hold. Its graph parent passes managed-slot reuse, but the designated
+window-cache-failure child fails at fixture line992: Windows does not provide
+the demanded same-slot HWND reuse before the bounded loop exits. That unrelated
+matrix prevents reaching the explicitly requested callback-restoration fault;
+the event is unsignaled and child exit1, not the required c0000420. Preserve
+this failed gate. Do not describe it as a passed negative or product regression.
+The planned fixture correction keeps the complete reuse matrix in the normal
+parent and removes that unrelated dependency only from explicit terminal-fault
+children; all resource/owner setup and exact terminal marker/event/status
+assertions remain. No allocator retry bound or runtime assertion is relaxed.
+
+R8 completes0 after both finite source corrections: model27, COMMDLG42/native
+reference, original TLS/context/scheduling/native execution group and actual
+USER16 Proc32 Off/Win16/All all pass. WOW32 is
+B761907DDE0B212F037C96B179328FB1E17326C1DF6EA38958CFA29472D768DF;
+NTVDM remains0E924EF84528D05F0A6E2BF605973CEB4CC7ACCC9876057F4C1EA6035CE43CA3.
+copydata-default-probe-identity-r1 independently assembles pinned HEAD/current
+SEND/RECV in all five existing modes: all ten image hashes match with the new
+Proc32 option off. These are independently authored tests, not rebuilt guests.
+The conservative changed nontrivial mirror-line upper bound is285, within
+the registered300-executable-line budget; declarations are included and
+comment/empty/brace-only lines excluded. No selected mirror file is added.
+The fixture's terminal-child dependency correction is test-only and applied
+after r8's consuming native fixtures finish; no live compiler/test input is
+changed. Full verification-r2 uses fresh evidence IDs and the complete current
+fixture, without reusing r1's failed foundation gate. Installed stays P12.
+
+R2's full native group finishes20/21: the intended graph terminal fault paths
+now all pass, but class-procedure's unrelated managed-reuse precondition fails
+at the same bounded allocation loop, before its own selected behavior. Native
+source tracing identifies create_bound's SetWindowsHookExA(WH_CBT) before its
+CreateWindowEx: Hook and HWND allocation can compete for the chosen dead USER
+slot. The independent64-round native service control confirms63 Hook matches
+and zero window matches on that exact source-shaped allocation sequence. This
+is a measured test-precondition defect, not grounds for a product workaround
+or marking the failed class-procedure row passed. R2 does not publish.
+
+The corrected test offers four simultaneously live, projected, pinned native
+windows before destroying them. It selects ONLY an actually reused window
+slot with a different full generation, retaining every old/new backing, tag,
+identity, invalid-generation and final-release assertion, plus cleanup checks
+for all unmatched pins. The existing131072-attempt/15000ms limits are unchanged;
+failure to obtain real reuse still fails. No fixed OS allocation order is
+assumed, no synthetic HWND substitutes for real reuse, and no assertion is
+deleted. Explicit terminal children still omit only the unrelated repeat
+matrix; the parent retains the complete two-mode creation/null-class proof.
+R3 tests the previously failed case first, then reruns the complete foundations
+and release group against the unchanged r8 production input hashes. Source
+and binary results remain distinct; an orchestration exit alone is no pass.
+
+R3 passes native21/21, original controls30, resource/style guards, but the
+subsequent menu-resource fixture again cannot obtain managed HWND reuse within
+the existing bound. Its16 original resource/7 parser/64 invalid-repeat and6
+original menu-thunk checks have errors0; its separate reuse precondition has
+errors1, so the aggregate remains a failed gate. The retained first-miss trace
+now identifies an actual IME HWND occupying a candidate's dead slot. Four
+candidates do not cover this richer native allocation context. The bounded
+test pool becomes16 candidates, with unchanged real same-slot/different-full-
+generation requirement, all matched/unmatched pin releases and original
+attempt/time limits. This changes only test setup capacity, not product
+allocation, lifetime checks or a semantic boundary. R4 first runs that exact
+failed menu-resource case: it passes (managed mode36 attempts, null-class1),
+including the original resource/parser/thunk and final memory/retirement
+assertions. The whole current fixture cohort must still pass before delivery;
+neither earlier partial pass nor more candidates authorizes release.
+
+R4 still fails the graph parent's acquisition precondition, despite the larger
+pool. Therefore candidate-pool growth is rejected, not increased again or
+used to waive real reuse. Source/observed roles require preserving the native
+GUI lifetime and reserving the intervening Hook allocation separately. An
+independent source-shaped control keeps a native BUTTON alive, creates a
+thread-local pass-through CBT Hook before the old STATIC, destroys the old
+window, releases that Hook last, then performs Hook→BUTTON creation. All64
+rounds obtain the actual old HWND slot with a new generation; the original
+unprepared control obtained zero window matches and63 Hook matches.
+
+The final fixture returns to its original single-slot/generation algorithm
+and original retry/time bound. It runs that matrix while its existing actual
+managed test window is alive (no added anchor/helper window), and only managed
+creation mode primes/frees the same-role test Hook. Null-class mode does not
+allocate that extra Hook. All normal, retained-generation, table/type/tag,
+invalid-generation and final-release assertions remain. The unnecessary
+pool/helper code is removed: current fixture delta27 additions/4 removals.
+This is entirely test-owned setup; no runtime Hook/window/allocator mechanism
+is introduced. Terminal children omit only the duplicated unrelated matrix.
+R5 first selects the three exact previously problematic graph/menu/class
+groups as a fixed all-must-pass set, then completes the unchanged whole release
+suite. No further production code or performance experiment is selected.
+
+R5's fixed three-case prerequisite set completes3/3: graph-snapshot,
+menu-resource and class-procedure all pass, with both reuse modes obtaining
+actual same-slot/new-generation windows on attempt1. The graph test also
+reaches every requested terminal fault event and exact c0000420 outcome.
+The role/lifetime correction supersedes, and deletes from current source,
+the unsuccessful candidate-pool attempts. All failures remain retained raw
+evidence. The ordinary complete cohort and publication remain pending;
+these prerequisite passes alone do not close S4 or authorize release.
+
+### S4 P13 composed correctness delivery and second-role review
+
+Question: complete the admitted095 constructor/provenance/caller/unwind group
+and097 native execution gap while retaining096 correctness, with performance
+frozen. Original conversion/list/Hook/task algorithms remain selected; USER
+owns native resources and delivery/replies, and adapters supply scoped
+ownership/unwind only. No original guest or user configuration changes.
+
+Inputs: sealed P12/3ce9b7d0b, copydata-resume-seal-r1, corrected frozen
+copydata-closure-build-r8 source/output inventories and canonical guest ZIP
+7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7.
+The complete r5 correctness cohort, not prior failed/partial cohorts, passes:
+
+- source model27, COMMDLG42 plus native reference, original TLS/Hook context,
+  original task order and actual native execution/lifetime supplements;
+- actual USER16 Proc32 fresh1/active-borrow1 in each of Off/Win16/All, ordinary
+  structured messages6, exact sender thread and both normal task retirements;
+- native21/21, original controls30, menu/resource and both-width style guards,
+  all12 real Win16 controls/dialog/common-dialog/Hook groups;
+- all15 real default/extension/structures/early/timeout message policy groups,
+  exact returned values and unchanged receiver/sender retirement assertions;
+- WINMINE/SOL gameplay and normal exit3 each, strict WRITE startup3 (four
+  samples each), Console17/Window17, native modal reference and actual modal3,
+  complete-token-logon gameplay3 and final quality/governance;
+- retained096 exact-body correctness refresh0 (generation/retirement/metadata/
+  fallback/LastError), with no timing or performance comparison;
+- native-queue-reference-r1 remains reusable with every recorded input hash
+  identical; native A/W ordinary-before-quit assertions are not bypassed.
+
+Exact roots are copydata-reuse-fixture-and-full-r5 (exit0),
+copydata-closure-first-runtime-r5, copydata-closure-foundations-r5 and its
+guest-floors, copydata-closure-all-gates-r5, applications-r5 and final-quality-r5.
+Original-source/source-body doubles remain supplementary; actual guest facts
+come only from their real CCPU/USER16 reports and lifecycle receipts. Default
+probe bytes remain identical in all ten prior SEND/RECV modes.
+
+copydata-closure-delivery-r5 completes0: recoverable coherent P12 backups,
+13-image publication to assets/release and O:/winnt/system32, installed
+both-width style, installed-logon/gameplay3 and final13-image hashes all pass.
+stopped-processes.json is empty: no existing owner session was terminated.
+Only NTVDM and WOW32 change. Their final hashes are respectively
+0E924EF84528D05F0A6E2BF605973CEB4CC7ACCC9876057F4C1EA6035CE43CA3 and
+B761907DDE0B212F037C96B179328FB1E17326C1DF6EA38958CFA29472D768DF.
+Original guest/configuration/ZIP stay unchanged; no performance conclusion.
+
+Second-role review: all12 modified host-mirror files retain their original
+functions, with285 conservative nontrivial changed lines within344's300
+executable-line budget. Selected278 files are183 byte-exact/95 registered
+content differences/issues0 versus P12's192/86: nine additional differing
+files, no new selected mirror or guest file. Registration/final-state README
+and Current/working-plan/evidence updates after runtime delivery are metadata
+only, not another runtime candidate; final documentation/source-register
+checks must cover these administrative changes before the reviewed commit.
+
+Scope remains finite and unfinished: other M4 families and real movement/
+failure/task-death boundaries, cross-worker and external-native-process/both-
+bitness interaction, then M1--M6 reconciliation stay S4 obligations. S5 owns
+individual task termination/NT Monitor and S6 reconciliation, not displaced
+S4 foundations. WRITE editing/save/full exit and physical-input/pixel-complete
+claims remain unproved. Historical0102/WRITE startup failures and older S3
+risks are retained, not declared fixed by current passes. P11 ad7da140e's091
+failed cohort was not published; P12's earlier facts remain in this audit.
+This is bounded P13 delivery, not S4/T or persistent-goal completion.
+
+Final-review-r1 completes0 after administrative finalization: runtime/test
+inputs and all outputs remain frozen, the sole superset-inventory difference
+is the WOW32 README's delivery status, the real CCPU fixture hash is unchanged
+since r5, all deployed13/ZIP hashes match, and fresh source-register plus
+post-delivery quality/governance checks pass (278/183/95/issues0).

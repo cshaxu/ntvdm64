@@ -985,6 +985,7 @@ VPVOID CopyDataFindData16 (HWND16 To_hwnd, HWND16 From_hwnd, DWORD Mem)
     while (pTemp) {
         if ((pTemp->To_hwnd == To_hwnd) &&
             (pTemp->From_hwnd == From_hwnd) &&
+            (pTemp->Flags & COPYDATA_HEADER) && /* DIV-344: not an embedded payload. */
             (pTemp->Mem32 == Mem)) {
                 return (pTemp->Mem16);
         }
@@ -1005,6 +1006,7 @@ PCPDATA CopyDataFindData32 (HWND16 To_hwnd, HWND16 From_hwnd, DWORD Mem)
     while (pTemp) {
         if ((pTemp->To_hwnd == To_hwnd) &&
             (pTemp->From_hwnd == From_hwnd) &&
+            (pTemp->Flags & COPYDATA_HEADER) && /* DIV-344: same original list. */
             (pTemp->Mem16 == Mem)) {
                 return (pTemp);
         }
@@ -1026,6 +1028,9 @@ BOOL CopyDataDeleteNode (HWND16 To_hwnd, HWND16 From_hwnd, DWORD Mem)
     PCPDATA pTemp2;
 
     pTemp1 = pCPDataFirst;
+
+    /* DIVERGENCE(MVDM-HOST-DIV-344): rollback may have no published node. */
+    if (!pTemp1) return FALSE;
 
     if ((pTemp1->To_hwnd == To_hwnd) &&
         (pTemp1->From_hwnd == From_hwnd) &&

@@ -342,11 +342,10 @@ closure. The witness includes20ms pixel polling. Local-hook-delivery-r1
 publishes coherent13 to both destinations and passes deployed style/installed
 logon3 plus final hashes. Source/assets form bounded P9, with reviewed
 main/origin delivery evidence retained; full M1--M6/S5/S6 remains open.
-P11 ad7da140e's091 cohort failed0102 and was never published.
-P12 delivers091--094: coherent13, installed3/hashes pass; no speedup proved.
-Unlocated0102/WRITE-Off failures are retained, not claimed repaired.
-M4 structure/reply/timeout witnesses pass; allocation/Proc32 gaps stay open.
-Full M1--M6/S5/S6 remains required; original converters/guest are unchanged.
+P12's091--094 and unlocated0102/WRITE-Off failures remain in the S4 audit.
+P13 publishes095--097: COPYDATA/caller ownership, Proc32 and COMMDLG scopes.
+Full gates, coherent13 and installed3/hashes pass; performance remains frozen.
+Full M1--M6/S5/S6 remains open; original guest/configuration stay unchanged.
 
 ## Active Packet
 
@@ -357,7 +356,7 @@ Full M1--M6/S5/S6 remains required; original converters/guest are unchanged.
 | Objective | Complete explicit/implicit message identity, reply, waits and nested execution for Win16/Win16 and both native directions through original owners and bounded native services; pair failure and retirement. |
 | Non-goals | Guest modification/rebuild, private native SMS/layout decoding, parallel queue/transport/scheduler, helper windows, whole USER server import, new individual-task termination UI or broad unrelated WOW families. |
 | Reference Baseline | Clean e5d7d77bb; P22 runtime from eba5fcfc7, all13 published and hash-matched; S3 original control/dialog/menu and callback/native-return evidence retained. |
-| Files And ABI Surface | Original MVDM wumsg/wmsg16/message converters/wmdisp32 and selected original USER taskman/queue; existing wow32-dll lifecycle/runtime/message/borrow/provider bindings and corresponding tests. NTVDM only for proved worker execution/lease dependencies. No new wire ABI by default. |
+| Files And ABI Surface | Original MVDM wumsg/wmsg16/wcommdlg/converters/wmdisp32 and selected USER taskman/queue; existing wow32-dll lifecycle/runtime/message/borrow/provider bindings and tests. NTVDM only for proved execution/lease dependencies. No new wire ABI by default. |
 | Applicable Rules | Source-first four-rung audit, original/host/adapter responsibility rule, registered minimal mirror diffs, immutable original guest, grouped background build/tests, coherent13 release and reviewed main/origin commit/push. |
 | Verification | Source-led M1--M6 inventory and finite remediation before runtime edits; original-body/boundary negative/lifetime fixtures plus real two-task/mixed-native message witnesses; retain S3 actual guest/application/DOS and normal-desktop floors. |
 | Expected Markers | Actual receiver InSendMessage/reply result/once-only delivery; returned value and LastError; original task execution restoration; queue non-consumption/order under native contract; nested and failed/destroyed-peer cleanup; no outstanding converted-buffer leases. |
@@ -370,12 +369,11 @@ Full M1--M6/S5/S6 remains required; original converters/guest are unchanged.
 
 ## Current Technical Baseline
 
-S4 P12 retains P9 and adds091--094's owned-view/native wait/receive corrections.
-NTVDM SHA-256 is5001C298681700FBEAE98A517A23A10AFB375BD94B9B5B5EA961F3B1A5D21BB9;
-WOW32 isE10B0B8DEB15A619DD90DADD80AB4BC3A616C52E5C7DC45219DB5AB931D0DA36.
-The release manifest owns exact identities of all13 images. Both
-assets/release and O:/winnt/system32 match the tested package; original guest,
-user configuration and assets/winnt.zip are unchanged by this delivery.
+S4 P13 retains P12 and composes095--097's message/COMMDLG lifetime group.
+NTVDM SHA-256 is0E924EF84528D05F0A6E2BF605973CEB4CC7ACCC9876057F4C1EA6035CE43CA3;
+WOW32 isB761907DDE0B212F037C96B179328FB1E17326C1DF6EA38958CFA29472D768DF.
+The coherent13 manifest matches assets/release and O:/winnt/system32.
+Original guest, user configuration and assets/winnt.zip are unchanged.
 
 | Architecture | Images |
 | --- | --- |
@@ -390,7 +388,7 @@ prove full S4 mixed-message/reply behavior, WRITE editing/save/full exit or
 S5 per-task termination. Physical control input and every drawing pixel are
 not inferred from message-driven probes.
 
-Selected278 mirror files retain192 exact/86 registered content differences,
+Selected278 mirror files retain183 exact/95 registered content differences,
 zero format-only/register gaps. This selected total is not an S3-added count
 or proof of dormant branches. Original CCPU40 /MT x86 remains the worker
 profile. NTW16S retains the integrated20px policy and approved custom geometry.

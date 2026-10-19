@@ -347,6 +347,17 @@ push word 0
 api 2,50
 require 18
 mov [native_window-data],ax
+%ifdef M4_COPYDATA_PROC32
+; USER16 GetWindowLong returns the original native-procedure thunk. Its
+; CallWindowProc route must execute the native procedure on THIS task thread.
+push ax
+push word -4
+api 2,135
+mov [native_procedure-data],ax
+mov [native_procedure+2-data],dx
+or ax,dx
+jz failed
+%endif
 send native_window,0x470,0x1234,0x5678,0x9abc
 result 0x10
 send native_window,0x471,0,0,0
@@ -379,6 +390,17 @@ result 0x46
 call check_position
 send native_window,0x4a,[window-data],ds,copydata-data
 result 0x4a
+%ifdef M4_COPYDATA_PROC32
+; Fresh guest input has no received native/far provenance node yet.
+push32 native_procedure
+push word [native_window-data]
+push word 0x4a
+push word [window-data]
+push ds
+push word copydata-data
+api 2,122
+result 0x4a
+%endif
 add word [native_count-data],3
 mov ax,3
 call native_operation
@@ -727,6 +749,25 @@ jne .bad
 cmp dx,0x447a
 jne .bad
 mov word [copy_depth-data],0
+%ifdef M4_COPYDATA_PROC32
+cmp dword [native_procedure-data],0
+je .no_native_procedure
+; Here target/from/far-header match this still-active received pair.
+; The native procedure receives the borrowed original conversion; the outer
+; guest far header and data must remain usable after native return.
+push32 native_procedure
+push word [window-data]
+push word 0x4a
+push word [bp+10]
+push word [bp+8]
+push word [bp+6]
+api 2,122
+cmp ax,0x4a
+jne .bad
+cmp dx,0x447a
+jne .bad
+.no_native_procedure:
+%endif
 ; Reacquire the far header/payload before inspecting them after reentry.
 les di,[bp+6]
 cmp dword [es:di+4],8
@@ -1085,6 +1126,9 @@ window: dw 0
 peer: dw 0
 sender: dw 0
 native_window: dw 0
+%ifdef M4_COPYDATA_PROC32
+native_procedure: dd 0
+%endif
 started: dw 0
 file: dw -1
 procedure: dd 0

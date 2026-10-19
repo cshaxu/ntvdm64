@@ -1,5 +1,15 @@
 # NTVDM worker owner
 
+ADAPTER-WOW-096 completes the080 allocated-view scalar read path in graph
+publication, window-slot identity, borrowed-generation relation and handle
+metadata consumers. Only domain-table or retained-record-owned storage uses
+the existing bounded synchronous RAM reader. Arbitrary guest pointers, link
+targets and non-owned/noncanonical CLS still retain scalar SAS semantics.
+Every generation check, capture/commit, pin, retirement and failure remains;
+no sampled field is cached, no boundary is skipped and no guest/mirror changes.
+Focused exact-body and actual CCPU lifetime checks establish correctness.
+Owner freezes performance experiments; P13 retains this without a speedup claim.
+
 ADAPTER-WOW-092 derives owned-CLS membership once per complete observation
 copy in call-local sorted addresses. It replaces repeated list walks, not
 class storage/identity/lifetime or descriptor authority. Single reads and

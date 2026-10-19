@@ -68,6 +68,8 @@ typedef struct _CPDATA {
 //
 
 #define COPYDATA_16             0x0001
+/* DIVERGENCE(MVDM-HOST-DIV-344): distinguish header from payload provenance. */
+#define COPYDATA_HEADER         0x0002
 
 /*----------------------------------------------------------------------------
 |       DDEDATA structure

@@ -13,6 +13,8 @@
 
 
 #include "precomp.h"
+/* DIVERGENCE(MVDM-HOST-DIV-344): original conversion finalizers. */
+#include "wow_message_lifetime.h"
 #pragma hdrstop
 
 MODNAME(wudlg.c);
@@ -26,7 +28,8 @@ LONG W32DialogFunc(HWND hdlg, UINT uMsg, DWORD uParam, LPARAM lParam)
 {
     BOOL fSuccess;
     register PWW pww;
-    WM32MSGPARAMEX wm32mpex;
+    WM32MSGPARAMEX wm32mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
+    __try {
     BOOL   fMessageNeedsThunking;
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
@@ -83,6 +86,7 @@ LONG W32DialogFunc(HWND hdlg, UINT uMsg, DWORD uParam, LPARAM lParam)
         wm32mpex.uParam = uParam;
         wm32mpex.lParam = lParam;
         wm32mpex.pww = pww;
+        wm32mpex.fFree = TRUE; /* DIV-344: same synchronous contract as WndProc. */
         wm32mpex.lpfnM32 = aw32Msg[uMsg].lpfnM32;
         if (!(wm32mpex.lpfnM32)(&wm32mpex)) {
                 LOGDEBUG(LOG_ERROR,("    W32DialogFunc ERROR: cannot thunk 32-bit message %04x\n", uMsg));
@@ -158,6 +162,9 @@ Error:
 SilentError:
     wm32mpex.lReturn = 0;
     goto Done;
+    } __finally {
+        wow_message_unwind32(&wm32mpex);
+    }
 }
 
 
@@ -1074,7 +1081,8 @@ ULONG FASTCALL WU32IsDialogMessage(PVDMFRAME pFrame)
     ULONG ul;
     MSG t2;
     register PISDIALOGMESSAGE16 parg16;
-    MSGPARAMEX mpex;
+    MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
+    __try {
     PMSG16 pMsg16;
 
     GETARGPTR(pFrame, sizeof(ISDIALOGMESSAGE16), parg16);
@@ -1087,6 +1095,7 @@ ULONG FASTCALL WU32IsDialogMessage(PVDMFRAME pFrame)
     mpex.iMsgThunkClass = WOWCLASS_UNKNOWN;
 
     ThunkMsg16(&mpex);
+    if (!mpex.fThunkSucceeded) { FREEARGPTR(parg16); RETURN(0); }
 
     GETFRAMEPTR(((PTD)CURRENTPTD())->vpStack, pFrame);
     GETARGPTR(pFrame, sizeof(ISDIALOGMESSAGE16), parg16);
@@ -1113,6 +1122,9 @@ ULONG FASTCALL WU32IsDialogMessage(PVDMFRAME pFrame)
 
     FREEARGPTR(parg16);
     RETURN(ul);
+    } __finally {
+        wow_message_unwind16(&mpex);
+    }
 }
 
 

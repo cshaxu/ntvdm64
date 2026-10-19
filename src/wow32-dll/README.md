@@ -1,5 +1,32 @@
 # WOW32 DLL target component
 
+ADAPTER-WOW-097 pairs all seven original GUI COMMDLG native leaves with the
+existing borrowed execution scope. Original wcommdlg conversion, COMMDLGTD,
+Hook/resource cleanup and results remain unchanged. Only that original owner
+receives SDK aliases; the adapter alone calls the seven real ANSI APIs.
+FindText/ReplaceText publish their returned window through the existing scope.
+GetFileTitle/CommDlgExtendedError are not GUI dispatch boundaries. Preserve
+LastError, nested execution and exceptional unwind; no new scheduler, helper
+window, mirror or guest change. This is a release-blocking execution repair,
+not evidence that COMMDLG causes WINMINE's residual cell-click latency.
+
+ADAPTER-WOW-095 (bounded S4 P13 delivery) supplies finite finalizers:
+invoke the original selected unthunker on exceptional exit, release an owned
+filter MSG16 and restore original private recursion/mode snapshots. Original
+COPYDATA conversion, node identity, native/guest allocation and normal cleanup
+remain in their selected MVDM owners (MVDM-HOST-DIV-344). Existing call scratch
+tracks owned versus borrowed payload; no allocation registry, transport or
+callback engine is added. Per-thread scoped flags are operation-private, not
+window facts or source-of-truth duplication. Guest/media remain unchanged.
+The original thunk and Hook entry scopes restore the original TLS modes and
+Hook context; each original message caller finally delegates only outstanding
+COPYDATA acquisitions back to its original unthunker. Native procedure/input
+conversions remain original. No copied-payload ownership escapes a filter
+callback: an absent original native pair was a NULL dereference, not a valid
+native MSG transfer. Reject that modified-output conversion, retain the input
+MSG and roll back its new allocation. Actual pointer-changing posted-message
+support is not inferred. Normal same-active-pair forwarding remains supported.
+
 ADAPTER-WOW-094 removes an overwritten first sample of exact required roots
 inside the existing copied-window transaction. Its temporary index marks full
 identities only during observation compaction, then is cleared/rebuilt before

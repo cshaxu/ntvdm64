@@ -344,6 +344,8 @@ typedef union _MSGTHUNKBUFFER {
     BYTE               calcsz[sizeof(NCCALCSIZE_PARAMS) +
                                         sizeof(WINDOWPOS)];
     THUNKTEXTDWORD     thkdword;                            // LB_GETTEXT w/no HASSTRINGS
+    /* DIVERGENCE(MVDM-HOST-DIV-344): synchronous COPYDATA release keys. */
+    struct { DWORD header, data, flags; } copydata;
 } MSGTHUNKBUFFER, *LPMSGTHUNKBUFFER;
 
 typedef struct _MSGPARAMEX *LPMSGPARAMEX;
@@ -362,6 +364,8 @@ typedef struct _MSGPARAMEX {
     INT            iMsgThunkClass;          // thunking aid
     INT            iClass;
     MSGTHUNKBUFFER MsgBuffer[1];
+    /* DIVERGENCE(MVDM-HOST-DIV-344): NULL HWND can be a valid thread message. */
+    BOOL fThunkSucceeded;
 } MSGPARAMEX;
 
 #define MSG16NEEDSTHUNKING(lpmpex) ((lpmpex)->iClass != WOWCLASS_NOTHUNK)

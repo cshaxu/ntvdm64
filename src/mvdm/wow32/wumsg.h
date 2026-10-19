@@ -13,7 +13,8 @@
 
 #define WOWDDE_POSTMESSAGE TRUE
 
-extern BOOL fWhoCalled;
+/* DIVERGENCE(MVDM-HOST-DIV-344): matches the private native-thread mode. */
+extern __declspec(thread) BOOL fWhoCalled;
 
 ULONG FASTCALL   WU32CallMsgFilter(PVDMFRAME pFrame);
 ULONG FASTCALL   WU32CallWindowProc(PVDMFRAME pFrame);
