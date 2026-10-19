@@ -1,0 +1,41 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "msvc-x86-release",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/.ninja/msvc-x86-release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_C_COMPILER": "cl.exe",
+        "CMAKE_CXX_COMPILER": "cl.exe",
+        "NTVDM_ARCHITECTURE": "x86",
+        "NTVDM_USE_CCACHE": "OFF",
+        "CMAKE_C_COMPILER_LAUNCHER": "",
+        "CMAKE_CXX_COMPILER_LAUNCHER": ""
+      }
+    },
+    {
+      "name": "msvc-x64-release",
+      "inherits": "msvc-x86-release",
+      "binaryDir": "${sourceDir}/build/.ninja/msvc-x64-release",
+      "cacheVariables": { "NTVDM_ARCHITECTURE": "x64" }
+    },
+    {
+      "name": "msvc-x86-release-ccache",
+      "inherits": "msvc-x86-release",
+      "cacheVariables": { "NTVDM_USE_CCACHE": "ON" }
+    },
+    {
+      "name": "msvc-x64-release-ccache",
+      "inherits": "msvc-x64-release",
+      "cacheVariables": { "NTVDM_USE_CCACHE": "ON" }
+    }
+  ],
+  "buildPresets": [
+    { "name": "msvc-x86-release", "configurePreset": "msvc-x86-release" },
+    { "name": "msvc-x64-release", "configurePreset": "msvc-x64-release" },
+    { "name": "msvc-x86-release-ccache", "configurePreset": "msvc-x86-release-ccache" },
+    { "name": "msvc-x64-release-ccache", "configurePreset": "msvc-x64-release-ccache" }
+  ]
+}

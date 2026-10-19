@@ -3,22 +3,23 @@ param(
     [Parameter(Mandatory)][ValidateSet('x86','x64')][string]$Architecture,
     [switch]$Append,
     [switch]$IncludeTests,
+    [string]$CompilerCache='',
     [string]$VsDevCmd='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 )
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $root=[IO.Path]::GetFullPath($BuildRoot)
-if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase)){throw 'Build root must be below repository build'}
+$compilerCommand = & "$PSScriptRoot/Initialize-NinjaTree.ps1" -BuildRoot $root -CompilerCache $CompilerCache
 $null=New-Item -ItemType Directory -Force $root
 $name=if($Architecture -eq 'x86'){'ntw16s32'}else{'ntw16s64'}
 $r=$repo.Replace('\','/').Replace(':','$:').Replace(' ','$ ')
 $include=$repo.Replace('\','/')
 $graph=@"
 rule ntw16s_cc
-  command = cl.exe /nologo /MT /O2 /W4 /WX /utf-8 /D_WIN32_WINNT=0x0A00 /DUNICODE /D_UNICODE /DNTW16S_BUILD /I"$include/src" /showIncludes /c "`$in" /Fo`$out
+  command = $compilerCommand /nologo /MT /O2 /W4 /WX /utf-8 /D_WIN32_WINNT=0x0A00 /DUNICODE /D_UNICODE /DNTW16S_BUILD /I"$include/src" /showIncludes /c "`$in" /Fo`$out
   deps = msvc
 rule w16style_cc
-  command = cl.exe /nologo /MT /O2 /W4 /WX /utf-8 /D_WIN32_WINNT=0x0A00 /DUNICODE /D_UNICODE /I"$include/src" /showIncludes /c "`$in" /Fo`$out
+  command = $compilerCommand /nologo /MT /O2 /W4 /WX /utf-8 /D_WIN32_WINNT=0x0A00 /DUNICODE /D_UNICODE /I"$include/src" /showIncludes /c "`$in" /Fo`$out
   deps = msvc
 rule ntw16s_link
   command = link.exe /nologo /dll /manifest:embed /out:$name.dll /implib:$name.lib /map:$name.map `$in user32.lib gdi32.lib comctl32.lib dwmapi.lib uxtheme.lib
@@ -26,7 +27,7 @@ rule w16style_link
   command = link.exe /nologo /subsystem:windows /manifest:embed /out:`$out /map:W16Style.map `$in user32.lib gdi32.lib comctl32.lib
 
 "@
-$units=@('layout','scroll_layout','scroll_track','win16_style','menu_paint','menu_layout','menu_bar','menu_bar_paint','menu_items','menu_scope','controls','control_scope','font','dllmain','attachment','theme','native_api')
+$units=@(Get-ChildItem "$repo/src/ntw16s-dll" -Filter '*.c' -File | Sort-Object Name | ForEach-Object BaseName)
 foreach($unit in $units){$graph+="build dll-$unit.obj: ntw16s_cc $r/src/ntw16s-dll/$unit.c`n"}
 $objects=($units|ForEach-Object {"dll-$_.obj"}) -join ' '
 $graph+="build $name.dll $name.lib: ntw16s_link $objects`n"

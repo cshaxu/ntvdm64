@@ -1,10 +1,10 @@
 [CmdletBinding()]
 param([Parameter(Mandatory)][string]$BuildRoot,
- [string]$WorkerBuildRoot='O:\repos.hobby\ntvdm64\build\M0-T445\S6\r003',
- [string]$ProviderBuildRoot='O:\repos.hobby\ntvdm64\build\M0-T447\S3\production-cohort-x86',
- [string]$Observer='O:\repos.hobby\ntvdm64\build\M0-T447\S2\frozen-print-observer-r1\observer.exe',
- [string]$CompilerDriver='O:\repos.hobby\ntvdm64\build\M0-T445\S6\provider\msvc-x86.cmd',
- [string]$LogonHelper='O:\repos.hobby\ntvdm64\build\M0-T447\S4\mine-release-acceptance-r1\default-Off\logon-env.dll')
+ [string]$WorkerBuildRoot=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/worker'),
+ [string]$ProviderBuildRoot=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/wow32'),
+ [Parameter(Mandatory)][string]$Observer,
+ [string]$CompilerDriver=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'),
+ [Parameter(Mandatory)][string]$LogonHelper)
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $root=[IO.Path]::GetFullPath($BuildRoot)

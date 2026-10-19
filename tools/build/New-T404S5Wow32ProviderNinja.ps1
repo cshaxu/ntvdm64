@@ -43,15 +43,6 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
     $RepositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 }
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
-$compilerCommand = 'cl'
-$compilerCacheDirectory = ''
-if (-not [string]::IsNullOrWhiteSpace($CompilerCache)) {
-    $compilerCachePath = (Resolve-Path -LiteralPath $CompilerCache -ErrorAction Stop).Path
-    if (!(Test-Path -LiteralPath $compilerCachePath -PathType Leaf)) { throw "Compiler cache executable is not a file: $CompilerCache" }
-    $compilerCacheDirectory = Join-Path $root 'build/compiler-cache'
-    New-Item -ItemType Directory -Path $compilerCacheDirectory -Force | Out-Null
-    $compilerCommand = '"' + (ConvertTo-NinjaPath $compilerCachePath) + '" cl'
-}
 $wow = Join-Path $root 'src/mvdm/wow32'
 $adapterWow = Join-Path $root 'src/wow32-dll/source'
 $manifest = Join-Path $wow 'sources'
@@ -166,10 +157,11 @@ $headers = @(Get-ChildItem -LiteralPath $wow -Filter '*.h' -File)
 if ($headers.Count -ne 104) { throw "WOW32 must retain 104 root headers; found $($headers.Count)." }
 
 if ([string]::IsNullOrWhiteSpace($BuildRoot)) {
-    $build = Join-Path $root 'build/M0-T404/S5/formal-x86'
+    $build = Join-Path $root 'build/.ninja/msvc-x86-release/wow32'
 } else {
     $build = [IO.Path]::GetFullPath($BuildRoot)
 }
+$compilerCommand = & "$PSScriptRoot/Initialize-NinjaTree.ps1" -BuildRoot $build -CompilerCache $CompilerCache
 New-Item -ItemType Directory -Force -Path $build, (Join-Path $build 'obj'),
     (Join-Path $build 'obj\opennt-user'), (Join-Path $build 'obj\wow32-dll'),
     (Join-Path $build 'obj\adapter-win32') | Out-Null
@@ -368,7 +360,6 @@ $environment = Join-Path $build 'msvc-x86.cmd'
     ('call "' + $vs + '" -arch=x86 -host_arch=x64 >nul'),
     'if errorlevel 1 exit /b %errorlevel%',
     ':ready',
-    $(if ($compilerCacheDirectory) { 'set "CCACHE_DIR=' + $compilerCacheDirectory + '"'; 'set "CCACHE_BASEDIR=' + $root + '"'; 'set "CCACHE_NOHASHDIR=true"' }),
     'cd /d "%MVDM_T404_S5_CALLER_CWD%"',
     '%*',
     'exit /b %errorlevel%'

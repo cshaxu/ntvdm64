@@ -1,13 +1,18 @@
 [CmdletBinding()]
 param([Parameter(Mandatory)][string]$BuildRoot,
- [string]$WorkerBuildRoot='O:\repos.hobby\ntvdm64\build\M0-T445\S6\r003',
- [string]$ProviderBuildRoot='O:\repos.hobby\ntvdm64\build\M0-T447\S3\production-cohort-x86')
+ [Parameter(Mandatory)][string]$Observer,
+ [string]$CompilerDriver='',
+ [string]$WorkerBuildRoot='',
+ [string]$ProviderBuildRoot='')
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'));$root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Fresh build-owned graph diagnostic required'}
 $null=New-Item -ItemType Directory $root;$shell=(Get-Process -Id $PID).Path
+if(!$WorkerBuildRoot){$WorkerBuildRoot="$repo/build/.ninja/msvc-x86-release/worker"}
+if(!$ProviderBuildRoot){$ProviderBuildRoot="$repo/build/.ninja/msvc-x86-release/wow32"}
 $provider=[IO.Path]::GetFullPath($ProviderBuildRoot);$worker=[IO.Path]::GetFullPath($WorkerBuildRoot)
-$compiler="$repo/build/M0-T445/S6/provider/msvc-x86.cmd";$observer="$repo/build/M0-T447/S2/frozen-print-observer-r1/observer.exe"
+if(!$CompilerDriver){$CompilerDriver=Join-Path $provider 'msvc-x86.cmd'}
+$compiler=(Resolve-Path $CompilerDriver).Path;$observer=(Resolve-Path $Observer).Path
 function Owned($name,$exe,$line,$seconds,$working=$repo){
  $p=Start-Process $exe -ArgumentList $line -WindowStyle Hidden -WorkingDirectory $working -PassThru -RedirectStandardOutput "$root/$name.stdout.txt" -RedirectStandardError "$root/$name.stderr.txt";$null=$p.Handle
  @{pid=$p.Id;start=$p.StartTime.ToUniversalTime().ToString('o');image=$exe;command=$line;working=$working;deadlineSeconds=$seconds}|ConvertTo-Json|Set-Content "$root/$name.process.json"

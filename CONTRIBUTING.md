@@ -23,60 +23,38 @@ and `git diff --check` when the checkout has Git metadata available.
 
 ## Build Output Layout
 
-Use `build/<task-id>/<run-id>/` for disposable configure, compiler, linker and
-debug output. Evidence, manifests and conclusions belong in `docs/etc/`.
-`artifacts/` is reserved for reports explicitly requested by the owner and
-formal versioned executable deliverables under
-`artifacts/build/<task-id>-<version>/` with their manifest.
-For example:
+The [execution policy](docs/rules/EXECUTION.md#build-cache-and-disposable-lifetime)
+owns the two cache roots, disposable-task budgets, safe cleanup and evidence
+retention. Do not retain per-task compiler trees or copy a CMake build tree.
+The root CMake entrypoint supports the actual MSVC source islands. Configure
+from the matching Visual Studio developer environment, for example:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools/build/New-T260S8FullNinjaGraph.ps1 `
-  -RepositoryRoot (Get-Location).Path `
-  -BuildRoot build/M0-T267-S1/r001
-ninja -C build/M0-T267-S1/r001
+cmake --preset msvc-x86-release
+cmake --build --preset msvc-x86-release --target W16Style
+# Other original-manifest targets: worker, wow32 (x86);
+# native-worker/frontend/monitor/launcher/service, hook64 (x64).
 ```
-
-The root CMake catalogue has been removed; it is not a supported configuration entrypoint.
 
 ## Incremental developer builds
 
-Ninja reuses objects only inside the same build root.  For ordinary local
-development, retain one root such as `build/developer/x86` rather than creating
-a new task run directory for every edit.  The formal task/evidence build roots
-remain disposable and independent.
-
-When `ccache.exe` is installed, opt in explicitly; the generator leaves it
-disabled by default.  This route stores the cache in `build/compiler-cache`,
-sets only process-local ccache configuration, and leaves the selected MSVC
-flags unchanged:
+Reconfigure the same architecture tree with the ccache preset to opt in;
+ccache is not required for the ordinary preset. Direct cmake --build and
+direct Ninja inherit fixed cache locations from the generated commands, not
+the invoking shell's environment. Returning to the ordinary preset clears
+the launcher. MSVC retains its existing /O2 release profile, not GCC's /O3.
 
 ```powershell
-$ccache = (Get-Command ccache.exe -ErrorAction Stop).Source
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools/build/New-T310OriginalSoftpcNinja.ps1 `
-  -Architecture x86 `
-  -RepositoryRoot (Get-Location).Path `
-  -BuildRoot build/developer/x86 `
-  -CompilerCache $ccache `
-  -NodeExecutable $env:MVDM_NODE22
-cmd.exe /d /c build\developer\x86\run-ninja-parallel.cmd ntvdm.exe
+cmake --preset msvc-x86-release-ccache
+cmake --build --preset msvc-x86-release-ccache --target W16Style
+cmake -E env "CCACHE_DIR=$PWD/build/.ccache" ccache --show-stats
 ```
 
-Use the generated `run-ninja-parallel.cmd`, not a direct compiler call: it
-initializes MSVC, configures only that build's ccache process environment, and
-honors `MVDM_BUILD_JOBS`.  A cache hit accelerates compilation; it is never
-verification evidence and does not replace a clean task build.
-
-The native-component, Hook64, and WOW32 Ninja generators accept the same
-optional `-CompilerCache $ccache` argument.  Omit that argument for a formal
-or task-evidence graph: its generated rules remain direct `cl.exe` commands.
-
-Do not invoke a compiler from the repository root without an explicit output
-path under `build/<task-id>/<run-id>/`; do not use `artifacts/` as a temporary build
-directory.
-
-After `ntvdm32.exe` has passed its admitted x86 verification and makes a
-recorded improvement over the preceding published candidate, copy that tested
-EXE and its required runnable package inputs to
-`build/output/` for owner testing. Record any known limitation beside it; do
-not publish an unverified candidate or one with a clear regression.
+The lower-level source-owner generators still accept -CompilerCache and a
+stable -BuildRoot below .ninja, using the same real CMake configuration.
+Their generated runners initialize MSVC for direct Ninja. Current product
+publication follows the active packet, never a disposable build/output copy.
+Reconfigure after changing original source-owner manifest selections; do not
+reuse an old graph as proof of a new source selection.
+A cache hit is acceleration, not behavioral acceptance. Tests and compilers
+run in owned background jobs as required by the execution rules.

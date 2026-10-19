@@ -1,10 +1,10 @@
 [CmdletBinding()]
 param([Parameter(Mandatory)][string]$BuildRoot,
- [string]$WorkerBuildRoot='O:\repos.hobby\ntvdm64\build\M0-T445\S6\r003',
- [string]$ProviderBuildRoot='O:\repos.hobby\ntvdm64\build\M0-T447\S3\production-cohort-x86',
+ [string]$WorkerBuildRoot=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/worker'),
+ [string]$ProviderBuildRoot=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/wow32'),
  [string]$ImageRoot,
- [string]$Observer='O:\repos.hobby\ntvdm64\build\M0-T447\S2\frozen-print-observer-r1\observer.exe',
- [string]$CompilerDriver='O:\repos.hobby\ntvdm64\build\M0-T445\S6\provider\msvc-x86.cmd')
+ [Parameter(Mandatory)][string]$Observer,
+ [string]$CompilerDriver=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'))
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'));$root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Fresh build-owned callback diagnostic required'}

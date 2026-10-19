@@ -214,10 +214,9 @@ monitor-adapter material.
   source-shaped unavailable outcome; it may not be silently omitted.
 - Generate the Ninja graph from audited owner/package manifests and dependency
   files. A configuration hash change invalidates the relevant graph/objects.
-- Put all disposable compiler, linker, generated, intermediate, fixture and
-  build-result output under `build/<task-id>/<run-id>/` (or formal
-  `build/output/`). Do not emit it into the repository root, `src/`, `tests/`,
-  `tools/`, `artifacts/`, or `O:\winnt`.
+- Follow the [build cache and lifetime policy](EXECUTION.md#build-cache-and-disposable-lifetime)
+  for stable Ninja trees, optional compiler caches and disposable task output.
+  Do not emit build products into source/tool directories or the runtime root.
 - A real-package run may place only original guest media/configuration, the
   selected three runtime executables, and their two selected runtime DLLs at
   the `O:\winnt` package root. Every harness, guest probe, test-only binary,

@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
-    [string]$RepositoryRoot = 'O:/repos.hobby/ntvdm64',
-    [string]$BuildRoot = 'build/M0-T447/S3/call-boundaries-x86',
+    [string]$RepositoryRoot = (Join-Path $PSScriptRoot '../..'),
+    [string]$BuildRoot = 'build/.ninja/msvc-x86-release/call-boundaries',
     [Parameter(Mandatory=$true)][string]$EvidenceRoot,
     [switch]$CpdWindowResearch,
     [switch]$StyleNotificationResearch,

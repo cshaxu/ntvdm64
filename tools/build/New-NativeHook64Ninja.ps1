@@ -9,22 +9,13 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 $root=[IO.Path]::GetFullPath($RepositoryRoot)
-$build=[IO.Path]::GetFullPath((Join-Path $root $BuildRoot))
-if(-not $build.StartsWith((Join-Path $root 'build')+'\',[StringComparison]::OrdinalIgnoreCase)) {
-    throw 'Hook build must remain below repository build/'
-}
+$build=if([IO.Path]::IsPathRooted($BuildRoot)){[IO.Path]::GetFullPath($BuildRoot)}else{[IO.Path]::GetFullPath((Join-Path $root $BuildRoot))}
+$compilerCommand = & "$PSScriptRoot/Initialize-NinjaTree.ps1" -BuildRoot $build -CompilerCache $CompilerCache
 New-Item -ItemType Directory -Path $build -Force | Out-Null
 New-Item -ItemType Directory -Path (Join-Path $build 'obj/basesrv') -Force | Out-Null
 function NP([string]$p) { $p.Replace('\','/').Replace(':','$:') }
-$compilerCommand='cl.exe'
-$compilerCacheDirectory=''
-if(-not [string]::IsNullOrWhiteSpace($CompilerCache)) {
-    $compilerCachePath=(Resolve-Path -LiteralPath $CompilerCache -ErrorAction Stop).Path
-    if(-not (Test-Path -LiteralPath $compilerCachePath -PathType Leaf)) { throw "Compiler cache executable is not a file: $CompilerCache" }
-    $compilerCacheDirectory=Join-Path $root 'build/compiler-cache'
-    New-Item -ItemType Directory -Path $compilerCacheDirectory -Force | Out-Null
-    $compilerCommand='"'+(NP $compilerCachePath)+'" cl.exe'
-}
+$compilerCachePath=$CompilerCache
+$compilerCacheDirectory=if($CompilerCache){Join-Path $root 'build/.ccache'}else{''}
 $reference=[IO.File]::ReadAllText([IO.Path]::GetFullPath($ReferenceGraph))
 $referenceFlags=[regex]::Match($reference,'(?m)^cflags = (.*)$').Groups[1].Value
 if(-not $referenceFlags) { throw 'Missing reference include graph' }
@@ -94,14 +85,9 @@ $runner=[Collections.Generic.List[string]]::new()
 $runner.Add('@echo off')
 $runner.Add('call "'+$vs+'" -arch=x64 -host_arch=x64 >nul')
 $runner.Add('if errorlevel 1 exit /b %errorlevel%')
-if($compilerCacheDirectory) {
-    $runner.Add('set "CCACHE_DIR='+$compilerCacheDirectory+'"')
-    $runner.Add('set "CCACHE_BASEDIR='+$root+'"')
-    $runner.Add('set "CCACHE_NOHASHDIR=true"')
-}
 $runner.Add('"'+$ninja+'" -C "'+$build+'" -j 8 %*')
 [IO.File]::WriteAllText((Join-Path $build 'run-ninja.cmd'),($runner -join "`r`n")+"`r`n",$utf8)
-$cacheMetadata=if($compilerCacheDirectory){@{enabled=$true;executable=$compilerCachePath;directory=$compilerCacheDirectory;baseDirectory=$root;hashDirectory=$false}}
+$cacheMetadata=if($compilerCacheDirectory){@{enabled=$true;executable=$compilerCachePath;directory=$compilerCacheDirectory;temporaryDirectory=(Join-Path $compilerCacheDirectory 'tmp');maxSize='5G'}}
 [IO.File]::WriteAllText((Join-Path $build 'source-manifest.json'),
     (@{architecture='AMD64';scope='Hook DLL only; no worker';compilerCache=$cacheMetadata;sources=$manifest} | ConvertTo-Json -Depth 5),$utf8)
 Write-Output "Generated Hook-only AMD64 graph: $build"

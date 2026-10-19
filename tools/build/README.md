@@ -1,18 +1,19 @@
 # Build Tools
 
-This directory contains tracked build entry points.  Each tool has one
-declared responsibility and may create or consume only disposable output below
-`build/<task-id>/<run-id>/`; it never publishes compiler output to `tools/` or
-`artifacts/`.
+This directory contains tracked build entry points. The
+[execution policy](../../docs/rules/EXECUTION.md#build-cache-and-disposable-lifetime)
+is the sole output/cache/lifetime authority. CMake presets select native
+architecture/configuration trees; original source-owner manifest generators
+retain their source lists and historical flags. Clear-BuildOutput.ps1 alone
+owns exact-target disposal and final residual inspection.
 
 Root-level compiler/linker products are prohibited and deliberately are not
-hidden by `.gitignore`. Reusable caches remain under their declared
-`build/<task-id>/<run-id>/` roots.
+hidden by `.gitignore`. Do not keep a reusable task-specific configure tree.
 
 `New-T310OriginalSoftpcNinja.ps1` creates the selected immutable Win32/x86
-CCPU40 formal graph in a caller-selected new build root. It rejects retired
-machine inputs and may refresh only graph metadata in an existing disposable
-root; it never imports cache output as a source or release input.
+CCPU40 formal graph in a stable CMake-validated Ninja subtree. It rejects retired
+machine inputs and may refresh only graph metadata in an existing
+tree; it never imports cache output as a source or release input.
 
 The formal product graph requires explicit `-NativeWorker` and
 `-NativeFrontend` and `-NativeMonitor` AMD64 producer images; it cannot silently

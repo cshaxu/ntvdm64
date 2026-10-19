@@ -461,10 +461,10 @@ as a protocol, or copy the implementation into tests. Private fixture hooks
 link the production archive. Preserve original DOS/WOW lock, callback, receipt
 and cleanup ordering when reorganizing project adaptation code.
 
-Ninja is generated from the source-owner and package-selection manifests.
-Disposable objects, libraries, generated files, fixture executables and build
-results belong under `build/<task-id>/<run-id>/`; selected formal product
-executables may be published at `build/output/`. A real-package run copies only
+Ninja is generated from the source-owner and package-selection manifests;
+CMake selects the stable configuration and cache routing. Output and disposal
+follow the [single lifetime policy](../rules/EXECUTION.md#build-cache-and-disposable-lifetime).
+A real-package run copies only
 original guest media/configuration and the coherent eight-file runtime set
 (run16, ntsrv, ntvdm, ntvwm, ntcon, ntmon and two runtime DLLs) to the
 `O:\winnt` package root. Disposable test harnesses, probes, manifests and

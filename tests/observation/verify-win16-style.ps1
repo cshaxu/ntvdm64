@@ -23,10 +23,13 @@ try {
     foreach($arch in @('x86','x64')){
         $dir=Join-Path $root $arch
         $null=New-Item -ItemType Directory $dir
+        $compile="$repo/build/.ninja/msvc-$arch-release/style-gallery-fixtures"
+        $null=New-Item -ItemType Directory -Force $compile
+        $compilerCommand=& "$repo/tools/build/Initialize-NinjaTree.ps1" -BuildRoot $compile
         $r=$repo.Replace('\','/')
         @'
 rule cc
-  command = cl.exe /nologo /MT /O2 /W4 /WX /utf-8 /DNTW16S_STATIC /D_WIN32_WINNT=0x0A00 /DUNICODE /D_UNICODE /I"@REPO@/src" /showIncludes /c "$in" /Fo$out
+  command = @COMPILER@ /nologo /MT /O2 /W4 /WX /utf-8 /DNTW16S_STATIC /D_WIN32_WINNT=0x0A00 /DUNICODE /D_UNICODE /I"@REPO@/src" /showIncludes /c "$in" /Fo$out
   deps = msvc
 rule archive
   command = lib.exe /nologo /out:$out $in
@@ -80,18 +83,19 @@ build native-menu-v6-probe.exe: menu_v6_link native-menu.obj
 build win16-style.lib: archive layout.obj scroll-layout.obj scroll-track.obj style.obj menu-paint.obj menu-layout.obj menu-bar.obj menu-bar-paint.obj menu-items.obj menu-scope.obj controls.obj control-scope.obj font.obj native-api.obj
 build win16-style-demo.exe: link demo.obj gallery.obj @STYLE_DLL@.lib layout.obj scroll-layout.obj menu-bar.obj menu-layout.obj
 default win16-style-demo.exe font-probe.exe font-test.exe menu-dispatch.exe control-present.exe control-lifetime.exe sizebox.exe list-tabs.exe native-menu-probe.exe native-menu-v6-probe.exe dc-failure.exe scroll-geometry.exe scroll-api.exe
-'@.Replace('@REPO@',$r).Replace('@STYLE_DLL@',$(if($arch -eq 'x86'){'ntw16s32'}else{'ntw16s64'})).Replace('@NINJA_REPO@',$r.Replace(':','$:').Replace(' ','$ ')) | Set-Content "$dir/build.ninja" -Encoding ascii
-        & "$repo/tools/build/New-Ntw16sNinja.ps1" -BuildRoot $dir -Architecture $arch -Append -IncludeTests -VsDevCmd $VsDevCmd
+'@.Replace('@COMPILER@',$compilerCommand).Replace('@REPO@',$r).Replace('@STYLE_DLL@',$(if($arch -eq 'x86'){'ntw16s32'}else{'ntw16s64'})).Replace('@NINJA_REPO@',$r.Replace(':','$:').Replace(' ','$ ')) | Set-Content "$compile/build.ninja" -Encoding ascii
+        & "$repo/tools/build/New-Ntw16sNinja.ps1" -BuildRoot $compile -Architecture $arch -Append -IncludeTests -VsDevCmd $VsDevCmd
         $selectedTarget=if($ScrollApiOnly){'scroll-api.exe'}else{''}
         @"
 @echo off
 call "$VsDevCmd" -arch=$arch -host_arch=x64 >nul
 if errorlevel 1 exit /b %errorlevel%
-cd /d "$dir"
+cd /d "$compile"
 "$ninja" -f build.ninja $selectedTarget
 "@ | Set-Content "$dir/build.cmd" -Encoding ascii
         & $env:ComSpec /d /c "$dir/build.cmd" *> "$dir/build.txt"
         if($LASTEXITCODE){throw "Build failed $arch"}
+        Copy-Item "$compile/*.exe","$compile/*.dll" $dir
         if(!$ScrollApiOnly){
             $viewport=Start-Process "$dir/win16-style-demo.exe" -ArgumentList @('--viewport-test',"$dir/viewport.bmp") -WindowStyle Hidden -PassThru -RedirectStandardOutput "$dir/viewport.txt" -RedirectStandardError "$dir/viewport.err"
             @{pid=$viewport.Id;start=$viewport.StartTime;deadline=$viewport.StartTime.AddSeconds(30)}|ConvertTo-Json|Set-Content "$dir/viewport-owner.json"

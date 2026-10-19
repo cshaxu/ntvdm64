@@ -53,7 +53,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 }
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 if ([string]::IsNullOrWhiteSpace($BuildRoot)) {
-    $build = Join-Path $root ("build/M0-T310/S8/p1-machine-source/{0}" -f $Architecture)
+    $build = Join-Path $root ("build/.ninja/msvc-{0}-release/worker" -f $Architecture)
 } else {
     $build = [IO.Path]::GetFullPath($BuildRoot)
 }
@@ -78,21 +78,9 @@ if (!(Test-Path -LiteralPath $vs -PathType Leaf) -or
     !(Test-Path -LiteralPath $nativeNinja -PathType Leaf)) {
     throw 'MSVC Build Tools and Ninja are required.'
 }
-$compilerCachePath = ''
-$compilerCommand = 'cl.exe'
-$compilerCacheDirectory = ''
-if (![string]::IsNullOrWhiteSpace($CompilerCache)) {
-    $compilerCachePath = (Resolve-Path -LiteralPath $CompilerCache -ErrorAction Stop).Path
-    if (!(Test-Path -LiteralPath $compilerCachePath -PathType Leaf)) {
-        throw "Compiler cache executable is not a file: $CompilerCache"
-    }
-    # Keep the developer cache below build/, never in a user-global location.
-    # CCACHE_BASEDIR/NOHASHDIR permit same-source direct-mode reuse across
-    # developer graph roots when their remaining command-line inputs agree.
-    $compilerCacheDirectory = Join-Path $root 'build/compiler-cache'
-    New-Item -ItemType Directory -Force -Path $compilerCacheDirectory | Out-Null
-    $compilerCommand = '"' + (NinjaPath $compilerCachePath) + '" cl.exe'
-}
+$compilerCommand = & "$PSScriptRoot/Initialize-NinjaTree.ps1" -BuildRoot $build -CompilerCache $CompilerCache
+$compilerCachePath = $CompilerCache
+$compilerCacheDirectory = if ($CompilerCache) { Join-Path $root 'build/.ccache' } else { '' }
 
 $ccpuRoot = Join-Path $root 'src/mvdm/softpc.new/base/ccpu386'
 $biosRoot = Join-Path $root 'src/mvdm/softpc.new/base/bios'
@@ -642,11 +630,6 @@ $parallelRunner = Join-Path $build 'run-ninja-parallel.cmd'
 @('@echo off',
   ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'),
   'if errorlevel 1 exit /b %errorlevel%',
-  $(if (![string]::IsNullOrWhiteSpace($compilerCacheDirectory)) {
-      'set "CCACHE_DIR=' + $compilerCacheDirectory + '"'
-      'set "CCACHE_BASEDIR=' + $root + '"'
-      'set "CCACHE_NOHASHDIR=true"'
-  }),
   ('if "%MVDM_BUILD_JOBS%"=="" set "MVDM_BUILD_JOBS=' + $ParallelJobs + '"'),
   ('"' + $nativeNinja + '" -C "' + $build + '" -j %MVDM_BUILD_JOBS% %*')) |
     Set-Content -LiteralPath $parallelRunner -Encoding ascii
@@ -2065,8 +2048,8 @@ if ($objectOutputDirectories.Count -gt 0) {
             enabled = $true
             executable = $compilerCachePath
             directory = $compilerCacheDirectory
-            baseDirectory = $root
-            hashDirectory = $false
+            temporaryDirectory = (Join-Path $compilerCacheDirectory 'tmp')
+            maxSize = '5G'
         }
     }
     ninjaParallelDefault = $ParallelJobs

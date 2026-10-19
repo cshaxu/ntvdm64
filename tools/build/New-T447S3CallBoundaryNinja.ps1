@@ -2,6 +2,7 @@
 param(
     [string]$RepositoryRoot = '',
     [string]$BuildRoot = '',
+    [string]$CompilerCache = '',
     [Parameter(Mandatory = $true)][string]$VsDevCmd
 )
 
@@ -15,11 +16,9 @@ $ErrorActionPreference = 'Stop'
 if (!$RepositoryRoot) { $RepositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot) }
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $allowed = [IO.Path]::GetFullPath((Join-Path $root 'build')) + [IO.Path]::DirectorySeparatorChar
-if (!$BuildRoot) { $BuildRoot = Join-Path $allowed 'M0-T447/S3/call-boundaries-x86' }
+if (!$BuildRoot) { $BuildRoot = Join-Path $allowed '.ninja/msvc-x86-release/call-boundaries' }
 $build = [IO.Path]::GetFullPath($BuildRoot)
-if (!$build.StartsWith($allowed, [StringComparison]::OrdinalIgnoreCase)) {
-    throw 'Fixture outputs must be below repository build/.'
-}
+$compilerCommand = & "$PSScriptRoot/Initialize-NinjaTree.ps1" -BuildRoot $build -CompilerCache $CompilerCache
 $vs = (Resolve-Path -LiteralPath $VsDevCmd).Path
 if (!(Test-Path -LiteralPath $vs -PathType Leaf)) { throw 'VsDevCmd must name the toolchain batch file.' }
 
@@ -190,7 +189,7 @@ $lines.Add('ninja_required_version = 1.10')
 $lines.Add('environment = ' + (NinjaValue $environment))
 $lines.Add('cflags = /nologo /TC /MT /O2 /W4 /Gz /DSTD_CALL /DUNICODE /D_UNICODE /showIncludes ' + ($includes -join ' '))
 $lines.Add('rule cc')
-$lines.Add('  command = cmd /d /c ""$environment" cl $cflags $extra /c /Fo$out $in"')
+$lines.Add('  command = cmd /d /c ""$environment" '+$compilerCommand+' $cflags $extra /c /Fo$out $in"')
 $lines.Add('  deps = msvc')
 $lines.Add('rule link')
 $lines.Add('  command = cmd /d /c ""$environment" link /nologo /machine:x86 /out:"$out" $in user32.lib gdi32.lib $libs"')

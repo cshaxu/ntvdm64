@@ -247,7 +247,7 @@ commits containing production changes remain subject to the runtime gate.
    be reused only with proven source/build-input identity; changed inputs
    require rebuilding the affected closure.
    Prefer dependency-driven incremental builds and retain valid object/library
-   caches under build/. Record compiler/SDK/CRT/architecture, flags, generated
+   caches under build/.ninja/. Record compiler/SDK/CRT/architecture, flags, generated
    graph, source/header and generated-input identity. Invalidate affected
    dependents when these change; use a clean build when dependency integrity
    is uncertain or a required clean-build milestone applies, not for every
@@ -346,14 +346,54 @@ verified coherent six-binary package to `O:/winnt` itself; a candidate
 subdirectory is not delivery. Preserve active owner sessions and recoverable
 baseline files during replacement.
 
-An admitted build records its `build/<task-id>/<run-id>/` working root before
-execution. All compiler, linker, generated, intermediate, fixture, and build
-result files, including every locally built `.exe`, remain below that root (or
-the formal `build/output/` publication path). The run root is disposable: the
-next build must remove the previous run's non-reusable products before it
-begins, unless a recorded manifest proves their source/toolchain/input identity
-and reuse is intentional. Do not emit build products into the repository root,
-`src/`, `tests/`, `tools/`, or `artifacts/`.
+#### Build cache and disposable lifetime
+
+Owner's Td build-hygiene policy supersedes older task-specific build-root and
+build/output retention instructions throughout this document. Exactly two
+roots may be reused across tasks: `build/.ninja/` for stable configuration
+trees, and `build/.ccache/` for the optional compiler cache (temporary files
+in `.ccache/tmp`, maximum 5G). Objects, libraries, generated sources, CMake
+metadata and dependency logs stay within their configuration's Ninja tree.
+Use actual compiler/architecture/profile names, for example
+`build/.ninja/msvc-x86-release` and `build/.ninja/msvc-x64-release`.
+Cache-enabled and ordinary builds of one configuration use the same tree.
+Do not create M/T/S/P copies, move old CMake trees, clear valid caches on a
+commit/task switch, or delete/migrate the user's global ccache.
+
+The real [CMake configuration](../../tools/build/BuildTree.cmake) owns Ninja
+directory validation and compiler-cache routing, including explicit per-
+compile CCACHE_DIR, CCACHE_TEMPDIR and CCACHE_MAXSIZE. Non-cache presets clear
+old compiler launchers. Direct cmake --build must obey the same routing;
+statistics explicitly select this repository's cache. Existing source-owner
+generators reuse that configuration, not another preset parser or validator.
+
+Every other build child is disposable: task scripts, probes, logs, captures,
+test media, staging, old configure trees and old output packages. The active
+task records its temporary root, owner, wall-clock/size/no-progress budgets
+before running. At a phase/task boundary, join its owned background jobs,
+retain only necessary results/hashes/conclusions in tracked task evidence,
+then remove unneeded output. Reusable tools belong in tracked tools/tests,
+not a permanent build directory. Cache trees cannot hide evidence/test media.
+
+[Clear-BuildOutput.ps1](../../tools/build/Clear-BuildOutput.ps1) is the single
+default-preview deletion and residual-inspection tool. Supply exact reviewed
+repository-relative targets and an ownership manifest; Apply requires actual
+process quiescence and explicit TasksExited attestation, not an assumption
+that the switch detects processes. All targets pass safety inspection before
+deletion. Reject traversal, persistent cache roots/configured Ninja trees,
+links/junctions and Git data;
+unknown/configuration/media content requires exact hash/provenance review.
+Verify an old Git checkout's origin/status/unique commits separately, never
+classify it as ordinary output. Do not kill unrelated processes or force-delete
+unknown/user data to achieve an empty listing. Report retained exceptions.
+The documentation gate checks documents only; safety tests call the real
+cleanup tool in-process. No background cleaner or recovery framework.
+
+Do not emit build products into the repository root, src, tests, tools or
+artifacts. These lifecycle rules do not remove the existing explicit runtime
+deployment exceptions below, or authorize product/guest changes during tooling
+work. Build/governance-only Td deliveries need risk-proportionate build and
+safety verification, not an unrelated runtime rebuild or release refresh.
 
 The only permitted deployment exception is a deliberate copy of the selected
 runtime package to `O:\winnt`: original guest media/configuration, the three

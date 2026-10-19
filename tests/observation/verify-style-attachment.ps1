@@ -6,9 +6,12 @@ if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase)){thr
 $null=New-Item -ItemType Directory -Force $root
 foreach($arch in @('x86','x64')) {
     $dir=Join-Path $root $arch
-    & "$repo/tools/build/New-Ntw16sNinja.ps1" -BuildRoot $dir -Architecture $arch -IncludeTests
-    & $env:ComSpec /d /c "$dir/build-style.cmd" *> "$dir/build.txt"
+    $null=New-Item -ItemType Directory -Force $dir
+    $compile="$repo/build/.ninja/msvc-$arch-release/style-fixtures"
+    & "$repo/tools/build/New-Ntw16sNinja.ps1" -BuildRoot $compile -Architecture $arch -IncludeTests
+    & $env:ComSpec /d /c "$compile/build-style.cmd" *> "$dir/build.txt"
     if($LASTEXITCODE){throw "Style build failed: $arch"}
+    Copy-Item "$compile/*.exe","$compile/*.dll" $dir
     $name=if($arch -eq 'x86'){'ntw16s32.dll'}else{'ntw16s64.dll'}
     $dll=if($System32){(Resolve-Path (Join-Path $System32 $name)).Path}else{"$dir/$name"}
     Get-FileHash $dll,"$dir/style-attachment-test.exe","$repo/tests/app/style_attachment.c"|ConvertTo-Json|Set-Content "$dir/attachment-inputs.json"

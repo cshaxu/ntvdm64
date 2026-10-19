@@ -9,9 +9,12 @@ $null=New-Item -ItemType Directory $root
 try{
  foreach($arch in @('x86','x64')){
   $dir="$root/$arch"
-  & "$repo/tools/build/New-Ntw16sNinja.ps1" -BuildRoot $dir -Architecture $arch -IncludeTests
-  & "$dir/build-style.cmd" *> "$dir/build.txt"
+  $null=New-Item -ItemType Directory -Force $dir
+  $compile="$repo/build/.ninja/msvc-$arch-release/style-fixtures"
+  & "$repo/tools/build/New-Ntw16sNinja.ps1" -BuildRoot $compile -Architecture $arch -IncludeTests
+  & "$compile/build-style.cmd" *> "$dir/build.txt"
   if($LASTEXITCODE){throw "Build failed $arch"}
+  Copy-Item "$compile/*.exe","$compile/*.dll" $dir
   $dll=if($arch -eq 'x86'){'ntw16s32.dll'}else{'ntw16s64.dll'}
   $cases=@('candidate');if($NegativeSystem32){$cases+='previous'}
   foreach($case in $cases){

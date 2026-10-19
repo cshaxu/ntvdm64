@@ -3,7 +3,7 @@ param([Parameter(Mandatory)][string]$PackageRoot,
  [Parameter(Mandatory)][string]$Observer,
  [Parameter(Mandatory)][string]$LogonHelper,
  [Parameter(Mandatory)][string]$BuildRoot,
- [string]$CompilerDriver='O:\repos.hobby\ntvdm64\build\M0-T445\S6\provider\msvc-x86.cmd',
+ [string]$CompilerDriver=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'),
  [string]$Nasm='nasm.exe')
 # Independent COM exercises original INT67 services; no original guest is
 # modified/rebuilt, no substituted memory provider and no mapped drive.

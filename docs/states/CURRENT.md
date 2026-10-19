@@ -2,6 +2,10 @@
 
 **Active: M0 T447 S4 — message identity, reply, waits and reentry.**
 
+S4 stays held at delivered P13 during standalone
+[Td build hygiene](../etc/operations/td-build-hygiene.md) delivery/acceptance;
+no numeric task, S4 P, runtime change or S4 closure follows from this Td.
+
 ## Current Work
 
 S3's fixed C1--C5 control/dialog/MENU-01 dependency scope is closed after
