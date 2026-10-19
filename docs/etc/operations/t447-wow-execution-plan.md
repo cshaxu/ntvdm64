@@ -97,6 +97,50 @@ shared launch is rejected with worker-not-distinct. This test-only P15
 adds no runtime, mirror or guest change. The [cross-worker evidence](../evidence/m0-t447-s4-message-source-audit.md#resumed-s4-cross-worker-message-and-local-task-identity)
 records exact process/task/fallback identities and remaining S4 boundaries.
 
+### Pending-send wait and target-destruction group
+
+After P15/30fe976b8, source trace selects one complete M2/M3/M5 boundary:
+native USER owns SendMessageTimeout/SMTO_BLOCK and ERRORONEXIT; original
+WU32SendMessage/W32Win16WndProcEx own guest send/conversion/callback;
+wow_user_native_call_begin/end suspends and restores execution in finally,
+with native failure not interpreted as an output payload. Existing native
+lifecycle fixtures already cover blocked nested timeout and destruction,
+but do not establish actual USER16 callback/guest-handle behavior.
+
+Extend the independently authored full structured message group, not a
+production helper. Native peer sends with SMTO_BLOCK into the real guest;
+guest synchronously sends back to that peer. The reverse callback must run
+only after the blocked native send times out, then the guest continuation
+and ordinary message group must complete. A second real receiver-owned
+test window destroys itself inside the pending callback; compare ERRORONEXIT
+status/result/error with paired native USER controls, not with HWND liveness.
+Both native
+and guest stale-window queries must reject the destroyed target, and the
+surviving tasks must finish their unchanged normal retirement.
+
+Fixed scope: opt-in authored NE/native fixture/runner and CMake targets,
+all3 style policies plus the unchanged3 shared controls. A no-SMTO_BLOCK
+fixture must fail the ordering assertion. Preserve native result/error
+without fabricating an extended error where USER gives none. No runtime,
+mirror, guest or semantic change is assumed. If this reveals a production
+gap, attribute it to the fixed execution/identity owners before correcting
+the whole group. Unrelated M4 allocation/conversion and full reconciliation
+remain S4 obligations, not absorbed into this phase. Scratch owner is
+build/t447-s4-pending-send,60-minute/2GiB/15-minute no-progress budget;
+summarize before sole-owner cleanup and retain stable caches.
+
+Group-r1 passes shared3 and blocked reentry but fails the initial, incorrect
+ERRORONEXIT assertion. A source-isolated native control then proves identical
+status1/error0/result447A007C with a dead HWND in all32/64 same/cross-process
+cases. Native USER can complete this callback successfully despite destruction;
+no new runtime semantics or product fix is justified. The final group must
+recheck those controls, exact guest result, dead identities and normal tasks.
+
+Final group-r2 passes native4, shared3, pending3 and the no-block negative
+on unchanged P13. This test-only P16 adds no runtime/mirror/guest diff; see
+the [pending-send evidence](../evidence/m0-t447-s4-message-source-audit.md#pending-send-blocking-and-receiver-window-destruction).
+This is window destruction, not pending thread/process death or all M4.
+
 ## Admission and boundaries
 
 The owner's clarified WINMINE report concerns active cell latency, not failed

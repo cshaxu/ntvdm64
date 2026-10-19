@@ -15,12 +15,18 @@ param(
  [string]$ExternalNativePeer='',
  [string]$NativeHost='',
  [string]$CrossWorkerCoordinator='',
- [switch]$SharedWorkerControl
+ [switch]$SharedWorkerControl,
+ [switch]$PendingSend
 )
 # Entire actual-guest message group. Invoke as an owned hidden background run.
 # No original guest is changed or rebuilt; only independently authored probes.
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
+if($PendingSend -and (!$NativeHost -or !$StructuredPayloads -or !$ThreadClientView -or
+ $CrossWorkerCoordinator -or $ExternalNativePeer -or $NativeExtension -or
+ $CopyDataProc32 -or $ReplyPayloadLifetime -or $TimeoutPayloadLifetime)){
+ throw 'PendingSend requires normal structured/client-view probes and prebuilt pending-send host'
+}
 if($SharedWorkerControl -and !$CrossWorkerCoordinator){throw 'SharedWorkerControl requires the cross-worker negative setup'}
 if($CrossWorkerCoordinator -and (!$NativeHost -or !$StructuredPayloads -or !$ThreadClientView -or
     $ExternalNativePeer -or $NativeExtension -or $CopyDataProc32 -or $ReplyPayloadLifetime -or $TimeoutPayloadLifetime)){
@@ -52,11 +58,13 @@ function Read-GuestReport([string]$path,[string]$name){
  $signature=if($ThreadClientView){'MSG2'}else{'MSG1'}
  if($StructuredPayloads){$recordBytes+=4;$signature=if($ThreadClientView){'MSG6'}else{'MSG5'}}
  if($CrossWorkerCoordinator){$recordBytes+=6;$signature='MSG7'}
+ if($PendingSend){$recordBytes+=4;$signature='MSG8'}
  if(!$bytes.Length -or $bytes.Length%$recordBytes){throw "Incomplete $name message records"}
  $fields=@('role','phase','errors','task','peerTask','basic','nested','early','posted','same','filtered','threadpost','text','native','destroyed')
  if($ThreadClientView){$fields+=@('clientVersion','clientExpected','clientChecks')}
  if($StructuredPayloads){$fields+=@('structures','copyNested')}
  if($CrossWorkerCoordinator){$fields+=@('remoteTask','foreignExpected','launchReady')}
+ if($PendingSend){$fields+=@('waitBlocked','waitDeath')}
  $rows=@()
  for($offset=0;$offset -lt $bytes.Length;$offset+=$recordBytes){
   if([Text.Encoding]::ASCII.GetString($bytes,$offset,4) -ne $signature){throw "Invalid $name signature"}
@@ -79,6 +87,7 @@ try{
   if($TimeoutPayloadLifetime){$arguments+='-DM4_TIMEOUT_PAYLOAD'}
   if($CopyDataProc32){$arguments+='-DM4_COPYDATA_PROC32'}
   if($CrossWorkerCoordinator){$arguments+='-DCROSS_WORKER'}
+  if($PendingSend){$arguments+='-DPENDING_SEND'}
   & $assembler @arguments $assembly *> "$root/$role-assemble.txt"
   if($LASTEXITCODE){throw "Independent $role assembly failed"}
  }
@@ -169,6 +178,7 @@ public static class WowMessageLogonEnvironment {
  }
  if(Test-Path "$tests/MSGPEER-FAIL.txt"){Copy-Item "$tests/MSGPEER-FAIL.txt" "$root/native-failures.txt"}
  if($CrossWorkerCoordinator -and (Test-Path "$tests/MSGXHOST.TXT")){Copy-Item "$tests/MSGXHOST.TXT" "$root/cross-worker.txt"}
+ if($PendingSend -and (Test-Path "$tests/MSGWAIT.BIN")){Copy-Item "$tests/MSGWAIT.BIN" "$root/MSGWAIT.bin"}
  if($ReplyPayloadLifetime -and (Test-Path "$tests/MSGREPLY.BIN")){Copy-Item "$tests/MSGREPLY.BIN" "$root/MSGREPLY.bin"}
  if($TimeoutPayloadLifetime -and (Test-Path "$tests/MSGTIME.BIN")){Copy-Item "$tests/MSGTIME.BIN" "$root/MSGTIME.bin"}
  $send=Read-GuestReport "$root/MSGSEND.bin" sender
@@ -224,6 +234,20 @@ public static class WowMessageLogonEnvironment {
  if($CrossWorkerCoordinator){$names+='receiverPid'}
  for($i=0;$i -lt $names.Count;$i++){$nativeReport[$names[$i]]=[BitConverter]::ToUInt32($bytes,4*$i)}
  $nativeReport|ConvertTo-Json|Set-Content "$root/native.json"
+ if($PendingSend){
+  if($last.waitBlocked -ne 1 -or $last.waitDeath -ne 0 -or $peer.waitBlocked -ne 0 -or $peer.waitDeath -ne 1){throw 'Guest blocked-send/death callback counts incomplete'}
+  $waitBytes=[IO.File]::ReadAllBytes("$root/MSGWAIT.bin")
+  if($waitBytes.Length -ne 60 -or [Text.Encoding]::ASCII.GetString($waitBytes,0,4) -ne 'WAIT'){throw 'Missing pending-send report'}
+  $waitNames=@('signature','errors','pid','senderThread','receiverThread','nativeThread','blockedStatus','blockedError','nestedAfterTimeout','deathStatus','deathError','deathWindowAlive','deathOwnerBefore','guestStaleResult','deathResult')
+  $wait=[ordered]@{};for($i=0;$i -lt $waitNames.Count;$i++){$wait[$waitNames[$i]]=[BitConverter]::ToUInt32($waitBytes,4*$i)}
+  $wait|ConvertTo-Json|Set-Content "$root/pending-send.json"
+  if($wait.errors -or $wait.pid -ne $nativeReport.pid -or
+   $wait.senderThread -ne $nativeReport.senderThread -or $wait.receiverThread -ne $nativeReport.receiverThread -or
+   $wait.nativeThread -ne $nativeReport.nativeThread -or $wait.blockedStatus -ne 0 -or
+   $wait.nestedAfterTimeout -ne 1 -or $wait.deathStatus -eq 0 -or $wait.deathError -ne 0 -or
+   $wait.deathResult -ne 0x447a007c -or $wait.deathWindowAlive -ne 0 -or
+   $wait.deathOwnerBefore -ne $wait.pid -or $wait.guestStaleResult -ne 0x447a007e){throw 'Actual blocked-send/destruction/result/identity contract failed'}
+ }
  if($ExternalNativePeer -and
     (!$nativeReport.externalPid -or $nativeReport.externalPid -eq $nativeReport.pid -or
      $nativeReport.externalBits -ne $(if($externalMachine -eq 0x14c){32}else{64}))){

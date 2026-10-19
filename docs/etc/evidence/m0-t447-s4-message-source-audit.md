@@ -5291,3 +5291,157 @@ inspection returns only .ccache and .ninja. Raw results are no longer promised
 recoverable; tracked producers, canonical media and the summaries above
 remain. The containing reviewed main/origin commit delivers test-only P15;
 P13 remains the installed runtime frontier and S4 remains active.
+
+## Pending-send blocking and receiver-window destruction
+
+Source-selected M2/M3/M5 question after P15: can a real Win16 callback send
+back into a native thread which has explicitly forbidden receive reentry,
+and are destruction-time native results kept separate from HWND validity?
+Original WU32SendMessage copies operands before ThunkMsg16, frees its argument
+views before native dispatch, then invokes its original unthunker.
+W32Win16WndProcEx/CallBack16 own the reverse callback. WU32InSendMessage and
+WU32ReplyMessage directly use native receive/reply; no private SMS is inferred.
+wow_user_task_lifecycle's native-call scope restores execution in finally;
+SendMessageTimeout only captures output roots on native success. DestroyWindow
+uses the same scope; actual USER owns destruction and the adapter withdraws
+its projection. No replacement wait, queue, transport or scheduler is needed
+for the selected calls. Existing native lifecycle fixtures cover nested
+SMTO_BLOCK timeout/destruction, but not actual USER16 callbacks and handles.
+
+The opt-in authored probe therefore retains the full ordinary message and
+structure group, adding two scenarios as one acceptance unit. Native peer
+receives a guest send, calls back with SMTO_BLOCK, and the guest sends back
+to it. That reverse native callback must not execute before the blocked send
+has timed out. After timeout USER can service the reverse call, the guest
+continues and normal original cleanup must follow. An additional window
+created by the real receiver task destroys itself inside another synchronous
+callback. Native status/result/error and dead HWND are checked separately;
+the surviving receiver verifies its original guest handle is invalid and a
+send through it returns0. Both original main tasks must still retire normally.
+These are disposable test windows, not hidden product helpers.
+
+Failed first cohort is retained as failed, not retried without attribution:
+supervisor PID12640 starts2026-10-19T05:00:46.622Z; group ends05:03:10.553Z,
+exit1, after both builds/shared3 pass. pending-Off records blocked status0,
+error1460, reverse-after-timeout1, but destruction status1/error0 with HWND
+already dead. The initial test incorrectly required status0 for that final
+send; native errors1 and sender errors818A prevent normal completion.
+No shared-task/receiver normal-retirement pass is claimed for this failed case.
+Result644046F2AC34AC93C5C583F8CE0FF32C3A00A64A7FC90A58500A6E07E8474CE5;
+failed WAIT32F101CCDCB8BAF88D900604E0D4605E0C3AA48F571823E43396652630030FFF.
+Its exact source inputs were probeD0380F85080A7702A2D32D88D29355A99CBE168293716456F221886D86FE943D,
+native5D9CD8AB66C211BDF76E2A61B5969173FCDFD2153B7E155F439F6AD486EA7A3D,
+runner5A38B5711E72720CD89B1F6685036F05DAE789767579DC0FE88571B7BEDEC4FA.
+
+Attribution control: tracked wow_pending_send_native_control.c calls raw
+USER32 only, with matching DestroyWindow-inside-WndProc/ERRORONEXIT/result,
+both native widths and both same/cross-process targets. No Hook, WOW, test
+provider, private layout or guest participates. Native-control-r1 supervisor
+PID40148 runs05:05:14.126--05:06:42.063Z, exit0; all four cases return
+status1/error0/result447A007C/destroyed1. This matches WOW, so the failed
+expectation is not evidence of a runtime defect. Source hash
+FA51D1B01C13F801BB50BEF3E71D76052A4C64E7A33A4517C63C47D84B7973FF;
+resultF440FD4AB53A502C730188D61CF071C58C98C36D8EBFC5AB9FC39A1BB2078ED3.
+
+The corrected group requires that exact paired native result, a separately
+invalid HWND, guest stale-handle refusal and normal task retirement. It does
+not merely accept either result to obtain a pass. Each final run repeats the
+four native controls. A separately compiled no-SMTO_BLOCK control must expose
+the forbidden reverse-before-return ordering and be rejected by the guest
+group. No product change or semantic concession follows from correcting this
+assertion. Receiver-thread/process death, HWND reuse, arbitrary failed sends,
+implicit receive and remaining M4 families are not proved by window death.
+
+Final reproducer: hidden owned pwsh -File
+tests/observation/verify-wow-external-native.ps1 -PendingSend -BuildRoot
+<repo>/build/t447-s4-pending-send/group-r2. Supervisor PID11572 starts
+05:07:46.011Z; group05:07:46.970--05:10:08.588Z, exit0. x86/x64 builds
+PID30036/12412 exit0, using the existing stable caches. Native controls
+PID42196/47828 repeat all four exact matches. Guest results:
+
+| Style | Shared case PID | Pending case PID | Worker | Sender/receiver task |
+| --- | ---: | ---: | ---: | --- |
+| Off | 48528 | 9124 | 35912 | 6079/6031 |
+| Win16 | 31296 | 12900 | 30744 | 6079/6031 |
+| All | 11260 | 48588 | 29120 | 6079/6031 |
+
+Every pending case records errors0, blocked status0/error1460, one reverse
+callback only after timeout, destruction status1/error0/result447A007C,
+dead HWND and guest stale-result447A007E. Guest reports record one blocked
+sender callback and one receiver destruction, retaining version030A/0300,
+all ordinary scalar/nested/reply/post/filter/local-thread-post/text and three
+structure-family assertions. Sender phases0/1/2/3/4/6 and receiver0/5/6 finish;
+both original tasks retire exactly once before fixture cleanup. Shared3
+retain the exact P14 default NE pair. No thread/process-death claim follows.
+
+The separate no-block fixture PID14916 runs05:10:01.566--05:10:08.562Z,
+actual exit1. It logs exact FAIL reverse callback before blocked send returned;
+the verifier accepts only this attributed negative, not an arbitrary failure.
+This demonstrates the ordering assertion distinguishes actual SMTO_BLOCK.
+Its failure cleanup is not normal guest retirement.
+
+Final resultF23D4ED5973D50EDDA4618C7CAD06FB5A346EDFFFFA4CC29C656C8BFC20AB158;
+stepsA25E996B3388289A32EA6A996CE861B4C43A43E69BA92605F7EA5AB905C83C0A.
+ProbeD0380F85080A7702A2D32D88D29355A99CBE168293716456F221886D86FE943D;
+native23381445CDFF7A6030867C20BC55B56C0DC6887C3CA27374016AECFDE1ECBA20;
+case runnerB5597E415DBF88E3C6290EB3A6A248382398F4C02A7D71B21C262EFE3BE6683A;
+group54D24E740B540DCA1D5047354CBD4E97C12F7F49F33CCA22904A96C415D221A5;
+CMakeCFA4ED5AC20DB976839744D0F185C7AC2CC9CEA810D0BFD60E8AEEE1FA5A9D91.
+Quality PID25068 runs05:10:42.093--05:10:58.337Z, exit0: all six current
+probe-input sets match; each runtime manifest and installed/released13 match
+P13; canonical ZIP is unchanged; parsers, documentation, links and whitespace
+pass. Failed-r1 source identities remain historical, not asserted current.
+
+Second-role review finds no production change or new runtime dependency:
+all new CMake targets are EXCLUDE_FROM_ALL fixtures, C outputs remain in
+stable .ninja trees, scratch media are canonical copies. The control kills
+only its own held child on failure and returns failure; its passing path
+requires natural child exit0. No guest rebuild, new exception or image refresh
+is justified. Original-mirror additions/deletions/diff delta0. The containing
+commit is test-only P16, with P13 still the installed runtime frontier.
+
+Read-only M4 follow-up constraints, not another implementation admission or
+a proved defect: wmdisp32's explicit malloc16/stackalloc16/GlobalAllocLock16
+sites span19 converter functions/26 calls. They group as follows:
+
+| Existing original owners | Required ownership boundary still to reconcile |
+| --- | --- |
+| Create/MDICreate | Partial string/structure construction, nested create, rollback and original frees. |
+| SetText/GetText/GetDlgCode/AskCBFormatName/DropObject | Borrowed parameter map versus owned heap/compatibility stack; output copyback and interrupted return. |
+| GetMinMaxInfo/DrawItem/MeasureItem/DeleteItem/CompareItem/NCCalcSize/WindowPosChanging | Stack-frame lifetime, nested callbacks, native output/result and rollback. |
+| SizeClipBoard/DDEAdvise/DDEExecute/WinHelp | Original shared-global/protocol ownership, asynchronous transfer versus call cleanup. |
+| CopyData | Retain P13's specific ownership proof, not a universal finalizer for the other18 owners. |
+
+This allocation-site inventory is not the complete M4 conversion inventory:
+wmsg16's reverse/native allocations and delegated helpers also remain.
+Original stackfree16 is intentionally empty; stackalloc16 advances vpCBStack,
+and CallBack16 restores the original frame/stack. Do not invent an independent
+stack allocator merely because that macro is empty. A callback returning
+FALSE still reaches W32Win16WndProcEx's normal original unthunker before its
+default path; an escaped exception/partial constructor is a distinct edge.
+The COPYDATA-specific finally is not proof of generic string/structure cleanup.
+No leak or output-after-reply fix is claimed without that source closure.
+
+Retained artifact identities: pending SEND9A61DED24E7B6F6ECDA596D18E666A3E12CF9AD022494860557DCAEBA750C6EF,
+RECVBA1E558FF3877C291C195A2A4175FAA30A11E77FE5C97DE0A62D0082C6932DE0,
+hostD9F731C88E723CF73EA9E4BBA1DE2DD3FE661953D0053D8FAE7C07C9F15AE1B6.
+Native control32 SHA2833F7FF166EBD848C54E4D09B08F68639E4FEE0F64C8D506017F8C74DEA4479;
+control64 FCAFE1322B1E00F231A435EA5AECD45ED807AC5F09629E5A166A20923D693F5D.
+QualityA0183FAA2D36C7797D856E102D72F445B108649787693F07BE6713F5EF74DDC7;
+negative markerD3A43856EE22D99AAB145E9E079200CA4DEC05BF3436C495D6C2B74CA157DC3D.
+
+Before disposal the sole remover inventories548 files/21489923 bytes,
+membership322E6394DFE0CF4D0E3519360280A30C3DCBFF12BC36D5AEEBB343328E3A7E20.
+All127 sensitive entries are individually hash-reviewed:70 exact canonical
+ZIP duplicates,22 NASM listings tied to the unchanged tracked probe and35
+authored MSG6/MSG8/NMSG/WAIT reports, including the failed first assertion.
+No Git data, changed user configuration or unknown media is present. Actual
+process inspection confirms all listed jobs/controllers/project workers are
+gone, without killing processes for cleanup. These conclusions/hashes precede
+the exact preview/Apply. Valid caches stay; no Git prune or cache reset.
+
+Preview returns Applied=false; subsequent Apply removes exactly that reviewed
+membership,548 files/21489923 bytes. The same remover's final residual check
+returns only .ccache and .ninja. Raw failed/passing artifacts are disposed,
+not promised recoverable; tracked producers, canonical media and the exact
+results/hashes above remain. S4 stays active at the test-only P16 checkpoint.

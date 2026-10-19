@@ -451,6 +451,16 @@ result 0x58
 %endif
 %endif
 %endif
+%ifdef PENDING_SEND
+mov ax,9
+call native_operation
+result 0x89
+cmp word [wait_blocked-data],1
+jne failed
+mov ax,10
+call native_operation
+result 0x8a
+%endif
 %ifdef EXTENSION_WITNESS
 ; Real original GetProcAddress32 failure followed by valid resolution.
 push32 module
@@ -660,6 +670,16 @@ cmp word [bp+12],0x466
 je .ack
 cmp word [bp+12],0x46f
 je .quit
+%ifdef PENDING_SEND
+cmp word [bp+12],0x47b
+je .wait_blocked
+cmp word [bp+12],0x47c
+je .death_destroy
+cmp word [bp+12],0x47d
+je .death_create
+cmp word [bp+12],0x47e
+je .death_stale
+%endif
 %ifdef CROSS_WORKER
 cmp word [bp+12],0x479
 je .launch_ready
@@ -1025,6 +1045,69 @@ inc word [extension_yielded-data]
 mov ax,0x76
 jmp .value
 %endif
+%ifdef PENDING_SEND
+.wait_blocked:
+api 2,192
+test ax,ax
+jz .bad
+send native_window,0x484,0,0,0
+cmp dx,0x447a
+jne .bad
+cmp ax,0x84
+jne .bad
+inc word [wait_blocked-data]
+mov ax,0x7b
+jmp .value
+.death_create:
+cmp word [death_window-data],0
+jne .bad
+push ds
+push word classname-data
+push ds
+push word death_caption-data
+push word 0x8000
+push word 0
+push word 0
+push word 0
+push word 100
+push word 60
+push word 0
+push word 0
+push word [instance-data]
+push word 0
+push word 0
+api 2,41
+test ax,ax
+jz .bad
+mov [death_window-data],ax
+jmp .value
+.death_destroy:
+api 2,192
+test ax,ax
+jz .bad
+mov ax,[bp+14]
+cmp ax,[death_window-data]
+jne .bad
+push ax
+api 2,53
+test ax,ax
+jz .bad
+inc word [wait_death-data]
+mov ax,0x7c
+jmp .value
+.death_stale:
+cmp word [wait_death-data],1
+jne .bad
+push word [death_window-data]
+api 2,47
+test ax,ax
+jnz .bad
+send death_window,0x460,0x1234,0x5678,0x9abc
+or ax,dx
+jnz .bad
+mov ax,0x7e
+jmp .value
+%endif
 %ifdef CROSS_WORKER
 .launch_ready:
 cmp word [bp+10],0x5341
@@ -1156,6 +1239,9 @@ align 16,db 0
 data:
 times 32 db 0
 report:
+%ifdef PENDING_SEND
+db 'MSG8'
+%else
 %ifdef CROSS_WORKER
 db 'MSG7'
 %else
@@ -1170,6 +1256,7 @@ db 'MSG5'
 db 'MSG2'
 %else
 db 'MSG1'
+%endif
 %endif
 %endif
 %endif
@@ -1206,7 +1293,15 @@ remote_task: dw 0
 foreign_expected: dw 0
 launch_ready: dw 0
 %endif
+%ifdef PENDING_SEND
+wait_blocked: dw 0
+wait_death: dw 0
+%endif
 report_end:
+%ifdef PENDING_SEND
+death_window: dw 0
+death_caption: db 'T447 death target',0
+%endif
 instance: dw 0
 window: dw 0
 peer: dw 0

@@ -28,6 +28,12 @@ static DWORD sender_thread, receiver_thread, peer_thread_id;
 static DWORD receiver_process_id;
 #endif
 static volatile LONG errors;
+#ifdef MESSAGE_PENDING_SEND
+static volatile LONG blocked_returned, blocked_nested;
+static DWORD blocked_status, blocked_error, death_status, death_error;
+static DWORD death_owner, death_result, stale_result;
+static HWND death_window;
+#endif
 #ifndef MESSAGE_EXTERNAL_HOST
 static volatile LONG received, nested, replied, text;
 #endif
@@ -180,6 +186,53 @@ static LRESULT CALLBACK peer_proc(HWND window, UINT message, WPARAM wp, LPARAM l
     case 0x470:
         check(wp == 0x1234 && (DWORD)lp == 0x56789abc);
         return 0x447a0010;
+#ifdef MESSAGE_PENDING_SEND
+    case 0x483:
+        SetLastError(ERROR_SUCCESS);
+        blocked_status=(DWORD)SendMessageTimeoutA(sender_window,0x47b,0,0,
+            SMTO_ERRORONEXIT |
+#ifndef MESSAGE_NONBLOCK_CONTROL
+            SMTO_BLOCK |
+#endif
+            SMTO_NORMAL,250,&value);
+        blocked_error=GetLastError();
+        check(blocked_status==0 && blocked_nested==0);
+        InterlockedExchange(&blocked_returned,1);
+        return 0x447a0083;
+    case 0x484:
+        check(GetCurrentThreadId()==peer_thread_id && InSendMessage());
+        if(!InterlockedCompareExchange(&blocked_returned,0,0)){
+            FILE *failure=NULL;
+            if(!fopen_s(&failure,"MSGPEER-FAIL.txt","ab")){
+                fputs("FAIL reverse callback before blocked send returned\n",failure);
+                fclose(failure);
+            }
+        }
+        check(InterlockedCompareExchange(&blocked_returned,0,0)==1);
+        InterlockedIncrement(&blocked_nested);
+        return 0x447a0084;
+    case 0x485:
+        check(SendMessageTimeoutA(receiver_window,0x47d,0,0,
+            SMTO_ERRORONEXIT,5000,&value)!=0 && HIWORD(value)==0x447a);
+        death_window=FindWindowA("T447_MSG_RECV","T447 death target");
+        check(death_window!=NULL && LOWORD((DWORD_PTR)death_window)==LOWORD(value));
+        check(GetWindowThreadProcessId(death_window,&death_owner)==receiver_thread &&
+            death_owner==GetCurrentProcessId());
+        SetLastError(ERROR_SUCCESS);
+        death_status=(DWORD)SendMessageTimeoutA(death_window,0x47c,0,0,
+            SMTO_ERRORONEXIT,5000,&value);
+        death_error=GetLastError();
+        /* Paired native controls prove that destroying the HWND inside its
+         * callback does not force this completed send to fail, even with
+         * ERRORONEXIT. Do not confuse dead HWND identity with API failure. */
+        death_result=death_status ? (DWORD)value : 0;
+        check(death_status!=0 && death_result==0x447a007c &&
+            death_error==0 && !IsWindow(death_window));
+        check(SendMessageTimeoutA(receiver_window,0x47e,0,0,
+            SMTO_ERRORONEXIT,5000,&value)!=0);
+        stale_result=(DWORD)value;check(stale_result==0x447a007e);
+        return 0x447a0085;
+#endif
     case 0x471:
         check(SendMessageTimeoutA(sender_window, 0x462, 0, 0x22334455,
             SMTO_ABORTIFHUNG | SMTO_ERRORONEXIT, 5000, &value) != 0);
@@ -307,6 +360,29 @@ DWORD WINAPI MessagePeer(DWORD operation)
     ] = {0};
     DWORD written;
     HANDLE output;
+#ifdef MESSAGE_PENDING_SEND
+    if(operation==9 || operation==10){
+        DWORD_PTR value=0;
+        check(GetCurrentThreadId()==sender_thread);
+        check(SendMessageTimeoutA(peer_window,operation==9 ? 0x483 : 0x485,0,0,
+            SMTO_ERRORONEXIT,10000,&value)!=0);
+        check(value==(operation==9 ? 0x447a0083u : 0x447a0085u));
+        check(blocked_returned==1 && blocked_nested==1);
+        if(operation==10){
+            DWORD wait_report[]={0x54494157,(DWORD)errors,GetCurrentProcessId(),
+                sender_thread,receiver_thread,peer_thread_id,blocked_status,
+                blocked_error,(DWORD)blocked_nested,death_status,death_error,
+                (DWORD)IsWindow(death_window),death_owner,stale_result,death_result};
+            output=CreateFileA("MSGWAIT.BIN",GENERIC_WRITE,0,NULL,CREATE_NEW,
+                FILE_ATTRIBUTE_NORMAL,NULL);
+            if(output==INVALID_HANDLE_VALUE)return 0;
+            check(WriteFile(output,wait_report,sizeof(wait_report),&written,NULL) &&
+                written==sizeof(wait_report));
+            check(CloseHandle(output));
+        }
+        return errors ? 0 : operation==9 ? 0x447a0089 : 0x447a008a;
+    }
+#endif
     if (operation == 0) {
         if (peer_thread || peer_ready) return 0;
         sender_window = FindWindowA("T447_MSG_SEND", NULL);
