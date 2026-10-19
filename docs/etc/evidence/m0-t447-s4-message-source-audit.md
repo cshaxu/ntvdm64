@@ -5445,3 +5445,134 @@ membership,548 files/21489923 bytes. The same remover's final residual check
 returns only .ccache and .ninja. Raw failed/passing artifacts are disposed,
 not promised recoverable; tracked producers, canonical media and the exact
 results/hashes above remain. S4 stays active at the test-only P16 checkpoint.
+
+## M4 native capture prerequisite
+
+Source-first question after370134abb: WM32GetText/GetMinMaxInfo/
+WindowPosChanging write their native output after CallBack16; ReplyMessage
+may already have released the sender. Does that imply a dangling native
+pointer, requiring a new early-finalization mechanism? This is a prerequisite
+inside the admitted M4 whole-ownership audit, not a new product feature.
+
+Actual source/build chain remains original: wumsg WU32SendMessage and
+CallWindowProc use ThunkMsg16/selected apfnThunkMsg16 and original unthunk;
+wmdisp32 W32Win16WndProcEx uses aw32Msg then original callback/unthunker;
+walloc16 owns its guest message heap and callback stack; wparam owns parameter
+map reference/alias state. The actual stable wow32 Ninja link contains
+wmdisp32.obj/walloc16.obj/wparam.obj and their canonical source paths.
+No autonomous replacement for these original owners was found or added.
+
+Related original-state facts: WM32SetText GetParam16 increments a borrowed
+parameter-map reference; its DeleteParamMap path avoids freeing borrowed
+guest storage. Owned strings take malloc16 or the compatibility stack path.
+WM32GetText retains original low-word result, touched-byte/zero-size quirks,
+bounded copyback and matching release. W32LocalReAlloc updates the original
+map after movement; task exit calls FreeParamMap only for that task. Original
+stackalloc16 advances vpCBStack; CallBack16 restores vpStack, and stackfree16
+is deliberately empty. These are source findings, not blanket runtime proof
+of movement, exception cleanup or concurrent mapping lifetime.
+
+Native evidence is necessary before changing normal output: the earlier
+COPYDATA early-reply witness protects the sender's page but does not observe
+USER's receiver capture. The new independently authored
+tests/observation/wow_message_capture_control.c uses raw public USER32 only:
+main-thread native WndProc plus held sender-thread handle, four standard
+messages, early ReplyMessage6, sender-owned page protected NOACCESS and
+verified unreadable, acknowledgement, then a second cross-thread scalar
+send bracketing full WndProc return. No USER call occurs between receiver
+acknowledgement and its return. Actual receiver address/protection are
+observed separately from the sender allocation. For the three output
+messages, a write is attempted only on a distinct writable capture; a caught
+fault fails this diagnostic, never conceals a product exception. COPYDATA
+has no post-reply input dereference. After the full-return fence only, the
+sender restores/releases its own page. Destroy/unregister/thread exit are
+required. The CMake targets are EXCLUDE_FROM_ALL, both widths, /O2 /W4 /WX;
+no production source, Hook, WOW provider or guest is linked into the control.
+
+First capture run PID47892 starts2026-10-19T05:20:44.590Z; actual x86 control
+PID3596 ends05:21:22.525Z with exit1/errors2. It correctly observes distinct
+GETTEXT receiver storage/protection4 but incorrectly requires output already
+copied into the sender page at early reply. That unsupported assertion fails;
+it is not a product defect or a successful eight-case group. Original source
+D92A064C194B3DC963E7A35E89F812C737EDE30145A3A33609645A7832F7DF4D;
+resultBB9CF801549AD54F20D643C913FCC28F26545B2155B307BDA8312A16F02119C7;
+output7BA32E78E83EC50B970749F06F4AB87F434878DDB2CCB508A7B02EEDC79E1E3B.
+
+Capture-r2 removes that presumption and records output_at_reply instead.
+It passes all8 native observations with errors0, distinct writable captures
+and output_at_reply0 for each output message. It does not yet demonstrate
+a post-reply write; VirtualQuery alone is not promoted into that stronger
+claim. SourceAAA4B30353277439C556D34DEDC11C5BA599F11AE5FECD1822C1295B4A16DCD3;
+result68674B15B9EB01E0757EADDFC3313C6B46EFEA726257F20D241B24282C88BBCA.
+
+Final capture-r3 sourceE74FFA8E55CCB38D0A8637D8DA4AD8E93374A279C4C8D7A694F02804C6FB3B91
+adds actual guarded writes, not another product implementation. Supervisor
+PID34500 starts05:24:37.928Z. Stable incremental x86/x64 fixture builds
+PID43800/42836 exit0; native controls PID12212/33696 run05:24:45.673--
+05:24:45.808Z and05:24:52.893--05:24:53.017Z, exit0/errors0. Group ends
+05:24:53.046Z, result0. All eight exact observations:
+
+| Message | Native32 receiver | Native64 receiver | Sender alias | Protection | Guarded output write |
+| --- | --- | --- | ---: | --- | ---: |
+| GETTEXT000D | EFEA34 | C8008FF0E0 | 0/0 | READWRITE4 | 1/1 |
+| MINMAX0024 | EFFA5C | C8008FF990 | 0/0 | READWRITE4 | 1/1 |
+| WINDOWPOS0046 | EFFA64 | C8008FF990 | 0/0 | READWRITE4 | 1/1 |
+| COPYDATA004A | EFFA78 | C8008FF990 | 0/0 | Header/data READWRITE4 | not attempted |
+
+Sender allocations1170000/native32 and23362C50000/native64 are NOACCESS
+at observation/write time. COPYDATA data B3DDA0/native32 andC8008FF9C0/native64
+also differ from their sender page+64. Every call returns status1/error0,
+early result6; the later callback result447A0099 does not replace it. Output
+at early reply is0 (not yet copied back), and all6 guarded output writes
+succeed before full return. The owned supervisor explicitly requires four
+rows/errors0 and three capture_write1 per width, not merely process exit0.
+This is raw native same-process/cross-thread capture evidence; it is NOT
+cross-process, actual USER16, every message or a portable private-USER contract.
+
+Reproduce in owned background jobs: configure the existing
+msvc-x86-release-ccache/msvc-x64-release-ccache presets, build target
+wow_capture_native_control, then run the corresponding
+build/.ninja/msvc-<arch>-release/message-probes/MSGCAPTURE.exe. Require exit0,
+four message rows/errors0 and exactly three capture_write1 lines per width.
+Observe per-build180-second and per-control90-second deadlines; do not clear
+caches or use a new task-numbered build tree. capture-r3 needed no configure
+because capture-r2 had already configured both exact trees.
+
+Final result4EAEC5688E03CAD6BB42CA85B593CDE37AF7C261E1D2689513FC36B5A8153171;
+stepsCFE937144B10732F9415F909656EDB84F03ABD30ACE063035E4FAC6B47C117C9;
+CMake5F77214361D5F0A5411E7BAA92DE74D139046B448B8977453CD5D21C32C2B32E.
+
+Conclusion/reviewer decision: the selected native output-pointer suspicion
+does not justify rewriting original normal unthunkers, delaying ReplyMessage,
+creating a conversion registry or guessing SMS identity. Preserve original
+normal conversion and the already approved modern native reply boundary.
+Actual Win16 early-output composition, all19 constructor/release owners,
+reverse/delegated conversions, parameter-map movement, allocation-failure and
+escaped-exception paths remain finite M4 work. A callback FALSE still runs
+the normal original unthunker; partial construction/escaped exception is
+different. No generic-finally correctness or M4/S4 closure is claimed here.
+
+Final control32 SHA F4B854B9AC5C330CDBD0F73D89352797C409C32C3E0546534D7FEDA16FBC99BD;
+control64 15F755DAA5EF177090D4B3D34FA63BAC4603418211FDA00158962C999DCC5E53.
+Quality PID34664 runs05:27:17.201--05:27:31.329Z, exit0: source/artifact
+hashes, actual PE widths, four distinct captures/three writes per width,
+installed/released13, canonical ZIP, no src/assets diff and documentation/
+links/whitespace all pass. Quality hash
+10314C1C6C4495EEFAD4CEAD1C1AAB906EDAEFE05E128DD1A660FFEC37393513.
+CURRENT compacts the delivered077/123/078 build-attempt chronology already
+retained in this audit, preserving its facts and remaining obligations rather
+than exceeding the control-plane size limit. No prior failure is erased.
+
+Before disposal, the sole remover inventories45 files/15745 bytes, membership
+8890071D44C3D70B32D7169D8EEB5CF8E6F90DEA7BD0C531ED7FFBC8E51D7DFD.
+There are no sensitive/configuration/media/Git entries, only this phase's
+owned generated commands/logs/JSON/CSV. Actual process inspection finds no
+live listed owner or MSGCAPTURE controller; no process is killed for cleanup.
+The necessary observations, first failed assertion, decisions and hashes are
+retained above before preview/Apply. Stable .ninja/.ccache remain untouched.
+
+Preview Applied=false precedes successful exact Apply:45 files/15745 bytes
+removed; final residual returns only the two caches. Raw diagnostic logs are
+disposed, not promised recoverable. The containing reviewed main/origin
+commit is research/test-only S4 P17, not a product release. Original mirror
+diff delta0, guest modification0; P13 remains installed and S4 remains open.

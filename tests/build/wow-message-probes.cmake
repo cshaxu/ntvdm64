@@ -56,6 +56,12 @@ if(NTVDM_ARCHITECTURE STREQUAL "x86")
   set_target_properties(wow_message_external_host PROPERTIES
     OUTPUT_NAME MSGHOST RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/message-probes")
 endif()
+add_executable(wow_capture_native_control EXCLUDE_FROM_ALL
+  "${CMAKE_SOURCE_DIR}/tests/observation/wow_message_capture_control.c")
+target_compile_options(wow_capture_native_control PRIVATE /O2 /W4 /WX)
+target_link_libraries(wow_capture_native_control PRIVATE user32)
+set_target_properties(wow_capture_native_control PROPERTIES
+  OUTPUT_NAME MSGCAPTURE RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/message-probes")
 add_executable(wow_pending_native_control EXCLUDE_FROM_ALL
   "${CMAKE_SOURCE_DIR}/tests/observation/wow_pending_send_native_control.c")
 target_compile_options(wow_pending_native_control PRIVATE /O2 /W4 /WX)

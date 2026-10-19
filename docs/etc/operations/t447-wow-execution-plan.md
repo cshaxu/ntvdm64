@@ -141,6 +141,39 @@ on unchanged P13. This test-only P16 adds no runtime/mirror/guest diff; see
 the [pending-send evidence](../evidence/m0-t447-s4-message-source-audit.md#pending-send-blocking-and-receiver-window-destruction).
 This is window destruction, not pending thread/process death or all M4.
 
+### M4 conversion ownership source group
+
+After P16/370134abb, audit the complete selected conversion closure, including
+wmdisp32's19 explicit guest-allocation owners, wmsg16 and delegated control
+thunks, wparam/walloc16/wcall16 and existing callback/native-call boundaries.
+Do not replace original allocators, parameter maps or conversion algorithms.
+Normal callback FALSE still runs the original unthunker; stackfree16 is
+intentionally empty because the original callback frame owns stack rollback.
+These facts are not proof of escaped-exception/partial-construction cleanup.
+
+One prerequisite needs a concrete native answer before selecting a correction:
+WM32GetText and the output-structure converters copy to native lParam after
+CallBack16. Modern ReplyMessage can return to the sender earlier. Determine
+whether actual USER preserves a receiver capture or exposes the sender's own
+buffer for GETTEXT/MINMAXINFO/WINDOWPOS/COPYDATA, with exact pointer identity,
+reply/result and sender-owned page protection. This is an independently
+authored native32/64 control, not a product helper or an assumed WOW fault.
+Do not infer capture lifetime from the existing COPYDATA input-only pass.
+No runtime edit or semantic concession is selected until the original caller,
+ownership and native evidence compose. Resolve the full group rather than
+adding per-message patches or a second resource manager.
+
+Diagnostic scratch owner: build/t447-s4-capture-ownership,60-minute phase,
+2GiB and15-minute no-progress budgets; stable compiler caches unchanged.
+
+Native prerequisite now answers the selected question: all8 raw USER32 cases
+have distinct receiver captures, with6 actual guarded output writes after
+sender-page protection. Original normal output conversion is retained; no
+new finalizer, payload manager or semantic relaxation follows. See the
+[capture audit](../evidence/m0-t447-s4-message-source-audit.md#m4-native-capture-prerequisite).
+This test/research-only P17 does not complete actual Win16 M4, construction
+rollback, movement, mapping or exception paths.
+
 ## Admission and boundaries
 
 The owner's clarified WINMINE report concerns active cell latency, not failed

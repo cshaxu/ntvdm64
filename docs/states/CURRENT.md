@@ -4,8 +4,8 @@
 
 Owner accepts and closes [Td build hygiene](../etc/operations/td-build-hygiene.md)
 at aadde21e8; S4 resumes from delivered P13. Retain stable caches, immutable
-guest and frozen performance lane. P15 proves cross-worker fallback; P16
-verifies blocked reentry and destruction. M4 ownership remains next.
+guest and frozen performance lane. P15/P16 verify cross-worker/wait paths;
+M4 capture controls retain original normal conversion, not generic cleanup.
 
 ## Current Work
 
@@ -29,33 +29,17 @@ defines all six groups, including implicit delivery, reply/wait and
 converted-data lifetime; explicit SendMessage alone cannot close S4.
 
 The [S4 source audit](../etc/evidence/m0-t447-s4-message-source-audit.md)
-now reconciles original sendmsg/focus/taskman consumers and retained native
-boundary counterexamples. Target-based pseudo-reply bookkeeping must be
-replaced as one execution group. HEVENT_REMOVEME excludes a task for one scan
-only; native-suspended eligibility must survive other scans without clearing
-real events. Review all eight selection/transition entries before freezing
-the minimal seam. Native receive/reply remains the sole message authority.
-Old private-SMS pointer-equality and non-yielding NT4 early-handoff test
-assertions are not the approved modern contract; no field fabrication or
-hidden waiver is selected. The eight-entry review now stages the registered
-077/123 execution group: original selection consumes a persistent readiness
-input; existing native/callback scopes own LIFO state, and old target-based
-pseudo-reply bookkeeping is removed. Native wait/modal and inline queue/
-enumeration/Hook entries plus failure/retirement must compose together before
-grouped verification. Candidate execution-build-r1 and its no-work r2 input
-refresh exit0. Execution-build-r3 also passes after moving the single borrowed
-frame top onto the existing THREADINFO carrier, removing private-task lookup
-and the added readiness vtable. Acceptance-r6 completes original30 and12
-real S3 guest groups, with explicit hash-checked reuse of r4 native20/style
-passes. Actual USER16 message r5 reaches zero-error send/reply/text counters
-but fails receiver retirement and reports a wrong peer task identity. The
-registered078 group reconnects the existing original class-unregister client
-and existing original full-HWND resolver before native thread-ID queries.
-Native full/short/dead query and irreversible class-release failure assertions
-join the unchanged real identity/retirement requirements. Fresh build-r5 passes;
-acceptance-r7 passes native20, both-width style, original30 and all12 real S3
-guest groups. Actual-message-r6 passes all3 styles: queried peer6031 equals
-receiver self6031, both tasks retire exactly once, launcher exit0. WINMINE/SOL
+retains the eight-entry sendmsg/focus/taskman review and failed/passing
+execution-build/acceptance chronology. Delivered077/123 replaces target-based
+pseudo-reply bookkeeping with original selection consuming persistent
+readiness; existing native/callback scopes own LIFO state through THREADINFO.
+Delivered078 reconnects original class-unregister/full-HWND resolution,
+correcting the first real message witness's identity/retirement failure.
+Native20/original30, both-width style and all12 S3 groups pass; actual-message-r6
+passes3 styles with peer6031 matching receiver self, exactly-once retirement
+and launcher exit0. Native receive/reply remains the sole authority: private
+SMS-pointer equality and NT4 early-handoff ordering are not promised.
+WINMINE/SOL
 gameplay and WRITE's retained startup depth pass all3 styles; DOS17/17 in both
 frontends and ordinary-logon/installed gameplay also pass. Final review adds
 direct MessageBox/ShellAbout acceptance: failed early probes assumed internal
@@ -355,6 +339,8 @@ Test-only P14 passes9 external/local cases; P15 passes cross3/shared3.
 P16 verifies blocked reentry/destruction under3 styles, shared3, native4
 and no-block refusal. P13 remains the runtime release; full M1--M6/S5/S6
 stay open. Exact identities, failed assertions and limits are in the S4 audit.
+P17 native capture prerequisite passes8 cases/6 post-reply writes; real M4
+construction, mapping, failure and lifecycle closure remains required.
 
 ## Active Packet
 
