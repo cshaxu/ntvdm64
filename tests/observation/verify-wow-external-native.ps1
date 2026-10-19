@@ -1,7 +1,9 @@
 [CmdletBinding()]
-param([Parameter(Mandatory)][string]$BuildRoot,[switch]$BuildOnly,[switch]$CrossWorkers,[switch]$PendingSend)
+param([Parameter(Mandatory)][string]$BuildRoot,[switch]$BuildOnly,[switch]$CrossWorkers,[switch]$PendingSend,
+ [string]$PackageRoot,[string]$ManifestPath)
 $ErrorActionPreference='Stop'
 if($CrossWorkers -and $PendingSend){throw 'Select one whole message group'}
+if([bool]$PackageRoot -ne [bool]$ManifestPath -or ($BuildOnly -and $PackageRoot)){throw 'Candidate package and manifest must be paired for a runtime group'}
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -or
@@ -57,14 +59,24 @@ try{
  }}
  if(!$BuildOnly){
   if((Get-FileHash assets/winnt.zip).Hash -ne '7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7'){throw 'Guest ZIP differs from P13'}
-  [IO.Compression.ZipFile]::ExtractToDirectory((Join-Path $repo 'assets/winnt.zip'),"$root/media")
-  $package="$root/media/WINNT"
-  $manifest=Get-Content assets/release/release-manifest.json -Raw|ConvertFrom-Json
-  if($manifest.Count -ne 13){throw 'Need coherent13 release manifest'}
-  foreach($image in $manifest){
-   $source=Join-Path $repo "assets/release/$($image.name)"
-   if((Get-FileHash $source).Hash -ne $image.sha256){throw 'Release identity mismatch'}
-   Copy-Item $source "$package/SYSTEM32/$($image.name)" -Force
+  if($PackageRoot){
+   $package=(Resolve-Path -LiteralPath $PackageRoot).Path
+   if(!$package.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase)){throw 'Candidate must be build-owned'}
+   $ManifestPath=(Resolve-Path -LiteralPath $ManifestPath).Path
+   $manifest=Get-Content $ManifestPath -Raw|ConvertFrom-Json
+   if($manifest.Count -ne 13 -or @($manifest.name|Sort-Object -Unique).Count -ne 13){throw 'Need coherent13 candidate manifest'}
+   foreach($image in $manifest){if((Get-FileHash "$package/SYSTEM32/$($image.name)").Hash -ne $image.sha256){throw 'Candidate identity mismatch'}}
+   Get-FileHash $ManifestPath|Export-Csv -NoTypeInformation "$root/candidate-manifest.csv"
+  }else{
+   [IO.Compression.ZipFile]::ExtractToDirectory((Join-Path $repo 'assets/winnt.zip'),"$root/media")
+   $package="$root/media/WINNT"
+   $manifest=Get-Content assets/release/release-manifest.json -Raw|ConvertFrom-Json
+   if($manifest.Count -ne 13){throw 'Need coherent13 release manifest'}
+   foreach($image in $manifest){
+    $source=Join-Path $repo "assets/release/$($image.name)"
+    if((Get-FileHash $source).Hash -ne $image.sha256){throw 'Release identity mismatch'}
+    Copy-Item $source "$package/SYSTEM32/$($image.name)" -Force
+   }
   }
   $observer=Join-Path $repo 'build/.ninja/msvc-x64-release/message-probes/console-startup-observer.exe'
   $driver=Join-Path $repo 'build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'

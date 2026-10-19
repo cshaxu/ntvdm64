@@ -3,9 +3,16 @@
 **Active: M0 T447 S4 — message identity, reply, waits and reentry.**
 
 Owner accepts and closes [Td build hygiene](../etc/operations/td-build-hygiene.md)
-at aadde21e8; S4 resumes from delivered P13. Retain stable caches, immutable
-guest and frozen performance lane. P15/P16 verify cross-worker/wait paths;
-M4 capture controls retain original normal conversion, not generic cleanup.
+at aadde21e8; S4 resumes with stable caches, immutable guest and frozen
+performance. P18 delivers registered345's bounded construction/release cohort:
+old-body13 failures/current36 passes, actual MDI/text/WinHelp3, native21,
+original30, S3 twelve groups, message18, external9/cross6/pending6, retained
+application/DOS/logon floors and installed verification pass. Coherent13 is
+hash-matched at both destinations. One captured0102 is legitimate low16 HWND
+reuse; corrected tests require old full-identity death and a proved new live
+generation before accepting guest TRUE. Historical unobserved0102 remains
+unattributed. The [audit](../etc/evidence/m0-t447-s4-message-source-audit.md#p18-bounded-delivery)
+retains failures, exact identities and limits. M4/S4 and S5/S6 remain open.
 
 ## Current Work
 
@@ -337,7 +344,7 @@ Full gates, coherent13 and installed3/hashes pass; performance remains frozen.
 Full M1--M6/S5/S6 remains open; original guest/configuration stay unchanged.
 Test-only P14 passes9 external/local cases; P15 passes cross3/shared3.
 P16 verifies blocked reentry/destruction under3 styles, shared3, native4
-and no-block refusal. P13 remains the runtime release; full M1--M6/S5/S6
+and no-block refusal. P13 was the runtime release; full M1--M6/S5/S6
 stay open. Exact identities, failed assertions and limits are in the S4 audit.
 P17 native capture prerequisite passes8 cases/6 post-reply writes; real M4
 construction, mapping, failure and lifecycle closure remains required.
@@ -364,9 +371,9 @@ construction, mapping, failure and lifecycle closure remains required.
 
 ## Current Technical Baseline
 
-S4 P13 retains P12 and composes095--097's message/COMMDLG lifetime group.
-NTVDM SHA-256 is0E924EF84528D05F0A6E2BF605973CEB4CC7ACCC9876057F4C1EA6035CE43CA3;
-WOW32 isB761907DDE0B212F037C96B179328FB1E17326C1DF6EA38958CFA29472D768DF.
+S4 P18 retains P13 and adds345's original construction/owned-release fixes.
+NTVDM SHA-256 isF615FD24F01B1CDDEF417588BEA39B6D00AD03174FBB6AC9677874252858BAA4;
+WOW32 is39B7AC68011109E05465572C8BC56F1668EF8DAA6E68C2EE0A10F51EA51D5777.
 The coherent13 manifest matches assets/release and O:/winnt/system32.
 Original guest, user configuration and assets/winnt.zip are unchanged.
 

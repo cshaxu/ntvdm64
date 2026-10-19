@@ -174,6 +174,90 @@ new finalizer, payload manager or semantic relaxation follows. See the
 This test/research-only P17 does not complete actual Win16 M4, construction
 rollback, movement, mapping or exception paths.
 
+### M4 original construction and owned-release correction group
+
+After58fa75e55, the19-owner/reverse-thunk sweep identifies five finite source
+defects, to correct together as MVDM-HOST-DIV-345 (not a new scheduler or
+generic finalization engine):
+
+| Source entry | Defect and smallest original-shaped correction |
+| --- | --- |
+| WM32GetText | malloc16 may return0; GETVDMPTR/RtlFillMemory still precede the failure return. Reject before touching the absent buffer, retaining all original copyback quirks. |
+| WM32Create -> WM32MDICreate | Ignore nested FALSE and continue with failed/freed partial operands. Branch to the existing outer Error cleanup instead. |
+| WM32MDICreate/Create release | Class identity is captured, but title and nested structure identity are reread from mutable guest fields. Capture both in existing call scratch; two appended DWORDs carry them through outer CREATE. Release must not depend on a still-live/currently styled WND. No guest/public ABI changes. |
+| ThunkWMMsg16 text/map | AddParamMap allocation failure replaces a valid flat string with0; NULL input also creates an unusable map entry. Skip NULL registration and retain the flat lease on optional-map failure; original GetParam16 miss and DeleteParamMap miss/free paths supply the fallback. Do not build another map or silently clear text. |
+| WM32WinHelp | GlobalAllocLock16 only assigns its handle output on success; local handle is uninitialized on failure. Initialize0, preserving the original zero-handle behavior rather than inventing a new protocol failure. |
+
+Retain original allocators/map/cache/unthunkers. The extra host-private scratch
+is at the end of WM32MSGPARAMEX; audit all consumers and retain prior offsets.
+Budget60 executable added/removed mirror lines, only wmdisp32.c/.h/wmsg16.c;
+register exact baseline hashes and source provenance before editing. Existing
+normal source-defined clipboard/DDE ownership and failure behavior is not
+replaced by blanket cleanup or a guessed protocol policy. Their transfer/
+asynchronous and escaped-exception obligations remain in the complete M4
+inventory, not falsely passed by this five-defect cohort.
+
+Before building, finish the whole correction and exact-original-body fixture:
+allocation stages, nested construction rollback, mutated-title non-owned
+survival, optional-map fallback, no map entry/release leak and WinHelp failure
+handle. Prove the old bodies fail the relevant negatives. Then once grouped,
+build the affected production closure and run the retained source/native/
+actual-guest/application/DOS/publication gates, including real MDI/text paths,
+coherent13 hashes to both destinations and reviewed commit/push. No original
+guest rebuild or new semantic concession. Scratch owner is
+build/t447-s4-message-construction (60-minute phase/2GiB/15-minute no-progress);
+use stable .ninja caches, summarize before sole-owner disposal.
+
+The first complete345 regression fails common-dialog-Win16 in its first
+round: error0102, DestroyWindow AX1, following local USER16 IsWindow AX1.
+Native21/original30 and the other11 S3 rows pass; no publication follows.
+This is not attributed to345 or equated with historical0102 by signature.
+Within the existing M5 identity/lifetime obligation, distinguish: wrong
+native destruction target; copied slot/cache not withdrawn; legitimate
+same-low16 identity reuse; or guest register/projection inconsistency.
+Use a separately linked unpublished diagnostic with only two copied project
+sources. It records completed DestroyWindow's raw/full target/result in TLS,
+then observes only the already-failed CDL2 file-write boundary (metadata,
+current identity/native liveness, callback pair and owner/class). No USER
+queries or I/O before the guest decision, guest edits, original mirror
+changes, new identity owner or runtime workaround. Validate placement with
+an independently authored D001 negative copy, then one bounded unchanged
+source-defined control cohort; no pass-by-repetition or inferred cause.
+Retain strict assertions and all failed/interrupted outcomes. Publication
+stays blocked pending attribution/disposition and the full retained gates.
+
+The one contextual diagnostic captures0102: old0FBC0E90 is dead; the committed
+slot is live0FBD0E90, class CicLoaderWndClass in the same worker, with empty
+callback cache. This is proved low16 reuse, not failed native destruction or
+stale publication. Original USER16 passes a signed16 HWND; original
+rtl/wow.c HMValidateHandleNoRip accepts zero/FFFF high words and validates the
+current slot. Therefore IsWindow(0E90) may correctly recognize the replacement.
+Do not change product identity/lifetime, suppress native IME windows or guest
+code to satisfy the overstrong test. Historical0102 without these observations
+remains unattributed; this finding does not retrospectively erase its risk.
+
+Correct the authored acceptance as one group: capture the exact native full
+dialog identity before each original DestroyWindow; retain actual guest
+IsWindow and its raw AX; require the captured native identity dead afterward.
+A guest TRUE is accepted only with a proved different live full generation
+sharing the low16 value. Use an independently authored GenericThunk test DLL,
+public native enumeration, paired native records and same-thread/process
+checks, not product diagnostic state or a runtime registry. Keep16 complete
+rounds, all original hooks/resource/normal task-retirement assertions and the
+last live-dialog exit case. Omitted destruction and wrong identity must fail
+the native reference control. Build test-only DLL/control once in stable
+.ninja; then fresh whole S3 acceptance and all remaining frozen-package gates.
+
+P18 completes this bounded group:36 exact-body cases, actual construction3,
+native21/original30, fresh S3 twelve groups, message18, application/DOS/logon
+floors and external9/cross6/pending6 pass. Coherent13 and installed style/logon
+pass at both release destinations; exact source/artifact/failure evidence is
+in the S4 source audit's P18 section. This does not close the19-owner inventory,
+reverse conversion, exceptional unwind, DDE/clipboard transfer or the complete
+M1--M6 reconciliation. Those remain S4, not transferred to S5/S6. No new
+semantic waiver, guest change or performance experiment follows from delivery.
+This strengthens identity proof, not an approved runtime semantic concession.
+
 ## Admission and boundaries
 
 The owner's clarified WINMINE report concerns active cell latency, not failed

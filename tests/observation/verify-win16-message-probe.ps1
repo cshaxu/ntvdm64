@@ -16,12 +16,18 @@ param(
  [string]$NativeHost='',
  [string]$CrossWorkerCoordinator='',
  [switch]$SharedWorkerControl,
- [switch]$PendingSend
+ [switch]$PendingSend,
+ [switch]$Construction
 )
 # Entire actual-guest message group. Invoke as an owned hidden background run.
 # No original guest is changed or rebuilt; only independently authored probes.
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
+if($Construction -and (!$StructuredPayloads -or !$ThreadClientView -or $CrossWorkerCoordinator -or
+ $ExternalNativePeer -or $NativeExtension -or $CopyDataProc32 -or $ReplyPayloadLifetime -or
+ $TimeoutPayloadLifetime -or $PendingSend)){
+ throw 'Construction requires the normal structured/client-view message group'
+}
 if($PendingSend -and (!$NativeHost -or !$StructuredPayloads -or !$ThreadClientView -or
  $CrossWorkerCoordinator -or $ExternalNativePeer -or $NativeExtension -or
  $CopyDataProc32 -or $ReplyPayloadLifetime -or $TimeoutPayloadLifetime)){
@@ -59,12 +65,14 @@ function Read-GuestReport([string]$path,[string]$name){
  if($StructuredPayloads){$recordBytes+=4;$signature=if($ThreadClientView){'MSG6'}else{'MSG5'}}
  if($CrossWorkerCoordinator){$recordBytes+=6;$signature='MSG7'}
  if($PendingSend){$recordBytes+=4;$signature='MSG8'}
+ if($Construction){$recordBytes+=14;$signature='MSG9'}
  if(!$bytes.Length -or $bytes.Length%$recordBytes){throw "Incomplete $name message records"}
  $fields=@('role','phase','errors','task','peerTask','basic','nested','early','posted','same','filtered','threadpost','text','native','destroyed')
  if($ThreadClientView){$fields+=@('clientVersion','clientExpected','clientChecks')}
  if($StructuredPayloads){$fields+=@('structures','copyNested')}
  if($CrossWorkerCoordinator){$fields+=@('remoteTask','foreignExpected','launchReady')}
  if($PendingSend){$fields+=@('waitBlocked','waitDeath')}
+ if($Construction){$fields+=@('mdiCreated','mdiDestroyed','mdiTitleMutation','mdiParamMutation','mdiTextChecks','helpCalls','helpFreed')}
  $rows=@()
  for($offset=0;$offset -lt $bytes.Length;$offset+=$recordBytes){
   if([Text.Encoding]::ASCII.GetString($bytes,$offset,4) -ne $signature){throw "Invalid $name signature"}
@@ -88,6 +96,7 @@ try{
   if($CopyDataProc32){$arguments+='-DM4_COPYDATA_PROC32'}
   if($CrossWorkerCoordinator){$arguments+='-DCROSS_WORKER'}
   if($PendingSend){$arguments+='-DPENDING_SEND'}
+  if($Construction){$arguments+='-DCONSTRUCTION'}
   & $assembler @arguments $assembly *> "$root/$role-assemble.txt"
   if($LASTEXITCODE){throw "Independent $role assembly failed"}
  }
@@ -114,6 +123,7 @@ try{
   if($ReplyPayloadLifetime){$nativeDefines+='/DM4_REPLY_PAYLOAD'}
   if($TimeoutPayloadLifetime){$nativeDefines+='/DM4_TIMEOUT_PAYLOAD'}
   if($CopyDataProc32){$nativeDefines+='/DM4_COPYDATA_PROC32'}
+  if($Construction){$nativeDefines+='/DMESSAGE_CONSTRUCTION'}
   & $CompilerDriver cl.exe /nologo /LD /MT /O2 /W4 /WX /D_CRT_SECURE_NO_WARNINGS @nativeDefines "/Fo$root/peer.obj" $native /link "/OUT:$root/MSGHOST.DLL" "/IMPLIB:$root/MSGHOST.lib" /EXPORT:MessagePeer=_MessagePeer@4 /EXPORT:MessageExtension=_MessageExtension@12 user32.lib *> "$root/native-build.txt"
   if($LASTEXITCODE){throw 'Native peer build failed'}
  }finally{Pop-Location}
@@ -234,6 +244,12 @@ public static class WowMessageLogonEnvironment {
  if($CrossWorkerCoordinator){$names+='receiverPid'}
  for($i=0;$i -lt $names.Count;$i++){$nativeReport[$names[$i]]=[BitConverter]::ToUInt32($bytes,4*$i)}
  $nativeReport|ConvertTo-Json|Set-Content "$root/native.json"
+ if($Construction){
+  if($last.mdiCreated -ne 3 -or $last.mdiDestroyed -ne 3 -or $last.mdiTitleMutation -ne 1 -or
+   $last.mdiParamMutation -ne 1 -or $last.mdiTextChecks -ne 3 -or $last.helpCalls -ne 1 -or
+   $last.helpFreed -ne 1 -or $peer.mdiCreated -ne 0){throw 'Actual MDI/text/WinHelp construction ownership paths incomplete'}
+  @{created=$last.mdiCreated;destroyed=$last.mdiDestroyed;titleMutation=$last.mdiTitleMutation;paramsMutation=$last.mdiParamMutation;textChecks=$last.mdiTextChecks;helpCalls=$last.helpCalls;helpFreed=$last.helpFreed;scope='Actual USER16 MDI Create/MDICreate/DefFrameProc/DefMDIChildProc, text and WinHelp private-buffer ownership; fault injection remains exact-body only'}|ConvertTo-Json|Set-Content "$root/construction.json"
+ }
  if($PendingSend){
   if($last.waitBlocked -ne 1 -or $last.waitDeath -ne 0 -or $peer.waitBlocked -ne 0 -or $peer.waitDeath -ne 1){throw 'Guest blocked-send/death callback counts incomplete'}
   $waitBytes=[IO.File]::ReadAllBytes("$root/MSGWAIT.bin")

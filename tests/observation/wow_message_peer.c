@@ -360,6 +360,14 @@ DWORD WINAPI MessagePeer(DWORD operation)
     ] = {0};
     DWORD written;
     HANDLE output;
+#ifdef MESSAGE_CONSTRUCTION
+    if(operation==11){
+        DWORD packet[4]={16,0x11223344,0x55667788,0x12345678};
+        check(GetCurrentThreadId()==sender_thread);
+        check(SendMessageA(sender_window,0x0038,0,(LPARAM)packet)==0x447a007f);
+        return errors ? 0 : 0x447a008b;
+    }
+#endif
 #ifdef MESSAGE_PENDING_SEND
     if(operation==9 || operation==10){
         DWORD_PTR value=0;

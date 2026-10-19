@@ -6,7 +6,9 @@ param(
     [string]$Nasm='nasm.exe',
     [ValidateSet('hook','timer','idle','common-dialog','generic','shell','print','winsock','controls','dialog')][string]$Case='hook',
     [ValidateSet('Off','Win16','All')][string]$Win16Style='Off',
-    [ValidateRange(1,32)][int]$CommonDialogRounds=1
+    [ValidateRange(1,32)][int]$CommonDialogRounds=1,
+    [string]$DiagnosticProbeSource,
+    [string]$CommonDialogIdentityHost
 )
 # Invoke in an owned background process; this runner never activates a desktop.
 $ErrorActionPreference='Stop'
@@ -18,6 +20,19 @@ if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or 
 $null=New-Item -ItemType Directory $root
 . "$PSScriptRoot/isolated_package_cleanup.ps1"
 $source=Join-Path $PSScriptRoot ('win16_'+$Case.Replace('-','_')+'_probe.asm')
+if($CommonDialogIdentityHost){
+    $CommonDialogIdentityHost=(Resolve-Path -LiteralPath $CommonDialogIdentityHost).Path
+    if($Case -ne 'common-dialog' -or $DiagnosticProbeSource -or
+            !$CommonDialogIdentityHost.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase)){
+        throw 'Identity host requires a normal authored common-dialog probe and a build-owned DLL'
+    }
+}
+if($DiagnosticProbeSource){
+    $source=(Resolve-Path -LiteralPath $DiagnosticProbeSource).Path
+    if($Case -ne 'common-dialog' -or !$source.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase)){
+        throw 'Diagnostic source must be an independently authored common-dialog probe copy under build'
+    }
+}
 $probe=if($Case -eq 'timer'){'TMRPROBE'}elseif($Case -eq 'idle'){'IDLPROBE'}elseif($Case -eq 'common-dialog'){'CDLPROBE'}elseif($Case -eq 'generic'){'GENPROBE'}elseif($Case -eq 'shell'){'SHLPROBE'}elseif($Case -eq 'print'){'PRNPROBE'}else{'CBTPROB'}
 $process=$null;$runtime=$null;$scope=$null
 if($Case -eq 'winsock'){$probe='WSKPROBE'}
@@ -33,6 +48,7 @@ try {
     $assembler=(Get-Command $Nasm -ErrorAction Stop).Source
     $defines=@()
     if($Case -eq 'common-dialog'){$defines+="-DCOMMON_DIALOG_ROUNDS=$CommonDialogRounds"}
+    if($CommonDialogIdentityHost){$defines+='-DCOMMON_DIALOG_IDENTITIES'}
     if($Case -eq 'print'){$defines+=('-DOUTPUT_DIR="'+$root+'"')}
     & $assembler @defines -f bin -o "$root/$probe.EXE" -l "$root/probe.lst" $source *> "$root/assemble.txt"
     if($LASTEXITCODE){throw 'Independent NE probe assembly failed'}
@@ -40,6 +56,11 @@ try {
     $scope=New-IsolatedPackageScope $runtime
     $tests=Join-Path $runtime 'tests'
     $null=New-Item -ItemType Directory $tests -Force
+    if($CommonDialogIdentityHost){
+        Copy-Item $CommonDialogIdentityHost "$tests/CDLHOST.DLL"
+        Get-FileHash $CommonDialogIdentityHost,"$PSScriptRoot/wow_common_dialog_identity.c"|
+            Export-Csv -NoTypeInformation "$root/identity-inputs.csv"
+    }
     Copy-Item "$root/$probe.EXE" "$tests/$probe.EXE"
     if($Case -eq 'winsock'){
         $inputDll="$runtime/system32/WINSOCK.DLL"
@@ -332,11 +353,14 @@ try {
         }
         'PASS real Win16 INT2F idle registration/taskman callback/vector restoration/retirement'|Set-Content "$root/result.txt"
     }elseif($Case -eq 'common-dialog'){
-        if(!$bytes.Length -or $bytes.Length % 24){throw 'Incomplete COMMDLG lifetime record'}
+        $recordSize=if($CommonDialogIdentityHost){28}else{24}
+        $signature=if($CommonDialogIdentityHost){'CDL3'}else{'CDL2'}
+        if(!$bytes.Length -or $bytes.Length % $recordSize){throw 'Incomplete COMMDLG lifetime record'}
         $records=@();$names=@('phase','errors','created','closed','hooks','leaving','task','dialog','destroyAX','isWindowAX')
-        for($record=0;$record -lt ($bytes.Length / 24);$record++){
-            $offset=24*$record
-            if([Text.Encoding]::ASCII.GetString($bytes,$offset,4) -ne 'CDL2'){throw 'Bad COMMDLG signature'}
+        if($CommonDialogIdentityHost){$names+=@('identityChecks','reused')}
+        for($record=0;$record -lt ($bytes.Length / $recordSize);$record++){
+            $offset=$recordSize*$record
+            if([Text.Encoding]::ASCII.GetString($bytes,$offset,4) -ne $signature){throw 'Bad COMMDLG signature'}
             $row=[ordered]@{}
             for($i=0;$i -lt $names.Count;$i++){$row[$names[$i]]=[BitConverter]::ToUInt16($bytes,$offset+4+2*$i)}
             $records+=[pscustomobject]$row
@@ -344,7 +368,7 @@ try {
         $records|ConvertTo-Json|Set-Content "$root/guest-report.json"
         # Decode short failure reports before enforcing the successful shape.
         # 0101: guest DestroyWindow returned FALSE; 0102: IsWindow stayed TRUE.
-        if($bytes.Length -ne 24*($CommonDialogRounds+3)){throw 'Unexpected COMMDLG lifetime record count; see guest-report.json'}
+        if($bytes.Length -ne $recordSize*($CommonDialogRounds+3)){throw 'Unexpected COMMDLG lifetime record count; see guest-report.json'}
         if($records[1].phase -ne 1 -or $records[1].created -ne 0 -or
                 $records[1].closed -ne 0 -or $records[1].hooks -ne 0 -or
                 $records[1].task -ne $records[0].task){throw 'COMMDLG owner creation checkpoint failed'}
@@ -355,8 +379,45 @@ try {
         for($round=1;$round -le $CommonDialogRounds;$round++){
             $row=$records[$round+1]
             if($row.phase -ne 1 -or $row.created -ne $round -or $row.closed -ne $round -or
-                    $row.hooks -ne $round -or !$row.dialog -or !$row.destroyAX -or $row.isWindowAX -ne 0 -or
+                    $row.hooks -ne $round -or !$row.dialog -or !$row.destroyAX -or
+                    (!$CommonDialogIdentityHost -and $row.isWindowAX -ne 0) -or
                     $row.task -ne $last.task){throw "COMMDLG destruction round $round failed"}
+            if($CommonDialogIdentityHost -and ($row.identityChecks -ne $round -or $row.reused -gt $round)){
+                throw "COMMDLG identity witness round $round incomplete"
+            }
+        }
+        if($CommonDialogIdentityHost){
+            Copy-Item "$tests/CDLID.BIN" "$root/native-identities.bin"
+            $native=[IO.File]::ReadAllBytes("$root/native-identities.bin")
+            if($native.Length -ne 128*$CommonDialogRounds){throw 'Missing paired native identities'}
+            $observed=@();$reused=0
+            for($round=1;$round -le $CommonDialogRounds;$round++){
+                $pair=@()
+                foreach($side in @(0,1)){
+                    $offset=128*($round-1)+64*$side
+                    $pair+=,@(for($word=0;$word -lt 16;$word++){[BitConverter]::ToUInt32($native,$offset+4*$word)})
+                }
+                $before=$pair[0];$after=$pair[1];$guest=$records[$round+1]
+                $operation=if($guest.isWindowAX){3}else{2}
+                if($before[0] -ne 0x31444943 -or $after[0] -ne 0x31444943 -or
+                        $before[1] -ne 1 -or $after[1] -ne $operation -or
+                        $before[2] -ne $guest.dialog -or $after[2] -ne $guest.dialog -or
+                        !$before[3] -or $before[6] -ne 1 -or $before[7] -ne $before[10] -or
+                        $before[8] -ne $before[9] -or $before[11] -ne 0x447a0001 -or
+                        $after[4] -ne $before[3] -or $after[5] -ne 0 -or
+                        $after[7] -ne $before[7] -or $after[8] -ne $before[8] -or
+                        $after[11] -ne (0x447a0000 -bor $operation)){
+                    throw "Native old-identity destruction failed in round $round"
+                }
+                if($operation -eq 3){
+                    if(!$after[3] -or $after[3] -eq $before[3] -or $after[6] -ne 1 -or
+                            ($after[3] -band 0xffff) -ne $guest.dialog){throw 'Guest TRUE lacks a proved new live generation'}
+                    ++$reused
+                }
+                $observed+=@{round=$round;before=$before;after=$after;guestIsWindow=$guest.isWindowAX}
+            }
+            $observed|ConvertTo-Json -Depth 6|Set-Content "$root/native-identities.json"
+            if($last.identityChecks -ne $CommonDialogRounds -or $last.reused -ne $reused){throw 'Native/guest identity accounting differs'}
         }
         $trace=Get-Content "$root/lifetime.txt" -Raw
         $task4='{0:X4}' -f [int]$last.task

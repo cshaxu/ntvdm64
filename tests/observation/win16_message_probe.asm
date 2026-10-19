@@ -461,6 +461,9 @@ mov ax,10
 call native_operation
 result 0x8a
 %endif
+%ifdef CONSTRUCTION
+call construction_check
+%endif
 %ifdef EXTENSION_WITNESS
 ; Real original GetProcAddress32 failure followed by valid resolution.
 push32 module
@@ -643,6 +646,26 @@ push di
 push bx
 mov ds,ax
 client_view
+%ifdef CONSTRUCTION
+cmp word [construction_help_message-data],0
+je .construction_window
+mov ax,[construction_help_message-data]
+cmp ax,[bp+12]
+je .construction_help
+.construction_window:
+cmp word [construction_active-data],1
+jne .construction_dispatch
+cmp word [bp+12],1
+je .construction_create
+.construction_dispatch:
+cmp word [bp+12],2
+jne .construction_regular
+mov ax,[bp+14]
+cmp ax,[construction_child-data]
+jne .construction_regular
+inc word [mdi_destroyed-data]
+.construction_regular:
+%endif
 %ifdef M4_STRUCTURES
 cmp word [bp+12],0x4a
 je .copydata
@@ -695,6 +718,30 @@ cmp word [bp+12],0x476
 je .extension_yield_ack
 %endif
 .default:
+%ifdef CONSTRUCTION
+cmp word [construction_client-data],0
+je .plain_default
+mov ax,[bp+14]
+cmp ax,[window-data]
+jne .mdi_default
+push word [bp+14]
+push word [construction_client-data]
+push word [bp+12]
+push word [bp+10]
+push word [bp+8]
+push word [bp+6]
+api 2,445                       ; original USER16 DefFrameProc
+jmp .return
+.mdi_default:
+push word [bp+14]
+push word [bp+12]
+push word [bp+10]
+push word [bp+8]
+push word [bp+6]
+api 2,447                       ; original USER16 DefMDIChildProc
+jmp .return
+.plain_default:
+%endif
 push word [bp+14]
 push word [bp+12]
 push word [bp+10]
@@ -1045,6 +1092,50 @@ inc word [extension_yielded-data]
 mov ax,0x76
 jmp .value
 %endif
+%ifdef CONSTRUCTION
+.construction_help:
+mov ax,[bp+6]
+test ax,ax
+jz .bad
+mov [construction_help_handle-data],ax
+push ax
+api 1,18                       ; original KERNEL GlobalLock
+mov di,ax
+mov es,dx
+or ax,dx
+jz .bad
+cmp word [es:di],16
+jne .bad
+cmp dword [es:di+4],0x11223344
+jne .bad
+push word [construction_help_handle-data]
+api 1,19                       ; original KERNEL GlobalUnlock
+inc word [construction_help_calls-data]
+mov ax,0x7f
+jmp .value
+.construction_create:
+mov ax,[bp+14]
+mov [construction_child-data],ax
+inc word [mdi_created-data]
+cmp word [construction_mode-data],1
+je .construction_title
+cmp word [construction_mode-data],2
+jne .construction_accept
+les di,[bp+6]
+mov dword [es:di],0              ; replace nested CREATE params, not its owner
+inc word [mdi_params-data]
+jmp .construction_accept
+.construction_title:
+les di,[bp+6]
+les di,[es:di]
+mov word [es:di+4],construction_foreign-data
+mov word [es:di+6],ds
+inc word [mdi_title-data]
+.construction_accept:
+xor ax,ax
+xor dx,dx
+jmp .return
+%endif
 %ifdef PENDING_SEND
 .wait_blocked:
 api 2,192
@@ -1139,6 +1230,90 @@ pop es
 pop ds
 pop bp
 retf 10
+%ifdef CONSTRUCTION
+construction_check:
+mov [construction_mdi+2-data],ds
+mov [construction_mdi+6-data],ds
+mov ax,[instance-data]
+mov [construction_mdi+8-data],ax
+push ds
+push word construction_client_class-data
+push word 0
+push word 0
+push word 0x4200                 ; WS_CHILD | WS_CLIPCHILDREN
+push word 0
+push word 0
+push word 0
+push word 100
+push word 60
+push word [window-data]
+push word 0
+push word [instance-data]
+push ds
+push word construction_client_params-data
+api 2,41
+require 24
+mov [construction_client-data],ax
+.next:
+mov word [construction_active-data],1
+send construction_client,0x220,0,ds,construction_mdi-data
+mov word [construction_active-data],0
+require 25
+cmp ax,[construction_child-data]
+jne failed
+push ax
+api 2,224
+cmp ax,[task-data]
+jne failed
+send construction_child,0x000c,0,ds,construction_text-data
+; Native DefMDIChildProc returns zero even when the title is changed.
+; Require that return plus the exact subsequent text, not DefWindowProc's BOOL.
+or ax,dx
+jnz failed
+send construction_child,0x000d,32,ds,buffer-data
+cmp ax,15
+jne failed
+mov si,buffer-data
+mov di,construction_text-data
+mov cx,16
+push ds
+pop es
+cld
+repe cmpsb
+jne failed
+inc word [mdi_text-data]
+send construction_client,0x221,[construction_child-data],0,0
+push word [construction_child-data]
+api 2,47
+test ax,ax
+jnz failed
+inc word [construction_mode-data]
+cmp word [construction_mode-data],3
+jne .next
+push word [construction_client-data]
+api 2,53
+require 27
+mov word [construction_client-data],0
+cmp word [mdi_created-data],3
+jne failed
+cmp word [mdi_destroyed-data],3
+jne failed
+push ds
+push word construction_help_name-data
+api 2,118                      ; original USER16 RegisterWindowMessage
+cmp ax,0xc000
+jb failed
+mov [construction_help_message-data],ax
+mov ax,11
+call native_operation
+result 0x8b
+push word [construction_help_handle-data]
+api 1,18
+or ax,dx
+jnz failed
+inc word [construction_help_freed-data]
+ret
+%endif
 %ifdef M4_STRUCTURES
 ; Caller-owned inputs; 16-bit ABI layouts are from original wowusr.h.
 structure_inputs:
@@ -1239,6 +1414,9 @@ align 16,db 0
 data:
 times 32 db 0
 report:
+%ifdef CONSTRUCTION
+db 'MSG9'
+%else
 %ifdef PENDING_SEND
 db 'MSG8'
 %else
@@ -1256,6 +1434,7 @@ db 'MSG5'
 db 'MSG2'
 %else
 db 'MSG1'
+%endif
 %endif
 %endif
 %endif
@@ -1297,7 +1476,33 @@ launch_ready: dw 0
 wait_blocked: dw 0
 wait_death: dw 0
 %endif
+%ifdef CONSTRUCTION
+mdi_created: dw 0
+mdi_destroyed: dw 0
+mdi_title: dw 0
+mdi_params: dw 0
+mdi_text: dw 0
+construction_help_calls: dw 0
+construction_help_freed: dw 0
+%endif
 report_end:
+%ifdef CONSTRUCTION
+construction_client: dw 0
+construction_child: dw 0
+construction_active: dw 0
+construction_mode: dw 0
+construction_help_message: dw 0
+construction_help_handle: dw 0
+construction_help_name: db 'WM_WINHELP',0
+construction_client_class: db 'MDICLIENT',0
+construction_client_params: dw 0,1000
+construction_mdi: dw classname-data,0,construction_title-data,0,0
+dw 0,0,80,40
+dd 0,0
+construction_title: db 'MDI title',0
+construction_foreign: db 'not owned by converter',0
+construction_text: db 'M4 native title',0
+%endif
 %ifdef PENDING_SEND
 death_window: dw 0
 death_caption: db 'T447 death target',0

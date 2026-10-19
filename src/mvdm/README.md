@@ -1,5 +1,27 @@
 # mvdm
 
+MVDM-HOST-DIV-345 registers the S4 original construction/release cohort against
+the same pinned OpenNT5c5b979ec08c17d3ca2eb70e8aad62d26515d01c WOW32 owners.
+Pre-change canonical mirror hashes: wmdisp32.c
+141A504A03FD41517B5585F802B636FD49A04546E538E71A0412F65F9E83BA4D;
+wmdisp32.h B26E105AE57608DFE9D30A629496549745BC5B68AC67B7DABA0E84404A95929C;
+wmsg16.c 92552D35D187F3D278333C12F0FB47D4D89FE968EC2E2252A9B47D4C0A43C9B2.
+Retain full original bodies/allocators/maps and existing Error/unthunk paths.
+Guard GETTEXT's absent allocation, propagate nested MDI conversion failure,
+release the captured owned MDI title, keep the original unmapped-string/free
+fallback on optional map allocation failure and initialize WinHelp's failed
+handle0. Existing dwTmp gains two final DWORDs for nested MDI title/structure;
+prior member offsets/PARM16 and public/guest/wire formats remain unchanged.
+Cleanup uses captured ownership, not mutable guest fields or current WND style.
+No facade can correct these original local failure branches or recover an
+owned title after it has been overwritten; no later code is imported.
+Source-proven minimal host corrections are permanently authorized. Budget60
+executable added/removed mirror lines in these three files. Exact-body
+fault/ownership negatives and actual MDI/text plus full coherent publication
+pass in bounded S4 P18; see the indexed S4 source audit for exact evidence and
+remaining M4 obligations. Raw mirror delta28 added/23 deleted lines includes
+comments; selected differing-file count remains95. No guest change.
+
 MVDM-HOST-DIV-344 (bounded S4 P13 delivery) registers the COPYDATA/caller group
 against pinned OpenNT5c5b979ec08c17d3ca2eb70e8aad62d26515d01c, base/mvdm/wow32.
 Original per-file hashes/paths are retained in P12 required-root-foundations-r1

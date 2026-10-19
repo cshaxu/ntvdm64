@@ -42,7 +42,8 @@ typedef struct _WM32MSGPARAMEX {
     PWW  pww;
     DWORD dwParam;
     BOOL fFree;
-    DWORD dwTmp[2];
+    /* DIVERGENCE(MVDM-HOST-DIV-345): final slots own nested MDI title/struct. */
+    DWORD dwTmp[4];
 } WM32MSGPARAMEX;
 
 /* Dispatch table entry

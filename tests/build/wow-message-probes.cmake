@@ -10,11 +10,31 @@ target_link_libraries(wow_message_external_peer PRIVATE user32)
 set_target_properties(wow_message_external_peer PROPERTIES
   OUTPUT_NAME MSGPEER RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/message-probes")
 if(NTVDM_ARCHITECTURE STREQUAL "x86")
-  foreach(mode IN ITEMS pending nonblock)
+  add_library(wow_common_dialog_identity_host SHARED EXCLUDE_FROM_ALL
+    "${CMAKE_SOURCE_DIR}/tests/observation/wow_common_dialog_identity.c")
+  add_executable(wow_common_dialog_identity_control EXCLUDE_FROM_ALL
+    "${CMAKE_SOURCE_DIR}/tests/observation/wow_common_dialog_identity.c")
+  target_compile_definitions(wow_common_dialog_identity_control PRIVATE COMMON_IDENTITY_STANDALONE)
+  foreach(target IN ITEMS wow_common_dialog_identity_host wow_common_dialog_identity_control)
+    target_compile_options(${target} PRIVATE /O2 /W4 /WX)
+    target_link_libraries(${target} PRIVATE user32)
+    set_target_properties(${target} PROPERTIES
+      RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/message-probes")
+  endforeach()
+  target_link_options(wow_common_dialog_identity_host PRIVATE
+    /EXPORT:CommonDialogIdentity=_CommonDialogIdentity@4)
+  set_target_properties(wow_common_dialog_identity_host PROPERTIES OUTPUT_NAME CDLHOST)
+  set_target_properties(wow_common_dialog_identity_control PROPERTIES OUTPUT_NAME CDLCONTROL)
+  foreach(mode IN ITEMS pending nonblock construction)
     add_library(wow_message_${mode}_host SHARED EXCLUDE_FROM_ALL
       "${CMAKE_SOURCE_DIR}/tests/observation/wow_message_peer.c")
     target_compile_definitions(wow_message_${mode}_host PRIVATE
-      M4_STRUCTURES MESSAGE_PENDING_SEND _CRT_SECURE_NO_WARNINGS)
+      M4_STRUCTURES _CRT_SECURE_NO_WARNINGS)
+    if(mode STREQUAL "construction")
+      target_compile_definitions(wow_message_${mode}_host PRIVATE MESSAGE_CONSTRUCTION)
+    else()
+      target_compile_definitions(wow_message_${mode}_host PRIVATE MESSAGE_PENDING_SEND)
+    endif()
     if(mode STREQUAL "nonblock")
       target_compile_definitions(wow_message_${mode}_host PRIVATE MESSAGE_NONBLOCK_CONTROL)
     endif()

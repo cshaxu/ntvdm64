@@ -444,6 +444,8 @@ BOOL FASTCALL WM32Create(LPWM32MSGPARAMEX lpwm32mpex)
     LPCREATESTRUCT lParam = (LPCREATESTRUCT) lpwm32mpex->lParam;
 
     if (lpwm32mpex->fThunk) {
+        /* DIVERGENCE(MVDM-HOST-DIV-345): initialize this call's nested owner. */
+        lpwm32mpex->dwTmp[3] = 0;
 
         if (HIWORD(lParam)) {
 
@@ -476,7 +478,7 @@ BOOL FASTCALL WM32Create(LPWM32MSGPARAMEX lpwm32mpex)
             if (lpwm32mpex->pww == NULL) {
                 lpwm32mpex->pww = (PWW)GetWindowLong(lpwm32mpex->hwnd, GWL_WOWWORDS);
                 if (lpwm32mpex->pww == NULL)
-                    return FALSE;   // Window is dead
+                    goto Error;   // DIV-345: release strings if window is dead.
             }
 
             if (lParam->lpCreateParams && (lpwm32mpex->pww->dwExStyle & WS_EX_MDICHILD) ) {
@@ -492,9 +494,12 @@ BOOL FASTCALL WM32Create(LPWM32MSGPARAMEX lpwm32mpex)
                 wm32mpexT.pww = lpwm32mpex->pww;
                 wm32mpexT.fFree = lpwm32mpex->fFree;
                 wm32mpexT.Parm16.WndProc.lParam = 0;
-                WM32MDICreate(&wm32mpexT);
+                /* DIVERGENCE(MVDM-HOST-DIV-345): reuse original rollback. */
+                if (!WM32MDICreate(&wm32mpexT)) goto Error;
                 lpwm32mpex->dwParam = wm32mpexT.dwParam;
+                lpwm32mpex->dwTmp[2] = wm32mpexT.dwTmp[0];
                 vpCreateParams = wm32mpexT.Parm16.WndProc.lParam;
+                lpwm32mpex->dwTmp[3] = vpCreateParams;
             }
             else {
                 vpCreateParams = (VPVOID)lParam->lpCreateParams;
@@ -550,27 +555,22 @@ BOOL FASTCALL WM32Create(LPWM32MSGPARAMEX lpwm32mpex)
 
         if (lpwm32mpex->Parm16.WndProc.lParam) {
 
-            if (lpwm32mpex->pww == NULL) {
-                lpwm32mpex->pww = (PWW)GetWindowLong(lpwm32mpex->hwnd, GWL_WOWWORDS);
-                if (lpwm32mpex->pww == NULL)
-                    return FALSE;   // Window is dead
-            }
-
-            if (lParam->lpCreateParams && (lpwm32mpex->pww->dwExStyle & WS_EX_MDICHILD) ) {
+            /* DIVERGENCE(MVDM-HOST-DIV-345): release captured ownership even
+             * after guest edits, style changes or window destruction. */
+            if (lpwm32mpex->dwTmp[3]) {
                 WM32MSGPARAMEX wm32mpexT;
-                GETVDMPTR(lpwm32mpex->Parm16.WndProc.lParam, sizeof(CREATESTRUCT16), pcws16);
                 wm32mpexT.fThunk = lpwm32mpex->fThunk;
                 wm32mpexT.hwnd = lpwm32mpex->hwnd;
                 wm32mpexT.uMsg = WM_MDICREATE;
                 wm32mpexT.uParam = lpwm32mpex->uParam;
-                wm32mpexT.lParam = (LONG)lParam->lpCreateParams;
+                wm32mpexT.lParam = 0; /* DIV-345: cleanup needs no native payload. */
                 wm32mpexT.pww = lpwm32mpex->pww;
                 wm32mpexT.fFree = lpwm32mpex->fFree;
-                wm32mpexT.Parm16.WndProc.lParam = (VPVOID)FETCHDWORD(pcws16->vpCreateParams);
+                wm32mpexT.Parm16.WndProc.lParam = lpwm32mpex->dwTmp[3];
                 wm32mpexT.lReturn = 0;
                 wm32mpexT.dwParam = lpwm32mpex->dwParam;
+                wm32mpexT.dwTmp[0] = lpwm32mpex->dwTmp[2];
                 WM32MDICreate(&wm32mpexT);
-                FREEVDMPTR(pcws16);
             }
 
             vpClass = lpwm32mpex->dwTmp[0];
@@ -746,6 +746,9 @@ BOOL FASTCALL WM32GetText(LPWM32MSGPARAMEX lpwm32mpex)
         } else {
             lpwm32mpex->Parm16.WndProc.lParam = malloc16(lpwm32mpex->Parm16.WndProc.wParam);
         }
+
+        /* DIVERGENCE(MVDM-HOST-DIV-345): allocation failure is not a buffer. */
+        if (!lpwm32mpex->Parm16.WndProc.lParam) return FALSE;
 
         //
         // non-zero fill to detect people who write more than they
@@ -1512,6 +1515,8 @@ BOOL FASTCALL WM32MDICreate(LPWM32MSGPARAMEX lpwm32mpex)
             // memory is dword-aligned or not however, so dwords must always
             // be paranoidly stored with the STOREDWORD/STORELONG macros -JTP
 
+            /* DIVERGENCE(MVDM-HOST-DIV-345): retain owned title identity. */
+            lpwm32mpex->dwTmp[0] = (DWORD)vp;
             if (!(lpwm32mpex->Parm16.WndProc.lParam = malloc16(sizeof(MDICREATESTRUCT16))))
                 goto Error;
 
@@ -1540,13 +1545,8 @@ BOOL FASTCALL WM32MDICreate(LPWM32MSGPARAMEX lpwm32mpex)
     }
     else {
         if (lpwm32mpex->Parm16.WndProc.lParam) {
-            GETVDMPTR(lpwm32mpex->Parm16.WndProc.lParam, sizeof(MDICREATESTRUCT16), pmcs16);
-
-            if (FETCHDWORD(pmcs16->vpszTitle)) {
-                free16(FETCHDWORD(pmcs16->vpszTitle));
-            }
-
-            FREEVDMPTR(pmcs16);
+            /* DIVERGENCE(MVDM-HOST-DIV-345): guest may replace vpszTitle. */
+            if (lpwm32mpex->dwTmp[0]) free16(lpwm32mpex->dwTmp[0]);
 
             //  if HIWORD(class) is zero, class is an atom, else a pointer.
 
@@ -2569,7 +2569,8 @@ BOOL FASTCALL WM32WinHelp (LPWM32MSGPARAMEX lpwm32mpex)
         if (lpwm32mpex->lParam) {
             // lpwm32mpex->lParam is LPHLP - however we need only the firstword,ie the size of data
 
-            HAND16  hMem16;
+            /* DIVERGENCE(MVDM-HOST-DIV-345): failed allocator leaves output unset. */
+            HAND16  hMem16 = 0;
             VPVOID  vp;
             LPBYTE  lpT;
             WORD cb;

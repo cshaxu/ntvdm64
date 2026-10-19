@@ -96,10 +96,41 @@ mov ax,[instance-data]
 mov [fr_instance-data],ax
 mov [fr_find-data+2],ds
 mov [fr_replace-data+2],ds
+%ifdef COMMON_DIALOG_IDENTITIES
+push ds
+push word identity_library-data
+push word 0
+push word 0
+push word 0
+push word 0
+api 12
+mov [identity_module-data],ax
+mov [identity_module+2-data],dx
+or ax,dx
+jz fatal
+push word [identity_module+2-data]
+push word [identity_module-data]
+push ds
+push word identity_export-data
+api 13
+mov [identity_proc-data],ax
+mov [identity_proc+2-data],dx
+or ax,dx
+jz fatal
+%endif
 mov word [phase-data],1
 call checkpoint               ; Distinguish owner success from FindText failure.
 destroy_round:
 call create_find
+%ifdef COMMON_DIALOG_IDENTITIES
+mov ax,[dialog-data]
+mov dx,1
+call identity_operation
+cmp dx,0x447a
+jne identity_failed
+cmp ax,1
+jne identity_failed
+%endif
 push word [dialog-data]
 api 7                         ; DestroyWindow: ordinary resource cleanup
 mov [destroy_ax-data],ax       ; Record guest-observed result before testing it.
@@ -108,8 +139,31 @@ jz destroy_failed
 push word [dialog-data]
 api 8                         ; IsWindow
 mov [iswindow_ax-data],ax
+%ifdef COMMON_DIALOG_IDENTITIES
+mov dx,2
+test ax,ax
+jz .identity_request
+inc dx
+.identity_request:
+mov ax,[dialog-data]
+call identity_operation
+cmp dx,0x447a
+jne identity_failed
+cmp word [iswindow_ax-data],0
+jne .identity_reused
+cmp ax,2
+jne identity_failed
+jmp .identity_verified
+.identity_reused:
+cmp ax,3
+jne identity_failed
+inc word [identity_reused-data]
+.identity_verified:
+inc word [identity_checks-data]
+%else
 test ax,ax
 jnz stale_window
+%endif
 inc word [closed-data]
 call checkpoint
 dec word [rounds_left-data]
@@ -120,6 +174,13 @@ cmp word [hooks-data],COMMON_DIALOG_ROUNDS+1
 jne failed
 mov word [leaving-data],1
 call checkpoint
+%ifdef COMMON_DIALOG_IDENTITIES
+push word [identity_module+2-data]
+push word [identity_module-data]
+api 15
+test ax,ax
+jz identity_failed
+%endif
 push word [file-data]
 api 9                         ; _lclose
 ; Deliberately leave the second modeless dialog alive. Original task exit
@@ -134,6 +195,27 @@ jmp report_failure
 stale_window:
 mov word [errors-data],0x102
 jmp report_failure
+%ifdef COMMON_DIALOG_IDENTITIES
+identity_failed:
+mov word [errors-data],0x103
+jmp report_failure
+identity_operation:
+push bp
+mov bp,sp
+push dx
+push ax
+push word [identity_proc+2-data]
+push word [identity_proc-data]
+push word 0
+push word 0
+push word 0
+push word 1
+api 14
+cmp sp,bp
+jne fatal
+pop bp
+ret
+%endif
 failed:
 inc word [errors-data]
 report_failure:
@@ -177,7 +259,11 @@ xor ax,ax
 xor dx,dx
 retf 10
 code_end:
+%ifdef COMMON_DIALOG_IDENTITIES
+dw 15
+%else
 dw 11
+%endif
 %macro fixup 3
 db 3,1
 dw ..@call_%1-code+1,%2,%3
@@ -193,10 +279,20 @@ fixup 8,2,47
 fixup 9,1,81
 fixup 10,3,11
 fixup 11,1,86
+%ifdef COMMON_DIALOG_IDENTITIES
+fixup 12,1,513
+fixup 13,1,515
+fixup 14,1,517
+fixup 15,1,514
+%endif
 align 16,db 0
 data:
 times 32 db 0
+%ifdef COMMON_DIALOG_IDENTITIES
+report: db 'CDL3'
+%else
 report: db 'CDL2'
+%endif
 phase: dw 0
 errors: dw 0
 created: dw 0
@@ -207,7 +303,17 @@ task: dw 0
 dialog: dw 0
 destroy_ax: dw 0
 iswindow_ax: dw 0
+%ifdef COMMON_DIALOG_IDENTITIES
+identity_checks: dw 0
+identity_reused: dw 0
+%endif
 report_end:
+%ifdef COMMON_DIALOG_IDENTITIES
+identity_module: dd 0
+identity_proc: dd 0
+identity_library: db 'CDLHOST.DLL',0
+identity_export: db 'CommonDialogIdentity',0
+%endif
 instance: dw 0
 file: dw 0
 rounds_left: dw COMMON_DIALOG_ROUNDS

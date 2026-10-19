@@ -225,7 +225,10 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
             LONG lParamMap;
 
             GETPSZPTR(lParam, (LPSZ)lParamMap);
-            *plParamNew = (LONG)AddParamMap(lParamMap, lParam);
+            /* DIVERGENCE(MVDM-HOST-DIV-345): NULL needs no map; on optional
+             * map failure retain the original unmapped lease/free path. */
+            *plParamNew = lParamMap ? (LONG)AddParamMap(lParamMap, lParam) : 0;
+            if (!*plParamNew) *plParamNew = lParamMap;
             if (lParamMap != *plParamNew) {
                 FREEPSZPTR((LPSZ)lParamMap);
             }

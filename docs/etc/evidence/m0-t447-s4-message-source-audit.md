@@ -5576,3 +5576,317 @@ removed; final residual returns only the two caches. Raw diagnostic logs are
 disposed, not promised recoverable. The containing reviewed main/origin
 commit is research/test-only S4 P17, not a product release. Original mirror
 diff delta0, guest modification0; P13 remains installed and S4 remains open.
+
+## M4 original construction and captured ownership cohort
+
+After58fa75e55 the admitted MVDM-HOST-DIV-345 group retains the original
+WM32Create/MDICreate/GetText/SetText/WinHelp converters, original parameter
+map and allocators. It guards the absent GETTEXT allocation, propagates
+nested constructor FALSE through existing rollback, captures the owned MDI
+title/nested-structure rather than freeing guest-rewritten fields, preserves
+the original unmapped-text fallback on optional map allocation failure and
+initializes WinHelp's otherwise undefined failed-allocation handle. There is
+no new message transport, finalizer registry, scheduling or guest change.
+The complete source/alternatives/budget are in the working plan and local
+345 registration; this cohort is not the complete M4 inventory or S4 closure.
+
+Supplemental producer is
+tests/observation/verify-wow-message-construction.ps1, using the exact selected
+whole original converter bodies/types and six original parameter-map functions
+with lower allocator/mapping/window services doubled. Baseline58fa75e55 and
+candidate are compiled x86 /MT /O2 /W4 /WX. Model-r1 lacks test declarations;
+model-r2 rejects the original cast-lvalue dialect warning. Those are failed
+fixture builds, not product runtime failures. Model-r3 PID26600 begins
+2026-10-19T05:51:13.6437194Z: baseline compile11656 exit0, run2720 exit1 with
+13 failed assertions; candidate compile8688 exit0, run28224 exit0 with all36
+scenarios. Six required old-negative families cover absent GETTEXT buffer,
+MDI title ownership, nested rejection, optional-map text, NULL map leak and
+dead-window rollback. Candidate additionally verifies mutation, borrowed map
+references/movement and normal release; old WinHelp's coincidentally zero
+uninitialized stack is not claimed a deterministic runtime negative.
+Original allocator output-on-failure source establishes that defect.
+
+Host-private WM32MSGPARAMEX is64->72 bytes, scratch offset56 unchanged,
+scratch2->4 DWORDs, PARM16 remains16. The appended ownership slots have no
+guest/wire/public export layout. Source search finds no assembly/inc layout
+consumer: C callers instantiate the actual header, including nested local
+frames. WM32Create explicitly initializes its new owner slot; the nested
+MDICreate initializer writes its own title slot. Existing unrelated scratch
+and converter algorithms remain. Original stackalloc16 is the unchanged
+callback-stack subtraction, not an independently fallible heap allocator;
+the injected allocation-stage evidence is explicitly heap failure, not
+guest stack exhaustion. Escaped-exception/protocol-owner cases remain M4.
+
+Model-r3 result SHA256
+EFE359645F3C5F22059C9BF9413F250935BB468C0949C5EDC6E210CCD648EB3B;
+fixture062872BFCE6FBFBA4CCAF02857CA5289CB321DFE3EBDAE78F7A4E3B04E220DFD;
+producer63597C370D6A911DAA1A86D4396B252386EF050F8D3C47A49B9AAAA8B790CCAE.
+Runtime source hashes wmdisp32.c
+8EFE01255A083F7EDB11E24FCAA7AAD87CCED6D7C8B99DECD8D9BA3334031F6E,
+wmdisp32.h DC153DA7665ED9C0B8C8E2607D8F188373860A7EB4C9B91AA610AEE3F2D7DE57,
+wmsg16.c BE05F88C0D422049D7308E5A6711E8E65181C8331A5405547BD547E9B1676B2C.
+Conservative raw changed-line bound, including comments, is51, below the60
+executable-line budget; no new original file becomes different.
+
+Coherent product-build-r1 supervisor9484 starts06:02:27.0805097Z and finishes
+06:04:45.3540816Z, result passed: x86 child39108, x64 child7292 and x86
+Hook/VDMREDIR child23640 all exit0. Stable .ninja/.ccache are retained.
+Stage child49328 builds candidate13 from a fresh canonical assets/winnt.zip
+extraction plus exact current host outputs; no installed-tree bulk copy.
+The first real probe cannot create O:/tmp/n081 under restricted permissions;
+it is not a runtime pass. Escalated r2 runs and fails assertion26 after its
+first MDI creation, before text/destroy/help verification.
+
+The failure is the probe's BOOL assumption: a pure modern USER control with
+STATIC frame, real MDICLIENT, registered DefMDIChildProcA child and WM_MDICREATE
+returns0 for successful WM_SETTEXT; GetWindowTextA returns15 and exact
+"M4 native title". The first native control omitted CLIENTCREATESTRUCT and
+fails0xC000041D; its corrected input supplies menu0/firstID1000 and exits0.
+No product workaround follows. The Win16 probe now requires the native zero
+return AND exact subsequent length/text, retaining rather than deleting the
+behavior assertion. Failed controls and roots remain non-pass evidence.
+
+Actual constructor acceptance uses independently authored MSG9 probes with
+original USER16/KERNEL unchanged: normal, guest-replaced title and nested
+creation-parameter cases; original DefFrameProc/DefMDIChildProc/text; private
+WinHelp buffer delivery and post-return GlobalLock rejection. R3-Off passes
+PID19436 at06:11:59.355--06:12:07.366Z. R3's unfinished Win16 leg has no
+terminal result and is not counted; its process identity must be reconciled
+separately from the valid Off row. R4-Win16 and r5-All pass: each sender final
+has errors0, created3/destroyed3, titleMutation1/paramsMutation1/textChecks3,
+helpCalls1/helpFreed1; ordinary message/identity/normal task retirement
+assertions also remain. These are not allocation fault injection in a real
+guest or full DDE/clipboard transfer coverage.
+
+The fresh source-register gate passes278 selected/183 exact/95 registered
+differences/issues0. Remaining retained native/original/S3/application/DOS
+and coherent publication gates are in progress. No candidate has been
+published, committed or presented as the current release; P13 remains the
+installed baseline until every required gate and final identities pass.
+
+### Full-floor identity failure and source-correct acceptance
+
+Native21 PID48264 runs14:07:20.250--14:15:52.775Z,21/21; original30 PID28520
+runs14:15:52.789--14:19:39.622Z,30/30. First full S3 PID35728 runs
+14:19:39.637--14:21:14.660Z,11/12: common-dialog-Win16 fails in round1 with
+phase0/1/1,0102, DestroyWindow AX1 and local USER16 IsWindow AX1. The launcher
+exit0 is not success. Both queued successors refuse their failed prerequisite;
+no application/publication success is inferred from those refusals.
+
+The reusable unpublished observer is
+tests/observation/new-wow-common-return-diagnostic.ps1 plus
+wow_common_return_diagnostic.h. It compiles two generated copies of current
+project-owned lifecycle/thunk sources and relinks the exact cached original
+objects into a separate DLL. It never edits a product source/cache object,
+guest, release or installed image. Initial diagnostic compilation includes a
+report-only historical declaration header in the wrong translation unit;
+the second encounters its unguarded duplicate type. Both builds fail and are
+never run. R3 removes redundant historical includes and links successfully.
+Diagnostic DLL112A3C544A82C4B99025B0185C7C6889FD6FDF1B5C0335BBDB45E93E2CECB2B7;
+header316A7874A81463AB21ABCA80DC0DCA49B36D1F67B7B2DAA74BC8CDB6B7B6D8DE;
+producerC45E3408E9C8904C982DC8A669477FB958A87D53A515B36F902DC4D8558453EB.
+TLS records the completed DestroyWindow raw/full target/result without USER
+queries or I/O before the guest's decision. Only its already-failed CDL2
+file-write entry emits current native/copied identity, metadata and cache.
+
+Diagnostic supervisor9512 runs14:30:58.179--14:31:24.556Z. D001 authored
+negative20936 correctly returns1 and records full0057036E dead, current short
+036E dead, metadata00010000 and cache0/0. One unchanged diagnostic case21052
+and one prior-P13-provider case32036 both pass. These observations validate
+placement, not a repair or green replacement for the failed row.
+
+One bounded full-S3 contextual replay26992 runs14:36:43.037--14:38:19.224Z.
+It again fails only common-dialog-Win16 and captures the real boundary:
+CDL_FAILURE code0102/dialog0E90/raw00000E90/full0FBC0E90/result1/old_live0/
+current0FBD0E90/current_live1/metadata0FBD0001/cache0,0/current_pid12336/
+classCicLoaderWndClass. The trace's own worker PID is12336. This proves an
+already-destroyed original HWND and a different live generation in its old
+low16 slot, not stale publication or failed DestroyWindow. It is not merely
+another successful replay. No name-based runtime exception or IME suppression
+is introduced. The first uninstrumented0102 and older historical0102 cannot
+be retrospectively attributed solely by their similar signatures.
+
+Source: pinned OpenNT client/wow.c ValidateHwndNoRip/IsWindow and rtl/wow.c
+HMValidateHandleNoRip; their SHA256s are
+1ECE9DB0E35238434843BB73ECE92DD66000A44BC6B1148A08BCABF1329F8D9A and
+71E5B523BD44077AB4E86FFC6093544922C815C759BB753C32B4155E3206691D.
+Original usercli.asm passes HWND through pushINT_LONG; rtl accepts matching
+generation OR high0/FFFF, then checks the current slot type. Therefore local
+IsWindow(short0E90) may correctly accept the replacement. The retained
+daytona wowrtl.asm (7EF0A72EDF8A29303F3B72D75E64DA1510CBDD3715E7F794AE295CDFDDCD9D81)
+and usercli.asm (4240D6F792E39C8DB65158E626BFE0F127FEE09351DA476CDF5A280E9AFDFC20)
+corroborate the exact client ABI. Their bodies/guest binaries remain unchanged.
+
+The authored acceptance now optionally uses the separate test-only32-bit
+CDLHOST.dll, not a product adapter or runtime diagnostic. Original GenericThunk
+loads it. Public enumeration captures the exact live full HWND before every
+original guest DestroyWindow; the actual guest IsWindow/raw AX remain in
+CDL3. Every round requires the captured full identity dead. Guest TRUE is
+accepted only with a different currently live full generation in that same
+low16 slot. CID1 paired native records additionally verify exact process,
+thread, input, result and native/guest counts. No missing/racing witness is
+called success. All16 rounds,17 original hooks, original resource callbacks,
+the final live-dialog task exit and exactly-once retirement stay required.
+
+Native control's first capture fails because short-handle GetWindowThreadProcessId
+is not reliable canonicalization. Public enumeration corrects only the test
+precondition. Identity-build-r2 compiles DLL/reference and passes omitted
+destruction/wrong-identity negatives; selected production WOW32 reports Ninja
+no-work and remains39B7AC68011109E05465572C8BC56F1668EF8DAA6E68C2EE0A10F51EA51D5777,
+equal to the sealed candidate. Test DLL
+BEA263380F1E92B37FF77AE9066ADCA3139EDCDF46A5F150B6746553D508460F;
+reference586EAEB064E6AB6D5082CA3CBBA62EDF54C1FBEBED2A146E1B20F1F6B67C1681.
+The independent wow_common_dialog_identity_reuse.c loads that exact DLL and
+rearms owned native windows, not a fixed dead-slot promise. Its first attempt
+observes010D0544->010E0544; omitted destruction/stale TRUE are rejected and
+the real new generation is accepted. This exercises the same DLL's TRUE arm,
+not a fabricated handle or source-only predicate.
+
+Fresh acceptance-r2 passes all12 S3 rows, each common-dialog policy16 identity
+checks/0 reuse and17 hooks/normal retirement. The observed native TRUE arm
+above independently covers the allowed reuse case. A subsequent test-only
+FreeLibrary failure branch now writes its error rather than exiting after
+the last successful report. Reversing only that branch reconstructs exactly
+the prior S3 source SHA068BBCD685D305656A92639BD09072E1F30AD81BEF8868FCCB1CFA1094FD569C;
+fresh common3 still required for the final source. The original failed rows
+are retained, never relabelled as passes or waived by later retries.
+
+Acceptance-r2 also passes all18 actual normal/extension/structured/early/
+timeout/Proc32 message policies, WINMINE/SOL gameplay and normal exit3 each,
+both-width style, native modal reference/real modal3 and ordinary-logon
+gameplay3. Its WRITE/DOS aggregate fails before DOS: the task controller
+mistakenly uses a long workspace TEMP, and WRITE reports that exact temporary
+path cannot be created. A second valid-short-TEMP attempt omits the retained
+observer's -WaitTarget and exits before a snapshot. Neither is product
+acceptance or proof of a runtime regression. Correct the isolated inputs to
+the standard physical-stage TEMP/TMP and explicit wait; do not patch/filter
+guest, user global environment or product. Reuse the unchanged compiled
+read-only window observer, not another build tree. Full supported Userenv
+entries remain; only the normal test-owned TEMP/TMP are scoped.
+
+Remaining fresh WRITE/DOS/common3/external/cross/pending gates and installed
+publication are pending. Native21/original30 reuse is guarded by unchanged
+source inventories and exact sealed-candidate artifact hashes, not elapsed
+time. New CMake additions are only two EXCLUDE_FROM_ALL identity-test targets;
+removing their exact block reconstructs the original frozen test-graph SHA
+031B4A7BE2307BA77751FB28A7CE5910903DBE131185CA80E38014B39139A80A.
+There is no relaxed product source/build-input check or implicit adoption of
+newly relinked cache outputs. The coherent candidate13 stays immutable;
+publication continues to require all finite gates and exact13 destination
+hashes. M4/S4, all older unobserved risks and S5/S6 remain open as before.
+
+### P18 bounded delivery
+
+The pending statements above describe intermediate states, superseded only
+by the following terminal evidence, all UTC on2026-10-19. The unchanged
+candidate13 is the product-build-r1 package, not later mutable cache relinks.
+MSVC x86/x64 Release /MT uses stable .ninja trees; original guest ZIP remains
+7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7.
+
+| Background group | PID/start--end UTC | Result and scope |
+| --- | --- | --- |
+| acceptance-r2 S3 |26336/14:53:07.579--14:54:42.854|12/12; controls/dialog/common/hook in Off/Win16/All; common16 rounds/17 hooks each. |
+| acceptance-r2 remaining successful rows |14:54:42.884--15:01:17.089|message18, WINMINE3/SOL3 playable and normal exit, both-width style, native modal reference/guest modal3, complete-logon gameplay3.31 aggregate rows pass; failed WRITE row excluded. |
+| final supervisor acceptance-r4 |45212/15:09:10.580--15:19:26.816|exit0, real10800s deadline; no observation timeout restart. |
+| WRITE/DOS corrected inputs |15920/15:09:11.418--15:11:48.669|WRITE3 four startup samples each, Console17/Window17 text/interaction/exit checks. Not WRITE editing/save/full exit. |
+| common final source |30436/15:11:48.731--15:11:56.087;23912/15:11:56.108--15:12:03.647;43552/15:12:03.678--15:12:11.309|Off/Win16/All pass16 rounds each with paired full identities, raw guest return and normal retirement. |
+| external/local mixed-native |1352/15:12:11.322--15:14:48.595|9/9, local/native32/native64 across3 policies. |
+| cross/shared worker |27964/15:14:48.609--15:17:06.087|6/6 across3 policies. |
+| pending send |48988/15:17:06.099--15:19:26.285|6/6 local/pending across3 policies, native same/cross destruction4 and forbidden nonblock ordering rejected. |
+| coherent publication |32220/15:21:37.457--15:22:16.291|exit0; exact13 backed up, copied to assets/release and O:/winnt/system32 and hash-verified. No active exact-path project processes needed closure. |
+| installed style |43624/15:21:44.971--15:22:01.138|both-width boundary pass, installed destination. |
+| installed ordinary logon |34796/15:22:01.156--15:22:16.172|complete Userenv, gameplay3 pass; final13 hashes unchanged. |
+
+Reproduction entrypoints are verify-wow-message-construction.ps1 (old revision
+58fa75e55498914dbf45ffa8630160f3f830b5df/current exact bodies),
+verify-win16-message-probe.ps1 -Construction -StructuredPayloads -ThreadClientView with each
+-Win16Style, verify-wow-s3-guest-contracts.ps1 with selected PackageRoot,
+Observer, EvidenceRoot and ManifestPath, and verify-wow-external-native.ps1
+with the same sealed PackageRoot/ManifestPath (ordinary, -CrossWorkers,
+-PendingSend separately). Build CDLHOST/CDLCONTROL using the named CMake
+test targets first. verify-wow-mine-gameplay.ps1, verify-wow-sol-gameplay.ps1,
+verify-win16-native-modal-probe.ps1 and verify-wow-logon-gameplay.ps1 retain
+the established3 policies. WRITE uses the retained read-only frontier observer
+with -WaitTarget and physical-stage TEMP/TMP, not a reduced guest or product.
+The two17-route groups use Verify-CommandExitStatus.ps1. The existing
+verify-ntw16s-boundary.ps1 tests both widths; installed logon adds -Installed.
+All invocations run in hidden owned processes with captured child identities
+and real deadlines. Full original and native fixtures remain30/30 and21/21;
+their unchanged source inventories and sealed artifact hashes are revalidated
+by the final supervisor, not rerun merely to allocate a new evidence name.
+
+SHA256 evidence summaries (raw disposable output is not a runtime dependency):
+
+- sealed candidate manifest4754699FC4F0EDC60393758E09310DD045682F9A9950CA94848FCAEB5A51CB36;
+  committed release manifestC32C4AE3269B69635CA363C6E8740ECB14D4E5C1058C2E75F15E4AF8B7CBCF66.
+- acceptance-r2 steps30FB560C44D70B5EC4228C44F47F5143B429AECD070A4E55EF92803852C2EA76;
+  final acceptance7A1F175E35C774E488349C5A8896475F543AE437268F2FE890D4FFAAE13F9333;
+  native real-generation reference18DA411FACC4592B1E7F577E29424B5A0ADA469EC542CE8972F13F6A55CEC7E3.
+- final publication0CE1001D5C4F33CA04D2364E08BD7EFB53F0F3BC0EF7694B170CC2475E299A24.
+- runtime wmdisp32.c8EFE01255A083F7EDB11E24FCAA7AAD87CCED6D7C8B99DECD8D9BA3334031F6E;
+  headerDC153DA7665ED9C0B8C8E2607D8F188373860A7EB4C9B91AA610AEE3F2D7DE57;
+  wmsg16.cBE05F88C0D422049D7308E5A6711E8E65181C8331A5405547BD547E9B1676B2C.
+- deployed NTVDMF615FD24F01B1CDDEF417588BEA39B6D00AD03174FBB6AC9677874252858BAA4;
+  WOW3239B7AC68011109E05465572C8BC56F1668EF8DAA6E68C2EE0A10F51EA51D5777.
+  All13 exact names/hashes are in the committed release-manifest.json; add-ons
+  remain untouched and outside that host manifest.
+
+Independent second-role review retains the original algorithms and sole native
+USER identity authority: only absent allocation, failed nested construction,
+captured ownership and optional metadata fallback change. No authored third
+converter/registry, guest modification, private native-layout assumption,
+name-based exception, environment filtering or new semantic concession.
+DIV345 raw28 added/23 removed lines including comments is inside its60-line
+budget. The source-register result remains278 selected/183 exact/95 different,
+issues0: three already-different files change, no new differing-file owner.
+The diagnostic DLL and CDLHOST are never product artifacts. Successful later
+runs do not turn failed prerequisites, interrupted runs or prior0102 into
+passes. Native reuse attribution applies only to the captured failure.
+
+M4's remaining19-owner reconciliation, reverse-thunk ownership, escaped
+exception cleanup, asynchronous DDE/clipboard transfer and full M1--M6
+closure remain S4 obligations. S5 individual termination/NT Monitor and S6
+final reconciliation stay unadmitted. Performance is frozen; no speedup is
+claimed. Td is accepted/closed; this is one bounded S4 P18, not S4/T closure.
+
+Final governance/relative-links/PowerShell parsing/diff and both13 destination
+identities pass. The first disposable quality launcher failed before running
+governance (reserved PowerShell args variable supplied no -File value, exit64);
+it is not a failed documentation assertion or product result. Corrected
+quality-r2 supervisor45992 starts15:24:47.342; governance20668 exits0 at
+15:25:23.160, links30728 exits0 at15:25:32.331, six changed/new PowerShell
+scripts parse and final result passes at15:25:33.522. No runtime input changes
+follow; final added evidence text receives the same documentation checks.
+
+Disposable-output preflight uses only Clear-BuildOutput.ps1, with actual
+escalated process visibility and PID/creation-time matching: zero live owned
+package/owner processes. The exact plan is5071 files/276075620 bytes under
+build/t447-s4-message-construction and one28-byte authored G7.COM under
+build/M0-T447 (no other contents). Inventory identities are respectively
+9E8D4C6FDD675303286A2E29CEDC4AE1676C588165856FA3B66451E9A2352A3B and
+74F18F69EEEB15186224C1DAFB07B647CEACEBC8FB688E7DC6D4570F5940B205.
+The in-memory ownership manifest SHA is
+C5AF2EABF824B1BC72472017B417C5060ACF534A635E7D56BABCAFCFB2FE55A1;
+530 sensitive entries are individually hash-reviewed: original media/config
+duplicates match canonical ZIP streams; authored binary reports/listings,
+numeric PID/exit records, D001/G7 probes and isolated PowerShell generated
+proxy/empty TEMP are task-owned outputs, not user data. No Git data/junction
+is present. Default preview deletes nothing; final Apply must recheck the
+same membership/metadata and all process identities before deleting these
+two roots, followed by CheckResidual. Only .ninja/.ccache may remain; neither
+is moved, cleared or treated as disposable evidence. Necessary results and
+hashes are retained above; prior coherent13 recovery remains available from
+the preceding committed release, not dependent on discarded backups. No prune.
+
+Final Apply succeeds with5075+1 files/276077673 bytes (263.29MiB) removed.
+The four added files are the final documentation-check script/logs/owner;
+its PID25380 runs15:27:18.103--15:27:43.237, exit0. Frozen main inventory
+EFCEBDAE14FA1669332867AA6D55922FCFA6195748C57D7F81F41E7740235619 matches
+preview and Apply; G7 inventory is unchanged. Apply's in-memory manifest
+serialization hash41340C5D686DF383DF853E3029128A81CE06E7D554A796552B0FA4BD6132F443
+includes the same530 reviewed sensitive files. Per-process hashtable property
+order makes its serialization hash unsuitable for cross-run membership
+comparison; the cleanup tool's sorted inventory hashes are authoritative.
+CheckResidual passes with only .ccache/.ninja. A final document-only check
+uses an owned180-second/5MiB disposable root, then the same cleanup owner;
+it cannot change product inputs or hide outputs in caches.
