@@ -1,12 +1,13 @@
 # T447 WOW32 execution working plan
 
-Owner holds S4 at P13 for [standalone Td build hygiene](td-build-hygiene.md).
+Owner accepts/closes [standalone Td build hygiene](td-build-hygiene.md) at
+aadde21e8 and resumes S4 from delivered P13; no new numeric task or P yet.
 Old M/T/S build paths below are historical evidence, not retained dependencies:
 their necessary conclusions/hashes are recorded before disposal. Resume from
 tracked producers using stable worker/wow32 subtrees under
 build/.ninja/msvc-x86-release and native profiles under build/.ninja/msvc-x64-release,
 following the [single output policy](../../rules/EXECUTION.md#build-cache-and-disposable-lifetime).
-This tooling transition neither completes M1--M6 nor admits another S4 P.
+This tooling transition neither completes M1--M6 nor supplies runtime acceptance.
 
 ## Admission and boundaries
 

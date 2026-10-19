@@ -2,11 +2,10 @@
 
 **Active: M0 T447 S4 — message identity, reply, waits and reentry.**
 
-S4 stays held at delivered P13 during standalone
-[Td build hygiene](../etc/operations/td-build-hygiene.md) delivery/acceptance;
-no numeric task, S4 P, runtime change or S4 closure follows from this Td.
-Owner-requested Td supplement passes all13 source-component builds and an
-unchanged second build (1197 intermediates); caches retained, no Git prune.
+Owner accepts and closes [Td build hygiene](../etc/operations/td-build-hygiene.md)
+at aadde21e8; S4 resumes from delivered P13. Retain stable caches, immutable
+guest and frozen performance lane. Reconcile cross-worker/external-native
+message entry/data/lifetime boundaries before grouped implementation/tests.
 
 ## Current Work
 

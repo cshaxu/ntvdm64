@@ -396,3 +396,14 @@ acceptance is claimed for the new build outputs, which are not deployed.
 This completes the requested all-component/incremental build scope; reviewed
 commit/push and final clean-state verification deliver the Td supplement for
 owner acceptance. T447 S4 stays held at P13 with its unchanged obligations.
+
+## Owner acceptance and closure
+
+Owner accepts the supplement and explicitly closes this standalone Td after
+aadde21e8f774068caee64663101823faa07f615 (main/origin synchronized, clean).
+Both the initial f2af83fae and supplementary all13/1197 build evidence remain
+above, with failed attempts and limitations preserved. No cache-clearing,
+Git prune, runtime re-publication or guest change follows from closure.
+T447 S4 resumes at its delivered P13 source/runtime frontier under the same
+fixed M1--M6 obligations. S5/S6 and Queue are unchanged; performance stays
+frozen. This acceptance closes tooling work, not those runtime obligations.
