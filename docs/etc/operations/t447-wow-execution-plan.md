@@ -1,13 +1,51 @@
 # T447 WOW32 execution working plan
 
 Owner accepts/closes [standalone Td build hygiene](td-build-hygiene.md) at
-aadde21e8 and resumes S4 from delivered P13; no new numeric task or P yet.
+aadde21e8 and resumes S4 from delivered P13; test-only P14 adds evidence,
+not another runtime release or numeric task.
 Old M/T/S build paths below are historical evidence, not retained dependencies:
 their necessary conclusions/hashes are recorded before disposal. Resume from
 tracked producers using stable worker/wow32 subtrees under
 build/.ninja/msvc-x86-release and native profiles under build/.ninja/msvc-x64-release,
 following the [single output policy](../../rules/EXECUTION.md#build-cache-and-disposable-lifetime).
 This tooling transition neither completes M1--M6 nor supplies runtime acceptance.
+
+### Resumed S4 external-native message group
+
+After accepted Td/clean3b82e2a51, complete one existing M1--M6 evidence gap:
+the native peer in verify-win16-message-probe is a thread inside the worker.
+Retain the actual USER16 sender/receiver and existing shared native message
+handler, but also build that endpoint as independent I386 and AMD64 processes.
+Native USER remains the only cross-process delivery/marshalling authority;
+original wumsg/wmsg16/wmdisp32 retain conversion, callback and finalization.
+Discovery publishes full external HWND identity; native-call scopes release/
+restore execution without enrolling the foreign thread as a WOW task.
+
+| Fixed chain | Original/adapter owner | Group assertion |
+| --- | --- | --- |
+| Discovery and identity | Original FindWindow/HWND16 conversion; wow_user_discovery and shared view | Separate real PID, full HWND and thread; actual32/64 PE, no worker-local peer substitute. |
+| Scalar/nested/reply/text | WU32SendMessage/InSendMessage/ReplyMessage, original callback; native USER | Existing exact four results, nested guest callback, first reply, both string directions and distinct actual native thread. |
+| Standard pointer messages | Original MINMAXINFO/WINDOWPOS/COPYDATA converters and native USER capture | Three existing structure families both directions, exact returned fields/results, no raw cross-process custom pointer transport. |
+| Normal lifecycle | Original two-task retirement and actual native process/window | Both guest tasks retire once, external window dies and held process returns0; failure remains a failed row. |
+
+Test-only scope: shared endpoint source/runner, explicit CMake fixture targets
+and an owned whole-group runner. No production, original mirror, guest or
+release changes anticipated. No semantic concession or runtime repair is
+inferred from code review. Use the released P13 coherent13, canonical ZIP,
+all3 style policies and both native widths, plus unchanged same-worker controls.
+Objects/libraries stay in existing .ninja architecture trees; run media/logs
+under build/t447-s4-external-native (this group only;60-minute phase,2GiB,
+15-minute no-progress budgets). Retain failed evidence, summarize before
+disposing through the existing cleanup owner. The established short physical
+test-stage helper retains its explicit O:/tmp exception and cleanup identity.
+Cross-worker Win16, pending receiver death, SMTO_BLOCK, other M4 families and
+the complete M1--M6 reconciliation remain required, not absorbed or waived by
+this finite external-native group. Performance remains frozen.
+Actual group-r1 now passes all9 cases on released P13, including distinct
+Win32/Win64 peer PIDs and normal retirement. The local-substitution negative
+is correctly refused. The [source audit](../evidence/m0-t447-s4-message-source-audit.md#resumed-s4-actual-external-native-process-and-bitness-group)
+retains exact inputs, counters and unproved boundaries; this is test-only
+evidence, not a new runtime repair or S4 closure.
 
 ## Admission and boundaries
 

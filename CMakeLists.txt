@@ -32,6 +32,7 @@ target_include_directories(W16Style PRIVATE src)
 target_compile_definitions(W16Style PRIVATE UNICODE _UNICODE _WIN32_WINNT=0x0A00)
 target_compile_options(W16Style PRIVATE /O2 /W4 /WX /utf-8)
 target_link_libraries(W16Style PRIVATE ntw16s user32 gdi32 comctl32)
+include(tests/build/wow-message-probes.cmake)
 
 # The original source-manifest composition remains its existing owner. CMake
 # selects stable subtrees and exposes their real Ninja targets, not a second

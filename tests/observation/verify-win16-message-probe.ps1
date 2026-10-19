@@ -11,7 +11,9 @@ param(
  [switch]$StructuredPayloads,
  [switch]$ReplyPayloadLifetime,
  [switch]$TimeoutPayloadLifetime,
- [switch]$CopyDataProc32
+ [switch]$CopyDataProc32,
+ [string]$ExternalNativePeer='',
+ [string]$NativeHost=''
 )
 # Entire actual-guest message group. Invoke as an owned hidden background run.
 # No original guest is changed or rebuilt; only independently authored probes.
@@ -20,6 +22,14 @@ $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 if($ReplyPayloadLifetime -and !$StructuredPayloads){throw 'ReplyPayloadLifetime requires the complete StructuredPayloads group'}
 if($TimeoutPayloadLifetime -and !$ReplyPayloadLifetime){throw 'TimeoutPayloadLifetime requires the complete ReplyPayloadLifetime group'}
 if($CopyDataProc32 -and (!$StructuredPayloads -or $ReplyPayloadLifetime -or $TimeoutPayloadLifetime)){throw 'Proc32 group requires normal structured mode without reply/timeout variants'}
+if($NativeHost -and (!$StructuredPayloads -or $CopyDataProc32 -or $ReplyPayloadLifetime -or $TimeoutPayloadLifetime)){
+ throw 'Prebuilt native host requires normal structured mode'
+}
+if($ExternalNativePeer -and
+    (!$NativeHost -or !$StructuredPayloads -or
+     $CopyDataProc32 -or $ReplyPayloadLifetime -or $TimeoutPayloadLifetime)){
+ throw 'External native group requires both built peer/host images and normal structured mode'
+}
 $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){
  throw 'Fresh build-owned evidence required'
@@ -62,6 +72,19 @@ try{
   & $assembler @arguments $assembly *> "$root/$role-assemble.txt"
   if($LASTEXITCODE){throw "Independent $role assembly failed"}
  }
+ if($NativeHost){
+  foreach($image in @($ExternalNativePeer,$NativeHost)|Where-Object {$_}){
+   $path=(Resolve-Path $image).Path
+   if(!$path.StartsWith((Join-Path $repo 'build/.ninja')+'\',[StringComparison]::OrdinalIgnoreCase)){throw 'External peer/host must come from stable Ninja fixture targets'}
+  }
+  Copy-Item $NativeHost "$root/MSGHOST.DLL"
+  if($ExternalNativePeer){
+  Copy-Item $ExternalNativePeer "$root/MSGPEER.EXE"
+  $externalBytes=[IO.File]::ReadAllBytes("$root/MSGPEER.EXE")
+  $externalMachine=[BitConverter]::ToUInt16($externalBytes,[BitConverter]::ToInt32($externalBytes,0x3c)+4)
+  if($externalMachine -notin @(0x14c,0x8664)){throw 'Wrong external peer PE machine'}
+  }
+ }else{
  Push-Location $root
  try{
   $nativeDefines=@();if($StructuredPayloads){$nativeDefines+='/DM4_STRUCTURES'}
@@ -71,12 +94,15 @@ try{
   & $CompilerDriver cl.exe /nologo /LD /MT /O2 /W4 /WX /D_CRT_SECURE_NO_WARNINGS @nativeDefines "/Fo$root/peer.obj" $native /link "/OUT:$root/MSGHOST.DLL" "/IMPLIB:$root/MSGHOST.lib" /EXPORT:MessagePeer=_MessagePeer@4 /EXPORT:MessageExtension=_MessageExtension@12 user32.lib *> "$root/native-build.txt"
   if($LASTEXITCODE){throw 'Native peer build failed'}
  }finally{Pop-Location}
+ }
  Get-FileHash $assembly,$native,$PSCommandPath,"$root/MSGSEND.EXE","$root/MSGRECV.EXE","$root/MSGHOST.DLL"|Export-Csv -NoTypeInformation "$root/probe-inputs.csv"
  if($ReplyPayloadLifetime){Get-FileHash "$PSScriptRoot/wow_reply_payload_lifetime.h","$PSScriptRoot/wow_reply_payload_report.ps1"|Export-Csv -NoTypeInformation "$root/reply-source-inputs.csv"}
  $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path
  $scope=New-IsolatedPackageScope $runtime
  $tests=Join-Path $runtime 'tests';$null=New-Item -ItemType Directory $tests -Force
+ if($ExternalNativePeer){$scope.Paths+=Join-Path $tests 'MSGPEER.EXE'}
  Copy-Item "$root/MSGSEND.EXE","$root/MSGRECV.EXE","$root/MSGHOST.DLL" $tests
+ if($ExternalNativePeer){Copy-Item "$root/MSGPEER.EXE" $tests;Get-FileHash "$root/MSGPEER.EXE"|Export-Csv -NoTypeInformation "$root/external-peer-input.csv"}
  Get-ChildItem "$runtime/system32" -File|Where-Object Name -in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll','ntw16s32.dll','ntw16s64.dll','W16Style.exe','KRNL386.EXE','USER.EXE','GDI.EXE')|Get-FileHash|Export-Csv -NoTypeInformation "$root/runtime-inputs.csv"
  @{machine='x86';cpu='original SoftPC CCPU40';guest='unchanged original package plus independent NE probes';style=$Win16Style}|ConvertTo-Json|Set-Content "$root/profile.json"
  # Complete supported logon environment, not a hand-picked variable allowlist.
@@ -162,12 +188,19 @@ public static class WowMessageLogonEnvironment {
  $bytes=[IO.File]::ReadAllBytes("$root/MSGHOST.bin")
  $nativeBytes=if($StructuredPayloads){52}else{48}
  if($CopyDataProc32){$nativeBytes+=8}
+ if($ExternalNativePeer){$nativeBytes+=8}
  if($bytes.Length -ne $nativeBytes -or [Text.Encoding]::ASCII.GetString($bytes,0,4) -ne 'NMSG'){throw 'Missing native peer report'}
  $names=@('signature','errors','pid','senderThread','receiverThread','nativeThread','received','nested','replied','text','exit','windowAlive');$nativeReport=[ordered]@{}
  if($StructuredPayloads){$names+='structures'}
  if($CopyDataProc32){$names+=@('proc32Fresh','proc32Borrowed')}
+ if($ExternalNativePeer){$names+=@('externalPid','externalBits')}
  for($i=0;$i -lt $names.Count;$i++){$nativeReport[$names[$i]]=[BitConverter]::ToUInt32($bytes,4*$i)}
  $nativeReport|ConvertTo-Json|Set-Content "$root/native.json"
+ if($ExternalNativePeer -and
+    (!$nativeReport.externalPid -or $nativeReport.externalPid -eq $nativeReport.pid -or
+     $nativeReport.externalBits -ne $(if($externalMachine -eq 0x14c){32}else{64}))){
+  throw 'Native peer did not execute in a distinct process of the requested bitness'
+ }
  if($nativeReport.errors -or !$nativeReport.pid -or $nativeReport.exit -or $nativeReport.windowAlive -or
     $nativeReport.received -ne 4 -or $nativeReport.nested -ne 1 -or $nativeReport.replied -ne 1 -or $nativeReport.text -ne 1 -or
     @(@($nativeReport.senderThread,$nativeReport.receiverThread,$nativeReport.nativeThread)|Where-Object {$_}|Sort-Object -Unique).Count -ne 3){throw 'Native peer identity/receive/result/lifetime failure'}
@@ -210,7 +243,7 @@ public static class WowMessageLogonEnvironment {
  if($ReplyPayloadLifetime){'PASS actual Win16 consumed COPYDATA before early reply; sender-owned header/payload protected and unreadable before receiver continuation; original unthunk/normal retirement completed; native captured-buffer lifetime not inferred'|Set-Content "$root/reply-payload-result.txt"}
  if($TimeoutPayloadLifetime){'PASS actual native SendMessageTimeout status0/error1460 after live Win16 receiver entered; owned input protected/unreadable before continuation; original unthunk and normal task retirement; not native API success or all M4'|Set-Content "$root/timeout-payload-result.txt"}
  if($ReplyPayloadLifetime){foreach($input in Import-Csv "$root/reply-source-inputs.csv"){if((Get-FileHash $input.Path).Hash -ne $input.Hash){throw 'Reply payload test source changed'}}}
- @{unproved='Cross-worker, external native process/bitness, implicit focus receive, full converted structures, SMTO_BLOCK and receiver death during pending send remain S4 obligations';largeEnvironment='Known original guest limitation not repaired by logon-block acceptance'}|ConvertTo-Json|Set-Content "$root/limits.json"
+ @{externalProcess=$(if($ExternalNativePeer){$nativeReport.externalPid}else{'not exercised'});unproved='Cross-worker, implicit focus receive, full converted structures, SMTO_BLOCK and receiver death during pending send remain S4 obligations; ordinary mode does not exercise an external native process';largeEnvironment='Known original guest limitation not repaired by logon-block acceptance'}|ConvertTo-Json|Set-Content "$root/limits.json"
  0|Set-Content "$root/exit.txt"
 }catch{$_|Out-String|Set-Content "$root/failure.txt";1|Set-Content "$root/exit.txt";exit 1}
 finally{

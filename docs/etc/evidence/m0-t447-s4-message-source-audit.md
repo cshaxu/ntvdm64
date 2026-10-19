@@ -5044,3 +5044,144 @@ inputs and all outputs remain frozen, the sole superset-inventory difference
 is the WOW32 README's delivery status, the real CCPU fixture hash is unchanged
 since r5, all deployed13/ZIP hashes match, and fresh source-register plus
 post-delivery quality/governance checks pass (278/183/95/issues0).
+
+### Resumed S4: actual external-native process and bitness group
+
+Question: does P13's existing message/conversion/execution closure work across
+a real process boundary, rather than only its in-worker native peer thread?
+Owner accepts/closes Td at aadde21e8; closure/resumption3b82e2a51 leaves the
+published P13 runtime unchanged. Performance is frozen. No runtime repair,
+new exception, original-source import, guest change or semantic waiver is
+selected by this evidence group.
+
+Source-led chain review before implementation:
+
+| Chain | Actual selected owner and rule | Disposition |
+| --- | --- | --- |
+| HWND discovery | Original FindWindow/GETHWND16, wow_user_discovery discovered/publish_discovery, existing page-domain table and wow_user_window_native_handle | Native USER supplies actual HWND/PID/TID; publish the full identity, retain original16-bit carrier conversion. Do not infer a guest task from a foreign thread. |
+| Send, callback and reply | Original wumsg WU32SendMessage/WU32InSendMessage/WU32ReplyMessage, wmsg16/wmdisp32, wow_user_task_lifecycle native_call_begin/end | Existing execution frames release/reacquire local WOW execution around native services; receiver identity/reply belong to actual USER callbacks, not the target HWND. Keep algorithms and approved modern USER contract. |
+| Standard pointer data | Original MINMAXINFO/WINDOWPOS/COPYDATA converters and call-owned finalization | Native USER owns cross-process32/64 capture/marshalling. Use actual standard messages and retain original guest conversion; never serialize raw custom-message pointers or build another transport. |
+| Resource/private state | wow_window_words_attach_target rejects foreign process attachment; borrow scope pins observed backing separately | Foreign observation is not a local window/property/task owner. No private foreign pointer or synthetic NT4 USER object is introduced. This does not prove every observed private field consumer. |
+| Lifetime | Existing original task retirement and immutable caller scopes; native endpoint process owns its HWND | Hold actual process handles, query real target PID/TID, require normal exit and window destruction, retain exact once-per-task retirement assertions. Explicit fixture cleanup is not the normal-exit proof. |
+
+Recovery ladder: directly retain the already selected original thunk/callback/
+converter sources; their native services already use the bounded public USER
+owner. No missing production dependency was found for these selected paths.
+There is no reason to import private USER/server code, alter a mirror or author
+a replacement algorithm. The necessary addition is an independent test endpoint,
+not a product provider. Broader failure/unsupported paths remain unproved.
+
+Implementation: compile the existing wow_message_peer.c handler both as an
+independent32/64-bit EXE and as its previous same-worker control. A small
+test-only generic-thunk DLL creates the selected EXE, holding its actual process
+handle. An event name plus scalar HWND/PID bootstrap the test; standard message
+payloads cross solely through USER. The ready HWND's queried PID must equal
+CreateProcess's actual PID and differ from the worker. The endpoint reports
+its actual sizeof(pointer), thread and process; the verifier checks PE machine,
+distinct process, counters and normal exit. There is no shared-pointer channel.
+The original same-worker report and authored NE bytes remain unchanged.
+
+CMake's EXCLUDE_FROM_ALL fixture targets keep objects/libs/metadata in the
+existing architecture trees. Only test media are copied to disposable roots;
+the existing short physical-stage helper and exact-path process cleanup remain.
+The optional NativeHost/ExternalNativePeer inputs keep previous probe modes;
+external mode requires the complete normal structured group and excludes its
+inapplicable same-process Proc32/borrowed-input and early/timeout variants.
+No original guest or public run16 option is added. The separate process is
+a test endpoint, not a production helper HWND/process or adapter mechanism.
+
+Reproducer: hidden background pwsh -NoProfile -ExecutionPolicy Bypass -File
+tests/observation/verify-wow-external-native.ps1 -BuildRoot
+<repo>/build/t447-s4-external-native/group-r1. Supervisor PID47648 starts
+2026-10-19T04:24:11.878Z; test starts04:24:12.709Z, finishes04:27:02.347Z,
+exit0. Build commands PID30784/40280 configure both stable ccache presets
+and build only the named test targets (exit0). Actual guest-case processes
+and peer identities follow; every case exits0 with native errors0.
+
+| Case | Case PID | WOW PID | External PID | Native bits |
+| --- | ---: | ---: | ---: | ---: |
+| local Off | 20824 | 47468 | n/a | worker32 |
+| local Win16 | 49916 | 41056 | n/a | worker32 |
+| local All | 22112 | 43744 | n/a | worker32 |
+| external Off | 43004 | 49468 | 35668 | 32 |
+| external Win16 | 20868 | 26768 | 48804 | 32 |
+| external All | 46068 | 26892 | 16960 | 32 |
+| external Off | 45152 | 5016 | 30832 | 64 |
+| external Win16 | 49924 | 32400 | 5932 | 64 |
+| external All | 19476 | 10220 | 11932 | 64 |
+
+All9 retain original sender phases0/1/2/3/4/6 and receiver0/5/6 with errors0;
+distinct actual guest tasks and threads, version030A/0300 retained across
+callbacks, nested2/same2/early1/post1/filter1/threadpost1/text1 and native7
+sender counters. Each guest has4 structured callbacks and exactly one normal
+retirement. The native endpoint receives4 scalar requests, nested1/reply1/
+text1 and6 structure checks, actual process/thread exit0 and windowAlive0.
+The standard families are MINMAXINFO, WINDOWPOS and COPYDATA, in both native
+directions in addition to the unchanged Win16/Win16 baseline. This proves
+the named cross-process conversion/lifecycle cases, not all messages or waits.
+
+All9 SEND/RECV image hashes are respectively
+B0692BB2A0948B2AAE4C4E98E703CEF39200C8FFEEABFFF8AA9038DC9CDF86BB and
+356AB86E785A1DF9F137B77D60B0D606CC450010F24F95729F44C99F9534DEF8.
+These probes are independently authored; original guest media are not rebuilt.
+The runtime in every case comes only from canonical assets/winnt.zip plus
+the exact released13-image manifest, never the Td's build-only candidate.
+
+Adversarial control: invoke verify-win16-message-probe.ps1 with its same
+StructuredPayloads/ThreadClientView/P13 inputs but deliberately pair NativeHost
+MSGHOSTLOCAL.dll with ExternalNativePeer=x64 MSGPEER.exe. The actual local
+thread runs and returns its old52-byte report, so it cannot satisfy the60-byte
+external report/identity contract. PID15596 starts04:28:09.898Z, returns1 with
+the exact Missing native peer report assertion; the controlling expected-
+failure check passes04:28:17.401Z. This is a proved test refusal, not a runtime
+regression, and is not retried into a pass. Both argument paths refer to the
+same stable message-probes fixture outputs as the positive group.
+
+Result813AA633E2A0EA4EADA5ABACDDD03631C7252E1368C762CC6E08BC837743A69D;
+steps80BEF6E58AD5B384AD45B54BFFA50D8D111B58C88734DB10D59933E57EF5EC44;
+negative5B9DDE57D1FF2C4BAE5A3AC50430E10203093F95BB5A0213D784C6D5078BB97A.
+Shared native sourceF02A364401982291BD78B1B49BECAC74BC5BDC6B6D11F55EF6AC95BF8F8A8965;
+case runner24C9A9744FD45D6788F31B306881EE927271F31E8FD34C094F1BE8F761CACECB;
+group runnerE8CB0464C4A8E04384A0135DFDAD3CC1250758442E899BEF6B0F3314D8775E73;
+fixture CMakeEA5FB0AA6DA5BA2F36C9D008D628C5478E3246A632263220E5FC700CCE6D74A9.
+Hashes/conclusions precede disposal of the owned raw evidence.
+
+Second-role scope review: no production source, original mirror, guest or
+release asset changed; mirror delta0. A runtime rebuild/publication and the
+unrelated whole application/device sweep are not implied by a test-only group.
+Do not reuse this as cross-worker Win16 proof: both guest tasks still share
+one CCPU40 worker. External Post/ThreadPost, implicit receive, SMTO_BLOCK,
+pending receiver death, other M4 conversion/movement/failure families and the
+complete M1--M6 reconciliation remain S4. No performance experiment ran and
+no historical0102/WRITE or older S3 failure is reclassified.
+
+Final quality PID47100 runs04:31:43.251--04:31:57.283Z, exit0: all9 actual
+runtime-input CSVs match the released13 manifest, every probe/source input
+still matches its recorded hash, both installed/released sets and canonical
+guest ZIP remain unchanged, both PowerShell scripts parse, source/asset diff0,
+and fresh documentation/link/whitespace gates pass. Compilation targets are
+EXCLUDE_FROM_ALL fixtures; no production rebuild/publication is claimed.
+
+Before phase disposal, the sole cleanup owner inventories419 files/13450659
+bytes. All85 sensitive entries are individually hash-reviewed:35 match the
+canonical ZIP exactly,20 are identical tracked-probe NASM listings and30 are
+the authored MSG6/NMSG result records. No user/configuration exception or Git
+data is present. Inline ownership-manifest hash is
+E0BB641D88E214AE15B26DBD733EB947EC869F08E32620E17B3AECC2DF16E474;
+exact membership5CF0D06E24334A27B0747C2723E6870D937B4F2953194B38A861B6C3FCEAFA89.
+These summaries/hashes precede deletion. Apply requires a fresh actual process
+inspection and completed jobs; valid .ninja/.ccache remain untouched.
+
+At04:33:56.150Z, preview Applied=false and fresh process inspection precede
+successful Apply with that exact membership. No active case, external peer or
+root consumer remains; no process is killed for disposal. Exactly419 files/
+13450659 bytes of generated evidence/canonical duplicates are removed; the
+same tool's final residual check returns only the two caches. Raw artifacts
+are not promised recoverable; their results/hashes above, canonical media,
+release images and tracked reusable test producers remain.
+
+The containing reviewed commit/push delivers S4 P14 as a test-only checkpoint.
+P13 remains the runtime/publication frontier; no untested binary is substituted
+and no source/mirror/guest/runtime completion is inferred. Next fixed S4 work
+remains cross-worker semantics and the remaining message/failure/reentry
+inventory, not another performance experiment or an early S5 admission.

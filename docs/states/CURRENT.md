@@ -351,6 +351,9 @@ P12's091--094 and unlocated0102/WRITE-Off failures remain in the S4 audit.
 P13 publishes095--097: COPYDATA/caller ownership, Proc32 and COMMDLG scopes.
 Full gates, coherent13 and installed3/hashes pass; performance remains frozen.
 Full M1--M6/S5/S6 remains open; original guest/configuration stay unchanged.
+Test-only S4 P14 external-native group passes9 actual guest cases: same-worker3,
+external I3863/AMD643 plus a local-substitution refusal. This is test-only
+evidence on P13, not cross-worker Win16, full M1--M6 or a new runtime release.
 
 ## Active Packet
 
