@@ -8496,3 +8496,30 @@ Win16 tasks in the same WOW worker and proves only classic
 not ship), INITIATE atoms, DATA/POKE/ADVISE, allocation-failure conversion, an
 external native process or cross-worker routing. Those are neither silently
 accepted nor retroactively reclassified as covered by the exact-body fixture.
+
+### M3 original queue-owner availability and mirror audit
+
+The source-led M3 reduction audit resolves whether the existing
+`wow_user_message_bridge` can be deleted in favour of a directly imported
+`xxxReceiveMessages`. It cannot. The retained original `taskman.c` owns only
+the two call sites in `xxxUserYield`; the body is a private NT4 USER service
+outside the imported/linkable OpenNT source closure and requires private
+SMS/PWND/queue state. Modern public USER32 does not expose those objects or a
+safe substitute for their layout. Importing a guessed body, casting a modern
+queue to that layout, or creating a parallel SMS list would violate the
+host/adapter boundary.
+
+The current bridge is consequently the narrower approved adaptation: a
+non-removing, sent-message-only `PeekMessage` services actual native
+synchronous sends, while original guest `GetMessage`/`PeekMessage` retain
+posted messages and `WM_QUIT`. It keeps only current-thread initialization
+identity and the observed `QS_SENDMESSAGE` bit; it is not a queue, SMS list,
+message dispatcher or task scheduler. `taskman.c` remains the original task
+selection and event-count owner.
+
+The same audit enumerated every current `MVDM-HOST-DIV-*` marker in the
+WOW32/host scope: 37 identifiers, all registered in `src/mvdm/README.md`,
+with no unregistered mirror change. This proves registration completeness,
+not that every divergence is removable or that M3/S4 is complete. The next
+M3 work remains exceptional/return-path proof for the retained original
+`BlockWOWIdle` pairs, not a speculative replacement of this boundary.
