@@ -2445,8 +2445,8 @@ their existing immediate behavior. Required validation is the actual
 `run16 command` management-delete path plus the unaffected `run16 cmd` path;
 the parent Console input mode must equal its pre-launch mode after each.
 
-The focused r4 production-path witness completed from the short owned package
-stage `O:\tmp\n9e0`: it observed an actual DOS `command.com` worker and NTCON,
+The focused r4 production-path witness completed from the owned short-package
+stage defined by the test helper: it observed an actual DOS `command.com` worker and NTCON,
 sent authenticated `--close-node 1 <NTCON-pid>` through the monitor RPC, and
 then observed both participants exit.  The retained parent Console input mode
 was `0x000001f7`, with `ENABLE_PROCESSED_INPUT`, `ENABLE_LINE_INPUT`, and

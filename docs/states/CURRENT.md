@@ -17,7 +17,9 @@ Full M1--M6/S4, protocol/output and S5/S6 remain open.
 Native output28 passes at860785e88. P22 adds no protocol ownership policy,
 stale local fallback or weaker validation. The post-P22
 [DDE source ledger](../etc/evidence/m0-t447-s4-message-source-audit.md#post-p22-dde-ownership-source-ledger)
-pins nine entries/three lifetimes.350--354/103 remain unpublished.
+pins nine entries/three lifetimes.  DIV-350--354 are published in the
+coherent 3eae6c637 baseline; DIV-103 remains staged pending its separate
+object gate.
 Native prerequisite, alias/ACK82 and filter/queue59 controls pass, not guest/
 product proof. DIV-354's nested WOW32 build is clean; its alias control proves
 only original/service ownership, not a guest DDE conversation.103 reconnects ANSI filter scope; object gate awaits full build.
@@ -78,70 +80,14 @@ FPU protection, argument order and assembly remain. Original-body/scope/frame
 checks and real generic-thunk callbacks/yields pass in all3 styles. This is
 not whole MMSYSTEM16-family acceptance; the complete remaining S4 scope stays.
 
-Owner's renewed installed WINMINE slowdown report received diagnostic priority
-before further S4 expansion. Installed-mine-regression-r1 verified then-P22
-identities, passed actual gameplay/normal exit in all3 policies with
-the complete logon environment, and reproduces an illegal-instruction startup
-failure with the inherited developer environment. Its observation runner's
-exit0 is not a pass for that failed launch. The owner's actual terminal
-environment and first-bad version are unobserved; do not equate this control
-with causal proof of the owner's instance. See the appended
-[diagnostic evidence](../etc/evidence/m0-t447-s4-message-source-audit.md#renewed-installed-winmine-startup-report).
-
-Owner clarification separates the reported regression from startup: WINMINE
-opens normally but each cell responds slowly. Source-led active-input
-profiling now reproduces median481ms on the ordinary desktop versus32ms on
-a private desktop, with identical P2 images and full logon environment.
-The source chain repeatedly copies the desktop view through scalar SAS;
-080 reuses bounded original c_GetLinAdd for owned copied-view reads,
-without reducing freshness or changing guest/scheduler behavior. Formal
-fixture refresh requires079/343 to compose with080; P3 includes their complete
-facades, not old-object substitutions. P2 was the comparison baseline.
-080 worker-only control improves ordinary median481ms to220ms
-(private30ms), not yet responsive enough. The first composed timing run's
-transient-board failure remains retained, excluded from performance claims.
-Corrected same-setup comparison verifies the composed candidate at201ms
-against380ms P2.079 unit/original-body/frame and actual default/extension
-Win16 message groups pass, including both public callbacks, yields and exact
-task retirement. DirectedYield is not an asynchronous completion barrier;
-the independent probe now waits for an explicit completion message without
-changing runtime scheduling. Earlier native-reuse and restricted-desktop
-admission failures remain recorded, not erased by later complete passes.
-The owner requests further optimization rather than accepting the remaining
-latency.081 admits only the complete owned-view field-write/reference-read
-closure: original CCPU translation and scalar fallback, no refresh reduction,
-new cache, scheduler or guest change.082 additionally applies the already
-approved route-E boundary: reuse committed complete external observations,
-while refreshing all local objects and explicit roots/payloads synchronously;
-keep exact full identities, death withdrawal and atomic graph validation.
-It adds no freshness timer, new state owner or semantic waiver. Explicit
-native foreign operands also retain their known full identity for synchronous
-return publication; they are not optional background observations.
-External-view-build-r2 passes079 and the real CCPU borrow/reclaim/graph group,
-including fresh fields, private sentinels, external snapshot/explicit refresh/
-native mutation, retirement and reuse. Final paired performance-r2 passes all
-six timing/normal-exit cases: ordinary median299.871ms P2 versus131.725ms
-candidate; sampled296.888ms versus131.884ms; private31.691ms versus32.257ms.
-This2.28x improvement is not stutter elimination. Frozen P3 passes the full
-native/original/actual-guest/message/application/DOS/modal/logon gates;
-delivery-r1 publishes coherent13 and verifies installed gameplay3/hashes.
-It is a bounded handoff, not S4/T closure. The inherited-environment startup
-failure is a distinct known control, not the owner's clarified symptom.
-Complete inputs, assertions, failures and delivery remain in the indexed
-[active-input evidence](../etc/evidence/m0-t447-s4-message-source-audit.md#clarified-owner-symptom-active-input-latency).
-
-After the clean P3 main/origin handoff5133c97f2, the next bounded work is
-read-only diagnosis of the existing EMS-alias lookup on the native memory
-access path. Verify actual ready WINMINE alias presence using the exact P3
-image/MAP and a caller-owned host-word observation, before selecting any
-empty-alias fast-negative change. The exact P3 diagnostic now observes NULL
-after the real board is ready and before its last measured click; all three
-timing/lifecycle cases pass.083 admits one empty-list early-negative guard,
-retaining default output and every nonempty owner/session/range check, with
-no new cache, mirror/guest edit or CPU instruction change. Complete service
-empty/invalid/multi-owner/remap/teardown and actual EMS/memory/DOS/WOW floors
-plus paired performance are required before another release. P3 remains the
-installed baseline and all S4/S5/S6 obligations remain unchanged.
+Performance work is frozen. The released P3 source-led input/view work and
+the later 083 empty-alias control are historical bounded baselines, not a
+stutter-closure claim; their measurements, failed controls, source identities
+and remaining limitations are retained in the
+[S4 source audit](../etc/evidence/m0-t447-s4-message-source-audit.md#clarified-owner-symptom-active-input-latency).
+The inherited-development-environment startup failure remains distinct from
+the owner-reported interactive slowdown and is recorded in TODO. No current
+S4 work may change guest scheduling or reopen performance scope.
 
 083 build-r2 passes physical/session matrices, original SAS/external-memory
 and copied-window lifecycle groups. Performance-r2 passes real EMS controls
