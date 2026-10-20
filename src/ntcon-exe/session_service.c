@@ -1,6 +1,7 @@
 #include "session_service.h"
 #include "common/console/members.h"
 #include "console_channel.h"
+#include "common/protocol/frontend_lifecycle.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include <stdio.h>
 struct frontend_session_service {
@@ -37,7 +38,15 @@ static DWORD WINAPI frontend_pump(void *context)
             DWORD retired=0;
             error=OpenNtBaseClientRetireWorkerlessFrontend(&retired);
             if(error)return error;
-            if(retired)return ERROR_SUCCESS;
+            if(retired==OPENNT_FRONTEND_RETIRE_FINAL_CLOSE)return ERROR_SUCCESS;
+            if(retired==OPENNT_FRONTEND_RETIRE_RETURN_CONSOLE) {
+                error=frontend_session_return_console(scope->presentation);
+                if(error)return error;
+                error=OpenNtBaseClientFrontendConsoleRestored();
+                if(error)return error;
+                continue;
+            }
+            if(retired!=OPENNT_FRONTEND_RETIRE_NONE)return ERROR_INVALID_DATA;
         }
         if(retire_index!=MAXDWORD && wait==WAIT_OBJECT_0+retire_index)
             scope->retire_requested=TRUE;

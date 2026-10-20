@@ -2,6 +2,7 @@
  * not an original OpenNT mirror. Physical separation only: existing function
  * bodies, state authority and lock/resource contracts are preserved. */
 #include <service_internal.h>
+#include "common/protocol/frontend_lifecycle.h"
 
 static ULONGLONG service_root_retirement_deadline(OPENNT_BASE_CONNECTION *root,ULONGLONG now);
 
@@ -58,6 +59,34 @@ static void service_release_frontend_shutdowns(service_frontend_shutdown *stops,
     if(!stops)return;
     while(count) {--count;CloseHandle(stops[count].process);CloseHandle(stops[count].shutdown);}
     HeapFree(GetProcessHeap(),0,stops);
+}
+
+/* The route is still live at this point, so NTCON can synchronously undo CAF
+ * before a worker close turns its transport into EOF.  The service owns the
+ * deadline and never substitutes a delay for the acknowledgement. */
+static DWORD service_wait_frontend_close_return(OPENNT_BASE_SERVICE *service,DWORD generation)
+{
+    ULONGLONG deadline=GetTickCount64()+10000u;
+    DWORD error=ERROR_PIPE_NOT_CONNECTED;
+    if(!service || !generation)return ERROR_INVALID_PARAMETER;
+    EnterCriticalSection(&service->lock);
+    for(;;) {
+        LIST_ENTRY *link;OPENNT_BASE_CONNECTION *root=NULL;
+        ULONGLONG now;
+        for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
+            OPENNT_BASE_CONNECTION *candidate=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
+            if(candidate->process.SequenceNumber==generation){root=candidate;break;}
+        }
+        if(!root || WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT)break;
+        if(root->frontend_close_returned){error=ERROR_SUCCESS;break;}
+        now=GetTickCount64();
+        if(now>=deadline){error=ERROR_TIMEOUT;break;}
+        if(!SleepConditionVariableCS(&service->frontend_changed,&service->lock,(DWORD)(deadline-now))) {
+            error=GetLastError();break;
+        }
+    }
+    LeaveCriticalSection(&service->lock);
+    return error;
 }
 
 /* The final worker-side ResetConsoleState must precede NTCON's restore of the
@@ -183,15 +212,14 @@ DWORD OpenNtBaseServiceCloseManagementNode(OPENNT_BASE_SERVICE *service,
                 &target,SYNCHRONIZE,FALSE,0)){error=GetLastError();break;}
             error=service_capture_frontend_shutdowns(service,root,&stops,&stop_count);
             if(error) {CloseHandle(target);target=NULL;break;}
-            /* Keep NTCON alive while the worker performs its original final
-             * Console reset.  The drain bit is the admission barrier; only
-             * after the worker process is gone do we publish closing. */
+            /* First return CAF to its real Console while the I/O channel is
+             * still alive.  The drain bit remains the admission barrier; the
+             * existing worker close follows only after that acknowledgement. */
             root->frontend_close_draining=stop_count ? TRUE : FALSE;
+            root->frontend_close_return_required=stop_count ? TRUE : FALSE;
+            root->frontend_close_returned=FALSE;
             if(!stop_count)root->frontend_closing=TRUE;
-            /* Do not wake NTCON while a worker still owns the final Console
-             * reset.  Its ordinary request loop would otherwise observe the
-             * admission barrier as a broken route and exit too early. */
-            if(!stop_count)service_signal_frontend_states(service);
+            service_signal_frontend_states(service);
             WakeAllConditionVariable(&service->frontend_changed);
             frontend=TRUE;error=ERROR_SUCCESS;break;
         }
@@ -212,8 +240,13 @@ done:
      * A pinned original process object, never a reopened PID, is targeted. */
     if(!error) {
         if(frontend) {
-            error=service_shutdown_frontend_workers(stops,stop_count);
-            if(!error && stop_count) {
+            DWORD return_error=ERROR_SUCCESS,shutdown_error;
+            if(stop_count)return_error=service_wait_frontend_close_return(service,key->generation);
+            /* Management's requested close still reaches the authenticated
+             * workers on a failed frontend acknowledgement; report that
+             * failure rather than manufacturing a successful handoff. */
+            shutdown_error=service_shutdown_frontend_workers(stops,stop_count);
+            if(!shutdown_error && stop_count) {
                 EnterCriticalSection(&service->lock);
                 /* The root stayed live while draining, so this is the only
                  * point at which NTCON may restore the borrowed Console. */
@@ -221,6 +254,7 @@ done:
                     OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
                     if(root->process.SequenceNumber==key->generation) {
                         root->frontend_close_draining=FALSE;
+                        root->frontend_close_return_required=FALSE;
                         root->frontend_closing=TRUE;
                         service_signal_frontend_states(service);
                         WakeAllConditionVariable(&service->frontend_changed);
@@ -229,10 +263,11 @@ done:
                 }
                 LeaveCriticalSection(&service->lock);
             }
-            if(!error) {
+            if(!shutdown_error) {
                 DWORD wait=WaitForSingleObject(target,10000);
-                if(wait!=WAIT_OBJECT_0)error=wait==WAIT_FAILED ? GetLastError() : ERROR_TIMEOUT;
+                if(wait!=WAIT_OBJECT_0)shutdown_error=wait==WAIT_FAILED ? GetLastError() : ERROR_TIMEOUT;
             }
+            error=return_error ? return_error : shutdown_error;
         } else if(!TerminateProcess(target,ERROR_CANCELLED))error=GetLastError();
     }
     service_release_frontend_shutdowns(stops,stop_count);
@@ -298,7 +333,12 @@ DWORD OpenNtBaseServiceRetireWorkerlessFrontend(OPENNT_BASE_CONNECTION *root,DWO
     *retired=0;
     EnterCriticalSection(&root->service->lock);
     if(OpenNtBaseServicePeer(root,pid,generation) && root->frontend_capability) {
-        *retired=root->frontend_closing ? 1u : 0u;
+        /* The scalar wire shape is retained; only NTCON consumes the
+         * management pre-close return action. */
+        *retired=root->frontend_closing ? OPENNT_FRONTEND_RETIRE_FINAL_CLOSE :
+            (root->frontend_close_draining && root->frontend_close_return_required &&
+             !root->frontend_close_returned ? OPENNT_FRONTEND_RETIRE_RETURN_CONSOLE :
+             OPENNT_FRONTEND_RETIRE_NONE);
         error=ERROR_SUCCESS;
     }
     LeaveCriticalSection(&root->service->lock);

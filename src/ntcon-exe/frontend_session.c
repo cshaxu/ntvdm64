@@ -16,8 +16,10 @@ struct frontend_session {
     BOOL input_mode_saved;
     DWORD parked_input_mode;
     BOOL parked;
-    HANDLE stop,refresh,refreshed,thread,changed,park,park_done,control[2];
+    HANDLE stop,refresh,refreshed,thread,changed,park,park_done,return_console,
+        return_done,control[2];
     DWORD park_error;
+    DWORD return_error;
     HANDLE console_input,console_output,console_surface,logical_surface;
     SMALL_RECT logical_window;
     COORD attempted_canvas;
@@ -554,8 +556,9 @@ static DWORD present_loop(frontend_session *frontend)
 {
     for(;;) {
         HANDLE waits[8]={frontend->stop,frontend->changed,frontend->refresh,
-            frontend->handoff,frontend->park,frontend_window_wake(frontend->window)};
-        DWORD error=0,wait,count=6;
+            frontend->handoff,frontend->park,frontend->return_console,
+            frontend_window_wake(frontend->window)};
+        DWORD error=0,wait,count=7;
         BOOL requested=WaitForSingleObject(frontend->refresh,0)==WAIT_OBJECT_0;
         const frontend_video *video;
         uint32_t *published;
@@ -587,6 +590,17 @@ static DWORD present_loop(frontend_session *frontend)
                 frontend->console_f_down=frontend->console_shortcut=FALSE;
             }
             SetEvent(frontend->park_done);
+        }
+        if(WaitForSingleObject(frontend->return_console,0)==WAIT_OBJECT_0) {
+            ResetEvent(frontend->return_console);
+            /* This is the management-close preparation edge.  Unlike park,
+             * the active native channel remains bound until NTSRV sends its
+             * existing shutdown instruction after this acknowledgement. */
+            frontend->return_error=frontend_window_select(frontend->window,
+                FRONTEND_DISPLAY_CONSOLE);
+            if(!frontend->return_error)
+                frontend->console_f_down=frontend->console_shortcut=FALSE;
+            SetEvent(frontend->return_done);
         }
         (void)refresh_window_title(frontend);
         if(frontend->owner || frontend->window_active) {
@@ -695,13 +709,15 @@ DWORD frontend_session_create(frontend_session **output)
     frontend->changed=CreateEventW(NULL,FALSE,FALSE,NULL);
     frontend->park=CreateEventW(NULL,TRUE,FALSE,NULL);
     frontend->park_done=CreateEventW(NULL,TRUE,FALSE,NULL);
+    frontend->return_console=CreateEventW(NULL,TRUE,FALSE,NULL);
+    frontend->return_done=CreateEventW(NULL,TRUE,FALSE,NULL);
     frontend->control[0]=CreateEventW(NULL,FALSE,FALSE,NULL);
     frontend->control[1]=CreateEventW(NULL,FALSE,FALSE,NULL);
     frontend->handoff=CreateEventW(NULL,TRUE,FALSE,NULL);
     frontend->handoff_done=CreateEventW(NULL,TRUE,FALSE,NULL);
     frontend->input_ready=CreateEventW(NULL,TRUE,FALSE,NULL);
     if(!frontend->stop || !frontend->refresh || !frontend->refreshed || !frontend->changed ||
-        !frontend->park || !frontend->park_done ||
+        !frontend->park || !frontend->park_done || !frontend->return_console || !frontend->return_done ||
         !frontend->control[0] || !frontend->control[1] || !frontend->handoff || !frontend->handoff_done || !frontend->input_ready) {
         error=GetLastError();frontend_session_destroy(frontend);return error;
     }
@@ -772,6 +788,19 @@ DWORD frontend_session_park(frontend_session *frontend)
     if(!ResetEvent(frontend->park_done) || !SetEvent(frontend->park))return GetLastError();
     wait=WaitForMultipleObjects(3,waits,FALSE,INFINITE);
     if(wait==WAIT_OBJECT_0)return frontend->park_error;
+    if(wait==WAIT_OBJECT_0+1)return ERROR_OPERATION_ABORTED;
+    if(wait==WAIT_FAILED)return GetLastError();
+    if(!GetExitCodeThread(frontend->thread,&error))return GetLastError();
+    return error ? error : ERROR_BROKEN_PIPE;
+}
+DWORD frontend_session_return_console(frontend_session *frontend)
+{
+    HANDLE waits[3];DWORD wait,error;
+    if(!frontend)return ERROR_INVALID_PARAMETER;
+    waits[0]=frontend->return_done;waits[1]=frontend->stop;waits[2]=frontend->thread;
+    if(!ResetEvent(frontend->return_done) || !SetEvent(frontend->return_console))return GetLastError();
+    wait=WaitForMultipleObjects(3,waits,FALSE,INFINITE);
+    if(wait==WAIT_OBJECT_0)return frontend->return_error;
     if(wait==WAIT_OBJECT_0+1)return ERROR_OPERATION_ABORTED;
     if(wait==WAIT_FAILED)return GetLastError();
     if(!GetExitCodeThread(frontend->thread,&error))return GetLastError();
@@ -1088,6 +1117,8 @@ DWORD frontend_session_destroy(frontend_session *frontend)
     if(frontend->changed)CloseHandle(frontend->changed);
     if(frontend->park)CloseHandle(frontend->park);
     if(frontend->park_done)CloseHandle(frontend->park_done);
+    if(frontend->return_console)CloseHandle(frontend->return_console);
+    if(frontend->return_done)CloseHandle(frontend->return_done);
     if(frontend->control[0])CloseHandle(frontend->control[0]);
     if(frontend->control[1])CloseHandle(frontend->control[1]);
     if(frontend->handoff)CloseHandle(frontend->handoff);

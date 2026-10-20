@@ -142,6 +142,10 @@ struct OPENNT_BASE_CONNECTION {
      * original Console reset before NTCON restores the borrowed parent mode.
      * This is a close-order barrier, not another worker/task state. */
     BOOL frontend_close_draining;
+    /* Management first asks NTCON to return a live CAF Window to Console,
+     * then sends the existing worker close instruction.  This acknowledgement
+     * is local to that close transaction; it never completes a launcher lease. */
+    BOOL frontend_close_return_required,frontend_close_returned;
     struct OPENNT_FRONTEND_ROUTE *frontend_io_route; /* Borrowed, service-lock protected. */
     DWORD frontend_request_root; /* Original pending command asks this root for I/O. */
     DWORD frontend_channel_root; /* One pending direct launcher-to-root attachment. */

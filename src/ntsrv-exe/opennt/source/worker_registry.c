@@ -19,27 +19,6 @@ static DWORD service_vdm_update(service_vdm_admission *state,BOOL undo);
 static DWORD service_vdm_admit(void *context,HANDLE process);
 BOOL service_root_has_worker(OPENNT_BASE_CONNECTION *root);
 
-/* Service-lock held.  A worker exit is the completion witness for either a
- * Console-close drain or a direct Worker-close request.  Only the service may
- * turn "the last worker is gone" into frontend retirement; NTCON never
- * infers it from its own remaining Console membership. */
-static void service_retire_root_after_worker_exit(OPENNT_BASE_SERVICE *service,
-    DWORD root_generation)
-{
-    LIST_ENTRY *link;
-    if(!root_generation)return;
-    for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
-        OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-        if(root->process.SequenceNumber!=root_generation || !root->frontend_capability ||
-            root->frontend_closing || root->frontend_close_draining)continue;
-        if(!service_root_has_worker(root)) {
-            root->frontend_closing=TRUE;
-            service_signal_frontend_states(service);
-            WakeAllConditionVariable(&service->frontend_changed);
-        }
-        break;
-    }
-}
 /* All callers hold the existing service lock. The worker watch is the single
  * persistent relationship authority; Console context only proves admission. */
 OPENNT_BASE_WORKER_WATCH *service_find_worker_watch(OPENNT_BASE_SERVICE *service,DWORD generation)
@@ -125,7 +104,6 @@ VOID CALLBACK service_worker_terminated(PVOID context,BOOLEAN fired)
     LIST_ENTRY *entry;
     OPENNT_BASE_EMPTY_NOTIFY notify=NULL;
     void *notify_context=NULL;
-    DWORD root_generation;
     (void)fired;
     if (!watch || !watch->service) return;
     EnterCriticalSection(&watch->service->lock);
@@ -169,9 +147,7 @@ VOID CALLBACK service_worker_terminated(PVOID context,BOOLEAN fired)
         connection->retired=TRUE;
         InsertTailList(&watch->service->retired_connections,&connection->retired_link);
     }
-    root_generation=watch->frontend_root_generation;
     RemoveEntryList(&watch->link);
-    service_retire_root_after_worker_exit(watch->service,root_generation);
     WakeAllConditionVariable(&watch->service->frontend_changed);
     service_signal_frontend_states(watch->service);
     service_signal_worker_states(watch->service);

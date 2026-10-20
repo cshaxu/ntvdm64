@@ -29,6 +29,10 @@ void frontend_session_cancel(frontend_session *);
 /* Return the borrowed visible Console to its caller without closing resident
  * worker channels. A later worker activation may reuse the same frontend. */
 DWORD frontend_session_park(frontend_session *);
+/* Synchronously return a CAF Window to the borrowed Console while retaining
+ * its active channel.  Management uses this before it orders that channel's
+ * worker to exit; it is deliberately not the idle/park transition. */
+DWORD frontend_session_return_console(frontend_session *);
 /* One channel owner; acquisition has no worker/device classification. */
 DWORD frontend_session_bind(frontend_session *,const void *,BOOL);
 /* Active owner requests exact text storage conversion under the I/O lock. */

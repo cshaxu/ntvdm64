@@ -1,16 +1,16 @@
 # Project Status
 
-**Active: M0 T447 S5 — WOW32 message, identity and reply completion.**
+**Active: M0 T447 S4 P4 — NTCON full-screen close handoff delivery review.**
 
-S4 is closed.  Its lifecycle delivery completed the authenticated native
-reservation-to-launcher path, explicit NTVWM-CUI console-close versus
-worker-close entries, and P3 protocol hardening: native launch/resume is now
-an explicit operation, GUI/CUI comes from the reservation-selected worker,
-and `CompareObjectHandles` is one startup-checked service capability.  No
-guest source, guest binary or mirror diff was introduced.  S5 now owns the
-remaining WOW32 M1--M6 message/identity/reply/wait/reentry inventory and the
-existing strict `run16 command` ConPTY first-prompt gap; that gap reproduced
-unchanged against the pre-P3 deployed package and is not claimed repaired.
+P4 reopens S4 only for an owner-reported lifecycle defect: after NTCON enters
+full screen, NTMON console deletion returns the parent terminal with character
+echo delayed until Enter.  The source-led repair is now staged for delivery:
+NTSRV requests and receives NTCON's synchronous Window-to-Console return while
+the authenticated channel still exists, then issues the existing worker-close
+instruction.  The acknowledgement is deliberately distinct from an ordinary
+launcher restoration.  No guest source, guest binary or mirror diff is
+permitted; S5’s WOW32 scope remains deferred while this bounded P4 delivery is
+reviewed.
 
 Owner accepts and closes [Td build hygiene](../etc/operations/td-build-hygiene.md)
 at aadde21e8; S4 resumes with stable caches, immutable guest and frozen
@@ -322,21 +322,47 @@ construction, mapping, failure and lifecycle closure remains required.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T447 S4; single-person implementer/reviewer, no subagents. |
-| Admission And Approval | Continuing owner goal.  Owner rejects S4 closure until the P1 GUI delivery disconnect and P2 NTVWM-CUI close-semantic split are repaired, the complete applicable product/test gates pass, and the complete package is published.  Retain approved modern USER delivery/reply boundary, original WOW conversion/scheduling and recorded exceptions; no new semantic waiver. |
-| Objective | Complete native classification/lifecycle routing: an authenticated reservation is the sole owner of expected native class and worker kind; GUI delivers only to its own one-shot launcher and records the completed target as a read-only Direct/Observed fact; CUI delivers only to matching resident CUI workers; NTVWM-CUI has distinct console-close and worker-close entries with once-only carrier teardown.  NTSRV lifecycle authority covers only NTVDM-DOS, NTVDM-WOW and NTVWM-CUI.  A GUI target is host-owned and read-only observed; its NTVWM GUI launcher receives generic worker-base notifications and deliberately no-ops them. |
+| Identifier Mode | M0 T447 S4 P4; single-person implementer/reviewer, no subagents. |
+| Admission And Approval | Owner reopens S4 to reproduce and root-cause the NTCON full-screen management-close input-handoff defect before any repair.  Existing lifecycle policy remains; no guest or semantic concession is admitted. |
+| Objective | Prove or refute the reported chain: `run16 cmd` or `run16 command` → Ctrl+Alt+F → NTMON Console delete → parent terminal has delayed echo until Enter.  Trace exact NTMON/NTSRV/worker-base/NTCON ordering and select the smallest project-owned repair only after evidence. |
 | Non-goals | Guest modification/rebuild, private native SMS/layout decoding, parallel queue/transport/scheduler, helper windows, whole USER server import, new individual-task termination UI or broad unrelated WOW families. |
-| Reference Baseline | `428e7b2ba` is a committed but unpublished partial lifecycle baseline.  Its full applicable product build, lifecycle matrices, coherent13 publication and deployed hash verification remain required after P1/P2. |
+| Reference Baseline | `ab2443014` is the published P3 lifecycle baseline.  Existing tests cover close acknowledgement, but not full-screen Console input mode after management frontend deletion. |
 | Files And ABI Surface | Project-owned NTSRV reservations/worker registry/native command service, NTVWM launcher/CUI lifecycle and worker-base callbacks; Run16 classification caller and focused host fixture/observation tests.  No guest ABI or mirror source change. |
 | Applicable Rules | Source-first four-rung audit, original/host/adapter responsibility rule, registered minimal mirror diffs, immutable original guest, grouped background build/tests, coherent13 release and reviewed main/origin commit/push. |
-| Verification | Reservation-kind/type mismatch negatives; Win32/Win64 CUI and GUI chain; actual target machine/subsystem rejection; GUI target read-only observation after launcher exit; blocked command cleanup; console/worker close concurrent teardown; retained S3/S4 runtime floors and deployed hashes. |
-| Expected Markers | Exact reservation-to-worker generation/kind/type match; BindNativeTarget machine/subsystem proof; target observation independent of GUI launcher and without a close action; one carrier cleanup under concurrent close; native request status/receipt/handle rollback without false success. |
+| Verification | Automated isolated CUI parent for both command forms; inject Ctrl+Alt+F; use the same management Console-close RPC as NTMON; record input mode/echo before and after close, first character and Enter; compare ordinary exit and worker-close controls. |
+| Expected Markers | Exactly one frontend-close instruction; worker final cleanup precedes NTCON restoration; parent Console input mode has echo restored before first post-close character; no residual worker/frontend. |
 | Asset Needs | Existing pinned read-only OpenNT and canonical guest ZIP; host-native fixture/observation probes only under disposable build paths. No new original guest artifact. |
-| Reporting Requirements | Per-chain reservation/worker/target authority, preserved contract, deleted duplicate selection or close paths, exact build/run identities, mirror delta and unproved cases in working plan/evidence. |
+| Reporting Requirements | Reproducer identity, mode/ordering trace, root cause, ordinary/worker-close comparison and exact affected owner; report an implementation proposal only if root cause is proven. |
 | Stop Conditions | New observable semantic concession or scope expansion needs approval; no approximate private state, helper HWND, speculative replacement or transferred foundation defect. Existing granted implementation/registration/publication authority remains. |
-| Exit Criteria | P1/P2 and their finite matrix pass; complete applicable product build and coherent13 publication to both destinations are hash-verified; review/commit/push.  Then retain the original S4 M1--M6 obligations in S4 rather than transferring them by this lifecycle repair alone. |
+| Exit Criteria | A bounded evidence record establishes the cause or a finite blocker.  If repair is admitted, it must add an automated reproduction/regression and pass the normal lifecycle release gate before P delivery. |
 | Original Owner Request | 单人双角色复通wow32；可接入原版立即接入并删除被取代自主实现；源码追溯优先；整组接通后验收；最小镜像diff，尽可能保持原版功能语义。 |
-| Similar-Issue Sweep | Explicit Send/SendDlgItem, Post/ThreadPost, implicit native sends, nested same/cross-task callbacks, native peers both directions, early/duplicate/no-pending reply, queue filters/waits, destruction and buffer invalidation. |
+| Similar-Issue Sweep | Both `cmd`/`command`, normal versus Ctrl+Alt+F, Console-close versus worker-close, NTVWM-CUI and NTVDM-DOS carriers, success/failure/draining races and first-character input mode. |
+
+### P4 delivery record (2026-10-20)
+
+The failure was not an inability to restore cooked input mode: the failing
+candidate already reported `0x1f7`.  It was an ordering error.  Management
+close first stopped the DOS worker, breaking NTCON's live Window channel; the
+frontend could then exit without first selecting the borrowed Console.  P4
+adds the existing scalar workerless-frontend operation value
+`RETURN_CONSOLE`, used only while a management close is draining.  NTCON
+synchronously selects Console and acknowledges; NTSRV then sends the existing
+worker-close request.  The final close remains the existing path.  Worker
+registry's competing immediate root-retirement writer was also removed, so
+the existing lifecycle deadline is the one authority for ordinary workerless
+frontend retirement.
+
+No guest, guest media, mirror, protocol-layout or public ABI diff was added.
+The final full-component gate builds all 13 product images plus the changed
+observer and verifies 1,344 intermediates unchanged on the second pass.
+`basesrv-service-reservation-test` passes.  The visible CAF observer cannot
+discover `LibKvmWindow` in this noninteractive automation desktop even after
+its own quoting/visibility defects were corrected; it therefore remains an
+explicit unexecuted runtime acceptance boundary, not a passing claim.  The
+same manually reproducible CAF→NTMON route is the owner acceptance test.
+Both release destinations hash-match the final 13-image manifest.  Exact
+source, test and release evidence is recorded in
+[P4's evidence record](../etc/evidence/m0-t447-s4-p4-ntcon-caf-close.md).
 
 ## Current Technical Baseline
 

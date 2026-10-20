@@ -809,9 +809,19 @@ DWORD OpenNtBaseServiceFrontendConsoleRestored(OPENNT_BASE_CONNECTION *root,DWOR
     DWORD error=ERROR_ACCESS_DENIED;
     if(!root)return error;
     EnterCriticalSection(&root->service->lock);
-    if(OpenNtBaseServicePeer(root,pid,generation) && root->frontend_capability && root->frontend_restored) {
-        error=SetEvent(root->frontend_restored) ? ERROR_SUCCESS : GetLastError();
-        if(!error)service_console_return_ack(root);
+    if(OpenNtBaseServicePeer(root,pid,generation) && root->frontend_capability) {
+        if(root->frontend_close_draining && root->frontend_close_return_required &&
+            !root->frontend_close_returned) {
+            /* This is the pre-worker-close CAF return acknowledgement.  Do
+             * not signal the launcher-facing restored event yet: its worker
+             * is still live and the root has not completed final teardown. */
+            root->frontend_close_returned=TRUE;
+            WakeAllConditionVariable(&root->service->frontend_changed);
+            error=ERROR_SUCCESS;
+        } else if(root->frontend_restored) {
+            error=SetEvent(root->frontend_restored) ? ERROR_SUCCESS : GetLastError();
+            if(!error)service_console_return_ack(root);
+        }
     }
     LeaveCriticalSection(&root->service->lock);return error;
 }

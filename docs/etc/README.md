@@ -4,6 +4,10 @@
 configuration/cache ownership, safe disposal and its verification; T447
 runtime scope and publication remain unchanged.
 
+[T447 S4 P4 NTCON CAF close](evidence/m0-t447-s4-p4-ntcon-caf-close.md)
+records the project-owned management-close ordering correction, final package
+identity, evidence and the remaining noninteractive visible-window limit.
+
 [T447 S4 message source audit](evidence/m0-t447-s4-message-source-audit.md)
 records actual native receive/reply ownership, the implicit-send and persistent
 eligibility gaps, original reuse/removal boundaries and complete S4 acceptance

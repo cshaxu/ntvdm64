@@ -2432,38 +2432,34 @@ relaxed message-ordering contract.
 
 Owner reported a reproducible host-side lifetime fault outside the WOW message
 algorithm: `cmd.exe -> run16 command`, followed by NTMON deleting its NTCON,
-can return to the parent CMD with raw input until Enter. The direct `run16
-cmd` comparison does not fail. Source tracing identifies two legitimate but
-unordered writers of the same borrowed Console input mode: the original DOS
-worker calls `ResetConsoleState` during final shutdown, while NTCON restores
-the parent mode when its frontend session exits. The existing management
-delete published `frontend_closing` first, so both exits raced.
+can return to the parent CMD with raw input until Enter.  The initial trace
+already showed cooked input mode restored (`0x1f7`), disproving a mode-bit or
+flush explanation.  The actual fault is that management close stopped the
+worker first, so the live NTCON Window channel became EOF before NTCON had
+selected the borrowed Console.
 
-The bounded host repair is in the existing NTSRV lifecycle owner. A selected
-frontend first becomes an admission-draining root; NTSRV signals only its
-already-authenticated non-WOW worker shutdown events and waits for their
-pinned process identities. Only after those workers have exited—therefore
-after the original DOS reset—is `frontend_closing` published and NTCON allowed
-to restore the borrowed Console mode. The drain bit is an admission/lifetime
-barrier, not task state, a second scheduler, a timeout retry, or guest change.
-An unsuccessful bounded worker close does not authorize NTCON's final restore.
-The ordinary no-worker close and all non-management retirement paths retain
-their existing immediate behavior. Required validation is the actual
-`run16 command` management-delete path plus the unaffected `run16 cmd` path;
-the parent Console input mode must equal its pre-launch mode after each.
+The bounded host repair retains the scalar workerless-frontend wire shape and
+adds named host-only values: final close and pre-close `RETURN_CONSOLE`.  A
+management-close root first drains admission, requests that NTCON synchronously
+leave Window mode while its channel is live, and waits for the normal frontend
+restored acknowledgement.  It then sends the existing authenticated worker
+close, and only afterwards publishes final close.  A failed acknowledgement
+still attempts the requested worker close but reports failure.  This is not a
+delay/retry policy, scheduler, guest change or changed original DOS
+`ResetConsoleState` behavior.  No-worker and ordinary retirement paths remain
+on their existing final-close route.
 
-The focused r4 production-path witness completed from the owned short-package
-stage defined by the test helper: it observed an actual DOS `command.com` worker and NTCON,
-sent authenticated `--close-node 1 <NTCON-pid>` through the monitor RPC, and
-then observed both participants exit.  The retained parent Console input mode
-was `0x000001f7`, with `ENABLE_PROCESSED_INPUT`, `ENABLE_LINE_INPUT`, and
-`ENABLE_ECHO_INPUT` all present.  The test entrypoint is
-`tests/observation/verify-dos-console-handoff.ps1`; its durable result is
-`O:\winnt\tests\t447-s4-console-handoff-r4.txt.handoff.txt`.  The exact
-candidate NTSRV hash was
-`98125183834813A980DAE4BDFD947A354910711BE2BCB5526AB83A5D2CEF5CD5`, matching
-both `assets/release` and `O:\winnt\system32` in the coherent thirteen-image
-publication.  This bounded delivery changes no guest image or `assets/winnt.zip`.
+Source review also removed a competing worker-registry immediate-root-close
+writer: the existing lifecycle deadline is the sole authority for ordinary
+workerless frontend retirement.  This correction adds no guest, guest-media,
+mirror, public ABI or protocol-layout diff.  The final r3 full build passes
+all 13 product images plus the changed observer and verifies 1,344 unchanged
+intermediates in the second pass; the BaseSrv lifecycle matrix passes.  A
+noninteractive automation desktop cannot expose `LibKvmWindow`, so its visible
+CAF witness ends at `find-kvm` after both prompts are ready and is expressly
+not counted as a product pass.  The exact final identities, publication proof,
+and manual owner-acceptance route are in
+`docs/etc/evidence/m0-t447-s4-p4-ntcon-caf-close.md`.
 
 ### S4 lifecycle reopening: reservation delivery and close semantics
 

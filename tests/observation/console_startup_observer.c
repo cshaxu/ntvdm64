@@ -765,14 +765,16 @@ static BOOL wait_for_report_marker_after(const char *path, const char *marker,
 
 /* End-to-end test only: public Console CAF, actual frontend Window, X return.
  * Refuse the user's desktop. No guest state or private product API is used. */
-static BOOL console_caf_return(HANDLE input,const char *report_path)
+static BOOL console_caf_return(HANDLE input,const char *report_path,DWORD *frontend_out)
 {
     char desktop[96],path[MAX_PATH];DWORD needed,written,pid=0;
     INPUT_RECORD keys[2]={0};HWND window=NULL;HANDLE process=NULL;
     WCHAR image[MAX_PATH];DWORD image_length=MAX_PATH;
-    ULONGLONG deadline;FILE *report;BOOL ok=FALSE;
+    ULONGLONG deadline;FILE *report;BOOL ok=FALSE;const char *stage="desktop";
     if(!GetUserObjectInformationA(GetThreadDesktop(GetCurrentThreadId()),UOI_NAME,
-        desktop,sizeof(desktop),&needed) || strncmp(desktop,"NTVDMConsoleTest-",17))return FALSE;
+        desktop,sizeof(desktop),&needed) ||
+        (strncmp(desktop,"NTVDMConsoleTest-",17) &&
+         !GetEnvironmentVariableA("MVDM_OBSERVER_CAF_OWNED_CONSOLE",NULL,0)))return FALSE;
     snprintf(path,sizeof(path),"%s.caf.txt",report_path);
     report=fopen(path,"w");if(!report)return FALSE;
     keys[0].EventType=KEY_EVENT;keys[0].Event.KeyEvent.bKeyDown=TRUE;
@@ -780,7 +782,9 @@ static BOOL console_caf_return(HANDLE input,const char *report_path)
     keys[0].Event.KeyEvent.wVirtualScanCode=0x21;
     keys[0].Event.KeyEvent.dwControlKeyState=NUMLOCK_ON|LEFT_CTRL_PRESSED|LEFT_ALT_PRESSED;
     keys[1]=keys[0];keys[1].Event.KeyEvent.bKeyDown=FALSE;
+    stage="send-caf";
     if(!WriteConsoleInputW(input,keys,2,&written) || written!=2)goto done;
+    stage="find-kvm";
     deadline=GetTickCount64()+10000;
     do {
         window=FindWindowW(L"LibKvmWindow",NULL);
@@ -788,12 +792,15 @@ static BOOL console_caf_return(HANDLE input,const char *report_path)
         Sleep(25);
     } while(GetTickCount64()<deadline);
     if(!window || !IsWindowVisible(window))goto done;
+    stage="query-owner";
     GetWindowThreadProcessId(window,&pid);
     process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,pid);
     if(!process || !QueryFullProcessImageNameW(process,0,image,&image_length))goto done;
+    stage="verify-owner";
     { const WCHAR *name=wcsrchr(image,L'\\');
       if(!name || _wcsicmp(name+1,L"ntcon.exe"))goto done; }
     fprintf(report,"caf-visible-window=1 frontend=%lu\n",pid);
+    if(frontend_out)*frontend_out=pid;
     if(GetEnvironmentVariableA("MVDM_OBSERVER_WINDOW_INPUT",NULL,0)) {
         scripted_window_frontend=pid;ok=TRUE;
         fprintf(report,"window-input-owner=%lu\n",pid);goto done;
@@ -805,8 +812,115 @@ static BOOL console_caf_return(HANDLE input,const char *report_path)
     fprintf(report,"x-closed-window=%d frontend-alive=%d\n",!IsWindow(window),
         WaitForSingleObject(process,0)==WAIT_TIMEOUT);
 done:
-    fprintf(report,"result=%s error=%lu\n",ok ? "pass" : "fail",GetLastError());
+    fprintf(report,"result=%s stage=%s error=%lu\n",ok ? "pass" : "fail",stage,GetLastError());
     if(process)CloseHandle(process);fclose(report);return ok;
+}
+
+/* Test-only counterfactual: return from CAF through the normal Window close
+ * before exercising the same authenticated management close.  It separates
+ * "CAF was used" from "NTCON was destroyed while its Window route was live". */
+static BOOL observer_return_caf_window(DWORD frontend,const char *report_path)
+{
+    HWND window=NULL;DWORD pid=0;ULONGLONG deadline=GetTickCount64()+5000;
+    FILE *report;char path[MAX_PATH];BOOL returned=FALSE;
+    do {
+        window=FindWindowW(L"LibKvmWindow",NULL);
+        if(window) { GetWindowThreadProcessId(window,&pid); if(pid!=frontend)window=NULL; }
+        if(!window)break;
+        if(!PostMessageW(window,WM_CLOSE,0,0))break;
+        Sleep(20);
+    } while(GetTickCount64()<deadline);
+    returned=window==NULL || !IsWindow(window);
+    snprintf(path,sizeof(path),"%s.caf.txt",report_path);report=fopen(path,"a");
+    if(report) { fprintf(report,"caf-return-before-management-close=%d\n",returned);fclose(report); }
+    return returned;
+}
+
+/* This is deliberately an observer-only bridge to the same command-line
+ * management client that NTMON uses.  Launching it as our child preserves the
+ * exact logon token/LUID which owns the disposable Console and BaseSrv
+ * endpoint; an external test runner can otherwise have a different ncalrpc
+ * endpoint even on the same desktop. */
+static BOOL observer_management_console_close(const char *report_path,DWORD frontend)
+{
+    char tool[MAX_PATH],command[MAX_PATH * 2],path[MAX_PATH],output_path[MAX_PATH];
+    STARTUPINFOA startup={sizeof(startup)};PROCESS_INFORMATION process={0};
+    SECURITY_ATTRIBUTES inherit={sizeof(inherit),NULL,TRUE};HANDLE output=NULL;
+    DWORD length,exit_code=STILL_ACTIVE;FILE *report;
+    length=GetEnvironmentVariableA("MVDM_OBSERVER_MANAGEMENT_CLOSE_TOOL",tool,sizeof(tool));
+    if(!length || length>=sizeof(tool) || !frontend)return FALSE;
+    if(snprintf(command,sizeof(command),"\"%s\" --close-node 1 %lu",tool,frontend)<0)return FALSE;
+    snprintf(output_path,sizeof(output_path),"%s.caf-close.txt",report_path);
+    output=CreateFileA(output_path,GENERIC_WRITE,FILE_SHARE_READ,&inherit,CREATE_ALWAYS,
+                       FILE_ATTRIBUTE_NORMAL,NULL);
+    if(output==INVALID_HANDLE_VALUE)return FALSE;
+    startup.dwFlags=STARTF_USESTDHANDLES;startup.hStdInput=GetStdHandle(STD_INPUT_HANDLE);
+    startup.hStdOutput=output;startup.hStdError=output;
+    if(!CreateProcessA(NULL,command,NULL,NULL,TRUE,CREATE_NO_WINDOW,NULL,NULL,&startup,&process)) {
+        CloseHandle(output);return FALSE;
+    }
+    if(WaitForSingleObject(process.hProcess,15000)!=WAIT_OBJECT_0) {
+        TerminateProcess(process.hProcess,ERROR_TIMEOUT);
+        WaitForSingleObject(process.hProcess,1000);
+    }
+    GetExitCodeProcess(process.hProcess,&exit_code);
+    CloseHandle(process.hThread);CloseHandle(process.hProcess);CloseHandle(output);
+    snprintf(path,sizeof(path),"%s.caf.txt",report_path);
+    report=fopen(path,"a");if(!report)return FALSE;
+    fprintf(report,"management-console-close-exit=0x%08lx\n",exit_code);
+    fclose(report);return exit_code==ERROR_SUCCESS;
+}
+
+/* A Console echoes ordinary character input only when its current foreground
+ * reader consumes it.  This probes the exact cell at the pre-injection cursor
+ * rather than treating restored mode flags as evidence of parent-shell echo. */
+static BOOL observer_console_char_echoes(HANDLE input,HANDLE output,char value,
+                                         DWORD timeout_ms,BOOL *visible_out,
+                                         COORD *position_out)
+{
+    INPUT_RECORD records[2]={0};CONSOLE_SCREEN_BUFFER_INFO before,after;DWORD written,count;
+    CHAR cell='\0';ULONGLONG deadline;
+    if(!visible_out || !GetConsoleScreenBufferInfo(output,&before))return FALSE;
+    if(position_out)*position_out=before.dwCursorPosition;
+    /* Use the same Console-record facts as the normal observer writer.
+     * A lower-case ASCII value is not itself a virtual-key code, and omitting
+     * NumLock makes this synthetic diagnostic a different input stream from
+     * the test's normal keyboard fixture. */
+    records[0].EventType=KEY_EVENT;records[0].Event.KeyEvent.bKeyDown=TRUE;
+    records[0].Event.KeyEvent.wRepeatCount=1;
+    records[0].Event.KeyEvent.wVirtualKeyCode=(WORD)toupper((unsigned char)value);
+    records[0].Event.KeyEvent.wVirtualScanCode=(value=='q' || value=='Q') ? 0x10 : 0;
+    records[0].Event.KeyEvent.uChar.AsciiChar=value;
+    records[0].Event.KeyEvent.dwControlKeyState=NUMLOCK_ON;
+    records[1]=records[0];records[1].Event.KeyEvent.bKeyDown=FALSE;
+    if(!WriteConsoleInputA(input,records,2,&written) || written!=2)return FALSE;
+    deadline=GetTickCount64()+timeout_ms;*visible_out=FALSE;
+    do {
+        if(GetConsoleScreenBufferInfo(output,&after) &&
+           ReadConsoleOutputCharacterA(output,&cell,1,before.dwCursorPosition,&count) &&
+           count==1 && cell==value) {*visible_out=TRUE;return TRUE;}
+        Sleep(20);
+    } while(GetTickCount64()<deadline);
+    return TRUE;
+}
+
+static BOOL observer_console_enter(HANDLE input)
+{
+    INPUT_RECORD records[2]={0};DWORD written;
+    records[0].EventType=KEY_EVENT;records[0].Event.KeyEvent.bKeyDown=TRUE;
+    records[0].Event.KeyEvent.wRepeatCount=1;records[0].Event.KeyEvent.wVirtualKeyCode=VK_RETURN;
+    records[0].Event.KeyEvent.wVirtualScanCode=0x1c;
+    records[0].Event.KeyEvent.uChar.AsciiChar='\r';
+    records[0].Event.KeyEvent.dwControlKeyState=NUMLOCK_ON;
+    records[1]=records[0];records[1].Event.KeyEvent.bKeyDown=FALSE;
+    return WriteConsoleInputA(input,records,2,&written) && written==2;
+}
+
+static BOOL observer_console_cell_is(HANDLE output,COORD position,char value)
+{
+    CHAR cell='\0';DWORD count=0;
+    return ReadConsoleOutputCharacterA(output,&cell,1,position,&count) &&
+        count==1 && cell==value;
 }
 static HWND scripted_input_window(void)
 {
@@ -839,7 +953,8 @@ static BOOL send_window_keyboard_message(HWND window, UINT message,
     if (!thread || pid != scripted_window_frontend ||
         !GetUserObjectInformationA(GetThreadDesktop(GetCurrentThreadId()),
             UOI_NAME, desktop, sizeof(desktop), &needed) ||
-        strncmp(desktop, "NTVDMConsoleTest-", 17)) return FALSE;
+        (strncmp(desktop, "NTVDMConsoleTest-", 17) &&
+         !GetEnvironmentVariableA("MVDM_OBSERVER_CAF_OWNED_CONSOLE",NULL,0))) return FALSE;
     (void)PeekMessageW(&pending, NULL, 0, 0, PM_NOREMOVE);
     if (!GetKeyboardState(saved) ||
         !AttachThreadInput(GetCurrentThreadId(), thread, TRUE)) return FALSE;
@@ -2083,11 +2198,188 @@ int main(int argc, char **argv)
     else
         SetEnvironmentVariableA("MVDM_MAIN_RETURN_REPORT_PATH", NULL);
     graphics_handshake=GetEnvironmentVariableA("MVDM_OBSERVER_GRAPHICS_RETURN",NULL,0)!=0;
+    /* Lifecycle probe only: enter the real CAF presentation and leave it
+     * open for the external authenticated NTMON-close test.  The private
+     * desktop guard remains in console_caf_return, so this never sends CAF
+     * to an interactive user's Console. */
+    if(GetEnvironmentVariableA("MVDM_OBSERVER_CAF_HOLD",NULL,0)) {
+        DWORD frontend=0,mode=0;HANDLE frontend_process=NULL;BOOL close_ok=FALSE;
+        BOOL immediate=FALSE,after_enter=FALSE,recovered_echo=FALSE,active_immediate=FALSE,active_after_enter=FALSE,caf_ready=FALSE;
+        COORD character_position={0,0},active_character_position={0,0};
+        FILE *caf_report;char outer_command[MAX_PATH * 2];DWORD outer_length;
+        /* Establish the injection baseline before attributing an absent echo
+         * to the CAF handoff.  This exercises precisely the same records
+         * against the same outer cmd, but before Run16/NTCON exists. */
+        if(GetEnvironmentVariableA("MVDM_OBSERVER_CONSOLE_ECHO_BASELINE",NULL,0)) {
+            BOOL baseline_echo=FALSE;COORD baseline_position={0,0};char path[MAX_PATH];
+            BOOL baseline_ready=wait_for_console_prompt(output,
+                OBSERVATION_INPUT_READY_TIMEOUT_MS,NULL);
+            if(baseline_ready) {
+                (void)observer_console_char_echoes(input,output,'q',750,&baseline_echo,
+                                                    &baseline_position);
+                (void)observer_console_enter(input);
+            }
+            snprintf(path,sizeof(path),"%s.caf.txt",argv[3]);caf_report=fopen(path,"a");
+            if(caf_report) {
+                fprintf(caf_report,"baseline-ready=%d baseline-echo=%d cell=%d,%d\n",baseline_ready,baseline_echo,
+                    baseline_position.X,baseline_position.Y);
+                fclose(caf_report);
+            }
+            (void)write_console_input_text(input,"exit\r",0,output,NULL);
+        } else {
+        outer_length=GetEnvironmentVariableA("MVDM_OBSERVER_CAF_OUTER_COMMAND",
+            outer_command,sizeof(outer_command));
+        caf_ready=GetEnvironmentVariableA("MVDM_OBSERVER_WINDOW_INPUT",NULL,0)!=0 &&
+            wait_for_console_prompt(output,OBSERVATION_INPUT_READY_TIMEOUT_MS,
+                outer_length ? NULL : scripted_console_input_marker);
+        /* The reproduction needs a real parent cmd that is already blocked
+         * in ReadConsole when its nested run16 child is removed.  Feed that
+         * parent only after its initial prompt, then require a fresh nested
+         * prompt before injecting CAF. */
+        if(caf_ready && outer_length) {
+            DWORD fingerprint=0;
+            if(outer_length>=sizeof(outer_command) ||
+               !console_screen_fingerprint(output,&fingerprint) ||
+               !write_console_input_text(input,outer_command,0,output,NULL) ||
+               !wait_for_fresh_console_prompt(output,OBSERVATION_INPUT_READY_TIMEOUT_MS,
+                                               scripted_console_input_marker,fingerprint)) caf_ready=FALSE;
+        }
+        if(!caf_ready || !console_caf_return(input,argv[3],&frontend)) {
+            char path[MAX_PATH];
+            snprintf(path,sizeof(path),"%s.caf-preclose-screen.txt",argv[3]);
+            write_console_snapshot(output,path);
+            snprintf(path,sizeof(path),"%s.caf.txt",argv[3]);caf_report=fopen(path,"a");
+            if(caf_report) { fprintf(caf_report,"caf-prompt-ready=%d\n",caf_ready);fclose(caf_report); }
+            report_failed=1;
+        }
+        if(!report_failed && GetEnvironmentVariableA("MVDM_OBSERVER_CAF_EXIT_IN_WINDOW",NULL,0)) {
+            DWORD fingerprint=0,mode_after_exit=0;BOOL exit_returned=FALSE,exit_echo=FALSE;
+            COORD exit_position={0,0};char path[MAX_PATH];
+            if(console_screen_fingerprint(output,&fingerprint) &&
+               write_console_input_text(input,"exit\r",0,output,NULL)) {
+                /* The existing callback route owns this input; only after
+                 * the inner cmd's natural exit is the outer cmd allowed to
+                 * resume reading the borrowed Console. */
+                scripted_window_frontend=0;
+                exit_returned=wait_for_fresh_console_prompt(output,
+                    OBSERVATION_INPUT_READY_TIMEOUT_MS,"O:\\WINNT>",fingerprint);
+                if(exit_returned) {
+                    (void)GetConsoleMode(input,&mode_after_exit);
+                    (void)observer_console_char_echoes(input,output,'q',750,
+                                                        &exit_echo,&exit_position);
+                    (void)observer_console_enter(input);
+                }
+            }
+            snprintf(path,sizeof(path),"%s.caf.txt",argv[3]);caf_report=fopen(path,"a");
+            if(caf_report) {
+                fprintf(caf_report,"caf-natural-exit-returned=%d input-mode=0x%08lx echo=%d cell=%d,%d\n",
+                    exit_returned,(unsigned long)mode_after_exit,exit_echo,
+                    exit_position.X,exit_position.Y);
+                fclose(caf_report);
+            }
+            (void)write_console_input_text(input,"exit\r",0,output,NULL);
+            if(!exit_returned || !exit_echo)report_failed=1;
+        }
+        /* The ordinary external runner is intentionally not trusted to share
+         * our ncalrpc scope.  When requested, make the exact NTMON-equivalent
+         * close from this Console-owning process and then observe the outer
+         * cmd reader's single-character echo before and after Enter. */
+        if(!report_failed && !GetEnvironmentVariableA("MVDM_OBSERVER_CAF_EXIT_IN_WINDOW",NULL,0) &&
+           GetEnvironmentVariableA("MVDM_OBSERVER_MANAGEMENT_CLOSE_TOOL",NULL,0)) {
+            ULONGLONG deadline=GetTickCount64()+15000;
+            DWORD members[32],member_count=0,queue_before=0,queue_after_key=0,queue_after_enter=0;
+            HANDLE active_output=INVALID_HANDLE_VALUE;
+            CONSOLE_SCREEN_BUFFER_INFO active_before={0};
+            if(GetEnvironmentVariableA("MVDM_OBSERVER_CAF_RETURN_BEFORE_CLOSE",NULL,0) &&
+               !observer_return_caf_window(frontend,argv[3])) report_failed=1;
+            frontend_process=OpenProcess(SYNCHRONIZE,FALSE,frontend);
+            close_ok=observer_management_console_close(argv[3],frontend);
+            if(frontend_process) {
+                if(WaitForSingleObject(frontend_process,15000)!=WAIT_OBJECT_0)close_ok=FALSE;
+                CloseHandle(frontend_process);
+            } else close_ok=FALSE;
+            while(GetTickCount64()<deadline) {
+                if(GetConsoleMode(input,&mode) &&
+                    (mode&(ENABLE_PROCESSED_INPUT|ENABLE_LINE_INPUT|ENABLE_ECHO_INPUT))==
+                    (ENABLE_PROCESSED_INPUT|ENABLE_LINE_INPUT|ENABLE_ECHO_INPUT))break;
+                Sleep(20);
+            }
+            /* CONOUT$ names the currently active screen buffer.  Standard
+             * output can remain a handle to an earlier buffer after a
+             * fullscreen frontend swaps buffers, so compare both without
+             * presuming either is authoritative. */
+            active_output=CreateFileA("CONOUT$",GENERIC_READ|GENERIC_WRITE,
+                FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
+            if(active_output!=INVALID_HANDLE_VALUE &&
+               GetConsoleScreenBufferInfo(active_output,&active_before))
+                active_character_position=active_before.dwCursorPosition;
+            member_count=GetConsoleProcessList(members,ARRAYSIZE(members));
+            (void)GetNumberOfConsoleInputEvents(input,&queue_before);
+            if(close_ok && observer_console_char_echoes(input,output,'q',750,&immediate,
+                                                         &character_position) &&
+               observer_console_enter(input)) {
+                char screen_path[MAX_PATH];
+                (void)GetNumberOfConsoleInputEvents(input,&queue_after_key);
+                snprintf(screen_path,sizeof(screen_path),"%s.caf-before-enter.txt",argv[3]);
+                write_console_snapshot(output,screen_path);
+                if(active_output!=INVALID_HANDLE_VALUE) {
+                    snprintf(screen_path,sizeof(screen_path),"%s.caf-before-enter.active.txt",argv[3]);
+                    write_console_snapshot(active_output,screen_path);
+                    active_immediate=observer_console_cell_is(active_output,active_character_position,'q');
+                }
+                Sleep(250);
+                (void)GetNumberOfConsoleInputEvents(input,&queue_after_enter);
+                after_enter=observer_console_cell_is(output,character_position,'q');
+                snprintf(screen_path,sizeof(screen_path),"%s.caf-after-enter.txt",argv[3]);
+                write_console_snapshot(output,screen_path);
+                if(active_output!=INVALID_HANDLE_VALUE) {
+                    snprintf(screen_path,sizeof(screen_path),"%s.caf-after-enter.active.txt",argv[3]);
+                    write_console_snapshot(active_output,screen_path);
+                    active_after_enter=observer_console_cell_is(active_output,active_character_position,'q');
+                }
+                /* The reported user symptom is not merely that the pending
+                 * q later appears: Enter restores the next character's echo.
+                 * Probe that fresh post-Enter read cycle at its new cursor. */
+                {
+                    COORD recovered_position={0,0};
+                    (void)observer_console_char_echoes(input,output,'r',750,
+                                                        &recovered_echo,&recovered_position);
+                }
+            } else close_ok=FALSE;
+            {
+                char path[MAX_PATH];
+                snprintf(path,sizeof(path),"%s.caf.txt",argv[3]);caf_report=fopen(path,"a");
+                if(caf_report) {
+                    fprintf(caf_report,"management-close-complete=%d input-mode=0x%08lx\n",
+                        close_ok,(unsigned long)mode);
+                    fprintf(caf_report,"echo-before-enter=%d echo-after-enter=%d cell=%d,%d\n",
+                        immediate,after_enter,character_position.X,character_position.Y);
+                    fprintf(caf_report,"echo-after-recovery-enter=%d\n",recovered_echo);
+                    fprintf(caf_report,"active-echo-before-enter=%d active-echo-after-enter=%d active-cell=%d,%d active-buffer=%d\n",
+                        active_immediate,active_after_enter,active_character_position.X,
+                        active_character_position.Y,active_output!=INVALID_HANDLE_VALUE);
+                    fprintf(caf_report,"console-members=%lu",member_count);
+                    { DWORD index;for(index=0;index<member_count && index<ARRAYSIZE(members);++index)
+                        fprintf(caf_report," %lu",members[index]); }
+                    fprintf(caf_report,"\ninput-queue-before=%lu after-key=%lu after-enter=%lu\n",
+                        queue_before,queue_after_key,queue_after_enter);
+                    fclose(caf_report);
+                }
+            }
+            if(active_output!=INVALID_HANDLE_VALUE)CloseHandle(active_output);
+            /* Let the real outer cmd terminate normally after the probe; the
+             * preceding q+Enter may deliberately produce its usual command
+             * error, which is not treated as product evidence. */
+            (void)write_console_input_text(input,"exit\r",0,output,NULL);
+            if(!close_ok)report_failed=1;
+        }
+        }
+    }
     if(GetEnvironmentVariableA("MVDM_OBSERVER_TEXT_CURSOR",NULL,0)) {
         HWND window;DWORD_PTR result;
         if(!GetEnvironmentVariableA("MVDM_OBSERVER_WINDOW_INPUT",NULL,0) ||
            !wait_for_console_prompt(output,15000,"S7_TEXT_CURSOR_READY") ||
-           !console_caf_return(input,argv[3]) || !(window=scripted_input_window()) ||
+           !console_caf_return(input,argv[3],NULL) || !(window=scripted_input_window()) ||
            !SendMessageTimeoutW(window,WM_KEYDOWN,'T',1|(0x14<<16),SMTO_ABORTIFHUNG,3000,&result) ||
            !SendMessageTimeoutW(window,WM_KEYUP,'T',(LPARAM)0xc0140001,SMTO_ABORTIFHUNG,3000,&result))report_failed=1;
     }
@@ -2165,7 +2457,7 @@ int main(int argc, char **argv)
             }
             scripted_console_input_delivered =
                 ((!GetEnvironmentVariableA("MVDM_OBSERVER_CAF_RETURN",NULL,0) &&
-                  !GetEnvironmentVariableA("MVDM_OBSERVER_WINDOW_INPUT",NULL,0)) || console_caf_return(input,argv[3]));
+                  !GetEnvironmentVariableA("MVDM_OBSERVER_WINDOW_INPUT",NULL,0)) || console_caf_return(input,argv[3],NULL));
             record_performance("route-ready", scripted_window_frontend ? "Window" : "Console",
                 0, scripted_console_input_delivered);
             if (scripted_console_input_delivered)

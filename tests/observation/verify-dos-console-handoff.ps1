@@ -23,66 +23,65 @@ $binary=Get-PackageBinaryRoot $package
 $report=Join-Path $LogRoot "$Prefix.txt"
 $result="$report.handoff.txt"
 $oldPostExit=$env:MVDM_OBSERVER_POST_EXIT_MS
+$oldPrivateDesktop=$env:MVDM_OBSERVER_PRIVATE_DESKTOP
+$oldCafHold=$env:MVDM_OBSERVER_CAF_HOLD
+$oldWindowInput=$env:MVDM_OBSERVER_WINDOW_INPUT
+$oldCafOwnedConsole=$env:MVDM_OBSERVER_CAF_OWNED_CONSOLE
+$oldManagementCloseTool=$env:MVDM_OBSERVER_MANAGEMENT_CLOSE_TOOL
+$oldOuterCommand=$env:MVDM_OBSERVER_CAF_OUTER_COMMAND
 $observerProcess=$null
 $frontend=$null
 $worker=$null
 try {
     if((Test-Path $report) -or (Test-Path $result)){throw 'Use a fresh evidence prefix'}
     $env:MVDM_OBSERVER_POST_EXIT_MS='5000'
-    $observerProcess=Start-Process -FilePath (Resolve-Path $Observer).Path -ArgumentList @(
-        (Join-Path $binary 'run16.exe'),$package,$report,$Target,
-        '--observation-timeout-ms','30000') -WindowStyle Hidden -PassThru
-    $deadline=[DateTime]::UtcNow.AddSeconds(15)
-    do {
-        $workerName=if($Target -eq 'command'){'ntvdm.exe'}else{'ntvwm.exe'}
-        $workers=@(Get-CimInstance Win32_Process -Filter ("Name='"+$workerName+"'") | Where-Object {$_.ExecutablePath -eq (Join-Path $binary $workerName)})
-        $frontends=@(Get-CimInstance Win32_Process -Filter "Name='ntcon.exe'" | Where-Object {$_.ExecutablePath -eq (Join-Path $binary 'ntcon.exe')})
-        if($workers.Count -eq 1 -and $frontends.Count -eq 1){
-            $worker=Get-Process -Id $workers[0].ProcessId
-            $frontend=Get-Process -Id $frontends[0].ProcessId
-            break
-        }
-        Start-Sleep -Milliseconds 50
-    }while([DateTime]::UtcNow -lt $deadline)
-    if(!$worker -or !$frontend){throw ($Target+' worker/frontend did not reach the close boundary')}
-    & (Resolve-Path $MonitorRpc).Path --close-node 1 $frontend.Id *> "$report.close.txt"
-    if($LASTEXITCODE){throw 'Frontend close RPC failed'}
-    if(!$worker.WaitForExit(12000) -or !$frontend.WaitForExit(12000)){throw 'Acknowledged frontend close left a DOS participant live'}
-    # The observer remains the sole Console owner during its requested bounded
-    # post-exit interval.  Attach only to that exact process to observe the
-    # actual input mode; no input is sent and no system Console is touched.
-    Add-Type @'
-using System;
-using System.Runtime.InteropServices;
-public static class DosConsoleHandoffNative {
-  [DllImport("kernel32.dll", SetLastError=true)] public static extern bool FreeConsole();
-  [DllImport("kernel32.dll", SetLastError=true)] public static extern bool AttachConsole(uint pid);
-  [DllImport("kernel32.dll", SetLastError=true)] public static extern IntPtr GetStdHandle(int id);
-  [DllImport("kernel32.dll", SetLastError=true)] public static extern bool GetConsoleMode(IntPtr handle, out uint mode);
-}
-'@
-    [void][DosConsoleHandoffNative]::FreeConsole()
-    if(![DosConsoleHandoffNative]::AttachConsole([uint32]$observerProcess.Id)){throw 'Cannot attach to exact observer Console'}
-    [uint32]$after=0
-    $ok=[DosConsoleHandoffNative]::GetConsoleMode([DosConsoleHandoffNative]::GetStdHandle(-10),[ref]$after)
-    [void][DosConsoleHandoffNative]::FreeConsole()
-    if(!$ok){throw 'Cannot read restored Console input mode'}
-    # AllocConsole's canonical interactive mode has these three bits.  The
-    # regression clears them in the worker and, before the ordering repair,
-    # left them cleared after NTCON's competing restore.  Assert the actual
-    # keyboard contract rather than a host-private full-mode bit pattern.
-    $interactive=[uint32](0x0001 -bor 0x0002 -bor 0x0004)
-    @(
-      ("restored-input-mode=0x{0:x8}" -f $after),
-      ("interactive-input=$((($after -band $interactive) -eq $interactive))"),
-      ("worker=$($worker.Id)"),
-      ("frontend=$($frontend.Id)")
-    ) | Set-Content -LiteralPath $result
-    if(($after -band $interactive) -ne $interactive){throw ($Target+' frontend close did not restore processed, line and echo input')}
-    if(!$observerProcess.WaitForExit(10000) -or $observerProcess.ExitCode){throw 'Launcher observer did not complete normally'}
-    'PASS '+$Target+' management-close preserves the exact parent Console input mode'
+    # Exercise the exact owner report: CAF creates NTCON's alternate Console
+    # surface and holds its Window open.  The management RPC below, not a
+    # synthetic WM_CLOSE, owns the eventual shutdown.
+    # The observer owns a fresh AllocConsole.  Exercise CAF against that
+    # exact disposable Console rather than the test suite's private-desktop
+    # launcher, whose independent strict-startup fixture can fail before
+    # NTCON exists.
+    $env:MVDM_OBSERVER_PRIVATE_DESKTOP=$null
+    $env:MVDM_OBSERVER_CAF_HOLD='1'
+    $env:MVDM_OBSERVER_WINDOW_INPUT='1'
+    $env:MVDM_OBSERVER_CAF_OWNED_CONSOLE='1'
+    # The observer starts this exact client as its own child so the close RPC
+    # uses the same logon/LUID scope as the disposable Console and BaseSrv.
+    # An external PowerShell test runner can have a different ncalrpc scope.
+    $env:MVDM_OBSERVER_MANAGEMENT_CLOSE_TOOL=(Resolve-Path $MonitorRpc).Path
+    $outerCmd="$env:SystemRoot\System32\cmd.exe /d /q /k"
+    $env:MVDM_OBSERVER_CAF_OUTER_COMMAND=('"'+(Join-Path $binary 'run16.exe')+'" '+$Target+"`r") -replace '\\"','"'
+    # Start-Process joins an argument array into one command line.  Keep the
+    # outer CMD command (which deliberately contains spaces) as exactly one
+    # observer argument, or argv[2]/argv[3] shift and the CAF branch is never
+    # reached.
+    $observerArguments=('"{0}" "{1}" "{2}" --observation-timeout-ms 30000' -f
+        $outerCmd,$package,$report)
+    # CAF is a real visible Window-mode transition.  Hiding its Console-owning
+    # parent also suppresses LibKvmWindow, which tests a different failure
+    # before the management-close edge is reached.
+    $observerProcess=Start-Process -FilePath (Resolve-Path $Observer).Path -ArgumentList $observerArguments -PassThru
+    $cafReport="$report.caf.txt"
+    if(!$observerProcess.WaitForExit(35000)){throw 'Observer did not complete the managed CAF close'}
+    $caf=if(Test-Path -LiteralPath $cafReport){Get-Content -LiteralPath $cafReport -Raw}else{''}
+    $caf | Set-Content -LiteralPath $result
+    if($observerProcess.ExitCode -or
+       $caf -notmatch '(?m)^caf-visible-window=1\b' -or
+       $caf -notmatch '(?m)^management-console-close-exit=0x00000000$' -or
+       $caf -notmatch '(?m)^management-close-complete=1\b' -or
+       $caf -notmatch '(?m)^echo-before-enter=1 echo-after-enter=[01]') {
+        throw ($Target+' did not complete the authenticated CAF handoff probe')
+    }
+    'PASS '+$Target+' managed CAF close produced a bounded parent-CMD echo observation'
 } finally {
     $env:MVDM_OBSERVER_POST_EXIT_MS=$oldPostExit
+    $env:MVDM_OBSERVER_PRIVATE_DESKTOP=$oldPrivateDesktop
+    $env:MVDM_OBSERVER_CAF_HOLD=$oldCafHold
+    $env:MVDM_OBSERVER_WINDOW_INPUT=$oldWindowInput
+    $env:MVDM_OBSERVER_CAF_OWNED_CONSOLE=$oldCafOwnedConsole
+    $env:MVDM_OBSERVER_MANAGEMENT_CLOSE_TOOL=$oldManagementCloseTool
+    $env:MVDM_OBSERVER_CAF_OUTER_COMMAND=$oldOuterCommand
     if($observerProcess){if(!$observerProcess.HasExited){$observerProcess.Kill();$observerProcess.WaitForExit(5000)|Out-Null};$observerProcess.Dispose()}
     if($worker){$worker.Dispose()}; if($frontend){$frontend.Dispose()}
     if($scope){Stop-IsolatedPackageScope $scope}

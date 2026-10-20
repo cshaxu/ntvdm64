@@ -14,6 +14,12 @@ $cmake = (Get-Command cmake.exe -ErrorAction Stop).Source
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 $steps = [Collections.Generic.List[object]]::new()
 $started = [DateTime]::UtcNow
+function Get-Sha256([string]$Path) {
+    $stream=[IO.File]::OpenRead($Path)
+    $hash=[Security.Cryptography.SHA256]::Create()
+    try {return ([BitConverter]::ToString($hash.ComputeHash($stream))).Replace('-','')}
+    finally {$hash.Dispose();$stream.Dispose()}
+}
 function Run-Step([string]$Name, [string]$Architecture, [string]$Command) {
     $batch = Join-Path $output "$Name.cmd"
     [IO.File]::WriteAllText($batch, "@echo off`r`ncall `"$vs`" -arch=$Architecture -host_arch=x64 >nul`r`nif errorlevel 1 exit /b %errorlevel%`r`n$Command`r`nexit /b %errorlevel%`r`n")
@@ -25,7 +31,10 @@ function Run-Step([string]$Name, [string]$Architecture, [string]$Command) {
     $steps.Add($step)
     $steps | ConvertTo-Json -Depth 5 | Set-Content (Join-Path $output 'steps.json')
     $lastProgress = [DateTime]::UtcNow; $lastSize = -1L
-    while (!$process.WaitForExit(1000)) {
+    while ($true) {
+        $process.Refresh()
+        if($process.HasExited){break}
+        Start-Sleep -Milliseconds 1000
         $size = (Get-Item $stdout).Length + (Get-Item $stderr).Length
         if ($size -ne $lastSize) {$lastSize=$size; $lastProgress=[DateTime]::UtcNow}
         if (([DateTime]::UtcNow-$started).TotalMinutes -gt 40 -or
@@ -46,7 +55,7 @@ function Build-Components([string]$Pass) {
     Run-Step "$Pass-x86" x86 "`"$cmake`" --build --preset msvc-x86-release-ccache --target W16Style wow32 --parallel 12"
     $runner = Join-Path $repo 'build/.ninja/msvc-x86-release/worker/run-ninja-parallel.cmd'
     Run-Step "$Pass-x86-hook-redir" x86 "call `"$runner`" nthook32.dll VDMREDIR.dll"
-    Run-Step "$Pass-x64" x64 "`"$cmake`" --build --preset msvc-x64-release-ccache --target W16Style native-worker native-frontend native-monitor native-launcher native-service hook64 --parallel 2"
+    Run-Step "$Pass-x64" x64 "`"$cmake`" --build --preset msvc-x64-release-ccache --target W16Style native-worker native-frontend native-monitor native-launcher native-service hook64 wow_message_observer --parallel 2"
 }
 function Intermediate-Snapshot {
     $snapshot = @{}
@@ -91,7 +100,7 @@ try {
         $bytes = [IO.File]::ReadAllBytes($image[1]); $pe=[BitConverter]::ToInt32($bytes,0x3c)
         if ([BitConverter]::ToUInt32($bytes,$pe) -ne 0x4550 -or [BitConverter]::ToUInt16($bytes,$pe+4) -ne $image[2]) {throw "Wrong PE architecture: $($image[0])"}
         $file=Get-Item $image[1]
-        $result.images += [pscustomobject]@{name=$image[0]; path=$file.FullName; machine=$image[2]; sha256=(Get-FileHash $file.FullName).Hash; bytes=$file.Length; timestamp=$file.LastWriteTimeUtc.Ticks}
+        $result.images += [pscustomobject]@{name=$image[0]; path=$file.FullName; machine=$image[2]; sha256=(Get-Sha256 $file.FullName); bytes=$file.Length; timestamp=$file.LastWriteTimeUtc.Ticks}
     }
     $before = Intermediate-Snapshot
     Build-Components 'second'
@@ -99,7 +108,7 @@ try {
     if (!$before.Count -or $before.Count -ne $after.Count) {throw 'Intermediate inventory changed on second build'}
     foreach ($path in $before.Keys) {if ($before[$path] -ne $after[$path]) {throw "Intermediate rebuilt: $path"}}
     foreach ($image in $result.images) {
-        if ((Get-FileHash $image.path).Hash -ne $image.sha256 -or (Get-Item $image.path).LastWriteTimeUtc.Ticks -ne $image.timestamp) {throw "Output rebuilt: $($image.name)"}
+        if ((Get-Sha256 $image.path) -ne $image.sha256 -or (Get-Item $image.path).LastWriteTimeUtc.Ticks -ne $image.timestamp) {throw "Output rebuilt: $($image.name)"}
     }
     foreach ($name in @('second-x86','second-x86-hook-redir','second-x64')) {
         $log=Get-Content (Join-Path $output "$name.stdout.log") -Raw
