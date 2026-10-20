@@ -976,6 +976,13 @@ promised host interface. Do not infer any further semantic concession.
 | M5 failure and lifecycle | Existing window/task/runtime/borrow owners plus original cleanup; native USER owns actual target death | Destroy/reuse receiver or nested window, failed send/post/wait and terminal worker adaptation failures; no stale target/task, replay, fabricated success or leaked conversion buffers. New requested task termination remains S5, not a reason to omit normal failure cleanup. |
 | M6 integrated acceptance | Independent two-task Win16 witnesses and architecture-correct native test peers, production WOW/CCPU providers and canonical immutable original media | Actual Win16/Win16 and both native directions, implicit native send inside another API, nested/reply/wait/failure and normal retirement together. Original-body/native doubles are supplemental, not substitutes. Retain native20/original30, actual S3 groups, app/DOS, normal-desktop floors and coherent13 publication. |
 
+M3's remaining exceptional-return check is deliberately a source-shaped
+validation group, not permission to make every idle pair exception-safe by
+construction.  `BlockWOWIdle` is one original bit with opposite callback and
+native-service interval meanings.  The exact original exception disposition
+must be exercised through `W32Dispatch/W32Exception` before a mirror change is
+selected; see the [source disposition](../evidence/m0-t447-s4-message-source-audit.md#m3-exceptional-blockwowidle-path-source-disposition).
+
 Before selecting a repair, produce one finite remediation table from these
 six groups: exact selected original entry/provider, available/missing input,
 single authority for each state, retained/replaced/removed implementation,

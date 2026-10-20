@@ -8523,3 +8523,48 @@ with no unregistered mirror change. This proves registration completeness,
 not that every divergence is removable or that M3/S4 is complete. The next
 M3 work remains exceptional/return-path proof for the retained original
 `BlockWOWIdle` pairs, not a speculative replacement of this boundary.
+
+### M3 exceptional `BlockWOWIdle` path: source disposition
+
+The remaining M3 question is narrower than “add a `finally` around every
+idle transition.”  There are two different original intervals, with opposite
+meanings: `wmdisp32.c::W32Win16WndProcEx` and
+`wudlg.c::W32DialogFunc` clear `VDM_WOWBLOCKED` immediately before
+`CallBack16` and set it again only after a normal callback return; the reached
+`wumsg.c`, `wkman.c` and `wkgthunk.c` native-service intervals set the bit
+before calling native USER/task waits and clear it on their normal return.
+`nt_eoi.c::BlockWOWIdle` is a one-bit SoftPC interrupt condition, not a nest
+counter, so treating either direction as a generic acquire/release pair would
+change the original scheduler contract.
+
+The source trace also rules out a local “repair” at the callback sites.
+`wcall16.c::wow_original_CallBack16` restores its callback frame in its own
+`__finally` but deliberately propagates an abnormal termination.  The outer
+`wow32.c::W32Dispatch` filter enters original `W32Exception`; Ignore changes
+the current API result, while Close changes the current guest frame to
+`RET_FORCETASKEXIT`.  Neither branch is a normal return from
+`W32Win16WndProcEx`/`W32DialogFunc`.  A new local `finally` that unconditionally
+sets `BlockWOWIdle(TRUE)` would therefore mark the worker blocked while the
+original exception disposition is resuming or terminating the selected guest
+task.  It is not justified by the existing callback-frame restoration and is
+rejected.
+
+Conversely, the modern native-call adapters already own entry/return scopes
+for the rehosted native services.  Their failed restoration path is the
+existing non-continuable worker boundary, not a return to arbitrary original
+code.  An SEH escape which reaches `W32Dispatch` needs to be distinguished
+from that terminal path before changing any of the original `TRUE -> native
+call -> FALSE` sites.  The existing `wow_original_wndproc_fixture` proves only
+three *normal* callback pairs; it neither drives the real original exception
+filter nor proves the process-wide idle bit after `RET_FORCETASKEXIT`.
+
+Accordingly no idle-state source change is selected yet.  The finite next
+group is one original-body exception witness that drives a callback fault
+through `W32Dispatch/W32Exception`, checks the actual disposition (Ignore and
+Close separately), and observes the next selected task/hardware wake before
+and after retirement.  It must use the real `BlockWOWIdle` provider or an
+exact source-shaped fixture; a direct C exception from the existing callback
+fixture is insufficient because it bypasses the original filter and guest
+return frame.  Only a demonstrated stale/incorrect state on that path can
+justify a minimal registered mirror correction.  This preserves the source
+ownership decision without claiming M3 or S4 closure.
