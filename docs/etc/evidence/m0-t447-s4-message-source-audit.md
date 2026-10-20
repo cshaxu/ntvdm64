@@ -8475,3 +8475,24 @@ add a second toggle: `W32Win16WndProcEx` already pairs FALSE, `CallBack16`,
 TRUE, while `CallBack16` owns its frame unwind. This inventory proves the
 ownership boundary and rejects a speculative repair; it does not claim M3 or
 S4 completion.
+
+### Classic DDE transport evidence correction
+
+The current S4 evidence already contains a real classic-DDE transport witness;
+it is not merely the `verify-wow-dde-alias.ps1` source-body fixture. In
+`verify-win16-message-probe.ps1 -ClassicDde`, the independently assembled
+Win16 sender receives a native `WM_DDE_EXECUTE` HGLOBAL through the production
+WOW32 converter, reads its original guest alias, posts the original-format
+`WM_DDE_ACK`, attempts its required early guest release, and later verifies
+that the native peer's free retired the alias. The native peer independently
+asserts ACK receipt, native HGLOBAL release and post-retirement failure. The
+test rejects a missing stage on either side; it is therefore real
+native-to-Win16 Execute/ACK/deferred-free evidence with the immutable guest
+unchanged.
+
+Its boundary is deliberately narrow and must remain explicit: it runs two
+Win16 tasks in the same WOW worker and proves only classic
+`WM_DDE_EXECUTE`/`WM_DDE_ACK`. It does not prove DDEML (which the package does
+not ship), INITIATE atoms, DATA/POKE/ADVISE, allocation-failure conversion, an
+external native process or cross-worker routing. Those are neither silently
+accepted nor retroactively reclassified as covered by the exact-body fixture.
