@@ -596,7 +596,7 @@ static int ntvwm_execution_rpc(void)
     /* This standalone fixture is its own frontend root. A direct launcher
      * may no longer publish the outer Console identity. */
     REQUIRE(!OpenNtBaseClientReportCurrentConsoleMembers());
-    REQUIRE(!OpenNtBaseClientStartNativeWorker(&worker) && worker);
+    REQUIRE(!OpenNtBaseClientStartNativeWorker(OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&worker) && worker);
     REQUIRE(GetCurrentDirectoryW(MAX_PATH,directory));
     REQUIRE(GetSystemDirectoryW(native,MAX_PATH));
     REQUIRE(!wcscat_s(native,MAX_PATH,L"\\cmd.exe"));

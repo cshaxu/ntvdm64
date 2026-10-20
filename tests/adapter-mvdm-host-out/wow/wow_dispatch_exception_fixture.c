@@ -5,6 +5,7 @@
 #include "wow_user_thunk_scope.h"
 #include "wow_user_borrow_scope.h"
 #include "wow_user_native_call.h"
+#include "wow_message_lifetime.h"
 #include <stdio.h>
 
 static OPENNT_SUPPORT_TEB teb;
@@ -28,6 +29,33 @@ static BOOL box_throw,box_reject,box_return_reject;
 static DWORD box_entry_error;
 static const DWORD caller_stack=0x17871000, callback_stack=0x17870fda;
 W32 aw32WOW[1]; /* Unused numeric-thunk branch, required by original TU. */
+M32 aw32Msg[1024]; /* Exact original WndProc body only uses the selected slot. */
+BOOL gfIgnoreInputAssertGiven;
+__declspec(noreturn) void __cdecl fixture_unreachable_dependency(void);
+
+/* The selected WndProc function is extracted byte-for-byte at build time from
+ * the current mirror.  The fixture supplies only its inactive conversion
+ * dependencies: this phase uses WM_USER+7, which the original body sends
+ * straight to CallBack16.  W32Dispatch/W32Exception themselves are compiled
+ * from their complete selected TU below, so this is not a retyped filter. */
+static unsigned idle_blocks,idle_unblocks,stack_enters,stack_leaves,unwinds;
+static WW callback_words;
+void WINAPI wow_message_stack_enter(wow_message_stack *scope)
+{
+    ZeroMemory(scope,sizeof(*scope));scope->task16=CURRENTPTD()->htask16;++stack_enters;
+}
+void WINAPI wow_message_stack_leave(wow_message_stack *scope,BOOL abnormal)
+{ (void)scope;(void)abnormal;++stack_leaves; }
+void WINAPI wow_message_unwind32(LPWM32MSGPARAMEX message)
+{ (void)message;++unwinds; }
+void WINAPI wow_message_unwind16(MSGPARAMEX *message)
+{ (void)message;fixture_unreachable_dependency(); }
+PWC FindPWC(HANDLE window) { (void)window;fixture_unreachable_dependency();return NULL; }
+WNDPROC GetStdClassWndProc(DWORD kind)
+{ (void)kind;fixture_unreachable_dependency();return NULL; }
+BOOL FASTCALL WM32NoThunking(LPWM32MSGPARAMEX message)
+{ (void)message;fixture_unreachable_dependency();return FALSE; }
+#include "original-wndproc.inc"
 
 /* Link-only resolution for the TU's unrelated initialization graph. The
  * verifier rejects a map retaining those owners; this is never a provider. */
@@ -74,8 +102,19 @@ void __cdecl setSS(USHORT value) { cpu_ss=value; }
 void __cdecl setSP(USHORT value) { cpu_sp=value; ++sets; }
 BOOL Sim32FlushVDMPointer(ULONG address,USHORT count,PBYTE bytes,BOOL mode)
 { (void)address;(void)count;(void)bytes;(void)mode; ++errors; return FALSE; }
+VOID __cdecl BlockWOWIdle(BOOL blocking)
+{
+    if(blocking)++idle_blocks;else ++idle_unblocks;
+}
 BOOL CallBack16(WORD ret,PPARM16 args,VPPROC proc,PULONG result)
-{ (void)ret;(void)args;(void)proc;(void)result; ++errors; return FALSE; }
+{
+    if(phase==7 || phase==8){
+        if(ret!=RET_WNDPROC || proc!=(VPPROC)0x12340056 ||
+                args->WndProc.wMsg!=WM_USER+7 || idle_unblocks!=idle_blocks+1)++errors;
+        RaiseException(0xe4470004,0,0,NULL);
+    }
+    (void)ret;(void)args;(void)proc;(void)result; ++errors; return FALSE;
+}
 ULONG __cdecl WOWSysErrorBox(LPSTR title,LPSTR text,USHORT first,
     USHORT second,USHORT third)
 {
@@ -85,7 +124,7 @@ ULONG __cdecl WOWSysErrorBox(LPSTR title,LPSTR text,USHORT first,
     if(first!=SEB_CLOSE || third!=(SEB_IGNORE|SEB_DEFBUTTON)) ++errors;
     SetLastError(0x2021);
     if(box_throw)RaiseException(0xe4470007,0,0,NULL);
-    return phase==6 ? 1 : 3; /* Original Close and Ignore, not a fake filter. */
+    return (phase==6 || phase==8) ? 1 : 3; /* Original Close and Ignore, not a fake filter. */
 }
 static BOOL hard_error_scope_cases(void)
 {
@@ -125,6 +164,14 @@ ULONG WINAPI wow_user_invoke_thunk(LPFNW32 thunk,PVDMFRAME supplied)
         RaiseException((DWORD)STATUS_INVALID_HANDLE,0,0,NULL);
         ++resumed;
         if(sets || VDMSTACK()!=callback_stack) ++errors;
+    }
+    if(phase==7 || phase==8){
+        callback_words.iClass=WOWCLASS_WIN16;
+        callback_words.flState=WWSTATE_ICLASSISSET;
+        callback_words.hInstance=(HANDLE)0x5678;
+        (void)W32Win16WndProcEx((HWND)1,WM_USER+7,0x4567,-17,
+            (VPWNDPROC)0x92340056,&callback_words);
+        ++errors; /* W32Dispatch must receive CallBack16's exception. */
     }
     return 0x1234abcd;
 }
@@ -180,7 +227,7 @@ int __cdecl main(int argc,char **argv)
     ldt[(caller_stack>>18)|1]=0x8000;
     ldt[((DWORD)0x12370000>>18)|1]=0x8000;
     for(index=0;index<CRITICAL_STRING_COUNT;++index) aszCriticalStrings[index]="fixture";
-    for(phase=debuggee?4:only;phase!=(debuggee?5u:only?only+1:7u);++phase) {
+    for(phase=debuggee?4:only;phase!=(debuggee?5u:only?only+1:9u);++phase) {
         DWORD caught=0;
         if(!debuggee && phase==4)continue;
         ZeroMemory(&task,sizeof(task));ZeroMemory(frame,sizeof(*frame));
@@ -190,6 +237,7 @@ int __cdecl main(int argc,char **argv)
         frame->wCallID=(DWORD)wow_user_invoke_thunk;frame->wTDB=task.htask16;
         cpu_ss=HIWORD(caller_stack);cpu_sp=LOWORD(caller_stack);
         sets=calls=dialogs=errors=resumed=0;
+        idle_blocks=idle_unblocks=stack_enters=stack_leaves=unwinds=0;
         box_enters=box_leaves=box_live=0;
         __try { W32Dispatch(); }
         __except(GetExceptionCode()==0xe4470004 && phase==4 ?
@@ -197,7 +245,7 @@ int __cdecl main(int argc,char **argv)
         if(errors || (((DWORD)cpu_ss<<16)|cpu_sp)!=(phase==4?callback_stack:caller_stack) || task.vpStack!=caller_stack ||
            caught!=(phase==4?0xe4470004u:0u) ||
            sets!=((phase==1 || phase==4)?0u:1u) || calls!=(phase==1?0u:1u) ||
-           dialogs!=((phase==1 || phase==2 || phase==5 || phase==6)?1u:0u) || resumed!=(phase==3?1u:0u) ||
+           dialogs!=((phase==1 || phase==2 || phase==5 || phase==6 || phase==7 || phase==8)?1u:0u) || resumed!=(phase==3?1u:0u) ||
            box_enters!=dialogs || box_leaves!=dialogs || box_live) {
             printf("DISPATCH_ABORT_WRONG phase=%u logical=%08lx cpu=%08lx entryret=%04x nestedret=%04x\n",
                 phase,task.vpStack,((DWORD)cpu_ss<<16)|cpu_sp,frame->wRetID,nested_frame->wRetID);
@@ -205,6 +253,12 @@ int __cdecl main(int argc,char **argv)
         }
         if(phase==6 && (frame->wRetID!=RET_FORCETASKEXIT || nested_frame->wRetID!=RET_ENUMWINDOWPROC)) {
             puts("DISPATCH_ABORT_WRONG phase=6 kill_target");return 1;
+        }
+        if((phase==7 || phase==8) && (idle_blocks || idle_unblocks!=1 ||
+                stack_enters!=1 || stack_leaves!=1 || unwinds!=1 ||
+                (phase==8 && frame->wRetID!=RET_FORCETASKEXIT))) {
+            printf("DISPATCH_IDLE_WRONG phase=%u block=%u unblock=%u stack=%u/%u unwind=%u ret=%04x\n",
+                phase,idle_blocks,idle_unblocks,stack_enters,stack_leaves,unwinds,frame->wRetID);return 1;
         }
         if((phase==0 || phase==3) && (frame->wAX!=0xabcd || frame->wDX!=0x1234))return 2;
         printf("DISPATCH_EXCEPTION phase=%u sets=%u calls=%u dialogs=%u resumed=%u\n",

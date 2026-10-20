@@ -2,6 +2,7 @@
 #define OPENNT_BASE_RESERVATION_H
 #include <windows.h>
 #include <stdint.h>
+#include "common/protocol/native_launch_type.h"
 
 /* Private binding for the interval between original CheckVDM's no-worker
  * result and the worker's authenticated Connect.  IDs correlate a launcher
@@ -13,7 +14,10 @@ typedef struct OPENNT_BASE_RESERVATIONS OPENNT_BASE_RESERVATIONS;
 typedef enum OPENNT_BASE_WORKER_KIND {
     OPENNT_BASE_WORKER_DOS,
     OPENNT_BASE_WORKER_WOW,
-    OPENNT_BASE_WORKER_NATIVE
+    OPENNT_BASE_WORKER_NATIVE,
+    /* One-shot native GUI launcher: no Console and no worker management
+     * lifetime. It exists only through suspended-target registration. */
+    OPENNT_BASE_WORKER_NATIVE_GUI_LAUNCHER
 } OPENNT_BASE_WORKER_KIND;
 
 BOOL OpenNtBaseReservationsInitialize(OPENNT_BASE_RESERVATIONS **);
@@ -22,7 +26,8 @@ BOOL OpenNtBaseReservationsIsEmpty(OPENNT_BASE_RESERVATIONS *);
 DWORD OpenNtBaseReservationCreate(OPENNT_BASE_RESERVATIONS *,DWORD launcher_pid,
     DWORD launcher_generation,ULONG task,HANDLE console,BOOL shared_wow,uint64_t *reservation);
 DWORD OpenNtBaseReservationCreateKind(OPENNT_BASE_RESERVATIONS *,DWORD launcher_pid,
-    DWORD launcher_generation,ULONG task,HANDLE console,OPENNT_BASE_WORKER_KIND,uint64_t *reservation);
+    DWORD launcher_generation,ULONG task,HANDLE console,OPENNT_BASE_WORKER_KIND,DWORD native_type,
+    uint64_t *reservation);
 DWORD OpenNtBaseReservationPrepareWorker(OPENNT_BASE_RESERVATIONS *,uint64_t reservation,
     DWORD launcher_pid,DWORD launcher_generation,HANDLE worker);
 /* A worker cannot nominate a reservation.  The service finds the one whose
@@ -32,7 +37,7 @@ DWORD OpenNtBaseReservationClaimWorker(OPENNT_BASE_RESERVATIONS *,DWORD worker_p
     HANDLE *worker);
 DWORD OpenNtBaseReservationClaimWorkerKind(OPENNT_BASE_RESERVATIONS *,DWORD worker_pid,
     DWORD worker_generation,uint64_t *reservation,ULONG *task,HANDLE *console,
-    OPENNT_BASE_WORKER_KIND *,HANDLE *worker);
+    OPENNT_BASE_WORKER_KIND *,DWORD *native_type,HANDLE *worker);
 /* Standard streams are copied by original BaseSrvUpdateVDMEntry before the
  * worker connects.  Retain typed broker resources under that finite
  * reservation until original GetNextVDMCommand consumes them. */

@@ -81,7 +81,7 @@ static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
     RPC_STATUS status,uuid_status;
     unsigned int index;
     DWORD result=RPC_S_SERVER_UNAVAILABLE;
-    status=RpcIfInqId(Client_vdm_service_v46_0_c_ifspec,&expected);
+    status=RpcIfInqId(Client_vdm_service_v47_0_c_ifspec,&expected);
     if (status) return status;
     status=RpcMgmtInqIfIds(binding,&interfaces);
     if (status) return status;
@@ -255,10 +255,10 @@ DWORD OpenNtBaseClientNativeStartupResult(DWORD caller_generation,DWORD request,
     return common_rpc_native_startup_result(&view,caller_generation,request,status,target,receipt);
 }
 
-DWORD OpenNtBaseClientRegisterNativeBackend(HANDLE frontend,HANDLE stop,HANDLE closed)
+DWORD OpenNtBaseClientRegisterNativeBackend(HANDLE frontend)
 {
     common_rpc_connection state=client_rpc_view();
-    return common_rpc_register_native_backend(&state,frontend,stop,closed);
+    return common_rpc_register_native_backend(&state,frontend);
 }
 DWORD OpenNtBaseClientCompleteWorkerChannel(DWORD request,DWORD exit_code)
 {
@@ -404,7 +404,7 @@ DWORD OpenNtBaseClientBrokerProcess(HANDLE *server)
     return DuplicateHandle(GetCurrentProcess(),client.server,GetCurrentProcess(),
         server,PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,0) ? 0 : GetLastError();
 }
-DWORD OpenNtBaseClientStartNativeWorker(HANDLE *worker)
+DWORD OpenNtBaseClientStartNativeWorker(DWORD native_type,HANDLE *worker)
 {
     DWORD error=ERROR_INVALID_STATE;
     if(!worker)return ERROR_INVALID_PARAMETER;
@@ -412,7 +412,7 @@ DWORD OpenNtBaseClientStartNativeWorker(HANDLE *worker)
     if(!client.connection || !client.binding || !client.process)return error;
     RpcTryExcept {
         error=Client_StartNativeWorker(client.binding,client.connection,client.process,
-            client.generation,worker);
+            client.generation,native_type,worker);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
@@ -461,6 +461,12 @@ DWORD OpenNtBaseClientWorkerShutdownEvent(HANDLE *shutdown)
 {
     common_rpc_connection state=client_rpc_view();
     return common_rpc_worker_shutdown_event(&state,shutdown);
+}
+
+DWORD OpenNtBaseClientWorkerConsoleCloseEvent(HANDLE *close)
+{
+    common_rpc_connection state=client_rpc_view();
+    return common_rpc_worker_console_close_event(&state,close);
 }
 
 DWORD OpenNtBaseClientWorkerStateChanged(HANDLE *state_changed)

@@ -1,6 +1,19 @@
 # Project Status
 
-**Active: M0 T447 S4 — message identity, reply, waits and reentry.**
+**Active: M0 T447 S5 — WOW32 message identity, reply, waits and reentry.**
+
+S4 is closed as the bounded host lifecycle/Console-routing delivery: Run16
+classifies DOS, Win16, Win32 CUI/GUI and Win64 CUI/GUI before NTSRV admission;
+NTSRV preserves the original DOS/Win16 path, makes CUI NTVWM a resident hidden-
+Console worker, makes GUI NTVWM a one-shot launcher, and verifies the suspended
+target's actual machine/subsystem before resume. Console-close, worker-close
+and broker-loss routes now apply only to their relevant worker kinds. No guest
+source, guest binary or mirror diff was added. The full former S4 WOW32
+message/identity/reply/reentry inventory moves intact to S5; former S5
+per-task termination/NT Monitor becomes S6, and later S numbers follow it.
+This paragraph supersedes older active-S4/S5 allocation wording below, which
+is retained as historical evidence only. See the current mapping in the
+[T447 execution plan](../etc/operations/t447-wow-execution-plan.md#s4-closure-and-s5-reallocation).
 
 Owner accepts and closes [Td build hygiene](../etc/operations/td-build-hygiene.md)
 at aadde21e8; S4 resumes with stable caches, immutable guest and frozen

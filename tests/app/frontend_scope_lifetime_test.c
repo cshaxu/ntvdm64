@@ -154,8 +154,8 @@ DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE value)
     return DuplicateHandle(GetCurrentProcess(),value,GetCurrentProcess(),
         &notification,0,FALSE,DUPLICATE_SAME_ACCESS) ? 0 : GetLastError();
 }
-DWORD OpenNtBaseClientStartNativeWorker(HANDLE *worker)
-{ return OpenNtBaseClientSelectNativeWorker(worker); }
+DWORD OpenNtBaseClientStartNativeWorker(DWORD native_type,HANDLE *worker)
+{ return OpenNtBaseNativeLaunchTypeIsValid(native_type) ? OpenNtBaseClientSelectNativeWorker(worker) : ERROR_INVALID_PARAMETER; }
 DWORD OpenNtBaseClientFrontendJoinCandidate(DWORD *nonce,DWORD *pid)
 {*nonce=*pid=0;return ERROR_NOT_FOUND;}
 DWORD OpenNtBaseClientFrontendJoinDecision(DWORD nonce,BOOL same)
@@ -352,7 +352,7 @@ int main(void)
         native_mode=TRUE;
         for(case_index=0;case_index<ARRAYSIZE(errors);++case_index) {
             native_error=errors[case_index];
-            CHECK(!run16_frontend_scope_launch_win32_text(scope,&start));
+            CHECK(!run16_frontend_scope_launch_native(scope,&start,OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI));
             CHECK(!GetHandleInformation(diagnostic_target,&flags) && GetLastError()==ERROR_INVALID_HANDLE);
             result=completed=99;
             CHECK(run16_frontend_scope_wait_native(scope,&result,&completed)==native_error);

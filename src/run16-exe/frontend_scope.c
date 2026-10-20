@@ -176,16 +176,18 @@ static DWORD wait_worker_change(HANDLE changed,HANDLE worker,HANDLE root,ULONGLO
     return wait==WAIT_OBJECT_0+count-1 ? ERROR_SUCCESS : ERROR_INVALID_STATE;
 }
 
-static DWORD scope_launch_native(run16_frontend_scope *scope,const run16_native_start *start,BOOL text)
+DWORD run16_frontend_scope_launch_native(run16_frontend_scope *scope,const run16_native_start *start,DWORD native_type)
 {
     HANDLE worker=NULL,changed=NULL,target=NULL;DWORD error;
     ULONGLONG deadline=GetTickCount64()+10000;
-    if(!scope || !start)return ERROR_INVALID_PARAMETER;
+    BOOL text;
+    if(!scope || !start || !OpenNtBaseNativeLaunchTypeIsValid(native_type))return ERROR_INVALID_PARAMETER;
+    text=OpenNtBaseNativeLaunchTypeIsText(native_type);
     if(scope->receipt)return ERROR_BUSY;
     error=OpenNtBaseClientWorkerStateChanged(&changed);
     if(error)return error;
     for(;;) {
-        error=OpenNtBaseClientStartNativeWorker(&worker);
+        error=OpenNtBaseClientStartNativeWorker(native_type,&worker);
         if(error==ERROR_ALREADY_EXISTS) {
             /* Each launcher has its own auto-reset state event; NTCON's
              * retirement event is never shared with this admission wait. */
@@ -216,10 +218,6 @@ done:
     CloseHandle(changed);
     return error;
 }
-DWORD run16_frontend_scope_launch_win32_text(run16_frontend_scope *scope,const run16_native_start *start)
-{ return scope_launch_native(scope,start,TRUE); }
-DWORD run16_frontend_scope_launch_win32_gui(run16_frontend_scope *scope,const run16_native_start *start)
-{ return scope_launch_native(scope,start,FALSE); }
 DWORD run16_wait_direct_event(HANDLE receipt)
 {
     DWORD wait;

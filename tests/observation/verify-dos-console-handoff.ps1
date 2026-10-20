@@ -5,7 +5,8 @@ param(
     [Parameter(Mandatory)][string]$PackageRoot,
     [Parameter(Mandatory)][string]$ProcessPackageRoot,
     [Parameter(Mandatory)][string]$LogRoot,
-    [Parameter(Mandatory)][string]$Prefix
+    [Parameter(Mandatory)][string]$Prefix,
+    [ValidateSet('command','cmd')][string]$Target='command'
 )
 $ErrorActionPreference='Stop'
 if($Prefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid report prefix'}
@@ -29,11 +30,12 @@ try {
     if((Test-Path $report) -or (Test-Path $result)){throw 'Use a fresh evidence prefix'}
     $env:MVDM_OBSERVER_POST_EXIT_MS='5000'
     $observerProcess=Start-Process -FilePath (Resolve-Path $Observer).Path -ArgumentList @(
-        (Join-Path $binary 'run16.exe'),$package,$report,'command',
+        (Join-Path $binary 'run16.exe'),$package,$report,$Target,
         '--observation-timeout-ms','30000') -WindowStyle Hidden -PassThru
     $deadline=[DateTime]::UtcNow.AddSeconds(15)
     do {
-        $workers=@(Get-CimInstance Win32_Process -Filter "Name='ntvdm.exe'" | Where-Object {$_.ExecutablePath -eq (Join-Path $binary 'ntvdm.exe')})
+        $workerName=if($Target -eq 'command'){'ntvdm.exe'}else{'ntvwm.exe'}
+        $workers=@(Get-CimInstance Win32_Process -Filter ("Name='"+$workerName+"'") | Where-Object {$_.ExecutablePath -eq (Join-Path $binary $workerName)})
         $frontends=@(Get-CimInstance Win32_Process -Filter "Name='ntcon.exe'" | Where-Object {$_.ExecutablePath -eq (Join-Path $binary 'ntcon.exe')})
         if($workers.Count -eq 1 -and $frontends.Count -eq 1){
             $worker=Get-Process -Id $workers[0].ProcessId
@@ -42,7 +44,7 @@ try {
         }
         Start-Sleep -Milliseconds 50
     }while([DateTime]::UtcNow -lt $deadline)
-    if(!$worker -or !$frontend){throw 'DOS worker/frontend did not reach the close boundary'}
+    if(!$worker -or !$frontend){throw ($Target+' worker/frontend did not reach the close boundary')}
     & (Resolve-Path $MonitorRpc).Path --close-node 1 $frontend.Id *> "$report.close.txt"
     if($LASTEXITCODE){throw 'Frontend close RPC failed'}
     if(!$worker.WaitForExit(12000) -or !$frontend.WaitForExit(12000)){throw 'Acknowledged frontend close left a DOS participant live'}
@@ -76,9 +78,9 @@ public static class DosConsoleHandoffNative {
       ("worker=$($worker.Id)"),
       ("frontend=$($frontend.Id)")
     ) | Set-Content -LiteralPath $result
-    if(($after -band $interactive) -ne $interactive){throw 'DOS frontend close did not restore processed, line and echo input'}
+    if(($after -band $interactive) -ne $interactive){throw ($Target+' frontend close did not restore processed, line and echo input')}
     if(!$observerProcess.WaitForExit(10000) -or $observerProcess.ExitCode){throw 'Launcher observer did not complete normally'}
-    'PASS direct DOS COMMAND management-close preserves the exact parent Console input mode'
+    'PASS '+$Target+' management-close preserves the exact parent Console input mode'
 } finally {
     $env:MVDM_OBSERVER_POST_EXIT_MS=$oldPostExit
     if($observerProcess){if(!$observerProcess.HasExited){$observerProcess.Kill();$observerProcess.WaitForExit(5000)|Out-Null};$observerProcess.Dispose()}

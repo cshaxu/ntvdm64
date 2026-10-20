@@ -5,6 +5,7 @@
 #include "common/protocol/management.h"
 #include "common/protocol/task_trace.h"
 #include "common/protocol/dos_observation.h"
+#include "common/protocol/native_launch_type.h"
 /* Native composition boundary; opaque pointers never enter command records.
  * One service instance per process, matching original BaseSrv globals.
  * Call only after RPC identity authentication. All operations serialized by
@@ -16,7 +17,7 @@ DWORD OpenNtBaseServiceObserveDosEvent(OPENNT_BASE_CONNECTION *,DWORD,DWORD,
 DWORD OpenNtBaseServiceWorkerIoTransition(OPENNT_BASE_CONNECTION *,DWORD,DWORD,DWORD);
 DWORD OpenNtBaseServiceWorkerIoCheckpoint(OPENNT_BASE_CONNECTION *,DWORD,DWORD,DWORD,DWORD,DWORD *);
 DWORD OpenNtBaseServiceFrontendIoDisconnected(OPENNT_BASE_CONNECTION *,DWORD,DWORD);
-DWORD OpenNtBaseServiceStartNativeWorker(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE *);
+DWORD OpenNtBaseServiceStartNativeWorker(OPENNT_BASE_CONNECTION *,DWORD,DWORD,DWORD native_type,HANDLE *);
 DWORD OpenNtBaseServiceSubmitNativeRequest(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE,
     DWORD,BYTE *,HANDLE *,HANDLE *,DWORD *);
 DWORD OpenNtBaseServiceFinishNativeRequest(OPENNT_BASE_CONNECTION *,DWORD,DWORD,DWORD,DWORD *,DWORD *);
@@ -55,6 +56,7 @@ BOOL OpenNtBaseServiceIsEmpty(OPENNT_BASE_SERVICE *);
 HANDLE OpenNtBaseServiceFrontendLifetimeChanged(OPENNT_BASE_SERVICE *);
 DWORD OpenNtBaseServiceNextFrontendDeadline(OPENNT_BASE_SERVICE *,ULONGLONG *deadline);
 DWORD OpenNtBaseServiceWorkerShutdownEvent(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE *);
+DWORD OpenNtBaseServiceWorkerConsoleCloseEvent(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE *);
 DWORD OpenNtBaseServiceWorkerIoReleaseEvent(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE *);
 DWORD OpenNtBaseServiceRetireExpiredFrontends(OPENNT_BASE_SERVICE *);
 /* Management callers are authenticated by transport. Wire close resolves a
@@ -87,7 +89,7 @@ DWORD OpenNtBaseServiceReportConsoleMembers(OPENNT_BASE_CONNECTION *,DWORD pid,
 /* Independent native-worker admission through the existing reservation path.
  * Execution Console binding is authenticated separately from frontend I/O. */
 DWORD OpenNtBaseServiceCreateNativeReservation(OPENNT_BASE_CONNECTION *,DWORD pid,
-    DWORD generation,uint64_t *reservation);
+    DWORD generation,DWORD native_type,uint64_t *reservation);
 /* Explicit launcher selection within its authenticated execution Console.
  * Returns a query/synchronize-only reference and pins that registered worker
  * generation for subsequent command/frontend attachments. No DOS record. */
@@ -127,9 +129,9 @@ DWORD OpenNtBaseServiceRetainFrontendRoot(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE capability,HANDLE *root,DWORD *root_generation);
 /* Native backend registration is separate from original DOS/WOW records.
  * The backend registers itself using its authenticated connection and root
- * capability. Stop/closed are typed session-control attachments, not task IDs. */
+ * capability. Worker control comes only from the worker-base control plane. */
 DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *,DWORD pid,
-    DWORD generation,HANDLE frontend,HANDLE stop,HANDLE closed);
+    DWORD generation,HANDLE frontend);
 DWORD OpenNtBaseServiceCompleteWorkerChannel(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
     DWORD request,DWORD exit_code);
 DWORD OpenNtBaseServiceCompleteNativeRequest(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,

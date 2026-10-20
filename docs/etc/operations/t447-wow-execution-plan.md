@@ -2464,3 +2464,45 @@ candidate NTSRV hash was
 `98125183834813A980DAE4BDFD947A354910711BE2BCB5526AB83A5D2CEF5CD5`, matching
 both `assets/release` and `O:\winnt\system32` in the coherent thirteen-image
 publication.  This bounded delivery changes no guest image or `assets/winnt.zip`.
+
+### S4 closure and S5 reallocation
+
+This section is the current task-allocation authority for T447 and supersedes
+earlier live-looking S4/S5 wording retained above as chronology.
+
+S4 closes with the host lifecycle repair and its completed composition:
+Run16 carries one explicit native launch class (`WIN32_CUI`, `WIN32_GUI`,
+`WIN64_CUI`, or `WIN64_GUI`) after the existing SEC_IMAGE query; DOS and Win16
+continue to use their original `BinaryType`. NTSRV records that class in the
+authenticated launch reservation and rejects a suspended target whose actual
+machine/subsystem differs. CUI NTVWM is the only resident native worker: it
+has the hidden Console, frontend/I/O route, console-close and worker-close
+semantics. GUI NTVWM is a one-request launcher without Console, presentation
+or monitor-worker lifetime; NTSRV retains and monitors its actual target.
+WOW receives worker-close and broker-loss only; it never receives
+console-close. No guest source/media/binary change is part of this closure.
+
+The complete remaining former S4 inventory transfers without semantic waiver
+to S5: M1--M6 mixed message identity, explicit and implicit delivery, reply
+and wait behavior, nested/reentrant execution, conversion ownership and all
+associated real guest/failure/lifecycle evidence. This is a renumbering of
+the unresolved work, not an assertion that it is implemented.
+
+Former S5 (original WOW hung/exit ownership, request-to-HTASK identity,
+reuse protection, individual task termination and NT Monitor task action)
+becomes S6. Every later S allocation increments by one. Existing historical
+references are retained as evidence aliases only; CURRENT.md names the sole
+active packet.
+
+#### Closure evidence and retained test limitation
+
+The current source was rebuilt in the stable x64 product graph for the host
+service/launcher closure and in the stable x86 formal graph for the affected
+original MVDM closure.  The formal x86 graph also rebuilt the service fixture
+from current source.  Its all-modes run stops before lifecycle assertions at
+the fixture's existing same-process `frontend_pair` client open
+(`CreateFile` returns `ERROR_ACCESS_DENIED`); the failure is outside the new
+Console/worker classification path and has no runtime substitution.  Keep
+that deterministic fixture-harness diagnosis with the S5 verification work;
+it is not evidence that the lifecycle route passed, nor a reason to widen S4
+with unrelated named-pipe test plumbing.

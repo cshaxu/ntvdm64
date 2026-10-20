@@ -27,6 +27,7 @@ static HANDLE attachment(unsigned index)
     peer(binding,connection,process,generation);*output=attachment(0);return result();}
 EVENT_CALL(WorkerFrontendCapability)
 EVENT_CALL(WorkerShutdownEvent)
+EVENT_CALL(WorkerConsoleCloseEvent)
 EVENT_CALL(WorkerStateChanged)
 EVENT_CALL(WorkerIoReleaseEvent)
 error_status_t Client_WorkerIoCheckpoint(handle_t binding,VDM_CONNECTION connection,
@@ -59,10 +60,10 @@ error_status_t Client_BindConsoleContext(handle_t binding,VDM_CONNECTION connect
     peer(binding,connection,process,generation);CHECK(capability==expected.process);return result();
 }
 error_status_t Client_RegisterNativeBackend(handle_t binding,VDM_CONNECTION connection,
-    HANDLE process,unsigned long generation,HANDLE frontend,HANDLE stop,HANDLE closed)
+    HANDLE process,unsigned long generation,HANDLE frontend)
 {
     peer(binding,connection,process,generation);
-    CHECK(frontend==expected.process && stop==expected.process && closed==NULL);return result();
+    CHECK(frontend==expected.process);return result();
 }
 static error_status_t route(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     unsigned long generation,HANDLE *pipe,HANDLE *frontend,unsigned long *root_generation,HANDLE *ready)
@@ -92,13 +93,14 @@ int main(void)
     unsigned i,initial;
     common_rpc_connection invalid={0};
     event_client events[]={common_rpc_worker_frontend_capability,
-        common_rpc_worker_shutdown_event,common_rpc_worker_state_changed,
+        common_rpc_worker_shutdown_event,common_rpc_worker_console_close_event,
+        common_rpc_worker_state_changed,
         common_rpc_worker_io_release_event};
     expected.binding=(RPC_BINDING_HANDLE)(ULONG_PTR)11;
     expected.connection=(VDM_CONNECTION)(ULONG_PTR)12;
     expected.process=CreateEventW(NULL,TRUE,FALSE,NULL);expected.generation=13;
     CHECK(expected.process && GetProcessHandleCount(GetCurrentProcess(),&before));
-    for(i=0;i<4;++i) {
+    for(i=0;i<5;++i) {
         CHECK(events[i](&expected,NULL)==ERROR_INVALID_PARAMETER);
         output=expected.process;CHECK(events[i](NULL,&output)==ERROR_INVALID_STATE && !output);
         output=expected.process;CHECK(events[i](&invalid,&output)==ERROR_INVALID_STATE && !output);
@@ -107,7 +109,7 @@ int main(void)
     output=expected.process;
     CHECK(common_rpc_acquire_console_context(NULL,NULL,&output)==ERROR_INVALID_STATE && !output);
     CHECK(common_rpc_bind_console_context(NULL,NULL)==ERROR_INVALID_STATE);
-    CHECK(common_rpc_register_native_backend(NULL,NULL,NULL,NULL)==ERROR_INVALID_STATE);
+    CHECK(common_rpc_register_native_backend(NULL,NULL)==ERROR_INVALID_STATE);
     CHECK(common_rpc_worker_io_transition(NULL,1)==ERROR_INVALID_STATE);
     CHECK(common_rpc_worker_io_checkpoint(&expected,2,42,NULL)==ERROR_INVALID_PARAMETER);
     generation=99;
@@ -126,14 +128,14 @@ int main(void)
     }
     for(mode=0;mode<3;++mode) {
         initial=calls;want=mode==0 ? 0 : mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED;
-        for(i=0;i<4;++i) {
+        for(i=0;i<5;++i) {
             CHECK(events[i](&expected,&output)==want);
             if(want){CHECK(!output);closed(1);}else {CHECK(output!=NULL);CloseHandle(output);}
         }
         CHECK(common_rpc_acquire_console_context(&expected,expected.process,&output)==want);
         if(want){CHECK(!output);closed(1);}else {CHECK(output!=NULL);CloseHandle(output);}
         CHECK(common_rpc_bind_console_context(&expected,expected.process)==want);
-        CHECK(common_rpc_register_native_backend(&expected,expected.process,expected.process,NULL)==want);
+        CHECK(common_rpc_register_native_backend(&expected,expected.process)==want);
         CHECK(common_rpc_worker_io_transition(&expected,1)==want);
         CHECK(common_rpc_frontend_io_disconnected(&expected)==want);
         for(i=0;i<2;++i) {
@@ -144,7 +146,7 @@ int main(void)
             else {CHECK(pipe && frontend && ready && generation==42);
                 CloseHandle(pipe);CloseHandle(frontend);CloseHandle(ready);}
         }
-        CHECK(calls==initial+11);
+        CHECK(calls==initial+12);
     }
     CHECK(takes==3 && waits==3);
     mode=3;

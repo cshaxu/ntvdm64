@@ -61,18 +61,18 @@ int main(void)
     CHECK(OpenNtBaseReservationRelease(state,third,103,9)==ERROR_SUCCESS);
     {
         OPENNT_BASE_WORKER_KIND kind=OPENNT_BASE_WORKER_DOS;
-        uint64_t native=0,other=0;
+        uint64_t native=0,other=0; DWORD claimed_native_type=0;
         CHECK(OpenNtBaseReservationsIsEmpty(state));
         CHECK(OpenNtBaseReservationCreateKind(state,104,12,0,(HANDLE)0x4567,
-            (OPENNT_BASE_WORKER_KIND)3,&native)==ERROR_INVALID_PARAMETER);
+            (OPENNT_BASE_WORKER_KIND)4,0,&native)==ERROR_INVALID_PARAMETER);
         CHECK(OpenNtBaseReservationCreateKind(state,104,12,0,NULL,
-            OPENNT_BASE_WORKER_NATIVE,&native)==ERROR_INVALID_PARAMETER);
+            OPENNT_BASE_WORKER_NATIVE,OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&native)==ERROR_INVALID_PARAMETER);
         CHECK(OpenNtBaseReservationCreateKind(state,104,12,0,(HANDLE)0x4567,
-            OPENNT_BASE_WORKER_NATIVE,&native)==ERROR_SUCCESS);
+            OPENNT_BASE_WORKER_NATIVE,OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&native)==ERROR_SUCCESS);
         CHECK(OpenNtBaseReservationCreateKind(state,105,16,0,(HANDLE)0x4567,
-            OPENNT_BASE_WORKER_NATIVE,&other)==ERROR_ALREADY_EXISTS && !other);
+            OPENNT_BASE_WORKER_NATIVE,OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&other)==ERROR_ALREADY_EXISTS && !other);
         CHECK(OpenNtBaseReservationCreateKind(state,105,16,0,(HANDLE)0x4568,
-            OPENNT_BASE_WORKER_NATIVE,&other)==ERROR_SUCCESS && other);
+            OPENNT_BASE_WORKER_NATIVE,OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&other)==ERROR_SUCCESS && other);
         CHECK(OpenNtBaseReservationRelease(state,other,105,16)==ERROR_SUCCESS);
         CHECK(OpenNtBaseReservationPrepareWorker(state,native,104,13,self)==ERROR_ACCESS_DENIED);
         CHECK(OpenNtBaseReservationPrepareWorker(state,native,104,12,self)==ERROR_SUCCESS);
@@ -81,22 +81,23 @@ int main(void)
             &task,&console,&shared_wow,&worker)==ERROR_NOT_SUPPORTED);
         CHECK(!worker && !claimed);
         CHECK(OpenNtBaseReservationClaimWorkerKind(state,GetCurrentProcessId(),14,&claimed,
-            &task,&console,&kind,&worker)==ERROR_SUCCESS);
+            &task,&console,&kind,&claimed_native_type,&worker)==ERROR_SUCCESS);
         CHECK(claimed==native && task==0 && console==(HANDLE)0x4567 && kind==OPENNT_BASE_WORKER_NATIVE);
+        CHECK(claimed_native_type==OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI);
         CHECK(worker!=NULL && WaitForSingleObject(worker,0)==WAIT_TIMEOUT);
         CHECK(OpenNtBaseReservationCreateKind(state,105,16,0,(HANDLE)0x4567,
-            OPENNT_BASE_WORKER_NATIVE,&other)==ERROR_ALREADY_EXISTS && !other);
+            OPENNT_BASE_WORKER_NATIVE,OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&other)==ERROR_ALREADY_EXISTS && !other);
         CloseHandle(worker);worker=NULL;
         CHECK(OpenNtBaseReservationAbandon(state,native));
         CHECK(OpenNtBaseReservationRetainWorker(state,native,104,12,&worker)==ERROR_SUCCESS);
         CHECK(WaitForSingleObject(worker,0)==WAIT_TIMEOUT);CloseHandle(worker);worker=NULL;
         CHECK(OpenNtBaseReservationClaimWorkerKind(state,GetCurrentProcessId(),15,&claimed,
-            &task,&console,&kind,&worker)==ERROR_ALREADY_EXISTS);
+            &task,&console,&kind,&claimed_native_type,&worker)==ERROR_ALREADY_EXISTS);
         CHECK(OpenNtBaseReservationReleaseWorker(state,native,GetCurrentProcessId(),15)==ERROR_ACCESS_DENIED);
         CHECK(OpenNtBaseReservationReleaseWorker(state,native,GetCurrentProcessId(),14)==ERROR_SUCCESS);
         CHECK(OpenNtBaseReservationsIsEmpty(state));
         CHECK(OpenNtBaseReservationCreateKind(state,105,16,0,(HANDLE)0x4567,
-            OPENNT_BASE_WORKER_NATIVE,&other)==ERROR_SUCCESS);
+            OPENNT_BASE_WORKER_NATIVE,OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&other)==ERROR_SUCCESS);
         CHECK(OpenNtBaseReservationRelease(state,other,105,16)==ERROR_SUCCESS);
     }
     CHECK(OpenNtBaseReservationsDestroy(state));CloseHandle(self);

@@ -1,7 +1,7 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(46.0),
+    version(47.0),
     pointer_default(unique)
 ]
 interface vdm_service
@@ -59,6 +59,7 @@ interface vdm_service
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation,
+        [in] unsigned long native_type,
         [out, system_handle(sh_process)] HANDLE *worker);
     /* The broker creates the exact product frontend. Console operations are
      * performed by that frontend against this authenticated caller. */
@@ -95,6 +96,14 @@ interface vdm_service
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation,
         [out, system_handle(sh_event)] HANDLE *shutdown);
+    /* Management Console-close is deliberately distinct from worker shutdown.
+     * The recipient receives only wait rights and chooses its own original or
+     * native close entry point. */
+    error_status_t WorkerConsoleCloseEvent(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out, system_handle(sh_event)] HANDLE *close);
     /* Service-directed I/O release, not task completion or worker shutdown.
      * The recipient receives synchronize rights only. */
     error_status_t WorkerIoReleaseEvent(
@@ -144,9 +153,7 @@ interface vdm_service
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation,
-        [in, system_handle(sh_event)] HANDLE frontend,
-        [in, system_handle(sh_event)] HANDLE stop,
-        [in, system_handle(sh_event)] HANDLE closed);
+        [in, system_handle(sh_event)] HANDLE frontend);
     /* The authenticated native worker binds an admitted direct record to the
      * actual target it just created.  This is a typed process attachment,
      * never a launcher-nominated numeric PID. */

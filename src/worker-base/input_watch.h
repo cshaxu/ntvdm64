@@ -10,8 +10,9 @@ typedef void (*worker_base_input_failure_fn)(void *context,DWORD error);
 /* Borrow cancellation/context until destroy joins. NULL ready callback exposes
  * the stable wake to an existing consumer; otherwise callback consumes input.
  * Both consumers acknowledge after their actual read, never merely on wake. */
-worker_base_input_watch *worker_base_input_watch_create(HANDLE shutdown,HANDLE stop,
-    worker_base_input_ready_fn ready,worker_base_input_shutdown_fn close,
+worker_base_input_watch *worker_base_input_watch_create(HANDLE console_close,HANDLE worker_close,HANDLE stop,
+    worker_base_input_ready_fn ready,worker_base_input_shutdown_fn close_console,
+    worker_base_input_shutdown_fn close_worker,
     worker_base_input_failure_fn failed,void *context);
 /* Duplicate a wait-only source; NULL disables it. No owner lock is acquired. */
 DWORD worker_base_input_watch_bind(worker_base_input_watch *,HANDLE source);

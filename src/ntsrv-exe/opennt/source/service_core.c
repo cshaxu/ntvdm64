@@ -126,6 +126,7 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
     else {
         uint64_t reservation=0;
         ULONG task=0;
+        DWORD native_type=0;
         HANDLE console=NULL;
         HANDLE reserved_worker=NULL;
         BOOL shared_wow=FALSE,watch_added=FALSE;
@@ -133,12 +134,15 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
         broker_vdm_receipts_initialize(&connection->streams,connection->process.SequenceNumber);
         error=OpenNtBaseReservationClaimWorkerKind(service->reservations,
             (DWORD)(ULONG_PTR)connection->process.ClientId.UniqueProcess,connection->process.SequenceNumber,
-            &reservation,&task,&console,&kind,&reserved_worker);
+            &reservation,&task,&console,&kind,&native_type,&reserved_worker);
         if (error==ERROR_NOT_FOUND) error=ERROR_SUCCESS;
         else if (!error) {
             OPENNT_BASE_WORKER_WATCH *watch;
             shared_wow=kind==OPENNT_BASE_WORKER_WOW;
-            connection->native_worker=kind==OPENNT_BASE_WORKER_NATIVE;
+            connection->native_worker=kind==OPENNT_BASE_WORKER_NATIVE ||
+                kind==OPENNT_BASE_WORKER_NATIVE_GUI_LAUNCHER;
+            connection->native_gui_launcher=kind==OPENNT_BASE_WORKER_NATIVE_GUI_LAUNCHER;
+            connection->native_launch_type=native_type;
             connection->reservation=reservation;connection->task=task;connection->reservation_kind=kind;
             connection->console=console;connection->wow=shared_wow;
             /* This is the post-create registration performed by original
@@ -166,9 +170,11 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                 watch->kind=kind;
                 watch->console=console;
                 watch->wow=shared_wow;
+                watch->native_gui_launcher=connection->native_gui_launcher;
                 watch->reservation=reservation;
                 watch->shutdown=CreateEventW(NULL,TRUE,FALSE,NULL);
-                if(!watch->shutdown)error=GetLastError();
+                watch->console_close=CreateEventW(NULL,TRUE,FALSE,NULL);
+                if(!watch->shutdown || !watch->console_close)error=GetLastError();
                 InitializeListHead(&watch->management_labels);
                 /* The first DOS record precedes the worker's first RPC.  Copy
                  * only its label before original GetNextVDMCommand releases
@@ -198,7 +204,7 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                         route_found=TRUE;
                         selected_root=route->root;
                         if(!selected_root || selected_root->frontend_closing || selected_root->frontend_close_draining)
-                            (void)SetEvent(watch->shutdown);
+                            (void)SetEvent(watch->console_close);
                         break;
                     }
                     for(root_link=service->connections.Flink;
@@ -223,6 +229,7 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                     if(!error)error=GetLastError();
                     CloseHandle(watch->process.ProcessHandle);
                     if(watch->shutdown)CloseHandle(watch->shutdown);
+                    if(watch->console_close)CloseHandle(watch->console_close);
                     HeapFree(GetProcessHeap(),0,watch);
                     if(!connection->native_worker)BaseSrvCleanupVDMResources(&connection->process);
                 } else {
@@ -310,8 +317,6 @@ DWORD OpenNtBaseServiceDisconnect(OPENNT_BASE_CONNECTION *connection)
         if (connection->frontend_state_changed) CloseHandle(connection->frontend_state_changed);
         if (connection->worker_state_changed) CloseHandle(connection->worker_state_changed);
         if (connection->worker_io_release) CloseHandle(connection->worker_io_release);
-        if (connection->native_stop) CloseHandle(connection->native_stop);
-        if (connection->native_closed) CloseHandle(connection->native_closed);
         if (connection->wow_start_event) CloseHandle(connection->wow_start_event);
         service_release_console_identities(connection);
         HeapFree(GetProcessHeap(),0,connection);

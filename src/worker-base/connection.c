@@ -23,6 +23,11 @@ DWORD worker_base_shutdown_event(HANDLE *shutdown)
     return OpenNtBaseClientWorkerShutdownEvent(shutdown);
 }
 
+DWORD worker_base_console_close_event(HANDLE *close)
+{
+    return OpenNtBaseClientWorkerConsoleCloseEvent(close);
+}
+
 DWORD worker_base_io_release_event(HANDLE *release)
 {
     return OpenNtBaseClientWorkerIoReleaseEvent(release);

@@ -378,13 +378,14 @@ static BOOL WINAPI launcher_control(DWORD event)
     return event == CTRL_C_EVENT || event == CTRL_BREAK_EVENT;
 }
 
-static DWORD launch_native(run16_frontend_scope *scope,PCWSTR application,PCWSTR command,BOOL text,BOOL wait,
+static DWORD launch_native(run16_frontend_scope *scope,PCWSTR application,PCWSTR command,DWORD native_type,BOOL wait,
     const run16_launch_options *options)
 {
     run16_native_start start={0};
     WCHAR directory[32768];
     PWSTR environment=NULL;
     DWORD error,result=ERROR_PROCESS_ABORTED,mode,i,length;
+    BOOL text;
     if(!scope)return ERROR_INVALID_PARAMETER;
     length=GetCurrentDirectoryW(ARRAYSIZE(directory),directory);
     if(!length || length>=ARRAYSIZE(directory))return ERROR_PATH_NOT_FOUND;
@@ -406,7 +407,9 @@ static DWORD launch_native(run16_frontend_scope *scope,PCWSTR application,PCWSTR
     start.console_mask=run16_frontend_scope_console_mask(scope);
     for(i=0;i<3;++i)
         if(GetConsoleMode(start.standard[i],&mode))start.console_mask|=1u<<i;
-    error=text ? run16_frontend_scope_launch_win32_text(scope,&start) : run16_frontend_scope_launch_win32_gui(scope,&start);
+    if(!OpenNtBaseNativeLaunchTypeIsValid(native_type))return ERROR_BAD_EXE_FORMAT;
+    text=OpenNtBaseNativeLaunchTypeIsText(native_type);
+    error=run16_frontend_scope_launch_native(scope,&start,native_type);
     if(!error && !wait)result=ERROR_SUCCESS;
     if(!error && wait) {
         DWORD target_completed=0;
@@ -442,7 +445,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
     WCHAR split_image[MAX_PATH];
     WCHAR normalized_command[MAX_PATH + MAXIMUM_VDM_COMMAND_LENGTH + 8u];
     WCHAR shell_command[MAX_PATH + MAXIMUM_VDM_COMMAND_LENGTH + 8u];
-    DWORD type, result = ERROR_INVALID_PARAMETER, binary = 0, comspec_bytes;
+    DWORD type, result = ERROR_INVALID_PARAMETER, binary = 0, comspec_bytes, native_type=0;
     BOOL image_resolved,initial_console_only,binary_classified;
     DWORD console_member;
     int count;
@@ -507,11 +510,10 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         image_resolved=resolve_image_path(image_argument,application,MAX_PATH);
     binary_classified=OpenNtBaseGetBinaryTypeW(image_resolved ? application : image_argument,&type);
     if(!binary_classified) {
-        DWORD subsystem=0;
         /* The retained historical classifier rejects opposite native machine
          * images. Accept only positively verified native SEC_IMAGE metadata;
          * DOS/WOW, shell syntax and failed discovery keep their original path. */
-        if(!run16_classify_native_image(image_resolved ? application : image_argument,&subsystem)) {
+        if(!run16_classify_native_launch_type(image_resolved ? application : image_argument,&native_type)) {
             type=SCS_32BIT_BINARY;binary_classified=TRUE;
         }
     }
@@ -540,7 +542,8 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         result=connect_broker();
         if (!result) result=run16_frontend_scope_begin_lease(&frontend_scope,initial_console_only);
         if (result) goto done;
-        result=launch_native(frontend_scope,application,shell_command,TRUE,TRUE,&options);
+        result=run16_classify_native_launch_type(application,&native_type);
+        if(!result)result=launch_native(frontend_scope,application,shell_command,native_type,TRUE,&options);
         goto done;
     }
     if (type == SCS_DOS_BINARY)
@@ -606,22 +609,21 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
     /* Original vdm.c obtains the subsystem from an image section. Reuse that
      * OS metadata contract for frontend selection; do not parse PE headers. */
     {
-        DWORD subsystem=0;
-        result=run16_classify_native_image(image_resolved ? application : image_argument,&subsystem);
+        result=run16_classify_native_launch_type(image_resolved ? application : image_argument,&native_type);
         if(result)goto done;
-        if (subsystem==IMAGE_SUBSYSTEM_WINDOWS_CUI) {
+        if (OpenNtBaseNativeLaunchTypeIsText(native_type)) {
             result=connect_broker();
             if (!result) result=run16_frontend_scope_begin_lease(&frontend_scope,initial_console_only);
             if (result) goto done;
         }
     }
     if(frontend_scope) {
-        result=launch_native(frontend_scope,image_resolved ? application : image_argument,launch_command,TRUE,TRUE,&options);
+        result=launch_native(frontend_scope,image_resolved ? application : image_argument,launch_command,native_type,TRUE,&options);
         goto done;
     }
     result=connect_broker();
     if(!result)result=run16_frontend_scope_begin_gui(&frontend_scope);
-    if(!result)result=launch_native(frontend_scope,image_resolved ? application : image_argument,launch_command,FALSE,options.wait,&options);
+    if(!result)result=launch_native(frontend_scope,image_resolved ? application : image_argument,launch_command,native_type,options.wait,&options);
 done:
     run16_frontend_scope_end(frontend_scope);
     OpenNtBaseClientDisconnectCurrent();

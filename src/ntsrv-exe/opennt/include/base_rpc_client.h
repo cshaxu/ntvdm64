@@ -6,6 +6,7 @@
 #include <windows.h>
 #include <stdint.h>
 #include "common/protocol/dos_observation.h"
+#include "common/protocol/native_launch_type.h"
 uint64_t OpenNtBaseClientObservationDirect(void);
 DWORD OpenNtBaseClientObserveDosEvent(const common_dos_observation *,BOOL,HANDLE);
 DWORD OpenNtBaseClientWorkerIoTransition(DWORD);
@@ -18,7 +19,7 @@ DWORD OpenNtBaseClientBrokerProcess(HANDLE *server);
 DWORD OpenNtBaseClientStartFrontend(uint64_t console_window,BOOL borrowed,
     HANDLE *root,HANDLE *capability,HANDLE *restored);
 DWORD OpenNtBaseClientReturnFrontendConsole(void);
-DWORD OpenNtBaseClientStartNativeWorker(HANDLE *);
+DWORD OpenNtBaseClientStartNativeWorker(DWORD native_type,HANDLE *);
 DWORD OpenNtBaseClientStartVdmWorker(PCWSTR environment,DWORD characters,
     DWORD show,HANDLE frontend,HANDLE *worker,HANDLE *parent);
 DWORD OpenNtBaseClientWaitFrontendConsoleRestored(void);
@@ -36,6 +37,7 @@ DWORD OpenNtBaseClientFrontendUsage(DWORD *pending,DWORD *tasks);
 DWORD OpenNtBaseClientRetireWorkerlessFrontend(DWORD *retired);
 DWORD OpenNtBaseClientFrontendStateChanged(HANDLE *state_changed);
 DWORD OpenNtBaseClientWorkerShutdownEvent(HANDLE *shutdown);
+DWORD OpenNtBaseClientWorkerConsoleCloseEvent(HANDLE *close);
 DWORD OpenNtBaseClientWorkerIoReleaseEvent(HANDLE *release);
 DWORD OpenNtBaseClientWorkerStateChanged(HANDLE *state_changed);
 DWORD OpenNtBaseClientRetireFrontend(void);
@@ -48,7 +50,7 @@ DWORD OpenNtBaseClientRegisterFrontendLease(uint64_t console_window,DWORD creato
 DWORD OpenNtBaseClientFrontendJoinCandidate(DWORD *nonce,DWORD *candidate_pid);
 DWORD OpenNtBaseClientFrontendJoinDecision(DWORD nonce,BOOL same_console);
 DWORD OpenNtBaseClientFrontendLeaseReady(void);
-DWORD OpenNtBaseClientRegisterNativeBackend(HANDLE frontend,HANDLE stop,HANDLE closed);
+DWORD OpenNtBaseClientRegisterNativeBackend(HANDLE frontend);
 DWORD OpenNtBaseClientBindNativeTarget(DWORD request,HANDLE target,HANDLE receipt);
 DWORD OpenNtBaseClientCompleteWorkerChannel(DWORD request,DWORD exit_code);
 DWORD OpenNtBaseClientCompleteNativeRequest(DWORD request,DWORD exit_code,DWORD io_error,DWORD io_flags);

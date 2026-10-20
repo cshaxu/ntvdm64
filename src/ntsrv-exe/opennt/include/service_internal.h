@@ -92,6 +92,8 @@ struct OPENNT_BASE_CONNECTION {
     BOOL vdm_starting;
     BOOL registered_worker;
     BOOL native_worker;
+    BOOL native_gui_launcher;
+    DWORD native_launch_type; /* Authenticated reservation value, never parsed command text. */
     DWORD selected_native_generation; /* Explicit launcher grant, not membership alone. */
     /* The original BaseSrvDupStandardHandles copies these caller streams
      * into the suspended worker during UpdateDOSEntry.  The standalone
@@ -160,7 +162,6 @@ struct OPENNT_BASE_CONNECTION {
     LIST_ENTRY win32records;
     struct OPENNT_BASE_WIN32RECORD *pending_win32record;
     DWORD next_win32record;
-    HANDLE native_stop,native_closed;
     LIST_ENTRY service_link;
     LIST_ENTRY retired_link;
 };
@@ -199,6 +200,7 @@ typedef struct OPENNT_BASE_WORKER_WATCH {
     HANDLE wait;
     HANDLE console;
     BOOL wow;
+    BOOL native_gui_launcher;
     uint64_t reservation;
     OPENNT_BASE_WORKER_KIND kind;
     FILETIME started;
@@ -209,7 +211,10 @@ typedef struct OPENNT_BASE_WORKER_WATCH {
     LIST_ENTRY management_labels;
     uint64_t last_dos_occurrence; /* Ordered source replay watermark, not history. */
     BOOL termination_requested;
+    /* `shutdown` is worker close; `console_close` is Console-close. The
+     * broker owns the command and the worker owns the semantic implementation. */
     HANDLE shutdown;
+    HANDLE console_close;
     DWORD frontend_root_generation,frontend_root_pid;
 } OPENNT_BASE_WORKER_WATCH;
 typedef struct OPENNT_BASE_MANAGEMENT_LABEL {

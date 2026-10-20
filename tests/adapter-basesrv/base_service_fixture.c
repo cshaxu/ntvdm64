@@ -341,7 +341,8 @@ int fixture_prepared_native_root_loss(void)
     root->frontend_capability=CreateEventW(NULL,TRUE,FALSE,NULL);
     PREPARED_CHECK(root->frontend_capability);
     PREPARED_CHECK(!OpenNtBaseServiceReportConsoleMembers(root,member,root_generation,1,&member));
-    PREPARED_CHECK(!OpenNtBaseServiceCreateNativeReservation(root,member,root_generation,&reservation));
+    PREPARED_CHECK(!OpenNtBaseServiceCreateNativeReservation(root,member,root_generation,
+        OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&reservation));
     PREPARED_CHECK(GetModuleFileNameW(NULL,image,ARRAYSIZE(image)));
     swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" --reservation-child",image);
     PREPARED_CHECK(CreateProcessW(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,

@@ -372,7 +372,6 @@ static void service_copy_win32record(OPENNT_BASE_CONNECTION *native,
         MANAGEMENT_KIND_WIN64 : MANAGEMENT_KIND_WIN32;
     lstrcpynW(item->image,record ? record->image : L"<EMPTY>",
         OPENNT_BASE_WORKER_IMAGE_CHARS);
-    if(WaitForSingleObject(native->native_stop,0)==WAIT_OBJECT_0)item->state|=0x80000000u;
 }
 
 static OPENNT_BASE_MANAGEMENT_KEY service_management_key(OPENNT_BASE_SERVICE *service,
@@ -499,7 +498,8 @@ static DWORD service_copy_management_tree(OPENNT_BASE_SERVICE *service,
         error=service_append_management(rows,count,capacity,&item);if(error)return error;
         for(child=service->worker_watches.Flink;child!=&service->worker_watches;child=child->Flink) {
             OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(child,OPENNT_BASE_WORKER_WATCH,link);
-            if(watch->frontend_root_generation!=root->process.SequenceNumber || watch->wow)continue;
+            if(watch->frontend_root_generation!=root->process.SequenceNumber || watch->wow ||
+                watch->native_gui_launcher)continue;
             error=service_append_worker(watch,rows,count,capacity);if(error)return error;
         }
     }
@@ -509,7 +509,7 @@ static DWORD service_copy_management_tree(OPENNT_BASE_SERVICE *service,
         OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
         OPENNT_BASE_WORKER_INFO missing={0};
         BOOL first=TRUE;
-        if(watch->wow)continue; /* WOW is the second page block. */
+        if(watch->wow || watch->native_gui_launcher)continue; /* Neither is a text worker row. */
         if(!watch->frontend_root_generation) {
             error=service_append_worker(watch,rows,count,capacity);if(error)return error;
             continue;

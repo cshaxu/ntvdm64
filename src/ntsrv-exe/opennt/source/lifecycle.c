@@ -10,10 +10,8 @@ typedef struct service_frontend_shutdown {
     HANDLE shutdown;
 } service_frontend_shutdown;
 
-/* Service lock held.  Capture only the authenticated, non-WOW workers that
- * are bound to this frontend root.  Their shutdown event already drives the
- * worker's normal close path; this helper adds no execution state or task
- * scheduler. */
+/* Service lock held. Capture only authenticated non-WOW workers bound to this
+ * frontend root. A frontend deletion is Console-close, never Worker-close. */
 static DWORD service_capture_frontend_shutdowns(OPENNT_BASE_SERVICE *service,
     OPENNT_BASE_CONNECTION *root,service_frontend_shutdown **stops,DWORD *count)
 {
@@ -24,7 +22,8 @@ static DWORD service_capture_frontend_shutdowns(OPENNT_BASE_SERVICE *service,
     *stops=NULL;*count=0;
     for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
         OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
-        if(!watch->wow && watch->frontend_root_generation==root->process.SequenceNumber &&
+        if(!watch->wow && !watch->native_gui_launcher &&
+            watch->frontend_root_generation==root->process.SequenceNumber &&
             WaitForSingleObject(watch->process.ProcessHandle,0)==WAIT_TIMEOUT)++capacity;
     }
     if(!capacity)return ERROR_SUCCESS;
@@ -32,12 +31,13 @@ static DWORD service_capture_frontend_shutdowns(OPENNT_BASE_SERVICE *service,
     if(!items)return ERROR_NOT_ENOUGH_MEMORY;
     for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
         OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
-        if(watch->wow || watch->frontend_root_generation!=root->process.SequenceNumber ||
+        if(watch->wow || watch->native_gui_launcher ||
+            watch->frontend_root_generation!=root->process.SequenceNumber ||
             WaitForSingleObject(watch->process.ProcessHandle,0)!=WAIT_TIMEOUT)continue;
-        if(!watch->shutdown) { error=ERROR_NOT_READY;break; }
+        if(!watch->console_close) { error=ERROR_NOT_READY;break; }
         if(!DuplicateHandle(GetCurrentProcess(),watch->process.ProcessHandle,GetCurrentProcess(),
             &items[index].process,SYNCHRONIZE,FALSE,0) ||
-            !DuplicateHandle(GetCurrentProcess(),watch->shutdown,GetCurrentProcess(),
+            !DuplicateHandle(GetCurrentProcess(),watch->console_close,GetCurrentProcess(),
             &items[index].shutdown,EVENT_MODIFY_STATE,FALSE,0)) {
             error=GetLastError();break;
         }
@@ -104,7 +104,7 @@ static DWORD service_terminate_worker(OPENNT_BASE_SERVICE *service,uint32_t proc
     const OPENNT_BASE_MANAGEMENT_KEY *key)
 {
     LIST_ENTRY *link;
-    HANDLE process=NULL,native_stop=NULL,native_closed=NULL;
+    HANDLE process=NULL,shutdown=NULL;
     DWORD error=ERROR_NOT_FOUND;
     if (!service || (!process_id && !key)) return ERROR_INVALID_PARAMETER;
     EnterCriticalSection(&service->lock);
@@ -116,29 +116,10 @@ static DWORD service_terminate_worker(OPENNT_BASE_SERVICE *service,uint32_t proc
             (DWORD)(ULONG_PTR)watch->process.ClientId.UniqueProcess!=process_id)continue;
         process_id=(DWORD)(ULONG_PTR)watch->process.ClientId.UniqueProcess;
         if (watch->termination_requested) { error=ERROR_BUSY; break; }
-        /* Native close must close its Console session, not only the carrier.
-         * Until its control binding is registered, fail explicitly. */
-        if(watch->kind==OPENNT_BASE_WORKER_NATIVE) {
-            LIST_ENTRY *entry;error=ERROR_NOT_READY;
-            for(entry=service->connections.Flink;entry!=&service->connections;entry=entry->Flink) {
-                OPENNT_BASE_CONNECTION *native=CONTAINING_RECORD(entry,OPENNT_BASE_CONNECTION,service_link);
-                if((DWORD)(ULONG_PTR)native->process.ClientId.UniqueProcess!=process_id ||
-                    !native->native_worker)continue;
-                if(!native->native_stop || !native->native_closed)break;
-                if(!DuplicateHandle(GetCurrentProcess(),watch->process.ProcessHandle,GetCurrentProcess(),&process,
-                    SYNCHRONIZE,FALSE,0) ||
-                    !DuplicateHandle(GetCurrentProcess(),native->native_stop,GetCurrentProcess(),&native_stop,
-                    EVENT_MODIFY_STATE,FALSE,0) ||
-                    !DuplicateHandle(GetCurrentProcess(),native->native_closed,GetCurrentProcess(),&native_closed,
-                    SYNCHRONIZE,FALSE,0))error=GetLastError();
-                else {watch->termination_requested=TRUE;error=ERROR_SUCCESS;}
-                break;
-            }
-            break;
-        }
-        if (watch->termination_requested) { error=ERROR_BUSY; break; }
         if (!DuplicateHandle(GetCurrentProcess(),watch->process.ProcessHandle,
-                GetCurrentProcess(),&process,PROCESS_TERMINATE|SYNCHRONIZE,FALSE,0)) {
+                GetCurrentProcess(),&process,SYNCHRONIZE,FALSE,0) ||
+            !DuplicateHandle(GetCurrentProcess(),watch->shutdown,GetCurrentProcess(),&shutdown,
+                EVENT_MODIFY_STATE,FALSE,0)) {
             error=GetLastError(); break;
         }
         watch->termination_requested=TRUE;
@@ -147,14 +128,9 @@ static DWORD service_terminate_worker(OPENNT_BASE_SERVICE *service,uint32_t proc
     }
 unlock:
     LeaveCriticalSection(&service->lock);
-    if(native_stop && native_closed && !error) {
-        /* Session owner must close its Console and acknowledge it. Carrier death
-         * alone cannot prove that attached clients were actually closed. */
-        if(!SetEvent(native_stop))error=GetLastError();
-        else if(WaitForSingleObject(native_closed,10000)!=WAIT_OBJECT_0)error=ERROR_TIMEOUT;
-        else if(WaitForSingleObject(process,5000)!=WAIT_OBJECT_0)error=ERROR_TIMEOUT;
-    } else if(!error && !TerminateProcess(process,ERROR_CANCELLED))error=GetLastError();
-    if(native_stop)CloseHandle(native_stop);if(native_closed)CloseHandle(native_closed);
+    if(!error && !SetEvent(shutdown))error=GetLastError();
+    if(!error && WaitForSingleObject(process,10000)!=WAIT_OBJECT_0)error=ERROR_TIMEOUT;
+    if(shutdown){CloseHandle(shutdown);shutdown=NULL;}
     if(error) {if(process)CloseHandle(process);return error;}
     CloseHandle(process);
     return error;

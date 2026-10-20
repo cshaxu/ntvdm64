@@ -48,13 +48,13 @@ DWORD common_rpc_bind_console_context(const common_rpc_connection *state,HANDLE 
     return error;
 }
 
-DWORD common_rpc_register_native_backend(const common_rpc_connection *state,HANDLE frontend,HANDLE stop,HANDLE closed)
+DWORD common_rpc_register_native_backend(const common_rpc_connection *state,HANDLE frontend)
 {
     DWORD error=ERROR_INVALID_STATE;
     if(!state || !state->connection || !state->binding || !state->process)return error;
     RpcTryExcept {
         error=Client_RegisterNativeBackend(state->binding,state->connection,state->process,
-            state->generation,frontend,stop,closed);
+            state->generation,frontend);
     }
     RpcExcept(1) {error=RpcExceptionCode();}
     RpcEndExcept
@@ -77,6 +77,24 @@ DWORD common_rpc_worker_shutdown_event(const common_rpc_connection *state,HANDLE
     if(error){if(local)CloseHandle(local);return error;}
     if(!local)return ERROR_INVALID_HANDLE;
     *shutdown=local;return ERROR_SUCCESS;
+}
+
+DWORD common_rpc_worker_console_close_event(const common_rpc_connection *state,HANDLE *close)
+{
+    DWORD error=ERROR_INVALID_STATE;
+    HANDLE local=NULL;
+    if(!close)return ERROR_INVALID_PARAMETER;
+    *close=NULL;
+    if(!state || !state->connection || !state->binding || !state->process)return error;
+    RpcTryExcept {
+        error=Client_WorkerConsoleCloseEvent(state->binding,state->connection,state->process,
+            state->generation,&local);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    if(error){if(local)CloseHandle(local);return error;}
+    if(!local)return ERROR_INVALID_HANDLE;
+    *close=local;return ERROR_SUCCESS;
 }
 
 DWORD common_rpc_worker_io_checkpoint(const common_rpc_connection *state,DWORD reason,DWORD request,DWORD *decision)

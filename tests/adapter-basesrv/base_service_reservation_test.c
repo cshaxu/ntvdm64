@@ -483,7 +483,8 @@ static int frontend_authority(void)
             NATIVE_COMMAND_WAIT_TEST waiting={0};
             CHECK(!OpenNtBaseServiceRetainFrontendRoot(launcher,GetCurrentProcessId(),launcher_generation,
                 capability,&retained,&retained_generation));CloseHandle(retained);
-            CHECK(!OpenNtBaseServiceCreateNativeReservation(launcher,GetCurrentProcessId(),launcher_generation,&reservation));
+            CHECK(!OpenNtBaseServiceCreateNativeReservation(launcher,GetCurrentProcessId(),launcher_generation,
+                OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&reservation));
             CHECK(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
                 NULL,NULL,&startup,&backend));
             CHECK(!OpenNtBaseServicePrepareWorker(launcher,GetCurrentProcessId(),launcher_generation,reservation,backend.hProcess));
@@ -641,7 +642,8 @@ static int frontend_notification(BOOL baseline)
         CHECK(!OpenNtBaseServiceRetainFrontendRoot(launcher,GetCurrentProcessId(),generation,
             capability,&retained,&verified_generation));
         CHECK(verified_generation==root_generation);CloseHandle(retained);
-        CHECK(!OpenNtBaseServiceCreateNativeReservation(launcher,GetCurrentProcessId(),generation,&reservation));
+        CHECK(!OpenNtBaseServiceCreateNativeReservation(launcher,GetCurrentProcessId(),generation,
+            OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&reservation));
         CHECK(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
             NULL,NULL,&startup,&backend));
         CHECK(!OpenNtBaseServicePrepareWorker(launcher,GetCurrentProcessId(),generation,reservation,backend.hProcess));
@@ -859,7 +861,7 @@ int main(int argc,char **argv)
         DWORD initial_generation=0,retained_generation=0;
         CHECK(!OpenNtBaseServiceConnect(service,self,&launcher,&launcherGeneration));
         CHECK(OpenNtBaseServiceCreateNativeReservation(launcher,GetCurrentProcessId(),
-            launcherGeneration+1,&reservation)==ERROR_ACCESS_DENIED && !reservation);
+            launcherGeneration+1,OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&reservation)==ERROR_ACCESS_DENIED && !reservation);
         CHECK(initial_capability && GetModuleFileNameA(NULL,command,MAX_PATH));
         {char executable[MAX_PATH];strcpy_s(executable,MAX_PATH,command);
             sprintf_s(command,sizeof(command),"\"%s\" --reservation-child",executable);}
@@ -876,9 +878,9 @@ int main(int argc,char **argv)
             launcherGeneration,initial_capability,&retained_root,&retained_generation));
         CHECK(retained_generation==initial_generation);CloseHandle(retained_root);
         CHECK(!OpenNtBaseServiceCreateNativeReservation(launcher,GetCurrentProcessId(),
-            launcherGeneration,&reservation) && reservation);
+            launcherGeneration,OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&reservation) && reservation);
         CHECK(OpenNtBaseServiceCreateNativeReservation(launcher,GetCurrentProcessId(),
-            launcherGeneration,&duplicate)==ERROR_INVALID_STATE && !duplicate);
+            launcherGeneration,OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&duplicate)==ERROR_INVALID_STATE && !duplicate);
         CHECK(GetModuleFileNameA(NULL,command,MAX_PATH));
         {char executable[MAX_PATH];strcpy_s(executable,MAX_PATH,command);
             sprintf_s(command,sizeof(command),"\"%s\" --reservation-child",executable);}
@@ -902,28 +904,14 @@ int main(int argc,char **argv)
             DWORD request=0,frontend_generation=0,root_generation=0,old_generation;
             HANDLE shutdown=NULL;
             char participant_name[96],participant_command[MAX_PATH+192];
-            HANDLE native_stop=CreateEventW(NULL,TRUE,FALSE,NULL);
-            HANDLE native_closed=CreateEventW(NULL,TRUE,FALSE,NULL);
-            CHECK(native_stop && native_closed);
-            /* GUI-only carrier controls exist before its first text route.
-             * Authentication and event validation are unchanged. */
+            /* GUI-only carrier registration has no private shutdown events:
+             * every close request comes through its worker watch. */
             CHECK(OpenNtBaseServiceRegisterNativeBackend(worker,child.dwProcessId,
-                workerGeneration+1,NULL,native_stop,native_closed)==ERROR_ACCESS_DENIED);
+                workerGeneration+1,NULL)==ERROR_ACCESS_DENIED);
             CHECK(OpenNtBaseServiceRegisterNativeBackend(worker,child.dwProcessId,
-                workerGeneration,NULL,native_stop,native_stop)==ERROR_INVALID_PARAMETER);
-            CHECK(SetEvent(native_closed));
+                workerGeneration,NULL)==ERROR_SUCCESS);
             CHECK(OpenNtBaseServiceRegisterNativeBackend(worker,child.dwProcessId,
-                workerGeneration,NULL,native_stop,native_closed)==ERROR_INVALID_PARAMETER);
-            CHECK(ResetEvent(native_closed));
-            CHECK(!OpenNtBaseServiceRegisterNativeBackend(worker,child.dwProcessId,
-                workerGeneration,NULL,native_stop,native_closed));
-            CHECK(OpenNtBaseServiceRegisterNativeBackend(worker,child.dwProcessId,
-                workerGeneration,NULL,native_stop,native_closed)==ERROR_INVALID_STATE);
-            {HANDLE release=NULL;
-                CHECK(!OpenNtBaseServiceWorkerIoReleaseEvent(worker,child.dwProcessId,
-                    workerGeneration,&release));
-                CHECK(release && WaitForSingleObject(release,0)==WAIT_TIMEOUT);
-                CloseHandle(release);}
+                workerGeneration,NULL)==ERROR_INVALID_STATE);
             CHECK(DuplicateHandle(GetCurrentProcess(),initial_capability,GetCurrentProcess(),
                 &capability,0,FALSE,DUPLICATE_SAME_ACCESS));
             CHECK(capability && foreign && ready);
@@ -961,7 +949,7 @@ int main(int argc,char **argv)
             CHECK(!OpenNtBaseServiceRetainCommandWorker(root,initial_process.dwProcessId,root_generation,&selected));
             CHECK(GetProcessId(selected)==child.dwProcessId);CloseHandle(selected);selected=NULL;
             CHECK(OpenNtBaseServiceCreateNativeReservation(root,initial_process.dwProcessId,
-                root_generation,&duplicate)==ERROR_INVALID_STATE && !duplicate);
+                root_generation,OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&duplicate)==ERROR_INVALID_STATE && !duplicate);
             CHECK(OpenNtBaseServiceRegisterFrontendRoot(root,initial_process.dwProcessId,
                 root_generation,capability)==ERROR_ALREADY_EXISTS);
             CHECK(OpenNtBaseServiceRequestFrontend(launcher,GetCurrentProcessId(),launcherGeneration,foreign)==ERROR_ACCESS_DENIED);
@@ -1076,7 +1064,7 @@ int main(int argc,char **argv)
             /* Root loss is a broker retirement decision, not permission for
              * the old resident worker to switch to a different root. */
             CHECK(!OpenNtBaseServiceRegisterNativeBackend(worker,child.dwProcessId,workerGeneration,
-                capability,native_stop,native_closed));
+                capability));
             CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
             /* Re-registering presentation does not turn an ordinary attached
              * native process into a broker Direct task. */
@@ -1128,7 +1116,7 @@ int main(int argc,char **argv)
                 CHECK(!OpenNtBaseServiceReportConsoleMembers(root,initial_process.dwProcessId,
                     root_generation,2,members));}
             CHECK(OpenNtBaseServiceRegisterNativeBackend(worker,child.dwProcessId,workerGeneration,
-                capability,native_stop,native_closed)==ERROR_PIPE_NOT_CONNECTED);
+                capability)==ERROR_PIPE_NOT_CONNECTED);
             {
                 OPENNT_BASE_WORKER_INFO *tree=NULL;
                 uint32_t count=0;uint64_t epoch=0;
@@ -1163,24 +1151,10 @@ int main(int argc,char **argv)
             CloseHandle(laterChild.hThread);CloseHandle(laterChild.hProcess);
             CloseHandle(participant_release);participant_release=NULL;
             CloseHandle(client);CloseHandle(server);CloseHandle(ready);CloseHandle(foreign);CloseHandle(capability);
-            {
-                NATIVE_CLOSE_TEST close_test={native_stop,native_closed,child.hProcess,0};
-                HANDLE closer=CreateThread(NULL,0,acknowledge_native_close,&close_test,0,NULL);
-                DWORD closer_exit=ERROR_GEN_FAILURE;
-                CHECK(closer);
-                /* The route/root is already gone.  Service authority comes
-                 * from the authenticated native worker watch, not the former
-                 * frontend association. */
-                {
-                    OPENNT_BASE_MANAGEMENT_KEY key={managementEpoch,MANAGEMENT_WORKER,workerGeneration,0};
-                    CHECK(!OpenNtBaseServiceCloseManagementNode(service,&key));
-                }
-                CHECK(WaitForSingleObject(closer,5000)==WAIT_OBJECT_0);
-                CHECK(GetExitCodeThread(closer,&closer_exit) && !closer_exit);
-                CHECK(close_test.observed==WAIT_OBJECT_0);
-                CloseHandle(closer);
-            }
-            CloseHandle(native_stop);CloseHandle(native_closed);
+            /* The full management-close acknowledgement is exercised by a
+             * real worker-base client; this registry fixture only verifies
+             * native admission and root binding. */
+            CHECK(TerminateProcess(child.hProcess,ERROR_CANCELLED));
             CHECK(!DOSHead && !WOWHead);
         }
         CHECK(!OpenNtBaseServiceDisconnect(launcher));launcher=NULL;
@@ -1205,8 +1179,7 @@ int main(int argc,char **argv)
     }
     if(argc==2 && !strcmp(argv[1],"--native-backend")) {
         HANDLE capability=CreateEventW(NULL,TRUE,FALSE,NULL);
-        HANDLE stop=CreateEventW(NULL,TRUE,FALSE,NULL),closed=CreateEventW(NULL,TRUE,FALSE,NULL);
-        CHECK(capability && stop && closed);
+        CHECK(capability);
         CHECK(GetModuleFileNameA(NULL,command,MAX_PATH));
         {char executable[MAX_PATH];strcpy_s(executable,MAX_PATH,command);
             sprintf_s(command,sizeof(command),"\"%s\" --reservation-child",executable);}
@@ -1220,7 +1193,7 @@ int main(int argc,char **argv)
          * process that claimed a prepared native reservation; the complete
          * reserved registration/rebind path is exercised by --native-worker. */
         CHECK(OpenNtBaseServiceRegisterNativeBackend(worker,child.dwProcessId,workerGeneration,
-            capability,stop,closed)==ERROR_INVALID_STATE);
+            capability)==ERROR_INVALID_STATE);
         CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
         CHECK(!workerInfoCount);
         CHECK(!OpenNtBaseServiceDisconnect(worker));worker=NULL;
@@ -1228,7 +1201,7 @@ int main(int argc,char **argv)
         CHECK(OpenNtBaseServiceIsEmpty(service) && OpenNtBaseServiceStop(service));
         CHECK(TerminateProcess(child.hProcess,0));
         CloseHandle(child.hProcess);CloseHandle(self);
-        CloseHandle(capability);CloseHandle(stop);CloseHandle(closed);
+        CloseHandle(capability);
         puts("PASS native backend registry: rejects unreserved backend registration");
         return 0;
     }
@@ -1257,7 +1230,8 @@ int main(int argc,char **argv)
             CHECK(!OpenNtBaseServiceRetainFrontendRoot(launcher,GetCurrentProcessId(),
                 launcherGeneration,capability,&retained,&generation));
             CHECK(generation==laterGeneration);CloseHandle(retained);}
-        CHECK(!OpenNtBaseServiceCreateNativeReservation(launcher,GetCurrentProcessId(),launcherGeneration,&reservation));
+        CHECK(!OpenNtBaseServiceCreateNativeReservation(launcher,GetCurrentProcessId(),launcherGeneration,
+            OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&reservation));
         CHECK(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,NULL,NULL,&startup,&laterChild));
         CHECK(!OpenNtBaseServicePrepareWorker(launcher,GetCurrentProcessId(),launcherGeneration,reservation,laterChild.hProcess));
         CHECK(!OpenNtBaseServiceConnect(service,laterChild.hProcess,&worker,&workerGeneration));

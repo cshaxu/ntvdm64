@@ -23,7 +23,9 @@ function Run-Owned([string]$name,[string]$file,[string]$arguments,[int]$seconds,
     if($p.ExitCode -ne $expected){throw "Failed $name actual=$($p.ExitCode) expected=$expected"}
 }
 try {
-    $sources=@('src/mvdm/wow32/wow32.c','src/wow32-dll/source/wow_user_thunk_scope.c','tests/adapter-mvdm-host-out/wow/wow_dispatch_exception_fixture.c')
+    Run-Owned 'extract-wndproc' 'powershell.exe' ('-NoProfile -ExecutionPolicy Bypass -File "'+$repo+'/tests/observation/extract-wow-wndproc-fixture.ps1" -BuildRoot "'+$root+'"') 30
+    if((Get-Content "$root/extract-wndproc.out" -Raw) -notmatch '^WOW_WNDPROC_MIRROR_BYTE_EXACT_SELECTED_BODY'){throw 'Original WndProc body extraction failed'}
+    $sources=@('src/mvdm/wow32/wow32.c','src/mvdm/wow32/wmdisp32.c','src/wow32-dll/source/wow_user_thunk_scope.c','tests/adapter-mvdm-host-out/wow/wow_dispatch_exception_fixture.c')
     $objects=@()
     foreach($source in $sources){
         $name=[IO.Path]::GetFileNameWithoutExtension($source)
@@ -37,7 +39,8 @@ try {
         $extra=if($name -eq 'wow_user_thunk_scope'){' /Dwow_user_invoke_thunk=fixture_unused_original_invoke'}elseif($name -eq 'wow32'){' /DWOWSysErrorBox=wow_user_sys_error_box'}else{''}
         # Package unrelated original global callback tables too, so OPT:REF
         # can discard DLL-initialization graphs without fake service stubs.
-        $arguments='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cl.exe '+$flags+' '+$release+$extra+' /Gy /Gw /GL /Fo"'+$object+'" "'+$input+'""'
+        $include=if($name -eq 'wow_dispatch_exception_fixture'){' /I"'+$root+'"'}else{''}
+        $arguments='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cl.exe '+$flags+' '+$release+$extra+$include+' /Gy /Gw /GL /Fo"'+$object+'" "'+$input+'""'
         Run-Owned $name 'cmd.exe' $arguments 120
     }
     # MSVC requires symbols in the complete original TU to resolve before
@@ -84,9 +87,9 @@ try {
     $output=Get-Content "$root/fixture.out" -Raw
     if($output -notmatch 'PASS selected W32Dispatch and W32Exception' -or
         $output -notmatch 'DISPATCH_SEARCH debugger-first-chance=1 child-exit=0' -or
-        ([regex]::Matches($output,'DISPATCH_EXCEPTION phase=')).Count -ne 6 -or
+        ([regex]::Matches($output,'DISPATCH_EXCEPTION phase=')).Count -ne 8 -or
         ([regex]::Matches($output,'HARD_ERROR_SCOPE mode=')).Count -ne 5){throw 'Missing boundary assertions'}
-    @($sources|ForEach-Object {"$repo/$_"}) + @("$ProviderBuildRoot/build.ninja") |
+    @($sources|ForEach-Object {"$repo/$_"}) + @("$repo/src/mvdm/wow32/wmdisp32.c","$root/original-wndproc.inc","$ProviderBuildRoot/build.ninja") |
         Get-FileHash | Select-Object Path,Hash | ConvertTo-Json | Set-Content "$root/inputs.json"
     '0'|Set-Content "$root/exit.txt"
 }catch{$_|Out-String|Set-Content "$root/error.txt";'1'|Set-Content "$root/exit.txt";throw}

@@ -11,6 +11,7 @@ typedef struct OPENNT_BASE_RESERVATION {
     ULONG task;
     HANDLE console,worker;
     OPENNT_BASE_WORKER_KIND kind;
+    DWORD native_type;
     BOOL abandoned;
     broker_vdm_receipts streams;
 } OPENNT_BASE_RESERVATION;
@@ -71,19 +72,22 @@ DWORD OpenNtBaseReservationCreate(OPENNT_BASE_RESERVATIONS *state,DWORD launcher
     DWORD launcher_generation,ULONG task,HANDLE console,BOOL shared_wow,uint64_t *reservation)
 {
     return OpenNtBaseReservationCreateKind(state,launcher_pid,launcher_generation,
-        task,console,shared_wow ? OPENNT_BASE_WORKER_WOW : OPENNT_BASE_WORKER_DOS,reservation);
+        task,console,shared_wow ? OPENNT_BASE_WORKER_WOW : OPENNT_BASE_WORKER_DOS,0,reservation);
 }
 
 DWORD OpenNtBaseReservationCreateKind(OPENNT_BASE_RESERVATIONS *state,DWORD launcher_pid,
-    DWORD launcher_generation,ULONG task,HANDLE console,OPENNT_BASE_WORKER_KIND kind,uint64_t *reservation)
+    DWORD launcher_generation,ULONG task,HANDLE console,OPENNT_BASE_WORKER_KIND kind,DWORD native_type,
+    uint64_t *reservation)
 {
     OPENNT_BASE_RESERVATION *entry;
     /* A shared WOW request has no DOS ConsoleRecord in original srvvdm.c.
      * Its launch reservation still binds one worker/task, so NULL is a valid
      * service-local Console identity only after BaseService verifies WIN16. */
     if (!state || !launcher_pid || !launcher_generation || !reservation ||
-        kind<OPENNT_BASE_WORKER_DOS || kind>OPENNT_BASE_WORKER_NATIVE ||
-        (!console && kind!=OPENNT_BASE_WORKER_WOW))
+        kind<OPENNT_BASE_WORKER_DOS || kind>OPENNT_BASE_WORKER_NATIVE_GUI_LAUNCHER ||
+        (!console && kind!=OPENNT_BASE_WORKER_WOW && kind!=OPENNT_BASE_WORKER_NATIVE_GUI_LAUNCHER) ||
+        ((kind==OPENNT_BASE_WORKER_NATIVE || kind==OPENNT_BASE_WORKER_NATIVE_GUI_LAUNCHER) !=
+            OpenNtBaseNativeLaunchTypeIsValid(native_type)))
         return ERROR_INVALID_PARAMETER;
     *reservation=0;
     entry=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*entry));
@@ -105,7 +109,7 @@ DWORD OpenNtBaseReservationCreateKind(OPENNT_BASE_RESERVATIONS *state,DWORD laun
     if (!state->next) { LeaveCriticalSection(&state->lock);HeapFree(GetProcessHeap(),0,entry);return ERROR_ARITHMETIC_OVERFLOW; }
     entry->id=state->next++;
     entry->launcher_pid=launcher_pid;entry->launcher_generation=launcher_generation;
-    entry->task=task;entry->console=console;entry->kind=kind;
+    entry->task=task;entry->console=console;entry->kind=kind;entry->native_type=native_type;
     if (broker_vdm_receipts_initialize(&entry->streams,launcher_generation)) {
         LeaveCriticalSection(&state->lock);HeapFree(GetProcessHeap(),0,entry);
         return ERROR_INVALID_DATA;
@@ -189,20 +193,20 @@ DWORD OpenNtBaseReservationPrepareWorker(OPENNT_BASE_RESERVATIONS *state,uint64_
 
 static DWORD claim_worker(OPENNT_BASE_RESERVATIONS *state,DWORD worker_pid,
     DWORD worker_generation,uint64_t *reservation,ULONG *task,HANDLE *console,
-    OPENNT_BASE_WORKER_KIND *kind,HANDLE *worker,BOOL native_allowed)
+    OPENNT_BASE_WORKER_KIND *kind,DWORD *native_type,HANDLE *worker,BOOL native_allowed)
 {
     LIST_ENTRY *cursor;
     HANDLE retained=NULL;
-    if (!state || !worker_pid || !worker_generation || !reservation || !task || !console || !kind || !worker)
+    if (!state || !worker_pid || !worker_generation || !reservation || !task || !console || !kind || !native_type || !worker)
         return ERROR_INVALID_PARAMETER;
-    *reservation=0;*task=0;*console=NULL;*kind=OPENNT_BASE_WORKER_DOS;*worker=NULL;
+    *reservation=0;*task=0;*console=NULL;*kind=OPENNT_BASE_WORKER_DOS;*native_type=0;*worker=NULL;
     EnterCriticalSection(&state->lock);
     for (cursor=state->entries.Flink;cursor!=&state->entries;cursor=cursor->Flink) {
         OPENNT_BASE_RESERVATION *entry=CONTAINING_RECORD(cursor,OPENNT_BASE_RESERVATION,link);
         if (entry->worker_pid!=worker_pid) continue;
         /* Until a caller selects the native execution binding, never let it
          * run the original VDM record update/cleanup on a native worker. */
-        if (entry->kind==OPENNT_BASE_WORKER_NATIVE && !native_allowed) {
+        if ((entry->kind==OPENNT_BASE_WORKER_NATIVE || entry->kind==OPENNT_BASE_WORKER_NATIVE_GUI_LAUNCHER) && !native_allowed) {
             LeaveCriticalSection(&state->lock);return ERROR_NOT_SUPPORTED;
         }
         if (!entry->worker || WaitForSingleObject(entry->worker,0)!=WAIT_TIMEOUT) {
@@ -221,7 +225,7 @@ static DWORD claim_worker(OPENNT_BASE_RESERVATIONS *state,DWORD worker_pid,
             LeaveCriticalSection(&state->lock);return error;
         }
         entry->worker_generation=worker_generation;
-        *reservation=entry->id;*task=entry->task;*console=entry->console;*kind=entry->kind;
+        *reservation=entry->id;*task=entry->task;*console=entry->console;*kind=entry->kind;*native_type=entry->native_type;
         LeaveCriticalSection(&state->lock);*worker=retained;return ERROR_SUCCESS;
     }
     LeaveCriticalSection(&state->lock);return ERROR_NOT_FOUND;
@@ -229,19 +233,19 @@ static DWORD claim_worker(OPENNT_BASE_RESERVATIONS *state,DWORD worker_pid,
 
 DWORD OpenNtBaseReservationClaimWorkerKind(OPENNT_BASE_RESERVATIONS *state,DWORD worker_pid,
     DWORD worker_generation,uint64_t *reservation,ULONG *task,HANDLE *console,
-    OPENNT_BASE_WORKER_KIND *kind,HANDLE *worker)
+    OPENNT_BASE_WORKER_KIND *kind,DWORD *native_type,HANDLE *worker)
 {
-    return claim_worker(state,worker_pid,worker_generation,reservation,task,console,kind,worker,TRUE);
+    return claim_worker(state,worker_pid,worker_generation,reservation,task,console,kind,native_type,worker,TRUE);
 }
 
 DWORD OpenNtBaseReservationClaimWorker(OPENNT_BASE_RESERVATIONS *state,DWORD worker_pid,
     DWORD worker_generation,uint64_t *reservation,ULONG *task,HANDLE *console,BOOL *shared_wow,
     HANDLE *worker)
 {
-    OPENNT_BASE_WORKER_KIND kind;DWORD error;
+    OPENNT_BASE_WORKER_KIND kind;DWORD native_type,error;
     if(!shared_wow)return ERROR_INVALID_PARAMETER;
     *shared_wow=FALSE;
-    error=claim_worker(state,worker_pid,worker_generation,reservation,task,console,&kind,worker,FALSE);
+    error=claim_worker(state,worker_pid,worker_generation,reservation,task,console,&kind,&native_type,worker,FALSE);
     if(!error)*shared_wow=kind==OPENNT_BASE_WORKER_WOW;
     return error;
 }

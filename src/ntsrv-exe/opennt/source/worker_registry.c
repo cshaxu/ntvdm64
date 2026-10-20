@@ -17,6 +17,29 @@ static BOOL service_native_root_selectable(OPENNT_BASE_SERVICE *service,
 static VOID CALLBACK service_vdm_process_completed(void *context,BOOLEAN fired);
 static DWORD service_vdm_update(service_vdm_admission *state,BOOL undo);
 static DWORD service_vdm_admit(void *context,HANDLE process);
+BOOL service_root_has_worker(OPENNT_BASE_CONNECTION *root);
+
+/* Service-lock held.  A worker exit is the completion witness for either a
+ * Console-close drain or a direct Worker-close request.  Only the service may
+ * turn "the last worker is gone" into frontend retirement; NTCON never
+ * infers it from its own remaining Console membership. */
+static void service_retire_root_after_worker_exit(OPENNT_BASE_SERVICE *service,
+    DWORD root_generation)
+{
+    LIST_ENTRY *link;
+    if(!root_generation)return;
+    for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
+        OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
+        if(root->process.SequenceNumber!=root_generation || !root->frontend_capability ||
+            root->frontend_closing || root->frontend_close_draining)continue;
+        if(!service_root_has_worker(root)) {
+            root->frontend_closing=TRUE;
+            service_signal_frontend_states(service);
+            WakeAllConditionVariable(&service->frontend_changed);
+        }
+        break;
+    }
+}
 /* All callers hold the existing service lock. The worker watch is the single
  * persistent relationship authority; Console context only proves admission. */
 OPENNT_BASE_WORKER_WATCH *service_find_worker_watch(OPENNT_BASE_SERVICE *service,DWORD generation)
@@ -103,6 +126,7 @@ VOID CALLBACK service_worker_terminated(PVOID context,BOOLEAN fired)
     LIST_ENTRY *entry;
     OPENNT_BASE_EMPTY_NOTIFY notify=NULL;
     void *notify_context=NULL;
+    DWORD root_generation;
     (void)fired;
     if (!watch || !watch->service) return;
     EnterCriticalSection(&watch->service->lock);
@@ -146,7 +170,9 @@ VOID CALLBACK service_worker_terminated(PVOID context,BOOLEAN fired)
         connection->retired=TRUE;
         InsertTailList(&watch->service->retired_connections,&connection->retired_link);
     }
+    root_generation=watch->frontend_root_generation;
     RemoveEntryList(&watch->link);
+    service_retire_root_after_worker_exit(watch->service,root_generation);
     WakeAllConditionVariable(&watch->service->frontend_changed);
     service_signal_frontend_states(watch->service);
     service_signal_worker_states(watch->service);
@@ -156,52 +182,37 @@ VOID CALLBACK service_worker_terminated(PVOID context,BOOLEAN fired)
 service_clear_management_labels(watch);
     CloseHandle(watch->process.ProcessHandle);
     if(watch->shutdown)CloseHandle(watch->shutdown);
+    if(watch->console_close)CloseHandle(watch->console_close);
     HeapFree(GetProcessHeap(),0,watch);
     if (notify) notify(notify_context);
 }
 
 
 DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *connection,
-    DWORD pid,DWORD generation,HANDLE frontend,HANDLE stop,HANDLE closed)
+    DWORD pid,DWORD generation,HANDLE frontend)
 {
-    HANDLE root=NULL,stop_copy=NULL,closed_copy=NULL;DWORD root_generation=0,error;
-    LIST_ENTRY *link;EVENT_BASIC_INFORMATION info;
-    SERVICE_COMPARE_HANDLES compare=(SERVICE_COMPARE_HANDLES)GetProcAddress(
-        GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
-    SERVICE_QUERY_OBJECT query=(SERVICE_QUERY_OBJECT)GetProcAddress(GetModuleHandleW(L"ntdll.dll"),"NtQueryObject");
-    struct {UNICODE_STRING name;WCHAR buffer[256];} object_name;
-    HANDLE events[2];DWORD index;
+    HANDLE root=NULL;DWORD root_generation=0,error;
+    LIST_ENTRY *link;
     if(!connection)return ERROR_ACCESS_DENIED;
-    if(!compare || !query)return ERROR_CALL_NOT_IMPLEMENTED;
     EnterCriticalSection(&connection->service->lock);
     /* Only the process which claimed the authenticated native reservation may
      * become a native worker.  A connected launcher/root is not sufficient. */
     if(!OpenNtBaseServicePeer(connection,pid,generation))
         {error=ERROR_ACCESS_DENIED;goto done;}
-    if(!connection->native_worker ||
+    if(!connection->native_worker || connection->native_gui_launcher ||
         connection->reservation_kind!=OPENNT_BASE_WORKER_NATIVE ||
         connection->frontend_capability || connection->process.fVDM)
         {error=ERROR_INVALID_STATE;goto done;}
-    /* Close control belongs to the worker before it acquires any text route.
-     * The same events accompany the later authenticated frontend binding. */
+    /* A root is merely the authenticated presentation association.  Worker
+     * lifecycle commands are held by the worker watch, never by a parallel
+     * native-only stop/closed event pair. */
     if(frontend) {
         error=OpenNtBaseServiceRetainFrontendRoot(connection,pid,generation,frontend,&root,&root_generation);
         if(error)goto done;
-    } else if(connection->native_stop || connection->native_closed)
-        {error=ERROR_INVALID_STATE;goto done;}
+    }
     if(connection->native_frontend_registered) {
         if(service_worker_root(connection)==root_generation) {error=ERROR_INVALID_STATE;goto done;}
         error=ERROR_PIPE_NOT_CONNECTED;goto done;
-    }
-    if(compare(stop,closed) || (frontend && (compare(stop,frontend) || compare(closed,frontend))))
-        {error=ERROR_INVALID_PARAMETER;goto done;}
-    events[0]=stop;events[1]=closed;
-    for(index=0;index<2;++index) {
-        ZeroMemory(&object_name,sizeof(object_name));
-        if(NtQueryEvent(events[index],EventBasicInformation,&info,sizeof(info),NULL)<0 ||
-            info.EventType!=NotificationEvent || info.EventState ||
-            query(events[index],1,&object_name,sizeof(object_name),NULL)<0 || object_name.name.Length)
-            {error=ERROR_INVALID_PARAMETER;goto done;}
     }
     for(link=connection->service->connections.Flink;link!=&connection->service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *other=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
@@ -210,10 +221,6 @@ DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *connection,
             WaitForSingleObject(other->process.ProcessHandle,0)==WAIT_TIMEOUT)
             {error=ERROR_ALREADY_EXISTS;goto done;}
     }
-    if(!DuplicateHandle(GetCurrentProcess(),stop,GetCurrentProcess(),&stop_copy,
-        SYNCHRONIZE|EVENT_MODIFY_STATE,FALSE,0) ||
-        !DuplicateHandle(GetCurrentProcess(),closed,GetCurrentProcess(),&closed_copy,SYNCHRONIZE,FALSE,0))
-        {error=GetLastError();goto done;}
     {
         LIST_ENTRY *root_link;
         for(root_link=connection->service->connections.Flink;
@@ -226,13 +233,10 @@ DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *connection,
                  registered_root->frontend_admission_deadline=0;break;}
         }
     }
-    if(connection->native_stop)CloseHandle(connection->native_stop);
-    if(connection->native_closed)CloseHandle(connection->native_closed);
-    connection->native_stop=stop_copy;connection->native_closed=closed_copy;
     connection->native_frontend_registered=root_generation!=0;
-    stop_copy=closed_copy=NULL;service_signal_frontend_states(connection->service);error=0;
+    service_signal_frontend_states(connection->service);error=0;
 done:
-    if(root)CloseHandle(root);if(stop_copy)CloseHandle(stop_copy);if(closed_copy)CloseHandle(closed_copy);
+    if(root)CloseHandle(root);
     LeaveCriticalSection(&connection->service->lock);return error;
 }
 
@@ -328,6 +332,30 @@ DWORD OpenNtBaseServiceWorkerShutdownEvent(OPENNT_BASE_CONNECTION *worker,DWORD 
     return error;
 }
 
+DWORD OpenNtBaseServiceWorkerConsoleCloseEvent(OPENNT_BASE_CONNECTION *worker,DWORD pid,
+    DWORD generation,HANDLE *close)
+{
+    LIST_ENTRY *link;
+    DWORD error=ERROR_ACCESS_DENIED;
+    if(!worker || !close)return ERROR_INVALID_PARAMETER;
+    *close=NULL;
+    EnterCriticalSection(&worker->service->lock);
+    if(OpenNtBaseServicePeer(worker,pid,generation))
+        for(link=worker->service->worker_watches.Flink;link!=&worker->service->worker_watches;link=link->Flink) {
+            OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
+            if(watch->process.SequenceNumber!=generation)continue;
+            if(watch->wow || watch->native_gui_launcher) {
+                error=ERROR_NOT_SUPPORTED;
+                break;
+            }
+            error=DuplicateHandle(GetCurrentProcess(),watch->console_close,GetCurrentProcess(),close,
+                SYNCHRONIZE,FALSE,0) ? ERROR_SUCCESS : GetLastError();
+            break;
+        }
+    LeaveCriticalSection(&worker->service->lock);
+    return error;
+}
+
 
 DWORD OpenNtBaseServiceWorkerIoReleaseEvent(OPENNT_BASE_CONNECTION *worker,DWORD pid,
     DWORD generation,HANDLE *release)
@@ -338,7 +366,7 @@ DWORD OpenNtBaseServiceWorkerIoReleaseEvent(OPENNT_BASE_CONNECTION *worker,DWORD
     EnterCriticalSection(&worker->service->lock);
     if(OpenNtBaseServicePeer(worker,pid,generation) &&
         (worker->registered_worker || (worker->native_worker &&
-            (service_worker_root(worker) || (worker->native_stop && worker->native_closed))))) {
+            worker->native_frontend_registered && service_worker_root(worker)))) {
         if(!worker->worker_io_release)
             worker->worker_io_release=CreateEventW(NULL,FALSE,FALSE,NULL);
         if(!worker->worker_io_release)error=GetLastError();
@@ -385,26 +413,32 @@ DWORD OpenNtBaseServiceCreateReservation(OPENNT_BASE_CONNECTION *connection,DWOR
 
 
 DWORD OpenNtBaseServiceCreateNativeReservation(OPENNT_BASE_CONNECTION *connection,
-    DWORD pid,DWORD generation,uint64_t *reservation)
+    DWORD pid,DWORD generation,DWORD native_type,uint64_t *reservation)
 {
-    DWORD error;
+    DWORD error;BOOL text;
     if (!connection || !reservation) return ERROR_INVALID_PARAMETER;
+    if(!OpenNtBaseNativeLaunchTypeIsValid(native_type))return ERROR_INVALID_PARAMETER;
+    text=OpenNtBaseNativeLaunchTypeIsText(native_type);
     *reservation=0;
     if (!OpenNtBaseServicePeer(connection,pid,generation)) return ERROR_ACCESS_DENIED;
-    /* Reuse the execution-Console discriminator, not a frontend capability.
-     * No CheckVDM/DOS record is manufactured for a native worker. */
-    error=service_bind_existing_console(connection);
-    if (error) return error;
+    /* Only a resident text carrier has a Console identity.  A GUI launcher is
+     * a one-shot broker endpoint: retaining a Console merely to start it would
+     * recreate the hidden-carrier lifetime this split removes. */
+    if(text) {
+        error=service_bind_existing_console(connection);
+        if(error)return error;
+    }
     EnterCriticalSection(&connection->service->lock);
     if (connection->reservation || connection->pending_creation || connection->selected_native_generation ||
             connection->process.fVDM || connection->native_worker || connection->wow)
         error=ERROR_INVALID_STATE;
     else {
         error=OpenNtBaseReservationCreateKind(connection->service->reservations,
-            pid,generation,0,connection->console,OPENNT_BASE_WORKER_NATIVE,reservation);
+            pid,generation,0,text ? connection->console : NULL,
+            text ? OPENNT_BASE_WORKER_NATIVE : OPENNT_BASE_WORKER_NATIVE_GUI_LAUNCHER,native_type,reservation);
         if (!error) {
             connection->reservation=*reservation;
-            connection->reservation_kind=OPENNT_BASE_WORKER_NATIVE;
+            connection->reservation_kind=text ? OPENNT_BASE_WORKER_NATIVE : OPENNT_BASE_WORKER_NATIVE_GUI_LAUNCHER;
             service_signal_worker_states(connection->service);
         }
     }
@@ -648,25 +682,29 @@ done:
 
 
 DWORD OpenNtBaseServiceStartNativeWorker(OPENNT_BASE_CONNECTION *connection,DWORD pid,
-    DWORD generation,HANDLE *worker)
+    DWORD generation,DWORD native_type,HANDLE *worker)
 {
     WCHAR image[MAX_PATH],command[MAX_PATH+3];
     STARTUPINFOW startup={sizeof(startup)};
-    uint64_t reservation=0;DWORD error;
-    if(!worker)return ERROR_INVALID_PARAMETER;
+    uint64_t reservation=0;DWORD error;BOOL text;
+    if(!worker || !OpenNtBaseNativeLaunchTypeIsValid(native_type))return ERROR_INVALID_PARAMETER;
     *worker=NULL;
-    error=OpenNtBaseServiceSelectNativeWorker(connection,pid,generation,worker);
-    if(error!=ERROR_NOT_FOUND)return error;
-    error=OpenNtBaseServiceCreateNativeReservation(connection,pid,generation,&reservation);
+    text=OpenNtBaseNativeLaunchTypeIsText(native_type);
+    if(text) {
+        error=OpenNtBaseServiceSelectNativeWorker(connection,pid,generation,worker);
+        if(error!=ERROR_NOT_FOUND)return error;
+    }
+    error=OpenNtBaseServiceCreateNativeReservation(connection,pid,generation,native_type,&reservation);
     if(error)return error;
     /* Same-package product worker only. No remote executable/flags command. */
     error=common_product_path_w(L"system32\\ntvwm.exe",image,ARRAYSIZE(image));
     if(error)goto done;
-    if(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\"",image)<0)
+    if(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" %ls",image,
+        text ? L"--cui-worker" : L"--gui-launcher")<0)
         {error=ERROR_FILENAME_EXCED_RANGE;goto done;}
     startup.dwFlags=STARTF_USESHOWWINDOW;startup.wShowWindow=SW_HIDE;
     error=broker_worker_start(connection,pid,generation,reservation,image,command,NULL,
-        CREATE_NEW_CONSOLE,&startup,worker);
+        text ? CREATE_NEW_CONSOLE : DETACHED_PROCESS,&startup,worker);
 done:
     if(error)(void)OpenNtBaseServiceReleaseReservation(connection,pid,generation,reservation);
     return error;

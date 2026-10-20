@@ -52,13 +52,13 @@ error_status_t Server_StartVdmWorker(handle_t binding,VDM_CONNECTION connection,
         characters,environment,show,frontend,worker,parent,receipt);
 }
 error_status_t Server_StartNativeWorker(handle_t binding,VDM_CONNECTION connection,
-    HANDLE process,ULONG generation,HANDLE *worker)
+    HANDLE process,ULONG generation,ULONG native_type,HANDLE *worker)
 {
     DWORD pid,error;
     if(!worker)return ERROR_INVALID_PARAMETER;
     *worker=NULL;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceStartNativeWorker(connection,pid,generation,worker);
+    return error ? error : OpenNtBaseServiceStartNativeWorker(connection,pid,generation,native_type,worker);
 }
 error_status_t Server_StartFrontend(handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation,LONGLONG window,ULONG borrowed,
@@ -460,10 +460,10 @@ error_status_t Server_BindConsoleContext(handle_t binding,VDM_CONNECTION connect
     return error ? error : OpenNtBaseServiceBindConsoleContext(connection,pid,generation,capability);
 }
 error_status_t Server_RegisterNativeBackend(handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,HANDLE frontend,HANDLE stop,HANDLE closed)
+    ULONG generation,HANDLE frontend)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceRegisterNativeBackend(connection,pid,generation,frontend,stop,closed);
+    return error ? error : OpenNtBaseServiceRegisterNativeBackend(connection,pid,generation,frontend);
 }
 
 error_status_t Server_WorkerShutdownEvent(handle_t binding,VDM_CONNECTION connection,HANDLE process,
@@ -472,6 +472,13 @@ error_status_t Server_WorkerShutdownEvent(handle_t binding,VDM_CONNECTION connec
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
     *shutdown=NULL;
     return error ? error : OpenNtBaseServiceWorkerShutdownEvent(connection,pid,generation,shutdown);
+}
+error_status_t Server_WorkerConsoleCloseEvent(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,HANDLE *close)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    *close=NULL;
+    return error ? error : OpenNtBaseServiceWorkerConsoleCloseEvent(connection,pid,generation,close);
 }
 error_status_t Server_WorkerIoCheckpoint(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG reason,ULONG request,ULONG *decision)
@@ -916,7 +923,8 @@ error_status_t Server_Reserve(handle_t binding,VDM_CONNECTION connection,HANDLE 
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
     if (error) return error;
     if(native_worker>1 || (native_worker && task))return ERROR_INVALID_PARAMETER;
-    error=native_worker ? OpenNtBaseServiceCreateNativeReservation(connection,pid,generation,&id) :
+    error=native_worker ? OpenNtBaseServiceCreateNativeReservation(connection,pid,generation,
+        OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&id) :
         OpenNtBaseServiceCreateReservation(connection,pid,generation,task,&id);
     if (!error) *reservation=(hyper)id;
     return error;
@@ -972,7 +980,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v46_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v47_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -1019,7 +1027,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v46_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v47_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);
