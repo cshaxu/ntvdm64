@@ -172,6 +172,7 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                 watch->wow=shared_wow;
                 watch->native_gui_launcher=connection->native_gui_launcher;
                 watch->reservation=reservation;
+                watch->native_launch_type=native_type;
                 watch->shutdown=CreateEventW(NULL,TRUE,FALSE,NULL);
                 watch->console_close=CreateEventW(NULL,TRUE,FALSE,NULL);
                 if(!watch->shutdown || !watch->console_close)error=GetLastError();

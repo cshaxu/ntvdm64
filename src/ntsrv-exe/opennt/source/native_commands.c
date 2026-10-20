@@ -227,6 +227,8 @@ DWORD OpenNtBaseServiceBindNativeTarget(OPENNT_BASE_CONNECTION *connection,DWORD
     EnterCriticalSection(&connection->service->lock);
     if(OpenNtBaseServicePeer(connection,pid,generation) && connection->native_worker &&
         connection->native_launch_type==actual_type &&
+        /* GUI launcher means non-text; CUI carrier means text.  This is the
+         * final PE-header recheck, rather than trusting a requester label. */
         connection->native_gui_launcher!=OpenNtBaseNativeLaunchTypeIsText(actual_type)) {
         for(link=connection->win32records.Flink;link!=&connection->win32records;link=link->Flink) {
             OPENNT_BASE_WIN32RECORD *record=CONTAINING_RECORD(link,OPENNT_BASE_WIN32RECORD,link);
@@ -242,8 +244,11 @@ DWORD OpenNtBaseServiceBindNativeTarget(OPENNT_BASE_CONNECTION *connection,DWORD
                     HANDLE owned_receipt=NULL,owned_target=NULL,owned_wait=NULL;
                     if(!DuplicateHandle(GetCurrentProcess(),receipt,GetCurrentProcess(),&owned_receipt,
                         EVENT_MODIFY_STATE,FALSE,0))error=GetLastError();
+                    /* NTSRV observes an admitted GUI target; it never owns or
+                     * terminates it.  Direct and hook-reported targets differ
+                     * only in how this observation record is created. */
                     else if(record->gui && !DuplicateHandle(GetCurrentProcess(),target,GetCurrentProcess(),&owned_target,
-                        SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION|PROCESS_TERMINATE,FALSE,0))error=GetLastError();
+                        SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,FALSE,0))error=GetLastError();
                     else if(record->gui && !RegisterWaitForSingleObject(&owned_wait,owned_target,
                         service_gui_exit,connection->service,INFINITE,WT_EXECUTEONLYONCE))error=GetLastError();
                     else {
@@ -349,9 +354,11 @@ DWORD service_queue_native_command(OPENNT_BASE_CONNECTION *connection,DWORD pid,
         if (error) goto done;
     } else if(!record || !bytes) {error=ERROR_INVALID_PARAMETER;goto done;}
     {
-        /* The existing admission selects the process. Neither an arbitrary
-         * PID nor frontend membership can nominate an execution endpoint. */
-        error=OpenNtBaseServiceRetainCommandWorker(connection,pid,generation,&worker);
+        /* Native direct launch derives its exact worker kind/class from the
+         * authenticated reservation.  A GUI request never falls through the
+         * resident CUI selector, and a CUI request cannot claim a GUI launcher. */
+        error=bytes ? OpenNtBaseServiceRetainNativeCommandWorker(connection,pid,generation,&worker) :
+            OpenNtBaseServiceRetainCommandWorker(connection,pid,generation,&worker);
         if (error) goto done;
         for (link=connection->service->connections.Flink;link!=&connection->service->connections;link=link->Flink) {
             OPENNT_BASE_CONNECTION *candidate=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
@@ -557,7 +564,11 @@ DWORD OpenNtBaseServiceSubmitNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD 
             wcslen(strings[0])>=ARRAYSIZE(image))return ERROR_INVALID_DATA;
         lstrcpynW(image,*strings[0] ? strings[0] : strings[1],ARRAYSIZE(image));
     } else if(payload)return ERROR_INVALID_PARAMETER;
-    error=OpenNtBaseServiceRetainCommandWorker(caller,pid,generation,&worker);
+    /* This preflight is deliberately the same reservation-exact selection as
+     * queueing below.  Do not report a GUI launcher ready and then attempt to
+     * deliver through the legacy CUI-only command-worker path. */
+    error=bytes ? OpenNtBaseServiceRetainNativeCommandWorker(caller,pid,generation,&worker) :
+        OpenNtBaseServiceRetainCommandWorker(caller,pid,generation,&worker);
     if(error)return error;
     startup=CreateEventW(NULL,TRUE,FALSE,NULL);
     if(!startup){error=GetLastError();goto done;}

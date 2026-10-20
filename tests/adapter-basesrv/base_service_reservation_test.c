@@ -26,6 +26,8 @@ int fixture_borrowed_console_identity_loss(void);
 DWORD service_next_frontend_deadline_at(OPENNT_BASE_SERVICE *,ULONGLONG,ULONGLONG *);
 DWORD service_retire_expired_frontends_at(OPENNT_BASE_SERVICE *,ULONGLONG);
 static const BYTE native_payload[3]={'N','T','C'};
+#define TEST_NATIVE_CUI_TYPE (sizeof(void *)==8 ? \
+    OPENNT_BASE_NATIVE_LAUNCH_WIN64_CUI : OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI)
 static DWORD test_native_request;
 #define queue_native_fixture(a,b,c,d,e) \
     fixture_queue_native_command(a,b,c,d,3,e)
@@ -59,17 +61,17 @@ static DWORD fixture_register_root(OPENNT_BASE_CONNECTION *root,DWORD pid,
 static int frontend_pair(HANDLE *server,HANDLE *client)
 {
     char name[96];
-    SECURITY_DESCRIPTOR descriptor;
-    SECURITY_ATTRIBUTES security={sizeof(security),&descriptor,FALSE};
     sprintf_s(name,sizeof(name),"\\\\.\\pipe\\ntvdm-frontend-test-%lu",GetCurrentProcessId());
-    CHECK(InitializeSecurityDescriptor(&descriptor,SECURITY_DESCRIPTOR_REVISION));
-    /* The fixture's client is created under this runner's restricted token.
-     * Service admission still verifies the authenticated creator/server PIDs. */
-    CHECK(SetSecurityDescriptorDacl(&descriptor,TRUE,NULL,FALSE));
+    /* Both ends belong to this fixture.  Let the host create the ordinary
+     * same-token pipe ACL; a hand-built descriptor has no owner and can be
+     * denied by the restricted runner despite its NULL DACL. */
     *server=CreateNamedPipeA(name,PIPE_ACCESS_DUPLEX|FILE_FLAG_FIRST_PIPE_INSTANCE,
-        PIPE_TYPE_BYTE|PIPE_WAIT,1,1024,1024,0,&security);
+        PIPE_TYPE_BYTE|PIPE_WAIT,1,1024,1024,0,NULL);
     CHECK(*server!=INVALID_HANDLE_VALUE);
-    *client=CreateFileA(name,GENERIC_READ|GENERIC_WRITE,0,NULL,OPEN_EXISTING,0,NULL);
+    /* The pipe endpoint needs byte read/write only.  GENERIC_* also asks this
+     * restricted test token for metadata rights which the pipe DACL need not
+     * grant, turning an otherwise valid in-process frontend pair into ACCESS_DENIED. */
+    *client=CreateFileA(name,FILE_READ_DATA|FILE_WRITE_DATA,0,NULL,OPEN_EXISTING,0,NULL);
     CHECK(*client!=INVALID_HANDLE_VALUE);
     CHECK(ConnectNamedPipe(*server,NULL) || GetLastError()==ERROR_PIPE_CONNECTED);
     return 0;
@@ -484,7 +486,7 @@ static int frontend_authority(void)
             CHECK(!OpenNtBaseServiceRetainFrontendRoot(launcher,GetCurrentProcessId(),launcher_generation,
                 capability,&retained,&retained_generation));CloseHandle(retained);
             CHECK(!OpenNtBaseServiceCreateNativeReservation(launcher,GetCurrentProcessId(),launcher_generation,
-                OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&reservation));
+                TEST_NATIVE_CUI_TYPE,&reservation));
             CHECK(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
                 NULL,NULL,&startup,&backend));
             CHECK(!OpenNtBaseServicePrepareWorker(launcher,GetCurrentProcessId(),launcher_generation,reservation,backend.hProcess));
@@ -643,7 +645,7 @@ static int frontend_notification(BOOL baseline)
             capability,&retained,&verified_generation));
         CHECK(verified_generation==root_generation);CloseHandle(retained);
         CHECK(!OpenNtBaseServiceCreateNativeReservation(launcher,GetCurrentProcessId(),generation,
-            OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&reservation));
+            TEST_NATIVE_CUI_TYPE,&reservation));
         CHECK(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
             NULL,NULL,&startup,&backend));
         CHECK(!OpenNtBaseServicePrepareWorker(launcher,GetCurrentProcessId(),generation,reservation,backend.hProcess));
@@ -861,7 +863,7 @@ int main(int argc,char **argv)
         DWORD initial_generation=0,retained_generation=0;
         CHECK(!OpenNtBaseServiceConnect(service,self,&launcher,&launcherGeneration));
         CHECK(OpenNtBaseServiceCreateNativeReservation(launcher,GetCurrentProcessId(),
-            launcherGeneration+1,OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&reservation)==ERROR_ACCESS_DENIED && !reservation);
+            launcherGeneration+1,TEST_NATIVE_CUI_TYPE,&reservation)==ERROR_ACCESS_DENIED && !reservation);
         CHECK(initial_capability && GetModuleFileNameA(NULL,command,MAX_PATH));
         {char executable[MAX_PATH];strcpy_s(executable,MAX_PATH,command);
             sprintf_s(command,sizeof(command),"\"%s\" --reservation-child",executable);}
@@ -878,9 +880,9 @@ int main(int argc,char **argv)
             launcherGeneration,initial_capability,&retained_root,&retained_generation));
         CHECK(retained_generation==initial_generation);CloseHandle(retained_root);
         CHECK(!OpenNtBaseServiceCreateNativeReservation(launcher,GetCurrentProcessId(),
-            launcherGeneration,OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&reservation) && reservation);
+            launcherGeneration,TEST_NATIVE_CUI_TYPE,&reservation) && reservation);
         CHECK(OpenNtBaseServiceCreateNativeReservation(launcher,GetCurrentProcessId(),
-            launcherGeneration,OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&duplicate)==ERROR_INVALID_STATE && !duplicate);
+            launcherGeneration,TEST_NATIVE_CUI_TYPE,&duplicate)==ERROR_INVALID_STATE && !duplicate);
         CHECK(GetModuleFileNameA(NULL,command,MAX_PATH));
         {char executable[MAX_PATH];strcpy_s(executable,MAX_PATH,command);
             sprintf_s(command,sizeof(command),"\"%s\" --reservation-child",executable);}
@@ -949,7 +951,7 @@ int main(int argc,char **argv)
             CHECK(!OpenNtBaseServiceRetainCommandWorker(root,initial_process.dwProcessId,root_generation,&selected));
             CHECK(GetProcessId(selected)==child.dwProcessId);CloseHandle(selected);selected=NULL;
             CHECK(OpenNtBaseServiceCreateNativeReservation(root,initial_process.dwProcessId,
-                root_generation,OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&duplicate)==ERROR_INVALID_STATE && !duplicate);
+                root_generation,TEST_NATIVE_CUI_TYPE,&duplicate)==ERROR_INVALID_STATE && !duplicate);
             CHECK(OpenNtBaseServiceRegisterFrontendRoot(root,initial_process.dwProcessId,
                 root_generation,capability)==ERROR_ALREADY_EXISTS);
             CHECK(OpenNtBaseServiceRequestFrontend(launcher,GetCurrentProcessId(),launcherGeneration,foreign)==ERROR_ACCESS_DENIED);
@@ -1231,7 +1233,7 @@ int main(int argc,char **argv)
                 launcherGeneration,capability,&retained,&generation));
             CHECK(generation==laterGeneration);CloseHandle(retained);}
         CHECK(!OpenNtBaseServiceCreateNativeReservation(launcher,GetCurrentProcessId(),launcherGeneration,
-            OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&reservation));
+            TEST_NATIVE_CUI_TYPE,&reservation));
         CHECK(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,NULL,NULL,&startup,&laterChild));
         CHECK(!OpenNtBaseServicePrepareWorker(launcher,GetCurrentProcessId(),launcherGeneration,reservation,laterChild.hProcess));
         CHECK(!OpenNtBaseServiceConnect(service,laterChild.hProcess,&worker,&workerGeneration));
@@ -2286,7 +2288,24 @@ int main(int argc,char **argv)
             CHECK(WaitForSingleObject(child.hProcess,0)==WAIT_TIMEOUT);
             CHECK(TerminateProcess(child.hProcess,0)); /* fixture cleanup */
             CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
-        } else CHECK(OpenNtBaseServiceTerminateWorker(service,child.dwProcessId)==ERROR_SUCCESS);
+        } else {
+            NATIVE_CLOSE_TEST close={0};
+            HANDLE close_thread;
+            /* Emulate the worker-base carrier: NTSRV signals the generic
+             * shutdown event, and the worker owns its normal process exit. */
+            CHECK(!OpenNtBaseServiceWorkerShutdownEvent(worker,child.dwProcessId,
+                workerGeneration,&close.stop));
+            close.process=child.hProcess;
+            close.closed=CreateEventW(NULL,TRUE,FALSE,NULL);
+            CHECK(close.closed);
+            close_thread=CreateThread(NULL,0,acknowledge_native_close,&close,0,NULL);
+            CHECK(close_thread);
+            CHECK(OpenNtBaseServiceTerminateWorker(service,child.dwProcessId)==ERROR_SUCCESS);
+            CHECK(WaitForSingleObject(close_thread,5000)==WAIT_OBJECT_0 &&
+                GetExitCodeThread(close_thread,&exitCode) && !exitCode &&
+                close.observed==WAIT_OBJECT_0 && WaitForSingleObject(close.closed,0)==WAIT_OBJECT_0);
+            CloseHandle(close_thread);CloseHandle(close.closed);CloseHandle(close.stop);
+        }
         { DWORD wait=WaitForSingleObject(laterParentEvent,5000);
           if (wait!=WAIT_OBJECT_0) fprintf(stderr,"pair completion wait=%lu error=%lu handle=%p\n",wait,GetLastError(),laterParentEvent);
           CHECK(wait==WAIT_OBJECT_0); }

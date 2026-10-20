@@ -52,6 +52,11 @@ DWORD OpenNtBaseReservationRevokeStream(OPENNT_BASE_RESERVATIONS *,uint64_t rese
  * process-handle namespace; command records still contain no OS handles. */
 DWORD OpenNtBaseReservationRetainWorker(OPENNT_BASE_RESERVATIONS *,uint64_t reservation,
     DWORD launcher_pid,DWORD launcher_generation,HANDLE *worker);
+/* Native command routing obtains its expected class from this authenticated
+ * reservation, not from a launcher-supplied worker choice. */
+DWORD OpenNtBaseReservationRetainNativeWorker(OPENNT_BASE_RESERVATIONS *,uint64_t reservation,
+    DWORD launcher_pid,DWORD launcher_generation,OPENNT_BASE_WORKER_KIND *,DWORD *native_type,
+    HANDLE *worker);
 DWORD OpenNtBaseReservationRelease(OPENNT_BASE_RESERVATIONS *,uint64_t reservation,
     DWORD launcher_pid,DWORD launcher_generation);
 /* Once Connect has authenticated the prepared process, the worker owns the

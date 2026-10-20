@@ -180,8 +180,9 @@ reply_ready:
     startup_reported=TRUE;
     if(error)ntvwm_executions_note_broker_failure(owner,error);
     if(!error && !startup_status && !request->root_capability) {
-        /* NTSRV now owns the GUI process reference and real exit watch.
-         * Startup released this worker request; no local GUI wait or I/O. */
+        /* NTSRV retains only an observation reference and real exit watch.
+         * The target remains owned by its normal Windows parent/lifetime;
+         * startup releases this one-shot launcher request without local I/O. */
         broker_completed=TRUE;
         goto done;
     }

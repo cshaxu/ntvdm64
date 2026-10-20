@@ -182,6 +182,11 @@ DWORD OpenNtBaseServiceAttachFrontendRequest(OPENNT_BASE_CONNECTION *,DWORD pid,
  * No caller-selected PID, task selection, Console handle or channel payload. */
 DWORD OpenNtBaseServiceRetainCommandWorker(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE *worker);
+/* Native direct launch routing is reservation-exact.  Unlike the original
+ * command-worker selector it may retain a one-shot GUI launcher, but only the
+ * launcher registered for this authenticated reservation and native class. */
+DWORD OpenNtBaseServiceRetainNativeCommandWorker(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,HANDLE *worker);
 /* One root frontend per selected DOS worker. Attach carries a pipe and a
  * manual-reset readiness event, never input/frame payloads. Take transfers
  * pipe, frontend process and synchronize-only event once; caller owns all

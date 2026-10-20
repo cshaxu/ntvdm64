@@ -2465,44 +2465,86 @@ candidate NTSRV hash was
 both `assets/release` and `O:\winnt\system32` in the coherent thirteen-image
 publication.  This bounded delivery changes no guest image or `assets/winnt.zip`.
 
-### S4 closure and S5 reallocation
+### S4 lifecycle reopening: reservation delivery and close semantics
 
-This section is the current task-allocation authority for T447 and supersedes
-earlier live-looking S4/S5 wording retained above as chronology.
+This is the current task-allocation authority for the host lifecycle portion
+of S4.  It supersedes the preceding closure/reallocation claim, which remains
+historical chronology only.
 
-S4 closes with the host lifecycle repair and its completed composition:
-Run16 carries one explicit native launch class (`WIN32_CUI`, `WIN32_GUI`,
-`WIN64_CUI`, or `WIN64_GUI`) after the existing SEC_IMAGE query; DOS and Win16
-continue to use their original `BinaryType`. NTSRV records that class in the
-authenticated launch reservation and rejects a suspended target whose actual
-machine/subsystem differs. CUI NTVWM is the only resident native worker: it
-has the hidden Console, frontend/I/O route, console-close and worker-close
-semantics. GUI NTVWM is a one-request launcher without Console, presentation
-or monitor-worker lifetime; NTSRV retains and monitors its actual target.
-WOW receives worker-close and broker-loss only; it never receives
-console-close. No guest source/media/binary change is part of this closure.
+The committed initial split correctly records `WIN32_CUI`, `WIN32_GUI`,
+`WIN64_CUI` and `WIN64_GUI` in an authenticated NTSRV reservation and starts a
+resident CUI carrier or a one-shot GUI launcher accordingly.  It does not,
+however, complete GUI delivery: `SubmitNativeRequest` and its queue helper
+still select through the old CUI-only command-worker routine.  A GUI request
+therefore has a valid reservation and launched `ntvwm --gui-launcher`, but can
+fail before `GetNextNativeCommand` with `ERROR_NOT_READY`.
 
-The complete remaining former S4 inventory transfers without semantic waiver
-to S5: M1--M6 mixed message identity, explicit and implicit delivery, reply
-and wait behavior, nested/reentrant execution, conversion ownership and all
-associated real guest/failure/lifecycle evidence. This is a renumbering of
-the unresolved work, not an assertion that it is implemented.
+P1 repairs that finite chain without making native workers interchangeable.
+The reservation remains the sole authority for worker kind and native class.
+The submit path derives those facts from the caller's authenticated reservation
+and retains only its exact registered worker generation: CUI maps only to a
+matching resident CUI worker; GUI maps only to the matching one-shot GUI
+launcher.  Queue delivery uses that retained generation, and `BindNativeTarget`
+continues to validate the suspended target's actual machine/subsystem before
+resume.  After a successful GUI bind/startup acknowledgement, NTSRV retains
+only a pinned observation handle, exit fact and read-only Direct/Observed
+record; it never owns, closes or terminates the GUI target.  Launcher rundown
+clears only launcher/reservation state, not the target observation.  Failed
+admission, timeout, launcher death or binding failure releases the reservation
+or pending receipt/handles exactly once and never reports startup success.
 
-Former S5 (original WOW hung/exit ownership, request-to-HTASK identity,
-reuse protection, individual task termination and NT Monitor task action)
-becomes S6. Every later S allocation increments by one. Existing historical
-references are retained as evidence aliases only; CURRENT.md names the sole
-active packet.
+P2 gives NTVWM-CUI two explicit semantic entries:
+`ntvwm_close_for_console_shutdown` and
+`ntvwm_close_for_worker_shutdown`.  Both may ultimately use one guarded
+carrier-teardown helper, but neither service instruction is inferred from the
+other.  Console-close applies only to NTVDM-DOS and NTVWM-CUI; worker-close
+applies to NTVDM-DOS, NTVDM-WOW and NTVWM-CUI.  GUI launchers receive the same
+worker-base management notifications but NTVWM deliberately no-ops them: they
+have no carrier or target ownership.  The worker-base watch still orders close notifications;
+the first terminal transition owns physical Console cleanup and the other sees
+the completed transition, preventing double close, deadlock and parent-input
+handoff corruption.
 
-#### Closure evidence and retained test limitation
+The lifecycle contract is deliberately carrier-based, not a second scheduler.
+Only two classification facts cross the Run16--NTSRV--worker-base boundary:
+the executable family (Win16 selects NTVDM; native selects NTVWM, with the
+actual PE machine still revalidated at bind) and `IS_CONSOLE_APP`.  The
+resulting ownership matrix is fixed for this S4 repair:
 
-The current source was rebuilt in the stable x64 product graph for the host
-service/launcher closure and in the stable x86 formal graph for the affected
-original MVDM closure.  The formal x86 graph also rebuilt the service fixture
-from current source.  Its all-modes run stops before lifecycle assertions at
-the fixture's existing same-process `frontend_pair` client open
-(`CreateFile` returns `ERROR_ACCESS_DENIED`); the failure is outside the new
-Console/worker classification path and has no runtime substitution.  Keep
-that deterministic fixture-harness diagnosis with the S5 verification work;
-it is not evidence that the lifecycle route passed, nor a reason to widen S4
-with unrelated named-pipe test plumbing.
+| Carrier / target | Console-close | Worker-close | Task-close | NTSRV loss |
+| --- | --- | --- | --- | --- |
+| NTVDM-DOS | original console-close then worker exit | original DOS-worker exit | unsupported | original worker-base exit path |
+| NTVDM-WOW | unsupported / irrelevant | original WOW-worker exit | original WOW task termination; worker remains | original worker-base exit path |
+| NTVWM-CUI | `ntvwm_close_for_console_shutdown` | `ntvwm_close_for_worker_shutdown` | unsupported | NTVWM worker-base exit path |
+| NTVWM GUI launcher and its native GUI target | notification delivered to launcher and deliberately no-op | notification delivered to launcher and deliberately no-op | unsupported | launcher has no persistent carrier; GUI target remains an ordinary host process |
+
+NTSRV manages the first three carrier classes.  A native GUI target is not a
+managed worker: it is only a verified, read-only Direct/Observed record with
+an observation handle and exit fact.  Neither NTSRV nor NTMON owns a close or
+terminate action for it; Task Manager remains the host owner of that action.
+`worker-base` dispatches its generic management notifications and does not
+infer CUI/GUI policy.  NTVWM interprets the notification according to its
+already-authenticated `IS_CONSOLE_APP` role.
+
+No guest source, guest media, guest binary or OpenNT mirror diff is part of
+P1/P2.  Complete product build, focused positive/negative lifecycle matrices,
+coherent thirteen-image publication to both destinations, deployed hash check,
+review, commit and push are mandatory before this bounded lifecycle work can
+be called delivered.  The original S4 M1--M6 WOW32 message/identity/reply/
+reentry inventory stays in S4; it is not moved to S5 by this repair.  The
+former S5 termination/NT Monitor scope and later allocations retain their
+existing numbering until a separately approved reassignment.
+
+Implementation evidence (2026-10-20): `basesrv-reservation-test` passes the
+reservation kind/type and stale-generation negatives.  The service matrix
+passes native copied command, authenticated independent CUI carrier,
+read-only GUI observation, frontend-close, management worker-close and
+unfinished-worker-exit cases.  The management fixture verifies that a GUI
+target cannot receive a close action and that its real host exit—not launcher
+rundown—owns completion.  `Test-FullComponentBuild` build-r7 passed all
+thirteen x86/x64 images and its second build preserved all 1,326 intermediate
+records.  The coherent13 manifest built from `assets/winnt.zip` staging was
+published and SHA-256 matched at both `assets/release` and
+`O:\winnt\system32`.  This proves the bounded host lifecycle repair and its
+package identity; it does not claim the remaining S4 M1--M6 WOW32 work is
+closed.

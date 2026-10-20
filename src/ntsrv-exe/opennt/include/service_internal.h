@@ -176,7 +176,7 @@ typedef struct OPENNT_BASE_WIN32RECORD {
     BOOL completed;
     BOOL observation_exited; /* Display fact only; never a completion receipt. */
     BOOL gui;
-    HANDLE gui_process,gui_wait; /* Query/wait/explicit-close reference; event-only watch. */
+    HANDLE gui_process,gui_wait; /* Query/wait-only observation reference; event-only watch. */
     HANDLE receipt; /* Signalled after NTVWM reports exit and I/O release. */
     DWORD io_error,io_flags; /* Final I/O precedes receipt under the service lock. */
     BOOL startup_delivered;
@@ -203,6 +203,7 @@ typedef struct OPENNT_BASE_WORKER_WATCH {
     BOOL native_gui_launcher;
     uint64_t reservation;
     OPENNT_BASE_WORKER_KIND kind;
+    DWORD native_launch_type; /* Copied from the claimed reservation. */
     FILETIME started;
     /* The original GetNextVDMCommand body frees VDMINFO immediately after
      * copying it to the worker.  These are labels keyed to surviving original

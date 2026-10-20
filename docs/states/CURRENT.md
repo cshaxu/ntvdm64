@@ -1,19 +1,17 @@
 # Project Status
 
-**Active: M0 T447 S5 — WOW32 message identity, reply, waits and reentry.**
+**Active: M0 T447 S4 — native classification and worker lifecycle completion.**
 
-S4 is closed as the bounded host lifecycle/Console-routing delivery: Run16
-classifies DOS, Win16, Win32 CUI/GUI and Win64 CUI/GUI before NTSRV admission;
-NTSRV preserves the original DOS/Win16 path, makes CUI NTVWM a resident hidden-
-Console worker, makes GUI NTVWM a one-shot launcher, and verifies the suspended
-target's actual machine/subsystem before resume. Console-close, worker-close
-and broker-loss routes now apply only to their relevant worker kinds. No guest
-source, guest binary or mirror diff was added. The full former S4 WOW32
-message/identity/reply/reentry inventory moves intact to S5; former S5
-per-task termination/NT Monitor becomes S6, and later S numbers follow it.
-This paragraph supersedes older active-S4/S5 allocation wording below, which
-is retained as historical evidence only. See the current mapping in the
-[T447 execution plan](../etc/operations/t447-wow-execution-plan.md#s4-closure-and-s5-reallocation).
+S4 remains open.  The first lifecycle delivery classified DOS, Win16, Win32
+CUI/GUI and Win64 CUI/GUI, but its GUI reservation path stops at an old CUI-only
+command-worker selector before delivery to the one-shot GUI launcher.  This is
+a host lifecycle defect, not a release limitation.  S4 now completes that
+authenticated reservation-to-launcher path and separates NTVWM-CUI
+console-close from worker-close at explicit semantic entries, including
+concurrent-close cleanup.  No guest source, guest binary or mirror diff is
+permitted.  The original S4 WOW32 M1--M6 inventory remains in S4 until this
+bounded lifecycle repair is truly built, tested, published and reviewed; it is
+not transferred to S5.
 
 Owner accepts and closes [Td build hygiene](../etc/operations/td-build-hygiene.md)
 at aadde21e8; S4 resumes with stable caches, immutable guest and frozen
@@ -326,31 +324,32 @@ construction, mapping, failure and lifecycle closure remains required.
 | Field | Required record |
 | --- | --- |
 | Identifier Mode | M0 T447 S4; single-person implementer/reviewer, no subagents. |
-| Admission And Approval | Continuing owner goal and approved six-stage T447 plan, after S3 bounded closure. Retain the already approved modern USER delivery/reply boundary, original WOW conversion/scheduling and all recorded exceptions; no new semantic waiver. |
-| Objective | Complete explicit/implicit message identity, reply, waits and nested execution for Win16/Win16 and both native directions through original owners and bounded native services; pair failure and retirement. |
+| Admission And Approval | Continuing owner goal.  Owner rejects S4 closure until the P1 GUI delivery disconnect and P2 NTVWM-CUI close-semantic split are repaired, the complete applicable product/test gates pass, and the complete package is published.  Retain approved modern USER delivery/reply boundary, original WOW conversion/scheduling and recorded exceptions; no new semantic waiver. |
+| Objective | Complete native classification/lifecycle routing: an authenticated reservation is the sole owner of expected native class and worker kind; GUI delivers only to its own one-shot launcher and records the completed target as a read-only Direct/Observed fact; CUI delivers only to matching resident CUI workers; NTVWM-CUI has distinct console-close and worker-close entries with once-only carrier teardown.  NTSRV lifecycle authority covers only NTVDM-DOS, NTVDM-WOW and NTVWM-CUI.  A GUI target is host-owned and read-only observed; its NTVWM GUI launcher receives generic worker-base notifications and deliberately no-ops them. |
 | Non-goals | Guest modification/rebuild, private native SMS/layout decoding, parallel queue/transport/scheduler, helper windows, whole USER server import, new individual-task termination UI or broad unrelated WOW families. |
-| Reference Baseline | Clean e5d7d77bb; P22 runtime from eba5fcfc7, all13 published and hash-matched; S3 original control/dialog/menu and callback/native-return evidence retained. |
-| Files And ABI Surface | Original MVDM wumsg/wmsg16/wcommdlg/converters/wmdisp32 and selected USER taskman/queue; existing wow32-dll lifecycle/runtime/message/borrow/provider bindings and tests. NTVDM only for proved execution/lease dependencies. No new wire ABI by default. |
+| Reference Baseline | `428e7b2ba` is a committed but unpublished partial lifecycle baseline.  Its full applicable product build, lifecycle matrices, coherent13 publication and deployed hash verification remain required after P1/P2. |
+| Files And ABI Surface | Project-owned NTSRV reservations/worker registry/native command service, NTVWM launcher/CUI lifecycle and worker-base callbacks; Run16 classification caller and focused host fixture/observation tests.  No guest ABI or mirror source change. |
 | Applicable Rules | Source-first four-rung audit, original/host/adapter responsibility rule, registered minimal mirror diffs, immutable original guest, grouped background build/tests, coherent13 release and reviewed main/origin commit/push. |
-| Verification | Source-led M1--M6 inventory and finite remediation before runtime edits; original-body/boundary negative/lifetime fixtures plus real two-task/mixed-native message witnesses; retain S3 actual guest/application/DOS and normal-desktop floors. |
-| Expected Markers | Actual receiver InSendMessage/reply result/once-only delivery; returned value and LastError; original task execution restoration; queue non-consumption/order under native contract; nested and failed/destroyed-peer cleanup; no outstanding converted-buffer leases. |
-| Asset Needs | Existing pinned read-only OpenNT and canonical guest ZIP; independent Win16 probes and native test peers only under build/. No new original guest artifact. |
-| Reporting Requirements | Per-chain caller/provider/source reuse, state authority, preserved contract and approved limits, deleted duplicate code, exact build/run identities, mirror delta and unproved cases in the working plan/evidence. |
+| Verification | Reservation-kind/type mismatch negatives; Win32/Win64 CUI and GUI chain; actual target machine/subsystem rejection; GUI target read-only observation after launcher exit; blocked command cleanup; console/worker close concurrent teardown; retained S3/S4 runtime floors and deployed hashes. |
+| Expected Markers | Exact reservation-to-worker generation/kind/type match; BindNativeTarget machine/subsystem proof; target observation independent of GUI launcher and without a close action; one carrier cleanup under concurrent close; native request status/receipt/handle rollback without false success. |
+| Asset Needs | Existing pinned read-only OpenNT and canonical guest ZIP; host-native fixture/observation probes only under disposable build paths. No new original guest artifact. |
+| Reporting Requirements | Per-chain reservation/worker/target authority, preserved contract, deleted duplicate selection or close paths, exact build/run identities, mirror delta and unproved cases in working plan/evidence. |
 | Stop Conditions | New observable semantic concession or scope expansion needs approval; no approximate private state, helper HWND, speculative replacement or transferred foundation defect. Existing granted implementation/registration/publication authority remains. |
-| Exit Criteria | All six fixed groups implemented or source-proven already connected, with complete required real boundary/negative/lifecycle evidence and preserved floors; compile/build coherent13, publish both destinations, hash-verify, review/commit/push. |
+| Exit Criteria | P1/P2 and their finite matrix pass; complete applicable product build and coherent13 publication to both destinations are hash-verified; review/commit/push.  Then retain the original S4 M1--M6 obligations in S4 rather than transferring them by this lifecycle repair alone. |
 | Original Owner Request | 单人双角色复通wow32；可接入原版立即接入并删除被取代自主实现；源码追溯优先；整组接通后验收；最小镜像diff，尽可能保持原版功能语义。 |
 | Similar-Issue Sweep | Explicit Send/SendDlgItem, Post/ThreadPost, implicit native sends, nested same/cross-task callbacks, native peers both directions, early/duplicate/no-pending reply, queue filters/waits, destruction and buffer invalidation. |
 
 ## Current Technical Baseline
 
-S4 P22 retains P21 and adds349/101/102's bounded conversion/acquisition group.
-The current coherent13 baseline retains NTVDM
-1FC1F21AD1FBDC87151E4F836670A931BBEA1591E75AE4A4C0B7A0CDB5E641F2 and carries WOW32
-EC648FB73B11DA61276CABC8ECA95C7E6C0D9AC1A9EA6D2D9E92D72814273DA2;
-NTSRV is98125183834813A980DAE4BDFD947A354910711BE2BCB5526AB83A5D2CEF5CD5.
-The coherent13 manifest matches the actual r4 Console-handoff candidate,
-assets/release and O:/winnt/system32. This is a delivery baseline, not S4
-closure.
+The historical S4 P22 baseline retains P21 and adds349/101/102's bounded conversion/acquisition group.
+The current coherent13 lifecycle candidate retains WOW32
+EC648FB73B11DA61276CABC8ECA95C7E6C0D9AC1A9EA6D2D9E92D72814273DA2 and publishes
+NTVDM `FF35E68DBAF35C427012813D2B3D41D97416F9C255B7CDD7292B27268AD5FDF6` and
+NTSRV `E0118AD156BDBEC6F6CA86FFA837788285F7B93A72078FCA0B0E99174A1ABD8C`.
+The full coherent13 manifest is hash-equal in `assets/release` and
+`O:/winnt/system32`; full x86/x64 build-r7 passed with 1,326 unchanged
+intermediates on its second build. This is a delivery baseline, not S4
+closure: the original M1--M6 inventory remains active.
 Original guest, user configuration and assets/winnt.zip are unchanged.
 
 The S4 classic-DDE cohort registers only DIV-350--354 in the existing original
@@ -361,7 +360,7 @@ lifecycle also passes. The current coherent13 baseline carries that bounded
 cohort, but it is not S4 closure: DDEML, the remaining DDE families, and the
 broader M1--M6 gates remain outside that result.
 
-S4 also contains one bounded host-lifecycle repair for an owner-reported
+Closed S4 contains one bounded host-lifecycle repair for an owner-reported
 borrowed Console race: explicit NTMON frontend deletion drains the associated
 DOS worker through its existing shutdown event before it allows NTCON to
 restore the parent CMD Console mode. This is a project-owned NTSRV/NTCON
@@ -397,9 +396,11 @@ witness and older GDI16/19 risks remain; no current pass claims them repaired.
 
 ## T447 Sequence and Delivery
 
-S1 source audit and S2 foundations are closed; S3 dependency closure is recorded
-above. S4 is the sole active packet. S5 individual task termination/NT Monitor
-and S6 whole-T reconciliation remain planned, not concurrent work.
+S1 source audit and S2 foundations are closed; S3 dependency closure is
+recorded above.  S4 remains active for the bounded native-worker lifecycle
+repair and its original M1--M6 WOW32 message/identity/reply/wait/reentry
+inventory. S6 individual task termination/NT Monitor and S7 whole-T
+reconciliation remain planned, not concurrent work.
 The [working plan](../etc/operations/t447-wow-execution-plan.md) retains the
 cross-T ownership boundaries; [Queue](QUEUE.md) is unchanged. T447 and the
 persistent WOW32 objective remain unfinished.

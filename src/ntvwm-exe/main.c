@@ -30,6 +30,7 @@ typedef struct native_membership {
     /* A live native parent may be blocked in an inner launcher. Only an
      * authenticated command/resume admission can request ownership again. */
     BOOL io_released;
+    volatile LONG carrier_closing;
 } native_membership;
 /* Called with the execution/I/O lock held, after final paint/input return.
  * Dispose only local transport state; the broker retains logical association. */
@@ -141,45 +142,46 @@ static DWORD take_presentation(native_membership *state)
      * route and calling a rejection success only hid broken handoff order. */
     return ERROR_SUCCESS;
 }
-static DWORD WINAPI close_console(void *context)
+static DWORD WINAPI ntvwm_release_console_carrier(void *context)
 {
     native_membership *state=context;
     ntvwm_console_guard_stop(state->guard);state->guard=NULL;
     return ntvwm_console_close();
 }
-/* A GetNext cancellation or failed final-I/O RPC may race the close watcher.
- * An already issued broker close must win over generic worker-fault teardown.
- * Reuse the I/O lock: exactly one caller closes the actual Console and exits;
- * this does not invent a close instruction on unexpected broker/worker loss. */
-static void honor_console_close(native_membership *state)
+/* Both authenticated terminal instructions ultimately release the one CUI
+ * carrier, but they remain separate service semantics.  The first transition
+ * owns the physical Console close; a racing instruction sees the claimed gate
+ * and cannot reset parent input state a second time. */
+static void ntvwm_shutdown_carrier_once(native_membership *state)
 {
-    if(state->console_close && WaitForSingleObject(state->console_close,0)==WAIT_OBJECT_0) {
-        EnterCriticalSection(state->lock);
-        worker_base_shutdown_close(close_console,state,INFINITE,ERROR_CANCELLED,state->closed);
-        LeaveCriticalSection(state->lock);
-    }
+    if(InterlockedCompareExchange(&state->carrier_closing,1,0)!=0)return;
+    worker_base_shutdown_close(ntvwm_release_console_carrier,state,INFINITE,ERROR_CANCELLED,state->closed);
 }
-static void honor_worker_close(native_membership *state)
+static void ntvwm_close_for_console_shutdown(native_membership *state)
 {
-    if((state->shutdown && WaitForSingleObject(state->shutdown,0)==WAIT_OBJECT_0) ||
-        (state->stop_requested && WaitForSingleObject(state->stop_requested,0)==WAIT_OBJECT_0)) {
-        EnterCriticalSection(state->lock);
-        worker_base_shutdown_close(close_console,state,INFINITE,ERROR_CANCELLED,state->closed);
-        LeaveCriticalSection(state->lock);
-    }
+    if(!state->console_close || WaitForSingleObject(state->console_close,0)!=WAIT_OBJECT_0)return;
+    EnterCriticalSection(state->lock);
+    ntvwm_shutdown_carrier_once(state);
+    LeaveCriticalSection(state->lock);
+}
+static void ntvwm_close_for_worker_shutdown(native_membership *state)
+{
+    if((!state->shutdown || WaitForSingleObject(state->shutdown,0)!=WAIT_OBJECT_0) &&
+        (!state->stop_requested || WaitForSingleObject(state->stop_requested,0)!=WAIT_OBJECT_0))return;
+    EnterCriticalSection(state->lock);
+    ntvwm_shutdown_carrier_once(state);
+    LeaveCriticalSection(state->lock);
 }
 static void input_failure(void *context,DWORD error)
 {
     native_membership *state=context;
-    honor_console_close(state);
-    honor_worker_close(state);
+    ntvwm_close_for_console_shutdown(state);
+    ntvwm_close_for_worker_shutdown(state);
     if(WaitForSingleObject(state->quit,0)!=WAIT_TIMEOUT)return;
     ntvwm_trace_error("input",0,error);
-    EnterCriticalSection(state->lock);
     SetEvent(state->stop_requested);
-    (void)close_console(state);
+    ntvwm_close_for_worker_shutdown(state);
     TerminateProcess(GetCurrentProcess(),error);
-    LeaveCriticalSection(state->lock);
 }
 static DWORD consume_input(void *context)
 {
@@ -208,11 +210,9 @@ static DWORD presentation_loop(void *context)
         if(wait==WAIT_OBJECT_0+3)break;
         EnterCriticalSection(state->lock);
         if(wait==WAIT_OBJECT_0 || wait==WAIT_OBJECT_0+1 || wait==WAIT_OBJECT_0+2) {
-            /* The authenticated broker orders Console-session closure,
-             * just as it does for NTVDM. Closing a direct launcher does not.
-             * Explicit management close uses this same backend operation. */
-            worker_base_shutdown_close(close_console,state,INFINITE,ERROR_CANCELLED,state->closed);
             LeaveCriticalSection(state->lock);
+            if(wait==WAIT_OBJECT_0)ntvwm_close_for_console_shutdown(state);
+            else ntvwm_close_for_worker_shutdown(state);
             return error ? error : ERROR_CANCELLED;
         }
         if(wait==WAIT_OBJECT_0+4) {
@@ -258,19 +258,17 @@ static DWORD WINAPI presentation_pump(void *context)
     native_membership *state=context;
     DWORD error=presentation_loop(context);
     ntvwm_trace_error("pump",0,error);
-    honor_console_close(state);
-    honor_worker_close(state);
+    ntvwm_close_for_console_shutdown(state);
+    ntvwm_close_for_worker_shutdown(state);
     if(!error || WaitForSingleObject(state->quit,0)!=WAIT_TIMEOUT)return error;
     /* Only an unrecoverable worker-side failure reaches here. A worker whose
      * presentation watcher has stopped cannot remain resident: it would no
      * longer consume the broker's Console-session close, even while idle. */
-    EnterCriticalSection(state->lock);
     SetEvent(state->stop_requested);
-    (void)close_console(state);
+    ntvwm_close_for_worker_shutdown(state);
     /* Main can be blocked in GetNextCommand; do not wait on that RPC
      * to report an unrecoverable worker-side presentation failure. */
     TerminateProcess(GetCurrentProcess(),error);
-    LeaveCriticalSection(state->lock);
     return error;
 }
 static void membership_close(native_membership *state)
@@ -355,11 +353,11 @@ static BOOL WINAPI control_event(DWORD event)
 
 static void broker_completion_fault(void *context,DWORD error)
 {
-    honor_console_close(context);
+    ntvwm_close_for_console_shutdown(context);
     ntvwm_trace_error("broker-complete",0,error);
     /* GetNext may be blocked in a synchronous RPC while a serving thread
      * discovers the failure. Process exit closes the worker's handles; it
-     * does not terminate any native target or descendant. NTSRV owns the
+     * does not terminate any native target or descendant. NTSRV observes the
      * resulting dead-worker rundown. */
     TerminateProcess(GetCurrentProcess(),error);
 }
@@ -367,17 +365,24 @@ static void broker_completion_fault(void *context,DWORD error)
 /* GUI launchers are deliberately one-shot.  They authenticate the reserved
  * broker connection and dispatch exactly one suspended target, but never
  * create a hidden Console, presentation loop, frontend membership, or
- * resident worker identity.  NTSRV owns the target once BindNativeTarget
- * succeeds. */
+ * resident worker identity.  NTSRV records the target only as a read-only
+ * Direct observation once BindNativeTarget succeeds. */
 static int run_gui_launcher(void)
 {
     DWORD error;
+    HANDLE shutdown=NULL,console_close=NULL;
     ntvwm_executions *requests=NULL;
     ntvwm_execution_io io={0};
     ntvwm_next_command command;
     CsrPortHeap=HeapCreate(0,0,0);
     if(!CsrPortHeap)return (int)GetLastError();
     error=worker_base_connect();
+    /* The launcher shares worker-base's management channel with a CUI
+     * carrier.  It deliberately consumes neither instruction: once a target
+     * is bound, NTSRV only observes it; before binding there is no Console or
+     * resident task for this one-shot process to tear down. */
+    if(!error)error=worker_base_shutdown_event(&shutdown);
+    if(!error)error=worker_base_console_close_event(&console_close);
     if(!error)error=ntvwm_executions_open(&requests);
     if(!error)ntvwm_executions_bind_io(requests,&io);
     if(!error) {
@@ -402,6 +407,8 @@ static int run_gui_launcher(void)
         }
     }
     ntvwm_executions_close(requests);
+    if(console_close)CloseHandle(console_close);
+    if(shutdown)CloseHandle(shutdown);
     worker_base_disconnect();
     HeapDestroy(CsrPortHeap);CsrPortHeap=NULL;
     return (int)error;
@@ -472,8 +479,8 @@ int wmain(int argc,WCHAR **argv)
             continue;
         }
     }
-    honor_console_close(&membership);
-    honor_worker_close(&membership);
+    ntvwm_close_for_console_shutdown(&membership);
+    ntvwm_close_for_worker_shutdown(&membership);
     if(membership.quit)SetEvent(membership.quit);
     ntvwm_executions_close(requests);
     membership_close(&membership);

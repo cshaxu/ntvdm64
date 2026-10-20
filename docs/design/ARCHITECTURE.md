@@ -183,6 +183,18 @@ registration, direct results, residency, exclusive CloseOnExit, shutdown and
 failure contracts. Win16 GUI stays on the original WOW/host-window path,
 not this DOS/native-text handoff.
 
+The active T447 refinement keeps this division explicit.  Worker-base carries
+only authenticated executable-family and console-app facts and dispatches
+generic management notifications; it does not infer carrier policy.  NTSRV
+lifecycle authority covers persistent NTVDM-DOS, NTVDM-WOW and NTVWM-CUI
+carriers.  NTVWM-CUI interprets console-close and worker-close through
+separate semantic entries with one guarded physical teardown.  A native GUI
+launcher may receive the same notification and no-op, while the launched GUI
+process is only a verified Direct/Observed host-process record: NTSRV/NTMON
+may observe it but never own a terminate or close action.  The active task
+matrix and evidence live in
+[the T447 execution plan](../etc/operations/t447-wow-execution-plan.md#s4-lifecycle-reopening-reservation-delivery-and-close-semantics).
+
 This contract applies when execution actually enters a broker-mediated
 worker boundary. Ordinary Windows child creation is a separate boundary:
 changing a native child's bitness does not automatically authorize replacing

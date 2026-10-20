@@ -7,8 +7,6 @@
       "binaryDir": "${sourceDir}/build/.ninja/msvc-x86-release",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
-        "CMAKE_C_COMPILER": "cl.exe",
-        "CMAKE_CXX_COMPILER": "cl.exe",
         "NTVDM_ARCHITECTURE": "x86",
         "NTVDM_USE_CCACHE": "OFF",
         "CMAKE_C_COMPILER_LAUNCHER": "",

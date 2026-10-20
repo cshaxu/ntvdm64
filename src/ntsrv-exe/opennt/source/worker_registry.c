@@ -203,6 +203,10 @@ DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *connection,
         connection->reservation_kind!=OPENNT_BASE_WORKER_NATIVE ||
         connection->frontend_capability || connection->process.fVDM)
         {error=ERROR_INVALID_STATE;goto done;}
+    /* Connect may already have associated the carrier with its authenticated
+     * root.  A NULL frontend means retain that association, not invent root 0
+     * and make a repeated registration look like a different route. */
+    root_generation=service_worker_root(connection);
     /* A root is merely the authenticated presentation association.  Worker
      * lifecycle commands are held by the worker watch, never by a parallel
      * native-only stop/closed event pair. */
@@ -211,7 +215,15 @@ DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *connection,
         if(error)goto done;
     }
     if(connection->native_frontend_registered) {
-        if(service_worker_root(connection)==root_generation) {error=ERROR_INVALID_STATE;goto done;}
+        /* A live backend may repeat the same authenticated presentation
+         * capability after a Direct request completes.  That is idempotent,
+         * not a second registration.  A NULL repeat still means the worker is
+         * trying to install its receiver twice, and a different root remains
+         * forbidden. */
+        if(service_worker_root(connection)==root_generation) {
+            error=frontend ? ERROR_SUCCESS : ERROR_INVALID_STATE;
+            goto done;
+        }
         error=ERROR_PIPE_NOT_CONNECTED;goto done;
     }
     for(link=connection->service->connections.Flink;link!=&connection->service->connections;link=link->Flink) {
@@ -233,7 +245,12 @@ DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *connection,
                  registered_root->frontend_admission_deadline=0;break;}
         }
     }
-    connection->native_frontend_registered=root_generation!=0;
+    /* A native backend has now installed worker-base's command/control
+     * receiver.  Reuse the existing readiness bit used by VDM Update: a
+     * management worker-close must never signal a merely connected suspended
+     * process and then wait for a handler that cannot exist yet. */
+    connection->registered_worker=TRUE;
+    connection->native_frontend_registered=TRUE;
     service_signal_frontend_states(connection->service);error=0;
 done:
     if(root)CloseHandle(root);
@@ -311,6 +328,58 @@ done:
     return error;
 }
 
+DWORD OpenNtBaseServiceRetainNativeCommandWorker(OPENNT_BASE_CONNECTION *connection,
+    DWORD pid,DWORD generation,HANDLE *worker)
+{
+    OPENNT_BASE_SERVICE *service;
+    OPENNT_BASE_WORKER_KIND kind;
+    DWORD native_type,error=ERROR_NOT_READY;
+    HANDLE retained=NULL;
+    LIST_ENTRY *link;
+    SERVICE_COMPARE_HANDLES compare;
+    if(!worker)return ERROR_INVALID_PARAMETER;
+    *worker=NULL;
+    if(!connection)return ERROR_ACCESS_DENIED;
+    service=connection->service;
+    EnterCriticalSection(&service->lock);
+    if(!OpenNtBaseServicePeer(connection,pid,generation) || connection->wow ||
+        connection->process.fVDM || connection->native_worker || connection->worker_failed)
+        goto done;
+    /* A nested CUI launch deliberately reuses the already selected resident
+     * worker.  That selector cannot nominate GUI launchers. */
+    if(connection->selected_native_generation) {
+        error=OpenNtBaseServiceRetainCommandWorker(connection,pid,generation,worker);
+        goto done;
+    }
+    if(!connection->reservation)goto done;
+    error=OpenNtBaseReservationRetainNativeWorker(service->reservations,connection->reservation,
+        pid,generation,&kind,&native_type,&retained);
+    if(error)goto done;
+    compare=(SERVICE_COMPARE_HANDLES)GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
+    if(!compare) { error=ERROR_CALL_NOT_IMPLEMENTED;goto done; }
+    for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
+        OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
+        if(watch->reservation!=connection->reservation || watch->kind!=kind ||
+            watch->native_launch_type!=native_type ||
+            watch->native_gui_launcher!=(kind==OPENNT_BASE_WORKER_NATIVE_GUI_LAUNCHER) ||
+            watch->process.ProcessHandle==NULL || !compare(retained,watch->process.ProcessHandle) ||
+            WaitForSingleObject(watch->process.ProcessHandle,0)!=WAIT_TIMEOUT)
+            continue;
+        if((kind==OPENNT_BASE_WORKER_NATIVE_GUI_LAUNCHER)==OpenNtBaseNativeLaunchTypeIsText(native_type)) {
+            error=ERROR_INVALID_STATE;goto done;
+        }
+        if(!DuplicateHandle(GetCurrentProcess(),watch->process.ProcessHandle,GetCurrentProcess(),worker,
+                PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,0))error=GetLastError();
+        else error=ERROR_SUCCESS;
+        goto done;
+    }
+    error=ERROR_NOT_READY;
+done:
+    if(retained)CloseHandle(retained);
+    LeaveCriticalSection(&service->lock);
+    return error;
+}
+
 
 DWORD OpenNtBaseServiceWorkerShutdownEvent(OPENNT_BASE_CONNECTION *worker,DWORD pid,
     DWORD generation,HANDLE *shutdown)
@@ -344,7 +413,7 @@ DWORD OpenNtBaseServiceWorkerConsoleCloseEvent(OPENNT_BASE_CONNECTION *worker,DW
         for(link=worker->service->worker_watches.Flink;link!=&worker->service->worker_watches;link=link->Flink) {
             OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
             if(watch->process.SequenceNumber!=generation)continue;
-            if(watch->wow || watch->native_gui_launcher) {
+            if(watch->wow) {
                 error=ERROR_NOT_SUPPORTED;
                 break;
             }

@@ -357,15 +357,16 @@ static DWORD observation_native_emit(OPENNT_BASE_SERVICE *service,SERVICE_OBSERV
     item.started_filetime=node->row.created_filetime;
     item.display_state=node->row.state==TASK_TRACE_UNCERTAIN ? MANAGEMENT_UNKNOWN : MANAGEMENT_BUSY;
     lstrcpynW(item.image,node->row.image,OPENNT_BASE_WORKER_IMAGE_CHARS);
-    /* Keep already-approved direct GUI process close authority, never give
-     * Hook descendants or native text projections synthetic close actions. */
+    /* Direct and Observed GUI processes are both read-only observations.  A
+     * native target's normal Windows owner controls its lifetime; NTSRV only
+     * supplies identity and exit facts to the monitor. */
     if(node->direct_request)for(link=service->gui_records.Flink;link!=&service->gui_records;link=link->Flink) {
         OPENNT_BASE_WIN32RECORD *record=CONTAINING_RECORD(link,OPENNT_BASE_WIN32RECORD,link);
         if(record->worker_generation==node->generation && record->request==node->direct_request &&
             !record->completed && record->gui_process && WaitForSingleObject(record->gui_process,0)==WAIT_TIMEOUT) {
             item.key.category=MANAGEMENT_GUI_TARGET;item.key.object=record->request;
             item.kind=record->native_machine==IMAGE_FILE_MACHINE_AMD64 ? MANAGEMENT_KIND_WIN64 : MANAGEMENT_KIND_WIN32;
-            item.actions=MANAGEMENT_CAN_CLOSE;break;
+            item.actions=0;break;
         }
     }
     error=service_append_management(rows,count,capacity,&item);if(error)return error;

@@ -549,7 +549,10 @@ static DWORD service_copy_management_tree(OPENNT_BASE_SERVICE *service,
         item.process_id=record->process_id;item.task=record->request;
         item.kind=record->native_machine==IMAGE_FILE_MACHINE_AMD64 ?
             MANAGEMENT_KIND_WIN64 : MANAGEMENT_KIND_WIN32;
-        item.display_state=MANAGEMENT_BUSY;item.actions=MANAGEMENT_CAN_CLOSE;
+        /* A GUI target is an observed process, whether it originated from
+         * Run16's Direct launch or nthook's Observed report.  NTSRV has no
+         * ownership action over it. */
+        item.display_state=MANAGEMENT_BUSY;item.actions=0;
         if(GetProcessTimes(record->gui_process,&started,&ignored,&ignored,&ignored))
             item.started_filetime=((uint64_t)started.dwHighDateTime<<32)|started.dwLowDateTime;
         lstrcpynW(item.image,record->image,OPENNT_BASE_WORKER_IMAGE_CHARS);

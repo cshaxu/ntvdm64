@@ -277,6 +277,40 @@ DWORD OpenNtBaseReservationRetainWorker(OPENNT_BASE_RESERVATIONS *state,uint64_t
     return ERROR_SUCCESS;
 }
 
+DWORD OpenNtBaseReservationRetainNativeWorker(OPENNT_BASE_RESERVATIONS *state,uint64_t reservation,
+    DWORD launcher_pid,DWORD launcher_generation,OPENNT_BASE_WORKER_KIND *kind,DWORD *native_type,
+    HANDLE *worker)
+{
+    OPENNT_BASE_RESERVATION *entry;
+    HANDLE retained=NULL;
+    if(!state || !reservation || !launcher_pid || !launcher_generation || !kind || !native_type || !worker)
+        return ERROR_INVALID_PARAMETER;
+    *kind=OPENNT_BASE_WORKER_DOS;*native_type=0;*worker=NULL;
+    EnterCriticalSection(&state->lock);
+    entry=find(state,reservation);
+    if(!entry) { LeaveCriticalSection(&state->lock);return ERROR_NOT_FOUND; }
+    if(entry->launcher_pid!=launcher_pid || entry->launcher_generation!=launcher_generation) {
+        LeaveCriticalSection(&state->lock);return ERROR_ACCESS_DENIED;
+    }
+    if((entry->kind!=OPENNT_BASE_WORKER_NATIVE && entry->kind!=OPENNT_BASE_WORKER_NATIVE_GUI_LAUNCHER) ||
+        !OpenNtBaseNativeLaunchTypeIsValid(entry->native_type) ||
+        (entry->kind==OPENNT_BASE_WORKER_NATIVE_GUI_LAUNCHER)==OpenNtBaseNativeLaunchTypeIsText(entry->native_type)) {
+        LeaveCriticalSection(&state->lock);return ERROR_INVALID_STATE;
+    }
+    if(!entry->worker || WaitForSingleObject(entry->worker,0)!=WAIT_TIMEOUT) {
+        LeaveCriticalSection(&state->lock);return ERROR_PROCESS_ABORTED;
+    }
+    if(!DuplicateHandle(GetCurrentProcess(),entry->worker,GetCurrentProcess(),&retained,
+            0,FALSE,DUPLICATE_SAME_ACCESS)) {
+        DWORD error=GetLastError();
+        LeaveCriticalSection(&state->lock);return error;
+    }
+    *kind=entry->kind;*native_type=entry->native_type;
+    LeaveCriticalSection(&state->lock);
+    *worker=retained;
+    return ERROR_SUCCESS;
+}
+
 BOOL OpenNtBaseReservationAbandon(OPENNT_BASE_RESERVATIONS *state,uint64_t reservation)
 {
     OPENNT_BASE_RESERVATION *entry;

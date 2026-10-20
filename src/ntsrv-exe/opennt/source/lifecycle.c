@@ -112,9 +112,25 @@ static DWORD service_terminate_worker(OPENNT_BASE_SERVICE *service,uint32_t proc
         !key->generation || key->object)) {error=ERROR_INVALID_HANDLE;goto unlock;}
     for (link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
         OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
+        OPENNT_BASE_CONNECTION *worker=NULL;
+        LIST_ENTRY *connection_link;
         if(key ? watch->process.SequenceNumber!=key->generation :
             (DWORD)(ULONG_PTR)watch->process.ClientId.UniqueProcess!=process_id)continue;
         process_id=(DWORD)(ULONG_PTR)watch->process.ClientId.UniqueProcess;
+        for(connection_link=service->connections.Flink;
+            connection_link!=&service->connections;connection_link=connection_link->Flink) {
+            OPENNT_BASE_CONNECTION *candidate=CONTAINING_RECORD(connection_link,
+                OPENNT_BASE_CONNECTION,service_link);
+            if(candidate->process.SequenceNumber==watch->process.SequenceNumber) {
+                worker=candidate;break;
+            }
+        }
+        /* A native carrier exposes its worker-base receiver only after native
+         * backend registration.  VDM workers have their original lifecycle
+         * receiver as part of the authenticated reservation/update path, so
+         * its shutdown event remains valid during that startup interval. */
+        if(!worker || (worker->native_worker && !worker->registered_worker))
+            {error=ERROR_NOT_READY;break;}
         if (watch->termination_requested) { error=ERROR_BUSY; break; }
         if (!DuplicateHandle(GetCurrentProcess(),watch->process.ProcessHandle,
                 GetCurrentProcess(),&process,SYNCHRONIZE,FALSE,0) ||
@@ -180,17 +196,16 @@ DWORD OpenNtBaseServiceCloseManagementNode(OPENNT_BASE_SERVICE *service,
             frontend=TRUE;error=ERROR_SUCCESS;break;
         }
     } else if(key->category==MANAGEMENT_GUI_TARGET && key->object) {
+        /* Keep management-key validation honest, but no GUI observation ever
+         * grants an operation over the real process. */
         for(link=service->gui_records.Flink;link!=&service->gui_records;link=link->Flink) {
             OPENNT_BASE_WIN32RECORD *record=CONTAINING_RECORD(link,OPENNT_BASE_WIN32RECORD,link);
-            if(record->worker_generation!=key->generation || record->request!=key->object)continue;
-            if(record->completed || !record->gui_process ||
-                WaitForSingleObject(record->gui_process,0)!=WAIT_TIMEOUT)break;
-            if(!DuplicateHandle(GetCurrentProcess(),record->gui_process,GetCurrentProcess(),&target,
-                PROCESS_TERMINATE|SYNCHRONIZE,FALSE,0))error=GetLastError();
-            else error=ERROR_SUCCESS;
-            break;
+            if(record->worker_generation==key->generation && record->request==key->object) {
+                error=ERROR_NOT_SUPPORTED;break;
+            }
         }
-    } else error=ERROR_NOT_SUPPORTED;
+    }
+    else error=ERROR_NOT_SUPPORTED;
 done:
     LeaveCriticalSection(&service->lock);
     /* Wait/termination cannot hold the registry lock needed for rundown.

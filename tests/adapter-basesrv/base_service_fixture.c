@@ -108,7 +108,7 @@ int fixture_parent_resume_origin(void)
 #undef ORIGIN_CHECK
 }
 
-/* Projection/close fixture: seed the existing admitted GUI record boundary,
+/* Projection/observation fixture: seed the existing admitted GUI record boundary,
  * bind a real suspended target through the production provider, then model
  * its already-tested startup transfer. No substitute close implementation. */
 int fixture_management_gui(void)
@@ -118,7 +118,7 @@ int fixture_management_gui(void)
     OPENNT_BASE_WIN32RECORD *record=NULL;
     OPENNT_BASE_WORKER_INFO *tree=NULL;
     PROCESS_INFORMATION carrier={0},target={0};STARTUPINFOW startup={sizeof(startup)};
-    WCHAR image[MAX_PATH],command[MAX_PATH+32];
+    WCHAR image[MAX_PATH],command[MAX_PATH+32],gui_image[MAX_PATH];
     HANDLE receipt=NULL;
     DWORD generation=0,result=1;uint32_t count=0;uint64_t epoch=0;
     OPENNT_BASE_MANAGEMENT_KEY key={0};
@@ -127,8 +127,13 @@ int fixture_management_gui(void)
     swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" --reservation-child",image);
     GUI_CHECK(CreateProcessW(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
         NULL,NULL,&startup,&carrier));
-    swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" --reservation-child",image);
-    GUI_CHECK(CreateProcessW(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
+    lstrcpynW(gui_image,image,ARRAYSIZE(gui_image));
+    {WCHAR *leaf=wcsrchr(gui_image,L'\\');GUI_CHECK(leaf);*leaf=0;
+        leaf=wcsrchr(gui_image,L'\\');GUI_CHECK(leaf);*leaf=0;
+        GUI_CHECK(!wcscat_s(gui_image,ARRAYSIZE(gui_image),L"\\W16Style.exe") &&
+            GetFileAttributesW(gui_image)!=INVALID_FILE_ATTRIBUTES);}
+    swprintf_s(command,ARRAYSIZE(command),L"\"%ls\"",gui_image);
+    GUI_CHECK(CreateProcessW(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED,
         NULL,NULL,&startup,&target));
     GUI_CHECK(!OpenNtBaseServiceConnect(service,carrier.hProcess,&worker,&generation));
     receipt=CreateEventW(NULL,TRUE,FALSE,NULL);GUI_CHECK(receipt);
@@ -136,9 +141,14 @@ int fixture_management_gui(void)
     record->request=17;record->gui=TRUE;lstrcpyW(record->image,L"fixture-gui.exe");
     EnterCriticalSection(&service->lock);
     worker->native_worker=TRUE;
+    worker->native_gui_launcher=TRUE;
+    worker->native_launch_type=sizeof(void *)==8 ? OPENNT_BASE_NATIVE_LAUNCH_WIN64_GUI :
+        OPENNT_BASE_NATIVE_LAUNCH_WIN32_GUI;
     InsertTailList(&worker->win32records,&record->link);
     LeaveCriticalSection(&service->lock);
-    GUI_CHECK(!OpenNtBaseServiceBindNativeTarget(worker,carrier.dwProcessId,generation,17,target.hProcess,receipt));
+    {DWORD bind=OpenNtBaseServiceBindNativeTarget(worker,carrier.dwProcessId,generation,17,target.hProcess,receipt);
+        if(bind)fprintf(stderr,"management-gui bind=%lu\n",(unsigned long)bind);
+        GUI_CHECK(!bind);}
     EnterCriticalSection(&service->lock);
     RemoveEntryList(&record->link);InsertTailList(&service->gui_records,&record->link);
     LeaveCriticalSection(&service->lock);
@@ -147,15 +157,19 @@ int fixture_management_gui(void)
         tree[0].key.object==17 && !tree[0].parent.category && !tree[0].depth &&
         tree[0].process_id==target.dwProcessId && tree[0].kind==
         (sizeof(void *)==8 ? MANAGEMENT_KIND_WIN64 : MANAGEMENT_KIND_WIN32) &&
-        tree[0].actions==MANAGEMENT_CAN_CLOSE && tree[0].started_filetime && tree[0].image[0]);
+        !tree[0].actions && tree[0].started_filetime && tree[0].image[0]);
     key=tree[0].key;++key.object;
     GUI_CHECK(OpenNtBaseServiceCloseManagementNode(service,&key)==ERROR_NOT_FOUND);
     GUI_CHECK(WaitForSingleObject(target.hProcess,0)==WAIT_TIMEOUT);
     key=tree[0].key;
-    GUI_CHECK(!OpenNtBaseServiceCloseManagementNode(service,&key));
-    GUI_CHECK(WaitForSingleObject(target.hProcess,5000)==WAIT_OBJECT_0);
+    GUI_CHECK(OpenNtBaseServiceCloseManagementNode(service,&key)==ERROR_NOT_SUPPORTED);
+    GUI_CHECK(WaitForSingleObject(target.hProcess,0)==WAIT_TIMEOUT);
     GUI_CHECK(WaitForSingleObject(carrier.hProcess,0)==WAIT_TIMEOUT);
-    GUI_CHECK(WaitForSingleObject(receipt,0)==WAIT_TIMEOUT); /* Close isn't fake completion. */
+    GUI_CHECK(WaitForSingleObject(receipt,0)==WAIT_TIMEOUT);
+    /* The target is ended by its actual owner; the service merely observes
+     * that exit and retires the Direct observation record. */
+    GUI_CHECK(TerminateProcess(target.hProcess,ERROR_CANCELLED));
+    GUI_CHECK(WaitForSingleObject(target.hProcess,5000)==WAIT_OBJECT_0);
     EnterCriticalSection(&service->lock);service_prune_gui_records(service);LeaveCriticalSection(&service->lock);
     record=NULL;
     GUI_CHECK(WaitForSingleObject(receipt,0)==WAIT_OBJECT_0);
@@ -173,7 +187,7 @@ cleanup:
     if(target.hThread)CloseHandle(target.hThread);if(target.hProcess)CloseHandle(target.hProcess);
     if(carrier.hProcess){TerminateProcess(carrier.hProcess,ERROR_CANCELLED);WaitForSingleObject(carrier.hProcess,5000);}
     if(carrier.hThread)CloseHandle(carrier.hThread);if(carrier.hProcess)CloseHandle(carrier.hProcess);
-    if(!result)puts("PASS management GUI: real pinned target, independent row, stale key, carrier survives, actual exit owns completion");
+    if(!result)puts("PASS management GUI: observed target has no close action; actual exit owns completion");
     return result;
 #undef GUI_CHECK
 }

@@ -91,6 +91,13 @@ int main(void)
         CHECK(OpenNtBaseReservationAbandon(state,native));
         CHECK(OpenNtBaseReservationRetainWorker(state,native,104,12,&worker)==ERROR_SUCCESS);
         CHECK(WaitForSingleObject(worker,0)==WAIT_TIMEOUT);CloseHandle(worker);worker=NULL;
+        CHECK(OpenNtBaseReservationRetainNativeWorker(state,native,104,13,&kind,
+            &claimed_native_type,&worker)==ERROR_ACCESS_DENIED && !worker);
+        CHECK(OpenNtBaseReservationRetainNativeWorker(state,native,104,12,&kind,
+            &claimed_native_type,&worker)==ERROR_SUCCESS);
+        CHECK(kind==OPENNT_BASE_WORKER_NATIVE &&
+            claimed_native_type==OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI && worker);
+        CloseHandle(worker);worker=NULL;
         CHECK(OpenNtBaseReservationClaimWorkerKind(state,GetCurrentProcessId(),15,&claimed,
             &task,&console,&kind,&claimed_native_type,&worker)==ERROR_ALREADY_EXISTS);
         CHECK(OpenNtBaseReservationReleaseWorker(state,native,GetCurrentProcessId(),15)==ERROR_ACCESS_DENIED);
@@ -99,6 +106,20 @@ int main(void)
         CHECK(OpenNtBaseReservationCreateKind(state,105,16,0,(HANDLE)0x4567,
             OPENNT_BASE_WORKER_NATIVE,OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&other)==ERROR_SUCCESS);
         CHECK(OpenNtBaseReservationRelease(state,other,105,16)==ERROR_SUCCESS);
+        CHECK(OpenNtBaseReservationCreateKind(state,106,17,0,NULL,
+            OPENNT_BASE_WORKER_NATIVE_GUI_LAUNCHER,OPENNT_BASE_NATIVE_LAUNCH_WIN64_GUI,&native)==ERROR_SUCCESS);
+        CHECK(OpenNtBaseReservationPrepareWorker(state,native,106,17,self)==ERROR_SUCCESS);
+        CHECK(OpenNtBaseReservationRetainNativeWorker(state,native,106,17,&kind,
+            &claimed_native_type,&worker)==ERROR_SUCCESS);
+        CHECK(kind==OPENNT_BASE_WORKER_NATIVE_GUI_LAUNCHER &&
+            claimed_native_type==OPENNT_BASE_NATIVE_LAUNCH_WIN64_GUI && worker);
+        CloseHandle(worker);worker=NULL;
+        CHECK(OpenNtBaseReservationClaimWorkerKind(state,GetCurrentProcessId(),18,&claimed,
+            &task,&console,&kind,&claimed_native_type,&worker)==ERROR_SUCCESS);
+        CHECK(claimed==native && console==NULL && kind==OPENNT_BASE_WORKER_NATIVE_GUI_LAUNCHER &&
+            claimed_native_type==OPENNT_BASE_NATIVE_LAUNCH_WIN64_GUI && worker);
+        CloseHandle(worker);worker=NULL;
+        CHECK(OpenNtBaseReservationReleaseWorker(state,native,GetCurrentProcessId(),18)==ERROR_SUCCESS);
     }
     CHECK(OpenNtBaseReservationsDestroy(state));CloseHandle(self);
     puts("PASS: DOS/WOW/native worker reservation, authenticated claim, generation, native/VDM isolation, abandonment and release");
