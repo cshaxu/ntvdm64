@@ -38,6 +38,14 @@ $null=New-Item -ItemType Directory $root
 . "$PSScriptRoot\isolated_package_cleanup.ps1"
 $source="$PSScriptRoot\wow_mine_gameplay_probe.c"
 $process=$null;$runtime=$null;$scope=$null
+$stressRounds=0
+$stressValue=[Environment]::GetEnvironmentVariable('MVDM_WOW_MINE_STRESS_ROUNDS')
+if($stressValue){
+    if(![uint32]::TryParse($stressValue,[ref]$stressRounds) -or !$stressRounds -or $stressRounds -gt 1000){
+        throw 'MVDM_WOW_MINE_STRESS_ROUNDS must be 1..1000'
+    }
+}
+$observerTimeout=[Math]::Max(30000,10000+50*$stressRounds)
 $saved=@{};foreach($name in @('TEMP','TMP','PATH','MVDM_OBSERVER_PRIVATE_DESKTOP',
     'MVDM_WOW_CALLBACK_FRAME_TRACE_PATH','MVDM_WOW_WINDOW_TRACE_PATH',
     'MVDM_WOW_REGISTRATION_TRACE_PATH','MVDM_TEST_STARTUP_IDENTITY',
@@ -95,7 +103,7 @@ try {
     $start=[Diagnostics.ProcessStartInfo]::new($Observer)
     $start.UseShellExecute=$false;$start.CreateNoWindow=$true
     $styleArgument=if($WindowStyle -eq 'Win16'){' --win16-style'}elseif($WindowStyle -eq 'All'){' --win16-style-all'}else{''}
-    $start.Arguments='"'+$runtime+'\system32\run16.exe" "'+$runtime+'" "'+$root+'\observer.txt" --wait'+$styleArgument+' "'+$runtime+'\WINMINE.EXE" --observation-timeout-ms 30000'
+    $start.Arguments='"'+$runtime+'\system32\run16.exe" "'+$runtime+'" "'+$root+'\observer.txt" --wait'+$styleArgument+' "'+$runtime+'\WINMINE.EXE" --observation-timeout-ms '+$observerTimeout
     $process=[Diagnostics.Process]::Start($start)
     $null=$process.Handle
     $process.Id | Set-Content "$root\observer.pid"
@@ -118,7 +126,7 @@ try {
         Copy-Item "$runtime\tests\GENPROBE.BIN" "$root\sibling-report.bin"
     }
     if($probeExit){throw "Gameplay probe failed: $probeExit"}
-    if(!$process.WaitForExit(35000)){throw 'Observer exceeded bound after window close'}
+    if(!$process.WaitForExit($observerTimeout+5000)){throw 'Observer exceeded bound after window close'}
     $report=Get-Content "$root\observer.txt" -Raw
     if($process.ExitCode -or $report -notmatch 'result=exited' -or $report -notmatch 'exit=0x00000000'){
         throw 'Game actions passed but launcher completion did not; inspect observer.txt'

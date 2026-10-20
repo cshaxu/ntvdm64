@@ -1,5 +1,88 @@
 # mvdm
 
+MVDM-HOST-DIV-354 registers the remaining S4 classic-DDE construction and
+rollback closure in existing wow32/wdde.c/.h, wmdisp32.c and wmsg16.c. Keep
+the original HDDE list as the sole persistent alias authority and retain each
+original packet/format/ACK/free algorithm. A bounded call-private conversion
+record may retain only scalar pairs created by one conversion (direct packet,
+DIB inner object, metafile-pict and metafile): it is not a registry, cache or
+ABI field. Register each pair before any subsequent failing operation; on
+failure, unwind that invocation's pairs in reverse only when the original
+HDDE still proves the exact pair is live. The native-to-guest rollback frees
+only newly created guest objects; the guest-to-native rollback frees only newly
+created native objects, using the existing metafile release route where
+applicable. Existing source objects and reused pairs are always borrowed.
+Preserve original publication-before-mark ordering; propagate a FALSE
+CallBack16 completion only when the current public wrapper rejects before the
+original guest callback, then remove the exact just-published pair. Never use
+the guest VP return, add a second persistent table, replay a message, broadly
+admit DDEML, alter guest/ABI, or replace original transfer/ACK ownership.
+Budget 220 executable added/removed lines across the four named originals.
+Require exact construction-allocation/registration/pack failure, nested
+indirect DIB/metafile, reused alias, ACK/free/reentry, failed post and
+successful-transfer controls before the one composed product build; this does
+not by itself close S4.
+
+MVDM-HOST-DIV-353 registers the S4 WM_DDE_INITIATE publication-progress
+boundary in existing wow32/wdde.c/.h, wmsg16.c, wmdisp32.c and wstruc.c.
+The original DDEInitiateList remains the only persistent initiation authority.
+`WI32DDEAddInitiator` reports only whether it actually published a node; each
+existing per-message invocation records that fact in its already call-private
+message storage, and a synchronous normal/recovery unthunk removes a node only
+when that same invocation published one. This preserves original successful
+LIFO same-initiator nesting and queued-transfer lifetime, while an allocation
+failure cannot consume an outer same-key token. It deliberately retains the
+original delivery behavior after an allocation failure: this correction adds no
+new post/queue failure policy, list, guest change, ABI change or protocol
+feature. `putmsg16` initializes its existing local conversion record before
+recording this progress, rather than reading indeterminate private slots.
+Budget 40 executable added/removed lines. Require complete original-body
+same-key nesting, failed-add, direct unthunk, getmsg recovery and queued
+transfer controls together with the remaining DDE construction/transfer group;
+this is not DDE closure by itself.
+
+MVDM-HOST-DIV-352 registers the S4 EXECUTE ACK node-read boundary in existing
+wow32/wmdisp32.c. DDEFindAckNode returns the original live HDDE authority;
+capture that node's metadata on this invocation's native stack before the
+first guest unmark/free callback, then use only the captured keys/flags for
+the existing ACK branches. Reentry may retire the list node; never reread
+its allocation afterwards. Keep the original list lookup/deletion, flags,
+ACK result, free order and missing-pair disposition. No second alias table,
+new generation policy, guest, ABI or native payload lifetime change. Budget
+10 executable added/removed lines. Require the complete original ACK normal,
+late-free, synthetic-handle and reentrant-node-retirement controls alongside
+the existing alias group; this alone is not the whole DDE ownership repair.
+
+MVDM-HOST-DIV-351 registers the S4 original DDE alias retirement boundary
+against the pinned OpenNT source and7835ba25e's D1/D2/D5 ledger. Keep HDDE
+as the sole persistent alias authority and original message/format/free-veto
+algorithms. An empty DDEDeletehandle must return FALSE, just as its existing
+missing-pair branch and neighbouring original CopyDataDeleteNode do, rather
+than dereference the absent head. No replacement registry, guest change,
+protocol feature or ownership transfer policy follows from that guard.
+Initial bound20 executable added/removed lines in existing wow32/wdde.c;
+extend the registered design before any broader acquisition/retirement edit.
+Require exact original-body empty/missing/head/interior/tail/duplicate and
+both-direction free/veto controls in the complete DDE acceptance cohort.
+
+MVDM-HOST-DIV-350 registers the S4 DDE conversion-selector cohort against
+pinned OpenNT5c5b979ec08c17d3ca2eb70e8aad62d26515d01c and7835ba25e's
+nine-entry ownership ledger. Existing wowhooks.c and wumsg.c retain original
+conversion/callback phase choices and native/guest conversion calls. Capture the
+entering TLS selector and restore it on normal, early-return and exceptional
+exit, including cleanup failure. Pair narrow GetMessage/PeekMessage putmsg16 intervals
+and both PostMessage/SendMessage caller intervals; retain the original scroll
+compatibility early return. No allocator, packet transfer/free, message
+replacement or ABI change. GetMessage's removed queue item explicitly uses
+the existing consuming phase TRUE, independent of its enclosing hook selector;
+PeekMessage still derives it from PM_REMOVE. No
+new state manager, thread/task ABI or guest change. A lower DDE
+allocator cannot restore its caller's operation selector on bypass/failure.
+Budget80 executable added/removed lines across these two existing originals.
+This is part of the already fixed DDE cohort, not an independently complete
+protocol repair: original-body nested/failure proof and the entire grouped
+DDE/runtime/publication gates remain required before delivery.
+
 MVDM-HOST-DIV-349 registers the S4 call-owned conversion transaction against
 pinned OpenNT5c5b979ec08c17d3ca2eb70e8aad62d26515d01c and delivered P21/
 native prerequisite860785e88. Six existing originals: wmdisp32.c/.h,
@@ -227,6 +310,8 @@ body. Original OpenNT wkman.c, kernel hooks.c and taskman.c are provenance:
 NT4's private registering-process filter is unavailable in public modern USER.
 Owner accepts thread-before-global ordering, not lost worker-wide coverage.
 Owned lifecycle/idle bindings supply thread coverage and native chain forwarding.
+The query follows taskman's selected PTI through its lifecycle native-thread ID
+to that exact original TD; another task's `hIdleHook` cannot enable this task.
 No guest changes; verification pending in the S2 scope audit. This supersedes
 DIV-336's unchanged global-registration/cleanup statement only.
 

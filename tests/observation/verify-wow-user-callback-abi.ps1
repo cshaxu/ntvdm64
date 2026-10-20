@@ -38,7 +38,8 @@ foreach ($assignment in $assignments) {
     $assigned[$slot] = $target
 }
 $objects = @('obj/wow32.obj','obj/wcall32.obj','obj/wres32.obj','obj/wuclip.obj','obj/wmdisp32.obj',
-    'obj/wudlg.obj','obj/wumsg.obj','obj/wuwind.obj','obj/wgfont.obj','obj/wuser.obj','obj/wdde.obj')
+    'obj/wudlg.obj','obj/wumsg.obj','obj/wuwind.obj','obj/wgfont.obj','obj/wuser.obj','obj/wdde.obj',
+    'obj/wow32-dll/wow_user_task_lifecycle.obj')
 $symbolSets = @{}
 $identities = foreach ($relative in $objects) {
     $path = Join-Path $BuildRoot $relative
@@ -89,6 +90,23 @@ foreach ($callback in $nativeCallbacks.Keys) {
 if ($code -notmatch 'RegisterWowBaseHandlers\(W32DDEFreeGlobalMem32\)') {
     throw 'Global-free hook no longer binds the original body'
 }
+# ADAPTER-WOW-103: an unused wrapper or header mapping is not reconnection.
+foreach ($encoding in @('A','W')) {
+    $bridge = '\|\s*_wow_native_CallMsgFilter' + $encoding + '@8\s*$'
+    $native = '\|\s*__imp__CallMsgFilter' + $encoding + '@8\s*$'
+    $scope = $symbolSets['obj/wow32-dll/wow_user_task_lifecycle.obj']
+    if (!@($scope | Where-Object { $_ -match 'SECT\w+' -and $_ -match $bridge }).Count -or
+        !@($scope | Where-Object { $_ -match 'UNDEF' -and $_ -match $native }).Count) {
+        throw "CallMsgFilter$encoding must define its stdcall scope and retain its actual native encoding"
+    }
+}
+if (!@($symbolSets['obj/wumsg.obj'] | Where-Object {
+        $_ -match 'UNDEF' -and $_ -match '\|\s*_wow_native_CallMsgFilterA@8\s*$'
+    }).Count -or @($symbolSets['obj/wumsg.obj'] | Where-Object {
+        $_ -match 'UNDEF' -and $_ -match '\|\s*__imp__CallMsgFilterA@8\s*$'
+    }).Count) {
+    throw 'Original ANSI CallMsgFilter still bypasses the WOW native-call boundary'
+}
 [pscustomobject]@{
     marker='WOW_USER_INPUT_CALLBACK_ABI_21_OK'
     sourceSha256=(Get-FileHash -LiteralPath $source).Hash
@@ -96,6 +114,7 @@ if ($code -notmatch 'RegisterWowBaseHandlers\(W32DDEFreeGlobalMem32\)') {
     callbacks=$rows
     dialogCallback='W32DialogFunc@16: original definition and both DWL_DLGPROC consumers match'
     nativeCallbacks=$nativeCallbacks
+    nativeMessageFilters='Both @8 definitions call their matching A/W USER import; original ANSI consumer references the bridge'
     objects=$identities
     limitation='Static x86 input-table ABI only; not real callback reachability, argument meaning, output-table or guest acceptance.'
 } | ConvertTo-Json -Depth 5

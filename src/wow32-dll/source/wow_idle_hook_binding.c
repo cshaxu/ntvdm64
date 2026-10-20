@@ -8,7 +8,7 @@ extern PTD gptdTaskHead;
 extern CRITICAL_SECTION gcsWOW;
 LRESULT CALLBACK WowOriginalForegroundIdleHook(int, WPARAM, LPARAM);
 
-BOOL WINAPI wow_user_idle_hook_registered(void)
+BOOL WINAPI wow_user_idle_hook_registered(DWORD native_thread_id)
 {
     PTD task;
     BOOL registered = FALSE;
@@ -16,14 +16,17 @@ BOOL WINAPI wow_user_idle_hook_registered(void)
     /* Before original WOW initialization there is no TD list or initialized
      * list lock. No registration can exist in that state. Recheck under the
      * lock before ever dereferencing a nonempty borrowed head. */
-    if (!gptdTaskHead) return FALSE;
+    if (!native_thread_id || !gptdTaskHead) return FALSE;
     /* wkman.c owns both the list and hIdleHook. Hold its existing lock only
      * while borrowing list nodes, never across native or guest callbacks. */
     EnterCriticalSection(&gcsWOW);
     for (task = gptdTaskHead; task; task = task->ptdNext) {
         /* W32Thread links its TD before initializing hIdleHook. hThread is
          * NULL before linkage and published only after successful InitTask. */
-        if (task->hThread && task->hIdleHook) {
+        /* taskman asks whether its selected pti is hooked.  Do not turn
+         * another task's original registration into a worker-wide result. */
+        if (task->dwThreadID == native_thread_id && task->hThread &&
+                task->hIdleHook) {
             registered = TRUE;
             break;
         }
@@ -40,10 +43,10 @@ static LRESULT dispatch_idle(int code, WPARAM wp, LPARAM lp)
     wow_user_borrow_scope borrow;
     BOOL borrowed = FALSE;
     LRESULT result = 0;
-    /* Thread scope excludes other processes; original TD intent gates all
-     * observers in this worker. Never interpret an unbound TEB as a TD. */
+    /* Thread scope excludes other processes; this bound task's original TD
+     * intent gates its observer. Never interpret an unbound TEB as a TD. */
     if (code < 0 || !binding || !binding->thread || !binding->thread->ptdb ||
-            !wow_user_idle_hook_registered())
+            !wow_user_idle_hook_registered(binding->thread->native_thread_id))
         return 0;
     if (!wow_task_callback_enter(&task)) return 0;
     __try {

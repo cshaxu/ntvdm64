@@ -191,7 +191,7 @@ static BOOL WINAPI idle_hooked(wow_task_order_thread *thread)
     wow_user_runtime_thread *binding = wow_user_runtime_current();
     if (!binding || binding->thread != thread || !binding->exclusive_held)
         lifecycle_failure("idle-hook-query-owner", ERROR_INVALID_STATE);
-    return wow_user_idle_hook_registered();
+    return wow_user_idle_hook_registered(thread->native_thread_id);
 }
 
 static void WINAPI idle_hook(wow_task_order_thread *thread)
@@ -1270,6 +1270,9 @@ WOW_NATIVE_CALL(int, GetWindowTextA, (HWND w, LPSTR text, int count), (w, text, 
  * Dialog message filters likewise execute application Hooks. Both use the
  * existing native-call ownership/return boundary, not direct USER calls. */
 WOW_NATIVE_CALL(int, GetWindowTextW, (HWND w, LPWSTR text, int count), (w, text, count), 0)
+/* ADAPTER-WOW-103: preserve the original ANSI entry, not an A-to-W rewrite. */
+WOW_NATIVE_CALL_TARGET(BOOL, CallMsgFilterA, (LPMSG message, int code),
+    (message, code), FALSE, message ? message->hwnd : NULL)
 WOW_NATIVE_CALL_TARGET(BOOL, CallMsgFilterW, (LPMSG message, int code),
     (message, code), FALSE, message ? message->hwnd : NULL)
 WOW_NATIVE_CALL(int, GetWindowTextLengthA, (HWND w), (w), 0)

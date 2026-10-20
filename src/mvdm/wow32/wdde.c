@@ -28,7 +28,7 @@ MODNAME(wdde.c);
 // message (from both the WMDISP32.C and WMSG16.C).
 //
 
-VOID WI32DDEAddInitiator (HAND16 Initiator)
+BOOL WI32DDEAddInitiator (HAND16 Initiator)
 {
     LPDDENODE Node;
 
@@ -51,6 +51,7 @@ VOID WI32DDEAddInitiator (HAND16 Initiator)
         DDEInitiateList = Node;
 
         LOGDEBUG(12, ("WOW::WI32DDEInitiator(): thunking -- adding an Initiator %04lX\n", Initiator));
+        return (TRUE);
     }
     else {
 
@@ -60,6 +61,7 @@ VOID WI32DDEAddInitiator (HAND16 Initiator)
 
         LOGDEBUG(12, ("WOW::WI32DDEInitiator(): thunking -- Couldn't allocate memory\n"));
         WOW32ASSERT (FALSE);
+        return (FALSE);
     }
 }
 
@@ -233,13 +235,14 @@ BOOL DDEIsTargetMSDraw(HAND16 To_hwnd)
 // WARNING: The Copyh32Toh16() calls may cause 16-bit memory movement
 //
 
-HAND16 DDECopyhData16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE h32, PDDEINFO pDdeInfo)
+HAND16 DDECopyhData16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE h32, PDDEINFO pDdeInfo, PDDECONVERSION pConversion)
 {
     HAND16  h16 = 0;
     VPVOID  vp1, vp2;
     DDEDATA *lpMem32;
     DDEDATA16 *lpMem16;
     int cb;
+    BOOL fFailed = FALSE;
 
     //
     // NULL handle ?
@@ -325,7 +328,11 @@ HAND16 DDECopyhData16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE h32, PDDEINFO pDd
                     pDdeInfo->Format = lpMem32->cfFormat;
                     pDdeInfo->Flags = 0;
                     pDdeInfo->h16 = 0;
-                    DDEAddhandle(To_hwnd, From_hwnd, (HAND16) hDib16, hDib32, pDdeInfo);
+                    if (!hDib16 || !DDETrackhandle(pConversion, To_hwnd, From_hwnd,
+                                        (HAND16)hDib16, hDib32, pDdeInfo)) {
+                        if (hDib16) GlobalUnlockFree16(GlobalLock16(hDib16, NULL));
+                        fFailed = TRUE;
+                    }
 
                 }
 
@@ -381,7 +388,11 @@ HAND16 DDECopyhData16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE h32, PDDEINFO pDd
                             pDdeInfo->Format = lpMem32->cfFormat;
                             pDdeInfo->h16 = 0;
                             pDdeInfo->Flags = DDE_METAFILE;
-                            DDEAddhandle(To_hwnd, From_hwnd, (HAND16) hMF16, hMF32, pDdeInfo);
+                            if (!hMF16 || !DDETrackhandle(pConversion, To_hwnd, From_hwnd,
+                                                (HAND16)hMF16, hMF32, pDdeInfo)) {
+                                if (hMF16) GlobalUnlockFree16(GlobalLock16(hMF16, NULL));
+                                fFailed = TRUE;
+                            }
                         }
 
                         GETMISCPTR(vp1, lpMem16);
@@ -405,12 +416,20 @@ HAND16 DDECopyhData16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE h32, PDDEINFO pDd
                             pDdeInfo->Format = lpMem32->cfFormat;
                             pDdeInfo->Flags = 0;
                             pDdeInfo->h16 = 0;
-                            DDEAddhandle(To_hwnd, From_hwnd, (HAND16) hMeta16, hMeta32, pDdeInfo);
+                            if (!DDETrackhandle(pConversion, To_hwnd, From_hwnd,
+                                                (HAND16)hMeta16, hMeta32, pDdeInfo)) {
+                                GlobalUnlockFree16(GlobalLock16(hMeta16, NULL));
+                                fFailed = TRUE;
+                            }
                             hMF32 = lpMemMeta32->hMF;
-                            if (hMF32) {
+                            if (!fFailed && hMF32) {
                                 hMF16 = WinMetaFileFromHMF(hMF32, FALSE);
                                 pDdeInfo->Flags = DDE_METAFILE;
-                                DDEAddhandle(To_hwnd, From_hwnd, (HAND16) hMF16, hMF32, pDdeInfo);
+                                if (!hMF16 || !DDETrackhandle(pConversion, To_hwnd, From_hwnd,
+                                                    (HAND16)hMF16, hMF32, pDdeInfo)) {
+                                    if (hMF16) GlobalUnlockFree16(GlobalLock16(hMF16, NULL));
+                                    fFailed = TRUE;
+                                }
                             }
 
                             GETMISCPTR(vp2, lpMemMeta16);
@@ -418,6 +437,9 @@ HAND16 DDECopyhData16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE h32, PDDEINFO pDd
                             GlobalUnlock16(hMeta16);
                             FLUSHVDMPTR(vp2, 8, lpMemMeta16);
                             FREEMISCPTR(lpMemMeta16);
+                        }
+                        else {
+                            fFailed = TRUE;
                         }
                         GlobalUnlock(hMeta32);
                     }
@@ -435,6 +457,12 @@ HAND16 DDECopyhData16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE h32, PDDEINFO pDd
 
     GlobalUnlock(h32);
 
+    if (fFailed) {
+        DDERollback16(pConversion, To_hwnd, From_hwnd);
+        if (h16) GlobalUnlockFree16(GlobalLock16(h16, NULL));
+        return (0);
+    }
+
     return (h16);
 }
 
@@ -446,13 +474,14 @@ HAND16 DDECopyhData16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE h32, PDDEINFO pDd
 // for the type of data.
 //
 
-HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pDdeInfo)
+HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pDdeInfo, PDDECONVERSION pConversion)
 {
     HANDLE  h32 = NULL;
     INT     cb;
     VPVOID  vp;
     DDEDATA *lpMem16;
     DDEDATA32 *lpMem32;
+    BOOL fFailed = FALSE;
 
     //
     // AmiPro passes a NULL handle.
@@ -532,7 +561,11 @@ HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pD
                     pDdeInfo->Format = lpMem16->cfFormat;
                     pDdeInfo->Flags = 0;
                     pDdeInfo->h16 = 0;
-                    DDEAddhandle(To_hwnd, From_hwnd, (HAND16) hDib16, hDib32, pDdeInfo);
+                    if (!hDib32 || !DDETrackhandle(pConversion, To_hwnd, From_hwnd,
+                                        (HAND16)hDib16, hDib32, pDdeInfo)) {
+                        if (hDib32) GlobalFree(hDib32);
+                        fFailed = TRUE;
+                    }
 
                     GlobalUnlock16(hDib16);
                     FREEMISCPTR(lpMemDib16);
@@ -583,20 +616,31 @@ HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pD
                             lpMemMeta32->mm = (LONG) FETCHSHORT(lpMemMeta16->mm);
                             lpMemMeta32->xExt = (LONG) FETCHSHORT(lpMemMeta16->xExt);
                             lpMemMeta32->yExt = (LONG) FETCHSHORT(lpMemMeta16->yExt);
+                            /* The mark callback below may reenter guest code.  Do
+                             * not dereference this flat guest view after it. */
+                            hMF16 = FETCHWORD(lpMemMeta16->hMF);
                             pDdeInfo->Format = lpMem16->cfFormat;
                             pDdeInfo->Flags = 0;
                             pDdeInfo->h16 = 0;
-                            DDEAddhandle(To_hwnd, From_hwnd, (HAND16) hMeta16, hMeta32, pDdeInfo);
-
-                            hMF16 = FETCHWORD(lpMemMeta16->hMF);
-
-                            if (hMF16) {
-                                hMF32 = (HMETAFILE) HMFFromWinMetaFile(hMF16, FALSE);
-                                pDdeInfo->Flags = DDE_METAFILE;
-                                DDEAddhandle(To_hwnd, From_hwnd, (HAND16) hMF16, hMF32, pDdeInfo);
+                            if (!DDETrackhandle(pConversion, To_hwnd, From_hwnd,
+                                                (HAND16)hMeta16, hMeta32, pDdeInfo)) {
+                                GlobalFree(hMeta32);
+                                fFailed = TRUE;
                             }
 
-                            lpMemMeta32->hMF = (HMETAFILE) hMF32;
+                            if (!fFailed && hMF16) {
+                                hMF32 = (HMETAFILE) HMFFromWinMetaFile(hMF16, FALSE);
+                                pDdeInfo->Flags = DDE_METAFILE;
+                                if (!hMF32 || !DDETrackhandle(pConversion, To_hwnd, From_hwnd,
+                                                    (HAND16)hMF16, hMF32, pDdeInfo)) {
+                                    if (hMF32) DeleteMetaFile(hMF32);
+                                    fFailed = TRUE;
+                                }
+                            }
+
+                            if (!fFailed) {
+                                lpMemMeta32->hMF = (HMETAFILE) hMF32;
+                            }
                             GlobalUnlock(hMeta32);
                         }
                         GlobalUnlock16(hMeta16);
@@ -613,6 +657,11 @@ HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pD
     GlobalUnlock16(h16);
 
     FREEMISCPTR(lpMem16);
+    if (fFailed) {
+        DDERollback32(pConversion, To_hwnd, From_hwnd);
+        if (h32) GlobalFree(h32);
+        return (NULL);
+    }
     return (h32);
 }
 
@@ -650,7 +699,11 @@ BOOL DDEAddhandle(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 hMem16, HANDLE hMem32
             // Mark the GAH_WOWDDEFREEHANDLE (ie GAH_PAHTOM) bit in the global
             // arena of this handle.
 
-            W32MarkDDEHandle (hMem16);
+            if (!W32MarkDDEHandle(hMem16)) {
+                /* DIV-354: wrapper rejection occurred before original guest entry. */
+                DDEDeletehandle(hMem16, hMem32);
+                return (FALSE);
+            }
 
             return (TRUE);
         }
@@ -665,6 +718,71 @@ BOOL DDEAddhandle(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 hMem16, HANDLE hMem32
 }
 
 
+VOID DDEBeginConversion(PDDECONVERSION pConversion)
+{
+    pConversion->Count = 0;
+}
+
+
+BOOL DDETrackhandle(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hwnd,
+                    HAND16 hMem16, HANDLE hMem32, PDDEINFO pDdeInfo)
+{
+    DDECONVERSIONPAIR *pPair;
+
+    if (pConversion->Count == DDE_CONVERSION_MAX_PAIRS) {
+        WOW32ASSERT(FALSE);
+        return (FALSE);
+    }
+
+    if (!DDEAddhandle(To_hwnd, From_hwnd, hMem16, hMem32, pDdeInfo)) {
+        return (FALSE);
+    }
+
+    pPair = &pConversion->Pair[pConversion->Count++];
+    pPair->h16 = hMem16;
+    pPair->h32 = hMem32;
+    pPair->Flags = pDdeInfo->Flags;
+    return (TRUE);
+}
+
+
+VOID DDERollback16(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hwnd)
+{
+    DDECONVERSIONPAIR *pPair;
+
+    while (pConversion->Count) {
+        pPair = &pConversion->Pair[--pConversion->Count];
+        if (DDEFindPair32(To_hwnd, From_hwnd, pPair->h16) == pPair->h32) {
+            W32UnMarkDDEHandle(pPair->h16);
+            if (DDEDeletehandle(pPair->h16, pPair->h32)) {
+                GlobalUnlockFree16(GlobalLock16(pPair->h16, NULL));
+            }
+        }
+    }
+}
+
+
+VOID DDERollback32(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hwnd)
+{
+    DDECONVERSIONPAIR *pPair;
+
+    while (pConversion->Count) {
+        pPair = &pConversion->Pair[--pConversion->Count];
+        if (DDEFindPair16(To_hwnd, From_hwnd, pPair->h32) == pPair->h16) {
+            W32UnMarkDDEHandle(pPair->h16);
+            if (DDEDeletehandle(pPair->h16, pPair->h32)) {
+                if (pPair->Flags & DDE_METAFILE) {
+                    DeleteMetaFile(pPair->h32);
+                }
+                else {
+                    GlobalFree(pPair->h32);
+                }
+            }
+        }
+    }
+}
+
+
 //  This routine deletes the given h16-h32 pair from the list and frees up
 //   the memory.
 //
@@ -674,6 +792,8 @@ BOOL DDEDeletehandle(HAND16 h16, HANDLE h32)
     PHDDE   phTemp1, phTemp2;
 
     phTemp1 = phDDEFirst;
+    /* DIVERGENCE(MVDM-HOST-DIV-351): the absent pair also includes an empty list. */
+    if (!phTemp1) return (FALSE);
 
     if ((phTemp1->hMem16 == h16) && (phTemp1->hMem32 == h32)) {  // first node
         phDDEFirst = phTemp1->pDDENext;
@@ -815,14 +935,14 @@ PHDDE DDEFindAckNode (HAND16 To_hwnd, HAND16 From_hwnd, HANDLE hMem32)
 //  hMem16.
 //
 
-VOID W32MarkDDEHandle (HAND16 hMem16)
+BOOL W32MarkDDEHandle (HAND16 hMem16)
 {
     PARM16 Parm16;
     VPVOID vp = 0;
 
     Parm16.WndProc.wParam = hMem16;
     Parm16.WndProc.wMsg = 1;
-    CallBack16(RET_WOWDDEFREEHANDLE, &Parm16, 0, &vp);
+    return CallBack16(RET_WOWDDEFREEHANDLE, &Parm16, 0, &vp);
 }
 
 VOID W32UnMarkDDEHandle (HAND16 hMem16)

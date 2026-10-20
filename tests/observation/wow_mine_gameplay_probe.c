@@ -131,6 +131,39 @@ static BOOL click(UINT down, UINT up, WPARAM held)
 {
     return PostMessageW(mine,down,held,MAKELPARAM(19,61)) && PostMessageW(mine,up,0,MAKELPARAM(19,61));
 }
+/* Diagnostic-only, opt-in message churn.  The ordinary acceptance path above
+ * remains one flag/reset/open sequence; this mode exercises the same real
+ * game window for a bounded interval while preserving its worker identity.
+ * It is deliberately driven by an environment value so the public test
+ * command line and guest stay unchanged. */
+static BOOL stress_gameplay(HANDLE process)
+{
+    char value[32];
+    DWORD rounds, index;
+    if (!GetEnvironmentVariableA("MVDM_WOW_MINE_STRESS_ROUNDS", value, sizeof(value)))
+        return TRUE;
+    rounds = strtoul(value, NULL, 10);
+    if (!rounds || rounds > 1000) return FALSE;
+    for (index = 0; index < rounds; ++index) {
+        int x = 19 + (int)((index % 8) * 16);
+        int y = 61 + (int)(((index / 8) % 8) * 16);
+        if (WaitForSingleObject(process, 0) != WAIT_TIMEOUT || !IsWindow(mine))
+            return FALSE;
+        if (index & 1u) {
+            if (!PostMessageW(mine, WM_RBUTTONDOWN, MK_RBUTTON, MAKELPARAM(x, y)) ||
+                !PostMessageW(mine, WM_RBUTTONUP, 0, MAKELPARAM(x, y))) return FALSE;
+        } else {
+            if (!PostMessageW(mine, WM_LBUTTONDOWN, MK_LBUTTON, MAKELPARAM(x, y)) ||
+                !PostMessageW(mine, WM_LBUTTONUP, 0, MAKELPARAM(x, y))) return FALSE;
+        }
+        if ((index % 8) == 7 &&
+            (!PostMessageW(mine, WM_KEYDOWN, VK_F2, 1) ||
+             !PostMessageW(mine, WM_KEYUP, VK_F2, 0xc0000001))) return FALSE;
+        Sleep(20);
+    }
+    printf("stress-rounds=%lu complete\n", rounds);
+    return WaitForSingleObject(process, 0) == WAIT_TIMEOUT && IsWindow(mine);
+}
 /* Launch a second ordinary Win16 task on the same unswitched desktop.
  * The script separately proves its worker/task identity from runtime traces;
  * launcher success alone is not proof of shared-worker retirement. */
@@ -244,6 +277,7 @@ int main(int argc,char **argv)
     if(!click(WM_LBUTTONDOWN,WM_LBUTTONUP,MK_LBUTTON) || !wait_cell(process,before,FALSE,"open"))return 11;
     if(!capture(mine,argv[3],"open"))return 12;
     printf("PASS flag changed cell+counter, F2 restored covered cell, left click changed cell\n");
+    if(!stress_gameplay(process))return 19;
     if(!PostMessageW(mine,WM_CLOSE,0,0))return 13;
     deadline=GetTickCount64()+5000;
     while(IsWindow(mine) && GetTickCount64()<deadline)Sleep(20);

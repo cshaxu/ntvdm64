@@ -12,6 +12,28 @@
 #undef DispatchMessageA
 #undef GetForegroundWindow
 
+/* The production idle object uses the common native-call ABI. This focused
+ * fixture deliberately links only that object, so retain the real USER chain
+ * through two direct test-only ABI providers rather than dragging the full
+ * lifecycle owner into an idle-order test. */
+HHOOK WINAPI wow_native_SetWindowsHookExA(int id, HOOKPROC proc,
+    HINSTANCE module, DWORD thread_id)
+{
+    typedef HHOOK (WINAPI *set_hook_fn)(int, HOOKPROC, HINSTANCE, DWORD);
+    set_hook_fn set_hook = (set_hook_fn)GetProcAddress(
+        GetModuleHandleA("user32.dll"), "SetWindowsHookExA");
+    return set_hook ? set_hook(id, proc, module, thread_id) : NULL;
+}
+
+LRESULT WINAPI wow_native_CallNextHookEx(HHOOK hook, int code,
+    WPARAM wp, LPARAM lp)
+{
+    typedef LRESULT (WINAPI *next_hook_fn)(HHOOK, int, WPARAM, LPARAM);
+    next_hook_fn next_hook = (next_hook_fn)GetProcAddress(
+        GetModuleHandleA("user32.dll"), "CallNextHookEx");
+    return next_hook ? next_hook(hook, code, wp, lp) : 0;
+}
+
 PTD gptdTaskHead;
 CRITICAL_SECTION gcsWOW;
 static wow_user_runtime_thread runtime;
@@ -132,24 +154,27 @@ done:
     fprintf(stderr, "WOW_IDLE_NATIVE_CHAIN errors=%u next=%u registered_and_unregistered=1 direct_not_forwarded=1\n", errors, next_calls);
 }
 
-int __cdecl main(void)
+int __cdecl main(int argc, char **argv)
 {
     TD first = {0}, second = {0};
     BOOL caught = FALSE;
+    BOOL logic_only = argc == 2 && !strcmp(argv[1], "--logic-only");
     InitializeCriticalSection(&gcsWOW);
     runtime.thread = &thread;
     thread.ptdb = &entry;
+    thread.native_thread_id = GetCurrentThreadId();
     SetLastError(0xe0447015);
-    CHECK(!wow_user_idle_hook_registered());
+    CHECK(!wow_user_idle_hook_registered(thread.native_thread_id));
     CHECK(GetLastError() == 0xe0447015);
     gptdTaskHead = &first;
     first.ptdNext = &second;
-    CHECK(!wow_user_idle_hook_registered());
+    CHECK(!wow_user_idle_hook_registered(thread.native_thread_id));
     second.hIdleHook = (HHOOK)(ULONG_PTR)1; /* Mock original TD state only. */
-    CHECK(!wow_user_idle_hook_registered()); /* Published but not initialized. */
+    second.dwThreadID = thread.native_thread_id;
+    CHECK(!wow_user_idle_hook_registered(thread.native_thread_id)); /* Published but not initialized. */
     CHECK(GetLastError() == 0xe0447015);
     second.hThread = (HANDLE)(ULONG_PTR)1;
-    CHECK(wow_user_idle_hook_registered());
+    CHECK(wow_user_idle_hook_registered(thread.native_thread_id));
     (void)WK32ForegroundIdleHook(HC_ACTION, 0, 0);
     CHECK(GetLastError() == 0xe0447015);
     nested = TRUE;
@@ -176,13 +201,24 @@ int __cdecl main(void)
     (void)WK32ForegroundIdleHook(HC_ACTION, 0, 0);
     CHECK(calls == 4 && !task_depth && !borrow_depth);
     second.hIdleHook = NULL;
-    CHECK(!wow_user_idle_hook_registered());
+    CHECK(!wow_user_idle_hook_registered(thread.native_thread_id));
+    first.dwThreadID = thread.native_thread_id + 1;
+    first.hThread = (HANDLE)(ULONG_PTR)2;
+    first.hIdleHook = (HHOOK)(ULONG_PTR)2;
+    CHECK(!wow_user_idle_hook_registered(thread.native_thread_id));
+    (void)WK32ForegroundIdleHook(HC_ACTION, 0, 0);
+    CHECK(calls == 4 && !task_depth && !borrow_depth);
+    first.hIdleHook = NULL;
     thread.ptdb = &entry;
     (void)WK32ForegroundIdleHook(HC_ACTION, 0, 0);
     CHECK(calls == 4 && !task_depth && !borrow_depth);
-    fprintf(stderr, "WOW_IDLE_HOOK_GUARD errors=%u calls=%u nested=1 exception=1 denied=2 foreign=2 retired=1\n",
+    fprintf(stderr, "WOW_IDLE_HOOK_GUARD errors=%u calls=%u nested=1 exception=1 denied=2 foreign=2 retired=1 task_scoped=1\n",
         errors, calls);
-    native_chain(&second);
+    if (logic_only) {
+        fprintf(stderr, "WOW_IDLE_NATIVE_CHAIN unavailable=logic-only\n");
+    } else {
+        native_chain(&second);
+    }
     gptdTaskHead = NULL;
     DeleteCriticalSection(&gcsWOW);
     return errors ? 1 : 0;

@@ -1796,10 +1796,17 @@ BOOL FASTCALL WM32DDEInitiate(LPWM32MSGPARAMEX lpwm32mpex)
     if (lpwm32mpex->fThunk) {
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
         lpwm32mpex->Parm16.WndProc.lParam = lpwm32mpex->lParam;
-        WI32DDEAddInitiator(lpwm32mpex->Parm16.WndProc.wParam);
+        /* DIVERGENCE(MVDM-HOST-DIV-353): retain this invocation's publication. */
+        lpwm32mpex->dwTmp[2] = lpwm32mpex->Parm16.WndProc.wParam;
+        lpwm32mpex->dwTmp[3] = WI32DDEAddInitiator((HAND16)lpwm32mpex->dwTmp[2]) ?
+                              WOW_DDE_INITIATE_ACTIVE : 0;
     }
     else {
-        WI32DDEDeleteInitiator((HAND16)GETHWND16(lpwm32mpex->uParam));
+        if (lpwm32mpex->dwTmp[3] & WOW_DDE_INITIATE_ACTIVE) {
+            HAND16 initiator = (HAND16)lpwm32mpex->dwTmp[2];
+            lpwm32mpex->dwTmp[3] = 0;
+            WI32DDEDeleteInitiator(initiator);
+        }
     }
 
     return (TRUE);
@@ -1855,6 +1862,9 @@ BOOL FASTCALL WM32DDEAck(LPWM32MSGPARAMEX lpwm32mpex)
                                            (HANDLE) lHi);
 
                 if (pDdeNode) {
+                    /* DIVERGENCE(MVDM-HOST-DIV-352): callbacks may retire this node. */
+                    HDDE dde = *pDdeNode;
+                    pDdeNode = &dde;
                     if (pDdeNode->DdeMsg == WM_DDE_EXECUTE) {
 
                         HIW(lpwm32mpex->Parm16.WndProc.lParam) = pDdeNode->hMem16;
@@ -1974,9 +1984,11 @@ BOOL FASTCALL WM32DDEAdvise(LPWM32MSGPARAMEX lpwm32mpex)
     UINT        lLo = 0;
     UINT        lHi = 0;
     DDEINFO     DdeInfo;
+    DDECONVERSION Conversion;
 
 
     if (lpwm32mpex->fThunk) {
+        DDEBeginConversion(&Conversion);
         UnpackDDElParam(lpwm32mpex->uMsg, lpwm32mpex->lParam, &lLo, &lHi);
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
 
@@ -1996,12 +2008,21 @@ BOOL FASTCALL WM32DDEAdvise(LPWM32MSGPARAMEX lpwm32mpex)
                 DdeInfo.Format = 0;
                 DdeInfo.Flags = DDE_PACKET;
                 DdeInfo.h16 = 0;
-                DDEAddhandle((HAND16)GETHWND16(lpwm32mpex->hwnd),
-                             (HAND16)lpwm32mpex->Parm16.WndProc.wParam,
-                             h16,
-                             (HANDLE) lLo,
-                             &DdeInfo);
+                if (!DDETrackhandle(&Conversion,
+                                    (HAND16)GETHWND16(lpwm32mpex->hwnd),
+                                    (HAND16)lpwm32mpex->Parm16.WndProc.wParam,
+                                    h16, (HANDLE)lLo, &DdeInfo)) {
+                    DDERollback16(&Conversion, (HAND16)GETHWND16(lpwm32mpex->hwnd),
+                                  (HAND16)lpwm32mpex->Parm16.WndProc.wParam);
+                    GlobalUnlockFree16(GlobalLock16(h16, NULL));
+                    if (fThunkDDEmsg) FreeDDElParam(lpwm32mpex->uMsg, lpwm32mpex->lParam);
+                    return (FALSE);
+                }
                 LOW(lpwm32mpex->Parm16.WndProc.lParam) = h16;
+            }
+            else {
+                if (fThunkDDEmsg) FreeDDElParam(lpwm32mpex->uMsg, lpwm32mpex->lParam);
+                return (FALSE);
             }
         }
 
@@ -2039,9 +2060,11 @@ BOOL FASTCALL WM32DDEData(LPWM32MSGPARAMEX lpwm32mpex)
     UINT    lLo = 0;
     UINT    lHi = 0;
     DDEINFO DdeInfo;
+    DDECONVERSION Conversion;
 
 
     if (lpwm32mpex->fThunk) {
+        DDEBeginConversion(&Conversion);
         UnpackDDElParam(lpwm32mpex->uMsg, lpwm32mpex->lParam, &lLo, &lHi);
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
 
@@ -2056,7 +2079,7 @@ BOOL FASTCALL WM32DDEData(LPWM32MSGPARAMEX lpwm32mpex)
             h16 = DDECopyhData16((HAND16)GETHWND16(lpwm32mpex->hwnd),
                                  (HAND16)lpwm32mpex->Parm16.WndProc.wParam,
                                  (HANDLE) lLo,
-                                 &DdeInfo);
+                                 &DdeInfo, &Conversion);
 
             //
             // If we could not allocate 16 bit memory, then return NULL to the
@@ -2076,11 +2099,18 @@ BOOL FASTCALL WM32DDEData(LPWM32MSGPARAMEX lpwm32mpex)
 
             DdeInfo.Flags = DDE_PACKET;
             DdeInfo.h16 = 0;
-            DDEAddhandle((HAND16)GETHWND16(lpwm32mpex->hwnd),
-                         (HAND16)lpwm32mpex->Parm16.WndProc.wParam,
-                         h16,
-                         (HANDLE) lLo,
-                         &DdeInfo);
+            if (!DDETrackhandle(&Conversion,
+                                (HAND16)GETHWND16(lpwm32mpex->hwnd),
+                                (HAND16)lpwm32mpex->Parm16.WndProc.wParam,
+                                h16, (HANDLE)lLo, &DdeInfo)) {
+                DDERollback16(&Conversion, (HAND16)GETHWND16(lpwm32mpex->hwnd),
+                              (HAND16)lpwm32mpex->Parm16.WndProc.wParam);
+                GlobalUnlockFree16(GlobalLock16(h16, NULL));
+                if (fThunkDDEmsg) FreeDDElParam(lpwm32mpex->uMsg, lpwm32mpex->lParam);
+                lpwm32mpex->Parm16.WndProc.wParam = (WORD)lHi;
+                lpwm32mpex->Parm16.WndProc.lParam = lLo;
+                return (0);
+            }
 
             LOW(lpwm32mpex->Parm16.WndProc.lParam) = h16;
         }
@@ -2123,9 +2153,11 @@ BOOL FASTCALL WM32DDEPoke(LPWM32MSGPARAMEX lpwm32mpex)
     UINT    lLo = 0;
     UINT    lHi = 0;
     DDEINFO DdeInfo;
+    DDECONVERSION Conversion;
 
 
     if (lpwm32mpex->fThunk) {
+        DDEBeginConversion(&Conversion);
         UnpackDDElParam(lpwm32mpex->uMsg, lpwm32mpex->lParam, &lLo, &lHi);
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
 
@@ -2150,7 +2182,7 @@ BOOL FASTCALL WM32DDEPoke(LPWM32MSGPARAMEX lpwm32mpex)
             h16 = DDECopyhData16((HAND16)GETHWND16(lpwm32mpex->hwnd),
                                  (HAND16)lpwm32mpex->Parm16.WndProc.wParam,
                                  (HANDLE) lLo,
-                                 &DdeInfo);
+                                 &DdeInfo, &Conversion);
 
 
             //
@@ -2169,11 +2201,17 @@ BOOL FASTCALL WM32DDEPoke(LPWM32MSGPARAMEX lpwm32mpex)
 
             DdeInfo.Flags = DDE_PACKET;
             DdeInfo.h16 = 0;
-            DDEAddhandle((HAND16)GETHWND16(lpwm32mpex->hwnd),
-                         (HAND16)lpwm32mpex->Parm16.WndProc.wParam,
-                         h16,
-                         (HANDLE) lLo,
-                         &DdeInfo);
+            if (!DDETrackhandle(&Conversion,
+                                (HAND16)GETHWND16(lpwm32mpex->hwnd),
+                                (HAND16)lpwm32mpex->Parm16.WndProc.wParam,
+                                h16, (HANDLE)lLo, &DdeInfo)) {
+                DDERollback16(&Conversion, (HAND16)GETHWND16(lpwm32mpex->hwnd),
+                              (HAND16)lpwm32mpex->Parm16.WndProc.wParam);
+                GlobalUnlockFree16(GlobalLock16(h16, NULL));
+                if (fThunkDDEmsg) FreeDDElParam(lpwm32mpex->uMsg, lpwm32mpex->lParam);
+                lpwm32mpex->Parm16.WndProc.lParam = lLo;
+                return (0);
+            }
 
             LOW(lpwm32mpex->Parm16.WndProc.lParam) = h16;
         }
@@ -2214,9 +2252,11 @@ BOOL FASTCALL WM32DDEExecute(LPWM32MSGPARAMEX lpwm32mpex)
     LPBYTE  lpMem16;
     LPBYTE  lpMem32;
     DDEINFO DdeInfo;
+    DDECONVERSION Conversion;
 
 
     if (lpwm32mpex->fThunk) {
+        DDEBeginConversion(&Conversion);
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
 
         if (h16 = DDEFindPair16((HAND16)GETHWND16(lpwm32mpex->hwnd),
@@ -2236,11 +2276,15 @@ BOOL FASTCALL WM32DDEExecute(LPWM32MSGPARAMEX lpwm32mpex)
                 DdeInfo.Format = 0;
                 DdeInfo.Flags = DDE_PACKET;
                 DdeInfo.h16 = 0;
-                DDEAddhandle((HAND16)GETHWND16(lpwm32mpex->hwnd),
-                             (HAND16)lpwm32mpex->Parm16.WndProc.wParam,
-                             h16,
-                             (HANDLE) lpwm32mpex->lParam,
-                             &DdeInfo);
+                if (!DDETrackhandle(&Conversion,
+                                    (HAND16)GETHWND16(lpwm32mpex->hwnd),
+                                    (HAND16)lpwm32mpex->Parm16.WndProc.wParam,
+                                    h16, (HANDLE)lpwm32mpex->lParam, &DdeInfo)) {
+                    DDERollback16(&Conversion, (HAND16)GETHWND16(lpwm32mpex->hwnd),
+                                  (HAND16)lpwm32mpex->Parm16.WndProc.wParam);
+                    GlobalUnlockFree16(GlobalLock16(h16, NULL));
+                    return (FALSE);
+                }
 
                 HIW(lpwm32mpex->Parm16.WndProc.lParam) = h16;
             }

@@ -7791,6 +7791,68 @@ baseline, not from another permanently retained disposable build tree.
 
 ### Post-P22 DDE ownership source ledger
 
+#### Classic-DDE executable witness boundary
+
+The immutable runtime package contains no `DDEML.DLL`; its retained files are
+the original USER/KERNEL/GDI guest and selected applications only. Existing
+source explicitly registers DDEML's instance/transaction manager as excluded.
+Therefore compiling the mirror's DDEML source, adding it to the package, or
+using it as a test dependency would both violate the immutable-guest rule and
+silently expand the product.
+
+The bounded runtime witness instead exercises the existing classic protocol
+which this S4 cohort changed: native `WM_DDE_EXECUTE` with a shared HGLOBAL,
+original `WM32DDEExecute` alias creation, guest read and reverse posted ACK,
+original ACK packing, a guest early `GlobalFree` request, and native
+`GlobalFree`-driven alias retirement. It is independently authored test code,
+not a guest replacement. It deliberately does not claim DDEML, atoms/INITIATE,
+DATA/POKE/ADVISE, all allocation failures, or every classic-DDE conversation
+form.
+
+#### Classic-DDE actual execution result (2026-10-19)
+
+The complete current cohort passed against the isolated immutable package and
+the candidate WOW32 provider.  First, an exact-body fixture selected twelve
+original alias/free bodies from the pre-cohort baseline and current candidate:
+the baseline exposed its expected three ownership defects, while the candidate
+passed all 82 service-double cases.  Then the normal same-worker message
+contract also passed: both guest tasks retired normally, the sender recorded
+one received execute, one early guest release request and one retired alias;
+the native peer recorded one packed ACK, one native release and one retired
+alias.  The runtime evidence is deliberately limited to this one complete
+`EXECUTE`/`ACK`/free lifecycle; it is evidence for the original path above,
+not a claim that the other classic-DDE families are covered.
+
+| Evidence | SHA-256 |
+| --- | --- |
+| `s4-dde-alias-r1/result.json` | `9377474C1CDDA2C4A6CB554E88AD0E2574CFBD60C3FF5743EC68B23412AD3950` |
+| `s4-dde-alias-r1/source-inputs.csv` | `026494942BAD35A93B43B329A71B2898FAB694AC85BEAA3618A9BE3705335781` |
+| `s4-classic-dde-r12/classic-dde-result.json` | `7D88861F10D02E1651AD70C220427BC24747AED0B6B486998085427243CBAD40` |
+| `s4-classic-dde-r12/result.txt` | `14C8D4F2C51910684D3E00ED23C6259C095436CB2D70EB5439089A1584E3A046` |
+| `s4-classic-dde-r12/sender.json` | `FB5B56B94968D9349CF69917781B334C6A1C6AC476CD8EC90281405920467E45` |
+| `s4-classic-dde-r12/native.json` | `D37B88AA6F9B7769D1BD1C5E6404D370DC9F84668B25128A0B8722CF3C8766C4` |
+| `s4-classic-dde-r12/probe-inputs.csv` | `9405F224687D6DBEDF80BE6A98E004CB296E9CCA7100A0886DBCD33938786411` |
+| `s4-classic-dde-r12/runtime-inputs.csv` | `5DF6341EB40F9B06D765B443468F70A32424FB25768E9CE5F37121FB2FC401E7` |
+
+The test created no guest artifact and admitted no DDEML endpoint.  The
+temporary package and native probes are disposable after these content hashes
+and the result summary have been recorded.
+
+The adjacent selector/host prerequisites were rechecked as the same local
+cohort.  The current exact original-body selector fixture passed all 59
+COPYDATA-lifetime cases, 14 filter-selector cases and 18 Get/Peek selector
+scope cases; its pre-DIV-350 filter counterfactual failed exactly the seven
+entry-selector preservation controls.  The task-scoped idle fixture passed
+its logic boundary (including foreign-thread exclusion), but its native hook
+chain was intentionally reported `unavailable=logic-only`; that unavailable
+desktop-dependent proof remains a limitation.  The independently authored
+x86 DDE host prerequisite confirmed that direct `KERNEL32!GlobalFree` enters
+the observed BASE hook and obeys its veto, whereas API-set/KERNELBASE
+`GlobalFree` and `FreeDDElParam` wrapper destruction do not.  Thus a wrapper's
+numeric handle or a hook's boolean return is not treated as a payload-liveness
+proof.  None of these source/host controls is a substitute for the remaining
+classic-DDE data/advise/poke/initiate families or the full M1--M6 S4 gate.
+
 Question: what remains outside P22's call-owned conversion transaction?
 Procedure: source-first trace of the complete nine WM_DDE_* dispatch entries,
 forward and reverse conversions, actual message/filter callers, alias-table
@@ -7890,3 +7952,499 @@ made by this checkpoint. M3 idle pairing and complete M1--M6 reconciliation
 remain S4; historical Shell/error13 and the other P22 limitations remain
 unlocated. This ledger neither closes S4 nor transfers a foundational defect
 to S5/S6.
+
+### DDE selector implementation and guest mark return contract
+
+After7835ba25e, register MVDM-HOST-DIV-350 before editing the two existing
+mirror files. Draft the complete five-caller selector cohort rather than a
+single failed filter: ThunkMsgFilterHook, ThunkMsgFilterHook16,
+WU32PeekMessage, WU32PostMessage and WU32SendMessage. Retain the original
+conversion/callback phase choices and all native/conversion calls; exiting
+an operation restores its entering value rather than imposing a default.
+Each filter and both send/post entry scopes capture the entering TLS value;
+the existing outer finally restores it after conversion unwind/stack cleanup,
+including an exception from that cleanup. PeekMessage instead pairs exactly
+its putmsg16/remapping interval, restoring before the existing allocation
+failure recovery/goto path. PostMessage's original scroll-compatibility early
+return remains and now unwinds its own selector after the nested SendMessage
+scope restores its entering POSTMESSAGE value. No new state object/helper,
+message algorithm, heap owner or ABI surface is added. These assignments
+invoke no native API and do not change LastError. Draft source is not built,
+accepted, published or a reason to close the remaining protocol cohort.
+
+Read-only guest source trace resolves a prerequisite for D2's mark failure
+handling without editing or recompiling guest:
+
+- wow16/kernel31/wow16cal.asm's RET table maps RET_WOWDDEFREEHANDLE51 to
+  WOW16SetDdeHandleFlag, which calls SetDdeHandleFlag before WOW16Done.
+- Both 2ginterf.asm and3ginterf.asm SetDdeHandleFlag set/clear the original
+  GAH_WOWDDEFREEHANDLE bit when the arena exists, then execute `xor ax,ax`
+  even on normal completion. Zero is not an allocation/mark failure result.
+- Both original GlobalFree paths test the mark and invoke WowDdeFreeHandle;
+  FALSE vetoes the actual free while reporting apparent success. This is the
+  guest counterpart of the already observed native BASE callback/veto path.
+- Therefore a later adapter must distinguish CallBack16's BOOL completion
+  from its return payload. W32MarkDDEHandle currently ignores completion,
+  but a proposed `vp != 0` success check would reject every ordinary mark.
+  Do not introduce that regression while repairing partial acquisition.
+
+The current selectors' restoration is only the D3/D4 cohort. D1/D2/D5's
+packet/alias rollback and exceptional initiation/release boundaries remain
+unimplemented; direct failure guards must first compose with their caller's
+Get/Peek recovery and actual protocol transfer. No new semantic concession,
+performance work, guest mutation, test execution or release follows from
+this implementation checkpoint. Build still contains only the two caches;
+no diagnostic or compilation job is active for this draft.
+
+### DDE alias retirement controls and reverse caller boundary
+
+The continuing source review registers351 before the two-line empty-list
+guard in wdde.c. This reuses the adjacent original CopyDataDeleteNode's
+absent-head pattern and the DDE function's existing missing-pair FALSE
+contract. It changes neither HDDE layout nor successful deletion/free order.
+The selector review also keeps AbnormalTermination evaluation in its original
+outer finally before adding a nested cleanup/restoration scope; this preserves
+P22's distinction between failed work and a normal return/goto. This is code
+review, not executed exception proof.
+
+Authored, not yet executed: wow_dde_alias_fixture.c and
+verify-wow-dde-alias.ps1. The verifier extracts the complete eleven original
+list, lookup, arena-mark and native/guest-free functions and the actual
+HDDE/DDEINFO/flag declarations from current source and immutable7835ba25e.
+No list/free implementation is copied into the fixture. Service doubles
+measure list-node allocation failure, mark/unmark, guest frees, native BASE
+callback/veto, metafile deletion and callback reentry. The original mark's
+zero return payload remains normal. The negative must have exactly the
+empty-list assertion failure, while both variants run the retained valid
+head/interior/tail/peer-isolation, duplicate-native-handle, EXECUTE late-free,
+metafile and unrelated-alias reentry cases. EXECUTE's actual ACK converter
+and transport remain separate required proofs; the fixture explicitly makes
+no guest/transport claim. This unit source has not been compiled or run.
+
+The full reverse call boundary is finite: nine direct WUMSG consumers
+(CallWindowProc, DefDlgProc, DefFrameProc, DefMDIChildProc, DefWindowProc,
+PostAppMessage, PostMessage, SendDlgItemMessage and SendMessage), two getmsg16
+consumers (CallMsgFilter and DispatchMessage), IsDialogMessage and three Hook
+message consumers (CallWndProcHook16, MsgFilterHook16 and the modified-message
+reverse conversion in MsgFilterHook). CBT's direct ThunkMsg16 call fixes
+WM_CREATE and is not a DDE entry. TranslateMessage/TranslateAccelerator/
+TranslateMDISysAccel use W32CopyMsgStruct, not getmsg16 or DDE conversion;
+do not grow the transaction group by counting those unrelated calls.
+
+Original CallMsgFilter already explicitly frees the new packed ACK/DATA/POKE/
+ADVISE lParam after its temporary native inspection, excluding initiation
+ACK. Other callers can dispatch or deliver a message. Therefore a universal
+"normal return frees every packet" finalizer would be wrong. Source recovery
+must preserve these actual consumers, distinguish the captured original
+packed allocation from a hook-modified MSG and never infer ownership from a
+numeric LRESULT alone. The original client ddetrack.c confirms PackDDElParam
+allocates only ACK/ADVISE/DATA/POKE wrappers, EXECUTE returns the command
+handle, UnpackDDElParam can fail, and FreeDDElParam frees only the wrapper.
+ReuseDDElParam can retain that same wrapper across different message forms.
+These read-only original sources are not imported as a new USER subsystem.
+
+The original guest WOW16GlobalUnlockFree path also returns BOOL TRUE on a
+successful free, unlike ordinary GlobalFree's null-handle success result;
+the existing C wrapper's HMEM16 declaration does not change that payload.
+Keep this distinction in rollback checks rather than invent a uniform
+zero-means-success convention. Actual guest source remains read-only.
+
+351's guard,350's selector restoration and the exact-body fixture remain one
+unbuilt/unpublished worktree cohort. No new protocol ownership record or
+generic packet cleanup is chosen by these changes. The remaining complete
+construction/transfer/ACK/failure recovery must be implemented before one
+composed build and acceptance. No test result, runtime improvement, delivery,
+guest change or S4 completion is claimed here.
+
+### DDE native release route prerequisite
+
+Further source trace rejects two unproved simplifications before changing
+payload rollback. Guest GlobalAlloc may call application GlobalNotify during
+compaction: 2gcompac.asm/3gcompac.asm call gnotify, and 2gmoreme.asm invokes
+TDB_GNotifyProc. The fact SetDdeHandleFlag itself has no application call is
+not proof that the whole DDE construction chain cannot reenter. Likewise,
+KERNEL32's observed callback does not prove all modern USER/GDI releases
+reach that particular export. No speculative call-owned registry, ABI
+expansion or generic packet finalizer is implemented on those assumptions.
+
+Read-only inspection36504 starts23:27:48.7547613Z, deadline120s, exit0:
+native32 USER32 version10.0.26100.8117, SHA-256
+56F3BC77020E21EBEEF825965929DC0D0BD87F9CAFBB08DBCD477043E4342D2E.
+Exports Pack/Unpack/Free/ReuseDDElParam have RVAs89090/89190/89030/89100.
+Free's instruction at RVA89068 calls IAT slot EE2D0. Follow-up11504 starts
+23:28:00.3978320Z,60s,exit0: that slot belongs to the GlobalFree import from
+api-ms-win-core-heap-l2-1-0.dll. Both use held handles/captured pipes and leave
+no disposable output. They prove the static route, not the API-set mapping
+or a dynamic WOW notification. The earlier D6 native KERNEL32 result remains
+true but must not be extrapolated to a different deallocator implementation.
+
+Author wow_dde_native_contract.c as a raw native prerequisite and add only its
+x86 EXCLUDE_FROM_ALL target to the existing native-probe CMake island. It
+uses no product/guest source. In its own process only, resolve the actual
+BASE registration export, confirm direct KERNEL32's notification and veto,
+and observe the resolved API-set owner, notification and remaining movable
+handle. For ACK/ADVISE/DATA/POKE record whether actual FreeDDElParam invokes
+that observer. Thread-local WH_MSGFILTER controls then compare a hook which
+does not eat the message, one which eats/frees it and clears its MSG field,
+and one which eats without freeing. Record result, actual hook invocation,
+consumption, original-field visibility and notification count. Never free
+twice or dereference a consumed packet. An unchanged stale numeric pointer
+and TRUE result must not be treated as a proof of remaining allocation.
+The process creates only its USER message queue, no hidden carrier window;
+no external thread/global hook, injection, desktop switching or product
+registration is involved. The observer is unregistered before exit.
+
+This is a prerequisite to the whole packet group, not product acceptance.
+Completed native evidence follows; runtime changes remain unbuilt/unpublished.
+
+### Native DDE prerequisite results and ANSI execution boundary
+
+Hidden supervisor37936 starts2026-10-19T23:30:58.1886036Z,1320s deadline,
+held handle/captured pipes, exit0. Children15756 (build,1200s) and15900
+(native observer,60s) both exit0; session30178 is drained and terminal.
+Preflight27216 failed before building because legacy PowerShell's inherited
+module path could not load Get-FileHash. Retain this failure; the successful
+supervisor uses bundled PowerShell7, not a repeated live job.
+
+Stable x86 Release Ninja compiles only the independent DDECONTRACT target,
+/O2 /MT /W4 /WX and repository-fixed ccache paths. Product images and guest
+are unchanged. Native errors=0, guest_proof=0, product_proof=0. Direct
+KERNEL32 GlobalFree calls the observer and honors its veto (one notification,
+handle survives). The resolved API-set owner is x86 KERNELBASE: zero observer
+notifications, allocation freed. All four FreeDDElParam wrapper forms also
+produce zero notifications. Original ddetrack.c explicitly excludes packed
+wrapper handles from WOW matching; this observation is NOT proof of a broken
+payload free path or permission to replace all native deallocators.
+
+All three thread-local filter controls invoke one hook. Returning FALSE
+preserves the packet; returning TRUE can accompany either actual packet free
+or no free. In all cases the caller's MSG field remains unchanged, including
+when the hook clears its copied MSG. Thus neither numeric lParam nor TRUE
+proves live ownership. No double free or consumed-packet dereference is used.
+
+SHA-256 native executable:
+DA5ECE32BE590CE6358274E97A61E698F346A92A143602F06A346C8B8BF8153E;
+observer stdout AC037672EE1F16968EBBB9987E0224A8FE1EC7DAF72C3BD3CDC0057ADCC89A57;
+result650BF2A1044846A362CDFD1FFA603B30F9798DDE259F89B21AFD3965AEB3A779;
+commands774D601B67C807FE9645AE372398CABD3C48C869C82C37797E5654A0639711C7;
+input seal DC9532D8996F7710CF96275DC7A0815AA6C5E7B558DE6FA6E08B3F84B3AC2AB7.
+Probe source D220B26B7D0B2130B681584EE862498BEDD5DCD4469AA28202E686594AD8D6CF;
+CMake island17B198810DD4B641EB36D24C037415FEECFCB4ABF2697A60C794375DF4EDE536.
+The completed disposable tree has12 files/8921 bytes; retain these summaries
+before sole-tool reviewed cleanup, not logs in persistent caches.
+
+Source tracing also proves a separate public execution-boundary omission:
+pre-cohort wumsg.obj SHA8005970BD56B77AEA60B3A069D25DFB4014A7D31D54584BB4504528CAD19CC85
+defines WU32CallMsgFilter but imports __imp__CallMsgFilterA@8 directly.
+Read-only dumpbin35572 starts23:36:36.5129416Z,60s deadline,exit0.
+The existing W wrapper alone cannot protect this ANSI consumer. Registered103
+adds the matching A wrapper and both private-facade mappings, preserving A/W
+encoding and existing native-call owner/return machinery. The callback ABI
+gate now requires both wrapper definitions/native imports and WUMSG's actual
+bridge reference with no raw ANSI import. This gate awaits the whole product
+build; its source assertions are not execution-return or guest proof.
+
+The first exact-body alias attempt uses a separate hidden supervisor47904,
+starting23:39:24.4268915Z,600s deadline,exit1;
+compile child24888 exits2. No executable runs. /WX exposed original assignment
+conditions/pointer-to-HAND16 casts plus fixture main inheriting /Gz. Keep
+original extracted bodies untouched, use the already established original
+warning exclusions and explicitly declare fixture main __cdecl. A fresh
+attempt must prove the exact negative and candidate; no pass is claimed yet.
+
+### Alias and complete filter selector source controls
+
+Corrected alias supervisor27576 starts23:40:28.8957686Z,600s,exit0;
+compile23448/25672 exit0, old14660 exits1 as required, candidate9084 exits0.
+Both execute61 controls with no leaked nodes. Immutable7835ba25e fails ONLY
+empty-delete-false; current351 passes all61. Result1129653DA98247EA82D66C762A61F11BB3AD015FC0F73116858AB1D3C619AD1E;
+candidate stdout9EB6E9D5497A1BEA900FEE4A0AB5E520AEB2830704F0E661889D1EBA9CB7B0E8;
+executable7563728B0E53C7FFA9DDF3A69FDF6840B559B52B57032052CD474D071E3941A5;
+exact-body header B01879D36A499D0BE74EE3EC71213EF924890E9A24CA5F6BBBBA1EC40D1D05A7.
+This proof precedes the later ACK extension; do not attribute ACK cases to it.
+
+Supervisor25304 starts23:42:22.7454734Z,600s,exit0, session95554 drained:
+the existing full original COPYDATA/filter fixture retains all27 controls
+and adds14 selector cases (both entering values; normal, nested same/different,
+callback exception, rejected replacement, allocation rejection, copy exception).
+Current compiled body11316 exits0:41 scenarios/errors0,14 selector/errors0.
+Replace ONLY the complete filter body with immutable7835ba25e, retain every
+other current body/service/assertion: negative45636 exits1 with exactly seven
+entry-selector preservation failures, no other failures or leaked nodes.
+Candidate stdout199857A873EA3D12FA7664AA228B419906C093DFC9A43DEE70E65305D12906AE;
+negative stdout E52F7A1077E16C77493C0BDBD7C7774CC6CACE74F09D1953FBA72F3B1AB7233C;
+candidate executable36378B5FD6CB93593ACEDC8307FF500F87A68A344F6B9D6B2CD4698E3254E7A6.
+This is exact function/service proof, NOT real guest DDE, every selector owner,
+exception during cleanup or ABI103 execution proof.
+
+Completed native scratch12/8921 bytes and failed alias preflight8/10528
+bytes are removed by the sole cleanup tool after reviewed previews with
+inventory hashes B95F50E3557BB21EA020E8268B6510376353FB53045093670F2EFD3E9EE0D56B
+and980D56E0E0EEE49C757BFBD46879E6CB775724ED49936AA532AB44F0B05C5265.
+Held supervisors and children already exited, authorized CIM finds no matching
+live identities. Failure-text9B7CC257C2ED2465A7C659694AA9449A538EE8A070B5BA5B029852BC32507A87
+and compiler-output F0598DC34F807BD055EB140B2D7C07CEC5E6A6B28749970688BA9359DE5C3F88
+preserve that rejected run. No cache, source, guest or unknown content removed.
+
+Source D5 review finds WM32DDEAck rereading pDdeNode after guest unmark/free
+callbacks, unlike native retirement's already captured h16. Register352 before
+editing: capture HDDE metadata on the invocation's native stack immediately
+after successful original lookup. Preserve all original flags/branches,
+free order/results and missing-pair handling, but never reread retired node
+storage. Extend the existing exact-body alias fixture with the COMPLETE ACK
+body, normal/late-free/synthetic-handle checks and controlled node retirement
+with quarantined poisoned storage. The latter proves stable metadata use,
+not allocator reuse timing or safe concurrent same-payload double free.
+Use a fresh build/wow-dde-ack-proof with S4 owner20min/100MiB/15min no-progress.
+This extension and352 are not yet compiled; full DDE transfer/abort remains.
+
+The ACK extension subsequently completes: supervisor22816 starts23:44:46.7706532Z,
+600s,exit0; compilers23824/46304 exit0, immutable47708 exits1 with ONLY
+empty-delete-false and ack-retired-node-captured; candidate27728 exits0.
+Both execute79 controls,12 complete actual-source bodies, no remaining nodes.
+Normal EXECUTE ACK, late free and synthetic original-handle return all pass;
+only the baseline rereads poisoned retired storage. No physical freed memory
+is dereferenced by the quarantine witness. Result12E399A7795CD0E920B5D7381610A38E65850EC47A7C9984407181EA869EF6BE;
+candidate stdout795702560F91D4F1F5C3763ADED96BAC2C0CC2BCBF40492037C53B5084EE7881;
+negative stdout F95F293AD2BE8F0809DA955F139D82FF1AF6BC8E99E1A42DA4C6A55EFC4CEDCD;
+candidate executable A8CB961FB991C72A59F74445AC6E5BD511F8D95CB3ACAADDE272FA0BBE41906F;
+exact-body header2C25F6C538454BBB8B7F6159E3583C531D5238116556FE573A7729F88B9FDB6C.
+Tighten the verifier's denominator from a minimum50 to exactly79 after this
+run; bodies and assertions are unchanged by that verifier-only tightening.
+
+The selector consumer sweep also identifies GetMessage's implicit consumption:
+unlike PeekMessage, it always removes the queued item, yet inherits any
+enclosing filter's FALSE conversion selector. Extend350's registration and
+pair its existing putmsg16 interval with an explicit TRUE/restored-entry scope.
+This final GetMessage scope is source-only; it is NOT covered by the preceding
+14 full-filter controls. No generic payload release or transfer policy is added.
+All350--352/103 production changes still await composed build/runtime gates;
+P22 remains the delivered baseline and S4 remains active.
+
+Source/document audit46048 starts23:46:36.6419801Z,600s,exit0 (held handle,
+session82309 drained): documentation governance and relative links pass;
+226 compile owners/278 selected mirrors,177 byte-exact/101 registered content
+differences, issues0. Source summary CA4F11C33107679362DAC55B9E40BD42A32CEB758B1C1949AB354295190BC13E;
+selected-source ledger D9A540B5EE042A01FDEF1DA208A3879C83EB9416B038F5E26B85F281EB0B294B.
+No newly divergent mirrored file is added. Current raw source delta across
+four already divergent originals is31 additions/6 deletions, including comments;
+350/351/352 registration budgets cover them. Adapter103 adds no mirror diff.
+This selected-source audit does not imply current product objects were rebuilt.
+
+Read-only dumpbin4568 starts23:47:13.9431010Z,60s,exit0: the observed x86
+KERNELBASE exports GlobalAlloc/GlobalFree but no RegisterWowBaseHandlers.
+Image hash5BE784046DC9731D1C36E872A8022065ED4A733707B1E467B30A96588714B137.
+Do not invent a second registration call or conclude all payload paths are
+broken from wrapper-only observations. Actual payload retirement is still
+part of the finite DDE acceptance obligation, not an accepted semantic waiver.
+
+Before disposing the four completed proof roots, all held supervisors/children
+are terminal; authorized CIM confirms zero matching pinned PIDs and zero
+command-line users of those exact roots. Alias steps8C8BC74CA6E831487534031D915F641F039662B615B3264BF34C396556C93BF1;
+selector input seal31E1591A8248A581B219F182E740CCEC3042A565D57B4CDFC6D973ED8C530DE1;
+ACK steps6EFEF0FC12069CE9AA63E099272D8FC8D17301B9AFBE9DE3BE4A6B3A1B55F283.
+Reviewed preview: alias24 files/317197 bytes/A8273197DFBC2F4EFBC5A3B48E734B47A962F124A2FC416206C25DE44216F90F;
+selector26/430325/F0DBE4D706B6CB322D994C1ECF4FF89A39D3917E3697EE522EE0C67377CF97B4;
+ACK24/346520/3027E00F352D70AAF2A99D30419B8EDAF806FCA7EA1F985C7A296854550F443C;
+audit6/840382/F6485A417F05D725C67966AD060348E9231CCE47F6CB693FC2CDB314B2526FD0.
+All80 files/1934424 bytes have known generated producers, no user/media/Git
+content or links. Apply must revalidate every exact target before deleting;
+no cache, native prerequisite executable, product or guest is selected.
+
+Apply completes against those exact inventories:80 files/1934424 bytes removed,
+CheckResidual reports only .ninja/.ccache. Total disposable cleanup this stage
+is100 files/1953873 bytes including the earlier failed preflight/native run.
+All hashes/limits above remain recorded; no effective cache is cleared.
+
+Final document supervisor47784 starts23:49:48.2471337Z,600s,exit0 and
+session43591 is drained; both document gates print PASS. The subsequent
+parse/hash marker is absent from captured output, so do NOT count that
+supervisor's exit0 as fresh13-image/ZIP or complete script-parse proof.
+These later checks require their own explicit result. No publication happened.
+
+Queue-scope fixture extension24044 starts23:51:06.0474852Z,600s,exit1;
+compiler39212 exits2 before any executable runs. /WX catches an authored
+fixture's signed/unsigned expected-result expression (C4389), not original
+source. Change only expected0/1234 constants to unsigned, retain /WX and
+all assertions. Failure F74D47F8E7A8A58241E5C648F02B72FECD596D20C3652B498B49EEA3858C6EE2;
+compile stdout13620BA7BA0F5F5281DB99F6D76DD100BD5BE60CC5286F67B9E71F85AD81F3A5.
+The new18 tests extract actual Get/Peek conversion intervals; they do not
+replace or prove complete queue/failed-protocol handling. Fresh results pending.
+
+Corrected queue supervisor48740 starts23:51:56.1471135Z,600s,exit0;
+session70602 is terminal. Candidate errors0/scenarios59: retained27, complete
+filter14 and exact queue-scope18. GetMessage and PeekMessage remove/no-remove
+each preserve both entering values through success, exception and nested
+Get/Peek conversion. Return1234 and exception boundaries remain exact. Only
+the source intervals are exercised for queue entries; no full queue/protocol
+failure or guest claim follows. Immutable complete-filter negative still has
+exactly seven selector failures; all18 current queue controls remain clean.
+Candidate stdout BA4839DAD770EDF1BAA659E7449D4B846B0796AF9B3A9CF644DF6ED153059010;
+negative F51D8F9BDF57A3C4E9367FCF862B7E65866833887078073F931B8CFCF818E224;
+executable6984EC84EF15288330E4A17F1C2833E50A2981D4F0592F5EFAC240840C702912;
+input seal6D5FE962F8C9ACD9279A14F81E16A80ED68D7842616F7DD3D3FDE8B9C43C0DDF;
+exact queue intervals FF41CB577AA08B16432924132D2D871985FE70B7F82B1D344EBA7E2E2715799E.
+
+Independent read-only identity supervisor39152 starts23:52:18.6901552Z,
+180s,exit0, explicitly prints UNCHANGED_P22_IDENTITIES_OK:13 images in each
+of two destinations/26 exact hash comparisons and canonical ZIP7A0534DE pass.
+This repairs the preceding observation gap, not a new publication.
+
+Failed queue-preflight10 files/36762 bytes are removed after exact preview
+E75CFDECE0E7D2A511586DB56C02AACA8120A4D4F41C769B9F33457764F4235F.
+Completed corrected root preview is27 files/443210 bytes, inventory
+28796CC0E1A2C15F3A1F87A93942664DCA145A81DE87033917B95D5A0D53EE4E.
+All owned jobs have exited; Apply will revalidate this sole generated target,
+then CheckResidual must again find only the two caches. No guest/product build
+or commit/push/delivery is claimed for this still-active DDE implementation.
+
+That exact27-file queue proof Apply succeeds and CheckResidual again lists
+only .ninja/.ccache. Including both rejected compiler preflights, this stage
+has disposed137 known generated files/2433845 bytes after summarization.
+The existing alias service double ignores its fake guest-free return value,
+just as the extracted free owners do: do not use it as evidence of the actual
+guest WOW16GlobalUnlockFree BOOL convention or of failed-free recovery.
+
+### DDE construction/transfer partition before the composed build
+
+The remaining D1/D2 work is now finite by construction family; it is not a
+single `DDEAddhandle` return-value edit.  There are three distinct ownership
+shapes in the selected classic-DDE scope:
+
+| Family | Sources | Newly owned object on successful conversion | Borrowed object that must not be released on registration failure |
+| --- | --- | --- | --- |
+| Native to guest packet | `WM32DDEAdvise`, `WM32DDEData`, `WM32DDEPoke`, `WM32DDEExecute`, and `DDECopyhData16` | guest `h16` packet and, for DIB/metafile, guest inner alias | incoming native `h32` packet/inner GDI object |
+| Guest to native packet | `ThunkWMMsg16` POSTMESSAGE branches for POKE/ADVISE/DATA/EXECUTE and `DDECopyhData32` | native `h32` packet and, for DIB/metafile, native inner alias | sending guest `h16` packet/inner GDI object |
+| Existing pair reuse | both directions' `DDEFindPair16/32` branches | none | both halves of the existing alias |
+
+`DDEAddhandle` deliberately publishes an HDDE node before `W32MarkDDEHandle`.
+That ordering is an original protocol requirement: reentrant guest free paths
+must be able to find the pair while the arena mark callback is active.  The
+modern public `CallBack16` wrapper can return FALSE only when its admission
+gate rejects before the original callback body begins; after entering the
+original body, its BOOL completion is TRUE while the guest VP result remains
+zero on a normal `SetDdeHandleFlag`.  Therefore the candidate correction may
+use that BOOL only to distinguish a pre-entry refusal, must keep publication
+before marking, and must remove only the exact just-published pair on that
+refusal.  It must not derive success from the VP result or move registration
+after the callback.
+
+The classic callers currently discard `DDEAddhandle`'s allocation-failure
+result too.  A caller-specific failure path is required after every *new*
+pair: discard its own newly allocated target representation, leave the source
+representation untouched, preserve the existing packed-lParam cleanup owner,
+and return the original conversion failure value.  Reused pair branches do
+not acquire or undo anything.  `WM_DDE_EXECUTE` remains a separate row: its
+documented duplicate-handle workaround owns a generated guest copy and an
+ACK-time `DDE_EXECUTE_FREE_H16` policy, so it cannot share POKE/DATA cleanup.
+
+The indirect DIB/metafile paths are also separate subtransactions.  Their
+inner alias is registered before the outer packet is completed.  If that
+inner registration fails, the outer packet cannot be delivered with an
+untracked inner handle; cleanup must release only the newly created inner
+target and then the newly created outer target.  The source-side DIB/metafile
+and any existing alias remain borrowed.  In `DDECopyhData32` metafile
+conversion, a guest-memory pointer is read again after the first registration
+callback; that value must be captured before the callback or reacquired by
+stable handle.  This is an existing reentry boundary, not permission to keep
+a flat guest pointer across a callback.
+
+`wddeml32.c` has independent `DDEAddhandle` callers with `-1` endpoints and
+DDEML buffer contracts.  They are not among the fixed nine classic message
+entries or their packet/ACK consumers.  They are recorded as the separate
+DDEML package boundary and are not silently folded into this classic-DDE
+repair.  No behavior, source or build dependency is omitted from the selected
+classic cohort by that partition.
+
+Before editing these construction branches, the final group must enumerate
+for each row: source direction, direct/indirect allocation, alias publication,
+packed-wrapper owner, native delivery transfer point, normal ACK/free owner,
+and failure return/error path.  The implementation then composes 350--353,
+the caller-specific construction corrections and the existing ACK/free
+owners in one build.  There is still no product build, guest change,
+publication, or claim of DDE protocol acceptance from this source ledger.
+
+### DDE construction cohort implementation checkpoint
+
+`MVDM-HOST-DIV-354` now keeps only a bounded stack-local record of new classic
+DDE alias pairs (`DDECONVERSION`, maximum three: packet plus two metafile
+subobjects). The original global `HDDE` list remains the sole long-lived alias
+authority. `DDEAddhandle` still publishes before the original guest mark
+callback; only a wrapper refusal before that original body starts removes the
+exact new node. Native-to-guest `ADVISE/DATA/POKE/EXECUTE` and guest-to-native
+POST `ADVISE/DATA/POKE/EXECUTE` use the record for their own failure unwind,
+including DIB/metafile inner aliases. Existing-pair paths acquire nothing;
+the separate DDEML `-1` endpoint family remains excluded.
+
+The nested x86 WOW32 target builds successfully from the stable Ninja tree.
+The exact-body alias fixture compares immutable `7835ba25e` with this
+candidate: 82 cases each; baseline has exactly the expected empty-delete,
+rejected-mark-publication and ACK-retired-node defects, while candidate has
+zero. It explicitly reports `guest_proof=0` and `transport_proof=0`: this is
+original/service ownership evidence, not an immutable-guest DDE conversation.
+The final composed-r1 nested build recompiles `wdde.c`, links `wow32.dll`, and
+exits zero; the alias harness also exits zero after that exact source input.
+The inherited generated-WOW warnings for missing legacy `WOWGlobal*16`
+declarations and duplicate DEF exports are unchanged build-graph warnings,
+not a candidate diagnostic waiver.
+No product package, ZIP, guest image, publication, commit or push follows
+from this checkpoint; full S4 native/guest/lifecycle gates remain required.
+
+### M3 idle-registration identity correction
+
+Question: does the current modern idle-observer adaptation retain original
+`xxxSleepTask`'s selected-task identity, rather than widening one task's
+registration to all tasks in a WOW worker?
+
+The source chain is finite. `wkman.c::WK32WowSetIdleHook` records the observer
+in the current original `TD.hIdleHook`; `WowOriginalFreeTask` clears that same
+intent before the lifecycle carrier releases its borrowed observer. Original
+`taskman.c::xxxSleepTask` calls `IsHooked(pti, WHF_FOREGROUNDIDLE)` only for its
+selected `pti`, then schedules that task while it invokes the callback. The
+previous adapter scanned `gptdTaskHead` for *any* initialized TD with an idle
+hook, so a registration on task A could admit the callback while task B was
+selected. That was an adapter identity error, not an accepted limitation of
+the thread-local modern hook boundary.
+
+The correction changes only the adapter query: it receives the lifecycle
+task's stable native thread ID, holds existing `gcsWOW`, and matches it with
+the original TD's `dwThreadID` before reading initialized `hThread` and
+`hIdleHook`. No independent registration state, guest image, scheduler or
+mirror algorithm is added. The direct taskman dispatch and native hook-proc
+dispatch use the same exact-task predicate.
+
+`wow_idle_hook_fixture` now proves the positive owner, an initialized foreign
+TD with a different native-thread ID, nested callback, exception unwind,
+denied task/borrow entries, absent binding and retired registration. Its
+explicit `-LogicOnly` run passes with `errors=0`, `calls=4` and
+`task_scoped=1`. The full real-USER native-chain mode is unchanged and still
+requires a switchable input desktop. In this background session
+`OpenInputDesktop/CreateDesktop` did not provide that precondition, so that
+mode reports no callbacks and fails; it is retained as unavailable evidence,
+not converted to a pass. Historical interactive native-chain evidence remains
+separate. This is source/adapter lifecycle proof only; it does not prove guest
+INT 2F delivery, all BlockWOWIdle pairings, M3 completion, S4 completion or a
+product publication.
+
+#### Idle-bit pairing review at the corrected callback boundary
+
+The correction does not add a second `BlockWOWIdle` owner.  The selected
+production provider is `softpc.new/host/src/nt_eoi.c::BlockWOWIdle`, linked
+into the worker (`nt_eoi.obj`) and exported to WOW32.  Its `FALSE` transition
+marks guest callback execution runnable; its matching `TRUE` transition marks
+the return to native handling blocked and may invoke the existing activity
+check.  `W32Win16WndProcEx` retains the original pair around `CallBack16`:
+`FALSE`, callback, `TRUE`.  Its project-owned outer `__finally` only unwinds
+the call-owned message conversion record; it neither swallows an exception nor
+changes that original idle-state protocol.
+
+`CallBack16` itself restores its guest callback-stack/control state in its own
+`__finally` and then propagates an abnormal termination.  Therefore adding a
+second, guessed idle toggle in the message lifetime finalizer would incorrectly
+claim scheduler ownership and could mask the original fatal path.  The review
+also checked the modified native dispatchers in `wumsg.c`: each retained
+`BlockWOWIdle(TRUE)` / native USER call / `BlockWOWIdle(FALSE)` interval stays
+outside the conversion unwinder.  This establishes that the exact-task idle
+registration correction introduces no new pairing imbalance; it does **not**
+prove every historical M3 wait/reentry path, which remains an explicit S4
+obligation.

@@ -31,7 +31,7 @@ DWORD service_authorize_worker_io(OPENNT_BASE_CONNECTION *worker,DWORD pid)
     OPENNT_FRONTEND_ROUTE *route=service_worker_io_route(worker,pid);
     LIST_ENTRY *link;
     if(!route)return ERROR_NOT_FOUND;
-    if(!route->root || route->root->frontend_closing)
+    if(!route->root || route->root->frontend_closing || route->root->frontend_close_draining)
         return ERROR_PIPE_NOT_CONNECTED;
     if(route->io_release_ordered || route->io_releasing)return ERROR_BUSY;
     if(route->root->frontend_io_route && route->root->frontend_io_route!=route) {
@@ -83,7 +83,7 @@ DWORD OpenNtBaseServiceWorkerIoCheckpoint(OPENNT_BASE_CONNECTION *connection,DWO
         if(!found){error=ERROR_INVALID_STATE;goto done;}
     } else {error=ERROR_INVALID_PARAMETER;goto done;}
     route=service_worker_io_route(connection,pid);
-    if(!route || !route->root || route->root->frontend_closing) {
+    if(!route || !route->root || route->root->frontend_closing || route->root->frontend_close_draining) {
         error=ERROR_PIPE_NOT_CONNECTED;goto done;
     }
     /* A paused parent's completion cannot close a different owner's channel.
@@ -113,7 +113,7 @@ DWORD OpenNtBaseServiceWorkerIoTransition(OPENNT_BASE_CONNECTION *connection,DWO
     for(;;) {
         ULONGLONG now;
         route=service_worker_io_route(connection,pid);
-        if(!route || !(root=route->root) || root->frontend_closing ||
+        if(!route || !(root=route->root) || root->frontend_closing || root->frontend_close_draining ||
             WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT) {
             error=ERROR_PIPE_NOT_CONNECTED;break;
         }
@@ -471,7 +471,7 @@ DWORD OpenNtBaseServiceAcquireFrontendRoot(OPENNT_BASE_CONNECTION *caller,DWORD 
         for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
             OPENNT_BASE_CONNECTION *item=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
             if(item->frontend_console_window==console_window && item->frontend_capability &&
-                !item->frontend_closing &&
+                !item->frontend_closing && !item->frontend_close_draining &&
                 WaitForSingleObject(item->process.ProcessHandle,0)==WAIT_TIMEOUT) {
                 if(root){error=ERROR_INVALID_STATE;goto done;}
                 root=item;
@@ -908,7 +908,7 @@ DWORD OpenNtBaseServiceRegisterFrontendLease(OPENNT_BASE_CONNECTION *root,DWORD 
     for(link=root->service->connections.Flink;link!=&root->service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *item=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
         if(item!=root && item->frontend_console_window==console_window &&
-            item->frontend_capability && !item->frontend_closing &&
+            item->frontend_capability && !item->frontend_closing && !item->frontend_close_draining &&
             WaitForSingleObject(item->process.ProcessHandle,0)==WAIT_TIMEOUT)
             {error=ERROR_ALREADY_EXISTS;goto done;}
         if(item->frontend_reserved_window==console_window &&
@@ -1024,7 +1024,7 @@ DWORD OpenNtBaseServiceFrontendLeaseReady(OPENNT_BASE_CONNECTION *root,DWORD pid
     if(!root)return error;
     EnterCriticalSection(&root->service->lock);
     if(OpenNtBaseServicePeer(root,pid,generation) && root->frontend_capability &&
-        !root->frontend_closing && root->frontend_restored) {
+        !root->frontend_closing && !root->frontend_close_draining && root->frontend_restored) {
         if(SetEvent(root->frontend_restored)) {
             service_console_return_ack(root);
             /* A leased root returns the visible Console, not the worker
@@ -1058,7 +1058,7 @@ DWORD OpenNtBaseServiceRetainFrontendRoot(OPENNT_BASE_CONNECTION *connection,
          link!=&connection->service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
         if (!root->frontend_capability || !compare(root->frontend_capability,capability)) continue;
-        if (root->frontend_closing || WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT) {
+        if (root->frontend_closing || root->frontend_close_draining || WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT) {
             error=ERROR_PIPE_NOT_CONNECTED;goto done;
         }
         if (connection->console && connection->console!=root->console &&
@@ -1162,7 +1162,7 @@ DWORD OpenNtBaseServiceAcquireConsoleContext(OPENNT_BASE_CONNECTION *connection,
             (DWORD)(ULONG_PTR)candidate->process.ClientId.UniqueProcess==GetProcessId(root_process) &&
             candidate->frontend_capability) { root=candidate;break; }
     }
-    if (!root || root->frontend_closing || WaitForSingleObject(root_process,0)!=WAIT_TIMEOUT) {
+    if (!root || root->frontend_closing || root->frontend_close_draining || WaitForSingleObject(root_process,0)!=WAIT_TIMEOUT) {
         error=ERROR_PIPE_NOT_CONNECTED;goto done;
     }
     error=service_acquire_console_context(root,connection->console,
@@ -1192,7 +1192,7 @@ DWORD OpenNtBaseServiceBindConsoleContext(OPENNT_BASE_CONNECTION *connection,
          link!=&connection->service->console_contexts;link=link->Flink) {
         OPENNT_BASE_CONSOLE_CONTEXT *context=CONTAINING_RECORD(link,OPENNT_BASE_CONSOLE_CONTEXT,link);
         if (!compare(context->capability,capability)) continue;
-        if (context->root->frontend_closing ||
+        if (context->root->frontend_closing || context->root->frontend_close_draining ||
             WaitForSingleObject(context->root->process.ProcessHandle,0)!=WAIT_TIMEOUT) {
             error=ERROR_PIPE_NOT_CONNECTED;break;
         }
@@ -1216,7 +1216,7 @@ static DWORD service_attach_frontend(OPENNT_BASE_CONNECTION *connection,
     EVENT_BASIC_INFORMATION event_info;
     HANDLE local_pipe=NULL,local_ready=NULL;
     DWORD error,flags;
-    if(connection->frontend_closing) return ERROR_PIPE_NOT_CONNECTED;
+    if(connection->frontend_closing || connection->frontend_close_draining) return ERROR_PIPE_NOT_CONNECTED;
     if(!route || route->root!=connection || !route->io_requested || route->io_releasing ||
         GetProcessId(route->worker)!=GetProcessId(worker))return ERROR_ACCESS_DENIED;
     if(route->pipe || route->ready || route->delivered)return ERROR_ALREADY_EXISTS;

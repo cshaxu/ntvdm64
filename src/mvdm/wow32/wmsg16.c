@@ -738,7 +738,10 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
 
     case WM_DDE_INITIATE:
         lpmpex->uParam = (LONG) FULLHWND32(wParam);
-        WI32DDEAddInitiator((HAND16) wParam);
+        /* DIVERGENCE(MVDM-HOST-DIV-353): only retire a node this call published. */
+        lpmpex->MsgBuffer->ddeinit.initiator = wParam;
+        lpmpex->MsgBuffer->ddeinit.active =
+            WI32DDEAddInitiator((HAND16) wParam) ? WOW_DDE_INITIATE_ACTIVE : 0;
         break;
 
     case WM_DDE_ACK:
@@ -784,23 +787,35 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         {
         DDEINFO DdeInfo;
         HANDLE  h32;
+        DDECONVERSION Conversion;
         HWND16 hwnd16 = lpmpex->Parm16.WndProc.hwnd;
         WORD wMsg     = lpmpex->Parm16.WndProc.wMsg;
 
         lpmpex->uParam = (LONG) FULLHWND32(wParam);
 
         if (fWhoCalled == WOWDDE_POSTMESSAGE) {
+            DDEBeginConversion(&Conversion);
             if (h32 = DDEFindPair32(hwnd16, wParam, (HAND16) LOWORD(lParam))) {
                 DDEDeletehandle(LOWORD(lParam), h32);
                 GlobalFree(h32);
             }
             DdeInfo.Msg = wMsg;
-	    h32 = DDECopyhData32(hwnd16, wParam, (HAND16) LOWORD(lParam), &DdeInfo);
+            h32 = DDECopyhData32(hwnd16, wParam, (HAND16) LOWORD(lParam), &DdeInfo, &Conversion);
 	    // WARNING: 16-bit memory may have moved
+            if (!h32) return FALSE;
             DdeInfo.Flags = DDE_PACKET;
             DdeInfo.h16 = 0;
-            DDEAddhandle(hwnd16, wParam, (HAND16)LOWORD(lParam), h32, &DdeInfo);
+            if (!DDETrackhandle(&Conversion, hwnd16, wParam,
+                                (HAND16)LOWORD(lParam), h32, &DdeInfo)) {
+                DDERollback32(&Conversion, hwnd16, wParam);
+                GlobalFree(h32);
+                return FALSE;
+            }
             *plParamNew = PackDDElParam(wMsg, (LONG) h32, (LONG) HIWORD(lParam));
+            if (!*plParamNew) {
+                DDERollback32(&Conversion, hwnd16, wParam);
+                return FALSE;
+            }
         }
         else {
             if (fThunkDDEmsg) {
@@ -822,6 +837,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         {
         DDEINFO DdeInfo;
         HANDLE  h32;
+        DDECONVERSION Conversion;
         INT cb;
         VPVOID  vp;
         LPBYTE  lpMem16;
@@ -832,6 +848,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         lpmpex->uParam = (LONG) FULLHWND32(wParam);
 
         if (fWhoCalled == WOWDDE_POSTMESSAGE) {
+            DDEBeginConversion(&Conversion);
             if (h32 = DDEFindPair32(hwnd16, wParam, (HAND16) LOWORD(lParam))) {
                 DDEDeletehandle(LOWORD(lParam), h32);
                 GlobalFree(h32);
@@ -851,8 +868,16 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
             DdeInfo.Format = 0;
             DdeInfo.Flags = DDE_PACKET;
             DdeInfo.h16 = 0;
-            DDEAddhandle(hwnd16, wParam, (HAND16)LOWORD(lParam), h32, &DdeInfo);
+            if (!DDETrackhandle(&Conversion, hwnd16, wParam,
+                                (HAND16)LOWORD(lParam), h32, &DdeInfo)) {
+                GlobalFree(h32);
+                return FALSE;
+            }
             *plParamNew = PackDDElParam(wMsg, (LONG) h32, (LONG) HIWORD(lParam));
+            if (!*plParamNew) {
+                DDERollback32(&Conversion, hwnd16, wParam);
+                return FALSE;
+            }
         }
         else {
             if (fThunkDDEmsg) {
@@ -872,12 +897,14 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         {
         DDEINFO DdeInfo;
         HANDLE h32;
+        DDECONVERSION Conversion;
         HWND16 hwnd16 = lpmpex->Parm16.WndProc.hwnd;
         WORD wMsg     = lpmpex->Parm16.WndProc.wMsg;
 
         lpmpex->uParam = (LONG) FULLHWND32(wParam);
 
         if (fWhoCalled == WOWDDE_POSTMESSAGE) {
+            DDEBeginConversion(&Conversion);
             if (h32 = DDEFindPair32(hwnd16, wParam, (HAND16) LOWORD(lParam))) {
                 DDEDeletehandle(LOWORD(lParam), h32);
                 GlobalFree(h32);
@@ -888,14 +915,24 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
             }
             else {
                 DdeInfo.Msg = wMsg;
-                h32 = DDECopyhData32(hwnd16, wParam, (HAND16) LOWORD(lParam), &DdeInfo);
+                h32 = DDECopyhData32(hwnd16, wParam, (HAND16) LOWORD(lParam), &DdeInfo, &Conversion);
 		// WARNING: 16-bit memory may have moved
+                if (!h32) return FALSE;
                 DdeInfo.Flags = DDE_PACKET;
                 DdeInfo.h16 = 0;
-                DDEAddhandle(hwnd16, wParam, (HAND16)LOWORD(lParam), h32, &DdeInfo);
+                if (!DDETrackhandle(&Conversion, hwnd16, wParam,
+                                    (HAND16)LOWORD(lParam), h32, &DdeInfo)) {
+                    DDERollback32(&Conversion, hwnd16, wParam);
+                    GlobalFree(h32);
+                    return FALSE;
+                }
             }
 
             *plParamNew = PackDDElParam(wMsg, (LONG) h32, (LONG) HIWORD(lParam));
+            if (!*plParamNew) {
+                DDERollback32(&Conversion, hwnd16, wParam);
+                return FALSE;
+            }
         }
         else {
             if (fThunkDDEmsg) {
@@ -919,8 +956,9 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
     case WM_DDE_EXECUTE:
         {
         DDEINFO DdeInfo;
-        HANDLE  h32;
-        HAND16  h16;
+        HANDLE  h32 = NULL;
+        HAND16  h16 = 0;
+        DDECONVERSION Conversion;
         INT     cb;
         VPVOID  vp;
         VPVOID  vp1;
@@ -932,10 +970,12 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         lpmpex->uParam = (LONG) FULLHWND32(wParam);
 
         if (fWhoCalled == WOWDDE_POSTMESSAGE) {
+            DDEBeginConversion(&Conversion);
             vp = GlobalLock16(HIWORD(lParam), &cb);
-
-            GETMISCPTR(vp, lpMem16);
-            h32 = GlobalAlloc(GMEM_DDESHARE, cb);
+            if (vp) {
+                GETMISCPTR(vp, lpMem16);
+                h32 = GlobalAlloc(GMEM_DDESHARE, cb);
+            }
             if (h32) {
                 lpMem32 = GlobalLock(h32);
                 RtlCopyMemory(lpMem32, lpMem16, cb);
@@ -967,10 +1007,16 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
                         DdeInfo.Format = 0;
                         DdeInfo.Flags = DDE_EXECUTE_FREE_H16 | DDE_PACKET;
                         DdeInfo.h16 = (HAND16) HIWORD(lParam);
-                        DDEAddhandle(hwnd16, wParam, h16, h32, &DdeInfo);
+                        if (!DDETrackhandle(&Conversion, hwnd16, wParam, h16, h32, &DdeInfo)) {
+                            GlobalUnlockFree16(GlobalLock16(h16, NULL));
+                            GlobalFree(h32);
+                            h32 = NULL;
+                        }
                     }
                     else {
                         LOGDEBUG (0, ("WOW::WMSG16: WM_DDE_EXECUTE : Can't allocate h16 !\n"));
+                        GlobalFree(h32);
+                        h32 = NULL;
                     }
                 }
                 else {
@@ -978,13 +1024,16 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
                     DdeInfo.Format = 0;
                     DdeInfo.Flags = DDE_PACKET;
                     DdeInfo.h16 = 0;
-                    DDEAddhandle(hwnd16, wParam, (HAND16)HIWORD(lParam), h32, &DdeInfo);
+                    if (!DDETrackhandle(&Conversion, hwnd16, wParam,
+                                        (HAND16)HIWORD(lParam), h32, &DdeInfo)) {
+                        GlobalFree(h32);
+                        h32 = NULL;
+                    }
                 }
             }
-            else {
+            if (vp) {
                 GlobalUnlock16(HIWORD(lParam));
             }
-            GlobalUnlock16(HIWORD(lParam));
         }
         else {
             if (!(h32 = DDEFindPair32(hwnd16, wParam, (HAND16) HIWORD(lParam)))) {
@@ -993,6 +1042,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         }
 
         *plParamNew = (ULONG)h32;
+        if (fWhoCalled == WOWDDE_POSTMESSAGE && !h32) return FALSE;
         }
         break;
 
@@ -1354,7 +1404,12 @@ VOID FASTCALL UnThunkWMMsg16(LPMSGPARAMEX lpmpex)
         break;
 
     case WM_DDE_INITIATE:
-        WI32DDEDeleteInitiator((HAND16) lpmpex->Parm16.WndProc.wParam);
+        /* DIVERGENCE(MVDM-HOST-DIV-353): an inner failed add has no token. */
+        if (lpmpex->MsgBuffer->ddeinit.active & WOW_DDE_INITIATE_ACTIVE) {
+            HAND16 initiator = (HAND16)lpmpex->MsgBuffer->ddeinit.initiator;
+            lpmpex->MsgBuffer->ddeinit.active = 0;
+            WI32DDEDeleteInitiator(initiator);
+        }
         break;
 
     case WM_NEXTMENU:

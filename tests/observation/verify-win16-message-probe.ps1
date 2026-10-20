@@ -18,6 +18,7 @@ param(
  [switch]$SharedWorkerControl,
  [switch]$PendingSend,
  [switch]$Construction,
+ [switch]$ClassicDde,
  [string]$TransactionDiagnosticManifest,
  [ValidateSet('BeforeCallback','AfterCallback')][string]$TransactionPhase='BeforeCallback'
 )
@@ -36,6 +37,11 @@ if($Construction -and (!$StructuredPayloads -or !$ThreadClientView -or $CrossWor
  $ExternalNativePeer -or $NativeExtension -or $CopyDataProc32 -or $ReplyPayloadLifetime -or
  $TimeoutPayloadLifetime -or $PendingSend)){
  throw 'Construction requires the normal structured/client-view message group'
+}
+if($ClassicDde -and (!$StructuredPayloads -or !$ThreadClientView -or $CrossWorkerCoordinator -or
+ $ExternalNativePeer -or $NativeExtension -or $CopyDataProc32 -or $ReplyPayloadLifetime -or
+ $TimeoutPayloadLifetime -or $PendingSend -or $Construction)){
+ throw 'ClassicDde requires the normal structured/client-view same-worker message group'
 }
 if($PendingSend -and (!$NativeHost -or !$StructuredPayloads -or !$ThreadClientView -or
  $CrossWorkerCoordinator -or $ExternalNativePeer -or $NativeExtension -or
@@ -75,6 +81,7 @@ function Read-GuestReport([string]$path,[string]$name){
  if($CrossWorkerCoordinator){$recordBytes+=6;$signature='MSG7'}
  if($PendingSend){$recordBytes+=4;$signature='MSG8'}
  if($Construction){$recordBytes+=14;$signature='MSG9'}
+ if($ClassicDde){$recordBytes+=8}
  if(!$bytes.Length -or $bytes.Length%$recordBytes){throw "Incomplete $name message records"}
  $fields=@('role','phase','errors','task','peerTask','basic','nested','early','posted','same','filtered','threadpost','text','native','destroyed')
  if($ThreadClientView){$fields+=@('clientVersion','clientExpected','clientChecks')}
@@ -82,6 +89,7 @@ function Read-GuestReport([string]$path,[string]$name){
  if($CrossWorkerCoordinator){$fields+=@('remoteTask','foreignExpected','launchReady')}
  if($PendingSend){$fields+=@('waitBlocked','waitDeath')}
  if($Construction){$fields+=@('mdiCreated','mdiDestroyed','mdiTitleMutation','mdiParamMutation','mdiTextChecks','helpCalls','helpFreed')}
+ if($ClassicDde){$fields+=@('ddeReceived','ddeReleaseAttempt','ddeRetired','ddeStage')}
  $rows=@()
  for($offset=0;$offset -lt $bytes.Length;$offset+=$recordBytes){
   if([Text.Encoding]::ASCII.GetString($bytes,$offset,4) -ne $signature){throw "Invalid $name signature"}
@@ -106,6 +114,7 @@ try{
   if($CrossWorkerCoordinator){$arguments+='-DCROSS_WORKER'}
   if($PendingSend){$arguments+='-DPENDING_SEND'}
   if($Construction){$arguments+='-DCONSTRUCTION'}
+  if($ClassicDde){$arguments+='-DCLASSIC_DDE'}
   if($TransactionDiagnosticManifest -and $role -eq 'SEND'){$arguments+='-DMESSAGE_TRANSACTION'}
   & $assembler @arguments $assembly *> "$root/$role-assemble.txt"
   if($LASTEXITCODE){throw "Independent $role assembly failed"}
@@ -134,6 +143,7 @@ try{
   if($TimeoutPayloadLifetime){$nativeDefines+='/DM4_TIMEOUT_PAYLOAD'}
   if($CopyDataProc32){$nativeDefines+='/DM4_COPYDATA_PROC32'}
   if($Construction){$nativeDefines+='/DMESSAGE_CONSTRUCTION'}
+  if($ClassicDde){$nativeDefines+='/DCLASSIC_DDE'}
   if($TransactionDiagnosticManifest){$nativeDefines+='/DMESSAGE_TRANSACTION'}
   & $CompilerDriver cl.exe /nologo /LD /MT /O2 /W4 /WX /D_CRT_SECURE_NO_WARNINGS @nativeDefines "/Fo$root/peer.obj" $native /link "/OUT:$root/MSGHOST.DLL" "/IMPLIB:$root/MSGHOST.lib" /EXPORT:MessagePeer=_MessagePeer@4 /EXPORT:MessageExtension=_MessageExtension@12 user32.lib *> "$root/native-build.txt"
   if($LASTEXITCODE){throw 'Native peer build failed'}
@@ -228,6 +238,7 @@ public static class WowMessageLogonEnvironment {
  }
  $expectedNative=if($NativeExtension){5}else{4}
  if($StructuredPayloads){$expectedNative+=3}
+ if($ClassicDde){$expectedNative++}
  $identityOk=if($CrossWorkerCoordinator){
   $last.remoteTask -eq $peer.task -and $peer.remoteTask -eq $last.task -and
   $last.foreignExpected -ne 0 -and $peer.foreignExpected -ne 0 -and
@@ -249,12 +260,14 @@ public static class WowMessageLogonEnvironment {
  }
  $bytes=[IO.File]::ReadAllBytes("$root/MSGHOST.bin")
  $nativeBytes=if($StructuredPayloads){52}else{48}
+ if($ClassicDde){$nativeBytes+=12}
  if($CopyDataProc32){$nativeBytes+=8}
  if($ExternalNativePeer){$nativeBytes+=8}
  if($CrossWorkerCoordinator){$nativeBytes+=4}
  if($bytes.Length -ne $nativeBytes -or [Text.Encoding]::ASCII.GetString($bytes,0,4) -ne 'NMSG'){throw 'Missing native peer report'}
  $names=@('signature','errors','pid','senderThread','receiverThread','nativeThread','received','nested','replied','text','exit','windowAlive');$nativeReport=[ordered]@{}
  if($StructuredPayloads){$names+='structures'}
+ if($ClassicDde){$names+=@('ddeAck','ddeReleased','ddeRetired')}
  if($CopyDataProc32){$names+=@('proc32Fresh','proc32Borrowed')}
  if($ExternalNativePeer){$names+=@('externalPid','externalBits')}
  if($CrossWorkerCoordinator){$names+='receiverPid'}
@@ -289,6 +302,15 @@ public static class WowMessageLogonEnvironment {
     $nativeReport.received -ne 4 -or $nativeReport.nested -ne 1 -or $nativeReport.replied -ne 1 -or $nativeReport.text -ne 1 -or
     @(@($nativeReport.senderThread,$nativeReport.receiverThread,$nativeReport.nativeThread)|Where-Object {$_}|Sort-Object -Unique).Count -ne 3){throw 'Native peer identity/receive/result/lifetime failure'}
  if($StructuredPayloads -and $nativeReport.structures -ne 6){throw 'Both native directions did not complete all three structure families'}
+ if($ClassicDde){
+  if($last.ddeReceived -ne 1 -or $last.ddeReleaseAttempt -ne 1 -or $last.ddeRetired -ne 1 -or
+     $peer.ddeReceived -ne 0 -or $nativeReport.ddeAck -ne 1 -or $nativeReport.ddeReleased -ne 1 -or
+     $nativeReport.ddeRetired -ne 1){throw 'Actual classic DDE execute/ack/free lifecycle incomplete'}
+  @{execute='native HGLOBAL -> original WM32DDEExecute -> Win16 alias';ack='Win16 PostMessage WM_DDE_ACK -> original reverse thunk -> native packed lParam';
+    release='guest early GlobalFree request is deferred; native GlobalFree retires both aliases';guest=@{received=$last.ddeReceived;releaseAttempt=$last.ddeReleaseAttempt;retired=$last.ddeRetired};
+    native=@{ack=$nativeReport.ddeAck;released=$nativeReport.ddeReleased;retired=$nativeReport.ddeRetired};
+    originalGuestChanged=$false;scope='Classic WM_DDE_EXECUTE/ACK only; no DDEML endpoint, atoms, DATA/POKE/ADVISE or allocation-failure injection'}|ConvertTo-Json|Set-Content "$root/classic-dde-result.json"
+ }
  if($TransactionDiagnosticManifest){
   $trace=@(Get-Content "$root/transaction.trace")
   $pattern='^pid=(\d+) tid=(\d+) task=([0-9A-F]{4}) phase=(BeforeCallback|AfterCallback) key=([0-9A-F]{8}) slot=(\d+) before=(\d+) after=(\d+) cursor=([0-9A-F]{8})/([0-9A-F]{8}) init=(\d+)/(\d+) injected=(\d+) escaped=(\d+)$'
@@ -361,6 +383,7 @@ public static class WowMessageLogonEnvironment {
  if($StructuredPayloads){
   @{families=@('MINMAXINFO','WINDOWPOS','COPYDATA');directions=@('Win16-to-Win16','Win16-to-native','native-to-Win16');guestCallbacks=@($last.structures,$peer.structures);nativeChecks=$nativeReport.structures;nestedMinmaxStackCopyback=$true;nestedCopydataFarIdentity=@($last.copyNested,$peer.copyNested);converterIdentity='Package/source manifests, not inferred by this probe';originalGuestChanged=$false;limits='Named synchronous paths only; not physical memory movement, all procedure branches, allocation-failure retirement or all M4'}|ConvertTo-Json|Set-Content "$root/structures-result.json"
  }
+ if($ClassicDde){'PASS actual classic native-to-Win16 WM_DDE_EXECUTE, reverse ACK packing, deferred guest release and native retirement; no DDEML admitted'|Set-Content "$root/classic-dde-result.txt"}
  if($CopyDataProc32){@{fresh=$nativeReport.proc32Fresh;activeBorrow=$nativeReport.proc32Borrowed;nativeCallerThread=$nativeReport.senderThread;ordinaryStructures=$nativeReport.structures;guestNormalRetirement=$true;limits='Original GetWindowLong/CallWindowProc native thunk; exact pointer identity additionally checked by source-body fixture, not inferred from native sender capture'}|ConvertTo-Json|Set-Content "$root/copydata-proc32-result.json"}
  if($ReplyPayloadLifetime){'PASS actual Win16 consumed COPYDATA before early reply; sender-owned header/payload protected and unreadable before receiver continuation; original unthunk/normal retirement completed; native captured-buffer lifetime not inferred'|Set-Content "$root/reply-payload-result.txt"}
  if($TimeoutPayloadLifetime){'PASS actual native SendMessageTimeout status0/error1460 after live Win16 receiver entered; owned input protected/unreadable before continuation; original unthunk and normal task retirement; not native API success or all M4'|Set-Content "$root/timeout-payload-result.txt"}

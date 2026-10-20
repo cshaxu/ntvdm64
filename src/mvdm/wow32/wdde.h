@@ -43,6 +43,19 @@ typedef struct _DDEINFO {
     HAND16  h16;               // original h16 for bad apps doing EXECUTE
 } DDEINFO, *PDDEINFO;
 
+/* MVDM-HOST-DIV-354: conversion-local acquisitions only; HDDE stays global. */
+#define DDE_CONVERSION_MAX_PAIRS 3
+typedef struct _DDECONVERSIONPAIR {
+    HAND16 h16;
+    HANDLE h32;
+    WORD Flags;
+} DDECONVERSIONPAIR, *PDDECONVERSIONPAIR;
+
+typedef struct _DDECONVERSION {
+    DDECONVERSIONPAIR Pair[DDE_CONVERSION_MAX_PAIRS];
+    WORD Count;
+} DDECONVERSION, *PDDECONVERSION;
+
 
 typedef struct _CPDATA {
     struct _CPDATA *Next;      // pointer to next CopyData alias
@@ -93,16 +106,21 @@ typedef struct {
 } DDEDATA32;
 
 
-VOID    WI32DDEAddInitiator (HAND16 Initiator);
+BOOL    WI32DDEAddInitiator (HAND16 Initiator);
 VOID    WI32DDEDeleteInitiator(HAND16 Initiator);
 BOOL    WI32DDEInitiate(HAND16 Initiator);
+#define WOW_DDE_INITIATE_ACTIVE 0x00000001
 BOOL    DDEDeletehandle(HAND16 h16, HANDLE h32);
 HANDLE  DDEFind32(HAND16 h16);
 HAND16  DDEFind16(HANDLE h32);
 BOOL    DDEAddhandle(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 hMem16, HANDLE hMem32, PDDEINFO pDdeInfo);
-HAND16  DDECopyhData16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE h32, PDDEINFO pDdeInfo);
-HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pDdeInfo);
-VOID    W32MarkDDEHandle (HAND16 hMem16);
+VOID    DDEBeginConversion(PDDECONVERSION pConversion);
+BOOL    DDETrackhandle(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hwnd, HAND16 hMem16, HANDLE hMem32, PDDEINFO pDdeInfo);
+VOID    DDERollback16(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hwnd);
+VOID    DDERollback32(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hwnd);
+HAND16  DDECopyhData16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE h32, PDDEINFO pDdeInfo, PDDECONVERSION pConversion);
+HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pDdeInfo, PDDECONVERSION pConversion);
+BOOL    W32MarkDDEHandle (HAND16 hMem16);
 VOID    W32UnMarkDDEHandle (HAND16 hMem16);
 HANDLE  DDEFindPair32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 hMem16);
 HAND16  DDEFindPair16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE hMem32);

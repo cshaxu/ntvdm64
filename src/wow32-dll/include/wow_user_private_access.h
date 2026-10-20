@@ -75,6 +75,8 @@ HCURSOR WINAPI wow_native_SetCursor(HCURSOR);
 DWORD WINAPI wow_native_SetClassLongA(HWND w, int index, LONG value);
 int WINAPI wow_native_GetWindowTextA(HWND w, LPSTR text, int count);
 int WINAPI wow_native_GetWindowTextW(HWND w, LPWSTR text, int count);
+/* ADAPTER-WOW-103: original WUMSG is ANSI; controls also use Unicode. */
+BOOL WINAPI wow_native_CallMsgFilterA(LPMSG message, int code);
 BOOL WINAPI wow_native_CallMsgFilterW(LPMSG message, int code);
 int WINAPI wow_native_GetWindowTextLengthA(HWND w);
 BOOL WINAPI wow_native_SetWindowTextA(HWND w, LPCSTR text);
@@ -158,6 +160,8 @@ int WINAPI wow_native_EnumPropsA(HWND, PROPENUMPROCA);
 #define RedrawWindow wow_native_RedrawWindow
 #define GetWindowTextA wow_native_GetWindowTextA
 #define GetWindowTextW wow_native_GetWindowTextW
+#define CallMsgFilterA wow_native_CallMsgFilterA
+#define CallMsgFilterW wow_native_CallMsgFilterW
 #define GetWindowTextLengthA wow_native_GetWindowTextLengthA
 #define SetWindowTextA wow_native_SetWindowTextA
 #define SetWindowTextW wow_native_SetWindowTextW

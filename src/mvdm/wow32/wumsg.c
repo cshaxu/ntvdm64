@@ -883,7 +883,13 @@ get_next_dde_message:
     }
 #endif
 
-    ulReturn = putmsg16(vpMsg, &t1);
+    { /* DIVERGENCE(MVDM-HOST-DIV-350): GetMessage consumed its own queue item. */
+        BOOL savedThunkDDE = fThunkDDEmsg;
+        __try {
+            fThunkDDEmsg = TRUE;
+            ulReturn = putmsg16(vpMsg, &t1);
+        } __finally { fThunkDDEmsg = savedThunkDDE; }
+    }
 
     // NOTE: Call to putmsg16 could've caused 16-bit memory movement
 
@@ -1190,6 +1196,9 @@ get_next_dde_message:
         // thunking 32 bit message to 16 bit message.
         //
 
+        /* DIVERGENCE(MVDM-HOST-DIV-350): only this conversion owns the selector. */
+        BOOL savedThunkDDE = fThunkDDEmsg;
+        __try {
         fThunkDDEmsg = (BOOL) (f5 & PM_REMOVE);
         ulReturn = putmsg16(vpf1, &t1);
 
@@ -1199,7 +1208,7 @@ get_next_dde_message:
         FREEARGPTR(parg16);
         FREEVDMPTR(pFrame);
 
-        fThunkDDEmsg = TRUE;
+        } __finally { fThunkDDEmsg = savedThunkDDE; } /* DIV-350 */
 
         if (((t1.message == WM_DDE_DATA) || (t1.message == WM_DDE_POKE)) && (!ulReturn)) {
             register PMSG16 pmsg16;
@@ -1441,6 +1450,7 @@ ULONG FASTCALL WU32PostMessage(PVDMFRAME pFrame)
     HWND hwnd;
     register PPOSTMESSAGE16 parg16;
     MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
+    BOOL savedWhoCalled = fWhoCalled; /* DIVERGENCE(MVDM-HOST-DIV-350): caller scope. */
     __try {
     DWORD err = NO_ERROR;
 
@@ -1530,7 +1540,8 @@ ULONG FASTCALL WU32PostMessage(PVDMFRAME pFrame)
     FREEARGPTR(parg16);
     RETURN((ULONG)mpex.lReturn);
     } __finally {
-        wow_message_unwind16(&mpex);
+        __try { wow_message_unwind16(&mpex); }
+        __finally { fWhoCalled = savedWhoCalled; } /* DIV-350 */
     }
 }
 
@@ -1854,6 +1865,7 @@ ULONG FASTCALL WU32SendMessage(PVDMFRAME pFrame)
     HWND hwnd;
     register PSENDMESSAGE16 parg16;
     MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
+    BOOL savedWhoCalled = fWhoCalled; /* DIVERGENCE(MVDM-HOST-DIV-350): caller scope. */
     __try {
     HWND16 hwndOld;
     UINT uMsgOld;
@@ -1919,7 +1931,8 @@ ULONG FASTCALL WU32SendMessage(PVDMFRAME pFrame)
     FREEARGPTR(parg16);
     RETURN((ULONG)mpex.lReturn);
     } __finally {
-        wow_message_unwind16(&mpex);
+        __try { wow_message_unwind16(&mpex); }
+        __finally { fWhoCalled = savedWhoCalled; } /* DIV-350 */
     }
 }
 

@@ -3,6 +3,7 @@
  * a provider. Its window is a test endpoint, never a product helper HWND. */
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#include <dde.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -22,6 +23,11 @@ static volatile LONG reply_driver_done;
 static HANDLE peer_thread;
 #endif
 static HANDLE peer_ready;
+#ifdef CLASSIC_DDE
+static HANDLE dde_ack_event;
+static HGLOBAL dde_payload;
+static volatile LONG dde_ack, dde_released, dde_retired;
+#endif
 static HWND sender_window, receiver_window, peer_window;
 static DWORD sender_thread, receiver_thread, peer_thread_id;
 #ifdef MESSAGE_CROSS_WORKER
@@ -113,6 +119,18 @@ static LRESULT CALLBACK peer_proc(HWND window, UINT message, WPARAM wp, LPARAM l
         InterlockedIncrement(&received);
     }
     switch (message) {
+#ifdef CLASSIC_DDE
+    case WM_DDE_ACK:
+        {
+            UINT lo=0,hi=0;
+            check(UnpackDDElParam(WM_DDE_ACK,lp,&lo,&hi));
+            check(lo==0x8000 && (HGLOBAL)(ULONG_PTR)hi==dde_payload);
+            check(FreeDDElParam(WM_DDE_ACK,lp));
+            InterlockedIncrement(&dde_ack);
+            check(SetEvent(dde_ack_event));
+            return 0;
+        }
+#endif
 #ifdef MESSAGE_CONSTRUCTION
     case 0x0038: {
         const DWORD *packet=(const DWORD *)lp;
@@ -347,6 +365,9 @@ int main(int argc, char **argv)
 DWORD WINAPI MessagePeer(DWORD operation)
 {
     DWORD owner = 0, code = 1;
+#ifdef CLASSIC_DDE
+    DWORD report[16] = {0};
+#else
     DWORD report[
 #ifdef MESSAGE_CROSS_WORKER
         14
@@ -366,6 +387,7 @@ DWORD WINAPI MessagePeer(DWORD operation)
 #endif
 #endif
     ] = {0};
+#endif
     DWORD written;
     HANDLE output;
 #ifdef MESSAGE_TRANSACTION
@@ -535,6 +557,46 @@ DWORD WINAPI MessagePeer(DWORD operation)
         return reply_payload_wait(&reply_payload) ? 0x447a0056 : 0;
     }
 #endif
+#ifdef CLASSIC_DDE
+    if (operation == 13) {
+        char *payload;
+        if(GetCurrentThreadId()!=sender_thread || dde_payload || !peer_window) return 0;
+        dde_ack_event=CreateEventA(NULL,TRUE,FALSE,NULL);
+        if(!dde_ack_event) return 0;
+        dde_payload=GlobalAlloc(GMEM_MOVEABLE|GMEM_DDESHARE,16);
+        if(!dde_payload) {
+            CloseHandle(dde_ack_event);
+            dde_ack_event=NULL;
+            return 0;
+        }
+        payload=(char *)GlobalLock(dde_payload);
+        if(!payload) {
+            GlobalFree(dde_payload);
+            dde_payload=NULL;
+            CloseHandle(dde_ack_event);
+            dde_ack_event=NULL;
+            return 0;
+        }
+        memcpy(payload,"T447-DDE-EXEC",14);payload[14]=0;
+        check(GlobalUnlock(dde_payload)==FALSE);
+        /* The original USER message contract declares EXECUTE posted.  It
+         * must not be synchronously delivered merely to simplify the probe. */
+        check(PostMessageA(sender_window,WM_DDE_EXECUTE,(WPARAM)peer_window,
+            (LPARAM)dde_payload));
+        return errors ? 0 : 0x447a008d;
+    }
+    if (operation == 14) {
+        DWORD_PTR value=0;
+        if(GetCurrentThreadId()!=sender_thread || !dde_payload || !dde_ack_event) return 0;
+        check(WaitForSingleObject(dde_ack_event,5000)==WAIT_OBJECT_0 && dde_ack==1);
+        check(GlobalFree(dde_payload)==NULL);dde_payload=NULL;InterlockedIncrement(&dde_released);
+        check(SendMessageTimeoutA(sender_window,0x486,0,0,
+            SMTO_ABORTIFHUNG|SMTO_ERRORONEXIT,5000,&value)!=0 && value==0x447a0086);
+        InterlockedIncrement(&dde_retired);
+        check(CloseHandle(dde_ack_event));dde_ack_event=NULL;
+        return errors ? 0 : 0x447a008e;
+    }
+#endif
     if (operation != 2 || !peer_thread) return 0;
     check(PostMessageA(peer_window, WM_CLOSE, 0, 0));
     if (WaitForSingleObject(peer_thread, 5000) != WAIT_OBJECT_0) return 0;
@@ -565,6 +627,12 @@ DWORD WINAPI MessagePeer(DWORD operation)
 #ifdef M4_STRUCTURES
     check(structure_received == 6);
     report[12]=(DWORD)structure_received;
+    report[1]=(DWORD)errors;
+#endif
+#ifdef CLASSIC_DDE
+    report[13]=(DWORD)dde_ack;
+    report[14]=(DWORD)dde_released;
+    report[15]=(DWORD)dde_retired;
     report[1]=(DWORD)errors;
 #endif
 #ifdef M4_COPYDATA_PROC32

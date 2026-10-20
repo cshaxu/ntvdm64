@@ -433,6 +433,32 @@ api 2,122
 result 0x4a
 %endif
 add word [native_count-data],3
+%ifdef CLASSIC_DDE
+mov ax,13
+call native_operation
+result 0x8d
+.wait_dde:
+peek 0x3e8,0x3e8,1
+test ax,ax
+jnz .dispatch_dde
+call deadline
+api 1,29
+jmp .wait_dde
+.dispatch_dde:
+push ds
+push word message-data
+api 2,114
+cmp word [dde_received-data],1
+jne failed
+cmp word [dde_release_attempt-data],1
+jne failed
+mov ax,14
+call native_operation
+result 0x8e
+inc word [native_count-data]
+cmp word [dde_retired-data],1
+jne failed
+%endif
 mov ax,3
 call native_operation
 result 0x20
@@ -709,6 +735,12 @@ cmp word [bp+12],0x47d
 je .death_create
 cmp word [bp+12],0x47e
 je .death_stale
+%endif
+%ifdef CLASSIC_DDE
+cmp word [bp+12],0x3e8
+je .dde_execute
+cmp word [bp+12],0x486
+je .dde_retired
 %endif
 %ifdef CROSS_WORKER
 cmp word [bp+12],0x479
@@ -1223,6 +1255,64 @@ cmp ax,[task-data]
 jne .bad
 jmp .value
 %endif
+%ifdef CLASSIC_DDE
+.dde_execute:
+mov word [dde_stage-data],1
+mov ax,[bp+8]
+test ax,ax
+jz .bad
+mov [dde_handle-data],ax
+mov word [dde_stage-data],2
+push ax
+api 1,18
+mov di,ax
+mov es,dx
+or ax,dx
+jz .bad
+mov word [dde_stage-data],3
+cmp word [es:di],0x3454
+jne .bad
+mov word [dde_stage-data],4
+cmp word [es:di+2],0x3734
+jne .bad
+mov word [dde_stage-data],5
+cmp word [es:di+4],0x442d
+jne .bad
+mov word [dde_stage-data],6
+cmp word [es:di+6],0x4544
+jne .bad
+mov word [dde_stage-data],7
+push word [dde_handle-data]
+api 1,19
+push word [native_window-data]
+push word 0x3e4
+push word [window-data]
+push word [dde_handle-data]
+push word 0x8000
+api 2,110
+test ax,ax
+jz .bad
+mov word [dde_stage-data],8
+push word [dde_handle-data]
+api 1,17
+or ax,ax
+jnz .bad
+mov word [dde_stage-data],9
+inc word [dde_received-data]
+inc word [dde_release_attempt-data]
+xor ax,ax
+jmp .value
+.dde_retired:
+mov word [dde_stage-data],10
+push word [dde_handle-data]
+api 1,18
+or ax,dx
+jnz .bad
+inc word [dde_retired-data]
+mov word [dde_stage-data],11
+mov ax,0x86
+jmp .value
+%endif
 .bad:
 or word [errors-data],0x4000
 xor ax,ax
@@ -1477,6 +1567,12 @@ client_checks: dw 0
 structures: dw 0
 copy_nested: dw 0
 %endif
+%ifdef CLASSIC_DDE
+dde_received: dw 0
+dde_release_attempt: dw 0
+dde_retired: dw 0
+dde_stage: dw 0
+%endif
 %ifdef CROSS_WORKER
 remote_task: dw 0
 foreign_expected: dw 0
@@ -1535,6 +1631,9 @@ file: dw -1
 procedure: dd 0
 module: dd 0
 native: dd 0
+%ifdef CLASSIC_DDE
+dde_handle: dw 0
+%endif
 %ifdef EXTENSION_WITNESS
 extension_native: dd 0
 extension_procedure: dd 0

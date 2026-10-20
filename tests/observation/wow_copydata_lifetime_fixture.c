@@ -37,6 +37,7 @@ typedef DWORD *PVPVOID;
 static BOOL fThunkDDEmsg=TRUE;
 static unsigned hook_mode,hook_depth;
 static BOOL hook_cwp;
+static BOOL selector_checks;
 static CWPSTRUCT cwp_input;
 static MSG filter_input;
 static PCPDATA pCPDataFirst;
@@ -158,12 +159,32 @@ static PWW FindPWW(HWND window,int cls){(void)window;(void)cls;return NULL;}
 static BOOL (FASTCALL *apfnThunkMsg16[])(LPMSGPARAMEX)={ThunkWMMsg16,ThunkWMMsg16};
 static VOID (FASTCALL *apfnUnThunkMsg16[])(LPMSGPARAMEX)={count_normal_unthunk,count_normal_unthunk};
 #include "copydata_exact_body.h"
+static ULONG fixture_get_queue(void);
+static ULONG fixture_peek_queue(UINT);
+static unsigned queue_mode,queue_depth,queue_calls;
+static BOOL queue_expected;
+static ULONG putmsg16(DWORD guest,LPMSG message){
+    BOOL entering=fThunkDDEmsg;
+    (void)guest;(void)message;++queue_calls;
+    CHECK(entering==queue_expected);
+    if(!queue_depth&&queue_mode==2){
+        ++queue_depth;queue_expected=TRUE;
+        CHECK(fixture_get_queue()==1234&&fThunkDDEmsg==entering);
+        queue_expected=FALSE;
+        CHECK(fixture_peek_queue(PM_NOREMOVE)==1234&&fThunkDDEmsg==entering);
+        queue_expected=entering;--queue_depth;
+    }
+    if(queue_mode==1)RaiseException(0xe0420952,0,0,NULL);
+    return 1234;
+}
+#include "queue_selector_intervals.h"
 static VOID FASTCALL count_normal_unthunk(LPMSGPARAMEX p){++normal_unthunks;UnThunkWMMsg16(p);}
 static BOOL CallBack16(INT code,PARM16 *args,DWORD procedure,PVPVOID result) {
     static DWORD outer_vp,outer_header;
     CWPSTRUCT16 *message=guest_pointer(args->HookProc.lParam);
     COPYDATASTRUCT *copy;HOOKSTATEDATA hook={1};MSG different=filter_input;
     CHECK(code==RET_HOOKPROC&&procedure==1&&message);
+    if(selector_checks)CHECK(fThunkDDEmsg==TRUE);
     if(message&&message->message==WM_COPYDATA){
         copy=guest_pointer((DWORD)message->lParam);
         CHECK(copy&&copy->dwData==123&&copy->cbData==8&&
@@ -181,6 +202,7 @@ static BOOL CallBack16(INT code,PARM16 *args,DWORD procedure,PVPVOID result) {
                 else CHECK(!ThunkMsgFilterHook(0,0,&filter_input,&hook));
             }
             --hook_depth;
+            if(selector_checks)CHECK(fThunkDDEmsg==TRUE);
             CHECK(guest_pointer(outer_header)==copy);
             if(hook_mode==4)message->hwnd=3; /* No native-pair lifetime for this replacement. */
         }
@@ -279,6 +301,40 @@ int main(void) {
         if(hook_cwp)CHECK(!ThunkCallWndProcHook(0,0,&cwp_input,&hook));else CHECK(!ThunkMsgFilterHook(0,0,&filter_input,&hook));
         CHECK(!live&&!pCPDataFirst);
      }
+    }
+    /* DIV-350: exercise the complete original filter owner, not an isolated
+     * save/restore helper. COPYDATA services are doubles; the operation selector
+     * is shared by DDE and must preserve the actual entering value on every
+     * path, including nested calls of a different message family. */
+    {HOOKSTATEDATA hook={1};unsigned entering,mode,selector_cases=0;BOOL caught;
+     selector_checks=TRUE;hook_cwp=FALSE;
+     for(entering=0;entering<=1;++entering)for(mode=0;mode<7;++mode){
+        reset(mode==5?1:0);hook_mode=mode<5?mode:0;
+        copy_fault=mode==6;fThunkDDEmsg=(BOOL)entering;caught=FALSE;
+        __try{CHECK(!ThunkMsgFilterHook(0,0,&filter_input,&hook));}
+        __except((GetExceptionCode()==0xe0420951||GetExceptionCode()==0xe0420950)?
+                EXCEPTION_EXECUTE_HANDLER:EXCEPTION_CONTINUE_SEARCH){caught=TRUE;}
+        CHECK(caught==(mode==3||mode==6));
+        CHECK(fThunkDDEmsg==(BOOL)entering&&!live&&!pCPDataFirst&&!hook_depth);
+        ++selector_cases;
+     }
+     selector_checks=FALSE;
+     printf("FILTER_SELECTOR cases=%u entry_values=2 modes=7 errors=%u guest_proof=0\n",
+         selector_cases,errors);
+    }
+    {unsigned entering,owner,mode,cases=0,prior_errors=errors;BOOL caught;ULONG result;
+     for(entering=0;entering<2;++entering)for(owner=0;owner<3;++owner)
+     for(mode=0;mode<3;++mode){
+        reset(0);queue_mode=mode;queue_calls=0;queue_expected=owner!=2;
+        fThunkDDEmsg=(BOOL)entering;caught=FALSE;result=0;
+        __try{result=owner==0?fixture_get_queue():fixture_peek_queue(owner==1?PM_REMOVE:PM_NOREMOVE);}
+        __except(GetExceptionCode()==0xe0420952?EXCEPTION_EXECUTE_HANDLER:EXCEPTION_CONTINUE_SEARCH){caught=TRUE;}
+        CHECK(caught==(mode==1)&&result==(mode==1?0u:1234u));
+        CHECK(fThunkDDEmsg==(BOOL)entering&&!queue_depth&&queue_calls==(mode==2?3u:1u));
+        ++cases;
+     }
+     printf("QUEUE_SELECTOR cases=%u owners=3 modes=3 errors=%u full_queue_proof=0 guest_proof=0\n",
+         cases,errors-prior_errors);
     }
     CHECK(!pCPDataFirst);VirtualFree(native,0,MEM_RELEASE);
     printf("COPYDATA_LIFETIME errors=%u scenarios=%u directions=2 stages=4 nested=1 immutable_release=1 exception=2 thread_status=1 hook_roles=2 filter_nested_different=1 embedded_headers=2 filter_output_rollback=1 guest_proof=0\n",errors,scenarios);

@@ -43,7 +43,7 @@ DWORD service_bind_worker_root(OPENNT_BASE_SERVICE *service,HANDLE worker,
         GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
     if(!worker || !root || !root->frontend_capability)return ERROR_INVALID_PARAMETER;
     if(!compare)return ERROR_CALL_NOT_IMPLEMENTED;
-    if(root->frontend_closing || WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT)
+    if(root->frontend_closing || root->frontend_close_draining || WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT)
         return ERROR_PIPE_NOT_CONNECTED;
     for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
         OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
@@ -77,7 +77,7 @@ static BOOL service_native_root_selectable(OPENNT_BASE_SERVICE *service,
             root_link=root_link->Flink) {
             OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(root_link,OPENNT_BASE_CONNECTION,service_link);
             if(root->process.SequenceNumber==bound_root && root->frontend_capability &&
-                !root->frontend_closing &&
+                !root->frontend_closing && !root->frontend_close_draining &&
                 WaitForSingleObject(root->process.ProcessHandle,0)==WAIT_TIMEOUT)return TRUE;
         }
         return FALSE;

@@ -1,5 +1,17 @@
 # WOW32 DLL target component
 
+ADAPTER-WOW-103 completes CallMsgFilter's existing native execution boundary
+for both ANSI and Unicode consumers. The original ANSI WUMSG entry currently
+imports CallMsgFilterA directly, while the existing W wrapper is bound only
+by the control-client facade. Reuse the same WOW_NATIVE_CALL_TARGET owner/
+return mechanism and expose both mappings through wow_user_private_access.h.
+Keep native A as A and W as W, target HWND and result/error semantics; do not
+route ANSI through Unicode, add a scheduler, clone messages or reinterpret
+native private state. This is an existing S4 M1/M4 dependency, not new scope
+or proof of DDE packet retirement. Include both ABI variants, original caller
+bindings, normal/nested/failure execution return and the whole DDE cohort
+before product delivery. No mirror, guest, public ABI or wire-layout change.
+
 ADAPTER-WOW-102 handles one specific precommit native-observation race.
 Public HWND queries do not acquire NT4's USER lock, even for windows in this
 worker. Exact-source/pure-native next/parent/owner witnesses prove that two

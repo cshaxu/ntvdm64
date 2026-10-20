@@ -17,10 +17,14 @@ Full M1--M6/S4, protocol/output and S5/S6 remain open.
 Native output28 passes at860785e88. P22 adds no protocol ownership policy,
 stale local fallback or weaker validation. The post-P22
 [DDE source ledger](../etc/evidence/m0-t447-s4-message-source-audit.md#post-p22-dde-ownership-source-ledger)
-pins nine message entries and three resource lifetimes; it is not a runtime
-repair. Styled raw-fault recovery, full M1--M6 and M3 idle remain open.
+pins nine entries/three lifetimes.350--354/103 remain unpublished.
+Native prerequisite, alias/ACK82 and filter/queue59 controls pass, not guest/
+product proof. DIV-354's nested WOW32 build is clean; its alias control proves
+only original/service ownership, not a guest DDE conversation.103 reconnects ANSI filter scope; object gate awaits full build.
+Queue18 proves exact conversion intervals, not full queue/protocol recovery.
+Styled raw-fault recovery, full M1--M6 and M3 idle remain open.
 
-P22 scratch is removed; build retains only .ninja and .ccache.
+Completed DDE proof scratch is removed; only .ninja/.ccache remain in build.
 No cache clear, prune or guest edit.
 
 ## Current Work
@@ -381,10 +385,30 @@ construction, mapping, failure and lifecycle closure remains required.
 ## Current Technical Baseline
 
 S4 P22 retains P21 and adds349/101/102's bounded conversion/acquisition group.
-NTVDM SHA-256 is1FC1F21AD1FBDC87151E4F836670A931BBEA1591E75AE4A4C0B7A0CDB5E641F2;
-WOW32 isACD234099C6B9B58A9AE5846181CE85E6AA9E2E58AB88BB8D07C1F554C907F0F.
-The coherent13 manifest matches assets/release and O:/winnt/system32.
+The current coherent13 baseline retains NTVDM
+1FC1F21AD1FBDC87151E4F836670A931BBEA1591E75AE4A4C0B7A0CDB5E641F2 and carries WOW32
+EC648FB73B11DA61276CABC8ECA95C7E6C0D9AC1A9EA6D2D9E92D72814273DA2;
+NTSRV is98125183834813A980DAE4BDFD947A354910711BE2BCB5526AB83A5D2CEF5CD5.
+The coherent13 manifest matches the actual r4 Console-handoff candidate,
+assets/release and O:/winnt/system32. This is a delivery baseline, not S4
+closure.
 Original guest, user configuration and assets/winnt.zip are unchanged.
+
+The S4 classic-DDE cohort registers only DIV-350--354 in the existing original
+WOW32 conversion/alias owners. Its exact-body alias/free fixture passes82
+candidate controls while immutable7835ba25e exposes the three expected
+pre-cohort defects; the isolated actual `WM_DDE_EXECUTE`/ACK/deferred-free
+lifecycle also passes. The current coherent13 baseline carries that bounded
+cohort, but it is not S4 closure: DDEML, the remaining DDE families, and the
+broader M1--M6 gates remain outside that result.
+
+S4 also contains one bounded host-lifecycle repair for an owner-reported
+borrowed Console race: explicit NTMON frontend deletion drains the associated
+DOS worker through its existing shutdown event before it allows NTCON to
+restore the parent CMD Console mode. This is a project-owned NTSRV/NTCON
+ordering boundary only; original DOS `ResetConsoleState` remains the worker's
+last mode writer, no guest image changes, and ordinary `run16 cmd` remains a
+control path.
 
 | Architecture | Images |
 | --- | --- |

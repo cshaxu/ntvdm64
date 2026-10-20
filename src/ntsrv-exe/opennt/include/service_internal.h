@@ -134,6 +134,10 @@ struct OPENNT_BASE_CONNECTION {
     HANDLE worker_state_changed; /* Per-launcher auto-reset worker transition wake. */
     HANDLE worker_io_release; /* Service-owned auto-reset I/O instruction, not a task. */
     BOOL frontend_closing; /* Admission barrier, never execution/task state. */
+    /* An explicit frontend close must let an attached DOS worker complete its
+     * original Console reset before NTCON restores the borrowed parent mode.
+     * This is a close-order barrier, not another worker/task state. */
+    BOOL frontend_close_draining;
     struct OPENNT_FRONTEND_ROUTE *frontend_io_route; /* Borrowed, service-lock protected. */
     DWORD frontend_request_root; /* Original pending command asks this root for I/O. */
     DWORD frontend_channel_root; /* One pending direct launcher-to-root attachment. */

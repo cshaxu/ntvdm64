@@ -348,6 +348,8 @@ typedef union _MSGTHUNKBUFFER {
     struct { DWORD header, data, flags; } copydata;
     /* DIVERGENCE(MVDM-HOST-DIV-347): call progress, no union size change. */
     struct { DWORD flags, native; } text;
+    /* DIVERGENCE(MVDM-HOST-DIV-353): original INITIATE node publication. */
+    struct { DWORD active, initiator; } ddeinit;
 } MSGTHUNKBUFFER, *LPMSGTHUNKBUFFER;
 
 typedef struct _MSGPARAMEX *LPMSGPARAMEX;

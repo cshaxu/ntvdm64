@@ -10,6 +10,12 @@ target_link_libraries(wow_message_external_peer PRIVATE user32)
 set_target_properties(wow_message_external_peer PROPERTIES
   OUTPUT_NAME MSGPEER RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/message-probes")
 if(NTVDM_ARCHITECTURE STREQUAL "x86")
+  add_executable(wow_dde_native_contract EXCLUDE_FROM_ALL
+    "${CMAKE_SOURCE_DIR}/tests/observation/wow_dde_native_contract.c")
+  target_compile_options(wow_dde_native_contract PRIVATE /O2 /W4 /WX)
+  target_link_libraries(wow_dde_native_contract PRIVATE user32)
+  set_target_properties(wow_dde_native_contract PROPERTIES
+    OUTPUT_NAME DDECONTRACT RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/message-probes")
   add_library(wow_common_dialog_identity_host SHARED EXCLUDE_FROM_ALL
     "${CMAKE_SOURCE_DIR}/tests/observation/wow_common_dialog_identity.c")
   add_executable(wow_common_dialog_identity_control EXCLUDE_FROM_ALL

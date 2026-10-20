@@ -930,6 +930,7 @@ LONG ThunkMsgFilterHook(INT nCode, LONG wParam, LPMSG lpMsg,
     MSG savedMsg = msgSave;
     int savedRecurse = cRecurse;
     PARM16 savedParm = Parm16Save;
+    BOOL savedThunkDDE = fThunkDDEmsg; /* DIVERGENCE(MVDM-HOST-DIV-350): caller scope. */
     wow_message_stack_enter(&stack);
     __try {
     BOOL   fMessageNeedsThunking;
@@ -1156,7 +1157,11 @@ LONG ThunkMsgFilterHook(INT nCode, LONG wParam, LPMSG lpMsg,
         __try { wow_message_unwind16(&mpex); }
         __finally { wow_message_unwind32(&wm32mpex); }
         }
-        } __finally { wow_message_stack_leave(&stack, abnormal || AbnormalTermination()); }
+        } __finally {
+            BOOL stackAbnormal = abnormal || AbnormalTermination(); /* DIV-350: original scope. */
+            __try { wow_message_stack_leave(&stack, stackAbnormal); }
+            __finally { fThunkDDEmsg = savedThunkDDE; } /* DIV-350 */
+        }
     }
 }
 
@@ -1802,6 +1807,7 @@ LONG ThunkMsgFilterHook16(INT nCode, LONG wParam, VPVOID vpMsg,
     PMSG16 pMsg16;
     MSG  Msg;
     MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
+    BOOL savedThunkDDE = fThunkDDEmsg; /* DIVERGENCE(MVDM-HOST-DIV-350): caller scope. */
     __try {
 
 
@@ -1861,7 +1867,8 @@ LONG ThunkMsgFilterHook16(INT nCode, LONG wParam, VPVOID vpMsg,
 
     return (LONG)(BOOL)LOWORD(mpex.lReturn);
     } __finally {
-        wow_message_unwind16(&mpex);
+        __try { wow_message_unwind16(&mpex); }
+        __finally { fThunkDDEmsg = savedThunkDDE; } /* DIV-350 */
     }
 }
 

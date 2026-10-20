@@ -197,7 +197,7 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                         if(!compare(route->worker,watch->process.ProcessHandle))continue;
                         route_found=TRUE;
                         selected_root=route->root;
-                        if(!selected_root || selected_root->frontend_closing)
+                        if(!selected_root || selected_root->frontend_closing || selected_root->frontend_close_draining)
                             (void)SetEvent(watch->shutdown);
                         break;
                     }
@@ -206,7 +206,7 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                         OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(root_link,
                             OPENNT_BASE_CONNECTION,service_link);
                         if(root->frontend_capability && service_root_console_matches(root,console) &&
-                            root->console_member_count && !root->frontend_closing &&
+                            root->console_member_count && !root->frontend_closing && !root->frontend_close_draining &&
                             WaitForSingleObject(root->process.ProcessHandle,0)==WAIT_TIMEOUT) {
                             selected_root=root;
                             break;

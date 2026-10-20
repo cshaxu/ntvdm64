@@ -10,6 +10,23 @@ build/.ninja/msvc-x86-release and native profiles under build/.ninja/msvc-x64-re
 following the [single output policy](../../rules/EXECUTION.md#build-cache-and-disposable-lifetime).
 This tooling transition neither completes M1--M6 nor supplies runtime acceptance.
 
+The continuing DDE cohort has native prerequisite proof, not product delivery.
+The [source audit](../evidence/m0-t447-s4-message-source-audit.md#native-dde-prerequisite-results-and-ansi-execution-boundary)
+records real BASE/filter observations and103's actual ANSI bypass. Keep the
+three independent wrapper/payload/selector lifetimes.350/351/103 remain staged;
+construction, failed transfer, ACK and abort ownership still require the fixed
+nine-message and fifteen-caller closure, not speculative universal cleanup.
+The first alias proof has61 controls; its complete ACK extension has79,
+exposing exactly empty-list and retired-ACK-node baseline failures. Extend
+the existing COPYDATA full-filter fixture with14
+selector controls and the pre-350 complete original filter as counterfactual;
+retain all27 previous controls. Queue18 additionally proves exact Get/Peek
+conversion scopes:59 service scenarios pass, not full queue or guest DDE.
+Use build/wow-dde-selector-proof, S4 owner20min/100MiB/15min no-progress;
+the same budgets cover build/wow-dde-audit for grouped source/document checks.
+summarize then sole-tool clean completed evidence. Keep product P22 installed
+until one composed product build, full retained gates and coherent13 delivery.
+
 ### Resumed S4 external-native message group
 
 After accepted Td/clean3b82e2a51, complete one existing M1--M6 evidence gap:
@@ -214,6 +231,17 @@ minimal mirror/adapter exception before production edits, implement the whole
 cohort, then run original-body failure/lifecycle and real guest acceptance
 plus every-P floors. The native probe is not a substitute for these gates.
 
+The first bounded M3 idle reconciliation item is task registration identity:
+`taskman.c::xxxSleepTask` asks whether its selected `pti` is hooked, not
+whether any TD in the worker is hooked. The lifecycle adapter therefore maps
+the selected task's stable native-thread ID to the exact original `TD` under
+`gcsWOW`, and reads only that TD's initialized `hThread/hIdleHook` intent.
+It adds no hook registry, guest field or global scheduling policy. The owned
+observer remains installed per task because modern public USER cannot express
+NT4's registering-process global filter. Native-chain proof and the remaining
+BlockWOWIdle/reentry closure remain separate gates; this identity correction
+does not close M3 or S4.
+
 The349/101 implementation includes the source-reached delegated heap closure:
 fourteen EDIT/ComboBox/ListBox owners and SHAREVIOLATION, not only wmdisp32's
 direct producers. CB_GETLBTEXT retains its slot0 copy-count;
@@ -270,6 +298,74 @@ abnormal unwind together. Preserve original protocol/format algorithms; no
 generic call-finally free of transferred packets, second ownership registry,
 guest edit or broad DDEML feature admission. The ledger distinguishes source
 defects, observed BASE callback control flow and unproved guest retirement.
+
+Registered350 now drafts caller-selector restoration in both filter
+directions, GetMessage/PeekMessage conversion and PostMessage/SendMessage.
+Keep original conversion/callback phase choices; an outer finally restores
+the actual entry value even when conversion or its cleanup fails. Do not
+publish or use a small selector-only build as DDE closure. The remaining
+packet/alias/indirect-object acquisition and transfer work must compose
+before the grouped construction/failure/reentry/runtime gates. Guest source
+trace additionally proves SetDdeHandleFlag's normal return is zero: observe
+CallBack16's completion separately, never treat the return payload as success.
+
+Registered353 keeps the original `DDEInitiateList` as the sole persistent
+authority, but records whether each existing conversion invocation actually
+published its own INITIATE node. Synchronous normal/recovery completion removes
+only that published node; queued transfer retains the original node lifetime.
+Thus an allocation-failed nested same-key conversion cannot remove its outer
+node. This is not a replacement list, packet finalizer, queue/post failure
+policy, guest edit or DDE protocol change; the remaining construction and
+transfer cohort still composes before any DDE delivery.
+
+The classic-DDE construction group is fixed by ownership direction,
+not by individual allocation calls: native-to-guest packet conversion,
+guest-to-native POSTMESSAGE conversion, existing-alias reuse, and the
+EXECUTE duplicate-handle workaround.  DIB/metafile inner aliases are nested
+subtransactions, not ordinary packets.  Preserve original HDDE publication
+before the guest arena mark so reentrant free lookup continues to work; use
+the public `CallBack16` BOOL only for a pre-entry admission refusal, never the
+guest callback's zero VP result.  Every new-pair failure releases only its own
+new target object, preserves the borrowed source half and leaves the existing
+packed-wrapper/delivery owner intact.  DDEML's independent `-1` endpoint
+callers remain an explicitly separate package.  This complete family, with
+350--353 and existing ACK/free consumers, is one single build/test unit.
+DIV-354 now implements it with a bounded call-local acquisition record rather
+than another global registry: outer packet and DIB/metafile aliases roll back
+only their newly created target side on construction/packing failure, and the
+guest metafile scalar is captured before the mark callback can reenter.  The
+nested WOW32 build and exact alias control are complete.  The grouped actual
+classic `WM_DDE_EXECUTE` -> original alias -> Win16 ACK -> original reverse
+packing -> deferred guest/native free lifecycle also passes; it does not cover
+the other DDE packet families, their allocation failures, or full S4 delivery.
+
+351 adds the same missing-head guard already used by neighbouring original
+CopyDataDeleteNode, without replacing HDDE or changing successful list/free
+policy.352 captures ACK's metadata before callbacks can retire the original
+node, not a second alias registry. verify-wow-dde-alias.ps1 now selects12
+complete original alias/arena/free/ACK bodies with original HDDE/DDEINFO/flags.
+Its82 service controls pass; immutable7835ba25e fails exactly empty-delete,
+rejected-mark-publication and retired-ACK-node cases. This cannot stand in for packet/transport, guest or
+full abnormal-unwind proof. Disposable evidence children include
+build/wow-dde-alias-proof and build/wow-dde-ack-proof, S4 owner,
+20min/100MiB/15min no-progress, no per-task Ninja/CMake tree or cache clear.
+
+The independently authored x86 wow_dde_native_contract prerequisite passes
+in the stable native-probe graph, without a product or guest build.
+Actual USER32 FreeDDElParam imports GlobalFree through api-ms-win-core-heap-
+l2-1-0, not directly from the previously inspected KERNEL32 export. Resolve
+that API set in an owned native32 process: KERNEL32 observes/vetoes, API-set
+KERNELBASE and all four packed forms bypass it. Original packed-wrapper bypass
+is intentional, not proof of a payload defect. Thread-local filter controls
+show TRUE can accompany free or no free while the caller's MSG is unchanged.
+Do not guess ownership from the BOOL or a stale numeric pointer.
+This source-led native prerequisite is not a partial product build or proof
+of guest/transport restoration. No hidden carrier window, injection, host
+patch, user interaction or guest edit is needed. The process registers its
+own observer and clears it before exit. Scratch build/wow-dde-native-contract
+belongs to S4,20min/20MiB/10min no-progress; only the existing stable x86
+Ninja/CMake cache compiles the native-only target. Product13 is not rebuilt
+or republished for this prerequisite.
 
 ### M4 original construction and owned-release correction group
 
@@ -2324,3 +2420,40 @@ capability is assigned to it; no deletion is justified by this audit alone.
 Do not announce S2/T447 delivered or publish the staged runtime as a planning
 side effect. Approval to audit is not acceptance of the new runtime or of a
 relaxed message-ordering contract.
+
+### S4 bounded borrowed-Console close ordering
+
+Owner reported a reproducible host-side lifetime fault outside the WOW message
+algorithm: `cmd.exe -> run16 command`, followed by NTMON deleting its NTCON,
+can return to the parent CMD with raw input until Enter. The direct `run16
+cmd` comparison does not fail. Source tracing identifies two legitimate but
+unordered writers of the same borrowed Console input mode: the original DOS
+worker calls `ResetConsoleState` during final shutdown, while NTCON restores
+the parent mode when its frontend session exits. The existing management
+delete published `frontend_closing` first, so both exits raced.
+
+The bounded host repair is in the existing NTSRV lifecycle owner. A selected
+frontend first becomes an admission-draining root; NTSRV signals only its
+already-authenticated non-WOW worker shutdown events and waits for their
+pinned process identities. Only after those workers have exited—therefore
+after the original DOS reset—is `frontend_closing` published and NTCON allowed
+to restore the borrowed Console mode. The drain bit is an admission/lifetime
+barrier, not task state, a second scheduler, a timeout retry, or guest change.
+An unsuccessful bounded worker close does not authorize NTCON's final restore.
+The ordinary no-worker close and all non-management retirement paths retain
+their existing immediate behavior. Required validation is the actual
+`run16 command` management-delete path plus the unaffected `run16 cmd` path;
+the parent Console input mode must equal its pre-launch mode after each.
+
+The focused r4 production-path witness completed from the short owned package
+stage `O:\tmp\n9e0`: it observed an actual DOS `command.com` worker and NTCON,
+sent authenticated `--close-node 1 <NTCON-pid>` through the monitor RPC, and
+then observed both participants exit.  The retained parent Console input mode
+was `0x000001f7`, with `ENABLE_PROCESSED_INPUT`, `ENABLE_LINE_INPUT`, and
+`ENABLE_ECHO_INPUT` all present.  The test entrypoint is
+`tests/observation/verify-dos-console-handoff.ps1`; its durable result is
+`O:\winnt\tests\t447-s4-console-handoff-r4.txt.handoff.txt`.  The exact
+candidate NTSRV hash was
+`98125183834813A980DAE4BDFD947A354910711BE2BCB5526AB83A5D2CEF5CD5`, matching
+both `assets/release` and `O:\winnt\system32` in the coherent thirteen-image
+publication.  This bounded delivery changes no guest image or `assets/winnt.zip`.
