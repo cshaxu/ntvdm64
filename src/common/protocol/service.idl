@@ -21,13 +21,13 @@ interface vdm_service
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation);
     /* Copied native launch/control only; worker/frontend I/O stays direct.
-     * The launcher classifies before admission. A NULL frontend submits a GUI
-     * startup request: no character route, service-held actual process lifetime.
-     * A non-NULL authenticated frontend retains the existing CUI/resume route. */
+     * operation is 1 (launch) or 2 (parent resume).  Frontend capability is
+     * validated after reservation-exact CUI/GUI worker selection, not used to
+     * infer the operation. */
     error_status_t SubmitNativeRequest(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation,
+        [in] unsigned long generation, [in, range(1,2)] unsigned long operation,
         [in, system_handle(sh_event)] HANDLE frontend,
         [in, range(0,1048576)] unsigned long bytes,
         [in, unique, size_is(bytes)] byte *payload,

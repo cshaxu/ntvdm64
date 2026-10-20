@@ -21,7 +21,8 @@ DWORD run16_native_request_submit(HANDLE root_capability,const run16_native_star
         }
         error=run16_native_launch_pack(&local,&payload,&bytes);if(error)return error;
     }
-    error=OpenNtBaseClientSubmitNativeRequest(root_capability,bytes,payload,target,receipt,&native_request);
+    error=OpenNtBaseClientSubmitNativeRequest(start ? OPENNT_BASE_NATIVE_REQUEST_LAUNCH :
+        OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME,root_capability,bytes,payload,target,receipt,&native_request);
     if(!error)*request=native_request;
     HeapFree(GetProcessHeap(),0,payload);
     return error;

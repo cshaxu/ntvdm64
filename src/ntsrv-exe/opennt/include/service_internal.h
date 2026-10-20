@@ -36,11 +36,13 @@ extern PWOWHEAD WOWHead;
 extern PCONSOLERECORD DOSHead;
 extern RTL_CRITICAL_SECTION BaseSrvWOWCriticalSection;
 extern RTL_CRITICAL_SECTION BaseSrvDOSCriticalSection;
+typedef BOOL (WINAPI *SERVICE_COMPARE_HANDLES)(HANDLE,HANDLE);
 
 struct OPENNT_BASE_SERVICE {
     OPENNT_BASE_PROCESS_REGISTRY registry;
     OPENNT_BASE_RESERVATIONS *reservations;
     CRITICAL_SECTION lock;
+    SERVICE_COMPARE_HANDLES compare_handles; /* Startup-checked host capability. */
     CONDITION_VARIABLE frontend_changed;
     ULONG next_console;
     ULONG next_wait_receipt;
@@ -242,8 +244,6 @@ typedef struct OPENNT_BASE_SERVICE_RESOURCES {
     OPENNT_BASE_RESOURCE_BINDING binding;
 } OPENNT_BASE_SERVICE_RESOURCES;
 
-typedef BOOL (WINAPI *SERVICE_COMPARE_HANDLES)(HANDLE,HANDLE);
-
 typedef NTSTATUS (NTAPI *SERVICE_QUERY_OBJECT)(HANDLE,ULONG,PVOID,ULONG,PULONG);
 
 /* Finite internal linkage only; resource init/release transport original calls,
@@ -289,7 +289,7 @@ DWORD service_bind_worker_root(OPENNT_BASE_SERVICE *,HANDLE worker,
     OPENNT_BASE_CONNECTION *root);
 BOOL service_root_has_worker(OPENNT_BASE_CONNECTION *root);
 DWORD service_queue_native_command(OPENNT_BASE_CONNECTION *connection,DWORD pid,
-    DWORD generation,HANDLE capability,const WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS],
+    DWORD generation,DWORD operation,HANDLE capability,const WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS],
     DWORD bytes,const BYTE *payload);
 DWORD service_authorize_worker_io(OPENNT_BASE_CONNECTION *worker,DWORD pid);
 DWORD service_take_native_command(OPENNT_BASE_CONNECTION *root,DWORD pid,

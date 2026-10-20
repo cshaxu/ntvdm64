@@ -11,7 +11,7 @@ DWORD common_rpc_native_startup_result(const common_rpc_connection *,
     DWORD caller_generation,DWORD request,DWORD status,HANDLE target,HANDLE receipt);
 DWORD common_rpc_complete_native_command(const common_rpc_connection *,
     DWORD request,DWORD exit_code,DWORD io_error,DWORD io_flags);
-DWORD common_rpc_submit_native_request(const common_rpc_connection *,HANDLE frontend,
+DWORD common_rpc_submit_native_request(const common_rpc_connection *,DWORD operation,HANDLE frontend,
     DWORD bytes,BYTE *payload,HANDLE *target,HANDLE *receipt,DWORD *request);
 DWORD common_rpc_finish_native_request(const common_rpc_connection *,DWORD request,
     DWORD *exit_code,DWORD *target_completed);

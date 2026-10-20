@@ -26,8 +26,7 @@ typedef LONG (NTAPI *OBSERVATION_QUERY)(HANDLE,ULONG,PVOID,ULONG,PULONG);
 static SERVICE_OBSERVATION *observation_process(OPENNT_BASE_SERVICE *service,HANDLE process)
 {
     LIST_ENTRY *link;
-    SERVICE_COMPARE_HANDLES same=(SERVICE_COMPARE_HANDLES)GetProcAddress(
-        GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
+    SERVICE_COMPARE_HANDLES same=service ? service->compare_handles : NULL;
     if(!same)return NULL;
     for(link=service->observations.Flink;link!=&service->observations;link=link->Flink) {
         SERVICE_OBSERVATION *node=CONTAINING_RECORD(link,SERVICE_OBSERVATION,link);

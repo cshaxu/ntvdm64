@@ -62,10 +62,9 @@ DWORD service_bind_worker_root(OPENNT_BASE_SERVICE *service,HANDLE worker,
     OPENNT_BASE_CONNECTION *root)
 {
     LIST_ENTRY *link;
-    SERVICE_COMPARE_HANDLES compare=(SERVICE_COMPARE_HANDLES)GetProcAddress(
-        GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
+    SERVICE_COMPARE_HANDLES compare=service ? service->compare_handles : NULL;
     if(!worker || !root || !root->frontend_capability)return ERROR_INVALID_PARAMETER;
-    if(!compare)return ERROR_CALL_NOT_IMPLEMENTED;
+    if(!compare)return ERROR_INVALID_STATE;
     if(root->frontend_closing || root->frontend_close_draining || WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT)
         return ERROR_PIPE_NOT_CONNECTED;
     for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
@@ -355,8 +354,8 @@ DWORD OpenNtBaseServiceRetainNativeCommandWorker(OPENNT_BASE_CONNECTION *connect
     error=OpenNtBaseReservationRetainNativeWorker(service->reservations,connection->reservation,
         pid,generation,&kind,&native_type,&retained);
     if(error)goto done;
-    compare=(SERVICE_COMPARE_HANDLES)GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
-    if(!compare) { error=ERROR_CALL_NOT_IMPLEMENTED;goto done; }
+    compare=service->compare_handles;
+    if(!compare) { error=ERROR_INVALID_STATE;goto done; }
     for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
         OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
         if(watch->reservation!=connection->reservation || watch->kind!=kind ||

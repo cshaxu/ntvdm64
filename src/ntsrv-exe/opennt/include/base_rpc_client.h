@@ -12,7 +12,7 @@ DWORD OpenNtBaseClientObserveDosEvent(const common_dos_observation *,BOOL,HANDLE
 DWORD OpenNtBaseClientWorkerIoTransition(DWORD);
 DWORD OpenNtBaseClientWorkerIoCheckpoint(DWORD,DWORD,DWORD *);
 DWORD OpenNtBaseClientFrontendIoDisconnected(void);
-DWORD OpenNtBaseClientSubmitNativeRequest(HANDLE,DWORD,BYTE *,HANDLE *,HANDLE *,DWORD *);
+DWORD OpenNtBaseClientSubmitNativeRequest(DWORD,HANDLE,DWORD,BYTE *,HANDLE *,HANDLE *,DWORD *);
 DWORD OpenNtBaseClientFinishNativeRequest(DWORD,DWORD *,DWORD *);
 DWORD OpenNtBaseClientConnectCurrent(void);
 DWORD OpenNtBaseClientBrokerProcess(HANDLE *server);

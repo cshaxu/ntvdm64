@@ -15,6 +15,11 @@ OPENNT_BASE_SERVICE *OpenNtBaseServiceStart(void)
     OPENNT_BASE_SERVICE *service=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*service));
     FILETIME now;
     if (!service) return NULL;
+    service->compare_handles=(SERVICE_COMPARE_HANDLES)GetProcAddress(
+        GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
+    if(!service->compare_handles) {
+        SetLastError(ERROR_CALL_NOT_IMPLEMENTED);HeapFree(GetProcessHeap(),0,service);return NULL;
+    }
     InitializeConditionVariable(&service->frontend_changed);
     if (!InitializeCriticalSectionEx(&service->lock,0,0)) {
         HeapFree(GetProcessHeap(),0,service); return NULL;
@@ -193,12 +198,10 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                     LIST_ENTRY *root_link;
                     OPENNT_BASE_CONNECTION *selected_root=NULL;
                     BOOL route_found=FALSE;
-                    SERVICE_COMPARE_HANDLES compare=(SERVICE_COMPARE_HANDLES)GetProcAddress(
-                        GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
+                    SERVICE_COMPARE_HANDLES compare=service->compare_handles;
                     /* RequestFrontend can precede worker Connect. Consume its
                      * exact authenticated process grant, not a Console guess. */
-                    if(!compare)error=ERROR_CALL_NOT_IMPLEMENTED;
-                    else for(root_link=service->frontend_routes.Flink;
+                    for(root_link=service->frontend_routes.Flink;
                         root_link!=&service->frontend_routes;root_link=root_link->Flink) {
                         OPENNT_FRONTEND_ROUTE *route=CONTAINING_RECORD(root_link,OPENNT_FRONTEND_ROUTE,link);
                         if(!compare(route->worker,watch->process.ProcessHandle))continue;

@@ -19,7 +19,7 @@ static DWORD WINAPI complete_target(void *context)
     }
     CloseHandle(target);return error;
 }
-DWORD OpenNtBaseClientSubmitNativeRequest(HANDLE capability,DWORD bytes,BYTE *payload,
+DWORD OpenNtBaseClientSubmitNativeRequest(DWORD operation,HANDLE capability,DWORD bytes,BYTE *payload,
     HANDLE *target,HANDLE *receipt,DWORD *request)
 {
     static const DWORD errors[]={0,ERROR_ACCESS_DENIED,ERROR_REVISION_MISMATCH,
@@ -27,10 +27,12 @@ DWORD OpenNtBaseClientSubmitNativeRequest(HANDLE capability,DWORD bytes,BYTE *pa
     run16_native_launch_packet packet;WCHAR *strings[4];PROCESS_INFORMATION process={0};DWORD error;
     *target=*receipt=NULL;*request=0;
     if(capability!=(HANDLE)1)return ERROR_ACCESS_DENIED;
-    if(!bytes) {
+    if(operation==OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME) {
+        if(bytes)return ERROR_INVALID_DATA;
         if(payload)return ERROR_INVALID_DATA;
         return scenario==9 ? ERROR_SUCCESS : scenario==10 ? ERROR_ACCESS_DENIED : ERROR_INVALID_DATA;
     }
+    if(operation!=OPENNT_BASE_NATIVE_REQUEST_LAUNCH)return ERROR_INVALID_PARAMETER;
     error=run16_native_launch_unpack(payload,bytes,&packet,strings);if(error)return error;
     if(packet.capabilities[0] || packet.capabilities[1])return ERROR_INVALID_DATA;
     if(scenario<6 && errors[scenario])return errors[scenario];

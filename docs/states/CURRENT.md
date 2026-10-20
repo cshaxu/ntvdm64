@@ -1,17 +1,16 @@
 # Project Status
 
-**Active: M0 T447 S4 — native classification and worker lifecycle completion.**
+**Active: M0 T447 S5 — WOW32 message, identity and reply completion.**
 
-S4 remains open.  The first lifecycle delivery classified DOS, Win16, Win32
-CUI/GUI and Win64 CUI/GUI, but its GUI reservation path stops at an old CUI-only
-command-worker selector before delivery to the one-shot GUI launcher.  This is
-a host lifecycle defect, not a release limitation.  S4 now completes that
-authenticated reservation-to-launcher path and separates NTVWM-CUI
-console-close from worker-close at explicit semantic entries, including
-concurrent-close cleanup.  No guest source, guest binary or mirror diff is
-permitted.  The original S4 WOW32 M1--M6 inventory remains in S4 until this
-bounded lifecycle repair is truly built, tested, published and reviewed; it is
-not transferred to S5.
+S4 is closed.  Its lifecycle delivery completed the authenticated native
+reservation-to-launcher path, explicit NTVWM-CUI console-close versus
+worker-close entries, and P3 protocol hardening: native launch/resume is now
+an explicit operation, GUI/CUI comes from the reservation-selected worker,
+and `CompareObjectHandles` is one startup-checked service capability.  No
+guest source, guest binary or mirror diff was introduced.  S5 now owns the
+remaining WOW32 M1--M6 message/identity/reply/wait/reentry inventory and the
+existing strict `run16 command` ConPTY first-prompt gap; that gap reproduced
+unchanged against the pre-P3 deployed package and is not claimed repaired.
 
 Owner accepts and closes [Td build hygiene](../etc/operations/td-build-hygiene.md)
 at aadde21e8; S4 resumes with stable caches, immutable guest and frozen
@@ -397,10 +396,12 @@ witness and older GDI16/19 risks remain; no current pass claims them repaired.
 ## T447 Sequence and Delivery
 
 S1 source audit and S2 foundations are closed; S3 dependency closure is
-recorded above.  S4 remains active for the bounded native-worker lifecycle
-repair and its original M1--M6 WOW32 message/identity/reply/wait/reentry
-inventory. S6 individual task termination/NT Monitor and S7 whole-T
-reconciliation remain planned, not concurrent work.
+recorded above.  S4 is closed after its bounded native-worker lifecycle repair
+and P3 protocol hardening.  S5 is active and owns the remaining WOW32
+message/identity/reply/wait/reentry inventory, plus the existing strict
+`run16 command` ConPTY first-prompt gap evidenced identically before and after
+P3. S6 individual task termination/NT Monitor and S7 whole-T reconciliation
+remain planned, not concurrent work.
 The [working plan](../etc/operations/t447-wow-execution-plan.md) retains the
 cross-T ownership boundaries; [Queue](QUEUE.md) is unchanged. T447 and the
 persistent WOW32 objective remain unfinished.

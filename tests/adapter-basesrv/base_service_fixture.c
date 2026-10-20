@@ -84,10 +84,10 @@ int fixture_parent_resume_origin(void)
     root->process.fVDM=TRUE;
     ORIGIN_CHECK(!service_prepare_parent_resume(caller,rg,&required) && !required);
     ORIGIN_CHECK(!OpenNtBaseServiceSubmitNativeRequest(caller,children[1].dwProcessId,cg,
-        root->frontend_capability,0,NULL,&target,&receipt,&request));
+        OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME,root->frontend_capability,0,NULL,&target,&receipt,&request));
     ORIGIN_CHECK(!target && !receipt && !request && !caller->dos_completion_read);
     ORIGIN_CHECK(OpenNtBaseServiceSubmitNativeRequest(caller,children[1].dwProcessId,cg,
-        root->frontend_capability,0,NULL,&target,&receipt,&request)==ERROR_INVALID_STATE);
+        OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME,root->frontend_capability,0,NULL,&target,&receipt,&request)==ERROR_INVALID_STATE);
     caller->dos_completion_read=TRUE;
     root->process.fVDM=FALSE;
     caller->execution_worker_generation=MAXDWORD;
@@ -570,7 +570,8 @@ cleanup:
 DWORD fixture_queue_native_command(OPENNT_BASE_CONNECTION *connection,DWORD pid,
     DWORD generation,HANDLE capability,DWORD bytes,const BYTE *payload)
 {
-    return service_queue_native_command(connection,pid,generation,capability,L"fixture.exe",bytes,payload);
+    return service_queue_native_command(connection,pid,generation,
+        OPENNT_BASE_NATIVE_REQUEST_LAUNCH,capability,L"fixture.exe",bytes,payload);
 }
 
 DWORD fixture_take_native_command(OPENNT_BASE_CONNECTION *connection,DWORD pid,

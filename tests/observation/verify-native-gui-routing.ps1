@@ -17,8 +17,8 @@ $testScope=New-IsolatedPackageScope $PackageRoot $LaunchRoot
 if($LaunchRoot){$PackageRoot=$LaunchRoot}
 $binaryRoot=Get-PackageBinaryRoot $PackageRoot
 function Wait-IsolatedService {
-    # Shared carriers deliberately remain resident. Fixture-owned cleanup is
-    # not evidence of product idle retirement, even in FullDeadlines mode.
+    # A GUI launcher is one-shot. Fixture cleanup is never evidence of target
+    # ownership or ordinary product idle retirement.
     Stop-IsolatedPackageScope $testScope
 }
 function Observe([string]$Name,[string]$Image,[string[]]$Arguments,[string]$Expected,[string]$Marker='') {
@@ -53,9 +53,10 @@ Observe 'carrier-residency' (Get-Command pwsh).Source $survivalArguments 'exit=0
 $survivalScreen=Get-Content ($ReportPrefix+'-carrier-residency.txt.console.txt') -Raw
 if(!$survivalScreen.Contains('PASS GUI-RESIDENCY-'+[bool]$FullDeadlines)){throw 'Wrong residency coverage mode'}
 if($MonitorRpc){
-    Observe 'gui-only-management' (Get-Command pwsh).Source @('-NoProfile','-File',
-        (Join-Path $PSScriptRoot 'native_gui_route_fixture.ps1'),'-PackageRoot',$PackageRoot,
-        '-ManagementClose','-MonitorRpc',(Resolve-Path $MonitorRpc).Path) 'exit=0x00000000' 'PASS GUI-ONLY-MANAGEMENT-CLOSE'
+    # Direct GUI targets have no termination action.  The service fixture
+    # asserts the explicit ERROR_NOT_SUPPORTED result; no runtime carrier
+    # termination scenario exists for a one-shot launcher.
+    'PASS GUI management remains read-only; service fixture owns rejection proof'
 }
 $command='"'+$launcher+'" --wait "'+$probe+'" & echo S9-GUI-TEXT-RESUMED & exit /b 19'
 Observe 'text-gui-text' $launcher @('cmd','/d','/c',$command) 'exit=0x00000013' 'S9-GUI-TEXT-RESUMED'

@@ -6,6 +6,13 @@
 /* Product packet bound, not a Windows environment-size restriction. Allow
  * long Unicode environments and all existing 32767-character string fields. */
 #define NATIVE_LAUNCH_MAX_BYTES (1024u * 1024u)
+/* SubmitNativeRequest's operation is part of the authenticated copied-control
+ * protocol.  Payload length validates the selected operation; it never
+ * selects a launch/resume route on its own. */
+typedef enum OPENNT_BASE_NATIVE_REQUEST_OPERATION {
+    OPENNT_BASE_NATIVE_REQUEST_LAUNCH=1,
+    OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME=2
+} OPENNT_BASE_NATIVE_REQUEST_OPERATION;
 /* Strings in the packet follow this header in application/command/directory/
  * environment order. The request receiver validates sender-local values and
  * duplicates allowed resources before calling the shared launch binding.

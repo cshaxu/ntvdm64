@@ -10,6 +10,7 @@
 #include "service.h"
 #include "ntsrv-exe/transport/rpc_security.h"
 #include "common/protocol/version.h"
+#include "common/codec/native_launch.h"
 #include "common/rpc/management.h"
 #include "common/protocol/management.h"
 #include <rpcasync.h>
@@ -210,20 +211,21 @@ static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
         BYTE malformed=0;
         DWORD caller_generation=0,bytes=0;
         ULONG request=0;
-        RPC_CHECK(Client_SubmitNativeRequest(binding,connection,self,generation+1,frontend,0,NULL,
+        RPC_CHECK(Client_SubmitNativeRequest(binding,connection,self,generation+1,OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME,frontend,0,NULL,
             &target,&receipt,&request),ERROR_ACCESS_DENIED);
         CHECK(!target && !receipt && !request);
-        RPC_CHECK(Client_SubmitNativeRequest(binding,connection,self,generation,execution,0,NULL,
+        RPC_CHECK(Client_SubmitNativeRequest(binding,connection,self,generation,OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME,execution,0,NULL,
             &target,&receipt,&request),ERROR_ACCESS_DENIED);
         CHECK(!target && !receipt && !request);
-        RPC_CHECK(Client_SubmitNativeRequest(binding,connection,self,generation,frontend,1,&malformed,
+        RPC_CHECK(Client_SubmitNativeRequest(binding,connection,self,generation,OPENNT_BASE_NATIVE_REQUEST_LAUNCH,frontend,1,&malformed,
             &target,&receipt,&request),ERROR_INVALID_DATA);
         CHECK(!target && !receipt && !request);
-        /* A zero-byte request is the accepted broker parent-resume operation.
+        /* Parent-resume is explicit; this fresh launcher has no completed
+         * child/selected parent, so the original prepare contract rejects it.
          * This fresh launcher has no completed child/selected parent, so the
          * original service_prepare_parent_resume contract rejects its state;
          * it is not a pending command waiting for a worker to become ready. */
-        RPC_CHECK(Client_SubmitNativeRequest(binding,connection,self,generation,frontend,0,NULL,
+        RPC_CHECK(Client_SubmitNativeRequest(binding,connection,self,generation,OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME,frontend,0,NULL,
             &target,&receipt,&request),ERROR_INVALID_STATE);
         CHECK(!target && !receipt && !request);
         RPC_CHECK(Client_GetNextNativeCommand(binding,connection,self,generation,1,&malformed,&bytes,&sender,&context,&io,&request,&caller_generation),ERROR_ACCESS_DENIED);

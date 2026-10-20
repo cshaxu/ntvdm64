@@ -419,11 +419,11 @@ DWORD OpenNtBaseClientStartNativeWorker(DWORD native_type,HANDLE *worker)
     if(error && *worker){CloseHandle(*worker);*worker=NULL;}
     return error;
 }
-DWORD OpenNtBaseClientSubmitNativeRequest(HANDLE frontend,DWORD bytes,BYTE *payload,
+DWORD OpenNtBaseClientSubmitNativeRequest(DWORD operation,HANDLE frontend,DWORD bytes,BYTE *payload,
     HANDLE *target,HANDLE *receipt,DWORD *request)
 {
     common_rpc_connection view=client_rpc_view();
-    return common_rpc_submit_native_request(&view,frontend,bytes,payload,target,receipt,request);
+    return common_rpc_submit_native_request(&view,operation,frontend,bytes,payload,target,receipt,request);
 }
 DWORD OpenNtBaseClientFinishNativeRequest(DWORD request,DWORD *exit_code,DWORD *target_completed)
 {

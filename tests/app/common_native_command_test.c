@@ -50,11 +50,11 @@ error_status_t Client_CompleteWorkerChannel(handle_t binding,VDM_CONNECTION conn
 }
 
 error_status_t Client_SubmitNativeRequest(handle_t binding,VDM_CONNECTION connection,
-    HANDLE process,unsigned long generation,HANDLE frontend,unsigned long bytes,
+    HANDLE process,unsigned long generation,unsigned long operation,HANDLE frontend,unsigned long bytes,
     byte *payload,HANDLE *target,HANDLE *receipt,unsigned long *request)
 {
     peer(binding,connection,process,generation);
-    CHECK(frontend==expected.process && bytes==4 && !memcmp(payload,"RPC!",4));
+    CHECK(operation==OPENNT_BASE_NATIVE_REQUEST_LAUNCH && frontend==expected.process && bytes==4 && !memcmp(payload,"RPC!",4));
     exported[0]=CreateEventW(NULL,TRUE,FALSE,NULL);
     exported[1]=CreateEventW(NULL,TRUE,FALSE,NULL);
     CHECK(exported[0] && exported[1]);
@@ -107,15 +107,16 @@ int main(void)
     raise_error=FALSE;injected=0;
     CHECK(!common_rpc_native_startup_result(&expected,81,71,ERROR_ACCESS_DENIED,expected.process,NULL));
     CHECK(!common_rpc_complete_native_command(&expected,0,37,ERROR_BROKEN_PIPE,2));
-    CHECK(common_rpc_submit_native_request(&expected,expected.process,4,payload,NULL,&execution,&request)==ERROR_INVALID_PARAMETER);
-    CHECK(common_rpc_submit_native_request(&empty,expected.process,4,payload,&sender,&execution,&request)==ERROR_INVALID_STATE);
+    CHECK(common_rpc_submit_native_request(&expected,OPENNT_BASE_NATIVE_REQUEST_LAUNCH,expected.process,4,payload,NULL,&execution,&request)==ERROR_INVALID_PARAMETER);
+    CHECK(common_rpc_submit_native_request(&expected,0,expected.process,4,payload,&sender,&execution,&request)==ERROR_INVALID_PARAMETER);
+    CHECK(common_rpc_submit_native_request(&empty,OPENNT_BASE_NATIVE_REQUEST_LAUNCH,expected.process,4,payload,&sender,&execution,&request)==ERROR_INVALID_STATE);
     CHECK(!sender && !execution && !request);
     CHECK(common_rpc_finish_native_request(&expected,0,&exit_code,&completed)==ERROR_INVALID_PARAMETER);
     CHECK(common_rpc_finish_native_request(&expected,71,NULL,&completed)==ERROR_INVALID_PARAMETER);
     CHECK(common_rpc_finish_native_request(&empty,71,&exit_code,&completed)==ERROR_INVALID_STATE);
     CHECK(!exit_code && !completed);
     CopyMemory(payload,"RPC!",4);
-    CHECK(!common_rpc_submit_native_request(&expected,expected.process,4,payload,&sender,&execution,&request));
+    CHECK(!common_rpc_submit_native_request(&expected,OPENNT_BASE_NATIVE_REQUEST_LAUNCH,expected.process,4,payload,&sender,&execution,&request));
     CHECK(sender==exported[0] && execution==exported[1] && request==71);
     CHECK(WaitForSingleObject(sender,0)==WAIT_TIMEOUT && WaitForSingleObject(execution,0)==WAIT_TIMEOUT);
     CloseHandle(sender);CloseHandle(execution);
@@ -130,7 +131,7 @@ int main(void)
     completed_value=1;
     for(j=0;j<2;++j) {
         raise_error=j!=0;injected=j ? RPC_S_SERVER_UNAVAILABLE : ERROR_ACCESS_DENIED;
-        CHECK(common_rpc_submit_native_request(&expected,expected.process,4,payload,&sender,&execution,&request)==injected);
+        CHECK(common_rpc_submit_native_request(&expected,OPENNT_BASE_NATIVE_REQUEST_LAUNCH,expected.process,4,payload,&sender,&execution,&request)==injected);
         CHECK(!sender && !execution && !request);
         for(i=0;i<2;++i)CHECK(WaitForSingleObject(exported[i],0)==WAIT_FAILED);
         CHECK(common_rpc_finish_native_request(&expected,71,&exit_code,&completed)==injected);

@@ -2548,3 +2548,39 @@ published and SHA-256 matched at both `assets/release` and
 `O:\winnt\system32`.  This proves the bounded host lifecycle repair and its
 package identity; it does not claim the remaining S4 M1--M6 WOW32 work is
 closed.
+
+P3 is a bounded code-quality correction to that same lifecycle path, not a
+new feature or a reopening of guest behavior.  Its fixed scope is three
+coupled facts exposed by the source audit: (1) the native-control request
+operation is an explicit two-value wire field (`launch` or `parent-resume`),
+so payload length is validation data and never selects a route; (2) the
+pending native record's GUI/CUI state is read only after the exact registered
+worker is selected from the caller's authenticated reservation, then checked
+against the frontend-capability contract (GUI has none; CUI has one); and (3)
+`CompareObjectHandles` is resolved once while NTSRV is created and stored as a
+service capability.  All users consume that one checked capability rather than
+independently probing KernelBase and deciding a fallback.  A host lacking it
+fails service startup with `ERROR_CALL_NOT_IMPLEMENTED`; there is no approximate
+handle-identity fallback.
+
+P3 updates every client/server declaration and focused protocol test, including
+malformed operation/payload combinations and authenticated CUI/GUI-capability
+polarity.  It preserves reservation-exact selection, the `BindNativeTarget`
+machine/subsystem recheck, direct GUI observation-only ownership, and existing
+close semantics.  It adds no guest or OpenNT mirror diff.  After the whole
+group is built, focused tests and the required full-component/package gates run
+under the execution rules before publication, commit and push.  The internal
+IDL remains at the product's existing v47 identity: this is an atomic package
+contract update, while the established product-version gate rejects mixed
+client/server releases; a gratuitous RPC interface-version divergence is not
+introduced.
+
+P3 completion evidence (2026-10-20): the final thirteen-image x86/x64 build
+completed with 1,343 retained intermediates and a no-work second pass.  The
+isolated Control run passed the actual client/bootstrap/rejection/timeout,
+worker-loss, monitor-RPC, reservation, GUI-launcher, GUI-survival and protocol
+negative gates.  The strict `run16 command` ConPTY DIR gate failed identically
+against the pre-P3 deployed `O:\winnt` package and the candidate: both launch
+NTVDM but never present the first DOS prompt.  It is therefore an existing
+terminal gap, transferred to S5 with its comparison evidence; it is not a P3
+regression or a passing claim.  P3 adds no guest or mirror diff.

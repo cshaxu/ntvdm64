@@ -20,14 +20,14 @@ static HANDLE idle_timer;
 static HANDLE frontend_timer; /* Broker-only startup and workerless-root deadlines. */
 static BASESRV_IDLE_POLICY idle_policy;
 error_status_t Server_SubmitNativeRequest(handle_t binding,VDM_CONNECTION connection,
-    HANDLE process,ULONG generation,HANDLE frontend,ULONG bytes,BYTE *payload,
+    HANDLE process,ULONG generation,ULONG operation,HANDLE frontend,ULONG bytes,BYTE *payload,
     HANDLE *target,HANDLE *receipt,ULONG *request)
 {
     DWORD pid,error;
     if(!target || !receipt || !request)return ERROR_INVALID_PARAMETER;
     *target=*receipt=NULL;*request=0;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceSubmitNativeRequest(connection,pid,generation,
+    return error ? error : OpenNtBaseServiceSubmitNativeRequest(connection,pid,generation,operation,
         frontend,bytes,payload,target,receipt,request);
 }
 error_status_t Server_FinishNativeRequest(handle_t binding,VDM_CONNECTION connection,
@@ -974,7 +974,7 @@ int main(void)
     result=RpcServerRegisterAuthInfoW(NULL,RPC_C_AUTHN_WINNT,NULL,NULL);
     if (result) return (int)result;
     service=OpenNtBaseServiceStart();
-    if (!service) return ERROR_NOT_ENOUGH_MEMORY;
+    if (!service) return GetLastError() ? (int)GetLastError() : ERROR_NOT_ENOUGH_MEMORY;
     if (!OpenNtBaseServiceConfigureEmptyNotify(service,basesrv_worker_terminated,NULL)) {
         DWORD error=GetLastError();
         (void)OpenNtBaseServiceStop(service);

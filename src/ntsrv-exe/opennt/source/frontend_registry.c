@@ -398,8 +398,7 @@ DWORD OpenNtBaseServiceRegisterFrontendRoot(OPENNT_BASE_CONNECTION *connection,
     DWORD error=ERROR_SUCCESS;
     BOOL granted=FALSE;
     if (!connection) return ERROR_ACCESS_DENIED;
-    compare=(SERVICE_COMPARE_HANDLES)GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),
-        "CompareObjectHandles");
+    compare=connection->service->compare_handles;
     query=(SERVICE_QUERY_OBJECT)GetProcAddress(GetModuleHandleW(L"ntdll.dll"),"NtQueryObject");
     if (!compare || !query) return ERROR_CALL_NOT_IMPLEMENTED;
     EnterCriticalSection(&connection->service->lock);
@@ -602,10 +601,9 @@ DWORD OpenNtBaseServiceFrontendStartupResult(OPENNT_BASE_CONNECTION *root,DWORD 
 {
     LIST_ENTRY *link;
     DWORD error=ERROR_ACCESS_DENIED;
-    SERVICE_COMPARE_HANDLES compare=(SERVICE_COMPARE_HANDLES)GetProcAddress(
-        GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
+    SERVICE_COMPARE_HANDLES compare=root ? root->service->compare_handles : NULL;
     if(!root || !capability)return ERROR_INVALID_PARAMETER;
-    if(!compare)return ERROR_CALL_NOT_IMPLEMENTED;
+    if(!compare)return ERROR_INVALID_STATE;
     EnterCriticalSection(&root->service->lock);
     if(!OpenNtBaseServicePeer(root,pid,generation))goto done;
     for(link=root->service->connections.Flink;link!=&root->service->connections;link=link->Flink) {
@@ -894,10 +892,9 @@ DWORD OpenNtBaseServiceRegisterFrontendLease(OPENNT_BASE_CONNECTION *root,DWORD 
     LIST_ENTRY *link;
     DWORD error=ERROR_ACCESS_DENIED;
     EVENT_BASIC_INFORMATION info;
-    SERVICE_COMPARE_HANDLES compare=(SERVICE_COMPARE_HANDLES)GetProcAddress(
-        GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
+    SERVICE_COMPARE_HANDLES compare=root ? root->service->compare_handles : NULL;
     if(!root || !console_window || !creator_pid || borrowed>1)return ERROR_INVALID_PARAMETER;
-    if(!compare)return ERROR_CALL_NOT_IMPLEMENTED;
+    if(!compare)return ERROR_INVALID_STATE;
     if(NtQueryEvent(retire,EventBasicInformation,&info,sizeof(info),NULL)<0 ||
         info.EventType!=NotificationEvent ||
         NtQueryEvent(restored,EventBasicInformation,&info,sizeof(info),NULL)<0 ||
@@ -1049,9 +1046,8 @@ DWORD OpenNtBaseServiceRetainFrontendRoot(OPENNT_BASE_CONNECTION *connection,
     if (!process || !root_generation) return ERROR_INVALID_PARAMETER;
     *process=NULL;*root_generation=0;
     if (!connection) return ERROR_ACCESS_DENIED;
-    compare=(SERVICE_COMPARE_HANDLES)GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),
-        "CompareObjectHandles");
-    if (!compare) return ERROR_CALL_NOT_IMPLEMENTED;
+    compare=connection->service->compare_handles;
+    if (!compare) return ERROR_INVALID_STATE;
     EnterCriticalSection(&connection->service->lock);
     if (!OpenNtBaseServicePeer(connection,pid,generation)) goto done;
     for (link=connection->service->connections.Flink;
@@ -1182,8 +1178,8 @@ DWORD OpenNtBaseServiceBindConsoleContext(OPENNT_BASE_CONNECTION *connection,
     LIST_ENTRY *link;
     DWORD error=ERROR_ACCESS_DENIED;
     if (!connection) return error;
-    compare=(SERVICE_COMPARE_HANDLES)GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
-    if (!compare) return ERROR_CALL_NOT_IMPLEMENTED;
+    compare=connection->service->compare_handles;
+    if (!compare) return ERROR_INVALID_STATE;
     EnterCriticalSection(&connection->service->lock);
     if (!OpenNtBaseServicePeer(connection,pid,generation) || connection->process.fVDM ||
         connection->wow || connection->task || connection->reservation ||
@@ -1531,9 +1527,8 @@ DWORD service_bind_existing_console(OPENNT_BASE_CONNECTION *connection)
     DWORD index,error=0;
     LIST_ENTRY *entry;
     if (!connection) return ERROR_INVALID_PARAMETER;
-    compare=(SERVICE_COMPARE_HANDLES)GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),
-        "CompareObjectHandles");
-    if (!compare) return ERROR_CALL_NOT_IMPLEMENTED;
+    compare=connection->service->compare_handles;
+    if (!compare) return ERROR_INVALID_STATE;
     service=connection->service;
     EnterCriticalSection(&service->lock);
     if (connection->console) { LeaveCriticalSection(&service->lock); return ERROR_SUCCESS; }

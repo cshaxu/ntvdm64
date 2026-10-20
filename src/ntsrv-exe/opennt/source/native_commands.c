@@ -317,7 +317,7 @@ done:
 
 
 DWORD service_queue_native_command(OPENNT_BASE_CONNECTION *connection,DWORD pid,
-    DWORD generation,HANDLE capability,const WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS],
+    DWORD generation,DWORD operation,HANDLE capability,const WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS],
     DWORD bytes,const BYTE *payload)
 {
     HANDLE root_process=NULL,execution=NULL,worker=NULL,frontend=NULL;
@@ -325,12 +325,18 @@ DWORD service_queue_native_command(OPENNT_BASE_CONNECTION *connection,DWORD pid,
     OPENNT_BASE_WIN32RECORD *record=NULL;
     BYTE *owned_payload=NULL;
     LIST_ENTRY *link;
+    BOOL gui=FALSE;
     if (!connection || !image) return ERROR_ACCESS_DENIED;
     EnterCriticalSection(&connection->service->lock);
     error=ERROR_ACCESS_DENIED;
     if (!OpenNtBaseServicePeer(connection,pid,generation) || connection->process.fVDM || connection->native_worker) goto done;
     if (connection->native_command_pending) { error=ERROR_BUSY;goto done; }
-    if(bytes>NATIVE_LAUNCH_MAX_BYTES || (bytes && !payload)) {error=ERROR_INVALID_PARAMETER;goto done;}
+    if(operation!=OPENNT_BASE_NATIVE_REQUEST_LAUNCH &&
+        operation!=OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME) {error=ERROR_INVALID_PARAMETER;goto done;}
+    if(bytes>NATIVE_LAUNCH_MAX_BYTES ||
+        (operation==OPENNT_BASE_NATIVE_REQUEST_LAUNCH && (!bytes || !payload)) ||
+        (operation==OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME && (bytes || payload)))
+        {error=ERROR_INVALID_PARAMETER;goto done;}
     if(bytes) {
         owned_payload=HeapAlloc(GetProcessHeap(),0,bytes);
         if(!owned_payload){error=ERROR_NOT_ENOUGH_MEMORY;goto done;}
@@ -343,7 +349,6 @@ DWORD service_queue_native_command(OPENNT_BASE_CONNECTION *connection,DWORD pid,
         record=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*record));
         if(!record) { error=ERROR_NOT_ENOUGH_MEMORY;goto done; }
         record->launcher_generation=generation;
-        record->gui=capability==NULL;
         lstrcpynW(record->image,image,OPENNT_BASE_WORKER_IMAGE_CHARS);
     }
     if(capability) {
@@ -352,22 +357,28 @@ DWORD service_queue_native_command(OPENNT_BASE_CONNECTION *connection,DWORD pid,
         if (error) goto done;
         error=OpenNtBaseServiceAcquireConsoleContext(connection,pid,generation,capability,&execution);
         if (error) goto done;
-    } else if(!record || !bytes) {error=ERROR_INVALID_PARAMETER;goto done;}
+    } else if(operation==OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME) {error=ERROR_INVALID_PARAMETER;goto done;}
     {
         /* Native direct launch derives its exact worker kind/class from the
          * authenticated reservation.  A GUI request never falls through the
          * resident CUI selector, and a CUI request cannot claim a GUI launcher. */
-        error=bytes ? OpenNtBaseServiceRetainNativeCommandWorker(connection,pid,generation,&worker) :
+        error=operation==OPENNT_BASE_NATIVE_REQUEST_LAUNCH ?
+            OpenNtBaseServiceRetainNativeCommandWorker(connection,pid,generation,&worker) :
             OpenNtBaseServiceRetainCommandWorker(connection,pid,generation,&worker);
         if (error) goto done;
         for (link=connection->service->connections.Flink;link!=&connection->service->connections;link=link->Flink) {
             OPENNT_BASE_CONNECTION *candidate=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
             if (candidate->native_worker &&
                 GetProcessId(candidate->process.ProcessHandle)==GetProcessId(worker)) {
-                worker_generation=candidate->process.SequenceNumber;break;
+                worker_generation=candidate->process.SequenceNumber;
+                gui=candidate->native_gui_launcher;break;
             }
         }
         if (!worker_generation) { error=ERROR_NOT_READY;goto done; }
+        /* Reservation-exact worker identity is the sole GUI/CUI authority.
+         * A frontend capability proves the CUI route; it cannot choose one. */
+        if((gui && capability) || (!gui && !capability)) {error=ERROR_INVALID_PARAMETER;goto done;}
+        if(record)record->gui=gui;
         if (capability && !DuplicateHandle(GetCurrentProcess(),capability,GetCurrentProcess(),&frontend,
                 SYNCHRONIZE,FALSE,0)) { error=GetLastError();goto done; }
     }
@@ -452,7 +463,7 @@ DWORD OpenNtBaseServiceNativeStartupResult(OPENNT_BASE_CONNECTION *worker,DWORD 
             if(target || receipt){error=ERROR_INVALID_DATA;goto done;}
         } else {
             record=service_native_result_record(caller,request,NULL);
-            compare=(SERVICE_COMPARE_HANDLES)GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
+            compare=worker->service->compare_handles;
             if(!record || record->startup_delivered || !compare || !target || !receipt ||
                 record->process_id!=GetProcessId(target) || !compare(record->receipt,receipt)) {
                 error=ERROR_INVALID_DATA;goto done;
@@ -529,7 +540,7 @@ DWORD service_prepare_parent_resume(OPENNT_BASE_CONNECTION *caller,
 }
 
 DWORD OpenNtBaseServiceSubmitNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD pid,
-    DWORD generation,HANDLE frontend,DWORD bytes,BYTE *payload,
+    DWORD generation,DWORD operation,HANDLE frontend,DWORD bytes,BYTE *payload,
     HANDLE *target,HANDLE *receipt,DWORD *request)
 {
     WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS]={0};
@@ -537,7 +548,9 @@ DWORD OpenNtBaseServiceSubmitNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD 
     HANDLE root=NULL;
     DWORD root_generation=0;
     DWORD error;
-    if(!target || !receipt || !request)return ERROR_INVALID_PARAMETER;
+    if(!target || !receipt || !request ||
+        (operation!=OPENNT_BASE_NATIVE_REQUEST_LAUNCH &&
+         operation!=OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME))return ERROR_INVALID_PARAMETER;
     *target=*receipt=NULL;*request=0;
     if(!caller || !OpenNtBaseServicePeer(caller,pid,generation))return ERROR_ACCESS_DENIED;
     /* Authenticate the root before interpreting launch data or selecting a
@@ -546,28 +559,30 @@ DWORD OpenNtBaseServiceSubmitNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD 
         error=OpenNtBaseServiceRetainFrontendRoot(caller,pid,generation,frontend,&root,&root_generation);
         if(error)return error;
         CloseHandle(root);
-    } else if(!bytes)return ERROR_INVALID_PARAMETER;
-    if(!bytes) {
+    } else if(operation==OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME)return ERROR_INVALID_PARAMETER;
+    if(operation==OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME) {
         BOOL native_parent=FALSE;
-        if(payload)return ERROR_INVALID_PARAMETER;
+        if(bytes || payload)return ERROR_INVALID_PARAMETER;
         EnterCriticalSection(&caller->service->lock);
         error=service_prepare_parent_resume(caller,root_generation,&native_parent);
         if(!error && !native_parent)caller->dos_completion_read=FALSE;
         LeaveCriticalSection(&caller->service->lock);
         if(error || !native_parent)return error;
     }
-    if(bytes) {
+    if(operation==OPENNT_BASE_NATIVE_REQUEST_LAUNCH) {
         run16_native_launch_packet packet;WCHAR *strings[4];
+        if(!bytes || !payload)return ERROR_INVALID_PARAMETER;
         error=run16_native_launch_unpack(payload,bytes,&packet,strings);
         if(error)return error;
         if(packet.capabilities[0] || packet.capabilities[1] ||
             wcslen(strings[0])>=ARRAYSIZE(image))return ERROR_INVALID_DATA;
         lstrcpynW(image,*strings[0] ? strings[0] : strings[1],ARRAYSIZE(image));
-    } else if(payload)return ERROR_INVALID_PARAMETER;
+    }
     /* This preflight is deliberately the same reservation-exact selection as
      * queueing below.  Do not report a GUI launcher ready and then attempt to
      * deliver through the legacy CUI-only command-worker path. */
-    error=bytes ? OpenNtBaseServiceRetainNativeCommandWorker(caller,pid,generation,&worker) :
+    error=operation==OPENNT_BASE_NATIVE_REQUEST_LAUNCH ?
+        OpenNtBaseServiceRetainNativeCommandWorker(caller,pid,generation,&worker) :
         OpenNtBaseServiceRetainCommandWorker(caller,pid,generation,&worker);
     if(error)return error;
     startup=CreateEventW(NULL,TRUE,FALSE,NULL);
@@ -575,7 +590,7 @@ DWORD OpenNtBaseServiceSubmitNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD 
     EnterCriticalSection(&caller->service->lock);
     if(caller->native_start_event)error=ERROR_BUSY;
     else {
-        error=service_queue_native_command(caller,pid,generation,frontend,image,bytes,payload);
+        error=service_queue_native_command(caller,pid,generation,operation,frontend,image,bytes,payload);
         if(!error) {
             caller->native_start_event=startup;
             caller->native_start_worker=caller->channel_worker_generation;
@@ -596,7 +611,7 @@ DWORD OpenNtBaseServiceSubmitNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD 
     {
         OPENNT_BASE_WIN32RECORD *record;
         error=caller->native_start_reported ? caller->native_start_status : ERROR_INVALID_STATE;
-        if(!error && bytes) {
+        if(!error && operation==OPENNT_BASE_NATIVE_REQUEST_LAUNCH) {
             record=service_native_result_record(caller,caller->native_start_request,NULL);
             if(!record || record->startup_delivered || !caller->native_start_target || !caller->native_start_receipt)
                 error=ERROR_INVALID_DATA;
@@ -611,7 +626,7 @@ DWORD OpenNtBaseServiceSubmitNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD 
     LeaveCriticalSection(&caller->service->lock);
 done:
     EnterCriticalSection(&caller->service->lock);
-    if(!error && !bytes)caller->dos_completion_read=FALSE;
+    if(!error && operation==OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME)caller->dos_completion_read=FALSE;
     if(startup && caller->native_start_event==startup) {
         caller->native_start_event=NULL;caller->native_start_worker=0;
         caller->native_start_request=0;caller->native_start_reported=FALSE;

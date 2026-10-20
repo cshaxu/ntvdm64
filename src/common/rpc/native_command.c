@@ -64,16 +64,18 @@ DWORD common_rpc_complete_native_command(const common_rpc_connection *state,
     return error;
 }
 
-DWORD common_rpc_submit_native_request(const common_rpc_connection *state,HANDLE frontend,
+DWORD common_rpc_submit_native_request(const common_rpc_connection *state,DWORD operation,HANDLE frontend,
     DWORD bytes,BYTE *payload,HANDLE *target,HANDLE *receipt,DWORD *request)
 {
     DWORD error=ERROR_INVALID_STATE;
-    if(!target || !receipt || !request)return ERROR_INVALID_PARAMETER;
+    if(!target || !receipt || !request ||
+        (operation!=OPENNT_BASE_NATIVE_REQUEST_LAUNCH &&
+         operation!=OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME))return ERROR_INVALID_PARAMETER;
     *target=*receipt=NULL;*request=0;
     if(!connected(state))return error;
     RpcTryExcept {
         error=Client_SubmitNativeRequest(state->binding,state->connection,state->process,
-            state->generation,frontend,bytes,payload,target,receipt,request);
+            state->generation,operation,frontend,bytes,payload,target,receipt,request);
     }
     RpcExcept(1){error=RpcExceptionCode();}
     RpcEndExcept
