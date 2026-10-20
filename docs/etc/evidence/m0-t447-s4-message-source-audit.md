@@ -8448,3 +8448,30 @@ outside the conversion unwinder.  This establishes that the exact-task idle
 registration correction introduces no new pairing imbalance; it does **not**
 prove every historical M3 wait/reentry path, which remains an explicit S4
 obligation.
+
+### M3 BlockWOWIdle source closure inventory
+
+The next M3 source pass finds no parallel project-owned idle-state engine to
+remove. The sole authority remains the original SoftPC
+`nt_eoi.c::BlockWOWIdle`: it sets or clears the single `VDM_WOWBLOCKED` bit
+under the original ICA lock, and `WOWIdle` signals the original WOWEXEC event
+when hardware work arrives. Replacing that bit with a counter, per-task state,
+or adapter scheduler would change the original interrupt contract and is
+rejected.
+
+The reached call families are `wkman.c` Yield, OldYield, DirectedYield,
+launch/wait and WowWaitForMsgAndEvent; `wkgthunk.c` DirectedYield;
+`wmdisp32.c` window callbacks; `wudlg.c` dialog callbacks; and `wumsg.c`
+message filtering, native default-procedure calls, dispatch, Get/Peek,
+SendMessage and WaitMessage. Their existing TRUE / native-or-guest operation /
+FALSE order remains original. The taskman copy does not write the bit; it only
+selects/waits tasks and observes the original event.
+
+The remaining finite audit is therefore not a new idle implementation: trace
+every selected call through `goto`, error and exceptional exits, establish
+whether a modern adapter scope can escape between a matching pair, and repair
+only an actual unmatched original boundary. Existing callback scopes must not
+add a second toggle: `W32Win16WndProcEx` already pairs FALSE, `CallBack16`,
+TRUE, while `CallBack16` owns its frame unwind. This inventory proves the
+ownership boundary and rejects a speculative repair; it does not claim M3 or
+S4 completion.
