@@ -87,8 +87,9 @@ generic notification framework or hidden helper window. Classify original
 scheduling, presentation pacing and test-harness safety separately, not as
 automatic deletion candidates. Verify lost-wakeup, concurrent teardown, idle CPU
 and actual source/test delta before coherent build/test/publication/commit/push.
-S3 remains the only active packet; this insertion does not expand its timeout
-cleanup into a repository-wide polling rewrite.
+S4 follows the recorded S3 closure; this separate polling audit does not expand
+into a repository-wide rewrite of original waits. CURRENT owns admission and
+delivery status; this proposal does not independently activate a packet.
 
 Design the entire finite transition table before coding: authenticated owner,
 request identity, task result versus final completion, command/ack phases,

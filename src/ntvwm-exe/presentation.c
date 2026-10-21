@@ -582,10 +582,11 @@ static DWORD return_unused_input(ntvwm_presentation *client)
 static DWORD final_capture(ntvwm_presentation *client,const console_text_style *font)
 {
     DWORD error,attempt;
+    /* Bounded optimistic acquisition, not a settling deadline. A rejected
+     * geometry is never published; do not sleep while holding the I/O owner. */
     for(attempt=0;attempt<8;++attempt) {
         error=ntvwm_presentation_capture(client,font);
         if(error!=ERROR_RETRY)break;
-        if(attempt<7)Sleep(10);
     }
     return error;
 }

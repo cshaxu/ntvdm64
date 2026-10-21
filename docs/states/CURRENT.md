@@ -2,271 +2,62 @@
 
 ## Current Work
 
-**Active: M0 T448 S4**
+**Active: M0 T448 S5**
 
-S3 concludes with P20's published protocol64 package and the test-only P21
-closure evidence. The fixed L04-L10 reconciliation and r58b/r59 restoration
-fault tests are in the [S3 ledger](../etc/evidence/m0-t448-s3-close-implementation.md#s3-fixed-scope-closure-reconciliation).
-No production binary changes accompany P21. Under the owner's standing approval
-for sequential execution, S4 is admitted for the already planned owned-code
-polling audit. S5 integrated acceptance and owner T acceptance remain required.
+S4 P2 completes the fixed thirteen-category polling audit against protocol64.
+Q05 Console destruction uses notifications; Q07 mouse backpressure uses the
+existing readiness event; Q06 removes the artificial10ms sleep while preserving
+bounded geometry-consistent acquisition and errors. The [S4 closure ledger](../etc/evidence/m0-t448-s4-polling-audit.md)
+maps implementation, retained policies, tests, failures and limitations.
 
-S3 P21 is pushed as 6ad0a4ba6. The [S4 inventory](../etc/evidence/m0-t448-s4-polling-audit.md)
-records thirteen bounded categories, separating actual polling from event-woken
-predicate scans, approved policies and source-shaped timers. Principal removal
-candidates are NTVWM Console-destruction polling/final-capture retry and DOS
-input backpressure. Producer-boundary and wrapper coverage review precedes any
-runtime change. Q05 now has a local event-driven close candidate: real tests
-exposed Console PID/TID identities differing from notification sources and an
-old premature-return shortcut. Failure/repeat and grouped regression now pass.
-S4 P1 publishes Q05/Q07; Q06 and final disposition reconciliation remain open.
+r16 full13/incremental, service/owner/RPC and runtime gates pass. Its stale
+presentation-fixture final expectations failed and remain recorded; corrected
+r17 passes521 presentation checks,142 native-command checks and four actual
+close-wait CPU observations. All13 candidate images are published/hash-verified
+at assets/release and O:/winnt/system32; publication-r16 retains P1 recovery.
+P2's delivering commit records its identity. S5 implementation begins only
+after P2 commit/push/clean-state verification succeeds.
 
-Q05/Q07 r15 passes full thirteen-image build, second incremental (1,420
-unchanged intermediates), focused fixtures and runtime regression including
-CAF-three before-Enter echo. After fixing CURRENT's32KiB limit, post checks
-pass (142 native-command,509 presentation). P1 publishes all13 images with
-matching hashes at both destinations; publication-r15 retains P20 recovery.
-Q07 reuses existing readiness; no new event/thread or mirror change. Commit
-identity is the delivering revision. S4 is not closed; the ledger retains
-failed runs and Q06's pending bounded-acquisition simplification.
+Standing owner approval admits S5 integrated acceptance and final ownership/
+evidence reconciliation, not new WOW32 functionality or additional lifecycle
+architecture. T closure still awaits owner acceptance. SOL startup is
+owner-confirmed with layout TODO; WRITE evidence remains startup-frontier only,
+not editing/exit acceptance. Neither limitation is silently upgraded.
 
-Owner confirms SOL launches normally in manual testing; its remaining window
-content layout issue is retained in TODO. For this lifecycle delivery, record
-SOL startup as owner-verified, not full-gameplay/visual acceptance. This
-supersedes the earlier temporary full-gameplay bypass wording below; other
-lifecycle gates and historical failed geometry evidence remain unchanged.
-
-P20 publishes all thirteen protocol-64 images at 2026-10-21 18:50:51 UTC to
-assets/release and O:/winnt/system32 with matching SHA-256 and a coherent P19
-backup. The three superseded capability-query RPCs and two redundant provider
-getters are removed; tests use the actual Connect capability provider. Owned
-production/test code is reduced by 106 lines; no new mirror or guest delta.
-
-r57 passes full/incremental build (1,415 unchanged intermediates), service and
-nine lifecycle-owner cases, real RPC/migration/wire checks, DOS17, WRITE's prior
-frontier, WINMINE gameplay, CAF-three and supplemental/governance checks. SOL
-uses the owner's startup confirmation above. Original-exit caller/thread source
-review is recorded separately from runtime proof. P20 is committed and pushed
-as 2b754a31e5b20a5e6dc0e6584bb599a0b3ee89b7.
-S3 closure audit identified missing individual restoration-API fault evidence
-under L06. Test-only coverage was added to the existing actual-source
-frontend fixture; product P20 remains unchanged. r58 stopped before its join
-case because the private Console inherited a font too large for the required
-80-column canvas; r58b reuses the existing small-font setup without weakening
-geometry assertions. r58b passes library, stop/join, management-return and all
-five restoration-fault combinations. r59 full frame/restore regressions,
-governance and unchanged thirteen-image hashes pass. P21 records S3 closure
-and S4 admission; it does not claim T closure.
-
-P19 is the recoverable preceding baseline, commit
-9fdd3867325a997de18b5517dd805b62e349f0f8. Earlier progress paragraphs below retain
-historical attempts and open findings at those times, not the installed state.
-
-The linked S3 ledger retains P18/P19 delivery, r48-r51 failures and corrections,
-and Connect's atomic capability-export review. Those historical checkpoints
-are superseded by P20/P21 above, not additional active work.
-
-After P18, the startup-close correction removes NTSRV's obsolete requirement
-for native backend registration before accepting an authenticated worker exit.
-The existing event retains the instruction for a later receiver. Production-
-linked r44 verifies this and five existing competing-close cases; startup
-consumer cleanup and original pre-cleanup integration are not yet complete.
-These later source changes are uncommitted/unpublished; installed P18 remains
-the verified baseline.
-
-The matching NTVWM consumer now acquires close instructions before initializing
-its carrier/backend, and retains partial membership on initialization failure
-until service disposition. Eight close-priority cases include injected backend
-registration failure and pass locally (r45c). This does not close the earlier
-Connect-to-instruction-acquisition failure window or NTVDM original cleanup
-ownership; those remain in the same finite S3 initialization/exit group.
-
-DIV-356 now stages original pre-cleanup permission at the three SoftPC and
-five WOW process-exit sites. Cleanup-thread ownership and recursive entry use
-the existing worker lifecycle gate; no final-ExitProcess interception or new
-IPC is introduced. The WOW export/exit-code extension passes the thirteen-image
-build, repeated incremental check and five focused permission cases (r47).
-After restoring terminat.c's original LF formatting, controller 37356 starts
-the full r48 regression, including new natural-exit/native-startup cases.
-Original-chain runtime and initialization/join coverage remain open; P18 is
-still the installed package.
-
-r48 passes the full build, service/owner/RPC checks, WRITE frontier, DOS17 and
-WINMINE, but SOL stops before gameplay because the current logical desktop is
-427x320 and its requested 585x384 client is clamped to 431x281. P18 reproduces
-the identical geometry failure in r49. Owner explicitly permits temporarily
-bypassing SOL on 2026-10-21; record it as unverified, never passed. Other gates
-remain required. Controller 24508 continues CAF/supplementary checks; this
-waiver does not resolve the remaining S3 initialization work.
-
-P16 (0e1f3f501) is published, pushed and verified: protocol 61 generalizes the
-existing exit-intent RPC to authenticated participants and keeps faulted NTCON
-awaiting service disposition. ConsoleRestored is an acknowledgement, not exit
-authorization. Full/incremental build, owner fault tests, real-RPC frontend EOF,
-runtime regression, supplementary checks and source review pass. All thirteen
-images were published/hash-verified at both destinations at 16:00:37 UTC.
-Original-host exit permission and initialization coverage remain open, so S3
-is not closed. Repair must use existing RPC/service arbitration, not reconnect,
-replay, additional transport or an arbitrary timeout. Worker/frontend I/O
-failure must be reported symmetrically; actual service death permits local
-cleanup/exit and never revival through a replacement NTSRV.
-
-Post-P16 L08 source audit rejects final-ExitProcess-only authorization: original
-cleanup can precede it. A local session escape-ownership correction now prevents
-a bound foreign thread from using/disarming the main thread's saved C stack;
-its focused real-thread test passes. Controller 36080 completed the complete
-r40 build/regression group successfully. P17 publishes this correction as a
-coherent protocol-61 package at 16:31:41 UTC, with hashes verified at both
-destinations. The delivering commit carries its repository identity; this
-progress delivery does not complete service permission or initialization.
-
-The worktree now stages protocol 62's explicit Console scope on the existing
-participant-exit RPC. NTSRV derives the frontend from the authenticated worker
-association and reuses the management-close transaction; no caller-selected
-frontend or new transport is introduced. Original pre-cleanup entry integration
-remains open as a group. The fTSRExit Console-group path now stages DIV-355:
-request the service before cleanup and retain original cleanup in its close
-handler. Real scoped-RPC/EOF/normal-command tests pass; controller 3732 completed
-the full r43 candidate regression at 17:11:07 UTC. An independent TSR probe
-then reached the original resident COMMAND prompt and returned 1067 after
-exit. Source tracing distinguishes that unfinished task receipt from the
-worker's zero process exit; r43d verifies 1067, delivered exit input, returned
-Console and no remaining Run16/NTVDM/NTCON before fixture cleanup. The earlier
-provisional zero-exit assertion remains recorded as failed, not retroactively
-passed. The same probe against P17 terminated the observer before a final report.
-This candidate is now the P18 installed set; its delivering commit records
-the reviewed source and complete release manifest together.
-
-Owner correction 2026-10-21: withdraw r32 from publication and audit/remove
-blanket control/lifecycle timeouts. Three five-second policies are retained:
-Run16's wait for newly started NTSRV, NTSRV empty-service grace and Console-close
-handler grace. Original internal waits are not blanket-rewritten; other
-necessary waits need individual justification/approval. This supersedes earlier
-blanket deadline exit criteria below; see the proposal and architecture.
-The r32 test processes finished but their timeout-policy results do not authorize
-publication. The r39 candidate passes full/incremental build, owner fault tests,
-five RPC wait/loss/bootstrap cases, five migration cases and wire/park tests.
-Full-package WRITE/DOS17/WINMINE/SOL/CAF-three and negative-result regression
-also pass, followed by native-completion/presentation checks and governance.
-The complete candidate is now published as the P16 progress package. See the
-[S3 ledger](../etc/evidence/m0-t448-s3-close-implementation.md).
-
-T447 closed by [explicit scope transfer](../history/m0-t447-transfer-closure.md)
-at pushed commit 4d4ef4d47, with a clean worktree verified before this admission.
-Owner authorizes T448: NTSRV lifecycle authority unification. All remaining
-WOW32 work is now the first [queued successor](QUEUE.md). Neither admission nor
-the prior checkpoint claims that the CAF defect is universally fixed.
+P1 is57bd2b0a6. S3 P20 is2b754a31e with test-only closure P21 at6ad0a4ba6;
+the [S3 ledger](../etc/evidence/m0-t448-s3-close-implementation.md) preserves
+historical failures, removed deadline experiments and L04-L10 reconciliation.
+Only the three approved five-second policies remain: bootstrap, empty-service
+retirement and original Console-close grace. Normal execution has no deadline;
+service loss permits local cleanup, never reconnection or task replay.
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T448 S4; Ordinary Mode, single person implementer/reviewer; no subagents. |
+| Identifier Mode | M0 T448 S5; Ordinary Mode, single person implementer/reviewer; no subagents. |
 | Candidate Proposal | [NTSRV lifecycle authority](../proposals/proposal-ntsrv-lifecycle-authority-001.md). |
-| Admission And Approval | Owner explicitly adds autonomous-code polling cleanup and approves continuous sequential execution. S3 fixed-scope closure is recorded in the linked ledger; P21 delivery must finish before S4 implementation. |
-| Objective | Inventory project-owned polling by purpose/call chain; replace avoidable polling with existing events/completions and document evidence for necessary sampling. Reduce duplicate mechanisms without altering source-owned semantics. |
+| Admission And Approval | Standing owner approval for continuous sequential execution; S4 P2 closure and coherent publication precede S5, with commit/push/clean verification required before implementation. |
+| Objective | Reconcile the entire approved lifecycle transition matrix to actual implementation and evidence; complete missing integrated acceptance without expanding product scope; prepare T acceptance. |
 | Non-goals | No guest modification/rebuild, original internal wait rewrite, new transport, timers/retries/reconnect framework, GUI target management or unrelated WOW32 feature work; no T closure without acceptance. |
-| Reference Baseline | S3 P20 2b754a31e, protocol64, complete published thirteen-image package; r57 all runtime gates and r58b/r59 test-only closure checks pass. |
-| Files And ABI Surface | Project-owned Run16/NTSRV/common/worker-base/NTCON/NTVDM/NTVWM paths and their tests; first inventory existing Sleep/timed waits/periodic scans. No ABI change planned; any necessary change requires coherent verification/publication. |
+| Reference Baseline | S4 P2 protocol64, r16 full/incremental/runtime plus r17 focused recovery; publication-r16 full13 hashes; delivering commit supplies source identity. |
+| Files And ABI Surface | Existing lifecycle owners and tracked tests/evidence; no planned ABI or production change. Any proved contract defect remains in scope and requires affected full delivery gates. |
 | Applicable Rules | docs/README reading set; execution, architecture, coding, document and source-policy authorities; original-owner recovery and exception registration. |
-| Verification | Call-chain inventory/classification, deterministic wakeup/stop/loss/idle checks for changed loops, full/incremental and every-P runtime/publication gates for production changes, code-delta and mirror audit, governance. |
-| Expected Markers | Finite inventory with remove/retain decisions; no lost wakeups or new busy loops; only approved timed policies; retained sampling justified by actual observation boundary; measured code delta. |
+| Verification | Map admission, submission failure, startup-only/wait, nested return, management close, service loss and cleanup to source and exact tests. Reuse hash-matched evidence; run missing integrated cases serially, then governance and full package/hash review. |
+| Expected Markers | One NTSRV lifecycle authority; RPC control/direct I/O only; no replay/reconnect, stale exit or lost handoff; before-Enter echo; explicit role and GUI observation boundaries. |
 | Asset Needs | Existing source and read-only original references; retained T447 fault evidence and rollback package; no new guest assets. |
-| Reporting Requirements | Report each polling owner, trigger, replacement or retention reason and tests; separate product/test/document line deltas, performance evidence and unverified boundaries. |
+| Reporting Requirements | Requirement-to-source/test closure matrix, source/test/document deltas, published hashes, inherited limitations and owner acceptance request; no unsupported whole-WOW usability claims. |
 | Stop Conditions | New observable semantic retreat, missing original-source authority or material scope expansion requires owner decision. |
-| Exit Criteria | Every inventoried owned polling loop has a reviewed disposition; admitted removals implemented and tested; no lifecycle regression; full package delivery for product changes, clean committed/pushed state and bounded S5 handoff. |
-| Original Owner Request | Append an S to inspect and clean polling in autonomous implementations; favor event-driven happy paths, central NTSRV lifecycle ownership and simpler code. |
-| Similar-Issue Sweep | Startup/connection polling, command/result/close waits, producer-consumer wakeups, process watchers, presentation refresh and necessary Console sampling; distinguish test containment from product policy. |
+| Exit Criteria | Fixed lifecycle matrix reconciled with adequate evidence and no unresolved in-scope foundational defect; coherent delivered package, reviewed commit/push and clean checkout; T awaits explicit owner acceptance. |
+| Original Owner Request | Finish the approved NTSRV-centered lifecycle cleanup through build, test, publication, commit/push and self-review, then present T acceptance. |
+| Similar-Issue Sweep | Root/inner launchers; DOS/WOW/native CUI/GUI; natural/management/Console/service-loss exits; startup failure, partial initialization, nested handoff and concurrent close. |
 
 ## Planned S sequence
 
-S3 P9 bounds seven inherited-Console/backend/I/O control calls using existing
-async RPC, including the server-side attachment wait (not task execution).
-Protocol 57 was completely published at 10:24:32 UTC on 2026-10-21 after all
-gates, including twenty-seven actual deadline scenarios and CAF-three return.
-No guest or mirror changes. UNKNOWN_IF diagnosis, remaining launch/result
-control calls, partial initialization and original-host exit permission stay open;
-see the S3 implementation ledger. This is not S3 closure or owner acceptance.
-
-P9 source/test net +109; combined with P8 the two deliveries net -65 lines,
-with no new transport. Evidence retains the failed new role assertion and its
-correction to the unchanged service contract; no authentication was relaxed.
-
-P10 records a complete protocol-57 source inventory: 68 methods, comprising
-34 async, 25 live finite synchronous controls, eight obsolete client surfaces,
-and one intentional long-lived receive. The linked ledger fixes their groups,
-provider-preservation and test-migration requirements. This is audit evidence,
-not new runtime completion; published binaries remain P9/protocol 57.
-
-After pushed P10 f658ad721, the nine launch/result/context calls use existing
-async RPC (candidate protocol 58). r18 full/incremental and service39 pass;
-r18/r18b prove 36 actual deadline scenarios and complete runtime regression.
-r19b adds an actual error reply retaining exit 37/completed and single-consume
-proof. P11 protocol 58 was published and hash-verified at both destinations
-at 11:18:49 UTC on 2026-10-21 after review. Remaining fixed groups stay open.
-
-P12 follows pushed P11 877e22543. Migration exposed concurrent startup failure
-183 and incorrect cross-width carrier-type validation. NTSRV now makes
-selection/reservation atomic with bounded service-side waiting and validates
-each target against its own admitted request type. Review removed an unused
-connection type copy. Final-source r22 full/incremental, service39, both native
-migration cases, deadline/wire/runtime/failure gates and presentation509 pass.
-All thirteen images were published and hash-verified at both destinations at
-12:11:53 UTC on 2026-10-21. No guest, mirror or wire-signature changes. Eight
-obsolete API removals and the fixed remaining groups are still open; this is
-progress delivery, not S3 closure. The linked ledger retains failed attempts.
-
-P12 is pushed at 8fd14dc63. Subsequent tests-only migration replaces the old
-launcher-as-frontend fixture with actual service-created NTCON and passes real
-RPC capability/role/descendant-rights/managed-close/stale-identity assertions
-(r23). Service-admitted test VDM now proves original command/re-entry, repeated
-local wait-handle identity, exit 7, actual frontend rights and duplicate-delivery
-rejection (r24c/r25). Reservation lifecycle and cancellation provider tests
-pass in service39 (r26). Eight obsolete remote surfaces and old test-role
-scaffolding are now removed in the protocol59 candidate; internal service
-providers remain. r28 runtime passes but publication stops on a trailing blank
-line; after formatting repair, r29 repeats full/incremental and the complete
-regression successfully. P13/protocol59 is published and hash-verified at both
-destinations at 13:06:55 UTC on 2026-10-21. Implementation/tests/tools net -635
-lines; no guest or mirror change. This is a progress delivery, not S3 closure;
-exact attempts and remaining fixed groups are in the S3 ledger.
-
-After pushed P13 d8051c3ab, P14/protocol60 converts the remaining
-sixteen finite methods to existing async RPC and aligns native observation's
-deadline to ten seconds. All thirteen components and unchanged second-build
-intermediates pass r30; r30b passes 53 actual deadline scenarios, service39,
-four migrated RPC cases, wire/runtime and presentation/resource gates. All
-thirteen images were published and hash-verified at both destinations at
-13:37:53 UTC on 2026-10-21. No guest/mirror change or S3 closure is claimed;
-UNKNOWN_IF diagnosis, partial initialization and original-host exit permission
-remain open in the linked ledger.
-
-After pushed P14 e3fc09f2c, isolated x86/x64 probes prove that the original
-standard RPC management query can use an async client on the same endpoint:
-interface data matches the public API, delayed replies cancel at ten seconds,
-and denial preserves its error. This is feasibility evidence only; production
-UNKNOWN_IF integration and its old/current/draining classification tests remain
-open. No new binary publication or S3 closure is claimed by this investigation.
-
-The subsequent candidate replaces the diagnostic with the same standard RPC
-operation's async client and the existing Connect deadline. r31 full-component
-and second incremental builds pass; production-linked x86/x64 queries each pass
-27 checks, including ten-second cancellation and stable repeated-call handle
-counts. Serial same-package and post regressions pass on r31. Final permanent
-x86/x64 fixtures pass 33 checks each, including actual unregistration, remaining
-deadline and zero allocations; candidate Run16 rejects retained protocol59
-NTSRV with 1306. P15's thirteen images were published and hash-verified at both
-destinations at 14:18:56 UTC on 2026-10-21. No S3 closure is claimed;
-the ledger retains default-worker bootstrap, initialization and exit-permission
-gaps and the first failed old-interface harness attempt.
-
-After pushed P15 b0b5cbb12, the default-worker bootstrap candidate separates
-the ten-second connection budget from post-connect timeout latching. The
-existing worker report-recovery contract is preserved; new actual paused-service
-case55 checks the default connection entry. r32 full/incremental builds pass
-at 14:26:19 UTC; actual paused-service case55 passes. Serial controller 21988
-is still running, with post-review controller 28868 waiting for its result.
-Published images remain P15 until all candidate gates and deployment succeed.
+S1-S3 implementation and historical P9-P21 attempts are recorded in the
+[S3 ledger](../etc/evidence/m0-t448-s3-close-implementation.md). Historical
+ten-second deadline experiments there are superseded by the approved three
+five-second policies; they are not current instructions or open S3 work.
 
 1. S1: whole-system ownership audit and complete transition design.
 2. S2: complete normal admission/result/handoff chain, including frontend policy and lifecycle-only WOW binding.
@@ -437,7 +228,20 @@ S4 is the separately approved polling cleanup; S5 retains integrated acceptance.
 SOL is owner-confirmed startup with layout TODO; WRITE retains its explicitly
 limited frontier. This is S closure, not T acceptance.
 
+## S4 Closure Record
+
+The [S4 ledger](../etc/evidence/m0-t448-s4-polling-audit.md)
+reconciles all13 categories, P1/P2 implementation, r16 runtime and corrected
+r17 capture/CPU evidence. P2's complete protocol64 package is published at both
+destinations with P1 recovery. No guest or mirror delta. S5 inherits final
+whole-T acceptance, not an unresolved S4 implementation item. Closure delivery
+requires the P2 commit/push/clean verification recorded by its controller.
+
 ## Temporary evidence
+
+S5 owns build/t448-s5 for final reconciliation/acceptance:8GiB ceiling,
+four-hour per-run and ten-minute no-progress investigation budgets. S4 sealed
+candidate, recovery and test evidence remain retained for S5 identity comparison.
 
 S4 owns build/t448-s4 for audit/test evidence: 8 GiB ceiling, four-hour per-run
 budget and ten-minute no-progress investigation threshold. Reuse only stable

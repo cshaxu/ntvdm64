@@ -7,6 +7,13 @@ static FILE *observation;
 static HWND observed_window;
 static HWINEVENTHOOK filtered_hook;
 static BOOL live_after_close;
+static ULONGLONG closing_thread_cpu(void)
+{
+    FILETIME created,exited,kernel,user;
+    if(!GetThreadTimes(GetCurrentThread(),&created,&exited,&kernel,&user))return ~0ULL;
+    return (((ULONGLONG)kernel.dwHighDateTime<<32)|kernel.dwLowDateTime)+
+        (((ULONGLONG)user.dwHighDateTime<<32)|user.dwLowDateTime);
+}
 static void CALLBACK observe_event(HWINEVENTHOOK hook,DWORD event,HWND window,
     LONG object,LONG child,DWORD thread,DWORD time)
 {
@@ -24,7 +31,7 @@ static DWORD observed_close(void)
 {
     const WCHAR *path=_wgetenv(L"NTVWM_CLOSE_OBSERVATION");
     HANDLE owner,thread_handle;DWORD pid=0,tid,error;
-    HWINEVENTHOOK all_hook;MSG message;ULONGLONG end;
+    HWINEVENTHOOK all_hook;MSG message;ULONGLONG end,cpu,start,elapsed,used;
     if(!path || !*path)return ntvwm_console_close();
     if(_wfopen_s(&observation,path,L"a") || !observation)return ERROR_OPEN_FAILED;
     observed_window=GetConsoleWindow();tid=GetWindowThreadProcessId(observed_window,&pid);
@@ -37,7 +44,18 @@ static DWORD observed_close(void)
         observed_window,pid,tid,GetCurrentProcessId(),GetCurrentThreadId(),
         owner!=NULL,thread_handle!=NULL,filtered_hook!=NULL,all_hook!=NULL);
     fflush(observation);
+    cpu=closing_thread_cpu();start=GetTickCount64();
     error=ntvwm_console_close();
+    elapsed=GetTickCount64()-start;used=closing_thread_cpu();
+    if(cpu==~0ULL || used==~0ULL || used<cpu)error=ERROR_INVALID_DATA;
+    else {
+        used=(used-cpu)/10000;
+        fprintf(observation,"close-wait wall-ms=%llu cpu-ms=%llu delayed-client=%d\n",
+            elapsed,used,close_seen!=NULL);
+        /* A real client deliberately holds CTRL_CLOSE below. The owner must
+         * wait for actual destruction, without burning a core while waiting. */
+        if(!error && close_seen && (elapsed<250 || used>elapsed/2))error=ERROR_INVALID_DATA;
+    }
     live_after_close=IsWindow(observed_window);
     fprintf(observation,"closed error=%lu window=%d process=%lu thread=%lu\n",error,
         live_after_close,WaitForSingleObject(owner,0),WaitForSingleObject(thread_handle,0));
@@ -59,7 +77,10 @@ static DWORD observed_close(void)
 }
 static BOOL WINAPI control(DWORD event)
 {
-    if(event==CTRL_CLOSE_EVENT)SetEvent(close_seen);
+    if(event==CTRL_CLOSE_EVENT) {
+        SetEvent(close_seen);
+        Sleep(300); /* Test stimulus only: delay actual carrier destruction. */
+    }
     return FALSE;
 }
 int wmain(int argc,WCHAR **argv)

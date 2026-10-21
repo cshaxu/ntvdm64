@@ -7,6 +7,19 @@
 #include <string.h>
 static FILE *log_file;
 static unsigned checks,failures;
+/* Only the acquisition edge is substituted in the fixture-specific object.
+ * Normal cases still acquire the real Console and use the real pipe peer. */
+static unsigned capture_attempts,capture_retries;
+static DWORD capture_error;
+DWORD fixture_capture_begin(ntvwm_capture *capture)
+{
+    ++capture_attempts;
+    if(capture_retries) {
+        --capture_retries;ZeroMemory(capture,sizeof(*capture));return ERROR_RETRY;
+    }
+    if(capture_error) {ZeroMemory(capture,sizeof(*capture));return capture_error;}
+    return ntvwm_capture_begin(capture);
+}
 #define CHECK(x) do { ++checks; if(!(x)){++failures;fprintf(log_file,"FAIL %d %s\n",__LINE__,#x);} } while(0)
 typedef struct peer_state {
     HANDLE pipe;
@@ -507,6 +520,24 @@ static void run_case(unsigned mode)
                     CHECK(WriteConsoleOutputCharacterW(buffer,L"Z",1,origin,&written) && written==1);
                     CHECK(!ntvwm_presentation_capture(endpoint,style));
                 }
+                {
+                    unsigned calls=state.calls,publications=state.publication_begins;
+                    CHECK(state.video.published_serial==7 && state.video.pixels[sizeof(console_text_style)]=='Z');
+                    capture_attempts=0;capture_retries=8;
+                    CHECK(ntvwm_presentation_flush(endpoint,style)==ERROR_RETRY);
+                    CHECK(capture_attempts==8 && !capture_retries);
+                    CHECK(state.calls==calls && state.publication_begins==publications);
+                    capture_attempts=0;capture_error=ERROR_ACCESS_DENIED;
+                    CHECK(ntvwm_presentation_flush(endpoint,style)==ERROR_ACCESS_DENIED);
+                    CHECK(capture_attempts==1 && state.calls==calls);
+                    capture_error=0;capture_attempts=0;capture_retries=7;
+                    CHECK(WriteConsoleOutputCharacterW(buffer,L"R",1,origin,&written) && written==1);
+                    CHECK(!ntvwm_presentation_flush(endpoint,style));
+                    CHECK(capture_attempts==8 && !capture_retries);
+                    CHECK(state.publication_begins==publications+1);
+                    CHECK(state.publication_ends==state.publication_begins);
+                    CHECK(state.video.pixels[sizeof(console_text_style)]=='R');
+                }
                 CHECK(SetConsoleActiveScreenBuffer(original));
             }
             if(buffer!=INVALID_HANDLE_VALUE)CloseHandle(buffer);
@@ -541,8 +572,8 @@ done:
         if(mode==6)CHECK(state.screen.width<=80 && state.screen.height<=25 &&
             state.screen.right<state.screen.width && state.screen.bottom<state.screen.height);
         if(mode==6)CHECK(state.titles==1);
-        CHECK(state.video.published_serial==(mode==6 ? 7u : 1u) && state.video.description.kind==CONSOLE_VIDEO_TEXT_FRAME);
-        CHECK(state.video.pixels && state.video.pixels[sizeof(console_text_style)]==(mode==6 ? 'Z' : 'A'));
+        CHECK(state.video.published_serial==(mode==6 ? 8u : 1u) && state.video.description.kind==CONSOLE_VIDEO_TEXT_FRAME);
+        CHECK(state.video.pixels && state.video.pixels[sizeof(console_text_style)]==(mode==6 ? 'R' : 'A'));
         if(mode==6 && state.video.pixels) {
             const console_text_style *style=(const console_text_style *)state.video.pixels;
             CHECK(style->cursor_column==3 && style->cursor_row==2 && style->cursor_visible);

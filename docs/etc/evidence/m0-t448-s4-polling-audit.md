@@ -315,3 +315,106 @@ build selection +6. This progress delivery increases owned code to replace
 polling and prove failures; it does not falsely claim a net reduction. Original
 mirror diff and immutable guest delta are both zero relative to P21. Q06 and
 final retained-category reconciliation are the remaining S4 work.
+
+P1 is pushed as57bd2b0a68dd01300bcb32578572a787315d67d1; the commit controller
+verified origin/main and a clean checkout before the following Q06 edits.
+Q06 now removes only the inter-acquisition sleep, keeping the existing eight
+attempts, geometry rejection and error propagation. The existing presentation
+fixture substitutes capture-begin only in a fixture-specific object compiled
+from the same production source. It injects eight unstable acquisitions (no
+publication), a non-retry access error (one attempt), and seven instabilities
+followed by real Console capture and complete pipe publication. Production
+objects contain no injection switch. These new assertions are not yet passing
+evidence; r16 will build and exercise the candidate before any new publication.
+
+## Final source dispositions (runtime closure pending)
+
+Q01 is retained, not left provisional. `run16/main.c::connect_broker` probes
+only RPC_S_SERVER_UNAVAILABLE, starts at most one service, and stays within
+the approved absolute5s bootstrap budget. NTSRV registers/listens on ncalrpc;
+only successful authenticated Connect establishes readiness. No pre-connection
+readiness capability exists on this path. A child-process wait signals death,
+not RPC readiness; adding a separate startup signal would expand the current
+mechanism rather than reuse one. Keep the at-most50ms absent-endpoint sampling;
+never replay an admitted command or reconnect a dead admitted service.
+
+Disposition summary: Q01 bootstrap sampling retained; Q02 empty-service and
+Q03 original close grace retained; Q04 active-output sampling retained; Q05
+destroy notification delivered in P1; Q06 finite acquisition without timed
+sleep implemented pending r16; Q07 capacity wake delivered in P1; Q08 normal
+CCPU event wait retained; Q09 guest-readable clock publication retained; Q10
+dirty-only frame pacing retained; Q11 monitor display sampling retained;
+Q12 behavioral control timers retained; Q13 event-driven predicate scans and
+unused imported sleep wrappers retained. There is no undecided implementation
+category. This does not claim all runtime/idle CPU evidence is complete.
+
+Final owned-tree Sleep/SleepEx scan covers common, Run16, NTSRV, worker-base,
+NTCON, NTVWM and NTVDM adapters. After Q06 it leaves Run16 bootstrap and the
+uninitialized CCPU yield described above; the imported NTCON base-sync wrappers
+have no consumers. Timed-condition/wait owners remain classified separately.
+In worker-base, task observation, publication, input watch and joins wait
+INFINITE; zero-time checks after wake select close priority, not a timed poll.
+The page-domain clock publishes time even without window/input activity and
+joins its publisher before unmapping; it cannot be replaced by input wakeups.
+No broad rewrite of original timers or private NT4 scheduling is authorized.
+
+### Reproducible acceptance map
+
+| Scope | Tracked entrypoint and assertions | Boundary |
+| --- | --- | --- |
+| Q05 real close | `tests/observation/ntvwm_close_test.c`, no arguments: live-client CTRL_CLOSE delivery, exact window gone before return, child exit, empty carrier and repeated close rejection. | Real hidden Console; host scheduling is not exhaustively enumerated. |
+| Q05 failure ordering | `tests/app/ntvwm_close_events_test.c`, no arguments:176 checks of subscription/detach/post/wait failures, unrelated notifications, WM_QUIT and TLS cleanup. | Actual source with substituted host API edges; complements rather than replaces real close. |
+| Q07 capacity | `tests/component-integration/softpc_relative_mouse_bridge_test.c`, no arguments: full readiness reset, partial movement keeps slot occupied, real slot release/cancel signals, handoff preserves borrowed handle. | Real queue/bridge/event, mocked ICA/IRQ; full guest saturation is not directly injected. |
+| Q07 integration | `tests/app/console_client_test.c` plus existing `tests/observation/verify-console-close-contract.ps1`: borrowed readiness identity and close callback's deliberate0x49 result. DOS17 and CAF-three exercise the unchanged original input path. | Integrated ordinary input/exit, not every possible concurrent producer interleaving. |
+| Q06 capture | `tests/observation/ntvwm_presentation_test.c`, report path: repeated instability emits no publication, non-retry failure stops immediately, eventual real-buffer capture completes publication. | New fixture-specific acquisition injection plus real Console/named-pipe peer; r16 result pending. |
+| Lifecycle non-regression | `tests/observation/verify-console-caf-self-delete.ps1`, cmd/command/ntmon defaults: actual Delete/Y and both echo-before-Enter assertions. Existing service/RPC/owner tests retain stop/loss/error precedence. | Uses isolated owned processes; cleanup of a failing fixture is never counted as normal exit. |
+| Build/publication | `tests/build/Test-FullComponentBuild.ps1`:13 selected images and unchanged second-build intermediates; package manifest checked at both publication destinations. | Per-candidate hashes, not a claim that an old run covers later source. |
+
+The preceding r15 individual records and post-r15 recovery establish P1's
+delivered gates. r16 is a separate candidate for Q06; its in-progress output
+cannot close that row. Closing-thread CPU observation is still outstanding.
+
+## S4 P2 closure
+
+r16/controller12976 finishes its serial runtime gates successfully, including
+all13 components/second incremental, service40/owner cases, RPC, migration,
+wire, DOS17, WRITE frontier, WINMINE and CAF-three. SOL remains owner startup
+evidence. The final presentation aggregate fails at19:56:25 UTC: all new capture
+assertions passed, but two old terminal assertions still expected7 frames/Z
+after the new recovery case deliberately publishes frame8/R. Preserve
+accept-r16 and post-r16 as failed, with all-r16/runtime-r16 passing separately.
+
+The fixture now checks7/Z before the new cases and8/R at final completion;
+no assertion is removed or loosened. r17/controller12368 reuses unchanged r16
+production inputs, rebuilds the corrected fixture and passes521 presentation
+checks,142 native-command checks, governance and mirror/guest review at
+19:58:29 UTC. The native worker source manifest matches its current production
+files; only tests/documentation changed after the r16 product build.
+
+Four actual live-client Console closures include a test-only300ms CTRL_CLOSE
+handler delay. `NTVWM_CLOSE_OBSERVATION` records closing-thread GetThreadTimes
+before/after the real close. Wall times313/328/328/312ms and CPU62/0/0/0ms meet
+the retained lower wall bound250ms and CPU below half elapsed assertion.
+Empty closes also pass. This measures the closing thread including notification
+dispatch, not whole-product idle CPU or a benchmark improvement. Evidence:
+close-cpu-r17.txt, four close-cpu-r17-N.out reports and post-r17-result.json.
+
+At2026-10-21 19:59:51 UTC controller6188 publishes all13 r16 images to both
+destinations, checks their manifest hashes and retains publication-r16-backup
+of P1. The unchanged protocol64 needs no guest or mirror modification. S4 P2
+production delta is+2/-1 (one removed Sleep plus explanatory comments), tests
++56/-4, build selection+3/-1. Source/test growth is explicit, not claimed as a
+code reduction; CURRENT's duplicated historical status is substantially reduced.
+
+Closure review reconciles every Q01-Q13 row above. Q05/Q07 are delivered in P1;
+Q06 now has positive/negative real-buffer/pipe proof; retained sampling/timers
+have named owners and reasons. No new transport, task retry, reconnect policy,
+guest rebuild or hidden helper is introduced. S4's admitted implementation
+scope is complete; P2 commit/push/clean verification is the final delivery gate.
+S5 owns whole-T integration/ownership reconciliation and owner acceptance, with
+the same SOL/WRITE limits, not transferred unfinished S4 repairs.
+
+Final commit controller5532/r18 stopped before staging because the governance
+closure-link recognizer requires a direct .md link rather than an anchored .md
+link. CURRENT now uses the direct ledger link. No product/test input changed;
+r18 remains failed and the subsequent commit controller records fresh review.
