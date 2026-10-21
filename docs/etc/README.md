@@ -10,6 +10,8 @@ distinguishes candidate changes, actual runs, failures and remaining acceptance.
 the finite management/loss group and its actual verification state.
 [S4 polling audit](evidence/m0-t448-s4-polling-audit.md) records the owned-loop
 inventory, retention/removal decisions and eventual verification evidence.
+[S5 integrated acceptance](evidence/m0-t448-s5-integrated-acceptance.md) maps
+final lifecycle evidence and explicitly pending acceptance checks.
 
 [T447 pre-closure snapshot](evidence/m0-t447-pre-closure-status.md) preserves
 the final active packet before owner-directed transfer closure. The

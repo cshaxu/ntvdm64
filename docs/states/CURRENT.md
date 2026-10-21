@@ -24,6 +24,13 @@ architecture. T closure still awaits owner acceptance. SOL startup is
 owner-confirmed with layout TODO; WRITE evidence remains startup-frontier only,
 not editing/exit acceptance. Neither limitation is silently upgraded.
 
+S5's [integrated acceptance ledger](../etc/evidence/m0-t448-s5-integrated-acceptance.md)
+records eight fresh conhost handoff passes against the unchanged full13 S4
+package: natural cmd/command return with frontend survival, external close and
+actual internal NTMON self-delete for cmd/command/ntmon, all with before-Enter
+echo assertions. Whole-matrix reconciliation remains active; this is not T
+closure or an assertion that every host/concurrency permutation is covered.
+
 P1 is57bd2b0a6. S3 P20 is2b754a31e with test-only closure P21 at6ad0a4ba6;
 the [S3 ledger](../etc/evidence/m0-t448-s3-close-implementation.md) preserves
 historical failures, removed deadline experiments and L04-L10 reconciliation.
