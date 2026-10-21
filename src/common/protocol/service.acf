@@ -7,6 +7,15 @@ interface vdm_service
     [async] WaitFrontendConsoleRestored();
     [async] Connect();
     [async] BrokerProcess();
+    [async] CloseManagementNode();
+    [async] FrontendCloseQuiesced();
+    [async] FrontendConsoleRestored();
+    [async] RetireWorkerlessFrontend();
+    [async] FrontendJoinCandidate();
+    [async] FrontendJoinDecision();
+    [async] FrontendLeaseReady();
+    [async] FrontendRequest();
+    [async] FrontendIoDisconnected();
     /* These calls retain the same context identity. Service locks protect
      * mutable fields; RPC still excludes Close/rundown until calls finish.
      * A blocking receive must not exclude its worker's completion/sampling. */

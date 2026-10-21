@@ -31,7 +31,7 @@ static DWORD WINAPI frontend_pump(void *context)
         wait=WaitForMultipleObjects(wait_count,waits,FALSE,INFINITE);
         if (wait==WAIT_OBJECT_0) break;
         if(broker_index!=MAXDWORD && wait==WAIT_OBJECT_0+broker_index)
-            return ERROR_BROKEN_PIPE;
+            return ERROR_INVALID_HANDLE;
         if (wait<WAIT_OBJECT_0 || wait>=WAIT_OBJECT_0+wait_count) {
             return GetLastError();
         }

@@ -1,4 +1,4 @@
-/* Read-only x86 instruction-pointer snapshot for an already-running worker.
+/* Read-only native-architecture snapshot for an already-running process.
  * Intended for bounded diagnosis only: each thread is suspended solely while
  * GetThreadContext copies its control registers, then resumed immediately. */
 #define WIN32_LEAN_AND_MEAN
@@ -47,19 +47,26 @@ int main(int argc, char **argv)
                 STACKFRAME64 frame = { 0 };
                 CONTEXT walk = context;
                 DWORD index;
-                printf("pid=%lu tid=%lu eip=%08lX ebp=%08lX esp=%08lX\n",
+#ifdef _WIN64
+                DWORD machine=IMAGE_FILE_MACHINE_AMD64;
+                DWORD64 ip=context.Rip,bp=context.Rbp,sp=context.Rsp;
+#else
+                DWORD machine=IMAGE_FILE_MACHINE_I386;
+                DWORD64 ip=context.Eip,bp=context.Ebp,sp=context.Esp;
+#endif
+                printf("pid=%lu tid=%lu ip=%llX bp=%llX sp=%llX\n",
                        (unsigned long)pid, (unsigned long)entry.th32ThreadID,
-                       (unsigned long)context.Eip, (unsigned long)context.Ebp,
-                       (unsigned long)context.Esp);
+                       (unsigned long long)ip, (unsigned long long)bp,
+                       (unsigned long long)sp);
                 if (process) {
-                    frame.AddrPC.Offset = walk.Eip;
+                    frame.AddrPC.Offset = ip;
                     frame.AddrPC.Mode = AddrModeFlat;
-                    frame.AddrStack.Offset = walk.Esp;
+                    frame.AddrStack.Offset = sp;
                     frame.AddrStack.Mode = AddrModeFlat;
-                    frame.AddrFrame.Offset = walk.Ebp;
+                    frame.AddrFrame.Offset = bp;
                     frame.AddrFrame.Mode = AddrModeFlat;
                     for (index = 0u; index < 16u && StackWalk64(
-                             IMAGE_FILE_MACHINE_I386, process, thread, &frame,
+                             machine, process, thread, &frame,
                              &walk, NULL, SymFunctionTableAccess64,
                              SymGetModuleBase64, NULL); ++index) {
                         printf("tid=%lu frame=%lu pc=%08llX\n",

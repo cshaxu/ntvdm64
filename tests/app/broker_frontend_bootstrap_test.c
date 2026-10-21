@@ -143,7 +143,7 @@ static DWORD parent_pid(DWORD pid)
     }while(Process32NextW(snapshot,&entry));
     CloseHandle(snapshot);return parent;
 }
-static DWORD native_worker_failure(HANDLE worker,HANDLE capability,BOOL completed)
+static DWORD native_worker_result(HANDLE worker,HANDLE capability,BOOL completed,BOOL kill_worker)
 {
     WCHAR image[MAX_PATH],command[MAX_PATH+16],directory[MAX_PATH];
     LPWCH environment=NULL;run16_native_start start={0};
@@ -173,17 +173,20 @@ static DWORD native_worker_failure(HANDLE worker,HANDLE capability,BOOL complete
     if(!target || !receipt || !request || (!completed && WaitForSingleObject(target,0)!=WAIT_TIMEOUT))
         {error=ERROR_INVALID_DATA;goto done;}
     if(completed && WaitForSingleObject(receipt,10000)!=WAIT_OBJECT_0){error=ERROR_TIMEOUT;goto done;}
-    control=OpenProcess(PROCESS_TERMINATE|SYNCHRONIZE,FALSE,GetProcessId(worker));
-    if(!control || !TerminateProcess(control,123)){error=GetLastError();goto done;}
+    if(kill_worker) {
+        control=OpenProcess(PROCESS_TERMINATE|SYNCHRONIZE,FALSE,GetProcessId(worker));
+        if(!control || !TerminateProcess(control,123)){error=GetLastError();goto done;}
+    }
     if(WaitForSingleObject(receipt,10000)!=WAIT_OBJECT_0){error=ERROR_TIMEOUT;goto done;}
-    if(WaitForSingleObject(control,5000)!=WAIT_OBJECT_0){error=ERROR_TIMEOUT;goto done;}
+    if(control && WaitForSingleObject(control,5000)!=WAIT_OBJECT_0){error=ERROR_TIMEOUT;goto done;}
     /* The receipt is now broker-owned, not inferred from the killed process.
      * A wrong request cannot consume the latched result. */
     error=run16_native_request_finish(request+1,&result,&target_completed);
     if(error!=ERROR_NOT_FOUND || target_completed || result){error=ERROR_INVALID_DATA;goto done;}
     error=run16_native_request_finish(request,&result,&target_completed);
-    printf("native finish after worker rundown: status=%lu result=%lu target-completed=%lu\n",
+    printf("native finish: status=%lu result=%lu target-completed=%lu\n",
         error,result,target_completed);
+    if(!kill_worker && error)goto done;
     /* A broker-latched completion remains consumable after worker death.
      * A recorded final-I/O error cannot erase the actual result/return grant;
      * there is no final worker pipe reply to read after rundown. */
@@ -192,7 +195,7 @@ static DWORD native_worker_failure(HANDLE worker,HANDLE capability,BOOL complete
         {error=ERROR_INVALID_DATA;goto done;}
     error=run16_native_request_finish(request,&result,&target_completed);
     if(error!=ERROR_NOT_FOUND || target_completed || result){error=ERROR_INVALID_DATA;goto done;}
-    puts(completed ?
+    puts(!kill_worker ? "PASS real native command completed; worker authenticated before service-loss injection" : completed ?
         "PASS actual target result 37 retained across worker rundown; wrong receipt denied; result consumed once" :
         "PASS broker signals native worker failure 1067; wrong receipt denied; result consumed once; no dead-channel read");
     error=0;
@@ -273,11 +276,9 @@ int wmain(int argc,WCHAR **argv)
     if(error!=ERROR_ACCESS_DENIED || owner){puts("FAIL forged root capability accepted");goto done;}
     error=OpenNtBaseClientFrontendConsoleRestored();
     if(error!=ERROR_ACCESS_DENIED){puts("FAIL launcher forged restoration");goto done;}
-    error=OpenNtBaseClientReturnFrontendConsole();
-    if(error){printf("FAIL return request=%lu\n",error);goto done;}
-    if(WaitForSingleObject(restored,5000)!=WAIT_OBJECT_0){puts("FAIL missing broker restoration acknowledgement");goto done;}
     error=OpenNtBaseClientWaitFrontendConsoleRestored();
     if(error){printf("FAIL broker return barrier=%lu\n",error);goto done;}
+    if(WaitForSingleObject(restored,0)!=WAIT_OBJECT_0){puts("FAIL missing broker restoration acknowledgement");goto done;}
     /* Reacquire the same root: its shared restoration event resets. The old
      * invocation's confirmation above must not depend on root process exit. */
     if(WaitForSingleObject(root,0)!=WAIT_TIMEOUT){puts("FAIL return killed resident frontend");goto done;}
@@ -297,7 +298,7 @@ int wmain(int argc,WCHAR **argv)
     puts("PASS authenticated service-created native worker; launcher does not create worker");
     if(argc==2 && (!wcscmp(argv[1],L"--native-worker-failure") ||
         !wcscmp(argv[1],L"--native-completed-worker-loss"))) {
-        error=native_worker_failure(worker,capability,!wcscmp(argv[1],L"--native-completed-worker-loss"));
+        error=native_worker_result(worker,capability,!wcscmp(argv[1],L"--native-completed-worker-loss"),TRUE);
         if(error){printf("FAIL native worker failure receipt=%lu\n",error);goto done;}
         failed=0;goto done;
     }
@@ -318,12 +319,17 @@ int wmain(int argc,WCHAR **argv)
         puts("PASS live worker cancels retirement; last worker loss starts a new broker-owned ten-second grace");
         failed=0;goto done;
     }
+    /* StartNativeWorker returns after Resume, not after worker Connect.
+     * Complete real work before testing loss of an established connection;
+     * killing the server immediately tests a different startup failure. */
+    error=native_worker_result(worker,capability,TRUE,FALSE);
+    if(error){printf("FAIL worker ready command=%lu\n",error);goto done;}
     TerminateProcess(broker.hProcess,123);
     if(WaitForSingleObject(broker.hProcess,5000)!=WAIT_OBJECT_0 ||
         WaitForSingleObject(root,5000)!=WAIT_OBJECT_0 || !GetExitCodeProcess(root,&result) ||
-        result!=RPC_S_SERVER_UNAVAILABLE){printf("FAIL broker-loss result=%lu\n",result);goto done;}
+        result!=ERROR_INVALID_HANDLE){printf("FAIL broker-loss result=%lu\n",result);goto done;}
     if(WaitForSingleObject(worker,5000)!=WAIT_OBJECT_0 || !GetExitCodeProcess(worker,&result) ||
-        result!=RPC_S_SERVER_UNAVAILABLE){printf("FAIL native worker broker-loss result=%lu\n",result);goto done;}
+        result!=ERROR_INVALID_HANDLE){printf("FAIL native worker broker-loss result=%lu\n",result);goto done;}
     puts("PASS broker parent; authenticated root; invalid Console/capability/ack denied; RPC return barrier; broker loss");
     failed=0;
 done:

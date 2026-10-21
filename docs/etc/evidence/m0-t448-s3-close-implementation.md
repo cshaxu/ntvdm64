@@ -559,3 +559,233 @@ diagnostics still need real bounds; a valid worker's concurrent GetNext/exit
 request and late cancellation cleanup need evidence; NTVDM and NTVWM startup/
 orderly-exit ownership still need completion. No guest change or mirror diff
 was introduced. S4 still owns final integrated acceptance.
+
+### Next close-control group (r9, not published)
+
+The five remaining synchronous calls on the close/handoff control chain now
+reuse the same async RPC owner: CloseManagementNode, ReturnFrontendConsole,
+FrontendCloseQuiesced, FrontendConsoleRestored and RetireFrontend. The existing
+service authentication and phase owners are unchanged; no task/worker may
+grant its own exit, and cancellation does not replay a management command.
+Protocol 51 fences the changed generated signatures from the published P2.
+Bounded BaseClient callers latch timeout before another finalization/cleanup
+RPC. Connectionless management retains its own binding and does not poison a
+separate BaseClient context after one cancelled call.
+
+Five additional suspended-service cases exercise these real generated calls,
+the unchanged ten-second bound and local-disconnect/no-replay behavior. They
+prove transport/timeout behavior, not frontend role authorization: actual CAF
+and raw-wire negatives remain required. The old common-management mock now
+tests issuance exceptions only for asynchronous CloseManagementNode; real
+reply/authentication/management effects belong to the existing wire and CAF
+tests, not fabricated async completion in a mock. No test success is claimed
+until the new build and runs complete. Guest and mirror inputs remain untouched.
+
+r9 owned full build PID 2144, serial deadline runner 19328 and dependent wire
+runner 22984 started at 06:36:35 UTC. Do not change their mutable inputs while
+they run. Source review additionally confirms the production NTCON still uses
+ConnectCurrent (unbounded policy), and its pump calls synchronous
+RetireWorkerlessFrontend before acknowledging quiescence. Therefore a bounded
+fixture alone cannot certify real frontend retirement on a stalled service.
+The same group must include that query and NTCON's bounded connection/failure
+latch, then exercise the actual child: pause NTCON, request return through
+NTSRV, pause NTSRV, resume NTCON, require local retirement and Console input
+restoration without resuming the service first. This is a concrete remaining
+consumer gap, not a new feature or a claim that r9 is deliverable.
+
+r9 full/incremental product builds passed at 06:40:04 UTC. The fixture compile
+then failed because its newly used real management declarations require the
+generated service header include directory; no runtime tests ran. The actual
+fixture build rule now declares that include input. NTCON now uses the existing
+bounded connection entry, and RetireWorkerlessFrontend shares the same async
+query/failure latch. The added mode 9 tests the actual NTCON process's timed
+retirement and exact original input mode with NTSRV still paused. Ordinary
+frontend mechanism mocks are updated to issuance-failure coverage (including
+the previously stale WaitFrontendConsoleRestored signature); actual wire and
+CAF tests retain positive behavior coverage. No old test failure is called a
+product pass. The r9a run will include both mechanism unit targets explicitly.
+
+r9a full/incremental builds passed at 06:47:38 UTC. The deadline runner failed
+its actual-NTCON mode 9 at 06:50:06 UTC; the wire runner correctly refused its
+prerequisite. Earlier individual cases produced their pass markers; the child
+failure had insufficient diagnostics and is not assigned a speculative cause.
+
+The production-call audit also proves ReturnFrontendConsole and RetireFrontend
+have no production consumers. Keeping them merely to drive older tests would
+preserve duplicate lifecycle controls. Remove their RPC/server/client methods
+and declarations instead of converting them: normal return tests use the actual
+WaitFrontendConsoleRestored barrier; forced retirement tests use authenticated
+management close; busy-root tests use the production retire-decision query.
+All remaining assertions concerning admission denial, live task retention and
+return acknowledgement remain. Mode 9 now identifies the real NTCON through
+the management snapshot and submits the same management close as NTMON before
+stalling the service. It prints child wait/exit/input-mode evidence. This also
+tests a real management request rather than a test-only return signal.
+There is no guest or original mirror change. The protocol-51 candidate remains
+unpublished; package-r8j / commit ab3d9829f stays the installed baseline.
+
+### Actual frontend pump stall and bounded RPC sweep
+
+r9b full/incremental and 38 service cases passed; actual NTCON mode 9 still
+failed with wait=258, exit=259 (STILL_ACTIVE) after 12000 ms. Its input mode
+already equalled the original 0x1f7, which does not prove retirement. The
+background stack diagnostic PID 12876 completed at 07:20:18 UTC on October 21.
+The immutable package-r9b NTCON PID 7612 / TID 29540 stack passed through
+RPCRT4 into image offsets 0x9a64, 0x14629 and 0x199b. The matching build map
+identifies FrontendRequest, OpenNtBaseClientFrontendRequest and frontend_pump.
+Evidence: build/t448-s3/stack-frontend-r9/case/frontend-stacks.txt and the
+matching stable-tree frontend/ntcon.exe.map. The diagnostic test failed its
+retirement assertion; successful stack capture is not a product pass.
+
+This proves a synchronous request remained after the bounded retirement
+query: a preceding reply cannot prevent the pump entering a later call as
+the server stalls. The finite repair covers the pump's five remaining RPCs:
+FrontendJoinCandidate, FrontendJoinDecision, FrontendLeaseReady,
+FrontendRequest and FrontendIoDisconnected. All reuse common async RPC
+completion/cancel/drain, preserve authenticated service decisions and latch
+the frontend timeout before later cleanup requests. No new communication
+transport, polling protocol or peer-control fence is introduced. Confirmed
+service-process death in the pump returns the already approved original
+ERROR_INVALID_HANDLE rather than the transport ERROR_BROKEN_PIPE. The existing
+bootstrap loss assertions likewise use 6, not the superseded 1722.
+
+The existing native stack probe now supports both x86 and x64 context layouts;
+it temporarily suspends only the explicitly selected test process's threads
+and resumes them after capture. The diagnostic harness uses the existing
+bootstrap trace and remains test-only. Ordinary successful replies continue
+to require actual wire/CAF proof; mechanism mocks cover issuance failure and
+resource cleanup, not synthetic async completion.
+
+r9c full-component/incremental build PID 21684 and dependent serial service /
+deadline runner PID 26056 started at 07:26:07 UTC. Logs are build-r9c and
+deadlines-r9c stdout/stderr under build/t448-s3. Actual NTCON mode 9 must pass
+with NTSRV still suspended, without the stack probe, before this group can
+proceed to wire/runtime/publication. Protocol 51 remains a local candidate.
+
+r9c full/incremental completed at 07:29:22 UTC; service38 passed in 5469 ms.
+All eight actual deadline cases passed at 07:31:29 UTC, including NTCON mode 9:
+wait=0, exit=1460, original/restored input=0x1f7, elapsed=10015 ms, with NTSRV
+still suspended. This is real frontend retirement, not only a wrapper result.
+
+The wire runner then exposed a first-use RPC runtime handle-count difference
+in the newly built frontend mechanism fixture. Independent raw API diagnosis
+(x86 PID 34940, 07:33:26 UTC) invoked only RpcAsyncInitializeHandle and
+RpcRaiseException: first initialization added six handles; the next two
+initializations and all three raises added zero. The x64 raw check added five
+on first use and zero thereafter. Tests now initialize the RPC runtime before
+the per-call baseline; they do not warm a project call or permit a nonzero
+leak. Both frontend and worker mechanism suites passed exactly zero handle
+delta (135 and 238 checks) on r9d. Management mechanism and actual monitor /
+identity wire cases also completed before the next failure.
+
+r9d's actual bootstrap test failed at 07:34:25 UTC: NTCON returned the required
+6, but NTVWM returned 1722. Source identifies the remaining mismatch: CUI's
+GetNext error reaches main's return unchanged even when close_if_service_lost
+has recorded confirmed death in the shared client. Both NTVWM entrypoints now
+resolve their final result through OpenNtBaseClientFailure before disconnect
+destroys that client identity. This adds no transport or alternate exit owner;
+ordinary errors remain unchanged unless the existing authority confirms loss.
+The updated test is not relaxed back to 1722.
+
+r9e full/incremental PID 34992, dependent deadline PID 6468 and wire/bootstrap
+PID 35828 started 07:35:15 UTC with fresh logs/results. Earlier candidate gates
+are retained as failed attempts. Product publication remains P2/protocol50.
+
+r9e full/incremental and eight deadline cases passed (actual NTCON 10000 ms),
+but bootstrap again returned worker 1722. This disproves treating final-result
+normalization alone as the demonstrated cause of that fixture failure. A
+complete source trace shows broker_worker_start_admitted returns immediately
+after ResumeThread; it does not await the child's Connect. The old fixture
+killed NTSRV immediately afterward, conflating pre-authentication startup
+failure with loss of an established connection. Reuse the fixture's existing
+native result path to complete a real `cmd /d /c exit 37` first, require its
+successful result (no permitted I/O error in this non-kill case), then kill
+the owned service and require both consumers to exit with 6. No arbitrary
+settling delay or 1722 waiver is added. The final-result normalization remains
+a source-correct application of the existing loss owner, not proof of the old
+fixture's cause by itself.
+
+Reviewer also moved failure normalization before FrontendRequest's attachment
+cleanup and JoinCandidate's output reset: a concurrent confirmed service loss
+must not turn a successful reply into an error after output cleanup has already
+been skipped. r9f build PID 32576, dependent deadlines PID 21600 and wire PID
+37756 began 07:43:01 UTC. Source and test inputs are frozen for these runs.
+
+r9f full/incremental, service38 and all eight deadline cases passed. Bootstrap
+proved actual native completion (status 0, result 37, completed 1), then failed
+with worker 1726. Thus startup timing was a real fixture distinction but not
+the whole remaining runtime defect. The command receive can fail before the
+service process becomes signalled; main then performed local teardown and
+membership_close stopped the service watcher before final error normalization.
+No read of the current process signal at the final return can fix that
+ownership violation reliably.
+
+For a fully initialized/managed CUI worker, main now consumes already-issued
+Console/worker close first, otherwise routes a failed command receive into
+the existing request_fault_exit owner. It retains the watcher and control
+connection until a service instruction or confirmed service death, exactly
+as the existing input/presentation/completion fault paths do. Partial bootstrap
+and GUI launchers retain their distinct boundaries; no new timer, peer wait,
+event family or alternate control mechanism is introduced. Their remaining
+initialization/exit-permission gaps are not declared solved. r9g full build
+PID 18152, deadline PID 33096 and wire PID 27132 began at 07:51:01-02 UTC.
+
+### r9g reviewed candidate
+
+Full thirteen-image build and second incremental passed at 07:53:52 UTC.
+Service38 and all eight real deadline cases passed at 07:55:55 UTC. Actual
+NTCON retirement was 10016 ms, exit 1460, original/restored input 0x1f7,
+while NTSRV remained paused. Wire/bootstrap completed at 07:56:50 UTC:
+management mechanism 114 checks, frontend 135 and worker 238; both handle
+delta assertions are exactly zero. Real monitor/identity negatives pass.
+The established-worker case reports native result 37 then both consumers'
+disconnect code 6. Workerless grace and live-worker cancellation/last-worker
+loss pass with the existing real ten-second policy assertions.
+
+Reviewer checked all production diffs against the role/authority boundary:
+authenticated service methods retain their old policy and output owners;
+async cancellation drains before releasing call storage; failed frontend
+attachments are cleared after final error classification; management still
+does not depend on the requesting task surviving. There is no new transport
+or peer-control dependency. Production source delta is +122/-151, net -29;
+tests/evidence increase to retain actual stalled-server and established-worker
+proof. No original mirror or guest/media changes. S3 remains open for the
+explicit remaining call families and original-host exit-permission integration.
+
+Same-package runtime runner PID 18444 began at 07:53:19 UTC and waited for
+wire success before running. WRITE retains only the four-sample startup
+frontier; no editing/saving/normal-exit or intermittent-crash fix claim.
+Review PID 23908 passed documentation/link/diff and zero mirror/guest checks
+at 07:53:19 UTC; delivery records will receive a fresh final review.
+
+Runtime r9g passed at 07:59:42 UTC: DOS17, WINMINE/SOL gameplay, WRITE startup
+frontier and all three actual CAF self-delete/active-buffer echo-before-Enter
+cases. Additional runner PID 25772 started 08:00:05 UTC: the shared native
+result helper's original worker-failure and completed-worker-loss cases both
+pass; the native stack diagnostic also compiles as x86, complementing its
+actual x64 stack capture. Build r9g retains 1398 unchanged intermediate files
+on the second build. Publication still requires the fresh final governance
+result and coherent thirteen-image hash validation at both destinations.
+
+### S3 P3 delivery
+
+Final pre-publication review PID 38000 passed at 08:01:20 UTC. Publication
+PID 20524 completed at 08:01:41 UTC on 2026-10-21. All thirteen package-r9g
+images match build-r9g/result.json, assets/release and O:/winnt/system32.
+The release manifest records every SHA-256, including unchanged images.
+Recovery is build/t448-s3/publication-r9g-backup; exact publication evidence
+is publication-r9g.json. No installed project process or selected style/Hook
+DLL holder was found in the final preflight, so no owner process was killed.
+
+This P delivers bounded management/frontend RPCs, removal of the two unused
+retirement operations, actual frontend timeout cleanup, and the managed native
+command-loop fault convergence. Production source is +122/-151 (net -29).
+Tests are +183/-77 (net +106), build selection +1/-1. The extra test code is
+actual process-stall/retirement proof and dual-width diagnosis, not another
+communications implementation. Original mirrors and guest media remain
+unchanged. S3 is not closed: startup/registration and remaining finite control
+families, ordinary disconnect/diagnostics, partial-initialization cleanup and
+the registered original-host exit-permission integration remain explicitly
+uncompleted. S4 retains final integrated acceptance. The narrow actual CAF
+cases passed; they do not prove every host/interaction variant or repair the
+historical intermittent WOW/WRITE issues.

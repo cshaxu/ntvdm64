@@ -1,6 +1,8 @@
 /* Project-added worker/control RPC adaptation; not original VDM dispatch,
  * task completion, blocking/resume or resource lifetime decisions. */
 #include "worker_control.h"
+#include "async_call.h"
+#include "common/protocol/frontend_lifecycle.h"
 #include "common/protocol/frontend_protocol.h"
 
 DWORD common_rpc_worker_frontend_capability(const common_rpc_connection *state,HANDLE *capability)
@@ -127,15 +129,16 @@ DWORD common_rpc_worker_io_transition(const common_rpc_connection *state,DWORD a
 }
 DWORD common_rpc_frontend_io_disconnected(const common_rpc_connection *state)
 {
-    DWORD error=ERROR_INVALID_STATE;
+    RPC_ASYNC_STATE async;DWORD error=ERROR_INVALID_STATE;
     if(!state || !state->connection || !state->binding || !state->process)return error;
+    error=common_rpc_begin_async(&async);if(error)return error;
     RpcTryExcept {
-        error=Client_FrontendIoDisconnected(state->binding,state->connection,state->process,
+        Client_FrontendIoDisconnected(&async,state->binding,state->connection,state->process,
             state->generation);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    return error;
+    return common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
 }
 DWORD common_rpc_worker_io_release_event(const common_rpc_connection *state,HANDLE *release)
 {

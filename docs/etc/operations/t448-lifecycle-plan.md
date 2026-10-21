@@ -243,6 +243,17 @@ late completion. Direct worker/NTCON pipes remain I/O only. Results and the
 finite remaining inventory belong in the S3 implementation ledger; this is
 not a claim that every current call has been corrected.
 
+The current frontend retirement group removes unused ReturnFrontendConsole /
+RetireFrontend methods rather than preserving two alternate controllers.
+Its actual-pump sweep additionally bounds join candidate/decision, lease-ready,
+request retrieval and I/O-disconnected acknowledgements on the same RPC
+mechanism. Timeout latching prevents a cleanup RPC after the first terminal
+failure. This does not yet certify startup registration / state-event
+attachment / AttachFrontendRequest, ordinary Disconnect, remaining worker
+control calls or UNKNOWN_IF diagnostic querying; those finite call families
+remain in the S3 communication inventory. No retries or transport substitute
+are permitted to hide a stalled control call.
+
 S1 changes documentation only: zero runtime, mirror, guest or release changes.
 S2 aims for zero mirror changes, using existing project-owned adapters. The
 selected S3 orderly-exit budget is at most three original host files and seven

@@ -2,6 +2,7 @@
 #include "management.h"
 #include "common/protocol/version.h"
 #include "async_call.h"
+#include "common/protocol/frontend_lifecycle.h"
 
 static const unsigned char app_version[APP_VERSION_BYTES]=APP_VERSION;
 
@@ -70,14 +71,15 @@ DWORD common_rpc_task_snapshot(const common_rpc_management *state,
 
 DWORD common_rpc_close_management_node(const common_rpc_management *state,const DTASKMGR_KEY *key)
 {
-    DWORD error=ERROR_INVALID_STATE;
+    RPC_ASYNC_STATE async;DWORD error=ERROR_INVALID_STATE;
     if (!state || !state->binding || !state->process) return error;
     if(!key)return ERROR_INVALID_PARAMETER;
+    error=common_rpc_begin_async(&async);if(error)return error;
     RpcTryExcept {
-        error=Client_CloseManagementNode(state->binding,state->process,APP_PROTOCOL_VERSION,
+        Client_CloseManagementNode(&async,state->binding,state->process,APP_PROTOCOL_VERSION,
             (unsigned char *)app_version,(DTASKMGR_KEY *)key);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    return error;
+    return common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
 }

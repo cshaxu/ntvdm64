@@ -42,10 +42,12 @@ error_status_t Client_FrontendUsage(handle_t binding,VDM_CONNECTION connection,
 {
     peer(binding,connection,process,generation);*pending=3;*tasks=7;return result();
 }
-error_status_t Client_RetireWorkerlessFrontend(handle_t binding,VDM_CONNECTION connection,
+error_status_t Client_RetireWorkerlessFrontend(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,unsigned long generation,unsigned long *retired)
 {
-    peer(binding,connection,process,generation);*retired=1;return result();
+    peer(binding,connection,process,generation);CHECK(async!=NULL);*retired=1;
+    RpcRaiseException(mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED);
+    return ERROR_SUCCESS;
 }
 error_status_t Client_FrontendStateChanged(handle_t binding,VDM_CONNECTION connection,
     HANDLE process,unsigned long generation,HANDLE *event)
@@ -58,12 +60,13 @@ error_status_t Client_FrontendStartupResult(handle_t binding,VDM_CONNECTION conn
     peer(binding,connection,process,generation);
     CHECK(capability==expected.process && status==ERROR_WRITE_FAULT);return result();
 }
-#define NO_OUTPUT(name) error_status_t Client_##name(handle_t binding,VDM_CONNECTION connection, \
-    HANDLE process,unsigned long generation) {peer(binding,connection,process,generation);return result();}
-NO_OUTPUT(ReturnFrontendConsole)
+/* Completion and positive replies belong to actual RPC/CAF tests. These
+ * stubs exercise synchronous issuance exceptions and local event cleanup. */
+#define NO_OUTPUT(name) error_status_t Client_##name(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection, \
+    HANDLE process,unsigned long generation) {peer(binding,connection,process,generation);CHECK(async!=NULL); \
+    RpcRaiseException(mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED);return ERROR_SUCCESS;}
 NO_OUTPUT(FrontendConsoleRestored)
 NO_OUTPUT(WaitFrontendConsoleRestored)
-NO_OUTPUT(RetireFrontend)
 
 static void closed(unsigned count)
 {
@@ -74,7 +77,11 @@ int main(void)
 {
     DWORD before=0,after=0,create,pending,tasks,retired,error,want;
     HANDLE root,capability,retire,restored,event;unsigned initial;
+    RPC_ASYNC_STATE runtime;
     common_rpc_connection invalid={0};
+    /* Initialize RPC's process-wide resources before measuring per-call
+     * attachment and notification cleanup. No project call is warmed up. */
+    CHECK(RpcAsyncInitializeHandle(&runtime,sizeof(runtime))==RPC_S_OK);
     expected.binding=(RPC_BINDING_HANDLE)(ULONG_PTR)11;
     expected.connection=(VDM_CONNECTION)(ULONG_PTR)12;
     expected.process=CreateEventW(NULL,TRUE,FALSE,NULL);expected.generation=13;
@@ -91,11 +98,9 @@ int main(void)
     CHECK(common_rpc_frontend_usage(&invalid,&pending,&tasks)==ERROR_INVALID_STATE && pending==88 && tasks==99);
     CHECK(common_rpc_retire_workerless_frontend(NULL,&retired)==ERROR_INVALID_STATE && retired==77);
     CHECK(common_rpc_frontend_state_changed(NULL,&event)==ERROR_INVALID_STATE && !event);
-    CHECK(common_rpc_return_frontend_console(NULL)==ERROR_INVALID_STATE);
     CHECK(common_rpc_frontend_console_restored(NULL)==ERROR_INVALID_STATE);
     CHECK(common_rpc_frontend_startup_result(NULL,NULL,0)==ERROR_INVALID_STATE);
     CHECK(common_rpc_wait_frontend_console_restored(NULL)==ERROR_INVALID_STATE);
-    CHECK(common_rpc_retire_frontend(NULL)==ERROR_INVALID_STATE);
     CHECK(!calls);
     for(mode=0;mode<3;++mode) {
         initial=calls;want=mode==0 ? 0 : mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED;
@@ -111,16 +116,15 @@ int main(void)
         pending=88;tasks=99;retired=77;
         CHECK(common_rpc_frontend_usage(&expected,&pending,&tasks)==want);
         CHECK(want ? pending==88 && tasks==99 : pending==3 && tasks==7);
-        CHECK(common_rpc_retire_workerless_frontend(&expected,&retired)==want);
-        CHECK(retired==(want ? 77U : 1U));
+        if(want){CHECK(common_rpc_retire_workerless_frontend(&expected,&retired)==want);CHECK(retired==77);}
         CHECK(common_rpc_frontend_state_changed(&expected,&event)==want);
         if(want){CHECK(!event);closed(1);}else {CHECK(event!=NULL);CloseHandle(event);}
-        CHECK(common_rpc_return_frontend_console(&expected)==want);
-        CHECK(common_rpc_frontend_console_restored(&expected)==want);
+        if(want){
+            CHECK(common_rpc_frontend_console_restored(&expected)==want);
+            CHECK(common_rpc_wait_frontend_console_restored(&expected)==want);
+        }
         CHECK(common_rpc_frontend_startup_result(&expected,expected.process,ERROR_WRITE_FAULT)==want);
-        CHECK(common_rpc_wait_frontend_console_restored(&expected)==want);
-        CHECK(common_rpc_retire_frontend(&expected)==want);
-        CHECK(calls==initial+10);
+        CHECK(calls==initial+(want ? 8U : 5U));
     }
     mode=3;event=expected.process;
     CHECK(common_rpc_frontend_state_changed(&expected,&event)==ERROR_INVALID_HANDLE && !event);

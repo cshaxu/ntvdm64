@@ -744,29 +744,6 @@ done:
 }
 
 
-DWORD OpenNtBaseServiceReturnFrontendConsole(OPENNT_BASE_CONNECTION *caller,DWORD pid,DWORD generation)
-{
-    DWORD error=ERROR_ACCESS_DENIED;LIST_ENTRY *link;
-    if(!caller)return error;
-    EnterCriticalSection(&caller->service->lock);
-    if(!OpenNtBaseServicePeer(caller,pid,generation))goto done;
-    /* An independent DOS/native completion can retire its otherwise unused root
-     * before the launcher reaches this call. Its restoration acknowledgement
-     * belongs to the launcher lease and survives frontend rundown. */
-    if(caller->frontend_return_complete){error=ERROR_SUCCESS;goto done;}
-    for(link=caller->service->connections.Flink;link!=&caller->service->connections;link=link->Flink) {
-        OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-        if(root->process.SequenceNumber!=caller->retained_frontend_root)continue;
-        if(root->frontend_creator_generation!=generation || !root->frontend_retire)break;
-        if(SetEvent(root->frontend_retire)) {
-            caller->frontend_return_pending=TRUE;
-            error=ERROR_SUCCESS;
-        }else error=GetLastError();
-        break;
-    }
-done:
-    LeaveCriticalSection(&caller->service->lock);return error;
-}
 
 /* A restoration belongs to the admitted launcher lease, not to the lifetime
  * of a reusable root event. Preserve its acknowledgement if another launcher

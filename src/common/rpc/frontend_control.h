@@ -13,9 +13,7 @@ DWORD common_rpc_retire_workerless_frontend(const common_rpc_connection *state,D
 DWORD common_rpc_frontend_state_changed(const common_rpc_connection *state,HANDLE *state_changed);
 DWORD common_rpc_start_frontend(const common_rpc_connection *state,uint64_t window,BOOL borrowed,
     HANDLE *root,HANDLE *capability,HANDLE *restored);
-DWORD common_rpc_return_frontend_console(const common_rpc_connection *state);
 DWORD common_rpc_frontend_console_restored(const common_rpc_connection *state);
 DWORD common_rpc_frontend_startup_result(const common_rpc_connection *state,HANDLE capability,DWORD status);
 DWORD common_rpc_wait_frontend_console_restored(const common_rpc_connection *state);
-DWORD common_rpc_retire_frontend(const common_rpc_connection *state);
 #endif

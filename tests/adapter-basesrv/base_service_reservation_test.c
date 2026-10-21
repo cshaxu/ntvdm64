@@ -1296,7 +1296,8 @@ int main(int argc,char **argv)
                 DWORD pending=0,tasks=0;
                 CHECK(!OpenNtBaseServiceFrontendUsage(root,initial_process.dwProcessId,root_generation,&pending,&tasks));
                 CHECK(pending==1 && !tasks);
-                CHECK(OpenNtBaseServiceRetireFrontend(root,initial_process.dwProcessId,root_generation)==ERROR_BUSY);
+                {DWORD action=~0u;CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(root,
+                    initial_process.dwProcessId,root_generation,&action) && action==OPENNT_FRONTEND_RETIRE_NONE);}
                 CHECK(OpenNtBaseServiceCompleteWorkerChannel(launcher,GetCurrentProcessId(),launcherGeneration)==ERROR_ACCESS_DENIED);
                 CHECK(OpenNtBaseServiceCompleteWorkerChannel(worker,child.dwProcessId,workerGeneration+1)==ERROR_ACCESS_DENIED);
                 CHECK(OpenNtBaseServiceCompleteNativeRequest(worker,child.dwProcessId,workerGeneration,
@@ -1657,7 +1658,15 @@ int main(int argc,char **argv)
         CloseHandle(root);root=NULL;
         /* Retirement is an admission barrier even while the owner is alive.
          * A previously issued execution capability cannot bypass that barrier. */
-        CHECK(OpenNtBaseServiceRetireFrontend(launcher,GetCurrentProcessId(),launcherGeneration)==ERROR_SUCCESS);
+        {
+            OPENNT_BASE_WORKER_INFO *tree=NULL;uint32_t count=0,index;uint64_t epoch=0;
+            OPENNT_BASE_MANAGEMENT_KEY key={0};
+            CHECK(!OpenNtBaseServiceSnapshotCopy(service,&epoch,&tree,&count));
+            for(index=0;index<count;++index)
+                if(tree[index].key.category==MANAGEMENT_FRONTEND && tree[index].key.generation==launcherGeneration)key=tree[index].key;
+            HeapFree(GetProcessHeap(),0,tree);
+            CHECK(key.generation && !OpenNtBaseServiceCloseManagementNode(service,&key));
+        }
         CHECK(WaitForSingleObject(self,0)==WAIT_TIMEOUT);
         CHECK(OpenNtBaseServiceBindConsoleContext(later,child.dwProcessId,laterGeneration,
             execution_again)==ERROR_PIPE_NOT_CONNECTED);
@@ -1920,7 +1929,8 @@ int main(int argc,char **argv)
         CHECK(WaitForSingleObject(capability,0)==WAIT_OBJECT_0);
         CHECK(!OpenNtBaseServiceFrontendUsage(rootConnection,rootProcess.dwProcessId,rootGeneration,
             &usage_pending,&usage_tasks) && usage_pending && usage_tasks==1);
-        CHECK(OpenNtBaseServiceRetireFrontend(rootConnection,rootProcess.dwProcessId,rootGeneration)==ERROR_BUSY);
+        {DWORD action=~0u;CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(rootConnection,
+            rootProcess.dwProcessId,rootGeneration,&action) && action==OPENNT_FRONTEND_RETIRE_NONE);}
         if (strcmp(argv[1],"--frontend-delegated")) {
             FRONTEND_WAIT_TEST waiting={0};
             HANDLE waitingThread;
@@ -1975,7 +1985,8 @@ int main(int argc,char **argv)
             &delivered,&peer,&deliveredGeneration,&deliveredReady)==ERROR_SUCCESS);
         CHECK(!OpenNtBaseServiceFrontendUsage(rootConnection,rootProcess.dwProcessId,rootGeneration,
             &usage_pending,&usage_tasks) && !usage_pending && usage_tasks==1);
-        CHECK(OpenNtBaseServiceRetireFrontend(rootConnection,rootProcess.dwProcessId,rootGeneration)==ERROR_BUSY);
+        {DWORD action=~0u;CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(rootConnection,
+            rootProcess.dwProcessId,rootGeneration,&action) && action==OPENNT_FRONTEND_RETIRE_NONE);}
         {
             PCONSOLERECORD source;PDOSRECORD record;ULONG saved;
             for(source=DOSHead;source && source->SequenceNumber!=workerGeneration;source=source->Next){}

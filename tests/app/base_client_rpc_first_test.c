@@ -11,6 +11,9 @@
 #include "ntvwm-exe/next_command.h"
 #include "run16-exe/native_request_client.h"
 #include "common/protocol/console_io.h"
+#include "common/rpc/management.h"
+#include "common/protocol/management.h"
+#include <base_rpc_client_internal.h>
 #include <stddef.h>
 
 /* BaseCheckForVDM shares its original client translation unit with
@@ -717,24 +720,64 @@ static int frontend_deadline(unsigned mode)
     typedef LONG (NTAPI *PROCESS_CONTROL)(HANDLE);
     PROCESS_CONTROL suspend=(PROCESS_CONTROL)GetProcAddress(GetModuleHandleW(L"ntdll.dll"),"NtSuspendProcess");
     PROCESS_CONTROL resume=(PROCESS_CONTROL)GetProcAddress(GetModuleHandleW(L"ntdll.dll"),"NtResumeProcess");
-    HANDLE root=NULL,capability=NULL,restored=NULL,server=NULL,control=NULL;
-    DWORD error;ULONGLONG began,elapsed;int result=1;BOOL paused=FALSE;
+    HANDLE root=NULL,capability=NULL,restored=NULL,server=NULL,control=NULL,frontend_control=NULL;
+    DWORD error,input_mode=0;ULONGLONG began,elapsed;int result=1;BOOL paused=FALSE,frontend_paused=FALSE;
     /* Workers keep their shared connection after an individual report times
      * out. Launchers instead latch their bounded finalization failure. Match
      * those actual production connection entries, not one policy for both. */
     if(!suspend || !resume || (worker_exit ? OpenNtBaseClientConnectCurrent() :
         OpenNtBaseClientConnectCurrentTimeout(10000)))goto done;
     if(OpenNtBaseClientBrokerProcess(&server))goto done;
-    if(!worker_exit && !startup && OpenNtBaseClientStartFrontend((uint64_t)(UINT_PTR)GetConsoleWindow(),TRUE,
+    if(mode==9 && !GetConsoleMode(GetStdHandle(STD_INPUT_HANDLE),&input_mode))goto done;
+    if(!worker_exit && !startup && (mode<4 || mode==9) && OpenNtBaseClientStartFrontend((uint64_t)(UINT_PTR)GetConsoleWindow(),TRUE,
         &root,&capability,&restored))goto done;
     if(startup)OpenNtBaseClientDisconnectCurrent(); /* End setup, before injecting the fault. */
+    if(mode==9) {
+        DWORD exit_code=STILL_ACTIVE,after=0,wait,index,count=0;
+        DTASKMGR_WORKER *items=NULL;DTASKMGR_KEY key={0};
+        common_rpc_connection view=OpenNtBaseClientExecutionConnection(NULL);
+        common_rpc_management management={view.binding,view.process};
+        error=common_rpc_task_snapshot(&management,&count,&items);
+        if(error){printf("FAIL snapshot=%lu\n",error);goto done;}
+        for(index=0;index<count;++index)
+            if(items[index].key.category==MANAGEMENT_FRONTEND && items[index].process_id==GetProcessId(root))key=items[index].key;
+        if(items)MIDL_user_free(items);
+        if(!key.generation){puts("FAIL actual frontend absent from management snapshot");goto done;}
+        frontend_control=OpenProcess(0x0800,FALSE,GetProcessId(root));
+        if(!frontend_control || suspend(frontend_control)<0)goto done;
+        frontend_paused=TRUE;
+        error=common_rpc_close_management_node(&management,&key);
+        if(error){printf("FAIL management close=%lu\n",error);goto done;}
+        control=OpenProcess(0x0800,FALSE,GetProcessId(server));
+        if(!control || suspend(control)<0)goto done;
+        paused=TRUE;began=GetTickCount64();
+        if(resume(frontend_control)<0)goto done;
+        frontend_paused=FALSE;
+        wait=WaitForSingleObject(root,12000);
+        (void)GetExitCodeProcess(root,&exit_code);
+        (void)GetConsoleMode(GetStdHandle(STD_INPUT_HANDLE),&after);
+        printf("NTCON wait=%lu exit=%lu input=%lx expected=%lx elapsed=%llu\n",wait,exit_code,after,input_mode,
+            (unsigned long long)(GetTickCount64()-began));
+        if(wait!=WAIT_OBJECT_0 || exit_code!=ERROR_TIMEOUT || after!=input_mode ||
+            WaitForSingleObject(server,0)!=WAIT_TIMEOUT)goto done;
+        printf("PASS: actual NTCON timeout retirement and input restoration with service paused; elapsed=%llu\n",
+            (unsigned long long)(GetTickCount64()-began));
+        result=0;goto done;
+    }
     /* Suspend only the owned frontend (0) or service (1/2). Production
      * launchers never receive this fault-injection access. */
     control=OpenProcess(0x0800,FALSE,GetProcessId(mode ? server : root)); /* PROCESS_SUSPEND_RESUME */
     if(!control || suspend(control)<0)goto done;
     paused=TRUE;began=GetTickCount64();
-    error=startup ? OpenNtBaseClientConnectCurrentTimeout(10000) : worker_exit ? OpenNtBaseClientRequestWorkerExit() :
-        OpenNtBaseClientWaitFrontendConsoleRestored();elapsed=GetTickCount64()-began;
+    if(mode==8) {
+        common_rpc_connection view=OpenNtBaseClientExecutionConnection(NULL);
+        common_rpc_management management={view.binding,view.process};DTASKMGR_KEY key={0};
+        error=common_rpc_close_management_node(&management,&key);
+    } else if(mode==5)error=OpenNtBaseClientFrontendCloseQuiesced();
+    else if(mode==6)error=OpenNtBaseClientFrontendConsoleRestored();
+    else error=startup ? OpenNtBaseClientConnectCurrentTimeout(10000) : worker_exit ? OpenNtBaseClientRequestWorkerExit() :
+        OpenNtBaseClientWaitFrontendConsoleRestored();
+    elapsed=GetTickCount64()-began;
     printf("finalization status=%lu elapsed=%llu\n",error,(unsigned long long)elapsed);
     if(error!=ERROR_TIMEOUT || elapsed<9000 || elapsed>13000 ||
         WaitForSingleObject(server,0)!=WAIT_TIMEOUT)goto done;
@@ -742,7 +785,7 @@ static int frontend_deadline(unsigned mode)
         puts("PASS: startup deadline with stalled service and no cleanup RPC");
         result=0;goto done;
     }
-    if(worker_exit) {
+    if(worker_exit || mode==8) {
         BASE_API_MSG query={0};NTSTATUS status;
         if(resume(control)<0)goto done;
         paused=FALSE;
@@ -752,17 +795,21 @@ static int frontend_deadline(unsigned mode)
             CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepIsFirstVDM),
             sizeof(query.u.IsFirstVDM));
         if(status!=STATUS_SUCCESS || query.ReturnValue!=STATUS_SUCCESS)goto done;
-        puts("PASS: real worker exit RPC deadline without poisoning shared connection");
+        puts(mode==8 ? "PASS: management close RPC deadline without poisoning shared connection" :
+            "PASS: real worker exit RPC deadline without poisoning shared connection");
         result=0;goto done;
     }
     began=GetTickCount64();
     if(OpenNtBaseClientWaitFrontendConsoleRestored()!=ERROR_TIMEOUT)goto done;
     OpenNtBaseClientDisconnectCurrent();
     if(GetTickCount64()-began>=1000)goto done;
-    puts(mode==2 ? "PASS: finalization deadline with stalled service and local disconnect" :
+    puts(mode>=4 ? "PASS: frontend control deadline and local disconnect" :
+        mode==2 ? "PASS: finalization deadline with stalled service and local disconnect" :
         "PASS: real RPC timeout without service death or request replay");result=0;
 done:
     if(paused && resume(control)<0)result=1;
+    if(frontend_paused && resume(frontend_control)<0)result=1;
+    if(frontend_control)CloseHandle(frontend_control);
     if(control)CloseHandle(control);
     if(root)CloseHandle(root);if(capability)CloseHandle(capability);
     if(restored)CloseHandle(restored);if(server)CloseHandle(server);
@@ -792,6 +839,10 @@ int main(int argc,char **argv)
     if (argc==2 && !lstrcmpA(argv[1],"--worker-exit-timeout")) return frontend_deadline(TRUE);
     if (argc==2 && !lstrcmpA(argv[1],"--finalization-service-timeout")) return frontend_deadline(2);
     if (argc==2 && !lstrcmpA(argv[1],"--startup-service-timeout")) return frontend_deadline(3);
+    if (argc==3 && !lstrcmpA(argv[1],"--control-service-timeout")) {
+        unsigned mode=(unsigned)strtoul(argv[2],NULL,10);
+        return mode>=5 && mode<=9 && mode!=7 ? frontend_deadline(mode) : 2;
+    }
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-cancel-parent")) return reservation_parent(2);
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-cancel-killed-parent")) return reservation_parent(3);
     if (argc==4 && !lstrcmpA(argv[1],"--frontend-cancel-monitor"))

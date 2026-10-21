@@ -36,12 +36,17 @@ error_status_t Client_TaskSnapshot(handle_t binding,HANDLE process,unsigned long
     if(*items){ZeroMemory(*items,sizeof(**items));(*items)->process_id=123;}
     return result();
 }
-error_status_t Client_CloseManagementNode(handle_t binding,HANDLE process,unsigned long protocol,
+error_status_t Client_CloseManagementNode(PRPC_ASYNC_STATE async,handle_t binding,HANDLE process,unsigned long protocol,
     unsigned char *application,DTASKMGR_KEY *key)
 {
     peer(binding,process,protocol,application);
     CHECK(key && key->instance==selected.instance && key->category==selected.category &&
-        key->generation==selected.generation && key->object==selected.object);return result();
+        key->generation==selected.generation && key->object==selected.object);
+    CHECK(async!=NULL);
+    /* Real reply and cancellation are exercised by monitor RPC/CAF fixtures;
+     * this mock is limited to synchronous stub exceptions. */
+    RpcRaiseException(mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED);
+    return ERROR_SUCCESS;
 }
 error_status_t Client_WorkerTaskTrace(handle_t binding,HANDLE process,unsigned long protocol,
     unsigned char *application,DTASKMGR_KEY *key,unsigned long *coverage,
@@ -76,7 +81,7 @@ int main(void)
         if(i==0){CHECK(count==1 && items && items->process_id==123);MIDL_user_free(items);}
         else CHECK(count==0 && items==NULL);
         CHECK(allocations==0);
-        CHECK(common_rpc_close_management_node(&expected,&selected)==error);
+        if(i==1 || i==2)CHECK(common_rpc_close_management_node(&expected,&selected)==error);
         if(i==1 || i==2) {
             uint64_t node=99;
             CHECK(common_rpc_observe_native_creation_bounded(&expected,expected.process,CREATE_SUSPENDED,&node)==error);

@@ -72,23 +72,21 @@ error_status_t Server_StartFrontend(handle_t binding,VDM_CONNECTION connection,
     return error ? error : OpenNtBaseServiceStartFrontend(connection,pid,generation,
         (uint64_t)window,borrowed!=0,root,capability,restored);
 }
-error_status_t Server_ReturnFrontendConsole(handle_t binding,VDM_CONNECTION connection,
+error_status_t Server_FrontendCloseQuiesced(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceReturnFrontendConsole(connection,pid,generation);
+    if(!error)error=OpenNtBaseServiceFrontendCloseQuiesced(connection,pid,generation);
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
-error_status_t Server_FrontendCloseQuiesced(handle_t binding,VDM_CONNECTION connection,
+error_status_t Server_FrontendConsoleRestored(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceFrontendCloseQuiesced(connection,pid,generation);
-}
-error_status_t Server_FrontendConsoleRestored(handle_t binding,VDM_CONNECTION connection,
-    HANDLE process,ULONG generation)
-{
-    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceFrontendConsoleRestored(connection,pid,generation);
+    if(!error)error=OpenNtBaseServiceFrontendConsoleRestored(connection,pid,generation);
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
 error_status_t Server_FrontendStartupResult(handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation,HANDLE capability,ULONG status)
@@ -324,20 +322,22 @@ error_status_t Server_ObserveDosEventAsync(PRPC_ASYNC_STATE async,handle_t bindi
     return ERROR_SUCCESS;
 }
 
-error_status_t Server_CloseManagementNode(handle_t binding,HANDLE process,ULONG protocol,
+error_status_t Server_CloseManagementNode(PRPC_ASYNC_STATE async,handle_t binding,HANDLE process,ULONG protocol,
     unsigned char application_version[32],DTASKMGR_KEY *key)
 {
     DWORD pid,error;
     OPENNT_BASE_MANAGEMENT_KEY selector;
-    if(!key)return ERROR_INVALID_PARAMETER;
+    if(!key){error=ERROR_INVALID_PARAMETER;goto complete;}
     selector.instance=(uint64_t)key->instance;selector.category=key->category;
     selector.generation=key->generation;selector.object=(uint64_t)key->object;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if (error) return error;
+    if (error) goto complete;
     error=basesrv_management_version(protocol,application_version);
     if (!error) error=OpenNtBaseServiceCloseManagementNode(service,&selector);
     basesrv_schedule_empty_stop();
-    return error;
+complete:
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
 void *__RPC_USER midl_user_allocate(size_t bytes) { return malloc(bytes); }
 void __RPC_USER midl_user_free(void *value) { free(value); }
@@ -513,11 +513,13 @@ error_status_t Server_WorkerIoTransition(handle_t binding,VDM_CONNECTION connect
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
     return error ? error : OpenNtBaseServiceWorkerIoTransition(connection,pid,generation,action);
 }
-error_status_t Server_FrontendIoDisconnected(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_FrontendIoDisconnected(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceFrontendIoDisconnected(connection,pid,generation);
+    if(!error)error=OpenNtBaseServiceFrontendIoDisconnected(connection,pid,generation);
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
 error_status_t Server_WorkerIoReleaseEvent(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE *release)
@@ -573,25 +575,30 @@ error_status_t Server_RegisterFrontendLease(handle_t binding,VDM_CONNECTION conn
     return error ? error : OpenNtBaseServiceRegisterFrontendLease(connection,pid,generation,
         (uint64_t)console_window,creator_pid,borrowed!=0,retire,restored);
 }
-error_status_t Server_FrontendJoinCandidate(handle_t binding,VDM_CONNECTION connection,
+error_status_t Server_FrontendJoinCandidate(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation,ULONG *nonce,ULONG *candidate_pid)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceFrontendJoinCandidate(connection,pid,generation,
-        nonce,candidate_pid);
+    *nonce=*candidate_pid=0;
+    if(!error)error=OpenNtBaseServiceFrontendJoinCandidate(connection,pid,generation,nonce,candidate_pid);
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
-error_status_t Server_FrontendJoinDecision(handle_t binding,VDM_CONNECTION connection,
+error_status_t Server_FrontendJoinDecision(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation,ULONG nonce,ULONG same_console)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceFrontendJoinDecision(connection,pid,generation,
-        nonce,same_console!=0);
+    if(!error)error=OpenNtBaseServiceFrontendJoinDecision(connection,pid,generation,nonce,same_console!=0);
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
-error_status_t Server_FrontendLeaseReady(handle_t binding,VDM_CONNECTION connection,
+error_status_t Server_FrontendLeaseReady(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceFrontendLeaseReady(connection,pid,generation);
+    if(!error)error=OpenNtBaseServiceFrontendLeaseReady(connection,pid,generation);
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
 error_status_t Server_RetainFrontendRoot(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE capability,HANDLE *root,ULONG *root_generation)
@@ -611,14 +618,17 @@ error_status_t Server_FrontendUsage(handle_t binding,VDM_CONNECTION connection,H
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
     return error ? error : OpenNtBaseServiceFrontendUsage(connection,pid,generation,pending,tasks);
 }
-error_status_t Server_RetireWorkerlessFrontend(handle_t binding,VDM_CONNECTION connection,
+error_status_t Server_RetireWorkerlessFrontend(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation,ULONG *retired)
 {
     DWORD pid,error;
-    if(!retired)return ERROR_INVALID_PARAMETER;
+    if(!retired){error=ERROR_INVALID_PARAMETER;goto complete;}
     *retired=0;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceRetireWorkerlessFrontend(connection,pid,generation,retired);
+    if(!error)error=OpenNtBaseServiceRetireWorkerlessFrontend(connection,pid,generation,retired);
+complete:
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
 error_status_t Server_FrontendStateChanged(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE *state_changed)
@@ -638,24 +648,21 @@ error_status_t Server_WorkerStateChanged(handle_t binding,VDM_CONNECTION connect
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
     return error ? error : OpenNtBaseServiceWorkerStateChanged(connection,pid,generation,state_changed);
 }
-error_status_t Server_RetireFrontend(handle_t binding,VDM_CONNECTION connection,HANDLE process,ULONG generation)
-{
-    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceRetireFrontend(connection,pid,generation);
-}
 error_status_t Server_RequestFrontend(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE capability)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
     return error ? error : OpenNtBaseServiceRequestFrontend(connection,pid,generation,capability);
 }
-error_status_t Server_FrontendRequest(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_FrontendRequest(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG *request,HANDLE *worker)
 {
     DWORD pid,error;
     *request=0;*worker=NULL;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceFrontendRequest(connection,pid,generation,request,worker);
+    if(!error)error=OpenNtBaseServiceFrontendRequest(connection,pid,generation,request,worker);
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
 error_status_t Server_AttachFrontendRequest(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG request,HANDLE channel,HANDLE ready)
@@ -1000,7 +1007,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v50_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v51_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -1047,7 +1054,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v50_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v51_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);

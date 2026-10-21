@@ -105,7 +105,6 @@ BOOL OpenNtBaseServicePeer(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation);
 DWORD OpenNtBaseServiceRetainPeer(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,HANDLE *);
 DWORD OpenNtBaseServiceStartFrontend(OPENNT_BASE_CONNECTION *,DWORD,DWORD,
     uint64_t,BOOL,HANDLE *,HANDLE *,HANDLE *);
-DWORD OpenNtBaseServiceReturnFrontendConsole(OPENNT_BASE_CONNECTION *,DWORD,DWORD);
 DWORD OpenNtBaseServiceWaitFrontendConsoleRestored(OPENNT_BASE_CONNECTION *,DWORD,DWORD);
 DWORD OpenNtBaseServiceFrontendConsoleRestored(OPENNT_BASE_CONNECTION *,DWORD,DWORD);
 DWORD OpenNtBaseServiceFrontendCloseQuiesced(OPENNT_BASE_CONNECTION *,DWORD,DWORD);
@@ -178,7 +177,6 @@ DWORD OpenNtBaseServiceWorkerStateChanged(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE *state_changed);
 /* Atomically reject retirement while original work/admission remains, else
  * revoke future joins. Frontend first drains its own native/local requests. */
-DWORD OpenNtBaseServiceRetireFrontend(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation);
 DWORD OpenNtBaseServiceAttachFrontendRequest(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,DWORD request,HANDLE pipe,HANDLE ready);
 /* Frontend transport authentication only: the original command's waiting

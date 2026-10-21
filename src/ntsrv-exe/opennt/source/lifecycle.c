@@ -450,19 +450,6 @@ DWORD service_retire_expired_frontends_at(OPENNT_BASE_SERVICE *service,ULONGLONG
 }
 
 
-DWORD OpenNtBaseServiceRetireFrontend(OPENNT_BASE_CONNECTION *root,DWORD pid,DWORD generation)
-{
-    DWORD pending=0,tasks=0,error;
-    if(!root)return ERROR_ACCESS_DENIED;
-    EnterCriticalSection(&root->service->lock);
-    error=OpenNtBaseServiceFrontendUsage(root,pid,generation,&pending,&tasks);
-    if(!error){
-        if(pending || tasks)error=ERROR_BUSY;
-        else { root->frontend_closing=TRUE;service_signal_frontend_states(root->service); }
-    }
-    LeaveCriticalSection(&root->service->lock);
-    return error;
-}
 
 
 

@@ -1352,7 +1352,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $baseServerFlags)
     $graph.Add('build native-service-layout-test.exe: basesrv_service_test_link obj/tests/native_service_layout.obj')
     $graph.Add('build obj/tests/base_client_rpc_first.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/base_client_rpc_first_test.c')))
-    $graph.Add('  cflags = ' + $baseOwnerFlags)
+    $graph.Add('  cflags = ' + $baseOwnerFlags + ' /I obj/basesrv')
     $graph.Add('rule base_rpc_test_link')
     $graph.Add('  command = link.exe /nologo /subsystem:console /out:$out $in rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
     $graph.Add('build base-client-rpc-first-test.exe: base_rpc_test_link obj/tests/base_client_rpc_first.obj obj/ntvwm/next_command.obj worker-base.lib frontend-client.lib obj/run16/support.obj base-rpc-client-core.lib base-rpc-client-launch-style.lib obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib | ntsrv.exe ntvwm.exe')

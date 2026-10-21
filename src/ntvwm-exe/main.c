@@ -451,6 +451,7 @@ static int run_gui_launcher(void)
     ntvwm_executions_close(requests);
     if(console_close)CloseHandle(console_close);
     if(shutdown)CloseHandle(shutdown);
+    error=OpenNtBaseClientFailure(error);
     worker_base_disconnect();
     HeapDestroy(CsrPortHeap);CsrPortHeap=NULL;
     return (int)error;
@@ -459,6 +460,7 @@ static int run_gui_launcher(void)
 int wmain(int argc,WCHAR **argv)
 {
     DWORD error;
+    BOOL managed=FALSE;
     ntvwm_executions *requests=NULL;
     native_membership membership={0};
     CRITICAL_SECTION io_lock;
@@ -481,6 +483,7 @@ int wmain(int argc,WCHAR **argv)
     if(!error) {
         ntvwm_executions_bind_io(requests,&io);
         ntvwm_executions_bind_fault(requests,broker_completion_fault,&membership);
+        managed=TRUE;
     }
     if(!error && !SetConsoleCtrlHandler(control_event,TRUE))error=GetLastError();
     while(!error) {
@@ -525,9 +528,14 @@ int wmain(int argc,WCHAR **argv)
     close_if_service_lost(&membership);
     ntvwm_close_for_console_shutdown(&membership);
     ntvwm_close_for_worker_shutdown(&membership);
+    /* A failed command receive can precede the service process's signalled
+     * state. Do not remove its watcher and locally exit during that interval.
+     * Use the same admitted exit request/instruction owner as other faults. */
+    if(error && managed)request_fault_exit(&membership,error);
     if(membership.quit)SetEvent(membership.quit);
     ntvwm_executions_close(requests);
     membership_close(&membership);
+    error=OpenNtBaseClientFailure(error);
     worker_base_disconnect();
     HeapDestroy(CsrPortHeap);CsrPortHeap=NULL;
     DeleteCriticalSection(&io_lock);

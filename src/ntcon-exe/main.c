@@ -1,6 +1,7 @@
 #include "run16-exe/frontend_bootstrap.h"
 #include "session_service.h"
 #include "session_arguments.h"
+#include "common/protocol/frontend_lifecycle.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include <shellapi.h>
 #include <stdio.h>
@@ -26,7 +27,8 @@ static DWORD session_entry(HANDLE caller,HANDLE notification,HANDLE retire,HANDL
     /* NTSRV validates the exact admitted process and capability in the RPC
      * registration and startup-result calls. The inherited caller identifies
      * the real Console, not the broker's own Console. */
-    error=OpenNtBaseClientConnectCurrent();if(error){bootstrap_trace("connect",error);goto done;}
+    error=OpenNtBaseClientConnectCurrentTimeout(OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    if(error){bootstrap_trace("connect",error);goto done;}
     if(WaitForSingleObject(caller,0)!=WAIT_TIMEOUT){error=ERROR_ACCESS_DENIED;bootstrap_trace("identity",error);goto respond;}
     pid=GetProcessId(caller);
     if(!pid || !AttachConsole(pid)){error=GetLastError();bootstrap_trace("attach",error);goto respond;}

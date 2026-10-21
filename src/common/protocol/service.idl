@@ -1,7 +1,7 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(50.0),
+    version(51.0),
     pointer_default(unique)
 ]
 interface vdm_service
@@ -75,10 +75,6 @@ interface vdm_service
         [out, system_handle(sh_process)] HANDLE *root,
         [out, system_handle(sh_event)] HANDLE *capability,
         [out, system_handle(sh_event)] HANDLE *restored);
-    error_status_t ReturnFrontendConsole(
-        [in] handle_t binding, [in] VDM_CONNECTION connection,
-        [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation);
     /* Startup outcome from the exact broker-admitted frontend process.
      * This is not the later Console restoration acknowledgement. */
     error_status_t FrontendStartupResult(
@@ -575,10 +571,6 @@ interface vdm_service
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation,
         [out, system_handle(sh_event)] HANDLE *state_changed);
-    error_status_t RetireFrontend(
-        [in] handle_t binding, [in] VDM_CONNECTION connection,
-        [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation);
     /* Copy direct request policy before InitTask publication. Not worker state. */
     error_status_t WowStyle(
         [in] handle_t binding,

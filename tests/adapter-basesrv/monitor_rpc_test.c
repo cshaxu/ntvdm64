@@ -216,7 +216,14 @@ static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
         CHECK(!received && !sender && !context && !io);
         /* The launcher now retains a separate real NTCON root. It cannot
          * consume that root's worker-I/O request queue. */
-        RPC_CHECK(Client_FrontendRequest(binding,connection,self,generation,&request,&probe),ERROR_ACCESS_DENIED);
+        {
+            RPC_ASYNC_STATE async;DWORD error=common_rpc_begin_async(&async);
+            CHECK(!error);
+            RpcTryExcept {Client_FrontendRequest(&async,binding,connection,self,generation,&request,&probe);}
+            RpcExcept(1){error=RpcExceptionCode();}
+            RpcEndExcept
+            CHECK(common_rpc_end_async(&async,error,NULL,10000)==ERROR_ACCESS_DENIED);
+        }
         CHECK(!probe && !request && WaitForSingleObject(frontend,0)==WAIT_TIMEOUT);
         puts("PASS actual RPC worker-only execution: generation/capability/payload rejection, no client pipe attachment, no submit/take without worker admission");
     }
@@ -365,7 +372,7 @@ int main(int argc,char **argv)
     }
     RpcTryExcept {
         DTASKMGR_KEY stale={1,MANAGEMENT_WORKER,1,0};
-        error=Client_CloseManagementNode(binding,self,APP_PROTOCOL_VERSION,(unsigned char *)version,&stale);
+        error=common_rpc_close_management_node(&management,&stale);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept

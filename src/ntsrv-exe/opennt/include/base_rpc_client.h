@@ -23,7 +23,6 @@ DWORD OpenNtBaseClientFailure(DWORD error);
 DWORD OpenNtBaseClientBrokerProcess(HANDLE *server);
 DWORD OpenNtBaseClientStartFrontend(uint64_t console_window,BOOL borrowed,
     HANDLE *root,HANDLE *capability,HANDLE *restored);
-DWORD OpenNtBaseClientReturnFrontendConsole(void);
 DWORD OpenNtBaseClientStartNativeWorker(DWORD native_type,HANDLE *);
 DWORD OpenNtBaseClientStartVdmWorker(PCWSTR environment,DWORD characters,
     DWORD show,HANDLE frontend,HANDLE *worker,HANDLE *parent);
@@ -52,7 +51,6 @@ DWORD OpenNtBaseClientRequestWorkerExit(void);
 DWORD OpenNtBaseClientWorkerConsoleCloseEvent(HANDLE *close);
 DWORD OpenNtBaseClientWorkerIoReleaseEvent(HANDLE *release);
 DWORD OpenNtBaseClientWorkerStateChanged(HANDLE *state_changed);
-DWORD OpenNtBaseClientRetireFrontend(void);
 DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE capability);
 DWORD OpenNtBaseClientAcquireFrontendRoot(uint64_t console_window,DWORD *create_root,
     HANDLE *root,HANDLE *capability,HANDLE *retire,HANDLE *restored);
