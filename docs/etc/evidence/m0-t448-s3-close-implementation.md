@@ -1348,3 +1348,131 @@ diagnosis/timing checks, initialization/fault cleanup and already approved
 original-host exit permission are the remaining work, followed by S4 integrated
 acceptance. This is more precise than saying only a few core methods remain;
 it neither expands T into new WOW features nor reduces its original objective.
+
+### Protocol 58 launch/result candidate — not delivered
+
+Following pushed inventory P10 f658ad721, the fixed nine-method group now has
+matching async ACF, service dispatch and production client issuance. Existing
+context_noserialize annotations remain. The same completion/cancellation owner
+retains storage until RPC completion and supplies the ten-second bound; no new
+transport, retry, guest or mirror modification. Core facades check the existing
+latched failure before issuing, normalize errors before publishing attachments,
+and clear/close failed outputs. StartVdmWorker publishes the original receipt
+mapping only after successful normalization and output validation.
+
+FinishNativeRequest explicitly separates common_rpc_finish_async transport
+status from the service reply, preserving completed/exit-code outputs on a
+real application-error reply and clearing them on transport failure. The
+intentional GetNextNativeCommand receive is unchanged. These are source-review
+facts, not runtime proof. Raw monitor negatives have matching async test calls;
+the common_native_command_test synchronous mocks still require migration and
+must not be run or counted as passing against this candidate. In particular,
+its success, malformed completion and partial application-error assertions
+must gain equivalent coverage, not disappear during the conversion.
+
+Owned build r17 started at 2026-10-21 10:50:31 UTC, PowerShell PID 7836,
+build/t448-s3/build.ps1 -Round r17; captured build-r17.out/.err and
+build-r17/steps.json. The x86 configuration completed successfully at 10:51:14;
+x64 configuration was confirmed live on the following observation. Full build,
+second incremental, affected fixtures, all nine actual paused-service cases,
+wire/outcome proof, complete runtime gates and coherent publication remain
+unclaimed until their results exist. Do not restart the runner from this
+record alone: inspect its current PID/result. Installed/released binaries remain
+the P9 protocol-57 package; candidate changes are uncommitted.
+
+The r17 build ended unsuccessfully at 10:52:11 UTC: generated protocol-58
+headers rejected the remaining v57 ifspec identifier in core. The sweep also
+found matching server registration/unregistration and identity-test references;
+all now use v58. This was a compile failure, not a runtime result, and r17 is
+retained rather than overwritten.
+
+The existing common-native unit now compiles the unchanged production client
+body with an explicitly mocked RPC completion primitive. Every previous reply,
+attachment, malformed-completion and exception assertion remains, with added
+ERROR_WRITE_FAULT/exit-37/completed preservation and completion-transport-error
+clearing checks. This is deliberately unit evidence only, not real asynchronous
+RPC proof. The native worker failure/completed-worker-loss wire cases remain
+required, and a deterministic actual application-error reply still needs proof.
+Nine additional paused-service modes 29--37 call each public launch/result
+facade, assert cleared outputs and then verify all nine return the latched
+timeout locally. No task-execution deadline or submission retry was introduced.
+
+Owned r18 full/incremental build PID 17648 and serial verification PID 33616
+started at approximately 10:54:55 UTC. Commands are build.ps1 -Round r18 and
+run-r18.ps1; stdout/stderr are build-r18 and all-r18 respectively. The runner
+requires full build, service matrix, existing deadline matrix, common-native
+unit, nine new deadline modes, wire, runtime, worker-loss and startup gates.
+First x86 compilation passed; x64 compilation was still live at the following
+observation. No final result, publication, commit or acceptance is claimed.
+
+Subsequent result: r18 full thirteen-component build and second incremental
+verification passed at 10:58:12 UTC (build-r18-result.json, exit 0). Build PID
+17648 ended; serial verification PID 33616 remained live. Runtime/test results
+are still pending; this supersedes only the preceding build-in-progress status.
+
+r18 service39 and all 27 retained actual deadline scenarios passed. At
+11:04:43 the sequence stopped at the new client unit's final handle count:
+141 checks, one failure, delta +6. Its baseline preceded the first
+RpcAsyncInitializeHandle, unlike the existing common-worker/frontend units.
+The corrected unit initializes only the RPC runtime before measuring; no
+project call is warmed up and the exact zero-delta assertion is retained.
+r18b rebuilds only that unit and passes 142 checks, zero failures, zero handle
+delta. This supports per-call cleanup, not real transport completion proof.
+
+Serial continuation run-r18b.ps1, PID 6640, validates r18 build/service/deadline
+results and each of the 27 saved PASS/zero-exit case reports, then runs nine
+fresh modes 29--37 against unchanged package-r18 and the unchanged actual RPC
+fixture. It proceeds to wire/runtime/loss/startup checks only on success.
+all-r18b.out/.err and all-r18b-result.json own the continuation result; do not
+replace r18's failed unit record. Last observation confirmed the continuation
+alive after the unit pass. No delivery or S closure is claimed.
+
+At 11:08:20 UTC r18b completed all nine fresh real deadline modes; together
+with r18 this is 36 actual scenarios, explicitly retained/fresh rather than a
+single rerun. Frontend-control 85 and worker-control 163 unit checks also
+passed with zero handle delta, and actual bootstrap reached its PASS. The
+same owned continuation was still running later wire/runtime gates. The
+deterministic real application-error reply requirement remains separate from
+the mocked completion unit and must not be inferred from these deadline cases.
+
+### S3 P11 launch/result verification and review
+
+r18b completed successfully at 11:12:31 UTC. Real wire identity/authentication,
+bootstrap and workerless grace/cancellation pass. The unchanged package-r18
+passes DOS17, playable WINMINE/SOL, WRITE's four-sample startup frontier only,
+and CAF-three internal deletion/return. Native unfinished-worker failure and
+completed-worker loss, scope lifetime, startup rejection and timeout rollback
+pass. WRITE editing/saving is not claimed.
+
+The additional real reply fixture deliberately substitutes only the isolated
+test package's trusted ntvwm sibling. Actual NTSRV creates/authenticates that
+worker; production RPC delivers the command, validates the suspended target,
+reports startup, records completion and consumes the result. Only the final
+I/O status is injected, without a product test hook. The first r19 attempt
+returned 87 before result verification because it omitted the normal CUI
+frontend association. r19b creates real NTCON first and passes at 11:16:10:
+actual status=29 (ERROR_WRITE_FAULT), result=37, completed=1; wrong request and
+second consumption return ERROR_NOT_FOUND with zero outputs. Its changed
+bootstrap/failure/completed-loss cases were rerun successfully. No service
+authentication was relaxed. r19's failure remains retained.
+
+Final source review: nine matching client/service/ACF signatures, preserved
+context serialization exceptions, one existing completion/cancellation helper,
+typed-output failure cleanup, no replay, original result consumption semantics,
+and no new I/O control command. Protocol 58 fences changed wire signatures.
+Tests distinguish mocked client completion from the actual service result case.
+No guest, original mirror or configuration changes. Fixed remaining scope is
+16 live finite methods, eight obsolete client surfaces, diagnosis/timing,
+partial-initialization/fault cleanup and original-host exit permission; the
+intentional native command receive remains unbounded by task duration.
+S3 is not closed. Coherent publication, governance and commit/push are pending.
+
+Delivery update: governance/review-r19b passes at 11:18:16 UTC. Installed
+project processes and relevant Hook/style DLL holders both counted zero;
+no owner session was terminated. publication-r18b passes at 11:18:49 UTC:
+all thirteen package-r18 hashes equal both assets/release and O:/winnt/system32.
+The previous coherent set is retained in publication-r18b-backup. Unchanged
+images were verified too, not omitted because Git has no binary diff for them.
+Source net +78 and test net +167 (combined +245); no reduction claim for this
+checkpoint. No mirror/guest delta. Commit/push follows the final record gate;
+S3 and T448 remain active with the fixed remaining groups above.

@@ -737,6 +737,32 @@ static DWORD worker_control_query(unsigned mode,HANDLE token)
     return error;
 }
 
+/* Each call reaches the same real RPC connection. Outputs must stay empty on
+ * transport timeout, including StartVdmWorker's process-local receipt mapping. */
+static DWORD launch_control_query(unsigned mode,HANDLE token)
+{
+    WCHAR environment[2]={0};BYTE payload=0;
+    HANDLE output=NULL,peer=NULL;DWORD value=0,completed=0,error;
+    switch(mode) {
+    case 29:error=OpenNtBaseClientSubmitNativeRequest(OPENNT_BASE_NATIVE_REQUEST_LAUNCH,
+        token,1,&payload,&output,&peer,&value);break;
+    case 30:error=OpenNtBaseClientFinishNativeRequest(42,&value,&completed);break;
+    case 31:error=OpenNtBaseClientStartVdmWorker(environment,2,SW_HIDE,token,&output,&peer);break;
+    case 32:error=OpenNtBaseClientStartNativeWorker(0,&output);break;
+    case 33:return OpenNtBaseClientCompleteNativeRequest(42,37,ERROR_WRITE_FAULT,0);
+    case 34:return OpenNtBaseClientNativeStartupResult(1,42,ERROR_ACCESS_DENIED,NULL,NULL);
+    case 35:return OpenNtBaseClientBindNativeTarget(42,GetCurrentProcess(),token);
+    case 36:error=OpenNtBaseClientRetainFrontendRoot(token,&output,&value);break;
+    case 37:return OpenNtBaseClientRequestFrontend(token);
+    default:return ERROR_INVALID_PARAMETER;
+    }
+    if(output || peer || value || completed) {
+        if(output)CloseHandle(output);if(peer)CloseHandle(peer);
+        return ERROR_INVALID_DATA;
+    }
+    return error;
+}
+
 static int frontend_deadline(unsigned mode)
 {
     DWORD (*events[])(HANDLE *)={OpenNtBaseClientWorkerFrontendCapability,
@@ -761,13 +787,17 @@ static int frontend_deadline(unsigned mode)
         /* Notifications require an admitted worker identity. */
         if(events[mode-18](&event)!=ERROR_ACCESS_DENIED || event)goto done;
     }
-    if(mode>=22) {
+    if(mode>=22 && mode<=28) {
         DWORD expected=mode==24 ? ERROR_INVALID_STATE : ERROR_ACCESS_DENIED;
         capability=CreateEventW(NULL,TRUE,FALSE,NULL);
         if(!capability)goto done;
         error=worker_control_query(mode,capability);
         printf("worker control %u unadmitted=%lu expected=%lu\n",mode,error,expected);
         if(error!=expected)goto done;
+    }
+    if(mode>=29) {
+        capability=CreateEventW(NULL,TRUE,FALSE,NULL);
+        if(!capability)goto done;
     }
     if(mode==9 && !GetConsoleMode(GetStdHandle(STD_INPUT_HANDLE),&input_mode))goto done;
     if(!worker_exit && !startup && (mode<4 || mode==9) && OpenNtBaseClientStartFrontend((uint64_t)(UINT_PTR)GetConsoleWindow(),TRUE,
@@ -829,7 +859,8 @@ static int frontend_deadline(unsigned mode)
         puts("PASS: ordinary disconnect deadline and idempotent local cleanup");
         result=0;goto done;
     }
-    if(mode>=22)error=worker_control_query(mode,capability);
+    if(mode>=29)error=launch_control_query(mode,capability);
+    else if(mode>=22)error=worker_control_query(mode,capability);
     else if(mode>=18) {
         HANDLE event=(HANDLE)1;
         error=events[mode-18](&event);
@@ -886,6 +917,10 @@ static int frontend_deadline(unsigned mode)
     }
     began=GetTickCount64();
     if(OpenNtBaseClientWaitFrontendConsoleRestored()!=ERROR_TIMEOUT)goto done;
+    if(mode>=29) {
+        unsigned i;
+        for(i=29;i<=37;++i)if(launch_control_query(i,capability)!=ERROR_TIMEOUT)goto done;
+    }
     if(mode>=22) {
         unsigned i;
         for(i=22;i<=28;++i)if(worker_control_query(i,capability)!=ERROR_TIMEOUT)goto done;
@@ -952,7 +987,7 @@ int main(int argc,char **argv)
     if (argc==2 && !lstrcmpA(argv[1],"--startup-service-timeout")) return frontend_deadline(3);
     if (argc==3 && !lstrcmpA(argv[1],"--control-service-timeout")) {
         unsigned mode=(unsigned)strtoul(argv[2],NULL,10);
-        return mode>=5 && mode<=28 && mode!=7 ? frontend_deadline(mode) : 2;
+        return mode>=5 && mode<=37 && mode!=7 ? frontend_deadline(mode) : 2;
     }
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-cancel-parent")) return reservation_parent(2);
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-cancel-killed-parent")) return reservation_parent(3);

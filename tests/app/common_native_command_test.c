@@ -1,14 +1,32 @@
 #include "common/rpc/native_command.h"
 #include "common/codec/native_launch.h"
+#include <rpcasync.h>
 #include <stdio.h>
 
 static unsigned checks,failures,calls;
 static DWORD injected;
+static DWORD completion_error;
 static BOOL raise_error;
 static HANDLE exported[3];
 static common_rpc_connection expected;
 static DWORD completed_value=1;
 #define CHECK(x) do {++checks;if(!(x)){++failures;printf("FAIL %u %s\n",__LINE__,#x);}} while(0)
+/* Deterministic client-unit seam, not an RPC transport test. Compile the same
+ * client body with only completion mocked; actual wire/deadline fixtures must
+ * separately prove marshalling, service execution and cancellation. */
+static RPC_STATUS RPC_ENTRY unit_complete(PRPC_ASYNC_STATE call,void *reply)
+{
+    CHECK(WaitForSingleObject(call->u.hEvent,0)==WAIT_OBJECT_0);
+    *(DWORD *)reply=injected;return completion_error;
+}
+#define RpcAsyncCompleteCall unit_complete
+#include "../../src/common/rpc/native_command.c"
+#undef RpcAsyncCompleteCall
+static error_status_t unit_issue(PRPC_ASYNC_STATE call)
+{
+    if(raise_error)RpcRaiseException(injected);
+    CHECK(SetEvent(call->u.hEvent));return ERROR_SUCCESS;
+}
 static void peer(handle_t binding,VDM_CONNECTION connection,HANDLE process,DWORD generation)
 {
     ++calls;
@@ -29,27 +47,25 @@ error_status_t Client_GetNextNativeCommand(handle_t binding,VDM_CONNECTION conne
     if(raise_error)RpcRaiseException(injected);
     return injected;
 }
-error_status_t Client_NativeStartupResult(handle_t binding,VDM_CONNECTION connection,
+error_status_t Client_NativeStartupResult(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,unsigned long generation,unsigned long caller_generation,
     unsigned long request,unsigned long status,HANDLE target,HANDLE receipt)
 {
     peer(binding,connection,process,generation);
     CHECK(caller_generation==81 && request==71 && status==ERROR_ACCESS_DENIED);
     CHECK(target==expected.process && receipt==NULL);
-    if(raise_error)RpcRaiseException(injected);
-    return injected;
+    return unit_issue(async);
 }
-error_status_t Client_CompleteWorkerChannel(handle_t binding,VDM_CONNECTION connection,
+error_status_t Client_CompleteWorkerChannel(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,unsigned long generation,unsigned long request,unsigned long exit_code,
     unsigned long io_error,unsigned long io_flags)
 {
     peer(binding,connection,process,generation);
     CHECK(request==0 && exit_code==37 && io_error==ERROR_BROKEN_PIPE && io_flags==2);
-    if(raise_error)RpcRaiseException(injected);
-    return injected;
+    return unit_issue(async);
 }
 
-error_status_t Client_SubmitNativeRequest(handle_t binding,VDM_CONNECTION connection,
+error_status_t Client_SubmitNativeRequest(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,unsigned long generation,unsigned long operation,HANDLE frontend,unsigned long bytes,
     byte *payload,HANDLE *target,HANDLE *receipt,unsigned long *request)
 {
@@ -59,28 +75,30 @@ error_status_t Client_SubmitNativeRequest(handle_t binding,VDM_CONNECTION connec
     exported[1]=CreateEventW(NULL,TRUE,FALSE,NULL);
     CHECK(exported[0] && exported[1]);
     *target=exported[0];*receipt=exported[1];*request=71;
-    if(raise_error)RpcRaiseException(injected);
-    return injected;
+    return unit_issue(async);
 }
 
-error_status_t Client_FinishNativeRequest(handle_t binding,VDM_CONNECTION connection,
+error_status_t Client_FinishNativeRequest(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,unsigned long generation,unsigned long request,unsigned long *exit_code,
     unsigned long *target_completed)
 {
     peer(binding,connection,process,generation);
     CHECK(request==71);
     *exit_code=37;*target_completed=completed_value;
-    if(raise_error)RpcRaiseException(injected);
-    return injected;
+    return unit_issue(async);
 }
 
 int main(void)
 {
+    RPC_ASYNC_STATE runtime;
     BYTE payload[4];
     DWORD bytes=99,request=99,generation=99,before,after,exit_code,completed;
     HANDLE sender=NULL,execution=NULL,frontend=NULL;
     unsigned i,j;
     common_rpc_connection empty={0};
+    /* Account for RPC's process-wide initialization before checking project
+     * call/attachment lifetime. No product call is warmed up or excluded. */
+    CHECK(RpcAsyncInitializeHandle(&runtime,sizeof(runtime))==RPC_S_OK);
     expected.binding=(RPC_BINDING_HANDLE)(ULONG_PTR)1;
     expected.connection=(VDM_CONNECTION)(ULONG_PTR)2;
     expected.process=GetCurrentProcess();expected.generation=3;
@@ -129,6 +147,13 @@ int main(void)
     CHECK(common_rpc_finish_native_request(&expected,71,&exit_code,&completed)==ERROR_INVALID_DATA);
     CHECK(!exit_code && !completed);
     completed_value=1;
+    injected=ERROR_WRITE_FAULT;
+    CHECK(common_rpc_finish_native_request(&expected,71,&exit_code,&completed)==ERROR_WRITE_FAULT);
+    CHECK(exit_code==37 && completed==1);
+    completion_error=RPC_S_CALL_FAILED;
+    CHECK(common_rpc_finish_native_request(&expected,71,&exit_code,&completed)==RPC_S_CALL_FAILED);
+    CHECK(!exit_code && !completed);
+    completion_error=0;
     for(j=0;j<2;++j) {
         raise_error=j!=0;injected=j ? RPC_S_SERVER_UNAVAILABLE : ERROR_ACCESS_DENIED;
         CHECK(common_rpc_submit_native_request(&expected,OPENNT_BASE_NATIVE_REQUEST_LAUNCH,expected.process,4,payload,&sender,&execution,&request)==injected);

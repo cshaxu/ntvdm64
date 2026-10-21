@@ -1,5 +1,11 @@
 interface vdm_service
 {
+    [async] SubmitNativeRequest();
+    [async] FinishNativeRequest();
+    [async] StartVdmWorker();
+    [async] StartNativeWorker();
+    [async] RetainFrontendRoot();
+    [async] RequestFrontend();
     [async] ObserveNativeCreationAsync();
     [async] ObserveDosEventAsync();
     /* Exit reporting must not queue behind a blocking command receive. */
@@ -40,9 +46,9 @@ interface vdm_service
      * protected by the service lock; context serialization would otherwise
      * queue them behind that intentional blocking receive. */
     [async] RegisterNativeBackend([context_handle_noserialize] connection);
-    BindNativeTarget([context_handle_noserialize] connection);
-    CompleteWorkerChannel([context_handle_noserialize] connection);
-    NativeStartupResult([context_handle_noserialize] connection);
+    [async] BindNativeTarget([context_handle_noserialize] connection);
+    [async] CompleteWorkerChannel([context_handle_noserialize] connection);
+    [async] NativeStartupResult([context_handle_noserialize] connection);
     [async] TakeFrontend([context_handle_noserialize] connection);
     /* The serving I/O thread must acquire/release its connection while the
      * worker's command thread is blocked in GetNextNativeCommand. Both calls

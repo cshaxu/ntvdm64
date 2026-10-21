@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include "run16-exe/native_request_client.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
+#include "common/codec/native_launch.h"
 
 PVOID CsrPortHeap;
 static int identity_role(PCWSTR label)
@@ -143,7 +144,7 @@ static DWORD parent_pid(DWORD pid)
     }while(Process32NextW(snapshot,&entry));
     CloseHandle(snapshot);return parent;
 }
-static DWORD native_worker_result(HANDLE worker,HANDLE capability,BOOL completed,BOOL kill_worker)
+static DWORD native_worker_result(HANDLE worker,HANDLE capability,BOOL completed,BOOL kill_worker,DWORD expected_io)
 {
     WCHAR image[MAX_PATH],command[MAX_PATH+16],directory[MAX_PATH];
     LPWCH environment=NULL;run16_native_start start={0};
@@ -174,11 +175,11 @@ static DWORD native_worker_result(HANDLE worker,HANDLE capability,BOOL completed
     error=run16_native_request_finish(request,&result,&target_completed);
     printf("native finish: status=%lu result=%lu target-completed=%lu\n",
         error,result,target_completed);
-    if(!kill_worker && error)goto done;
+    if(!kill_worker && error!=expected_io){error=ERROR_INVALID_DATA;goto done;}
     /* A broker-latched completion remains consumable after worker death.
      * A recorded final-I/O error cannot erase the actual result/return grant;
      * there is no final worker pipe reply to read after rundown. */
-    if(completed ? (error && error!=ERROR_BROKEN_PIPE && error!=ERROR_PROCESS_ABORTED) || result!=37 || target_completed!=TRUE :
+    if(completed ? (error && error!=expected_io && error!=ERROR_BROKEN_PIPE && error!=ERROR_PROCESS_ABORTED) || result!=37 || target_completed!=TRUE :
         error!=ERROR_PROCESS_ABORTED || result || target_completed)
         {error=ERROR_INVALID_DATA;goto done;}
     error=run16_native_request_finish(request,&result,&target_completed);
@@ -200,6 +201,86 @@ done:
     if(environment)FreeEnvironmentStringsW(environment);
     return error;
 }
+/* Test-only authenticated sibling, never installed. The real service creates
+ * this worker from its reservation. Only final I/O is injected; target binding,
+ * startup, completion and one-shot result consumption use production RPC. */
+static int result_worker(void)
+{
+    BYTE *payload=NULL;WCHAR *strings[4];run16_native_launch_packet packet;
+    HANDLE caller=NULL,execution=NULL,frontend=NULL,receipt=NULL;
+    STARTUPINFOW startup={sizeof(startup)};PROCESS_INFORMATION target={0};
+    DWORD error,bytes=0,request=0,generation=0,exit_code=0;
+    payload=HeapAlloc(GetProcessHeap(),0,NATIVE_LAUNCH_MAX_BYTES);
+    if(!payload)return ERROR_NOT_ENOUGH_MEMORY;
+    error=OpenNtBaseClientConnectCurrent();
+    if(!error)error=OpenNtBaseClientRegisterNativeBackend(NULL);
+    if(!error)error=OpenNtBaseClientGetNextNativeCommand(NATIVE_LAUNCH_MAX_BYTES,payload,
+        &bytes,&caller,&execution,&frontend,&request,&generation);
+    if(!error)error=run16_native_launch_unpack(payload,bytes,&packet,strings);
+    if(!error) {
+        receipt=CreateEventW(NULL,TRUE,FALSE,NULL);
+        if(!receipt)error=GetLastError();
+    }
+    if(!error && !CreateProcessW(strings[0],strings[1],NULL,NULL,FALSE,CREATE_SUSPENDED,
+        NULL,NULL,&startup,&target))error=GetLastError();
+    if(!error)error=OpenNtBaseClientBindNativeTarget(request,target.hProcess,receipt);
+    if(!error && ResumeThread(target.hThread)==(DWORD)-1)error=GetLastError();
+    if(!error)error=OpenNtBaseClientNativeStartupResult(generation,request,0,target.hProcess,receipt);
+    if(!error && WaitForSingleObject(target.hProcess,10000)!=WAIT_OBJECT_0)error=ERROR_TIMEOUT;
+    if(!error && !GetExitCodeProcess(target.hProcess,&exit_code))error=GetLastError();
+    if(!error)error=OpenNtBaseClientCompleteNativeRequest(request,exit_code,ERROR_WRITE_FAULT,0);
+    if(target.hProcess) {
+        if(WaitForSingleObject(target.hProcess,0)!=WAIT_OBJECT_0) {
+            TerminateProcess(target.hProcess,ERROR_CANCELLED);WaitForSingleObject(target.hProcess,10000);
+        }
+        CloseHandle(target.hProcess);
+    }
+    if(target.hThread)CloseHandle(target.hThread);
+    if(caller)CloseHandle(caller);if(execution)CloseHandle(execution);
+    if(frontend)CloseHandle(frontend);if(receipt)CloseHandle(receipt);
+    HeapFree(GetProcessHeap(),0,payload);OpenNtBaseClientDisconnectCurrent();return (int)error;
+}
+static int native_io_error(void)
+{
+    WCHAR self[MAX_PATH],source[MAX_PATH],directory[MAX_PATH],image[MAX_PATH],*slash;
+    PROCESS_INFORMATION broker={0};HANDLE worker=NULL,root=NULL,capability=NULL,restored=NULL;
+    DWORD error;const char *stage="connect";int failed=1;
+    if(!GetModuleFileNameW(NULL,self,ARRAYSIZE(self)) || !wcsstr(self,L"\\build\\"))return 84;
+    wcscpy_s(source,ARRAYSIZE(source),self);slash=wcsrchr(source,L'\\');if(!slash)return 84;slash[1]=0;
+    swprintf_s(directory,ARRAYSIZE(directory),L"%lsnative-result",source);
+    if(!CreateDirectoryW(directory,NULL))return 84;
+    wcscat_s(directory,ARRAYSIZE(directory),L"\\system32");
+    if(!CreateDirectoryW(directory,NULL))return 84;
+    swprintf_s(image,ARRAYSIZE(image),L"%ls\\ntvwm.exe",directory);
+    if(!CopyFileW(self,image,TRUE))return 84;
+    wcscat_s(source,ARRAYSIZE(source),L"ntcon.exe");
+    swprintf_s(image,ARRAYSIZE(image),L"%ls\\ntcon.exe",directory);
+    if(!CopyFileW(source,image,TRUE))return 84;
+    slash=wcsrchr(source,L'\\');wcscpy_s(slash+1,ARRAYSIZE(source)-(size_t)(slash+1-source),L"ntsrv.exe");
+    swprintf_s(image,ARRAYSIZE(image),L"%ls\\ntsrv.exe",directory);
+    if(!CopyFileW(source,image,TRUE))return 84;
+    CsrPortHeap=HeapCreate(0,0,0);if(!CsrPortHeap)return 1;
+    error=OpenNtBaseClientConnectCurrent();
+    if(error!=RPC_S_SERVER_UNAVAILABLE)goto done;
+    error=start_broker(image,&broker);if(error)goto done;
+    stage="frontend";
+    error=OpenNtBaseClientStartFrontend((uint64_t)(UINT_PTR)GetConsoleWindow(),TRUE,&root,&capability,&restored);
+    if(error)goto done;
+    stage="worker";
+    error=OpenNtBaseClientStartNativeWorker(OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&worker);
+    if(!error){stage="result";error=native_worker_result(worker,capability,TRUE,FALSE,ERROR_WRITE_FAULT);}
+    if(!error){puts("PASS actual RPC I/O-error reply retains exit 37/completed; consumed exactly once");failed=0;}
+done:
+    printf("native I/O-error fixture stage=%s status=%lu\n",stage,error);
+    stop_broker(&broker);
+    if(worker){
+        if(WaitForSingleObject(worker,10000)!=WAIT_OBJECT_0)failed=1;
+        CloseHandle(worker);
+    }
+    if(root){if(WaitForSingleObject(root,10000)!=WAIT_OBJECT_0)failed=1;CloseHandle(root);}
+    if(capability)CloseHandle(capability);if(restored)CloseHandle(restored);
+    HeapDestroy(CsrPortHeap);CsrPortHeap=NULL;return failed;
+}
 int wmain(int argc,WCHAR **argv)
 {
     WCHAR image[MAX_PATH],command[MAX_PATH+3],*slash;
@@ -207,6 +288,8 @@ int wmain(int argc,WCHAR **argv)
     HANDLE root=NULL,capability=NULL,restored=NULL,fake=NULL,owner=NULL,worker=NULL;
     DWORD error,result=0,generation=0,i;int failed=1;
     ULONGLONG started=0;
+    if(argc==2 && !wcscmp(argv[1],L"--cui-worker"))return result_worker();
+    if(argc==2 && !wcscmp(argv[1],L"--native-io-error"))return native_io_error();
     if(argc==8 && !wcscmp(argv[1],L"--session"))return rejected_peer(
         (HANDLE)(UINT_PTR)wcstoul(argv[2],NULL,16),(HANDLE)(UINT_PTR)wcstoul(argv[3],NULL,16));
     if(argc==3 && !wcscmp(argv[1],L"--identity"))return identity_role(argv[2]);
@@ -285,7 +368,7 @@ int wmain(int argc,WCHAR **argv)
     puts("PASS authenticated service-created native worker; launcher does not create worker");
     if(argc==2 && (!wcscmp(argv[1],L"--native-worker-failure") ||
         !wcscmp(argv[1],L"--native-completed-worker-loss"))) {
-        error=native_worker_result(worker,capability,!wcscmp(argv[1],L"--native-completed-worker-loss"),TRUE);
+        error=native_worker_result(worker,capability,!wcscmp(argv[1],L"--native-completed-worker-loss"),TRUE,0);
         if(error){printf("FAIL native worker failure receipt=%lu\n",error);goto done;}
         failed=0;goto done;
     }
@@ -309,7 +392,7 @@ int wmain(int argc,WCHAR **argv)
     /* StartNativeWorker returns after Resume, not after worker Connect.
      * Complete real work before testing loss of an established connection;
      * killing the server immediately tests a different startup failure. */
-    error=native_worker_result(worker,capability,TRUE,FALSE);
+    error=native_worker_result(worker,capability,TRUE,FALSE,0);
     if(error){printf("FAIL worker ready command=%lu\n",error);goto done;}
     TerminateProcess(broker.hProcess,123);
     if(WaitForSingleObject(broker.hProcess,5000)!=WAIT_OBJECT_0 ||

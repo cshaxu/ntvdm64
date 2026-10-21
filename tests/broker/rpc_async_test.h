@@ -68,4 +68,27 @@ static __inline DWORD test_rpc_register_frontend_root(handle_t binding,VDM_CONNE
     RpcEndExcept
     return common_rpc_end_async(&async,error,NULL,10000);
 }
+static __inline DWORD test_rpc_native_startup_result(handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,ULONG generation,ULONG caller_generation,ULONG request,ULONG status,HANDLE target,HANDLE receipt)
+{
+    RPC_ASYNC_STATE async;DWORD error=common_rpc_begin_async(&async);
+    if(error)return error;
+    RpcTryExcept {Client_NativeStartupResult(&async,binding,connection,process,generation,
+        caller_generation,request,status,target,receipt);}
+    RpcExcept(1){error=RpcExceptionCode();}
+    RpcEndExcept
+    return common_rpc_end_async(&async,error,NULL,10000);
+}
+static __inline DWORD test_rpc_submit_native_request(handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,ULONG generation,ULONG operation,HANDLE frontend,ULONG bytes,BYTE *payload,
+    HANDLE *target,HANDLE *receipt,ULONG *request)
+{
+    RPC_ASYNC_STATE async;DWORD error=common_rpc_begin_async(&async);
+    if(error)return error;
+    RpcTryExcept {Client_SubmitNativeRequest(&async,binding,connection,process,generation,
+        operation,frontend,bytes,payload,target,receipt,request);}
+    RpcExcept(1){error=RpcExceptionCode();}
+    RpcEndExcept
+    return common_rpc_end_async(&async,error,NULL,10000);
+}
 #endif

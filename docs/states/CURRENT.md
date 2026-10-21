@@ -19,7 +19,7 @@ the prior checkpoint claims that the CAF defect is universally fixed.
 | Admission And Approval | Owner approves final design and continuous sequential execution through T pre-closure acceptance; S1 design concluded and pushed at c838c332c. |
 | Objective | Implement the approved unified management-close transaction, concurrency and role-specific service-loss cleanup, preserving the S2 normal-chain candidate. |
 | Non-goals | No guest modification/rebuild; no native GUI target lifecycle ownership; no unrelated WOW32 capability work; no T closure without owner acceptance. |
-| Reference Baseline | S3 P9 worker-control consolidation: protocol 57, thirteen images published and hash-verified at both destinations; full/incremental build, 39 service cases, twenty-seven actual deadline scenarios (explicit retained/fresh evidence), real bootstrap/loss/retirement, startup rejection/timeout rollback, wire negatives and same-package runtime gates pass within the recorded frontier. S3 exit-permission work remains open; no functional acceptance or waiver. |
+| Reference Baseline | S3 P11 launch/result consolidation: protocol 58, thirteen images published and hash-verified at both destinations; full/incremental build, service39, 36 actual deadline scenarios, real error-result/single-consumption proof, bootstrap/loss/retirement, startup rollback, wire negatives and same-package runtime gates pass within the recorded frontier. Remaining RPC cleanup and exit-permission work remain open; no S3 acceptance or waiver. |
 | Files And ABI Surface | Run16, NTSRV service/client, common protocol, worker-base, NTCON, NTVDM and NTVWM; production-linked lifecycle tests; coherent protocol updates if required. |
 | Applicable Rules | docs/README reading set; execution, architecture, coding, document and source-policy authorities; original-owner recovery and exception registration. |
 | Verification | Source-first implementation and diff review; background x86/x64 full-component/incremental builds; affected production-linked service/frontend/launcher fixtures and normal DOS/native/WOW startup/return regression; complete package deployment and hashes; governance. |
@@ -50,6 +50,13 @@ P10 records a complete protocol-57 source inventory: 68 methods, comprising
 and one intentional long-lived receive. The linked ledger fixes their groups,
 provider-preservation and test-migration requirements. This is audit evidence,
 not new runtime completion; published binaries remain P9/protocol 57.
+
+After pushed P10 f658ad721, the nine launch/result/context calls use existing
+async RPC (candidate protocol 58). r18 full/incremental and service39 pass;
+r18/r18b prove 36 actual deadline scenarios and complete runtime regression.
+r19b adds an actual error reply retaining exit 37/completed and single-consume
+proof. P11 protocol 58 was published and hash-verified at both destinations
+at 11:18:49 UTC on 2026-10-21 after review. Remaining fixed groups stay open.
 
 1. S1: whole-system ownership audit and complete transition design.
 2. S2: complete normal admission/result/handoff chain, including frontend policy and lifecycle-only WOW binding.
@@ -160,7 +167,8 @@ Both assets/release and O:/winnt/system32 were hash-verified. All-component
 build/incremental and focused lifecycle tests pass; actual remaining failed
 and unexecuted gates remain explicitly listed in the closure, not converted to
 passes. Guest, configuration and assets/winnt.zip are unchanged. This checkpoint
-adds no OpenNT mirror diff; service protocol revision is 51.
+adds no OpenNT mirror diff; current service protocol revision is 58. The
+protocol-51 through protocol-54 paragraphs below retain prior checkpoints.
 
 The published protocol-51 continuation removes unused retirement RPC methods and
 bounds the actual NTCON pump's control calls through the existing async RPC

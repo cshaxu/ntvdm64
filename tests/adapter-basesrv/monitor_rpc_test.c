@@ -172,9 +172,9 @@ static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
         !memcmp(server_version,version,sizeof(version)));
     /* A launcher cannot impersonate a native worker or report a guessed
      * request's startup, even with valid process/event attachments. */
-    RPC_CHECK(Client_NativeStartupResult(binding,connection,self,generation,
+    RPC_CHECK(test_rpc_native_startup_result(binding,connection,self,generation,
         generation,1,ERROR_SUCCESS,self,forged),ERROR_ACCESS_DENIED);
-    RPC_CHECK(Client_NativeStartupResult(binding,connection,self,generation+1,
+    RPC_CHECK(test_rpc_native_startup_result(binding,connection,self,generation+1,
         generation,1,ERROR_ACCESS_DENIED,NULL,NULL),ERROR_ACCESS_DENIED);
     RPC_CHECK(test_rpc_register_frontend_root(binding,connection,self,generation,forged),ERROR_ACCESS_DENIED);
     {
@@ -199,13 +199,13 @@ static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
         BYTE malformed=0;
         DWORD caller_generation=0,bytes=0;
         ULONG request=0;
-        RPC_CHECK(Client_SubmitNativeRequest(binding,connection,self,generation+1,OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME,frontend,0,NULL,
+        RPC_CHECK(test_rpc_submit_native_request(binding,connection,self,generation+1,OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME,frontend,0,NULL,
             &target,&receipt,&request),ERROR_ACCESS_DENIED);
         CHECK(!target && !receipt && !request);
-        RPC_CHECK(Client_SubmitNativeRequest(binding,connection,self,generation,OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME,execution,0,NULL,
+        RPC_CHECK(test_rpc_submit_native_request(binding,connection,self,generation,OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME,execution,0,NULL,
             &target,&receipt,&request),ERROR_ACCESS_DENIED);
         CHECK(!target && !receipt && !request);
-        RPC_CHECK(Client_SubmitNativeRequest(binding,connection,self,generation,OPENNT_BASE_NATIVE_REQUEST_LAUNCH,frontend,1,&malformed,
+        RPC_CHECK(test_rpc_submit_native_request(binding,connection,self,generation,OPENNT_BASE_NATIVE_REQUEST_LAUNCH,frontend,1,&malformed,
             &target,&receipt,&request),ERROR_INVALID_DATA);
         CHECK(!target && !receipt && !request);
         /* Parent-resume is explicit; this fresh launcher has no completed
@@ -213,7 +213,7 @@ static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
          * This fresh launcher has no completed child/selected parent, so the
          * original service_prepare_parent_resume contract rejects its state;
          * it is not a pending command waiting for a worker to become ready. */
-        RPC_CHECK(Client_SubmitNativeRequest(binding,connection,self,generation,OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME,frontend,0,NULL,
+        RPC_CHECK(test_rpc_submit_native_request(binding,connection,self,generation,OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME,frontend,0,NULL,
             &target,&receipt,&request),ERROR_INVALID_STATE);
         CHECK(!target && !receipt && !request);
         RPC_CHECK(Client_GetNextNativeCommand(binding,connection,self,generation,1,&malformed,&bytes,&sender,&context,&io,&request,&caller_generation),ERROR_ACCESS_DENIED);

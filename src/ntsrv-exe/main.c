@@ -19,46 +19,58 @@ static SRWLOCK idle_lock=SRWLOCK_INIT;
 static HANDLE idle_timer;
 static HANDLE frontend_timer; /* Broker-only startup and workerless-root deadlines. */
 static BASESRV_IDLE_POLICY idle_policy;
-error_status_t Server_SubmitNativeRequest(handle_t binding,VDM_CONNECTION connection,
+error_status_t Server_SubmitNativeRequest(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation,ULONG operation,HANDLE frontend,ULONG bytes,BYTE *payload,
     HANDLE *target,HANDLE *receipt,ULONG *request)
 {
     DWORD pid,error;
-    if(!target || !receipt || !request)return ERROR_INVALID_PARAMETER;
+    if(!target || !receipt || !request){error=ERROR_INVALID_PARAMETER;goto complete;}
     *target=*receipt=NULL;*request=0;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceSubmitNativeRequest(connection,pid,generation,operation,
+    if(!error)error=OpenNtBaseServiceSubmitNativeRequest(connection,pid,generation,operation,
         frontend,bytes,payload,target,receipt,request);
+complete:
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
-error_status_t Server_FinishNativeRequest(handle_t binding,VDM_CONNECTION connection,
+error_status_t Server_FinishNativeRequest(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation,ULONG request,ULONG *exit_code,ULONG *target_completed)
 {
     DWORD pid,error;
-    if(!exit_code || !target_completed)return ERROR_INVALID_PARAMETER;
+    if(!exit_code || !target_completed){error=ERROR_INVALID_PARAMETER;goto complete;}
     *exit_code=*target_completed=0;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceFinishNativeRequest(connection,pid,generation,
+    if(!error)error=OpenNtBaseServiceFinishNativeRequest(connection,pid,generation,
         request,exit_code,target_completed);
+complete:
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
-error_status_t Server_StartVdmWorker(handle_t binding,VDM_CONNECTION connection,
+error_status_t Server_StartVdmWorker(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation,ULONG characters,WCHAR *environment,
     ULONG show,HANDLE frontend,HANDLE *worker,HANDLE *parent,ULONG *receipt)
 {
     DWORD pid,error;
-    if(!worker || !parent || !receipt)return ERROR_INVALID_PARAMETER;
+    if(!worker || !parent || !receipt){error=ERROR_INVALID_PARAMETER;goto complete;}
     *worker=*parent=NULL;*receipt=0;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceStartVdmWorker(connection,pid,generation,
+    if(!error)error=OpenNtBaseServiceStartVdmWorker(connection,pid,generation,
         characters,environment,show,frontend,worker,parent,receipt);
+complete:
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
-error_status_t Server_StartNativeWorker(handle_t binding,VDM_CONNECTION connection,
+error_status_t Server_StartNativeWorker(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation,ULONG native_type,HANDLE *worker)
 {
     DWORD pid,error;
-    if(!worker)return ERROR_INVALID_PARAMETER;
+    if(!worker){error=ERROR_INVALID_PARAMETER;goto complete;}
     *worker=NULL;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceStartNativeWorker(connection,pid,generation,native_type,worker);
+    if(!error)error=OpenNtBaseServiceStartNativeWorker(connection,pid,generation,native_type,worker);
+complete:
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
 error_status_t Server_StartFrontend(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation,LONGLONG window,ULONG borrowed,
@@ -447,12 +459,14 @@ error_status_t Server_GetNextNativeCommand(handle_t binding,VDM_CONNECTION conne
     return error ? error : OpenNtBaseServiceGetNextNativeCommand(connection,pid,generation,
         capacity,payload,bytes,caller_process,execution,frontend,request,caller_generation);
 }
-error_status_t Server_NativeStartupResult(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_NativeStartupResult(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG caller_generation,ULONG request,ULONG status,HANDLE target,HANDLE receipt)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceNativeStartupResult(connection,pid,generation,
+    if(!error)error=OpenNtBaseServiceNativeStartupResult(connection,pid,generation,
         caller_generation,request,status,target,receipt);
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
 error_status_t Server_WorkerFrontendCapability(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE *capability)
@@ -552,11 +566,13 @@ error_status_t Server_WorkerIoReleaseEvent(PRPC_ASYNC_STATE async,handle_t bindi
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
 }
-error_status_t Server_CompleteWorkerChannel(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_CompleteWorkerChannel(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG request,ULONG exit_code,ULONG io_error,ULONG io_flags)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceCompleteNativeRequest(connection,pid,generation,request,exit_code,io_error,io_flags);
+    if(!error)error=OpenNtBaseServiceCompleteNativeRequest(connection,pid,generation,request,exit_code,io_error,io_flags);
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
 error_status_t Server_NativeExitCode(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG request,ULONG *exit_code)
@@ -564,11 +580,13 @@ error_status_t Server_NativeExitCode(handle_t binding,VDM_CONNECTION connection,
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
     return error ? error : OpenNtBaseServiceNativeExitCode(connection,pid,generation,request,exit_code);
 }
-error_status_t Server_BindNativeTarget(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_BindNativeTarget(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG request,HANDLE target,HANDLE receipt)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceBindNativeTarget(connection,pid,generation,request,target,receipt);
+    if(!error)error=OpenNtBaseServiceBindNativeTarget(connection,pid,generation,request,target,receipt);
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
 error_status_t Server_RegisterFrontendRoot(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE capability)
@@ -613,14 +631,16 @@ error_status_t Server_FrontendLeaseReady(PRPC_ASYNC_STATE async,handle_t binding
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
 }
-error_status_t Server_RetainFrontendRoot(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_RetainFrontendRoot(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE capability,HANDLE *root,ULONG *root_generation)
 {
     DWORD pid,error;
     *root=NULL;*root_generation=0;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceRetainFrontendRoot(connection,pid,generation,
+    if(!error)error=OpenNtBaseServiceRetainFrontendRoot(connection,pid,generation,
         capability,root,root_generation);
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
 error_status_t Server_FrontendUsage(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG *pending,ULONG *tasks)
@@ -655,11 +675,13 @@ complete:
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
 }
-error_status_t Server_RequestFrontend(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_RequestFrontend(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE capability)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceRequestFrontend(connection,pid,generation,capability);
+    if(!error)error=OpenNtBaseServiceRequestFrontend(connection,pid,generation,capability);
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
 error_status_t Server_FrontendRequest(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG *request,HANDLE *worker)
@@ -1018,7 +1040,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v57_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v58_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -1065,7 +1087,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v57_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v58_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);

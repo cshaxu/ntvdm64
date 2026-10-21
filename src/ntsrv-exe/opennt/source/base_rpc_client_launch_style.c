@@ -11,6 +11,8 @@
 #include <base_rpc_client_internal.h>
 #include <base_rpc_client_launch_style.h>
 #include "ntsrv-exe/transport/vdm_receipt.h"
+#include "common/rpc/async_call.h"
+#include "common/protocol/frontend_lifecycle.h"
 
 static struct {
     DWORD request_window_style;
@@ -521,18 +523,22 @@ done:
 DWORD OpenNtBaseClientStartVdmWorker(PCWSTR environment,DWORD characters,DWORD show,
     HANDLE frontend,HANDLE *worker,HANDLE *parent)
 {
+    RPC_ASYNC_STATE async;
     common_rpc_connection client=OpenNtBaseClientExecutionConnection(reset_launch);
     DWORD error=ERROR_INVALID_STATE;ULONG receipt=0;
     if(!worker || !parent)return ERROR_INVALID_PARAMETER;
     *worker=*parent=NULL;
     if(!client.connection || !client.binding || !client.process)return error;
+    error=OpenNtBaseClientFailure(0);if(error)return error;
+    error=common_rpc_begin_async(&async);if(error)return error;
     RpcTryExcept {
-        error=Client_StartVdmWorker(client.binding,client.connection,client.process,
+        Client_StartVdmWorker(&async,client.binding,client.connection,client.process,
             client.generation,characters,(WCHAR *)environment,show,frontend,
             worker,parent,&receipt);
     }
     RpcExcept(1){error=RpcExceptionCode();}
     RpcEndExcept
+    error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
     if(!error && (!*worker || (!!*parent != !!receipt)))error=ERROR_INVALID_DATA;
     if(error) {
         if(*worker)CloseHandle(*worker);if(*parent)CloseHandle(*parent);
@@ -541,7 +547,7 @@ DWORD OpenNtBaseClientStartVdmWorker(PCWSTR environment,DWORD characters,DWORD s
         /* Same process-local receipt mapping as original Update's RPC facade. */
         parent_event_handle=*parent;parent_receipt=receipt;
     }
-    return OpenNtBaseClientFailure(error);
+    return error;
 }
 
 DWORD WINAPI OpenNtBaseClientWowStyle(ULONG task,DWORD *style)

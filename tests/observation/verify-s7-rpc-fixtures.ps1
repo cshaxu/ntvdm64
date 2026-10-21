@@ -4,7 +4,7 @@ param(
     [Parameter(Mandatory)][string]$PackageRoot,
     [Parameter(Mandatory)][string]$ReportPrefix,
     [Parameter(Mandatory)][ValidateSet('client','bootstrap','startup-rejections',
-        'startup-timeout','native-worker-failure','native-completed-worker-loss',
+        'startup-timeout','native-worker-failure','native-completed-worker-loss','native-io-error',
         'workerless-grace','workerless-cancel','monitor-rpc',
         'native-command','native-registry')][string[]]$Cases
 )
@@ -24,7 +24,7 @@ foreach($case in $Cases) {
         elseif($case -in @('native-command','native-registry')){'basesrv-service-reservation-test.exe'}
         else{'broker-frontend-bootstrap-test.exe'}
     $casePackageRoot=$PackageRoot
-    if($case -in @('startup-rejections','startup-timeout')) {
+    if($case -in @('startup-rejections','startup-timeout','native-io-error')) {
         # This fixture deliberately replaces the frontend with an adversarial
         # peer. Its C-side build-only guard must remain effective even when
         # ordinary product cases execute in a short physical O:\tmp stage.
@@ -33,7 +33,8 @@ foreach($case in $Cases) {
         $casePackageRoot=$ReportPrefix+'-'+$case+'-package\system32'
         if(Test-Path -LiteralPath $casePackageRoot){throw 'Require a fresh rejection fixture package'}
         $null=New-Item -ItemType Directory -Path $casePackageRoot
-        foreach($name in @($image,'ntsrv.exe')) {
+        $inputs=@($image,'ntsrv.exe');if($case -eq 'native-io-error'){$inputs+='ntcon.exe'}
+        foreach($name in $inputs) {
             $source=Join-Path $PackageRoot $name
             $destination=Join-Path $casePackageRoot $name
             Copy-Item -LiteralPath $source -Destination $destination
