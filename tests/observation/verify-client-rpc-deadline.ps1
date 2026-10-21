@@ -6,7 +6,7 @@ param(
     [switch]$WorkerExit,
     [switch]$StalledService,
     [switch]$Startup,
-    [ValidateSet(5,6,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37)][int]$Control,
+    [ValidateSet(5,6,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54)][int]$Control,
     [string]$ThreadSnapshot
 )
 $ErrorActionPreference='Stop'
@@ -41,7 +41,9 @@ try {
     $expected=if($WorkerExit){'PASS: real worker exit RPC deadline without poisoning shared connection'}elseif($StalledService){'PASS: finalization deadline with stalled service and local disconnect'}elseif($Startup){'PASS: startup deadline with stalled service and no cleanup RPC'}else{'PASS: real RPC timeout without service death or request replay'}
     if($Control){
         $mode='--control-service-timeout'
+        if($Control -ge 38){$expected='PASS: finite original/management RPC deadline with drained outputs'}else{
         $expected=if($Control -eq 17){'PASS: ordinary disconnect deadline and idempotent local cleanup'}elseif($Control -eq 9){'PASS: actual NTCON timeout retirement and input restoration with service paused'}elseif($Control -eq 8){'PASS: management close RPC deadline without poisoning shared connection'}else{'PASS: frontend control deadline and local disconnect'}
+        }
     }
     $arguments=@($image,$runtime,"$root\observer.txt",$mode)
     if($Control){$arguments+=[string]$Control}

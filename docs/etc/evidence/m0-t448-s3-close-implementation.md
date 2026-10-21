@@ -1871,3 +1871,106 @@ S3 remains open for the sixteen finite synchronous methods, UNKNOWN_IF
 diagnosis and observation timeout consistency, partial-initialization/fault
 cleanup and original-host exit permission. No new transport, semantic waiver,
 guest change or S3/T acceptance is introduced by P13.
+
+## Remaining finite-control group
+
+P13 is pushed at d8051c3ab and the worktree is clean before this group.
+Convert all sixteen remaining finite methods together: First, Check, Get,
+Exit, Update, ExitCode, Reenter, AttachFile, AttachPipe, RevokeStream,
+RegisterWowExec, WowStyle, WowStarted, WowStartup, TaskSnapshot and
+WorkerTaskTrace. Reuse the existing async RPC completion/cancellation owner
+and ten-second policy; preserve the original application reply separately
+from transport failure. Get returns the original wait attachment rather than
+waiting for task completion. GetNextNativeCommand remains the one intentional
+long receive. Keep all argument/output storage alive through cancellation drain,
+close unconsumed typed attachments on failure and retain stream aliasing,
+receipt and repeated worker-wait identity. No guest/mirror changes are planned.
+Update raw-wire tests and mocks with the real signature, then build the whole
+package and verify actual stalled-service return, original DOS/WOW behavior,
+negative authentication and resource cleanup before publication. UNKNOWN_IF,
+partial initialization and original-host exit permission remain separate fixed
+obligations, not covered by this conversion alone.
+
+Candidate protocol60 implements that sixteen-method conversion. One server
+completion helper covers normal and early authentication/validation returns;
+AttachPipe delegates completion exactly once to AttachFile. The launch facade
+retains arguments through the existing cancellation drain, consolidates distinct
+stream rollback and releases unconsumed typed handle arrays even when timeout
+wins a concurrent reply. Management readers use the same async mechanism;
+native creation observation now uses the shared ten-second constant rather than
+250ms. No private transport or alternative completion mechanism is introduced.
+
+Full/incremental build r30, controller 35448, passes from 13:14:22 to
+13:17:39 UTC on 2026-10-21: thirteen images and 1,398 unchanged intermediates.
+After that controller ends, add deadline cases 38-54 to the actual RPC fixture.
+They exercise original command callers where local preconditions are available;
+ExitCode, WowStartup and RevokeStream instead exercise their real wire contracts
+without fabricating a receipt in the production client's private mapping.
+Management readers and native observation are also tested separately from the
+launcher's latched failure state. These are distinct evidence scopes, not claims
+that a raw-wire case proves every public facade's local prerequisite handling.
+Serial verification controller 26820 uses package-r30, rebuilds the changed test
+fixture and runs these seventeen cases before the thirty-six established ones
+and full wire/runtime gates. Results remain pending; installed/released binaries
+remain P13/protocol59 until the complete new candidate passes publication gates.
+
+r30 verification stops at 13:19:52 before running cases: the expanded fixture
+omitted base_rpc_client_launch_style.h for WowStyle. The product build remains
+valid; add that existing declaration and rerun as r30b without changing product
+sources or rewriting the failed r30 result.
+
+r30b controller 12932 passes rebuilt fixtures and service39 at 13:21:16 UTC,
+then all four migrated actual-RPC cases at 13:21:37. It is running the new
+deadline cases before the established matrix. Post controller 33972 waits for
+that exact process before native completion/presentation/governance checks;
+neither another serial test nor publication is started in parallel. Source and
+test inputs remain frozen until these controllers finish. No protocol60 runtime
+completion or publication is yet claimed.
+
+During the frozen r30b run, source enumeration confirms 60 IDL methods and
+59 ACF async declarations; GetNextNativeCommand alone remains the intentional
+long receive. Cases 38-54 all pass actual paused-service deadlines by 13:25 UTC;
+the earlier thirty-six cases continue. Delivery controller 33560 waits for post
+controller 33972 and every existing gate, pins changed source/test hashes,
+checks installed holders and uses the existing complete-package recovery
+transaction. Scheduling that controller is not a publication result.
+
+Read-only next-group review confirms host_applClose closes the original event,
+sound, heartbeat, video and device resources before host_terminate calls
+ExitProcess. base/support/terminat.c also performs base cleanup before those
+calls. The final exit substitution alone therefore cannot prove pre-teardown
+permission; preserve this ordering obligation when selecting the earliest
+owned/source seam. No exit-permission hook is implemented in this candidate.
+
+For the separate UNKNOWN_IF diagnosis, Microsoft documents that
+[RpcCancelThreadEx](https://learn.microsoft.com/en-us/windows/win32/api/rpcdce/nf-rpcdce-rpccancelthreadex)
+does not support ncalrpc, and
+[RpcBindingSetOption](https://learn.microsoft.com/en-us/windows/win32/api/rpcdce/nf-rpcdce-rpcbindingsetoption)
+call timeout is ignored for local RPC. These rule out treating a synchronous
+diagnostic thread plus either setting as a proven bounded implementation.
+This research changes no runtime or approved semantics; do not classify an
+unverified missing interface as a confirmed version mismatch.
+
+## P14 finite-control delivery
+
+r30b completes all 53 actual deadline cases, service39, four migrated actual
+RPC cases, wire/error/startup and same-package runtime gates at 13:37:09 UTC
+on 2026-10-21. Post verification completes at 13:37:39, including native142,
+presentation509 and governance. Management tests retain 128 checks, zero
+failures and zero outstanding allocations. WRITE evidence remains startup-only;
+this is not complete editor acceptance or proof that every failure interleaving
+has been exhausted. The changed legacy broker service_client fixture is not
+claimed as directly executed by this matrix.
+
+Delivery controller 33560 completes at 13:37:53 UTC. All thirteen host images
+are published to assets/release and O:/winnt/system32, with recoverable backups
+in build/t448-s3/publication-r30b-backup. Independent SHA-256 comparison checks
+all thirteen against package-r30b/system32 and both destinations. Protocol60
+has 59 async methods and the intentional long command receive; no third
+transport, guest modification or mirror diff is introduced.
+
+Production source nets +141 lines and tests +184 (+325 combined); combined
+with P13's removal this is -310 source/test/tool lines, excluding documentation
+and binaries. UNKNOWN_IF diagnosis, partial-initialization/fault cleanup and
+original-host pre-teardown exit permission remain fixed S3 obligations. This
+checkpoint delivers verified progress, not S3 closure or owner acceptance.

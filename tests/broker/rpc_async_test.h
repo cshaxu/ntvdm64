@@ -91,4 +91,76 @@ static __inline DWORD test_rpc_submit_native_request(handle_t binding,VDM_CONNEC
     RpcEndExcept
     return common_rpc_end_async(&async,error,NULL,10000);
 }
+static __inline DWORD test_rpc_first(handle_t binding, VDM_CONNECTION connection, HANDLE process, unsigned long generation, unsigned long *first)
+{
+    RPC_ASYNC_STATE async;DWORD error=common_rpc_begin_async(&async);
+    if(error)return error;
+    RpcTryExcept {Client_First(&async,binding,connection,process,generation,first);}
+    RpcExcept(1){error=RpcExceptionCode();}
+    RpcEndExcept
+    return common_rpc_end_async(&async,error,NULL,10000);
+}
+static __inline DWORD test_rpc_attach_pipe(handle_t binding, VDM_CONNECTION connection, HANDLE process, unsigned long generation, unsigned long role, HANDLE stream, unsigned long *receipt)
+{
+    RPC_ASYNC_STATE async;DWORD error=common_rpc_begin_async(&async);
+    if(error)return error;
+    RpcTryExcept {Client_AttachPipe(&async,binding,connection,process,generation,role,stream,receipt);}
+    RpcExcept(1){error=RpcExceptionCode();}
+    RpcEndExcept
+    return common_rpc_end_async(&async,error,NULL,10000);
+}
+static __inline DWORD test_rpc_attach_file(handle_t binding, VDM_CONNECTION connection, HANDLE process, unsigned long generation, unsigned long role, HANDLE stream, unsigned long *receipt)
+{
+    RPC_ASYNC_STATE async;DWORD error=common_rpc_begin_async(&async);
+    if(error)return error;
+    RpcTryExcept {Client_AttachFile(&async,binding,connection,process,generation,role,stream,receipt);}
+    RpcExcept(1){error=RpcExceptionCode();}
+    RpcEndExcept
+    return common_rpc_end_async(&async,error,NULL,10000);
+}
+static __inline DWORD test_rpc_revoke_stream(handle_t binding, VDM_CONNECTION connection, HANDLE process, unsigned long generation, unsigned long receipt)
+{
+    RPC_ASYNC_STATE async;DWORD error=common_rpc_begin_async(&async);
+    if(error)return error;
+    RpcTryExcept {Client_RevokeStream(&async,binding,connection,process,generation,receipt);}
+    RpcExcept(1){error=RpcExceptionCode();}
+    RpcEndExcept
+    return common_rpc_end_async(&async,error,NULL,10000);
+}
+static __inline DWORD test_rpc_task_snapshot(handle_t binding, HANDLE process, unsigned long protocol, byte application_version[ 32 ], unsigned long *count, DTASKMGR_WORKER **entries)
+{
+    RPC_ASYNC_STATE async;DWORD error=common_rpc_begin_async(&async);
+    if(error)return error;
+    RpcTryExcept {Client_TaskSnapshot(&async,binding,process,protocol,application_version,count,entries);}
+    RpcExcept(1){error=RpcExceptionCode();}
+    RpcEndExcept
+    return common_rpc_end_async(&async,error,NULL,10000);
+}
+static __inline DWORD test_rpc_worker_task_trace(handle_t binding, HANDLE process, unsigned long protocol, byte application_version[ 32 ], DTASKMGR_KEY *key, unsigned long *coverage, unsigned long *count, WORKER_TRACE_NODE **entries)
+{
+    RPC_ASYNC_STATE async;DWORD error=common_rpc_begin_async(&async);
+    if(error)return error;
+    RpcTryExcept {Client_WorkerTaskTrace(&async,binding,process,protocol,application_version,key,coverage,count,entries);}
+    RpcExcept(1){error=RpcExceptionCode();}
+    RpcEndExcept
+    return common_rpc_end_async(&async,error,NULL,10000);
+}
+static __inline DWORD test_rpc_wow_started(handle_t binding, VDM_CONNECTION connection, HANDLE process, unsigned long generation, unsigned long task)
+{
+    RPC_ASYNC_STATE async;DWORD error=common_rpc_begin_async(&async);
+    if(error)return error;
+    RpcTryExcept {Client_WowStarted(&async,binding,connection,process,generation,task);}
+    RpcExcept(1){error=RpcExceptionCode();}
+    RpcEndExcept
+    return common_rpc_end_async(&async,error,NULL,10000);
+}
+static __inline DWORD test_rpc_wow_startup(handle_t binding, VDM_CONNECTION connection, HANDLE process, unsigned long generation, unsigned long parent_receipt, HANDLE *event, unsigned long *started)
+{
+    RPC_ASYNC_STATE async;DWORD error=common_rpc_begin_async(&async);
+    if(error)return error;
+    RpcTryExcept {Client_WowStartup(&async,binding,connection,process,generation,parent_receipt,event,started);}
+    RpcExcept(1){error=RpcExceptionCode();}
+    RpcEndExcept
+    return common_rpc_end_async(&async,error,NULL,10000);
+}
 #endif

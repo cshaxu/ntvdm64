@@ -206,38 +206,44 @@ static void WINAPI basesrv_worker_terminated(void *context)
     (void)context;
     basesrv_schedule_empty_stop();
 }
-error_status_t Server_AttachFile(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+/* Complete every finite RPC reply, including authentication/validation failure. */
+static error_status_t basesrv_complete_rpc(PRPC_ASYNC_STATE async,DWORD error)
+{
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
+}
+error_status_t Server_AttachFile(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG role,HANDLE stream,ULONG *receipt)
 {
     DWORD pid,error;
     *receipt=0;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if (error) return error;
-    return OpenNtBaseServiceAttachStream(connection,pid,generation,role,stream,receipt);
+    if (error) return basesrv_complete_rpc(async,error);
+    return basesrv_complete_rpc(async,OpenNtBaseServiceAttachStream(connection,pid,generation,role,stream,receipt));
 }
-error_status_t Server_AttachPipe(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_AttachPipe(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG role,HANDLE stream,ULONG *receipt)
 {
-    return Server_AttachFile(binding,connection,process,generation,role,stream,receipt);
+    return Server_AttachFile(async,binding,connection,process,generation,role,stream,receipt);
 }
-error_status_t Server_RevokeStream(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_RevokeStream(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG receipt)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if (error) return error;
-    return OpenNtBaseServiceRevokeStream(connection,pid,generation,receipt);
+    if (error) return basesrv_complete_rpc(async,error);
+    return basesrv_complete_rpc(async,OpenNtBaseServiceRevokeStream(connection,pid,generation,receipt));
 }
-error_status_t Server_TaskSnapshot(handle_t binding,HANDLE process,ULONG protocol,
+error_status_t Server_TaskSnapshot(PRPC_ASYNC_STATE async,handle_t binding,HANDLE process,ULONG protocol,
     unsigned char application_version[32],ULONG *count,DTASKMGR_WORKER **entries)
 {
     OPENNT_BASE_WORKER_INFO *local=NULL;
     DWORD pid,error;
     uint32_t actual=0,index;
     uint64_t service_epoch=0;
-    if (!count || !entries) return ERROR_INVALID_PARAMETER;
+    if (!count || !entries) return basesrv_complete_rpc(async,ERROR_INVALID_PARAMETER);
     *count=0; *entries=NULL;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if (error) return error;
+    if (error) return basesrv_complete_rpc(async,error);
     error=basesrv_management_version(protocol,application_version);
     if (!error) error=OpenNtBaseServiceSnapshotCopy(service,&service_epoch,&local,&actual);
     if (error) goto done;
@@ -273,9 +279,9 @@ done:
     if (local) HeapFree(GetProcessHeap(),0,local);
     if (error && *entries) { MIDL_user_free(*entries); *entries=NULL; }
     if (error) *count=0;
-    return error;
+    return basesrv_complete_rpc(async,error);
 }
-error_status_t Server_WorkerTaskTrace(handle_t binding,HANDLE process,ULONG protocol,
+error_status_t Server_WorkerTaskTrace(PRPC_ASYNC_STATE async,handle_t binding,HANDLE process,ULONG protocol,
     unsigned char application_version[32],DTASKMGR_KEY *key,ULONG *coverage,
     ULONG *count,WORKER_TRACE_NODE **entries)
 {
@@ -283,9 +289,9 @@ error_status_t Server_WorkerTaskTrace(handle_t binding,HANDLE process,ULONG prot
     common_task_trace_node *local=NULL;
     uint32_t actual=0,flags=0;
     DWORD pid,error;
-    if(!coverage || !count || !entries)return ERROR_INVALID_PARAMETER;
+    if(!coverage || !count || !entries)return basesrv_complete_rpc(async,ERROR_INVALID_PARAMETER);
     *coverage=0;*count=0;*entries=NULL;
-    if(!key)return ERROR_INVALID_PARAMETER;
+    if(!key)return basesrv_complete_rpc(async,ERROR_INVALID_PARAMETER);
     selector.instance=(uint64_t)key->instance;selector.category=key->category;
     selector.generation=key->generation;selector.object=(uint64_t)key->object;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
@@ -300,7 +306,7 @@ error_status_t Server_WorkerTaskTrace(handle_t binding,HANDLE process,ULONG prot
     }
     if(local)HeapFree(GetProcessHeap(),0,local);
     if(!error){*coverage=flags;*count=actual;}
-    return error;
+    return basesrv_complete_rpc(async,error);
 }
 static DWORD basesrv_observe_native_creation(handle_t binding,HANDLE reporter,ULONG protocol,
     unsigned char application_version[32],HANDLE child,ULONG flags,hyper *node)
@@ -708,40 +714,40 @@ error_status_t Server_WaitFrontend(PRPC_ASYNC_STATE async,handle_t binding,VDM_C
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
 }
-error_status_t Server_First(handle_t binding,VDM_CONNECTION connection,HANDLE process,ULONG generation,ULONG *first)
+error_status_t Server_First(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,ULONG generation,ULONG *first)
 {
     DWORD pid;
     RPC_STATUS status;
     *first=0;
     status=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if (status) return status;
+    if (status) return basesrv_complete_rpc(async,status);
     status=OpenNtBaseServiceFirst(connection,pid,generation,first);
-    return status;
+    return basesrv_complete_rpc(async,status);
 }
-error_status_t Server_RegisterWowExec(handle_t binding,VDM_CONNECTION connection,
+error_status_t Server_RegisterWowExec(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation,ULONG window)
 {
     DWORD pid;
     RPC_STATUS status=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if (status) return status;
-    return OpenNtBaseServiceRegisterWowExec(connection,pid,generation,window);
+    if (status) return basesrv_complete_rpc(async,status);
+    return basesrv_complete_rpc(async,OpenNtBaseServiceRegisterWowExec(connection,pid,generation,window));
 }
-error_status_t Server_WowStyle(handle_t binding,VDM_CONNECTION connection,
+error_status_t Server_WowStyle(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation,ULONG task,ULONG *style)
 {
     DWORD pid;RPC_STATUS status=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if(status)return status;
-    return OpenNtBaseServiceWowStyle(connection,pid,generation,task,style);
+    if(status)return basesrv_complete_rpc(async,status);
+    return basesrv_complete_rpc(async,OpenNtBaseServiceWowStyle(connection,pid,generation,task,style));
 }
-error_status_t Server_WowStarted(handle_t binding,VDM_CONNECTION connection,
+error_status_t Server_WowStarted(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation,ULONG task)
 {
     DWORD pid;
     RPC_STATUS status=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if (status) return status;
-    return OpenNtBaseServiceWowStarted(connection,pid,generation,task);
+    if (status) return basesrv_complete_rpc(async,status);
+    return basesrv_complete_rpc(async,OpenNtBaseServiceWowStarted(connection,pid,generation,task));
 }
-error_status_t Server_WowStartup(handle_t binding,VDM_CONNECTION connection,
+error_status_t Server_WowStartup(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation,ULONG parent_receipt,HANDLE *event,ULONG *started)
 {
     DWORD pid;
@@ -749,13 +755,13 @@ error_status_t Server_WowStartup(handle_t binding,VDM_CONNECTION connection,
     RPC_STATUS status;
     *event=NULL; *started=0;
     status=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if (status) return status;
+    if (status) return basesrv_complete_rpc(async,status);
     /* Service returns an owned wait-only duplicate; RPC consumes that copy. */
     status=OpenNtBaseServiceWowStartup(connection,pid,generation,parent_receipt,event,&value);
     if (!status) *started=value ? 1u : 0u;
-    return status;
+    return basesrv_complete_rpc(async,status);
 }
-error_status_t Server_Check(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_Check(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG requestBytes,unsigned char *request,ULONG *parentEventCount,
     HANDLE **parentEvents,ULONG *parentReceipt,ULONG *replyBytes,
     unsigned char reply[BASE_CHECK_REPLY_BYTES])
@@ -764,23 +770,23 @@ error_status_t Server_Check(handle_t binding,VDM_CONNECTION connection,HANDLE pr
     uint32_t required=0;
     uint32_t parent_receipt=0;
     HANDLE parent_event=NULL;
-    if (!parentEventCount || !parentEvents || !parentReceipt || !replyBytes || !reply) return ERROR_INVALID_PARAMETER;
+    if (!parentEventCount || !parentEvents || !parentReceipt || !replyBytes || !reply) return basesrv_complete_rpc(async,ERROR_INVALID_PARAMETER);
     *parentEventCount=0;*parentEvents=NULL;*parentReceipt=0;*replyBytes=0;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if (error) return error;
+    if (error) return basesrv_complete_rpc(async,error);
     error=OpenNtBaseServiceCheck(connection,pid,generation,request,requestBytes,
         reply,BASE_CHECK_REPLY_BYTES,&required,&parent_event,&parent_receipt);
-    if (!error && required!=BASE_CHECK_REPLY_BYTES) return ERROR_INVALID_DATA;
+    if (!error && required!=BASE_CHECK_REPLY_BYTES) return basesrv_complete_rpc(async,ERROR_INVALID_DATA);
     if (!error && parent_event) {
         error=export_handles(&parent_event,1,parentEvents);
-        if (error) return error;
+        if (error) return basesrv_complete_rpc(async,error);
         *parentEventCount=1;
     }
     if (!error) *parentReceipt=(ULONG)parent_receipt;
     if (!error) *replyBytes=required;
-    return error;
+    return basesrv_complete_rpc(async,error);
 }
-error_status_t Server_Get(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_Get(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG requestBytes,unsigned char *request,ULONG *waitEventCount,HANDLE **waitEvents,
     ULONG *pipeStreamMask,ULONG *pipeStreamCount,HANDLE **pipeStreams,
     ULONG *fileStreamMask,ULONG *fileStreamCount,HANDLE **fileStreams,ULONG *replyBytes,
@@ -796,24 +802,24 @@ error_status_t Server_Get(handle_t binding,VDM_CONNECTION connection,HANDLE proc
     HANDLE wait_event=NULL;
     HANDLE standard[3]={NULL,NULL,NULL};
     if (!waitEventCount || !waitEvents || !pipeStreamMask || !pipeStreamCount || !pipeStreams ||
-        !fileStreamMask || !fileStreamCount || !fileStreams || !replyBytes || !reply) return ERROR_INVALID_PARAMETER;
+        !fileStreamMask || !fileStreamCount || !fileStreams || !replyBytes || !reply) return basesrv_complete_rpc(async,ERROR_INVALID_PARAMETER);
     *waitEventCount=0; *waitEvents=NULL;
     *pipeStreamMask=0; *pipeStreamCount=0; *pipeStreams=NULL;
     *fileStreamMask=0; *fileStreamCount=0; *fileStreams=NULL;
     *replyBytes=0; *reply=NULL;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if (error) return error;
+    if (error) return basesrv_complete_rpc(async,error);
     error=OpenNtBaseServiceGet(connection,pid,generation,request,requestBytes,
         &source_reply,&bytes,&wait_event,standard,&standard_count);
     if (error) {
         fprintf(stderr,"basesrv: Get rejected %lu\n",error); fflush(stderr);
-        return error;
+        return basesrv_complete_rpc(async,error);
     }
     if (wait_event) {
         error=export_handles(&wait_event,1,waitEvents);
         if (error) {
             OpenNtBaseServiceReleaseCommandReply(source_reply);
-            return error;
+            return basesrv_complete_rpc(async,error);
         }
         *waitEventCount=1;
     }
@@ -821,7 +827,7 @@ error_status_t Server_Get(handle_t binding,VDM_CONNECTION connection,HANDLE proc
         if (*waitEvents) { CloseHandle(**waitEvents); MIDL_user_free(*waitEvents);
             *waitEvents=NULL; *waitEventCount=0; }
         OpenNtBaseServiceReleaseCommandReply(source_reply);
-        return ERROR_NOT_ENOUGH_MEMORY;
+        return basesrv_complete_rpc(async,ERROR_NOT_ENOUGH_MEMORY);
     }
     memcpy(*reply,source_reply,bytes);
     for (index=0;index<standard_count;++index) if (standard[index]) {
@@ -853,7 +859,7 @@ error_status_t Server_Get(handle_t binding,VDM_CONNECTION connection,HANDLE proc
         *pipeStreamMask=*pipeStreamCount=*fileStreamMask=*fileStreamCount=0;
         if (*waitEvents) { CloseHandle(**waitEvents); MIDL_user_free(*waitEvents);
             *waitEvents=NULL; *waitEventCount=0; }
-        OpenNtBaseServiceReleaseCommandReply(source_reply); return error;
+        OpenNtBaseServiceReleaseCommandReply(source_reply); return basesrv_complete_rpc(async,error);
     }
     /* Get consumed reservation ownership.  RPC has independently duplicated
      * each selected resource into the worker, so close the broker's source
@@ -867,26 +873,26 @@ error_status_t Server_Get(handle_t binding,VDM_CONNECTION connection,HANDLE proc
     }
     OpenNtBaseServiceReleaseCommandReply(source_reply);
     *replyBytes=bytes;
-    return ERROR_SUCCESS;
+    return basesrv_complete_rpc(async,ERROR_SUCCESS);
 }
-error_status_t Server_Exit(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_Exit(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG isWow,ULONG wowTask,ULONG *closeWorkerWait)
 {
     DWORD pid,error;
     BOOL close_wait=FALSE;
     unsigned long close_wait_wire=0;
-    if (!closeWorkerWait || isWow>1u) return ERROR_INVALID_PARAMETER;
+    if (!closeWorkerWait || isWow>1u) return basesrv_complete_rpc(async,ERROR_INVALID_PARAMETER);
     *closeWorkerWait=0;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if (error) return error;
+    if (error) return basesrv_complete_rpc(async,error);
     error=OpenNtBaseServiceExit(connection,pid,generation,(BOOL)isWow,wowTask,&close_wait);
     if (!error) {
         close_wait_wire=close_wait ? 1u : 0u;
         *closeWorkerWait=close_wait_wire;
     }
-    return error;
+    return basesrv_complete_rpc(async,error);
 }
-error_status_t Server_Update(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_Update(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG requestBytes,unsigned char *request,ULONG *parentEventCount,HANDLE **parentEvents,
     ULONG *parentReceipt,ULONG *replyBytes,unsigned char reply[BASE_UPDATE_REPLY_BYTES])
 {
@@ -894,45 +900,45 @@ error_status_t Server_Update(handle_t binding,VDM_CONNECTION connection,HANDLE p
     uint32_t required=0;
     uint32_t parent_receipt=0;
     HANDLE parent_event=NULL;
-    if (!parentEventCount || !parentEvents || !parentReceipt || !replyBytes || !reply) return ERROR_INVALID_PARAMETER;
+    if (!parentEventCount || !parentEvents || !parentReceipt || !replyBytes || !reply) return basesrv_complete_rpc(async,ERROR_INVALID_PARAMETER);
     *parentEventCount=0; *parentEvents=NULL; *parentReceipt=0; *replyBytes=0;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if (error) return error;
+    if (error) return basesrv_complete_rpc(async,error);
     error=OpenNtBaseServiceUpdate(connection,pid,generation,request,requestBytes,reply,
         BASE_UPDATE_REPLY_BYTES,&required,&parent_event,&parent_receipt);
     if (error) {
         fprintf(stderr,"basesrv: Update rejected %lu\n",error); fflush(stderr);
-        return error;
+        return basesrv_complete_rpc(async,error);
     }
-    if (required!=BASE_UPDATE_REPLY_BYTES) return ERROR_INVALID_DATA;
+    if (required!=BASE_UPDATE_REPLY_BYTES) return basesrv_complete_rpc(async,ERROR_INVALID_DATA);
     if (parent_event) {
         error=export_handles(&parent_event,1,parentEvents);
-        if (error) return error;
+        if (error) return basesrv_complete_rpc(async,error);
         *parentEventCount=1;
     }
     *parentReceipt=(ULONG)parent_receipt;
     *replyBytes=required;
-    return ERROR_SUCCESS;
+    return basesrv_complete_rpc(async,ERROR_SUCCESS);
 }
-error_status_t Server_ExitCode(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_ExitCode(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG parentReceipt,ULONG *exitCode)
 {
     DWORD pid,error;
-    if (!exitCode || !parentReceipt) return ERROR_INVALID_PARAMETER;
+    if (!exitCode || !parentReceipt) return basesrv_complete_rpc(async,ERROR_INVALID_PARAMETER);
     *exitCode=0;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if (error) return error;
+    if (error) return basesrv_complete_rpc(async,error);
     error=OpenNtBaseServiceExitCode(connection,pid,generation,parentReceipt,exitCode);
-    return error;
+    return basesrv_complete_rpc(async,error);
 }
-error_status_t Server_Reenter(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_Reenter(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG increment)
 {
     DWORD pid,error;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if (error) return error;
+    if (error) return basesrv_complete_rpc(async,error);
     error=OpenNtBaseServiceReenter(connection,pid,generation,increment);
-    return error;
+    return basesrv_complete_rpc(async,error);
 }
 error_status_t Server_Disconnect(PRPC_ASYNC_STATE async,handle_t binding,HANDLE process,ULONG generation,VDM_CONNECTION *connection)
 {
@@ -964,7 +970,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v59_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v60_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -1011,7 +1017,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v59_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v60_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);

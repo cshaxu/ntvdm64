@@ -1,5 +1,21 @@
 interface vdm_service
 {
+    [async] First();
+    [async] Check();
+    [async] Get();
+    [async] Exit();
+    [async] Update();
+    [async] ExitCode();
+    [async] Reenter();
+    [async] AttachFile();
+    [async] AttachPipe();
+    [async] RevokeStream();
+    [async] RegisterWowExec();
+    [async] WowStyle();
+    [async] WowStarted();
+    [async] WowStartup();
+    [async] TaskSnapshot();
+    [async] WorkerTaskTrace();
     [async] SubmitNativeRequest();
     [async] FinishNativeRequest();
     [async] StartVdmWorker();

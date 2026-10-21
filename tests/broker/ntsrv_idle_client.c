@@ -34,7 +34,7 @@ int main(int argc,char **argv)
             deadline=GetTickCount64()+duration;
             do {
                 ULONG count=0;DTASKMGR_WORKER *entries=NULL;
-                error=Client_TaskSnapshot(binding,process,APP_PROTOCOL_VERSION,version,&count,&entries);
+                error=test_rpc_task_snapshot(binding,process,APP_PROTOCOL_VERSION,version,&count,&entries);
                 if (entries) midl_user_free(entries);
                 if (error || count) { error=error?error:ERROR_INVALID_DATA;break; }
                 puts("OBSERVED EMPTY");fflush(stdout);
@@ -56,9 +56,9 @@ int main(int argc,char **argv)
             } else if (!error) {
                 HANDLE denied_event=NULL;
                 ULONG started=99;
-                DWORD denied=Client_WowStarted(binding,connection,process,generation,1);
+                DWORD denied=test_rpc_wow_started(binding,connection,process,generation,1);
                 if (denied!=ERROR_ACCESS_DENIED) { error=ERROR_INVALID_DATA; __leave; }
-                denied=Client_WowStartup(binding,connection,process,generation,1,&denied_event,&started);
+                denied=test_rpc_wow_startup(binding,connection,process,generation,1,&denied_event,&started);
                 if (denied_event) CloseHandle(denied_event);
                 if (denied!=ERROR_ACCESS_DENIED || denied_event || started) {
                     error=ERROR_INVALID_DATA; __leave;

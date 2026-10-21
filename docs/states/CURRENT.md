@@ -19,7 +19,7 @@ the prior checkpoint claims that the CAF defect is universally fixed.
 | Admission And Approval | Owner approves final design and continuous sequential execution through T pre-closure acceptance; S1 design concluded and pushed at c838c332c. |
 | Objective | Implement the approved unified management-close transaction, concurrency and role-specific service-loss cleanup, preserving the S2 normal-chain candidate. |
 | Non-goals | No guest modification/rebuild; no native GUI target lifecycle ownership; no unrelated WOW32 capability work; no T closure without owner acceptance. |
-| Reference Baseline | S3 P13 obsolete RPC retirement: protocol 59, thirteen images published and hash-verified at both destinations; full/incremental build, service39, four migrated actual-RPC cases, 36 actual deadline scenarios, wire/error/startup and same-package runtime gates pass within the recorded frontier. Remaining finite RPC, initialization/fault and original-host exit-permission work remain open; no S3 acceptance or waiver. |
+| Reference Baseline | S3 P14 finite RPC unification: protocol 60, thirteen images published and hash-verified at both destinations; full/incremental build, service39, four migrated actual-RPC cases, 53 actual deadline scenarios, wire/error/startup and same-package runtime gates pass within the recorded frontier. UNKNOWN_IF diagnosis, initialization/fault and original-host exit-permission work remain open; no S3 acceptance or waiver. |
 | Files And ABI Surface | Run16, NTSRV service/client, common protocol, worker-base, NTCON, NTVDM and NTVWM; production-linked lifecycle tests; coherent protocol updates if required. |
 | Applicable Rules | docs/README reading set; execution, architecture, coding, document and source-policy authorities; original-owner recovery and exception registration. |
 | Verification | Source-first implementation and diff review; background x86/x64 full-component/incremental builds; affected production-linked service/frontend/launcher fixtures and normal DOS/native/WOW startup/return regression; complete package deployment and hashes; governance. |
@@ -83,6 +83,16 @@ regression successfully. P13/protocol59 is published and hash-verified at both
 destinations at 13:06:55 UTC on 2026-10-21. Implementation/tests/tools net -635
 lines; no guest or mirror change. This is a progress delivery, not S3 closure;
 exact attempts and remaining fixed groups are in the S3 ledger.
+
+After pushed P13 d8051c3ab, P14/protocol60 converts the remaining
+sixteen finite methods to existing async RPC and aligns native observation's
+deadline to ten seconds. All thirteen components and unchanged second-build
+intermediates pass r30; r30b passes 53 actual deadline scenarios, service39,
+four migrated RPC cases, wire/runtime and presentation/resource gates. All
+thirteen images were published and hash-verified at both destinations at
+13:37:53 UTC on 2026-10-21. No guest/mirror change or S3 closure is claimed;
+UNKNOWN_IF diagnosis, partial initialization and original-host exit permission
+remain open in the linked ledger.
 
 1. S1: whole-system ownership audit and complete transition design.
 2. S2: complete normal admission/result/handoff chain, including frontend policy and lifecycle-only WOW binding.
@@ -193,7 +203,7 @@ Both assets/release and O:/winnt/system32 were hash-verified. All-component
 build/incremental and focused lifecycle tests pass; actual remaining failed
 and unexecuted gates remain explicitly listed in the closure, not converted to
 passes. Guest, configuration and assets/winnt.zip are unchanged. This checkpoint
-adds no OpenNT mirror diff; current service protocol revision is 59. The
+adds no OpenNT mirror diff; current service protocol revision is 60. The
 protocol-51 through protocol-54 paragraphs below retain prior checkpoints.
 
 The published protocol-51 continuation removes unused retirement RPC methods and

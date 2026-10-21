@@ -9,6 +9,7 @@
 #include <tlhelp32.h>
 #include <rpc.h>
 #include "service.h"
+#include "../broker/rpc_async_test.h"
 #include "ntsrv-exe/transport/rpc_security.h"
 #include "common/protocol/version.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
@@ -37,7 +38,7 @@ static BOOL dos_records(PCWSTR report, unsigned stage, PCWSTR phase)
         FALSE, GetCurrentProcessId());
     if (!self) goto done;
     RpcTryExcept {
-        error = Client_TaskSnapshot(binding, self, APP_PROTOCOL_VERSION, version, &count, &rows);
+        error = test_rpc_task_snapshot(binding, self, APP_PROTOCOL_VERSION, version, &count, &rows);
     } RpcExcept(1) { error = RpcExceptionCode(); } RpcEndExcept
     /* Stage 1 observes final completion; an empty snapshot is valid there. */
     if (error || (!count && stage != 1)) goto done;

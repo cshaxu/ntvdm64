@@ -21,7 +21,7 @@ static LONG deliver_original_stream(void *context,HANDLE stream,uint32_t *receip
 {
     stream_rpc_test *test=context;ULONG id=0;
     ++test->delivered;
-    test->error=Client_AttachPipe(test->binding,test->connection,test->process,test->generation,2,stream,&id);
+    test->error=test_rpc_attach_pipe(test->binding,test->connection,test->process,test->generation,2,stream,&id);
     if (test->error) return (LONG)0xc0000001L;
     *receipt=id;return 0;
 }
@@ -29,7 +29,7 @@ static LONG revoke_original_stream(void *context,uint32_t receipt)
 {
     stream_rpc_test *test=context;
     ++test->revoked;
-    test->error=Client_RevokeStream(test->binding,test->connection,test->process,test->generation,receipt);
+    test->error=test_rpc_revoke_stream(test->binding,test->connection,test->process,test->generation,receipt);
     return test->error ? (LONG)0xc0000001L : 0;
 }
 #define REQUIRE(x) do { phase=__LINE__; if (!(x)) { fprintf(stderr,"FAIL line %d\n",__LINE__); return 1; } } while(0)
@@ -96,9 +96,9 @@ int main(int argc,char **argv)
             REQUIRE(test_rpc_acquire_console_context(binding,connection,process,0,NULL,&context)==ERROR_ACCESS_DENIED && !context);
             REQUIRE(test_rpc_acquire_console_context(binding,connection,process,generation,NULL,&context)==ERROR_ACCESS_DENIED && !context);
         }
-        REQUIRE(Client_First(binding,connection,process,0,&first)==ERROR_ACCESS_DENIED && first==0);
-        REQUIRE(!Client_First(binding,connection,process,generation,&first) && first==expectedFirst);
-        REQUIRE(!Client_First(binding,connection,process,generation,&first) && first==0);
+        REQUIRE(test_rpc_first(binding,connection,process,0,&first)==ERROR_ACCESS_DENIED && first==0);
+        REQUIRE(!test_rpc_first(binding,connection,process,generation,&first) && first==expectedFirst);
+        REQUIRE(!test_rpc_first(binding,connection,process,generation,&first) && first==0);
         REQUIRE(GetEnvironmentVariableA("BASESRV_TEST_PID",receiverPid,sizeof(receiverPid)));
         receiver=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,strtoul(receiverPid,NULL,10));
         REQUIRE(receiver && WaitForSingleObject(receiver,0)==WAIT_TIMEOUT);
@@ -113,23 +113,23 @@ int main(int argc,char **argv)
         writer=CreateFileA(temporary,GENERIC_READ|GENERIC_WRITE,FILE_SHARE_READ|FILE_SHARE_WRITE|FILE_SHARE_DELETE,
             NULL,OPEN_EXISTING,FILE_ATTRIBUTE_TEMPORARY|FILE_FLAG_DELETE_ON_CLOSE,NULL);
         REQUIRE(writer!=INVALID_HANDLE_VALUE);
-        REQUIRE(!Client_AttachFile(binding,connection,process,generation,1,writer,&receipt) && receipt);
-        REQUIRE(!Client_RevokeStream(binding,connection,process,generation,receipt));
+        REQUIRE(!test_rpc_attach_file(binding,connection,process,generation,1,writer,&receipt) && receipt);
+        REQUIRE(!test_rpc_revoke_stream(binding,connection,process,generation,receipt));
         REQUIRE(CloseHandle(writer));writer=NULL;
         REQUIRE(CreatePipe(&reader,&writer,NULL,0));
-        REQUIRE(Client_AttachPipe(binding,connection,process,0,2,writer,&receipt)==ERROR_ACCESS_DENIED && !receipt);
-        REQUIRE(Client_AttachPipe(binding,connection,process,generation,4,writer,&receipt)==ERROR_INVALID_PARAMETER && !receipt);
-        REQUIRE(!Client_AttachPipe(binding,connection,process,generation,2,writer,&receipt) && receipt);
+        REQUIRE(test_rpc_attach_pipe(binding,connection,process,0,2,writer,&receipt)==ERROR_ACCESS_DENIED && !receipt);
+        REQUIRE(test_rpc_attach_pipe(binding,connection,process,generation,4,writer,&receipt)==ERROR_INVALID_PARAMETER && !receipt);
+        REQUIRE(!test_rpc_attach_pipe(binding,connection,process,generation,2,writer,&receipt) && receipt);
         REQUIRE(CloseHandle(writer)); writer=NULL;
         REQUIRE(PeekNamedPipe(reader,NULL,0,NULL,&available,NULL) && available==0);
-        REQUIRE(Client_RevokeStream(binding,connection,process,0,receipt)==ERROR_ACCESS_DENIED);
+        REQUIRE(test_rpc_revoke_stream(binding,connection,process,0,receipt)==ERROR_ACCESS_DENIED);
         REQUIRE(PeekNamedPipe(reader,NULL,0,NULL,&available,NULL));
-        REQUIRE(!Client_RevokeStream(binding,connection,process,generation,receipt));
-        REQUIRE(!Client_RevokeStream(binding,connection,process,generation,receipt));
+        REQUIRE(!test_rpc_revoke_stream(binding,connection,process,generation,receipt));
+        REQUIRE(!test_rpc_revoke_stream(binding,connection,process,generation,receipt));
         REQUIRE(!PeekNamedPipe(reader,NULL,0,NULL,&available,NULL) && GetLastError()==ERROR_BROKEN_PIPE);
         REQUIRE(CloseHandle(reader));reader=NULL;
         REQUIRE(CreatePipe(&reader,&writer,NULL,0));
-        REQUIRE(!Client_AttachPipe(binding,connection,process,generation,2,writer,&receipt) && receipt);
+        REQUIRE(!test_rpc_attach_pipe(binding,connection,process,generation,2,writer,&receipt) && receipt);
         REQUIRE(CloseHandle(writer));writer=NULL;
         REQUIRE(test_rpc_disconnect(binding,process,0,&connection)==ERROR_ACCESS_DENIED && connection);
         REQUIRE(!test_rpc_disconnect(binding,process,generation,&connection) && !connection);
@@ -137,7 +137,7 @@ int main(int argc,char **argv)
         REQUIRE(CloseHandle(reader));reader=NULL;
         REQUIRE(!test_rpc_connect(binding,process,APP_PROTOCOL_VERSION,app_version,
             &server_protocol,server_version,&connection,&next) && next>generation);
-        REQUIRE(!Client_First(binding,connection,process,next,&first) && first==0);
+        REQUIRE(!test_rpc_first(binding,connection,process,next,&first) && first==0);
         REQUIRE(!test_rpc_disconnect(binding,process,next,&connection) && !connection);
     }
     RpcExcept(1) { fprintf(stderr,"RPC exception %lu at line %d\n",RpcExceptionCode(),phase); return 2; }

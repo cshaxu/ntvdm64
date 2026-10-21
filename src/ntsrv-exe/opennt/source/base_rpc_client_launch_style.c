@@ -86,6 +86,24 @@ static BOOL receipt_seen(const ULONG receipts[3],ULONG limit,ULONG receipt)
     return FALSE;
 }
 
+/* Roll back each distinct attachment once; terminal transport failure leaves
+ * the authenticated connection rundown responsible for service resources. */
+static void revoke_streams(const common_rpc_connection *client,const ULONG receipts[3])
+{
+    ULONG index;
+    for(index=0;!OpenNtBaseClientFailure(0) && index<3;++index) {
+        RPC_ASYNC_STATE async;DWORD error;
+        if(!receipts[index] || receipt_seen(receipts,index,receipts[index]))continue;
+        error=common_rpc_begin_async(&async);if(error)break;
+        RpcTryExcept {Client_RevokeStream(&async,client->binding,client->connection,
+            client->process,client->generation,receipts[index]);}
+        RpcExcept(1){error=RpcExceptionCode();}
+        RpcEndExcept
+        (void)OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
+            OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+    }
+}
+
 /* Recognize only the caller's exact standard Console handle, not an
  * unrelated same-type file/pipe; preserve the original stream contract. */
 static BOOL current_standard_console(HANDLE value,DWORD standard_id)
@@ -150,31 +168,44 @@ static DWORD attach_standard_streams(PBASE_API_MSG message,ULONG receipts[3])
             receipts[index]=receipts[previous]; break;
         }
         if (previous<index) continue;
-        RpcTryExcept {
-            if (type==FILE_TYPE_PIPE)
-                error=Client_AttachPipe(client.binding,client.connection,client.process,
-                    client.generation,roles[index],values[index],&receipts[index]);
-            else
-                error=Client_AttachFile(client.binding,client.connection,client.process,
-                    client.generation,roles[index],values[index],&receipts[index]);
+        {
+            RPC_ASYNC_STATE async;
+            error=OpenNtBaseClientFailure(0);
+            if(!error)error=common_rpc_begin_async(&async);
+            if(!error) {
+                RpcTryExcept {
+                    if (type==FILE_TYPE_PIPE)
+                        Client_AttachPipe(&async,client.binding,client.connection,client.process,
+                            client.generation,roles[index],values[index],&receipts[index]);
+                    else
+                        Client_AttachFile(&async,client.binding,client.connection,client.process,
+                            client.generation,roles[index],values[index],&receipts[index]);
+                }
+                RpcExcept(1) { error=RpcExceptionCode(); }
+                RpcEndExcept
+                error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
+                    OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+            }
         }
-        RpcExcept(1) { error=RpcExceptionCode(); }
-        RpcEndExcept
         if (error || !receipts[index]) break;
     }
-if (error || index!=3) {
+    if (error || index!=3) {
         error=OpenNtBaseClientFailure(error ? error : ERROR_INVALID_HANDLE);
-        for (index=0;!OpenNtBaseClientFailure(0) && index<3;++index) if (receipts[index] &&
-            !receipt_seen(receipts,index,receipts[index])) {
-            RpcTryExcept { (void)Client_RevokeStream(client.binding,client.connection,
-                client.process,client.generation,receipts[index]); }
-            RpcExcept(1) { }
-            RpcEndExcept
-        }
+        revoke_streams(&client,receipts);
         receipts[0]=receipts[1]=receipts[2]=0;
         return error ? error : ERROR_INVALID_HANDLE;
     }
     return ERROR_SUCCESS;
+}
+
+/* Returned attachments may arrive even when cancellation wins the reply.
+ * Transfer consumed handles by clearing their slot; close every other copy. */
+static void release_handle_array(HANDLE *values,ULONG count)
+{
+    ULONG index;
+    if(!values)return;
+    for(index=0;index<count;++index)if(values[index])CloseHandle(values[index]);
+    MIDL_user_free(values);
 }
 
 static NTSTATUS check_command(PCSR_API_MSG message,ULONG length)
@@ -203,15 +234,24 @@ static NTSTATUS check_command(PCSR_API_MSG message,ULONG length)
         ||
         !OpenNtBaseWriteCheckStyle(wire,wireBytes,launch.request_window_style))
         goto done;
-    RpcTryExcept {
-        error=Client_Check(client.binding,client.connection,client.process,client.generation,
-            wireBytes,wire,&parent_event_count,&parent_events,&parent_receipt_value,&replyBytes,reply);
+    {
+        RPC_ASYNC_STATE async;
+        error=OpenNtBaseClientFailure(0);
+        if(!error)error=common_rpc_begin_async(&async);
+        if(!error) {
+            RpcTryExcept {
+                Client_Check(&async,client.binding,client.connection,client.process,client.generation,
+                    wireBytes,wire,&parent_event_count,&parent_events,&parent_receipt_value,&replyBytes,reply);
+            }
+            RpcExcept(1) { error=RpcExceptionCode(); }
+            RpcEndExcept
+            error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
+                OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+        }
     }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
     if (!error && replyBytes==sizeof(reply) && parent_event_count<=1 &&
         (!parent_event_count || parent_events)) {
-        if (parent_event_count) parent_event=parent_events[0];
+        if (parent_event_count) {parent_event=parent_events[0];parent_events[0]=NULL;}
         applied=OpenNtBaseApplyCheckReply(reply,(uint32_t)replyBytes,client.generation,request,base);
     }
     if (applied && base->u.CheckVDM.VDMState==VDM_PRESENT_AND_READY &&
@@ -223,19 +263,12 @@ static NTSTATUS check_command(PCSR_API_MSG message,ULONG length)
         applied=FALSE;
     }
 done:
-    if (parent_events) MIDL_user_free(parent_events);
+    release_handle_array(parent_events,parent_event_count);
     if (parent_event) CloseHandle(parent_event);
     if (wire) HeapFree(GetProcessHeap(),0,wire);
     if (error || !applied) {
-        ULONG index;
         error=OpenNtBaseClientFailure(error ? error : ERROR_INVALID_DATA);
-        for (index=0;!OpenNtBaseClientFailure(0) && index<3;++index) if (streams[index] &&
-            !receipt_seen(streams,index,streams[index])) {
-            RpcTryExcept { (void)Client_RevokeStream(client.binding,client.connection,
-                client.process,client.generation,streams[index]); }
-            RpcExcept(1) { }
-            RpcEndExcept
-        }
+        revoke_streams(&client,streams);
         message->ReturnValue=rpc_failure(error);
         return message->ReturnValue;
     }
@@ -267,18 +300,27 @@ static NTSTATUS get_command(PCSR_API_MSG message,ULONG length)
         !(wire=HeapAlloc(GetProcessHeap(),0,wire_bytes)) ||
         !OpenNtBaseEncodeGetCommand(base,request,client.generation,wire,wire_bytes,&wire_bytes))
         goto done;
-    RpcTryExcept {
-        error=Client_Get(client.binding,client.connection,client.process,client.generation,
-            wire_bytes,wire,&wait_event_count,&wait_events,
-            &pipe_mask,&pipe_count,&pipe_handles,&file_mask,&file_count,&file_handles,
-            &reply_bytes,&reply);
+    {
+        RPC_ASYNC_STATE async;
+        error=OpenNtBaseClientFailure(0);
+        if(!error)error=common_rpc_begin_async(&async);
+        if(!error) {
+            RpcTryExcept {
+                Client_Get(&async,client.binding,client.connection,client.process,client.generation,
+                    wire_bytes,wire,&wait_event_count,&wait_events,
+                    &pipe_mask,&pipe_count,&pipe_handles,&file_mask,&file_count,&file_handles,
+                    &reply_bytes,&reply);
+            }
+            RpcExcept(1) { error=RpcExceptionCode(); }
+            RpcEndExcept
+            error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
+                OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+        }
     }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
     if (!error && wait_event_count<=1 && (!wait_event_count || wait_events) &&
         pipe_count<=3 && (!pipe_count || pipe_handles) &&
         file_count<=3 && (!file_count || file_handles) && reply && reply_bytes) {
-        if (wait_event_count) wait_event=wait_events[0];
+        if (wait_event_count) {wait_event=wait_events[0];wait_events[0]=NULL;}
         applied=OpenNtBaseApplyGetCommand(reply,(uint32_t)reply_bytes,client.generation,request,base);
         if(applied)(void)OpenNtBaseReadGetObservation(reply,reply_bytes,client.generation,request,&observation_direct);
         if(applied)applied=OpenNtBaseReadGetStyle(reply,reply_bytes,client.generation,request,
@@ -335,22 +377,12 @@ static NTSTATUS get_command(PCSR_API_MSG message,ULONG length)
                 base->u.GetNextVDMCommand.WaitObjectForVDM=worker_wait_event;
             } else worker_wait_event=wait_event;
         }
-        wait_event=NULL;
+        if(applied)wait_event=NULL;
     }
 done:
-    if (wait_events) MIDL_user_free(wait_events);
-    if (pipe_handles) {
-        ULONG index;
-        for (index=0;index<pipe_count;++index) if (pipe_handles[index])
-            CloseHandle(pipe_handles[index]);
-        MIDL_user_free(pipe_handles);
-    }
-    if (file_handles) {
-        ULONG index;
-        for (index=0;index<file_count;++index) if (file_handles[index])
-            CloseHandle(file_handles[index]);
-        MIDL_user_free(file_handles);
-    }
+    release_handle_array(wait_events,wait_event_count);
+    release_handle_array(pipe_handles,pipe_count);
+    release_handle_array(file_handles,file_count);
     if (wait_event) CloseHandle(wait_event);
     if (reply) MIDL_user_free(reply);
     if (wire) HeapFree(GetProcessHeap(),0,wire);
@@ -410,12 +442,21 @@ static NTSTATUS exit_command(PCSR_API_MSG message,ULONG length)
 
     if (length!=sizeof(*exit_message)) goto done;
     is_wow=exit_message->ConsoleHandle==(HANDLE)-1;
-    RpcTryExcept {
-        error=Client_Exit(client.binding,client.connection,client.process,client.generation,
-            is_wow ? 1u : 0u,is_wow ? exit_message->iWowTask : 0u,&close_worker_wait);
+    {
+        RPC_ASYNC_STATE async;
+        error=OpenNtBaseClientFailure(0);
+        if(!error)error=common_rpc_begin_async(&async);
+        if(!error) {
+            RpcTryExcept {
+                Client_Exit(&async,client.binding,client.connection,client.process,client.generation,
+                    is_wow ? 1u : 0u,is_wow ? exit_message->iWowTask : 0u,&close_worker_wait);
+            }
+            RpcExcept(1) { error=RpcExceptionCode(); }
+            RpcEndExcept
+            error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
+                OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+        }
     }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
     if (error || close_worker_wait>1u || (close_worker_wait && !worker_wait_event)) goto done;
     exit_message->WaitObjectForVDM=close_worker_wait ? worker_wait_event : NULL;
     if (close_worker_wait) worker_wait_event=NULL;
@@ -443,15 +484,24 @@ static NTSTATUS update_command(PCSR_API_MSG message,ULONG length)
         !(wire=HeapAlloc(GetProcessHeap(),0,wire_bytes)) ||
         !OpenNtBaseEncodeUpdateCommand(base,request,client.generation,wire,wire_bytes,&wire_bytes))
         goto done;
-    RpcTryExcept {
-        error=Client_Update(client.binding,client.connection,client.process,client.generation,
-            wire_bytes,wire,&parent_event_count,&parent_events,&receipt,&reply_bytes,reply);
+    {
+        RPC_ASYNC_STATE async;
+        error=OpenNtBaseClientFailure(0);
+        if(!error)error=common_rpc_begin_async(&async);
+        if(!error) {
+            RpcTryExcept {
+                Client_Update(&async,client.binding,client.connection,client.process,client.generation,
+                    wire_bytes,wire,&parent_event_count,&parent_events,&receipt,&reply_bytes,reply);
+            }
+            RpcExcept(1) { error=RpcExceptionCode(); }
+            RpcEndExcept
+            error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
+                OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+        }
     }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
     if (!error && reply_bytes==sizeof(reply) && parent_event_count<=1 &&
         (!parent_event_count || parent_events)) {
-        if (parent_event_count) parent_event=parent_events[0];
+        if (parent_event_count) {parent_event=parent_events[0];parent_events[0]=NULL;}
         applied=OpenNtBaseApplyUpdateReply(reply,(uint32_t)reply_bytes,client.generation,request,base);
     }
     if (applied) {
@@ -461,7 +511,7 @@ static NTSTATUS update_command(PCSR_API_MSG message,ULONG length)
         parent_event=NULL;
     }
 done:
-    if (parent_events) MIDL_user_free(parent_events);
+    release_handle_array(parent_events,parent_event_count);
     if (parent_event) CloseHandle(parent_event);
     if (wire) HeapFree(GetProcessHeap(),0,wire);
     if (error || !applied) {
@@ -479,12 +529,21 @@ static NTSTATUS exit_code_command(PCSR_API_MSG message,ULONG length)
     ULONG exit_code=0;
     if (length!=sizeof(*exit_message) || exit_message->hParent!=parent_event_handle || !parent_receipt)
         goto done;
-    RpcTryExcept {
-        error=Client_ExitCode(client.binding,client.connection,client.process,client.generation,
-            parent_receipt,&exit_code);
+    {
+        RPC_ASYNC_STATE async;
+        error=OpenNtBaseClientFailure(0);
+        if(!error)error=common_rpc_begin_async(&async);
+        if(!error) {
+            RpcTryExcept {
+                Client_ExitCode(&async,client.binding,client.connection,client.process,client.generation,
+                    parent_receipt,&exit_code);
+            }
+            RpcExcept(1) { error=RpcExceptionCode(); }
+            RpcEndExcept
+            error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
+                OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+        }
     }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
     if (!error) {
         exit_message->ExitCode=exit_code;
         parent_event_handle=NULL;parent_receipt=0;
@@ -505,12 +564,21 @@ static NTSTATUS reenter_command(PCSR_API_MSG message,ULONG length)
     if (length!=sizeof(*reenter) ||
         (reenter->fIncDec!=INCREMENT_REENTER_COUNT &&
          reenter->fIncDec!=DECREMENT_REENTER_COUNT)) goto done;
-    RpcTryExcept {
-        error=Client_Reenter(client.binding,client.connection,client.process,client.generation,
-            reenter->fIncDec);
+    {
+        RPC_ASYNC_STATE async;
+        error=OpenNtBaseClientFailure(0);
+        if(!error)error=common_rpc_begin_async(&async);
+        if(!error) {
+            RpcTryExcept {
+                Client_Reenter(&async,client.binding,client.connection,client.process,client.generation,
+                    reenter->fIncDec);
+            }
+            RpcExcept(1) { error=RpcExceptionCode(); }
+            RpcEndExcept
+            error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
+                OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+        }
     }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
     if (!error) {
         message->ReturnValue=STATUS_SUCCESS;
         return STATUS_SUCCESS;
@@ -557,12 +625,21 @@ DWORD WINAPI OpenNtBaseClientWowStyle(ULONG task,DWORD *style)
     if(!style)return ERROR_INVALID_PARAMETER;
     *style=WINDOW_STYLE_OFF;
     if(!client.connection)return error;
-    RpcTryExcept {
-        error=Client_WowStyle(client.binding,client.connection,client.process,
-            client.generation,task,style);
+    {
+        RPC_ASYNC_STATE async;
+        error=OpenNtBaseClientFailure(0);
+        if(!error)error=common_rpc_begin_async(&async);
+        if(!error) {
+            RpcTryExcept {
+                Client_WowStyle(&async,client.binding,client.connection,client.process,
+                    client.generation,task,style);
+            }
+            RpcExcept(1){error=RpcExceptionCode();}
+            RpcEndExcept
+            error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
+                OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+        }
     }
-    RpcExcept(1){error=RpcExceptionCode();}
-    RpcEndExcept
     if(!error && !WINDOW_STYLE_VALID(*style))error=ERROR_INVALID_DATA;
     return error;
 }
@@ -572,12 +649,21 @@ DWORD WINAPI OpenNtBaseClientWowStarted(ULONG task)
     common_rpc_connection client=OpenNtBaseClientExecutionConnection(reset_launch);
     DWORD error=ERROR_INVALID_STATE;
     if (!client.connection) return error;
-    RpcTryExcept {
-        error=Client_WowStarted(client.binding,client.connection,client.process,
-            client.generation,task);
+    {
+        RPC_ASYNC_STATE async;
+        error=OpenNtBaseClientFailure(0);
+        if(!error)error=common_rpc_begin_async(&async);
+        if(!error) {
+            RpcTryExcept {
+                Client_WowStarted(&async,client.binding,client.connection,client.process,
+                    client.generation,task);
+            }
+            RpcExcept(1) { error=RpcExceptionCode(); }
+            RpcEndExcept
+            error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
+                OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+        }
     }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
     return error;
 }
 
@@ -591,12 +677,21 @@ DWORD OpenNtBaseClientWowStartup(HANDLE parent,HANDLE *event,BOOL *started)
     if (!client.connection) return error;
     if (!parent || parent!=parent_event_handle || !parent_receipt)
         return ERROR_INVALID_HANDLE;
-    RpcTryExcept {
-        error=Client_WowStartup(client.binding,client.connection,client.process,
-            client.generation,parent_receipt,event,&value);
+    {
+        RPC_ASYNC_STATE async;
+        error=OpenNtBaseClientFailure(0);
+        if(!error)error=common_rpc_begin_async(&async);
+        if(!error) {
+            RpcTryExcept {
+                Client_WowStartup(&async,client.binding,client.connection,client.process,
+                    client.generation,parent_receipt,event,&value);
+            }
+            RpcExcept(1) { error=RpcExceptionCode(); }
+            RpcEndExcept
+            error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
+                OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+        }
     }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
     if (!error && (!*event || value>1)) error=ERROR_INVALID_DATA;
     if (error && *event) { CloseHandle(*event); *event=NULL; }
     if (!error) *started=value!=0;
@@ -619,13 +714,22 @@ NTSTATUS NTAPI OpenNtBaseClientCallServer(PCSR_API_MSG message,
             message->ReturnValue=STATUS_UNSUCCESSFUL;
             return STATUS_UNSUCCESSFUL;
         }
-        RpcTryExcept {
-            error=Client_RegisterWowExec(client.binding,client.connection,client.process,
-                client.generation,(ULONG)(ULONG_PTR)
-                    ((PBASE_API_MSG)message)->u.RegisterWowExec.hwndWowExec);
+        {
+            RPC_ASYNC_STATE async;
+            error=OpenNtBaseClientFailure(0);
+            if(!error)error=common_rpc_begin_async(&async);
+            if(!error) {
+                RpcTryExcept {
+                    Client_RegisterWowExec(&async,client.binding,client.connection,client.process,
+                        client.generation,(ULONG)(ULONG_PTR)
+                            ((PBASE_API_MSG)message)->u.RegisterWowExec.hwndWowExec);
+                }
+                RpcExcept(1) { error=RpcExceptionCode(); }
+                RpcEndExcept
+                error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
+                    OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+            }
         }
-        RpcExcept(1) { error=RpcExceptionCode(); }
-        RpcEndExcept
         message->ReturnValue=error ? rpc_failure(error) : STATUS_SUCCESS;
         return (NTSTATUS)message->ReturnValue;
     }
@@ -646,12 +750,21 @@ NTSTATUS NTAPI OpenNtBaseClientCallServer(PCSR_API_MSG message,
         message->ReturnValue=(ULONG)STATUS_UNSUCCESSFUL;
         return STATUS_UNSUCCESSFUL;
     }
-    RpcTryExcept {
-        error=Client_First(client.binding,client.connection,client.process,
-            client.generation,&first);
+    {
+        RPC_ASYNC_STATE async;
+        error=OpenNtBaseClientFailure(0);
+        if(!error)error=common_rpc_begin_async(&async);
+        if(!error) {
+            RpcTryExcept {
+                Client_First(&async,client.binding,client.connection,client.process,
+                    client.generation,&first);
+            }
+            RpcExcept(1) { error=RpcExceptionCode(); }
+            RpcEndExcept
+            error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
+                OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+        }
     }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
     if (error) {
         message->ReturnValue=rpc_failure(error);
         return (NTSTATUS)message->ReturnValue;

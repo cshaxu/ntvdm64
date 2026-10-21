@@ -23,16 +23,16 @@ static void note(const char *stage,DWORD result,ULONG a,ULONG b,ULONG c)
     }
     SetLastError(saved);
 }
-static error_status_t traced_get(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+static error_status_t traced_get(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     unsigned long generation,unsigned long bytes,byte *request,
     unsigned long *wait_count,HANDLE **waits,unsigned long *pipe_mask,
     unsigned long *pipe_count,HANDLE **pipes,unsigned long *file_mask,
     unsigned long *file_count,HANDLE **files,unsigned long *reply_bytes,byte **reply)
 {
-    error_status_t result=Client_Get(binding,connection,process,generation,bytes,request,
+    error_status_t result=Client_Get(async,binding,connection,process,generation,bytes,request,
         wait_count,waits,pipe_mask,pipe_count,pipes,file_mask,file_count,files,reply_bytes,reply);
-    note("rpc-get",result,*wait_count,*pipe_count,*file_count);
-    note("rpc-masks",result,*pipe_mask,*file_mask,*reply_bytes);
+    /* Outputs are unavailable until the real caller completes the async call. */
+    note("rpc-get-issued",result,0,0,0);
     return result;
 }
 static BOOL traced_apply(const void *data,uint32_t bytes,uint32_t generation,

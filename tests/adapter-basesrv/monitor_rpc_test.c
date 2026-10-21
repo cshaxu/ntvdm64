@@ -360,7 +360,7 @@ int main(int argc,char **argv)
      * separately exercised Console named-pipe policy. */
     if (!empty) CHECK(console_context_rpc(binding,self)==0);
     RpcTryExcept {
-        error=Client_TaskSnapshot(binding,self,APP_PROTOCOL_VERSION+1,(unsigned char *)version,
+        error=test_rpc_task_snapshot(binding,self,APP_PROTOCOL_VERSION+1,(unsigned char *)version,
             &count,&entries);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
@@ -370,7 +370,7 @@ int main(int argc,char **argv)
         unsigned char wrong_version[APP_VERSION_BYTES];
         memcpy(wrong_version,version,sizeof(wrong_version));wrong_version[0]^=1;
         RpcTryExcept {
-            error=Client_TaskSnapshot(binding,self,APP_PROTOCOL_VERSION,wrong_version,&count,&entries);
+            error=test_rpc_task_snapshot(binding,self,APP_PROTOCOL_VERSION,wrong_version,&count,&entries);
         }
         RpcExcept(1) {error=RpcExceptionCode();}
         RpcEndExcept
@@ -389,7 +389,7 @@ int main(int argc,char **argv)
         CHECK(common_rpc_worker_task_trace(&management,&absent,&coverage,&actual,&nodes)==ERROR_INVALID_HANDLE);
         CHECK(!actual && !coverage && !nodes);
         RpcTryExcept {
-            error=Client_WorkerTaskTrace(binding,self,APP_PROTOCOL_VERSION-1,
+            error=test_rpc_worker_task_trace(binding,self,APP_PROTOCOL_VERSION-1,
                 (unsigned char *)version,&absent,&coverage,&actual,&nodes);
         }
         RpcExcept(1) {error=RpcExceptionCode();}

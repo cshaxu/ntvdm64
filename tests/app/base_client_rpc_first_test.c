@@ -15,6 +15,8 @@
 #include "common/rpc/management.h"
 #include "common/protocol/management.h"
 #include <base_rpc_client_internal.h>
+#include <base_rpc_client_launch_style.h>
+#include "common/rpc/async_call.h"
 #include <stddef.h>
 
 /* BaseCheckForVDM shares its original client translation unit with
@@ -553,6 +555,91 @@ static DWORD launch_control_query(unsigned mode,HANDLE token)
     return error;
 }
 
+/* Public original-command callers where their local prerequisites are available.
+ * ExitCode/WowStartup require a previously admitted parent receipt; those two
+ * plus rollback-only RevokeStream test the real wire without fabricating one
+ * in the production client's private mapping. */
+static DWORD finite_control_query(unsigned mode)
+{
+    common_rpc_connection view=OpenNtBaseClientExecutionConnection(NULL);
+    common_rpc_management management={view.binding,view.process};
+    BASE_API_MSG message={0};STARTUPINFOA startup={sizeof(startup)};
+    CHAR command[128]="MEM\r\n";
+    HANDLE input=NULL,output=NULL,event=NULL;
+    ULONG number=0,length=0,value=0,count=0,coverage=0;
+    DWORD error=ERROR_INVALID_PARAMETER;
+    NTSTATUS status;
+    switch(mode) {
+    case 38:number=BasepIsFirstVDM;length=sizeof(message.u.IsFirstVDM);break;
+    case 39:case 45:case 46:
+        if(mode==45) {
+            output=CreateFileW(L"NUL",GENERIC_WRITE,FILE_SHARE_READ|FILE_SHARE_WRITE,
+                NULL,OPEN_EXISTING,0,NULL);
+            if(output==INVALID_HANDLE_VALUE)return GetLastError();
+        }
+        if(mode==46 && !CreatePipe(&input,&output,NULL,0))return GetLastError();
+        message.u.CheckVDM.ConsoleHandle=(HANDLE)1;
+        message.u.CheckVDM.BinaryType=BINARY_TYPE_DOS;
+        message.u.CheckVDM.CmdLine=command;message.u.CheckVDM.CmdLen=(USHORT)(strlen(command)+1);
+        message.u.CheckVDM.StartupInfo=&startup;message.u.CheckVDM.StdOut=output;
+        number=BasepCheckVDM;length=sizeof(message.u.CheckVDM);break;
+    case 40:
+        message.u.GetNextVDMCommand.VDMState=ASKING_FOR_FIRST_COMMAND;
+        message.u.GetNextVDMCommand.CmdLine=command;
+        message.u.GetNextVDMCommand.CmdLen=sizeof(command);
+        message.u.GetNextVDMCommand.StartupInfo=&startup;
+        number=BasepGetNextVDMCommand;length=sizeof(message.u.GetNextVDMCommand);break;
+    case 41:number=BasepExitVDM;length=sizeof(message.u.ExitVDM);break;
+    case 42:
+        message.u.UpdateVDMEntry.EntryIndex=UPDATE_VDM_PROCESS_HANDLE;
+        message.u.UpdateVDMEntry.BinaryType=BINARY_TYPE_DOS;
+        number=BasepUpdateVDMEntry;length=sizeof(message.u.UpdateVDMEntry);break;
+    case 44:
+        message.u.SetReenterCount.fIncDec=INCREMENT_REENTER_COUNT;
+        number=BasepSetReenterCount;length=sizeof(message.u.SetReenterCount);break;
+    case 48:number=BasepRegisterWowExec;length=sizeof(message.u.RegisterWowExec);break;
+    case 49:return OpenNtBaseClientWowStyle(1,&value);
+    case 50:return OpenNtBaseClientWowStarted(1);
+    case 52: {
+        DTASKMGR_WORKER *items=NULL;
+        error=common_rpc_task_snapshot(&management,&count,&items);
+        if(items)MIDL_user_free(items);
+        return count || items ? ERROR_INVALID_DATA : error;
+    }
+    case 53: {
+        DTASKMGR_KEY key={0};WORKER_TRACE_NODE *items=NULL;
+        error=common_rpc_worker_task_trace(&management,&key,&coverage,&count,&items);
+        if(items)MIDL_user_free(items);
+        return coverage || count || items ? ERROR_INVALID_DATA : error;
+    }
+    case 54: {
+        uint64_t node=0;
+        error=common_rpc_observe_native_creation_bounded(&management,GetCurrentProcess(),0,&node);
+        return node ? ERROR_INVALID_DATA : error;
+    }
+    case 43:case 47:case 51: {
+        RPC_ASYNC_STATE async;
+        error=common_rpc_begin_async(&async);if(error)return error;
+        RpcTryExcept {
+            if(mode==43)Client_ExitCode(&async,view.binding,view.connection,view.process,view.generation,1,&value);
+            else if(mode==47)Client_RevokeStream(&async,view.binding,view.connection,view.process,view.generation,1);
+            else Client_WowStartup(&async,view.binding,view.connection,view.process,view.generation,1,&event,&value);
+        }
+        RpcExcept(1){error=RpcExceptionCode();}
+        RpcEndExcept
+        error=common_rpc_end_async(&async,error,NULL,10000);
+        if(event)CloseHandle(event);
+        return event || value ? ERROR_INVALID_DATA : error;
+    }
+    default:return ERROR_INVALID_PARAMETER;
+    }
+    status=OpenNtBaseClientCallServer((PCSR_API_MSG)&message,NULL,
+        CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,number),length);
+    error=GetLastError();
+    if(input)CloseHandle(input);if(output)CloseHandle(output);
+    return status==STATUS_UNSUCCESSFUL && message.ReturnValue==(ULONG)STATUS_UNSUCCESSFUL ? error : ERROR_INVALID_DATA;
+}
+
 static int frontend_deadline(unsigned mode)
 {
     DWORD (*events[])(HANDLE *)={OpenNtBaseClientWorkerFrontendCapability,
@@ -649,7 +736,8 @@ static int frontend_deadline(unsigned mode)
         puts("PASS: ordinary disconnect deadline and idempotent local cleanup");
         result=0;goto done;
     }
-    if(mode>=29)error=launch_control_query(mode,capability);
+    if(mode>=38)error=finite_control_query(mode);
+    else if(mode>=29)error=launch_control_query(mode,capability);
     else if(mode>=22)error=worker_control_query(mode,capability);
     else if(mode>=18) {
         HANDLE event=(HANDLE)1;
@@ -687,6 +775,15 @@ static int frontend_deadline(unsigned mode)
     printf("finalization status=%lu elapsed=%llu\n",error,(unsigned long long)elapsed);
     if(error!=ERROR_TIMEOUT || elapsed<9000 || elapsed>13000 ||
         WaitForSingleObject(server,0)!=WAIT_TIMEOUT)goto done;
+    if(mode>=38) {
+        BOOL raw=mode==43 || mode==47 || mode==51 || mode>=52;
+        if(!raw && OpenNtBaseClientFailure(0)!=ERROR_TIMEOUT)goto done;
+        if(raw && OpenNtBaseClientFailure(0))goto done;
+        if(resume(control)<0)goto done;
+        paused=FALSE;
+        puts("PASS: finite original/management RPC deadline with drained outputs");
+        result=0;goto done;
+    }
     if(startup) {
         puts("PASS: startup deadline with stalled service and no cleanup RPC");
         result=0;goto done;
@@ -780,7 +877,7 @@ int main(int argc,char **argv)
     if (argc==2 && !lstrcmpA(argv[1],"--startup-service-timeout")) return frontend_deadline(3);
     if (argc==3 && !lstrcmpA(argv[1],"--control-service-timeout")) {
         unsigned mode=(unsigned)strtoul(argv[2],NULL,10);
-        return mode>=5 && mode<=37 && mode!=7 ? frontend_deadline(mode) : 2;
+        return mode>=5 && mode<=54 && mode!=7 ? frontend_deadline(mode) : 2;
     }
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-root-parent")) return frontend_root_parent();
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-root-child")) return frontend_root_child(FALSE);

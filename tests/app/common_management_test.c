@@ -1,6 +1,7 @@
 #include "common/rpc/management.h"
 #include "common/protocol/version.h"
 #include "common/protocol/task_trace.h"
+#include <rpcasync.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,19 +23,30 @@ static void peer(handle_t binding,HANDLE process,unsigned long protocol,unsigned
     ++calls;CHECK(binding==expected.binding);CHECK(process==expected.process);
     CHECK(protocol==APP_PROTOCOL_VERSION);CHECK(!memcmp(application,version,APP_VERSION_BYTES));
 }
-static DWORD result(void)
+/* Deterministic completion seam only; real replies/cancellation use RPC fixtures. */
+static RPC_STATUS RPC_ENTRY unit_complete(PRPC_ASYNC_STATE async,void *reply)
+{
+    CHECK(WaitForSingleObject(async->u.hEvent,0)==WAIT_OBJECT_0);
+    *(DWORD *)reply=mode==1 ? ERROR_ACCESS_DENIED : ERROR_SUCCESS;
+    return ERROR_SUCCESS;
+}
+#define RpcAsyncCompleteCall unit_complete
+#include "../../src/common/rpc/management.c"
+#undef RpcAsyncCompleteCall
+static DWORD result(PRPC_ASYNC_STATE async)
 {
     if(mode==2)RpcRaiseException(RPC_S_CALL_FAILED);
-    return mode==1 ? ERROR_ACCESS_DENIED : ERROR_SUCCESS;
+    CHECK(SetEvent(async->u.hEvent));
+    return ERROR_SUCCESS;
 }
-error_status_t Client_TaskSnapshot(handle_t binding,HANDLE process,unsigned long protocol,
+error_status_t Client_TaskSnapshot(PRPC_ASYNC_STATE async,handle_t binding,HANDLE process,unsigned long protocol,
     unsigned char *application,unsigned long *count,DTASKMGR_WORKER **items)
 {
     peer(binding,process,protocol,application);
     *count=mode==3 ? 0 : 1;
     *items=mode==3 ? NULL : MIDL_user_allocate(sizeof(**items));
     if(*items){ZeroMemory(*items,sizeof(**items));(*items)->process_id=123;}
-    return result();
+    return result(async);
 }
 error_status_t Client_CloseManagementNode(PRPC_ASYNC_STATE async,handle_t binding,HANDLE process,unsigned long protocol,
     unsigned char *application,DTASKMGR_KEY *key)
@@ -48,7 +60,7 @@ error_status_t Client_CloseManagementNode(PRPC_ASYNC_STATE async,handle_t bindin
     RpcRaiseException(mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED);
     return ERROR_SUCCESS;
 }
-error_status_t Client_WorkerTaskTrace(handle_t binding,HANDLE process,unsigned long protocol,
+error_status_t Client_WorkerTaskTrace(PRPC_ASYNC_STATE async,handle_t binding,HANDLE process,unsigned long protocol,
     unsigned char *application,DTASKMGR_KEY *key,unsigned long *coverage,
     unsigned long *count,WORKER_TRACE_NODE **items)
 {
@@ -56,7 +68,7 @@ error_status_t Client_WorkerTaskTrace(handle_t binding,HANDLE process,unsigned l
     *coverage=1;*count=mode==3 ? 0 : 1;
     *items=mode==3 ? NULL : MIDL_user_allocate(sizeof(**items));
     if(*items){ZeroMemory(*items,sizeof(**items));(*items)->node=19;}
-    return result();
+    return result(async);
 }
 error_status_t Client_ObserveNativeCreationAsync(PRPC_ASYNC_STATE async,handle_t binding,
     HANDLE process,unsigned long protocol,unsigned char *application,HANDLE child,
