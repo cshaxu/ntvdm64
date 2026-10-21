@@ -84,7 +84,7 @@ static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
     RPC_STATUS status,uuid_status;
     unsigned int index;
     DWORD result=RPC_S_SERVER_UNAVAILABLE;
-    status=RpcIfInqId(Client_vdm_service_v52_0_c_ifspec,&expected);
+    status=RpcIfInqId(Client_vdm_service_v53_0_c_ifspec,&expected);
     if (status) return status;
     status=RpcMgmtInqIfIds(binding,&interfaces);
     if (status) return status;
@@ -201,8 +201,10 @@ done:
 
 DWORD OpenNtBaseClientReportCurrentConsoleMembers(void)
 {
+    RPC_ASYNC_STATE async;
     DWORD count,error,*members=NULL;
     if (!client.connection || !client.process) return ERROR_INVALID_STATE;
+    error=OpenNtBaseClientFailure(0);if(error)return error;
     /* Only the attached root samples identity. Preserve its two-read ceiling;
      * common owns allocation, never authentication or registration policy. */
     error=common_console_members_read(32,4096,2,&members,&count);
@@ -211,12 +213,15 @@ DWORD OpenNtBaseClientReportCurrentConsoleMembers(void)
         if(error==ERROR_GEN_FAILURE)error=ERROR_INVALID_HANDLE;
         goto done;
     }
+    error=common_rpc_begin_async(&async);if(error)goto done;
     RpcTryExcept {
-        error=Client_ReportConsoleMembers(client.binding,client.connection,client.process,
+        Client_ReportConsoleMembers(&async,client.binding,client.connection,client.process,
             client.generation,count,members);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
+    error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,client.server,
+        OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
 done:
     common_console_members_release(members);
     return error;
@@ -345,28 +350,36 @@ DWORD OpenNtBaseClientBindNativeTarget(DWORD request,HANDLE target,HANDLE receip
 }
 DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE capability)
 {
+    RPC_ASYNC_STATE async;
     DWORD error=ERROR_INVALID_STATE;
     if (!client.connection || !client.binding || !client.process) return error;
+    error=OpenNtBaseClientFailure(0);if(error)return error;
+    error=common_rpc_begin_async(&async);if(error)return error;
     RpcTryExcept {
-        error=Client_RegisterFrontendRoot(client.binding,client.connection,client.process,
+        Client_RegisterFrontendRoot(&async,client.binding,client.connection,client.process,
             client.generation,capability);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    return error;
+    return OpenNtBaseClientFailure(common_rpc_end_async(&async,error,client.server,
+        OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
 }
 DWORD OpenNtBaseClientRegisterFrontendLease(uint64_t console_window,DWORD creator_pid,
     BOOL borrowed,HANDLE retire,HANDLE restored)
 {
+    RPC_ASYNC_STATE async;
     DWORD error=ERROR_INVALID_STATE;
     if(!client.connection || !client.binding || !client.process)return error;
+    error=OpenNtBaseClientFailure(0);if(error)return error;
+    error=common_rpc_begin_async(&async);if(error)return error;
     RpcTryExcept {
-        error=Client_RegisterFrontendLease(client.binding,client.connection,client.process,
+        Client_RegisterFrontendLease(&async,client.binding,client.connection,client.process,
             client.generation,(LONGLONG)console_window,creator_pid,borrowed!=FALSE,retire,restored);
     }
     RpcExcept(1){error=RpcExceptionCode();}
     RpcEndExcept
-    return error;
+    return OpenNtBaseClientFailure(common_rpc_end_async(&async,error,client.server,
+        OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
 }
 DWORD OpenNtBaseClientFrontendJoinCandidate(DWORD *nonce,DWORD *candidate_pid)
 {
@@ -503,7 +516,8 @@ DWORD OpenNtBaseClientFrontendCloseQuiesced(void)
 DWORD OpenNtBaseClientFrontendStartupResult(HANDLE capability,DWORD status)
 {
     common_rpc_connection state=client_rpc_view();
-    return common_rpc_frontend_startup_result(&state,capability,status);
+    DWORD error=OpenNtBaseClientFailure(0);if(error)return error;
+    return OpenNtBaseClientFailure(common_rpc_frontend_startup_result(&state,capability,status));
 }
 DWORD OpenNtBaseClientWaitFrontendConsoleRestored(void)
 {
@@ -631,16 +645,21 @@ DWORD OpenNtBaseClientFrontendRequest(DWORD *request,HANDLE *worker)
 
 DWORD OpenNtBaseClientAttachFrontendRequest(DWORD request,HANDLE pipe,HANDLE ready,DWORD *generation)
 {
+    RPC_ASYNC_STATE async;
     DWORD error=ERROR_INVALID_STATE;
     if (!generation) return ERROR_INVALID_PARAMETER;
     *generation=0;
     if (!client.connection || !client.binding || !client.process) return error;
+    error=OpenNtBaseClientFailure(0);if(error)return error;
+    error=common_rpc_begin_async(&async);if(error)return error;
     RpcTryExcept {
-        error=Client_AttachFrontendRequest(client.binding,client.connection,client.process,
+        Client_AttachFrontendRequest(&async,client.binding,client.connection,client.process,
             client.generation,request,pipe,ready);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
+    error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,client.server,
+        OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
     if (!error) *generation=client.generation;
     return error;
 }

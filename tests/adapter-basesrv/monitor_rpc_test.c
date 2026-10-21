@@ -175,7 +175,7 @@ static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
         generation,1,ERROR_SUCCESS,self,forged),ERROR_ACCESS_DENIED);
     RPC_CHECK(Client_NativeStartupResult(binding,connection,self,generation+1,
         generation,1,ERROR_ACCESS_DENIED,NULL,NULL),ERROR_ACCESS_DENIED);
-    RPC_CHECK(Client_RegisterFrontendRoot(binding,connection,self,generation,forged),ERROR_ACCESS_DENIED);
+    RPC_CHECK(test_rpc_register_frontend_root(binding,connection,self,generation,forged),ERROR_ACCESS_DENIED);
     RPC_CHECK(Client_FrontendStartupResult(binding,connection,self,generation,
         forged,ERROR_ACCESS_DENIED),ERROR_ACCESS_DENIED);
     RPC_CHECK(Client_FrontendStartupResult(binding,connection,self,generation+1,

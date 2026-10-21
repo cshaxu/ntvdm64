@@ -28,4 +28,14 @@ static __inline DWORD test_rpc_broker_process(handle_t binding,VDM_CONNECTION co
     RpcEndExcept
     return common_rpc_end_async(&async,error,NULL,10000);
 }
+static __inline DWORD test_rpc_register_frontend_root(handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,ULONG generation,HANDLE capability)
+{
+    RPC_ASYNC_STATE async;DWORD error=common_rpc_begin_async(&async);
+    if(error)return error;
+    RpcTryExcept {Client_RegisterFrontendRoot(&async,binding,connection,process,generation,capability);}
+    RpcExcept(1){error=RpcExceptionCode();}
+    RpcEndExcept
+    return common_rpc_end_async(&async,error,NULL,10000);
+}
 #endif

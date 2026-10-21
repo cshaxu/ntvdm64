@@ -721,6 +721,7 @@ static int frontend_deadline(unsigned mode)
     PROCESS_CONTROL suspend=(PROCESS_CONTROL)GetProcAddress(GetModuleHandleW(L"ntdll.dll"),"NtSuspendProcess");
     PROCESS_CONTROL resume=(PROCESS_CONTROL)GetProcAddress(GetModuleHandleW(L"ntdll.dll"),"NtResumeProcess");
     HANDLE root=NULL,capability=NULL,restored=NULL,server=NULL,control=NULL,frontend_control=NULL;
+    HANDLE pipe_read=NULL,pipe_write=NULL;
     DWORD error,input_mode=0;ULONGLONG began,elapsed;int result=1;BOOL paused=FALSE,frontend_paused=FALSE;
     /* Workers keep their shared connection after an individual report times
      * out. Launchers instead latch their bounded finalization failure. Match
@@ -732,6 +733,12 @@ static int frontend_deadline(unsigned mode)
     if(!worker_exit && !startup && (mode<4 || mode==9) && OpenNtBaseClientStartFrontend((uint64_t)(UINT_PTR)GetConsoleWindow(),TRUE,
         &root,&capability,&restored))goto done;
     if(startup)OpenNtBaseClientDisconnectCurrent(); /* End setup, before injecting the fault. */
+    if(mode>=10) {
+        capability=CreateEventW(NULL,TRUE,FALSE,NULL);
+        restored=CreateEventW(NULL,TRUE,FALSE,NULL);
+        if(!capability || !restored)goto done;
+        if(mode==13 && !CreatePipe(&pipe_read,&pipe_write,NULL,0))goto done;
+    }
     if(mode==9) {
         DWORD exit_code=STILL_ACTIVE,after=0,wait,index,count=0;
         DTASKMGR_WORKER *items=NULL;DTASKMGR_KEY key={0};
@@ -775,6 +782,15 @@ static int frontend_deadline(unsigned mode)
         error=common_rpc_close_management_node(&management,&key);
     } else if(mode==5)error=OpenNtBaseClientFrontendCloseQuiesced();
     else if(mode==6)error=OpenNtBaseClientFrontendConsoleRestored();
+    else if(mode==10)error=OpenNtBaseClientRegisterFrontendRoot(capability);
+    else if(mode==11)error=OpenNtBaseClientRegisterFrontendLease(
+        (uint64_t)(UINT_PTR)GetConsoleWindow(),GetCurrentProcessId(),TRUE,capability,restored);
+    else if(mode==12)error=OpenNtBaseClientReportCurrentConsoleMembers();
+    else if(mode==13) {
+        DWORD generation=99;
+        error=OpenNtBaseClientAttachFrontendRequest(1,pipe_read,capability,&generation);
+        if(generation)goto done;
+    }
     else error=startup ? OpenNtBaseClientConnectCurrentTimeout(10000) : worker_exit ? OpenNtBaseClientRequestWorkerExit() :
         OpenNtBaseClientWaitFrontendConsoleRestored();
     elapsed=GetTickCount64()-began;
@@ -801,6 +817,17 @@ static int frontend_deadline(unsigned mode)
     }
     began=GetTickCount64();
     if(OpenNtBaseClientWaitFrontendConsoleRestored()!=ERROR_TIMEOUT)goto done;
+    if(mode>=10) {
+        DWORD generation=99;
+        /* No cleanup/report call may issue another RPC while the first
+         * deadline is latched and the authenticated service remains paused. */
+        if(OpenNtBaseClientFrontendStartupResult(capability,ERROR_TIMEOUT)!=ERROR_TIMEOUT ||
+            OpenNtBaseClientRegisterFrontendRoot(capability)!=ERROR_TIMEOUT ||
+            OpenNtBaseClientRegisterFrontendLease(0,0,FALSE,capability,restored)!=ERROR_TIMEOUT ||
+            OpenNtBaseClientReportCurrentConsoleMembers()!=ERROR_TIMEOUT ||
+            OpenNtBaseClientAttachFrontendRequest(1,pipe_read,capability,&generation)!=ERROR_TIMEOUT ||
+            generation)goto done;
+    }
     OpenNtBaseClientDisconnectCurrent();
     if(GetTickCount64()-began>=1000)goto done;
     puts(mode>=4 ? "PASS: frontend control deadline and local disconnect" :
@@ -810,6 +837,7 @@ done:
     if(paused && resume(control)<0)result=1;
     if(frontend_paused && resume(frontend_control)<0)result=1;
     if(frontend_control)CloseHandle(frontend_control);
+    if(pipe_read)CloseHandle(pipe_read);if(pipe_write)CloseHandle(pipe_write);
     if(control)CloseHandle(control);
     if(root)CloseHandle(root);if(capability)CloseHandle(capability);
     if(restored)CloseHandle(restored);if(server)CloseHandle(server);
@@ -841,7 +869,7 @@ int main(int argc,char **argv)
     if (argc==2 && !lstrcmpA(argv[1],"--startup-service-timeout")) return frontend_deadline(3);
     if (argc==3 && !lstrcmpA(argv[1],"--control-service-timeout")) {
         unsigned mode=(unsigned)strtoul(argv[2],NULL,10);
-        return mode>=5 && mode<=9 && mode!=7 ? frontend_deadline(mode) : 2;
+        return mode>=5 && mode<=13 && mode!=7 ? frontend_deadline(mode) : 2;
     }
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-cancel-parent")) return reservation_parent(2);
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-cancel-killed-parent")) return reservation_parent(3);

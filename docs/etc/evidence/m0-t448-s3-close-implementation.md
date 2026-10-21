@@ -867,3 +867,88 @@ remaining worker control bounds, partial initialization and original-host
 exit permission remain S3 obligations. Neither this P nor the protocol bump
 claims those paths are finished. Final commit includes the complete release
 manifest; S4 integrated acceptance and owner T acceptance remain pending.
+
+### Next registration/attachment candidate
+
+On clean pushed 3907b52a0, the production frontend startup path still called
+RegisterFrontendRoot, ReportConsoleMembers, RegisterFrontendLease and
+AttachFrontendRequest synchronously. With an authenticated but paused NTSRV,
+these could prevent the role from reaching its existing timeout cleanup.
+Convert the four calls and server stubs using the existing async RPC helper,
+without changing service reservation/identity/I/O policy. RPC major/protocol
+53 isolates the updated call contract. Member arrays survive until cancellation
+drains; failed attachment never publishes a connection generation.
+
+The frontend main's respond label always reports startup status, so the facade
+must reject that report locally after a prior terminal failure rather than
+issue a second blocking call. New actual deadline modes 10/11/12/13 cover all
+four operations against a suspended real NTSRV and assert startup/report/
+attachment follow-ups plus disconnect finish locally within one second.
+The raw monitor forged-root negative uses the same production async helper.
+Other finite control families and original-host exit permission remain open.
+No guest/mirror modifications. Candidate is not yet built or delivered.
+
+r11 build PID 18544 began 2026-10-21 08:29:44 UTC. Service/deadline runner
+27092 waits for that result; wire runner 22656 waits for service/deadline
+success. Logs are build/deadlines/wire-r11.out/.err and fresh result files.
+The twelve-case deadline suite retains the previous eight scenarios and adds
+four registration/attachment cases. Member storage is freed only after the
+existing helper completes cancellation; the real channel caller's failure
+branch stops its activated channel and closes the unexported server handle.
+Those are source-review facts, not yet actual timed-failure proof.
+
+r11 full thirteen-image build and second incremental passed at 08:33:08 UTC;
+service38 passed, elapsed 5381 ms. Governance PID 16008 passed at 08:33:02 UTC,
+zero mirror/guest changes. Twelve actual deadline cases passed at 08:36:11 UTC.
+The new modes 10/11/12/13 return ERROR_TIMEOUT (1460) after respectively
+10015/10000/10016/10015 ms while the real authenticated service remains paused.
+Each also proves the startup-result and all four control follow-ups plus
+disconnect remain local, completing in under one second; attachment generation
+is zero after failure. These cases use live RPC, not mocked successful returns.
+They do not claim every real NTCON initialization phase has been paused in situ.
+
+Same-package runtime PID 28880, extra worker-failure PID 35744 and startup
+rollback PID 5456 began waiting on their predecessors at 08:32:41-42 UTC.
+Source delta so far is production +51/-23 (net +28), tests +42/-4 (net +38).
+Together with P4's removal this is a net reduction of 27 source/test lines;
+the new lines implement bounded calls and their actual failure evidence,
+not an additional transport/state framework. Delivery remains pending.
+
+Adjacent source audit: run16/frontend_scope.c immediately closes both the
+process/restored outputs from StartFrontend, retaining only its capability.
+Its inherited-root lookup likewise immediately closes the returned process.
+These are remaining redundant resource exports, not current peer waits. Audit
+test observation needs separately when simplifying the pending startup RPC
+group; do not preserve unused production attachments solely for fixture
+convenience or delete identity/retirement assertions to remove them.
+
+r11 wire/bootstrap/retirement completed at 08:37:13 UTC, including forged
+frontend registration rejection and protocol identity checks. Frontend and
+worker mechanism fixtures retain exact zero handle deltas (102/238 checks).
+Runtime completed 08:40:03 UTC: DOS17, WINMINE/SOL gameplay, WRITE startup-only
+frontier and all three CAF self-delete/echo-before-Enter cases. Worker failure
+and completed-worker-loss passed 08:40:13 UTC; scope lifetime and real startup
+rejection/timeout rollback passed 08:40:28 UTC. Preflight found no installed
+project process or selected Hook/style DLL holder.
+
+Reviewer verified all four new server methods complete every authentication
+and service-error branch once; client arrays/handles remain live until RPC
+completion drains. The startup-result guard observes the same terminal latch,
+and failed attachment does not publish a success generation. RPC major and
+application protocol both equal 53, including the real identity fixture.
+No guest/mirror changes; no third control mechanism. The ordinary successful
+startup-result RPC itself is still synchronous, as are the explicitly open
+startup/state/Disconnect diagnostic families; this candidate fixes the four
+named operations and their failure continuation, not those remaining paths.
+
+### S3 P5 delivery
+
+Final pre-publication review PID 31488 passed at 08:41:23 UTC. Publication
+PID 25968 completed at 08:41:54 UTC on 2026-10-21. All thirteen package-r11
+images match build-r11/result.json and both assets/release and O:/winnt/system32;
+publication-r11.json records exact SHA-256 values and publication-r11-backup
+holds the previous complete package. No installed process was killed.
+Source/test changes are +93/-27 (net +66), offset by P4's -93; no mirror or
+guest changes. This is the four-operation registration/attachment checkpoint,
+not S3 closure or full lifecycle completion. Remaining boundaries are listed
+above and in Current. No historical WRITE/intermittent-WOW fix is claimed.

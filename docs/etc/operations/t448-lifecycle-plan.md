@@ -261,6 +261,18 @@ Retain those service algorithms and their reservation tests; remove only the
 unused remote/client facade and its tests. This narrows the control authority
 without replacing the transport or creating a second startup implementation.
 
+The next bounded registration/attachment group converts RegisterFrontendRoot,
+RegisterFrontendLease, ReportConsoleMembers and AttachFrontendRequest to the
+same asynchronous RPC completion/cancellation path. Keep sampled member storage
+alive until completion drains; publish the attachment generation only on final
+success. A latched registration/attachment timeout prevents a subsequent startup
+result or cleanup RPC, preserving the original failure and local teardown.
+Service policy/authentication stays unchanged. Actual paused-service cases cover
+each operation and immediate failed follow-up calls; normal startup, forged
+identity, I/O attachment, rollback and runtime remain mandatory. StartFrontend,
+state-event acquisition, ordinary Disconnect and UNKNOWN_IF diagnosis remain
+separate explicitly open entries, not implicitly solved by these four methods.
+
 S1 changes documentation only: zero runtime, mirror, guest or release changes.
 S2 aims for zero mirror changes, using existing project-owned adapters. The
 selected S3 orderly-exit budget is at most three original host files and seven
