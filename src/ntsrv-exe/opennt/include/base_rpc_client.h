@@ -17,7 +17,6 @@ DWORD OpenNtBaseClientFinishNativeRequest(DWORD,DWORD *,DWORD *);
 DWORD OpenNtBaseClientConnectCurrent(void);
 /* Launcher bootstrap only: all connection calls share this remaining budget. */
 DWORD OpenNtBaseClientConnectCurrentTimeout(DWORD milliseconds);
-DWORD OpenNtBaseClientSetCallTimeout(DWORD milliseconds);
 /* Preserve ordinary failures; confirmed admitted service loss maps to the
  * original disconnected-port Win32 error. No peer observation is involved. */
 DWORD OpenNtBaseClientFailure(DWORD error);
@@ -49,6 +48,7 @@ DWORD OpenNtBaseClientFrontendUsage(DWORD *pending,DWORD *tasks);
 DWORD OpenNtBaseClientRetireWorkerlessFrontend(DWORD *retired);
 DWORD OpenNtBaseClientFrontendStateChanged(HANDLE *state_changed);
 DWORD OpenNtBaseClientWorkerShutdownEvent(HANDLE *shutdown);
+DWORD OpenNtBaseClientRequestWorkerExit(void);
 DWORD OpenNtBaseClientWorkerConsoleCloseEvent(HANDLE *close);
 DWORD OpenNtBaseClientWorkerIoReleaseEvent(HANDLE *release);
 DWORD OpenNtBaseClientWorkerStateChanged(HANDLE *state_changed);

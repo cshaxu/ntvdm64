@@ -8,26 +8,18 @@ static const unsigned char app_version[APP_VERSION_BYTES]=APP_VERSION;
 DWORD common_rpc_observe_native_creation_bounded(const common_rpc_management *state,HANDLE child,
     DWORD flags,uint64_t *node)
 {
-    RPC_ASYNC_STATE async={0};hyper identity=0;DWORD reply=ERROR_INVALID_STATE,error;
-    HANDLE completed=NULL;BOOL issued=FALSE;
+    RPC_ASYNC_STATE async={0};hyper identity=0;DWORD error;
     if(!node)return ERROR_INVALID_PARAMETER;
     *node=0;
     if(!state || !state->binding || !state->process || !child)return ERROR_INVALID_STATE;
-    error=RpcAsyncInitializeHandle(&async,sizeof(async));if(error)return error;
-    completed=CreateEventW(NULL,TRUE,FALSE,NULL);if(!completed)return GetLastError();
-    async.NotificationType=RpcNotificationTypeEvent;async.u.hEvent=completed;
+    error=common_rpc_begin_async(&async);if(error)return error;
     RpcTryExcept {
         Client_ObserveNativeCreationAsync(&async,state->binding,state->process,APP_PROTOCOL_VERSION,
             (unsigned char *)app_version,child,flags,&identity);
-        issued=TRUE;error=ERROR_SUCCESS;
     }
     RpcExcept(1) {error=RpcExceptionCode();}
     RpcEndExcept
-    if(issued) {
-        error=common_rpc_finish_async(&async,completed,NULL,250,&reply);
-        if(!error)error=reply;
-    }
-    CloseHandle(completed);
+    error=common_rpc_end_async(&async,error,NULL,250);
     if(!error)*node=(uint64_t)identity;
     return error;
 }

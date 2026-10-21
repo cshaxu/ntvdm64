@@ -446,7 +446,7 @@ static void run_case(unsigned mode,unsigned round)
         contender=CreateThread(NULL,0,snapshot_contender,acquired,0,NULL);CHECK(contender);
         CHECK(WaitForSingleObject(acquired,0)==WAIT_TIMEOUT);
         if(round&1) {
-            request.sequence=6;request.operation=CONSOLE_IO_ACTIVATE;
+            request.sequence=6;request.operation=38; /* Retired peer activation. */
             peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data));
             CHECK(WaitForSingleObject(thread,5000)==WAIT_OBJECT_0);
             CHECK(GetExitCodeThread(thread,&exit_code) && exit_code==ERROR_INVALID_DATA);
@@ -760,25 +760,26 @@ static void test_prepare_operation(void)
     frontend_io_channel channel={0};console_io_request request={0};console_io_reply reply;
     CONSOLE_SCREEN_BUFFER_INFO info;
     channel.root=test_frontend;channel.console.generation=1;
-    channel.console.io_context=&channel;channel.console.activate=activate;
+    channel.console.io_context=&channel;
     channel.console.prepare_text=prepare_text;channel.console.enter=enter;channel.console.leave=leave;
     request.version=CONSOLE_IO_VERSION;request.generation=1;request.sequence=1;
     request.operation=CONSOLE_IO_PREPARE_TEXT_REGION;request.state.width=100;request.state.height=35;
     CHECK(!actual_dispatch(&channel.console,&request,&reply) && !reply.result && reply.error==ERROR_NOT_READY);
-    request.sequence=2;request.operation=CONSOLE_IO_ACTIVATE;request.state.mode=1;
+    request.sequence=2;request.operation=38;request.state.mode=0;
     CHECK(actual_dispatch(&channel.console,&request,&reply)==ERROR_INVALID_DATA && channel.console.sequence==1);
     request.state.mode=0;request.state.input=1;
-    CHECK(!actual_dispatch(&channel.console,&request,&reply) && reply.result);
-    request.sequence=3;request.operation=CONSOLE_IO_PREPARE_TEXT_REGION;
+    CHECK(actual_dispatch(&channel.console,&request,&reply)==ERROR_INVALID_DATA && channel.console.sequence==1);
+    CHECK(!activate(&channel,TRUE)); /* Local application of an NTSRV grant. */
+    request.sequence=2;request.operation=CONSOLE_IO_PREPARE_TEXT_REGION;
     CHECK(!actual_dispatch(&channel.console,&request,&reply) && reply.result);
     CHECK(GetConsoleScreenBufferInfo(channel.console.output,&info) && info.dwSize.X==100 && info.dwSize.Y==35);
-    request.sequence=4;request.state.width=0;
-    CHECK(actual_dispatch(&channel.console,&request,&reply)==ERROR_INVALID_DATA && channel.console.sequence==3);
+    request.sequence=3;request.state.width=0;
+    CHECK(actual_dispatch(&channel.console,&request,&reply)==ERROR_INVALID_DATA && channel.console.sequence==2);
     CHECK(GetConsoleScreenBufferInfo(channel.console.output,&info) && info.dwSize.X==100 && info.dwSize.Y==35);
     CHECK(!activate(&channel,FALSE));
     frontend_session_forget(test_frontend,&channel);CloseHandle(channel.console.output);
     fprintf(private_report ? private_report : stdout,
-        "PASS operation-only activation and exact text-region request: inactive denied, reserved kind rejected, invalid geometry preserves state\n");
+        "PASS RPC-only activation and exact text-region request: retired peer activation rejected, inactive denied, invalid geometry preserves state\n");
 }
 static void test_standalone_text(BOOL native,BOOL styled)
 {

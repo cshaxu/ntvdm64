@@ -3,8 +3,9 @@
 ## Authority and status
 
 Owner approved the four-stage division and requested execution. Current admits
-S3 after the bounded S2 implementation/review conclusion, with S2 P delivery
-explicitly deferred by the retained regression gates. S1 design was delivered
+S3 after the bounded S2 implementation/review conclusion. S3 P1 at d0814cd4c
+delivers the retained S2 work and close-arbitration checkpoint; remaining S3
+exit permission and initialization/fault work is not closed. S1 design was delivered
 at c838c332c. This plan elaborates the approved architecture; it does not claim
 runtime implementation or waive the control-only-through-NTSRV boundary.
 Baseline: 7917ef25a, following the published T447 checkpoint 4d4ef4d47.
@@ -133,6 +134,17 @@ inside input_watch is not policy. Reject stale generation/phase acknowledgements
 
 ## Role-specific commands
 
+Spontaneous whole-worker exit intent uses the same service close arbitration
+as management, authenticated to the reporting worker's connection generation.
+Acceptance is not teardown permission. The existing shutdown/Console-close
+instruction is the permission: if Console-close was accepted first, reporting
+a local failure must not bypass frontend quiescence, reset its deadline or
+signal a competing shutdown. No extra worker registry, peer fence or retry
+protocol is needed. A rejected/stale report cannot authorize local teardown.
+This request is for managed workers; transient native GUI launchers retain
+their distinct startup-release contract. Component wiring and original-owner
+cleanup synchronization must be verified before declaring this group complete.
+
 DOS and native CUI support Console-close and worker-close, not individual task
 termination. WOW supports worker-close and source-shaped individual task close,
 not Console-close. Native GUI launcher consumes generic notifications and
@@ -215,6 +227,21 @@ production-linked fixtures rather than only checking exit status or screenshots.
 Preserve T447 COMMAND/WRITE/SOL non-passes; do not count them as restored here.
 
 ## Mirror and delivery budget
+
+### Communication unification within the lifecycle group
+
+Owner requires reuse of the existing RPC control and worker/frontend I/O
+mechanisms, with no third communication mechanism. NTSRV remains the only
+control authority. Audit existing lifecycle callers as well as new code;
+consolidate bounded local RPC on the existing asynchronous completion/cancel
+mechanism rather than RPC_C_OPT_CALL_TIMEOUT (ignored by ncalrpc). Cover
+startup Connect/BrokerProcess, final disposition, worker exit requests,
+frontend acknowledgements and management close. Intentional blocking command
+receive and normal task execution are not ten-second operations. Maintain
+authenticated identity, cancellation lifetime, no replay, and service-owned
+late completion. Direct worker/NTCON pipes remain I/O only. Results and the
+finite remaining inventory belong in the S3 implementation ledger; this is
+not a claim that every current call has been corrected.
 
 S1 changes documentation only: zero runtime, mirror, guest or release changes.
 S2 aims for zero mirror changes, using existing project-owned adapters. The

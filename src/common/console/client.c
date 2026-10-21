@@ -23,13 +23,6 @@ void ntcon_worker_client_dispose(ntcon_worker_client *client)
     ZeroMemory(client,sizeof(*client));
 }
 
-DWORD ntcon_worker_activate(ntcon_worker_client *client,BOOL active)
-{
-    console_io_request request={0};console_io_reply reply;
-    request.operation=CONSOLE_IO_ACTIVATE;request.state.input=active!=FALSE;
-    return ntcon_worker_call(client,&request,&reply);
-}
-
 DWORD ntcon_worker_prepare_text(ntcon_worker_client *client,COORD size)
 {
     console_io_request request={0};console_io_reply reply;

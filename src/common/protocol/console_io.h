@@ -73,13 +73,12 @@ enum console_io_operation {
     CONSOLE_IO_GET_DISPLAY_MODE,
     CONSOLE_IO_SET_DISPLAY_MODE,
     CONSOLE_IO_KEYBOARD_LAYOUT,
-    /* input selects acquisition/release; mode is reserved zero. */
-    CONSOLE_IO_ACTIVATE,
+    /* Wire value 38 was frontend activation; retired. Ownership is RPC-only. */
     /* state.count = byte offset, state.mode = revision (zero starts read).
      * Reply count = total bytes, mode = revision; data is the record's
      * actual bounded payload.
      * No published text configuration returns ERROR_NOT_FOUND. */
-    CONSOLE_IO_READ_TEXT_CONFIGURATION,
+    CONSOLE_IO_READ_TEXT_CONFIGURATION = 39,
     /* Native worker copies a multi-tile frontend screen while its channel
      * owns the frontend I/O lock. The channel releases it on END or EOF. */
     CONSOLE_IO_SNAPSHOT_BEGIN,

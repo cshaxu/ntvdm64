@@ -79,6 +79,34 @@ DWORD OpenNtBaseServiceTerminateWorker(OPENNT_BASE_SERVICE *service,uint32_t pro
     return service_terminate_worker(service,process_id,NULL);
 }
 
+DWORD OpenNtBaseServiceRequestWorkerExit(OPENNT_BASE_CONNECTION *worker,DWORD pid,
+    DWORD generation)
+{
+    OPENNT_BASE_SERVICE *service;
+    OPENNT_BASE_MANAGEMENT_KEY key={0};
+    OPENNT_BASE_WORKER_WATCH *watch;
+    DWORD error=ERROR_ACCESS_DENIED;
+    if(!worker)return ERROR_INVALID_PARAMETER;
+    service=worker->service;
+    EnterCriticalSection(&service->lock);
+    if(!OpenNtBaseServicePeer(worker,pid,generation))goto done;
+    watch=service_find_worker_watch(service,worker->process.SequenceNumber);
+    if(!watch)goto done;
+    /* A transient GUI launcher has no managed worker teardown. Its startup
+     * release is a distinct service result, not a Console/worker command. */
+    if(watch->native_gui_launcher){error=ERROR_NOT_SUPPORTED;goto done;}
+    key.instance=service->management_epoch;
+    key.category=MANAGEMENT_WORKER;
+    key.generation=watch->process.SequenceNumber;
+    error=ERROR_SUCCESS;
+done:
+    LeaveCriticalSection(&service->lock);
+    /* Re-resolve by generation, never by PID after dropping the lock. Reuse
+     * management arbitration: a pending Console close keeps its quiescence
+     * barrier, and repeated intent cannot send a competing worker command. */
+    return error ? error : service_terminate_worker(service,0,&key);
+}
+
 DWORD OpenNtBaseServiceCloseManagementNode(OPENNT_BASE_SERVICE *service,
     const OPENNT_BASE_MANAGEMENT_KEY *key)
 {

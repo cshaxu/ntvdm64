@@ -328,7 +328,6 @@ int main(int argc,char **argv)
     frontend.input=CreateFileW(L"CONIN$",GENERIC_READ|GENERIC_WRITE,FILE_SHARE_READ|FILE_SHARE_WRITE,
         NULL,OPEN_EXISTING,0,NULL);
     frontend.generation=17;
-    frontend.activate=bind_dos;
     frontend.prepare_text=prepare_text;
     CHECK(local!=INVALID_HANDLE_VALUE && frontend.output!=INVALID_HANDLE_VALUE &&
         frontend.input!=INVALID_HANDLE_VALUE);

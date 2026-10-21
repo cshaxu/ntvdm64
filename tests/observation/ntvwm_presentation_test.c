@@ -12,7 +12,6 @@ typedef struct peer_state {
     HANDLE pipe;
     HANDLE publication_ack;
     unsigned mode,calls;
-    unsigned activations,releases;
     unsigned snapshot_begins,snapshot_ends,screen_reads;
     unsigned publication_begins,publication_ends,publication_aborts;
     unsigned titles,cell_writes;
@@ -63,7 +62,7 @@ static DWORD WINAPI peer(void *context)
         }
         if(request.operation==CONSOLE_IO_WRITE_CELLS_W)++state->cell_writes;
         /* The sender must never acquire the frontend implicitly. */
-        if(request.operation==CONSOLE_IO_ACTIVATE)return ERROR_INVALID_FUNCTION;
+        if(request.operation==38)return ERROR_INVALID_FUNCTION; /* Retired activation. */
         if(state->mode==0 || (state->mode==6 && sequence<=5)) {
             if(sequence==1)error=ERROR_NOT_READY;
             else if(request.operation==CONSOLE_IO_VIDEO_BEGIN) {
@@ -115,8 +114,6 @@ static DWORD WINAPI peer(void *context)
             } else if(request.operation==CONSOLE_IO_SNAPSHOT_END) {
                 if(state->snapshot_begins!=state->snapshot_ends+1)error=ERROR_INVALID_STATE;
                 else ++state->snapshot_ends;
-            } else if(request.operation==CONSOLE_IO_ACTIVATE) {
-                if(request.state.input)++state->activations;else ++state->releases;
             } else if(request.operation==CONSOLE_IO_PUBLISH_TITLE_A) {
                 if(state->mode==21)error=ERROR_NOT_READY;
                 else {
@@ -536,8 +533,7 @@ done:
         CloseHandle(thread);
     }
     if(state.publication_ack)CloseHandle(state.publication_ack);
-    fprintf(log_file,"mode=%u calls=%u activations=%u releases=%u\n",mode,state.calls,
-        state.activations,state.releases);
+    fprintf(log_file,"mode=%u calls=%u\n",mode,state.calls);
     if(mode==0 || mode==6) {
         /* One rejected barrier, VIDEO_BEGIN, one variable-length VIDEO_DATA,
          * then the successful explicit barrier. No implicit ownership call. */
@@ -558,9 +554,8 @@ done:
         state.calls==(mode==5 ? 0u : mode==12 ? 4u : mode==10 ? 6u : mode==9 ? 21u : 1u));
     if((mode>=9 && mode<=16) || mode==20 || mode==21)CHECK(state.snapshot_begins==state.snapshot_ends &&
         state.snapshot_begins==(mode==9 ? 3u : mode==20 ? 2u : 1u));
-    /* Ownership is admitted/released over NTSRV RPC, never by presentation.
-     * Reject ACTIVATE above, while retaining final paint/input/barrier checks. */
-    CHECK(state.activations==0 && state.releases==0);
+    /* Peer rejects the retired activation opcode before dispatch above;
+     * final paint/input/barrier assertions retain the actual data contract. */
     if(mode==16) {
         DWORD i;CHECK(state.returned_count==ARRAYSIZE(state.returned));
         for(i=0;i<state.returned_count;++i)

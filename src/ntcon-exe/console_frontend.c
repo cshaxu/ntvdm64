@@ -99,7 +99,8 @@ DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request
     if (!request->sequence || owner->sequence==UINT32_MAX ||
         request->sequence!=owner->sequence+1 || request->bytes>CONSOLE_IO_MAX_DATA_BYTES ||
         (request->bytes && !request->data) ||
-        request->operation<CONSOLE_IO_WRITE || request->operation>CONSOLE_IO_PREPARE_TEXT_REGION)
+        request->operation<CONSOLE_IO_WRITE || request->operation>CONSOLE_IO_PREPARE_TEXT_REGION ||
+        request->operation==38) /* Retired peer activation, never a data operation. */
         return ERROR_INVALID_DATA;
     cells=request->operation>=CONSOLE_IO_READ_CELLS_A && request->operation<=CONSOLE_IO_WRITE_CELLS_W;
     write_cells=request->operation>=CONSOLE_IO_WRITE_CELLS_A && request->operation<=CONSOLE_IO_WRITE_CELLS_W;
@@ -130,7 +131,6 @@ DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request
         s->count>CONSOLE_IO_INPUT_CAPACITY)
         return ERROR_INVALID_DATA;
     if (request->operation==CONSOLE_IO_WINDOW_RECT && s->mode>1) return ERROR_INVALID_DATA;
-    if (request->operation==CONSOLE_IO_ACTIVATE && (s->mode || request->bytes)) return ERROR_INVALID_DATA;
     if(request->operation==CONSOLE_IO_PREPARE_TEXT_REGION &&
         (s->width<=0 || s->height<=0 || s->width>SHRT_MAX || s->height>SHRT_MAX || request->bytes))
         return ERROR_INVALID_DATA;
@@ -152,11 +152,6 @@ DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request
     reply->version=CONSOLE_IO_VERSION;
     reply->generation=owner->generation;
     reply->sequence=request->sequence;
-    if(request->operation==CONSOLE_IO_ACTIVATE) {
-        reply->error=owner->activate ? owner->activate(owner->io_context,s->input!=0) : ERROR_INVALID_FUNCTION;
-        reply->result=reply->error==ERROR_SUCCESS;
-        return ERROR_SUCCESS;
-    }
     if(owner->enter) {
         reply->error=owner->enter(owner->io_context);
         if(reply->error)return ERROR_SUCCESS;

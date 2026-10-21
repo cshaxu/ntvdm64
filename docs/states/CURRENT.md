@@ -19,7 +19,7 @@ the prior checkpoint claims that the CAF defect is universally fixed.
 | Admission And Approval | Owner approves final design and continuous sequential execution through T pre-closure acceptance; S1 design concluded and pushed at c838c332c. |
 | Objective | Implement the approved unified management-close transaction, concurrency and role-specific service-loss cleanup, preserving the S2 normal-chain candidate. |
 | Non-goals | No guest modification/rebuild; no native GUI target lifecycle ownership; no unrelated WOW32 capability work; no T closure without owner acceptance. |
-| Reference Baseline | S3 P1 r7 checkpoint carrying S2: thirteen images published and hash-verified at both destinations; full/incremental build, 36 service cases and same-package runtime gates pass within the recorded frontier. S3 exit-permission work remains open; no functional acceptance or waiver. |
+| Reference Baseline | S3 P2 communication-cleanup checkpoint: protocol 50, thirteen images published and hash-verified at both destinations; full/incremental build, 38 service cases, four actual deadline scenarios, wire negatives and same-package runtime gates pass within the recorded frontier. S3 exit-permission work remains open; no functional acceptance or waiver. |
 | Files And ABI Surface | Run16, NTSRV service/client, common protocol, worker-base, NTCON, NTVDM and NTVWM; production-linked lifecycle tests; coherent protocol updates if required. |
 | Applicable Rules | docs/README reading set; execution, architecture, coding, document and source-policy authorities; original-owner recovery and exception registration. |
 | Verification | Source-first implementation and diff review; background x86/x64 full-component/incremental builds; affected production-linked service/frontend/launcher fixtures and normal DOS/native/WOW startup/return regression; complete package deployment and hashes; governance. |
@@ -102,6 +102,29 @@ functional acceptance. WRITE intermittency is not called repaired. S3's
 healthy-service exit permission, partial-initialization cleanup and remaining
 fault/concurrency verification remain open; S4 owns final integrated acceptance.
 
+S3 continuation after pushed P1 d0814cd4c now implements spontaneous exit
+requests through the existing close arbiter. Acceptance remains distinct from
+the service's teardown instruction, preserving a prior Console quiescence
+barrier. The owner-side operation now has RPC/worker-base wiring and local
+permission tests, but no second published package. Real suspended-service
+verification exposed that the synchronous local-RPC timeout option is ineffective.
+S3 is reusing the existing asynchronous RPC completion/cancellation mechanism
+and auditing the remaining startup/finalization callers under the owner's
+explicit two-mechanism boundary: RPC control, direct worker/frontend I/O only.
+The linked S3 ledger records failed and pending gates; no transport workaround
+is admitted.
+
+The communication cleanup now removes retired I/O activation and the ineffective
+local-RPC timeout setter, reusing one existing async completion/cancellation
+owner. Full thirteen-component and incremental builds pass on r8i; r8j passes
+38 service cases and four real suspended-service/frontend deadline scenarios.
+r8k passes real management and application/protocol identity RPC negatives.
+Same-package DOS17, WINMINE/SOL gameplay, WRITE's startup-only frontier and all
+three internal CAF deletion cases passed on r8k. The coherent thirteen-image
+set was published and hash-verified at both destinations at 06:30:19 UTC on
+2026-10-21. Remaining synchronous control/diagnostic calls and host exit-permission
+integration remain explicit S3 gaps; this P2 progress delivery does not close S3.
+
 ## S1 Closure Record
 
 Design-only conclusion delivered at c838c332c. The
@@ -119,7 +142,7 @@ Both assets/release and O:/winnt/system32 were hash-verified. All-component
 build/incremental and focused lifecycle tests pass; actual remaining failed
 and unexecuted gates remain explicitly listed in the closure, not converted to
 passes. Guest, configuration and assets/winnt.zip are unchanged. This checkpoint
-adds no OpenNT mirror diff; service protocol revision is 49.
+adds no OpenNT mirror diff; service protocol revision is 50.
 
 [Preserved pre-closure status](../etc/evidence/m0-t447-pre-closure-status.md)
 retains the complete prior packet and technical history. Its active wording

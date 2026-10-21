@@ -31,6 +31,7 @@ typedef struct native_membership {
      * authenticated command/resume admission can request ownership again. */
     BOOL io_released;
     volatile LONG carrier_closing;
+    volatile LONG exit_requested;
 } native_membership;
 /* Called with the execution/I/O lock held, after final paint/input return.
  * Dispose only local transport state; the broker retains logical association. */
@@ -188,11 +189,42 @@ static void ntvwm_close_for_console_shutdown(native_membership *state)
 }
 static void ntvwm_close_for_worker_shutdown(native_membership *state)
 {
-    if((!state->shutdown || WaitForSingleObject(state->shutdown,0)!=WAIT_OBJECT_0) &&
-        (!state->stop_requested || WaitForSingleObject(state->stop_requested,0)!=WAIT_OBJECT_0))return;
+    if(!state->shutdown || WaitForSingleObject(state->shutdown,0)!=WAIT_OBJECT_0)return;
     EnterCriticalSection(state->lock);
     ntvwm_shutdown_carrier_once(state);
     LeaveCriticalSection(state->lock);
+}
+static void request_fault_exit(native_membership *state,DWORD error)
+{
+    HANDLE server=NULL,waits[3];DWORD status,wait;
+    close_if_service_lost(state);
+    ntvwm_trace_error("worker-fault",0,error);
+    /* Local cancellation stops new I/O admission, never grants teardown.
+     * All reporting threads join the existing service instruction. */
+    SetEvent(state->stop_requested);
+    if(!InterlockedCompareExchange(&state->exit_requested,1,0)) {
+        status=worker_base_request_exit();
+        ntvwm_trace_error("worker-exit-request",0,status);
+        close_if_service_lost(state);
+    }
+    status=OpenNtBaseClientBrokerProcess(&server);
+    if(!status) {
+        waits[0]=server;waits[1]=state->console_close;waits[2]=state->shutdown;
+        wait=WaitForMultipleObjects(3,waits,FALSE,INFINITE);
+        CloseHandle(server);
+        if(wait==WAIT_OBJECT_0)service_lost(state);
+        else if(wait==WAIT_OBJECT_0+1)ntvwm_close_for_console_shutdown(state);
+        else if(wait==WAIT_OBJECT_0+2)ntvwm_close_for_worker_shutdown(state);
+        else ntvwm_trace_error("worker-exit-wait",0,
+            wait==WAIT_FAILED ? GetLastError() : ERROR_INVALID_STATE);
+    } else {
+        ntvwm_trace_error("worker-exit-service",0,status);
+        close_if_service_lost(state);
+    }
+    /* Another terminal owner may already be cleaning up. A failed request or
+     * local wait never authorizes this thread to tear down the carrier. The
+     * independent service-loss watcher and accepted close remain active. */
+    WaitForSingleObject(GetCurrentProcess(),INFINITE);
 }
 static void input_failure(void *context,DWORD error)
 {
@@ -201,10 +233,7 @@ static void input_failure(void *context,DWORD error)
     ntvwm_close_for_console_shutdown(state);
     ntvwm_close_for_worker_shutdown(state);
     if(WaitForSingleObject(state->quit,0)!=WAIT_TIMEOUT)return;
-    ntvwm_trace_error("input",0,error);
-    SetEvent(state->stop_requested);
-    ntvwm_close_for_worker_shutdown(state);
-    TerminateProcess(GetCurrentProcess(),error);
+    request_fault_exit(state,error);
 }
 static DWORD consume_input(void *context)
 {
@@ -234,6 +263,7 @@ static DWORD presentation_loop(void *context)
         EnterCriticalSection(state->lock);
         if(wait==WAIT_OBJECT_0 || wait==WAIT_OBJECT_0+1 || wait==WAIT_OBJECT_0+2) {
             LeaveCriticalSection(state->lock);
+            if(wait==WAIT_OBJECT_0+2)request_fault_exit(state,ERROR_OPERATION_ABORTED);
             if(wait==WAIT_OBJECT_0)ntvwm_close_for_console_shutdown(state);
             else ntvwm_close_for_worker_shutdown(state);
             return error ? error : ERROR_CANCELLED;
@@ -285,14 +315,7 @@ static DWORD WINAPI presentation_pump(void *context)
     ntvwm_close_for_console_shutdown(state);
     ntvwm_close_for_worker_shutdown(state);
     if(!error || WaitForSingleObject(state->quit,0)!=WAIT_TIMEOUT)return error;
-    /* Only an unrecoverable worker-side failure reaches here. A worker whose
-     * presentation watcher has stopped cannot remain resident: it would no
-     * longer consume the broker's Console-session close, even while idle. */
-    SetEvent(state->stop_requested);
-    ntvwm_close_for_worker_shutdown(state);
-    /* Main can be blocked in GetNextCommand; do not wait on that RPC
-     * to report an unrecoverable worker-side presentation failure. */
-    TerminateProcess(GetCurrentProcess(),error);
+    request_fault_exit(state,error);
     return error;
 }
 static void membership_close(native_membership *state)
@@ -378,14 +401,7 @@ static BOOL WINAPI control_event(DWORD event)
 
 static void broker_completion_fault(void *context,DWORD error)
 {
-    close_if_service_lost(context);
-    ntvwm_close_for_console_shutdown(context);
-    ntvwm_trace_error("broker-complete",0,error);
-    /* GetNext may be blocked in a synchronous RPC while a serving thread
-     * discovers the failure. Process exit closes the worker's handles; it
-     * does not terminate any native target or descendant. NTSRV observes the
-     * resulting dead-worker rundown. */
-    TerminateProcess(GetCurrentProcess(),error);
+    request_fault_exit(context,error);
 }
 
 /* GUI launchers are deliberately one-shot.  They authenticate the reserved

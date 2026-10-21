@@ -2,9 +2,13 @@ param(
     [Parameter(Mandatory)][string]$PackageRoot,
     [Parameter(Mandatory)][string]$BuildRoot,
     [Parameter(Mandatory)][string]$Observer,
-    [Parameter(Mandatory)][string]$Fixture
+    [Parameter(Mandatory)][string]$Fixture,
+    [switch]$WorkerExit,
+    [switch]$StalledService,
+    [switch]$Startup
 )
 $ErrorActionPreference='Stop'
+if(([int][bool]$WorkerExit+[int][bool]$StalledService+[int][bool]$Startup) -gt 1){throw 'Select one deadline scenario'}
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or
@@ -28,8 +32,10 @@ try {
     $start=[Diagnostics.ProcessStartInfo]::new((Resolve-Path $Observer).Path)
     $start.UseShellExecute=$false;$start.CreateNoWindow=$true
     $start.EnvironmentVariables['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'
+    $mode=if($WorkerExit){'--worker-exit-timeout'}elseif($StalledService){'--finalization-service-timeout'}elseif($Startup){'--startup-service-timeout'}else{'--frontend-timeout-parent'}
+    $expected=if($WorkerExit){'PASS: real worker exit RPC deadline without poisoning shared connection'}elseif($StalledService){'PASS: finalization deadline with stalled service and local disconnect'}elseif($Startup){'PASS: startup deadline with stalled service and no cleanup RPC'}else{'PASS: real RPC timeout without service death or request replay'}
     foreach($arg in @($image,$runtime,"$root\observer.txt",
-        '--frontend-timeout-parent','--observation-timeout-ms','25000')){
+        $mode,'--observation-timeout-ms','25000')){
         $start.ArgumentList.Add($arg)
     }
     $process=[Diagnostics.Process]::Start($start);$null=$process.Handle
@@ -38,11 +44,10 @@ try {
     $report=Get-Content "$root/observer.txt" -Raw
     $screen=Get-Content "$root/observer.txt.console.txt" -Raw
     if($process.ExitCode -or $report -notmatch 'exit=0x00000000' -or
-        $screen -notmatch 'PASS: real RPC timeout without service death or request replay'){
+        !$screen.Contains($expected)){
         throw 'Real RPC deadline fixture failed; retain report and Console assertions'
     }
-    'PASS ten-second live-service RPC timeout and immediate local finalization/disconnect'|
-        Set-Content "$root/result.txt"
+    $expected|Set-Content "$root/result.txt"
 } finally {
     if($process){
         if(!$process.HasExited){$process.Kill();$null=$process.WaitForExit(10000)}

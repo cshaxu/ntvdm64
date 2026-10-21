@@ -51,12 +51,6 @@ static DWORD activate(void *context,BOOL active)
     }
     return error;
 }
-static DWORD reject_pipe_activation(void *context,BOOL active)
-{
-    (void)context;(void)active;
-    /* Connection ownership is granted by authenticated NTSRV RPC only. */
-    return ERROR_NOT_SUPPORTED;
-}
 static DWORD prepare_text(void *context,COORD size)
 {
     frontend_io_channel *channel=context;
@@ -326,7 +320,7 @@ static DWORD WINAPI console_channel_main(void *context)
             request->operation!=CONSOLE_IO_READ_TEXT_CONFIGURATION &&
             request->operation!=CONSOLE_IO_SNAPSHOT_END)error=ERROR_INVALID_DATA;
         if(!error && channel->publication_surface &&
-            (request->operation==CONSOLE_IO_ACTIVATE || request->operation==CONSOLE_IO_PREPARE_TEXT_REGION ||
+            (request->operation==CONSOLE_IO_PREPARE_TEXT_REGION ||
              request->operation==CONSOLE_IO_SNAPSHOT_BEGIN ||
              request->operation==CONSOLE_IO_READ_INPUT || request->operation==CONSOLE_IO_PEEK_INPUT))
             error=ERROR_INVALID_DATA;
@@ -360,7 +354,7 @@ static DWORD WINAPI console_channel_main(void *context)
             error=frontend_session_video(channel->root,channel,&channel->console.video,TRUE);
         if(video_locked)frontend_session_snapshot_end(channel->root);
         if (!error && (request->operation==CONSOLE_IO_READ_INPUT ||
-            request->operation==CONSOLE_IO_PEEK_INPUT || request->operation==CONSOLE_IO_ACTIVATE)) {
+            request->operation==CONSOLE_IO_PEEK_INPUT)) {
             INPUT_RECORD record;
             DWORD count=0;
             /* Reset before checking the frontend queue. Its stable readiness
@@ -461,7 +455,7 @@ DWORD frontend_io_channel_start_request(DWORD request,HANDLE worker,frontend_ses
     channel->root=root;
     channel->console.logical_window=frontend_session_text_region(root);
     channel->console.io_context=channel;
-    channel->console.activate=reject_pipe_activation;channel->console.prepare_text=prepare_text;
+    channel->console.prepare_text=prepare_text;
     channel->console.video_data=video_data;
     channel->console.enter=enter;channel->console.leave=leave;
     channel->console.screen_begin=screen_begin;channel->console.screen_end=screen_end;

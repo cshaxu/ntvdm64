@@ -1,6 +1,8 @@
 /* Project-added frontend control RPC exchanges extracted from the standalone
  * BaseClient adapter. Decisions and per-process resource owners stay local. */
 #include "frontend_control.h"
+#include "async_call.h"
+#include "common/protocol/frontend_lifecycle.h"
 
 DWORD common_rpc_acquire_frontend_root(const common_rpc_connection *state,uint64_t console_window,DWORD *create_root,
     HANDLE *root,HANDLE *capability,HANDLE *retire,HANDLE *restored)
@@ -134,15 +136,16 @@ DWORD common_rpc_frontend_startup_result(const common_rpc_connection *state,HAND
 
 DWORD common_rpc_wait_frontend_console_restored(const common_rpc_connection *state)
 {
-    DWORD error=ERROR_INVALID_STATE;
+    RPC_ASYNC_STATE async={0};DWORD error=ERROR_INVALID_STATE;
     if(!state || !state->connection || !state->binding || !state->process)return error;
+    error=common_rpc_begin_async(&async);if(error)return error;
     RpcTryExcept {
-        error=Client_WaitFrontendConsoleRestored(state->binding,state->connection,
+        Client_WaitFrontendConsoleRestored(&async,state->binding,state->connection,
             state->process,state->generation);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    return error;
+    return common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
 }
 
 DWORD common_rpc_retire_frontend(const common_rpc_connection *state)

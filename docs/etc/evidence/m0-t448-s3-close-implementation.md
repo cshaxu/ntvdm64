@@ -304,3 +304,258 @@ unfinished work. The previously reviewed normal-chain changes and close-kind
 arbitration are an incremental delivery, not S3/T functional closure. S4 still
 owns integrated acceptance. No additional source change followed the r7 build;
 the final documentation gate and diff check cover the delivery records.
+
+## Spontaneous exit arbitration continuation (r8)
+
+P1 was committed and pushed as d0814cd4c; the worktree was verified clean.
+The next group begins with RequestWorkerExit at the actual NTSRV lifecycle
+owner. It validates the reporting connection and resolves a generation-keyed
+management identity, then reuses the existing close arbiter. No PID lookup
+after lock release, independent close state, forced teardown or alternate
+Console-close sequence is introduced. Acceptance alone is not exit permission.
+The existing service-issued instruction retains that role, including when
+frontend quiescence is still pending or its transaction has timed out.
+
+Production-linked cases worker-exit-then-console and console-then-worker-exit
+reuse the existing close-order fixture. They verify authentication rejection,
+idempotence, unchanged deadline, first accepted close kind, no pre-quiescence
+instruction and late quiescence after timeout. Background fixture build and
+service runner PID 36244 passed all 38 cases at 2026-10-21 05:30:32 UTC;
+service execution took 5531 ms. Evidence is build/t448-s3/verify-r8-intent-result.json
+and service-r8-intent. The r7 build prerequisite in that runner is historical;
+this run rebuilds the affected fixture closure, not a new full product package.
+
+The operation is not yet connected through RPC/worker-base or to executable
+exit sites. Next integrate those callers, removing their local exit decisions,
+and verify initialization-phase cleanup before a new coherent build/publication.
+No end-to-end exit-permission claim follows from the owner-side fixture. The
+installed package remains exactly P1. Mirror/guest changes remain zero.
+
+### Component wiring and local permission test
+
+Protocol 50 now carries RequestWorkerExit through authenticated RPC and the
+policy-free worker-base forwarding function. NTVWM input, presentation and
+completion-report faults join one request/permission path. stop_requested is
+now local admission cancellation only, no longer a worker-close instruction.
+The caller sends at most one request and waits on the existing service close
+events or authenticated service death; it never treats an RPC error or local
+wait failure as teardown permission. Other accepted close/loss observers remain
+responsible if one reporting thread cannot observe the terminal instruction.
+
+The production-main-linked native close fixture passed seven cases, including
+fault acceptance with no teardown until either worker-close or Console-close
+is signalled, and local stop without permission. Carrier-order's eight cases
+also passed. Owned runner PID 38280 completed at 2026-10-21 05:33:47 UTC;
+build/t448-s3/native-close-r8-result.json and close-priority-r8 retain evidence.
+These replace only the RPC boundary and actual Console close in the fixture,
+not the production permission/close logic. They are not real-RPC fault proof.
+
+Full r8 build failed because three source/test locations still named the
+generated protocol-49 interface. Corrected all four references to protocol 50;
+r8b is the new owned full/incremental run (PID 6784), followed by service runner
+15268. The failed run and its skipped service tests are retained. No package
+has been replaced by this group. Final review must also bound the new request
+RPC independently of the long-lived command-receive call; do not change the
+shared binding timeout underneath concurrent GetNextNativeCommand.
+
+### Local RPC timeout correction and communication audit
+
+r8b and r8c full thirteen-component plus second incremental builds passed;
+r8c service fixtures passed all 38 cases (runner 1144, 2026-10-21 05:43:44 UTC).
+The actual suspended-service test then failed: worker-exit-deadline-r8c reached
+its 25-second diagnostic limit instead of returning at ten seconds. The captured
+main-thread frame at image offset 0x571f maps to Client_RequestWorkerExit's
+generated RPC stub, not to local cleanup after the call. This is a failed gate.
+
+common/rpc/local_binding.c selects ncalrpc. Microsoft's
+[RpcBindingSetOption contract](https://learn.microsoft.com/en-us/windows/win32/api/rpcdce/nf-rpcdce-rpcbindingsetoption)
+explicitly says RPC_C_OPT_CALL_TIMEOUT is ignored for local RPC. The previous
+frontend-timeout fixture suspends NTCON, not NTSRV: its passing result proves
+the live service's restoration deadline, not client escape from a stalled
+service. Neither result proves a context-binding override hypothesis.
+
+Reuse the already selected common/rpc/async_call.h completion/cancellation
+mechanism used by DOS/native observation. RequestWorkerExit now has an async
+ACF declaration with context_handle_noserialize, retaining authenticated
+connection identity and the same service close arbiter. This removes its
+copied binding and ineffective timeout option. A blocking GetNext must not
+serialize the exit report. No helper thread, alternate endpoint, peer-control
+pipe, retry or new transport is introduced. r8d is the owned build (25648)
+and subsequent fixture/staging/deadline runner (22604), started 05:53:06 UTC;
+results remain pending at this entry.
+
+The owner additionally requires retrospective communication unification.
+The finite audit includes Connect/BrokerProcess startup, Run16's bounded
+final-disposition calls, worker exit requests, frontend control/acknowledgement
+and management close, plus intentional long-lived command receives. The
+remaining SetCallTimeout wrapper still applies the ignored binding option;
+its callers are not considered corrected by the RequestWorkerExit change.
+Separate per-call deadlines from unbounded task execution and command receive;
+preserve cancellation storage lifetime, late-service execution, no replay and
+context rundown. The existing NTCON named pipe is the worker I/O data path,
+not evidence of a third control transport. Do not remove authenticated event
+attachments merely because RPC conveys them: trace their actual signalling
+owner and reject endpoint-to-endpoint control. No guest or mirror change.
+
+r8d completed: full thirteen-image build and no-work second incremental pass,
+38 service cases pass (6192 ms), and the real suspended-NTSRV exit RPC test
+returns ERROR_TIMEOUT (1460) in exactly 10000 ms. After resuming the same
+service, an unrelated ordinary RPC succeeds; the test does not replay the
+exit request. Owned runner 22604 completed at 05:57:17 UTC. Exact inputs and
+output are worker-exit-deadline-r8d/inputs.json and observer.txt.console.txt;
+deadline-r8d-result.json records success. This validates the new operation,
+not all synchronous lifecycle methods or valid-worker concurrent GetNext yet.
+
+The I/O audit found an obsolete control surface: CONSOLE_IO_ACTIVATE,
+ntcon_worker_activate and frontend_console.activate. No production caller
+remains; console_channel had already installed a rejection callback, while
+some fixtures still granted ownership through that obsolete dispatcher.
+Remove the client operation, callback and dispatch branch. Preserve numeric
+wire value 38 as a rejected hole (subsequent operation identities unchanged),
+with negative tests for both values of its activation flag. Fixtures apply
+the existing frontend-local grant directly only to model NTSRV authorization;
+the production local activation function remains behind service coordination.
+Presentation fixtures reject the retired opcode and retain data/paint/input
+assertions rather than keeping unused activation counters. This cleanup is
+20 added / 46 removed lines including tests (net -26), zero mirror/guest diff.
+Owned focused build/test runner 38684 passed at 05:59:52 UTC: real private
+Console channel lifetime, frontend dispatch, original-shape client close and
+native presentation. Evidence is io-r8e/result.json and its per-case logs.
+Review tightened the retired-command negative to use a valid reserved-mode
+field for both input=0 and input=1, so rejection cannot be attributed only to
+malformed payload. That final fixture-only refinement passed the same focused
+group in io-r8f (runner 22016, 06:01:31 UTC), including 509 presentation
+assertions with zero failures. This is local verification, not publication;
+remaining lifecycle RPC timeout callers and NTVDM exit-permission integration
+still block S3 closure.
+
+### Remaining lifecycle RPC inventory (r8g)
+
+| Chain / actual owner | Current mechanism and required disposition |
+| --- | --- |
+| Run16 bootstrap -> OpenNtBaseClientConnectCurrentTimeout -> Connect/BrokerProcess | Synchronous local RPC still uses the ineffective option. Convert through the existing async mechanism with one remaining absolute startup budget; test a stalled service and partial context/attachment cleanup. |
+| Run16 submission -> native_command / launch_style | Existing authenticated RPC, no third channel. Audit each submitted operation's bound and cleanup before removing the misleading global SetCallTimeout API; no replay on ambiguous reply. |
+| Native/DOS result receipt -> FinishNativeRequest / ExitCode | Receipt waits represent normal task execution and remain unbounded with service-death observation. Result RPC and final disposition need a real bounded wait, not a task lifetime limit. |
+| Final Console return -> WaitFrontendConsoleRestored | r8g converts the existing exchange to async and reuses common_rpc_finish_async. The service's original handoff owner stays unchanged. Tests separately suspend NTCON or NTSRV, then assert timeout plus immediate local disconnect without another RPC. |
+| Worker fault -> RequestWorkerExit | Real suspended-service timeout passed r8d. Legitimate-worker/concurrent command-receive permission evidence remains required; local permission fixtures alone do not establish that chain. |
+| NTMON -> CloseManagementNode; NTCON -> state queries/acknowledgements | Existing service RPCs, not peer control. Synchronous pending-call behavior still needs the common bounded mechanism and phase-specific failure verification. |
+| Worker command receive / live task | Intentional indefinite work wait, not a finalization deadline. Keep separate from bounded control transactions and retain service-loss cancellation/cleanup. |
+| Worker <-> NTCON presentation/input | Existing common/console/client and common/transport/pipe_transfer provide ordered overlapped I/O, cancellation and buffer drain. Retired activation command removed; service-delivered local grant remains. No new transport or independent ownership protocol. |
+
+r8g full build PID 37244 and serial fixture/staging/three-deadline runner
+35648 started at 06:03:14 UTC. Product inputs include the I/O removal and
+final-return async conversion; immutable package-r8d does not certify these
+later changes. No publication or closure claim until the actual gates finish.
+
+r8g completed at 06:07:44 UTC. The full thirteen-image and second incremental
+builds pass; the service matrix passes 38 cases in 5161 ms. All three actual
+deadline cases pass on package-r8g: worker exit with suspended NTSRV returns
+1460 in 10015 ms and preserves the ordinary connection after resume; final
+restoration with suspended NTCON returns 1460 in 10000 ms; final restoration
+with suspended NTSRV returns 1460 in 10015 ms. Both finalization cases assert
+that a repeated local query and disconnect finish within one second while the
+faulted process is still suspended, without replay or an extra cleanup RPC.
+Exact results are deadlines-r8g-result.json and deadline-r8g-{worker,frontend,service}.
+These elapsed values include normal scheduler granularity around the unchanged
+10000 ms deadline. Documentation governance reports success in
+governance-r8g.stdout.txt. The inventory's remaining synchronous calls are
+still open; this is not an all-RPC timeout claim or a new published baseline.
+
+### Startup and shared async ownership consolidation (r8h)
+
+Connect and BrokerProcess now use the existing async RPC interface mechanism.
+The client retains one absolute startup deadline and passes only its remaining
+budget to each completion wait; failed bootstrap still skips cleanup RPC and
+leaves server-side context rundown authoritative. The shared async header now
+owns event initialization and exactly-once completion/event release, including
+the distinct synchronous-stub-exception path. DOS/native observation, worker
+exit and final Console return reuse it; no parallel cancellation implementation
+or background transport thread is added.
+
+Raw-wire version/authentication fixtures retain their intentional varied inputs
+through tests/broker/rpc_async_test.h, which calls the real generated stubs and
+the production async completion mechanism. The raw-wire negatives are not
+replaced by a simulated service. The startup fault case establishes its exact
+owned service during setup, disconnects, suspends that service, and then tests
+a fresh bounded connection. Late-context/attachment rundown and the separate
+UNKNOWN_IF diagnostic query still require review; RpcMgmtInqIfIds is currently
+synchronous and must not be mistaken for a proved bounded startup path.
+
+Owned full build 21364 and serial fixture/staging/four-deadline runner 37884
+started 06:12:33 UTC. No result or publication is asserted at this entry.
+
+r8h completed successfully: full thirteen-component build and second increment
+ended 06:15:55 UTC; service38 passed in 5090 ms; all four actual deadline cases
+completed by 06:17:09 UTC, including a fresh connection to a suspended service.
+This proves that tested startup branch, not the separate UNKNOWN_IF diagnostic.
+
+### Removal of the ineffective timeout API (r8i)
+
+Removed OpenNtBaseClientSetCallTimeout and its RPC_C_OPT_CALL_TIMEOUT call.
+Run16 already establishes its bounded connection through ConnectCurrentTimeout;
+it no longer reports success from an option ignored by local RPC. The deadline
+fixture now uses that same bounded connection entry, rather than changing a
+binding option after connecting. Existing synchronous control calls remain
+explicit gaps in the inventory above, not silently certified by this removal.
+The raw management observation negatives now also reuse the common async
+begin/end owner, removing a second manual event/cancel/drain implementation.
+Their bounded decision uses ten seconds, preserving the negative wire inputs.
+
+Owned full build 34616 and serial verification 37188 started 06:18:12 UTC.
+No new release has been published; protocol-50 work remains a local candidate.
+
+r8i full/incremental builds passed at 06:21:23 UTC. Its worker deadline
+fixture failed after correctly returning 1460 at 10000 ms: the fixture had
+incorrectly switched the worker to the launcher's failure-latching connection
+policy. Consequently its unrelated post-timeout RPC was refused locally.
+The fixture now uses the real worker ConnectCurrent entry for that case and
+the real bounded launcher entry for the finalization cases. No runtime policy
+or assertion was relaxed. r8i wire runner 5232 refused its failed prerequisite.
+
+r8j reuses the identical r8i product artifacts and rebuilds the affected
+fixture. Verification PID 24136 passed service38 (5219 ms) and all four actual
+deadline cases by 06:24:13 UTC. Raw management/version wire verification PID
+29048 follows serially; its result is not yet asserted here. Repository source
+search finds no remaining SetCallTimeout implementation or call and no retired
+CONSOLE_IO_ACTIVATE / ntcon_worker_activate entry. The explanatory comment
+about why the old option failed is intentionally retained.
+
+r8j raw-wire runner failed because its temporary fixture directory contained
+only NTSRV, while the real management test requests NTCON and launches Run16.
+The precise observed status was ERROR_FILE_NOT_FOUND at StartFrontend, not an
+RPC transport failure. No assertions or product logic changed. r8k copies the
+candidate System32 inputs and uses the existing private-Console observer.
+PID 24884 passed at 06:25:54 UTC: generation/capability/payload/role rejection,
+inner Run16 false capability rejection, restricted Console rights and rundown,
+DOS/native observation authentication, and application/protocol mismatch checks.
+It does not claim a valid worker's concurrent exit-report/GetNext proof.
+
+Same-package runtime verification PID 29896 uses package-r8j, preserving r8i
+product hashes. It repeats DOS17, WINMINE/SOL gameplay, WRITE's established
+startup-only frontier and all three internal CAF deletion cases. Results are
+pending; the package has not been published at this point.
+
+### S3 P2 coherent progress delivery
+
+Runtime runner 29896 completed at 06:29:02 UTC: DOS17, WINMINE and SOL gameplay,
+WRITE startup frontier (not editing/saving/normal exit), and all three internal
+CAF NTMON deletion cases pass. The latter checks visible echo before Enter.
+Review runner 32248 passed documentation governance, diff whitespace and zero
+mirror/guest-change checks at 06:29:33 UTC. These checks complement the actual
+source review; they do not certify the open S3 exit paths.
+
+Publication runner 5496 completed at 06:30:19 UTC on 2026-10-21. All thirteen
+images in assets/release and O:/winnt/system32 match build-r8i/result.json and
+the tested package-r8j. Protocol is 50; application version remains 0.0.448.
+The previous coherent package/manifest is retained in publication-r8-backup.
+Read-only installed-process and project-DLL-holder inspection found no holders;
+no user processes were terminated for this publication. publication-r8.json
+records all hashes, both destinations and recovery paths.
+
+This P2 removes an I/O control bypass and an ineffective timeout API, retains
+one RPC completion/cancellation owner, and delivers the tested progress. It
+does not close S3 or the remaining inventory: synchronous controls and version
+diagnostics still need real bounds; a valid worker's concurrent GetNext/exit
+request and late cancellation cleanup need evidence; NTVDM and NTVWM startup/
+orderly-exit ownership still need completion. No guest change or mirror diff
+was introduced. S4 still owns final integrated acceptance.

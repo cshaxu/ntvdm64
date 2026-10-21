@@ -20,7 +20,6 @@ typedef struct ntcon_worker_client {
 DWORD ntcon_worker_client_init(ntcon_worker_client *,HANDLE,HANDLE,HANDLE,DWORD);
 void ntcon_worker_client_dispose(ntcon_worker_client *);
 /* One attempt only; waiting/retry and backend state transitions stay local. */
-DWORD ntcon_worker_activate(ntcon_worker_client *,BOOL);
 DWORD ntcon_worker_prepare_text(ntcon_worker_client *,COORD);
 /* Encode/send one atomic key batch. Return raw server status/count so the
  * original API and native all-or-error caller retain their distinct contracts. */

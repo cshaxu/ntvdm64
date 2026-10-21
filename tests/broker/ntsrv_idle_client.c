@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "service.h"
+#include "rpc_async_test.h"
 #include "ntsrv-exe/transport/rpc_security.h"
 #include "common/protocol/version.h"
 void *__RPC_USER midl_user_allocate(size_t n) { return malloc(n); }
@@ -47,7 +48,7 @@ int main(int argc,char **argv)
                     strtoul(argv[3],NULL,10));
                 if (!process) return 6;
             }
-            error=Client_Connect(binding,process,APP_PROTOCOL_VERSION+(!strcmp(argv[1],"reject")),
+            error=test_rpc_connect(binding,process,APP_PROTOCOL_VERSION+(!strcmp(argv[1],"reject")),
                 version,&protocol,reply,&connection,&generation);
             if (!strcmp(argv[1],"reject") || !strcmp(argv[1],"badpeer")) {
                 DWORD expected=!strcmp(argv[1],"reject")?ERROR_REVISION_MISMATCH:RPC_S_ACCESS_DENIED;

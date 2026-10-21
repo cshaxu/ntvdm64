@@ -12,9 +12,19 @@ static int ntvwm_unused_entry(int,WCHAR **);
 #include <stdlib.h>
 
 static HANDLE observed_close;
+static HANDLE observed_request;
+static volatile LONG exit_requests;
 DWORD OpenNtBaseClientFailure(DWORD error){return error;}
+DWORD worker_base_request_exit(void)
+{ InterlockedIncrement(&exit_requests);SetEvent(observed_request);return ERROR_SUCCESS; }
+DWORD OpenNtBaseClientBrokerProcess(HANDLE *process)
+{ return DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),process,
+    SYNCHRONIZE,FALSE,0) ? ERROR_SUCCESS : GetLastError(); }
+void ntvwm_trace_error(const char *phase,DWORD request,DWORD error)
+{ (void)phase;(void)request;(void)error; }
 void ntvwm_console_guard_stop(ntvwm_console_guard *guard){(void)guard;}
 static DWORD WINAPI lose_service(void *context){service_lost(context);return 0;}
+static DWORD WINAPI report_fault(void *context){request_fault_exit(context,ERROR_WRITE_FAULT);return 0;}
 DWORD test_console_close(void)
 {
     return SetEvent(observed_close) ? ERROR_SUCCESS : GetLastError();
@@ -33,6 +43,20 @@ int wmain(int argc,WCHAR **argv)
         state.stop_requested=CreateEventW(NULL,TRUE,mode==2,NULL);
         state.console_close=CreateEventW(NULL,TRUE,mode==3,NULL);
         if(!state.shutdown || !state.stop_requested || !state.console_close)return ERROR_NOT_ENOUGH_MEMORY;
+        if(mode==5 || mode==6) {
+            HANDLE reporter;
+            observed_request=state.quit;ResetEvent(observed_request);
+            reporter=CreateThread(NULL,0,report_fault,&state,0,NULL);
+            if(!reporter || WaitForSingleObject(observed_request,10000)!=WAIT_OBJECT_0 ||
+                exit_requests!=1 || WaitForSingleObject(observed_close,0)!=WAIT_TIMEOUT ||
+                WaitForSingleObject(reporter,0)!=WAIT_TIMEOUT)return ERROR_INVALID_STATE;
+            /* Acceptance and the local admission stop are not permission. */
+            ntvwm_close_for_worker_shutdown(&state);
+            if(WaitForSingleObject(observed_close,0)!=WAIT_TIMEOUT)return ERROR_INVALID_STATE;
+            SetEvent(mode==5 ? state.shutdown : state.console_close);
+            WaitForSingleObject(reporter,10000);
+            return ERROR_INVALID_STATE;
+        }
         if(mode==4) {
             HANDLE losing;
             /* A real launch/rollback owns this lock. Confirmed service loss
@@ -51,9 +75,10 @@ int wmain(int argc,WCHAR **argv)
         ntvwm_close_for_worker_shutdown(&state);
         CloseHandle(state.shutdown);CloseHandle(state.stop_requested);CloseHandle(state.console_close);
         DeleteCriticalSection(&lock);
-        return mode ? ERROR_INVALID_STATE : ERROR_PROCESS_ABORTED;
+        return mode && mode!=2 ? ERROR_INVALID_STATE : ERROR_PROCESS_ABORTED;
     }
-    for(mode=0;mode<5;++mode) {
+    for(mode=0;mode<7;++mode) {
+        BOOL closes=mode!=0 && mode!=2;
         SECURITY_ATTRIBUTES attributes={sizeof(attributes),NULL,TRUE};
         HANDLE close=CreateEventW(&attributes,TRUE,FALSE,NULL);
         HANDLE ack=CreateEventW(&attributes,TRUE,FALSE,NULL);
@@ -69,13 +94,13 @@ int wmain(int argc,WCHAR **argv)
             ++failures;TerminateProcess(process.hProcess,ERROR_TIMEOUT);
         }
         if(!GetExitCodeProcess(process.hProcess,&result) ||
-            result!=(DWORD)(mode==4 ? ERROR_INVALID_HANDLE : mode ? ERROR_CANCELLED : ERROR_PROCESS_ABORTED))++failures;
-        if(WaitForSingleObject(close,0)!=(mode ? WAIT_OBJECT_0 : WAIT_TIMEOUT))++failures;
-        if(WaitForSingleObject(ack,0)!=(mode ? WAIT_OBJECT_0 : WAIT_TIMEOUT))++failures;
+            result!=(DWORD)(mode==4 ? ERROR_INVALID_HANDLE : closes ? ERROR_CANCELLED : ERROR_PROCESS_ABORTED))++failures;
+        if(WaitForSingleObject(close,0)!=(closes ? WAIT_OBJECT_0 : WAIT_TIMEOUT))++failures;
+        if(WaitForSingleObject(ack,0)!=(closes ? WAIT_OBJECT_0 : WAIT_TIMEOUT))++failures;
         CloseHandle(process.hThread);CloseHandle(process.hProcess);
         CloseHandle(close);CloseHandle(ack);CloseHandle(quit);
     }
-    printf("%s native close priority: five cancellation/close/loss-fence cases, %u failures\n",
+    printf("%s native close priority: seven cancellation/permission/close/loss-fence cases, %u failures\n",
         failures ? "FAIL" : "PASS",failures);
     return failures ? 1 : 0;
 }

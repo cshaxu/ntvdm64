@@ -6,6 +6,7 @@
 #include <string.h>
 #include <stdint.h>
 #include "service.h"
+#include "rpc_async_test.h"
 #include "ntsrv-exe/transport/rpc_security.h"
 #include "common/protocol/version.h"
 void *__RPC_USER midl_user_allocate(size_t bytes) { return malloc(bytes); }
@@ -57,20 +58,20 @@ int main(int argc,char **argv)
     REQUIRE(!RpcBindingFromStringBindingW(text,&binding));
     REQUIRE(!RpcBindingSetAuthInfoW(binding,NULL,RPC_C_AUTHN_LEVEL_PKT_PRIVACY,RPC_C_AUTHN_WINNT,NULL,RPC_C_AUTHZ_NONE));
     RpcTryExcept {
-        REQUIRE(Client_Connect(binding,process,APP_PROTOCOL_VERSION+1,app_version,
+        REQUIRE(test_rpc_connect(binding,process,APP_PROTOCOL_VERSION+1,app_version,
             &server_protocol,server_version,&connection,&generation)==ERROR_REVISION_MISMATCH && !connection && !generation);
         REQUIRE(server_protocol==APP_PROTOCOL_VERSION && !memcmp(server_version,app_version,sizeof(app_version)));
-        REQUIRE(Client_Connect(binding,process,APP_PROTOCOL_VERSION-1,app_version,
+        REQUIRE(test_rpc_connect(binding,process,APP_PROTOCOL_VERSION-1,app_version,
             &server_protocol,server_version,&connection,&generation)==ERROR_REVISION_MISMATCH && !connection && !generation);
         REQUIRE(server_protocol==APP_PROTOCOL_VERSION && !memcmp(server_version,app_version,sizeof(app_version)));
         app_version[0]='9';
-        REQUIRE(Client_Connect(binding,process,APP_PROTOCOL_VERSION,app_version,
+        REQUIRE(test_rpc_connect(binding,process,APP_PROTOCOL_VERSION,app_version,
             &server_protocol,server_version,&connection,&generation)==ERROR_REVISION_MISMATCH && !connection && !generation);
         memset(app_version,'X',sizeof(app_version)); /* no terminator */
-        REQUIRE(Client_Connect(binding,process,APP_PROTOCOL_VERSION,app_version,
+        REQUIRE(test_rpc_connect(binding,process,APP_PROTOCOL_VERSION,app_version,
             &server_protocol,server_version,&connection,&generation)==ERROR_REVISION_MISMATCH && !connection && !generation);
         memset(app_version,0,sizeof(app_version));memcpy(app_version,APP_VERSION,sizeof(APP_VERSION));
-        REQUIRE(!Client_Connect(binding,process,APP_PROTOCOL_VERSION,app_version,
+        REQUIRE(!test_rpc_connect(binding,process,APP_PROTOCOL_VERSION,app_version,
             &server_protocol,server_version,&connection,&generation) && connection && generation);
         REQUIRE(server_protocol==APP_PROTOCOL_VERSION && !memcmp(server_version,app_version,sizeof(app_version)));
         if (abandon) {
@@ -81,14 +82,14 @@ int main(int argc,char **argv)
         }
         {
             HANDLE server=NULL;
-            REQUIRE(Client_BrokerProcess(binding,connection,process,0,&server)==ERROR_ACCESS_DENIED && !server);
-            REQUIRE(!Client_BrokerProcess(binding,connection,process,generation,&server) && server);
+            REQUIRE(test_rpc_broker_process(binding,connection,process,0,&server)==ERROR_ACCESS_DENIED && !server);
+            REQUIRE(!test_rpc_broker_process(binding,connection,process,generation,&server) && server);
             REQUIRE(WaitForSingleObject(server,0)==WAIT_TIMEOUT);
             /* Wait-only: never grant a client process-termination authority. */
             REQUIRE(!TerminateProcess(server,123) && GetLastError()==ERROR_ACCESS_DENIED);
             CloseHandle(server);
         }
-        REQUIRE(Client_Connect(binding,process,APP_PROTOCOL_VERSION,app_version,
+        REQUIRE(test_rpc_connect(binding,process,APP_PROTOCOL_VERSION,app_version,
             &server_protocol,server_version,&duplicate,&next)==ERROR_ALREADY_EXISTS && !duplicate && !next);
         {
             HANDLE worker=NULL;
@@ -134,7 +135,7 @@ int main(int argc,char **argv)
         REQUIRE(!Client_Disconnect(binding,process,generation,&connection) && !connection);
         REQUIRE(!PeekNamedPipe(reader,NULL,0,NULL,&available,NULL) && GetLastError()==ERROR_BROKEN_PIPE);
         REQUIRE(CloseHandle(reader));reader=NULL;
-        REQUIRE(!Client_Connect(binding,process,APP_PROTOCOL_VERSION,app_version,
+        REQUIRE(!test_rpc_connect(binding,process,APP_PROTOCOL_VERSION,app_version,
             &server_protocol,server_version,&connection,&next) && next>generation);
         REQUIRE(!Client_First(binding,connection,process,next,&first) && first==0);
         REQUIRE(!Client_Disconnect(binding,process,next,&connection) && !connection);

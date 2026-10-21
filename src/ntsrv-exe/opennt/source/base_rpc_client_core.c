@@ -9,12 +9,14 @@
 #include "ntsrv-exe/transport/rpc_security.h"
 #include <base_rpc_client.h>
 #include "common/protocol/version.h" /* Shared metadata, no product behavior. */
+#include "common/protocol/frontend_lifecycle.h"
 #include "common/console/members.h"
 #include "common/rpc/local_binding.h"
 #include "common/rpc/native_command.h"
 #include "common/rpc/frontend_control.h"
 #include "common/rpc/worker_control.h"
 #include "common/rpc/dos_observation.h"
+#include "common/rpc/async_call.h"
 #include <base_rpc_client_internal.h>
 
 typedef struct OPENNT_BASE_RPC_CLIENT {
@@ -82,7 +84,7 @@ static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
     RPC_STATUS status,uuid_status;
     unsigned int index;
     DWORD result=RPC_S_SERVER_UNAVAILABLE;
-    status=RpcIfInqId(Client_vdm_service_v49_0_c_ifspec,&expected);
+    status=RpcIfInqId(Client_vdm_service_v50_0_c_ifspec,&expected);
     if (status) return status;
     status=RpcMgmtInqIfIds(binding,&interfaces);
     if (status) return status;
@@ -101,15 +103,6 @@ static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
 DWORD OpenNtBaseClientConnectCurrent(void)
 {
     return OpenNtBaseClientConnectCurrentTimeout(INFINITE);
-}
-
-DWORD OpenNtBaseClientSetCallTimeout(DWORD milliseconds)
-{
-    DWORD error;
-    if(!client.binding || !milliseconds)return ERROR_INVALID_PARAMETER;
-    error=RpcBindingSetOption(client.binding,RPC_C_OPT_CALL_TIMEOUT,milliseconds);
-    if(!error)client.bounded_calls=milliseconds!=INFINITE;
-    return error;
 }
 
 DWORD OpenNtBaseClientFailure(DWORD error)
@@ -137,7 +130,8 @@ DWORD OpenNtBaseClientConnectCurrentTimeout(DWORD milliseconds)
     DWORD error=ERROR_GEN_FAILURE;
     ULONG generation=0;
     VDM_CONNECTION connection=NULL;
-    ULONGLONG deadline=GetTickCount64()+milliseconds;
+    ULONGLONG deadline=milliseconds==INFINITE ? 0 : GetTickCount64()+milliseconds;
+    RPC_ASYNC_STATE async;
 
     if(!milliseconds)return ERROR_TIMEOUT;
     if (client.connection) return ERROR_ALREADY_EXISTS;
@@ -147,21 +141,20 @@ DWORD OpenNtBaseClientConnectCurrentTimeout(DWORD milliseconds)
     /* Preserve this source-shaped client's historical binding-failure result;
      * the neutral mechanism itself returns the precise RPC status. */
     if(common_rpc_bind_local(endpoint,&client.binding))goto done;
-    if(milliseconds!=INFINITE) {
-        error=OpenNtBaseClientSetCallTimeout(milliseconds);
-        if(error)goto done;
-    }
+    client.bounded_calls=milliseconds!=INFINITE;
     /* Original BaseSrvUpdateDOSEntry duplicates the authenticated worker's
      * self pseudo-handle; no broader process access is needed. */
     client.process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE|PROCESS_DUP_HANDLE,
         FALSE,GetCurrentProcessId());
     if (!client.process) { error=GetLastError(); goto done; }
+    error=common_rpc_begin_async(&async);if(error)goto done;
     RpcTryExcept {
-        error=Client_Connect(client.binding,client.process,APP_PROTOCOL_VERSION,
+        Client_Connect(&async,client.binding,client.process,APP_PROTOCOL_VERSION,
             (unsigned char *)expected,&server_protocol,server_version,&connection,&generation);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
+    error=common_rpc_end_async(&async,error,NULL,common_rpc_remaining_ms(deadline));
     if (error==RPC_S_UNKNOWN_IF) error=classify_missing_interface(client.binding);
     /* A confirmed legacy RPC major cannot decode this Connect signature. */
     if (error==RPC_S_PROCNUM_OUT_OF_RANGE ||
@@ -180,18 +173,15 @@ DWORD OpenNtBaseClientConnectCurrentTimeout(DWORD milliseconds)
     if (connection) { client.connection=connection; client.generation=generation; }
     if (!error && (!connection || !generation)) error=ERROR_INVALID_DATA;
     if (error) goto done;
-    if(milliseconds!=INFINITE) {
-        ULONGLONG now=GetTickCount64();
-        if(now>=deadline){error=ERROR_TIMEOUT;goto done;}
-        error=OpenNtBaseClientSetCallTimeout((DWORD)(deadline-now));
-        if(error)goto done;
-    }
+    if(!common_rpc_remaining_ms(deadline)){error=ERROR_TIMEOUT;goto done;}
+    error=common_rpc_begin_async(&async);if(error)goto done;
     RpcTryExcept {
-        error=Client_BrokerProcess(client.binding,client.connection,client.process,
+        Client_BrokerProcess(&async,client.binding,client.connection,client.process,
             client.generation,&client.server);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
+    error=common_rpc_end_async(&async,error,NULL,common_rpc_remaining_ms(deadline));
     if (error) goto done;
     if (!client.server || WaitForSingleObject(client.server,0)!=WAIT_TIMEOUT) {
         error=RPC_S_SERVER_UNAVAILABLE; goto done;
@@ -534,6 +524,25 @@ DWORD OpenNtBaseClientWorkerShutdownEvent(HANDLE *shutdown)
 {
     common_rpc_connection state=client_rpc_view();
     return common_rpc_worker_shutdown_event(&state,shutdown);
+}
+
+DWORD OpenNtBaseClientRequestWorkerExit(void)
+{
+    RPC_ASYNC_STATE async={0};
+    DWORD error=OpenNtBaseClientFailure(0);
+    if(error)return error;
+    if(!client.binding || !client.connection || !client.process)return ERROR_INVALID_STATE;
+    /* Local RPC ignores RPC_C_OPT_CALL_TIMEOUT. Reuse the existing async
+     * completion/cancellation owner without changing concurrent GetNext calls. */
+    error=common_rpc_begin_async(&async);if(error)return error;
+    RpcTryExcept {
+        Client_RequestWorkerExit(&async,client.binding,client.connection,
+            client.process,client.generation);
+    }
+    RpcExcept(1){error=RpcExceptionCode();}
+    RpcEndExcept
+    error=common_rpc_end_async(&async,error,client.server,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    return OpenNtBaseClientFailure(error);
 }
 
 DWORD OpenNtBaseClientWorkerConsoleCloseEvent(HANDLE *close)

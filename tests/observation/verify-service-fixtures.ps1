@@ -25,6 +25,7 @@ $cases=@('parent-resume-origin','io-authority','route-cancellation','prepared-na
     'frontend-completion-barrier','management-frontend-close-order',
     'management-frontend-close-timeout','management-frontend-prepare-timeout',
     'management-worker-then-console','management-console-then-worker','management-late-worker-close',
+    'worker-exit-then-console','console-then-worker-exit',
     'management-terminate','unfinished-worker-exit')
 if($FailureProbe){$cases=@('runner-failure')}
 $null=New-Item -ItemType Directory -Path $log

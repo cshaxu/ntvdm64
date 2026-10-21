@@ -136,7 +136,7 @@ static DWORD connect_broker(void)
         ULONGLONG now=GetTickCount64();
         if(now>=deadline)return ERROR_TIMEOUT;
         error=OpenNtBaseClientConnectCurrentTimeout((DWORD)(deadline-now));
-        if (!error) return OpenNtBaseClientSetCallTimeout(OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+        if (!error) return ERROR_SUCCESS;
         if (error != RPC_S_SERVER_UNAVAILABLE)
             return error; /* Bootstrap only an absent endpoint, not a rejected request. */
         if (!spawned)

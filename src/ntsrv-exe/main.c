@@ -97,11 +97,13 @@ error_status_t Server_FrontendStartupResult(handle_t binding,VDM_CONNECTION conn
     return error ? error : OpenNtBaseServiceFrontendStartupResult(connection,pid,generation,
         capability,status);
 }
-error_status_t Server_WaitFrontendConsoleRestored(handle_t binding,VDM_CONNECTION connection,
+error_status_t Server_WaitFrontendConsoleRestored(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,unsigned long generation)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceWaitFrontendConsoleRestored(connection,pid,generation);
+    if(!error)error=OpenNtBaseServiceWaitFrontendConsoleRestored(connection,pid,generation);
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
 #define BASE_CHECK_REPLY_BYTES 40u
 #define BASE_UPDATE_REPLY_BYTES 32u
@@ -374,7 +376,7 @@ static DWORD export_handles(const HANDLE *source,ULONG count,HANDLE **output)
     }
     return ERROR_SUCCESS;
 }
-error_status_t Server_Connect(handle_t binding,HANDLE process,ULONG protocol,
+error_status_t Server_Connect(PRPC_ASYNC_STATE async,handle_t binding,HANDLE process,ULONG protocol,
     unsigned char application_version[32],ULONG *server_protocol,
     unsigned char server_version[32],VDM_CONNECTION *connection,ULONG *generation)
 {
@@ -385,7 +387,7 @@ error_status_t Server_Connect(handle_t binding,HANDLE process,ULONG protocol,
     *server_protocol=APP_PROTOCOL_VERSION;
     memcpy(server_version,expected,sizeof(expected));
     status=basesrv_begin_connect();
-    if (status) return status;
+    if (status) goto complete;
     /* Every admitted attempt, including identity/version failure or an RPC
      * exception, releases its transient hold and rechecks empty retention. */
     __try {
@@ -401,7 +403,9 @@ error_status_t Server_Connect(handle_t binding,HANDLE process,ULONG protocol,
     } __finally {
         basesrv_end_connect();
     }
-    return status;
+complete:
+    (void)RpcAsyncCompleteCall(async,&status);
+    return ERROR_SUCCESS;
 }
 error_status_t Server_ReportConsoleMembers(handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation,ULONG count,ULONG *members)
@@ -411,19 +415,21 @@ error_status_t Server_ReportConsoleMembers(handle_t binding,VDM_CONNECTION conne
     if (status) return status;
     return OpenNtBaseServiceReportConsoleMembers(connection,pid,generation,count,members);
 }
-error_status_t Server_BrokerProcess(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_BrokerProcess(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE *server)
 {
     DWORD pid,error;
     *server=NULL;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if (error) return error;
-    if (!OpenNtBaseServicePeer(connection,pid,generation)) return ERROR_ACCESS_DENIED;
+    if (error) goto complete;
+    if (!OpenNtBaseServicePeer(connection,pid,generation)) {error=ERROR_ACCESS_DENIED;goto complete;}
     /* RPC consumes this non-inheritable identity/wait duplicate. The receiver
      * can verify a bootstrap pipe's server PID but cannot terminate, modify
      * or duplicate resources from the broker through this capability. */
     if (!DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),
-            server,SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,FALSE,0)) return GetLastError();
+            server,SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,FALSE,0)) error=GetLastError();
+complete:
+    (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
 }
 error_status_t Server_GetNextNativeCommand(handle_t binding,VDM_CONNECTION connection,HANDLE process,
@@ -478,6 +484,14 @@ error_status_t Server_WorkerShutdownEvent(handle_t binding,VDM_CONNECTION connec
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
     *shutdown=NULL;
     return error ? error : OpenNtBaseServiceWorkerShutdownEvent(connection,pid,generation,shutdown);
+}
+error_status_t Server_RequestWorkerExit(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if(!error)error=OpenNtBaseServiceRequestWorkerExit(connection,pid,generation);
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
 error_status_t Server_WorkerConsoleCloseEvent(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE *close)
@@ -986,7 +1000,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v49_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v50_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -1033,7 +1047,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v49_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v50_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);

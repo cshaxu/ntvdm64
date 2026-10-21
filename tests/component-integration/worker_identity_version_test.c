@@ -6,6 +6,7 @@
 #include <string.h>
 #include <rpc.h>
 #include "service.h"
+#include "../broker/rpc_async_test.h"
 #include "common/protocol/version.h"
 #include "ntsrv-exe/transport/rpc_security.h"
 
@@ -29,7 +30,7 @@ int wmain(int argc, WCHAR **argv)
     RPC_IF_ID interface_id;
     int failed = 1;
     if ((argc != 2 && argc != 3) || !broker_rpc_capture_scope(&scope)) return 2;
-    if(RpcIfInqId(Client_vdm_service_v49_0_c_ifspec,&interface_id) ||
+    if(RpcIfInqId(Client_vdm_service_v50_0_c_ifspec,&interface_id) ||
         interface_id.VersMajor!=APP_PROTOCOL_VERSION || interface_id.VersMinor!=0)return 2;
     swprintf_s(endpoint,128,L"ntvdm-basesrv-%lu-%08lx-%08lx",
         scope.session,(ULONG)scope.logon.HighPart,scope.logon.LowPart);
@@ -43,7 +44,7 @@ int wmain(int argc, WCHAR **argv)
     if (!self) goto done;
     /* Refuse to test or terminate an already-running singleton. */
     RpcTryExcept {
-        error=Client_Connect(binding,self,APP_PROTOCOL_VERSION,app,
+        error=test_rpc_connect(binding,self,APP_PROTOCOL_VERSION,app,
             &protocol,server,&connection,&generation);
     } RpcExcept(1) { error=RpcExceptionCode(); } RpcEndExcept
     if (error!=RPC_S_SERVER_UNAVAILABLE) goto done;
@@ -51,7 +52,7 @@ int wmain(int argc, WCHAR **argv)
         NULL,NULL,&startup,&broker)) goto done;
     for (attempt=0;attempt<100;++attempt) {
         RpcTryExcept {
-            error=Client_Connect(binding,self,APP_PROTOCOL_VERSION,app,
+            error=test_rpc_connect(binding,self,APP_PROTOCOL_VERSION,app,
                 &protocol,server,&connection,&generation);
         } RpcExcept(1) { error=RpcExceptionCode(); } RpcEndExcept
         if (!error) break;
@@ -63,14 +64,14 @@ int wmain(int argc, WCHAR **argv)
     generation=0;
     memcpy(app,"0.0.427",sizeof("0.0.427"));
     RpcTryExcept {
-        error=Client_Connect(binding,self,APP_PROTOCOL_VERSION,app,
+        error=test_rpc_connect(binding,self,APP_PROTOCOL_VERSION,app,
             &protocol,server,&connection,&generation);
     } RpcExcept(1) { error=RpcExceptionCode(); } RpcEndExcept
     if (error!=ERROR_REVISION_MISMATCH || connection || generation) goto done;
     puts("PASS previous T application identity rejected by current real service");
     memset(app,0,sizeof(app));memcpy(app,APP_VERSION,sizeof(APP_VERSION));
     RpcTryExcept {
-        error=Client_Connect(binding,self,APP_PROTOCOL_VERSION-1,app,
+        error=test_rpc_connect(binding,self,APP_PROTOCOL_VERSION-1,app,
             &protocol,server,&connection,&generation);
     } RpcExcept(1) { error=RpcExceptionCode(); } RpcEndExcept
     if (error!=ERROR_REVISION_MISMATCH || connection || generation) goto done;

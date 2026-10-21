@@ -13,7 +13,6 @@ typedef struct frontend_console {
     SMALL_RECT *logical_window;
     frontend_video video;
     void *io_context;
-    DWORD (*activate)(void *,BOOL);
     DWORD (*prepare_text)(void *,COORD);
     /* Standalone receivers may defer byte commit until dependent storage is
      * prepared; private owned fixtures can use the codec's automatic commit. */

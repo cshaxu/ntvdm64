@@ -710,31 +710,57 @@ static int ntvwm_execution_rpc(void)
     return 0;
 }
 
-static int frontend_deadline(void)
+static int frontend_deadline(unsigned mode)
 {
+    BOOL worker_exit=mode==1;
+    BOOL startup=mode==3;
     typedef LONG (NTAPI *PROCESS_CONTROL)(HANDLE);
     PROCESS_CONTROL suspend=(PROCESS_CONTROL)GetProcAddress(GetModuleHandleW(L"ntdll.dll"),"NtSuspendProcess");
     PROCESS_CONTROL resume=(PROCESS_CONTROL)GetProcAddress(GetModuleHandleW(L"ntdll.dll"),"NtResumeProcess");
     HANDLE root=NULL,capability=NULL,restored=NULL,server=NULL,control=NULL;
     DWORD error;ULONGLONG began,elapsed;int result=1;BOOL paused=FALSE;
-    if(!suspend || !resume || OpenNtBaseClientConnectCurrent())goto done;
-    if(OpenNtBaseClientSetCallTimeout(10000) || OpenNtBaseClientBrokerProcess(&server))goto done;
-    if(OpenNtBaseClientStartFrontend((uint64_t)(UINT_PTR)GetConsoleWindow(),TRUE,
+    /* Workers keep their shared connection after an individual report times
+     * out. Launchers instead latch their bounded finalization failure. Match
+     * those actual production connection entries, not one policy for both. */
+    if(!suspend || !resume || (worker_exit ? OpenNtBaseClientConnectCurrent() :
+        OpenNtBaseClientConnectCurrentTimeout(10000)))goto done;
+    if(OpenNtBaseClientBrokerProcess(&server))goto done;
+    if(!worker_exit && !startup && OpenNtBaseClientStartFrontend((uint64_t)(UINT_PTR)GetConsoleWindow(),TRUE,
         &root,&capability,&restored))goto done;
-    /* Fault injection only into the service-created frontend pinned by root.
-     * The launcher under test never gets this extra process access. */
-    control=OpenProcess(0x0800,FALSE,GetProcessId(root)); /* PROCESS_SUSPEND_RESUME */
+    if(startup)OpenNtBaseClientDisconnectCurrent(); /* End setup, before injecting the fault. */
+    /* Suspend only the owned frontend (0) or service (1/2). Production
+     * launchers never receive this fault-injection access. */
+    control=OpenProcess(0x0800,FALSE,GetProcessId(mode ? server : root)); /* PROCESS_SUSPEND_RESUME */
     if(!control || suspend(control)<0)goto done;
     paused=TRUE;began=GetTickCount64();
-    error=OpenNtBaseClientWaitFrontendConsoleRestored();elapsed=GetTickCount64()-began;
+    error=startup ? OpenNtBaseClientConnectCurrentTimeout(10000) : worker_exit ? OpenNtBaseClientRequestWorkerExit() :
+        OpenNtBaseClientWaitFrontendConsoleRestored();elapsed=GetTickCount64()-began;
     printf("finalization status=%lu elapsed=%llu\n",error,(unsigned long long)elapsed);
     if(error!=ERROR_TIMEOUT || elapsed<9000 || elapsed>13000 ||
         WaitForSingleObject(server,0)!=WAIT_TIMEOUT)goto done;
+    if(startup) {
+        puts("PASS: startup deadline with stalled service and no cleanup RPC");
+        result=0;goto done;
+    }
+    if(worker_exit) {
+        BASE_API_MSG query={0};NTSTATUS status;
+        if(resume(control)<0)goto done;
+        paused=FALSE;
+        /* Not an exit-request replay. An unrelated ordinary call verifies
+         * the shared connection did not inherit this report's timeout. */
+        status=OpenNtBaseClientCallServer((PCSR_API_MSG)&query,NULL,
+            CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepIsFirstVDM),
+            sizeof(query.u.IsFirstVDM));
+        if(status!=STATUS_SUCCESS || query.ReturnValue!=STATUS_SUCCESS)goto done;
+        puts("PASS: real worker exit RPC deadline without poisoning shared connection");
+        result=0;goto done;
+    }
     began=GetTickCount64();
     if(OpenNtBaseClientWaitFrontendConsoleRestored()!=ERROR_TIMEOUT)goto done;
     OpenNtBaseClientDisconnectCurrent();
     if(GetTickCount64()-began>=1000)goto done;
-    puts("PASS: real RPC timeout without service death or request replay");result=0;
+    puts(mode==2 ? "PASS: finalization deadline with stalled service and local disconnect" :
+        "PASS: real RPC timeout without service death or request replay");result=0;
 done:
     if(paused && resume(control)<0)result=1;
     if(control)CloseHandle(control);
@@ -762,7 +788,10 @@ int main(int argc,char **argv)
     if (argc==2 && !lstrcmpA(argv[1],"--reservation-child")) return reservation_child(FALSE);
     if (argc==2 && !lstrcmpA(argv[1],"--reservation-parent")) return reservation_parent(FALSE);
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-cancel-child")) return reservation_child(2);
-    if (argc==2 && !lstrcmpA(argv[1],"--frontend-timeout-parent")) return frontend_deadline();
+    if (argc==2 && !lstrcmpA(argv[1],"--frontend-timeout-parent")) return frontend_deadline(FALSE);
+    if (argc==2 && !lstrcmpA(argv[1],"--worker-exit-timeout")) return frontend_deadline(TRUE);
+    if (argc==2 && !lstrcmpA(argv[1],"--finalization-service-timeout")) return frontend_deadline(2);
+    if (argc==2 && !lstrcmpA(argv[1],"--startup-service-timeout")) return frontend_deadline(3);
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-cancel-parent")) return reservation_parent(2);
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-cancel-killed-parent")) return reservation_parent(3);
     if (argc==4 && !lstrcmpA(argv[1],"--frontend-cancel-monitor"))

@@ -8,6 +8,7 @@
 #include <string.h>
 #include <wchar.h>
 #include "service.h"
+#include "../broker/rpc_async_test.h"
 #include "ntsrv-exe/transport/rpc_security.h"
 #include "common/protocol/version.h"
 #include "common/codec/native_launch.h"
@@ -27,48 +28,31 @@ static const unsigned char version[APP_VERSION_BYTES]=APP_VERSION;
 static DWORD observation_call(RPC_BINDING_HANDLE binding,HANDLE reporter,ULONG protocol,
     HANDLE child,DWORD flags,hyper *node)
 {
-    RPC_ASYNC_STATE async={0};DWORD error,reply=ERROR_INVALID_STATE;
-    HANDLE completed=CreateEventW(NULL,TRUE,FALSE,NULL);
-    if(!completed)return GetLastError();*node=0;
-    error=RpcAsyncInitializeHandle(&async,sizeof(async));
-    if(!error) {
-        async.NotificationType=RpcNotificationTypeEvent;async.u.hEvent=completed;
-        RpcTryExcept {
-            Client_ObserveNativeCreationAsync(&async,binding,reporter,protocol,
-                (unsigned char *)version,child,flags,node);
-        }
-        RpcExcept(1) {error=RpcExceptionCode();}
-        RpcEndExcept
-        if(!error) {
-            if(WaitForSingleObject(completed,1000)!=WAIT_OBJECT_0) {
-                error=RpcAsyncCancelCall(&async,TRUE);
-                (void)WaitForSingleObject(completed,INFINITE);
-            }
-            {DWORD completion=RpcAsyncCompleteCall(&async,&reply);if(!error)error=completion;}
-            if(!error)error=reply;
-        }
+    RPC_ASYNC_STATE async;DWORD error;
+    *node=0;
+    error=common_rpc_begin_async(&async);if(error)return error;
+    RpcTryExcept {
+        Client_ObserveNativeCreationAsync(&async,binding,reporter,protocol,
+            (unsigned char *)version,child,flags,node);
     }
-    CloseHandle(completed);return error;
+    RpcExcept(1) {error=RpcExceptionCode();}
+    RpcEndExcept
+    return common_rpc_end_async(&async,error,NULL,10000);
 }
 
 static DWORD dos_observation_call(RPC_BINDING_HANDLE binding,VDM_CONNECTION connection,
     HANDLE process,DWORD generation,DWORD protocol)
 {
-    RPC_ASYNC_STATE async={0};DOS_OBSERVATION_FACT fact={0};
-    HANDLE completed;DWORD error,reply=ERROR_INVALID_STATE;BOOL issued=FALSE;
+    RPC_ASYNC_STATE async;DOS_OBSERVATION_FACT fact={0};DWORD error;
     fact.event=1;fact.occurrence=1;fact.direct=1;fact.psp=0x100;
-    error=RpcAsyncInitializeHandle(&async,sizeof(async));if(error)return error;
-    completed=CreateEventW(NULL,TRUE,FALSE,NULL);if(!completed)return GetLastError();
-    async.NotificationType=RpcNotificationTypeEvent;async.u.hEvent=completed;
+    error=common_rpc_begin_async(&async);if(error)return error;
     RpcTryExcept {
         Client_ObserveDosEventAsync(&async,binding,connection,process,generation,protocol,
             (unsigned char *)version,&fact,0);
-        issued=TRUE;error=ERROR_SUCCESS;
     }
     RpcExcept(1){error=RpcExceptionCode();}
     RpcEndExcept
-    if(issued){error=common_rpc_finish_async(&async,completed,NULL,1000,&reply);if(!error)error=reply;}
-    CloseHandle(completed);return error;
+    return common_rpc_end_async(&async,error,NULL,10000);
 }
 
 static void json_string(const WCHAR *value)
@@ -174,14 +158,14 @@ static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
     CHECK(error==(expected)); \
 } while (0)
     CHECK(forged);
-    RPC_CHECK(Client_Connect(binding,self,APP_PROTOCOL_VERSION-1,(unsigned char *)version,
+    RPC_CHECK(test_rpc_connect(binding,self,APP_PROTOCOL_VERSION-1,(unsigned char *)version,
         &server_protocol,server_version,&connection,&generation),ERROR_REVISION_MISMATCH);
     CHECK(!connection && !generation);
     memcpy(wrong_version,version,sizeof(wrong_version));wrong_version[0]='!';
-    RPC_CHECK(Client_Connect(binding,self,APP_PROTOCOL_VERSION,wrong_version,
+    RPC_CHECK(test_rpc_connect(binding,self,APP_PROTOCOL_VERSION,wrong_version,
         &server_protocol,server_version,&connection,&generation),ERROR_REVISION_MISMATCH);
     CHECK(!connection && !generation);
-    RPC_CHECK(Client_Connect(binding,self,APP_PROTOCOL_VERSION,(unsigned char *)version,
+    RPC_CHECK(test_rpc_connect(binding,self,APP_PROTOCOL_VERSION,(unsigned char *)version,
         &server_protocol,server_version,&connection,&generation),ERROR_SUCCESS);
     CHECK(connection && generation && server_protocol==APP_PROTOCOL_VERSION &&
         !memcmp(server_version,version,sizeof(version)));
@@ -247,7 +231,7 @@ static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
     /* Launcher disconnect does not revoke a live root. Observe the broker's
      * real workerless retirement before asserting stale-context rejection. */
     CHECK(WaitForSingleObject(root,15000)==WAIT_OBJECT_0);
-    RPC_CHECK(Client_Connect(binding,self,APP_PROTOCOL_VERSION,(unsigned char *)version,
+    RPC_CHECK(test_rpc_connect(binding,self,APP_PROTOCOL_VERSION,(unsigned char *)version,
         &server_protocol,server_version,&connection,&generation),ERROR_SUCCESS);
     RPC_CHECK(Client_BindConsoleContext(binding,connection,self,generation,execution),ERROR_ACCESS_DENIED);
     RPC_CHECK(Client_Disconnect(binding,self,generation,&connection),ERROR_SUCCESS);
@@ -433,7 +417,7 @@ int main(int argc,char **argv)
         {
             VDM_CONNECTION connected=NULL;ULONG generation=0,protocol=0;
             unsigned char application[32]={0};
-            CHECK(!Client_Connect(binding,self,APP_PROTOCOL_VERSION,(unsigned char *)version,
+            CHECK(!test_rpc_connect(binding,self,APP_PROTOCOL_VERSION,(unsigned char *)version,
                 &protocol,application,&connected,&generation) && connected && generation);
             CHECK(dos_observation_call(binding,connected,self,generation,APP_PROTOCOL_VERSION)==ERROR_ACCESS_DENIED);
             CHECK(dos_observation_call(binding,connected,self,generation+1,APP_PROTOCOL_VERSION)==ERROR_ACCESS_DENIED);

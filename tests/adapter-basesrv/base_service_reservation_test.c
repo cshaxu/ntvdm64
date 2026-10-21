@@ -267,6 +267,7 @@ static int frontend_completion_barrier(void)
  * real worker exit advances the same transaction. */
 static int management_frontend_close_ordering(unsigned timeout,unsigned competing)
 {
+    BOOL self_exit=competing>=3;
     OPENNT_BASE_SERVICE *service=OpenNtBaseServiceStart();
     OPENNT_BASE_CONNECTION *root=NULL,*worker=NULL;
     PROCESS_INFORMATION root_child={0},worker_child={0};
@@ -299,17 +300,26 @@ static int management_frontend_close_ordering(unsigned timeout,unsigned competin
     for(index=0;index<count;++index)
         if(tree[index].key.category==MANAGEMENT_FRONTEND)key=tree[index].key;
     CHECK(key.category==MANAGEMENT_FRONTEND);
+    if(self_exit) {
+        competing-=2;
+        CHECK(OpenNtBaseServiceRequestWorkerExit(root,root_child.dwProcessId,root_generation)==ERROR_ACCESS_DENIED);
+        CHECK(OpenNtBaseServiceRequestWorkerExit(worker,worker_child.dwProcessId,worker_generation+1)==ERROR_ACCESS_DENIED);
+        CHECK(watch.close_kind==WORKER_CLOSE_NONE);
+    }
     if(competing==1) {
-        CHECK(!OpenNtBaseServiceTerminateWorker(service,worker_child.dwProcessId));
+        CHECK(!(self_exit ? OpenNtBaseServiceRequestWorkerExit(worker,worker_child.dwProcessId,worker_generation) :
+            OpenNtBaseServiceTerminateWorker(service,worker_child.dwProcessId)));
         CHECK(watch.close_kind==WORKER_CLOSE_WORKER);
     }
     before=GetTickCount64();
     CHECK(!OpenNtBaseServiceCloseManagementNode(service,&key));
     if(competing==2) {
-        CHECK(!OpenNtBaseServiceTerminateWorker(service,worker_child.dwProcessId));
+        CHECK(!(self_exit ? OpenNtBaseServiceRequestWorkerExit(worker,worker_child.dwProcessId,worker_generation) :
+            OpenNtBaseServiceTerminateWorker(service,worker_child.dwProcessId)));
         CHECK(watch.close_kind==WORKER_CLOSE_CONSOLE);
     }
     CHECK(GetTickCount64()-before<1000); /* No requester-held lifetime wait. */
+    if(self_exit)CHECK(!OpenNtBaseServiceRequestWorkerExit(worker,worker_child.dwProcessId,worker_generation));
     deadline=root->frontend_close_deadline;
     CHECK(deadline>=before+10000 && deadline<=GetTickCount64()+10000);
     CHECK(!OpenNtBaseServiceCloseManagementNode(service,&key));
@@ -1048,6 +1058,8 @@ int main(int argc,char **argv)
     if(argc==2 && !strcmp(argv[1],"--management-frontend-prepare-timeout"))return management_frontend_close_ordering(2,0);
     if(argc==2 && !strcmp(argv[1],"--management-worker-then-console"))return management_frontend_close_ordering(0,1);
     if(argc==2 && !strcmp(argv[1],"--management-console-then-worker"))return management_frontend_close_ordering(1,2);
+    if(argc==2 && !strcmp(argv[1],"--worker-exit-then-console"))return management_frontend_close_ordering(0,3);
+    if(argc==2 && !strcmp(argv[1],"--console-then-worker-exit"))return management_frontend_close_ordering(2,4);
     if(argc==2 && !strcmp(argv[1],"--shared-worker-residency"))return fixture_shared_worker_residency();
     if(argc==3 && !strcmp(argv[1],"--reservation-wait-child"))
         return reservation_wait_child(argv[2]);
