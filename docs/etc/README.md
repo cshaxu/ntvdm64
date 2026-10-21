@@ -1,5 +1,10 @@
 # Supporting Material
 
+[T448 lifecycle working design](operations/t448-lifecycle-plan.md) records the
+approved S grouping, finite transitions and pending service-loss boundary.
+[S1 source audit](evidence/m0-t448-s1-lifecycle-audit.md) records actual call
+chains, ownership violations and the remaining bounded design work.
+
 [T447 pre-closure snapshot](evidence/m0-t447-pre-closure-status.md) preserves
 the final active packet before owner-directed transfer closure. The
 [closure](../history/m0-t447-transfer-closure.md) and Current supersede it.

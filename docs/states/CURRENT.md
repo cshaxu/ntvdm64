@@ -34,13 +34,25 @@ the prior checkpoint claims that the CAF defect is universally fixed.
 ## Planned S sequence
 
 1. S1: whole-system ownership audit and complete transition design.
-2. S2: NTSRV-owned request completion and Run16 admission/exit protocol.
-3. S3: worker/frontend control separation, lifecycle-only WOW reception and role-specific cleanup.
+2. S2: complete normal admission/result/handoff chain, including frontend policy and lifecycle-only WOW binding.
+3. S3: unified management-close transactions, concurrency and role-specific service-loss cleanup.
 4. S4: integrated fault/concurrency and real Console handoff acceptance, full release and closure audit.
 
 The [proposal](../proposals/proposal-ntsrv-lifecycle-authority-001.md) owns the
 finite inherited gap list. Cross-group changes must preserve a coherent working
 protocol, not publish incompatible partial upgrades.
+
+## S1 Progress
+
+Owner approved the four-stage plan and execution. The
+[working design](../etc/operations/t448-lifecycle-plan.md) and
+[source audit](../etc/evidence/m0-t448-s1-lifecycle-audit.md) record the actual
+chains and finite L01-L10 remediation groups. Runtime is unchanged. S1 remains
+open pending an explicit choice for loss-only recovery synchronization versus
+best-effort loss return. Selected original natural/fatal exit sites now have a
+bounded three-host-file/seven-call design budget, not an implemented mirror diff.
+Service-created endpoint-signalled fences are not silently classified as
+service-only communication. Healthy-service paths require no such exception.
 
 ## Current Technical Baseline
 
@@ -60,6 +72,10 @@ is historical, not concurrent admission. The prior
 transfer inventory, not current task allocation.
 
 ## Temporary evidence
+
+S1 owns build/t448-s1 for documentation-gate output only: 100 MiB ceiling,
+one-hour run budget and ten-minute no-progress limit; inspect and dispose at
+the S1 boundary after retaining the concise result. No new compiler tree.
 
 build/t447-s4-p4 is retained for the immediate lifecycle successor: fault dumps,
 exact package/rollback identities and final test logs. No live background test
