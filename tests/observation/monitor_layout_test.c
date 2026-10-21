@@ -1,11 +1,24 @@
 /* Native Console fixture: exercises the product renderer in a private buffer.
  * No broker, guest session or visible screen-buffer switch is needed. */
+#include <windows.h>
+static ULONGLONG WINAPI fixture_ticks(void);
+static DWORD WINAPI fixture_wait(HANDLE,DWORD);
+static BOOL WINAPI fixture_input(HANDLE,PINPUT_RECORD,DWORD,LPDWORD);
+static BOOL WINAPI fixture_write(HANDLE,LPCWSTR,DWORD,COORD,LPDWORD);
+#define GetTickCount64 fixture_ticks
+#define WaitForSingleObject fixture_wait
+#define ReadConsoleInputW fixture_input
+#define WriteConsoleOutputCharacterW fixture_write
 #define wmain monitor_product_main
 #define common_rpc_task_snapshot fixture_task_snapshot
 #define common_rpc_close_management_node fixture_close_node
 #define common_rpc_worker_task_trace fixture_task_trace
 #include "../../src/ntmon-exe/main.c"
 #undef wmain
+#undef GetTickCount64
+#undef WaitForSingleObject
+#undef ReadConsoleInputW
+#undef WriteConsoleOutputCharacterW
 #include <assert.h>
 #include <stddef.h>
 
@@ -13,6 +26,30 @@ static const DTASKMGR_WORKER *reply_items;
 static ULONG reply_count,close_calls;
 static DWORD reply_error,close_error;
 static DTASKMGR_KEY closed_key;
+static BOOL loop_test;
+static DWORD writes,last_writes,waits;
+static ULONGLONG clock_value;
+static ULONGLONG WINAPI fixture_ticks(void){return loop_test ? clock_value : GetTickCount64();}
+static BOOL WINAPI fixture_write(HANDLE h,LPCWSTR text,DWORD count,COORD at,LPDWORD written)
+{ ++writes;return WriteConsoleOutputCharacterW(h,text,count,at,written); }
+static BOOL WINAPI fixture_input(HANDLE h,PINPUT_RECORD record,DWORD count,LPDWORD read)
+{
+    if(!loop_test)return ReadConsoleInputW(h,record,count,read);
+    ZeroMemory(record,sizeof(*record));record->EventType=KEY_EVENT;
+    record->Event.KeyEvent.bKeyDown=TRUE;record->Event.KeyEvent.wVirtualKeyCode=VK_ESCAPE;
+    *read=1;return TRUE;
+}
+static DWORD WINAPI fixture_wait(HANDLE h,DWORD timeout)
+{
+    if(!loop_test)return WaitForSingleObject(h,timeout);
+    assert(timeout==1000);++waits;clock_value+=timeout;
+    if(waits==2 || waits==5)assert(writes==last_writes); /* Same snapshot/error: no repaint. */
+    else assert(writes>last_writes);
+    last_writes=writes;
+    if(waits==2)reply_count=0; /* Removal must paint on the next sample. */
+    if(waits==3)reply_error=ERROR_ACCESS_DENIED;
+    return waits==5 ? WAIT_OBJECT_0 : WAIT_TIMEOUT;
+}
 DWORD fixture_task_trace(const common_rpc_management *client,const DTASKMGR_KEY *key,
     ULONG *coverage,ULONG *count,WORKER_TRACE_NODE **nodes)
 {
@@ -331,7 +368,13 @@ int wmain(void)
     }
     state.binding=(RPC_BINDING_HANDLE)(ULONG_PTR)1;state.process=(HANDLE)(ULONG_PTR)1;
     state.trace_key=(DTASKMGR_KEY){17,MANAGEMENT_WORKER,9,0};
-    render(output,&state,items,3);render_trace(output,&state);capture(output);
+    {
+        common_rpc_management client={state.binding,state.process};
+        WORKER_TRACE_NODE *nodes=NULL;ULONG coverage=0,count=0;
+        DWORD error=fixture_task_trace(&client,&state.trace_key,&coverage,&count,&nodes);
+        render(output,&state,items,3);render_trace(output,&state,nodes,count,error);capture(output);
+        MIDL_user_free(nodes);
+    }
     cell(0,1,L'\x250c',MONITOR_NORMAL_ATTRIBUTE); /* Original page remains. */
     cell(3,8,L'\x250c',MONITOR_SELECTED_ATTRIBUTE);
     cell(6,9,L'W',MONITOR_SELECTED_ATTRIBUTE);
@@ -343,6 +386,22 @@ int wmain(void)
     cell(6,14,L'E',MONITOR_SELECTED_ATTRIBUTE);
     cell(1,24,L'U',MONITOR_STATUS_ATTRIBUTE); /* Original footer remains. */
     assert(state.trace_count==1);
+    {
+        DTASKMGR_WORKER copy=items[0];WORKER_TRACE_NODE trace={0},other={0};
+        MONITOR_STATE view=state;
+        assert(same_rows(items,1,&copy,1));++copy.key.generation;
+        assert(!same_rows(items,1,&copy,1));copy=items[0];++copy.actions;
+        assert(!same_rows(items,1,&copy,1));
+        assert(same_trace(&trace,1,&other,1));other.reserved=99;
+        assert(same_trace(&trace,1,&other,1));++other.node;
+        assert(!same_trace(&trace,1,&other,1));
+        assert(same_view(&state,&view));++view.horizontal_offset;
+        assert(!same_view(&state,&view));
+        reply_items=items;reply_count=1;reply_error=0;loop_test=TRUE;
+        writes=last_writes=waits=0;clock_value=0;
+        assert(!monitor_product_main() && waits==5);
+        loop_test=FALSE;reply_error=0;
+    }
     CloseHandle(output);
     if (allocated) FreeConsole();
     selection_and_input();

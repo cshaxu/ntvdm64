@@ -12,6 +12,8 @@ the finite management/loss group and its actual verification state.
 inventory, retention/removal decisions and eventual verification evidence.
 [S5 integrated acceptance](evidence/m0-t448-s5-integrated-acceptance.md) maps
 final lifecycle evidence and explicitly pending acceptance checks.
+[S6 cleanup](evidence/m0-t448-s6-unused-monitor-cleanup.md) records unused
+interface removal, change-only monitor behavior and verification results.
 
 [T447 pre-closure snapshot](evidence/m0-t447-pre-closure-status.md) preserves
 the final active packet before owner-directed transfer closure. The

@@ -31,8 +31,7 @@ void mvdm_softpc_ccpu_wait_signal(void)
 
 void mvdm_softpc_ccpu_wait_for_event(void)
 {
-    if (ccpu_wake_event != NULL)
-        (void)WaitForSingleObject(ccpu_wake_event, INFINITE);
-    else
-        Sleep(0);
+    /* Startup creates the event before CCPU execution; teardown closes it
+     * after execution has ended. There is no uninitialized yield mode. */
+    (void)WaitForSingleObject(ccpu_wake_event, INFINITE);
 }

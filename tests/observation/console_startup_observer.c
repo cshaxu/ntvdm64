@@ -2433,11 +2433,14 @@ int main(int argc, char **argv)
              * presuming either is authoritative. */
             active_output=CreateFileA("CONOUT$",GENERIC_READ|GENERIC_WRITE,
                 FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
+            member_count=GetConsoleProcessList(members,ARRAYSIZE(members));
+            (void)GetNumberOfConsoleInputEvents(input,&queue_before);
+            /* Enumerating members can let the outer shell finish printing
+             * its prompt. Sample both cursors after that diagnostic query,
+             * adjacent to injection, not at different prompt epochs. */
             if(active_output!=INVALID_HANDLE_VALUE &&
                GetConsoleScreenBufferInfo(active_output,&active_before))
                 active_character_position=active_before.dwCursorPosition;
-            member_count=GetConsoleProcessList(members,ARRAYSIZE(members));
-            (void)GetNumberOfConsoleInputEvents(input,&queue_before);
             if(close_ok && observer_console_char_echoes(input,output,'q',750,&immediate,
                                                          &character_position)) {
                 char screen_path[MAX_PATH];

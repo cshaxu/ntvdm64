@@ -35,8 +35,9 @@ Initialization creates both mutexes or releases the partial allocation and fails
 disposal releases them after all mailbox users have quiesced.
 
 Each mailbox selects one notification implementation exactly once before caller publication.
-Initialization allocates no wake. Console selects and creates the default wait
-primitive (one Base automatic-reset Event); Window directly selects its native message notifier. A second selection is
+Initialization allocates no wake. Window selects its native message notifier.
+The unused default Event path is removed in this frontend subset (T448 S6).
+A NULL notifier is rejected; a second selection is
 rejected without changing the active notifier. Frame, control and
 terminal fault all use that selected entry, outside mailbox locks. Context
 remains valid through worker join; as with destruction, callers must quiesce
@@ -66,7 +67,7 @@ input declarations expose copied input normalization with common surrogate,
 recovery and delivery state. Same-shape platform operations decode raw keys and
 text layout; Linux terminal text uses TEXT rather than inventing physical keys.
 Window message decoding and key-state queries belong only to kvm-window.
-Base owns the default Event implementation; no KVM platform wake duplicate remains.
+There is no default Event implementation or KVM platform wake duplicate.
 Capture copies the active bytes without consuming; acknowledgement clears pending only
 if that publication is still latest. Failed output keeps it pending without
 restoring a stale copy over newer content or signalling another retry.

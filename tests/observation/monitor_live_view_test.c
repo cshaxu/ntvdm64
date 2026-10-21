@@ -68,7 +68,7 @@ int wmain(int argc,WCHAR **argv)
     assert(SetConsoleScreenBufferSize(output,(COORD){80,25}));
     render(output,&state,items,count);capture_bitmap(output,argv[2],L"main");
     assert(!handle_key(&state,items,count,VK_RETURN,0) && state.trace_key.category);
-    render(output,&state,items,count);render_trace(output,&state);assert(state.trace_count==live);
+    render(output,&state,items,count);render_trace(output,&state,reply,total,0);assert(state.trace_count==live);
     {
         WCHAR header[81]={0};DWORD copied=0;
         ULONG shown=live ? (live>MONITOR_MODAL_ROWS ? MONITOR_MODAL_ROWS : live) : 1;

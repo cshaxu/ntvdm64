@@ -14,6 +14,7 @@
 #include "trace_view.h"
 
 #define MONITOR_COLUMNS 80
+#define MONITOR_SAMPLE_MS 1000u
 #define MONITOR_ROWS 25
 #define MONITOR_INTERIOR (MONITOR_COLUMNS-2)
 #define MONITOR_STATUS_COLUMN 55
@@ -371,12 +372,11 @@ static void modal_line(HANDLE output,SHORT y,PCWSTR text,WCHAR left,WCHAR right)
     }
     (void)WriteConsoleOutputW(output,cells,(COORD){MONITOR_MODAL_WIDTH,1},(COORD){0,0},&area);
 }
-static void render_trace(HANDLE output,MONITOR_STATE *state)
+static void render_trace(HANDLE output,MONITOR_STATE *state,
+    WORKER_TRACE_NODE *nodes,ULONG count,DWORD error)
 {
-    common_rpc_management client={state->binding,state->process};WORKER_TRACE_NODE *nodes=NULL;
-    monitor_trace_row order[TASK_TRACE_MAX_NODES];ULONG coverage=0,count=0;uint32_t visible=0;
+    monitor_trace_row order[TASK_TRACE_MAX_NODES];uint32_t visible=0;
     WCHAR line[640],rule[MONITOR_MODAL_WIDTH-1];FILETIME time;uint64_t now;
-    DWORD error=common_rpc_worker_task_trace(&client,&state->trace_key,&coverage,&count,&nodes);
     C_ASSERT(sizeof(WORKER_TRACE_NODE)==sizeof(common_task_trace_node));
     if(!error && !monitor_trace_order((const common_task_trace_node *)nodes,count,order,&visible))error=ERROR_INVALID_DATA;
     if(error)visible=0;
@@ -416,7 +416,6 @@ static void render_trace(HANDLE output,MONITOR_STATE *state)
     modal_line(output,y++,L"",L'\x2502',L'\x2502');
     modal_line(output,y++,L"  ESC=Close  UP/DOWN=Scroll  LEFT/RIGHT=Pan",L'\x2502',L'\x2502');
     modal_line(output,y,rule,L'\x2514',L'\x2518');
-    if(nodes)MIDL_user_free(nodes);
 }
 static void accept_snapshot(MONITOR_STATE *state,const DTASKMGR_WORKER *items,ULONG count)
 {
@@ -521,9 +520,45 @@ static BOOL handle_key(MONITOR_STATE *state,const DTASKMGR_WORKER *items,
     }
     return FALSE;
 }
+/* Compare copied semantic fields, never RPC padding, allocation addresses or
+ * the current clock. Elapsed labels update only when another change redraws. */
+static BOOL same_rows(const DTASKMGR_WORKER *a,ULONG ac,const DTASKMGR_WORKER *b,ULONG bc)
+{
+    if(ac!=bc)return FALSE;
+    for(ULONG i=0;i<ac;++i,++a,++b)
+        if(!same_key(&a->key,&b->key) || !same_key(&a->parent,&b->parent) ||
+           a->depth!=b->depth || a->display_state!=b->display_state || a->actions!=b->actions ||
+           a->process_id!=b->process_id || a->kind!=b->kind || a->state!=b->state ||
+           a->started_filetime!=b->started_filetime || a->task!=b->task ||
+           a->stack_depth!=b->stack_depth || wcscmp(a->image,b->image))return FALSE;
+    return TRUE;
+}
+static BOOL same_trace(const WORKER_TRACE_NODE *a,ULONG ac,const WORKER_TRACE_NODE *b,ULONG bc)
+{
+    if(ac!=bc)return FALSE;
+    for(ULONG i=0;i<ac;++i,++a,++b)
+        if(a->node!=b->node || a->parent!=b->parent || a->relation!=b->relation ||
+           a->source!=b->source || a->kind!=b->kind || a->state!=b->state ||
+           a->process_id!=b->process_id || a->task!=b->task || a->flags!=b->flags ||
+           a->dos_psp!=b->dos_psp || a->entered_order!=b->entered_order ||
+           a->created_filetime!=b->created_filetime || wcscmp(a->image,b->image))return FALSE;
+    return TRUE;
+}
+static BOOL same_view(const MONITOR_STATE *a,const MONITOR_STATE *b)
+{
+    return same_key(&a->selected_key,&b->selected_key) && same_key(&a->confirm_key,&b->confirm_key) &&
+        same_key(&a->trace_key,&b->trace_key) && a->status==b->status && a->action_error==b->action_error &&
+        a->confirm_pid==b->confirm_pid && a->first_visible==b->first_visible &&
+        a->horizontal_offset==b->horizontal_offset && a->trace_first==b->trace_first &&
+        a->trace_offset==b->trace_offset;
+}
 int wmain(void)
 {
-    MONITOR_STATE state;
+    MONITOR_STATE state,painted={0};
+    DTASKMGR_WORKER *items=NULL;WORKER_TRACE_NODE *nodes=NULL;
+    ULONG count=0,node_count=0,coverage=0;DWORD trace_error=0;
+    BOOL redraw=TRUE,sample=TRUE,quit=FALSE;
+    ULONGLONG next_sample=0;
     HANDLE input=GetStdHandle(STD_INPUT_HANDLE),output=GetStdHandle(STD_OUTPUT_HANDLE);
     DWORD mode;
     ZeroMemory(&state,sizeof(state));
@@ -534,24 +569,46 @@ int wmain(void)
         hidden.bVisible=FALSE;
         state.cursor_saved=SetConsoleCursorInfo(output,&hidden);
     }
-    for (;;) {
-        DTASKMGR_WORKER *items=NULL; ULONG count=0; DWORD wait,error;
-        error=refresh(&state,&items,&count); state.status=error;
-        render(output,&state,items,count);
-        if(state.trace_key.category)render_trace(output,&state);
-        wait=WaitForSingleObject(input,750);
+    while(!quit) {
+        DWORD wait;ULONGLONG now=GetTickCount64();
+        if(sample || now>=next_sample) {
+            DTASKMGR_WORKER *fresh=NULL;WORKER_TRACE_NODE *trace=NULL;
+            ULONG fresh_count=0,trace_count=0,new_coverage=0;DWORD error=0;
+            state.status=refresh(&state,&fresh,&fresh_count);
+            if(state.trace_key.category) {
+                common_rpc_management client={state.binding,state.process};
+                error=common_rpc_worker_task_trace(&client,&state.trace_key,&new_coverage,&trace_count,&trace);
+            }
+            redraw|=!same_rows(items,count,fresh,fresh_count) ||
+                !same_trace(nodes,node_count,trace,trace_count) || trace_error!=error || coverage!=new_coverage;
+            if(items)MIDL_user_free(items);if(nodes)MIDL_user_free(nodes);
+            items=fresh;count=fresh_count;nodes=trace;node_count=trace_count;
+            trace_error=error;coverage=new_coverage;
+            next_sample=GetTickCount64()+MONITOR_SAMPLE_MS;sample=FALSE;
+        }
+        if(redraw || !same_view(&painted,&state)) {
+            render(output,&state,items,count);
+            if(state.trace_key.category)render_trace(output,&state,nodes,node_count,trace_error);
+            painted=state;redraw=FALSE;
+        }
+        now=GetTickCount64();
+        wait=WaitForSingleObject(input,now>=next_sample ? 0 : (DWORD)(next_sample-now));
         if (wait==WAIT_OBJECT_0) {
             INPUT_RECORD record; DWORD read=0;
-            if (ReadConsoleInputW(input,&record,1,&read) && record.EventType==KEY_EVENT && record.Event.KeyEvent.bKeyDown) {
+            if(!ReadConsoleInputW(input,&record,1,&read)){quit=TRUE;continue;}
+            if(read && record.EventType==WINDOW_BUFFER_SIZE_EVENT)redraw=TRUE;
+            if (read && record.EventType==KEY_EVENT && record.Event.KeyEvent.bKeyDown) {
                 WORD key=record.Event.KeyEvent.wVirtualKeyCode;
-                if(handle_key(&state,items,count,key,record.Event.KeyEvent.uChar.UnicodeChar)) {
-                    if(items)MIDL_user_free(items);
-                    break;
-                }
+                DTASKMGR_KEY old_trace=state.trace_key;
+                BOOL confirming=state.confirm_key.category!=0;
+                quit=handle_key(&state,items,count,key,record.Event.KeyEvent.uChar.UnicodeChar);
+                /* A newly opened detail or completed management action needs
+                 * a fresh observation immediately; ordinary navigation does not. */
+                sample=!same_key(&old_trace,&state.trace_key) || (confirming && !state.confirm_key.category);
             }
-        }
-        if (items) MIDL_user_free(items);
+        } else if(wait!=WAIT_TIMEOUT)break;
     }
+    if(items)MIDL_user_free(items);if(nodes)MIDL_user_free(nodes);
     if (state.binding) RpcBindingFree(&state.binding);
     if (state.process) CloseHandle(state.process);
     if (state.cursor_saved) (void)SetConsoleCursorInfo(output,&state.cursor);

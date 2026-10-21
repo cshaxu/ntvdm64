@@ -8,27 +8,23 @@
   "files": [
     {
       "path": "lib/base/README.md",
-      "sha256": "92AA516A5B8E29050E6321FDB57E921A868208232F37E73022A7CE94DD852876",
+      "upstreamSha256": "92AA516A5B8E29050E6321FDB57E921A868208232F37E73022A7CE94DD852876",
+      "adaptation": "M0 T448 S6: remove unused synchronization/default mailbox Event closure; retain native window notifier and mutexes.",
+      "sha256": "9CD175ACA9E720A6D2F1DF6B4756EE30EBC5651E6720BC7389650E092781E9F4",
       "compile": false
     },
     {
       "path": "lib/base/sync_interface.h",
-      "sha256": "C867B4E6AE002570773D08F1FEC9A9C30CC46C5F5863BD7E7F06501F01653D37",
-      "compile": false
-    },
-    {
-      "path": "lib/base/sync.c",
-      "sha256": "1F4B176855A47F46F4850FAAE2FB4BB75367C210A7A1BCCCEE7571D9FF7170C6",
-      "compile": true
-    },
-    {
-      "path": "lib/base/sync.h",
-      "sha256": "6BD490041EED0A423D9A0835BFE4B89847DE0CF14ECFE73735A7CD715E54B4C8",
+      "upstreamSha256": "C867B4E6AE002570773D08F1FEC9A9C30CC46C5F5863BD7E7F06501F01653D37",
+      "adaptation": "M0 T448 S6: remove unused synchronization/default mailbox Event closure; retain native window notifier and mutexes.",
+      "sha256": "56F69B2604B1C89059199526B690FE4087AC95EACCB5078885826794CE9ED2B2",
       "compile": false
     },
     {
       "path": "lib/base/win32/sync.c",
-      "sha256": "DA9C7497DE92EF08610980D4F2D4D6A827070D0C26E601A5A560B7E4C8497D18",
+      "upstreamSha256": "DA9C7497DE92EF08610980D4F2D4D6A827070D0C26E601A5A560B7E4C8497D18",
+      "adaptation": "M0 T448 S6: remove unused synchronization/default mailbox Event closure; retain native window notifier and mutexes.",
+      "sha256": "00F95021995C23F2E32BB6005165AEE3615FA8623C6604C5338697571D1837E1",
       "compile": true
     },
     {
@@ -78,18 +74,24 @@
     },
     {
       "path": "lib/kvm-base/mailbox_interface.h",
-      "sha256": "52ACCB5BBD7992629A5FF5356FA857D9925A43FE77026B016B16B529D89601E5",
-      "compile": false
+      "sha256": "628407C02CCBF1CE65F5E7DA5EFD6C618E0F1D65D392CE8D8223A54A1D6656A5",
+      "compile": false,
+      "upstreamSha256": "52ACCB5BBD7992629A5FF5356FA857D9925A43FE77026B016B16B529D89601E5",
+      "adaptation": "M0 T448 S6: remove unused synchronization/default mailbox Event closure; retain native window notifier and mutexes."
     },
     {
       "path": "lib/kvm-base/mailbox.c",
-      "sha256": "E2E05E9D5A0A6FD0D5654D7FEB53ED664034F072510FEE3B703B160F474D3C2D",
-      "compile": true
+      "sha256": "B33B1E7A7D91536F31ADD34005487E7BB59FC699C2ABF9F1BA8D692066FE063A",
+      "compile": true,
+      "upstreamSha256": "E2E05E9D5A0A6FD0D5654D7FEB53ED664034F072510FEE3B703B160F474D3C2D",
+      "adaptation": "M0 T448 S6: remove unused synchronization/default mailbox Event closure; retain native window notifier and mutexes."
     },
     {
       "path": "lib/kvm-base/README.md",
-      "sha256": "557AEF9A82149E7E436277743B3FB518E030BA284BE617A0FC4BA1D35F4B1B49",
-      "compile": false
+      "sha256": "DF3F1276DD42B8CAFF95112F59E4E773C5AAB53C964345789D1FCFCFDBE6D505",
+      "compile": false,
+      "upstreamSha256": "557AEF9A82149E7E436277743B3FB518E030BA284BE617A0FC4BA1D35F4B1B49",
+      "adaptation": "M0 T448 S6: remove unused synchronization/default mailbox Event closure; retain native window notifier and mutexes."
     },
     {
       "path": "lib/kvm-base/win32/input.c",
@@ -220,13 +222,27 @@
     },
     {
       "path": "lib/types/win32/sync.h",
-      "sha256": "27799532853C6FC00256659365255114EE8C54D38B1AA32D079785AE53BD4E97",
+      "upstreamSha256": "27799532853C6FC00256659365255114EE8C54D38B1AA32D079785AE53BD4E97",
+      "adaptation": "M0 T448 S6: remove unused task/wait/reset/sleep/yield interfaces and aliases; retain mailbox event and mutex closure.",
+      "sha256": "96EC84CE44979B2541FF2F04897778A8361BC2BD2D234CBC1C13BA57E4F4AE75",
       "compile": false
     },
     {
       "path": "lib/types/win32/window.h",
       "sha256": "F7EBD44EAB3B208D81BD388A63D9CABF19B6F16BECC67F470BFEB2790EACA8DF",
       "compile": false
+    }
+  ],
+  "removedFiles": [
+    {
+      "path": "lib/base/sync.c",
+      "upstreamSha256": "1F4B176855A47F46F4850FAAE2FB4BB75367C210A7A1BCCCEE7571D9FF7170C6",
+      "reason": "T448 S6: no consumer of task/event/wait APIs after removal of unused default mailbox notifier."
+    },
+    {
+      "path": "lib/base/sync.h",
+      "upstreamSha256": "6BD490041EED0A423D9A0835BFE4B89847DE0CF14ECFE73735A7CD715E54B4C8",
+      "reason": "T448 S6: no consumer of task/event/wait APIs after removal of unused default mailbox notifier."
     }
   ]
 }

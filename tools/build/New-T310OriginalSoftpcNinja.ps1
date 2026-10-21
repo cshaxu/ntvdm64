@@ -1760,7 +1760,7 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     $graph.Add('build obj/monitor/stub.obj: cc obj/basesrv/service_c.c | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('rule monitor_link')
-    $graph.Add('  command = link.exe /nologo /subsystem:console /opt:ref /out:$out /map:$out.map $in rpcrt4.lib kernel32.lib advapi32.lib legacy_stdio_definitions.lib')
+    $graph.Add('  command = link.exe /nologo /subsystem:console /opt:ref /out:$out /map:$out.map $in rpcrt4.lib kernel32.lib advapi32.lib legacy_stdio_definitions.lib $extra_libs')
     # monitor is a client of the authenticated local BaseSrv endpoint.  It
     # shares only the native transport scope helper, never a BaseClient
     # registration or worker lifecycle library.
@@ -1792,6 +1792,7 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     $graph.Add('build obj/tests/monitor_live_view.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/monitor_live_view_test.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build monitor-live-view-test.exe: monitor_link obj/tests/monitor_live_view.obj obj/monitor/trace_view.obj obj/monitor/stub.obj broker-transport.lib common-rpc.lib')
+    $graph.Add('  extra_libs = gdi32.lib')
     $graph.Add('rule worker_link')
     # MSVC leaves an unchanged import library's timestamp intact. Without
     # restat that implicit output makes the whole link dirty on every build.
@@ -1892,7 +1893,7 @@ $boundedExecutionFixtureSeamsObject = 'obj/tests/ccpu_bounded_execution_fixture_
 $graph.Add('build ' + $boundedExecutionFixtureSeamsObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_bounded_execution_fixture_seams.c')))
 # Same original owner libraries as the product, with a fixture main only.
 $graph.Add('rule event_test_link')
-$graph.Add('  command = link.exe /nologo /force:multiple /map:$out.map /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
+$graph.Add('  command = link.exe /nologo /force:multiple /map:$out.map /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib rpcrt4.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
 $fixtureHostLibraries = 'worker-base.lib worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib vdmredir-dll-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res'
 # The shared native-child binding now reaches Hook installation and DOS style
 # queries even in the fixture closure. Link the real selected providers.

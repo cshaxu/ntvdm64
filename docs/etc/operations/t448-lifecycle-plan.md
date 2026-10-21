@@ -2,6 +2,15 @@
 
 ## Authority and status
 
+### Owner-added S6 cleanup
+
+After S5, remove proved uncalled NTCON synchronization APIs and unreachable
+CCPU yield fallback. NTMON samples at 1000 ms but repaints only changed
+snapshot, error or UI state (including resize); elapsed time alone is not a
+repaint reason. Keep immediate keyboard handling and modal task updates.
+The [S6 ledger](../evidence/m0-t448-s6-unused-monitor-cleanup.md) bounds this
+cleanup and its full-package acceptance; no new transport or lifecycle policy.
+
 ### S3 initialization capability boundary
 
 Protocol 63 is delivered in P19. The protocol-64 cleanup removes the obsolete

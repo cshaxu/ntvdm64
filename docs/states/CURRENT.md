@@ -2,11 +2,19 @@
 
 ## Current Work
 
-**Active: M0 T448 S5**
+**Active: M0 T448 S6**
 
-S5 integrated acceptance is complete locally and at the final reviewed delivery
-checkpoint; T448 awaits owner acceptance after commit/push/clean verification.
-No new implementation S is admitted. The [S5 ledger](../etc/evidence/m0-t448-s5-integrated-acceptance.md)
+Owner admits S6 to remove proved unused wait fallbacks/interfaces and make
+NTMON sample once per second but redraw only on actual snapshot or UI changes.
+Idle elapsed-time progression alone must not redraw. No new service protocol.
+S6 implementation and verification are complete: full13/incremental r5,
+monitor/CCPU, frontend library/channel/text, eight CAF r6 cases and Minesweeper
+pass. The full13 candidate is published/hash-verified at assets/release and
+O:/winnt/system32, with rollback backup. Final reviewed commit/push and clean
+verification precede the owner acceptance handoff; T448 is not closed.
+See the [S6 ledger](../etc/evidence/m0-t448-s6-unused-monitor-cleanup.md).
+S5 delivered at6a956824c, pushed with a clean checkout; T448 remains open.
+The [S5 ledger](../etc/evidence/m0-t448-s5-integrated-acceptance.md)
 maps all nine inherited obligations to current owners, actual assertions and
 explicit coverage limits. Fresh evidence includes eight CAF return cases,
 service40, two real-RPC concurrency/fault rounds, actual service loss and both
@@ -51,22 +59,22 @@ service loss permits local cleanup, never reconnection or task replay.
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T448 S5; Ordinary Mode, single person implementer/reviewer; no subagents. |
+| Identifier Mode | M0 T448 S6; Ordinary Mode, single person implementer/reviewer; no subagents. |
 | Candidate Proposal | [NTSRV lifecycle authority](../proposals/proposal-ntsrv-lifecycle-authority-001.md). |
-| Admission And Approval | Standing owner approval for continuous sequential execution; S4 P2 closure and coherent publication precede S5, with commit/push/clean verification required before implementation. |
-| Objective | Reconcile the entire approved lifecycle transition matrix to actual implementation and evidence; complete missing integrated acceptance without expanding product scope; prepare T acceptance. |
+| Admission And Approval | Owner explicitly requests a new sequential S for unused fallback/API removal and change-only NTMON rendering with one-second idle sampling. S5 delivered at6a956824c. |
+| Objective | Remove proved unreachable CCPU yield fallback and unused NTCON wait/yield interface closure; sample NTMON state at1000ms idle cadence, redraw only on content/UI changes, preserve immediate keyboard actions and task-detail updates. |
 | Non-goals | No guest modification/rebuild, original internal wait rewrite, new transport, timers/retries/reconnect framework, GUI target management or unrelated WOW32 feature work; no T closure without acceptance. |
-| Reference Baseline | S4 P2 protocol64, r16 full/incremental/runtime plus r17 focused recovery; publication-r16 full13 hashes; delivering commit supplies source identity. |
-| Files And ABI Surface | Existing lifecycle owners and tracked tests/evidence; no planned ABI or production change. Any proved contract defect remains in scope and requires affected full delivery gates. |
+| Reference Baseline | S5 delivery6a956824c and its acceptance matrix; installed full13 S4 P2 protocol64 package. |
+| Files And ABI Surface | NTCON private sync declarations/implementations/aliases and import manifest, NTVDM CCPU wait adapter, NTMON main and existing observation tests; fixture RPC/GDI import-library corrections and CAF probe cursor-sampling ordering correction; no wire ABI or guest change. |
 | Applicable Rules | docs/README reading set; execution, architecture, coding, document and source-policy authorities; original-owner recovery and exception registration. |
-| Verification | Map admission, submission failure, startup-only/wait, nested return, management close, service loss and cleanup to source and exact tests. Reuse hash-matched evidence; run missing integrated cases serially, then governance and full package/hash review. |
-| Expected Markers | One NTSRV lifecycle authority; RPC control/direct I/O only; no replay/reconnect, stale exit or lost handoff; before-Enter echo; explicit role and GUI observation boundaries. |
+| Verification | Prove no callers before removing interface closure; prove CCPU initialization/teardown ordering; test unchanged samples cause no redraw, changed worker/task/error/detail/UI causes redraw, one-second idle sample and keyboard responsiveness. Run affected fixtures plus full13 build/incremental, runtime gates, coherent publication/hash checks. |
+| Expected Markers | No dead yield/sleep wrappers; no uninitialized HLT polling; no idle repaint/time-only repaint; visible changes and management actions remain correct; unchanged service lifecycle authority. |
 | Asset Needs | Existing source and read-only original references; retained T447 fault evidence and rollback package; no new guest assets. |
 | Reporting Requirements | Requirement-to-source/test closure matrix, source/test/document deltas, published hashes, inherited limitations and owner acceptance request; no unsupported whole-WOW usability claims. |
 | Stop Conditions | New observable semantic retreat, missing original-source authority or material scope expansion requires owner decision. |
-| Exit Criteria | Fixed lifecycle matrix reconciled with adequate evidence and no unresolved in-scope foundational defect; coherent delivered package, reviewed commit/push and clean checkout; T awaits explicit owner acceptance. |
-| Original Owner Request | Finish the approved NTSRV-centered lifecycle cleanup through build, test, publication, commit/push and self-review, then present T acceptance. |
-| Similar-Issue Sweep | Root/inner launchers; DOS/WOW/native CUI/GUI; natural/management/Console/service-loss exits; startup failure, partial initialization, nested handoff and concurrent close. |
+| Exit Criteria | Fixed S6 cleanup/monitor behavior verified and full13 latest package published to both destinations; reviewed commit/push/clean checkout; no S6 claim based only on local tests. |
+| Original Owner Request | Remove unused fallback and idle NTCON interfaces; NTMON must not refresh without changes, sample every one second; append a new S. |
+| Similar-Issue Sweep | Whole removed wrapper chain and address-taken/build references; monitor main rows, modal task trace, selection/confirmation, RPC error changes, resize and input events. |
 
 ## Planned S sequence
 
@@ -80,6 +88,7 @@ five-second policies; they are not current instructions or open S3 work.
 3. S3: unified management-close transactions, concurrency and role-specific service-loss cleanup.
 4. S4: owner-added autonomous-code polling audit and cleanup; reuse existing events and completion notifications, justify retained polling, verify wakeup/exit/idle behavior and code delta.
 5. S5: integrated fault/concurrency and real Console handoff acceptance, full release and closure audit (formerly S4).
+6. S6: owner-added unused fallback/interface cleanup and NTMON change-only rendering with one-second sampling.
 
 The [proposal](../proposals/proposal-ntsrv-lifecycle-authority-001.md) owns the
 finite inherited gap list. Cross-group changes must preserve a coherent working
@@ -253,7 +262,7 @@ destinations with P1 recovery. No guest or mirror delta. S5 inherits final
 whole-T acceptance, not an unresolved S4 implementation item. Closure delivery
 requires the P2 commit/push/clean verification recorded by its controller.
 
-## S5 Acceptance Record
+## S5 Closure Record
 
 The [final reconciliation](../etc/evidence/m0-t448-s5-integrated-acceptance.md)
 records r1/r2/r3 runtime passes, final-review-r2 (controller18296) source,
@@ -266,7 +275,28 @@ SOL layout, WRITE's startup-only frontier, source-reviewed rather than induced
 arbitrary fatal guest states, and non-exhaustive host/thread interleavings stay
 explicit limitations. T448 remains open for owner acceptance.
 
+## S6 Delivery Record
+
+Removed uncalled NTCON task/event/wait/sleep/yield closure and default mailbox
+Event; retained mutexes and actual native window notification. CCPU requires its
+startup-created event, without an uninitialized yield fallback. NTMON samples
+at1000ms, compares semantic snapshots and UI state, and avoids idle repaint.
+Production C/H delta is +84/-376 (net-292); tests +66/-4; build rules +3/-2.
+Import-subset provenance/hashes are registered; OpenNT mirror and guest delta0.
+Full13 r5 passed with1426 unchanged second-build intermediates. Focused monitor
+and CCPU, window library, full private channel, text49, CAF8 and Minesweeper
+passed. Historical fixture invocation/link and coordinate-sampling failures
+remain in the ledger. Live-view bitmap fixture is compile-checked; live modal
+capture was not rerun, and existing SOL/WRITE limits remain unchanged.
+Review and complete two-destination publication passed with recovery at
+build/t448-s6/publication-r5-backup. Delivery controller records the eventual
+commit, remote identity and clean worktree; S6 then awaits owner acceptance.
+
 ## Temporary evidence
+
+S6 owns build/t448-s6:8GiB ceiling, four-hour per-run budget and ten-minute
+no-progress investigation threshold. Retain the installed S4 package and S5
+acceptance evidence for comparison; use only existing stable Ninja/ccache trees.
 
 S5 owns build/t448-s5 for final reconciliation/acceptance:8GiB ceiling,
 four-hour per-run and ten-minute no-progress investigation budgets. S4 sealed

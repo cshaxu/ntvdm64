@@ -1,22 +1,10 @@
 #include "lib/kvm-base/mailbox_interface.h"
 
-static lib_status kvm_component_notify_waiter(void *context)
-{
-    return base_sync_event_signal(context);
-}
-
 lib_status kvm_component_mailboxes_select_notify(kvm_component_mailboxes *mailboxes,
     kvm_mailbox_notify_fn notify, void *context)
 {
-    if (mailboxes == LIB_NULL) return LIB_STATUS_INVALID_ARGUMENT;
+    if (mailboxes == LIB_NULL || notify == LIB_NULL) return LIB_STATUS_INVALID_ARGUMENT;
     if (mailboxes->notify != LIB_NULL) return LIB_STATUS_INVALID_STATE;
-    if (notify == LIB_NULL) {
-        lib_status status = base_sync_event_create(BASE_SYNC_EVENT_AUTO_RESET,
-            &mailboxes->wake);
-        if (status != LIB_STATUS_OK) return status;
-        notify = kvm_component_notify_waiter;
-        context = mailboxes->wake;
-    }
     mailboxes->notify = notify;
     mailboxes->notify_context = context;
     return LIB_STATUS_OK;
@@ -47,8 +35,6 @@ lib_status kvm_component_mailboxes_create(kvm_component_mailboxes *mailboxes,
 void kvm_component_mailboxes_destroy(kvm_component_mailboxes *mailboxes)
 {
     if (mailboxes == LIB_NULL) return;
-    base_sync_event_destroy(mailboxes->wake);
-    mailboxes->wake = LIB_NULL;
     base_sync_mutex_destroy(mailboxes->frame_lock);
     mailboxes->frame_lock = LIB_NULL;
     base_sync_mutex_destroy(mailboxes->control_lock);

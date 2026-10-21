@@ -18,8 +18,8 @@ typedef struct kvm_component_control {
 typedef lib_status (*kvm_mailbox_notify_fn)(void *context);
 
 /* Each KVM leaf owns exactly one of these. It contains two independent
- * mailboxes: a latest-wins copied frame and a FIFO control queue. The native
- * wake object is merely their shared wait primitive, never a third mailbox.
+ * mailboxes: a latest-wins copied frame and a FIFO control queue. The selected
+ * notification callback wakes the native window worker, never a third mailbox.
  * Independent locks protect frames and controls. Terminal closure takes
  * frame then control; ordinary control never waits for a frame copy. */
 typedef struct kvm_component_mailboxes {
@@ -35,7 +35,6 @@ typedef struct kvm_component_mailboxes {
     lib_u32 control_count;
     lib_bool closed;
     /* Selected once during startup; non-NULL notify means selection succeeded. */
-    base_sync_event *wake;
     kvm_mailbox_notify_fn notify;
     void *notify_context;
 } kvm_component_mailboxes;
@@ -47,7 +46,7 @@ typedef struct kvm_component_mailboxes {
 lib_status kvm_component_mailboxes_create(kvm_component_mailboxes *mailboxes,
     void *frame_storage, lib_size frame_capacity);
 /* One-time startup selection, before publishing the component to any caller.
- * NULL notify creates the default wait primitive; otherwise no wake is allocated.
+ * Requires a notification callback; no default wait primitive is allocated.
  * Failure leaves selection unset. Context lives until worker join and caller
  * quiescence. After selection, notification failure is after enqueue: do not replay. */
 lib_status kvm_component_mailboxes_select_notify(kvm_component_mailboxes *mailboxes,

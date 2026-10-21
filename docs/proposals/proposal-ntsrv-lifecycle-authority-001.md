@@ -128,3 +128,9 @@ service-loss cleanup proof, passing affected positive/negative/lifecycle tests,
 real pre-Enter echo, full background build/incremental verification, coherent
 publication/hashes, mirror exception accounting, reviewed commit/push and owner
 acceptance. Existing failures are not passing results or hidden exclusions.
+
+Owner-added S6 removes proved unused NTCON synchronization/default-notifier
+interfaces and the unreachable CCPU yield fallback. NTMON samples existing RPC
+state at one second and draws only semantic/UI changes, not elapsed-time ticks.
+See the [bounded S6 ledger](../etc/evidence/m0-t448-s6-unused-monitor-cleanup.md).
+This adds no transport, lifecycle policy, guest change or new original wait rule.
