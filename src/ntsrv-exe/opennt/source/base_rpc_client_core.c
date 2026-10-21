@@ -84,7 +84,7 @@ static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
     RPC_STATUS status,uuid_status;
     unsigned int index;
     DWORD result=RPC_S_SERVER_UNAVAILABLE;
-    status=RpcIfInqId(Client_vdm_service_v54_0_c_ifspec,&expected);
+    status=RpcIfInqId(Client_vdm_service_v55_0_c_ifspec,&expected);
     if (status) return status;
     status=RpcMgmtInqIfIds(binding,&interfaces);
     if (status) return status;
@@ -261,13 +261,21 @@ void OpenNtBaseClientDisconnectCurrent(void)
     OpenNtBaseClientStopBrokerWatch();
     if (!client.local_failure && client.connection && client.binding && client.process &&
         (!client.server || WaitForSingleObject(client.server,0)==WAIT_TIMEOUT)) {
+        RPC_ASYNC_STATE async;
+        DWORD error=common_rpc_begin_async(&async);
         connection=client.connection;
-        RpcTryExcept {
-            (void)Client_Disconnect(client.binding,client.process,
-                client.generation,&connection);
+        if(!error) {
+            RpcTryExcept {
+                Client_Disconnect(&async,client.binding,client.process,
+                    client.generation,&connection);
+            }
+            RpcExcept(1) { error=RpcExceptionCode(); }
+            RpcEndExcept
+            /* Cleanup never replaces the caller's established task result.
+             * Drain cancellation before releasing context/binding storage. */
+            (void)common_rpc_end_async(&async,error,client.server,
+                OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
         }
-        RpcExcept(1) { }
-        RpcEndExcept
     }
     if (client.process) CloseHandle(client.process);
     if (client.server) CloseHandle(client.server);

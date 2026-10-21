@@ -131,14 +131,14 @@ int main(int argc,char **argv)
         REQUIRE(CreatePipe(&reader,&writer,NULL,0));
         REQUIRE(!Client_AttachPipe(binding,connection,process,generation,2,writer,&receipt) && receipt);
         REQUIRE(CloseHandle(writer));writer=NULL;
-        REQUIRE(Client_Disconnect(binding,process,0,&connection)==ERROR_ACCESS_DENIED && connection);
-        REQUIRE(!Client_Disconnect(binding,process,generation,&connection) && !connection);
+        REQUIRE(test_rpc_disconnect(binding,process,0,&connection)==ERROR_ACCESS_DENIED && connection);
+        REQUIRE(!test_rpc_disconnect(binding,process,generation,&connection) && !connection);
         REQUIRE(!PeekNamedPipe(reader,NULL,0,NULL,&available,NULL) && GetLastError()==ERROR_BROKEN_PIPE);
         REQUIRE(CloseHandle(reader));reader=NULL;
         REQUIRE(!test_rpc_connect(binding,process,APP_PROTOCOL_VERSION,app_version,
             &server_protocol,server_version,&connection,&next) && next>generation);
         REQUIRE(!Client_First(binding,connection,process,next,&first) && first==0);
-        REQUIRE(!Client_Disconnect(binding,process,next,&connection) && !connection);
+        REQUIRE(!test_rpc_disconnect(binding,process,next,&connection) && !connection);
     }
     RpcExcept(1) { fprintf(stderr,"RPC exception %lu at line %d\n",RpcExceptionCode(),phase); return 2; }
     RpcEndExcept

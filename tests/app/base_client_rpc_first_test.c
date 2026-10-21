@@ -733,7 +733,7 @@ static int frontend_deadline(unsigned mode)
     if(!worker_exit && !startup && (mode<4 || mode==9) && OpenNtBaseClientStartFrontend((uint64_t)(UINT_PTR)GetConsoleWindow(),TRUE,
         &root,&capability,&restored))goto done;
     if(startup)OpenNtBaseClientDisconnectCurrent(); /* End setup, before injecting the fault. */
-    if(mode>=10) {
+    if(mode>=10 && mode<=16) {
         capability=CreateEventW(NULL,TRUE,FALSE,NULL);
         restored=CreateEventW(NULL,TRUE,FALSE,NULL);
         if(!capability || !restored)goto done;
@@ -776,6 +776,19 @@ static int frontend_deadline(unsigned mode)
     control=OpenProcess(0x0800,FALSE,GetProcessId(mode ? server : root)); /* PROCESS_SUSPEND_RESUME */
     if(!control || suspend(control)<0)goto done;
     paused=TRUE;began=GetTickCount64();
+    if(mode==17) {
+        HANDLE disconnected=(HANDLE)1;
+        OpenNtBaseClientDisconnectCurrent();
+        elapsed=GetTickCount64()-began;
+        printf("disconnect elapsed=%llu\n",(unsigned long long)elapsed);
+        if(elapsed<9000 || elapsed>13000 || WaitForSingleObject(server,0)!=WAIT_TIMEOUT ||
+            OpenNtBaseClientBrokerProcess(&disconnected)!=ERROR_INVALID_STATE || disconnected)goto done;
+        began=GetTickCount64();
+        OpenNtBaseClientDisconnectCurrent();
+        if(GetTickCount64()-began>=1000)goto done;
+        puts("PASS: ordinary disconnect deadline and idempotent local cleanup");
+        result=0;goto done;
+    }
     if(mode==8) {
         common_rpc_connection view=OpenNtBaseClientExecutionConnection(NULL);
         common_rpc_management management={view.binding,view.process};DTASKMGR_KEY key={0};
@@ -883,7 +896,7 @@ int main(int argc,char **argv)
     if (argc==2 && !lstrcmpA(argv[1],"--startup-service-timeout")) return frontend_deadline(3);
     if (argc==3 && !lstrcmpA(argv[1],"--control-service-timeout")) {
         unsigned mode=(unsigned)strtoul(argv[2],NULL,10);
-        return mode>=5 && mode<=16 && mode!=7 ? frontend_deadline(mode) : 2;
+        return mode>=5 && mode<=17 && mode!=7 ? frontend_deadline(mode) : 2;
     }
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-cancel-parent")) return reservation_parent(2);
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-cancel-killed-parent")) return reservation_parent(3);

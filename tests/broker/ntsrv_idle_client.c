@@ -67,7 +67,7 @@ int main(int argc,char **argv)
                 puts("CONNECTED");fflush(stdout);
                 Sleep(duration);
                 if (!strcmp(argv[1],"crash")) TerminateProcess(GetCurrentProcess(),73);
-                error=Client_Disconnect(binding,process,generation,&connection);
+                error=test_rpc_disconnect(binding,process,generation,&connection);
                 puts("DISCONNECTED");fflush(stdout);
             }
         }

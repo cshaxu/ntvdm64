@@ -283,6 +283,13 @@ Raw authentication tests reuse the common frontend client for the changed
 calls. Success/retirement remain real-service tests; issuance exceptions retain
 exact attachment cleanup and zero handle-delta assertions.
 
+The ordinary Disconnect cleanup also uses the existing asynchronous RPC
+completion/cancellation helper with a ten-second deadline and service-loss
+stop. It retains the void cleanup contract: remote cleanup failure cannot
+replace an already determined task result. Context/binding storage remains
+live through cancellation completion; repeated local cleanup is harmless.
+This does not resolve UNKNOWN_IF diagnosis or remaining worker controls.
+
 S1 changes documentation only: zero runtime, mirror, guest or release changes.
 S2 aims for zero mirror changes, using existing project-owned adapters. The
 selected S3 orderly-exit budget is at most three original host files and seven

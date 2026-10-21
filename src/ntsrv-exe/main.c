@@ -975,15 +975,15 @@ error_status_t Server_Release(handle_t binding,VDM_CONNECTION connection,HANDLE 
     if (!error) basesrv_schedule_empty_stop();
     return error;
 }
-error_status_t Server_Disconnect(handle_t binding,HANDLE process,ULONG generation,VDM_CONNECTION *connection)
+error_status_t Server_Disconnect(PRPC_ASYNC_STATE async,handle_t binding,HANDLE process,ULONG generation,VDM_CONNECTION *connection)
 {
     DWORD pid,result=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if (result) return result;
-    if (!OpenNtBaseServicePeer(*connection,pid,generation)) return ERROR_ACCESS_DENIED;
-    result=OpenNtBaseServiceDisconnect(*connection);
+    if (!result && !OpenNtBaseServicePeer(*connection,pid,generation)) result=ERROR_ACCESS_DENIED;
+    if (!result) result=OpenNtBaseServiceDisconnect(*connection);
     if (!result) *connection=NULL;
     if (!result) basesrv_schedule_empty_stop();
-    return result;
+    (void)RpcAsyncCompleteCall(async,&result);
+    return ERROR_SUCCESS;
 }
 int main(void)
 {
@@ -1005,7 +1005,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v54_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v55_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -1052,7 +1052,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v54_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v55_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);

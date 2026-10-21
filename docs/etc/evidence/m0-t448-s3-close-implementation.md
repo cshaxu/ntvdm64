@@ -1015,3 +1015,58 @@ delivers the three named frontend calls and their output/failure contracts,
 not the remaining S3 boundaries. Source/test net +54, mirrors/guest unchanged.
 Actual runtime frontiers and the synthetic-reply coverage limitation remain
 explicit above. Final records undergo governance before commit/push.
+
+### Ordinary disconnect candidate
+
+Source review confirms the remaining synchronous Disconnect could block after
+the caller had already obtained its task result. The candidate converts that
+existing method to async RPC, retaining authenticated context validation,
+serialized context rundown and service-owned cleanup. Client cancellation is
+drained before releasing resources. The cleanup API remains void and never
+overwrites task results. Protocol 55 requires a coherent thirteen-image delivery.
+Existing real-wire positive/forged-generation cases use the same async helper;
+new deadline mode 17 pauses the owned NTSRV, verifies ten-second local cleanup,
+cleared connection and immediate repeated disconnect. No guest/mirror changes.
+Build/runtime/delivery evidence pending; this is not S3 closure.
+
+r13 build PID 14012 started 2026-10-21 09:11:17 UTC. Deadline/service runner
+34940 and wire runner 34372 wait for their predecessors. Evidence uses fresh
+r13 paths under build/t448-s3; no mutable test/build input changes while running.
+
+Full thirteen-image and second incremental build passed 09:14:34 UTC; service38
+passed 09:14:54 UTC. Governance PID 25744 passed 09:14:04 UTC. Sixteen actual
+deadline cases passed 09:18:25 UTC; mode 17 reports exactly 10000 ms while the
+service remains paused/alive, clears the connection and repeats cleanup within
+one second. Runtime 25672, extra failure 13904 and startup/scope 7616 runners
+started 09:13:42-43 UTC and remain gated by their serial predecessors.
+Reviewer verified the ordinary disconnect preserves context serialization and
+all authentication errors, completes every async server branch, and retains
+the old void-result cleanup contract. Source +24/-15 (net +9), tests +37/-14
+(net +23 before the reviewer addition below); this safety group is not claimed
+as a code-size reduction.
+
+r13 wire tests passed 09:19:25 UTC; DOS17, WINMINE/SOL gameplay, WRITE's existing
+four-sample startup frontier and CAF-three self-delete/echo-before-Enter passed
+09:22:16 UTC. Extra worker-failure tests passed 09:22:26 UTC; scope and startup
+rejection/timeout rollback passed 09:22:40 UTC. No expanded WRITE editing/save
+or intermittent WOW crash claim. Installed process/image-holder preflight was
+empty. Review found the updated broker service-client negative Disconnect
+generation case was not in the executed wire selection. Add the same assertion
+to the executed monitor fixture (rejection retains context, then valid close
+succeeds), and rerun wire/bootstrap on identical package-r13 before publication.
+This adds two test lines; final test net +25, production net +9.
+
+### S3 P7 delivery
+
+Supplemental actual-wire runner PID 4600 passed 09:24:21 UTC on the unchanged
+package-r13, including the newly executed wrong-generation Disconnect rejection
+and following successful authorized close. Final review PID 31412 passed
+09:23:44 UTC. Publication PID 25404 completed 09:24:45 UTC: all thirteen images
+match build-r13/result.json, assets/release and O:/winnt/system32; publication-
+r13.json retains SHA-256 and publication-r13-backup retains both old sets.
+No installed process needed termination. The unchanged second build verified
+1398 intermediates. Final documentation/diff review precedes commit and push.
+No new transport, guest change or mirror diff. S3 remains open for the finite
+remaining communication, partial-initialization and original-exit boundaries;
+S4 integrated acceptance remains required. This P does not claim total code
+reduction: source/test net +34, or that every service-loss race is tested.

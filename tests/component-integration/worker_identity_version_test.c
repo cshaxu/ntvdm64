@@ -30,7 +30,7 @@ int wmain(int argc, WCHAR **argv)
     RPC_IF_ID interface_id;
     int failed = 1;
     if ((argc != 2 && argc != 3) || !broker_rpc_capture_scope(&scope)) return 2;
-    if(RpcIfInqId(Client_vdm_service_v54_0_c_ifspec,&interface_id) ||
+    if(RpcIfInqId(Client_vdm_service_v55_0_c_ifspec,&interface_id) ||
         interface_id.VersMajor!=APP_PROTOCOL_VERSION || interface_id.VersMinor!=0)return 2;
     swprintf_s(endpoint,128,L"ntvdm-basesrv-%lu-%08lx-%08lx",
         scope.session,(ULONG)scope.logon.HighPart,scope.logon.LowPart);
@@ -60,7 +60,7 @@ int wmain(int argc, WCHAR **argv)
     }
     if (error || !connection || !generation || protocol!=APP_PROTOCOL_VERSION ||
         memcmp(app,server,sizeof(app))) goto done;
-    if (Client_Disconnect(binding,self,generation,&connection)) goto done;
+    if (test_rpc_disconnect(binding,self,generation,&connection)) goto done;
     generation=0;
     memcpy(app,"0.0.427",sizeof("0.0.427"));
     RpcTryExcept {
@@ -93,7 +93,7 @@ int wmain(int argc, WCHAR **argv)
     }
     failed=0;
 done:
-    if (connection && binding) Client_Disconnect(binding,self,generation,&connection);
+    if (connection && binding) test_rpc_disconnect(binding,self,generation,&connection);
     if (self) CloseHandle(self);
     if (binding) RpcBindingFree(&binding);
     if (text) RpcStringFreeW(&text);

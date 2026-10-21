@@ -19,7 +19,7 @@ the prior checkpoint claims that the CAF defect is universally fixed.
 | Admission And Approval | Owner approves final design and continuous sequential execution through T pre-closure acceptance; S1 design concluded and pushed at c838c332c. |
 | Objective | Implement the approved unified management-close transaction, concurrency and role-specific service-loss cleanup, preserving the S2 normal-chain candidate. |
 | Non-goals | No guest modification/rebuild; no native GUI target lifecycle ownership; no unrelated WOW32 capability work; no T closure without owner acceptance. |
-| Reference Baseline | S3 P6 bounded frontend startup/state/result: protocol 54, thirteen images published and hash-verified at both destinations; full/incremental build, 38 service cases, fifteen actual deadline scenarios, real bootstrap/loss/retirement, startup rejection/timeout rollback, wire negatives and same-package runtime gates pass within the recorded frontier. S3 exit-permission work remains open; no functional acceptance or waiver. |
+| Reference Baseline | S3 P7 bounded ordinary Disconnect: protocol 55, thirteen images published and hash-verified at both destinations; full/incremental build, 38 service cases, sixteen actual deadline scenarios, real bootstrap/loss/retirement, startup rejection/timeout rollback, wire negatives and same-package runtime gates pass within the recorded frontier. S3 exit-permission work remains open; no functional acceptance or waiver. |
 | Files And ABI Surface | Run16, NTSRV service/client, common protocol, worker-base, NTCON, NTVDM and NTVWM; production-linked lifecycle tests; coherent protocol updates if required. |
 | Applicable Rules | docs/README reading set; execution, architecture, coding, document and source-policy authorities; original-owner recovery and exception registration. |
 | Verification | Source-first implementation and diff review; background x86/x64 full-component/incremental builds; affected production-linked service/frontend/launcher fixtures and normal DOS/native/WOW startup/return regression; complete package deployment and hashes; governance. |
@@ -32,6 +32,13 @@ the prior checkpoint claims that the CAF defect is universally fixed.
 | Similar-Issue Sweep | All normal/failure/timeout/service-loss exits; GUI/CUI separation; internal/external management; nested launchers; worker/frontend direct-control bypasses. |
 
 ## Planned S sequence
+
+S3 P7 bounds ordinary Disconnect using the existing async RPC mechanism.
+Protocol 55 was completely published at 09:24:45 UTC on 2026-10-21 after all
+gates, including wrong-generation disconnect rejection and ten-second paused-
+service cleanup. No guest or mirror changes. UNKNOWN_IF diagnosis, remaining
+worker/inherited-console controls and original-host exit permission stay open;
+see the S3 implementation ledger. This is not S3 closure or owner acceptance.
 
 1. S1: whole-system ownership audit and complete transition design.
 2. S2: complete normal admission/result/handoff chain, including frontend policy and lifecycle-only WOW binding.

@@ -237,7 +237,9 @@ static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
     CHECK(inner_launcher(frontend,frontend,CREATE_NO_WINDOW,ERROR_ACCESS_DENIED)==0);
     /* Positive nested execution belongs to the product CLI tests. */
     puts("PASS: production inner run16 rejects frontend object used as execution capability");
-    RPC_CHECK(Client_Disconnect(binding,self,generation,&connection),ERROR_SUCCESS);
+    RPC_CHECK(test_rpc_disconnect(binding,self,generation+1,&connection),ERROR_ACCESS_DENIED);
+    CHECK(connection);
+    RPC_CHECK(test_rpc_disconnect(binding,self,generation,&connection),ERROR_SUCCESS);
     CHECK(!connection);
     /* Launcher disconnect does not revoke a live root. Observe the broker's
      * real workerless retirement before asserting stale-context rejection. */
@@ -245,7 +247,7 @@ static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
     RPC_CHECK(test_rpc_connect(binding,self,APP_PROTOCOL_VERSION,(unsigned char *)version,
         &server_protocol,server_version,&connection,&generation),ERROR_SUCCESS);
     RPC_CHECK(Client_BindConsoleContext(binding,connection,self,generation,execution),ERROR_ACCESS_DENIED);
-    RPC_CHECK(Client_Disconnect(binding,self,generation,&connection),ERROR_SUCCESS);
+    RPC_CHECK(test_rpc_disconnect(binding,self,generation,&connection),ERROR_SUCCESS);
     CloseHandle(execution);CloseHandle(frontend);CloseHandle(root);
     CloseHandle(restored);CloseHandle(forged);
     puts("PASS: typed execution Console RPC, restricted rights, separate frontend authority, generation and root rundown");
@@ -434,7 +436,7 @@ int main(int argc,char **argv)
             CHECK(dos_observation_call(binding,connected,self,generation+1,APP_PROTOCOL_VERSION)==ERROR_ACCESS_DENIED);
             CHECK(dos_observation_call(binding,connected,created.hProcess,generation,APP_PROTOCOL_VERSION)==RPC_S_ACCESS_DENIED);
             CHECK(dos_observation_call(binding,connected,self,generation,APP_PROTOCOL_VERSION-1)==ERROR_REVISION_MISMATCH);
-            CHECK(!Client_Disconnect(binding,self,generation,&connected) && !connected);
+            CHECK(!test_rpc_disconnect(binding,self,generation,&connected) && !connected);
             puts("PASS real DOS observation rejects non-worker, wrong generation, false process attachment and old protocol");
         }
         CHECK(WaitForSingleObject(created.hProcess,0)==WAIT_TIMEOUT);
