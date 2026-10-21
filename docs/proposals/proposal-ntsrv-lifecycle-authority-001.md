@@ -134,3 +134,8 @@ interfaces and the unreachable CCPU yield fallback. NTMON samples existing RPC
 state at one second and draws only semantic/UI changes, not elapsed-time ticks.
 See the [bounded S6 ledger](../etc/evidence/m0-t448-s6-unused-monitor-cleanup.md).
 This adds no transport, lifecycle policy, guest change or new original wait rule.
+
+Owner adds S7 shared-library review after S6 acceptance. The
+[compatibility audit](../etc/evidence/m0-t448-s7-shared-library-import-audit.md)
+must resolve raw-import incompatibilities before implementation, retaining text
+capabilities and NTSRV authority without restoring extra deadlines.

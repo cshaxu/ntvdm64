@@ -2,6 +2,10 @@
 
 ## Authority and status
 
+Owner adds S7 after accepting S6. The [shared-library audit](../evidence/m0-t448-s7-shared-library-import-audit.md)
+records unchanged-import incompatibilities; this stage admits audit/discussion,
+not production import or new semantic concessions. T closure is postponed.
+
 ### Owner-added S6 cleanup
 
 After S5, remove proved uncalled NTCON synchronization APIs and unreachable

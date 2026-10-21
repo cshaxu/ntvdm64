@@ -2,12 +2,13 @@
 
 ## Current Work
 
-**Active: M0 T448 S6**
+**Active: M0 T448 S7**
 
-S6 is owner-accepted and closed. This packet remains only for the requested
-whole-T closure audit and its documentation delivery; no implementation S is
-open. The audit recommends T448 closure within its fixed lifecycle scope,
-pending the owner's T-level decision. See the [accepted S6 and T audit](../etc/evidence/m0-t448-s6-unused-monitor-cleanup.md#owner-acceptance-and-t-closure-audit).
+S6 is owner-accepted and closed. Owner now adds S7 to audit an unchanged
+SoftPC shared-library import before discussing incompatible contracts. T448
+closure is postponed for this explicit scope addition. No production import
+or semantic concession is authorized by the audit. See the [S7 audit](../etc/evidence/m0-t448-s7-shared-library-import-audit.md)
+and [accepted S6 and prior T audit](../etc/evidence/m0-t448-s6-unused-monitor-cleanup.md#owner-acceptance-and-t-closure-audit).
 The delivered baseline is d5d0dc243, protocol64. All thirteen committed and
 installed images were rechecked against the release manifest and agree.
 The proposed WOW read-time clock optimization was not implemented; the owner
@@ -69,22 +70,22 @@ service loss permits local cleanup, never reconnection or task replay.
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T448 S6; Ordinary Mode, single person implementer/reviewer; no subagents. |
+| Identifier Mode | M0 T448 S7; Ordinary Mode, single person implementer/reviewer; no subagents. |
 | Candidate Proposal | [NTSRV lifecycle authority](../proposals/proposal-ntsrv-lifecycle-authority-001.md). |
-| Admission And Approval | Owner explicitly requests a new sequential S for unused fallback/API removal and change-only NTMON rendering with one-second idle sampling. S5 delivered at6a956824c. |
-| Objective | Remove proved unreachable CCPU yield fallback and unused NTCON wait/yield interface closure; sample NTMON state at1000ms idle cadence, redraw only on content/UI changes, preserve immediate keyboard actions and task-detail updates. |
+| Admission And Approval | Owner requests a new S for shared-library upgrade; first audit incompatible points of an unchanged import and discuss them before implementation. S6 accepted and closed. |
+| Objective | Compare pinned old upstream, current NTCON adaptations and committed new upstream; identify source/build/API, ownership and behavioral incompatibilities and explicit decisions. |
 | Non-goals | No guest modification/rebuild, original internal wait rewrite, new transport, timers/retries/reconnect framework, GUI target management or unrelated WOW32 feature work; no T closure without acceptance. |
-| Reference Baseline | S5 delivery6a956824c and its acceptance matrix; installed full13 S4 P2 protocol64 package. |
-| Files And ABI Surface | NTCON private sync declarations/implementations/aliases and import manifest, NTVDM CCPU wait adapter, NTMON main and existing observation tests; fixture RPC/GDI import-library corrections and CAF probe cursor-sampling ordering correction; no wire ABI or guest change. |
+| Reference Baseline | Local7d839ed96, product d5d0dc243/protocol64; old import3186afcd; upstream committed9ebb988776d0ef6f21b8aeb0e5ef93d5f2afc220, excluding its dirty worktree. |
+| Files And ABI Surface | Audit docs, NTCON import manifest/library and actual consumers, SoftPC src/lib and test/lib read-only. No runtime/ABI edit in this phase. |
 | Applicable Rules | docs/README reading set; execution, architecture, coding, document and source-policy authorities; original-owner recovery and exception registration. |
-| Verification | Prove no callers before removing interface closure; prove CCPU initialization/teardown ordering; test unchanged samples cause no redraw, changed worker/task/error/detail/UI causes redraw, one-second idle sample and keyboard responsiveness. Run affected fixtures plus full13 build/incremental, runtime gates, coherent publication/hash checks. |
-| Expected Markers | No dead yield/sleep wrappers; no uninitialized HLT polling; no idle repaint/time-only repaint; visible changes and management actions remain correct; unchanged service lifecycle authority. |
+| Verification | Pinned Git source comparison, caller and dependency trace, local exception review; distinguish static incompatibility from tested failure. Background documentation gate and clean reviewed commit/push. |
+| Expected Markers | Finite compatibility matrix, scope recommendation and owner decisions; no overwrite of local fixes or upstream WIP. |
 | Asset Needs | Existing source and read-only original references; retained T447 fault evidence and rollback package; no new guest assets. |
-| Reporting Requirements | Requirement-to-source/test closure matrix, source/test/document deltas, published hashes, inherited limitations and owner acceptance request; no unsupported whole-WOW usability claims. |
+| Reporting Requirements | Explain unchanged-import failures, safe consumer adaptations and semantic tradeoffs; explicitly state no compile/runtime qualification yet. |
 | Stop Conditions | New observable semantic retreat, missing original-source authority or material scope expansion requires owner decision. |
-| Exit Criteria | Fixed S6 cleanup/monitor behavior verified and full13 latest package published to both destinations; reviewed commit/push/clean checkout; no S6 claim based only on local tests. |
-| Original Owner Request | Remove unused fallback and idle NTCON interfaces; NTMON must not refresh without changes, sample every one second; append a new S. |
-| Similar-Issue Sweep | Whole removed wrapper chain and address-taken/build references; monitor main rows, modal task trace, selection/confirmation, RPC error changes, resize and input events. |
+| Exit Criteria | Audit and owner decisions precede import. Implementation requires a revised packet with affected build/runtime/publication gates; this first delivery is audit-only, not S7 implementation closure. |
+| Original Owner Request | Admit a new S and first audit incompatible points needing discussion if the library is imported unchanged. |
+| Similar-Issue Sweep | Frames, fonts/cursor, input/capture, mailbox ownership, stop/join/failure, dependencies/build selection and import provenance. |
 
 ## Planned S sequence
 
@@ -99,6 +100,7 @@ five-second policies; they are not current instructions or open S3 work.
 4. S4: owner-added autonomous-code polling audit and cleanup; reuse existing events and completion notifications, justify retained polling, verify wakeup/exit/idle behavior and code delta.
 5. S5: integrated fault/concurrency and real Console handoff acceptance, full release and closure audit (formerly S4).
 6. S6: owner-added unused fallback/interface cleanup and NTMON change-only rendering with one-second sampling.
+7. S7: owner-added SoftPC shared-library import compatibility audit, then separately confirmed integration decisions.
 
 The [proposal](../proposals/proposal-ntsrv-lifecycle-authority-001.md) owns the
 finite inherited gap list. Cross-group changes must preserve a coherent working
@@ -287,6 +289,9 @@ explicit limitations. T448 remains open for owner acceptance.
 
 ## S6 Closure Record
 
+Owner accepted S6 after delivery d5d0dc243; acceptance and the prior whole-T
+audit are in the [S6 ledger](../etc/evidence/m0-t448-s6-unused-monitor-cleanup.md).
+
 Removed uncalled NTCON task/event/wait/sleep/yield closure and default mailbox
 Event; retained mutexes and actual native window notification. CCPU requires its
 startup-created event, without an uninitialized yield fallback. NTMON samples
@@ -299,8 +304,8 @@ passed. Historical fixture invocation/link and coordinate-sampling failures
 remain in the ledger. Live-view bitmap fixture is compile-checked; live modal
 capture was not rerun, and existing SOL/WRITE limits remain unchanged.
 Review and complete two-destination publication passed with recovery at
-build/t448-s6/publication-r5-backup. Delivery controller records the eventual
-commit, remote identity and clean worktree; S6 then awaits owner acceptance.
+build/t448-s6/publication-r5-backup. Delivery controller records the commit,
+remote identity and clean worktree; owner acceptance is now recorded above.
 
 ## Temporary evidence
 
