@@ -60,3 +60,49 @@ palette-only conversion; latest-wins/failure/retirement/reopen; input/capture;
 frontend/channel/text and eight CAF pre-Enter echo cases; full13/incremental and
 coherent two-destination publication after runtime changes. Audit delivery is
 documentation-only, no binaries. S7 stays open pending decisions.
+
+## Removal research requested by owner
+
+Read-only source tracing establishes live producers, not just unused fields:
+
+- NTVWM text_frame.c::ntvwm_text_frame_pack reads actual viewport dimensions,
+  accepts up to160x96 and converts COMMON_LVB_UNDERSCORE into optional third
+  bytes. frontend_window_library_test.c covers120x30,160x54,160x96 and exact
+  pixels; ntvwm_text_frame_test.c tests the native attribute mapping. These
+  are targeted fixtures, not evidence of a particular everyday app requiring
+  every maximum dimension.
+- Original mvdm/softpc.new/base/video/vga_prts.c::do_new_cursor produces a
+  second segment when cursor end is below start (with distinct zero-end handling).
+  mvdm_softpc_text_video_copy reads both segments; win32/console_text.c publishes
+  them; NTCON window_frame.c/text_frame.c forwards them to its extended renderer.
+  Therefore removal changes a source-defined display behavior, not dead-code
+  cleanup. No guest or original emulator change is necessary or proposed.
+- frontend_session.c processes Window decoding even outside active Window mode;
+  decode errors propagate through its pump. Reducing a library constant alone
+  can fail presentation rather than merely disabling CAF. Window capacity must
+  be separated from protocol validity if only the Window feature is restricted.
+
+Least-scope removal option: leave the established wire and original producers
+intact, discard underline and secondary-segment presentation only at the NTCON
+Window conversion, and remove those library fields/render/geometry branches.
+Native Console underline currently maps back to COMMON_LVB_UNDERSCORE in
+frontend_session.c and can remain. This deliberately makes Window less faithful
+than existing behavior; collapsing two segments to one bounding block is not
+equivalent. Prefer the primary segment if such a visual concession is approved.
+
+Large text has no equivalent lossless80x50 representation. Options are explicit
+Window-mode refusal with continued Console presentation, approved crop/scroll
+interaction, or a product-wide80x50 restriction. Refusal must handle growth while
+already in Window mode, avoid leaving a stale picture, preserve data and input
+coordinates, and keep control with NTSRV. It is a feature decision and requires
+implementation design/tests; simply returning ERROR_NOT_SUPPORTED from decoding
+is unsafe as a purported nonfatal refusal. Do not resize hidden guest/native
+Consoles or change guest video modes just to accommodate a library limit.
+
+Full product removal is larger: remove native attribute production, style-byte
+consumers, geometry acceptance and protocol fields together, revise the wire
+version and all peers/tests. It still cannot delete original VGA behavior.
+Not recommended merely to avoid three local library extensions. No new removal
+is implemented or runtime-tested; owner request here is research only. Existing
+positive tests must become explicit approved-degradation tests, never disappear
+silently. No evidence yet establishes the exact160x96 maximum as mandatory.
