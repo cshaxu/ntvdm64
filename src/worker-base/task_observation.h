@@ -26,7 +26,7 @@ DWORD worker_task_observer_start(worker_task_observer *,worker_observation_publi
 BOOL worker_task_observer_offer(worker_task_observer *,const common_dos_observation *);
 /* After producer quiescence, normal teardown may wait finitely for accepted
  * facts to finish publication. This does not certify missing/failed reports. */
-DWORD worker_task_observer_drain(worker_task_observer *,DWORD timeout);
+DWORD worker_task_observer_drain(worker_task_observer *);
 /* Quiesce/unregister producers first; join before releasing transport/session. */
 void worker_task_observer_stop(worker_task_observer *);
 #endif

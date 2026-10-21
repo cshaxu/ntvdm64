@@ -12,9 +12,32 @@ struct frontend_session_service {
     frontend_session *presentation;
     void (*channel_ready)(void);
 };
-static DWORD WINAPI frontend_pump(void *context)
+/* One service-selected disposition path for healthy and faulted I/O. */
+static DWORD frontend_retirement(frontend_session_service *scope,DWORD *action)
 {
-    frontend_session_service *scope=context;
+    DWORD error=OpenNtBaseClientRetireWorkerlessFrontend(action);
+    if(error)return error;
+    switch(*action) {
+    case OPENNT_FRONTEND_RETIRE_NONE:
+    case OPENNT_FRONTEND_RETIRE_FINAL_CLOSE:
+        return ERROR_SUCCESS;
+    case OPENNT_FRONTEND_RETIRE_RETURN_CONSOLE:
+        error=frontend_session_return_console(scope->presentation);
+        if(!error)error=OpenNtBaseClientFrontendCloseQuiesced();
+        if(!error)scope->return_prepared=TRUE;
+        return error;
+    case OPENNT_FRONTEND_RETIRE_PARK:
+        error=frontend_session_park(scope->presentation);
+        if(error)return error;
+        if(scope->retire && !ResetEvent(scope->retire))return GetLastError();
+        scope->retire_requested=FALSE;
+        return OpenNtBaseClientFrontendLeaseReady();
+    default:
+        return ERROR_INVALID_DATA;
+    }
+}
+static DWORD frontend_run(frontend_session_service *scope)
+{
     HANDLE waits[7];
     DWORD error=ERROR_SUCCESS;
     for (;;) {
@@ -39,27 +62,10 @@ static DWORD WINAPI frontend_pump(void *context)
          * request. Check it before joins, channel work or lease restoration. */
         {
             DWORD retired=0;
-            error=OpenNtBaseClientRetireWorkerlessFrontend(&retired);
+            error=frontend_retirement(scope,&retired);
             if(error)return error;
             if(retired==OPENNT_FRONTEND_RETIRE_FINAL_CLOSE)return ERROR_SUCCESS;
-            if(retired==OPENNT_FRONTEND_RETIRE_RETURN_CONSOLE) {
-                error=frontend_session_return_console(scope->presentation);
-                if(error)return error;
-                error=OpenNtBaseClientFrontendCloseQuiesced();
-                if(error)return error;
-                scope->return_prepared=TRUE;
-                continue;
-            }
-            if(retired==OPENNT_FRONTEND_RETIRE_PARK) {
-                error=frontend_session_park(scope->presentation);
-                if(error)return error;
-                if(scope->retire && !ResetEvent(scope->retire))return GetLastError();
-                scope->retire_requested=FALSE;
-                error=OpenNtBaseClientFrontendLeaseReady();
-                if(error)return error;
-                continue;
-            }
-            if(retired!=OPENNT_FRONTEND_RETIRE_NONE)return ERROR_INVALID_DATA;
+            if(retired!=OPENNT_FRONTEND_RETIRE_NONE)continue;
         }
         /* The prepared close has frozen producer access. Its resulting pipe
          * EOF is not permission to finalize before NTSRV joins the workers.
@@ -129,6 +135,35 @@ static DWORD WINAPI frontend_pump(void *context)
     return ERROR_SUCCESS;
 }
 
+static DWORD WINAPI frontend_pump(void *context)
+{
+    frontend_session_service *scope=context;
+    DWORD error=frontend_run(scope),action,step,wait;
+    HANDLE waits[3]={scope->broker,scope->stop,scope->state_changed};
+    /* The in-process fixture has no admitted service lifetime. Production
+     * keeps the authenticated broker handle until this thread has joined. */
+    if(!error || !scope->broker)return error;
+    if(WaitForSingleObject(scope->broker,0)==WAIT_OBJECT_0)return ERROR_INVALID_HANDLE;
+    /* Stop admitting I/O after a fault, but do not close the presentation or
+     * report restoration before NTSRV's instruction. Submission is one-shot;
+     * failure does not authorize local exit, reconnection or replay. */
+    step=OpenNtBaseClientRequestParticipantExit();
+    for(;;) {
+        if(WaitForSingleObject(scope->broker,0)==WAIT_OBJECT_0)return ERROR_INVALID_HANDLE;
+        if(!step) {
+            step=frontend_retirement(scope,&action);
+            if(!step && action==OPENNT_FRONTEND_RETIRE_FINAL_CLOSE)return error;
+        }
+        /* A failed control/restore operation must not be retried or converted
+         * into a successful acknowledgement. Only service death permits local
+         * cleanup when this control path can no longer execute instructions. */
+        wait=WaitForMultipleObjects(step ? 1 : 3,waits,FALSE,INFINITE);
+        if(wait==WAIT_OBJECT_0)return ERROR_INVALID_HANDLE;
+        if(wait==WAIT_OBJECT_0+1)return error;
+        if(wait!=WAIT_OBJECT_0+2)step=ERROR_INVALID_STATE;
+    }
+}
+
 DWORD frontend_service_close(frontend_session_service *scope)
 {
     DWORD error=ERROR_SUCCESS,step;
@@ -142,7 +177,7 @@ DWORD frontend_service_close(frontend_session_service *scope)
     if(scope->channel) {
         step=frontend_io_channel_stop(scope->channel);
         if(step) {
-            /* The channel's bounded join failed, so its storage must remain
+            /* The channel's join failed, so its storage must remain
              * live.  Its stop was nevertheless issued; return the borrowed
              * Console through the still-running presentation before asking
              * that presentation thread to stop. */

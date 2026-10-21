@@ -19,8 +19,6 @@ int fixture_parent_resume_origin(void);
 int fixture_shared_worker_residency(void);
 int fixture_management_gui(void);
 int fixture_borrowed_console_identity_loss(void);
-DWORD service_next_frontend_deadline_at(OPENNT_BASE_SERVICE *,ULONGLONG,ULONGLONG *);
-DWORD service_retire_expired_frontends_at(OPENNT_BASE_SERVICE *,ULONGLONG);
 static const BYTE native_payload[3]={'N','T','C'};
 #define TEST_NATIVE_CUI_TYPE (sizeof(void *)==8 ? \
     OPENNT_BASE_NATIVE_LAUNCH_WIN64_CUI : OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI)
@@ -128,7 +126,7 @@ static DWORD WINAPI acknowledge_frontend_close(void *context)
     if(error || closing!=OPENNT_FRONTEND_RETIRE_RETURN_CONSOLE)return error ? error : ERROR_INVALID_STATE;
     error=OpenNtBaseServiceFrontendCloseQuiesced(test->root,test->pid,test->generation);
     if(error)return error;
-    error=OpenNtBaseServiceRetireExpiredFrontends(test->root->service);
+    error=OpenNtBaseServiceReconcileFrontends(test->root->service);
     if(error)return error;
     error=OpenNtBaseServiceRetireWorkerlessFrontend(test->root,test->pid,test->generation,&closing);
     if(error || closing!=OPENNT_FRONTEND_RETIRE_FINAL_CLOSE)return error ? error : ERROR_INVALID_STATE;
@@ -230,7 +228,7 @@ static int frontend_completion_barrier(void)
     CHECK(WaitForSingleObject(call.done,0)==WAIT_TIMEOUT);
     EnterCriticalSection(&service->lock);
     root->frontend_close_draining=root->frontend_close_return_required=TRUE;
-    root->frontend_close_deadline=GetTickCount64()+10000;
+    root->frontend_close_requested=TRUE;
     LeaveCriticalSection(&service->lock);
     CHECK(OpenNtBaseServiceFrontendConsoleRestored(root,child.dwProcessId,root_generation)==ERROR_INVALID_STATE);
     CHECK(!OpenNtBaseServiceFrontendCloseQuiesced(root,child.dwProcessId,root_generation));
@@ -263,9 +261,8 @@ static int frontend_completion_barrier(void)
 
 /* The service owns one close transaction.  A lifecycle sweep during the
  * acknowledgement barrier must not translate it into ordinary worker-close;
- * after the Console-close is sent, timeout must remain recoverable until the
- * real worker exit advances the same transaction. */
-static int management_frontend_close_ordering(unsigned timeout,unsigned competing)
+ * elapsed time cannot advance it; acknowledgement and real worker exit do. */
+static int management_frontend_close_ordering(unsigned phase,unsigned competing)
 {
     BOOL self_exit=competing>=3;
     OPENNT_BASE_SERVICE *service=OpenNtBaseServiceStart();
@@ -278,7 +275,7 @@ static int management_frontend_close_ordering(unsigned timeout,unsigned competin
     DWORD root_generation=0,worker_generation=0,action=0;
     OPENNT_BASE_WORKER_INFO *tree=NULL;OPENNT_BASE_MANAGEMENT_KEY key={0};
     uint64_t epoch=0;uint32_t count=0,index;
-    ULONGLONG before,deadline,due=0;
+    ULONGLONG before;
     CHECK(service && capability && GetModuleFileNameA(NULL,image,MAX_PATH));
     sprintf_s(command,sizeof(command),"\"%s\" --reservation-child",image);
     CHECK(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
@@ -302,71 +299,73 @@ static int management_frontend_close_ordering(unsigned timeout,unsigned competin
     CHECK(key.category==MANAGEMENT_FRONTEND);
     if(self_exit) {
         competing-=2;
-        CHECK(OpenNtBaseServiceRequestWorkerExit(root,root_child.dwProcessId,root_generation)==ERROR_ACCESS_DENIED);
-        CHECK(OpenNtBaseServiceRequestWorkerExit(worker,worker_child.dwProcessId,worker_generation+1)==ERROR_ACCESS_DENIED);
+        CHECK(OpenNtBaseServiceRequestParticipantExit(root,root_child.dwProcessId,root_generation+1)==ERROR_ACCESS_DENIED);
+        CHECK(OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation+1)==ERROR_ACCESS_DENIED);
         CHECK(watch.close_kind==WORKER_CLOSE_NONE);
     }
     if(competing==1) {
-        CHECK(!(self_exit ? OpenNtBaseServiceRequestWorkerExit(worker,worker_child.dwProcessId,worker_generation) :
+        CHECK(!(self_exit ? OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation) :
             OpenNtBaseServiceTerminateWorker(service,worker_child.dwProcessId)));
         CHECK(watch.close_kind==WORKER_CLOSE_WORKER);
     }
     before=GetTickCount64();
-    CHECK(!OpenNtBaseServiceCloseManagementNode(service,&key));
+    CHECK(!(self_exit ? OpenNtBaseServiceRequestParticipantExit(root,root_child.dwProcessId,root_generation) :
+        OpenNtBaseServiceCloseManagementNode(service,&key)));
     if(competing==2) {
-        CHECK(!(self_exit ? OpenNtBaseServiceRequestWorkerExit(worker,worker_child.dwProcessId,worker_generation) :
+        CHECK(!(self_exit ? OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation) :
             OpenNtBaseServiceTerminateWorker(service,worker_child.dwProcessId)));
         CHECK(watch.close_kind==WORKER_CLOSE_CONSOLE);
     }
     CHECK(GetTickCount64()-before<1000); /* No requester-held lifetime wait. */
-    if(self_exit)CHECK(!OpenNtBaseServiceRequestWorkerExit(worker,worker_child.dwProcessId,worker_generation));
-    deadline=root->frontend_close_deadline;
-    CHECK(deadline>=before+10000 && deadline<=GetTickCount64()+10000);
+    if(self_exit) {
+        CHECK(!OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation));
+        CHECK(!OpenNtBaseServiceRequestParticipantExit(root,root_child.dwProcessId,root_generation));
+    }
+    CHECK(root->frontend_close_requested);
     CHECK(!OpenNtBaseServiceCloseManagementNode(service,&key));
-    CHECK(root->frontend_close_deadline==deadline); /* Duplicate cannot rearm. */
-    CHECK(!service_retire_expired_frontends_at(service,deadline-1));
-    CHECK(!root->frontend_close_timed_out);
-    CHECK(!service_next_frontend_deadline_at(service,deadline-1,&due) && due==deadline);
+    CHECK(root->frontend_close_requested); /* Duplicate preserves the same transaction. */
+    CHECK(!OpenNtBaseServiceReconcileFrontends(service));
+    CHECK(root->frontend_close_draining);
     CHECK(WaitForSingleObject(watch.console_close,0)==WAIT_TIMEOUT);
     CHECK(WaitForSingleObject(watch.shutdown,0)==(competing==1 ? WAIT_OBJECT_0 : WAIT_TIMEOUT));
     CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(root,root_child.dwProcessId,root_generation,&action));
     CHECK(action==OPENNT_FRONTEND_RETIRE_RETURN_CONSOLE);
     CHECK(OpenNtBaseServiceFrontendConsoleRestored(root,root_child.dwProcessId,root_generation)==ERROR_INVALID_STATE);
     CHECK(OpenNtBaseServiceFrontendCloseQuiesced(root,root_child.dwProcessId,root_generation+1)==ERROR_ACCESS_DENIED);
-    if(timeout==2) {
-        CHECK(!service_retire_expired_frontends_at(service,deadline));
-        CHECK(root->frontend_close_timed_out && root->frontend_close_draining);
+    if(phase==2) {
+        CHECK(!OpenNtBaseServiceReconcileFrontends(service));
+        CHECK(root->frontend_close_requested && root->frontend_close_draining);
         CHECK(WaitForSingleObject(watch.console_close,0)==WAIT_TIMEOUT);
     }
     CHECK(!OpenNtBaseServiceFrontendCloseQuiesced(root,root_child.dwProcessId,root_generation));
     CHECK(!OpenNtBaseServiceFrontendCloseQuiesced(root,root_child.dwProcessId,root_generation));
-    CHECK(!service_retire_expired_frontends_at(service,timeout==2 ? deadline : deadline-1));
+    CHECK(!OpenNtBaseServiceReconcileFrontends(service));
     CHECK(WaitForSingleObject(watch.console_close,0)==(competing==1 ? WAIT_TIMEOUT : WAIT_OBJECT_0));
     CHECK(WaitForSingleObject(watch.shutdown,0)==(competing==1 ? WAIT_OBJECT_0 : WAIT_TIMEOUT));
-    if(timeout==1) {
-        CHECK(!service_retire_expired_frontends_at(service,deadline));
-        CHECK(root->frontend_close_timed_out && root->frontend_close_draining);
+    if(phase==1) {
+        CHECK(!OpenNtBaseServiceReconcileFrontends(service));
+        CHECK(root->frontend_close_requested && root->frontend_close_draining);
         CHECK(TerminateProcess(root_child.hProcess,ERROR_CANCELLED));
         CHECK(WaitForSingleObject(root_child.hProcess,5000)==WAIT_OBJECT_0);
         /* Real context rundown removes the root, unlike merely marking its
          * process dead. The retained worker must not receive a new close kind. */
         CHECK(!OpenNtBaseServiceDisconnect(root));root=NULL;
         if(competing==2)CHECK(!OpenNtBaseServiceTerminateWorker(service,worker_child.dwProcessId));
-        CHECK(!service_retire_expired_frontends_at(service,deadline+1));
+        CHECK(!OpenNtBaseServiceReconcileFrontends(service));
         CHECK(WaitForSingleObject(watch.shutdown,0)==WAIT_TIMEOUT);
     }
     CHECK(TerminateProcess(worker_child.hProcess,ERROR_CANCELLED));
     CHECK(WaitForSingleObject(worker_child.hProcess,5000)==WAIT_OBJECT_0);
-    CHECK(!service_retire_expired_frontends_at(service,timeout ? deadline+1 : deadline-1));
+    CHECK(!OpenNtBaseServiceReconcileFrontends(service));
     if(root)CHECK(!root->frontend_close_draining && root->frontend_closing);
-    if(!timeout || timeout==2) {
+    if(phase!=1) {
         CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(root,root_child.dwProcessId,root_generation,&action));
         CHECK(action==OPENNT_FRONTEND_RETIRE_FINAL_CLOSE);
         CHECK(!OpenNtBaseServiceFrontendCloseQuiesced(root,root_child.dwProcessId,root_generation));
         CHECK(TerminateProcess(root_child.hProcess,ERROR_CANCELLED));
         CHECK(WaitForSingleObject(root_child.hProcess,5000)==WAIT_OBJECT_0);
     }
-    if(root)CHECK(root->frontend_close_deadline==deadline);
+    if(root)CHECK(root->frontend_close_requested);
     CHECK(WaitForSingleObject(watch.shutdown,0)==(competing==1 ? WAIT_OBJECT_0 : WAIT_TIMEOUT));
     EnterCriticalSection(&service->lock);RemoveEntryList(&watch.link);LeaveCriticalSection(&service->lock);
     CloseHandle(watch.shutdown);CloseHandle(watch.console_close);
@@ -376,7 +375,7 @@ static int management_frontend_close_ordering(unsigned timeout,unsigned competin
     HeapFree(GetProcessHeap(),0,tree);CloseHandle(capability);
     CloseHandle(worker_child.hThread);CloseHandle(worker_child.hProcess);
     CloseHandle(root_child.hThread);CloseHandle(root_child.hProcess);
-    puts("PASS accepted close outlives caller; one deadline, exact phase, late facts and Console-close only");
+    puts("PASS accepted close outlives caller; event-driven phases, participant loss and Console-close only");
     return 0;
 }
 
@@ -655,7 +654,6 @@ static int frontend_authority(void)
         char image[MAX_PATH],command[MAX_PATH+32];
         DWORD launcher_generation=0,root_generation=0,create=0,closing=0;
         DWORD members[2];
-        ULONGLONG deadline=0,before=GetTickCount64();
         CHECK(service && self && capability && retire && restored && startup_result);
         CHECK(worker_cleanup && OpenNtBaseServiceConfigureEmptyNotify(service,
             frontend_notification_cleanup,worker_cleanup));
@@ -712,10 +710,8 @@ static int frontend_authority(void)
         CloseHandle(startup_result);
         CHECK(OpenNtBaseServiceWorkerShutdownEvent(root,child.dwProcessId,root_generation,&shutdown)==ERROR_ACCESS_DENIED);
         CHECK(!shutdown);
-        CHECK(!OpenNtBaseServiceRetireExpiredFrontends(service));
+        CHECK(!OpenNtBaseServiceReconcileFrontends(service));
         CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(root,child.dwProcessId,root_generation,&closing) && !closing);
-        CHECK(!OpenNtBaseServiceNextFrontendDeadline(service,&deadline));
-        CHECK(deadline>=before && deadline<=GetTickCount64()+10000);
         if(phase>=2) {
             OPENNT_BASE_CONNECTION *worker=NULL;
             PROCESS_INFORMATION backend={0};
@@ -733,11 +729,9 @@ static int frontend_authority(void)
             CHECK(!OpenNtBaseServicePrepareWorker(launcher,GetCurrentProcessId(),launcher_generation,reservation,backend.hProcess));
             CHECK(!OpenNtBaseServiceConnect(service,backend.hProcess,&worker,&worker_generation));
             {
-                ULONGLONG next=0;
-                /* Newly admitted work cancels the already armed root grace,
-                 * even when evaluated at its former expiry. */
-                CHECK(!service_next_frontend_deadline_at(service,deadline,&next));
-                CHECK(!service_retire_expired_frontends_at(service,deadline));
+                /* Admission keeps the root available; reconciliation alone
+                 * cannot turn a live participant into an expired lease. */
+                CHECK(!OpenNtBaseServiceReconcileFrontends(service));
                 CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(root,child.dwProcessId,root_generation,&closing) && !closing);
             }
             CHECK(OpenNtBaseServiceWorkerShutdownEvent(worker,backend.dwProcessId,worker_generation+1,&shutdown)==ERROR_ACCESS_DENIED);
@@ -745,15 +739,11 @@ static int frontend_authority(void)
             CHECK(WaitForSingleObject(shutdown,0)==WAIT_TIMEOUT);
             CHECK(!SetEvent(shutdown) && GetLastError()==ERROR_ACCESS_DENIED);
             if(phase>=4) {
-                ULONGLONG again=0,now=deadline+20000;
                 CHECK(TerminateProcess(backend.hProcess,0));
                 CHECK(WaitForSingleObject(backend.hProcess,5000)==WAIT_OBJECT_0);
                 CHECK(!OpenNtBaseServiceDisconnect(worker));worker=NULL;
-                CHECK(!service_next_frontend_deadline_at(service,now,&again) && again==now+10000);
-                CHECK(!service_retire_expired_frontends_at(service,again-1));
+                CHECK(!OpenNtBaseServiceReconcileFrontends(service));
                 CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(root,child.dwProcessId,root_generation,&closing) && !closing);
-                CHECK(!service_retire_expired_frontends_at(service,again));
-                CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(root,child.dwProcessId,root_generation,&closing) && closing);
                 CHECK(!OpenNtBaseServiceDisconnect(root));root=NULL;
                 CHECK(!OpenNtBaseServiceDisconnect(launcher));launcher=NULL;
                 CloseHandle(shutdown);CloseHandle(backend.hThread);CloseHandle(backend.hProcess);
@@ -767,7 +757,7 @@ static int frontend_authority(void)
             CHECK(WaitForSingleObject(command_wait,0)==WAIT_TIMEOUT);
             CHECK(!OpenNtBaseServiceDisconnect(root));root=NULL;
             CHECK(WaitForSingleObject(shutdown,0)==WAIT_TIMEOUT); /* Not worker policy. */
-            CHECK(!OpenNtBaseServiceRetireExpiredFrontends(service));
+            CHECK(!OpenNtBaseServiceReconcileFrontends(service));
             CHECK(WaitForSingleObject(shutdown,0)==WAIT_TIMEOUT);
             {
                 HANDLE close=NULL;
@@ -785,28 +775,24 @@ static int frontend_authority(void)
             CHECK(!OpenNtBaseServiceDisconnect(launcher));launcher=NULL;
             CHECK(WaitForSingleObject(worker_cleanup,5000)==WAIT_OBJECT_0);
         } else {
-        /* No LeaseReady call: the obsolete idle gate must not pin this root. */
+        /* With no launcher or worker, park the live frontend. Only an actual
+         * lifecycle transition, not a synthetic expiry, may retire it. */
         CHECK(!OpenNtBaseServiceDisconnect(launcher));launcher=NULL;
-        CHECK(!OpenNtBaseServiceRetireExpiredFrontends(service));
+        CHECK(!OpenNtBaseServiceReconcileFrontends(service));
         CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(root,child.dwProcessId,root_generation,&closing) &&
             closing==OPENNT_FRONTEND_RETIRE_PARK);
-        CHECK(!OpenNtBaseServiceNextFrontendDeadline(service,&deadline) && deadline);
         {
-            ULONGLONG next=0;
             HANDLE state_changed=NULL;
             CHECK(!OpenNtBaseServiceFrontendStateChanged(root,child.dwProcessId,root_generation,&state_changed));
             while(WaitForSingleObject(state_changed,0)==WAIT_OBJECT_0) {}
-            CHECK(!service_retire_expired_frontends_at(service,deadline-1));
+            CHECK(!OpenNtBaseServiceReconcileFrontends(service));
             CHECK(WaitForSingleObject(state_changed,0)==WAIT_TIMEOUT);
             CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(root,child.dwProcessId,root_generation,&closing) &&
                 closing==OPENNT_FRONTEND_RETIRE_PARK);
-            CHECK(!service_next_frontend_deadline_at(service,deadline-1,&next) && next==deadline);
-            CHECK(!service_retire_expired_frontends_at(service,deadline));
-            CHECK(WaitForSingleObject(state_changed,0)==WAIT_OBJECT_0);
             CloseHandle(state_changed);
         }
-        CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(root,child.dwProcessId,root_generation,&closing) && closing);
-        CHECK(!OpenNtBaseServiceNextFrontendDeadline(service,&deadline) && !deadline);
+        CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(root,child.dwProcessId,root_generation,&closing) &&
+            closing==OPENNT_FRONTEND_RETIRE_PARK);
         CHECK(!OpenNtBaseServiceIsEmpty(service));
         CHECK(!OpenNtBaseServiceDisconnect(root));root=NULL;
         }
@@ -817,7 +803,7 @@ authority_finish:
         CloseHandle(child.hThread);CloseHandle(child.hProcess);
         CloseHandle(capability);CloseHandle(retire);CloseHandle(restored);CloseHandle(self);
     }
-    puts("PASS: broker retires workerless dedicated/borrowed roots without an idle gate; startup admission remains bounded");
+    puts("PASS: authenticated startup, worker loss and explicit root retirement; live workerless roots park without expiry");
     return 0;
 }
 
@@ -1054,8 +1040,8 @@ int main(int argc,char **argv)
     if(argc==2 && !strcmp(argv[1],"--frontend-completion-barrier"))return frontend_completion_barrier();
     if(argc==2 && !strcmp(argv[1],"--management-frontend-close"))return management_frontend_close();
     if(argc==2 && !strcmp(argv[1],"--management-frontend-close-order"))return management_frontend_close_ordering(0,0);
-    if(argc==2 && !strcmp(argv[1],"--management-frontend-close-timeout"))return management_frontend_close_ordering(1,0);
-    if(argc==2 && !strcmp(argv[1],"--management-frontend-prepare-timeout"))return management_frontend_close_ordering(2,0);
+    if(argc==2 && !strcmp(argv[1],"--management-frontend-close-root-loss"))return management_frontend_close_ordering(1,0);
+    if(argc==2 && !strcmp(argv[1],"--management-frontend-prepare-pending"))return management_frontend_close_ordering(2,0);
     if(argc==2 && !strcmp(argv[1],"--management-worker-then-console"))return management_frontend_close_ordering(0,1);
     if(argc==2 && !strcmp(argv[1],"--management-console-then-worker"))return management_frontend_close_ordering(1,2);
     if(argc==2 && !strcmp(argv[1],"--worker-exit-then-console"))return management_frontend_close_ordering(0,3);
@@ -1080,7 +1066,7 @@ int main(int argc,char **argv)
             "--reservation-child","--native-worker","--native-backend","--frontend-root","--native-command","--frontend-unclaimed-stop",
             "--frontend-unclaimed-reconnect","--frontend-delegated","--management-late-worker-close",
             "--frontend-wait-root-loss","--frontend-wait-request-loss",
-            "--frontend-wait","--frontend-wait-timeout","--frontend-wait-worker-loss","--frontend-rundown",
+            "--frontend-wait","--frontend-wait-worker-loss","--frontend-rundown",
             "--reenter-before-return","--reenter-after-return","--reenter-nested-return",
             "--reenter-pending-command","--reenter-before-increment",
             "--launcher-completed-rundown","--launcher-completed-uncollected",
@@ -1377,7 +1363,7 @@ int main(int argc,char **argv)
                 CHECK(OpenNtBaseServiceCloseManagementNode(service,&tree[0].key)==ERROR_NOT_FOUND);
                 HeapFree(GetProcessHeap(),0,tree);
             }
-            CHECK(!OpenNtBaseServiceRetireExpiredFrontends(service));
+            CHECK(!OpenNtBaseServiceReconcileFrontends(service));
             CHECK(WaitForSingleObject(shutdown,0)==WAIT_TIMEOUT);
             {
                 HANDLE close=NULL;
@@ -1823,7 +1809,7 @@ int main(int argc,char **argv)
         CHECK(OpenNtBaseServiceCheck(launcher,GetCurrentProcessId(),launcherGeneration,
             wire,wireBytes,answer,answerBytes,&answerBytes,&parentEvent,&parentReceipt)==ERROR_NOT_READY);
         CHECK(!OpenNtBaseServiceFrontendCloseQuiesced(launcher,GetCurrentProcessId(),launcherGeneration));
-        CHECK(!OpenNtBaseServiceRetireExpiredFrontends(service));
+        CHECK(!OpenNtBaseServiceReconcileFrontends(service));
         CHECK(WaitForSingleObject(close,0)==WAIT_OBJECT_0);
         CHECK(WaitForSingleObject(shutdown,0)==WAIT_TIMEOUT);
         CHECK(TerminateProcess(child.hProcess,ERROR_CANCELLED));
@@ -2088,21 +2074,11 @@ int main(int argc,char **argv)
             launcherGeneration,self,ready)==ERROR_INVALID_PARAMETER);
         CHECK(OpenNtBaseServiceAttachFrontend(launcher,GetCurrentProcessId(),
             launcherGeneration,pending,self)==ERROR_INVALID_PARAMETER);
-        if(argc==2 && (!strcmp(argv[1],"--frontend-wait") || !strcmp(argv[1],"--frontend-wait-timeout") ||
+        if(argc==2 && (!strcmp(argv[1],"--frontend-wait") ||
             !strcmp(argv[1],"--frontend-wait-worker-loss"))) {
-            ULONGLONG began=GetTickCount64();
             waiting.connection=worker;waiting.pid=child.dwProcessId;waiting.generation=workerGeneration;
             waitingThread=CreateThread(NULL,0,frontend_wait,&waiting,0,NULL);CHECK(waitingThread);
             CHECK(WaitForSingleObject(waitingThread,100)==WAIT_TIMEOUT);
-            if(!strcmp(argv[1],"--frontend-wait-timeout")) {
-                CHECK(WaitForSingleObject(waitingThread,13000)==WAIT_OBJECT_0);
-                CHECK(GetTickCount64()-began>=10000 && GetTickCount64()-began<14000);
-                CHECK(waiting.error==ERROR_TIMEOUT && !waiting.pipe && !waiting.frontend &&
-                    !waiting.ready && !waiting.frontend_generation);
-                CloseHandle(waitingThread);waitingThread=NULL;
-                /* A later real attachment remains consumable exactly once;
-                 * the completed timeout invocation must not steal it. */
-            }
             if(!strcmp(argv[1],"--frontend-wait-worker-loss")) {
                 CHECK(TerminateProcess(child.hProcess,23));
                 CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);

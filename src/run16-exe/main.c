@@ -125,7 +125,7 @@ static DWORD connect_broker(void)
     STARTUPINFOW startup = {sizeof(startup)};
     PROCESS_INFORMATION child = {0};
     DWORD error=ERROR_GEN_FAILURE;
-    ULONGLONG deadline=GetTickCount64()+OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS;
+    ULONGLONG deadline=GetTickCount64()+OPENNT_LIFECYCLE_GRACE_MS;
     BOOL spawned=FALSE;
     if (!sibling_path(L"system32\\ntsrv.exe", broker, MAX_PATH))
         return GetLastError();
@@ -169,10 +169,9 @@ static DWORD wait_wow_startup(HANDLE parent)
     if(error){CloseHandle(ready);return error;}
     events[0]=server;events[1]=ready;events[2]=parent;
     wait=started ? WAIT_OBJECT_0+1 : WaitForMultipleObjects(ARRAYSIZE(events),events,FALSE,
-        OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+        INFINITE);
     if (wait==WAIT_FAILED) error=GetLastError();
     else if(wait==WAIT_OBJECT_0)error=ERROR_INVALID_HANDLE;
-    else if(wait==WAIT_TIMEOUT)error=ERROR_TIMEOUT;
     CloseHandle(server);
     CloseHandle(ready); ready=NULL;
     if (error) return OpenNtBaseClientFailure(error);

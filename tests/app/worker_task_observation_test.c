@@ -36,13 +36,13 @@ int main(void)
     fact.event=DOS_OBSERVATION_ENTER;fact.occurrence=1;
     CHECK(worker_task_observer_offer(&observer,&fact));
     CHECK(WaitForSingleObject(state.entered,5000)==WAIT_OBJECT_0);
-    CHECK(worker_task_observer_drain(&observer,0)==ERROR_TIMEOUT);
+    CHECK(WaitForSingleObject(observer.drained,0)==WAIT_TIMEOUT);
     /* The consumer is held outside the queue lock. Filling/overflow never
      * waits for transport and preserves all accepted distinct events. */
     for(index=0;index<WORKER_OBSERVATION_CAPACITY;++index){fact.occurrence=index+2;CHECK(worker_task_observer_offer(&observer,&fact));}
     ++fact.occurrence;CHECK(!worker_task_observer_offer(&observer,&fact));
     CHECK(SetEvent(state.release));CHECK(WaitForSingleObject(state.done,5000)==WAIT_OBJECT_0);
-    CHECK(!worker_task_observer_drain(&observer,5000));
+    CHECK(!worker_task_observer_drain(&observer));
     worker_task_observer_stop(&observer);
     CHECK(state.count==WORKER_OBSERVATION_CAPACITY+1 && state.gaps==1);
     CHECK(state.consumer!=state.producer && state.cancelled==1 && !observer.thread);
@@ -53,6 +53,18 @@ int main(void)
     CHECK(!worker_task_observer_start(&observer,publish,cancel,&state));
     CHECK(worker_task_observer_offer(&observer,&fact));
     CHECK(WaitForSingleObject(state.entered,5000)==WAIT_OBJECT_0);
+    worker_task_observer_stop(&observer);
+    CHECK(state.cancelled==1 && state.count==1 && !observer.thread);
+    /* Actual publisher exit also releases drain; pending facts must not be
+     * mistaken for successful delivery merely because the thread stopped. */
+    state.count=state.gaps=state.cancelled=0;ResetEvent(state.entered);ResetEvent(state.release);
+    CHECK(!worker_task_observer_start(&observer,publish,cancel,&state));
+    CHECK(worker_task_observer_offer(&observer,&fact));
+    CHECK(WaitForSingleObject(state.entered,5000)==WAIT_OBJECT_0);
+    CHECK(worker_task_observer_offer(&observer,&fact));
+    CHECK(SetEvent(observer.stop) && SetEvent(state.release));
+    CHECK(WaitForSingleObject(observer.thread,5000)==WAIT_OBJECT_0);
+    CHECK(worker_task_observer_drain(&observer)==ERROR_OPERATION_ABORTED);
     worker_task_observer_stop(&observer);
     CHECK(state.cancelled==1 && state.count==1 && !observer.thread);
     CloseHandle(state.entered);CloseHandle(state.release);CloseHandle(state.done);

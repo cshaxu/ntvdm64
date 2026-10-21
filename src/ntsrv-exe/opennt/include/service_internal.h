@@ -26,7 +26,6 @@
 #include "common/codec/native_launch.h"
 #include "common/protocol/frontend_lifecycle.h"
 #include <stdio.h>
-#define FRONTEND_STARTUP_DEADLINE_MS OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS
 #define SERVICE_OBSERVATION_MAX 1024u
 typedef NTSTATUS (*OPENNT_USER_TEST_TOKEN_FOR_INTERACTIVE)(HANDLE,PLUID);
 extern OPENNT_USER_TEST_TOKEN_FOR_INTERACTIVE UserTestTokenForInteractive;
@@ -128,8 +127,6 @@ struct OPENNT_BASE_CONNECTION {
     BOOL frontend_starting;
     BOOL frontend_return_pending,frontend_return_complete;
     BOOL frontend_borrowed,frontend_idle;
-    ULONGLONG frontend_admission_deadline;
-    ULONGLONG frontend_workerless_deadline; /* NTSRV-owned cancellable grace. */
     DWORD frontend_creator_generation;
     HANDLE frontend_exit_watch,frontend_exit_process;
     OPENNT_BASE_CONNECTION *frontend_join_caller;
@@ -147,8 +144,7 @@ struct OPENNT_BASE_CONNECTION {
      * then sends the existing worker close instruction.  This acknowledgement
      * is local to that close transaction; it never completes a launcher lease. */
     BOOL frontend_close_return_required,frontend_close_returned;
-    ULONGLONG frontend_close_deadline; /* One close per authenticated root generation. */
-    BOOL frontend_close_timed_out; /* Does not reopen admission or discard late facts. */
+    BOOL frontend_close_requested; /* One close per authenticated root generation. */
     struct OPENNT_FRONTEND_ROUTE *frontend_io_route; /* Borrowed, service-lock protected. */
     DWORD frontend_request_root; /* Original pending command asks this root for I/O. */
     DWORD frontend_channel_root; /* One pending direct launcher-to-root attachment. */
@@ -270,9 +266,6 @@ VOID CALLBACK service_worker_terminated(PVOID context,BOOLEAN fired);
 void service_delete_console_context(OPENNT_BASE_CONSOLE_CONTEXT *context);
 DWORD service_acquire_console_context(OPENNT_BASE_CONNECTION *root,HANDLE console,
     DWORD worker_generation,HANDLE *capability);
-DWORD service_submit_native_request_until(OPENNT_BASE_CONNECTION *caller,DWORD pid,
-    DWORD generation,DWORD operation,HANDLE frontend,DWORD bytes,BYTE *payload,
-    HANDLE *target,HANDLE *receipt,DWORD *request,ULONGLONG deadline);
 DWORD service_prepare_parent_resume(OPENNT_BASE_CONNECTION *caller,
     DWORD root_generation,BOOL *native_parent);
 BOOL service_root_console_matches(OPENNT_BASE_CONNECTION *root,HANDLE console);
@@ -315,8 +308,6 @@ void service_retire_completed_root(OPENNT_BASE_CONNECTION *parent,DWORD idle_wor
 DWORD service_bind_existing_console(OPENNT_BASE_CONNECTION *connection);
 /* Policy-owner time inputs; production callers pass GetTickCount64 through
  * the public wrappers. No mutable clock or runtime timeout override. */
-DWORD service_next_frontend_deadline_at(OPENNT_BASE_SERVICE *,ULONGLONG,ULONGLONG *);
-DWORD service_retire_expired_frontends_at(OPENNT_BASE_SERVICE *,ULONGLONG);
 /* Existing service lock protects facts. Stop joins waits outside that lock
  * after transport has quiesced; observation never contributes to IsEmpty. */
 void service_observation_bind(OPENNT_BASE_SERVICE *,DWORD,DWORD,HANDLE);

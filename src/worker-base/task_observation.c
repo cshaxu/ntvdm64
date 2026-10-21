@@ -72,12 +72,14 @@ BOOL worker_task_observer_offer(worker_task_observer *state,const common_dos_obs
     SetEvent(state->wake);return accepted;
 }
 
-DWORD worker_task_observer_drain(worker_task_observer *state,DWORD timeout)
+DWORD worker_task_observer_drain(worker_task_observer *state)
 {
-    DWORD wait;
-    if(!state || !state->thread || timeout==INFINITE)return ERROR_INVALID_PARAMETER;
-    wait=WaitForSingleObject(state->drained,timeout);
-    return wait==WAIT_OBJECT_0 ? ERROR_SUCCESS : wait==WAIT_TIMEOUT ? ERROR_TIMEOUT : GetLastError();
+    DWORD wait;HANDLE completion[2];
+    if(!state || !state->thread)return ERROR_INVALID_PARAMETER;
+    completion[0]=state->drained;completion[1]=state->thread;
+    wait=WaitForMultipleObjects(2,completion,FALSE,INFINITE);
+    return wait==WAIT_OBJECT_0 ? ERROR_SUCCESS :
+        wait==WAIT_OBJECT_0+1 ? ERROR_OPERATION_ABORTED : GetLastError();
 }
 
 void worker_task_observer_stop(worker_task_observer *state)

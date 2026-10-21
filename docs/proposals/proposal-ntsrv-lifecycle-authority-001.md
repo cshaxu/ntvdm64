@@ -2,6 +2,17 @@
 
 ## Owner direction and scope
 
+Owner correction on 2026-10-21 supersedes the blanket control/close deadline
+policy in the earlier design and implementation records. Keep the explicit
+Run16-to-new-NTSRV startup wait, NTSRV empty-service grace and Console-close
+handler grace, each five seconds under the subsequent owner clarification.
+Original internal device/task waits retain their source semantics.
+Ordinary RPC, report, query, disconnect and lifecycle operations follow normal
+completion or actual failure/service loss, not an added arbitrary deadline.
+Individually necessary waits must be explained and approved, not inferred from
+the earlier instruction to standardize existing bounded waits. S3 includes the
+systematic removal audit; the pending r32 timeout candidate is not for delivery.
+
 Owner requests this package ahead of the WOW32 continuation when closing
 T447 by explicit transfer. Current admits this package as T448 S1 after
 the clean, pushed T447 closure checkpoint 4d4ef4d47.
@@ -24,7 +35,7 @@ delivery and receive service-authorized release; the actual native GUI target
 remains read-only Direct/Observed, not service-owned or killed on service loss.
 NTMON and W16Style remain ordinary tools. DLLs follow their host lifetimes.
 
-Before admission Run16 may start the absent service under one real ten-second
+Before admission Run16 may start the absent service under one real five-second
 deadline. After admission there is no reconnect/replay. A confirmed lost
 authenticated service session invokes role-specific local cleanup and exit;
 a single operation timeout is not proof of disconnection. With the session
@@ -32,30 +43,52 @@ alive, reportable failures go to NTSRV for disposition. Actual crashes remain
 failures observed by the service, not orderly exits. Normal task completion
 is a report, not permission for its worker or launcher to retire.
 
-## Finite inherited gaps
+Owner clarification: a later NTSRV process cannot revive an admitted session.
+No participant restarts the service, reconnects or replays that session after
+service death. A broken worker/frontend I/O channel only authorizes stopping
+unsafe I/O and reporting the failure to the still-live service, not local
+process retirement. NTSRV decides both sides' disposition; confirmed service
+death permits role-owned local cleanup and exit without a service acknowledgement.
+The same rule applies symmetrically to frontend and worker failures. Suspension
+and resumption of the same live test service is not service resurrection.
 
-1. Run16 startup uses 100 sleeps of 50ms, not an absolute ten-second deadline.
+## Finite inherited gaps (updated for the owner correction)
+
+1. Run16 startup must share one absolute five-second budget across its phases;
+   its existing readiness polling is separately audited in S4.
 2. Run16 still observes worker/frontend process handles during admission.
-3. DOS parent-resume trigger and separate finalization/timeout exit remain
+3. DOS parent-resume trigger and separate finalization exit remain
    launcher-owned; task completion must join required handoff at NTSRV.
 4. Shared broker watcher covers process death, not uniform confirmed session
    loss; replace forced watcher exit with role-owned cleanup. Healthy-service
    handoff is service-ordered; disconnected Run16 returns the original-shaped
-   error independently of NTCON. Final-disposition timeout uses that same local
-   return mechanism with its own error. No peer recovery synchronization.
+   error independently of NTCON. No final-disposition timeout or peer recovery
+   synchronization is permitted.
 5. NTCON still chooses parking from creator death and usage; move the decision
    to service commands and preserve final-buffer/input restoration evidence.
 6. WOW skips the character setup containing the worker-close receiver. Trace
    and connect lifecycle-only reception without introducing NTCON to WOW.
 7. NTVWM local input/presentation/completion failures and one-shot GUI release
    require explicit service disposition instead of autonomous healthy-service exit.
-8. Reconcile bounded ten-second policy, including NTVDM's remaining 5000ms
-   Console-close grace; retain original close semantics and register any diff.
+8. Remove extra deadlines; retain only the three approved five-second project
+   policies and original internal waits. Register every imported-source diff.
 9. Complete actual internal/external CAF management-close, normal task return,
    nested CMD/COMMAND and first-character-before-Enter proof. Current installed
    CMD confirmation and COMMAND initial-prompt failures remain non-passes.
 
 ## Implementation groups and acceptance
+
+Owner adds a dedicated S4 after current S3 for autonomous-code polling audit and
+cleanup; original integrated acceptance is S5. Inventory Sleep loops, periodic
+scans, repeated state queries and probes by call chain. Prefer existing events,
+RPC notifications, I/O completion and process-exit notifications. Record each
+retained poll's need, frequency and exit condition. Do not add a third transport,
+generic notification framework or hidden helper window. Classify original
+scheduling, presentation pacing and test-harness safety separately, not as
+automatic deletion candidates. Verify lost-wakeup, concurrent teardown, idle CPU
+and actual source/test delta before coherent build/test/publication/commit/push.
+S3 remains the only active packet; this insertion does not expand its timeout
+cleanup into a repository-wide polling rewrite.
 
 Design the entire finite transition table before coding: authenticated owner,
 request identity, task result versus final completion, command/ack phases,

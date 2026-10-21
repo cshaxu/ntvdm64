@@ -4,7 +4,6 @@
 #include <service_internal.h>
 #include "common/protocol/frontend_lifecycle.h"
 
-static ULONGLONG service_root_retirement_deadline(OPENNT_BASE_CONNECTION *root,ULONGLONG now);
 
 void service_signal_frontend_states(OPENNT_BASE_SERVICE *service)
 {
@@ -79,32 +78,37 @@ DWORD OpenNtBaseServiceTerminateWorker(OPENNT_BASE_SERVICE *service,uint32_t pro
     return service_terminate_worker(service,process_id,NULL);
 }
 
-DWORD OpenNtBaseServiceRequestWorkerExit(OPENNT_BASE_CONNECTION *worker,DWORD pid,
+DWORD OpenNtBaseServiceRequestParticipantExit(OPENNT_BASE_CONNECTION *participant,DWORD pid,
     DWORD generation)
 {
     OPENNT_BASE_SERVICE *service;
     OPENNT_BASE_MANAGEMENT_KEY key={0};
     OPENNT_BASE_WORKER_WATCH *watch;
     DWORD error=ERROR_ACCESS_DENIED;
-    if(!worker)return ERROR_INVALID_PARAMETER;
-    service=worker->service;
+    if(!participant)return ERROR_INVALID_PARAMETER;
+    service=participant->service;
     EnterCriticalSection(&service->lock);
-    if(!OpenNtBaseServicePeer(worker,pid,generation))goto done;
-    watch=service_find_worker_watch(service,worker->process.SequenceNumber);
+    if(!OpenNtBaseServicePeer(participant,pid,generation))goto done;
+    key.instance=service->management_epoch;
+    key.generation=participant->process.SequenceNumber;
+    if(participant->frontend_capability) {
+        key.category=MANAGEMENT_FRONTEND;
+        error=ERROR_SUCCESS;
+        goto done;
+    }
+    watch=service_find_worker_watch(service,participant->process.SequenceNumber);
     if(!watch)goto done;
     /* A transient GUI launcher has no managed worker teardown. Its startup
      * release is a distinct service result, not a Console/worker command. */
     if(watch->native_gui_launcher){error=ERROR_NOT_SUPPORTED;goto done;}
-    key.instance=service->management_epoch;
     key.category=MANAGEMENT_WORKER;
-    key.generation=watch->process.SequenceNumber;
     error=ERROR_SUCCESS;
 done:
     LeaveCriticalSection(&service->lock);
     /* Re-resolve by generation, never by PID after dropping the lock. Reuse
      * management arbitration: a pending Console close keeps its quiescence
      * barrier, and repeated intent cannot send a competing worker command. */
-    return error ? error : service_terminate_worker(service,0,&key);
+    return error ? error : OpenNtBaseServiceCloseManagementNode(service,&key);
 }
 
 DWORD OpenNtBaseServiceCloseManagementNode(OPENNT_BASE_SERVICE *service,
@@ -123,11 +127,11 @@ DWORD OpenNtBaseServiceCloseManagementNode(OPENNT_BASE_SERVICE *service,
             OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
             if(root->process.SequenceNumber!=key->generation || !root->frontend_capability)continue;
             /* One terminal operation per root generation. A repeated request
-             * observes acceptance, never restarts its deadline or cleanup. */
-            if(root->frontend_close_deadline){error=ERROR_SUCCESS;break;}
+             * observes acceptance, never restarts cleanup. */
+            if(root->frontend_close_requested){error=ERROR_SUCCESS;break;}
             if(root->frontend_closing){error=ERROR_BUSY;break;}
             if(WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT)break;
-            root->frontend_close_deadline=GetTickCount64()+OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS;
+            root->frontend_close_requested=TRUE;
             root->frontend_close_draining=TRUE;
             root->frontend_close_return_required=TRUE;
             root->frontend_close_returned=FALSE;
@@ -265,32 +269,6 @@ BOOL service_root_has_worker(OPENNT_BASE_CONNECTION *root)
     return FALSE;
 }
 
-static ULONGLONG service_root_retirement_deadline(OPENNT_BASE_CONNECTION *root,ULONGLONG now)
-{
-    LIST_ENTRY *link;
-    ULONGLONG deadline;
-    if(!root->frontend_capability || !root->frontend_console_window || root->frontend_closing || root->frontend_close_draining ||
-        WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT)return 0;
-    if(service_root_has_worker(root)) {
-        root->frontend_workerless_deadline=0;
-        return 0;
-    }
-    /* Start once on loss of the last worker; rechecks do not renew the grace.
-     * A newly associated worker cancels it. NTCON owns no local deadline. */
-    if(!root->frontend_workerless_deadline)
-        root->frontend_workerless_deadline=now+FRONTEND_STARTUP_DEADLINE_MS;
-    deadline=root->frontend_workerless_deadline;
-    /* An already admitted startup remains bounded and authenticated. */
-    if(root->frontend_admission_deadline>deadline)
-        for(link=root->service->connections.Flink;link!=&root->service->connections;link=link->Flink) {
-            OPENNT_BASE_CONNECTION *caller=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-            if(caller->process.SequenceNumber==root->frontend_creator_generation &&
-                WaitForSingleObject(caller->process.ProcessHandle,0)==WAIT_TIMEOUT)
-                return root->frontend_admission_deadline;
-        }
-    return deadline;
-}
-
 /* The root process is NTCON, so its continued attachment must never count as
  * proof that a borrowed user Console still exists.  The identity is fixed at
  * authenticated root registration: later processes cannot revive an orphaned
@@ -318,36 +296,7 @@ HANDLE OpenNtBaseServiceFrontendLifetimeChanged(OPENNT_BASE_SERVICE *service)
     return service ? service->frontend_lifetime_changed : NULL;
 }
 
-DWORD OpenNtBaseServiceNextFrontendDeadline(OPENNT_BASE_SERVICE *service,ULONGLONG *deadline)
-{
-    return service_next_frontend_deadline_at(service,GetTickCount64(),deadline);
-}
-
-/* Explicit time is private to the policy owner. Fixtures advance the same
- * decision path, not a shortened timer or replacement lifecycle policy. */
-DWORD service_next_frontend_deadline_at(OPENNT_BASE_SERVICE *service,ULONGLONG now,ULONGLONG *deadline)
-{
-    LIST_ENTRY *link;
-    if(!service || !deadline)return ERROR_INVALID_PARAMETER;
-    *deadline=0;
-    EnterCriticalSection(&service->lock);
-    for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
-        OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-        ULONGLONG due=service_root_retirement_deadline(root,now);
-        if(root->frontend_close_deadline && !root->frontend_close_timed_out &&
-            (!due || root->frontend_close_deadline<due))due=root->frontend_close_deadline;
-        if(due && (!*deadline || due<*deadline))*deadline=due;
-    }
-    LeaveCriticalSection(&service->lock);
-    return ERROR_SUCCESS;
-}
-
-DWORD OpenNtBaseServiceRetireExpiredFrontends(OPENNT_BASE_SERVICE *service)
-{
-    return service_retire_expired_frontends_at(service,GetTickCount64());
-}
-
-DWORD service_retire_expired_frontends_at(OPENNT_BASE_SERVICE *service,ULONGLONG now)
+DWORD OpenNtBaseServiceReconcileFrontends(OPENNT_BASE_SERVICE *service)
 {
     LIST_ENTRY *link;
     BOOL changed=FALSE,gui_changed;
@@ -357,11 +306,6 @@ DWORD service_retire_expired_frontends_at(OPENNT_BASE_SERVICE *service,ULONGLONG
     service_observation_prune(service);
     for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-        if(root->frontend_close_deadline && !root->frontend_close_timed_out &&
-            now>=root->frontend_close_deadline) {
-            root->frontend_close_timed_out=TRUE;
-            changed=TRUE; /* Retain admission barrier; late facts may finish. */
-        }
         if(root->frontend_close_draining) {
             BOOL live_worker=FALSE;
             BOOL frontend_live=WaitForSingleObject(root->process.ProcessHandle,0)==WAIT_TIMEOUT;
@@ -403,11 +347,6 @@ DWORD service_retire_expired_frontends_at(OPENNT_BASE_SERVICE *service,ULONGLONG
             root->frontend_closing=TRUE;
             changed=TRUE;
             continue;
-        }
-        ULONGLONG deadline=service_root_retirement_deadline(root,now);
-        if(deadline && deadline<=now) {
-            root->frontend_closing=TRUE;
-            changed=TRUE;
         }
     }
     /* Only NTSRV translates lost frontend ownership into Console-close.

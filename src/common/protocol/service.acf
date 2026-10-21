@@ -25,7 +25,7 @@ interface vdm_service
     [async] ObserveNativeCreationAsync();
     [async] ObserveDosEventAsync();
     /* Exit reporting must not queue behind a blocking command receive. */
-    [async] RequestWorkerExit([context_handle_noserialize] connection);
+    [async] RequestParticipantExit([context_handle_noserialize] connection);
     [async] WaitFrontendConsoleRestored();
     [async] Connect();
     [async] BrokerProcess();

@@ -192,7 +192,7 @@ cleanup:
 #undef GUI_CHECK
 }
 
-/* Trusted fixture inserts only the existing watch record; all deadline,
+/* Trusted fixture inserts only the existing watch record; all residency,
  * cancellation and shutdown decisions execute the production archive. */
 int fixture_shared_worker_residency(void)
 {
@@ -201,7 +201,7 @@ int fixture_shared_worker_residency(void)
     OPENNT_BASE_WORKER_WATCH watch={0};
     PROCESS_INFORMATION child={0};STARTUPINFOW startup={sizeof(startup)};
     WCHAR image[MAX_PATH],command[MAX_PATH+32];
-    DWORD generation=0,root_generation=0,index;ULONGLONG due=0;
+    DWORD generation=0,root_generation=0,index;
 #define RETIRE_CHECK(value) do {if(!(value)){fprintf(stderr,"FAIL unbound line %d\n",__LINE__);return 1;}}while(0)
     RETIRE_CHECK(service && GetModuleFileNameW(NULL,image,ARRAYSIZE(image)));
     swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" --reservation-child",image);
@@ -216,31 +216,22 @@ int fixture_shared_worker_residency(void)
     worker->native_worker=TRUE;
     InsertTailList(&service->worker_watches,&watch.link);
     LeaveCriticalSection(&service->lock);
-    RETIRE_CHECK(!service_next_frontend_deadline_at(service,100,&due) && !due);
-    RETIRE_CHECK(!service_retire_expired_frontends_at(service,10099));
+    RETIRE_CHECK(!OpenNtBaseServiceReconcileFrontends(service));
     RETIRE_CHECK(WaitForSingleObject(watch.shutdown,0)==WAIT_TIMEOUT);
     EnterCriticalSection(&service->lock);
-    worker->native_inflight=1; /* Existing direct execution suppresses idle grace. */
+    worker->native_inflight=1;
     LeaveCriticalSection(&service->lock);
-    RETIRE_CHECK(!service_next_frontend_deadline_at(service,10100,&due) && !due);
-    RETIRE_CHECK(!service_retire_expired_frontends_at(service,20000));
+    RETIRE_CHECK(!OpenNtBaseServiceReconcileFrontends(service));
     RETIRE_CHECK(WaitForSingleObject(watch.shutdown,0)==WAIT_TIMEOUT);
     EnterCriticalSection(&service->lock);worker->native_inflight=0;LeaveCriticalSection(&service->lock);
-    RETIRE_CHECK(!service_next_frontend_deadline_at(service,30000,&due) && !due);
-    RETIRE_CHECK(!service_retire_expired_frontends_at(service,39999));
-    RETIRE_CHECK(WaitForSingleObject(watch.shutdown,0)==WAIT_TIMEOUT);
-    RETIRE_CHECK(!service_retire_expired_frontends_at(service,40000));
-    RETIRE_CHECK(WaitForSingleObject(watch.shutdown,0)==WAIT_TIMEOUT);
-    RETIRE_CHECK(!service_retire_expired_frontends_at(service,86400000));
-    RETIRE_CHECK(!service_next_frontend_deadline_at(service,86400000,&due) && !due);
+    RETIRE_CHECK(!OpenNtBaseServiceReconcileFrontends(service));
     RETIRE_CHECK(WaitForSingleObject(watch.shutdown,0)==WAIT_TIMEOUT);
     /* Shared WOW also has no app-idle retirement. Its original task/kernel
      * exit still owns a separate WOW lifetime, not this service timer. */
     EnterCriticalSection(&service->lock);
     watch.kind=OPENNT_BASE_WORKER_WOW;watch.wow=TRUE;worker->native_worker=FALSE;
     LeaveCriticalSection(&service->lock);
-    RETIRE_CHECK(!service_retire_expired_frontends_at(service,172800000));
-    RETIRE_CHECK(!service_next_frontend_deadline_at(service,172800000,&due) && !due);
+    RETIRE_CHECK(!OpenNtBaseServiceReconcileFrontends(service));
     RETIRE_CHECK(WaitForSingleObject(watch.shutdown,0)==WAIT_TIMEOUT);
     RETIRE_CHECK(WaitForSingleObject(child.hProcess,0)==WAIT_TIMEOUT);
     /* Paired DOS/native relationship decisions read this same watch, even
@@ -256,10 +247,10 @@ int fixture_shared_worker_residency(void)
         RETIRE_CHECK(!service_bind_worker_root(service,child.hProcess,root));
         RETIRE_CHECK(watch.frontend_root_generation==root_generation && service_root_has_worker(root));
         LeaveCriticalSection(&service->lock);
-        RETIRE_CHECK(!service_retire_expired_frontends_at(service,172800001+index));
+        RETIRE_CHECK(!OpenNtBaseServiceReconcileFrontends(service));
         RETIRE_CHECK(WaitForSingleObject(watch.shutdown,0)==WAIT_TIMEOUT);
         EnterCriticalSection(&service->lock);root->frontend_closing=TRUE;LeaveCriticalSection(&service->lock);
-        RETIRE_CHECK(!service_retire_expired_frontends_at(service,172800003+index));
+        RETIRE_CHECK(!OpenNtBaseServiceReconcileFrontends(service));
         RETIRE_CHECK(WaitForSingleObject(watch.console_close,0)==WAIT_OBJECT_0);
         RETIRE_CHECK(WaitForSingleObject(watch.shutdown,0)==WAIT_TIMEOUT);
         RETIRE_CHECK(ResetEvent(watch.console_close));
@@ -668,7 +659,7 @@ int fixture_borrowed_console_identity_loss(void)
         LeaveCriticalSection(&service->lock);
         IDENTITY_CHECK(TerminateProcess(external.hProcess,0));
         IDENTITY_CHECK(WaitForSingleObject(external.hProcess,5000)==WAIT_OBJECT_0);
-        IDENTITY_CHECK(!service_retire_expired_frontends_at(service,1));
+        IDENTITY_CHECK(!OpenNtBaseServiceReconcileFrontends(service));
         IDENTITY_CHECK((root->frontend_closing ? 1u : 0u)==borrowed);
         IDENTITY_CHECK(WaitForSingleObject(shutdown,0)==(borrowed ? WAIT_OBJECT_0 : WAIT_TIMEOUT));
         EnterCriticalSection(&service->lock);

@@ -253,14 +253,6 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
             service_prune_cancelled_frontends(service);
             InsertTailList(&service->connections,&connection->service_link);
             if(watch_added) {
-                LIST_ENTRY *root_link;
-                for(root_link=service->connections.Flink;root_link!=&service->connections;
-                    root_link=root_link->Flink) {
-                    OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(root_link,
-                        OPENNT_BASE_CONNECTION,service_link);
-                    if(root->frontend_capability && root->console==console)
-                        root->frontend_admission_deadline=0;
-                }
                 service_signal_frontend_states(service);
             }
             if(connection->native_worker)service_signal_worker_states(service);

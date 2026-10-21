@@ -17,7 +17,6 @@ static broker_rpc_scope scope;
 static OPENNT_BASE_SERVICE *service;
 static SRWLOCK idle_lock=SRWLOCK_INIT;
 static HANDLE idle_timer;
-static HANDLE frontend_timer; /* Broker-only startup and workerless-root deadlines. */
 static BASESRV_IDLE_POLICY idle_policy;
 error_status_t Server_SubmitNativeRequest(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation,ULONG operation,HANDLE frontend,ULONG bytes,BYTE *payload,
@@ -133,7 +132,7 @@ static __declspec(noreturn) void basesrv_idle_fatal(PCSTR operation,DWORD error)
     abort();
 }
 /* idle_lock serializes Connect admission with the final empty decision.
- * Management observations never cancel or restart this ten-second grace. */
+ * Management observations never cancel or restart this five-second grace. */
 static void basesrv_schedule_empty_locked(void)
 {
     LARGE_INTEGER due;
@@ -521,11 +520,11 @@ error_status_t Server_WorkerShutdownEvent(PRPC_ASYNC_STATE async,handle_t bindin
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
 }
-error_status_t Server_RequestWorkerExit(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_RequestParticipantExit(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if(!error)error=OpenNtBaseServiceRequestWorkerExit(connection,pid,generation);
+    if(!error)error=OpenNtBaseServiceRequestParticipantExit(connection,pid,generation);
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
 }
@@ -970,45 +969,29 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v60_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v61_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
         idle_timer=CreateWaitableTimerW(NULL,FALSE,NULL);
         if (!idle_timer) basesrv_idle_fatal("CreateWaitableTimer",GetLastError());
-        frontend_timer=CreateWaitableTimerW(NULL,FALSE,NULL);
-        if (!frontend_timer) basesrv_idle_fatal("Create frontend timer",GetLastError());
         /* Arm only after listening succeeds, never race stop against startup. */
         result=RpcServerListen(1,RPC_C_LISTEN_MAX_CALLS_DEFAULT,TRUE);
     }
     if (!result) {
         /* Readiness is a successful client RPC, never this diagnostic line. */
         fwprintf(stdout,L"basesrv: listening on %ls\n",endpoint); fflush(stdout);
-        /* Manual and launcher starts have the same ten-second empty grace. */
+        /* Manual and launcher starts have the same five-second empty grace. */
         basesrv_schedule_empty_stop();
         for(;;) {
-            HANDLE waits[3]={idle_timer,frontend_timer,
+            HANDLE waits[2]={idle_timer,
                 OpenNtBaseServiceFrontendLifetimeChanged(service)};
-            ULONGLONG deadline=0,now;
-            LARGE_INTEGER due;
-            DWORD wait,error=OpenNtBaseServiceRetireExpiredFrontends(service);
-            if(error)basesrv_idle_fatal("frontend deadline",error);
-            error=OpenNtBaseServiceNextFrontendDeadline(service,&deadline);
-            if(error)basesrv_idle_fatal("frontend admission deadline",error);
-            if(deadline) {
-                now=GetTickCount64();
-                due.QuadPart=-(LONGLONG)(deadline>now ? deadline-now : 1u)*10000;
-                if(!SetWaitableTimer(frontend_timer,&due,0,NULL,NULL,FALSE))
-                    basesrv_idle_fatal("Set frontend timer",GetLastError());
-            } else if(!CancelWaitableTimer(frontend_timer))
-                basesrv_idle_fatal("Cancel frontend timer",GetLastError());
-            wait=WaitForMultipleObjects(3,waits,FALSE,INFINITE);
+            DWORD wait,error=OpenNtBaseServiceReconcileFrontends(service);
+            if(error)basesrv_idle_fatal("frontend reconciliation",error);
+            wait=WaitForMultipleObjects(ARRAYSIZE(waits),waits,FALSE,INFINITE);
             if(wait==WAIT_OBJECT_0) {
                 if(basesrv_claim_empty_stop())break;
-            } else if(wait==WAIT_OBJECT_0+1) {
-                error=OpenNtBaseServiceRetireExpiredFrontends(service);
-                if(error)basesrv_idle_fatal("frontend retirement",error);
-            } else if(wait!=WAIT_OBJECT_0+2)
+            } else if(wait!=WAIT_OBJECT_0+1)
                 basesrv_idle_fatal("lifetime wait",GetLastError());
         }
         result=RpcMgmtStopServerListening(NULL);
@@ -1017,11 +1000,10 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v60_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v61_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);
-    if (frontend_timer) CloseHandle(frontend_timer);
     if (!OpenNtBaseServiceStop(service)) return ERROR_BUSY;
     return (int)result;
 }

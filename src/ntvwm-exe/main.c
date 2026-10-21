@@ -49,7 +49,6 @@ static DWORD begin_io(void *context,HANDLE stop)
 {
     native_membership *state=context;
     DWORD error=ERROR_SUCCESS,wait;
-    ULONGLONG deadline=GetTickCount64()+10000;
     EnterCriticalSection(state->lock);
     ++state->admissions;
     if(!SetEvent(state->route_changed)) {
@@ -60,7 +59,6 @@ static DWORD begin_io(void *context,HANDLE stop)
         /* A Console target must not run before its frontend can receive output
          * and provide input. Broker delivery alone is not an I/O handoff. */
         HANDLE waits[4];
-        ULONGLONG now;
         if(WaitForSingleObject(stop,0)!=WAIT_TIMEOUT ||
             WaitForSingleObject(state->stop_requested,0)!=WAIT_TIMEOUT) {
             error=ERROR_OPERATION_ABORTED;break;
@@ -74,12 +72,10 @@ static DWORD begin_io(void *context,HANDLE stop)
             if(error){--state->users;LeaveCriticalSection(state->lock);return error;}
             return ERROR_SUCCESS;
         }
-        now=GetTickCount64();
-        if(now>=deadline){error=ERROR_TIMEOUT;break;}
         waits[0]=stop;waits[1]=state->stop_requested;
         waits[2]=state->thread;waits[3]=state->admission_ready;
         LeaveCriticalSection(state->lock);
-        wait=WaitForMultipleObjects(4,waits,FALSE,(DWORD)(deadline-now));
+        wait=WaitForMultipleObjects(4,waits,FALSE,INFINITE);
         EnterCriticalSection(state->lock);
         if(wait==WAIT_OBJECT_0 || wait==WAIT_OBJECT_0+1)
             {error=ERROR_OPERATION_ABORTED;break;}
@@ -88,7 +84,6 @@ static DWORD begin_io(void *context,HANDLE stop)
             if(!error)error=ERROR_OPERATION_ABORTED;
             break;
         }
-        if(wait==WAIT_TIMEOUT){error=ERROR_TIMEOUT;break;}
         if(wait==WAIT_FAILED){error=GetLastError();break;}
     }
     --state->admissions;

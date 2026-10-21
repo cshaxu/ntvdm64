@@ -20,7 +20,7 @@ DWORD common_rpc_observe_native_creation_bounded(const common_rpc_management *st
     }
     RpcExcept(1) {error=RpcExceptionCode();}
     RpcEndExcept
-    error=common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    error=common_rpc_end_async(&async,error,NULL,INFINITE);
     if(!error)*node=(uint64_t)identity;
     return error;
 }
@@ -43,7 +43,7 @@ DWORD common_rpc_worker_task_trace(const common_rpc_management *state,const DTAS
     }
     RpcExcept(1) {error=RpcExceptionCode();}
     RpcEndExcept
-    error=common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    error=common_rpc_end_async(&async,error,NULL,INFINITE);
     if(error){if(result)MIDL_user_free(result);return error;}
     *coverage=flags;*count=actual;*items=result;
     return ERROR_SUCCESS;
@@ -66,7 +66,7 @@ DWORD common_rpc_task_snapshot(const common_rpc_management *state,
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    error=common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    error=common_rpc_end_async(&async,error,NULL,INFINITE);
     if (error) {
         if (result) MIDL_user_free(result);
         return error;
@@ -87,5 +87,5 @@ DWORD common_rpc_close_management_node(const common_rpc_management *state,const 
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    return common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    return common_rpc_end_async(&async,error,NULL,INFINITE);
 }

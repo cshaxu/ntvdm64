@@ -9,6 +9,7 @@
  * renderer, Console ownership, guest state or task scheduling lives here. */
 typedef struct ntcon_worker_client {
     HANDLE pipe,peer,cancel,event;
+    HANDLE failure_event; /* Optional borrowed local notification, never IPC. */
     DWORD generation,sequence,failure,video_serial;
     BYTE *reply_payload;
     DWORD reply_capacity;
@@ -19,6 +20,9 @@ typedef struct ntcon_worker_client {
  * handles. Callers retain their existing locks and endpoint teardown order. */
 DWORD ntcon_worker_client_init(ntcon_worker_client *,HANDLE,HANDLE,HANDLE,DWORD);
 void ntcon_worker_client_dispose(ntcon_worker_client *);
+/* Terminal channel faults only, not ordinary argument/server-operation errors.
+ * Notify the owner without deciding process lifetime. */
+DWORD ntcon_worker_client_fail(ntcon_worker_client *,DWORD);
 /* One attempt only; waiting/retry and backend state transitions stay local. */
 DWORD ntcon_worker_prepare_text(ntcon_worker_client *,COORD);
 /* Encode/send one atomic key batch. Return raw server status/count so the

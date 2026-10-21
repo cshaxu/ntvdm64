@@ -100,7 +100,7 @@ static void revoke_streams(const common_rpc_connection *client,const ULONG recei
         RpcExcept(1){error=RpcExceptionCode();}
         RpcEndExcept
         (void)OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
-            OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+            INFINITE));
     }
 }
 
@@ -184,7 +184,7 @@ static DWORD attach_standard_streams(PBASE_API_MSG message,ULONG receipts[3])
                 RpcExcept(1) { error=RpcExceptionCode(); }
                 RpcEndExcept
                 error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
-                    OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+                    INFINITE));
             }
         }
         if (error || !receipts[index]) break;
@@ -246,7 +246,7 @@ static NTSTATUS check_command(PCSR_API_MSG message,ULONG length)
             RpcExcept(1) { error=RpcExceptionCode(); }
             RpcEndExcept
             error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
-                OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+                INFINITE));
         }
     }
     if (!error && replyBytes==sizeof(reply) && parent_event_count<=1 &&
@@ -314,7 +314,7 @@ static NTSTATUS get_command(PCSR_API_MSG message,ULONG length)
             RpcExcept(1) { error=RpcExceptionCode(); }
             RpcEndExcept
             error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
-                OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+                INFINITE));
         }
     }
     if (!error && wait_event_count<=1 && (!wait_event_count || wait_events) &&
@@ -454,7 +454,7 @@ static NTSTATUS exit_command(PCSR_API_MSG message,ULONG length)
             RpcExcept(1) { error=RpcExceptionCode(); }
             RpcEndExcept
             error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
-                OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+                INFINITE));
         }
     }
     if (error || close_worker_wait>1u || (close_worker_wait && !worker_wait_event)) goto done;
@@ -496,7 +496,7 @@ static NTSTATUS update_command(PCSR_API_MSG message,ULONG length)
             RpcExcept(1) { error=RpcExceptionCode(); }
             RpcEndExcept
             error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
-                OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+                INFINITE));
         }
     }
     if (!error && reply_bytes==sizeof(reply) && parent_event_count<=1 &&
@@ -541,7 +541,7 @@ static NTSTATUS exit_code_command(PCSR_API_MSG message,ULONG length)
             RpcExcept(1) { error=RpcExceptionCode(); }
             RpcEndExcept
             error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
-                OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+                INFINITE));
         }
     }
     if (!error) {
@@ -576,7 +576,7 @@ static NTSTATUS reenter_command(PCSR_API_MSG message,ULONG length)
             RpcExcept(1) { error=RpcExceptionCode(); }
             RpcEndExcept
             error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
-                OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+                INFINITE));
         }
     }
     if (!error) {
@@ -606,7 +606,7 @@ DWORD OpenNtBaseClientStartVdmWorker(PCWSTR environment,DWORD characters,DWORD s
     }
     RpcExcept(1){error=RpcExceptionCode();}
     RpcEndExcept
-    error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+    error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,INFINITE));
     if(!error && (!*worker || (!!*parent != !!receipt)))error=ERROR_INVALID_DATA;
     if(error) {
         if(*worker)CloseHandle(*worker);if(*parent)CloseHandle(*parent);
@@ -637,7 +637,7 @@ DWORD WINAPI OpenNtBaseClientWowStyle(ULONG task,DWORD *style)
             RpcExcept(1){error=RpcExceptionCode();}
             RpcEndExcept
             error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
-                OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+                INFINITE));
         }
     }
     if(!error && !WINDOW_STYLE_VALID(*style))error=ERROR_INVALID_DATA;
@@ -661,7 +661,7 @@ DWORD WINAPI OpenNtBaseClientWowStarted(ULONG task)
             RpcExcept(1) { error=RpcExceptionCode(); }
             RpcEndExcept
             error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
-                OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+                INFINITE));
         }
     }
     return error;
@@ -689,7 +689,7 @@ DWORD OpenNtBaseClientWowStartup(HANDLE parent,HANDLE *event,BOOL *started)
             RpcExcept(1) { error=RpcExceptionCode(); }
             RpcEndExcept
             error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
-                OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+                INFINITE));
         }
     }
     if (!error && (!*event || value>1)) error=ERROR_INVALID_DATA;
@@ -727,7 +727,7 @@ NTSTATUS NTAPI OpenNtBaseClientCallServer(PCSR_API_MSG message,
                 RpcExcept(1) { error=RpcExceptionCode(); }
                 RpcEndExcept
                 error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
-                    OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+                    INFINITE));
             }
         }
         message->ReturnValue=error ? rpc_failure(error) : STATUS_SUCCESS;
@@ -762,7 +762,7 @@ NTSTATUS NTAPI OpenNtBaseClientCallServer(PCSR_API_MSG message,
             RpcExcept(1) { error=RpcExceptionCode(); }
             RpcEndExcept
             error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
-                OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+                INFINITE));
         }
     }
     if (error) {

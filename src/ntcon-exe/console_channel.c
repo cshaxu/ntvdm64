@@ -413,13 +413,12 @@ DWORD frontend_io_channel_stop(frontend_io_channel *channel)
          * own OVERLAPPED before closing the pipe. Cancel only synchronous
          * Console work here: the thread may already have closed its pipe,
          * so this borrowed handle value cannot safely be used for CancelIoEx.
-         * Then bound
-         * the join. A timed-out thread still borrows channel/root storage;
-         * the caller must keep both alive until terminal process cleanup. */
+         * Join before releasing the channel/root storage still borrowed by
+         * that thread; elapsed time does not transfer its ownership. */
         (void)CancelSynchronousIo(channel->thread);
-        wait=WaitForSingleObject(channel->thread,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+        wait=WaitForSingleObject(channel->thread,INFINITE);
         if(wait!=WAIT_OBJECT_0)
-            return wait==WAIT_TIMEOUT ? ERROR_TIMEOUT : GetLastError();
+            return GetLastError();
         CloseHandle(channel->thread);
     } else if (channel->pipe && channel->pipe!=INVALID_HANDLE_VALUE) CloseHandle(channel->pipe);
     frontend_session_forget(channel->root,channel);

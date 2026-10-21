@@ -102,7 +102,6 @@ DWORD OpenNtBaseServiceWorkerIoTransition(OPENNT_BASE_CONNECTION *connection,DWO
 {
     OPENNT_FRONTEND_ROUTE *route;
     OPENNT_BASE_CONNECTION *root;
-    ULONGLONG deadline=GetTickCount64()+FRONTEND_STARTUP_DEADLINE_MS;
     DWORD error=ERROR_ACCESS_DENIED;
     if(!connection)return ERROR_INVALID_PARAMETER;
     EnterCriticalSection(&connection->service->lock);
@@ -112,7 +111,6 @@ DWORD OpenNtBaseServiceWorkerIoTransition(OPENNT_BASE_CONNECTION *connection,DWO
      * skips this operation; an erroneous request is not an admission. */
     if(connection->wow)goto done;
     for(;;) {
-        ULONGLONG now;
         route=service_worker_io_route(connection,pid);
         if(!route || !(root=route->root) || root->frontend_closing || root->frontend_close_draining ||
             WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT) {
@@ -156,10 +154,8 @@ DWORD OpenNtBaseServiceWorkerIoTransition(OPENNT_BASE_CONNECTION *connection,DWO
             service_finish_io_release(route);
             if(root->frontend_io_route!=route){error=ERROR_SUCCESS;break;}
         }
-        now=GetTickCount64();
-        if(now>=deadline){error=ERROR_TIMEOUT;break;}
         if(!SleepConditionVariableCS(&connection->service->frontend_changed,
-            &connection->service->lock,(DWORD)(deadline-now))) {
+            &connection->service->lock,INFINITE)) {
             error=GetLastError();break;
         }
         /* Re-resolve after every wake: rundown may have removed the route. */
@@ -454,7 +450,6 @@ DWORD OpenNtBaseServiceAcquireFrontendRoot(OPENNT_BASE_CONNECTION *caller,DWORD 
     HANDLE *capability,HANDLE *retire,HANDLE *restored)
 {
     OPENNT_BASE_SERVICE *service;
-    ULONGLONG deadline=GetTickCount64()+OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS;
     DWORD error=ERROR_ACCESS_DENIED;
     if(!caller || !console_window || !create_root || !process || !capability || !retire || !restored)
         return ERROR_INVALID_PARAMETER;
@@ -464,7 +459,6 @@ DWORD OpenNtBaseServiceAcquireFrontendRoot(OPENNT_BASE_CONNECTION *caller,DWORD 
     for(;;) {
         OPENNT_BASE_CONNECTION *root=NULL,*reservation=NULL;
         LIST_ENTRY *link;
-        DWORD remaining;
         if(!OpenNtBaseServicePeer(caller,pid,generation) || caller->process.fVDM ||
             caller->native_worker || WaitForSingleObject(caller->process.ProcessHandle,0)!=WAIT_TIMEOUT)
             {error=ERROR_ACCESS_DENIED;break;}
@@ -507,8 +501,6 @@ DWORD OpenNtBaseServiceAcquireFrontendRoot(OPENNT_BASE_CONNECTION *caller,DWORD 
                     if(!ResetEvent(root->frontend_retire) || !ResetEvent(root->frontend_restored))
                         {error=GetLastError();break;}
                     root->frontend_idle=FALSE;
-                    root->frontend_admission_deadline=service_root_has_worker(root) ? 0 :
-                        GetTickCount64()+FRONTEND_STARTUP_DEADLINE_MS;
                     root->frontend_creator_generation=generation;
                     caller->retained_frontend_root=root->process.SequenceNumber;
                     caller->frontend_return_pending=caller->frontend_return_complete=FALSE;
@@ -522,11 +514,8 @@ DWORD OpenNtBaseServiceAcquireFrontendRoot(OPENNT_BASE_CONNECTION *caller,DWORD 
             caller->frontend_reserved_window=console_window;
             *create_root=1;error=ERROR_SUCCESS;break;
         }
-        remaining=deadline>GetTickCount64() ?
-            (DWORD)(deadline-GetTickCount64()) : 0;
-        if(!remaining){error=ERROR_TIMEOUT;break;}
-        if(!SleepConditionVariableCS(&service->frontend_changed,&service->lock,remaining) &&
-            GetLastError()!=ERROR_TIMEOUT){error=GetLastError();break;}
+        if(!SleepConditionVariableCS(&service->frontend_changed,&service->lock,INFINITE))
+            {error=GetLastError();break;}
     }
 done:
     /* A join belongs to this RPC call, never to an abandoned launcher. */
@@ -635,11 +624,11 @@ DWORD OpenNtBaseServiceStartFrontend(OPENNT_BASE_CONNECTION *caller,DWORD pid,
 {
     WCHAR image[MAX_PATH],command[1024];
     HANDLE creator=NULL;
-    HANDLE notification=NULL,retire=NULL,ack=NULL,event=NULL,timer=NULL,verified=NULL;
+    HANDLE notification=NULL,retire=NULL,ack=NULL,event=NULL,verified=NULL;
     HANDLE inherited[4],unused_retire=NULL;
     SECURITY_ATTRIBUTES security={sizeof(security),NULL,TRUE};
     STARTUPINFOEXW startup={0};PROCESS_INFORMATION process={0};
-    LARGE_INTEGER due;SIZE_T bytes=0;
+    SIZE_T bytes=0;
     DWORD error,create=0,root_generation=0;
     BOOL attributes=FALSE,accepted=FALSE;
     if(!caller || !window || borrowed>1 || !root || !capability || !restored)
@@ -693,19 +682,14 @@ DWORD OpenNtBaseServiceStartFrontend(OPENNT_BASE_CONNECTION *caller,DWORD pid,
     if(error)goto done;
     if(ResumeThread(process.hThread)==(DWORD)-1){error=GetLastError();goto done;}
     CloseHandle(process.hThread);process.hThread=NULL;
-    timer=CreateWaitableTimerW(NULL,TRUE,NULL);
-    if(!timer){error=GetLastError();goto done;}
-    due.QuadPart=-10LL*1000*(LONGLONG)OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS;
-    if(!SetWaitableTimer(timer,&due,0,NULL,NULL,FALSE)){error=GetLastError();goto done;}
     {
-        HANDLE waits[4]={event,process.hProcess,creator,timer};
+        HANDLE waits[3]={event,process.hProcess,creator};
         DWORD wait=WaitForMultipleObjects(ARRAYSIZE(waits),waits,FALSE,INFINITE);
         if(wait==WAIT_OBJECT_0) {
             EnterCriticalSection(&caller->service->lock);
             error=caller->frontend_start_reported ? caller->frontend_start_status : ERROR_INVALID_STATE;
             LeaveCriticalSection(&caller->service->lock);
-        }else if(wait==WAIT_OBJECT_0+3)error=ERROR_TIMEOUT;
-        else if(wait==WAIT_FAILED)error=GetLastError();
+        }else if(wait==WAIT_FAILED)error=GetLastError();
         else error=ERROR_PROCESS_ABORTED;
     }
     if(error && WaitForSingleObject(process.hProcess,0)==WAIT_OBJECT_0) {
@@ -737,7 +721,7 @@ done:
     if(process.hProcess)CloseHandle(process.hProcess);
     if(verified)CloseHandle(verified);if(creator)CloseHandle(creator);
     if(notification)CloseHandle(notification);if(retire)CloseHandle(retire);if(ack)CloseHandle(ack);
-    if(timer)CloseHandle(timer);if(event)CloseHandle(event);
+    if(event)CloseHandle(event);
     if(attributes)DeleteProcThreadAttributeList(startup.lpAttributeList);
     if(startup.lpAttributeList)HeapFree(GetProcessHeap(),0,startup.lpAttributeList);
     return error;
@@ -763,14 +747,12 @@ static void service_console_return_ack(OPENNT_BASE_CONNECTION *root)
 DWORD OpenNtBaseServiceWaitFrontendConsoleRestored(OPENNT_BASE_CONNECTION *caller,DWORD pid,DWORD generation)
 {
     DWORD error=ERROR_ACCESS_DENIED;
-    ULONGLONG deadline=GetTickCount64()+OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS;
     OPENNT_BASE_SERVICE *service;
     if(!caller)return error;
     service=caller->service;
     EnterCriticalSection(&service->lock);
     for(;;) {
         LIST_ENTRY *link;OPENNT_BASE_CONNECTION *root=NULL;
-        ULONGLONG now;
         if(!OpenNtBaseServicePeer(caller,pid,generation))break;
         if(caller->frontend_return_complete){error=ERROR_SUCCESS;break;}
         /* Request completion is uniform at the launcher. Only the service
@@ -783,9 +765,6 @@ DWORD OpenNtBaseServiceWaitFrontendConsoleRestored(OPENNT_BASE_CONNECTION *calle
         }
         if(!root || WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT)
             {error=ERROR_PIPE_NOT_CONNECTED;break;}
-        if(root->frontend_close_deadline && root->frontend_close_deadline<deadline)
-            deadline=root->frontend_close_deadline;
-        if(root->frontend_close_timed_out){error=ERROR_TIMEOUT;break;}
         if(caller->dos_completion_read && caller->execution_worker_generation &&
             !root->frontend_close_draining && !root->frontend_closing) {
             HANDLE capability=NULL,target=NULL,receipt=NULL;DWORD request=0;
@@ -795,9 +774,9 @@ DWORD OpenNtBaseServiceWaitFrontendConsoleRestored(OPENNT_BASE_CONNECTION *calle
             /* Original task result is already consumed. NTSRV alone decides
              * the inherited parent's reacquisition, outside the state lock. */
             LeaveCriticalSection(&service->lock);
-            error=service_submit_native_request_until(caller,pid,generation,
+            error=OpenNtBaseServiceSubmitNativeRequest(caller,pid,generation,
                 OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME,capability,0,NULL,
-                &target,&receipt,&request,deadline);
+                &target,&receipt,&request);
             CloseHandle(capability);
             if(target)CloseHandle(target);
             if(receipt)CloseHandle(receipt);
@@ -820,9 +799,7 @@ DWORD OpenNtBaseServiceWaitFrontendConsoleRestored(OPENNT_BASE_CONNECTION *calle
                 break;
             }
         }
-        now=GetTickCount64();
-        if(now>=deadline){error=ERROR_TIMEOUT;break;}
-        if(!SleepConditionVariableCS(&service->frontend_changed,&service->lock,(DWORD)(deadline-now)))
+        if(!SleepConditionVariableCS(&service->frontend_changed,&service->lock,INFINITE))
             {error=GetLastError();break;}
     }
     LeaveCriticalSection(&service->lock);return error;
@@ -835,13 +812,13 @@ DWORD OpenNtBaseServiceFrontendCloseQuiesced(OPENNT_BASE_CONNECTION *root,DWORD 
     EnterCriticalSection(&root->service->lock);
     if(OpenNtBaseServicePeer(root,pid,generation) && root->frontend_capability) {
         error=ERROR_INVALID_STATE;
-        if(root->frontend_close_deadline && root->frontend_close_return_required &&
+        if(root->frontend_close_requested && root->frontend_close_return_required &&
             root->frontend_close_draining) {
             root->frontend_close_returned=TRUE;
             service_signal_frontend_states(root->service);
             WakeAllConditionVariable(&root->service->frontend_changed);
             error=ERROR_SUCCESS;
-        } else if(root->frontend_close_deadline && root->frontend_close_returned) {
+        } else if(root->frontend_close_requested && root->frontend_close_returned) {
             error=ERROR_SUCCESS; /* A duplicate phase acknowledgement is not final. */
         }
     }
@@ -982,8 +959,6 @@ DWORD OpenNtBaseServiceRegisterFrontendLease(OPENNT_BASE_CONNECTION *root,DWORD 
     root->frontend_console_window=console_window;
     root->frontend_borrowed=borrowed;
     root->frontend_creator_generation=creator->process.SequenceNumber;
-    root->frontend_admission_deadline=GetTickCount64()+FRONTEND_STARTUP_DEADLINE_MS;
-    root->frontend_workerless_deadline=root->frontend_admission_deadline;
     creator->retained_frontend_root=generation;
     /* Registry removal closes ProcessHandle before context disposal. The
      * registered wait therefore owns a separate copy until joined below. */
@@ -994,8 +969,6 @@ DWORD OpenNtBaseServiceRegisterFrontendLease(OPENNT_BASE_CONNECTION *root,DWORD 
         error=GetLastError();
         root->frontend_console_window=0;
         root->frontend_creator_generation=0;
-        root->frontend_admission_deadline=0;
-        root->frontend_workerless_deadline=0;
         root->frontend_borrowed=FALSE;
         creator->retained_frontend_root=0;
         CloseHandle(root->frontend_retire);root->frontend_retire=NULL;
@@ -1013,8 +986,6 @@ DWORD OpenNtBaseServiceRegisterFrontendLease(OPENNT_BASE_CONNECTION *root,DWORD 
         CloseHandle(root->frontend_exit_process);root->frontend_exit_process=NULL;
         root->frontend_console_window=0;
         root->frontend_creator_generation=0;
-        root->frontend_admission_deadline=0;
-        root->frontend_workerless_deadline=0;
         root->frontend_borrowed=FALSE;
         creator->retained_frontend_root=0;
         CloseHandle(root->frontend_retire);root->frontend_retire=NULL;
@@ -1549,21 +1520,17 @@ DWORD OpenNtBaseServiceWaitFrontend(OPENNT_BASE_CONNECTION *connection,DWORD pid
     DWORD generation,HANDLE *pipe,HANDLE *frontend,DWORD *frontend_generation,HANDLE *ready)
 {
     DWORD error;
-    ULONGLONG deadline=GetTickCount64()+FRONTEND_STARTUP_DEADLINE_MS;
     if (!connection) return ERROR_ACCESS_DENIED;
     EnterCriticalSection(&connection->service->lock);
     for (;;) {
-        ULONGLONG now;
         error=OpenNtBaseServiceTakeFrontend(connection,pid,generation,
             pipe,frontend,frontend_generation,ready);
         if (error!=ERROR_NOT_READY) break;
         /* Only capability arrival is awaited. Original Get already selected
          * the command; no guest command is queued, replayed or selected here.
          * Already delivered is terminal: a route cannot be consumed twice. */
-        now=GetTickCount64();
-        if(now>=deadline){error=ERROR_TIMEOUT;break;}
         if (!SleepConditionVariableCS(&connection->service->frontend_changed,
-                &connection->service->lock,(DWORD)(deadline-now))) { error=GetLastError();break; }
+                &connection->service->lock,INFINITE)) { error=GetLastError();break; }
     }
     LeaveCriticalSection(&connection->service->lock);
     return error;

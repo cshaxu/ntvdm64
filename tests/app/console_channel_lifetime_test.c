@@ -42,6 +42,16 @@ DWORD frontend_console_dispatch(frontend_console *owner,
     return actual_dispatch(owner,request,reply);
 }
 #include "../../src/ntcon-exe/console_channel.c"
+typedef struct channel_stop_test {
+    frontend_io_channel *channel;
+    HANDLE entered;
+} channel_stop_test;
+static DWORD WINAPI stop_channel(void *context)
+{
+    channel_stop_test *test=context;
+    SetEvent(test->entered);
+    return frontend_io_channel_stop(test->channel);
+}
 #define CHECK(x) do { if(!(x)) { DWORD check_error=GetLastError(); \
     fprintf(private_report ? private_report : stderr,"FAIL line=%u error=%lu\n", \
     (unsigned)__LINE__,check_error);if(private_report)fflush(private_report);ExitProcess(1); } } while(0)
@@ -1188,7 +1198,8 @@ static int management_return(void)
     frontend_session_forget(frontend,&video);
     CHECK(!frontend_session_destroy(frontend));
     frontend_video_dispose(&video);CloseHandle(input);CloseHandle(output);
-    puts("PASS management return restores mode, closes CAF, rejects late owner/video and permits terminal disposal");
+    fprintf(private_report ? private_report : stdout,
+        "PASS management return restores mode, closes CAF, rejects late owner/video and permits terminal disposal\n");
     return 0;
 }
 int main(int argc,char **argv)
@@ -1198,7 +1209,16 @@ int main(int argc,char **argv)
     CONSOLE_SCREEN_BUFFER_INFO current,restored;
     CONSOLE_CURSOR_INFO original_cursor={0},current_cursor={0},restored_cursor={0};
     SMALL_RECT reduced;
-    if(argc==2 && !strcmp(argv[1],"--management-return"))return management_return();
+    if((argc==2 || argc==3) && !strcmp(argv[1],"--management-return")) {
+        int result;
+        if(argc==3) {
+            CHECK(!fopen_s(&private_report,argv[2],"w") && private_report);
+            setvbuf(private_report,NULL,_IONBF,0);
+        }
+        result=management_return();
+        if(private_report)fclose(private_report);
+        return result;
+    }
     if(argc==3 && !strcmp(argv[1],"--private-desktop"))return run_private_desktop(argv[2],TRUE);
     if(argc==3 && !strcmp(argv[1],"--private-desktop-full"))return run_private_desktop(argv[2],FALSE);
     if(argc==3 && !strcmp(argv[1],"--private-full")) {
@@ -1288,9 +1308,10 @@ int main(int argc,char **argv)
             current.dwSize.X==80 && current.dwSize.Y==28 && current.dwCursorPosition.Y==27);
         CloseHandle(logical);
     }
-    if(argc==2 && !strcmp(argv[1],"--stop-timeout")) {
+    if(argc==2 && !strcmp(argv[1],"--stop-join")) {
         frontend_io_channel *channel=NULL;
-        console_io_request request={0};HANDLE worker;ULONGLONG began;
+        console_io_request request={0};HANDLE worker,stop_thread;
+        channel_stop_test stopping={0};
         DWORD error;
         held_dispatch=CreateEventW(NULL,TRUE,FALSE,NULL);
         release_dispatch=CreateEventW(NULL,TRUE,FALSE,NULL);
@@ -1304,18 +1325,21 @@ int main(int argc,char **argv)
         request.sequence=1;request.operation=CONSOLE_IO_BARRIER;
         peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data));
         CHECK(WaitForSingleObject(held_dispatch,1000)==WAIT_OBJECT_0);
-        began=GetTickCount64();
-        error=frontend_io_channel_stop(channel);
-        CHECK(error==ERROR_TIMEOUT && GetTickCount64()-began>=9500 &&
-            GetTickCount64()-began<12000);
-        /* Timeout retains the borrowed channel/root. Once the fault clears,
-         * a second stop joins normally and all resources can be reclaimed. */
+        stopping.channel=channel;stopping.entered=CreateEventW(NULL,TRUE,FALSE,NULL);
+        CHECK(stopping.entered);
+        stop_thread=CreateThread(NULL,0,stop_channel,&stopping,0,NULL);CHECK(stop_thread);
+        CHECK(WaitForSingleObject(stopping.entered,1000)==WAIT_OBJECT_0);
+        CHECK(WaitForSingleObject(stop_thread,100)==WAIT_TIMEOUT);
+        /* The original stop call retains ownership until the dispatcher
+         * releases it; no timeout return or second cleanup attempt. */
         CHECK(SetEvent(release_dispatch));
-        CHECK(!frontend_io_channel_stop(channel));
+        CHECK(WaitForSingleObject(stop_thread,5000)==WAIT_OBJECT_0);
+        CHECK(GetExitCodeThread(stop_thread,&error) && !error);
+        CloseHandle(stop_thread);CloseHandle(stopping.entered);
         CHECK(!frontend_session_destroy(test_frontend));
         CloseHandle(peer);CloseHandle(held_dispatch);CloseHandle(release_dispatch);
         CloseHandle(read_entered);
-        puts("PASS stopped channel returns ERROR_TIMEOUT within bound, retains borrowed storage, then joins after fault release");
+        puts("PASS stopped channel retains borrowed storage until dispatcher release and joins exactly once");
         return 0;
     }
     CHECK(!frontend_session_console(test_frontend,&input,&canonical));

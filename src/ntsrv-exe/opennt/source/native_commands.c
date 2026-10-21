@@ -544,9 +544,9 @@ DWORD service_prepare_parent_resume(OPENNT_BASE_CONNECTION *caller,
     return ERROR_PROCESS_ABORTED;
 }
 
-DWORD service_submit_native_request_until(OPENNT_BASE_CONNECTION *caller,DWORD pid,
+DWORD OpenNtBaseServiceSubmitNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD pid,
     DWORD generation,DWORD operation,HANDLE frontend,DWORD bytes,BYTE *payload,
-    HANDLE *target,HANDLE *receipt,DWORD *request,ULONGLONG deadline)
+    HANDLE *target,HANDLE *receipt,DWORD *request)
 {
     WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS]={0};
     HANDLE startup=NULL,worker=NULL;
@@ -588,7 +588,6 @@ DWORD service_submit_native_request_until(OPENNT_BASE_CONNECTION *caller,DWORD p
      * deliver through the legacy CUI-only command-worker path. */
     EnterCriticalSection(&caller->service->lock);
     for(;;) {
-        ULONGLONG now;
         error=operation==OPENNT_BASE_NATIVE_REQUEST_LAUNCH ?
             OpenNtBaseServiceRetainNativeCommandWorker(caller,pid,generation,&worker) :
             OpenNtBaseServiceRetainCommandWorker(caller,pid,generation,&worker);
@@ -599,10 +598,8 @@ DWORD service_submit_native_request_until(OPENNT_BASE_CONNECTION *caller,DWORD p
             !caller->reservation || caller->selected_native_generation)break;
         if(WaitForSingleObject(caller->process.ProcessHandle,0)!=WAIT_TIMEOUT)
             {error=ERROR_PROCESS_ABORTED;break;}
-        now=GetTickCount64();
-        if(now>=deadline){error=ERROR_TIMEOUT;break;}
         if(!SleepConditionVariableCS(&caller->service->frontend_changed,
-            &caller->service->lock,(DWORD)(deadline-now))) {error=GetLastError();break;}
+            &caller->service->lock,INFINITE)) {error=GetLastError();break;}
     }
     LeaveCriticalSection(&caller->service->lock);
     if(error)return error;
@@ -627,11 +624,9 @@ DWORD service_submit_native_request_until(OPENNT_BASE_CONNECTION *caller,DWORD p
     if(error)goto done;
     {
         HANDLE waits[3]={startup,worker,caller->process.ProcessHandle};
-        ULONGLONG now=GetTickCount64();
-        DWORD wait=WaitForMultipleObjects(3,waits,FALSE,
-            now>=deadline ? 0 : (DWORD)(deadline-now));
+        DWORD wait=WaitForMultipleObjects(3,waits,FALSE,INFINITE);
         if(wait!=WAIT_OBJECT_0) {
-            error=wait==WAIT_TIMEOUT ? ERROR_TIMEOUT : wait==WAIT_FAILED ? GetLastError() : ERROR_PROCESS_ABORTED;
+            error=wait==WAIT_FAILED ? GetLastError() : ERROR_PROCESS_ABORTED;
             goto done;
         }
     }
@@ -670,15 +665,6 @@ done:
     return error;
 }
 
-
-DWORD OpenNtBaseServiceSubmitNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD pid,
-    DWORD generation,DWORD operation,HANDLE frontend,DWORD bytes,BYTE *payload,
-    HANDLE *target,HANDLE *receipt,DWORD *request)
-{
-    return service_submit_native_request_until(caller,pid,generation,operation,
-        frontend,bytes,payload,target,receipt,request,
-        GetTickCount64()+OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
-}
 
 DWORD OpenNtBaseServiceFinishNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD pid,
     DWORD generation,DWORD request,DWORD *exit_code,DWORD *target_completed)

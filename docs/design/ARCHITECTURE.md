@@ -12,9 +12,18 @@ workers. Confirmed service loss permits role-specific local cleanup; healthy
 service task completion is a report requiring coordinated disposition.
 The proposal records startup exceptions and every inherited implementation gap.
 
+T448 owner correction (2026-10-21): ordinary control RPC and lifecycle operations
+do not acquire a blanket timeout. The owner's subsequent clarification retains
+three five-second policies: Run16 waiting for the NTSRV it starts, NTSRV's
+empty-service retirement, and Console-close handler grace.
+Other necessary waits require an individually explained purpose and approval;
+earlier blanket deadline statements are superseded, not authorization to retain
+them. Preserve normal completion, actual service-loss handling and error results.
+The active S audits and removes the overextended implementation and tests.
+
 T448 owner clarification: submission failure never retries, including ambiguous
 reply loss. Win16 startup success releases its default launcher without waiting
-for task exit. Confirmed service loss or final-disposition timeout makes Run16
+for task exit. Confirmed service loss makes Run16
 clean up locally and return the corresponding failure, without peer waits or
 restoration fences; this is not a claim that Console restoration completed.
 Normal task execution has no ten-second lifetime. NTSRV retains accepted-work

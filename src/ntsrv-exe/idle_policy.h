@@ -4,7 +4,8 @@
 #ifndef NTSRV_IDLE_POLICY_H
 #define NTSRV_IDLE_POLICY_H
 #include <windows.h>
-#define BASESRV_EMPTY_GRACE_MS 10000u
+#include "common/protocol/frontend_lifecycle.h"
+#define BASESRV_EMPTY_GRACE_MS OPENNT_LIFECYCLE_GRACE_MS
 typedef struct BASESRV_IDLE_POLICY {
     ULONGLONG deadline;
     ULONG pending;

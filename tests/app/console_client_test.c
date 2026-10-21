@@ -46,6 +46,14 @@ static HANDLE delivery,peer,stop,readiness,frontend_process,video_wait;
 static HANDLE server_thread;
 static void create_transport(void);
 static HANDLE broker_shutdown,broker_console_close;
+static HANDLE fault_reported;
+static volatile LONG fault_reports;
+DWORD worker_base_request_exit(void)
+{
+    InterlockedIncrement(&fault_reports);
+    CHECK(SetEvent(fault_reported));
+    return ERROR_SUCCESS; /* Acceptance deliberately withholds an exit order. */
+}
 static session_teardown_fn cleanup;
 static void *cleanup_context;
 static frontend_console frontend;
@@ -290,9 +298,11 @@ int main(int argc,char **argv)
     SMALL_RECT grid_rect={-1,3,1,4};
     int i;
     HANDLE stable_wait;
-    BOOL broken_pipe=argc==2 && !strcmp(argv[1],"--broken-pipe");
+    BOOL broken_video=argc==2 && !strcmp(argv[1],"--broken-video");
+    BOOL broken_pipe=broken_video || (argc==2 && !strcmp(argv[1],"--broken-pipe"));
     BOOL variable_video=argc==2 && !strcmp(argv[1],"--variable-video");
     hang_close=argc==2 && !strcmp(argv[1],"--close-hang");
+    fault_reported=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(fault_reported);
     if(argc==2 && (!strcmp(argv[1],"--lifecycle-console") || !strcmp(argv[1],"--lifecycle-wow") || !strcmp(argv[1],"--lifecycle-loss"))) {
         BOOL text=!strcmp(argv[1],"--lifecycle-console");
         CHECK(!ntvdm_worker_lifecycle_begin(&owner,text));
@@ -828,6 +838,16 @@ int main(int argc,char **argv)
     }
     if (broken_pipe) {
         SetEvent(stop);
+        if(broken_video) {
+            console_video_description description={0};BYTE pixel=1;
+            description.width=description.height=description.stride=1;
+            description.depth=8;description.bytes=1;
+            CHECK(ntvdm_console_video_async(TRUE));
+            CHECK(ntvdm_console_publish_video(&description,&pixel,1));
+            CHECK(WaitForSingleObject(fault_reported,5000)==WAIT_OBJECT_0);
+            CHECK(fault_reports==1 && owner.console_client);
+            puts("PASS asynchronous video failure reports to service without local worker exit");
+        }
         goto disconnected;
     }
     CHECK(ReadConsoleOutputCharacterA(local,&untouched,1,p,&count) && untouched==' ');
@@ -1061,12 +1081,16 @@ disconnected:
         CHECK(!GetConsoleScreenBufferInfo(local,&info) && GetLastError()==ERROR_PIPE_NOT_CONNECTED);
         CHECK(!SetConsoleMode(frontend.input,ENABLE_MOUSE_INPUT) && GetLastError()==ERROR_PIPE_NOT_CONNECTED);
     }
+    CHECK(WaitForSingleObject(fault_reported,5000)==WAIT_OBJECT_0);
+    CHECK(fault_reports==1 && WaitForSingleObject(broker_shutdown,0)==WAIT_TIMEOUT);
+    puts("PASS terminal I/O failure reports once; acceptance alone does not exit worker");
     ntvdm_worker_lifecycle_end();
     cleanup(cleanup_context);bound=NULL;
     CHECK(!owner.console_client);
     CHECK(WaitForSingleObject(server_thread,5000)==WAIT_OBJECT_0);
     CloseHandle(server_thread);CloseHandle(stop);CloseHandle(video_wait);CloseHandle(local);CloseHandle(frontend.output);CloseHandle(frontend.input);
     CloseHandle(readiness);CloseHandle(frontend_process);CloseHandle(broker_shutdown);CloseHandle(broker_console_close);
+    CloseHandle(fault_reported);
     puts("PASS client transport, distinct frontend ownership, native error and idle frontend loss");
     return 0;
 }

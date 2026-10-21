@@ -117,8 +117,8 @@ void ntvdm_dos_observer_stop(ntvdm_dos_observer *state)
     if(registered==state) {
         (void)VDDDeInstallUserHook(state->registration);registered=NULL;
     }
-    /* Producer is now quiescent. Normal teardown gives accepted facts a
-     * finite chance to finish; failure cannot change the guest result. */
-    (void)worker_task_observer_drain(&state->outbox,10000);
+    /* Producer is quiescent. Join accepted publication or actual publisher
+     * exit; elapsed time is not permission to drop its remaining facts. */
+    (void)worker_task_observer_drain(&state->outbox);
     worker_task_observer_stop(&state->outbox);state->registration=NULL;
 }

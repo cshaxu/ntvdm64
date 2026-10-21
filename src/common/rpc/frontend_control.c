@@ -16,7 +16,7 @@ DWORD common_rpc_retire_workerless_frontend(const common_rpc_connection *state,D
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    error=common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    error=common_rpc_end_async(&async,error,NULL,INFINITE);
     if(!error)*retired=local;
     return error;
 }
@@ -36,7 +36,7 @@ DWORD common_rpc_frontend_state_changed(const common_rpc_connection *state,HANDL
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    error=common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    error=common_rpc_end_async(&async,error,NULL,INFINITE);
     if(error) { if(local)CloseHandle(local);return error; }
     if(!local)return ERROR_INVALID_HANDLE;
     *state_changed=local;
@@ -58,7 +58,7 @@ DWORD common_rpc_start_frontend(const common_rpc_connection *state,uint64_t wind
     }
     RpcExcept(1){error=RpcExceptionCode();}
     RpcEndExcept
-    error=common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    error=common_rpc_end_async(&async,error,NULL,INFINITE);
     if(error){
         if(*root)CloseHandle(*root);if(*capability)CloseHandle(*capability);
         if(*restored)CloseHandle(*restored);
@@ -79,7 +79,7 @@ DWORD common_rpc_frontend_console_restored(const common_rpc_connection *state)
     }
     RpcExcept(1){error=RpcExceptionCode();}
     RpcEndExcept
-    return common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    return common_rpc_end_async(&async,error,NULL,INFINITE);
 }
 
 DWORD common_rpc_frontend_startup_result(const common_rpc_connection *state,HANDLE capability,DWORD status)
@@ -94,7 +94,7 @@ DWORD common_rpc_frontend_startup_result(const common_rpc_connection *state,HAND
     }
     RpcExcept(1){error=RpcExceptionCode();}
     RpcEndExcept
-    return common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    return common_rpc_end_async(&async,error,NULL,INFINITE);
 }
 
 DWORD common_rpc_wait_frontend_console_restored(const common_rpc_connection *state)
@@ -108,5 +108,5 @@ DWORD common_rpc_wait_frontend_console_restored(const common_rpc_connection *sta
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    return common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    return common_rpc_end_async(&async,error,NULL,INFINITE);
 }

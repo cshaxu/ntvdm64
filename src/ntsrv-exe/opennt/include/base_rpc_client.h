@@ -14,8 +14,9 @@ DWORD OpenNtBaseClientWorkerIoCheckpoint(DWORD,DWORD,DWORD *);
 DWORD OpenNtBaseClientFrontendIoDisconnected(void);
 DWORD OpenNtBaseClientSubmitNativeRequest(DWORD,HANDLE,DWORD,BYTE *,HANDLE *,HANDLE *,DWORD *);
 DWORD OpenNtBaseClientFinishNativeRequest(DWORD,DWORD *,DWORD *);
+/* Ordinary connection waits for the RPC result, not a product deadline. */
 DWORD OpenNtBaseClientConnectCurrent(void);
-/* Launcher bootstrap only: all connection calls share this remaining budget. */
+/* Run16 service-startup exception: phases share the supplied remaining budget. */
 DWORD OpenNtBaseClientConnectCurrentTimeout(DWORD milliseconds);
 /* Preserve ordinary failures; confirmed admitted service loss maps to the
  * original disconnected-port Win32 error. No peer observation is involved. */
@@ -46,7 +47,9 @@ DWORD OpenNtBaseClientWowStartup(HANDLE parent,HANDLE *event,BOOL *started);
 DWORD OpenNtBaseClientRetireWorkerlessFrontend(DWORD *retired);
 DWORD OpenNtBaseClientFrontendStateChanged(HANDLE *state_changed);
 DWORD OpenNtBaseClientWorkerShutdownEvent(HANDLE *shutdown);
-DWORD OpenNtBaseClientRequestWorkerExit(void);
+/* Report inability to continue. NTSRV selects the authenticated participant's
+ * close transaction; successful submission is not permission to exit. */
+DWORD OpenNtBaseClientRequestParticipantExit(void);
 DWORD OpenNtBaseClientWorkerConsoleCloseEvent(HANDLE *close);
 DWORD OpenNtBaseClientWorkerIoReleaseEvent(HANDLE *release);
 DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE capability);

@@ -36,6 +36,9 @@ static HANDLE failed_broker;
 static DWORD submit_error,submit_calls;
 static volatile LONG usage_pending,drain_calls,park_calls,broker_shutdown;
 static HANDLE usage_seen,park_seen;
+static BOOL fault_mode;
+static HANDLE fault_seen,quiesced_seen,restore_seen;
+static DWORD fault_reports,fault_report_error,restore_error,restore_calls;
 static void attached(void);
 static DWORD fixture_frontend_start(PCWSTR image,frontend_connection *connection)
 {
@@ -58,7 +61,10 @@ DWORD OpenNtBaseClientStartFrontend(uint64_t window,BOOL borrowed,HANDLE *root,
     return error;
 }
 DWORD OpenNtBaseClientFrontendConsoleRestored(void){CHECK(FALSE);return ERROR_INVALID_STATE;}
-DWORD OpenNtBaseClientFrontendCloseQuiesced(void){CHECK(FALSE);return ERROR_INVALID_STATE;}
+DWORD OpenNtBaseClientFrontendCloseQuiesced(void)
+{ CHECK(fault_mode && restore_calls==1);CHECK(SetEvent(quiesced_seen));return 0; }
+DWORD OpenNtBaseClientRequestParticipantExit(void)
+{ CHECK(fault_mode);++fault_reports;CHECK(SetEvent(fault_seen));return fault_report_error; }
 DWORD OpenNtBaseClientFrontendIoDisconnected(void)
 {
     CHECK(created && !channels[created-1]);
@@ -80,7 +86,7 @@ DWORD frontend_session_create(frontend_session **out)
 { *out=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(**out));return *out ? 0 : ERROR_NOT_ENOUGH_MEMORY; }
 void frontend_session_cancel(frontend_session *value) { (void)value; }
 DWORD frontend_session_return_console(frontend_session *value)
-{ (void)value;CHECK(FALSE);return ERROR_INVALID_STATE; }
+{ (void)value;CHECK(fault_mode);++restore_calls;CHECK(SetEvent(restore_seen));return restore_error; }
 DWORD frontend_session_park(frontend_session *value)
 { (void)value;CHECK(retirement_mode);InterlockedIncrement(&park_calls);CHECK(SetEvent(park_seen));return 0; }
 DWORD frontend_session_drain(frontend_session *value)
@@ -168,6 +174,7 @@ DWORD OpenNtBaseClientBindConsoleContext(HANDLE value)
 DWORD OpenNtBaseClientFrontendRequest(DWORD *request,HANDLE *worker)
 {
     DWORD error=ERROR_NOT_FOUND;
+    if(fault_mode){ResetEvent(notification);return ERROR_PIPE_NOT_CONNECTED;}
     EnterCriticalSection(&lock);
     if(disconnect_pending) {
         CHECK(!pending);disconnect_pending=FALSE;*request=0;*worker=NULL;
@@ -253,6 +260,55 @@ static void service_controls_retirement(void)
     retirement_mode=FALSE;CloseHandle(retirement_state);retirement_state=NULL;
     CloseHandle(usage_seen);CloseHandle(park_seen);CloseHandle(creator);
     puts("PASS completed lease parks without self-retirement; broker shutdown overrides stale pending usage");
+}
+static void service_controls_fault(void)
+{
+    DWORD scenario;
+    for(scenario=0;scenario<4;++scenario) {
+        frontend_session_service *service=NULL;
+        DWORD result;
+        failed_broker=CreateEventW(NULL,TRUE,FALSE,NULL);
+        retirement_state=CreateEventW(NULL,FALSE,FALSE,NULL);
+        fault_seen=CreateEventW(NULL,TRUE,FALSE,NULL);
+        quiesced_seen=CreateEventW(NULL,TRUE,FALSE,NULL);
+        restore_seen=CreateEventW(NULL,TRUE,FALSE,NULL);
+        CHECK(failed_broker && retirement_state && fault_seen && quiesced_seen && restore_seen);
+        fault_mode=TRUE;fault_reports=restore_calls=0;
+        fault_report_error=scenario==2 ? ERROR_ACCESS_DENIED : 0;
+        restore_error=scenario==3 ? ERROR_WRITE_FAULT : 0;
+        InterlockedExchange(&broker_shutdown,0);
+        CHECK(ResetEvent(notification));
+        CHECK(!frontend_service_start_process(notification,failed_broker,notification,&service));
+        CHECK(SetEvent(notification));
+        CHECK(WaitForSingleObject(fault_seen,5000)==WAIT_OBJECT_0);
+        CHECK(WaitForSingleObject(frontend_service_thread(service),50)==WAIT_TIMEOUT);
+        CHECK(fault_reports==1 && !restore_calls);
+        if(scenario==0 || scenario==3) {
+            InterlockedExchange(&broker_shutdown,OPENNT_FRONTEND_RETIRE_RETURN_CONSOLE);
+            CHECK(SetEvent(retirement_state));
+            CHECK(WaitForSingleObject(restore_seen,5000)==WAIT_OBJECT_0);
+            if(!scenario) {
+                CHECK(WaitForSingleObject(quiesced_seen,5000)==WAIT_OBJECT_0);
+                CHECK(WaitForSingleObject(frontend_service_thread(service),50)==WAIT_TIMEOUT);
+                InterlockedExchange(&broker_shutdown,OPENNT_FRONTEND_RETIRE_FINAL_CLOSE);
+                CHECK(SetEvent(retirement_state));
+            } else {
+                CHECK(WaitForSingleObject(frontend_service_thread(service),50)==WAIT_TIMEOUT);
+                CHECK(WaitForSingleObject(quiesced_seen,0)==WAIT_TIMEOUT);
+            }
+        }
+        if(scenario)CHECK(SetEvent(failed_broker));
+        CHECK(WaitForSingleObject(frontend_service_thread(service),5000)==WAIT_OBJECT_0);
+        CHECK(GetExitCodeThread(frontend_service_thread(service),&result));
+        CHECK(result==(scenario ? ERROR_INVALID_HANDLE : ERROR_PIPE_NOT_CONNECTED));
+        CHECK(fault_reports==1); /* No replay/reconnect after failure. */
+        CHECK(!frontend_service_close(service));
+        CloseHandle(failed_broker);failed_broker=NULL;
+        CloseHandle(retirement_state);retirement_state=NULL;
+        CloseHandle(fault_seen);CloseHandle(quiesced_seen);CloseHandle(restore_seen);
+    }
+    fault_mode=FALSE;InterlockedExchange(&broker_shutdown,0);
+    puts("PASS frontend fault reports once; no local retirement; service orders return/final close; service loss exits; failed report/restore never acknowledges success");
 }
 int main(void)
 {
@@ -392,6 +448,7 @@ int main(void)
     CHECK(stopped==COUNT);
     for (i=0;i<COUNT;++i) CHECK(!channels[i]);
     service_controls_retirement();
+    service_controls_fault();
     CloseHandle(notification);CloseHandle(ready);CloseHandle(disconnect_seen);DeleteCriticalSection(&lock);
     puts("PASS completed channels reclaimed; live channel preserved; final join complete");
     return 0;

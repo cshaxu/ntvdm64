@@ -17,13 +17,13 @@ $fixturePath=(Resolve-Path $Fixture).Path
 # Each fixture owns an in-process service and PID-qualified pipe names.
 # None binds the global RPC endpoint. Do not add real-package cases here.
 $cases=@('parent-resume-origin','io-authority','route-cancellation','prepared-native-root-loss','frontend-unclaimed-stop','frontend-unclaimed-reconnect','frontend-delegated','frontend-wait','frontend-wait-root-loss',
-    'frontend-wait-request-loss','frontend-wait-worker-loss','frontend-wait-timeout','frontend-rundown',
+    'frontend-wait-request-loss','frontend-wait-worker-loss','frontend-rundown',
     'reenter-before-return','reenter-after-return','reenter-nested-return',
     'reenter-pending-command','reenter-before-increment','launcher-completed-rundown',
     'completed-worker-loss','wow-start-late-query','default','frontend-authority','shared-worker-residency',
     'native-command','native-worker','management-gui','management-frontend-close',
     'frontend-completion-barrier','management-frontend-close-order',
-    'management-frontend-close-timeout','management-frontend-prepare-timeout',
+    'management-frontend-close-root-loss','management-frontend-prepare-pending',
     'management-worker-then-console','management-console-then-worker','management-late-worker-close',
     'worker-exit-then-console','console-then-worker-exit',
     'management-terminate','unfinished-worker-exit')

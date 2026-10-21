@@ -15,6 +15,14 @@ DWORD ntcon_worker_client_init(ntcon_worker_client *client,HANDLE pipe,HANDLE pe
     client->pipe=pipe;client->peer=peer;client->cancel=cancel;client->generation=generation;
     return ERROR_SUCCESS;
 }
+DWORD ntcon_worker_client_fail(ntcon_worker_client *client,DWORD error)
+{
+    if(error && !client->failure) {
+        client->failure=error;
+        if(client->failure_event)SetEvent(client->failure_event);
+    }
+    return error;
+}
 void ntcon_worker_client_dispose(ntcon_worker_client *client)
 {
     if(!client)return;
@@ -51,7 +59,7 @@ DWORD ntcon_worker_prepend_keys(ntcon_worker_client *client,const INPUT_RECORD *
     }
     request.data=(BYTE *)payload;
     error=ntcon_worker_exchange(client,&request,reply);
-    if(!error && reply->state.count>count)error=client->failure=ERROR_INVALID_DATA;
+    if(!error && reply->state.count>count)error=ntcon_worker_client_fail(client,ERROR_INVALID_DATA);
     return error;
 }
 
@@ -98,8 +106,7 @@ static DWORD ntcon_worker_send(ntcon_worker_client *client,console_io_request *r
     error=send_request(client,request);
     if(error==ERROR_BROKEN_PIPE || error==ERROR_NO_DATA || error==ERROR_PIPE_NOT_CONNECTED)
         error=ERROR_PIPE_NOT_CONNECTED;
-    if(error)client->failure=error;
-    return error;
+    return ntcon_worker_client_fail(client,error);
 }
 
 DWORD ntcon_worker_exchange(ntcon_worker_client *client,console_io_request *request,console_io_reply *reply)
@@ -129,8 +136,7 @@ DWORD ntcon_worker_exchange(ntcon_worker_client *client,console_io_request *requ
     if(!error && reply->bytes)error=transfer(client,FALSE,console_io_reply_payload(reply),reply->bytes);
     if(error==ERROR_BROKEN_PIPE || error==ERROR_NO_DATA || error==ERROR_PIPE_NOT_CONNECTED)
         error=ERROR_PIPE_NOT_CONNECTED;
-    if(error)client->failure=error;
-    return error;
+    return ntcon_worker_client_fail(client,error);
 }
 
 DWORD ntcon_worker_call(ntcon_worker_client *client,console_io_request *request,console_io_reply *reply)

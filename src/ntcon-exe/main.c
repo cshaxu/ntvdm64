@@ -27,7 +27,7 @@ static DWORD session_entry(HANDLE caller,HANDLE notification,HANDLE retire,HANDL
     /* NTSRV validates the exact admitted process and capability in the RPC
      * registration and startup-result calls. The inherited caller identifies
      * the real Console, not the broker's own Console. */
-    error=OpenNtBaseClientConnectCurrentTimeout(OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    error=OpenNtBaseClientConnectCurrent();
     if(error){bootstrap_trace("connect",error);goto done;}
     if(WaitForSingleObject(caller,0)!=WAIT_TIMEOUT){error=ERROR_ACCESS_DENIED;bootstrap_trace("identity",error);goto respond;}
     pid=GetProcessId(caller);

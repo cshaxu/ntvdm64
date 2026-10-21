@@ -4,9 +4,9 @@ param(
     [Parameter(Mandatory)][string]$PackageRoot,
     [Parameter(Mandatory)][string]$ReportPrefix,
     [Parameter(Mandatory)][ValidateSet('client','bootstrap','startup-rejections',
-        'startup-timeout','native-worker-failure','native-completed-worker-loss','native-io-error',
-        'workerless-grace','workerless-cancel','monitor-rpc',
-        'native-command','native-registry','ntvwm-execution','ntvwm-public-startup','frontend-root-parent','admitted-vdm')][string[]]$Cases
+        'native-worker-failure','native-completed-worker-loss','native-io-error',
+        'workerless-park','worker-loss-park','monitor-rpc',
+        'native-command','native-registry','ntvwm-execution','ntvwm-public-startup','frontend-root-parent','admitted-vdm','frontend-io-fault')][string[]]$Cases
 )
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/isolated_package_cleanup.ps1"
@@ -21,15 +21,15 @@ foreach($case in $Cases) {
     $report=$ReportPrefix+'-'+$case+'.txt'
     if(Test-Path -LiteralPath $report){throw 'Use a fresh report prefix'}
     $image=if($case -eq 'client'){'frontend-request-client-test.exe'}
-        elseif($case -in @('ntvwm-execution','ntvwm-public-startup','frontend-root-parent','admitted-vdm')){'base-client-rpc-first-test.exe'}
+        elseif($case -in @('ntvwm-execution','ntvwm-public-startup','frontend-root-parent','admitted-vdm','frontend-io-fault')){'base-client-rpc-first-test.exe'}
         elseif($case -eq 'monitor-rpc'){'monitor-rpc-test.exe'}
         elseif($case -in @('native-command','native-registry')){'basesrv-service-reservation-test.exe'}
         else{'broker-frontend-bootstrap-test.exe'}
     $casePackageRoot=$PackageRoot
-    if($case -eq 'admitted-vdm') {
+    if($case -in @('admitted-vdm','frontend-io-fault')) {
         # Only this fresh build-owned package substitutes a test host worker;
         # no installed/release image or original guest file is changed.
-        $casePackageRoot=$ReportPrefix+'-admitted-vdm-package\system32'
+        $casePackageRoot=$ReportPrefix+'-'+$case+'-package\system32'
         if(Test-Path -LiteralPath $casePackageRoot){throw 'Require a fresh admitted worker fixture'}
         $null=New-Item -ItemType Directory -Path $casePackageRoot
         foreach($name in @($image,'ntsrv.exe','ntcon.exe')) {
@@ -37,7 +37,7 @@ foreach($case in $Cases) {
         }
         Copy-Item -LiteralPath (Join-Path $casePackageRoot $image) -Destination (Join-Path $casePackageRoot 'ntvdm.exe')
     }
-    if($case -in @('startup-rejections','startup-timeout','native-io-error')) {
+    if($case -in @('startup-rejections','native-io-error')) {
         # This fixture deliberately replaces the frontend with an adversarial
         # peer. Its C-side build-only guard must remain effective even when
         # ordinary product cases execute in a short physical O:\tmp stage.
@@ -66,7 +66,7 @@ foreach($case in $Cases) {
     foreach($argument in $arguments){$start.ArgumentList.Add($argument)}
     $scope=$null;$service=$null;$process=$null
     try {
-        if($case -in @('ntvwm-execution','ntvwm-public-startup','frontend-root-parent','admitted-vdm')) {
+        if($case -in @('ntvwm-execution','ntvwm-public-startup','frontend-root-parent','admitted-vdm','frontend-io-fault')) {
             $scope=New-IsolatedPackageScope $casePackageRoot
             $scope.Paths+=Join-Path $casePackageRoot $image
             $serviceStart=[Diagnostics.ProcessStartInfo]::new((Join-Path $casePackageRoot 'ntsrv.exe'))

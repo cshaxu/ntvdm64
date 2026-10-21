@@ -88,7 +88,7 @@ static int rejected_peer(HANDLE caller,HANDLE capability)
     OpenNtBaseClientDisconnectCurrent();HeapDestroy(CsrPortHeap);CsrPortHeap=NULL;
     CloseHandle(caller);CloseHandle(capability);return (int)error;
 }
-static int startup_failures(BOOL timeout)
+static int startup_failures(void)
 {
     static const WCHAR *modes[]={L"status",L"unregistered",L"capability"};
     WCHAR self[MAX_PATH],source[MAX_PATH],package[MAX_PATH],image[MAX_PATH],*slash;
@@ -110,9 +110,9 @@ static int startup_failures(BOOL timeout)
     CsrPortHeap=HeapCreate(0,0,0);if(!CsrPortHeap)return 1;
     error=OpenNtBaseClientConnectCurrent();
     if(error!=RPC_S_SERVER_UNAVAILABLE){printf("FAIL existing broker/status=%lu\n",error);goto done;}
-    for(i=0;i<(timeout ? 1u : ARRAYSIZE(modes));++i) {
+    for(i=0;i<ARRAYSIZE(modes);++i) {
         ULONGLONG began,elapsed;
-        SetEnvironmentVariableW(L"FRONTEND_TEST_REPLY",timeout ? NULL : modes[i]);
+        SetEnvironmentVariableW(L"FRONTEND_TEST_REPLY",modes[i]);
         error=start_broker(image,&broker);if(error)goto done;
         /* Warm the new RPC marshalling path independently of the rejection. */
         (void)OpenNtBaseClientStartFrontend(0,TRUE,&root,&cap,&restored);
@@ -121,11 +121,10 @@ static int startup_failures(BOOL timeout)
         error=OpenNtBaseClientStartFrontend((uint64_t)(UINT_PTR)GetConsoleWindow(),TRUE,&root,&cap,&restored);
         elapsed=GetTickCount64()-began;
         if(!GetProcessHandleCount(GetCurrentProcess(),&after) || before!=after || root || cap || restored ||
-            !error || (timeout ? error!=ERROR_TIMEOUT || elapsed<9000 || elapsed>15000 :
-                error!=ERROR_ACCESS_DENIED)) {
+            error!=ERROR_ACCESS_DENIED) {
             printf("FAIL rejection %lu error=%lu elapsed=%llu handles=%lu/%lu\n",i,error,elapsed,before,after);goto done;
         }
-        printf("PASS broker-owned rejection %ls error=%lu no local handle leak\n",timeout ? L"timeout" : modes[i],error);
+        printf("PASS broker-owned rejection %ls error=%lu no local handle leak\n",modes[i],error);
         stop_broker(&broker);
     }
     failed=0;
@@ -287,14 +286,12 @@ int wmain(int argc,WCHAR **argv)
     STARTUPINFOW startup={sizeof(startup)};PROCESS_INFORMATION broker={0};
     HANDLE root=NULL,capability=NULL,restored=NULL,fake=NULL,owner=NULL,worker=NULL;
     DWORD error,result=0,generation=0,i;int failed=1;
-    ULONGLONG started=0;
     if(argc==2 && !wcscmp(argv[1],L"--cui-worker"))return result_worker();
     if(argc==2 && !wcscmp(argv[1],L"--native-io-error"))return native_io_error();
     if(argc==8 && !wcscmp(argv[1],L"--session"))return rejected_peer(
         (HANDLE)(UINT_PTR)wcstoul(argv[2],NULL,16),(HANDLE)(UINT_PTR)wcstoul(argv[3],NULL,16));
     if(argc==3 && !wcscmp(argv[1],L"--identity"))return identity_role(argv[2]);
-    if(argc==2 && !wcscmp(argv[1],L"--startup-rejections"))return startup_failures(FALSE);
-    if(argc==2 && !wcscmp(argv[1],L"--startup-timeout"))return startup_failures(TRUE);
+    if(argc==2 && !wcscmp(argv[1],L"--startup-rejections"))return startup_failures();
     CsrPortHeap=HeapCreate(0,0,0);if(!CsrPortHeap)return 1;
     error=OpenNtBaseClientConnectCurrent();
     if(error!=RPC_S_SERVER_UNAVAILABLE){printf("FAIL existing broker/status=%lu\n",error);goto done;}
@@ -331,7 +328,6 @@ int wmain(int argc,WCHAR **argv)
     if(error!=ERROR_INVALID_PARAMETER || root || capability || restored){puts("FAIL invalid Console accepted");goto done;}
     error=OpenNtBaseClientWaitFrontendConsoleRestored();
     if(error){puts("FAIL request without a Console lease required a return");goto done;}
-    started=GetTickCount64();
     error=OpenNtBaseClientStartFrontend((uint64_t)(UINT_PTR)GetConsoleWindow(),TRUE,
         &root,&capability,&restored);
     if(error){printf("FAIL bootstrap=%lu\n",error);goto done;}
@@ -352,13 +348,11 @@ int wmain(int argc,WCHAR **argv)
     /* Reacquire the same root: its shared restoration event resets. The old
      * invocation's confirmation above must not depend on root process exit. */
     if(WaitForSingleObject(root,0)!=WAIT_TIMEOUT){puts("FAIL return killed resident frontend");goto done;}
-    if(argc==2 && !wcscmp(argv[1],L"--workerless-grace")) {
-        if(WaitForSingleObject(root,8000)!=WAIT_TIMEOUT ||
-            WaitForSingleObject(root,4000)!=WAIT_OBJECT_0 ||
-            GetTickCount64()-started<9000 || !GetExitCodeProcess(root,&result) || result) {
-            printf("FAIL broker-owned workerless deadline/result=%lu\n",result);goto done;
+    if(argc==2 && !wcscmp(argv[1],L"--workerless-park")) {
+        if(WaitForSingleObject(root,11000)!=WAIT_TIMEOUT) {
+            puts("FAIL live workerless root expired");goto done;
         }
-        puts("PASS workerless root remains alive during grace; NTSRV retires it after ten seconds");
+        puts("PASS workerless root remains parked beyond the removed expiry");
         failed=0;goto done;
     }
     error=OpenNtBaseClientStartNativeWorker(OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&worker);
@@ -372,21 +366,19 @@ int wmain(int argc,WCHAR **argv)
         if(error){printf("FAIL native worker failure receipt=%lu\n",error);goto done;}
         failed=0;goto done;
     }
-    if(argc==2 && !wcscmp(argv[1],L"--workerless-cancel")) {
+    if(argc==2 && !wcscmp(argv[1],L"--worker-loss-park")) {
         HANDLE control;
         if(WaitForSingleObject(root,11000)!=WAIT_TIMEOUT) {
-            puts("FAIL live worker did not cancel root retirement");goto done;
+            puts("FAIL live worker root expired");goto done;
         }
         control=OpenProcess(PROCESS_TERMINATE|SYNCHRONIZE,FALSE,GetProcessId(worker));
         if(!control)goto done;
         if(!TerminateProcess(control,123)){CloseHandle(control);goto done;}
         WaitForSingleObject(control,5000);CloseHandle(control);
-        if(WaitForSingleObject(root,8000)!=WAIT_TIMEOUT ||
-            WaitForSingleObject(root,4000)!=WAIT_OBJECT_0 ||
-            !GetExitCodeProcess(root,&result) || result) {
-            printf("FAIL last-worker-loss grace/result=%lu\n",result);goto done;
+        if(WaitForSingleObject(root,11000)!=WAIT_TIMEOUT) {
+            puts("FAIL worker loss armed an unapproved root expiry");goto done;
         }
-        puts("PASS live worker cancels retirement; last worker loss starts a new broker-owned ten-second grace");
+        puts("PASS live worker and subsequent worker loss preserve parked frontend without an expiry");
         failed=0;goto done;
     }
     /* StartNativeWorker returns after Resume, not after worker Connect.

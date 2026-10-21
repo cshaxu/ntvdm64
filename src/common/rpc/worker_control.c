@@ -21,7 +21,7 @@ static DWORD worker_event(const common_rpc_connection *state,HANDLE *output,
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    error=common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    error=common_rpc_end_async(&async,error,NULL,INFINITE);
     if(error){if(local)CloseHandle(local);return error;}
     if(required && !local)return ERROR_INVALID_HANDLE;
     *output=local;return ERROR_SUCCESS;
@@ -43,7 +43,7 @@ DWORD common_rpc_acquire_console_context(const common_rpc_connection *state,HAND
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    error=common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    error=common_rpc_end_async(&async,error,NULL,INFINITE);
     if (error && *capability) { CloseHandle(*capability);*capability=NULL; }
     return error;
 }
@@ -60,7 +60,7 @@ static DWORD worker_handle(const common_rpc_connection *state,HANDLE handle,work
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    return common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    return common_rpc_end_async(&async,error,NULL,INFINITE);
 }
 DWORD common_rpc_bind_console_context(const common_rpc_connection *state,HANDLE capability)
 { return worker_handle(state,capability,Client_BindConsoleContext); }
@@ -87,7 +87,7 @@ DWORD common_rpc_worker_io_checkpoint(const common_rpc_connection *state,DWORD r
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    error=common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    error=common_rpc_end_async(&async,error,NULL,INFINITE);
     if(error)return error;
     if(local!=WORKER_IO_KEEP && local!=WORKER_IO_RELEASE)return ERROR_INVALID_DATA;
     *decision=local;return ERROR_SUCCESS;
@@ -104,7 +104,7 @@ DWORD common_rpc_worker_io_transition(const common_rpc_connection *state,DWORD a
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    return common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    return common_rpc_end_async(&async,error,NULL,INFINITE);
 }
 DWORD common_rpc_frontend_io_disconnected(const common_rpc_connection *state)
 {
@@ -117,7 +117,7 @@ DWORD common_rpc_frontend_io_disconnected(const common_rpc_connection *state)
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    return common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    return common_rpc_end_async(&async,error,NULL,INFINITE);
 }
 DWORD common_rpc_worker_io_release_event(const common_rpc_connection *state,HANDLE *release)
 { return worker_event(state,release,Client_WorkerIoReleaseEvent,TRUE); }
@@ -138,7 +138,7 @@ DWORD common_rpc_take_frontend(const common_rpc_connection *state,HANDLE *pipe,H
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    error=common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    error=common_rpc_end_async(&async,error,NULL,INFINITE);
     if (error) {
         if (*pipe) CloseHandle(*pipe);
         if (*frontend) CloseHandle(*frontend);

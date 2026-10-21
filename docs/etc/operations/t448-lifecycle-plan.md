@@ -2,7 +2,18 @@
 
 ## Authority and status
 
-Owner approved the four-stage division and requested execution. Current admits
+The owner's 2026-10-21 correction in the linked proposal supersedes this
+document's earlier blanket ten-second control/finalization policy. r32 is
+withdrawn from publication. Audit existing timeout owners, their actual purpose
+and introduction before removing arbitrary client deadlines, timeout latches,
+service-side expiry policies and tests that exist only to enforce those policies.
+Retain real error/service-loss cleanup and normal ownership ordering. Existing
+RPC async completion may remain where needed for service-loss cancellation;
+it is not itself a timeout policy. Test-harness safety limits, nonblocking
+liveness probes and presentation pacing are not product operation deadlines.
+
+Owner approved the original four-stage division and subsequently inserted a
+polling-cleanup S4; original integrated acceptance becomes S5. Current admits
 S3 after the bounded S2 implementation/review conclusion. S3 P1 at d0814cd4c
 delivers the retained S2 work and close-arbitration checkpoint; remaining S3
 exit permission and initialization/fault work is not closed. S1 design was delivered
@@ -20,7 +31,8 @@ tracks candidate implementation and verification. No guest changes or rebuilds.
 | S1 | All role ownership, transitions, failure ordering and original-owner audit | Finite remediation/test matrix; service-loss boundary explicitly settled; reviewed design delivery, not runtime acceptance |
 | S2 | Admission, execution result, parent/frontend handoff and launcher final result | No launcher peer-liveness decision or autonomous frontend parking; lifecycle-only WOW binding; coherent package and positive/negative normal-path evidence |
 | S3 | Console/worker/WOW-task close, concurrent completion and service loss | Uniform internal/external management transaction; fault cleanup; real pre-Enter echo and failure-injection evidence; coherent delivery |
-| S4 | Entire matrix, source cleanup and closure | No remaining control bypass, resource/return regression or unaccounted mirror diff; full build/incremental/publication, reviewed push and owner acceptance |
+| S4 | Autonomous-code polling inventory and cleanup | Map every polling loop to owner/purpose/notification alternative; remove unnecessary polling without new transport/framework; prove no lost wakeup, idle busy loop or shutdown hang; record justified retained polling and source/test delta; build/test/full publication/commit/push |
+| S5 | Entire matrix, source cleanup and closure (formerly S4) | No remaining control bypass, resource/return regression or unaccounted mirror diff; full build/incremental/publication, reviewed push and owner acceptance |
 
 S2 must include enough lifecycle dispatch separation for normal WOW/native GUI
 operation; S3 adds close/fault behavior, not a second competing dispatcher.
@@ -102,22 +114,20 @@ identity. No internal-versus-external caller branch is allowed.
 | Restoring | NTCON restores canonical active buffer and input state after old writers/readers cannot regain access; report failure independently for each operation |
 | Final | Service latches results, releases launchers and orders frontend retirement or retention; free records only after references/waits are retired |
 
-All phases share one absolute ten-second deadline. Waits use the remaining
-budget; duplicate requests and late acknowledgements do not reset it. Natural
-task execution is not given a ten-second lifetime. Empty-service/frontend grace
-timers remain separate policies, each ten seconds where applicable.
+Phases advance on their actual acknowledgements, operation failures and process
+exit observations, without a transaction deadline or timed-out state. Duplicate
+requests join the accepted operation rather than restarting it. Neither elapsed
+time nor a late acknowledgement authorizes reopening admission or reporting
+successful Console restoration. The live service retains responsibility for
+accepted work and unfinished handoff; a confirmed service loss permits the
+role's local cleanup without a peer recovery fence.
 
-Timeout moves the operation to a recorded timed-out/quiesced condition, not
-success and not reopened admission. A matching late acknowledgement or actual
-process-exit observation may finish it; there is no automatic retry loop or
-silent force-kill escalation. Existing explicitly authorized forced-close
-semantics must be identified at their original owner, not added generically.
-Owner supersedes indefinite launcher retention: after the final-disposition
-wait deadline, Run16 uses the same local cleanup/return mechanism as service
-loss, retaining the timeout error rather than fabricating disconnection or
-successful Console restoration. This deadline does not limit normal task
-execution. The still-live service retains responsibility for accepted work
-and the unfinished handoff transaction after launcher departure.
+The only project-owned five-second policies are newly started NTSRV bootstrap,
+empty-service retirement and Console-close handler grace. Original internal
+waits retain their source semantics. There is no workerless-frontend expiry,
+ordinary RPC deadline, final-disposition timeout or automatic retry/force-kill
+escalation. The explicitly authorized Console-close forced exit remains at
+its named owner, not a generic close-transaction fallback.
 
 This table is the Console-close sequence, not a universal teardown recipe.
 NTSRV selects phases from the actual scope: WOW task close retains its worker;
@@ -210,14 +220,14 @@ through the failure result, rather than infer it from stale thread state.
 | L02 | NTSRV completion + launcher / S2 | Normal and failed native/DOS result; nested parent restore; duplicate result query; no peer wait |
 | L03 | NTSRV frontend policy + NTCON / S2 | Normal return keeps frontend reusable; creator death cannot independently park; two simultaneous launchers |
 | L04 | worker-base dispatch + NTVDM bootstrap / S2-S3 | WOW receives worker-close without character initialization; GUI ignores inapplicable command; no kind policy in worker-base |
-| L05 | NTSRV close operation / S3 | Internal/external deletion, caller dies after acceptance, normal-result/close race, one cleanup, one absolute deadline |
+| L05 | NTSRV close operation / S3 | Internal/external deletion, caller dies after acceptance, normal-result/close race, one cleanup, event-driven acknowledgement and actual exit |
 | L06 | NTCON quiesce/restore / S3 | Delayed frame/read/EOF, each restoration error, join failure, no false acknowledgement, first character before Enter |
-| L07 | shared RPC notification + role cleanup / S2-S3 | Basic loss/finalization-timeout exits ship with S2; S3 tests every phase; explicit original status/error propagation; Run16 returns even if NTCON is stalled or absent, with no peer wait; timeout/rejection remain distinct; no unconditional watcher kill |
+| L07 | shared RPC notification + role cleanup / S2-S3 | Remove S2's finalization timeout; test actual loss at each phase and original status/error propagation; disconnected Run16 returns even if NTCON is stalled or absent, with no peer wait; no unconditional watcher kill |
 | L08 | original NTVDM/WOW exit boundary / S3 | Natural/fatal/management paths retain original cleanup, no wait under guest locks, source-proven mirror exception if needed |
 | L09 | GUI launch and failure / S2-S3 | Startup-only/--wait, suspension/binding failure rollback, launcher departure; GUI target remains alive on service loss |
-| L10 | record/attachment rundown / S3-S4 | PID/handle reuse, late command/ack, abandoned reservation, released wait callbacks, no leaked resources |
+| L10 | record/attachment rundown / S3 and S5 | PID/handle reuse, late command/ack, abandoned reservation, released wait callbacks, no leaked resources |
 
-S4 repeats real conhost and terminal paths with CMD, COMMAND and direct NTMON,
+S5 repeats real conhost and terminal paths with CMD, COMMAND and direct NTMON,
 CAF before/after NTMON, internal/external close, normal exit and no-CAF controls.
 Use existing tests/observation/verify-console-caf-self-delete.ps1 and strengthen
 service fixtures in tests/adapter-basesrv/base_service_reservation_test.c;

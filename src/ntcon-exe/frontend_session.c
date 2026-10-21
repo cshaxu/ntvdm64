@@ -831,14 +831,10 @@ DWORD frontend_session_return_console(frontend_session *frontend)
     if(!frontend)return ERROR_INVALID_PARAMETER;
     waits[0]=frontend->return_done;waits[1]=frontend->stop;waits[2]=frontend->thread;
     if(!ResetEvent(frontend->return_done) || !SetEvent(frontend->return_console))return GetLastError();
-    /* A failed channel teardown may leave a producer blocked in I/O.  The
-     * management close must still make a bounded attempt to restore the
-     * borrowed Console, then let its caller retain the live storage and
-     * report failure instead of hanging process shutdown indefinitely. */
-    wait=WaitForMultipleObjects(3,waits,FALSE,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    /* Completion, explicit stop or thread exit settles this request. */
+    wait=WaitForMultipleObjects(3,waits,FALSE,INFINITE);
     if(wait==WAIT_OBJECT_0)return frontend->return_error;
     if(wait==WAIT_OBJECT_0+1)return ERROR_OPERATION_ABORTED;
-    if(wait==WAIT_TIMEOUT)return ERROR_TIMEOUT;
     if(wait==WAIT_FAILED)return GetLastError();
     if(!GetExitCodeThread(frontend->thread,&error))return GetLastError();
     return error ? error : ERROR_BROKEN_PIPE;

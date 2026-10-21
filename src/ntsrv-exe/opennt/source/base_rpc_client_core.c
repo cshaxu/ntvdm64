@@ -32,7 +32,6 @@ typedef struct OPENNT_BASE_RPC_CLIENT {
     void *lost_context;
     ULONG generation;
     volatile LONG local_failure;
-    BOOL bounded_calls;
 } OPENNT_BASE_RPC_CLIENT;
 
 static OPENNT_BASE_RPC_CLIENT client;
@@ -82,7 +81,7 @@ void __RPC_USER MIDL_user_free(void *value) { free(value); }
 static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding,ULONGLONG deadline)
 {
     RPC_IF_ID expected;
-    RPC_STATUS status=RpcIfInqId(Client_vdm_service_v60_0_c_ifspec,&expected);
+    RPC_STATUS status=RpcIfInqId(Client_vdm_service_v61_0_c_ifspec,&expected);
     if (status) return status;
     return common_rpc_classify_interface(binding,&expected,deadline);
 }
@@ -98,8 +97,6 @@ DWORD OpenNtBaseClientFailure(DWORD error)
     if(failure)return failure;
     if(client.server && WaitForSingleObject(client.server,0)==WAIT_OBJECT_0)
         failure=ERROR_INVALID_HANDLE;
-    else if(client.bounded_calls && (error==ERROR_TIMEOUT || error==RPC_S_CALL_CANCELLED))
-        failure=ERROR_TIMEOUT;
     if(failure){
         DWORD previous=(DWORD)InterlockedCompareExchange(&client.local_failure,(LONG)failure,0);
         return previous ? previous : failure;
@@ -128,7 +125,6 @@ DWORD OpenNtBaseClientConnectCurrentTimeout(DWORD milliseconds)
     /* Preserve this source-shaped client's historical binding-failure result;
      * the neutral mechanism itself returns the precise RPC status. */
     if(common_rpc_bind_local(endpoint,&client.binding))goto done;
-    client.bounded_calls=milliseconds!=INFINITE;
     /* Original BaseSrvUpdateDOSEntry duplicates the authenticated worker's
      * self pseudo-handle; no broader process access is needed. */
     client.process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE|PROCESS_DUP_HANDLE,
@@ -208,7 +204,7 @@ DWORD OpenNtBaseClientReportCurrentConsoleMembers(void)
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
     error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,client.server,
-        OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+        INFINITE));
 done:
     common_console_members_release(members);
     return error;
@@ -261,7 +257,7 @@ void OpenNtBaseClientDisconnectCurrent(void)
             /* Cleanup never replaces the caller's established task result.
              * Drain cancellation before releasing context/binding storage. */
             (void)common_rpc_end_async(&async,error,client.server,
-                OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+                INFINITE);
         }
     }
     if (client.process) CloseHandle(client.process);
@@ -346,7 +342,7 @@ DWORD OpenNtBaseClientBindNativeTarget(DWORD request,HANDLE target,HANDLE receip
     }
     RpcExcept(1) {error=RpcExceptionCode();}
     RpcEndExcept
-    return OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+    return OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,INFINITE));
 }
 DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE capability)
 {
@@ -362,7 +358,7 @@ DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE capability)
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
     return OpenNtBaseClientFailure(common_rpc_end_async(&async,error,client.server,
-        OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+        INFINITE));
 }
 DWORD OpenNtBaseClientRegisterFrontendLease(uint64_t console_window,DWORD creator_pid,
     BOOL borrowed,HANDLE retire,HANDLE restored)
@@ -379,7 +375,7 @@ DWORD OpenNtBaseClientRegisterFrontendLease(uint64_t console_window,DWORD creato
     RpcExcept(1){error=RpcExceptionCode();}
     RpcEndExcept
     return OpenNtBaseClientFailure(common_rpc_end_async(&async,error,client.server,
-        OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+        INFINITE));
 }
 DWORD OpenNtBaseClientFrontendJoinCandidate(DWORD *nonce,DWORD *candidate_pid)
 {
@@ -396,7 +392,7 @@ DWORD OpenNtBaseClientFrontendJoinCandidate(DWORD *nonce,DWORD *candidate_pid)
     RpcExcept(1){error=RpcExceptionCode();}
     RpcEndExcept
     error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,client.server,
-        OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+        INFINITE));
     if(error)*nonce=*candidate_pid=0;
     return error;
 }
@@ -412,7 +408,7 @@ DWORD OpenNtBaseClientFrontendJoinDecision(DWORD nonce,BOOL same_console)
     }
     RpcExcept(1){error=RpcExceptionCode();}
     RpcEndExcept
-    error=common_rpc_end_async(&async,error,client.server,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    error=common_rpc_end_async(&async,error,client.server,INFINITE);
     return OpenNtBaseClientFailure(error);
 }
 DWORD OpenNtBaseClientFrontendLeaseReady(void)
@@ -427,7 +423,7 @@ DWORD OpenNtBaseClientFrontendLeaseReady(void)
     }
     RpcExcept(1){error=RpcExceptionCode();}
     RpcEndExcept
-    error=common_rpc_end_async(&async,error,client.server,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    error=common_rpc_end_async(&async,error,client.server,INFINITE);
     return OpenNtBaseClientFailure(error);
 }
 
@@ -474,7 +470,7 @@ DWORD OpenNtBaseClientStartNativeWorker(DWORD native_type,HANDLE *worker)
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+    error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,INFINITE));
     if(error && *worker){CloseHandle(*worker);*worker=NULL;}
     return error;
 }
@@ -538,7 +534,7 @@ DWORD OpenNtBaseClientFrontendCloseQuiesced(void)
     RpcExcept(1){error=RpcExceptionCode();}
     RpcEndExcept
     return OpenNtBaseClientFailure(common_rpc_end_async(&async,error,client.server,
-        OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+        INFINITE));
 }
 DWORD OpenNtBaseClientFrontendStartupResult(HANDLE capability,DWORD status)
 {
@@ -557,7 +553,7 @@ DWORD OpenNtBaseClientWaitFrontendConsoleRestored(void)
 DWORD OpenNtBaseClientWorkerShutdownEvent(HANDLE *shutdown)
 { return client_worker_event(common_rpc_worker_shutdown_event,shutdown); }
 
-DWORD OpenNtBaseClientRequestWorkerExit(void)
+DWORD OpenNtBaseClientRequestParticipantExit(void)
 {
     RPC_ASYNC_STATE async={0};
     DWORD error=OpenNtBaseClientFailure(0);
@@ -567,12 +563,12 @@ DWORD OpenNtBaseClientRequestWorkerExit(void)
      * completion/cancellation owner without changing concurrent GetNext calls. */
     error=common_rpc_begin_async(&async);if(error)return error;
     RpcTryExcept {
-        Client_RequestWorkerExit(&async,client.binding,client.connection,
+        Client_RequestParticipantExit(&async,client.binding,client.connection,
             client.process,client.generation);
     }
     RpcExcept(1){error=RpcExceptionCode();}
     RpcEndExcept
-    error=common_rpc_end_async(&async,error,client.server,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    error=common_rpc_end_async(&async,error,client.server,INFINITE);
     return OpenNtBaseClientFailure(error);
 }
 
@@ -622,7 +618,7 @@ DWORD OpenNtBaseClientRetainFrontendRoot(HANDLE capability,HANDLE *root,DWORD *g
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+    error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,INFINITE));
     if (error) {
         if (*root) CloseHandle(*root);
         *root=NULL;*generation=0;
@@ -643,7 +639,7 @@ DWORD OpenNtBaseClientRequestFrontend(HANDLE capability)
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    return OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+    return OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,INFINITE));
 }
 
 DWORD OpenNtBaseClientFrontendRequest(DWORD *request,HANDLE *worker)
@@ -661,7 +657,7 @@ DWORD OpenNtBaseClientFrontendRequest(DWORD *request,HANDLE *worker)
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
     error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,client.server,
-        OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+        INFINITE));
     if (error) {
         if (*worker) CloseHandle(*worker);
         *worker=NULL;*request=0;
@@ -685,7 +681,7 @@ DWORD OpenNtBaseClientAttachFrontendRequest(DWORD request,HANDLE pipe,HANDLE rea
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
     error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,client.server,
-        OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS));
+        INFINITE));
     if (!error) *generation=client.generation;
     return error;
 }

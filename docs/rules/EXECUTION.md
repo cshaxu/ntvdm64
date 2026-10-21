@@ -154,12 +154,13 @@ clean only its pinned owned processes, and restore its environment even on
 failure. Tests must not create or depend on `subst` drive mappings. Explicit
 fixture cleanup is not evidence of normal retirement.
 
-Test ten-second lifecycle decisions at their existing production owner using
-explicit time inputs, including before/at expiry, cancellation, rearm and
-shutdown notification. Preserve the production deadline and separately verify
-real process/event/receipt wiring. -FullDeadlines retains the real-timer
-diagnostic for policy/timer changes or investigation; do not repeatedly spend
-that grace merely waiting for test-owned services between unrelated cases.
+Test only the approved timed policies in the
+[lifecycle boundary](../design/ARCHITECTURE.md#approved-lifecycle-target-boundary)
+at their production owner, using explicit time inputs where supported. Cover
+before/at expiry and applicable cancellation, rearm and shutdown notification;
+separately verify real process/event/receipt wiring. Event-driven operations
+must not acquire product deadlines merely to bound a test. Diagnostic budgets
+belong to the test runner and do not authorize product timeout or retry policy.
 Do not shorten product waits, remove meaningful input pacing, waive negatives
 or weaken output assertions as a throughput optimization.
 

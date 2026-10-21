@@ -2150,3 +2150,515 @@ both destinations. Recoverable prior images are in
 build/t448-s3/publication-r31-backup. Protocol remains 60; guest and selected
 mirrors are unchanged. Reviewed main commit/push follows this complete
 progress delivery. The finite remaining S3 groups above are not waived.
+
+## Finite default-worker bootstrap candidate
+
+P15 is pushed at b0b5cbb12 and the worktree is clean before this group.
+Separate the connection budget from post-connect timeout disposition in the
+existing client owner: private connect_current takes the finite budget and
+the existing latch policy independently. Default worker connection uses ten
+seconds and does not latch individual later report timeouts; launcher/frontend
+connection takes its remaining budget, capped at ten seconds, and retains
+terminal timeout latching. No new state owner, transport, retry, protocol
+revision or guest/mirror change is introduced. A failed initial connection
+still uses local context rundown without a second cleanup RPC budget.
+
+Actual deadline fixture case55 ends its setup connection, suspends only its
+owned NTSRV, then calls OpenNtBaseClientConnectCurrent rather than the explicit
+timeout overload. It requires 1460 within the ten-second envelope while the
+service remains alive. Existing worker report-timeout/recovery coverage remains
+unchanged and must pass, proving that finite bootstrap did not poison the
+shared worker connection policy. Full build controller 11256 and dependent
+serial controller 21988 run r32 (54 deadline cases). Inputs are frozen; no
+new result or publication is yet claimed. Partial initialization cleanup and
+original-host pre-teardown permission remain separate fixed S3 obligations.
+
+r32 full-component and second incremental builds finish successfully at
+14:26:19 UTC on 2026-10-21. The new actual paused-service case55 passes with
+fixture exit zero and the startup-deadline/no-cleanup-RPC assertion. Its
+fixture SHA-256 is
+A7F2E7D2A78FA1F46B9631F58FF94D61F31605B4530B89F30A42D85262C67EC3.
+Serial controller 21988 is verified alive; post-review controller 28868 starts
+at 14:28:14 UTC and waits for that same serial run. No duplicate test run or
+new runtime change is started. The full regression and publication remain
+pending; P15 is still the deployed baseline.
+
+Final source review of this candidate finds exactly three production caller
+families: Run16 supplies its remaining startup budget, NTCON supplies ten
+seconds, and worker-base uses the default entry. Both entrypoints reach one
+private implementation; no caller retains an infinite connection budget.
+Connect, optional interface diagnosis and BrokerProcess consume one absolute
+deadline. Failed bootstrap still performs local rundown, not a second RPC.
+The existing worker-exit timeout/recovery test passes in r32, so the new
+bootstrap bound does not latch later worker report failures. Source plus
+permanent tests net +9 lines; protocol, original mirrors and guest stay
+unchanged. This review does not certify the still-running complete matrix.
+
+## Owner correction: remove overextended timeout policy
+
+On 2026-10-21 the owner rejects blanket control-call and lifecycle deadlines.
+r32 is withdrawn from publication regardless of its test outcome. Existing
+controllers 21988/28868 only run tests/review; neither publishes. Keep their
+evidence but do not treat timeout-test success as design acceptance.
+
+The source inventory identifies client deadlines in common/rpc controls,
+base_rpc_client_core/launch_style and service_client, plus service-side waits
+and expiry in frontend_registry, worker_registry, native_commands and lifecycle.
+Run16 WOW startup, NTVWM presentation startup and NTCON teardown waits require
+separate purpose/provenance review. Zero-time process liveness checks, frame
+pacing and test-harness safety budgets are not blanket product timeouts.
+Preserve the explicit Run16/new-service startup and NTSRV empty-service grace;
+do not infer approval for other deadlines. Removal must cover timeout latches,
+expiry consequences and obsolete tests as well as wait constants. Preserve
+normal result delivery, real failure, service-loss handling and RPC completion
+storage lifetime. No product correction has yet been built or published.
+
+### Wait-policy removal map and original close evidence
+
+r32 serial testing ends successfully at 14:43:06 UTC, post-review at 14:43:35.
+Both controllers are terminal. The owner-withdrawn candidate is not published;
+its deadline passes do not justify retaining the rejected product policy.
+
+| Chain | Necessary dependency | Timeout-policy disposition |
+| --- | --- | --- |
+| Run16 -> newly started NTSRV | Wait for usable service or startup failure | Retain the explicitly approved total ten-second startup budget; do not extend it to ordinary admitted calls |
+| NTSRV empty retirement | Cancellable idle grace with no active owners | Retain the explicitly approved ten seconds |
+| Common RPC controls and BaseClient core/style calls | Actual reply/error or confirmed service loss; preserve issued-call storage until completion | Remove arbitrary per-call deadlines and timeout-only connection poisoning; keep real errors and cancellation cleanup |
+| Service frontend/native admission and finalization | Registration/result/handoff acknowledgement or actual participant loss | Remove expiry-only failure/retirement branches while retaining authenticated identities, ordering, result delivery and wakeups |
+| NTCON/NTVWM thread and I/O cleanup | Stop users before freeing their storage | Preserve join/completion dependencies; separately review inherited bounded joins, never treat expiry as successful cleanup |
+| DOS Console-close | Original handler completion and Console service's close decision | Separate original semantic review below; not justification for universal RPC timeouts |
+
+Read-only original evidence: OpenNT/windows/core/ntcon/server/input.c,
+SHA-256 84D7D4C5A422208D14900C8F3A86B0F9648A3755F03D6D49765B35266617252A,
+around lines 2740-2890. The Console server creates the target control callback,
+waits gCmsHungAppTimeout for CTRL_CLOSE_EVENT, and on non-forced timeout offers
+the end-task dialog with retry/cancel handling. ntuser/inc/user.h line2635
+defines its default as five seconds; the setting is not a universal RPC budget.
+The current worker-base shutdown_close helper instead applies its caller's
+ten-second grace then unconditional process termination. Thus citing original
+CntrlHandler alone does not prove equivalence. No original code is imported or
+modified for this investigation; do not silently choose a new force-close policy.
+
+The minimal removal should preserve existing RPC ownership and async machinery
+where needed for genuine service loss. No transport replacement, whole-commit
+rollback, or new timeout manager is required. Tests that assert arbitrary
+ten-second failure must be removed/replaced with normal completion, explicit
+failure and service-loss assertions; harness safety deadlines are separate.
+
+The subsequent owner clarification selects five seconds for the three explicit
+project policies: new-service startup, empty-service retirement and Console-close
+handler grace. Source research also confirms original WOW task-end five-second
+stages (wkman.h CMS_WAITTASKEXIT), Console logoff/shutdown's configurable default
+twenty seconds, DOS event-thread quiescence's 360000ms fault limit, and indefinite
+WOW creation/VDM-command event waits. These original internal contracts are not
+blanket rewritten or claimed to be fully composed here.
+
+Removal implementation has begun after both r32 controllers finished: delete
+the client timeout-latch field/branch and default-worker deadline, use ordinary
+connection for NTCON, remove fifty per-call budgets in six client files and the
+DOS-observation budget, retain actual cancellation/error result ownership, and
+share a five-second constant for the three approved policies. WOW startup waits
+for readiness/service or worker exit, not a product timer. Native submission now
+has one service implementation without a deadline-wrapper or deadline argument;
+Console-return finalization waits for acknowledged state/participant failure,
+not elapsed time. Remaining service expiry fields, frontend/worker waits and
+test migration are still open. This intermediate source is not built/published.
+
+The close transaction now retains only its accepted-request boolean in place of
+deadline/timed-out fields. Remove its timer scheduling and expiry transition;
+duplicate requests still join the same transaction and actual quiescence/worker
+exit advance its phases. The service fixture retains identity, duplicate,
+competing worker/Console-close and participant-loss assertions; simulated elapsed
+time must not close participants. Native worker reservation contention also waits
+on its existing condition variable without a timer. Static search finds no old
+close-deadline/timed-out fields or native-submit-until wrapper in source/tests.
+Remaining workerless/admission expiry and fixture migration still prevent build
+freeze and delivery; none of these edits is claimed runtime-verified yet.
+
+Frontend startup now waits directly on its existing startup-result, child-process
+and creator-process handles; delete its extra waitable timer, due-time setup,
+timeout branch and timer cleanup. Frontend acquisition, worker I/O transition
+and attachment wait retain their existing condition-variable wakeups and
+re-resolve authenticated objects after wake, without elapsed-time failure.
+Source tracing finds completion/rundown notifications in frontend_registry,
+worker_registry and service_core; runtime loss/concurrency proof is still
+required. The remaining frontend admission/workerless deadline fields are
+explicitly pending, not hidden behind a changed constant.
+
+Remove the workerless/admission deadline fields, root-retirement deadline
+calculation and frontend timer in NTSRV's main loop. Its existing lifetime-change
+event now drives OpenNtBaseServiceReconcileFrontends; actual borrowed-Console
+loss and acknowledged management close remain, with no replacement idle timer
+or immediate workerless kill. NTSRV's distinct empty-service timer remains.
+Delete the corresponding deadline-reset loops in worker admission. NTCON return
+and channel joins and NTVWM presentation admission now await their existing
+completion/stop/thread-exit conditions. Old timer-specific fixtures still need
+migration; NTVWM's hidden-Console disappearance poll and imported UI component
+joins remain explicit pending audit items. No build or publication yet.
+
+The following source/test migration removes all references to the deleted
+frontend expiry APIs. Shared-worker residency still checks native busy/idle,
+WOW residency and paired DOS/native root authority. Frontend-authority tests
+retain authenticated startup, worker loss, root rundown and exact handle
+delivery; a live workerless frontend now parks without expiry. Close-ordering
+tests retain duplicate acceptance, quiescence ordering, competing terminal
+scopes and actual participant loss. Rename the old timeout cases to root-loss
+and prepare-pending; remove the separate attachment-timeout case, retaining
+normal delayed attachment and worker-loss cases. These are changed assertions
+for the owner's new contract, not proof that the new implementation passes.
+
+NTVWM hidden-Console disappearance retains its existing exact-window identity
+checks and poll but no arbitrary deadline. S4 owns conversion/justification of
+that poll; this is not represented as event-driven completion. The obsolete
+shared ten-second constant and startup-deadline alias are removed. Imported UI
+join policy and RPC deadline fixtures still need migration.
+
+Background service verification r34 starts controller PID 14628 using
+build/t448-s3/service-r34.ps1, the existing x64 service Ninja tree and the
+production-linked service-fixture matrix (38 cases after removing the obsolete
+attachment-timeout case). Output is service-r34.out/.err and service-r34-result.json
+under the active disposable root; per-case observer budgets remain diagnostic
+guards, not product deadlines. This run is not a full-package publication gate.
+
+r34 completes successfully at 2026-10-21 15:04:00 UTC (start 15:03:42 UTC):
+the x64 production-linked service fixture builds and all 38 cases pass,
+matrix elapsed 5417 ms at concurrency four. This proves the retained service
+assertions after expiry removal, not the still-unmigrated RPC stall tests,
+UI joins, full package or physical Console return. Published assets remain P15.
+
+UI join audit: kvm_component_destroy queues STOP (or accepts already closed
+admission after a terminal fault), calls join_worker, then disposes only after
+success. The Win32 join waits on the worker thread handle before closing ready
+and worker handles and releasing worker_state. Replace the previous registered
+ten-second imported-header exception with LIB_UINT32_MAX, the existing Win32
+infinite-wait representation; no new ABI, cancellation mechanism or disposal
+owner. Update README and nxvm-import.json with the new exception and local
+SHA256 6D93EA9346C9F9820F411F72174E55D7EC762E17F90CD683DB8A677C4D20E319.
+This changes one imported library policy line, not an OpenNT or guest mirror.
+
+Replace --stop-timeout with --stop-join in the production channel fixture:
+the dispatcher holds an existing lock while a separate test thread starts
+the actual stop. Assert stop remains pending, release the dispatcher and
+require the same stop call to complete successfully before frontend disposal.
+No second stop or expiry recovery remains; the test's observation bounds are
+diagnostic only. The pending check proves ownership ordering, not arbitrary
+long-duration behavior.
+
+Background frontend r35 PID 34304 (15:07:08-15:07:18 UTC) builds the changed
+library/channel fixtures and passes library and stop-join cases. Management
+return exits zero but the runner fails its PASS-text gate: the fixture replaces
+its Console, so the observer's old Console cannot capture its final output.
+Do not classify the whole run as passed. Add an optional explicit report to
+that fixture and rerun all three cases as r35b controller PID 32156, retaining
+r35 failure evidence. Both runs use the stable x64 frontend tree, isolated
+observer desktop and build/t448-s3/frontend-r35* reports; no publication.
+
+r35b completes at 15:08:24 UTC (start 15:08:14 UTC): all pinned import hashes
+match, changed fixtures build, and all three library/stop-join/management-return
+cases pass. The management assertion report confirms input-mode restoration,
+CAF destruction, rejection of late acquisition/video, repeated return and
+terminal disposal. This is isolated API-level evidence, not the real internal
+NTMON self-delete acceptance or a complete thirteen-image build/publication.
+
+RPC-test migration removes the obsolete numbered timeout/latch matrix and its
+query-only scaffolding. The replacement --rpc-wait contract has five named
+cases: reply, default connect, disconnect, real service loss and explicitly
+bounded bootstrap. Ordinary reply/connect/disconnect are held beyond the old
+ten-second policy and must remain pending, then complete after service resume;
+reply/connect also perform a subsequent ordinary query. Disconnect checks
+released client state and idempotent cleanup. Loss requires the authenticated
+service process to exit and checks ERROR_INVALID_HANDLE. Bootstrap alone
+requires the approved five-second timeout. Test threads keep their stack/client
+ownership until joined; suspension/termination targets only the isolated test
+service. These five shared-mechanism checks do not replace the existing
+operation-specific normal/admission/error/output tests or claim every RPC
+method's lifecycle proven. Those remain part of the full acceptance inventory.
+
+Rename the real-package runner to tests/observation/verify-client-rpc-wait.ps1;
+old disposable deadline runners are invalid for this candidate. Full-component
+and second-incremental build r36 starts in background PID 28064. RPC controller
+36452 waits for that exact process and successful build result, then compiles
+the x86 fixture, stages all thirteen hash-matched images and executes the five
+named cases serially. Logs/results remain in build/t448-s3/build-r36* and
+rpc-r36*. Neither startup nor staging authorizes release or S3 closure.
+
+r36 full thirteen-image build and unchanged second-incremental verification
+pass at 15:15:05 UTC (start 15:11:36 UTC). RPC controller 36452 passes reply
+(ordinary call survives beyond ten seconds, resumes and accepts the next query),
+then stops at connect with exit 1 at 15:15:42 UTC. No loss/disconnect/bootstrap
+pass is inferred. The connect setup disconnects its only service client before
+suspension; the five-second empty-service timer may therefore compete with
+the resumed connection after eleven seconds. This is an unproved harness
+interaction, not a diagnosed product defect. Add explicit returned-status and
+service-liveness reporting before resolving it; retain the failed evidence.
+
+Further sweep found old workerless-grace/cancel and frontend startup-timeout
+expectations in the real bootstrap fixture. Remove the timeout-only startup
+case while retaining real rejection and handle-leak checks; rename the two
+workerless cases to park/worker-loss-park and assert no expiry across the old
+deadline. These migrated cases still require execution.
+
+After r36 staging, remove another production ten-second wait in DOS observation
+teardown. The producer is first unregistered; drain waits on the existing
+drained event or actual publisher-thread exit, with no timeout parameter.
+RPC failure can finish publication and service-loss cancellation remains with
+the existing stop path. Update the unit test to inspect pending state directly
+and use the unbounded drain contract after release. This post-r36 source change
+invalidates r36 as final delivery evidence; a fresh affected/full package and
+observer drain/cancellation tests are required. No guest/OpenNT mirror change.
+
+Diagnostic r36b controller PID 3316 builds the RPC and observation fixtures;
+the copied ordered outbox/overflow/off-producer/cancellation-join test passes.
+Connect reproduces exit 1 with RPC status 1817 (no registered interfaces) and
+the server handle still unsignalled, recorded at 15:17:50 UTC. Source tracing
+shows the empty timer claims stopping before RpcServerUnregisterIf completes;
+the test had removed its only client before pausing for eleven seconds.
+This supports an empty-service retirement race, not an ordinary-call timeout.
+
+For connect/bootstrap only, the fixture now starts an exact same-image child
+that creates a real authenticated client context and holds it until an explicit
+test release event. This prevents the approved empty-service policy competing
+with the connection contract. No product keeper, retry or transport is added.
+The child is joined and checked before test cleanup; all other scenarios are
+unchanged. Background controller 25156 runs r36c connect/disconnect/loss/
+bootstrap/reply against the unchanged sealed r36 package. Comparison results
+remain pending; retaining the client does not itself prove the diagnosis.
+
+r36c completes successfully 15:20:16 UTC (start 15:19:15 UTC): connect,
+disconnect, actual service loss, bootstrap and reply all pass. The only change
+for the failed connect comparison is retaining a genuine client while the
+caller reconnects, supporting the empty-service race attribution. No product
+timeout or idle-policy relaxation was used. These five tests exercise the
+sealed r36 binaries, not the later DOS-observation drain change.
+
+Add observer-unit coverage of a publisher exiting with pending facts: drain
+must return ERROR_OPERATION_ABORTED rather than successful delivery. Latest
+full-package r37 build/incremental controller PID 35624 starts after the r36
+build and fixture compilation have completed. Serial controller 21564 waits
+for it, then runs service38, observer unit, same-package RPC-five, four migrated
+admission cases, wire/bootstrap/workerless-park cases, DOS17, independent WOW
+frontiers, internal CAF-three and negative completion/startup checks followed
+by governance. Logs are build-r37*, all-r37* and referenced per-group records
+under build/t448-s3. Any failed group stops progression; this controller does
+not publish. No completion or delivery is inferred from starting it.
+
+r37 full/incremental passes at 15:23:32 UTC; service38 passes at 15:23:53 UTC,
+and the extended observer unit passes including publisher exit with undelivered
+facts. Independent idle-boundary controller 24800 passes at 15:24:42 UTC:
+exact five seconds, no renewal, before/at expiry, Connect cancellation,
+occupied-service rearm, stopping and overflow. The test now checks literal
+five-second boundaries rather than inheriting the production constant.
+
+Serial r37 stops at loss at 15:24:48 UTC after reply/connect/disconnect pass.
+Actual result is RPC_S_CALL_FAILED (1726), followed by a signalled service
+process; r36c had observed ERROR_INVALID_HANDLE (6). The client's source only
+normalizes to 6 once the authenticated process is signalled, so asynchronous
+RPC failure can legitimately precede that observation. Split the assertion:
+initial failed call must be 6 or the observed 1726 (never success/timeout), and
+after confirmed process death both Failure(actual_error) and Failure(0) must
+equal 6. This preserves the confirmed-loss contract and avoids imposing a
+new scheduler ordering; no production behavior changes for this result.
+
+RPC r37b controller 38564 recompiles the test and repeats all five cases
+against sealed package-r37. Controller 11808 waits for its successful result
+before resuming four migrated cases, wire/bootstrap/park, real DOS/WOW/CAF,
+negative results and governance with fresh r37b reports. Earlier r37 failure
+evidence remains; unchanged product hashes reuse r37 full-build evidence.
+The active plan/proposal now explicitly remove stale transaction-deadline
+clauses rather than relying only on a superseding introductory paragraph.
+
+### Service-death and peer-I/O failure audit checkpoint
+
+RPC r37b five cases and migration r37b four cases pass. r37c controller 32476
+terminates unsuccessfully at 15:29:14 UTC: the wire runner still supplies retired
+workerless-grace/workerless-cancel case names to the migrated ValidateSet. This
+is a harness invocation error, not a product pass or failure. Management128,
+frontend-control75 and worker-control163 pass before that invocation failure.
+Replace those runner arguments with workerless-park/worker-loss-park. Fresh
+r37d controller 31340 runs the unchanged sealed package-r37 serially, using
+resume-r37c.ps1 -Round r37d; stdout/stderr and final result are all-r37d under
+build/t448-s3. It must not publish or overwrite previous evidence.
+
+Owner's service-death clarification is now explicit in the proposal. Source
+review finds NTVWM input_failure/presentation_pump -> request_fault_exit ->
+worker_base_request_exit -> service RequestWorkerExit -> management arbitration;
+the participant waits for a service instruction or authenticated process death.
+It does not rediscover the frontend after a broken transport. This is source
+evidence, not yet a full fault-injection proof of every error branch.
+
+NTCON is NOT equivalent: session_service.c frontend_pump returns
+ERROR_PIPE_NOT_CONNECTED when its channel exits without an authorized release;
+main.c session_entry consumes that result, calls frontend_service_close,
+FrontendConsoleRestored and DisconnectCurrent, then returns to wmain. The
+ConsoleRestored provider only acknowledges restoration (and rejects draining);
+it does not authorize this unexpected exit. This is a confirmed S3 lifecycle
+ownership gap. Required repair: report failure through existing RPC/service
+arbitration, stop failed I/O, and obtain service disposition before retirement;
+confirmed service death alone takes the local terminal path. Validate both
+peer-loss directions and no reconnect to a replacement service. No runtime
+repair or publication is claimed by this audit checkpoint.
+
+### Candidate participant-fault disposition (protocol 61)
+
+r37d finishes successfully at 15:37:55 UTC, including the sealed protocol-60
+package's wire/park, runtime, CAF self-delete/echo, startup rejection and native
+failure cases. This does not validate the subsequent protocol-61 edits.
+
+Generalize the existing authenticated RequestWorkerExit RPC to
+RequestParticipantExit (same parameters, no additional transport). The service
+derives worker versus frontend identity from its connection, never caller-sent
+role or a supplied target PID, then invokes existing management arbitration.
+NTCON's fault path reports once and waits for service-selected return/final
+close or actual service death. Normal and faulted paths share one retirement
+handler. Failed report/restore does not authorize exit, retry or a false
+acknowledgement. Full failure disposition when restoration itself is impossible
+remains a coverage/design-review item, not a demonstrated successful handoff.
+
+Service fixtures extend competing worker/Console close cases with frontend
+self-report, stale generation rejection and idempotent repeated requests.
+frontend_scope_lifetime_test adds four production-pump unit cases: withheld
+permission, ordered return/final close, actual loss notification, rejected
+report and failed restore. The service/process handles are substituted with
+events in this unit test; it does not prove real RPC or process-death wiring.
+
+Background controller 25756, verify-r38.ps1, waits for controller 31340 before
+building the complete protocol-61 package/incremental and running service and
+frontend scope fixtures. Logs fault-r38.out/.err, build-r38*, verify-r38*.
+The initially invoked script contains an incorrect launcher fixture path;
+the saved script is corrected to the actual x86 worker graph. If the running
+parsed script retains the old path, record its invocation failure and run the
+fixture separately without repeating a successful full build. No publication.
+
+r38 stops in the first x86 build at 15:39:46 UTC: the interface version changed
+to 61 but four generated-interface symbol references still named v60_0.
+Update client interface inquiry, service register/unregister and the identity
+fixture to v61_0; no ABI fallback is added. Fresh controller 36080 runs
+verify-r38.ps1 -Round r38b with corrected paths and retained cache. Evidence
+fault-r38b*, build-r38b*, verify-r38b* remains pending; no successful build or
+delivery is claimed for r38.
+
+Symmetric source sweep additionally finds that NTVDM console_client send_video
+returns transport failure to publication, which records the failure and ends
+the publication thread without reporting participant intent. The generic
+common Console client intentionally only latches/returns transport errors.
+The NTVDM executable's lifecycle watch currently receives service instructions
+and service death, but has no local I/O-fault report input. This missing
+NTVDM-owner binding belongs to the same S3 fault chain, not S4 polling work.
+Retain the generic transport boundary: do not make common own lifecycle or
+inject an executable-specific policy into the common client. Before wiring,
+trace both synchronous Console API errors and asynchronous publication/input
+errors to choose one executable-owned report path without holding I/O locks
+across teardown or changing ordinary API parameter-error semantics.
+
+r38b completes successfully at 15:44:26 UTC: complete thirteen-image build,
+second incremental (1414 intermediate inventory), service cases and the expanded
+frontend scope fixture pass. This is candidate build/unit evidence, not deployed
+product or actual fault-RPC acceptance.
+
+The NTVDM binding is now implemented using a borrowed local failure event in
+the existing common Console client. Sticky transport/framing failures notify
+that event; ordinary server-operation and argument errors retain API returns.
+NTVDM owns a duplicate for its I/O lifetime, so lifecycle-watch destruction
+cannot leave a reused/closed handle in a producer. Rebinding a service-authorized
+new I/O channel reattaches the same local notification. The existing independent
+NTVDM lifecycle watcher submits participant intent once, without rearming the
+fault notification, while retaining Console/worker close reception. This adds
+no thread, timer, cross-process event or communication transport. WOW allocates
+no character-I/O fault event. Common knows no service policy or executable role.
+Input-watch failure uses the same latch; synchronous invalid framing and
+asynchronous video transport share the common notification.
+
+console_client_test now verifies real broken-pipe I/O and an asynchronous video
+send failure, with substituted service acceptance deliberately withholding a
+close instruction. Repeated I/O failures must report once and leave the worker
+alive. Existing WOW/service-loss entry checks remain separate. These are
+production-linked owner/transport tests, not real service/guest acceptance.
+Background controller 33504 runs verify-r39.ps1: full/incremental build,
+service fixtures, frontend scope and isolated Console-client cases. Evidence
+io-r39*, fault-r39*, build-r39*, verify-r39* is pending; no publication yet.
+
+r39 controller 33504 completes successfully at 15:50:42 UTC. Full/thirteen
+images and second incremental pass, as do service fixtures, frontend scope,
+real Console transport broken-pipe and asynchronous broken-video assertions,
+independent WOW close reception and service-loss cleanup-entry checks. Service
+decisions in these owner fixtures are substituted; they do not prove RPC wiring.
+
+Add a distinct frontend-io-fault real-RPC case to the existing admitted VDM
+fixture: a test carrier gets the original first command then deliberately
+closes its admitted pipe while staying alive. Actual NTCON must report the EOF
+to actual NTSRV and prepare return; the carrier waits for a real Console-close
+instruction, verifies NTSRV and NTCON are still alive, then honors that order.
+The parent requires both carrier and NTCON exit with NTSRV still alive. This
+is a test carrier, not guest execution. The original normal admission fixture
+previously closed the pipe before exercising commands; it now retains the
+lease and performs the real pause/release-begin/physical-close/released sequence.
+This removes an unintended fault from its positive-path contract, not an
+assertion relaxation; duplicate acquisition/rights and original exit 7 remain.
+
+Controller 27552 runs all-r39.ps1: seal package-r39 from exact thirteen build
+hashes, observer outbox, five real RPC wait/loss/bootstrap cases, five migration
+cases including the new EOF route, wire/bootstrap/park, runtime DOS17 and
+independent WOW frontiers plus CAF-three, negative results and governance.
+Evidence all-r39*, rpc-r39*, migration-r39*, wire-r39*, runtime-r39* is pending.
+No publication starts automatically. All source modifications remain local.
+
+r39 intermediate verification: rpc-r39-result passes at 15:53:26 UTC;
+migration-r39-result passes at 15:53:47 UTC; wire-r39-result passes at
+15:54:38 UTC. The migration group includes actual frontend-io-fault and the
+repaired normal admitted-vdm case. Runtime regression remains in progress;
+these results do not prove the unfinished runtime gates or S3 host-exit closure.
+Supplemental controller 25592 (post-verify.ps1 -Round r39 -PriorPid 27552)
+waits for the serial controller before native-completion, presentation and
+governance checks. Both controllers were verified alive during observation.
+
+Remove the obsolete execution-rule demand for generic ten-second lifecycle
+tests/-FullDeadlines. The rule now links the architecture's approved policies
+and separates diagnostic budgets from product deadlines; no production input
+or running test is changed by this documentation correction.
+
+runtime-r39-result passes at 15:57:31 UTC: WRITE frontier, DOS17, WINMINE,
+SOL and CAF-three using package-r39. The serial log explicitly records actual
+NTMON self-delete with active-buffer echo before Enter. extra-r39-result passes
+at 15:57:40 UTC for native worker failure and completed-worker loss. Serial
+stdout also reports startup-rejections and native-io-error assertions passed.
+Final controller/governance and supplemental results remain pending at this
+checkpoint; no publication or S3 closure is claimed. These runtime observations
+do not resolve the separately recorded original-host exit-permission gap.
+
+Both controllers subsequently finish successfully: all-r39-result at
+15:58:02 UTC and post-r39-result at 15:58:34 UTC. The supplemental run passes
+native-completion and isolated presentation assertions plus documentation and
+diff gates. Neither controller remains live. The candidate still requires
+final source review, coherent publication and commit/push; these successful
+gates do not close the outstanding S3 source-exit inventory.
+
+### P16 reviewed progress publication
+
+Final source review checks authenticated participant classification, generation
+re-resolution after dropping the service lock, shared management-close
+arbitration, one-shot fault notification without rearm, and independent duplicate
+event ownership until I/O producers have joined. NTCON does not resume failed
+I/O or acknowledge failed restoration. Service death remains distinct from
+submission failure. The existing input watcher carries NTVDM notification;
+no thread, timer or additional cross-process transport is introduced.
+
+Controller 34616 runs deliver-r39.ps1 (fresh review-r39final gate followed by
+publish-r8.ps1 -Round r39 -ReviewRound r39final -BuildRound r39 -Package
+package-r39). It finishes publication at 2026-10-21 16:00:37 UTC. All thirteen
+images match the tested build hashes at assets/release and O:/winnt/system32;
+publication-r39.json records the full set. Prior installed and committed assets
+plus manifest are backed up in publication-r39-backup. Read-only discovery found
+no installed component or Hook/style DLL holder requiring termination.
+
+Before recording this delivery, diff accounting including the new RPC-wait
+test is: production/non-Markdown source +268/-345 (net -77), tests +470/-568
+(net -98), combined net -175. Documentation is counted separately and includes
+retained failed-attempt evidence. OpenNT and guest/media diff remains zero.
+The existing NTCON kvm-base join-limit exception changes two lines each way,
+with updated README and import hash; it adds no mirror lines or new API.
+
+This is P16 progress, not S3 closure: L08 original-host exit permission and
+the remaining startup/partial-initialization inventory still need source-led
+implementation and coverage. S4 polling audit has not begun. Commit/push and
+clean-tree identity will be verified separately after the final documentation
+gate; no owner acceptance is implied by publication.

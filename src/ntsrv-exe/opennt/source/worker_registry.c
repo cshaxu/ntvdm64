@@ -213,7 +213,7 @@ DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *connection,
             if(registered_root->process.SequenceNumber==root_generation)
                 {error=service_bind_worker_root(connection->service,connection->process.ProcessHandle,registered_root);
                  if(error)goto done;
-                 registered_root->frontend_admission_deadline=0;break;}
+                 break;}
         }
     }
     /* A native backend has now installed worker-base's command/control
@@ -708,7 +708,6 @@ DWORD OpenNtBaseServiceStartNativeWorker(OPENNT_BASE_CONNECTION *connection,DWOR
     WCHAR image[MAX_PATH],command[MAX_PATH+3];
     STARTUPINFOW startup={sizeof(startup)};
     uint64_t reservation=0;DWORD error;BOOL text;
-    ULONGLONG deadline=GetTickCount64()+OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS;
     if(!worker || !OpenNtBaseNativeLaunchTypeIsValid(native_type))return ERROR_INVALID_PARAMETER;
     *worker=NULL;
     if(!connection || !OpenNtBaseServicePeer(connection,pid,generation))return ERROR_ACCESS_DENIED;
@@ -718,17 +717,14 @@ DWORD OpenNtBaseServiceStartNativeWorker(OPENNT_BASE_CONNECTION *connection,DWOR
      * starts another carrier while the authenticated reservation is pending. */
     EnterCriticalSection(&connection->service->lock);
     for(;;) {
-        ULONGLONG now;
         if(text) {
             error=OpenNtBaseServiceSelectNativeWorker(connection,pid,generation,worker);
             if(error!=ERROR_NOT_FOUND)break;
         }
         error=OpenNtBaseServiceCreateNativeReservation(connection,pid,generation,native_type,&reservation);
         if(error!=ERROR_ALREADY_EXISTS || !text)break;
-        now=GetTickCount64();
-        if(now>=deadline){error=ERROR_TIMEOUT;break;}
         if(!SleepConditionVariableCS(&connection->service->frontend_changed,
-            &connection->service->lock,(DWORD)(deadline-now))){error=GetLastError();break;}
+            &connection->service->lock,INFINITE)){error=GetLastError();break;}
     }
     if(!error)connection->native_request_type=native_type;
     LeaveCriticalSection(&connection->service->lock);

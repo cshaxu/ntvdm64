@@ -51,7 +51,7 @@ DWORD common_rpc_native_startup_result(const common_rpc_connection *state,
     }
     RpcExcept(1) {error=RpcExceptionCode();}
     RpcEndExcept
-    return common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    return common_rpc_end_async(&async,error,NULL,INFINITE);
 }
 
 DWORD common_rpc_complete_native_command(const common_rpc_connection *state,
@@ -67,7 +67,7 @@ DWORD common_rpc_complete_native_command(const common_rpc_connection *state,
     }
     RpcExcept(1) {error=RpcExceptionCode();}
     RpcEndExcept
-    return common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    return common_rpc_end_async(&async,error,NULL,INFINITE);
 }
 
 DWORD common_rpc_submit_native_request(const common_rpc_connection *state,DWORD operation,HANDLE frontend,
@@ -87,7 +87,7 @@ DWORD common_rpc_submit_native_request(const common_rpc_connection *state,DWORD 
     }
     RpcExcept(1){error=RpcExceptionCode();}
     RpcEndExcept
-    error=common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    error=common_rpc_end_async(&async,error,NULL,INFINITE);
     if(error) {
         if(*target)CloseHandle(*target);
         if(*receipt)CloseHandle(*receipt);
@@ -112,7 +112,7 @@ DWORD common_rpc_finish_native_request(const common_rpc_connection *state,DWORD 
     RpcExcept(1){error=RpcExceptionCode();}
     RpcEndExcept
     if(!error)error=common_rpc_finish_async(&async,async.u.hEvent,NULL,
-        OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS,&reply);
+        INFINITE,&reply);
     CloseHandle(async.u.hEvent);
     /* A real application-error reply can still carry a consumed exit result.
      * Only failed transport invalidates those outputs. Never replay consumption. */

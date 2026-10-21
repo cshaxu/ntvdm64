@@ -1,5 +1,6 @@
 /* Worker-local transport only. No native Console presentation or guest policy. */
 #include "console_client.h"
+#include "worker_lifecycle.h"
 #include "console_text.h"
 #include "console_geometry.h"
 #include "worker-base/publication.h"
@@ -33,7 +34,7 @@ static BOOL decode_input(const console_io_input *wire,INPUT_RECORD *record)
 typedef struct console_client {
     session *owner;
     ntcon_worker_client channel;
-    HANDLE ready,stop,shutdown;
+    HANDLE ready,stop,shutdown,failure_event;
     worker_base_input_watch *input_watch;
     HANDLE capability,input_identity,output_identity;
     CRITICAL_SECTION lock;
@@ -48,6 +49,13 @@ typedef struct console_client {
 } console_client;
 static DWORD console_activate(console_client *,BOOL);
 static console_client *output_client(HANDLE);
+static void console_input_failed(void *context,DWORD error)
+{
+    console_client *client=context;
+    EnterCriticalSection(&client->lock);
+    (void)ntcon_worker_client_fail(&client->channel,error);
+    LeaveCriticalSection(&client->lock);
+}
 static DWORD send_video(void *context,const console_video_description *description,const void *pixels)
 {
     console_client *client=context;DWORD error;
@@ -197,6 +205,7 @@ static void console_client_end(void *context)
     worker_base_input_watch_destroy(client->input_watch);
     CloseHandle(client->channel.pipe);CloseHandle(client->channel.peer);
     ntcon_worker_client_dispose(&client->channel);
+    if(client->failure_event)CloseHandle(client->failure_event);
     CloseHandle(client->ready);
     if (client->capability) CloseHandle(client->capability);
     if (client->stop) CloseHandle(client->stop);
@@ -237,6 +246,9 @@ DWORD ntvdm_console_client_begin(session *owner)
     error=ntcon_worker_client_init(&client->channel,client->channel.pipe,
         client->channel.peer,NULL,client->channel.generation);
     if(error){console_client_end(client);return error;}
+    error=ntvdm_worker_lifecycle_fault_event(&client->failure_event);
+    if(error){console_client_end(client);return error;}
+    client->channel.failure_event=client->failure_event;
     client->stop=CreateEventW(NULL,TRUE,FALSE,NULL);
     client->input_identity=CreateEventW(NULL,TRUE,FALSE,NULL);
     client->output_identity=CreateEventW(NULL,TRUE,FALSE,NULL);
@@ -251,7 +263,7 @@ DWORD ntvdm_console_client_begin(session *owner)
     error=ntvdm_console_graphics_attach_publisher(client->graphics,client->publisher);
     if(error){console_client_end(client);return error;}
     client->input_watch=worker_base_input_watch_create(NULL,NULL,client->stop,
-        NULL,NULL,NULL,NULL,client);
+        NULL,NULL,NULL,console_input_failed,client);
     error=client->input_watch ? console_activate(client,TRUE) : GetLastError();
     if (!error && !session_register_teardown(owner,console_client_end,client))error=ERROR_NOT_ENOUGH_MEMORY;
     if (error) {
@@ -342,6 +354,7 @@ static DWORD console_activate(console_client *client,BOOL active)
             &client->channel.generation);
         if(!error)error=ntcon_worker_client_init(&client->channel,client->channel.pipe,
             client->channel.peer,client->stop,client->channel.generation);
+        if(!error)client->channel.failure_event=client->failure_event;
     }
     if(!active && client->channel.pipe) {
         console_io_request barrier={0};console_io_reply reply;
@@ -381,7 +394,7 @@ static DWORD console_activate(console_client *client,BOOL active)
         if(error) {
             DWORD release=console_activate(client,FALSE);
             if(!release)ZeroMemory(&client->mouse,sizeof(client->mouse));
-            else client->channel.failure=release; /* Failed return is not reusable. */
+            else (void)ntcon_worker_client_fail(&client->channel,release);
         }
     }
     /* Unlike IRQ cancellation, successful DOS ownership handoff retires the
@@ -687,7 +700,7 @@ BOOL WINAPI MvdmWriteConsoleA(HANDLE output,const VOID *buffer,DWORD length,
         error=exchange(client,&reply);
         if (!error && reply.state.count>chunk)
             error=ERROR_INVALID_DATA;
-        if (error) { client->channel.failure=error;break; }
+        if (error) { (void)ntcon_worker_client_fail(&client->channel,error);break; }
         total+=reply.state.count;
         if (!reply.result) { result=FALSE;error=reply.error;break; }
         if (reply.state.count!=chunk) break;
@@ -918,7 +931,7 @@ static BOOL cells_operation(console_client *client,BOOL write,BOOL wide,CHAR_INF
                 (reply.state.right>=reply.state.left && reply.state.bottom>=reply.state.top &&
                  (reply.state.left<s->left || reply.state.right>s->right ||
                   reply.state.top<s->top || reply.state.bottom>s->bottom))) {
-                error=client->channel.failure=ERROR_INVALID_DATA;ok=FALSE;break;
+                error=ntcon_worker_client_fail(&client->channel,ERROR_INVALID_DATA);ok=FALSE;break;
             }
             if (reply.state.right<reply.state.left || reply.state.bottom<reply.state.top) continue;
             if (first) {
@@ -996,12 +1009,12 @@ static BOOL input_operation(HANDLE input,INPUT_RECORD *records,DWORD length,LPDW
     if (!error && !ok) error=reply.error;
     if (ok && (reply.state.count>client->request.state.count ||
         reply.bytes!=reply.state.count*sizeof(console_io_input))) {
-        error=client->channel.failure=ERROR_INVALID_DATA;ok=FALSE;
+        error=ntcon_worker_client_fail(&client->channel,ERROR_INVALID_DATA);ok=FALSE;
     }
     for (i=0;ok && i<reply.state.count;i++) {
         console_io_input wire;
         memcpy(&wire,reply.data+i*sizeof(wire),sizeof(wire));
-        if (!decode_input(&wire,&records[i])) { error=client->channel.failure=ERROR_INVALID_DATA;ok=FALSE; }
+        if (!decode_input(&wire,&records[i])) { error=ntcon_worker_client_fail(&client->channel,ERROR_INVALID_DATA);ok=FALSE; }
     }
     if (ok) *read=reply.state.count;
     if (ok) {

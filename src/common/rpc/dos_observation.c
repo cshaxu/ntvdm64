@@ -20,5 +20,5 @@ DWORD common_rpc_observe_dos_event(const common_rpc_connection *state,
     }
     RpcExcept(1) {error=RpcExceptionCode();}
     RpcEndExcept
-    return common_rpc_end_async(&async,error,stop,10000);
+    return common_rpc_end_async(&async,error,stop,INFINITE);
 }

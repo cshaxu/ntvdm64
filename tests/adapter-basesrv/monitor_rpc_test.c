@@ -241,8 +241,20 @@ static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
     CHECK(connection);
     RPC_CHECK(test_rpc_disconnect(binding,self,generation,&connection),ERROR_SUCCESS);
     CHECK(!connection);
-    /* Launcher disconnect does not revoke a live root. Observe the broker's
-     * real workerless retirement before asserting stale-context rejection. */
+    /* Launcher disconnect does not revoke a live root. Request its explicit
+     * management close; no workerless-expiry policy retires it for this test. */
+    CHECK(WaitForSingleObject(root,0)==WAIT_TIMEOUT);
+    {
+        common_rpc_management management={binding,self};
+        DTASKMGR_WORKER *items=NULL;ULONG count=0,index;
+        RPC_CHECK(common_rpc_task_snapshot(&management,&count,&items),ERROR_SUCCESS);
+        for(index=0;index<count;++index)
+            if(items[index].key.category==MANAGEMENT_FRONTEND &&
+                items[index].process_id==GetProcessId(root))break;
+        CHECK(index<count);
+        error=common_rpc_close_management_node(&management,&items[index].key);
+        MIDL_user_free(items);CHECK(!error);
+    }
     CHECK(WaitForSingleObject(root,15000)==WAIT_OBJECT_0);
     RPC_CHECK(test_rpc_connect(binding,self,APP_PROTOCOL_VERSION,(unsigned char *)version,
         &server_protocol,server_version,&connection,&generation),ERROR_SUCCESS);

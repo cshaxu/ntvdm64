@@ -9,10 +9,28 @@ extern VOID TerminateVDM(VOID);
 extern UINT VdmExitCode;
 static struct {
     session *owner;
-    HANDLE stop,console_close,worker_close;
+    HANDLE stop,console_close,worker_close,fault;
     worker_base_input_watch *watch;
     volatile LONG closing;
 } lifecycle;
+
+DWORD ntvdm_worker_lifecycle_fault_event(HANDLE *event)
+{
+    if(!event)return ERROR_INVALID_PARAMETER;
+    *event=NULL;
+    if(!lifecycle.fault)return ERROR_INVALID_STATE;
+    return DuplicateHandle(GetCurrentProcess(),lifecycle.fault,GetCurrentProcess(),
+        event,EVENT_MODIFY_STATE,FALSE,0) ? ERROR_SUCCESS : GetLastError();
+}
+static DWORD report_io_fault(void *context)
+{
+    (void)context;
+    if(!InterlockedCompareExchange(&lifecycle.closing,0,0))
+        (void)worker_base_request_exit();
+    /* Do not acknowledge/rearm this local fault. The watcher still receives
+     * service close instructions; submission never grants local teardown. */
+    return ERROR_SUCCESS;
+}
 
 static DWORD WINAPI close_console(void *context)
 {
@@ -35,7 +53,7 @@ static void console_instruction(void *context)
 {
     if(InterlockedCompareExchange(&lifecycle.closing,1,0))return;
     worker_base_shutdown_close(close_console,context,
-        OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS,CONTROL_C_EXIT,NULL);
+        OPENNT_LIFECYCLE_GRACE_MS,CONTROL_C_EXIT,NULL);
 }
 static void worker_instruction(void *context)
 {
@@ -58,6 +76,7 @@ void ntvdm_worker_lifecycle_end(void)
     if(lifecycle.stop)CloseHandle(lifecycle.stop);
     if(lifecycle.console_close)CloseHandle(lifecycle.console_close);
     if(lifecycle.worker_close)CloseHandle(lifecycle.worker_close);
+    if(lifecycle.fault)CloseHandle(lifecycle.fault);
     ZeroMemory(&lifecycle,sizeof(lifecycle));
 }
 DWORD ntvdm_worker_lifecycle_begin(session *owner,BOOL character_io)
@@ -73,11 +92,17 @@ DWORD ntvdm_worker_lifecycle_begin(session *owner,BOOL character_io)
     if(character_io) {
         error=worker_base_console_close_event(&lifecycle.console_close);
         if(error)goto fail;
+        lifecycle.fault=CreateEventW(NULL,TRUE,FALSE,NULL);
+        if(!lifecycle.fault){error=GetLastError();goto fail;}
     }
     lifecycle.watch=worker_base_input_watch_create(lifecycle.console_close,
-        lifecycle.worker_close,lifecycle.stop,NULL,console_instruction,
+        lifecycle.worker_close,lifecycle.stop,report_io_fault,console_instruction,
         worker_instruction,NULL,owner);
     if(!lifecycle.watch){error=GetLastError();goto fail;}
+    if(lifecycle.fault) {
+        error=worker_base_input_watch_bind(lifecycle.watch,lifecycle.fault);
+        if(error)goto fail;
+    }
     error=worker_base_watch_service(service_lost,owner);
     if(error)goto fail;
     return ERROR_SUCCESS;

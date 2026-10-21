@@ -25,7 +25,7 @@ DWORD worker_base_shutdown_event(HANDLE *shutdown)
 }
 
 DWORD worker_base_request_exit(void)
-{ return OpenNtBaseClientRequestWorkerExit(); }
+{ return OpenNtBaseClientRequestParticipantExit(); }
 
 DWORD worker_base_console_close_event(HANDLE *close)
 {

@@ -12,6 +12,7 @@
 #include "run16-exe/native_request_client.h"
 #include "common/protocol/console_io.h"
 #include "common/protocol/frontend_protocol.h"
+#include "common/protocol/frontend_lifecycle.h"
 #include "common/rpc/management.h"
 #include "common/protocol/management.h"
 #include <base_rpc_client_internal.h>
@@ -82,6 +83,8 @@ static NTSTATUS set_reenter_count(ULONG state)
 static int admitted_vdm_child(void)
 {
     CHAR command[1024]={0};WCHAR name[128];HANDLE released,first_wait=NULL;
+    HANDLE lease_pipe=NULL,lease_frontend=NULL,lease_ready=NULL;
+    BOOL io_fault=GetEnvironmentVariableW(L"NTVDM_RPC_TEST_IO_FAULT",name,ARRAYSIZE(name))!=0;
     unsigned index;
     REQUIRE(GetEnvironmentVariableW(L"NTVDM_RPC_TEST_RELEASE",name,ARRAYSIZE(name)));
     released=OpenEventW(SYNCHRONIZE,FALSE,name);REQUIRE(released);
@@ -98,7 +101,9 @@ static int admitted_vdm_child(void)
         REQUIRE(!SetEvent(capability) && GetLastError()==ERROR_ACCESS_DENIED);
         REQUIRE(!OpenNtBaseClientRetainFrontendRoot(capability,&root,&root_generation));
         REQUIRE(root_generation==generation && GetProcessId(root)==GetProcessId(frontend));
-        CloseHandle(root);CloseHandle(capability);CloseHandle(pipe);CloseHandle(frontend);CloseHandle(ready);
+        CloseHandle(root);CloseHandle(capability);
+        lease_pipe=pipe;lease_frontend=frontend;lease_ready=ready;
+        pipe=frontend=ready=NULL;
         REQUIRE(OpenNtBaseClientTakeFrontend(&pipe,&frontend,&generation,&ready)==ERROR_ALREADY_EXISTS);
         REQUIRE(!pipe && !frontend && !generation && !ready);
         REQUIRE(OpenNtBaseClientWaitFrontend(&pipe,&frontend,&generation,&ready)==ERROR_ALREADY_EXISTS);
@@ -106,6 +111,21 @@ static int admitted_vdm_child(void)
     }
     REQUIRE(get_first_command(command,sizeof(command))==STATUS_SUCCESS);
     REQUIRE(!lstrcmpA(command,"MEM\\r\\n"));
+    if(io_fault) {
+        HANDLE close=NULL,broker=NULL;
+        REQUIRE(!OpenNtBaseClientWorkerConsoleCloseEvent(&close));
+        REQUIRE(WaitForSingleObject(close,0)==WAIT_TIMEOUT);
+        /* Deliberate unauthorised EOF: the real NTCON must report the fault,
+         * return its Console, then obtain NTSRV's worker-close instruction. */
+        CloseHandle(lease_pipe);lease_pipe=NULL;
+        REQUIRE(WaitForSingleObject(close,10000)==WAIT_OBJECT_0);
+        REQUIRE(!OpenNtBaseClientBrokerProcess(&broker));
+        REQUIRE(WaitForSingleObject(broker,0)==WAIT_TIMEOUT);
+        REQUIRE(WaitForSingleObject(lease_frontend,0)==WAIT_TIMEOUT);
+        CloseHandle(broker);CloseHandle(close);CloseHandle(lease_frontend);CloseHandle(lease_ready);
+        CloseHandle(released);OpenNtBaseClientDisconnectCurrent();
+        return 0; /* Test carrier honors the service's Console-close order. */
+    }
     REQUIRE(set_reenter_count(INCREMENT_REENTER_COUNT)==STATUS_SUCCESS);
     REQUIRE(report_task_exit()==STATUS_SUCCESS);
     for(index=0;index<3;++index) {
@@ -121,13 +141,21 @@ static int admitted_vdm_child(void)
         REQUIRE(WaitForSingleObject(first_wait,0)==WAIT_TIMEOUT);
     }
     REQUIRE(set_reenter_count(DECREMENT_REENTER_COUNT)==STATUS_SUCCESS);
+    {
+        DWORD decision=WORKER_IO_KEEP;
+        REQUIRE(!OpenNtBaseClientWorkerIoCheckpoint(WORKER_IO_CHECKPOINT_PAUSE,0,&decision));
+        REQUIRE(decision==WORKER_IO_RELEASE);
+        REQUIRE(!OpenNtBaseClientWorkerIoTransition(WORKER_IO_RELEASE_BEGIN));
+        CloseHandle(lease_pipe);CloseHandle(lease_frontend);CloseHandle(lease_ready);
+        REQUIRE(!OpenNtBaseClientWorkerIoTransition(WORKER_IO_RELEASED));
+    }
     REQUIRE(WaitForSingleObject(released,10000)==WAIT_OBJECT_0);
     CloseHandle(released);
     OpenNtBaseClientDisconnectCurrent();
     return 0;
 }
 
-static int admitted_vdm_parent(void)
+static int admitted_vdm_parent(BOOL io_fault)
 {
     BASE_API_MSG message={0};STARTUPINFOA startup={sizeof(startup)};
     CHAR command[]="MEM\\r\\n";WCHAR name[128],*environment,*end;
@@ -136,6 +164,7 @@ static int admitted_vdm_parent(void)
     swprintf_s(name,ARRAYSIZE(name),L"Local\\NTVDM-RPC-admitted-release-%lu",GetCurrentProcessId());
     released=CreateEventW(NULL,TRUE,FALSE,name);REQUIRE(released);
     REQUIRE(SetEnvironmentVariableW(L"NTVDM_RPC_TEST_RELEASE",name));
+    REQUIRE(SetEnvironmentVariableW(L"NTVDM_RPC_TEST_IO_FAULT",io_fault ? L"1" : NULL));
     REQUIRE(!OpenNtBaseClientConnectCurrent());
     REQUIRE(!OpenNtBaseClientStartFrontend((uint64_t)(UINT_PTR)GetConsoleWindow(),TRUE,
         &root,&capability,&restored));
@@ -154,16 +183,27 @@ static int admitted_vdm_parent(void)
     if(error)fprintf(stderr,"admitted VDM startup error=%lu\n",error);
     REQUIRE(!error && worker && parent);
     REQUIRE(!TerminateProcess(worker,99) && GetLastError()==ERROR_ACCESS_DENIED);
-    REQUIRE(WaitForSingleObject(parent,10000)==WAIT_OBJECT_0);
-    REQUIRE(BaseCheckForVDM(parent,&code) && code==7);
-    REQUIRE(SetEvent(released));
+    if(!io_fault) {
+        REQUIRE(WaitForSingleObject(parent,10000)==WAIT_OBJECT_0);
+        REQUIRE(BaseCheckForVDM(parent,&code) && code==7);
+        REQUIRE(SetEvent(released));
+    }
     REQUIRE(WaitForSingleObject(worker,10000)==WAIT_OBJECT_0);
     REQUIRE(GetExitCodeProcess(worker,&code) && !code);
+    if(io_fault) {
+        HANDLE broker=NULL;
+        REQUIRE(WaitForSingleObject(root,10000)==WAIT_OBJECT_0);
+        REQUIRE(!OpenNtBaseClientBrokerProcess(&broker));
+        REQUIRE(WaitForSingleObject(broker,0)==WAIT_TIMEOUT);
+        CloseHandle(broker);
+    }
     CloseHandle(parent);CloseHandle(worker);CloseHandle(released);
     CloseHandle(root);CloseHandle(capability);CloseHandle(restored);
     OpenNtBaseClientDisconnectCurrent();
     REQUIRE(SetEnvironmentVariableW(L"NTVDM_RPC_TEST_RELEASE",NULL));
-    puts("PASS service-admitted VDM: original command/reentry, repeated wait identity, wait-only worker, exact exit 7 and child assertions");
+    REQUIRE(SetEnvironmentVariableW(L"NTVDM_RPC_TEST_IO_FAULT",NULL));
+    puts(io_fault ? "PASS real frontend EOF reports to live NTSRV; Console-close instruction precedes carrier exit and frontend retirement" :
+        "PASS service-admitted VDM: original command/reentry, repeated wait identity, wait-only worker, exact exit 7 and child assertions");
     return 0;
 }
 
@@ -506,346 +546,147 @@ static int ntvwm_execution_rpc(void)
     return 0;
 }
 
-/* Exercise the public facade and its output contract, not a replacement RPC. */
-static DWORD worker_control_query(unsigned mode,HANDLE token)
-{
-    HANDLE output=NULL,peer=NULL,ready=NULL;DWORD generation=0,decision=WORKER_IO_KEEP,error;
-    switch(mode) {
-    case 22:
-        error=OpenNtBaseClientAcquireConsoleContext(token,&output);break;
-    case 23:return OpenNtBaseClientBindConsoleContext(token);
-    case 24:return OpenNtBaseClientRegisterNativeBackend(token);
-    case 25:
-        error=OpenNtBaseClientWorkerIoCheckpoint(WORKER_IO_CHECKPOINT_COMPLETE,42,&decision);break;
-    case 26:return OpenNtBaseClientWorkerIoTransition(WORKER_IO_ACQUIRE);
-    case 27:error=OpenNtBaseClientTakeFrontend(&output,&peer,&generation,&ready);break;
-    case 28:error=OpenNtBaseClientWaitFrontend(&output,&peer,&generation,&ready);break;
-    default:return ERROR_INVALID_PARAMETER;
-    }
-    if(output || peer || ready || generation || decision!=WORKER_IO_KEEP) {
-        if(output)CloseHandle(output);if(peer)CloseHandle(peer);if(ready)CloseHandle(ready);
-        return ERROR_INVALID_DATA;
-    }
-    return error;
-}
+/* Real RPC waits: elapsed time is not a failure except during explicitly
+ * bounded service bootstrap. Fault injection is confined to the test service. */
+typedef struct rpc_wait_test {
+    HANDLE entered;
+    const char *kind;
+    DWORD error;
+} rpc_wait_test;
 
-/* Each call reaches the same real RPC connection. Outputs must stay empty on
- * transport timeout, including StartVdmWorker's process-local receipt mapping. */
-static DWORD launch_control_query(unsigned mode,HANDLE token)
+static DWORD first_vdm_query(void)
 {
-    WCHAR environment[2]={0};BYTE payload=0;
-    HANDLE output=NULL,peer=NULL;DWORD value=0,completed=0,error;
-    switch(mode) {
-    case 29:error=OpenNtBaseClientSubmitNativeRequest(OPENNT_BASE_NATIVE_REQUEST_LAUNCH,
-        token,1,&payload,&output,&peer,&value);break;
-    case 30:error=OpenNtBaseClientFinishNativeRequest(42,&value,&completed);break;
-    case 31:error=OpenNtBaseClientStartVdmWorker(environment,2,SW_HIDE,token,&output,&peer);break;
-    case 32:error=OpenNtBaseClientStartNativeWorker(0,&output);break;
-    case 33:return OpenNtBaseClientCompleteNativeRequest(42,37,ERROR_WRITE_FAULT,0);
-    case 34:return OpenNtBaseClientNativeStartupResult(1,42,ERROR_ACCESS_DENIED,NULL,NULL);
-    case 35:return OpenNtBaseClientBindNativeTarget(42,GetCurrentProcess(),token);
-    case 36:error=OpenNtBaseClientRetainFrontendRoot(token,&output,&value);break;
-    case 37:return OpenNtBaseClientRequestFrontend(token);
-    default:return ERROR_INVALID_PARAMETER;
-    }
-    if(output || peer || value || completed) {
-        if(output)CloseHandle(output);if(peer)CloseHandle(peer);
-        return ERROR_INVALID_DATA;
-    }
-    return error;
-}
-
-/* Public original-command callers where their local prerequisites are available.
- * ExitCode/WowStartup require a previously admitted parent receipt; those two
- * plus rollback-only RevokeStream test the real wire without fabricating one
- * in the production client's private mapping. */
-static DWORD finite_control_query(unsigned mode)
-{
-    common_rpc_connection view=OpenNtBaseClientExecutionConnection(NULL);
-    common_rpc_management management={view.binding,view.process};
-    BASE_API_MSG message={0};STARTUPINFOA startup={sizeof(startup)};
-    CHAR command[128]="MEM\r\n";
-    HANDLE input=NULL,output=NULL,event=NULL;
-    ULONG number=0,length=0,value=0,count=0,coverage=0;
-    DWORD error=ERROR_INVALID_PARAMETER;
-    NTSTATUS status;
-    switch(mode) {
-    case 38:number=BasepIsFirstVDM;length=sizeof(message.u.IsFirstVDM);break;
-    case 39:case 45:case 46:
-        if(mode==45) {
-            output=CreateFileW(L"NUL",GENERIC_WRITE,FILE_SHARE_READ|FILE_SHARE_WRITE,
-                NULL,OPEN_EXISTING,0,NULL);
-            if(output==INVALID_HANDLE_VALUE)return GetLastError();
-        }
-        if(mode==46 && !CreatePipe(&input,&output,NULL,0))return GetLastError();
-        message.u.CheckVDM.ConsoleHandle=(HANDLE)1;
-        message.u.CheckVDM.BinaryType=BINARY_TYPE_DOS;
-        message.u.CheckVDM.CmdLine=command;message.u.CheckVDM.CmdLen=(USHORT)(strlen(command)+1);
-        message.u.CheckVDM.StartupInfo=&startup;message.u.CheckVDM.StdOut=output;
-        number=BasepCheckVDM;length=sizeof(message.u.CheckVDM);break;
-    case 40:
-        message.u.GetNextVDMCommand.VDMState=ASKING_FOR_FIRST_COMMAND;
-        message.u.GetNextVDMCommand.CmdLine=command;
-        message.u.GetNextVDMCommand.CmdLen=sizeof(command);
-        message.u.GetNextVDMCommand.StartupInfo=&startup;
-        number=BasepGetNextVDMCommand;length=sizeof(message.u.GetNextVDMCommand);break;
-    case 41:number=BasepExitVDM;length=sizeof(message.u.ExitVDM);break;
-    case 42:
-        message.u.UpdateVDMEntry.EntryIndex=UPDATE_VDM_PROCESS_HANDLE;
-        message.u.UpdateVDMEntry.BinaryType=BINARY_TYPE_DOS;
-        number=BasepUpdateVDMEntry;length=sizeof(message.u.UpdateVDMEntry);break;
-    case 44:
-        message.u.SetReenterCount.fIncDec=INCREMENT_REENTER_COUNT;
-        number=BasepSetReenterCount;length=sizeof(message.u.SetReenterCount);break;
-    case 48:number=BasepRegisterWowExec;length=sizeof(message.u.RegisterWowExec);break;
-    case 49:return OpenNtBaseClientWowStyle(1,&value);
-    case 50:return OpenNtBaseClientWowStarted(1);
-    case 52: {
-        DTASKMGR_WORKER *items=NULL;
-        error=common_rpc_task_snapshot(&management,&count,&items);
-        if(items)MIDL_user_free(items);
-        return count || items ? ERROR_INVALID_DATA : error;
-    }
-    case 53: {
-        DTASKMGR_KEY key={0};WORKER_TRACE_NODE *items=NULL;
-        error=common_rpc_worker_task_trace(&management,&key,&coverage,&count,&items);
-        if(items)MIDL_user_free(items);
-        return coverage || count || items ? ERROR_INVALID_DATA : error;
-    }
-    case 54: {
-        uint64_t node=0;
-        error=common_rpc_observe_native_creation_bounded(&management,GetCurrentProcess(),0,&node);
-        return node ? ERROR_INVALID_DATA : error;
-    }
-    case 43:case 47:case 51: {
-        RPC_ASYNC_STATE async;
-        error=common_rpc_begin_async(&async);if(error)return error;
-        RpcTryExcept {
-            if(mode==43)Client_ExitCode(&async,view.binding,view.connection,view.process,view.generation,1,&value);
-            else if(mode==47)Client_RevokeStream(&async,view.binding,view.connection,view.process,view.generation,1);
-            else Client_WowStartup(&async,view.binding,view.connection,view.process,view.generation,1,&event,&value);
-        }
-        RpcExcept(1){error=RpcExceptionCode();}
-        RpcEndExcept
-        error=common_rpc_end_async(&async,error,NULL,10000);
-        if(event)CloseHandle(event);
-        return event || value ? ERROR_INVALID_DATA : error;
-    }
-    default:return ERROR_INVALID_PARAMETER;
-    }
-    status=OpenNtBaseClientCallServer((PCSR_API_MSG)&message,NULL,
-        CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,number),length);
+    BASE_API_MSG message={0};
+    DWORD error;
+    NTSTATUS status=OpenNtBaseClientCallServer((PCSR_API_MSG)&message,NULL,
+        CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepIsFirstVDM),
+        sizeof(message.u.IsFirstVDM));
+    if(status==STATUS_SUCCESS && message.ReturnValue==STATUS_SUCCESS)return ERROR_SUCCESS;
     error=GetLastError();
-    if(input)CloseHandle(input);if(output)CloseHandle(output);
-    return status==STATUS_UNSUCCESSFUL && message.ReturnValue==(ULONG)STATUS_UNSUCCESSFUL ? error : ERROR_INVALID_DATA;
+    return error ? error : ERROR_INVALID_DATA;
 }
 
-static int frontend_deadline(unsigned mode)
+static DWORD WINAPI rpc_wait_call(void *context)
 {
-    DWORD (*events[])(HANDLE *)={OpenNtBaseClientWorkerFrontendCapability,
-        OpenNtBaseClientWorkerShutdownEvent,OpenNtBaseClientWorkerConsoleCloseEvent,
-        OpenNtBaseClientWorkerIoReleaseEvent};
-    BOOL worker_exit=mode==1;
-    BOOL startup=mode==3;
+    rpc_wait_test *test=context;
+    SetEvent(test->entered);
+    if(!strcmp(test->kind,"connect"))test->error=OpenNtBaseClientConnectCurrent();
+    else if(!strcmp(test->kind,"disconnect")) {
+        OpenNtBaseClientDisconnectCurrent();
+        test->error=ERROR_SUCCESS;
+    } else test->error=first_vdm_query();
+    return test->error;
+}
+
+static int rpc_wait_keeper(const char *ready_name,const char *release_name)
+{
+    HANDLE ready=OpenEventA(EVENT_MODIFY_STATE,FALSE,ready_name);
+    HANDLE release=OpenEventA(SYNCHRONIZE,FALSE,release_name);
+    DWORD error=ERROR_INVALID_HANDLE;
+    if(ready && release) {
+        error=OpenNtBaseClientConnectCurrent();
+        if(!error && (!SetEvent(ready) || WaitForSingleObject(release,INFINITE)!=WAIT_OBJECT_0))
+            error=GetLastError();
+    }
+    OpenNtBaseClientDisconnectCurrent();
+    if(ready)CloseHandle(ready);if(release)CloseHandle(release);
+    return (int)error;
+}
+
+static int rpc_wait_contract(const char *kind)
+{
     typedef LONG (NTAPI *PROCESS_CONTROL)(HANDLE);
     PROCESS_CONTROL suspend=(PROCESS_CONTROL)GetProcAddress(GetModuleHandleW(L"ntdll.dll"),"NtSuspendProcess");
     PROCESS_CONTROL resume=(PROCESS_CONTROL)GetProcAddress(GetModuleHandleW(L"ntdll.dll"),"NtResumeProcess");
-    HANDLE root=NULL,capability=NULL,restored=NULL,server=NULL,control=NULL,frontend_control=NULL;
-    HANDLE pipe_read=NULL,pipe_write=NULL;
-    DWORD error,input_mode=0;ULONGLONG began,elapsed;int result=1;BOOL paused=FALSE,frontend_paused=FALSE;
-    /* Workers keep their shared connection after an individual report times
-     * out. Launchers instead latch their bounded finalization failure. Match
-     * those actual production connection entries, not one policy for both. */
-    if(!suspend || !resume || (worker_exit ? OpenNtBaseClientConnectCurrent() :
-        OpenNtBaseClientConnectCurrentTimeout(10000)))goto done;
+    HANDLE server=NULL,control=NULL,thread=NULL;
+    HANDLE keeper_ready=NULL,keeper_release=NULL;
+    PROCESS_INFORMATION keeper={0};STARTUPINFOA startup={sizeof(startup)};
+    rpc_wait_test test={0};
+    BOOL paused=FALSE,bootstrap=!strcmp(kind,"bootstrap"),loss=!strcmp(kind,"loss");
+    DWORD error;ULONGLONG began,elapsed;int result=1;
+    if(strcmp(kind,"reply") && strcmp(kind,"connect") && strcmp(kind,"disconnect") &&
+        !bootstrap && !loss)return 2;
+    if(!suspend || !resume || OpenNtBaseClientConnectCurrent())goto done;
     if(OpenNtBaseClientBrokerProcess(&server))goto done;
-    if(mode>=18 && mode<=21) {
-        HANDLE event=(HANDLE)1;
-        /* Notifications require an admitted worker identity. */
-        if(events[mode-18](&event)!=ERROR_ACCESS_DENIED || event)goto done;
-    }
-    if(mode>=22 && mode<=28) {
-        DWORD expected=mode==24 ? ERROR_INVALID_STATE : ERROR_ACCESS_DENIED;
-        capability=CreateEventW(NULL,TRUE,FALSE,NULL);
-        if(!capability)goto done;
-        error=worker_control_query(mode,capability);
-        printf("worker control %u unadmitted=%lu expected=%lu\n",mode,error,expected);
-        if(error!=expected)goto done;
-    }
-    if(mode>=29) {
-        capability=CreateEventW(NULL,TRUE,FALSE,NULL);
-        if(!capability)goto done;
-    }
-    if(mode==9 && !GetConsoleMode(GetStdHandle(STD_INPUT_HANDLE),&input_mode))goto done;
-    if(!worker_exit && !startup && (mode<4 || mode==9) && OpenNtBaseClientStartFrontend((uint64_t)(UINT_PTR)GetConsoleWindow(),TRUE,
-        &root,&capability,&restored))goto done;
-    if(startup)OpenNtBaseClientDisconnectCurrent(); /* End setup, before injecting the fault. */
-    if(mode>=10 && mode<=16) {
-        capability=CreateEventW(NULL,TRUE,FALSE,NULL);
-        restored=CreateEventW(NULL,TRUE,FALSE,NULL);
-        if(!capability || !restored)goto done;
-        if(mode==13 && !CreatePipe(&pipe_read,&pipe_write,NULL,0))goto done;
-    }
-    if(mode==9) {
-        DWORD exit_code=STILL_ACTIVE,after=0,wait,index,count=0;
-        DTASKMGR_WORKER *items=NULL;DTASKMGR_KEY key={0};
-        common_rpc_connection view=OpenNtBaseClientExecutionConnection(NULL);
-        common_rpc_management management={view.binding,view.process};
-        error=common_rpc_task_snapshot(&management,&count,&items);
-        if(error){printf("FAIL snapshot=%lu\n",error);goto done;}
-        for(index=0;index<count;++index)
-            if(items[index].key.category==MANAGEMENT_FRONTEND && items[index].process_id==GetProcessId(root))key=items[index].key;
-        if(items)MIDL_user_free(items);
-        if(!key.generation){puts("FAIL actual frontend absent from management snapshot");goto done;}
-        frontend_control=OpenProcess(0x0800,FALSE,GetProcessId(root));
-        if(!frontend_control || suspend(frontend_control)<0)goto done;
-        frontend_paused=TRUE;
-        error=common_rpc_close_management_node(&management,&key);
-        if(error){printf("FAIL management close=%lu\n",error);goto done;}
-        control=OpenProcess(0x0800,FALSE,GetProcessId(server));
-        if(!control || suspend(control)<0)goto done;
-        paused=TRUE;began=GetTickCount64();
-        if(resume(frontend_control)<0)goto done;
-        frontend_paused=FALSE;
-        wait=WaitForSingleObject(root,12000);
-        (void)GetExitCodeProcess(root,&exit_code);
-        (void)GetConsoleMode(GetStdHandle(STD_INPUT_HANDLE),&after);
-        printf("NTCON wait=%lu exit=%lu input=%lx expected=%lx elapsed=%llu\n",wait,exit_code,after,input_mode,
-            (unsigned long long)(GetTickCount64()-began));
-        if(wait!=WAIT_OBJECT_0 || exit_code!=ERROR_TIMEOUT || after!=input_mode ||
-            WaitForSingleObject(server,0)!=WAIT_TIMEOUT)goto done;
-        printf("PASS: actual NTCON timeout retirement and input restoration with service paused; elapsed=%llu\n",
-            (unsigned long long)(GetTickCount64()-began));
-        result=0;goto done;
-    }
-    /* Suspend only the owned frontend (0) or service (1/2). Production
-     * launchers never receive this fault-injection access. */
-    control=OpenProcess(0x0800,FALSE,GetProcessId(mode ? server : root)); /* PROCESS_SUSPEND_RESUME */
-    if(!control || suspend(control)<0)goto done;
-    paused=TRUE;began=GetTickCount64();
-    if(mode==17) {
-        HANDLE disconnected=(HANDLE)1;
+    control=OpenProcess(PROCESS_SUSPEND_RESUME|PROCESS_TERMINATE,FALSE,GetProcessId(server));
+    if(!control)goto done;
+    if(bootstrap || !strcmp(kind,"connect")) {
+        char image[MAX_PATH],command[MAX_PATH+256],ready_name[80],release_name[80];
+        /* A separate real client prevents the approved empty-service timer
+         * from competing with the connection wait under test. */
+        sprintf_s(ready_name,sizeof(ready_name),"Local\\rpc-wait-ready-%lu",GetCurrentProcessId());
+        sprintf_s(release_name,sizeof(release_name),"Local\\rpc-wait-release-%lu",GetCurrentProcessId());
+        keeper_ready=CreateEventA(NULL,TRUE,FALSE,ready_name);
+        keeper_release=CreateEventA(NULL,TRUE,FALSE,release_name);
+        if(!keeper_ready || !keeper_release || !GetModuleFileNameA(NULL,image,MAX_PATH))goto done;
+        sprintf_s(command,sizeof(command),"\"%s\" --rpc-wait-keeper %s %s",image,ready_name,release_name);
+        if(!CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_NO_WINDOW,NULL,NULL,&startup,&keeper))goto done;
+        if(WaitForSingleObject(keeper_ready,5000)!=WAIT_OBJECT_0)goto done;
         OpenNtBaseClientDisconnectCurrent();
-        elapsed=GetTickCount64()-began;
-        printf("disconnect elapsed=%llu\n",(unsigned long long)elapsed);
-        if(elapsed<9000 || elapsed>13000 || WaitForSingleObject(server,0)!=WAIT_TIMEOUT ||
-            OpenNtBaseClientBrokerProcess(&disconnected)!=ERROR_INVALID_STATE || disconnected)goto done;
+    }
+    if(suspend(control)<0)goto done;
+    paused=TRUE;
+    if(bootstrap) {
         began=GetTickCount64();
-        OpenNtBaseClientDisconnectCurrent();
-        if(GetTickCount64()-began>=1000)goto done;
-        puts("PASS: ordinary disconnect deadline and idempotent local cleanup");
-        result=0;goto done;
-    }
-    if(mode>=38)error=finite_control_query(mode);
-    else if(mode>=29)error=launch_control_query(mode,capability);
-    else if(mode>=22)error=worker_control_query(mode,capability);
-    else if(mode>=18) {
-        HANDLE event=(HANDLE)1;
-        error=events[mode-18](&event);
-        if(event)goto done;
-    } else if(mode==8) {
-        common_rpc_connection view=OpenNtBaseClientExecutionConnection(NULL);
-        common_rpc_management management={view.binding,view.process};DTASKMGR_KEY key={0};
-        error=common_rpc_close_management_node(&management,&key);
-    } else if(mode==5)error=OpenNtBaseClientFrontendCloseQuiesced();
-    else if(mode==6)error=OpenNtBaseClientFrontendConsoleRestored();
-    else if(mode==10)error=OpenNtBaseClientRegisterFrontendRoot(capability);
-    else if(mode==11)error=OpenNtBaseClientRegisterFrontendLease(
-        (uint64_t)(UINT_PTR)GetConsoleWindow(),GetCurrentProcessId(),TRUE,capability,restored);
-    else if(mode==12)error=OpenNtBaseClientReportCurrentConsoleMembers();
-    else if(mode==13) {
-        DWORD generation=99;
-        error=OpenNtBaseClientAttachFrontendRequest(1,pipe_read,capability,&generation);
-        if(generation)goto done;
-    }
-    else if(mode==14) {
-        HANDLE owner=(HANDLE)1,token=(HANDLE)1,ack=(HANDLE)1;
-        error=OpenNtBaseClientStartFrontend((uint64_t)(UINT_PTR)GetConsoleWindow(),TRUE,&owner,&token,&ack);
-        if(owner || token || ack)goto done;
-    }
-    else if(mode==15) {
-        HANDLE event=(HANDLE)1;
-        error=OpenNtBaseClientFrontendStateChanged(&event);
-        if(event)goto done;
-    }
-    else if(mode==16)error=OpenNtBaseClientFrontendStartupResult(capability,ERROR_SUCCESS);
-    else error=startup ? OpenNtBaseClientConnectCurrentTimeout(10000) : worker_exit ? OpenNtBaseClientRequestWorkerExit() :
-        OpenNtBaseClientWaitFrontendConsoleRestored();
-    elapsed=GetTickCount64()-began;
-    printf("finalization status=%lu elapsed=%llu\n",error,(unsigned long long)elapsed);
-    if(error!=ERROR_TIMEOUT || elapsed<9000 || elapsed>13000 ||
-        WaitForSingleObject(server,0)!=WAIT_TIMEOUT)goto done;
-    if(mode>=38) {
-        BOOL raw=mode==43 || mode==47 || mode==51 || mode>=52;
-        if(!raw && OpenNtBaseClientFailure(0)!=ERROR_TIMEOUT)goto done;
-        if(raw && OpenNtBaseClientFailure(0))goto done;
-        if(resume(control)<0)goto done;
-        paused=FALSE;
-        puts("PASS: finite original/management RPC deadline with drained outputs");
-        result=0;goto done;
-    }
-    if(startup) {
-        puts("PASS: startup deadline with stalled service and no cleanup RPC");
-        result=0;goto done;
-    }
-    if(worker_exit || mode==8) {
-        BASE_API_MSG query={0};NTSTATUS status;
-        if(resume(control)<0)goto done;
-        paused=FALSE;
-        /* Not an exit-request replay. An unrelated ordinary call verifies
-         * the shared connection did not inherit this report's timeout. */
-        status=OpenNtBaseClientCallServer((PCSR_API_MSG)&query,NULL,
-            CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepIsFirstVDM),
-            sizeof(query.u.IsFirstVDM));
-        if(status!=STATUS_SUCCESS || query.ReturnValue!=STATUS_SUCCESS)goto done;
-        puts(mode==8 ? "PASS: management close RPC deadline without poisoning shared connection" :
-            "PASS: real worker exit RPC deadline without poisoning shared connection");
-        result=0;goto done;
-    }
-    began=GetTickCount64();
-    if(OpenNtBaseClientWaitFrontendConsoleRestored()!=ERROR_TIMEOUT)goto done;
-    if(mode>=29) {
-        unsigned i;
-        for(i=29;i<=37;++i)if(launch_control_query(i,capability)!=ERROR_TIMEOUT)goto done;
-    }
-    if(mode>=22) {
-        unsigned i;
-        for(i=22;i<=28;++i)if(worker_control_query(i,capability)!=ERROR_TIMEOUT)goto done;
-    }
-    if(mode>=18) {
-        unsigned i;
-        for(i=0;i<sizeof(events)/sizeof(events[0]);++i) {
-            HANDLE event=(HANDLE)1;
-            if(events[i](&event)!=ERROR_TIMEOUT || event)goto done;
+        error=OpenNtBaseClientConnectCurrentTimeout(OPENNT_LIFECYCLE_GRACE_MS);
+        elapsed=GetTickCount64()-began;
+        printf("bootstrap error=%lu elapsed=%llu\n",error,(unsigned long long)elapsed);
+        if(error!=ERROR_TIMEOUT || elapsed<4500 || elapsed>8000 ||
+            WaitForSingleObject(server,0)!=WAIT_TIMEOUT)goto done;
+    } else {
+        test.kind=kind;test.entered=CreateEventW(NULL,TRUE,FALSE,NULL);
+        if(!test.entered)goto done;
+        thread=CreateThread(NULL,0,rpc_wait_call,&test,0,NULL);if(!thread)goto done;
+        if(WaitForSingleObject(test.entered,5000)!=WAIT_OBJECT_0)goto done;
+        /* Cross the removed ten-second policy for ordinary calls, not merely
+         * a short scheduling delay. Loss needs only an outstanding call. */
+        if(WaitForSingleObject(thread,loss ? 100 : 11000)!=WAIT_TIMEOUT)goto done;
+        if(loss) {
+            if(!TerminateProcess(control,ERROR_CANCELLED) ||
+                WaitForSingleObject(server,5000)!=WAIT_OBJECT_0)goto done;
+            paused=FALSE;
+        } else {
+            if(resume(control)<0)goto done;
+            paused=FALSE;
+        }
+        if(WaitForSingleObject(thread,5000)!=WAIT_OBJECT_0)goto done;
+        printf("RPC wait %s result=%lu service-wait=%lu\n",kind,test.error,WaitForSingleObject(server,0));
+        if(loss) {
+            /* RPC can report its broken call before the process object is
+             * signalled. Once death is confirmed, the public loss mapping
+             * must be the original disconnected-handle error. */
+            if((test.error!=ERROR_INVALID_HANDLE && test.error!=RPC_S_CALL_FAILED) ||
+                OpenNtBaseClientFailure(test.error)!=ERROR_INVALID_HANDLE ||
+                OpenNtBaseClientFailure(0)!=ERROR_INVALID_HANDLE)goto done;
+        } else if(test.error)goto done;
+        if(!loss && strcmp(kind,"disconnect") && first_vdm_query())goto done;
+        if(!strcmp(kind,"disconnect")) {
+            HANDLE unexpected=NULL;
+            if(OpenNtBaseClientBrokerProcess(&unexpected)!=ERROR_INVALID_STATE || unexpected)goto done;
+            OpenNtBaseClientDisconnectCurrent(); /* Idempotent local cleanup. */
         }
     }
-    if(mode>=10) {
-        DWORD generation=99;
-        HANDLE owner=(HANDLE)1,token=(HANDLE)1,ack=(HANDLE)1,event=(HANDLE)1;
-        /* No cleanup/report call may issue another RPC while the first
-         * deadline is latched and the authenticated service remains paused. */
-        if(OpenNtBaseClientFrontendStartupResult(capability,ERROR_TIMEOUT)!=ERROR_TIMEOUT ||
-            OpenNtBaseClientRegisterFrontendRoot(capability)!=ERROR_TIMEOUT ||
-            OpenNtBaseClientRegisterFrontendLease(0,0,FALSE,capability,restored)!=ERROR_TIMEOUT ||
-            OpenNtBaseClientReportCurrentConsoleMembers()!=ERROR_TIMEOUT ||
-            OpenNtBaseClientAttachFrontendRequest(1,pipe_read,capability,&generation)!=ERROR_TIMEOUT ||
-            generation ||
-            OpenNtBaseClientStartFrontend(0,TRUE,&owner,&token,&ack)!=ERROR_TIMEOUT || owner || token || ack ||
-            OpenNtBaseClientFrontendStateChanged(&event)!=ERROR_TIMEOUT || event)goto done;
-    }
-    OpenNtBaseClientDisconnectCurrent();
-    if(GetTickCount64()-began>=1000)goto done;
-    puts(mode>=4 ? "PASS: frontend control deadline and local disconnect" :
-        mode==2 ? "PASS: finalization deadline with stalled service and local disconnect" :
-        "PASS: real RPC timeout without service death or request replay");result=0;
+    printf("PASS RPC wait contract: %s\n",kind);result=0;
 done:
     if(paused && resume(control)<0)result=1;
-    if(frontend_paused && resume(frontend_control)<0)result=1;
-    if(frontend_control)CloseHandle(frontend_control);
-    if(pipe_read)CloseHandle(pipe_read);if(pipe_write)CloseHandle(pipe_write);
-    if(control)CloseHandle(control);
-    if(root)CloseHandle(root);if(capability)CloseHandle(capability);
-    if(restored)CloseHandle(restored);if(server)CloseHandle(server);
+    if(thread) {
+        /* The harness may fail a diagnostic bound, but cannot release a live
+         * test call's stack or disconnect its borrowed client concurrently. */
+        WaitForSingleObject(thread,INFINITE);CloseHandle(thread);
+    }
+    if(test.entered)CloseHandle(test.entered);
+    if(keeper_release)SetEvent(keeper_release);
+    if(keeper.hProcess) {
+        DWORD exit_code;
+        if(WaitForSingleObject(keeper.hProcess,5000)!=WAIT_OBJECT_0) {
+            TerminateProcess(keeper.hProcess,ERROR_CANCELLED);
+            WaitForSingleObject(keeper.hProcess,INFINITE);result=1;
+        }
+        if(!GetExitCodeProcess(keeper.hProcess,&exit_code) || exit_code)result=1;
+        CloseHandle(keeper.hThread);CloseHandle(keeper.hProcess);
+    }
+    if(keeper_ready)CloseHandle(keeper_ready);if(keeper_release)CloseHandle(keeper_release);
+    if(control)CloseHandle(control);if(server)CloseHandle(server);
     OpenNtBaseClientDisconnectCurrent();
     return result;
 }
@@ -866,19 +707,14 @@ int main(int argc,char **argv)
         name=wcsrchr(executable,L'\\');
         if(name && !_wcsicmp(name+1,L"ntvdm.exe"))return admitted_vdm_child();
     }
-    if(argc==2 && !lstrcmpA(argv[1],"--admitted-vdm"))return admitted_vdm_parent();
+    if(argc==2 && !lstrcmpA(argv[1],"--admitted-vdm"))return admitted_vdm_parent(FALSE);
+    if(argc==2 && !lstrcmpA(argv[1],"--frontend-io-fault"))return admitted_vdm_parent(TRUE);
     if (argc==5 && !lstrcmpA(argv[1],"--ntvwm-reuse-child")) return ntvwm_reuse_child(argv);
     if (argc==2 && !lstrcmpA(argv[1],"--native-worker-startup")) return ntvwm_execution_rpc();
     if (argc==2 && !lstrcmpA(argv[1],"--ntvwm-execution")) return ntvwm_execution_rpc();
     if (argc==2 && !lstrcmpA(argv[1],"--ntvwm-public-startup")) return ntvwm_public_startup();
-    if (argc==2 && !lstrcmpA(argv[1],"--frontend-timeout-parent")) return frontend_deadline(FALSE);
-    if (argc==2 && !lstrcmpA(argv[1],"--worker-exit-timeout")) return frontend_deadline(TRUE);
-    if (argc==2 && !lstrcmpA(argv[1],"--finalization-service-timeout")) return frontend_deadline(2);
-    if (argc==2 && !lstrcmpA(argv[1],"--startup-service-timeout")) return frontend_deadline(3);
-    if (argc==3 && !lstrcmpA(argv[1],"--control-service-timeout")) {
-        unsigned mode=(unsigned)strtoul(argv[2],NULL,10);
-        return mode>=5 && mode<=54 && mode!=7 ? frontend_deadline(mode) : 2;
-    }
+    if (argc==3 && !lstrcmpA(argv[1],"--rpc-wait"))return rpc_wait_contract(argv[2]);
+    if (argc==4 && !lstrcmpA(argv[1],"--rpc-wait-keeper"))return rpc_wait_keeper(argv[2],argv[3]);
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-root-parent")) return frontend_root_parent();
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-root-child")) return frontend_root_child(FALSE);
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-root-stale")) return frontend_root_child(TRUE);
