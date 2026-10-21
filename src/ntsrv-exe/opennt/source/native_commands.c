@@ -226,13 +226,12 @@ DWORD OpenNtBaseServiceBindNativeTarget(OPENNT_BASE_CONNECTION *connection,DWORD
     error=ERROR_ACCESS_DENIED;
     EnterCriticalSection(&connection->service->lock);
     if(OpenNtBaseServicePeer(connection,pid,generation) && connection->native_worker &&
-        connection->native_launch_type==actual_type &&
         /* GUI launcher means non-text; CUI carrier means text.  This is the
          * final PE-header recheck, rather than trusting a requester label. */
         connection->native_gui_launcher!=OpenNtBaseNativeLaunchTypeIsText(actual_type)) {
         for(link=connection->win32records.Flink;link!=&connection->win32records;link=link->Flink) {
             OPENNT_BASE_WIN32RECORD *record=CONTAINING_RECORD(link,OPENNT_BASE_WIN32RECORD,link);
-            if(record->request==request) {
+            if(record->request==request && record->native_type==actual_type) {
                 if(record->receipt ||
                     (record->process_id && record->process_id!=target_pid))error=ERROR_INVALID_STATE;
                 else {
@@ -333,6 +332,9 @@ DWORD service_queue_native_command(OPENNT_BASE_CONNECTION *connection,DWORD pid,
     if (connection->native_command_pending) { error=ERROR_BUSY;goto done; }
     if(operation!=OPENNT_BASE_NATIVE_REQUEST_LAUNCH &&
         operation!=OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME) {error=ERROR_INVALID_PARAMETER;goto done;}
+    if(operation==OPENNT_BASE_NATIVE_REQUEST_LAUNCH &&
+        !OpenNtBaseNativeLaunchTypeIsValid(connection->native_request_type))
+        {error=ERROR_INVALID_STATE;goto done;}
     if(bytes>NATIVE_LAUNCH_MAX_BYTES ||
         (operation==OPENNT_BASE_NATIVE_REQUEST_LAUNCH && (!bytes || !payload)) ||
         (operation==OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME && (bytes || payload)))
@@ -349,6 +351,7 @@ DWORD service_queue_native_command(OPENNT_BASE_CONNECTION *connection,DWORD pid,
         record=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*record));
         if(!record) { error=ERROR_NOT_ENOUGH_MEMORY;goto done; }
         record->launcher_generation=generation;
+        record->native_type=connection->native_request_type;
         lstrcpynW(record->image,image,OPENNT_BASE_WORKER_IMAGE_CHARS);
     }
     if(capability) {
@@ -375,6 +378,8 @@ DWORD service_queue_native_command(OPENNT_BASE_CONNECTION *connection,DWORD pid,
             }
         }
         if (!worker_generation) { error=ERROR_NOT_READY;goto done; }
+        if(record && gui==OpenNtBaseNativeLaunchTypeIsText(record->native_type))
+            {error=ERROR_INVALID_STATE;goto done;}
         /* Reservation-exact worker identity is the sole GUI/CUI authority.
          * A frontend capability proves the CUI route; it cannot choose one. */
         if((gui && capability) || (!gui && !capability)) {error=ERROR_INVALID_PARAMETER;goto done;}

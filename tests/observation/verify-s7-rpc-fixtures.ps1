@@ -6,9 +6,10 @@ param(
     [Parameter(Mandatory)][ValidateSet('client','bootstrap','startup-rejections',
         'startup-timeout','native-worker-failure','native-completed-worker-loss','native-io-error',
         'workerless-grace','workerless-cancel','monitor-rpc',
-        'native-command','native-registry')][string[]]$Cases
+        'native-command','native-registry','ntvwm-execution','ntvwm-public-startup')][string[]]$Cases
 )
 $ErrorActionPreference='Stop'
+. "$PSScriptRoot/isolated_package_cleanup.ps1"
 $Observer=(Resolve-Path -LiteralPath $Observer).Path
 $PackageRoot=(Resolve-Path -LiteralPath $PackageRoot).Path
 $ReportPrefix=[IO.Path]::GetFullPath($ReportPrefix)
@@ -20,6 +21,7 @@ foreach($case in $Cases) {
     $report=$ReportPrefix+'-'+$case+'.txt'
     if(Test-Path -LiteralPath $report){throw 'Use a fresh report prefix'}
     $image=if($case -eq 'client'){'frontend-request-client-test.exe'}
+        elseif($case -in @('ntvwm-execution','ntvwm-public-startup')){'base-client-rpc-first-test.exe'}
         elseif($case -eq 'monitor-rpc'){'monitor-rpc-test.exe'}
         elseif($case -in @('native-command','native-registry')){'basesrv-service-reservation-test.exe'}
         else{'broker-frontend-bootstrap-test.exe'}
@@ -51,8 +53,18 @@ foreach($case in $Cases) {
     elseif($case -notin @('client','bootstrap','monitor-rpc')){$arguments+='--'+$case}
     $arguments+=@('--observation-timeout-ms','45000')
     foreach($argument in $arguments){$start.ArgumentList.Add($argument)}
-    $process=[Diagnostics.Process]::Start($start)
+    $scope=$null;$service=$null;$process=$null
     try {
+        if($case -in @('ntvwm-execution','ntvwm-public-startup')) {
+            $scope=New-IsolatedPackageScope $casePackageRoot
+            $scope.Paths+=Join-Path $casePackageRoot $image
+            $serviceStart=[Diagnostics.ProcessStartInfo]::new((Join-Path $casePackageRoot 'ntsrv.exe'))
+            $serviceStart.UseShellExecute=$false;$serviceStart.WindowStyle=[Diagnostics.ProcessWindowStyle]::Hidden
+            $service=[Diagnostics.Process]::Start($serviceStart)
+            # Startup settling only; the fixture must authenticate Connect.
+            Start-Sleep -Milliseconds 200
+        }
+        $process=[Diagnostics.Process]::Start($start)
         if(!$process.WaitForExit(55000)){throw "Observer remains live: $($process.Id)"}
         $content=Get-Content -LiteralPath $report -Raw
         $screen=Get-Content -LiteralPath ($report+'.console.txt') -Raw
@@ -61,5 +73,12 @@ foreach($case in $Cases) {
             throw "RPC fixture failed: $case; report=$report"
         }
         "PASS $case actual fixture exit zero and assertion output"
-    } finally {$process.Dispose()}
+    } finally {
+        if($process){
+            if(!$process.HasExited){$process.Kill();$null=$process.WaitForExit(10000)}
+            $process.Dispose()
+        }
+        if($scope){Stop-IsolatedPackageScope $scope}
+        if($service){$service.Dispose()}
+    }
 }

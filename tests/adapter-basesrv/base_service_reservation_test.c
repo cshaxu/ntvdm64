@@ -1247,6 +1247,23 @@ int main(int argc,char **argv)
                  * actual CreateProcess target to the direct WIN32RECORD. */
                 {HANDLE completion=CreateEventW(NULL,TRUE,FALSE,NULL);
                     CHECK(completion);
+                    if(sizeof(void *)==8) {
+                        WCHAR wrong_image[MAX_PATH],wrong_line[MAX_PATH+32];
+                        STARTUPINFOW wrong_start={sizeof(wrong_start)};
+                        PROCESS_INFORMATION wrong_target={0};DWORD rejected;
+                        CHECK(GetSystemWow64DirectoryW(wrong_image,MAX_PATH));
+                        CHECK(!wcscat_s(wrong_image,MAX_PATH,L"\\cmd.exe"));
+                        CHECK(swprintf_s(wrong_line,ARRAYSIZE(wrong_line),L"\"%ls\" /d /c exit",wrong_image)>0);
+                        CHECK(CreateProcessW(wrong_image,wrong_line,NULL,NULL,FALSE,
+                            CREATE_SUSPENDED|CREATE_NO_WINDOW,NULL,NULL,&wrong_start,&wrong_target));
+                        rejected=OpenNtBaseServiceBindNativeTarget(worker,child.dwProcessId,workerGeneration,
+                            test_native_request,wrong_target.hProcess,completion);
+                        CHECK(TerminateProcess(wrong_target.hProcess,ERROR_CANCELLED));
+                        CHECK(WaitForSingleObject(wrong_target.hProcess,10000)==WAIT_OBJECT_0);
+                        CloseHandle(wrong_target.hThread);CloseHandle(wrong_target.hProcess);
+                        CHECK(rejected==ERROR_ACCESS_DENIED);
+                        CHECK(WaitForSingleObject(completion,0)==WAIT_TIMEOUT);
+                    }
                     {DWORD bind_error=OpenNtBaseServiceBindNativeTarget(worker,child.dwProcessId,workerGeneration,
                         test_native_request,laterChild.hProcess,completion);
                         if(bind_error)fprintf(stderr,"native target binding error=%lu\n",bind_error);
@@ -1550,7 +1567,7 @@ int main(int argc,char **argv)
                 launcherGeneration,capability,&retained,&generation));
             CHECK(generation==laterGeneration);CloseHandle(retained);
         }
-        {HANDLE selected=NULL;CHECK(!OpenNtBaseServiceSelectNativeWorker(launcher,GetCurrentProcessId(),launcherGeneration,&selected));
+        {HANDLE selected=NULL;CHECK(!OpenNtBaseServiceStartNativeWorker(launcher,GetCurrentProcessId(),launcherGeneration,TEST_NATIVE_CUI_TYPE,&selected));
          CHECK(GetProcessId(selected)==laterChild.dwProcessId);CloseHandle(selected);}
         CHECK(!queue_native_fixture(launcher,GetCurrentProcessId(),launcherGeneration,capability,native_payload));
         CHECK(!OpenNtBaseServiceDisconnect(launcher));launcher=NULL;
@@ -1564,7 +1581,7 @@ int main(int argc,char **argv)
                 launcherGeneration,capability,&retained,&generation));
             CHECK(generation==laterGeneration);CloseHandle(retained);
         }
-        {HANDLE selected=NULL;CHECK(!OpenNtBaseServiceSelectNativeWorker(launcher,GetCurrentProcessId(),launcherGeneration,&selected));
+        {HANDLE selected=NULL;CHECK(!OpenNtBaseServiceStartNativeWorker(launcher,GetCurrentProcessId(),launcherGeneration,TEST_NATIVE_CUI_TYPE,&selected));
          CHECK(GetProcessId(selected)==laterChild.dwProcessId);CloseHandle(selected);}
         CHECK(!queue_native_fixture(launcher,GetCurrentProcessId(),launcherGeneration,capability,native_payload));
         CHECK(!OpenNtBaseServiceDisconnect(later));later=NULL;

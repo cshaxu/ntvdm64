@@ -85,10 +85,6 @@ DWORD frontend_session_park(frontend_session *value)
 { (void)value;CHECK(retirement_mode);InterlockedIncrement(&park_calls);CHECK(SetEvent(park_seen));return 0; }
 DWORD frontend_session_drain(frontend_session *value)
 { (void)value;CHECK(retirement_mode);InterlockedIncrement(&drain_calls);return 0; }
-DWORD OpenNtBaseClientFrontendUsage(DWORD *pending_count,DWORD *tasks)
-{
-    (void)pending_count;(void)tasks;CHECK(FALSE);return ERROR_INVALID_FUNCTION;
-}
 DWORD OpenNtBaseClientFrontendStateChanged(HANDLE *state_changed)
 {
     *state_changed=NULL;
@@ -132,19 +128,16 @@ DWORD run16_native_request_finish(DWORD request,DWORD *exit_code,DWORD *complete
     *exit_code=*completed ? 37 : 0;
     return native_error;
 }
-DWORD OpenNtBaseClientSelectNativeWorker(HANDLE *worker)
+DWORD OpenNtBaseClientStartNativeWorker(DWORD native_type,HANDLE *worker)
 {
     *worker=NULL;
+    if(!OpenNtBaseNativeLaunchTypeIsValid(native_type))return ERROR_INVALID_PARAMETER;
     if(!native_mode)return ERROR_NOT_SUPPORTED;
     CHECK(DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),worker,SYNCHRONIZE,FALSE,0));
     return ERROR_SUCCESS;
 }
 DWORD OpenNtBaseClientRequestFrontend(HANDLE capability)
 { (void)capability;CHECK(native_mode);return ERROR_SUCCESS; }
-DWORD OpenNtBaseClientReserveNativeWorker(uint64_t *reservation)
-{ *reservation=0;return ERROR_NOT_SUPPORTED; }
-DWORD OpenNtBaseClientReleaseWorker(uint64_t reservation)
-{ (void)reservation;return ERROR_NOT_SUPPORTED; }
 
 DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE value)
 {
@@ -152,8 +145,6 @@ DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE value)
     return DuplicateHandle(GetCurrentProcess(),value,GetCurrentProcess(),
         &notification,0,FALSE,DUPLICATE_SAME_ACCESS) ? 0 : GetLastError();
 }
-DWORD OpenNtBaseClientStartNativeWorker(DWORD native_type,HANDLE *worker)
-{ return OpenNtBaseNativeLaunchTypeIsValid(native_type) ? OpenNtBaseClientSelectNativeWorker(worker) : ERROR_INVALID_PARAMETER; }
 DWORD OpenNtBaseClientFrontendJoinCandidate(DWORD *nonce,DWORD *pid)
 {*nonce=*pid=0;return ERROR_NOT_FOUND;}
 DWORD OpenNtBaseClientFrontendJoinDecision(DWORD nonce,BOOL same)

@@ -455,15 +455,22 @@ static int ntvwm_reuse_child(char **argv)
     DWORD expected=(DWORD)strtoul(argv[4],NULL,10),code,request=0;
     HANDLE worker=NULL,target=NULL,receipt=NULL,foreign=CreateEventW(NULL,TRUE,FALSE,NULL);
     WCHAR native[MAX_PATH],directory[MAX_PATH],command[MAX_PATH+64],*environment;
-    run16_native_start start={0};uint64_t reservation=0;
+    run16_native_start start={0};
     REQUIRE(frontend && execution && foreign && !OpenNtBaseClientConnectCurrent());
     REQUIRE(OpenNtBaseClientBindConsoleContext(foreign)==ERROR_ACCESS_DENIED);
     CloseHandle(foreign);
     REQUIRE(!OpenNtBaseClientBindConsoleContext(execution));
-    REQUIRE(OpenNtBaseClientCommandWorker(&worker)==ERROR_NOT_READY && !worker);
-    REQUIRE(!OpenNtBaseClientSelectNativeWorker(&worker) && GetProcessId(worker)==expected);
-    REQUIRE(OpenNtBaseClientReserveNativeWorker(&reservation)==ERROR_INVALID_STATE && !reservation);
-    REQUIRE(GetSystemDirectoryW(native,MAX_PATH) && !wcscat_s(native,MAX_PATH,L"\\cmd.exe"));
+    {
+        HANDLE root=NULL;DWORD generation=0;
+        REQUIRE(!OpenNtBaseClientRetainFrontendRoot(frontend,&root,&generation) && root && generation);
+        CloseHandle(root);
+    }
+    REQUIRE(!OpenNtBaseClientStartNativeWorker(OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&worker) &&
+        GetProcessId(worker)==expected);
+    /* Pin the actual Win32 image: a later x64 Run16 must not reinterpret the
+     * x86 caller's redirected System32 spelling as the Win64 cmd.exe. */
+    REQUIRE((GetSystemWow64DirectoryW(native,MAX_PATH) || GetSystemDirectoryW(native,MAX_PATH)) &&
+        !wcscat_s(native,MAX_PATH,L"\\cmd.exe"));
     REQUIRE(GetCurrentDirectoryW(MAX_PATH,directory));
     REQUIRE(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" /d /c exit /b 73",native)>0);
     environment=GetEnvironmentStringsW();REQUIRE(environment);
@@ -486,12 +493,20 @@ static int ntvwm_reuse_child(char **argv)
         REQUIRE(SetEnvironmentVariableW(L"NTVDM_FRONTEND_CAPABILITY",value));
         swprintf_s(value,32,L"%lx",(ULONG)(ULONG_PTR)execution);
         REQUIRE(SetEnvironmentVariableW(L"NTVDM_EXECUTION_CONSOLE",value));
+        /* The x64 public launcher now deliberately selects native System32:
+         * its Win64 target must reuse the same CUI carrier after Win32 exit 73.
+         * Binding still checks that request's admitted machine/subsystem. */
+        REQUIRE(GetSystemDirectoryW(native,MAX_PATH) && !wcscat_s(native,MAX_PATH,L"\\cmd.exe"));
         REQUIRE(swprintf_s(line,ARRAYSIZE(line),L"\"%ls\" \"%ls\" /d /c exit /b 61",launcher,native)>0);
+        startup.dwFlags=STARTF_USESTDHANDLES;
+        startup.hStdInput=GetStdHandle(STD_INPUT_HANDLE);
+        startup.hStdOutput=GetStdHandle(STD_OUTPUT_HANDLE);startup.hStdError=GetStdHandle(STD_ERROR_HANDLE);
         REQUIRE(CreateProcessW(launcher,line,NULL,NULL,TRUE,CREATE_NO_WINDOW,NULL,NULL,&startup,&process));
         CloseHandle(process.hThread);
         wait=WaitForSingleObject(process.hProcess,10000);
         if(wait!=WAIT_OBJECT_0){TerminateProcess(process.hProcess,99);WaitForSingleObject(process.hProcess,5000);}
         REQUIRE(GetExitCodeProcess(process.hProcess,&code));CloseHandle(process.hProcess);
+        if(wait!=WAIT_OBJECT_0 || code!=61)fprintf(stderr,"public run16 wait=%lu result=%lu\n",wait,code);
         REQUIRE(wait==WAIT_OBJECT_0 && code==61);
         REQUIRE(SetEnvironmentVariableW(L"NTVDM_FRONTEND_CAPABILITY",NULL));
         REQUIRE(SetEnvironmentVariableW(L"NTVDM_EXECUTION_CONSOLE",NULL));
@@ -502,19 +517,28 @@ static int ntvwm_reuse_child(char **argv)
 
 static int ntvwm_reuse_launcher(HANDLE frontend,DWORD expected)
 {
-    HANDLE execution=NULL,inherited[2]={0};WCHAR image[MAX_PATH],command[MAX_PATH+120];
+    HANDLE execution=NULL,inherited[2]={0},log,input;WCHAR image[MAX_PATH],command[MAX_PATH+120],report[MAX_PATH];
+    SECURITY_ATTRIBUTES attributes={sizeof(attributes),NULL,TRUE};
     STARTUPINFOW startup={sizeof(startup)};PROCESS_INFORMATION process={0};DWORD result,wait;
     REQUIRE(!OpenNtBaseClientAcquireConsoleContext(frontend,&execution));
     REQUIRE(DuplicateHandle(GetCurrentProcess(),frontend,GetCurrentProcess(),&inherited[0],SYNCHRONIZE,TRUE,0));
     REQUIRE(DuplicateHandle(GetCurrentProcess(),execution,GetCurrentProcess(),&inherited[1],SYNCHRONIZE,TRUE,0));
     REQUIRE(GetModuleFileNameW(NULL,image,MAX_PATH));
+    REQUIRE(swprintf_s(report,ARRAYSIZE(report),L"%ls.reuse.txt",image)>0);
+    log=CreateFileW(report,GENERIC_WRITE,FILE_SHARE_READ,&attributes,CREATE_NEW,FILE_ATTRIBUTE_NORMAL,NULL);
+    REQUIRE(log!=INVALID_HANDLE_VALUE);
+    input=CreateFileW(L"NUL",GENERIC_READ,FILE_SHARE_READ|FILE_SHARE_WRITE,&attributes,OPEN_EXISTING,0,NULL);
+    REQUIRE(input!=INVALID_HANDLE_VALUE);
+    startup.dwFlags=STARTF_USESTDHANDLES;startup.hStdInput=input;startup.hStdOutput=startup.hStdError=log;
     REQUIRE(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" --ntvwm-reuse-child %lx %lx %lu",
         image,(ULONG)(ULONG_PTR)inherited[0],(ULONG)(ULONG_PTR)inherited[1],expected)>0);
     REQUIRE(CreateProcessW(image,command,NULL,NULL,TRUE,CREATE_NO_WINDOW,NULL,NULL,&startup,&process));
+    CloseHandle(log);CloseHandle(input);
     CloseHandle(process.hThread);CloseHandle(inherited[0]);CloseHandle(inherited[1]);CloseHandle(execution);
     wait=WaitForSingleObject(process.hProcess,10000);
     if(wait!=WAIT_OBJECT_0){TerminateProcess(process.hProcess,99);WaitForSingleObject(process.hProcess,5000);}
     REQUIRE(GetExitCodeProcess(process.hProcess,&result));CloseHandle(process.hProcess);
+    if(wait!=WAIT_OBJECT_0 || result!=73)fprintf(stderr,"reuse child wait=%lu result=%lu\n",wait,result);
     REQUIRE(wait==WAIT_OBJECT_0 && result==73);return 0;
 }
 
@@ -526,10 +550,13 @@ static int ntvwm_public_startup(void)
     WCHAR image[MAX_PATH],native[MAX_PATH],line[MAX_PATH*2+80],value[32],*slash;
     DWORD index,wait,code;
     REQUIRE(!OpenNtBaseClientConnectCurrent());
-    frontend=CreateEventW(NULL,TRUE,FALSE,NULL);
-    REQUIRE(frontend && !OpenNtBaseClientRegisterFrontendRoot(frontend));
+    {
+        HANDLE root=NULL,restored=NULL;
+        REQUIRE(!OpenNtBaseClientStartFrontend((uint64_t)(UINT_PTR)GetConsoleWindow(),TRUE,
+            &root,&frontend,&restored));
+        CloseHandle(root);CloseHandle(restored);
+    }
     REQUIRE(!OpenNtBaseClientAcquireConsoleContext(frontend,&execution));
-    REQUIRE(OpenNtBaseClientSelectNativeWorker(&worker)==ERROR_NOT_FOUND && !worker);
     REQUIRE(DuplicateHandle(GetCurrentProcess(),frontend,GetCurrentProcess(),&inherited[0],SYNCHRONIZE,TRUE,0));
     REQUIRE(DuplicateHandle(GetCurrentProcess(),execution,GetCurrentProcess(),&inherited[1],SYNCHRONIZE,TRUE,0));
     REQUIRE(GetModuleFileNameW(NULL,image,MAX_PATH));
@@ -566,9 +593,9 @@ static int ntvwm_public_startup(void)
                 (unsigned long)index,(unsigned long)wait,(unsigned long)code,61ul+index);
         REQUIRE(wait==WAIT_OBJECT_0 && code==61+index);
     }
-    /* Selection rejects ambiguous workers. Successful selection after both
-     * launchers exit proves one registered survivor for this execution context. */
-    REQUIRE(!OpenNtBaseClientSelectNativeWorker(&worker));
+    /* The service-owned start operation selects the resident worker or starts
+     * one; this alone is not proof of uniqueness during the concurrent launch. */
+    REQUIRE(!OpenNtBaseClientStartNativeWorker(OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&worker));
     REQUIRE(WaitForSingleObject(worker,0)==WAIT_TIMEOUT);
     shutdown=OpenProcess(PROCESS_TERMINATE|SYNCHRONIZE,FALSE,GetProcessId(worker));
     REQUIRE(shutdown && TerminateProcess(shutdown,0));
@@ -576,7 +603,7 @@ static int ntvwm_public_startup(void)
     CloseHandle(shutdown);CloseHandle(worker);
     CloseHandle(inherited[0]);CloseHandle(inherited[1]);CloseHandle(execution);CloseHandle(frontend);
     OpenNtBaseClientDisconnectCurrent();
-    puts("PASS public run16 concurrent first startup: exact 61/62 results, unique resident NTVWM after launcher exit; fixture frontend only, presentation not tested");
+    puts("PASS public run16 concurrent first startup: exact 61/62 results, reusable resident NTVWM after launcher exit; real service-created frontend");
     return 0;
 }
 
@@ -584,22 +611,19 @@ static int ntvwm_execution_rpc(void)
 {
     WCHAR image[MAX_PATH],command[MAX_PATH+64],directory[MAX_PATH],native[MAX_PATH];
     WCHAR *slash,*environment;
-    HANDLE worker=NULL;DWORD error=0,code=0,deadline,index;
+    HANDLE worker=NULL;DWORD error=0,code=0,index;
     HANDLE capability=NULL;
     REQUIRE(!OpenNtBaseClientConnectCurrent());
-    {
-        HANDLE selected=NULL;
-        REQUIRE(OpenNtBaseClientSelectNativeWorker(&selected)==ERROR_NOT_FOUND && !selected);
-    }
     REQUIRE(GetModuleFileNameW(NULL,image,MAX_PATH));
     slash=wcsrchr(image,L'\\');REQUIRE(slash);
     REQUIRE(!wcscpy_s(slash+1,MAX_PATH-(size_t)(slash+1-image),L"ntvwm.exe"));
     REQUIRE(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\"",image)>0);
-    capability=CreateEventW(NULL,TRUE,FALSE,NULL);
-    REQUIRE(capability && !OpenNtBaseClientRegisterFrontendRoot(capability));
-    /* This standalone fixture is its own frontend root. A direct launcher
-     * may no longer publish the outer Console identity. */
-    REQUIRE(!OpenNtBaseClientReportCurrentConsoleMembers());
+    {
+        HANDLE root=NULL,restored=NULL;
+        REQUIRE(!OpenNtBaseClientStartFrontend((uint64_t)(UINT_PTR)GetConsoleWindow(),TRUE,
+            &root,&capability,&restored));
+        CloseHandle(root);CloseHandle(restored);
+    }
     REQUIRE(!OpenNtBaseClientStartNativeWorker(OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&worker) && worker);
     REQUIRE(GetCurrentDirectoryW(MAX_PATH,directory));
     REQUIRE(GetSystemDirectoryW(native,MAX_PATH));
@@ -615,11 +639,7 @@ static int ntvwm_execution_rpc(void)
         start.application=native;start.command=command;start.directory=directory;
         start.environment=environment;start.console_mask=1;
         start.standard[1]=start.standard[2]=writer;
-        deadline=GetTickCount()+5000;
-        do {
-            error=run16_native_request_submit(capability,&start,&target,&receipt,&request);
-            if(error==ERROR_NOT_READY)Sleep(10);
-        }while(error==ERROR_NOT_READY && (LONG)(deadline-GetTickCount())>0);
+        error=run16_native_request_submit(capability,&start,&target,&receipt,&request);
         if(error || !target || !receipt)
             fprintf(stderr,"native submit error=%lu target=%p receipt=%p worker=%lu\n",
                 (unsigned long)error,target,receipt,(unsigned long)GetProcessId(worker));
@@ -661,46 +681,11 @@ static int ntvwm_execution_rpc(void)
     FreeEnvironmentStringsW(environment);
     REQUIRE(!ntvwm_reuse_launcher(capability,GetProcessId(worker)));
     REQUIRE(WaitForSingleObject(worker,0)==WAIT_TIMEOUT);
-    {
-        WCHAR name[128];HANDLE server,client,ready,selected=NULL;
-        DWORD request_id=0,generation=0,bytes=0;
-        console_io_request request;console_io_reply reply={0};
-        /* Public run16 already requested this route before returning. Do not
-         * mask a lost request by recreating it from the fixture connection. */
-        REQUIRE(!OpenNtBaseClientFrontendRequest(&request_id,&selected));
-        REQUIRE(GetProcessId(selected)==GetProcessId(worker));CloseHandle(selected);
-        swprintf_s(name,ARRAYSIZE(name),L"\\\\.\\pipe\\ntvwm-runtime-presentation-%lu",GetCurrentProcessId());
-        server=CreateNamedPipeW(name,PIPE_ACCESS_DUPLEX|FILE_FLAG_OVERLAPPED|FILE_FLAG_FIRST_PIPE_INSTANCE,
-            PIPE_TYPE_BYTE|PIPE_WAIT|PIPE_REJECT_REMOTE_CLIENTS,1,32768,32768,0,NULL);
-        REQUIRE(server!=INVALID_HANDLE_VALUE);
-        client=CreateFileW(name,GENERIC_READ|GENERIC_WRITE,0,NULL,OPEN_EXISTING,0,NULL);
-        REQUIRE(client!=INVALID_HANDLE_VALUE);
-        REQUIRE(ConnectNamedPipe(server,NULL) || GetLastError()==ERROR_PIPE_CONNECTED);
-        ready=CreateEventW(NULL,TRUE,FALSE,NULL);REQUIRE(ready);
-        REQUIRE(!OpenNtBaseClientAttachFrontendRequest(request_id,server,ready,&generation));
-        REQUIRE(ReadFile(client,&request,offsetof(console_io_request,data),&bytes,NULL) &&
-            bytes==offsetof(console_io_request,data));
-        REQUIRE(request.version==CONSOLE_IO_VERSION && request.generation==generation &&
-            request.sequence==1 && request.operation==CONSOLE_IO_BARRIER && !request.bytes);
-        reply.version=CONSOLE_IO_VERSION;reply.generation=generation;reply.sequence=1;
-        /* Attached but inactive is legitimate. Receiving this reply must not
-         * activate the frontend or terminate the resident worker. */
-        reply.error=ERROR_NOT_READY;
-        REQUIRE(WriteFile(client,&reply,offsetof(console_io_reply,data),&bytes,NULL) &&
-            bytes==offsetof(console_io_reply,data));
-        Sleep(200);REQUIRE(WaitForSingleObject(worker,0)==WAIT_TIMEOUT);
-        CloseHandle(client);CloseHandle(server);CloseHandle(ready);
-    }
-    {
-        DWORD pending=1,tasks=0;
-        deadline=GetTickCount()+5000;
-        do {
-            REQUIRE(!OpenNtBaseClientFrontendUsage(&pending,&tasks));
-            REQUIRE(!tasks);
-            if(pending)Sleep(10);
-        }while(pending && (LONG)(deadline-GetTickCount())>0);
-        REQUIRE(!pending);
-    }
+    /* A launcher cannot impersonate NTCON to attach its own presentation pipe.
+     * Observe the actual service-coordinated return instead. Inactive channel
+     * barrier handling belongs to the frontend/worker I/O fixture. */
+    REQUIRE(!OpenNtBaseClientWaitFrontendConsoleRestored());
+    REQUIRE(WaitForSingleObject(worker,0)==WAIT_TIMEOUT);
     /* Fixture shutdown is explicit, not launcher-death or target completion. */
     {
         HANDLE terminate=OpenProcess(PROCESS_TERMINATE|SYNCHRONIZE,FALSE,GetProcessId(worker));
@@ -710,7 +695,7 @@ static int ntvwm_execution_rpc(void)
     }
     CloseHandle(worker);CloseHandle(capability);
     OpenNtBaseClientDisconnectCurrent();
-    puts("PASS actual NTVWM: independent entry, authenticated requests, exact 37/19 results, alias/EOF, failed launch/reuse; second launcher returns 73 and public run16 returns 61 through existing worker; forged context rejected; worker survives launcher");
+    puts("PASS actual NTVWM: independent entry, authenticated requests, exact 37/19 results, alias/EOF, failed launch/reuse; Win32 second launcher returns 73 and Win64 public run16 returns 61 through existing worker; forged context rejected; worker survives launcher");
     return 0;
 }
 

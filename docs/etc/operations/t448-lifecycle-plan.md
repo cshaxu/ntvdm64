@@ -349,6 +349,25 @@ explicit checks. Resolve them in existing RPC/process-local mechanisms; no
 new IPC, private helper process, detached pending call, guest patch or silent
 version-mismatch/error-code reclassification is authorized.
 
+Retirement migration exposed two native admission boundaries that must retain
+the existing product contract. NTSRV selects or reserves a resident CUI carrier
+under its existing service lock. Concurrent first-start requests wait for the
+same authenticated reservation to become selectable, or fail within the shared
+ten-second control policy; callers do not replay submission. This uses the
+existing service condition, not new cross-process communication. GUI launcher
+reservations remain exact and one-shot.
+
+The native carrier's first target type is not the type authority for later
+nested targets. Each authenticated launcher admission records its requested
+type and copies it into the queued direct request. That immutable request
+value is compared with the actual suspended target's machine/subsystem at
+BindNativeTarget. The persistent worker's CUI/GUI role and exact GUI reservation
+are still independently enforced. A Win32-to-Win64 CUI nesting does not create
+another hidden Console merely because target bitness changes. Request state
+is a controlled immutable projection of admission, not a second independently
+maintained carrier classification. Migration tests must retain wrong-type
+rejection, exact exit results, same-carrier reuse and concurrent-start coverage.
+
 S1 changes documentation only: zero runtime, mirror, guest or release changes.
 S2 aims for zero mirror changes, using existing project-owned adapters. The
 selected S3 orderly-exit budget is at most three original host files and seven

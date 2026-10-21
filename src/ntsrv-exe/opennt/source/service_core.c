@@ -146,7 +146,6 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
             connection->native_worker=kind==OPENNT_BASE_WORKER_NATIVE ||
                 kind==OPENNT_BASE_WORKER_NATIVE_GUI_LAUNCHER;
             connection->native_gui_launcher=kind==OPENNT_BASE_WORKER_NATIVE_GUI_LAUNCHER;
-            connection->native_launch_type=native_type;
             connection->reservation=reservation;connection->task=task;connection->reservation_kind=kind;
             connection->console=console;connection->wow=shared_wow;
             /* This is the post-create registration performed by original

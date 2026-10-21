@@ -459,6 +459,7 @@ DWORD OpenNtBaseServiceCreateNativeReservation(OPENNT_BASE_CONNECTION *connectio
         if (!error) {
             connection->reservation=*reservation;
             connection->reservation_kind=text ? OPENNT_BASE_WORKER_NATIVE : OPENNT_BASE_WORKER_NATIVE_GUI_LAUNCHER;
+            connection->native_request_type=native_type;
             service_signal_worker_states(connection->service);
         }
     }
@@ -707,15 +708,31 @@ DWORD OpenNtBaseServiceStartNativeWorker(OPENNT_BASE_CONNECTION *connection,DWOR
     WCHAR image[MAX_PATH],command[MAX_PATH+3];
     STARTUPINFOW startup={sizeof(startup)};
     uint64_t reservation=0;DWORD error;BOOL text;
+    ULONGLONG deadline=GetTickCount64()+OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS;
     if(!worker || !OpenNtBaseNativeLaunchTypeIsValid(native_type))return ERROR_INVALID_PARAMETER;
     *worker=NULL;
+    if(!connection || !OpenNtBaseServicePeer(connection,pid,generation))return ERROR_ACCESS_DENIED;
     text=OpenNtBaseNativeLaunchTypeIsText(native_type);
-    if(text) {
-        error=OpenNtBaseServiceSelectNativeWorker(connection,pid,generation,worker);
-        if(error!=ERROR_NOT_FOUND)return error;
+    /* Select and reserve are one admission decision. A competing first start
+     * waits on the existing service condition, never resubmits a command or
+     * starts another carrier while the authenticated reservation is pending. */
+    EnterCriticalSection(&connection->service->lock);
+    for(;;) {
+        ULONGLONG now;
+        if(text) {
+            error=OpenNtBaseServiceSelectNativeWorker(connection,pid,generation,worker);
+            if(error!=ERROR_NOT_FOUND)break;
+        }
+        error=OpenNtBaseServiceCreateNativeReservation(connection,pid,generation,native_type,&reservation);
+        if(error!=ERROR_ALREADY_EXISTS || !text)break;
+        now=GetTickCount64();
+        if(now>=deadline){error=ERROR_TIMEOUT;break;}
+        if(!SleepConditionVariableCS(&connection->service->frontend_changed,
+            &connection->service->lock,(DWORD)(deadline-now))){error=GetLastError();break;}
     }
-    error=OpenNtBaseServiceCreateNativeReservation(connection,pid,generation,native_type,&reservation);
-    if(error)return error;
+    if(!error)connection->native_request_type=native_type;
+    LeaveCriticalSection(&connection->service->lock);
+    if(error || *worker)return error;
     /* Same-package product worker only. No remote executable/flags command. */
     error=common_product_path_w(L"system32\\ntvwm.exe",image,ARRAYSIZE(image));
     if(error)goto done;
@@ -742,6 +759,7 @@ DWORD OpenNtBaseServiceReleaseReservation(OPENNT_BASE_CONNECTION *connection,DWO
     if (!error) {
         connection->reservation=0; connection->pending_creation=FALSE;
         connection->reservation_kind=OPENNT_BASE_WORKER_DOS;
+        connection->native_request_type=0;
         connection->parent_wait=NULL; connection->worker_failed=FALSE;
         connection->parent_is_worker_exit=FALSE;
         connection->parent_receipt=connection->completed_receipt=0;

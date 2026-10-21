@@ -19,7 +19,7 @@ the prior checkpoint claims that the CAF defect is universally fixed.
 | Admission And Approval | Owner approves final design and continuous sequential execution through T pre-closure acceptance; S1 design concluded and pushed at c838c332c. |
 | Objective | Implement the approved unified management-close transaction, concurrency and role-specific service-loss cleanup, preserving the S2 normal-chain candidate. |
 | Non-goals | No guest modification/rebuild; no native GUI target lifecycle ownership; no unrelated WOW32 capability work; no T closure without owner acceptance. |
-| Reference Baseline | S3 P11 launch/result consolidation: protocol 58, thirteen images published and hash-verified at both destinations; full/incremental build, service39, 36 actual deadline scenarios, real error-result/single-consumption proof, bootstrap/loss/retirement, startup rollback, wire negatives and same-package runtime gates pass within the recorded frontier. Remaining RPC cleanup and exit-permission work remain open; no S3 acceptance or waiver. |
+| Reference Baseline | S3 P12 native admission repair: protocol 58, thirteen images published and hash-verified at both destinations; full/incremental build, service39, concurrent native startup and cross-width reuse, 36 actual deadline scenarios, error-result/single-consumption, startup rollback, wire negatives and same-package runtime gates pass within the recorded frontier. Remaining RPC cleanup and exit-permission work remain open; no S3 acceptance or waiver. |
 | Files And ABI Surface | Run16, NTSRV service/client, common protocol, worker-base, NTCON, NTVDM and NTVWM; production-linked lifecycle tests; coherent protocol updates if required. |
 | Applicable Rules | docs/README reading set; execution, architecture, coding, document and source-policy authorities; original-owner recovery and exception registration. |
 | Verification | Source-first implementation and diff review; background x86/x64 full-component/incremental builds; affected production-linked service/frontend/launcher fixtures and normal DOS/native/WOW startup/return regression; complete package deployment and hashes; governance. |
@@ -57,6 +57,17 @@ r18/r18b prove 36 actual deadline scenarios and complete runtime regression.
 r19b adds an actual error reply retaining exit 37/completed and single-consume
 proof. P11 protocol 58 was published and hash-verified at both destinations
 at 11:18:49 UTC on 2026-10-21 after review. Remaining fixed groups stay open.
+
+P12 follows pushed P11 877e22543. Migration exposed concurrent startup failure
+183 and incorrect cross-width carrier-type validation. NTSRV now makes
+selection/reservation atomic with bounded service-side waiting and validates
+each target against its own admitted request type. Review removed an unused
+connection type copy. Final-source r22 full/incremental, service39, both native
+migration cases, deadline/wire/runtime/failure gates and presentation509 pass.
+All thirteen images were published and hash-verified at both destinations at
+12:11:53 UTC on 2026-10-21. No guest, mirror or wire-signature changes. Eight
+obsolete API removals and the fixed remaining groups are still open; this is
+progress delivery, not S3 closure. The linked ledger retains failed attempts.
 
 1. S1: whole-system ownership audit and complete transition design.
 2. S2: complete normal admission/result/handoff chain, including frontend policy and lifecycle-only WOW binding.

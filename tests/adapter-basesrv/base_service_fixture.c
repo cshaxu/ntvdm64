@@ -142,7 +142,7 @@ int fixture_management_gui(void)
     EnterCriticalSection(&service->lock);
     worker->native_worker=TRUE;
     worker->native_gui_launcher=TRUE;
-    worker->native_launch_type=sizeof(void *)==8 ? OPENNT_BASE_NATIVE_LAUNCH_WIN64_GUI :
+    record->native_type=sizeof(void *)==8 ? OPENNT_BASE_NATIVE_LAUNCH_WIN64_GUI :
         OPENNT_BASE_NATIVE_LAUNCH_WIN32_GUI;
     InsertTailList(&worker->win32records,&record->link);
     LeaveCriticalSection(&service->lock);

@@ -1476,3 +1476,199 @@ images were verified too, not omitted because Git has no binary diff for them.
 Source net +78 and test net +167 (combined +245); no reduction claim for this
 checkpoint. No mirror/guest delta. Commit/push follows the final record gate;
 S3 and T448 remain active with the fixed remaining groups above.
+
+### Obsolete-client test migration in progress
+
+P11 is pushed as 877e22543d99208b37a6b64c358fcd148453f980. Its published
+protocol-58 package remains unchanged. The next cleanup first migrates tests
+which still self-register a frontend, reserve/prepare workers from a launcher,
+or retry failed native submission. No eight-method wire deletion is claimed yet.
+The scope-lifetime unit's unused reserve/release/usage mocks are removed and
+its native-start mock implements the current API directly.
+
+The native execution fixture now uses actual NTSRV-created NTCON, one request
+submission, authenticated execution-context plus frontend retention, and the
+real service Console-return operation. It no longer impersonates the frontend
+to attach a pipe. The removed local inactive-barrier assertion maps to
+tests/observation/ntvwm_presentation_test.c run_case(0/6): ERROR_NOT_READY on
+the first barrier, continued frame publication and a successful later barrier,
+with operation 38 (implicit activation) explicitly forbidden. This mapping
+still needs a fresh affected-fixture run; it is not new passing evidence.
+
+Owned background migration-r20 through r20f retain all results under
+build/t448-s3 (PIDs 21900, 19368, 36312, 38472, 25204, 2164). All ended.
+The fixture compiled; r20/r20b exposed missing frontend retention in its old
+descendant setup. r20c/d/e then returned 5 from nested public Run16. Source
+tracing shows the x86 test's System32 spelling is redirected for its direct
+request, but names Win64 cmd.exe when interpreted by x64 Run16. The fixture
+now pins the same Win32 image using the actual WOW64 directory. r20f proves
+exact 37/19 results, alias/EOF, failed-target reuse, descendant 73 and public
+Run16 61 through the same worker, rejected forged context and service return.
+
+r20f's second case, concurrent public first startup, fails: child 0 returns
+183 instead of 61, with no submission retry. Do not weaken the assertion or
+count the pair as passing. The service selection/create-reservation boundary
+must be traced before retiring this test's old APIs. Separately, source shows
+StartNativeWorker reuses a CUI worker without comparing requested bitness,
+while BindNativeTarget compares actual type to that worker's creation type.
+The observed mixed-width result and this source disagreement require an exact
+request/worker ownership decision within the existing classification contract;
+removing the suspended-target validation is not a solution. Neither finding
+is evidence that a third transport is needed. Both remain explicit migration
+blockers, alongside the unconverted reservation/root-role test families.
+
+Only tests and this evidence changed in this migration checkpoint. No product
+build input, guest, mirror, published image or wire version changed; no new
+publication or S closure is claimed. Next work retains the existing finite
+eight-API retirement scope and its assertion migration, rather than adding new
+features or erasing the newly exposed failures.
+
+### Native admission corrections — candidate, not published
+
+The next source review confirms that SelectNativeWorker and reservation create
+were separate decisions: a competing first start could return 183 even though
+the reservation belonged to the same execution Console. StartNativeWorker now
+holds the service lock across that decision and waits on the existing condition
+for competing startup, with the existing ten-second limit. It neither replays
+SubmitNativeRequest nor introduces a wire method. Worker registration and
+reservation release already wake that condition.
+
+BindNativeTarget formerly compared every target against the carrier's initial
+reservation type. Launcher admission now supplies native_request_type, copied
+into each direct record as native_type under the service lock. Binding compares
+the actual target with that record, retaining the CUI/GUI role check. The
+reservation-exact GUI selection remains unchanged. No wire, guest or original
+mirror change. Source review establishes the intended ownership; tests still
+must prove it.
+
+The native reuse fixture deliberately exercises Win32 exit 73 followed by x64
+Run16's Win64 System32 target exit 61 on the same carrier. The service fixture
+also supplies a real suspended wrong-width cmd.exe to a Win64 request, expects
+ERROR_ACCESS_DENIED with unsignalled receipt, terminates only that owned test
+process, then binds the correct target. This is not permission to run or alter
+any guest image.
+
+Owned full/incremental build r21 started at 2026-10-21 11:35:46 UTC, controller
+PID 17608. Serial verification controller PID 37832 waits for that exact result
+before compiling fixtures or testing. Scripts are build.ps1 -Round r21 and
+run-r21.ps1; stdout/stderr and eventual JSON results stay under build/t448-s3.
+The last observation had completed x86 and entered x64 first build. No final
+build/test success, publication, commit or S closure is claimed at this point.
+
+r21 full thirteen-image build and unchanged-intermediate second build pass at
+11:38:41 UTC. Serial r21 verification then failed the native-command fixture
+at line 1572: two reconnect branches still used selection without the current
+typed startup admission. They now call StartNativeWorker, retaining the same
+queue/disconnect assertions. r21b failed management-gui because its explicitly
+synthetic admitted record did not seed the new expected type. The fixture now
+seeds that field alongside its existing GUI admission seed; no production
+check was relaxed. Both failed attempts and logs remain retained.
+
+Continuation r21c (controller PID 29788, run-r21.ps1 -Round r21c) reuses the
+unchanged r21 product build and recompiles the affected test source. Service39
+passes at 11:42:03 UTC, including real wrong-width target rejection followed by
+correct binding. Actual native execution/reuse and simultaneous public startup
+both pass at 11:42:18 UTC. Win32 73 and Win64 61 use the same worker; concurrent
+startup preserves distinct 61/62 results. Scope lifetime assertions pass too.
+The controller next entered its 36 real deadline cases and remaining wire,
+runtime, error-result and startup gates. Those later outcomes remain pending;
+do not infer publication or complete acceptance from these focused passes.
+
+Candidate input identities: migration-r21c's base-client-rpc-first-test.exe
+SHA-256 501b84246f1b02083a106fc86c271ccabced104314eeb4435fa337c2d5762651;
+service fixture 80514cfb7b6beb816215b7d6e27e8eaa35bf3a61265e8bcff5564bdb2b58f06e;
+package-r21c ntsrv.exe fa9f7264a30b42a2845afeec36a6fa711751523c292ad67d54d43b36d62464e0.
+Full-build evidence verifies 1,398 unchanged intermediates on its second pass.
+
+Post-run controller PID 25524 (post-r21c.ps1) is explicitly waiting for the
+owned serial verifier PID 29788 to finish and requires its success result. It
+then builds/runs the native completion unit and original presentation fixture
+on an isolated desktop, followed by governance. The presentation run retains
+the inactive-barrier continuation assertions formerly misplaced in a launcher
+fixture. It must not overlap the real session matrix. At 11:47:59 UTC the serial
+verifier had entered 27 deadline scenarios; no final outcome was recorded.
+
+Source review of the candidate: no new RPC signature or transport, no guest or
+mirror change. Existing worker role and exact GUI reservation remain distinct
+from immutable per-request expected type; no dynamic cleanup resource was
+added. Source net +25, tests net +13 at this checkpoint (combined +38), so this
+is a correctness repair, not yet the planned eight-interface reduction.
+
+At 11:50:01 UTC all 36 actual deadline scenarios pass; wire identity, role,
+bootstrap and workerless grace/cancellation pass at 11:50:55. Frontend/worker
+RPC units retain 85/163 checks with zero failures and zero handle delta.
+Product runtime and post-run presentation/review remain in progress.
+
+Read-only quality review finds one now-unused state projection: after binding
+moved to per-request native_type, OPENNT_BASE_CONNECTION.native_launch_type
+is assigned only by service_core and seeded by the GUI observation fixture,
+with no production reader. The similarly named worker-watch field is still
+read by reservation-exact selection and must remain. Delete only the unused
+connection field/assignment and seed the fixture's request directly after the
+current immutable-package run finishes, then rebuild/verify final source.
+Do not publish the pre-cleanup candidate as if it includes that review fix.
+
+r21c serial verification completes successfully at 11:54:12 UTC. Runtime
+passes DOS17, playable WINMINE/SOL, WRITE's unchanged four-sample startup-only
+frontier, and CAF-three internal deletion with active-buffer echo before Enter.
+Worker failure/completed-worker loss, startup rejection/timeout rollback and
+actual ERROR_WRITE_FAULT plus exit 37/completed/single-consumption pass.
+Post-run verification ends at 11:54:40: native completion unit passes, and the
+presentation fixture reports 509 checks, zero failures, including inactive
+barrier continuation. Governance passes. Both controllers have ended.
+
+The quality-review fix then removes the unused connection native_launch_type
+field and service_core assignment; the GUI observation fixture directly seeds
+its request's native_type. The worker-watch field and its exact-reservation
+comparison remain. Final-source full/incremental build r22 starts under PID
+38252, with serial verification PID 1924 waiting for that build's result before
+running. Same scripts, fresh r22 evidence/package paths. Earlier r21c evidence
+is retained but is not substituted for final-source publication gates. No new
+release or commit yet. Candidate source/test combined net is now +35 rather
+than +38; the larger eight-interface reduction remains unfinished.
+
+Final-source r22 full/incremental build passes at 11:58:36 UTC. Service39
+passes at 11:59:08 and both actual native migration scenarios pass at 11:59:23.
+Serial controller PID 1924 then continues the deadline/wire/runtime sequence.
+Post-run controller PID 21988 waits for that exact process and result before
+completion/presentation units and governance. No input source is changed while
+these run. The obsolete connection field now has no remaining reference;
+the worker-watch type still has its exact-reservation consumer.
+
+Delivery controller PID 27248 (deliver-r22.ps1) waits for post-run completion,
+requires all/post/startup/migration/service success, checks the changed source
+file set and SHA-256 values against its frozen inputs, and rejects known
+installed Hook/style/VDM DLL holders before calling the existing complete
+publication transaction. That transaction separately rejects installed project
+processes, verifies all thirteen candidate hashes, backs up both destinations,
+and verifies replacement or rollback. This is a scheduled owned foreground-free
+delivery, not evidence that publication already occurred. Any failure stops it;
+commit/push still require the final evidence/status review.
+
+## P12 final-source delivery
+
+r22 completes all 36 real deadline scenarios at 12:07:06 UTC, wire gates at
+12:08:00, and same-package runtime at 12:10:49 on 2026-10-21. Runtime retains
+DOS17, playable WINMINE/SOL, WRITE four-sample startup only (editing/saving
+unverified), and CAF-three internal deletion with pre-Enter active-buffer echo.
+The full serial suite finishes at 12:11:11; post verification at 12:11:39.
+Native completion reports 142 checks, zero failures and zero handle delta;
+presentation reports 509 checks and zero failures. Service39, both actual native
+migration cases, wrong-width rejection, startup rollback, real error result and
+single consumption all pass. Earlier failed migration attempts remain above.
+
+Publication controller 27248 completes at 12:11:53 UTC: all thirteen package
+images match both assets/release and O:/winnt/system32. Recoverable prior sets
+are in build/t448-s3/publication-r22-backup. Final NTSRV SHA-256 is
+d4d4f67bf1e1d660043117b26dab436103a9f1884b462d1d5d41b6ad1a16118d;
+the committed release-manifest.json records every image. Protocol remains 58.
+
+Review: selection/reservation is serialized at the existing service owner;
+the condition wait releases that lock and has the existing ten-second bound.
+No client submission retry or new IPC is introduced. Target type belongs to
+each admitted request; exact GUI reservation, worker role and actual suspended
+target validation remain enforced. The unused connection-type projection is
+removed. Source net +23 and tests net +12, combined +35: this correctness repair
+does not claim the unfinished eight-interface reduction. Zero guest/media or
+original mirror changes; no new mirror exception required. S3 remains open for
+the already fixed RPC retirement, finite-call and exit-permission groups.

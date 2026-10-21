@@ -96,7 +96,7 @@ struct OPENNT_BASE_CONNECTION {
     BOOL registered_worker;
     BOOL native_worker;
     BOOL native_gui_launcher;
-    DWORD native_launch_type; /* Authenticated reservation value, never parsed command text. */
+    DWORD native_request_type; /* Launcher admission; copied into each queued direct request. */
     DWORD selected_native_generation; /* Explicit launcher grant, not membership alone. */
     /* The original BaseSrvDupStandardHandles copies these caller streams
      * into the suspended worker during UpdateDOSEntry.  The standalone
@@ -180,6 +180,7 @@ typedef struct OPENNT_BASE_WIN32RECORD {
     /* Bind only the admitted direct target's actual CreateProcess identity. */
     DWORD process_id;
     DWORD native_machine; /* Verified actual direct target, never worker width. */
+    DWORD native_type; /* Immutable admitted type of this request, not the carrier's first target. */
     DWORD worker_generation; /* Retained when a GUI record leaves its carrier. */
     DWORD launcher_generation,exit_code,completion_error;
     BOOL completed;
