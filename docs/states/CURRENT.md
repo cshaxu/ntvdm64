@@ -45,6 +45,12 @@ P9 source/test net +109; combined with P8 the two deliveries net -65 lines,
 with no new transport. Evidence retains the failed new role assertion and its
 correction to the unchanged service contract; no authentication was relaxed.
 
+P10 records a complete protocol-57 source inventory: 68 methods, comprising
+34 async, 25 live finite synchronous controls, eight obsolete client surfaces,
+and one intentional long-lived receive. The linked ledger fixes their groups,
+provider-preservation and test-migration requirements. This is audit evidence,
+not new runtime completion; published binaries remain P9/protocol 57.
+
 1. S1: whole-system ownership audit and complete transition design.
 2. S2: complete normal admission/result/handoff chain, including frontend policy and lifecycle-only WOW binding.
 3. S3: unified management-close transactions, concurrency and role-specific service-loss cleanup.

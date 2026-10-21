@@ -1273,3 +1273,78 @@ GetNextNativeCommand/task execution waits must not be replaced with ten-second
 task termination. Guest and mirrors unchanged; no new transport or permission
 retreat. Quality review verified output ownership, immutable identity checks,
 context serialization annotations, no replay and provider CV bounded lifetime.
+
+### Protocol 57 complete RPC inventory
+
+S3 P10 is a documentation/source-audit delivery on published P9 revision
+8929196513a01ece0ece649ff2a76a22c37e1269. No source/test/binary change or new
+runtime result is claimed. Question: does the informal remaining-control list
+cover the actual interface and distinguish dead client policy from live service
+algorithms? Procedure: enumerate every error_status_t method in service.idl,
+join exact method names against service.acf async annotations, find Client_*
+references throughout src, then trace executable consumers beyond facade
+definitions. Check tests/tools separately rather than counting them as product
+consumers. All counts below are source facts at this exact revision.
+
+| Group | Exact wire methods | Owner and disposition |
+| --- | --- | --- |
+| Finite launch/result/context (9) | SubmitNativeRequest, FinishNativeRequest, StartVdmWorker, StartNativeWorker, CompleteWorkerChannel, NativeStartupResult, BindNativeTarget, RetainFrontendRoot, RequestFrontend | common/rpc/native_command.c and NTSRV base_rpc_client_core/launch_style; real Run16, NTVDM and NTVWM consumers. Convert as one coherent group, preserving authenticated reply outcomes and output ownership. |
+| Original VDM/stream/WOW finite controls (14) | First, Check, Get, Exit, Update, ExitCode, Reenter, AttachFile, AttachPipe, RevokeStream, RegisterWowExec, WowStyle, WowStarted, WowStartup | base_rpc_client_launch_style.c; retain original behavior, typed stream/event receipts and NTSTATUS mapping. Bound transport, not guest execution. |
+| Management reads (2) | TaskSnapshot, WorkerTaskTrace | common/rpc/management.c; real NTMON readers. Bound RPC and reclaim returned arrays on failure; remain read-only observations. |
+| Obsolete client surfaces (8) | NativeExitCode, SelectNativeWorker, CommandWorker, AttachFrontend, Reserve, Prepare, Release, FrontendUsage | No production caller beyond their own facade bodies. Do not add new bounded adapters. Migrate valid tests before removing client/IDL/server-dispatch exposure. Service-internal implementations are a separate reachability decision. |
+| Deliberate command wait (1) | GetNextNativeCommand | NTVWM resident receiver; native_commands.c waits for future commands and checks worker/Console close. Preserve long-lived receive with service-loss/management cleanup; do not impose a task lifetime. |
+| Existing async (34) | Remaining IDL methods, including the eleven worker notification/I/O methods delivered by P8/P9 | Existing async designation is not whole-system lifecycle proof. Preserve prior evidence and inspect caller timeout/cleanup policy; do not count annotations as completed acceptance. |
+
+Arithmetic: 68 total = 34 async + 34 synchronous; synchronous = 9+14+2 live
+finite + 8 obsolete + 1 deliberate receive. This corrects the narrower early
+estimate of eight startup wrappers: StartVdmWorker is in launch_style, not core.
+No generated-interface parser/checker or extra authority file is introduced.
+
+Important source findings and concrete consequences:
+
+- Get is not the same as GetNextNativeCommand. base_service.c
+  OpenNtBaseServiceGet dispatches original BaseSrvGetNextVDMCommand and exports
+  WaitObjectForVDM; base_rpc_client_launch_style.c applies that event to the
+  original caller. The original srvvdm.c sets the event field and returns.
+  Therefore transport can be bounded without timing out the original wait.
+- FinishNativeRequest is not a boolean success query. native_commands.c consumes
+  NativeExitCode, sets target_completed, and can then return io_error. Existing
+  base_service_reservation_test.c asserts ERROR_WRITE_FAULT + exit 37 + completed,
+  followed by ERROR_NOT_FOUND and zero outputs on a second consumption. Preserve
+  those assertions and add async-wire coverage; the old synchronous unit stub
+  alone is not sufficient evidence. Transport cancellation must clear partial
+  scalars, while a completed application-error reply must retain them.
+- NativeExitCode's client/wire wrapper has no consumer, but its service provider
+  is called by FinishNativeRequest. SelectNativeWorker's provider is called by
+  StartNativeWorker. RetainCommandWorker is used by native submission and frontend
+  selection. FrontendUsage's service provider is used by lifecycle/management.
+  Deleting these provider algorithms merely because the client wrapper is dead
+  would break the intended central owner.
+- Old base_client_rpc_first_test branches still manually reserve/prepare workers,
+  select them, attach frontends and retry submission. The active one-shot
+  bootstrap tests and service fixtures are the current architecture. The old
+  Verify-BasesrvProduct.mjs invokes --reservation-parent; it must be explicitly
+  migrated/retired with its assertion mapping, not silently left uncompilable or
+  treated as a passing product gate. P8's recorded self-registration failure is
+  consistent with this source finding, not a reason to weaken registration.
+- RpcMgmtInqIfIds is outside the IDL count. Its diagnosis is still synchronous;
+  a transport-only version probe must not turn same-version endpoint drain into
+  a false protocol mismatch. No solution to that outstanding boundary is claimed
+  by this inventory. Likewise the native observation async helper still uses
+  250ms; async conversion alone did not establish uniform approved timing.
+
+Acceptance mapping for the fixed implementation set: all finite methods need
+paused-service deadline/local-failure evidence; mutable methods need exact
+identity, ambiguous reply/no replay, rundown and late completion evidence;
+typed outputs need rights, clearing and leak checks; Get needs immutable guest
+DOS/WOW delivery and event/stream alias coverage; Finish needs successful and
+application-error outcome preservation, failed-worker result and single consume;
+management readers need version/authentication negatives and returned-array
+cleanup. Preserve the complete package runtime gate and input-identity rules.
+The old-client test migration cannot erase a required behavior assertion.
+
+Audit conclusion: S3 remains incomplete. The finite wire sweep above, external
+diagnosis/timing checks, initialization/fault cleanup and already approved
+original-host exit permission are the remaining work, followed by S4 integrated
+acceptance. This is more precise than saying only a few core methods remain;
+it neither expands T into new WOW features nor reduces its original objective.

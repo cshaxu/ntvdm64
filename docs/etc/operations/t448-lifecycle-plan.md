@@ -314,6 +314,41 @@ back. Service rundown owns any committed state. Actual service fixtures and
 authenticated runtime calls cover successful state/attachment behavior;
 paused-service cases cover each client deadline and immediate latched follow-up.
 
+### Fixed remaining RPC closure after protocol 57
+
+The complete IDL/ACF and production-consumer audit is recorded in the
+[S3 ledger](../evidence/m0-t448-s3-close-implementation.md#protocol-57-complete-rpc-inventory).
+It supersedes an informal count of only the core/native wrappers: StartVdmWorker
+and the original VDM adapter are also on the startup/exit chain. There are 68
+wire methods: 34 async, 25 live synchronous finite controls, eight synchronous
+obsolete client surfaces, and one intentional long-lived native command receive.
+These are a fixed remediation set, not permission to add new product features.
+
+Implement the nine startup/result/context methods as one group; then the
+fourteen VDM/stream/WOW methods and two management readers as their owning
+groups. Retire the eight unused client wire surfaces only after moving each
+still-valid assertion to the current production path or service fixture.
+Keep the service-internal providers used by live algorithms. Do not convert
+dead methods merely to grow an async facade. The DOS/WOW Get RPC returns an
+original wait-event attachment; it is not the long-lived task wait itself.
+Only GetNextNativeCommand intentionally waits for future command arrival.
+
+Transport failure is distinct from an authenticated application-status reply:
+FinishNativeRequest may legitimately return an I/O error with completed=TRUE
+and the real exit code. Use the existing async completion primitive's separate
+transport status and reply value; close/drain before freeing storage. Preserve
+this outcome on real replies, clear outputs on transport failure, reject invalid
+completion flags, and never replay consumption/submission. The same distinction
+applies to original NTSTATUS-bearing VDM replies and receipt ownership.
+
+The eight retirements and 25 adaptations complete the fixed wire-method sweep,
+not S3 by themselves. The external RpcMgmtInqIfIds diagnosis, the native
+observation client's current 250ms bound versus the approved 10s policy,
+partial-initialization/fault cleanup and original-host exit permission remain
+explicit checks. Resolve them in existing RPC/process-local mechanisms; no
+new IPC, private helper process, detached pending call, guest patch or silent
+version-mismatch/error-code reclassification is authorized.
+
 S1 changes documentation only: zero runtime, mirror, guest or release changes.
 S2 aims for zero mirror changes, using existing project-owned adapters. The
 selected S3 orderly-exit budget is at most three original host files and seven
