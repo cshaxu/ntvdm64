@@ -1209,6 +1209,9 @@ int main(int argc,char **argv)
     CONSOLE_SCREEN_BUFFER_INFO current,restored;
     CONSOLE_CURSOR_INFO original_cursor={0},current_cursor={0},restored_cursor={0};
     SMALL_RECT reduced;
+#ifdef NTCON_FRAME_FAILURE_TEST
+    if(argc==2 && !strcmp(argv[1],"--restore-failures"))return test_restore_failures();
+#endif
     if((argc==2 || argc==3) && !strcmp(argv[1],"--management-return")) {
         int result;
         if(argc==3) {
@@ -1224,6 +1227,9 @@ int main(int argc,char **argv)
     if(argc==3 && !strcmp(argv[1],"--private-full")) {
         CHECK(!fopen_s(&private_report,argv[2],"w") && private_report);
         setvbuf(private_report,NULL,_IONBF,0);
+    }
+    if((argc==3 && !strcmp(argv[1],"--private-full")) ||
+        (argc==2 && !strcmp(argv[1],"--stop-join"))) {
         /* This child owns a hidden Console. Establish a small raster font on
          * its canonical buffer before derived buffers inherit it: private
          * desktops otherwise inherit user font/DPI and can expose only58x15.
@@ -1237,7 +1243,7 @@ int main(int argc,char **argv)
             wcscpy_s(font.FaceName,LF_FACESIZE,L"Terminal");
             CHECK(SetCurrentConsoleFontEx(fixture_output,FALSE,&font));
             CHECK(GetCurrentConsoleFontEx(fixture_output,FALSE,&font));
-            fprintf(private_report,"private Console font=%dx%d maximum=%dx%d\\n",
+            fprintf(private_report ? private_report : stdout,"private Console font=%dx%d maximum=%dx%d\\n",
                 font.dwFontSize.X,font.dwFontSize.Y,
                 GetLargestConsoleWindowSize(fixture_output).X,
                 GetLargestConsoleWindowSize(fixture_output).Y);

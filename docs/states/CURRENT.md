@@ -2,7 +2,14 @@
 
 ## Current Work
 
-**Active: M0 T448 S3**
+**Active: M0 T448 S4**
+
+S3 concludes with P20's published protocol64 package and the test-only P21
+closure evidence. The fixed L04-L10 reconciliation and r58b/r59 restoration
+fault tests are in the [S3 ledger](../etc/evidence/m0-t448-s3-close-implementation.md#s3-fixed-scope-closure-reconciliation).
+No production binary changes accompany P21. Under the owner's standing approval
+for sequential execution, S4 is admitted for the already planned owned-code
+polling audit. S5 integrated acceptance and owner T acceptance remain required.
 
 Owner confirms SOL launches normally in manual testing; its remaining window
 content layout issue is retained in TODO. For this lifecycle delivery, record
@@ -20,9 +27,17 @@ r57 passes full/incremental build (1,415 unchanged intermediates), service and
 nine lifecycle-owner cases, real RPC/migration/wire checks, DOS17, WRITE's prior
 frontier, WINMINE gameplay, CAF-three and supplemental/governance checks. SOL
 uses the owner's startup confirmation above. Original-exit caller/thread source
-review is recorded separately from runtime proof. P20 commit/push follows this
-verified publication. S3 is not yet closed: its final fixed-scope evidence
-reconciliation and closure record remain; do not infer T acceptance.
+review is recorded separately from runtime proof. P20 is committed and pushed
+as 2b754a31e5b20a5e6dc0e6584bb599a0b3ee89b7.
+S3 closure audit identified missing individual restoration-API fault evidence
+under L06. Test-only coverage was added to the existing actual-source
+frontend fixture; product P20 remains unchanged. r58 stopped before its join
+case because the private Console inherited a font too large for the required
+80-column canvas; r58b reuses the existing small-font setup without weakening
+geometry assertions. r58b passes library, stop/join, management-return and all
+five restoration-fault combinations. r59 full frame/restore regressions,
+governance and unchanged thirteen-image hashes pass. P21 records S3 closure
+and S4 admission; it does not claim T closure.
 
 P19 is the recoverable preceding baseline, commit
 9fdd3867325a997de18b5517dd805b62e349f0f8. Earlier progress paragraphs below retain
@@ -148,22 +163,22 @@ the prior checkpoint claims that the CAF defect is universally fixed.
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T448 S3; Ordinary Mode, single person implementer/reviewer; no subagents. |
+| Identifier Mode | M0 T448 S4; Ordinary Mode, single person implementer/reviewer; no subagents. |
 | Candidate Proposal | [NTSRV lifecycle authority](../proposals/proposal-ntsrv-lifecycle-authority-001.md). |
-| Admission And Approval | Owner approves final design and continuous sequential execution through T pre-closure acceptance; S1 design concluded and pushed at c838c332c. |
-| Objective | Implement the approved unified management-close transaction, concurrency and role-specific service-loss cleanup, preserving the S2 normal-chain candidate. |
-| Non-goals | No guest modification/rebuild; no native GUI target lifecycle ownership; no unrelated WOW32 capability work; no T closure without owner acceptance. |
-| Reference Baseline | S3 P18 progress package: protocol 62, thirteen images published/hash-verified at both destinations on 2026-10-21 17:20:19 UTC; full/incremental, service/owner faults, RPC/migration/wire, same-package runtime/CAF and original TSR Console-entry checks pass. Initialization/fault and remaining original-host exit permission remain open; no S3 acceptance or waiver. |
-| Files And ABI Surface | Run16, NTSRV service/client, common protocol, worker-base, NTCON, NTVDM and NTVWM; production-linked lifecycle tests; coherent protocol updates if required. |
+| Admission And Approval | Owner explicitly adds autonomous-code polling cleanup and approves continuous sequential execution. S3 fixed-scope closure is recorded in the linked ledger; P21 delivery must finish before S4 implementation. |
+| Objective | Inventory project-owned polling by purpose/call chain; replace avoidable polling with existing events/completions and document evidence for necessary sampling. Reduce duplicate mechanisms without altering source-owned semantics. |
+| Non-goals | No guest modification/rebuild, original internal wait rewrite, new transport, timers/retries/reconnect framework, GUI target management or unrelated WOW32 feature work; no T closure without acceptance. |
+| Reference Baseline | S3 P20 2b754a31e, protocol64, complete published thirteen-image package; r57 all runtime gates and r58b/r59 test-only closure checks pass. |
+| Files And ABI Surface | Project-owned Run16/NTSRV/common/worker-base/NTCON/NTVDM/NTVWM paths and their tests; first inventory existing Sleep/timed waits/periodic scans. No ABI change planned; any necessary change requires coherent verification/publication. |
 | Applicable Rules | docs/README reading set; execution, architecture, coding, document and source-policy authorities; original-owner recovery and exception registration. |
-| Verification | Source-first implementation and diff review; background x86/x64 full-component/incremental builds; affected production-linked service/frontend/launcher fixtures and normal DOS/native/WOW startup/return regression; complete package deployment and hashes; governance. |
-| Expected Markers | One service-owned close transaction independent of requester survival; event-driven completion and actual participant loss; only the three approved five-second policies; no competing close/restore owner; exact acknowledgements and original exit semantics. |
+| Verification | Call-chain inventory/classification, deterministic wakeup/stop/loss/idle checks for changed loops, full/incremental and every-P runtime/publication gates for production changes, code-delta and mirror audit, governance. |
+| Expected Markers | Finite inventory with remove/retain decisions; no lost wakeups or new busy loops; only approved timed policies; retained sampling justified by actual observation boundary; measured code delta. |
 | Asset Needs | Existing source and read-only original references; retained T447 fault evidence and rollback package; no new guest assets. |
-| Reporting Requirements | Distinguish verified source facts, design decisions and runtime proof; report exact remaining gaps without functional-closure claims. |
+| Reporting Requirements | Report each polling owner, trigger, replacement or retention reason and tests; separate product/test/document line deltas, performance evidence and unverified boundaries. |
 | Stop Conditions | New observable semantic retreat, missing original-source authority or material scope expansion requires owner decision. |
-| Exit Criteria | Complete L05-L08/L10 close/fault chains and applicable L04/L09 cleanup; production-linked and actual close regressions, coherent thirteen-image publication and reviewed push. P1 delivers progress only; unfinished exit-permission and initialization/fault coverage still block S3 closure. |
-| Original Owner Request | Close T447 with all unfinished work assigned; prioritize a new T centralizing lifecycle authority in NTSRV; admit only after clean delivery. |
-| Similar-Issue Sweep | All normal/failure/timeout/service-loss exits; GUI/CUI separation; internal/external management; nested launchers; worker/frontend direct-control bypasses. |
+| Exit Criteria | Every inventoried owned polling loop has a reviewed disposition; admitted removals implemented and tested; no lifecycle regression; full package delivery for product changes, clean committed/pushed state and bounded S5 handoff. |
+| Original Owner Request | Append an S to inspect and clean polling in autonomous implementations; favor event-driven happy paths, central NTSRV lifecycle ownership and simpler code. |
+| Similar-Issue Sweep | Startup/connection polling, command/result/close waits, producer-consumer wakeups, process watchers, presentation refresh and necessary Console sampling; distinguish test containment from product policy. |
 
 ## Planned S sequence
 
@@ -414,7 +429,22 @@ is historical, not concurrent admission. The prior
 [working plan](../etc/operations/t447-wow-execution-plan.md) is likewise a
 transfer inventory, not current task allocation.
 
+## S3 Closure Record
+
+S3 closes against P20's verified/published protocol64 package, commit 2b754a31e,
+and the P21 test-only delivery. The [fixed-scope reconciliation and evidence](../etc/evidence/m0-t448-s3-close-implementation.md)
+maps L04-L10 to implementation, source review, r57 runtime gates and r58b/r59
+restoration/stop/join tests. No foundation defect is transferred to S4 or S5.
+S4 is the separately approved polling cleanup; S5 retains integrated acceptance.
+SOL is owner-confirmed startup with layout TODO; WRITE retains its explicitly
+limited frontier. This is S closure, not T acceptance.
+
 ## Temporary evidence
+
+S4 owns build/t448-s4 for audit/test evidence: 8 GiB ceiling, four-hour per-run
+budget and ten-minute no-progress investigation threshold. Reuse only stable
+build/.ninja and build/.ccache for compilation. S3 exact package/rollback and
+evidence remain retained for S5 comparison; audit before deleting any material.
 
 S3 uses build/t448-s3 for owned runners, logs, staging and recovery, with an
 8 GiB ceiling, four-hour per-run budget and ten-minute no-progress investigation

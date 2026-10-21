@@ -3313,6 +3313,71 @@ project process was present at the checked publication boundary. P20 commit/push
 is the remaining delivery operation. S3's final fixed-scope reconciliation is
 still required; this publication alone does not close S3 or T448.
 
+### S3 closure audit: L06 restoration fault coverage
+
+P20 commit 2b754a31e5b20a5e6dc0e6584bb599a0b3ee89b7 is pushed and the
+delivery runner verified a clean worktree at 18:51:52.113 UTC. Subsequent
+closure review found that frontend-scope tests assert generic restore failure
+and real management return, but do not individually inject each Console restore
+API failure required by L06. This is a bounded missing test, not a newly proven
+product defect or a reason to move L06 to a later S.
+
+The existing console_frame_failure_test translation unit now wraps the actual
+frontend_session.c calls to SetConsoleMode, SetConsoleScreenBufferInfoEx,
+SetConsoleCursorInfo and SetConsoleActiveScreenBuffer with thread-local test
+faults. Four individual failures and one combined failure require every
+independent step to be attempted, the first error to survive, input restoration
+to remain independent, the presentation thread to be joined and retained
+resources to remain safely cleanable. No production or guest change is made.
+The permanent runner is tests/observation/verify-frontend-restoration.ps1.
+
+Hidden r58 controller 31752 failed at 18:54:40.427 UTC before the new cases:
+stop-join's initial geometry setup returned error87, largest58x15, requested
+80-column canvas. The original observer and console logs are retained. The
+fixture already establishes a 4x6 Terminal font for private-full; stop-join now
+uses that same setup, with all geometry assertions retained. Controller15952
+runs restore-r58b.ps1; results remain pending, never inferred from a successful
+compile or the earlier P20 runtime package.
+
+r58b completes successfully at 18:55:37.240 UTC: the existing window library,
+stop/join and management-return cases pass, as do the four independent restore
+API faults and combined fault. restore-r58b-result.json and observer/assertion
+logs retain the exact execution. This covers actual frontend destruction and
+independent restoration under injected OS errors, not a claim that Windows can
+restore a Console whose underlying OS resources are permanently unavailable.
+
+### S3 fixed-scope closure reconciliation
+
+Closure basis is the published P20 protocol64 package plus test-only r58b/r59.
+The following maps the admitted L04-L10 obligations to implementation and
+actual evidence; it does not claim every possible OS fault/interleaving.
+
+| Scope | Implemented owner and boundary | Verification and remaining boundary |
+| --- | --- | --- |
+| L04 role dispatch | ConnectionControls exports authenticated role capabilities; worker-base dispatches, NTVDM/NTVWM select cleanup. WOW has no character initialization. | r57 preparing-worker-exit, management-gui, lifecycle-wow/pending and real ntvwm startup/execution. Native GUI targets remain unmanaged; no new task controls. |
+| L05 close arbitration | lifecycle.c RequestParticipantExit/CloseManagementNode/ReconcileFrontends retain the generation-keyed operation, independent of requester survival. | r57 management-frontend-close/order/root-loss/prepare-pending, both worker/Console orderings, late worker close, worker-exit orderings and frontend-completion-barrier. CAF-three verifies actual self-delete return; S5 adds the planned integrated host/presentation permutations. |
+| L06 quiescence/restoration | NTCON freezes terminal return, stops producer access, joins before release, attempts independent restoration and preserves error; service receives actual phase facts. | r57 frontend-scope faults reject false success; r58b stop-join and management-return reject late bind/video; r59 full frame fixture covers stale ownership, EOF, partial publications and handle stability. New four individual plus combined restore faults prove all steps attempted/first error/input independence. Permanent OS restoration failure remains an error, never claimed successful. |
+| L07 service loss | Connection-owned process capability, common async cancellation and executable-owned cleanup; no recovery fence or reconnect. | r57 raw reply/connect/disconnect/loss/bootstrap, owner lifecycle-loss/natural-loss and frontend root-parent cases; explicit error6 versus real task-result assertions. No guarantee of peer restoration ordering after service death, as explicitly approved. |
+| L08 original cleanup | DIV-355 Console intent and DIV-356 pre-cleanup permission/activation retain original cleanup; source review above covers recursion, caller locks and released guest aliases. | r57 natural/partial-startup/management/loss owner cases, ordinary DOS17, WOW startup/gameplay and CAF runtime, plus retained original TSR entry proof. Original fatal/hung branches have source-order proof, not a claim that every fatal guest state was induced. No guest changes. |
+| L09 GUI cleanup | Service startup disposition and native target binding/rollback; transient launcher has no native GUI target lifetime ownership. | r57 management-gui, native-command/native-worker, raw startup-rejections, actual ntvwm-execution/public-startup and completed-worker-loss. Existing startup-only/wait contracts retained; no task-manager substitute. |
+| L10 rundown | Existing connection/reservation generations, pinned handles and actual process observation own removal; stale facts cannot revive records. | r57 stale-generation/capability failure assertions, route cancellation, request/worker/root loss, abandoned/completed launcher rundown, reentry cases and common RPC zero-handle-delta checks. S5 repeats integrated concurrency; this is not mathematical proof of every OS handle-reuse schedule. |
+
+r59 hidden controller23360 completes at 2026-10-21 18:57:40.193 UTC. Full
+console-frame-failure-test --private-desktop-full passes the retained allocation,
+projection, EOF, geometry, ordered-input and stable-handle assertions; the new
+restoration matrix passes again. Ninja reports no work; governance and diff
+checks pass. All thirteen P20 release, installed and package hashes still match;
+there are no production/src, assets or build-tool changes. Rebuilding or copying
+identical product images is unnecessary for this test/document-only P21.
+
+No open S3 foundation defect was identified by this reconciliation. S3 closes
+with the P21 reviewed test/evidence delivery; the existing S4 polling cleanup
+and S5 integrated acceptance remain required before T closure. SOL layout and
+WRITE editing/exit frontiers remain separately recorded limitations, not new
+passing claims or lifecycle waivers. P20's net106-line reduction is followed
+by necessary bounded test coverage; report test additions separately rather
+than disguising them as product simplification.
+
 ### Owner SOL acceptance clarification
 
 Owner subsequently states: "你只要记录sol可以正常启动即可 我手测可以
