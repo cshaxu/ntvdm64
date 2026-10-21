@@ -521,10 +521,10 @@ error_status_t Server_WorkerShutdownEvent(PRPC_ASYNC_STATE async,handle_t bindin
     return ERROR_SUCCESS;
 }
 error_status_t Server_RequestParticipantExit(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation)
+    ULONG generation,ULONG exit_scope)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if(!error)error=OpenNtBaseServiceRequestParticipantExit(connection,pid,generation);
+    if(!error)error=OpenNtBaseServiceRequestParticipantExit(connection,pid,generation,exit_scope);
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
 }
@@ -969,7 +969,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v61_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v62_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -1000,7 +1000,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v61_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v62_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);

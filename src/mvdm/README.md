@@ -1,5 +1,24 @@
 # mvdm
 
+MVDM-HOST-DIV-355 (T448 S3 P18): original OpenNT
+base/mvdm/softpc.new/host/src/nt_event.c routes COMMAND fTSRExit by cleaning
+the worker and posting WM_CLOSE to its Console window. The admitted standalone
+architecture assigns that Console to NTSRV/NTCON, so direct reuse would bypass
+the service's close transaction. Keep cmdPushExitInConsoleBuffer's WOW exclusion,
+CNTRL_PUSHEXIT identity and calling-thread retirement, but submit Console scope
+through the existing worker-base/RPC mechanism. Move its original host_applClose
+and ExitVDM(FALSE,0) to CntrlHandler's CNTRL_PUSHEXIT branch, followed by the
+original ExitProcess(0). This replaces that branch's obsolete DIV-147 session
+escape, not the remaining DIV-147 sites. Source-local ordering is unchanged
+within cleanup; its start now follows the service Console-close delivery.
+NTSRV resolves the authenticated frontend association and preserves quiescence;
+the project-created callback thread has no original Console-server callback
+dependency. No replacement Console window, timeout or guest change is added.
+The source already composes; a binding alone cannot relocate pre-authorized
+cleanup, so this minimal owner-local mirror change is registered. Verification
+and remaining original-entry gaps are tracked in the
+[S3 ledger](../../docs/etc/evidence/m0-t448-s3-close-implementation.md).
+
 MVDM-HOST-DIV-354 registers the remaining S4 classic-DDE construction and
 rollback closure in existing wow32/wdde.c/.h, wmdisp32.c and wmsg16.c. Keep
 the original HDDE list as the sole persistent alias authority and retain each

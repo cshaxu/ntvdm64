@@ -1,7 +1,7 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(61.0),
+    version(62.0),
     pointer_default(unique)
 ]
 interface vdm_service
@@ -10,7 +10,7 @@ interface vdm_service
     error_status_t RequestParticipantExit(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation);
+        [in] unsigned long generation, [in] unsigned long scope);
     error_status_t WorkerIoCheckpoint(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,

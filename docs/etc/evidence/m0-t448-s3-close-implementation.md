@@ -2804,3 +2804,198 @@ Protocol remains 61. No global interception, original mirror or guest change
 is present. Commit/push is verified after the final post-record documentation
 gate. L08 permission placement/concurrency and initialization remain S3 work,
 not silently deferred to the polling or WOW successor stages.
+
+### L08 pre-cleanup and startup receiver closure
+
+Read-only follow-up against pushed P17 (3fb04dd46) traces callers of
+host_applClose, not merely ExitProcess. The following findings extend the
+existing L08 insertion audit, not the task's feature scope:
+
+- mvdm_standalone_worker_begin connects before session activation, installs
+  ntvdm_worker_lifecycle_begin before WOW binding/guest-memory initialization,
+  and arms the session escape before returning to the actual setjmp in
+  obj.vdm/ntvdm.c. input_watch_create immediately starts its receiver thread.
+  A management callback can therefore enter original termination during
+  partial initialization. P17 prevents foreign-thread longjmp but does not
+  serialize this teardown with initialization.
+- The begin failure label and mvdm_standalone_worker_finish both enter local
+  cleanup without service permission. Cleanup joins the lifecycle receiver.
+  Moving that cleanup into the receiver would instead introduce self-join:
+  worker_base_input_watch_destroy waits indefinitely for its own thread.
+  Startup resource preparation, receiver activation and cleanup ownership
+  must be treated together, not repaired by relocating one cleanup call.
+- Original base/support/terminat.c cleans devices before host_applClose;
+  gating only host_applClose is too late for this path. Original
+  base/support/main.c also calls host_applClose directly after CPU return.
+  The owned termination adapter and bounded execution fixture do likewise;
+  fixture composition must not accidentally acquire production service policy.
+- Original dos/command/cmdmisc.c routes fTSRExit to
+  nt_event.c:cmdPushExitInConsoleBuffer. That function sets CNTRL_PUSHEXIT,
+  calls host_applClose and ExitVDM, posts WM_CLOSE, then exits its thread.
+  It is a separate Console-group intent, not evidence that the seven final
+  process-exit sites cover the cleanup closure. Preserve its classification
+  while moving control arbitration to NTSRV; do not equate it silently with
+  worker-only close or wait until its final ExitThread.
+- ega_trcr.c's additional host_applClose call is inside EGA_DUMP. Its object
+  being present in the Ninja graph alone does not prove that debug body is
+  in the selected product. No new product repair is inferred from that hit.
+
+Implementation constraints from this audit: the actual closing executor must
+not join itself; service authorization must precede the first worker-wide
+cleanup; startup must not expose partially initialized original resources to
+a closing executor; and Console-group intent must retain its distinct service
+scope. These are source findings, not runtime reproductions. No new timeout,
+transport, guest change or mirror modification was made. L08 remains open.
+
+### L08 scoped participant intent candidate
+
+Protocol 62 extends the existing RequestParticipantExit RPC with a copied
+scope scalar. Existing NTCON/worker fault callers retain participant scope;
+the Console scope resolves only the authenticated worker watch's retained
+frontend generation. No frontend PID/key crosses this request. WOW and native
+GUI reject Console scope; missing association and unknown scopes fail without
+starting a close. The service delegates to the same management transaction,
+including quiescence, first-accepted close kind and requester-independent
+progress. No new event, retry, deadline or transport is introduced.
+
+The existing production-linked reservation fixture adds worker-origin Console
+closure, authentication/scope/kind/association negatives, and duplicate intent
+while preserving the pending-quiescence assertions and original competition
+cases. The normal fixture runner includes this case. The first r41 compile
+finds the remaining version-61 MIDL interface names; these are corrected in
+service registration, client identity lookup and the identity fixture. r41b
+then builds NTSRV/the fixture and passes all five focused cases, including
+both worker/Console ordering directions. r41c additionally builds both native
+client widths and checks repeated Console intent. Its result is recorded after
+completion, not inferred from launching the controller.
+
+r41c controller 11396 completes successfully at 2026-10-21 16:51:27 UTC:
+NTSRV, the production-linked fixture and x86/x64 client archives build in the
+existing Ninja/ccache trees without reconfiguration. All five focused cases
+and documentation governance pass. Diff review confirms that authentication
+precedes scope handling and the close key is revalidated by generation after
+dropping the lock. These tests exercise the actual service provider, not yet
+the new scope over a live cross-process RPC connection.
+
+This is a staged edge of the admitted L08 group, not an independently completed
+feature: original fTSRExit/pre-cleanup callers, initialization and closing-thread
+ownership still require integration. The installed P17/protocol-61 package is
+unchanged. No guest or OpenNT mirror changes have been made. Do not publish
+protocol-62 components individually or describe these service fixtures as an
+end-to-end original DOS exit test.
+
+### L08 original Console-group entry candidate and real RPC proof
+
+r42 controller 35820 completes at 2026-10-21 16:57:33 UTC. Existing Ninja trees
+incrementally build the protocol-62 service, frontend and x86 RPC fixture.
+The new real worker-console-exit case leaves the actual NTCON pipe intact,
+submits Console intent twice, observes only the Console-close instruction,
+and proves frontend retirement while NTSRV stays alive. Existing frontend EOF
+and original command/reentry/exit-7 cases pass on the same inputs. This is real
+RPC and frontend execution with a test worker, not original guest acceptance.
+Documentation governance passes. No installed image is changed by these tests.
+
+Original source tracing: OpenNT base/mvdm/softpc.new/host/src/nt_event.c SHA-256
+7F555A87BA029627D6811C0F7B96964BB8A96AF90C60C89012975A4AC5442076 has
+cmdPushExitInConsoleBuffer clean the host, call ExitVDM, post WM_CLOSE and retire
+the calling thread; CntrlHandler's CNTRL_PUSHEXIT branch then calls ExitProcess(0).
+Unchanged guest tcode.asm sets scs_tsrexit after Do16BitPrompt returns the exit
+condition. cmdmisc.c copies/releases its CMDINFO guest lease before dispatching
+that intent. CmdDispatch/MS_bop_4 add no lock around the call. Frontend quiescence
+uses its own presentation thread and restoration acknowledgement, not a callback
+into that guest command frame. This establishes the reached call edges; it is
+not a blanket claim that every other termination entry is lock-free.
+
+DIV-355 stages this original Console-group path: submit the existing scoped RPC
+through worker-base, retire the original calling thread, and defer its same
+host_applClose/ExitVDM/ExitProcess sequence to the existing Console-close handler.
+The service-created handler thread replaces the old Console-window control
+delivery; no WM_CLOSE is sent to a host window. This removes the obsolete
+DIV-147 session escape at this one branch. Failed submission does not retry or
+authorize worker-resource teardown. Other natural/fatal/init entries still need
+their own pre-cleanup integration and remain L08 blockers.
+
+Controller 3732 runs full-r40.ps1 -Round r43 for the fixed candidate: thirteen
+components, unchanged second incremental, service/owner fixtures, six real-RPC
+migration cases including worker Console intent, wire/runtime and supplemental
+checks. Source edits are stopped during this run. No publication or commit is
+claimed until the resulting evidence and mirror review are complete.
+
+### r43 completed regression and original TSR entry witness
+
+Controller 3732 completed successfully at 2026-10-21 17:11:07 UTC:
+`build/t448-s3/full-r43-result.json`. Full thirteen-component and unchanged
+second incremental builds completed at 17:04:25 UTC, followed by service and
+owner-fault fixtures, six RPC migration cases, wire, same-package runtime and
+supplemental checks. The CAF check reports actual NTMON self-delete and active
+buffer echo before Enter. This covers the staged Console-scope change, not the
+remaining original natural/fatal exits or partial initialization.
+
+Independent `tests/observation/console_tsr_exit.asm` uses DOS INT 21h/AH=31h;
+it does not replace or patch any original guest. The temporary runner is
+`build/t448-s3/tsr-r43.ps1`. Initial PID 22328 failed before execution because
+the stage lacked a tests directory. After creating that directory, PID 25132
+timed out with a blank screen under the inherited long environment. Neither
+attempt proves a product exit-path result. PID 16160 repeats the established
+DOS regression environment (host System32 PATH, stage TEMP/TMP), reaching
+`CONSOLE-TSR-READY`, the resident COMMAND prompt and delivered `exit` input.
+The observer remains alive, sees only itself attached to the returned Console,
+and records Run16 exit 0x42b (1067). Its provisional zero-exit assertion fails;
+the failure is retained in tsr-r43c-result.json and is not waived as a pass.
+
+The identical probe against package-r40 (PID 21828) loses the observer before
+its final report; it is not a measured zero-exit baseline. Its NTVDM hash
+C7D29E800B3E3EFE3AAE222CCD3D47BD23F8A7E67497A7B48A3063157537D615
+matches the published P17 asset. Do not attribute the observer's termination
+solely from this incomplete report.
+
+Source attribution for the candidate's result: cmdmisc.c handles fTSRExit
+before GetNextVDMCommand can report ordinary task completion;
+service_preserve_parent_results marks an unsignalled parent receipt failed
+before original ExitVDM removes its record, and OpenNtBaseServiceExitCode
+returns ERROR_PROCESS_ABORTED. Whole-worker exit zero is therefore not proof
+of an ordinary task completion zero. Resolve the probe's acceptance against
+that explicit distinction; do not change service completion semantics merely
+to make a provisional zero assertion pass. No additional product source or
+published binary changed during these supplementary probes.
+
+The source-defined distinction supplies r43d's explicit assertion, not a new
+product semantic change: unfinished receipt returns ERROR_PROCESS_ABORTED;
+do not infer its result from the worker's exit code. PID 34720 ran from
+17:16:59 to 17:17:06 UTC and passed. `tsr-r43d-result.json` records the
+independent COM hash
+31F19B6C57C98A8B59AF574B4F7DBBF2DAEF3BD2D93A7F96A05F94FA1BA0DD67.
+It verifies delivered exit input, resident prompt/marker, Run16 return 1067,
+exactly the observer left attached to the Console, and no stage Run16,
+NTVDM or NTCON process **before** fixture cleanup. NTSRV remains alive in
+the observer report. This is original TSR Console-entry acceptance, not
+acceptance of the remaining natural/fatal or initialization group.
+
+Reproduction uses NASM `-f bin` on the tracked independent ASM, placing the
+COM in the isolated package's tests directory. With PATH set to host System32
+and TEMP/TMP to the stage, run the built console-startup-observer with arguments
+`<stage>/system32/run16.exe <stage> <report> <stage>/tests/TSREXIT.COM
+--observe-console-input-text <exit-plus-CR> --observation-timeout-ms 30000`.
+The 30-second limit belongs only to the diagnostic observer. Check the above
+report/screen assertions and exact stage executable paths before cleanup.
+
+### P18 owner-directed progress publication
+
+Owner explicitly requests publishing the latest fully tested candidate before
+continuing the remaining original logic. No later product edits are included.
+Controller 19472 runs publish-r8.ps1 -Round r43 and completes at
+2026-10-21 17:20:19 UTC. All thirteen images from package-r43 are copied to
+assets/release and O:/winnt/system32 and each destination is SHA-256 equal
+to build-r43/result.json. publication-r43.json records the exact list; the
+recoverable preceding package is publication-r43-backup. No installed product
+process was running at the publication preflight. No partial package or guest
+replacement is published.
+
+Review checks authentication before scope selection, service-derived frontend
+identity, preserved quiescence/duplicate handling, WOW/GUI rejection and original
+cleanup order. The new route does not grant cleanup on RPC acceptance. DIV-355
+is the only changed mirror code file: nt_event.c changes +13/-22 relative to
+P17, not a claim of eliminating its accumulated upstream divergence. The pinned
+upstream comparison remains +148/-41 for that file. Complete S3 original-exit
+and partial-initialization permission remain explicitly open. This is P18
+progress delivery, not S3 acceptance or T closure.

@@ -4,6 +4,14 @@
 
 **Active: M0 T448 S3**
 
+P18 publishes the protocol-62 Console-scope candidate at 2026-10-21
+17:20:19 UTC: all thirteen images match the tested package at assets/release
+and O:/winnt/system32. Full/incremental, service/owner-fault, RPC, wire,
+runtime/CAF and supplementary TSR checks pass. Owner requested this progress
+publication before further original-exit work. DIV-355 is registered; original
+guest files are unchanged. Remaining natural/fatal exit authorization and
+initialization/closing-thread coverage still block S3; this is not S3 closure.
+
 P16 (0e1f3f501) is published, pushed and verified: protocol 61 generalizes the
 existing exit-intent RPC to authenticated participants and keeps faulted NTCON
 awaiting service disposition. ConsoleRestored is an acknowledgement, not exit
@@ -24,6 +32,23 @@ r40 build/regression group successfully. P17 publishes this correction as a
 coherent protocol-61 package at 16:31:41 UTC, with hashes verified at both
 destinations. The delivering commit carries its repository identity; this
 progress delivery does not complete service permission or initialization.
+
+The worktree now stages protocol 62's explicit Console scope on the existing
+participant-exit RPC. NTSRV derives the frontend from the authenticated worker
+association and reuses the management-close transaction; no caller-selected
+frontend or new transport is introduced. Original pre-cleanup entry integration
+remains open as a group. The fTSRExit Console-group path now stages DIV-355:
+request the service before cleanup and retain original cleanup in its close
+handler. Real scoped-RPC/EOF/normal-command tests pass; controller 3732 completed
+the full r43 candidate regression at 17:11:07 UTC. An independent TSR probe
+then reached the original resident COMMAND prompt and returned 1067 after
+exit. Source tracing distinguishes that unfinished task receipt from the
+worker's zero process exit; r43d verifies 1067, delivered exit input, returned
+Console and no remaining Run16/NTVDM/NTCON before fixture cleanup. The earlier
+provisional zero-exit assertion remains recorded as failed, not retroactively
+passed. The same probe against P17 terminated the observer before a final report.
+This candidate is now the P18 installed set; its delivering commit records
+the reviewed source and complete release manifest together.
 
 Owner correction 2026-10-21: withdraw r32 from publication and audit/remove
 blanket control/lifecycle timeouts. Three five-second policies are retained:
@@ -54,7 +79,7 @@ the prior checkpoint claims that the CAF defect is universally fixed.
 | Admission And Approval | Owner approves final design and continuous sequential execution through T pre-closure acceptance; S1 design concluded and pushed at c838c332c. |
 | Objective | Implement the approved unified management-close transaction, concurrency and role-specific service-loss cleanup, preserving the S2 normal-chain candidate. |
 | Non-goals | No guest modification/rebuild; no native GUI target lifecycle ownership; no unrelated WOW32 capability work; no T closure without owner acceptance. |
-| Reference Baseline | S3 P17 progress package: protocol 61, thirteen images published/hash-verified at both destinations on 2026-10-21 16:31:41 UTC; full/incremental, session escape ownership, service/owner faults, RPC/migration/wire, same-package runtime and supplemental checks pass. Initialization/fault and original-host exit permission remain open; no S3 acceptance or waiver. |
+| Reference Baseline | S3 P18 progress package: protocol 62, thirteen images published/hash-verified at both destinations on 2026-10-21 17:20:19 UTC; full/incremental, service/owner faults, RPC/migration/wire, same-package runtime/CAF and original TSR Console-entry checks pass. Initialization/fault and remaining original-host exit permission remain open; no S3 acceptance or waiver. |
 | Files And ABI Surface | Run16, NTSRV service/client, common protocol, worker-base, NTCON, NTVDM and NTVWM; production-linked lifecycle tests; coherent protocol updates if required. |
 | Applicable Rules | docs/README reading set; execution, architecture, coding, document and source-policy authorities; original-owner recovery and exception registration. |
 | Verification | Source-first implementation and diff review; background x86/x64 full-component/incremental builds; affected production-linked service/frontend/launcher fixtures and normal DOS/native/WOW startup/return regression; complete package deployment and hashes; governance. |
@@ -266,7 +291,7 @@ Both assets/release and O:/winnt/system32 were hash-verified. All-component
 build/incremental and focused lifecycle tests pass; actual remaining failed
 and unexecuted gates remain explicitly listed in the closure, not converted to
 passes. Guest, configuration and assets/winnt.zip are unchanged. This checkpoint
-adds no OpenNT mirror diff; current service protocol revision is 60. The
+retains registered DIV-355 in nt_event.c; current service protocol revision is 62. The
 protocol-51 through protocol-54 paragraphs below retain prior checkpoints.
 
 The published protocol-51 continuation removes unused retirement RPC methods and

@@ -264,6 +264,7 @@ static int frontend_completion_barrier(void)
  * elapsed time cannot advance it; acknowledgement and real worker exit do. */
 static int management_frontend_close_ordering(unsigned phase,unsigned competing)
 {
+    BOOL worker_console=competing==5;
     BOOL self_exit=competing>=3;
     OPENNT_BASE_SERVICE *service=OpenNtBaseServiceStart();
     OPENNT_BASE_CONNECTION *root=NULL,*worker=NULL;
@@ -298,28 +299,40 @@ static int management_frontend_close_ordering(unsigned phase,unsigned competing)
         if(tree[index].key.category==MANAGEMENT_FRONTEND)key=tree[index].key;
     CHECK(key.category==MANAGEMENT_FRONTEND);
     if(self_exit) {
-        competing-=2;
-        CHECK(OpenNtBaseServiceRequestParticipantExit(root,root_child.dwProcessId,root_generation+1)==ERROR_ACCESS_DENIED);
-        CHECK(OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation+1)==ERROR_ACCESS_DENIED);
+        competing=worker_console ? 0 : competing-2;
+        CHECK(OpenNtBaseServiceRequestParticipantExit(root,root_child.dwProcessId,root_generation+1,OPENNT_EXIT_PARTICIPANT)==ERROR_ACCESS_DENIED);
+        CHECK(OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation+1,OPENNT_EXIT_CONSOLE)==ERROR_ACCESS_DENIED);
+        CHECK(OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation,MAXDWORD)==ERROR_INVALID_PARAMETER);
+        watch.wow=TRUE;
+        CHECK(OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation,OPENNT_EXIT_CONSOLE)==ERROR_NOT_SUPPORTED);
+        watch.wow=FALSE;watch.native_gui_launcher=TRUE;
+        CHECK(OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation,OPENNT_EXIT_CONSOLE)==ERROR_NOT_SUPPORTED);
+        watch.native_gui_launcher=FALSE;watch.frontend_root_generation=0;
+        CHECK(OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation,OPENNT_EXIT_CONSOLE)==ERROR_NOT_READY);
+        watch.frontend_root_generation=root_generation;
+        CHECK(!root->frontend_close_requested);
         CHECK(watch.close_kind==WORKER_CLOSE_NONE);
     }
     if(competing==1) {
-        CHECK(!(self_exit ? OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation) :
+        CHECK(!(self_exit ? OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation,OPENNT_EXIT_PARTICIPANT) :
             OpenNtBaseServiceTerminateWorker(service,worker_child.dwProcessId)));
         CHECK(watch.close_kind==WORKER_CLOSE_WORKER);
     }
     before=GetTickCount64();
-    CHECK(!(self_exit ? OpenNtBaseServiceRequestParticipantExit(root,root_child.dwProcessId,root_generation) :
+    CHECK(!(worker_console ? OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation,OPENNT_EXIT_CONSOLE) :
+        self_exit ? OpenNtBaseServiceRequestParticipantExit(root,root_child.dwProcessId,root_generation,OPENNT_EXIT_PARTICIPANT) :
         OpenNtBaseServiceCloseManagementNode(service,&key)));
     if(competing==2) {
-        CHECK(!(self_exit ? OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation) :
+        CHECK(!(self_exit ? OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation,OPENNT_EXIT_PARTICIPANT) :
             OpenNtBaseServiceTerminateWorker(service,worker_child.dwProcessId)));
         CHECK(watch.close_kind==WORKER_CLOSE_CONSOLE);
     }
     CHECK(GetTickCount64()-before<1000); /* No requester-held lifetime wait. */
+    if(worker_console)
+        CHECK(!OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation,OPENNT_EXIT_CONSOLE));
     if(self_exit) {
-        CHECK(!OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation));
-        CHECK(!OpenNtBaseServiceRequestParticipantExit(root,root_child.dwProcessId,root_generation));
+        CHECK(!OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation,OPENNT_EXIT_PARTICIPANT));
+        CHECK(!OpenNtBaseServiceRequestParticipantExit(root,root_child.dwProcessId,root_generation,OPENNT_EXIT_PARTICIPANT));
     }
     CHECK(root->frontend_close_requested);
     CHECK(!OpenNtBaseServiceCloseManagementNode(service,&key));
@@ -1046,6 +1059,7 @@ int main(int argc,char **argv)
     if(argc==2 && !strcmp(argv[1],"--management-console-then-worker"))return management_frontend_close_ordering(1,2);
     if(argc==2 && !strcmp(argv[1],"--worker-exit-then-console"))return management_frontend_close_ordering(0,3);
     if(argc==2 && !strcmp(argv[1],"--console-then-worker-exit"))return management_frontend_close_ordering(2,4);
+    if(argc==2 && !strcmp(argv[1],"--worker-console-exit"))return management_frontend_close_ordering(2,5);
     if(argc==2 && !strcmp(argv[1],"--shared-worker-residency"))return fixture_shared_worker_residency();
     if(argc==3 && !strcmp(argv[1],"--reservation-wait-child"))
         return reservation_wait_child(argv[2]);

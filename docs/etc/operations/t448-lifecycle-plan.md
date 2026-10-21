@@ -409,3 +409,22 @@ requires local divergence/provenance registration and lock/reentry tests;
 this budget is design, not an implemented or measured final diff.
 No guest diff is permitted. Protocol changes update the real common IDL
 and all consumers together, with the complete thirteen-image release gate.
+
+The original fTSRExit/Console-group entry uses an explicit Console scope on
+the existing participant-exit RPC, not a new transport or a target NTCON PID.
+NTSRV authenticates the participant, derives its retained frontend generation,
+and enters the same frontend-close transaction used by management. WOW and
+native GUI carriers cannot request this scope; a missing association is an
+error, never permission to select another Console. Ordinary participant faults
+retain their existing participant scope. Acceptance remains distinct from the
+existing close instruction. Protocol 62 stages this finite service/client edge;
+original pre-cleanup entry integration and lock-safe permission are still open,
+so it cannot be published as completed L08 or mixed with protocol-61 images.
+
+The pre-cleanup sweep additionally identifies nt_event.c's Console-group
+intent, absent from the earlier final-ExitProcess inventory. DIV-355 registers
+that one owner-local entry/handler change: source-owned cleanup moves from
+before the Console request to its service-delivered close handler, preserving
+host_applClose, ExitVDM and original zero process-exit ordering. The RPC carries
+scope, not an arbitrary frontend identity. This is the explicit correction to
+the earlier file/call inventory, not a claim that its remaining sites are done.

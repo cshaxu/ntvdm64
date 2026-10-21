@@ -81,7 +81,7 @@ void __RPC_USER MIDL_user_free(void *value) { free(value); }
 static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding,ULONGLONG deadline)
 {
     RPC_IF_ID expected;
-    RPC_STATUS status=RpcIfInqId(Client_vdm_service_v61_0_c_ifspec,&expected);
+    RPC_STATUS status=RpcIfInqId(Client_vdm_service_v62_0_c_ifspec,&expected);
     if (status) return status;
     return common_rpc_classify_interface(binding,&expected,deadline);
 }
@@ -553,7 +553,7 @@ DWORD OpenNtBaseClientWaitFrontendConsoleRestored(void)
 DWORD OpenNtBaseClientWorkerShutdownEvent(HANDLE *shutdown)
 { return client_worker_event(common_rpc_worker_shutdown_event,shutdown); }
 
-DWORD OpenNtBaseClientRequestParticipantExit(void)
+static DWORD client_request_exit(DWORD scope)
 {
     RPC_ASYNC_STATE async={0};
     DWORD error=OpenNtBaseClientFailure(0);
@@ -564,13 +564,19 @@ DWORD OpenNtBaseClientRequestParticipantExit(void)
     error=common_rpc_begin_async(&async);if(error)return error;
     RpcTryExcept {
         Client_RequestParticipantExit(&async,client.binding,client.connection,
-            client.process,client.generation);
+            client.process,client.generation,scope);
     }
     RpcExcept(1){error=RpcExceptionCode();}
     RpcEndExcept
     error=common_rpc_end_async(&async,error,client.server,INFINITE);
     return OpenNtBaseClientFailure(error);
 }
+
+DWORD OpenNtBaseClientRequestParticipantExit(void)
+{ return client_request_exit(OPENNT_EXIT_PARTICIPANT); }
+
+DWORD OpenNtBaseClientRequestConsoleExit(void)
+{ return client_request_exit(OPENNT_EXIT_CONSOLE); }
 
 DWORD OpenNtBaseClientWorkerConsoleCloseEvent(HANDLE *close)
 { return client_worker_event(common_rpc_worker_console_close_event,close); }

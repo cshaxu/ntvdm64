@@ -79,7 +79,7 @@ DWORD OpenNtBaseServiceTerminateWorker(OPENNT_BASE_SERVICE *service,uint32_t pro
 }
 
 DWORD OpenNtBaseServiceRequestParticipantExit(OPENNT_BASE_CONNECTION *participant,DWORD pid,
-    DWORD generation)
+    DWORD generation,DWORD scope)
 {
     OPENNT_BASE_SERVICE *service;
     OPENNT_BASE_MANAGEMENT_KEY key={0};
@@ -89,6 +89,9 @@ DWORD OpenNtBaseServiceRequestParticipantExit(OPENNT_BASE_CONNECTION *participan
     service=participant->service;
     EnterCriticalSection(&service->lock);
     if(!OpenNtBaseServicePeer(participant,pid,generation))goto done;
+    if(scope!=OPENNT_EXIT_PARTICIPANT && scope!=OPENNT_EXIT_CONSOLE) {
+        error=ERROR_INVALID_PARAMETER;goto done;
+    }
     key.instance=service->management_epoch;
     key.generation=participant->process.SequenceNumber;
     if(participant->frontend_capability) {
@@ -102,6 +105,14 @@ DWORD OpenNtBaseServiceRequestParticipantExit(OPENNT_BASE_CONNECTION *participan
      * release is a distinct service result, not a Console/worker command. */
     if(watch->native_gui_launcher){error=ERROR_NOT_SUPPORTED;goto done;}
     key.category=MANAGEMENT_WORKER;
+    if(scope==OPENNT_EXIT_CONSOLE) {
+        if(watch->wow){error=ERROR_NOT_SUPPORTED;goto done;}
+        if(!watch->frontend_root_generation){error=ERROR_NOT_READY;goto done;}
+        /* Never accept a caller-supplied frontend identity. The retained
+         * authenticated association selects the existing close transaction. */
+        key.category=MANAGEMENT_FRONTEND;
+        key.generation=watch->frontend_root_generation;
+    }
     error=ERROR_SUCCESS;
 done:
     LeaveCriticalSection(&service->lock);

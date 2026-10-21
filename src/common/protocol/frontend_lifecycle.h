@@ -8,6 +8,11 @@
  * use this duration. Ordinary RPC and resource joins have no deadline. */
 #define OPENNT_LIFECYCLE_GRACE_MS 5000u
 
+enum opennt_participant_exit_scope {
+    OPENNT_EXIT_PARTICIPANT=0,
+    OPENNT_EXIT_CONSOLE=1
+};
+
 enum opennt_frontend_retire_action {
     OPENNT_FRONTEND_RETIRE_NONE=0,
     OPENNT_FRONTEND_RETIRE_FINAL_CLOSE=1,

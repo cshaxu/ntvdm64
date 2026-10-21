@@ -50,6 +50,8 @@ DWORD OpenNtBaseClientWorkerShutdownEvent(HANDLE *shutdown);
 /* Report inability to continue. NTSRV selects the authenticated participant's
  * close transaction; successful submission is not permission to exit. */
 DWORD OpenNtBaseClientRequestParticipantExit(void);
+/* Close only this authenticated participant's associated Console. */
+DWORD OpenNtBaseClientRequestConsoleExit(void);
 DWORD OpenNtBaseClientWorkerConsoleCloseEvent(HANDLE *close);
 DWORD OpenNtBaseClientWorkerIoReleaseEvent(HANDLE *release);
 DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE capability);

@@ -85,6 +85,7 @@ static int admitted_vdm_child(void)
     CHAR command[1024]={0};WCHAR name[128];HANDLE released,first_wait=NULL;
     HANDLE lease_pipe=NULL,lease_frontend=NULL,lease_ready=NULL;
     BOOL io_fault=GetEnvironmentVariableW(L"NTVDM_RPC_TEST_IO_FAULT",name,ARRAYSIZE(name))!=0;
+    BOOL console_exit=io_fault && !wcscmp(name,L"2");
     unsigned index;
     REQUIRE(GetEnvironmentVariableW(L"NTVDM_RPC_TEST_RELEASE",name,ARRAYSIZE(name)));
     released=OpenEventW(SYNCHRONIZE,FALSE,name);REQUIRE(released);
@@ -112,17 +113,26 @@ static int admitted_vdm_child(void)
     REQUIRE(get_first_command(command,sizeof(command))==STATUS_SUCCESS);
     REQUIRE(!lstrcmpA(command,"MEM\\r\\n"));
     if(io_fault) {
-        HANDLE close=NULL,broker=NULL;
+        HANDLE close=NULL,shutdown=NULL,broker=NULL;
         REQUIRE(!OpenNtBaseClientWorkerConsoleCloseEvent(&close));
+        REQUIRE(!OpenNtBaseClientWorkerShutdownEvent(&shutdown));
         REQUIRE(WaitForSingleObject(close,0)==WAIT_TIMEOUT);
-        /* Deliberate unauthorised EOF: the real NTCON must report the fault,
-         * return its Console, then obtain NTSRV's worker-close instruction. */
-        CloseHandle(lease_pipe);lease_pipe=NULL;
+        if(console_exit) {
+            /* Keep I/O intact: only this authenticated request can initiate
+             * the Console transaction. A duplicate must not restart it. */
+            REQUIRE(!OpenNtBaseClientRequestConsoleExit());
+            REQUIRE(!OpenNtBaseClientRequestConsoleExit());
+        } else {
+            /* Deliberate unauthorised EOF: the real NTCON reports the fault. */
+            CloseHandle(lease_pipe);lease_pipe=NULL;
+        }
         REQUIRE(WaitForSingleObject(close,10000)==WAIT_OBJECT_0);
+        REQUIRE(WaitForSingleObject(shutdown,0)==WAIT_TIMEOUT);
         REQUIRE(!OpenNtBaseClientBrokerProcess(&broker));
         REQUIRE(WaitForSingleObject(broker,0)==WAIT_TIMEOUT);
         REQUIRE(WaitForSingleObject(lease_frontend,0)==WAIT_TIMEOUT);
-        CloseHandle(broker);CloseHandle(close);CloseHandle(lease_frontend);CloseHandle(lease_ready);
+        if(lease_pipe)CloseHandle(lease_pipe);
+        CloseHandle(broker);CloseHandle(close);CloseHandle(shutdown);CloseHandle(lease_frontend);CloseHandle(lease_ready);
         CloseHandle(released);OpenNtBaseClientDisconnectCurrent();
         return 0; /* Test carrier honors the service's Console-close order. */
     }
@@ -155,7 +165,7 @@ static int admitted_vdm_child(void)
     return 0;
 }
 
-static int admitted_vdm_parent(BOOL io_fault)
+static int admitted_vdm_parent(unsigned io_fault)
 {
     BASE_API_MSG message={0};STARTUPINFOA startup={sizeof(startup)};
     CHAR command[]="MEM\\r\\n";WCHAR name[128],*environment,*end;
@@ -164,7 +174,7 @@ static int admitted_vdm_parent(BOOL io_fault)
     swprintf_s(name,ARRAYSIZE(name),L"Local\\NTVDM-RPC-admitted-release-%lu",GetCurrentProcessId());
     released=CreateEventW(NULL,TRUE,FALSE,name);REQUIRE(released);
     REQUIRE(SetEnvironmentVariableW(L"NTVDM_RPC_TEST_RELEASE",name));
-    REQUIRE(SetEnvironmentVariableW(L"NTVDM_RPC_TEST_IO_FAULT",io_fault ? L"1" : NULL));
+    REQUIRE(SetEnvironmentVariableW(L"NTVDM_RPC_TEST_IO_FAULT",io_fault==2 ? L"2" : io_fault ? L"1" : NULL));
     REQUIRE(!OpenNtBaseClientConnectCurrent());
     REQUIRE(!OpenNtBaseClientStartFrontend((uint64_t)(UINT_PTR)GetConsoleWindow(),TRUE,
         &root,&capability,&restored));
@@ -202,7 +212,8 @@ static int admitted_vdm_parent(BOOL io_fault)
     OpenNtBaseClientDisconnectCurrent();
     REQUIRE(SetEnvironmentVariableW(L"NTVDM_RPC_TEST_RELEASE",NULL));
     REQUIRE(SetEnvironmentVariableW(L"NTVDM_RPC_TEST_IO_FAULT",NULL));
-    puts(io_fault ? "PASS real frontend EOF reports to live NTSRV; Console-close instruction precedes carrier exit and frontend retirement" :
+    puts(io_fault==2 ? "PASS real worker Console-exit RPC: intact I/O, duplicate intent, Console-only instruction, live NTSRV and frontend retirement" :
+        io_fault ? "PASS real frontend EOF reports to live NTSRV; Console-close instruction precedes carrier exit and frontend retirement" :
         "PASS service-admitted VDM: original command/reentry, repeated wait identity, wait-only worker, exact exit 7 and child assertions");
     return 0;
 }
@@ -709,6 +720,7 @@ int main(int argc,char **argv)
     }
     if(argc==2 && !lstrcmpA(argv[1],"--admitted-vdm"))return admitted_vdm_parent(FALSE);
     if(argc==2 && !lstrcmpA(argv[1],"--frontend-io-fault"))return admitted_vdm_parent(TRUE);
+    if(argc==2 && !lstrcmpA(argv[1],"--worker-console-exit"))return admitted_vdm_parent(2);
     if (argc==5 && !lstrcmpA(argv[1],"--ntvwm-reuse-child")) return ntvwm_reuse_child(argv);
     if (argc==2 && !lstrcmpA(argv[1],"--native-worker-startup")) return ntvwm_execution_rpc();
     if (argc==2 && !lstrcmpA(argv[1],"--ntvwm-execution")) return ntvwm_execution_rpc();

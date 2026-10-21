@@ -57,7 +57,7 @@ HANDLE OpenNtBaseServiceFrontendLifetimeChanged(OPENNT_BASE_SERVICE *);
 DWORD OpenNtBaseServiceWorkerShutdownEvent(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE *);
 /* Report spontaneous whole-worker exit intent. Success accepts the request;
  * only the existing service close instruction grants teardown permission. */
-DWORD OpenNtBaseServiceRequestParticipantExit(OPENNT_BASE_CONNECTION *,DWORD,DWORD);
+DWORD OpenNtBaseServiceRequestParticipantExit(OPENNT_BASE_CONNECTION *,DWORD,DWORD,DWORD);
 DWORD OpenNtBaseServiceWorkerConsoleCloseEvent(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE *);
 DWORD OpenNtBaseServiceWorkerIoReleaseEvent(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE *);
 DWORD OpenNtBaseServiceReconcileFrontends(OPENNT_BASE_SERVICE *);

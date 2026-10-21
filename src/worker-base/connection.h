@@ -22,6 +22,7 @@ DWORD worker_base_shutdown_event(HANDLE *shutdown);
 /* Request only; acceptance is not permission. The executable waits for its
  * existing service instruction or confirmed loss before teardown. */
 DWORD worker_base_request_exit(void);
+DWORD worker_base_request_console_exit(void);
 /* Console-close is a separate instruction from worker shutdown. */
 DWORD worker_base_console_close_event(HANDLE *close);
 /* Execute worker-local close after an authenticated instruction. Grace is

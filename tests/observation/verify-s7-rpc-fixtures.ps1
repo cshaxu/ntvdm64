@@ -6,7 +6,7 @@ param(
     [Parameter(Mandatory)][ValidateSet('client','bootstrap','startup-rejections',
         'native-worker-failure','native-completed-worker-loss','native-io-error',
         'workerless-park','worker-loss-park','monitor-rpc',
-        'native-command','native-registry','ntvwm-execution','ntvwm-public-startup','frontend-root-parent','admitted-vdm','frontend-io-fault')][string[]]$Cases
+        'native-command','native-registry','ntvwm-execution','ntvwm-public-startup','frontend-root-parent','admitted-vdm','frontend-io-fault','worker-console-exit')][string[]]$Cases
 )
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/isolated_package_cleanup.ps1"
@@ -21,12 +21,12 @@ foreach($case in $Cases) {
     $report=$ReportPrefix+'-'+$case+'.txt'
     if(Test-Path -LiteralPath $report){throw 'Use a fresh report prefix'}
     $image=if($case -eq 'client'){'frontend-request-client-test.exe'}
-        elseif($case -in @('ntvwm-execution','ntvwm-public-startup','frontend-root-parent','admitted-vdm','frontend-io-fault')){'base-client-rpc-first-test.exe'}
+        elseif($case -in @('ntvwm-execution','ntvwm-public-startup','frontend-root-parent','admitted-vdm','frontend-io-fault','worker-console-exit')){'base-client-rpc-first-test.exe'}
         elseif($case -eq 'monitor-rpc'){'monitor-rpc-test.exe'}
         elseif($case -in @('native-command','native-registry')){'basesrv-service-reservation-test.exe'}
         else{'broker-frontend-bootstrap-test.exe'}
     $casePackageRoot=$PackageRoot
-    if($case -in @('admitted-vdm','frontend-io-fault')) {
+    if($case -in @('admitted-vdm','frontend-io-fault','worker-console-exit')) {
         # Only this fresh build-owned package substitutes a test host worker;
         # no installed/release image or original guest file is changed.
         $casePackageRoot=$ReportPrefix+'-'+$case+'-package\system32'
@@ -66,7 +66,7 @@ foreach($case in $Cases) {
     foreach($argument in $arguments){$start.ArgumentList.Add($argument)}
     $scope=$null;$service=$null;$process=$null
     try {
-        if($case -in @('ntvwm-execution','ntvwm-public-startup','frontend-root-parent','admitted-vdm','frontend-io-fault')) {
+        if($case -in @('ntvwm-execution','ntvwm-public-startup','frontend-root-parent','admitted-vdm','frontend-io-fault','worker-console-exit')) {
             $scope=New-IsolatedPackageScope $casePackageRoot
             $scope.Paths+=Join-Path $casePackageRoot $image
             $serviceStart=[Diagnostics.ProcessStartInfo]::new((Join-Path $casePackageRoot 'ntsrv.exe'))

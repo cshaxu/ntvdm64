@@ -60,6 +60,7 @@
 #include "ntvdm-exe/softpc/mvdm_softpc_mouse_guest.h"
 #include "nt_event.h"
 #include "mvdm_softpc_termination.h"
+#include "worker-base/connection.h" /* MVDM-HOST-DIV-355: Console exit intent. */
 #include "mvdm_softpc_event_thread.h"
 /* DIVERGENCE(MVDM-HOST-DIV-317): pending scan data retains its raw origin. */
 #include "mvdm_keyboard_history.h"
@@ -1386,11 +1387,12 @@ BOOL CntrlHandler(ULONG CtrlType)
                 }
 #endif
             if (CntrlHandlerState & CNTRL_PUSHEXIT) {
-                /* DIVERGENCE(MVDM-HOST-DIV-147): an NT4 console-control
-                 * event ended a dedicated ntvdm.exe.  End only the bound
-                 * session in the current in-process composition. */
-                (void)mvdm_softpc_terminate_current_session(
-                    (uint32_t)VDMForWOW, 0u);
+                /* DIVERGENCE(MVDM-HOST-DIV-355): defer the original
+                 * cmdPushExit cleanup until the service's Console-close
+                 * delivery. Preserve its cleanup/ExitVDM/process-exit order. */
+                host_applClose();
+                ExitVDM(FALSE,0);
+                ExitProcess(0);
                 return FALSE;
             }
 
@@ -1997,23 +1999,12 @@ void cmdPushExitInConsoleBuffer (void)
         }
     CntrlHandlerState |= CNTRL_PUSHEXIT;
 
-    /*
-     *  Signal all processes in this group that they should be
-     *  terminating. Do this by posting a WM_CLOSE message to
-     *  the console window, which causes console to send control
-     *  close event to all processes.
-     *
-     *  The vdm must be able to receive control events from the
-     *  console after posting the WM_CLOSE msg since the vdm's
-     *  CntrlHandler is still registered. To be safe we do
-     *  vdm specific cleanup first, and let the CntrlHandler
-     *  do the ExitProcess(). This avoids possible deadlock\race
-     *  conditions with the console.
-     */
-    host_applClose();
-    ExitVDM(FALSE,0);
-    PostMessage(hWndConsole, WM_CLOSE, 0,0);
-    ExitThread(0);
+    /* DIVERGENCE(MVDM-HOST-DIV-355): NTSRV owns this Console group.
+     * Report intent through the existing RPC; do not close a host window or
+     * release worker resources before its instruction. The original calling
+     * thread retires; the independent lifecycle receiver remains alive.
+     * Submission failure is not retried or treated as teardown permission. */
+    ExitThread(worker_base_request_console_exit());
 }
 
 
