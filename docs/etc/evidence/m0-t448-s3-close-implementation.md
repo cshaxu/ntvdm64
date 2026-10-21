@@ -2662,3 +2662,145 @@ the remaining startup/partial-initialization inventory still need source-led
 implementation and coverage. S4 polling audit has not begun. Commit/push and
 clean-tree identity will be verified separately after the final documentation
 gate; no owner acceptance is implied by publication.
+
+P16 repository delivery is verified: commit
+0e1f3f501c513730769f9cfa2241201f1a402663 matches origin/main, the working tree
+is clean, and commit-r39-result records success at 16:02:42 UTC. Git emitted
+an unreachable-object maintenance warning; no manual prune was executed.
+
+### L08 source-order audit after P16
+
+Read-only tracing against P16 confirms that the earlier seven final
+ExitProcess substitutions are only an inventory, not a sufficient design:
+
+| Chain | Actual ordering / consequence |
+| --- | --- |
+| SoftPC terminate (base/support/terminat.c) | Device/video/storage shutdown precedes host_applClose, host_terminate and ExitProcess; permission only at the final exit cannot protect resource ownership. The repeated-termination branch also calls CRT exit directly. |
+| Normal CPU return (base/support/main.c) | host_start_cpu returns into host_applClose before the standalone outer finish; authorization only in outer cleanup is too late for original host resources. |
+| Authored session escape (mvdm_softpc_termination.c) | mvdm_softpc_terminate_current_session calls host_applClose before session_terminate_current; an owned pre-close seam exists, but it is not the only termination caller. |
+| WOW whole-process exits (wkman.c and wow32.c) | All five inspected final exits first call ExitVDM(WOWVDM, ALL_TASKS). Original task-record cleanup must not precede the intended service decision merely because process exit itself is delayed. Single-task ExitVDM remains a different contract. |
+| Received worker close / service loss | worker_base_shutdown_close with INFINITE calls the original close callback on the receiving thread. ntvdm_worker_lifecycle_end joins the input watcher, so routing this callback through standalone cleanup would self-join. The finite Console-close grace instead runs its handler on another thread. |
+| Existing service Exit RPC | OpenNtBaseServiceExit invokes original record cleanup under the service lock and returns wait-identity disposal, not a distinct pre-cleanup permission. It must not silently be treated as an already-existing permission handshake. |
+
+The inspection covers source ordering, not runtime proof of a new fix. No
+mirror or product source changed in this audit. Implementation must establish
+permission before the first whole-worker teardown, preserve received-command
+and service-loss paths without a second request, and avoid moving teardown
+onto a thread that it joins. The prior three-file/seven-site estimate is not
+authority to ship a late check or to intercept ExitProcess globally. Resolve
+the existing original and authored entry seams before changing the measured
+mirror budget; retain normal task completion separately from worker retirement.
+
+The L08 continuation identifies a concrete authored escape-ownership defect:
+session_terminate_current checked only session binding and a process-shared
+armed flag, although obj.vdm/ntvdm.c establishes setjmp on the main thread.
+CntrlHandler's CNTRL_PUSHEXIT branch calls the same escape from a bound Console
+handler thread. A shared session binding is not ownership of another thread's
+saved C stack. Add thread-local ownership at arm/disarm/terminate in session.c;
+foreign-thread termination returns the existing refused-operation result and
+cannot mutate completion or disarm the owner's escape. The service-authorized
+Console handler can then return through its existing shutdown owner rather
+than jumping across threads. No mirror, protocol, guest or global hook change.
+
+Extend the existing session_lifecycle_test with a real foreign thread, unchanged
+owner state/arming, same-thread completion code 37 and disarm/reuse checks.
+Expose it through the existing source-owner Ninja generator, linking the actual
+session/guest-memory objects. session-r40 runs configure and that focused test
+in the stable x86 tree; its five-second thread join is a diagnostic test budget,
+not product policy. This repair is only an L08 safety prerequisite, not proof of
+the pending service-permission handshake or complete Console teardown.
+
+Controller 27520 completes session-r40 successfully at 16:13:22 UTC: real
+Ninja compiles session.c and session_lifecycle_test.c and links the production
+guest-memory object; the executable exits zero. This proves foreign-thread
+refusal/no mutation, owner-thread completion and disarm/reuse in the focused
+fixture. It is not a full package, a reproduced user-facing failure or a new
+delivery. The deployed P16 package remains unchanged while L08 implementation
+continues; no guest or OpenNT mirror diff was introduced.
+
+### L08 rejected shortcut and existing arbitration verification
+
+Further source tracing supplies the exact counterexample behind the S1 ban on
+inferring process exit from ExitVDM arguments: wow32/wkman.c W32DestroyTask
+calls ExitVDM(WOWVDM, ALL_TASKS) when nWOWTasks is zero, then continues
+WOWCleanup, WK32DeleteTask and thread-handle cleanup. Therefore a generic hook
+on ALL_TASKS would incorrectly turn task cleanup into an asynchronous process
+termination point, and could interrupt the remaining source-owned cleanup.
+Keep this route distinct from WK32ExitKernel/WK32FatalExit/WOWStartupFailed and
+the explicit fatal/hung-process sites. The alternative nt_term.c body is not
+selected by the current Ninja graph; do not patch it as another runtime owner.
+The direct keyba.c terminate caller is HUNTER-only, not evidence of a current
+product entry. Existing namespace-only mvdm_softpc_symbol_compat.h renames both
+the definition and calls; changing that macro alone cannot insert a wrapper.
+
+The potential management race was checked before changing code: accepted
+frontend close already sets each associated worker watch's close_kind to
+WORKER_CLOSE_CONSOLE under the service lock. service_terminate_worker then
+recognizes the accepted kind and does not signal shutdown. The existing
+reservation fixture's competing==2/self_exit branch verifies that subsequent
+participant intent leaves both events unsignaled before quiescence, then only
+Console-close signals afterward. No extra root scan, timer, retry or second
+close state is needed for that path; retain the existing implementation.
+
+The exit integration must use explicit process-intent call sites before
+whole-worker teardown, preserve task-local cleanup as-is, and retain the same
+service arbitration rather than adding another controller. The source audit
+does not yet prove lock-safe insertion at all of those sites. This finite L08
+obligation remains open; neither its seven-call inventory nor the passing
+session-escape fixture is a substitute for that proof.
+
+Controller 36080 starts full-r40.ps1 at 16:20:05 UTC for the authored session
+escape change: full thirteen-component build and unchanged second incremental,
+service/owner fault fixtures, real session ownership fixture, sealed package,
+RPC migration/wire, DOS17/WOW/CAF runtime and supplemental checks. The reusable
+disposable runners take a round parameter rather than copying another complete
+runner. Removed their obsolete wait for old PID 31340; supplemental verification
+supports PriorPid=0 for same-controller sequencing, never waiting on PID zero.
+The first launch precheck matched its own command text and refused before any
+runner started; the corrected check matches actual -File invocations and the
+new controller is the only run. There is no automatic publication or commit.
+Production source inputs remain fixed while this group is running.
+
+Session-escape review checks both actual callers: standalone cleanup disarms
+before its thread unbind, and mvdm_softpc_execution_run_until_return disarms on
+both normal and escaped fixture returns before unbinding. The TLS pointer is
+only stack-target ownership, not another lifecycle authority or session ABI
+field. Foreign-thread refusal occurs before completion-code/state mutation;
+the owning thread can still disarm after completion. The real-thread fixture
+joins its foreign caller before the owner longjmps and uses static session
+storage, so no modified automatic local is read after longjmp. Product builds
+must continue sharing the worker's existing session/TLS through their existing
+imports; no duplicate session implementation is introduced into WOW32.
+
+At the current r40 observation, both configurations and all first-pass product
+builds pass, including the redirector's session_thread_finish import check.
+Second incremental validation is in progress. These are intermediate build
+facts, not completed runtime or publication evidence.
+
+r40 finishes successfully at 16:29:49 UTC (full-r40-result.json). Full thirteen
+images and unchanged second incremental cover 1415 intermediates; service38,
+frontend scope, four Console fault/lifecycle cases and actual session escape
+ownership pass. Five RPC wait/loss cases, five migration cases, wire/park and
+WRITE frontier/DOS17/WINMINE/SOL/CAF-three pass on package-r40. The negative
+result/startup/I/O cases and supplemental native RPC (142 checks, zero handle
+delta), presentation and governance checks also pass. WRITE remains startup
+frontier only, not editing/exit acceptance. Controller 36080 is no longer live.
+Publication and commit are still separate gates.
+
+P17 review accounting: authored production change +11/-3 (net +8), test
++46/-1 (net +45), existing build generator +3/-0. This small safety fix adds
+56 non-documentation lines; no protocol, OpenNT mirror or guest change.
+Together with P16's net -175, the two changes still reduce non-documentation
+source/test/build lines by 119. It intentionally does not merge task completion
+and process exit or claim the remaining L08 handshake is implemented.
+
+P17 publication controller 5024 finishes at 2026-10-21 16:31:41 UTC:
+deliver-r39.ps1 -Round r40 runs a fresh final gate and publishes the complete
+thirteen-image package-r40 using build-r40 and its completed regressions.
+publication-r40.json records successful SHA-256 equality at both destinations;
+publication-r40-backup preserves the exact prior package and release manifest.
+Read-only installation/module discovery found no process needing termination.
+Protocol remains 61. No global interception, original mirror or guest change
+is present. Commit/push is verified after the final post-record documentation
+gate. L08 permission placement/concurrency and initialization remain S3 work,
+not silently deferred to the polling or WOW successor stages.

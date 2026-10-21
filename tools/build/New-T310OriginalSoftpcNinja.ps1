@@ -1764,6 +1764,9 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     $graph.Add('build obj/tests/monitor_session.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/monitor_session_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build monitor-session-test.exe: console_test_link obj/tests/monitor_session.obj')
+    $graph.Add('build obj/tests/session_lifecycle.obj: cc ' + (NinjaPath (Join-Path $root 'tests/session/session_lifecycle_test.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build session-lifecycle-test.exe: console_test_link obj/tests/session_lifecycle.obj obj/ntvdm/session/session.obj obj/ntvdm/session/guest_memory_lease.obj')
     $monitorRpcTestObject = 'obj/tests/monitor_rpc_test.obj'
     $graph.Add('build ' + $monitorRpcTestObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/adapter-basesrv/monitor_rpc_test.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)

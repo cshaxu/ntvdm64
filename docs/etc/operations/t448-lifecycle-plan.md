@@ -382,7 +382,13 @@ S1 changes documentation only: zero runtime, mirror, guest or release changes.
 S2 aims for zero mirror changes, using existing project-owned adapters. The
 selected S3 orderly-exit budget is at most three original host files and seven
 ExitProcess call substitutions: nt_reset.c (two), wow32/wkman.c (four), and
-wow32/wow32.c (one). Prefer reducing this through proven existing seams; do not
+wow32/wow32.c (one). Post-P16 source tracing establishes that this is an exit
+inventory, not sufficient insertion placement: original teardown and ExitVDM
+can precede those sites. The
+[L08 ordering audit](../evidence/m0-t448-s3-close-implementation.md#l08-source-order-audit-after-p16)
+therefore requires proving pre-cleanup entry seams before implementation; do
+not implement a final-exit wait as if it authorized earlier cleanup.
+Prefer reducing this through proven existing seams; do not
 globally intercept ExitProcess or alter unrelated CRT exits. Keep original
 task completion and source-owned task cleanup in place. Classify each exit site
 before inserting an executable-owned worker-exit-intent binding: worker-wide

@@ -7,6 +7,8 @@
 static __declspec(thread) session *thread_instance;
 static __declspec(thread) uint32_t thread_binding_owner;
 static __declspec(thread) int thread_finishing;
+/* A saved C stack belongs to its arming thread, not every session binding. */
+static __declspec(thread) session *thread_termination_escape;
 
 static uint32_t session_binding_count(const session *instance)
 {
@@ -403,22 +405,28 @@ int session_binding_diagnostic_snapshot(const session *instance,
 int session_arm_termination_escape(session *instance)
 {
     if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
-        thread_instance != instance || instance->termination_armed != 0u)
+        thread_instance != instance || instance->termination_armed != 0u ||
+        thread_termination_escape != NULL)
         return 0;
+    thread_termination_escape = instance;
     instance->termination_armed = 1u;
     return 1;
 }
 
 void session_disarm_termination_escape(session *instance)
 {
-    if (instance != NULL && session_valid(instance))
+    if (instance != NULL && instance == thread_termination_escape &&
+        session_valid(instance)) {
         instance->termination_armed = 0u;
+        thread_termination_escape = NULL;
+    }
 }
 
 int session_terminate_current(uint32_t completion_code)
 {
     session *instance = thread_instance;
-    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
+    if (instance != thread_termination_escape ||
+        !session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
         instance->termination_armed == 0u)
         return 0;
     instance->completion_code = completion_code;

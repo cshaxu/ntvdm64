@@ -4,21 +4,26 @@
 
 **Active: M0 T448 S3**
 
-Latest source audit confirms an S3 blocker: NTCON channel-thread failure flows
-through session_entry cleanup and process return without a preceding service
-fault-disposition decision. ConsoleRestored is an acknowledgement, not exit
-authorization. A protocol-61 candidate now generalizes the existing exit-intent
-RPC to authenticated participants and keeps faulted NTCON awaiting service
-disposition. Full/incremental build, owner fault tests and the real-RPC frontend
-EOF shutdown case pass; runtime regression, supplementary checks and source
-review pass. P16's complete protocol-61 package was published/hash-verified at
-both destinations at 16:00:37 UTC. The P16 commit identifies this package;
-repository push is verified after commit creation. Original-host exit
-permission and initialization coverage remain open, so S3 is not closed.
-Repair must use existing RPC/service arbitration, not reconnect,
+P16 (0e1f3f501) is published, pushed and verified: protocol 61 generalizes the
+existing exit-intent RPC to authenticated participants and keeps faulted NTCON
+awaiting service disposition. ConsoleRestored is an acknowledgement, not exit
+authorization. Full/incremental build, owner fault tests, real-RPC frontend EOF,
+runtime regression, supplementary checks and source review pass. All thirteen
+images were published/hash-verified at both destinations at 16:00:37 UTC.
+Original-host exit permission and initialization coverage remain open, so S3
+is not closed. Repair must use existing RPC/service arbitration, not reconnect,
 replay, additional transport or an arbitrary timeout. Worker/frontend I/O
 failure must be reported symmetrically; actual service death permits local
 cleanup/exit and never revival through a replacement NTSRV.
+
+Post-P16 L08 source audit rejects final-ExitProcess-only authorization: original
+cleanup can precede it. A local session escape-ownership correction now prevents
+a bound foreign thread from using/disarming the main thread's saved C stack;
+its focused real-thread test passes. Controller 36080 completed the complete
+r40 build/regression group successfully. P17 publishes this correction as a
+coherent protocol-61 package at 16:31:41 UTC, with hashes verified at both
+destinations. The delivering commit carries its repository identity; this
+progress delivery does not complete service permission or initialization.
 
 Owner correction 2026-10-21: withdraw r32 from publication and audit/remove
 blanket control/lifecycle timeouts. Three five-second policies are retained:
@@ -49,7 +54,7 @@ the prior checkpoint claims that the CAF defect is universally fixed.
 | Admission And Approval | Owner approves final design and continuous sequential execution through T pre-closure acceptance; S1 design concluded and pushed at c838c332c. |
 | Objective | Implement the approved unified management-close transaction, concurrency and role-specific service-loss cleanup, preserving the S2 normal-chain candidate. |
 | Non-goals | No guest modification/rebuild; no native GUI target lifecycle ownership; no unrelated WOW32 capability work; no T closure without owner acceptance. |
-| Reference Baseline | S3 P16 progress package: protocol 61, thirteen images published/hash-verified at both destinations on 2026-10-21 16:00:37 UTC; full/incremental, service/owner faults, five RPC wait cases, five migration cases, wire/park, same-package runtime and supplemental checks pass. Initialization/fault and original-host exit permission remain open; no S3 acceptance or waiver. |
+| Reference Baseline | S3 P17 progress package: protocol 61, thirteen images published/hash-verified at both destinations on 2026-10-21 16:31:41 UTC; full/incremental, session escape ownership, service/owner faults, RPC/migration/wire, same-package runtime and supplemental checks pass. Initialization/fault and original-host exit permission remain open; no S3 acceptance or waiver. |
 | Files And ABI Surface | Run16, NTSRV service/client, common protocol, worker-base, NTCON, NTVDM and NTVWM; production-linked lifecycle tests; coherent protocol updates if required. |
 | Applicable Rules | docs/README reading set; execution, architecture, coding, document and source-policy authorities; original-owner recovery and exception registration. |
 | Verification | Source-first implementation and diff review; background x86/x64 full-component/incremental builds; affected production-linked service/frontend/launcher fixtures and normal DOS/native/WOW startup/return regression; complete package deployment and hashes; governance. |
