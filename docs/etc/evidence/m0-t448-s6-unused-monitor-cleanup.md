@@ -98,4 +98,48 @@ explicit staged paths, commit/push identity and clean checkout.
 Limits: real live-view bitmap/modal RPC capture was compile-checked but not rerun;
 deterministic modal/layout/identity tests and actual NTMON management were run.
 No claim of exhaustive host scheduling coverage; inherited SOL layout and WRITE
-startup-only limits are unchanged. Await owner S6 acceptance, not T closure.
+startup-only limits are unchanged. The following owner acceptance supersedes
+the prior awaiting-acceptance state, not these coverage limits.
+
+## Owner acceptance and T closure audit
+
+Owner accepts S6 and requests whole-T closure review. S6 closes at delivered
+commit d5d0dc2438ca130f9fc69eb4f351187b55530b18 (pushed, clean).
+This follow-up changes documentation only: no new build, runtime test, guest,
+mirror or publication change. Rechecking the thirteen manifest SHA-256 values
+against both assets/release and O:/winnt/system32 found all thirteen pairs
+identical. Git initially had no uncommitted changes.
+
+The optional WOW clock experiment is not an outstanding implementation promise.
+Source review found that ccpusas4.c phy_r32 splits a DWORD into two word reads,
+phyR consumes individual bytes, and c_GetPhyAdd/physical_mapping_resolve return
+pointers rather than a complete-read transaction. Refreshing on pointer lookup
+can mix samples within one clock read. A correct read-time implementation needs
+an audited complete-access boundary including direct-pointer and cross-page
+paths; no narrow safe implementation or performance benefit was demonstrated.
+Owner accepts retaining the existing publisher. No claim that read-time clocks
+are impossible, that the current publisher was optimized, or that this research
+passed runtime/performance tests is made. Q09 remains deliberately retained.
+
+| Closure group | Evidence and conclusion |
+| --- | --- |
+| S1 ownership/design | S1 source audit and S5 nine-row reconciliation identify NTSRV authority, role-specific cleanup and startup exceptions. No open design decision in this fixed scope. |
+| S2 normal lifecycle | S3 delivered the retained chain; S5 verifies admission, results, parent return, frontend retention and dual-width GUI startup/wait. No peer lifecycle authority is newly admitted. |
+| S3 close/loss | S3 L04-L10 closure plus S5 service40, repeated real RPC fault/concurrency, actual service loss and eight CAF cases. No reconnect/replay or new transport. |
+| S4 polling | Q01-Q13 all have removal or explicit retention dispositions. Three approved five-second policies remain; original internal waits and justified output/clock sampling are not falsely described as eliminated. |
+| S5 integrated acceptance | Nine inherited obligations have source/assertion/coverage rows; six mirror files were compared and registered. This review reuses those unchanged-input results, not an exhaustive new code audit. |
+| S6 cleanup/monitor | Full13 and 1426 unchanged intermediates, focused tests, frontend/channel/text and eight CAF cases plus Minesweeper passed; owner now accepts. |
+
+Conclusion: no known unfinished item in T448's fixed lifecycle/cleanup scope
+blocks T closure. Recommend closure, but do not silently treat S acceptance as
+the owner's T closure decision or admit the next queued task.
+
+Retained boundaries: SOL layout and WRITE full editing/exit remain unproved;
+intermittent direct WOW/game exit remains an unlocated TODO, not a fixed defect.
+The first queued WOW32 execution continuation retains unfinished execution,
+messages and task-termination functionality; later usability packages retain
+their scope. The queue is unchanged. Real live-view bitmap/modal capture was
+not rerun, and the enumerated concurrency cases do not prove every OS schedule.
+Necessary raw comparison evidence and coherent rollback packages remain in
+their existing task-owned build directories pending exact safe-disposal review;
+they are not reusable caches. This audit deletes no files or user media.

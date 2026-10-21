@@ -4,6 +4,16 @@
 
 **Active: M0 T448 S6**
 
+S6 is owner-accepted and closed. This packet remains only for the requested
+whole-T closure audit and its documentation delivery; no implementation S is
+open. The audit recommends T448 closure within its fixed lifecycle scope,
+pending the owner's T-level decision. See the [accepted S6 and T audit](../etc/evidence/m0-t448-s6-unused-monitor-cleanup.md#owner-acceptance-and-t-closure-audit).
+The delivered baseline is d5d0dc243, protocol64. All thirteen committed and
+installed images were rechecked against the release manifest and agree.
+The proposed WOW read-time clock optimization was not implemented; the owner
+accepts retaining the existing publisher after its source feasibility review.
+
+The following delivery checkpoint predates the acceptance above:
 Owner admits S6 to remove proved unused wait fallbacks/interfaces and make
 NTMON sample once per second but redraw only on actual snapshot or UI changes.
 Idle elapsed-time progression alone must not redraw. No new service protocol.
@@ -275,7 +285,7 @@ SOL layout, WRITE's startup-only frontier, source-reviewed rather than induced
 arbitrary fatal guest states, and non-exhaustive host/thread interleavings stay
 explicit limitations. T448 remains open for owner acceptance.
 
-## S6 Delivery Record
+## S6 Closure Record
 
 Removed uncalled NTCON task/event/wait/sleep/yield closure and default mailbox
 Event; retained mutexes and actual native window notification. CCPU requires its
