@@ -1,7 +1,7 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(58.0),
+    version(59.0),
     pointer_default(unique)
 ]
 interface vdm_service
@@ -121,17 +121,6 @@ interface vdm_service
         [in] unsigned long generation, [in] unsigned long request,
         [in] unsigned long exit_code,
         [in] unsigned long io_error, [in] unsigned long io_flags);
-    error_status_t NativeExitCode(
-        [in] handle_t binding, [in] VDM_CONNECTION connection,
-        [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation, [in] unsigned long request,
-        [out] unsigned long *exit_code);
-    /* Explicit native-worker grant in the authenticated execution Console. */
-    error_status_t SelectNativeWorker(
-        [in] handle_t binding, [in] VDM_CONNECTION connection,
-        [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation,
-        [out, system_handle(sh_process)] HANDLE *worker);
     /* Native worker's one-command blocking acquire.  This is deliberately
      * shaped as GetNext rather than a transport wait: the recipient owns one
      * admitted Direct command, completes it, and then acquires the next. */
@@ -239,24 +228,8 @@ interface vdm_service
         [in] unsigned long generation, [in] unsigned long request,
         [in, system_handle(sh_pipe)] HANDLE channel,
         [in, system_handle(sh_event)] HANDLE ready);
-    /* Original Check/Update chooses the worker. This grants only a pinned
-     * query/synchronize capability to its waiting launcher, not a caller-
-     * nominated process or a frame transport through BaseSrv. */
-    error_status_t CommandWorker(
-        [in] handle_t binding,
-        [in] VDM_CONNECTION connection,
-        [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation,
-        [out, system_handle(sh_process)] HANDLE *worker);
     /* Direct frontend channel attachments only. No input/frame payloads or
      * caller-selected worker identity pass through these methods. */
-    error_status_t AttachFrontend(
-        [in] handle_t binding,
-        [in] VDM_CONNECTION connection,
-        [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation,
-        [in, system_handle(sh_pipe)] HANDLE channel,
-        [in, system_handle(sh_event)] HANDLE ready);
     error_status_t TakeFrontend(
         [in] handle_t binding,
         [in] VDM_CONNECTION connection,
@@ -430,30 +403,6 @@ interface vdm_service
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation,
         [in] unsigned long increment);
-    /* Reservation identifiers correlate a launch rollback only.  Worker
-     * authority is the authenticated system process attachment in Prepare,
-     * and Console identity remains local to the broker connection. */
-    error_status_t Reserve(
-        [in] handle_t binding,
-        [in] VDM_CONNECTION connection,
-        [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation,
-        [in] unsigned long task,
-        [in] unsigned long native_worker,
-        [out] hyper *reservation);
-    error_status_t Prepare(
-        [in] handle_t binding,
-        [in] VDM_CONNECTION connection,
-        [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation,
-        [in] hyper reservation,
-        [in, system_handle(sh_process)] HANDLE worker);
-    error_status_t Release(
-        [in] handle_t binding,
-        [in] VDM_CONNECTION connection,
-        [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation,
-        [in] hyper reservation);
     error_status_t Disconnect(
         [in] handle_t binding,
         [in, system_handle(sh_process)] HANDLE process,
@@ -531,12 +480,6 @@ interface vdm_service
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation,
         [in] unsigned long window);
-    error_status_t FrontendUsage(
-        [in] handle_t binding, [in] VDM_CONNECTION connection,
-        [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation,
-        [out] unsigned long *pending,
-        [out] unsigned long *tasks);
     error_status_t RetireWorkerlessFrontend(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,

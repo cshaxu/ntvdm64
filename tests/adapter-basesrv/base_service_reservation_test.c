@@ -1139,6 +1139,16 @@ int main(int argc,char **argv)
             launcherGeneration,TEST_NATIVE_CUI_TYPE,&reservation) && reservation);
         CHECK(OpenNtBaseServiceCreateNativeReservation(launcher,GetCurrentProcessId(),
             launcherGeneration,TEST_NATIVE_CUI_TYPE,&duplicate)==ERROR_INVALID_STATE && !duplicate);
+        /* Reservation policy belongs to NTSRV, not a remote launcher API.
+         * Retain the former wire fixture's release/reuse/stale assertions. */
+        CHECK(OpenNtBaseServiceCreateNativeReservation(launcher,GetCurrentProcessId(),
+            launcherGeneration,TEST_NATIVE_CUI_TYPE,NULL)==ERROR_INVALID_PARAMETER);
+        CHECK(!OpenNtBaseServiceReleaseReservation(launcher,GetCurrentProcessId(),launcherGeneration,reservation));
+        CHECK(!OpenNtBaseServiceCreateNativeReservation(launcher,GetCurrentProcessId(),
+            launcherGeneration,TEST_NATIVE_CUI_TYPE,&duplicate) && duplicate && duplicate!=reservation);
+        CHECK(OpenNtBaseServiceReleaseReservation(launcher,GetCurrentProcessId(),
+            launcherGeneration,reservation)==ERROR_NOT_FOUND);
+        reservation=duplicate;
         CHECK(GetModuleFileNameA(NULL,command,MAX_PATH));
         {char executable[MAX_PATH];strcpy_s(executable,MAX_PATH,command);
             sprintf_s(command,sizeof(command),"\"%s\" --reservation-child",executable);}

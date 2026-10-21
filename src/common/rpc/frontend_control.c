@@ -4,21 +4,6 @@
 #include "async_call.h"
 #include "common/protocol/frontend_lifecycle.h"
 
-DWORD common_rpc_frontend_usage(const common_rpc_connection *state,DWORD *pending,DWORD *tasks)
-{
-    DWORD error=ERROR_INVALID_STATE,local_pending=0,local_tasks=0;
-    if(!pending || !tasks)return ERROR_INVALID_PARAMETER;
-    if(!state || !state->connection || !state->binding || !state->process)return error;
-    RpcTryExcept {
-        error=Client_FrontendUsage(state->binding,state->connection,state->process,
-            state->generation,&local_pending,&local_tasks);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    if(!error){*pending=local_pending;*tasks=local_tasks;}
-    return error;
-}
-
 DWORD common_rpc_retire_workerless_frontend(const common_rpc_connection *state,DWORD *retired)
 {
     RPC_ASYNC_STATE async;DWORD error=ERROR_INVALID_STATE,local=0;

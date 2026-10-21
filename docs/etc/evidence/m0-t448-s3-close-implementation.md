@@ -1672,3 +1672,202 @@ removed. Source net +23 and tests net +12, combined +35: this correctness repair
 does not claim the unfinished eight-interface reduction. Zero guest/media or
 original mirror changes; no new mirror exception required. S3 remains open for
 the already fixed RPC retirement, finite-call and exit-permission groups.
+
+## Post-P12 obsolete-test migration
+
+P12 is pushed at 8fd14dc63; the worktree was clean before this continuation.
+The old frontend_root_parent fixture registered the launcher itself as a
+frontend, which no longer represents the production role contract. It now
+starts actual NTCON through StartFrontend, rejects launcher registration,
+checks non-signallable capability and non-terminating process rights, and
+delivers that capability to a real descendant. An independent event remains
+rejected. The service management snapshot supplies the exact frontend key;
+CloseManagementNode closes that frontend, then a second descendant verifies
+the old capability is rejected. No direct task-to-frontend control is added.
+
+Background migration-r23, controller PID 38668, ran from 12:15:27 through
+12:15:36 UTC on 2026-10-21 against unchanged package-r22. It rebuilt the actual
+client fixture and passed frontend-root-parent on an isolated desktop with
+real RPC and service-created NTCON. Source is tests-only so far; no product
+publication change, guest/mirror change or interface retirement is claimed.
+
+Remaining old reservation tests cannot simply be deleted: they include original
+GetNext command/re-entry, repeated local wait-handle identity, receipt exit 7,
+frontend rights, delayed delivery and cancellation. The current service tests
+already cover original re-entry and worker death, but those passes alone do
+not prove the old real-RPC wait-handle identity assertions. Preserve that wire
+boundary in a service-admitted worker fixture before retiring Reserve/Prepare/
+Release. Frontend delivery/cancellation belongs to actual frontend/worker
+fixtures, not a launcher pretending to own a frontend. The independent native
+reservation create/duplicate/release/stale checks belong to the service-owned
+reservation tests once the client creation surface disappears. Eight-interface
+retirement remains one unfinished group, not a completed deletion.
+
+The replacement admitted-vdm fixture now enters through real StartFrontend,
+original CheckVDM and StartVdmWorker. A fresh build-owned package substitutes
+only its test executable as ntvdm.exe; this is a host wire fixture, never a
+guest execution claim or a released product. The child checks original command
+delivery, re-entry increment/decrement and three GetNext replies preserving the
+same live local wait handle. The parent checks a wait-only worker handle,
+original BaseCheckForVDM exit 7 and successful completion of all child assertions.
+Its explicit test release event coordinates assertions only, not product IPC.
+
+r24 (PID 22748, 12:18:54–12:19:03 UTC) passes that original-command route.
+r24b (PID 28272, 12:19:54–12:20:14) adds real frontend delivery rights but fails
+the parent-completion wait: the synthetic worker omitted WORKER_IO_ACQUIRE
+before WaitFrontend. The actual worker-base/connection.c:worker_base_io_open
+establishes this prerequisite. Adding the same existing RPC transition, without
+changing any production checks, produces passing r24c (PID 14732,
+12:20:52–12:21:02 UTC). The child also verifies ready/capability handles cannot
+be signalled, the frontend cannot be terminated through the borrowed handle,
+the retained root identity matches, and duplicate TakeFrontend/WaitFrontend
+return ERROR_ALREADY_EXISTS with cleared outputs. Fixture SHA-256:
+f7dec5cf161b370707f644137201632c7ceb7f5109de14b549e428c9b1f053cc.
+
+Remaining retirement mapping: service fixture frontend-wait covers deferred
+attachment and handle delivery; frontend-wait-root-loss/request-loss/worker-loss,
+frontend-wait-timeout and frontend-rundown cover distinct cancellation and EOF
+contracts. These provider tests must remain alongside actual wire tests, not
+be described as real RPC cancellation evidence. The old launcher's root-loss
+setup conflicts with the new roles and cannot simply be retained unchanged.
+The old native reservation test also needs its create/release/reuse/stale
+assertions retained at the service owner. No obsolete wire entry is removed yet.
+
+r25 (PID 25436, 12:22:19–12:22:36 UTC) runs all four migrated cases serially
+against unchanged package-r22 and passes: ntvwm-execution,
+ntvwm-public-startup, frontend-root-parent and admitted-vdm. The service's
+native-worker fixture now retains null-output rejection, reservation release,
+new unique reservation identity and rejection of the released old identity
+before continuing its existing authenticated worker binding. Full service
+verification r26, controller PID 17608, is running against the P12 product
+build prerequisite; its outcome is not yet known. These are test migrations,
+not newly delivered product changes or completed interface removal.
+
+r26 finishes successfully at 12:24:15 UTC (start 12:23:43): all 39 service
+cases pass, including the moved reservation lifecycle assertions and the
+existing frontend cancellation/rundown family. This supplies the provider
+coverage mapping alongside r25's real wire evidence. The next implementation
+step is the bounded removal of the eight obsolete remote surfaces and their
+obsolete test-role scaffolding while preserving those internal providers.
+
+## Protocol 59 retirement candidate
+
+The eight unused remote methods NativeExitCode, SelectNativeWorker,
+CommandWorker, AttachFrontend, Reserve, Prepare, Release and FrontendUsage
+are removed from IDL, server RPC entrypoints and client/common facades.
+Live service-internal providers remain: Finish consumes NativeExitCode;
+StartNativeWorker uses selection/reservation; command routing uses retained
+worker identity; lifecycle uses frontend usage; service startup owns prepare
+and rollback. Protocol major/version metadata advance together from 58 to 59.
+The remaining 60 methods comprise 43 async controls, 16 finite synchronous
+controls and one intentional long receive; finite-call conversion is still open.
+
+Removed old fixture scaffolding no longer reserves/spawns its own worker or
+impersonates NTCON. Its command/re-entry/wait identity/exit 7 and rights/duplicate
+delivery assertions are retained by r25 admitted-vdm; root capability/descendant/
+stale assertions by r25 frontend-root-parent; reservation release/reuse/stale
+assertions by r26 native-worker; cancellation/provider ordering by the r26
+frontend-wait family. Native results use the already exercised Finish path.
+The retired FrontendUsage facade's mock-only marshalling checks are removed,
+not converted into another public usage query. Its internal state algorithm
+and service assertions remain. The raw broker negative test uses the retained
+authenticated context-acquisition method for invalid generation/no capability.
+
+Two T412 tooling entrypoints were already incompatible with current source
+paths, bitness and roles. They now explicitly fail with current test entrypoints
+rather than generating obsolete patched launchers or returning false acceptance.
+Files remain for indexed historical links; no historical run is relabelled.
+
+Full thirteen-image and second-incremental build r27 starts at 12:28:05 UTC,
+controller PID 13064. Sources remain frozen during the build. Initial review
+also identifies stale adjacent IDL comments for removed CommandWorker/Prepare;
+remove those before final candidate verification. No protocol-59 package has
+been published. P12/protocol58 remains the coherent installed baseline.
+
+r27 fails at 12:29:38 UTC during x86 client compilation: the explicit generated
+RPC interface descriptor still named v58. The build did not produce a release.
+All four descriptor references in client/server/identity-test are changed to
+v59 and both obsolete adjacent IDL comments are removed. A repository search
+finds no remaining removed Client_/Server_ surface reference or v58 descriptor
+in src/tests/tools. Internal service providers still have live callers.
+
+Final-candidate build r28 starts under PID 31244; serial verification PID 21932
+starts at 12:31:38 UTC and waits for its build result. It includes service39,
+all four migrated wire cases, the 36 actual deadline scenarios and prior full
+wire/runtime/error/startup gates. Current diff versus P12: src -270 lines,
+tests -193, tools -171 (combined -634, excluding documentation). No guest or
+original mirror change. This is candidate reduction, not publication or S3
+completion. Remaining finite-call and original-host exit authorization work
+stay in the fixed S3 scope after this coherent progress delivery.
+
+r28 full thirteen-image and second-incremental build passes at 12:34:41 UTC.
+Service39 passes at 12:35:14 and all four migrated actual-RPC cases pass at
+12:35:33. Serial controller 21932 continues real deadlines and runtime;
+post controller 18176 waits for that exact process before the completion/
+presentation/governance gates. Delivery controller 22176 freezes the changed
+source/test set and hashes, waits for post success, requires all gates, checks
+installed image/DLL holders and then invokes the existing recoverable full
+thirteen-image publication. These scheduled operations do not establish that
+publication has occurred. Commit/push require final result and diff review.
+
+All 36 r28 deadline cases pass at 12:43:20 UTC; wire gates pass at 12:44:19.
+Frontend RPC unit now has 75 checks (the retired facade's cases are gone),
+worker RPC 163, both zero failures/handle delta. Runtime completes at 12:47:08:
+DOS17, playable WINMINE/SOL, WRITE startup-only frontier and CAF-three pre-Enter
+echo pass. Full serial verification finishes at 12:47:31. Post-run native
+completion and presentation509 pass, and document governance passes, but
+git diff --check rejects one added blank line at the end of
+base_rpc_client_core.c. Post and delivery therefore fail at 12:48:02 before
+any publication; retain those failed results rather than overwriting them.
+
+After both controllers end, remove only that trailing blank line. Build r29,
+controller PID 23832, starts at 12:48:49 UTC. Compare its complete image hashes
+with the tested r28 package before deciding evidence reuse; unequal product
+identity requires new runtime evidence. No statement that the whitespace-only
+source change automatically makes untested binaries acceptable is authorized.
+
+r29 full/incremental build passes at 12:51:46 UTC; independent governance
+review-r29 passes at 12:50:00. Seven image hashes equal r28; ntvdm, nthook32,
+ntvwm, ntcon, run16 and ntsrv differ. Read-only byte comparison finds equal
+lengths and four changed bytes each (including the PE timestamp); no assumption
+of identical tested package is made. Run the entire matrix again on r29.
+Serial controller PID 13788 owns that run; post controller PID 33328 waits for
+it. Delivery PID 15560 waits for post success and the same complete set of
+gates, source/test hash freeze, installed-holder checks and backup/hash-verified
+thirteen-image transaction. No successful publication or new commit yet.
+
+## P13 verified retirement delivery
+
+The final r29 package passes service39 (12:54:00 UTC), all four migrated
+actual-RPC cases (12:54:21), all 36 actual deadline cases (13:02:07), wire
+negatives and RPC units (13:03:01), and the complete runtime group (13:05:50).
+The runtime frontier is DOS17, playable WINMINE/SOL, WRITE startup-only and
+three internal CAF self-delete routes with visible echo before Enter. WRITE
+editing/save/normal exit is not proved. Serial controller 13788 completes at
+13:06:13; post controller 33328 completes at 13:06:41 after native-RPC142,
+isolated presentation509 and governance/diff checks. All checks pass; RPC unit
+handle deltas are zero. Presentation explicitly reports production-activation=no;
+the actual frontend activation/return evidence comes from the runtime gates.
+
+Delivery controller 15560 verifies the frozen source/test hashes and installed
+holder preflight, then publishes all thirteen images at 13:06:55 UTC on
+2026-10-21. The prior coherent package is recoverable under
+build/t448-s3/publication-r29-backup. A subsequent independent hash comparison
+confirms every image in tested package-r29/system32, assets/release and
+O:/winnt/system32 equals release-manifest.json. Protocol is 59; guest media,
+assets/winnt.zip and both original mirrors are unchanged. Reviewed net changes:
+src -271, tests -193, tools -171; combined -635 excluding documentation/binaries.
+
+Review confirms the direct Console pipe carries I/O, not activation/lifecycle
+instructions; retired wire value 38 remains reserved. NTSRV retains the live
+internal reservation, selection, result and lifecycle providers. One internal
+AttachFrontend wrapper now has only provider-test callers; migrate those to
+the real request entrypoint before removing that wrapper in the fixed cleanup
+group. The changed legacy tests/broker/service_client.c is not executed by r29;
+the current identity/wire fixtures supply this delivery's actual RPC evidence.
+No test result is attributed to either retired T412 runner.
+
+S3 remains open for the sixteen finite synchronous methods, UNKNOWN_IF
+diagnosis and observation timeout consistency, partial-initialization/fault
+cleanup and original-host exit permission. No new transport, semantic waiver,
+guest change or S3/T acceptance is introduced by P13.

@@ -92,9 +92,9 @@ int main(int argc,char **argv)
         REQUIRE(test_rpc_connect(binding,process,APP_PROTOCOL_VERSION,app_version,
             &server_protocol,server_version,&duplicate,&next)==ERROR_ALREADY_EXISTS && !duplicate && !next);
         {
-            HANDLE worker=NULL;
-            REQUIRE(Client_CommandWorker(binding,connection,process,0,&worker)==ERROR_ACCESS_DENIED && !worker);
-            REQUIRE(Client_CommandWorker(binding,connection,process,generation,&worker)==ERROR_NOT_READY && !worker);
+            HANDLE context=NULL;
+            REQUIRE(test_rpc_acquire_console_context(binding,connection,process,0,NULL,&context)==ERROR_ACCESS_DENIED && !context);
+            REQUIRE(test_rpc_acquire_console_context(binding,connection,process,generation,NULL,&context)==ERROR_ACCESS_DENIED && !context);
         }
         REQUIRE(Client_First(binding,connection,process,0,&first)==ERROR_ACCESS_DENIED && first==0);
         REQUIRE(!Client_First(binding,connection,process,generation,&first) && first==expectedFirst);

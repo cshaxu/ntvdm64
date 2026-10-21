@@ -19,7 +19,7 @@ the prior checkpoint claims that the CAF defect is universally fixed.
 | Admission And Approval | Owner approves final design and continuous sequential execution through T pre-closure acceptance; S1 design concluded and pushed at c838c332c. |
 | Objective | Implement the approved unified management-close transaction, concurrency and role-specific service-loss cleanup, preserving the S2 normal-chain candidate. |
 | Non-goals | No guest modification/rebuild; no native GUI target lifecycle ownership; no unrelated WOW32 capability work; no T closure without owner acceptance. |
-| Reference Baseline | S3 P12 native admission repair: protocol 58, thirteen images published and hash-verified at both destinations; full/incremental build, service39, concurrent native startup and cross-width reuse, 36 actual deadline scenarios, error-result/single-consumption, startup rollback, wire negatives and same-package runtime gates pass within the recorded frontier. Remaining RPC cleanup and exit-permission work remain open; no S3 acceptance or waiver. |
+| Reference Baseline | S3 P13 obsolete RPC retirement: protocol 59, thirteen images published and hash-verified at both destinations; full/incremental build, service39, four migrated actual-RPC cases, 36 actual deadline scenarios, wire/error/startup and same-package runtime gates pass within the recorded frontier. Remaining finite RPC, initialization/fault and original-host exit-permission work remain open; no S3 acceptance or waiver. |
 | Files And ABI Surface | Run16, NTSRV service/client, common protocol, worker-base, NTCON, NTVDM and NTVWM; production-linked lifecycle tests; coherent protocol updates if required. |
 | Applicable Rules | docs/README reading set; execution, architecture, coding, document and source-policy authorities; original-owner recovery and exception registration. |
 | Verification | Source-first implementation and diff review; background x86/x64 full-component/incremental builds; affected production-linked service/frontend/launcher fixtures and normal DOS/native/WOW startup/return regression; complete package deployment and hashes; governance. |
@@ -68,6 +68,21 @@ All thirteen images were published and hash-verified at both destinations at
 12:11:53 UTC on 2026-10-21. No guest, mirror or wire-signature changes. Eight
 obsolete API removals and the fixed remaining groups are still open; this is
 progress delivery, not S3 closure. The linked ledger retains failed attempts.
+
+P12 is pushed at 8fd14dc63. Subsequent tests-only migration replaces the old
+launcher-as-frontend fixture with actual service-created NTCON and passes real
+RPC capability/role/descendant-rights/managed-close/stale-identity assertions
+(r23). Service-admitted test VDM now proves original command/re-entry, repeated
+local wait-handle identity, exit 7, actual frontend rights and duplicate-delivery
+rejection (r24c/r25). Reservation lifecycle and cancellation provider tests
+pass in service39 (r26). Eight obsolete remote surfaces and old test-role
+scaffolding are now removed in the protocol59 candidate; internal service
+providers remain. r28 runtime passes but publication stops on a trailing blank
+line; after formatting repair, r29 repeats full/incremental and the complete
+regression successfully. P13/protocol59 is published and hash-verified at both
+destinations at 13:06:55 UTC on 2026-10-21. Implementation/tests/tools net -635
+lines; no guest or mirror change. This is a progress delivery, not S3 closure;
+exact attempts and remaining fixed groups are in the S3 ledger.
 
 1. S1: whole-system ownership audit and complete transition design.
 2. S2: complete normal admission/result/handoff chain, including frontend policy and lifecycle-only WOW binding.
@@ -178,7 +193,7 @@ Both assets/release and O:/winnt/system32 were hash-verified. All-component
 build/incremental and focused lifecycle tests pass; actual remaining failed
 and unexecuted gates remain explicitly listed in the closure, not converted to
 passes. Guest, configuration and assets/winnt.zip are unchanged. This checkpoint
-adds no OpenNT mirror diff; current service protocol revision is 58. The
+adds no OpenNT mirror diff; current service protocol revision is 59. The
 protocol-51 through protocol-54 paragraphs below retain prior checkpoints.
 
 The published protocol-51 continuation removes unused retirement RPC methods and

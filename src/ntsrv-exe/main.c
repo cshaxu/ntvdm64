@@ -574,12 +574,6 @@ error_status_t Server_CompleteWorkerChannel(PRPC_ASYNC_STATE async,handle_t bind
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
 }
-error_status_t Server_NativeExitCode(handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,ULONG request,ULONG *exit_code)
-{
-    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceNativeExitCode(connection,pid,generation,request,exit_code);
-}
 error_status_t Server_BindNativeTarget(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG request,HANDLE target,HANDLE receipt)
 {
@@ -642,15 +636,6 @@ error_status_t Server_RetainFrontendRoot(PRPC_ASYNC_STATE async,handle_t binding
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
 }
-error_status_t Server_FrontendUsage(handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,ULONG *pending,ULONG *tasks)
-{
-    DWORD pid,error;
-    if(!pending || !tasks)return ERROR_INVALID_PARAMETER;
-    *pending=*tasks=0;
-    error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceFrontendUsage(connection,pid,generation,pending,tasks);
-}
 error_status_t Server_RetireWorkerlessFrontend(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation,ULONG *retired)
 {
@@ -700,30 +685,6 @@ error_status_t Server_AttachFrontendRequest(PRPC_ASYNC_STATE async,handle_t bind
     if(!error)error=OpenNtBaseServiceAttachFrontendRequest(connection,pid,generation,request,channel,ready);
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
-}
-error_status_t Server_SelectNativeWorker(handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,HANDLE *worker)
-{
-    DWORD pid,error;
-    *worker=NULL;
-    error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceSelectNativeWorker(connection,pid,generation,worker);
-}
-error_status_t Server_CommandWorker(handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,HANDLE *worker)
-{
-    DWORD pid,error;
-    *worker=NULL;
-    error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if (error) return error;
-    /* The typed RPC attachment consumes the restricted service duplicate. */
-    return OpenNtBaseServiceRetainCommandWorker(connection,pid,generation,worker);
-}
-error_status_t Server_AttachFrontend(handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,HANDLE pipe,HANDLE ready)
-{
-    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceAttachFrontend(connection,pid,generation,pipe,ready);
 }
 error_status_t Server_TakeFrontend(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE *pipe,HANDLE *frontend,ULONG *frontend_generation,HANDLE *ready)
@@ -973,43 +934,6 @@ error_status_t Server_Reenter(handle_t binding,VDM_CONNECTION connection,HANDLE 
     error=OpenNtBaseServiceReenter(connection,pid,generation,increment);
     return error;
 }
-error_status_t Server_Reserve(handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,ULONG task,ULONG native_worker,hyper *reservation)
-{
-    DWORD pid,error;
-    uint64_t id=0;
-    if (!reservation) return ERROR_INVALID_PARAMETER;
-    *reservation=0;
-    error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if (error) return error;
-    if(native_worker>1 || (native_worker && task))return ERROR_INVALID_PARAMETER;
-    error=native_worker ? OpenNtBaseServiceCreateNativeReservation(connection,pid,generation,
-        OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI,&id) :
-        OpenNtBaseServiceCreateReservation(connection,pid,generation,task,&id);
-    if (!error) *reservation=(hyper)id;
-    return error;
-}
-error_status_t Server_Prepare(handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,hyper reservation,HANDLE worker)
-{
-    DWORD pid,error;
-    if (reservation<=0 || !worker || worker==INVALID_HANDLE_VALUE) return ERROR_INVALID_PARAMETER;
-    error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if (error) return error;
-    error=OpenNtBaseServicePrepareWorker(connection,pid,generation,(uint64_t)reservation,worker);
-    return error;
-}
-error_status_t Server_Release(handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,hyper reservation)
-{
-    DWORD pid,error;
-    if (reservation<=0) return ERROR_INVALID_PARAMETER;
-    error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if (error) return error;
-    error=OpenNtBaseServiceReleaseReservation(connection,pid,generation,(uint64_t)reservation);
-    if (!error) basesrv_schedule_empty_stop();
-    return error;
-}
 error_status_t Server_Disconnect(PRPC_ASYNC_STATE async,handle_t binding,HANDLE process,ULONG generation,VDM_CONNECTION *connection)
 {
     DWORD pid,result=broker_rpc_peer_process(&scope,binding,process,&pid);
@@ -1040,7 +964,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v58_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v59_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -1087,7 +1011,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v58_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v59_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);

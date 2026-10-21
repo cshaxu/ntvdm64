@@ -43,7 +43,6 @@ DWORD WINAPI OpenNtBaseClientWowStarted(ULONG task);
 /* Resolve only this client's original parent completion handle; no caller
  * guesses transport receipts. Returned startup event is owned/wait-only. */
 DWORD OpenNtBaseClientWowStartup(HANDLE parent,HANDLE *event,BOOL *started);
-DWORD OpenNtBaseClientFrontendUsage(DWORD *pending,DWORD *tasks);
 DWORD OpenNtBaseClientRetireWorkerlessFrontend(DWORD *retired);
 DWORD OpenNtBaseClientFrontendStateChanged(HANDLE *state_changed);
 DWORD OpenNtBaseClientWorkerShutdownEvent(HANDLE *shutdown);
@@ -60,7 +59,6 @@ DWORD OpenNtBaseClientRegisterNativeBackend(HANDLE frontend);
 DWORD OpenNtBaseClientBindNativeTarget(DWORD request,HANDLE target,HANDLE receipt);
 DWORD OpenNtBaseClientCompleteWorkerChannel(DWORD request,DWORD exit_code);
 DWORD OpenNtBaseClientCompleteNativeRequest(DWORD request,DWORD exit_code,DWORD io_error,DWORD io_flags);
-DWORD OpenNtBaseClientNativeExitCode(DWORD request,DWORD *exit_code);
 DWORD OpenNtBaseClientWorkerFrontendCapability(HANDLE *capability);
 DWORD OpenNtBaseClientRetainFrontendRoot(HANDLE capability,HANDLE *root,DWORD *generation);
 /* Separate execution association; caller owns/closes the wait-only event. */
@@ -72,20 +70,9 @@ DWORD OpenNtBaseClientRequestFrontend(HANDLE capability);
 /* Success with zero request/NULL worker is an explicit disconnect command. */
 DWORD OpenNtBaseClientFrontendRequest(DWORD *request,HANDLE *worker);
 DWORD OpenNtBaseClientAttachFrontendRequest(DWORD request,HANDLE pipe,HANDLE ready,DWORD *generation);
-/* Caller closes the query/synchronize-only handle. Valid only while its
- * original DOS command is pending; not a worker-selection request. */
-DWORD OpenNtBaseClientCommandWorker(HANDLE *worker);
-DWORD OpenNtBaseClientSelectNativeWorker(HANDLE *worker);
-DWORD OpenNtBaseClientAttachFrontend(HANDLE pipe,DWORD *generation,HANDLE ready);
 DWORD OpenNtBaseClientTakeFrontend(HANDLE *pipe,HANDLE *frontend,DWORD *frontend_generation,HANDLE *ready);
 DWORD OpenNtBaseClientWaitFrontend(HANDLE *pipe,HANDLE *frontend,DWORD *frontend_generation,HANDLE *ready);
 /* Worker-owned I/O binding, invoked only before delivery of a real command. */
 void OpenNtBaseClientSetCommandBinding(DWORD (*ready)(void *),void *context);
 void OpenNtBaseClientDisconnectCurrent(void);
-/* App-only launch composition over the authenticated connection.  These do
- * not carry Console or command data: original CheckVDM owns both locally. */
-DWORD OpenNtBaseClientReserveWorker(ULONG task,uint64_t *reservation);
-DWORD OpenNtBaseClientReserveNativeWorker(uint64_t *reservation);
-DWORD OpenNtBaseClientPrepareWorker(uint64_t reservation,HANDLE worker);
-DWORD OpenNtBaseClientReleaseWorker(uint64_t reservation);
 #endif
