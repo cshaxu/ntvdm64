@@ -2,7 +2,15 @@
 
 ## Authority and status
 
-### S3 initialization capability boundary (protocol 63 candidate)
+### S3 initialization capability boundary
+
+Protocol 63 is delivered in P19. The protocol-64 cleanup removes the obsolete
+BrokerProcess, WorkerShutdownEvent and WorkerConsoleCloseEvent wire operations
+and both redundant worker-event service getters. Connect remains their sole
+authenticated export point; existing owned-handle client APIs only duplicate
+the connection's local capabilities. Raw-wire tests obtain the service handle
+from Connect and verify its restricted rights there. Provider lifecycle tests
+use ConnectionControls without retaining parallel provider policy.
 
 Connect must not report success before supplying the service lifetime and
 role-appropriate close capabilities. NTSRV derives role from its authenticated
@@ -91,7 +99,7 @@ caller rundown; repeated queries observe the same result without resubmission.
 
 Submission is single-attempt: failure, including an ambiguous lost reply,
 returns submission failure without replay. Missing-service bootstrap is a
-separate pre-submission operation with its one absolute ten-second budget.
+separate pre-submission operation with its one absolute five-second budget.
 NTSRV must retire abandoned request resources independently of the requester;
 an ambiguous reply is not proof that the target never started and does not
 authorize killing an already committed GUI target.
@@ -103,7 +111,7 @@ retains its existing completion contract without GUI management rights.
 ## Normal operation
 
 Run16 retains search, classification and CLI behavior. Before authenticated
-admission it may start NTSRV, with a single absolute ten-second budget including
+admission it may start NTSRV, with a single absolute five-second budget including
 connect operations. Service singleton admission and protocol-version rejection
 remain authoritative; do not start replacements for incompatible peers.
 
@@ -169,7 +177,7 @@ Spontaneous whole-worker exit intent uses the same service close arbitration
 as management, authenticated to the reporting worker's connection generation.
 Acceptance is not teardown permission. The existing shutdown/Console-close
 instruction is the permission: if Console-close was accepted first, reporting
-a local failure must not bypass frontend quiescence, reset its deadline or
+a local failure must not bypass frontend quiescence, restart its transaction or
 signal a competing shutdown. No extra worker registry, peer fence or retry
 protocol is needed. A rejected/stale report cannot authorize local teardown.
 This request is for managed workers; transient native GUI launchers retain
@@ -181,7 +189,7 @@ termination. WOW supports worker-close and source-shaped individual task close,
 not Console-close. Native GUI launcher consumes generic notifications and
 reports a non-applicable result without acquiring Console resources. The service
 does not offer management actions for native GUI targets. Worker-base dispatches
-the reason, operation and deadline; each executable implements the semantics.
+the service instruction; each executable implements the semantics.
 
 Keep original CntrlHandler/TerminateVDM and WOW task cleanup at their source
 owners. Original spontaneous termination/fatal exits must be audited separately
@@ -224,11 +232,11 @@ Run16 CLI: returning that API error as the launcher exit code is this product's
 binding, not an original Run16 implementation. Do not map every timeout,
 rejection, startup error or task failure to 6. Preserve those distinct results.
 
-S2 must deliver basic loss and bounded-finalization exits with its normal
+S2 must deliver basic loss and service-directed finalization with its normal
 waiting protocol; S3 extends the full phase/concurrency/failure matrix.
-The current shared watcher hard-exits with RPC_S_SERVER_UNAVAILABLE (1722),
-and launch-style rpc_failure discards its input into STATUS_UNSUCCESSFUL;
-neither establishes the required original error propagation. Some original
+The pre-refactor shared watcher hard-exited with RPC_S_SERVER_UNAVAILABLE (1722),
+and launch-style rpc_failure discarded its input into STATUS_UNSUCCESSFUL;
+neither established the required original error propagation. Some original
 BaseCheckForVDM failure exits do not set LastError, so stale GetLastError is
 not evidence of the failure cause. S2 must carry the explicit transport status
 through the failure result, rather than infer it from stale thread state.

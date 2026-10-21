@@ -4,6 +4,18 @@
 #include <service_internal.h>
 #include <stdio.h>
 
+/* Select one exported capability for existing lifecycle scenarios. All role,
+ * authentication and rights decisions remain in the actual Connect provider. */
+DWORD fixture_connection_control(BOOL console,OPENNT_BASE_CONNECTION *connection,
+    DWORD pid,DWORD generation,HANDLE *selected)
+{
+    HANDLE shutdown=NULL,close=NULL;
+    DWORD error=OpenNtBaseServiceConnectionControls(connection,pid,generation,&shutdown,&close);
+    *selected=console ? close : shutdown;
+    if(console ? shutdown!=NULL : close!=NULL)CloseHandle(console ? shutdown : close);
+    return error;
+}
+
 int fixture_parent_resume_origin(void)
 {
     OPENNT_BASE_SERVICE *service=OpenNtBaseServiceStart();
@@ -363,10 +375,10 @@ int fixture_prepared_native_root_loss(void)
     /* Connect must consume the canceled exact-process grant, not the still
      * valid Console membership fallback. No substitute worker is selected. */
     PREPARED_CHECK(!OpenNtBaseServiceConnect(service,child.hProcess,&worker,&worker_generation));
-    PREPARED_CHECK(!OpenNtBaseServiceWorkerShutdownEvent(worker,child.dwProcessId,worker_generation,&shutdown));
+    PREPARED_CHECK(!fixture_connection_control(FALSE,worker,child.dwProcessId,worker_generation,&shutdown));
     PREPARED_CHECK(WaitForSingleObject(shutdown,0)==WAIT_TIMEOUT);
     CloseHandle(shutdown);shutdown=NULL;
-    PREPARED_CHECK(!OpenNtBaseServiceWorkerConsoleCloseEvent(worker,child.dwProcessId,worker_generation,&shutdown));
+    PREPARED_CHECK(!fixture_connection_control(TRUE,worker,child.dwProcessId,worker_generation,&shutdown));
     PREPARED_CHECK(WaitForSingleObject(shutdown,0)==WAIT_OBJECT_0);
     PREPARED_CHECK(!service_worker_root(worker));
     CloseHandle(shutdown);

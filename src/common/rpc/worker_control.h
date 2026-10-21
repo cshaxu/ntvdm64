@@ -9,8 +9,6 @@ DWORD common_rpc_worker_frontend_capability(const common_rpc_connection *state,H
 DWORD common_rpc_acquire_console_context(const common_rpc_connection *state,HANDLE frontend,HANDLE *capability);
 DWORD common_rpc_bind_console_context(const common_rpc_connection *state,HANDLE capability);
 DWORD common_rpc_register_native_backend(const common_rpc_connection *state,HANDLE frontend);
-DWORD common_rpc_worker_shutdown_event(const common_rpc_connection *state,HANDLE *shutdown);
-DWORD common_rpc_worker_console_close_event(const common_rpc_connection *state,HANDLE *close);
 DWORD common_rpc_worker_io_release_event(const common_rpc_connection *state,HANDLE *release);
 DWORD common_rpc_worker_io_transition(const common_rpc_connection *state,DWORD action);
 DWORD common_rpc_worker_io_checkpoint(const common_rpc_connection *state,DWORD reason,DWORD request,DWORD *decision);

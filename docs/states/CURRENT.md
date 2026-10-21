@@ -10,13 +10,23 @@ SOL startup as owner-verified, not full-gameplay/visual acceptance. This
 supersedes the earlier temporary full-gameplay bypass wording below; other
 lifecycle gates and historical failed geometry evidence remain unchanged.
 
-P19 publishes all thirteen protocol-63 images at 2026-10-21 18:32:44 UTC to
-assets/release and O:/winnt/system32, with matching SHA-256 and a coherent P18
-backup. Full/incremental build, service/owner/real-RPC, DOS17, WRITE, WINMINE,
-CAF-three and supplemental checks pass (r52/r54/r55); SOL uses the owner's
-startup confirmation above. Commit/push is the next delivery action.
-Remaining S3 work is the obsolete capability-RPC removal and final original
-exit/initialization caller/thread coverage review; S3 is not closed.
+P20 publishes all thirteen protocol-64 images at 2026-10-21 18:50:51 UTC to
+assets/release and O:/winnt/system32 with matching SHA-256 and a coherent P19
+backup. The three superseded capability-query RPCs and two redundant provider
+getters are removed; tests use the actual Connect capability provider. Owned
+production/test code is reduced by 106 lines; no new mirror or guest delta.
+
+r57 passes full/incremental build (1,415 unchanged intermediates), service and
+nine lifecycle-owner cases, real RPC/migration/wire checks, DOS17, WRITE's prior
+frontier, WINMINE gameplay, CAF-three and supplemental/governance checks. SOL
+uses the owner's startup confirmation above. Original-exit caller/thread source
+review is recorded separately from runtime proof. P20 commit/push follows this
+verified publication. S3 is not yet closed: its final fixed-scope evidence
+reconciliation and closure record remain; do not infer T acceptance.
+
+P19 is the recoverable preceding baseline, commit
+9fdd3867325a997de18b5517dd805b62e349f0f8. Earlier progress paragraphs below retain
+historical attempts and open findings at those times, not the installed state.
 
 Connect returns service
 lifetime and authenticated worker close capabilities in its existing RPC

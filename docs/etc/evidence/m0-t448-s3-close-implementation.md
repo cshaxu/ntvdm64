@@ -3193,6 +3193,126 @@ Console permission without entering the uninitialized original handler. Full
 real original-entry runtime proof and obsolete capability RPC removal remain
 pending; no new product deadline, guest mutation or release is claimed.
 
+### r56 capability-query cleanup focused verification
+
+The protocol-64 working change removes the superseded BrokerProcess,
+WorkerShutdownEvent and WorkerConsoleCloseEvent RPC declarations/dispatch.
+Connect already supplies these authenticated capabilities atomically. Real RPC
+tests now obtain the service handle from Connect rather than the deleted query.
+The worker-control exception fixture retains the two remaining event interfaces;
+both loops use ARRAYSIZE and the expected issuance count derives from that size.
+This fixes an otherwise out-of-bounds second loop after interface removal.
+
+Hidden controller PID 15208 ran build/t448-s3/verify-controls-r56.ps1 from
+2026-10-21 18:39:22.554 through 18:39:29.330 UTC. The stable x86 Ninja tree
+rebuilt nine dependency-selected edges and the actual fixture passed 133 checks,
+zero failures and zero process handle delta. stdout/stderr and the terminal JSON
+are retained under build/t448-s3/controls-r56.* and controls-r56-result.json.
+This proves only the remaining wrapper issuance-exception/attachment cleanup
+contract, not protocol-64 package or runtime acceptance. Old provider-only test
+calls still require migration; no new package was published. P19 remains the
+installed and pushed baseline.
+
+### r57 provider consolidation
+
+Removed the two superseded service event-query functions and declarations.
+Existing reservation scenarios now select their needed handle from the actual
+ConnectionControls provider via a test-only projection that closes the unused
+handle and does not implement role/authentication policy. Nonworker Connect
+success returns no worker capabilities; its assertion now checks success plus
+NULL instead of the retired query's ACCESS_DENIED result. Stale generations
+still require ACCESS_DENIED. Existing direct provider cases retain both-output
+atomic rollback and wait-only rights assertions. Repository source/test search
+finds no remaining callers or declarations of the three removed RPCs or the
+two retired provider functions. No mirror or guest modification is added.
+
+Hidden controller PID 35164 runs verify-r39.ps1 -Round r57 for the full package,
+unchanged incremental build, service fixtures and nine owner lifecycle cases.
+Its exact command and live CMake child were verified through the OS process
+table; missing sandbox process visibility did not cause a duplicate restart.
+Terminal evidence will be read from io-r57-result.json before any acceptance
+claim. Installed P19 is unchanged during verification.
+
+### Original-exit caller and cleanup-thread source review
+
+Reviewed WK32ExitKernel and WK32FatalExit: each copies the scalar exit code and
+releases GETARGPTR before permission acquisition; ExitVDM(ALL_TASKS) and actual
+ExitProcess remain after permission. W32HungAppNotifyThread releases gcsHungApp
+before the guest-interrupt wait and its eventual whole-process permission call.
+Its earlier successful single-task branch remains unchanged. WOWStartupFailed
+and unexpected W32Thread return similarly obtain permission before ALL_TASKS
+retirement. These are source-order findings, not runtime execution of every
+original fatal/hung branch.
+
+RequestParticipantExit drops the service lock before generation-keyed management
+arbitration, which accepts/signals rather than waiting for the requesting task.
+The spontaneous-exit caller claims the cleanup thread before this request;
+competing watcher callbacks cannot enter original cleanup, and same-thread
+recursive terminate/host_applClose/host_terminate calls reuse the claim.
+The finite Console helper explicitly transfers that claim to its handler thread.
+Worker/service-loss callbacks use the infinite-grace helper's inline callback,
+not a second joining cleanup thread. Original TerminateVDM goes through terminate
+to host_terminate/ExitProcess; it does not call standalone_worker_cleanup.
+The separate standalone finish/startup-failure paths authorize before stopping
+and joining watchers and before disconnect closes borrowed capabilities.
+
+This review supports the caller ordering and absence of a service/task wait
+cycle for these paths. It is not a substitute for fault-injection and real
+runtime coverage; r57 still must pass the delivered owner/activation cases and
+the serial package regressions. Hidden controller 16036 waits for the verified
+live r57 process handle, then runs all-r39 and post-verify for r57; a failed
+prerequisite terminates that controller without staging/publication.
+
+### r57 build and owner verification result
+
+Controller 35164 completes successfully at 2026-10-21 18:44:50.374 UTC.
+FullComponentBuild reports thirteen images and 1,415 unchanged intermediates
+after second x86/x64 builds (build-r57-result.json, completed 18:44:15.906).
+Service fixtures pass at 18:44:38.064, frontend-scope checks at 18:44:43.541;
+all nine console owner scenarios pass, including pre-activation Console close,
+WOW without a Console capability, service death and spontaneous/partial-startup
+exit authorization. The terminal io-r57-result.json is passing. Controller
+16036 continues serialized package verification; no publication is inferred.
+
+### Protocol-64 diff review and serial verification progress
+
+Relative to P19, the reviewed production diff adds seven and removes 116 lines;
+tests add 50 and remove 47 lines. Combined owned code is reduced by 106 lines,
+excluding documentation and generated/released binaries. No mirror or guest
+delta is added. The test-only capability projection has no role decisions;
+it delegates to the actual provider and closes the unused output. Connect's
+service-process rights check replaces the removed BrokerProcess query test;
+authenticated stale-generation rejection remains covered at the provider and
+other wire operations, not by retaining a dead endpoint.
+
+The lifecycle plan also contained two stale ten-second bootstrap phrases.
+They now agree with the already approved five-second policy; no runtime timeout
+is added or changed. r57 RPC reply/connect/disconnect/loss/bootstrap succeeds;
+six migration cases pass at 18:46:07.639 UTC and wire identity/bootstrap/park
+checks pass at 18:46:55.876. Product regression remains active, not a completed
+acceptance claim. A guarded P20 commit runner is prepared but not executed;
+it requires passing acceptance, coherent publication, hash equality, governance
+and reviewed paths before staging and pushing.
+
+### S3 P20 verification and publication
+
+Controller 16036 completes accept-r57 at 2026-10-21 18:50:29.354 UTC, successful.
+The immutable package-r57 passes RPC, six migration cases, wire identity and
+bootstrap/park checks, DOS17, WINMINE gameplay, WRITE's four-sample prior frontier,
+CAF cmd/command/ntmon before-Enter echo, native failure/completion-loss and
+startup/I/O rejection cases. SOL is owner-confirmed startup, not a gameplay or
+layout pass. Supplemental native-command and presentation checks and documentation
+governance also pass. WRITE editing/normal exit remain explicitly unverified,
+not an expanded claim from its startup frontier.
+
+Hidden publication controller 7488 verifies every gate and publishes all thirteen
+protocol-64 images at 18:50:51.243 UTC, with SHA-256 equality between package,
+assets/release and O:/winnt/system32. publication-r57.json records exact hashes;
+publication-r57-backup retains both prior P19 sets and manifest. No installed
+project process was present at the checked publication boundary. P20 commit/push
+is the remaining delivery operation. S3's final fixed-scope reconciliation is
+still required; this publication alone does not close S3 or T448.
+
 ### Owner SOL acceptance clarification
 
 Owner subsequently states: "你只要记录sol可以正常启动即可 我手测可以

@@ -6,6 +6,7 @@
 
 extern PCONSOLERECORD DOSHead;
 extern PWOWHEAD WOWHead;
+DWORD fixture_connection_control(BOOL,OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE *);
 
 /* Test-only entry to the actual private copied queue/take implementation.
  * Real RPC authentication/startup remains covered by cross-process fixtures. */
@@ -344,7 +345,7 @@ static int management_frontend_close_ordering(unsigned phase,unsigned competing)
         if(preparing) {
             HANDLE late_receiver=NULL;
             CHECK(!worker->registered_worker);
-            CHECK(!OpenNtBaseServiceWorkerShutdownEvent(worker,worker_child.dwProcessId,
+            CHECK(!fixture_connection_control(FALSE,worker,worker_child.dwProcessId,
                 worker_generation,&late_receiver));
             CHECK(WaitForSingleObject(late_receiver,0)==WAIT_OBJECT_0);
             CloseHandle(late_receiver);
@@ -753,7 +754,7 @@ static int frontend_authority(void)
         CHECK(OpenNtBaseServiceFrontendStartupResult(root,child.dwProcessId,root_generation,
             capability,0)==ERROR_ACCESS_DENIED);
         CloseHandle(startup_result);
-        CHECK(OpenNtBaseServiceWorkerShutdownEvent(root,child.dwProcessId,root_generation,&shutdown)==ERROR_ACCESS_DENIED);
+        CHECK(fixture_connection_control(FALSE,root,child.dwProcessId,root_generation,&shutdown)==ERROR_SUCCESS);
         CHECK(!shutdown);
         CHECK(!OpenNtBaseServiceReconcileFrontends(service));
         CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(root,child.dwProcessId,root_generation,&closing) && !closing);
@@ -779,8 +780,8 @@ static int frontend_authority(void)
                 CHECK(!OpenNtBaseServiceReconcileFrontends(service));
                 CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(root,child.dwProcessId,root_generation,&closing) && !closing);
             }
-            CHECK(OpenNtBaseServiceWorkerShutdownEvent(worker,backend.dwProcessId,worker_generation+1,&shutdown)==ERROR_ACCESS_DENIED);
-            CHECK(!OpenNtBaseServiceWorkerShutdownEvent(worker,backend.dwProcessId,worker_generation,&shutdown));
+            CHECK(fixture_connection_control(FALSE,worker,backend.dwProcessId,worker_generation+1,&shutdown)==ERROR_ACCESS_DENIED);
+            CHECK(!fixture_connection_control(FALSE,worker,backend.dwProcessId,worker_generation,&shutdown));
             CHECK(WaitForSingleObject(shutdown,0)==WAIT_TIMEOUT);
             CHECK(!SetEvent(shutdown) && GetLastError()==ERROR_ACCESS_DENIED);
             if(phase>=4) {
@@ -806,7 +807,7 @@ static int frontend_authority(void)
             CHECK(WaitForSingleObject(shutdown,0)==WAIT_TIMEOUT);
             {
                 HANDLE close=NULL;
-                CHECK(!OpenNtBaseServiceWorkerConsoleCloseEvent(worker,backend.dwProcessId,worker_generation,&close));
+                CHECK(!fixture_connection_control(TRUE,worker,backend.dwProcessId,worker_generation,&close));
                 CHECK(WaitForSingleObject(close,0)==WAIT_OBJECT_0);CloseHandle(close);
             }
             CHECK(WaitForSingleObject(command_wait,5000)==WAIT_OBJECT_0);
@@ -1394,7 +1395,7 @@ int main(int argc,char **argv)
             old_generation=root_generation;
             CHECK(!queue_native_fixture(launcher,GetCurrentProcessId(),
                 launcherGeneration,capability,native_payload));
-            CHECK(!OpenNtBaseServiceWorkerShutdownEvent(worker,child.dwProcessId,
+            CHECK(!fixture_connection_control(FALSE,worker,child.dwProcessId,
                 workerGeneration,&shutdown));
             CHECK(WaitForSingleObject(shutdown,0)==WAIT_TIMEOUT);
             CHECK(!OpenNtBaseServiceDisconnect(root));root=NULL;initial_root=NULL;
@@ -1416,7 +1417,7 @@ int main(int argc,char **argv)
             CHECK(WaitForSingleObject(shutdown,0)==WAIT_TIMEOUT);
             {
                 HANDLE close=NULL;
-                CHECK(!OpenNtBaseServiceWorkerConsoleCloseEvent(worker,child.dwProcessId,workerGeneration,&close));
+                CHECK(!fixture_connection_control(TRUE,worker,child.dwProcessId,workerGeneration,&close));
                 CHECK(WaitForSingleObject(close,0)==WAIT_OBJECT_0);CloseHandle(close);
             }
             {
@@ -1846,8 +1847,8 @@ int main(int argc,char **argv)
         CHECK(!OpenNtBaseServiceCloseManagementNode(service,&key));
         /* Actual reservation claim after close acceptance, before quiescence. */
         CHECK(!OpenNtBaseServiceConnect(service,child.hProcess,&worker,&workerGeneration));
-        CHECK(!OpenNtBaseServiceWorkerConsoleCloseEvent(worker,child.dwProcessId,workerGeneration,&close));
-        CHECK(!OpenNtBaseServiceWorkerShutdownEvent(worker,child.dwProcessId,workerGeneration,&shutdown));
+        CHECK(!fixture_connection_control(TRUE,worker,child.dwProcessId,workerGeneration,&close));
+        CHECK(!fixture_connection_control(FALSE,worker,child.dwProcessId,workerGeneration,&shutdown));
         CHECK(WaitForSingleObject(close,0)==WAIT_TIMEOUT);
         CHECK(!OpenNtBaseServiceTerminateWorker(service,child.dwProcessId));
         CHECK(WaitForSingleObject(shutdown,0)==WAIT_TIMEOUT);
@@ -2683,7 +2684,7 @@ int main(int argc,char **argv)
             HANDLE close_thread;
             /* Emulate the worker-base carrier: NTSRV signals the generic
              * shutdown event, and the worker owns its normal process exit. */
-            CHECK(!OpenNtBaseServiceWorkerShutdownEvent(worker,child.dwProcessId,
+            CHECK(!fixture_connection_control(FALSE,worker,child.dwProcessId,
                 workerGeneration,&close.stop));
             close.process=child.hProcess;
             close.closed=CreateEventW(NULL,TRUE,FALSE,NULL);
@@ -2989,7 +2990,7 @@ int main(int argc,char **argv)
         HANDLE shutdown=NULL;
         PWOWHEAD original_head=WOWHead;
         CHECK(original_head && original_head->SequenceNumber==wowGeneration);
-        CHECK(!OpenNtBaseServiceWorkerShutdownEvent(wowWorker,wowChild.dwProcessId,wowGeneration,&shutdown));
+        CHECK(!fixture_connection_control(FALSE,wowWorker,wowChild.dwProcessId,wowGeneration,&shutdown));
         CHECK(!OpenNtBaseServiceTerminateWorker(service,wowChild.dwProcessId));
         CHECK(WaitForSingleObject(shutdown,0)==WAIT_OBJECT_0);
         CHECK(OpenNtBaseEncodeCheckCommand(&check,13,launcherGeneration,NULL,0,&wireBytes));

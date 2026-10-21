@@ -45,6 +45,7 @@ int main(int argc,char **argv)
     unsigned char app_version[APP_VERSION_BYTES]=APP_VERSION,server_version[APP_VERSION_BYTES]={0};
     ULONG server_protocol=0;
     HANDLE reader=NULL,writer=NULL;
+    HANDLE server=NULL,shutdown=NULL,console_close=NULL;
     DWORD available;
     char temporary[MAX_PATH];
     char receiverPid[32];HANDLE receiver;
@@ -71,23 +72,18 @@ int main(int argc,char **argv)
         REQUIRE(test_rpc_connect(binding,process,APP_PROTOCOL_VERSION,app_version,
             &server_protocol,server_version,&connection,&generation)==ERROR_REVISION_MISMATCH && !connection && !generation);
         memset(app_version,0,sizeof(app_version));memcpy(app_version,APP_VERSION,sizeof(APP_VERSION));
-        REQUIRE(!test_rpc_connect(binding,process,APP_PROTOCOL_VERSION,app_version,
-            &server_protocol,server_version,&connection,&generation) && connection && generation);
+        REQUIRE(!test_rpc_connect_controls(binding,process,APP_PROTOCOL_VERSION,app_version,
+            &server_protocol,server_version,&connection,&generation,&server,&shutdown,&console_close) && connection && generation);
         REQUIRE(server_protocol==APP_PROTOCOL_VERSION && !memcmp(server_version,app_version,sizeof(app_version)));
+        REQUIRE(server && !shutdown && !console_close); /* Not an admitted worker. */
+        REQUIRE(WaitForSingleObject(server,0)==WAIT_TIMEOUT);
+        REQUIRE(!TerminateProcess(server,123) && GetLastError()==ERROR_ACCESS_DENIED);
+        CloseHandle(server);server=NULL;
         if (abandon) {
             /* Deliberately leave the context open and let process exit test
              * the real RPC rundown path, not explicit Disconnect. */
             puts("PASS: registered context intentionally abandoned at process exit");
             return 0;
-        }
-        {
-            HANDLE server=NULL;
-            REQUIRE(test_rpc_broker_process(binding,connection,process,0,&server)==ERROR_ACCESS_DENIED && !server);
-            REQUIRE(!test_rpc_broker_process(binding,connection,process,generation,&server) && server);
-            REQUIRE(WaitForSingleObject(server,0)==WAIT_TIMEOUT);
-            /* Wait-only: never grant a client process-termination authority. */
-            REQUIRE(!TerminateProcess(server,123) && GetLastError()==ERROR_ACCESS_DENIED);
-            CloseHandle(server);
         }
         REQUIRE(test_rpc_connect(binding,process,APP_PROTOCOL_VERSION,app_version,
             &server_protocol,server_version,&duplicate,&next)==ERROR_ALREADY_EXISTS && !duplicate && !next);

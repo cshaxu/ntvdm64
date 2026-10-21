@@ -1,7 +1,7 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(63.0),
+    version(64.0),
     pointer_default(unique)
 ]
 interface vdm_service
@@ -95,19 +95,6 @@ interface vdm_service
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation);
-    error_status_t WorkerShutdownEvent(
-        [in] handle_t binding, [in] VDM_CONNECTION connection,
-        [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation,
-        [out, system_handle(sh_event)] HANDLE *shutdown);
-    /* Management Console-close is deliberately distinct from worker shutdown.
-     * The recipient receives only wait rights and chooses its own original or
-     * native close entry point. */
-    error_status_t WorkerConsoleCloseEvent(
-        [in] handle_t binding, [in] VDM_CONNECTION connection,
-        [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation,
-        [out, system_handle(sh_event)] HANDLE *close);
     /* Service-directed I/O release, not task completion or worker shutdown.
      * The recipient receives synchronize rights only. */
     error_status_t WorkerIoReleaseEvent(
@@ -286,13 +273,8 @@ interface vdm_service
         unsigned long event,psp,parent_psp,flags;
         wchar_t image[260];
     } DOS_OBSERVATION_FACT;
-    /* Authenticated lifetime capability, not a PID or restart authority. */
-    error_status_t BrokerProcess(
-        [in] handle_t binding,
-        [in] VDM_CONNECTION connection,
-        [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation,
-        [out, system_handle(sh_process)] HANDLE *server);
+    /* Lifecycle capabilities are returned atomically with admission, not
+     * fetched through separate post-Connect RPCs. */
     error_status_t Connect(
         [in] handle_t binding,
         [in, system_handle(sh_process)] HANDLE process,

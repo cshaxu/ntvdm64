@@ -28,7 +28,6 @@ interface vdm_service
     [async] RequestParticipantExit([context_handle_noserialize] connection);
     [async] WaitFrontendConsoleRestored();
     [async] Connect();
-    [async] BrokerProcess();
     [async] CloseManagementNode();
     [async] FrontendCloseQuiesced();
     [async] FrontendConsoleRestored();
@@ -47,8 +46,6 @@ interface vdm_service
     [async] FrontendStartupResult();
     [async] Disconnect();
     [async] WorkerFrontendCapability();
-    [async] WorkerShutdownEvent();
-    [async] WorkerConsoleCloseEvent();
     [async] WorkerIoReleaseEvent();
     [async] AcquireConsoleContext();
     [async] BindConsoleContext();

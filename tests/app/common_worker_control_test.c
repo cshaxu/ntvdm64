@@ -27,8 +27,6 @@ static HANDLE attachment(unsigned index)
     peer(binding,connection,process,generation);CHECK(async!=NULL);*output=attachment(0); \
     RpcRaiseException(mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED);return ERROR_SUCCESS;}
 EVENT_CALL(WorkerFrontendCapability)
-EVENT_CALL(WorkerShutdownEvent)
-EVENT_CALL(WorkerConsoleCloseEvent)
 EVENT_CALL(WorkerIoReleaseEvent)
 error_status_t Client_WorkerIoCheckpoint(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,unsigned long generation,unsigned long reason,unsigned long request,unsigned long *decision)
@@ -98,13 +96,12 @@ int main(void)
     /* Exclude RPC's first-use process resources, not per-call resources. */
     CHECK(RpcAsyncInitializeHandle(&runtime,sizeof(runtime))==RPC_S_OK);
     event_client events[]={common_rpc_worker_frontend_capability,
-        common_rpc_worker_shutdown_event,common_rpc_worker_console_close_event,
         common_rpc_worker_io_release_event};
     expected.binding=(RPC_BINDING_HANDLE)(ULONG_PTR)11;
     expected.connection=(VDM_CONNECTION)(ULONG_PTR)12;
     expected.process=CreateEventW(NULL,TRUE,FALSE,NULL);expected.generation=13;
     CHECK(expected.process && GetProcessHandleCount(GetCurrentProcess(),&before));
-    for(i=0;i<4;++i) {
+    for(i=0;i<ARRAYSIZE(events);++i) {
         CHECK(events[i](&expected,NULL)==ERROR_INVALID_PARAMETER);
         output=expected.process;CHECK(events[i](NULL,&output)==ERROR_INVALID_STATE && !output);
         output=expected.process;CHECK(events[i](&invalid,&output)==ERROR_INVALID_STATE && !output);
@@ -133,7 +130,7 @@ int main(void)
         initial=calls;want=mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED;
         /* Successful async replies use the actual NTSRV/runtime tests.
          * These stubs assert issuance exceptions and attachment cleanup. */
-        for(i=0;i<4;++i) {
+        for(i=0;i<ARRAYSIZE(events);++i) {
             CHECK(events[i](&expected,&output)==want);
             CHECK(!output);closed(1);
         }
@@ -151,12 +148,12 @@ int main(void)
             CHECK(error==want);
             CHECK(!pipe && !frontend && !ready && !generation);closed(3);
         }
-        CHECK(calls==initial+11);
+        CHECK(calls==initial+ARRAYSIZE(events)+7);
     }
     CHECK(takes==2 && waits==2);
     mode=2;expected.binding=(RPC_BINDING_HANDLE)(ULONG_PTR)21;
     expected.connection=(VDM_CONNECTION)(ULONG_PTR)22;expected.generation=23;
-    CHECK(common_rpc_worker_shutdown_event(&expected,&output)==RPC_S_CALL_FAILED && !output);closed(1);
+    CHECK(common_rpc_worker_io_release_event(&expected,&output)==RPC_S_CALL_FAILED && !output);closed(1);
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&after) && before==after);
     CHECK(WaitForSingleObject(expected.process,0)==WAIT_TIMEOUT);CloseHandle(expected.process);
     printf("%s common worker-control RPC %u checks %u failures; handle delta=%ld\n",

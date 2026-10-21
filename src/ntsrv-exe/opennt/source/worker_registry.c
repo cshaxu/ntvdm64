@@ -381,49 +381,6 @@ DWORD OpenNtBaseServiceConnectionControls(OPENNT_BASE_CONNECTION *connection,DWO
     return error;
 }
 
-DWORD OpenNtBaseServiceWorkerShutdownEvent(OPENNT_BASE_CONNECTION *worker,DWORD pid,
-    DWORD generation,HANDLE *shutdown)
-{
-    LIST_ENTRY *link;
-    DWORD error=ERROR_ACCESS_DENIED;
-    if(!worker || !shutdown)return ERROR_INVALID_PARAMETER;
-    *shutdown=NULL;
-    EnterCriticalSection(&worker->service->lock);
-    if(OpenNtBaseServicePeer(worker,pid,generation))
-        for(link=worker->service->worker_watches.Flink;link!=&worker->service->worker_watches;link=link->Flink) {
-            OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
-            if(watch->process.SequenceNumber!=generation)continue;
-            error=DuplicateHandle(GetCurrentProcess(),watch->shutdown,GetCurrentProcess(),shutdown,
-                SYNCHRONIZE,FALSE,0) ? ERROR_SUCCESS : GetLastError();
-            break;
-        }
-    LeaveCriticalSection(&worker->service->lock);
-    return error;
-}
-
-DWORD OpenNtBaseServiceWorkerConsoleCloseEvent(OPENNT_BASE_CONNECTION *worker,DWORD pid,
-    DWORD generation,HANDLE *close)
-{
-    LIST_ENTRY *link;
-    DWORD error=ERROR_ACCESS_DENIED;
-    if(!worker || !close)return ERROR_INVALID_PARAMETER;
-    *close=NULL;
-    EnterCriticalSection(&worker->service->lock);
-    if(OpenNtBaseServicePeer(worker,pid,generation))
-        for(link=worker->service->worker_watches.Flink;link!=&worker->service->worker_watches;link=link->Flink) {
-            OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
-            if(watch->process.SequenceNumber!=generation)continue;
-            if(watch->wow) {
-                error=ERROR_NOT_SUPPORTED;
-                break;
-            }
-            error=DuplicateHandle(GetCurrentProcess(),watch->console_close,GetCurrentProcess(),close,
-                SYNCHRONIZE,FALSE,0) ? ERROR_SUCCESS : GetLastError();
-            break;
-        }
-    LeaveCriticalSection(&worker->service->lock);
-    return error;
-}
 
 
 DWORD OpenNtBaseServiceWorkerIoReleaseEvent(OPENNT_BASE_CONNECTION *worker,DWORD pid,

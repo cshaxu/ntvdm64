@@ -67,12 +67,6 @@ DWORD common_rpc_bind_console_context(const common_rpc_connection *state,HANDLE 
 DWORD common_rpc_register_native_backend(const common_rpc_connection *state,HANDLE frontend)
 { return worker_handle(state,frontend,Client_RegisterNativeBackend); }
 
-DWORD common_rpc_worker_shutdown_event(const common_rpc_connection *state,HANDLE *shutdown)
-{ return worker_event(state,shutdown,Client_WorkerShutdownEvent,TRUE); }
-
-DWORD common_rpc_worker_console_close_event(const common_rpc_connection *state,HANDLE *close)
-{ return worker_event(state,close,Client_WorkerConsoleCloseEvent,TRUE); }
-
 DWORD common_rpc_worker_io_checkpoint(const common_rpc_connection *state,DWORD reason,DWORD request,DWORD *decision)
 {
     RPC_ASYNC_STATE async;

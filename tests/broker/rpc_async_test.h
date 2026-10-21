@@ -4,34 +4,31 @@
 #include "common/rpc/async_call.h"
 /* Raw-wire fixtures vary authentication/version inputs intentionally. Reuse
  * production cancellation, never a test transport or replacement endpoint. */
+static __inline DWORD test_rpc_connect_controls(handle_t binding,HANDLE process,ULONG protocol,
+    unsigned char *application,ULONG *server_protocol,unsigned char *server_version,
+    VDM_CONNECTION *connection,ULONG *generation,HANDLE *server,HANDLE *shutdown,HANDLE *console_close)
+{
+    RPC_ASYNC_STATE async;DWORD error=common_rpc_begin_async(&async);
+    if(error)return error;
+    RpcTryExcept {
+        Client_Connect(&async,binding,process,protocol,application,server_protocol,
+            server_version,connection,generation,server,shutdown,console_close);
+    }
+    RpcExcept(1){error=RpcExceptionCode();}
+    RpcEndExcept
+    return common_rpc_end_async(&async,error,NULL,10000);
+}
 static __inline DWORD test_rpc_connect(handle_t binding,HANDLE process,ULONG protocol,
     unsigned char *application,ULONG *server_protocol,unsigned char *server_version,
     VDM_CONNECTION *connection,ULONG *generation)
 {
     HANDLE server=NULL,shutdown=NULL,console_close=NULL;
-    RPC_ASYNC_STATE async;DWORD error=common_rpc_begin_async(&async);
-    if(error)return error;
-    RpcTryExcept {
-        Client_Connect(&async,binding,process,protocol,application,server_protocol,
-            server_version,connection,generation,&server,&shutdown,&console_close);
-    }
-    RpcExcept(1){error=RpcExceptionCode();}
-    RpcEndExcept
-    error=common_rpc_end_async(&async,error,NULL,10000);
+    DWORD error=test_rpc_connect_controls(binding,process,protocol,application,
+        server_protocol,server_version,connection,generation,&server,&shutdown,&console_close);
     if(server)CloseHandle(server);
     if(shutdown)CloseHandle(shutdown);
     if(console_close)CloseHandle(console_close);
     return error;
-}
-static __inline DWORD test_rpc_broker_process(handle_t binding,VDM_CONNECTION connection,
-    HANDLE process,ULONG generation,HANDLE *server)
-{
-    RPC_ASYNC_STATE async;DWORD error=common_rpc_begin_async(&async);
-    if(error)return error;
-    RpcTryExcept {Client_BrokerProcess(&async,binding,connection,process,generation,server);}
-    RpcExcept(1){error=RpcExceptionCode();}
-    RpcEndExcept
-    return common_rpc_end_async(&async,error,NULL,10000);
 }
 static __inline DWORD test_rpc_disconnect(handle_t binding,HANDLE process,ULONG generation,
     VDM_CONNECTION *connection)
