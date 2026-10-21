@@ -66,6 +66,9 @@ $graph.Add('  command = link.exe /nologo /machine:x64 /subsystem:console /opt:re
 $graph.Add('rule idl')
 $graph.Add('  command = midl.exe /nologo /env x64 /target NT100 /prefix client Client_ /prefix server Server_ /acf "'+(NP (Join-Path $root 'src/common/protocol/service.acf'))+'" /out obj/basesrv /h service.h /cstub service_c.c /sstub service_s.c "'+(NP (Join-Path $root 'src/common/protocol/service.idl'))+'"')
 $graph.Add('build obj/basesrv/service_c.c obj/basesrv/service_s.c obj/basesrv/service.h: idl '+(NP (Join-Path $root 'src/common/protocol/service.idl'))+' | '+(NP (Join-Path $root 'src/common/protocol/service.acf')))
+$graph.Add('rule rpc_management_idl')
+$graph.Add('  command = midl.exe /nologo /env x64 /target NT100 /acf "'+(NP (Join-Path $root 'src/common/protocol/rpc_management.acf'))+'" /client stub /server none /out obj/basesrv /h rpc_management.h /cstub rpc_management_c.c $in')
+$graph.Add('build obj/basesrv/rpc_management_c.c obj/basesrv/rpc_management.h: rpc_management_idl '+(NP (Join-Path $root 'src/common/protocol/rpc_management.idl'))+' | '+(NP (Join-Path $root 'src/common/protocol/rpc_management.acf')))
 $done=@{};$manifest=[Collections.Generic.List[object]]::new()
 # Finite client-side closure proved by the image-matched S1 ledger. Native
 # /Gy can discard the whole legacy dispatch branch; do not make regeneration
@@ -80,6 +83,7 @@ function Add-Edge([string]$target) {
  if($Component -ne 'Launcher' -and $target -eq 'opennt-base-client.lib'){return}
  if($Component -notin @('Worker','Launcher','Service') -and $target -eq 'original-opennt-rtl-x86.lib'){return}
  if($target -match '^obj/basesrv/service_[cs]\.c$|^obj/basesrv/service\.h$'){return}
+ if($target -match '^obj/basesrv/rpc_management(_c\.c|\.h)$'){return}
  if($done.ContainsKey($target)){return}
  if(!$edges.ContainsKey($target)){throw "Unresolved selected build edge: $target"}
  $edge=$edges[$target];$done[$target]=$true
@@ -126,7 +130,7 @@ function Add-Edge([string]$target) {
  }
  if($source -notmatch '\.(c|cpp)$'){throw "Not a source: $source"}
  if($source -notmatch '^O\$:/'){
-  if($source -notin @('obj/basesrv/service_c.c','obj/basesrv/service_s.c')){throw "Unknown generated source: $source"}
+  if($source -notin @('obj/basesrv/service_c.c','obj/basesrv/service_s.c','obj/basesrv/rpc_management_c.c')){throw "Unknown generated source: $source"}
  }
  foreach($input in $inputs|Select-Object -Skip 1){
   if($input -match '^O\$:/.*\.(c|h)$'){
@@ -136,7 +140,9 @@ function Add-Edge([string]$target) {
   }else{Add-Edge $input}
  }
  $null=New-Item -ItemType Directory -Path (Join-Path $build (Split-Path $target -Parent)) -Force
- $graph.Add('build '+$target+': cc '+$source+' | obj/basesrv/service.h')
+ $generatedHeaders='obj/basesrv/service.h'
+ if($target -in @('obj/common/interface_query.obj','obj/common/rpc_management_stub.obj')){$generatedHeaders+=' obj/basesrv/rpc_management.h'}
+ $graph.Add('build '+$target+': cc '+$source+' | '+$generatedHeaders)
  $flags=$nativeFlags
  if($target -eq 'obj/opennt-base-server/srvvdm.obj'){
   # OPENNT-HOST-068: integer-zero binding is local to this original TU.

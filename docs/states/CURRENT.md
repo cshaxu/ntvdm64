@@ -19,7 +19,7 @@ the prior checkpoint claims that the CAF defect is universally fixed.
 | Admission And Approval | Owner approves final design and continuous sequential execution through T pre-closure acceptance; S1 design concluded and pushed at c838c332c. |
 | Objective | Implement the approved unified management-close transaction, concurrency and role-specific service-loss cleanup, preserving the S2 normal-chain candidate. |
 | Non-goals | No guest modification/rebuild; no native GUI target lifecycle ownership; no unrelated WOW32 capability work; no T closure without owner acceptance. |
-| Reference Baseline | S3 P14 finite RPC unification: protocol 60, thirteen images published and hash-verified at both destinations; full/incremental build, service39, four migrated actual-RPC cases, 53 actual deadline scenarios, wire/error/startup and same-package runtime gates pass within the recorded frontier. UNKNOWN_IF diagnosis, initialization/fault and original-host exit-permission work remain open; no S3 acceptance or waiver. |
+| Reference Baseline | S3 P15 bounded interface diagnosis: protocol 60, thirteen images published and hash-verified at both destinations; full/incremental, service39, four migrated RPC cases, 53 deadlines, same-package runtime and x86/x64 diagnostic33 pass. Candidate Run16 rejects actual old-protocol NTSRV. Default-worker bootstrap, initialization/fault and original-host exit permission remain open; no S3 acceptance or waiver. |
 | Files And ABI Surface | Run16, NTSRV service/client, common protocol, worker-base, NTCON, NTVDM and NTVWM; production-linked lifecycle tests; coherent protocol updates if required. |
 | Applicable Rules | docs/README reading set; execution, architecture, coding, document and source-policy authorities; original-owner recovery and exception registration. |
 | Verification | Source-first implementation and diff review; background x86/x64 full-component/incremental builds; affected production-linked service/frontend/launcher fixtures and normal DOS/native/WOW startup/return regression; complete package deployment and hashes; governance. |
@@ -100,6 +100,18 @@ interface data matches the public API, delayed replies cancel at ten seconds,
 and denial preserves its error. This is feasibility evidence only; production
 UNKNOWN_IF integration and its old/current/draining classification tests remain
 open. No new binary publication or S3 closure is claimed by this investigation.
+
+The subsequent candidate replaces the diagnostic with the same standard RPC
+operation's async client and the existing Connect deadline. r31 full-component
+and second incremental builds pass; production-linked x86/x64 queries each pass
+27 checks, including ten-second cancellation and stable repeated-call handle
+counts. Serial same-package and post regressions pass on r31. Final permanent
+x86/x64 fixtures pass 33 checks each, including actual unregistration, remaining
+deadline and zero allocations; candidate Run16 rejects retained protocol59
+NTSRV with 1306. P15's thirteen images were published and hash-verified at both
+destinations at 14:18:56 UTC on 2026-10-21. No S3 closure is claimed;
+the ledger retains default-worker bootstrap, initialization and exit-permission
+gaps and the first failed old-interface harness attempt.
 
 1. S1: whole-system ownership audit and complete transition design.
 2. S2: complete normal admission/result/handoff chain, including frontend policy and lifecycle-only WOW binding.

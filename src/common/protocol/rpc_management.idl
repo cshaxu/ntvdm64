@@ -1,0 +1,27 @@
+/* Operation-zero wire declaration derived from Microsoft OpenNT-4.5
+ * nt/private/rpc/runtime/rtifs/mgmt.idl and nbase.idl.
+ * Copyright (c) 1991 Microsoft Corporation.
+ * Provenance and bounded client-only selection: T448 S3 implementation ledger.
+ * No RPC runtime implementation is imported. */
+[uuid(afa8bd80-7d8a-11c9-bef4-08002b102989), version(1)]
+interface rpc_management
+{
+    typedef struct {
+        unsigned long Data1;
+        unsigned short Data2;
+        unsigned short Data3;
+        byte Data4[8];
+    } management_uuid;
+    typedef struct {
+        management_uuid Uuid;
+        unsigned short VersMajor;
+        unsigned short VersMinor;
+    } management_if_id;
+    typedef struct {
+        unsigned long Count;
+        [size_is(Count)] management_if_id *IfId[];
+    } *management_if_vector;
+    void management_inquire_interfaces([in] handle_t binding,
+        [out] management_if_vector *interfaces,
+        [out] error_status_t *status);
+}

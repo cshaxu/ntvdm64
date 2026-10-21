@@ -18,6 +18,7 @@
 #include "common/rpc/worker_control.h"
 #include "common/rpc/dos_observation.h"
 #include "common/rpc/async_call.h"
+#include "common/rpc/interface_query.h"
 #include <base_rpc_client_internal.h>
 
 typedef struct OPENNT_BASE_RPC_CLIENT {
@@ -78,27 +79,12 @@ void __RPC_USER MIDL_user_free(void *value) { free(value); }
 /* UNKNOWN_IF also occurs while a healthy-version endpoint drains. Query the
  * same authenticated local endpoint before calling it a version mismatch.
  * This never admits work or relaxes the subsequent Connect identity check. */
-static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
+static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding,ULONGLONG deadline)
 {
     RPC_IF_ID expected;
-    RPC_IF_ID_VECTOR *interfaces=NULL;
-    RPC_STATUS status,uuid_status;
-    unsigned int index;
-    DWORD result=RPC_S_SERVER_UNAVAILABLE;
-    status=RpcIfInqId(Client_vdm_service_v60_0_c_ifspec,&expected);
+    RPC_STATUS status=RpcIfInqId(Client_vdm_service_v60_0_c_ifspec,&expected);
     if (status) return status;
-    status=RpcMgmtInqIfIds(binding,&interfaces);
-    if (status) return status;
-    for (index=0;index<interfaces->Count;++index) {
-        RPC_IF_ID *peer=interfaces->IfId[index];
-        if (UuidEqual(&peer->Uuid,&expected.Uuid,&uuid_status) &&
-            (peer->VersMajor!=expected.VersMajor || peer->VersMinor!=expected.VersMinor)) {
-            result=ERROR_REVISION_MISMATCH;
-            break;
-        }
-    }
-    RpcIfIdVectorFree(&interfaces);
-    return result;
+    return common_rpc_classify_interface(binding,&expected,deadline);
 }
 
 DWORD OpenNtBaseClientConnectCurrent(void)
@@ -156,7 +142,7 @@ DWORD OpenNtBaseClientConnectCurrentTimeout(DWORD milliseconds)
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
     error=common_rpc_end_async(&async,error,NULL,common_rpc_remaining_ms(deadline));
-    if (error==RPC_S_UNKNOWN_IF) error=classify_missing_interface(client.binding);
+    if (error==RPC_S_UNKNOWN_IF) error=classify_missing_interface(client.binding,deadline);
     /* A confirmed legacy RPC major cannot decode this Connect signature. */
     if (error==RPC_S_PROCNUM_OUT_OF_RANGE ||
         (error==ERROR_REVISION_MISMATCH && !server_protocol)) {

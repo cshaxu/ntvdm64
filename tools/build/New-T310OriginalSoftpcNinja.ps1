@@ -1465,10 +1465,17 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/common/dos_observation.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/rpc/dos_observation.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build common-rpc.lib: lib obj/common/local_binding.obj obj/common/native_command.obj obj/common/frontend_control.obj obj/common/worker_control.obj obj/common/management.obj obj/common/dos_observation.obj')
+    $graph.Add('build obj/common/interface_query.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/rpc/interface_query.c')) + ' | obj/basesrv/rpc_management.h')
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build obj/common/rpc_management_stub.obj: cc obj/basesrv/rpc_management_c.c | obj/basesrv/rpc_management.h')
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build common-rpc.lib: lib obj/common/local_binding.obj obj/common/native_command.obj obj/common/frontend_control.obj obj/common/worker_control.obj obj/common/management.obj obj/common/dos_observation.obj obj/common/interface_query.obj obj/common/rpc_management_stub.obj')
     $graph.Add('build obj/tests/common_management.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/common_management_test.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build common-management-test.exe: base_rpc_test_link obj/tests/common_management.obj common-rpc.lib')
+    $graph.Add('build obj/tests/rpc_interface_query.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/rpc_interface_query_test.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build rpc-interface-query-test.exe: base_rpc_test_link obj/tests/rpc_interface_query.obj common-rpc.lib')
     $graph.Add('build obj/tests/common_worker_control.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/common_worker_control_test.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build common-worker-control-test.exe: base_rpc_test_link obj/tests/common_worker_control.obj common-rpc.lib')
@@ -1726,6 +1733,9 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     $graph.Add('rule basesrv_idl')
     $graph.Add('  command = midl.exe /nologo /env win32 /target NT100 /prefix client Client_ /prefix server Server_ /acf "' + (NinjaPath (Join-Path $root 'src/common/protocol/service.acf')) + '" /out obj/basesrv /h service.h /cstub service_c.c /sstub service_s.c $in')
     $graph.Add('build obj/basesrv/service_s.c | obj/basesrv/service_c.c obj/basesrv/service.h: basesrv_idl ' + (NinjaPath (Join-Path $root 'src/common/protocol/service.idl')) + ' | ' + (NinjaPath (Join-Path $root 'src/common/protocol/service.acf')))
+    $graph.Add('rule rpc_management_idl')
+    $graph.Add('  command = midl.exe /nologo /env win32 /target NT100 /acf "' + (NinjaPath (Join-Path $root 'src/common/protocol/rpc_management.acf')) + '" /client stub /server none /out obj/basesrv /h rpc_management.h /cstub rpc_management_c.c $in')
+    $graph.Add('build obj/basesrv/rpc_management_c.c obj/basesrv/rpc_management.h: rpc_management_idl ' + (NinjaPath (Join-Path $root 'src/common/protocol/rpc_management.idl')) + ' | ' + (NinjaPath (Join-Path $root 'src/common/protocol/rpc_management.acf')))
     $nativeServiceFlags = '/nologo /c /MT /W4 /we4013 /showIncludes /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
     $graph.Add('build obj/basesrv/entry.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntsrv-exe/main.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
@@ -2163,6 +2173,9 @@ if ($objectOutputDirectories.Count -gt 0) {
     }
     commonRpcComposition = [ordered]@{
         target = 'common-rpc.lib'
+        diagnosticSources = @('src/common/rpc/interface_query.c','src/common/rpc/interface_query.h','src/common/protocol/rpc_management.idl','src/common/protocol/rpc_management.acf' | ForEach-Object {
+            [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
+        })
         selected = ($Architecture -eq 'x86')
         disposition = 'ncalrpc binding/rollback, native-command/frontend-control/worker-control clients; no endpoint selection or service policy'
         sources = @('src/common/rpc/local_binding.c', 'src/common/rpc/local_binding.h', 'src/common/rpc/connection.h', 'src/common/rpc/native_command.c', 'src/common/rpc/native_command.h', 'src/common/rpc/frontend_control.c', 'src/common/rpc/frontend_control.h', 'src/common/rpc/worker_control.c', 'src/common/rpc/worker_control.h', 'src/common/rpc/management.c', 'src/common/rpc/management.h', 'src/common/rpc/async_call.h', 'src/common/rpc/dos_observation.c', 'src/common/rpc/dos_observation.h', 'src/common/protocol/dos_observation.h' | ForEach-Object {

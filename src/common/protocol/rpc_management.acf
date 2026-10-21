@@ -1,0 +1,3 @@
+interface rpc_management {
+    [async] management_inquire_interfaces();
+}

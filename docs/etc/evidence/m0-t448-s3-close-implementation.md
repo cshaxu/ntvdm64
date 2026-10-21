@@ -1995,6 +1995,10 @@ can retain the same wire operation and use the existing completion owner.
 Microsoft's [local-interface mapping](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-rpce/c898d4cb-c22b-465f-8fe3-1631669dc30a)
 also identifies the standard management query's Windows counterpart.
 
+The corresponding nbase.idl SHA-256 is
+4FB4130221E8C42F2E12D959F321E3C9F9E44546CEC2696BE60D52503AE3D146;
+its Microsoft 1991 notice is retained by the derived declaration selection.
+
 Research-only files under build/t448-s3/mgmt-proof retain the original notice
 and source identity, select only operation zero, spell the exact UUID/version
 data layout without the unavailable historical nbase.idl include, and generate
@@ -2032,3 +2036,117 @@ Required production tests include old/current/draining interface classification,
 access denial, delayed management response, resource cleanup and shared-deadline
 exhaustion. Those production gates, partial initialization and original-host
 pre-teardown permission remain open. Published P14 is unchanged.
+
+## Standard management query integration candidate
+
+The feasibility record is pushed at 47aedfec5 before implementation. Select
+only the standard operation-zero declaration and client generation under
+common/protocol and common/rpc. The original UUID, operation number, counted
+interface vector, UUID/version fields and separate application status are
+retained; symbols are namespaced to avoid SDK conflicts. The source notice and
+exact upstream identity remain above and in rpc_management.idl. Full rtifs,
+RPC runtime, server management implementation and historical transport are
+rejected: the modern host already provides this operation, and none of those
+implementation dependencies are needed. No historical executable code enters
+a product or mirror. This is the smallest declaration/async-client adaptation,
+not a new management protocol. No guest or mirror diff is added.
+
+common_rpc_classify_interface replaces the synchronous public query at the
+existing client diagnostic call. It borrows the authenticated binding and the
+Connect absolute deadline, does not retry or obtain a fresh budget, and keeps
+the previous old-major/minor versus current/missing-interface classification.
+The standard method returns void plus an application-status output: use the
+existing async finish/drain helper with no return-value storage, then inspect
+that output only after completion. Every returned pointer/vector is released
+through the generated client's allocator after drain, including late outputs
+when timeout wins. It creates no detached thread or helper process.
+
+The existing x86 graph and its native x64 derived graphs generate the selected
+client into their own stable build trees and archive it with common-rpc.
+Only consumers that reference the diagnostic pull those archive members.
+No application protocol bump is needed: the project service wire is unchanged.
+Production-linked rpc_interface_query_test uses the real host management
+provider on a private process-qualified endpoint; it does not mock reply,
+cancellation or marshaling. Cases cover old major/minor, current and missing
+UUID, denial, already exhausted deadline without another server call, sixteen
+repeated queries with handle-count comparison, and a delayed provider's actual
+ten-second cancellation. Full build controller 22012 and dependent query
+controller 37560 are running for r31; no result or publication is yet claimed.
+
+r31 full-component/second-incremental build passes at 13:56:48 UTC on
+2026-10-21. Query controller 37560 completes at 13:57:17: x86 and x64 each
+pass 27 checks, actual timeout 10,000ms, and repeated-call process handle
+counts remain 142/142 and 122/122 respectively. These are production-library
+tests, unlike the prior research probe. Serial controller 25604 now runs the
+existing complete same-package matrix; post controller 22648 waits for it.
+Inputs are frozen. Actual endpoint draining/unregistration and a nonzero
+partially consumed connection budget still need explicit targeted evidence;
+the matching-version/missing-UUID and already-expired cases do not substitute
+for those transitions. No candidate publication or S3 closure is claimed.
+
+While serial inputs remain frozen, supplemental private-endpoint probes link
+the same built common-rpc libraries without changing product/test sources.
+Controller 23120 passes x86/x64 at 13:59:57 UTC: registered old interface is
+1306; actual RpcServerUnregisterIf changes the query result to 1817 (no
+interfaces), not a false revision mismatch. After re-registration, a four-second
+provider delay with only 1,500ms remaining returns 1460 after 1,500ms/x86 and
+1,515ms/x64. This proves the helper consumes the supplied remaining budget;
+it does not by itself prove every production Connect race. The supplemental
+source/output remains in build/t448-s3/query-transitions.* and must be folded
+into the permanent query fixture after the running frozen matrix finishes.
+
+Read-only inspection of the fixed partial-bootstrap group also finds that
+worker_base_connect calls OpenNtBaseClientConnectCurrent, whose default still
+passes INFINITE. That value currently serves two distinct purposes: bootstrap
+deadline and whether a later worker report timeout poisons its shared connection.
+The latter is intentionally preserved by the existing worker deadline test:
+after a report timeout, a healthy shared worker connection remains usable.
+Simply changing the argument to 10000 would silently change that policy.
+The required repair must separate the finite ten-second connection budget from
+the existing role-specific failure latch, retain worker report behavior, and
+prove actual default-worker bootstrap timeout. This belongs to the already
+fixed initialization/fault group, not a newly expanded task. No such code
+change is made while r31 inputs are frozen.
+
+## P15 verification and review
+
+r31 completes 53 actual deadline cases at 14:09:29 UTC on 2026-10-21,
+wire gates at 14:10:25 and the complete serial matrix at 14:13:41. Post
+controller 22648 passes at 14:14:26, including native142 with zero handle
+delta, presentation509 and governance. Runtime covers DOS17, WINMINE/SOL,
+WRITE startup only and the three CAF self-delete/echo cases; it does not
+certify complete WRITE editing or every possible desktop schedule.
+
+After those controllers exit, extend the permanent query fixture with actual
+interface unregistration, a partially consumed deadline and allocation counts.
+No production source or package changes after r31 build. r31b query controller
+22580 passes at 14:16:57: both architectures pass 33 checks with zero outstanding
+MIDL allocations. Timeout is 10,015ms/x86 and 10,000ms/x64; remaining-budget
+timeout is 1,516ms on both; repeated-query handle counts are 156/156 and 138/138.
+The supplemental transition cases are now permanent source, not only build logs.
+
+Actual candidate Run16 versus retained protocol59 NTSRV passes at 14:15:58:
+candidate exits 1306 before target launch. The first harness attempt fails on
+an empty-log null expression at 14:14:27, kills only its owned test service,
+and never exercises the candidate. Keep that failed result; r31b fixes only
+the log poll and succeeds. Server SHA-256 is
+00B90397AC4110336357F4C351B40448594B1AE965A5B1AD1E74256818E78182;
+candidate Run16 is
+2678A93D707571BF9FB68AD0104F3AF1408CDB963ED9ED7A5FFA02283DBC089D.
+
+Reviewer confirms this replaces the lone synchronous diagnostic RPC with
+the same standard operation and one existing async completion owner. Source
+nets +64, build scripts +19 and permanent tests +88 (+171 total, excluding
+docs/binaries); combined with P13/P14 the three implementation groups net -139.
+There is no guest/mirror diff or service wire revision change. This establishes
+the diagnostic group, not S3 closure: finite default-worker bootstrap with
+unchanged report-latch policy, partial initialization and original-host exit
+permission remain open. Complete publication and reviewed push are pending.
+
+Final governance passes at 14:18:04 UTC. Delivery controller 21900 publishes
+all thirteen host images at 14:18:56 to assets/release and O:/winnt/system32;
+independent comparison confirms all images match package-r31/system32 and
+both destinations. Recoverable prior images are in
+build/t448-s3/publication-r31-backup. Protocol remains 60; guest and selected
+mirrors are unchanged. Reviewed main commit/push follows this complete
+progress delivery. The finite remaining S3 groups above are not waived.
