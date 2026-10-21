@@ -4,6 +4,14 @@
 
 **Active: M0 T448 S5**
 
+S5 integrated acceptance is complete locally and at the final reviewed delivery
+checkpoint; T448 awaits owner acceptance after commit/push/clean verification.
+No new implementation S is admitted. The [S5 ledger](../etc/evidence/m0-t448-s5-integrated-acceptance.md)
+maps all nine inherited obligations to current owners, actual assertions and
+explicit coverage limits. Fresh evidence includes eight CAF return cases,
+service40, two real-RPC concurrency/fault rounds, actual service loss and both
+native GUI widths' startup-only/wait/independent-target/text-return cases.
+
 S4 P2 completes the fixed thirteen-category polling audit against protocol64.
 Q05 Console destruction uses notifications; Q07 mouse backpressure uses the
 existing readiness event; Q06 removes the artificial10ms sleep while preserving
@@ -28,8 +36,9 @@ S5's [integrated acceptance ledger](../etc/evidence/m0-t448-s5-integrated-accept
 records eight fresh conhost handoff passes against the unchanged full13 S4
 package: natural cmd/command return with frontend survival, external close and
 actual internal NTMON self-delete for cmd/command/ntmon, all with before-Enter
-echo assertions. Whole-matrix reconciliation remains active; this is not T
-closure or an assertion that every host/concurrency permutation is covered.
+echo assertions. Whole-matrix reconciliation and the six-file mirror review
+are recorded below; this is not owner T closure or an assertion that every
+host/concurrency permutation is covered.
 
 P1 is57bd2b0a6. S3 P20 is2b754a31e with test-only closure P21 at6ad0a4ba6;
 the [S3 ledger](../etc/evidence/m0-t448-s3-close-implementation.md) preserves
@@ -243,6 +252,19 @@ r17 capture/CPU evidence. P2's complete protocol64 package is published at both
 destinations with P1 recovery. No guest or mirror delta. S5 inherits final
 whole-T acceptance, not an unresolved S4 implementation item. Closure delivery
 requires the P2 commit/push/clean verification recorded by its controller.
+
+## S5 Acceptance Record
+
+The [final reconciliation](../etc/evidence/m0-t448-s5-integrated-acceptance.md)
+records r1/r2/r3 runtime passes, final-review-r2 (controller18296) source,
+mirror-registration and all13 package-hash checks. No S5 production or guest
+change requires rebuilding/republishing; the full S4 r16/r17 delivered package
+remains the latest installed baseline. S5 P1 is3918764fa; final documentation
+delivery requires governance, commit/push and clean-state verification.
+No known unfulfilled in-scope implementation obligation is transferred out.
+SOL layout, WRITE's startup-only frontier, source-reviewed rather than induced
+arbitrary fatal guest states, and non-exhaustive host/thread interleavings stay
+explicit limitations. T448 remains open for owner acceptance.
 
 ## Temporary evidence
 

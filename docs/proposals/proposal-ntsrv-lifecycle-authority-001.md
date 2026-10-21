@@ -52,7 +52,14 @@ death permits role-owned local cleanup and exit without a service acknowledgemen
 The same rule applies symmetrically to frontend and worker failures. Suspension
 and resumption of the same live test service is not service resurrection.
 
-## Finite inherited gaps (updated for the owner correction)
+## Finite inherited gaps and acceptance obligations
+
+The nine rows below preserve the admission inventory, not assertions that all
+listed defects still exist. S2-S4 implemented the approved repairs; the
+[integrated reconciliation](../etc/evidence/m0-t448-s5-integrated-acceptance.md)
+maps their current source, actual acceptance and remaining limits. CURRENT is
+the sole delivery authority. Historical failed observations below cannot be
+treated as either current failures or passes without that reconciliation.
 
 1. Run16 startup must share one absolute five-second budget across its phases;
    its existing readiness polling is separately audited in S4.
@@ -73,8 +80,9 @@ and resumption of the same live test service is not service resurrection.
 8. Remove extra deadlines; retain only the three approved five-second project
    policies and original internal waits. Register every imported-source diff.
 9. Complete actual internal/external CAF management-close, normal task return,
-   nested CMD/COMMAND and first-character-before-Enter proof. Current installed
-   CMD confirmation and COMMAND initial-prompt failures remain non-passes.
+   nested CMD/COMMAND and first-character-before-Enter proof. The admission-time
+   CMD confirmation and COMMAND initial-prompt failures remain recorded non-passes;
+   later successful observations have their own exact package/run identity.
 
 ## Implementation groups and acceptance
 
