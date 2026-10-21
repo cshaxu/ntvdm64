@@ -84,7 +84,7 @@ static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
     RPC_STATUS status,uuid_status;
     unsigned int index;
     DWORD result=RPC_S_SERVER_UNAVAILABLE;
-    status=RpcIfInqId(Client_vdm_service_v53_0_c_ifspec,&expected);
+    status=RpcIfInqId(Client_vdm_service_v54_0_c_ifspec,&expected);
     if (status) return status;
     status=RpcMgmtInqIfIds(binding,&interfaces);
     if (status) return status;
@@ -447,7 +447,13 @@ DWORD OpenNtBaseClientRetireWorkerlessFrontend(DWORD *retired)
 DWORD OpenNtBaseClientFrontendStateChanged(HANDLE *state_changed)
 {
     common_rpc_connection state=client_rpc_view();
-    return common_rpc_frontend_state_changed(&state,state_changed);
+    DWORD error;
+    if(!state_changed)return ERROR_INVALID_PARAMETER;
+    *state_changed=NULL;
+    error=OpenNtBaseClientFailure(0);if(error)return error;
+    error=OpenNtBaseClientFailure(common_rpc_frontend_state_changed(&state,state_changed));
+    if(error && *state_changed){CloseHandle(*state_changed);*state_changed=NULL;}
+    return error;
 }
 
 DWORD OpenNtBaseClientBrokerProcess(HANDLE *server)
@@ -489,7 +495,19 @@ DWORD OpenNtBaseClientStartFrontend(uint64_t window,BOOL borrowed,
     HANDLE *root,HANDLE *capability,HANDLE *restored)
 {
     common_rpc_connection state=client_rpc_view();
-    return OpenNtBaseClientFailure(common_rpc_start_frontend(&state,window,borrowed,root,capability,restored));
+    DWORD error;
+    if(!root || !capability || !restored)return ERROR_INVALID_PARAMETER;
+    *root=*capability=*restored=NULL;
+    error=OpenNtBaseClientFailure(0);if(error)return error;
+    error=OpenNtBaseClientFailure(common_rpc_start_frontend(&state,window,borrowed,root,capability,restored));
+    /* A successful wire reply can race confirmed service loss. Do not leak
+     * its attachments or publish success after the final failure decision. */
+    if(error){
+        if(*root)CloseHandle(*root);if(*capability)CloseHandle(*capability);
+        if(*restored)CloseHandle(*restored);
+        *root=*capability=*restored=NULL;
+    }
+    return error;
 }
 DWORD OpenNtBaseClientFrontendConsoleRestored(void)
 {

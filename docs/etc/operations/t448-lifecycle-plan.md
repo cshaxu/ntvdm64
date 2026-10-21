@@ -273,6 +273,16 @@ identity, I/O attachment, rollback and runtime remain mandatory. StartFrontend,
 state-event acquisition, ordinary Disconnect and UNKNOWN_IF diagnosis remain
 separate explicitly open entries, not implicitly solved by these four methods.
 
+The subsequent frontend group bounds StartFrontend, FrontendStateChanged and
+FrontendStartupResult on the same RPC helper. The executable facade applies
+terminal-failure latching before issuance and after completion, closing any
+returned attachments if a successful reply races confirmed service death.
+No task-running wait acquires a ten-second lifetime. NTSRV still owns startup
+reservation completion/rollback; client cancellation is not a second owner.
+Raw authentication tests reuse the common frontend client for the changed
+calls. Success/retirement remain real-service tests; issuance exceptions retain
+exact attachment cleanup and zero handle-delta assertions.
+
 S1 changes documentation only: zero runtime, mirror, guest or release changes.
 S2 aims for zero mirror changes, using existing project-owned adapters. The
 selected S3 orderly-exit budget is at most three original host files and seven

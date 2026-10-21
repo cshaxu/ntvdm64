@@ -791,6 +791,17 @@ static int frontend_deadline(unsigned mode)
         error=OpenNtBaseClientAttachFrontendRequest(1,pipe_read,capability,&generation);
         if(generation)goto done;
     }
+    else if(mode==14) {
+        HANDLE owner=(HANDLE)1,token=(HANDLE)1,ack=(HANDLE)1;
+        error=OpenNtBaseClientStartFrontend((uint64_t)(UINT_PTR)GetConsoleWindow(),TRUE,&owner,&token,&ack);
+        if(owner || token || ack)goto done;
+    }
+    else if(mode==15) {
+        HANDLE event=(HANDLE)1;
+        error=OpenNtBaseClientFrontendStateChanged(&event);
+        if(event)goto done;
+    }
+    else if(mode==16)error=OpenNtBaseClientFrontendStartupResult(capability,ERROR_SUCCESS);
     else error=startup ? OpenNtBaseClientConnectCurrentTimeout(10000) : worker_exit ? OpenNtBaseClientRequestWorkerExit() :
         OpenNtBaseClientWaitFrontendConsoleRestored();
     elapsed=GetTickCount64()-began;
@@ -819,6 +830,7 @@ static int frontend_deadline(unsigned mode)
     if(OpenNtBaseClientWaitFrontendConsoleRestored()!=ERROR_TIMEOUT)goto done;
     if(mode>=10) {
         DWORD generation=99;
+        HANDLE owner=(HANDLE)1,token=(HANDLE)1,ack=(HANDLE)1,event=(HANDLE)1;
         /* No cleanup/report call may issue another RPC while the first
          * deadline is latched and the authenticated service remains paused. */
         if(OpenNtBaseClientFrontendStartupResult(capability,ERROR_TIMEOUT)!=ERROR_TIMEOUT ||
@@ -826,7 +838,9 @@ static int frontend_deadline(unsigned mode)
             OpenNtBaseClientRegisterFrontendLease(0,0,FALSE,capability,restored)!=ERROR_TIMEOUT ||
             OpenNtBaseClientReportCurrentConsoleMembers()!=ERROR_TIMEOUT ||
             OpenNtBaseClientAttachFrontendRequest(1,pipe_read,capability,&generation)!=ERROR_TIMEOUT ||
-            generation)goto done;
+            generation ||
+            OpenNtBaseClientStartFrontend(0,TRUE,&owner,&token,&ack)!=ERROR_TIMEOUT || owner || token || ack ||
+            OpenNtBaseClientFrontendStateChanged(&event)!=ERROR_TIMEOUT || event)goto done;
     }
     OpenNtBaseClientDisconnectCurrent();
     if(GetTickCount64()-began>=1000)goto done;
@@ -869,7 +883,7 @@ int main(int argc,char **argv)
     if (argc==2 && !lstrcmpA(argv[1],"--startup-service-timeout")) return frontend_deadline(3);
     if (argc==3 && !lstrcmpA(argv[1],"--control-service-timeout")) {
         unsigned mode=(unsigned)strtoul(argv[2],NULL,10);
-        return mode>=5 && mode<=13 && mode!=7 ? frontend_deadline(mode) : 2;
+        return mode>=5 && mode<=16 && mode!=7 ? frontend_deadline(mode) : 2;
     }
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-cancel-parent")) return reservation_parent(2);
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-cancel-killed-parent")) return reservation_parent(3);

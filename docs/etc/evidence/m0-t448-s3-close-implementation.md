@@ -952,3 +952,66 @@ Source/test changes are +93/-27 (net +66), offset by P4's -93; no mirror or
 guest changes. This is the four-operation registration/attachment checkpoint,
 not S3 closure or full lifecycle completion. Remaining boundaries are listed
 above and in Current. No historical WRITE/intermittent-WOW fix is claimed.
+
+### Next frontend startup/control candidate
+
+Baseline 823ba0d90 is clean and pushed. Convert StartFrontend,
+FrontendStateChanged and FrontendStartupResult to existing asynchronous RPC,
+major/protocol 54. Service authentication and startup policy remain unchanged.
+The executable facades reject calls after terminal failure and close outputs
+after final failure normalization, including a wire-success/service-loss race.
+Three new paused-service modes 14/15/16 check ten-second completion, cleared
+outputs and immediate failed follow-ups. Normal task waits remain unchanged.
+
+The common frontend fixture now tests real issuance-exception cleanup rather
+than pretending to complete an async call synchronously. Success moves to the
+already-required real monitor/bootstrap/NTCON tests (returned root, capability,
+restoration and state-event use). The synthetic successful-null state reply
+case is no longer executed: its existing null validation remains in source,
+but this is not claimed as malformed-server-reply runtime coverage. Raw forged
+capability/stale generation negatives use the production common RPC client,
+not another wrapper or test transport. All scope/rollback/runtime gates remain
+required. No guest/mirror changes; candidate not yet delivered.
+
+r12 full/incremental build PID 38252 began 2026-10-21 08:49:06 UTC. Service
+and fifteen-deadline runner 37496 waits for build success; wire runner 38512
+waits for those results. Fresh logs/results use r12 below build/t448-s3.
+Mutable source inputs remain frozen until these owned runs finish.
+
+r12 full thirteen-image build and unchanged 1398-intermediate second build
+passed at 08:52:23 UTC. Service38 passed (5189 ms). Governance PID 32464 passed
+08:53:16 UTC, zero guest/mirror changes. All fifteen actual deadline cases
+passed 08:55:58 UTC. Modes 14/15/16 returned ERROR_TIMEOUT after respectively
+10016/10015/10000 ms; returned attachments were null and all latched follow-up
+calls/disconnect completed locally within one second while NTSRV stayed paused.
+Same-package runtime PID 25884, worker failures PID 38276 and startup rollback
+PID 30852 began waiting on predecessors at 08:52:56 UTC. Delivery pending.
+
+r12 wire/bootstrap/retirement passed at 08:56:56 UTC. Common frontend now
+performs 85 issuance/cleanup checks with exact zero handle delta; worker retains
+238 checks and zero delta. Actual monitor validates startup success and forged
+capability/stale-generation rejection. Runtime passed 08:59:47 UTC: DOS17,
+WINMINE/SOL gameplay, unchanged WRITE startup-only frontier and CAF-three
+self-delete/echo-before-Enter. Worker failures passed 08:59:56 UTC; scope,
+startup rejection and timeout rollback passed 09:00:11 UTC.
+
+Reviewer checked server completion on success/invalid-parameter/authentication
+failure; async output lifetime and client terminal-failure normalization precede
+handoff. Production +57/-20 (net +37), tests +50/-33 (net +17). This group
+adds bounded calls and real timeout assertions; it does not claim a net code
+reduction. No guest/mirror change or third transport. Installed process/DLL
+preflight found no matching holder. Ordinary Disconnect/UNKNOWN_IF diagnosis,
+remaining worker and inherited-console binding controls, partial initialization
+and original-host exit permission remain open; final S4 acceptance is unchanged.
+
+### S3 P6 delivery
+
+Final pre-publication review PID 21760 passed at 09:01:49 UTC. Publication
+PID 25824 completed at 09:02:29 UTC on 2026-10-21. All thirteen package-r12
+images match build-r12/result.json, assets/release and O:/winnt/system32.
+publication-r12.json records every SHA-256; publication-r12-backup retains
+the previous complete package. No installed process was killed. This P
+delivers the three named frontend calls and their output/failure contracts,
+not the remaining S3 boundaries. Source/test net +54, mirrors/guest unchanged.
+Actual runtime frontiers and the synthetic-reply coverage limitation remain
+explicit above. Final records undergo governance before commit/push.

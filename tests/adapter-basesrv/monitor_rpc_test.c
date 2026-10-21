@@ -13,6 +13,7 @@
 #include "common/protocol/version.h"
 #include "common/codec/native_launch.h"
 #include "common/rpc/management.h"
+#include "common/rpc/frontend_control.h"
 #include "common/protocol/management.h"
 #include <rpcasync.h>
 #include "common/rpc/async_call.h"
@@ -176,12 +177,15 @@ static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
     RPC_CHECK(Client_NativeStartupResult(binding,connection,self,generation+1,
         generation,1,ERROR_ACCESS_DENIED,NULL,NULL),ERROR_ACCESS_DENIED);
     RPC_CHECK(test_rpc_register_frontend_root(binding,connection,self,generation,forged),ERROR_ACCESS_DENIED);
-    RPC_CHECK(Client_FrontendStartupResult(binding,connection,self,generation,
-        forged,ERROR_ACCESS_DENIED),ERROR_ACCESS_DENIED);
-    RPC_CHECK(Client_FrontendStartupResult(binding,connection,self,generation+1,
-        forged,ERROR_SUCCESS),ERROR_ACCESS_DENIED);
-    RPC_CHECK(Client_StartFrontend(binding,connection,self,generation,
-        (ULONGLONG)(UINT_PTR)GetConsoleWindow(),TRUE,&root,&frontend,&restored),ERROR_SUCCESS);
+    {
+        common_rpc_connection peer={binding,connection,self,generation};
+        RPC_CHECK(common_rpc_frontend_startup_result(&peer,forged,ERROR_ACCESS_DENIED),ERROR_ACCESS_DENIED);
+        ++peer.generation;
+        RPC_CHECK(common_rpc_frontend_startup_result(&peer,forged,ERROR_SUCCESS),ERROR_ACCESS_DENIED);
+        --peer.generation;
+        RPC_CHECK(common_rpc_start_frontend(&peer,(ULONGLONG)(UINT_PTR)GetConsoleWindow(),
+            TRUE,&root,&frontend,&restored),ERROR_SUCCESS);
+    }
     CHECK(root && frontend && restored);
     RPC_CHECK(Client_AcquireConsoleContext(binding,connection,self,generation+1,frontend,&execution),
         ERROR_ACCESS_DENIED);

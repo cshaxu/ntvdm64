@@ -18,16 +18,17 @@ static error_status_t result(void)
 }
 static HANDLE attachment(unsigned index)
 {
-    attachments[index]=mode==3 ? NULL : CreateEventW(NULL,TRUE,FALSE,NULL);
-    CHECK(mode==3 || attachments[index]!=NULL);
+    attachments[index]=CreateEventW(NULL,TRUE,FALSE,NULL);
+    CHECK(attachments[index]!=NULL);
     return attachments[index];
 }
-error_status_t Client_StartFrontend(handle_t binding,VDM_CONNECTION connection,
+error_status_t Client_StartFrontend(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,unsigned long generation,__int64 window,unsigned long borrowed,
     HANDLE *root,HANDLE *capability,HANDLE *restored)
 {
-    peer(binding,connection,process,generation);CHECK(window==0x123456789LL && borrowed==1);
-    *root=attachment(0);*capability=attachment(1);*restored=attachment(2);return result();
+    peer(binding,connection,process,generation);CHECK(async && window==0x123456789LL && borrowed==1);
+    *root=attachment(0);*capability=attachment(1);*restored=attachment(2);
+    RpcRaiseException(mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED);return ERROR_SUCCESS;
 }
 error_status_t Client_FrontendUsage(handle_t binding,VDM_CONNECTION connection,
     HANDLE process,unsigned long generation,unsigned long *pending,unsigned long *tasks)
@@ -41,16 +42,18 @@ error_status_t Client_RetireWorkerlessFrontend(PRPC_ASYNC_STATE async,handle_t b
     RpcRaiseException(mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED);
     return ERROR_SUCCESS;
 }
-error_status_t Client_FrontendStateChanged(handle_t binding,VDM_CONNECTION connection,
+error_status_t Client_FrontendStateChanged(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,unsigned long generation,HANDLE *event)
 {
-    peer(binding,connection,process,generation);*event=attachment(0);return result();
+    peer(binding,connection,process,generation);CHECK(async!=NULL);*event=attachment(0);
+    RpcRaiseException(mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED);return ERROR_SUCCESS;
 }
-error_status_t Client_FrontendStartupResult(handle_t binding,VDM_CONNECTION connection,
+error_status_t Client_FrontendStartupResult(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,unsigned long generation,HANDLE capability,unsigned long status)
 {
     peer(binding,connection,process,generation);
-    CHECK(capability==expected.process && status==ERROR_WRITE_FAULT);return result();
+    CHECK(async && capability==expected.process && status==ERROR_WRITE_FAULT);
+    RpcRaiseException(mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED);return ERROR_SUCCESS;
 }
 /* Completion and positive replies belong to actual RPC/CAF tests. These
  * stubs exercise synchronous issuance exceptions and local event cleanup. */
@@ -93,26 +96,22 @@ int main(void)
     CHECK(common_rpc_frontend_startup_result(NULL,NULL,0)==ERROR_INVALID_STATE);
     CHECK(common_rpc_wait_frontend_console_restored(NULL)==ERROR_INVALID_STATE);
     CHECK(!calls);
-    for(mode=0;mode<3;++mode) {
-        initial=calls;want=mode==0 ? 0 : mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED;
+    CHECK(!common_rpc_frontend_usage(&expected,&pending,&tasks) && pending==3 && tasks==7);
+    for(mode=1;mode<3;++mode) {
+        initial=calls;want=mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED;
         CHECK(common_rpc_start_frontend(&expected,0x123456789ULL,17,&root,&capability,&restored)==want);
-        if(want){CHECK(!root && !capability && !restored);closed(3);}
-        else {CHECK(root && capability && restored);CloseHandle(root);CloseHandle(capability);CloseHandle(restored);}
+        CHECK(!root && !capability && !restored);closed(3);
         pending=88;tasks=99;retired=77;
         CHECK(common_rpc_frontend_usage(&expected,&pending,&tasks)==want);
-        CHECK(want ? pending==88 && tasks==99 : pending==3 && tasks==7);
-        if(want){CHECK(common_rpc_retire_workerless_frontend(&expected,&retired)==want);CHECK(retired==77);}
+        CHECK(pending==88 && tasks==99);
+        CHECK(common_rpc_retire_workerless_frontend(&expected,&retired)==want);CHECK(retired==77);
         CHECK(common_rpc_frontend_state_changed(&expected,&event)==want);
-        if(want){CHECK(!event);closed(1);}else {CHECK(event!=NULL);CloseHandle(event);}
-        if(want){
-            CHECK(common_rpc_frontend_console_restored(&expected)==want);
-            CHECK(common_rpc_wait_frontend_console_restored(&expected)==want);
-        }
+        CHECK(!event);closed(1);
+        CHECK(common_rpc_frontend_console_restored(&expected)==want);
+        CHECK(common_rpc_wait_frontend_console_restored(&expected)==want);
         CHECK(common_rpc_frontend_startup_result(&expected,expected.process,ERROR_WRITE_FAULT)==want);
-        CHECK(calls==initial+(want ? 7U : 4U));
+        CHECK(calls==initial+7U);
     }
-    mode=3;event=expected.process;
-    CHECK(common_rpc_frontend_state_changed(&expected,&event)==ERROR_INVALID_HANDLE && !event);
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&after) && before==after);
     CHECK(WaitForSingleObject(expected.process,0)==WAIT_TIMEOUT);
     CloseHandle(expected.process);

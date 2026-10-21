@@ -6,7 +6,7 @@ param(
     [switch]$WorkerExit,
     [switch]$StalledService,
     [switch]$Startup,
-    [ValidateSet(5,6,8,9,10,11,12,13)][int]$Control,
+    [ValidateSet(5,6,8,9,10,11,12,13,14,15,16)][int]$Control,
     [string]$ThreadSnapshot
 )
 $ErrorActionPreference='Stop'

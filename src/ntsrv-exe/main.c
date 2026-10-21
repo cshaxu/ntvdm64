@@ -60,17 +60,20 @@ error_status_t Server_StartNativeWorker(handle_t binding,VDM_CONNECTION connecti
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
     return error ? error : OpenNtBaseServiceStartNativeWorker(connection,pid,generation,native_type,worker);
 }
-error_status_t Server_StartFrontend(handle_t binding,VDM_CONNECTION connection,
+error_status_t Server_StartFrontend(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation,LONGLONG window,ULONG borrowed,
     HANDLE *root,HANDLE *capability,HANDLE *restored)
 {
     DWORD pid,error;
-    if(!root || !capability || !restored)return ERROR_INVALID_PARAMETER;
+    if(!root || !capability || !restored){error=ERROR_INVALID_PARAMETER;goto complete;}
     *root=*capability=*restored=NULL;
-    if(borrowed>1)return ERROR_INVALID_PARAMETER;
+    if(borrowed>1){error=ERROR_INVALID_PARAMETER;goto complete;}
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceStartFrontend(connection,pid,generation,
+    if(!error)error=OpenNtBaseServiceStartFrontend(connection,pid,generation,
         (uint64_t)window,borrowed!=0,root,capability,restored);
+complete:
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
 error_status_t Server_FrontendCloseQuiesced(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation)
@@ -88,12 +91,14 @@ error_status_t Server_FrontendConsoleRestored(PRPC_ASYNC_STATE async,handle_t bi
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
 }
-error_status_t Server_FrontendStartupResult(handle_t binding,VDM_CONNECTION connection,
+error_status_t Server_FrontendStartupResult(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation,HANDLE capability,ULONG status)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceFrontendStartupResult(connection,pid,generation,
+    if(!error)error=OpenNtBaseServiceFrontendStartupResult(connection,pid,generation,
         capability,status);
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
 error_status_t Server_WaitFrontendConsoleRestored(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,unsigned long generation)
@@ -620,14 +625,17 @@ complete:
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
 }
-error_status_t Server_FrontendStateChanged(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_FrontendStateChanged(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE *state_changed)
 {
     DWORD pid,error;
-    if(!state_changed)return ERROR_INVALID_PARAMETER;
+    if(!state_changed){error=ERROR_INVALID_PARAMETER;goto complete;}
     *state_changed=NULL;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceFrontendStateChanged(connection,pid,generation,state_changed);
+    if(!error)error=OpenNtBaseServiceFrontendStateChanged(connection,pid,generation,state_changed);
+complete:
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
 error_status_t Server_WorkerStateChanged(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE *state_changed)
@@ -997,7 +1005,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v53_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v54_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -1044,7 +1052,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v53_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v54_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);

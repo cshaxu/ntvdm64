@@ -19,7 +19,7 @@ the prior checkpoint claims that the CAF defect is universally fixed.
 | Admission And Approval | Owner approves final design and continuous sequential execution through T pre-closure acceptance; S1 design concluded and pushed at c838c332c. |
 | Objective | Implement the approved unified management-close transaction, concurrency and role-specific service-loss cleanup, preserving the S2 normal-chain candidate. |
 | Non-goals | No guest modification/rebuild; no native GUI target lifecycle ownership; no unrelated WOW32 capability work; no T closure without owner acceptance. |
-| Reference Baseline | S3 P5 bounded frontend registration/attachment: protocol 53, thirteen images published and hash-verified at both destinations; full/incremental build, 38 service cases, twelve actual deadline scenarios, real bootstrap/loss/retirement, startup rejection/timeout rollback, wire negatives and same-package runtime gates pass within the recorded frontier. S3 exit-permission work remains open; no functional acceptance or waiver. |
+| Reference Baseline | S3 P6 bounded frontend startup/state/result: protocol 54, thirteen images published and hash-verified at both destinations; full/incremental build, 38 service cases, fifteen actual deadline scenarios, real bootstrap/loss/retirement, startup rejection/timeout rollback, wire negatives and same-package runtime gates pass within the recorded frontier. S3 exit-permission work remains open; no functional acceptance or waiver. |
 | Files And ABI Surface | Run16, NTSRV service/client, common protocol, worker-base, NTCON, NTVDM and NTVWM; production-linked lifecycle tests; coherent protocol updates if required. |
 | Applicable Rules | docs/README reading set; execution, architecture, coding, document and source-policy authorities; original-owner recovery and exception registration. |
 | Verification | Source-first implementation and diff review; background x86/x64 full-component/incremental builds; affected production-linked service/frontend/launcher fixtures and normal DOS/native/WOW startup/return regression; complete package deployment and hashes; governance. |
@@ -174,6 +174,15 @@ second cleanup RPC. Protocol 53 package-r11 passed the full P regression and
 was published/hash-verified at both destinations on 2026-10-21 08:41 UTC.
 StartFrontend, state acquisition, normal startup-result, Disconnect/UNKNOWN_IF,
 remaining worker controls and original-host exit permission remain open.
+
+S3 P6 bounds StartFrontend, state-event retrieval and startup-result reporting
+through existing RPC completion/cancellation. Failed final normalization closes
+returned attachments, and latched failure prevents subsequent control calls.
+Protocol 54 package-r12 passes fifteen actual deadline cases and the full P
+runtime gate; thirteen images published/hash-verified at both destinations on
+2026-10-21 09:02 UTC. The source audit retains ordinary Disconnect/UNKNOWN_IF,
+remaining worker/inherited-console controls, initialization and original-host
+exit permission as open obligations. S3 and T acceptance are not claimed.
 
 [Preserved pre-closure status](../etc/evidence/m0-t447-pre-closure-status.md)
 retains the complete prior packet and technical history. Its active wording
