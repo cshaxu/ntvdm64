@@ -56,8 +56,12 @@ original natural/fatal exit sites now have a
 bounded three-host-file/seven-call design budget, not an implemented mirror diff.
 Service-created endpoint-signalled fences are prohibited, not classified as
 service-only communication. Loss return does not certify Console restoration;
-healthy-service handoff ordering remains mandatory. S1 awaits reviewed design
-delivery; this correction does not claim runtime implementation.
+healthy-service handoff ordering remains mandatory. Owner approves the final
+design corrections and continuous sequential execution through T pre-closure
+acceptance: finalization timeout returns locally, submissions never retry,
+NTSRV selects scope-specific phases, task cleanup precedes no unauthorized
+worker teardown, and Win16 default launcher return is startup-only. S1 design
+verification/delivery precedes S2 admission; no runtime repair is claimed here.
 
 ## Current Technical Baseline
 

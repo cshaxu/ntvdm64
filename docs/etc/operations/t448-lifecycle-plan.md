@@ -52,10 +52,16 @@ actual return status after required handoff. A timeout response is not that
 envelope. Retain the terminal result until consumer acknowledgement or verified
 caller rundown; repeated queries observe the same result without resubmission.
 
-An unaccepted request may be retried within its admission deadline. Accepted
-requests are never replayed after transport ambiguity. GUI default completion
-is successful startup; explicit --wait uses observed actual target exit, without
-granting management/termination rights over that target.
+Submission is single-attempt: failure, including an ambiguous lost reply,
+returns submission failure without replay. Missing-service bootstrap is a
+separate pre-submission operation with its one absolute ten-second budget.
+NTSRV must retire abandoned request resources independently of the requester;
+an ambiguous reply is not proof that the target never started and does not
+authorize killing an already committed GUI target.
+Win16 and native GUI default completion is successful startup, not task exit.
+The service releases their launcher on startup confirmation; subsequent task
+exit does not release that already departed launcher again. Explicit --wait
+retains its existing completion contract without GUI management rights.
 
 ## Normal operation
 
@@ -102,8 +108,18 @@ success and not reopened admission. A matching late acknowledgement or actual
 process-exit observation may finish it; there is no automatic retry loop or
 silent force-kill escalation. Existing explicitly authorized forced-close
 semantics must be identified at their original owner, not added generically.
-An active client can observe this failure without receiving permission to
-release an unrestored borrowed Console.
+Owner supersedes indefinite launcher retention: after the final-disposition
+wait deadline, Run16 uses the same local cleanup/return mechanism as service
+loss, retaining the timeout error rather than fabricating disconnection or
+successful Console restoration. This deadline does not limit normal task
+execution. The still-live service retains responsibility for accepted work
+and the unfinished handoff transaction after launcher departure.
+
+This table is the Console-close sequence, not a universal teardown recipe.
+NTSRV selects phases from the actual scope: WOW task close retains its worker;
+WOW worker close has no frontend phases; GUI launcher commands are inapplicable
+where specified; ordinary completion need not close a carrier. Worker-base
+dispatches commands without choosing any of these policies.
 
 Normal task completion racing management close preserves already committed
 task results. Worker-close does not become Console-close. A subsequently
@@ -162,11 +178,13 @@ Run16 CLI: returning that API error as the launcher exit code is this product's
 binding, not an original Run16 implementation. Do not map every timeout,
 rejection, startup error or task failure to 6. Preserve those distinct results.
 
+S2 must deliver basic loss and bounded-finalization exits with its normal
+waiting protocol; S3 extends the full phase/concurrency/failure matrix.
 The current shared watcher hard-exits with RPC_S_SERVER_UNAVAILABLE (1722),
 and launch-style rpc_failure discards its input into STATUS_UNSUCCESSFUL;
 neither establishes the required original error propagation. Some original
 BaseCheckForVDM failure exits do not set LastError, so stale GetLastError is
-not evidence of the failure cause. S3 must carry the explicit transport status
+not evidence of the failure cause. S2 must carry the explicit transport status
 through the failure result, rather than infer it from stale thread state.
 
 ## Finite remediation and tests
@@ -179,7 +197,7 @@ through the failure result, rather than infer it from stale thread state.
 | L04 | worker-base dispatch + NTVDM bootstrap / S2-S3 | WOW receives worker-close without character initialization; GUI ignores inapplicable command; no kind policy in worker-base |
 | L05 | NTSRV close operation / S3 | Internal/external deletion, caller dies after acceptance, normal-result/close race, one cleanup, one absolute deadline |
 | L06 | NTCON quiesce/restore / S3 | Delayed frame/read/EOF, each restoration error, join failure, no false acknowledgement, first character before Enter |
-| L07 | shared RPC notification + role cleanup / S3 | Service death/context loss at every phase; explicit original status/error propagation; Run16 returns even if NTCON is stalled or absent, with no peer wait; timeout/rejection remain distinct; no unconditional watcher kill |
+| L07 | shared RPC notification + role cleanup / S2-S3 | Basic loss/finalization-timeout exits ship with S2; S3 tests every phase; explicit original status/error propagation; Run16 returns even if NTCON is stalled or absent, with no peer wait; timeout/rejection remain distinct; no unconditional watcher kill |
 | L08 | original NTVDM/WOW exit boundary / S3 | Natural/fatal/management paths retain original cleanup, no wait under guest locks, source-proven mirror exception if needed |
 | L09 | GUI launch and failure / S2-S3 | Startup-only/--wait, suspension/binding failure rollback, launcher departure; GUI target remains alive on service loss |
 | L10 | record/attachment rundown / S3-S4 | PID/handle reuse, late command/ack, abandoned reservation, released wait callbacks, no leaked resources |
@@ -201,8 +219,13 @@ selected S3 orderly-exit budget is at most three original host files and seven
 ExitProcess call substitutions: nt_reset.c (two), wow32/wkman.c (four), and
 wow32/wow32.c (one). Prefer reducing this through proven existing seams; do not
 globally intercept ExitProcess or alter unrelated CRT exits. Keep original
-ExitVDM cleanup, then call an executable-owned exit-intent binding which reports
-the explicit worker-exit reason and obtains service disposition. The service
+task completion and source-owned task cleanup in place. Classify each exit site
+before inserting an executable-owned worker-exit-intent binding: worker-wide
+resource teardown follows service permission, not the reverse. Retain the
+control connection and handoff resources until that permission or confirmed
+loss. A received service close command is already permission and must not
+trigger a second permission RPC. Natural/management races share exactly one
+teardown. The service
 must not wait for that worker's death before replying with exit permission;
 it may permit worker exit while retaining the launcher's final-return barrier.
 No frontend/guest callbacks are invoked by this exit permission operation.

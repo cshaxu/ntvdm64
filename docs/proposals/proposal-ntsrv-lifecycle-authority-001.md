@@ -39,8 +39,10 @@ is a report, not permission for its worker or launcher to retire.
 3. DOS parent-resume trigger and separate finalization/timeout exit remain
    launcher-owned; task completion must join required handoff at NTSRV.
 4. Shared broker watcher covers process death, not uniform confirmed session
-   loss; forced exit can race NTCON restoration. Design and prove cleanup
-   order without a new direct component-control channel.
+   loss; replace forced watcher exit with role-owned cleanup. Healthy-service
+   handoff is service-ordered; disconnected Run16 returns the original-shaped
+   error independently of NTCON. Final-disposition timeout uses that same local
+   return mechanism with its own error. No peer recovery synchronization.
 5. NTCON still chooses parking from creator death and usage; move the decision
    to service commands and preserve final-buffer/input restoration evidence.
 6. WOW skips the character setup containing the worker-close receiver. Trace
@@ -68,6 +70,12 @@ and real Console acceptance. Protocol changes deliver coherent thirteen-image
 packages, never incompatible half-updates. Preserve normal park-with-live-NTCON,
 GUI startup-only/--wait, task versus worker versus Console-close distinctions,
 same request path for internal/external NTMON, and native GUI non-ownership.
+
+Owner's final design correction: submissions never retry on failure or ambiguous
+reply; NTSRV owns abandoned accepted-request cleanup. Win16 default Run16 return
+is startup success, not Win16 task exit. The implementation plan separates task
+cleanup from service-authorized whole-worker teardown. Basic loss/timeout exits
+are part of the normal-path delivery, not deferred until fault-matrix testing.
 
 Source evidence: [T447 working plan](../etc/operations/t447-wow-execution-plan.md),
 [CAF ledger](../etc/evidence/m0-t447-s4-p4-ntcon-caf-close.md), and

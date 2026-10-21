@@ -118,3 +118,22 @@ The owner-correction documentation gate passed in background PID 32740,
 2026-10-21 02:02:23-02:02:41 UTC: Verify-DocumentationGovernance and diff --check,
 exit 0. This gate covers documentation only; no product build or publication
 was needed for this zero-runtime-diff correction.
+
+## Final owner-approved design disposition
+
+Owner approved all six review corrections and execution through T pre-closure
+acceptance. Finalization timeout returns Run16 through local failure cleanup,
+not indefinite retention or a peer wait. Submission is single-attempt. Service
+phases depend on actual scope, not a universal Console teardown. Task completion
+cleanup remains original; whole-worker cleanup requires prior service authority
+and cannot tear down the control connection before that decision. A received
+close command is already authority. S2 includes basic fault exits; S3 extends
+their full matrix. Win16 default completion is startup confirmation, so its later
+task exit cannot release the already departed launcher. These are design closure
+conditions, not measured runtime capabilities; the finite L01-L10 work remains.
+
+Final design governance and diff check passed in background PID 22456,
+2026-10-21 02:28:32-02:28:51 UTC, exit 0. Single-person reviewer checked the
+six corrections, startup-only Win16 return and no peer-dependency rule against
+the actual design diff. S1 reaches its design-only conclusion; runtime work
+continues under sequential S2 admission, not a product acceptance claim.

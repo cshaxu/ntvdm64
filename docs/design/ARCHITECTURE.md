@@ -12,6 +12,15 @@ workers. Confirmed service loss permits role-specific local cleanup; healthy
 service task completion is a report requiring coordinated disposition.
 The proposal records startup exceptions and every inherited implementation gap.
 
+T448 owner clarification: submission failure never retries, including ambiguous
+reply loss. Win16 startup success releases its default launcher without waiting
+for task exit. Confirmed service loss or final-disposition timeout makes Run16
+clean up locally and return the corresponding failure, without peer waits or
+restoration fences; this is not a claim that Console restoration completed.
+Normal task execution has no ten-second lifetime. NTSRV retains accepted-work
+and handoff responsibility if the requester departs. Task cleanup remains
+source-owned; whole-worker orderly teardown follows service authorization.
+
 ## WOW behavior and resource ownership — T447
 
 The [responsibility rule](../rules/ARCHITECTURE.md#original-behavior-and-modern-host-responsibility-t447)
