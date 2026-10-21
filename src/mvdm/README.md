@@ -1,5 +1,44 @@
 # mvdm
 
+MVDM-HOST-DIV-356 (T448 S3 candidate): retain original SoftPC terminate,
+host_applClose and host_terminate bodies and their cleanup order, but obtain
+standalone service permission before their first resource/record destruction.
+terminate must enter before its repeated-call exit shortcut; host_applClose
+and host_terminate also have direct callers. Three one-call insertion sites
+share ntvdm-exe/win32/worker_lifecycle.c's cleanup-thread ownership. Recursive
+calls by that owner do not submit another request. A natural caller waits on
+the existing authenticated service/close handles; acceptance alone is not
+permission. Console-close retains its original callback and approved grace.
+Original fixtures without a managed worker have no service policy. A final
+ExitProcess binding was rejected because device cleanup and ExitVDM precede
+it. No guest changes or new control transport. Pinned OpenNT base/mvdm sources:
+softpc.new/base/support/terminat.c SHA256
+B085166424614A154A41F794BF3505F50A77A2EA60338BCEFCB845BE8E092E53;
+softpc.new/host/src/nt_reset.c SHA256
+9AA8120237FFA104C87318EF39747A0E66C28BF56BFE9AF03511BDDF13F11B47.
+The same registration covers WOW's five whole-process exits in wkman.c and
+wow32.c: the parent NtvdmAuthorizeExit export preserves their selected exit code
+unless the service has died (ERROR_INVALID_HANDLE). Original ExitVDM and
+ExitProcess stay in their original order; no single-task retirement is
+intercepted. ExitKernel/FatalExit copy the argument and release its guest alias
+before the blocking service call. Original OpenNT base/mvdm/wow32/wkman.c hash:
+56BE1989F2BC3ACAFFCFA6345B20E38F5E7312BADF03AF04D4565F8F4A489AC9;
+wow32.c hash: 1DFE9900E6DA3BF0E2984C3DF42BDD155B177CFE7707BB24E1324037147D292A.
+This candidate does not yet prove partial-initialization safety or all original
+entry runtime paths; verification belongs to the
+[S3 ledger](../../docs/etc/evidence/m0-t448-s3-close-implementation.md).
+
+The same DIV-356 adds one activation call at nt_cpu.c::host_start_cpu, after
+original main has completed host/device/DOS initialization. The adapter retains
+early service capabilities but starts cleanup callbacks only here. Original
+initialization has no ready callback to adapt; starting receivers in standalone
+bootstrap permits cleanup of uninitialized original resources. No original
+algorithm moves out of its owner. Original nt_cpu.c SHA256:
+3F77F06E497854B00F58ACDE8BFE7B5E67AF7C5E67174DEB579CD76E13F5830F.
+Before this boundary, startup failure obtains service permission then releases
+only owned partial startup resources; it does not invoke the original Console
+handler. Activation failure after the boundary enters original TerminateVDM.
+
 MVDM-HOST-DIV-355 (T448 S3 P18): original OpenNT
 base/mvdm/softpc.new/host/src/nt_event.c routes COMMAND fTSRExit by cleaning
 the worker and posting WM_CLOSE to its Console window. The admitted standalone

@@ -264,6 +264,7 @@ static int frontend_completion_barrier(void)
  * elapsed time cannot advance it; acknowledgement and real worker exit do. */
 static int management_frontend_close_ordering(unsigned phase,unsigned competing)
 {
+    BOOL preparing=competing==6;
     BOOL worker_console=competing==5;
     BOOL self_exit=competing>=3;
     OPENNT_BASE_SERVICE *service=OpenNtBaseServiceStart();
@@ -285,7 +286,7 @@ static int management_frontend_close_ordering(unsigned phase,unsigned competing)
         NULL,NULL,&startup,&worker_child));
     CHECK(!OpenNtBaseServiceConnect(service,root_child.hProcess,&root,&root_generation));
     CHECK(!OpenNtBaseServiceConnect(service,worker_child.hProcess,&worker,&worker_generation));
-    worker->native_worker=TRUE;worker->registered_worker=TRUE;
+    worker->native_worker=TRUE;worker->registered_worker=!preparing;
     CHECK(!OpenNtBaseServiceRegisterFrontendRoot(root,root_child.dwProcessId,root_generation,capability));
     watch.process=worker->process;watch.service=service;watch.kind=OPENNT_BASE_WORKER_NATIVE;
     watch.frontend_root_generation=root_generation;
@@ -294,12 +295,35 @@ static int management_frontend_close_ordering(unsigned phase,unsigned competing)
     CHECK(watch.shutdown && watch.console_close);
     EnterCriticalSection(&service->lock);InsertTailList(&service->worker_watches,&watch.link);
     LeaveCriticalSection(&service->lock);
+    if(preparing) {
+        HANDLE shutdown=NULL,console_close=NULL,saved=watch.console_close;
+        CHECK(!OpenNtBaseServiceConnectionControls(root,root_child.dwProcessId,
+            root_generation,&shutdown,&console_close) && !shutdown && !console_close);
+        CHECK(OpenNtBaseServiceConnectionControls(worker,worker_child.dwProcessId,
+            worker_generation+1,&shutdown,&console_close)==ERROR_ACCESS_DENIED);
+        CHECK(!shutdown && !console_close);
+        watch.console_close=NULL;
+        CHECK(OpenNtBaseServiceConnectionControls(worker,worker_child.dwProcessId,
+            worker_generation,&shutdown,&console_close)==ERROR_INVALID_HANDLE);
+        CHECK(!shutdown && !console_close); /* Roll back the first duplicate. */
+        watch.console_close=saved;
+        watch.wow=TRUE;
+        CHECK(!OpenNtBaseServiceConnectionControls(worker,worker_child.dwProcessId,
+            worker_generation,&shutdown,&console_close) && shutdown && !console_close);
+        CHECK(!SetEvent(shutdown) && GetLastError()==ERROR_ACCESS_DENIED);
+        CloseHandle(shutdown);shutdown=NULL;watch.wow=FALSE;
+        CHECK(!OpenNtBaseServiceConnectionControls(worker,worker_child.dwProcessId,
+            worker_generation,&shutdown,&console_close) && shutdown && console_close);
+        CHECK(!SetEvent(console_close) && GetLastError()==ERROR_ACCESS_DENIED);
+        CloseHandle(shutdown);CloseHandle(console_close);
+        puts("PASS atomic connection controls: identity, role, wait-only rights and partial rollback");
+    }
     CHECK(!OpenNtBaseServiceSnapshotCopy(service,&epoch,&tree,&count));
     for(index=0;index<count;++index)
         if(tree[index].key.category==MANAGEMENT_FRONTEND)key=tree[index].key;
     CHECK(key.category==MANAGEMENT_FRONTEND);
     if(self_exit) {
-        competing=worker_console ? 0 : competing-2;
+        competing=preparing ? 1 : worker_console ? 0 : competing-2;
         CHECK(OpenNtBaseServiceRequestParticipantExit(root,root_child.dwProcessId,root_generation+1,OPENNT_EXIT_PARTICIPANT)==ERROR_ACCESS_DENIED);
         CHECK(OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation+1,OPENNT_EXIT_CONSOLE)==ERROR_ACCESS_DENIED);
         CHECK(OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation,MAXDWORD)==ERROR_INVALID_PARAMETER);
@@ -317,6 +341,14 @@ static int management_frontend_close_ordering(unsigned phase,unsigned competing)
         CHECK(!(self_exit ? OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation,OPENNT_EXIT_PARTICIPANT) :
             OpenNtBaseServiceTerminateWorker(service,worker_child.dwProcessId)));
         CHECK(watch.close_kind==WORKER_CLOSE_WORKER);
+        if(preparing) {
+            HANDLE late_receiver=NULL;
+            CHECK(!worker->registered_worker);
+            CHECK(!OpenNtBaseServiceWorkerShutdownEvent(worker,worker_child.dwProcessId,
+                worker_generation,&late_receiver));
+            CHECK(WaitForSingleObject(late_receiver,0)==WAIT_OBJECT_0);
+            CloseHandle(late_receiver);
+        }
     }
     before=GetTickCount64();
     CHECK(!(worker_console ? OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation,OPENNT_EXIT_CONSOLE) :
@@ -1060,6 +1092,7 @@ int main(int argc,char **argv)
     if(argc==2 && !strcmp(argv[1],"--worker-exit-then-console"))return management_frontend_close_ordering(0,3);
     if(argc==2 && !strcmp(argv[1],"--console-then-worker-exit"))return management_frontend_close_ordering(2,4);
     if(argc==2 && !strcmp(argv[1],"--worker-console-exit"))return management_frontend_close_ordering(2,5);
+    if(argc==2 && !strcmp(argv[1],"--preparing-worker-exit"))return management_frontend_close_ordering(0,6);
     if(argc==2 && !strcmp(argv[1],"--shared-worker-residency"))return fixture_shared_worker_residency();
     if(argc==3 && !strcmp(argv[1],"--reservation-wait-child"))
         return reservation_wait_child(argv[2]);
@@ -1162,7 +1195,9 @@ int main(int argc,char **argv)
         CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
         CHECK(workerInfoCount==1 && workerInfo.kind==2 && workerInfo.sequence==workerGeneration &&
             workerInfo.process_id==child.dwProcessId && workerInfo.state);
-        CHECK(OpenNtBaseServiceTerminateWorker(service,child.dwProcessId)==ERROR_NOT_READY);
+        /* Cancellation before backend registration has its own isolated
+         * preparing-worker-exit case; do not close this admission fixture. */
+        CHECK(!worker->registered_worker);
         {
             HANDLE capability=NULL,foreign=CreateEventW(NULL,TRUE,FALSE,NULL);
             HANDLE ready=CreateEventW(NULL,TRUE,FALSE,NULL),server=NULL,client=NULL;

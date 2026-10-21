@@ -49,6 +49,8 @@
 #include "nt_com.h"
 #include "nt_reset.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
+/* DIVERGENCE(MVDM-HOST-DIV-356): authorization also covers direct host close. */
+extern void ntvdm_worker_lifecycle_authorize_exit(void);
 #include <intrin.h>
 #include "nt_event.h"
 #include "nt_fulsc.h"
@@ -297,6 +299,8 @@ void  host_applInit(int argc,char *argv[])
 void
 host_applClose(void)
 {
+  /* DIVERGENCE(MVDM-HOST-DIV-356): before any original host resource release. */
+  ntvdm_worker_lifecycle_authorize_exit();
   if (!HostApplicationStarted || HostApplicationClosed)
       return;
   HostApplicationClosed = TRUE;
@@ -336,6 +340,8 @@ host_applClose(void)
  */
 void host_terminate(void)
 {
+    /* DIVERGENCE(MVDM-HOST-DIV-356): direct entries precede ExitVDM retirement. */
+    ntvdm_worker_lifecycle_authorize_exit();
 
     mvdm_softpc_report_termination("host-terminate", _ReturnAddress());
 

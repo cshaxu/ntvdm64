@@ -49,8 +49,7 @@ GLOBAL	quick_event_delays	host_delays;
 /* DIVERGENCE(MVDM-HOST-DIV-030): CCPU SAS owns Start_of_M_area and
  * Length_of_M_area in ccpusas4.c.  These two historical duplicate host
  * definitions are unused by the selected CCPU path and collide at a modern
- * static link.  Keep them for non-CCPU configurations; the original
- * host_start_cpu/host_simulate bodies below remain unchanged. */
+ * static link. Keep them for non-CCPU configurations. */
 #ifndef CCPU
 GLOBAL	host_addr Start_of_M_area;
 GLOBAL	IHPE Length_of_M_area;
@@ -85,8 +84,12 @@ long		idt_base;
 	we are running a software emulation, or if a 486 is present,
 	starts up this emulation.
 */
+/* DIVERGENCE(MVDM-HOST-DIV-356): original host initialization is complete;
+ * only now may service instructions enter its original cleanup callbacks. */
+extern void NtvdmActivateLifecycle(void);
 void	host_start_cpu()
 {
+  NtvdmActivateLifecycle();
   cpu_simulate ();
 }
 

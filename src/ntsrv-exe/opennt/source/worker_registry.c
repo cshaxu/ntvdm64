@@ -216,10 +216,9 @@ DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *connection,
                  break;}
         }
     }
-    /* A native backend has now installed worker-base's command/control
-     * receiver.  Reuse the existing readiness bit used by VDM Update: a
-     * management worker-close must never signal a merely connected suspended
-     * process and then wait for a handler that cannot exist yet. */
+    /* Backend readiness permits execution selection, not close admission.
+     * The authenticated watch can already retain a shutdown instruction;
+     * registering this backend must not clear or supersede that instruction. */
     connection->registered_worker=TRUE;
     connection->native_frontend_registered=TRUE;
     service_signal_frontend_states(connection->service);error=0;
@@ -351,6 +350,36 @@ done:
     return error;
 }
 
+
+DWORD OpenNtBaseServiceConnectionControls(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,HANDLE *shutdown,HANDLE *console_close)
+{
+    LIST_ENTRY *link;
+    DWORD error=ERROR_ACCESS_DENIED;
+    if(!connection || !shutdown || !console_close)return ERROR_INVALID_PARAMETER;
+    *shutdown=NULL;*console_close=NULL;
+    EnterCriticalSection(&connection->service->lock);
+    if(OpenNtBaseServicePeer(connection,pid,generation)) {
+        error=ERROR_SUCCESS;
+        for(link=connection->service->worker_watches.Flink;
+            link!=&connection->service->worker_watches;link=link->Flink) {
+            OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
+            if(watch->process.SequenceNumber!=generation)continue;
+            if(!DuplicateHandle(GetCurrentProcess(),watch->shutdown,GetCurrentProcess(),
+                shutdown,SYNCHRONIZE,FALSE,0))error=GetLastError();
+            else if(!watch->wow && !DuplicateHandle(GetCurrentProcess(),watch->console_close,
+                GetCurrentProcess(),console_close,SYNCHRONIZE,FALSE,0))error=GetLastError();
+            break;
+        }
+    }
+    LeaveCriticalSection(&connection->service->lock);
+    if(error) {
+        if(*shutdown)CloseHandle(*shutdown);
+        if(*console_close)CloseHandle(*console_close);
+        *shutdown=NULL;*console_close=NULL;
+    }
+    return error;
+}
 
 DWORD OpenNtBaseServiceWorkerShutdownEvent(OPENNT_BASE_CONNECTION *worker,DWORD pid,
     DWORD generation,HANDLE *shutdown)

@@ -272,6 +272,7 @@ foreach ($alias in @(
     [pscustomobject]@{ Decorated = 'OpenNtBaseClientWowStyle@8'; Raw = 'OpenNtBaseClientWowStyle' },
     [pscustomobject]@{ Decorated = 'NtvdmInstallChildStyle@8'; Raw = 'NtvdmInstallChildStyle' },
     [pscustomobject]@{ Decorated = 'NtvdmSeparateWowStyle@4'; Raw = 'NtvdmSeparateWowStyle' },
+    [pscustomobject]@{ Decorated = 'NtvdmAuthorizeExit@4'; Raw = 'NtvdmAuthorizeExit' },
     [pscustomobject]@{ Decorated = 'host_CreateThread@24'; Raw = 'host_CreateThread' },
     [pscustomobject]@{ Decorated = 'host_ExitThread@4'; Raw = 'host_ExitThread' },
     [pscustomobject]@{ Decorated = 'opennt_exit_thread@4'; Raw = 'opennt_exit_thread' },

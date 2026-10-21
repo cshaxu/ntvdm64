@@ -9,6 +9,9 @@ DWORD worker_base_connect(void)
     return OpenNtBaseClientConnectCurrent();
 }
 
+DWORD worker_base_controls(HANDLE *server,HANDLE *shutdown,HANDLE *console_close)
+{ return OpenNtBaseClientWorkerControls(server,shutdown,console_close); }
+
 DWORD worker_base_watch_service(void (*lost)(void *),void *context)
 { return OpenNtBaseClientWatchBroker(lost,context); }
 void worker_base_unwatch_service(void)

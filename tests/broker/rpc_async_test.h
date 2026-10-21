@@ -8,15 +8,20 @@ static __inline DWORD test_rpc_connect(handle_t binding,HANDLE process,ULONG pro
     unsigned char *application,ULONG *server_protocol,unsigned char *server_version,
     VDM_CONNECTION *connection,ULONG *generation)
 {
+    HANDLE server=NULL,shutdown=NULL,console_close=NULL;
     RPC_ASYNC_STATE async;DWORD error=common_rpc_begin_async(&async);
     if(error)return error;
     RpcTryExcept {
         Client_Connect(&async,binding,process,protocol,application,server_protocol,
-            server_version,connection,generation);
+            server_version,connection,generation,&server,&shutdown,&console_close);
     }
     RpcExcept(1){error=RpcExceptionCode();}
     RpcEndExcept
-    return common_rpc_end_async(&async,error,NULL,10000);
+    error=common_rpc_end_async(&async,error,NULL,10000);
+    if(server)CloseHandle(server);
+    if(shutdown)CloseHandle(shutdown);
+    if(console_close)CloseHandle(console_close);
+    return error;
 }
 static __inline DWORD test_rpc_broker_process(handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation,HANDLE *server)

@@ -83,6 +83,9 @@ DWORD OpenNtBaseServiceTerminateWorker(OPENNT_BASE_SERVICE *,uint32_t process_id
 DWORD OpenNtBaseServiceCloseManagementNode(OPENNT_BASE_SERVICE *,
     const OPENNT_BASE_MANAGEMENT_KEY *);
 DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *,HANDLE,OPENNT_BASE_CONNECTION **,DWORD *);
+/* Connect's authenticated lifecycle capabilities. Non-workers receive no
+ * worker events; returned handles are wait-only and owned by the caller. */
+DWORD OpenNtBaseServiceConnectionControls(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE *,HANDLE *);
 /* Local Console membership is sampled only by the authenticated NTCON root
  * which is actually attached to that Console. It is a bounded selection
  * hint for original ConsoleRecord association, never a task/worker claim. */

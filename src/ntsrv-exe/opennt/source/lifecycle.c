@@ -51,12 +51,11 @@ static DWORD service_terminate_worker(OPENNT_BASE_SERVICE *service,uint32_t proc
                 worker=candidate;break;
             }
         }
-        /* A native carrier exposes its worker-base receiver only after native
-         * backend registration.  VDM workers have their original lifecycle
-         * receiver as part of the authenticated reservation/update path, so
-         * its shutdown event remains valid during that startup interval. */
-        if(!worker || (worker->native_worker && !worker->registered_worker))
-            {error=ERROR_NOT_READY;break;}
+        /* Connect already owns the authenticated watch and manual-reset
+         * instruction. Backend readiness gates execution, not cancellation:
+         * startup failure must not need a working frontend to request exit.
+         * A receiver attached later observes the same latched instruction. */
+        if(!worker){error=ERROR_NOT_READY;break;}
         if (watch->close_kind!=WORKER_CLOSE_NONE) { error=ERROR_SUCCESS; break; }
         if(!watch->shutdown){error=ERROR_NOT_READY;break;}
         /* SetEvent cannot call back or wait. Commit acceptance only after the

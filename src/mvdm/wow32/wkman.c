@@ -23,6 +23,8 @@
 
 #include "precomp.h"
 #pragma hdrstop
+/* DIVERGENCE(MVDM-HOST-DIV-356): parent authorizes whole-worker cleanup. */
+extern DWORD WINAPI NtvdmAuthorizeExit(DWORD exit_code);
 #include <ntexapi.h>
 #include <sharewow.h>
 #if !defined(_X86_)
@@ -577,11 +579,14 @@ ULONG FASTCALL WK32WOWInitTask(PVDMFRAME pFrame)
         SuspendTimerThread();       // turns timer thread off
 
     if (fBoot) {
+        DWORD exit_code;
         W32Thread((LPVOID)vpStack);    // SHOULD NEVER RETURN
 
         WOW32ASSERTMSG(FALSE, "\nWOW32: WK32WOWInitTask ERROR - Main Thread Returning - Contact DaveHart\n");
+        /* DIVERGENCE(MVDM-HOST-DIV-356): before original task-record retirement. */
+        exit_code = NtvdmAuthorizeExit(EXIT_FAILURE);
         ExitVDM(WOWVDM, ALL_TASKS);
-        ExitProcess(EXIT_FAILURE);
+        ExitProcess(exit_code);
     }
 
     hThread = host_CreateThread(NULL,
@@ -3001,8 +3006,12 @@ DWORD W32HungAppNotifyThread(UINT htaskKill)
 
             LOGDEBUG(LOG_ALWAYS, ("W32HungAppNotifyThread: Destroying WOW Process\n"));
 
-            ExitVDM(WOWVDM, ALL_TASKS);
-            ExitProcess(0);
+            /* DIVERGENCE(MVDM-HOST-DIV-356): retain the hung-process exit code. */
+            {
+                DWORD exit_code = NtvdmAuthorizeExit(0);
+                ExitVDM(WOWVDM, ALL_TASKS);
+                ExitProcess(exit_code);
+            }
         }
 
         LOGDEBUG(LOG_ALWAYS,("W32HungAppNotifyThread: Success with Keyboard Interrupt\n"));
@@ -4370,6 +4379,7 @@ Done:
 ULONG FASTCALL WK32ExitKernel(PVDMFRAME pFrame)
 {
     PEXITKERNEL16 parg16;
+    DWORD exit_code;
 
     GETARGPTR(pFrame, sizeof(*parg16), parg16);
 
@@ -4381,8 +4391,12 @@ ULONG FASTCALL WK32ExitKernel(PVDMFRAME pFrame)
         "\n\n"
         );
 
+    /* DIVERGENCE(MVDM-HOST-DIV-356): retain no guest alias across the wait. */
+    exit_code = parg16->wExitCode;
+    FREEARGPTR(parg16);
+    exit_code = NtvdmAuthorizeExit(exit_code);
     ExitVDM(WOWVDM, ALL_TASKS);
-    ExitProcess(parg16->wExitCode);
+    ExitProcess(exit_code);
 
     return 0;   // Never executed, here to avoid compiler warning.
 }
@@ -4401,6 +4415,7 @@ ULONG FASTCALL WK32ExitKernel(PVDMFRAME pFrame)
 ULONG FASTCALL WK32FatalExit(PVDMFRAME pFrame)
 {
     PFATALEXIT16 parg16;
+    DWORD exit_code;
 
     GETARGPTR(pFrame, sizeof(*parg16), parg16);
 
@@ -4415,8 +4430,12 @@ ULONG FASTCALL WK32FatalExit(PVDMFRAME pFrame)
 
     // Sometimes we get this with no harm done (app bug)
  
+    /* DIVERGENCE(MVDM-HOST-DIV-356): retain no guest alias across the wait. */
+    exit_code = parg16->f1;
+    FREEARGPTR(parg16);
+    exit_code = NtvdmAuthorizeExit(exit_code);
     ExitVDM(WOWVDM, ALL_TASKS);
-    ExitProcess(parg16->f1);
+    ExitProcess(exit_code);
 
     return 0;   // Never executed, here to avoid compiler warning.
 }

@@ -460,6 +460,7 @@ foreach ($entry in @(
     'OpenNtBaseClientWowStyle=_OpenNtBaseClientWowStyle@8',
     'NtvdmInstallChildStyle=_NtvdmInstallChildStyle@8',
     'NtvdmSeparateWowStyle=_NtvdmSeparateWowStyle@4',
+    'NtvdmAuthorizeExit=_NtvdmAuthorizeExit@4',
     'VdmAllocateVirtualMemory', 'VdmFreeVirtualMemory',
     'VdmAddVirtualMemory', 'VdmRemoveVirtualMemory',
     'VdmAddDescriptorMapping', 'SetWOWforceIncrAlloc',

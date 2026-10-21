@@ -46,6 +46,8 @@ DWORD WINAPI OpenNtBaseClientWowStarted(ULONG task);
 DWORD OpenNtBaseClientWowStartup(HANDLE parent,HANDLE *event,BOOL *started);
 DWORD OpenNtBaseClientRetireWorkerlessFrontend(DWORD *retired);
 DWORD OpenNtBaseClientFrontendStateChanged(HANDLE *state_changed);
+/* Borrowed until Disconnect; no allocation or RPC after successful Connect. */
+DWORD OpenNtBaseClientWorkerControls(HANDLE *server,HANDLE *shutdown,HANDLE *console_close);
 DWORD OpenNtBaseClientWorkerShutdownEvent(HANDLE *shutdown);
 /* Report inability to continue. NTSRV selects the authenticated participant's
  * close transaction; successful submission is not permission to exit. */

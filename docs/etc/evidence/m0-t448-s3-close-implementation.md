@@ -2999,3 +2999,262 @@ P17, not a claim of eliminating its accumulated upstream divergence. The pinned
 upstream comparison remains +148/-41 for that file. Complete S3 original-exit
 and partial-initialization permission remain explicitly open. This is P18
 progress delivery, not S3 acceptance or T closure.
+
+### Post-P18 startup instruction admission correction
+
+Source tracing finds a concrete startup authorization obstruction:
+service_core.c creates the authenticated worker watch and manual-reset close
+events during Connect, but service_terminate_worker rejects a native participant
+until registered_worker is set by frontend/backend registration. That condition
+predates the nonblocking close transaction and incorrectly makes a failed
+backend a prerequisite for asking NTSRV to terminate it. Remove only that
+readiness condition; retain connection/generation/watch authentication,
+first-accepted close kind and Console quiescence. Execution admission still
+requires its existing backend readiness. No new transport, deadline or guest
+change follows.
+
+The production-linked preparing-worker-exit case requests participant exit
+before native backend registration and acquires its wait-only shutdown handle
+after acceptance, requiring it already signalled. It then exercises duplicate
+intent and a competing Console close without changing the first close kind.
+This verifies instruction latching, not yet actual startup-failure teardown
+or original-host initialization safety. The installed P18 package is unchanged
+until the remaining implementation group and delivery gates complete.
+
+Controller 27156 runs exit-scope-r41.ps1 -Round r44 from 17:29:39 to
+17:30:18 UTC. Incremental service/provider build, preparing-worker-exit,
+worker-console-exit, worker-exit-then-console, console-then-worker-exit,
+management-worker-then-console and management-console-then-worker pass,
+followed by documentation governance. No source edits overlap the run.
+Native GetNextCommand already refuses signalled worker/Console instructions
+before delivery; RetainCommandWorker excludes a closing watch. The adjacent
+backend-registration comment is updated afterwards to distinguish execution
+readiness from close admission, without executable changes. This is a local
+fix/verification step within the remaining group, not another published P.
+
+### Post-P18 native consumer initialization ordering
+
+NTVWM main.c previously marked itself managed only after carrier creation,
+backend registration, membership threads, execution storage and service watcher
+all succeeded. membership_initialize also destroyed partial membership on an
+error, including the very close-event handles needed by request_fault_exit.
+The consumer now acquires shutdown and Console-close handles before carrier
+creation, then marks that instruction-equipped connection managed. Failed
+membership initialization retains resources for the existing request/dispatch
+path; a missing local stop_requested event is harmless, not an attempted
+SetEvent(NULL). No timeout, replay, new IPC or mirror change is introduced.
+
+Reproducible test: tests/observation/verify-ntvwm-close-priority.ps1 with
+BuildRoot below build, CompilerWrapper for MSVC x64 and FontInclude naming the
+generated frontend-font directory. It compiles the actual main.c owner and
+production worker-base shutdown helper. Case 7 injects backend registration
+ERROR_NOT_ENOUGH_MEMORY, asserts both original close handles remain valid and
+unchanged, rejects any attempted receiver creation, then requires no cleanup
+on request acceptance and actual cleanup/acknowledgement only after shutdown.
+The seven existing cancellation, worker/Console-close, service-loss lock-fence
+and request-versus-permission cases remain. This is a provider-boundary test,
+not real NTSRV startup or complete product acceptance.
+
+Sandbox controller 8184 ended before creating a test directory. Elevated
+controllers 4640 and 18956 reached compile/link but failed because the new
+reachable initialization function pulled unrelated I/O callback dependencies
+into the small fixture. They are retained as failed runs. Fixture-only consumer
+creation substitutes now reject unexpected calls without linking that unused
+I/O closure. Controller 37384 passed all eight cases at 17:39:00 UTC; artifacts
+are build/t448-s3/close-priority-r45c. No installed binary was changed.
+
+Controller 26124 runs startup-r45.ps1 from 17:40:00 to 17:40:33 UTC:
+production x64 ntvwm.exe rebuilds only main.obj and its link through the stable
+Ninja tree with repository-pinned ccache paths; the second build reports no
+work. The eight final-I/O/carrier ordering cases and documentation gate pass.
+This evidence paragraph and Current update follow that gate, so its result
+does not claim a check of these later documentation edits.
+
+The earlier connected-but-not-yet-instruction-equipped failure window is NOT
+claimed repaired. NTVDM original pre-cleanup authorization, original callback
+ownership and initialization remain the other finite group boundaries. Keep
+these explicit rather than treating the new native case as group completion.
+
+### Original pre-cleanup authorization candidate (DIV-356)
+
+The first original-entry implementation uses the existing worker lifecycle
+owner rather than a late ExitProcess hook. Its closing field now identifies
+the one cleanup thread: a natural caller claims it before requesting service
+exit, receives the actual worker/Console instruction or observes service death,
+then continues original cleanup. Management callbacks use the same claim;
+the finite Console helper transfers ownership to its actual handler thread.
+Recursive terminate -> host_applClose -> host_terminate entries by that owner
+do not submit another request. A competing terminal caller cannot run the
+original non-atomic repeated-terminate shortcut over another cleanup.
+
+Three SoftPC insertion sites precede actual original destruction: terminate's
+device/CMOS/video work, host_applClose's event/timer/device close, and direct
+host_terminate's ExitVDM. Five WOW process exits likewise obtain permission
+before original ExitVDM(ALL_TASKS), keeping their ExitProcess after it. The
+parent export carries the original chosen exit code, replaced with 6 only for
+verified service death. ExitKernel/FatalExit copy/free their guest argument
+alias before the blocking call. W32DestroyTask and ordinary task completion
+are unchanged. DIV-356 in src/mvdm/README.md records the four upstream files
+and exact hashes. This is a candidate, not a runtime-restoration claim.
+
+Controller 14012 runs original-exit-r46.ps1 from 17:44:13 to 17:44:22 UTC:
+actual ntvdm.exe and console-client-test.exe compile; --natural-exit and
+--natural-loss require acceptance to leave the caller blocked until an event,
+and repeated same-thread authorization must issue one request. Existing
+--lifecycle-wow, --lifecycle-loss and --lifecycle-console callbacks call the
+new guard recursively and retain exit codes 74/74/73. All five pass. Original
+cleanup bodies are substituted in this focused fixture, so this is ownership
+and permission proof, not runtime proof of every original caller.
+
+The later WOW export/code-carrying extension and guest-alias release are not
+covered by r46. Full-component/repeated-incremental generation and the amended
+five permission cases are running under controller 28804, original-exit-r47;
+do not treat its start as a pass. Partial initialization, the earlier connection
+capability-acquisition failure window, and lock/join behavior at the complete
+original cleanup call chains remain explicit pending acceptance boundaries.
+
+Controller 28804 completes at 17:50:33 UTC: all thirteen components build,
+the repeat preserves 1,415 intermediates, and all five permission cases pass.
+The amended natural-loss case returns 6 through the actual parent authorization
+export; normal natural-exit preserves 131. These are still fixture exit codes,
+not proof of each real WOW fatal/normal entry. Review then removes an accidental
+CRLF rewrite in terminat.c, restoring the selected upstream LF formatting.
+The incremental four-file mirror change versus P18 is +41/-6 (net +35), with
+README registration counted separately (+28). No original guest is changed.
+This necessary pre-cleanup insertion increases the mirror budget; no claim of
+mirror reduction or completed S3 is made.
+
+Controller 37356 starts full-r40.ps1 -Round r48 at 17:52:06 UTC against those
+final source bytes. The group now includes the native partial-initialization
+case and natural-exit/loss assertions in addition to prior service, I/O, RPC,
+DOS/WOW and CAF checks. Its explicit budgets remain diagnostic runner budgets,
+not product timeout policies. r47 is retained as the earlier complete build;
+r48 must finish before any new runtime-pass/publication claim. P18 remains the
+installed thirteen-image baseline while the remaining initialization/ownership
+work is unfinished.
+
+### r48 SOL environment limitation and owner-authorized temporary bypass
+
+Controller 37356 ends failed at 17:59:42 UTC. Complete build/incremental,
+service/owner fixtures, real RPC and wire checks pass. Runtime records WRITE
+frontier, DOS17 and WINMINE passing, then SOL probe exit 4. Its log proves
+screen=427x320, maxtrack=447x340, initial client=431x261; an ordinary resize
+requests 585x384 but obtains 431x281. wow_sol_gameplay_probe.c returns at its
+geometry precondition, before deal/stock/close assertions. The entire r48
+result stays failed; no claim that gameplay or its exit behavior passed.
+
+Controller 5556 runs sol-geometry-r49.ps1 from 18:01:56 to 18:02:13 UTC,
+serially using immutable package-r43 (published P18) and package-r48 with the
+same probe/environment. Both reproduce exit 4 and exactly the same desktop,
+window and clamped-client dimensions. This attributes this test obstruction
+to its available geometry, not a demonstrated candidate regression; it does
+not prove candidate SOL gameplay is correct. Captures and input hashes remain
+in sol-geometry-r49-package-r43 and sol-geometry-r49-package-r48.
+
+Owner explicitly replies: "我确实没有别的方案 你就先暂时bypass sol".
+Temporarily exclude this SOL full-gameplay gate while the desktop restriction
+persists, label it unverified/environment-limited, and retain its normal test
+source/assertions unchanged for later restoration. All other gates remain.
+Controller 24508 starts remaining-r48.ps1 at 18:03:01 UTC for CAF, supplementary
+negative checks and review. Its result cannot overwrite the original failed
+full-r48 result or turn the waived SOL row into a pass.
+
+### r50 remaining checks and protocol-63 initialization work
+
+Controller 24508 finishes at 18:03:46 UTC: all three CAF cases pass, then the
+old supplementary orchestrator rejects r48's failed runtime prerequisite.
+This is not a second product failure. New remaining-r50.ps1 explicitly checks
+the three passed runtime rows plus all three CAF rows, retains the failed SOL
+result, and runs the omitted native failure/completion tests and review.
+Controller 5556 completes 18:06:59--18:07:27 UTC with passed=true and an explicit
+SOL UNVERIFIED waiver. No failed result is rewritten.
+
+The finite initialization group now stages protocol 63's atomic Connect
+capabilities, documented in the working design. New provider assertions cover
+non-worker/WOW/native role selection, stale generation, denied SetEvent rights
+and rollback when the second duplicate fails. Worker owners borrow cached
+handles through worker-base; no late capability RPC or independent policy is
+introduced. Build/runtime verification is pending; P18 is still installed.
+
+r51 controller 18700 builds all thirteen protocol-63 images at
+18:11:59--18:15:29 UTC with 1,415 unchanged second-build intermediates.
+Service fixtures pass by 18:15:54, including atomic controls role/rights/rollback.
+The owner group then fails lifecycle-wow: its new controls mock incorrectly
+creates a Console-close event for WOW (FAIL line 345). Correct the mock's role,
+retain the original no-Console assertion; do not mark r51 owner tests passed.
+
+The remaining startup change is now staged: borrow controls immediately after
+Connect and before session activation; retain them on partial allocation
+failure; obtain service permission before standalone startup cleanup/finish.
+Delay original cleanup receivers until host_start_cpu after original main's
+host_init_screen/InitialiseDosEmulation. DIV-356 records the single new hook.
+Owner tests add pending Console-close before activation and partial-startup
+Console permission without entering the uninitialized original handler. Full
+real original-entry runtime proof and obsolete capability RPC removal remain
+pending; no new product deadline, guest mutation or release is claimed.
+
+### Owner SOL acceptance clarification
+
+Owner subsequently states: "你只要记录sol可以正常启动即可 我手测可以
+只是窗口内容layout有点问题而已". Record successful startup as owner-provided
+manual evidence, with no inferred package hash or complete gameplay coverage.
+For this lifecycle delivery the required SOL milestone is startup, not the
+full-gameplay geometry probe. Keep r48/r49 failures unchanged as diagnostic
+evidence; they do not negate the owner's startup result and are not converted
+to passes. The reported content-layout issue is retained in TODO for queued
+WOW32 usability work. Other lifecycle and publication requirements are unchanged.
+
+r52 controller 22860 completes 18:18:32--18:21:53 UTC: full thirteen-image build,
+unchanged second-build intermediates, service fixtures and all nine owner cases
+pass. Cases are broken-pipe/video, lifecycle WOW/loss/Console/pending instruction,
+and natural exit/loss/partial-startup Console permission. These are owner/adapter
+proof, not a substitute for the subsequent real-package regression. accept-r52
+will run native close-priority, RPC, migration, runtime/CAF and post checks;
+its SOL record explicitly cites owner startup evidence, not gameplay pass.
+
+r52 acceptance controller 37572 stops before package staging at 18:23:08 UTC:
+the native-close fixture has twelve failures, isolated in diagnostic r53 to
+modes 5--7 (fault-report waits). The new fixture had substituted the self
+pseudo-handle for the old duplicated real process handle. r54 directly measures
+WaitForMultipleObjects: pseudo-process gives WAIT_FAILED/6; a real wait-only
+duplicate gives WAIT_TIMEOUT. Restoring the real handle makes all eight
+unchanged close assertions pass (controller 22152, 18:25:45 UTC). Product
+Connect already exports real handles; no product workaround is added.
+accept-r55 resumes the as-yet-unrun package stage/runtime checks using r52's
+unchanged product images and r54 native-close evidence. Failed attempts remain.
+
+### P19 coherent progress delivery
+
+accept-r55 controller 25492 completes 18:26:31--18:32:09 UTC with passed=true.
+It consumes unchanged build-r52 images, r52 nine owner cases and r54 eight
+native-close cases. Real RPC reply/connect/disconnect/loss/bootstrap, six
+migration scenarios, wire identity/bootstrap/park, WRITE four-sample frontier,
+DOS17, WINMINE gameplay, three CAF self-delete/before-Enter echo cases,
+native failure/completed-loss, startup rejection/native-I/O failure and final
+presentation/native-command checks pass. SOL has an explicit owner-startup
+record, no invented gameplay or package-hash claim. Full build and second-run
+1,415-intermediate identity are retained in build-r52/result.json.
+
+Source review confirms the original main.c exit(1) is SECURE-only, not enabled
+in the production graph. nt_reset's missing-f return rejects direct invocation;
+the authenticated worker constructor uses original BaseGetVdmConfigInfo, whose
+vdm.c lines 1953 onward always append -f. No additional mirror change is made
+for these non-admitted startup paths. Real service process/event exports are
+wait-only, partial exports close before connection rundown, and consumer
+borrowed handles remain valid through joined teardown until disconnect.
+Original fatal/hung caller lock coverage and obsolete three capability RPCs
+remain explicitly pending for final S3 review, not silently certified here.
+
+The five changed mirror files retain LF and DIV-356 registration; delta versus
+P18 is +46/-8 (net +38), not a reduction. Owned product net growth is +117;
+tests/build net growth including the new 14-line verifier is +142. New tests
+are correctness coverage; obsolete RPC removal is the identified reduction
+opportunity, not permission to delete their retained identity/rights coverage.
+Guest files and assets/winnt.zip remain unchanged.
+
+Publication controller 29896 succeeds at 18:32:44.548 UTC: all thirteen images
+from package-r52/system32 match assets/release and O:/winnt/system32. The
+coherent old set is recoverable in publication-r52-backup. No installed process
+needed termination. publication-r52.json records every SHA-256. P19's delivering
+commit records the exact repository identity; this is a progress release,
+not S3 closure or a claim that all T448 work is complete.

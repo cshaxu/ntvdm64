@@ -2352,6 +2352,9 @@ PVOID WOWStartupFailed(VOID)
 {
     char szCaption[256];
     char szMsgBoxText[1024];
+    DWORD exit_code;
+    /* DIVERGENCE(MVDM-HOST-DIV-356): parent owns whole-worker exit permission. */
+    extern DWORD WINAPI NtvdmAuthorizeExit(DWORD exit_code);
 
     LoadString(hmodWOW32, iszStartupFailed, szMsgBoxText, sizeof szMsgBoxText);
     LoadString(hmodWOW32, iszSystemError, szCaption, sizeof szCaption);
@@ -2361,8 +2364,10 @@ PVOID WOWStartupFailed(VOID)
         szCaption,
         MB_SETFOREGROUND | MB_TASKMODAL | MB_ICONSTOP | MB_OK | MB_DEFBUTTON1);
 
+    /* DIVERGENCE(MVDM-HOST-DIV-356): before original task-record retirement. */
+    exit_code = NtvdmAuthorizeExit(EXIT_FAILURE);
     ExitVDM(WOWVDM, ALL_TASKS);         // Tell Win32 All Tasks are gone.
-    ExitProcess(EXIT_FAILURE);
+    ExitProcess(exit_code);
     return (PVOID)NULL;
 }
 

@@ -4,6 +4,8 @@
 /* Worker-side broker lifetime binding. The caller owns CsrPortHeap and its
  * backend state; it must disconnect before destroying that storage. */
 DWORD worker_base_connect(void);
+/* Borrowed connection-owned handles, valid until disconnect. */
+DWORD worker_base_controls(HANDLE *server,HANDLE *shutdown,HANDLE *console_close);
 /* Register only after owner state exists; join before owner state is freed.
  * Callback is executable policy, never selected by worker kind here. */
 DWORD worker_base_watch_service(void (*lost)(void *),void *context);

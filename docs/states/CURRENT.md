@@ -4,6 +4,37 @@
 
 **Active: M0 T448 S3**
 
+Owner confirms SOL launches normally in manual testing; its remaining window
+content layout issue is retained in TODO. For this lifecycle delivery, record
+SOL startup as owner-verified, not full-gameplay/visual acceptance. This
+supersedes the earlier temporary full-gameplay bypass wording below; other
+lifecycle gates and historical failed geometry evidence remain unchanged.
+
+P19 publishes all thirteen protocol-63 images at 2026-10-21 18:32:44 UTC to
+assets/release and O:/winnt/system32, with matching SHA-256 and a coherent P18
+backup. Full/incremental build, service/owner/real-RPC, DOS17, WRITE, WINMINE,
+CAF-three and supplemental checks pass (r52/r54/r55); SOL uses the owner's
+startup confirmation above. Commit/push is the next delivery action.
+Remaining S3 work is the obsolete capability-RPC removal and final original
+exit/initialization caller/thread coverage review; S3 is not closed.
+
+Connect returns service
+lifetime and authenticated worker close capabilities in its existing RPC
+response. Consumers borrow them until disconnect instead of acquiring them
+after successful connection. Failed capability export rolls back the
+connection; worker-base adds no role policy. r51 passes the full thirteen-image
+build, unchanged 1,415 intermediates and service tests. Its WOW owner fixture
+finds an incorrect mock exporting a Console event for WOW; the mock is corrected
+without relaxing its assertion. Deferred original-host callback activation and
+startup-failure authorization now pass the grouped verification and are in
+the published P19 package. Earlier progress paragraphs below describe P18
+and the retained pre-publication attempts, not the current installed set.
+
+r50 completes supplementary native failure/completion and source/governance
+checks against r48, retaining its SOL waiver. The separate CAF cmd/command/ntmon
+cases pass before-Enter echo assertions. The original failed r48 aggregate and
+r49 geometry comparisons remain unmodified.
+
 P18 publishes the protocol-62 Console-scope candidate at 2026-10-21
 17:20:19 UTC: all thirteen images match the tested package at assets/release
 and O:/winnt/system32. Full/incremental, service/owner-fault, RPC, wire,
@@ -11,6 +42,39 @@ runtime/CAF and supplementary TSR checks pass. Owner requested this progress
 publication before further original-exit work. DIV-355 is registered; original
 guest files are unchanged. Remaining natural/fatal exit authorization and
 initialization/closing-thread coverage still block S3; this is not S3 closure.
+
+After P18, the startup-close correction removes NTSRV's obsolete requirement
+for native backend registration before accepting an authenticated worker exit.
+The existing event retains the instruction for a later receiver. Production-
+linked r44 verifies this and five existing competing-close cases; startup
+consumer cleanup and original pre-cleanup integration are not yet complete.
+These later source changes are uncommitted/unpublished; installed P18 remains
+the verified baseline.
+
+The matching NTVWM consumer now acquires close instructions before initializing
+its carrier/backend, and retains partial membership on initialization failure
+until service disposition. Eight close-priority cases include injected backend
+registration failure and pass locally (r45c). This does not close the earlier
+Connect-to-instruction-acquisition failure window or NTVDM original cleanup
+ownership; those remain in the same finite S3 initialization/exit group.
+
+DIV-356 now stages original pre-cleanup permission at the three SoftPC and
+five WOW process-exit sites. Cleanup-thread ownership and recursive entry use
+the existing worker lifecycle gate; no final-ExitProcess interception or new
+IPC is introduced. The WOW export/exit-code extension passes the thirteen-image
+build, repeated incremental check and five focused permission cases (r47).
+After restoring terminat.c's original LF formatting, controller 37356 starts
+the full r48 regression, including new natural-exit/native-startup cases.
+Original-chain runtime and initialization/join coverage remain open; P18 is
+still the installed package.
+
+r48 passes the full build, service/owner/RPC checks, WRITE frontier, DOS17 and
+WINMINE, but SOL stops before gameplay because the current logical desktop is
+427x320 and its requested 585x384 client is clamped to 431x281. P18 reproduces
+the identical geometry failure in r49. Owner explicitly permits temporarily
+bypassing SOL on 2026-10-21; record it as unverified, never passed. Other gates
+remain required. Controller 24508 continues CAF/supplementary checks; this
+waiver does not resolve the remaining S3 initialization work.
 
 P16 (0e1f3f501) is published, pushed and verified: protocol 61 generalizes the
 existing exit-intent RPC to authenticated participants and keeps faulted NTCON

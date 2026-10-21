@@ -2,6 +2,27 @@
 
 ## Authority and status
 
+### S3 initialization capability boundary (protocol 63 candidate)
+
+Connect must not report success before supplying the service lifetime and
+role-appropriate close capabilities. NTSRV derives role from its authenticated
+reservation/watch, never a client-selected flag. Non-workers receive no worker
+events; WOW receives worker-close only; native launcher controls remain no-op
+in that consumer. All exports have wait-only rights (service process also has
+query-limited rights). Partial export failure closes exported duplicates and
+runs connection rundown before returning failure. There is no reconnect.
+
+The shared RPC client owns these handles until disconnect. Worker lifecycle
+owners borrow them without allocation or a second RPC; existing owned-handle
+APIs remain local duplicates for I/O consumers. This removes the admission-to-
+instruction acquisition window. Original-host callbacks still must be deferred
+until original initialization is complete; that remaining change and startup
+failure cleanup are part of the same S3 group, not a separate new capability.
+
+Required proof: authenticated role selection, denied mutation rights, partial
+duplicate rollback, latched instruction delivery, raw-wire/version mismatch,
+real Connect and owner startup failure/service-loss behavior. No guest changes.
+
 The owner's 2026-10-21 correction in the linked proposal supersedes this
 document's earlier blanket ten-second control/finalization policy. r32 is
 withdrawn from publication. Audit existing timeout owners, their actual purpose

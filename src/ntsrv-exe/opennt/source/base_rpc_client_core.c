@@ -26,6 +26,7 @@ typedef struct OPENNT_BASE_RPC_CLIENT {
     VDM_CONNECTION connection;
     HANDLE process;
     HANDLE server;
+    HANDLE worker_shutdown,worker_console_close;
     HANDLE stop;
     HANDLE watcher;
     void (*lost)(void *);
@@ -81,7 +82,7 @@ void __RPC_USER MIDL_user_free(void *value) { free(value); }
 static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding,ULONGLONG deadline)
 {
     RPC_IF_ID expected;
-    RPC_STATUS status=RpcIfInqId(Client_vdm_service_v62_0_c_ifspec,&expected);
+    RPC_STATUS status=RpcIfInqId(Client_vdm_service_v63_0_c_ifspec,&expected);
     if (status) return status;
     return common_rpc_classify_interface(binding,&expected,deadline);
 }
@@ -133,7 +134,8 @@ DWORD OpenNtBaseClientConnectCurrentTimeout(DWORD milliseconds)
     error=common_rpc_begin_async(&async);if(error)goto done;
     RpcTryExcept {
         Client_Connect(&async,client.binding,client.process,APP_PROTOCOL_VERSION,
-            (unsigned char *)expected,&server_protocol,server_version,&connection,&generation);
+            (unsigned char *)expected,&server_protocol,server_version,&connection,&generation,
+            &client.server,&client.worker_shutdown,&client.worker_console_close);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
@@ -155,16 +157,6 @@ DWORD OpenNtBaseClientConnectCurrentTimeout(DWORD milliseconds)
      * it never becomes available to original BaseClient task operations. */
     if (connection) { client.connection=connection; client.generation=generation; }
     if (!error && (!connection || !generation)) error=ERROR_INVALID_DATA;
-    if (error) goto done;
-    if(!common_rpc_remaining_ms(deadline)){error=ERROR_TIMEOUT;goto done;}
-    error=common_rpc_begin_async(&async);if(error)goto done;
-    RpcTryExcept {
-        Client_BrokerProcess(&async,client.binding,client.connection,client.process,
-            client.generation,&client.server);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    error=common_rpc_end_async(&async,error,NULL,common_rpc_remaining_ms(deadline));
     if (error) goto done;
     if (!client.server || WaitForSingleObject(client.server,0)!=WAIT_TIMEOUT) {
         error=RPC_S_SERVER_UNAVAILABLE; goto done;
@@ -262,6 +254,8 @@ void OpenNtBaseClientDisconnectCurrent(void)
     }
     if (client.process) CloseHandle(client.process);
     if (client.server) CloseHandle(client.server);
+    if (client.worker_shutdown) CloseHandle(client.worker_shutdown);
+    if (client.worker_console_close) CloseHandle(client.worker_console_close);
     if (client.binding) RpcBindingFree(&client.binding);
     cleanup=(void (*)(void))InterlockedExchangePointer(&execution_cleanup,NULL);
     if (cleanup) cleanup();
@@ -551,7 +545,22 @@ DWORD OpenNtBaseClientWaitFrontendConsoleRestored(void)
 }
 
 DWORD OpenNtBaseClientWorkerShutdownEvent(HANDLE *shutdown)
-{ return client_worker_event(common_rpc_worker_shutdown_event,shutdown); }
+{
+    if(!shutdown)return ERROR_INVALID_PARAMETER;
+    *shutdown=NULL;
+    if(!client.worker_shutdown)return ERROR_ACCESS_DENIED;
+    return DuplicateHandle(GetCurrentProcess(),client.worker_shutdown,GetCurrentProcess(),
+        shutdown,SYNCHRONIZE,FALSE,0) ? ERROR_SUCCESS : GetLastError();
+}
+
+DWORD OpenNtBaseClientWorkerControls(HANDLE *server,HANDLE *shutdown,HANDLE *console_close)
+{
+    if(!server || !shutdown || !console_close)return ERROR_INVALID_PARAMETER;
+    *server=NULL;*shutdown=NULL;*console_close=NULL;
+    if(!client.connection || !client.server || !client.worker_shutdown)return ERROR_INVALID_STATE;
+    *server=client.server;*shutdown=client.worker_shutdown;*console_close=client.worker_console_close;
+    return ERROR_SUCCESS;
+}
 
 static DWORD client_request_exit(DWORD scope)
 {
@@ -579,7 +588,13 @@ DWORD OpenNtBaseClientRequestConsoleExit(void)
 { return client_request_exit(OPENNT_EXIT_CONSOLE); }
 
 DWORD OpenNtBaseClientWorkerConsoleCloseEvent(HANDLE *close)
-{ return client_worker_event(common_rpc_worker_console_close_event,close); }
+{
+    if(!close)return ERROR_INVALID_PARAMETER;
+    *close=NULL;
+    if(!client.worker_console_close)return client.worker_shutdown ? ERROR_NOT_SUPPORTED : ERROR_ACCESS_DENIED;
+    return DuplicateHandle(GetCurrentProcess(),client.worker_console_close,GetCurrentProcess(),
+        close,SYNCHRONIZE,FALSE,0) ? ERROR_SUCCESS : GetLastError();
+}
 
 DWORD OpenNtBaseClientWorkerIoReleaseEvent(HANDLE *release)
 { return client_worker_event(common_rpc_worker_io_release_event,release); }

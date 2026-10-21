@@ -52,11 +52,16 @@
 
 IMPORT VOID host_applClose IPT0();
 IMPORT VOID host_terminate IPT0();
+/* DIVERGENCE(MVDM-HOST-DIV-356): standalone service permission precedes cleanup. */
+IMPORT VOID ntvdm_worker_lifecycle_authorize_exit IPT0();
 
 void terminate()
 {
 	SAVED BOOL already_called_terminate = FALSE;
 	UTINY i;
+
+	/* DIVERGENCE(MVDM-HOST-DIV-356): preserve the original cleanup thread/order. */
+	ntvdm_worker_lifecycle_authorize_exit();
 
 	if (already_called_terminate)
 	{

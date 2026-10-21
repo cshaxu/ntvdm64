@@ -46,6 +46,18 @@ static HANDLE delivery,peer,stop,readiness,frontend_process,video_wait;
 static HANDLE server_thread;
 static void create_transport(void);
 static HANDLE broker_shutdown,broker_console_close;
+static HANDLE broker_lifetime;
+static BOOL lifecycle_wow;
+DWORD OpenNtBaseClientFailure(DWORD error)
+{ return broker_lifetime && WaitForSingleObject(broker_lifetime,0)==WAIT_OBJECT_0 ? ERROR_INVALID_HANDLE : error; }
+DWORD worker_base_controls(HANDLE *process,HANDLE *shutdown,HANDLE *console_close)
+{
+    if(!broker_lifetime)broker_lifetime=CreateEventW(NULL,TRUE,FALSE,NULL);
+    if(!broker_shutdown)broker_shutdown=CreateEventW(NULL,TRUE,FALSE,NULL);
+    if(!lifecycle_wow && !broker_console_close)broker_console_close=CreateEventW(NULL,TRUE,FALSE,NULL);
+    *process=broker_lifetime;*shutdown=broker_shutdown;*console_close=broker_console_close;
+    return broker_lifetime && broker_shutdown && (lifecycle_wow || broker_console_close) ? ERROR_SUCCESS : GetLastError();
+}
 static HANDLE fault_reported;
 static volatile LONG fault_reports;
 DWORD worker_base_request_exit(void)
@@ -96,6 +108,7 @@ int session_thread_unbind(session *instance) { CHECK(bound==instance);bound=NULL
 BOOL CntrlHandler(ULONG type)
 {
     CHECK(type==CTRL_CLOSE_EVENT && bound==&owner);
+    ntvdm_worker_lifecycle_authorize_exit();
     puts("PASS authenticated root death dispatches original-shape close callback");
     fflush(stdout);
     if (hang_close) Sleep(INFINITE);
@@ -104,6 +117,7 @@ BOOL CntrlHandler(ULONG type)
 void TerminateVDM(void)
 {
     CHECK(bound==&owner);
+    ntvdm_worker_lifecycle_authorize_exit();
     if(expect_loss){CHECK(VdmExitCode==ERROR_INVALID_HANDLE);puts("PASS service loss reaches original worker cleanup entry with disconnected-port result");fflush(stdout);}
     ExitProcess(74); /* Separate worker-close source entry. */
 }
@@ -282,6 +296,13 @@ static int variable_video_case(void)
     printf("PASS variable records: 307200B uses BEGIN+one payload; 1310720B uses BEGIN+two payload parts and one final reply\n");
     return 0;
 }
+static DWORD WINAPI natural_exit(void *context)
+{
+    (void)context;
+    ntvdm_worker_lifecycle_authorize_exit();
+    ntvdm_worker_lifecycle_authorize_exit(); /* Original terminate -> host close. */
+    return NtvdmAuthorizeExit(131);
+}
 int main(int argc,char **argv)
 {
     HANDLE local;
@@ -303,12 +324,34 @@ int main(int argc,char **argv)
     BOOL variable_video=argc==2 && !strcmp(argv[1],"--variable-video");
     hang_close=argc==2 && !strcmp(argv[1],"--close-hang");
     fault_reported=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(fault_reported);
-    if(argc==2 && (!strcmp(argv[1],"--lifecycle-console") || !strcmp(argv[1],"--lifecycle-wow") || !strcmp(argv[1],"--lifecycle-loss"))) {
-        BOOL text=!strcmp(argv[1],"--lifecycle-console");
+    if(argc==2 && (!strcmp(argv[1],"--natural-exit") || !strcmp(argv[1],"--natural-loss") || !strcmp(argv[1],"--natural-console"))) {
+        HANDLE thread;DWORD result;
+        BOOL loss=!strcmp(argv[1],"--natural-loss");
+        BOOL text=!strcmp(argv[1],"--natural-console");
+        lifecycle_wow=!text;
+        CHECK(!ntvdm_worker_lifecycle_begin(&owner,text));
+        thread=CreateThread(NULL,0,natural_exit,NULL,0,NULL);CHECK(thread);
+        CHECK(WaitForSingleObject(fault_reported,5000)==WAIT_OBJECT_0);
+        CHECK(fault_reports==1 && WaitForSingleObject(thread,0)==WAIT_TIMEOUT);
+        CHECK(SetEvent(loss ? broker_lifetime : text ? broker_console_close : broker_shutdown));
+        CHECK(WaitForSingleObject(thread,5000)==WAIT_OBJECT_0);
+        CHECK(GetExitCodeThread(thread,&result) && result==(loss ? ERROR_INVALID_HANDLE : 131) && fault_reports==1);
+        CHECK(!loss || VdmExitCode==ERROR_INVALID_HANDLE);
+        CloseHandle(thread);ntvdm_worker_lifecycle_end();
+        puts("PASS natural pre-cleanup permission waits for instruction/loss; same-thread recursion reports once");
+        return 0;
+    }
+    if(argc==2 && (!strcmp(argv[1],"--lifecycle-console") || !strcmp(argv[1],"--lifecycle-wow") || !strcmp(argv[1],"--lifecycle-loss") || !strcmp(argv[1],"--lifecycle-pending"))) {
+        BOOL pending=!strcmp(argv[1],"--lifecycle-pending");
+        BOOL text=pending || !strcmp(argv[1],"--lifecycle-console");
+        lifecycle_wow=!text;
         CHECK(!ntvdm_worker_lifecycle_begin(&owner,text));
         CHECK(!owner.console_client && !delivery && !frontend_process);
         CHECK(text || !broker_console_close);
+        CHECK(!loss_callback); /* No original cleanup receiver before ready. */
+        if(pending)CHECK(SetEvent(broker_console_close));
         puts("PASS independent lifecycle reception without character resources");fflush(stdout);
+        CHECK(!ntvdm_worker_lifecycle_activate());
         if(!strcmp(argv[1],"--lifecycle-loss")) {
             expect_loss=TRUE;CHECK(loss_callback);loss_callback(loss_context);
             CHECK(!"loss callback returned without cleanup");
@@ -346,6 +389,7 @@ int main(int argc,char **argv)
     create_transport();
     if(variable_video)return variable_video_case();
     CHECK(!ntvdm_worker_lifecycle_begin(&owner,TRUE));
+    CHECK(!ntvdm_worker_lifecycle_activate());
     CHECK(!ntvdm_console_client_begin(&owner));bound=&owner;
     {
         mvdm_mouse_bridge *mouse=mvdm_softpc_mouse_current();

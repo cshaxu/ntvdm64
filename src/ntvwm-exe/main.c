@@ -18,7 +18,7 @@ PVOID CsrPortHeap;
 typedef struct native_membership {
     HWND carrier;
     ntvwm_console_guard *guard;
-    HANDLE quit,thread,capability,stop_requested,closed,admission_ready,shutdown,console_close,io_release;
+    HANDLE quit,thread,capability,stop_requested,closed,admission_ready,shutdown,console_close,io_release,server;
     HANDLE pipe,frontend,ready;
     HANDLE route_changed;
     worker_base_input_watch *input_watch;
@@ -191,30 +191,25 @@ static void ntvwm_close_for_worker_shutdown(native_membership *state)
 }
 static void request_fault_exit(native_membership *state,DWORD error)
 {
-    HANDLE server=NULL,waits[3];DWORD status,wait;
+    HANDLE waits[3];DWORD status,wait;
     close_if_service_lost(state);
     ntvwm_trace_error("worker-fault",0,error);
     /* Local cancellation stops new I/O admission, never grants teardown.
      * All reporting threads join the existing service instruction. */
-    SetEvent(state->stop_requested);
+    if(state->stop_requested)SetEvent(state->stop_requested);
     if(!InterlockedCompareExchange(&state->exit_requested,1,0)) {
         status=worker_base_request_exit();
         ntvwm_trace_error("worker-exit-request",0,status);
         close_if_service_lost(state);
     }
-    status=OpenNtBaseClientBrokerProcess(&server);
-    if(!status) {
-        waits[0]=server;waits[1]=state->console_close;waits[2]=state->shutdown;
+    {
+        waits[0]=state->server;waits[1]=state->console_close;waits[2]=state->shutdown;
         wait=WaitForMultipleObjects(3,waits,FALSE,INFINITE);
-        CloseHandle(server);
         if(wait==WAIT_OBJECT_0)service_lost(state);
         else if(wait==WAIT_OBJECT_0+1)ntvwm_close_for_console_shutdown(state);
         else if(wait==WAIT_OBJECT_0+2)ntvwm_close_for_worker_shutdown(state);
         else ntvwm_trace_error("worker-exit-wait",0,
             wait==WAIT_FAILED ? GetLastError() : ERROR_INVALID_STATE);
-    } else {
-        ntvwm_trace_error("worker-exit-service",0,status);
-        close_if_service_lost(state);
     }
     /* Another terminal owner may already be cleaning up. A failed request or
      * local wait never authorizes this thread to tear down the carrier. The
@@ -330,8 +325,7 @@ static void membership_close(native_membership *state)
     if(state->stop_requested)CloseHandle(state->stop_requested);
     if(state->closed)CloseHandle(state->closed);
     if(state->admission_ready)CloseHandle(state->admission_ready);
-    if(state->shutdown)CloseHandle(state->shutdown);
-    if(state->console_close)CloseHandle(state->console_close);
+    /* Lifecycle handles are borrowed from the connection until disconnect. */
     if(state->io_release)CloseHandle(state->io_release);
     if(state->route_changed)CloseHandle(state->route_changed);
     ZeroMemory(state,sizeof(*state));
@@ -356,8 +350,6 @@ static DWORD membership_initialize(native_membership *state)
     if(!state->quit || !state->stop_requested || !state->closed || !state->admission_ready || !state->route_changed)error=GetLastError();
     else error=ERROR_SUCCESS;
     if(!error)error=OpenNtBaseClientRegisterNativeBackend(NULL);
-    if(!error)error=worker_base_shutdown_event(&state->shutdown);
-    if(!error)error=worker_base_console_close_event(&state->console_close);
     if(!error)error=worker_base_io_release_event(&state->io_release);
     if(!error) {
         state->input_watch=worker_base_input_watch_create(state->console_close,state->shutdown,state->quit,
@@ -368,8 +360,9 @@ static DWORD membership_initialize(native_membership *state)
         state->thread=CreateThread(NULL,0,presentation_pump,state,0,NULL);
         if(!state->thread)error=GetLastError();
     }
-    if(error)membership_close(state);
-    /* Only explicit management close may acknowledge actual Console closure. */
+    /* The caller retains partial state until service disposition. In
+     * particular, do not discard its close events or join a reporting thread
+     * before that thread can receive the instruction it is awaiting. */
     return error;
 }
 
@@ -407,7 +400,7 @@ static void broker_completion_fault(void *context,DWORD error)
 static int run_gui_launcher(void)
 {
     DWORD error;
-    HANDLE shutdown=NULL,console_close=NULL;
+    HANDLE server=NULL,shutdown=NULL,console_close=NULL;
     ntvwm_executions *requests=NULL;
     ntvwm_execution_io io={0};
     ntvwm_next_command command;
@@ -418,8 +411,7 @@ static int run_gui_launcher(void)
      * carrier.  It deliberately consumes neither instruction: once a target
      * is bound, NTSRV only observes it; before binding there is no Console or
      * resident task for this one-shot process to tear down. */
-    if(!error)error=worker_base_shutdown_event(&shutdown);
-    if(!error)error=worker_base_console_close_event(&console_close);
+    if(!error)error=worker_base_controls(&server,&shutdown,&console_close);
     if(!error)error=ntvwm_executions_open(&requests);
     if(!error)ntvwm_executions_bind_io(requests,&io);
     if(!error) {
@@ -444,8 +436,6 @@ static int run_gui_launcher(void)
         }
     }
     ntvwm_executions_close(requests);
-    if(console_close)CloseHandle(console_close);
-    if(shutdown)CloseHandle(shutdown);
     error=OpenNtBaseClientFailure(error);
     worker_base_disconnect();
     HeapDestroy(CsrPortHeap);CsrPortHeap=NULL;
@@ -466,6 +456,8 @@ int wmain(int argc,WCHAR **argv)
     CsrPortHeap=HeapCreate(0,0,0);
     if(!CsrPortHeap)return GetLastError();
     error=worker_base_connect();
+    if(!error)error=worker_base_controls(&membership.server,&membership.shutdown,&membership.console_close);
+    if(!error)managed=TRUE;
     if(!error) error=ntvwm_console_initialize();
     if(!error) {
         membership.carrier=GetConsoleWindow();
@@ -478,7 +470,6 @@ int wmain(int argc,WCHAR **argv)
     if(!error) {
         ntvwm_executions_bind_io(requests,&io);
         ntvwm_executions_bind_fault(requests,broker_completion_fault,&membership);
-        managed=TRUE;
     }
     if(!error && !SetConsoleCtrlHandler(control_event,TRUE))error=GetLastError();
     while(!error) {

@@ -93,6 +93,8 @@ static int mvdm_standalone_worker_cleanup(int result)
 DWORD mvdm_standalone_worker_begin(void)
 {
     DWORD error=ERROR_INVALID_STATE;
+    int index;
+    BOOL character_io=TRUE;
 
     if (worker_started) return ERROR_ALREADY_EXISTS;
     session_initialize(&worker_session,1u);
@@ -115,6 +117,17 @@ DWORD mvdm_standalone_worker_begin(void)
     worker_shadow_registry=TRUE;
     error=worker_base_connect();
     if (error!=ERROR_SUCCESS) goto fail;
+    /* Classify only the original startup switch; no guest/global WOW state
+     * is changed before original initialization. Retain controls first. */
+    for(index=1;index<__argc;++index) {
+        const char *argument=__argv[index];
+        if((argument[0]=='-' || argument[0]=='/') &&
+            tolower((unsigned char)argument[1])=='w') {
+            character_io=FALSE;break;
+        }
+    }
+    error=ntvdm_worker_lifecycle_begin(&worker_session,character_io);
+    if(error)goto fail;
     if (!session_select_machine_backend(&worker_session,
             SESSION_MACHINE_BACKEND_SOFTPC) || !session_activate(&worker_session) ||
         !session_thread_bind_owned(&worker_session,
@@ -122,24 +135,9 @@ DWORD mvdm_standalone_worker_begin(void)
         error=ERROR_INVALID_STATE; goto fail;
     }
     worker_thread=TRUE;
-    {
-        int index;
-        BOOL character_io=TRUE;
-        /* Original BaseGetVdmConfigInfo supplies the mandatory -w switch.
-         * Match nt_reset's switch recognition without moving its classifier
-         * or changing VDMForWOW before original initialization. */
-        for(index=1;index<__argc;++index) {
-            const char *argument=__argv[index];
-            if((argument[0]=='-' || argument[0]=='/') &&
-                tolower((unsigned char)argument[1])=='w') {
-                character_io=FALSE;break;
-            }
-        }
-        error=ntvdm_worker_lifecycle_begin(&worker_session,character_io);
-        if(!error)error=worker_base_start_character_io(character_io,begin_character_io,&worker_session,NULL);
-        worker_character_io=character_io;
-        if(error)goto fail;
-    }
+    error=worker_base_start_character_io(character_io,begin_character_io,&worker_session,NULL);
+    worker_character_io=character_io;
+    if(error)goto fail;
     if (!wow_user_session_attach(&worker_wow_binding, &worker_session,
             &worker_wow_runtime)) {
         error=ERROR_INVALID_STATE; goto fail;
@@ -160,6 +158,7 @@ DWORD mvdm_standalone_worker_begin(void)
     worker_started=TRUE;
     return ERROR_SUCCESS;
 fail:
+    error=NtvdmAuthorizeExit(error);
     (void)mvdm_standalone_worker_cleanup((int)error);
     return error;
 }
@@ -176,5 +175,6 @@ DWORD mvdm_standalone_worker_completion_code(void)
 
 int mvdm_standalone_worker_finish(int result)
 {
+    result=(int)NtvdmAuthorizeExit((DWORD)result);
     return mvdm_standalone_worker_cleanup(result);
 }

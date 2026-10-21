@@ -400,12 +400,14 @@ static DWORD export_handles(const HANDLE *source,ULONG count,HANDLE **output)
 }
 error_status_t Server_Connect(PRPC_ASYNC_STATE async,handle_t binding,HANDLE process,ULONG protocol,
     unsigned char application_version[32],ULONG *server_protocol,
-    unsigned char server_version[32],VDM_CONNECTION *connection,ULONG *generation)
+    unsigned char server_version[32],VDM_CONNECTION *connection,ULONG *generation,
+    HANDLE *server,HANDLE *shutdown,HANDLE *console_close)
 {
     static const unsigned char expected[APP_VERSION_BYTES]=APP_VERSION;
     DWORD pid;
     RPC_STATUS status;
     *connection=NULL; *generation=0;
+    *server=NULL;*shutdown=NULL;*console_close=NULL;
     *server_protocol=APP_PROTOCOL_VERSION;
     memcpy(server_version,expected,sizeof(expected));
     status=basesrv_begin_connect();
@@ -422,6 +424,17 @@ error_status_t Server_Connect(PRPC_ASYNC_STATE async,handle_t binding,HANDLE pro
             __leave;
         }
         status=OpenNtBaseServiceConnect(service,process,(OPENNT_BASE_CONNECTION **)connection,generation);
+        if(status)__leave;
+        status=OpenNtBaseServiceConnectionControls(*connection,pid,*generation,shutdown,console_close);
+        if(!status && !DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),
+            server,SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,FALSE,0))status=GetLastError();
+        if(status) {
+            if(*shutdown)CloseHandle(*shutdown);
+            if(*console_close)CloseHandle(*console_close);
+            *shutdown=NULL;*console_close=NULL;
+            VDM_CONNECTION_rundown(*connection);
+            *connection=NULL;*generation=0;
+        }
     } __finally {
         basesrv_end_connect();
     }
@@ -969,7 +982,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v62_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v63_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -1000,7 +1013,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v62_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v63_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);
