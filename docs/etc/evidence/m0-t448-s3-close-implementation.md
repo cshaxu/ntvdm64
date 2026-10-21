@@ -1974,3 +1974,61 @@ with P13's removal this is -310 source/test/tool lines, excluding documentation
 and binaries. UNKNOWN_IF diagnosis, partial-initialization/fault cleanup and
 original-host pre-teardown exit permission remain fixed S3 obligations. This
 checkpoint delivers verified progress, not S3 closure or owner acceptance.
+
+## UNKNOWN_IF bounded-management feasibility
+
+P14 is pushed at e3fc09f2c with a clean worktree before this investigation.
+The remaining synchronous call is classify_missing_interface's
+RpcMgmtInqIfIds, after Connect reports RPC_S_UNKNOWN_IF. Its current distinction
+between an older interface and a draining current endpoint must remain;
+UNKNOWN_IF alone does not prove ERROR_REVISION_MISMATCH.
+
+Read-only source tracing finds the original management wire declaration in
+O:/repos.external/OpenNT-4.5/nt/private/rpc/runtime/rtifs/mgmt.idl, SHA-256
+59084245FD49A3C182F131E9902E78238CFAD9C5B3CB32A5E632CBE64F71ED15,
+Copyright (c) 1991 Microsoft Corporation. Operation zero returns a counted
+vector of interface UUID/major/minor identifiers and a separate status output.
+The adjoining nbase.idl defines those exact data fields. No RPC runtime
+implementation or private NT transport is imported. The original synchronous
+ACF cannot provide the required cancellable local call; an async client ACF
+can retain the same wire operation and use the existing completion owner.
+Microsoft's [local-interface mapping](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-rpce/c898d4cb-c22b-465f-8fe3-1631669dc30a)
+also identifies the standard management query's Windows counterpart.
+
+Research-only files under build/t448-s3/mgmt-proof retain the original notice
+and source identity, select only operation zero, spell the exact UUID/version
+data layout without the unavailable historical nbase.idl include, and generate
+an async client using MSVC /MT and MIDL /target NT100. These are disposable
+probe inputs, not product imports. The first attempt fails because the SDK
+does not provide nbase.idl; the corrected probe does not depend on an external
+source tree at build or runtime. The probe creates a private PID-qualified
+ncalrpc endpoint in its own process, registers a dummy interface, and uses the
+host RPC runtime's management provider. It touches no installed project service,
+guest, frontend or user application.
+
+Background matrix controller 23020 passes at 13:48:44 UTC on 2026-10-21:
+
+- x86 and x64: async interface-vector contents equal RpcMgmtInqIfIds output;
+  both normal queries return transport/application zero and one interface.
+- An authorization callback deliberately delays for twelve seconds. Both
+  clients return ERROR_TIMEOUT (1460) at 10,000ms through the existing async
+  cancellation/drain helper. Returned vector is null, not consumed as a reply.
+- Subsequent denied queries retain application status 5, transport zero and
+  no vector. Each test waits for its own delayed provider before final shutdown.
+- Both processes exit zero; no product binary or protocol revision changes.
+
+Retained probe hashes: query.idl
+FFEBD43D9F9C1B5E32266626DECA013382E3A331DD27135FADD9CDCCF85B2234;
+query.acf D822BDAAE7EFA4CF9A03B73D09C56A0547A7C63793F1451021DA4B5BD874B806;
+proof.c D32F4B72C79D79642CA7DDBD22D37191854165309C341505C85988A0BE0A433C.
+
+This proves the bounded standard-RPC route is feasible on the tested host,
+not that production diagnosis has been repaired. Integration must keep the
+same authenticated binding, remaining Connect deadline and original
+classification; free every returned allocation after cancellation completion.
+Admit only the declaration/client-generation slice under the existing RPC
+owner, not a new server, transport, helper process or management framework.
+Required production tests include old/current/draining interface classification,
+access denial, delayed management response, resource cleanup and shared-deadline
+exhaustion. Those production gates, partial initialization and original-host
+pre-teardown permission remain open. Published P14 is unchanged.

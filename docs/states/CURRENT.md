@@ -94,6 +94,13 @@ thirteen images were published and hash-verified at both destinations at
 UNKNOWN_IF diagnosis, partial initialization and original-host exit permission
 remain open in the linked ledger.
 
+After pushed P14 e3fc09f2c, isolated x86/x64 probes prove that the original
+standard RPC management query can use an async client on the same endpoint:
+interface data matches the public API, delayed replies cancel at ten seconds,
+and denial preserves its error. This is feasibility evidence only; production
+UNKNOWN_IF integration and its old/current/draining classification tests remain
+open. No new binary publication or S3 closure is claimed by this investigation.
+
 1. S1: whole-system ownership audit and complete transition design.
 2. S2: complete normal admission/result/handoff chain, including frontend policy and lifecycle-only WOW binding.
 3. S3: unified management-close transactions, concurrency and role-specific service-loss cleanup.
