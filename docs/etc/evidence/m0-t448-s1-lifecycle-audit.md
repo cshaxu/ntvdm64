@@ -74,17 +74,36 @@ ordering, not a newly reproduced runtime trace or attribution of every CAF failu
 Without post-loss information from NTCON, Run16 cannot distinguish that schedule
 from one where restoration already completed. A fixed sleep changes probability,
 not correctness. A service-created fence signalled by NTCON would establish the
-required ordering but is still cross-component synchronization, and therefore
-requires a precise exception to the strict communication rule. The alternatives
-and rights/lifetime limits are specified in the [working design](../operations/t448-lifecycle-plan.md).
+required ordering but is still cross-component synchronization. Owner explicitly
+rejected that proposal: Run16 must return the original service-loss error without
+depending on NTCON. The [working design](../operations/t448-lifecycle-plan.md)
+now records that decision, not a pending exception. Loss return does not assert
+that another component has finished restoring the Console.
+
+## Original failure provenance and owner correction
+
+Read-only OpenNT reference base/ntdll/csrutil.c CsrClientCallServer preserves
+failed NtRequestWaitReplyPort Status in m->ReturnValue and returns it.
+base/ntos/rtl/generr.c explicitly maps STATUS_PORT_DISCONNECTED to
+ERROR_INVALID_HANDLE; public/sdk/inc/winerror.h defines that error as 6.
+The selected vdm.c BaseSetLastNTError seam uses RtlNtStatusToDosError.
+This is evidence for the disconnected-port API error, not a universal original
+Run16 exit contract (OpenNT has no such launcher).
+
+Current project broker_lifetime_watch instead hard-exits with 1722, and
+base_rpc_client_launch_style.c rpc_failure drops its input status. Original
+BaseCheckForVDM also has failure returns that do not set LastError. The finite
+L07 repair therefore requires explicit failure propagation, not stale last-error
+reads or a blanket replacement of all failures with error 6. No runtime change
+or failure-injection verification is claimed in this source/design correction.
 
 ## Review verdict and remaining S1 boundary
 
 The existing healthy-service design can be consolidated without new helpers or
-guest changes. No runtime fix is delivered. S1 is not yet closed:
-
-1. Owner must choose the narrow loss-only recovery fence or explicitly accept
-   best-effort Console return after service loss; no silent exception.
+guest changes. No runtime fix is delivered. The pending owner choice is resolved:
+strict service-only control, independent loss cleanup and original error return;
+no recovery fence. S1 design delivery still requires documentation verification
+and reviewed commit/push, not product runtime acceptance.
 The selected original exit call-site/build-binding audit now gives the bounded
 three-file/seven-call design budget above; implementation still must prove
 the lock/reentry and failure behavior before any runtime closure.
@@ -94,3 +113,8 @@ Do not broaden this to unrelated WOW controls/messages. The existing package
 and its T447 runtime evidence remain unchanged; documentation checks cannot
 certify lifecycle behavior. Implementer/reviewer are the same person in two
 passes, with no delegated agent.
+
+The owner-correction documentation gate passed in background PID 32740,
+2026-10-21 02:02:23-02:02:41 UTC: Verify-DocumentationGovernance and diff --check,
+exit 0. This gate covers documentation only; no product build or publication
+was needed for this zero-runtime-diff correction.

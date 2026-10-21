@@ -143,28 +143,31 @@ fixed ten seconds cannot prove restoration: NTCON can be suspended longer.
 The visible mode bits alone do not prove cancellation of an old input read or
 selection of the final output buffer. A forced NTCON crash cannot certify cleanup.
 
-Two honest contracts remain. No runtime choice is made by this document:
+Owner explicitly rejected the recovery-fence exception. The selected contract
+is strict service-only control: after confirmed admitted-session loss, Run16
+cleans up its own resources and returns the applicable original error to its
+parent without waiting for NTCON or a worker. NTCON and workers independently
+perform their own loss cleanup. No peer event, peer-process wait, helper,
+replacement service, synthetic Enter or sleep-based ordering is permitted.
+Run16 failure return does not certify Console restoration. Ordering guarantees
+while NTSRV is alive remain mandatory; do not weaken those normal paths.
 
-- Strict service-only communication: both perform independent local cleanup;
-  orderly return after service death is best effort, not guaranteed. Healthy
-  service paths remain strictly ordered. This relaxes the requested loss-path
-  guarantee and needs explicit acceptance.
-- Recommended narrow recovery-fence exception: before a CUI lease begins,
-  NTSRV grants one per-lease, unnamed completion fence, modify-only to its
-  NTCON and synchronize-only to its launcher. On confirmed service loss,
-  NTCON freezes/drains its own I/O, restores and detaches before signalling;
-  Run16 waits only on that fence for the remaining recovery budget, never on a
-  peer process, and exits with service-loss status. No normal control, command,
-  membership selection or reconnect is allowed over it. Unique per-lease objects
-  prevent stale signalling; never reset/reuse a fence. Failed cleanup or timeout
-  does not signal success and remains an explicitly unguaranteed fault return.
+Error provenance is explicit: original base/ntdll/csrutil.c CsrClientCallServer
+copies a failed NtRequestWaitReplyPort status into ReturnValue and returns it.
+Original base/ntos/rtl/generr.c maps STATUS_PORT_DISCONNECTED to
+ERROR_INVALID_HANDLE (6). Represent confirmed service-session disconnection at
+the NTSTATUS compatibility seam with that disconnected-port status and preserve
+its Win32 conversion for the launcher failure return. OpenNT has no product
+Run16 CLI: returning that API error as the launcher exit code is this product's
+binding, not an original Run16 implementation. Do not map every timeout,
+rejection, startup error or task failure to 6. Preserve those distinct results.
 
-The second is still endpoint-produced cross-component synchronization, even
-though NTSRV creates the object. Calling it a service capability does not make
-it comply with an absolute no-direct-contact rule. Obtain a narrow owner choice
-before S1 closure. A new supervisor/helper, replacement NTSRV, parent-shell
-patch, synthetic Enter or sleep-based ordering is rejected. No architecture
-exception has been silently introduced.
+The current shared watcher hard-exits with RPC_S_SERVER_UNAVAILABLE (1722),
+and launch-style rpc_failure discards its input into STATUS_UNSUCCESSFUL;
+neither establishes the required original error propagation. Some original
+BaseCheckForVDM failure exits do not set LastError, so stale GetLastError is
+not evidence of the failure cause. S3 must carry the explicit transport status
+through the failure result, rather than infer it from stale thread state.
 
 ## Finite remediation and tests
 
@@ -176,7 +179,7 @@ exception has been silently introduced.
 | L04 | worker-base dispatch + NTVDM bootstrap / S2-S3 | WOW receives worker-close without character initialization; GUI ignores inapplicable command; no kind policy in worker-base |
 | L05 | NTSRV close operation / S3 | Internal/external deletion, caller dies after acceptance, normal-result/close race, one cleanup, one absolute deadline |
 | L06 | NTCON quiesce/restore / S3 | Delayed frame/read/EOF, each restoration error, join failure, no false acknowledgement, first character before Enter |
-| L07 | shared RPC notification + role cleanup / S3 | Service death/context loss at every phase; no unconditional watcher kill; selected recovery-fence contract |
+| L07 | shared RPC notification + role cleanup / S3 | Service death/context loss at every phase; explicit original status/error propagation; Run16 returns even if NTCON is stalled or absent, with no peer wait; timeout/rejection remain distinct; no unconditional watcher kill |
 | L08 | original NTVDM/WOW exit boundary / S3 | Natural/fatal/management paths retain original cleanup, no wait under guest locks, source-proven mirror exception if needed |
 | L09 | GUI launch and failure / S2-S3 | Startup-only/--wait, suspension/binding failure rollback, launcher departure; GUI target remains alive on service loss |
 | L10 | record/attachment rundown / S3-S4 | PID/handle reuse, late command/ack, abandoned reservation, released wait callbacks, no leaked resources |

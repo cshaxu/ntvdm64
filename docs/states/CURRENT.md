@@ -47,12 +47,17 @@ protocol, not publish incompatible partial upgrades.
 Owner approved the four-stage plan and execution. The
 [working design](../etc/operations/t448-lifecycle-plan.md) and
 [source audit](../etc/evidence/m0-t448-s1-lifecycle-audit.md) record the actual
-chains and finite L01-L10 remediation groups. Runtime is unchanged. S1 remains
-open pending an explicit choice for loss-only recovery synchronization versus
-best-effort loss return. Selected original natural/fatal exit sites now have a
+chains and finite L01-L10 remediation groups. Runtime is unchanged. Owner rejected
+loss-only recovery synchronization: Run16 returns the applicable original
+service-disconnection error without any NTCON/worker wait. The source audit
+records disconnected-port status conversion to ERROR_INVALID_HANDLE (6), distinct
+from other failures and from the current project watcher exit 1722. Selected
+original natural/fatal exit sites now have a
 bounded three-host-file/seven-call design budget, not an implemented mirror diff.
-Service-created endpoint-signalled fences are not silently classified as
-service-only communication. Healthy-service paths require no such exception.
+Service-created endpoint-signalled fences are prohibited, not classified as
+service-only communication. Loss return does not certify Console restoration;
+healthy-service handoff ordering remains mandatory. S1 awaits reviewed design
+delivery; this correction does not claim runtime implementation.
 
 ## Current Technical Baseline
 
