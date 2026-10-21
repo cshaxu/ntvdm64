@@ -19,7 +19,7 @@ the prior checkpoint claims that the CAF defect is universally fixed.
 | Admission And Approval | Owner approves final design and continuous sequential execution through T pre-closure acceptance; S1 design concluded and pushed at c838c332c. |
 | Objective | Implement the approved unified management-close transaction, concurrency and role-specific service-loss cleanup, preserving the S2 normal-chain candidate. |
 | Non-goals | No guest modification/rebuild; no native GUI target lifecycle ownership; no unrelated WOW32 capability work; no T closure without owner acceptance. |
-| Reference Baseline | S3 P8 notification-handle consolidation: protocol 56, thirteen images published and hash-verified at both destinations; full/incremental build, 38 service cases, twenty actual deadline scenarios, real bootstrap/loss/retirement, startup rejection/timeout rollback, wire negatives and same-package runtime gates pass within the recorded frontier. S3 exit-permission work remains open; no functional acceptance or waiver. |
+| Reference Baseline | S3 P9 worker-control consolidation: protocol 57, thirteen images published and hash-verified at both destinations; full/incremental build, 39 service cases, twenty-seven actual deadline scenarios (explicit retained/fresh evidence), real bootstrap/loss/retirement, startup rejection/timeout rollback, wire negatives and same-package runtime gates pass within the recorded frontier. S3 exit-permission work remains open; no functional acceptance or waiver. |
 | Files And ABI Surface | Run16, NTSRV service/client, common protocol, worker-base, NTCON, NTVDM and NTVWM; production-linked lifecycle tests; coherent protocol updates if required. |
 | Applicable Rules | docs/README reading set; execution, architecture, coding, document and source-policy authorities; original-owner recovery and exception registration. |
 | Verification | Source-first implementation and diff review; background x86/x64 full-component/incremental builds; affected production-linked service/frontend/launcher fixtures and normal DOS/native/WOW startup/return regression; complete package deployment and hashes; governance. |
@@ -33,17 +33,17 @@ the prior checkpoint claims that the CAF defect is universally fixed.
 
 ## Planned S sequence
 
-S3 P8 consolidates four notification getters using the existing async RPC
-mechanism and removes the obsolete worker-state retry notification.
-Protocol 56 was completely published at 09:59:34 UTC on 2026-10-21 after all
-gates, including twenty actual deadline scenarios and CAF-three input return.
-No guest or mirror changes. UNKNOWN_IF diagnosis, remaining
-worker/inherited-console controls and original-host exit permission stay open;
+S3 P9 bounds seven inherited-Console/backend/I/O control calls using existing
+async RPC, including the server-side attachment wait (not task execution).
+Protocol 57 was completely published at 10:24:32 UTC on 2026-10-21 after all
+gates, including twenty-seven actual deadline scenarios and CAF-three return.
+No guest or mirror changes. UNKNOWN_IF diagnosis, remaining launch/result
+control calls, partial initialization and original-host exit permission stay open;
 see the S3 implementation ledger. This is not S3 closure or owner acceptance.
 
-The P8 source/test diff is net -174 lines, with no new transport. Its evidence
-retains the obsolete self-registering frontend fixture failure separately from
-the passing current-admission product tests; no authentication was relaxed.
+P9 source/test net +109; combined with P8 the two deliveries net -65 lines,
+with no new transport. Evidence retains the failed new role assertion and its
+correction to the unchanged service contract; no authentication was relaxed.
 
 1. S1: whole-system ownership audit and complete transition design.
 2. S2: complete normal admission/result/handoff chain, including frontend policy and lifecycle-only WOW binding.

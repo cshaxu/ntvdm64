@@ -28,6 +28,8 @@ interface vdm_service
     [async] WorkerShutdownEvent();
     [async] WorkerConsoleCloseEvent();
     [async] WorkerIoReleaseEvent();
+    [async] AcquireConsoleContext();
+    [async] BindConsoleContext();
     /* These calls retain the same context identity. Service locks protect
      * mutable fields; RPC still excludes Close/rundown until calls finish.
      * A blocking receive must not exclude its worker's completion/sampling. */
@@ -37,15 +39,15 @@ interface vdm_service
      * native target.  These are authenticated worker-local state changes,
      * protected by the service lock; context serialization would otherwise
      * queue them behind that intentional blocking receive. */
-    RegisterNativeBackend([context_handle_noserialize] connection);
+    [async] RegisterNativeBackend([context_handle_noserialize] connection);
     BindNativeTarget([context_handle_noserialize] connection);
     CompleteWorkerChannel([context_handle_noserialize] connection);
     NativeStartupResult([context_handle_noserialize] connection);
-    TakeFrontend([context_handle_noserialize] connection);
+    [async] TakeFrontend([context_handle_noserialize] connection);
     /* The serving I/O thread must acquire/release its connection while the
      * worker's command thread is blocked in GetNextNativeCommand. Both calls
      * use the same authenticated identity and service-lock/CV protection. */
-    WorkerIoTransition([context_handle_noserialize] connection);
-    WorkerIoCheckpoint([context_handle_noserialize] connection);
-    WaitFrontend([context_handle_noserialize] connection);
+    [async] WorkerIoTransition([context_handle_noserialize] connection);
+    [async] WorkerIoCheckpoint([context_handle_noserialize] connection);
+    [async] WaitFrontend([context_handle_noserialize] connection);
 }

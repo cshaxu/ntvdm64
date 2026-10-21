@@ -464,26 +464,32 @@ error_status_t Server_WorkerFrontendCapability(PRPC_ASYNC_STATE async,handle_t b
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
 }
-error_status_t Server_AcquireConsoleContext(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_AcquireConsoleContext(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE frontend,HANDLE *capability)
 {
     DWORD pid,error;
     *capability=NULL;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceAcquireConsoleContext(connection,pid,generation,
+    if(!error)error=OpenNtBaseServiceAcquireConsoleContext(connection,pid,generation,
         frontend,capability);
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
-error_status_t Server_BindConsoleContext(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_BindConsoleContext(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE capability)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceBindConsoleContext(connection,pid,generation,capability);
+    if(!error)error=OpenNtBaseServiceBindConsoleContext(connection,pid,generation,capability);
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
-error_status_t Server_RegisterNativeBackend(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_RegisterNativeBackend(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE frontend)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceRegisterNativeBackend(connection,pid,generation,frontend);
+    if(!error)error=OpenNtBaseServiceRegisterNativeBackend(connection,pid,generation,frontend);
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
 
 error_status_t Server_WorkerShutdownEvent(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
@@ -512,18 +518,22 @@ error_status_t Server_WorkerConsoleCloseEvent(PRPC_ASYNC_STATE async,handle_t bi
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
 }
-error_status_t Server_WorkerIoCheckpoint(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_WorkerIoCheckpoint(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG reason,ULONG request,ULONG *decision)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
     *decision=WORKER_IO_KEEP;
-    return error ? error : OpenNtBaseServiceWorkerIoCheckpoint(connection,pid,generation,reason,request,decision);
+    if(!error)error=OpenNtBaseServiceWorkerIoCheckpoint(connection,pid,generation,reason,request,decision);
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
-error_status_t Server_WorkerIoTransition(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_WorkerIoTransition(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG action)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceWorkerIoTransition(connection,pid,generation,action);
+    if(!error)error=OpenNtBaseServiceWorkerIoTransition(connection,pid,generation,action);
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
 error_status_t Server_FrontendIoDisconnected(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation)
@@ -693,23 +703,27 @@ error_status_t Server_AttachFrontend(handle_t binding,VDM_CONNECTION connection,
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
     return error ? error : OpenNtBaseServiceAttachFrontend(connection,pid,generation,pipe,ready);
 }
-error_status_t Server_TakeFrontend(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_TakeFrontend(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE *pipe,HANDLE *frontend,ULONG *frontend_generation,HANDLE *ready)
 {
     DWORD pid,error;
     *pipe=NULL; *frontend=NULL; *frontend_generation=0;*ready=NULL;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceTakeFrontend(connection,pid,generation,
+    if(!error)error=OpenNtBaseServiceTakeFrontend(connection,pid,generation,
         pipe,frontend,frontend_generation,ready);
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
-error_status_t Server_WaitFrontend(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_WaitFrontend(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE *pipe,HANDLE *frontend,ULONG *frontend_generation,HANDLE *ready)
 {
     DWORD pid,error;
     *pipe=NULL;*frontend=NULL;*frontend_generation=0;*ready=NULL;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceWaitFrontend(connection,pid,generation,
+    if(!error)error=OpenNtBaseServiceWaitFrontend(connection,pid,generation,
         pipe,frontend,frontend_generation,ready);
+    (void)RpcAsyncCompleteCall(async,&error);
+    return ERROR_SUCCESS;
 }
 error_status_t Server_First(handle_t binding,VDM_CONNECTION connection,HANDLE process,ULONG generation,ULONG *first)
 {
@@ -1004,7 +1018,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v56_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v57_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -1051,7 +1065,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v56_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v57_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);

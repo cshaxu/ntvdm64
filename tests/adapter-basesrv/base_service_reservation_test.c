@@ -1080,7 +1080,7 @@ int main(int argc,char **argv)
             "--reservation-child","--native-worker","--native-backend","--frontend-root","--native-command","--frontend-unclaimed-stop",
             "--frontend-unclaimed-reconnect","--frontend-delegated","--management-late-worker-close",
             "--frontend-wait-root-loss","--frontend-wait-request-loss",
-            "--frontend-wait","--frontend-wait-worker-loss","--frontend-rundown",
+            "--frontend-wait","--frontend-wait-timeout","--frontend-wait-worker-loss","--frontend-rundown",
             "--reenter-before-return","--reenter-after-return","--reenter-nested-return",
             "--reenter-pending-command","--reenter-before-increment",
             "--launcher-completed-rundown","--launcher-completed-uncollected",
@@ -2061,11 +2061,21 @@ int main(int argc,char **argv)
             launcherGeneration,self,ready)==ERROR_INVALID_PARAMETER);
         CHECK(OpenNtBaseServiceAttachFrontend(launcher,GetCurrentProcessId(),
             launcherGeneration,pending,self)==ERROR_INVALID_PARAMETER);
-        if(argc==2 && (!strcmp(argv[1],"--frontend-wait") ||
+        if(argc==2 && (!strcmp(argv[1],"--frontend-wait") || !strcmp(argv[1],"--frontend-wait-timeout") ||
             !strcmp(argv[1],"--frontend-wait-worker-loss"))) {
+            ULONGLONG began=GetTickCount64();
             waiting.connection=worker;waiting.pid=child.dwProcessId;waiting.generation=workerGeneration;
             waitingThread=CreateThread(NULL,0,frontend_wait,&waiting,0,NULL);CHECK(waitingThread);
             CHECK(WaitForSingleObject(waitingThread,100)==WAIT_TIMEOUT);
+            if(!strcmp(argv[1],"--frontend-wait-timeout")) {
+                CHECK(WaitForSingleObject(waitingThread,13000)==WAIT_OBJECT_0);
+                CHECK(GetTickCount64()-began>=10000 && GetTickCount64()-began<14000);
+                CHECK(waiting.error==ERROR_TIMEOUT && !waiting.pipe && !waiting.frontend &&
+                    !waiting.ready && !waiting.frontend_generation);
+                CloseHandle(waitingThread);waitingThread=NULL;
+                /* A later real attachment remains consumable exactly once;
+                 * the completed timeout invocation must not steal it. */
+            }
             if(!strcmp(argv[1],"--frontend-wait-worker-loss")) {
                 CHECK(TerminateProcess(child.hProcess,23));
                 CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);

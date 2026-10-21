@@ -1549,17 +1549,21 @@ DWORD OpenNtBaseServiceWaitFrontend(OPENNT_BASE_CONNECTION *connection,DWORD pid
     DWORD generation,HANDLE *pipe,HANDLE *frontend,DWORD *frontend_generation,HANDLE *ready)
 {
     DWORD error;
+    ULONGLONG deadline=GetTickCount64()+FRONTEND_STARTUP_DEADLINE_MS;
     if (!connection) return ERROR_ACCESS_DENIED;
     EnterCriticalSection(&connection->service->lock);
     for (;;) {
+        ULONGLONG now;
         error=OpenNtBaseServiceTakeFrontend(connection,pid,generation,
             pipe,frontend,frontend_generation,ready);
         if (error!=ERROR_NOT_READY) break;
         /* Only capability arrival is awaited. Original Get already selected
          * the command; no guest command is queued, replayed or selected here.
          * Already delivered is terminal: a route cannot be consumed twice. */
+        now=GetTickCount64();
+        if(now>=deadline){error=ERROR_TIMEOUT;break;}
         if (!SleepConditionVariableCS(&connection->service->frontend_changed,
-                &connection->service->lock,INFINITE)) { error=GetLastError();break; }
+                &connection->service->lock,(DWORD)(deadline-now))) { error=GetLastError();break; }
     }
     LeaveCriticalSection(&connection->service->lock);
     return error;

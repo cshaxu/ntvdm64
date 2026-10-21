@@ -11,6 +11,7 @@
 #include "ntvwm-exe/next_command.h"
 #include "run16-exe/native_request_client.h"
 #include "common/protocol/console_io.h"
+#include "common/protocol/frontend_protocol.h"
 #include "common/rpc/management.h"
 #include "common/protocol/management.h"
 #include <base_rpc_client_internal.h>
@@ -713,6 +714,29 @@ static int ntvwm_execution_rpc(void)
     return 0;
 }
 
+/* Exercise the public facade and its output contract, not a replacement RPC. */
+static DWORD worker_control_query(unsigned mode,HANDLE token)
+{
+    HANDLE output=NULL,peer=NULL,ready=NULL;DWORD generation=0,decision=WORKER_IO_KEEP,error;
+    switch(mode) {
+    case 22:
+        error=OpenNtBaseClientAcquireConsoleContext(token,&output);break;
+    case 23:return OpenNtBaseClientBindConsoleContext(token);
+    case 24:return OpenNtBaseClientRegisterNativeBackend(token);
+    case 25:
+        error=OpenNtBaseClientWorkerIoCheckpoint(WORKER_IO_CHECKPOINT_COMPLETE,42,&decision);break;
+    case 26:return OpenNtBaseClientWorkerIoTransition(WORKER_IO_ACQUIRE);
+    case 27:error=OpenNtBaseClientTakeFrontend(&output,&peer,&generation,&ready);break;
+    case 28:error=OpenNtBaseClientWaitFrontend(&output,&peer,&generation,&ready);break;
+    default:return ERROR_INVALID_PARAMETER;
+    }
+    if(output || peer || ready || generation || decision!=WORKER_IO_KEEP) {
+        if(output)CloseHandle(output);if(peer)CloseHandle(peer);if(ready)CloseHandle(ready);
+        return ERROR_INVALID_DATA;
+    }
+    return error;
+}
+
 static int frontend_deadline(unsigned mode)
 {
     DWORD (*events[])(HANDLE *)={OpenNtBaseClientWorkerFrontendCapability,
@@ -732,10 +756,18 @@ static int frontend_deadline(unsigned mode)
     if(!suspend || !resume || (worker_exit ? OpenNtBaseClientConnectCurrent() :
         OpenNtBaseClientConnectCurrentTimeout(10000)))goto done;
     if(OpenNtBaseClientBrokerProcess(&server))goto done;
-    if(mode>=18) {
+    if(mode>=18 && mode<=21) {
         HANDLE event=(HANDLE)1;
         /* Notifications require an admitted worker identity. */
         if(events[mode-18](&event)!=ERROR_ACCESS_DENIED || event)goto done;
+    }
+    if(mode>=22) {
+        DWORD expected=mode==24 ? ERROR_INVALID_STATE : ERROR_ACCESS_DENIED;
+        capability=CreateEventW(NULL,TRUE,FALSE,NULL);
+        if(!capability)goto done;
+        error=worker_control_query(mode,capability);
+        printf("worker control %u unadmitted=%lu expected=%lu\n",mode,error,expected);
+        if(error!=expected)goto done;
     }
     if(mode==9 && !GetConsoleMode(GetStdHandle(STD_INPUT_HANDLE),&input_mode))goto done;
     if(!worker_exit && !startup && (mode<4 || mode==9) && OpenNtBaseClientStartFrontend((uint64_t)(UINT_PTR)GetConsoleWindow(),TRUE,
@@ -797,7 +829,8 @@ static int frontend_deadline(unsigned mode)
         puts("PASS: ordinary disconnect deadline and idempotent local cleanup");
         result=0;goto done;
     }
-    if(mode>=18) {
+    if(mode>=22)error=worker_control_query(mode,capability);
+    else if(mode>=18) {
         HANDLE event=(HANDLE)1;
         error=events[mode-18](&event);
         if(event)goto done;
@@ -853,6 +886,10 @@ static int frontend_deadline(unsigned mode)
     }
     began=GetTickCount64();
     if(OpenNtBaseClientWaitFrontendConsoleRestored()!=ERROR_TIMEOUT)goto done;
+    if(mode>=22) {
+        unsigned i;
+        for(i=22;i<=28;++i)if(worker_control_query(i,capability)!=ERROR_TIMEOUT)goto done;
+    }
     if(mode>=18) {
         unsigned i;
         for(i=0;i<sizeof(events)/sizeof(events[0]);++i) {
@@ -915,7 +952,7 @@ int main(int argc,char **argv)
     if (argc==2 && !lstrcmpA(argv[1],"--startup-service-timeout")) return frontend_deadline(3);
     if (argc==3 && !lstrcmpA(argv[1],"--control-service-timeout")) {
         unsigned mode=(unsigned)strtoul(argv[2],NULL,10);
-        return mode>=5 && mode<=21 && mode!=7 ? frontend_deadline(mode) : 2;
+        return mode>=5 && mode<=28 && mode!=7 ? frontend_deadline(mode) : 2;
     }
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-cancel-parent")) return reservation_parent(2);
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-cancel-killed-parent")) return reservation_parent(3);

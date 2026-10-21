@@ -187,10 +187,10 @@ static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
             TRUE,&root,&frontend,&restored),ERROR_SUCCESS);
     }
     CHECK(root && frontend && restored);
-    RPC_CHECK(Client_AcquireConsoleContext(binding,connection,self,generation+1,frontend,&execution),
+    RPC_CHECK(test_rpc_acquire_console_context(binding,connection,self,generation+1,frontend,&execution),
         ERROR_ACCESS_DENIED);
     CHECK(!execution);
-    RPC_CHECK(Client_AcquireConsoleContext(binding,connection,self,generation,frontend,&execution),
+    RPC_CHECK(test_rpc_acquire_console_context(binding,connection,self,generation,frontend,&execution),
         ERROR_SUCCESS);
     CHECK(execution && WaitForSingleObject(execution,0)==WAIT_TIMEOUT);
     CHECK(!SetEvent(execution) && GetLastError()==ERROR_ACCESS_DENIED);
@@ -231,9 +231,9 @@ static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
         CHECK(!probe && !request && WaitForSingleObject(frontend,0)==WAIT_TIMEOUT);
         puts("PASS actual RPC worker-only execution: generation/capability/payload rejection, no client pipe attachment, no submit/take without worker admission");
     }
-    RPC_CHECK(Client_BindConsoleContext(binding,connection,self,generation,frontend),ERROR_ACCESS_DENIED);
-    RPC_CHECK(Client_BindConsoleContext(binding,connection,self,generation+1,execution),ERROR_ACCESS_DENIED);
-    RPC_CHECK(Client_BindConsoleContext(binding,connection,self,generation,execution),ERROR_SUCCESS);
+    RPC_CHECK(test_rpc_bind_console_context(binding,connection,self,generation,frontend),ERROR_ACCESS_DENIED);
+    RPC_CHECK(test_rpc_bind_console_context(binding,connection,self,generation+1,execution),ERROR_ACCESS_DENIED);
+    RPC_CHECK(test_rpc_bind_console_context(binding,connection,self,generation,execution),ERROR_SUCCESS);
     CHECK(inner_launcher(frontend,frontend,CREATE_NO_WINDOW,ERROR_ACCESS_DENIED)==0);
     /* Positive nested execution belongs to the product CLI tests. */
     puts("PASS: production inner run16 rejects frontend object used as execution capability");
@@ -246,7 +246,7 @@ static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
     CHECK(WaitForSingleObject(root,15000)==WAIT_OBJECT_0);
     RPC_CHECK(test_rpc_connect(binding,self,APP_PROTOCOL_VERSION,(unsigned char *)version,
         &server_protocol,server_version,&connection,&generation),ERROR_SUCCESS);
-    RPC_CHECK(Client_BindConsoleContext(binding,connection,self,generation,execution),ERROR_ACCESS_DENIED);
+    RPC_CHECK(test_rpc_bind_console_context(binding,connection,self,generation,execution),ERROR_ACCESS_DENIED);
     RPC_CHECK(test_rpc_disconnect(binding,self,generation,&connection),ERROR_SUCCESS);
     CloseHandle(execution);CloseHandle(frontend);CloseHandle(root);
     CloseHandle(restored);CloseHandle(forged);

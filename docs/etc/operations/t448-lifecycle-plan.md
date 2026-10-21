@@ -302,6 +302,18 @@ handle; the frontend capability retains its prior provider-status contract.
 This does not change service authentication, permissions or I/O ownership, and
 does not add a deadline to intentional command receives or task execution.
 
+The remaining worker-control group comprises AcquireConsoleContext,
+BindConsoleContext, RegisterNativeBackend, WorkerIoCheckpoint,
+WorkerIoTransition and Take/WaitFrontend. Reuse async RPC and the existing
+ten-second constant; preserve the noserialize context annotations needed by
+the resident command receiver. WaitFrontend awaits an already granted I/O
+attachment, not another task: bound its server CV wait too so cancellation
+cannot retain a server invocation indefinitely. Failed acquisition leaves
+outputs empty; a timed-out mutation is not replayed or represented as rolled
+back. Service rundown owns any committed state. Actual service fixtures and
+authenticated runtime calls cover successful state/attachment behavior;
+paused-service cases cover each client deadline and immediate latched follow-up.
+
 S1 changes documentation only: zero runtime, mirror, guest or release changes.
 S2 aims for zero mirror changes, using existing project-owned adapters. The
 selected S3 orderly-exit budget is at most three original host files and seven

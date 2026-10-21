@@ -14,8 +14,8 @@ static void peer(handle_t binding,VDM_CONNECTION connection,HANDLE process,DWORD
 }
 static error_status_t result(void)
 {
-    if(mode==2)RpcRaiseException(RPC_S_CALL_FAILED);
-    return mode==1 ? ERROR_ACCESS_DENIED : ERROR_SUCCESS;
+    RpcRaiseException(mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED);
+    return ERROR_SUCCESS;
 }
 static HANDLE attachment(unsigned index)
 {
@@ -30,7 +30,7 @@ EVENT_CALL(WorkerFrontendCapability)
 EVENT_CALL(WorkerShutdownEvent)
 EVENT_CALL(WorkerConsoleCloseEvent)
 EVENT_CALL(WorkerIoReleaseEvent)
-error_status_t Client_WorkerIoCheckpoint(handle_t binding,VDM_CONNECTION connection,
+error_status_t Client_WorkerIoCheckpoint(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,unsigned long generation,unsigned long reason,unsigned long request,unsigned long *decision)
 {
     peer(binding,connection,process,generation);
@@ -38,7 +38,7 @@ error_status_t Client_WorkerIoCheckpoint(handle_t binding,VDM_CONNECTION connect
     *decision=mode==3 ? 99 : mode==4 ? WORKER_IO_KEEP : WORKER_IO_RELEASE;
     return result();
 }
-error_status_t Client_WorkerIoTransition(handle_t binding,VDM_CONNECTION connection,
+error_status_t Client_WorkerIoTransition(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,unsigned long generation,unsigned long action)
 {
     peer(binding,connection,process,generation);CHECK(action==1);return result();
@@ -50,18 +50,18 @@ error_status_t Client_FrontendIoDisconnected(PRPC_ASYNC_STATE async,handle_t bin
     RpcRaiseException(mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED);
     return ERROR_SUCCESS;
 }
-error_status_t Client_AcquireConsoleContext(handle_t binding,VDM_CONNECTION connection,
+error_status_t Client_AcquireConsoleContext(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,unsigned long generation,HANDLE frontend,HANDLE *capability)
 {
     peer(binding,connection,process,generation);CHECK(frontend==expected.process);
     *capability=attachment(0);return result();
 }
-error_status_t Client_BindConsoleContext(handle_t binding,VDM_CONNECTION connection,
+error_status_t Client_BindConsoleContext(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,unsigned long generation,HANDLE capability)
 {
     peer(binding,connection,process,generation);CHECK(capability==expected.process);return result();
 }
-error_status_t Client_RegisterNativeBackend(handle_t binding,VDM_CONNECTION connection,
+error_status_t Client_RegisterNativeBackend(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,unsigned long generation,HANDLE frontend)
 {
     peer(binding,connection,process,generation);
@@ -73,12 +73,12 @@ static error_status_t route(handle_t binding,VDM_CONNECTION connection,HANDLE pr
     peer(binding,connection,process,generation);*pipe=attachment(0);
     *frontend=attachment(1);*ready=attachment(2);*root_generation=42;return result();
 }
-error_status_t Client_TakeFrontend(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Client_TakeFrontend(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     unsigned long generation,HANDLE *pipe,HANDLE *frontend,unsigned long *root_generation,HANDLE *ready)
 {
     ++takes;return route(binding,connection,process,generation,pipe,frontend,root_generation,ready);
 }
-error_status_t Client_WaitFrontend(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Client_WaitFrontend(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
     unsigned long generation,HANDLE *pipe,HANDLE *frontend,unsigned long *root_generation,HANDLE *ready)
 {
     ++waits;return route(binding,connection,process,generation,pipe,frontend,root_generation,ready);
@@ -123,44 +123,37 @@ int main(void)
     pipe=frontend=ready=expected.process;generation=99;
     CHECK(common_rpc_take_frontend(NULL,&pipe,&frontend,&generation,&ready,TRUE)==ERROR_INVALID_STATE);
     CHECK(!pipe && !frontend && !ready && !generation && !calls);
-    for(mode=0;mode<5;++mode) {
+    for(mode=1;mode<3;++mode) {
         generation=99;
-        want=mode==0 || mode==4 ? 0 : mode==1 ? ERROR_ACCESS_DENIED :
-            mode==2 ? RPC_S_CALL_FAILED : ERROR_INVALID_DATA;
+        want=mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED;
         CHECK(common_rpc_worker_io_checkpoint(&expected,WORKER_IO_CHECKPOINT_COMPLETE,42,&generation)==want);
-        CHECK(generation==(mode==0 ? WORKER_IO_RELEASE : WORKER_IO_KEEP));
+        CHECK(generation==WORKER_IO_KEEP);
     }
-    for(mode=0;mode<3;++mode) {
-        initial=calls;want=mode==0 ? 0 : mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED;
+    for(mode=1;mode<3;++mode) {
+        initial=calls;want=mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED;
         /* Successful async replies use the actual NTSRV/runtime tests.
          * These stubs assert issuance exceptions and attachment cleanup. */
-        for(i=0;mode && i<4;++i) {
+        for(i=0;i<4;++i) {
             CHECK(events[i](&expected,&output)==want);
-            if(want){CHECK(!output);closed(1);}else {CHECK(output!=NULL);CloseHandle(output);}
+            CHECK(!output);closed(1);
         }
         CHECK(common_rpc_acquire_console_context(&expected,expected.process,&output)==want);
-        if(want){CHECK(!output);closed(1);}else {CHECK(output!=NULL);CloseHandle(output);}
+        CHECK(!output);closed(1);
         CHECK(common_rpc_bind_console_context(&expected,expected.process)==want);
         CHECK(common_rpc_register_native_backend(&expected,expected.process)==want);
         CHECK(common_rpc_worker_io_transition(&expected,1)==want);
         /* Actual RPC/CAF exercises successful completion; this stub only
          * covers issuance failure and notification-event cleanup. */
-        if(mode)CHECK(common_rpc_frontend_io_disconnected(&expected)==want);
+        CHECK(common_rpc_frontend_io_disconnected(&expected)==want);
         for(i=0;i<2;++i) {
             generation=99;
             error=common_rpc_take_frontend(&expected,&pipe,&frontend,&generation,&ready,i!=0);
             CHECK(error==want);
-            if(want){CHECK(!pipe && !frontend && !ready && !generation);closed(3);}
-            else {CHECK(pipe && frontend && ready && generation==42);
-                CloseHandle(pipe);CloseHandle(frontend);CloseHandle(ready);}
+            CHECK(!pipe && !frontend && !ready && !generation);closed(3);
         }
-        CHECK(calls==initial+(mode ? 11 : 6));
+        CHECK(calls==initial+11);
     }
-    CHECK(takes==3 && waits==3);
-    mode=3;
-    /* Capability exchanges preserve the prior provider-status contract;
-     * only the notification APIs require a non-null successful attachment. */
-    CHECK(!common_rpc_acquire_console_context(&expected,expected.process,&output) && !output);
+    CHECK(takes==2 && waits==2);
     mode=2;expected.binding=(RPC_BINDING_HANDLE)(ULONG_PTR)21;
     expected.connection=(VDM_CONNECTION)(ULONG_PTR)22;expected.generation=23;
     CHECK(common_rpc_worker_shutdown_event(&expected,&output)==RPC_S_CALL_FAILED && !output);closed(1);

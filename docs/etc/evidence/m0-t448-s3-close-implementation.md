@@ -1179,3 +1179,97 @@ build-r14b at both assets/release and O:/winnt/system32. publication-r14c.json
 retains hashes; publication-r14c-backup retains both prior coherent sets.
 Post-publication documentation review, scoped commit and push follow; S3 stays
 open. No input/test assertion was changed after the passing r14c verification.
+
+### Remaining worker-control group candidate
+
+Source trace: worker-base connection.c invokes transition/acquire, WaitFrontend,
+checkpoint and release; NTVDM console_client retains the inherited execution
+capability, Run16 frontend_scope binds it, and NTVWM registers its backend.
+Seven previously synchronous wire calls now reuse async RPC and ten-second
+cancellation. Bind/backend share one typed invocation body; facade failure
+guards preserve bounded-launcher latching and shared-worker policy. Every
+failed attachment output is cleared/closed, and checkpoint failure cannot
+publish a release decision. Existing noserialize annotations are preserved.
+
+WaitFrontend is an attachment wait after an admitted I/O grant, not the
+long-running GetNextNativeCommand/task wait. Its server CV wait was unbounded;
+it now has the existing ten-second startup deadline. A new service fixture
+waits for real expiry, verifies empty outputs, then attaches and consumes the
+route exactly once, proving the expired call does not steal later delivery.
+Seven additional paused-service cases exercise facade timeout, empty output
+and all immediate follow-ups. The actual raw-wire monitor fixture retains
+successful inherited-context binding and wrong-generation/forged negatives.
+Unit stubs test issuance exceptions and resource closure, not fake synchronous
+success for async calls. Synthetic malformed-success checkpoint/capability
+replies are not runtime-proved here; valid KEEP/RELEASE and access rules remain
+covered by service fixtures and the product I/O chain.
+
+Protocol 57 is local only until full package verification/publication. Guest
+and mirrors unchanged. Use existing build/t448-s3 budget/caches and fresh r15
+run evidence; no live input edits during builds/tests. No new transport,
+submission retry, restored hidden-window mechanism or GUI management rights.
+
+r15 build PID 12920, service/deadline PID 28556, wire PID 32496 and review
+PID 29436 started at 10:06:49 UTC on 2026-10-21. Review passed 10:07:08 UTC.
+Full thirteen-image/second incremental build passed 10:10:06 UTC, with 1398
+unchanged intermediates. Service39 passed 10:10:40 UTC, including the new
+ten-second attachment wait followed by successful exactly-once delivery.
+Runtime PID 38284, extra PID 31768 and startup PID 8624 are gated on preceding
+tests. Current source +107/-58 (net +49), tests +98/-42 (net +56): this group
+adds 105 lines for explicit bounds/output cleanup and proof; with P8 the two
+groups net -69. Do not trade assertions or ownership for a lower line count.
+No mirror change. Paused-service and runtime results are still pending.
+
+r15 deadline modes through 23 passed, but mode 24 failed its pre-fault role
+assertion: RegisterNativeBackend deliberately returns ERROR_INVALID_STATE for
+an authenticated non-worker, unlike the other six APIs' ERROR_ACCESS_DENIED.
+The new fixture assumed the latter for all seven. Source worker_registry.c
+proves the existing distinction; preserve it and print actual/expected status.
+No product input changes. r15 downstream runners correctly terminated on the
+failed prerequisite without executing runtime cases. Keep this failure visible.
+
+r15b rebuilds only the affected client fixture and reruns all seven new modes.
+Retain r15's twenty unchanged pre-existing deadline cases after checking their
+individual PASS and zero-exit files; the only intervening source edit is the
+mode>=22 pre-fault assertion/diagnostic. Reuse service39 and build-r15 based on
+unchanged inputs and thirteen package hashes, then run all wire/runtime/fault
+gates against freshly staged package-r15b. No claim that r15's whole runner
+passed; the combined evidence identifies both rounds explicitly.
+
+r15b deadline PID 25348 passed 10:19:28 UTC: seven fresh modes plus twenty
+retained unchanged modes, all actual process/RPC assertions. Governance PID
+23536 passed 10:18:07 UTC. Wire PID 31776 passed 10:20:28 UTC, including actual
+typed Console context success/forged identity/generation/root rundown, single-
+submit bootstrap and workerless grace/cancel. Mechanism tests passed 85 frontend
+and 163 worker assertions with zero handle delta. These counts are narrower
+than the retired synchronous-success mocks; actual service39 and runtime
+provide the valid behavior evidence, not the number of unit assertions.
+Final source/test net is +109 after adding the pre-fault diagnostic (+49 source,
++60 tests), or net -65 across P8 and this candidate. Runtime/fault gates remain
+pending. All current product images are build-r15; no new product build was
+needed for the isolated test expectation correction.
+
+### S3 P9 delivery
+
+Runtime PID 37504 passed 10:23:18 UTC: DOS17, WINMINE/SOL gameplay, WRITE's
+existing four-sample startup frontier, and CAF-three self-delete/echo-before-
+Enter. Extra worker failure/completed-worker loss PID 25024 passed 10:23:28;
+scope/startup rejection/timeout PID 10992 passed 10:23:43. Review PID 31668
+passed 10:21:37. No claim for WRITE editing/save, physical desktop observation
+or elimination of every intermittent WOW failure.
+
+All thirteen package-r15b images match build-r15/result.json. Installed
+process and selected DLL-holder preflight was empty; no user process was
+terminated. Publication PID 33988 passed 10:24:32 UTC on 2026-10-21, with all
+thirteen hashes equal at assets/release and O:/winnt/system32. Manifest is in
+publication-r15b.json and recoverable prior images in publication-r15b-backup.
+Post-publication documentation gate and scoped main commit/push follow.
+
+This closes the bounded seven-call implementation group, not S3. Remaining
+work is UNKNOWN_IF diagnosis; production launch/result control calls and
+retirement of unused historical facades; partial-initialization/fault cleanup;
+and the approved original-host exit-permission sites. Existing intentional
+GetNextNativeCommand/task execution waits must not be replaced with ten-second
+task termination. Guest and mirrors unchanged; no new transport or permission
+retreat. Quality review verified output ownership, immutable identity checks,
+context serialization annotations, no replay and provider CV bounded lifetime.
