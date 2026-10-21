@@ -2,15 +2,45 @@
 
 ## Current Work
 
-**No active M/T/S packet.**
+**Active: M0 T448 S1**
 
-Owner directs [T447 transfer closure](../history/m0-t447-transfer-closure.md).
-The complete unfinished scope is retained in the two leading
-[Queue](QUEUE.md) candidates: NTSRV lifecycle unification first, WOW32 execution
-continuation second. This is not full functional acceptance or proof that the
-CAF self-delete defect is universally fixed. No new production work is admitted
-until the closure checkpoint is reviewed, verified, committed and pushed with
-a clean worktree, then the owner-authorized next lifecycle task is admitted.
+T447 closed by [explicit scope transfer](../history/m0-t447-transfer-closure.md)
+at pushed commit 4d4ef4d47, with a clean worktree verified before this admission.
+Owner authorizes T448: NTSRV lifecycle authority unification. All remaining
+WOW32 work is now the first [queued successor](QUEUE.md). Neither admission nor
+the prior checkpoint claims that the CAF defect is universally fixed.
+
+## Active Packet
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T448 S1; Ordinary Mode, single person implementer/reviewer; no subagents. |
+| Candidate Proposal | [NTSRV lifecycle authority](../proposals/proposal-ntsrv-lifecycle-authority-001.md). |
+| Admission And Approval | Owner explicitly requests clean T447 closure, then admission of the lifecycle-unification task; closure pushed before this admission. |
+| Objective | Complete the source-backed ownership inventory and finite transition/implementation design for every managed role, including Console return. |
+| Non-goals | No guest modification/rebuild; no native GUI target lifecycle ownership; no unrelated WOW32 capability work; no new runtime change in this admission. |
+| Reference Baseline | 4d4ef4d47 and its coherent published thirteen-image manifest, closure evidence and inherited non-passes. |
+| Files And ABI Surface | Current, proposal and architecture/evidence documents; audit Run16, NTSRV, worker-base, NTCON, NTVDM and NTVWM control interfaces before changing ABI. |
+| Applicable Rules | docs/README reading set; execution, architecture, coding, document and source-policy authorities; original-owner recovery and exception registration. |
+| Verification | Source call-chain audit, role/transition matrix, ownership/rollback/concurrency review and documentation governance; implementation groups later require product/runtime gates. |
+| Expected Markers | Every inherited gap has one owner, finite repair scope, failure behavior and concrete acceptance case; no competing lifecycle authority. |
+| Asset Needs | Existing source and read-only original references; retained T447 fault evidence and rollback package; no new guest assets. |
+| Reporting Requirements | Distinguish verified source facts, design decisions and runtime proof; report exact remaining gaps without functional-closure claims. |
+| Stop Conditions | New observable semantic retreat, missing original-source authority or material scope expansion requires owner decision. |
+| Exit Criteria | Complete bounded design and review, governance pass, reviewed docs commit/push; S1 design closure does not certify runtime repair. |
+| Original Owner Request | Close T447 with all unfinished work assigned; prioritize a new T centralizing lifecycle authority in NTSRV; admit only after clean delivery. |
+| Similar-Issue Sweep | All normal/failure/timeout/service-loss exits; GUI/CUI separation; internal/external management; nested launchers; worker/frontend direct-control bypasses. |
+
+## Planned S sequence
+
+1. S1: whole-system ownership audit and complete transition design.
+2. S2: NTSRV-owned request completion and Run16 admission/exit protocol.
+3. S3: worker/frontend control separation, lifecycle-only WOW reception and role-specific cleanup.
+4. S4: integrated fault/concurrency and real Console handoff acceptance, full release and closure audit.
+
+The [proposal](../proposals/proposal-ntsrv-lifecycle-authority-001.md) owns the
+finite inherited gap list. Cross-group changes must preserve a coherent working
+protocol, not publish incompatible partial upgrades.
 
 ## Current Technical Baseline
 

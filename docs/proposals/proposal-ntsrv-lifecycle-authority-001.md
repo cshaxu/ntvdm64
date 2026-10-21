@@ -3,7 +3,8 @@
 ## Owner direction and scope
 
 Owner requests this package ahead of the WOW32 continuation when closing
-T447 by explicit transfer. This is a candidate until Current admits it.
+T447 by explicit transfer. Current admits this package as T448 S1 after
+the clean, pushed T447 closure checkpoint 4d4ef4d47.
 It inherits the CAF cooked-read/active-buffer evidence and current checkpoint;
 neither a passing fixture nor the checkpoint is complete lifecycle acceptance.
 

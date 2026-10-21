@@ -1,5 +1,17 @@
 # System Architecture
 
+## Approved lifecycle target boundary
+
+[T448 lifecycle design](../proposals/proposal-ntsrv-lifecycle-authority-001.md)
+is the approved target, not a claim that the current checkpoint implements it.
+NTSRV owns managed admission, frontend association, handoff and final exit
+decisions. Admitted Run16, worker-base and NTCON receive control only from
+NTSRV; the worker/frontend direct channel is user I/O only. WOW and native GUI
+have no NTCON. Native GUI targets remain read-only observations, not managed
+workers. Confirmed service loss permits role-specific local cleanup; healthy
+service task completion is a report requiring coordinated disposition.
+The proposal records startup exceptions and every inherited implementation gap.
+
 ## WOW behavior and resource ownership — T447
 
 The [responsibility rule](../rules/ARCHITECTURE.md#original-behavior-and-modern-host-responsibility-t447)
