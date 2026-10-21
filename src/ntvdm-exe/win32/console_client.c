@@ -264,6 +264,7 @@ DWORD ntvdm_console_client_begin(session *owner)
     if(error){console_client_end(client);return error;}
     client->input_watch=worker_base_input_watch_create(NULL,NULL,client->stop,
         NULL,NULL,NULL,console_input_failed,client);
+    client->mouse.input_ready=worker_base_input_watch_event(client->input_watch);
     error=client->input_watch ? console_activate(client,TRUE) : GetLastError();
     if (!error && !session_register_teardown(owner,console_client_end,client))error=ERROR_NOT_ENOUGH_MEMORY;
     if (error) {
@@ -393,7 +394,7 @@ static DWORD console_activate(console_client *client,BOOL active)
          * A failed conversion must not strand the frontend's active owner. */
         if(error) {
             DWORD release=console_activate(client,FALSE);
-            if(!release)ZeroMemory(&client->mouse,sizeof(client->mouse));
+            if(!release)mvdm_softpc_mouse_reset(&client->mouse);
             else (void)ntcon_worker_client_fail(&client->channel,release);
         }
     }
@@ -403,7 +404,7 @@ static DWORD console_activate(console_client *client,BOOL active)
      * before this call. Match that acknowledged retirement locally; the next
      * DOS activation will receive a fresh ENTER. Never reset on failed RPC. */
     if(!error && active)error=worker_base_input_watch_bind(client->input_watch,client->ready);
-    if(!error && !active)ZeroMemory(&client->mouse,sizeof(client->mouse));
+    if(!error && !active)mvdm_softpc_mouse_reset(&client->mouse);
     LeaveCriticalSection(&client->lock);
     return error;
 }

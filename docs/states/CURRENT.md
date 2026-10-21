@@ -11,6 +11,25 @@ No production binary changes accompany P21. Under the owner's standing approval
 for sequential execution, S4 is admitted for the already planned owned-code
 polling audit. S5 integrated acceptance and owner T acceptance remain required.
 
+S3 P21 is pushed as 6ad0a4ba6. The [S4 inventory](../etc/evidence/m0-t448-s4-polling-audit.md)
+records thirteen bounded categories, separating actual polling from event-woken
+predicate scans, approved policies and source-shaped timers. Principal removal
+candidates are NTVWM Console-destruction polling/final-capture retry and DOS
+input backpressure. Producer-boundary and wrapper coverage review precedes any
+runtime change. Q05 now has a local event-driven close candidate: real tests
+exposed Console PID/TID identities differing from notification sources and an
+old premature-return shortcut. Failure/repeat and grouped regression now pass.
+S4 P1 publishes Q05/Q07; Q06 and final disposition reconciliation remain open.
+
+Q05/Q07 r15 passes full thirteen-image build, second incremental (1,420
+unchanged intermediates), focused fixtures and runtime regression including
+CAF-three before-Enter echo. After fixing CURRENT's32KiB limit, post checks
+pass (142 native-command,509 presentation). P1 publishes all13 images with
+matching hashes at both destinations; publication-r15 retains P20 recovery.
+Q07 reuses existing readiness; no new event/thread or mirror change. Commit
+identity is the delivering revision. S4 is not closed; the ledger retains
+failed runs and Q06's pending bounded-acquisition simplification.
+
 Owner confirms SOL launches normally in manual testing; its remaining window
 content layout issue is retained in TODO. For this lifecycle delivery, record
 SOL startup as owner-verified, not full-gameplay/visual acceptance. This
@@ -43,30 +62,9 @@ P19 is the recoverable preceding baseline, commit
 9fdd3867325a997de18b5517dd805b62e349f0f8. Earlier progress paragraphs below retain
 historical attempts and open findings at those times, not the installed state.
 
-Connect returns service
-lifetime and authenticated worker close capabilities in its existing RPC
-response. Consumers borrow them until disconnect instead of acquiring them
-after successful connection. Failed capability export rolls back the
-connection; worker-base adds no role policy. r51 passes the full thirteen-image
-build, unchanged 1,415 intermediates and service tests. Its WOW owner fixture
-finds an incorrect mock exporting a Console event for WOW; the mock is corrected
-without relaxing its assertion. Deferred original-host callback activation and
-startup-failure authorization now pass the grouped verification and are in
-the published P19 package. Earlier progress paragraphs below describe P18
-and the retained pre-publication attempts, not the current installed set.
-
-r50 completes supplementary native failure/completion and source/governance
-checks against r48, retaining its SOL waiver. The separate CAF cmd/command/ntmon
-cases pass before-Enter echo assertions. The original failed r48 aggregate and
-r49 geometry comparisons remain unmodified.
-
-P18 publishes the protocol-62 Console-scope candidate at 2026-10-21
-17:20:19 UTC: all thirteen images match the tested package at assets/release
-and O:/winnt/system32. Full/incremental, service/owner-fault, RPC, wire,
-runtime/CAF and supplementary TSR checks pass. Owner requested this progress
-publication before further original-exit work. DIV-355 is registered; original
-guest files are unchanged. Remaining natural/fatal exit authorization and
-initialization/closing-thread coverage still block S3; this is not S3 closure.
+The linked S3 ledger retains P18/P19 delivery, r48-r51 failures and corrections,
+and Connect's atomic capability-export review. Those historical checkpoints
+are superseded by P20/P21 above, not additional active work.
 
 After P18, the startup-close correction removes NTSRV's obsolete requirement
 for native backend registration before accepting an authenticated worker exit.

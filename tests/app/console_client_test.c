@@ -393,7 +393,8 @@ int main(int argc,char **argv)
     CHECK(!ntvdm_console_client_begin(&owner));bound=&owner;
     {
         mvdm_mouse_bridge *mouse=mvdm_softpc_mouse_current();
-        CHECK(mouse && dos_active);
+        HANDLE input_ready=ntvdm_console_input_wait_handle();
+        CHECK(mouse && dos_active && mouse->input_ready==input_ready && input_ready);
         mouse->submitted=mouse->active=TRUE;
         mouse->queue.count=1;
         bind_error=ERROR_BUSY;
@@ -401,7 +402,7 @@ int main(int argc,char **argv)
         CHECK(dos_active && mouse->submitted && mouse->active && mouse->queue.count==1);
         bind_error=ERROR_SUCCESS;
         CHECK(ntvdm_console_set_active(FALSE) && !dos_active);
-        CHECK(!mouse->submitted && !mouse->active && !mouse->queue.count);
+        CHECK(!mouse->submitted && !mouse->active && !mouse->queue.count && mouse->input_ready==input_ready);
         {
             console_text_style style={0};
             console_video_description description={0};

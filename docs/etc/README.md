@@ -8,6 +8,8 @@ chains, ownership violations and the remaining bounded design work.
 distinguishes candidate changes, actual runs, failures and remaining acceptance.
 [S3 close implementation](evidence/m0-t448-s3-close-implementation.md) records
 the finite management/loss group and its actual verification state.
+[S4 polling audit](evidence/m0-t448-s4-polling-audit.md) records the owned-loop
+inventory, retention/removal decisions and eventual verification evidence.
 
 [T447 pre-closure snapshot](evidence/m0-t447-pre-closure-status.md) preserves
 the final active packet before owner-directed transfer closure. The

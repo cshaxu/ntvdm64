@@ -9,6 +9,7 @@ struct ntvwm_console_guard {
     HWND window;
     HANDLE stop,ready,thread;
     DWORD start_error,error;
+    BOOL destroyed;
 };
 /* WinEvent delivers OUTOFCONTEXT callbacks on the installing thread. Each
  * guard owns that thread; TLS binds only its callback, not worker policy. */
@@ -22,13 +23,15 @@ DWORD ntvwm_console_hide(HWND window)
     { DWORD error=GetLastError();return error ? error : ERROR_GEN_FAILURE; }
 }
 
-static void CALLBACK carrier_shown(HWINEVENTHOOK hook,DWORD event,HWND window,
+static void CALLBACK carrier_event(HWINEVENTHOOK hook,DWORD event,HWND window,
     LONG object,LONG child,DWORD thread,DWORD time)
 {
     ntvwm_console_guard *guard=event_guard;
     (void)hook;(void)thread;(void)time;
-    if(guard && event==EVENT_OBJECT_SHOW && window==guard->window &&
+    if(guard && window==guard->window &&
         object==OBJID_WINDOW && child==0) {
+        if(event==EVENT_OBJECT_DESTROY) { guard->destroyed=TRUE;return; }
+        if(event!=EVENT_OBJECT_SHOW)return;
         /* No I/O lock, capture, RPC or wait in this callback. Report a hide
          * failure only after joining, never through the capture logger here. */
         DWORD error=ntvwm_console_hide(window);
@@ -46,7 +49,7 @@ static DWORD WINAPI carrier_guard_thread(void *context)
     SetLastError(ERROR_SUCCESS);
     /* The Console window belongs to conhost, not this worker's PID. */
     hook=SetWinEventHook(EVENT_OBJECT_SHOW,EVENT_OBJECT_SHOW,NULL,
-        carrier_shown,0,0,WINEVENT_OUTOFCONTEXT);
+        carrier_event,0,0,WINEVENT_OUTOFCONTEXT);
     if(!hook) {
         guard->start_error=GetLastError();
         if(!guard->start_error)guard->start_error=ERROR_GEN_FAILURE;
@@ -480,29 +483,47 @@ DWORD ntvwm_capture_read(ntvwm_capture *capture,DWORD offset,
 
 DWORD ntvwm_console_close(void)
 {
-    HWND window=GetConsoleWindow();DWORD process=0,thread,current_process=0;
+    HWND window=GetConsoleWindow();DWORD error=0;
+    ntvwm_console_guard closing={0},*previous=event_guard;
+    HWINEVENTHOOK hook;MSG message;
     if(!window)return ERROR_INVALID_HANDLE;
-    thread=GetWindowThreadProcessId(window,&process);
-    if(!thread || !process)return ERROR_INVALID_HANDLE;
+    /* Subscribe before detach, including last-member destruction. Console
+     * notifications can originate outside the reported window PID/TID; like
+     * the hide guard, filter the exact HWND in the callback instead. */
+    closing.window=window;
+    PeekMessageW(&message,NULL,0,0,PM_NOREMOVE);
+    SetLastError(ERROR_SUCCESS);
+    hook=SetWinEventHook(EVENT_OBJECT_DESTROY,EVENT_OBJECT_DESTROY,NULL,
+        carrier_event,0,0,WINEVENT_OUTOFCONTEXT);
+    if(!hook) { error=GetLastError();return error ? error : ERROR_GEN_FAILURE; }
+    event_guard=&closing;
     /* Keep the worker outside the Console's CTRL_CLOSE broadcast, so it can
      * confirm closure. FreeConsole alone is insufficient with live clients. */
-    if(!FreeConsole())return GetLastError();
-    if(!IsWindow(window))return ERROR_SUCCESS;
-    if(GetWindowThreadProcessId(window,&current_process)!=thread || current_process!=process)
-        return ERROR_SUCCESS; /* The captured Console window has been destroyed. */
+    if(!FreeConsole()){error=GetLastError();goto done;}
+    if(!IsWindow(window))goto done;
     if(!PostMessageW(window,WM_CLOSE,0,0)) {
-        DWORD error=GetLastError();
+        error=GetLastError();
         /* Last-member detach can destroy the window between validation and
          * posting. Only disappearance of that exact window proves closure. */
-        if(!IsWindow(window) ||
-            GetWindowThreadProcessId(window,&current_process)!=thread || current_process!=process)
-            return ERROR_SUCCESS;
-        return error;
+        if(!IsWindow(window) || closing.destroyed)
+            error=ERROR_SUCCESS;
+        goto done;
     }
-    while(IsWindow(window)) {
-        if(GetWindowThreadProcessId(window,&current_process)!=thread || current_process!=process)
-            return ERROR_SUCCESS;
-        Sleep(10);
+    while(!closing.destroyed && IsWindow(window)) {
+        DWORD wait;
+        wait=MsgWaitForMultipleObjectsEx(0,NULL,INFINITE,QS_ALLINPUT,MWMO_INPUTAVAILABLE);
+        if(wait!=WAIT_OBJECT_0) {
+            error=wait==WAIT_FAILED ? GetLastError() : ERROR_INVALID_STATE;break;
+        }
+        while(PeekMessageW(&message,NULL,0,0,PM_REMOVE)) {
+            if(message.message==WM_QUIT) {
+                PostQuitMessage((int)message.wParam);error=ERROR_OPERATION_ABORTED;goto done;
+            }
+            TranslateMessage(&message);DispatchMessageW(&message);
+        }
     }
-    return ERROR_SUCCESS;
+done:
+    UnhookWinEvent(hook);
+    event_guard=previous;
+    return error;
 }

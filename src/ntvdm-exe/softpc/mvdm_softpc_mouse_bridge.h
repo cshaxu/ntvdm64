@@ -9,6 +9,7 @@ typedef struct mvdm_mouse_bridge {
     BOOL submitted,active;
     uint16_t width,height,virtual_width,virtual_height;
     int64_t remainder_x,remainder_y;
+    HANDLE input_ready; /* Borrowed from the owning input watch; never closed here. */
 } mvdm_mouse_bridge;
 
 /* Worker Console client owns storage; original event/CPU threads access only
@@ -30,4 +31,12 @@ BOOL mvdm_softpc_mouse_next(mvdm_mouse_bridge *,mvdm_mouse_input_sample *);
  * consumed route. Later ENTER/MOVE records and producer state survive. */
 void mvdm_softpc_mouse_leave(mvdm_mouse_bridge *);
 void mvdm_softpc_mouse_cancel(mvdm_mouse_bridge *);
+/* Quiesced ownership handoff: clear route state, preserve the borrowed wake. */
+static __inline void mvdm_softpc_mouse_reset(mvdm_mouse_bridge *state)
+{
+    if(state) {
+        HANDLE ready=state->input_ready;
+        ZeroMemory(state,sizeof(*state));state->input_ready=ready;
+    }
+}
 #endif

@@ -92,6 +92,41 @@ int main(void)
     submit(&s,CONSOLE_MOUSE_LEAVE,0,0,0,0,0,ERROR_SUCCESS);
     mvdm_softpc_mouse_cancel(&s);
     assert(!memcmp(&s,&other,sizeof(s)));
+    /* Borrow the existing input-watch wake, with no additional event/thread.
+     * Large movement fragments do not free a slot; cancellation does. */
+    s.input_ready=CreateEventW(NULL,TRUE,TRUE,NULL);
+    assert(s.input_ready);
+    for(i=0;i<MVDM_MOUSE_INPUT_CAPACITY;++i) {
+        mvdm_mouse_input_sample sample={0};
+        sample.action=CONSOLE_MOUSE_MOVE;sample.buttons=i&1;
+        sample.dx=i ? 0 : 40000;
+        assert(mvdm_mouse_input_push(&s.queue,&sample));
+    }
+    assert(!mvdm_softpc_mouse_capacity(&s));
+    assert(WaitForSingleObject(s.input_ready,0)==WAIT_TIMEOUT);
+    take(&s,CONSOLE_MOUSE_MOVE,SHRT_MAX,0,0);
+    assert(!mvdm_softpc_mouse_capacity(&s));
+    assert(WaitForSingleObject(s.input_ready,0)==WAIT_TIMEOUT);
+    take(&s,CONSOLE_MOUSE_MOVE,40000-SHRT_MAX,0,0);
+    assert(mvdm_softpc_mouse_capacity(&s)==1);
+    assert(WaitForSingleObject(s.input_ready,0)==WAIT_OBJECT_0);
+    {
+        mvdm_mouse_input_sample sample={0};
+        sample.action=CONSOLE_MOUSE_LEAVE;
+        assert(mvdm_mouse_input_push(&s.queue,&sample));
+    }
+    assert(!mvdm_softpc_mouse_capacity(&s));
+    assert(WaitForSingleObject(s.input_ready,0)==WAIT_TIMEOUT);
+    mvdm_softpc_mouse_cancel(&s);
+    assert(mvdm_softpc_mouse_capacity(&s)==MVDM_MOUSE_INPUT_CAPACITY);
+    assert(WaitForSingleObject(s.input_ready,0)==WAIT_OBJECT_0);
+    {
+        HANDLE ready=s.input_ready;
+        mvdm_softpc_mouse_reset(&s);
+        assert(s.input_ready==ready && !s.queue.count && !s.active && !s.submitted);
+        CloseHandle(ready);s.input_ready=NULL;
+    }
+    puts("PASS pressure wake: full reset, partial delivery blocked, freed slot and cancellation signalled, handoff retains borrowed handle");
     puts("PASS relative bridge: scale/remainders, buttons, rapid re-entry, atomic rejection, independent state, cancellation; mocked ICA/IRQ only");
     return 0;
 }

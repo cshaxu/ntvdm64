@@ -486,7 +486,7 @@ BOOL ntvdm_console_read_pc_input(HANDLE input, PINPUT_RECORD records,
      * its original suspend/APC handling remains reachable. Never wait while
      * holding ICA or drop/merge motion across a button or direction change. */
     limit=min((DWORD)ARRAYSIZE(raw),mvdm_softpc_mouse_capacity(mvdm_softpc_mouse_current()));
-    if (!limit) { Sleep(1); return TRUE; }
+    if (!limit) return TRUE;
     if (!ReadConsoleInputExW(input, raw, limit, &available, flags))
         return FALSE;
     for (index = 0u; index < available; ++index) {

@@ -14,6 +14,10 @@ DWORD mvdm_softpc_mouse_capacity(mvdm_mouse_bridge *state)
     if(state) {
         host_ica_lock();
         capacity-=state->queue.count;
+        /* Input watch has already latched readiness until the next read ack.
+         * Clear it under the same ICA lock as dequeue, so a freed slot cannot
+         * race this reset. Original nt_event_loop still waits for suspend/APC. */
+        if(!capacity && state->input_ready)ResetEvent(state->input_ready);
         host_ica_unlock();
     }
     return capacity;
@@ -58,12 +62,16 @@ BOOL mvdm_softpc_mouse_active(const mvdm_mouse_bridge *state)
 { return state && state->active; }
 BOOL mvdm_softpc_mouse_next(mvdm_mouse_bridge *state,mvdm_mouse_input_sample *sample)
 {
+    BOOL full;
     if(!state || !sample)return FALSE;
+    full=state->queue.count==MVDM_MOUSE_INPUT_CAPACITY;
     if(!mvdm_mouse_input_take(&state->queue,sample)) {
         if(!state->active)return FALSE;
         ZeroMemory(sample,sizeof(*sample));
         sample->buttons=state->queue.delivered_buttons;sample->action=CONSOLE_MOUSE_MOVE;
     }
+    if(full && state->queue.count<MVDM_MOUSE_INPUT_CAPACITY && state->input_ready)
+        SetEvent(state->input_ready);
     if(sample->action==CONSOLE_MOUSE_ENTER)state->active=TRUE;
     /* LEAVE is returned while active, allowing the original CPU-thread cursor
      * owner to restore its saved background before retiring this route. */
@@ -75,11 +83,13 @@ void mvdm_softpc_mouse_cancel(mvdm_mouse_bridge *state)
 {
     if(state) {
         BOOL submitted=state->submitted;
+        BOOL full=state->queue.count==MVDM_MOUSE_INPUT_CAPACITY;
         /* Original IRQ cancellation discards pending input, not the frontend
          * connection. Its already accepted ENTER/LEAVE still determines the
          * route of records that remain upstream. Clear deltas/buttons without
          * requiring the frontend to send a second ENTER after a guest reset. */
-        ZeroMemory(state,sizeof(*state));
+        mvdm_softpc_mouse_reset(state);
         state->submitted=state->active=submitted;
+        if(full && state->input_ready)SetEvent(state->input_ready);
     }
 }
