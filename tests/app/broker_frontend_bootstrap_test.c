@@ -257,7 +257,7 @@ int wmain(int argc,WCHAR **argv)
     error=OpenNtBaseClientStartFrontend(0,TRUE,&root,&capability,&restored);
     if(error!=ERROR_INVALID_PARAMETER || root || capability || restored){puts("FAIL invalid Console accepted");goto done;}
     error=OpenNtBaseClientWaitFrontendConsoleRestored();
-    if(error!=ERROR_ACCESS_DENIED){puts("FAIL unrequested return accepted");goto done;}
+    if(error){puts("FAIL request without a Console lease required a return");goto done;}
     started=GetTickCount64();
     error=OpenNtBaseClientStartFrontend((uint64_t)(UINT_PTR)GetConsoleWindow(),TRUE,
         &root,&capability,&restored);

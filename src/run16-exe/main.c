@@ -358,14 +358,6 @@ done:
     if (task_completed && (binary & ~BINARY_SUBTYPE_MASK)==BINARY_TYPE_DOS) {
         DWORD handoff=run16_frontend_scope_resume_parent(frontend_scope);
         if(handoff)result=handoff;
-        else {
-            handoff=run16_frontend_scope_retire(frontend_scope);
-            if(handoff)result=handoff;
-            else {
-                handoff=run16_frontend_scope_restore_parent(frontend_scope);
-                if(handoff)result=handoff;
-            }
-        }
     }
     return result;
 }
@@ -385,7 +377,6 @@ static DWORD launch_native(run16_frontend_scope *scope,PCWSTR application,PCWSTR
     WCHAR directory[32768];
     PWSTR environment=NULL;
     DWORD error,result=ERROR_PROCESS_ABORTED,mode,i,length;
-    BOOL text;
     if(!scope)return ERROR_INVALID_PARAMETER;
     length=GetCurrentDirectoryW(ARRAYSIZE(directory),directory);
     if(!length || length>=ARRAYSIZE(directory))return ERROR_PATH_NOT_FOUND;
@@ -408,24 +399,11 @@ static DWORD launch_native(run16_frontend_scope *scope,PCWSTR application,PCWSTR
     for(i=0;i<3;++i)
         if(GetConsoleMode(start.standard[i],&mode))start.console_mask|=1u<<i;
     if(!OpenNtBaseNativeLaunchTypeIsValid(native_type))return ERROR_BAD_EXE_FORMAT;
-    text=OpenNtBaseNativeLaunchTypeIsText(native_type);
     error=run16_frontend_scope_launch_native(scope,&start,native_type);
     if(!error && !wait)result=ERROR_SUCCESS;
     if(!error && wait) {
         DWORD target_completed=0;
         DWORD completion=run16_frontend_scope_wait_native(scope,&result,&target_completed);
-        /* The direct native target can have completed even when its final
-         * presentation fence reports an error. In either case, a root
-         * launcher must not hand an outer CMD its Console until NTCON has
-         * reselected the canonical buffer and restored input mode. A live target has not
-         * completed the handoff and retains the existing failure path. */
-        if(text && target_completed) {
-            DWORD handoff=run16_frontend_scope_retire(scope);
-            if(!handoff) {
-                handoff=run16_frontend_scope_restore_parent(scope);
-            }
-            if(!completion)completion=handoff;
-        }
         error=completion;
     }
 done:
@@ -594,6 +572,10 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
                 options.window_style : run16_frontend_scope_window_style(frontend_scope));
             if (!result) result = launch_vdm(binary, application, launch_command,frontend_scope,initial_console_only,options.wait);
         }
+        {
+            DWORD completion=run16_frontend_scope_finish(frontend_scope);
+            if(!result)result=completion;
+        }
         run16_frontend_scope_end(frontend_scope);frontend_scope=NULL;
         OpenNtBaseClientDisconnectCurrent();
         if (!HeapDestroy(CsrPortHeap) && !result)
@@ -625,6 +607,10 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
     if(!result)result=run16_frontend_scope_begin_gui(&frontend_scope);
     if(!result)result=launch_native(frontend_scope,image_resolved ? application : image_argument,launch_command,native_type,options.wait,&options);
 done:
+    {
+        DWORD completion=run16_frontend_scope_finish(frontend_scope);
+        if(!result)result=completion;
+    }
     run16_frontend_scope_end(frontend_scope);
     OpenNtBaseClientDisconnectCurrent();
     LocalFree(arguments);

@@ -2,6 +2,11 @@
 
 ## Objective and admission
 
+Owner-directed transfer closure supersedes the admission statements below.
+See [T447 closure](../history/m0-t447-transfer-closure.md) and the complete
+[WOW32 successor](proposal-wow32-execution-continuation-001.md). This document
+retains the original scope and evidence; it no longer admits active work.
+
 Current disposition: S2 P16 closes the frozen foundations with the owner's
 explicit isolated common-dialog risk acceptance; see
 [closure](../history/m0-t447-s2-foundation-closure.md). Earlier pending S2

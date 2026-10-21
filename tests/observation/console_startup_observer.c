@@ -30,6 +30,29 @@ typedef CONTEXT observer_guest_context;
 
 static char control_event_report[MAX_PATH];
 static DWORD scripted_window_frontend;
+static HANDLE observer_pty_input;
+static BOOL observer_pty_write(const char *text,DWORD bytes)
+{
+    DWORD written=0;
+    if(GetEnvironmentVariableA("MVDM_OBSERVER_PTY_WIN32_KEYS",NULL,0)) {
+        DWORD i;
+        /* Windows Terminal's documented Win32-input-mode wire format:
+         * CSI Vk;Sc;Uc;Kd;Cs;Rc _. Test data only, no terminal source import. */
+        for(i=0;i<bytes;++i) {
+            SHORT mapped=VkKeyScanA(text[i]);WORD vk=(WORD)(mapped&255);
+            DWORD scan=MapVirtualKeyA(vk,MAPVK_VK_TO_VSC),state=NUMLOCK_ON;
+            char wire[128];int n;
+            if(mapped==-1)return FALSE;
+            if(mapped&0x100)state|=SHIFT_PRESSED;
+            n=snprintf(wire,sizeof(wire),"\x1b[%u;%lu;%u;1;%lu;1_\x1b[%u;%lu;%u;0;%lu;1_",
+                vk,scan,(unsigned char)text[i],state,vk,scan,(unsigned char)text[i],state);
+            if(n<=0 || n>=(int)sizeof(wire) ||
+               !WriteFile(observer_pty_input,wire,(DWORD)n,&written,NULL) || written!=(DWORD)n)return FALSE;
+        }
+        return TRUE;
+    }
+    return WriteFile(observer_pty_input,text,bytes,&written,NULL) && written==bytes;
+}
 static ULONGLONG mouse_burst_started;
 static DWORD mouse_burst_elapsed;
 /* Optional test-only timeline. Buffer observations until target completion:
@@ -893,7 +916,9 @@ static BOOL observer_console_char_echoes(HANDLE input,HANDLE output,char value,
     records[0].Event.KeyEvent.uChar.AsciiChar=value;
     records[0].Event.KeyEvent.dwControlKeyState=NUMLOCK_ON;
     records[1]=records[0];records[1].Event.KeyEvent.bKeyDown=FALSE;
-    if(!WriteConsoleInputA(input,records,2,&written) || written!=2)return FALSE;
+    if(observer_pty_input) {
+        if(!observer_pty_write(&value,1))return FALSE;
+    } else if(!WriteConsoleInputA(input,records,2,&written) || written!=2)return FALSE;
     deadline=GetTickCount64()+timeout_ms;*visible_out=FALSE;
     do {
         if(GetConsoleScreenBufferInfo(output,&after) &&
@@ -907,6 +932,7 @@ static BOOL observer_console_char_echoes(HANDLE input,HANDLE output,char value,
 static BOOL observer_console_enter(HANDLE input)
 {
     INPUT_RECORD records[2]={0};DWORD written;
+    if(observer_pty_input)return observer_pty_write("\r",1);
     records[0].EventType=KEY_EVENT;records[0].Event.KeyEvent.bKeyDown=TRUE;
     records[0].Event.KeyEvent.wRepeatCount=1;records[0].Event.KeyEvent.wVirtualKeyCode=VK_RETURN;
     records[0].Event.KeyEvent.wVirtualScanCode=0x1c;
@@ -1052,6 +1078,8 @@ static BOOL write_console_input_text(HANDLE input, const char *text, DWORD line_
 
     if (input == NULL || input == INVALID_HANDLE_VALUE || text == NULL)
         return FALSE;
+    if(observer_pty_input && !scripted_window_frontend && !line_delay_ms)
+        return observer_pty_write(text,(DWORD)strlen(text));
     for (cursor = text; *cursor != '\0'; ++cursor) {
         INPUT_RECORD records[4];
         DWORD written = 0;
@@ -1297,6 +1325,17 @@ static BOOL console_row_has_marker(const char *row, DWORD count,
     } else {
         marker_length = strlen(marker);
         found = strstr(row, marker);
+        /* DOS canonicalizes drive paths to uppercase; CMD may preserve the
+         * on-disk spelling. Compare only complete drive-qualified prompt
+         * markers case-insensitively. Text witnesses remain exact. */
+        if(found == NULL && marker_length >= 3 && marker[1] == ':' &&
+            marker[marker_length - 1] == '>' && marker_length <= count) {
+            for(index=0;index<=count-marker_length;++index) {
+                if(!_strnicmp(row+index,marker,marker_length)) {
+                    found=row+index;break;
+                }
+            }
+        }
         if (found == NULL) return FALSE;
         if (!marker_length || marker[marker_length - 1] != '>') return TRUE;
         found += marker_length;
@@ -1725,6 +1764,15 @@ int main(int argc, char **argv)
     }
     if (GetEnvironmentVariableA("MVDM_OBSERVER_PRIVATE_DESKTOP", NULL, 0))
         return private_desktop_observer();
+    if (GetEnvironmentVariableA("MVDM_OBSERVER_OWN_JOB", NULL, 0)) {
+        JOBOBJECT_EXTENDED_LIMIT_INFORMATION limits={0};
+        HANDLE owned_job=CreateJobObjectW(NULL,NULL);
+        limits.BasicLimitInformation.LimitFlags=JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE;
+        if(!owned_job || !SetInformationJobObject(owned_job,JobObjectExtendedLimitInformation,
+            &limits,sizeof(limits)) || !AssignProcessToJobObject(owned_job,GetCurrentProcess()))return 65;
+        /* Deliberately retained until observer exit: its OS handle cleanup
+         * kills only this test process and its descendants, never Terminal. */
+    }
     /* App derives SystemRoot from the image directory itself.  Keep this
      * observer report aligned with that original-layout package contract;
      * argv[2] is the stage and product working directory. */
@@ -1738,8 +1786,16 @@ int main(int argc, char **argv)
      * CONOUT$ handles but no HWND, which is deliberately not a valid product
      * frontend.  Always detach first, including the ordinary interactive
      * case, so every observation has the same isolated conhost baseline. */
-    (void)FreeConsole();
-    if (!AllocConsole()) return 65;
+    if(!GetEnvironmentVariableA("MVDM_OBSERVER_OWNED_PTY",NULL,0)) {
+        (void)FreeConsole();
+        if (!AllocConsole()) return 65;
+    } else {
+        char handle_text[32];
+        if(GetEnvironmentVariableA("MVDM_OBSERVER_PTY_INPUT",handle_text,sizeof(handle_text))) {
+            observer_pty_input=(HANDLE)(ULONG_PTR)_strtoui64(handle_text,NULL,16);
+            if(!SetHandleInformation(observer_pty_input,HANDLE_FLAG_INHERIT,0))return 65;
+        }
+    }
     if (GetEnvironmentVariableA("MVDM_OBSERVER_RECORD_CONTROL", NULL, 0)) {
         if (snprintf(control_event_report, sizeof(control_event_report),
                      "%s.control.bin", argv[3]) < 0 ||
@@ -1752,6 +1808,11 @@ int main(int argc, char **argv)
                          FILE_SHARE_READ | FILE_SHARE_WRITE, &inherit,
                          OPEN_EXISTING, 0, NULL);
     if (input == INVALID_HANDLE_VALUE || output == INVALID_HANDLE_VALUE) return 66;
+    if(GetEnvironmentVariableA("MVDM_OBSERVER_INITIAL_MOUSE_INPUT",NULL,0)) {
+        DWORD initial_mode;
+        if(!GetConsoleMode(input,&initial_mode) ||
+           !SetConsoleMode(input,initial_mode|ENABLE_MOUSE_INPUT))return 66;
+    }
 
     clear_console(output);
     /* A private desktop can inherit a 53x15 Console even though Setup's
@@ -2152,6 +2213,13 @@ int main(int argc, char **argv)
         snprintf(path,sizeof(path),"%s.initial-console.txt",argv[3]);initial=fopen(path,"w");
         if(!initial)return 70;
         fprintf(initial,"console-window=%p\n",(void *)GetConsoleWindow());
+        {
+            DWORD host_pid=0,length=MAX_PATH;char host_path[MAX_PATH]={0};HANDLE host_process;
+            GetWindowThreadProcessId(GetConsoleWindow(),&host_pid);
+            host_process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION,FALSE,host_pid);
+            if(host_process){QueryFullProcessImageNameA(host_process,0,host_path,&length);CloseHandle(host_process);}
+            fprintf(initial,"observer-pid=%lu console-window-owner-pid=%lu console-window-owner=%s\n",GetCurrentProcessId(),host_pid,host_path);
+        }
         fprintf(initial,"buffer=%d,%d viewport=%d,%d,%d,%d maximum=%d,%d font=%d,%d\n",
             info.dwSize.X,info.dwSize.Y,info.srWindow.Left,info.srWindow.Top,
             info.srWindow.Right,info.srWindow.Bottom,info.dwMaximumWindowSize.X,info.dwMaximumWindowSize.Y,
@@ -2241,8 +2309,10 @@ int main(int argc, char **argv)
             if(outer_length>=sizeof(outer_command) ||
                !console_screen_fingerprint(output,&fingerprint) ||
                !write_console_input_text(input,outer_command,0,output,NULL) ||
-               !wait_for_fresh_console_prompt(output,OBSERVATION_INPUT_READY_TIMEOUT_MS,
-                                               scripted_console_input_marker,fingerprint)) caf_ready=FALSE;
+               !(GetEnvironmentVariableA("MVDM_OBSERVER_CAF_DIRECT_NTMON",NULL,0) ?
+                 wait_input_milestone(output,NULL,"NTVDM Task Monitor",NULL,FALSE) :
+                 wait_for_fresh_console_prompt(output,OBSERVATION_INPUT_READY_TIMEOUT_MS,
+                                               scripted_console_input_marker,fingerprint))) caf_ready=FALSE;
         }
         if(!caf_ready || !console_caf_return(input,argv[3],&frontend)) {
             char path[MAX_PATH];
@@ -2253,7 +2323,7 @@ int main(int argc, char **argv)
             report_failed=1;
         }
         if(!report_failed && GetEnvironmentVariableA("MVDM_OBSERVER_CAF_EXIT_IN_WINDOW",NULL,0)) {
-            DWORD fingerprint=0,mode_after_exit=0;BOOL exit_returned=FALSE,exit_echo=FALSE;
+            DWORD fingerprint=0,mode_after_exit=0;BOOL exit_returned=FALSE,exit_echo=FALSE,frontend_alive=FALSE;
             COORD exit_position={0,0};char path[MAX_PATH];
             if(console_screen_fingerprint(output,&fingerprint) &&
                write_console_input_text(input,"exit\r",0,output,NULL)) {
@@ -2262,30 +2332,34 @@ int main(int argc, char **argv)
                  * resume reading the borrowed Console. */
                 scripted_window_frontend=0;
                 exit_returned=wait_for_fresh_console_prompt(output,
-                    OBSERVATION_INPUT_READY_TIMEOUT_MS,"O:\\WINNT>",fingerprint);
+                    OBSERVATION_INPUT_READY_TIMEOUT_MS,scripted_console_input_marker,fingerprint);
                 if(exit_returned) {
+                    HANDLE natural_frontend_process=OpenProcess(SYNCHRONIZE,FALSE,frontend);
+                    if(natural_frontend_process){frontend_alive=WaitForSingleObject(natural_frontend_process,0)==WAIT_TIMEOUT;CloseHandle(natural_frontend_process);}
                     (void)GetConsoleMode(input,&mode_after_exit);
                     (void)observer_console_char_echoes(input,output,'q',750,
                                                         &exit_echo,&exit_position);
-                    (void)observer_console_enter(input);
+                    /* Remove the test character; never execute a PATH q.cmd. */
+                    (void)write_console_input_text(input,"\b",0,output,NULL);
                 }
             }
             snprintf(path,sizeof(path),"%s.caf.txt",argv[3]);caf_report=fopen(path,"a");
             if(caf_report) {
-                fprintf(caf_report,"caf-natural-exit-returned=%d input-mode=0x%08lx echo=%d cell=%d,%d\n",
+                fprintf(caf_report,"caf-natural-exit-returned=%d input-mode=0x%08lx echo=%d cell=%d,%d frontend-alive=%d\n",
                     exit_returned,(unsigned long)mode_after_exit,exit_echo,
-                    exit_position.X,exit_position.Y);
+                    exit_position.X,exit_position.Y,frontend_alive);
                 fclose(caf_report);
             }
             (void)write_console_input_text(input,"exit\r",0,output,NULL);
-            if(!exit_returned || !exit_echo)report_failed=1;
+            if(!exit_returned || !exit_echo || !frontend_alive)report_failed=1;
         }
         /* The ordinary external runner is intentionally not trusted to share
          * our ncalrpc scope.  When requested, make the exact NTMON-equivalent
          * close from this Console-owning process and then observe the outer
          * cmd reader's single-character echo before and after Enter. */
         if(!report_failed && !GetEnvironmentVariableA("MVDM_OBSERVER_CAF_EXIT_IN_WINDOW",NULL,0) &&
-           GetEnvironmentVariableA("MVDM_OBSERVER_MANAGEMENT_CLOSE_TOOL",NULL,0)) {
+           (GetEnvironmentVariableA("MVDM_OBSERVER_MANAGEMENT_CLOSE_TOOL",NULL,0) ||
+            GetEnvironmentVariableA("MVDM_OBSERVER_CAF_SELF_NTMON",NULL,0))) {
             ULONGLONG deadline=GetTickCount64()+15000;
             DWORD members[32],member_count=0,queue_before=0,queue_after_key=0,queue_after_enter=0;
             HANDLE active_output=INVALID_HANDLE_VALUE;
@@ -2293,11 +2367,60 @@ int main(int argc, char **argv)
             if(GetEnvironmentVariableA("MVDM_OBSERVER_CAF_RETURN_BEFORE_CLOSE",NULL,0) &&
                !observer_return_caf_window(frontend,argv[3])) report_failed=1;
             frontend_process=OpenProcess(SYNCHRONIZE,FALSE,frontend);
-            close_ok=observer_management_console_close(argv[3],frontend);
+            if(GetEnvironmentVariableA("MVDM_OBSERVER_CAF_SELF_NTMON",NULL,0)) {
+                INPUT_RECORD keys[2]={0};char expected[80];
+                BOOL paced=GetEnvironmentVariableA("MVDM_OBSERVER_SELF_PACE",NULL,0)!=0;
+                if(paced)Sleep(1500); /* Diagnostic human-paced control only. */
+                /* Exercise the real in-worker UI caller, not the external
+                 * RPC control. Validate the exact selected Console before Y. */
+                snprintf(expected,sizeof(expected),"End Console %lu [Y/N]?",frontend);
+                close_ok=(GetEnvironmentVariableA("MVDM_OBSERVER_CAF_DIRECT_NTMON",NULL,0) ||
+                    write_console_input_text(input,"ntmon\r",0,output,NULL)) &&
+                    wait_input_milestone(output,NULL,"NTVDM Task Monitor",NULL,FALSE);
+                if(paced && close_ok)Sleep(1500);
+                keys[0].EventType=KEY_EVENT;keys[0].Event.KeyEvent.bKeyDown=TRUE;
+                keys[0].Event.KeyEvent.wRepeatCount=1;
+                keys[0].Event.KeyEvent.wVirtualKeyCode=VK_DELETE;
+                keys[0].Event.KeyEvent.wVirtualScanCode=0x53;
+                keys[0].Event.KeyEvent.dwControlKeyState=NUMLOCK_ON|ENHANCED_KEY;
+                keys[1]=keys[0];keys[1].Event.KeyEvent.bKeyDown=FALSE;
+                if(close_ok)close_ok=write_window_key_records(keys,2) &&
+                    wait_input_milestone(output,NULL,expected,NULL,FALSE);
+                if(paced && close_ok)Sleep(1500);
+                if(close_ok && observer_pty_input &&
+                   GetEnvironmentVariableA("MVDM_OBSERVER_DETACH_BEFORE_CLOSE",NULL,0))
+                    close_ok=FreeConsole();
+                if(close_ok)close_ok=write_console_input_text(input,"y",0,output,NULL);
+                { char path[MAX_PATH];FILE *self_report;
+                  snprintf(path,sizeof(path),"%s.caf.txt",argv[3]);
+                  self_report=fopen(path,"a");
+                  if(self_report){fprintf(self_report,"self-ntmon-confirmed=%d target=%lu\n",close_ok,frontend);fclose(self_report);} }
+            } else close_ok=observer_management_console_close(argv[3],frontend);
             if(frontend_process) {
                 if(WaitForSingleObject(frontend_process,15000)!=WAIT_OBJECT_0)close_ok=FALSE;
                 CloseHandle(frontend_process);
             } else close_ok=FALSE;
+            if(close_ok)scripted_window_frontend=0; /* Subsequent input belongs to outer CMD. */
+            if(observer_pty_input && GetEnvironmentVariableA("MVDM_OBSERVER_DETACH_BEFORE_CLOSE",NULL,0)) {
+                char path[MAX_PATH];FILE *detached_report;
+                snprintf(path,sizeof(path),"%s.caf.txt",argv[3]);
+                detached_report=fopen(path,"a");
+                if(detached_report) {
+                    fprintf(detached_report,"detached-close-complete=%d q-tick=%llu\n",close_ok,GetTickCount64());fflush(detached_report);
+                    if(close_ok) {
+                        observer_pty_write("q",1);Sleep(750);
+                        fprintf(detached_report,"erase-enter-tick=%llu\n",GetTickCount64());fflush(detached_report);
+                        observer_pty_write("\b\r",2);Sleep(250);
+                        fprintf(detached_report,"r-tick=%llu\n",GetTickCount64());fflush(detached_report);
+                        observer_pty_write("r",1);Sleep(750);
+                        fprintf(detached_report,"cleanup-tick=%llu\n",GetTickCount64());
+                        observer_pty_write("\bexit\r",6);
+                    }
+                    fclose(detached_report);
+                }
+                if(!close_ok)report_failed=1;
+                goto managed_close_done;
+            }
             while(GetTickCount64()<deadline) {
                 if(GetConsoleMode(input,&mode) &&
                     (mode&(ENABLE_PROCESSED_INPUT|ENABLE_LINE_INPUT|ENABLE_ECHO_INPUT))==
@@ -2316,8 +2439,7 @@ int main(int argc, char **argv)
             member_count=GetConsoleProcessList(members,ARRAYSIZE(members));
             (void)GetNumberOfConsoleInputEvents(input,&queue_before);
             if(close_ok && observer_console_char_echoes(input,output,'q',750,&immediate,
-                                                         &character_position) &&
-               observer_console_enter(input)) {
+                                                         &character_position)) {
                 char screen_path[MAX_PATH];
                 (void)GetNumberOfConsoleInputEvents(input,&queue_after_key);
                 snprintf(screen_path,sizeof(screen_path),"%s.caf-before-enter.txt",argv[3]);
@@ -2327,6 +2449,10 @@ int main(int argc, char **argv)
                     write_console_snapshot(active_output,screen_path);
                     active_immediate=observer_console_cell_is(active_output,active_character_position,'q');
                 }
+                /* Never execute the diagnostic character: q.cmd can exist on
+                 * PATH and terminate the very shell being observed. */
+                if(!write_console_input_text(input,"\b",0,output,NULL) ||
+                   !observer_console_enter(input))close_ok=FALSE;
                 Sleep(250);
                 (void)GetNumberOfConsoleInputEvents(input,&queue_after_enter);
                 after_enter=observer_console_cell_is(output,character_position,'q');
@@ -2367,11 +2493,11 @@ int main(int argc, char **argv)
                 }
             }
             if(active_output!=INVALID_HANDLE_VALUE)CloseHandle(active_output);
-            /* Let the real outer cmd terminate normally after the probe; the
-             * preceding q+Enter may deliberately produce its usual command
-             * error, which is not treated as product evidence. */
-            (void)write_console_input_text(input,"exit\r",0,output,NULL);
+            /* Remove the second probe character before exiting the owned
+             * shell. Never turn either diagnostic character into a command. */
+            (void)write_console_input_text(input,"\bexit\r",0,output,NULL);
             if(!close_ok)report_failed=1;
+managed_close_done: ;
         }
         }
     }

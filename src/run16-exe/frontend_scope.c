@@ -3,6 +3,7 @@
 #include "run16-exe/native_request_client.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include "common/protocol/console_io.h"
+#include "common/protocol/frontend_lifecycle.h"
 #include "nthook32-dll/hook.h"
 #include <stdint.h>
 #include <stdlib.h>
@@ -129,6 +130,10 @@ fail:
         if(inherited_frontend)CloseHandle(inherited_frontend);
         if(inherited_execution)CloseHandle(inherited_execution);
     }
+    /* Retaining/creating a frontend may have succeeded before later setup
+     * failed. Complete that request through the same service-owned barrier;
+     * preserve the original setup error rather than inventing task success. */
+    (void)run16_frontend_scope_finish(scope);
     run16_frontend_scope_end(scope);
     return error;
 }
@@ -179,7 +184,7 @@ static DWORD wait_worker_change(HANDLE changed,HANDLE worker,HANDLE root,ULONGLO
 DWORD run16_frontend_scope_launch_native(run16_frontend_scope *scope,const run16_native_start *start,DWORD native_type)
 {
     HANDLE worker=NULL,changed=NULL,target=NULL;DWORD error;
-    ULONGLONG deadline=GetTickCount64()+10000;
+    ULONGLONG deadline=GetTickCount64()+OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS;
     BOOL text;
     if(!scope || !start || !OpenNtBaseNativeLaunchTypeIsValid(native_type))return ERROR_INVALID_PARAMETER;
     text=OpenNtBaseNativeLaunchTypeIsText(native_type);
@@ -254,17 +259,8 @@ DWORD run16_frontend_scope_resume_parent(run16_frontend_scope *scope)
     return run16_native_request_resume(scope->capability);
 }
 
-DWORD run16_frontend_scope_restore_parent(run16_frontend_scope *scope)
+DWORD run16_frontend_scope_finish(run16_frontend_scope *scope)
 {
-    /* Only a root launcher can return an outer CMD to this Console.  An
-     * inherited scope is an inner invocation and must never hold its root's
-     * frontend lifetime. */
-    if(!scope || !scope->owns_environment || !scope->restored)return ERROR_SUCCESS;
+    if(!scope)return ERROR_SUCCESS;
     return OpenNtBaseClientWaitFrontendConsoleRestored();
-}
-
-DWORD run16_frontend_scope_retire(run16_frontend_scope *scope)
-{
-    if(!scope || !scope->owns_environment || !scope->restored)return ERROR_SUCCESS;
-    return OpenNtBaseClientReturnFrontendConsole();
 }

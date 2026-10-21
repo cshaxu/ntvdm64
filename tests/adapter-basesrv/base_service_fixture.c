@@ -370,6 +370,9 @@ int fixture_prepared_native_root_loss(void)
      * valid Console membership fallback. No substitute worker is selected. */
     PREPARED_CHECK(!OpenNtBaseServiceConnect(service,child.hProcess,&worker,&worker_generation));
     PREPARED_CHECK(!OpenNtBaseServiceWorkerShutdownEvent(worker,child.dwProcessId,worker_generation,&shutdown));
+    PREPARED_CHECK(WaitForSingleObject(shutdown,0)==WAIT_TIMEOUT);
+    CloseHandle(shutdown);shutdown=NULL;
+    PREPARED_CHECK(!OpenNtBaseServiceWorkerConsoleCloseEvent(worker,child.dwProcessId,worker_generation,&shutdown));
     PREPARED_CHECK(WaitForSingleObject(shutdown,0)==WAIT_OBJECT_0);
     PREPARED_CHECK(!service_worker_root(worker));
     CloseHandle(shutdown);
@@ -381,7 +384,7 @@ int fixture_prepared_native_root_loss(void)
     CloseHandle(child.hThread);CloseHandle(child.hProcess);
     PREPARED_CHECK(OpenNtBaseServiceIsEmpty(service) && OpenNtBaseServiceStop(service));
     CloseHandle(cleanup_seen);
-    puts("PASS prepared native root loss: actual claim/Connect consumes cancellation, shutdown already signaled, no adoption");
+    puts("PASS prepared native root loss: claim consumes cancellation, Console-close signaled without worker-close, no adoption");
     return 0;
 #undef PREPARED_CHECK
 }
@@ -436,6 +439,11 @@ int fixture_io_authority(void)
         watches[index].frontend_root_generation=root_generation;
         InsertTailList(&service->worker_watches,&watches[index].link);watched[index]=TRUE;
         IO_CHECK(service_worker_root(workers[index])==root_generation && service_root_has_worker(root));
+        /* An association alone is not frontend admission. Keep that negative
+         * before seeding the authenticated registration this fixture models. */
+        IO_CHECK(OpenNtBaseServiceWorkerIoReleaseEvent(workers[index],children[index].dwProcessId,
+            generations[index],&release_capability)==ERROR_ACCESS_DENIED && !release_capability);
+        workers[index]->native_frontend_registered=TRUE;
         IO_CHECK(OpenNtBaseServiceWorkerIoReleaseEvent(workers[index],children[index].dwProcessId,
             generations[index]+1,&release_capability)==ERROR_ACCESS_DENIED && !release_capability);
         IO_CHECK(!OpenNtBaseServiceWorkerIoReleaseEvent(workers[index],children[index].dwProcessId,

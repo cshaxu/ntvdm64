@@ -24,8 +24,9 @@
 #include "ntsrv-exe/transport/frontend_admission.h"
 #include "run16-exe/frontend_bootstrap.h"
 #include "common/codec/native_launch.h"
+#include "common/protocol/frontend_lifecycle.h"
 #include <stdio.h>
-#define FRONTEND_STARTUP_DEADLINE_MS 10000u
+#define FRONTEND_STARTUP_DEADLINE_MS OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS
 #define SERVICE_OBSERVATION_MAX 1024u
 typedef NTSTATUS (*OPENNT_USER_TEST_TOKEN_FOR_INTERACTIVE)(HANDLE,PLUID);
 extern OPENNT_USER_TEST_TOKEN_FOR_INTERACTIVE UserTestTokenForInteractive;

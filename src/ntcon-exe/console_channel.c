@@ -1,6 +1,7 @@
 #include "console_channel.h"
 #include "console_frontend.h"
 #include "common/transport/pipe_transfer.h"
+#include "common/protocol/frontend_lifecycle.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include <stddef.h>
 #include <stdio.h>
@@ -422,7 +423,7 @@ DWORD frontend_io_channel_stop(frontend_io_channel *channel)
          * the join. A timed-out thread still borrows channel/root storage;
          * the caller must keep both alive until terminal process cleanup. */
         (void)CancelSynchronousIo(channel->thread);
-        wait=WaitForSingleObject(channel->thread,10000);
+        wait=WaitForSingleObject(channel->thread,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
         if(wait!=WAIT_OBJECT_0)
             return wait==WAIT_TIMEOUT ? ERROR_TIMEOUT : GetLastError();
         CloseHandle(channel->thread);

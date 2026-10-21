@@ -3,6 +3,7 @@
  * bodies, state authority and lock/resource contracts are preserved. */
 #include <service_internal.h>
 #include "common/protocol/frontend_protocol.h"
+#include "common/protocol/frontend_lifecycle.h"
 #include "common/system_root.h"
 
 
@@ -453,7 +454,7 @@ DWORD OpenNtBaseServiceAcquireFrontendRoot(OPENNT_BASE_CONNECTION *caller,DWORD 
     HANDLE *capability,HANDLE *retire,HANDLE *restored)
 {
     OPENNT_BASE_SERVICE *service;
-    ULONGLONG deadline=GetTickCount64()+10000;
+    ULONGLONG deadline=GetTickCount64()+OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS;
     DWORD error=ERROR_ACCESS_DENIED;
     if(!caller || !console_window || !create_root || !process || !capability || !retire || !restored)
         return ERROR_INVALID_PARAMETER;
@@ -510,6 +511,7 @@ DWORD OpenNtBaseServiceAcquireFrontendRoot(OPENNT_BASE_CONNECTION *caller,DWORD 
                         GetTickCount64()+FRONTEND_STARTUP_DEADLINE_MS;
                     root->frontend_creator_generation=generation;
                     caller->retained_frontend_root=root->process.SequenceNumber;
+                    caller->frontend_return_pending=caller->frontend_return_complete=FALSE;
                     /* Match RetainFrontendRoot: the authenticated reusable
                      * root also establishes the caller's Console identity. */
                     if(!caller->console)caller->console=root->console;
@@ -693,7 +695,7 @@ DWORD OpenNtBaseServiceStartFrontend(OPENNT_BASE_CONNECTION *caller,DWORD pid,
     CloseHandle(process.hThread);process.hThread=NULL;
     timer=CreateWaitableTimerW(NULL,TRUE,NULL);
     if(!timer){error=GetLastError();goto done;}
-    due.QuadPart=-10LL*1000*10000;
+    due.QuadPart=-10LL*1000*(LONGLONG)OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS;
     if(!SetWaitableTimer(timer,&due,0,NULL,NULL,FALSE)){error=GetLastError();goto done;}
     {
         HANDLE waits[4]={event,process.hProcess,creator,timer};
@@ -775,8 +777,8 @@ static void service_console_return_ack(OPENNT_BASE_CONNECTION *root)
     for(link=root->service->connections.Flink;link!=&root->service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *caller=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
         if(caller->retained_frontend_root==root->process.SequenceNumber &&
-            caller->process.SequenceNumber==root->frontend_creator_generation &&
-            caller->frontend_return_pending)caller->frontend_return_complete=TRUE;
+            caller->process.SequenceNumber==root->frontend_creator_generation)
+            caller->frontend_return_complete=TRUE;
     }
     WakeAllConditionVariable(&root->service->frontend_changed);
 }
@@ -784,21 +786,44 @@ static void service_console_return_ack(OPENNT_BASE_CONNECTION *root)
 DWORD OpenNtBaseServiceWaitFrontendConsoleRestored(OPENNT_BASE_CONNECTION *caller,DWORD pid,DWORD generation)
 {
     DWORD error=ERROR_ACCESS_DENIED;
+    ULONGLONG deadline=GetTickCount64()+OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS;
     OPENNT_BASE_SERVICE *service;
     if(!caller)return error;
     service=caller->service;
     EnterCriticalSection(&service->lock);
     for(;;) {
         LIST_ENTRY *link;OPENNT_BASE_CONNECTION *root=NULL;
-        if(!OpenNtBaseServicePeer(caller,pid,generation) || !caller->frontend_return_pending)break;
+        ULONGLONG now;
+        if(!OpenNtBaseServicePeer(caller,pid,generation))break;
         if(caller->frontend_return_complete){error=ERROR_SUCCESS;break;}
+        /* Request completion is uniform at the launcher. Only the service
+         * knows whether this authenticated request borrowed the outer Console.
+         * GUI and inherited/nested requests have no outer lease to return. */
+        if(!caller->retained_frontend_root){error=ERROR_SUCCESS;break;}
         for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
             OPENNT_BASE_CONNECTION *item=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
             if(item->process.SequenceNumber==caller->retained_frontend_root){root=item;break;}
         }
         if(!root || WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT)
             {error=ERROR_PIPE_NOT_CONNECTED;break;}
-        if(!SleepConditionVariableCS(&service->frontend_changed,&service->lock,INFINITE))
+        if(root->frontend_creator_generation!=generation) {
+            error=caller->frontend_return_pending ? ERROR_INVALID_STATE : ERROR_SUCCESS;
+            break;
+        }
+        if(!caller->frontend_return_pending) {
+            /* Arm before waking NTCON, including failed task/startup results.
+             * A management transaction owns final return while draining. */
+            caller->frontend_return_pending=TRUE;
+            if(!root->frontend_closing && !root->frontend_close_draining &&
+                (!root->frontend_retire || !SetEvent(root->frontend_retire))) {
+                error=root->frontend_retire ? GetLastError() : ERROR_INVALID_STATE;
+                caller->frontend_return_pending=FALSE;
+                break;
+            }
+        }
+        now=GetTickCount64();
+        if(now>=deadline){error=ERROR_TIMEOUT;break;}
+        if(!SleepConditionVariableCS(&service->frontend_changed,&service->lock,(DWORD)(deadline-now)))
             {error=GetLastError();break;}
     }
     LeaveCriticalSection(&service->lock);return error;
@@ -817,6 +842,11 @@ DWORD OpenNtBaseServiceFrontendConsoleRestored(OPENNT_BASE_CONNECTION *root,DWOR
              * is still live and the root has not completed final teardown. */
             root->frontend_close_returned=TRUE;
             WakeAllConditionVariable(&root->service->frontend_changed);
+            SetEvent(root->service->frontend_lifetime_changed);
+            error=ERROR_SUCCESS;
+        } else if(root->frontend_close_draining) {
+            /* A repeated preparation acknowledgement is not final return.
+             * Only worker rundown can advance the transaction to closing. */
             error=ERROR_SUCCESS;
         } else if(root->frontend_restored) {
             error=SetEvent(root->frontend_restored) ? ERROR_SUCCESS : GetLastError();

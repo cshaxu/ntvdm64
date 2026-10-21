@@ -23,20 +23,15 @@ static DWORD probe_wait(run16_frontend_scope *scope,DWORD *code,DWORD *completed
     DWORD error=run16_frontend_scope_wait_native(scope,code,completed);
     receipt_failure("receipt",error,*code,*completed);return error;
 }
-static DWORD probe_launch(run16_frontend_scope *scope,const run16_native_start *start)
+static DWORD probe_launch(run16_frontend_scope *scope,const run16_native_start *start,DWORD native_type)
 {
-    DWORD error=run16_frontend_scope_launch_win32_text(scope,start);
+    DWORD error=run16_frontend_scope_launch_native(scope,start,native_type);
     receipt_failure("startup",error,0,0);return error;
 }
-static DWORD probe_retire(run16_frontend_scope *scope)
+static DWORD probe_finish(run16_frontend_scope *scope)
 {
-    DWORD error=run16_frontend_scope_retire(scope);
-    receipt_failure("retire",error,0,0);return error;
-}
-static DWORD probe_restore(run16_frontend_scope *scope)
-{
-    DWORD error=run16_frontend_scope_restore_parent(scope);
-    receipt_failure("restore",error,0,0);return error;
+    DWORD error=run16_frontend_scope_finish(scope);
+    receipt_failure("complete",error,0,0);return error;
 }
 static DWORD probe_resume(run16_frontend_scope *scope)
 {
@@ -51,9 +46,8 @@ static BOOL probe_dos_result(HANDLE wait,LPDWORD code)
     SetLastError(saved);return completed;
 }
 #define run16_frontend_scope_wait_native probe_wait
-#define run16_frontend_scope_launch_win32_text probe_launch
-#define run16_frontend_scope_retire probe_retire
-#define run16_frontend_scope_restore_parent probe_restore
+#define run16_frontend_scope_launch_native probe_launch
+#define run16_frontend_scope_finish probe_finish
 #define run16_frontend_scope_resume_parent probe_resume
 #define BaseCheckForVDM probe_dos_result
 #include "../../src/run16-exe/main.c"

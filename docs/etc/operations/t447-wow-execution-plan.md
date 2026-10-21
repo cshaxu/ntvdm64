@@ -1,5 +1,42 @@
 # T447 WOW32 execution working plan
 
+## Owner-directed transfer closure
+
+T447 is closed by explicit owner direction, not by completion of all rows below.
+This plan is now the retained transfer inventory. All active/staged wording
+below is historical and superseded by [Current](../../states/CURRENT.md).
+The [closure](../../history/m0-t447-transfer-closure.md) assigns the lifecycle
+reconstruction to the first candidate and every unfinished WOW32 row to the
+second. No earlier S reassignment or closure label drops an unresolved row.
+
+## S4 P4 service-owned Console completion
+
+The owner-approved handoff repair keeps NTSRV as lease/transaction authority,
+NTCON as the only presentation restorer, and Run16 as a uniform request client.
+Every acquired request scope, including failed setup/task exits, completes via
+the existing authenticated service completion call. NTSRV decides whether a
+request has no lease, inherits a nested lease, or owns an outer lease; Run16
+does not select a root-only restoration path or touch Console resources.
+
+For management close, preparation freezes presentation and restores Console
+before Console-close reaches workers. It does not complete the launcher lease.
+Worker rundown advances the durable transaction to final NTCON teardown; only
+that restoration acknowledgement completes the lease. Repeated preparation
+acknowledgements remain preparation. The lifecycle scanner respects the same
+transaction and is woken by late preparation/worker-exit events after timeout.
+Ordinary request completion parks the frontend through the existing service
+route. Final acknowledgement survives frontend rundown on the authenticated
+creator record. Internal/external NTMON use identical policy.
+
+Regression covers nested/no-lease completion, failed native results without
+false target-completed flags, setup failure, preparation/final separation,
+late acknowledgement, worker-close timeout and frozen presentation. All bounded
+production lifecycle waits are ten seconds; failure is not reported as a
+successful restoration. No guest/mirror change or conhost-private dependency.
+The preserved conhost dump is diagnostic evidence only. Coherent13 build,
+runtime regression, both publication destinations and review remain delivery
+gates; the source change alone is not acceptance.
+
 Owner accepts/closes [standalone Td build hygiene](td-build-hygiene.md) at
 aadde21e8 and resumes S4 from delivered P13; test-only P14 adds evidence,
 not another runtime release or numeric task.
@@ -2460,6 +2497,44 @@ CAF witness ends at `find-kvm` after both prompts are ready and is expressly
 not counted as a product pass.  The exact final identities, publication proof,
 and manual owner-acceptance route are in
 `docs/etc/evidence/m0-t447-s4-p4-ntcon-caf-close.md`.
+
+#### P4 close-transaction audit correction (`a9bc337fd` plus staged repair)
+
+The preceding initial repair is insufficient for the active candidate.
+`frontend_close_draining` accidentally made the ordinary workerless sweep
+treat an attached worker as detached, permitting worker `shutdown` before
+NTCON's `RETURN_CONSOLE` acknowledgement.  It also had no durable advance
+after timeout, while NTCON could continue to present graphics after its
+acknowledgement.  These are project-owned ordering defects, not guest behavior.
+
+The staged implementation gives NTSRV one durable transaction.  While draining,
+the ordinary sweep retains the root as attached.  Before acknowledgement it
+sends no worker instruction.  After acknowledgement it retries only the
+authenticated `console_close` instruction until matching CUI workers exit;
+only then is final close published.  If NTCON dies first, the failure remains
+recorded and the same Console-close route is used—admission is not reopened and
+generic shutdown is not substituted.  NTCON freezes local presentation before
+`return_done`; late video/display requests cannot recreate CAF.  Teardown keeps
+the first error but still attempts independent buffer, palette, cursor and
+input-mode restoration, retaining storage when a live channel cannot join.
+
+Required verification includes the drain/sweep race, delayed worker exit,
+failed return plus frontend death, late video after `return_done`, partial
+duplicate-handle cleanup and failed native completion returning the launcher
+Console.  No publication or P4 closure is permitted until that matrix and the
+actual CAF route run.  The current noninteractive canvas failure is retained
+as an environmental non-pass.
+
+All production waits within that authenticated frontend lifecycle now use the
+single shared `OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS` contract, fixed at ten
+seconds: admission, workerless grace, startup acknowledgement, management
+return acknowledgement, ordered Console-close completion and NTCON channel
+join/return.  Test-only polling deadlines remain observations, not alternate
+product close policies.  The outstanding manual symptom is further narrowed:
+an externally hosted NTMON can delete the same CAF frontend and return cooked
+Console correctly; the failure requires NTMON itself to be hosted by the CAF
+frontend it asks to close.  The remaining investigation must preserve that
+self-hosted versus external-hosted distinction.
 
 ### S4 lifecycle reopening: reservation delivery and close semantics
 

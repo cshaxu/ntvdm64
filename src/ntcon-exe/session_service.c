@@ -6,8 +6,8 @@
 #include <stdio.h>
 struct frontend_session_service {
     HANDLE notification,stop,thread,retire,state_changed;
-    HANDLE creator;
-    BOOL retire_requested,creator_exited;
+    HANDLE creator,broker;
+    BOOL retire_requested,creator_exited,return_prepared;
     frontend_io_channel *channel;
     frontend_session *presentation;
     void (*channel_ready)(void);
@@ -18,17 +18,23 @@ static DWORD WINAPI frontend_pump(void *context)
     HANDLE waits[7];
     DWORD error=ERROR_SUCCESS;
     for (;;) {
-        DWORD wait_count=0,retire_index=MAXDWORD,creator_index=MAXDWORD,wait;
+        DWORD wait_count=0,retire_index=MAXDWORD,creator_index=MAXDWORD,broker_index=MAXDWORD,wait;
         waits[wait_count++]=scope->stop;
-        waits[wait_count++]=scope->notification;
-        if(scope->retire && !scope->retire_requested) {
+        if(scope->broker){broker_index=wait_count;waits[wait_count++]=scope->broker;}
+        if(!scope->return_prepared)waits[wait_count++]=scope->notification;
+        if(scope->retire && !scope->retire_requested && !scope->return_prepared) {
             retire_index=wait_count;waits[wait_count++]=scope->retire;
         }
-        if(scope->creator && !scope->creator_exited) { creator_index=wait_count;waits[wait_count++]=scope->creator; }
+        if(scope->creator && !scope->creator_exited && !scope->return_prepared) {
+            creator_index=wait_count;waits[wait_count++]=scope->creator;
+        }
         if(scope->state_changed) waits[wait_count++]=scope->state_changed;
-        if(scope->channel)waits[wait_count++]=frontend_io_channel_thread(scope->channel);
+        if(scope->channel && !scope->return_prepared)
+            waits[wait_count++]=frontend_io_channel_thread(scope->channel);
         wait=WaitForMultipleObjects(wait_count,waits,FALSE,INFINITE);
         if (wait==WAIT_OBJECT_0) break;
+        if(broker_index!=MAXDWORD && wait==WAIT_OBJECT_0+broker_index)
+            return ERROR_BROKEN_PIPE;
         if (wait<WAIT_OBJECT_0 || wait>=WAIT_OBJECT_0+wait_count) {
             return GetLastError();
         }
@@ -44,10 +50,15 @@ static DWORD WINAPI frontend_pump(void *context)
                 if(error)return error;
                 error=OpenNtBaseClientFrontendConsoleRestored();
                 if(error)return error;
+                scope->return_prepared=TRUE;
                 continue;
             }
             if(retired!=OPENNT_FRONTEND_RETIRE_NONE)return ERROR_INVALID_DATA;
         }
+        /* The prepared close has frozen producer access. Its resulting pipe
+         * EOF is not permission to finalize before NTSRV joins the workers.
+         * Wait only for service state/stop, not the already-signalled pipe. */
+        if(scope->return_prepared)continue;
         if(retire_index!=MAXDWORD && wait==WAIT_OBJECT_0+retire_index)
             scope->retire_requested=TRUE;
         if(creator_index!=MAXDWORD && wait==WAIT_OBJECT_0+creator_index)
@@ -138,26 +149,38 @@ static DWORD WINAPI frontend_pump(void *context)
 
 DWORD frontend_service_close(frontend_session_service *scope)
 {
-    DWORD error=ERROR_SUCCESS;
+    DWORD error=ERROR_SUCCESS,step;
     if (!scope) return ERROR_SUCCESS;
     if (scope->stop) SetEvent(scope->stop);
-    frontend_session_cancel(scope->presentation);
     if (scope->thread) {
         WaitForSingleObject(scope->thread,INFINITE);
         CloseHandle(scope->thread);
+        scope->thread=NULL;
     }
     if(scope->channel) {
-        error=frontend_io_channel_stop(scope->channel);
-        if(error)return error;
-        scope->channel=NULL;
+        step=frontend_io_channel_stop(scope->channel);
+        if(step) {
+            /* The channel's bounded join failed, so its storage must remain
+             * live.  Its stop was nevertheless issued; return the borrowed
+             * Console through the still-running presentation before asking
+             * that presentation thread to stop. */
+            error=step;
+            step=frontend_session_return_console(scope->presentation);
+            if(!error && step)error=step;
+        } else scope->channel=NULL;
     }
-    error=frontend_session_destroy(scope->presentation);
+    frontend_session_cancel(scope->presentation);
+    /* If channel join failed it may still borrow presentation state, so do
+     * not free it.  Cancellation above remains the safe convergence request. */
+    step=scope->channel ? ERROR_BUSY : frontend_session_destroy(scope->presentation);
+    if(!error && step)error=step;
     /* A failed teardown deliberately retains the presentation object and its
      * handles for process cleanup.  Do not free the owning service storage:
      * the caller must report failure rather than manufacture a handoff. */
     if(error)return error;
     if(scope->stop)CloseHandle(scope->stop);
     if(scope->state_changed)CloseHandle(scope->state_changed);
+    if(scope->broker)CloseHandle(scope->broker);
     HeapFree(GetProcessHeap(),0,scope);
     return ERROR_SUCCESS;
 }
@@ -173,6 +196,8 @@ static DWORD service_start(HANDLE notification,HANDLE creator,HANDLE retire,
     scope->notification=notification;scope->channel_ready=ready;
     scope->creator=creator;scope->retire=retire;
     if(creator) {
+        error=OpenNtBaseClientBrokerProcess(&scope->broker);
+        if(error)goto fail;
         error=OpenNtBaseClientFrontendStateChanged(&scope->state_changed);
         if(error)goto fail;
     }

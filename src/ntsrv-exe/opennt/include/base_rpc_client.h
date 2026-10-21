@@ -22,6 +22,9 @@ DWORD OpenNtBaseClientReturnFrontendConsole(void);
 DWORD OpenNtBaseClientStartNativeWorker(DWORD native_type,HANDLE *);
 DWORD OpenNtBaseClientStartVdmWorker(PCWSTR environment,DWORD characters,
     DWORD show,HANDLE frontend,HANDLE *worker,HANDLE *parent);
+/* Finalize an admitted launcher request. NTSRV returns immediately for a
+ * non-owning/nested request; an outer lease includes NTCON's final restoration.
+ * Invoke for failed requests too, before releasing the client connection. */
 DWORD OpenNtBaseClientWaitFrontendConsoleRestored(void);
 DWORD OpenNtBaseClientFrontendConsoleRestored(void);
 DWORD OpenNtBaseClientFrontendStartupResult(HANDLE capability,DWORD status);

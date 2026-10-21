@@ -22,6 +22,8 @@ $cases=@('parent-resume-origin','io-authority','route-cancellation','prepared-na
     'reenter-pending-command','reenter-before-increment','launcher-completed-rundown',
     'completed-worker-loss','wow-start-late-query','default','frontend-authority','shared-worker-residency',
     'native-command','native-worker','management-gui','management-frontend-close',
+    'frontend-completion-barrier','management-frontend-close-order',
+    'management-frontend-close-timeout','management-frontend-prepare-timeout',
     'management-terminate','unfinished-worker-exit')
 if($FailureProbe){$cases=@('runner-failure')}
 $null=New-Item -ItemType Directory -Path $log

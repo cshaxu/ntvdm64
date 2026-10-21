@@ -55,7 +55,13 @@ permission to replace the published runtime package.
 base, kvm-base and kvm-window from SoftPC revision
 3186afcd7b743e9797364c6a762eccd3b5576ca1, refreshed with owner approval on
 2026-09-27 from the earlier nxvm pin. The selected files under `lib/` and
-their MIT notice are unmodified. Only frontend presentation may consume this
+their MIT notice retain the upstream provenance. T447 S4 P4 changes only
+`KVM_COMPONENT_DESTROY_TIMEOUT_MS` from five to ten seconds, as explicitly
+requested for bounded shutdown waits. The manifest preserves the upstream
+hash and pins the local bytes. No ABI, join/dispose order or timeout failure
+behavior changes; the library fixture and CAF close regression
+verify the retained contract. This is a local policy exception, not an OpenNT
+or guest change. Only frontend presentation may consume this
 library; launcher clients and worker objects must not acquire a link edge.
 The upstream repository is not a build or runtime dependency. Its test library,
 Console broker, application and Linux implementations are not imported.

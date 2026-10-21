@@ -1087,10 +1087,16 @@ static void test_logical_publication(BOOL native)
     /* Host-only canvas changes must neither clip storage nor pan the logical
      * viewport. The same upper-left mapping covers all four intersections. */
     for(unsigned index=0;index<4;++index) {
-        SHORT width=index&1 ? 60 : 100,height=index&2 ? 20 : 30;
+        /* A hidden/private desktop can legitimately cap the visible raster at
+         * 80 columns even though the backing buffer remains 120.  The test is
+         * about projection across wide/narrow physical viewports, not a host
+         * claim that every desktop exposes a 100-column window. */
+        SHORT maximum=GetLargestConsoleWindowSize(canonical).X;
+        SHORT width=index&1 ? min((SHORT)60,maximum) : min((SHORT)100,maximum);
+        SHORT height=index&2 ? 20 : 30;
         SMALL_RECT canvas={0,0,width-1,height-1};
         CONSOLE_CURSOR_INFO cursor;
-        CHECK(SetConsoleCursorPosition(canonical,(COORD){0,0}));
+        CHECK(maximum>=60 && SetConsoleCursorPosition(canonical,(COORD){0,0}));
         CHECK(SetConsoleScreenBufferSize(canonical,(COORD){120,60}));
         CHECK(SetConsoleWindowInfo(canonical,TRUE,&canvas));
         CHECK(FillConsoleOutputCharacterW(canonical,L'Z',120*60,(COORD){0,0},&count));
@@ -1148,6 +1154,42 @@ static int run_private_desktop(const char *report,BOOL geometry_only)
     printf("private Console handoff exit=%lu report=%s\n",code,report);
     return (int)code;
 }
+/* Terminal management return needs a fresh presentation. It cannot be folded
+ * into the reusable-channel rounds: subsequent acquisition must be rejected. */
+static int management_return(void)
+{
+    frontend_session *frontend=NULL;frontend_video video={0};
+    console_video_description description={4,2,4,8,8,{0}};
+    BYTE pixels[8]={1,1,1,1,1,1,1,1};
+    HANDLE input=NULL,output=NULL;DWORD before,after;HWND window=NULL;
+    ULONGLONG deadline;
+    FreeConsole();CHECK(AllocConsole());ShowWindow(GetConsoleWindow(),SW_HIDE);
+    CHECK(!frontend_session_create(&frontend));
+    CHECK(!frontend_session_console(frontend,&input,&output));
+    CHECK(GetConsoleMode(input,&before));
+    CHECK(!frontend_session_bind(frontend,&video,TRUE));
+    description.palette[1]=0xffffff;
+    CHECK(!frontend_video_begin(&video,1,&description));
+    CHECK(!frontend_video_data(&video,1,0,pixels,sizeof(pixels)));
+    CHECK(!frontend_session_video(frontend,&video,&video,FALSE));
+    deadline=GetTickCount64()+10000;
+    while(!(window=FindWindowW(L"LibKvmWindow",NULL)) && GetTickCount64()<deadline)Sleep(10);
+    CHECK(window);
+    CHECK(SetConsoleMode(input,before^ENABLE_ECHO_INPUT));
+    CHECK(!frontend_session_return_console(frontend));
+    CHECK(!IsWindow(window));
+    CHECK(GetConsoleMode(input,&after) && after==before);
+    CHECK(frontend_session_enter(frontend,&video)==ERROR_NOT_READY);
+    CHECK(frontend_session_bind(frontend,&video,TRUE)==ERROR_NOT_READY);
+    CHECK(frontend_session_video(frontend,&video,&video,FALSE)==ERROR_NOT_READY);
+    CHECK(!frontend_session_return_console(frontend));
+    CHECK(!IsWindow(window));
+    frontend_session_forget(frontend,&video);
+    CHECK(!frontend_session_destroy(frontend));
+    frontend_video_dispose(&video);CloseHandle(input);CloseHandle(output);
+    puts("PASS management return restores mode, closes CAF, rejects late owner/video and permits terminal disposal");
+    return 0;
+}
 int main(int argc,char **argv)
 {
     unsigned round,mode;DWORD before,after;
@@ -1155,6 +1197,7 @@ int main(int argc,char **argv)
     CONSOLE_SCREEN_BUFFER_INFO current,restored;
     CONSOLE_CURSOR_INFO original_cursor={0},current_cursor={0},restored_cursor={0};
     SMALL_RECT reduced;
+    if(argc==2 && !strcmp(argv[1],"--management-return"))return management_return();
     if(argc==3 && !strcmp(argv[1],"--private-desktop"))return run_private_desktop(argv[2],TRUE);
     if(argc==3 && !strcmp(argv[1],"--private-desktop-full"))return run_private_desktop(argv[2],FALSE);
     if(argc==3 && !strcmp(argv[1],"--private-full")) {
@@ -1172,6 +1215,11 @@ int main(int argc,char **argv)
             font.dwFontSize.X=4;font.dwFontSize.Y=6;
             wcscpy_s(font.FaceName,LF_FACESIZE,L"Terminal");
             CHECK(SetCurrentConsoleFontEx(fixture_output,FALSE,&font));
+            CHECK(GetCurrentConsoleFontEx(fixture_output,FALSE,&font));
+            fprintf(private_report,"private Console font=%dx%d maximum=%dx%d\\n",
+                font.dwFontSize.X,font.dwFontSize.Y,
+                GetLargestConsoleWindowSize(fixture_output).X,
+                GetLargestConsoleWindowSize(fixture_output).Y);
             CloseHandle(fixture_output);
         }
     }

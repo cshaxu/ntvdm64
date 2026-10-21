@@ -1,5 +1,11 @@
 # WOW32 production completion program after initial WINMINE milestone
 
+Owner-directed execution-package closure preserves every unfinished W01 and
+promoted dependency in the [execution continuation](proposal-wow32-execution-continuation-001.md).
+The [Queue](../states/QUEUE.md) places lifecycle unification ahead of that
+continuation. Historical references to active T447 below identify inherited
+ownership, not current admission; no family or acceptance requirement is removed.
+
 ## Guest-contract audit handoff
 
 The owner assigns known WOW-side contract gaps to this program's existing

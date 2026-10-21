@@ -1,5 +1,9 @@
 # Supporting Material
 
+[T447 pre-closure snapshot](evidence/m0-t447-pre-closure-status.md) preserves
+the final active packet before owner-directed transfer closure. The
+[closure](../history/m0-t447-transfer-closure.md) and Current supersede it.
+
 [Td build hygiene](operations/td-build-hygiene.md) records standalone build
 configuration/cache ownership, safe disposal and its verification; T447
 runtime scope and publication remain unchanged.
@@ -7,6 +11,10 @@ runtime scope and publication remain unchanged.
 [T447 S4 P4 NTCON CAF close](evidence/m0-t447-s4-p4-ntcon-caf-close.md)
 records the project-owned management-close ordering correction, final package
 identity, evidence and the remaining noninteractive visible-window limit.
+
+[T447 pre-P4 status](evidence/m0-t447-s4-pre-p4-status.md) retains earlier
+S4 investigations, failed controls and delivery chronology moved out of CURRENT;
+it is historical evidence, not a second active packet.
 
 [T447 S4 message source audit](evidence/m0-t447-s4-message-source-audit.md)
 records actual native receive/reply ownership, the implicit-send and persistent

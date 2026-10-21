@@ -601,7 +601,7 @@ DWORD OpenNtBaseServiceSubmitNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD 
     if(error)goto done;
     {
         HANDLE waits[3]={startup,worker,caller->process.ProcessHandle};
-        DWORD wait=WaitForMultipleObjects(3,waits,FALSE,10000);
+        DWORD wait=WaitForMultipleObjects(3,waits,FALSE,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
         if(wait!=WAIT_OBJECT_0) {
             error=wait==WAIT_TIMEOUT ? ERROR_TIMEOUT : wait==WAIT_FAILED ? GetLastError() : ERROR_PROCESS_ABORTED;
             goto done;

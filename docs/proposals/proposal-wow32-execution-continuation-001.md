@@ -1,0 +1,51 @@
+# WOW32 execution continuation
+
+## Complete transfer, not a reset
+
+Owner closes T447 by transferring all unfinished WOW32 work into this candidate,
+behind NTSRV lifecycle unification. T447's source, stable capability IDs, accepted
+boundaries, tests, failed observations and exception registers remain inherited.
+No historical S number is reused as a new task allocation. Current alone admits
+the successor. This is not a claim that T447 achieved complete WOW32 recovery.
+
+The complete inherited authority is the
+[execution proposal](proposal-wow32-message-task-execution-001.md),
+[working plan](../etc/operations/t447-wow-execution-plan.md),
+[source audit](../etc/evidence/m0-t447-s4-message-source-audit.md), and
+[closure](../history/m0-t447-transfer-closure.md).
+Every unresolved row in those inventories remains an obligation even when it
+is not repeated in this summary. Retain completed evidence without rerunning
+source discovery merely because the numeric task changes.
+
+## Residual inventory
+
+| Inherited scope | Successor obligation |
+| --- | --- |
+| C01--C03, C09, execution C10 / M1 | Complete send/post/get/peek/filter/WM_QUIT in same task, same worker, cross worker and native directions. |
+| M2 | Explicit/implicit mixed-message identity, reply, early/duplicate/no-pending reply and receiver continuation under the approved modern USER contract. |
+| M3 | Original schedule/wait/reentry and exceptional BlockWOWIdle paths, without fabricated private SMS or a replacement scheduler. |
+| M4 | Remaining conversion/construction/result/data ownership and exactly-once unwind; preserve delivered cohorts and retained DDE alias/ACK evidence. |
+| M5 | Destruction/reuse, cancellation/failure, terminal cleanup and native-return safety; do not hide foundation defects in later features. |
+| M6 | Real two-task Win16 and both native directions, nested/reply/wait/failure/normal-exit integrated proof and all original runtime floors. |
+| Prior S5/S6 task termination work | Original HTASK identity, request mapping and reuse protection, per-task NT Monitor deletion, sibling survival and distinct whole-worker close. |
+| Prior final acceptance | Full source/minimal-diff reconciliation, cross-package ownership, real guest versus fixture evidence and coherent delivery. |
+| Existing incomplete S2/S3 evidence and risks | Preserve common-dialog unlocated failure, styled raw-fault recovery, required object/control/dialog/MENU-01 obligations and any unresolved responsibility-audit row; closure labels do not erase these. |
+| Application/DOS witnesses | SOL/WRITE normal startup and usable depth, WRITE illegal-instruction witness, SOL insufficient-canvas gate, COMMAND/strict DIR initial-prompt gap, and retained intermittent WOWEXEC/game-exit TODO evidence. Attribute causes before claiming guest limitations. |
+
+The lifecycle candidate owns infrastructure control/exit/CAF handoff and the
+WOW worker-close receiver. This candidate owns WOW task algorithms, individual
+task termination integration and execution semantics. Both must test their
+shared boundary; neither transfers an unresolved foundation defect merely to
+manufacture acceptance. The existing other WOW candidates retain their residual
+families; this package inherits T447's cross-T promoted dependencies, not all
+unrelated future WOW features.
+
+## Constraints and acceptance
+
+Retain original/host/adapter/NTW16S ownership, approved external snapshot and
+modern USER delivery/reply boundaries, thread-level idle choice, immutable
+guest and source-first minimal registered mirror diffs. No new semantic waiver.
+Reconcile every inherited non-passing row before grouping implementation.
+Build/test/publish/commit/push per current execution rules; no screenshot,
+compile, native double or old successful batch substitutes for real guest
+execution and cleanup. The whole-provider goal and queue families do not shrink.

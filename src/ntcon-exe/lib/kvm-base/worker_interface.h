@@ -6,7 +6,8 @@
 
 #include "lib/types/atomic.h"
 
-#define KVM_COMPONENT_DESTROY_TIMEOUT_MS 5000u
+/* DIVERGENCE T447-S4-P4: owner-approved ten-second host shutdown budget. */
+#define KVM_COMPONENT_DESTROY_TIMEOUT_MS 10000u
 typedef lib_status (*kvm_component_join_fn)(kvm_component *component, lib_u32 timeout_ms);
 typedef void (*kvm_component_dispose_fn)(kvm_component *component);
 

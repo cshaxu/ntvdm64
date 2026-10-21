@@ -4,6 +4,7 @@
 #include "window_keyboard.h"
 #include "window_mouse.h"
 #include "window_frame.h"
+#include "common/protocol/frontend_lifecycle.h"
 #include "lib/kvm-window/render.h"
 #include "opennt-abi/host-compat/include/console_grid.h"
 #include <stdint.h>
@@ -16,6 +17,10 @@ struct frontend_session {
     BOOL input_mode_saved;
     DWORD parked_input_mode;
     BOOL parked;
+    /* Management Console-close has returned the borrowed Console.  This is
+     * terminal presentation state: late video/display requests must not make
+     * CAF visible again after NTSRV observes the acknowledgement. */
+    BOOL console_return_frozen;
     HANDLE stop,refresh,refreshed,thread,changed,park,park_done,return_console,
         return_done,control[2];
     DWORD park_error;
@@ -121,6 +126,28 @@ static DWORD restore_console_palette(frontend_session *frontend)
     if(!frontend)return ERROR_INVALID_PARAMETER;
     return frontend->original_palette_saved ?
         console_set_palette(frontend->console_output,frontend->original_palette) : ERROR_SUCCESS;
+}
+static void retain_first_error(DWORD *first,DWORD error)
+{
+    if(!*first && error)*first=error;
+}
+/* Attempt every independently reversible borrowed-Console restoration.  The
+ * first failure remains the operation result, but a palette or window error
+ * must never suppress restoration of the caller's cooked input mode. */
+static DWORD restore_borrowed_console(frontend_session *frontend,BOOL clear_window)
+{
+    DWORD error=ERROR_SUCCESS;
+    if(clear_window)retain_first_error(&error,frontend_window_clear(frontend->window));
+    retain_first_error(&error,frontend_window_select(frontend->window,FRONTEND_DISPLAY_CONSOLE));
+    if(frontend->input_mode_saved &&
+        !SetConsoleMode(frontend->console_input,frontend->original_input_mode))
+        retain_first_error(&error,GetLastError());
+    retain_first_error(&error,restore_console_palette(frontend));
+    retain_first_error(&error,restore_cursor_shape(frontend));
+    /* A stale producer request is not permitted to survive a management
+     * handoff and reopen graphics on the next present-loop iteration. */
+    (void)InterlockedExchange(&frontend->display_request,0);
+    return error;
 }
 /* DOS's OpenNT Console API calls operate on an inactive buffer. In a
  * multi-tab terminal, changing the active Conhost buffer to 28 rows need not
@@ -593,30 +620,35 @@ static DWORD present_loop(frontend_session *frontend)
         }
         if(WaitForSingleObject(frontend->return_console,0)==WAIT_OBJECT_0) {
             ResetEvent(frontend->return_console);
-            /* This is the management-close preparation edge.  Unlike park,
-             * the active native channel remains bound until NTSRV sends its
-             * existing shutdown instruction after this acknowledgement. */
-            frontend->return_error=frontend_window_select(frontend->window,
-                FRONTEND_DISPLAY_CONSOLE);
-            if(!frontend->return_error)
+            /* Management must return the same physical Console state as an
+             * ordinary borrowed-Console handoff before its worker receives
+             * the close instruction.  Selecting the Console buffer alone
+             * is insufficient: NTSRV must also hold request completion until
+             * final restoration, before the outer CMD starts its next read.
+             * The active channel remains bound only long enough to obtain
+             * this synchronous acknowledgement; this is not an idle park. */
+            frontend->return_error=restore_borrowed_console(frontend,TRUE);
+            if(!frontend->return_error) {
                 frontend->console_f_down=frontend->console_shortcut=FALSE;
+                frontend->console_return_frozen=TRUE;
+            }
             SetEvent(frontend->return_done);
         }
-        (void)refresh_window_title(frontend);
-        if(frontend->owner || frontend->window_active) {
+        if(!frontend->console_return_frozen)(void)refresh_window_title(frontend);
+        if(!frontend->console_return_frozen && (frontend->owner || frontend->window_active)) {
             error=collect_console(frontend);
             waits[count++]=frontend->console_input;
         }
         if(!error && frontend->window_mouse.width)
             error=frontend_window_poll(frontend->window);
-        if(!error) {
+        if(!error && !frontend->console_return_frozen) {
             LONG display=InterlockedExchange(&frontend->display_request,0);
             if(display)error=frontend_window_select(frontend->window,
                 display==2 ? FRONTEND_DISPLAY_WINDOW : FRONTEND_DISPLAY_CONSOLE);
         }
         video=frontend->video;
         published=&frontend->video_serial;
-        if(!error && video) {
+        if(!error && !frontend->console_return_frozen && video) {
             uint32_t serial=video->published_serial;
             if(serial!=*published && (!video->pending || video->pixels)) {
                 if(video->pixels) {
@@ -799,9 +831,14 @@ DWORD frontend_session_return_console(frontend_session *frontend)
     if(!frontend)return ERROR_INVALID_PARAMETER;
     waits[0]=frontend->return_done;waits[1]=frontend->stop;waits[2]=frontend->thread;
     if(!ResetEvent(frontend->return_done) || !SetEvent(frontend->return_console))return GetLastError();
-    wait=WaitForMultipleObjects(3,waits,FALSE,INFINITE);
+    /* A failed channel teardown may leave a producer blocked in I/O.  The
+     * management close must still make a bounded attempt to restore the
+     * borrowed Console, then let its caller retain the live storage and
+     * report failure instead of hanging process shutdown indefinitely. */
+    wait=WaitForMultipleObjects(3,waits,FALSE,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
     if(wait==WAIT_OBJECT_0)return frontend->return_error;
     if(wait==WAIT_OBJECT_0+1)return ERROR_OPERATION_ABORTED;
+    if(wait==WAIT_TIMEOUT)return ERROR_TIMEOUT;
     if(wait==WAIT_FAILED)return GetLastError();
     if(!GetExitCodeThread(frontend->thread,&error))return GetLastError();
     return error ? error : ERROR_BROKEN_PIPE;
@@ -811,6 +848,7 @@ DWORD frontend_session_return_console(frontend_session *frontend)
 static DWORD apply_binding(frontend_session *frontend,const void *owner,BOOL active)
 {
     DWORD error=0,i,kept=0;
+    if(active && frontend->console_return_frozen)return ERROR_NOT_READY;
     /* Exactly one actual owner. NTSRV/execution boundaries request release;
      * acquisition cannot preempt it or create a frontend scheduling queue. */
     if(active && frontend->owner==owner)return ERROR_SUCCESS;
@@ -889,7 +927,7 @@ DWORD frontend_session_enter(frontend_session *frontend,const void *owner)
 {
     if(!frontend || !owner)return ERROR_INVALID_PARAMETER;
     EnterCriticalSection(&frontend->io_lock);
-    if(frontend->owner==owner)return ERROR_SUCCESS;
+    if(frontend->owner==owner && !frontend->console_return_frozen)return ERROR_SUCCESS;
     LeaveCriticalSection(&frontend->io_lock);return ERROR_NOT_READY;
 }
 static DWORD publish_video(frontend_session *frontend,const void *owner,
@@ -1091,24 +1129,24 @@ DWORD frontend_session_destroy(frontend_session *frontend)
     if(frontend->stop)SetEvent(frontend->stop);
     /* All resources observe the frontend stop, but closing the native Console must
      * never signal that session-wide event. */
-    if(frontend->thread) { WaitForSingleObject(frontend->thread,INFINITE);CloseHandle(frontend->thread); }
-    if(frontend->window)return ERROR_BUSY; /* Failed Window join: retain all callback context. */
+    if(frontend->thread) { WaitForSingleObject(frontend->thread,INFINITE);CloseHandle(frontend->thread);frontend->thread=NULL; }
+    /* A failed Window join retains callback storage, but must not leave the
+     * outer command interpreter in window-mode input. */
+    if(frontend->window)retain_first_error(&error,ERROR_BUSY);
     /* Reselect the canonical buffer even after a presentation failure. A
      * failed cleanup retains its handles for terminal process cleanup. */
     if(frontend->console_surface) {
-        if(!SetConsoleActiveScreenBuffer(frontend->console_output))return GetLastError();
-        CloseHandle(frontend->console_surface);
-        frontend->console_surface=NULL;
+        if(!SetConsoleActiveScreenBuffer(frontend->console_output))retain_first_error(&error,GetLastError());
+        else {CloseHandle(frontend->console_surface);frontend->console_surface=NULL;}
     }
     if(frontend->logical_surface) {CloseHandle(frontend->logical_surface);frontend->logical_surface=NULL;}
-    if(!frontend->parked)error=restore_console_palette(frontend);
-    if(error)return error;
-    error=restore_cursor_shape(frontend);
-    if(error)return error;
+    if(!frontend->parked)retain_first_error(&error,restore_console_palette(frontend));
+    retain_first_error(&error,restore_cursor_shape(frontend));
     if(frontend->input_mode_saved) {
-        if(!SetConsoleMode(frontend->console_input,frontend->original_input_mode))return GetLastError();
-        frontend->input_mode_saved=FALSE;
+        if(!SetConsoleMode(frontend->console_input,frontend->original_input_mode))retain_first_error(&error,GetLastError());
+        else frontend->input_mode_saved=FALSE;
     }
+    if(error)return error; /* Retain every possibly-live callback/resource. */
     if(frontend->console_input && frontend->console_input!=INVALID_HANDLE_VALUE)CloseHandle(frontend->console_input);
     if(frontend->console_output && frontend->console_output!=INVALID_HANDLE_VALUE)CloseHandle(frontend->console_output);
     if(frontend->stop)CloseHandle(frontend->stop);

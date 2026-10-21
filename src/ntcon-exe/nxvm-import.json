@@ -98,7 +98,9 @@
     },
     {
       "path": "lib/kvm-base/worker_interface.h",
-      "sha256": "BDF89DA7CFBCE826D92ED57917229ECAD927B10464D944AE2CC4016287A86840",
+      "upstreamSha256": "BDF89DA7CFBCE826D92ED57917229ECAD927B10464D944AE2CC4016287A86840",
+      "localException": "T447-S4-P4: owner-approved 10000ms finite component shutdown; see README.md",
+      "sha256": "58BA11DB726A0AD831D4C9B91DE31CCF156000355437DAD092A71EF685C26D7A",
       "compile": false
     },
     {

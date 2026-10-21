@@ -29,6 +29,7 @@ static frontend_session_service *fixture_service;
 static BOOL retirement_mode;
 static BOOL native_mode;
 static DWORD native_error;
+static DWORD completion_calls,completion_error;
 static HANDLE diagnostic_target;
 static volatile LONG usage_pending,retire_calls,drain_calls,park_calls,broker_shutdown;
 static HANDLE usage_seen,park_seen;
@@ -54,13 +55,15 @@ DWORD OpenNtBaseClientStartFrontend(uint64_t window,BOOL borrowed,HANDLE *root,
     return error;
 }
 DWORD OpenNtBaseClientReturnFrontendConsole(void){return ERROR_SUCCESS;}
+DWORD OpenNtBaseClientFrontendConsoleRestored(void){CHECK(FALSE);return ERROR_INVALID_STATE;}
 DWORD OpenNtBaseClientFrontendIoDisconnected(void)
 {
     CHECK(created && !channels[created-1]);
     CHECK(InterlockedCompareExchange(&stopped,0,0)==(LONG)created);
     ++disconnects;CHECK(SetEvent(disconnect_seen));return ERROR_SUCCESS;
 }
-DWORD OpenNtBaseClientWaitFrontendConsoleRestored(void){return ERROR_SUCCESS;}
+DWORD OpenNtBaseClientWaitFrontendConsoleRestored(void)
+{ ++completion_calls;return completion_error; }
 DWORD OpenNtBaseClientAcquireFrontendRoot(uint64_t window,DWORD *create_root,
     HANDLE *root,HANDLE *capability,HANDLE *retire,HANDLE *restored)
 { (void)window;*create_root=1;*root=*capability=*retire=*restored=NULL;return 0; }
@@ -77,6 +80,8 @@ struct frontend_session { DWORD unused; };
 DWORD frontend_session_create(frontend_session **out)
 { *out=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(**out));return *out ? 0 : ERROR_NOT_ENOUGH_MEMORY; }
 void frontend_session_cancel(frontend_session *value) { (void)value; }
+DWORD frontend_session_return_console(frontend_session *value)
+{ (void)value;CHECK(FALSE);return ERROR_INVALID_STATE; }
 DWORD frontend_session_park(frontend_session *value)
 { (void)value;CHECK(retirement_mode);InterlockedIncrement(&park_calls);CHECK(SetEvent(park_seen));return 0; }
 DWORD frontend_session_drain(frontend_session *value)
@@ -92,6 +97,11 @@ DWORD OpenNtBaseClientFrontendStateChanged(HANDLE *state_changed)
     *state_changed=NULL;
     CHECK(retirement_state);
     return DuplicateHandle(GetCurrentProcess(),retirement_state,GetCurrentProcess(),state_changed,
+        SYNCHRONIZE,FALSE,0) ? ERROR_SUCCESS : GetLastError();
+}
+DWORD OpenNtBaseClientBrokerProcess(HANDLE *server)
+{
+    return DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),server,
         SYNCHRONIZE,FALSE,0) ? ERROR_SUCCESS : GetLastError();
 }
 DWORD OpenNtBaseClientWorkerStateChanged(HANDLE *state_changed)
@@ -358,6 +368,13 @@ int main(void)
             CHECK(run16_frontend_scope_wait_native(scope,&result,&completed)==native_error);
             CHECK(completed==(DWORD)(native_error!=ERROR_PROCESS_ABORTED));
             CHECK(result==(completed ? 37u : 0u));
+            {
+                DWORD calls=completion_calls;
+                completion_error=case_index ? ERROR_TIMEOUT : ERROR_SUCCESS;
+                CHECK(run16_frontend_scope_finish(scope)==completion_error);
+                CHECK(completion_calls==calls+1);
+                completion_error=0;
+            }
         }
         native_mode=FALSE;
         CHECK(GetProcessHandleCount(GetCurrentProcess(),&after) && after==before);
