@@ -84,7 +84,7 @@ static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
     RPC_STATUS status,uuid_status;
     unsigned int index;
     DWORD result=RPC_S_SERVER_UNAVAILABLE;
-    status=RpcIfInqId(Client_vdm_service_v55_0_c_ifspec,&expected);
+    status=RpcIfInqId(Client_vdm_service_v56_0_c_ifspec,&expected);
     if (status) return status;
     status=RpcMgmtInqIfIds(binding,&interfaces);
     if (status) return status;
@@ -285,11 +285,19 @@ void OpenNtBaseClientDisconnectCurrent(void)
     ZeroMemory(&client,sizeof(client));
 }
 
-DWORD OpenNtBaseClientWorkerFrontendCapability(HANDLE *capability)
+static DWORD client_worker_event(DWORD (*query)(const common_rpc_connection *,HANDLE *),HANDLE *output)
 {
     common_rpc_connection state=client_rpc_view();
-    return common_rpc_worker_frontend_capability(&state,capability);
+    DWORD error;
+    if(!output)return ERROR_INVALID_PARAMETER;
+    *output=NULL;
+    error=OpenNtBaseClientFailure(0);
+    if(!error)error=OpenNtBaseClientFailure(query(&state,output));
+    if(error && *output){CloseHandle(*output);*output=NULL;}
+    return error;
 }
+DWORD OpenNtBaseClientWorkerFrontendCapability(HANDLE *capability)
+{ return client_worker_event(common_rpc_worker_frontend_capability,capability); }
 
 DWORD OpenNtBaseClientAcquireConsoleContext(HANDLE frontend,HANDLE *capability)
 {
@@ -554,10 +562,7 @@ DWORD OpenNtBaseClientWaitFrontendConsoleRestored(void)
 }
 
 DWORD OpenNtBaseClientWorkerShutdownEvent(HANDLE *shutdown)
-{
-    common_rpc_connection state=client_rpc_view();
-    return common_rpc_worker_shutdown_event(&state,shutdown);
-}
+{ return client_worker_event(common_rpc_worker_shutdown_event,shutdown); }
 
 DWORD OpenNtBaseClientRequestWorkerExit(void)
 {
@@ -579,22 +584,10 @@ DWORD OpenNtBaseClientRequestWorkerExit(void)
 }
 
 DWORD OpenNtBaseClientWorkerConsoleCloseEvent(HANDLE *close)
-{
-    common_rpc_connection state=client_rpc_view();
-    return common_rpc_worker_console_close_event(&state,close);
-}
-
-DWORD OpenNtBaseClientWorkerStateChanged(HANDLE *state_changed)
-{
-    common_rpc_connection state=client_rpc_view();
-    return common_rpc_worker_state_changed(&state,state_changed);
-}
+{ return client_worker_event(common_rpc_worker_console_close_event,close); }
 
 DWORD OpenNtBaseClientWorkerIoReleaseEvent(HANDLE *release)
-{
-    common_rpc_connection state=client_rpc_view();
-    return common_rpc_worker_io_release_event(&state,release);
-}
+{ return client_worker_event(common_rpc_worker_io_release_event,release); }
 
 DWORD OpenNtBaseClientWorkerIoTransition(DWORD action)
 {

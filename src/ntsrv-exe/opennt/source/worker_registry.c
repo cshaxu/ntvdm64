@@ -90,12 +90,7 @@ static BOOL service_native_root_selectable(OPENNT_BASE_SERVICE *service,
 
 void service_signal_worker_states(OPENNT_BASE_SERVICE *service)
 {
-    LIST_ENTRY *link;
     WakeAllConditionVariable(&service->frontend_changed);
-    for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
-        OPENNT_BASE_CONNECTION *caller=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-        if(caller->worker_state_changed)(void)SetEvent(caller->worker_state_changed);
-    }
 }
 
 VOID CALLBACK service_worker_terminated(PVOID context,BOOLEAN fired)
@@ -422,26 +417,6 @@ DWORD OpenNtBaseServiceWorkerIoReleaseEvent(OPENNT_BASE_CONNECTION *worker,DWORD
     return error;
 }
 
-DWORD OpenNtBaseServiceWorkerStateChanged(OPENNT_BASE_CONNECTION *caller,DWORD pid,
-    DWORD generation,HANDLE *state_changed)
-{
-    DWORD error=ERROR_ACCESS_DENIED;
-    if(!state_changed)return ERROR_INVALID_PARAMETER;
-    *state_changed=NULL;
-    if(!caller)return error;
-    EnterCriticalSection(&caller->service->lock);
-    if(OpenNtBaseServicePeer(caller,pid,generation) && !caller->native_worker &&
-        !caller->process.fVDM) {
-        if(!caller->worker_state_changed)
-            caller->worker_state_changed=CreateEventW(NULL,FALSE,FALSE,NULL);
-        if(!caller->worker_state_changed)error=GetLastError();
-        else if(!DuplicateHandle(GetCurrentProcess(),caller->worker_state_changed,
-            GetCurrentProcess(),state_changed,SYNCHRONIZE,FALSE,0))error=GetLastError();
-        else error=ERROR_SUCCESS;
-    }
-    LeaveCriticalSection(&caller->service->lock);
-    return error;
-}
 
 
 DWORD OpenNtBaseServiceCreateReservation(OPENNT_BASE_CONNECTION *connection,DWORD pid,

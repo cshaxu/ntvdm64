@@ -137,7 +137,6 @@ struct OPENNT_BASE_CONNECTION {
     int frontend_join_decision;
     DWORD retained_frontend_root; /* Authenticated launcher association, not a task. */
     HANDLE frontend_state_changed; /* Root-private auto-reset retirement wake. */
-    HANDLE worker_state_changed; /* Per-launcher auto-reset worker transition wake. */
     HANDLE worker_io_release; /* Service-owned auto-reset I/O instruction, not a task. */
     BOOL frontend_closing; /* Admission barrier, never execution/task state. */
     /* An explicit frontend close must let an attached DOS worker complete its

@@ -1070,3 +1070,112 @@ No new transport, guest change or mirror diff. S3 remains open for the finite
 remaining communication, partial-initialization and original-exit boundaries;
 S4 integrated acceptance remains required. This P does not claim total code
 reduction: source/test net +34, or that every service-loss race is tested.
+
+### Notification-handle consolidation candidate
+
+The four retained notification/capability getters repeat the same wire, exception and
+output-ownership pattern. One typed internal helper now uses the existing
+async RPC completion/cancellation mechanism for all four, preserving required
+versus optional successful attachments. A single executable-facade helper
+normalizes terminal failure before issuance and after completion, without
+poisoning an unbounded shared worker connection on an individual timeout.
+No new wire method, generic transport or worker policy is added. Protocol 56
+must be delivered coherently. All four reject an unadmitted launcher.
+
+Actual deadline modes 18-21 cover each getter, its pre-fault access contract,
+null failure output and immediate latched follow-ups. Successful use is exercised
+by the service-created DOS/native/WOW/CAF paths; source trace ties NTVDM's
+worker_lifecycle_begin and console_client_begin/activation to the four getters.
+Service fixtures retain successful/shutdown/release access-right checks.
+Unit stubs retain
+issuance-exception attachment closure, invalid arguments and exact zero handle
+delta; they no longer pretend a synchronous stub return completes async RPC.
+The former synthetic successful-null worker-event replies are not runtime-
+covered in this candidate; unchanged required-handle validation remains source
+review evidence, not claimed adversarial-server coverage. Other synchronous
+checkpoint/transition and Take/Wait tests retain their existing assertions.
+No guest or mirror change. Build, test and delivery pending.
+
+The preliminary r14 candidate also converted WorkerStateChanged. Source-call
+audit then proved that only old tests used it: production has single service-
+owned submit, while that bootstrap fixture still retried ERROR_NOT_READY.
+Remove the obsolete wire/client/provider, per-connection event and unused mock;
+retain internal service condition-variable notification. The actual bootstrap
+fixture now submits once and keeps its completion/failure/result assertions.
+The historical extraction-only verify-common-worker-control.mjs requires a
+pre-extraction snapshot and literal source equality; it is not a current gate
+for these intentionally changed contracts. Retire it rather than rewriting it
+into a duplicate behavior checker. Its historical T424 evidence remains and
+the script is recoverable in Git; current tests exercise real RPC and resources.
+
+r14 full/incremental build PID 29336 passed 09:35:26 UTC on 2026-10-21 and was
+not interrupted or published. Waiting runners 21900/32988 were stopped only
+after confirming no test child was running; inputs were then changed after
+the build completed. Final candidate uses fresh r14b evidence and the same
+valid compiler caches; no old CMake tree movement or cache clearing.
+
+r14b build PID 35732 started 09:38:01 UTC; service/deadline runner 1324 and
+wire runner 22040 wait for predecessors. Source inputs are frozen through
+verification. Current production diff is +56/-155 (net -99); tests +54/-113
+(net -59), including retirement of the historical 74-line extraction checker.
+The actual runtime and assertions, not that line count, determine acceptance.
+
+r14b full/incremental build passed 09:41:18 UTC; service38 passed 09:41:43 UTC.
+Governance PID 24704 passed 09:40:08 UTC. Runtime runner 20536, extra failure
+runner 14504 and startup/scope runner 37648 started at 09:39:47-48 UTC, waiting
+for the real RPC gates. No runtime source/test input is edited during these
+runs. Candidate publication remains blocked until all gates complete.
+
+All twenty r14b deadline cases passed individually, but the additionally
+selected old --reservation-parent failed at line 219, RegisterFrontendRoot,
+before any new positive assertion. Source proves it tries to self-register an
+arbitrary frontend; frontend_registry.c correctly requires the service-created
+process and exact inherited capability. This legacy fixture is not a valid
+current-admission positive oracle. No product behavior is relaxed or this
+failure marked passed. Undo only its newly added selection/assertions, retaining
+the failure evidence. Successful current ownership is verified through actual
+service-created product runs; base_service_reservation_test and the I/O fixture
+retain rights/state assertions, and monitor_rpc_test rejects forged registration.
+The old fixture's broader migration is not claimed by this P.
+
+Downstream r14b runners correctly failed their prerequisite and ran no product
+cases. Rerun the corrected test selection as r14c against byte-identical
+build-r14b product images: no product input changed after that full/incremental
+build. Rebuild affected fixture sources; rerun service38, all twenty deadlines,
+wire/bootstrap, fault/startup and runtime gates. This is not a failed product
+regression waiver or a weakened timeout/output assertion.
+
+r14c service38 passed 09:49:10 UTC; all twenty actual deadline cases passed
+09:53:30 UTC. Wire runner PID 28520 passed 09:54:30 UTC, including 85 frontend
+and 206 worker mechanism checks with zero handle delta, actual authenticated
+monitor/identity negatives and one-shot bootstrap/workerless grace/cancel.
+Runtime PID 35800, extra PID 13252 and startup PID 31160 run serially on
+package-r14c. Review PID 636 passed 09:53:27 UTC. After removing the newly added
+obsolete-fixture selection, final production diff is +56/-155 (net -99), tests
++37/-112 (net -75): combined net -174, excluding documentation and binaries.
+No mirror/guest diff. Product images are exactly build-r14b's thirteen hashes;
+publication must use that explicit build identity, not invent a build-r14c.
+
+### S3 P8 verification and delivery
+
+r14c runtime passed 09:57:21 UTC: DOS17, WINMINE/SOL gameplay, WRITE's four-
+sample startup frontier and all three CAF self-delete/echo-before-Enter cases.
+Extra worker failure/completed-worker loss passed 09:57:30 UTC; frontend scope
+and startup rejection/timeout rollback passed 09:57:43 UTC. These retain the
+previous frontier, not WRITE editing/save or universal intermittent-crash proof.
+All thirteen package hashes match build-r14b; installed process and selected
+DLL-holder preflight was empty. No user session needed termination.
+Final governance/diff review precedes coherent publication, commit and push.
+The obsolete reservation fixture failure above remains non-pass evidence.
+Remaining UNKNOWN_IF diagnosis, worker/inherited-console controls, partial-
+initialization and original-host exit permission are still S3 blockers; this
+delivery does not close S3 or claim every RPC/fault path is unified.
+
+Final review PID 38104 passed 09:59:11 UTC. An early publication invocation
+PID 27192 refused the not-yet-written review result before creating a backup
+or changing any image. After verifying the completed gate and no side effects,
+publication PID 1036 succeeded 09:59:34 UTC: thirteen images hash-identical to
+build-r14b at both assets/release and O:/winnt/system32. publication-r14c.json
+retains hashes; publication-r14c-backup retains both prior coherent sets.
+Post-publication documentation review, scoped commit and push follow; S3 stays
+open. No input/test assertion was changed after the passing r14c verification.

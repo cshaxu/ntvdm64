@@ -173,8 +173,6 @@ DWORD OpenNtBaseServiceRetireWorkerlessFrontend(OPENNT_BASE_CONNECTION *,DWORD p
     DWORD generation,DWORD *retired);
 DWORD OpenNtBaseServiceFrontendStateChanged(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE *state_changed);
-DWORD OpenNtBaseServiceWorkerStateChanged(OPENNT_BASE_CONNECTION *,DWORD pid,
-    DWORD generation,HANDLE *state_changed);
 /* Atomically reject retirement while original work/admission remains, else
  * revoke future joins. Frontend first drains its own native/local requests. */
 DWORD OpenNtBaseServiceAttachFrontendRequest(OPENNT_BASE_CONNECTION *,DWORD pid,

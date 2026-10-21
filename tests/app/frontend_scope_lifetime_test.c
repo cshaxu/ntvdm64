@@ -101,11 +101,6 @@ DWORD OpenNtBaseClientBrokerProcess(HANDLE *server)
     return DuplicateHandle(GetCurrentProcess(),failed_broker ? failed_broker : GetCurrentProcess(),GetCurrentProcess(),server,
         SYNCHRONIZE,FALSE,0) ? ERROR_SUCCESS : GetLastError();
 }
-DWORD OpenNtBaseClientWorkerStateChanged(HANDLE *state_changed)
-{
-    *state_changed=CreateEventW(NULL,FALSE,FALSE,NULL);
-    return *state_changed ? ERROR_SUCCESS : GetLastError();
-}
 DWORD OpenNtBaseClientRetireWorkerlessFrontend(DWORD *retired)
 {
     *retired=(DWORD)InterlockedCompareExchange(&broker_shutdown,0,0);

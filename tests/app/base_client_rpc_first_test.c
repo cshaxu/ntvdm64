@@ -715,6 +715,9 @@ static int ntvwm_execution_rpc(void)
 
 static int frontend_deadline(unsigned mode)
 {
+    DWORD (*events[])(HANDLE *)={OpenNtBaseClientWorkerFrontendCapability,
+        OpenNtBaseClientWorkerShutdownEvent,OpenNtBaseClientWorkerConsoleCloseEvent,
+        OpenNtBaseClientWorkerIoReleaseEvent};
     BOOL worker_exit=mode==1;
     BOOL startup=mode==3;
     typedef LONG (NTAPI *PROCESS_CONTROL)(HANDLE);
@@ -729,6 +732,11 @@ static int frontend_deadline(unsigned mode)
     if(!suspend || !resume || (worker_exit ? OpenNtBaseClientConnectCurrent() :
         OpenNtBaseClientConnectCurrentTimeout(10000)))goto done;
     if(OpenNtBaseClientBrokerProcess(&server))goto done;
+    if(mode>=18) {
+        HANDLE event=(HANDLE)1;
+        /* Notifications require an admitted worker identity. */
+        if(events[mode-18](&event)!=ERROR_ACCESS_DENIED || event)goto done;
+    }
     if(mode==9 && !GetConsoleMode(GetStdHandle(STD_INPUT_HANDLE),&input_mode))goto done;
     if(!worker_exit && !startup && (mode<4 || mode==9) && OpenNtBaseClientStartFrontend((uint64_t)(UINT_PTR)GetConsoleWindow(),TRUE,
         &root,&capability,&restored))goto done;
@@ -789,7 +797,11 @@ static int frontend_deadline(unsigned mode)
         puts("PASS: ordinary disconnect deadline and idempotent local cleanup");
         result=0;goto done;
     }
-    if(mode==8) {
+    if(mode>=18) {
+        HANDLE event=(HANDLE)1;
+        error=events[mode-18](&event);
+        if(event)goto done;
+    } else if(mode==8) {
         common_rpc_connection view=OpenNtBaseClientExecutionConnection(NULL);
         common_rpc_management management={view.binding,view.process};DTASKMGR_KEY key={0};
         error=common_rpc_close_management_node(&management,&key);
@@ -841,6 +853,13 @@ static int frontend_deadline(unsigned mode)
     }
     began=GetTickCount64();
     if(OpenNtBaseClientWaitFrontendConsoleRestored()!=ERROR_TIMEOUT)goto done;
+    if(mode>=18) {
+        unsigned i;
+        for(i=0;i<sizeof(events)/sizeof(events[0]);++i) {
+            HANDLE event=(HANDLE)1;
+            if(events[i](&event)!=ERROR_TIMEOUT || event)goto done;
+        }
+    }
     if(mode>=10) {
         DWORD generation=99;
         HANDLE owner=(HANDLE)1,token=(HANDLE)1,ack=(HANDLE)1,event=(HANDLE)1;
@@ -896,7 +915,7 @@ int main(int argc,char **argv)
     if (argc==2 && !lstrcmpA(argv[1],"--startup-service-timeout")) return frontend_deadline(3);
     if (argc==3 && !lstrcmpA(argv[1],"--control-service-timeout")) {
         unsigned mode=(unsigned)strtoul(argv[2],NULL,10);
-        return mode>=5 && mode<=17 && mode!=7 ? frontend_deadline(mode) : 2;
+        return mode>=5 && mode<=21 && mode!=7 ? frontend_deadline(mode) : 2;
     }
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-cancel-parent")) return reservation_parent(2);
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-cancel-killed-parent")) return reservation_parent(3);

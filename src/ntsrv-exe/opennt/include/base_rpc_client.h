@@ -50,7 +50,6 @@ DWORD OpenNtBaseClientWorkerShutdownEvent(HANDLE *shutdown);
 DWORD OpenNtBaseClientRequestWorkerExit(void);
 DWORD OpenNtBaseClientWorkerConsoleCloseEvent(HANDLE *close);
 DWORD OpenNtBaseClientWorkerIoReleaseEvent(HANDLE *release);
-DWORD OpenNtBaseClientWorkerStateChanged(HANDLE *state_changed);
 DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE capability);
 DWORD OpenNtBaseClientRegisterFrontendLease(uint64_t console_window,DWORD creator_pid,
     BOOL borrowed,HANDLE retire,HANDLE restored);

@@ -147,28 +147,16 @@ static DWORD native_worker_result(HANDLE worker,HANDLE capability,BOOL completed
 {
     WCHAR image[MAX_PATH],command[MAX_PATH+16],directory[MAX_PATH];
     LPWCH environment=NULL;run16_native_start start={0};
-    HANDLE changed=NULL,target=NULL,receipt=NULL,control=NULL;
-    DWORD request=0,error,result=0,wait,target_completed=99;ULONGLONG deadline=GetTickCount64()+10000;
-    error=OpenNtBaseClientWorkerStateChanged(&changed);if(error)return error;
+    HANDLE target=NULL,receipt=NULL,control=NULL;
+    DWORD request=0,error,result=0,target_completed=99;
     if(!GetEnvironmentVariableW(L"COMSPEC",image,ARRAYSIZE(image)) ||
         !GetCurrentDirectoryW(ARRAYSIZE(directory),directory)) {error=GetLastError();goto done;}
     environment=GetEnvironmentStringsW();if(!environment){error=GetLastError();goto done;}
     swprintf_s(command,ARRAYSIZE(command),completed ? L"\"%ls\" /d /c exit 37" : L"\"%ls\" /d /k",image);
     start.application=image;start.command=command;start.directory=directory;
     start.environment=environment;start.console_mask=7;
-    for(;;) {
-        error=OpenNtBaseClientRequestFrontend(capability);
-        if(error==ERROR_ALREADY_EXISTS)error=0;
-        if(!error)error=run16_native_request_submit(capability,&start,
-            &target,&receipt,&request);
-        if(error!=ERROR_NOT_READY)break;
-        {
-            ULONGLONG now=GetTickCount64();
-            if(now>=deadline){error=ERROR_TIMEOUT;break;}
-            wait=WaitForSingleObject(changed,(DWORD)(deadline-now));
-        }
-        if(wait!=WAIT_OBJECT_0){error=wait==WAIT_TIMEOUT ? ERROR_TIMEOUT : GetLastError();break;}
-    }
+    /* Same one-shot admission as Run16: NTSRV owns readiness and I/O binding. */
+    error=run16_native_request_submit(capability,&start,&target,&receipt,&request);
     if(error)goto done;
     if(!target || !receipt || !request || (!completed && WaitForSingleObject(target,0)!=WAIT_TIMEOUT))
         {error=ERROR_INVALID_DATA;goto done;}
@@ -209,7 +197,6 @@ done:
         CloseHandle(target);
     }
     if(control)CloseHandle(control);if(receipt)CloseHandle(receipt);
-    if(changed)CloseHandle(changed);
     if(environment)FreeEnvironmentStringsW(environment);
     return error;
 }

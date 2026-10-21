@@ -290,6 +290,18 @@ replace an already determined task result. Context/binding storage remains
 live through cancellation completion; repeated local cleanup is harmless.
 This does not resolve UNKNOWN_IF diagnosis or remaining worker controls.
 
+The notification-handle group unifies WorkerFrontendCapability,
+WorkerShutdownEvent, WorkerConsoleCloseEvent and WorkerIoReleaseEvent through
+one existing async-RPC attachment acquisition body. WorkerStateChanged has no
+production consumer: remove that obsolete launcher-retry notification and its
+service state, retaining the service's internal condition-variable wake.
+Its old bootstrap fixture must submit once just like Run16, not wait/retry.
+The facade preserves caller-specific timeout latching and closes attachments
+on a final service-loss result. Three notification results require a non-null
+handle; the frontend capability retains its prior provider-status contract.
+This does not change service authentication, permissions or I/O ownership, and
+does not add a deadline to intentional command receives or task execution.
+
 S1 changes documentation only: zero runtime, mirror, guest or release changes.
 S2 aims for zero mirror changes, using existing project-owned adapters. The
 selected S3 orderly-exit budget is at most three original host files and seven

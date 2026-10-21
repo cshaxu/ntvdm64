@@ -5,21 +5,29 @@
 #include "common/protocol/frontend_lifecycle.h"
 #include "common/protocol/frontend_protocol.h"
 
-DWORD common_rpc_worker_frontend_capability(const common_rpc_connection *state,HANDLE *capability)
+typedef error_status_t (*worker_event_rpc)(PRPC_ASYNC_STATE,handle_t,VDM_CONNECTION,HANDLE,ULONG,HANDLE *);
+static DWORD worker_event(const common_rpc_connection *state,HANDLE *output,
+    worker_event_rpc invoke,BOOL required)
 {
+    RPC_ASYNC_STATE async;
     DWORD error=ERROR_INVALID_STATE;
-    if (!capability) return ERROR_INVALID_PARAMETER;
-    *capability=NULL;
+    HANDLE local=NULL;
+    if (!output) return ERROR_INVALID_PARAMETER;
+    *output=NULL;
     if(!state || !state->connection || !state->binding || !state->process) return error;
+    error=common_rpc_begin_async(&async);if(error)return error;
     RpcTryExcept {
-        error=Client_WorkerFrontendCapability(state->binding,state->connection,state->process,
-            state->generation,capability);
+        invoke(&async,state->binding,state->connection,state->process,state->generation,&local);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    if (error && *capability) { CloseHandle(*capability);*capability=NULL; }
-    return error;
+    error=common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+    if(error){if(local)CloseHandle(local);return error;}
+    if(required && !local)return ERROR_INVALID_HANDLE;
+    *output=local;return ERROR_SUCCESS;
 }
+DWORD common_rpc_worker_frontend_capability(const common_rpc_connection *state,HANDLE *capability)
+{ return worker_event(state,capability,Client_WorkerFrontendCapability,FALSE); }
 
 DWORD common_rpc_acquire_console_context(const common_rpc_connection *state,HANDLE frontend,HANDLE *capability)
 {
@@ -64,40 +72,10 @@ DWORD common_rpc_register_native_backend(const common_rpc_connection *state,HAND
 }
 
 DWORD common_rpc_worker_shutdown_event(const common_rpc_connection *state,HANDLE *shutdown)
-{
-    DWORD error=ERROR_INVALID_STATE;
-    HANDLE local=NULL;
-    if(!shutdown)return ERROR_INVALID_PARAMETER;
-    *shutdown=NULL;
-    if(!state || !state->connection || !state->binding || !state->process)return error;
-    RpcTryExcept {
-        error=Client_WorkerShutdownEvent(state->binding,state->connection,state->process,
-            state->generation,&local);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    if(error){if(local)CloseHandle(local);return error;}
-    if(!local)return ERROR_INVALID_HANDLE;
-    *shutdown=local;return ERROR_SUCCESS;
-}
+{ return worker_event(state,shutdown,Client_WorkerShutdownEvent,TRUE); }
 
 DWORD common_rpc_worker_console_close_event(const common_rpc_connection *state,HANDLE *close)
-{
-    DWORD error=ERROR_INVALID_STATE;
-    HANDLE local=NULL;
-    if(!close)return ERROR_INVALID_PARAMETER;
-    *close=NULL;
-    if(!state || !state->connection || !state->binding || !state->process)return error;
-    RpcTryExcept {
-        error=Client_WorkerConsoleCloseEvent(state->binding,state->connection,state->process,
-            state->generation,&local);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    if(error){if(local)CloseHandle(local);return error;}
-    if(!local)return ERROR_INVALID_HANDLE;
-    *close=local;return ERROR_SUCCESS;
-}
+{ return worker_event(state,close,Client_WorkerConsoleCloseEvent,TRUE); }
 
 DWORD common_rpc_worker_io_checkpoint(const common_rpc_connection *state,DWORD reason,DWORD request,DWORD *decision)
 {
@@ -141,41 +119,7 @@ DWORD common_rpc_frontend_io_disconnected(const common_rpc_connection *state)
     return common_rpc_end_async(&async,error,NULL,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
 }
 DWORD common_rpc_worker_io_release_event(const common_rpc_connection *state,HANDLE *release)
-{
-    DWORD error=ERROR_INVALID_STATE;
-    HANDLE local=NULL;
-    if(!release)return ERROR_INVALID_PARAMETER;
-    *release=NULL;
-    if(!state || !state->connection || !state->binding || !state->process)return error;
-    RpcTryExcept {
-        error=Client_WorkerIoReleaseEvent(state->binding,state->connection,state->process,
-            state->generation,&local);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    if(error){if(local)CloseHandle(local);return error;}
-    if(!local)return ERROR_INVALID_HANDLE;
-    *release=local;return ERROR_SUCCESS;
-}
-
-DWORD common_rpc_worker_state_changed(const common_rpc_connection *state,HANDLE *state_changed)
-{
-    DWORD error=ERROR_INVALID_STATE;
-    HANDLE local=NULL;
-    if(!state_changed)return ERROR_INVALID_PARAMETER;
-    *state_changed=NULL;
-    if(!state || !state->connection || !state->binding || !state->process)return error;
-    RpcTryExcept {
-        error=Client_WorkerStateChanged(state->binding,state->connection,state->process,
-            state->generation,&local);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    if(error) { if(local)CloseHandle(local);return error; }
-    if(!local)return ERROR_INVALID_HANDLE;
-    *state_changed=local;
-    return ERROR_SUCCESS;
-}
+{ return worker_event(state,release,Client_WorkerIoReleaseEvent,TRUE); }
 
 DWORD common_rpc_take_frontend(const common_rpc_connection *state,HANDLE *pipe,HANDLE *frontend,DWORD *frontend_generation,HANDLE *ready,BOOL wait)
 {

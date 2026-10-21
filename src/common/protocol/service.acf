@@ -24,6 +24,10 @@ interface vdm_service
     [async] FrontendStateChanged();
     [async] FrontendStartupResult();
     [async] Disconnect();
+    [async] WorkerFrontendCapability();
+    [async] WorkerShutdownEvent();
+    [async] WorkerConsoleCloseEvent();
+    [async] WorkerIoReleaseEvent();
     /* These calls retain the same context identity. Service locks protect
      * mutable fields; RPC still excludes Close/rundown until calls finish.
      * A blocking receive must not exclude its worker's completion/sampling. */

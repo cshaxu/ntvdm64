@@ -22,13 +22,13 @@ static HANDLE attachment(unsigned index)
     exported[index]=mode==3 ? NULL : CreateEventW(NULL,TRUE,FALSE,NULL);
     CHECK(mode==3 || exported[index]!=NULL);return exported[index];
 }
-#define EVENT_CALL(name) error_status_t Client_##name(handle_t binding,VDM_CONNECTION connection, \
+#define EVENT_CALL(name) error_status_t Client_##name(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection, \
     HANDLE process,unsigned long generation,HANDLE *output) { \
-    peer(binding,connection,process,generation);*output=attachment(0);return result();}
+    peer(binding,connection,process,generation);CHECK(async!=NULL);*output=attachment(0); \
+    RpcRaiseException(mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED);return ERROR_SUCCESS;}
 EVENT_CALL(WorkerFrontendCapability)
 EVENT_CALL(WorkerShutdownEvent)
 EVENT_CALL(WorkerConsoleCloseEvent)
-EVENT_CALL(WorkerStateChanged)
 EVENT_CALL(WorkerIoReleaseEvent)
 error_status_t Client_WorkerIoCheckpoint(handle_t binding,VDM_CONNECTION connection,
     HANDLE process,unsigned long generation,unsigned long reason,unsigned long request,unsigned long *decision)
@@ -99,13 +99,12 @@ int main(void)
     CHECK(RpcAsyncInitializeHandle(&runtime,sizeof(runtime))==RPC_S_OK);
     event_client events[]={common_rpc_worker_frontend_capability,
         common_rpc_worker_shutdown_event,common_rpc_worker_console_close_event,
-        common_rpc_worker_state_changed,
         common_rpc_worker_io_release_event};
     expected.binding=(RPC_BINDING_HANDLE)(ULONG_PTR)11;
     expected.connection=(VDM_CONNECTION)(ULONG_PTR)12;
     expected.process=CreateEventW(NULL,TRUE,FALSE,NULL);expected.generation=13;
     CHECK(expected.process && GetProcessHandleCount(GetCurrentProcess(),&before));
-    for(i=0;i<5;++i) {
+    for(i=0;i<4;++i) {
         CHECK(events[i](&expected,NULL)==ERROR_INVALID_PARAMETER);
         output=expected.process;CHECK(events[i](NULL,&output)==ERROR_INVALID_STATE && !output);
         output=expected.process;CHECK(events[i](&invalid,&output)==ERROR_INVALID_STATE && !output);
@@ -133,7 +132,9 @@ int main(void)
     }
     for(mode=0;mode<3;++mode) {
         initial=calls;want=mode==0 ? 0 : mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED;
-        for(i=0;i<5;++i) {
+        /* Successful async replies use the actual NTSRV/runtime tests.
+         * These stubs assert issuance exceptions and attachment cleanup. */
+        for(i=0;mode && i<4;++i) {
             CHECK(events[i](&expected,&output)==want);
             if(want){CHECK(!output);closed(1);}else {CHECK(output!=NULL);CloseHandle(output);}
         }
@@ -153,19 +154,16 @@ int main(void)
             else {CHECK(pipe && frontend && ready && generation==42);
                 CloseHandle(pipe);CloseHandle(frontend);CloseHandle(ready);}
         }
-        CHECK(calls==initial+(mode ? 12 : 11));
+        CHECK(calls==initial+(mode ? 11 : 6));
     }
     CHECK(takes==3 && waits==3);
     mode=3;
-    CHECK(common_rpc_worker_shutdown_event(&expected,&output)==ERROR_INVALID_HANDLE && !output);
-    CHECK(common_rpc_worker_state_changed(&expected,&output)==ERROR_INVALID_HANDLE && !output);
     /* Capability exchanges preserve the prior provider-status contract;
      * only the notification APIs require a non-null successful attachment. */
-    CHECK(!common_rpc_worker_frontend_capability(&expected,&output) && !output);
     CHECK(!common_rpc_acquire_console_context(&expected,expected.process,&output) && !output);
-    mode=0;expected.binding=(RPC_BINDING_HANDLE)(ULONG_PTR)21;
+    mode=2;expected.binding=(RPC_BINDING_HANDLE)(ULONG_PTR)21;
     expected.connection=(VDM_CONNECTION)(ULONG_PTR)22;expected.generation=23;
-    CHECK(!common_rpc_worker_shutdown_event(&expected,&output));CloseHandle(output);
+    CHECK(common_rpc_worker_shutdown_event(&expected,&output)==RPC_S_CALL_FAILED && !output);closed(1);
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&after) && before==after);
     CHECK(WaitForSingleObject(expected.process,0)==WAIT_TIMEOUT);CloseHandle(expected.process);
     printf("%s common worker-control RPC %u checks %u failures; handle delta=%ld\n",
