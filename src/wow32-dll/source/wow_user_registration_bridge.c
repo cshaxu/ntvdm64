@@ -26,6 +26,7 @@ extern struct _TD *gptdShell;
 VOID WINAPI FreeDDEData(HANDLE, BOOL, BOOL);
 /* Uses ntvdm's existing authenticated BaseClient, never a DLL-private peer. */
 DWORD WINAPI OpenNtBaseClientWowStarted(ULONG task);
+BOOL WINAPI wow_current_separate_launch(void);
 #include "ntsrv-exe/opennt/include/base_rpc_client_launch_style.h"
 DWORD WINAPI NtvdmSeparateWowStyle(DWORD *style);
 
@@ -297,7 +298,8 @@ static BOOL WINAPI registered_init_task(UINT version, LPCSTR app_name,
     registration_trace("InitTask", result);
     if(!result)registration_trace("InitTaskError",init_error);
     SetLastError(init_error);
-    if (result && shared_id && shared_id!=(DWORD)-1) {
+    if (result && ((shared_id && shared_id!=(DWORD)-1) ||
+        (shared_id==0 && wow_current_separate_launch()))) {
         DWORD error=wow_user_task_lifecycle_notify_start(&wow_lifecycle,
             task_id, shared_id, OpenNtBaseClientWowStarted);
         registration_trace("InitTaskNotification",error);

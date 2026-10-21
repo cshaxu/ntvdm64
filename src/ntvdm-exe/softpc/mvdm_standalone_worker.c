@@ -13,6 +13,7 @@
 #include "ntvdm-exe/wow/include/wow_user_session_binding.h"
 #include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
 #include "ntvdm-exe/win32/console_client.h"
+#include "ntvdm-exe/win32/worker_lifecycle.h"
 #include <stdlib.h>
 #include <ctype.h>
 
@@ -44,6 +45,7 @@ static int mvdm_standalone_worker_cleanup(int result)
     uint32_t dispose_reason;
 
     ntvdm_dos_observer_stop(&worker_observer);
+    ntvdm_worker_lifecycle_end();
 
     /* The original host has already stopped its timer/event producers before
      * this process-level worker cleanup runs. */
@@ -133,7 +135,8 @@ DWORD mvdm_standalone_worker_begin(void)
                 character_io=FALSE;break;
             }
         }
-        error=worker_base_start_character_io(character_io,begin_character_io,&worker_session,NULL);
+        error=ntvdm_worker_lifecycle_begin(&worker_session,character_io);
+        if(!error)error=worker_base_start_character_io(character_io,begin_character_io,&worker_session,NULL);
         worker_character_io=character_io;
         if(error)goto fail;
     }

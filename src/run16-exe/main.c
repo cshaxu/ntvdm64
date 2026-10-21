@@ -17,6 +17,7 @@
 #include "common/system_root.h"
 #include "common/guest_environment.h"
 #include "common/application_search.h"
+#include "common/protocol/frontend_lifecycle.h"
 #include <shellapi.h>
 #include <stdio.h>
 #include <wchar.h>
@@ -123,27 +124,22 @@ static DWORD connect_broker(void)
     WCHAR broker[MAX_PATH];
     STARTUPINFOW startup = {sizeof(startup)};
     PROCESS_INFORMATION child = {0};
-    DWORD error=ERROR_GEN_FAILURE, attempt;
+    DWORD error=ERROR_GEN_FAILURE;
+    ULONGLONG deadline=GetTickCount64()+OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS;
+    BOOL spawned=FALSE;
     if (!sibling_path(L"system32\\ntsrv.exe", broker, MAX_PATH))
         return GetLastError();
-    /* A concurrent launcher may own a healthy endpoint, or may be in the
-     * broker-only empty-stop window.  Candidate creation is never readiness:
-     * an instance losing the endpoint race exits, while a candidate started
-     * after the old listener has drained becomes the fresh singleton. */
-    for (attempt = 0; attempt < 100; ++attempt)
+    /* Bootstrap is not task submission. One absent-service creation and one
+     * absolute connect budget; admitted task requests are never replayed. */
+    for (;;)
     {
-        error = OpenNtBaseClientConnectCurrent();
-        /* Service loss is relevant from admission onward, not only after a
-         * worker has started. The shared authenticated process-handle watcher
-         * blocks on broker/stop events, with no periodic liveness RPC. */
-        if (!error) return OpenNtBaseClientWatchBroker();
-        if (error == ERROR_REVISION_MISMATCH)
-            return error; /* Never start/retry a broker for an incompatible peer. */
-        /* Re-try only at bounded intervals.  This covers a listener which
-         * has stopped between the failed Connect and the first candidate's
-         * endpoint registration without turning the launcher into a broker
-         * supervisor or keeping any product-local lifecycle state. */
-        if (attempt==0 || attempt==20 || attempt==60)
+        ULONGLONG now=GetTickCount64();
+        if(now>=deadline)return ERROR_TIMEOUT;
+        error=OpenNtBaseClientConnectCurrentTimeout((DWORD)(deadline-now));
+        if (!error) return OpenNtBaseClientSetCallTimeout(OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+        if (error != RPC_S_SERVER_UNAVAILABLE)
+            return error; /* Bootstrap only an absent endpoint, not a rejected request. */
+        if (!spawned)
         {
             if (CreateProcessW(broker, NULL, NULL, NULL, FALSE, CREATE_NO_WINDOW,
                 NULL, NULL, &startup, &child))
@@ -152,24 +148,34 @@ static DWORD connect_broker(void)
                 CloseHandle(child.hProcess);
                 ZeroMemory(&child,sizeof(child));
             }
+            else return GetLastError();
+            spawned=TRUE;
         }
-        Sleep(50);
+        now=GetTickCount64();
+        if(now>=deadline)return ERROR_TIMEOUT;
+        Sleep((DWORD)min(50u,deadline-now));
     }
     return error;
 }
 
 static DWORD wait_wow_startup(HANDLE parent)
 {
-    HANDLE ready=NULL,events[2];
+    HANDLE ready=NULL,server=NULL,events[3];
     BOOL started=FALSE;
     DWORD error,wait,result=0;
     error=OpenNtBaseClientWowStartup(parent,&ready,&started);
     if (error) return error;
-    events[0]=ready; events[1]=parent;
-    wait=started ? WAIT_OBJECT_0 : WaitForMultipleObjects(ARRAYSIZE(events),events,FALSE,INFINITE);
+    error=OpenNtBaseClientBrokerProcess(&server);
+    if(error){CloseHandle(ready);return error;}
+    events[0]=server;events[1]=ready;events[2]=parent;
+    wait=started ? WAIT_OBJECT_0+1 : WaitForMultipleObjects(ARRAYSIZE(events),events,FALSE,
+        OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
     if (wait==WAIT_FAILED) error=GetLastError();
+    else if(wait==WAIT_OBJECT_0)error=ERROR_INVALID_HANDLE;
+    else if(wait==WAIT_TIMEOUT)error=ERROR_TIMEOUT;
+    CloseHandle(server);
     CloseHandle(ready); ready=NULL;
-    if (error) return error;
+    if (error) return OpenNtBaseClientFailure(error);
     /* Completion can race the first query/wait. Re-read the latched result
      * before consuming the original parent result or declaring load failure. */
     error=OpenNtBaseClientWowStartup(parent,&ready,&started);
@@ -198,7 +204,6 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
     BOOL published = FALSE;
     BOOL service_start_attempted = FALSE;
     BOOL resumed = FALSE;
-    BOOL task_completed = FALSE;
     /* A Console-subsystem launcher started by Explorer already has a new
      * Console. Original CreateProcess classified this as a new DOS session
      * before that Console existed. Preserve its session/CloseOnExit path,
@@ -284,7 +289,7 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
             result=frontend_capability ? OpenNtBaseClientRequestFrontend(frontend_capability) : ERROR_INVALID_STATE;
             if (result && result!=ERROR_ALREADY_EXISTS) { CloseHandle(parent_wait);goto done; }
         }
-        if (binary==BINARY_TYPE_WIN16 && !wait_target) {
+        if ((binary==BINARY_TYPE_WIN16 || binary==BINARY_TYPE_SEPWOW) && !wait_target) {
             result=wait_wow_startup(parent_wait);
             CloseHandle(parent_wait);
             goto done;
@@ -293,7 +298,6 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
             result=run16_wait_direct_event(parent_wait);
             if(!result) {
                 if(!BaseCheckForVDM(parent_wait,&result))result=GetLastError();
-                else task_completed=TRUE;
             }
         }
         CloseHandle(parent_wait);
@@ -321,7 +325,7 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
         frontend_capability,&worker.hProcess,&parent_wait);
     if(result)goto done;
     resumed = TRUE;
-    if (binary==BINARY_TYPE_WIN16 && !wait_target) {
+    if ((binary==BINARY_TYPE_WIN16 || binary==BINARY_TYPE_SEPWOW) && !wait_target) {
         result=wait_wow_startup(parent_wait);
         goto waited;
     }
@@ -331,7 +335,6 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
     result=run16_wait_direct_event(parent_wait);
     if(!result) {
         if(!BaseCheckForVDM(parent_wait,&result))result=GetLastError();
-        else task_completed=TRUE;
     }
 waited:
     if (parent_wait && parent_wait != worker.hProcess)
@@ -352,13 +355,6 @@ done:
     if (worker.hProcess)
         CloseHandle(worker.hProcess);
     (void)BaseDestroyVDMEnvironment(&environment, &unicode_environment);
-    /* Only an acknowledged DOS completion can resume its native parent's
-     * presentation. Startup/fault results must not select another worker or
-     * be replaced by an unrelated resume error. */
-    if (task_completed && (binary & ~BINARY_SUBTYPE_MASK)==BINARY_TYPE_DOS) {
-        DWORD handoff=run16_frontend_scope_resume_parent(frontend_scope);
-        if(handoff)result=handoff;
-    }
     return result;
 }
 
@@ -574,7 +570,11 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         }
         {
             DWORD completion=run16_frontend_scope_finish(frontend_scope);
-            if(!result)result=completion;
+            DWORD failure=OpenNtBaseClientFailure(0);
+            /* A task's numeric exit code is not a transport status. Only
+             * an independently latched loss/timeout supersedes that result. */
+            if(failure)result=failure;
+            else if(!result)result=completion;
         }
         run16_frontend_scope_end(frontend_scope);frontend_scope=NULL;
         OpenNtBaseClientDisconnectCurrent();
@@ -609,7 +609,9 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
 done:
     {
         DWORD completion=run16_frontend_scope_finish(frontend_scope);
-        if(!result)result=completion;
+        DWORD failure=OpenNtBaseClientFailure(0);
+        if(failure)result=failure;
+        else if(!result)result=completion;
     }
     run16_frontend_scope_end(frontend_scope);
     OpenNtBaseClientDisconnectCurrent();

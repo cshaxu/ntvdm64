@@ -3,11 +3,14 @@
 ## Authority and status
 
 Owner approved the four-stage division and requested execution. Current admits
-S1 only. This plan elaborates the approved architecture; it does not claim
+S3 after the bounded S2 implementation/review conclusion, with S2 P delivery
+explicitly deferred by the retained regression gates. S1 design was delivered
+at c838c332c. This plan elaborates the approved architecture; it does not claim
 runtime implementation or waive the control-only-through-NTSRV boundary.
 Baseline: 7917ef25a, following the published T447 checkpoint 4d4ef4d47.
 The [source audit](../evidence/m0-t448-s1-lifecycle-audit.md) distinguishes facts,
-proposed changes and remaining design approval. No guest changes or rebuilds.
+source facts and approved decisions. The [S2 ledger](../evidence/m0-t448-s2-lifecycle-implementation.md)
+tracks candidate implementation and verification. No guest changes or rebuilds.
 
 ## Delivery groups
 

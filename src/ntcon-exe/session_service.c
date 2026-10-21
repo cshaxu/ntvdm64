@@ -6,8 +6,8 @@
 #include <stdio.h>
 struct frontend_session_service {
     HANDLE notification,stop,thread,retire,state_changed;
-    HANDLE creator,broker;
-    BOOL retire_requested,creator_exited,return_prepared;
+    HANDLE broker;
+    BOOL retire_requested,return_prepared;
     frontend_io_channel *channel;
     frontend_session *presentation;
     void (*channel_ready)(void);
@@ -18,15 +18,12 @@ static DWORD WINAPI frontend_pump(void *context)
     HANDLE waits[7];
     DWORD error=ERROR_SUCCESS;
     for (;;) {
-        DWORD wait_count=0,retire_index=MAXDWORD,creator_index=MAXDWORD,broker_index=MAXDWORD,wait;
+        DWORD wait_count=0,retire_index=MAXDWORD,broker_index=MAXDWORD,wait;
         waits[wait_count++]=scope->stop;
         if(scope->broker){broker_index=wait_count;waits[wait_count++]=scope->broker;}
         if(!scope->return_prepared)waits[wait_count++]=scope->notification;
         if(scope->retire && !scope->retire_requested && !scope->return_prepared) {
             retire_index=wait_count;waits[wait_count++]=scope->retire;
-        }
-        if(scope->creator && !scope->creator_exited && !scope->return_prepared) {
-            creator_index=wait_count;waits[wait_count++]=scope->creator;
         }
         if(scope->state_changed) waits[wait_count++]=scope->state_changed;
         if(scope->channel && !scope->return_prepared)
@@ -48,9 +45,18 @@ static DWORD WINAPI frontend_pump(void *context)
             if(retired==OPENNT_FRONTEND_RETIRE_RETURN_CONSOLE) {
                 error=frontend_session_return_console(scope->presentation);
                 if(error)return error;
-                error=OpenNtBaseClientFrontendConsoleRestored();
+                error=OpenNtBaseClientFrontendCloseQuiesced();
                 if(error)return error;
                 scope->return_prepared=TRUE;
+                continue;
+            }
+            if(retired==OPENNT_FRONTEND_RETIRE_PARK) {
+                error=frontend_session_park(scope->presentation);
+                if(error)return error;
+                if(scope->retire && !ResetEvent(scope->retire))return GetLastError();
+                scope->retire_requested=FALSE;
+                error=OpenNtBaseClientFrontendLeaseReady();
+                if(error)return error;
                 continue;
             }
             if(retired!=OPENNT_FRONTEND_RETIRE_NONE)return ERROR_INVALID_DATA;
@@ -61,8 +67,6 @@ static DWORD WINAPI frontend_pump(void *context)
         if(scope->return_prepared)continue;
         if(retire_index!=MAXDWORD && wait==WAIT_OBJECT_0+retire_index)
             scope->retire_requested=TRUE;
-        if(creator_index!=MAXDWORD && wait==WAIT_OBJECT_0+creator_index)
-            scope->creator_exited=TRUE;
         {
             DWORD nonce=0,candidate=0,join;
             /* NTSRV asks for this one-off, physical same-Console check while
@@ -121,28 +125,6 @@ static DWORD WINAPI frontend_pump(void *context)
             }
             if (scope->channel_ready) scope->channel_ready();
         }
-        if(scope->presentation && ((scope->creator && scope->creator_exited) ||
-            scope->retire_requested)){
-            DWORD pending=0,tasks=0;
-            error=OpenNtBaseClientFrontendUsage(&pending,&tasks);
-            if(error)return error;
-            /* NTSRV includes native admissions and reported Console members.
-             * The frontend owns neither targets nor a second backend census. */
-            if(pending || tasks)continue;
-            /* Return the visible Console but retain resident worker I/O.
-             * Only the broker decides when the root must retire. */
-            {
-                error=frontend_session_park(scope->presentation);
-                if(error)return error;
-            }
-            /* Resident channels remain admitted across borrowed leases. A
-             * second launch must be able to retire the same frontend. */
-            scope->retire_requested=FALSE;
-            scope->creator=NULL; /* First launcher is not the next phase's owner. */
-            if(!ResetEvent(scope->retire))return GetLastError();
-            error=OpenNtBaseClientFrontendLeaseReady();
-            if(error)return error;
-        }
     }
     return ERROR_SUCCESS;
 }
@@ -194,7 +176,7 @@ static DWORD service_start(HANDLE notification,HANDLE creator,HANDLE retire,
     scope=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*scope));
     if(!scope)return ERROR_NOT_ENOUGH_MEMORY;
     scope->notification=notification;scope->channel_ready=ready;
-    scope->creator=creator;scope->retire=retire;
+    scope->retire=retire;
     if(creator) {
         error=OpenNtBaseClientBrokerProcess(&scope->broker);
         if(error)goto fail;

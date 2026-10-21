@@ -24,6 +24,7 @@ $cases=@('parent-resume-origin','io-authority','route-cancellation','prepared-na
     'native-command','native-worker','management-gui','management-frontend-close',
     'frontend-completion-barrier','management-frontend-close-order',
     'management-frontend-close-timeout','management-frontend-prepare-timeout',
+    'management-worker-then-console','management-console-then-worker','management-late-worker-close',
     'management-terminate','unfinished-worker-exit')
 if($FailureProbe){$cases=@('runner-failure')}
 $null=New-Item -ItemType Directory -Path $log
@@ -78,7 +79,9 @@ try {
             if($match.Success){
                 $fixturePid=[uint32]$match.Groups[1].Value
                 foreach($child in @(Get-CimInstance Win32_Process -Filter "ParentProcessId=$fixturePid")){
-                    if($child.CommandLine -and $child.CommandLine.StartsWith('"'+$fixturePath+'" ',[StringComparison]::OrdinalIgnoreCase)){
+                    if($child.CommandLine -and (
+                        $child.CommandLine.StartsWith('"'+$fixturePath+'" ',[StringComparison]::OrdinalIgnoreCase) -or
+                        $child.CommandLine.StartsWith($fixturePath+' ',[StringComparison]::OrdinalIgnoreCase))){
                         Stop-Process -Id $child.ProcessId -Force -ErrorAction Stop
                     }
                 }

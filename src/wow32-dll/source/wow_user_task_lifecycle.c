@@ -599,7 +599,10 @@ BOOL WINAPI wow_user_task_lifecycle_init_style(wow_user_task_lifecycle *owner,
     }
     if (status == STATUS_SUCCESS) {
         task->launch_request = shared_id;
-        task->start_pending = shared_id && shared_id != (DWORD)-1;
+        /* Separate WOW deliberately passes zero to original USER. Its real
+         * launch is identified by the original TD at the registration edge;
+         * bootstrap/internal tasks never issue that notification. */
+        task->start_pending = shared_id != (DWORD)-1;
         result = TRUE;
         task = NULL;
     } else SetLastError(RtlNtStatusToDosError(status));

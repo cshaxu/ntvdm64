@@ -401,7 +401,7 @@ static void service_copy_worker(OPENNT_BASE_WORKER_WATCH *watch,OPENNT_BASE_WORK
     } else service_copy_vdm_management_record(watch,item);
     item->display_state=item->state==0 ? MANAGEMENT_UNKNOWN :
         item->stack_depth ? MANAGEMENT_BUSY : MANAGEMENT_IDLE;
-    if(watch->termination_requested || (item->state&0x80000000u) ||
+    if(watch->close_kind!=WORKER_CLOSE_NONE || (item->state&0x80000000u) ||
         WaitForSingleObject(watch->process.ProcessHandle,0)!=WAIT_TIMEOUT) {
         item->state|=0x80000000u;item->display_state=MANAGEMENT_CLOSING;
     } else item->actions=MANAGEMENT_CAN_CLOSE;

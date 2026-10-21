@@ -4,6 +4,10 @@
 /* Worker-side broker lifetime binding. The caller owns CsrPortHeap and its
  * backend state; it must disconnect before destroying that storage. */
 DWORD worker_base_connect(void);
+/* Register only after owner state exists; join before owner state is freed.
+ * Callback is executable policy, never selected by worker kind here. */
+DWORD worker_base_watch_service(void (*lost)(void *),void *context);
+void worker_base_unwatch_service(void);
 /* Caller supplies its already classified execution route. Window-only work
  * skips character startup locally; classification and execution stay local. */
 static __inline DWORD worker_base_start_character_io(BOOL required,

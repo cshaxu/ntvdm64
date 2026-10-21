@@ -27,11 +27,6 @@ DWORD OpenNtBaseClientSubmitNativeRequest(DWORD operation,HANDLE capability,DWOR
     run16_native_launch_packet packet;WCHAR *strings[4];PROCESS_INFORMATION process={0};DWORD error;
     *target=*receipt=NULL;*request=0;
     if(capability!=(HANDLE)1)return ERROR_ACCESS_DENIED;
-    if(operation==OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME) {
-        if(bytes)return ERROR_INVALID_DATA;
-        if(payload)return ERROR_INVALID_DATA;
-        return scenario==9 ? ERROR_SUCCESS : scenario==10 ? ERROR_ACCESS_DENIED : ERROR_INVALID_DATA;
-    }
     if(operation!=OPENNT_BASE_NATIVE_REQUEST_LAUNCH)return ERROR_INVALID_PARAMETER;
     error=run16_native_launch_unpack(payload,bytes,&packet,strings);if(error)return error;
     if(packet.capabilities[0] || packet.capabilities[1])return ERROR_INVALID_DATA;
@@ -69,6 +64,11 @@ int main(void)
     start.application=image;start.command=command;start.directory=directory;start.environment=environment;
     /* Launcher authority slots must be stripped before copied RPC submission. */
     start.capabilities[0]=(HANDLE)123;start.capabilities[1]=(HANDLE)456;
+    {
+        HANDLE target=NULL,receipt=NULL;DWORD request=0,before=created;
+        if(run16_native_request_submit((HANDLE)1,NULL,&target,&receipt,&request)!=ERROR_INVALID_PARAMETER ||
+            created!=before)return 13; /* Parent reacquisition belongs to NTSRV. */
+    }
     for(scenario=0;scenario<6;++scenario) {
         HANDLE target=NULL,receipt=NULL;DWORD error,result=0,request=0,before=created;
         error=run16_native_request_submit((HANDLE)1,&start,&target,&receipt,&request);
@@ -98,11 +98,6 @@ int main(void)
         CloseHandle(completion_thread);CloseHandle(target);CloseHandle(receipt);
         CloseHandle(final_ready);CloseHandle(final_permission);
     }
-    for(scenario=9;scenario<=11;++scenario) {
-        DWORD before=created,wanted=scenario==9 ? 0 : scenario==10 ? ERROR_ACCESS_DENIED : ERROR_INVALID_DATA;
-        if(run16_native_request_resume((HANDLE)1)!=wanted || created!=before)return 10;
-        printf("PASS RPC resume case=%lu status=%lu no target\n",scenario,wanted);
-    }
     scenario=12;
     {
         DWORD result=99,completed=99;
@@ -110,6 +105,6 @@ int main(void)
         puts("PASS broker failure returned with cleared result, no dead-channel read");
     }
     FreeEnvironmentStringsW(environment);
-    puts("PASS client-only RPC submission, authority stripping, real exit 37, I/O barrier, errors and resume");
+    puts("PASS client-only RPC submission, authority stripping, real exit 37, I/O barrier and errors; no parent-resume entry");
     return 0;
 }

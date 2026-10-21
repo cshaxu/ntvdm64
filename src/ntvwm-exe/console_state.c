@@ -1,6 +1,7 @@
 /* Recovered from S8 d253e55af native_console_capture.c; see component README. */
 #include "console_state.h"
 #include "common/console/members.h"
+#include "common/protocol/frontend_lifecycle.h"
 #include <string.h>
 #include <stdio.h>
 
@@ -499,7 +500,7 @@ DWORD ntvwm_console_close(void)
             return ERROR_SUCCESS;
         return error;
     }
-    deadline=GetTickCount64()+8000;
+      deadline=GetTickCount64()+OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS;
     while(IsWindow(window)) {
         if(GetWindowThreadProcessId(window,&current_process)!=thread || current_process!=process)
             return ERROR_SUCCESS;

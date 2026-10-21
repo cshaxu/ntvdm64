@@ -157,6 +157,28 @@ static void ntvwm_shutdown_carrier_once(native_membership *state)
     if(InterlockedCompareExchange(&state->carrier_closing,1,0)!=0)return;
     worker_base_shutdown_close(ntvwm_release_console_carrier,state,INFINITE,ERROR_CANCELLED,state->closed);
 }
+static void service_lost(void *context)
+{
+    native_membership *state=context;
+    /* Terminal observers cannot return into an older direct-exit path while
+     * the winning owner is still closing the Console. This lock also fences
+     * suspended target creation/rollback: closing the carrier before that
+     * handoff can strand a target that cannot yet receive CTRL_CLOSE. */
+    if(InterlockedCompareExchange(&state->carrier_closing,1,0)!=0) {
+        WaitForSingleObject(GetCurrentProcess(),INFINITE);
+        return;
+    }
+    if(state->quit)SetEvent(state->quit);
+    EnterCriticalSection(state->lock);
+    worker_base_shutdown_close(ntvwm_release_console_carrier,state,INFINITE,
+        ERROR_INVALID_HANDLE,state->closed);
+}
+static void close_if_service_lost(native_membership *state)
+{
+    /* A transport error alone is not proof of service death. The client
+     * verifies the authenticated process and latches the disconnected status. */
+    if(OpenNtBaseClientFailure(0)==ERROR_INVALID_HANDLE)service_lost(state);
+}
 static void ntvwm_close_for_console_shutdown(native_membership *state)
 {
     if(!state->console_close || WaitForSingleObject(state->console_close,0)!=WAIT_OBJECT_0)return;
@@ -175,6 +197,7 @@ static void ntvwm_close_for_worker_shutdown(native_membership *state)
 static void input_failure(void *context,DWORD error)
 {
     native_membership *state=context;
+    close_if_service_lost(state);
     ntvwm_close_for_console_shutdown(state);
     ntvwm_close_for_worker_shutdown(state);
     if(WaitForSingleObject(state->quit,0)!=WAIT_TIMEOUT)return;
@@ -257,6 +280,7 @@ static DWORD WINAPI presentation_pump(void *context)
 {
     native_membership *state=context;
     DWORD error=presentation_loop(context);
+    close_if_service_lost(state);
     ntvwm_trace_error("pump",0,error);
     ntvwm_close_for_console_shutdown(state);
     ntvwm_close_for_worker_shutdown(state);
@@ -274,6 +298,7 @@ static DWORD WINAPI presentation_pump(void *context)
 static void membership_close(native_membership *state)
 {
     CRITICAL_SECTION *lock=state->lock;
+    worker_base_unwatch_service();
     if(state->quit)SetEvent(state->quit);
     if(state->thread){WaitForSingleObject(state->thread,INFINITE);CloseHandle(state->thread);}
     worker_base_input_watch_destroy(state->input_watch);
@@ -353,6 +378,7 @@ static BOOL WINAPI control_event(DWORD event)
 
 static void broker_completion_fault(void *context,DWORD error)
 {
+    close_if_service_lost(context);
     ntvwm_close_for_console_shutdown(context);
     ntvwm_trace_error("broker-complete",0,error);
     /* GetNext may be blocked in a synchronous RPC while a serving thread
@@ -435,6 +461,7 @@ int wmain(int argc,WCHAR **argv)
     }
     if(!error) error=membership_initialize(&membership);
     if(!error) error=ntvwm_executions_open(&requests);
+    if(!error) error=worker_base_watch_service(service_lost,&membership);
     if(!error) {
         ntvwm_executions_bind_io(requests,&io);
         ntvwm_executions_bind_fault(requests,broker_completion_fault,&membership);
@@ -479,6 +506,7 @@ int wmain(int argc,WCHAR **argv)
             continue;
         }
     }
+    close_if_service_lost(&membership);
     ntvwm_close_for_console_shutdown(&membership);
     ntvwm_close_for_worker_shutdown(&membership);
     if(membership.quit)SetEvent(membership.quit);

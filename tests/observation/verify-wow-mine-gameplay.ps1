@@ -6,6 +6,7 @@ param(
     [Parameter(Mandatory)][string]$BuildRoot,
     [ValidateSet('Off','Win16','All')][string]$WindowStyle='Off',
     [switch]$VisibleDesktop,
+    [switch]$StartupOnly,
     [switch]$RetiringSibling,
     [switch]$ExceptionSibling,
     [switch]$StartupFailureSibling,
@@ -103,7 +104,8 @@ try {
     $start=[Diagnostics.ProcessStartInfo]::new($Observer)
     $start.UseShellExecute=$false;$start.CreateNoWindow=$true
     $styleArgument=if($WindowStyle -eq 'Win16'){' --win16-style'}elseif($WindowStyle -eq 'All'){' --win16-style-all'}else{''}
-    $start.Arguments='"'+$runtime+'\system32\run16.exe" "'+$runtime+'" "'+$root+'\observer.txt" --wait'+$styleArgument+' "'+$runtime+'\WINMINE.EXE" --observation-timeout-ms '+$observerTimeout
+    $waitArgument=if($StartupOnly){''}else{' --wait'}
+    $start.Arguments='"'+$runtime+'\system32\run16.exe" "'+$runtime+'" "'+$root+'\observer.txt"'+$waitArgument+$styleArgument+' "'+$runtime+'\WINMINE.EXE" --observation-timeout-ms '+$observerTimeout
     $process=[Diagnostics.Process]::Start($start)
     $null=$process.Handle
     $process.Id | Set-Content "$root\observer.pid"
@@ -113,6 +115,15 @@ try {
         if($worker -or $process.HasExited){break};Start-Sleep -Milliseconds 50
     }while([DateTime]::UtcNow -lt $deadline)
     if(!$worker){throw 'No worker in this owned runtime'}
+    if($StartupOnly){
+        if(!$process.WaitForExit(10000)){throw 'Default Win16 launcher did not return after startup'}
+        $startupReport=Get-Content "$root\observer.txt" -Raw
+        if($process.ExitCode -or $startupReport -notmatch 'exit=0x00000000'){
+            throw 'Default Win16 launcher failed before gameplay'
+        }
+        'PASS launcher returned successfully before any gameplay or close input' |
+            Set-Content "$root\startup-result.txt"
+    }
     $marked=if($WindowStyle -eq 'Off'){'0'}else{'1'}
     $desktopName=if($VisibleDesktop){'-'}else{"NTVDMConsoleTest-$($process.Id)"}
     $probeArguments=@($worker.ProcessId,$desktopName,"$root\mine",$marked)

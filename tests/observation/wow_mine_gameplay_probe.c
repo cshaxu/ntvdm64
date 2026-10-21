@@ -232,9 +232,10 @@ int main(int argc,char **argv)
 {
     HANDLE process; HDESK desk; ULONGLONG deadline, started; DWORD before, counter; DWORD_PTR reply;
     BOOL inherited_desktop;
-    if((argc!=4 && argc!=5 && argc!=7 && argc!=8) ||
+    if((argc!=4 && argc!=5 && argc!=6 && argc!=7 && argc!=8) ||
         (strcmp(argv[2],"-") && strncmp(argv[2],"NTVDMConsoleTest-",17)))return 2;
     inherited_desktop=!strcmp(argv[2],"-");
+    if(argc==6 && (inherited_desktop || strcmp(argv[5],"--ready-only")))return 2;
     if(inherited_desktop && argc>=7)return 2;
     if(argc==8){
         if(!strcmp(argv[7],"exception"))exception_sibling=TRUE;
@@ -262,6 +263,10 @@ int main(int argc,char **argv)
         printf("PASS unchanged title and native frame=%u\n",native_frame);
     }
     if(!wait_board(process,&before,&counter) || !capture(mine,argv[3],"before"))return 5;
+    if(argc==6) {
+        puts("PASS owned private-desktop game ready; no gameplay or close input");
+        CloseHandle(process);CloseDesktop(desk);return 0;
+    }
     if(argc>=7) {
         if(!retire_sibling(argv[2],argv[5],argv[6]) ||
            WaitForSingleObject(process,0)!=WAIT_TIMEOUT ||

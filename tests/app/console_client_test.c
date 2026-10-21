@@ -3,6 +3,7 @@
  * even through the native API. Only broker delivery and session binding are
  * stubbed; both I/O implementations and Console operations are real. */
 #include "ntvdm-exe/win32/console_client.h"
+#include "ntvdm-exe/win32/worker_lifecycle.h"
 #include "ntvdm-exe/win32/console_text.h"
 #include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h"
 #include "ntcon-exe/console_frontend.h"
@@ -44,7 +45,7 @@ static __declspec(thread) session *bound;
 static HANDLE delivery,peer,stop,readiness,frontend_process,video_wait;
 static HANDLE server_thread;
 static void create_transport(void);
-static HANDLE broker_shutdown;
+static HANDLE broker_shutdown,broker_console_close;
 static session_teardown_fn cleanup;
 static void *cleanup_context;
 static frontend_console frontend;
@@ -74,6 +75,14 @@ static DWORD prepare_text(void *context,COORD size)
 }
 static BOOL hang_close;
 static DWORD execution_error;
+UINT VdmExitCode;
+static void (*loss_callback)(void *);
+static void *loss_context;
+static BOOL expect_loss;
+DWORD worker_base_watch_service(void (*lost)(void *),void *context)
+{ CHECK(lost && !loss_callback);loss_callback=lost;loss_context=context;return ERROR_SUCCESS; }
+void worker_base_unwatch_service(void)
+{ loss_callback=NULL;loss_context=NULL; }
 int session_thread_bind(session *instance) { bound=instance;return 1; }
 int session_thread_unbind(session *instance) { CHECK(bound==instance);bound=NULL;return 1; }
 BOOL CntrlHandler(ULONG type)
@@ -83,6 +92,18 @@ BOOL CntrlHandler(ULONG type)
     fflush(stdout);
     if (hang_close) Sleep(INFINITE);
     ExitProcess(73); /* Test substitute for original VDM close, not guest proof. */
+}
+void TerminateVDM(void)
+{
+    CHECK(bound==&owner);
+    if(expect_loss){CHECK(VdmExitCode==ERROR_INVALID_HANDLE);puts("PASS service loss reaches original worker cleanup entry with disconnected-port result");fflush(stdout);}
+    ExitProcess(74); /* Separate worker-close source entry. */
+}
+DWORD worker_base_console_close_event(HANDLE *event)
+{
+    if(!broker_console_close)broker_console_close=CreateEventW(NULL,TRUE,FALSE,NULL);
+    return broker_console_close && DuplicateHandle(GetCurrentProcess(),broker_console_close,
+        GetCurrentProcess(),event,SYNCHRONIZE,FALSE,0) ? ERROR_SUCCESS : GetLastError();
 }
 void OpenNtBaseClientSetCommandBinding(DWORD (*ready)(void *),void *context)
 { (void)ready;(void)context; }
@@ -272,6 +293,19 @@ int main(int argc,char **argv)
     BOOL broken_pipe=argc==2 && !strcmp(argv[1],"--broken-pipe");
     BOOL variable_video=argc==2 && !strcmp(argv[1],"--variable-video");
     hang_close=argc==2 && !strcmp(argv[1],"--close-hang");
+    if(argc==2 && (!strcmp(argv[1],"--lifecycle-console") || !strcmp(argv[1],"--lifecycle-wow") || !strcmp(argv[1],"--lifecycle-loss"))) {
+        BOOL text=!strcmp(argv[1],"--lifecycle-console");
+        CHECK(!ntvdm_worker_lifecycle_begin(&owner,text));
+        CHECK(!owner.console_client && !delivery && !frontend_process);
+        CHECK(text || !broker_console_close);
+        puts("PASS independent lifecycle reception without character resources");fflush(stdout);
+        if(!strcmp(argv[1],"--lifecycle-loss")) {
+            expect_loss=TRUE;CHECK(loss_callback);loss_callback(loss_context);
+            CHECK(!"loss callback returned without cleanup");
+        }
+        CHECK(SetEvent(text ? broker_console_close : broker_shutdown));
+        Sleep(10000);CHECK(!"lifecycle callback did not exit");
+    }
     if (argc==2 && !strcmp(argv[1],"--readiness-peer")) { Sleep(INFINITE);return 0; }
     if (broken_pipe) {
         /* Keep the authenticated presenter process alive while its channel
@@ -302,6 +336,7 @@ int main(int argc,char **argv)
     stop=CreateEventW(NULL,TRUE,FALSE,NULL);video_wait=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(stop && video_wait);
     create_transport();
     if(variable_video)return variable_video_case();
+    CHECK(!ntvdm_worker_lifecycle_begin(&owner,TRUE));
     CHECK(!ntvdm_console_client_begin(&owner));bound=&owner;
     {
         mvdm_mouse_bridge *mouse=mvdm_softpc_mouse_current();
@@ -866,8 +901,15 @@ int main(int argc,char **argv)
         memset(graphics.lpBitMap,17,16);CHECK(ReleaseMutex(graphics.hMutex));
         serial=frontend.video.published_serial;
         CHECK(ntvdm_console_graphics_invalidate(surface,&dirty)==1);
+        /* This fixture has no SoftPC video tick. Explicitly perform that
+         * owner's publication grant after the complete frame is prepared. */
+        CHECK(ntvdm_console_video_async(TRUE));
         CHECK(wait_video_serial(serial+1));
         CHECK(frontend.video.pixels && frontend.video.pixels[15]==17);
+        if(frontend.video.description.palette[17]!=0x001100)
+            fprintf(stderr,"palette frame serial=%lu expected-after=%lu size=%lux%lu colour17=%08lx\n",
+                frontend.video.published_serial,serial,frontend.video.description.width,
+                frontend.video.description.height,frontend.video.description.palette[17]);
         CHECK(frontend.video.description.palette[17]==0x001100);
         CHECK(ntvdm_console_graphics_palette(surface,palette,SYSPAL_STATIC)==1);
         CHECK(GetObjectType(palette)==OBJ_PAL);
@@ -881,6 +923,7 @@ int main(int argc,char **argv)
         CHECK(!frontend.video.pixels && !frontend.video.pending);
         serial=frontend.video.published_serial;
         CHECK(SetConsoleActiveScreenBuffer(surface));
+        CHECK(ntvdm_console_video_async(TRUE));
         CHECK(wait_video_serial(serial+1));
         CHECK(frontend.video.pixels && frontend.video.pixels[15]==17);
         CHECK(SetConsoleActiveScreenBuffer(GetStdHandle(STD_OUTPUT_HANDLE)));
@@ -1003,7 +1046,7 @@ int main(int argc,char **argv)
     SetEvent(stop);
     CHECK(TerminateProcess(frontend_process,23));
     CHECK(WaitForSingleObject(frontend_process,5000)==WAIT_OBJECT_0);
-    CHECK(SetEvent(broker_shutdown)); /* Simulated NTSRV root-loss instruction. */
+    CHECK(SetEvent(broker_console_close)); /* Simulated NTSRV Console-close instruction. */
     Sleep(10000);
     CHECK(!"root close did not terminate fixture");
 disconnected:
@@ -1019,11 +1062,12 @@ disconnected:
         CHECK(!GetConsoleScreenBufferInfo(local,&info) && GetLastError()==ERROR_PIPE_NOT_CONNECTED);
         CHECK(!SetConsoleMode(frontend.input,ENABLE_MOUSE_INPUT) && GetLastError()==ERROR_PIPE_NOT_CONNECTED);
     }
+    ntvdm_worker_lifecycle_end();
     cleanup(cleanup_context);bound=NULL;
     CHECK(!owner.console_client);
     CHECK(WaitForSingleObject(server_thread,5000)==WAIT_OBJECT_0);
     CloseHandle(server_thread);CloseHandle(stop);CloseHandle(video_wait);CloseHandle(local);CloseHandle(frontend.output);CloseHandle(frontend.input);
-    CloseHandle(readiness);CloseHandle(frontend_process);CloseHandle(broker_shutdown);
+    CloseHandle(readiness);CloseHandle(frontend_process);CloseHandle(broker_shutdown);CloseHandle(broker_console_close);
     puts("PASS client transport, distinct frontend ownership, native error and idle frontend loss");
     return 0;
 }

@@ -31,7 +31,7 @@ static DWORD inherited_capability(const char *name,HANDLE *capability)
     return ERROR_SUCCESS;
 }
 struct run16_frontend_scope {
-    HANDLE capability,restored,root,receipt;
+    HANDLE capability,receipt;
     BOOL owns_environment,has_execution;
     DWORD console_mask,native_request;
     DWORD window_style;
@@ -42,8 +42,6 @@ void run16_frontend_scope_end(run16_frontend_scope *scope)
     if(!scope)return;
     if(scope->owns_environment)SetEnvironmentVariableA(FRONTEND_ENV,NULL);
     if(scope->capability)CloseHandle(scope->capability);
-    if(scope->restored)CloseHandle(scope->restored);
-    if(scope->root)CloseHandle(scope->root);
     if(scope->receipt)CloseHandle(scope->receipt);
     HeapFree(GetProcessHeap(),0,scope);
 }
@@ -52,7 +50,7 @@ static DWORD scope_begin(run16_frontend_scope **output,BOOL lease,BOOL console_o
     run16_frontend_scope *scope;
     char text[32];
     DWORD error=ERROR_SUCCESS,generation;
-    HANDLE inherited_frontend=NULL,inherited_execution=NULL;
+    HANDLE inherited_frontend=NULL,inherited_execution=NULL,root=NULL;
     nthook_context seed;BOOL seeded=FALSE;
     if (!output) return ERROR_INVALID_PARAMETER;
     *output=NULL;
@@ -83,7 +81,8 @@ static DWORD scope_begin(run16_frontend_scope **output,BOOL lease,BOOL console_o
             if (error) goto fail;
             scope->has_execution=TRUE;
         }
-        error=OpenNtBaseClientRetainFrontendRoot(inherited_frontend,&scope->root,&generation);
+        error=OpenNtBaseClientRetainFrontendRoot(inherited_frontend,&root,&generation);
+        if(root){CloseHandle(root);root=NULL;}
         if (error) goto fail;
         if (!DuplicateHandle(GetCurrentProcess(),inherited_frontend,GetCurrentProcess(),
             &scope->capability,SYNCHRONIZE,FALSE,0)) { error=GetLastError();goto fail; }
@@ -94,8 +93,6 @@ static DWORD scope_begin(run16_frontend_scope **output,BOOL lease,BOOL console_o
             &connection.process,&connection.capability,&connection.restored);
         if(error)goto fail;
         scope->capability=connection.capability;connection.capability=NULL;
-        scope->restored=connection.restored;connection.restored=NULL;
-        scope->root=connection.process;connection.process=NULL;
         frontend_bootstrap_release(&connection);
         sprintf_s(text,sizeof(text),"%llx",(unsigned long long)(uintptr_t)scope->capability);
         if (!SetEnvironmentVariableA(FRONTEND_ENV,text)) { error=GetLastError();goto fail; }
@@ -164,73 +161,39 @@ DWORD run16_frontend_scope_window_style(run16_frontend_scope *scope)
 DWORD run16_frontend_scope_creation_flags(run16_frontend_scope *scope)
 { return scope ? scope->creation_flags : 0; }
 
-static DWORD wait_worker_change(HANDLE changed,HANDLE worker,HANDLE root,ULONGLONG deadline)
-{
-    HANDLE waits[3];DWORD count=0,worker_index=MAXDWORD,root_index=MAXDWORD,wait,remaining;
-    ULONGLONG now=GetTickCount64();
-    if(now>=deadline)return ERROR_TIMEOUT;
-    remaining=(DWORD)(deadline-now);
-    if(worker){worker_index=count;waits[count++]=worker;}
-    if(root){root_index=count;waits[count++]=root;}
-    waits[count++]=changed;
-    wait=WaitForMultipleObjects(count,waits,FALSE,remaining);
-    if(wait==WAIT_TIMEOUT)return ERROR_TIMEOUT;
-    if(wait==WAIT_FAILED)return GetLastError();
-    if(worker && wait==WAIT_OBJECT_0+worker_index)return ERROR_PROCESS_ABORTED;
-    if(root && wait==WAIT_OBJECT_0+root_index)return ERROR_PIPE_NOT_CONNECTED;
-    return wait==WAIT_OBJECT_0+count-1 ? ERROR_SUCCESS : ERROR_INVALID_STATE;
-}
-
 DWORD run16_frontend_scope_launch_native(run16_frontend_scope *scope,const run16_native_start *start,DWORD native_type)
 {
-    HANDLE worker=NULL,changed=NULL,target=NULL;DWORD error;
-    ULONGLONG deadline=GetTickCount64()+OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS;
+    HANDLE worker=NULL,target=NULL;DWORD error;
     BOOL text;
     if(!scope || !start || !OpenNtBaseNativeLaunchTypeIsValid(native_type))return ERROR_INVALID_PARAMETER;
     text=OpenNtBaseNativeLaunchTypeIsText(native_type);
     if(scope->receipt)return ERROR_BUSY;
-    error=OpenNtBaseClientWorkerStateChanged(&changed);
-    if(error)return error;
-    for(;;) {
-        error=OpenNtBaseClientStartNativeWorker(native_type,&worker);
-        if(error==ERROR_ALREADY_EXISTS) {
-            /* Each launcher has its own auto-reset state event; NTCON's
-             * retirement event is never shared with this admission wait. */
-            error=wait_worker_change(changed,NULL,scope->root,deadline);
-            if(!error)continue;
-            break;
-        }
-        break;
-    }
+    error=OpenNtBaseClientStartNativeWorker(native_type,&worker);
+    if(worker)CloseHandle(worker);
     if(error)goto done;
-    for(;;) {
-        /* Both worker kinds acquire the same authenticated presentation route.
-         * A reused route is not a new frontend or an input activation. */
-        error=text ? OpenNtBaseClientRequestFrontend(scope->capability) : ERROR_SUCCESS;
-        if(error==ERROR_ALREADY_EXISTS)error=ERROR_SUCCESS;
-        if(!error)error=run16_native_request_submit(text ? scope->capability : NULL,start,&target,&scope->receipt,&scope->native_request);
-        if(error!=ERROR_NOT_READY)break;
-        /* No request was accepted. Wait only for initial registration; never
-         * replay a submitted request or restart a failed worker. */
-        error=wait_worker_change(changed,worker,scope->root,deadline);
-        if(error)break;
-    }
-    CloseHandle(worker);
+    /* One submission. NTSRV owns readiness and frontend association; neither
+     * a transient status nor an ambiguous reply authorizes a replay here. */
+    error=run16_native_request_submit(text ? scope->capability : NULL,start,
+        &target,&scope->receipt,&scope->native_request);
 done:
     /* The exported reference is startup diagnostics only. Neither task
      * completion nor Console return depends on local target observation. */
     if(target)CloseHandle(target);
-    CloseHandle(changed);
     return error;
 }
 DWORD run16_wait_direct_event(HANDLE receipt)
 {
-    DWORD wait;
+    HANDLE server=NULL,waits[2];DWORD wait,error;
     if(!receipt)return ERROR_INVALID_PARAMETER;
-    wait=WaitForSingleObject(receipt,INFINITE);
-    if(wait==WAIT_FAILED)return GetLastError();
-    if(wait!=WAIT_OBJECT_0)return ERROR_INVALID_STATE;
-    return ERROR_SUCCESS;
+    error=OpenNtBaseClientBrokerProcess(&server);
+    if(error)return error;
+    waits[0]=server;waits[1]=receipt;
+    wait=WaitForMultipleObjects(2,waits,FALSE,INFINITE);
+    error=wait==WAIT_OBJECT_0 ? ERROR_INVALID_HANDLE :
+        wait==WAIT_OBJECT_0+1 ? ERROR_SUCCESS :
+        wait==WAIT_FAILED ? GetLastError() : ERROR_INVALID_STATE;
+    CloseHandle(server);
+    return error;
 }
 DWORD run16_frontend_scope_wait_native(run16_frontend_scope *scope,DWORD *result,DWORD *target_completed)
 {
@@ -250,15 +213,6 @@ DWORD run16_frontend_scope_wait_native(run16_frontend_scope *scope,DWORD *result
     }
     return error;
 }
-DWORD run16_frontend_scope_resume_parent(run16_frontend_scope *scope)
-{
-    if(!scope || !scope->has_execution)return 0;
-    /* NTSRV validates the completed child and inherited worker origin. A DOS
-     * origin keeps its original resume path; only a native parent is granted
-     * an I/O reacquisition through the existing confirmation barrier. */
-    return run16_native_request_resume(scope->capability);
-}
-
 DWORD run16_frontend_scope_finish(run16_frontend_scope *scope)
 {
     if(!scope)return ERROR_SUCCESS;

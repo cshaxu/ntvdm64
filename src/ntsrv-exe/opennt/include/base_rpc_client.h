@@ -15,6 +15,12 @@ DWORD OpenNtBaseClientFrontendIoDisconnected(void);
 DWORD OpenNtBaseClientSubmitNativeRequest(DWORD,HANDLE,DWORD,BYTE *,HANDLE *,HANDLE *,DWORD *);
 DWORD OpenNtBaseClientFinishNativeRequest(DWORD,DWORD *,DWORD *);
 DWORD OpenNtBaseClientConnectCurrent(void);
+/* Launcher bootstrap only: all connection calls share this remaining budget. */
+DWORD OpenNtBaseClientConnectCurrentTimeout(DWORD milliseconds);
+DWORD OpenNtBaseClientSetCallTimeout(DWORD milliseconds);
+/* Preserve ordinary failures; confirmed admitted service loss maps to the
+ * original disconnected-port Win32 error. No peer observation is involved. */
+DWORD OpenNtBaseClientFailure(DWORD error);
 DWORD OpenNtBaseClientBrokerProcess(HANDLE *server);
 DWORD OpenNtBaseClientStartFrontend(uint64_t console_window,BOOL borrowed,
     HANDLE *root,HANDLE *capability,HANDLE *restored);
@@ -27,11 +33,14 @@ DWORD OpenNtBaseClientStartVdmWorker(PCWSTR environment,DWORD characters,
  * Invoke for failed requests too, before releasing the client connection. */
 DWORD OpenNtBaseClientWaitFrontendConsoleRestored(void);
 DWORD OpenNtBaseClientFrontendConsoleRestored(void);
+DWORD OpenNtBaseClientFrontendCloseQuiesced(void);
 DWORD OpenNtBaseClientFrontendStartupResult(HANDLE capability,DWORD status);
 DWORD OpenNtBaseClientReportCurrentConsoleMembers(void);
-/* Arm only after launcher creation rollback is no longer required. Workers
- * arm immediately after Connect, before entering guest code. */
-DWORD OpenNtBaseClientWatchBroker(void);
+/* Mechanism only: the executable supplies loss cleanup after its resources
+ * exist. Callback runs off-thread, outside client locks; it must not disconnect
+ * or destroy this watcher. Owner stops/joins before releasing callback state. */
+DWORD OpenNtBaseClientWatchBroker(void (*lost)(void *),void *context);
+void OpenNtBaseClientStopBrokerWatch(void);
 DWORD WINAPI OpenNtBaseClientWowStarted(ULONG task);
 /* Resolve only this client's original parent completion handle; no caller
  * guesses transport receipts. Returned startup event is owned/wait-only. */

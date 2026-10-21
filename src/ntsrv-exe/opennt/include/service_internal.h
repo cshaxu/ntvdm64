@@ -116,6 +116,7 @@ struct OPENNT_BASE_CONNECTION {
     HANDLE vdm_exit_watch,vdm_exit_process;
     HANDLE wow_start_event;
     BOOL wow_started;
+    BOOL separate_wow_delivered; /* Original GetNext consumed the one-shot record. */
     HANDLE frontend_capability; /* Root lease, independent of command lifetime. */
     uint64_t frontend_console_window,frontend_reserved_window;
     HANDLE frontend_retire,frontend_restored;
@@ -147,6 +148,8 @@ struct OPENNT_BASE_CONNECTION {
      * then sends the existing worker close instruction.  This acknowledgement
      * is local to that close transaction; it never completes a launcher lease. */
     BOOL frontend_close_return_required,frontend_close_returned;
+    ULONGLONG frontend_close_deadline; /* One close per authenticated root generation. */
+    BOOL frontend_close_timed_out; /* Does not reopen admission or discard late facts. */
     struct OPENNT_FRONTEND_ROUTE *frontend_io_route; /* Borrowed, service-lock protected. */
     DWORD frontend_request_root; /* Original pending command asks this root for I/O. */
     DWORD frontend_channel_root; /* One pending direct launcher-to-root attachment. */
@@ -200,6 +203,11 @@ typedef struct OPENNT_FRONTEND_ROUTE {
     DWORD request;
     BOOL io_requested,io_release_ordered,io_releasing,io_worker_closed,io_frontend_closed;
 } OPENNT_FRONTEND_ROUTE;
+typedef enum OPENNT_BASE_WORKER_CLOSE_KIND {
+    WORKER_CLOSE_NONE,
+    WORKER_CLOSE_WORKER,
+    WORKER_CLOSE_CONSOLE
+} OPENNT_BASE_WORKER_CLOSE_KIND;
 typedef struct OPENNT_BASE_WORKER_WATCH {
     LIST_ENTRY link;
     OPENNT_BASE_SERVICE *service;
@@ -218,7 +226,7 @@ typedef struct OPENNT_BASE_WORKER_WATCH {
      * DOSRecord chain remains the sole source of task depth and state. */
     LIST_ENTRY management_labels;
     uint64_t last_dos_occurrence; /* Ordered source replay watermark, not history. */
-    BOOL termination_requested;
+    OPENNT_BASE_WORKER_CLOSE_KIND close_kind;
     /* `shutdown` is worker close; `console_close` is Console-close. The
      * broker owns the command and the worker owns the semantic implementation. */
     HANDLE shutdown;
@@ -262,6 +270,9 @@ VOID CALLBACK service_worker_terminated(PVOID context,BOOLEAN fired);
 void service_delete_console_context(OPENNT_BASE_CONSOLE_CONTEXT *context);
 DWORD service_acquire_console_context(OPENNT_BASE_CONNECTION *root,HANDLE console,
     DWORD worker_generation,HANDLE *capability);
+DWORD service_submit_native_request_until(OPENNT_BASE_CONNECTION *caller,DWORD pid,
+    DWORD generation,DWORD operation,HANDLE frontend,DWORD bytes,BYTE *payload,
+    HANDLE *target,HANDLE *receipt,DWORD *request,ULONGLONG deadline);
 DWORD service_prepare_parent_resume(OPENNT_BASE_CONNECTION *caller,
     DWORD root_generation,BOOL *native_parent);
 BOOL service_root_console_matches(OPENNT_BASE_CONNECTION *root,HANDLE console);

@@ -105,6 +105,7 @@ DWORD OpenNtBaseServiceStartFrontend(OPENNT_BASE_CONNECTION *,DWORD,DWORD,
 DWORD OpenNtBaseServiceReturnFrontendConsole(OPENNT_BASE_CONNECTION *,DWORD,DWORD);
 DWORD OpenNtBaseServiceWaitFrontendConsoleRestored(OPENNT_BASE_CONNECTION *,DWORD,DWORD);
 DWORD OpenNtBaseServiceFrontendConsoleRestored(OPENNT_BASE_CONNECTION *,DWORD,DWORD);
+DWORD OpenNtBaseServiceFrontendCloseQuiesced(OPENNT_BASE_CONNECTION *,DWORD,DWORD);
 DWORD OpenNtBaseServiceFrontendStartupResult(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE,DWORD);
 /* Independent of DOS command receipts: a root registers an unnamed event
  * received through an authenticated typed attachment. Descendants present

@@ -9,7 +9,8 @@ typedef void (*worker_base_input_failure_fn)(void *context,DWORD error);
 
 /* Borrow cancellation/context until destroy joins. NULL ready callback exposes
  * the stable wake to an existing consumer; otherwise callback consumes input.
- * Both consumers acknowledge after their actual read, never merely on wake. */
+ * Both consumers acknowledge after their actual read, never merely on wake.
+ * Either close source may be NULL; no program-kind policy belongs here. */
 worker_base_input_watch *worker_base_input_watch_create(HANDLE console_close,HANDLE worker_close,HANDLE stop,
     worker_base_input_ready_fn ready,worker_base_input_shutdown_fn close_console,
     worker_base_input_shutdown_fn close_worker,

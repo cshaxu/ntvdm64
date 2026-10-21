@@ -91,6 +91,7 @@ static BOOL service_native_root_selectable(OPENNT_BASE_SERVICE *service,
 void service_signal_worker_states(OPENNT_BASE_SERVICE *service)
 {
     LIST_ENTRY *link;
+    WakeAllConditionVariable(&service->frontend_changed);
     for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *caller=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
         if(caller->worker_state_changed)(void)SetEvent(caller->worker_state_changed);
@@ -519,7 +520,7 @@ DWORD OpenNtBaseServiceSelectNativeWorker(OPENNT_BASE_CONNECTION *connection,
         if(watch->kind!=OPENNT_BASE_WORKER_NATIVE ||
             (watch->console!=connection->console &&
              (requested_root || watch->frontend_root_generation)) ||
-            watch->termination_requested || WaitForSingleObject(watch->process.ProcessHandle,0)!=WAIT_TIMEOUT ||
+            watch->close_kind!=WORKER_CLOSE_NONE || WaitForSingleObject(watch->process.ProcessHandle,0)!=WAIT_TIMEOUT ||
             !service_native_root_selectable(service,watch->process.SequenceNumber,
                 requested_root))continue;
         /* Shared GUI carriers, like shared WOW, are not keyed by an outer

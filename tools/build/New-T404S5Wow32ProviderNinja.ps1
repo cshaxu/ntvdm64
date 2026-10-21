@@ -81,6 +81,7 @@ $providerSupportSources = @(
     (Join-Path $adapterWow 'wow_task_event_binding.c'),
     (Join-Path $adapterWow 'wow_task_profile_binding.c'),
     (Join-Path $adapterWow 'wow_task_parent.c'),
+    (Join-Path $adapterWow 'wow_launch_identity.c'),
     (Join-Path $adapterWow 'wow_native_process.c'),
     (Join-Path $adapterWow 'wow_title_policy.c'),
     (Join-Path $adapterWow 'wow_user_message_bridge.c'),

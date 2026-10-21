@@ -11,6 +11,9 @@
 #include "opennt-host/base/win32/inc/basevdm.h"
 #include <vdmapi.h>
 #include <base_event.h>
+#ifndef STATUS_PORT_DISCONNECTED
+#define STATUS_PORT_DISCONNECTED ((NTSTATUS)0xC0000037L)
+#endif
 BOOL BaseCheckForVDM(HANDLE, LPDWORD);
 /* Bind the admitted CSR-shaped boundary explicitly. Modern ntdll.lib also
  * exports CsrClientCallServer; it must never silently satisfy this dependency.

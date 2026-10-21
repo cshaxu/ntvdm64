@@ -10,6 +10,7 @@
 #include "ntcon-exe/session_service.h"
 #include "run16-exe/frontend_bootstrap.h"
 #include "common/protocol/console_io.h"
+#include "common/protocol/frontend_lifecycle.h"
 
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"line %u error %lu: %s\n", \
     (unsigned)__LINE__,GetLastError(),#x); ExitProcess(1); } } while (0)
@@ -31,6 +32,8 @@ static BOOL native_mode;
 static DWORD native_error;
 static DWORD completion_calls,completion_error;
 static HANDLE diagnostic_target;
+static HANDLE failed_broker;
+static DWORD submit_error,submit_calls;
 static volatile LONG usage_pending,retire_calls,drain_calls,park_calls,broker_shutdown;
 static HANDLE usage_seen,park_seen;
 static void attached(void);
@@ -56,6 +59,7 @@ DWORD OpenNtBaseClientStartFrontend(uint64_t window,BOOL borrowed,HANDLE *root,
 }
 DWORD OpenNtBaseClientReturnFrontendConsole(void){return ERROR_SUCCESS;}
 DWORD OpenNtBaseClientFrontendConsoleRestored(void){CHECK(FALSE);return ERROR_INVALID_STATE;}
+DWORD OpenNtBaseClientFrontendCloseQuiesced(void){CHECK(FALSE);return ERROR_INVALID_STATE;}
 DWORD OpenNtBaseClientFrontendIoDisconnected(void)
 {
     CHECK(created && !channels[created-1]);
@@ -88,9 +92,7 @@ DWORD frontend_session_drain(frontend_session *value)
 { (void)value;CHECK(retirement_mode);InterlockedIncrement(&drain_calls);return 0; }
 DWORD OpenNtBaseClientFrontendUsage(DWORD *pending_count,DWORD *tasks)
 {
-    CHECK(retirement_mode);
-    *pending_count=(DWORD)InterlockedCompareExchange(&usage_pending,0,0);*tasks=0;
-    CHECK(SetEvent(usage_seen));return 0;
+    (void)pending_count;(void)tasks;CHECK(FALSE);return ERROR_INVALID_FUNCTION;
 }
 DWORD OpenNtBaseClientFrontendStateChanged(HANDLE *state_changed)
 {
@@ -101,7 +103,7 @@ DWORD OpenNtBaseClientFrontendStateChanged(HANDLE *state_changed)
 }
 DWORD OpenNtBaseClientBrokerProcess(HANDLE *server)
 {
-    return DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),server,
+    return DuplicateHandle(GetCurrentProcess(),failed_broker ? failed_broker : GetCurrentProcess(),GetCurrentProcess(),server,
         SYNCHRONIZE,FALSE,0) ? ERROR_SUCCESS : GetLastError();
 }
 DWORD OpenNtBaseClientWorkerStateChanged(HANDLE *state_changed)
@@ -122,6 +124,12 @@ DWORD OpenNtBaseClientRetireFrontend(void)
 DWORD OpenNtBaseClientRetireWorkerlessFrontend(DWORD *retired)
 {
     *retired=(DWORD)InterlockedCompareExchange(&broker_shutdown,0,0);
+    if(retirement_mode) {
+        CHECK(SetEvent(usage_seen));
+        if(!*retired && !InterlockedCompareExchange(&usage_pending,0,0) &&
+            !InterlockedCompareExchange(&park_calls,0,0))
+            *retired=OPENNT_FRONTEND_RETIRE_PARK;
+    }
     return ERROR_SUCCESS;
 }
 DWORD frontend_session_destroy(frontend_session *value) { if(value)HeapFree(GetProcessHeap(),0,value);return 0; }
@@ -129,6 +137,8 @@ DWORD run16_native_request_submit(HANDLE capability,const run16_native_start *st
 {
     (void)capability;(void)start;*out=*receipt=NULL;*request=0;
     if(!native_mode)return ERROR_NOT_SUPPORTED;
+    ++submit_calls;
+    if(submit_error)return submit_error;
     /* Deliberately not a completed process. Scope must close diagnostics and
      * use the broker receipt/result rather than wait on this reference. */
     *out=diagnostic_target=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(*out);
@@ -142,8 +152,6 @@ DWORD run16_native_request_finish(DWORD request,DWORD *exit_code,DWORD *complete
     *exit_code=*completed ? 37 : 0;
     return native_error;
 }
-DWORD run16_native_request_resume(HANDLE capability)
-{ (void)capability;CHECK(FALSE);return ERROR_NOT_SUPPORTED; }
 DWORD OpenNtBaseClientSelectNativeWorker(HANDLE *worker)
 {
     *worker=NULL;
@@ -257,6 +265,7 @@ static void service_controls_retirement(void)
     CHECK(creator && usage_seen && park_seen && retirement_state);
     retirement_mode=TRUE;usage_pending=1;
     CHECK(!frontend_service_start_process(notification,creator,notification,&service));
+    CHECK(SetEvent(retirement_state));
     CHECK(WaitForSingleObject(usage_seen,5000)==WAIT_OBJECT_0);
     CHECK(WaitForSingleObject(frontend_service_thread(service),0)==WAIT_TIMEOUT);
     CHECK(!retire_calls && !drain_calls);
@@ -360,6 +369,9 @@ int main(void)
         run16_native_start start={0};DWORD case_index,flags,result,completed,before,after;
         CHECK(GetProcessHandleCount(GetCurrentProcess(),&before));
         native_mode=TRUE;
+        submit_error=ERROR_NOT_READY;submit_calls=0;
+        CHECK(run16_frontend_scope_launch_native(scope,&start,OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI)==ERROR_NOT_READY);
+        CHECK(submit_calls==1);submit_error=0;
         for(case_index=0;case_index<ARRAYSIZE(errors);++case_index) {
             native_error=errors[case_index];
             CHECK(!run16_frontend_scope_launch_native(scope,&start,OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI));
@@ -379,6 +391,16 @@ int main(void)
         native_mode=FALSE;
         CHECK(GetProcessHandleCount(GetCurrentProcess(),&after) && after==before);
         puts("PASS native receipt alone distinguishes target completion/final-I/O failure/unfinished failure; diagnostic reference closed before wait; no leaked handles");
+        {
+            HANDLE receipt=CreateEventW(NULL,TRUE,FALSE,NULL);
+            failed_broker=CreateEventW(NULL,TRUE,TRUE,NULL);
+            CHECK(receipt && failed_broker);
+            CHECK(run16_wait_direct_event(receipt)==ERROR_INVALID_HANDLE);
+            CHECK(SetEvent(receipt));
+            CHECK(run16_wait_direct_event(receipt)==ERROR_INVALID_HANDLE);
+            CloseHandle(receipt);CloseHandle(failed_broker);failed_broker=NULL;
+            puts("PASS submission never retries; service death returns original error without any worker/frontend wait");
+        }
     }
     for (i=0;i<COUNT;++i) {
         submit(i+1);

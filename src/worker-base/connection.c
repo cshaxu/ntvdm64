@@ -6,12 +6,13 @@
  * or DOS/native execution policy lives here. The service owns authentication. */
 DWORD worker_base_connect(void)
 {
-    DWORD error=OpenNtBaseClientConnectCurrent();
-    if(error)return error;
-    error=OpenNtBaseClientWatchBroker();
-    if(error)OpenNtBaseClientDisconnectCurrent();
-    return error;
+    return OpenNtBaseClientConnectCurrent();
 }
+
+DWORD worker_base_watch_service(void (*lost)(void *),void *context)
+{ return OpenNtBaseClientWatchBroker(lost,context); }
+void worker_base_unwatch_service(void)
+{ OpenNtBaseClientStopBrokerWatch(); }
 
 void worker_base_disconnect(void)
 {

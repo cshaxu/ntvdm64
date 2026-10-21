@@ -426,9 +426,24 @@ DWORD OpenNtBaseServiceWowStarted(OPENNT_BASE_CONNECTION *connection,DWORD pid,
     if (!connection) return error;
     service=connection->service;
     EnterCriticalSection(&service->lock);
-    if (!OpenNtBaseServicePeer(connection,pid,generation) || !connection->wow ||
-        !connection->process.fVDM || !WOWHead || WOWHead->SequenceNumber!=generation)
+    if (!OpenNtBaseServicePeer(connection,pid,generation) || !connection->process.fVDM)
         goto done;
+    if(!connection->wow) {
+        /* Separate WOW has no surviving WOWRecord: original GetNext frees
+         * its DOS ConsoleRecord on delivery. Match only the authenticated
+         * one-shot reservation, and reject bootstrap/undelivered reports. */
+        if(task || !connection->reservation || !connection->separate_wow_delivered)goto done;
+        for(entry=service->connections.Flink;entry!=&service->connections;entry=entry->Flink) {
+            OPENNT_BASE_CONNECTION *parent=CONTAINING_RECORD(entry,OPENNT_BASE_CONNECTION,service_link);
+            if(parent->process.fVDM || parent->reservation!=connection->reservation ||
+                parent->pending_vdm_binary!=BINARY_TYPE_SEPWOW || !parent->parent_receipt)continue;
+            error=parent->wow_start_event && !SetEvent(parent->wow_start_event) ? GetLastError() : ERROR_SUCCESS;
+            if(!error)parent->wow_started=TRUE;
+            break;
+        }
+        goto done;
+    }
+    if(!WOWHead || WOWHead->SequenceNumber!=generation)goto done;
     for (record=WOWHead->WOWRecord;record;record=record->WOWRecordNext)
         if (record->iTask==task) break;
     if (!record || !record->fDispatched) { error=ERROR_INVALID_STATE; goto done; }
@@ -461,7 +476,8 @@ DWORD OpenNtBaseServiceWowStartup(OPENNT_BASE_CONNECTION *connection,DWORD pid,
     if (!connection) return error;
     EnterCriticalSection(&connection->service->lock);
     if (!OpenNtBaseServicePeer(connection,pid,generation) || connection->process.fVDM ||
-        !connection->wow || !parent_receipt || parent_receipt!=connection->parent_receipt)
+        (!connection->wow && connection->pending_vdm_binary!=BINARY_TYPE_SEPWOW) ||
+        !parent_receipt || parent_receipt!=connection->parent_receipt)
         goto done;
     if (!connection->wow_start_event)
         connection->wow_start_event=CreateEventW(NULL,TRUE,connection->wow_started,NULL);
@@ -493,6 +509,7 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
     uint32_t needed=0;
     NTSTATUS status;
     HANDLE separate_console=NULL;
+    HANDLE selected_console=NULL;
     OPENNT_BASE_CONSOLE_CONTEXT *separate_context=NULL;
     BOOL separate_dos=FALSE;
     BOOL console_record_exists=FALSE;
@@ -514,6 +531,7 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
     if (message.u.CheckVDM.ConsoleHandle==OPENNT_BASE_CONSOLE_EXISTING) {
         DWORD bind=service_bind_existing_console(connection);
         if (bind) return bind;
+        selected_console=connection->console;
         /* VDM_READY is not worker readiness.  Reuse only a worker that has
          * already reached its original GetNextVDMCommand wait.  Otherwise
          * preserve resident COMMAND and let CheckDOS create its original
@@ -537,6 +555,26 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
         separate_dos=TRUE;
     }
     EnterCriticalSection(&connection->service->lock);
+    /* CheckVDM publishes an original task record. A closing worker remains
+     * in that original list until its actual cleanup, but must not accept a
+     * new task during that interval. Read the service's single close owner;
+     * do not infer admission from whether its event has been delivered yet. */
+    {
+        LIST_ENTRY *entry;
+        for(entry=connection->service->worker_watches.Flink;
+            entry!=&connection->service->worker_watches;entry=entry->Flink) {
+            OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(entry,OPENNT_BASE_WORKER_WATCH,link);
+            BOOL selected=message.u.CheckVDM.BinaryType==BINARY_TYPE_WIN16 ?
+                (watch->wow && WOWHead && WOWHead->SequenceNumber==watch->process.SequenceNumber) :
+                (message.u.CheckVDM.BinaryType==BINARY_TYPE_DOS &&
+                 selected_console && watch->kind==OPENNT_BASE_WORKER_DOS &&
+                 watch->console==selected_console);
+            if(selected && watch->close_kind!=WORKER_CLOSE_NONE) {
+                LeaveCriticalSection(&connection->service->lock);
+                return ERROR_NOT_READY;
+            }
+        }
+    }
     if(separate_dos && connection->retained_frontend_root) {
         LIST_ENTRY *link;
         OPENNT_BASE_CONNECTION *root=NULL;
@@ -828,7 +866,7 @@ DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD ge
     OPENNT_BASE_SERVICE_RESOURCES resources;
     const OPENNT_BASE_RESOURCE_BINDING *previous_resources;
     NTSTATUS status;
-    DWORD error;
+    DWORD error,requested_state;
     if (!output || !output_bytes || !wait_event || !standard || !standard_count)
         return ERROR_INVALID_PARAMETER;
     *output=NULL; *output_bytes=0; *wait_event=NULL;
@@ -837,7 +875,8 @@ DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD ge
         return ERROR_ACCESS_DENIED;
     error=OpenNtBasePrepareGetCommand(input,bytes,generation,&message,&state);
     if (error) return error;
-EnterCriticalSection(&connection->service->lock);
+    requested_state=message.u.GetNextVDMCommand.VDMState;
+    EnterCriticalSection(&connection->service->lock);
     /* The original client sends -1 for the shared-WOW PIF/acquisition path;
      * that selects BaseSrv's WOW record and deliberately has no DOS Console.
      * Every other request retains the reservation's service-local Console
@@ -936,6 +975,10 @@ if (!OpenNtBaseFinishGetCommand(&message,&state)) { error=ERROR_INVALID_DATA; go
         if(error==ERROR_NOT_FOUND)error=ERROR_SUCCESS;
         if(error)goto done;
     }
+    if(message.ReturnValue==STATUS_SUCCESS && message.u.GetNextVDMCommand.CmdLen &&
+        !*wait_event && (requested_state & ASKING_FOR_SEPWOW_BINARY) &&
+        !(requested_state & (ASKING_FOR_PIF|ASKING_FOR_ENVIRONMENT)))
+        connection->separate_wow_delivered=TRUE;
     *output=state.reply; *output_bytes=state.reply_bytes; state.reply=NULL;
     error=ERROR_SUCCESS;
 done:

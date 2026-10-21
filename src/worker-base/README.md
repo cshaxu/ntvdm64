@@ -1,8 +1,11 @@
 # Worker Base
 
 Project-added worker mechanisms reused by NTVDM and NTVWM only. The current
-connection.c/h owns their shared ConnectCurrent/WatchBroker initialization and
-disconnect, including failed-watch cleanup. Both production entries call it.
+connection.c/h owns their shared connection, explicit executable-owned loss
+notification and disconnect. Owners register only after callback resources
+exist and stop/join before releasing them. Transport never kills a process;
+worker-base does not select DOS/WOW/native cleanup. Both production entries
+connect; the nonresident GUI launcher has no CUI cleanup watcher.
 The NTVWM-only GetNextNativeCommand wrapper belongs to `ntvwm-exe`, not this
 shared library; NTVDM retains its original BaseSrv-shaped GetNextVDMCommand.
 The S21 audit records this shared boundary and the owner-local mechanisms that

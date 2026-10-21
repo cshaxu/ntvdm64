@@ -64,17 +64,22 @@ int main(int argc,char **argv)
         fflush(log);CloseHandle(child[i].hThread);child[i].hThread=NULL;
     }
     if(!observe_workers(argv[4],argv[5],workers,ids,log))goto done;
-    if(WaitForSingleObject(child[0].hProcess,15000)!=WAIT_OBJECT_0)goto done;
-    if(!GetExitCodeProcess(child[0].hProcess,&status[0]) || status[0])goto done;
-    if(WaitForSingleObject(child[1].hProcess,0)!=WAIT_TIMEOUT){
-        fputs("FAIL peer already exited; no overlap/survival proof\n",log);goto done;
+    /* Hook returns startup-only Run16 processes, not worker lifetime handles.
+     * Both launchers must finish while independently pinned workers execute. */
+    for(i=0;i<2;++i){
+        if(WaitForSingleObject(child[i].hProcess,10000)!=WAIT_OBJECT_0 ||
+            !GetExitCodeProcess(child[i].hProcess,&status[i]) || status[i])goto done;
+        if(WaitForSingleObject(workers[i],0)!=WAIT_TIMEOUT){
+            fputs("FAIL worker ended before startup-return proof\n",log);goto done;
+        }
     }
-    fputs("first-exited peer-still-running\n",log);fflush(log);
+    fputs("PASS both startup-only launchers returned with workers alive\n",log);fflush(log);
     first=WaitForMultipleObjects(2,workers,FALSE,5000);
     if(first>WAIT_OBJECT_0+1)goto done;
     first-=WAIT_OBJECT_0;
     if(!GetExitCodeProcess(workers[first],&worker_status) || worker_status ||
         WaitForSingleObject(workers[1-first],0)!=WAIT_TIMEOUT)goto done;
+    fputs("first-exited peer-still-running\n",log);fflush(log);
     {
         LARGE_INTEGER size;
         HANDLE trace=CreateFileA(argv[4],GENERIC_READ,
@@ -85,8 +90,6 @@ int main(int argc,char **argv)
         fprintf(log,"worker-exited pid=%lu exit=0 peer=%lu trace_bytes=%lld\n",
             ids[first],ids[1-first],size.QuadPart);fflush(log);
     }
-    if(WaitForSingleObject(child[1].hProcess,15000)!=WAIT_OBJECT_0)goto done;
-    if(!GetExitCodeProcess(child[1].hProcess,&status[1]) || status[1])goto done;
     if(WaitForSingleObject(workers[1-first],5000)!=WAIT_OBJECT_0 ||
         !GetExitCodeProcess(workers[1-first],&worker_status) || worker_status)goto done;
     fprintf(log,"worker-exited pid=%lu exit=0 final=1\n",ids[1-first]);

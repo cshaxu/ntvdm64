@@ -23,13 +23,17 @@ static DWORD WINAPI input_thread(void *context)
     BOOL pending=FALSE;
     for(;;) {
         HANDLE source=NULL;
-        HANDLE waits[6]={watch->console_close,watch->worker_close,watch->stop,watch->local_stop,watch->rearm,NULL};
-        DWORD count=5,result,error=ERROR_SUCCESS;
+        HANDLE waits[6];
+        DWORD count=0,rearm_index,source_index=MAXDWORD,result,error=ERROR_SUCCESS;
+        if(watch->console_close)waits[count++]=watch->console_close;
+        if(watch->worker_close)waits[count++]=watch->worker_close;
+        waits[count++]=watch->stop;waits[count++]=watch->local_stop;
+        rearm_index=count;waits[count++]=watch->rearm;
         EnterCriticalSection(&watch->lock);
         if(!pending && watch->source) {
             if(!DuplicateHandle(GetCurrentProcess(),watch->source,GetCurrentProcess(),
                 &source,SYNCHRONIZE,FALSE,0))error=GetLastError();
-            else waits[count++]=source;
+            else {source_index=count;waits[count++]=source;}
         }
         LeaveCriticalSection(&watch->lock);
         if(error)return fail_watch(watch,error);
@@ -38,18 +42,18 @@ static DWORD WINAPI input_thread(void *context)
         if(source)CloseHandle(source);
         /* Recheck priority before calling an owner: readiness is not permission
          * to overtake broker close or local cancellation. */
-        if(WaitForSingleObject(watch->console_close,0)==WAIT_OBJECT_0) {
+        if(watch->console_close && WaitForSingleObject(watch->console_close,0)==WAIT_OBJECT_0) {
             if(watch->close_console)watch->close_console(watch->context);
             return ERROR_PROCESS_ABORTED;
         }
-        if(WaitForSingleObject(watch->worker_close,0)==WAIT_OBJECT_0) {
+        if(watch->worker_close && WaitForSingleObject(watch->worker_close,0)==WAIT_OBJECT_0) {
             if(watch->close_worker)watch->close_worker(watch->context);
             return ERROR_PROCESS_ABORTED;
         }
         if(WaitForSingleObject(watch->stop,0)==WAIT_OBJECT_0 ||
             WaitForSingleObject(watch->local_stop,0)==WAIT_OBJECT_0)return ERROR_SUCCESS;
-        if(result==WAIT_OBJECT_0+4){pending=FALSE;continue;}
-        if(result!=WAIT_OBJECT_0+5)
+        if(result==WAIT_OBJECT_0+rearm_index){pending=FALSE;continue;}
+        if(source_index==MAXDWORD || result!=WAIT_OBJECT_0+source_index)
             return fail_watch(watch,result==WAIT_FAILED ? error : ERROR_PIPE_NOT_CONNECTED);
         if(!SetEvent(watch->wake))return fail_watch(watch,GetLastError());
         pending=TRUE;
@@ -65,7 +69,7 @@ worker_base_input_watch *worker_base_input_watch_create(HANDLE console_close,HAN
     worker_base_input_failure_fn failed,void *context)
 {
     worker_base_input_watch *watch;DWORD error;
-    if(!console_close || !worker_close || !stop){SetLastError(ERROR_INVALID_PARAMETER);return NULL;}
+    if(!stop){SetLastError(ERROR_INVALID_PARAMETER);return NULL;}
     watch=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*watch));
     if(!watch){SetLastError(ERROR_NOT_ENOUGH_MEMORY);return NULL;}
     InitializeCriticalSection(&watch->lock);

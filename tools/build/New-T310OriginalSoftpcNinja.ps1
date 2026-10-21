@@ -267,7 +267,7 @@ if (!(Test-Path -LiteralPath $redirResourceSource)) { throw "Original Redirector
 if (!(Test-Path -LiteralPath $redirExportDefinition)) { throw "Original Redirector export definition missing: $redirExportDefinition" }
 $adapterWin32Names = @('ntioapi_facade.c', 'thread_start_compat.c', 'ccpu_thread_exit_compat.c',
                           'nt_thread_alert_compat.c',
-                          'console_compat.c', 'console_client.c', 'console_bitmap.c', 'console_graphics.c', 'console_text.c', 'crt_compat.c',
+                          'console_compat.c', 'console_client.c', 'worker_lifecycle.c', 'console_bitmap.c', 'console_graphics.c', 'console_text.c', 'crt_compat.c',
                            'command_process_compat.c', 'native_child_style.c', 'wow_private_unavailable.c',
                            'wow_hard_error_dialog.c',
                            'mvdm_base_vdm_environment.c')
@@ -1706,7 +1706,9 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/tests/console_client.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/win32/console_client.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build console-client-test.exe: console_test_link obj/tests/console_client_test.obj obj/tests/console_client.obj obj/tests/console_graphics_provider.obj obj/tests/console_bitmap_provider.obj obj/frontend/console_frontend.obj obj/frontend/console_video.obj worker-base.lib ' + $consoleGridObject)
+    $graph.Add('build obj/tests/worker_lifecycle.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/win32/worker_lifecycle.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build console-client-test.exe: console_test_link obj/tests/console_client_test.obj obj/tests/console_client.obj obj/tests/worker_lifecycle.obj obj/tests/console_graphics_provider.obj obj/tests/console_bitmap_provider.obj obj/frontend/console_frontend.obj obj/frontend/console_video.obj worker-base.lib ' + $consoleGridObject)
     $graph.Add('build obj/tests/softpc_text_video.obj: cc ' + (NinjaPath (Join-Path $root 'tests/component-integration/softpc_text_video_test.c')))
     $graph.Add('build softpc-text-video-test.exe: console_test_link obj/tests/softpc_text_video.obj obj/adapter-softpc/mvdm_softpc_text_video.obj')
     $graph.Add('build obj/tests/console_text_producer.obj: cc ' + (NinjaPath (Join-Path $root 'tests/component-integration/console_text_producer_test.c')))

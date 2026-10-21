@@ -18,7 +18,9 @@ static DWORD unexpected_broker(void)
     return ERROR_CALL_NOT_IMPLEMENTED;
 }
 DWORD OpenNtBaseClientConnectCurrent(void) { return unexpected_broker(); }
-DWORD OpenNtBaseClientWatchBroker(void) { return unexpected_broker(); }
+DWORD OpenNtBaseClientWatchBroker(void (*lost)(void *),void *context)
+{ (void)lost;(void)context;return unexpected_broker(); }
+void OpenNtBaseClientStopBrokerWatch(void) { }
 void OpenNtBaseClientDisconnectCurrent(void) { (void)unexpected_broker(); }
 DWORD OpenNtBaseClientWorkerIoTransition(DWORD action)
 { (void)action; return unexpected_broker(); }

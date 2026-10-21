@@ -211,6 +211,7 @@ int fixture_shared_worker_residency(void)
     watch.service=service;watch.kind=OPENNT_BASE_WORKER_NATIVE;
     watch.process.ProcessHandle=child.hProcess;watch.process.SequenceNumber=generation;
     watch.shutdown=CreateEventW(NULL,TRUE,FALSE,NULL);RETIRE_CHECK(watch.shutdown);
+    watch.console_close=CreateEventW(NULL,TRUE,FALSE,NULL);RETIRE_CHECK(watch.console_close);
     EnterCriticalSection(&service->lock);
     worker->native_worker=TRUE;
     InsertTailList(&service->worker_watches,&watch.link);
@@ -259,8 +260,9 @@ int fixture_shared_worker_residency(void)
         RETIRE_CHECK(WaitForSingleObject(watch.shutdown,0)==WAIT_TIMEOUT);
         EnterCriticalSection(&service->lock);root->frontend_closing=TRUE;LeaveCriticalSection(&service->lock);
         RETIRE_CHECK(!service_retire_expired_frontends_at(service,172800003+index));
-        RETIRE_CHECK(WaitForSingleObject(watch.shutdown,0)==WAIT_OBJECT_0);
-        RETIRE_CHECK(ResetEvent(watch.shutdown));
+        RETIRE_CHECK(WaitForSingleObject(watch.console_close,0)==WAIT_OBJECT_0);
+        RETIRE_CHECK(WaitForSingleObject(watch.shutdown,0)==WAIT_TIMEOUT);
+        RETIRE_CHECK(ResetEvent(watch.console_close));
     }
     /* Native final-empty completion uses the same root authority, but only
      * its creating launcher may retire a self-created Console. Borrowed and
@@ -284,7 +286,8 @@ int fixture_shared_worker_residency(void)
     RETIRE_CHECK(OpenNtBaseServiceIsEmpty(service) && OpenNtBaseServiceStop(service));
     RETIRE_CHECK(TerminateProcess(child.hProcess,0));
     CloseHandle(child.hThread);CloseHandle(child.hProcess);CloseHandle(watch.shutdown);
-    puts("PASS shared GUI carrier: native/WOW residency; DOS/native common root authority and loss shutdown");
+    CloseHandle(watch.console_close);
+    puts("PASS shared GUI carrier: native/WOW residency; DOS/native common root authority and Console-close");
     return 0;
 #undef RETIRE_CHECK
 }

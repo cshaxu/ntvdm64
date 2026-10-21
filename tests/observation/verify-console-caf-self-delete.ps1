@@ -39,7 +39,9 @@ try{
    # in both outer and inner prompts; retain the strict idle-prompt assertion.
    $stage=(New-PhysicalRuntimeStage $PackageRoot).ToUpperInvariant()
    $scope=New-IsolatedPackageScope $stage
-   $env:PATH="$stage\system32;"+$saved.PATH
+   # Fixed probe commands come from this package or host System32. Inheriting
+   # a build-tool PATH changes DOS startup before the handoff under test.
+   $env:PATH="$stage\system32;"+(Join-Path $env:SystemRoot 'System32')
    $env:MVDM_OBSERVER_CAF_DIRECT_NTMON=if($target -eq 'ntmon'){'1'}else{$null}
    $env:MVDM_OBSERVER_CAF_OUTER_COMMAND='"'+$stage+'\system32\run16.exe" '+$target+"`r"
    $report=Join-Path $log "$target.txt"

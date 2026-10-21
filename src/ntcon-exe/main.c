@@ -27,7 +27,6 @@ static DWORD session_entry(HANDLE caller,HANDLE notification,HANDLE retire,HANDL
      * registration and startup-result calls. The inherited caller identifies
      * the real Console, not the broker's own Console. */
     error=OpenNtBaseClientConnectCurrent();if(error){bootstrap_trace("connect",error);goto done;}
-    error=OpenNtBaseClientWatchBroker();if(error){bootstrap_trace("watch",error);goto done;}
     if(WaitForSingleObject(caller,0)!=WAIT_TIMEOUT){error=ERROR_ACCESS_DENIED;bootstrap_trace("identity",error);goto respond;}
     pid=GetProcessId(caller);
     if(!pid || !AttachConsole(pid)){error=GetLastError();bootstrap_trace("attach",error);goto respond;}

@@ -7,5 +7,4 @@ DWORD run16_native_request_submit(HANDLE,const run16_native_start *,HANDLE *,HAN
 /* target_completed is broker-authenticated, including final-I/O error returns;
  * it is false for unfinished worker failure, stale receipt or RPC failure. */
 DWORD run16_native_request_finish(DWORD request,DWORD *exit_code,DWORD *target_completed);
-DWORD run16_native_request_resume(HANDLE);
 #endif

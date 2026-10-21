@@ -539,9 +539,9 @@ DWORD service_prepare_parent_resume(OPENNT_BASE_CONNECTION *caller,
     return ERROR_PROCESS_ABORTED;
 }
 
-DWORD OpenNtBaseServiceSubmitNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD pid,
+DWORD service_submit_native_request_until(OPENNT_BASE_CONNECTION *caller,DWORD pid,
     DWORD generation,DWORD operation,HANDLE frontend,DWORD bytes,BYTE *payload,
-    HANDLE *target,HANDLE *receipt,DWORD *request)
+    HANDLE *target,HANDLE *receipt,DWORD *request,ULONGLONG deadline)
 {
     WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS]={0};
     HANDLE startup=NULL,worker=NULL;
@@ -581,10 +581,31 @@ DWORD OpenNtBaseServiceSubmitNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD 
     /* This preflight is deliberately the same reservation-exact selection as
      * queueing below.  Do not report a GUI launcher ready and then attempt to
      * deliver through the legacy CUI-only command-worker path. */
-    error=operation==OPENNT_BASE_NATIVE_REQUEST_LAUNCH ?
-        OpenNtBaseServiceRetainNativeCommandWorker(caller,pid,generation,&worker) :
-        OpenNtBaseServiceRetainCommandWorker(caller,pid,generation,&worker);
+    EnterCriticalSection(&caller->service->lock);
+    for(;;) {
+        ULONGLONG now;
+        error=operation==OPENNT_BASE_NATIVE_REQUEST_LAUNCH ?
+            OpenNtBaseServiceRetainNativeCommandWorker(caller,pid,generation,&worker) :
+            OpenNtBaseServiceRetainCommandWorker(caller,pid,generation,&worker);
+        if(error!=ERROR_NOT_READY)break;
+        /* An absent grant is not a startup in progress. Never turn malformed
+         * or stale submissions into an implicit worker-selection retry. */
+        if(operation!=OPENNT_BASE_NATIVE_REQUEST_LAUNCH ||
+            !caller->reservation || caller->selected_native_generation)break;
+        if(WaitForSingleObject(caller->process.ProcessHandle,0)!=WAIT_TIMEOUT)
+            {error=ERROR_PROCESS_ABORTED;break;}
+        now=GetTickCount64();
+        if(now>=deadline){error=ERROR_TIMEOUT;break;}
+        if(!SleepConditionVariableCS(&caller->service->frontend_changed,
+            &caller->service->lock,(DWORD)(deadline-now))) {error=GetLastError();break;}
+    }
+    LeaveCriticalSection(&caller->service->lock);
     if(error)return error;
+    if(frontend && operation==OPENNT_BASE_NATIVE_REQUEST_LAUNCH) {
+        error=OpenNtBaseServiceRequestFrontend(caller,pid,generation,frontend);
+        if(error==ERROR_ALREADY_EXISTS)error=ERROR_SUCCESS;
+        if(error)goto done;
+    }
     startup=CreateEventW(NULL,TRUE,FALSE,NULL);
     if(!startup){error=GetLastError();goto done;}
     EnterCriticalSection(&caller->service->lock);
@@ -601,7 +622,9 @@ DWORD OpenNtBaseServiceSubmitNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD 
     if(error)goto done;
     {
         HANDLE waits[3]={startup,worker,caller->process.ProcessHandle};
-        DWORD wait=WaitForMultipleObjects(3,waits,FALSE,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+        ULONGLONG now=GetTickCount64();
+        DWORD wait=WaitForMultipleObjects(3,waits,FALSE,
+            now>=deadline ? 0 : (DWORD)(deadline-now));
         if(wait!=WAIT_OBJECT_0) {
             error=wait==WAIT_TIMEOUT ? ERROR_TIMEOUT : wait==WAIT_FAILED ? GetLastError() : ERROR_PROCESS_ABORTED;
             goto done;
@@ -642,6 +665,15 @@ done:
     return error;
 }
 
+
+DWORD OpenNtBaseServiceSubmitNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD pid,
+    DWORD generation,DWORD operation,HANDLE frontend,DWORD bytes,BYTE *payload,
+    HANDLE *target,HANDLE *receipt,DWORD *request)
+{
+    return service_submit_native_request_until(caller,pid,generation,operation,
+        frontend,bytes,payload,target,receipt,request,
+        GetTickCount64()+OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
+}
 
 DWORD OpenNtBaseServiceFinishNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD pid,
     DWORD generation,DWORD request,DWORD *exit_code,DWORD *target_completed)
@@ -800,7 +832,8 @@ DWORD OpenNtBaseServiceGetNextNativeCommand(OPENNT_BASE_CONNECTION *connection,D
             link!=&connection->service->worker_watches;link=link->Flink) {
             OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
             if(watch->process.SequenceNumber==generation &&
-                WaitForSingleObject(watch->shutdown,0)==WAIT_OBJECT_0) {
+                (WaitForSingleObject(watch->shutdown,0)==WAIT_OBJECT_0 ||
+                 (watch->console_close && WaitForSingleObject(watch->console_close,0)==WAIT_OBJECT_0))) {
                 error=ERROR_CANCELLED;goto done;
             }
         }

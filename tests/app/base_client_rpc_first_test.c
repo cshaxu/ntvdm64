@@ -710,6 +710,40 @@ static int ntvwm_execution_rpc(void)
     return 0;
 }
 
+static int frontend_deadline(void)
+{
+    typedef LONG (NTAPI *PROCESS_CONTROL)(HANDLE);
+    PROCESS_CONTROL suspend=(PROCESS_CONTROL)GetProcAddress(GetModuleHandleW(L"ntdll.dll"),"NtSuspendProcess");
+    PROCESS_CONTROL resume=(PROCESS_CONTROL)GetProcAddress(GetModuleHandleW(L"ntdll.dll"),"NtResumeProcess");
+    HANDLE root=NULL,capability=NULL,restored=NULL,server=NULL,control=NULL;
+    DWORD error;ULONGLONG began,elapsed;int result=1;BOOL paused=FALSE;
+    if(!suspend || !resume || OpenNtBaseClientConnectCurrent())goto done;
+    if(OpenNtBaseClientSetCallTimeout(10000) || OpenNtBaseClientBrokerProcess(&server))goto done;
+    if(OpenNtBaseClientStartFrontend((uint64_t)(UINT_PTR)GetConsoleWindow(),TRUE,
+        &root,&capability,&restored))goto done;
+    /* Fault injection only into the service-created frontend pinned by root.
+     * The launcher under test never gets this extra process access. */
+    control=OpenProcess(0x0800,FALSE,GetProcessId(root)); /* PROCESS_SUSPEND_RESUME */
+    if(!control || suspend(control)<0)goto done;
+    paused=TRUE;began=GetTickCount64();
+    error=OpenNtBaseClientWaitFrontendConsoleRestored();elapsed=GetTickCount64()-began;
+    printf("finalization status=%lu elapsed=%llu\n",error,(unsigned long long)elapsed);
+    if(error!=ERROR_TIMEOUT || elapsed<9000 || elapsed>13000 ||
+        WaitForSingleObject(server,0)!=WAIT_TIMEOUT)goto done;
+    began=GetTickCount64();
+    if(OpenNtBaseClientWaitFrontendConsoleRestored()!=ERROR_TIMEOUT)goto done;
+    OpenNtBaseClientDisconnectCurrent();
+    if(GetTickCount64()-began>=1000)goto done;
+    puts("PASS: real RPC timeout without service death or request replay");result=0;
+done:
+    if(paused && resume(control)<0)result=1;
+    if(control)CloseHandle(control);
+    if(root)CloseHandle(root);if(capability)CloseHandle(capability);
+    if(restored)CloseHandle(restored);if(server)CloseHandle(server);
+    OpenNtBaseClientDisconnectCurrent();
+    return result;
+}
+
 int main(int argc,char **argv)
 {
     BASE_API_MSG message={0};
@@ -728,6 +762,7 @@ int main(int argc,char **argv)
     if (argc==2 && !lstrcmpA(argv[1],"--reservation-child")) return reservation_child(FALSE);
     if (argc==2 && !lstrcmpA(argv[1],"--reservation-parent")) return reservation_parent(FALSE);
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-cancel-child")) return reservation_child(2);
+    if (argc==2 && !lstrcmpA(argv[1],"--frontend-timeout-parent")) return frontend_deadline();
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-cancel-parent")) return reservation_parent(2);
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-cancel-killed-parent")) return reservation_parent(3);
     if (argc==4 && !lstrcmpA(argv[1],"--frontend-cancel-monitor"))

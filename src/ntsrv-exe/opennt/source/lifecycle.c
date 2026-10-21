@@ -6,113 +6,6 @@
 
 static ULONGLONG service_root_retirement_deadline(OPENNT_BASE_CONNECTION *root,ULONGLONG now);
 
-typedef struct service_frontend_shutdown {
-    HANDLE process;
-    HANDLE console_close;
-} service_frontend_shutdown;
-
-/* Service lock held. Capture only authenticated non-WOW workers bound to this
- * frontend root. A frontend deletion is Console-close, never Worker-close. */
-static DWORD service_capture_frontend_shutdowns(OPENNT_BASE_SERVICE *service,
-    OPENNT_BASE_CONNECTION *root,service_frontend_shutdown **stops,DWORD *count)
-{
-    LIST_ENTRY *link;
-    service_frontend_shutdown *items=NULL;
-    DWORD capacity=0,index=0,error=ERROR_SUCCESS;
-    if(!service || !root || !stops || !count)return ERROR_INVALID_PARAMETER;
-    *stops=NULL;*count=0;
-    for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
-        OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
-        if(!watch->wow && !watch->native_gui_launcher &&
-            watch->frontend_root_generation==root->process.SequenceNumber &&
-            WaitForSingleObject(watch->process.ProcessHandle,0)==WAIT_TIMEOUT)++capacity;
-    }
-    if(!capacity)return ERROR_SUCCESS;
-    items=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,capacity*sizeof(*items));
-    if(!items)return ERROR_NOT_ENOUGH_MEMORY;
-    for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
-        OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
-        if(watch->wow || watch->native_gui_launcher ||
-            watch->frontend_root_generation!=root->process.SequenceNumber ||
-            WaitForSingleObject(watch->process.ProcessHandle,0)!=WAIT_TIMEOUT)continue;
-        if(!watch->console_close) { error=ERROR_NOT_READY;break; }
-        if(!DuplicateHandle(GetCurrentProcess(),watch->process.ProcessHandle,GetCurrentProcess(),
-            &items[index].process,SYNCHRONIZE,FALSE,0)) { error=GetLastError();break; }
-        if(!DuplicateHandle(GetCurrentProcess(),watch->console_close,GetCurrentProcess(),
-            &items[index].console_close,EVENT_MODIFY_STATE,FALSE,0)) {
-            error=GetLastError();
-            CloseHandle(items[index].process);items[index].process=NULL;
-            break;
-        }
-        /* The root's drain flag is the admission barrier.  Do not repurpose
-         * the management-termination bit: this is an orderly frontend close,
-         * and its existing shutdown path remains the sole worker exit path. */
-        ++index;
-    }
-    if(error) {
-        while(index) {--index;CloseHandle(items[index].process);CloseHandle(items[index].console_close);}
-        HeapFree(GetProcessHeap(),0,items);return error;
-    }
-    *stops=items;*count=index;return ERROR_SUCCESS;
-}
-
-static void service_release_frontend_shutdowns(service_frontend_shutdown *stops,DWORD count)
-{
-    if(!stops)return;
-    while(count) {--count;CloseHandle(stops[count].process);CloseHandle(stops[count].console_close);}
-    HeapFree(GetProcessHeap(),0,stops);
-}
-
-/* The route is still live at this point, so NTCON can synchronously undo CAF
- * before a worker close turns its transport into EOF.  The service owns the
- * deadline and never substitutes a delay for the acknowledgement. */
-static DWORD service_wait_frontend_close_return(OPENNT_BASE_SERVICE *service,DWORD generation)
-{
-    ULONGLONG deadline=GetTickCount64()+OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS;
-    DWORD error=ERROR_PIPE_NOT_CONNECTED;
-    if(!service || !generation)return ERROR_INVALID_PARAMETER;
-    EnterCriticalSection(&service->lock);
-    for(;;) {
-        LIST_ENTRY *link;OPENNT_BASE_CONNECTION *root=NULL;
-        ULONGLONG now;
-        for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
-            OPENNT_BASE_CONNECTION *candidate=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-            if(candidate->process.SequenceNumber==generation){root=candidate;break;}
-        }
-        if(!root || WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT)break;
-        if(root->frontend_close_returned){error=ERROR_SUCCESS;break;}
-        now=GetTickCount64();
-        if(now>=deadline){error=ERROR_TIMEOUT;break;}
-        if(!SleepConditionVariableCS(&service->frontend_changed,&service->lock,(DWORD)(deadline-now))) {
-            error=GetLastError();break;
-        }
-    }
-    LeaveCriticalSection(&service->lock);
-    return error;
-}
-
-/* Management has already received NTCON's synchronous borrowed-Console
- * return acknowledgement.  Now use the existing worker process watches as
- * the completion proof for the ordered Console-close; do not add a delay
- * policy or alter guest code. */
-static DWORD service_close_frontend_workers(service_frontend_shutdown *stops,DWORD count)
-{
-    DWORD index,error=ERROR_SUCCESS;
-    ULONGLONG deadline=GetTickCount64()+OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS;
-    /* Make every independent close request before waiting.  A bad duplicate
-     * must not prevent later workers from receiving the ordered Console-close. */
-    for(index=0;index<count;++index)
-        if(!SetEvent(stops[index].console_close) && !error)error=GetLastError();
-    if(error)return error;
-    for(index=0;index<count;++index) {
-        ULONGLONG now=GetTickCount64();
-        DWORD wait=now>=deadline ? 0u : (DWORD)(deadline-now);
-        DWORD status=WaitForSingleObject(stops[index].process,wait);
-        if(status!=WAIT_OBJECT_0) {error=status==WAIT_FAILED ? GetLastError() : ERROR_TIMEOUT;break;}
-    }
-    return error;
-}
-
 void service_signal_frontend_states(OPENNT_BASE_SERVICE *service)
 {
     LIST_ENTRY *link;
@@ -139,7 +32,6 @@ static DWORD service_terminate_worker(OPENNT_BASE_SERVICE *service,uint32_t proc
     const OPENNT_BASE_MANAGEMENT_KEY *key)
 {
     LIST_ENTRY *link;
-    HANDLE process=NULL,shutdown=NULL;
     DWORD error=ERROR_NOT_FOUND;
     if (!service || (!process_id && !key)) return ERROR_INVALID_PARAMETER;
     EnterCriticalSection(&service->lock);
@@ -166,24 +58,18 @@ static DWORD service_terminate_worker(OPENNT_BASE_SERVICE *service,uint32_t proc
          * its shutdown event remains valid during that startup interval. */
         if(!worker || (worker->native_worker && !worker->registered_worker))
             {error=ERROR_NOT_READY;break;}
-        if (watch->termination_requested) { error=ERROR_BUSY; break; }
-        if (!DuplicateHandle(GetCurrentProcess(),watch->process.ProcessHandle,
-                GetCurrentProcess(),&process,SYNCHRONIZE,FALSE,0) ||
-            !DuplicateHandle(GetCurrentProcess(),watch->shutdown,GetCurrentProcess(),&shutdown,
-                EVENT_MODIFY_STATE,FALSE,0)) {
-            error=GetLastError(); break;
-        }
-        watch->termination_requested=TRUE;
+        if (watch->close_kind!=WORKER_CLOSE_NONE) { error=ERROR_SUCCESS; break; }
+        if(!watch->shutdown){error=ERROR_NOT_READY;break;}
+        /* SetEvent cannot call back or wait. Commit acceptance only after the
+         * service-owned instruction is latched, under its lifetime lock. */
+        if(!SetEvent(watch->shutdown)){error=GetLastError();break;}
+        watch->close_kind=WORKER_CLOSE_WORKER;
         error=ERROR_SUCCESS;
         break;
     }
 unlock:
     LeaveCriticalSection(&service->lock);
-    if(!error && !SetEvent(shutdown))error=GetLastError();
-    if(!error && WaitForSingleObject(process,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS)!=WAIT_OBJECT_0)error=ERROR_TIMEOUT;
-    if(shutdown){CloseHandle(shutdown);shutdown=NULL;}
-    if(error) {if(process)CloseHandle(process);return error;}
-    CloseHandle(process);
+    /* Acceptance does not wait for a worker containing the requesting task. */
     return error;
 }
 
@@ -197,10 +83,6 @@ DWORD OpenNtBaseServiceCloseManagementNode(OPENNT_BASE_SERVICE *service,
     const OPENNT_BASE_MANAGEMENT_KEY *key)
 {
     LIST_ENTRY *link;
-    HANDLE target=NULL;
-    service_frontend_shutdown *stops=NULL;
-    DWORD stop_count=0;
-    BOOL frontend=FALSE;
     DWORD error=ERROR_NOT_FOUND;
     if(!service || !key)return ERROR_INVALID_PARAMETER;
     if(key->category==MANAGEMENT_WORKER)return service_terminate_worker(service,0,key);
@@ -212,78 +94,41 @@ DWORD OpenNtBaseServiceCloseManagementNode(OPENNT_BASE_SERVICE *service,
         for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
             OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
             if(root->process.SequenceNumber!=key->generation || !root->frontend_capability)continue;
-            if(root->frontend_closing || root->frontend_close_draining){error=ERROR_BUSY;break;}
+            /* One terminal operation per root generation. A repeated request
+             * observes acceptance, never restarts its deadline or cleanup. */
+            if(root->frontend_close_deadline){error=ERROR_SUCCESS;break;}
+            if(root->frontend_closing){error=ERROR_BUSY;break;}
             if(WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT)break;
-            if(!DuplicateHandle(GetCurrentProcess(),root->process.ProcessHandle,GetCurrentProcess(),
-                &target,SYNCHRONIZE,FALSE,0)){error=GetLastError();break;}
-            error=service_capture_frontend_shutdowns(service,root,&stops,&stop_count);
-            if(error) {CloseHandle(target);target=NULL;break;}
-            /* First return CAF to its real Console while the I/O channel is
-             * still alive.  The drain bit remains the admission barrier; the
-             * existing worker close follows only after that acknowledgement. */
-            root->frontend_close_draining=stop_count ? TRUE : FALSE;
-            root->frontend_close_return_required=stop_count ? TRUE : FALSE;
+            root->frontend_close_deadline=GetTickCount64()+OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS;
+            root->frontend_close_draining=TRUE;
+            root->frontend_close_return_required=TRUE;
             root->frontend_close_returned=FALSE;
-            if(!stop_count)root->frontend_closing=TRUE;
+            {
+                LIST_ENTRY *entry;
+                for(entry=service->worker_watches.Flink;entry!=&service->worker_watches;entry=entry->Flink) {
+                    OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(entry,OPENNT_BASE_WORKER_WATCH,link);
+                    if(!watch->wow && !watch->native_gui_launcher &&
+                        watch->frontend_root_generation==key->generation &&
+                        watch->close_kind==WORKER_CLOSE_NONE)
+                        watch->close_kind=WORKER_CLOSE_CONSOLE;
+                }
+            }
             service_signal_frontend_states(service);
             WakeAllConditionVariable(&service->frontend_changed);
-            frontend=TRUE;error=ERROR_SUCCESS;break;
+            error=ERROR_SUCCESS;break;
         }
     } else if(key->category==MANAGEMENT_GUI_TARGET && key->object) {
-        /* Keep management-key validation honest, but no GUI observation ever
-         * grants an operation over the real process. */
         for(link=service->gui_records.Flink;link!=&service->gui_records;link=link->Flink) {
             OPENNT_BASE_WIN32RECORD *record=CONTAINING_RECORD(link,OPENNT_BASE_WIN32RECORD,link);
             if(record->worker_generation==key->generation && record->request==key->object) {
                 error=ERROR_NOT_SUPPORTED;break;
             }
         }
-    }
-    else error=ERROR_NOT_SUPPORTED;
+    } else error=ERROR_NOT_SUPPORTED;
 done:
     LeaveCriticalSection(&service->lock);
-    /* Wait/termination cannot hold the registry lock needed for rundown.
-     * A pinned original process object, never a reopened PID, is targeted. */
-    if(!error) {
-        if(frontend) {
-            DWORD return_error=ERROR_SUCCESS,shutdown_error=ERROR_SUCCESS;
-            if(stop_count)return_error=service_wait_frontend_close_return(service,key->generation);
-            /* A failed return never falls through to ordinary worker close:
-             * preserve the draining transaction for the live frontend to
-             * acknowledge or for a later lifecycle pass to diagnose. */
-            if(!return_error && stop_count)
-                shutdown_error=service_close_frontend_workers(stops,stop_count);
-            if(!return_error && !shutdown_error && stop_count) {
-                EnterCriticalSection(&service->lock);
-                /* The root stayed live while draining, so this is the only
-                 * point at which NTCON may restore the borrowed Console. */
-                for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
-                    OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-                    if(root->process.SequenceNumber==key->generation) {
-                        root->frontend_close_draining=FALSE;
-                        root->frontend_close_return_required=FALSE;
-                        root->frontend_closing=TRUE;
-                        service_signal_frontend_states(service);
-                        WakeAllConditionVariable(&service->frontend_changed);
-                        break;
-                    }
-                }
-                LeaveCriticalSection(&service->lock);
-            }
-            /* A return timeout/failure deliberately leaves the root draining:
-             * no worker close was issued, so waiting for the root here would
-             * only add an unrelated ten-second delay to the caller.  A later
-             * acknowledgement, or root death observed by lifecycle, owns the
-             * next transition. */
-            if(!return_error && !shutdown_error) {
-                DWORD wait=WaitForSingleObject(target,OPENNT_FRONTEND_LIFECYCLE_TIMEOUT_MS);
-                if(wait!=WAIT_OBJECT_0)shutdown_error=wait==WAIT_FAILED ? GetLastError() : ERROR_TIMEOUT;
-            }
-            error=return_error ? return_error : shutdown_error;
-        } else if(!TerminateProcess(target,ERROR_CANCELLED))error=GetLastError();
-    }
-    service_release_frontend_shutdowns(stops,stop_count);
-    if(target)CloseHandle(target);
+    /* Accepted, not completed. The lifecycle owner advances the retained
+     * root operation even if this ordinary management task immediately exits. */
     return error;
 }
 
@@ -351,6 +196,24 @@ DWORD OpenNtBaseServiceRetireWorkerlessFrontend(OPENNT_BASE_CONNECTION *root,DWO
             (root->frontend_close_draining && root->frontend_close_return_required &&
              !root->frontend_close_returned ? OPENNT_FRONTEND_RETIRE_RETURN_CONSOLE :
              OPENNT_FRONTEND_RETIRE_NONE);
+        if(*retired==OPENNT_FRONTEND_RETIRE_NONE && !root->frontend_close_draining &&
+            root->frontend_creator_generation &&
+            root->frontend_restored && WaitForSingleObject(root->frontend_restored,0)==WAIT_TIMEOUT) {
+            LIST_ENTRY *link;BOOL returning=TRUE;DWORD pending=0,tasks=0;
+            for(link=root->service->connections.Flink;link!=&root->service->connections;link=link->Flink) {
+                OPENNT_BASE_CONNECTION *caller=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
+                if(caller->process.SequenceNumber==root->frontend_creator_generation) {
+                    returning=caller->frontend_return_pending ||
+                        WaitForSingleObject(caller->process.ProcessHandle,0)!=WAIT_TIMEOUT;
+                    break;
+                }
+            }
+            if(returning) {
+                error=OpenNtBaseServiceFrontendUsage(root,pid,generation,&pending,&tasks);
+                if(error){LeaveCriticalSection(&root->service->lock);return error;}
+                if(!pending && !tasks)*retired=OPENNT_FRONTEND_RETIRE_PARK;
+            }
+        }
         error=ERROR_SUCCESS;
     }
     LeaveCriticalSection(&root->service->lock);
@@ -443,6 +306,8 @@ DWORD service_next_frontend_deadline_at(OPENNT_BASE_SERVICE *service,ULONGLONG n
     for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
         ULONGLONG due=service_root_retirement_deadline(root,now);
+        if(root->frontend_close_deadline && !root->frontend_close_timed_out &&
+            (!due || root->frontend_close_deadline<due))due=root->frontend_close_deadline;
         if(due && (!*deadline || due<*deadline))*deadline=due;
     }
     LeaveCriticalSection(&service->lock);
@@ -464,6 +329,11 @@ DWORD service_retire_expired_frontends_at(OPENNT_BASE_SERVICE *service,ULONGLONG
     service_observation_prune(service);
     for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
+        if(root->frontend_close_deadline && !root->frontend_close_timed_out &&
+            now>=root->frontend_close_deadline) {
+            root->frontend_close_timed_out=TRUE;
+            changed=TRUE; /* Retain admission barrier; late facts may finish. */
+        }
         if(root->frontend_close_draining) {
             BOOL live_worker=FALSE;
             BOOL frontend_live=WaitForSingleObject(root->process.ProcessHandle,0)==WAIT_TIMEOUT;
@@ -483,7 +353,12 @@ DWORD service_retire_expired_frontends_at(OPENNT_BASE_SERVICE *service,ULONGLONG
                     watch->frontend_root_generation!=root->process.SequenceNumber ||
                     WaitForSingleObject(watch->process.ProcessHandle,0)!=WAIT_TIMEOUT)continue;
                 live_worker=TRUE;
-                if(watch->console_close && WaitForSingleObject(watch->console_close,0)==WAIT_TIMEOUT) {
+                if(watch->close_kind==WORKER_CLOSE_NONE)watch->close_kind=WORKER_CLOSE_CONSOLE;
+                /* The first accepted terminal scope survives root rundown.
+                 * Console-close encompasses an existing worker-close by
+                 * waiting for it, never by dispatching a second close kind. */
+                if(watch->close_kind==WORKER_CLOSE_CONSOLE && watch->console_close &&
+                    WaitForSingleObject(watch->console_close,0)==WAIT_TIMEOUT) {
                     (void)SetEvent(watch->console_close);
                     changed=TRUE;
                 }
@@ -507,7 +382,7 @@ DWORD service_retire_expired_frontends_at(OPENNT_BASE_SERVICE *service,ULONGLONG
             changed=TRUE;
         }
     }
-    /* Only NTSRV translates lost frontend ownership into worker shutdown.
+    /* Only NTSRV translates lost frontend ownership into Console-close.
      * An admitted GUI-only carrier has no character frontend by design;
      * like shared WOW, it remains resident rather than timing out as startup. */
     for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
@@ -527,10 +402,13 @@ DWORD service_retire_expired_frontends_at(OPENNT_BASE_SERVICE *service,ULONGLONG
                     attached=TRUE;
             }
         }
-        if(!attached && watch->shutdown &&
-            WaitForSingleObject(watch->shutdown,0)==WAIT_TIMEOUT) {
-            (void)SetEvent(watch->shutdown);
-            changed=TRUE; /* Also wake pre-binding GetNextCommand. */
+        if(!attached) {
+            if(watch->close_kind==WORKER_CLOSE_NONE)watch->close_kind=WORKER_CLOSE_CONSOLE;
+            if(watch->close_kind==WORKER_CLOSE_CONSOLE && watch->console_close &&
+                WaitForSingleObject(watch->console_close,0)==WAIT_TIMEOUT) {
+                (void)SetEvent(watch->console_close);
+                changed=TRUE; /* Also wake pre-binding GetNextCommand. */
+            }
         }
     }
     if(changed) {

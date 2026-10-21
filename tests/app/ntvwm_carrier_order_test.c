@@ -55,7 +55,7 @@ int main(void)
         }
     }
     used=0;calls[0]=0;state.guard=(ntvwm_console_guard *)(ULONG_PTR)1;
-    if(close_console(&state)!=123 || state.guard || strcmp(calls,"SX"))return 3;
+    if(ntvwm_release_console_carrier(&state)!=123 || state.guard || strcmp(calls,"SX"))return 3;
     CloseHandle(state.admission_ready);DeleteCriticalSection(&lock);
     puts("PASS 8 final-I/O/hide/release/error cases; stop-before-close preserves result");return 0;
 }

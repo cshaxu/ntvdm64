@@ -4,6 +4,10 @@
 approved S grouping, finite transitions and pending service-loss boundary.
 [S1 source audit](evidence/m0-t448-s1-lifecycle-audit.md) records actual call
 chains, ownership violations and the remaining bounded design work.
+[S2 implementation ledger](evidence/m0-t448-s2-lifecycle-implementation.md)
+distinguishes candidate changes, actual runs, failures and remaining acceptance.
+[S3 close implementation](evidence/m0-t448-s3-close-implementation.md) records
+the finite management/loss group and its actual verification state.
 
 [T447 pre-closure snapshot](evidence/m0-t447-pre-closure-status.md) preserves
 the final active packet before owner-directed transfer closure. The

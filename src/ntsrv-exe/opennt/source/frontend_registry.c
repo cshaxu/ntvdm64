@@ -806,6 +806,28 @@ DWORD OpenNtBaseServiceWaitFrontendConsoleRestored(OPENNT_BASE_CONNECTION *calle
         }
         if(!root || WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT)
             {error=ERROR_PIPE_NOT_CONNECTED;break;}
+        if(root->frontend_close_deadline && root->frontend_close_deadline<deadline)
+            deadline=root->frontend_close_deadline;
+        if(root->frontend_close_timed_out){error=ERROR_TIMEOUT;break;}
+        if(caller->dos_completion_read && caller->execution_worker_generation &&
+            !root->frontend_close_draining && !root->frontend_closing) {
+            HANDLE capability=NULL,target=NULL,receipt=NULL;DWORD request=0;
+            if(!DuplicateHandle(GetCurrentProcess(),root->frontend_capability,
+                GetCurrentProcess(),&capability,SYNCHRONIZE,FALSE,0))
+                {error=GetLastError();break;}
+            /* Original task result is already consumed. NTSRV alone decides
+             * the inherited parent's reacquisition, outside the state lock. */
+            LeaveCriticalSection(&service->lock);
+            error=service_submit_native_request_until(caller,pid,generation,
+                OPENNT_BASE_NATIVE_REQUEST_PARENT_RESUME,capability,0,NULL,
+                &target,&receipt,&request,deadline);
+            CloseHandle(capability);
+            if(target)CloseHandle(target);
+            if(receipt)CloseHandle(receipt);
+            EnterCriticalSection(&service->lock);
+            if(error)break;
+            continue; /* Re-resolve root after the unlocked operation. */
+        }
         if(root->frontend_creator_generation!=generation) {
             error=caller->frontend_return_pending ? ERROR_INVALID_STATE : ERROR_SUCCESS;
             break;
@@ -829,25 +851,36 @@ DWORD OpenNtBaseServiceWaitFrontendConsoleRestored(OPENNT_BASE_CONNECTION *calle
     LeaveCriticalSection(&service->lock);return error;
 }
 
+DWORD OpenNtBaseServiceFrontendCloseQuiesced(OPENNT_BASE_CONNECTION *root,DWORD pid,DWORD generation)
+{
+    DWORD error=ERROR_ACCESS_DENIED;
+    if(!root)return error;
+    EnterCriticalSection(&root->service->lock);
+    if(OpenNtBaseServicePeer(root,pid,generation) && root->frontend_capability) {
+        error=ERROR_INVALID_STATE;
+        if(root->frontend_close_deadline && root->frontend_close_return_required &&
+            root->frontend_close_draining) {
+            root->frontend_close_returned=TRUE;
+            service_signal_frontend_states(root->service);
+            WakeAllConditionVariable(&root->service->frontend_changed);
+            error=ERROR_SUCCESS;
+        } else if(root->frontend_close_deadline && root->frontend_close_returned) {
+            error=ERROR_SUCCESS; /* A duplicate phase acknowledgement is not final. */
+        }
+    }
+    LeaveCriticalSection(&root->service->lock);return error;
+}
+
 DWORD OpenNtBaseServiceFrontendConsoleRestored(OPENNT_BASE_CONNECTION *root,DWORD pid,DWORD generation)
 {
     DWORD error=ERROR_ACCESS_DENIED;
     if(!root)return error;
     EnterCriticalSection(&root->service->lock);
     if(OpenNtBaseServicePeer(root,pid,generation) && root->frontend_capability) {
-        if(root->frontend_close_draining && root->frontend_close_return_required &&
-            !root->frontend_close_returned) {
-            /* This is the pre-worker-close CAF return acknowledgement.  Do
-             * not signal the launcher-facing restored event yet: its worker
-             * is still live and the root has not completed final teardown. */
-            root->frontend_close_returned=TRUE;
-            WakeAllConditionVariable(&root->service->frontend_changed);
-            SetEvent(root->service->frontend_lifetime_changed);
-            error=ERROR_SUCCESS;
-        } else if(root->frontend_close_draining) {
-            /* A repeated preparation acknowledgement is not final return.
-             * Only worker rundown can advance the transaction to closing. */
-            error=ERROR_SUCCESS;
+        if(root->frontend_close_draining) {
+            /* A final acknowledgement cannot substitute for quiescence while
+             * carriers can still access their old I/O route. */
+            error=ERROR_INVALID_STATE;
         } else if(root->frontend_restored) {
             error=SetEvent(root->frontend_restored) ? ERROR_SUCCESS : GetLastError();
             if(!error)service_console_return_ack(root);

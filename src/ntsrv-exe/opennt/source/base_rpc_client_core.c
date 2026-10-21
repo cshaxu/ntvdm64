@@ -24,7 +24,11 @@ typedef struct OPENNT_BASE_RPC_CLIENT {
     HANDLE server;
     HANDLE stop;
     HANDLE watcher;
+    void (*lost)(void *);
+    void *lost_context;
     ULONG generation;
+    volatile LONG local_failure;
+    BOOL bounded_calls;
 } OPENNT_BASE_RPC_CLIENT;
 
 static OPENNT_BASE_RPC_CLIENT client;
@@ -50,21 +54,18 @@ DWORD OpenNtBaseClientObserveDosEvent(const common_dos_observation *fact,BOOL ga
     return common_rpc_observe_dos_event(&view,fact,gap,stop);
 }
 
-/* Owner-approved standalone failure containment, not guest termination or
- * BaseSrv scheduling. Never reconnect a live command to a replacement server.
- * TerminateProcess avoids deadlocking in CRT/DLL teardown while other threads
- * are inside guest or RPC code after the service has disappeared. */
+/* Notify only confirmed death of the authenticated service process. Neither
+ * process termination nor role-specific resource cleanup belongs in transport. */
 static DWORD WINAPI broker_lifetime_watch(void *context)
 {
     OPENNT_BASE_RPC_CLIENT *state=context;
     HANDLE waits[2]={state->stop,state->server};
     DWORD result=WaitForMultipleObjects(2,waits,FALSE,INFINITE);
-    if (result!=WAIT_OBJECT_0) {
-        /* Do not write redirected stderr here: a full pipe can itself block
-         * forever. The process exit status is the failure witness. */
-        TerminateProcess(GetCurrentProcess(),RPC_S_SERVER_UNAVAILABLE);
+    if (result==WAIT_OBJECT_0+1) {
+        (void)OpenNtBaseClientFailure(ERROR_INVALID_HANDLE);
+        state->lost(state->lost_context);
     }
-    return 0;
+    return result==WAIT_FAILED ? GetLastError() : ERROR_SUCCESS;
 }
 
 /* Generated client stubs own only their transient marshalling buffers. */
@@ -81,7 +82,7 @@ static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
     RPC_STATUS status,uuid_status;
     unsigned int index;
     DWORD result=RPC_S_SERVER_UNAVAILABLE;
-    status=RpcIfInqId(Client_vdm_service_v47_0_c_ifspec,&expected);
+    status=RpcIfInqId(Client_vdm_service_v49_0_c_ifspec,&expected);
     if (status) return status;
     status=RpcMgmtInqIfIds(binding,&interfaces);
     if (status) return status;
@@ -99,6 +100,35 @@ static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
 
 DWORD OpenNtBaseClientConnectCurrent(void)
 {
+    return OpenNtBaseClientConnectCurrentTimeout(INFINITE);
+}
+
+DWORD OpenNtBaseClientSetCallTimeout(DWORD milliseconds)
+{
+    DWORD error;
+    if(!client.binding || !milliseconds)return ERROR_INVALID_PARAMETER;
+    error=RpcBindingSetOption(client.binding,RPC_C_OPT_CALL_TIMEOUT,milliseconds);
+    if(!error)client.bounded_calls=milliseconds!=INFINITE;
+    return error;
+}
+
+DWORD OpenNtBaseClientFailure(DWORD error)
+{
+    DWORD failure=(DWORD)InterlockedCompareExchange(&client.local_failure,0,0);
+    if(failure)return failure;
+    if(client.server && WaitForSingleObject(client.server,0)==WAIT_OBJECT_0)
+        failure=ERROR_INVALID_HANDLE;
+    else if(client.bounded_calls && (error==ERROR_TIMEOUT || error==RPC_S_CALL_CANCELLED))
+        failure=ERROR_TIMEOUT;
+    if(failure){
+        DWORD previous=(DWORD)InterlockedCompareExchange(&client.local_failure,(LONG)failure,0);
+        return previous ? previous : failure;
+    }
+    return error;
+}
+
+DWORD OpenNtBaseClientConnectCurrentTimeout(DWORD milliseconds)
+{
     static const unsigned char expected[APP_VERSION_BYTES]=APP_VERSION;
     unsigned char server_version[APP_VERSION_BYTES]={0};
     ULONG server_protocol=0;
@@ -107,7 +137,9 @@ DWORD OpenNtBaseClientConnectCurrent(void)
     DWORD error=ERROR_GEN_FAILURE;
     ULONG generation=0;
     VDM_CONNECTION connection=NULL;
+    ULONGLONG deadline=GetTickCount64()+milliseconds;
 
+    if(!milliseconds)return ERROR_TIMEOUT;
     if (client.connection) return ERROR_ALREADY_EXISTS;
     if (!broker_rpc_capture_scope(&scope)) return GetLastError();
     wsprintfW(endpoint,L"ntvdm-basesrv-%lu-%08lx-%08lx",scope.session,
@@ -115,6 +147,10 @@ DWORD OpenNtBaseClientConnectCurrent(void)
     /* Preserve this source-shaped client's historical binding-failure result;
      * the neutral mechanism itself returns the precise RPC status. */
     if(common_rpc_bind_local(endpoint,&client.binding))goto done;
+    if(milliseconds!=INFINITE) {
+        error=OpenNtBaseClientSetCallTimeout(milliseconds);
+        if(error)goto done;
+    }
     /* Original BaseSrvUpdateDOSEntry duplicates the authenticated worker's
      * self pseudo-handle; no broader process access is needed. */
     client.process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE|PROCESS_DUP_HANDLE,
@@ -144,6 +180,12 @@ DWORD OpenNtBaseClientConnectCurrent(void)
     if (connection) { client.connection=connection; client.generation=generation; }
     if (!error && (!connection || !generation)) error=ERROR_INVALID_DATA;
     if (error) goto done;
+    if(milliseconds!=INFINITE) {
+        ULONGLONG now=GetTickCount64();
+        if(now>=deadline){error=ERROR_TIMEOUT;goto done;}
+        error=OpenNtBaseClientSetCallTimeout((DWORD)(deadline-now));
+        if(error)goto done;
+    }
     RpcTryExcept {
         error=Client_BrokerProcess(client.binding,client.connection,client.process,
             client.generation,&client.server);
@@ -156,7 +198,14 @@ DWORD OpenNtBaseClientConnectCurrent(void)
     }
     error=ERROR_SUCCESS;
 done:
-    if (error) OpenNtBaseClientDisconnectCurrent();
+    if (error) {
+        error=OpenNtBaseClientFailure(error);
+        /* A failed bootstrap has no admitted request to finalize. Context
+         * rundown owns any partially accepted connection; do not spend a
+         * second connect budget attempting a cleanup RPC. */
+        client.local_failure=error;
+        OpenNtBaseClientDisconnectCurrent();
+    }
     return error;
 }
 
@@ -183,12 +232,13 @@ done:
     return error;
 }
 
-DWORD OpenNtBaseClientWatchBroker(void)
+DWORD OpenNtBaseClientWatchBroker(void (*lost)(void *),void *context)
 {
-    if (!client.server) return ERROR_INVALID_STATE;
+    if (!client.server || !lost) return ERROR_INVALID_STATE;
     if (client.watcher) return ERROR_ALREADY_EXISTS;
     client.stop=CreateEventW(NULL,TRUE,FALSE,NULL);
     if (!client.stop) return GetLastError();
+    client.lost=lost;client.lost_context=context;
     client.watcher=CreateThread(NULL,0,broker_lifetime_watch,&client,0,NULL);
     if (!client.watcher) {
         DWORD error=GetLastError();
@@ -198,17 +248,24 @@ DWORD OpenNtBaseClientWatchBroker(void)
     return ERROR_SUCCESS;
 }
 
+void OpenNtBaseClientStopBrokerWatch(void)
+{
+    if(client.watcher) {
+        SetEvent(client.stop);
+        WaitForSingleObject(client.watcher,INFINITE);
+        CloseHandle(client.watcher);client.watcher=NULL;
+    }
+    if(client.stop){CloseHandle(client.stop);client.stop=NULL;}
+    client.lost=NULL;client.lost_context=NULL;
+}
+
 void OpenNtBaseClientDisconnectCurrent(void)
 {
     VDM_CONNECTION connection;
     void (*cleanup)(void);
-    if (client.watcher) {
-        SetEvent(client.stop);
-        WaitForSingleObject(client.watcher,INFINITE);
-        CloseHandle(client.watcher);
-    }
-    if (client.stop) CloseHandle(client.stop);
-    if (client.connection && client.binding && client.process) {
+    OpenNtBaseClientStopBrokerWatch();
+    if (!client.local_failure && client.connection && client.binding && client.process &&
+        (!client.server || WaitForSingleObject(client.server,0)==WAIT_TIMEOUT)) {
         connection=client.connection;
         RpcTryExcept {
             (void)Client_Disconnect(client.binding,client.process,
@@ -239,7 +296,7 @@ DWORD OpenNtBaseClientAcquireConsoleContext(HANDLE frontend,HANDLE *capability)
 DWORD OpenNtBaseClientBindConsoleContext(HANDLE capability)
 {
     common_rpc_connection state=client_rpc_view();
-    return common_rpc_bind_console_context(&state,capability);
+    return OpenNtBaseClientFailure(common_rpc_bind_console_context(&state,capability));
 }
 
 DWORD OpenNtBaseClientGetNextNativeCommand(DWORD capacity,BYTE *payload,DWORD *bytes,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request,DWORD *caller_generation)
@@ -400,6 +457,7 @@ DWORD OpenNtBaseClientBrokerProcess(HANDLE *server)
 {
     if(!server)return ERROR_INVALID_PARAMETER;
     *server=NULL;
+    if(OpenNtBaseClientFailure(0))return client.local_failure;
     if(!client.server)return ERROR_INVALID_STATE;
     return DuplicateHandle(GetCurrentProcess(),client.server,GetCurrentProcess(),
         server,PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,0) ? 0 : GetLastError();
@@ -417,24 +475,24 @@ DWORD OpenNtBaseClientStartNativeWorker(DWORD native_type,HANDLE *worker)
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
     if(error && *worker){CloseHandle(*worker);*worker=NULL;}
-    return error;
+    return OpenNtBaseClientFailure(error);
 }
 DWORD OpenNtBaseClientSubmitNativeRequest(DWORD operation,HANDLE frontend,DWORD bytes,BYTE *payload,
     HANDLE *target,HANDLE *receipt,DWORD *request)
 {
     common_rpc_connection view=client_rpc_view();
-    return common_rpc_submit_native_request(&view,operation,frontend,bytes,payload,target,receipt,request);
+    return OpenNtBaseClientFailure(common_rpc_submit_native_request(&view,operation,frontend,bytes,payload,target,receipt,request));
 }
 DWORD OpenNtBaseClientFinishNativeRequest(DWORD request,DWORD *exit_code,DWORD *target_completed)
 {
     common_rpc_connection view=client_rpc_view();
-    return common_rpc_finish_native_request(&view,request,exit_code,target_completed);
+    return OpenNtBaseClientFailure(common_rpc_finish_native_request(&view,request,exit_code,target_completed));
 }
 DWORD OpenNtBaseClientStartFrontend(uint64_t window,BOOL borrowed,
     HANDLE *root,HANDLE *capability,HANDLE *restored)
 {
     common_rpc_connection state=client_rpc_view();
-    return common_rpc_start_frontend(&state,window,borrowed,root,capability,restored);
+    return OpenNtBaseClientFailure(common_rpc_start_frontend(&state,window,borrowed,root,capability,restored));
 }
 DWORD OpenNtBaseClientReturnFrontendConsole(void)
 {
@@ -446,6 +504,19 @@ DWORD OpenNtBaseClientFrontendConsoleRestored(void)
     common_rpc_connection state=client_rpc_view();
     return common_rpc_frontend_console_restored(&state);
 }
+DWORD OpenNtBaseClientFrontendCloseQuiesced(void)
+{
+    DWORD error=OpenNtBaseClientFailure(0);
+    if(error)return error;
+    if(!client.binding || !client.connection || !client.process)return ERROR_INVALID_STATE;
+    RpcTryExcept {
+        error=Client_FrontendCloseQuiesced(client.binding,client.connection,
+            client.process,client.generation);
+    }
+    RpcExcept(1){error=RpcExceptionCode();}
+    RpcEndExcept
+    return OpenNtBaseClientFailure(error);
+}
 DWORD OpenNtBaseClientFrontendStartupResult(HANDLE capability,DWORD status)
 {
     common_rpc_connection state=client_rpc_view();
@@ -454,7 +525,9 @@ DWORD OpenNtBaseClientFrontendStartupResult(HANDLE capability,DWORD status)
 DWORD OpenNtBaseClientWaitFrontendConsoleRestored(void)
 {
     common_rpc_connection state=client_rpc_view();
-    return common_rpc_wait_frontend_console_restored(&state);
+    DWORD error=OpenNtBaseClientFailure(0);
+    if(error)return error;
+    return OpenNtBaseClientFailure(common_rpc_wait_frontend_console_restored(&state));
 }
 
 DWORD OpenNtBaseClientWorkerShutdownEvent(HANDLE *shutdown)
@@ -519,7 +592,7 @@ DWORD OpenNtBaseClientRetainFrontendRoot(HANDLE capability,HANDLE *root,DWORD *g
         if (*root) CloseHandle(*root);
         *root=NULL;*generation=0;
     }
-    return error;
+    return OpenNtBaseClientFailure(error);
 }
 
 DWORD OpenNtBaseClientRequestFrontend(HANDLE capability)
@@ -532,7 +605,7 @@ DWORD OpenNtBaseClientRequestFrontend(HANDLE capability)
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    return error;
+    return OpenNtBaseClientFailure(error);
 }
 
 DWORD OpenNtBaseClientFrontendRequest(DWORD *request,HANDLE *worker)

@@ -97,7 +97,9 @@ static BOOL current_standard_console(HANDLE value,DWORD standard_id)
 
 static NTSTATUS rpc_failure(DWORD error)
 {
-    (void)error;
+    error=OpenNtBaseClientFailure(error);
+    SetLastError(error);
+    if(OpenNtBaseClientFailure(0)==ERROR_INVALID_HANDLE)return STATUS_PORT_DISCONNECTED;
     return STATUS_UNSUCCESSFUL;
 }
 
@@ -159,7 +161,8 @@ static DWORD attach_standard_streams(PBASE_API_MSG message,ULONG receipts[3])
         if (error || !receipts[index]) break;
     }
 if (error || index!=3) {
-        for (index=0;index<3;++index) if (receipts[index] &&
+        error=OpenNtBaseClientFailure(error ? error : ERROR_INVALID_HANDLE);
+        for (index=0;!OpenNtBaseClientFailure(0) && index<3;++index) if (receipts[index] &&
             !receipt_seen(receipts,index,receipts[index])) {
             RpcTryExcept { (void)Client_RevokeStream(client.binding,client.connection,
                 client.process,client.generation,receipts[index]); }
@@ -223,16 +226,16 @@ done:
     if (wire) HeapFree(GetProcessHeap(),0,wire);
     if (error || !applied) {
         ULONG index;
-        for (index=0;index<3;++index) if (streams[index] &&
+        error=OpenNtBaseClientFailure(error ? error : ERROR_INVALID_DATA);
+        for (index=0;!OpenNtBaseClientFailure(0) && index<3;++index) if (streams[index] &&
             !receipt_seen(streams,index,streams[index])) {
             RpcTryExcept { (void)Client_RevokeStream(client.binding,client.connection,
                 client.process,client.generation,streams[index]); }
             RpcExcept(1) { }
             RpcEndExcept
         }
-        SetLastError(error ? error : ERROR_INVALID_DATA);
-        message->ReturnValue=(ULONG)STATUS_UNSUCCESSFUL;
-        return STATUS_UNSUCCESSFUL;
+        message->ReturnValue=rpc_failure(error);
+        return message->ReturnValue;
     }
     return (NTSTATUS)message->ReturnValue;
 }
@@ -350,9 +353,8 @@ done:
     if (reply) MIDL_user_free(reply);
     if (wire) HeapFree(GetProcessHeap(),0,wire);
     if (error || !applied) {
-        SetLastError(error ? error : ERROR_INVALID_DATA);
-        message->ReturnValue=(ULONG)STATUS_UNSUCCESSFUL;
-        return STATUS_UNSUCCESSFUL;
+        message->ReturnValue=rpc_failure(error ? error : ERROR_INVALID_DATA);
+        return message->ReturnValue;
     }
     if((message->ReturnValue==STATUS_SUCCESS || (message->ReturnValue==STATUS_NO_MEMORY &&
         (base->u.GetNextVDMCommand.VDMState & RETURN_ON_NO_COMMAND))) &&
@@ -418,9 +420,8 @@ static NTSTATUS exit_command(PCSR_API_MSG message,ULONG length)
     message->ReturnValue=STATUS_SUCCESS;
     return STATUS_SUCCESS;
 done:
-    SetLastError(error ? error : ERROR_INVALID_DATA);
-    message->ReturnValue=STATUS_UNSUCCESSFUL;
-    return STATUS_UNSUCCESSFUL;
+    message->ReturnValue=rpc_failure(error ? error : ERROR_INVALID_DATA);
+    return message->ReturnValue;
 }
 
 static NTSTATUS update_command(PCSR_API_MSG message,ULONG length)
@@ -462,9 +463,8 @@ done:
     if (parent_event) CloseHandle(parent_event);
     if (wire) HeapFree(GetProcessHeap(),0,wire);
     if (error || !applied) {
-        SetLastError(error ? error : ERROR_INVALID_DATA);
-        message->ReturnValue=(ULONG)STATUS_UNSUCCESSFUL;
-        return STATUS_UNSUCCESSFUL;
+        message->ReturnValue=rpc_failure(error ? error : ERROR_INVALID_DATA);
+        return message->ReturnValue;
     }
     return (NTSTATUS)message->ReturnValue;
 }
@@ -490,9 +490,8 @@ static NTSTATUS exit_code_command(PCSR_API_MSG message,ULONG length)
         return STATUS_SUCCESS;
     }
 done:
-    SetLastError(error);
-    message->ReturnValue=STATUS_UNSUCCESSFUL;
-    return STATUS_UNSUCCESSFUL;
+    message->ReturnValue=rpc_failure(error);
+    return message->ReturnValue;
 }
 
 static NTSTATUS reenter_command(PCSR_API_MSG message,ULONG length)
@@ -515,9 +514,8 @@ static NTSTATUS reenter_command(PCSR_API_MSG message,ULONG length)
         return STATUS_SUCCESS;
     }
 done:
-    SetLastError(error);
-    message->ReturnValue=STATUS_UNSUCCESSFUL;
-    return STATUS_UNSUCCESSFUL;
+    message->ReturnValue=rpc_failure(error);
+    return message->ReturnValue;
 }
 
 DWORD OpenNtBaseClientStartVdmWorker(PCWSTR environment,DWORD characters,DWORD show,
@@ -543,7 +541,7 @@ DWORD OpenNtBaseClientStartVdmWorker(PCWSTR environment,DWORD characters,DWORD s
         /* Same process-local receipt mapping as original Update's RPC facade. */
         parent_event_handle=*parent;parent_receipt=receipt;
     }
-    return error;
+    return OpenNtBaseClientFailure(error);
 }
 
 DWORD WINAPI OpenNtBaseClientWowStyle(ULONG task,DWORD *style)
@@ -596,7 +594,7 @@ DWORD OpenNtBaseClientWowStartup(HANDLE parent,HANDLE *event,BOOL *started)
     if (!error && (!*event || value>1)) error=ERROR_INVALID_DATA;
     if (error && *event) { CloseHandle(*event); *event=NULL; }
     if (!error) *started=value!=0;
-    return error;
+    return OpenNtBaseClientFailure(error);
 }
 
 NTSTATUS NTAPI OpenNtBaseClientCallServer(PCSR_API_MSG message,
@@ -608,6 +606,8 @@ NTSTATUS NTAPI OpenNtBaseClientCallServer(PCSR_API_MSG message,
     (void)capture;
     if (!message || !client.connection || !client.binding || !client.process)
         return STATUS_UNSUCCESSFUL;
+    error=OpenNtBaseClientFailure(0);
+    if(error){message->ReturnValue=rpc_failure(error);return message->ReturnValue;}
     if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepRegisterWowExec)) {
         if (length!=sizeof(BASE_REGISTER_WOWEXEC_MSG)) {
             message->ReturnValue=STATUS_UNSUCCESSFUL;

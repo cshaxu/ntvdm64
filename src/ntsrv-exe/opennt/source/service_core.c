@@ -207,8 +207,16 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                         if(!compare(route->worker,watch->process.ProcessHandle))continue;
                         route_found=TRUE;
                         selected_root=route->root;
-                        if(!selected_root || selected_root->frontend_closing || selected_root->frontend_close_draining)
-                            (void)SetEvent(watch->console_close);
+                        if(!selected_root || selected_root->frontend_closing || selected_root->frontend_close_draining) {
+                            watch->close_kind=WORKER_CLOSE_CONSOLE;
+                            /* A late binding joins the existing close transaction.
+                             * Its frontend must quiesce before worker teardown,
+                             * just as for workers present at acceptance. */
+                            if(!selected_root || !selected_root->frontend_close_draining ||
+                                selected_root->frontend_close_returned ||
+                                WaitForSingleObject(selected_root->process.ProcessHandle,0)!=WAIT_TIMEOUT)
+                                (void)SetEvent(watch->console_close);
+                        }
                         break;
                     }
                     for(root_link=service->connections.Flink;

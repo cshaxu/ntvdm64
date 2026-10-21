@@ -33,7 +33,7 @@ static BOOL decode_input(const console_io_input *wire,INPUT_RECORD *record)
 typedef struct console_client {
     session *owner;
     ntcon_worker_client channel;
-    HANDLE ready,stop,shutdown,console_close;
+    HANDLE ready,stop,shutdown;
     worker_base_input_watch *input_watch;
     HANDLE capability,input_identity,output_identity;
     CRITICAL_SECTION lock;
@@ -187,47 +187,6 @@ BOOL ntvdm_console_text_palette(PALETTEENTRY colours[16])
     return valid;
 }
 
-/* Original nt_event.c owns the VDM close decision/cleanup. The NT4 Console
- * Server used a callback thread and bounded wait before forced close. Our
- * authenticated broker instruction controls session retirement; no native
- * Console, PID ancestry, or guest/task policy is acquired here. */
-extern BOOL CntrlHandler(ULONG type);
-extern VOID TerminateVDM(VOID);
-static DWORD WINAPI console_close_callback(void *context)
-{
-    console_client *client=context;
-    if (!session_thread_bind(client->owner)) return ERROR_INVALID_STATE;
-    (void)CntrlHandler(CTRL_CLOSE_EVENT);
-    (void)session_thread_unbind(client->owner);
-    return 0;
-}
-
-static DWORD WINAPI worker_close_callback(void *context)
-{
-    console_client *client=context;
-    if (!session_thread_bind(client->owner)) return ERROR_INVALID_STATE;
-    /* This is the original VDM termination entry, not a synthetic Console
-     * control event. It performs the original host/BaseSrv exit sequence. */
-    TerminateVDM();
-    (void)session_thread_unbind(client->owner);
-    return ERROR_PROCESS_ABORTED;
-}
-
-/* nt_event caches its wait handle once. Keep that local event stable; the
- * authenticated frontend event and process are notification sources only.
- * A signalled source is armed again after read/peek, avoiding a hot wait loop. */
-static void console_input_console_close(void *context)
-{
-    console_client *client=context;
-    worker_base_shutdown_close(console_close_callback,client,5000,CONTROL_C_EXIT,NULL);
-}
-
-static void console_input_worker_close(void *context)
-{
-    console_client *client=context;
-    worker_base_shutdown_close(worker_close_callback,client,INFINITE,ERROR_CANCELLED,NULL);
-}
-
 static void console_client_end(void *context)
 {
     console_client *client=context;
@@ -242,7 +201,6 @@ static void console_client_end(void *context)
     if (client->capability) CloseHandle(client->capability);
     if (client->stop) CloseHandle(client->stop);
     if (client->shutdown) CloseHandle(client->shutdown);
-    if (client->console_close) CloseHandle(client->console_close);
     if (client->input_identity) CloseHandle(client->input_identity);
     if (client->output_identity) CloseHandle(client->output_identity);
     DeleteCriticalSection(&client->lock);
@@ -288,14 +246,12 @@ DWORD ntvdm_console_client_begin(session *owner)
     }
     error=worker_base_shutdown_event(&client->shutdown);
     if(error){console_client_end(client);return error;}
-    error=worker_base_console_close_event(&client->console_close);
-    if(error){console_client_end(client);return error;}
     client->publisher=worker_base_publication_create(send_video_copy,client,client->shutdown);
     if(!client->publisher){error=GetLastError();console_client_end(client);return error;}
     error=ntvdm_console_graphics_attach_publisher(client->graphics,client->publisher);
     if(error){console_client_end(client);return error;}
-    client->input_watch=worker_base_input_watch_create(client->console_close,client->shutdown,client->stop,
-        NULL,console_input_console_close,console_input_worker_close,NULL,client);
+    client->input_watch=worker_base_input_watch_create(NULL,NULL,client->stop,
+        NULL,NULL,NULL,NULL,client);
     error=client->input_watch ? console_activate(client,TRUE) : GetLastError();
     if (!error && !session_register_teardown(owner,console_client_end,client))error=ERROR_NOT_ENOUGH_MEMORY;
     if (error) {

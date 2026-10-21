@@ -201,10 +201,12 @@ $previous = @{}
 foreach ($name in $environmentNames) { $previous[$name]=[Environment]::GetEnvironmentVariable($name) }
 $results = @()
 try {
-    # Original guest utilities live in system32. This explicit test PATH is
-    # ordinary user search input, not a product-owned package fallback.
+    # This fixed command matrix uses only packaged guest utilities and host
+    # System32 commands. Do not import the build controller's toolchain PATH
+    # into DOS. Long-PATH compatibility is a separate product boundary, not
+    # proved by this controlled lifecycle fixture or silently repaired here.
     [Environment]::SetEnvironmentVariable('PATH',
-        (Join-Path $PackageRoot 'system32')+';'+$previous['PATH'])
+        (Join-Path $PackageRoot 'system32')+';'+(Join-Path $env:SystemRoot 'System32'))
     # The observer owns a disposable Console.  Its fixed 80-column baseline
     # prevents a remote controller viewport from truncating marker text; this
     # is test setup only, never a product geometry request.
