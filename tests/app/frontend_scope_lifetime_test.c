@@ -67,10 +67,6 @@ DWORD OpenNtBaseClientFrontendIoDisconnected(void)
 }
 DWORD OpenNtBaseClientWaitFrontendConsoleRestored(void)
 { ++completion_calls;return completion_error; }
-DWORD OpenNtBaseClientAcquireFrontendRoot(uint64_t window,DWORD *create_root,
-    HANDLE *root,HANDLE *capability,HANDLE *retire,HANDLE *restored)
-{ (void)window;*create_root=1;*root=*capability=*retire=*restored=NULL;return 0; }
-DWORD OpenNtBaseClientCancelFrontendRootReservation(void){return 0;}
 void frontend_bootstrap_release(frontend_connection *connection)
 {
     if(connection->capability)CloseHandle(connection->capability);

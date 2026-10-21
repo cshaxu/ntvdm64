@@ -4,27 +4,6 @@
 #include "async_call.h"
 #include "common/protocol/frontend_lifecycle.h"
 
-DWORD common_rpc_acquire_frontend_root(const common_rpc_connection *state,uint64_t console_window,DWORD *create_root,
-    HANDLE *root,HANDLE *capability,HANDLE *retire,HANDLE *restored)
-{
-    DWORD error=ERROR_INVALID_STATE;
-    if(!create_root || !root || !capability || !retire || !restored)return ERROR_INVALID_PARAMETER;
-    *create_root=0;*root=*capability=*retire=*restored=NULL;
-    if(!state || !state->connection || !state->binding || !state->process)return error;
-    RpcTryExcept {
-        error=Client_AcquireFrontendRoot(state->binding,state->connection,state->process,
-            state->generation,(LONGLONG)console_window,create_root,root,capability,retire,restored);
-    }
-    RpcExcept(1){error=RpcExceptionCode();}
-    RpcEndExcept
-    if(error){
-        if(*root)CloseHandle(*root);if(*capability)CloseHandle(*capability);
-        if(*retire)CloseHandle(*retire);if(*restored)CloseHandle(*restored);
-        *root=*capability=*retire=*restored=NULL;*create_root=0;
-    }
-    return error;
-}
-
 DWORD common_rpc_frontend_usage(const common_rpc_connection *state,DWORD *pending,DWORD *tasks)
 {
     DWORD error=ERROR_INVALID_STATE,local_pending=0,local_tasks=0;

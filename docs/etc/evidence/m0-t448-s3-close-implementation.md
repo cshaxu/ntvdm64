@@ -789,3 +789,81 @@ the registered original-host exit-permission integration remain explicitly
 uncompleted. S4 retains final integrated acceptance. The narrow actual CAF
 cases passed; they do not prove every host/interaction variant or repair the
 historical intermittent WOW/WRITE issues.
+
+### S3 next candidate: remove client-owned reservation controls
+
+Source audit on c9efafca0 plus the current candidate finds no production caller
+of OpenNtBaseClientAcquireFrontendRoot or CancelFrontendRootReservation.
+The retained StartFrontend service implementation calls acquisition at
+frontend_registry.c and cancels its reservation on failure before returning.
+Remove the two IDL methods, server wrappers, client/common facade, unused scope
+fixture stubs and obsolete facade test cases. Keep service reservation and
+concurrency tests unchanged. The live StartFrontend facade retains invalid
+input, attachment cleanup, error and exact handle-delta tests.
+
+Candidate protocol is 52; production and test source combined changes are
++8/-101 (net -93). No mirror or guest change. Full component and second
+incremental runner PID 38656 started 2026-10-21 08:09:07 UTC with
+build/t448-s3/build.ps1 -Round r10; stdout/stderr are build-r10.out/.err.
+Results and coherent publication are pending, not a delivery or S3 closure.
+
+r10 completed full/incremental compilation, but review caught the required
+RPC interface-major change before verification. Waiting verifiers 13964,
+22332, 29208 and 5268 were stopped; no tests or publication are claimed for
+that candidate. Updated service.idl and every generated-interface reference
+to major 52, including the real identity fixture's major/protocol assertion.
+The replacement r10b run will verify this coherent ABI, preserving r10 evidence.
+
+r10b background build PID 17196 started 08:13:02 UTC; verification chain PIDs
+12932 (service/deadlines) and 19272 (wire/bootstrap) wait for explicit success
+results before executing. All use fresh r10b logs below build/t448-s3.
+The source review also found FrontendUsage now has only a real fixture caller,
+but its pending-I/O assertion must be mapped to a production observation before
+removing that surface. Retain it for this candidate rather than deleting the
+assertion. RetainFrontendRoot is not obsolete: inherited Run16 frontend scope
+still uses its authenticated lookup. Those conclusions prevent a name-based
+bulk removal from weakening either identity checks or lifecycle verification.
+
+r10b full thirteen-component build and unchanged 1398-intermediate second
+build passed at 08:16:14 UTC. Service38 passed; all eight actual deadline
+scenarios completed at 08:18:22 UTC. Governance review PID 25972 passed at
+08:16:26 UTC with zero mirror/guest changes. Frontend facade now has 102
+checks, exact handle delta zero; worker facade retains 238 checks, also zero.
+Removed checks cover only the deleted operation, not live startup behavior.
+
+Runtime PID 35452 and additional worker-failure PID 27736 began waiting at
+08:16:06 UTC; startup/rollback PID 34224 began at 08:19:02 UTC and waits for
+both to complete. Its existing frontend-scope fixture and actual adversarial
+startup-rejections/startup-timeout cases specifically retain the deleted
+remote facade's service-owned success/failure responsibilities. Source and
+fixture inputs stay unchanged during these runs. Results remain pending.
+
+r10b same-package runtime passed at 08:22:12 UTC: DOS17, WINMINE/SOL gameplay,
+WRITE's unchanged four-sample startup frontier and all three CAF self-delete
+echo-before-Enter cases. Worker-failure/completed-worker-loss passed at
+08:22:22 UTC. Scope lifetime and actual startup rejection/timeout rollback
+passed at 08:22:37 UTC. Reviewer checked deletion completeness, preserved
+service ownership, major-version isolation and retained test assertions.
+Production +5/-79 (net -74); tests +8/-27 (net -19): combined net -93.
+No new transport, fallback, retry, mirror diff or guest change. Installed-image
+and selected DLL-holder preflight found zero matching processes/modules.
+The complete package still requires final governance and coherent publication.
+
+### S3 P4 delivery
+
+Final review PID 34768 passed at 08:23:31 UTC. Publication PID 14024 completed
+at 08:23:59 UTC on 2026-10-21: all thirteen package-r10b image hashes match
+build-r10b/result.json, assets/release and O:/winnt/system32. Recovery package
+is publication-r10b-backup; publication-r10b.json records all hashes and paths.
+No owner process was killed. Unchanged WOW/style images were included and
+verified, not omitted from publication. Pending statements above describe
+their earlier observation points and are superseded by these run results.
+
+This P deletes two obsolete client-control operations and their dead test
+facades; service policy and reservation concurrency coverage remain intact.
+Runtime coverage and historical limitations remain those recorded above.
+Ordinary Disconnect/UNKNOWN_IF diagnostics, live startup-registration and
+remaining worker control bounds, partial initialization and original-host
+exit permission remain S3 obligations. Neither this P nor the protocol bump
+claims those paths are finished. Final commit includes the complete release
+manifest; S4 integrated acceptance and owner T acceptance remain pending.

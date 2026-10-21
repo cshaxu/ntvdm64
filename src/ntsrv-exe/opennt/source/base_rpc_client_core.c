@@ -84,7 +84,7 @@ static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
     RPC_STATUS status,uuid_status;
     unsigned int index;
     DWORD result=RPC_S_SERVER_UNAVAILABLE;
-    status=RpcIfInqId(Client_vdm_service_v51_0_c_ifspec,&expected);
+    status=RpcIfInqId(Client_vdm_service_v52_0_c_ifspec,&expected);
     if (status) return status;
     status=RpcMgmtInqIfIds(binding,&interfaces);
     if (status) return status;
@@ -352,24 +352,6 @@ DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE capability)
             client.generation,capability);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    return error;
-}
-DWORD OpenNtBaseClientAcquireFrontendRoot(uint64_t console_window,DWORD *create_root,
-    HANDLE *root,HANDLE *capability,HANDLE *retire,HANDLE *restored)
-{
-    common_rpc_connection state=client_rpc_view();
-    return common_rpc_acquire_frontend_root(&state,console_window,create_root,root,capability,retire,restored);
-}
-DWORD OpenNtBaseClientCancelFrontendRootReservation(void)
-{
-    DWORD error=ERROR_INVALID_STATE;
-    if(!client.connection || !client.binding || !client.process)return error;
-    RpcTryExcept {
-        error=Client_CancelFrontendRootReservation(client.binding,client.connection,
-            client.process,client.generation);
-    }
-    RpcExcept(1){error=RpcExceptionCode();}
     RpcEndExcept
     return error;
 }

@@ -19,7 +19,7 @@ the prior checkpoint claims that the CAF defect is universally fixed.
 | Admission And Approval | Owner approves final design and continuous sequential execution through T pre-closure acceptance; S1 design concluded and pushed at c838c332c. |
 | Objective | Implement the approved unified management-close transaction, concurrency and role-specific service-loss cleanup, preserving the S2 normal-chain candidate. |
 | Non-goals | No guest modification/rebuild; no native GUI target lifecycle ownership; no unrelated WOW32 capability work; no T closure without owner acceptance. |
-| Reference Baseline | S3 P3 communication-cleanup checkpoint: protocol 51, thirteen images published and hash-verified at both destinations; full/incremental build, 38 service cases, eight actual deadline scenarios, real bootstrap/loss/retirement, wire negatives and same-package runtime gates pass within the recorded frontier. S3 exit-permission work remains open; no functional acceptance or waiver. |
+| Reference Baseline | S3 P4 reservation-control cleanup: protocol 52, thirteen images published and hash-verified at both destinations; full/incremental build, 38 service cases, eight actual deadline scenarios, real bootstrap/loss/retirement, startup rejection/timeout rollback, wire negatives and same-package runtime gates pass within the recorded frontier. S3 exit-permission work remains open; no functional acceptance or waiver. |
 | Files And ABI Surface | Run16, NTSRV service/client, common protocol, worker-base, NTCON, NTVDM and NTVWM; production-linked lifecycle tests; coherent protocol updates if required. |
 | Applicable Rules | docs/README reading set; execution, architecture, coding, document and source-policy authorities; original-owner recovery and exception registration. |
 | Verification | Source-first implementation and diff review; background x86/x64 full-component/incremental builds; affected production-linked service/frontend/launcher fixtures and normal DOS/native/WOW startup/return regression; complete package deployment and hashes; governance. |
@@ -155,6 +155,16 @@ eight real deadline cases and full runtime gate pass. The thirteen-image set
 is published and hash-verified at both destinations as the S3 P3 checkpoint;
 the [S3 ledger](../etc/evidence/m0-t448-s3-close-implementation.md) retains the
 failed attempts and remaining startup/worker/exit-permission inventory.
+
+S3 P4 removes the unused client-owned acquisition/cancellation RPCs; NTSRV's
+StartFrontend keeps the original service reservation and failure rollback.
+Candidate r10b uses RPC major/protocol 52 and reduces production plus test
+source by 93 lines, without mirror or guest changes. Full/incremental build,
+service38, eight real deadline cases, wire identity/loss/retirement, startup
+rejection/timeout, scope lifetime and the same-package runtime gate pass.
+All thirteen images were published and hash-verified on 2026-10-21 08:23 UTC.
+This is another bounded cleanup checkpoint, not S3 closure; the remaining
+finite call families and original exit-permission work remain in the ledger.
 
 [Preserved pre-closure status](../etc/evidence/m0-t447-pre-closure-status.md)
 retains the complete prior packet and technical history. Its active wording

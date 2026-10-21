@@ -52,9 +52,6 @@ DWORD OpenNtBaseClientWorkerConsoleCloseEvent(HANDLE *close);
 DWORD OpenNtBaseClientWorkerIoReleaseEvent(HANDLE *release);
 DWORD OpenNtBaseClientWorkerStateChanged(HANDLE *state_changed);
 DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE capability);
-DWORD OpenNtBaseClientAcquireFrontendRoot(uint64_t console_window,DWORD *create_root,
-    HANDLE *root,HANDLE *capability,HANDLE *retire,HANDLE *restored);
-DWORD OpenNtBaseClientCancelFrontendRootReservation(void);
 DWORD OpenNtBaseClientRegisterFrontendLease(uint64_t console_window,DWORD creator_pid,
     BOOL borrowed,HANDLE retire,HANDLE restored);
 DWORD OpenNtBaseClientFrontendJoinCandidate(DWORD *nonce,DWORD *candidate_pid);

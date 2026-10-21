@@ -3,7 +3,7 @@
 
 static unsigned checks,failures,calls,mode;
 static common_rpc_connection expected;
-static HANDLE attachments[4];
+static HANDLE attachments[3];
 #define CHECK(x) do {++checks;if(!(x)){++failures;printf("FAIL %u %s\n",__LINE__,#x);}} while(0)
 static void peer(handle_t binding,VDM_CONNECTION connection,HANDLE process,DWORD generation)
 {
@@ -21,14 +21,6 @@ static HANDLE attachment(unsigned index)
     attachments[index]=mode==3 ? NULL : CreateEventW(NULL,TRUE,FALSE,NULL);
     CHECK(mode==3 || attachments[index]!=NULL);
     return attachments[index];
-}
-error_status_t Client_AcquireFrontendRoot(handle_t binding,VDM_CONNECTION connection,
-    HANDLE process,unsigned long generation,__int64 window,unsigned long *create,
-    HANDLE *root,HANDLE *capability,HANDLE *retire,HANDLE *restored)
-{
-    peer(binding,connection,process,generation);CHECK(window==0x123456789LL);
-    *create=1;*root=attachment(0);*capability=attachment(1);
-    *retire=attachment(2);*restored=attachment(3);return result();
 }
 error_status_t Client_StartFrontend(handle_t binding,VDM_CONNECTION connection,
     HANDLE process,unsigned long generation,__int64 window,unsigned long borrowed,
@@ -75,8 +67,8 @@ static void closed(unsigned count)
 }
 int main(void)
 {
-    DWORD before=0,after=0,create,pending,tasks,retired,error,want;
-    HANDLE root,capability,retire,restored,event;unsigned initial;
+    DWORD before=0,after=0,pending,tasks,retired,want;
+    HANDLE root,capability,restored,event;unsigned initial;
     RPC_ASYNC_STATE runtime;
     common_rpc_connection invalid={0};
     /* Initialize RPC's process-wide resources before measuring per-call
@@ -86,10 +78,9 @@ int main(void)
     expected.connection=(VDM_CONNECTION)(ULONG_PTR)12;
     expected.process=CreateEventW(NULL,TRUE,FALSE,NULL);expected.generation=13;
     CHECK(expected.process && GetProcessHandleCount(GetCurrentProcess(),&before));
-    root=capability=retire=restored=expected.process;create=99;
-    CHECK(common_rpc_acquire_frontend_root(NULL,0,&create,&root,&capability,&retire,&restored)==ERROR_INVALID_STATE);
-    CHECK(!create && !root && !capability && !retire && !restored);
-    CHECK(common_rpc_acquire_frontend_root(&expected,0,NULL,&root,&capability,&retire,&restored)==ERROR_INVALID_PARAMETER);
+    root=capability=restored=expected.process;
+    CHECK(common_rpc_start_frontend(NULL,0,FALSE,&root,&capability,&restored)==ERROR_INVALID_STATE);
+    CHECK(!root && !capability && !restored);
     CHECK(common_rpc_start_frontend(&expected,0,FALSE,NULL,&capability,&restored)==ERROR_INVALID_PARAMETER);
     CHECK(common_rpc_frontend_usage(&expected,NULL,&tasks)==ERROR_INVALID_PARAMETER);
     CHECK(common_rpc_retire_workerless_frontend(&expected,NULL)==ERROR_INVALID_PARAMETER);
@@ -104,12 +95,6 @@ int main(void)
     CHECK(!calls);
     for(mode=0;mode<3;++mode) {
         initial=calls;want=mode==0 ? 0 : mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED;
-        create=99;root=capability=retire=restored=NULL;
-        error=common_rpc_acquire_frontend_root(&expected,0x123456789ULL,&create,&root,&capability,&retire,&restored);
-        CHECK(error==want);
-        if(want){CHECK(!create && !root && !capability && !retire && !restored);closed(4);}
-        else {CHECK(create==1 && root && capability && retire && restored);
-            CloseHandle(root);CloseHandle(capability);CloseHandle(retire);CloseHandle(restored);}
         CHECK(common_rpc_start_frontend(&expected,0x123456789ULL,17,&root,&capability,&restored)==want);
         if(want){CHECK(!root && !capability && !restored);closed(3);}
         else {CHECK(root && capability && restored);CloseHandle(root);CloseHandle(capability);CloseHandle(restored);}
@@ -124,7 +109,7 @@ int main(void)
             CHECK(common_rpc_wait_frontend_console_restored(&expected)==want);
         }
         CHECK(common_rpc_frontend_startup_result(&expected,expected.process,ERROR_WRITE_FAULT)==want);
-        CHECK(calls==initial+(want ? 8U : 5U));
+        CHECK(calls==initial+(want ? 7U : 4U));
     }
     mode=3;event=expected.process;
     CHECK(common_rpc_frontend_state_changed(&expected,&event)==ERROR_INVALID_HANDLE && !event);

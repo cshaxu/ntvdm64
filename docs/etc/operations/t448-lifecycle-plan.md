@@ -254,6 +254,13 @@ control calls or UNKNOWN_IF diagnostic querying; those finite call families
 remain in the S3 communication inventory. No retries or transport substitute
 are permitted to hide a stalled control call.
 
+The obsolete client-owned AcquireFrontendRoot / CancelFrontendRootReservation
+wire entrypoints are removed in the next candidate. StartFrontend is the
+production request: NTSRV alone invokes acquisition and rollback internally.
+Retain those service algorithms and their reservation tests; remove only the
+unused remote/client facade and its tests. This narrows the control authority
+without replacing the transport or creating a second startup implementation.
+
 S1 changes documentation only: zero runtime, mirror, guest or release changes.
 S2 aims for zero mirror changes, using existing project-owned adapters. The
 selected S3 orderly-exit budget is at most three original host files and seven
