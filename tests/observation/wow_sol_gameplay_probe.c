@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "wow_sol_geometry.h"
 static DWORD owner_pid;
 static HWND game;
 static void report_geometry(const char *phase)
@@ -193,8 +194,9 @@ int main(int argc,char **argv)
      * Identify the owned app independently of desktop-dependent initial size.
      * Resize only this test subject through ordinary USER, never change the
      * desktop mode or silently skip gameplay on a smaller initial window. */
-    if (rect.right < 500 || rect.bottom < 250) {
+    if (rect.right < 585 || rect.bottom < 384) {
         RECT outer;
+        int geometry;
         if (!GetWindowRect(game, &outer) ||
             !SetWindowPos(game, NULL, 0, 0,
                 585 + (outer.right - outer.left) - rect.right,
@@ -207,7 +209,33 @@ int main(int argc,char **argv)
         }
         printf("gameplay-geometry requested=585x384 actual=%ldx%ld\n",rect.right,rect.bottom);
         report_geometry("after-resize");
-        if (rect.right != 585 || rect.bottom != 384) {
+        if (!GetWindowRect(game, &outer)) return 4;
+        geometry=sol_geometry_result((int)rect.right,(int)rect.bottom,
+            (int)(outer.right-outer.left),(int)(outer.bottom-outer.top),
+            GetSystemMetrics(SM_CXMAXTRACK),GetSystemMetrics(SM_CYMAXTRACK),
+            AreDpiAwarenessContextsEqual(GetThreadDpiAwarenessContext(),
+                GetWindowDpiAwarenessContext(game)));
+        if (geometry == 1) {
+            (void)capture(game,argv[3],"geometry-limited");
+            if(!wait_deal_ready(process)) {
+                puts("partial-startup-not-ready");
+                return 4;
+            }
+            if(!PostMessageW(game,WM_CLOSE,0,0)) {
+                printf("partial-close-post-failure error=%lu\n",GetLastError());
+                return 4;
+            }
+            deadline=GetTickCount64()+10000;
+            while(IsWindow(game) && GetTickCount64()<deadline)Sleep(25);
+            if(IsWindow(game)) {
+                printf("partial-close-timeout process-wait=%lu\n",WaitForSingleObject(process,0));
+                EnumDesktopWindows(desktop,report_window,0);
+                return 4;
+            }
+            puts("PARTIAL SOL startup and window close; full gameplay UNVERIFIED: geometry matches host max tracking size");
+            CloseHandle(process);CloseDesktop(desktop);return 77;
+        }
+        if (geometry != 0) {
             (void)capture(game,argv[3],"geometry-failure");
             return 4;
         }

@@ -62,3 +62,55 @@ were checked against candidate hashes (`s9-publication.json`). The
 contains the sources and release manifest and was pushed to `origin/main`.
 The owner subsequently approved S9 closure. This approval does not close T448
 or expand the stated test coverage.
+
+## SOL integration geometry follow-up
+
+Owner requests closure of the original-behavior small-desktop sizing concern
+and environment-aware integration coverage. This follow-up is test-only and
+does not change S9 title behavior, original guest, mirror or product assets.
+
+The installed `O:/winnt/SOL.EXE` and the retained S3 copy share SHA-256
+`68B196C6FD496BAC0E2F30F162EE0B4B4D6EB5BFEC1AF086C8EA759222211F31`.
+Read-only NE resource and instruction inspection finds its 71x96 bitmap,
+the startup seven-card 585-pixel client-width calculation, AdjustWindowRect,
+and a separate initial-height limit based on GDI VERTRES. OpenNT
+`windows/core/ntuser/kernel/createw.c::xxxAdjustSize` clamps tiled/sizeable
+windows to the values of WM_GETMINMAXINFO, whose default MAXTRACK derives
+from CXMAXTRACK/CYMAXTRACK in `minmax.c`; `inctlpan.c` derives those metrics
+from screen and frame metrics. SOL's relevant window-procedure dispatch uses
+the default handler. The 427x320 historical desktop records 447x340 maximum
+track and 447-pixel actual outer width, consistent with that original path.
+Its actual minmax response was not captured; this is source-and-observation
+attribution rather than a claim of a directly captured original message.
+
+An independent hidden native-window control set maxtrack to447x340 and
+requested601x443; the resulting outer rectangle was447x340. With the limit
+raised to1000x1000, the same request produced601x443. This demonstrates the
+host mechanism, not the result of an injected SOL intervention. A subsequent
+direct installed-SOL private-desktop attempt did not find its Solitaire
+window and timed out; its owned worker and broker were stopped. It is not a
+successful SOL test.
+
+`wow_sol_geometry_test.c` checks sufficient geometry, either or both limiting
+axes, unexplained clipping, and different awareness contexts. MSVC compiles
+the real integration probe at /W4 /WX. Real package S9 private-desktop run
+`build/sol-size-integration-r1` observed screen320x607, maxtrack340x627,
+initial and post-resize client324x384 and outer340x443; target and observer
+had matching DPI contexts. The probe captured the limited window, closed it,
+and the observer recorded `result=exited` and `exit=0x00000000`. The runner
+records `PARTIAL ... full gameplay UNVERIFIED` and exits non-success: no deal,
+stock or full-gameplay claim. Full-size gameplay is still required when a
+sufficient desktop is available; historical larger-desktop evidence remains
+historical, not a fresh run of this test change. The owner's separately
+reported SOL layout symptom has no measured geometry and remains distinct.
+
+Initial early-close rounds r2/r3 reached the same limited geometry but failed
+their close assertion; the observer reported exit `0xffffffff`. Do not erase
+or reinterpret those failures. The probe was then changed to wait for SOL's
+existing deal-menu readiness assertion before requesting close and to report
+close-post/close-timeout failures explicitly. Final-source rounds r5 and r6
+each reached deal-menu enabled, closed the window, and recorded the explicit
+partial result plus launcher exit0. Those two observations do not prove the
+root cause of r2/r3 or every timing interleaving; normal close failure remains
+a failure, not an environment skip. Full-size gameplay remains unexecuted for
+this test revision because the available desktop is320 pixels wide.

@@ -2,7 +2,34 @@
 
 ## Current Work
 
-**No active numeric M/T/S packet.** T448 remains open after owner-approved S9 closure; T closure has not been approved.
+**Active: M0 T448 S10**, Ordinary Mode, single implementer/reviewer. T448 remains open.
+
+## Active Packet
+
+| Field | S10 integration-test packet |
+| --- | --- |
+| Identifier Mode | M0 T448 S10, Ordinary Mode; one implementer and independent self-review. |
+| Admission And Approval | Owner accepts original small-desktop sizing semantics and requests environment-aware SOL integration verification. S9 is owner-closed; this is its next bounded S. |
+| Objective | Distinguish genuine SOL gameplay failures from desktops that cannot accommodate the existing gameplay geometry; preserve truthful evidence. |
+| Non-goals | No guest, production or mirror changes; no global sizing override; no unsupported claim that the owner's separately reported layout symptom is explained. |
+| Reference Baseline | S9 delivery; retained SOL geometry evidence and immutable original OpenNT sizing path. |
+| Files And ABI Surface | SOL observation probe/runner, focused test, current state, TODO and indexed evidence; no product ABI. |
+| Applicable Rules | Reading set, execution, source policy, guest immutability, test evidence and documentation governance. |
+| Verification | Exercise geometry decision boundaries and failure paths, compile the integration probe, run feasible real SOL integration, governance and diff review; report unavailable checks. |
+| Expected Markers | Sufficient geometry retains full gameplay assertions; geometry matching the host tracking limit reports partial coverage, never gameplay pass; unexplained resize failure remains failure. |
+| Asset Needs | Existing published package, immutable SOL and host window services; isolated test output under build/sol-size-research. |
+| Reporting Requirements | Sizing attribution, test outcomes, retained user-layout uncertainty and no-product-diff statement. Budget 1 GiB and one hour; inspect after ten minutes without progress. |
+| Stop Conditions | Newly proposed semantic waiver, guest changes or ambiguous test outcome beyond this scope. |
+| Exit Criteria | Focused tests and required governance pass; truthful integration coverage; reviewed test/document delivery committed and pushed, then await owner acceptance. |
+| Original Owner Request | Close the original-behavior sizing issue and make the environment-dependent SOL integration test validate what its actual geometry permits. |
+| Similar-Issue Sweep | Check SOL runner/callers and retained TODO for misleading unconditional gameplay passes. |
+
+S10 test-only implementation: classifier cases and MSVC probe compilation
+pass; private-desktop r5/r6 verify readiness and normal exit with explicit
+partial/unverified gameplay at 320-pixel screen width. Earlier r2/r3 close
+failures remain recorded, not explained or erased. Full-size gameplay was not
+rerun here. [Evidence](../etc/evidence/m0-t448-s9-console-title-handoff.md#sol-integration-geometry-follow-up)
+also distinguishes the owner's separately unmeasured layout report.
 
 S9 implements Console-title handoff for NTVWM; the [S9 evidence](../etc/evidence/m0-t448-s9-console-title-handoff.md)
 records full13/incremental, focused channel, real CAF, DOS/PIF title and

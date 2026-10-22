@@ -46,11 +46,16 @@ try {
     }while([DateTime]::UtcNow -lt $deadline)
     if(!$worker){throw 'No worker in this owned runtime'}
     & "$root\probe.exe" $worker.ProcessId "NTVDMConsoleTest-$($process.Id)" "$root\sol" *> "$root\probe.txt"
-    if($LASTEXITCODE){throw "Gameplay probe failed: $LASTEXITCODE"}
+    $probeResult=$LASTEXITCODE
+    if($probeResult -ne 0 -and $probeResult -ne 77){throw "Gameplay probe failed: $probeResult"}
     if(!$process.WaitForExit(65000)){throw 'Observer exceeded bound after window close'}
     $report=Get-Content "$root\observer.txt" -Raw
     if($process.ExitCode -or $report -notmatch 'result=exited' -or $report -notmatch 'exit=0x00000000'){
         throw 'Game actions passed but launcher completion did not; inspect observer.txt'
+    }
+    if($probeResult -eq 77){
+        'PARTIAL SOL startup, window close and run16 completion; full gameplay UNVERIFIED: geometry matches host max tracking size' | Set-Content "$root\result.txt"
+        throw 'SOL full gameplay not verified: geometry matches host max tracking size; see result.txt'
     }
     'PASS SOL deal, stock draw, WM_CLOSE and run16 completion' | Set-Content "$root\result.txt"
 } finally {
