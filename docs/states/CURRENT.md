@@ -4,8 +4,9 @@
 
 **Active: M0 T448 S8**
 
-S8 P1 is implemented, verified and published; delivery commit/push and clean
-checkout verification precede the owner acceptance handoff. The
+S8 P1 is delivered at b3ee596e4ac85e1a223af24a5ccd410369d6bce3, pushed to
+origin/main with a clean checkout and all13 installed/released hashes rechecked.
+Owner acceptance remains pending. The
 [S8 ledger](../etc/evidence/m0-t448-s8-shared-library-import.md) records52
 byte-exact upstream files,18 translation units, direct exchange-writer decoding,
 lazy actual-size payloads and removal of redundant staging. No guest or original

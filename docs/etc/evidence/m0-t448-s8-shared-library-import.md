@@ -300,3 +300,39 @@ the complete release manifest/assets. Verify push and clean status at handoff;
 owner acceptance is not inferred. Keep bounded scratch and rollback evidence
 until acceptance disposition; do not clear valid Ninja/ccache caches. The r6
 readiness incident is retained as unassigned test evidence, not a claimed fix.
+
+## Delivered identity and final T-scope reconciliation
+
+S8 P1 source/release commit is b3ee596e4ac85e1a223af24a5ccd410369d6bce3.
+Post-push verification found origin/main equal to HEAD, no staged/unstaged or
+untracked files, and all13 candidate/assets/installed SHA-256 values equal.
+The staged52 imported blobs also matched the previously verified raw source
+bytes. Git reported unreachable loose objects during its automatic packing;
+no manual prune or unrelated repository cleanup was performed.
+
+This follow-up is documentation-only. It does not refresh binaries or claim
+new runtime evidence. Against the accepted S6 source d5d0dc243, no changes
+exist under Run16, NTSRV, worker-base, NTVWM, common protocol/transport,
+adapter-mvdm-host-out or original MVDM/OpenNT mirrors. NTCON frontend_session
+changes are the frame writer/size/present ABI, removed staging allocation,
+consumed-on-return destruction cleanup and the ACP title bound. No lifecycle
+RPC owner, command/ack or reconnect policy changed. The S5 nine-row source/
+assertion reconciliation and S6 closure audit remain applicable to those
+unchanged owners; S8's channel/CAF and allocation/lifetime tests cover its
+changed frontend boundary. This is not a fresh exhaustive schedule proof.
+
+| Remaining closure group | Disposition |
+| --- | --- |
+| S1-S6 lifecycle/polling/monitor scope | Prior accepted S6 audit and S5 nine-row reconciliation retained; no new source changes to their control owners. |
+| S7 compatibility audit | Bounded audit concluded and handed its selected closure to S8. |
+| S8 import/integration | Full13/incremental, both-width fixtures, real channel/eight CAF, DOS17 and retained WOW frontiers, exact import/publication hashes, commit/push/clean verification delivered. |
+| Title capacity | Resolved under explicit owner-approved display truncation; no outstanding upstream expansion request. |
+| Owner acceptance/T closure | Pending; neither this audit nor the automatic goal continuation supplies owner acceptance or admits a new task. |
+
+No further implementation S is identified within this fixed scope. Preserve
+SOL layout, WRITE editing/exit and intermittent direct WOW exit as their
+existing limitations/TODOs. Preserve the r6 readiness incident as unassigned,
+not repaired; later passing matrices do not identify its cause. The queued
+WOW32 continuation is not absorbed into T448. Keep current rollback/evidence
+until acceptance and exact safe-disposal review. Do not repeat successful
+product tests or add cleanup features merely while waiting for acceptance.
