@@ -17,6 +17,7 @@ struct frontend_io_channel {
     frontend_video committed_video;
     char title[CONSOLE_IO_TITLE_BYTES];
     BOOL title_valid;
+    uint32_t title_epoch;
     frontend_session *root;
 };
 static DWORD activate(void *context,BOOL active)
@@ -37,6 +38,7 @@ static DWORD activate(void *context,BOOL active)
     /* Keep the shared logical viewport through acquisition. Only a copied
      * geometry operation or publication changes its dimensions. */
     if(!error && active && channel->title_valid &&
+        channel->title_epoch==frontend_session_title_epoch(channel->root) &&
         !frontend_session_enter(channel->root,channel)) {
         frontend_session_worker_title(channel->root,channel,channel->title);
         frontend_session_leave(channel->root);
@@ -207,11 +209,21 @@ static void title_changed(void *context)
     frontend_io_channel *channel=context;
     frontend_session_console_title_changed(channel->root);
 }
+static DWORD handoff_title(void *context,char *title,DWORD capacity)
+{
+    frontend_io_channel *channel=context;
+    if(channel->title_valid && channel->title_epoch==frontend_session_title_epoch(channel->root)) {
+        if(capacity<CONSOLE_IO_TITLE_BYTES)return ERROR_INSUFFICIENT_BUFFER;
+        strcpy_s(title,capacity,channel->title);return ERROR_SUCCESS;
+    }
+    return frontend_session_handoff_title(channel->root,title,capacity);
+}
 static void publish_title(void *context,const char *title)
 {
     frontend_io_channel *channel=context;
     strcpy_s(channel->title,sizeof(channel->title),title);
     channel->title_valid=TRUE;
+    channel->title_epoch=frontend_session_title_epoch(channel->root);
     if(!frontend_session_enter(channel->root,channel)) {
         frontend_session_worker_title(channel->root,channel,channel->title);
         frontend_session_leave(channel->root);
@@ -318,6 +330,7 @@ static DWORD WINAPI console_channel_main(void *context)
             request->operation!=CONSOLE_IO_GET_CURSOR_INFO &&
             request->operation!=CONSOLE_IO_READ_CELLS_W &&
             request->operation!=CONSOLE_IO_READ_TEXT_CONFIGURATION &&
+            request->operation!=CONSOLE_IO_GET_HANDOFF_TITLE_A &&
             request->operation!=CONSOLE_IO_SNAPSHOT_END)error=ERROR_INVALID_DATA;
         if(!error && channel->publication_surface &&
             (request->operation==CONSOLE_IO_PREPARE_TEXT_REGION ||
@@ -464,6 +477,7 @@ DWORD frontend_io_channel_start_request(DWORD request,HANDLE worker,frontend_ses
     channel->console.window_clip_owned=window_clip_owned;
     channel->console.title_changed=title_changed;
     channel->console.publish_title=publish_title;
+    channel->console.handoff_title=handoff_title;
     channel->console.read_text_configuration=read_text_configuration;
     channel->console.read_input=read_input;channel->console.prepend_input=prepend_input;
     channel->stop=CreateEventW(NULL,TRUE,FALSE,NULL);

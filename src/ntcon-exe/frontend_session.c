@@ -42,6 +42,9 @@ struct frontend_session {
     const void *title_owner;
     char worker_title[CONSOLE_IO_TITLE_BYTES];
     BOOL worker_title_valid;
+    char handoff_title[CONSOLE_IO_TITLE_BYTES];
+    BOOL handoff_title_valid;
+    uint32_t title_epoch;
     const frontend_video *video;
     uint32_t video_serial;
     console_text_configuration text_configuration;
@@ -802,6 +805,22 @@ void frontend_session_worker_title(frontend_session *frontend,const void *owner,
     frontend->title_owner=owner;frontend->worker_title_valid=TRUE;
     SetEvent(frontend->changed);
 }
+DWORD frontend_session_handoff_title(frontend_session *frontend,char *title,DWORD capacity)
+{
+    DWORD length,error;
+    if(!frontend || !title || capacity<CONSOLE_IO_TITLE_BYTES)return ERROR_INVALID_PARAMETER;
+    if(frontend->handoff_title_valid) {
+        strcpy_s(title,capacity,frontend->handoff_title);return ERROR_SUCCESS;
+    }
+    title[0]=0;SetLastError(ERROR_SUCCESS);
+    length=GetConsoleTitleA(title,capacity);error=GetLastError();
+    title[capacity-1]=0;
+    return length || error==ERROR_SUCCESS ? ERROR_SUCCESS : error;
+}
+uint32_t frontend_session_title_epoch(frontend_session *frontend)
+{
+    return frontend->title_epoch;
+}
 void frontend_session_cancel(frontend_session *frontend)
 {
     if(frontend && frontend->stop) {
@@ -862,6 +881,8 @@ static DWORD apply_binding(frontend_session *frontend,const void *owner,BOOL act
         if(!SetConsoleMode(frontend->console_input,frontend->parked_input_mode))
             return GetLastError();
         frontend->parked=FALSE;
+        frontend->handoff_title_valid=FALSE;
+        ++frontend->title_epoch;
     }
     if(frontend->window_mouse.width)
         error=frontend_window_mode(frontend->window)==FRONTEND_DISPLAY_WINDOW ?
@@ -877,6 +898,10 @@ static DWORD apply_binding(frontend_session *frontend,const void *owner,BOOL act
     frontend->input_count=kept;
     if(!kept && !ResetEvent(frontend->input_ready))return GetLastError();
     ZeroMemory(&frontend->window_mouse,sizeof(frontend->window_mouse));
+    if(!active && frontend->worker_title_valid && frontend->title_owner==owner) {
+        strcpy_s(frontend->handoff_title,sizeof(frontend->handoff_title),frontend->worker_title);
+        frontend->handoff_title_valid=TRUE;
+    }
     frontend->owner=active ? owner : NULL;
     frontend->title_owner=NULL;frontend->worker_title_valid=FALSE;
     frontend->video=NULL;frontend->video_serial=0;

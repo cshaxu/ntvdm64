@@ -13,6 +13,11 @@ static BOOL screen_written;
 static DWORD title_notifications;
 static DWORD published_titles;
 static char last_published_title[CONSOLE_IO_TITLE_BYTES];
+static DWORD handoff_title(void *context,char *title,DWORD capacity)
+{
+    (void)context;
+    return strcpy_s(title,capacity,"handoff title") ? ERROR_INSUFFICIENT_BUFFER : ERROR_SUCCESS;
+}
 static void title_changed(void *context)
 {
     (void)context;++title_notifications;
@@ -87,6 +92,7 @@ int main(void)
     owner.generation=17;
     owner.title_changed=title_changed;
     owner.publish_title=publish_title;
+    owner.handoff_title=handoff_title;
     owner.input=CreateFileW(L"CONIN$",GENERIC_READ|GENERIC_WRITE,FILE_SHARE_READ|FILE_SHARE_WRITE,
         NULL,OPEN_EXISTING,0,NULL);
     owner.output=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,
@@ -170,6 +176,9 @@ int main(void)
         CHECK(SetConsoleTitleA(original));
         puts("PASS successful Console-title call notifies the attached frontend once");
     }
+    operation(&owner,CONSOLE_IO_GET_HANDOFF_TITLE_A);
+    CHECK(!frontend_console_dispatch(&owner,&request,&reply) && reply.result &&
+        reply.bytes==sizeof("handoff title") && !strcmp((const char *)reply.data,"handoff title"));
     operation(&owner,CONSOLE_IO_PUBLISH_TITLE_A);
     request.bytes=3;memcpy(request.data,"bad",3);
     CHECK(frontend_console_dispatch(&owner,&request,&reply)==ERROR_INVALID_DATA &&

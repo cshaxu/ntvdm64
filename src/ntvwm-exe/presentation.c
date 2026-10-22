@@ -106,7 +106,7 @@ DWORD ntvwm_presentation_call(ntvwm_presentation *client,const console_io_reques
 {
     console_io_request request;DWORD error;
     if(!client || !input || !reply || input->bytes>CONSOLE_IO_MAX_DATA_BYTES ||
-        input->operation<CONSOLE_IO_WRITE || input->operation>CONSOLE_IO_PREPARE_TEXT_REGION)
+        input->operation<CONSOLE_IO_WRITE || input->operation>CONSOLE_IO_GET_HANDOFF_TITLE_A)
         return ERROR_INVALID_PARAMETER;
     memcpy(&request,input,sizeof(request));
     EnterCriticalSection(&client->lock);error=exchange(client,&request,reply);
@@ -480,6 +480,12 @@ DWORD ntvwm_presentation_seed(ntvwm_presentation *client,HANDLE output)
     if(memcmp(&screen,&reply.state,sizeof(screen))) {error=ERROR_RETRY;goto done;}
     error=read_configuration(client,&configuration,&has_configuration);
     if(error)goto done;
+    ZeroMemory(&request,sizeof(request));request.operation=CONSOLE_IO_GET_HANDOFF_TITLE_A;
+    error=exchange(client,&request,&reply);
+    if(error)goto done;
+    if(!reply.bytes || reply.bytes>CONSOLE_IO_TITLE_BYTES ||
+        memchr(reply.data,0,reply.bytes)!=reply.data+reply.bytes-1) {error=ERROR_INVALID_DATA;goto done;}
+    if(!SetConsoleTitleA((const char *)reply.data)) {error=GetLastError();goto done;}
     ZeroMemory(&request,sizeof(request));request.operation=CONSOLE_IO_SNAPSHOT_END;
     error=exchange(client,&request,&reply);
     snapshot_held=FALSE;

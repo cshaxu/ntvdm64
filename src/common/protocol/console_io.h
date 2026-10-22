@@ -8,7 +8,7 @@
 /* Direct worker/frontend wire header; no pointers or native resource
  * identities cross the pipe.  Local payload pointers below are explicitly
  * process-local staging only.  Peers are authenticated by BaseSrv attachment. */
-#define CONSOLE_IO_VERSION 27u
+#define CONSOLE_IO_VERSION 28u
 /* One-hop worker -> launcher stream routing, not an authorization token.
  * Versioned name; three low bits designate worker-local interactive endpoints.
  * File/pipe handles remain actual inherited resources. Consume before launch. */
@@ -95,7 +95,9 @@ enum console_io_operation {
     /* Active owner requests exact storage dimensions in width/height.
      * Rebase the current viewport and retain original cell-grid resize rules.
      * Device-mode selection belongs to the caller, never the frontend. */
-    CONSOLE_IO_PREPARE_TEXT_REGION
+    CONSOLE_IO_PREPARE_TEXT_REGION,
+    /* Copied caption of the logical Console at ownership handoff. */
+    CONSOLE_IO_GET_HANDOFF_TITLE_A
 };
 enum console_io_window_query {
     CONSOLE_WINDOW_ICONIC=1,

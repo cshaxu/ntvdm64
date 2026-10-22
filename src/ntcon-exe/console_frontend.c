@@ -99,7 +99,7 @@ DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request
     if (!request->sequence || owner->sequence==UINT32_MAX ||
         request->sequence!=owner->sequence+1 || request->bytes>CONSOLE_IO_MAX_DATA_BYTES ||
         (request->bytes && !request->data) ||
-        request->operation<CONSOLE_IO_WRITE || request->operation>CONSOLE_IO_PREPARE_TEXT_REGION ||
+        request->operation<CONSOLE_IO_WRITE || request->operation>CONSOLE_IO_GET_HANDOFF_TITLE_A ||
         request->operation==38) /* Retired peer activation, never a data operation. */
         return ERROR_INVALID_DATA;
     cells=request->operation>=CONSOLE_IO_READ_CELLS_A && request->operation<=CONSOLE_IO_WRITE_CELLS_W;
@@ -275,6 +275,13 @@ DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request
             reply->bytes=count<s->count ? count+1 : s->count;
         ok=count!=0 || mode==ERROR_SUCCESS;
         SetLastError(mode);
+        break;
+    case CONSOLE_IO_GET_HANDOFF_TITLE_A:
+        if(!owner->handoff_title) {SetLastError(ERROR_INVALID_FUNCTION);ok=FALSE;break;}
+        mode=owner->handoff_title(owner->io_context,(char *)reply->data,CONSOLE_IO_TITLE_BYTES);
+        ok=mode==ERROR_SUCCESS;
+        if(ok)reply->bytes=(DWORD)strlen((const char *)reply->data)+1;
+        else SetLastError(mode);
         break;
     case CONSOLE_IO_SET_TITLE_A:
         ok=SetConsoleTitleA((LPCSTR)console_io_request_payload(request));

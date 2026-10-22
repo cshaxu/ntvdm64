@@ -127,6 +127,9 @@ static DWORD WINAPI peer(void *context)
             } else if(request.operation==CONSOLE_IO_SNAPSHOT_END) {
                 if(state->snapshot_begins!=state->snapshot_ends+1)error=ERROR_INVALID_STATE;
                 else ++state->snapshot_ends;
+            } else if(request.operation==CONSOLE_IO_GET_HANDOFF_TITLE_A) {
+                static const char title[]="handoff title";
+                memcpy(reply.data,title,sizeof(title));reply.bytes=sizeof(title);
             } else if(request.operation==CONSOLE_IO_PUBLISH_TITLE_A) {
                 if(state->mode==21)error=ERROR_NOT_READY;
                 else {
@@ -314,7 +317,9 @@ static void run_case(unsigned mode)
             CHECK(GetConsoleScreenBufferInfo(buffer,&after));
             CHECK(ReadConsoleOutputCharacterW(buffer,&cell,1,origin,&count) && count==1);
             if(mode==9 || mode==11 || mode==13 || mode==16 || mode==20 || mode==21) {
+                char title[CONSOLE_IO_TITLE_BYTES];
                 COORD last={19,7};
+                CHECK(GetConsoleTitleA(title,sizeof(title)) && !strcmp(title,"handoff title"));
                 CHECK(cell=='A' && after.dwSize.X==20 && after.dwSize.Y==8);
                 CHECK(after.dwCursorPosition.X==4 && after.dwCursorPosition.Y==2);
                 CHECK(ReadConsoleOutputCharacterW(buffer,&cell,1,last,&count) && count==1 && cell=='H');
@@ -582,7 +587,7 @@ done:
     } else if(mode>=17 && mode!=20 && mode!=21)CHECK(state.calls==1);
     else if(mode==21)CHECK(state.calls>=6u);
     else CHECK(mode==11 || mode>=13 ? state.calls>=6u :
-        state.calls==(mode==5 ? 0u : mode==12 ? 4u : mode==10 ? 6u : mode==9 ? 21u : 1u));
+        state.calls==(mode==5 ? 0u : mode==12 ? 4u : mode==10 ? 6u : mode==9 ? 24u : 1u));
     if((mode>=9 && mode<=16) || mode==20 || mode==21)CHECK(state.snapshot_begins==state.snapshot_ends &&
         state.snapshot_begins==(mode==9 ? 3u : mode==20 ? 2u : 1u));
     /* Peer rejects the retired activation opcode before dispatch above;

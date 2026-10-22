@@ -145,4 +145,10 @@ at0d9f1803ee04bd89bd6150306912a3e8674d0a83 and NTCON caller migration. S7's
 [conclusion and handoff](../etc/evidence/m0-t448-s7-shared-library-import-audit.md#s7-conclusion-and-s8-handoff)
 records resolved upstream defects, consumed-on-return destroy, dynamic payloads
 and the finite verification/publication scope. No guest, worker-wire or service
-authority changes; CURRENT owns the only active S8 packet.
+authority changes; CURRENT owned the S8 packet.
+
+Following S8 functional acceptance, the owner admits S9 to correct the NTVWM
+CAF carrier caption. The [S9 evidence](../etc/evidence/m0-t448-s9-console-title-handoff.md)
+records the existing Console I/O handoff, title ownership, regression coverage
+and delivery; CURRENT owns the active packet. No guest or lifecycle authority
+is transferred.

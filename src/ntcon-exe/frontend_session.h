@@ -22,6 +22,8 @@ DWORD frontend_session_display(frontend_session *,BOOL window);
 void frontend_session_console_title_changed(frontend_session *);
 /* Called with the frontend I/O lock held by this authenticated channel. */
 void frontend_session_worker_title(frontend_session *,const void *,const char *);
+DWORD frontend_session_handoff_title(frontend_session *,char *,DWORD);
+uint32_t frontend_session_title_epoch(frontend_session *);
 /* Terminal teardown must restore the caller's active buffer and input mode
  * before the root launcher returns control to its parent Console. */
 DWORD frontend_session_destroy(frontend_session *);

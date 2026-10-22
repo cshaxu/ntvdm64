@@ -765,6 +765,35 @@ static DWORD WINAPI publication_reader(void *context)
     frontend_session_snapshot_end(test_frontend);
     return read->error;
 }
+static void test_title_handoff(void)
+{
+    frontend_io_channel a={0},b={0};char original[CONSOLE_IO_TITLE_BYTES],title[CONSOLE_IO_TITLE_BYTES];
+    a.root=b.root=test_frontend;
+    GetConsoleTitleA(original,sizeof(original));
+    CHECK(SetConsoleTitleA("root title"));
+    CHECK(!activate(&a,TRUE));
+    CHECK(!handoff_title(&a,title,sizeof(title)) && !strcmp(title,"root title"));
+    publish_title(&a,"parent title");
+    CHECK(!activate(&a,FALSE));
+    CHECK(!activate(&b,TRUE));
+    CHECK(!handoff_title(&b,title,sizeof(title)) && !strcmp(title,"parent title"));
+    publish_title(&b,"child title");
+    CHECK(!activate(&b,FALSE));
+    CHECK(!activate(&a,TRUE));
+    CHECK(!handoff_title(&a,title,sizeof(title)) && !strcmp(title,"parent title"));
+    CHECK(!activate(&a,FALSE));
+    CHECK(!frontend_session_park(test_frontend));
+    CHECK(SetConsoleTitleA("new root title"));
+    CHECK(!activate(&b,TRUE));
+    CHECK(!handoff_title(&b,title,sizeof(title)) && !strcmp(title,"new root title"));
+    CHECK(!activate(&b,FALSE));
+    CHECK(SetConsoleTitleA(original));
+    frontend_session_forget(test_frontend,&a);frontend_session_forget(test_frontend,&b);
+    if(a.console.output)CloseHandle(a.console.output);
+    if(b.console.output)CloseHandle(b.console.output);
+    fprintf(private_report ? private_report : stdout,
+        "PASS title handoff: root, nested owner, restored owner and parked root\n");
+}
 static void test_prepare_operation(void)
 {
     frontend_io_channel channel={0};console_io_request request={0};console_io_reply reply;
@@ -1288,6 +1317,7 @@ int main(int argc,char **argv)
     read_entered=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(read_entered);
     CHECK(GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE),&original_cursor));
     CHECK(!frontend_session_create(&test_frontend));
+    test_title_handoff();
     test_prepare_operation();
     test_standalone_text(FALSE,FALSE);
     test_standalone_text(FALSE,TRUE);

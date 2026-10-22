@@ -2,11 +2,19 @@
 
 ## Current Work
 
-**Active: M0 T448 S8**
+**Active: M0 T448 S9**
+
+S9 implements Console-title handoff for NTVWM; the [S9 evidence](../etc/evidence/m0-t448-s9-console-title-handoff.md)
+records full13/incremental, focused channel, real CAF, DOS/PIF title and
+runtime results. The full thirteen-image package is published and hash-checked
+at assets/release and O:/winnt/system32; the delivery commit records its
+identity, and owner acceptance remains.
 
 S8 P1 is delivered at b3ee596e4ac85e1a223af24a5ccd410369d6bce3, pushed to
 origin/main with a clean checkout and all13 installed/released hashes rechecked.
-Owner acceptance remains pending. The
+Owner reports functional acceptance and separately reports that CAF displays
+the NTVWM carrier title for `run16 cmd`; title investigation is recorded in the
+S8 ledger. T closure is not claimed. The
 [S8 ledger](../etc/evidence/m0-t448-s8-shared-library-import.md) records52
 byte-exact upstream files,18 translation units, direct exchange-writer decoding,
 lazy actual-size payloads and removal of redundant staging. No guest or original
@@ -21,7 +29,7 @@ repeats and two full matrices passed without claiming its cause repaired.
 All13 images are published/hash-verified at assets/release and O:/winnt/system32;
 publication-r20 retains a rollback backup. Source review and governance pass.
 Scratch/evidence remains in build/t448-s8 pending acceptance and disposition;
-stable Ninja/ccache caches are retained. T448 remains open for owner acceptance.
+stable Ninja/ccache caches are retained. T448 remains open.
 Owner admits S8 on 2026-10-22 to import the audited public-library closure
 unchanged and adapt NTCON. S7 reaches its bounded audit-only conclusion;
 no import or downstream runtime qualification was performed in S7. T448
@@ -89,22 +97,29 @@ service loss permits local cleanup, never reconnection or task replay.
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T448 S8; Ordinary Mode, single person implementer/reviewer; no subagents. |
+| Identifier Mode | M0 T448 S9; Ordinary Mode, single person implementer/reviewer; no subagents. |
 | Candidate Proposal | [NTSRV lifecycle authority](../proposals/proposal-ntsrv-lifecycle-authority-001.md). |
-| Admission And Approval | Owner approves a new S to import public library components after S7 audit and upstream lifetime remediation. |
-| Objective | Byte-exact selected upstream library closure, correctly integrated NTCON frame/input/lifetime consumers, verified coherent release. |
-| Non-goals | No guest modification/rebuild, original internal wait rewrite, new transport, timers/retries/reconnect framework, GUI target management or unrelated WOW32 feature work; no T closure without acceptance. |
-| Reference Baseline | Product d5d0dc243/protocol64; old import3186afcd; selected upstream0d9f1803ee04bd89bd6150306912a3e8674d0a83. S7 follow-up inspected HEAD453edcfa and upstream S14 evidence, not local qualification. |
-| Files And ABI Surface | src/ntcon-exe selected lib and consumers, import manifest/notices, tools/build selection, tests and docs. Process-local ABI changes only; retain worker wire/RPC and guest. |
+| Admission And Approval | Owner accepts S8 functionality, reports CAF title showing ntvwm.exe, and explicitly requests a fix. |
+| Objective | Restore correct Console title initialization and title handoff for native CUI without exposing the carrier name or overriding application title changes. |
+| Non-goals | No guest modification/rebuild, GUI or WOW32 feature changes, new transport, timers/retries/reconnect framework, or T closure without owner acceptance. |
+| Reference Baseline | Delivered S8 P1 b3ee596e4; [S8 ledger](../etc/evidence/m0-t448-s8-shared-library-import.md) records current title observations and retained limits. |
+| Files And ABI Surface | NTCON/NTVWM title and handoff owners, existing Console I/O protocol where needed, tests and evidence; retain coherent protocol/package. |
 | Applicable Rules | docs/README reading set; execution, architecture, coding, document and source-policy authorities; original-owner recovery and exception registration. |
-| Verification | Byte/hash and dependency audit; dynamic frames, concurrent retirement, fatal child tests, input/capture, frontend/channel/text, eight CAF pre-Enter echo cases, DOS17 and retained WOW frontiers; full13 plus no-change incremental; governance/link/diff review. All builds/tests hidden background. |
-| Expected Markers | No fixed maximum Window payload allocation; underline/split cursor/font32 preserved; destroy consumes on every normal return; no added timeout/retry or callback; no original mirror diff. |
-| Asset Needs | Existing source and read-only original references; retained T447 fault evidence and rollback package; no new guest assets. |
-| Reporting Requirements | Selected source hashes, adapted callers, removed local exceptions, allocation/lifetime evidence, source delta and limitations. Scratch build/t448-s8 owned by S8: 2GiB, two hours per run, investigate after ten minutes without progress; archive concise evidence and retire scratch after owned jobs exit. Stable Ninja/ccache retained. |
+| Verification | Verify native initial, explicit and nested titles, handoff and restoration including DOS/PIF; focused negative/lifecycle tests, full13 incremental, relevant real CAF and DOS regressions, governance and review. All builds/tests hidden background. |
+| Expected Markers | Carrier name never substitutes for inherited visible title; app title updates and nested restoration work; DOS and PIF behavior retained; no original mirror diff. |
+| Asset Needs | Existing source, isolated package and immutable guest assets; prior S8 evidence and rollback package. |
+| Reporting Requirements | Actual title authority, handoff and failure semantics, tests and limits, full package hashes and code/mirror delta. Scratch build/t448-s8 reused for this S: 2GiB, two hours per run, investigate after ten minutes without progress; retain stable caches. |
 | Stop Conditions | New observable semantic retreat, missing original-source authority or material scope expansion requires owner decision. |
-| Exit Criteria | Required tests pass with existing explicit limitations preserved; all13 images published/hash-verified at assets/release and configured system32, reviewed commit/push and clean worktree, then owner acceptance. Admission-only documentation delivery does not rebuild or publish. |
-| Original Owner Request | Admit a new S to import the public library components. |
-| Similar-Issue Sweep | Frames, fonts/cursor, input/capture, mailbox ownership, stop/join/failure, dependencies/build selection and import provenance. |
+| Exit Criteria | Required title/lifecycle tests pass; all13 images published/hash-verified at assets/release and configured system32, reviewed commit/push and clean worktree, then owner acceptance. |
+| Original Owner Request | Fix the CAF title shown as ntvwm.exe; verify whether NTVDM has the same problem. |
+| Similar-Issue Sweep | DOS shared Console, PIF title, native nested and app-set titles, channel ownership and restore. |
+
+## S8 Closure Record
+
+The owner accepted S8 functionality; its delivered import, tests, publication,
+and retained limitations are recorded in the [S8 evidence](../etc/evidence/m0-t448-s8-shared-library-import.md).
+The subsequently reported native Console caption defect is admitted separately
+as S9 and does not imply T acceptance.
 
 ## S7 Closure Record
 
@@ -129,6 +144,7 @@ five-second policies; they are not current instructions or open S3 work.
 6. S6: owner-added unused fallback/interface cleanup and NTMON change-only rendering with one-second sampling.
 7. S7: SoftPC shared-library compatibility and remediation audit; bounded audit conclusion, no runtime import.
 8. S8: pinned byte-exact public-library import and NTCON integration, full verification and publication.
+9. S9: native Console title initialization and handoff, preserving app-set and restored titles.
 
 The [proposal](../proposals/proposal-ntsrv-lifecycle-authority-001.md) owns the
 finite inherited gap list. Cross-group changes must preserve a coherent working

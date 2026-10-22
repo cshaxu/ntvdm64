@@ -551,6 +551,9 @@ records core ownership, public ABI, dual-width regression and publication.
 [T448 S7 shared-library compatibility audit](evidence/m0-t448-s7-shared-library-import-audit.md)
 records pinned-source incompatibilities and decisions before import.
 
+[T448 S9 Console title handoff](evidence/m0-t448-s9-console-title-handoff.md)
+records the native title fix, ownership, regression evidence and remaining limits.
+
 [T433 S6 native service mirror audit](evidence/m0-t433-s6-native-service-mirror-audit.md)
 records actual selected dependencies, numeric-carrier versus local-resource
 semantics, strict native compile/link/layout attempts and the proposed diff budget.

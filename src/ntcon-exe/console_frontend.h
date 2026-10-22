@@ -33,6 +33,7 @@ typedef struct frontend_console {
     void (*title_changed)(void *);
     /* Copied caption metadata, not a SetConsoleTitle on the root Console. */
     void (*publish_title)(void *,const char *);
+    DWORD (*handoff_title)(void *,char *,DWORD);
     /* Copied input owned by frontend; callbacks hold the enter lock. */
     DWORD (*read_input)(void *,BOOL,INPUT_RECORD *,DWORD,DWORD *);
     DWORD (*prepend_input)(void *,const INPUT_RECORD *,DWORD);

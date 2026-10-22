@@ -327,12 +327,51 @@ changed frontend boundary. This is not a fresh exhaustive schedule proof.
 | S7 compatibility audit | Bounded audit concluded and handed its selected closure to S8. |
 | S8 import/integration | Full13/incremental, both-width fixtures, real channel/eight CAF, DOS17 and retained WOW frontiers, exact import/publication hashes, commit/push/clean verification delivered. |
 | Title capacity | Resolved under explicit owner-approved display truncation; no outstanding upstream expansion request. |
-| Owner acceptance/T closure | Pending; neither this audit nor the automatic goal continuation supplies owner acceptance or admits a new task. |
+| Owner acceptance/T closure | Owner reports functional acceptance but identifies the NTVWM CAF title issue below; T closure is not claimed. |
 
-No further implementation S is identified within this fixed scope. Preserve
+No further implementation S was identified within the fixed import scope. Preserve
 SOL layout, WRITE editing/exit and intermittent direct WOW exit as their
 existing limitations/TODOs. Preserve the r6 readiness incident as unassigned,
 not repaired; later passing matrices do not identify its cause. The queued
 WOW32 continuation is not absorbed into T448. Keep current rollback/evidence
 until acceptance and exact safe-disposal review. Do not repeat successful
 product tests or add cleanup features merely while waiting for acceptance.
+
+## Owner functional acceptance and title observation
+
+The owner reports functional acceptance and observes `ntvwm.exe` as the CAF
+caption after `run16 cmd`. On the delivered package-r21, an isolated private
+desktop observation recorded the visible LibKvmWindow and NTVWM hidden Console
+with the same carrier-path title. A separate `cmd /k title TITLE-AUDIT-EXPLICIT`
+observation recorded that explicit title in both windows. DOS `COMMAND.COM`
+instead displayed the isolated outer Console title `NTVDM observation`. A
+generated PIF with title `PIF-TITLE-AUDIT` displayed that title in CAF; its
+read-back NT31 flags were zero. These are title observations, not normal-exit
+or general PIF compatibility tests: the observer terminated the held launcher
+after sampling, and only its own isolated package was cleaned up.
+
+Relevant retained run files in the S8 scratch root are
+`title-audit2-cmd.txt.timeout-live.txt`,
+`title-audit3-explicit.txt.timeout-live.txt`,
+`title-audit4-dos.txt.timeout-live.txt`, and
+`title-pif-audit.txt.timeout-live.txt`. The initial short timeout was rejected
+before launch; two incorrectly formed DOS argument attempts did not reach the
+intended target and do not count as evidence. The PIF test did not prove the
+requested NT31 flag was set. No production change, release or fix is claimed.
+
+NTVWM captures its hidden Console title, while the existing frontend title
+query reads the attached native Console. Active worker titles can differ from
+that native title during nested handoffs, so blindly seeding every acquisition
+from the latter may overwrite active or restored titles. A title correction
+must preserve explicit title changes, nested handoff and restoration; its
+design and runtime verification are not established by these observations.
+
+The owner subsequently requests a fix, admitted as S9. The release-side
+title and new-channel title must be distinguished: the current frontend
+clears its active title on unbind but retains a per-channel title for later
+reactivation. NTVWM seeds the screen before target execution, and can reuse
+an already-presenting carrier for nested launches. Any implementation must
+avoid reinitializing that live carrier or replacing a returning channel's
+own title with its child's title. A frontend native-title query alone cannot
+provide the prior active worker's copied caption. These are source-level
+constraints; no selected implementation or verification is claimed here.

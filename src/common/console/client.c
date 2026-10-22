@@ -127,6 +127,7 @@ DWORD ntcon_worker_exchange(ntcon_worker_client *client,console_io_request *requ
         reply->reserved || reply->padding ||
         reply->bytes>CONSOLE_IO_MAX_DATA_BYTES ||
         (reply->bytes && request->operation!=CONSOLE_IO_GET_TITLE_A &&
+            request->operation!=CONSOLE_IO_GET_HANDOFF_TITLE_A &&
             request->operation!=CONSOLE_IO_KEYBOARD_LAYOUT &&
             request->operation!=CONSOLE_IO_READ_TEXT_CONFIGURATION &&
             request->operation!=CONSOLE_IO_READ_INPUT && request->operation!=CONSOLE_IO_PEEK_INPUT &&
