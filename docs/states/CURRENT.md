@@ -2,12 +2,13 @@
 
 ## Current Work
 
-**Active: M0 T448 S7**
+**Active: M0 T448 S8**
 
-S6 is owner-accepted and closed. Owner now adds S7 to audit an unchanged
-SoftPC shared-library import before discussing incompatible contracts. T448
-closure is postponed for this explicit scope addition. No production import
-or semantic concession is authorized by the audit. See the [S7 audit](../etc/evidence/m0-t448-s7-shared-library-import-audit.md)
+Owner admits S8 on 2026-10-22 to import the audited public-library closure
+unchanged and adapt NTCON. S7 reaches its bounded audit-only conclusion;
+no import or downstream runtime qualification was performed in S7. T448
+remains open. S8 pins SoftPC 0d9f1803ee04bd89bd6150306912a3e8674d0a83;
+no moving HEAD or dirty upstream inputs. See the [S7 audit and S8 handoff](../etc/evidence/m0-t448-s7-shared-library-import-audit.md#s7-conclusion-and-s8-handoff)
 and [accepted S6 and prior T audit](../etc/evidence/m0-t448-s6-unused-monitor-cleanup.md#owner-acceptance-and-t-closure-audit).
 The delivered baseline is d5d0dc243, protocol64. All thirteen committed and
 installed images were rechecked against the release manifest and agree.
@@ -70,22 +71,30 @@ service loss permits local cleanup, never reconnection or task replay.
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T448 S7; Ordinary Mode, single person implementer/reviewer; no subagents. |
+| Identifier Mode | M0 T448 S8; Ordinary Mode, single person implementer/reviewer; no subagents. |
 | Candidate Proposal | [NTSRV lifecycle authority](../proposals/proposal-ntsrv-lifecycle-authority-001.md). |
-| Admission And Approval | Owner requests a new S for shared-library upgrade; first audit incompatible points of an unchanged import and discuss them before implementation. S6 accepted and closed. |
-| Objective | Compare pinned old upstream, current NTCON adaptations and committed new upstream; identify source/build/API, ownership and behavioral incompatibilities and explicit decisions. |
+| Admission And Approval | Owner approves a new S to import public library components after S7 audit and upstream lifetime remediation. |
+| Objective | Byte-exact selected upstream library closure, correctly integrated NTCON frame/input/lifetime consumers, verified coherent release. |
 | Non-goals | No guest modification/rebuild, original internal wait rewrite, new transport, timers/retries/reconnect framework, GUI target management or unrelated WOW32 feature work; no T closure without acceptance. |
-| Reference Baseline | Local7d839ed96, product d5d0dc243/protocol64; old import3186afcd; upstream committed9ebb988776d0ef6f21b8aeb0e5ef93d5f2afc220, excluding its dirty worktree. |
-| Files And ABI Surface | Audit docs, NTCON import manifest/library and actual consumers, SoftPC src/lib and test/lib read-only. No runtime/ABI edit in this phase. |
+| Reference Baseline | Product d5d0dc243/protocol64; old import3186afcd; selected upstream0d9f1803ee04bd89bd6150306912a3e8674d0a83. S7 follow-up inspected HEAD453edcfa and upstream S14 evidence, not local qualification. |
+| Files And ABI Surface | src/ntcon-exe selected lib and consumers, import manifest/notices, tools/build selection, tests and docs. Process-local ABI changes only; retain worker wire/RPC and guest. |
 | Applicable Rules | docs/README reading set; execution, architecture, coding, document and source-policy authorities; original-owner recovery and exception registration. |
-| Verification | Pinned Git source comparison, caller and dependency trace, local exception review; distinguish static incompatibility from tested failure. Background documentation gate and clean reviewed commit/push. |
-| Expected Markers | Finite compatibility matrix, scope recommendation and owner decisions; no overwrite of local fixes or upstream WIP. |
+| Verification | Byte/hash and dependency audit; dynamic frames, concurrent retirement, fatal child tests, input/capture, frontend/channel/text, eight CAF pre-Enter echo cases, DOS17 and retained WOW frontiers; full13 plus no-change incremental; governance/link/diff review. All builds/tests hidden background. |
+| Expected Markers | No fixed maximum Window payload allocation; underline/split cursor/font32 preserved; destroy consumes on every normal return; no added timeout/retry or callback; no original mirror diff. |
 | Asset Needs | Existing source and read-only original references; retained T447 fault evidence and rollback package; no new guest assets. |
-| Reporting Requirements | Explain unchanged-import failures, safe consumer adaptations and semantic tradeoffs; explicitly state no compile/runtime qualification yet. |
+| Reporting Requirements | Selected source hashes, adapted callers, removed local exceptions, allocation/lifetime evidence, source delta and limitations. Scratch build/t448-s8 owned by S8: 2GiB, two hours per run, investigate after ten minutes without progress; archive concise evidence and retire scratch after owned jobs exit. Stable Ninja/ccache retained. |
 | Stop Conditions | New observable semantic retreat, missing original-source authority or material scope expansion requires owner decision. |
-| Exit Criteria | Audit and owner decisions precede import. Implementation requires a revised packet with affected build/runtime/publication gates; this first delivery is audit-only, not S7 implementation closure. |
-| Original Owner Request | Admit a new S and first audit incompatible points needing discussion if the library is imported unchanged. |
+| Exit Criteria | Required tests pass with existing explicit limitations preserved; all13 images published/hash-verified at assets/release and configured system32, reviewed commit/push and clean worktree, then owner acceptance. Admission-only documentation delivery does not rebuild or publish. |
+| Original Owner Request | Admit a new S to import the public library components. |
 | Similar-Issue Sweep | Frames, fonts/cursor, input/capture, mailbox ownership, stop/join/failure, dependencies/build selection and import provenance. |
+
+## S7 Closure Record
+
+S7 reaches its audit-only conclusion under the owner's S8 admission. The
+[closure and handoff](../etc/evidence/m0-t448-s7-shared-library-import-audit.md)
+records upstream remediation, selected pin and all remaining integration gates.
+No downstream import, runtime qualification or product publication is claimed;
+those obligations belong to S8. S6 acceptance and the product baseline remain.
 
 ## Planned S sequence
 
@@ -100,7 +109,8 @@ five-second policies; they are not current instructions or open S3 work.
 4. S4: owner-added autonomous-code polling audit and cleanup; reuse existing events and completion notifications, justify retained polling, verify wakeup/exit/idle behavior and code delta.
 5. S5: integrated fault/concurrency and real Console handoff acceptance, full release and closure audit (formerly S4).
 6. S6: owner-added unused fallback/interface cleanup and NTMON change-only rendering with one-second sampling.
-7. S7: owner-added SoftPC shared-library import compatibility audit, then separately confirmed integration decisions.
+7. S7: SoftPC shared-library compatibility and remediation audit; bounded audit conclusion, no runtime import.
+8. S8: pinned byte-exact public-library import and NTCON integration, full verification and publication.
 
 The [proposal](../proposals/proposal-ntsrv-lifecycle-authority-001.md) owns the
 finite inherited gap list. Cross-group changes must preserve a coherent working

@@ -2,9 +2,11 @@
 
 ## Authority and status
 
-Owner adds S7 after accepting S6. The [shared-library audit](../evidence/m0-t448-s7-shared-library-import-audit.md)
-records unchanged-import incompatibilities; this stage admits audit/discussion,
-not production import or new semantic concessions. T closure is postponed.
+Owner admits S8 after S7's bounded audit conclusion. The [shared-library audit](../evidence/m0-t448-s7-shared-library-import-audit.md#s7-conclusion-and-s8-handoff)
+records the pinned import and consumer migration scope. S8 integrates selected
+byte-exact public-library sources into NTCON, verifies and publishes the full
+package. No guest, RPC, worker protocol or WOW32 feature expansion. T closure
+follows S8 acceptance and final audit, not this admission.
 
 ### Owner-added S6 cleanup
 

@@ -139,3 +139,10 @@ Owner adds S7 shared-library review after S6 acceptance. The
 [compatibility audit](../etc/evidence/m0-t448-s7-shared-library-import-audit.md)
 must resolve raw-import incompatibilities before implementation, retaining text
 capabilities and NTSRV authority without restoring extra deadlines.
+
+Owner subsequently admits S8 for the selected byte-exact public-library import
+at0d9f1803ee04bd89bd6150306912a3e8674d0a83 and NTCON caller migration. S7's
+[conclusion and handoff](../etc/evidence/m0-t448-s7-shared-library-import-audit.md#s7-conclusion-and-s8-handoff)
+records resolved upstream defects, consumed-on-return destroy, dynamic payloads
+and the finite verification/publication scope. No guest, worker-wire or service
+authority changes; CURRENT owns the only active S8 packet.
