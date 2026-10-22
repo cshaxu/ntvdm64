@@ -2,27 +2,33 @@
 
 ## Current Work
 
-**Active: M0 T448 S10**, Ordinary Mode, single implementer/reviewer. T448 remains open.
+**Active: M0 T448 S11**, Ordinary Mode, single implementer/reviewer. T448 remains open.
 
 ## Active Packet
 
-| Field | S10 integration-test packet |
+| Field | S11 CAF and WOW startup regression packet |
 | --- | --- |
-| Identifier Mode | M0 T448 S10, Ordinary Mode; one implementer and independent self-review. |
-| Admission And Approval | Owner accepts original small-desktop sizing semantics and requests environment-aware SOL integration verification. S9 is owner-closed; this is its next bounded S. |
-| Objective | Distinguish genuine SOL gameplay failures from desktops that cannot accommodate the existing gameplay geometry; preserve truthful evidence. |
-| Non-goals | No guest, production or mirror changes; no global sizing override; no unsupported claim that the owner's separately reported layout symptom is explained. |
-| Reference Baseline | S9 delivery; retained SOL geometry evidence and immutable original OpenNT sizing path. |
-| Files And ABI Surface | SOL observation probe/runner, focused test, current state, owner-directed TODO removals, subsequent S plan and indexed evidence; no product ABI. |
-| Applicable Rules | Reading set, execution, source policy, guest immutability, test evidence and documentation governance. |
-| Verification | Exercise geometry decision boundaries and failure paths, compile the integration probe, run feasible real SOL integration, governance and diff review; report unavailable checks. |
-| Expected Markers | Sufficient geometry retains full gameplay assertions; geometry matching the host tracking limit reports partial coverage, never gameplay pass; unexplained resize failure remains failure. |
-| Asset Needs | Existing published package, immutable SOL and host window services; isolated test output under build/sol-size-research. |
-| Reporting Requirements | Sizing attribution, test outcomes, retained user-layout uncertainty and no-product-diff statement. Budget 1 GiB and one hour; inspect after ten minutes without progress. |
-| Stop Conditions | Newly proposed semantic waiver, guest changes or ambiguous test outcome beyond this scope. |
-| Exit Criteria | Focused tests and required governance pass; truthful integration coverage; reviewed test/document delivery committed and pushed, then await owner acceptance. |
-| Original Owner Request | Close the original-behavior sizing issue and make the environment-dependent SOL integration test validate what its actual geometry permits. |
-| Similar-Issue Sweep | Check SOL runner/callers and retained TODO for misleading unconditional gameplay passes. |
+| Identifier Mode | M0 T448 S11, Ordinary Mode; one implementer and independent self-review. |
+| Admission And Approval | Owner inserts urgent S11 for reported startup failures; prior DOS/mouse S11 becomes S12, former S12 becomes S13. |
+| Objective | Reproduce, locate and correct command CAF window absence and SOL/WOW window startup failure; verify actual affected paths. |
+| Non-goals | No guest modification, rebuild or hot patch; no speculative fixes or unrelated lifecycle and WOW expansion. |
+| Reference Baseline | Published S9 package; S10 commits e097bccb0 and 25a507a7d, with full-size SOL gameplay still unverified. |
+| Files And ABI Surface | Launch, worker, frontend, desktop and source-owned boundaries as evidence requires; preserve ABI unless separately justified. |
+| Applicable Rules | Reading set, execution, source policy, guest immutability, original-owner evidence, and documentation governance. |
+| Verification | Pin installed package; independently reproduce real command CAF and SOL startup, trace stage and visibility, test fixes and controls. |
+| Expected Markers | Visible CAF window, actual SOL/WOW startup, correct cleanup and verified full-package release. |
+| Asset Needs | Published package, immutable guest inputs, isolated desktop and existing observers. |
+| Reporting Requirements | Reproduction, root cause, correction, test coverage and remaining boundaries. Disposable build/t448-s11-regression budget 2 GiB and two hours; inspect after ten minutes without progress. |
+| Stop Conditions | Unapproved semantic change, guest modification, or evidence requiring materially broader implementation. |
+| Exit Criteria | Reported regressions repaired and verified, full appropriate build/test/release, review, commit and push; await owner acceptance. |
+| Original Owner Request | Insert S11 for `run16 command` CAF window and `run16 sol` WOW window failures; move prior S11 to S12. |
+| Similar-Issue Sweep | Distinguish display/desktop, process startup, shared service interference and package integrity. |
+
+[S11 investigation](../etc/evidence/m0-t448-s11-window-startup.md) reproduces
+the already documented original COMMAND large-environment lifetime defect on
+the current package. The specific post-prompt CAF report remains unverified;
+no product fix or publication is claimed. Prior DOS/mouse S12 observations
+are retained in that ledger, not treated as completed triage.
 
 S10 test-only implementation: classifier cases and MSVC probe compilation
 pass; private-desktop r5/r6 verify readiness and normal exit with explicit
@@ -36,8 +42,9 @@ performance, wide-text mouse and historical native-menu entries without
 claiming repairs; preserve original-capability limitations and T271/document
 debt; and plan bounded current-package reproduction of seven selected cases.
 The [T448 follow-up plan](../etc/operations/t448-lifecycle-plan.md#owner-directed-todo-triage)
-records S11/S12, evidence-based disposition, and unavailable-versus-nonrepro
-boundaries. S10 remains active pending owner acceptance; S11 is not yet active.
+records S12/S13, evidence-based disposition, and unavailable-versus-nonrepro
+boundaries. S10 delivery remains pending owner acceptance; approval to begin
+S11 does not imply acceptance of S10's unverified full-size gameplay.
 
 S9 implements Console-title handoff for NTVWM; the [S9 evidence](../etc/evidence/m0-t448-s9-console-title-handoff.md)
 records full13/incremental, focused channel, real CAF, DOS/PIF title and
@@ -128,6 +135,13 @@ Only the three approved five-second policies remain: bootstrap, empty-service
 retirement and original Console-close grace. Normal execution has no deadline;
 service loss permits local cleanup, never reconnection or task replay.
 
+## S10 Closure Record
+
+S10's bounded test-only implementation and TODO planning were delivered at
+e097bccb0 and 25a507a7d. The [evidence](../etc/evidence/m0-t448-s9-console-title-handoff.md)
+retains limited-desktop results and prior close failures. Full-size gameplay
+was not rerun; owner acceptance remains separate from S11 admission.
+
 ## S9 Closure Record
 
 | Field | Record |
@@ -181,8 +195,9 @@ five-second policies; they are not current instructions or open S3 work.
 8. S8: pinned byte-exact public-library import and NTCON integration, full verification and publication.
 9. S9: native Console title initialization and handoff, preserving app-set and restored titles.
 10. S10: SOL environment-aware integration evidence and owner-directed TODO triage planning.
-11. S11: reproduce and attribute three DOS/mouse issues; disposition only with evidence.
-12. S12: reproduce and attribute four lifecycle/input historical witnesses; disposition only with evidence.
+11. S11: investigate and repair reported command CAF and SOL window startup failures.
+12. S12: reproduce and attribute three DOS/mouse issues; disposition only with evidence.
+13. S13: reproduce and attribute four lifecycle/input historical witnesses; disposition only with evidence.
 
 The [proposal](../proposals/proposal-ntsrv-lifecycle-authority-001.md) owns the
 finite inherited gap list. Cross-group changes must preserve a coherent working

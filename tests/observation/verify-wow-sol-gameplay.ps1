@@ -26,7 +26,8 @@ try {
     } finally {Pop-Location}
     $runtime=New-PhysicalRuntimeStage $PackageRoot -RuntimeImages $RuntimeImages
     $scope=New-IsolatedPackageScope $runtime
-    $inputs=@('SOL.EXE')+@(Get-Content "$repo\assets\release\release-manifest.json" -Raw | ConvertFrom-Json | ForEach-Object { 'system32\'+$_.name })
+    $manifest=Get-Content "$repo\assets\release\release-manifest.json" -Raw | ConvertFrom-Json
+    $inputs=@('SOL.EXE')+@($manifest | ForEach-Object { 'system32\'+$_.name })
     $inputs | ForEach-Object {
         [pscustomobject]@{File=$_;SHA256=(Get-IsolatedFileSha256 (Join-Path $runtime $_))}
     } | ConvertTo-Json | Set-Content "$root\inputs.json"

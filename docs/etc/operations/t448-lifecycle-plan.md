@@ -483,7 +483,17 @@ animation TODO rows. Available records do not establish a MySMB16 performance
 fix; removal is the owner's backlog disposition, not proof of resolution.
 Retain their existing historical evidence.
 
-### S11: DOS and mouse evidence
+### S11: DOS CAF and WOW window startup regression
+
+Owner inserts this urgent S before the DOS/mouse triage: reproduce and trace
+`run16 command` followed by CAF failing to display its window, and `run16 sol`
+failing to show WOWEXEC or Solitaire. Pin the installed package and preserve
+any active user session; distinguish desktop visibility, service, worker and
+guest startup stages. Correct proven project-owned causes and verify both
+actual launch paths and relevant controls before complete-package publication.
+No guest modification or unapproved semantic change.
+
+### S12: DOS and mouse evidence
 
 Pin the current release and immutable guest hashes, inspect each original
 report and execute its actual relevant route with independent success and
@@ -497,7 +507,7 @@ already has source and prior failing evidence; a snapshot prototype failure
 is not by itself proof of a current ordinary-path regression. Do not modify
 or rebuild the guest, or suppress an actual failure.
 
-### S12: lifecycle and input witnesses
+### S13: lifecycle and input witnesses
 
 Use the existing exact witnesses and current published package to run bounded
 targeted controls for (1) native rapid interactive nonzero return, (2) two
@@ -508,7 +518,7 @@ snapshots as applicable; never treat a timeout, missing prerequisite, or
 unrun case as a successful negative reproduction. A later passing run does
 not prove a historical failure was repaired or determine its cause.
 
-For S11 and S12, choose finite case-specific rounds and documented resource,
+For S12 and S13, choose finite case-specific rounds and documented resource,
 desktop and time budgets before each run. If valid, representative witness
 and controls complete without recurrence, the owner authorizes removing that
 row from the active TODO while retaining the prior failed evidence and stating
@@ -521,5 +531,5 @@ No guest changes or invented timeout/retry policy are authorized.
 
 The owner retains the separately described original defects/capability
 boundaries, the T271 reconciliation and historical documentation migration.
-The INT33 row is specifically included in S11 for fresh reproduction and
+The INT33 row is specifically included in S12 for fresh reproduction and
 owner-directed disposition; do not silently drop its existing proof.

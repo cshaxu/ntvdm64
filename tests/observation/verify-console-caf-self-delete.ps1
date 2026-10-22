@@ -6,7 +6,8 @@ param(
  [Parameter(Mandatory)][string]$LogRoot,
  [ValidateSet('cmd','command','ntmon')][string[]]$Targets=@('cmd','command','ntmon'),
  [ValidateSet('SelfDelete','ExternalClose','NaturalExit')][string]$Mode='SelfDelete',
- [string]$MonitorRpc
+ [string]$MonitorRpc,
+ [switch]$InheritPath
 )
 # Run from an owned background runner. Real in-worker NTMON Delete/Y, not an
 # external management RPC by default. Additional modes exercise the same
@@ -53,7 +54,7 @@ try{
    $scope=New-IsolatedPackageScope $stage
    # Fixed probe commands come from this package or host System32. Inheriting
    # a build-tool PATH changes DOS startup before the handoff under test.
-   $env:PATH="$stage\system32;"+(Join-Path $env:SystemRoot 'System32')
+   if(!$InheritPath){$env:PATH="$stage\system32;"+(Join-Path $env:SystemRoot 'System32')}
    $env:MVDM_OBSERVER_CAF_DIRECT_NTMON=if($target -eq 'ntmon'){'1'}else{$null}
    $env:MVDM_OBSERVER_CAF_OUTER_COMMAND='"'+$stage+'\system32\run16.exe" '+$target+"`r"
    $report=Join-Path $log "$target.txt"

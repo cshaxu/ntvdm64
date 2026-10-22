@@ -13,7 +13,7 @@ static void s35_environment_snapshot(FILE *log, const char *phase)
 {
     mvdm_guest_location location;
     mvdm_guest_location_lease lease;
-    WORD value = 0, owner = 0, paragraphs = 0;
+    WORD value = 0, owner = 0, paragraphs = 0, stack[4] = {0};
     DWORD ds = (WORD)getDS(), es = (WORD)getES();
     int valid = 0;
     if (mvdm_guest_location_set_real_mode(&location, (WORD)ds, 0x203c) &&
@@ -27,11 +27,18 @@ static void s35_environment_snapshot(FILE *log, const char *phase)
         memcpy(&paragraphs, (const char *)lease.bytes + 3, 2);
         mvdm_guest_location_release(&lease, 0);
     }
-    fprintf(log, "%s DS=%04lX ES=%04lX BX=%04X EnvSiz=%04X valid=%d "
-        "MCBowner=%04X MCBparagraphs=%04X containsEnvSiz=%d\n",
-        phase, ds, es, (WORD)getBX(), value, valid, owner, paragraphs,
+    if (mvdm_guest_location_set_real_mode(&location, (WORD)getSS(), (WORD)getSP()) &&
+        mvdm_guest_location_acquire(&location, sizeof(stack), GUEST_MEMORY_ACCESS_READ, &lease)) {
+        memcpy(stack, lease.bytes, sizeof(stack));
+        mvdm_guest_location_release(&lease, 0);
+    }
+    fprintf(log, "%s CS=%04X IP=%04X SS=%04X SP=%04X DS=%04lX ES=%04lX BX=%04X EnvSiz=%04X valid=%d "
+        "MCBowner=%04X MCBparagraphs=%04X containsEnvSiz=%d stack=%04X,%04X,%04X,%04X\n",
+        phase, (WORD)getCS(), (WORD)getIP(), (WORD)getSS(), (WORD)getSP(),
+        ds, es, (WORD)getBX(), value, valid, owner, paragraphs,
         ds * 16 + 0x203c >= es * 16 &&
-        ds * 16 + 0x203e <= (es + paragraphs) * 16);
+        ds * 16 + 0x203e <= (es + paragraphs) * 16,
+        stack[0], stack[1], stack[2], stack[3]);
     fflush(log);
 }
 

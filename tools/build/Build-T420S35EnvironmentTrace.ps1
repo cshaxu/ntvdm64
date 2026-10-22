@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param([Parameter(Mandatory)][string]$FormalRoot,
       [Parameter(Mandatory)][string]$BuildRoot,
-      [ValidateSet('environment','wow-environment','thread-exit','dpmi','exception','pm-allocation-failure','dpmi-pointer','dpmi-ioctl','dpmi-xmem-failure')][string]$Boundary = 'environment',
+      [ValidateSet('environment','wow-environment','command-dispatch','thread-exit','dpmi','exception','pm-allocation-failure','dpmi-pointer','dpmi-ioctl','dpmi-xmem-failure')][string]$Boundary = 'environment',
       [switch]$DpmiLifecycleOnly,
       [Parameter(Mandatory)][string]$EnvironmentTraceLog)
 $ErrorActionPreference = 'Stop'
@@ -15,7 +15,7 @@ if (!$build.StartsWith("$repo\build\", [StringComparison]::OrdinalIgnoreCase) -o
 New-Item -ItemType Directory $build | Out-Null
 $graph = Get-Content (Join-Path $formal 'build.ninja')
 $flags = ($graph | Where-Object { $_.StartsWith('cflags = ') }).Substring(9).Replace('$:', ':')
-if ($Boundary -in @('environment','wow-environment','thread-exit')) {
+if ($Boundary -in @('environment','wow-environment','command-dispatch','thread-exit')) {
     $traceLog = [IO.Path]::GetFullPath($EnvironmentTraceLog).Replace('\', '/')
     if ([IO.Path]::GetDirectoryName($traceLog) -eq '' -or
         [IO.Path]::GetFileName($traceLog) -notmatch '^[A-Za-z0-9_.-]+$') {
@@ -29,6 +29,10 @@ $traceSource = 'command_environment_trace.c'
 if ($Boundary -eq 'wow-environment') {
     $memberName = 'obj/command/cmdmisc.obj'
     $traceSource = 'wow_initial_environment_trace.c'
+}
+if ($Boundary -eq 'command-dispatch') {
+    $memberName = 'obj/command/cmddisp.obj'
+    $traceSource = 'command_dispatch_trace.c'
 }
 if ($Boundary -eq 'thread-exit') {
     $memberName = 'obj/adapter-win32/thread_start_compat.obj'
@@ -86,7 +90,10 @@ $object = Join-Path $build 'observed-owner.obj'
 $library = Join-Path $build $libraryName
 $exe = Join-Path $build 'ntvdm.exe'
 $commandObjects = ($graph | Where-Object { $_.StartsWith("build ${libraryName}: lib ") }).Split(' ',4)[3].Split(' ')
-$workerInputs = ($graph | Where-Object { $_.StartsWith('build ntvdm.exe | ntvdm.lib: worker_link ') }).Substring('build ntvdm.exe | ntvdm.lib: worker_link '.Length).Split(' ')
+$workerInputLine = ($graph | Where-Object { $_.StartsWith('build ntvdm.exe | ntvdm.lib: worker_link ') }).Substring('build ntvdm.exe | ntvdm.lib: worker_link '.Length)
+# Ninja's implicit dependencies after ` | ` are not linker input arguments;
+# the provider .def is already passed explicitly below.
+$workerInputs = ($workerInputLine -split ' \| ', 2)[0].Split(' ')
 $inputs = @($commandObjects + $workerInputs | Sort-Object -Unique)
 $inputs | ForEach-Object { Get-FileHash (Join-Path $formal $_) } |
     Select-Object Path,Hash | ConvertTo-Json | Set-Content "$build\reused-inputs.json"

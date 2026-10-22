@@ -16,6 +16,8 @@ final lifecycle evidence and explicitly pending acceptance checks.
 interface removal, change-only monitor behavior and verification results.
 [S8 library import](evidence/m0-t448-s8-shared-library-import.md) records the
 pinned source closure, consumer migration, actual runs and remaining gates.
+[S11 startup investigation](evidence/m0-t448-s11-window-startup.md) separates
+the reproduced original COMMAND environment limit from the unresolved CAF report.
 
 [T447 pre-closure snapshot](evidence/m0-t447-pre-closure-status.md) preserves
 the final active packet before owner-directed transfer closure. The
