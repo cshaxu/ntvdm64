@@ -2,10 +2,19 @@
 
 lib_bool kvm_window_frame_size(const kvm_window_frame *frame, lib_u32 *width, lib_u32 *height)
 {
-    if (kvm_window_frame_validate(frame) != LIB_STATUS_OK || !width || !height) return LIB_FALSE;
-    *width = frame->graphics ? frame->image.width : frame->text.base.text_columns * 8u;
-    *height = frame->graphics ? frame->image.height : frame->text.base.text_rows *
-        (frame->text.base.font_height != 0u ? frame->text.base.font_height : KVM_WINDOW_DEFAULT_FONT_HEIGHT);
+    if (frame == LIB_NULL || (frame->text == LIB_NULL && frame->graphics == LIB_NULL) || !width || !height) return LIB_FALSE;
+    if (frame->graphics) {
+        *width = frame->graphics->width; *height = frame->graphics->height;
+    } else {
+        lib_u32 font_height = frame->text->base.font_height ?
+            frame->text->base.font_height : KVM_TEXT_FONT_DEFAULT_HEIGHT;
+        if (frame->text->base.text_columns > LIB_INT32_MAX / 8u ||
+            frame->text->base.text_rows > LIB_INT32_MAX / font_height) return LIB_FALSE;
+        *width = frame->text->base.text_columns * 8u;
+        *height = frame->text->base.text_rows * font_height;
+    }
+    if (*width == 0u || *height == 0u || *width > LIB_INT32_MAX || *height > LIB_INT32_MAX ||
+        (lib_size)*width > LIB_SIZE_MAX / *height / sizeof(lib_u32)) return LIB_FALSE;
     return LIB_TRUE;
 }
 
@@ -25,33 +34,31 @@ lib_bool kvm_window_render_frame(const kvm_window_frame *frame, lib_u32 *pixels,
 {
     kvm_window_rect damage = {(lib_i32)width, (lib_i32)height, 0, 0};
     lib_u32 row;
-    lib_u32 frame_width, frame_height, cell_height = KVM_WINDOW_DEFAULT_FONT_HEIGHT;
+    lib_u32 frame_width, frame_height, cell_height = KVM_TEXT_FONT_DEFAULT_HEIGHT;
 
     if (!pixels || !valid || !changed ||
         !kvm_window_frame_size(frame, &frame_width, &frame_height) ||
         width != frame_width || height != frame_height) return LIB_FALSE;
-    if (!frame->graphics && frame->text.base.font_height)
-        cell_height = frame->text.base.font_height;
+    if (!frame->graphics && frame->text->base.font_height)
+        cell_height = frame->text->base.font_height;
     /* The surface is the rendered baseline, independent of skipped publications.
      * Compare resolved colours so palette changes need no separate cache. */
     for (row = 0u; row < height; ++row) {
-        lib_u32 *destination = pixels + row * width;
+        lib_u32 *destination = pixels + (lib_size)row * width;
         lib_u32 column;
         if (frame->graphics) {
-            const lib_u8 *source = frame->image.pixels + row * frame->image.stride;
+            const lib_u32 *source = frame->graphics->pixels + (lib_size)row * frame->graphics->stride;
             for (column = 0u; column < width; ++column)
-                kvm_window_update_pixel(&destination[column], frame->image.palette[source[column]],
+                kvm_window_update_pixel(&destination[column], source[column],
                     column, row, *valid, &damage);
         } else {
-            const kvm_window_text_frame *text = &frame->text;
-            const kvm_text_cell *cells = text->base.cells + (row / cell_height) * KVM_TEXT_COLUMNS;
+            const kvm_window_text_frame *text = frame->text;
+            const kvm_text_cell *cells = text->base.cells + (lib_size)(row / cell_height) * text->base.stride;
             for (column = 0u; column < text->base.text_columns; ++column) {
                 const kvm_text_cell *cell = &cells[column];
                 const lib_u8 *font = cell->glyph_bank ? text->secondary_font : text->font;
                 lib_u8 bits = font[(lib_size)cell->glyph_index * KVM_WINDOW_FONT_HEIGHT + row % cell_height];
-                if (text->styles[(row / cell_height) * KVM_TEXT_COLUMNS + column] &
-                    KVM_WINDOW_TEXT_UNDERLINE && row % cell_height == cell_height - 1u)
-                    bits = 0xffu;
+                if (cell->underline && row % cell_height == text->base.underline_row) bits = 0xffu;
                 lib_u32 bit;
                 for (bit = 0u; bit < 8u; ++bit) {
                     lib_u32 x = column * 8u + bit;

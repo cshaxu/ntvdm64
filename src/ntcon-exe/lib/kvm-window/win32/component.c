@@ -11,6 +11,15 @@
 #include "lib/kvm-window/win32/mouse.h"
 
 #include "lib/types/win32/window.h"
+#include "lib/types/win32/text.h"
+
+static lib_bool kvm_window_apply_title(lib_win32_hwnd window, const char *title)
+{
+    lib_win32_wchar wide[KVM_WINDOW_TITLE_CAPACITY];
+    return lib_win32_multi_byte_to_wide_char(LIB_WIN32_CP_UTF8,
+        LIB_WIN32_MB_ERR_INVALID_CHARS, title, -1, wide,
+        KVM_WINDOW_TITLE_CAPACITY) != 0 && lib_win32_set_window_text_w(window, wide);
+}
 
 #define WIN32_WINDOW_MAILBOX_READY (LIB_WIN32_WM_APP + 1u)
 #define WIN32_WINDOW_MOUSE_READY (LIB_WIN32_WM_APP + 2u)
@@ -21,7 +30,7 @@
 
 typedef struct kvm_win32_window_context {
     kvm_window *component;
-    kvm_window_frame frame;
+    const kvm_window_frame *frame;
     lib_win32_hdc surface_dc;
     lib_win32_hbitmap surface_bitmap;
     lib_win32_hgdiobj surface_previous_bitmap;
@@ -29,8 +38,7 @@ typedef struct kvm_win32_window_context {
     lib_u32 surface_width;
     lib_u32 surface_height;
     lib_bool surface_valid;
-    lib_u32 displayed_sequence;
-    kvm_keyboard_normalizer keyboard_normalizer;
+    base_keyboard_decoder keyboard_normalizer;
     lib_bool left_button;
     lib_bool right_button;
     lib_i64 pending_mouse_dx;
@@ -42,7 +50,10 @@ typedef struct kvm_win32_window_context {
     lib_u32 client_surface_height;
     lib_i32 client_width;
     lib_i32 client_height;
+    lib_u32 scale_pixels;
+    lib_u32 scale_source;
     lib_bool correcting_aspect;
+    kvm_win32_snap snap;
     lib_bool frozen;
     lib_bool cursor_blink_visible;
     lib_win32_dword cursor_blink_due;
@@ -156,26 +167,25 @@ static void win32_window_initial_bounds(lib_i32 *left, lib_i32 *top, lib_i32 *wi
 
 static lib_status win32_window_destroy_surface(kvm_win32_window_context *context)
 {
+    lib_status status = LIB_STATUS_OK;
     if (context == LIB_NULL) return LIB_STATUS_OK;
-    if (context->surface_dc != LIB_NULL && context->surface_previous_bitmap != LIB_NULL) {
-        if (!lib_win32_select_object(context->surface_dc, context->surface_previous_bitmap))
-            return LIB_STATUS_IO_ERROR;
-        context->surface_previous_bitmap = LIB_NULL;
+    /* Deleting the owned DC releases its selection, not the owned bitmap.
+       If that fails, never delete a bitmap still selected into the live DC. */
+    if (context->surface_dc != LIB_NULL) {
+        if (lib_win32_delete_dc(context->surface_dc)) {
+            context->surface_dc = LIB_NULL;
+            context->surface_previous_bitmap = LIB_NULL;
+        } else status = LIB_STATUS_IO_ERROR;
     }
-    if (context->surface_bitmap != LIB_NULL) {
-        if (!lib_win32_delete_object(context->surface_bitmap)) return LIB_STATUS_IO_ERROR;
-        context->surface_bitmap = LIB_NULL;
+    if (context->surface_bitmap != LIB_NULL && context->surface_previous_bitmap == LIB_NULL) {
+        if (lib_win32_delete_object(context->surface_bitmap)) context->surface_bitmap = LIB_NULL;
+        else status = LIB_STATUS_IO_ERROR;
     }
-    if (context->surface_dc != LIB_NULL && !lib_win32_delete_dc(context->surface_dc))
-        return LIB_STATUS_IO_ERROR;
-    context->surface_dc = LIB_NULL;
-    context->surface_bitmap = LIB_NULL;
-    context->surface_previous_bitmap = LIB_NULL;
     context->surface_pixels = LIB_NULL;
     context->surface_width = 0u;
     context->surface_height = 0u;
     context->surface_valid = LIB_FALSE;
-    return LIB_STATUS_OK;
+    return status;
 }
 
 static lib_bool win32_window_ensure_surface(lib_win32_hwnd window,
@@ -255,68 +265,103 @@ static void win32_window_enforce_aspect(lib_win32_hwnd window,
     lib_status status;
     if (context == LIB_NULL || context->correcting_aspect != LIB_FALSE ||
         context->surface_width == 0u || context->surface_height == 0u) return;
+    if (lib_win32_is_iconic(window)) return;
+    kvm_win32_snap snap = kvm_win32_snap_state(window);
+    kvm_win32_size_basis basis = snap != KVM_WIN32_SNAP_NONE ? KVM_WIN32_SIZE_FIT :
+        context->snap == KVM_WIN32_SNAP_SIDE ? KVM_WIN32_SIZE_HEIGHT : KVM_WIN32_SIZE_WIDTH;
+    /* Observe native state before our synchronous correction. Nested size
+       messages must neither consume restoration nor replace the chosen axis. */
+    context->snap = snap;
     context->correcting_aspect = LIB_TRUE;
     status = kvm_win32_enforce_client_aspect(window, context->surface_width,
-        context->surface_height);
+        context->surface_height, basis);
     context->correcting_aspect = LIB_FALSE;
     if (status != LIB_STATUS_OK) kvm_component_fail(&context->component->base, status);
 }
 
 static void win32_window_resize_client(lib_win32_hwnd window,
-    kvm_win32_window_context *context, lib_u32 width, lib_u32 height)
+    kvm_win32_window_context *context, lib_u32 width, lib_u32 height,
+    lib_bool automatic)
 {
     if (window == LIB_NULL || context == LIB_NULL || width == 0u || height == 0u ||
         (context->client_surface_width == width &&
          context->client_surface_height == height)) return;
-    lib_status status = kvm_win32_resize_client(window, width, height);
+    lib_u64 target_width = width, target_height = height;
+    lib_bool initial = context->scale_source == 0u;
+    if (automatic && !initial) {
+        target_width = ((lib_u64)width * context->scale_pixels + context->scale_source / 2u) /
+            context->scale_source;
+        target_height = ((lib_u64)height * context->scale_pixels + context->scale_source / 2u) /
+            context->scale_source;
+    }
+    if (target_width == 0u) target_width = 1u;
+    if (target_height == 0u) target_height = 1u;
+    if (target_width > LIB_INT32_MAX || target_height > LIB_INT32_MAX) {
+        kvm_component_fail(&context->component->base, LIB_STATUS_UNSUPPORTED);
+        return;
+    }
+    /* Programmatic size changes must not replace the user's scale with a
+       rounded intermediate ratio or enforce the previous frame's aspect. */
+    context->correcting_aspect = LIB_TRUE;
+    lib_status status = kvm_win32_resize_client(window, (lib_u32)target_width,
+        (lib_u32)target_height, automatic && initial);
+    context->correcting_aspect = LIB_FALSE;
     if (status != LIB_STATUS_OK) {
         kvm_component_fail(&context->component->base, status);
         return;
     }
     context->client_surface_width = width;
     context->client_surface_height = height;
+    if (initial || !automatic) {
+        win32_window_capture_client_size(window, context);
+        if (context->client_width > 0 && context->client_height > 0) {
+            context->scale_pixels = (lib_u32)context->client_width;
+            context->scale_source = width;
+        }
+    }
 }
 
 static lib_bool win32_window_cursor_rect(lib_win32_hwnd window,
-    const kvm_win32_window_context *context, lib_u32 index,lib_win32_rect *cursor)
+    const kvm_win32_window_context *context, lib_win32_rect *cursor)
 {
     kvm_window_rect display;
     kvm_window_rect result;
     if (!window || !context || !cursor || !win32_window_display_rect(context,
             context->surface_width, context->surface_height, &display)) return LIB_FALSE;
-    if (!(index ? kvm_window_secondary_cursor_rect(&context->frame,&display,&result) :
-        kvm_window_cursor_rect(&context->frame,&display,&result))) return LIB_FALSE;
+    if (!kvm_window_cursor_rect(context->frame, &display, &result)) return LIB_FALSE;
     kvm_win32_rect_store(cursor, &result);
     return LIB_TRUE;
 }
 
-static lib_bool win32_window_paint(lib_win32_hwnd window, kvm_win32_window_context *context,
+static lib_bool win32_window_cursor_visible(const kvm_win32_window_context *context)
+{
+    if (context->frame == LIB_NULL) return LIB_FALSE;
+    if (context->frame->text == LIB_NULL) return LIB_FALSE;
+    const kvm_text_frame *text = &context->frame->text->base;
+    return (text->cursor_mode == KVM_CURSOR_SOURCE ? text->cursor_phase :
+            text->cursor_mode == KVM_CURSOR_HOST && context->cursor_blink_visible);
+}
+
+static lib_bool win32_window_paint(kvm_win32_window_context *context,
     lib_win32_hdc dc)
 {
     kvm_window_rect display;
 
     if (context == LIB_NULL || context->surface_dc == LIB_NULL ||
-        kvm_window_frame_validate(&context->frame) != LIB_STATUS_OK ||
+        context->frame == LIB_NULL || (context->frame->text == LIB_NULL && context->frame->graphics == LIB_NULL) ||
         !win32_window_display_rect(context, context->surface_width,
             context->surface_height, &display)) return LIB_TRUE;
     if (!lib_win32_stretch_blt(dc, display.left, display.top, display.right - display.left,
         display.bottom - display.top, context->surface_dc, 0, 0,
         (lib_i32)context->surface_width, (lib_i32)context->surface_height, LIB_WIN32_SRCCOPY)) return LIB_FALSE;
-    if (context->cursor_blink_visible) {
-        lib_win32_rect cursors[2];lib_u32 index,count=0;
-        for(index=0;index<2u;++index)
-            if(win32_window_cursor_rect(window,context,index,&cursors[count]))++count;
-        /* Both original cursor ranges address the same character cell.
-         * Merge overlap before inversion so it never cancels itself. */
-        if(count==2 && cursors[0].left==cursors[1].left &&
-            cursors[0].right==cursors[1].right &&
-            cursors[0].top<=cursors[1].bottom && cursors[1].top<=cursors[0].bottom) {
-            if(cursors[1].top<cursors[0].top)cursors[0].top=cursors[1].top;
-            if(cursors[1].bottom>cursors[0].bottom)cursors[0].bottom=cursors[1].bottom;
-            count=1;
+    if (win32_window_cursor_visible(context)) {
+        kvm_window_rect spans[2];
+        lib_u32 count = kvm_window_cursor_rects(context->frame, &display, spans);
+        for (lib_u32 i = 0u; i < count; ++i) {
+            lib_win32_rect cursor;
+            kvm_win32_rect_store(&cursor, &spans[i]);
+            if (!lib_win32_invert_rect(dc, &cursor)) return LIB_FALSE;
         }
-        for(index=0;index<count;++index)
-            if(!lib_win32_invert_rect(dc,&cursors[index]))return LIB_FALSE;
     }
     return LIB_TRUE;
 }
@@ -333,32 +378,29 @@ static void win32_window_advance_cursor_blink(lib_win32_hwnd window,
     kvm_win32_window_context *context)
 {
     lib_win32_rect cursor;
-    lib_u32 index;
     lib_win32_dword now = lib_win32_get_tick_count();
     lib_win32_dword periods;
 
     /* KillTimer does not remove an already queued tick. The frozen/due guards
      * also prevent an old tick from advancing a newly unfrozen phase early. */
     if (!win32_window_accepting_input(context) || context->frozen ||
-        kvm_window_frame_validate(&context->frame) != LIB_STATUS_OK || context->frame.graphics ||
-        (!context->frame.text.base.cursor_visible &&
-            !context->frame.text.secondary_cursor_visible) ||
+        context->frame == LIB_NULL || (context->frame->text == LIB_NULL && context->frame->graphics == LIB_NULL) || context->frame->graphics ||
+        context->frame->text->base.cursor_mode != KVM_CURSOR_HOST ||
         (lib_win32_long)(now - context->cursor_blink_due) < 0)
         return;
     periods = (now - context->cursor_blink_due) / WIN32_WINDOW_CURSOR_BLINK_INTERVAL_MS + 1u;
     if ((periods & 1u) != 0u)
         context->cursor_blink_visible = context->cursor_blink_visible == LIB_FALSE;
     context->cursor_blink_due += periods * WIN32_WINDOW_CURSOR_BLINK_INTERVAL_MS;
-    for(index=0;index<2u;++index)
-        if(win32_window_cursor_rect(window,context,index,&cursor))
-            (void)win32_window_invalidate(window,context,&cursor);
+    if (win32_window_cursor_rect(window, context, &cursor))
+        (void)win32_window_invalidate(window, context, &cursor);
 }
 
 static lib_i32 win32_window_transition(kvm_win32_window_context *context,
     lib_win32_wparam key, lib_win32_lparam lparam, lib_bool released)
 {
-    kvm_keyboard_record record = {
-        KVM_KEYBOARD_TRANSITION, (lib_u16)((lparam >> 16) & 0xffu),
+    base_keyboard_record record = {
+        BASE_KEYBOARD_TRANSITION, (lib_u16)((lparam >> 16) & 0xffu),
         (lib_u16)key, 0u,
         kvm_window_keyboard_flags_from_lparam((lib_u64)lparam),
         kvm_window_modifiers_from_key_state(), !released, (lib_u16)lparam };
@@ -405,8 +447,8 @@ static void win32_window_queue_mouse(lib_win32_hwnd window,
     context->pending_mouse_dx += dx;
     context->pending_mouse_dy += dy;
     context->pending_mouse_buttons =
-        (context->left_button ? KVM_MOUSE_BUTTON_LEFT : 0u) |
-        (context->right_button ? KVM_MOUSE_BUTTON_RIGHT : 0u);
+        (context->left_button ? BASE_MOUSE_BUTTON_LEFT : 0u) |
+        (context->right_button ? BASE_MOUSE_BUTTON_RIGHT : 0u);
     if (context->mouse_delivery_posted) return;
     context->mouse_delivery_posted = LIB_TRUE;
     if (!lib_win32_post_message_a(window, WIN32_WINDOW_MOUSE_READY, 0u, 0))
@@ -435,8 +477,8 @@ static void win32_window_mouse(lib_win32_hwnd window, kvm_win32_window_context *
 static void win32_window_mouse_buttons(kvm_win32_window_context *context)
 {
     win32_window_emit_mouse(context, 0, 0,
-        (context->left_button ? KVM_MOUSE_BUTTON_LEFT : 0u) |
-        (context->right_button ? KVM_MOUSE_BUTTON_RIGHT : 0u));
+        (context->left_button ? BASE_MOUSE_BUTTON_LEFT : 0u) |
+        (context->right_button ? BASE_MOUSE_BUTTON_RIGHT : 0u));
 }
 
 static void win32_window_release_mouse(kvm_win32_window_context *context)
@@ -485,53 +527,70 @@ static void win32_window_consume_frame(lib_win32_hwnd window,
 {
     lib_u32 width;
     lib_u32 height;
-    lib_win32_rect old_cursor[2] = {{0},{0}},new_cursor[2] = {{0},{0}};
-    lib_bool old_visible[2] = {0},new_visible[2] = {0};
-    lib_u32 index;
+    lib_win32_rect old_cursor = {0}, new_cursor = {0};
+    const kvm_cursor_mode old_mode = context->frame == LIB_NULL || context->frame->graphics ?
+        KVM_CURSOR_DISABLED : context->frame->text->base.cursor_mode;
+    lib_bool old_visible = win32_window_cursor_visible(context) &&
+        win32_window_cursor_rect(window, context, &old_cursor);
+    lib_bool new_visible;
 
-    if(context->cursor_blink_visible)
-        for(index=0;index<2u;++index)
-            old_visible[index]=win32_window_cursor_rect(window,context,index,&old_cursor[index]);
-
-    if (!win32_window_accepting_input(context) ||
-        !kvm_component_mailboxes_capture_frame(&context->component->base.mailboxes,
-            &context->displayed_sequence, &context->frame, sizeof(context->frame)))
-        return;
-    if (!kvm_window_frame_size(&context->frame, &width, &height) ||
-        !win32_window_ensure_surface(window, context, width, height)) {
-        kvm_component_fail(&context->component->base, LIB_STATUS_IO_ERROR);
-        return;
-    }
-    win32_window_resize_client(window, context, width, height);
+    const kvm_window_frame *previous = context->frame;
+    const kvm_window_frame *incoming;
     if (!win32_window_accepting_input(context)) return;
+    incoming = kvm_component_mailboxes_take_frame(&context->component->base.mailboxes, LIB_NULL);
+    if (incoming == LIB_NULL) return;
+    context->frame = incoming;
+    if (!context->frame->graphics && context->frame->text->base.cursor_mode == KVM_CURSOR_HOST &&
+        old_mode != KVM_CURSOR_HOST) {
+        context->cursor_blink_visible = LIB_TRUE;
+        context->cursor_blink_due = lib_win32_get_tick_count() +
+            WIN32_WINDOW_CURSOR_BLINK_INTERVAL_MS;
+        if (!context->frozen && !lib_win32_set_timer(window, WIN32_WINDOW_CURSOR_TIMER,
+                WIN32_WINDOW_CURSOR_BLINK_INTERVAL_MS, LIB_NULL)) {
+            kvm_component_fail(&context->component->base, LIB_STATUS_IO_ERROR);
+            goto failed;
+        }
+    }
+    if (!kvm_window_frame_size(context->frame, &width, &height)) {
+        kvm_component_fail(&context->component->base, LIB_STATUS_UNSUPPORTED);
+        goto failed;
+    }
+    if (!win32_window_ensure_surface(window, context, width, height)) {
+        kvm_component_fail(&context->component->base, LIB_STATUS_IO_ERROR);
+        goto failed;
+    }
+    win32_window_resize_client(window, context, width, height, LIB_TRUE);
+    if (!win32_window_accepting_input(context)) goto failed;
     {
         kvm_window_rect changed;
         kvm_window_rect changed_target;
         kvm_window_rect display;
         lib_win32_rect target;
-        if (kvm_window_render_frame(&context->frame, context->surface_pixels,
+        if (kvm_window_render_frame(context->frame, context->surface_pixels,
                 context->surface_width, context->surface_height,
                 &context->surface_valid, &changed) &&
             win32_window_display_rect(context, width, height, &display)) {
             kvm_window_map_dirty_rect(&changed, &display, width, height, &changed_target);
             kvm_win32_rect_store(&target, &changed_target);
-            if (!win32_window_invalidate(window, context, &target)) return;
+            if (!win32_window_invalidate(window, context, &target)) goto failed;
         }
     }
-    for(index=0;index<2u;++index) {
-        new_visible[index]=context->cursor_blink_visible &&
-            win32_window_cursor_rect(window,context,index,&new_cursor[index]);
-        if(old_visible[index]!=new_visible[index] ||
-            (old_visible[index] && (old_cursor[index].left!=new_cursor[index].left ||
-                old_cursor[index].top!=new_cursor[index].top ||
-                old_cursor[index].right!=new_cursor[index].right ||
-                old_cursor[index].bottom!=new_cursor[index].bottom))) {
-            if(old_visible[index] && !win32_window_invalidate(window,context,&old_cursor[index]))return;
-            if(new_visible[index] && !win32_window_invalidate(window,context,&new_cursor[index]))return;
-        }
+    new_visible = win32_window_cursor_visible(context) &&
+        win32_window_cursor_rect(window, context, &new_cursor);
+    /* Equal outer bounds can still contain different split spans. */
+    if (old_visible != new_visible || (old_visible &&
+        (lib_memory_compare(&old_cursor, &new_cursor, sizeof(old_cursor)) != 0 ||
+         previous->text->base.font_height != incoming->text->base.font_height ||
+         lib_memory_compare(previous->text->base.cursor, incoming->text->base.cursor,
+             sizeof(previous->text->base.cursor)) != 0))) {
+        if (old_visible && !win32_window_invalidate(window, context, &old_cursor)) goto failed;
+        if (new_visible && !win32_window_invalidate(window, context, &new_cursor)) goto failed;
     }
-    kvm_component_mailboxes_acknowledge_frame(&context->component->base.mailboxes,
-        context->displayed_sequence);
+    kvm_component_mailboxes_finish_frame(&context->component->base.mailboxes, LIB_TRUE);
+    return;
+failed:
+    context->frame = previous;
+    kvm_component_mailboxes_finish_frame(&context->component->base.mailboxes, LIB_FALSE);
 }
 
 static lib_bool win32_window_consume_mailboxes(lib_win32_hwnd window,
@@ -556,7 +615,7 @@ static lib_bool win32_window_consume_mailboxes(lib_win32_hwnd window,
             return LIB_FALSE;
         }
         if (control.kind == KVM_WINDOW_CONTROL_SET_TITLE) {
-            if (!lib_win32_set_window_text_a(window, (char *)control.payload)) {
+            if (!kvm_window_apply_title(window, (char *)control.payload)) {
                 kvm_component_fail(&context->component->base, LIB_STATUS_IO_ERROR);
                 return LIB_FALSE;
             }
@@ -620,6 +679,11 @@ static lib_win32_lresult LIB_WIN32_CALLBACK win32_window_proc(lib_win32_hwnd win
     context = win32_window_context(window);
     if (context == LIB_NULL) return lib_win32_def_window_proc_w(window, message, wparam, lparam);
     switch (message) {
+    case LIB_WIN32_WM_GETMINMAXINFO:
+        /* Manual sizing is not limited by the virtual desktop. */
+        ((lib_win32_minmaxinfo *)lparam)->ptMaxTrackSize.x = LIB_INT32_MAX;
+        ((lib_win32_minmaxinfo *)lparam)->ptMaxTrackSize.y = LIB_INT32_MAX;
+        return 0;
     case LIB_WIN32_WM_TIMER:
         if (wparam == WIN32_WINDOW_CURSOR_TIMER) {
             win32_window_advance_cursor_blink(window, context);
@@ -648,7 +712,7 @@ static lib_win32_lresult LIB_WIN32_CALLBACK win32_window_proc(lib_win32_hwnd win
         {
             lib_win32_paintstruct paint;
             lib_win32_hdc dc = lib_win32_begin_paint(window, &paint);
-            lib_i32 painted = dc != LIB_NULL && win32_window_paint(window, context, dc);
+            lib_i32 painted = dc != LIB_NULL && win32_window_paint(context, dc);
             /* End the paint transaction even if drawing failed. */
             if (dc != LIB_NULL && !lib_win32_end_paint(window, &paint)) painted = 0;
             if (!painted) kvm_component_fail(&context->component->base, LIB_STATUS_IO_ERROR);
@@ -657,6 +721,11 @@ static lib_win32_lresult LIB_WIN32_CALLBACK win32_window_proc(lib_win32_hwnd win
     case LIB_WIN32_WM_SIZE:
         win32_window_capture_client_size(window, context);
         win32_window_enforce_aspect(window, context);
+        if (!context->correcting_aspect && context->client_width > 0 &&
+            context->client_height > 0 && context->surface_width != 0u) {
+            context->scale_pixels = (lib_u32)context->client_width;
+            context->scale_source = context->surface_width;
+        }
         if (!kvm_win32_mouse_refresh_bounds(&context->mouse))
             win32_window_release_mouse(context);
         (void)win32_window_invalidate(window, context, LIB_NULL);
@@ -672,34 +741,51 @@ static lib_win32_lresult LIB_WIN32_CALLBACK win32_window_proc(lib_win32_hwnd win
         return 1;
     case LIB_WIN32_WM_NCLBUTTONDBLCLK:
         if (wparam == LIB_WIN32_HTCAPTION) {
-            if (lib_win32_is_zoomed(window)) lib_win32_show_window(window, LIB_WIN32_SW_RESTORE);
+            context->snap = KVM_WIN32_SNAP_NONE;
+            context->correcting_aspect = LIB_TRUE;
+            if (kvm_win32_snap_state(window) != KVM_WIN32_SNAP_NONE)
+                lib_win32_show_window(window, LIB_WIN32_SW_RESTORE);
+            context->correcting_aspect = LIB_FALSE;
             context->client_surface_width = 0u;
             context->client_surface_height = 0u;
             if (context->surface_width != 0u)
                 win32_window_resize_client(window, context, context->surface_width,
-                    context->surface_height);
+                    context->surface_height, LIB_FALSE);
             return 0;
         }
         break;
     case LIB_WIN32_WM_SYSCOMMAND:
         if ((wparam & 0xfff0u) == LIB_WIN32_SC_MAXIMIZE) {
             if (context->surface_width != 0u && context->surface_height != 0u) {
+                context->snap = KVM_WIN32_SNAP_NONE;
+                context->correcting_aspect = LIB_TRUE;
+                if (kvm_win32_snap_state(window) != KVM_WIN32_SNAP_NONE)
+                    lib_win32_show_window(window, LIB_WIN32_SW_RESTORE);
                 lib_status status = kvm_win32_maximize_client(window, context->surface_width,
                     context->surface_height);
+                context->correcting_aspect = LIB_FALSE;
+                win32_window_capture_client_size(window, context);
+                if (status == LIB_STATUS_OK && context->client_width > 0) {
+                    context->scale_pixels = (lib_u32)context->client_width;
+                    context->scale_source = context->surface_width;
+                }
                 if (status != LIB_STATUS_OK) kvm_component_fail(&context->component->base, status);
             }
             return 0;
         }
         break;
     case LIB_WIN32_WM_SIZING:
-        if (kvm_win32_constrain_sizing(window, wparam, (lib_win32_rect *)lparam,
-                context->surface_width, context->surface_height) != LIB_STATUS_OK)
-            kvm_component_fail(&context->component->base, LIB_STATUS_IO_ERROR);
-        return LIB_WIN32_TRUE;
+        {
+            lib_status status = kvm_win32_constrain_sizing(window, wparam,
+                (lib_win32_rect *)lparam, context->surface_width, context->surface_height);
+            if (status == LIB_STATUS_UNSUPPORTED) break;
+            if (status != LIB_STATUS_OK) kvm_component_fail(&context->component->base, status);
+            return LIB_WIN32_TRUE;
+        }
     case LIB_WIN32_WM_KEYDOWN:
     case LIB_WIN32_WM_SYSKEYDOWN:
         if (win32_window_accepting_input(context) &&
-            win32_window_transition(context, wparam, lparam, 0) == KVM_KEYBOARD_UNMAPPED) {
+            win32_window_transition(context, wparam, lparam, 0) == BASE_KEYBOARD_UNMAPPED) {
             lib_win32_msg native = { 0 };
             native.hwnd = window; native.message = message;
             native.wParam = wparam; native.lParam = lparam;
@@ -716,8 +802,8 @@ static lib_win32_lresult LIB_WIN32_CALLBACK win32_window_proc(lib_win32_hwnd win
     case LIB_WIN32_WM_CHAR:
     case LIB_WIN32_WM_SYSCHAR:
         if (win32_window_accepting_input(context)) {
-            kvm_keyboard_record record = {
-                KVM_KEYBOARD_CHARACTER, (lib_u16)((lparam >> 16) & 0xffu),
+            base_keyboard_record record = {
+                BASE_KEYBOARD_CHARACTER, (lib_u16)((lparam >> 16) & 0xffu),
                 0u, (lib_u16)wparam, 0u, 0u, LIB_TRUE, (lib_u16)lparam };
             (void)kvm_keyboard_submit_record(&context->keyboard_normalizer,
                 &context->component->base.hotkey_matcher, context,
@@ -805,19 +891,21 @@ static lib_win32_lresult LIB_WIN32_CALLBACK win32_window_proc(lib_win32_hwnd win
 
 static lib_status win32_window_destroy(kvm_win32_window_context *context, lib_win32_hwnd window)
 {
-    lib_status status;
+    lib_status status = LIB_STATUS_OK;
     if (window != LIB_NULL && lib_win32_is_window(window) && !lib_win32_destroy_window(window))
-        return LIB_STATUS_IO_ERROR;
-    status = win32_window_destroy_surface(context);
-    if (status != LIB_STATUS_OK) return status;
-    if (context != LIB_NULL && context->transparent_cursor != LIB_NULL)
-        if (!lib_win32_destroy_cursor(context->transparent_cursor)) return LIB_STATUS_IO_ERROR;
-    return LIB_STATUS_OK;
+        status = LIB_STATUS_IO_ERROR;
+    if (win32_window_destroy_surface(context) != LIB_STATUS_OK) status = LIB_STATUS_IO_ERROR;
+    if (context != LIB_NULL && context->transparent_cursor != LIB_NULL) {
+        if (lib_win32_destroy_cursor(context->transparent_cursor)) context->transparent_cursor = LIB_NULL;
+        else status = LIB_STATUS_IO_ERROR;
+    }
+    return status;
 }
 
 typedef struct kvm_window_win32_state {
     lib_win32_handle worker;
     lib_win32_handle ready;
+    lib_win32_handle stop;
     lib_status startup_status;
     kvm_win32_window_context context;
 } kvm_window_win32_state;
@@ -849,6 +937,7 @@ static lib_win32_dword LIB_WIN32_WINAPI kvm_window_worker(void *opaque)
     klass.lpszClassName = L"LibKvmWindow";
     if (lib_win32_register_class_w(&klass) == 0 && lib_win32_get_last_error() != LIB_WIN32_ERROR_CLASS_ALREADY_EXISTS) {
         state->startup_status = LIB_STATUS_INVALID_STATE;
+        (void)lib_win32_set_event(state->ready);
         return 0u; /* Creator also observes worker exit. */
     }
     win32_window_initial_bounds(&initial_left, &initial_top, &initial_width,
@@ -860,10 +949,11 @@ static lib_win32_dword LIB_WIN32_WINAPI kvm_window_worker(void *opaque)
         LIB_NULL, LIB_NULL, klass.hInstance, context);
     if (window == LIB_NULL) {
         state->startup_status = LIB_STATUS_INVALID_STATE;
+        (void)lib_win32_set_event(state->ready);
         return 0u; /* Creator also observes worker exit. */
     }
     state->startup_status = LIB_STATUS_IO_ERROR;
-    if (!lib_win32_set_window_text_a(window, component->initial_title)) goto startup_failed;
+    if (!kvm_window_apply_title(window, component->initial_title)) goto startup_failed;
     context->transparent_cursor = win32_window_create_transparent_cursor();
     if (context->transparent_cursor == LIB_NULL) goto startup_failed;
     if (!context->frozen && !lib_win32_set_timer(window,
@@ -885,8 +975,9 @@ static lib_win32_dword LIB_WIN32_WINAPI kvm_window_worker(void *opaque)
     }
     while (lib_win32_is_window(window) && win32_window_accepting_input(context)) {
         lib_win32_dword wait = lib_win32_msg_wait_for_multiple_objects(
-            0u, LIB_NULL, LIB_WIN32_FALSE,
+            1u, &state->stop, LIB_WIN32_FALSE,
             LIB_WIN32_INFINITE, LIB_WIN32_QS_ALLINPUT);
+        if (wait == LIB_WIN32_WAIT_OBJECT_0) break;
         if (wait == LIB_WIN32_WAIT_FAILED) {
             kvm_component_fail(&component->base, LIB_STATUS_IO_ERROR);
         }
@@ -901,13 +992,13 @@ static lib_win32_dword LIB_WIN32_WINAPI kvm_window_worker(void *opaque)
     }
     if (!lib_win32_is_window(window)) kvm_component_fail(&component->base, LIB_STATUS_IO_ERROR);
     win32_window_release_mouse(context);
-    if (win32_window_destroy(context, window) != LIB_STATUS_OK)
-        kvm_component_fail(&component->base, LIB_STATUS_IO_ERROR);
-    kvm_component_retire(&component->base, LIB_STATUS_OK);
-    return 0u;
+    lib_status cleanup = win32_window_destroy(context, window);
+    kvm_component_retire(&component->base, cleanup);
+    return (lib_win32_dword)cleanup;
 
 startup_failed:
     (void)win32_window_destroy(context, window);
+    (void)lib_win32_set_event(state->ready);
     return 0u; /* Creator observes worker exit and the original startup status. */
 }
 
@@ -930,41 +1021,51 @@ lib_status kvm_window_worker_start(kvm_window *component)
     if (state->ready == LIB_NULL) {
         lib_release(state); return LIB_STATUS_NO_MEMORY;
     }
+    state->stop = lib_win32_create_event_a(LIB_NULL, LIB_WIN32_TRUE, LIB_WIN32_FALSE, LIB_NULL);
+    if (state->stop == LIB_NULL) {
+        lib_win32_close_handle(state->ready);
+        lib_release(state); return LIB_STATUS_NO_MEMORY;
+    }
     component->worker_state = state;
     state->worker = lib_win32_create_thread(LIB_NULL, 0u, kvm_window_worker, component, 0u, LIB_NULL);
     if (state->worker == LIB_NULL) {
         component->worker_state = LIB_NULL;
         lib_win32_close_handle(state->ready);
+        lib_win32_close_handle(state->stop);
         lib_release(state); return LIB_STATUS_NO_MEMORY;
     }
     completion[0] = state->ready;
     completion[1] = state->worker;
     wait = lib_win32_wait_for_multiple_objects(2u, completion, LIB_WIN32_FALSE, LIB_WIN32_INFINITE);
     if (wait != LIB_WIN32_WAIT_OBJECT_0 || state->startup_status != LIB_STATUS_OK) {
-        startup_status = wait == LIB_WIN32_WAIT_OBJECT_0 + 1u ?
-            state->startup_status : LIB_STATUS_IO_ERROR;
+        startup_status = state->startup_status;
+        if (wait != LIB_WIN32_WAIT_OBJECT_0 &&
+            wait != LIB_WIN32_WAIT_OBJECT_0 + 1u)
+            startup_status = LIB_STATUS_IO_ERROR;
         if (startup_status == LIB_STATUS_OK) startup_status = LIB_STATUS_IO_ERROR;
         /* An unsuccessful wait is not permission to free a live worker. */
-        if (kvm_window_worker_join(component, KVM_COMPONENT_DESTROY_TIMEOUT_MS) != LIB_STATUS_OK)
-            return startup_status;
+        (void)kvm_window_worker_join(component);
         return startup_status;
     }
     return LIB_STATUS_OK;
 }
 
-lib_status kvm_window_worker_join(kvm_window *component, lib_u32 timeout_ms)
+lib_status kvm_window_worker_join(kvm_window *component)
 {
     kvm_window_win32_state *state;
+    lib_win32_dword result = LIB_STATUS_OK;
     if (component == LIB_NULL || (state = (kvm_window_win32_state *)
             component->worker_state) == LIB_NULL) return LIB_STATUS_OK;
-    /* STOP is already in the control FIFO.  The worker consumes it, closes
-     * its Window, and thereby establishes completion before this join. */
-    if (lib_win32_wait_for_single_object(state->worker, timeout_ms) != LIB_WIN32_WAIT_OBJECT_0)
-        return LIB_STATUS_IO_ERROR;
-    (void)lib_win32_close_handle(state->worker);
-    state->worker = LIB_NULL;
-    (void)lib_win32_close_handle(state->ready);
+    /* STOP closes normal admission. This terminal wake exits the native
+     * message wait even if the ordinary mailbox notification failed. */
+    lib_win32_dword timeout = lib_win32_set_event(state->stop) ? LIB_WIN32_INFINITE : 0u;
+    if (lib_win32_wait_for_single_object(state->worker, timeout) != LIB_WIN32_WAIT_OBJECT_0)
+        lib_process_exit_immediate(LIB_STATUS_INTERNAL_ERROR);
+    if (!lib_win32_get_exit_code_thread(state->worker, &result) || timeout == 0u) result = LIB_STATUS_IO_ERROR;
+    if (!lib_win32_close_handle(state->worker)) result = LIB_STATUS_IO_ERROR;
+    if (!lib_win32_close_handle(state->ready)) result = LIB_STATUS_IO_ERROR;
+    if (!lib_win32_close_handle(state->stop)) result = LIB_STATUS_IO_ERROR;
     component->worker_state = LIB_NULL;
     lib_release(state);
-    return LIB_STATUS_OK;
+    return (lib_status)result;
 }

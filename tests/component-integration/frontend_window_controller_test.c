@@ -4,6 +4,14 @@
 #include "window_controller.h"
 #include "window_keyboard.h"
 
+/* Fixture snapshot only; production decodes directly into this writer. */
+static DWORD present_fixture(frontend_window_controller *owner,
+    const kvm_window_frame_storage *source,BOOL graphics)
+{
+    if(!kvm_window_frame_copy(frontend_window_writer(owner),&source->frame))return ERROR_INVALID_DATA;
+    return frontend_window_present(owner,graphics);
+}
+
 #define CHECK(x) do { if(!(x)) { fprintf(stderr,"FAIL line %d error %lu: %s\n",__LINE__,GetLastError(),#x); return __LINE__; } } while(0)
 typedef struct observations {
     LONG retired; DWORD routes; BOOL window,graphics; DWORD consumer_thread;
@@ -114,7 +122,11 @@ static int run_on_private_desktop(void)
     DWORD code=ERROR_GEN_FAILURE;
     sprintf_s(name,sizeof(name),"NTVDMConsoleTest-%lu",GetCurrentProcessId());
     desktop=CreateDesktopA(name,NULL,NULL,0,GENERIC_ALL,NULL);
-    if(!desktop)return (int)GetLastError();
+    if(!desktop) {
+        DWORD error=GetLastError();
+        fprintf(stderr,"CreateDesktop failed error=%lu\n",error);
+        return (int)error;
+    }
     if(!GetModuleFileNameA(NULL,image,sizeof(image))) { CloseDesktop(desktop);return (int)GetLastError(); }
     sprintf_s(command,sizeof(command),"\"%s\"",image);
     start.lpDesktop=name;
@@ -134,7 +146,7 @@ int main(int argc,char **argv)
     frontend_window_controller *a=NULL,*b=NULL;
     observations first={0},second={0};
     frontend_window_callbacks ca={&first,input,route},cb={&second,input,route};
-    kvm_window_frame *frame=calloc(1,sizeof(*frame));
+    kvm_window_frame_storage *frame=calloc(1,sizeof(*frame));
     HWND wa,wb;DWORD routes,input_mode=0;
     (void)argv;CHECK(argc==1);
     /* Never create a test Window on the user's desktop. */
@@ -167,12 +179,12 @@ int main(int argc,char **argv)
         puts("PASS copied FIFO order, UI-time layout, overflow rejection, closed queue drain and no borrowed source pointer");
     }
     CHECK(frame);
-    frame->valid=LIB_TRUE;frame->text.base.text_columns=80;
-    frame->text.base.text_rows=50;frame->text.base.font_height=8;
+    CHECK(kvm_window_frame_prepare_text(frame,80,50,80)==LIB_STATUS_OK);
+    frame->data.text->base.font_height=8;
     CHECK(!frontend_window_create(&a,&ca,"Frontend controller A"));
     CHECK(!frontend_window_create(&b,&cb,"Frontend controller B"));
     CHECK(frontend_window_mode(a)==FRONTEND_DISPLAY_CONSOLE);
-    CHECK(!frontend_window_present(a,frame,FALSE) && !frontend_window_visible(a));
+    CHECK(!present_fixture(a,frame,FALSE) && !frontend_window_visible(a));
     CHECK(!frontend_window_select(a,FRONTEND_DISPLAY_WINDOW));
     {
         unsigned attempt;
@@ -254,7 +266,7 @@ int main(int argc,char **argv)
         CHECK(first.keyboard.physical.held_count==0);
         puts("PASS real Window key messages -> copied FIFO -> native conversion -> cooked Console exact ab CR LF");
     }
-    CHECK(!frontend_window_present(b,frame,FALSE));
+    CHECK(!present_fixture(b,frame,FALSE));
     CHECK(!frontend_window_select(b,FRONTEND_DISPLAY_WINDOW));
     wb=lookup("Frontend controller B");CHECK(wb && IsWindowVisible(wb));
     CHECK(close_request(wa));
@@ -278,10 +290,9 @@ int main(int argc,char **argv)
     }
     /* Native raster is text: only the explicit policy, not frame.graphics,
      * selects Window. Static DOS graphics continues without new frames. */
-    memset(frame,0,sizeof(*frame));frame->valid=frame->graphics=LIB_TRUE;
-    frame->image.width=frame->image.stride=2;frame->image.height=2;
-    CHECK(!frontend_window_present(a,frame,FALSE) && !frontend_window_visible(a));
-    CHECK(!frontend_window_present(a,frame,TRUE) && frontend_window_visible(a));
+    CHECK(kvm_window_frame_prepare_graphics(frame,2,2,2)==LIB_STATUS_OK);
+    CHECK(!present_fixture(a,frame,FALSE) && !frontend_window_visible(a));
+    CHECK(!present_fixture(a,frame,TRUE) && frontend_window_visible(a));
     wa=lookup("Frontend controller A");CHECK(wa && first.graphics);
     routes=first.routes;
     CHECK(close_request(wa));
@@ -290,18 +301,71 @@ int main(int argc,char **argv)
     CHECK(lookup("Frontend controller A")==wa && first.routes==routes);
     CHECK(frontend_window_mode(a)==FRONTEND_DISPLAY_CONSOLE);
     CHECK(!frontend_window_poll(a) && frontend_window_visible(a));
-    CHECK(!frontend_window_present(a,frame,FALSE) && !frontend_window_visible(a));
+    CHECK(!present_fixture(a,frame,FALSE) && !frontend_window_visible(a));
     CHECK(first.retired==4);
     CHECK(!frontend_window_select(a,FRONTEND_DISPLAY_WINDOW));
     CHECK(frontend_window_visible(a));
     CHECK(!frontend_window_clear(a) && !frontend_window_visible(a));
     CHECK(frontend_window_mode(a)==FRONTEND_DISPLAY_WINDOW);
-    CHECK(!frontend_window_present(a,frame,FALSE) && frontend_window_visible(a));
+    CHECK(!present_fixture(a,frame,FALSE) && frontend_window_visible(a));
+    {
+        char ansi[KVM_WINDOW_TITLE_CAPACITY];WCHAR expected[KVM_WINDOW_TITLE_CAPACITY],actual[KVM_WINDOW_TITLE_CAPACITY];
+        unsigned attempt;DWORD error;
+        CHECK(WideCharToMultiByte(CP_ACP,0,L"caf\x00e9",-1,ansi,sizeof(ansi),NULL,NULL));
+        CHECK(MultiByteToWideChar(CP_ACP,0,ansi,-1,expected,ARRAYSIZE(expected)));
+        wa=lookup("Frontend controller A");CHECK(wa);
+        error=frontend_window_set_title(a,ansi);
+        if(error)fprintf(stderr,"ACP title rejected: codepage=%u error=%lu\n",GetACP(),error);
+        CHECK(!error);
+        for(attempt=0;attempt<100;++attempt){
+            GetWindowTextW(wa,actual,ARRAYSIZE(actual));
+            if(!wcscmp(actual,expected))break;
+            Sleep(10);
+        }
+        CHECK(attempt<100);
+        puts("PASS native ACP title preserved through UTF-8 library boundary");
+        {
+            /* Independent UTF-16 oracle: shorten whole characters until their
+             * UTF-8 representation fits. Include exact ASCII and 2/3-byte cuts. */
+            const WCHAR glyphs[]={L'A',L'\x00e9',L'\x20ac'};
+            char source[128];WCHAR wide[128];unsigned scenario;
+            frontend_window_controller *initial=NULL;
+            unsigned length=127,i;int bytes,utf8_bytes;DWORD initial_error;
+            for(scenario=0;scenario<ARRAYSIZE(glyphs);++scenario) {
+                length=127;
+                for(i=0;i<length;++i)wide[i]=glyphs[scenario];
+                wide[length]=0;
+                while((bytes=WideCharToMultiByte(CP_ACP,0,wide,-1,NULL,0,NULL,NULL))>(int)sizeof(source))
+                    wide[--length]=0;
+                CHECK(bytes>0 && WideCharToMultiByte(CP_ACP,0,wide,-1,source,sizeof(source),NULL,NULL));
+                CHECK(MultiByteToWideChar(CP_ACP,0,source,-1,expected,ARRAYSIZE(expected)));
+                utf8_bytes=WideCharToMultiByte(CP_UTF8,0,expected,-1,NULL,0,NULL,NULL);
+                CHECK(utf8_bytes>0);
+                error=frontend_window_set_title(a,source);
+                initial_error=frontend_window_create(&initial,&ca,source);
+                while(utf8_bytes>(int)KVM_WINDOW_TITLE_CAPACITY) {
+                    expected[wcslen(expected)-1]=0;
+                    utf8_bytes=WideCharToMultiByte(CP_UTF8,0,expected,-1,NULL,0,NULL,NULL);
+                    CHECK(utf8_bytes>0);
+                }
+                CHECK(!error && !initial_error && initial);
+                CHECK(!frontend_window_destroy(initial));
+                for(attempt=0;attempt<100;++attempt) {
+                    GetWindowTextW(wa,actual,ARRAYSIZE(actual));
+                    if(!wcscmp(actual,expected))break;
+                    Sleep(10);
+                }
+                CHECK(attempt<100);
+                CHECK(WideCharToMultiByte(CP_ACP,0,wide,-1,ansi,sizeof(ansi),NULL,NULL));
+                CHECK(!strcmp(source,ansi)); /* Source remains caller-owned. */
+            }
+        }
+    }
     CHECK(!frontend_window_destroy(a));CHECK(!frontend_window_destroy(b));
     CHECK(first.retired==6 && second.retired==1);
     CHECK(first.consumer_thread==GetCurrentThreadId() && second.consumer_thread==GetCurrentThreadId());
     CHECK(!lookup("Frontend controller A") && !lookup("Frontend controller B"));
-    free(frame);
+    kvm_window_frame_release(frame);free(frame);
     puts("PASS real private Window: policy, X/CAF/AltEnter, static graphics, native raster classification, owner handoff, independent instances, joined retirement");
     return 0;
 }

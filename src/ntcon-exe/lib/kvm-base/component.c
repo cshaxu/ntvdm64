@@ -38,7 +38,7 @@ static void kvm_component_report_failure(kvm_component *component, lib_status st
 
 lib_status kvm_component_initialize(kvm_component *component,
     const kvm_component_options *options, kvm_component_join_fn join_worker,
-    kvm_component_dispose_fn dispose, void *frame_storage, lib_size frame_capacity)
+    kvm_component_dispose_fn dispose)
 {
     lib_u64 identity;
     if (component == LIB_NULL || options == LIB_NULL || options->input_sink == LIB_NULL ||
@@ -57,7 +57,7 @@ lib_status kvm_component_initialize(kvm_component *component,
     kvm_hotkey_matcher_initialize(&component->hotkey_matcher, &options->hotkeys);
     lib_atomic_i32_initialize(&component->stopping, 0);
     lib_atomic_i32_initialize(&component->failure, LIB_STATUS_OK);
-    return kvm_component_mailboxes_create(&component->mailboxes, frame_storage, frame_capacity);
+    return kvm_component_mailboxes_create(&component->mailboxes);
 }
 
 lib_bool kvm_component_emit_to(kvm_component *component, const kvm_input_event *event,
@@ -129,12 +129,11 @@ void kvm_component_retire(kvm_component *component, lib_status status)
         kvm_component_report_failure(component, LIB_STATUS_IO_ERROR);
 }
 
-lib_status kvm_component_publish_frame(kvm_component *component, const void *frame,
-    lib_size bytes)
+lib_status kvm_component_publish_frame(kvm_component *component, kvm_frame_exchange *frames)
 {
     lib_status status;
     if (component == LIB_NULL) return LIB_STATUS_INVALID_ARGUMENT;
-    status = kvm_component_mailboxes_publish_frame(&component->mailboxes, frame, bytes);
+    status = kvm_component_mailboxes_publish_frame(&component->mailboxes, frames);
     if (status != LIB_STATUS_OK) return status;
     status = kvm_component_mailboxes_notify(&component->mailboxes);
     if (status != LIB_STATUS_OK) kvm_component_fail(component, status);
@@ -155,15 +154,11 @@ lib_status kvm_component_destroy(kvm_component *component)
     status = kvm_component_request_stop(component);
     /* A terminal fault has already closed admission.  It still has one
      * worker to join; do not make destruction depend on a second STOP. */
-    if (status != LIB_STATUS_OK && status != LIB_STATUS_INVALID_STATE) {
-        kvm_component_report_failure(component, LIB_STATUS_INVALID_STATE);
-        return status;
-    }
-    status = component->join_worker(component, KVM_COMPONENT_DESTROY_TIMEOUT_MS);
-    if (status != LIB_STATUS_OK) return status;
+    lib_status cleanup = component->join_worker(component);
+    if (status == LIB_STATUS_OK || status == LIB_STATUS_INVALID_STATE) status = cleanup;
     kvm_hotkey_matcher_discard(&component->hotkey_matcher);
     component->dispose(component);
-    return LIB_STATUS_OK;
+    return status;
 }
 
 void kvm_component_fail(kvm_component *component, lib_status status)

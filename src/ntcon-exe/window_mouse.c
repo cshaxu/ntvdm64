@@ -61,10 +61,10 @@ DWORD frontend_window_mouse_dispatch(frontend_window_mouse *state,const frontend
     }
     if(!state->width || !state->height)return ERROR_NOT_READY;
     if(!event->data.mouse.relative || event->data.mouse.wheel_x || event->data.mouse.wheel_y ||
-        (event->data.mouse.buttons&~(KVM_MOUSE_BUTTON_LEFT|KVM_MOUSE_BUTTON_RIGHT)))
+        (event->data.mouse.buttons&~(BASE_MOUSE_BUTTON_LEFT|BASE_MOUSE_BUTTON_RIGHT)))
         return ERROR_NOT_SUPPORTED;
-    buttons=(uint16_t)(((event->data.mouse.buttons&KVM_MOUSE_BUTTON_LEFT) ? 1 : 0) |
-        ((event->data.mouse.buttons&KVM_MOUSE_BUTTON_RIGHT) ? 2 : 0));
+    buttons=(uint16_t)(((event->data.mouse.buttons&BASE_MOUSE_BUTTON_LEFT) ? 1 : 0) |
+        ((event->data.mouse.buttons&BASE_MOUSE_BUTTON_RIGHT) ? 2 : 0));
     /* One atomic queue write preserves ENTER before its first sample. KVM
      * already scales client deltas to content pixels; do not scale twice. */
     if(!state->active)records[count++]=frame_record(state,CONSOLE_MOUSE_ENTER,0,0,0,input->control_state);

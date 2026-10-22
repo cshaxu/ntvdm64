@@ -1036,6 +1036,8 @@ static BOOL wait_input_milestone(HANDLE output, const char *echo,
     ULONGLONG started = GetTickCount64();
     ULONGLONG deadline = started + OBSERVATION_INPUT_READY_TIMEOUT_MS;
     BOOL completed = FALSE;
+    observer_text_view last_view={0};
+    unsigned readable=0;
     ++milestone_waits;
     do {
         observer_text_view view;
@@ -1050,10 +1052,13 @@ static BOOL wait_input_milestone(HANDLE output, const char *echo,
             if (window && !IsWindowVisible(window)) window = NULL;
         }
         if ((!scripted_window_frontend || window) && observer_text_read(output, window,
-                scripted_window_frontend, &view) &&
+                scripted_window_frontend, &view)) {
+            last_view=view;++readable;
+            if (
             (!echo || observer_prompt_echo(&view, echo)) &&
             (!contains || observer_view_contains(&view, contains)) &&
             (!absent || !observer_view_contains(&view, absent))) { completed = TRUE; break; }
+        }
         /* Observation cadence, not unconditional keyboard/command delay. */
         if (scripted_target_process) {
             DWORD result = WaitForSingleObject(scripted_target_process, 10);
@@ -1064,6 +1069,14 @@ static BOOL wait_input_milestone(HANDLE output, const char *echo,
     milestone_wait_ms += GetTickCount64() - started;
     record_performance(contains ? "visible-text" : "prompt-echo",
         contains ? contains : echo, GetTickCount64() - started, completed);
+    if(!completed) {
+        fprintf(stderr,"milestone failed expected=%s readable=%u cursor=%d,%d\n",
+            contains ? contains : (echo ? echo : ""),readable,
+            last_view.cursor_column,last_view.cursor_row);
+        for(unsigned row=0;row<last_view.rows;++row)
+            fprintf(stderr,"%.*s\n",(int)last_view.columns,
+                last_view.cells+row*last_view.columns);
+    }
     return completed;
 }
 
@@ -1072,7 +1085,7 @@ static BOOL write_console_input_text(HANDLE input, const char *text, DWORD line_
 {
     const char *cursor;
     unsigned line = 0;
-    char echo[KVM_TEXT_COLUMNS + 1] = {0};
+    char echo[OBSERVER_TEXT_COLUMNS + 1] = {0};
     unsigned echoed = 0;
     BOOL observed = milestone_input && line_delay_ms != 0;
 
@@ -1156,7 +1169,7 @@ static BOOL write_console_input_text(HANDLE input, const char *text, DWORD line_
                     _stricmp(echo,"edit") != 0 && _stricmp(echo,"edit.com") != 0)) return FALSE;
                 echoed = 0; echo[0] = 0;
             } else {
-                if (echoed >= KVM_TEXT_COLUMNS || (unsigned char)character < 32) return FALSE;
+                if (echoed >= OBSERVER_TEXT_COLUMNS || (unsigned char)character < 32) return FALSE;
                 echo[echoed++] = character; echo[echoed] = 0;
                 /* At most four characters outstanding; acknowledge their
                  * actual full echo before another chunk or Enter. Missing

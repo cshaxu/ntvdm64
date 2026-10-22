@@ -50,7 +50,6 @@ struct frontend_session {
     frontend_window_controller *window;
     frontend_keyboard_delivery keyboard;
     frontend_window_mouse window_mouse;
-    kvm_window_frame *window_frame;
     BOOL window_active;
     BOOL console_f_down,console_shortcut;
     INPUT_RECORD *input;
@@ -67,7 +66,7 @@ static DWORD apply_binding(frontend_session *,const void *,BOOL);
 static DWORD collect_console(frontend_session *);
 static DWORD refresh_window_title(frontend_session *frontend)
 {
-    char title[KVM_WINDOW_TITLE_CAPACITY]={0};
+    char title[CONSOLE_IO_TITLE_BYTES]={0};
     DWORD length;
     const void *active=frontend->owner;
     if(active && frontend->worker_title_valid && frontend->title_owner==active)
@@ -77,8 +76,8 @@ static DWORD refresh_window_title(frontend_session *frontend)
     /* A disappearing root Console is handled by the existing lifetime path;
      * a cosmetic title read must not block a pending worker handoff. */
     if(!length && GetLastError()!=ERROR_SUCCESS)return ERROR_SUCCESS;
-    /* The local Window control payload has a fixed capacity. Keep its
-     * termination valid even when the Console title is longer. */
+    /* Preserve the ACP producer boundary independently of the library's
+     * UTF-8 control capacity. Terminate longer host titles as before. */
     title[sizeof(title)-1]=0;
     return frontend_window_set_title(frontend->window,title);
 }
@@ -653,12 +652,13 @@ static DWORD present_loop(frontend_session *frontend)
             if(serial!=*published && (!video->pending || video->pixels)) {
                 if(video->pixels) {
                     lib_u32 width=0,height=0;
-                    error=frontend_window_decode_frame(video,frontend->window_frame);
-                    if(!error && !kvm_window_frame_size(frontend->window_frame,&width,&height))
+                    kvm_window_frame_storage *writer=frontend_window_writer(frontend->window);
+                    error=frontend_window_decode_frame(video,writer);
+                    if(!error && !kvm_window_frame_size(&writer->frame,&width,&height))
                         error=ERROR_INVALID_DATA;
                     if(!error)
                         error=frontend_window_mouse_geometry(&frontend->window_mouse,width,height);
-                    if(!error)error=frontend_window_present(frontend->window,frontend->window_frame,
+                    if(!error)error=frontend_window_present(frontend->window,
                         video->description.kind==CONSOLE_VIDEO_DIB);
                     if(!error && frontend->window_active)
                         error=frontend_window_mouse_enter(&frontend->window_mouse,window_records,frontend);
@@ -682,15 +682,11 @@ static DWORD WINAPI present(void *context)
     frontend_session *frontend=context;
     frontend_window_callbacks callbacks={frontend,window_input,window_route};
     DWORD error,ending;
-    frontend->window_frame=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*frontend->window_frame));
-    if(!frontend->window_frame)return ERROR_NOT_ENOUGH_MEMORY;
     error=frontend_window_create(&frontend->window,&callbacks,"");
     if(!error)error=present_loop(frontend);
     ending=frontend_window_destroy(frontend->window);
-    if(ending)return ending; /* Callback storage must outlive a failed join. */
     frontend->window=NULL;
-    HeapFree(GetProcessHeap(),0,frontend->window_frame);frontend->window_frame=NULL;
-    return error;
+    return error ? error : ending;
 }
 DWORD frontend_session_create(frontend_session **output)
 {

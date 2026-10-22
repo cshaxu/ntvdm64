@@ -53,29 +53,42 @@ permission to replace the published runtime package.
 
 `nxvm-import.json` pins the exact Win32 dependency closure of the shared types,
 base, kvm-base and kvm-window from SoftPC revision
-3186afcd7b743e9797364c6a762eccd3b5576ca1, refreshed with owner approval on
-2026-09-27 from the earlier nxvm pin. The selected files under `lib/` and
-their MIT notice retain the upstream provenance. T448 S3 supersedes the
-T447 S4 P4 ten-second shutdown exception: `KVM_COMPONENT_DESTROY_TIMEOUT_MS`
-uses the existing Win32 infinite-wait value, `LIB_UINT32_MAX`. Destruction
-requests STOP and joins actual worker exit before disposal; startup failure
-also joins the worker before releasing its state. No ABI or join/dispose order
-changes. The manifest preserves the upstream hash and pins the local bytes.
-This owner-approved removal of the extra deadline requires renewed library
-and CAF close regression; earlier finite-wait results do not prove it.
-This is a local policy exception, not an OpenNT
-or guest change. Only frontend presentation may consume this
+0d9f1803ee04bd89bd6150306912a3e8674d0a83, admitted in T448 S8. All52 selected
+files are byte-exact, including the upstream removal of destroy deadlines.
+The MIT notice remains unchanged. Every normal destroy return consumes the
+object, including post-join cleanup errors. Failure to establish thread
+quiescence takes the library's immediate process-fatal path; there is no
+application fatal callback or recoverable half-object. Ordinary errors still
+flow through existing NTCON/NTSRV failure coordination. Only frontend presentation may consume this
 library; launcher clients and worker objects must not acquire a link edge.
 The upstream repository is not a build or runtime dependency. Its test library,
 Console broker, application and Linux implementations are not imported.
 
-The manifest's compile rows select fifteen translation units; the remaining
+The manifest's compile rows select eighteen translation units; the remaining
 files are their recursive header closure and four component READMEs. Base
 clock/process implementations are unnecessary for this selected closure.
+Base now owns keyboard normalization; no copied old KVM keyboard decoder
+remains. Restored upstream Base/default-notifier source preserves byte identity;
+it does not add an application timer, polling service or new runtime role.
+
+The frontend I/O producer decodes directly into the exchange's unheld writer.
+Four small slot descriptors own lazily allocated, actual-size text OR RGB
+payloads; the library retains immutable processing/displayed frames until safe
+retirement. There is no full-frame staging copy in frontend_session or the
+controller. The existing indexed worker wire becomes RGB at that boundary;
+wire text limits remain160x96/font32, independently of dynamic library capacity.
+Text underline and both cursor spans retain their wire semantics, with Window
+as the sole blink-phase owner. A failed decode is never committed.
 `tests/component-integration/verify-frontend-window-library.ps1` checks pinned
 bytes and builds the real Win32 leaf with a non-interactive contract fixture.
-This initial library verification does not claim product Window wiring; the
-S6 ledger tracks that remaining work.
+Library-only assertions do not substitute for the production channel, Window
+and CAF regression gates. CURRENT and the S8 evidence ledger record those
+integration results and publication status.
+
+Console titles retain the existing128-byte ACP producer boundary. NTCON converts
+them to the imported Window API's UTF-8 representation. Owner-approved display
+truncation keeps the longest complete UTF-8 prefix fitting127 bytes plus NUL;
+it does not alter the original Console title or the worker/frontend protocol.
 
 INPUT_RESET releases only successfully delivered keys belonging to that source,
 discards frontend-local dead-key composition, and retains the live source identity.

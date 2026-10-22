@@ -20,13 +20,15 @@ typedef struct frontend_window_callbacks {
 } frontend_window_callbacks;
 
 /* All calls except library callbacks are serialized by the frontend I/O
- * owner. The callback context outlives successful destruction. */
+ * owner. Every normal destruction return consumes the controller. */
 DWORD frontend_window_create(frontend_window_controller **,
     const frontend_window_callbacks *,const char *title);
 HANDLE frontend_window_wake(frontend_window_controller *);
 DWORD frontend_window_select(frontend_window_controller *,frontend_display_mode);
 /* Raster carrier != DOS graphics: native Console rasters pass FALSE. */
-DWORD frontend_window_present(frontend_window_controller *,const kvm_window_frame *,BOOL dos_graphics);
+/* Fill only the current writer, then commit. Do not retain it after present. */
+kvm_window_frame_storage *frontend_window_writer(frontend_window_controller *);
+DWORD frontend_window_present(frontend_window_controller *,BOOL dos_graphics);
 DWORD frontend_window_set_title(frontend_window_controller *,const char *);
 DWORD frontend_window_poll(frontend_window_controller *);
 /* Execution-owner handoff discards stale pixels, but retains display policy. */

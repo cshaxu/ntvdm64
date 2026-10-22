@@ -21,6 +21,9 @@ typedef uintptr_t lib_uptr;
 typedef lib_u8 lib_bool;
 typedef lib_i32 lib_status;
 
+/* Immediate process termination: no atexit callbacks or ordinary cleanup. */
+#define lib_process_exit_immediate _Exit
+
 
 enum {
     LIB_STATUS_OK = 0,
@@ -36,6 +39,10 @@ enum {
 #define LIB_FALSE 0
 #define LIB_TRUE 1
 #define LIB_NULL NULL
+#define LIB_UINT8_MAX UINT8_MAX
+#define LIB_UINT16_MAX UINT16_MAX
+#define LIB_INT16_MAX INT16_MAX
+#define LIB_INT16_MIN INT16_MIN
 #define LIB_INT32_MAX INT32_MAX
 #define LIB_INT32_MIN INT32_MIN
 #define LIB_UINT32_MAX UINT32_MAX

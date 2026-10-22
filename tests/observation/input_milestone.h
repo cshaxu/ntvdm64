@@ -5,18 +5,16 @@
  * selected context prefix already checked by window_text_geometry_probe.c.
  * No production hook, acknowledgement, focus change or injected marker. */
 #include <stddef.h>
-#include "lib/kvm-window/frame_interface.h"
+#include "window_frame_observation.h"
+
+/* Observation buffer bound follows current wire acceptance, not lib capacity. */
+enum { OBSERVER_TEXT_COLUMNS=160, OBSERVER_TEXT_ROWS=96 };
 
 typedef struct observer_text_view {
     unsigned columns, rows;
     int cursor_column, cursor_row;
-    char cells[KVM_TEXT_COLUMNS * KVM_TEXT_ROWS];
+    char cells[OBSERVER_TEXT_COLUMNS * OBSERVER_TEXT_ROWS];
 } observer_text_view;
-
-typedef struct observer_window_prefix {
-    void *owner;
-    kvm_window_frame frame;
-} observer_window_prefix;
 
 static BOOL observer_text_read(HANDLE output, HWND window, DWORD expected_pid,
                                observer_text_view *view)
@@ -24,49 +22,45 @@ static BOOL observer_text_read(HANDLE output, HWND window, DWORD expected_pid,
     unsigned x, y;
     if (window) {
         DWORD pid = 0;
-        SIZE_T copied;
         HANDLE process;
-        ULONG_PTR context, address;
-        kvm_text_frame *first, *second;
-        lib_bool flags[2], after_flags[2];
+        observed_window_frame first,second;
+        kvm_text_cell *cells=NULL,*check;
+        lib_size bytes;
         BOOL ok = FALSE;
         GetWindowThreadProcessId(window, &pid);
         if (pid != expected_pid) return FALSE;
         process = OpenProcess(PROCESS_VM_READ | SYNCHRONIZE, FALSE, pid);
         if (!process) return FALSE;
-        context = (ULONG_PTR)GetWindowLongPtrW(window, GWLP_USERDATA);
-        address = context + offsetof(observer_window_prefix, frame);
-        first = (kvm_text_frame *)malloc(sizeof(*first) * 2);
-        if (!first) { CloseHandle(process); return FALSE; }
-        second = first + 1;
         /* Reject torn geometry/content rather than treating a transport ACK
          * or old Console mirror as proof of consumption. Blink phase is not
          * an input/result milestone. Every other copied field must agree. */
-        if (context && WaitForSingleObject(process, 0) == WAIT_TIMEOUT &&
-            ReadProcessMemory(process, (void *)address, flags, sizeof(flags), &copied) &&
-            copied == sizeof(flags) && flags[0] && !flags[1] &&
-            ReadProcessMemory(process, (void *)(address + offsetof(kvm_window_frame, text)),
-                first, sizeof(*first), &copied) && copied == sizeof(*first) &&
-            ReadProcessMemory(process, (void *)(address + offsetof(kvm_window_frame, text)),
-                second, sizeof(*second), &copied) && copied == sizeof(*second) &&
-            ReadProcessMemory(process, (void *)address, after_flags, sizeof(after_flags), &copied) &&
-            copied == sizeof(after_flags) && !memcmp(flags, after_flags, sizeof(flags)) &&
-            context == (ULONG_PTR)GetWindowLongPtrW(window, GWLP_USERDATA)) {
-            first->cursor_phase = second->cursor_phase = 0;
-            if (!memcmp(first, second, sizeof(*first)) &&
-                kvm_text_frame_validate(first) == LIB_STATUS_OK) {
-                view->columns = first->text_columns;
-                view->rows = first->text_rows;
-                view->cursor_column = first->cursor_column;
-                view->cursor_row = first->cursor_row;
+        if (WaitForSingleObject(process,0)==WAIT_TIMEOUT &&
+            observer_window_frame_read(process,window,&first) && first.frame.text &&
+            first.text.text_columns<=OBSERVER_TEXT_COLUMNS && first.text.text_rows<=OBSERVER_TEXT_ROWS &&
+            first.text.stride<=OBSERVER_TEXT_COLUMNS &&
+            kvm_frame_extent(first.text.text_columns,first.text.text_rows,first.text.stride,
+                sizeof(*cells),&bytes)==LIB_STATUS_OK &&
+            first.text.capacity>=bytes/sizeof(*cells) && (cells=malloc(bytes*2))!=NULL) {
+            check=(kvm_text_cell *)((BYTE *)cells+bytes);
+            if(observer_read_bytes(process,first.text.cells,cells,bytes) &&
+                observer_read_bytes(process,first.text.cells,check,bytes) &&
+                !memcmp(cells,check,bytes) && observer_window_frame_read(process,window,&second) &&
+                !memcmp(&first,&second,sizeof(first))) {
+                first.text.cells=cells;
+                if(kvm_text_frame_validate(&first.text)!=LIB_STATUS_OK)goto done;
+                view->columns = first.text.text_columns;
+                view->rows = first.text.text_rows;
+                view->cursor_column = first.text.cursor_column;
+                view->cursor_row = first.text.cursor_row;
                 for (y = 0; y < view->rows; ++y)
                     for (x = 0; x < view->columns; ++x)
                         view->cells[y * view->columns + x] =
-                            (char)first->cells[y * KVM_TEXT_COLUMNS + x].glyph_index;
+                            (char)cells[y * first.text.stride + x].glyph_index;
                 ok = TRUE;
             }
         }
-        free(first); CloseHandle(process); return ok;
+done:
+        free(cells); CloseHandle(process); return ok;
     } else {
         CONSOLE_SCREEN_BUFFER_INFO info;
         char *cells = NULL;
@@ -74,7 +68,7 @@ static BOOL observer_text_read(HANDLE output, HWND window, DWORD expected_pid,
         if (observer_console_snapshot(output, &info, &cells, &count)) return FALSE;
         view->columns = (unsigned)(info.srWindow.Right - info.srWindow.Left + 1);
         view->rows = (unsigned)(info.srWindow.Bottom - info.srWindow.Top + 1);
-        if (view->columns > KVM_TEXT_COLUMNS || view->rows > KVM_TEXT_ROWS) {
+        if (view->columns > OBSERVER_TEXT_COLUMNS || view->rows > OBSERVER_TEXT_ROWS) {
             free(cells); return FALSE;
         }
         view->cursor_column = info.dwCursorPosition.X - info.srWindow.Left;
@@ -111,7 +105,7 @@ static BOOL observer_prompt_echo(const observer_text_view *view, const char *ech
 static BOOL observer_view_contains(const observer_text_view *view, const char *text)
 {
     unsigned y;
-    char row[KVM_TEXT_COLUMNS + 1];
+    char row[OBSERVER_TEXT_COLUMNS + 1];
     for (y = 0; y < view->rows; ++y) {
         memcpy(row, view->cells + y * view->columns, view->columns);
         row[view->columns] = 0;

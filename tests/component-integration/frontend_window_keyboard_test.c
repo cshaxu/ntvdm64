@@ -119,7 +119,7 @@ static void native_tests(BOOL cooked)
     assert(frontend_window_keyboard_record(&event,SHIFT_PRESSED,layout,&physical));
     assert(!frontend_console_keyboard_records(&state,&event,&physical,layout,records,&count));
     assert(count==1 && records[0].Event.KeyEvent.uChar.UnicodeChar==L'B');line[1]=records[0];
-    event.data.key.key=KVM_KEY_ENTER;event.data.key.scan_code=0x1c;
+    event.data.key.key=BASE_KEY_ENTER;event.data.key.scan_code=0x1c;
     assert(frontend_window_keyboard_record(&event,0,layout,&physical));
     assert(!frontend_console_keyboard_records(&state,&event,&physical,layout,records,&count));
     assert(count==1 && records[0].Event.KeyEvent.uChar.UnicodeChar==L'\r');line[2]=records[0];
@@ -216,14 +216,14 @@ int main(int argc,char **argv)
     event.data.key.pressed = 0;
     assert(frontend_window_keyboard_record(&event, 0, layout, &record));
     assert(!record.Event.KeyEvent.bKeyDown && record.Event.KeyEvent.wRepeatCount == 1);
-    event.data.key.key = KVM_KEY_CONTROL;
+    event.data.key.key = BASE_KEY_CONTROL;
     event.data.key.scan_code = 0x1d;
-    event.data.key.flags = KVM_KEY_FLAG_EXTENDED;
+    event.data.key.flags = BASE_KEY_FLAG_EXTENDED;
     event.data.key.pressed = 1;
     assert(frontend_window_keyboard_record(&event, RIGHT_CTRL_PRESSED, layout, &record));
     assert(record.Event.KeyEvent.wVirtualKeyCode == VK_CONTROL);
     assert(record.Event.KeyEvent.dwControlKeyState == (RIGHT_CTRL_PRESSED | ENHANCED_KEY));
-    event.data.key.key = KVM_KEY_ALT;
+    event.data.key.key = BASE_KEY_ALT;
     event.data.key.scan_code = 0x38;
     assert(frontend_window_keyboard_record(&event, RIGHT_ALT_PRESSED | LEFT_CTRL_PRESSED,
         layout, &record));
@@ -244,10 +244,10 @@ int main(int argc,char **argv)
     ZeroMemory(&event, sizeof(event));
     event.type = KVM_EVENT_KEY;
     event.source_identity = 17;
-    event.data.key.modifiers = KVM_KEY_MODIFIER_CONTROL;
-    event.data.key.key = KVM_KEY_CONTROL;
+    event.data.key.modifiers = BASE_KEY_MODIFIER_CONTROL;
+    event.data.key.key = BASE_KEY_CONTROL;
     event.data.key.scan_code = 0x1d;
-    event.data.key.flags = KVM_KEY_FLAG_EXTENDED;
+    event.data.key.flags = BASE_KEY_FLAG_EXTENDED;
     event.data.key.pressed = 1;
     assert(frontend_window_keyboard_accept(&state, &event, RIGHT_CTRL_PRESSED | NUMLOCK_ON, layout, &record));
     assert(frontend_window_keyboard_accept(&state, &event, RIGHT_CTRL_PRESSED | NUMLOCK_ON, layout, &record));
@@ -277,11 +277,11 @@ int main(int argc,char **argv)
     frontend_window_keyboard_release_begin(&state, TRUE);
     assert(!frontend_window_keyboard_release_next(&state, &record)); /* No duplicate break. */
     event.source_identity = 19;
-    event.data.key.key = KVM_KEY_SHIFT;
+    event.data.key.key = BASE_KEY_SHIFT;
     event.data.key.scan_code = 0x2a;
     event.data.key.flags = 0;
     event.data.key.pressed = 1;
-    event.data.key.modifiers = KVM_KEY_MODIFIER_SHIFT;
+    event.data.key.modifiers = BASE_KEY_MODIFIER_SHIFT;
     assert(frontend_window_keyboard_accept(&state, &event, 0, layout, &record));
     assert(record.Event.KeyEvent.dwControlKeyState == SHIFT_PRESSED); /* WM_CHAR-owned chord. */
     event.data.key.pressed = 0;

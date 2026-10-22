@@ -14,6 +14,8 @@ inventory, retention/removal decisions and eventual verification evidence.
 final lifecycle evidence and explicitly pending acceptance checks.
 [S6 cleanup](evidence/m0-t448-s6-unused-monitor-cleanup.md) records unused
 interface removal, change-only monitor behavior and verification results.
+[S8 library import](evidence/m0-t448-s8-shared-library-import.md) records the
+pinned source closure, consumer migration, actual runs and remaining gates.
 
 [T447 pre-closure snapshot](evidence/m0-t447-pre-closure-status.md) preserves
 the final active packet before owner-directed transfer closure. The

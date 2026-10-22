@@ -9,7 +9,7 @@
 #include "lib/kvm-window/window.h"
 typedef struct context_prefix {
     kvm_window *component;
-    kvm_window_frame frame;
+    const kvm_window_frame *frame;
     void *dc,*bitmap,*previous;
     uint32_t *pixels,width,height;
 } context_prefix;
@@ -27,8 +27,8 @@ static BOOL CALLBACK visit(HWND window,LPARAM unused) {
     context=malloc(sizeof(*context));if(!context){CloseHandle(process);return FALSE;}
     ULONG_PTR address=(ULONG_PTR)GetWindowLongPtrA(window,GWLP_USERDATA);
     if(!address || !ReadProcessMemory(process,(void*)address,context,sizeof(*context),&got) || got!=sizeof(*context))goto done;
-    printf("pid=%lu non-atomic=1 graphics=%u valid=%u width=%u height=%u context=%p pixels=%p frame-size=%zu\n",
-        pid,context->frame.graphics,context->frame.valid,context->width,context->height,(void*)address,(void*)context->pixels,sizeof(context->frame));
+    printf("pid=%lu non-atomic=1 frame=%p width=%u height=%u context=%p pixels=%p\n",
+        pid,(void*)context->frame,context->width,context->height,(void*)address,(void*)context->pixels);
     if(!context->pixels || !context->width || !context->height || context->width>4096 || context->height>4096)goto done;
     size=context->width*context->height*4;pixels=malloc(size);if(!pixels)goto done;
     if(ReadProcessMemory(process,context->pixels,pixels,size,&got)&&got==size) {

@@ -1375,7 +1375,7 @@ if ($Architecture -eq 'x86') {
         }
         if ($row.compile) { $frontendWindowSources += 'src/ntcon-exe/' + $row.path }
     }
-    $frontendWindowSources += @('window_frame.c','text_frame.c','window_controller.c','window_input_queue.c','window_keyboard.c','window_mouse.c') |
+    $frontendWindowSources += @('window_frame.c','window_controller.c','window_input_queue.c','window_keyboard.c','window_mouse.c') |
         ForEach-Object { 'src/ntcon-exe/' + $_ }
     $windowObjects = @()
     foreach ($source in $frontendWindowSources) {
@@ -1535,7 +1535,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/tests/ntvwm_next_command.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntvwm_next_command_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build ntvwm-next-command-test.exe: console_test_link obj/tests/ntvwm_next_command.obj obj/ntvwm/next_command.obj')
-    foreach ($kind in @('library','controller','keyboard','mouse')) {
+    foreach ($kind in @('library','controller','keyboard','mouse','lifetime','payload')) {
         $source = Join-Path $root ('tests/component-integration/frontend_window_' + $kind + '_test.c')
         $object = 'obj/tests/frontend_window_' + $kind + '.obj'
         $graph.Add('build ' + $object + ': cc ' + (NinjaPath $source))

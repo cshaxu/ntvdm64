@@ -125,26 +125,26 @@ static DWORD delivered_modifiers(const frontend_window_keyboard_state *state,
     const kvm_input_event *event, DWORD native)
 {
     unsigned changed = event->data.key.scan_code |
-        ((event->data.key.flags & KVM_KEY_FLAG_EXTENDED) ? 256u : 0u);
+        ((event->data.key.flags & BASE_KEY_FLAG_EXTENDED) ? 256u : 0u);
     BOOL down = event->data.key.pressed != 0;
     DWORD result = native & KEY_LOCK_BITS, sides;
     /* kvm-base can emit a synthetic physical chord for WM_CHAR. Its modifier
      * facts, not the physical host state, govern that chord. Preserve side
      * identity from delivered scans, using the UI snapshot only when no scan
      * established it (for example a modifier already held on focus entry). */
-    if (event->data.key.modifiers & KVM_KEY_MODIFIER_CONTROL) {
+    if (event->data.key.modifiers & BASE_KEY_MODIFIER_CONTROL) {
         sides = (prospective_down(state, 0x1d, changed, down) ? LEFT_CTRL_PRESSED : 0) |
             (prospective_down(state, 0x11d, changed, down) ? RIGHT_CTRL_PRESSED : 0);
         if (!sides) sides = native & (LEFT_CTRL_PRESSED | RIGHT_CTRL_PRESSED);
         result |= sides ? sides : LEFT_CTRL_PRESSED;
     }
-    if (event->data.key.modifiers & KVM_KEY_MODIFIER_ALT) {
+    if (event->data.key.modifiers & BASE_KEY_MODIFIER_ALT) {
         sides = (prospective_down(state, 0x38, changed, down) ? LEFT_ALT_PRESSED : 0) |
             (prospective_down(state, 0x138, changed, down) ? RIGHT_ALT_PRESSED : 0);
         if (!sides) sides = native & (LEFT_ALT_PRESSED | RIGHT_ALT_PRESSED);
         result |= sides ? sides : LEFT_ALT_PRESSED;
     }
-    if (event->data.key.modifiers & KVM_KEY_MODIFIER_SHIFT) result |= SHIFT_PRESSED;
+    if (event->data.key.modifiers & BASE_KEY_MODIFIER_SHIFT) result |= SHIFT_PRESSED;
     return result;
 }
 
@@ -173,7 +173,7 @@ BOOL frontend_window_keyboard_record(const kvm_input_event *event,
     } else if (event->type == KVM_EVENT_KEY) {
         scan = event->data.key.scan_code;
         if (!scan || scan > 0xffu) { SetLastError(ERROR_INVALID_DATA); return FALSE; }
-        if (event->data.key.flags & KVM_KEY_FLAG_EXTENDED) {
+        if (event->data.key.flags & BASE_KEY_FLAG_EXTENDED) {
             scan |= 0xe000u;
             key->dwControlKeyState |= ENHANCED_KEY;
         }
@@ -182,11 +182,11 @@ BOOL frontend_window_keyboard_record(const kvm_input_event *event,
          * Pause and PrintScreen share historical scan identities with other
          * keys, so preserve the normalized physical key's explicit identity. */
         switch (event->data.key.key) {
-        case KVM_KEY_CONTROL: vk = VK_CONTROL; break;
-        case KVM_KEY_ALT: vk = VK_MENU; break;
-        case KVM_KEY_SHIFT: vk = VK_SHIFT; break;
-        case KVM_KEY_PAUSE: vk = VK_PAUSE; break;
-        case KVM_KEY_PRINT_SCREEN: vk = VK_SNAPSHOT; break;
+        case BASE_KEY_CONTROL: vk = VK_CONTROL; break;
+        case BASE_KEY_ALT: vk = VK_MENU; break;
+        case BASE_KEY_SHIFT: vk = VK_SHIFT; break;
+        case BASE_KEY_PAUSE: vk = VK_PAUSE; break;
+        case BASE_KEY_PRINT_SCREEN: vk = VK_SNAPSHOT; break;
         default: break;
         }
         if (!vk) { SetLastError(ERROR_INVALID_DATA); return FALSE; }
@@ -216,7 +216,7 @@ BOOL frontend_window_keyboard_accept(frontend_window_keyboard_state *state,
     state->locks = control_state & KEY_LOCK_BITS;
     if (event->type == KVM_EVENT_KEY) {
         identity = event->data.key.scan_code |
-            ((event->data.key.flags & KVM_KEY_FLAG_EXTENDED) ? 256u : 0u);
+            ((event->data.key.flags & BASE_KEY_FLAG_EXTENDED) ? 256u : 0u);
         if (record->Event.KeyEvent.bKeyDown) {
             if (!state->held[identity].bKeyDown) ++state->held_count;
             state->held[identity] = record->Event.KeyEvent;

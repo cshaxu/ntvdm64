@@ -11,12 +11,12 @@ struct frontend_window_controller {
     frontend_window_callbacks callbacks;
     frontend_window_input_queue input;
     kvm_window *window;
-    kvm_window_frame *frame;
+    kvm_frame_exchange *frames;
     HANDLE wake;
     volatile LONG failure,requested_console,requested_mouse_release;
     LONG epoch;
     frontend_display_mode display;
-    BOOL graphics,frame_dirty,route_known,route_window,route_graphics;
+    BOOL graphics,frame_valid,frame_dirty,route_known,route_window,route_graphics;
     char title[KVM_WINDOW_TITLE_CAPACITY];
 };
 
@@ -27,6 +27,25 @@ static DWORD status_error(lib_status status)
     if(status==LIB_STATUS_INVALID_ARGUMENT)return ERROR_INVALID_PARAMETER;
     if(status==LIB_STATUS_UNSUPPORTED)return ERROR_NOT_SUPPORTED;
     return ERROR_IO_DEVICE;
+}
+/* Console title producers retain their existing ACP wire. The imported
+ * Window API is UTF-8. Owner-approved cosmetic truncation retains the longest
+ * complete UTF-8 prefix; the producer title and wire remain unchanged. */
+static DWORD encode_title(const char *title,char output[KVM_WINDOW_TITLE_CAPACITY])
+{
+    WCHAR wide[KVM_WINDOW_TITLE_CAPACITY];
+    char encoded[3*KVM_WINDOW_TITLE_CAPACITY];int bytes;size_t length;
+    if(!title || strlen(title)>=KVM_WINDOW_TITLE_CAPACITY)return ERROR_INVALID_PARAMETER;
+    if(!MultiByteToWideChar(CP_ACP,0,title,-1,wide,ARRAYSIZE(wide)))return GetLastError();
+    bytes=WideCharToMultiByte(CP_UTF8,0,wide,-1,encoded,sizeof(encoded),NULL,NULL);
+    if(!bytes)return GetLastError();
+    length=(size_t)bytes-1;
+    if(length>=KVM_WINDOW_TITLE_CAPACITY) {
+        length=KVM_WINDOW_TITLE_CAPACITY-1;
+        while(((unsigned char)encoded[length]&0xc0)==0x80)--length;
+    }
+    memcpy(output,encoded,length);output[length]=0;
+    return ERROR_SUCCESS;
 }
 static void fail(frontend_window_controller *owner,DWORD error)
 {
@@ -83,17 +102,18 @@ static DWORD route(frontend_window_controller *owner,BOOL window)
 }
 static DWORD close_window(frontend_window_controller *owner)
 {
-    DWORD error=status_error(kvm_window_destroy(owner->window));
-    if(error)return error; /* Keep live callback storage on failed join. */
+    DWORD error=status_error(kvm_window_destroy(owner->window)),next;
+    /* Every normal return has joined and consumed the library object. */
     owner->window=NULL;
-    error=drain_input(owner); /* Join includes final source-retirement event. */
-    if(error)return error;
-    return route(owner,FALSE);
+    next=drain_input(owner); /* Join includes final source-retirement event. */
+    if(!error)error=next;
+    next=route(owner,FALSE);
+    return error ? error : next;
 }
 static DWORD apply(frontend_window_controller *owner)
 {
     DWORD error;
-    BOOL want=owner->frame->valid &&
+    BOOL want=owner->frame_valid &&
         (owner->display==FRONTEND_DISPLAY_WINDOW || owner->graphics);
     if(!want)return close_window(owner);
     if(!owner->window) {
@@ -107,11 +127,11 @@ static DWORD apply(frontend_window_controller *owner)
         options.initial_title=owner->title;
         kvm_hotkey_registry_initialize(&options.component.hotkeys);
         error=status_error(kvm_hotkey_registry_register(&options.component.hotkeys,
-            'F',KVM_KEY_MODIFIER_CONTROL|KVM_KEY_MODIFIER_ALT,"console"));
+            'F',BASE_KEY_MODIFIER_CONTROL|BASE_KEY_MODIFIER_ALT,"console"));
         if(!error)error=status_error(kvm_hotkey_registry_register(&options.component.hotkeys,
-            KVM_KEY_ENTER,KVM_KEY_MODIFIER_ALT,"console"));
+            BASE_KEY_ENTER,BASE_KEY_MODIFIER_ALT,"console"));
         if(!error)error=status_error(kvm_hotkey_registry_register(&options.component.hotkeys,
-            'M',KVM_KEY_MODIFIER_CONTROL|KVM_KEY_MODIFIER_ALT,"release-mouse"));
+            'M',BASE_KEY_MODIFIER_CONTROL|BASE_KEY_MODIFIER_ALT,"release-mouse"));
         if(error)return error;
         error=status_error(kvm_window_create(&owner->window,&options));
         if(error)return error;
@@ -119,7 +139,7 @@ static DWORD apply(frontend_window_controller *owner)
     }
     error=route(owner,TRUE);
     if(!error && owner->frame_dirty) {
-        error=status_error(kvm_window_publish_frame(owner->window,owner->frame));
+        error=status_error(kvm_window_publish_frame(owner->window,owner->frames));
         if(!error)owner->frame_dirty=FALSE;
     }
     return error;
@@ -128,26 +148,27 @@ DWORD frontend_window_create(frontend_window_controller **result,
     const frontend_window_callbacks *callbacks,const char *title)
 {
     frontend_window_controller *owner;
+    char encoded[KVM_WINDOW_TITLE_CAPACITY];DWORD error;
     if(!result)return ERROR_INVALID_PARAMETER;
     *result=NULL;
-    if(!callbacks || !callbacks->input || !callbacks->route || !title ||
-        strlen(title)>=KVM_WINDOW_TITLE_CAPACITY)return ERROR_INVALID_PARAMETER;
+    if(!callbacks || !callbacks->input || !callbacks->route)return ERROR_INVALID_PARAMETER;
+    error=encode_title(title,encoded);
+    if(error)return error;
     owner=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*owner));
     if(!owner)return ERROR_NOT_ENOUGH_MEMORY;
     owner->callbacks=*callbacks;
     if(!frontend_window_input_queue_create(&owner->input)) {
-        DWORD error=GetLastError();HeapFree(GetProcessHeap(),0,owner);return error;
+        error=GetLastError();HeapFree(GetProcessHeap(),0,owner);return error;
     }
     owner->wake=CreateEventW(NULL,TRUE,FALSE,NULL);
-    owner->frame=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*owner->frame));
-    if(!owner->wake || !owner->frame) {
-        DWORD error=owner->frame ? GetLastError() : ERROR_NOT_ENOUGH_MEMORY;
+    error=owner->wake ? status_error(kvm_frame_exchange_create(&owner->frames,
+        sizeof(kvm_window_frame_storage),kvm_window_frame_retire)) : GetLastError();
+    if(error) {
         if(owner->wake)CloseHandle(owner->wake);
-        if(owner->frame)HeapFree(GetProcessHeap(),0,owner->frame);
         frontend_window_input_queue_destroy(&owner->input);
         HeapFree(GetProcessHeap(),0,owner);return error;
     }
-    strcpy_s(owner->title,sizeof(owner->title),title);
+    strcpy_s(owner->title,sizeof(owner->title),encoded);
     *result=owner;return ERROR_SUCCESS;
 }
 HANDLE frontend_window_wake(frontend_window_controller *owner)
@@ -183,31 +204,40 @@ DWORD frontend_window_select(frontend_window_controller *owner,frontend_display_
     owner->display=display;
     return apply(owner);
 }
-DWORD frontend_window_present(frontend_window_controller *owner,const kvm_window_frame *frame,BOOL graphics)
+kvm_window_frame_storage *frontend_window_writer(frontend_window_controller *owner)
 {
-    if(!owner || !frame)return ERROR_INVALID_PARAMETER;
-    if(graphics && !frame->graphics)return ERROR_INVALID_DATA;
-    if(!kvm_window_frame_copy(owner->frame,frame))return ERROR_INVALID_DATA;
+    return owner ? kvm_frame_exchange_writer(owner->frames) : NULL;
+}
+DWORD frontend_window_present(frontend_window_controller *owner,BOOL graphics)
+{
+    kvm_window_frame_storage *writer=frontend_window_writer(owner);
+    if(!writer)return ERROR_INVALID_PARAMETER;
+    if(graphics && !writer->frame.graphics)return ERROR_INVALID_DATA;
+    if(kvm_window_frame_commit(owner->frames)!=LIB_STATUS_OK)return ERROR_INVALID_DATA;
+    owner->frame_valid=TRUE;
     owner->frame_dirty=TRUE;
     owner->graphics=graphics!=FALSE;
     return frontend_window_poll(owner);
 }
 DWORD frontend_window_set_title(frontend_window_controller *owner,const char *title)
 {
-    DWORD error;
-    if(!owner || !title || strlen(title)>=sizeof(owner->title))return ERROR_INVALID_PARAMETER;
-    if(!strcmp(owner->title,title))return ERROR_SUCCESS;
+    DWORD error;char encoded[KVM_WINDOW_TITLE_CAPACITY];
+    if(!owner)return ERROR_INVALID_PARAMETER;
+    error=encode_title(title,encoded);
+    if(error)return error;
+    if(!strcmp(owner->title,encoded))return ERROR_SUCCESS;
     if(owner->window) {
-        error=status_error(kvm_window_set_title(owner->window,title));
+        error=status_error(kvm_window_set_title(owner->window,encoded));
         if(error)return error;
     }
-    strcpy_s(owner->title,sizeof(owner->title),title);
+    strcpy_s(owner->title,sizeof(owner->title),encoded);
     return ERROR_SUCCESS;
 }
 DWORD frontend_window_clear(frontend_window_controller *owner)
 {
     if(!owner)return ERROR_INVALID_PARAMETER;
-    owner->frame->valid=LIB_FALSE;
+    kvm_frame_exchange_invalidate(owner->frames);
+    owner->frame_valid=FALSE;
     owner->graphics=FALSE;
     return frontend_window_poll(owner);
 }
@@ -216,12 +246,11 @@ DWORD frontend_window_destroy(frontend_window_controller *owner)
     DWORD error;
     if(!owner)return ERROR_SUCCESS;
     error=close_window(owner);
-    if(error)return error;
-    CloseHandle(owner->wake);
+    if(!CloseHandle(owner->wake) && !error)error=GetLastError();
     frontend_window_input_queue_destroy(&owner->input);
-    HeapFree(GetProcessHeap(),0,owner->frame);
+    kvm_frame_exchange_destroy(owner->frames);
     HeapFree(GetProcessHeap(),0,owner);
-    return ERROR_SUCCESS;
+    return error;
 }
 BOOL frontend_window_visible(const frontend_window_controller *owner)
 {

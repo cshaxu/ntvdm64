@@ -6,12 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
-#include "lib/kvm-window/frame_interface.h"
-
-typedef struct observed_prefix {
-    void *owner;
-    kvm_window_frame frame;
-} observed_prefix;
+#include "window_frame_observation.h"
 typedef struct observation {
     FILE *log;
     ULONGLONG started;
@@ -23,23 +18,20 @@ static BOOL CALLBACK window_sample(HWND window,LPARAM parameter)
 {
     observation *state=(observation *)parameter;
     WCHAR name[128];RECT client,outer;DWORD pid;
-    HANDLE process;ULONG_PTR address;SIZE_T copied;
-    BYTE data[offsetof(kvm_window_frame,text)+sizeof(kvm_window_text_frame)];
-    kvm_window_frame *frame=(kvm_window_frame *)data;
+    HANDLE process;observed_window_frame sample;
     char current[256];
     if(!GetClassNameW(window,name,ARRAYSIZE(name)) || wcscmp(name,L"LibKvmWindow"))return TRUE;
     if(!GetClientRect(window,&client) || !GetWindowRect(window,&outer))return TRUE;
     GetWindowThreadProcessId(window,&pid);
     process=OpenProcess(PROCESS_VM_READ,FALSE,pid);
     if(!process)return TRUE;
-    address=(ULONG_PTR)GetWindowLongPtrW(window,GWLP_USERDATA)+offsetof(observed_prefix,frame);
-    if(ReadProcessMemory(process,(const void *)address,data,sizeof(data),&copied) && copied==sizeof(data) && frame->valid) {
-        if(frame->graphics)
+    if(observer_window_frame_read(process,window,&sample)) {
+        if(sample.frame.graphics)
             sprintf_s(current,sizeof(current),"hwnd=%p client=%ldx%ld graphics=%ux%u",window,
-                client.right,client.bottom,frame->image.width,frame->image.height);
+                client.right,client.bottom,sample.graphics.width,sample.graphics.height);
         else
             sprintf_s(current,sizeof(current),"hwnd=%p client=%ldx%ld text=%ux%u font=%u",window,
-                client.right,client.bottom,frame->text.base.text_columns,frame->text.base.text_rows,frame->text.base.font_height);
+                client.right,client.bottom,sample.text.text_columns,sample.text.text_rows,sample.text.font_height);
         ++state->samples;
         if(strcmp(current,state->previous)) {
             fprintf(state->log,"%llu ms %s\n",GetTickCount64()-state->started,current);

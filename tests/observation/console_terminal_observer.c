@@ -191,40 +191,31 @@ static int s36_close_window(void)
     s36_note("close-window",IsWindow(window)?"still-open":"closed");
     return !IsWindow(window);
 }
-typedef struct s37_window_prefix {
-    void *owner;
-    kvm_window_frame frame;
-} s37_window_prefix;
+#include "window_frame_observation.h"
 static int s37_unrequested_30,s37_requested_100x40,s37_returned_80x43;
 static int s37_window_geometry(char *last,size_t capacity)
 {
     HWND window=FindWindowW(L"LibKvmWindow",NULL);
-    RECT client;DWORD pid;HANDLE process;SIZE_T copied;
-    BYTE data[offsetof(kvm_window_frame,text)+sizeof(kvm_window_text_frame)];
-    kvm_window_frame *frame=(kvm_window_frame *)data;
-    ULONG_PTR address;
+    RECT client;DWORD pid;HANDLE process;observed_window_frame sample;
     char current[160],line[200];DWORD written;
     if(!window || !GetClientRect(window,&client))return 0;
     GetWindowThreadProcessId(window,&pid);
     process=OpenProcess(PROCESS_VM_READ,FALSE,pid);
     if(!process)return 0;
-    address=(ULONG_PTR)GetWindowLongPtrW(window,GWLP_USERDATA)+
-        offsetof(s37_window_prefix,frame);
-    if(!ReadProcessMemory(process,(const void *)address,data,sizeof(data),&copied) ||
-        copied!=sizeof(data) || !frame->valid){CloseHandle(process);return 0;}
-    if(frame->graphics)
+    if(!observer_window_frame_read(process,window,&sample)){CloseHandle(process);return 0;}
+    if(sample.frame.graphics)
         snprintf(current,sizeof(current),"client=%ldx%ld graphics=%ux%u",
-            client.right,client.bottom,frame->image.width,frame->image.height);
+            client.right,client.bottom,sample.graphics.width,sample.graphics.height);
     else
         snprintf(current,sizeof(current),"client=%ldx%ld text=%ux%u font=%u",
-            client.right,client.bottom,frame->text.base.text_columns,
-            frame->text.base.text_rows,frame->text.base.font_height);
-    if(!frame->graphics) {
-        if(frame->text.base.text_columns==80 && frame->text.base.text_rows==30)
+            client.right,client.bottom,sample.text.text_columns,
+            sample.text.text_rows,sample.text.font_height);
+    if(!sample.frame.graphics) {
+        if(sample.text.text_columns==80 && sample.text.text_rows==30)
             s37_unrequested_30=1;
-        if(frame->text.base.text_columns==100 && frame->text.base.text_rows==40)
+        if(sample.text.text_columns==100 && sample.text.text_rows==40)
             s37_requested_100x40=1;
-        if(frame->text.base.text_columns==80 && frame->text.base.text_rows==43)
+        if(sample.text.text_columns==80 && sample.text.text_rows==43)
             s37_returned_80x43=1;
     }
     CloseHandle(process);

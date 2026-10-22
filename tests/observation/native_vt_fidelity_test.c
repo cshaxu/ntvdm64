@@ -53,7 +53,7 @@ static void inspect(frontend_session *frontend,HANDLE source,HANDLE visible,void
     ntvwm_capture capture={0};CHAR_INFO cells[2000],oracle[2000],shown[2000];
     CONSOLE_SCREEN_BUFFER_INFOEX info={sizeof(info)},projected={sizeof(projected)};
     console_text_style font={0};console_video_description description;frontend_video video={0};
-    kvm_window_frame *frame=calloc(1,sizeof(*frame));BYTE *payload=NULL;
+    kvm_window_frame_storage *frame=calloc(1,sizeof(*frame));BYTE *payload=NULL;
     DWORD error,count=0,offset=0;SMALL_RECT region;COORD size={80,25},zero={0,0};
     unsigned i,x,y;lib_u32 width,height,*pixels=NULL;lib_bool valid=0;kvm_window_rect changed;
     CHECK(frame!=NULL);if(!frame)return;
@@ -74,18 +74,18 @@ static void inspect(frontend_session *frontend,HANDLE source,HANDLE visible,void
     CHECK(frontend_video_begin(&video,1,&description)==0);
     CHECK(frontend_video_data(&video,1,0,payload,description.bytes)==0);
     CHECK(frontend_window_decode_frame(&video,frame)==0);
-    CHECK(kvm_window_frame_size(frame,&width,&height));
+    CHECK(kvm_window_frame_size(&frame->frame,&width,&height));
     pixels=calloc((size_t)width*height,sizeof(*pixels));CHECK(pixels!=NULL);if(!pixels)goto done;
-    CHECK(kvm_window_render_frame(frame,pixels,width,height,&valid,&changed));
+    CHECK(kvm_window_render_frame(&frame->frame,pixels,width,height,&valid,&changed));
     CHECK(frontend_session_video(frontend,owner,&video,TRUE)==0);
     CHECK(GetConsoleScreenBufferInfoEx(visible,&projected));
     region=(SMALL_RECT){projected.srWindow.Left,projected.srWindow.Top,
         (SHORT)(projected.srWindow.Left+79),(SHORT)(projected.srWindow.Top+24)};
     CHECK(ReadConsoleOutputW(visible,shown,size,zero,&region));
     CHECK(!memcmp(projected.ColorTable,info.ColorTable,sizeof(info.ColorTable)));
-    for(i=0;i<16;++i)CHECK(description.palette[i]==rgb(info.ColorTable[i]) && frame->text.base.text_palette[i]==rgb(info.ColorTable[i]));
+    for(i=0;i<16;++i)CHECK(description.palette[i]==rgb(info.ColorTable[i]) && frame->data.text->base.text_palette[i]==rgb(info.ColorTable[i]));
     for(y=0;y<25;++y)for(x=0;x<80;++x){
-        WORD a=cells[y*80+x].Attributes&255;const kvm_text_cell *c=&frame->text.base.cells[y*KVM_TEXT_COLUMNS+x];
+        WORD a=cells[y*80+x].Attributes&255;const kvm_text_cell *c=&frame->data.text->base.cells[y*frame->data.text->base.stride+x];
         CHECK((shown[y*80+x].Attributes&255)==a);
         CHECK(c->foreground==(a&15) && c->background==(a>>4));
         CHECK(pixels[(y*16)*width+x*8]==rgb(info.ColorTable[a&15]));
@@ -101,7 +101,7 @@ done:
     /* Session retains the video pointer until acknowledged unbind. */
     CHECK(frontend_session_bind(frontend,owner,FALSE)==0);
     ntvwm_capture_end(&capture);frontend_video_dispose(&video);
-    if(payload)HeapFree(GetProcessHeap(),0,payload);free(pixels);free(frame);
+    if(payload)HeapFree(GetProcessHeap(),0,payload);free(pixels);kvm_window_frame_release(frame);free(frame);
 }
 static void raw_outputs(const char *exe,const char *root)
 {

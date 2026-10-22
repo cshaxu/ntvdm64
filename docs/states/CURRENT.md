@@ -4,14 +4,31 @@
 
 **Active: M0 T448 S8**
 
+S8 P1 is implemented, verified and published; delivery commit/push and clean
+checkout verification precede the owner acceptance handoff. The
+[S8 ledger](../etc/evidence/m0-t448-s8-shared-library-import.md) records52
+byte-exact upstream files,18 translation units, direct exchange-writer decoding,
+lazy actual-size payloads and removal of redundant staging. No guest or original
+mirror changes. Owner-approved title truncation keeps a complete UTF-8 prefix
+(127 bytes plus NUL); producer titles/protocol remain unchanged.
+
+Final build-r20 passes all13 components and1454 unchanged intermediates.
+Both-width fixtures, channel/text, all eight CAF cases, DOS17 and Minesweeper
+pass against package-r21. WRITE/SOL retain explicit startup-only limits.
+An initial r6 cmd SelfDelete readiness failure remains unassigned; later fixed
+repeats and two full matrices passed without claiming its cause repaired.
+All13 images are published/hash-verified at assets/release and O:/winnt/system32;
+publication-r20 retains a rollback backup. Source review and governance pass.
+Scratch/evidence remains in build/t448-s8 pending acceptance and disposition;
+stable Ninja/ccache caches are retained. T448 remains open for owner acceptance.
 Owner admits S8 on 2026-10-22 to import the audited public-library closure
 unchanged and adapt NTCON. S7 reaches its bounded audit-only conclusion;
 no import or downstream runtime qualification was performed in S7. T448
 remains open. S8 pins SoftPC 0d9f1803ee04bd89bd6150306912a3e8674d0a83;
 no moving HEAD or dirty upstream inputs. See the [S7 audit and S8 handoff](../etc/evidence/m0-t448-s7-shared-library-import-audit.md#s7-conclusion-and-s8-handoff)
 and [accepted S6 and prior T audit](../etc/evidence/m0-t448-s6-unused-monitor-cleanup.md#owner-acceptance-and-t-closure-audit).
-The delivered baseline is d5d0dc243, protocol64. All thirteen committed and
-installed images were rechecked against the release manifest and agree.
+The pre-S8 delivered baseline was d5d0dc243, protocol64. The S8 release manifest
+now records the tested and published complete thirteen-image package.
 The proposed WOW read-time clock optimization was not implemented; the owner
 accepts retaining the existing publisher after its source feasibility review.
 

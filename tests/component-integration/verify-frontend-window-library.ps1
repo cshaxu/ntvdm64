@@ -26,7 +26,6 @@ New-Item -ItemType Directory -Force -Path $output | Out-Null
 & (Join-Path $repo 'tools/build/Generate-FrontendFont.ps1') -OutputFile (Join-Path $output 'native_pc_font.h')
 $objects = @()
 $sources += Join-Path $owner 'window_frame.c'
-$sources += Join-Path $owner 'text_frame.c'
 $sources += Join-Path $owner 'window_controller.c'
 $sources += Join-Path $owner 'window_input_queue.c'
 $sources += Join-Path $owner 'window_keyboard.c'

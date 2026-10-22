@@ -58,7 +58,7 @@ static void dos_contract(void)
     p=payload(&out,1);assert(p.dx==INT_MIN && p.dy==INT_MAX && !p.buttons);
     assert(p.width==640 && p.height==400 && p.control==input.control_state);
     input.event.data.mouse.delta_x=input.event.data.mouse.delta_y=0;
-    input.event.data.mouse.buttons=KVM_MOUSE_BUTTON_RIGHT;
+    input.event.data.mouse.buttons=BASE_MOUSE_BUTTON_RIGHT;
     assert(!frontend_window_mouse_dispatch(&state,&input,sink,&out));
     p=payload(&out,2);assert(p.action==CONSOLE_MOUSE_MOVE && p.buttons==2 && !p.dx && !p.dy);
     input.event.type=KVM_EVENT_INPUT_RESET;saved=state;out.error=ERROR_BROKEN_PIPE;

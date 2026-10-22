@@ -6,9 +6,8 @@
 
 #include "lib/types/atomic.h"
 
-/* DIVERGENCE T448-S3: destruction joins actual worker exit, without expiry. */
-#define KVM_COMPONENT_DESTROY_TIMEOUT_MS LIB_UINT32_MAX
-typedef lib_status (*kvm_component_join_fn)(kvm_component *component, lib_u32 timeout_ms);
+/* Every return guarantees worker/callback quiescence, including cleanup errors. */
+typedef lib_status (*kvm_component_join_fn)(kvm_component *component);
 typedef void (*kvm_component_dispose_fn)(kvm_component *component);
 
 struct kvm_component {
@@ -27,11 +26,11 @@ struct kvm_component {
 
 lib_status kvm_component_initialize(kvm_component *component,
     const kvm_component_options *options, kvm_component_join_fn join_worker,
-    kvm_component_dispose_fn dispose, void *frame_storage, lib_size frame_capacity);
-/* Copied opaque payload. The leaf validates its value before this entry.
+    kvm_component_dispose_fn dispose);
+/* Notify the borrowed exchange after the producer's typed commit.
  * STOP or terminal fault rejects later publications with INVALID_STATE. */
 lib_status kvm_component_publish_frame(kvm_component *component,
-    const void *frame, lib_size bytes);
+    kvm_frame_exchange *frames);
 /* A source identity is never recycled.  Zero is the permanent exhausted
  * sentinel, rather than the beginning of a second allocation epoch. */
 lib_status kvm_component_allocate_source_identity(lib_atomic_u64 *next,

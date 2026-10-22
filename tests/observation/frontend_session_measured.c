@@ -9,8 +9,8 @@
 #include "ntcon-exe/window_frame.h"
 #include "lib/kvm-window/render.h"
 #include "opennt-abi/host-compat/include/console_grid.h"
-static DWORD measured_decode(const frontend_video *,kvm_window_frame *);
-static DWORD measured_present(frontend_window_controller *,const kvm_window_frame *,BOOL);
+static DWORD measured_decode(const frontend_video *,kvm_window_frame_storage *);
+static DWORD measured_present(frontend_window_controller *,BOOL);
 DWORD measured_actual_destroy(frontend_session *);
 DWORD measured_actual_park(frontend_session *);
 DWORD measured_actual_read(frontend_session *,BOOL,INPUT_RECORD *,DWORD,DWORD *);
@@ -128,7 +128,7 @@ DWORD frontend_session_video(frontend_session *owner,const void *source,
     }
     SetLastError(error);return result;
 }
-static DWORD measured_decode(const frontend_video *video,kvm_window_frame *frame)
+static DWORD measured_decode(const frontend_video *video,kvm_window_frame_storage *frame)
 {
     BOOL enabled=worker_performance_enabled();
     LONGLONG start=enabled ? worker_performance_clock() : 0;
@@ -136,11 +136,11 @@ static DWORD measured_decode(const frontend_video *video,kvm_window_frame *frame
     if(enabled)worker_performance_record("frontend-decode",start,video->description.bytes,result);
     SetLastError(error);return result;
 }
-static DWORD measured_present(frontend_window_controller *window,const kvm_window_frame *frame,BOOL graphics)
+static DWORD measured_present(frontend_window_controller *window,BOOL graphics)
 {
     BOOL enabled=worker_performance_enabled();
     LONGLONG start=enabled ? worker_performance_clock() : 0;
-    DWORD result=frontend_window_present(window,frame,graphics),error=GetLastError();
+    DWORD result=frontend_window_present(window,graphics),error=GetLastError();
     /* This is library presentation completion, not a physical display scan. */
     if(enabled)worker_performance_record("frontend-present",start,0,result);
     SetLastError(error);return result;

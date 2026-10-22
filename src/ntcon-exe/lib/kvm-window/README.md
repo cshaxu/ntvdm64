@@ -1,24 +1,57 @@
 # kvm-window
 
+Win32 initial placement and the first content size fit the monitor work area.
+Maximize also fits that area while preserving content aspect ratio.
+Native snap fits the system-assigned client region in both dimensions. Dragging
+off top snap uses restored width; dragging off a side uses restored height,
+without a desktop cap. Only the last snap kind is retained, not another scale
+or saved rectangle. IsWindowArranged supplies side-state on Windows 10 1903+;
+older hosts retain width-led native restoration without side identification.
+Unknown sizing directions defer to native handling, not failure.
+Subsequent frame changes preserve the current scale; no separate snap scale is kept.
+Manual horizontal edges use width, vertical edges use height, and corners use
+the dominant proposed scale. Resizing has no desktop-size cap; title-bar double-click restores natural
+content dimensions even beyond the work area. Native coordinate/resource limits
+still apply. These operations change presentation size, never frame dimensions.
+
 Text cells select primary/secondary bitmaps through explicit glyph-bank values;
 foreground/background palette indices are independent, with no device bit layout.
+Enabled underline adds foreground pixels on the frame's scanline, before the
+existing surface comparison. It does not mutate fonts. One cursor may have two
+disjoint spans sharing position and phase. Painting inverts their union only;
+damage may include the gap to erase the preceding shape safely.
 
-`kvm-window` depends on `types` and `kvm-base` only. It owns one Window lifecycle and sends
+`kvm-window` depends on `types`, `base` and `kvm-base`. It uses Base's UTF-8
+validator before copying titles into its existing control FIFO. Window owns one lifecycle and sends
 copied KVM events to the application queue entry. It never includes `console-broker` or
 makes product decisions.
 
-`kvm_window_frame` contains either common text fields with two bitmap-font banks,
-or Window-owned complete indexed graphics and palette. It contains no
-Console character map. Copies include only the active text or graphics extent.
+`kvm_window_frame` contains a publication sequence and two mutually exclusive
+payload pointers: text (common cells with two bitmap-font banks) or complete
+RGB graphics (`lib_u32` numeric `0x00RRGGBB`, no alpha). Exactly one pointer is
+non-null; there is no valid flag or independent mode tag. Each producer slot is
+`kvm_window_frame_storage`: the reference and one reusable payload backing.
+The begin_text/begin_graphics helpers select that slot's own backing, without
+allocation. Do not shallow-copy storage or publish pointers into mutable input.
+Graphics stride counts pixels; visible high bytes must be zero and invalid
+colour/geometry is rejected by frame_commit before replacing pending output.
+Row padding is never drawn. Source palettes are resolved by the publisher.
+The leaf frame contains no Console character map. The producer supplies a
+four-slot exchange, writes its current writer, commits, then notifies Window.
+Window borrows the same exchange until destruction; it never copies that payload.
+The explicit diagnostic copy helper copies only the active payload into the
+destination's backing, rebinding its pointers and preserving the sequence.
 Window compares resolved colours with its existing RGB surface on consumption,
 updates changed pixels and invalidates their enclosing rectangle. Skipped frames
 need no damage history. Both text and graphics decode colours directly into the
 same pixel comparison helper, without an intermediate buffer. First frames
 and recreated surfaces require full invalidation; same-size mode transitions
 compare actual pixels. Cursor position/shape/visibility changes invalidate the
-old/new overlay rectangles separately. Stride and palette come from each frame.
+old/new overlay rectangles separately. Text retains its own colour palette.
 Native invalidation accumulates until paint; exposure redraws the surface.
-Successful acknowledgement is generation-bound. No extra previous-frame cache.
+Successful finish retains the displayed input for cursor/paint metadata until
+its replacement succeeds. Failure leaves that input retained. There is no
+separate previous-frame cache; the existing RGB surface remains Window-owned.
 
 Win32 mailbox notifications use SendNotifyMessage to the owned Window, not an
 Event-to-message bridge. Notifications coalesce; requests stay in the private
@@ -29,18 +62,23 @@ modal interaction before the worker's existing destruction/retirement tail.
 This changes only leaf-support implementation, not application APIs.
 
 The Window owns only host presentation mechanics: it draws a content text cursor
-from copied position/shape/enabled frame fields and toggles that drawing every
-250 ms while unfrozen, using one owned native Window timer. No outer-loop blink
+from copied position/shape/mode fields. DISABLED hides it; HOST toggles every
+250 ms while unfrozen, using one owned native Window timer; SOURCE draws exactly
+the supplied cursor_phase. Timer messages never advance or redraw SOURCE mode.
+Returning to HOST starts a fresh bright interval. No outer-loop blink
 timeout remains; native move/size/menu loops dispatch the same timer message.
 Timer startup/transition failures use the existing failure path. Native Window
 timer delivery advances the original 250ms phase grid, including missed periods;
 it does not restart a new 250ms interval at every delayed message. Text glyphs
-and cursor geometry use the same frame font height (8/14/16 rows, 16-row storage
-stride), so a short glyph is not drawn above an unrelated 16-row cursor cell.
+and cursor geometry use the same active frame font height (1--32 rows), with
+a fixed 32-byte glyph-slot stride. Zero height uses the Base-owned
+`KVM_TEXT_FONT_DEFAULT_HEIGHT` (16), so a short glyph is not drawn above an
+unrelated default-height cursor cell.
 Native Window destruction removes its timer; stale queued ticks cannot bypass
 frozen/due checks.
-Checked destroy uses the shared 5000 ms join contract; a failed join retains the
-component and all callback dependencies, never freeing a live worker.
+Checked destroy requests terminal stop, wakes the native message wait, then
+joins the actual worker exit. If exit cannot be confirmed, the process terminates
+without application callbacks; no live worker is freed or returned as a half object.
 `freeze()` submits one control; the Window worker prevents capture, releases any
 capture, and holds the cursor at its current drawn state; `unfreeze()` resumes
 the blink but waits for a later client-area click before it captures. A real
@@ -71,7 +109,9 @@ input failure releases capture; reentry requires another click.
 All post-start worker exits stop input, release capture, close the
 Window and retire the source once quiescent, before releasing storage. First
 failure is reported on the detecting thread, not delayed until this cleanup.
-Failed native disposal retains ownership and returns failure from join/destroy.
+Destroy consumes the object on every normal return, including native cleanup
+failure. Independent cleanup continues; a bitmap still selected into a DC is
+not deleted. Such post-join resource errors do not trigger process termination.
 Paint acquisition, pixel transfer, cursor inversion and redraw-request failures
 use that same terminal path, without retry loops. A successful BeginPaint is
 always paired with EndPaint even if drawing fails. Empty/minimized content

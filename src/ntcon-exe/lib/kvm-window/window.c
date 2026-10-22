@@ -1,7 +1,8 @@
 #include "lib/kvm-window/window.h"
+#include "lib/base/text_interface.h"
 
-static lib_status kvm_window_component_stop(kvm_component *base, lib_u32 timeout_ms)
-{ return kvm_window_worker_join((kvm_window *)base, timeout_ms); }
+static lib_status kvm_window_component_stop(kvm_component *base)
+{ return kvm_window_worker_join((kvm_window *)base); }
 
 static void kvm_window_component_dispose(kvm_component *base)
 {
@@ -28,6 +29,7 @@ lib_status kvm_window_create(kvm_window **out_window,
     if (options == LIB_NULL ||
         options->initial_title == LIB_NULL ||
         lib_memory_find(options->initial_title, '\0', KVM_WINDOW_TITLE_CAPACITY) == LIB_NULL ||
+        !base_text_utf8_valid(options->initial_title) ||
         options->component.input_sink == LIB_NULL ||
         options->component.failure_sink == LIB_NULL)
         return LIB_STATUS_INVALID_ARGUMENT;
@@ -37,29 +39,20 @@ lib_status kvm_window_create(kvm_window **out_window,
         lib_text_length(options->initial_title) + 1u);
     window->initial_frozen = options->initial_frozen != LIB_FALSE;
     status = kvm_component_initialize(&window->base, &options->component,
-        kvm_window_component_stop, kvm_window_component_dispose,
-        &window->pending_frame, sizeof(window->pending_frame));
+        kvm_window_component_stop, kvm_window_component_dispose);
     if (status == LIB_STATUS_OK) status = kvm_window_worker_start(window);
     if (status != LIB_STATUS_OK) {
-        /* The worker start path has either joined its failed worker or has
-         * entered the process-terminal failure path at the application edge.
-         * A normal create failure never exposes a half-created Window. */
-        if (window->worker_state == LIB_NULL)
-            kvm_window_component_dispose(&window->base);
+        kvm_window_component_dispose(&window->base);
         return status;
     }
     *out_window = window;
     return LIB_STATUS_OK;
 }
 
-lib_status kvm_window_publish_frame(kvm_window *window, const kvm_window_frame *frame)
+lib_status kvm_window_publish_frame(kvm_window *window, kvm_frame_exchange *frames)
 {
-    lib_status status;
-    if (window == LIB_NULL) return LIB_STATUS_INVALID_ARGUMENT;
-    status = kvm_window_frame_validate(frame);
-    if (status != LIB_STATUS_OK) return status;
-    return kvm_component_publish_frame(&window->base, frame,
-        kvm_window_frame_size_bytes(frame));
+    if (window == LIB_NULL || frames == LIB_NULL) return LIB_STATUS_INVALID_ARGUMENT;
+    return kvm_component_publish_frame(&window->base, frames);
 }
 
 lib_status kvm_window_destroy(kvm_window *window)
@@ -73,7 +66,7 @@ lib_status kvm_window_set_title(kvm_window *window, const char *title)
         .kind = KVM_WINDOW_CONTROL_SET_TITLE
     };
     if (title == LIB_NULL || lib_memory_find(title, '\0',
-            KVM_WINDOW_TITLE_CAPACITY) == LIB_NULL)
+            KVM_WINDOW_TITLE_CAPACITY) == LIB_NULL || !base_text_utf8_valid(title))
         return LIB_STATUS_INVALID_ARGUMENT;
     lib_memory_copy(control.payload, title, lib_text_length(title) + 1u);
     return kvm_window_enqueue(window, control);
