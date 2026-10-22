@@ -472,3 +472,54 @@ before the Console request to its service-delivered close handler, preserving
 host_applClose, ExitVDM and original zero process-exit ordering. The RPC carries
 scope, not an arbitrary frontend identity. This is the explicit correction to
 the earlier file/call inventory, not a claim that its remaining sites are done.
+
+## Owner-directed TODO triage
+
+The owner directs the following finite follow-up within T448, after S10's
+acceptance and sequential admission. This is planning, not a new active S or
+an assertion that any selected defect was reproduced or repaired. S10 removes
+the owner-selected MySMB16 performance, wide-text mouse and native-menu
+animation TODO rows. Available records do not establish a MySMB16 performance
+fix; removal is the owner's backlog disposition, not proof of resolution.
+Retain their existing historical evidence.
+
+### S11: DOS and mouse evidence
+
+Pin the current release and immutable guest hashes, inspect each original
+report and execute its actual relevant route with independent success and
+failure evidence: (1) nested DOS BAT and MEM file redirection; (2) MEM's
+reported largest executable block, including direct original DOS comparison
+and units/unsigned-result attribution; (3) INT33 SaveState/RestoreState using
+the original provider and a valid real guest state round trip. For each,
+record expected and actual output, exact scope, root cause if reproduced,
+and whether it is guest-original, original-host or project-owned. The third
+already has source and prior failing evidence; a snapshot prototype failure
+is not by itself proof of a current ordinary-path regression. Do not modify
+or rebuild the guest, or suppress an actual failure.
+
+### S12: lifecycle and input witnesses
+
+Use the existing exact witnesses and current published package to run bounded
+targeted controls for (1) native rapid interactive nonzero return, (2) two
+session management-close RPC failure, (3) outer-CMD missing initial input,
+and (4) the two pre-prompt startup timeouts. Record actual target return,
+RPC code, participant and console state, input records and failure-stage
+snapshots as applicable; never treat a timeout, missing prerequisite, or
+unrun case as a successful negative reproduction. A later passing run does
+not prove a historical failure was repaired or determine its cause.
+
+For S11 and S12, choose finite case-specific rounds and documented resource,
+desktop and time budgets before each run. If valid, representative witness
+and controls complete without recurrence, the owner authorizes removing that
+row from the active TODO while retaining the prior failed evidence and stating
+that the cause remains unknown. If the necessary environment, executable,
+fixture or observation is unavailable, explicitly report not tested and do
+not pretend nonreproduction. Reproduced cases stay tracked with their cause
+and a source-backed repair boundary; implementing any material new fix needs
+the applicable S brief, semantic authority and full product delivery gates.
+No guest changes or invented timeout/retry policy are authorized.
+
+The owner retains the separately described original defects/capability
+boundaries, the T271 reconciliation and historical documentation migration.
+The INT33 row is specifically included in S11 for fresh reproduction and
+owner-directed disposition; do not silently drop its existing proof.

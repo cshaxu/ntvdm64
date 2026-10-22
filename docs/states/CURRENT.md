@@ -13,7 +13,7 @@
 | Objective | Distinguish genuine SOL gameplay failures from desktops that cannot accommodate the existing gameplay geometry; preserve truthful evidence. |
 | Non-goals | No guest, production or mirror changes; no global sizing override; no unsupported claim that the owner's separately reported layout symptom is explained. |
 | Reference Baseline | S9 delivery; retained SOL geometry evidence and immutable original OpenNT sizing path. |
-| Files And ABI Surface | SOL observation probe/runner, focused test, current state, TODO and indexed evidence; no product ABI. |
+| Files And ABI Surface | SOL observation probe/runner, focused test, current state, owner-directed TODO removals, subsequent S plan and indexed evidence; no product ABI. |
 | Applicable Rules | Reading set, execution, source policy, guest immutability, test evidence and documentation governance. |
 | Verification | Exercise geometry decision boundaries and failure paths, compile the integration probe, run feasible real SOL integration, governance and diff review; report unavailable checks. |
 | Expected Markers | Sufficient geometry retains full gameplay assertions; geometry matching the host tracking limit reports partial coverage, never gameplay pass; unexplained resize failure remains failure. |
@@ -30,6 +30,14 @@ partial/unverified gameplay at 320-pixel screen width. Earlier r2/r3 close
 failures remain recorded, not explained or erased. Full-size gameplay was not
 rerun here. [Evidence](../etc/evidence/m0-t448-s9-console-title-handoff.md#sol-integration-geometry-follow-up)
 also distinguishes the owner's separately unmeasured layout report.
+
+Owner additionally directs TODO triage inside T448: remove the MySMB16
+performance, wide-text mouse and historical native-menu entries without
+claiming repairs; preserve original-capability limitations and T271/document
+debt; and plan bounded current-package reproduction of seven selected cases.
+The [T448 follow-up plan](../etc/operations/t448-lifecycle-plan.md#owner-directed-todo-triage)
+records S11/S12, evidence-based disposition, and unavailable-versus-nonrepro
+boundaries. S10 remains active pending owner acceptance; S11 is not yet active.
 
 S9 implements Console-title handoff for NTVWM; the [S9 evidence](../etc/evidence/m0-t448-s9-console-title-handoff.md)
 records full13/incremental, focused channel, real CAF, DOS/PIF title and
@@ -172,6 +180,9 @@ five-second policies; they are not current instructions or open S3 work.
 7. S7: SoftPC shared-library compatibility and remediation audit; bounded audit conclusion, no runtime import.
 8. S8: pinned byte-exact public-library import and NTCON integration, full verification and publication.
 9. S9: native Console title initialization and handoff, preserving app-set and restored titles.
+10. S10: SOL environment-aware integration evidence and owner-directed TODO triage planning.
+11. S11: reproduce and attribute three DOS/mouse issues; disposition only with evidence.
+12. S12: reproduce and attribute four lifecycle/input historical witnesses; disposition only with evidence.
 
 The [proposal](../proposals/proposal-ntsrv-lifecycle-authority-001.md) owns the
 finite inherited gap list. Cross-group changes must preserve a coherent working
