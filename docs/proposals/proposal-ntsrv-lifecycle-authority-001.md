@@ -150,5 +150,5 @@ authority changes; CURRENT owned the S8 packet.
 Following S8 functional acceptance, the owner admits S9 to correct the NTVWM
 CAF carrier caption. The [S9 evidence](../etc/evidence/m0-t448-s9-console-title-handoff.md)
 records the existing Console I/O handoff, title ownership, regression coverage
-and delivery; CURRENT owns the active packet. No guest or lifecycle authority
-is transferred.
+and delivery; the owner approved S9 closure while T448 remains open. No guest
+or lifecycle authority is transferred.

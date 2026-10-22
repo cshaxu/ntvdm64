@@ -2,13 +2,13 @@
 
 ## Current Work
 
-**Active: M0 T448 S9**
+**No active numeric M/T/S packet.** T448 remains open after owner-approved S9 closure; T closure has not been approved.
 
 S9 implements Console-title handoff for NTVWM; the [S9 evidence](../etc/evidence/m0-t448-s9-console-title-handoff.md)
 records full13/incremental, focused channel, real CAF, DOS/PIF title and
 runtime results. The full thirteen-image package is published and hash-checked
 at assets/release and O:/winnt/system32; the delivery commit records its
-identity, and owner acceptance remains.
+identity. The owner approved S9 closure; this is not T closure.
 
 S8 P1 is delivered at b3ee596e4ac85e1a223af24a5ccd410369d6bce3, pushed to
 origin/main with a clean checkout and all13 installed/released hashes rechecked.
@@ -93,11 +93,11 @@ Only the three approved five-second policies remain: bootstrap, empty-service
 retirement and original Console-close grace. Normal execution has no deadline;
 service loss permits local cleanup, never reconnection or task replay.
 
-## Active Packet
+## S9 Closure Record
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T448 S9; Ordinary Mode, single person implementer/reviewer; no subagents. |
+| Identifier Mode | M0 T448 S9; Ordinary Mode, single person implementer/reviewer; no subagents. Closed by owner approval. |
 | Candidate Proposal | [NTSRV lifecycle authority](../proposals/proposal-ntsrv-lifecycle-authority-001.md). |
 | Admission And Approval | Owner accepts S8 functionality, reports CAF title showing ntvwm.exe, and explicitly requests a fix. |
 | Objective | Restore correct Console title initialization and title handoff for native CUI without exposing the carrier name or overriding application title changes. |
@@ -110,7 +110,7 @@ service loss permits local cleanup, never reconnection or task replay.
 | Asset Needs | Existing source, isolated package and immutable guest assets; prior S8 evidence and rollback package. |
 | Reporting Requirements | Actual title authority, handoff and failure semantics, tests and limits, full package hashes and code/mirror delta. Scratch build/t448-s8 reused for this S: 2GiB, two hours per run, investigate after ten minutes without progress; retain stable caches. |
 | Stop Conditions | New observable semantic retreat, missing original-source authority or material scope expansion requires owner decision. |
-| Exit Criteria | Required title/lifecycle tests pass; all13 images published/hash-verified at assets/release and configured system32, reviewed commit/push and clean worktree, then owner acceptance. |
+| Exit Criteria | Required title/lifecycle tests pass; all13 images published/hash-verified at assets/release and configured system32; delivery commit d8a8a9d4a pushed and clean worktree verified; owner approved S closure. |
 | Original Owner Request | Fix the CAF title shown as ntvwm.exe; verify whether NTVDM has the same problem. |
 | Similar-Issue Sweep | DOS shared Console, PIF title, native nested and app-set titles, channel ownership and restore. |
 

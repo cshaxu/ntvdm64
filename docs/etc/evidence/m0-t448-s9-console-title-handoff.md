@@ -58,5 +58,7 @@ passing these tests does not establish all applications' title behavior or
 all concurrent handoff interleavings. The complete thirteen-image candidate
 was published to `assets/release` and `O:/winnt/system32`, and both destinations
 were checked against candidate hashes (`s9-publication.json`). The
-`s9-publication-backup` retains the prior package. The delivery commit carries
-the sources and release manifest; S9 remains active pending owner acceptance.
+`s9-publication-backup` retains the prior package. Delivery commit `d8a8a9d4a`
+contains the sources and release manifest and was pushed to `origin/main`.
+The owner subsequently approved S9 closure. This approval does not close T448
+or expand the stated test coverage.
