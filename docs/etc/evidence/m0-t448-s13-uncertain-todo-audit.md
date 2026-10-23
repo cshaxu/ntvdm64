@@ -194,3 +194,16 @@ The inherited trace SHA-256 is
 `12bf1345b4d76c15dcdfc8d0b60f4a138d38c9df12e6e65cd7aff16f69528239`;
 the combined inherited/control trace is
 `e6f52ad11cf1621e7438bcff4a6a948756eb1a5d7ae6245b0cff25d340a7053b`.
+
+## Owner-directed S14 handoff
+
+The owner requests that S13-reproduced work be packaged for S14. The reproduced
+inherited-environment startup failure and its DOS/native relaunch scenarios
+form one bounded handoff, with the direct attribution and control limitations
+above. [S14's planned scope](../operations/t448-lifecycle-plan.md#s14-s13-reproduced-startup-failure)
+requires a policy-compatible host-side assessment without guest changes or
+unapproved environment manipulation. The existing original-guest P1 TODO is
+the canonical retained limitation, not a second independently observed bug.
+The unobserved game crash, SOL layout report and unavailable COM peer are not
+claimed as reproduced or transferred under this handoff. S13 remains active
+pending its owner acceptance; this plan does not admit S14 as active.

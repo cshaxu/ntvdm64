@@ -575,6 +575,33 @@ snapshots as applicable; never treat a timeout, missing prerequisite, or
 unrun case as a successful negative reproduction. A later passing run does
 not prove a historical failure was repaired or determine its cause.
 
+### S14: S13-reproduced startup failure
+
+Owner-directed follow-on, planned rather than an additional active packet:
+the current inherited-environment DOS startup fails before its first prompt.
+The outer-CMD relaunch and rapid DOS/native sequences are witnessed scenarios,
+not independently established defects. The host-only diagnostic directly
+observes the original COMMAND discarded-INIT `EnvSiz` overwrite in its own
+run; it does not establish that every earlier timeout had the same cause.
+Inputs, hashes, controls and limits are in the [S13 evidence](../evidence/m0-t448-s13-uncertain-todo-audit.md#direct-guest-state-attribution-of-the-current-inherited-environment-failure).
+
+Audit whether a source-supported host-side remedy can preserve original
+semantics and unchanged guest bytes. Do not modify, rebuild or hot-patch the
+guest, filter or truncate the environment, inject `/E:`, force DOS=HIGH, or
+add an allocator special case. Do not represent the original guest defect as
+a proven host defect. Any new observable semantic retreat requires separate
+approval. If no compatible remedy is demonstrated, document the evidence and
+retain the single existing original-guest P1 limitation in TODO; do not claim a
+repair or manufacture a duplicate TODO. If a valid remedy is found, implement
+and verify the real inherited environment and short-environment controls,
+including DOS/native relaunch and guest identity, then apply the normal full
+delivery gates. S14's eventual packet must define its exact finite acceptance.
+
+Unreproduced historical failures, the reported intermittent game exits, SOL
+layout, unavailable external COM validation and later WOW32 work are not
+silently reclassified as S14 reproductions; their existing dispositions and
+owners remain in the S13 ledger and relevant TODO or future package.
+
 ### Transferred TODO inventory
 
 The owner directs removal of entries taken into S12/S13 from TODO to avoid

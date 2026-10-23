@@ -53,6 +53,8 @@ This does not attribute the separate historical timeout reports. See the
 [S13 evidence](../etc/evidence/m0-t448-s13-uncertain-todo-audit.md).
 The finite nonreproduction controls, retained long-play and SOL layout risks,
 COM prerequisite and later WOW32 WRITE ownership are also recorded there.
+The owner directs its reproduced case to the planned S14; S13 remains open
+until its investigation delivery is accepted.
 
 Earlier stages' complete status and chronology are preserved in the indexed
 [pre-compaction snapshot](https://github.com/cshaxu/ntvdm64/blob/ba156ef61/docs/states/CURRENT.md).
@@ -80,6 +82,7 @@ five-second policies; they are not current instructions or open S3 work.
 11. S11: investigate and repair reported command CAF and SOL window startup failures.
 12. S12: audit all TODO and remediate reproduced host-side defects; preserve original guest boundaries.
 13. S13: investigate and test not-necessarily-reproducible TODO cases with explicit dispositions and evidence.
+14. S14: assess and address the S13-reproduced DOS startup failure within immutable-guest and approved semantic boundaries; [scope](../etc/operations/t448-lifecycle-plan.md#s14-s13-reproduced-startup-failure).
 
 The [proposal](../proposals/proposal-ntsrv-lifecycle-authority-001.md) owns the
 finite inherited gap list. Cross-group changes must preserve a coherent working
