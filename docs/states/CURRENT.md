@@ -3,6 +3,7 @@
 ## Current Work
 
 **Active: M0 T448 S13**, Ordinary Mode, single implementer/reviewer. T448 remains open.
+S13's bounded investigation is ready for owner review; S13 is not yet closed.
 
 ## Active Packet
 
@@ -50,6 +51,8 @@ a host-only read-only diagnostic: the original COMMAND environment copy
 overwrites its discarded-INIT `EnvSiz`; the short-PATH control does not.
 This does not attribute the separate historical timeout reports. See the
 [S13 evidence](../etc/evidence/m0-t448-s13-uncertain-todo-audit.md).
+The finite nonreproduction controls, retained long-play and SOL layout risks,
+COM prerequisite and later WOW32 WRITE ownership are also recorded there.
 
 Earlier stages' complete status and chronology are preserved in the indexed
 [pre-compaction snapshot](https://github.com/cshaxu/ntvdm64/blob/ba156ef61/docs/states/CURRENT.md).

@@ -25,9 +25,9 @@ no-progress investigation threshold.
 | Common dialog | Original strict CDL2 identity/return probe, 16 rounds on current package. | Passed 16 rounds; historical root cause unknown. |
 | Intermittent direct WINMINE/SOL exit | Existing real gameplay witnesses; 3 runs each, compare S12 evidence and preserve exact failing process identity. | 3/3 each pass; short runs cannot rule out long-play crash. |
 | SOL reported layout | Check actual desktop/application geometry and captured gameplay; no assumption that the historical report equals the 427x320 environment. | Measured 585x384 client on 1280x720 desktop; original report geometry unavailable. |
-| WRITE lifecycle | Inspect existing real frontier and original-owner plan; test only if an existing valid edit/exit witness is available. | Pending; startup is not lifecycle acceptance. |
+| WRITE lifecycle | Inspect existing real frontier and original-owner plan; test only if an existing valid edit/exit witness is available. | Existing fixture checks four startup samples only; edit/exit stay with queued WOW32 continuation. |
 | 8253 and zero-length VDMREDIR | Trace actual existing call/test evidence and distinguish speculation from a real symptom. | 8253 source difference lacks product symptom; VDMREDIR repaired in S12. |
-| COM, suballocator, NTW16S, NTVWM, T271, document migration | Inventory actual prerequisites or accepted capability boundaries; do not classify untestable work as nonreproduced. | COM peer not established; remaining boundaries need disposition before closure. |
+| COM, suballocator, NTW16S, NTVWM, T271, document migration | Inventory actual prerequisites or accepted capability boundaries; do not classify untestable work as nonreproduced. | COM peer not established; other boundaries and future owners are recorded below. |
 
 Owner permits closing a specifically targeted historical issue after valid
 representative nonreproduction, preserving its original failure and unknown
@@ -43,7 +43,8 @@ the witnesses serially; details are temporarily under `build/t448-s13-native-r01
 
 * The strict rapid-interactive native witness passed 3/3 runs, 12 launches per
   run, including final output and outer CMD exit 19. This is a bounded
-  nonrecurrence, not an explanation or a causal repair of the original outer81.
+  nonrecurrence, not an explanation or a causal repair of the original outer81;
+  under the owner's S13 rule the old one-off leaves active TODO.
 * The outer-CMD DOS/native/DOS witness failed 3/3 before its first DOS prompt:
   the observer timed out with Run16, NTSRV, NTCON and NTVDM still present.
   It therefore did not reach the historical missing-first-character boundary.
@@ -81,6 +82,13 @@ the witnesses serially; details are temporarily under `build/t448-s13-native-r01
   window close and launcher completion. They are short scripted interactions,
   not proof that the owner's long-play intermittent WOW/application exit is
   absent or that its cause is known.
+  A further opt-in stress witness (owned PID 36896, exit 0) completed 1000
+  alternating cell actions with regular F2 resets on the same game window,
+  checked worker/window survival throughout, and then closed normally. Its
+  `probe.txt` SHA-256 is
+  `a9d213b2ae0e1bb60b44bcf3b34b36a8ab29306bc719eaaf2e202fc885892c06`.
+  This is still a bounded synthetic interaction, not proof against rare
+  longer-duration failures or a basis to remove the owner's retained risk.
 * Three SOL gameplay witnesses completed stock draw, Deal, second draw and
   normal close. The first actual client was 585x384 on a 1280x720 desktop with
   1300x740 maximum tracking size. This measured isolated desktop is not proof
@@ -119,11 +127,17 @@ SHA-256 summaries, for later scratch disposition:
 
 * The inherited-environment pre-prompt timeout has current failure evidence and
   now has the diagnostic attribution below. This does not identify the causes
-  of the two separate older startup timeouts. The original guest limitation
-  remains established and retained in TODO, not counted as fixed.
-* WRITE's S12 startup witness does not test editing or exit. Preserve the
-  owner-approved WOW32 continuation as its proper execution owner; do not
-  certify the full lifecycle from startup alone.
+  of the two separate older startup timeouts. Current S12 DOS17 in each mode
+  and S13's three cold-start controls did not reproduce those original
+  observations; under the owner's rule they leave active TODO without a causal
+  repair claim. The original guest limitation remains established and retained
+  in TODO, not counted as fixed.
+* `tests/observation/verify-wow-write-frontier.ps1` checks four retained startup
+  snapshots and explicitly does not test editing, saving or normal exit. No
+  existing valid edit/exit witness was found by the S13 fixture inventory.
+  The first queued WOW32 continuation proposal explicitly owns WRITE's normal
+  startup and usable depth. Preserve that work there; do not certify the full
+  lifecycle from startup alone.
 * Real COM requires an actual CTS-capable peer or separately authorized virtual
   pair. NTW16S's documented glyph, custom-drawing, scrollbar and fixed-layout
   limits remain capability boundaries. NTVWM's 20 ms active output sampling
@@ -138,6 +152,9 @@ SHA-256 summaries, for later scratch disposition:
 * The owner-reported game exits and SOL layout remain separately unverified
   beyond the bounded observations above; the report's actual desktop geometry
   and an occurrence with product identity and failure diagnostics are absent.
+* The two previously duplicated TODO rows for the original COMMAND discarded
+  INIT problem were merged into one P1 row with both original evidence chains
+  and the S13 trace linked. This is deduplication, not closure of the defect.
 
 ## Direct guest-state attribution of the current inherited-environment failure
 
