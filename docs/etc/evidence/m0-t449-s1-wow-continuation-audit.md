@@ -303,6 +303,21 @@ management dispatcher or a demonstrated same-task call path. Any proposed
 reuse must identify an actual reachable caller and execution context rather
 than assuming a stored function pointer delivers a task-specific command.
 
+The source-side original guest reference also rules out treating `LockTDB`
+as an immediate context switch: `kernel31/schedule.asm` checks a candidate
+task against `LockTDB` and refuses a switch to a different task; it also
+avoids rescheduling while in DOS. The original hung path writes `LockTDB`,
+then sends WOWEXEC a heartbeat and posts Escape key messages to the selected
+native thread before waiting; only later does it inject the global interrupt.
+This mechanism is an attempted schedule/wakeup sequence, not proof that the
+target is currently executing when an interrupt is delivered. The original
+`WOW16ForceTaskExit` likewise performs DOS `4cff` for the current context.
+These read-only reference observations must be matched against the immutable
+deployed guest and actual execution chain before choosing a target-selection
+mechanism; no guest source or image is modified. A target-specific control
+must not replace the required proof with a blind `LockTDB` write followed by
+an interrupt.
+
 ## Original task publication and retirement chain
 
 `wkman.c::AddProcessSharedList` registers a per-process shared-list object;
