@@ -255,6 +255,28 @@ delivery, publication, cancellation and completion records still require a
 single end-to-end design and failure review; the existing event handles alone
 cannot carry the identity or provide the task-specific completion receipt.
 
+The existing management WOW row is specifically an admission-list projection:
+`service_capture_wow_labels` binds its generated identity to a `WOWRECORD`
+and its parent wait carrier, and `service_append_worker` does not advertise a
+Delete action. Such an identity can prevent reuse of that *record* from
+being confused with another record; it does not pin or identify a TD/HTASK.
+`CloseManagementNode` currently rejects the WOW-task category, so there is no
+hidden task-delete implementation behind the UI. A task publication design
+must not simply reuse that sidecar as though it established the missing
+worker-local binding.
+
+The minimum outcome matrix for the future group is: (1) an accepted request
+for the exact live worker/task incarnation; (2) an already-retired target or
+a reused identity, without touching the new occupant; (3) normal task exit
+concurrent with the request, with one retirement and no false target result;
+(4) worker loss or whole-worker close, reported as such instead of successful
+individual deletion; (5) requester/NTMON exit after acceptance, which must
+not cancel the NTSRV-owned operation; (6) repeated requests and concurrent
+distinct targets, without one process-wide hung-event signal completing the
+wrong request; and (7) actual sibling task remains usable. This is an
+acceptance and failure-partition requirement, not a claim that the current
+protocol implements those states or that retries/timeouts are required.
+
 ## Original task publication and retirement chain
 
 `wkman.c::AddProcessSharedList` registers a per-process shared-list object;
