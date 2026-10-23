@@ -43,6 +43,10 @@ Initial source reconciliation is recorded in the [S1 audit](../etc/evidence/m0-t
 It confirms that individual WOW task deletion is not connected and distinguishes
 the service request identity from the original HTASK. The M1--M6 and full
 identity/lifetime audit is still in progress; no runtime repair is claimed.
+The continuation proposal now records the dependency-ordered S2--S4 delivery
+shape and its explicit acceptance boundaries. S1 must still reconcile its
+inherited rows before admitting that implementation; the plan itself is not
+an S1 closure or a product-test result.
 
 Owner execution direction: trace source and call chains first; preserve original
 capabilities and semantics and minimize original-source diffs. Where an original
