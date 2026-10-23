@@ -75,6 +75,37 @@ the project's established RPC/I/O boundaries. Merely setting the existing
 worker-shutdown event or adding a management UI item cannot implement the
 targeted operation, and the shared worker-base must not interpret WOW policy.
 
+## DDE evidence chronology correction
+
+The late S4 ledger describes DIV-350--354 as a source candidate awaiting
+delivery. `git log -S DDEBeginConversion -- src/mvdm/wow32/wdde.c` identifies
+`3eae6c637` as the commit that incorporated the group; `git diff --stat
+3eae6c637..HEAD` over `wdde.c`, `wdde.h`, `wmsg16.c`, `wmdisp32.c` and
+`wumsg.c` is empty. T448's final cached build selected and released the
+current WOW32 provider. Thus the earlier statement that this source has never
+been built or delivered is stale. This does **not** upgrade old candidate
+fixture results to proof for the final release: the recorded final T448
+regression did not include the classic-DDE message-probe mode, and neither
+the current final build nor a hash comparison proves real DDE exchange,
+failure rollback or exactly-once payload retirement. The inherited real
+Execute/ACK and source-body evidence retain their exact run/package identities;
+the remaining M4 matrix must be reconciled by caller and ownership family.
+
+One concrete failure-path candidate in the current source is the 16-to-32
+posted DDE path: `WU32PostMessage` converts first, calls host `PostMessage`,
+and invokes the ordinary unthunker even when posting fails. For POKE, DATA,
+ADVISE and EXECUTE, `ThunkWMMsg16` can create an HDDE association and native
+payload before that call; `UnThunkWMMsg16` has no corresponding cases, and
+`wow_message_unwind16` only releases the explicitly listed text/COPYDATA
+resources. The conversion-local rollback is used for construction failures,
+not visibly carried to the post-result branch. This is a source-level
+ownership risk, not yet a proven leak: the native packed-lParam contract,
+the original HDDE retirement paths, retry via `WOWPRIVATEMSG`, and borrowed
+versus newly created pairs must be traced and tested together before changing
+cleanup. In particular, freeing everything on a failed post without proving
+ownership can break reused pairs or cause double release. Include this path in
+the finite M4 failure matrix; do not claim that DIV-354 already covers it.
+
 Source identities (SHA-256) for this pass: `wkman.c`
 `49BE04B3E5959F175D72B63A87239EA4F325CFDD38B051932DF2176D5527E860`;
 `vdmdbg.c` `11CAD596254D09929987CF110F5B492862972D06077C5FECC100DC79B087E1D2`;
