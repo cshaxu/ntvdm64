@@ -136,6 +136,20 @@ of captured release tokens is not evidence of a second allocation engine: its
 implementation calls the existing original allocation/free owners and must be
 judged by its actual contracts, not by its filename alone.
 
+For the retained P22 receipt, the historical final seal lists WOW32
+`ACD234099C6B9B58A9AE5846181CE85E6AA9E2E58AB88BB8D07C1F554C907F0F`,
+the six message modes under three styles, cross-worker/pending-send rows,
+source-exact construction negatives and separate diagnostic-only callback
+fault images. `git log 29be71998..HEAD` over the selected lifetime source,
+`wcall16`, EDIT/ListBox delegates and `wmdisp32`/`wmsg16` identifies one later
+change, `3eae6c637`; its zero-context diff hunks in the latter two files are
+confined to DDE cases. The other four inspected files are unchanged in that
+comparison. This allows the old P22 results to remain bounded evidence for
+the checked non-DDE source bodies; it does not prove an unchanged complete
+binary, unchanged dependencies, current-release real execution, or validate
+the later DDE modifications. The final T449 acceptance must identify its own
+sealed package and run the applicable composed tests.
+
 ## Original task publication and retirement chain
 
 `wkman.c::AddProcessSharedList` registers a per-process shared-list object;
@@ -281,3 +295,15 @@ source chain against current production selections and test assertions. Then
 specify dependency-ordered groups with exact original reuse, duplicate removal,
 failure/lifetime rules and acceptance. Do not treat the individual-task gap as
 the only open row or begin isolated repair before this audit is reconciled.
+
+The dependency order currently supported by source evidence is: (1) reconcile
+execution/callback, object and normal retirement first; (2) connect message
+identity/reply and conversion/transfer cohorts with their failure paths;
+(3) connect targetable task publication, worker-local termination and
+NTSRV-mediated completion as one group, using the earlier execution/retirement
+contract; (4) run final same-package real guest and native-direction acceptance.
+This is not yet an admitted S breakdown: the remaining source and evidence
+reconciliation can expose dependencies that require merging or reordering
+groups. DDE protocol scope is limited to message ownership transferred into
+this task; broader DDE remains with its existing candidate. A group must not
+be presented as completed solely because its original implementation compiles.
