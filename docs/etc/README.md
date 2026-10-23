@@ -13,8 +13,12 @@ per-task termination or whole-provider completion.
 
 [T449 S3 targeted termination progress](evidence/m0-t449-s3-targeted-termination-progress.md)
 records the authenticated shared-WOW binding, original termination ownership,
-current candidate build/publication evidence and the still-required real
-two-task acceptance matrix.
+current candidate build/publication evidence and the resolved real two-task
+acceptance matrix.
+
+[T449 S4 integrated reconciliation ledger](evidence/m0-t449-s4-reconciliation-ledger.md)
+maps the inherited M/C/application rows to their production owners, exact
+proof entrypoints and retained boundaries for the final integrated package.
 
 [T448 S13 uncertain TODO audit](evidence/m0-t448-s13-uncertain-todo-audit.md)
 owns the bounded investigation plan, witnesses and dispositions.

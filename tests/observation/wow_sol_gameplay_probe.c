@@ -226,8 +226,12 @@ int main(int argc,char **argv)
                 return 4;
             }
             deadline=GetTickCount64()+10000;
-            while(IsWindow(game) && GetTickCount64()<deadline)Sleep(25);
-            if(IsWindow(game)) {
+            while(game && GetTickCount64()<deadline) {
+                game=NULL;EnumDesktopWindows(desktop,find_game,0);
+                if(!game)break;
+                Sleep(25);
+            }
+            if(game) {
                 printf("partial-close-timeout process-wait=%lu\n",WaitForSingleObject(process,0));
                 EnumDesktopWindows(desktop,report_window,0);
                 return 4;
@@ -266,8 +270,24 @@ int main(int argc,char **argv)
        !capture(game,argv[3],"draw"))return 7;
     if(!PostMessageW(game,WM_CLOSE,0,0))return 8;
     deadline=GetTickCount64()+10000;
-    while(IsWindow(game) && GetTickCount64()<deadline)Sleep(25);
-    if(IsWindow(game))return 9;
+    while(game && GetTickCount64()<deadline) {
+        /* A destroyed top-level HWND may be recycled before the next poll.
+           Re-identify the visible Solitaire task by its current desktop/PID
+           identity instead of treating the old numerical HWND as a task
+           lifetime token. */
+        game=NULL;EnumDesktopWindows(desktop,find_game,0);
+        if(!game)break;
+        Sleep(25);
+    }
+    if(game) {
+        DWORD_PTR close_reply=0;
+        BOOL responsive=SendMessageTimeoutW(game,WM_NULL,0,0,
+            SMTO_ABORTIFHUNG,2000,&close_reply);
+        printf("close-timeout responsive=%d error=%lu reply=%llu\n",
+            responsive,GetLastError(),(unsigned long long)close_reply);
+        EnumDesktopWindows(desktop,report_window,0);
+        return 9;
+    }
     puts("PASS SOL stock draw, Deal cleared nonempty waste, redealt tableau present, second stock draw and normal owned window close");
     CloseHandle(process);CloseDesktop(desktop);return 0;
 }

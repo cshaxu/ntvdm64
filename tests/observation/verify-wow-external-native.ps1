@@ -64,11 +64,15 @@ try{
    if(!$package.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase)){throw 'Candidate must be build-owned'}
    $ManifestPath=(Resolve-Path -LiteralPath $ManifestPath).Path
    $manifestHash=Get-FileHash -LiteralPath $ManifestPath
-   try{
-    $manifest=@(Get-Content -LiteralPath $ManifestPath -Raw|ConvertFrom-Json)
-    if($manifest.Count -ne 13 -or @($manifest.name|Sort-Object -Unique).Count -ne 13){throw 'Need coherent13 candidate JSON manifest'}
-    foreach($image in $manifest){if((Get-FileHash "$package/SYSTEM32/$($image.name)").Hash -ne $image.sha256){throw 'Candidate identity mismatch'}}
-   }catch [System.Management.Automation.RuntimeException]{
+    if([IO.Path]::GetExtension($ManifestPath) -ieq '.json'){
+     $manifest=@(Get-Content -LiteralPath $ManifestPath -Raw|ConvertFrom-Json)
+     # Windows PowerShell 5.1 yields one array object for a top-level JSON
+     # array, while PowerShell 7 enumerates it.  Flatten only that parser
+     # representation; do not relax the coherent-13 identity contract.
+     if($manifest.Count -eq 1 -and $manifest[0] -is [array]){$manifest=@($manifest[0])}
+     if($manifest.Count -ne 13 -or @($manifest.name|Sort-Object -Unique).Count -ne 13){throw 'Need coherent13 candidate JSON manifest'}
+     foreach($image in $manifest){if((Get-FileHash "$package/SYSTEM32/$($image.name)").Hash -ne $image.sha256){throw 'Candidate JSON identity mismatch'}}
+    }else{
     $manifest=@(Import-Csv -LiteralPath $ManifestPath)
     if($manifest.Count -lt 13 -or @($manifest.Path|Sort-Object -Unique).Count -ne $manifest.Count){throw 'Need coherent candidate CSV manifest'}
     $system32Root=[IO.Path]::GetFullPath((Join-Path $package 'SYSTEM32'))+'\'
