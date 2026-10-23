@@ -8,9 +8,10 @@
 extern BOOL CntrlHandler(ULONG type);
 extern VOID TerminateVDM(VOID);
 extern UINT VdmExitCode;
+extern DWORD ntvdm_wow_terminate_ticket(uint64_t identity);
 static struct {
     session *owner;
-    HANDLE stop,console_close,worker_close,fault,server;
+    HANDLE stop,console_close,worker_close,task_close,fault,server;
     worker_base_input_watch *watch;
     volatile LONG closing;
     BOOL original_ready;
@@ -65,6 +66,19 @@ static void worker_instruction(void *context)
 {
     if(InterlockedCompareExchange(&lifecycle.closing,(LONG)GetCurrentThreadId(),0))return;
     worker_base_shutdown_close(close_worker,context,INFINITE,ERROR_CANCELLED,NULL);
+}
+static DWORD task_instruction(void *context)
+{
+    uint64_t identity=0;DWORD error;
+    (void)context;
+    error=worker_base_take_wow_task_close(&identity);
+    if(error==ERROR_NOT_FOUND)return ERROR_SUCCESS; /* stale source record retired normally */
+    if(error)return error;
+    error=ntvdm_wow_terminate_ticket(identity);
+    if(!error)return ERROR_SUCCESS;
+    /* Injection was not accepted locally. Release this request for a later
+     * authenticated management action; do not spin or kill the whole worker. */
+    return worker_base_fail_wow_task_close(identity);
 }
 static void service_lost(void *context)
 {
@@ -124,7 +138,7 @@ DWORD ntvdm_worker_lifecycle_begin(session *owner,BOOL character_io)
 {
     DWORD error;
     if(!owner || lifecycle.owner)return ERROR_INVALID_STATE;
-    error=worker_base_controls(&lifecycle.server,&lifecycle.worker_close,&lifecycle.console_close);
+    error=worker_base_controls(&lifecycle.server,&lifecycle.worker_close,&lifecycle.console_close,&lifecycle.task_close);
     if(error)return error;
     lifecycle.owner=owner;
     if(!character_io)lifecycle.console_close=NULL;
@@ -144,8 +158,8 @@ DWORD ntvdm_worker_lifecycle_activate(void)
     if(lifecycle.original_ready || !lifecycle.stop)return ERROR_INVALID_STATE;
     lifecycle.original_ready=TRUE;
     lifecycle.watch=worker_base_input_watch_create(lifecycle.console_close,
-        lifecycle.worker_close,lifecycle.stop,report_io_fault,console_instruction,
-        worker_instruction,NULL,lifecycle.owner);
+        lifecycle.worker_close,lifecycle.task_close,lifecycle.stop,report_io_fault,console_instruction,
+        worker_instruction,task_instruction,NULL,lifecycle.owner);
     if(!lifecycle.watch)return GetLastError();
     if(lifecycle.fault) {
         error=worker_base_input_watch_bind(lifecycle.watch,lifecycle.fault);

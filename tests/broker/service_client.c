@@ -45,7 +45,7 @@ int main(int argc,char **argv)
     unsigned char app_version[APP_VERSION_BYTES]=APP_VERSION,server_version[APP_VERSION_BYTES]={0};
     ULONG server_protocol=0;
     HANDLE reader=NULL,writer=NULL;
-    HANDLE server=NULL,shutdown=NULL,console_close=NULL;
+    HANDLE server=NULL,shutdown=NULL,console_close=NULL,wow_task_close=NULL;
     DWORD available;
     char temporary[MAX_PATH];
     char receiverPid[32];HANDLE receiver;
@@ -73,9 +73,9 @@ int main(int argc,char **argv)
             &server_protocol,server_version,&connection,&generation)==ERROR_REVISION_MISMATCH && !connection && !generation);
         memset(app_version,0,sizeof(app_version));memcpy(app_version,APP_VERSION,sizeof(APP_VERSION));
         REQUIRE(!test_rpc_connect_controls(binding,process,APP_PROTOCOL_VERSION,app_version,
-            &server_protocol,server_version,&connection,&generation,&server,&shutdown,&console_close) && connection && generation);
+            &server_protocol,server_version,&connection,&generation,&server,&shutdown,&console_close,&wow_task_close) && connection && generation);
         REQUIRE(server_protocol==APP_PROTOCOL_VERSION && !memcmp(server_version,app_version,sizeof(app_version)));
-        REQUIRE(server && !shutdown && !console_close); /* Not an admitted worker. */
+        REQUIRE(server && !shutdown && !console_close && !wow_task_close); /* Not an admitted worker. */
         REQUIRE(WaitForSingleObject(server,0)==WAIT_TIMEOUT);
         REQUIRE(!TerminateProcess(server,123) && GetLastError()==ERROR_ACCESS_DENIED);
         CloseHandle(server);server=NULL;

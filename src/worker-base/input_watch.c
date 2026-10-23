@@ -2,9 +2,10 @@
 
 struct worker_base_input_watch {
     CRITICAL_SECTION lock;
-    HANDLE console_close,worker_close,stop,local_stop,rearm,wake,source,thread;
+    HANDLE console_close,worker_close,task_close,stop,local_stop,rearm,wake,source,thread;
     worker_base_input_ready_fn ready;
     worker_base_input_shutdown_fn close_console,close_worker;
+    worker_base_input_task_fn close_task;
     worker_base_input_failure_fn failed;
     void *context;
     DWORD error;
@@ -23,10 +24,11 @@ static DWORD WINAPI input_thread(void *context)
     BOOL pending=FALSE;
     for(;;) {
         HANDLE source=NULL;
-        HANDLE waits[6];
+        HANDLE waits[7];
         DWORD count=0,rearm_index,source_index=MAXDWORD,result,error=ERROR_SUCCESS;
         if(watch->console_close)waits[count++]=watch->console_close;
         if(watch->worker_close)waits[count++]=watch->worker_close;
+        if(watch->task_close)waits[count++]=watch->task_close;
         waits[count++]=watch->stop;waits[count++]=watch->local_stop;
         rearm_index=count;waits[count++]=watch->rearm;
         EnterCriticalSection(&watch->lock);
@@ -52,6 +54,10 @@ static DWORD WINAPI input_thread(void *context)
         }
         if(WaitForSingleObject(watch->stop,0)==WAIT_OBJECT_0 ||
             WaitForSingleObject(watch->local_stop,0)==WAIT_OBJECT_0)return ERROR_SUCCESS;
+        if(watch->task_close && WaitForSingleObject(watch->task_close,0)==WAIT_OBJECT_0) {
+            if(watch->close_task) { error=watch->close_task(watch->context); if(error)return fail_watch(watch,error); }
+            continue;
+        }
         if(result==WAIT_OBJECT_0+rearm_index){pending=FALSE;continue;}
         if(source_index==MAXDWORD || result!=WAIT_OBJECT_0+source_index)
             return fail_watch(watch,result==WAIT_FAILED ? error : ERROR_PIPE_NOT_CONNECTED);
@@ -63,9 +69,9 @@ static DWORD WINAPI input_thread(void *context)
         }
     }
 }
-worker_base_input_watch *worker_base_input_watch_create(HANDLE console_close,HANDLE worker_close,HANDLE stop,
+worker_base_input_watch *worker_base_input_watch_create(HANDLE console_close,HANDLE worker_close,HANDLE task_close,HANDLE stop,
     worker_base_input_ready_fn ready,worker_base_input_shutdown_fn close_console,
-    worker_base_input_shutdown_fn close_worker,
+    worker_base_input_shutdown_fn close_worker,worker_base_input_task_fn close_task,
     worker_base_input_failure_fn failed,void *context)
 {
     worker_base_input_watch *watch;DWORD error;
@@ -73,8 +79,8 @@ worker_base_input_watch *worker_base_input_watch_create(HANDLE console_close,HAN
     watch=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*watch));
     if(!watch){SetLastError(ERROR_NOT_ENOUGH_MEMORY);return NULL;}
     InitializeCriticalSection(&watch->lock);
-    watch->console_close=console_close;watch->worker_close=worker_close;watch->stop=stop;watch->ready=ready;
-    watch->close_console=close_console;watch->close_worker=close_worker;watch->failed=failed;watch->context=context;
+    watch->console_close=console_close;watch->worker_close=worker_close;watch->task_close=task_close;watch->stop=stop;watch->ready=ready;
+    watch->close_console=close_console;watch->close_worker=close_worker;watch->close_task=close_task;watch->failed=failed;watch->context=context;
     watch->local_stop=CreateEventW(NULL,TRUE,FALSE,NULL);
     watch->rearm=CreateEventW(NULL,FALSE,FALSE,NULL);
     watch->wake=CreateEventW(NULL,TRUE,FALSE,NULL);

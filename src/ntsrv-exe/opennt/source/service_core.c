@@ -178,8 +178,10 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                 watch->native_launch_type=native_type;
                 watch->shutdown=CreateEventW(NULL,TRUE,FALSE,NULL);
                 watch->console_close=CreateEventW(NULL,TRUE,FALSE,NULL);
-                if(!watch->shutdown || !watch->console_close)error=GetLastError();
+                watch->wow_task_close=CreateEventW(NULL,TRUE,FALSE,NULL);
+                if(!watch->shutdown || !watch->console_close || !watch->wow_task_close)error=GetLastError();
                 InitializeListHead(&watch->management_labels);
+                InitializeListHead(&watch->wow_task_closes);
                 /* The first DOS record precedes the worker's first RPC.  Copy
                  * only its label before original GetNextVDMCommand releases
                  * VDMINFO; the record chain still owns all task state. */

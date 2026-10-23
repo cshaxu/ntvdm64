@@ -11,6 +11,11 @@ record the bounded source repair, selected original ownership, actual guest
 matrix and coherent-package delivery boundary; they do not claim later
 per-task termination or whole-provider completion.
 
+[T449 S3 targeted termination progress](evidence/m0-t449-s3-targeted-termination-progress.md)
+records the authenticated shared-WOW binding, original termination ownership,
+current candidate build/publication evidence and the still-required real
+two-task acceptance matrix.
+
 [T448 S13 uncertain TODO audit](evidence/m0-t448-s13-uncertain-todo-audit.md)
 owns the bounded investigation plan, witnesses and dispositions.
 

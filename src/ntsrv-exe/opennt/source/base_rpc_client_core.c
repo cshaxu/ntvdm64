@@ -26,7 +26,7 @@ typedef struct OPENNT_BASE_RPC_CLIENT {
     VDM_CONNECTION connection;
     HANDLE process;
     HANDLE server;
-    HANDLE worker_shutdown,worker_console_close;
+    HANDLE worker_shutdown,worker_console_close,worker_wow_task_close;
     HANDLE stop;
     HANDLE watcher;
     void (*lost)(void *);
@@ -82,7 +82,7 @@ void __RPC_USER MIDL_user_free(void *value) { free(value); }
 static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding,ULONGLONG deadline)
 {
     RPC_IF_ID expected;
-    RPC_STATUS status=RpcIfInqId(Client_vdm_service_v64_0_c_ifspec,&expected);
+    RPC_STATUS status=RpcIfInqId(Client_vdm_service_v65_0_c_ifspec,&expected);
     if (status) return status;
     return common_rpc_classify_interface(binding,&expected,deadline);
 }
@@ -135,7 +135,7 @@ DWORD OpenNtBaseClientConnectCurrentTimeout(DWORD milliseconds)
     RpcTryExcept {
         Client_Connect(&async,client.binding,client.process,APP_PROTOCOL_VERSION,
             (unsigned char *)expected,&server_protocol,server_version,&connection,&generation,
-            &client.server,&client.worker_shutdown,&client.worker_console_close);
+            &client.server,&client.worker_shutdown,&client.worker_console_close,&client.worker_wow_task_close);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
@@ -256,6 +256,7 @@ void OpenNtBaseClientDisconnectCurrent(void)
     if (client.server) CloseHandle(client.server);
     if (client.worker_shutdown) CloseHandle(client.worker_shutdown);
     if (client.worker_console_close) CloseHandle(client.worker_console_close);
+    if (client.worker_wow_task_close) CloseHandle(client.worker_wow_task_close);
     if (client.binding) RpcBindingFree(&client.binding);
     cleanup=(void (*)(void))InterlockedExchangePointer(&execution_cleanup,NULL);
     if (cleanup) cleanup();
@@ -553,13 +554,59 @@ DWORD OpenNtBaseClientWorkerShutdownEvent(HANDLE *shutdown)
         shutdown,SYNCHRONIZE,FALSE,0) ? ERROR_SUCCESS : GetLastError();
 }
 
-DWORD OpenNtBaseClientWorkerControls(HANDLE *server,HANDLE *shutdown,HANDLE *console_close)
+DWORD OpenNtBaseClientWorkerControls(HANDLE *server,HANDLE *shutdown,HANDLE *console_close,HANDLE *wow_task_close)
 {
-    if(!server || !shutdown || !console_close)return ERROR_INVALID_PARAMETER;
-    *server=NULL;*shutdown=NULL;*console_close=NULL;
+    if(!server || !shutdown || !console_close || !wow_task_close)return ERROR_INVALID_PARAMETER;
+    *server=NULL;*shutdown=NULL;*console_close=NULL;*wow_task_close=NULL;
     if(!client.connection || !client.server || !client.worker_shutdown)return ERROR_INVALID_STATE;
     *server=client.server;*shutdown=client.worker_shutdown;*console_close=client.worker_console_close;
+    *wow_task_close=client.worker_wow_task_close;
     return ERROR_SUCCESS;
+}
+
+DWORD WINAPI OpenNtBaseClientBindWowTask(ULONG task,USHORT htask,uint64_t *identity)
+{
+    RPC_ASYNC_STATE async;DWORD error;hyper value=0;
+    /* Shared WOW supplies its original iTask; a separate WOW is authenticated
+     * by its consumed one-shot reservation and deliberately supplies zero. */
+    if(!identity || !htask)return ERROR_INVALID_PARAMETER;*identity=0;
+    if(!client.connection || !client.binding || !client.process)return ERROR_ACCESS_DENIED;
+    error=common_rpc_begin_async(&async);if(error)return error;
+    RpcTryExcept {Client_BindWowTask(&async,client.binding,client.connection,client.process,client.generation,task,htask,&value);}
+    RpcExcept(1){error=RpcExceptionCode();} RpcEndExcept
+    error=common_rpc_end_async(&async,error,client.server,INFINITE);
+    if(!error)*identity=(uint64_t)value;return OpenNtBaseClientFailure(error);
+}
+DWORD WINAPI OpenNtBaseClientRetireWowTask(uint64_t identity)
+{
+    RPC_ASYNC_STATE async;DWORD error;
+    if(!identity)return ERROR_INVALID_PARAMETER;
+    if(!client.connection || !client.binding || !client.process)return ERROR_ACCESS_DENIED;
+    error=common_rpc_begin_async(&async);if(error)return error;
+    RpcTryExcept {Client_RetireWowTask(&async,client.binding,client.connection,client.process,client.generation,(hyper)identity);}
+    RpcExcept(1){error=RpcExceptionCode();} RpcEndExcept
+    return OpenNtBaseClientFailure(common_rpc_end_async(&async,error,client.server,INFINITE));
+}
+DWORD OpenNtBaseClientTakeWowTaskClose(uint64_t *identity)
+{
+    RPC_ASYNC_STATE async;DWORD error;hyper value=0;
+    if(!identity)return ERROR_INVALID_PARAMETER;*identity=0;
+    if(!client.connection || !client.binding || !client.process)return ERROR_ACCESS_DENIED;
+    error=common_rpc_begin_async(&async);if(error)return error;
+    RpcTryExcept {Client_TakeWowTaskClose(&async,client.binding,client.connection,client.process,client.generation,&value);}
+    RpcExcept(1){error=RpcExceptionCode();} RpcEndExcept
+    error=common_rpc_end_async(&async,error,client.server,INFINITE);
+    if(!error)*identity=(uint64_t)value;return OpenNtBaseClientFailure(error);
+}
+DWORD WINAPI OpenNtBaseClientFailWowTaskClose(uint64_t identity)
+{
+    RPC_ASYNC_STATE async;DWORD error;
+    if(!identity)return ERROR_INVALID_PARAMETER;
+    if(!client.connection || !client.binding || !client.process)return ERROR_ACCESS_DENIED;
+    error=common_rpc_begin_async(&async);if(error)return error;
+    RpcTryExcept {Client_FailWowTaskClose(&async,client.binding,client.connection,client.process,client.generation,(hyper)identity);}
+    RpcExcept(1){error=RpcExceptionCode();} RpcEndExcept
+    return OpenNtBaseClientFailure(common_rpc_end_async(&async,error,client.server,INFINITE));
 }
 
 static DWORD client_request_exit(DWORD scope)

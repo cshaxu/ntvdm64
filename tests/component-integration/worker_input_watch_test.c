@@ -2,6 +2,7 @@
 #include <stdio.h>
 #define CHECK(x) do { if(!(x)){printf("FAIL line %d: %s (%lu)\n",__LINE__,#x,GetLastError());return 1;} ++checks; } while(0)
 static unsigned checks;
+static HANDLE task_close_event;
 typedef struct probe { HANDLE seen,source; volatile LONG count; DWORD error; volatile LONG failures; } probe;
 static DWORD ready(void *context)
 {
@@ -11,12 +12,14 @@ static DWORD ready(void *context)
 }
 static void closed(void *context)
 {probe *p=context;InterlockedIncrement(&p->count);SetEvent(p->seen);}
+static DWORD task_closed(void *context)
+{probe *p=context;ResetEvent(task_close_event);InterlockedIncrement(&p->count);SetEvent(p->seen);return ERROR_SUCCESS;}
 static void failed(void *context,DWORD error)
 {probe *p=context;p->error=error;InterlockedIncrement(&p->failures);SetEvent(p->seen);}
 int main(void)
 {
     DWORD before,after;unsigned i;
-    CHECK(worker_base_input_watch_create(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)==NULL);
+    CHECK(worker_base_input_watch_create(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)==NULL);
     CHECK(GetLastError()==ERROR_INVALID_PARAMETER);
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&before));
     for(i=0;i<50;++i) {
@@ -24,7 +27,7 @@ int main(void)
         HANDLE stop=CreateEventW(NULL,TRUE,FALSE,NULL);
         HANDLE source=CreateEventW(NULL,TRUE,FALSE,NULL);
         HANDLE next=CreateEventW(NULL,TRUE,FALSE,NULL);
-        worker_base_input_watch *w=worker_base_input_watch_create(NULL,shutdown,stop,NULL,NULL,NULL,NULL,NULL);
+        worker_base_input_watch *w=worker_base_input_watch_create(NULL,shutdown,NULL,stop,NULL,NULL,NULL,NULL,NULL,NULL);
         CHECK(w!=NULL);CHECK(!worker_base_input_watch_bind(w,source));
         CHECK(SetEvent(source));
         CHECK(WaitForSingleObject(worker_base_input_watch_event(w),3000)==WAIT_OBJECT_0);
@@ -39,7 +42,7 @@ int main(void)
     {
         HANDLE shutdown=CreateEventW(NULL,TRUE,FALSE,NULL),stop=CreateEventW(NULL,TRUE,FALSE,NULL);
         probe p={CreateEventW(NULL,TRUE,FALSE,NULL),CreateEventW(NULL,TRUE,FALSE,NULL),0,0};
-        worker_base_input_watch *w=worker_base_input_watch_create(NULL,shutdown,stop,ready,NULL,closed,failed,&p);
+        worker_base_input_watch *w=worker_base_input_watch_create(NULL,shutdown,NULL,stop,ready,NULL,closed,NULL,failed,&p);
         CHECK(w!=NULL);CHECK(!worker_base_input_watch_bind(w,p.source));
         CHECK(SetEvent(p.source));CHECK(WaitForSingleObject(p.seen,3000)==WAIT_OBJECT_0);
         CHECK(p.count==1);CHECK(!worker_base_input_watch_ack(w));
@@ -53,7 +56,7 @@ int main(void)
     {
         HANDLE shutdown=CreateEventW(NULL,TRUE,FALSE,NULL),stop=CreateEventW(NULL,TRUE,FALSE,NULL);
         probe p={CreateEventW(NULL,TRUE,FALSE,NULL),CreateEventW(NULL,TRUE,FALSE,NULL),0,ERROR_INVALID_DATA};
-        worker_base_input_watch *w=worker_base_input_watch_create(NULL,shutdown,stop,ready,NULL,NULL,failed,&p);
+        worker_base_input_watch *w=worker_base_input_watch_create(NULL,shutdown,NULL,stop,ready,NULL,NULL,NULL,failed,&p);
         CHECK(w!=NULL);CHECK(!worker_base_input_watch_bind(w,p.source));
         CHECK(SetEvent(p.source));CHECK(WaitForSingleObject(p.seen,3000)==WAIT_OBJECT_0);
         worker_base_input_watch_destroy(w);CHECK(p.count==1 && p.error==ERROR_INVALID_DATA && p.failures==1);
@@ -62,7 +65,7 @@ int main(void)
     {
         HANDLE shutdown=CreateEventW(NULL,TRUE,FALSE,NULL),stop=CreateEventW(NULL,TRUE,TRUE,NULL);
         probe p={CreateEventW(NULL,TRUE,FALSE,NULL),CreateEventW(NULL,TRUE,TRUE,NULL),0,0};
-        worker_base_input_watch *w=worker_base_input_watch_create(NULL,shutdown,stop,ready,NULL,closed,failed,&p);
+        worker_base_input_watch *w=worker_base_input_watch_create(NULL,shutdown,NULL,stop,ready,NULL,closed,NULL,failed,&p);
         CHECK(w!=NULL);CHECK(!worker_base_input_watch_bind(w,p.source));
         worker_base_input_watch_destroy(w);CHECK(p.count==0);
         CloseHandle(p.seen);CloseHandle(p.source);CloseHandle(stop);CloseHandle(shutdown);
@@ -70,7 +73,7 @@ int main(void)
     {
         HANDLE shutdown=CreateEventW(NULL,TRUE,TRUE,NULL),stop=CreateEventW(NULL,TRUE,FALSE,NULL);
         probe p={CreateEventW(NULL,TRUE,FALSE,NULL),CreateEventW(NULL,TRUE,TRUE,NULL),0,0};
-        worker_base_input_watch *w=worker_base_input_watch_create(NULL,shutdown,stop,ready,NULL,closed,failed,&p);
+        worker_base_input_watch *w=worker_base_input_watch_create(NULL,shutdown,NULL,stop,ready,NULL,closed,NULL,failed,&p);
         CHECK(w!=NULL);CHECK(WaitForSingleObject(p.seen,3000)==WAIT_OBJECT_0);
         worker_base_input_watch_destroy(w);CHECK(p.count==1);
         CloseHandle(p.seen);CloseHandle(p.source);CloseHandle(stop);CloseHandle(shutdown);
@@ -80,11 +83,27 @@ int main(void)
         HANDLE stop=CreateEventW(NULL,TRUE,FALSE,NULL);
         HANDLE shutdown=CreateEventW(NULL,TRUE,FALSE,NULL);
         probe p={CreateEventW(NULL,TRUE,FALSE,NULL),NULL,0,0};
-        worker_base_input_watch *w=worker_base_input_watch_create(NULL,shutdown,stop,NULL,NULL,closed,failed,&p);
+        worker_base_input_watch *w=worker_base_input_watch_create(NULL,shutdown,NULL,stop,NULL,NULL,closed,NULL,failed,&p);
         CHECK(w!=NULL);CHECK(SetEvent(shutdown));
         CHECK(WaitForSingleObject(p.seen,10000)==WAIT_OBJECT_0);
         worker_base_input_watch_destroy(w);CHECK(p.count==1 && !p.failures);
         CloseHandle(stop);CloseHandle(shutdown);CloseHandle(p.seen);
+    }
+    /* A task-close instruction is non-terminal: it must not consume the
+     * worker-close path or prevent a subsequent input-source rearm. */
+    {
+        HANDLE task=CreateEventW(NULL,TRUE,FALSE,NULL),stop=CreateEventW(NULL,TRUE,FALSE,NULL);
+        HANDLE source=CreateEventW(NULL,TRUE,FALSE,NULL);
+        probe p={CreateEventW(NULL,TRUE,FALSE,NULL),source,0,0};
+        worker_base_input_watch *w=worker_base_input_watch_create(NULL,NULL,task,stop,
+            ready,NULL,NULL,task_closed,failed,&p);
+        CHECK(w!=NULL);CHECK(!worker_base_input_watch_bind(w,source));
+        task_close_event=task;
+        CHECK(SetEvent(task));CHECK(WaitForSingleObject(p.seen,3000)==WAIT_OBJECT_0);
+        CHECK(p.count==1);CHECK(ResetEvent(p.seen));
+        CHECK(SetEvent(source));CHECK(WaitForSingleObject(p.seen,3000)==WAIT_OBJECT_0);
+        CHECK(p.count==2);CHECK(SetEvent(stop));worker_base_input_watch_destroy(w);
+        CloseHandle(p.seen);CloseHandle(source);CloseHandle(stop);CloseHandle(task);task_close_event=NULL;
     }
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&after));CHECK(after==before);
     printf("PASS shared input watcher: %u assertions; event/callback, rearm, source replacement, close priority, 50-cycle handles\n",checks);

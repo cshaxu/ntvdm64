@@ -90,20 +90,20 @@ int main(int argc,char **argv)
     /* Identity failure used to cancel the timer permanently. */
     clock_ms=25000;peer_error=ERROR_ACCESS_DENIED;
     CHECK(Server_Connect(NULL,NULL,APP_PROTOCOL_VERSION,version,&protocol,reply,
-        &connection,&generation)==ERROR_ACCESS_DENIED);
+        &connection,&generation,NULL,NULL,NULL,NULL)==ERROR_ACCESS_DENIED);
     CHECK(idle_deadline==35000 && !pending_connects);
     peer_error=0;clock_ms=26000;
     CHECK(Server_Connect(NULL,NULL,APP_PROTOCOL_VERSION+1,version,&protocol,reply,
-        &connection,&generation)==ERROR_REVISION_MISMATCH);
+        &connection,&generation,NULL,NULL,NULL,NULL)==ERROR_REVISION_MISMATCH);
     CHECK(idle_deadline==36000 && !pending_connects);
     connect_error=ERROR_UNHANDLED_EXCEPTION;
     __try {
-        (void)Server_Connect(NULL,NULL,APP_PROTOCOL_VERSION,version,&protocol,reply,&connection,&generation);
+        (void)Server_Connect(NULL,NULL,APP_PROTOCOL_VERSION,version,&protocol,reply,&connection,&generation,NULL,NULL,NULL,NULL);
         return 2;
     } __except(EXCEPTION_EXECUTE_HANDLER) { }
     CHECK(!pending_connects && idle_deadline==36000);
     connect_error=0;
-    CHECK(!Server_Connect(NULL,NULL,APP_PROTOCOL_VERSION,version,&protocol,reply,&connection,&generation));
+    CHECK(!Server_Connect(NULL,NULL,APP_PROTOCOL_VERSION,version,&protocol,reply,&connection,&generation,NULL,NULL,NULL,NULL));
     CHECK(!idle_deadline && !pending_connects && connection && generation);
     clock_ms=50000;CHECK(!basesrv_claim_empty_stop());
     empty=TRUE;basesrv_schedule_empty_stop();

@@ -83,7 +83,13 @@ DWORD OpenNtBaseServiceCloseManagementNode(OPENNT_BASE_SERVICE *,
 DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *,HANDLE,OPENNT_BASE_CONNECTION **,DWORD *);
 /* Connect's authenticated lifecycle capabilities. Non-workers receive no
  * worker events; returned handles are wait-only and owned by the caller. */
-DWORD OpenNtBaseServiceConnectionControls(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE *,HANDLE *);
+DWORD OpenNtBaseServiceConnectionControls(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE *,HANDLE *,HANDLE *);
+/* A WOW task binds its live original TD/HTASK to the current original
+ * BaseSrv record.  The returned identity is opaque outside the broker. */
+DWORD OpenNtBaseServiceBindWowTask(OPENNT_BASE_CONNECTION *,DWORD,DWORD,ULONG,USHORT,uint64_t *);
+DWORD OpenNtBaseServiceRetireWowTask(OPENNT_BASE_CONNECTION *,DWORD,DWORD,uint64_t);
+DWORD OpenNtBaseServiceTakeWowTaskClose(OPENNT_BASE_CONNECTION *,DWORD,DWORD,uint64_t *);
+DWORD OpenNtBaseServiceFailWowTaskClose(OPENNT_BASE_CONNECTION *,DWORD,DWORD,uint64_t);
 /* Local Console membership is sampled only by the authenticated NTCON root
  * which is actually attached to that Console. It is a bounded selection
  * hint for original ConsoleRecord association, never a task/worker claim. */

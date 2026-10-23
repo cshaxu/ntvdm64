@@ -9,8 +9,12 @@ DWORD worker_base_connect(void)
     return OpenNtBaseClientConnectCurrent();
 }
 
-DWORD worker_base_controls(HANDLE *server,HANDLE *shutdown,HANDLE *console_close)
-{ return OpenNtBaseClientWorkerControls(server,shutdown,console_close); }
+DWORD worker_base_controls(HANDLE *server,HANDLE *shutdown,HANDLE *console_close,HANDLE *wow_task_close)
+{ return OpenNtBaseClientWorkerControls(server,shutdown,console_close,wow_task_close); }
+DWORD worker_base_take_wow_task_close(uint64_t *identity)
+{ return OpenNtBaseClientTakeWowTaskClose(identity); }
+DWORD worker_base_fail_wow_task_close(uint64_t identity)
+{ return OpenNtBaseClientFailWowTaskClose(identity); }
 
 DWORD worker_base_watch_service(void (*lost)(void *),void *context)
 { return OpenNtBaseClientWatchBroker(lost,context); }

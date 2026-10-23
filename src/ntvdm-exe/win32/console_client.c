@@ -262,8 +262,8 @@ DWORD ntvdm_console_client_begin(session *owner)
     if(!client->publisher){error=GetLastError();console_client_end(client);return error;}
     error=ntvdm_console_graphics_attach_publisher(client->graphics,client->publisher);
     if(error){console_client_end(client);return error;}
-    client->input_watch=worker_base_input_watch_create(NULL,NULL,client->stop,
-        NULL,NULL,NULL,console_input_failed,client);
+    client->input_watch=worker_base_input_watch_create(NULL,NULL,NULL,client->stop,
+        NULL,NULL,NULL,NULL,console_input_failed,client);
     client->mouse.input_ready=worker_base_input_watch_event(client->input_watch);
     error=client->input_watch ? console_activate(client,TRUE) : GetLastError();
     if (!error && !session_register_teardown(owner,console_client_end,client))error=ERROR_NOT_ENOUGH_MEMORY;

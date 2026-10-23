@@ -47,7 +47,11 @@ DWORD OpenNtBaseClientWowStartup(HANDLE parent,HANDLE *event,BOOL *started);
 DWORD OpenNtBaseClientRetireWorkerlessFrontend(DWORD *retired);
 DWORD OpenNtBaseClientFrontendStateChanged(HANDLE *state_changed);
 /* Borrowed until Disconnect; no allocation or RPC after successful Connect. */
-DWORD OpenNtBaseClientWorkerControls(HANDLE *server,HANDLE *shutdown,HANDLE *console_close);
+DWORD OpenNtBaseClientWorkerControls(HANDLE *server,HANDLE *shutdown,HANDLE *console_close,HANDLE *wow_task_close);
+DWORD OpenNtBaseClientTakeWowTaskClose(uint64_t *identity);
+DWORD WINAPI OpenNtBaseClientFailWowTaskClose(uint64_t identity);
+DWORD WINAPI OpenNtBaseClientBindWowTask(ULONG task,USHORT htask,uint64_t *identity);
+DWORD WINAPI OpenNtBaseClientRetireWowTask(uint64_t identity);
 DWORD OpenNtBaseClientWorkerShutdownEvent(HANDLE *shutdown);
 /* Report inability to continue. NTSRV selects the authenticated participant's
  * close transaction; successful submission is not permission to exit. */

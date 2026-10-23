@@ -293,28 +293,29 @@ static int management_frontend_close_ordering(unsigned phase,unsigned competing)
     watch.frontend_root_generation=root_generation;
     watch.shutdown=CreateEventW(NULL,TRUE,FALSE,NULL);
     watch.console_close=CreateEventW(NULL,TRUE,FALSE,NULL);
-    CHECK(watch.shutdown && watch.console_close);
+    watch.wow_task_close=CreateEventW(NULL,TRUE,FALSE,NULL);
+    CHECK(watch.shutdown && watch.console_close && watch.wow_task_close);
     EnterCriticalSection(&service->lock);InsertTailList(&service->worker_watches,&watch.link);
     LeaveCriticalSection(&service->lock);
     if(preparing) {
-        HANDLE shutdown=NULL,console_close=NULL,saved=watch.console_close;
+        HANDLE shutdown=NULL,console_close=NULL,task_close=NULL,saved=watch.console_close;
         CHECK(!OpenNtBaseServiceConnectionControls(root,root_child.dwProcessId,
-            root_generation,&shutdown,&console_close) && !shutdown && !console_close);
+            root_generation,&shutdown,&console_close,&task_close) && !shutdown && !console_close && !task_close);
         CHECK(OpenNtBaseServiceConnectionControls(worker,worker_child.dwProcessId,
-            worker_generation+1,&shutdown,&console_close)==ERROR_ACCESS_DENIED);
-        CHECK(!shutdown && !console_close);
+            worker_generation+1,&shutdown,&console_close,&task_close)==ERROR_ACCESS_DENIED);
+        CHECK(!shutdown && !console_close && !task_close);
         watch.console_close=NULL;
         CHECK(OpenNtBaseServiceConnectionControls(worker,worker_child.dwProcessId,
-            worker_generation,&shutdown,&console_close)==ERROR_INVALID_HANDLE);
-        CHECK(!shutdown && !console_close); /* Roll back the first duplicate. */
+            worker_generation,&shutdown,&console_close,&task_close)==ERROR_INVALID_HANDLE);
+        CHECK(!shutdown && !console_close && !task_close); /* Roll back the first duplicate. */
         watch.console_close=saved;
         watch.wow=TRUE;
         CHECK(!OpenNtBaseServiceConnectionControls(worker,worker_child.dwProcessId,
-            worker_generation,&shutdown,&console_close) && shutdown && !console_close);
+            worker_generation,&shutdown,&console_close,&task_close) && shutdown && !console_close && task_close);
         CHECK(!SetEvent(shutdown) && GetLastError()==ERROR_ACCESS_DENIED);
-        CloseHandle(shutdown);shutdown=NULL;watch.wow=FALSE;
+        CloseHandle(shutdown);CloseHandle(task_close);shutdown=task_close=NULL;watch.wow=FALSE;
         CHECK(!OpenNtBaseServiceConnectionControls(worker,worker_child.dwProcessId,
-            worker_generation,&shutdown,&console_close) && shutdown && console_close);
+            worker_generation,&shutdown,&console_close,&task_close) && shutdown && console_close && !task_close);
         CHECK(!SetEvent(console_close) && GetLastError()==ERROR_ACCESS_DENIED);
         CloseHandle(shutdown);CloseHandle(console_close);
         puts("PASS atomic connection controls: identity, role, wait-only rights and partial rollback");
@@ -414,7 +415,7 @@ static int management_frontend_close_ordering(unsigned phase,unsigned competing)
     if(root)CHECK(root->frontend_close_requested);
     CHECK(WaitForSingleObject(watch.shutdown,0)==(competing==1 ? WAIT_OBJECT_0 : WAIT_TIMEOUT));
     EnterCriticalSection(&service->lock);RemoveEntryList(&watch.link);LeaveCriticalSection(&service->lock);
-    CloseHandle(watch.shutdown);CloseHandle(watch.console_close);
+    CloseHandle(watch.shutdown);CloseHandle(watch.console_close);CloseHandle(watch.wow_task_close);
     CHECK(!OpenNtBaseServiceDisconnect(worker));
     if(root)CHECK(!OpenNtBaseServiceDisconnect(root));
     CHECK(OpenNtBaseServiceStop(service));
@@ -2886,6 +2887,48 @@ int main(int argc,char **argv)
         }
         CHECK(wowRows==1 && taskRows==1);
         HeapFree(GetProcessHeap(),0,tree);
+    }
+    {
+        OPENNT_BASE_WORKER_INFO *tree=NULL;
+        OPENNT_BASE_MANAGEMENT_KEY taskKey={0};
+        uint32_t count=0,index;
+        uint64_t epoch=0,ticket=0;
+        /* A real WOW task must first authenticate its local original HTASK.
+         * NTSRV owns only the opaque management key: close delivery never
+         * exposes either htask16 or a private original record to NTMON. */
+        CHECK(OpenNtBaseServiceBindWowTask(wowWorker,wowChild.dwProcessId,
+            wowGeneration,wowTask,0x3344u,&ticket)==ERROR_SUCCESS && ticket);
+        CHECK(OpenNtBaseServiceBindWowTask(wowWorker,wowChild.dwProcessId,
+            wowGeneration,wowTask,0x3344u,&epoch)==ERROR_ALREADY_EXISTS && !epoch);
+        CHECK(!OpenNtBaseServiceSnapshotCopy(service,&epoch,&tree,&count));
+        for(index=0;index<count;++index) {
+            if(tree[index].key.category==MANAGEMENT_WOW_TASK &&
+                tree[index].key.generation==wowGeneration && tree[index].task==wowTask) {
+                taskKey=tree[index].key;
+                CHECK(taskKey.object==ticket && tree[index].actions==MANAGEMENT_CAN_CLOSE);
+            }
+        }
+        CHECK(taskKey.object==ticket);
+        HeapFree(GetProcessHeap(),0,tree);tree=NULL;
+        CHECK(OpenNtBaseServiceCloseManagementNode(service,&taskKey)==ERROR_SUCCESS);
+        /* Repeated user intent is idempotent: one local delivery only. */
+        CHECK(OpenNtBaseServiceCloseManagementNode(service,&taskKey)==ERROR_SUCCESS);
+        CHECK(OpenNtBaseServiceTakeWowTaskClose(wowWorker,wowChild.dwProcessId,
+            wowGeneration,&epoch)==ERROR_SUCCESS && epoch==ticket);
+        CHECK(OpenNtBaseServiceTakeWowTaskClose(wowWorker,wowChild.dwProcessId,
+            wowGeneration,&epoch)==ERROR_NOT_FOUND && !epoch);
+        /* A selected original entry can fail without spinning the manual
+         * event or faking termination; a later explicit operator close is
+         * allowed on the same authenticated task row. */
+        CHECK(OpenNtBaseServiceFailWowTaskClose(wowWorker,wowChild.dwProcessId,
+            wowGeneration,ticket)==ERROR_SUCCESS);
+        CHECK(OpenNtBaseServiceCloseManagementNode(service,&taskKey)==ERROR_SUCCESS);
+        CHECK(OpenNtBaseServiceTakeWowTaskClose(wowWorker,wowChild.dwProcessId,
+            wowGeneration,&epoch)==ERROR_SUCCESS && epoch==ticket);
+        CHECK(OpenNtBaseServiceRetireWowTask(wowWorker,wowChild.dwProcessId,
+            wowGeneration,ticket)==ERROR_SUCCESS);
+        CHECK(OpenNtBaseServiceCloseManagementNode(service,&taskKey)==ERROR_NOT_SUPPORTED);
+        puts("PASS WOW task close binds opaque management identity, delivers once, retries only on later intent and retires safely");
     }
     if (wowStartup) {
         /* Test-only identity fault: same task number, different original

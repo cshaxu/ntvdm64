@@ -283,12 +283,16 @@ int main(int argc,char **argv)
     BOOL tree=argc==2 && !_stricmp(argv[1],"--tree-json");
     BOOL trace=argc==3 && !_stricmp(argv[1],"--trace-json");
     BOOL node_close=argc==4 && !_stricmp(argv[1],"--close-node");
+    BOOL wow_task_close=argc==2 && !_stricmp(argv[1],"--close-wow-task");
+    BOOL wow_task_close_index=argc==3 && !_stricmp(argv[1],"--close-wow-task-index");
+    ULONG wow_task_index=wow_task_close_index ? strtoul(argv[2],NULL,10) : 0;
     ULONG selected_category=node_close ? strtoul(argv[2],NULL,10) : MANAGEMENT_WORKER;
-    BOOL existing=trace || tree || node_close || (argc>=2 && (!_stricmp(argv[1],"--existing") || !_stricmp(argv[1],"--terminate")));
+    BOOL existing=trace || tree || node_close || wow_task_close || wow_task_close_index ||
+        (argc>=2 && (!_stricmp(argv[1],"--existing") || !_stricmp(argv[1],"--terminate")));
     BOOL terminate=(argc==2 || argc==3) && !_stricmp(argv[1],"--terminate");
     DWORD selected_pid=node_close ? strtoul(argv[3],NULL,10) : terminate && argc==3 ? strtoul(argv[2],NULL,10) : 0;
     ULONG index;
-    if (argc!=1 && !empty && !existing) { fputs("usage: monitor-rpc-test [--empty|--existing|--tree-json|--terminate [pid]|--close-node category pid]\n",stderr); return 2; }
+    if (argc!=1 && !empty && !existing) { fputs("usage: monitor-rpc-test [--empty|--existing|--tree-json|--terminate [pid]|--close-node category pid|--close-wow-task|--close-wow-task-index index]\n",stderr); return 2; }
     CHECK(broker_rpc_capture_scope(&scope));
     if (!existing) {
         CHECK(GetModuleFileNameW(NULL,path,MAX_PATH));
@@ -342,9 +346,18 @@ int main(int argc,char **argv)
                 (unsigned long)entries[index].process_id,(unsigned long)entries[index].task,
                 (unsigned long)entries[index].kind,(unsigned long)entries[index].state,
                 entries[index].image);
-        if (terminate || node_close) {
+        if (terminate || node_close || wow_task_close || wow_task_close_index) {
             ULONG selected=0;
-            if(argc==3 || node_close) {
+            if(wow_task_close || wow_task_close_index) {
+                ULONG tasks=0; BOOL selected_task=FALSE;
+                for(index=0;index<count;++index)
+                    if(entries[index].key.category==MANAGEMENT_WOW_TASK) {
+                        if(tasks==wow_task_index) {selected=index;selected_task=TRUE;}
+                        ++tasks;
+                    }
+                if(wow_task_close)CHECK(tasks==1);
+                else CHECK(selected_task);
+            } else if(argc==3 || node_close) {
                 CHECK(selected_pid!=0);
                 for(selected=0;selected<count;++selected)
                     if(entries[selected].process_id==selected_pid &&

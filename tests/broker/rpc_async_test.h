@@ -6,13 +6,14 @@
  * production cancellation, never a test transport or replacement endpoint. */
 static __inline DWORD test_rpc_connect_controls(handle_t binding,HANDLE process,ULONG protocol,
     unsigned char *application,ULONG *server_protocol,unsigned char *server_version,
-    VDM_CONNECTION *connection,ULONG *generation,HANDLE *server,HANDLE *shutdown,HANDLE *console_close)
+    VDM_CONNECTION *connection,ULONG *generation,HANDLE *server,HANDLE *shutdown,HANDLE *console_close,
+    HANDLE *wow_task_close)
 {
     RPC_ASYNC_STATE async;DWORD error=common_rpc_begin_async(&async);
     if(error)return error;
     RpcTryExcept {
         Client_Connect(&async,binding,process,protocol,application,server_protocol,
-            server_version,connection,generation,server,shutdown,console_close);
+            server_version,connection,generation,server,shutdown,console_close,wow_task_close);
     }
     RpcExcept(1){error=RpcExceptionCode();}
     RpcEndExcept
@@ -22,12 +23,13 @@ static __inline DWORD test_rpc_connect(handle_t binding,HANDLE process,ULONG pro
     unsigned char *application,ULONG *server_protocol,unsigned char *server_version,
     VDM_CONNECTION *connection,ULONG *generation)
 {
-    HANDLE server=NULL,shutdown=NULL,console_close=NULL;
+    HANDLE server=NULL,shutdown=NULL,console_close=NULL,wow_task_close=NULL;
     DWORD error=test_rpc_connect_controls(binding,process,protocol,application,
-        server_protocol,server_version,connection,generation,&server,&shutdown,&console_close);
+        server_protocol,server_version,connection,generation,&server,&shutdown,&console_close,&wow_task_close);
     if(server)CloseHandle(server);
     if(shutdown)CloseHandle(shutdown);
     if(console_close)CloseHandle(console_close);
+    if(wow_task_close)CloseHandle(wow_task_close);
     return error;
 }
 static __inline DWORD test_rpc_disconnect(handle_t binding,HANDLE process,ULONG generation,

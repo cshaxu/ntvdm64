@@ -1,7 +1,7 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(64.0),
+    version(65.0),
     pointer_default(unique)
 ]
 interface vdm_service
@@ -286,7 +286,28 @@ interface vdm_service
         [out] unsigned long *generation,
         [out, system_handle(sh_process)] HANDLE *server,
         [out, system_handle(sh_event)] HANDLE *shutdown,
-        [out, system_handle(sh_event)] HANDLE *console_close);
+        [out, system_handle(sh_event)] HANDLE *console_close,
+        [out, system_handle(sh_event)] HANDLE *wow_task_close);
+    /* The worker maps the returned broker identity to its own current
+     * original TD/HTASK.  HTASK is never made a management or wire selector. */
+    error_status_t BindWowTask(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation, [in] unsigned long task,
+        [in, range(1,65535)] unsigned short htask,
+        [out] hyper *identity);
+    error_status_t RetireWowTask(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation, [in] hyper identity);
+    error_status_t TakeWowTaskClose(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation, [out] hyper *identity);
+    error_status_t FailWowTaskClose(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation, [in] hyper identity);
     /* A launcher reports only the PIDs currently attached to its own
      * Console.  BaseSrv compares this local observation with authenticated
      * connections to choose an existing ConsoleRecord; no helper process,

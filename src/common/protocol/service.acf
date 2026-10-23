@@ -29,6 +29,10 @@ interface vdm_service
     [async] WaitFrontendConsoleRestored();
     [async] Connect();
     [async] CloseManagementNode();
+    [async] BindWowTask([context_handle_noserialize] connection);
+    [async] RetireWowTask([context_handle_noserialize] connection);
+    [async] TakeWowTaskClose([context_handle_noserialize] connection);
+    [async] FailWowTaskClose([context_handle_noserialize] connection);
     [async] FrontendCloseQuiesced();
     [async] FrontendConsoleRestored();
     [async] RetireWorkerlessFrontend();

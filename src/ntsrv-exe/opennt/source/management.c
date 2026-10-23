@@ -46,6 +46,14 @@ static OPENNT_BASE_MANAGEMENT_LABEL *service_wow_label(OPENNT_BASE_WORKER_WATCH 
         if(label->wow_record==record && service_same_management_wait(label->parent_wait,record->hWaitForParent))
             return label;
     }
+    /* A live worker may publish its original TD while the GetNext request is
+     * still returning through BaseSrv.  Keep its authenticated task label
+     * pending until the original record is observable; never invent a record. */
+    for(link=watch->management_labels.Flink;link!=&watch->management_labels;link=link->Flink) {
+        OPENNT_BASE_MANAGEMENT_LABEL *label=CONTAINING_RECORD(link,OPENNT_BASE_MANAGEMENT_LABEL,link);
+        if(label->wow_record==NULL && label->wow_task_bound && label->task==record->iTask)
+            return label;
+    }
     return NULL;
 }
 
@@ -65,7 +73,9 @@ static void service_capture_wow_labels(OPENNT_BASE_WORKER_WATCH *watch)
         for(record=WOWHead->WOWRecord;record;record=record->WOWRecordNext)
             if(label->wow_record==record && service_same_management_wait(label->parent_wait,record->hWaitForParent))
                 {live=TRUE;break;}
-        if(!live){RemoveEntryList(link);HeapFree(GetProcessHeap(),0,label);}
+        if(!live && !(label->wow_record==NULL && label->wow_task_bound)){
+            RemoveEntryList(link);HeapFree(GetProcessHeap(),0,label);
+        }
     }
     for(record=WOWHead->WOWRecord;record;record=record->WOWRecordNext) {
         OPENNT_BASE_MANAGEMENT_LABEL *label=service_wow_label(watch,record);
@@ -77,6 +87,7 @@ static void service_capture_wow_labels(OPENNT_BASE_WORKER_WATCH *watch)
             label->identity=++watch->service->next_management_task;
             InsertTailList(&watch->management_labels,&label->link);
         }
+        label->wow_record=record;label->parent_wait=record->hWaitForParent;
         label->task=record->iTask;
         if(record->lpVDMInfo)service_copy_management_image(record->lpVDMInfo,label->image);
     }
@@ -451,9 +462,12 @@ static DWORD service_append_worker(OPENNT_BASE_WORKER_WATCH *watch,
             task.key=service_management_key(watch->service,MANAGEMENT_WOW_TASK,worker.sequence,label->identity);
             task.parent=worker.key;task.depth=1;task.kind=1;task.task=record->iTask;
             task.display_state=record->fDispatched ? MANAGEMENT_BUSY : MANAGEMENT_IDLE;
+            if(label->wow_task_bound && !label->wow_task_close_requested &&
+                watch->close_kind==WORKER_CLOSE_NONE)
+                task.actions=MANAGEMENT_CAN_CLOSE;
             lstrcpynW(task.image,label->image[0] ? label->image : L"<UNKNOWN>",OPENNT_BASE_WORKER_IMAGE_CHARS);
-            /* WOW tasks have no individual host PID/creation time or proven
-             * targeted-close API. Do not turn DEL into a whole-worker kill. */
+            /* A per-task action is available only after the authenticated WOW
+             * worker has bound this original record to its live TD/HTASK. */
             error=service_append_management(rows,count,capacity,&task);
             if(error)break;
         }

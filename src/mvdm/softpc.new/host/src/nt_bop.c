@@ -2,6 +2,7 @@
 #include <ntrtl.h>
 #include <nturtl.h>
 #include <windows.h>
+#include <stdint.h>
 #include <vdm.h>
 #include "insignia.h"
 #include "host_def.h"
@@ -169,6 +170,19 @@ HANDLE hWOWDll;
 MYFARPROC WOWDispatchEntry;
 MYFARPROC WOWInitEntry;
 VOID (*pW32HungAppNotifyThread)(UINT) = NULL;
+
+/* T449 S3: the broker selects an opaque management ticket; WOW32 resolves
+ * it against its live original TD mapping and owns the actual HTASK exit.
+ * This is intentionally a narrow loader bridge, not a second control path. */
+DWORD ntvdm_wow_terminate_ticket(uint64_t ticket)
+{
+    typedef DWORD (WINAPI *terminate_ticket_fn)(uint64_t);
+    terminate_ticket_fn terminate_ticket;
+    if(!ticket || !hWOWDll)return ERROR_INVALID_STATE;
+    terminate_ticket=(terminate_ticket_fn)GetProcAddress(hWOWDll,
+        "W32TerminateTaskTicket");
+    return terminate_ticket ? terminate_ticket(ticket) : ERROR_PROC_NOT_FOUND;
+}
 
 static BOOL WowModeInitialized = FALSE;
 

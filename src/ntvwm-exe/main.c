@@ -352,8 +352,8 @@ static DWORD membership_initialize(native_membership *state)
     if(!error)error=OpenNtBaseClientRegisterNativeBackend(NULL);
     if(!error)error=worker_base_io_release_event(&state->io_release);
     if(!error) {
-        state->input_watch=worker_base_input_watch_create(state->console_close,state->shutdown,state->quit,
-            consume_input,NULL,NULL,input_failure,state);
+        state->input_watch=worker_base_input_watch_create(state->console_close,state->shutdown,NULL,state->quit,
+            consume_input,NULL,NULL,NULL,input_failure,state);
         if(!state->input_watch)error=GetLastError();
     }
     if(!error) {
@@ -400,7 +400,7 @@ static void broker_completion_fault(void *context,DWORD error)
 static int run_gui_launcher(void)
 {
     DWORD error;
-    HANDLE server=NULL,shutdown=NULL,console_close=NULL;
+    HANDLE server=NULL,shutdown=NULL,console_close=NULL,wow_task_close=NULL;
     ntvwm_executions *requests=NULL;
     ntvwm_execution_io io={0};
     ntvwm_next_command command;
@@ -411,7 +411,7 @@ static int run_gui_launcher(void)
      * carrier.  It deliberately consumes neither instruction: once a target
      * is bound, NTSRV only observes it; before binding there is no Console or
      * resident task for this one-shot process to tear down. */
-    if(!error)error=worker_base_controls(&server,&shutdown,&console_close);
+    if(!error)error=worker_base_controls(&server,&shutdown,&console_close,&wow_task_close);
     if(!error)error=ntvwm_executions_open(&requests);
     if(!error)ntvwm_executions_bind_io(requests,&io);
     if(!error) {
@@ -456,7 +456,10 @@ int wmain(int argc,WCHAR **argv)
     CsrPortHeap=HeapCreate(0,0,0);
     if(!CsrPortHeap)return GetLastError();
     error=worker_base_connect();
-    if(!error)error=worker_base_controls(&membership.server,&membership.shutdown,&membership.console_close);
+    {
+        HANDLE wow_task_close=NULL;
+        if(!error)error=worker_base_controls(&membership.server,&membership.shutdown,&membership.console_close,&wow_task_close);
+    }
     if(!error)managed=TRUE;
     if(!error) error=ntvwm_console_initialize();
     if(!error) {

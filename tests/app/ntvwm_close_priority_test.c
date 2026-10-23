@@ -13,7 +13,7 @@ static worker_base_input_watch *unexpected_watch(void){++unexpected_start;return
 #define wmain ntvwm_unused_entry
 #define ntvwm_console_close test_console_close
 #define CreateThread(a,b,c,d,e,f) unexpected_thread()
-#define worker_base_input_watch_create(a,b,c,d,e,f,g,h) unexpected_watch()
+#define worker_base_input_watch_create(a,b,c,d,e,f,g,h,i,j) unexpected_watch()
 #include "../../src/ntvwm-exe/main.c"
 #undef worker_base_input_watch_create
 #undef CreateThread

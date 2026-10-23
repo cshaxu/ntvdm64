@@ -22,6 +22,7 @@
 --*/
 
 #include "precomp.h"
+#include "wow_task_termination.h"
 #pragma hdrstop
 /* DIVERGENCE(MVDM-HOST-DIV-356): parent authorizes whole-worker cleanup. */
 extern DWORD WINAPI NtvdmAuthorizeExit(DWORD exit_code);
@@ -1103,6 +1104,12 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
             host_ExitThread(EXIT_FAILURE);
             }
 
+        /* DIVERGENCE(MVDM-HOST-DIV-449): W32Thread is the original point at
+         * which this live 16-bit task owns both its exact BaseSrv iTask and
+         * HTASK.  Keep management identity binding beside that hand-off;
+         * InitTask intentionally receives zero for a separate WOW VDM. */
+        if (td.VDMInfoiTaskID != (UINT)-1 && td.VDMInfoiTaskID != 0)
+            (void)wow_task_termination_bind(td.VDMInfoiTaskID,td.htask16);
 
         dwLastHotkey = 0;
         dwLastX = dwLastY = dwLastXSize = dwLastYSize = (DWORD) CW_USEDEFAULT;
@@ -1743,6 +1750,11 @@ VOID W32DestroyTask( PTD ptd)
     if (!(ptd->dwFlags & TDF_TASKCLEANUPDONE)) {
         (pfnOut.pfnWOWCleanup)(HINSTRES32(ptd->hInst16), (DWORD) ptd->htask16, NULL, 0);
     }
+
+    /* DIVERGENCE(MVDM-HOST-DIV-449): the original task owner has completed
+     * its cleanup. Retire only the project-owned management binding now; it
+     * never owns, selects, or alters the original task destruction path. */
+    wow_task_termination_retire(ptd->htask16);
 
 
     // Remove this task from the linked list of tasks
@@ -2934,6 +2946,9 @@ DWORD W32HungAppNotifyThread(UINT htaskKill)
                     );
 
             if (nMsgBoxChoice == IDCANCEL) {
+                 /* DIVERGENCE(MVDM-HOST-DIV-449): original user cancellation
+                  * leaves this exact task live; reopen only its ticket. */
+                 wow_task_termination_fail((USHORT)htaskKill);
                  ExitThread(0);
             }
         }
@@ -3001,6 +3016,9 @@ DWORD W32HungAppNotifyThread(UINT htaskKill)
                  EnterCriticalSection(&gcsHungApp);
                  *pNtVDMState &= ~VDM_WOWHUNGAPP;
                  LeaveCriticalSection(&gcsHungApp);
+                 /* DIVERGENCE(MVDM-HOST-DIV-449): the original task remains
+                  * live after cancel, so an explicit later close may retry. */
+                 wow_task_termination_fail((USHORT)htaskKill);
                  ExitThread(0);
             }
 
@@ -3019,6 +3037,9 @@ DWORD W32HungAppNotifyThread(UINT htaskKill)
     } else { // task not found
 
         LOGDEBUG(LOG_ALWAYS,("W32HungAppNotifyThread: Task already Terminated \n"));
+        /* DIVERGENCE(MVDM-HOST-DIV-449): no original cleanup will retire a
+         * still-published binding on this path. Reopen only that ticket. */
+        wow_task_termination_fail((USHORT)htaskKill);
 
     }
 

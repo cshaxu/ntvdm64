@@ -9,10 +9,11 @@
 DWORD fixture_connection_control(BOOL console,OPENNT_BASE_CONNECTION *connection,
     DWORD pid,DWORD generation,HANDLE *selected)
 {
-    HANDLE shutdown=NULL,close=NULL;
-    DWORD error=OpenNtBaseServiceConnectionControls(connection,pid,generation,&shutdown,&close);
+    HANDLE shutdown=NULL,close=NULL,task_close=NULL;
+    DWORD error=OpenNtBaseServiceConnectionControls(connection,pid,generation,&shutdown,&close,&task_close);
     *selected=console ? close : shutdown;
     if(console ? shutdown!=NULL : close!=NULL)CloseHandle(console ? shutdown : close);
+    if(task_close)CloseHandle(task_close);
     return error;
 }
 

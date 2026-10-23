@@ -45,18 +45,19 @@ static __declspec(thread) session *bound;
 static HANDLE delivery,peer,stop,readiness,frontend_process,video_wait;
 static HANDLE server_thread;
 static void create_transport(void);
-static HANDLE broker_shutdown,broker_console_close;
+static HANDLE broker_shutdown,broker_console_close,broker_wow_task_close;
 static HANDLE broker_lifetime;
 static BOOL lifecycle_wow;
 DWORD OpenNtBaseClientFailure(DWORD error)
 { return broker_lifetime && WaitForSingleObject(broker_lifetime,0)==WAIT_OBJECT_0 ? ERROR_INVALID_HANDLE : error; }
-DWORD worker_base_controls(HANDLE *process,HANDLE *shutdown,HANDLE *console_close)
+DWORD worker_base_controls(HANDLE *process,HANDLE *shutdown,HANDLE *console_close,HANDLE *wow_task_close)
 {
     if(!broker_lifetime)broker_lifetime=CreateEventW(NULL,TRUE,FALSE,NULL);
     if(!broker_shutdown)broker_shutdown=CreateEventW(NULL,TRUE,FALSE,NULL);
+    if(lifecycle_wow && !broker_wow_task_close)broker_wow_task_close=CreateEventW(NULL,TRUE,FALSE,NULL);
     if(!lifecycle_wow && !broker_console_close)broker_console_close=CreateEventW(NULL,TRUE,FALSE,NULL);
-    *process=broker_lifetime;*shutdown=broker_shutdown;*console_close=broker_console_close;
-    return broker_lifetime && broker_shutdown && (lifecycle_wow || broker_console_close) ? ERROR_SUCCESS : GetLastError();
+    *process=broker_lifetime;*shutdown=broker_shutdown;*console_close=broker_console_close;*wow_task_close=broker_wow_task_close;
+    return broker_lifetime && broker_shutdown && (lifecycle_wow ? broker_wow_task_close : broker_console_close) ? ERROR_SUCCESS : GetLastError();
 }
 static HANDLE fault_reported;
 static volatile LONG fault_reports;

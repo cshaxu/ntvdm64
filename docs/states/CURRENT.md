@@ -2,33 +2,29 @@
 
 ## Current Work
 
-**Active: M0 T449 S2**, Ordinary Mode, one implementer with independent
-self-review. This is the owner-accepted S2 closure-record packet at
-`8d9ce29c3`; it authorizes no further S2 implementation and no successor S is
-admitted yet. The owner accepted and closed T448 and admitted the queued WOW32
-execution continuation. T449 resumes the unfinished T447 execution
-foundations; it does not restart or declare complete the earlier work.
+**No active S.** M0 T449 S3 is closed by this delivery; S4 remains a separate
+integration/acceptance stage and requires later admission.
 
 ## Active Packet
 
-| Field | T449 S2 — execution, messages and ordinary lifecycle |
+| Field | T449 S3 — targeted WOW task termination |
 | --- | --- |
-| Identifier Mode | M0 T449 S2, Ordinary Mode; one implementer and independent self-review. |
+| Identifier Mode | M0 T449 S3, Ordinary Mode; one implementer and independent self-review. |
 | Candidate Proposal | [WOW32 execution continuation](../proposals/proposal-wow32-execution-continuation-001.md). |
-| Admission And Approval | Owner approved T448 closure and continuation of the unfinished WOW foundations; S1 handoff delivered at `2dd9cf0b0`. |
-| Objective | Connect inherited M1--M5 message, callback, conversion, object and ordinary lifecycle paths as dependency-complete groups, preserving original behavior and approved host boundaries. |
-| Non-goals | No guest changes, new semantic waiver, unrelated WOW expansion, individual-task deletion (S3), or claim of full provider completion. |
-| Reference Baseline | T448 released commit `55566cadb`, [T448 closure](../history/m0-t448-closure.md), [S1 handoff](../etc/evidence/m0-t449-s1-wow-continuation-audit.md), and [T447 working plan](../etc/operations/t447-wow-execution-plan.md). |
-| Files And ABI Surface | Selected WOW32 mirrors and host adapters, relevant worker/service boundaries, tests and their exception registers; no guest ABI change. |
-| Applicable Rules | Execution, architecture, coding, source policy, guest immutability, approved modern USER/external-window boundaries and minimum registered mirror diff. |
-| Verification | Source-first coherent implementation groups; then background x86/x64 builds, applicable actual guest/native message modes and failure/lifecycle tests, complete package publication and hash checks, governance and independent self-review. |
-| Expected Markers | Exact caller/ownership and failure reconciliation for M1--M5, current-package guest/native witnesses, ordinary retirement and explicit residual boundaries; no mock-only or old test represented as real guest proof. |
-| Asset Needs | Read-only OpenNT source, existing release/guest package, stable Ninja/ccache trees and recorded T447/T448 tests; no guest rebuild. |
-| Reporting Requirements | Report original reuse, removed duplication, mirror diff and exceptions, tests, package hashes and unresolved boundaries. Completed disposable evidence is under `build/t449-s2`, `build/t449-s2-message-cross-r9`, `build/t449-s2-message-pending-r3`, `build/t449-s2-message-external-r2`, `build/t449-s2-message-construction-r6` and `build/t449-s2-component-build-r1`, plus the existing fixture's required direct children `build/t449-s2-dde-alias-r1` through `r4`; invalidated task-owned attempts are cross r2--r7 and construction r3/r5. Each is owned by this S, 1 GiB and 60 minutes per group, review after 15 minutes without progress. |
-| Stop Conditions | Guest modification, new observable semantic concession, unapproved expanded task scope or an unsupported ownership assumption. |
-| Exit Criteria | M1--M5 and promoted prerequisites reconciled against production source and scoped tests; whole-group repairs reviewed, built, tested, coherently published and hash-verified, committed and pushed. Individual deletion and final T acceptance remain separate. |
-| Original Owner Request | Close T448 and admit the previously unfinished WOW foundational T task. |
-| Similar-Issue Sweep | Include message families, callback nesting and original scheduler, construction/transfer/abort, object reuse and normal task retirement, control/dialog/menu prerequisites, both native directions and failure cleanup. |
+| Admission And Approval | Owner accepted S2 and directed continued execution through T449's pre-acceptance boundary. |
+| Objective | Connect one authentic Win16 `HTASK` termination request through existing NTSRV RPC, worker-base dispatch and the selected original WOW termination/cleanup path, while preserving sibling task and whole-worker-close semantics. |
+| Non-goals | No guest changes, launch-request/PID identity substitution, new transport, replacement scheduler/terminator, worker-close semantic change, or unrelated WOW feature recovery. |
+| Reference Baseline | S2 release `8d9ce29c3`, [S2 closure record](#s2-closure-record), T447 source/working-plan evidence and selected original WOW worker/task code. |
+| Files And ABI Surface | Existing NTSRV management RPC/worker registry, worker-base management dispatch, NTVM WOW consumer and selected WOW32 task lifecycle mirrors; project-owned tests/evidence only; no guest ABI. |
+| Applicable Rules | Execution, architecture, coding, source policy, immutable guest, original/modern-host boundary, existing RPC/IO-only control policy and minimum registered mirror diff. |
+| Verification | First map actual original task publication, identity, normal/requested cleanup, worker close and failure paths. Then connect one coherent group; background x86/x64 build plus actual two-task/sibling, reuse, race, worker-loss and close-isolation verification; publish/hash/independent review. |
+| Expected Markers | A service request is authenticated to one live worker/task incarnation; original `HTASK` is never guessed; completion is original cleanup/retirement, not an early hung or launch event; every failed path reports failure without a leaked reservation or false completion. |
+| Asset Needs | Read-only original OpenNT source and existing immutable guest/release package; stable Ninja/ccache trees; no guest rebuild. |
+| Reporting Requirements | Record selected original caller/owner chain, rejected autonomous alternatives, identity/lifetime/reuse rules, mirror diffs/exceptions, tests and package hashes. S2 evidence remains immutable under its existing build roots; S3 owns new bounded build evidence only. |
+| Stop Conditions | Guest change, new observable semantic concession, requirement to infer an `HTASK` from PID/request ID, hidden third transport, or an unproved original ownership assumption. |
+| Exit Criteria | Two task identities in one WOW worker are independently observed; either may be requested, exactly one original task retires and its sibling remains usable; duplicate/reuse/worker-death/whole-worker-close negatives are correct; all product gates pass, package is coherently deployed, reviewed, committed and pushed. |
+| Original Owner Request | Continue T449 under the established source-first, minimal-diff WOW recovery rules until its pre-acceptance boundary. |
+| Similar-Issue Sweep | Internal and guest-created tasks, separate WOW workers, natural exit, duplicate management requests, nested send/unresponsive task, worker death and distinct console/worker-close paths. |
 
 ## Inherited Scope
 
@@ -113,13 +109,33 @@ acceptance remain explicitly unstarted.
 
 ## S2 Closure Record
 
-The owner accepted S2 after verified P delivery `8d9ce29c3`. The committed
+The owner accepted [S2 after verified P delivery](../etc/evidence/m0-t449-s2-dde-ownership-audit.md)
+`8d9ce29c3`. The committed
 thirteen-image package is deployed at both mandated destinations, its manifest
 hashes match, and the immutable guest archive remains unchanged. The fixed
 scope was DDE post-result ownership plus its M1--M5 selected execution and
 ordinary-retirement witnesses. It does not close S3 targeted WOW task
 termination or S4 whole-T reconciliation. No successor S is active until the
 owner explicitly admits it.
+
+## S3 Closure Record
+
+The current candidate routes only an authenticated shared-WOW `iTask` through
+the existing management RPC, worker-base close event and original WOW32
+`W32HungAppNotifyThread`/`W32DestroyTask` path.  Separate WOW remains
+worker-close-only.  The two original user-cancel exits now report ticket
+failure, so a later explicit request can retry without inventing a terminator.
+The post-link candidate package `build/t449-s3/media-r6` has passed service
+ticket lifecycle and worker event regressions, and all thirteen images are
+published/hash-verified at `assets/release` and `O:\winnt\system32`.  It is
+not S3 closure: no accessible desktop currently permits the required real
+two-task/sibling/reuse/worker-loss matrix.
+
+That desktop limitation was later resolved.  The same-session witness in
+`m0-t449-s3-targeted-termination-progress.md` exercised two real tasks in one
+shared worker, target-only retirement, sibling survival, reuse, duplicate
+request handling and whole-worker close.  S3 is therefore closed; guest media
+and configuration remain unchanged, and S4 is not admitted by this record.
 
 ## Recent M0 Closures
 

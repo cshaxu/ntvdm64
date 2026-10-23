@@ -1,54 +1,80 @@
 [
-  {
-    "name": "run16.exe",
-    "sha256": "C19B5E4EEDE7911DEF574BEA0990EFD2FED9075DF7CD4F6FDF41505C1CAFBE11"
-  },
-  {
-    "name": "ntsrv.exe",
-    "sha256": "ED83757BA03016908CE9B5A94096D1589770FCE1C480629513E31F134D290444"
-  },
-  {
-    "name": "ntcon.exe",
-    "sha256": "8818BA20648EABD486B2045FC9CF8037FCFE12855B9F73D6763D9249C5D87429"
-  },
-  {
-    "name": "ntvdm.exe",
-    "sha256": "3BE5845A83BFAD0D9D7D597E7AD4A608ED803405DF2075E1A41DCF7F29B3A326"
-  },
-  {
-    "name": "ntvwm.exe",
-    "sha256": "72E930289FC8BB8751250BBBC7C175A837D503CFDF4CAFF41D8B1D43FDEFB162"
-  },
-  {
-    "name": "ntmon.exe",
-    "sha256": "F6C911D24B243F3685286E1C03C5A9C53E92661A6B26315F8F182155832AA880"
-  },
-  {
-    "name": "WOW32.DLL",
-    "sha256": "E1424CAC174C3388D293142A1A7F159634088BA07E65797408997A3B83C5BC39"
-  },
-  {
-    "name": "VDMREDIR.DLL",
-    "sha256": "CFAE1661372AB8072084EB3BBEBD5A035D82571D86D82232D80298CDDA3038A1"
-  },
-  {
-    "name": "nthook32.dll",
-    "sha256": "8D87D81DA535880020F006E62AD4C8523A4BC4D593DCF441F1E47DA32A4B2090"
-  },
-  {
-    "name": "nthook64.dll",
-    "sha256": "56DB2C9E8AC1BB94A5D4A27A192BD60C8BCB7D61072C2283C893BBD15867E01D"
-  },
-  {
-    "name": "ntw16s32.dll",
-    "sha256": "1023848A330B9890F3D6DBB2BB6DF35CA9546191548850190E536D747B6F0C3A"
-  },
-  {
-    "name": "ntw16s64.dll",
-    "sha256": "5EA70F47A8D9035868BB3169C37C209E27684EE500ED2200EEA054B1B7EEAF5A"
-  },
-  {
-    "name": "W16Style.exe",
-    "sha256": "DED9B130FA373D9E0A55F9AB06AC23B325215BAA4CE293E1577D04F5B8E8ACAE"
-  }
+    {
+        "Name":  "run16.exe",
+        "RelativePath":  "system32\\run16.exe",
+        "Sha256":  "6BEF50448707EA5DCEB8B33F5FD56D7F435756C6973F1975B50BF24FED74E95B",
+        "Machine":  34404
+    },
+    {
+        "Name":  "ntsrv.exe",
+        "RelativePath":  "system32\\ntsrv.exe",
+        "Sha256":  "7EC95C5C976B185E3CFBBD5B79615F3134C2C618EBF7DBF71F811573E3B1628D",
+        "Machine":  34404
+    },
+    {
+        "Name":  "ntcon.exe",
+        "RelativePath":  "system32\\ntcon.exe",
+        "Sha256":  "C7F7957482429CC3FB1A1086FFCC571D96EBEAA5B8C19C30524228E85F15E432",
+        "Machine":  34404
+    },
+    {
+        "Name":  "ntvdm.exe",
+        "RelativePath":  "system32\\ntvdm.exe",
+        "Sha256":  "0AC094DFEDC780A2CBFD999486A2519551C3663AAC7C0547AEF7A9F7AE8418FD",
+        "Machine":  332
+    },
+    {
+        "Name":  "ntvwm.exe",
+        "RelativePath":  "system32\\ntvwm.exe",
+        "Sha256":  "D724EF6109710E2419C060863E0B6B85EDC09CFDE71E1FAC9FE27F6BF2043FCD",
+        "Machine":  34404
+    },
+    {
+        "Name":  "ntmon.exe",
+        "RelativePath":  "system32\\ntmon.exe",
+        "Sha256":  "CE2CE8ED4AAA8D77866C22DFC65E57813B84B18A8F24F2DBE9405EE52FE0013C",
+        "Machine":  34404
+    },
+    {
+        "Name":  "WOW32.DLL",
+        "RelativePath":  "system32\\WOW32.DLL",
+        "Sha256":  "E3B58B29E41CCA7BFDA8F39262A9D08767234F876B5B72EFD94E2680D15A0A0D",
+        "Machine":  332
+    },
+    {
+        "Name":  "VDMREDIR.DLL",
+        "RelativePath":  "system32\\VDMREDIR.DLL",
+        "Sha256":  "1AFF9FCB96DFDD1A42791B777DD445A206E13944B8433A7974B3F1AE13DFBF81",
+        "Machine":  332
+    },
+    {
+        "Name":  "nthook32.dll",
+        "RelativePath":  "system32\\nthook32.dll",
+        "Sha256":  "8D87D81DA535880020F006E62AD4C8523A4BC4D593DCF441F1E47DA32A4B2090",
+        "Machine":  332
+    },
+    {
+        "Name":  "nthook64.dll",
+        "RelativePath":  "system32\\nthook64.dll",
+        "Sha256":  "B0F0A62EA3CD74CF45B6BCC9A04F834C2A73BF37ADD20A85EA73619E1326BC04",
+        "Machine":  34404
+    },
+    {
+        "Name":  "ntw16s32.dll",
+        "RelativePath":  "system32\\ntw16s32.dll",
+        "Sha256":  "1023848A330B9890F3D6DBB2BB6DF35CA9546191548850190E536D747B6F0C3A",
+        "Machine":  332
+    },
+    {
+        "Name":  "ntw16s64.dll",
+        "RelativePath":  "system32\\ntw16s64.dll",
+        "Sha256":  "5EA70F47A8D9035868BB3169C37C209E27684EE500ED2200EEA054B1B7EEAF5A",
+        "Machine":  34404
+    },
+    {
+        "Name":  "W16Style.exe",
+        "RelativePath":  "system32\\W16Style.exe",
+        "Sha256":  "DED9B130FA373D9E0A55F9AB06AC23B325215BAA4CE293E1577D04F5B8E8ACAE",
+        "Machine":  34404
+    }
 ]

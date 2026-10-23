@@ -1,11 +1,14 @@
 #ifndef WORKER_BASE_CONNECTION_H
 #define WORKER_BASE_CONNECTION_H
 #include <windows.h>
+#include <stdint.h>
 /* Worker-side broker lifetime binding. The caller owns CsrPortHeap and its
  * backend state; it must disconnect before destroying that storage. */
 DWORD worker_base_connect(void);
 /* Borrowed connection-owned handles, valid until disconnect. */
-DWORD worker_base_controls(HANDLE *server,HANDLE *shutdown,HANDLE *console_close);
+DWORD worker_base_controls(HANDLE *server,HANDLE *shutdown,HANDLE *console_close,HANDLE *wow_task_close);
+DWORD worker_base_take_wow_task_close(uint64_t *identity);
+DWORD worker_base_fail_wow_task_close(uint64_t identity);
 /* Register only after owner state exists; join before owner state is freed.
  * Callback is executable policy, never selected by worker kind here. */
 DWORD worker_base_watch_service(void (*lost)(void *),void *context);

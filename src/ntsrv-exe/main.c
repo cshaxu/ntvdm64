@@ -401,13 +401,13 @@ static DWORD export_handles(const HANDLE *source,ULONG count,HANDLE **output)
 error_status_t Server_Connect(PRPC_ASYNC_STATE async,handle_t binding,HANDLE process,ULONG protocol,
     unsigned char application_version[32],ULONG *server_protocol,
     unsigned char server_version[32],VDM_CONNECTION *connection,ULONG *generation,
-    HANDLE *server,HANDLE *shutdown,HANDLE *console_close)
+    HANDLE *server,HANDLE *shutdown,HANDLE *console_close,HANDLE *wow_task_close)
 {
     static const unsigned char expected[APP_VERSION_BYTES]=APP_VERSION;
     DWORD pid;
     RPC_STATUS status;
     *connection=NULL; *generation=0;
-    *server=NULL;*shutdown=NULL;*console_close=NULL;
+    *server=NULL;*shutdown=NULL;*console_close=NULL;*wow_task_close=NULL;
     *server_protocol=APP_PROTOCOL_VERSION;
     memcpy(server_version,expected,sizeof(expected));
     status=basesrv_begin_connect();
@@ -425,13 +425,14 @@ error_status_t Server_Connect(PRPC_ASYNC_STATE async,handle_t binding,HANDLE pro
         }
         status=OpenNtBaseServiceConnect(service,process,(OPENNT_BASE_CONNECTION **)connection,generation);
         if(status)__leave;
-        status=OpenNtBaseServiceConnectionControls(*connection,pid,*generation,shutdown,console_close);
+        status=OpenNtBaseServiceConnectionControls(*connection,pid,*generation,shutdown,console_close,wow_task_close);
         if(!status && !DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),
             server,SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,FALSE,0))status=GetLastError();
         if(status) {
             if(*shutdown)CloseHandle(*shutdown);
             if(*console_close)CloseHandle(*console_close);
-            *shutdown=NULL;*console_close=NULL;
+            if(*wow_task_close)CloseHandle(*wow_task_close);
+            *shutdown=NULL;*console_close=NULL;*wow_task_close=NULL;
             VDM_CONNECTION_rundown(*connection);
             *connection=NULL;*generation=0;
         }
@@ -441,6 +442,36 @@ error_status_t Server_Connect(PRPC_ASYNC_STATE async,handle_t binding,HANDLE pro
 complete:
     (void)RpcAsyncCompleteCall(async,&status);
     return ERROR_SUCCESS;
+}
+error_status_t Server_BindWowTask(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,ULONG task,USHORT htask,hyper *identity)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    *identity=0;
+    if(!error)error=OpenNtBaseServiceBindWowTask(connection,pid,generation,task,htask,(uint64_t *)identity);
+    (void)RpcAsyncCompleteCall(async,&error);return ERROR_SUCCESS;
+}
+error_status_t Server_RetireWowTask(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,hyper identity)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if(!error)error=OpenNtBaseServiceRetireWowTask(connection,pid,generation,(uint64_t)identity);
+    (void)RpcAsyncCompleteCall(async,&error);return ERROR_SUCCESS;
+}
+error_status_t Server_TakeWowTaskClose(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,hyper *identity)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    *identity=0;
+    if(!error)error=OpenNtBaseServiceTakeWowTaskClose(connection,pid,generation,(uint64_t *)identity);
+    (void)RpcAsyncCompleteCall(async,&error);return ERROR_SUCCESS;
+}
+error_status_t Server_FailWowTaskClose(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,hyper identity)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if(!error)error=OpenNtBaseServiceFailWowTaskClose(connection,pid,generation,(uint64_t)identity);
+    (void)RpcAsyncCompleteCall(async,&error);return ERROR_SUCCESS;
 }
 error_status_t Server_ReportConsoleMembers(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation,ULONG count,ULONG *members)
@@ -947,7 +978,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v64_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v65_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -978,7 +1009,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v64_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v65_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);

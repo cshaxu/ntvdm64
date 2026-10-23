@@ -27,6 +27,158 @@ BOOL OpenNtBaseServiceIsEmpty(OPENNT_BASE_SERVICE *service)
     return empty;
 }
 
+/* The service owns admission identity; the WOW process owns the actual TD and
+ * HTASK.  These helpers intentionally retain no mirror of either private WOW
+ * object.  A label disappears with its original WOWRECORD, which makes an
+ * undelivered request stale rather than redirecting it after iTask reuse. */
+static OPENNT_BASE_MANAGEMENT_LABEL *service_wow_task_label(
+    OPENNT_BASE_WORKER_WATCH *watch,uint64_t identity,ULONG task)
+{
+    LIST_ENTRY *link;
+    for(link=watch->management_labels.Flink;link!=&watch->management_labels;link=link->Flink) {
+        OPENNT_BASE_MANAGEMENT_LABEL *label=CONTAINING_RECORD(link,OPENNT_BASE_MANAGEMENT_LABEL,link);
+        if(label->wow_record && label->identity==identity && label->task==task)return label;
+    }
+    return NULL;
+}
+
+/* Only the original shared-WOW record supplies a task identity.  Separate
+ * WOW deliberately consumes its one-shot record before WOW32 reaches
+ * InitTask, so it remains worker-close-only rather than gaining a fabricated
+ * individual-task management row. */
+static BOOL service_wow_worker_connection(const OPENNT_BASE_CONNECTION *connection)
+{
+    return connection && connection->wow;
+}
+
+DWORD OpenNtBaseServiceBindWowTask(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,ULONG task,USHORT htask,uint64_t *identity)
+{
+    OPENNT_BASE_WORKER_WATCH *watch;LIST_ENTRY *link;DWORD error=ERROR_ACCESS_DENIED;
+    if(!identity || !htask)return ERROR_INVALID_PARAMETER;
+    *identity=0;
+    if(!connection)return ERROR_INVALID_PARAMETER;
+    EnterCriticalSection(&connection->service->lock);
+    if(!OpenNtBaseServicePeer(connection,pid,generation) ||
+        !service_wow_worker_connection(connection))goto done;
+    watch=service_find_worker_watch(connection->service,generation);
+    if(!watch || !watch->wow || watch->close_kind!=WORKER_CLOSE_NONE) {error=ERROR_INVALID_STATE;goto done;}
+    service_capture_wow_management_labels(connection);
+    error=ERROR_NOT_FOUND;
+    if(connection->wow) {
+        if(!task){error=ERROR_INVALID_PARAMETER;goto done;}
+        for(link=watch->management_labels.Flink;link!=&watch->management_labels;link=link->Flink) {
+            OPENNT_BASE_MANAGEMENT_LABEL *label=CONTAINING_RECORD(link,OPENNT_BASE_MANAGEMENT_LABEL,link);
+            if(!label->wow_record || label->task!=task)continue;
+            if(label->wow_task_bound){error=ERROR_ALREADY_EXISTS;break;}
+            label->wow_task_bound=TRUE;
+            *identity=label->identity;
+            error=ERROR_SUCCESS;
+            break;
+        }
+    }
+    if(error==ERROR_NOT_FOUND && connection->wow) {
+        /* The worker's TD is already authoritative, but BaseSrv can expose
+         * its matching WOWRECORD only after the in-flight GetNext returns.
+         * Preserve this authenticated pending label; management remains
+         * invisible until management.c resolves it to that original record. */
+        if(connection->service->next_management_task==UINT64_MAX) {
+            error=ERROR_NOT_ENOUGH_MEMORY;
+        } else {
+            OPENNT_BASE_MANAGEMENT_LABEL *pending=HeapAlloc(GetProcessHeap(),
+                HEAP_ZERO_MEMORY,sizeof(*pending));
+            if(!pending) error=ERROR_NOT_ENOUGH_MEMORY;
+            else {
+                pending->identity=++connection->service->next_management_task;
+                pending->task=task;pending->wow_task_bound=TRUE;
+                InsertTailList(&watch->management_labels,&pending->link);
+                *identity=pending->identity;error=ERROR_SUCCESS;
+            }
+        }
+    }
+done:
+    LeaveCriticalSection(&connection->service->lock);
+    return error;
+}
+
+DWORD OpenNtBaseServiceRetireWowTask(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,uint64_t identity)
+{
+    OPENNT_BASE_WORKER_WATCH *watch;OPENNT_BASE_MANAGEMENT_LABEL *label;DWORD error=ERROR_ACCESS_DENIED;
+    if(!connection || !identity)return ERROR_INVALID_PARAMETER;
+    EnterCriticalSection(&connection->service->lock);
+    if(!OpenNtBaseServicePeer(connection,pid,generation) ||
+        !service_wow_worker_connection(connection))goto done;
+    watch=service_find_worker_watch(connection->service,generation);
+    if(!watch || !watch->wow){error=ERROR_INVALID_STATE;goto done;}
+    service_capture_wow_management_labels(connection);
+    for(LIST_ENTRY *link=watch->management_labels.Flink;link!=&watch->management_labels;link=link->Flink) {
+        label=CONTAINING_RECORD(link,OPENNT_BASE_MANAGEMENT_LABEL,link);
+        if(label->identity==identity && label->wow_task_bound) {
+            label->wow_task_bound=FALSE;label->wow_task_close_requested=FALSE;
+            error=ERROR_SUCCESS;goto done;
+        }
+    }
+    error=ERROR_NOT_FOUND;
+done:
+    LeaveCriticalSection(&connection->service->lock);
+    return error;
+}
+
+DWORD OpenNtBaseServiceTakeWowTaskClose(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,uint64_t *identity)
+{
+    OPENNT_BASE_WORKER_WATCH *watch;DWORD error=ERROR_ACCESS_DENIED;
+    if(!identity)return ERROR_INVALID_PARAMETER;
+    *identity=0;
+    if(!connection)return ERROR_INVALID_PARAMETER;
+    EnterCriticalSection(&connection->service->lock);
+    if(!OpenNtBaseServicePeer(connection,pid,generation) ||
+        !service_wow_worker_connection(connection))goto done;
+    watch=service_find_worker_watch(connection->service,generation);
+    if(!watch || !watch->wow){error=ERROR_INVALID_STATE;goto done;}
+    service_capture_wow_management_labels(connection);
+    while(!IsListEmpty(&watch->wow_task_closes)) {
+        LIST_ENTRY *entry=RemoveHeadList(&watch->wow_task_closes);
+        OPENNT_BASE_WOW_TASK_CLOSE *request=CONTAINING_RECORD(entry,OPENNT_BASE_WOW_TASK_CLOSE,link);
+        OPENNT_BASE_MANAGEMENT_LABEL *label=service_wow_task_label(watch,request->identity,request->task);
+        if(label && label->wow_task_bound) {*identity=request->identity;error=ERROR_SUCCESS;HeapFree(GetProcessHeap(),0,request);break;}
+        HeapFree(GetProcessHeap(),0,request);
+    }
+    if(IsListEmpty(&watch->wow_task_closes))(void)ResetEvent(watch->wow_task_close);
+    if(!*identity && error==ERROR_ACCESS_DENIED)error=ERROR_NOT_FOUND;
+done:
+    LeaveCriticalSection(&connection->service->lock);
+    return error;
+}
+
+DWORD OpenNtBaseServiceFailWowTaskClose(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,uint64_t identity)
+{
+    OPENNT_BASE_WORKER_WATCH *watch;OPENNT_BASE_MANAGEMENT_LABEL *label=NULL;
+    LIST_ENTRY *link;DWORD error=ERROR_ACCESS_DENIED;
+    if(!connection || !identity)return ERROR_INVALID_PARAMETER;
+    EnterCriticalSection(&connection->service->lock);
+    if(!OpenNtBaseServicePeer(connection,pid,generation) ||
+        !service_wow_worker_connection(connection))goto done;
+    watch=service_find_worker_watch(connection->service,generation);
+    if(!watch || !watch->wow || watch->close_kind!=WORKER_CLOSE_NONE){error=ERROR_INVALID_STATE;goto done;}
+    service_capture_wow_management_labels(connection);
+    for(link=watch->management_labels.Flink;link!=&watch->management_labels;link=link->Flink) {
+        OPENNT_BASE_MANAGEMENT_LABEL *candidate=CONTAINING_RECORD(link,OPENNT_BASE_MANAGEMENT_LABEL,link);
+        if(candidate->identity==identity){label=candidate;break;}
+    }
+    if(!label || !label->wow_task_bound || !label->wow_task_close_requested){error=ERROR_NOT_FOUND;goto done;}
+    /* A local original-entry failure is neither a task completion nor a
+     * worker failure.  Reopen the same authenticated row for an explicit
+     * later operator request; never immediately self-requeue a manual event. */
+    label->wow_task_close_requested=FALSE;
+    error=ERROR_SUCCESS;
+done:
+    LeaveCriticalSection(&connection->service->lock);
+    return error;
+}
+
 static DWORD service_terminate_worker(OPENNT_BASE_SERVICE *service,uint32_t process_id,
     const OPENNT_BASE_MANAGEMENT_KEY *key)
 {
@@ -166,6 +318,37 @@ DWORD OpenNtBaseServiceCloseManagementNode(OPENNT_BASE_SERVICE *service,
                 error=ERROR_NOT_SUPPORTED;break;
             }
         }
+    } else if(key->category==MANAGEMENT_WOW_TASK && key->object) {
+        OPENNT_BASE_WORKER_WATCH *watch=service_find_worker_watch(service,key->generation);
+        OPENNT_BASE_MANAGEMENT_LABEL *label;
+        OPENNT_BASE_WOW_TASK_CLOSE *request;
+        if(!watch || !watch->wow || watch->close_kind!=WORKER_CLOSE_NONE) {error=ERROR_NOT_FOUND;goto done;}
+        service_capture_initial_management_labels(watch);
+        /* The opaque management identity is the only caller input that
+         * survives original-record address and iTask reuse.  The original
+         * scalar is retained only with the queued local delivery record. */
+        label=NULL;
+        for(link=watch->management_labels.Flink;link!=&watch->management_labels;link=link->Flink) {
+            OPENNT_BASE_MANAGEMENT_LABEL *candidate=CONTAINING_RECORD(link,OPENNT_BASE_MANAGEMENT_LABEL,link);
+            if(candidate->wow_record && candidate->identity==key->object){label=candidate;break;}
+        }
+        /* An extant original WOW row that has not authenticated a local
+         * HTASK is visible but deliberately not terminable.  Preserve the
+         * management API's existing capability result rather than treating
+         * an unbound row as a stale management key. */
+        if(!label){error=ERROR_INVALID_HANDLE;goto done;}
+        if(!label->wow_task_bound){error=ERROR_NOT_SUPPORTED;goto done;}
+        if(label->wow_task_close_requested){error=ERROR_SUCCESS;goto done;}
+        request=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*request));
+        if(!request){error=ERROR_NOT_ENOUGH_MEMORY;goto done;}
+        request->identity=label->identity;request->task=label->task;
+        label->wow_task_close_requested=TRUE;
+        InsertTailList(&watch->wow_task_closes,&request->link);
+        if(!SetEvent(watch->wow_task_close)) {
+            RemoveEntryList(&request->link);label->wow_task_close_requested=FALSE;
+            HeapFree(GetProcessHeap(),0,request);error=GetLastError();goto done;
+        }
+        error=ERROR_SUCCESS;
     } else error=ERROR_NOT_SUPPORTED;
 done:
     LeaveCriticalSection(&service->lock);

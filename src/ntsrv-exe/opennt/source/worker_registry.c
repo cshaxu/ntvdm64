@@ -151,9 +151,14 @@ VOID CALLBACK service_worker_terminated(PVOID context,BOOLEAN fired)
     notify_context=watch->service->empty_notify_context;
     LeaveCriticalSection(&watch->service->lock);
 service_clear_management_labels(watch);
+    while(!IsListEmpty(&watch->wow_task_closes)) {
+        LIST_ENTRY *entry=RemoveHeadList(&watch->wow_task_closes);
+        HeapFree(GetProcessHeap(),0,CONTAINING_RECORD(entry,OPENNT_BASE_WOW_TASK_CLOSE,link));
+    }
     CloseHandle(watch->process.ProcessHandle);
     if(watch->shutdown)CloseHandle(watch->shutdown);
     if(watch->console_close)CloseHandle(watch->console_close);
+    if(watch->wow_task_close)CloseHandle(watch->wow_task_close);
     HeapFree(GetProcessHeap(),0,watch);
     if (notify) notify(notify_context);
 }
@@ -352,12 +357,12 @@ done:
 
 
 DWORD OpenNtBaseServiceConnectionControls(OPENNT_BASE_CONNECTION *connection,DWORD pid,
-    DWORD generation,HANDLE *shutdown,HANDLE *console_close)
+    DWORD generation,HANDLE *shutdown,HANDLE *console_close,HANDLE *wow_task_close)
 {
     LIST_ENTRY *link;
     DWORD error=ERROR_ACCESS_DENIED;
-    if(!connection || !shutdown || !console_close)return ERROR_INVALID_PARAMETER;
-    *shutdown=NULL;*console_close=NULL;
+    if(!connection || !shutdown || !console_close || !wow_task_close)return ERROR_INVALID_PARAMETER;
+    *shutdown=NULL;*console_close=NULL;*wow_task_close=NULL;
     EnterCriticalSection(&connection->service->lock);
     if(OpenNtBaseServicePeer(connection,pid,generation)) {
         error=ERROR_SUCCESS;
@@ -369,6 +374,8 @@ DWORD OpenNtBaseServiceConnectionControls(OPENNT_BASE_CONNECTION *connection,DWO
                 shutdown,SYNCHRONIZE,FALSE,0))error=GetLastError();
             else if(!watch->wow && !DuplicateHandle(GetCurrentProcess(),watch->console_close,
                 GetCurrentProcess(),console_close,SYNCHRONIZE,FALSE,0))error=GetLastError();
+            else if(watch->wow && !DuplicateHandle(GetCurrentProcess(),watch->wow_task_close,
+                GetCurrentProcess(),wow_task_close,SYNCHRONIZE,FALSE,0))error=GetLastError();
             break;
         }
     }
@@ -376,7 +383,8 @@ DWORD OpenNtBaseServiceConnectionControls(OPENNT_BASE_CONNECTION *connection,DWO
     if(error) {
         if(*shutdown)CloseHandle(*shutdown);
         if(*console_close)CloseHandle(*console_close);
-        *shutdown=NULL;*console_close=NULL;
+        if(*wow_task_close)CloseHandle(*wow_task_close);
+        *shutdown=NULL;*console_close=NULL;*wow_task_close=NULL;
     }
     return error;
 }

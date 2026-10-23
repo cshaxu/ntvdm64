@@ -221,12 +221,17 @@ typedef struct OPENNT_BASE_WORKER_WATCH {
      * DOSRECORD identities.  They never model execution lifetime: srvvdm.c's
      * DOSRecord chain remains the sole source of task depth and state. */
     LIST_ENTRY management_labels;
+    /* Targeted WOW termination is a broker-owned instruction queue.  Its
+     * entries select a retained management label; they are not a second task
+     * registry and never carry a native process/thread handle. */
+    LIST_ENTRY wow_task_closes;
     uint64_t last_dos_occurrence; /* Ordered source replay watermark, not history. */
     OPENNT_BASE_WORKER_CLOSE_KIND close_kind;
     /* `shutdown` is worker close; `console_close` is Console-close. The
      * broker owns the command and the worker owns the semantic implementation. */
     HANDLE shutdown;
     HANDLE console_close;
+    HANDLE wow_task_close;
     DWORD frontend_root_generation,frontend_root_pid;
 } OPENNT_BASE_WORKER_WATCH;
 typedef struct OPENNT_BASE_MANAGEMENT_LABEL {
@@ -236,9 +241,18 @@ typedef struct OPENNT_BASE_MANAGEMENT_LABEL {
     ULONG task;
     PWOWRECORD wow_record;
     uint64_t identity;
+    /* The WOW worker has bound this service-issued identity to one live
+     * original TD/HTASK pair.  Only then may a management row be deleted. */
+    BOOL wow_task_bound;
+    BOOL wow_task_close_requested;
     BOOL observation_exited;
     WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS];
 } OPENNT_BASE_MANAGEMENT_LABEL;
+typedef struct OPENNT_BASE_WOW_TASK_CLOSE {
+    LIST_ENTRY link;
+    uint64_t identity;
+    ULONG task;
+} OPENNT_BASE_WOW_TASK_CLOSE;
 typedef struct OPENNT_BASE_CONSOLE_CONTEXT {
     LIST_ENTRY link;
     OPENNT_BASE_CONNECTION *root; /* Removed under service lock before root free. */
