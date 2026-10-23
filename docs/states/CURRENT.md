@@ -2,34 +2,61 @@
 
 ## Current Work
 
-### M0 T450 S4 — closure audit and owner acceptance
+**Active: M0 T450 S5**
+
+## Active Packet
+
+### M0 T450 S5 — normalize Run16's Console entry contract
 
 | Field | Record |
 | --- | --- |
-| Identifier / mode | M0 T450 S4, Ordinary Mode. |
-| Admission and approval | The owner approved the queued Win16 Style removal package and directed execution through T closure, stopping before final owner acceptance on 2026-10-23. |
-| Objective | Remove every project-owned command, wire field, RPC/reservation state and runtime branch whose sole purpose is selecting or propagating Win16 Style, while retaining ordinary launch, native classification, BaseSrv lifecycle, worker-base, NTHook and WOW behavior. |
-| Non-goals | Do not import, link, test or promise compatibility with the separate `win16style` / `run16s` project; do not modify, build or patch guest media; do not remove ordinary NTHook propagation or queued WOW capability work. |
-| Reference baseline | `fd1204f8c`, with the owner-accepted T449 thirteen-image package recorded at `44a0596e8` / `32f3ca2a1`. The removal proposal is [Win16 Style removal](../proposals/proposal-win16-style-removal-001.md). |
-| Files and ABI surface | Expected: Run16 options/scope, `common/protocol/window_style.h`, native launch/hook/frontend records, BaseSrv client/service/command records, NTVM/NTVWM style callers, NTHook style bridge, WOW title policy and their feature-only tests. Ordinary program type, console, reservation and lifecycle fields remain. |
-| Applicable rules | [Execution](../rules/EXECUTION.md), [architecture](../rules/ARCHITECTURE.md), [coding](../rules/CODING.md), [source policy](../etc/operations/policy/source-policy.md), and the proposal. |
-| Verification | The full ten-image x86/x64 build and second no-op increment passed in `build/t450-s1/component-build-r6`; staged publication and dual-destination manifest hashes passed. Removed-option rejection and ordinary installed launch passed; the active source/build/release audit is clean. The closure record is [M0 T450 closure](../history/m0-t450-closure.md). |
-| Expected markers | Both public style options are rejected; no `WINDOW_STYLE`, `Ntw16s`, or style-policy branch remains in retained production transport; normal launch data and NTHook propagation still have a single owner. |
-| Asset needs | No new sources or guest assets. Existing immutable guest hashes remain unchanged. |
-| Reporting | Record removed ABI fields, retained non-style fields, test evidence, release-set reduction and external-project boundary. |
-| Stop conditions | Pause for a discovered consumer where style state is inseparable from an independently approved feature, or a proposed new external integration/semantic change. |
-| Exit criteria | S1–S3 are complete. S4 records the closure audit, commits and pushes the ten-image package, then waits for owner acceptance. |
-| Original owner request | “一样啊，我们：run16 -> CreateProcess -> NTSRV… [then] 这样吧你还是按照方案1，彻底清理掉win16 style部分，就在这个T任务中。帮我规划一下S任务划分。我后续还是会用run16s启动run16来尝试应用窗口风格的。…开始执行，到T收口前停下等我验收。” |
-| Similar-issue sweep | Treat style-only release assets, CMake targets, test fixtures, evidence, package scripts and documentation as consumers; do not leave an Off-valued compatibility state. |
+| Identifier Mode | M0 T450 S5, Ordinary Mode. |
+| Admission And Approval | The owner approved converting the existing CUI `run16` entry from `wWinMain` to `wmain`, retaining an untouched raw command tail and adding coverage for redirection, pipelines and `cmd /c` arguments on 2026-10-23. |
+| Objective | Normalize `run16` to its actual Console-subsystem contract without changing command-tail semantics or Console inheritance. |
+| Non-goals | No GUI-subsystem launcher, no NTSRV/NTCON/worker lifecycle change, no guest change, and no command-shell parsing or reserialization by `run16`. |
+| Reference Baseline | `244450652`: T450 S1–S4 style removal and ten-image publication are complete; the current launcher remains `/SUBSYSTEM:CONSOLE` but uses a `wWinMain` entry override. |
+| Files And ABI Surface | `run16` entry, raw-tail helper, x86/x64 Ninja entry metadata and the existing launch-options test. No RPC or guest ABI changes. |
+| Applicable Rules | [Execution](../rules/EXECUTION.md), [architecture](../rules/ARCHITECTURE.md), [coding](../rules/CODING.md), [source policy](../etc/operations/policy/source-policy.md). |
+| Verification | Passed: `build/t450-s5/focused` reports `RUN16-LAUNCH-OPTIONS-PASS cases=22`; generated x86/x64 launcher graphs retain `subsystem = console` / `wmainCRTStartup`; `component-build-r2` passed all ten images and a 1,476-intermediate no-op increment; stage and dual-destination publication hashes passed. An installed `cmd /c ver` observation produced the expected version text and Run16 exited, but its ad-hoc redirected-pipe harness could not naturally close because the child chain retained the pipe; it is recorded as observation, not a runtime pass. |
+| Expected markers | `run16` stays `/SUBSYSTEM:CONSOLE`; its only entry override is `wmainCRTStartup`; `>`, `>>`, `|`, quoted paths and `cmd /c ver` remain exact target-tail text. |
+| Asset Needs | No new assets or guest changes. |
+| Reporting Requirements | Record link contract, raw-tail cases, build/publication hashes and any intentionally unchanged Console behavior. |
+| Stop Conditions | Pause only if the C runtime entry change requires a new public launch semantic or exposes an unrelated legacy command-tail contract. |
+| Exit Criteria | Source review, focused raw-tail test, coherent ten-image package publication and hash verification, then commit/push and owner acceptance. Delivery evidence is [T450 S5 Run16 entry evidence](../etc/evidence/m0-t450-s5-run16-entry.md). |
+| Original Owner Request | “批准，请你做这个修改，并确保已有测试能够覆盖尾部情况 ( \">\", \">>\", \"|\" 管道和程序参数如 \"cmd /c ver\"之类)” |
+| Similar-Issue Sweep | Check both x86 and x64 generated graph owners and preserve the existing parser's no-allocation target-slice rule. |
+| Candidate Proposal | [Win16 Style removal](../proposals/proposal-win16-style-removal-001.md), whose completed T450 boundary is retained while S5 makes this launcher-only correction. |
 
 ### Planned sequential S boundaries
 
 1. **S1 (complete):** removed style selection and propagation control plane.
 2. **S2 (complete):** deleted the isolated renderer/demo/test/build component and all style-only release/deployment entries; the package is reduced to ten host images.
 3. **S3 (complete):** normal no-style launch, rejection and stale-reference audits passed; publication and hash verification passed.
-4. **S4 (complete; awaiting owner acceptance):** closure record and final
-   commit/push completed at `db91004e5`; the ten-image package is deployed and
-   T450 stops here for owner acceptance.
+4. **S4 (complete):** closure record and final commit/push completed at
+   `db91004e5`; the ten-image package is deployed.
+5. **S5 (active; delivery ready for owner acceptance):** normalized the
+   retained CUI Run16 entry, proved raw-tail preservation, and published the
+   ten-image package without adding a GUI-launcher mode.
+
+## S1 Closure Record
+
+[T450 S1--S4 closure ledger](../etc/evidence/m0-t450-s1-s4-closure-ledger.md)
+records the published removal/control-plane package and its retained evidence.
+
+## S2 Closure Record
+
+[T450 S1--S4 closure ledger](../etc/evidence/m0-t450-s1-s4-closure-ledger.md)
+records the renderer/demo removal and reduced ten-image package evidence.
+
+## S3 Closure Record
+
+[T450 S1--S4 closure ledger](../etc/evidence/m0-t450-s1-s4-closure-ledger.md)
+records normal-launch/rejection and publication evidence.
+
+## S4 Closure Record
+
+[T450 S1--S4 closure ledger](../etc/evidence/m0-t450-s1-s4-closure-ledger.md)
+records closure audit and owner-acceptance boundary evidence.
 
 ## Current Technical Baseline
 

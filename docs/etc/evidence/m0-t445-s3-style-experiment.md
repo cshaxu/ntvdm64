@@ -203,7 +203,7 @@ The owner now explicitly permits embedding original Win3.1 resources in the
 isolated experiment. This supersedes the earlier no-import decision above,
 not the product-integration boundary. Source policy and the active packet
 record the narrow admission. Source/rights/extraction details live in
-[the component resource ledger](../../../src/ntw16s-dll/resources.md).
+the former component resource ledger (removed by T450).
 
 Six 19x18 VGA.DRV OEM button images now replace hand-drawn triangles/bevels.
 The header encodes their actual decoded pixels losslessly as four palette
@@ -417,7 +417,7 @@ Client cursor behavior, WM_ACTIVATE/focus, menu tracking, moving/resizing and
 window commands stay with their original owners. No window-height increase,
 global theme mutation, new thread, hook or repaint loop is introduced.
 Primary API/Chromium comparison provenance is recorded in
-[the component ledger](../../../src/ntw16s-dll/resources.md#host-non-client-painting-boundary).
+the former component ledger's host non-client-painting boundary (removed by T450).
 
 r068/r069 extend the oracle through minimize/restore: the strip stays clean,
 but two outer clip pixels at (1,1) and (418,1) become black on native restore.

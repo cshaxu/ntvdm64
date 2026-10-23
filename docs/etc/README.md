@@ -1,5 +1,12 @@
 # Supporting Material
 
+[T450 S1--S4 closure ledger](evidence/m0-t450-s1-s4-closure-ledger.md)
+indexes the completed Win16 Style-removal sequence retained before the active
+Run16 entry-contract correction.
+
+[T450 S5 Run16 entry evidence](evidence/m0-t450-s5-run16-entry.md) records
+the retained Console-subsystem contract, raw-tail checks and publication.
+
 [T449 S1 WOW continuation audit](evidence/m0-t449-s1-wow-continuation-audit.md)
 reconciles inherited execution rows against current source and records the
 remaining source/acceptance audit without claiming implementation completion.

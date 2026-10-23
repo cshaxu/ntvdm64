@@ -1515,7 +1515,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/run16/stub.obj: cc obj/basesrv/service_c.c | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('rule run16_link')
-    $graph.Add('  command = link.exe /nologo /subsystem:console /entry:wWinMainCRTStartup /opt:ref /out:$out /map:$out.map $in rpcrt4.lib ntdll.lib kernel32.lib shell32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib')
+    $graph.Add('  command = link.exe /nologo /subsystem:console /entry:wmainCRTStartup /opt:ref /out:$out /map:$out.map $in rpcrt4.lib ntdll.lib kernel32.lib shell32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib')
     $graph.Add('build obj/frontend/console_frontend.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'console_frontend.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/frontend/console_video.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'console_video.c')))

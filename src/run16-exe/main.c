@@ -403,9 +403,10 @@ done:
     return error ? error : result;
 }
 
-int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int show)
+int wmain(int argc, wchar_t **argv)
 {
     LPWSTR *arguments;
+    PWSTR command;
     PCWSTR image_argument;
     PCWSTR launch_command;
     PCWSTR option, tail;
@@ -419,9 +420,9 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
     BOOL image_resolved,initial_console_only,binary_classified;
     DWORD console_member;
     int count;
-    (void)instance;
-    (void)previous;
-    (void)show;
+    (void)argc;
+    (void)argv;
+    command = (PWSTR)run16_command_line_tail(GetCommandLineW());
     if (!run16_parse_launch_options(command,&options))
     {
         fputs("Usage: run16.exe [--wait] <binary> [arguments]\n", stderr);
