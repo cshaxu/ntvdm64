@@ -101,16 +101,26 @@ test oracle rather than a product repair.
 
 WRITE startup is retained and the current 12-case common-dialog matrix proves
 the selected WOW/common-dialog bridge, but full real WRITE edit/save/exit is
-not yet a pass.  Source tracing established why the first owned probe was not
-a valid substitute: WRITE's original main loop consumes `WM_CHAR` from its
+not yet a pass.  The owned current-package startup check also reconfirmed that
+WRITE needs the complete, unfiltered Userenv logon block and the short physical
+stage: under that already-approved environment, `MSWRITE_MENU`, `MSWRITE_DOC`
+and `MSWRITE_PAGEINFO` are visible in the shared WOW worker.  An inherited
+developer environment instead remains before WOW publication; it is the known
+immutable COMMAND large-environment limitation, not a candidate product
+diagnosis.
+
+Source tracing established why an unswitched-private-desktop edit/save probe is
+not a valid substitute: WRITE's original main loop consumes `WM_CHAR` from its
 own `MSWRITE_DOC` queue (`wow16/write/cmd.c::KcAlphaKeyMessage` and
 `mdoc.c::EatOneCharacter`), whereas its Save As flow crosses the original
-`wcommdlg.c::WCD32GetFileName` thunk and a modal native dialog/hook.  A probe
-on an unswitched private desktop can enumerate these windows, but cannot use
-the desktop's physical input queue; synchronous delivery bypasses WRITE's
-queue algorithm and the modal dialog remains open.  That proves a test-driver
-boundary only.  It is neither evidence that immutable WRITE cannot save nor
-evidence of a host-side product regression.
+`wcommdlg.c::WCD32GetFileName` thunk and a modal native dialog/hook.  In the
+full Userenv run the native Save As dialog, `edt1` (control 1152) and `IDOK`
+all appeared and the requested name was present in the visible edit control.
+However, direct cross-thread `WM_COMMAND`, queued Enter and attached-thread
+focus do not cause that inactive desktop's common-dialog loop to accept the
+file.  They are not physical input and must not be promoted to an interaction
+pass.  This is a test-driver boundary only: it is neither evidence that
+immutable WRITE cannot save nor evidence of a host-side product regression.
 
 The finite next step is an owned input-capable private-desktop harness (or an
 equivalent visible-desktop, isolated test session) that sends normal input
