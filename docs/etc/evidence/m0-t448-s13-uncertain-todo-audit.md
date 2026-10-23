@@ -214,6 +214,10 @@ the combined inherited/control trace is
 
 ## Owner-directed S14 handoff
 
+The owner subsequently approved S13 closure on 2026-10-22 local time. This
+closes the bounded investigation and documented ownership handoff, not the
+retained guest limitations or unverified reports.
+
 The owner subsequently declined the host workaround and directed that the
 case remain solely as the known original guest limitation in TODO. The S14
 handoff described below is superseded; no S14 implementation is authorized.
@@ -226,5 +230,6 @@ requires a policy-compatible host-side assessment without guest changes or
 unapproved environment manipulation. The existing original-guest P1 TODO is
 the canonical retained limitation, not a second independently observed bug.
 The unobserved game crash, SOL layout report and unavailable COM peer are not
-claimed as reproduced or transferred under this handoff. S13 remains active
-pending its owner acceptance; this plan does not admit S14 as active.
+claimed as reproduced or transferred under this handoff. At the time of that
+proposal S13 was pending owner acceptance; the later closure decision above
+supersedes that historical status. The planned startup repair was not admitted.

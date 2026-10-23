@@ -2,12 +2,17 @@
 
 ## Current Work
 
-**Active: M0 T448 S14**, Ordinary Mode, single implementer/reviewer. T448 remains open.
-S13 reached its bounded investigation and handoff; owner functional acceptance is not inferred.
-S14's byte-exact SoftPC import, build, targeted tests and complete 13-image
-publication are complete; owner acceptance remains pending. The corrected CAF
+**Active: M0 T448 S14** packet retained for T448 preclosure review, Ordinary
+Mode, single implementer/reviewer. S14 is closed; T448 remains open.
+S13's bounded investigation and handoff and S14's byte-exact SoftPC import
+are owner-accepted and closed. The owner-requested cached whole-component
+rebuild, bounded regression, preclosure review and coherent 13-image
+publication passed after restoring original-host mirror formatting. T-level
+acceptance remains pending. The corrected CAF
 observer and its remaining test limitations are recorded in the
 [S14 evidence](../etc/evidence/m0-t448-s8-shared-library-import.md#s14-synchronization-and-verification).
+The [T448 preclosure repeat](../etc/evidence/m0-t448-s5-integrated-acceptance.md#t448-owner-requested-preclosure-repeat-2026-10-22-local) records
+actual coverage, retained limits and coherent publication.
 
 ## Active Packet
 
@@ -15,7 +20,7 @@ observer and its remaining test limitations are recorded in the
 | --- | --- |
 | Identifier Mode | M0 T448 S14, Ordinary Mode; one implementer and independent self-review. |
 | Candidate Proposal | [NTSRV lifecycle authority](../proposals/proposal-ntsrv-lifecycle-authority-001.md). |
-| Admission And Approval | Owner approves a new S to import the current SoftPC public library unchanged and perform necessary integration. S13 investigation and ownership handoff are complete; functional acceptance remains separate. |
+| Admission And Approval | Owner approved the unchanged SoftPC public-library import and subsequently accepted S13 and S14 closure; full cached build, tests and T closure review were requested. |
 | Objective | Pin and import the selected public-library closure byte-for-byte, adapt consumers only if necessary, build and verify coherent publication. |
 | Non-goals | No guest changes, upstream worktree writes, unrelated library expansion, semantic retreat or unapproved timeout. |
 | Reference Baseline | S12 13-image release at 36e8d41f6; S8 library pin 0d9f1803ee04bd89bd6150306912a3e8674d0a83. |
@@ -61,7 +66,7 @@ The [S13 handoff](../etc/evidence/m0-t448-s13-uncertain-todo-audit.md#remaining-
 assigns unresolved items once to TODO or the queued WOW32 continuation.
 The owner retains the reproduced COMMAND case as a known original guest
 limitation in TODO, without a host workaround. S13's bounded handoff is
-complete; owner functional acceptance is not inferred.
+complete and the owner approved S13 closure; retained issues are not claimed fixed.
 
 Earlier stages' complete status and chronology are preserved in the indexed
 [pre-compaction snapshot](https://github.com/cshaxu/ntvdm64/blob/ba156ef61/docs/states/CURRENT.md).
@@ -146,7 +151,15 @@ handoff; reproduced guest limitations remain in TODO and unresolved WOW32
 work belongs to the queued continuation. This is a bounded handoff, not an
 assertion that every historical failure was reproduced or fixed. See the
 [S13 investigation and handoff](../etc/evidence/m0-t448-s13-uncertain-todo-audit.md).
-Owner functional acceptance was not inferred.
+The owner explicitly approved S13 closure after the bounded handoff; this
+acceptance does not claim the retained limitations were repaired.
+
+## S14 Closure Record
+
+The owner accepted the delivered byte-exact SoftPC synchronization, coherent
+13-image publication and recorded test boundaries; see [S14 evidence](../etc/evidence/m0-t448-s8-shared-library-import.md).
+T448 preclosure verification is separate and is recorded above; T-level
+owner acceptance remains pending.
 
 ## S12 Closure Record
 
@@ -156,12 +169,12 @@ coverage, original guest exclusions and the approved bounded directory semantics
 
 ## Current Technical Baseline
 
-The six-fix 13-image checkpoint was built, tested, published and hash-verified;
-the [S12 ledger](../etc/evidence/m0-t448-s11-window-startup.md) and
-[release manifest](../../assets/release/release-manifest.json) record its
-identity, actual test coverage and limits. Guest binaries remain unchanged.
-S12 is owner-accepted. WRITE editing and exit remain
-unverified; original guest limitations and S13's investigation remain separate.
+The latest 13-image cached-build checkpoint was tested, published and
+hash-verified; the [T448 preclosure evidence](../etc/evidence/m0-t448-s5-integrated-acceptance.md#t448-owner-requested-preclosure-repeat-2026-10-22-local)
+and [release manifest](../../assets/release/release-manifest.json) record
+identity and coverage. Guest binaries remain unchanged. S12--S14 have owner
+closure approval. WRITE editing and exit, original guest limitations and
+the previously reported intermittent game exit remain explicitly separate.
 
 ## Recent M0 Closures
 

@@ -74,6 +74,15 @@ implementation consolidation, not speculative CPU or product redesign.
 
 ## Known examples, not an exhaustive worklist
 
+The T448 preclosure selected-build mirror sweep also identified three
+historical standalone declaration headers without an original file at their
+current mirror paths: `opennt-host/base/ntos/rtl/environapi.h`, `zwapi.h`,
+and `opennt-host/netapi/xactsrv/xactsrv_wksta_minimal.h`. The first two have
+existing OPENNT-HOST-015/067 records; the third is present since `639c55e8f`.
+Review their provenance, ownership and placement against the mirror rules as
+part of this proposal. This observation alone does not establish a runtime
+defect or authorize deletion of declarations needed by selected code.
+
 | Area | Source-grounded question and required disposition |
 | --- | --- |
 | Segment register/cache binding | The original c_reg.h defines ES/CS/SS/DS/FS/GS. modesw.c duplicates those numbers and private declarations in a local patch. The corrected numbers are necessary; eliminate duplicated authority using original declarations through the smallest appropriate boundary. Justify each cache refresh against the actual DPMI transition: a successful ES reproduction alone does not prove all six refreshes are minimal, and removing a necessary refresh is not acceptable diff reduction. |

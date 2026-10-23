@@ -134,3 +134,74 @@ repair was indicated by this fixed acceptance matrix.
   commit/push only after required checks. T closure still requires owner
   acceptance. SOL startup/manual usability is owner-confirmed with layout debt;
   WRITE remains startup-frontier evidence, not editing/exit acceptance.
+
+## T448 owner-requested preclosure repeat, 2026-10-22 local
+
+The owner accepted S13's bounded investigation and S14's synchronized import,
+then requested a complete cached host build, testing and closure review. The
+source baseline was `18c7129f2`; no guest was rebuilt or modified. The first
+two build attempts overlapped because the operator incorrectly concluded that
+the first hidden process had exited. Their results are invalid for acceptance;
+one reported Ninja log contention, and the other had an unstable incremental
+snapshot. After both stopped, serial build PID 28844 used the stable x86/x64
+Ninja trees and repository ccache. All 13 images built, and 1458 intermediate
+files were unchanged on the second build. Three image hashes differed from the
+prior published package after graph regeneration; the new complete set, not a
+mixture, was staged and tested. Build script: `tests/build/Test-FullComponentBuild.ps1`;
+the exact run records are under `build/t448-closure/build-r3`.
+
+Background regression PID 17016 passed six frontend fixtures per architecture,
+service40, DOS17 in both Console and Window modes, WINMINE gameplay, SOL deal
+and stock gameplay, WRITE's existing four-sample startup frontier, and eight
+CAF natural-exit/external-close/self-delete routes with pre-Enter echo.
+Lifecycle PID 26656 passed frontend-scope lifetime, two rounds of the four
+actual RPC fixtures, real pending-request service loss, and the x86/x64 GUI
+startup, wait, child, one-shot carrier and text-GUI-text cases. The executable
+test entrypoints and per-case results are retained in `build/t448-closure`;
+WRITE editing/saving/exit remains unverified, and bounded game tests do not
+exclude the owner's intermittent long-play report.
+
+All 13 tested images were published together to `assets/release` and
+`O:/winnt/system32` with matching SHA-256s, retaining a rollback copy. The
+original and staged COMMAND.COM hashes match. A separate upstream comparison
+checked all 11 MVDM C files changed by T448 since `4d4ef4d47`, including the
+local and registry entries for DIV-355 through DIV-362; it is not a fresh
+full-repository mirror sweep. Guest media and `assets/winnt.zip` did not
+change. S13's single retained COMMAND guest defect, COM peer prerequisite,
+other debt, and WOW32 WRITE/SOL/game-exit handoffs remain in their designated
+TODO or queue owners. No semantic limitation is represented as a test pass.
+T-level owner acceptance and the final closure decision remain separate.
+
+The subsequent selected-translation-unit sweep found ten host mirror files
+whose newline-normalized content matched both original source trees but whose
+bytes differed. The ten were restored byte-for-byte to the identical upstream
+sources under the mirror formatting rule; no guest files were changed. Since
+those are production build inputs, the earlier package and tests above are a
+checkpoint only. The expanded selected-graph/dependency sweep subsequently
+found eight further host headers with only newline differences; these too were
+restored to identical upstream bytes. Seven flattened RAP paths were matched
+to their actual original paths. The final sweep found 717 byte-exact selected
+files, 285 files with substantive or other existing differences, three
+declaration carriers without a primary path, and no remaining newline-only
+differences. The 285 are not represented as individually re-audited by this
+sweep. The three historical carriers and their existing records are identified
+in the queued implementation-minimization proposal. None was deleted or
+silently treated as original.
+
+After all 18 format restorations, final serial cached build PID 29560 passed
+on both architectures: all 13 product images built and 1458 intermediate
+files were unchanged on the no-change repeat. Final regression PID 26032
+passed the same frontend, service40, DOS17 Console/Window, WINMINE, SOL,
+WRITE startup-frontier and eight CAF cases described above. Final lifecycle
+PID 34536 passed the scope fixtures, real RPC/service-loss and x86/x64 GUI
+cases. Publication PID 32372 copied the complete final set to both release
+destinations and verified each SHA-256; the previous complete set is retained
+as a rollback. Machine-readable results and logs are in
+`build/t448-closure-final2`. These disposable logs are evidence references,
+not permanent build-cache contents. No guest image was altered or rebuilt.
+
+This establishes the requested preclosure build, bounded test and coherent
+publication evidence, not complete proof of every historical mirror diff or
+the unverified WRITE editing/exit and intermittent long-play scenarios. The
+existing TODO and queued follow-up retain those limitations. S13 and S14 are
+owner accepted and closed; T-level owner acceptance remains separate.

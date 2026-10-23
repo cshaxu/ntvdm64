@@ -580,7 +580,9 @@ not prove a historical failure was repaired or determine its cause.
 **Superseded by owner decision:** do not pursue the proposed host workaround
 or allocate S14 for this case. Retain the existing original-guest P1 in TODO
 and its evidence; do not claim the defect fixed. The following is historical
-planning, not authorized work.
+planning, not authorized work. The owner instead allocated S14 to the
+byte-exact SoftPC library synchronization and accepted that delivery; see
+[S14 evidence](../evidence/m0-t448-s8-shared-library-import.md#s14-synchronization-and-verification).
 
 Owner-directed follow-on, planned rather than an additional active packet:
 the current inherited-environment DOS startup fails before its first prompt.

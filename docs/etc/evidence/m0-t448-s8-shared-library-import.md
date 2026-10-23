@@ -31,7 +31,7 @@ run corrected-environment WINMINE gameplay witness passed. All tests use the
 unchanged staged guest. The complete 13-image candidate is published to both
 assets/release and O:/winnt/system32, with hashes checked against the candidate;
 guest files were not changed. Disposable evidence and candidate remain under
-`build/t448-s14`. Owner acceptance remains pending. Negative injection for the
+`build/t448-s14`. The owner accepted S14 on 2026-10-22 local time. Negative injection for the
 corrected observer and full-size SOL gameplay were not rerun in this stage.
 
 ## Scope and provenance
