@@ -105,12 +105,20 @@ paths and ownership before relying on list disappearance as completion or
 adding another independent registry. A repository search found the
 `RemoveProcessSharedList` definition and declaration but no direct call; it
 does not establish that all process-death reclamation is absent, since the
-shared-memory manager or another process might reclaim it. Trace that manager
-and actual worker death before making the determination. `sharewow.h` itself
-maps a named section and serializes it with a mutex; its lock function does
-not perform per-process reclamation. The section can disappear when its last
-handle closes, but that alone does not prove cleanup while another process
-keeps it open. Also note that the original debugger
+shared-memory manager or another process might reclaim it. The follow-up
+source trace identifies `wow32.c` startup calling `CleanseSharedList` before
+`AddProcessSharedList`: the original cleanser removes a process entry when
+`OpenProcess(SYNCHRONIZE)` fails. It does not walk that process's task chain
+to mark its task objects available, and it does not itself distinguish an
+access-denied open from a nonexistent process or protect against PID reuse.
+`sharewow.h` maps a named section and serializes it with a mutex; its lock
+function does not perform per-process reclamation. The section can disappear
+when its last handle closes, but that does not prove cleanup while another
+process keeps it open. These are concrete limits of the original publication
+mechanism, not evidence that current users have hit a leak or permission
+failure. Do not import the cleanser's `OpenProcess` failure test as an NTSRV
+authoritative death decision; the server already owns worker lifetimes.
+Also note that the original debugger
 enumerator uses shared memory and callback-based observation; it is not an
 authorization to let NTSRV directly control a worker or dereference its
 private pointers. The eventual control remains through NTSRV and worker-base.
