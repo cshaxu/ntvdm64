@@ -333,89 +333,6 @@ static DWORD service_allocate_console(OPENNT_BASE_SERVICE *service,HANDLE *conso
 }
 
 
-/* Called under the service lock for the authenticated bootstrap reply. */
-static DWORD service_separate_boot_style(OPENNT_BASE_CONNECTION *connection,
-    uint32_t *style)
-{
-    LIST_ENTRY *entry;
-    if(connection->wow || !connection->process.fVDM || !connection->reservation)
-        return ERROR_INVALID_STATE;
-    /* The authenticated launch reservation exists before WOW's bootstrap
-     * InitTask. No DOS record has been dispatched at this point. */
-    for(entry=connection->service->connections.Flink;
-        entry!=&connection->service->connections;entry=entry->Flink) {
-        OPENNT_BASE_CONNECTION *parent=CONTAINING_RECORD(entry,OPENNT_BASE_CONNECTION,service_link);
-        if(!parent->process.fVDM && parent->reservation==connection->reservation &&
-            parent->pending_vdm_binary==BINARY_TYPE_SEPWOW) {
-            *style=parent->request_window_style;
-            return ERROR_SUCCESS;
-        }
-    }
-    return ERROR_NOT_FOUND;
-}
-
-/* Called under the service lock after original GetNext commits delivery or
- * parent resume. The last BUSY record is the original DOS execution stack,
- * not a task chosen from monitoring labels. */
-static DWORD service_dos_window_style(OPENNT_BASE_CONNECTION *connection,
-    uint32_t *style)
-{
-    PCONSOLERECORD console;
-    PDOSRECORD selected=NULL;
-    LIST_ENTRY *entry;
-    DWORD error=ERROR_NOT_FOUND;
-    *style=WINDOW_STYLE_OFF;
-    if(connection->wow || !connection->process.fVDM)return ERROR_INVALID_STATE;
-    RtlEnterCriticalSection(&BaseSrvDOSCriticalSection);
-    for(console=DOSHead;console;console=console->Next) {
-        PDOSRECORD record;
-        if(console->SequenceNumber!=connection->process.SequenceNumber)continue;
-        for(record=console->DOSRecord;record;record=record->DOSRecordNext)
-            if(record->VDMState==VDM_BUSY)selected=record;
-        break;
-    }
-    if(!selected) { error=ERROR_SUCCESS;goto done; }
-    for(entry=connection->service->connections.Flink;
-        entry!=&connection->service->connections;entry=entry->Flink) {
-        OPENNT_BASE_CONNECTION *parent=CONTAINING_RECORD(entry,OPENNT_BASE_CONNECTION,service_link);
-        if(parent->process.fVDM || parent->wow || parent->console!=connection->console)continue;
-        if((selected->hWaitForParent && parent->parent_receipt &&
-            (ULONG_PTR)selected->hWaitForParent==((ULONG_PTR)parent->parent_receipt & ~(ULONG_PTR)1)) ||
-           (!selected->hWaitForParent && selected==console->DOSRecord &&
-            connection->reservation && parent->reservation==connection->reservation)) {
-            *style=parent->request_window_style;error=ERROR_SUCCESS;break;
-        }
-    }
-done:
-    RtlLeaveCriticalSection(&BaseSrvDOSCriticalSection);
-    return error;
-}
-
-DWORD OpenNtBaseServiceWowStyle(OPENNT_BASE_CONNECTION *connection,DWORD pid,
-    DWORD generation,ULONG task,DWORD *style)
-{
-    PWOWRECORD record;LIST_ENTRY *entry;DWORD error=ERROR_ACCESS_DENIED;
-    if(!connection || !style)return ERROR_INVALID_PARAMETER;
-    *style=WINDOW_STYLE_OFF;
-    EnterCriticalSection(&connection->service->lock);
-    if(!OpenNtBaseServicePeer(connection,pid,generation) || !connection->wow ||
-       !connection->process.fVDM || !WOWHead || WOWHead->SequenceNumber!=generation)goto done;
-    for(record=WOWHead->WOWRecord;record;record=record->WOWRecordNext)
-        if(record->iTask==task)break;
-    if(!record || !record->fDispatched){error=ERROR_INVALID_STATE;goto done;}
-    error=ERROR_NOT_FOUND;
-    for(entry=connection->service->connections.Flink;
-        entry!=&connection->service->connections;entry=entry->Flink){
-        OPENNT_BASE_CONNECTION *parent=CONTAINING_RECORD(entry,OPENNT_BASE_CONNECTION,service_link);
-        if(!parent->process.fVDM && parent->wow && parent->task==task &&
-           parent->parent_receipt && parent->parent_receipt==(ULONG_PTR)record->hWaitForParentServer){
-            *style=parent->request_window_style;error=ERROR_SUCCESS;break;
-        }
-    }
-done:
-    LeaveCriticalSection(&connection->service->lock);return error;
-}
-
 DWORD OpenNtBaseServiceWowStarted(OPENNT_BASE_CONNECTION *connection,DWORD pid,
     DWORD generation,ULONG task)
 {
@@ -513,13 +430,11 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
     OPENNT_BASE_CONSOLE_CONTEXT *separate_context=NULL;
     BOOL separate_dos=FALSE;
     BOOL console_record_exists=FALSE;
-    uint32_t window_style;
     if (required) *required=0;
     if (!parent_event || !parent_receipt) return ERROR_INVALID_PARAMETER;
     *parent_event=NULL;*parent_receipt=0;
     if (!connection || !required || !OpenNtBaseServicePeer(connection,pid,generation) ||
-        !OpenNtBaseDecodeCheckCommand(input,bytes,generation,&message,&startup,&request) ||
-        !OpenNtBaseReadCheckStyle(input,bytes,&window_style))
+        !OpenNtBaseDecodeCheckCommand(input,bytes,generation,&message,&startup,&request))
         return ERROR_INVALID_PARAMETER;
     if(connection->selected_native_generation)return ERROR_INVALID_STATE;
     /* CheckVDM publishes an original record.  Reject a short reply before
@@ -619,7 +534,6 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
     if (!status && NT_SUCCESS((NTSTATUS)message.ReturnValue)) {
         connection->wow=message.u.CheckVDM.BinaryType==BINARY_TYPE_WIN16;
         connection->pending_vdm_binary=message.u.CheckVDM.BinaryType;
-        connection->request_window_style=window_style;
         if (connection->wow) connection->task=message.u.CheckVDM.iTask;
         connection->wow_started=FALSE;
         if (connection->wow_start_event) CloseHandle(connection->wow_start_event);
@@ -911,16 +825,6 @@ DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD ge
         !(message.u.GetNextVDMCommand.VDMState &
             (ASKING_FOR_ENVIRONMENT|ASKING_FOR_PIF|ASKING_FOR_WOW_BINARY))) {
         state.observation.direct=service_dos_delivery_trace(connection);
-        error=service_dos_window_style(connection,&state.window_style);
-        if(error)goto done;
-        state.window_style_present=1;
-    }
-    if(message.ReturnValue==STATUS_SUCCESS &&
-        (message.u.GetNextVDMCommand.VDMState & (ASKING_FOR_PIF|ASKING_FOR_SEPWOW_BINARY))==
-            (ASKING_FOR_PIF|ASKING_FOR_SEPWOW_BINARY)) {
-        error=service_separate_boot_style(connection,&state.window_style);
-        if(error)goto done;
-        state.window_style_present=1;
     }
 if (!OpenNtBaseFinishGetCommand(&message,&state)) { error=ERROR_INVALID_DATA; goto done; }
     if (message.u.GetNextVDMCommand.StdIn || message.u.GetNextVDMCommand.StdOut ||

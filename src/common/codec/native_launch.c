@@ -13,8 +13,7 @@ DWORD run16_native_launch_pack(const run16_native_start *start,BYTE **output,DWO
     if(!output || !bytes) return ERROR_INVALID_PARAMETER;
     *output=NULL;*bytes=0;
     if(!start || !start->command || !*start->command || !start->directory ||
-        !*start->directory || !start->environment || start->console_mask>7 ||
-        !WINDOW_STYLE_VALID(start->window_style)) return ERROR_INVALID_PARAMETER;
+        !*start->directory || !start->environment || start->console_mask>7) return ERROR_INVALID_PARAMETER;
     strings[0]=start->application ? start->application : L"";
     strings[1]=start->command;strings[2]=start->directory;strings[3]=start->environment;
     for(i=0;i<3;++i) {
@@ -36,7 +35,6 @@ DWORD run16_native_launch_pack(const run16_native_start *start,BYTE **output,DWO
     total+=(uint64_t)header.characters[3]*sizeof(WCHAR);
     if(total>NATIVE_LAUNCH_MAX_BYTES) return ERROR_BUFFER_OVERFLOW;
     header.console_mask=start->console_mask;
-    header.window_style=start->window_style;
     for(i=0;i<3;++i) header.standard[i]=(uint64_t)(ULONG_PTR)start->standard[i];
     for(i=0;i<2;++i) header.capabilities[i]=(uint64_t)(ULONG_PTR)start->capabilities[i];
     *output=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,(SIZE_T)total);
@@ -61,7 +59,7 @@ DWORD run16_native_launch_unpack(BYTE *payload,DWORD bytes,run16_native_launch_p
     if(!payload || !header || !strings || bytes<sizeof(*header) ||
         bytes>NATIVE_LAUNCH_MAX_BYTES) return ERROR_INVALID_DATA;
     memcpy(header,payload,sizeof(*header));
-    if(header->console_mask>7 || !WINDOW_STYLE_VALID(header->window_style)) return ERROR_INVALID_DATA;
+    if(header->console_mask>7) return ERROR_INVALID_DATA;
     for(i=0;i<4;++i) {
         if(header->characters[i]<(i==3 ? 2u : 1u) || (i<3 && header->characters[i]>32767))
             return ERROR_INVALID_DATA;

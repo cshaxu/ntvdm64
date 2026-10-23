@@ -4,7 +4,6 @@ param(
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$CompilerDriver,
     [Parameter(Mandatory)][string]$BuildRoot,
-    [ValidateSet('Off','Win16','All')][string]$WindowStyle='Off',
     [ValidateSet('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe')]
     [string[]]$RuntimeImages=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe')
 )
@@ -35,8 +34,7 @@ try {
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     $start=[Diagnostics.ProcessStartInfo]::new($Observer)
     $start.UseShellExecute=$false;$start.CreateNoWindow=$true
-    $styleArgument=if($WindowStyle -eq 'Win16'){' --win16-style'}elseif($WindowStyle -eq 'All'){' --win16-style-all'}else{''}
-    $start.Arguments='"'+$runtime+'\system32\run16.exe" "'+$runtime+'" "'+$root+'\observer.txt" --wait'+$styleArgument+' "'+$runtime+'\SOL.EXE" --observation-timeout-ms 60000'
+    $start.Arguments='"'+$runtime+'\system32\run16.exe" "'+$runtime+'" "'+$root+'\observer.txt" --wait "'+$runtime+'\SOL.EXE" --observation-timeout-ms 60000'
     $process=[Diagnostics.Process]::Start($start)
     $null=$process.Handle
     $process.Id | Set-Content "$root\observer.pid"

@@ -487,16 +487,6 @@ static int detached_reservation(OPENNT_BASE_SERVICE *service,HANDLE self,ULONG b
     CHECK(OpenNtBaseEncodeCheckCommand(&request,1,generation,NULL,0,&bytes));
     wire=malloc(bytes);
     CHECK(wire && OpenNtBaseEncodeCheckCommand(&request,1,generation,wire,bytes,&bytes));
-    {
-        uint32_t style=99;
-        CHECK(OpenNtBaseReadCheckStyle(wire,bytes,&style) && style==WINDOW_STYLE_OFF);
-        CHECK(OpenNtBaseWriteCheckStyle(wire,bytes,WINDOW_STYLE_ALL));
-        CHECK(OpenNtBaseReadCheckStyle(wire,bytes,&style) && style==WINDOW_STYLE_ALL);
-        CHECK(!OpenNtBaseWriteCheckStyle(wire,bytes,3));
-        CHECK(OpenNtBaseReadCheckStyle(wire,bytes,&style) && style==WINDOW_STYLE_ALL);
-        CHECK(OpenNtBaseWriteCheckStyle(wire,bytes,
-            binary==BINARY_TYPE_SEPWOW ? WINDOW_STYLE_ALL : WINDOW_STYLE_OFF));
-    }
     CHECK(OpenNtBaseServiceCheck(connection,GetCurrentProcessId(),generation,wire,bytes,
         NULL,0,&required,&event,&receipt)==ERROR_INSUFFICIENT_BUFFER);
     answer=malloc(required);
@@ -545,7 +535,7 @@ static int detached_reservation(OPENNT_BASE_SERVICE *service,HANDLE self,ULONG b
         {
             BASE_API_MSG get={0}; STARTUPINFOA startup_info={sizeof(startup_info)};
             void *get_wire=NULL,*get_reply=NULL; HANDLE wait=NULL,streams[3]={0};
-            uint32_t get_bytes=0,get_reply_bytes=0,style=99,present=99;
+            uint32_t get_bytes=0,get_reply_bytes=0;
             ULONG stream_count=0;
             get.u.GetNextVDMCommand.StartupInfo=&startup_info;
             get.u.GetNextVDMCommand.iTask=reply.u.CheckVDM.iTask;
@@ -559,9 +549,6 @@ static int detached_reservation(OPENNT_BASE_SERVICE *service,HANDLE self,ULONG b
             CHECK(!OpenNtBaseServiceGet(worker_connection,child.dwProcessId,worker_generation,
                 get_wire,get_bytes,&get_reply,&get_reply_bytes,&wait,streams,&stream_count));
             CHECK(!wait && !stream_count);
-            CHECK(OpenNtBaseReadGetStyle(get_reply,get_reply_bytes,worker_generation,3,&style,&present));
-            CHECK(binary==BINARY_TYPE_SEPWOW ?
-                (present==1 && style==WINDOW_STYLE_ALL) : (!present && style==WINDOW_STYLE_OFF));
             OpenNtBaseServiceReleaseCommandReply(get_reply);free(get_wire);
         }
         if(binary==BINARY_TYPE_SEPWOW) {
@@ -1044,7 +1031,6 @@ int main(int argc,char **argv)
     STARTUPINFOA startup={sizeof(startup)};
     HANDLE self=NULL,wowFrontend=NULL,wowContext=NULL,laterFrontend=NULL;
     DWORD launcherGeneration=0,workerGeneration=0,laterGeneration=0,wowGeneration=0;
-    DWORD windowStyle=WINDOW_STYLE_OFF;
     uint64_t reservation=0,claimed=0,wowReservation=0;
     ULONG task=0,wowTask=0;
     HANDLE wowStartup=NULL;
@@ -1796,7 +1782,6 @@ int main(int argc,char **argv)
     check.u.CheckVDM.StdErr=(HANDLE)(ULONG_PTR)stdoutReceipt;
     CHECK(OpenNtBaseEncodeCheckCommand(&check,1,launcherGeneration,NULL,0,&wireBytes));
     wire=malloc(wireBytes);CHECK(wire && OpenNtBaseEncodeCheckCommand(&check,1,launcherGeneration,wire,wireBytes,&wireBytes));
-    CHECK(OpenNtBaseWriteCheckStyle(wire,wireBytes,WINDOW_STYLE_WIN16));
     CHECK(OpenNtBaseServiceCheck(launcher,GetCurrentProcessId(),launcherGeneration,wire,wireBytes,NULL,0,&answerBytes,&parentEvent,&parentReceipt)==ERROR_INSUFFICIENT_BUFFER && answerBytes);
     answer=malloc(answerBytes);CHECK(answer && OpenNtBaseServiceCheck(launcher,GetCurrentProcessId(),launcherGeneration,wire,wireBytes,answer,answerBytes,&answerBytes,&parentEvent,&parentReceipt)==ERROR_SUCCESS);
     CHECK(OpenNtBaseApplyCheckReply(answer,answerBytes,launcherGeneration,1,&reply));
@@ -2261,9 +2246,6 @@ int main(int argc,char **argv)
     CHECK(OpenNtBaseServiceGet(worker,child.dwProcessId,workerGeneration,getWire,getWireBytes,
         &getAnswer,&wireBytes,&getWait,standard,&standardCount)==ERROR_SUCCESS);
     CHECK(getAnswer!=NULL && getWait==NULL && standardCount==0);
-    { uint32_t style=99,present=99;
-      CHECK(OpenNtBaseReadGetStyle(getAnswer,wireBytes,workerGeneration,3,&style,&present));
-      CHECK(style==WINDOW_STYLE_OFF && !present); }
     OpenNtBaseServiceReleaseCommandReply(getAnswer);getAnswer=NULL;
     free(getWire);getWire=NULL;
     ZeroMemory(&get,sizeof(get));
@@ -2288,11 +2270,6 @@ int main(int argc,char **argv)
         CHECK(delivered!=0);
         CHECK(!OpenNtBaseReadGetObservation(getAnswer,wireBytes,workerGeneration,5,&wrong) && !wrong);
         CHECK(!OpenNtBaseReadGetObservation(getAnswer,wireBytes-1,workerGeneration,4,&wrong) && !wrong);
-        { uint32_t style=99,present=0;
-          CHECK(OpenNtBaseReadGetStyle(getAnswer,wireBytes,workerGeneration,4,&style,&present));
-          CHECK(present && style==WINDOW_STYLE_WIN16);
-          CHECK(!OpenNtBaseReadGetStyle(getAnswer,wireBytes,workerGeneration,5,&style,&present));
-          CHECK(!present && style==WINDOW_STYLE_OFF); }
     }
     CHECK(WriteFile(standard[1],"S34\n",4,&bytes,NULL) && bytes==4);
     CHECK(ReadFile(stdoutRead,streamText,4,&bytes,NULL) && bytes==4 &&
@@ -2412,10 +2389,7 @@ int main(int argc,char **argv)
         &getAnswer,&wireBytes,&getWait,standard,&standardCount)==ERROR_SUCCESS);
     CHECK(getAnswer!=NULL && getWait==NULL && standardCount==0);
     CHECK(OpenNtBaseApplyGetCommand(getAnswer,wireBytes,workerGeneration,7,&get));
-    { uint32_t style=99,present=0;
-      CHECK(OpenNtBaseReadGetStyle(getAnswer,wireBytes,workerGeneration,7,&style,&present));
-      CHECK(present && style==WINDOW_STYLE_OFF);
-      puts("PASS DOS Get replaces previous request policy on resident-worker reuse"); }
+    puts("PASS DOS Get replaces previous request on resident-worker reuse");
     CHECK(get.ReturnValue==STATUS_SUCCESS &&
         get.u.GetNextVDMCommand.CmdLen==sizeof(cmd) && !memcmp(getCmd,cmd,sizeof(cmd)));
     OpenNtBaseServiceReleaseCommandReply(getAnswer);getAnswer=NULL;
@@ -2482,9 +2456,6 @@ int main(int argc,char **argv)
                 CHECK(!getWait && getAnswer && !standardCount);
                 CHECK(OpenNtBaseApplyGetCommand(getAnswer,wireBytes,workerGeneration,9,&get));
                 CHECK(get.ReturnValue==STATUS_NO_MEMORY);
-                { uint32_t style=99,present=0;
-                  CHECK(OpenNtBaseReadGetStyle(getAnswer,wireBytes,workerGeneration,9,&style,&present));
-                  CHECK(present && style==WINDOW_STYLE_OFF); }
                 OpenNtBaseServiceReleaseCommandReply(getAnswer);getAnswer=NULL;
             }
             /* The consumed completion cannot wake a later shell-out; nor
@@ -2772,7 +2743,6 @@ int main(int argc,char **argv)
     CHECK(OpenNtBaseEncodeCheckCommand(&check,8,launcherGeneration,NULL,0,&wireBytes));
     free(wire);wire=malloc(wireBytes);CHECK(wire && OpenNtBaseEncodeCheckCommand(
         &check,8,launcherGeneration,wire,wireBytes,&wireBytes));
-    CHECK(OpenNtBaseWriteCheckStyle(wire,wireBytes,WINDOW_STYLE_ALL));
     CHECK(OpenNtBaseServiceCheck(launcher,GetCurrentProcessId(),launcherGeneration,
         wire,wireBytes,NULL,0,&answerBytes,&parentEvent,&parentReceipt)==ERROR_INSUFFICIENT_BUFFER && answerBytes);
     free(answer);answer=malloc(answerBytes);CHECK(answer && OpenNtBaseServiceCheck(
@@ -2803,12 +2773,6 @@ int main(int argc,char **argv)
     CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
     CHECK(workerInfoCount==1 && workerInfo.kind==1 && workerInfo.stack_depth==1 &&
         workerInfo.task==wowTask);
-    CHECK(OpenNtBaseServiceWowStyle(launcher,GetCurrentProcessId(),launcherGeneration,
-        wowTask,&windowStyle)==ERROR_ACCESS_DENIED && windowStyle==WINDOW_STYLE_OFF);
-    CHECK(OpenNtBaseServiceWowStyle(wowWorker,wowChild.dwProcessId,wowGeneration+1,
-        wowTask,&windowStyle)==ERROR_ACCESS_DENIED);
-    CHECK(OpenNtBaseServiceWowStyle(wowWorker,wowChild.dwProcessId,wowGeneration,
-        wowTask,&windowStyle)==ERROR_INVALID_STATE);
     CHECK(OpenNtBaseServiceWowStarted(launcher,GetCurrentProcessId(),launcherGeneration,
         wowTask)==ERROR_ACCESS_DENIED);
     CHECK(OpenNtBaseServiceWowStarted(wowWorker,wowChild.dwProcessId,wowGeneration+1,
@@ -2937,15 +2901,11 @@ int main(int argc,char **argv)
         CHECK(WOWHead && WOWHead->WOWRecord && WOWHead->WOWRecord->iTask==wowTask);
         original=WOWHead->WOWRecord->hWaitForParentServer;
         WOWHead->WOWRecord->hWaitForParentServer=(HANDLE)(ULONG_PTR)(parentReceipt+2);
-        CHECK(OpenNtBaseServiceWowStyle(wowWorker,wowChild.dwProcessId,wowGeneration,
-            wowTask,&windowStyle)==ERROR_NOT_FOUND && windowStyle==WINDOW_STYLE_OFF);
         CHECK(OpenNtBaseServiceWowStarted(wowWorker,wowChild.dwProcessId,wowGeneration,
             wowTask)==ERROR_SUCCESS);
         CHECK(WaitForSingleObject(wowStartup,0)==WAIT_TIMEOUT);
         WOWHead->WOWRecord->hWaitForParentServer=original;
     }
-    CHECK(OpenNtBaseServiceWowStyle(wowWorker,wowChild.dwProcessId,wowGeneration,
-        wowTask,&windowStyle)==ERROR_SUCCESS && windowStyle==WINDOW_STYLE_ALL);
     CHECK(OpenNtBaseServiceWowStarted(wowWorker,wowChild.dwProcessId,wowGeneration,
         wowTask)==ERROR_SUCCESS);
     if (wowStartup) CHECK(WaitForSingleObject(wowStartup,0)==WAIT_OBJECT_0);
@@ -2963,8 +2923,6 @@ int main(int argc,char **argv)
     CHECK(OpenNtBaseServiceWowStarted(wowWorker,wowChild.dwProcessId,wowGeneration,
         wowTask)==ERROR_INVALID_STATE);
     puts("PASS WOW startup authentication, wait-only notification and immediate-completion latch");
-    CHECK(OpenNtBaseServiceWowStyle(wowWorker,wowChild.dwProcessId,wowGeneration,
-        wowTask,&windowStyle)==ERROR_INVALID_STATE && windowStyle==WINDOW_STYLE_OFF);
     {
         DWORD oldReceipt=parentReceipt;
         ULONG oldTask=wowTask;
@@ -2990,8 +2948,6 @@ int main(int argc,char **argv)
             &getAnswer,&wireBytes,&getWait,standard,&standardCount)==ERROR_SUCCESS);
         CHECK(getAnswer && !getWait && !standardCount);
         OpenNtBaseServiceReleaseCommandReply(getAnswer);getAnswer=NULL;
-        CHECK(OpenNtBaseServiceWowStyle(wowWorker,wowChild.dwProcessId,wowGeneration,
-            wowTask,&windowStyle)==ERROR_SUCCESS && windowStyle==WINDOW_STYLE_OFF);
         CHECK(OpenNtBaseServiceWowStarted(wowWorker,wowChild.dwProcessId,wowGeneration,
             wowTask)==ERROR_SUCCESS);
         CHECK(WaitForSingleObject(wowStartup,0)==WAIT_OBJECT_0);
@@ -3001,7 +2957,7 @@ int main(int argc,char **argv)
             &closeWowWait)==ERROR_SUCCESS && !closeWowWait);
         CHECK(WaitForSingleObject(parentEvent,0)==WAIT_OBJECT_0);
         puts("PASS reused WOW gets a fresh receipt/latch; stale startup identity rejected");
-        puts("PASS WOW style is request-scoped; receipt mismatch, retired task and worker reuse checked");
+        puts("PASS reused WOW receipt mismatch, retired task and worker reuse checked");
     }
     /* Original failed-exec removes a dispatched task without InitTask. Its
      * zero WOW completion must not become a positive startup receipt. */

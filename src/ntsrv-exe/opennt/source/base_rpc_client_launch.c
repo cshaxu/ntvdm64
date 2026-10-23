@@ -9,16 +9,12 @@
 #include <base_service.h>
 #include <base_rpc_client.h>
 #include <base_rpc_client_internal.h>
-#include <base_rpc_client_launch_style.h>
+#include <base_rpc_client_launch.h>
 #include "ntsrv-exe/transport/vdm_receipt.h"
 #include "common/rpc/async_call.h"
 #include "common/protocol/frontend_lifecycle.h"
 
 static struct {
-    DWORD request_window_style;
-    DWORD dos_window_style;
-    DWORD separate_wow_style;
-    BOOL separate_wow_style_valid;
     uint64_t observation_direct; /* Captured on actual Get delivery, not a selector. */
     DWORD (*command_ready)(void *);
     void *command_context;
@@ -40,30 +36,6 @@ static void reset_launch(void)
     parent_event_handle=NULL;
     parent_receipt=0;
     ZeroMemory(&launch,sizeof(launch));
-}
-
-DWORD OpenNtBaseClientSetWindowStyle(DWORD style)
-{
-    (void)OpenNtBaseClientExecutionConnection(reset_launch);
-    if(!WINDOW_STYLE_VALID(style))return ERROR_INVALID_PARAMETER;
-    launch.request_window_style=style;return ERROR_SUCCESS;
-}
-
-DWORD OpenNtBaseClientDosWindowStyle(void)
-{
-    (void)OpenNtBaseClientExecutionConnection(reset_launch);
-    /* Read on the guest execution thread when COMMAND captures its inputs.
-     * The detached CreateProcess thread consumes that copy, never this value.
-     * A successful parent resume restores the policy before the next capture. */
-    return launch.dos_window_style;
-}
-
-DWORD OpenNtBaseClientSeparateWowStyle(DWORD *style)
-{
-    (void)OpenNtBaseClientExecutionConnection(reset_launch);
-    if(!style)return ERROR_INVALID_PARAMETER;
-    if(!launch.separate_wow_style_valid)return ERROR_INVALID_STATE;
-    *style=launch.separate_wow_style;return ERROR_SUCCESS;
 }
 
 uint64_t OpenNtBaseClientObservationDirect(void)
@@ -230,9 +202,7 @@ static NTSTATUS check_command(PCSR_API_MSG message,ULONG length)
     forwarded.u.CheckVDM.StdErr=(HANDLE)(ULONG_PTR)streams[2];
     if (!OpenNtBaseEncodeCheckCommand(&forwarded,request,client.generation,NULL,0,&wireBytes) ||
         !(wire=HeapAlloc(GetProcessHeap(),0,wireBytes)) ||
-        !OpenNtBaseEncodeCheckCommand(&forwarded,request,client.generation,wire,wireBytes,&wireBytes)
-        ||
-        !OpenNtBaseWriteCheckStyle(wire,wireBytes,launch.request_window_style))
+        !OpenNtBaseEncodeCheckCommand(&forwarded,request,client.generation,wire,wireBytes,&wireBytes))
         goto done;
     {
         RPC_ASYNC_STATE async;
@@ -292,7 +262,6 @@ static NTSTATUS get_command(PCSR_API_MSG message,ULONG length)
     DWORD error=ERROR_INVALID_DATA;
     BOOL applied=FALSE;
     uint64_t observation_direct=0;
-    uint32_t window_style=WINDOW_STYLE_OFF,window_style_present=0;
     DWORD requested_state=base->u.GetNextVDMCommand.VDMState;
     if (!request) request=(uint32_t)InterlockedIncrement(&request_id);
     if (length!=sizeof(BASE_GET_NEXT_VDM_COMMAND_MSG) ||
@@ -323,8 +292,6 @@ static NTSTATUS get_command(PCSR_API_MSG message,ULONG length)
         if (wait_event_count) {wait_event=wait_events[0];wait_events[0]=NULL;}
         applied=OpenNtBaseApplyGetCommand(reply,(uint32_t)reply_bytes,client.generation,request,base);
         if(applied)(void)OpenNtBaseReadGetObservation(reply,reply_bytes,client.generation,request,&observation_direct);
-        if(applied)applied=OpenNtBaseReadGetStyle(reply,reply_bytes,client.generation,request,
-            &window_style,&window_style_present);
     }
     if (applied) {
         base->u.GetNextVDMCommand.WaitObjectForVDM=wait_event;
@@ -398,27 +365,6 @@ done:
             (ASKING_FOR_ENVIRONMENT|ASKING_FOR_PIF|ASKING_FOR_WOW_BINARY))
         ) {
         launch.observation_direct=observation_direct;
-        if(!window_style_present) {
-            SetLastError(ERROR_INVALID_DATA);message->ReturnValue=(ULONG)STATUS_UNSUCCESSFUL;
-            return STATUS_UNSUCCESSFUL;
-        }
-        launch.dos_window_style=window_style;
-        if(requested_state & ASKING_FOR_SEPWOW_BINARY) {
-            launch.separate_wow_style=window_style;
-            launch.separate_wow_style_valid=TRUE;
-        }
-    }
-    /* Separate WOW initializes its bootstrap task before asking for the
-     * first application command. Capture policy on its original PIF reply. */
-    if(message->ReturnValue==STATUS_SUCCESS &&
-        (requested_state & (ASKING_FOR_PIF|ASKING_FOR_SEPWOW_BINARY))==
-            (ASKING_FOR_PIF|ASKING_FOR_SEPWOW_BINARY)) {
-        if(!window_style_present) {
-            SetLastError(ERROR_INVALID_DATA);message->ReturnValue=(ULONG)STATUS_UNSUCCESSFUL;
-            return STATUS_UNSUCCESSFUL;
-        }
-        launch.separate_wow_style=window_style;
-        launch.separate_wow_style_valid=TRUE;
     }
     if (message->ReturnValue==STATUS_SUCCESS && launch.command_ready &&
         !base->u.GetNextVDMCommand.WaitObjectForVDM && base->u.GetNextVDMCommand.CmdLen &&
@@ -615,32 +561,6 @@ DWORD OpenNtBaseClientStartVdmWorker(PCWSTR environment,DWORD characters,DWORD s
         /* Same process-local receipt mapping as original Update's RPC facade. */
         parent_event_handle=*parent;parent_receipt=receipt;
     }
-    return error;
-}
-
-DWORD WINAPI OpenNtBaseClientWowStyle(ULONG task,DWORD *style)
-{
-    common_rpc_connection client=OpenNtBaseClientExecutionConnection(reset_launch);
-    DWORD error=ERROR_INVALID_STATE;
-    if(!style)return ERROR_INVALID_PARAMETER;
-    *style=WINDOW_STYLE_OFF;
-    if(!client.connection)return error;
-    {
-        RPC_ASYNC_STATE async;
-        error=OpenNtBaseClientFailure(0);
-        if(!error)error=common_rpc_begin_async(&async);
-        if(!error) {
-            RpcTryExcept {
-                Client_WowStyle(&async,client.binding,client.connection,client.process,
-                    client.generation,task,style);
-            }
-            RpcExcept(1){error=RpcExceptionCode();}
-            RpcEndExcept
-            error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,NULL,
-                INFINITE));
-        }
-    }
-    if(!error && !WINDOW_STYLE_VALID(*style))error=ERROR_INVALID_DATA;
     return error;
 }
 

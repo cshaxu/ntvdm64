@@ -17,7 +17,7 @@ BOOL WINAPI wow_default_capture_context(wow_default_context *, UINT);
 BOOL WINAPI wow_default_ensure_shell_message(HWND);
 int WINAPI GetWindowBorders(LONG, DWORD, BOOL, BOOL);
 struct tagWND;
-/* Owner-approved ordinary native/custom NTW16S nonclient policy boundary. */
+/* Ordinary host nonclient policy boundary. */
 int WINAPI wow_default_find_nc_hit(struct tagWND *, LONG);
 /* Caller prepares the relationship graph through the control/dialog entry
  * and retains the original WND through its existing task/borrow scope.

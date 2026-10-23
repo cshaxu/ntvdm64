@@ -36,9 +36,8 @@ The [responsibility rule](../rules/ARCHITECTURE.md#original-behavior-and-modern-
 governs existing and new implementations. Original WOW/selected USER client
 algorithms own retained behavior; native Windows owns actual windows, desktop
 resources and system messaging; WOW adapters translate identities/data and
-preserve execution and lifetime boundaries; NTW16S owns approved presentation
-and matching custom hit geometry. A host call is a service edge, not permission
-to replace its caller's behavior. Copied WND/menu fields are projections, not
+preserve execution and lifetime boundaries. A host call is a service edge, not
+permission to replace its caller's behavior. Copied WND/menu fields are projections, not
 another native window manager. Original control-private data is distinct from
 those resource observations and must have one retained allocation owner.
 
@@ -77,25 +76,19 @@ the operation. See the [complete design](../etc/operations/t447-wow-execution-pl
 
 The NTSRV-owned client has separately selected core and launch-style archives.
 Core owns one authenticated connection, frontend/native control and disconnect.
-Only launch/execution consumers link the original BaseClient dispatch facade
-and its appearance request/delivery/query state. The extension borrows the
-core connection for synchronous calls and registers its local cleanup for
-disconnect; it cannot replace connection authority or create a second client.
-NTCON links no execution/style archive. This is source/link ownership, not a
+Only launch/execution consumers link the original BaseClient dispatch facade.
+The extension borrows the core connection for synchronous calls and registers
+its local cleanup for disconnect; it cannot replace connection authority or
+create a second client. NTCON links no execution archive. This is source/link
+ownership, not a
 frontend-only preprocessor variant or a change to copied RPC contracts.
 
-## NTW16S style DLL boundary — T445 S5
+## Window appearance boundary
 
-NTW16S owns the complete local Win3.x presentation engine, compiled as
-ntw16s32.dll and ntw16s64.dll. W16Style.exe owns only demonstration content,
-layout and application behavior and calls its public C interface. Hook launch
-propagation and WOW task/window policy remain outside the DLL; S8 integrates
-the native Hooks and WOW32-owned creation scopes. Win16 uses the x86 host DLL
-through WOW32, never a guest DLL import or ntvdm.exe appearance hook.
-The temporary diagnostic caption prefix is retired; application titles remain
-unchanged regardless of style policy.
-Borrowed HWNDs belong to the calling GUI thread; allocated state/resources
-are released by the DLL. DLL entry does not install hooks or draw windows.
+The project has no Win16 Style presentation component. Window appearance is
+ordinary host behavior; any separate styling project remains outside this
+repository's build, release, protocol and runtime contracts. Application
+titles are unchanged by this project.
 
 Owner-approved T423 S12 text extension: the common text ABI accepts original
 glyph/attribute pairs or optional glyph/attribute/style triples. Both workers

@@ -38,7 +38,7 @@ if($graph -match '^build obj/run16/(?:native_console_frontend|frontend_session|c
 # A stale RPC method must not survive merely because no EXE calls it today.
 foreach ($path in @('src/common/protocol/service.idl',
         'src/ntsrv-exe/opennt/source/base_rpc_client_core.c',
-        'src/ntsrv-exe/opennt/source/base_rpc_client_launch_style.c',
+        'src/ntsrv-exe/opennt/source/base_rpc_client_launch.c',
         'src/ntsrv-exe/opennt/source/base_service.c',
         'src/ntsrv-exe/opennt/source/service_core.c',
         'src/ntsrv-exe/opennt/source/worker_registry.c',

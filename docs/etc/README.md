@@ -574,8 +574,8 @@ full integration results, eight-file publication/recovery and retained limits.
 records the x86/x64 source boundary, minimal registered adaptations, native
 build/import, ABI/real-process verification, publication and retained limits.
 
-[T445 S5 NTW16S DLL and W16Style delivery](evidence/m0-t445-s5-style-dll.md)
-records core ownership, public ABI, dual-width regression and publication.
+[Historical T445 Win16 Style delivery](evidence/m0-t445-s5-style-dll.md)
+is retained as archive evidence only; T450 removed that component and package.
 
 [T448 S7 shared-library compatibility audit](evidence/m0-t448-s7-shared-library-import-audit.md)
 records pinned-source incompatibilities and decisions before import.

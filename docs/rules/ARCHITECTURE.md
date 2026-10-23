@@ -19,9 +19,9 @@ replacement of selected original WOW behavior by native controls.
   engine. Each state has one authoritative owner; derived projections require
   explicit publication/invalidation rules and cannot override native reality.
   Original behavior-private state may remain in original structures.
-- NTW16S owns its approved custom appearance and the corresponding geometry
-  and hit testing. Ordinary nonclient hit testing uses native Windows; custom
-  regions use NTW16S. Exact NT4 legacy border return values are not promised.
+- Window appearance is owned by modern Windows in this repository. Any
+  separately developed styling layer is outside its protocols, builds and
+  lifecycle contracts.
 
 For every functional chain, first attempt direct original reuse, then bounded
 service/data adaptation. Identify the precise unavailable private mechanism
@@ -106,26 +106,6 @@ callback admission gate, or extend this exception to stale required local
 mutations. It does not authorize guest changes, a second object authority,
 private USER-server reconstruction or a new scheduler.
 
-## Owner-approved T445 S5 style DLL components
-
-After accepting S4, owner replaces the static-library arrangement below:
-the complete style core moves from src/win16-style into src/ntw16s-dll,
-producing ntw16s32.dll and ntw16s64.dll. src/w16style-exe owns the thin
-W16Style.exe demonstration using the public DLL API, not a second renderer.
-Both DLLs and the x64 executable become release components; the x86 demo is
-also built and tested. Tests/probes remain under tests. This supersedes the
-earlier experiment-only/no-publication restriction, not Hook/WOW integration
-admission. Consumers retain effective per-window policy; no new thread, IPC,
-global interception, guest/mirror modification or process policy is admitted.
-
-## Owner-approved T445 window-style source owner
-
-Owner admits `src/win16-style` as a specialist project-owned static library,
-compiled separately for x86 (WOW32.DLL/nthook32.dll) and x64 (nthook64.dll).
-It owns only local application-window presentation/installation and cleanup;
-callers supply the effective per-window enable decision. It owns no program
-classification, launch propagation, task registry or lifecycle policy, and
-depends on neither NTCON, worker-base nor executable-private/service code.
 No runtime component, thread, polling loop, IPC or mirror relocation is admitted.
 This bounded source-root approval supersedes the root restriction only for
 this owner; Current Work still controls implementation-stage admission.

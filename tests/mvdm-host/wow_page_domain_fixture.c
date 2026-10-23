@@ -24,10 +24,6 @@
 #include "wow32-dll/include/wow_cleanup_bindings.h"
 #include "wow32-dll/include/wow_user_task_lifecycle.h"
 #include "wow32-dll/include/wow_user_private_access.h"
-#ifdef WOW_WINDOW_BORROW_FIXTURE
-#include "wow32-dll/include/wow_title_policy.h"
-#include "common/protocol/window_style.h"
-#endif
 
 extern BOOL WINAPI WOWCallback16Ex(DWORD, DWORD, DWORD, PVOID, PDWORD);
 
@@ -1050,9 +1046,10 @@ static void verify_managed_slot_reuse(wow_task_order_thread *thread)
 
 static unsigned terminal_dialog_callbacks;
 static unsigned modal_dialog_calls;
-static BOOL modal_style_expected;
 static wow_window_words_binding *modal_retained;
 static unsigned modal_handle_form;
+int WINAPI wow_original_DialogBoxIndirectParamAorW(HINSTANCE, LPCDLGTEMPLATEW,
+    HWND, DLGPROC, LPARAM, DWORD);
 static INT_PTR CALLBACK original_modal_witness(HWND window,UINT message,
     WPARAM wp,LPARAM lp)
 {
@@ -1070,10 +1067,6 @@ static INT_PTR CALLBACK original_modal_witness(HWND window,UINT message,
     }
     if(message==WM_TIMER){
         fprintf(stderr,"WOW_MODAL_STAGE timer hwnd=%p\n",window);
-        HMODULE module=GetModuleHandleW(L"ntw16s32.dll");
-        BOOL (__cdecl *attached)(HWND)=module?
-            (BOOL (__cdecl *)(HWND))(void *)GetProcAddress(module,"Ntw16sWindowAttached"):NULL;
-        BORROW_CHECK((attached && attached(window))==modal_style_expected);
         BORROW_CHECK(KillTimer(window,1));
         HWND carrier=modal_handle_form==1?(HWND)(ULONG_PTR)LOWORD(window):
             modal_handle_form==2?(HWND)(LONG_PTR)(SHORT)LOWORD(window):window;
@@ -1106,7 +1099,7 @@ static void verify_original_modal_task(void)
     PFNWOWHANDLERSOUT outputs={0};
     DWORD resource[32]={0};DLGTEMPLATE *dialog=(DLGTEMPLATE *)resource;
     HANDLE wake=CreateEventW(NULL,FALSE,FALSE,NULL);
-    unsigned before=borrow_errors,mode,encoding,carrier,modes=1;
+    unsigned before=borrow_errors,encoding,carrier;
     /* Modal Peek/Wait require InitTask's actual host_context/owner, not just
      * the controlled task words used by the native creation-only matrix. */
     BORROW_CHECK(wake && wow_user_runtime_initialize(&runtime));
@@ -1156,17 +1149,14 @@ static void verify_original_modal_task(void)
 #ifdef WOW_REAL_DIALOG_LIFECYCLE_FIXTURE
     verify_real_dialog_lifecycle(lifecycle);
 #else
-#ifdef WOW_STYLED_TERMINAL_FIXTURE
-    modes=3;
-#endif
     dialog->style=WS_POPUP|WS_CAPTION|DS_MODALFRAME;dialog->cx=100;dialog->cy=40;
-    for(mode=0;mode<modes;++mode)for(encoding=0;encoding<2;++encoding)for(carrier=0;carrier<3;++carrier){
+    for(encoding=0;encoding<2;++encoding)for(carrier=0;carrier<3;++carrier){
         INT_PTR result;PWND state;unsigned calls=modal_dialog_calls;
-        modal_retained=NULL;modal_style_expected=mode!=WINDOW_STYLE_OFF;
+        modal_retained=NULL;
         modal_handle_form=carrier;
-        fprintf(stderr,"WOW_MODAL_STAGE enter mode=%u encoding=%u\n",mode,encoding);
-        result=wow_title_modal(GetModuleHandleW(NULL),dialog,NULL,
-            original_modal_witness,0,encoding?0:SCDLG_ANSI,mode);
+        fprintf(stderr,"WOW_MODAL_STAGE enter encoding=%u\n",encoding);
+        result=wow_original_DialogBoxIndirectParamAorW(GetModuleHandleW(NULL),dialog,NULL,
+            original_modal_witness,0,encoding?0:SCDLG_ANSI);
         fprintf(stderr,"WOW_MODAL_STAGE returned result=%ld error=%lu\n",(LONG)result,GetLastError());
         BORROW_CHECK(result==49 && modal_dialog_calls==calls+1 && modal_retained);
         state=wow_window_words_client_state_value(modal_retained);
@@ -1182,10 +1172,10 @@ static void verify_original_modal_task(void)
     BORROW_CHECK(CloseHandle(wake));
 #ifndef WOW_REAL_DIALOG_LIFECYCLE_FIXTURE
     fprintf(stderr,"WOW_ORIGINAL_MODAL_CARRIERS errors=%u full=1 zero16=1 signed16=1 original_end=1\n",borrow_errors-before);
-    fprintf(stderr,"WOW_ORIGINAL_MODAL_CCPU errors=%u modes=%u aw=2 returned=49 pdlg_retired=1\n",
-        borrow_errors-before,modes);
+    fprintf(stderr,"WOW_ORIGINAL_MODAL_CCPU errors=%u modes=1 aw=2 returned=49 pdlg_retired=1\n",
+        borrow_errors-before);
 #else
-    (void)before;(void)mode;(void)encoding;(void)modes;(void)carrier;
+    (void)before;(void)encoding;(void)carrier;
 #endif
 }
 
@@ -1416,33 +1406,14 @@ static void verify_native_class_creation(wow_class_lookup_context *classes, ULON
         tail[0] = 0xffff; tail[1] = 0x0080; /* Standard BUTTON ordinal. */
         tail[2] = 'O'; tail[3] = 'K'; /* NUL title and zero extra bytes follow. */
         for (terminal_case = 0; terminal_case != 2; ++terminal_case) {
-#ifdef WOW_STYLED_TERMINAL_FIXTURE
-        void *style_scope=NULL;
-        DWORD style_gdi=0;
-        BOOL (__cdecl *query_style)(HWND)=NULL;
-        if (terminal_case) {
-            HMODULE style;
-            BORROW_CHECK(wow_style_creation_begin(WINDOW_STYLE_WIN16,&style_scope));
-            style=GetModuleHandleW(L"ntw16s32.dll");
-            query_style=style?(BOOL (__cdecl *)(HWND))(void *)GetProcAddress(style,"Ntw16sWindowAttached"):NULL;
-            BORROW_CHECK(style_scope && query_style);
-            style_gdi=GetGuiResources(GetCurrentProcess(),GR_GDIOBJECTS);
-        }
-#endif
         window = wow_user_server_create_dialog(GetModuleHandle(NULL), dialog,
             sizeof(template_words), NULL, terminal_dialog_witness, 0,
             SCDLG_CLIENT | SCDLG_ANSI | SCDLG_NOREVALIDATE);
-#ifdef WOW_STYLED_TERMINAL_FIXTURE
-        if (terminal_case) BORROW_CHECK(wow_style_creation_end(style_scope)==ERROR_SUCCESS);
-#endif
         BORROW_CHECK(window != NULL);
         if (window) {
             button = GetDlgItem(window, 101);
             child = wow_window_words_acquire(button);
             BORROW_CHECK(button != NULL && child != NULL);
-#ifdef WOW_STYLED_TERMINAL_FIXTURE
-            if (terminal_case) BORROW_CHECK(query_style && query_style(window) && query_style(button));
-#endif
             if (child) {
                 BORROW_CHECK(wow_window_words_cleanup_value(child)->thread == &thread);
                 BORROW_CHECK(wow_window_class_words_value(child) != NULL);
@@ -1490,9 +1461,6 @@ static void verify_native_class_creation(wow_class_lookup_context *classes, ULON
                     BORROW_CHECK(wow_window_words_prepare_exit(button, child));
                 }
                 if (root) BORROW_CHECK(wow_window_words_prepare_exit(window, root));
-#ifdef WOW_STYLED_TERMINAL_FIXTURE
-                BORROW_CHECK(query_style && query_style(window) && query_style(button));
-#endif
                 BORROW_CHECK(wow_user_runtime_leave(&binding));
                 BORROW_CHECK(!wow_task_callback_enter(&rejected));
                 BORROW_CHECK(GetLastError() == ERROR_INVALID_STATE && !binding.exclusive_held);
@@ -1527,15 +1495,6 @@ static void verify_native_class_creation(wow_class_lookup_context *classes, ULON
             BORROW_CHECK(objects.entries[LOWORD(window)].bType == TYPE_FREE);
             BORROW_CHECK(button && !IsWindow(button) &&
                 objects.entries[LOWORD(button)].bType == TYPE_FREE);
-#ifdef WOW_STYLED_TERMINAL_FIXTURE
-            if (terminal_case) {
-                DWORD after;
-                GdiFlush();after=GetGuiResources(GetCurrentProcess(),GR_GDIOBJECTS);
-                BORROW_CHECK(after==style_gdi);
-                fprintf(stderr,"WOW_STYLED_TERMINAL_CCPU errors=%u style_before=1 neutralized=1 dialog=1 button=1 gdi=%lu/%lu\n",
-                    borrow_errors-before,style_gdi,after);
-            }
-#endif
         }
         }
         fprintf(stderr, "WOW_TERMINAL_PREPARE_CCPU errors=%u dialog_suppressed=1 native_button=1 creation_denied=1 callback_denied=1\n",
@@ -1999,7 +1958,7 @@ static void verify_native_window_first_subclass_case(BOOL existing_subclass)
             unsigned chain_calls = native_chain_calls;
             /* Retaining the comctl predecessor must retain its chain, not
              * substitute the raw leaf procedure. This is a carrier test;
-             * it does not claim NTW16S rendering or guest execution. */
+             * it does not claim host rendering or guest execution. */
             BORROW_CHECK(GetWindowSubclass(window, native_chain, 47, &data) && data == 0);
             (void)SendMessageA(window, WM_APP + 65, 0, 0);
             BORROW_CHECK(native_chain_calls == chain_calls + 1);

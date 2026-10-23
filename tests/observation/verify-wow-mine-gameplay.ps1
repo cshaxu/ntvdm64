@@ -4,7 +4,6 @@ param(
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$CompilerDriver,
     [Parameter(Mandatory)][string]$BuildRoot,
-    [ValidateSet('Off','Win16','All')][string]$WindowStyle='Off',
     [switch]$VisibleDesktop,
     [switch]$StartupOnly,
     [switch]$RetiringSibling,
@@ -103,9 +102,8 @@ try {
     else{$env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'}
     $start=[Diagnostics.ProcessStartInfo]::new($Observer)
     $start.UseShellExecute=$false;$start.CreateNoWindow=$true
-    $styleArgument=if($WindowStyle -eq 'Win16'){' --win16-style'}elseif($WindowStyle -eq 'All'){' --win16-style-all'}else{''}
     $waitArgument=if($StartupOnly){''}else{' --wait'}
-    $start.Arguments='"'+$runtime+'\system32\run16.exe" "'+$runtime+'" "'+$root+'\observer.txt"'+$waitArgument+$styleArgument+' "'+$runtime+'\WINMINE.EXE" --observation-timeout-ms '+$observerTimeout
+    $start.Arguments='"'+$runtime+'\system32\run16.exe" "'+$runtime+'" "'+$root+'\observer.txt"'+$waitArgument+' "'+$runtime+'\WINMINE.EXE" --observation-timeout-ms '+$observerTimeout
     $process=[Diagnostics.Process]::Start($start)
     $null=$process.Handle
     $process.Id | Set-Content "$root\observer.pid"
@@ -124,7 +122,7 @@ try {
         'PASS launcher returned successfully before any gameplay or close input' |
             Set-Content "$root\startup-result.txt"
     }
-    $marked=if($WindowStyle -eq 'Off'){'0'}else{'1'}
+    $marked='0'
     $desktopName=if($VisibleDesktop){'-'}else{"NTVDMConsoleTest-$($process.Id)"}
     $probeArguments=@($worker.ProcessId,$desktopName,"$root\mine",$marked)
     if($withSibling){$probeArguments+=@("$runtime\system32\run16.exe","$runtime\tests\$siblingName.EXE")}

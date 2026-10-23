@@ -52,10 +52,10 @@ function Run-Step([string]$Name, [string]$Architecture, [string]$Command) {
     Write-Output "PASS $Name"
 }
 function Build-Components([string]$Pass) {
-    Run-Step "$Pass-x86" x86 "`"$cmake`" --build --preset msvc-x86-release-ccache --target W16Style wow32 --parallel 12"
+    Run-Step "$Pass-x86" x86 "`"$cmake`" --build --preset msvc-x86-release-ccache --target wow32 --parallel 12"
     $runner = Join-Path $repo 'build/.ninja/msvc-x86-release/worker/run-ninja-parallel.cmd'
     Run-Step "$Pass-x86-hook-redir" x86 "call `"$runner`" nthook32.dll VDMREDIR.dll"
-    Run-Step "$Pass-x64" x64 "`"$cmake`" --build --preset msvc-x64-release-ccache --target W16Style native-worker native-frontend native-monitor native-launcher native-service hook64 wow_message_observer --parallel 2"
+    Run-Step "$Pass-x64" x64 "`"$cmake`" --build --preset msvc-x64-release-ccache --target native-worker native-frontend native-monitor native-launcher native-service hook64 wow_message_observer --parallel 2"
 }
 function Intermediate-Snapshot {
     $snapshot = @{}
@@ -86,9 +86,6 @@ try {
         @('WOW32.DLL',"$x86/wow32/WOW32.DLL",0x14c),
         @('VDMREDIR.DLL',"$x86/worker/VDMREDIR.dll",0x14c),
         @('nthook32.dll',"$x86/worker/nthook32.dll",0x14c),
-        @('ntw16s32.dll',"$x86/ntw16s32.dll",0x14c),
-        @('ntw16s64.dll',"$x64/ntw16s64.dll",0x8664),
-        @('W16Style.exe',"$x64/W16Style.exe",0x8664),
         @('ntvwm.exe',"$x64/worker/ntvwm.exe",0x8664),
         @('ntcon.exe',"$x64/frontend/ntcon.exe",0x8664),
         @('ntmon.exe',"$x64/monitor/ntmon.exe",0x8664),

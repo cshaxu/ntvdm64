@@ -21,7 +21,6 @@ typedef struct run16_native_start {
     PCWSTR application,command,directory,environment;
     HANDLE standard[3],capabilities[2];
     DWORD console_mask;
-    DWORD window_style;
 } run16_native_start;
 DWORD run16_native_launch_pack(const run16_native_start *,BYTE **,DWORD *);
 /* Validated borrowed string views; caller keeps payload alive. */

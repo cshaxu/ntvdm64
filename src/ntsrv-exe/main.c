@@ -740,13 +740,6 @@ error_status_t Server_RegisterWowExec(PRPC_ASYNC_STATE async,handle_t binding,VD
     if (status) return basesrv_complete_rpc(async,status);
     return basesrv_complete_rpc(async,OpenNtBaseServiceRegisterWowExec(connection,pid,generation,window));
 }
-error_status_t Server_WowStyle(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
-    HANDLE process,ULONG generation,ULONG task,ULONG *style)
-{
-    DWORD pid;RPC_STATUS status=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if(status)return basesrv_complete_rpc(async,status);
-    return basesrv_complete_rpc(async,OpenNtBaseServiceWowStyle(connection,pid,generation,task,style));
-}
 error_status_t Server_WowStarted(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation,ULONG task)
 {

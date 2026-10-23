@@ -4,47 +4,11 @@
 
 NTSRV retains both source owners under opennt/source:
 base_rpc_client_core.c builds base-rpc-client-core.lib for shared connection,
-control and resource handoff; base_rpc_client_launch_style.c builds
-base-rpc-client-launch-style.lib for Run16/VDM execution and style state.
+control and resource handoff; base_rpc_client_launch.c builds the remaining
+Run16/VDM execution client slice.
 NTCON and NTVWM use core only; NTVDM and Run16 select both. WOW reaches the
 worker's existing client exports, not a DLL-private duplicate connection.
 The private composition header is not a wire ABI or general plugin registry.
-
-## NTW16S and W16Style component placement — T445 S5
-
-The owner-approved successor to src/win16-style is src/ntw16s-dll: the whole
-core, internal headers and visual resources live there, with no parallel
-static core owner. One source family builds ntw16s32.dll and ntw16s64.dll.
-src/w16style-exe produces W16Style.exe, a thin public-API demonstration;
-automated fixtures remain in tests. The three admitted release images join
-release-manifest.json, not addon-manifest.json. Prior static-library text
-below describes the S3/S4 baseline superseded by this admission.
-
-S8 adds creation attachment, per-window theme capture and three original
-native API leaves under the same NTW16S owner. Native Hook window_titles.cpp
-loads its same-width DLL from the trusted product System32 and binds original
-scroll/theme trampolines. WOW32 wow_title_policy.c loads ntw16s32.dll beside
-the existing worker and chooses each task's explicit creation scope, including
-Off masking. Neither consumer contains a second renderer; ntvdm.exe, NTCON,
-NTSRV and the guest receive no appearance implementation. This is local ABI2,
-not a wire-protocol change. See the [S8 design](../etc/operations/t445-s8-style-integration-design.md)
-and [verification status](../etc/evidence/m0-t445-s8-style-integration.md).
-
-## Approved window-style library placement — T445
-
-`src/win16-style` is the approved shared static-library source owner for
-project-authored application-window style. Its x86 build serves WOW32.DLL and
-nthook32.dll; its x64 build serves nthook64.dll. Window title marking and later
-frame layout/drawing share this owner and installation boundary. Task-policy
-selection and propagation stay in their existing consumers. The directory is
-admitted first for an isolated experiment: tests/app supplies an independently
-launched Win32 GUI fixture directly linked to the library, with outputs only
-under build/. No existing product consumer links it until later integration
-admission. The standalone prototype now has dual-width HWND tests and probe
-captures; product integration and owner visual stability acceptance remain
-pending. See the
-[appearance proposal](../proposals/proposal-win31-window-appearance-001.md)
-and the source-owner admission in [Architecture Rules](../rules/ARCHITECTURE.md).
 
 ## Owner-approved independent guest add-on — T435
 

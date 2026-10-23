@@ -94,9 +94,9 @@ if(!$CleanupOnly){
             $unchanged=Run-Dev $architecture "`"$ninja`" -C `"$tree/worker`" $imports" 'native-imports-incremental'
             Check (($unchanged -join ' ') -match 'no work to do') 'unchanged native imports do not restage'
         }
-        $null=Run-Dev $architecture "`"$cmake`" --build `"$tree`" --target W16Style" "$architecture-build-off"
+        $null=Run-Dev $architecture "`"$cmake`" --build `"$tree`" --target native-launcher" "$architecture-build-off"
         $before=@(Get-ChildItem "$tree/CMakeFiles" -Filter '*.obj' -Recurse | ForEach-Object {"$($_.FullName):$($_.LastWriteTimeUtc.Ticks)"})
-        $noWork=Run-Dev $architecture "`"$cmake`" --build `"$tree`" --target W16Style" "$architecture-incremental-off"
+        $noWork=Run-Dev $architecture "`"$cmake`" --build `"$tree`" --target native-launcher" "$architecture-incremental-off"
         $after=@(Get-ChildItem "$tree/CMakeFiles" -Filter '*.obj' -Recurse | ForEach-Object {"$($_.FullName):$($_.LastWriteTimeUtc.Ticks)"})
         Check ($before.Count -gt 0 -and !(Compare-Object $before $after) -and ($noWork -join ' ') -match 'no work to do') "$architecture unchanged incremental does not compile"
         $null=Run-Dev $architecture "`"$cmake`" --preset $preset-ccache" "$architecture-configure-cache"
@@ -104,7 +104,7 @@ if(!$CleanupOnly){
         $savedDir=$env:CCACHE_DIR; $savedTemp=$env:CCACHE_TEMPDIR; $savedMax=$env:CCACHE_MAXSIZE
         try{
             $env:CCACHE_DIR=$foreign; $env:CCACHE_TEMPDIR="$foreign/tmp"; $env:CCACHE_MAXSIZE='1M'
-            $null=Run-Dev $architecture "`"$cmake`" --build `"$tree`" --target W16Style --verbose" "$architecture-build-cache-hostile-env"
+            $null=Run-Dev $architecture "`"$cmake`" --build `"$tree`" --target native-launcher --verbose" "$architecture-build-cache-hostile-env"
         }finally{$env:CCACHE_DIR=$savedDir;$env:CCACHE_TEMPDIR=$savedTemp;$env:CCACHE_MAXSIZE=$savedMax}
         Check (!(Test-Path $foreign)) "$architecture ignores caller's external cache location"
         $log=Get-Content (Join-Path $scratch "$architecture-build-cache-hostile-env.log") -Raw
@@ -114,8 +114,7 @@ if(!$CleanupOnly){
         Check ($commands -match 'CCACHE_DIR=.*build/.ccache' -and $commands -match 'CCACHE_TEMPDIR=.*build/.ccache/tmp' -and $commands -match 'CCACHE_MAXSIZE=5G') "$architecture original manifest graph fixes cache routing too"
         $library=if($architecture -eq 'x86'){'common-root.lib'}else{'common-rpc.lib'}
         $null=Run-Dev $architecture "`"$ninja`" -C `"$manifestTree`" $library" "$architecture-original-manifest-library"
-        $null=Run-Dev $architecture "`"$ninja`" -C `"$tree`" -t clean ntw16s W16Style" "$architecture-cache-rebuild-clean"
-        $null=Run-Dev $architecture "`"$cmake`" --build `"$tree`" --target W16Style" "$architecture-cache-hit-rebuild"
+        $null=Run-Dev $architecture "`"$cmake`" --build `"$tree`" --target native-launcher" "$architecture-cache-hit-rebuild"
         $null=Run-Dev $architecture "`"$cmake`" --preset $preset" "$architecture-disable-cache"
         $cache=Get-Content "$tree/CMakeCache.txt" -Raw
         Check ($cache -match '(?m)^CMAKE_C_COMPILER_LAUNCHER:STRING=\r?$' -and $cache -match '(?m)^CMAKE_CXX_COMPILER_LAUNCHER:STRING=\r?$') "$architecture cache-off clears old launchers in same tree"
@@ -135,9 +134,6 @@ if(!$CleanupOnly){
     $configurationOwner=@{targets=@(@{path=$temporaryConfig;owner='Td configuration test';reason='unconfigured test-only prefix, no Ninja graph or CMake cache';inventorySha256=$configurationInventory[-1].InventorySha256});reviewedFiles=@()}
     & $cleaner -Target $temporaryConfig -OwnershipManifest $configurationOwner -Apply -TasksExited | Out-Null
     Check (!(Test-Path (Join-Path $repo $temporaryConfig))) 'unconfigured test prefix is removed, not hidden in cache'
-    & "$repo/tests/observation/verify-title-marker.ps1" -BuildRoot "$scratch/title-marker"
-    if($LASTEXITCODE -or (Get-Content "$scratch/title-marker/exit-code.txt" -Raw).Trim() -ne '0'){throw 'Migrated style fixture entrypoint failed'}
-    Check $true 'migrated dual-width fixture entrypoint builds in cache and logs outside it'
 }
 Write-Utf8 (Join-Path $scratch 'result.json') (@{passed=@($passed);count=$passed.Count;utc=[DateTime]::UtcNow.ToString('o')}|ConvertTo-Json -Depth 4)
 "PASS: $($passed.Count) build-hygiene assertions"

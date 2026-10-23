@@ -22,7 +22,7 @@ try{
  $inputs=@($PSCommandPath,"$PSScriptRoot/verify-wow-callback-cost.ps1","$PSScriptRoot/summarize-wow-callback-cost.ps1",$Observer,$CompilerDriver)
  foreach($dir in @($BaselineImages,$CandidateImages)){
   $inputs+=Join-Path $dir 'release-manifest.json'
-  $images=@(Get-Content "$dir/release-manifest.json" -Raw|ConvertFrom-Json);if($images.Count -ne 13){throw 'Coherent13 required'}
+  $images=@(Get-Content "$dir/release-manifest.json" -Raw|ConvertFrom-Json);if($images.Count -ne 10){throw 'Coherent ten-image package required'}
   foreach($image in $images){$path=Join-Path $dir $image.name;if((Get-FileHash $path).Hash -ne $image.sha256){throw 'Selected manifest mismatch'};$inputs+=$path}
  }
  $inputs|Sort-Object -Unique|Get-FileHash|Export-Csv -NoTypeInformation "$root/inputs.csv"

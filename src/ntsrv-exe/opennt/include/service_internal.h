@@ -90,7 +90,6 @@ struct OPENNT_BASE_CONNECTION {
     BOOL retired;
     BOOL pending_creation;
     ULONG pending_vdm_binary; /* Original Check result, not caller-selected creation. */
-    DWORD request_window_style; /* Bound to this original Check request, not its worker. */
     BOOL vdm_starting;
     BOOL registered_worker;
     BOOL native_worker;

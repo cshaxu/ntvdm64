@@ -10,7 +10,6 @@
 #include "wow_user_native_call.h"
 #include "wow_task_cleanup_entry.h"
 #include "wow_class_client_bindings.h"
-#include "common/protocol/window_style.h"
 
 struct wow_user_task_lifecycle_thread;
 
@@ -51,12 +50,6 @@ BOOL WINAPI wow_user_task_lifecycle_register(wow_user_task_lifecycle *,
     wow_task_end_callback, HANDLE);
 BOOL WINAPI wow_user_task_lifecycle_init(wow_user_task_lifecycle *, UINT,
     LPCSTR, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, WORD);
-/* Called before original InitTask can publish a task. Direct requests pass
- * their copied value and parent=0; local guest children name their original
- * TDB_Parent. Inheritance never selects an arbitrary other WOW task. */
-BOOL WINAPI wow_user_task_lifecycle_init_style(wow_user_task_lifecycle *, UINT,
-    LPCSTR, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, WORD, DWORD, WORD);
-BOOL WINAPI wow_user_task_lifecycle_style(wow_user_task_lifecycle *, DWORD *);
 /* Retry only the launcher notification after original InitTask committed.
  * The callback runs outside the USER lock; task/request identity must match. */
 DWORD WINAPI wow_user_task_lifecycle_notify_start(wow_user_task_lifecycle *,

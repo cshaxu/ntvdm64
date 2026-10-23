@@ -6,21 +6,22 @@
  */
 
 #include <windows.h>
-#include "wow_title_policy.h"
 #include "opennt-abi/host-compat/include/wow32_provider_private.h"
 #include "opennt-abi/source/public/internal/windows/inc/wingdip.h"
 
+int WINAPI wow_original_DialogBoxIndirectParamAorW(HINSTANCE, LPCDLGTEMPLATEW,
+    HWND, DLGPROC, LPARAM, UINT);
+
 /* ADAPTER-WOW-063 supersedes ADAPTER-WIN32-051's native modal substitution.
- * Keep product style policy outside original clres/dlgmgr; preserve the
- * complete input flags so the original entry owns their interpretation. */
+ * Preserve the complete input flags so the original entry owns their
+ * interpretation. */
 int WINAPI wow_user_dialog_box_indirect_param(HINSTANCE module,
     LPCDLGTEMPLATEW dialog_template, HWND owner, DLGPROC dialog_proc,
     LPARAM init_param, UINT flags)
 {
-    DWORD policy;
-    if (dialog_template == NULL || !wow_title_policy(&policy)) return -1;
-    return (int)wow_title_modal(module,dialog_template,owner,dialog_proc,
-        init_param,flags,policy);
+    if (dialog_template == NULL) return -1;
+    return wow_original_DialogBoxIndirectParamAorW(module,dialog_template,
+        owner,dialog_proc,init_param,flags);
 }
 
 /* DIVERGENCE(ADAPTER-WIN32-052): OpenNT's GetHFONT retrieves the font

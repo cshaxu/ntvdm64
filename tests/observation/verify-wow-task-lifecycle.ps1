@@ -2,8 +2,7 @@ param(
     [Parameter(Mandatory=$true)][string]$ProviderBuildRoot,
     [Parameter(Mandatory=$true)][string]$WorkerBuildRoot,
     [string]$BuildRoot,
-    [ValidateSet('task-lifecycle','process-retirement','menu-cleanup','menu-resource','native-dispatch-gate','window-procedure','standard-class','class-query','class-procedure','class-lifetime','dialog-lifecycle','init-notification','start-notification','style-policy','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect','task-order','class-client','window-borrow','window-reclaim','graph-snapshot','thunk-scope','native-creation')] [string]$Case = 'task-lifecycle',
-    [string]$StyleDll,
+    [ValidateSet('task-lifecycle','process-retirement','menu-cleanup','menu-resource','native-dispatch-gate','window-procedure','standard-class','class-query','class-procedure','class-lifetime','dialog-lifecycle','init-notification','start-notification','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect','task-order','class-client','window-borrow','window-reclaim','graph-snapshot','thunk-scope','native-creation')] [string]$Case = 'task-lifecycle',
     [switch]$InitRollback,
     [switch]$CreationUnwind,
     [switch]$OriginalModalOnly,
@@ -21,7 +20,6 @@ if ($InitRollback -and $Case -ne 'task-lifecycle') { throw 'InitRollback require
 if ($CreationUnwind -and $Case -ne 'native-creation') { throw 'CreationUnwind requires native-creation' }
 if ($RealDialogLifecycleOnly) { $OriginalModalOnly = $true }
 if ($OriginalModalOnly -and $Case -ne 'window-borrow') { throw 'OriginalModalOnly requires window-borrow' }
-if ($StyleDll -and $Case -notin @('style-policy','window-borrow')) { throw 'StyleDll requires style-policy or window-borrow' }
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $vs = (Resolve-Path -LiteralPath $VsDevCmd).Path
 
@@ -33,20 +31,6 @@ if (!$out.StartsWith(($repo + '\build\'), [StringComparison]::OrdinalIgnoreCase)
     throw 'Lifecycle fixture output must be under repository build.'
 }
 New-Item -ItemType Directory -Path $out -Force | Out-Null
-if ($requestedCase -eq 'style-policy') {
-    if (!$StyleDll) { throw 'style-policy requires a matching style DLL' }
-    # One process-level registration lifetime per executable. Keep policy/peer
-    # model assertions and require real original-modal acceptance separately.
-    $shell=(Get-Process -Id $PID).Path
-    $line='-NoProfile -File "'+$PSCommandPath+'" -ProviderBuildRoot "'+$provider+'" -WorkerBuildRoot "'+$worker+'" -BuildRoot "'+$out+'/original-modal" -Case window-borrow -OriginalModalOnly -StyleDll "'+(Resolve-Path $StyleDll).Path+'" -VsDevCmd "'+$vs+'" -Ninja "'+$Ninja+'"'
-    $modal=Start-Process $shell -ArgumentList $line -WindowStyle Hidden -PassThru -WorkingDirectory $repo -RedirectStandardOutput "$out/original-modal.stdout.txt" -RedirectStandardError "$out/original-modal.stderr.txt"
-    $null=$modal.Handle
-    @{pid=$modal.Id;start=$modal.StartTime.ToUniversalTime().ToString('o');command=$line;timeoutSeconds=300} |
-        ConvertTo-Json | Set-Content "$out/original-modal.process.json"
-    if (!$modal.WaitForExit(300000)) { & taskkill.exe /PID $modal.Id /T /F; throw 'Original modal prerequisite deadline' }
-    $modal.WaitForExit();$code=$modal.ExitCode;$code|Set-Content "$out/original-modal.exit.txt";$modal.Dispose()
-    if ($code) { throw 'Actual original modal/AW/style/lifetime prerequisite failed' }
-}
 # Initialize the compiler shell once. Only compiler children receive the
 # resulting environment; the verifier and acceptance children never inherit it.
 $environmentStart = [DateTimeOffset]::UtcNow
@@ -155,7 +139,7 @@ function Invoke-NinjaTarget([string]$directory, [string]$target) {
 # do not rely on a provider-only build or on an incidental aggregate archive.
 $workerObjects = @(
     (Join-Path $worker 'base-rpc-client-core.lib'),
-    (Join-Path $worker 'base-rpc-client-launch-style.lib'),
+    (Join-Path $worker 'base-rpc-client-launch.lib'),
     (Join-Path $worker 'obj/worker/stub.obj'),
     (Join-Path $worker 'obj/adapter-wow-worker/wow_gdi_alias.obj'),
     (Join-Path $worker 'obj/adapter-wow-worker/wow_user_runtime.obj'),
@@ -265,15 +249,6 @@ if ($Case -eq 'menu-resource') { $fixture += ' /DWOW_RESOURCE_CLIENT_FIXTURE' }
 if ($Case -eq 'start-notification') { $fixture += ' /DWOW_START_NOTIFICATION_FIXTURE' }
 if ($Case -eq 'menu-cleanup') { $fixture += ' /DWOW_MENU_CLEANUP_FIXTURE' }
 if ($Case -eq 'task-order') { $fixture += ' /we4113 /we4047' }
-if ($Case -eq 'style-policy') {
-    if(!$StyleDll){throw 'style-policy requires the tested ntw16s32.dll'}
-    Copy-Item -LiteralPath (Resolve-Path $StyleDll).Path -Destination "$out/ntw16s32.dll"
-    $fixture += ' /DWOW_TITLE_POLICY_FIXTURE'
-}
-if ($Case -eq 'window-borrow' -and $StyleDll) {
-    Copy-Item -LiteralPath (Resolve-Path $StyleDll).Path -Destination "$out/ntw16s32.dll"
-    $fixture += ' /DWOW_STYLED_TERMINAL_FIXTURE'
-}
 if ($Case -in @('native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect')) { $fixture += ' /DWOW_NATIVE_SEND_FIXTURE' }
 if ($Case -eq 'native-indirect') { $fixture += ' /DWOW_NATIVE_INDIRECT_FIXTURE' }
 if ($Case -eq 'native-reply') { $fixture += ' /DWOW_NATIVE_REPLY_FIXTURE' }
@@ -525,11 +500,6 @@ $process.Refresh()
 $fixtureOutput = @(Get-Content "$out/stdout.txt"; Get-Content "$out/stderr.txt")
 $fixtureExitCode = $process.ExitCode
 $fixtureExitCode | Set-Content -LiteralPath "$out/fixture-exit.txt"
-if ($requestedCase -eq 'style-policy' -and
-    (!($fixtureOutput -match '^WOW_TITLE_POLICY bound task, Off isolation and dynamic caption checked$') -or
-     !($fixtureOutput -match '^WOW_TITLE_POLICY same-runtime Off peer and parent policy retention checked$'))) {
-    throw 'Style policy/peer isolation contract failed after real modal prerequisite'
-}
 if ($OriginalModalOnly) {
     if (!($fixtureOutput -match '^WOW_CLIENT_CONTEXT_BINDING_CCPU errors=0 production_op=1 controlled_views=2 scheduling=separate$')) {
         throw 'Original execution initialization or production thread-client projection operation failed'
@@ -537,7 +507,7 @@ if ($OriginalModalOnly) {
     # Dedicated scope, not a substitute pass for the independent whole CCPU
     # window/class/menu matrices. The actual registered lifetime gets its own
     # process so its legitimate process cleanup cannot perturb their baselines.
-    $modalModes = if ($StyleDll) {3} else {1}
+    $modalModes = 1
     if ($RealDialogLifecycleOnly) {
         if ($fixtureExitCode -ne 0 -or
             !($fixtureOutput -match '^WOW_REAL_DIALOG_SCOPE errors=0 callback_reject=1 capture_exception=1 exact_production_finally=1 cache_restored=1 context_restored=1 owner_restored=1$') -or
@@ -566,9 +536,6 @@ if ($Case -eq 'class-client' -and
 if ($Case -eq 'class-lifetime' -and
     !($fixtureOutput -match '^WOW_WINDOW_CLASS_SHARED_LIFETIME errors=0 callbacks=1 native_failure_retains_node=32$')) {
     throw 'Window/class retained storage, replacement or rollback was not verified'
-}
-if ($Case -eq 'init-notification' -and !($fixtureOutput -match '^WOW_INIT_PRECOMMIT_CLEANUP errors=0 retries=7 registered_cleanup=1$')) {
-    throw 'Precommit original-task registered cleanup was not verified'
 }
 if ($InitRollback -and !($fixtureOutput -match '^WOW_INIT_ROLLBACK errors=0 failed_allocations=2 name_releases=2$')) {
     throw 'Original InitTask rollback/name release/error preservation was not verified'
@@ -600,10 +567,6 @@ if ($Case -eq 'graph-snapshot' -and
     throw 'Real native handle-slot reuse and retained-generation isolation were not verified'
 }
 $fixtureOutput | Write-Output
-if ($Case -eq 'window-borrow' -and $StyleDll -and
-    !($fixtureOutput -match '^WOW_STYLED_TERMINAL_CCPU errors=0 style_before=1 neutralized=1 dialog=1 button=1 gdi=[0-9]+/[0-9]+$')) {
-    throw 'Styled real-CCPU terminal cleanup did not prove actual attachment, neutralization and GDI retirement'
-}
 if ($Case -eq 'graph-snapshot') {
     if (!($fixtureOutput -match '^WOW_CLASS_MEMBERSHIP_COPY_CCPU errors=0 phases=4 owned=2 nonowned=2 page_crossing=1 invalid_name=1$')) {
         throw 'Full-copy class membership changed scalar descriptor, lifetime or failure behavior'

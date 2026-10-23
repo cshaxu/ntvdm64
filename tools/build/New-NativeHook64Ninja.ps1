@@ -44,7 +44,7 @@ $graph.Add('  command = midl.exe /nologo /env x64 /target NT100 /prefix client C
 $graph.Add('build obj/basesrv/service.h obj/basesrv/service_c.c obj/basesrv/service_s.c: idl '+(NP (Join-Path $root 'src/common/protocol/service.idl'))+' | '+(NP (Join-Path $root 'src/common/protocol/service.acf')))
 $graph.Add('build observation-stub.obj: cc obj/basesrv/service_c.c | obj/basesrv/service.h')
 $sources=@('src/nthook32-dll/entry.cpp','src/nthook32-dll/context.cpp',
-    'src/nthook32-dll/installer.cpp','src/nthook32-dll/create_process.cpp','src/nthook32-dll/window_titles.cpp',
+    'src/nthook32-dll/installer.cpp','src/nthook32-dll/create_process.cpp',
     'src/common/native_image.c',
     'src/run16-exe/hook_classification.c',
     'src/opennt-host/base/win32/client/vdm.c',

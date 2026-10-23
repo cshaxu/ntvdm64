@@ -29,9 +29,6 @@ static BOOL create_policy_child(LPCSTR application,LPSTR command,
     nthook_context context;
     DWORD error=nthook_context_paths(&context);
     if(error){SetLastError(error);return FALSE;}
-    if(!mvdm_command_native_child_window_style(&context.window_style)){
-        SetLastError(ERROR_INVALID_STATE);return FALSE;
-    }
     context.frontend=frontend;context.execution=execution;
     if(!CreateProcessA(application,command,process_attributes,thread_attributes,
         inherit,flags|CREATE_SUSPENDED,environment,directory,startup,process))return FALSE;

@@ -10,9 +10,6 @@ param(
     [string]$NativeMonitor='',
     [string]$NativeLauncher='',
     [string]$NativeService,
-    [string]$Style32='',
-    [string]$Style64='',
-    [string]$StyleDemo='',
     [Parameter(Mandatory)][string]$NativeWorker
 )
 $ErrorActionPreference='Stop'
@@ -28,23 +25,11 @@ function Get-StageFileSha256([string]$LiteralPath) {
     }
 }
 if($NativeHook64 -and !$NativeHook){throw 'Hook64 requires the matching Hook32 package input'}
-if(($Style32 -or $Style64 -or $StyleDemo) -and !($Style32 -and $Style64 -and $StyleDemo)) {
-    throw 'Style package requires both DLL widths and the x64 demo'
-}
-$styleInputs=@{}
-if($Style32) {
-    $styleInputs=@{'ntw16s32.dll'=(Resolve-Path -LiteralPath $Style32).Path;
-        'ntw16s64.dll'=(Resolve-Path -LiteralPath $Style64).Path;
-        'W16Style.exe'=(Resolve-Path -LiteralPath $StyleDemo).Path}
-}
 $baseline=(Resolve-Path -LiteralPath $BaselineRoot).Path
 $cache=(Resolve-Path -LiteralPath $BuildCache).Path
 $wow=(Resolve-Path -LiteralPath $Wow32).Path
 $output=[IO.Path]::GetFullPath($OutputRoot)
 $build=(Resolve-Path -LiteralPath "$PSScriptRoot/../../build").Path+'\'
-foreach($path in $styleInputs.Values) {
-    if(!$path.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)){throw 'Style inputs must be build-owned'}
-}
 if(!$output.StartsWith($build,[StringComparison]::OrdinalIgnoreCase) -or
    (Test-Path -LiteralPath $output)){throw 'Require a fresh repository-build staging root'}
 Copy-Item -LiteralPath $baseline -Destination $output -Recurse
@@ -53,7 +38,6 @@ if(!(Test-Path -LiteralPath $system -PathType Container)){throw 'Baseline lacks 
 $names=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL')
 if($NativeHook){$NativeHook=(Resolve-Path -LiteralPath $NativeHook).Path;$names+='nthook32.dll'}
 if($NativeHook64){$NativeHook64=(Resolve-Path -LiteralPath $NativeHook64).Path;$names+='nthook64.dll'}
-if($Style32){$names+=@('ntw16s32.dll','ntw16s64.dll','W16Style.exe')}
 if($NativeWorker){
     $NativeWorker=(Resolve-Path -LiteralPath $NativeWorker).Path
     if(!$NativeHook64 -or !$NativeWorker.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)){throw 'Native worker requires both Hooks and a build-owned input'}
@@ -76,12 +60,10 @@ if($NativeService){
 }
 $manifest=foreach($name in $names){
     $source=if($name -eq 'WOW32.DLL'){$wow}elseif($name -eq 'nthook32.dll'){$NativeHook}elseif($name -eq 'nthook64.dll'){$NativeHook64}elseif($name -eq 'ntvwm.exe' -and $NativeWorker){$NativeWorker}elseif($name -eq 'ntcon.exe' -and $NativeFrontend){$NativeFrontend}elseif($name -eq 'ntmon.exe' -and $NativeMonitor){$NativeMonitor}elseif($name -eq 'run16.exe' -and $NativeLauncher){$NativeLauncher}elseif($name -eq 'ntsrv.exe' -and $NativeService){$NativeService}else{Join-Path $cache $name}
-    if($styleInputs.ContainsKey($name)){$source=$styleInputs[$name]}
     try {$bytes=[IO.File]::ReadAllBytes($source)}
     catch {throw "Cannot read package input '$source': $($_.Exception.Message)"}
     $pe=[BitConverter]::ToInt32($bytes,60)
     $expectedMachine=if($name -eq 'nthook64.dll' -or ($name -eq 'ntvwm.exe' -and $NativeWorker) -or ($name -eq 'ntcon.exe' -and $NativeFrontend) -or ($name -eq 'ntmon.exe' -and $NativeMonitor) -or ($name -eq 'run16.exe' -and $NativeLauncher) -or ($name -eq 'ntsrv.exe' -and $NativeService)){0x8664}else{0x14c}
-    if($name -in @('ntw16s64.dll','W16Style.exe')){$expectedMachine=0x8664}
     if([BitConverter]::ToUInt16($bytes,$pe+4) -ne $expectedMachine){throw "Wrong PE machine input: $name"}
     $destination=Join-Path $system $name
     Copy-Item -LiteralPath $source -Destination $destination -Force

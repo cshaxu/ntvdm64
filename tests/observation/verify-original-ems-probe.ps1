@@ -41,7 +41,7 @@ try{
  OwnedTool pif-build $env:ComSpec $line 120
  OwnedTool pif-profile "$root/pif-builder.exe" ('"'+$tests+'" --close-on-exit') 30
  Get-FileHash "$PSScriptRoot/ems_pif_builder.c",$CompilerDriver,"$tests/E30.COM","$tests/E30.PIF","$tests/E30.NT","$tests/E30AUTO.NT"|Export-Csv -NoTypeInformation "$root/profile-inputs.csv"
- Get-ChildItem "$stage/system32" -File|Where-Object Name -in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll','ntw16s32.dll','ntw16s64.dll','W16Style.exe','COMMAND.COM')|Get-FileHash|Export-Csv -NoTypeInformation "$root/runtime-inputs.csv"
+ Get-ChildItem "$stage/system32" -File|Where-Object Name -in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll','COMMAND.COM')|Get-FileHash|Export-Csv -NoTypeInformation "$root/runtime-inputs.csv"
  Add-Type -Path (Resolve-Path $LogonHelper).Path
  $logonIdentity=[Security.Principal.WindowsIdentity]::GetCurrent()
  try{$entries=[WowMessageLogonEnvironment]::Read($logonIdentity.Token)}

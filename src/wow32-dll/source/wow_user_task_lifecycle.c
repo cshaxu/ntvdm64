@@ -57,7 +57,6 @@ typedef struct wow_user_task_lifecycle_thread {
     HHOOK terminal_observer;
     HHOOK idle_observer;
     DWORD message_wakes;
-    DWORD window_style;
     DWORD launch_request;
     BOOL start_pending;
     BOOL wait_publication_pending; /* Native wait omitted a guest publication. */
@@ -477,24 +476,6 @@ BOOL WINAPI wow_user_task_lifecycle_init(wow_user_task_lifecycle *owner,
     UINT version, LPCSTR app_name, DWORD task_id, DWORD hotkey, DWORD shared_id,
     DWORD x, DWORD y, DWORD width, DWORD height, WORD show)
 {
-    return wow_user_task_lifecycle_init_style(owner, version, app_name, task_id,
-        hotkey, shared_id, x, y, width, height, show, WINDOW_STYLE_OFF, 0);
-}
-
-BOOL WINAPI wow_user_task_lifecycle_style(wow_user_task_lifecycle *owner,
-    DWORD *style)
-{
-    wow_user_task_lifecycle_thread *task = current_task(owner);
-    if (!style || !task) { SetLastError(ERROR_INVALID_STATE); return FALSE; }
-    *style = task->window_style;
-    return TRUE;
-}
-
-BOOL WINAPI wow_user_task_lifecycle_init_style(wow_user_task_lifecycle *owner,
-    UINT version, LPCSTR app_name, DWORD task_id, DWORD hotkey, DWORD shared_id,
-    DWORD x, DWORD y, DWORD width, DWORD height, WORD show,
-    DWORD window_style, WORD parent_task)
-{
     wow_user_task_lifecycle_thread *task;
     wow_user_runtime_thread *binding;
     WCHAR *wide = NULL;
@@ -504,9 +485,6 @@ BOOL WINAPI wow_user_task_lifecycle_init_style(wow_user_task_lifecycle *owner,
     DWORD failure_error;
     BOOL result = FALSE;
 
-    if (!WINDOW_STYLE_VALID(window_style)) {
-        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
-    }
     if (!owner || !owner->initialized || !owner->registered || !app_name ||
             !(binding = wow_user_runtime_current()) || binding->runtime != owner->runtime ||
             binding->thread || !wow_user_runtime_enter(binding)) {
@@ -524,15 +502,6 @@ BOOL WINAPI wow_user_task_lifecycle_init_style(wow_user_task_lifecycle *owner,
             (SIZE_T)length * sizeof(WCHAR))) || !MultiByteToWideChar(CP_ACP, 0,
             app_name, -1, wide, length)) goto done;
     task->owner = owner;
-    task->window_style = window_style;
-    if (parent_task) {
-        wow_user_task_lifecycle_thread *parent;
-        for (parent = owner->threads; parent; parent = parent->next)
-            if (parent->thread.ptdb && parent->thread.ptdb->hTaskWow == parent_task)
-                break;
-        if (!parent) { SetLastError(ERROR_NOT_FOUND); goto done; }
-        task->window_style = parent->window_style;
-    }
     /* Creates the current USER queue without pumping input or creating a
      * hidden window. A task owns its native thread capability until all of
      * this binding's input links have been retired. */

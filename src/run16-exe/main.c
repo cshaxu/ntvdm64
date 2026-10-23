@@ -8,7 +8,6 @@
 #include "ntsrv-exe/opennt/include/base_client.h"
 #include "ntsrv-exe/opennt/include/base_config.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
-#include "ntsrv-exe/opennt/include/base_rpc_client_launch_style.h"
 #include "frontend_scope.h"
 #include "launch_options.h"
 #include "image_classification.h"
@@ -379,8 +378,6 @@ static DWORD launch_native(run16_frontend_scope *scope,PCWSTR application,PCWSTR
     if(!environment) { error=GetLastError();goto done; }
     start.application=application;start.command=command;
     start.directory=directory;start.environment=environment;
-    start.window_style=options->window_style_explicit ? options->window_style :
-        run16_frontend_scope_window_style(scope);
     start.standard[0]=GetStdHandle(STD_INPUT_HANDLE);
     start.standard[1]=GetStdHandle(STD_OUTPUT_HANDLE);
     start.standard[2]=GetStdHandle(STD_ERROR_HANDLE);
@@ -427,7 +424,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
     (void)show;
     if (!run16_parse_launch_options(command,&options))
     {
-        fputs("Usage: run16.exe [--wait] [--win16-style | --win16-style-all] <binary> [arguments]\n", stderr);
+        fputs("Usage: run16.exe [--wait] <binary> [arguments]\n", stderr);
         return ERROR_INVALID_PARAMETER;
     }
     command=(PWSTR)options.command;
@@ -563,8 +560,6 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
             if (!result && binary==BINARY_TYPE_WIN16 &&
                 (run16_frontend_scope_creation_flags(frontend_scope) & CREATE_SEPARATE_WOW_VDM))
                 binary=BINARY_TYPE_SEPWOW;
-            if (!result) result=OpenNtBaseClientSetWindowStyle(options.window_style_explicit ?
-                options.window_style : run16_frontend_scope_window_style(frontend_scope));
             if (!result) result = launch_vdm(binary, application, launch_command,frontend_scope,initial_console_only,options.wait);
         }
         {

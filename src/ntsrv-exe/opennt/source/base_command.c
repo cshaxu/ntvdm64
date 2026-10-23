@@ -11,27 +11,9 @@ typedef struct check_prefix {
     broker_vdm_message_header header;
     broker_vdm_check_values values;
     broker_vdm_startup startup;
-    uint32_t console_mode,window_style;
+    uint32_t console_mode;
 } check_prefix;
-typedef char check_prefix_size[sizeof(check_prefix)==116?1:-1];
-
-BOOL OpenNtBaseReadCheckStyle(const void *input,uint32_t bytes,uint32_t *style)
-{
-    check_prefix prefix;
-    if(!input || !style || bytes<sizeof(prefix))return FALSE;
-    memcpy(&prefix,input,sizeof(prefix));
-    if(prefix.header.bytes!=bytes || prefix.header.version!=BROKER_VDM_MESSAGE_VERSION ||
-        prefix.header.operation!=BROKER_VDM_CHECK || prefix.header.reply ||
-        !WINDOW_STYLE_VALID(prefix.window_style))return FALSE;
-    *style=prefix.window_style;return TRUE;
-}
-BOOL OpenNtBaseWriteCheckStyle(void *input,uint32_t bytes,uint32_t style)
-{
-    uint32_t previous;
-    if(!WINDOW_STYLE_VALID(style) || !OpenNtBaseReadCheckStyle(input,bytes,&previous))return FALSE;
-    memcpy((unsigned char *)input+offsetof(check_prefix,window_style),&style,sizeof(style));
-    return TRUE;
-}
+typedef char check_prefix_size[sizeof(check_prefix)==112?1:-1];
 
 typedef struct check_reply {
     broker_vdm_message_header header;
@@ -77,9 +59,8 @@ typedef struct get_prefix {
     broker_vdm_get_values values;
     broker_vdm_startup startup;
     common_dos_delivery observation;
-    uint32_t window_style, window_style_present;
 } get_prefix;
-typedef char get_prefix_size[sizeof(get_prefix)==120?1:-1];
+typedef char get_prefix_size[sizeof(get_prefix)==112?1:-1];
 typedef struct update_request {
     broker_vdm_message_header header;
     broker_vdm_update_values values;
@@ -200,7 +181,6 @@ BOOL OpenNtBaseDecodeCheckCommand(void *input, uint32_t bytes, uint32_t generati
     memcpy(&prefix,input,sizeof(prefix));
     decoded=*message;
     if (prefix.values.task || prefix.values.state || prefix.console_mode>2 ||
-        !WINDOW_STYLE_VALID(prefix.window_style) ||
         !OpenNtBaseDecodeValues(&prefix.values,sizeof(prefix.values),BROKER_VDM_CHECK,&decoded) ||
         !OpenNtBaseDecodeStartup(&prefix.startup,&decodedStartup) ||
         !OpenNtBaseDecodeCheckPayload((unsigned char *)input+sizeof(prefix),
@@ -259,7 +239,7 @@ DWORD OpenNtBasePrepareGetCommand(const void *input,uint32_t bytes,uint32_t gene
         header.operation!=BROKER_VDM_GET_NEXT) return ERROR_INVALID_PARAMETER;
     memcpy(&prefix,input,sizeof(prefix));
     decoded=*message;
-    if (prefix.window_style || prefix.window_style_present || prefix.observation.direct || prefix.startup.present!=1 || prefix.startup.x || prefix.startup.y || prefix.startup.x_size ||
+    if (prefix.observation.direct || prefix.startup.present!=1 || prefix.startup.x || prefix.startup.y || prefix.startup.x_size ||
         prefix.startup.y_size || prefix.startup.x_chars || prefix.startup.y_chars || prefix.startup.fill ||
         prefix.startup.flags || prefix.startup.show || prefix.values.code_page || prefix.values.creation_flags ||
         prefix.values.drive || prefix.values.from_bat ||
@@ -293,10 +273,6 @@ BOOL OpenNtBaseFinishGetCommand(const BASE_API_MSG *message,OPENNT_BASE_GET_COMM
     prefix.header.bytes=state->reply_bytes;
     prefix.header.payload_bytes=state->reply_bytes-sizeof(prefix.header);
     prefix.observation=state->observation;
-    if (!WINDOW_STYLE_VALID(state->window_style) || state->window_style_present>1 ||
-        (!state->window_style_present && state->window_style)) return FALSE;
-    prefix.window_style=state->window_style;
-    prefix.window_style_present=state->window_style_present;
     memcpy(state->reply,&prefix,sizeof(prefix));
     memcpy((unsigned char *)state->reply+sizeof(prefix),state->payload.bytes,state->payload.size);
     return TRUE;
@@ -313,8 +289,7 @@ BOOL OpenNtBaseApplyGetCommand(const void *input,uint32_t bytes,uint32_t generat
         !broker_vdm_message_read(input,bytes,generation,1,&header) ||
         header.operation!=BROKER_VDM_GET_NEXT || header.request_id!=request) return FALSE;
     memcpy(&prefix,input,sizeof(prefix)); decoded=*message;
-    if (!WINDOW_STYLE_VALID(prefix.window_style) || prefix.window_style_present>1 ||
-        (!prefix.window_style_present && prefix.window_style) || prefix.startup.present!=1 ||
+    if (prefix.startup.present!=1 ||
         !OpenNtBaseDecodeValues(&prefix.values,sizeof(prefix.values),BROKER_VDM_GET_NEXT,&decoded) ||
         !OpenNtBaseDecodeStartup(&prefix.startup,&startup) ||
         !OpenNtBaseApplyGetPayload((const unsigned char *)input+sizeof(prefix),bytes-sizeof(prefix),
@@ -335,20 +310,6 @@ BOOL OpenNtBaseReadGetObservation(const void *input,uint32_t bytes,uint32_t gene
     if(bytes<sizeof(prefix) || !broker_vdm_message_read(input,bytes,generation,1,&header) ||
         header.operation!=BROKER_VDM_GET_NEXT || header.request_id!=request)return FALSE;
     memcpy(&prefix,input,sizeof(prefix));*direct=prefix.observation.direct;return TRUE;
-}
-
-BOOL OpenNtBaseReadGetStyle(const void *input,uint32_t bytes,uint32_t generation,
-    uint32_t request,uint32_t *style,uint32_t *present)
-{
-    get_prefix prefix;broker_vdm_message_header header;
-    if(!style || !present)return FALSE;
-    *style=WINDOW_STYLE_OFF;*present=0;
-    if(bytes<sizeof(prefix) || !broker_vdm_message_read(input,bytes,generation,1,&header) ||
-        header.operation!=BROKER_VDM_GET_NEXT || header.request_id!=request)return FALSE;
-    memcpy(&prefix,input,sizeof(prefix));
-    if(!WINDOW_STYLE_VALID(prefix.window_style) || prefix.window_style_present>1 ||
-       (!prefix.window_style_present && prefix.window_style))return FALSE;
-    *style=prefix.window_style;*present=prefix.window_style_present;return TRUE;
 }
 
 void OpenNtBaseReleaseGetCommand(OPENNT_BASE_GET_COMMAND *state)

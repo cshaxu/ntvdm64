@@ -3,8 +3,6 @@
 #include "wow_window_words_binding.h"
 #include "ntvdm-exe/session/session.h"
 #include "wow_native_process.h"
-#include "nthook32-dll/hook.h"
-#include "wow_title_policy.h"
 #include "wow_menu_client_bindings.h"
 #include "wow_idle_hook_binding.h"
 #include "opennt-abi/host-compat/include/wow32_provider_private.h"
@@ -121,66 +119,6 @@ static DWORD WINAPI notify_start(ULONG request)
 }
 #else
 #define FIXTURE_LAUNCH_REQUEST 0
-#endif
-
-#ifdef WOW_TITLE_POLICY_FIXTURE
-DWORD WINAPI NtvdmSeparateWowStyle(DWORD *style);
-extern BOOL fSeparateWow;
-static BOOL style_attached(HWND window)
-{
-    typedef BOOL (__cdecl *attached_fn)(HWND);
-    HMODULE module=GetModuleHandleW(L"ntw16s32.dll");
-    attached_fn query=module?(attached_fn)(void *)GetProcAddress(module,"Ntw16sWindowAttached"):NULL;
-    return query && query(window);
-}
-static HWND style_window(DWORD policy,LPCWSTR title)
-{
-    void *scope=NULL;HWND window;
-    CHECK(wow_style_creation_begin(policy,&scope));
-    window=CreateWindowExW(0,L"STATIC",title,WS_OVERLAPPEDWINDOW,0,0,400,240,NULL,NULL,NULL,NULL);
-    CHECK(!wow_style_creation_end(scope));
-    CHECK(style_attached(window)==(policy!=WINDOW_STYLE_OFF));return window;
-}
-typedef struct style_peer {
-    session *owner;wow_user_runtime *runtime;wow_user_task_lifecycle *lifecycle;HDESK desktop;
-} style_peer;
-static DWORD WINAPI off_title_peer(void *argument)
-{
-    style_peer *peer=argument;wow_user_runtime_thread binding={0};DWORD policy;HWND window;WCHAR text[80];
-    CHECK(SetThreadDesktop(peer->desktop));
-    CHECK(session_thread_bind(peer->owner));
-    CHECK(wow_user_runtime_bind(&binding,peer->runtime,NULL,NULL));
-    CHECK(wow_user_task_lifecycle_init_style(peer->lifecycle,0x0400,"OFF.EXE",
-        0x1236,0,0,0,0,1,1,SW_HIDE,WINDOW_STYLE_OFF,0));
-    CHECK(wow_title_policy(&policy) && policy==WINDOW_STYLE_OFF);
-    window=style_window(policy,L"other task");
-    CHECK(window);GetWindowTextW(window,text,80);
-    CHECK(!wcscmp(text,L"other task"));CHECK(DestroyWindow(window));
-    CHECK(wow_user_runtime_unbind(&binding));CHECK(session_thread_unbind(peer->owner));return 0;
-}
-static void verify_task_title(void)
-{
-    DWORD policy;HWND w;WCHAR title[100];
-    CHECK(!fSeparateWow);
-    CHECK(NtvdmSeparateWowStyle(NULL)==ERROR_INVALID_PARAMETER);
-    CHECK(NtvdmSeparateWowStyle(&policy)==ERROR_NOT_FOUND);
-    fSeparateWow=TRUE; /* fixture-only classification, no delivered Get record */
-    CHECK(NtvdmSeparateWowStyle(&policy)==ERROR_INVALID_STATE);
-    fSeparateWow=FALSE;
-    CHECK(wow_title_policy(&policy) && policy==WINDOW_STYLE_WIN16);
-    w=style_window(policy,L"task");
-    CHECK(w);GetWindowTextW(w,title,100);
-    CHECK(!wcscmp(title,L"task"));
-    CHECK(SetWindowTextW(w,L"changed"));GetWindowTextW(w,title,100);
-    CHECK(!wcscmp(title,L"changed"));CHECK(DestroyWindow(w));
-    w=style_window(WINDOW_STYLE_OFF,L"off");
-    CHECK(w);GetWindowTextW(w,title,100);
-    CHECK(!wcscmp(title,L"off"));CHECK(DestroyWindow(w));
-    /* Original modal A/W and Off/Win16/All live in the required real-CCPU
-     * registered-owner sibling process. This model owns only policy/peer
-     * isolation and dynamic caption tests, not a second modal lifetime. */
-    fprintf(stderr,"WOW_TITLE_POLICY bound task, Off isolation and dynamic caption checked\n");
-}
 #endif
 
 static VOID WINAPI end_task(void)
@@ -806,13 +744,10 @@ static DWORD WINAPI cross_receiver(void *parameter)
     wow_window_words_binding *borrow;
     WW words = {0};
     MSG message;
-    DWORD window_style;
     CHECK(session_thread_bind(test->session_owner));
     CHECK(wow_user_runtime_bind(&binding, test->runtime, NULL, NULL));
-    CHECK(wow_user_task_lifecycle_init_style(test->lifecycle, 0x0400, "RECEIVER.EXE",
-        0x1235, 0, 0, 0, 0, 1, 1, SW_HIDE, WINDOW_STYLE_OFF, 0x1234));
-    CHECK(wow_user_task_lifecycle_style(test->lifecycle, &window_style) &&
-        window_style == WINDOW_STYLE_WIN16);
+    CHECK(wow_user_task_lifecycle_init(test->lifecycle, 0x0400, "RECEIVER.EXE",
+        0x1235, 0, 0, 0, 0, 1, 1, SW_HIDE));
     test->window = CreateWindowExW(0, L"WOW_NATIVE_CROSS", L"", 0, 0, 0, 1, 1,
         HWND_MESSAGE, NULL, GetModuleHandleW(NULL), test);
     CHECK(test->window != NULL);
@@ -1195,26 +1130,6 @@ int __cdecl main(int argc,char **argv)
     HWND native_window;
     MSG message;
     HANDLE wowexec = CreateEventW(NULL, FALSE, FALSE, NULL);
-    DWORD window_style;
-
-    if(argc==2 && !strcmp(argv[1],"--style-child")) {
-        nthook_context context;BOOL found=FALSE;
-        if(nthook_context_read(&context,&found) || !found ||
-            context.mode!=NATIVE_HOOK_LAUNCHER || context.frontend || context.execution ||
-            GetModuleHandleW(L"nthook32.dll"))return 90;
-        return (int)(100+context.window_style);
-    }
-
-#ifdef WOW_TITLE_POLICY_FIXTURE
-    {
-        WCHAR name[80];HDESK desktop;
-        swprintf_s(name,80,L"WowTitle-%lu",GetCurrentProcessId());
-        desktop=CreateDesktopW(name,NULL,NULL,0,GENERIC_ALL,NULL);
-        CHECK(desktop && SetThreadDesktop(desktop));
-        if(!desktop)return 92;
-        /* Owned for this short-lived process; all windows end before exit. */
-    }
-#endif
 
     CHECK(wowexec != NULL);
     session_initialize(&owner, 42040u);
@@ -1245,19 +1160,16 @@ int __cdecl main(int argc,char **argv)
     }
     CHECK(wow_user_task_lifecycle_register(&lifecycle, end_task, wowexec));
     CHECK(lifecycle.registered && lifecycle.process.pwpi != NULL);
-    CHECK(!wow_user_task_lifecycle_init_style(&lifecycle, 0x0400, "APP.EXE",
-        0x1234, 0, 0, 0, 0, 1, 1, SW_HIDE, 3, 0));
-    CHECK(!binding.thread && GetLastError() == ERROR_INVALID_PARAMETER);
-    CHECK(!wow_user_task_lifecycle_init_style(&lifecycle, 0x0400, "APP.EXE",
-        0x1234, 0, 0, 0, 0, 1, 1, SW_HIDE, WINDOW_STYLE_OFF, 0x4321));
+    CHECK(!wow_user_task_lifecycle_init(&lifecycle, 0x0400, "APP.EXE",
+        0x1234, 0, 0, 0, 0, 1, 1, SW_HIDE));
     CHECK(!binding.thread && GetLastError() == ERROR_NOT_FOUND);
     CHECK(wow_user_idle_hook_for_current() == NULL);
     {
         wow_class_lookup_entry *entry;
         unsigned published = 0;
         wow_task_class_fail_at = 3;
-        CHECK(!wow_user_task_lifecycle_init_style(&lifecycle, 0x0400, "APP.EXE",
-            0x1234, 0, 0, 0, 0, 1, 1, SW_HIDE, WINDOW_STYLE_OFF, 0));
+        CHECK(!wow_user_task_lifecycle_init(&lifecycle, 0x0400, "APP.EXE",
+            0x1234, 0, 0, 0, 0, 1, 1, SW_HIDE));
         CHECK(!binding.thread && !binding.exclusive_held && !lifecycle.threads);
         CHECK(wow_user_idle_hook_for_current() == NULL);
         for (entry = lifecycle.classes.pclsPublicList; entry; entry = entry->next)
@@ -1271,9 +1183,8 @@ int __cdecl main(int argc,char **argv)
         const int hook_ids[] = {WH_CALLWNDPROCRET, WH_CBT, WH_FOREGROUNDIDLE};
         for (failure = 0; failure < ARRAYSIZE(hook_ids); ++failure) {
             wow_init_hook_fail = hook_ids[failure];
-            CHECK(!wow_user_task_lifecycle_init_style(&lifecycle, 0x0400,
-                "APP.EXE", 0x1234, 0, 0, 0, 0, 1, 1, SW_HIDE,
-                WINDOW_STYLE_OFF, 0));
+            CHECK(!wow_user_task_lifecycle_init(&lifecycle, 0x0400,
+                "APP.EXE", 0x1234, 0, 0, 0, 0, 1, 1, SW_HIDE));
             CHECK(GetLastError() == ERROR_ACCESS_DENIED);
             CHECK(!wow_init_hooks_live && !binding.thread &&
                 !binding.exclusive_held && !lifecycle.threads);
@@ -1283,9 +1194,8 @@ int __cdecl main(int argc,char **argv)
         for (failure = 1; failure <= 2; ++failure) {
             wow_init_alloc_calls = 0;
             wow_init_fail_at = failure;
-            CHECK(!wow_user_task_lifecycle_init_style(&lifecycle, 0x0400,
-                "APP.EXE", 0x1234, 0, 0, 0, 0, 1, 1, SW_HIDE,
-                WINDOW_STYLE_OFF, 0));
+            CHECK(!wow_user_task_lifecycle_init(&lifecycle, 0x0400,
+                "APP.EXE", 0x1234, 0, 0, 0, 0, 1, 1, SW_HIDE));
             CHECK(GetLastError() == (failure == 1 ?
                 ERROR_INVALID_NAME : ERROR_NOT_ENOUGH_MEMORY));
             CHECK(wow_init_alloc_calls == failure && !wow_init_name_live);
@@ -1297,10 +1207,10 @@ int __cdecl main(int argc,char **argv)
         wow_init_alloc_calls = wow_init_fail_at = 0;
     }
 #endif
-    CHECK(wow_user_task_lifecycle_init_style(&lifecycle, 0x0400, "APP.EXE",
+    CHECK(wow_user_task_lifecycle_init(&lifecycle, 0x0400, "APP.EXE",
         0x1234, 0, FIXTURE_LAUNCH_REQUEST,
         (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT,
-        (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT, SW_SHOW, WINDOW_STYLE_WIN16, 0));
+        (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT, SW_SHOW));
     {
         HHOOK observer = wow_user_idle_hook_for_current();
         CHECK(observer != NULL);
@@ -1342,42 +1252,6 @@ int __cdecl main(int argc,char **argv)
         fprintf(stderr, "WOW_START_NOTIFICATION identity/reentry/unlocked/retry/commit checked errors=%u\n", errors);
     }
 #endif
-    CHECK(wow_user_task_lifecycle_style(&lifecycle, &window_style) &&
-        window_style == WINDOW_STYLE_WIN16);
-#ifdef WOW_TITLE_POLICY_FIXTURE
-    verify_task_title();
-    {
-        style_peer peer={&owner,&runtime,&lifecycle,GetThreadDesktop(GetCurrentThreadId())};
-        HANDLE thread=CreateThread(NULL,0,off_title_peer,&peer,0,NULL);DWORD code;
-        CHECK(thread);
-        if(WaitForSingleObject(thread,15000)!=WAIT_OBJECT_0)ExitProcess(93);
-        CHECK(GetExitCodeThread(thread,&code) && !code);CloseHandle(thread);
-        /* Re-enter through the production cooperative scheduling boundary
-         * after the peer retires; a host wait is not a WOW task switch. */
-        CHECK(wow_user_task_lifecycle_yield(&lifecycle));
-        CHECK(wow_title_policy(&window_style) && window_style==WINDOW_STYLE_WIN16);
-        fprintf(stderr,"WOW_TITLE_POLICY same-runtime Off peer and parent policy retention checked\n");
-    }
-#endif
-    {
-        char image[MAX_PATH],target[MAX_PATH],command[MAX_PATH+32],*slash;
-        STARTUPINFOA startup={sizeof(startup)};PROCESS_INFORMATION child={0};
-        DWORD code=0;
-        CHECK(GetModuleFileNameA(NULL,image,sizeof(image)));
-        strcpy_s(target,sizeof(target),image);slash=strrchr(target,'\\');
-        if(!slash)return 91;
-        strcpy_s(slash+1,sizeof(target)-(size_t)(slash+1-target),"run16.exe");
-        CHECK(CopyFileA(image,target,FALSE));
-        sprintf_s(command,sizeof(command),"\"%s\" --style-child",target);
-        CHECK(wow_native_create_process_a(target,command,NULL,NULL,FALSE,
-            CREATE_NO_WINDOW,NULL,NULL,&startup,&child));
-        if(child.hProcess) {
-            CHECK(WaitForSingleObject(child.hProcess,10000)==WAIT_OBJECT_0);
-            CHECK(GetExitCodeProcess(child.hProcess,&code) && code==100+WINDOW_STYLE_WIN16);
-            CloseHandle(child.hThread);CloseHandle(child.hProcess);
-        }
-        puts("WOW_NATIVE_STYLE_CHILD checked current-task payload");
-    }
     CHECK(wow_user_runtime_current() == &binding && binding.thread != NULL);
     /* Original shared WOWEXEC has no per-task WaitForInputIdle record.
      * It must survive idle notification and lose FIRSTIDLE. A real waiter
@@ -1588,7 +1462,6 @@ int __cdecl main(int argc,char **argv)
     fprintf(stderr, "WOW_INIT_ROLLBACK errors=%u failed_allocations=2 name_releases=%u\n",
         errors, wow_init_name_releases);
 #endif
-    CHECK(!wow_user_task_lifecycle_style(&lifecycle, &window_style));
     wow_user_task_lifecycle_dispose(&lifecycle);
     CHECK(session_thread_unbind(&owner));
     CHECK(session_dispose(&owner));

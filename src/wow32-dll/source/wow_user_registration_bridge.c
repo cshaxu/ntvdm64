@@ -10,7 +10,6 @@
 #include "wow_task_order_bindings.h"
 #include "wow_user_task_lifecycle.h"
 #include "wow_task_parent.h"
-#include "wow_title_policy.h"
 #include "wow_user_object_bindings.h"
 #include "wow_user_private_access.h"
 #include "wow_user_borrow_scope.h"
@@ -27,8 +26,6 @@ VOID WINAPI FreeDDEData(HANDLE, BOOL, BOOL);
 /* Uses ntvdm's existing authenticated BaseClient, never a DLL-private peer. */
 DWORD WINAPI OpenNtBaseClientWowStarted(ULONG task);
 BOOL WINAPI wow_current_separate_launch(void);
-#include "ntsrv-exe/opennt/include/base_rpc_client_launch_style.h"
-DWORD WINAPI NtvdmSeparateWowStyle(DWORD *style);
 
 /* ADAPTER-WOW-056: UserRegisterWowHandlers is one original all-or-nothing
  * ABI transaction.  Modern USER32 exposes its historical name but rejects
@@ -250,8 +247,6 @@ static BOOL WINAPI registered_init_task(UINT version, LPCSTR app_name,
 {
     BOOL result;
     DWORD init_error;
-    DWORD style = WINDOW_STYLE_OFF;
-    WORD parent = 0;
     if (!ensure_lifecycle()) return FALSE;
     if (wow_user_runtime_current()->thread) {
         DWORD error = wow_user_task_lifecycle_notify_start(&wow_lifecycle,
@@ -260,40 +255,11 @@ static BOOL WINAPI registered_init_task(UINT version, LPCSTR app_name,
         SetLastError(error);
         return error == ERROR_SUCCESS;
     }
-    if (shared_id && shared_id != (DWORD)-1) {
-        DWORD error = OpenNtBaseClientWowStyle(shared_id, &style);
-        if (error) {
-            registration_trace("InitTaskSharedStyleError", error);
-            SetLastError(error); return FALSE;
-        }
-    } else {
-        DWORD error;
-        /* W32Thread identifies the initial shell before InitTask. Its guest
-         * TDB still names ldboot.asm's bogus boot task, not a USER task from
-         * which policy can be inherited. Use that original identity rather
-         * than a filename, first-list-entry guess or missing-parent fallback. */
-        if (!(gptdShell && NtCurrentTeb()->WOW32Reserved == gptdShell) &&
-            !wow_task_parent(task_id, &parent)) {
-            error=GetLastError();
-            registration_trace("InitTaskParentError", error);
-            SetLastError(error); return FALSE;
-        }
-        if(!parent && shared_id==0) {
-            error=NtvdmSeparateWowStyle(&style);
-            /* Shared WOW bootstrap has no launcher task; its root is Off.
-             * An actual separate worker without delivered policy is an error. */
-            if(error && error!=ERROR_NOT_FOUND){
-                registration_trace("InitTaskSeparateStyleError", error);
-                SetLastError(error);return FALSE;
-            }
-        }
-    }
     registration_trace("InitTaskId", task_id);
     registration_trace("InitTaskSharedId", shared_id);
-    registration_trace("InitTaskParent", parent);
-    result = ensure_lifecycle() && wow_user_task_lifecycle_init_style(&wow_lifecycle,
+    result = ensure_lifecycle() && wow_user_task_lifecycle_init(&wow_lifecycle,
         version, app_name, task_id, hotkey, shared_id, x, y, width, height,
-        show, style, parent);
+        show);
     init_error=GetLastError();
     registration_trace("InitTask", result);
     if(!result)registration_trace("InitTaskError",init_error);
@@ -318,16 +284,10 @@ static HWND WINAPI registered_create_window_ex(DWORD ex_style,
     int width, int height, HWND parent, HMENU menu, HANDLE instance,
     LPVOID param, DWORD flags, LPDWORD wow_words)
 {
-    DWORD policy,error=ERROR_SUCCESS,failure=ERROR_SUCCESS;HWND result=NULL;void *style_scope;
-    if(!wow_title_policy(&policy))return NULL;
-    if(!wow_style_creation_begin(policy,&style_scope))return NULL;
-    __try {
-        result = wow_user_create_window_ex(ex_style, class_name, window_name,
-            style, x, y, width, height, parent, menu, instance, param, flags,
-            wow_words);
-        error=GetLastError();
-    } __finally {failure=wow_style_creation_end(style_scope);}
-    if(failure){if(result)DestroyWindow(result);result=NULL;error=failure;}
+    HWND result = wow_user_create_window_ex(ex_style, class_name, window_name,
+        style, x, y, width, height, parent, menu, instance, param, flags,
+        wow_words);
+    DWORD error=GetLastError();
     registration_trace("CreateWindowEx", (DWORD)(ULONG_PTR)result);
     SetLastError(error);
     return result;
@@ -336,14 +296,8 @@ static HWND WINAPI registered_create_window_ex(DWORD ex_style,
 static HWND WINAPI registered_create_dialog(HANDLE module,LPDLGTEMPLATE resource,
     DWORD bytes,HWND owner,DLGPROC procedure,LONG parameter,UINT flags)
 {
-    DWORD policy,error=ERROR_SUCCESS,failure=ERROR_SUCCESS;HWND result=NULL;void *style_scope;
-    if(!wow_title_policy(&policy))return NULL;
-    if(!wow_style_creation_begin(policy,&style_scope))return NULL;
-    __try {
-        result=wow_user_server_create_dialog(module,resource,bytes,owner,procedure,parameter,flags);
-        error=GetLastError();
-    } __finally {failure=wow_style_creation_end(style_scope);}
-    if(failure){if(result)DestroyWindow(result);result=NULL;error=failure;}
+    HWND result=wow_user_server_create_dialog(module,resource,bytes,owner,procedure,parameter,flags);
+    DWORD error=GetLastError();
     SetLastError(error);return result;
 }
 

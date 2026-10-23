@@ -61,7 +61,7 @@ try {
         Export-Csv -NoTypeInformation -LiteralPath "$logs/source-sha256.csv"
     Get-FileHash -Algorithm SHA256 -LiteralPath "$build/build.ninja",$VsDevCmd |
         Export-Csv -NoTypeInformation -LiteralPath "$logs/build-sha256.csv"
-    $targets = @('original-control-bodies','original-getset-boundary','window-access-boundary','original-dialog-creator-lifetime','original-dialog-modal-lifetime','original-dialog-end-boundary','original-default-boundary','call-boundaries','dialog-context-boundaries','dialog-modal-boundary','dialog-keyboard-boundary','original-mnemonic-lifetime-boundary','original-keyboard-lifetime-boundary',
+    $targets = @('original-control-bodies','original-getset-boundary','window-access-boundary','original-dialog-creator-lifetime','original-dialog-modal-lifetime','original-dialog-end-boundary','original-default-boundary','call-boundaries','dialog-context-boundaries','dialog-keyboard-boundary','original-mnemonic-lifetime-boundary','original-keyboard-lifetime-boundary',
         'original-string-boundaries','original-mnemonic-drawing-boundaries','original-button-drawing-boundaries','original-button-resource-boundaries','original-state-drawing-boundaries',
         'dialog-navigation-boundaries','original-window-view-boundaries','original-button-lifetime-boundaries')
     $targets += 'dialog-native-owner-research'
@@ -76,7 +76,7 @@ try {
     if ($result -eq 0) {
         $cases = @('wow_dialog_getset_fixture','wow_window_client_message_fixture','wow_dialog_creator_lifetime_fixture','wow_dialog_lifetime_fixture','wow_dialog_call_fixture','wow_edit_call_fixture','wow_edit_memory_callbacks_fixture',
                 'wow_control_brush_fixture','wow_default_window_binding_fixture','wow_dialog_context_fixture',
-                'wow_dialog_creation_entry_fixture','wow_dialog_finalization_fixture','wow_dialog_end_original_fixture','wow_dialog_modal_entry_fixture','wow_dialog_keyboard_entry_fixture','wow_dialog_mnemonic_lifetime_fixture','wow_dialog_keyboard_lifetime_fixture',
+                'wow_dialog_creation_entry_fixture','wow_dialog_finalization_fixture','wow_dialog_end_original_fixture','wow_dialog_keyboard_entry_fixture','wow_dialog_mnemonic_lifetime_fixture','wow_dialog_keyboard_lifetime_fixture',
                 'wow_control_string_fixture','wow_text_measure_failure_fixture','wow_mnemonic_drawing_fixture',
                 'wow_default_original_fixture','wow_button_drawing_fixture','wow_button_resources_fixture','wow_control_draw_state_fixture',
                 'wow_dialog_navigation_fixture','wow_edit_view_fixture','wow_button_lifetime_fixture','wow_button_dc_fixture')

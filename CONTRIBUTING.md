@@ -31,8 +31,8 @@ from the matching Visual Studio developer environment, for example:
 
 ```powershell
 cmake --preset msvc-x86-release
-cmake --build --preset msvc-x86-release --target W16Style
-# Other original-manifest targets: worker, wow32 (x86);
+cmake --build --preset msvc-x86-release --target wow32
+# Other original-manifest targets: worker (x86);
 # native-worker/frontend/monitor/launcher/service, hook64 (x64).
 ```
 
@@ -46,7 +46,7 @@ the launcher. MSVC retains its existing /O2 release profile, not GCC's /O3.
 
 ```powershell
 cmake --preset msvc-x86-release-ccache
-cmake --build --preset msvc-x86-release-ccache --target W16Style
+cmake --build --preset msvc-x86-release-ccache --target wow32
 cmake -E env "CCACHE_DIR=$PWD/build/.ccache" ccache --show-stats
 ```
 

@@ -1,0 +1,4 @@
+#ifndef OPENNT_BASE_RPC_CLIENT_LAUNCH_STYLE_H
+#define OPENNT_BASE_RPC_CLIENT_LAUNCH_STYLE_H
+#include <windows.h>
+#endif

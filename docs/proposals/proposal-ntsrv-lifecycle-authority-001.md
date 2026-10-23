@@ -33,7 +33,8 @@ character I/O or attach to NTCON. Worker lifecycle reception is independent
 of character-I/O initialization. NTVWM GUI launchers are one-shot: report
 delivery and receive service-authorized release; the actual native GUI target
 remains read-only Direct/Observed, not service-owned or killed on service loss.
-NTMON and W16Style remain ordinary tools. DLLs follow their host lifetimes.
+NTMON remains an ordinary tool. Historical Win16 Style components were removed
+by T450 and are not part of this lifecycle contract.
 
 Before admission Run16 may start the absent service under one real five-second
 deadline. After admission there is no reconnect/replay. A confirmed lost

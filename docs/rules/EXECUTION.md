@@ -170,14 +170,6 @@ or weaken output assertions as a throughput optimization.
 
 #### Current ten-component release and committed assets
 
-T445 S5 owner admission adds ntw16s32.dll, ntw16s64.dll and the x64
-W16Style.exe to the same release-manifest.json and configured system32
-publication, making thirteen host images. The x86 demo is test/build output,
-not a second colliding published executable. The prior ten-image identities
-remain unchanged until their own consumer integration is admitted. Apply
-coherent backup, hash verification and failure recovery to the expanded set;
-DLL-only delivery must not imply Hook/WOW integration or guest changes.
-
 Owner clarification dated 2026-10-06: every delivery that updates product code
 must include the latest verified and published complete ten-component package
 in `assets/release/` in the same commit. The ten files are `run16.exe`,

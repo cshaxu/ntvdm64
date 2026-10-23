@@ -210,7 +210,6 @@ DWORD OpenNtBaseServiceRegisterWowExec(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD 
  * Query is confined to the submitting connection's parent receipt and returns
  * an owned, synchronize-only event duplicate plus a latched success flag. */
 DWORD OpenNtBaseServiceWowStarted(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,ULONG task);
-DWORD OpenNtBaseServiceWowStyle(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,ULONG task,DWORD *style);
 DWORD OpenNtBaseServiceWowStartup(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
     DWORD parent_receipt,HANDLE *event,BOOL *started);
 /* These are authenticated service bindings around the original CheckVDM

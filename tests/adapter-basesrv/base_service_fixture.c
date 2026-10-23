@@ -143,7 +143,7 @@ int fixture_management_gui(void)
     lstrcpynW(gui_image,image,ARRAYSIZE(gui_image));
     {WCHAR *leaf=wcsrchr(gui_image,L'\\');GUI_CHECK(leaf);*leaf=0;
         leaf=wcsrchr(gui_image,L'\\');GUI_CHECK(leaf);*leaf=0;
-        GUI_CHECK(!wcscat_s(gui_image,ARRAYSIZE(gui_image),L"\\W16Style.exe") &&
+        GUI_CHECK(!wcscat_s(gui_image,ARRAYSIZE(gui_image),L"\\ntmon.exe") &&
             GetFileAttributesW(gui_image)!=INVALID_FILE_ATTRIBUTES);}
     swprintf_s(command,ARRAYSIZE(command),L"\"%ls\"",gui_image);
     GUI_CHECK(CreateProcessW(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED,

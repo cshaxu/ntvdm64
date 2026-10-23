@@ -36,8 +36,7 @@ int main(void)
         int ok = run16_parse_launch_options(cases[i].input, &parsed);
         if (ok != (cases[i].target != NULL) || parsed.wait != cases[i].wait ||
             (ok && wcscmp(parsed.command, cases[i].target)) ||
-            (!ok && parsed.command != NULL) || parsed.window_style != WINDOW_STYLE_OFF ||
-            parsed.window_style_explicit) {
+            (!ok && parsed.command != NULL)) {
             fprintf(stderr, "FAIL launch-options case %u\n", i);
             return 1;
         }
@@ -47,32 +46,9 @@ int main(void)
     }
     if (run16_parse_launch_options(L"x", NULL)) return 3;
     {
-        static const struct {
-            const wchar_t *input,*target;
-            unsigned style;
-            int wait;
-        } style_cases[] = {
-            {L"--win16-style command/c ver",L"command/c ver",WINDOW_STYLE_WIN16,0},
-            {L"--win16-style-all --wait \"a b.exe\"  /x",L"\"a b.exe\"  /x",WINDOW_STYLE_ALL,1},
-            {L"--wait --win16-style x",L"x",WINDOW_STYLE_WIN16,1},
-            {L"--win16-style-all x --win16-style",L"x --win16-style",WINDOW_STYLE_ALL,0},
-            {L"--win16-style",NULL,WINDOW_STYLE_WIN16,0},
-            {L"--win16-style --win16-style-all x",NULL,WINDOW_STYLE_WIN16,0},
-            {L"--win16-style-all --win16-style-all x",NULL,WINDOW_STYLE_ALL,0},
-            {L"--win16-style-all --win16-style x",NULL,WINDOW_STYLE_ALL,0},
-            {L"--win16-style --win16-style x",NULL,WINDOW_STYLE_WIN16,0},
-            {L"--win16-style-all",NULL,WINDOW_STYLE_ALL,0},
-            {L"\t--win16-style\t--wait\tcommand/c ver  ",L"command/c ver  ",WINDOW_STYLE_WIN16,1},
-            {L"--win16-style-all --wait --wait x",NULL,WINDOW_STYLE_ALL,1}
-        };
-        count += (unsigned)(sizeof(style_cases)/sizeof(style_cases[0]));
-        for(i=0;i<sizeof(style_cases)/sizeof(style_cases[0]);++i){
-            run16_launch_options parsed;
-            int ok=run16_parse_launch_options(style_cases[i].input,&parsed);
-            if(ok!=(style_cases[i].target!=NULL) || !parsed.window_style_explicit ||
-               parsed.window_style!=style_cases[i].style || parsed.wait!=style_cases[i].wait ||
-               (ok && wcscmp(parsed.command,style_cases[i].target)))return 4;
-        }
+        run16_launch_options parsed;
+        if (run16_parse_launch_options(L"--win16-style command/c ver", &parsed) ||
+            run16_parse_launch_options(L"--win16-style-all x", &parsed)) return 4;
     }
     printf("RUN16-LAUNCH-OPTIONS-PASS cases=%u\n", count);
     return 0;

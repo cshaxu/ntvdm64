@@ -54,7 +54,7 @@ public static class WowLogonEnvironment {
  @{source='CreateEnvironmentBlock current token inherit=false';entries=$shape.Count;characters=1+($shape|Measure-Object characters -Sum).Sum;filtering=$false;limit='Logon block, not a snapshot of an already-running shell'}|ConvertTo-Json|Set-Content "$root/environment-contract.json"
  Get-FileHash $Observer,$GameProbe,$PSCommandPath|Export-Csv -NoTypeInformation "$root/probe-inputs.csv"
  $shell=(Get-Process -Id $PID).Path
- foreach($mode in @('Off','Win16','All')){
+ foreach($mode in @('Normal')){
   $out="$root/$mode";$null=New-Item -ItemType Directory $out
   if($Installed){
    # Deliberate installed test, not a bypass for ordinary staged cleanup.
@@ -64,12 +64,11 @@ public static class WowLogonEnvironment {
    if(@(Get-CimInstance Win32_Process|Where-Object {$_.ExecutablePath -in $paths}).Count){throw 'Preserve existing installed project session'}
    $scope=[pscustomobject]@{Paths=$paths;Root=$stage}
   }else{$stage=New-PhysicalRuntimeStage $package;$scope=New-IsolatedPackageScope $stage}
-  Get-ChildItem "$stage/system32" -File|Where-Object Name -in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll','ntw16s32.dll','ntw16s64.dll','W16Style.exe')|Get-FileHash|Export-Csv -NoTypeInformation "$out/images.csv"
+  Get-ChildItem "$stage/system32" -File|Where-Object Name -in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll')|Get-FileHash|Export-Csv -NoTypeInformation "$out/images.csv"
   $info=[Diagnostics.ProcessStartInfo]::new($Observer);$info.UseShellExecute=$false;$info.CreateNoWindow=$true
   $info.EnvironmentVariables.Clear()
   foreach($entry in $entries){$split=$entry.IndexOf('=',1);$info.EnvironmentVariables[$entry.Substring(0,$split)]=$entry.Substring($split+1)}
-  $style=if($mode -eq 'Win16'){' --win16-style'}elseif($mode -eq 'All'){' --win16-style-all'}else{''}
-  $info.Arguments='"'+$stage+'/system32/run16.exe" "'+$stage+'" "'+$out+'/observer.txt" --wait'+$style+' winmine --observation-timeout-ms 30000'
+  $info.Arguments='"'+$stage+'/system32/run16.exe" "'+$stage+'" "'+$out+'/observer.txt" --wait winmine --observation-timeout-ms 30000'
   $p=[Diagnostics.Process]::Start($info);$null=$p.Handle
   @{pid=$p.Id;start=$p.StartTime.ToUniversalTime().ToString('o');command=$info.Arguments;timeoutSeconds=60;desktop='inherited ordinary desktop';installed=[bool]$Installed}|ConvertTo-Json|Set-Content "$out/owner.json"
   $deadline=[DateTime]::UtcNow.AddSeconds(12);$worker=$null
@@ -78,8 +77,7 @@ public static class WowLogonEnvironment {
    if($worker -or $p.HasExited){break};Start-Sleep -Milliseconds 50
   }while([DateTime]::UtcNow -lt $deadline)
   if(!$worker){throw 'Owned WOW worker absent'}
-  $marked=if($mode -eq 'Off'){'0'}else{'1'}
-  $line='"'+$GameProbe+'" '+$worker.ProcessId+' - "'+$out+'/mine" '+$marked
+  $line='"'+$GameProbe+'" '+$worker.ProcessId+' - "'+$out+'/mine" 0'
   $q=Start-Process $env:ComSpec -ArgumentList ('/d /s /c "'+$line+'"') -WorkingDirectory $root -WindowStyle Hidden -PassThru -RedirectStandardOutput "$out/game.txt" -RedirectStandardError "$out/game.err";$null=$q.Handle
   @{pid=$q.Id;start=$q.StartTime.ToUniversalTime().ToString('o');command=$line;timeoutSeconds=40}|ConvertTo-Json|Set-Content "$out/game-owner.json"
   if(!$q.WaitForExit(40000)){taskkill.exe /PID $q.Id /T /F;throw 'Gameplay deadline'}

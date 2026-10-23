@@ -1,8 +1,7 @@
 param(
     [Parameter(Mandatory)][string]$ProviderBuildRoot,
     [Parameter(Mandatory)][string]$WorkerBuildRoot,
-    [Parameter(Mandatory)][string]$BuildRoot,
-    [Parameter(Mandatory)][string]$StyleDll
+    [Parameter(Mandatory)][string]$BuildRoot
 )
 # Supplemental native/actual-CCPU contracts, never real Win16 acceptance or
 # authorization to publish. The caller supplies an already built coherent
@@ -14,13 +13,12 @@ if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or
         (Test-Path -LiteralPath $root)){throw 'Fresh build-owned evidence root required'}
 $provider=(Resolve-Path $ProviderBuildRoot).Path
 $worker=(Resolve-Path $WorkerBuildRoot).Path
-$style=(Resolve-Path $StyleDll).Path
 $shell=(Get-Process -Id $PID).Path
 $null=New-Item -ItemType Directory $root
 try{
     $roots=@('src/wow32-dll','src/opennt-host','src/opennt-abi/host-compat',
         'src/mvdm/wow32','src/ntvdm-exe/wow','src/ntvdm-exe/softpc',
-        'src/ntw16s-dll','tests/adapter-mvdm-host-out/wow','tests/mvdm-host',
+        'tests/adapter-mvdm-host-out/wow','tests/mvdm-host',
         'tests/observation/verify-wow-task-lifecycle.ps1',
         'tests/observation/verify-wow-native-slot-group.ps1')
     $deleted=@(& git -C $repo ls-files -d -- @roots)
@@ -31,7 +29,7 @@ try{
     $paths|Where-Object {$_ -notin $deleted}|ForEach-Object {
         Get-FileHash -LiteralPath (Join-Path $repo $_)
     }|Export-Csv -NoTypeInformation "$root/source-sha256.csv"
-    Get-FileHash "$provider/wow32.dll","$worker/ntvdm.exe",$style |
+    Get-FileHash "$provider/wow32.dll","$worker/ntvdm.exe" |
         Export-Csv -NoTypeInformation "$root/artifact-sha256.csv"
     $rows=@('window-borrow','native-dispatch-gate','window-procedure','class-client',
         'class-query','class-procedure','class-lifetime','native-creation',
@@ -42,8 +40,6 @@ try{
     $rows+=@(
         @{name='creation-unwind';case='native-creation';arguments='-CreationUnwind'},
         @{name='init-rollback';case='task-lifecycle';arguments='-InitRollback'},
-        @{name='styled-window-borrow';case='window-borrow';arguments='-StyleDll "'+$style+'"'},
-        @{name='style-policy';case='style-policy';arguments='-StyleDll "'+$style+'"'},
         @{name='graph-negative';case='graph-snapshot';arguments=''}
     )
     $results=@()

@@ -47,7 +47,7 @@ static BOOL traced_apply(const void *data,uint32_t bytes,uint32_t generation,
 #define OpenNtBaseApplyGetCommand traced_apply
 #define OpenNtBaseClientSetCommandBinding diagnostic_actual_binding
 #include "../../src/ntsrv-exe/opennt/source/base_rpc_client_core.c"
-#include "../../src/ntsrv-exe/opennt/source/base_rpc_client_launch_style.c"
+#include "../../src/ntsrv-exe/opennt/source/base_rpc_client_launch.c"
 #undef Client_Get
 #undef OpenNtBaseApplyGetCommand
 #undef OpenNtBaseClientSetCommandBinding

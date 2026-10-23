@@ -4,7 +4,6 @@
 #include "wow_window_client_state_bindings.h"
 #include "wow_dialog_state_bindings.h"
 #include "wow_dialog_procedure_bindings.h"
-#include "wow_title_policy.h"
 #include "wow_edit_entry_bindings.h"
 #include "wow_user_client_view_layout.h"
 #include "wow_user_borrow_scope.h"
@@ -974,7 +973,6 @@ BOOL WINAPI wow_window_words_detach_if(HWND window, wow_window_words_binding *ex
 BOOL WINAPI wow_window_words_terminal(HWND window, wow_window_words_binding *binding)
 {
     BOOL retired = TRUE, property_reference = FALSE, table_reference = FALSE;
-    BOOL style_live;
     WORD finalize_fnid;
     if (!binding) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
     AcquireSRWLockExclusive(&publication_lock);
@@ -1000,11 +998,6 @@ BOOL WINAPI wow_window_words_terminal(HWND window, wow_window_words_binding *bin
     /* Original finalization can reenter destruction and retire this binding.
      * Never clean a replacement HWND generation's appearance state. No
      * publication lock spans the DLL's resource release. */
-    AcquireSRWLockShared(&publication_lock);
-    style_live = binding->enrolled && GetPropW(window, property_name) == binding;
-    ReleaseSRWLockShared(&publication_lock);
-    if (style_live && !wow_style_window_terminal(window))
-        wow_user_native_call_failed("finalize-window-style", GetLastError());
     AcquireSRWLockExclusive(&publication_lock);
     if (!binding->enrolled && !binding->terminal_pending) {
         ReleaseSRWLockExclusive(&publication_lock);

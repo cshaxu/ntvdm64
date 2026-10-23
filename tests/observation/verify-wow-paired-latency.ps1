@@ -29,7 +29,7 @@ try{
   $dir=if($case -like 'baseline*'){$baseline}else{$candidate}
   foreach($name in @('ntvdm.exe','WOW32.DLL')){Copy-Item (Join-Path $dir $name) "$package/system32/$name" -Force}
   $null=New-Item -ItemType Directory "$root/$case-inputs"
-  Get-ChildItem "$package/system32" -File|Where-Object Name -in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll','ntw16s32.dll','ntw16s64.dll','W16Style.exe')|Get-FileHash|Export-Csv -NoTypeInformation "$root/$case-inputs/images.csv"
+  Get-ChildItem "$package/system32" -File|Where-Object Name -in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll')|Get-FileHash|Export-Csv -NoTypeInformation "$root/$case-inputs/images.csv"
   Owned ($case+'-ems') ('-NoProfile -File "'+$PSScriptRoot+'/verify-original-ems-probe.ps1" -PackageRoot "'+$package+'" -Observer "'+$Observer+'" -LogonHelper "'+$LogonHelper+'" -CompilerDriver "'+$CompilerDriver+'" -BuildRoot "'+$root+'/'+$case+'-ems"') 180
   Owned $case ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-mine-latency.ps1" -PackageRoot "'+$package+'" -Observer "'+$Observer+'" -CompilerDriver "'+$CompilerDriver+'" -BuildRoot "'+$root+'/'+$case+'" -WorkerMap "'+$dir+'/ntvdm.exe.map" -WowMap "'+$dir+'/WOW32.DLL.map"') 300
   foreach($environment in @('normal','normal-sampled','private')){

@@ -9,7 +9,6 @@ param(
     [ValidateRange(0,5000)][int]$PostExitObservationMs=0,
     [switch]$VisibleDesktop,
     [switch]$WaitTarget,
-    [ValidateSet('Off','Win16','All')][string]$WindowStyle='Off',
     [ValidateSet('WINMINE.EXE','SOL.EXE','WRITE.EXE')]
     [string[]]$Guests=@('WINMINE.EXE','SOL.EXE','WRITE.EXE')
 )
@@ -61,8 +60,6 @@ foreach($guest in $Guests){
         $start=[Diagnostics.ProcessStartInfo]::new($Observer)
         $observerArguments=@((Join-Path (Get-PackageBinaryRoot $PackageRoot) 'run16.exe'),$PackageRoot,($stem+'.txt'))
         if($WaitTarget){$observerArguments+='--wait'}
-        if($WindowStyle -eq 'Win16'){$observerArguments+='--win16-style'}
-        elseif($WindowStyle -eq 'All'){$observerArguments+='--win16-style-all'}
         $observerArguments+=@((Join-Path $GuestRoot $guest),
             '--observation-timeout-ms','20000')
         $start.Arguments=($observerArguments | ForEach-Object {

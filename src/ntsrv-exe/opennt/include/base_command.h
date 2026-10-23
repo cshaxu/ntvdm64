@@ -37,10 +37,6 @@ BOOL OpenNtBaseEncodeUpdateReply(const BASE_API_MSG *,uint32_t request,uint32_t 
 BOOL OpenNtBaseApplyUpdateReply(const void *,uint32_t bytes,uint32_t generation,
     uint32_t request,PBASE_API_MSG);
 #include <base_payload.h>
-#include "common/protocol/window_style.h"
-/* Project envelope only; original BASE_CHECKVDM_MSG remains unchanged. */
-BOOL OpenNtBaseWriteCheckStyle(void *,uint32_t,uint32_t);
-BOOL OpenNtBaseReadCheckStyle(const void *,uint32_t,uint32_t *);
 /* Per-call native ownership. Initialize to zero; prepare reserves all reply
  * storage before source consumption. Never serialize this structure. */
 typedef struct OPENNT_BASE_GET_COMMAND {
@@ -50,7 +46,6 @@ typedef struct OPENNT_BASE_GET_COMMAND {
     void *reply;
     uint32_t reply_bytes;
     common_dos_delivery observation;
-    uint32_t window_style, window_style_present;
 } OPENNT_BASE_GET_COMMAND;
 BOOL OpenNtBaseEncodeGetCommand(const BASE_API_MSG *,uint32_t request,uint32_t generation,
     void *,uint32_t capacity,uint32_t *required);
@@ -62,7 +57,6 @@ BOOL OpenNtBaseApplyGetCommand(const void *,uint32_t bytes,uint32_t generation,
 /* Read-only project metadata after the original copied reply is validated.
  * No original BASE message field or task wait is repurposed. */
 BOOL OpenNtBaseReadGetObservation(const void *,uint32_t,uint32_t,uint32_t,uint64_t *);
-BOOL OpenNtBaseReadGetStyle(const void *,uint32_t,uint32_t,uint32_t,uint32_t *,uint32_t *);
 /* Restore/discard borrowed native pointers before release; repeat-safe. */
 void OpenNtBaseReleaseGetCommand(OPENNT_BASE_GET_COMMAND *);
 #endif

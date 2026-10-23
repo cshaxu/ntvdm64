@@ -13,7 +13,6 @@ void run16_frontend_scope_end(run16_frontend_scope *);
 HANDLE run16_frontend_scope_capability(run16_frontend_scope *);
 BOOL run16_frontend_scope_has_execution(run16_frontend_scope *);
 DWORD run16_frontend_scope_console_mask(run16_frontend_scope *);
-DWORD run16_frontend_scope_window_style(run16_frontend_scope *);
 DWORD run16_frontend_scope_creation_flags(run16_frontend_scope *);
 DWORD run16_frontend_scope_launch_native(run16_frontend_scope *,const run16_native_start *,DWORD native_type);
 DWORD run16_frontend_scope_wait_native(run16_frontend_scope *,DWORD *,DWORD *);

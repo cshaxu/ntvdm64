@@ -16,7 +16,7 @@
 #include "common/rpc/management.h"
 #include "common/protocol/management.h"
 #include <base_rpc_client_internal.h>
-#include <base_rpc_client_launch_style.h>
+#include <base_rpc_client_launch.h>
 #include "common/rpc/async_call.h"
 #include <stddef.h>
 

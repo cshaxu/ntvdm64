@@ -13,12 +13,9 @@ DWORD WINAPI UserRegisterWowHandlers(APFNWOWHANDLERSIN, APFNWOWHANDLERSOUT);
  * this original startup identity, so do not link W32Thread as a substitute. */
 struct _TD *gptdShell;
 static PFNWOWHANDLERSOUT output;
-static unsigned errors, notifications, styles;
+static unsigned errors, notifications;
 static unsigned fail_count;
 static BOOL raise_notification, retire_notification;
-static BOOL reject_style;
-void WINAPI wow_fixture_startup_td_begin(WORD);
-void WINAPI wow_fixture_startup_td_end(void);
 #define CHECK(x) do { if (!(x)) { ++errors; fprintf(stderr, \
     "FAIL line=%d error=%lu\n", __LINE__, GetLastError()); } } while (0)
 
@@ -26,14 +23,6 @@ unsigned long __cdecl mvdm_softpc_wow_page_domain_guest_shared_info(void)
 { return 0x1000; }
 int __cdecl mvdm_softpc_wow_page_domain_client_desktop_ready(void)
 { return 1; }
-DWORD WINAPI OpenNtBaseClientWowStyle(ULONG request, DWORD *style)
-{
-    CHECK(request == 0x5678);
-    ++styles;
-    if (reject_style) return ERROR_NOT_ENOUGH_MEMORY;
-    *style = WINDOW_STYLE_OFF;
-    return ERROR_SUCCESS;
-}
 static BOOL initialize_task(void)
 {
     return output.pfnInitTask(0x0400, "APP.EXE", 0x1234, 0, 0x5678,
@@ -71,26 +60,13 @@ int __cdecl main(void)
     CHECK(output.pfnRegisterUserHungAppHandlers(end_task, event));
     lifecycle = runtime.lifecycle;
 
-    /* The actual registered cleanup must accept exactly the still-linked,
-     * never-committed original task after all initialization attempts fail. */
-    wow_fixture_startup_td_begin(0x1234);
-    reject_style = TRUE;
-    for (i = 0; i < 7; ++i)
-        CHECK(!initialize_task() && GetLastError() == ERROR_NOT_ENOUGH_MEMORY);
-    CHECK(!binding.thread && !lifecycle->threads && styles == 7 && !notifications);
-    CHECK(output.pfnWOWCleanup((HANDLE)0x1234, 0x1234, NULL, 0));
-    CHECK(!binding.thread && !lifecycle->threads);
-    wow_fixture_startup_td_end();
-    reject_style = FALSE; styles = 0;
-    fprintf(stderr,"WOW_INIT_PRECOMMIT_CLEANUP errors=%u retries=7 registered_cleanup=1\n",errors);
-
     fail_count = 2;
     CHECK(!initialize_task() && GetLastError() == ERROR_RETRY);
     committed = binding.thread;
-    CHECK(committed && styles == 1 && notifications == 1);
+    CHECK(committed && notifications == 1);
     CHECK(!initialize_task() && GetLastError() == ERROR_RETRY);
     CHECK(initialize_task());
-    CHECK(binding.thread == committed && styles == 1 && notifications == 3);
+    CHECK(binding.thread == committed && notifications == 3);
     CHECK(!initialize_task() && GetLastError() == ERROR_INVALID_STATE);
     CHECK(notifications == 3);
     CHECK(wow_user_runtime_unbind(&binding));
@@ -98,24 +74,24 @@ int __cdecl main(void)
     /* Original W32Thread owns the seven-attempt bound; verify its callback
      * can be attempted seven times without reinitialization, then retired. */
     CHECK(wow_user_runtime_bind(&binding, &runtime, NULL, NULL));
-    notifications = styles = 0; fail_count = 7;
+    notifications = 0; fail_count = 7;
     for (i = 0; i < 7; ++i)
         CHECK(!initialize_task() && GetLastError() == ERROR_RETRY);
-    CHECK(styles == 1 && notifications == 7);
+    CHECK(notifications == 7);
     CHECK(output.pfnWOWCleanup((HANDLE)0x1234, 0x1234, NULL, 0));
     CHECK(binding.thread != NULL); /* Committed case retains normal retirement. */
     CHECK(wow_user_runtime_unbind(&binding));
     CHECK(lifecycle->threads == NULL);
 
     CHECK(wow_user_runtime_bind(&binding, &runtime, NULL, NULL));
-    notifications = styles = fail_count = 0; raise_notification = TRUE;
+    notifications = fail_count = 0; raise_notification = TRUE;
     __try { (void)initialize_task(); }
     __except (GetExceptionCode() == 0xe0447002u ?
             EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) { caught = TRUE; }
     CHECK(caught && binding.thread && !binding.exclusive_held);
     raise_notification = FALSE;
     CHECK(initialize_task());
-    CHECK(styles == 1 && notifications == 2);
+    CHECK(notifications == 2);
     CHECK(wow_user_runtime_unbind(&binding));
 
     CHECK(wow_user_runtime_bind(&binding, &runtime, NULL, NULL));

@@ -22,7 +22,7 @@ $null=New-Item -ItemType Directory -Path $out
 $shell=(Get-Process -Id $PID).Path
 try {
     $sourceRoots=@('src/wow32-dll','src/mvdm/wow32',
-        'src/opennt-host/windows/core/ntuser','src/ntw16s-dll',
+        'src/opennt-host/windows/core/ntuser',
         'tests/observation/verify-win16-hook-probe.ps1',
         'tests/observation/verify-wow-s3-guest-contracts.ps1',
         'tests/observation/win16_controls_probe.asm',

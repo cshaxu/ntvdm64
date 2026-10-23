@@ -11,7 +11,6 @@ interface vdm_service
     [async] AttachPipe();
     [async] RevokeStream();
     [async] RegisterWowExec();
-    [async] WowStyle();
     [async] WowStarted();
     [async] WowStartup();
     [async] TaskSnapshot();

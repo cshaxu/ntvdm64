@@ -274,7 +274,6 @@ LONG nthook_attach(void)
     if(!error)error=DetourUpdateThread(GetCurrentThread());
     if(!error)error=DetourAttach(&(PVOID &)create_w,hooked_w);
     if(!error)error=DetourAttach(&(PVOID &)create_a,hooked_a);
-    if(!error)error=nthook_attach_titles();
     if(error){DetourTransactionAbort();return error;}
     return DetourTransactionCommit();
 }

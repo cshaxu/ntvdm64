@@ -271,32 +271,6 @@ cleanup permission, outside publication locks. It is not a second COMMDLGTD
 registry or a saved application-procedure fallback. Original resource/PDLG
 cleanup stays with its existing owner; no guest or mirror delta is added.
 
-ADAPTER-WOW-074 binds NTW16S's optional ComboBox information query to a scoped
-copy of the actual original CBOX. Native USER's GetComboBoxInfo owns only native
-control data and cannot supply this recovered control's children or rectangles.
-Original editrc/buttonrc and retained spwndEdit/spwndList remain authoritative;
-no new control algorithm, persistent projection or native-private cast exists.
-The query rejects cleanup, stale child identity and foreign GUI threads, restores
-task/borrow/error state and invokes no application callback. Untouched native
-controls keep GetComboBoxInfo. Bind the additive DLL export before style readiness;
-retain WOW's code for the existing DLL/callback lifetime. Mirror/guest delta0.
-Whole control/template/native/style acceptance remains required before delivery.
-
-ADAPTER-WOW-073 binds canonical terminal cleanup to the matching NTW16S
-Ntw16sWindowTerminal endpoint after original control/dialog finalization.
-Recheck the exact binding/property generation after those reentrant finalizers;
-never hold the publication lock over DLL resource release. The DLL shares its
-existing same-thread disposal owners without application notifications or
-appearance restoration. Off/unloaded style has no DLL dependency. No original
-mirror or guest changes are required. Native USER still owns actual window
-destruction and native callback exception policy; project service exceptions
-which propagate back retain the existing original execution/unwind contract.
-Uncaught native WNDPROC exceptions are not a supported outer-catch guarantee
-on WOW64. Do not change process exception policy or hide guest/adapter errors
-to make a native fast-path-specific test pass. Real-DLL, native callback and
-controlled service-unwind tests remain required; this row is registration,
-not acceptance or publication.
-
 ADAPTER-WOW-072 selects the missing native x86 entry for an immutable original
 WOW procedure/callback pair in wow_window_procedure_entry.c. Core r3 builds;
 CPD/native-subclass, class query and native task/send rows pass. Full grouped
@@ -518,15 +492,11 @@ resolution is removed from the product; reference-only tests may inspect it.
 This staged chain still requires group2 relationship lifetime and group6
 real-control acceptance; no new runtime pass or publication is asserted.
 
-ADAPTER-WOW-063 nonclient exception: owner approves native ordinary-frame hit
-testing and existing NTW16S geometry for styled frames, without guaranteeing
-every NT4 border compatibility result. FindNCHit binds through the existing
-scoped native boundary, not recursive SendMessage. The original default and
-direct ListBox callers share this binding. Original-body selection and grouped
-acceptance remain pending; see the S3 source audit for the recovery ladder.
-The same state owner now routes public recovered control extra words and
-GWL_STYLE writes through original getset, preserving its ListBox style guard.
-This replaces the dialog-only selection, not the logical WNDPROC owner.
+ADAPTER-WOW-063 uses host nonclient hit testing for ordinary host frames while
+retaining the original default and direct ListBox call paths. It does not claim
+every NT4 border compatibility result. The same state owner routes public
+recovered control extra words and GWL_STYLE writes through original getset,
+preserving its ListBox style guard without a separate appearance subsystem.
 
 ADAPTER-WOW-063 send-boundary lifetime extension: SendMessageWorker's host
 binding now obtains an exact-state borrow before native A/W dispatch and

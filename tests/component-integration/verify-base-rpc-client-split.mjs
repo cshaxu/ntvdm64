@@ -24,7 +24,7 @@ function sources(root, target, extra = []) {
   }
   return result;
 }
-const forbidden = /\/(?:nthook32-dll|ntw16s-dll)\/|\/base_rpc_client_launch_style\.c$|\/run16-exe\/native_launch\.c$/;
+const forbidden = /\/nthook32-dll\/|\/base_rpc_client_launch\.c$|\/run16-exe\/native_launch\.c$/;
 function checkFrontend(selected, map) {
   assert(selected.some(s => s.endsWith('/base_rpc_client_core.c')), 'Frontend missing core');
   assert(!selected.some(s => forbidden.test(s)), 'Frontend links execution/style provider');
@@ -36,19 +36,18 @@ function checkFrontend(selected, map) {
 const frontendSources = sources(frontend, 'ntcon.exe');
 const frontendMap = fs.readFileSync(path.join(frontend, 'ntcon.exe.map'), 'utf8');
 checkFrontend(frontendSources, frontendMap);
-for (const leak of ['base_rpc_client_launch_style.c', '../nthook32-dll/installer.cpp', '../ntw16s-dll/title_marker.c']) {
+for (const leak of ['base_rpc_client_launch.c', '../nthook32-dll/installer.cpp']) {
   assert.throws(() => checkFrontend([...frontendSources, 'O:/repo/src/' + leak.replace(/^\.\.\//, '')], frontendMap));
 }
 assert.throws(() => checkFrontend(frontendSources, frontendMap + '\n OpenNtBaseClientSetWindowStyle '));
 assert.throws(() => checkFrontend(frontendSources, frontendMap + '\n OpenNtBaseReadGetStyle '));
 const launcherSources = sources(launcher, 'run16.exe');
-for (const file of ['base_rpc_client_core.c', 'base_rpc_client_launch_style.c'])
+for (const file of ['base_rpc_client_core.c', 'base_rpc_client_launch.c'])
   assert(launcherSources.some(s => s.endsWith('/' + file)), `Launcher missing ${file}`);
 const launcherMap = fs.readFileSync(path.join(launcher, 'run16.exe.map'), 'utf8');
-assert(/OpenNtBaseClientSetWindowStyle\b/.test(launcherMap), 'Launcher policy setter not linked');
 assert(/OpenNtBaseClientCallServer\b/.test(launcherMap), 'Launcher execution facade not linked');
 for (const file of ['src/ntsrv-exe/opennt/source/base_rpc_client_core.c',
-  'src/ntsrv-exe/opennt/source/base_rpc_client_launch_style.c', 'tools/build/New-NativeWorkerNinja.ps1']) {
+  'src/ntsrv-exe/opennt/source/base_rpc_client_launch.c', 'tools/build/New-NativeWorkerNinja.ps1']) {
   assert(!fs.readFileSync(file, 'utf8').includes('OPENNT_BASE_RPC_FRONTEND_ONLY'), `Conditional remains: ${file}`);
 }
 console.log(JSON.stringify({result:'PASS', frontendSources:frontendSources.length,

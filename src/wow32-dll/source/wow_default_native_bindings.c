@@ -2,12 +2,11 @@
 #include "wow_user_private_access.h"
 #include "wow_user_borrow_scope.h"
 #include "wow_user_task_lifecycle.h"
-#include "wow_title_policy.h"
 #include "wow_user_client_view_layout.h"
 
 /* ADAPTER-WOW-063: approved nonclient boundary. Both original FindNCHit
  * callers reach one owner; never SendMessage back into the same HWND.
- * Custom geometry uses the same NTW16S implementation as its subclass. */
+ * The modern host owns nonclient geometry and hit testing. */
 int WINAPI wow_default_find_nc_hit(PWND state, LONG point)
 {
     wow_user_native_call call;
@@ -20,8 +19,7 @@ int WINAPI wow_default_find_nc_hit(PWND state, LONG point)
     if(!wow_user_native_call_begin(&call,window))return HTERROR;
     __try {
         SetLastError(error);
-        if(!wow_style_hit_test(window,(LPARAM)point,&result))
-            result=DefWindowProcW(window,WM_NCHITTEST,0,(LPARAM)point);
+        result=DefWindowProcW(window,WM_NCHITTEST,0,(LPARAM)point);
     } __finally {
         error=GetLastError();
         if(!wow_user_native_call_end(&call))

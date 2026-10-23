@@ -19,8 +19,6 @@ int run16_parse_launch_options(const wchar_t *command, run16_launch_options *opt
     if (!options) return 0;
     options->command = NULL;
     options->wait = 0;
-    options->window_style = WINDOW_STYLE_OFF;
-    options->window_style_explicit = 0;
     if (!command) return 0;
     target = skip_space(command);
     for (;;) {
@@ -29,13 +27,8 @@ int run16_parse_launch_options(const wchar_t *command, run16_launch_options *opt
             options->wait = 1;
             target = skip_space(target + 6);
         } else if (prefix_token(target, L"--win16-style") ||
-                   prefix_token(target, L"--win16-style-all")) {
-            int all = prefix_token(target, L"--win16-style-all");
-            if (options->window_style_explicit) return 0;
-            options->window_style_explicit = 1;
-            options->window_style = all ? WINDOW_STYLE_ALL : WINDOW_STYLE_WIN16;
-            target = skip_space(target + (all ? 17 : 13));
-        } else break;
+                   prefix_token(target, L"--win16-style-all")) return 0;
+        else break;
     }
     if (!*target) return 0;
     options->command = target;

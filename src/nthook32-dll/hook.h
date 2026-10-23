@@ -7,7 +7,6 @@ extern "C" {
 #endif
 typedef struct nthook_context {
     DWORD mode;
-    DWORD window_style;
     DWORD creation_flags; /* One redirected launch, never descendant policy. */
     HANDLE frontend,execution;
     WCHAR launcher[MAX_PATH],hook[MAX_PATH],hook64[MAX_PATH];

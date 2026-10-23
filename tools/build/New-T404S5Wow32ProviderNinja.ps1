@@ -84,7 +84,6 @@ $providerSupportSources = @(
     (Join-Path $adapterWow 'wow_task_parent.c'),
     (Join-Path $adapterWow 'wow_launch_identity.c'),
     (Join-Path $adapterWow 'wow_native_process.c'),
-    (Join-Path $adapterWow 'wow_title_policy.c'),
     (Join-Path $adapterWow 'wow_user_message_bridge.c'),
     (Join-Path $adapterWow 'wow_user_task_lifecycle.c'),
     (Join-Path $adapterWow 'wow_input_group_lifetime.c'),
@@ -270,12 +269,9 @@ foreach ($alias in @(
     [pscustomobject]@{ Decorated = 'NtCurrentPeb@0'; Raw = 'NtCurrentPeb' },
     [pscustomobject]@{ Decorated = 'ExitVDM@8'; Raw = 'ExitVDM' },
     [pscustomobject]@{ Decorated = 'OpenNtBaseClientWowStarted@4'; Raw = 'OpenNtBaseClientWowStarted' },
-    [pscustomobject]@{ Decorated = 'OpenNtBaseClientWowStyle@8'; Raw = 'OpenNtBaseClientWowStyle' },
     [pscustomobject]@{ Decorated = 'OpenNtBaseClientBindWowTask@12'; Raw = 'OpenNtBaseClientBindWowTask' },
     [pscustomobject]@{ Decorated = 'OpenNtBaseClientRetireWowTask@8'; Raw = 'OpenNtBaseClientRetireWowTask' },
     [pscustomobject]@{ Decorated = 'OpenNtBaseClientFailWowTaskClose@8'; Raw = 'OpenNtBaseClientFailWowTaskClose' },
-    [pscustomobject]@{ Decorated = 'NtvdmInstallChildStyle@8'; Raw = 'NtvdmInstallChildStyle' },
-    [pscustomobject]@{ Decorated = 'NtvdmSeparateWowStyle@4'; Raw = 'NtvdmSeparateWowStyle' },
     [pscustomobject]@{ Decorated = 'NtvdmAuthorizeExit@4'; Raw = 'NtvdmAuthorizeExit' },
     [pscustomobject]@{ Decorated = 'host_CreateThread@24'; Raw = 'host_CreateThread' },
     [pscustomobject]@{ Decorated = 'host_ExitThread@4'; Raw = 'host_ExitThread' },
@@ -433,18 +429,18 @@ foreach ($source in $sources) {
     } elseif ($source -eq 'wkman.c') {
         $ninja.Add('  cflags = $cflags /DWOW_NATIVE_PROCESS_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_native_process.h')) + '"')
     } elseif ($source -eq 'wudlg.c') {
-        $ninja.Add('  cflags = $cflags /DWOWSysErrorBox=wow_user_sys_error_box /DWOW_TITLE_MESSAGE_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_title_policy.h')) + '"')
+        $ninja.Add('  cflags = $cflags /DWOWSysErrorBox=wow_user_sys_error_box')
     } elseif ($source -eq 'wcommdlg.c') {
         $ninja.Add('  cflags = $cflags /DWOW_COMMON_DIALOG_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_common_dialog_calls.h')) + '"')
     } elseif ($source -in @('wuser.c','wuser31.c','wuwind.c')) {
         $hardErrorBinding = if ($source -eq 'wuser.c') {' /DWOWSysErrorBox=wow_user_sys_error_box'} else {''}
-        $ninja.Add('  cflags = $cflags' + $hardErrorBinding + ' /DWOW_STYLE_SCROLL_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_title_policy.h')) + '"')
+        $ninja.Add('  cflags = $cflags' + $hardErrorBinding)
     } elseif ($source -eq 'wkgthunk.c') {
         $ninja.Add('  cflags = $cflags /DWK32ICallProc32=wow_original_WK32ICallProc32 /DWOWYield16=wow_original_WOWYield16 /DWOWDirectedYield16=wow_original_WOWDirectedYield16 /DWOW_NATIVE_EXTENSION_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_user_native_extension.h')) + '"')
     } elseif ($source -eq 'wmmedia.c') {
         $ninja.Add('  cflags = $cflags /DWMM32CallProc32=wow_original_WMM32CallProc32')
     } elseif ($source -eq 'wshell.c') {
-        $ninja.Add('  cflags = $cflags /DWOWShellExecute=wow_shell_execute /DWOW_STYLE_SHELL_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_title_policy.h')) + '"')
+        $ninja.Add('  cflags = $cflags /DWOWShellExecute=wow_shell_execute')
     }
 }
 $supportObjects = [System.Collections.Generic.List[string]]::new()
