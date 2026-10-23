@@ -484,6 +484,28 @@ Pair lookup, reentrancy, exception unwind and exact-once cleanup need to be
 verified together before selecting the implementation; this observation is
 source evidence, not a runtime reproduction.
 
+S2's post-result design must also account for pre-existing associations.
+`ThunkWMMsg16` POKE, ADVISE and DATA first find an old pair for the same
+conversation and 16-bit handle, remove it and free its 32-bit resource,
+before constructing the new message. A failed post therefore cannot be made
+fully transactional merely by rolling back newly tracked acquisitions: the
+old pair may already be gone. The original source deliberately performs this
+replacement, so its timing and any observable effect must be established
+before changing it; neither blindly restoring an already freed handle nor
+claiming that the new-pair rollback restores the old state is correct.
+
+There is a separate reentry/alias concern: `DDEAddhandle` marks the guest
+handle for each association, whereas `DDERollback32` unmarks before deleting
+its selected association. DDE aliases are a list and `DDEFindNode16` finds
+only the first matching handle. A new failure finalizer must check whether
+another live pair still depends on the same guest mark and follow the
+original guest free/ACK contract; a blanket unmark on one pair's rollback is
+not established as safe. The existing exact-source alias fixture exercises
+list/free and mark-callback reentry, but its selected bodies do not include
+`DDERollback32` or `WU32PostMessage`, and its classic real-guest probe covers
+native-to-Win16 EXECUTE/ACK only. Extend acceptance for the reverse posted
+path and shared-mark case instead of citing those older witnesses as proof.
+
 Source identities (SHA-256) for this pass: `wkman.c`
 `49BE04B3E5959F175D72B63A87239EA4F325CFDD38B051932DF2176D5527E860`;
 `vdmdbg.c` `11CAD596254D09929987CF110F5B492862972D06077C5FECC100DC79B087E1D2`;
