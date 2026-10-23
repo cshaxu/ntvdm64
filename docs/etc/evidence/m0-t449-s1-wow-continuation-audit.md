@@ -318,6 +318,22 @@ mechanism; no guest source or image is modified. A target-specific control
 must not replace the required proof with a blind `LockTDB` write followed by
 an interrupt.
 
+Current selected-host execution supplies a possible *safe-point component*,
+not a complete task-termination delivery: `wow_task_callback_enter` obtains
+the actual current thread's task binding, uses the original taskman handoff
+to obtain execution and rejects tasks already in cleanup; callback leave then
+restores the nested scope. `wow_user_task_lifecycle_exit` checks the current
+task's `hTaskWow` before original cleanup, while `retire_current_thread`
+records `complete` only after its own retirement call succeeds. These are
+useful existing owners for same-task execution and retirement evidence.
+They do not arrange delivery to a task which has no window or callback, is
+stuck in guest code, or whose native thread cannot process a message; nor do
+they by themselves establish an incarnation-safe identifier or an NTSRV
+acknowledgement. A callback-enter hook must not be presented as a universal
+force-kill solution. Trace the existing BOP/guest entry and original hung
+paths as a complete set before choosing any control adapter; preserve failure
+as failure rather than falsely reporting termination.
+
 ## Original task publication and retirement chain
 
 `wkman.c::AddProcessSharedList` registers a per-process shared-list object;
