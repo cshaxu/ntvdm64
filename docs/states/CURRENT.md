@@ -2,83 +2,49 @@
 
 ## Current Work
 
-**Active: M0 T450 S5**
+**Active: M0 T451 S1**
 
 ## Active Packet
 
-### M0 T450 S5 — normalize Run16's Console entry contract
+### M0 T451 S1 — USER object and producer contract inventory
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T450 S5, Ordinary Mode. |
-| Admission And Approval | The owner approved converting the existing CUI `run16` entry from `wWinMain` to `wmain`, retaining an untouched raw command tail and adding coverage for redirection, pipelines and `cmd /c` arguments on 2026-10-23. |
-| Objective | Normalize `run16` to its actual Console-subsystem contract without changing command-tail semantics or Console inheritance. |
-| Non-goals | No GUI-subsystem launcher, no NTSRV/NTCON/worker lifecycle change, no guest change, and no command-shell parsing or reserialization by `run16`. |
-| Reference Baseline | `244450652`: T450 S1–S4 style removal and ten-image publication are complete; the current launcher remains `/SUBSYSTEM:CONSOLE` but uses a `wWinMain` entry override. |
-| Files And ABI Surface | `run16` entry, raw-tail helper, x86/x64 Ninja entry metadata and the existing launch-options test. No RPC or guest ABI changes. |
-| Applicable Rules | [Execution](../rules/EXECUTION.md), [architecture](../rules/ARCHITECTURE.md), [coding](../rules/CODING.md), [source policy](../etc/operations/policy/source-policy.md). |
-| Verification | Passed: `build/t450-s5/focused` reports `RUN16-LAUNCH-OPTIONS-PASS cases=22`; generated x86/x64 launcher graphs retain `subsystem = console` / `wmainCRTStartup`; `component-build-r2` passed all ten images and a 1,476-intermediate no-op increment; stage and dual-destination publication hashes passed. An installed `cmd /c ver` observation produced the expected version text and Run16 exited, but its ad-hoc redirected-pipe harness could not naturally close because the child chain retained the pipe; it is recorded as observation, not a runtime pass. |
-| Expected markers | `run16` stays `/SUBSYSTEM:CONSOLE`; its only entry override is `wmainCRTStartup`; `>`, `>>`, `|`, quoted paths and `cmd /c ver` remain exact target-tail text. |
-| Asset Needs | No new assets or guest changes. |
-| Reporting Requirements | Record link contract, raw-tail cases, build/publication hashes and any intentionally unchanged Console behavior. |
-| Stop Conditions | Pause only if the C runtime entry change requires a new public launch semantic or exposes an unrelated legacy command-tail contract. |
-| Exit Criteria | Source review, focused raw-tail test, coherent ten-image package publication and hash verification, then commit/push and owner acceptance. Delivery evidence is [T450 S5 Run16 entry evidence](../etc/evidence/m0-t450-s5-run16-entry.md). |
-| Original Owner Request | “批准，请你做这个修改，并确保已有测试能够覆盖尾部情况 ( \">\", \">>\", \"|\" 管道和程序参数如 \"cmd /c ver\"之类)” |
-| Similar-Issue Sweep | Check both x86 and x64 generated graph owners and preserve the existing parser's no-allocation target-slice rule. |
-| Candidate Proposal | [Win16 Style removal](../proposals/proposal-win16-style-removal-001.md), whose completed T450 boundary is retained while S5 makes this launcher-only correction. |
-
-### Planned sequential S boundaries
-
-1. **S1 (complete):** removed style selection and propagation control plane.
-2. **S2 (complete):** deleted the isolated renderer/demo/test/build component and all style-only release/deployment entries; the package is reduced to ten host images.
-3. **S3 (complete):** normal no-style launch, rejection and stale-reference audits passed; publication and hash verification passed.
-4. **S4 (complete):** closure record and final commit/push completed at
-   `db91004e5`; the ten-image package is deployed.
-5. **S5 (active; delivery ready for owner acceptance):** normalized the
-   retained CUI Run16 entry, proved raw-tail preservation, and published the
-   ten-image package without adding a GUI-launcher mode.
-
-## S1 Closure Record
-
-[T450 S1--S4 closure ledger](../etc/evidence/m0-t450-s1-s4-closure-ledger.md)
-records the published removal/control-plane package and its retained evidence.
-
-## S2 Closure Record
-
-[T450 S1--S4 closure ledger](../etc/evidence/m0-t450-s1-s4-closure-ledger.md)
-records the renderer/demo removal and reduced ten-image package evidence.
-
-## S3 Closure Record
-
-[T450 S1--S4 closure ledger](../etc/evidence/m0-t450-s1-s4-closure-ledger.md)
-records normal-launch/rejection and publication evidence.
-
-## S4 Closure Record
-
-[T450 S1--S4 closure ledger](../etc/evidence/m0-t450-s1-s4-closure-ledger.md)
-records closure audit and owner-acceptance boundary evidence.
+| Identifier Mode | M0 T451 S1, Ordinary Mode. |
+| Admission And Approval | The owner accepted and closed T450, then explicitly approved admission of the next queued T on 2026-10-23. |
+| Objective | Produce the source-first, finite contract inventory for residual WOW32 C04--C07/object-C10 USER objects and PMODE32 direct consumers, separating work already closed by T447/T449 from T451-owned system/native/external-object and geometry cases. |
+| Non-goals | No guest modification/rebuild, no USER-server reconstruction, no temporary provider, no broad control/dialog/message implementation, and no production behavior change before a later admitted S. |
+| Reference Baseline | `6c661b579` is the owner-accepted T450 ten-image package. T447 delivered the local WND/CLS/desktop foundation; T449 delivered execution and targeted task retirement. |
+| Files And ABI Surface | Read-only source, provenance, caller and test inventory; any detailed record belongs under `docs/etc/operations/` or `docs/etc/evidence/`. No new runtime ABI is admitted by S1. |
+| Applicable Rules | [Execution](../rules/EXECUTION.md), [architecture](../rules/ARCHITECTURE.md), [coding](../rules/CODING.md), and [source policy](../etc/operations/policy/source-policy.md). |
+| Verification | Trace each claimed C04--C07/object-C10 consumer to its original/provider source, current producer, authority state, update/invalidation and test. Mechanically confirm no production source/build/guest input changes in S1. |
+| Expected Markers | A reconciled finite row set: direct reader, producer, identity class, authority, lifecycle/rollback rule, reuse disposition, executable evidence and exact successor S ownership. |
+| Asset Needs | Existing selected original OpenNT/WOW32 sources, current x86 build graph and retained T447/T449 evidence; no external import or guest asset. |
+| Reporting Requirements | Distinguish proved implementation gaps from inherited completed paths; list every unavailable/private boundary and avoid treating a trace hit as an implementation requirement. |
+| Stop Conditions | Pause for owner decision if a needed residual behavior requires a new observable semantic concession, a new source import outside approved mirrors, or a cross-candidate dependency not bounded by a promotion. |
+| Exit Criteria | Complete, reviewed and indexed contract ledger; no unassigned residual C04--C07/object-C10 case; verified no implementation change; commit/push the documentation delivery. |
+| Original Owner Request | “可以，收口，然后准入下一个T任务。” |
+| Similar-Issue Sweep | Include own-created, system/native and other-task identities; direct readers, first callback, geometry, stale reuse, nested destruction and failed creation. |
+| Candidate Proposal | [WOW32 USER objects/shared view](../proposals/proposal-wow32-user-objects-shared-view-001.md). |
 
 ## Current Technical Baseline
 
-The pending T450 release is a ten-image package. All release images match at
-`assets/release/` and `O:\winnt\system32`; the three former style binaries are
-absent. Immutable guest media and guest configuration remain unchanged. The
-T450 closure record carries the build, runtime and publication evidence.
-
-The ordered WOW32 capability packages remain in [Queue](QUEUE.md). Existing
-unplanned debt remains in [TODO](TODO.md); it is not implicitly admitted by
-T450.
+The ten-image host package at `6c661b579` is published in both
+`assets/release/` and `O:\winnt\system32`; guest media and guest configuration
+remain immutable and unchanged. T450 is closed at
+[its closure record](../history/m0-t450-closure.md). T451 S1 is an inventory
+and design boundary only; it does not claim a new WOW32 capability.
 
 ## Recent M0 Closures
 
 | Task | Disposition |
 | --- | --- |
+| T450 | [Owner-accepted style removal and Run16 Console-entry closure](../history/m0-t450-closure.md). |
 | T449 | [Owner-accepted WOW32 execution continuation closure](../history/m0-t449-closure.md). |
 | T448 | [Owner-accepted lifecycle closure](../history/m0-t448-closure.md). |
-| T447 | [Owner-directed scope-transfer closure](../history/m0-t447-transfer-closure.md), not full WOW functional acceptance. |
 
 ## Recent Governance
 
-T449 closure records the accepted S4 physical application witness and the
-next candidate's non-admitted status. No product binary changed in this
-documentation-only delivery.
+T450's completed S5 evidence is retained with its closure record. This
+documentation-only transition admits T451 S1; it does not rebuild, replace or
+republish the already hash-verified ten-image package.

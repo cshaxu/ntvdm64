@@ -1,8 +1,9 @@
-# M0 T450 — Win16 Style removal closure record
+# M0 T450 — Win16 Style removal and Run16 entry closure record
 
 ## Outcome
 
-The project-owned Win16 Style implementation has been removed.  This is a
+The project-owned Win16 Style implementation has been removed, and the
+retained Console-subsystem `run16.exe` entry has been normalized. This is a
 host-only change: guest media and guest configuration were neither rebuilt nor
 modified.
 
@@ -40,6 +41,8 @@ USER control API, not a project Win16 Style feature or propagation path.
 | Base RPC graph ownership | Pass | `build/t450-s3/base-rpc-split-r1` |
 | Build hygiene | Pass | `build/t450-s3/hygiene-r1/stdout.log` |
 | Active-source audit | Pass: no component, transport or propagation reference remains; only the unrelated original EDIT API remains | T450 S4 audit |
+| S5 raw-tail contract | Pass: 22 launch-option cases, including exact full-line `cmd /c ver`, `>`, `>>`, `|` and quoted-target tails | [S5 evidence](../etc/evidence/m0-t450-s5-run16-entry.md) |
+| S5 package | Pass: all ten images, no-op increment, stage and dual-destination SHA-256 agreement | [S5 evidence](../etc/evidence/m0-t450-s5-run16-entry.md) |
 
 The direct standalone invocation of `base-client-rpc-first-test.exe` was not
 counted: it requires its existing live BaseSrv fixture endpoint and fails
@@ -55,5 +58,6 @@ this project.  A consumer that wants a retro appearance must use the separate
 project at its own process-boundary contract.  T450 neither tests nor promises
 that external integration.
 
-T450 is ready for owner acceptance after commit/push.  Queued WOW32 capability
-work is unchanged.
+S5 was published and pushed in `6c661b579`; the owner accepted T450 on
+2026-10-23. The next owner-approved package, T451, owns the residual WOW32
+USER object/shared-view work. Queued successors retain their prior order.
