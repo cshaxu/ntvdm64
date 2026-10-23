@@ -45,6 +45,12 @@ documented user-mode equivalent; arbitrary deletion, rename and index reuse
 remain outside the approved hint's equivalence claim. See the [evidence ledger](../etc/evidence/m0-t448-s11-window-startup.md).
 The owner accepted S12; T448 remains open and S13 is now active.
 
+S13's inherited-environment DOS startup failure has now been reproduced with
+a host-only read-only diagnostic: the original COMMAND environment copy
+overwrites its discarded-INIT `EnvSiz`; the short-PATH control does not.
+This does not attribute the separate historical timeout reports. See the
+[S13 evidence](../etc/evidence/m0-t448-s13-uncertain-todo-audit.md).
+
 Earlier stages' complete status and chronology are preserved in the indexed
 [pre-compaction snapshot](https://github.com/cshaxu/ntvdm64/blob/ba156ef61/docs/states/CURRENT.md).
 It is historical, not an additional active packet. S10 full-size SOL gameplay

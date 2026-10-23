@@ -21,7 +21,7 @@ no-progress investigation threshold.
 | Rapid native interaction | Three runs of the existing strict 12-round interactive launcher; preserve direct return on failure. | Passed 3/3; historical root cause unknown. |
 | Outer CMD first input | Three same-Console DOS/native relaunch witnesses, preserving line-by-line output. | 3/3 inherited-environment timeouts before boundary; 3/3 short-PATH controls pass. |
 | Two-session management close | Three actual RPC two-session cases; retain numeric errors and participant state. | Passed 3/3; historical root cause unknown. |
-| Pre-prompt startup timeouts | Current S12's 17 DOS cases in each mode plus three cold launch controls; preserve an actual timeout as failure. | Current inherited environment reached three timeouts; control passes, exact cause unproved. |
+| Pre-prompt startup timeouts | Current S12's 17 DOS cases in each mode plus three cold launch controls; preserve an actual timeout as failure. | Current inherited-environment failure directly reproduced the known COMMAND EnvSiz overwrite in a diagnostic host; prior separate failures remain unattributed. |
 | Common dialog | Original strict CDL2 identity/return probe, 16 rounds on current package. | Passed 16 rounds; historical root cause unknown. |
 | Intermittent direct WINMINE/SOL exit | Existing real gameplay witnesses; 3 runs each, compare S12 evidence and preserve exact failing process identity. | 3/3 each pass; short runs cannot rule out long-play crash. |
 | SOL reported layout | Check actual desktop/application geometry and captured gameplay; no assumption that the historical report equals the 427x320 environment. | Measured 585x384 client on 1280x720 desktop; original report geometry unavailable. |
@@ -51,8 +51,9 @@ the witnesses serially; details are temporarily under `build/t448-s13-native-r01
   established that inherited large PATH can break this immutable guest before
   its prompt. Three diagnostic controls using a short PATH, without changing
   the package or guest, completed DOS MEM/EXIT -> native VER -> DOS MEM/EXIT
-  and outer exit 19. This establishes an environment-sensitive distinction but
-  does not directly observe the guest overwrite or prove the identical cause.
+  and outer exit 19. These initial controls establish an environment-sensitive
+  distinction but do not directly observe the guest overwrite; the subsequent
+  diagnostic reproduction below supplies that observation.
   No product environment filtering or guest patch is authorized.
   These three valid controls also exercised both DOS commands without the
   historical missing initial character; under the owner's S13 rule that old
@@ -116,11 +117,10 @@ SHA-256 summaries, for later scratch disposition:
 
 ## Boundaries still requiring an explicit disposition
 
-* The inherited-environment pre-prompt timeout has current failure evidence;
-  a changed PATH is an informative control, not a direct capture of the
-  overwrite or proof of this run's root cause. Do not close it as an old
-  nonreproduction. The large-environment guest limitation remains independently
-  established and retained in TODO.
+* The inherited-environment pre-prompt timeout has current failure evidence and
+  now has the diagnostic attribution below. This does not identify the causes
+  of the two separate older startup timeouts. The original guest limitation
+  remains established and retained in TODO, not counted as fixed.
 * WRITE's S12 startup witness does not test editing or exit. Preserve the
   owner-approved WOW32 continuation as its proper execution owner; do not
   certify the full lifecycle from startup alone.
@@ -138,3 +138,42 @@ SHA-256 summaries, for later scratch disposition:
 * The owner-reported game exits and SOL layout remain separately unverified
   beyond the bounded observations above; the report's actual desktop geometry
   and an occurrence with product identity and failure diagnostics are absent.
+
+## Direct guest-state attribution of the current inherited-environment failure
+
+An isolated host-only diagnostic was built with
+`tools/build/Build-T420S35EnvironmentTrace.ps1` from the current x86 worker
+object graph. The uninstrumented graph's `ntvdm.exe` SHA-256
+`47b2819993712c66d8db9e62409e9843bfca53ffe12abbd83d9a34cec3663f4c`
+matches the published and S12 package image. The diagnostic `ntvdm.exe` SHA-256
+is `1f40b138caf1edb58fcb71b02e976d4348adc839b4003d9833cae42146ff9a35`;
+it wraps the unchanged original environment service solely to read and log
+the guest state immediately before and after that service. It was never
+published. The diagnostic does not modify guest binaries or add guest-memory
+writes, and no product environment was modified.
+The candidate and installed `COMMAND.COM` both retain SHA-256
+`908a77ac617c2d741f0aa1b73f73973dcf29adc91f092e5bcb02173c8c732c43`.
+
+On the inherited-PATH observer run, the same DOS relaunch witness timed out
+before the first prompt. The trace shows the valid initial environment MCB
+owned by the COMMAND PSP, with ES=049F and 0177 paragraphs, containing the
+original `EnvSiz` at DS:203C. Immediately before the service it was 0177;
+after the service it was 3D4D, with unchanged MCB owner and size. The source
+and original guest map identify DS:203C as INIT's `EnvSiz`, later reused by
+`EndInit`. Thus this diagnostic reproduction directly observes the previously
+documented original guest discarded-INIT overlap and overwrite, not merely a
+correlation with PATH length.
+
+The same diagnostic host under the short-PATH control completed the entire
+DOS/native/DOS sequence and outer exit 19. Its MCB was 00F6 paragraphs and did
+not contain DS:203C; the observed value remained 00F6 before and after the
+service. This control supports the mechanism but does not establish a general
+safe environment length. The direct trace reproduces and attributes the
+current diagnostic run; instrumentation cannot retroactively prove that every
+earlier timeout had the same cause. Under the standing guest policy, no guest
+patch, hot patch or host environment filtering is applied.
+
+The inherited trace SHA-256 is
+`12bf1345b4d76c15dcdfc8d0b60f4a138d38c9df12e6e65cd7aff16f69528239`;
+the combined inherited/control trace is
+`e6f52ad11cf1621e7438bcff4a6a948756eb1a5d7ae6245b0cff25d340a7053b`.
