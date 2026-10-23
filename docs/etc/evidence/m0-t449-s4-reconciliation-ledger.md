@@ -99,6 +99,39 @@ test oracle rather than a product repair.
 
 ## Remaining bounded S4 item
 
+## Current sealed-package reconciliation — 2026-10-23
+
+The former `package-r1` cannot be used as a release witness: its ten core
+host images no longer matched the current build inputs, although its three
+style images did.  It remains historical evidence only.  `build-r6` therefore
+reconfigured both stable Ninja trees, built all thirteen selected images,
+validated their PE machines and required redirector import, and made a second
+no-work pass with the same 1,470 tracked intermediates.  `package-r2` is a
+fresh immutable-media stage whose thirteen `SYSTEM32` hashes exactly equal
+`build-r6/result.json`.
+
+The current package, rather than the historical package, passed the complete
+selected S4 runtime set:
+
+| Group | Current package result |
+| --- | --- |
+| external native | 9/9 actual local/x86/x64 peer cases across Off/Win16/All (`message-external-r4`) |
+| cross worker | 6/6 actual local/cross-worker cases across Off/Win16/All (`message-cross-r2`) |
+| pending send / destruction | 6/6 actual cases across Off/Win16/All plus the required nonblocking ordering negative (`message-pending-r2`) |
+| WINMINE | flag/counter, reset, open, close and normal Run16 completion (`mine-r4`) |
+| SOL | deal, stock draw, close and normal Run16 completion (`sol-r3`) |
+| controls/dialog/common dialog/hook | 12/12 immutable-guest cases across Off/Win16/All (`guest-contracts-r2`) |
+| CAF console handoff | self-delete 3/3, natural exit 2/2, external close 3/3; each proves echo before Enter (`caf-self-r4`, `caf-natural-r2`, `caf-external-r2`) |
+
+This replaces the stale package as the only candidate eligible for deployment.
+The tests are isolated-package runs; no guest file was modified or rebuilt.
+
+`package-r2` was then published as one recoverable thirteen-image set.  The
+previous `assets/release` and `O:/winnt/system32` image copies plus the
+release manifest were backed up under `build/t449-s4/publish-r2`; every new
+copy at both destinations was verified against `publish-r2/verified-manifest.json`.
+The installed and release roots now carry the same `package-r2` identities.
+
 WRITE startup is retained and the current 12-case common-dialog matrix proves
 the selected WOW/common-dialog bridge, but full real WRITE edit/save/exit is
 not yet a pass.  The owned current-package startup check also reconfirmed that

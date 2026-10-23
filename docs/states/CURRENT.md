@@ -68,6 +68,13 @@ and hash-verified at both destinations; see its
 WRITE editing/exit and intermittent long-play outcomes remain unproved. Original
 COMMAND's large-environment defect remains in TODO as a guest limitation.
 
+S4's later `package-r2` supersedes its stale initial candidate: the current
+thirteen-image package was rebuilt, exercised through the selected message,
+application, guest-contract and CAF matrices, published and hash-verified at
+both destinations.  Its evidence is in
+`m0-t449-s4-reconciliation-ledger.md`; only WRITE physical edit/save/normal
+exit remains an open S4 witness, not a passing row.
+
 S2's DDE ownership group is owner-accepted and closed. Source tracing found
 one bounded gap: `WU32PostMessage` discards the original stack-local DDE
 conversion record before native `PostMessage` reports acceptance or rejection.
