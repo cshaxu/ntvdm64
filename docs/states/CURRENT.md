@@ -39,14 +39,13 @@ and thread-level idle boundaries remain intact. NTSRV owns lifecycle control;
 this task owns the WOW task algorithms and individual-task integration.
 Other WOW packages remain in the queue with their residual scopes.
 
-Initial source reconciliation is recorded in the [S1 audit](../etc/evidence/m0-t449-s1-wow-continuation-audit.md).
-It confirms that individual WOW task deletion is not connected and distinguishes
-the service request identity from the original HTASK. The M1--M6 and full
-identity/lifetime audit is still in progress; no runtime repair is claimed.
-The continuation proposal now records the dependency-ordered S2--S4 delivery
-shape and its explicit acceptance boundaries. S1 must still reconcile its
-inherited rows before admitting that implementation; the plan itself is not
-an S1 closure or a product-test result.
+The [S1 audit](../etc/evidence/m0-t449-s1-wow-continuation-audit.md) maps the
+inherited rows, bounded prior evidence and unfinished work to the proposed
+S2--S4 delivery groups. It confirms that individual WOW task deletion is not
+connected and distinguishes the service request identity from the original
+HTASK. The source reconciliation and stage handoff are documented; S1 remains
+active until this documentation has passed review and is committed/pushed.
+The handoff is not a runtime repair, product-test result or semantic waiver.
 
 Owner execution direction: trace source and call chains first; preserve original
 capabilities and semantics and minimize original-source diffs. Where an original

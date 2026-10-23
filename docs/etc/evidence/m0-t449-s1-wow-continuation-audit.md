@@ -492,26 +492,30 @@ service `lifecycle.c` `4B9847C3399F8B05B8D37E24CE8D0CE7620030FFE2E30A9DD47551289
 `wow_user_task_lifecycle.c` `02068CECA2890AF3DE2A9FCE85C6FFBD259E0FA9625757D43D888BEB772576F0`;
 selected `taskman.c` `FCCAB963DCDE796091AAE9972C86B874C899B81D2F91727B7081A3ACFD5A1898`.
 
-## Remaining S1 audit
+## Fixed implementation handoff
 
-Complete the per-entry M1--M6 conversion/failure denominator, callback/object
-responsibility reconciliation, and the task registration/identity/retirement
-source chain against current production selections and test assertions. Then
-specify dependency-ordered groups with exact original reuse, duplicate removal,
-failure/lifetime rules and acceptance. Do not treat the individual-task gap as
-the only open row or begin isolated repair before this audit is reconciled.
+The inherited detailed ledgers remain the per-entry denominator. The table
+below assigns every transferred group without converting an old test into a
+current-package pass. S2 must review and implement the detailed affected
+entries together, and produce source/artifact-specific evidence for them; the
+assignment is not a claim that all failure paths have already been proved.
 
-The dependency order currently supported by source evidence is: (1) reconcile
-execution/callback, object and normal retirement first; (2) connect message
-identity/reply and conversion/transfer cohorts with their failure paths;
-(3) connect targetable task publication, worker-local termination and
-NTSRV-mediated completion as one group, using the earlier execution/retirement
-contract; (4) run final same-package real guest and native-direction acceptance.
-This is not yet an admitted S breakdown: the remaining source and evidence
-reconciliation can expose dependencies that require merging or reordering
-groups. DDE protocol scope is limited to message ownership transferred into
-this task; broader DDE remains with its existing candidate. A group must not
-be presented as completed solely because its original implementation compiles.
+| Transferred group | Detailed denominator and evidence | Responsible stage |
+| --- | --- | --- |
+| C01--C03/C09/C10, M1--M3 | Original USER16 entrypoints and scheduler/reply boundary above; [message ledger](m0-t447-s4-message-source-audit.md), `verify-win16-message-probe.ps1` modes and their actual assertions above. | S2: execution, receipt, reentry and normal/failure paths; S4: same-package integrated proof. |
+| M4 | The [nineteen original allocation owners](m0-t447-s4-message-source-audit.md#post-p18-complete-allocation-owner-disposition), reverse delegates, five cohorts and DDE delivery/rollback source traces above; `verify-wow-dde-alias.ps1` and `verify-win16-message-probe.ps1 -ClassicDde` have the explicit bounded scopes described above. | S2: preserve original owners, fix proved ownership gaps as connected cohorts, add missing failure witnesses; S4: integrated guest proof. The queue retains unrelated DDE capability. |
+| M5 and promoted W02/W03/W06/W09 prerequisites | The object/native-call boundary above, [control source ledger](m0-t447-s3-control-source-audit.md) C1--C5 and S2/S3 historical closure records. | S2: ordinary creation, callback, failed construction, identity, reentry and retirement needed by message execution; S4: current-package integration. Later queued work retains non-prerequisite families. |
+| Individual task termination and management | The original TD/HTASK and hung/retirement chains above and [approved termination requirements](../operations/t447-wow-execution-plan.md#approved-individual-wow-task-termination). | S3: one authenticated service/worker dispatch, incarnation-safe task execution and completion group; ordinary task cleanup remains in S2. |
+| M6 and transferred applications | Probe modes and bounded T447/T448 receipts above; `verify-wow-mine-gameplay.ps1`, `verify-wow-sol-gameplay.ps1`, `verify-wow-write-frontier.ps1` and T448 integrated acceptance. | S4: seal and run current-package actual-guest/native integration and application regressions; WRITE editing/save/exit needs its own evidence. An intermittent game exit and the owner's SOL observation remain limitations unless actually attributed. |
+| Original guest/other project issues | Transfer reconciliation below and the T448 TODO dispositions. | Retain the approved guest limitation and separate queued COM/guest work; do not pull unrelated functionality into T449 or remove it. |
+
+The [continuation proposal](../../proposals/proposal-wow32-execution-continuation-001.md#dependency-ordered-implementation-and-delivery-plan)
+defines the whole-group exits and publication requirements. An implementation
+must still trace each affected call and failure before changing it, retain the
+approved external-window and modern USER boundaries, and register necessary
+mirror deviations. No proposed stage is a runtime pass. In particular, the
+identified DDE post-failure issue is a source-level risk, not a reproduced
+leak, and task-specific delivery remains a design/implementation obligation.
 
 ## Transfer reconciliation for application and lifecycle witnesses
 
