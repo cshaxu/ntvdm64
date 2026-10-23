@@ -230,6 +230,31 @@ binary, unchanged dependencies, current-release real execution, or validate
 the later DDE modifications. The final T449 acceptance must identify its own
 sealed package and run the applicable composed tests.
 
+## Current worker control surface
+
+The concrete control surface is `service.idl`'s authenticated
+`VDM_CONNECTION`, process handle and generation on worker calls, with
+`CloseManagementNode` for the manager and existing typed worker signals for
+shutdown/Console-close. `worker_base_controls` returns server/shutdown/
+Console-close handles; the worker-base layer forwards existing RPCs and
+does not currently carry an HTASK-bearing command. The existing `Exit` RPC's
+`wow_task` is the original BaseSrv launch/wait identifier used on worker
+notification, not proof of the HTASK required by targeted termination.
+`WowStarted` and `WowStyle` likewise use the existing launch task number;
+their presence does not establish a targetable guest-created task inventory.
+
+The future coherent group must extend the established authenticated RPC/control
+contract to carry a worker-scoped task incarnation and its outcome, rather
+than reinterpret those existing integers, send a raw TD address, introduce a
+manager-to-worker connection or turn a whole-worker shutdown signal into a
+task command. The service must validate the management key and worker
+generation, and the worker must validate the current incarnation before
+invoking any original task operation. The shared worker-base forwards the
+instruction; only NTVDM/WOW32 may decide its task semantics. Exact command
+delivery, publication, cancellation and completion records still require a
+single end-to-end design and failure review; the existing event handles alone
+cannot carry the identity or provide the task-specific completion receipt.
+
 ## Original task publication and retirement chain
 
 `wkman.c::AddProcessSharedList` registers a per-process shared-list object;
