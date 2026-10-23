@@ -106,6 +106,36 @@ assertions are useful M1/M5/M6 witnesses but do not establish NTMON-targeted
 task deletion or sibling survival. Existing historical pass records must be
 matched to these exact modes and package hashes before marking any row proved.
 
+## M4 construction and unwind reconciliation
+
+The historical S4 [nineteen-owner disposition](m0-t447-s4-message-source-audit.md#post-p18-complete-allocation-owner-disposition)
+is the detailed denominator; it is not a list of nineteen independently
+unimplemented features. Current `wmdisp32.c` and
+`wow_message_lifetime.c` retain the original converters and use call-owned
+captured tokens for CREATE/MDICREATE, text/map, heap outputs, temporary
+clipboard/WinHelp and COPYDATA. Reverse EDIT/ListBox allocation checks and
+the signed-count release pairing are present under DIV-346. These are source
+observations; their existence does not by itself prove every failure path or
+their execution in a given release.
+
+The source ownership split determines finite implementation cohorts:
+
+| Cohort | Existing owner and current source boundary | Required unresolved evidence or repair selection |
+| --- | --- | --- |
+| Guest callback frame and stack-based structures | Original callback stack and selected `wow_message_stack_enter/leave`; no independent stack allocation for MINMAXINFO, DRAW/MEASURE/DELETE/COMPAREITEM, NCCALCSIZE and WINDOWPOS. | Reconcile actual abnormal callback/exception return, movement and nested frame restoration against the current provider; never invent a second allocator or replay output on abort. |
+| Call-owned heap/global and text/map | Original `malloc16`, `free16`, Global allocation and parameter map; DIV-345/347/349 and ADAPTER-WOW-101 retain the acquisition tokens. | Reconcile each of the nineteen named owners and reverse delegates on normal, partial construction and escaped exception; prove no output copyback or WinHelp activation on abort, and exactly-once release. |
+| COPYDATA input and output capture | Original converter and CPDATA pairing plus existing captured call ownership. | Match normal, early-reply, timeout and CallWindowProc runs to exact package/mode; do not infer all structure families or sender-buffer lifetime from a COPYDATA-only pass. |
+| Classic DDE protocol transfer | Original HDDE pair/list, original guest free/ACK rules and DIV-350--354 conversion-local rollback. | Reconcile all packet families and post-failure, retry, peer/task death and reentrancy before selecting repairs; generic call unwind cannot replace the transfer owner. |
+| Reverse control converters | Original EDIT/ListBox and delegated converters; DIV-346 acquisition checks remain in selected source. | Preserve count and release predicates and establish exact-body failure evidence against selected source, then use real controls as integration evidence; do not replace original control logic. |
+
+The source-exact ledger's old normal or fault-injection pass remains evidence
+only for its recorded source and package. S1 must map these rows and their
+applicable retained results; it must not label all exceptional cases fixed
+merely because a common release function is present. Conversely, the presence
+of captured release tokens is not evidence of a second allocation engine: its
+implementation calls the existing original allocation/free owners and must be
+judged by its actual contracts, not by its filename alone.
+
 ## Original task publication and retirement chain
 
 `wkman.c::AddProcessSharedList` registers a per-process shared-list object;
