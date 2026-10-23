@@ -300,6 +300,43 @@ policy with potentially unbounded resources, while guessing a lexical successor
 is not the filesystem's enumeration order. None of those alternatives is
 established as an exact, generally applicable replacement.
 
+#### Deleted-anchor decision boundary
+
+The existing search list saves a prefetched result B while `FindBufferNext`
+points at the subsequent C. After the original 128-buffer / 64-directory
+reclamation, a caller may delete B before the next request. The slow reset
+scans for B, cannot find it, and never returns C; the real `Deleted` guest
+probe reproduces this. DIV-360 does not change this result.
+
+Possible implementations have materially different contracts:
+
+* Keep a bounded next-entry hint per active search before discarding its
+  buffer. First run the original B reset; only if B is absent, rescan for the
+  captured C and leave C unconsumed for the original `FileFindNext`. This can
+  recover the observed B-deleted/C-still-present case without guessing lexical
+  order. It costs up to one bounded filename and index per search plus a second
+  scan on the fallback. If C is also removed or renamed, or identity/index is
+  reused, this hint cannot guarantee NT4-equivalent results. The filesystem's
+  index is explicitly not universally stable. This is a design, not an
+  implemented or tested fix, and its new mutation semantics need approval.
+* Retain each open directory handle and its prefetched entries until its search
+  closes. This preserves the existing provider's live state without indexed
+  reopen, but removing the original 64-handle/128-buffer global caps can make
+  resources grow with active searches; reimposing finite caps requires a new
+  observable failure or eviction rule. It is not an established universal
+  equivalent under arbitrary filesystem mutation and resource exhaustion.
+* Restore the original indexed query using a kernel carrier. This expands the
+  project to a kernel driver and still depends on filesystem support for index
+  semantics; no such carrier or authority is present in this task.
+* Retain the known slow-fallback limitation. This avoids new behavior and
+  deployment, but does not fix the reproduced host defect and needs explicit
+  owner disposition before S12 can close.
+
+The standing approval for minimal source-proven host corrections does not
+authorize choosing an observable compatibility retreat, an unbounded resource
+policy or a kernel-driver dependency. None of the four alternatives is
+silently accepted and S12 remains open.
+
 The S12 inventory also contains the original redirector username CX=0
 underflow. Its actual-provider fixture explicitly demonstrates that a
 capacity-checked call copies `user` despite zero declared capacity
