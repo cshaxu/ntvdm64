@@ -500,6 +500,12 @@ $process.Refresh()
 $fixtureOutput = @(Get-Content "$out/stdout.txt"; Get-Content "$out/stderr.txt")
 $fixtureExitCode = $process.ExitCode
 $fixtureExitCode | Set-Content -LiteralPath "$out/fixture-exit.txt"
+if ($fixtureExitCode -eq 2 -and
+    ($fixtureOutput -match '^WOW_PAGE_DOMAIN_DESKTOP_UNAVAILABLE error=\d+$')) {
+    throw ('Isolated page-domain desktop is unavailable in this session: ' +
+        ($fixtureOutput | Where-Object { $_ -match '^WOW_PAGE_DOMAIN_DESKTOP_UNAVAILABLE ' } |
+            Select-Object -First 1))
+}
 if ($OriginalModalOnly) {
     if (!($fixtureOutput -match '^WOW_CLIENT_CONTEXT_BINDING_CCPU errors=0 production_op=1 controlled_views=2 scheduling=separate$')) {
         throw 'Original execution initialization or production thread-client projection operation failed'

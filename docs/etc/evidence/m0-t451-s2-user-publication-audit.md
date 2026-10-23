@@ -54,7 +54,10 @@ The fixture now begins with the actual third-publication injection. It proves
 that the first two copied standard classes survive the failed admission, the
 task binding/hook list rolls back, and the retry publishes the remaining
 members exactly once. The isolated page-domain fixture now also emits its
-exact desktop-creation error rather than leaving a silent exit code.
+exact desktop-creation error rather than leaving a silent exit code. The
+observation runner consumes that marker before its ordinary postconditions and
+reports the unavailable desktop as the failure cause; it does not recast an
+unrun fixture as a message-replay defect.
 
 ## Executed evidence
 
