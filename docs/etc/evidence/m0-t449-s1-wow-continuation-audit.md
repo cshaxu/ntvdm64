@@ -357,3 +357,19 @@ reconciliation can expose dependencies that require merging or reordering
 groups. DDE protocol scope is limited to message ownership transferred into
 this task; broader DDE remains with its existing candidate. A group must not
 be presented as completed solely because its original implementation compiles.
+
+## Transfer reconciliation for application and lifecycle witnesses
+
+| Transfer item | Later evidence / current disposition | T449 ownership |
+| --- | --- | --- |
+| CAF close, Run16/frontend/worker authority | T448 S5 records real self-delete, external close and natural exit under its enumerated conhost cases. This supersedes T447's partial CAF status for those tested paths only. | Reuse the delivered service/worker control boundary; do not reopen CAF as an unproved WOW message feature, and do not infer all terminal-host interleavings passed. |
+| COMMAND large inherited environment | T448 S13 captured an EnvSiz/guest-INIT overwrite with a host-only diagnostic; the owner declined a special workaround and retained it as a guest limitation. | Preserve the TODO/guest disposition; do not modify or rebuild COMMAND to force the WOW tests through it. Keep normal-environment DOS/launch witnesses in final acceptance. |
+| WINMINE/SOL long-play exit | T448 S13 has three short runs each and a bounded synthetic WINMINE run, none proving the intermittent report gone. | Preserve the reported direct Run16 game/worker failure and capture exact process/package/retirement evidence if it recurs; short passes cannot close it. |
+| SOL display/layout | The old 427x320 test-canvas failure was environment-dependent; T448 S13 measured a separate larger desktop, but did not capture the owner's original report geometry. | Do not change OpenNT geometry to force the small-canvas game to fit. Preserve the distinct owner-reported layout observation until its own geometry is established; conditional integration assertions must reflect the actual environment. |
+| WRITE | T448 final package has a four-observation startup frontier; the earlier T447 illegal-instruction report is not a current proven failure or a proven fix. | Verify real editing/save/normal exit and attribute any recurrence before assigning a component or guest cause. |
+| COM external peer and original guest defects | These are explicitly retained outside WOW execution in T448's closure and TODO. | Do not absorb into T449 or erase them as a side effect of WOW acceptance. |
+
+These dispositions use the later [T448 S13 audit](m0-t448-s13-uncertain-todo-audit.md)
+and [T448 S5 integrated acceptance](m0-t448-s5-integrated-acceptance.md), not
+the stale T447 transfer checkpoint alone. A passing subset is not an overall
+WOW-provider pass.
