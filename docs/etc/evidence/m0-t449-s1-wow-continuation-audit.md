@@ -106,6 +106,36 @@ assertions are useful M1/M5/M6 witnesses but do not establish NTMON-targeted
 task deletion or sibling survival. Existing historical pass records must be
 matched to these exact modes and package hashes before marking any row proved.
 
+## M1--M3 receive, reply and scheduler boundary
+
+Current `WU32InSendMessage` and `WU32ReplyMessage` directly call the host
+USER APIs; no nominated target is passed to either. The project bridge
+initializes the actual current thread's USER queue and uses non-removing
+`PeekMessage` with `PM_QS_SENDMESSAGE` to admit pending synchronous native
+callbacks. Guest Get/Peek retains posted messages and WM_QUIT. At native wait,
+`GetQueueStatus`'s high word detects already-present synchronous work before
+`MsgWaitForMultipleObjectsEx`; the continuation schedules the original task
+event without creating an SMS object or asserting a fabricated receive.
+
+The retained original `taskman.c` still contains `DirectedScheduleTask`,
+send/receive lock counts and a `xxxSleepTask` branch based on `psmsCurrent`.
+A repository-wide search finds no current production setter of `psmsCurrent`
+or `psmsSent` outside that original body; the header fields remain to compile
+the original structure. Thus the original private-SMS-specific branch is not
+shown to execute with a real modern host SMS. This is consistent with the
+already approved modern USER message/reply boundary, not proof that all NT4
+early-reply execution ordering is preserved. It is also not justification to
+construct a synthetic SMS or cast a native opaque value to the old structure.
+Original non-SMS task selection/yield and existing execution scopes remain in
+the path; mixed implicit/explicit receives, nested reply, pending wait and
+same/cross-worker progress must be verified against the accepted contract.
+
+There is no source basis in this pass to delete the bridge: the original
+`xxxReceiveMessages` provider requires private NT4 USER queue state that is
+not available as a composable current host interface. The project bridge is a
+public-host service adapter, not a replacement guest message queue; its
+non-removal and callback/execution boundaries are acceptance obligations.
+
 ## Object and native-call dependency reconciliation
 
 The current creation path is not just a post-create decoration:
