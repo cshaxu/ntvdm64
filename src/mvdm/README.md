@@ -1,5 +1,41 @@
 # mvdm
 
+MVDM-HOST-DIV-361 (T448 S12 candidate): `VrGetUserName` rejects an
+explicitly checked zero-byte capacity with the existing `NERR_BufTooSmall`
+result instead of underflowing `CX-1` and writing to the guest buffer.
+Unchecked `BX=0`, positive capacities, conversion and buffer release remain
+unchanged. The original-provider fixture covers zero, empty and nonempty
+names, exact bounds, unchecked mode and failure cleanup; the guest is unchanged.
+
+MVDM-HOST-DIV-360 (T448 S12 candidate): when `demsrch.c::FileFindClose`
+discards unconsumed directory-buffer entries after the underlying enumeration
+already reached its end, mark the search for its original reopen/reset path.
+Preserve other failure statuses and the empty-buffer end status. DOS INT21
+under buffer pressure and the real DEM provider verify the non-deletion case;
+the deleted reset-anchor limitation remains unresolved. Not yet published.
+
+MVDM-HOST-DIV-359 (T448 S12 candidate): `keyba.c` installs the actual 8042
+controller response in the output register and status without issuing a keyboard
+interrupt; command C0 supplies the emulated input-port byte. The existing
+NTVDM path otherwise returned stale scan output. Actual controller/PIC tests
+cover replies and EOI-owned queued input; this candidate is not yet published.
+
+MVDM-HOST-DIV-358 (T448 S12 candidate): `vga_prts.c` records CRTC cursor
+start register writes even when only bit 5 changes and applies that disable bit
+independently of scan-line geometry. It preserves the existing split-cursor
+geometry. Register readback and real frontend-frame verification are required
+before accepting the candidate; it is not yet published.
+
+MVDM-HOST-DIV-357 (T448 S12 candidate): original
+`softpc.new/base/keymouse/mouse_io.c::mouse_save_state` always stores a zero
+checksum, whereas its original restore routine validates the byte sum of the
+cookie and context. Keep the original format and restore validation; compute
+that same sum over the exact bytes saved. Source-proven real INT33 failure and
+test-buffer checksum control, current SoftPC comparison, rejected alternatives
+and planned negative/lifecycle tests are recorded in the
+[S12 evidence](../../docs/etc/evidence/m0-t448-s11-window-startup.md#int33-host-correction-proposal).
+This is a candidate with focused verification, not a fully verified or published repair.
+
 MVDM-HOST-DIV-356 (T448 S3 candidate): retain original SoftPC terminate,
 host_applClose and host_terminate bodies and their cleanup order, but obtain
 standalone service permission before their first resource/record destruction.
@@ -1044,7 +1080,7 @@ firmware include are removed; original retry/failure order is unchanged.
 | MVDM-HOST-DIV-227 | Supply the original WOW/DOSX `SEL_BIOSDATA` cache to CPU40. | CPU40 treated protected selector `0040h` as an ordinary LDT descriptor, but original DOSX reserves it as a fixed BIOS-data carrier. | Select the original `dxboot.asm` base `0x400`, 64-KiB writable ring-3 data cache for selector `0040h`. | `softpc.new/base/ccpu386/c_seg.c` |
 | MVDM-HOST-DIV-228 | Permit the original writable WOW DOSX `DXCODE` carrier. | The source executes its documented self-modifying initialization through selector `00CFh`; CCPU had made every protected code cache read-only. | Retain writability only for the original `SEL_DXCODE|STD_RING` cache while preserving normal protected-code write protection. | `softpc.new/base/ccpu386/c_seg.c` |
 | MVDM-HOST-DIV-229 | Restore the source-defined BOP `FDh` real-mode transition in the CPU40 product topology. | The CCPU graph compiled the BIOS BOP table without its monitor-gated `FDh` entry, so the original WOW DOSX five-word continuation frame fell through `illegal_bop` and later returned through poisoned stack storage. | Select the original BIOS table entry for x86 and restore the identical DOSX frame transfer in the existing CPU40 DPMI mode-switch owner, loading cached real-mode segments only after PE is clear. | `dpmi32/modesw.c`, `tools/build/New-T310OriginalSoftpcNinja.ps1` |
-| MVDM-HOST-DIV-171 | Write the original local computer/user result directly through `LPSTR_FROM_WORDS(ES:DI)`. | The historical x86 host alias has no explicit lifetime and cannot safely cross the current session boundary; the selected public NetAPI carrier returns the user name as Unicode without the historical global `UNICODE` compile setting. | Preserve the original public calls, character-capacity gate and register/status order; replace only the bounded copies with the worker lease. The added OEM conversion also checks positive declared capacity in bytes including NUL and returns existing `NERR_BufTooSmall` before writing; BX=0 unchecked and original CX=0 underflow remain unchanged. Lease refusal returns `ERROR_INVALID_ADDRESS`. | `vdmredir/vrnetapi.c`; `../vdmredir-dll/include/mvdm_redirector_guest_copy.h`; `../vdmredir-dll/source/mvdm_redirector_guest_copy.c` |
+| MVDM-HOST-DIV-171 | Write the original local computer/user result directly through `LPSTR_FROM_WORDS(ES:DI)`. | The historical x86 host alias has no explicit lifetime and cannot safely cross the current session boundary; the selected public NetAPI carrier returns the user name as Unicode without the historical global `UNICODE` compile setting. | Preserve the original public calls, character-capacity gate and register/status order; replace only the bounded copies with the worker lease. The added OEM conversion also checks positive declared capacity in bytes including NUL and returns existing `NERR_BufTooSmall` before writing; BX=0 remains unchecked. DIV-361 separately corrects the CX=0 underflow. Lease refusal returns `ERROR_INVALID_ADDRESS`. | `vdmredir/vrnetapi.c`; `../vdmredir-dll/include/mvdm_redirector_guest_copy.h`; `../vdmredir-dll/source/mvdm_redirector_guest_copy.c` |
 | MVDM-HOST-DIV-172 | Use `VrRemoteApi`'s locally synthesized computer name as the server name for the original RAP branch. | The original source explicitly copied the Unicode `NetWkstaGetInfo` result with `strcpy`, which is not a valid modern C string conversion. | Preserve the fixed local OEM temporary, `NetApiBufferFree`, and original later RAP branch; convert only the public Unicode result through `WideCharToMultiByte(CP_OEMCP)`. Conversion failure releases the original local allocation and returns `ERROR_INVALID_DATA`. | `vdmredir/vrremote.c` |
 | MVDM-HOST-DIV-176 | Write the original `I_CDNames` trio of guest far-pointer destinations after obtaining public workstation/user values. | The original treats the packed guest structure and all three targets as durable flat aliases. That crosses the current session boundary without a lease and is invalid on x64. | Keep original NetAPI calls, ANSI conversion, upper-casing and no-return-code behavior. The Redirector adapter reads each destination after the preceding write, clears each non-null target and copies through bounded leases, including destinations aliasing later pointer fields. | `vdmredir/vrnetapi.c`; `../vdmredir-dll/{include/mvdm_redirector_guest_copy.h,source/mvdm_redirector_guest_copy.c}` |
 | MVDM-HOST-DIV-177 | Diagnose the original `demOpen` canonical pathname and scalar file result during fixed-container permanent-COMMAND bootstrap recovery. | T353 proves the original command open fails but not whether NTDOS reached the default or `cmdconf`-generated shell pathname. Direct inspection must not retain `GetVDMAddr` as a host alias. | Retain original `demOpen` order, path, CreateFile, handle, CF and AX behavior. A default-off adapter helper receives only DS:SI numbers, independently makes a bounded read lease, records copied text/scalars, and releases before the original call continues. | `dos/dem/demfile.c`; `../ntvdm/softpc/{include/mvdm_softpc_termination.h,mvdm_softpc_termination.c}` |

@@ -493,7 +493,44 @@ guest startup stages. Correct proven project-owned causes and verify both
 actual launch paths and relevant controls before complete-package publication.
 No guest modification or unapproved semantic change.
 
-### S12: DOS and mouse evidence
+### S12: reproducible host TODO remediation
+
+The owner expands S12 from DOS/mouse triage to all reproducible host-side
+TODO defects, and S13 to not-necessarily-reproducible TODO investigation.
+This admission does not authorize guest changes or new semantic retreats.
+Freeze the TODO inventory at admission and reconcile every item to an owner,
+reproducer, repair, evidence and disposition. Do not equate an untested case
+with a pass or silently omit an item because it crosses an existing T plan.
+
+Confirmed host-side failure candidates, to revalidate and remedy as one
+bounded S12 group, are: INT33 saved-state checksum; VGA cursor disable bit;
+8042 C0 response; redirector username zero-capacity underflow; and the DEM indexed directory restart when the remembered
+name is deleted. Recover original logic and smallest dependency closure first;
+existing prior TODO wording requiring a matching upstream fix is superseded by
+the current source-proven original-host correction authority, not by a license
+to bypass exception registration or failure testing. Retain existing tests and
+add real repro, negatives, lifecycle, relevant build/profile coverage, and
+mirror-diff/provenance records for every correction.
+
+Audit the reproduced INT31 invalid-buffer witness as a mixed host/guest case:
+the owner previously accepted this specific out-of-contract guest limitation.
+Do not manufacture a new error semantic or patch guest; identify any separable
+host memory-safety repair and its compatibility evidence before acting. Other
+known style coverage limits and the NTVWM output sampler are not automatically
+bugs merely because they are observable: examine each actual TODO contract and
+fix any demonstrated reproducible host defect without silently dropping
+previously accepted boundaries. A test or device unavailable for verification
+is a named blocker, not a pass. The external COM row requires a suitable real
+peer or separately admitted virtual peer; its missing hardware is not itself a
+reproduced host defect.
+
+Original guest issues remain grouped in TODO. MEM's zero-value underflow is
+strongly supported but its private variable and separate original-DOS control
+remain unobserved; never treat that uncertainty as a proven host defect or a
+license to patch guest. Nested BAT redirection is owner-closed after paced and
+continuous valid witnesses passed, with historical failure retained.
+
+The earlier S12 investigation and criteria remain supporting evidence:
 
 Pin the current release and immutable guest hashes, inspect each original
 report and execute its actual relevant route with independent success and
@@ -507,7 +544,21 @@ already has source and prior failing evidence; a snapshot prototype failure
 is not by itself proof of a current ordinary-path regression. Do not modify
 or rebuild the guest, or suppress an actual failure.
 
-### S13: lifecycle and input witnesses
+### S13: not-necessarily-reproducible TODO investigation
+
+Audit every remaining uncertainty-bearing TODO, not just the four historical
+lifecycle/input witnesses: include reported SOL layout and intermittent direct
+WINMINE/SOL termination, the common-dialog witness, WRITE lifecycle, potential
+8253 timing issue and VDMREDIR zero-length edge. For every row retain original
+evidence and choose meaningful witness, controls and finite test budget;
+distinguish unknown cause, unavailable environment, confirmed defect and
+non-reproduction. Device-dependent COM, conditional suballocator rollback,
+NTW16S bounded coverage, NTVWM sampler, T271 and documentation migration must
+be inventoried with their real prerequisite/acceptance or engineering nature,
+not falsely declared reproduced or dropped. Original guest retained problems
+remain tracked without guest mutation. An S13 reproduction is not automatically
+repaired as S12 work after S12 closes: record its owner and appropriate follow-on
+unless governance explicitly admits the resulting repair.
 
 Use the existing exact witnesses and current published package to run bounded
 targeted controls for (1) native rapid interactive nonzero return, (2) two
@@ -517,6 +568,39 @@ RPC code, participant and console state, input records and failure-stage
 snapshots as applicable; never treat a timeout, missing prerequisite, or
 unrun case as a successful negative reproduction. A later passing run does
 not prove a historical failure was repaired or determine its cause.
+
+### Transferred TODO inventory
+
+The owner directs removal of entries taken into S12/S13 from TODO to avoid
+duplicate tracking. The complete transferred entries follow, unchanged in
+substance: this is active investigation or remediation, not a list of fixes.
+The S12/S13 categorization and accepted guest, device and semantic boundaries
+above govern disposition. MEM is an investigated guest-retained case and is
+not permission to modify guest. An unresolved item must be returned to TODO or
+assigned to its proper future packet before T448 closes; do not lose debt.
+
+| Priority | Transferred item | Existing admission path and evidence |
+| --- | --- | --- |
+| P2 | Owner confirms direct SOL startup succeeds, but reports incorrect window-content layout; the actual desktop and application geometry for that report were not captured. The separately investigated 427×320 test-desktop width limit follows original OpenNT maximum-tracking semantics and is not an adapter defect; see [SOL geometry evidence](../evidence/m0-t448-s9-console-title-handoff.md#sol-integration-geometry-follow-up). | Preserve the distinct owner report until its actual geometry is observed; do not presume it is the small-desktop case. Full gameplay and visual correctness are not certified by startup or a geometry-limited test. No guest changes or unapproved sizing overrides. |
+| P2 | One common-dialog witness exited after DestroyWindow before its second report. Host return was1; old evidence lacks guest AX and local IsWindow result. Later same-image runs and16 create/destroy rounds pass. Owner permits closure with this unlocated risk; no stable reproduction, introduced revision or causal repair is established. See [retained witness](../evidence/m0-t447-s2-scope-freeze.md#guest-observed-return-boundary). | Preserve the failing record and strict CDL2 return/identity assertions. On recurrence capture both guest results and task/object identity before attributing or repairing; no guest modification or weakened success condition. |
+| P2 | Owner reports that direct `run16 WINMINE` and `run16 SOL` can, after ordinary play, exit their WOW worker and application together. It is intermittent: bounded direct-game probes, including real click/reset churn, do not reproduce it. One separate temporary-worker WER record contains `0xC0000420` near WOW32, but its runtime package is not proven to be the owner's occurrence. | On recurrence preserve the exact package, process identity, WER/fail-fast trace and task-retirement trace before cleanup; correlate the failure stage to the direct `run16` worker before selecting a repair. Do not blame a Win3.1 PIF path, suppress the fail-fast, add a retry/delay, or change guest media. |
+| P3 | NTW16S retains bounded style coverage: CP1252 bitmap glyphs, native fallback for unsupported custom drawing/large scrollbar positions, and possible text clipping in fixed-layout host About dialogs. S9 does not implement automatic arbitrary-application reflow. See [component contract](../../../src/ntw16s-dll/README.md) and [S9 evidence](../evidence/m0-t445-s9-integrated-acceptance.md). | Admit concrete application/layout or Unicode cases with original geometry and lifecycle evidence; do not silently resize third-party controls or claim universal style coverage. |
+| P2 | Original NTVDM host mouse INT33 SaveState writes checksum zero, while RestoreState requires the summed cookie/context checksum. The real-provider guest probe reproduces failure and a test-buffer checksum control restores position; SoftPC currently retains the same defect. See [S12 evidence](../evidence/m0-t448-s11-window-startup.md#s12-resumed-first-bounded-witnesses). | Fix in the original host saver under the current source-proven original-host correction policy, with a registered minimal divergence, unchanged guest and real positive, invalid-cookie/checksum and lifecycle tests. No fix is yet implemented. |
+| P2 | One T433 S5 full-run rapid interactive burst returned outer81 after marker11; the old fixture did not preserve the direct nonzero code. Three S4/S5 comparison groups each,144 diagnostic rounds and final unchanged-package Full pass, but no causal repair is claimed. See [retained rapid observation](../evidence/m0-t433-s5-native-launcher-migration.md#retained-rapid-interactive-failure-and-further-evidence). | Preserve the failed report and failure-only code/worker diagnostics. On recurrence capture startup, real target result, final I/O and Console restoration separately before cleanup. Continue under an admitted lifecycle/integrated audit, not retries, longer sleeps, explicit exit0 or weakened assertions. Do not call it harness-only or an original-program exemption without evidence. |
+| P2 | Original VDMREDIR VrGetUserName compares len with `(DWORD)CX-1`; CX=0 underflows. The same expression exists in pinned OpenNT. No matching sibling SoftPC repair is established; its current source tree has no vrnetapi.c counterpart. See [origin gate](../evidence/m0-t430-s2-softpc-repair-gate.md). This inherited issue is distinct from project Unicode/OEM bounded-copy adaptation. | Preserve for later source-based research; do not invent an original-host correction now. Adopt only a subsequently verified matching SoftPC fix under the owner provenance gate. No confirmed product runtime failure is claimed. |
+| P2 | Unchanged original VGA `vga_prts.c` does not honor a bit-5-only cursor-disable write: the register assignment depends on changed start bits and `do_new_cursor` derives visibility from scan-line geometry. The register-only probe's first attempt preserves this failure; start beyond character height remains supported. See [source and frame evidence](../evidence/m0-t425-s8-worker-frame-deduplication.md#natural-route-closure-checks-r041-r044). | Admit an original VGA cursor-register contract repair separately if required; compare pinned source and test disable-bit, shape and position independently. No frontend/transport dedup or guest patch may hide it. |
+| P2 | One private two-session management close returned an RPC failure under the unified text-surface package. The original fixture did not retain its numerical error or live state, so production versus probe attribution is unproved. Four same-production-source repetitions pass; no causal repair is claimed. See [failure and replay record](../evidence/m0-t424-s12-logical-surface.md#final-verification-and-release). | Retain the failed logs and strengthened error/state diagnostics. On recurrence freeze exact binaries and capture authenticated request, worker/target/Console state before cleanup; admit only a proven owner-boundary repair. Do not weaken tests, add delays/retries, claim harness-only failure or classify it as an original guest limitation. |
+| P2 | One automated outer-CMD relaunch observation read the second `run16 command` as `un16 command`. Identical reruns and three consecutive published-package probes pass; six untouched-baseline controls also pass. Cause is not established as harness-only or production, and no repair is claimed. See [input observation and controls](../evidence/m0-t424-s8-ntsrv-service-separation.md#verification-progress). | On recurrence, freeze the exact package and input records, trace frontend ownership release/park, input consumption/return and outer CMD readiness before cleanup. Distinguish fixed-rhythm synthetic input from a genuine product handoff defect; admit the proven owner-boundary repair. Do not add Sleep, weaken assertions, declare an original-guest limitation or treat an isolated passing rerun as causal repair. |
+| P2 | NTVWM retains timed acquisition of active hidden Console output at 20 ms, as delivered by [T429 S7](../evidence/m0-t429-s7-native-acquisition-interval.md). The earlier [WinEvent probe](../evidence/m0-t423-s24-native-participant-graph.md#verification) found no real buffer-update or caret event for ordinary Console writes; no verified replacement output-change source is established. [T429 S8](../evidence/m0-t429-s8-shared-event-input.md) separates event-driven input and admission from this output capture interval; idle waits indefinitely. | Revisit output acquisition only when a reliable output-change signal or a different verified capture contract is available; preserve native text updates, cursor behavior and DOS/native handoff. This disclosed sampler exception does not apply to input, command acquisition, completion, handoff or other controllable events. |
+| P2 | Two historical pre-prompt startup timeouts have no exact failed-artifact manifest or live-worker snapshot. The final identified independent-frontend package passes DOS17 and strict cold starts; this does not prove the historical cause repaired. See [final disposition](../evidence/m0-t423-s3-hidden-console-ledger.md#historical-startup-timeout-disposition). | Preserve failed reports. On recurrence, stop the affected delivery, pin binaries/configuration and collect live worker threads/windows with the enhanced observer before cleanup; admit the demonstrated owner-boundary repair. Do not treat this unattributed observation as an original-guest exemption or invent a retry/timeout workaround. |
+| P2 | Owner-accepted original INT31/0500 invalid-buffer limitation: the original host writes its 36-byte memory-information structure without validating the complete ES span, and the original DOSX return path clears CF. A reduced-limit probe reproduces the write while deliberately violating the required valid-buffer precondition. See [DPMI32 evidence](../evidence/m0-t420-s38-dpmi32-capability-review.md). | Preserve the negative reproducer and immutable guest; no invented error policy or guest patch. This specific owner acceptance is not a blanket exemption for original host defects or project host/adapter failures. Normal-input successes do not prove invalid-span protection. |
+| P3 | Original suballocator partial callback failure rollback is incomplete: fixed-size FreeChunk restoration omits trailing bitmap bytes, and earlier successful commits/decommits are not undone. The selected original CPU40 SAS callbacks have no such fallible operations after local zeroing removal; this is not an active product failure. See [suballocator evidence](../evidence/m0-t420-s36-suballoc-capability-review.md#final-capability-ledger-and-closure). | Before admitting a fallible backing commit/decommit provider, verify whole-operation rollback of metadata and data, including compensation failure; do not patch only the bitmap or revive local clearing callbacks. |
+| P2 | Original selected NTVDM 8042 response branch invalidates its cached byte/output slot without installing `code_to_send`; C0 therefore returns stale output rather than initialized BF. Two sentinel cases reproduce it in the actual production controller. The verified sibling SoftPC C0 assignment alone cannot repair this branch; its port60 IRQ-clear correction is in excluded non-NTVDM code. Actual NTVDM read/EOI queue ownership passes the bounded PIC fixture. See [selected-branch evidence](../evidence/m0-t430-s3-controller-pic-boundary.md). | Preserve this original host response defect and reproducer until an existing matching SoftPC repair for the selected NTVDM contract is verified. No new original fix, bulk branch replacement or IRQ-clear-on-read policy is authorized. Timer, BIOS ISR and concurrency proof remain separate from the controlled host fixture. |
+| P1 | Full WRITE lifecycle remains unproved; preserve the malformed-arena/environment evidence and unaccepted provider/transition WIP without promoting it to a product baseline. | Owner review of the original-owner audit, followed by an active recovery packet. |
+| P2 | The original 8253 mode-zero elapsed-counter calculation may report subsequent terminal-count periods differently from NTVDMx64's comparative patch. No current workload reproduces a timer fault. | Admit only after a real DOS/Win16 timer symptom; then compare the exact mode-zero first-count and 65536-wrap contract with focused positive and negative tests. |
+| P1 | Complete real external COM transmit/receive acceptance for the retained original `rs232_io.c` INT 14h sender/receiver and `com.c` → `nt_com.c` provider path. The current host has only `COM3` (`usbser` USB Billboard), with CTS/DSR both low, so the original CTS gate correctly prevents external transmit; no product diff, overlay, provider or fake success is retained. The test-only direct-source mock covers the original provider's successful open/write/read/close contract but does not substitute for a real peer. | Supply a CTS-capable paired/null-modem or loopback serial endpoint, or explicitly admit a virtual serial-pair provider. Re-run the S30 real DOS guest transmit, host-driven receive, failure and teardown matrix; see [S30 external COM boundary](../evidence/m0-t420-s30-external-com-boundary.md). |
+| P2 | DEM indexed directory restart has no production VdmQueryDir binding; the unchanged original FileFindReset slow fallback fails when its remembered name was deleted. Real filesystem cases reproduce this limit; ordinary guest FCB first/next/end passes. See [directory-reset evidence](../evidence/m0-t430-s5-dem-directory-reset.md). | Preserve the original algorithm and missing fast-path/performance limit. A future admitted finite kernel-directory carrier must retain index/name/status and resource ordering, not a dummy callback or another slow scan. Adopt an original-host mutation correction only if a matching SoftPC repair is subsequently established. |
+| P2 | MEM.EXE reports a near-4 GiB largest executable size despite 655360 conventional bytes. A DOS EXEC probe observes the real MEM PSP and an output exactly matching zero-minus-PSP unsigned underflow; associated guest source declares the top-of-memory value as a zero dummy. See [S12 investigation](../evidence/m0-t448-s11-window-startup.md#s12-resumed-first-bounded-witnesses). | Preserve immutable guest; the private value and a separate original-DOS comparison remain unobserved. Do not attribute this to the host memory provider or patch the guest without evidence and authority. |
 
 For S12 and S13, choose finite case-specific rounds and documented resource,
 desktop and time budgets before each run. If valid, representative witness

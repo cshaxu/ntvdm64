@@ -1226,6 +1226,15 @@ FileFindClose(
 
     pFFindEntry->DirectoryHandle = 0;
 
+    /* DIVERGENCE(MVDM-HOST-DIV-360): reaching the end of the underlying
+     * directory does not mean that the retained buffer was consumed.  If
+     * reclamation discards unconsumed entries, the next search must reopen
+     * and reset rather than treating the old end status as final. */
+    if (pFFindEntry->FindBufferNext &&
+        (pFFindEntry->LastQueryStatus == STATUS_NO_MORE_FILES ||
+         pFFindEntry->LastQueryStatus == STATUS_NO_SUCH_FILE)) {
+        pFFindEntry->LastQueryStatus = STATUS_SUCCESS;
+    }
     if (pFFindEntry->FindBufferBase) {
         RtlFreeHeap(RtlProcessHeap(), 0, pFFindEntry->FindBufferBase);
         --NumFindBuffer;

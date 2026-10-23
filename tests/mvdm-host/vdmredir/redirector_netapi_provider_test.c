@@ -117,8 +117,16 @@ int main(void)
     check(ax == NERR_BufTooSmall && memory[0x40] == 0xa5 && freed == 1,
         "actual original character gate retained");
     init(0); VrGetUserName();
-    check(ax == 0 && carry == 0 && !memcmp(memory + 0x40, "user", 5) &&
-        freed == 1, "RETAINED_LIMIT original CX0 underflow is not repaired");
+    check(ax == NERR_BufTooSmall && carry == 1 && memory[0x40] == 0xa5 &&
+        freed == 1, "zero capacity rejects copy and frees exactly once");
+    user0.wkui0_username = L"";
+    init(0); VrGetUserName();
+    check(ax == NERR_BufTooSmall && carry == 1 && memory[0x40] == 0xa5 &&
+        freed == 1, "empty username still needs terminating byte");
+    init(1); VrGetUserName();
+    check(ax == 0 && carry == 0 && memory[0x40] == 0 && memory[0x41] == 0xa5 &&
+        freed == 1, "empty username fits one-byte capacity");
+    user0.wkui0_username = L"user";
     init(1); bx = 0; VrGetUserName();
     check(ax == 0x1234 && carry == 1 && !memcmp(memory + 0x40, "user", 5) &&
         freed == 1, "actual BX0 unchecked copy and registers retained");

@@ -788,6 +788,37 @@ static BOOL wait_for_report_marker_after(const char *path, const char *marker,
 
 /* End-to-end test only: public Console CAF, actual frontend Window, X return.
  * Refuse the user's desktop. No guest state or private product API is used. */
+static HWND find_owned_kvm_window(void)
+{
+    WCHAR launch[4096], expected[4096], image[4096];
+    WCHAR *end, *name;
+    HWND window = NULL;
+    DWORD pid, length;
+    HANDLE process;
+    if (!GetEnvironmentVariableW(L"MVDM_OBSERVER_CAF_OUTER_COMMAND", launch, 4096) || launch[0] != L'"')
+        return FindWindowW(L"LibKvmWindow", NULL);
+    end = wcschr(launch + 1, L'"');
+    if (!end) return NULL;
+    *end = L'\0';
+    name = wcsrchr(launch + 1, L'\\');
+    if (!name) return NULL;
+    *name = L'\0';
+    if (swprintf_s(expected, 4096, L"%ls\\ntcon.exe", launch + 1) < 0) return NULL;
+    while ((window = FindWindowExW(NULL, window, L"LibKvmWindow", NULL)) != NULL) {
+        if (!IsWindowVisible(window)) continue;
+        GetWindowThreadProcessId(window, &pid);
+        process = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, pid);
+        if (!process) continue;
+        length = 4096;
+        if (QueryFullProcessImageNameW(process, 0, image, &length) && !_wcsicmp(image, expected)) {
+            CloseHandle(process);
+            return window;
+        }
+        CloseHandle(process);
+    }
+    return NULL;
+}
+
 static BOOL console_caf_return(HANDLE input,const char *report_path,DWORD *frontend_out)
 {
     char desktop[96],path[MAX_PATH];DWORD needed,written,pid=0;
@@ -810,7 +841,7 @@ static BOOL console_caf_return(HANDLE input,const char *report_path,DWORD *front
     stage="find-kvm";
     deadline=GetTickCount64()+10000;
     do {
-        window=FindWindowW(L"LibKvmWindow",NULL);
+        window=find_owned_kvm_window();
         if(window && IsWindowVisible(window))break;
         Sleep(25);
     } while(GetTickCount64()<deadline);
@@ -820,6 +851,7 @@ static BOOL console_caf_return(HANDLE input,const char *report_path,DWORD *front
     process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,pid);
     if(!process || !QueryFullProcessImageNameW(process,0,image,&image_length))goto done;
     stage="verify-owner";
+    fprintf(report,"caf-window-owner-pid=%lu image=%ls\n",pid,image);
     { const WCHAR *name=wcsrchr(image,L'\\');
       if(!name || _wcsicmp(name+1,L"ntcon.exe"))goto done; }
     fprintf(report,"caf-visible-window=1 frontend=%lu\n",pid);

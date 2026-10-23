@@ -17,6 +17,7 @@ extern BOOL bDelayIntPending;
 extern ULONG DelayIrqLine;
 extern int output_full, pending_8042, input_port_val;
 extern char output_contents, KbdData;
+extern half_word cmd_byte_8042, op_port_remembered_bits;
 extern void ica_inb(io_addr, IU8 *), ica_outb(io_addr, IU8);
 extern IS32 ica_intack(IU32 *);
 
@@ -69,16 +70,22 @@ int main(void)
     DelayIrqLine = 0;
     bKbdEoiPending = FALSE; bForceDelayInts = FALSE;
 
-    /* Retained original limitation, not a desired-C0 pass. Sentinels prove
-     * the real selected NTVDM response branch doesn't install any reply. */
+    /* Controller replies replace stale output and do not raise a keyboard IRQ. */
     CHECK(input_port_val == 0xbf);
     output_contents = 0x5a; KbdData = 0x33;
-    kbd_outb(0x64, 0xc0); kbd_inb(0x60, &value);
-    CHECK(value == 0x5a && value != input_port_val);
+    before = eoi_calls;
+    kbd_outb(0x64, 0xc0);
+    kbd_inb(0x64, &value); CHECK(value & 1);
+    kbd_inb(0x60, &value);
+    CHECK(value == input_port_val && eoi_calls == before);
     output_contents = 0x27; KbdData = 0x44;
     kbd_outb(0x64, 0xc0); kbd_inb(0x60, &value);
-    CHECK(value == 0x27 && value != input_port_val);
-    fprintf(stderr, "RETAINED_LIMIT C0 returns stale output in selected original NTVDM branch\n");
+    CHECK(value == input_port_val);
+    kbd_outb(0x64, 0xaa); kbd_inb(0x60, &value); CHECK(value == 0x55);
+    kbd_outb(0x64, 0xab); kbd_inb(0x60, &value); CHECK(value == 0x00);
+    kbd_outb(0x64, 0x20); kbd_inb(0x60, &value); CHECK(value == cmd_byte_8042);
+    kbd_outb(0x64, 0xd0); kbd_inb(0x60, &value); CHECK(value == (half_word)(0xc1 + op_port_remembered_bits));
+    kbd_outb(0x64, 0xe0); kbd_inb(0x60, &value); CHECK(value == 0x02);
 
     KbdData = -1;
     /* Immediate controller replies are prepended, not a FIFO append. */
@@ -106,6 +113,22 @@ int main(void)
     CHECK(!output_full && !bKbdEoiPending && !pending_8042);
     CHECK(!(pic(0x0a) & 2) && !(pic(0x0b) & 2));
     fprintf(stderr, "PASS actual INTACK/EOI advances queued bytes and retires final slot\n");
+
+    /* A direct controller reply replaces the output byte without consuming
+     * the queued scan-code slot or fabricating an EOI. */
+    bDelayIntPending = FALSE; DelayIrqLine = 0;
+    AddTo6805BuffImm(0xfe); AddTo6805BuffImm(0xfa); continue_output();
+    CHECK(output_full && bKbdEoiPending);
+    before = eoi_calls;
+    kbd_outb(0x64, 0xc0); kbd_inb(0x60, &value);
+    CHECK(value == input_port_val && bKbdEoiPending && eoi_calls == before);
+    CHECK(ica_intack(&hook) == 9);
+    ica_outb(0x20, 0x20);
+    CHECK(eoi_calls > before && output_full && (unsigned char)output_contents == 0xfe);
+    ica_hw_interrupt(0, 1, 1);
+    CHECK(ica_intack(&hook) == 9);
+    ica_outb(0x20, 0x20);
+    CHECK(!output_full && !bKbdEoiPending && !pending_8042);
     sas_term(); (void)session_thread_unbind(&owner); (void)session_dispose(&owner);
     fprintf(stderr, "KEYBOARD_PIC_PROFILE assertions=%u failures=%u\n", assertions, failures);
     return failures ? 1 : 0;

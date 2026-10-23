@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param([Parameter(Mandatory)][string]$OutputRoot,
-    [string]$BuildCache='build/M0-T427/S2/r001')
+    [string]$BuildCache='build/.ninja/msvc-x86-release/worker')
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $out=[IO.Path]::GetFullPath((Join-Path $repo $OutputRoot))
@@ -24,8 +24,10 @@ if($LASTEXITCODE){throw 'Compile failed'}
 $generator=Get-Content (Join-Path $repo 'tools/build/New-T310OriginalSoftpcNinja.ps1') -Raw
 $closure=[regex]::Match($generator,'(?m)^\$fixtureHostLibraries = ''([^'']+)''')
 if(!$closure.Success){throw 'Selected fixture closure absent'}
+$extraClosure=[regex]::Match($generator,"(?m)^\`$fixtureHostLibraries \+= '([^']+)'$")
+if(!$extraClosure.Success){throw 'Selected fixture additional closure absent'}
 $dependencies=@('obj/tests/ccpu_bounded_execution_fixture_seams.obj','obj/tests/ccpu_host_fixture_seams.obj')+
-    $closure.Groups[1].Value.Split(' ')+@('common-root.lib','common-rpc.lib',
+    $closure.Groups[1].Value.Split(' ')+$extraClosure.Groups[1].Value.Trim().Split(' ')+@('common-root.lib','common-rpc.lib',
     'common-transport.lib','common-codec.lib','common-console.lib')
 $libraries=$dependencies | ForEach-Object {
     $p=Join-Path (Join-Path $repo $BuildCache) $_
@@ -60,5 +62,5 @@ try{
         scope='Actual original DEM functions and real NT directory calls; provider fixture, not guest INT21 proof'
     } | ConvertTo-Json | Set-Content (Join-Path $out 'result.json')
     Write-Output $result
-    if($p.ExitCode -or $result -notmatch 'assertions=47 failures=0'){throw 'DEM assertions failed'}
+    if($p.ExitCode -or $result -notmatch 'assertions=54 failures=0'){throw 'DEM assertions failed'}
 }finally{$p.Dispose()}

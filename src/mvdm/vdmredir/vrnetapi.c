@@ -481,7 +481,9 @@ Return Value:
          * is compiled without the historical global UNICODE switch. */
         len = (DWORD)wcslen(pInfo->wkui0_username);
         if (getBX()) {
-            itFits = (len) <= (DWORD)getCX()-1;
+            /* DIVERGENCE(MVDM-HOST-DIV-361): zero capacity cannot hold
+             * even the terminating byte; do not let CX-1 underflow. */
+            itFits = getCX() != 0 && (len) <= (DWORD)getCX()-1;
             if (itFits) {
                 SET_SUCCESS();
             } else {
@@ -493,7 +495,7 @@ Return Value:
         if (itFits) {
             /* DIVERGENCE(MVDM-HOST-DIV-171): bound the added OEM conversion
              * by bytes, including NUL. Keep the original BX=0 unchecked ABI
-             * and CX=0 underflow; neither authorizes an original guest fix. */
+             * while rejecting zero capacity before the copy. */
             status = mvdm_redirector_copy_wide_to_guest(getES(), getDI(),
                 pInfo->wkui0_username, getBX() && getCX() ? getCX() : UINT32_MAX);
             if (status != NERR_Success) SET_ERROR((WORD)status);

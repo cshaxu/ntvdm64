@@ -71,7 +71,12 @@ static void scenario(int mutation)
     check("original FCB formatter", !memcmp(fcb.FileExt, "TST", 3) &&
         fcb.ulFileSize == 2);
     closed = entry.DirectoryHandle;
+    entry.LastQueryStatus = mutation == 0 ? STATUS_UNSUCCESSFUL :
+        mutation == 1 ? STATUS_NO_SUCH_FILE : STATUS_NO_MORE_FILES;
+    check("remaining buffered entries before reclamation", entry.FindBufferNext != NULL);
     FileFindClose(&entry);
+    check("reclamation preserves errors and reopens normal end",
+        entry.LastQueryStatus == (mutation == 0 ? STATUS_UNSUCCESSFUL : STATUS_SUCCESS));
     check("close releases actual handle", !GetHandleInformation(closed, &flags) &&
         GetLastError() == ERROR_INVALID_HANDLE);
     check("close releases original buffer ownership", NumDirectoryHandle == 0 &&
@@ -117,6 +122,7 @@ int main(int argc, char **argv)
     FFINDLIST entry;
     WCHAR pattern[MAX_PATH];
     NTSTATUS status;
+    setvbuf(stdout, NULL, _IONBF, 0);
     if (argc != 2 || !MultiByteToWideChar(CP_ACP, 0, argv[1], -1, directory, MAX_PATH)) return 2;
     /* Runner supplies a new owned directory; never use a global TEMP wildcard. */
     if (!CreateDirectoryW(directory, NULL)) return 3;
@@ -129,6 +135,9 @@ int main(int argc, char **argv)
     check("undersized buffer original failure", status == STATUS_BUFFER_TOO_SMALL);
     check("open failure releases resources", !entry.DirectoryHandle &&
         !entry.FindBufferBase && NumDirectoryHandle == 0 && NumFindBuffer == 0);
+    entry.LastQueryStatus = STATUS_NO_MORE_FILES;
+    FileFindClose(&entry);
+    check("empty buffer preserves final status", entry.LastQueryStatus == STATUS_NO_MORE_FILES);
     dispose(&entry);
     check("owned directory cleanup", RemoveDirectoryW(directory) != 0);
     fprintf(stdout, "assertions=%d failures=%d\n", assertions, failures);

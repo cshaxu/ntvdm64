@@ -585,7 +585,7 @@ LOCAL VOID	do_new_cursor IFN0()
 		set_cursor_start(crt_controller.cursor_start.as_bfld.cursor_start);
 		set_cursor_height(get_char_height() - get_cursor_start());
 		set_cursor_visible(TRUE);
-		host_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start,
+		host_cursor_size_changed(crt_controller.cursor_start.as.abyte & 0x3f,
 					crt_controller.cursor_end.as_bfld.cursor_end);
 	}
 	else if (crt_controller.cursor_end.as_bfld.cursor_end < crt_controller.cursor_start.as_bfld.cursor_start) {
@@ -595,7 +595,7 @@ LOCAL VOID	do_new_cursor IFN0()
 		set_cursor_start(crt_controller.cursor_start.as_bfld.cursor_start);
 		set_cursor_height(get_char_height() - get_cursor_start());
 		set_cursor_visible(TRUE);
-		host_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start,
+		host_cursor_size_changed(crt_controller.cursor_start.as.abyte & 0x3f,
 					crt_controller.cursor_end.as_bfld.cursor_end);
 	}
 	else if (crt_controller.cursor_end.as_bfld.cursor_end == crt_controller.cursor_start.as_bfld.cursor_start) {
@@ -605,7 +605,7 @@ LOCAL VOID	do_new_cursor IFN0()
 		set_cursor_start1(0);
 		set_cursor_height1(0);
 		set_cursor_visible(TRUE);
-		host_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start,
+		host_cursor_size_changed(crt_controller.cursor_start.as.abyte & 0x3f,
 					crt_controller.cursor_end.as_bfld.cursor_end);
 	}
 	else if (crt_controller.cursor_end.as_bfld.cursor_end - 1 >= get_char_height()) {
@@ -615,7 +615,7 @@ LOCAL VOID	do_new_cursor IFN0()
 		set_cursor_start1(0);
 		set_cursor_height1(0);
 		set_cursor_visible(TRUE);
-		host_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start,
+		host_cursor_size_changed(crt_controller.cursor_start.as.abyte & 0x3f,
 					crt_controller.cursor_end.as_bfld.cursor_end);
 	}
 	else {
@@ -629,9 +629,14 @@ LOCAL VOID	do_new_cursor IFN0()
 		set_cursor_start1(0);
 		set_cursor_height1(0);
 		set_cursor_visible(TRUE);
-		host_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start,
+		host_cursor_size_changed(crt_controller.cursor_start.as.abyte & 0x3f,
 					crt_controller.cursor_end.as_bfld.cursor_end);
 	}
+
+	/* DIVERGENCE(MVDM-HOST-DIV-358): VGA CRTC bit 5 disables the cursor
+	 * independently of its scan-line geometry. */
+	if (crt_controller.cursor_start.as_bfld.cursor_off)
+		set_cursor_visible(FALSE);
 
 	if(( get_cur_y() < 0 ) ||
 			((( get_cur_y() + 1 ) * get_char_height()) > get_screen_height() ))
@@ -1413,17 +1418,8 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 					{
 #endif /* V7VGA */
 						new.value = value;
-						if (crt_controller.cursor_start.as_bfld.cursor_off)
-							set_cursor_visible(FALSE);
-						else
-							set_cursor_visible(TRUE);
-
-						if (crt_controller.cursor_start.as_bfld.cursor_start != 
-							((CURSOR_START*)&new)->as_bfld.cursor_start)
-						{
-							crt_controller.cursor_start.as.abyte = value;
-						}
-
+						/* DIV-358: retain bit-only writes as well as geometry. */
+						crt_controller.cursor_start.as.abyte = value;
 						do_new_cursor();
 #ifdef V7VGA
 					}

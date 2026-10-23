@@ -2,33 +2,43 @@
 
 ## Current Work
 
-**Active: M0 T448 S11**, Ordinary Mode, single implementer/reviewer. T448 remains open.
+**Active: M0 T448 S12**, Ordinary Mode, single implementer/reviewer. T448 remains open.
 
 ## Active Packet
 
-| Field | S11 CAF and WOW startup regression packet |
+| Field | S12 reproducible host TODO remediation packet |
 | --- | --- |
-| Identifier Mode | M0 T448 S11, Ordinary Mode; one implementer and independent self-review. |
-| Admission And Approval | Owner inserts urgent S11 for reported startup failures; prior DOS/mouse S11 becomes S12, former S12 becomes S13. |
-| Objective | Reproduce, locate and correct command CAF window absence and SOL/WOW window startup failure; verify actual affected paths. |
+| Identifier Mode | M0 T448 S12, Ordinary Mode; one implementer and independent self-review. |
+| Admission And Approval | Owner expands active S12 to fix all reproducible host-side TODO defects; S13 investigates the remaining not-necessarily-reproducible TODO cases. |
+| Objective | Audit the complete TODO by actual owner and reproducibility; repair evidenced reproducible host defects, with original-source exception records and real regression evidence. Preserve original guest limitations. |
 | Non-goals | No guest modification, rebuild or hot patch; no speculative fixes or unrelated lifecycle and WOW expansion. |
 | Reference Baseline | Published S9 package; S10 commits e097bccb0 and 25a507a7d, with full-size SOL gameplay still unverified. |
-| Files And ABI Surface | Launch, worker, frontend, desktop and source-owned boundaries as evidence requires; preserve ABI unless separately justified. |
+| Files And ABI Surface | Original host providers and project-owned adapters as proven by each case; preserve guest binaries and existing ABI unless separately justified. |
 | Applicable Rules | Reading set, execution, source policy, guest immutability, original-owner evidence, and documentation governance. |
-| Verification | Pin installed package; independently reproduce real command CAF and SOL startup, trace stage and visibility, test fixes and controls. |
-| Expected Markers | Visible CAF window, actual SOL/WOW startup, correct cleanup and verified full-package release. |
-| Asset Needs | Published package, immutable guest inputs, isolated desktop and existing observers. |
-| Reporting Requirements | Reproduction, root cause, correction, test coverage and remaining boundaries. Disposable build/t448-s11-regression budget 2 GiB and two hours; inspect after ten minutes without progress. |
+| Verification | Revalidate each original failing witness and owner; prove repairs with positive, negative, lifecycle and actual guest paths, run affected regressions, and distinguish unavailable from nonreproducible. |
+| Expected Markers | INT33 checksum, VGA cursor-disable, 8042 C0, redirector zero capacity and DEM deleted-name cases dispositioned with source, tests and mirror-diff accounting. |
+| Asset Needs | Published package, immutable guest inputs, isolated desktop and independently authored disposable probes. |
+| Reporting Requirements | Per TODO report classification, observed behavior, owner, fix or explicit remaining boundary and evidence. Disposable build/t448-s12 budget 2 GiB and two hours per run; inspect after ten minutes without progress. |
 | Stop Conditions | Unapproved semantic change, guest modification, or evidence requiring materially broader implementation. |
-| Exit Criteria | Reported regressions repaired and verified, full appropriate build/test/release, review, commit and push; await owner acceptance. |
-| Original Owner Request | Insert S11 for `run16 command` CAF window and `run16 sol` WOW window failures; move prior S11 to S12. |
-| Similar-Issue Sweep | Distinguish display/desktop, process startup, shared service interference and package integrity. |
+| Exit Criteria | All confirmed reproducible host defects in the frozen inventory repaired and tested, or an explicit authority/prerequisite blocker reported; full appropriate build, release, review, commit and push; await owner acceptance. |
+| Original Owner Request | Expand S12 to all reproducible host-side TODO repairs; use S13 for all not-necessarily-reproducible TODO investigation. |
+| Similar-Issue Sweep | Distinguish original guest defects, original host defects, adapter defects and invalid test witnesses. |
 
 [S11 investigation](../etc/evidence/m0-t448-s11-window-startup.md) reproduces
 the already documented original COMMAND large-environment lifetime defect on
 the current package. The specific post-prompt CAF report remains unverified;
 no product fix or publication is claimed. Prior DOS/mouse S12 observations
 are retained in that ledger, not treated as completed triage.
+
+S12 candidate DIV-357–361 repairs the INT33 checksum, VGA cursor-disable,
+8042 response, buffered directory-entry loss and redirector zero capacity.
+Focused provider/guest/frame tests pass. The four-fix candidate passes DOS17
+in both modes, WINMINE, SOL gameplay, the previous WRITE startup frontier and
+three CAF self-delete/echo routes; full-package tests for DIV-361 are pending.
+WRITE editing/exit remain unverified. The 13-image five-fix checkpoint is
+published and hash-verified; S12 remains open. DEM's deleted-name
+fallback remains unresolved: the original indexed kernel IRP lacks a documented
+user-mode equivalent. See the evidence ledger for alternatives and limits.
 
 S10 test-only implementation: classifier cases and MSVC probe compilation
 pass; private-desktop r5/r6 verify readiness and normal exit with explicit
@@ -135,6 +145,14 @@ Only the three approved five-second policies remain: bootstrap, empty-service
 retirement and original Console-close grace. Normal execution has no deadline;
 service loss permits local cleanup, never reconnection or task replay.
 
+## S11 Closure Record
+
+The owner reports current testing is normal and directs the return to S12.
+The [S11 investigation](../etc/evidence/m0-t448-s11-window-startup.md)
+retains the reproduced original COMMAND environment limitation and the
+unverified exact CAF report. No corrective product change, full publication,
+or causal repair is claimed; the known limitation remains in TODO.
+
 ## S10 Closure Record
 
 S10's bounded test-only implementation and TODO planning were delivered at
@@ -196,8 +214,8 @@ five-second policies; they are not current instructions or open S3 work.
 9. S9: native Console title initialization and handoff, preserving app-set and restored titles.
 10. S10: SOL environment-aware integration evidence and owner-directed TODO triage planning.
 11. S11: investigate and repair reported command CAF and SOL window startup failures.
-12. S12: reproduce and attribute three DOS/mouse issues; disposition only with evidence.
-13. S13: reproduce and attribute four lifecycle/input historical witnesses; disposition only with evidence.
+12. S12: audit all TODO and remediate reproduced host-side defects; preserve original guest boundaries.
+13. S13: investigate and test not-necessarily-reproducible TODO cases with explicit dispositions and evidence.
 
 The [proposal](../proposals/proposal-ntsrv-lifecycle-authority-001.md) owns the
 finite inherited gap list. Cross-group changes must preserve a coherent working

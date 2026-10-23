@@ -2554,6 +2554,7 @@ if (!waiting_for_next_8042_code)
 		case 0xc0:
 			/* Read Input Port */
 			/* But don't cause an interrupt */
+			code_to_send=input_port_val; /* DIVERGENCE(MVDM-HOST-DIV-359) */
 			code_to_send_valid=TRUE;
 			break;
 		case 0xd0:
@@ -2655,6 +2656,10 @@ if (code_to_send_valid)
         output_full = FALSE;
         KbdData = -1;
         nt_keyboard_history.output=0; /* DIV-317: direct controller response replaces scan output. */
+        /* DIV-359: expose the controller reply through port 60/status,
+         * without generating an IRQ or entering the scan-code queue. */
+        output_contents = (char)code_to_send;
+        kbd_status |= 1;
 #else /* NTVDM else */
 
 	/* Transfer 8042 command output to output buffer, overwriting value

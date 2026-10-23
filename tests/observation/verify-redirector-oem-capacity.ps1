@@ -63,8 +63,11 @@ if ($OriginalProviders) {
     $generator = Get-Content (Join-Path $root 'tools/build/New-T310OriginalSoftpcNinja.ps1') -Raw
     $fixture = [regex]::Match($generator, '(?m)^\$fixtureHostLibraries = ''([^'']+)''')
     if (!$fixture.Success) { throw 'Missing selected fixture closure.' }
+    $extraFixture = [regex]::Match($generator, "(?m)^\`$fixtureHostLibraries \+= '([^']+)'\r?$")
+    if (!$extraFixture.Success) { throw 'Missing extended fixture closure.' }
     $dependencies = @('obj/tests/ccpu_bounded_execution_fixture_seams.obj',
         'obj/tests/ccpu_host_fixture_seams.obj') + $fixture.Groups[1].Value.Split(' ') +
+        $extraFixture.Groups[1].Value.Trim().Split(' ') +
         @('original-mvdm-redir.lib','original-opennt-netlib.lib',
         'original-opennt-netapi-api.lib','original-opennt-xactsrv.lib',
         'common-root.lib','common-rpc.lib','common-transport.lib',
@@ -106,7 +109,7 @@ try {
         })
     } | ConvertTo-Json -Depth 4 | Set-Content (Join-Path $out 'result.json')
     Write-Output $text
-    $count = if ($OriginalProviders) { 10 } else { 15 }
+    $count = if ($OriginalProviders) { 12 } else { 15 }
     if ($p.ExitCode -ne 0 -or $text -notmatch "assertions=$count failures=0") {
         throw 'OEM/CD assertions failed.'
     }

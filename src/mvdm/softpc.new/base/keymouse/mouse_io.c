@@ -3720,6 +3720,7 @@ LOCAL void mouse_save_state IFN4(word *,m1,word *,m2,word *,m3,word *,m4)
 	 */
 	sys_addr		dest;
 	IS32			cs = 0;
+	IS32			i;
 #if defined(NTVDM) && defined(MONITOR)
 
     /* real CF resides in 16 bit code */
@@ -3739,6 +3740,12 @@ LOCAL void mouse_save_state IFN4(word *,m1,word *,m2,word *,m3,word *,m4)
 	note_trace0(MOUSE_VERBOSE, "mouse_io: mouse_save_state()");
 
 	dest = effective_addr (getES(), *m4);
+	/* DIVERGENCE(MVDM-HOST-DIV-357): match the existing restore checksum
+	 * over exactly the cookie and context bytes written to the guest. */
+	for (i = 0; i < MOUSE_CONTEXT_MAGIC_SIZE; i++)
+		cs += (IU8)mouse_context_magic[i];
+	for (i = 0; i < sizeof(MOUSE_CONTEXT); i++)
+		cs += ((IU8 *)&mouse_context)[i];
 
 	/* Save Cookie */
 	sas_stores(dest, (IU8 *)mouse_context_magic, MOUSE_CONTEXT_MAGIC_SIZE);
