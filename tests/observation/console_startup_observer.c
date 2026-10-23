@@ -926,16 +926,24 @@ static BOOL observer_management_console_close(const char *report_path,DWORD fron
     fclose(report);return exit_code==ERROR_SUCCESS;
 }
 
-/* A Console echoes ordinary character input only when its current foreground
- * reader consumes it.  This probes the exact cell at the pre-injection cursor
- * rather than treating restored mode flags as evidence of parent-shell echo. */
+/* Require a newly written character immediately before the current cursor.
+ * The parent can print its prompt after injection, moving the cursor away
+ * from the pre-injection location.  Comparing with a screen snapshot prevents
+ * a pre-existing character from being mistaken for echo. */
 static BOOL observer_console_char_echoes(HANDLE input,HANDLE output,char value,
                                          DWORD timeout_ms,BOOL *visible_out,
                                          COORD *position_out)
 {
-    INPUT_RECORD records[2]={0};CONSOLE_SCREEN_BUFFER_INFO before,after;DWORD written,count;
-    CHAR cell='\0';ULONGLONG deadline;
+    INPUT_RECORD records[2]={0};CONSOLE_SCREEN_BUFFER_INFO before,after;DWORD written,count,screen_size;
+    CHAR cell='\0',*screen;ULONGLONG deadline; COORD origin={0,0};
     if(!visible_out || !GetConsoleScreenBufferInfo(output,&before))return FALSE;
+    if(before.dwSize.X<=0 || before.dwSize.Y<=0)return FALSE;
+    screen_size=(DWORD)before.dwSize.X*(DWORD)before.dwSize.Y;
+    screen=(CHAR *)malloc(screen_size);
+    if(!screen)return FALSE;
+    if(!ReadConsoleOutputCharacterA(output,screen,screen_size,origin,&count) || count!=screen_size) {
+        free(screen);return FALSE;
+    }
     if(position_out)*position_out=before.dwCursorPosition;
     /* Use the same Console-record facts as the normal observer writer.
      * A lower-case ASCII value is not itself a virtual-key code, and omitting
@@ -949,15 +957,25 @@ static BOOL observer_console_char_echoes(HANDLE input,HANDLE output,char value,
     records[0].Event.KeyEvent.dwControlKeyState=NUMLOCK_ON;
     records[1]=records[0];records[1].Event.KeyEvent.bKeyDown=FALSE;
     if(observer_pty_input) {
-        if(!observer_pty_write(&value,1))return FALSE;
-    } else if(!WriteConsoleInputA(input,records,2,&written) || written!=2)return FALSE;
+        if(!observer_pty_write(&value,1)){free(screen);return FALSE;}
+    } else if(!WriteConsoleInputA(input,records,2,&written) || written!=2){free(screen);return FALSE;}
     deadline=GetTickCount64()+timeout_ms;*visible_out=FALSE;
     do {
         if(GetConsoleScreenBufferInfo(output,&after) &&
-           ReadConsoleOutputCharacterA(output,&cell,1,before.dwCursorPosition,&count) &&
-           count==1 && cell==value) {*visible_out=TRUE;return TRUE;}
+           after.dwSize.X==before.dwSize.X && after.dwSize.Y==before.dwSize.Y) {
+            COORD pos=after.dwCursorPosition;
+            if(pos.X>0) --pos.X;
+            else if(pos.Y>0) {--pos.Y;pos.X=after.dwSize.X-1;}
+            else continue;
+            if(screen[(DWORD)pos.Y*(DWORD)before.dwSize.X+(DWORD)pos.X]!=value &&
+               ReadConsoleOutputCharacterA(output,&cell,1,pos,&count) &&
+               count==1 && cell==value) {
+                *visible_out=TRUE;if(position_out)*position_out=pos;free(screen);return TRUE;
+            }
+        }
         Sleep(20);
     } while(GetTickCount64()<deadline);
+    free(screen);
     return TRUE;
 }
 
@@ -2489,6 +2507,7 @@ int main(int argc, char **argv)
             if(close_ok && observer_console_char_echoes(input,output,'q',750,&immediate,
                                                          &character_position)) {
                 char screen_path[MAX_PATH];
+                if(immediate)active_character_position=character_position;
                 (void)GetNumberOfConsoleInputEvents(input,&queue_after_key);
                 snprintf(screen_path,sizeof(screen_path),"%s.caf-before-enter.txt",argv[3]);
                 write_console_snapshot(output,screen_path);

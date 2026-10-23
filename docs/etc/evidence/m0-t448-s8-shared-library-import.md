@@ -1,5 +1,39 @@
 # T448 S8 public-library import
 
+## S14 synchronization and verification
+
+Owner approves byte-exact synchronization of the selected SoftPC public
+closure. Read-only upstream HEAD `7d3b711d0113992984cb7eeed613097ebf750168`
+changes only selected `kvm-base/component.c` and `worker_interface.h` since
+the S8 pin: the identity allocator becomes component-private, removing its
+external declaration and internal null checks. No repository consumer outside
+that component calls it. All 52 selected local blobs and manifest SHA-256s
+match the new pinned Git objects. `libvterm` is a separate library.
+
+Full build r1 failed during compiler detection (wrong CMake/PDB mismatch); r2
+using Kitware CMake passed all 13 images and the second-build check with 1458
+unchanged intermediates. Candidate package r1 matches all 13 built hashes.
+Six x86 and six x64 frontend fixtures passed. CAF NaturalExit and SelfDelete
+passed; ExternalClose cmd and ntmon passed, but command initially failed its
+active-buffer pre-Enter echo assertion. The baseline comparison also failed
+the same strict gate. Both candidate and baseline before-Enter snapshots show
+`q` on the newly printed outer prompt at row 5, while the test recorded a
+pre-injection cursor on row 4. The observer is corrected to check a newly
+written character immediately before the current cursor against its pre-input
+screen snapshot. This handles a parent prompt printed after input without
+accepting an already-present character as echo. The corrected observer passes
+all eight real NaturalExit, ExternalClose and SelfDelete cases for the
+applicable cmd, command and ntmon targets. Original failed records are retained;
+this does not prove that every historical echo problem was an observer race.
+DOS Console 17 cases passed. The first WINMINE probe build failed because the
+temporary harness removed its TEMP directory before compiling; a separately
+run corrected-environment WINMINE gameplay witness passed. All tests use the
+unchanged staged guest. The complete 13-image candidate is published to both
+assets/release and O:/winnt/system32, with hashes checked against the candidate;
+guest files were not changed. Disposable evidence and candidate remain under
+`build/t448-s14`. Owner acceptance remains pending. Negative injection for the
+corrected observer and full-size SOL gameplay were not rerun in this stage.
+
 ## Scope and provenance
 
 Owner admits S8 after the [S7 audit](m0-t448-s7-shared-library-import-audit.md).

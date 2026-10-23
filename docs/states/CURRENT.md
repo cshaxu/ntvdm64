@@ -2,29 +2,33 @@
 
 ## Current Work
 
-**Active: M0 T448 S13**, Ordinary Mode, single implementer/reviewer. T448 remains open.
-S13's bounded investigation is ready for owner review; S13 is not yet closed.
+**Active: M0 T448 S14**, Ordinary Mode, single implementer/reviewer. T448 remains open.
+S13 reached its bounded investigation and handoff; owner functional acceptance is not inferred.
+S14's byte-exact SoftPC import, build, targeted tests and complete 13-image
+publication are complete; owner acceptance remains pending. The corrected CAF
+observer and its remaining test limitations are recorded in the
+[S14 evidence](../etc/evidence/m0-t448-s8-shared-library-import.md#s14-synchronization-and-verification).
 
 ## Active Packet
 
-| Field | S13 uncertain TODO investigation packet |
+| Field | S14 SoftPC public-library synchronization packet |
 | --- | --- |
-| Identifier Mode | M0 T448 S13, Ordinary Mode; one implementer and independent self-review. |
+| Identifier Mode | M0 T448 S14, Ordinary Mode; one implementer and independent self-review. |
 | Candidate Proposal | [NTSRV lifecycle authority](../proposals/proposal-ntsrv-lifecycle-authority-001.md). |
-| Admission And Approval | Owner accepts S12 and admits S13 to investigate the remaining not-necessarily-reproducible TODO cases. |
-| Objective | Reconcile the transferred inventory, reproduce representative uncertain cases and establish owner, evidence and bounded disposition without treating nonreproduction as repair. |
-| Non-goals | No guest modification, rebuild or hot patch; no speculative repairs, semantic retreat, invented retries, or unrelated WOW implementation. |
-| Reference Baseline | S12 published 13-image package at commit 36e8d41f6; [S12 evidence](../etc/evidence/m0-t448-s11-window-startup.md) retains the test coverage and mutation limits. |
-| Files And ABI Surface | Investigation records, focused test fixtures and scripts; no production ABI change without appropriately admitted repair. |
-| Applicable Rules | Reading set, execution, source policy, guest immutability, original-owner evidence, and documentation governance. |
-| Verification | Pin package and guest identity; exercise valid bounded witnesses and controls, inspect source and historical logs; preserve missing prerequisites and actual failure diagnostics. |
-| Expected Markers | Each transferred uncertainty has a witnessed, nonreproduced, unavailable, retained-boundary or separately planned disposition with evidence and explicit limits. |
-| Asset Needs | Published package, immutable guest inputs, isolated desktop, existing tests and independently authored disposable probes where needed. |
-| Reporting Requirements | Per case identify original evidence, scope and actual result; no nonreproduction claim for unavailable or invalid tests. Disposable build/t448-s13 budget 2 GiB and two hours per run; inspect after ten minutes without progress. |
-| Stop Conditions | Unapproved semantic change, guest modification, or evidence requiring materially broader implementation. |
-| Exit Criteria | Finite transferred inventory reconciled without lost debt, valid required checks completed or unavailable boundaries recorded, evidence reviewed, governance checked, committed and pushed; await owner acceptance. |
-| Original Owner Request | Accept and close S12; admit S13 to investigate the remaining uncertain issues. |
-| Similar-Issue Sweep | Distinguish intermittent product failures, historical failed observations, accepted capability limits, missing device prerequisites and unrelated engineering work. |
+| Admission And Approval | Owner approves a new S to import the current SoftPC public library unchanged and perform necessary integration. S13 investigation and ownership handoff are complete; functional acceptance remains separate. |
+| Objective | Pin and import the selected public-library closure byte-for-byte, adapt consumers only if necessary, build and verify coherent publication. |
+| Non-goals | No guest changes, upstream worktree writes, unrelated library expansion, semantic retreat or unapproved timeout. |
+| Reference Baseline | S12 13-image release at 36e8d41f6; S8 library pin 0d9f1803ee04bd89bd6150306912a3e8674d0a83. |
+| Files And ABI Surface | NTCON selected public library, provenance manifest, affected consumers/tests and release evidence. |
+| Applicable Rules | Reading set, execution, source policy, guest immutability and documentation governance. |
+| Verification | Compare every selected source blob to pinned SoftPC; dependency/API audit, builds, incremental, focused and relevant real package tests, full release/hash and documentation gates. |
+| Expected Markers | Zero selected-file import diffs; actual compatibility and test coverage recorded; coherent installed and asset hashes. |
+| Asset Needs | SoftPC read-only Git objects, stable Ninja caches, existing product package and isolated fixtures. |
+| Reporting Requirements | Record source revision, exact changes, tests and limitations. Disposable build/t448-s14 budget 2 GiB and two hours per run; inspect after ten minutes without progress. |
+| Stop Conditions | Unapproved semantic change, guest modification, or incompatible upstream closure. |
+| Exit Criteria | Review, required verification, coherent publication, commit/push and owner acceptance. |
+| Original Owner Request | Approve a new S to import the SoftPC library unchanged with necessary adaptation. |
+| Similar-Issue Sweep | Check all selected upstream components and actual callers, not just the previously identified two files. |
 
 [S11 investigation](../etc/evidence/m0-t448-s11-window-startup.md) reproduces
 the already documented original COMMAND large-environment lifetime defect on
@@ -44,7 +48,7 @@ as do full DOS, WOW and CAF regressions. The 13-image package is published and
 hash-verified at both destinations. The original indexed kernel IRP has no
 documented user-mode equivalent; arbitrary deletion, rename and index reuse
 remain outside the approved hint's equivalence claim. See the [evidence ledger](../etc/evidence/m0-t448-s11-window-startup.md).
-The owner accepted S12; T448 remains open and S13 is now active.
+The owner accepted S12; T448 remains open.
 
 S13's inherited-environment DOS startup failure has now been reproduced with
 a host-only read-only diagnostic: the original COMMAND environment copy
@@ -56,8 +60,8 @@ COM prerequisite and later WOW32 WRITE ownership are also recorded there.
 The [S13 handoff](../etc/evidence/m0-t448-s13-uncertain-todo-audit.md#remaining-work-handoff)
 assigns unresolved items once to TODO or the queued WOW32 continuation.
 The owner retains the reproduced COMMAND case as a known original guest
-limitation in TODO, without a host workaround; S13 remains open until its
-investigation delivery is accepted.
+limitation in TODO, without a host workaround. S13's bounded handoff is
+complete; owner functional acceptance is not inferred.
 
 Earlier stages' complete status and chronology are preserved in the indexed
 [pre-compaction snapshot](https://github.com/cshaxu/ntvdm64/blob/ba156ef61/docs/states/CURRENT.md).
@@ -85,6 +89,7 @@ five-second policies; they are not current instructions or open S3 work.
 11. S11: investigate and repair reported command CAF and SOL window startup failures.
 12. S12: audit all TODO and remediate reproduced host-side defects; preserve original guest boundaries.
 13. S13: investigate and test not-necessarily-reproducible TODO cases with explicit dispositions and evidence.
+14. S14: synchronize the selected SoftPC public-library closure unchanged and verify integration.
 
 The [proposal](../proposals/proposal-ntsrv-lifecycle-authority-001.md) owns the
 finite inherited gap list. Cross-group changes must preserve a coherent working
@@ -133,6 +138,15 @@ Bounded test-only delivery; full-size gameplay and owner acceptance remain separ
 ## S11 Closure Record
 
 Owner reports normal testing; no causal repair claimed: [S11 ledger](../etc/evidence/m0-t448-s11-window-startup.md).
+
+## S13 Closure Record
+
+The owner-directed investigation reached its finite evidence and ownership
+handoff; reproduced guest limitations remain in TODO and unresolved WOW32
+work belongs to the queued continuation. This is a bounded handoff, not an
+assertion that every historical failure was reproduced or fixed. See the
+[S13 investigation and handoff](../etc/evidence/m0-t448-s13-uncertain-todo-audit.md).
+Owner functional acceptance was not inferred.
 
 ## S12 Closure Record
 

@@ -1,6 +1,6 @@
 {
   "source": "softpc (shared nxvm four-component library)",
-  "revision": "0d9f1803ee04bd89bd6150306912a3e8674d0a83",
+  "revision": "7d3b711d0113992984cb7eeed613097ebf750168",
   "license": "MIT; Copyright (c) 2026 Neko; see lib/LICENSE.nxvm",
   "licenseSha256": "BF37952D329B48CEE37B42D90B96D30DC049940902E42D69338A19CF72003543",
   "destination": "src/ntcon-exe",
@@ -73,7 +73,7 @@
     },
     {
       "path": "lib/kvm-base/component.c",
-      "sha256": "4172CDC847A6E5FCBF76855F352C92B159C09224B62300E15D1026D96364DE8F",
+      "sha256": "1CC7F7BCF2C54097EFCFB4E55651B02E7599339FB4AD488E049349391AB4812B",
       "compile": true
     },
     {
@@ -133,7 +133,7 @@
     },
     {
       "path": "lib/kvm-base/worker_interface.h",
-      "sha256": "C8095B3E0B530E8C73CE0DB9B53FCD10E55642206CF663A89CEC4FF6B42487B4",
+      "sha256": "E33095C2D18957BCBCE9518FC1B7AE2A333D5FC5E500FA39D9AF6B188787288B",
       "compile": false
     },
     {
