@@ -197,6 +197,10 @@ the combined inherited/control trace is
 
 ## Owner-directed S14 handoff
 
+The owner subsequently declined the host workaround and directed that the
+case remain solely as the known original guest limitation in TODO. The S14
+handoff described below is superseded; no S14 implementation is authorized.
+
 The owner requests that S13-reproduced work be packaged for S14. The reproduced
 inherited-environment startup failure and its DOS/native relaunch scenarios
 form one bounded handoff, with the direct attribution and control limitations

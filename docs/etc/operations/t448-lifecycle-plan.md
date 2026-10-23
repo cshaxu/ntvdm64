@@ -577,6 +577,11 @@ not prove a historical failure was repaired or determine its cause.
 
 ### S14: S13-reproduced startup failure
 
+**Superseded by owner decision:** do not pursue the proposed host workaround
+or allocate S14 for this case. Retain the existing original-guest P1 in TODO
+and its evidence; do not claim the defect fixed. The following is historical
+planning, not authorized work.
+
 Owner-directed follow-on, planned rather than an additional active packet:
 the current inherited-environment DOS startup fails before its first prompt.
 The outer-CMD relaunch and rapid DOS/native sequences are witnessed scenarios,
