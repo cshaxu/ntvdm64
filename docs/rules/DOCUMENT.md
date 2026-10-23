@@ -28,6 +28,13 @@ chronology belongs in `etc/evidence/` and is linked from Status. A complete S
 brief belongs in the fixed Status packet; a multi-S working plan belongs under
 `etc/operations/`.
 
+Keep `states/CURRENT.md` at or below 16 KiB (16,384 bytes) in normal operation.
+If a current packet temporarily needs more space, keep the active facts intact,
+explain the exception in the status record, and move detailed or closed-stage
+chronology to indexed evidence or history as soon as practical. The existing
+32 KiB hard limit still applies; the 16 KiB target is not a reason to discard
+evidence or omit active obligations.
+
 ## Migration Exception
 
 Pre-governance records are retained only while they have a declared migration
@@ -49,7 +56,7 @@ The documentation-governance gate is mandatory for every P and Td closure. It
 rejects an extra or missing principal path, an unindexed `etc/` Markdown
 record, a broken relative path or heading anchor, encoding corruption, an
 invalid active/intermission state, or a `CURRENT.md` control document over 32
-KiB. The size limit is a control-plane limit, not permission to discard
+KiB. It warns above the normal 16 KiB target. The size limit is a control-plane limit, not permission to discard
 history: move detailed closed chronology to indexed evidence or history.
 
 The gate validates structure, not the truth of free prose. Closure review must

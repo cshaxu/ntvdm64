@@ -1,5 +1,9 @@
 # Supporting Material
 
+[T448 pre-compaction status snapshot](https://github.com/cshaxu/ntvdm64/blob/ba156ef61/docs/states/CURRENT.md)
+preserves the complete status and historical chronology before the 16 KiB
+normal-target cleanup. It is historical evidence, not a second active packet.
+
 [T448 lifecycle working design](operations/t448-lifecycle-plan.md) records the
 approved S grouping, finite transitions and pending service-loss boundary.
 [S1 source audit](evidence/m0-t448-s1-lifecycle-audit.md) records actual call

@@ -175,8 +175,12 @@ foreach ($relativePath in $requiredH2.Keys) {
 }
 
 $statusPath = Join-Path $docs 'states/CURRENT.md'
-if ((Get-Item -LiteralPath $statusPath).Length -gt 32768) {
+$statusBytes = (Get-Item -LiteralPath $statusPath).Length
+if ($statusBytes -gt 32768) {
     throw 'docs/states/CURRENT.md exceeds its 32 KiB control-plane limit.'
+}
+if ($statusBytes -gt 16384) {
+    Write-Warning 'docs/states/CURRENT.md exceeds its normal 16 KiB target; document the temporary exception and compact it when practical.'
 }
 $status = Get-Content -LiteralPath $statusPath -Raw
 foreach ($heading in @('## Current Work', '## Current Technical Baseline')) {
