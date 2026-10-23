@@ -62,5 +62,5 @@ try{
         scope='Actual original DEM functions and real NT directory calls; provider fixture, not guest INT21 proof'
     } | ConvertTo-Json | Set-Content (Join-Path $out 'result.json')
     Write-Output $result
-    if($p.ExitCode -or $result -notmatch 'assertions=54 failures=0'){throw 'DEM assertions failed'}
+    if($p.ExitCode -or $result -notmatch 'assertions=115 failures=0'){throw 'DEM assertions failed'}
 }finally{$p.Dispose()}

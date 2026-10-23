@@ -19,6 +19,7 @@
 #include <mvdm.h>
 #include <memory.h>
 #include <nt_vdd.h>
+#include "../../../ntvdm-exe/session/dem_restart_hint.h"
 
 extern BOOL IsFirstCall;
 
@@ -56,6 +57,9 @@ typedef struct _FILEFINDLIST {
     PVOID          FindBufferNext;
     ULONG          FindBufferLength;
     FFINDDOSDATA   DosData;
+    /* DIVERGENCE(MVDM-HOST-DIV-362): bounded restart hint when a buffered
+     * successor survives reclamation but the remembered entry is deleted. */
+    DEM_RESTART_HINT RestartHint;
     USHORT         usSrchAttr;
     BOOLEAN        SupportReset;
     UNICODE_STRING PathName;
@@ -1235,7 +1239,10 @@ FileFindClose(
          pFFindEntry->LastQueryStatus == STATUS_NO_SUCH_FILE)) {
         pFFindEntry->LastQueryStatus = STATUS_SUCCESS;
     }
+    /* DIVERGENCE(MVDM-HOST-DIV-362): retain only the first unconsumed
+     * directory entry, not the discarded buffer or directory handle. */
     if (pFFindEntry->FindBufferBase) {
+        DemCaptureRestartHint(&pFFindEntry->RestartHint, pFFindEntry->FindBufferNext);
         RtlFreeHeap(RtlProcessHeap(), 0, pFFindEntry->FindBufferBase);
         --NumFindBuffer;
         }
@@ -1363,6 +1370,15 @@ FileFindReset(
                             );
 
            if (!NT_SUCCESS(Status)) {
+               /* DIVERGENCE(MVDM-HOST-DIV-362): retry only a missing
+                * anchor at end of enumeration, leaving a matching hint
+                * unconsumed for the original FileFindNext. */
+               if (pFFindEntry->RestartHint.Length &&
+                   (Status == STATUS_NO_MORE_FILES || Status == STATUS_NO_SUCH_FILE)) {
+                   return DemFindRestartHint(&pFFindEntry->RestartHint,
+                       pFFindEntry->DirectoryHandle, pFFindEntry->FindBufferBase,
+                       pFFindEntry->FindBufferLength, &pFFindEntry->FindBufferNext);
+               }
 #if DBG
                if (fShowSVCMsg & DEMFILIO) {
                    sprintf(demDebugBuffer, "FFReset Status %x\n", Status);

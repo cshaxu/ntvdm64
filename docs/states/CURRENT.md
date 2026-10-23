@@ -10,7 +10,7 @@
 | --- | --- |
 | Identifier Mode | M0 T448 S12, Ordinary Mode; one implementer and independent self-review. |
 | Candidate Proposal | [NTSRV lifecycle authority](../proposals/proposal-ntsrv-lifecycle-authority-001.md). |
-| Admission And Approval | Owner expands active S12 to fix all reproducible host-side TODO defects; S13 investigates the remaining not-necessarily-reproducible TODO cases. |
+| Admission And Approval | Owner expands active S12 to fix all reproducible host-side TODO defects; S13 investigates the remaining not-necessarily-reproducible TODO cases. Owner approves the bounded deleted-anchor successor-hint design and its documented mutation limits. |
 | Objective | Audit the complete TODO by actual owner and reproducibility; repair evidenced reproducible host defects, with original-source exception records and real regression evidence. Preserve original guest limitations. |
 | Non-goals | No guest modification, rebuild or hot patch; no speculative fixes or unrelated lifecycle and WOW expansion. |
 | Reference Baseline | Published S9 package; S10 commits e097bccb0 and 25a507a7d, with full-size SOL gameplay still unverified. |
@@ -31,16 +31,19 @@ the current package. The specific post-prompt CAF report remains unverified;
 no product fix or publication is claimed. Prior DOS/mouse S12 observations
 are retained in that ledger, not treated as completed triage.
 
-S12 candidate DIV-357–361 repairs the INT33 checksum, VGA cursor-disable,
+S12 DIV-357–361 repairs the INT33 checksum, VGA cursor-disable,
 8042 response, buffered directory-entry loss and redirector zero capacity.
 Focused provider/guest/frame tests pass. The four-fix candidate passes DOS17
 in both modes, WINMINE, SOL gameplay, the previous WRITE startup frontier and
 three CAF self-delete/echo routes. DIV-361 full-package tests also pass;
 WRITE editing/exit remain unverified. The 13-image five-fix checkpoint is
-published and hash-verified; S12 remains open. DEM's deleted-name
-fallback remains unresolved: the original indexed kernel IRP lacks a documented
-user-mode equivalent. See the [evidence ledger](../etc/evidence/m0-t448-s11-window-startup.md)
-for alternatives and limits; no new semantic boundary has been approved.
+published and hash-verified. DIV-362 implements the owner-approved bounded
+successor hint for the deleted-name fallback; provider and real DOS cases pass,
+as do full DOS, WOW and CAF regressions. The 13-image package is published and
+hash-verified at both destinations. The original indexed kernel IRP has no
+documented user-mode equivalent; arbitrary deletion, rename and index reuse
+remain outside the approved hint's equivalence claim. See the [evidence ledger](../etc/evidence/m0-t448-s11-window-startup.md).
+S12 awaits owner acceptance; T448 remains open.
 
 Earlier stages' complete status and chronology are preserved in the indexed
 [pre-compaction snapshot](https://github.com/cshaxu/ntvdm64/blob/ba156ef61/docs/states/CURRENT.md).
@@ -119,12 +122,12 @@ Owner reports normal testing; no causal repair claimed: [S11 ledger](../etc/evid
 
 ## Current Technical Baseline
 
-The five-fix 13-image checkpoint was built, tested, published and hash-verified;
+The six-fix 13-image checkpoint was built, tested, published and hash-verified;
 the [S12 ledger](../etc/evidence/m0-t448-s11-window-startup.md) and
 [release manifest](../../assets/release/release-manifest.json) record its
 identity, actual test coverage and limits. Guest binaries remain unchanged.
-S12 is not closed and the unresolved directory-reset semantic choice is not
-approval to change behavior.
+S12 is not closed pending owner acceptance. WRITE editing and exit remain
+unverified; original guest limitations and S13's investigation remain separate.
 
 ## Recent M0 Closures
 

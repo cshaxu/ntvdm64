@@ -48,7 +48,7 @@ static void scenario(int mutation)
     FFINDLIST entry;
     FFINDDOSDATA first, next;
     SRCHBUF fcb;
-    WCHAR pattern[MAX_PATH], remembered[MAX_PATH], other[MAX_PATH];
+    WCHAR pattern[MAX_PATH], remembered[MAX_PATH], other[MAX_PATH], hint[MAX_PATH];
     HANDLE closed;
     DWORD flags;
     NTSTATUS status;
@@ -75,6 +75,13 @@ static void scenario(int mutation)
         mutation == 1 ? STATUS_NO_SUCH_FILE : STATUS_NO_MORE_FILES;
     check("remaining buffered entries before reclamation", entry.FindBufferNext != NULL);
     FileFindClose(&entry);
+    check("reclamation saves bounded successor", entry.RestartHint.Length > 0 &&
+        entry.RestartHint.Length < sizeof(hint));
+    memcpy(hint, entry.RestartHint.Name, entry.RestartHint.Length);
+    hint[entry.RestartHint.Length / sizeof(WCHAR)] = 0;
+    FileFindClose(&entry);
+    check("repeated reclamation preserves successor hint", entry.RestartHint.Length > 0 &&
+        !memcmp(entry.RestartHint.Name, hint, entry.RestartHint.Length));
     check("reclamation preserves errors and reopens normal end",
         entry.LastQueryStatus == (mutation == 0 ? STATUS_UNSUCCESSFUL : STATUS_SUCCESS));
     check("close releases actual handle", !GetHandleInformation(closed, &flags) &&
@@ -86,9 +93,15 @@ static void scenario(int mutation)
         path(remembered, L"DDD.TST");
         check("rename unrelated file", MoveFileW(other, remembered) != 0);
         check("create later file", create_file(L"EEE.TST"));
-    } else if (mutation == 2) {
+    } else if (mutation >= 2) {
         path(remembered, entry.DosData.FileName);
         check("delete remembered file", DeleteFileW(remembered) != 0);
+        if (mutation == 3) {
+            path(other, hint);
+            check("delete successor hint", DeleteFileW(other) != 0);
+        }
+        if (mutation == 4) ++entry.RestartHint.Index;
+        if (mutation == 5) entry.RestartHint.Length = 0;
     }
     entry.SupportReset = TRUE;
     status = FileFindOpen(NULL, &entry, 4096);
@@ -97,13 +110,15 @@ static void scenario(int mutation)
     status = FileFindReset(&entry);
     fprintf(stdout, "RESET mutation=%d status=%08lx index=%lu\n", mutation,
         (unsigned long)status, (unsigned long)entry.DosData.FileIndex);
-    if (mutation == 2) {
-        check("retained original deleted-name limit", status == STATUS_NO_MORE_FILES);
+    if (mutation >= 3) {
+        check("missing or mismatched hint ends without guessed successor", status == STATUS_NO_MORE_FILES);
     } else {
-        check("fallback finds remembered index and name", status == STATUS_SUCCESS);
+        check("reset finds anchor or surviving hint", status == STATUS_SUCCESS);
         status = FileFindNext(&next, &entry);
         check("continuation returns different file", status == STATUS_SUCCESS &&
             wcscmp(next.FileName, entry.DosData.FileName) != 0);
+        if (mutation == 2)
+            check("deleted anchor returns saved hint unconsumed", !wcscmp(next.FileName, hint));
         while (NT_SUCCESS(status)) status = FileFindNext(&next, &entry);
         check("enumeration ends with original status", status == STATUS_NO_MORE_FILES);
     }
@@ -128,7 +143,7 @@ int main(int argc, char **argv)
     if (!CreateDirectoryW(directory, NULL)) return 3;
     check("unbound real monitor fast path unavailable",
         NtVdmControl(VdmQueryDir, &entry) == STATUS_NOT_IMPLEMENTED);
-    scenario(0); scenario(1); scenario(2);
+    scenario(0); scenario(1); scenario(2); scenario(3); scenario(4); scenario(5);
     memset(&entry, 0, sizeof(entry));
     path(pattern, L"????????.TST");
     status = FileFindOpen(pattern, &entry, 1);

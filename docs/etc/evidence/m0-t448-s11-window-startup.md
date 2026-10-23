@@ -337,6 +337,36 @@ authorize choosing an observable compatibility retreat, an unbounded resource
 policy or a kernel-driver dependency. None of the four alternatives is
 silently accepted and S12 remains open.
 
+#### Owner-approved successor-hint candidate
+
+The owner subsequently approved the bounded next-entry hint and its stated
+mutation limits. DIV-362 retains a name/index only when reclaiming an
+unconsumed buffer; ordinary anchor reset stays first. If its anchor scan ends
+without a match, the adapter restarts the directory scan for the saved hint,
+leaving that entry unconsumed. A deleted or renamed hint, index/name reuse and
+arbitrary concurrent mutation are not claimed NT4-equivalent. Original guest
+files are untouched; no kernel driver or unbounded handle retention is used.
+The actual-provider fixture exercises deletion of the anchor and of both
+anchor and hint, as well as original controls and resource release. The
+initial adapter fixture passed 77 assertions, but actual DOS pressure r01
+failed: repeated reclamation revisited an already closed search and cleared
+its hint. The candidate now updates the hint only when freeing a real buffer;
+provider r05 passes 115 assertions including repeated close, absent hints and
+an index mismatch. On the coherent
+candidate package r02, independently authored DOS probes pass the deleted
+anchor, no-delete and no-pressure cases; all 17 DOS cases pass in both Console
+and Window modes. WINMINE interaction and normal close, SOL deal/draw/close,
+WRITE's existing four-sample startup frontier, and the cmd/command/ntmon CAF
+self-delete paths pass. WRITE editing and exit remain unverified. The x86/x64
+host builds pass and x86's second build reports no work. At this checkpoint
+the 13-image candidate was published and hash-verified at `assets/release` and
+`O:/winnt/system32`; the previous 13-image set is backed up at
+`build/t448-s12-hint-publication-backup-r02` and publication identity is in
+`build/t448-s12-hint-publication-r02.json`. DIV-362 adds 16 mirror lines;
+the additional adapter is project-owned, not original mirror code. All guest
+binaries remain unchanged. These tests establish the described cases, not
+equivalence under arbitrary concurrent filesystem mutations.
+
 The S12 inventory also contains the original redirector username CX=0
 underflow. Its actual-provider fixture explicitly demonstrates that a
 capacity-checked call copies `user` despite zero declared capacity

@@ -1,5 +1,14 @@
 # mvdm
 
+MVDM-HOST-DIV-362 (T448 S12 candidate): on directory-buffer reclamation,
+retain one bounded unconsumed successor name/index. If the original slow
+reset cannot find its remembered anchor, a user-mode adapter searches for
+the successor and leaves it unconsumed. This is not equivalent to the NT4
+kernel indexed query under arbitrary deletion, rename or index reuse. The
+user-mode adapter lives in `ntvdm-exe/session`; the real-provider, DOS pressure
+and full package regressions are recorded in the
+[S12 evidence](../../docs/etc/evidence/m0-t448-s11-window-startup.md).
+
 MVDM-HOST-DIV-361 (T448 S12 checkpoint): `VrGetUserName` rejects an
 explicitly checked zero-byte capacity with the existing `NERR_BufTooSmall`
 result instead of underflowing `CX-1` and writing to the guest buffer.

@@ -35,10 +35,10 @@ try {
     $report=Get-Content "$out/report.txt" -Raw
     $screen=Get-Content "$out/report.txt.console.txt" -Raw
     if($Case -eq 'Deleted') {
-        if($process.ExitCode -ne 0 -or $report -notmatch 'exit=0x00000001' -or $screen -notmatch 'DEM-RESET-NO-MORE') {
-            throw 'Deleted-anchor outcome changed; investigate before disposition'
+        if($process.ExitCode -ne 0 -or $report -notmatch 'exit=0x00000000' -or $screen -notmatch 'DEM-RESET-CONTINUED') {
+            throw 'Deleted-anchor continuation failed'
         }
-        'OBSERVED known deleted-anchor limitation; not a repair pass' | Set-Content "$out/result.txt"
+        'PASS DOS deleted-anchor continuation' | Set-Content "$out/result.txt"
     } else {
         if($process.ExitCode -ne 0 -or $report -notmatch 'exit=0x00000000' -or $screen -notmatch 'DEM-RESET-CONTINUED') {
             throw 'DOS directory continuation control failed'
