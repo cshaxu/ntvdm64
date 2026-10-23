@@ -277,6 +277,32 @@ wrong request; and (7) actual sibling task remains usable. This is an
 acceptance and failure-partition requirement, not a claim that the current
 protocol implements those states or that retries/timeouts are required.
 
+The original execution entrypoints have different scopes. `W32EndTask`
+explicitly requires the target application's own thread and invokes
+`CallBack16(RET_FORCETASKEXIT)` against `CURRENTPTD`; calling it directly on
+an arbitrary worker-base control thread would target the wrong context.
+`WU32SetEventHook` similarly edits the *current* TD's guest return frame.
+The original hung handler's injected `VDM_WOWHUNGAPP` keyboard interrupt is
+process-global; the guest keyboard handler consumes the bit and executes DOS
+`int 21h/4cff` in the then-executing guest context, not by checking the
+requested HTASK. These original branches therefore cannot safely be exposed
+as a general per-task RPC by forwarding an HTASK alone. Reuse requires a
+verified transfer onto the selected task's own execution context and identity
+recheck, while preserving guest code and the approved no-sibling/no-worker
+escalation boundary. Source trace establishes why this is necessary; it does
+not yet establish which existing scheduling entry can perform that transfer
+without altering observable semantics.
+
+The current selected `WK32InitializeHungAppSupport` registers
+`W32HungAppNotifyThread`, not `W32EndTask`, with the imported
+`xxxRegisterUserHungAppHandlers`; its `pfnW32EndTask` parameter name is not
+evidence otherwise. The selected `exitwin.c` stores that pointer in
+`lpfnWowExitTask`, and a source search finds no further production use of that
+field in this tree. Thus this registration is not itself an existing targeted
+management dispatcher or a demonstrated same-task call path. Any proposed
+reuse must identify an actual reachable caller and execution context rather
+than assuming a stored function pointer delivers a task-specific command.
+
 ## Original task publication and retirement chain
 
 `wkman.c::AddProcessSharedList` registers a per-process shared-list object;
