@@ -245,6 +245,26 @@ cleanup. In particular, freeing everything on a failed post without proving
 ownership can break reused pairs or cause double release. Include this path in
 the finite M4 failure matrix; do not claim that DIV-354 already covers it.
 
+The follow-up source trace separates the obligations further. ACK, POKE,
+ADVISE and DATA can allocate packed native lParams; EXECUTE uses its native
+payload handle directly. `WM32DDEAck` uses the reverse conversation keys and
+native handle to locate an EXECUTE association and, when `fFree` applies,
+honors `DDE_EXECUTE_FREE_MEM`/`DDE_EXECUTE_FREE_H16` before removing the pair.
+`W32DdeFreeHandle16` normally retires non-EXECUTE aliases when guest frees
+them, but for EXECUTE it records deferred free and returns FALSE. Therefore
+guest-free notification alone is not a general fallback for an EXECUTE post
+that never reaches a receiver and can never generate its ACK. Likewise,
+`WU32CallMsgFilter` freeing a packed parameter from its own filter conversion
+does not prove that `WU32PostMessage` frees a different packed parameter when
+post fails. The caller also has an `ERROR_INVALID_PARAMETER` fallback that
+posts the original 16-bit values as `WOWPRIVATEMSG` to a WOW destination;
+its conversion acquisitions and the fallback's success/failure need distinct
+disposition. `WU32SendMessage` also sets `fWhoCalled` to the POSTMESSAGE
+conversion mode for legacy applications that synchronously send DDE, so a
+post-failure fix must not blindly apply its transfer rules to synchronous
+send or borrowed hook conversions. These are conditional source traces, not
+a reproduced leak or permission to alter the normal ACK protocol.
+
 Source identities (SHA-256) for this pass: `wkman.c`
 `49BE04B3E5959F175D72B63A87239EA4F325CFDD38B051932DF2176D5527E860`;
 `vdmdbg.c` `11CAD596254D09929987CF110F5B492862972D06077C5FECC100DC79B087E1D2`;
