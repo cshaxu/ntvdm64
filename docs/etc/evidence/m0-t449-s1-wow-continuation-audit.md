@@ -463,6 +463,27 @@ post-failure fix must not blindly apply its transfer rules to synchronous
 send or borrowed hook conversions. These are conditional source traces, not
 a reproduced leak or permission to alter the normal ACK protocol.
 
+There is an additional constraint on reusing the existing rollback helper:
+the repeated-EXECUTE compatibility path in `ThunkWMMsg16` allocates a new
+guest alias and records it with `DDE_EXECUTE_FREE_H16 | DDE_PACKET`; the
+ordinary ACK path later frees that alias. `DDERollback32`, however, removes
+the tracked association and releases its native object without acting on
+`DDE_EXECUTE_FREE_H16`. Its present construction-failure callers do not
+establish that it is a complete post-failure finalizer for a successfully
+constructed EXECUTE. Simply extending its lifetime into `WU32PostMessage`
+would therefore leave the owned guest alias behind. Conversely, the normal
+non-alias EXECUTE association points at the application's original handle,
+which must not be freed by failed delivery. A coherent repair must retain
+the conversion's actual acquisition identities through the post result,
+release only its own alias and native resources when delivery did not commit,
+and leave successfully transferred ownership to the original ACK protocol.
+This also applies when the private-message fallback succeeds: the original
+16-bit message is delivered through a different path, so discarded native
+conversion resources and the delivered guest handle have different owners.
+Pair lookup, reentrancy, exception unwind and exact-once cleanup need to be
+verified together before selecting the implementation; this observation is
+source evidence, not a runtime reproduction.
+
 Source identities (SHA-256) for this pass: `wkman.c`
 `49BE04B3E5959F175D72B63A87239EA4F325CFDD38B051932DF2176D5527E860`;
 `vdmdbg.c` `11CAD596254D09929987CF110F5B492862972D06077C5FECC100DC79B087E1D2`;
