@@ -2,186 +2,66 @@
 
 ## Current Work
 
-**Active: M0 T448 S14** packet retained for T448 preclosure review, Ordinary
-Mode, single implementer/reviewer. S14 is closed; T448 remains open.
-S13's bounded investigation and handoff and S14's byte-exact SoftPC import
-are owner-accepted and closed. The owner-requested cached whole-component
-rebuild, bounded regression, preclosure review and coherent 13-image
-publication passed after restoring original-host mirror formatting. T-level
-acceptance remains pending. The corrected CAF
-observer and its remaining test limitations are recorded in the
-[S14 evidence](../etc/evidence/m0-t448-s8-shared-library-import.md#s14-synchronization-and-verification).
-The [T448 preclosure repeat](../etc/evidence/m0-t448-s5-integrated-acceptance.md#t448-owner-requested-preclosure-repeat-2026-10-22-local) records
-actual coverage, retained limits and coherent publication.
+**Active: M0 T449 S1**, Ordinary Mode, one implementer with independent
+self-review. The owner accepted and closed T448 and admitted the queued WOW32
+execution continuation. T449 resumes the unfinished T447 execution foundations;
+it does not restart or declare complete the earlier work.
 
 ## Active Packet
 
-| Field | S14 SoftPC public-library synchronization packet |
+| Field | T449 S1 — inherited execution baseline and bounded implementation plan |
 | --- | --- |
-| Identifier Mode | M0 T448 S14, Ordinary Mode; one implementer and independent self-review. |
-| Candidate Proposal | [NTSRV lifecycle authority](../proposals/proposal-ntsrv-lifecycle-authority-001.md). |
-| Admission And Approval | Owner approved the unchanged SoftPC public-library import and subsequently accepted S13 and S14 closure; full cached build, tests and T closure review were requested. |
-| Objective | Pin and import the selected public-library closure byte-for-byte, adapt consumers only if necessary, build and verify coherent publication. |
-| Non-goals | No guest changes, upstream worktree writes, unrelated library expansion, semantic retreat or unapproved timeout. |
-| Reference Baseline | S12 13-image release at 36e8d41f6; S8 library pin 0d9f1803ee04bd89bd6150306912a3e8674d0a83. |
-| Files And ABI Surface | NTCON selected public library, provenance manifest, affected consumers/tests and release evidence. |
-| Applicable Rules | Reading set, execution, source policy, guest immutability and documentation governance. |
-| Verification | Compare every selected source blob to pinned SoftPC; dependency/API audit, builds, incremental, focused and relevant real package tests, full release/hash and documentation gates. |
-| Expected Markers | Zero selected-file import diffs; actual compatibility and test coverage recorded; coherent installed and asset hashes. |
-| Asset Needs | SoftPC read-only Git objects, stable Ninja caches, existing product package and isolated fixtures. |
-| Reporting Requirements | Record source revision, exact changes, tests and limitations. Disposable build/t448-s14 budget 2 GiB and two hours per run; inspect after ten minutes without progress. |
-| Stop Conditions | Unapproved semantic change, guest modification, or incompatible upstream closure. |
-| Exit Criteria | Review, required verification, coherent publication, commit/push and owner acceptance. |
-| Original Owner Request | Approve a new S to import the SoftPC library unchanged with necessary adaptation. |
-| Similar-Issue Sweep | Check all selected upstream components and actual callers, not just the previously identified two files. |
+| Identifier Mode | M0 T449 S1, Ordinary Mode; one implementer and independent self-review. |
+| Candidate Proposal | [WOW32 execution continuation](../proposals/proposal-wow32-execution-continuation-001.md). |
+| Admission And Approval | Owner approved T448 closure and admission of the previously unfinished WOW foundational task. |
+| Objective | Reconcile every inherited non-passing execution row, current implementation and applicable test evidence after T448; define a finite, dependency-ordered implementation and verification plan without repeating proved discovery. |
+| Non-goals | No new guest changes, runtime repair, semantic waiver, unrelated WOW feature expansion or claim of full provider completion in this audit-only S. |
+| Reference Baseline | T448 released commit `55566cadb`, [T448 closure](../history/m0-t448-closure.md), [T447 transfer](../history/m0-t447-transfer-closure.md) and its [working plan](../etc/operations/t447-wow-execution-plan.md). |
+| Files And ABI Surface | Current status and existing indexed execution plans/evidence; inspect WOW32 original callers, adapters, service/worker boundary and tests read-only. No ABI change in S1. |
+| Applicable Rules | Execution, architecture, coding, source policy, guest immutability, approved modern USER/external-window boundaries and minimum registered mirror diff. |
+| Verification | Cross-check stable C/W/M row ownership, source/call chains, present Git/build identity and concrete test assertions against retained evidence; run documentation governance and link/diff checks. Run targeted diagnostics only when needed, in background. |
+| Expected Markers | Finite row-by-row evidence and gaps, dependencies, coherent implementation groups, tests, retained risks and ownership; no mock-only or old test represented as real guest proof. |
+| Asset Needs | Read-only OpenNT source, existing release/guest package, stable Ninja/ccache trees and recorded T447/T448 tests; no guest rebuild. |
+| Reporting Requirements | Present proposed S breakdown, discovered foundations and evidence/unknowns; retain WRITE editing/exit, SOL geometry and intermittent direct game/worker exit without overstating current proof. Disposable task output under build/t449-s1, 1 GiB and 60 minutes per group, review after 15 minutes without progress. |
+| Stop Conditions | Guest modification, new observable semantic concession, unapproved expanded task scope or an unsupported ownership assumption. |
+| Exit Criteria | Reconciled finite inherited scope and dependency-ordered plan with evidence and no unowned transferred rows, reviewed and documented; documentation delivery committed/pushed. Implementation and T acceptance remain separate. |
+| Original Owner Request | Close T448 and admit the previously unfinished WOW foundational T task. |
+| Similar-Issue Sweep | Include messages, callbacks, scheduler, conversion, object/controls/dialog/menu prerequisites, task identity and termination, sibling survival, failure/cleanup and real guest/native boundaries. |
 
-[S11 investigation](../etc/evidence/m0-t448-s11-window-startup.md) reproduces
-the already documented original COMMAND large-environment lifetime defect on
-the current package. The specific post-prompt CAF report remains unverified;
-no product fix for that guest defect is claimed. Prior DOS/mouse observations
-and the subsequently delivered S12 repairs are retained in that ledger.
+## Inherited Scope
 
-S12 DIV-357–361 repairs the INT33 checksum, VGA cursor-disable,
-8042 response, buffered directory-entry loss and redirector zero capacity.
-Focused provider/guest/frame tests pass. The four-fix candidate passes DOS17
-in both modes, WINMINE, SOL gameplay, the previous WRITE startup frontier and
-three CAF self-delete/echo routes. DIV-361 full-package tests also pass;
-WRITE editing/exit remain unverified. The 13-image five-fix checkpoint is
-published and hash-verified. DIV-362 implements the owner-approved bounded
-successor hint for the deleted-name fallback; provider and real DOS cases pass,
-as do full DOS, WOW and CAF regressions. The 13-image package is published and
-hash-verified at both destinations. The original indexed kernel IRP has no
-documented user-mode equivalent; arbitrary deletion, rename and index reuse
-remain outside the approved hint's equivalence claim. See the [evidence ledger](../etc/evidence/m0-t448-s11-window-startup.md).
-The owner accepted S12; T448 remains open.
+The [continuation proposal](../proposals/proposal-wow32-execution-continuation-001.md)
+inherits all unfinished T447 M1--M6/C/W rows, promoted dependencies and prior
+acceptance constraints. The complete [T447 execution plan](../etc/operations/t447-wow-execution-plan.md)
+and linked source audits/evidence remain authoritative historical inputs.
+Previously delivered foundations and approved external snapshot, modern USER
+and thread-level idle boundaries remain intact. NTSRV owns lifecycle control;
+this task owns the WOW task algorithms and individual-task integration.
+Other WOW packages remain in the queue with their residual scopes.
 
-S13's inherited-environment DOS startup failure has now been reproduced with
-a host-only read-only diagnostic: the original COMMAND environment copy
-overwrites its discarded-INIT `EnvSiz`; the short-PATH control does not.
-This does not attribute the separate historical timeout reports. See the
-[S13 evidence](../etc/evidence/m0-t448-s13-uncertain-todo-audit.md).
-The finite nonreproduction controls, retained long-play and SOL layout risks,
-COM prerequisite and later WOW32 WRITE ownership are also recorded there.
-The [S13 handoff](../etc/evidence/m0-t448-s13-uncertain-todo-audit.md#remaining-work-handoff)
-assigns unresolved items once to TODO or the queued WOW32 continuation.
-The owner retains the reproduced COMMAND case as a known original guest
-limitation in TODO, without a host workaround. S13's bounded handoff is
-complete and the owner approved S13 closure; retained issues are not claimed fixed.
-
-Earlier stages' complete status and chronology are preserved in the indexed
-[pre-compaction snapshot](https://github.com/cshaxu/ntvdm64/blob/ba156ef61/docs/states/CURRENT.md).
-It is historical, not an additional active packet. S10 full-size SOL gameplay
-remains unverified and owner acceptance remains separate; S11's original
-COMMAND environment limitation and unverified exact CAF report are retained.
-
-## Planned S sequence
-
-S1-S3 implementation and historical P9-P21 attempts are recorded in the
-[S3 ledger](../etc/evidence/m0-t448-s3-close-implementation.md). Historical
-ten-second deadline experiments there are superseded by the approved three
-five-second policies; they are not current instructions or open S3 work.
-
-1. S1: whole-system ownership audit and complete transition design.
-2. S2: complete normal admission/result/handoff chain, including frontend policy and lifecycle-only WOW binding.
-3. S3: unified management-close transactions, concurrency and role-specific service-loss cleanup.
-4. S4: owner-added autonomous-code polling audit and cleanup; reuse existing events and completion notifications, justify retained polling, verify wakeup/exit/idle behavior and code delta.
-5. S5: integrated fault/concurrency and real Console handoff acceptance, full release and closure audit (formerly S4).
-6. S6: owner-added unused fallback/interface cleanup and NTMON change-only rendering with one-second sampling.
-7. S7: SoftPC shared-library compatibility and remediation audit; bounded audit conclusion, no runtime import.
-8. S8: pinned byte-exact public-library import and NTCON integration, full verification and publication.
-9. S9: native Console title initialization and handoff, preserving app-set and restored titles.
-10. S10: SOL environment-aware integration evidence and owner-directed TODO triage planning.
-11. S11: investigate and repair reported command CAF and SOL window startup failures.
-12. S12: audit all TODO and remediate reproduced host-side defects; preserve original guest boundaries.
-13. S13: investigate and test not-necessarily-reproducible TODO cases with explicit dispositions and evidence.
-14. S14: synchronize the selected SoftPC public-library closure unchanged and verify integration.
-
-The [proposal](../proposals/proposal-ntsrv-lifecycle-authority-001.md) owns the
-finite inherited gap list. Cross-group changes must preserve a coherent working
-protocol, not publish incompatible partial upgrades.
-
-## S1 Closure Record
-
-Design-only delivery: [source audit](../etc/evidence/m0-t448-s1-lifecycle-audit.md).
-
-## S2 Closure Record
-
-Bounded delivery, not owner functional acceptance: [S2 ledger](../etc/evidence/m0-t448-s2-lifecycle-implementation.md) and [S3 delivery](../etc/evidence/m0-t448-s3-close-implementation.md).
-
-## S3 Closure Record
-
-Delivered protocol 64 and bounded reconciliation: [S3 ledger](../etc/evidence/m0-t448-s3-close-implementation.md).
-
-## S4 Closure Record
-
-Polling audit and cleanup: [S4 ledger](../etc/evidence/m0-t448-s4-polling-audit.md).
-
-## S5 Closure Record
-
-Integrated acceptance with explicit limitations: [S5 ledger](../etc/evidence/m0-t448-s5-integrated-acceptance.md).
-
-## S6 Closure Record
-
-Owner accepted: [S6 ledger](../etc/evidence/m0-t448-s6-unused-monitor-cleanup.md).
-
-## S7 Closure Record
-
-Audit-only conclusion: [S7 ledger](../etc/evidence/m0-t448-s7-shared-library-import-audit.md).
-
-## S8 Closure Record
-
-Owner accepted functionality: [S8 ledger](../etc/evidence/m0-t448-s8-shared-library-import.md).
-
-## S9 Closure Record
-
-Owner approved closure: [S9 ledger](../etc/evidence/m0-t448-s9-console-title-handoff.md).
-
-## S10 Closure Record
-
-Bounded test-only delivery; full-size gameplay and owner acceptance remain separate: [S10 evidence](../etc/evidence/m0-t448-s9-console-title-handoff.md).
-
-## S11 Closure Record
-
-Owner reports normal testing; no causal repair claimed: [S11 ledger](../etc/evidence/m0-t448-s11-window-startup.md).
-
-## S13 Closure Record
-
-The owner-directed investigation reached its finite evidence and ownership
-handoff; reproduced guest limitations remain in TODO and unresolved WOW32
-work belongs to the queued continuation. This is a bounded handoff, not an
-assertion that every historical failure was reproduced or fixed. See the
-[S13 investigation and handoff](../etc/evidence/m0-t448-s13-uncertain-todo-audit.md).
-The owner explicitly approved S13 closure after the bounded handoff; this
-acceptance does not claim the retained limitations were repaired.
-
-## S14 Closure Record
-
-The owner accepted the delivered byte-exact SoftPC synchronization, coherent
-13-image publication and recorded test boundaries; see [S14 evidence](../etc/evidence/m0-t448-s8-shared-library-import.md).
-T448 preclosure verification is separate and is recorded above; T-level
-owner acceptance remains pending.
-
-## S12 Closure Record
-
-Owner accepted the tested and published six-fix checkpoint, commit 36e8d41f6;
-see the [S12 ledger](../etc/evidence/m0-t448-s11-window-startup.md) for actual
-coverage, original guest exclusions and the approved bounded directory semantics.
+Owner execution direction: trace source and call chains first; preserve original
+capabilities and semantics and minimize original-source diffs. Where an original
+implementation is proved composable and replaces autonomous duplication, remove
+the duplicate as part of the same coherent implementation group. Connect each
+whole group before building and testing it; tests verify the connected group,
+not substitute for the source audit. Keep single-person dual-role review.
 
 ## Current Technical Baseline
 
-The latest 13-image cached-build checkpoint was tested, published and
-hash-verified; the [T448 preclosure evidence](../etc/evidence/m0-t448-s5-integrated-acceptance.md#t448-owner-requested-preclosure-repeat-2026-10-22-local)
-and [release manifest](../../assets/release/release-manifest.json) record
-identity and coverage. Guest binaries remain unchanged. S12--S14 have owner
-closure approval. WRITE editing and exit, original guest limitations and
-the previously reported intermittent game exit remain explicitly separate.
+T448's complete 13-image package at `55566cadb` was built, tested, published
+and hash-verified at both destinations; see its
+[closure evidence](../etc/evidence/m0-t448-s5-integrated-acceptance.md#t448-owner-requested-preclosure-repeat-2026-10-22-local).
+WRITE editing/exit and intermittent long-play outcomes remain unproved. Original
+COMMAND's large-environment defect remains in TODO as a guest limitation.
 
 ## Recent M0 Closures
 
 | Task | Disposition |
 | --- | --- |
-| T447 | [Owner-directed scope-transfer closure](../history/m0-t447-transfer-closure.md), not full functional acceptance. |
+| T448 | [Owner-accepted lifecycle closure](../history/m0-t448-closure.md). |
+| T447 | [Owner-directed scope-transfer closure](../history/m0-t447-transfer-closure.md), not full WOW functional acceptance. |
 
 ## Recent Governance
 
-Prior governance evidence remains indexed in the preserved pre-closure status.
+T448's final governance, publication and retained limitations are documented
+in its [closure](../history/m0-t448-closure.md).
