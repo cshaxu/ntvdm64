@@ -75,6 +75,37 @@ the project's established RPC/I/O boundaries. Merely setting the existing
 worker-shutdown event or adding a management UI item cannot implement the
 targeted operation, and the shared worker-base must not interpret WOW policy.
 
+## Existing real-message probe: assertion boundaries
+
+The checked-in `tests/observation/verify-win16-message-probe.ps1` is not a
+single all-features run. Its option validation deliberately separates modes:
+`ClassicDde` cannot be combined with cross-worker, external peer, pending
+send, construction or early-reply/timeout payload modes; cross-worker requires
+its own native host and coordinator; external-native requires a separately
+built peer. A passing ordinary invocation therefore cannot prove those other
+directions. Each future result must identify its selected package and options.
+
+The structured mode explicitly asserts only MINMAXINFO, WINDOWPOS and
+COPYDATA in its named directions; the script says it does not prove physical
+guest memory movement, all branches or allocation failures. Construction mode
+asserts three MDI creates/destroys, title and parameter mutation, text and
+WinHelp, but leaves fault injection to the separately identified diagnostic
+provider. `ClassicDde` asserts native-to-Win16 EXECUTE, reverse ACK and alias
+release only. The pending-send branch asserts a blocked-send timeout and
+specific receiver-window destruction/result/identity values; it is stronger
+than ordinary mode, but is not a general proof of receiver thread/process
+death, every failure reason or all message payloads. The unconditional
+`limits.json` wording about receiver death describes ordinary mode and must
+not override the more specific pending-send assertions, nor be interpreted as
+proving a completed pending-send run in the final package.
+
+Normal same-worker mode additionally checks two actual task-retirement
+records; cross-worker mode instead validates two separate worker identities,
+process/window/thread associations and normal process retirement. These
+assertions are useful M1/M5/M6 witnesses but do not establish NTMON-targeted
+task deletion or sibling survival. Existing historical pass records must be
+matched to these exact modes and package hashes before marking any row proved.
+
 ## Original task publication and retirement chain
 
 `wkman.c::AddProcessSharedList` registers a per-process shared-list object;
@@ -122,6 +153,36 @@ Also note that the original debugger
 enumerator uses shared memory and callback-based observation; it is not an
 authorization to let NTSRV directly control a worker or dereference its
 private pointers. The eventual control remains through NTSRV and worker-base.
+
+## Hung-task notification is not a targeted completion receipt
+
+The original `W32HungAppNotifyThread` finds a matching `PTD` while holding
+`gcsWOW`, releases that lock, then reads the pointer to select `LockTDB`.
+`W32DestroyTask` removes a `PTD` under that lock after resource cleanup, and
+the normal `W32Thread` TD is stack-owned. Thus a lookup result alone does not
+establish that the pointer or its HTASK incarnation is still valid after the
+lock is released. A future management request must perform incarnation-safe
+validation and must not retain a naked TD pointer across this boundary.
+
+The original notification event is a single process-wide manual-reset event:
+each `W32HungAppNotifyThread` resets it, and every `W32DestroyTask` sets it
+before `W32FreeTask`, guest cleanup and TD unlinking. It has neither task
+identity nor completion generation. Consequently a signal may correspond to
+another task, an overlapping request may reset another request's signal, and
+even the intended task's signal precedes complete cleanup. The event remains
+part of the original hung-app algorithm, but it cannot be the NTSRV receipt
+that a particular requested incarnation has retired. Any additional receipt
+must come from the existing service/worker control channel after verified
+retirement, not from a new cross-component transport or a second scheduler.
+
+Finally, the original hung path includes a heartbeat, a keyboard interrupt,
+and user-mediated escalation to the active task or whole process. Its guest
+keyboard interrupt consumes the process-wide `VDM_WOWHUNGAPP` bit. Selective
+NTMON Delete must preserve the authorized task boundary; it cannot claim
+success from this shared event, silently kill the active sibling, or trigger
+the whole-worker escalation. This source conclusion fixes requirements for a
+coherent identity, dispatch, retirement and sibling-survival group; it is not
+an implementation or proof of all guest behavior.
 
 ## DDE evidence chronology correction
 
