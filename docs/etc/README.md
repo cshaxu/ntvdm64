@@ -1,5 +1,10 @@
 # Supporting Material
 
+[T451 S1 USER object contract ledger](operations/m0-t451-s1-user-object-contract-ledger.md)
+maps every residual C04--C07/object-C10 PMODE32 direct-reader family to its
+producer, authority, update/withdrawal rule, evidence and bounded S2--S4
+successor; it is an inventory, not a runtime-completion claim.
+
 [T450 S1--S4 closure ledger](evidence/m0-t450-s1-s4-closure-ledger.md)
 indexes the completed Win16 Style-removal sequence retained before the active
 Run16 entry-contract correction.

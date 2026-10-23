@@ -35,6 +35,17 @@ remain immutable and unchanged. T450 is closed at
 [its closure record](../history/m0-t450-closure.md). T451 S1 is an inventory
 and design boundary only; it does not claim a new WOW32 capability.
 
+## S1 Result Pending Owner Acceptance
+
+The indexed [USER object contract ledger](../etc/operations/m0-t451-s1-user-object-contract-ledger.md)
+reconciles ten finite rows across direct WND/CLS/MENU/ITEM readers, desktop and
+system roots, read-only external objects, geometry/data publication, and
+retirement.  It assigns the remaining publication, mutation and acceptance
+obligations to S2--S4 without reopening T447/T449's accepted local execution
+paths.  This documentation-only delivery changed no production source, build
+input, guest asset, release asset or installed file.  Documentation governance
+passed; commit/push is the remaining S1 P step.
+
 ## Recent M0 Closures
 
 | Task | Disposition |
