@@ -35,7 +35,7 @@ function Read-Input([string]$Path, [bool]$Old) {
 }
 
 function Select-Body([string]$Text, [string]$Name, [string]$Variant) {
-    $pattern = '(?m)^(?:BOOL|VOID|HAND16|HANDLE|PHDDE)\s+(?:FASTCALL\s+)?' +
+    $pattern = '(?m)^(?:static\s+)?(?:BOOL|VOID|HAND16|HANDLE|PHDDE)\s+(?:FASTCALL\s+)?' +
         [regex]::Escape($Name) + '\s*\([^;{}]*\)\s*\{'
     $found = [regex]::Matches($Text, $pattern)
     if ($found.Count -ne 1) { throw "Require one complete source body: $Name" }
@@ -83,7 +83,7 @@ function Invoke-Owned([string]$Name, [string]$File, [string[]]$Arguments,
 }
 
 try {
-    $inputs = @('src/mvdm/wow32/wdde.c', 'src/mvdm/wow32/wdde.h', 'src/mvdm/wow32/wmdisp32.c') |
+    $inputs = @('src/mvdm/wow32/wdde.c', 'src/mvdm/wow32/wdde.h', 'src/mvdm/wow32/wmdisp32.c', 'src/mvdm/wow32/wumsg.c') |
         ForEach-Object { Join-Path $repo $_ }
     Get-FileHash -LiteralPath @($inputs + @($fixture, $PSCommandPath, $driver)) |
         Export-Csv -NoTypeInformation "$root/source-inputs.csv"
@@ -101,6 +101,14 @@ try {
         $flags = [regex]::Matches($header, '(?m)^#define DDE_(?!CONVERSION_)[^\n]+') |
             ForEach-Object Value
         if (@($flags).Count -ne 4) { throw 'Original DDE flag family changed' }
+        if (!$old) {
+            $conversionStart = $header.IndexOf('#define DDE_CONVERSION_MAX_PAIRS', [StringComparison]::Ordinal)
+            if ($conversionStart -lt 0) { throw 'Conversion ownership types missing' }
+            $conversionEnd = $header.IndexOf('} DDECONVERSION, *PDDECONVERSION;', $conversionStart, [StringComparison]::Ordinal)
+            if ($conversionEnd -lt 0) { throw 'Conversion ownership types missing' }
+            $types += "`n#define FIXTURE_CONVERSION 1`n" + $header.Substring($conversionStart,
+                $conversionEnd + '} DDECONVERSION, *PDDECONVERSION;'.Length - $conversionStart)
+        }
         [IO.File]::WriteAllText("$directory/dde_alias_types.h", $types + "`n" + ($flags -join "`n"))
         $markReturn = if ($source -match '(?m)^BOOL\s+W32MarkDDEHandle\s*\(') { 'BOOL' } else { 'VOID' }
         [IO.File]::WriteAllText("$directory/dde_alias_mark_prototype.h",
@@ -110,6 +118,12 @@ try {
                 'DDEFindAckNode', 'W32MarkDDEHandle', 'W32UnMarkDDEHandle',
                 'W32DDEFreeGlobalMem32', 'W32DdeFreeHandle16')) {
             Select-Body $source $name $variant
+        }
+        if (!$old) {
+            foreach ($name in @('DDEBeginConversion', 'DDETrackhandle', 'DDERollback32')) {
+                $bodies += Select-Body $source $name $variant
+            }
+            $bodies += Select-Body (Read-Input 'src/mvdm/wow32/wumsg.c' $false) 'W32CancelDDEPost' $variant
         }
         $bodies += Select-Body (Read-Input 'src/mvdm/wow32/wmdisp32.c' $old) 'WM32DDEAck' $variant
         [IO.File]::WriteAllText("$directory/dde_alias_exact_bodies.h", ($bodies -join "`n`n"))
@@ -130,7 +144,7 @@ try {
         } elseif ($failed.Count) { throw 'Candidate has an alias/free ownership failure' }
         $result = [regex]::Match($output,
             'DDE_ALIAS cases=(\d+) errors=(\d+) nodes=0 guest_proof=0 transport_proof=0')
-        if (!$result.Success -or [int]$result.Groups[1].Value -ne 82 -or
+        if (!$result.Success -or [int]$result.Groups[1].Value -ne $(if ($old) { 82 } else { 101 }) -or
                 [int]$result.Groups[2].Value -ne $(if ($old) { 3 } else { 0 })) {
             throw 'Incomplete exact-body ownership result'
         }
@@ -143,7 +157,7 @@ try {
             throw "Source changed during group: $($entry.Path)"
         }
     }
-    @{ passed = $true; baseline = $baseline; bodies = 12;
+    @{ passed = $true; baseline = $baseline; baselineBodies = 12; candidateBodies = 16;
         scope = 'Original alias/free bodies with service doubles; no guest/transport proof'
     } | ConvertTo-Json | Set-Content "$root/result.json"
 } catch {

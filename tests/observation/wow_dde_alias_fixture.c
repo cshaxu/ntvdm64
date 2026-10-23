@@ -36,6 +36,14 @@ typedef struct _WM32MSGPARAMEX {
 
 #include "dde_alias_types.h"
 
+#ifdef FIXTURE_CONVERSION
+typedef struct _MSGPARAMEX {
+    PARM16 Parm16;
+    LONG lParam;
+    BOOL ddePostPacked;
+} MSGPARAMEX, *LPMSGPARAMEX;
+#endif
+
 static PHDDE phDDEFirst;
 static unsigned failures, cases, live_nodes, marks, unmarks;
 static unsigned native_frees, guest_frees, meta_frees;
@@ -49,6 +57,9 @@ static unsigned packet_frees;
 static BOOL initiating, fThunkDDEmsg = TRUE;
 
 static BOOL DDEDeletehandle(HAND16, HANDLE);
+#ifdef FIXTURE_CONVERSION
+static BOOL DDEAddhandle(HAND16, HAND16, HAND16, HANDLE, PDDEINFO);
+#endif
 static BOOL W32DdeFreeHandle16(HAND16);
 static BOOL W32DDEFreeGlobalMem32(HANDLE);
 #include "dde_alias_mark_prototype.h"
@@ -312,6 +323,60 @@ int __cdecl main(void)
         marked[21] = 0;
         CHECK("ack-wrapper-release", packet_frees == 4);
     }
+#ifdef FIXTURE_CONVERSION
+    /* Candidate-only exact original conversion bodies. A failed conversion
+     * must not clear a mark still owned by an independent association, and
+     * an EXECUTE compatibility alias is owned by the conversion. These are
+     * deterministic service-double checks, not actual guest/post evidence. */
+    {
+        DDECONVERSION conversion;
+        DDEINFO info;
+        unsigned old_native = native_frees, old_guest = guest_frees;
+        memset(&info, 0, sizeof(info));
+        info.Msg = WM_DDE_DATA; info.Flags = DDE_PACKET;
+        CHECK("rollback-peer-add", add(3, 4, 30, 130, WM_DDE_DATA, DDE_PACKET));
+        DDEBeginConversion(&conversion);
+        CHECK("rollback-track", DDETrackhandle(&conversion, 1, 2, 30, H(131), &info));
+        CHECK("rollback-mark-before", marked[30] && live_nodes == 2);
+        DDERollback32(&conversion, 1, 2);
+        CHECK("rollback-peer-retained", DDEFindPair32(3, 4, 30) == H(130));
+        CHECK("rollback-peer-mark-retained", marked[30]);
+        CHECK("rollback-new-native-once", native_frees == old_native + 1 && last_native == 131);
+        CHECK("rollback-peer-cleanup", DDEDeletehandle(30, H(130)) && !live_nodes);
+        marked[30] = 0;
+        DDEBeginConversion(&conversion);
+        info.Msg = WM_DDE_EXECUTE; info.Flags = DDE_PACKET | DDE_EXECUTE_FREE_H16;
+        info.h16 = 77;
+        CHECK("rollback-execute-track", DDETrackhandle(&conversion, 1, 2, 31, H(132), &info));
+        DDERollback32(&conversion, 1, 2);
+        CHECK("rollback-execute-alias-freed", guest_frees == old_guest + 1 && last_guest == 31);
+        CHECK("rollback-execute-native-freed", native_frees == old_native + 2 && last_native == 132);
+        CHECK("rollback-execute-unmarked", !marked[31]);
+        CHECK("rollback-execute-empty", !phDDEFirst && !live_nodes && !conversion.Count);
+        {
+            MSGPARAMEX message;
+            unsigned old_packets = packet_frees;
+            memset(&message, 0, sizeof(message));
+            message.Parm16.WndProc.hwnd = 1;
+            message.Parm16.WndProc.wParam = 2;
+            message.Parm16.WndProc.wMsg = WM_DDE_POKE;
+            message.lParam = 0x1234;
+            message.ddePostPacked = TRUE;
+            DDEBeginConversion(&conversion);
+            info.Msg = WM_DDE_POKE; info.Flags = DDE_PACKET;
+            CHECK("post-cancel-track", DDETrackhandle(&conversion, 1, 2, 33, H(134), &info));
+            SetLastError(ERROR_ACCESS_DENIED);
+            W32CancelDDEPost(&message, &conversion);
+            CHECK("post-cancel-error-preserved", GetLastError() == ERROR_ACCESS_DENIED);
+            CHECK("post-cancel-packet-once", packet_frees == old_packets + 1 && !message.ddePostPacked);
+            CHECK("post-cancel-native-once", native_frees == old_native + 3 && last_native == 134);
+            CHECK("post-cancel-guest-retained", guest_frees == old_guest + 1 && !marked[33]);
+            W32CancelDDEPost(&message, &conversion);
+            CHECK("post-cancel-idempotent", packet_frees == old_packets + 1 && native_frees == old_native + 3);
+            CHECK("post-cancel-empty", !phDDEFirst && !live_nodes && !conversion.Count);
+        }
+    }
+#endif
     printf("DDE_ALIAS cases=%u errors=%u nodes=%u guest_proof=0 transport_proof=0\n",
         cases, failures, live_nodes);
     return failures ? 1 : 0;

@@ -768,15 +768,25 @@ VOID DDERollback32(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hwnd)
 
     while (pConversion->Count) {
         pPair = &pConversion->Pair[--pConversion->Count];
-        if (DDEFindPair16(To_hwnd, From_hwnd, pPair->h32) == pPair->h16) {
-            W32UnMarkDDEHandle(pPair->h16);
-            if (DDEDeletehandle(pPair->h16, pPair->h32)) {
-                if (pPair->Flags & DDE_METAFILE) {
-                    DeleteMetaFile(pPair->h32);
+        if (DDEFindPair16(To_hwnd, From_hwnd, pPair->h32) == pPair->h16 &&
+                DDEDeletehandle(pPair->h16, pPair->h32)) {
+            /* DIVERGENCE(MVDM-HOST-DIV-363): the original HDDE list is the
+             * sole alias authority.  A failed post must not clear a shared
+             * guest arena mark while another live pair still names it. */
+            if (!DDEFindNode16(pPair->h16)) {
+                W32UnMarkDDEHandle(pPair->h16);
+                /* DIVERGENCE(MVDM-HOST-DIV-363): WM_DDE_EXECUTE may create
+                 * a unique 16-bit alias which the normal ACK path frees.
+                 * A rejected post has no ACK, so retire only that alias. */
+                if (pPair->Flags & DDE_EXECUTE_FREE_H16) {
+                    GlobalUnlockFree16(GlobalLock16(pPair->h16, NULL));
                 }
-                else {
-                    GlobalFree(pPair->h32);
-                }
+            }
+            if (pPair->Flags & DDE_METAFILE) {
+                DeleteMetaFile(pPair->h32);
+            }
+            else {
+                GlobalFree(pPair->h32);
             }
         }
     }

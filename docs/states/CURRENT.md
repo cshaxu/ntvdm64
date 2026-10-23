@@ -22,7 +22,7 @@ it does not restart or declare complete the earlier work.
 | Verification | Source-first coherent implementation groups; then background x86/x64 builds, applicable actual guest/native message modes and failure/lifecycle tests, complete package publication and hash checks, governance and independent self-review. |
 | Expected Markers | Exact caller/ownership and failure reconciliation for M1--M5, current-package guest/native witnesses, ordinary retirement and explicit residual boundaries; no mock-only or old test represented as real guest proof. |
 | Asset Needs | Read-only OpenNT source, existing release/guest package, stable Ninja/ccache trees and recorded T447/T448 tests; no guest rebuild. |
-| Reporting Requirements | Report original reuse, removed duplication, mirror diff and exceptions, tests, package hashes and unresolved boundaries. Preserve WRITE editing/exit, SOL geometry and intermittent direct game/worker exit without overstating proof. Disposable task output under build/t449-s2, 1 GiB and 60 minutes per group, review after 15 minutes without progress. |
+| Reporting Requirements | Report original reuse, removed duplication, mirror diff and exceptions, tests, package hashes and unresolved boundaries. Completed disposable evidence is under `build/t449-s2`, `build/t449-s2-message-cross-r9`, `build/t449-s2-message-pending-r3`, `build/t449-s2-message-external-r2`, `build/t449-s2-message-construction-r6` and `build/t449-s2-component-build-r1`, plus the existing fixture's required direct children `build/t449-s2-dde-alias-r1` through `r4`; invalidated task-owned attempts are cross r2--r7 and construction r3/r5. Each is owned by this S, 1 GiB and 60 minutes per group, review after 15 minutes without progress. |
 | Stop Conditions | Guest modification, new observable semantic concession, unapproved expanded task scope or an unsupported ownership assumption. |
 | Exit Criteria | M1--M5 and promoted prerequisites reconciled against production source and scoped tests; whole-group repairs reviewed, built, tested, coherently published and hash-verified, committed and pushed. Individual deletion and final T acceptance remain separate. |
 | Original Owner Request | Close T448 and admit the previously unfinished WOW foundational T task. |
@@ -68,6 +68,47 @@ and hash-verified at both destinations; see its
 [closure evidence](../etc/evidence/m0-t448-s5-integrated-acceptance.md#t448-owner-requested-preclosure-repeat-2026-10-22-local).
 WRITE editing/exit and intermittent long-play outcomes remain unproved. Original
 COMMAND's large-environment defect remains in TODO as a guest limitation.
+
+S2's DDE ownership group has completed its coherent-package P delivery and
+awaits owner acceptance before S3 admission. Source tracing found
+one bounded gap: `WU32PostMessage` discards the original stack-local DDE
+conversion record before native `PostMessage` reports acceptance or rejection.
+The current reduced candidate retains it only until that result, leaving the
+original successful receiver/ACK path and synchronous `WU32SendMessage`
+unchanged. It additionally retires only an original generated EXECUTE alias
+when a rejected post has no ACK. Earlier speculative exception/reentry and
+synchronous-send edits were removed. The reduced candidate compiled as WOW32
+`E1424CAC174C3388D293142A1A7F159634088BA07E65797408997A3B83C5BC39` and
+passed the 101-case exact-body fixture plus isolated real guest DDE traffic,
+including the rejected DATA-post cleanup; detailed evidence is linked below.
+This is not evidence for DDEML, other message families, all formats,
+allocation failure or arbitrary interleavings. The separate synchronous
+EXECUTE diagnostic fails on candidate, released provider and a native control;
+it is outside documented Win32 DDE protocol and does not establish the original
+AmiPro-specific compatibility.
+The bounded source findings and evidence are recorded in the
+[DDE ownership working audit](../etc/evidence/m0-t449-s2-dde-ownership-audit.md).
+The linked [M1--M3 message/scheduler audit](../etc/evidence/m0-t449-s2-message-scheduler-audit.md)
+confirms the selected original/adapter boundary and identifies no new source
+repair in that cohort; its selected current-package runtime matrix is complete.
+The [M5 ordinary-retirement audit](../etc/evidence/m0-t449-s2-retirement-source-audit.md)
+similarly confirms original `W32DestroyTask` remains the selected owner; it
+does not substitute the later targeted-termination scope.
+The later current-candidate rerun passed the coherent cross-worker,
+pending-send/receiver-destruction and external-native matrices: 6/6, 6/6 plus
+the required negative, and 9/9 respectively, each across Off/Win16/All;
+details are in the message/scheduler audit. Pending death beyond the selected
+case, uncovered interleavings and other conversion families remain open.
+
+The final P package is `build/t449-s2/media-dde-r31`: its whole-component
+cached build recorded all thirteen x86/x64 images and a no-work second pass.
+That exact package reran cross-worker 6/6, pending 6/6 plus the required
+negative, external peer 9/9, and the construction/ordinary-retirement witness
+with zero errors. All thirteen files were then synchronized to
+`assets/release` and `O:\winnt\system32` and rehashed against the tracked
+release manifest. The guest archive, guest files and guest configuration are
+unchanged. S3 targeted task termination and S4 integrated/whole-provider
+acceptance remain explicitly unstarted.
 
 ## Recent M0 Closures
 

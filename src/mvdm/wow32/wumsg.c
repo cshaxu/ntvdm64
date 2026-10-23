@@ -1441,6 +1441,25 @@ ULONG FASTCALL WU32PostAppMessage(PVDMFRAME pFrame)
     .endcmt
 --*/
 
+/* DIV-363: abandon only resources produced by this undelivered conversion. */
+static VOID W32CancelDDEPost(LPMSGPARAMEX mpex, PDDECONVERSION conversion)
+{
+    DWORD error = GetLastError();
+    __try {
+        if (mpex->ddePostPacked) {
+            mpex->ddePostPacked = FALSE;
+            FreeDDElParam(mpex->Parm16.WndProc.wMsg, mpex->lParam);
+        }
+    }
+    __finally {
+        __try {
+            DDERollback32(conversion, mpex->Parm16.WndProc.hwnd,
+                          mpex->Parm16.WndProc.wParam);
+        }
+        __finally { SetLastError(error); }
+    }
+}
+
 ULONG FASTCALL WU32PostMessage(PVDMFRAME pFrame)
 {
     LONG l;
@@ -1450,9 +1469,12 @@ ULONG FASTCALL WU32PostMessage(PVDMFRAME pFrame)
     HWND hwnd;
     register PPOSTMESSAGE16 parg16;
     MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
+    DDECONVERSION postConversion = {0}; /* DIV-363: post-result ownership. */
     BOOL savedWhoCalled = fWhoCalled; /* DIVERGENCE(MVDM-HOST-DIV-350): caller scope. */
     __try {
     DWORD err = NO_ERROR;
+
+    mpex.ddePostConversion = &postConversion;
 
     GETARGPTR(pFrame, sizeof(POSTMESSAGE16), parg16);
 
@@ -1513,6 +1535,14 @@ ULONG FASTCALL WU32PostMessage(PVDMFRAME pFrame)
         if (!l)
             err = GetLastError();
 
+        if (l) {
+            postConversion.Count = 0; /* Receiver/ACK owns transferred pairs. */
+            mpex.ddePostPacked = FALSE;
+        }
+        else {
+            W32CancelDDEPost(&mpex, &postConversion);
+        }
+
         mpex.lReturn = l;
         if (MSG16NEEDSTHUNKING(&mpex)) {
             (mpex.lpfnUnThunk16)(&mpex);
@@ -1540,7 +1570,10 @@ ULONG FASTCALL WU32PostMessage(PVDMFRAME pFrame)
     FREEARGPTR(parg16);
     RETURN((ULONG)mpex.lReturn);
     } __finally {
-        __try { wow_message_unwind16(&mpex); }
+        __try {
+            __try { W32CancelDDEPost(&mpex, &postConversion); }
+            __finally { wow_message_unwind16(&mpex); }
+        }
         __finally { fWhoCalled = savedWhoCalled; } /* DIV-350 */
     }
 }

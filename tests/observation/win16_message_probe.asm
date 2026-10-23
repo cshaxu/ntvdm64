@@ -458,6 +458,110 @@ result 0x8e
 inc word [native_count-data]
 cmp word [dde_retired-data],1
 jne failed
+; Independent reverse-direction witness: a Win16-owned command is posted
+; to the native peer, which ACKs the native alias back to this task.
+mov ax,15
+call native_operation
+result 0x8f
+push word 0x2002                 ; GMEM_MOVEABLE | GMEM_DDESHARE
+push word 0
+push word 32
+api 1,15                        ; KERNEL GlobalAlloc
+test ax,ax
+jz failed
+mov [dde_reverse_handle-data],ax
+push ax
+api 1,18                        ; GlobalLock
+mov bx,ax
+or bx,dx
+jz failed
+mov di,ax
+mov es,dx
+mov si,dde_reverse_payload-data
+mov cx,17
+cld
+rep movsb
+push word [dde_reverse_handle-data]
+api 1,19                        ; GlobalUnlock
+post native_window,0x3e8,[window-data],[dde_reverse_handle-data],0
+test ax,ax
+jz failed
+mov ax,16
+call native_operation
+result 0x90
+.wait_reverse_ack:
+peek 0x3e4,0x3e4,1
+test ax,ax
+jnz .dispatch_reverse_ack
+call deadline
+api 1,29
+jmp .wait_reverse_ack
+.dispatch_reverse_ack:
+push ds
+push word message-data
+api 2,114
+cmp word [dde_reverse_ack-data],1
+jne failed
+mov ax,0x3e5                   ; WM_DDE_DATA
+call dde_packet_roundtrip
+mov ax,0x3e7                   ; WM_DDE_POKE
+call dde_packet_roundtrip
+mov ax,0x3e2                   ; WM_DDE_ADVISE
+call dde_packet_roundtrip
+call dde_failed_post
+%ifdef SYNC_DDE_DIAGNOSTIC
+; Same native peer/thread, but generated entirely by the host as a control.
+mov ax,15
+call native_operation
+result 0x8f
+mov ax,17
+call native_operation
+result 0x91
+mov ax,16
+call native_operation
+result 0x90
+; Original WOW also accepts applications that send EXECUTE synchronously.
+mov ax,15
+call native_operation
+result 0x8f
+push word 0x2002
+push word 0
+push word 32
+api 1,15
+test ax,ax
+jz failed
+mov [dde_reverse_handle-data],ax
+push ax
+api 1,18
+mov bx,ax
+or bx,dx
+jz failed
+mov di,ax
+mov es,dx
+mov si,dde_reverse_payload-data
+mov cx,17
+cld
+rep movsb
+push word [dde_reverse_handle-data]
+api 1,19
+send native_window,0x3e8,[window-data],[dde_reverse_handle-data],0
+mov ax,16
+call native_operation
+result 0x90
+.wait_sync_dde_ack:
+peek 0x3e4,0x3e4,1
+test ax,ax
+jnz .dispatch_sync_dde_ack
+call deadline
+api 1,29
+jmp .wait_sync_dde_ack
+.dispatch_sync_dde_ack:
+push ds
+push word message-data
+api 2,114
+cmp word [dde_reverse_ack-data],2
+jne failed
+%endif
 %endif
 mov ax,3
 call native_operation
@@ -644,6 +748,114 @@ inc di
 test al,al
 jnz equal_text
 ret
+%ifdef CLASSIC_DDE
+dde_failed_post:
+push word 0x2002
+push word 0
+push word 32
+api 1,15
+test ax,ax
+jz failed
+mov [dde_reverse_handle-data],ax
+push ax
+api 1,18
+mov bx,ax
+or bx,dx
+jz failed
+mov di,ax
+mov es,dx
+mov word [es:di],0
+mov word [es:di+2],1
+add di,4
+mov si,dde_packet_payload-data
+mov cx,14
+cld
+rep movsb
+push word [dde_reverse_handle-data]
+api 1,19
+mov ax,20
+call native_operation
+result 0x94
+push word [native_window-data]
+push word 0x3e5
+push word [window-data]
+push word 0
+push word [dde_reverse_handle-data]
+api 2,110
+client_view
+mov [dde_failed_result-data],ax
+mov ax,21
+call native_operation
+result 0x95
+cmp word [dde_failed_result-data],0
+jne failed
+; Failed delivery must not consume the sender's 16-bit memory.
+push word [dde_reverse_handle-data]
+api 1,18
+mov bx,ax
+or bx,dx
+jz failed
+push word [dde_reverse_handle-data]
+api 1,19
+push word [dde_reverse_handle-data]
+api 1,17
+test ax,ax
+jnz failed
+ret
+
+dde_packet_roundtrip:
+mov [dde_packet_message-data],ax
+mov ax,15
+call native_operation
+result 0x8f
+push word 0x2002
+push word 0
+push word 32
+api 1,15
+test ax,ax
+jz failed
+mov [dde_reverse_handle-data],ax
+push ax
+api 1,18
+mov bx,ax
+or bx,dx
+jz failed
+mov di,ax
+mov es,dx
+mov word [es:di],0             ; sender retains data ownership
+mov word [es:di+2],1           ; CF_TEXT
+add di,4
+mov si,dde_packet_payload-data
+mov cx,14
+cld
+rep movsb
+push word [dde_reverse_handle-data]
+api 1,19
+push word [native_window-data]
+push word [dde_packet_message-data]
+push word [window-data]
+push word 0
+push word [dde_reverse_handle-data]
+api 2,110
+client_view
+test ax,ax
+jz failed
+mov ax,16
+call native_operation
+result 0x90
+mov ax,18
+call native_operation
+result 0x92
+push word [dde_reverse_handle-data]
+api 1,17                       ; original app-owned guest global handle
+test ax,ax
+jnz failed
+mov ax,19
+call native_operation
+result 0x93
+inc word [dde_packet_count-data]
+ret
+%endif
 native_operation:
 push bp
 mov bp,sp
@@ -739,6 +951,8 @@ je .death_stale
 %ifdef CLASSIC_DDE
 cmp word [bp+12],0x3e8
 je .dde_execute
+cmp word [bp+12],0x3e4
+je .dde_reverse_ack
 cmp word [bp+12],0x486
 je .dde_retired
 %endif
@@ -1312,6 +1526,19 @@ inc word [dde_retired-data]
 mov word [dde_stage-data],11
 mov ax,0x86
 jmp .value
+.dde_reverse_ack:
+cmp word [bp+6],0x8000
+jne .bad
+mov ax,[dde_reverse_handle-data]
+cmp [bp+8],ax
+jne .bad
+push ax
+api 1,17                        ; original guest handle remains app-owned
+test ax,ax
+jnz .bad
+inc word [dde_reverse_ack-data]
+xor ax,ax
+jmp .value
 %endif
 .bad:
 or word [errors-data],0x4000
@@ -1572,6 +1799,8 @@ dde_received: dw 0
 dde_release_attempt: dw 0
 dde_retired: dw 0
 dde_stage: dw 0
+dde_reverse_ack: dw 0
+dde_packet_count: dw 0
 %endif
 %ifdef CROSS_WORKER
 remote_task: dw 0
@@ -1633,6 +1862,11 @@ module: dd 0
 native: dd 0
 %ifdef CLASSIC_DDE
 dde_handle: dw 0
+dde_reverse_handle: dw 0
+dde_reverse_payload: db 'T449-DDE-REVERSE',0
+dde_packet_message: dw 0
+dde_failed_result: dw 0
+dde_packet_payload: db 'T449-DDE-DATA',0
 %endif
 %ifdef EXTENSION_WITNESS
 extension_native: dd 0

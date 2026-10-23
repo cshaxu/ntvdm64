@@ -23,12 +23,176 @@ static volatile LONG reply_driver_done;
 static HANDLE peer_thread;
 #endif
 static HANDLE peer_ready;
+static HWND peer_window;
 #ifdef CLASSIC_DDE
 static HANDLE dde_ack_event;
+static HANDLE dde_reverse_event;
 static HGLOBAL dde_payload;
 static volatile LONG dde_ack, dde_released, dde_retired;
+static volatile LONG dde_reverse_received;
+static volatile LONG dde_native_control;
+static HGLOBAL dde_observed_packet;
+static HGLOBAL (WINAPI *dde_real_free)(HGLOBAL);
+static ULONG_PTR *dde_free_slot;
+static volatile LONG dde_free_calls;
+static HGLOBAL dde_free_result;
+static ULONG_PTR *dde_post_slot, *dde_lparam_slot;
+static BOOL (WINAPI *dde_real_post)(HWND,UINT,WPARAM,LPARAM);
+static BOOL (WINAPI *dde_real_free_lparam)(UINT,LPARAM);
+static volatile LONG dde_failed_posts, dde_freed_lparams;
+static LPARAM dde_failed_lparam;
+static HWND dde_failed_window;
+
+static ULONG_PTR *dde_find_import(const char *wanted)
+{
+    BYTE *base=(BYTE *)GetModuleHandleA("WOW32.DLL");
+    IMAGE_DOS_HEADER *dos;
+    IMAGE_NT_HEADERS32 *nt;
+    IMAGE_IMPORT_DESCRIPTOR *desc;
+    if(!base) return NULL;
+    dos=(IMAGE_DOS_HEADER *)base;
+    nt=(IMAGE_NT_HEADERS32 *)(base+dos->e_lfanew);
+    if(dos->e_magic!=IMAGE_DOS_SIGNATURE || nt->Signature!=IMAGE_NT_SIGNATURE ||
+       !nt->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT].VirtualAddress) return NULL;
+    desc=(IMAGE_IMPORT_DESCRIPTOR *)(base+nt->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT].VirtualAddress);
+    for(;desc->Name;desc++) {
+        IMAGE_THUNK_DATA32 *names,*slots;
+        if(!desc->OriginalFirstThunk) continue;
+        names=(IMAGE_THUNK_DATA32 *)(base+desc->OriginalFirstThunk);
+        slots=(IMAGE_THUNK_DATA32 *)(base+desc->FirstThunk);
+        for(;names->u1.AddressOfData;names++,slots++) {
+            IMAGE_IMPORT_BY_NAME *name;
+            if(IMAGE_SNAP_BY_ORDINAL32(names->u1.Ordinal)) continue;
+            name=(IMAGE_IMPORT_BY_NAME *)(base+names->u1.AddressOfData);
+            if(strcmp((const char *)name->Name,wanted)==0) return (ULONG_PTR *)&slots->u1.Function;
+        }
+    }
+    return NULL;
+}
+
+static BOOL dde_replace_import(ULONG_PTR *slot,ULONG_PTR value)
+{
+    DWORD old,ignored;
+    if(!slot || !VirtualProtect(slot,sizeof(*slot),PAGE_READWRITE,&old)) return FALSE;
+    *slot=value;
+    return VirtualProtect(slot,sizeof(*slot),old,&ignored);
+}
+
+static BOOL WINAPI dde_fail_post(HWND hwnd,UINT message,WPARAM wparam,LPARAM lparam)
+{
+    UINT_PTR lo,hi;
+    /* WOW's converted HWND may be the 16-bit value rather than the full
+     * native handle; restrict the injection to this test peer in either form. */
+    if(message==WM_DDE_DATA && LOWORD((ULONG_PTR)hwnd)==LOWORD((ULONG_PTR)peer_window)) {
+        if(UnpackDDElParam(message,lparam,&lo,&hi)) dde_observed_packet=(HGLOBAL)lo;
+        dde_failed_window=hwnd;
+        dde_failed_lparam=lparam;
+        InterlockedIncrement(&dde_failed_posts);
+        SetLastError(ERROR_ACCESS_DENIED);
+        return FALSE;
+    }
+    return dde_real_post(hwnd,message,wparam,lparam);
+}
+
+static BOOL WINAPI dde_observe_free_lparam(UINT message,LPARAM lparam)
+{
+    BOOL result=dde_real_free_lparam(message,lparam);
+    if(message==WM_DDE_DATA && lparam==dde_failed_lparam && result)
+        InterlockedIncrement(&dde_freed_lparams);
+    return result;
+}
+
+static BOOL dde_switch_failed_post(BOOL enable)
+{
+    union { ULONG_PTR value; BOOL (WINAPI *function)(HWND,UINT,WPARAM,LPARAM); } post;
+    union { ULONG_PTR value; BOOL (WINAPI *function)(UINT,LPARAM); } lparam;
+    if(enable) {
+        if(dde_post_slot || dde_lparam_slot) return FALSE;
+        dde_post_slot=dde_find_import("PostMessageA");
+        dde_lparam_slot=dde_find_import("FreeDDElParam");
+        if(!dde_post_slot || !dde_lparam_slot) goto fail;
+        post.value=*dde_post_slot; dde_real_post=post.function;
+        lparam.value=*dde_lparam_slot; dde_real_free_lparam=lparam.function;
+        post.function=dde_fail_post;
+        lparam.function=dde_observe_free_lparam;
+        if(!dde_replace_import(dde_lparam_slot,lparam.value)) goto fail;
+        if(!dde_replace_import(dde_post_slot,post.value)) {
+            lparam.function=dde_real_free_lparam;
+            dde_replace_import(dde_lparam_slot,lparam.value);
+            goto fail;
+        }
+        return TRUE;
+    }
+    if(!dde_post_slot || !dde_lparam_slot) return FALSE;
+    post.function=dde_real_post;
+    lparam.function=dde_real_free_lparam;
+    if(!dde_replace_import(dde_post_slot,post.value) ||
+       !dde_replace_import(dde_lparam_slot,lparam.value)) return FALSE;
+    dde_post_slot=NULL; dde_lparam_slot=NULL;
+    return TRUE;
+fail:
+    dde_post_slot=NULL; dde_lparam_slot=NULL;
+    return FALSE;
+}
+
+/* Test-only observation at WOW32's own import, not a product hook. The
+ * original free executes normally; the freed handle is never queried. */
+static HGLOBAL WINAPI dde_observe_free(HGLOBAL handle)
+{
+    HGLOBAL result=dde_real_free(handle);
+    if(handle==dde_observed_packet) {
+        dde_free_result=result;
+        InterlockedIncrement(&dde_free_calls);
+    }
+    return result;
+}
+
+static BOOL dde_switch_free_import(BOOL enable)
+{
+    union { ULONG_PTR value; HGLOBAL (WINAPI *function)(HGLOBAL); } convert;
+    DWORD old,ignored;
+    if(enable) {
+        BYTE *base=(BYTE *)GetModuleHandleA("WOW32.DLL");
+        IMAGE_DOS_HEADER *dos;
+        IMAGE_NT_HEADERS32 *nt;
+        IMAGE_IMPORT_DESCRIPTOR *desc;
+        if(!base || dde_free_slot) return FALSE;
+        dos=(IMAGE_DOS_HEADER *)base;
+        nt=(IMAGE_NT_HEADERS32 *)(base+dos->e_lfanew);
+        if(dos->e_magic!=IMAGE_DOS_SIGNATURE || nt->Signature!=IMAGE_NT_SIGNATURE ||
+           !nt->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT].VirtualAddress) return FALSE;
+        desc=(IMAGE_IMPORT_DESCRIPTOR *)(base+nt->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT].VirtualAddress);
+        for(;desc->Name;desc++) {
+            IMAGE_THUNK_DATA32 *names,*slots;
+            if(!desc->OriginalFirstThunk) continue;
+            names=(IMAGE_THUNK_DATA32 *)(base+desc->OriginalFirstThunk);
+            slots=(IMAGE_THUNK_DATA32 *)(base+desc->FirstThunk);
+            for(;names->u1.AddressOfData;names++,slots++) {
+                IMAGE_IMPORT_BY_NAME *name;
+                if(IMAGE_SNAP_BY_ORDINAL32(names->u1.Ordinal)) continue;
+                name=(IMAGE_IMPORT_BY_NAME *)(base+names->u1.AddressOfData);
+                if(strcmp((const char *)name->Name,"GlobalFree")==0) {
+                    dde_free_slot=(ULONG_PTR *)&slots->u1.Function;
+                    convert.value=*dde_free_slot;dde_real_free=convert.function;
+                    break;
+                }
+            }
+            if(dde_free_slot) break;
+        }
+        if(!dde_free_slot || !dde_real_free) { dde_free_slot=NULL;return FALSE; }
+        convert.function=dde_observe_free;
+    } else {
+        if(!dde_free_slot || !dde_real_free) return FALSE;
+        convert.function=dde_real_free;
+    }
+    if(!VirtualProtect(dde_free_slot,sizeof(*dde_free_slot),PAGE_READWRITE,&old)) return FALSE;
+    *dde_free_slot=convert.value;
+    if(!VirtualProtect(dde_free_slot,sizeof(*dde_free_slot),old,&ignored)) return FALSE;
+    if(!enable) dde_free_slot=NULL;
+    return TRUE;
+}
 #endif
-static HWND sender_window, receiver_window, peer_window;
+static HWND sender_window, receiver_window;
 static DWORD sender_thread, receiver_thread, peer_thread_id;
 #ifdef MESSAGE_CROSS_WORKER
 static DWORD receiver_process_id;
@@ -120,6 +284,50 @@ static LRESULT CALLBACK peer_proc(HWND window, UINT message, WPARAM wp, LPARAM l
     }
     switch (message) {
 #ifdef CLASSIC_DDE
+    case 0x487:
+        return 0x447a0087;
+    case WM_DDE_DATA:
+    case WM_DDE_POKE:
+    case WM_DDE_ADVISE:
+        {
+            UINT lo=0,hi=0;
+            DDEDATA *data;
+            check(UnpackDDElParam(message,lp,&lo,&hi));
+            check(window==peer_window && (HWND)wp==sender_window && lo!=0 && hi==0);
+            data=(DDEDATA *)GlobalLock((HGLOBAL)(ULONG_PTR)lo);
+            check(data!=NULL);
+            if(data) {
+                check(data->cfFormat==CF_TEXT);
+                if(message!=WM_DDE_ADVISE) check(strcmp((char *)data->Value,"T449-DDE-DATA")==0);
+                GlobalUnlock((HGLOBAL)(ULONG_PTR)lo);
+            }
+            check(FreeDDElParam(message,lp));
+            dde_observed_packet=(HGLOBAL)(ULONG_PTR)lo;
+            InterlockedIncrement(&dde_reverse_received);
+            check(dde_reverse_event && SetEvent(dde_reverse_event));
+            return 0;
+        }
+    case WM_DDE_EXECUTE:
+        {
+            HGLOBAL payload=(HGLOBAL)lp;
+            const char *reverse_text=(const char *)GlobalLock(payload);
+            LPARAM ack;
+            check(window==peer_window && (HWND)wp==sender_window && reverse_text!=NULL);
+            if(reverse_text) {
+                check(strcmp(reverse_text,"T449-DDE-REVERSE")==0);
+                GlobalUnlock(payload);
+            }
+            if(InterlockedCompareExchange(&dde_native_control,0,0)) {
+                InterlockedIncrement(&dde_reverse_received);
+                check(dde_reverse_event && SetEvent(dde_reverse_event));
+                return 0;
+            }
+            ack=PackDDElParam(WM_DDE_ACK,0x8000,(UINT_PTR)payload);
+            check(ack!=0 && PostMessageA(sender_window,WM_DDE_ACK,(WPARAM)window,ack));
+            InterlockedIncrement(&dde_reverse_received);
+            check(dde_reverse_event && SetEvent(dde_reverse_event));
+            return 0;
+        }
     case WM_DDE_ACK:
         {
             UINT lo=0,hi=0;
@@ -558,6 +766,102 @@ DWORD WINAPI MessagePeer(DWORD operation)
     }
 #endif
 #ifdef CLASSIC_DDE
+    if (operation == 20) {
+        FILE *out;
+        if(GetCurrentThreadId()!=sender_thread || dde_free_slot || dde_post_slot) return 0;
+        dde_observed_packet=NULL; dde_failed_lparam=0; dde_failed_window=NULL;
+        dde_failed_posts=0; dde_freed_lparams=0; dde_free_calls=0;
+        dde_free_result=(HGLOBAL)(ULONG_PTR)1;
+        if(!dde_switch_free_import(TRUE)) return 0;
+        if(!dde_switch_failed_post(TRUE)) {
+            out=fopen("MSGPEER-FAIL.txt","a");
+            if(out) { fprintf(out,"failed-post import setup failed post=%p lparam=%p error=%lu\n",
+                (void *)dde_find_import("PostMessageA"),(void *)dde_find_import("FreeDDElParam"),GetLastError()); fclose(out); }
+            dde_switch_free_import(FALSE); return 0;
+        }
+        return 0x447a0094;
+    }
+    if (operation == 21) {
+        BOOL restored_post,restored_free;
+        FILE *out;
+        if(GetCurrentThreadId()!=sender_thread || !dde_free_slot || !dde_post_slot) return 0;
+        restored_post=dde_switch_failed_post(FALSE);
+        restored_free=dde_switch_free_import(FALSE);
+        out=fopen("MSGPEER-FAIL.txt","a");
+        if(out) { fprintf(out,"failed-post restore=%d/%d posts=%ld window=%p peer=%p packet=%p lparams=%ld frees=%ld result=%p\n",
+            restored_post,restored_free,dde_failed_posts,dde_failed_window,peer_window,dde_observed_packet,dde_freed_lparams,dde_free_calls,dde_free_result); fclose(out); }
+        check(restored_post && restored_free && dde_failed_posts==1 &&
+              LOWORD((ULONG_PTR)dde_failed_window)==LOWORD((ULONG_PTR)peer_window) &&
+              dde_observed_packet && dde_freed_lparams==1 && dde_free_calls==1 &&
+              dde_free_result==NULL);
+        dde_observed_packet=NULL;
+        return errors ? 0 : 0x447a0095;
+    }
+    if (operation == 18) {
+        if(GetCurrentThreadId()!=sender_thread || !dde_observed_packet || dde_free_slot) return 0;
+        dde_free_calls=0;dde_free_result=(HGLOBAL)(ULONG_PTR)1;
+        return dde_switch_free_import(TRUE) ? 0x447a0092 : 0;
+    }
+    if (operation == 19) {
+        BOOL restored;
+        if(GetCurrentThreadId()!=sender_thread || !dde_free_slot) return 0;
+        restored=dde_switch_free_import(FALSE);
+        check(restored && dde_free_calls==1 && dde_free_result==NULL);
+        dde_observed_packet=NULL;
+        return errors ? 0 : 0x447a0093;
+    }
+    if (operation == 17) {
+        HGLOBAL payload;
+        char *bytes;
+        LRESULT result, generic;
+        DWORD error;
+        if(GetCurrentThreadId()!=sender_thread || !peer_window || !dde_reverse_event) return 0;
+        payload=GlobalAlloc(GMEM_MOVEABLE|GMEM_DDESHARE,32);
+        if(!payload) return 0;
+        bytes=(char *)GlobalLock(payload);
+        if(!bytes) { GlobalFree(payload);return 0; }
+        memcpy(bytes,"T449-DDE-REVERSE",17);
+        GlobalUnlock(payload);
+        generic=SendMessageA(peer_window,0x487,0,0);
+        check(generic==0x447a0087);
+        InterlockedExchange(&dde_native_control,1);
+        SetLastError(0);
+        result=SendMessageA(peer_window,WM_DDE_EXECUTE,(WPARAM)sender_window,(LPARAM)payload);
+        error=GetLastError();
+        {
+            FILE *out=fopen("MSGPEER-FAIL.txt","a");
+            if(out) {
+                fprintf(out,"native-generic=%ld native-send-result=%ld error=%lu received=%ld\n",
+                        (long)generic,(long)result,error,dde_reverse_received);
+                fclose(out);
+            }
+        }
+        InterlockedExchange(&dde_native_control,0);
+        GlobalFree(payload);
+        return errors ? 0 : 0x447a0091;
+    }
+    if (operation == 15) {
+        if(GetCurrentThreadId()!=sender_thread || dde_reverse_event || !peer_window) return 0;
+        InterlockedExchange(&dde_reverse_received,0);
+        dde_reverse_event=CreateEventA(NULL,TRUE,FALSE,NULL);
+        return dde_reverse_event ? 0x447a008f : 0;
+    }
+    if (operation == 16) {
+        DWORD wait;
+        if(GetCurrentThreadId()!=sender_thread || !dde_reverse_event) return 0;
+        wait=WaitForSingleObject(dde_reverse_event,5000);
+        {
+            FILE *out=fopen("MSGPEER-FAIL.txt","a");
+            if(out) {
+                fprintf(out,"reverse-wait=%lu received=%ld errors=%ld last-error=%lu\n",
+                        wait,dde_reverse_received,errors,GetLastError());
+                fclose(out);
+            }
+        }
+        check(wait==WAIT_OBJECT_0 && dde_reverse_received==1);
+        check(CloseHandle(dde_reverse_event)); dde_reverse_event=NULL;
+        return errors ? 0 : 0x447a0090;
+    }
     if (operation == 13) {
         char *payload;
         if(GetCurrentThreadId()!=sender_thread || dde_payload || !peer_window) return 0;

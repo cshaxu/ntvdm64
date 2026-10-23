@@ -370,6 +370,9 @@ typedef struct _MSGPARAMEX {
     MSGTHUNKBUFFER MsgBuffer[1];
     /* DIVERGENCE(MVDM-HOST-DIV-344): NULL HWND can be a valid thread message. */
     BOOL fThunkSucceeded;
+    /* DIV-363: optional owner supplied only by WU32PostMessage. */
+    PVOID ddePostConversion;
+    BOOL ddePostPacked;
 } MSGPARAMEX;
 
 #define MSG16NEEDSTHUNKING(lpmpex) ((lpmpex)->iClass != WOWCLASS_NOTHUNK)

@@ -102,6 +102,23 @@ cleanup, so this minimal owner-local mirror change is registered. Verification
 and remaining original-entry gaps are tracked in the
 [S3 ledger](../../docs/etc/evidence/m0-t448-s3-close-implementation.md).
 
+MVDM-HOST-DIV-363 extends DIV-354's conversion-local rollback in
+`wow32/wdde.c`, `walias.h`, `wmsg16.c` and `wumsg.c` for T449 S2. The original
+`WU32PostMessage` loses its stack-local `DDECONVERSION` immediately after
+thunking, even though the actual native `PostMessage` can still reject the
+converted packet. Keep one call-local record only until that native result: a
+rejected post releases its packed parameter and just-created original HDDE
+pairs before the existing private-message fallback; a successful post transfers
+them unchanged to the original receiver/ACK path. Do not change synchronous
+`WU32SendMessage`, replace the original HDDE list, add a registry, or alter
+successful ACK ownership. The ordinary ACK frees a generated
+`DDE_EXECUTE_FREE_H16` alias; the same alias must be freed when a rejected post
+has no ACK. This is the sole `wdde.c` divergence. The focused source fixture
+proves original pair/mark ownership, failed-post cancellation and that exact
+generated-alias rule. The recorded candidate package additionally passed
+actual guest DDE traffic and the rejected DATA-post control; complete S2
+delivery is recorded by its coherent thirteen-image package gate.
+
 MVDM-HOST-DIV-354 registers the remaining S4 classic-DDE construction and
 rollback closure in existing wow32/wdde.c/.h, wmdisp32.c and wmsg16.c. Keep
 the original HDDE list as the sole persistent alias authority and retain each

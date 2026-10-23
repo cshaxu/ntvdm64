@@ -4,6 +4,13 @@
 reconciles inherited execution rows against current source and records the
 remaining source/acceptance audit without claiming implementation completion.
 
+[T449 S2 DDE ownership audit](evidence/m0-t449-s2-dde-ownership-audit.md),
+[message/scheduler audit](evidence/m0-t449-s2-message-scheduler-audit.md), and
+[ordinary-retirement audit](evidence/m0-t449-s2-retirement-source-audit.md)
+record the bounded source repair, selected original ownership, actual guest
+matrix and coherent-package delivery boundary; they do not claim later
+per-task termination or whole-provider completion.
+
 [T448 S13 uncertain TODO audit](evidence/m0-t448-s13-uncertain-todo-audit.md)
 owns the bounded investigation plan, witnesses and dispositions.
 

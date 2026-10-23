@@ -63,10 +63,21 @@ try{
    $package=(Resolve-Path -LiteralPath $PackageRoot).Path
    if(!$package.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase)){throw 'Candidate must be build-owned'}
    $ManifestPath=(Resolve-Path -LiteralPath $ManifestPath).Path
-   $manifest=Get-Content $ManifestPath -Raw|ConvertFrom-Json
-   if($manifest.Count -ne 13 -or @($manifest.name|Sort-Object -Unique).Count -ne 13){throw 'Need coherent13 candidate manifest'}
-   foreach($image in $manifest){if((Get-FileHash "$package/SYSTEM32/$($image.name)").Hash -ne $image.sha256){throw 'Candidate identity mismatch'}}
-   Get-FileHash $ManifestPath|Export-Csv -NoTypeInformation "$root/candidate-manifest.csv"
+   $manifestHash=Get-FileHash -LiteralPath $ManifestPath
+   try{
+    $manifest=@(Get-Content -LiteralPath $ManifestPath -Raw|ConvertFrom-Json)
+    if($manifest.Count -ne 13 -or @($manifest.name|Sort-Object -Unique).Count -ne 13){throw 'Need coherent13 candidate JSON manifest'}
+    foreach($image in $manifest){if((Get-FileHash "$package/SYSTEM32/$($image.name)").Hash -ne $image.sha256){throw 'Candidate identity mismatch'}}
+   }catch [System.Management.Automation.RuntimeException]{
+    $manifest=@(Import-Csv -LiteralPath $ManifestPath)
+    if($manifest.Count -lt 13 -or @($manifest.Path|Sort-Object -Unique).Count -ne $manifest.Count){throw 'Need coherent candidate CSV manifest'}
+    $system32Root=[IO.Path]::GetFullPath((Join-Path $package 'SYSTEM32'))+'\'
+    foreach($image in $manifest){
+     $path=[IO.Path]::GetFullPath($image.Path)
+     if(!$path.StartsWith($system32Root,[StringComparison]::OrdinalIgnoreCase) -or !(Test-Path -LiteralPath $path) -or (Get-FileHash -LiteralPath $path).Hash -ne $image.Hash){throw 'Candidate CSV identity mismatch'}
+    }
+   }
+   $manifestHash|Export-Csv -NoTypeInformation "$root/candidate-manifest.csv"
   }else{
    [IO.Compression.ZipFile]::ExtractToDirectory((Join-Path $repo 'assets/winnt.zip'),"$root/media")
    $package="$root/media/WINNT"
