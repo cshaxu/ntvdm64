@@ -2,34 +2,34 @@
 
 ## Current Work
 
-**Active: M0 T448 S12**, Ordinary Mode, single implementer/reviewer. T448 remains open.
+**Active: M0 T448 S13**, Ordinary Mode, single implementer/reviewer. T448 remains open.
 
 ## Active Packet
 
-| Field | S12 reproducible host TODO remediation packet |
+| Field | S13 uncertain TODO investigation packet |
 | --- | --- |
-| Identifier Mode | M0 T448 S12, Ordinary Mode; one implementer and independent self-review. |
+| Identifier Mode | M0 T448 S13, Ordinary Mode; one implementer and independent self-review. |
 | Candidate Proposal | [NTSRV lifecycle authority](../proposals/proposal-ntsrv-lifecycle-authority-001.md). |
-| Admission And Approval | Owner expands active S12 to fix all reproducible host-side TODO defects; S13 investigates the remaining not-necessarily-reproducible TODO cases. Owner approves the bounded deleted-anchor successor-hint design and its documented mutation limits. |
-| Objective | Audit the complete TODO by actual owner and reproducibility; repair evidenced reproducible host defects, with original-source exception records and real regression evidence. Preserve original guest limitations. |
-| Non-goals | No guest modification, rebuild or hot patch; no speculative fixes or unrelated lifecycle and WOW expansion. |
-| Reference Baseline | Published S9 package; S10 commits e097bccb0 and 25a507a7d, with full-size SOL gameplay still unverified. |
-| Files And ABI Surface | Original host providers and project-owned adapters as proven by each case; preserve guest binaries and existing ABI unless separately justified. |
+| Admission And Approval | Owner accepts S12 and admits S13 to investigate the remaining not-necessarily-reproducible TODO cases. |
+| Objective | Reconcile the transferred inventory, reproduce representative uncertain cases and establish owner, evidence and bounded disposition without treating nonreproduction as repair. |
+| Non-goals | No guest modification, rebuild or hot patch; no speculative repairs, semantic retreat, invented retries, or unrelated WOW implementation. |
+| Reference Baseline | S12 published 13-image package at commit 36e8d41f6; [S12 evidence](../etc/evidence/m0-t448-s11-window-startup.md) retains the test coverage and mutation limits. |
+| Files And ABI Surface | Investigation records, focused test fixtures and scripts; no production ABI change without appropriately admitted repair. |
 | Applicable Rules | Reading set, execution, source policy, guest immutability, original-owner evidence, and documentation governance. |
-| Verification | Revalidate each original failing witness and owner; prove repairs with positive, negative, lifecycle and actual guest paths, run affected regressions, and distinguish unavailable from nonreproducible. |
-| Expected Markers | INT33 checksum, VGA cursor-disable, 8042 C0, redirector zero capacity and DEM deleted-name cases dispositioned with source, tests and mirror-diff accounting. |
-| Asset Needs | Published package, immutable guest inputs, isolated desktop and independently authored disposable probes. |
-| Reporting Requirements | Per TODO report classification, observed behavior, owner, fix or explicit remaining boundary and evidence. Disposable build/t448-s12 budget 2 GiB and two hours per run; inspect after ten minutes without progress. |
+| Verification | Pin package and guest identity; exercise valid bounded witnesses and controls, inspect source and historical logs; preserve missing prerequisites and actual failure diagnostics. |
+| Expected Markers | Each transferred uncertainty has a witnessed, nonreproduced, unavailable, retained-boundary or separately planned disposition with evidence and explicit limits. |
+| Asset Needs | Published package, immutable guest inputs, isolated desktop, existing tests and independently authored disposable probes where needed. |
+| Reporting Requirements | Per case identify original evidence, scope and actual result; no nonreproduction claim for unavailable or invalid tests. Disposable build/t448-s13 budget 2 GiB and two hours per run; inspect after ten minutes without progress. |
 | Stop Conditions | Unapproved semantic change, guest modification, or evidence requiring materially broader implementation. |
-| Exit Criteria | All confirmed reproducible host defects in the frozen inventory repaired and tested, or an explicit authority/prerequisite blocker reported; full appropriate build, release, review, commit and push; await owner acceptance. |
-| Original Owner Request | Expand S12 to all reproducible host-side TODO repairs; use S13 for all not-necessarily-reproducible TODO investigation. |
-| Similar-Issue Sweep | Distinguish original guest defects, original host defects, adapter defects and invalid test witnesses. |
+| Exit Criteria | Finite transferred inventory reconciled without lost debt, valid required checks completed or unavailable boundaries recorded, evidence reviewed, governance checked, committed and pushed; await owner acceptance. |
+| Original Owner Request | Accept and close S12; admit S13 to investigate the remaining uncertain issues. |
+| Similar-Issue Sweep | Distinguish intermittent product failures, historical failed observations, accepted capability limits, missing device prerequisites and unrelated engineering work. |
 
 [S11 investigation](../etc/evidence/m0-t448-s11-window-startup.md) reproduces
 the already documented original COMMAND large-environment lifetime defect on
 the current package. The specific post-prompt CAF report remains unverified;
-no product fix or publication is claimed. Prior DOS/mouse S12 observations
-are retained in that ledger, not treated as completed triage.
+no product fix for that guest defect is claimed. Prior DOS/mouse observations
+and the subsequently delivered S12 repairs are retained in that ledger.
 
 S12 DIV-357–361 repairs the INT33 checksum, VGA cursor-disable,
 8042 response, buffered directory-entry loss and redirector zero capacity.
@@ -43,7 +43,7 @@ as do full DOS, WOW and CAF regressions. The 13-image package is published and
 hash-verified at both destinations. The original indexed kernel IRP has no
 documented user-mode equivalent; arbitrary deletion, rename and index reuse
 remain outside the approved hint's equivalence claim. See the [evidence ledger](../etc/evidence/m0-t448-s11-window-startup.md).
-S12 awaits owner acceptance; T448 remains open.
+The owner accepted S12; T448 remains open and S13 is now active.
 
 Earlier stages' complete status and chronology are preserved in the indexed
 [pre-compaction snapshot](https://github.com/cshaxu/ntvdm64/blob/ba156ef61/docs/states/CURRENT.md).
@@ -120,13 +120,19 @@ Bounded test-only delivery; full-size gameplay and owner acceptance remain separ
 
 Owner reports normal testing; no causal repair claimed: [S11 ledger](../etc/evidence/m0-t448-s11-window-startup.md).
 
+## S12 Closure Record
+
+Owner accepted the tested and published six-fix checkpoint, commit 36e8d41f6;
+see the [S12 ledger](../etc/evidence/m0-t448-s11-window-startup.md) for actual
+coverage, original guest exclusions and the approved bounded directory semantics.
+
 ## Current Technical Baseline
 
 The six-fix 13-image checkpoint was built, tested, published and hash-verified;
 the [S12 ledger](../etc/evidence/m0-t448-s11-window-startup.md) and
 [release manifest](../../assets/release/release-manifest.json) record its
 identity, actual test coverage and limits. Guest binaries remain unchanged.
-S12 is not closed pending owner acceptance. WRITE editing and exit remain
+S12 is owner-accepted. WRITE editing and exit remain
 unverified; original guest limitations and S13's investigation remain separate.
 
 ## Recent M0 Closures

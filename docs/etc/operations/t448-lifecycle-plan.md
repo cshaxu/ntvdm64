@@ -546,6 +546,12 @@ or rebuild the guest, or suppress an actual failure.
 
 ### S13: not-necessarily-reproducible TODO investigation
 
+The owner accepted S12 and admitted S13. The historical transferred rows below
+retain their original wording, not current repair status: S12 delivered
+DIV-357 through DIV-362 for mouse checksum, VGA cursor, 8042 response, directory
+buffer/restart and redirector zero capacity. See the S12 closure evidence;
+do not reclassify those fixed witnesses as pending S13 investigations.
+
 Audit every remaining uncertainty-bearing TODO, not just the four historical
 lifecycle/input witnesses: include reported SOL layout and intermittent direct
 WINMINE/SOL termination, the common-dialog witness, WRITE lifecycle, potential
@@ -572,9 +578,9 @@ not prove a historical failure was repaired or determine its cause.
 ### Transferred TODO inventory
 
 The owner directs removal of entries taken into S12/S13 from TODO to avoid
-duplicate tracking. The complete transferred entries follow, unchanged in
-substance: this is active investigation or remediation, not a list of fixes.
-The S12/S13 categorization and accepted guest, device and semantic boundaries
+duplicate tracking. The complete transferred entries follow as the historical
+intake, unchanged in substance; individual S12 fixes and S13 dispositions
+supersede their original pending language. The S12/S13 categorization and accepted guest, device and semantic boundaries
 above govern disposition. MEM is an investigated guest-retained case and is
 not permission to modify guest. An unresolved item must be returned to TODO or
 assigned to its proper future packet before T448 closes; do not lose debt.
