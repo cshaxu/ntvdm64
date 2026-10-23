@@ -66,13 +66,15 @@ claim S2 closure or waive its coherent-package gate.
 
 ## Active temporary outputs
 
-`build/t451-s2/` is the S2-owned disposable fixture root. It contains only
-the focused lifecycle/page-domain builds and their logs; no cache, package,
-guest media or acceptance evidence is stored there. Its owner is the active
-S2 packet. The current run completed with no owned background process; retain
-it only until the desktop-capable matrix is either captured into the S2 record
-or superseded, then remove it through `Clear-BuildOutput.ps1` using a reviewed
-manifest.
+`build/t451-s2/` was the S2-owned disposable fixture root. It contained only
+focused lifecycle/page-domain builds and their logs; no cache, package, guest
+media or acceptance evidence. After the checkpoint conclusions were recorded,
+the current run had no owned background process and the reviewed
+`Clear-BuildOutput.ps1` manifest removed all 282 files (32,803,106 bytes;
+tree inventory `80E8B190E8D1A50C3CCCCD4E192D7291F31E455DADA0547F6D3245F9EB06CC7B`).
+Stable Ninja/ccache roots were not touched. A final global residual scan still
+reports historical build outputs with unverified ownership; they are outside
+this S2 cleanup and were deliberately retained.
 
 ## Recent M0 Closures
 

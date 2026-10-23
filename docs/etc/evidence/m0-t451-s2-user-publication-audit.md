@@ -84,3 +84,14 @@ the S2 acceptance vehicle; no assertion was weakened or bypassed.
 
 These are fixed acceptance gates, not an invitation to add a new object
 family. R05/R09/R10 remain S3 exactly as assigned by the S1 ledger.
+
+## Disposable output disposition
+
+The focused run's `build/t451-s2/` tree was removed after this record retained
+its commands, markers and environment diagnosis. The reviewed cleanup manifest
+covered 282 generated files / 32,803,106 bytes at inventory hash
+`80E8B190E8D1A50C3CCCCD4E192D7291F31E455DADA0547F6D3245F9EB06CC7B`.
+The cleanup tool rejected no S2 item and did not traverse the stable
+`.ninja`/`.ccache` roots. Its final global residual scan found older
+unattributed build children; they were not within this packet's authority and
+were left intact.
