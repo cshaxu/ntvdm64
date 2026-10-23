@@ -72,8 +72,10 @@ S4's later `package-r2` supersedes its stale initial candidate: the current
 thirteen-image package was rebuilt, exercised through the selected message,
 application, guest-contract and CAF matrices, published and hash-verified at
 both destinations.  Its evidence is in
-`m0-t449-s4-reconciliation-ledger.md`; only WRITE physical edit/save/normal
-exit remains an open S4 witness, not a passing row.
+`m0-t449-s4-reconciliation-ledger.md`.  The owner has now completed the
+required physical WRITE Save As witness: `O:\\winnt\\XXX.WRI` was produced and
+all associated project processes retired normally.  S4 is delivered, with
+owner acceptance of the T remaining the only transition not yet recorded.
 
 S2's DDE ownership group is owner-accepted and closed. Source tracing found
 one bounded gap: `WU32PostMessage` discards the original stack-local DDE
@@ -157,3 +159,11 @@ and configuration remain unchanged, and S4 is not admitted by this record.
 
 T448's final governance, publication and retained limitations are documented
 in its [closure](../history/m0-t448-closure.md).
+
+## S4 Delivery Record
+
+The [S4 reconciliation ledger](../etc/evidence/m0-t449-s4-reconciliation-ledger.md#write-physical-interaction-witness--2026-10-23)
+now contains current-package build, runtime, publication and physical WRITE
+evidence.  Its `package-r2` is commit `32f3ca2a1`; the thirteen release and
+installed images rehash to the same manifest.  S4 has reached its bounded
+delivery point and awaits owner acceptance before T449 closure.

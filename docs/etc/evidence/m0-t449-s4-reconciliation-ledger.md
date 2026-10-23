@@ -97,8 +97,6 @@ the visible class/PID identity on each close poll; `sol-off-r5` then proves
 normal closure and Run16 completion.  This is the M5 rule applied to the
 test oracle rather than a product repair.
 
-## Remaining bounded S4 item
-
 ## Current sealed-package reconciliation — 2026-10-23
 
 The former `package-r1` cannot be used as a release witness: its ten core
@@ -133,8 +131,7 @@ copy at both destinations was verified against `publish-r2/verified-manifest.jso
 The installed and release roots now carry the same `package-r2` identities.
 
 WRITE startup is retained and the current 12-case common-dialog matrix proves
-the selected WOW/common-dialog bridge, but full real WRITE edit/save/exit is
-not yet a pass.  The owned current-package startup check also reconfirmed that
+the selected WOW/common-dialog bridge.  The owned current-package startup check also reconfirmed that
 WRITE needs the complete, unfiltered Userenv logon block and the short physical
 stage: under that already-approved environment, `MSWRITE_MENU`, `MSWRITE_DOC`
 and `MSWRITE_PAGEINFO` are visible in the shared WOW worker.  An inherited
@@ -155,10 +152,19 @@ file.  They are not physical input and must not be promoted to an interaction
 pass.  This is a test-driver boundary only: it is neither evidence that
 immutable WRITE cannot save nor evidence of a host-side product regression.
 
-The finite next step is an owned input-capable private-desktop harness (or an
-equivalent visible-desktop, isolated test session) that sends normal input
-through the existing frontend path, then proves document content, Save As,
-normal Exit and Run16 completion.  No source repair is admitted unless that
-witness shows an actual bridge failure.  Therefore S4 is not ready for final
-publication/closure solely because this one required application witness is
-unproved.
+## WRITE physical interaction witness — 2026-10-23
+
+The owner performed the required physical Save As interaction in the visible,
+published `run16` WRITE session and confirmed success.  WRITE saved the
+document as `O:\\winnt\\XXX.WRI`; the original Win16 path handling normalized the
+requested `O:\\winnt\\tests\\xxx.wri` name to its current working directory rather
+than creating a `tests` child file.  The saved file is 640 bytes, has SHA-256
+`078F7C04561080C39DDC61E26EC6B43146A965FCD1DD9F69E4EA6D40A4C5C85C`, and was
+written at `2026-10-23T14:00:20.3685087-07:00`.  A subsequent process query
+found no surviving project `run16`, `ntvdm`, `ntvwm`, `ntcon`, or `ntsrv`
+process.  This is the required real edit/save/normal-retirement witness; it
+does not rely on the invalid inactive-desktop synthetic-input attempt.
+
+With that physical witness, every fixed S4 group now has current-package
+evidence.  The package was already built, published, hash-verified, reviewed,
+committed, and pushed; S4 is delivered and awaits owner acceptance of T449.
