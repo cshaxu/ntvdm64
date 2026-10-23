@@ -1,40 +1,39 @@
 # mvdm
 
-MVDM-HOST-DIV-361 (T448 S12 candidate): `VrGetUserName` rejects an
+MVDM-HOST-DIV-361 (T448 S12 checkpoint): `VrGetUserName` rejects an
 explicitly checked zero-byte capacity with the existing `NERR_BufTooSmall`
 result instead of underflowing `CX-1` and writing to the guest buffer.
 Unchecked `BX=0`, positive capacities, conversion and buffer release remain
 unchanged. The original-provider fixture covers zero, empty and nonempty
 names, exact bounds, unchecked mode and failure cleanup; the guest is unchanged.
 
-MVDM-HOST-DIV-360 (T448 S12 candidate): when `demsrch.c::FileFindClose`
+MVDM-HOST-DIV-360 (T448 S12 checkpoint): when `demsrch.c::FileFindClose`
 discards unconsumed directory-buffer entries after the underlying enumeration
 already reached its end, mark the search for its original reopen/reset path.
 Preserve other failure statuses and the empty-buffer end status. DOS INT21
 under buffer pressure and the real DEM provider verify the non-deletion case;
-the deleted reset-anchor limitation remains unresolved. Not yet published.
+the deleted reset-anchor limitation remains unresolved.
 
-MVDM-HOST-DIV-359 (T448 S12 candidate): `keyba.c` installs the actual 8042
+MVDM-HOST-DIV-359 (T448 S12 checkpoint): `keyba.c` installs the actual 8042
 controller response in the output register and status without issuing a keyboard
 interrupt; command C0 supplies the emulated input-port byte. The existing
 NTVDM path otherwise returned stale scan output. Actual controller/PIC tests
-cover replies and EOI-owned queued input; this candidate is not yet published.
+cover replies and EOI-owned queued input.
 
-MVDM-HOST-DIV-358 (T448 S12 candidate): `vga_prts.c` records CRTC cursor
+MVDM-HOST-DIV-358 (T448 S12 checkpoint): `vga_prts.c` records CRTC cursor
 start register writes even when only bit 5 changes and applies that disable bit
 independently of scan-line geometry. It preserves the existing split-cursor
-geometry. Register readback and real frontend-frame verification are required
-before accepting the candidate; it is not yet published.
+geometry. Register readback and real frontend-frame verification pass.
 
-MVDM-HOST-DIV-357 (T448 S12 candidate): original
+MVDM-HOST-DIV-357 (T448 S12 checkpoint): original
 `softpc.new/base/keymouse/mouse_io.c::mouse_save_state` always stores a zero
 checksum, whereas its original restore routine validates the byte sum of the
 cookie and context. Keep the original format and restore validation; compute
 that same sum over the exact bytes saved. Source-proven real INT33 failure and
 test-buffer checksum control, current SoftPC comparison, rejected alternatives
-and planned negative/lifecycle tests are recorded in the
+and negative/lifecycle tests are recorded in the
 [S12 evidence](../../docs/etc/evidence/m0-t448-s11-window-startup.md#int33-host-correction-proposal).
-This is a candidate with focused verification, not a fully verified or published repair.
+The full tested thirteen-image checkpoint is published; S12 remains open.
 
 MVDM-HOST-DIV-356 (T448 S3 candidate): retain original SoftPC terminate,
 host_applClose and host_terminate bodies and their cleanup order, but obtain
