@@ -5412,7 +5412,11 @@ int main(int argc, char **argv)
     DWORD result = 3;
     wsprintfW(name, L"T447Graph-%lu", GetCurrentProcessId());
     desktop = CreateDesktopW(name, NULL, NULL, 0, GENERIC_ALL, NULL);
-    if (!desktop) return 2;
+    if (!desktop) {
+        fprintf(stderr, "WOW_PAGE_DOMAIN_DESKTOP_UNAVAILABLE error=%lu\n",
+            GetLastError());
+        return 2;
+    }
     thread = CreateThread(NULL, 0, run_graph_desktop, desktop, 0, NULL);
     if (thread) {
         WaitForSingleObject(thread, INFINITE); /* Outer harness owns deadline. */

@@ -5,6 +5,14 @@ maps every residual C04--C07/object-C10 PMODE32 direct-reader family to its
 producer, authority, update/withdrawal rule, evidence and bounded S2--S4
 successor; it is an inventory, not a runtime-completion claim.
 
+[T451 S1 closure record](evidence/m0-t451-s1-closure.md) fixes the inventory
+closure boundary and confirms that the S1 commit changed no product input.
+
+[T451 S2 USER publication audit](evidence/m0-t451-s2-user-publication-audit.md)
+traces the selected original reader/publisher chains, corrects the stale
+standard-class fixture prelude, records its passing focused cases and the
+current isolated-desktop acceptance prerequisite.
+
 [T450 S1--S4 closure ledger](evidence/m0-t450-s1-s4-closure-ledger.md)
 indexes the completed Win16 Style-removal sequence retained before the active
 Run16 entry-contract correction.

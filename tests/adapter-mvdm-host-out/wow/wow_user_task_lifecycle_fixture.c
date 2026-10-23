@@ -1160,13 +1160,15 @@ int __cdecl main(int argc,char **argv)
     }
     CHECK(wow_user_task_lifecycle_register(&lifecycle, end_task, wowexec));
     CHECK(lifecycle.registered && lifecycle.process.pwpi != NULL);
-    CHECK(!wow_user_task_lifecycle_init(&lifecycle, 0x0400, "APP.EXE",
-        0x1234, 0, 0, 0, 0, 1, 1, SW_HIDE));
-    CHECK(!binding.thread && GetLastError() == ERROR_NOT_FOUND);
-    CHECK(wow_user_idle_hook_for_current() == NULL);
     {
         wow_class_lookup_entry *entry;
         unsigned published = 0;
+        /* This is the first admission attempt.  Before removal of the
+         * project-owned style policy, the preceding call exercised an
+         * intentionally invalid style payload and failed before publication.
+         * The plain lifecycle entry has no equivalent invalid input: with the
+         * projection leaf configured to fail on its third member, it must
+         * leave precisely the first two standard classes published. */
         wow_task_class_fail_at = 3;
         CHECK(!wow_user_task_lifecycle_init(&lifecycle, 0x0400, "APP.EXE",
             0x1234, 0, 0, 0, 0, 1, 1, SW_HIDE));
