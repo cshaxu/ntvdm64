@@ -106,6 +106,56 @@ assertions are useful M1/M5/M6 witnesses but do not establish NTMON-targeted
 task deletion or sibling survival. Existing historical pass records must be
 matched to these exact modes and package hashes before marking any row proved.
 
+## Object and native-call dependency reconciliation
+
+The current creation path is not just a post-create decoration:
+`wow_window_creation_binding.c` installs a thread-local CBT observer before
+`CreateWindowExA/W` (or the selected dialog creation service), enrolls the
+native window during its callbacks, and rejects a returned window if the
+expected enrollment is absent or belongs to a different HWND. Its `__finally`
+pops the nested scope, removes the hook, releases the borrowed window/class
+owners and restores the native-call execution scope. A failed result retires
+an enrolled partial window. This is source evidence of the intended paths,
+not proof that every hook veto or exceptional reentry has been exercised.
+
+`wow_user_native_call_begin/end` uses the existing task execution scope and
+original `xxxSleepTask`/`xxxDirectedYield` when required. At return,
+`publish_guest_return` refreshes the explicit window/payload graph, desktop
+borrow and native menu views before guest continuation. A failed required
+publication enters the existing terminal native-call failure boundary rather
+than silently continuing on a partial view. The approved snapshot boundary
+still applies to other processes; this synchronization is not a claim of
+real-time global shared memory. A message cohort that crosses a native call
+must therefore verify callback nesting, execution restoration and the view
+it consumes together; testing its converter in isolation cannot prove them.
+
+On terminal window retirement `wow_window_words_terminal` marks the local
+original-compatible view destroyed, invokes the original control/dialog
+finalizer before withdrawing identity, and rechecks enrollment after possible
+reentry. `wow_user_window_retire` checks index, full handle uniqueness and
+the expected object before withdrawing the view. Menu retirement checks
+native `IsMenu`, withdraws copied parent views before children and preserves
+detached-but-live menus; native destruction and original cleanup remain the
+owners, not the copied graph. These source checks constrain a future repair:
+do not replace original control finalization, destroy a merely detached menu,
+or retire a new object because its short handle equals an old one. Reconcile
+the existing S2/S3 test assertions for exceptional creation, nested destroy,
+handle reuse and menu detach/reparent before assigning a pass or a specific
+fix; this section does not establish those runtime cases by inspection.
+
+The retained S3 control-interaction-r3 receipt supplies a bounded actual
+guest witness: under each of Off/Win16/All it records zero errors, three
+word callbacks and three nested callbacks, eight normally destroyed controls
+and two left to exact-once task retirement; it also checks actual list
+movement and both droppable combo forms' capture/release. Its subsequent
+identity reconciliation checked the then-selected mirrors and package; these
+were T447 P22/P23 identities, not a fresh T448 run. S3's closure separately
+maps its fixed C1--C5 scope, but neither that witness nor source inspection
+proves every current menu reparent, failed creation, foreign-object churn or
+abnormal/reused handle combination. The old accepted common-dialog anomaly
+and styled raw-fault limitations retain their own records and are not erased
+by this control witness.
+
 ## M4 construction and unwind reconciliation
 
 The historical S4 [nineteen-owner disposition](m0-t447-s4-message-source-audit.md#post-p18-complete-allocation-owner-disposition)
