@@ -64,6 +64,16 @@ current background session reaches their explicit
 assertion. No product source or release image has changed, and this does not
 claim S2 closure or waive its coherent-package gate.
 
+## Active temporary outputs
+
+`build/t451-s2/` is the S2-owned disposable fixture root. It contains only
+the focused lifecycle/page-domain builds and their logs; no cache, package,
+guest media or acceptance evidence is stored there. Its owner is the active
+S2 packet. The current run completed with no owned background process; retain
+it only until the desktop-capable matrix is either captured into the S2 record
+or superseded, then remove it through `Clear-BuildOutput.ps1` using a reviewed
+manifest.
+
 ## Recent M0 Closures
 
 | Task | Disposition |
