@@ -53,6 +53,8 @@ This does not attribute the separate historical timeout reports. See the
 [S13 evidence](../etc/evidence/m0-t448-s13-uncertain-todo-audit.md).
 The finite nonreproduction controls, retained long-play and SOL layout risks,
 COM prerequisite and later WOW32 WRITE ownership are also recorded there.
+The [S13 handoff](../etc/evidence/m0-t448-s13-uncertain-todo-audit.md#remaining-work-handoff)
+assigns unresolved items once to TODO or the queued WOW32 continuation.
 The owner retains the reproduced COMMAND case as a known original guest
 limitation in TODO, without a host workaround; S13 remains open until its
 investigation delivery is accepted.

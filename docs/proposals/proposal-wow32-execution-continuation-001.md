@@ -32,6 +32,15 @@ source discovery merely because the numeric task changes.
 | Existing incomplete S2/S3 evidence and risks | Preserve common-dialog unlocated failure, styled raw-fault recovery, required object/control/dialog/MENU-01 obligations and any unresolved responsibility-audit row; closure labels do not erase these. |
 | Application/DOS witnesses | SOL/WRITE normal startup and usable depth, WRITE illegal-instruction witness, SOL insufficient-canvas gate, COMMAND/strict DIR initial-prompt gap, and retained intermittent WOWEXEC/game-exit TODO evidence. Attribute causes before claiming guest limitations. |
 
+The separately reported SOL content-layout problem also belongs to this
+application witness: capture the owner's actual desktop and window geometry
+before attributing it to the known small-desktop maximum-tracking boundary.
+The intermittent direct `run16 WINMINE`/`run16 SOL` worker-and-game exit is
+not resolved by S13's short runs or 1000 synthetic WINMINE actions; on
+recurrence capture the exact product identity and failure/retirement trace.
+The [S13 handoff](../etc/evidence/m0-t448-s13-uncertain-todo-audit.md#remaining-work-handoff)
+retains evidence and does not claim a cause or fix for either report.
+
 The lifecycle candidate owns infrastructure control/exit/CAF handoff and the
 WOW worker-close receiver. This candidate owns WOW task algorithms, individual
 task termination integration and execution semantics. Both must test their

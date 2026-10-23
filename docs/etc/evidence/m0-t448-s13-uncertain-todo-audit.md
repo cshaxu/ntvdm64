@@ -156,6 +156,23 @@ SHA-256 summaries, for later scratch disposition:
   INIT problem were merged into one P1 row with both original evidence chains
   and the S13 trace linked. This is deduplication, not closure of the defect.
 
+## Remaining work handoff
+
+The queued [WOW32 execution continuation](../../proposals/proposal-wow32-execution-continuation-001.md)
+owns WRITE editing/saving/exit, the separately reported SOL layout, and the
+intermittent direct WINMINE/SOL worker-and-game exit. S13's bounded successful
+runs do not explain or fix those reports. The unplanned real COM prerequisite,
+8253 suspicion, suballocator conditional rollback, NTW16S limitations,
+NTVWM output sampler, directory-restart boundary, and accepted INT31 invalid
+buffer boundary return to [TODO](../../states/TODO.md); the provisional MEM
+and confirmed COMMAND guest-associated limitations are grouped there as well.
+T271 and document migration remain in TODO. S12's six delivered corrections
+are not reintroduced. Historical rapid return, two-session RPC, first input,
+common-dialog and the separately unattributed startup observations leave active
+TODO under the owner's bounded nonreproduction rule, without claiming a fix or
+assigning their failures to COMMAND. Their retained evidence remains above.
+The transferred inventory is historical; it is not another active owner.
+
 ## Direct guest-state attribution of the current inherited-environment failure
 
 An isolated host-only diagnostic was built with
