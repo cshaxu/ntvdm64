@@ -27,7 +27,9 @@
 1. **S1 (complete):** removed style selection and propagation control plane.
 2. **S2 (complete):** deleted the isolated renderer/demo/test/build component and all style-only release/deployment entries; the package is reduced to ten host images.
 3. **S3 (complete):** normal no-style launch, rejection and stale-reference audits passed; publication and hash verification passed.
-4. **S4 (active):** closure record, final commit/push verification and owner acceptance.
+4. **S4 (complete; awaiting owner acceptance):** closure record and final
+   commit/push completed at `db91004e5`; the ten-image package is deployed and
+   T450 stops here for owner acceptance.
 
 ## Current Technical Baseline
 
