@@ -3,9 +3,11 @@
 ## Current Work
 
 **Active: M0 T449 S2**, Ordinary Mode, one implementer with independent
-self-review. The owner accepted and closed T448 and admitted the queued WOW32
-execution continuation. T449 resumes the unfinished T447 execution foundations;
-it does not restart or declare complete the earlier work.
+self-review. This is the owner-accepted S2 closure-record packet at
+`8d9ce29c3`; it authorizes no further S2 implementation and no successor S is
+admitted yet. The owner accepted and closed T448 and admitted the queued WOW32
+execution continuation. T449 resumes the unfinished T447 execution
+foundations; it does not restart or declare complete the earlier work.
 
 ## Active Packet
 
@@ -69,8 +71,7 @@ and hash-verified at both destinations; see its
 WRITE editing/exit and intermittent long-play outcomes remain unproved. Original
 COMMAND's large-environment defect remains in TODO as a guest limitation.
 
-S2's DDE ownership group has completed its coherent-package P delivery and
-awaits owner acceptance before S3 admission. Source tracing found
+S2's DDE ownership group is owner-accepted and closed. Source tracing found
 one bounded gap: `WU32PostMessage` discards the original stack-local DDE
 conversion record before native `PostMessage` reports acceptance or rejection.
 The current reduced candidate retains it only until that result, leaving the
@@ -109,6 +110,16 @@ with zero errors. All thirteen files were then synchronized to
 release manifest. The guest archive, guest files and guest configuration are
 unchanged. S3 targeted task termination and S4 integrated/whole-provider
 acceptance remain explicitly unstarted.
+
+## S2 Closure Record
+
+The owner accepted S2 after verified P delivery `8d9ce29c3`. The committed
+thirteen-image package is deployed at both mandated destinations, its manifest
+hashes match, and the immutable guest archive remains unchanged. The fixed
+scope was DDE post-result ownership plus its M1--M5 selected execution and
+ordinary-retirement witnesses. It does not close S3 targeted WOW task
+termination or S4 whole-T reconciliation. No successor S is active until the
+owner explicitly admits it.
 
 ## Recent M0 Closures
 
