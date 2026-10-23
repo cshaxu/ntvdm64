@@ -9,6 +9,7 @@ and its approved cross-package mappings remain inherited without dropped rows.
 
 | Next order | Candidate implementation package | Proposal |
 | --- | --- | --- |
+| Next | Remove all project-owned Win16 Style logic, propagation, injected styling paths, component artifacts and release assets; preserve unrelated normal launch and WOW/worker behavior. | [Proposal](../proposals/proposal-win16-style-removal-001.md) |
 | 1 | WOW32 residual USER objects/shared view — reconcile C04--C07/object-C10 after execution foundations; retain independent system/native/external-object and geometry coverage, with guest/failure/cleanup evidence. | [Proposal](../proposals/proposal-wow32-user-objects-shared-view-001.md) |
 | 2 | WOW32 modules, memory and aliases — retain general loader/allocation/alias coverage; reached EDIT/dialog DS and startup-failure coordination transfer to the active execution package. | [Proposal](../proposals/proposal-wow32-modules-memory-aliases-001.md) |
 | 3 | WOW32 files, directories, environment and OEM — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-files-environment-oem-001.md) |

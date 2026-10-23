@@ -156,8 +156,8 @@ immutable WRITE cannot save nor evidence of a host-side product regression.
 
 The owner performed the required physical Save As interaction in the visible,
 published `run16` WRITE session and confirmed success.  WRITE saved the
-document as `O:\\winnt\\XXX.WRI`; the original Win16 path handling normalized the
-requested `O:\\winnt\\tests\\xxx.wri` name to its current working directory rather
+document as `O:\winnt\XXX.WRI`; the original Win16 path handling normalized the
+requested `O:\winnt\tests\xxx.wri` name to its current working directory rather
 than creating a `tests` child file.  The saved file is 640 bytes, has SHA-256
 `078F7C04561080C39DDC61E26EC6B43146A965FCD1DD9F69E4EA6D40A4C5C85C`, and was
 written at `2026-10-23T14:00:20.3685087-07:00`.  A subsequent process query
