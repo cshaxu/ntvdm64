@@ -75,6 +75,46 @@ the project's established RPC/I/O boundaries. Merely setting the existing
 worker-shutdown event or adding a management UI item cannot implement the
 targeted operation, and the shared worker-base must not interpret WOW policy.
 
+## Original task publication and retirement chain
+
+`wkman.c::AddProcessSharedList` registers a per-process shared-list object;
+`AddTaskSharedList` first reserves an HTASK with module and thread unset,
+and the later `W32Thread` call fills the module, current thread, module name
+and image path. `vdmdbg.c::VDMEnumTaskWOWEx` walks the selected process's
+task list and only invokes the callback for entries with a nonzero module.
+This is a different original inventory from BaseSrv's launch/wait records.
+It establishes a useful source for published HTASK identities, not that an
+NTSRV launch record and every task have a one-to-one relationship.
+
+The shared table is explicitly best-effort: `AddTaskSharedList` permits a
+task to continue when the mapping is unavailable or its finite table is full.
+Its reserved entry has no ready module or thread. Therefore an empty
+enumeration, a reserved entry, or a successful launch cannot prove that a
+particular live task is safely targetable. Any service-side projection must
+report coverage honestly, bind an identity to the actual worker generation,
+and reject stale/reused task identities; it must not treat missing inventory
+as proof of task termination or pretend that a reservation is a live task.
+
+Normal `WK32KillTask` calls `W32DestroyTask` before
+`RemoveTaskSharedList`, which removes the current thread's record. The
+`W32Thread` InitTask-failure and unexpected-return paths visible in this
+file call `W32DestroyTask` and exit without the same explicit per-task
+removal; a process-level shared-list cleanup or another path may still remove
+them. This is an audit candidate, not a proven stale record: resolve those
+paths and ownership before relying on list disappearance as completion or
+adding another independent registry. A repository search found the
+`RemoveProcessSharedList` definition and declaration but no direct call; it
+does not establish that all process-death reclamation is absent, since the
+shared-memory manager or another process might reclaim it. Trace that manager
+and actual worker death before making the determination. `sharewow.h` itself
+maps a named section and serializes it with a mutex; its lock function does
+not perform per-process reclamation. The section can disappear when its last
+handle closes, but that alone does not prove cleanup while another process
+keeps it open. Also note that the original debugger
+enumerator uses shared memory and callback-based observation; it is not an
+authorization to let NTSRV directly control a worker or dereference its
+private pointers. The eventual control remains through NTSRV and worker-base.
+
 ## DDE evidence chronology correction
 
 The late S4 ledger describes DIV-350--354 as a source candidate awaiting
