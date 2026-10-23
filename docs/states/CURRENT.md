@@ -39,6 +39,11 @@ and thread-level idle boundaries remain intact. NTSRV owns lifecycle control;
 this task owns the WOW task algorithms and individual-task integration.
 Other WOW packages remain in the queue with their residual scopes.
 
+Initial source reconciliation is recorded in the [S1 audit](../etc/evidence/m0-t449-s1-wow-continuation-audit.md).
+It confirms that individual WOW task deletion is not connected and distinguishes
+the service request identity from the original HTASK. The M1--M6 and full
+identity/lifetime audit is still in progress; no runtime repair is claimed.
+
 Owner execution direction: trace source and call chains first; preserve original
 capabilities and semantics and minimize original-source diffs. Where an original
 implementation is proved composable and replaces autonomous duplication, remove
