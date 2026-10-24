@@ -86,6 +86,11 @@ delivery package are complete. See the
 S3 is closed at [its closure record](../etc/evidence/m0-t451-s3-closure.md).
 Its evidence root `build/t451-s3/` remains disposable task evidence. S4 owns
 its own fresh bounded evidence root under `build/t451-s4/`.
+S4's same-artifact WINMINE private-desktop interaction gate has passed using
+the current source-built standard observer.  Its companion frontier harness
+has been reconciled with the current `system32` package layout and short-stage
+environment; the completed consumer/handoff audit records both the passed
+game frontier and the remaining legacy three-frontier harness liveness gap.
 The tracked native-slot group requires a private desktop. Its first
 low-integrity execution received `ERROR_ACCESS_DENIED` from `CreateDesktopW`,
 but the same checked-in runner was then rerun in the desktop-capable execution
