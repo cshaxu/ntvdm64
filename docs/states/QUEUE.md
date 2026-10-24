@@ -2,8 +2,8 @@
 
 This is the authoritative ordered queue of unnumbered candidate packages.
 Only [Current](CURRENT.md) admits an active task. The lifecycle and WOW32
-execution-continuation packages are owner-closed; the former first candidate
-is now admitted and represented only in Current. Remaining candidates retain their relative order and
+execution-continuation packages and USER objects/shared view
+are owner-closed. Remaining candidates retain their relative order and
 residual scope. The [WOW32 program](../proposals/proposal-wow32-production-completion-002.md)
 and its approved cross-package mappings remain inherited without dropped rows.
 
@@ -15,7 +15,7 @@ proposal applies that rule before adding a mirror difference or adapter.
 
 | Next order | Candidate implementation package | Proposal |
 | --- | --- | --- |
-| 1 | WOW32 modules, memory and aliases — retain general loader/allocation/alias coverage; reached EDIT/dialog DS and startup-failure coordination transfer to the active execution package. | [Proposal](../proposals/proposal-wow32-modules-memory-aliases-001.md) |
+| 1 | WOW32 modules, memory and aliases — retain general loader/allocation/alias coverage; reached EDIT/dialog DS and startup-failure coordination belong to the accepted execution foundation. | [Proposal](../proposals/proposal-wow32-modules-memory-aliases-001.md) |
 | 2 | WOW32 files, directories, environment and OEM — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-files-environment-oem-001.md) |
 | 3 | WOW32 resource discovery and loading foundation — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-resource-loading-001.md) |
 | 4 | WOW32 GDI identity, DC and drawing — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-gdi-dc-drawing-001.md) |

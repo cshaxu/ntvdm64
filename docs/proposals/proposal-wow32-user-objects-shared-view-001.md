@@ -2,9 +2,10 @@
 
 ## Objective and admission
 
-Owner-directed split dated 2026-09-28, subsequently admitted as T451. The
-active packet and delivery state are authoritative in [Current](../states/CURRENT.md);
-this proposal does not independently admit additional work.
+Owner-directed split dated 2026-09-28, subsequently admitted as T451 and
+owner-accepted on 2026-10-24. The [closure record](../history/m0-t451-closure.md)
+owns delivery evidence and boundaries. This retained design does not admit
+additional work; [Current](../states/CURRENT.md) owns any active packet.
 It owns workstream **W02**, formerly successor S2 / T422 S4, under the
 [WOW32 program](proposal-wow32-production-completion-002.md). Its S identifiers
 below are local to T451; historical S references resolve through the
