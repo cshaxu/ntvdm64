@@ -103,3 +103,22 @@ path. Publication `build/t452-s2/publication-r2/publication-r2.json` records
 the matching candidate, `assets/release` and `O:\\winnt\\system32` image
 hashes. The historical oversized/inherited COMMAND environment failure is not
 claimed as a module-name regression or repaired in S2.
+
+## S3 admission and audit boundary
+
+S2 closed at `0f8487f04`. S3 begins source-first review of the original
+`wole2.c` 32-slot alias table and of the existing `PTD::pWOAList` chain in
+`wkman.c`, `walias.c` and `wuwind.c`. These are separate authorities: an OLE
+HTASK alias is neither a WOW task nor a WinOldAp representative. The existing
+task-scoped WOA list, original selector encoding and original 32-slot
+oldest-creation-time replacement rule remain the default contract.
+
+The review must separately account for WOA node allocation, pending
+representative association, caller-scoped module and instance lookup, child
+wait/query completion, parent task retirement, node disposal, native process
+handle close and native process termination. Original code proves that node
+disposal is not itself permission to close or terminate a child. S3 may add a
+narrow guard or serialization only if a reachable project-owned concurrent or
+stale-access path is established. It may not introduce a global registry,
+opaque-token coordinator, retained process-handle owner or changed capacity
+policy merely to make a probe easier.
