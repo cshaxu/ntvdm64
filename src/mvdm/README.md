@@ -1,5 +1,17 @@
 # mvdm
 
+MVDM-HOST-DIV-450 (T452 S2): retain original WOW32 KERNEL k49's module versus
+HTASK-alias selection, original `NtQuerySystemInformation` observation and
+ANSI conversion, but make the caller-declared guest byte count the sole
+output/flush bound. A zero or signed-invalid count returns zero before guest
+mapping; nonzero output starts as an empty string and flushes exactly that
+range. The historical 16 KiB stack snapshot becomes one transient
+size-query/allocation/populated-query sequence; an allocation, query,
+conversion, retirement or process-list-change failure returns zero without
+retry, cache, process handle, alternate alias table or guest pointer escape.
+K233/K234 retain the selected original CCPU40 `VdmAllocateVirtualMemory` /
+`VdmFreeVirtualMemory` pair and are not redirected through this change.
+
 MVDM-HOST-DIV-449 (T449 S3 candidate): the selected original WOW task
 lifecycle has the exact `BaseSrv` task number and 16-bit `HTASK` together only
 in `wow32/wkman.c::W32Thread`; bind the project-owned opaque management ticket

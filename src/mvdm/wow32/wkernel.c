@@ -775,18 +775,31 @@ ULONG FASTCALL WK32GetModuleFileName(PVDMFRAME pFrame)
     PSZ psz2;
     register PGETMODULEFILENAME16 parg16;
     HANDLE hT;
+    INT cch;
 
     GETARGPTR(pFrame, sizeof(GETMODULEFILENAME16), parg16);
-    ALLOCVDMPTR(parg16->f2, parg16->f3, psz2);
+    cch = INT32(parg16->f3);
 
-    if ( ISTASKALIAS(parg16->f1) ) {
-        ul = GetHtaskAliasProcessName(parg16->f1,psz2,INT32(parg16->f3));
-    } else {
-        hT = (parg16->f1) ? (HMODULE32(parg16->f1)) : GetModuleHandle(NULL) ;
-        ul = GETINT16(GetModuleFileName(hT, psz2, INT32(parg16->f3)));
+    /* DIVERGENCE(MVDM-HOST-DIV-450): the original final strlen-based flush
+     * can exceed the only guest range this k49 caller supplied.  Keep the
+     * original module/alias provider and result; zero-size has no writable
+     * guest range, and every nonzero write/flush remains within cch. */
+    if (cch <= 0) {
+        FREEARGPTR(parg16);
+        RETURN(0);
     }
 
-    FLUSHVDMPTR(parg16->f2, strlen(psz2)+1, psz2);
+    ALLOCVDMPTR(parg16->f2, cch, psz2);
+    psz2[0] = '\0';
+
+    if ( ISTASKALIAS(parg16->f1) ) {
+        ul = GetHtaskAliasProcessName(parg16->f1, psz2, cch);
+    } else {
+        hT = (parg16->f1) ? (HMODULE32(parg16->f1)) : GetModuleHandle(NULL) ;
+        ul = GETINT16(GetModuleFileName(hT, psz2, cch));
+    }
+
+    FLUSHVDMPTR(parg16->f2, cch, psz2);
     FREEVDMPTR(psz2);
     FREEARGPTR(parg16);
     RETURN(ul);

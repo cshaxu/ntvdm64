@@ -86,3 +86,20 @@ background tests and coherent ten-image publication for production changes.
 No computer use, guest modification, new polling or timeout is admitted.
 External/guest limitations remain explicit non-passes. T closure waits for
 owner acceptance.
+
+S2 uses `tests/observation/verify-wow-module-alias-bounds.ps1` against the
+actual CCPU40 `wole2.c` production compile command. Its fixture proves
+exact/truncated/one-byte/unavailable alias output without substituting a
+provider. `original-external-memory-test.exe` remains the direct selected
+`VdmAllocateVirtualMemory`/`VdmFreeVirtualMemory` normal allocation, resize
+and release proof. Neither test transfers `nt_mem.c` ownership to a new WOW
+allocator.
+
+Candidate `build/t452-s2/candidate-r12` staged the current coherent ten-image
+set. Its `logon-wow-r12` proof used the complete supported Userenv block
+(`CreateEnvironmentBlock`, current token, `inherit=false`) rather than an
+inherited development shell and passed the owned WinMine flag/reset/open/close
+path. Publication `build/t452-s2/publication-r2/publication-r2.json` records
+the matching candidate, `assets/release` and `O:\\winnt\\system32` image
+hashes. The historical oversized/inherited COMMAND environment failure is not
+claimed as a module-name regression or repaired in S2.
