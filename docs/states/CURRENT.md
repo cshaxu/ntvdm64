@@ -84,12 +84,14 @@ delivery package are complete. See the
 ## Active temporary outputs
 
 S3 owns `build/t451-s3/` for its current source-audit and fixture attempts.
-The tracked native-slot group requires a private desktop; the current
-non-interactive token received `ERROR_ACCESS_DENIED` from `CreateDesktopW`.
-This is recorded in the
-[S3 audit](../etc/evidence/m0-t451-s3-mutation-destruction-audit.md). It is
-not a product result and must be rerun in a desktop-capable context before S3
-closure.  The same audit now separately records the finite modern-host
+The tracked native-slot group requires a private desktop. Its first
+low-integrity execution received `ERROR_ACCESS_DENIED` from `CreateDesktopW`,
+but the same checked-in runner was then rerun in the desktop-capable execution
+context used by the historical acceptance path. The fresh, source/artifact
+hashed matrix at `build/t451-s3/desktop-current/matrix/` passed all 19 rows;
+the [S3 audit](../etc/evidence/m0-t451-s3-mutation-destruction-audit.md)
+records its exact scope and the access-context diagnosis. The same audit now
+separately records the finite modern-host
 boundary for original kernel-owned real destruction: neither a return hook,
 WinEvent nor CBT covers every original root/child/failure path.  No synthetic
 host replacement or production semantic concession is selected. Stable

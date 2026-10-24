@@ -84,9 +84,10 @@ they do not claim a wholesale NT4 server shared-memory model.
 
 ## Current execution observation
 
-On 2026-10-23 two independent current x86 provider/worker invocations of the
-tracked `verify-wow-native-slot-group.ps1` group completed the same 19-row
-matrix. Eleven rows passed: `native-dispatch-gate`, `window-procedure`,
+The low-integrity command token first made two independent current x86
+provider/worker invocations of the tracked
+`verify-wow-native-slot-group.ps1` group incomplete. Eleven rows passed:
+`native-dispatch-gate`, `window-procedure`,
 `class-client`, `class-query`, `class-lifetime`, `task-lifecycle`,
 `native-send`, `native-nested`, `native-foreign`, `native-indirect`, and
 `init-rollback`. The task row emitted
@@ -103,10 +104,23 @@ observed its fixture's unavailable exit instead of the normal context marker.
 This is an unavailable test-environment result, not a passing or failing
 product assertion; it leaves the R05/R09 CCPU acceptance open.
 
-The next evidence run must execute the same tracked group in a desktop-capable
-test context, preserve its source/artifact hashes, and record every row's
-normal, negative and lifecycle marker. No production source change is
-justified by this access-denied prerequisite.
+The historical r13 evidence used this same checked-in runner and this same
+fixture-owned `CreateDesktopW(..., GENERIC_ALL, ...)` path; it was not a
+different test or a permissive fallback. On 2026-10-23 the runner was rerun
+from a desktop-capable, medium-integrity token. A one-shot uniquely named
+private-desktop probe first created and closed successfully, isolating the
+previous `ERROR_ACCESS_DENIED` to the low-integrity command executor rather
+than to the source, interactive session, or fixture.
+
+The fresh, source/artifact-hashed group at
+`build/t451-s3/desktop-current/matrix/summary.json` completed all 19 cases
+with `failed: 0`. In addition to the eleven rows above, the previously blocked
+`window-borrow`, `class-procedure`, `native-creation`, `standard-class`,
+`process-retirement`, `dialog-lifecycle`, `creation-unwind`, and
+`graph-negative` rows all exited zero. This is actual private-desktop
+execution of the normal, negative, reuse, destruction, rollback and lifecycle
+fixtures, not a skipped prerequisite. No production source, guest image, or
+release asset changed for this evidence recovery.
 
 ## Incidental Run16 cold-start correction
 
@@ -129,7 +143,9 @@ Console cold start of the staged package:
 `assets/release`, and `O:\winnt\system32` were then compared for all ten host
 images; every SHA-256 agreed.  The installed bit-identical command completed
 with exit zero in `installed-run16-console-result.json`.  Guest media and
-configuration were neither modified nor rebuilt.  This evidence delivers the
-Run16 correction but does not close S3's pending private-desktop R05/R09
-acceptance.
+configuration were neither modified nor rebuilt. This evidence delivers the
+Run16 correction. The later desktop-capable 19-row matrix closes the prior
+private-desktop R05/R09 acceptance prerequisite; the separately documented
+public-host terminal-observation boundary remains a design conclusion, not a
+test-environment failure.
 
