@@ -1,5 +1,9 @@
 # Supporting Material
 
+[T452 module, memory and alias plan](operations/t452-modules-memory-aliases-plan.md)
+records the owner-admitted sequence, pinned read-only audit receipt and
+minimum-diff production reconciliation gates.
+
 [T451 S1 USER object contract ledger](operations/m0-t451-s1-user-object-contract-ledger.md)
 maps every residual C04--C07/object-C10 PMODE32 direct-reader family to its
 producer, authority, update/withdrawal rule, evidence and bounded S2--S4

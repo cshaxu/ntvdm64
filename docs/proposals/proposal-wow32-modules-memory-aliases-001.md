@@ -2,8 +2,10 @@
 
 ## Objective and admission
 
-Owner-directed split dated 2026-09-28. This is one unnumbered candidate T in
-[Queue](../states/QUEUE.md), not an active task or an implementation approval.
+Owner-directed split dated 2026-09-28, admitted on 2026-10-24. The active
+packet is owned solely by [Current](../states/CURRENT.md); the
+[working plan](../etc/operations/t452-modules-memory-aliases-plan.md) records
+its audit receipt and stages. This retained proposal does not admit parallel work.
 It owns workstream **W03**, formerly successor S3 / T422 S5, under the
 [WOW32 program](proposal-wow32-production-completion-002.md). Its S identifiers
 below are local to this candidate; historical S references resolve through the
@@ -76,5 +78,6 @@ regression. C11/C12 apply locally, not only at final program acceptance.
 Close only this candidate's complete owner scope, with exact artifacts, test
 entrypoints, remaining approved limitations and stable handoff IDs for consumers.
 Do not defer unfinished implementation, errors or cleanup to integrated acceptance.
-This planning split itself modifies no runtime, admits no active packet and
-requires no commit or publication; the owner requested working-tree edits only.
+The original planning split modified no runtime. Subsequent owner admission
+is recorded in Current; normal reviewed commit/push and production delivery
+rules apply to the admitted work.
