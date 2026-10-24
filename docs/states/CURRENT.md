@@ -29,7 +29,35 @@
 
 ## Current Technical Baseline
 
-S5 is **delivered, awaiting owner acceptance**. Its r5 regression, complete
+### S5 follow-up P closure — shared launch ownership
+
+Owner approved a bounded additional P on 2026-10-24, then S5 closure.
+Remove unused launcher-private includes from NTCON/NTSRV; relocate the
+actually shared native process-creation primitive to existing common, with
+no algorithm, ABI, lifecycle, guest or original-mirror change. Keep
+launcher-only receipt/bootstrap bookkeeping private. Update source graphs,
+consumer includes and ownership tests; no new runtime component or framework.
+Verify full cached ten-component build/incremental identity, source/link
+boundaries and existing root/Control/DOS/WOW regression using the prior r5
+package as the retained baseline, then coherent publication, commit and push.
+S5 owns `build/t451-s5/shared-ownership/` with the same 40-minute build,
+scenario test and 2-GiB disposable-output budgets. No later S/T is admitted.
+
+The bounded S5 implementation is **closed following the owner's instruction**;
+T451 remains awaiting final owner acceptance, with no new implementation admitted.
+The follow-up passed full ten-component cached build and second-build identity
+(1490 intermediates), source equality/link ownership, Service40, ten root/outer
+CMD cases, Control11, DOS17 in both modes, WINMINE interaction, SOL/WRITE startup,
+redirection, service death, channel/failure and actual Ctrl+C/Break delivery.
+NTVWM presentation/input-return/lifetime assertions passed (526/689/1084).
+A stale fixture barrier expectation was corrected; its initial timeout and
+the control probe's wrong inherited-stdio invocation remain recorded as
+non-pass attempts, superseded by correct reruns, not hidden or waived.
+All ten images are published to both destinations, with twenty matching hashes.
+See the [S5 evidence](../etc/evidence/m0-t451-s5-direct-root-native-cui-route.md)
+for exact scope and publication. Guest/original mirror diff remains zero.
+
+The preceding r5 regression, complete
 publication and reviewed P delivery are committed and pushed as `60367a2b5`.
 The owner rejected the preceding installed root EXIT/mixed-chain behavior;
 that rejection is not overwritten by earlier candidate results.

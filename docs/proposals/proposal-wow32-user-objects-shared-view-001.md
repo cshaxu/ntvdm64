@@ -2,11 +2,12 @@
 
 ## Objective and admission
 
-Owner-directed split dated 2026-09-28. This is one unnumbered candidate T in
-[Queue](../states/QUEUE.md), not an active task or an implementation approval.
+Owner-directed split dated 2026-09-28, subsequently admitted as T451. The
+active packet and delivery state are authoritative in [Current](../states/CURRENT.md);
+this proposal does not independently admit additional work.
 It owns workstream **W02**, formerly successor S2 / T422 S4, under the
 [WOW32 program](proposal-wow32-production-completion-002.md). Its S identifiers
-below are local to this candidate; historical S references resolve through the
+below are local to T451; historical S references resolve through the
 program transfer table. Existing code, stable capability IDs, tests and failures
 are inherited rather than reset. No new global source audit is required.
 
@@ -33,7 +34,7 @@ a temporary provider or silently absorb another candidate's implementation.
 Necessary error and fatal-cleanup paths belong to the earliest consuming owner,
 with stable-ID handoff, even when general hard-error recovery is later.
 
-## Proposed S tasks
+## Admitted S tasks
 
 | S | Scope | Work | Required closure |
 | --- | --- | --- | --- |
@@ -41,7 +42,7 @@ with stable-ID handoff, even when general hard-error recovery is later.
 | S2 | Identity, classes and publication | Complete desktop/WND/CLS identity, registration, first-callback publication and original layout/rebasing. | Guest direct reads and first callbacks observe valid objects, including external objects. |
 | S3 | Mutation and destruction | Complete geometry, host-originated updates without thunk refresh, stale reuse, nested destruction and rollback. | Reentry, mutation and failed creation withdraw or update the correct object without corrupting another task. |
 | S4 | Object acceptance and handoff | Run direct-data, callback and object-lifetime tests plus production regression. | All selected object classes and direct-read paths are accounted for; consumers reuse this single view owner. |
-| S5 | Native CUI final-frame handoff | Make the native CUI final capture wait for NTCON's sequence-specific render submission before I/O release. | Direct new-Console COMMAND internal output is not overwritten before the final frame is committed; failure never reports a false release. |
+| S5 | Direct-root native CUI route and handoff | Authenticate nested execution contexts against the NTSRV-owned root; order completion and Console restoration before root retirement. Retain the sequence-specific final-frame contract and clean shared creation ownership. | Ten root/inherited EXIT cases, Control/DOS/WOW regressions, failure paths and coherent publication; [actual source findings and evidence](../etc/evidence/m0-t451-s5-direct-root-native-cui-route.md), not a short-lived-command hypothesis. |
 
 ## Verification, boundaries and handoff
 

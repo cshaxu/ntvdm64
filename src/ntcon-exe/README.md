@@ -21,8 +21,9 @@ client-only fixture exclude frontend service, input-pump and renderer objects.
 The launcher-owned client library contains bootstrap_client and
 native_request_client under run16-exe. Common owns protocol declarations,
 the copied packet codec and pipe transport; no launcher transfer wrapper remains.
-The shared process primitive in run16-exe/native_launch.c is used by the
-NTVWM target owner and launcher service bootstrap. Native GUI submission also
+The shared process primitive in common/native_process.c is used by the
+NTVWM target owner, not launcher service bootstrap. Run16 does not link it;
+NTCON does not include the launcher's private bootstrap header. Native GUI submission also
 goes through NTSRV to NTVWM; it is not a frontend execution route.
 
 The worker-side copied protocol client now belongs to common, not this

@@ -4,7 +4,7 @@
 #undef _WIN32_WINNT
 #define _WIN32_WINNT 0x0A00
 #endif
-#include "run16-exe/native_launch.h"
+#include "common/native_process.h"
 #include "common/protocol/console_io.h"
 #include <stdio.h>
 #include <string.h>

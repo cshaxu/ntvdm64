@@ -11,7 +11,6 @@
 #include "frontend_scope.h"
 #include "launch_options.h"
 #include "image_classification.h"
-#include "native_launch.h"
 #include "common/protocol/console_io.h"
 #include "common/system_root.h"
 #include "common/guest_environment.h"

@@ -445,3 +445,68 @@ The production delta is +130/-62 lines, tests/tools +376/-96, and the included
 evidence/queue governance documentation +656/-24 before this final receipt.
 Original mirror diff remains zero. Final documentation governance and
 `git diff --check` passed. This records delivery, not owner acceptance.
+
+### Approved follow-up P: shared process creation ownership
+
+The owner requested bounded shared-component cleanup followed by S5 closure
+on 2026-10-24. The selected production mechanism moves unchanged from
+`src/run16-exe/native_launch.[ch]` to `src/common/native_process.[ch]`.
+NTVWM is its production consumer; fixtures select the same provider. Run16
+had no call to the creation entrypoints and now drops the unused link input.
+The packet codec remains separately owned by common. Existing entrypoint and
+packet names are retained to avoid unrelated API churn. No second lifecycle
+authority, transport, timeout, process launcher or archive is introduced.
+
+NTCON and NTSRV drop unused Run16-private bootstrap includes. NTCON names
+the common frontend protocol directly. The actual launcher-local receipt
+structure and release routine remain private to Run16, not moved wholesale
+into common. NTSRV continues to decide admission, identities and retirement;
+NTVWM consumes the request and creates the target using the neutral primitive.
+
+Reviewer pass: the moved C body must compare exactly to the preceding HEAD
+after its single include-path substitution. Graph assertions require the
+primitive in NTVWM and reject it in Run16/NTCON; final frontend map/graph
+checks reject launch-policy and target-creation leakage. The ownership gate's
+stale provider lists are reconciled with existing native-path/image helpers,
+RPC observation/query providers and worker task observation, rather than
+discarding its negative controls. Cross-owner launcher-private includes are
+also rejected. This is a source-ownership correction, not new runtime behavior.
+
+Verification is owned by `build/t451-s5/shared-ownership/`: full cached build,
+second-build identity, source/link gates, service/root matrices, Control,
+DOS Console/Window, WOW frontiers, redirection, service death, channel/failure
+and real control delivery. Result and publication reconciliation follows
+after those gates complete. Original mirror and guest changes remain zero;
+the existing adapter exception covers this owned-only relocation.
+
+Follow-up results: full cached build passed for ten images; second build
+preserved 1490 intermediates and all outputs. Service40, ten root/inherited
+EXIT cases, Control11 and both DOS17 matrices passed. WINMINE interaction and
+four-sample SOL/WRITE startup passed within the prior explicit boundaries.
+Redirection (`>`, `>>`, `|`, `cmd /c ver`) and service-loss cleanup passed.
+Both channel variants retain 427/427 handles. NTVWM presentation, input return
+and execution lifetime pass 526, 689 and 1084 assertions respectively; the
+execution fixture reports zero remaining handles and 48 completions.
+
+Two supplementary runner/test corrections are retained transparently:
+
+- The broad presentation fixture originally timed out at mode 0. Its caller
+  sends a generic BARRIER after video, while the fake peer incorrectly expected
+  PRESENT_BARRIER and returned without replying. The expected operation now
+  matches that caller. Production is unchanged; actual sequence-specific final
+  commitment remains exercised by the channel/lifetime tests. The corrected
+  broad fixture and input-return fixture pass; no geometry case was excluded.
+- Directly invoking the real control-event probe inherited redirected standard
+  handles and failed GetConsoleCursorInfo with error 6 before exercising the
+  channel. Rerunning with the established separate hidden Console process
+  passed the real Ctrl+C/Break assertions. The failed report is preserved;
+  `control-delivery2.txt` is the passing run, not an overwritten failure.
+
+The body equality check and final graph/map negative controls pass. All 71
+non-product package inputs are unchanged. Coherent publication replaced ten
+images at both `assets/release` and `O:\winnt\system32`; twenty SHA-256 values
+match the candidate and tracked manifest. Installed Run16 is
+`31F3B53D6E541FA6D1A396EC2818A8EB76468042DF28604BA0CD42ECA454140A`;
+NTSRV is `7B6E0662236C267E6FF3610D7AEABCAEFFC0D88FE31513EDF7ED93560C11ED2D`.
+No new mirror exception or guest concession is needed. The owner authorized
+S5 closure after this P; T451 final acceptance remains with the owner.

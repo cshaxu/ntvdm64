@@ -23,7 +23,7 @@ static int emit(int index,int split)
 #include "ntcon-exe/frontend_session.h"
 #include "ntcon-exe/window_frame.h"
 #include "ntcon-exe/lib/kvm-window/render.h"
-#include "run16-exe/native_launch.h"
+#include "common/native_process.h"
 static FILE *logfile;
 static unsigned checks,failures;
 #define CHECK(x) do{++checks;if(!(x)){++failures;fprintf(logfile,"FAIL line=%d error=%lu %s\n",__LINE__,GetLastError(),#x);}}while(0)

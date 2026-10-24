@@ -17,6 +17,14 @@ $graph = @($graph | ForEach-Object {
     } else { $_ }
 })
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
+foreach($owner in @('ntcon-exe','ntsrv-exe','ntvwm-exe')) {
+    foreach($file in Get-ChildItem (Join-Path $repo "src/$owner") -File -Recurse |
+            Where-Object Extension -in '.c','.h') {
+        if((Get-Content $file.FullName -Raw) -match '#include\s*[<"][^>"\r\n]*run16-exe/(?:frontend_bootstrap|native_launch)\.h[>"]') {
+            throw "Launcher-private header escaped ownership: $($file.FullName)"
+        }
+    }
+}
 function Assert-FrontendPrivateNames([string]$Source) {
     if($Source -match '\b(?:run16_native_frontend|run16_console_(?:channel|frontend|video|dispatch|prepare_text)|frontend_native_keyboard|FRONTEND_NATIVE_KEY_RECORDS)(?:\b|_)|\bnative_console_frontend\.h\b') {
         throw 'Retired launcher/worker-owned spelling in frontend-private API'
@@ -148,7 +156,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
             throw "$target must not depend on NTVWM-private implementation"
         }
         $actual=@(Get-FrontendSources $target 'run16-exe')
-        if('native_launch.c' -in $actual) {
+        if('native_process.c' -in @(Get-FrontendSources $target 'common')) {
             throw "$target must not contain target creation"
         }
         foreach($required in $client) {
@@ -156,16 +164,25 @@ function Assert-FrontendOwnership([string[]]$Lines) {
         }
     }
     $launcherNative=@(Get-FrontendSources 'run16.exe' 'ntvwm-exe')
-    if($launcherNative.Count -or 'native_launch.c' -notin @(Get-FrontendSources 'run16.exe' 'run16-exe')) {
-        throw 'run16 must retain bounded GUI creation, not NTVWM execution/presentation'
+    if($launcherNative.Count -or 'native_process.c' -in @(Get-FrontendSources 'run16.exe' 'common')) {
+        throw 'run16 submits to NTSRV; it must not select native target creation'
     }
-    foreach($required in @('native_launch.c')) {
-        if($required -notin @(Get-FrontendSources 'ntvwm.exe' 'run16-exe')) {
+    foreach($required in @('native_process.c')) {
+        if($required -notin @(Get-FrontendSources 'ntvwm.exe' 'common')) {
             throw "NTVWM omits shared native launch primitive $required"
         }
     }
+    # Existing path/image selection providers are explicit archive members.
+    # Do not silently admit another common provider (especially process creation).
     foreach($archive in @('frontend-client.lib','opennt-base-bindings.lib','worker-base.lib')) {
-        if(@(Get-FrontendSources $archive 'common').Count) {
+        $neutral=@(Get-FrontendSources $archive 'common')
+        if($archive -eq 'frontend-client.lib') {
+            $neutral=@($neutral | Where-Object { $_ -ne 'native_path.c' })
+        }
+        if($archive -eq 'opennt-base-bindings.lib') {
+            $neutral=@($neutral | Where-Object { $_ -ne 'native_image.c' })
+        }
+        if($neutral.Count) {
             throw "$archive must not embed neutral common providers"
         }
     }
@@ -185,7 +202,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
     if(@(Compare-Object @('console/members.c','console/client.c') @(Get-FrontendSources 'common-console.lib' 'common')).Count) {
         throw 'Common Console snapshot/client must have exactly one provider'
     }
-    if(@(Compare-Object @('rpc/local_binding.c','rpc/native_command.c','rpc/frontend_control.c','rpc/worker_control.c','rpc/management.c') @(Get-FrontendSources 'common-rpc.lib' 'common')).Count) {
+    if(@(Compare-Object @('rpc/local_binding.c','rpc/native_command.c','rpc/frontend_control.c','rpc/worker_control.c','rpc/management.c','rpc/dos_observation.c','rpc/interface_query.c') @(Get-FrontendSources 'common-rpc.lib' 'common')).Count) {
         throw 'Common RPC binding/native-command/frontend-control/worker-control clients must each have exactly one provider'
     }
     foreach($target in @('run16.exe','ntvdm.exe','ntvwm.exe','ntcon.exe','ntmon.exe')) {
@@ -207,7 +224,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
     }
     foreach($target in @('worker-base.lib','ntvdm.exe','ntvwm.exe')) {
         $actual=@(Get-FrontendSources $target 'worker-base')
-        if(@(Compare-Object @('connection.c','shutdown_close.c','publication.c','input_watch.c') $actual).Count) {
+        if(@(Compare-Object @('connection.c','shutdown_close.c','publication.c','input_watch.c','task_observation.c') $actual).Count) {
             throw "$target does not use the complete common worker implementation"
         }
     }
@@ -267,7 +284,7 @@ foreach($archive in @('frontend-client.lib','opennt-base-bindings.lib','worker-b
 foreach($archive in @('common-codec.lib','common-transport.lib','common-console.lib','common-rpc.lib')) {
     $mutated=@($graph | ForEach-Object {
         if($_ -match ('^build '+[regex]::Escape($archive)+':')) {
-            $_ -replace ': (\S+) ', ': $1 obj/run16/native_launch.obj '
+            $_ -replace ': (\S+) ', ': $1 obj/run16/frontend_scope.obj '
         } else { $_ }
     })
     $rejected=$false
@@ -278,7 +295,7 @@ foreach($archive in @('common-codec.lib','common-transport.lib','common-console.
 foreach($target in @('frontend-client.lib','ntcon.exe')) {
     $mutated=@($graph | ForEach-Object {
         if($_ -match ('^build '+[regex]::Escape($target)+'(?: |:)')) {
-            $_ -replace ': (\S+) ', ': $1 obj/run16/native_launch.obj '
+            $_ -replace ': (\S+) ', ': $1 obj/common/native_process.obj '
         } else { $_ }
     })
     $rejected=$false

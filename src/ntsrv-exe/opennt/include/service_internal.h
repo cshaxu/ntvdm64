@@ -22,7 +22,6 @@
 #include "ntsrv-exe/transport/vdm_receipt.h"
 #include "ntsrv-exe/transport/worker_spawn.h"
 #include "ntsrv-exe/transport/frontend_admission.h"
-#include "run16-exe/frontend_bootstrap.h"
 #include "common/codec/native_launch.h"
 #include "common/protocol/frontend_lifecycle.h"
 #include <stdio.h>

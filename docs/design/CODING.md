@@ -179,11 +179,17 @@ mirror change or NTCON-owned worker policy is admitted.
 
 `run16-exe/bootstrap_client.c` and `native_request_client.c` own the finite
 `frontend-client.lib`. Packet validation is selected from common/codec;
-`native_launch.c` is the separately selected resource/CreateProcess primitive
-used for broker bootstrap and by NTSRV/NTVWM, not local run16 GUI execution.
+`common/native_process.[ch]` is the separately selected restricted-handle
+resource/CreateProcess primitive used by NTVWM and execution fixtures. It
+does not implement broker startup, submission, policy or lifecycle. Run16
+does not link that unused target-creation object.
 NTCON never links target creation. Local startup/client declarations remain
 with their implementation owners; copied wire declarations live in common/protocol.
 No private NTCON/NTVWM implementation root is a shared startup source owner.
+
+NTCON and NTSRV do not include Run16's private `frontend_bootstrap.h`.
+Its local returned-reference bookkeeping has only launcher consumers and
+stays private; shared frontend declarations come from common/protocol.
 
 Cross-component wire declarations and service IDL have one owner: common/protocol.
 Control RPC and direct worker I/O pipes remain separate protocols; no obsolete

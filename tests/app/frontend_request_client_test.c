@@ -4,7 +4,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include "run16-exe/native_request_client.h"
-#include "run16-exe/native_launch.h"
+#include "common/native_process.h"
 
 static DWORD scenario,final_status,created;
 static HANDLE final_ready,final_permission,completion_thread;

@@ -1554,7 +1554,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/common/native_launch.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/codec/native_launch.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build common-codec.lib: lib obj/common/native_launch.obj')
-    $graph.Add('build obj/run16/native_launch.obj: cc ' + (NinjaPath (Join-Path $root 'src/run16-exe/native_launch.c')))
+    $graph.Add('build obj/common/native_process.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/native_process.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/frontend/frontend_session.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'frontend_session.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags + ' /std:c11 /I "' + (NinjaPath $frontendRoot) + '"')
@@ -1586,7 +1586,7 @@ if ($Architecture -eq 'x86') {
     $nativeBinding = ' obj/run16/support.obj base-rpc-client-core.lib obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib'
     # One declared source closure, consumed by the isolated native builder.
     # The x86 product graph must never silently link another worker carrier.
-    $graph.Add('build ntvwm-source-closure: phony worker-base.lib obj/ntvwm/next_command.obj obj/ntvwm/main.obj obj/ntvwm/presentation.obj obj/ntvwm/text_frame.obj obj/ntvwm/console_state.obj obj/ntvwm/execution.obj obj/run16/native_launch.obj nthook-installer.lib nthook-context.lib' + $nativeBinding + ' common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib')
+    $graph.Add('build ntvwm-source-closure: phony worker-base.lib obj/ntvwm/next_command.obj obj/ntvwm/main.obj obj/ntvwm/presentation.obj obj/ntvwm/text_frame.obj obj/ntvwm/console_state.obj obj/ntvwm/execution.obj obj/common/native_process.obj nthook-installer.lib nthook-context.lib' + $nativeBinding + ' common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib')
     $graph.Add('rule native_worker_import')
     if($NativeWorker){
         $nativeWorkerInput=(Resolve-Path -LiteralPath $NativeWorker).Path
@@ -1655,7 +1655,7 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     $graph.Add('build frontend-text-handoff-test.exe: console_test_link obj/tests/frontend_text_handoff.obj obj/frontend/frontend_session.obj frontend-window.lib obj/frontend/console_frontend.obj obj/frontend/console_video.obj ' + $consoleGridObject)
     $graph.Add('build obj/tests/ntvwm_execution_lifetime.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntvwm_execution_lifetime_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build ntvwm-execution-lifetime-test.exe: frontend_link obj/tests/ntvwm_execution_lifetime.obj obj/ntvwm/execution.obj obj/run16/native_launch.obj common-codec.lib nthook-installer.lib nthook-context.lib obj/run16/support.obj original-opennt-rtl-x86.lib || nthook32.dll run16.exe')
+    $graph.Add('build ntvwm-execution-lifetime-test.exe: frontend_link obj/tests/ntvwm_execution_lifetime.obj obj/ntvwm/execution.obj obj/common/native_process.obj common-codec.lib nthook-installer.lib nthook-context.lib obj/run16/support.obj original-opennt-rtl-x86.lib || nthook32.dll run16.exe')
     $graph.Add('build obj/tests/ntsrv_native_job_tracker.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntsrv_native_job_tracker_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/tests/native_job_tracker_research.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/native_job_tracker_research.c')))
@@ -1675,7 +1675,7 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     $graph.Add('build relative-mouse-bridge-test.exe: console_test_link obj/tests/relative_mouse_bridge.obj obj/adapter-softpc/mvdm_softpc_mouse_bridge.obj obj/adapter-softpc/mvdm_softpc_mouse_input.obj')
     $graph.Add('build obj/tests/frontend_request_client.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/frontend_request_client_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build frontend-request-client-test.exe: console_test_link obj/tests/frontend_request_client.obj frontend-client.lib obj/run16/native_launch.obj')
+    $graph.Add('build frontend-request-client-test.exe: console_test_link obj/tests/frontend_request_client.obj frontend-client.lib obj/common/native_process.obj')
     $graph.Add('build obj/tests/frontend_gui_boundary.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/frontend_gui_boundary_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('rule gui_boundary_link')
@@ -1731,7 +1731,7 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build console-text-producer-test.exe: console_test_link obj/tests/console_text_producer.obj obj/tests/console_text_provider.obj')
     # The frontend EXE is a runtime prerequisite, never a launcher link input.
-    $graph.Add('build run16.exe: run16_link obj/run16/entry.obj obj/common/application_search.obj obj/run16/image_classification.obj obj/common/native_image.obj obj/run16/launch_options.obj obj/run16/frontend_scope.obj frontend-client.lib obj/run16/native_launch.obj obj/run16/support.obj base-rpc-client-core.lib base-rpc-client-launch.lib obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib nthook-context.lib || ntcon.exe')
+    $graph.Add('build run16.exe: run16_link obj/run16/entry.obj obj/common/application_search.obj obj/run16/image_classification.obj obj/common/native_image.obj obj/run16/launch_options.obj obj/run16/frontend_scope.obj frontend-client.lib obj/run16/support.obj base-rpc-client-core.lib base-rpc-client-launch.lib obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib nthook-context.lib || ntcon.exe')
     $graph.Add('build obj/tests/console_video_observed.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/console_video_observed.c')))
     $graph.Add('  cflags = /nologo /c /MT /std:c11 /W4 /we4013 /showIncludes /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"')
     $graph.Add('build obj/tests/run16_package_observed.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/run16_package_observed.c')) + ' | obj/basesrv/service.h')
@@ -2230,10 +2230,10 @@ sources = @('src/common/protocol/native_hook.h', 'src/nthook32-dll/hook.h', 'src
         })
     }
     nativeLaunchComposition = [ordered]@{
-        target = 'obj/run16/native_launch.obj'
-        consumers = @('run16.exe','ntvwm.exe')
-        disposition = 'launcher-owned restricted resource/CreateProcess primitive; no worker policy or frontend ownership'
-        sources = @('src/run16-exe/native_launch.c','src/run16-exe/native_launch.h' | ForEach-Object {
+        target = 'obj/common/native_process.obj'
+        consumers = @('ntvwm.exe')
+        disposition = 'common restricted resource/CreateProcess primitive; no worker policy or frontend ownership'
+        sources = @('src/common/native_process.c','src/common/native_process.h' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
     }
@@ -2263,7 +2263,7 @@ sources = @('src/common/protocol/native_hook.h', 'src/nthook32-dll/hook.h', 'src
         buildInput = $NativeFrontend
         sourceClosure = 'ntcon-source-closure'
         disposition = 'independent authenticated visible presentation owner; no native backend, parser or helper'
-        sources = @('src/ntcon-exe/main.c', 'src/run16-exe/frontend_bootstrap.h', 'src/ntcon-exe/frontend_session.c', 'src/ntcon-exe/frontend_session.h', 'src/ntcon-exe/console_frontend.c', 'src/ntcon-exe/console_frontend.h', 'src/ntcon-exe/console_video.c', 'src/ntcon-exe/console_video.h', 'src/ntcon-exe/console_channel.c', 'src/ntcon-exe/console_channel.h', 'src/common/protocol/console_video.h', 'src/common/protocol/console_io.h' | ForEach-Object {
+        sources = @('src/ntcon-exe/main.c', 'src/common/protocol/frontend_protocol.h', 'src/ntcon-exe/frontend_session.c', 'src/ntcon-exe/frontend_session.h', 'src/ntcon-exe/console_frontend.c', 'src/ntcon-exe/console_frontend.h', 'src/ntcon-exe/console_video.c', 'src/ntcon-exe/console_video.h', 'src/ntcon-exe/console_channel.c', 'src/ntcon-exe/console_channel.h', 'src/common/protocol/console_video.h', 'src/common/protocol/console_io.h' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
     }

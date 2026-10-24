@@ -1,6 +1,6 @@
-#include "run16-exe/frontend_bootstrap.h"
 #include "session_service.h"
 #include "session_arguments.h"
+#include "common/protocol/frontend_protocol.h"
 #include "common/protocol/frontend_lifecycle.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include <shellapi.h>

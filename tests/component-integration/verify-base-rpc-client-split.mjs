@@ -24,7 +24,7 @@ function sources(root, target, extra = []) {
   }
   return result;
 }
-const forbidden = /\/nthook32-dll\/|\/base_rpc_client_launch\.c$|\/run16-exe\/native_launch\.c$/;
+const forbidden = /\/nthook32-dll\/|\/base_rpc_client_launch\.c$|\/common\/native_process\.c$/;
 function checkFrontend(selected, map) {
   assert(selected.some(s => s.endsWith('/base_rpc_client_core.c')), 'Frontend missing core');
   assert(!selected.some(s => forbidden.test(s)), 'Frontend links execution/style provider');
@@ -36,7 +36,7 @@ function checkFrontend(selected, map) {
 const frontendSources = sources(frontend, 'ntcon.exe');
 const frontendMap = fs.readFileSync(path.join(frontend, 'ntcon.exe.map'), 'utf8');
 checkFrontend(frontendSources, frontendMap);
-for (const leak of ['base_rpc_client_launch.c', '../nthook32-dll/installer.cpp']) {
+for (const leak of ['base_rpc_client_launch.c', '../nthook32-dll/installer.cpp', 'common/native_process.c']) {
   assert.throws(() => checkFrontend([...frontendSources, 'O:/repo/src/' + leak.replace(/^\.\.\//, '')], frontendMap));
 }
 assert.throws(() => checkFrontend(frontendSources, frontendMap + '\n OpenNtBaseClientSetWindowStyle '));

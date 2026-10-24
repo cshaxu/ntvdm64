@@ -1223,11 +1223,13 @@ The finite `frontend-client.lib` implementation is launcher-owned under
 Their local declarations stay with the implementation. Wire declarations
 and IDL live in common/protocol; the copied launch codec and neutral ordered
 pipe mechanics have separate common providers. NTCON links common protocol/
-codec/I/O, not launcher target creation. NTVWM reuses the codec and the separately selected launcher-owned
-native resource/CreateProcess primitive; worker Console state, execution and
-completion remain NTVWM-owned. This is the same owned-client-library pattern
-as the NTSRV client, not a generic shared component, process, or runtime
-dependency on run16.exe. Worker-base remains worker-only.
+codec/I/O, not launcher target creation. NTVWM reuses the codec and the
+separately selected `common/native_process` restricted-handle creation
+primitive; worker Console state, execution and completion remain NTVWM-owned.
+The primitive has no admission or lifecycle policy and introduces no runtime
+component. Run16 has no call to it and does not link it. Launcher-private
+returned-reference bookkeeping remains private; NTCON/NTSRV consume common
+protocol declarations directly. Worker-base remains worker-only.
 
 ```text
 run16 -> ntsrv protocol client

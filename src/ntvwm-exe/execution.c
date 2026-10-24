@@ -3,7 +3,7 @@
 #include "execution.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include "console_state.h"
-#include "run16-exe/native_launch.h"
+#include "common/native_process.h"
 #include "common/protocol/frontend_protocol.h"
 #include "worker-base/connection.h"
 #include "nthook32-dll/hook.h"

@@ -28,7 +28,11 @@ including lengths and borrowed string views. It does not create processes,
 authenticate clients or duplicate capabilities. Those remain endpoint-owned.
 common-codec.lib is its single selected provider; private archives do not
 embed a second copy. Local target materialization is separately declared in
-run16-exe/native_launch.h. I/O-client instance state is declared in
+common/native_process.h. The implementation is separately selected by NTVWM
+and its fixtures, not Run16 or NTCON. It materializes copied arguments and
+restricted inherited handles for CreateProcess; caller-owned admission,
+target binding, execution and lifetime decisions remain outside common.
+I/O-client instance state is declared in
 common/console/client.h, not a wire protocol header.
 
 `console/client` owns the existing shared NTCON named-pipe protocol client:

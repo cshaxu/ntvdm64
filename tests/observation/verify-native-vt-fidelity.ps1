@@ -29,7 +29,7 @@ try {
     if($LASTEXITCODE -or $drift){throw 'Accepted frontend dependencies have changed; rebuild their closure'}
     $dependency=@('obj/frontend/frontend_session.obj','obj/frontend/console_frontend.obj','obj/frontend/console_video.obj','obj/opennt-abi-host-compat/console_grid.obj','frontend-window.lib')
     $dependency|ForEach-Object{Get-FileHash (Join-Path $FrontendBuild $_)}|ConvertTo-Json|Set-Content "$root\dependencies.json"
-    $source=@('tests/observation/native_vt_fidelity_test.c','src/ntvwm-exe/console_state.c','src/ntvwm-exe/text_frame.c','src/common/console/members.c','src/run16-exe/native_launch.c','src/common/codec/native_launch.c')
+    $source=@('tests/observation/native_vt_fidelity_test.c','src/ntvwm-exe/console_state.c','src/ntvwm-exe/text_frame.c','src/common/console/members.c','src/common/native_process.c','src/common/codec/native_launch.c')
     $source|ForEach-Object{Get-FileHash (Join-Path $repo $_)}|ConvertTo-Json|Set-Content "$root\sources.json"
     foreach($arch in @('x64','x86')) {
         $commands=@('@echo off',('call "'+$VsDevCmd+'" -no_logo -arch='+$arch+' -host_arch=x64'),'if errorlevel 1 exit /b %errorlevel%')

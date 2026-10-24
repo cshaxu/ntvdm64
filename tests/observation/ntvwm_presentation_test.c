@@ -68,8 +68,10 @@ static DWORD WINAPI peer(void *context)
             video_final=TRUE;
         ++state->calls;
         if(state->mode==0) {
+            /* This case calls the generic barrier explicitly below; the
+             * sequence-specific final barrier belongs to presentation_end. */
             static const DWORD expected[]={CONSOLE_IO_BARRIER,CONSOLE_IO_VIDEO_BEGIN,
-                CONSOLE_IO_VIDEO_DATA,CONSOLE_IO_PRESENT_BARRIER};
+                CONSOLE_IO_VIDEO_DATA,CONSOLE_IO_BARRIER};
             if(sequence>ARRAYSIZE(expected) || request.operation!=expected[sequence-1])
                 return ERROR_INVALID_FUNCTION;
         }
