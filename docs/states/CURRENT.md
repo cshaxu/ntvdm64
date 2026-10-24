@@ -29,8 +29,8 @@
 
 ## Current Technical Baseline
 
-S5's r5 regression and complete publication are finished; its reviewed P
-delivery is being committed and pushed before requesting owner acceptance.
+S5 is **delivered, awaiting owner acceptance**. Its r5 regression, complete
+publication and reviewed P delivery are committed and pushed as `60367a2b5`.
 The owner rejected the preceding installed root EXIT/mixed-chain behavior;
 that rejection is not overwritten by earlier candidate results.
 
@@ -67,8 +67,8 @@ earlier failures are recorded in the
 The same ten images are now published to `assets/release` and
 `O:\winnt\system32`, with all twenty hashes matched to the tested candidate
 and tracked release manifest. All 71 non-product candidate files match the
-sealed baseline; original mirrors and guest remain unchanged. Required before
-inviting acceptance: commit, push and verify clean synchronization.
+sealed baseline; original mirrors and guest remain unchanged. Final document
+governance and diff checks passed. No new S is admitted before acceptance.
 Current disposable evidence remains
 owned by S5: 40 minutes per build run, scenario-specific diagnostic test
 budgets, and 2 GiB disposable output; preserve failed evidence until its

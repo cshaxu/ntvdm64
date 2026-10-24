@@ -439,3 +439,9 @@ NTSRV is `18AB4B13F6A4F0BE6C42098B489B1E05A3997C26A754F80D2ADE51EFA5D3148F`.
 This is the first publication of the r5 root-lifetime corrections; the earlier
 owner rejection applied to the prior installed package. Owner acceptance of
 this complete delivery remains pending.
+
+The reviewed delivery was committed and pushed to main as `60367a2b5`.
+The production delta is +130/-62 lines, tests/tools +376/-96, and the included
+evidence/queue governance documentation +656/-24 before this final receipt.
+Original mirror diff remains zero. Final documentation governance and
+`git diff --check` passed. This records delivery, not owner acceptance.
