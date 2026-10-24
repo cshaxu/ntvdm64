@@ -4,6 +4,10 @@
 records the owner-admitted sequence, pinned read-only audit receipt and
 minimum-diff production reconciliation gates.
 
+[T452 S1 source matrix](evidence/m0-t452-s1-modules-memory-alias-source-matrix.md)
+records the finite W03 owner/build/lifetime review before any production
+implementation; it does not claim runtime acceptance.
+
 [T451 S1 USER object contract ledger](operations/m0-t451-s1-user-object-contract-ledger.md)
 maps every residual C04--C07/object-C10 PMODE32 direct-reader family to its
 producer, authority, update/withdrawal rule, evidence and bounded S2--S4

@@ -62,6 +62,10 @@ and direct consumers. Each row needs source/hash, caller/provider, current
 binding, state authority, creation/rollback/reentry/retirement, exact tests
 and uncovered boundaries. These four anchors do not claim all gaps are known.
 
+The resulting finite review is [M0 T452 S1 source matrix](../evidence/m0-t452-s1-modules-memory-alias-source-matrix.md).
+It identifies the selected non-`i386` CPU40 branch, the direct source owners,
+and the two bounded repair loci; it is not runtime proof.
+
 ## Implementation and evidence rule
 
 Reuse original bodies first, then the smallest original-shaped binding.
