@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T451 S3**
+**Active: M0 T451 S4**
 
 ## Active Packet
 
-### M0 T451 S3 — USER mutation, destruction and copied-state timing
+### M0 T451 S4 — USER object acceptance and consumer handoff
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T451 S3, Ordinary Mode. |
-| Admission And Approval | T451 was owner-admitted on 2026-10-23. S2's publication boundary is delivered and recorded in [its closure](../etc/evidence/m0-t451-s2-closure.md); the approved candidate proposal assigns this sequential S3 scope. |
-| Objective | Complete finite R05/R09/R10 mutation: host-originated scalar/geometry refresh, stale reuse, nested destruction/rollback, and copied fixed-field timing, using the S2 view owner. |
-| Non-goals | No guest modification/rebuild, USER-server reconstruction, new object table, broad control/dialog/message implementation, or new external source import. |
-| Reference Baseline | S1's ten-row ledger and S2's original-layout publication chain. |
-| Files And ABI Surface | Existing WOW32 bindings/page-domain owner and focused fixtures only; no guest or new cross-component ABI. |
+| Identifier Mode | M0 T451 S4, Ordinary Mode. |
+| Admission And Approval | T451 was owner-admitted on 2026-10-23. S1--S3 have delivered the finite object inventory, publication and mutation/lifetime foundation; the approved candidate proposal assigns S4 as their sequential acceptance and handoff scope. |
+| Objective | Verify that every selected direct-data, callback and object-lifetime consumer reuses the one S2/S3 copied-view owner, then run the applicable coherent product regression and record the consumer handoff. |
+| Non-goals | No guest modification/rebuild, USER-server reconstruction, new object table, broad control/dialog/message implementation, external source import, or reopening an S1--S3 row without a demonstrated consumer defect. |
+| Reference Baseline | S1's ten-row ledger; S2 publication closure; S3 mutation/destruction closure. |
+| Files And ABI Surface | Existing WOW32 bindings/page-domain owner, selected consumers and focused acceptance fixtures only; no guest or new cross-component ABI. |
 | Applicable Rules | [Execution](../rules/EXECUTION.md), [architecture](../rules/ARCHITECTURE.md), [coding](../rules/CODING.md), and [source policy](../etc/operations/policy/source-policy.md). |
-| Verification | Trace each R05/R09/R10 reader and original producer before changing code; then exercise mutation, reuse, destruction, rollback and timing as one bounded group. |
+| Verification | Trace each selected consumer to its original producer and the single copied-view owner before changing code; execute direct-data, callback and lifetime acceptance as a bounded group, followed by applicable package regression. |
 | Expected Markers | One authority per copied scalar/identity; no stale low-word reuse, foreign retirement, partial graph commit or duplicated original lifecycle operation. |
 | Asset Needs | Existing selected original sources, current Ninja build graph and immutable guest media only. |
-| Reporting Requirements | State original algorithm retained, adapter boundary, identity/lifetime owner, test evidence, and any semantic boundary. |
+| Reporting Requirements | State original algorithm retained, adapter boundary, identity/lifetime owner, consumer evidence, package evidence, and any semantic boundary. |
 | Stop Conditions | Pause only for a new observable semantic concession, unapproved source import or unbounded dependency. |
-| Exit Criteria | Every R05/R09/R10 entry has a finite producer/update/withdrawal chain and acceptance evidence; final coherent package delivery is deferred to S4. |
+| Exit Criteria | Every selected consumer is accounted for against the single view owner, acceptance and applicable product regression are recorded, and handoff leaves no S1--S3 object implementation backlog. |
 | Original Owner Request | “开始执行，到T收口前停下等我验收。” |
 | Similar-Issue Sweep | Include scalar readers, host-only mutation, reused HWND generations, nested task/window retirement, and failed creation/rollback. |
 | Candidate Proposal | [WOW32 USER objects/shared view](../proposals/proposal-wow32-user-objects-shared-view-001.md). |
@@ -83,7 +83,9 @@ delivery package are complete. See the
 
 ## Active temporary outputs
 
-S3 owns `build/t451-s3/` for its current source-audit and fixture attempts.
+S3 is closed at [its closure record](../etc/evidence/m0-t451-s3-closure.md).
+Its evidence root `build/t451-s3/` remains disposable task evidence. S4 owns
+its own fresh bounded evidence root under `build/t451-s4/`.
 The tracked native-slot group requires a private desktop. Its first
 low-integrity execution received `ERROR_ACCESS_DENIED` from `CreateDesktopW`,
 but the same checked-in runner was then rerun in the desktop-capable execution
