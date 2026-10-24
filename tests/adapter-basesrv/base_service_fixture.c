@@ -298,7 +298,7 @@ int fixture_shared_worker_residency(void)
         WaitForSingleObject(watch.shutdown,0)==WAIT_OBJECT_0);
     RemoveEntryList(&watch.link);
     service_advance_terminal_root_retire(service,root_generation);
-    RETIRE_CHECK(root->frontend_closing && !root->frontend_terminal_retire);
+    RETIRE_CHECK(!root->frontend_closing && !root->frontend_terminal_retire);
     /* Probe the inverse COMMAND exit shape: a DOS root is complete while a
      * nested NTVWM-CUI carrier is idle.  NTSRV must issue the same close,
      * keep the frontend lease until actual carrier rundown, then arm the
@@ -322,8 +322,29 @@ int fixture_shared_worker_residency(void)
         WaitForSingleObject(watch.shutdown,0)==WAIT_OBJECT_0);
     RemoveEntryList(&watch.link);
     service_advance_terminal_root_retire(service,root_generation);
-    RETIRE_CHECK(root->frontend_closing && !root->frontend_terminal_retire &&
-        root->frontend_return_pending);
+    RETIRE_CHECK(!root->frontend_closing && !root->frontend_terminal_retire &&
+        !root->frontend_return_pending);
+    /* The direct root has one more real shape: COMMAND's DOS carrier and an
+     * idle NTVWM-CUI carrier can overlap while the root is retiring.  They
+     * are different worker implementations, not different ownership.  The
+     * service must dispatch worker-close to either text kind instead of
+     * waiting forever for a live DOS watch that it never instructed. */
+    root->frontend_closing=FALSE;root->frontend_terminal_retire=FALSE;
+    root->frontend_return_pending=FALSE;root->frontend_creator_generation=generation;
+    root->retained_frontend_root=root_generation;worker->native_worker=FALSE;
+    CloseHandle(root->frontend_retire);root->frontend_retire=CreateEventW(NULL,TRUE,FALSE,NULL);
+    RETIRE_CHECK(root->frontend_retire);
+    watch.kind=OPENNT_BASE_WORKER_DOS;watch.close_kind=WORKER_CLOSE_NONE;
+    InsertTailList(&service->worker_watches,&watch.link);
+    RETIRE_CHECK(ResetEvent(watch.shutdown));
+    service_retire_completed_root(worker);
+    RETIRE_CHECK(root->frontend_terminal_retire && !root->frontend_closing &&
+        watch.close_kind==WORKER_CLOSE_WORKER &&
+        WaitForSingleObject(watch.shutdown,0)==WAIT_OBJECT_0);
+    RemoveEntryList(&watch.link);
+    service_advance_terminal_root_retire(service,root_generation);
+    RETIRE_CHECK(!root->frontend_closing && !root->frontend_terminal_retire &&
+        !root->frontend_return_pending);
     LeaveCriticalSection(&service->lock);
     RETIRE_CHECK(!OpenNtBaseServiceDisconnect(root));
     RETIRE_CHECK(!OpenNtBaseServiceDisconnect(worker));

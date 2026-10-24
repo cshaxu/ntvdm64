@@ -107,3 +107,54 @@ installed SHA-256 values were compared entry by entry in
 The final product probes prove both cross-carrier directions through real
 Console input/output; remaining owner acceptance is visual/usability evidence,
 not a substitute for those lifecycle assertions.
+
+## Root Run16 exit regression
+
+The former root-only hang was not a COMMAND, `VER`, `MEM`, or shell-token
+failure.  It was an NTSRV retirement ordering error.  Once the creator's root
+transaction completed, `service_advance_terminal_root_retire` treated only an
+idle NTVWM-CUI carrier as closeable.  A live DOS carrier was therefore left
+open.  In the inverse shape, it final-closed the frontend before the creator's
+already-defined `WaitFrontendConsoleRestored` exchange.  NTCON then took its
+final-close path rather than PARKing and acknowledging restored Console mode,
+leaving the root launcher waiting indefinitely.
+
+The service now owns both actions consistently:
+
+1. only the root creator can begin terminal retirement;
+2. the service sends `WORKER_CLOSE_WORKER` to either textual carrier kind
+   (`DOS` or `NATIVE`/NTVWM-CUI); WOW and GUI-launcher observations are not
+   Console carriers;
+3. after their observed exit, it clears the root retirement transaction but
+   preserves the frontend lease; and
+4. the creator's existing restoration RPC lets NTCON PARK and acknowledge
+   Console return before Run16 exits.
+
+No component gains a new direct lifecycle link; no guest file, BOP, COMMAND
+or BaseCheckVDM logic changes.
+
+`tests/observation/verify-root-carrier-exit.ps1` is the fixed executable
+regression.  It uses a physical isolated package, a clean deployment-like
+environment, and result-gated input—not typeahead.  Against
+`build/t451-s5/root-exit-r12/package`, all of the following passed:
+
+| Root form | Command | Result required |
+| --- | --- | --- |
+| `run16 command` | `VER`, then `EXIT` | visible host `VER`; direct launcher exits 0 |
+| `run16 command` | `MEM`, then `EXIT` | visible MEM result; direct launcher exits 1 (guest MEM's documented result) |
+| `run16 cmd` | `VER`, then `EXIT` | visible host `VER`; direct launcher exits 0 |
+| `run16 cmd` | `MEM`, then `EXIT` | visible MEM result; direct launcher exits 0 |
+| `cmd → run16 command` | `VER`/`MEM`, then inner and outer `EXIT` | visible result; outer launcher exits 23 |
+| `cmd → run16 cmd` | `VER`/`MEM`, then inner and outer `EXIT` | visible result; outer launcher exits 23 |
+
+The service fixture also passed after rebuilding the affected x64 service
+target.  It now asserts the mixed DOS/NTVWM-CUI case directly and verifies
+that terminal rundown preserves—not prematurely closes—the frontend lease.
+
+The tested ten-image package was published after recoverable copies to both
+required destinations.  `build/t451-s5/root-exit-r12/publication/
+published-manifest.json` records entry-by-entry equality.  The new `ntsrv.exe`
+hash is `3FE8AE82825DB4EC747063E4975FAF326FA5D31A397676B3E60C40B652C87872`.
+`ntvdm.exe` and `ntvwm.exe` were refreshed as part of the required coherent
+package, not because this repair changes their source.  `assets/winnt.zip`
+and every guest file remain unchanged.

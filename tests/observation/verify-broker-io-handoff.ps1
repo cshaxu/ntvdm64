@@ -23,7 +23,7 @@ if(Get-Process ntsrv -ErrorAction SilentlyContinue) {throw 'An existing broker m
 # the checked, real short stage rather than a drive alias or a path heuristic.
 $stage=$null
 $testScope=$null
-$binary=$null
+$binary=Get-PackageBinaryRoot $runtime
 $names='run16.exe','ntsrv.exe','ntvdm.exe','ntvwm.exe','ntcon.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL'
 foreach($hook in 'nthook32.dll','nthook64.dll') {
     if(Test-Path (Join-Path $binary $hook)){$names+=,$hook}
@@ -114,7 +114,7 @@ try {
     }
     "PASS broker I/O $Case $NativeMachine : actual CMD/DOS input, parent return and direct exit=23"
 } finally {
-    try {Stop-IsolatedPackageScope $testScope}finally{
+    try {if($testScope){Stop-IsolatedPackageScope $testScope}}finally{
         if($stage){Remove-PhysicalRuntimeStage $stage}
         foreach($name in $environmentNames) {
             # PowerShell can marshal null to an empty string here. Native

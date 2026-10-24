@@ -619,11 +619,13 @@ void service_retire_completed_root(OPENNT_BASE_CONNECTION *parent)
 }
 
 /* Service lock held.  A terminal root transaction becomes frontend close
- * only after every NTSRV-requested idle native carrier has really exited. */
+ * only after every NTSRV-requested text carrier has really exited.  A root
+ * can legitimately contain both the original DOS carrier and NTVWM-CUI:
+ * both receive the same broker-owned worker-close instruction. */
 void service_advance_terminal_root_retire(OPENNT_BASE_SERVICE *service,DWORD root_generation)
 {
     LIST_ENTRY *link;
-    OPENNT_BASE_CONNECTION *root=NULL,*creator=NULL;
+    OPENNT_BASE_CONNECTION *root=NULL;
     BOOL live=FALSE,pending=FALSE;
     if(!service || !root_generation)return;
     for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
@@ -647,27 +649,39 @@ void service_advance_terminal_root_retire(OPENNT_BASE_SERVICE *service,DWORD roo
         LIST_ENTRY *worker_link;
         if(watch->frontend_root_generation!=root_generation ||
             WaitForSingleObject(watch->process.ProcessHandle,0)!=WAIT_TIMEOUT)continue;
+        /* WOW and GUI launchers do not carry this root's text Console. They
+         * must not keep a Console-return transaction live merely because an
+         * unrelated observation record remains registered. */
+        if(watch->wow || watch->native_gui_launcher)continue;
         live=TRUE;
         for(worker_link=service->connections.Flink;worker_link!=&service->connections;worker_link=worker_link->Flink) {
             OPENNT_BASE_CONNECTION *candidate=CONTAINING_RECORD(worker_link,OPENNT_BASE_CONNECTION,service_link);
             if(candidate->process.SequenceNumber==watch->process.SequenceNumber) {worker=candidate;break;}
         }
-        if(watch->wow || watch->kind!=OPENNT_BASE_WORKER_NATIVE || watch->native_gui_launcher ||
-            !worker || !worker->native_worker || worker->native_gui_launcher ||
-            worker->native_inflight || !IsListEmpty(&worker->win32records))return;
+        /* WOW has no text frontend and a GUI launcher is one-shot.  Neither
+         * belongs to this root Console retirement.  The remaining two kinds
+         * are text carriers with distinct implementation paths but one
+         * NTSRV-owned worker-close protocol.  Returning merely because the
+         * DOS carrier is live creates a cycle: a root COMMAND can be waiting
+         * for the service to close it while this transaction waits for it to
+         * disappear. */
+        if(!worker ||
+            (watch->kind!=OPENNT_BASE_WORKER_DOS && watch->kind!=OPENNT_BASE_WORKER_NATIVE) ||
+            (worker->native_worker && (worker->native_gui_launcher || worker->native_inflight ||
+                !IsListEmpty(&worker->win32records))))return;
         if(watch->close_kind==WORKER_CLOSE_NONE) {
             if(!watch->shutdown || !SetEvent(watch->shutdown))return;
             watch->close_kind=WORKER_CLOSE_WORKER;
         }
     }
     if(live)return;
-    for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
-        OPENNT_BASE_CONNECTION *candidate=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-        if(candidate->process.SequenceNumber==root->frontend_creator_generation) {creator=candidate;break;}
-    }
-    if(root->frontend_retire && creator)creator->frontend_return_pending=TRUE;
+    /* Do not turn a completed terminal transaction into FINAL_CLOSE here.
+     * The creator's existing WaitFrontendConsoleRestored request, or its
+     * still-live lease, is what lets NTCON park the now-workerless frontend
+     * and acknowledge restored Console mode.  Marking root closing first
+     * makes NTCON take FINAL_CLOSE instead, so the creator can never receive
+     * its restoration acknowledgement. */
     root->frontend_terminal_retire=FALSE;
-    root->frontend_closing=TRUE;
     service_signal_frontend_states(service);
     WakeAllConditionVariable(&service->frontend_changed);
 }

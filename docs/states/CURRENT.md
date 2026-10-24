@@ -12,12 +12,12 @@
 | --- | --- |
 | Identifier Mode | M0 T451 S5, Ordinary Mode. |
 | Admission And Approval | Owner redirected the unclosed SOL Options observation to the queued everyday-usability interaction stage on 2026-10-23, and admitted this S5 repair for the independently reproducible direct `run16 command` native-CUI route failure. S4 remains its completed, separately bounded handoff/acceptance delivery. |
-| Objective | Repair the direct-new-Console NTVWM-CUI route failure shared by `run16 command → VER`, `NTMON`, and the installed native `EDIT.EXE`, without command-name special cases. The source root is a delivery-time raw equality check between an authenticated nested execution Console and the visible frontend root; it must retain the existing broker-authenticated context relation instead. The proposed final-frame acknowledgement remains a separate candidate for a fast-output release race, not this long-lived-route repair. |
+| Objective | Repair the direct-new-Console NTVWM-CUI route failure shared by `run16 command → VER`, `NTMON`, and the installed native `EDIT.EXE`, without command-name special cases; also preserve root Run16's normal return after either DOS or NTVWM-CUI work has occurred. The source roots are a delivery-time raw equality check between an authenticated nested execution Console and the visible frontend root, and a terminal-retire path that final-closed the frontend before the creator's existing Console-restoration acknowledgement. |
 | Non-goals | No guest modification/rebuild, COMMAND/BOP/BaseCheckVDM semantic change, USER-server reconstruction, shell-token heuristic, synchronous ordinary-frame transport, new polling/timeout/sleep, or worker-local endpoint shortcut into host CUI children. |
 | Reference Baseline | S1 object ledger; S2 publication closure; S3 mutation/destruction closure; S4 handoff audit; existing NTVWM publication and NTCON channel/render protocol. |
 | Files And ABI Surface | Project-owned NTSRV native-command/frontend-context adapter and its actual-service fixture; the pre-existing `console_io`/NTVWM/NTCON final-frame candidate remains separately audited. No guest ABI. |
 | Applicable Rules | [Execution](../rules/EXECUTION.md), [architecture](../rules/ARCHITECTURE.md), [coding](../rules/CODING.md), and [source policy](../etc/operations/policy/source-policy.md). |
-| Verification | Establish the real direct-root NTVWM-CUI input/output route before asserting repair; then cover direct `VER`, `NTMON`, and native `EDIT.EXE`, with DOS (`MEM`, `EDIT.COM`) and inherited-CMD controls. If retained, the final-frame sequence test proves only its exact release ordering. Also cover redirection/pipeline negatives, `EXIT`, failed `cmd /c`, Ctrl+C and channel/worker loss. |
+| Verification | Establish the real direct-root NTVWM-CUI input/output route before asserting repair; then cover direct `VER`, `NTMON`, and native `EDIT.EXE`, with DOS (`MEM`, `EDIT.COM`) and inherited-CMD controls. The fixed root-exit matrix is `run16 command|cmd → VER|MEM → EXIT` and `cmd → run16 command|cmd → VER|MEM → EXIT`; each case gates the next input on the prior visible result and requires real launcher exit. If retained, the final-frame sequence test proves only its exact release ordering. Also cover redirection/pipeline negatives, `EXIT`, failed `cmd /c`, Ctrl+C and channel/worker loss. |
 | Expected Markers | An authenticated execution context distinct from the visible root is delivered only when it belongs to that root; a foreign context remains rejected. If retained, the separate final barrier records exact source serial, render-committed serial, acknowledgement and release ordering. |
 | Asset Needs | Existing original COMMAND sources, current Ninja symbols/build graph, immutable guest media, and project-owned frontend fixtures. |
 | Reporting Requirements | State the source chain, final-frame/commit authority, failure disposition, new protocol surface, focused evidence, package identity and any remaining observation boundary. |
@@ -35,6 +35,11 @@ unchanged. S5 refreshes all ten images from one staged current build and
 records its authenticated direct-root native-CUI delivery repair and
 sequence-specific final-frame barrier in the
 [S5 route record](../etc/evidence/m0-t451-s5-direct-root-native-cui-route.md).
+The current S5 candidate also fixes root-carrier retirement: NTSRV closes both
+text-carrier kinds under the root transaction while preserving the frontend
+lease for the creator's normal Console-restoration acknowledgement. The
+published staged hash record and eight-case root-return evidence are in the
+same S5 route record.
 The earlier restricted-token desktop failure is superseded by the documented
 desktop-capable modern-PowerShell runner.  The active S5 record now includes
 passing private-desktop real-carrier return probes in both DOS→native and
