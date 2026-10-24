@@ -13,6 +13,14 @@ traces the selected original reader/publisher chains, corrects the stale
 standard-class fixture prelude, records its passing focused cases and the
 current isolated-desktop acceptance prerequisite.
 
+[T451 S2 closure record](evidence/m0-t451-s2-closure.md) fixes the released
+first-task publication boundary, its original-owner contract, immutable-guest
+acceptance and coherent ten-image delivery identity.
+
+[T451 S3 mutation/destruction audit](evidence/m0-t451-s3-mutation-destruction-audit.md)
+records the source-first R05/R09/R10 owner chains and the bounded
+desktop-capability prerequisite for its remaining mutation acceptance.
+
 [T450 S1--S4 closure ledger](evidence/m0-t450-s1-s4-closure-ledger.md)
 indexes the completed Win16 Style-removal sequence retained before the active
 Run16 entry-contract correction.

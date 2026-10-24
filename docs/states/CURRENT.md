@@ -29,10 +29,13 @@
 
 ## Current Technical Baseline
 
-The S2 ten-image host package is published in both `assets/release/` and
+The current ten-image host package is published in both `assets/release/` and
 `O:\winnt\system32`; guest media and guest configuration remain immutable and
-unchanged. It passed the complete build and immutable Win16 `WINMINE.EXE`
-acceptance; its full closure evidence is linked below.
+unchanged.  During S3, the published Run16 image additionally corrected the
+host-specific cold-NTSRV RPC startup classification without changing its
+existing five-second bootstrap grace; its exact build, cold Console exercise
+and ten-image hash evidence are in the [S3 audit](../etc/evidence/m0-t451-s3-mutation-destruction-audit.md).
+The S2 USER publication acceptance remains linked below.
 T450 is closed at
 [its closure record](../history/m0-t450-closure.md). T451 S2 begins from the
 S1 inventory; no new WOW32 capability is claimed until its coherent delivery.
@@ -53,7 +56,7 @@ paths.  This documentation-only delivery changed no production source, build
 input, guest asset, release asset or installed file.  Documentation governance
 passed; it was committed and pushed as `110f2f078`.
 
-## S2 closure
+## S2 Closure Record
 
 The [S2 publication audit](../etc/evidence/m0-t451-s2-user-publication-audit.md)
 confirms the selected original USER16/WOW32 readers and current copied-view
@@ -80,9 +83,13 @@ delivery package are complete. See the
 
 ## Active temporary outputs
 
-S2's `build/t451-s2/` root is being disposed through the single reviewed
-cleanup tool after its recorded hashes/results were transferred to the closure
-record. Stable Ninja/ccache roots remain untouched.
+S3 owns `build/t451-s3/` for its current source-audit and fixture attempts.
+The tracked native-slot group requires a private desktop; the current
+non-interactive token received `ERROR_ACCESS_DENIED` from `CreateDesktopW`.
+This is recorded in the
+[S3 audit](../etc/evidence/m0-t451-s3-mutation-destruction-audit.md). It is
+not a product result and must be rerun in a desktop-capable context before S3
+closure. Stable Ninja/ccache roots remain untouched.
 
 ## Recent M0 Closures
 

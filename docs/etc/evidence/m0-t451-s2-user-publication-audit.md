@@ -162,7 +162,7 @@ rebuild or configure any guest image.
 
 The final remaining delivery operation is mechanical: preserve the current
 asset package, synchronize this exact ten-image candidate to
-`assets/release` and `O:\\winnt\\system32`, compare all manifest hashes, then
+`assets/release` and `O:\winnt\system32`, compare all manifest hashes, then
 commit and push. These are fixed acceptance gates, not an invitation to add a
 new object family. R05/R09/R10 remain S3 exactly as assigned by the S1 ledger.
 

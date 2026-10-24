@@ -124,36 +124,62 @@ static DWORD connect_broker(void)
     STARTUPINFOW startup = {sizeof(startup)};
     PROCESS_INFORMATION child = {0};
     DWORD error=ERROR_GEN_FAILURE;
+    DWORD initial_connect_error=ERROR_SUCCESS;
     ULONGLONG deadline=GetTickCount64()+OPENNT_LIFECYCLE_GRACE_MS;
     BOOL spawned=FALSE;
     if (!sibling_path(L"system32\\ntsrv.exe", broker, MAX_PATH))
         return GetLastError();
-    /* Bootstrap is not task submission. One absent-service creation and one
-     * absolute connect budget; admitted task requests are never replayed. */
+    /* Bootstrap is not task submission. One launch attempt and one absolute
+     * connect budget; admitted task requests are never replayed.  On this
+     * host an unopened local authenticated endpoint can report either the
+     * conventional unavailable status or access denied before an NTSRV has
+     * accepted the first authenticated RPC request.  A process handle lets
+     * this boundary distinguish that finite startup state from a
+     * server which has already failed; it is not a second control channel. */
     for (;;)
     {
         ULONGLONG now=GetTickCount64();
-        if(now>=deadline)return ERROR_TIMEOUT;
+        if(now>=deadline) { error=ERROR_TIMEOUT; goto done; }
         error=OpenNtBaseClientConnectCurrentTimeout((DWORD)(deadline-now));
-        if (!error) return ERROR_SUCCESS;
-        if (error != RPC_S_SERVER_UNAVAILABLE)
-            return error; /* Bootstrap only an absent endpoint, not a rejected request. */
+        if (!error) { error=ERROR_SUCCESS; goto done; }
+        if (error!=RPC_S_SERVER_UNAVAILABLE && error!=ERROR_ACCESS_DENIED)
+            goto done;
         if (!spawned)
         {
+            initial_connect_error=error;
             if (CreateProcessW(broker, NULL, NULL, NULL, FALSE, CREATE_NO_WINDOW,
                 NULL, NULL, &startup, &child))
             {
                 CloseHandle(child.hThread);
-                CloseHandle(child.hProcess);
-                ZeroMemory(&child,sizeof(child));
+                child.hThread=NULL;
             }
-            else return GetLastError();
+            else { error=GetLastError(); goto done; }
             spawned=TRUE;
         }
         now=GetTickCount64();
-        if(now>=deadline)return ERROR_TIMEOUT;
-        Sleep((DWORD)min(50u,deadline-now));
+        if(now>=deadline) { error=ERROR_TIMEOUT; goto done; }
+        /* The only bounded bootstrap wait is also a child-death observation.
+         * Reattempting the already selected local RPC endpoint is the sole
+         * readiness probe; no task request is sent until it succeeds. */
+        {
+            DWORD wait=WaitForSingleObject(child.hProcess,(DWORD)min(50u,deadline-now));
+            if(wait==WAIT_OBJECT_0) {
+                DWORD status=ERROR_PROCESS_ABORTED;
+                if(GetExitCodeProcess(child.hProcess,&status) && !status)
+                    status=ERROR_PROCESS_ABORTED;
+                /* A concurrently healthy endpoint rejects our one server
+                 * creation with the RPC duplicate-endpoint status.  Preserve
+                 * the already observed RPC rejection, rather than converting
+                 * an authorization result into a launcher-owned status. */
+                error=status==RPC_S_DUPLICATE_ENDPOINT ? initial_connect_error : status;
+                goto done;
+            }
+            if(wait==WAIT_FAILED) { error=GetLastError(); goto done; }
+        }
     }
+done:
+    if(child.hThread)CloseHandle(child.hThread);
+    if(child.hProcess)CloseHandle(child.hProcess);
     return error;
 }
 

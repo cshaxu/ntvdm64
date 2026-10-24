@@ -28,7 +28,7 @@ reversion of that entry-normalization change, not an invented launch parser.
 | Full x86/x64 ten-image build | Pass; `r25-full-component`, 10 images and 1,476 intermediates; second increment compiled no intermediates. |
 | Candidate staging | Pass; each selected image's machine and SHA-256 verified before copying into the immutable baseline package. |
 | Actual immutable WOW guest | Pass; candidate `WINMINE.EXE` flag, reset, open-cell, WM_CLOSE and Run16-completion flow completed. The guest input SHA-256 is `633C1328922B4092351E0019B1BA1C6D56C0F0FEA83824CC8B7E2E731B15E80B`. |
-| Publication | Pass; all ten candidate hashes agree between the staged manifest, `assets/release` and `O:\\winnt\\system32`. |
+| Publication | Pass; all ten candidate hashes agree between the staged manifest, `assets/release` and `O:\winnt\system32`. |
 
 The tested final package manifest declares `run16.exe`
 `C482F54B93C3EC3F1F0DEC1D2D979ED7ACA7DBC1C22A6E7CF2F4343F8DD38C99`,
