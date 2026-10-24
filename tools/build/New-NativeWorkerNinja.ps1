@@ -106,7 +106,7 @@ function Add-Edge([string]$target) {
   $rule=if($edge.Rule -eq 'lib'){'lib'}elseif($edge.Rule -in @('console_test_link','pointer_test_link','monitor_link','broker_test_link','rtl_fixture_link','basesrv_service_test_link') -or $Component -eq 'Monitor'){'test_link'}else{'link'}
   $graph.Add('build '+$output+': '+$rule+' '+(($inputs|ForEach-Object {$_.Replace('original-opennt-rtl-x86.lib','original-opennt-rtl-native.lib')}) -join ' '))
   if($target -eq 'common-worker-control-test.exe' -or $edge.Rule -in @('console_test_link','pointer_test_link')){$graph.Add('  entry = mainCRTStartup')}
-  if($target -eq 'run16.exe'){$graph.Add('  entry = wmainCRTStartup')}
+  if($target -eq 'run16.exe'){$graph.Add('  entry = wWinMainCRTStartup')}
   if($target -eq 'ntsrv.exe'){$graph.Add('  entry = mainCRTStartup');$graph.Add('  subsystem = windows')}
   if($target -eq 'native-capture-test.exe'){$graph.Add('  entry = mainCRTStartup')}
   $entryOverride=[regex]::Match($edge.Bindings,'(?m)^\s+entry = (mainCRTStartup|wmainCRTStartup)\s*$').Groups[1].Value

@@ -59,6 +59,9 @@ typedef struct wow_user_task_lifecycle_thread {
     DWORD message_wakes;
     DWORD launch_request;
     BOOL start_pending;
+    /* xxxInitTask has committed this carrier, but its one initial copied
+     * USER view has not yet reached the W32Thread return boundary. */
+    BOOL initial_publication_pending;
     BOOL wait_publication_pending; /* Native wait omitted a guest publication. */
     const void *start_attempt;
 } wow_user_task_lifecycle_thread;
@@ -568,6 +571,7 @@ BOOL WINAPI wow_user_task_lifecycle_init(wow_user_task_lifecycle *owner,
     }
     if (status == STATUS_SUCCESS) {
         task->launch_request = shared_id;
+        task->initial_publication_pending = TRUE;
         /* Separate WOW deliberately passes zero to original USER. Its real
          * launch is identified by the original TD at the registration edge;
          * bootstrap/internal tasks never issue that notification. */
@@ -1070,6 +1074,46 @@ static BOOL publish_guest_return(wow_user_runtime_thread *binding,
      * obligation, not an independent HWND/graph dirty-state authority. */
     if (published && task) task->wait_publication_pending = FALSE;
     return published;
+}
+
+BOOL WINAPI wow_user_task_lifecycle_publish_initial_view(
+    wow_user_task_lifecycle *owner)
+{
+    wow_user_runtime_thread *binding = wow_user_runtime_current();
+    wow_user_task_lifecycle_thread *task;
+    BOOL result;
+    DWORD error, saved = GetLastError();
+    /* W32Thread invokes pfnInitTask immediately before it transfers control
+     * to the guest app.  xxxInitTask has now established the original task
+     * carrier, but no native call has necessarily returned to trigger the
+     * ordinary publication point.  Acquire the existing runtime owner and
+     * use that exact publisher; this is not an independent startup view. */
+    if (!owner || !binding || binding->runtime != owner->runtime ||
+            !binding->thread || !wow_user_runtime_enter(binding)) {
+        SetLastError(ERROR_INVALID_STATE);
+        return FALSE;
+    }
+    task = current_task(owner);
+    if (!task) {
+        result = FALSE;
+        error = ERROR_INVALID_STATE;
+    } else if (!task->initial_publication_pending) {
+        /* W32Thread retries pfnInitTask after a launch notification failure.
+         * Original xxxInitTask already committed, so retain its one copied
+         * initial-view transaction rather than publishing it again. */
+        result = TRUE;
+        error = saved;
+    } else {
+        result = publish_guest_return(binding, NULL);
+        error = GetLastError();
+        if (result) task->initial_publication_pending = FALSE;
+    }
+    if (!wow_user_runtime_leave(binding)) {
+        result = FALSE;
+        error = GetLastError();
+    }
+    SetLastError(error);
+    return result;
 }
 
 static void publish_scheduled_return(wow_user_runtime_thread *binding)

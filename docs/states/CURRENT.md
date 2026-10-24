@@ -2,36 +2,38 @@
 
 ## Current Work
 
-**Active: M0 T451 S2**
+**Active: M0 T451 S3**
 
 ## Active Packet
 
-### M0 T451 S2 — USER identity, class and shared-object publication
+### M0 T451 S3 — USER mutation, destruction and copied-state timing
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T451 S2, Ordinary Mode. |
-| Admission And Approval | T451 was owner-admitted on 2026-10-23.  S1 reached its committed source-first inventory at `110f2f078`; the approved candidate proposal already assigns this sequential S2 publication scope. |
-| Objective | Complete the bounded producer path for residual desktop/system/external WND and CLS objects plus MENU/ITEM and window-menu publication, so the unchanged PMODE32 readers have a single source of copied original-layout facts. |
-| Non-goals | No guest modification/rebuild, no USER-server reconstruction, no temporary provider, no broad control/dialog/message implementation, no foreign callback/property/cleanup ownership, and no geometry/mutation/reuse repair beyond the publication prerequisite. |
-| Reference Baseline | `110f2f078` records the ten-row contract ledger. T447 delivered local WND/CLS/desktop foundation; T449 delivered execution and targeted task retirement. |
-| Files And ABI Surface | Project-owned WOW32 bindings, page-domain carrier, focused fixture/observation sources and indexed evidence only. No new cross-component runtime ABI or guest input is admitted. |
+| Identifier Mode | M0 T451 S3, Ordinary Mode. |
+| Admission And Approval | T451 was owner-admitted on 2026-10-23. S2's publication boundary is delivered and recorded in [its closure](../etc/evidence/m0-t451-s2-closure.md); the approved candidate proposal assigns this sequential S3 scope. |
+| Objective | Complete finite R05/R09/R10 mutation: host-originated scalar/geometry refresh, stale reuse, nested destruction/rollback, and copied fixed-field timing, using the S2 view owner. |
+| Non-goals | No guest modification/rebuild, USER-server reconstruction, new object table, broad control/dialog/message implementation, or new external source import. |
+| Reference Baseline | S1's ten-row ledger and S2's original-layout publication chain. |
+| Files And ABI Surface | Existing WOW32 bindings/page-domain owner and focused fixtures only; no guest or new cross-component ABI. |
 | Applicable Rules | [Execution](../rules/EXECUTION.md), [architecture](../rules/ARCHITECTURE.md), [coding](../rules/CODING.md), and [source policy](../etc/operations/policy/source-policy.md). |
-| Verification | Trace each selected publisher from the original direct reader through current capture/commit/retirement.  Add focused positive, negative and lifetime assertions for system/external publication and menu attachment, then run the selected x86 build and coherent runtime package matrix before release. |
-| Expected Markers | Every S2 reader has one producer, exact full-identity validation, a no-foreign-ownership rule, atomic publish/failure rule and a caller/fixture assertion. |
-| Asset Needs | Existing selected original OpenNT/WOW32 sources, current x86 build graph, retained T447/T449 evidence and immutable guest acceptance media; no external import. |
-| Reporting Requirements | Identify every removed/retained autonomous project implementation, original behavior reused, exception-register change and exact test boundary.  Never claim freshness for approved external snapshots. |
-| Stop Conditions | Pause for owner decision only if a required reader needs a new observable semantic concession, an unapproved source import or an unbounded cross-candidate dependency. |
-| Exit Criteria | One reviewed publication chain for all S2 rows; selected build/tests and immutable-guest evidence on a coherent package; complete ten-image publication/hash verification; commit/push the implementation delivery. |
-| Original Owner Request | “可以，收口，然后准入下一个T任务。” |
-| Similar-Issue Sweep | Include desktop/system/native/other-task identities; every MENU/ITEM caller, all first-callback edges and every failure/retirement caller. |
+| Verification | Trace each R05/R09/R10 reader and original producer before changing code; then exercise mutation, reuse, destruction, rollback and timing as one bounded group. |
+| Expected Markers | One authority per copied scalar/identity; no stale low-word reuse, foreign retirement, partial graph commit or duplicated original lifecycle operation. |
+| Asset Needs | Existing selected original sources, current Ninja build graph and immutable guest media only. |
+| Reporting Requirements | State original algorithm retained, adapter boundary, identity/lifetime owner, test evidence, and any semantic boundary. |
+| Stop Conditions | Pause only for a new observable semantic concession, unapproved source import or unbounded dependency. |
+| Exit Criteria | Every R05/R09/R10 entry has a finite producer/update/withdrawal chain and acceptance evidence; final coherent package delivery is deferred to S4. |
+| Original Owner Request | “开始执行，到T收口前停下等我验收。” |
+| Similar-Issue Sweep | Include scalar readers, host-only mutation, reused HWND generations, nested task/window retirement, and failed creation/rollback. |
 | Candidate Proposal | [WOW32 USER objects/shared view](../proposals/proposal-wow32-user-objects-shared-view-001.md). |
 
 ## Current Technical Baseline
 
-The ten-image host package at `6c661b579` is published in both
-`assets/release/` and `O:\winnt\system32`; guest media and guest configuration
-remain immutable and unchanged. T450 is closed at
+The S2 ten-image host package is published in both `assets/release/` and
+`O:\winnt\system32`; guest media and guest configuration remain immutable and
+unchanged. It passed the complete build and immutable Win16 `WINMINE.EXE`
+acceptance; its full closure evidence is linked below.
+T450 is closed at
 [its closure record](../history/m0-t450-closure.md). T451 S2 begins from the
 S1 inventory; no new WOW32 capability is claimed until its coherent delivery.
 
@@ -51,30 +53,36 @@ paths.  This documentation-only delivery changed no production source, build
 input, guest asset, release asset or installed file.  Documentation governance
 passed; it was committed and pushed as `110f2f078`.
 
-## S2 publication audit checkpoint
+## S2 closure
 
 The [S2 publication audit](../etc/evidence/m0-t451-s2-user-publication-audit.md)
 confirms the selected original USER16/WOW32 readers and current copied-view
 publishers for R01/R03/R04/R06/R07/R08. It also removes a stale test prelude
 left by T450's style deletion: the lifecycle fixture now begins with its real
 third-class failure injection and passes its rollback/retry contract. The
-remaining page-domain graph/menu cases require a desktop-capable session; the
-current background session reaches their explicit
-`WOW_PAGE_DOMAIN_DESKTOP_UNAVAILABLE error=5` diagnostic before any case
-assertion. No product source or release image has changed, and this does not
-claim S2 closure or waive its coherent-package gate.
+admitted first-task handoff is now proven by its focused real-CCPU row:
+registered `pfnInitTask` publishes the immediately readable desktop/task-base
+view and completes normal cleanup. A later private-desktop run completed the
+four independent external-graph/menu fixtures with exit zero; their detailed
+markers are retained in the audit. The admitted first-task handoff publication
+correction is now a verified and published product image; the closure record
+states its exact package/guest evidence.
+
+The finalized focused batch is green: the selected x86 `wow32` target is up to
+date after its nested worker dependency; task-lifecycle, initialization
+notification and real-CCPU initial publication pass; and the private-desktop
+window-borrow, graph-snapshot, menu-resource and standard-class fixtures pass.
+The latter four retain actual graph/menu, negative and lifetime markers; they
+are not inferred from a successful build. The complete ten-image candidate
+build, immutable-guest acceptance, dual-destination hash verification and
+delivery package are complete. See the
+[S2 closure record](../etc/evidence/m0-t451-s2-closure.md).
 
 ## Active temporary outputs
 
-`build/t451-s2/` was the S2-owned disposable fixture root. It contained only
-focused lifecycle/page-domain builds and their logs; no cache, package, guest
-media or acceptance evidence. After the checkpoint conclusions were recorded,
-the current run had no owned background process and the reviewed
-`Clear-BuildOutput.ps1` manifest removed all 282 files (32,803,106 bytes;
-tree inventory `80E8B190E8D1A50C3CCCCD4E192D7291F31E455DADA0547F6D3245F9EB06CC7B`).
-Stable Ninja/ccache roots were not touched. A final global residual scan still
-reports historical build outputs with unverified ownership; they are outside
-this S2 cleanup and were deliberately retained.
+S2's `build/t451-s2/` root is being disposed through the single reviewed
+cleanup tool after its recorded hashes/results were transferred to the closure
+record. Stable Ninja/ccache roots remain untouched.
 
 ## Recent M0 Closures
 

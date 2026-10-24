@@ -249,6 +249,16 @@ static BOOL WINAPI registered_init_task(UINT version, LPCSTR app_name,
     DWORD init_error;
     if (!ensure_lifecycle()) return FALSE;
     if (wow_user_runtime_current()->thread) {
+        /* wkman.c retries pfnInitTask after every failed post-InitTask
+         * handoff.  Resume the one incomplete copied-view transaction before
+         * its original launch notification retry; do not run xxxInitTask or
+         * create another task carrier. */
+        if (!wow_user_task_lifecycle_publish_initial_view(&wow_lifecycle)) {
+            DWORD error = GetLastError();
+            registration_trace("InitTaskInitialPublicationRetry", error);
+            SetLastError(error);
+            return FALSE;
+        }
         DWORD error = wow_user_task_lifecycle_notify_start(&wow_lifecycle,
             task_id, shared_id, OpenNtBaseClientWowStarted);
         registration_trace("InitTaskNotificationRetry", error);
@@ -261,6 +271,11 @@ static BOOL WINAPI registered_init_task(UINT version, LPCSTR app_name,
         version, app_name, task_id, hotkey, shared_id, x, y, width, height,
         show);
     init_error=GetLastError();
+    if (result && !wow_user_task_lifecycle_publish_initial_view(&wow_lifecycle)) {
+        result = FALSE;
+        init_error = GetLastError();
+        registration_trace("InitTaskInitialPublication", init_error);
+    }
     registration_trace("InitTask", result);
     if(!result)registration_trace("InitTaskError",init_error);
     SetLastError(init_error);

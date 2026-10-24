@@ -50,6 +50,12 @@ BOOL WINAPI wow_user_task_lifecycle_register(wow_user_task_lifecycle *,
     wow_task_end_callback, HANDLE);
 BOOL WINAPI wow_user_task_lifecycle_init(wow_user_task_lifecycle *, UINT,
     LPCSTR, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, WORD);
+/* Complete the copied USER view after original InitTask has created its
+ * task carrier but before W32Thread can enter the 16-bit application.  This
+ * reuses the ordinary return publisher; it creates no scheduler or object
+ * ownership path. */
+BOOL WINAPI wow_user_task_lifecycle_publish_initial_view(
+    wow_user_task_lifecycle *);
 /* Retry only the launcher notification after original InitTask committed.
  * The callback runs outside the USER lock; task/request identity must match. */
 DWORD WINAPI wow_user_task_lifecycle_notify_start(wow_user_task_lifecycle *,

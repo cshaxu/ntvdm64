@@ -6,21 +6,6 @@ static const wchar_t *skip_space(const wchar_t *text)
     return text;
 }
 
-const wchar_t *run16_command_line_tail(const wchar_t *command_line)
-{
-    const wchar_t *text;
-    if (!command_line) return NULL;
-    text = skip_space(command_line);
-    if (*text == L'"') {
-        ++text;
-        while (*text && *text != L'"') ++text;
-        if (*text == L'"') ++text;
-    } else {
-        while (*text && *text != L' ' && *text != L'\t') ++text;
-    }
-    return skip_space(text);
-}
-
 static int prefix_token(const wchar_t *text, const wchar_t *token)
 {
     size_t length = wcslen(token);

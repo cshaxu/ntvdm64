@@ -6,6 +6,7 @@ param(
     [switch]$InitRollback,
     [switch]$CreationUnwind,
     [switch]$OriginalModalOnly,
+    [switch]$InitialPublicationOnly,
     [switch]$RealDialogLifecycleOnly,
     [string]$Ninja = 'ninja.exe',
     [string]$VsDevCmd = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
@@ -20,6 +21,8 @@ if ($InitRollback -and $Case -ne 'task-lifecycle') { throw 'InitRollback require
 if ($CreationUnwind -and $Case -ne 'native-creation') { throw 'CreationUnwind requires native-creation' }
 if ($RealDialogLifecycleOnly) { $OriginalModalOnly = $true }
 if ($OriginalModalOnly -and $Case -ne 'window-borrow') { throw 'OriginalModalOnly requires window-borrow' }
+if ($InitialPublicationOnly -and $Case -ne 'window-borrow') { throw 'InitialPublicationOnly requires window-borrow' }
+if ($InitialPublicationOnly -and $OriginalModalOnly) { throw 'InitialPublicationOnly and OriginalModalOnly are exclusive' }
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $vs = (Resolve-Path -LiteralPath $VsDevCmd).Path
 
@@ -222,7 +225,7 @@ if ($Case -eq 'class-query') {
     Invoke-NinjaTarget $provider 'obj/wow32-dll/wow_class_client_bindings.obj obj/wow32-dll/wow_user_private_access.obj'
     $fixtureName = 'wow_class_query_fixture.c'
 }
-if ($Case -eq 'init-notification') {
+if ($Case -eq 'init-notification' -or $InitialPublicationOnly) {
     Invoke-NinjaTarget $provider 'obj/wow32-dll/wow_user_registration_bridge.obj'
     $fixtureName = 'wow_init_notification_fixture.c'
 }
@@ -240,6 +243,7 @@ if ($InitRollback) { $fixture += ' /DWOW_INIT_ROLLBACK_FIXTURE' }
 if ($Case -eq 'native-creation') { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE /DWOW_NATIVE_CREATION_FIXTURE' }
 if ($Case -eq 'class-procedure') { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE /DWOW_CLASS_PROCEDURE_FIXTURE' }
 if ($OriginalModalOnly) { $fixture += ' /DWOW_ORIGINAL_MODAL_FIXTURE' }
+if ($InitialPublicationOnly) { $fixture += ' /DWOW_INITIAL_PUBLICATION_FIXTURE' }
 if ($RealDialogLifecycleOnly) { $fixture += ' /DWOW_REAL_DIALOG_LIFECYCLE_FIXTURE' }
 if ($Case -eq 'standard-class') { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE /DWOW_STANDARD_CLASS_FIXTURE' }
 if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource')) { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE' }
@@ -381,6 +385,12 @@ $parentObjects = @((Join-Path $out 'parent-stub.obj'))
         'publish_named_class','retire_class','release_class','set_expected_windows_version',
         'exchange_client_context')
     if ($Case -eq 'process-retirement') { $replacedLeaves += 'handle_metadata' }
+    if ($Case -eq 'init-notification') {
+        # The fixture supplies the pre-registration desktop readiness and
+        # shared-info seam.  Keep the real page-domain owner for every other
+        # entry instead of allowing duplicate definitions at final link.
+        $replacedLeaves += @('client_desktop_ready','guest_shared_info')
+    }
     foreach ($leaf in $replacedLeaves) {
         $symbol = 'mvdm_softpc_wow_page_domain_' + $leaf
         $pageFixture += ' /D' + $symbol + '=wow_fixture_real_page_' + $leaf
@@ -388,7 +398,7 @@ $parentObjects = @((Join-Path $out 'parent-stub.obj'))
     Invoke-CompilerCommand $worker $pageFixture
     $parentObjects += Join-Path $out 'page-native-fixture.obj'
 }
-if ($Case -eq 'init-notification') {
+if ($Case -eq 'init-notification' -or $InitialPublicationOnly) {
     $startupTd = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\startup-td.obj" "'+$repo+'\tests\adapter-mvdm-host-out\wow\wow_startup_td_fixture.c"')
     if ($startupTd -eq $compile) { throw 'Startup TD fixture substitution failed' }
     Invoke-NinjaTarget $provider 'obj/wow32-dll/wow_task_cleanup_entry.obj'
@@ -430,6 +440,25 @@ foreach ($object in $objects) {
     if (!(Test-Path -LiteralPath $object -PathType Leaf)) {
         throw "Missing current selected provider object: $object"
     }
+}
+if ($Case -eq 'init-notification' -or $InitialPublicationOnly) {
+    # Preserve the real launch-client library because it provides other
+    # selected BaseClient calls.  Redirect only this bridge's notification
+    # import to the fixture's authenticated RPC seam; no duplicate definition
+    # or link-order selection remains.
+    $bridgeCompile = $commands | Where-Object {
+        $_ -match 'wow_user_registration_bridge\.c$'
+    } | Select-Object -Last 1
+    if (!$bridgeCompile) { throw 'Missing production registration bridge compile command' }
+    $bridgeFixture = $bridgeCompile -replace '/Fo\S+\s+\S+wow_user_registration_bridge\.c$', ('/Fo"'+$out+'\registration-bridge-fixture.obj" "'+$repo+'\src\wow32-dll\source\wow_user_registration_bridge.c"')
+    if ($bridgeFixture -eq $bridgeCompile) { throw 'Registration bridge fixture substitution failed' }
+    Invoke-Build ($bridgeFixture + ' /DOpenNtBaseClientWowStarted=wow_fixture_OpenNtBaseClientWowStarted')
+    $bridgeObjects = @($objects | Where-Object {
+        $_ -match '[\\/]wow32-dll[\\/]wow_user_registration_bridge\.obj$'
+    })
+    if ($bridgeObjects.Count -ne 1) { throw 'Expected exactly one registration bridge owner' }
+    $objects = @($objects | Where-Object { $_ -notin $bridgeObjects })
+    $parentObjects += Join-Path $out 'registration-bridge-fixture.obj'
 }
 # EXE and DLL each own this variable in production. A combined executable
 # must preserve two distinct cells, not merge their independent load state.
@@ -505,6 +534,15 @@ if ($fixtureExitCode -eq 2 -and
     throw ('Isolated page-domain desktop is unavailable in this session: ' +
         ($fixtureOutput | Where-Object { $_ -match '^WOW_PAGE_DOMAIN_DESKTOP_UNAVAILABLE ' } |
             Select-Object -First 1))
+}
+if ($InitialPublicationOnly) {
+    if ($fixtureExitCode -ne 0 -or
+        !($fixtureOutput -match '^WOW_INITIAL_TASK_PUBLICATION_CCPU errors=0 desktop=1 task_base=1$') -or
+        !($fixtureOutput -match '^WOW_INITIAL_TASK_PUBLICATION_SCOPE real_ccpu=1 registered_owner=1 normal_cleanup=1$') -or
+        !($fixtureOutput -match '^WOW_PAGE_DOMAIN_LIFECYCLE_OK$')) {
+        throw 'Initial registered InitTask publication did not leave a complete CCPU view'
+    }
+    return
 }
 if ($OriginalModalOnly) {
     if (!($fixtureOutput -match '^WOW_CLIENT_CONTEXT_BINDING_CCPU errors=0 production_op=1 controlled_views=2 scheduling=separate$')) {

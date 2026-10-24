@@ -29,7 +29,7 @@ static BOOL initialize_task(void)
         (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT,
         (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT, SW_HIDE);
 }
-DWORD WINAPI OpenNtBaseClientWowStarted(ULONG request)
+DWORD WINAPI wow_fixture_OpenNtBaseClientWowStarted(ULONG request)
 {
     wow_user_runtime_thread *binding = wow_user_runtime_current();
     CHECK(request == 0x5678 && binding && !binding->exclusive_held);

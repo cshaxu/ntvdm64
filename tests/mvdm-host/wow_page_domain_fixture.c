@@ -116,6 +116,21 @@ static BOOL dialog_cache_failure;
 #define BORROW_CHECK(value) do { if (!(value)) { ++borrow_errors; \
     fprintf(stderr, "WINDOW_BORROW_FAIL line=%d error=%lu\n", __LINE__, GetLastError()); } } while (0)
 
+#ifdef WOW_INITIAL_PUBLICATION_FIXTURE
+/* The registration bridge must issue its BaseSrv notification only after the
+ * first copied desktop view has been committed.  The callout itself runs
+ * outside the protected guest page domain, just like the real RPC client;
+ * the caller verifies readability again after pfnInitTask returns. */
+static unsigned initial_publication_notifications;
+DWORD WINAPI wow_fixture_OpenNtBaseClientWowStarted(ULONG request)
+{
+    wow_user_runtime_thread *binding = wow_user_runtime_current();
+    BORROW_CHECK(request == 0x6a77u && binding && !binding->exclusive_held);
+    ++initial_publication_notifications;
+    return ERROR_SUCCESS;
+}
+#endif
+
 /* Compare the optimized whole-copy path to an independently pinned scalar
  * read of the same actual CCPU backing, not a duplicate membership model. */
 static void verify_full_class_projection(ULONG backing, BOOL valid)
@@ -1119,6 +1134,27 @@ static void verify_original_modal_task(void)
     lifecycle=runtime.lifecycle;
     BORROW_CHECK(lifecycle && lifecycle->initialized);
     fprintf(stderr,"WOW_MODAL_STAGE registered\n");
+#ifdef WOW_INITIAL_PUBLICATION_FIXTURE
+    {
+        /* This is W32Thread's actual output boundary: InitTask must leave a
+         * task-visible base view before guest execution can make its first
+         * direct USER16 query.  Do not manufacture a native window here:
+         * original xxxInitTask does not own or publish arbitrary host windows;
+         * their external graph path is covered by window-borrow separately. */
+        BORROW_CHECK(outputs.pfnInitTask(0x0400,"INITIAL.EXE",0x4323,0,0x6a77u,
+            0,0,200,100,SW_HIDE));
+        BORROW_CHECK(initial_publication_notifications == 1u);
+        BORROW_CHECK(mvdm_softpc_wow_page_domain_window_handle(
+            LOWORD(GetDesktopWindow())) == (ULONG)(ULONG_PTR)GetDesktopWindow());
+        fprintf(stderr,"WOW_INITIAL_TASK_PUBLICATION_CCPU errors=%u desktop=1 task_base=1\n",
+            borrow_errors-before);
+        BORROW_CHECK(outputs.pfnWOWCleanup((HANDLE)0x4323,0x4323,NULL,0));
+        BORROW_CHECK(wow_user_runtime_unbind(&binding));
+        BORROW_CHECK(wow_user_task_lifecycle_dispose(lifecycle));
+        BORROW_CHECK(CloseHandle(wake));
+        return;
+    }
+#endif
     /* Launcher metadata is outside this native-only modal row. Enter the
      * actual registered owner's original InitTask without inventing a launch. */
     BORROW_CHECK(wow_user_task_lifecycle_init(lifecycle,0x0400,"MODAL.EXE",
@@ -5076,13 +5112,17 @@ guest_window_failure:
     geometry_window = NULL;
     }
 #ifdef WOW_WINDOW_BORROW_FIXTURE
-#ifdef WOW_ORIGINAL_MODAL_FIXTURE
+#if defined(WOW_ORIGINAL_MODAL_FIXTURE) || defined(WOW_INITIAL_PUBLICATION_FIXTURE)
     /* One process-level registered owner per test process. Do not insert a
      * fresh process lifetime inside the unrelated class-allocation matrix. */
     stage="registered-original-modal";
     verify_original_modal_task();
     if(borrow_errors)goto done;
+#ifdef WOW_INITIAL_PUBLICATION_FIXTURE
+    fprintf(stderr,"WOW_INITIAL_TASK_PUBLICATION_SCOPE real_ccpu=1 registered_owner=1 normal_cleanup=1\n");
+#else
     fprintf(stderr,"WOW_ORIGINAL_MODAL_SCOPE real_ccpu=1 registered_owner=1 normal_cleanup=1\n");
+#endif
     passed=1;goto done;
 #endif
     stage = "production-class-registration";
@@ -5405,7 +5445,7 @@ int main(int argc, char **argv)
         if(!CloseDesktop(desktop))result=4;
         return (int)result;
     }
-#elif defined(WOW_WINDOW_BORROW_FIXTURE)
+#elif defined(WOW_WINDOW_BORROW_FIXTURE) && !defined(WOW_INITIAL_PUBLICATION_FIXTURE)
     WCHAR name[64];
     HDESK desktop;
     HANDLE thread;

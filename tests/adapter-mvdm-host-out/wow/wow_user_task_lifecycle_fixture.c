@@ -1213,6 +1213,11 @@ int __cdecl main(int argc,char **argv)
         0x1234, 0, FIXTURE_LAUNCH_REQUEST,
         (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT,
         (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT, SW_SHOW));
+    /* The registration bridge performs this once before W32Thread can enter
+     * guest code.  Exercise the same no-guest-execution transaction here;
+     * inactive page domains remain a valid native-only fixture boundary. */
+    CHECK(wow_user_task_lifecycle_publish_initial_view(&lifecycle));
+    CHECK(!binding.exclusive_held);
     {
         HHOOK observer = wow_user_idle_hook_for_current();
         CHECK(observer != NULL);
