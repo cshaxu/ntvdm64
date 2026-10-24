@@ -100,7 +100,7 @@ set. Its `logon-wow-r12` proof used the complete supported Userenv block
 (`CreateEnvironmentBlock`, current token, `inherit=false`) rather than an
 inherited development shell and passed the owned WinMine flag/reset/open/close
 path. Publication `build/t452-s2/publication-r2/publication-r2.json` records
-the matching candidate, `assets/release` and `O:\\winnt\\system32` image
+the matching candidate, `assets/release` and `O:\winnt\system32` image
 hashes. The historical oversized/inherited COMMAND environment failure is not
 claimed as a module-name regression or repaired in S2.
 

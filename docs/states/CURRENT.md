@@ -2,75 +2,56 @@
 
 ## Current Work
 
-**Active: M0 T452 S4**
+**Active: M0 T453 S1**
 
-The owner accepted T451 and approved closure on 2026-10-24.
-The [closure record](../history/m0-t451-closure.md) owns completed scope,
-evidence and remaining boundaries. The owner now admits W03 modules, memory
-and aliases, following ntvdm64-wow32-audit for minimum diff and maximum recovery.
+The owner admits the Queue's first remaining WOW32 package: W04 files,
+directories, environment and OEM. T452 has closed its W03 boundary. This packet follows the read-only
+`ntvdm64-wow32-audit`: minimum mirror/adapter diff and maximum sourced
+reconnection, with no guest modification.
 
 ## Active Packet
 
-### M0 T452 S4 — W03 whole acceptance and resource-loading handoff
+### M0 T453 S1 — W04 file, directory, environment and OEM source contract
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T452 S4, Ordinary Mode; single-agent author and separate reviewer passes. |
-| Admission And Approval | S3's source-owner conclusion and CCPU40 alias fixture are recorded in [S3 audit](../etc/evidence/m0-t452-s3-alias-winoldap-audit.md). The owner-approved T452 sequence now admits its finite W03 acceptance row. |
-| Objective | Reconcile all W03 module, allocation and alias evidence; establish the exact remaining runtime gate and hand storage semantics to the queued resource-loading owner without masking any failed original path. |
-| Non-goals | No guest changes/rebuild, scheduler/USER import, second alias/module/task registry, process termination policy, resource-loader implementation, external audit edits or unrelated provider repair. |
-| Reference Baseline | Published S2 `0f8487f04`, S3 source/test receipt and the content-pinned external OpenNT audit in the working plan. |
-| Files And ABI Surface | W03's selected `wkernel.c`, `wkmem.c`, `wole2.c`, `wkman.c`, `walias.c` and their existing tests/evidence only. Guest ABI, dispatch tables, `nt_mem.c` ownership and resource provider code remain unchanged unless a sourced W03 defect proves otherwise. |
+| Identifier Mode | M0 T453 S1, Ordinary Mode; single-agent author and separate reviewer passes. |
+| Admission And Approval | Owner directs Queue row W04 admission. It is Green under [minimum-diff governance](../etc/operations/wow32-queue-minimal-diff-admission-governance.md); T452 supplies the consumed W03 allocation/alias boundary. |
+| Objective | Establish the finite selected original-owner matrix for file, directory, environment and OEM operations before any repair; recover maximum original behavior with the minimum justified binding. |
+| Non-goals | No guest changes/rebuild, generic filesystem/environment service, second current-directory or OEM authority, registry/shell/resource/GDI implementation, unrelated USER repair or external-audit edits. |
+| Reference Baseline | T452 closure, W04 [proposal](../proposals/proposal-wow32-files-environment-oem-001.md), and [T453 plan](../etc/operations/t453-files-environment-oem-plan.md). |
+| Files And ABI Surface | Selected original file/OEM callers, existing bindings and W04 tests/evidence only. Guest ABI, W03 allocation/alias ownership and later providers remain unchanged unless a traced edge proves a bounded prerequisite. |
 | Applicable Rules | Execution, architecture, coding, documentation, source policy and WOW32 minimum-diff admission governance. |
-| Verification | Review every W03 matrix row against actual selected caller/provider evidence; run the focused production-owner fixtures and applicable inherited regression only after the finite matrix is fixed. Treat the concurrent WinOldAp return-chain as a non-pass until its original USER execution boundary is separately owned. |
-| Expected Markers | Exact bounded k49 output; selected CCPU40 allocate/free pairing; original 32-slot alias semantics; explicit WOA process/node/representative disposition; no duplicate memory or task owner. |
-| Asset Needs | Pinned original OpenNT/audit, immutable guests, existing W03 tests and published ten-image baseline; no guest replacement. |
-| Reporting Requirements | Separate static/build/runtime evidence; exact original/mirror delta; every non-pass has a named original owner and successor disposition. |
-| Stop Conditions | New semantic concession, guest mutation, unbounded import, competing owner, needed scheduler/USER reconstruction or material scope expansion. |
-| Exit Criteria | Every W03 row is either backed by actual production evidence or explicitly remains a finite non-pass at its correct owner; cached build/publication requirements are applied to any production change; resource loading receives no invented storage owner. |
+| Verification | Source-first matrix: exact owner/build condition, guest/WOW/host representation, buffer/handle authority, normal/failure/rollback/retirement paths and actual test entrypoints for both OEM directions and delete branches. |
+| Expected Markers | No independent path/environment/OEM state; exact selected original error/cleanup owner; bounded repair list or documented no-change result. |
+| Asset Needs | Pinned original OpenNT/audit, immutable guests and existing W04 tests; no guest replacement. |
+| Reporting Requirements | Separate static/build/runtime evidence; mirror/adapter estimate only after tracing the finite matrix; unresolved edges name their original owner and successor. |
+| Stop Conditions | New semantic concession, guest mutation, unbounded import, competing filesystem/environment owner, required scheduler/USER reconstruction or material scope expansion. |
+| Exit Criteria | All selected W04 rows have caller/provider/lifetime/test matrix and finite minimum-diff repair plan; no production change follows merely from static audit presence. |
 | Original Owner Request | 准入队列第一条；按照 ntvdm64-wow32-audit 审计结果执行最小化 diff 和最大化复通。 |
-| Similar-Issue Sweep | Module/query identities, allocation/free pairing, aliases, WOA/representative/process-handle separation, rollback, reentry, unload/task cleanup and resource-loader storage handoff. |
-| Candidate Proposal | [Modules, memory and aliases](../proposals/proposal-wow32-modules-memory-aliases-001.md). |
+| Similar-Issue Sweep | File/open/close/rename/delete, directory enumeration/resume, environment creation/release, ANSI/OEM conversion both directions, buffer bounds, rollback and consumer cleanup. |
+| Candidate Proposal | [Files, directories, environment and OEM](../proposals/proposal-wow32-files-environment-oem-001.md). |
 
-The [working plan](../etc/operations/t452-modules-memory-aliases-plan.md)
-and [S1 source matrix](../etc/evidence/m0-t452-s1-modules-memory-alias-source-matrix.md)
-own the four-stage sequence and finite denominator. S3's closure evidence is
-the [alias and WinOldAp audit](../etc/evidence/m0-t452-s3-alias-winoldap-audit.md);
-only S4 is active.
-
-## S1 Closure Record
-
-The finite original-owner and build-condition denominator is recorded in the
-[S1 source matrix](../etc/evidence/m0-t452-s1-modules-memory-alias-source-matrix.md).
-
-## S2 Closure Record
-
-The bounded module-name/alias delivery and its coherent publication are
-recorded in the [S2 delivery receipt](../etc/evidence/m0-t452-s2-module-alias-delivery.md).
-
-## S3 Closure Record
-
-The original alias and WinOldAp ownership disposition, including the explicit
-S4 non-pass, is recorded in the [S3 audit](../etc/evidence/m0-t452-s3-alias-winoldap-audit.md).
+Only S1 is active. The four-stage sequence is in the
+[T453 plan](../etc/operations/t453-files-environment-oem-plan.md).
 
 ## Current Technical Baseline
 
-Accepted implementation baseline: `7f87c7f98`. S1 source-audit receipt:
-`861e9112f`; it changed no product artifacts. S2 delivery `0f8487f04` is the
-current coherent ten-image deployed baseline; its durable stage, Userenv
-runtime and publication receipts are in `build/t452-s2`.
+T452 S2 `0f8487f04` remains the W03 coherent ten-image delivery. T452 S3/S4
+made no product-source or deployment change; their current production-object
+and formal evidence is indexed in `docs/etc/README.md`.
 
 ## Successor Boundary
 
-The [Queue](QUEUE.md) now begins with files, environment and OEM; remaining
-relative order is unchanged. SOL Options remains in the
-queued everyday-usability package; startup is not full interaction acceptance.
+W04 is active. The remaining Queue relative order is unchanged. SOL Options
+remains in the queued everyday-usability package; startup is not full
+interaction acceptance.
 
 ## Temporary Evidence
 
-S3 reuses `build/t452-s2`: one-agent audit/implementation/build/test evidence, 1 GiB
-budget and one-hour diagnostic run budget. These are operational budgets, not
-product timeouts. Join owned jobs and retain durable evidence before exact-target cleanup.
+T453 may use only a declared `build/t453-s1` root for disposable evidence;
+stable `.ninja` and `.ccache` remain reusable caches. Retain durable results
+before exact-target cleanup; never use a task root as a build cache.
 
 `build/M0-T451`, `build/t451-s3`, `build/t451-s4` and `build/t451-s5` remain
 temporary evidence, not reusable caches. Process inventory access was denied
@@ -80,6 +61,7 @@ Stable `.ninja` and `.ccache` caches remain untouched.
 
 ## Recent M0 Closures
 
+- T452: modules, memory and aliases.
 - [T451](../history/m0-t451-closure.md): USER objects/shared view and CUI handoff.
 - [T450](../history/m0-t450-closure.md): style removal and Run16 entry.
 - [T449](../history/m0-t449-closure.md): WOW32 execution continuation.
@@ -87,6 +69,5 @@ Stable `.ninja` and `.ccache` caches remain untouched.
 
 ## Recent Governance
 
-T451 is closed. T452 S1 source reconciliation passed documentation governance,
-relative links and diff checks at `861e9112f`; S2 product changes require the
-full production delivery gates.
+T453 admission preserves Queue order and records the W04 Green gate. No
+production source, guest media or release asset changed during this transition.

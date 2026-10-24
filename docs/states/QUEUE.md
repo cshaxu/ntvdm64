@@ -11,7 +11,8 @@ The [WOW32 minimum-diff admission governance](../etc/operations/wow32-queue-mini
 links every remaining WOW32 candidate to the OpenNT-only seam ledger and
 classifies its admission gate. It does not reorder this Queue, admit work, or
 turn static audit closure into product/runtime completion. Every candidate
-proposal applies that rule before adding a mirror difference or adapter.
+proposal applies that rule before adding a mirror difference or adapter. The
+active-packet transition does not renumber later candidate identities.
 
 | Next order | Candidate implementation package | Proposal |
 | --- | --- | --- |
