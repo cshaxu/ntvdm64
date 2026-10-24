@@ -2,29 +2,29 @@
 
 ## Current Work
 
-**Active: M0 T451 S4**
+**Active: M0 T451 S5**
 
 ## Active Packet
 
-### M0 T451 S4 — USER object acceptance and consumer handoff
+### M0 T451 S5 — SOL Options access-violation investigation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T451 S4, Ordinary Mode. |
-| Admission And Approval | T451 was owner-admitted on 2026-10-23. S1--S3 have delivered the finite object inventory, publication and mutation/lifetime foundation; the approved candidate proposal assigns S4 as their sequential acceptance and handoff scope. |
-| Objective | Verify that every selected direct-data, callback and object-lifetime consumer reuses the one S2/S3 copied-view owner, then run the applicable coherent product regression and record the consumer handoff. |
-| Non-goals | No guest modification/rebuild, USER-server reconstruction, new object table, broad control/dialog/message implementation, external source import, or reopening an S1--S3 row without a demonstrated consumer defect. |
-| Reference Baseline | S1's ten-row ledger; S2 publication closure; S3 mutation/destruction closure. |
-| Files And ABI Surface | Existing WOW32 bindings/page-domain owner, selected consumers and focused acceptance fixtures only; no guest or new cross-component ABI. |
+| Identifier Mode | M0 T451 S5, Ordinary Mode. |
+| Admission And Approval | Owner admitted S5 on 2026-10-23 after observing that SOL can now enter its Options route but faults in `WOW32.DLL`; S4 remains its completed, separately bounded handoff/acceptance delivery. |
+| Objective | Reproduce and source-trace the SOL Options `WOW32.DLL` access violation to its original consumer, copied-view/host boundary and lifetime state; determine a finite repair proposal or a source-proven retained limitation. |
+| Non-goals | No guest modification/rebuild, USER-server reconstruction, new object table, speculative catch-all exception handling, broad control/dialog/message implementation, external source import, or production repair before the root-cause design is recorded. |
+| Reference Baseline | S1 object ledger; S2 publication closure; S3 mutation/destruction closure; S4 handoff audit; owner screenshot of SOL Options fault. |
+| Files And ABI Surface | Investigation evidence and, if needed, a narrowly scoped source-level diagnostic fixture only; no guest or new cross-component ABI. |
 | Applicable Rules | [Execution](../rules/EXECUTION.md), [architecture](../rules/ARCHITECTURE.md), [coding](../rules/CODING.md), and [source policy](../etc/operations/policy/source-policy.md). |
-| Verification | Trace each selected consumer to its original producer and the single copied-view owner before changing code; execute direct-data, callback and lifetime acceptance as a bounded group, followed by applicable package regression. |
-| Expected Markers | One authority per copied scalar/identity; no stale low-word reuse, foreign retirement, partial graph commit or duplicated original lifecycle operation. |
-| Asset Needs | Existing selected original sources, current Ninja build graph and immutable guest media only. |
-| Reporting Requirements | State original algorithm retained, adapter boundary, identity/lifetime owner, consumer evidence, package evidence, and any semantic boundary. |
-| Stop Conditions | Pause only for a new observable semantic concession, unapproved source import or unbounded dependency. |
-| Exit Criteria | Every selected consumer is accounted for against the single view owner, acceptance and applicable product regression are recorded, and handoff leaves no S1--S3 object implementation backlog. |
-| Original Owner Request | “开始执行，到T收口前停下等我验收。” |
-| Similar-Issue Sweep | Include scalar readers, host-only mutation, reused HWND generations, nested task/window retirement, and failed creation/rollback. |
+| Verification | First obtain a reproducible Options route and map the fault offset to the exact source/binary; trace the original call chain and every object/state owner.  Then compare the reached original contract with the modern-host adapter without changing guest media. |
+| Expected Markers | Exact faulting module/address and source range; reproducible input sequence; one identified invalid identity, stale projection, invalid host assumption, or a source-proven non-project limitation; no guessed ownership. |
+| Asset Needs | Existing selected original sources, current Ninja symbols/build graph, immutable guest media and the owner-supplied runtime observation only. |
+| Reporting Requirements | State the reproducer, fault mapping, original algorithm, adapter boundary, identity/lifetime owner, root cause confidence, repair options and any semantic boundary. |
+| Stop Conditions | Pause for a new observable semantic concession, unapproved source import, guest change, or an unbounded dependency closure. |
+| Exit Criteria | A finite, evidence-backed root-cause report and repair/limitation disposition; no repair is claimed merely because the fault is caught or hidden. |
+| Original Owner Request | “不用打开，你准入一个S5来调研看看吧”。 |
+| Similar-Issue Sweep | Cover SOL dialog/control/menu calls that share the faulting original consumer, including stale/reused HWND, failed dialog creation and nested callback paths when reached by the trace. |
 | Candidate Proposal | [WOW32 USER objects/shared view](../proposals/proposal-wow32-user-objects-shared-view-001.md). |
 
 ## Current Technical Baseline
@@ -81,18 +81,21 @@ build, immutable-guest acceptance, dual-destination hash verification and
 delivery package are complete. See the
 [S2 closure record](../etc/evidence/m0-t451-s2-closure.md).
 
-## S4 Delivery Pending Owner Acceptance
+## S4 Closure Record
 
 The [S4 closure record](../etc/evidence/m0-t451-s4-closure.md) records the
 completed selected-consumer accounting, 19-row direct object matrix, WINMINE
 interaction acceptance and SOL/WRITE startup frontiers. It changed no product
 binary: the candidate, `assets/release`, and installed `WOW32.DLL` remain
-hash-identical. No S5 is admitted; T451 itself remains open only for the
-owner's T-level closure decision.
+hash-identical.  The subsequently owner-admitted S5 is a separate, observed
+SOL Options fault investigation; it does not rewrite S4's selected handoff
+evidence or claim that its startup frontier proved complete SOL interaction.
 
-## Active temporary outputs
+## S3 Closure Record
 
 S3 is closed at [its closure record](../etc/evidence/m0-t451-s3-closure.md).
+
+## Active temporary outputs
 Its evidence root `build/t451-s3/` remains disposable task evidence. S4 owns
 its own fresh bounded evidence root under `build/t451-s4/`.
 S4's same-artifact WINMINE private-desktop interaction gate has passed using

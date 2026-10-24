@@ -34,7 +34,7 @@ second private PWW/PWC reader or an independent copied-view owner.
 | Immutable WINMINE interaction | `build/t451-s4/winmine-r5/result.txt` | Flag, reset, open cell, `WM_CLOSE` and normal Run16 completion pass. |
 | SOL visible startup frontier | `build/t451-s4/frontiers-logs/t451-s4-sol-r1-sol-windows.txt` | One staged `ntvdm.exe`, visible `Solitaire` and `Stat` in all four samples. |
 | WRITE visible startup frontier | `build/t451-s4/frontiers-logs/t451-s4-write-r2-write-windows.txt` plus `verify-wow-write-frontier.ps1` | One staged `ntvdm.exe`; `MSWRITE_MENU`, `MSWRITE_DOC`, `MSWRITE_PAGEINFO` in all four samples; verifier passes. |
-| Package identity | candidate, `assets/release`, `O:\\winnt\\system32` SHA-256 | `WOW32.DLL` is identical (`475275C6B1D9F4976CC5371860D0EF19F072D07CE1…`). |
+| Package identity | candidate, `assets/release`, configured installed `system32` SHA-256 | `WOW32.DLL` is identical (`475275C6B1D9F4976CC5371860D0EF19F072D07CE1…`). |
 
 SOL and WRITE assertions are deliberately startup/frontier evidence, not a
 claim of complete application interaction or normal exit.  WINMINE is the
@@ -52,6 +52,8 @@ accepted matrix.
 
 The latest S4 source/evidence checkpoint is published on `origin/main`.
 S4 changes only evidence/governance and uses the already hash-verified product
-package; it does not require a binary republish.  T451 has no unadmitted S5.
-This closes S4's finite scope and leaves the T-level closure pending owner
-acceptance, rather than silently closing the T.
+package; it does not require a binary republish.  This closes S4's finite
+scope.  A later owner observation admitted S5 to investigate a SOL Options
+access violation; that new route was outside S4's explicitly startup-only SOL
+frontier and does not retrospectively convert that limited assertion into a
+complete SOL-interaction claim.

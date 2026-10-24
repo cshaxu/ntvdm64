@@ -21,6 +21,19 @@ acceptance and coherent ten-image delivery identity.
 records the source-first R05/R09/R10 owner chains and the bounded
 desktop-capability prerequisite for its remaining mutation acceptance.
 
+[T451 S3 closure record](evidence/m0-t451-s3-closure.md) fixes the published
+mutation/destruction boundary, including the retained modern-host destruction
+limit and its immutable-guest and package evidence.
+
+[T451 S4 closure record](evidence/m0-t451-s4-closure.md) records the selected
+consumer handoff, direct-object matrix and application frontiers; its SOL
+scope is explicitly startup-only, with later Options fault investigation owned
+by active S5.
+
+[T451 S4 object handoff audit](evidence/m0-t451-s4-object-handoff-audit.md)
+maps every selected direct Window/Class consumer to the single copied-view
+owner and records the provider/consumer boundary used by the S4 closure.
+
 [T450 S1--S4 closure ledger](evidence/m0-t450-s1-s4-closure-ledger.md)
 indexes the completed Win16 Style-removal sequence retained before the active
 Run16 entry-contract correction.
