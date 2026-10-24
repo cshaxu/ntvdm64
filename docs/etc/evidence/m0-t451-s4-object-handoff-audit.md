@@ -104,33 +104,28 @@ applicable 19-row boundary proof (`failed: 0`), recorded in its closure
 evidence.  The S4 run proves the selected same-artifact game frontier through
 the one retained object chain; it introduces no second view or guest change.
 
-## Historical frontier harness reconciliation
+## Modern frontier selection
 
-The retained `verify-wow-headless-frontiers.ps1` had not followed the present
-single product layout.  Its original form directly read host images and
-`WFWNET.DRV` from the package root, although the current package has one host
-binary root at `<package>\\system32`; it also passed a bare guest name and a
-non-normalized root to the observer.  The shared test helper already defines
-`Get-PackageBinaryRoot` for exactly this compatibility boundary.  The script
-now imports that helper and uses its resolved binary roots only for host-image
-identity, process ownership and the launcher.  Guest media remain at the
-package root and are passed by full path.  Test `TEMP`, `TMP` and `PATH` are
-temporarily pinned to the isolated short stage and restored in `finally`,
-matching the accepted WINMINE gate.
+`verify-wow-headless-frontiers.ps1` is a retained flat-package/network-profile
+gate.  It is not the current package's handoff authority.  The existing
+`observe-wow-frontiers.ps1` already uses `Get-PackageBinaryRoot`, supports the
+current `system32` layout and can observe one application at a time.  S4 uses
+that single modern observer path for remaining SOL/WRITE evidence, rather than
+adding a parallel adaptation to the legacy gate.
 
-This reconciliation is test-only: it neither changes a product artifact nor
-adds a product fallback.  The initial runs supplied a non-standard packaged
-observer or a long build path and therefore ended before useful product
-observation.  After the standard observer plus the short physical stage were
-used, the exact window reader observed the visible immutable WINMINE
-`Minesweeper` window and the visible immutable SOL `Solitaire` window, both
-hosted by the one staged `ntvdm.exe` and with no `ntcon.exe`.  The historical
-localized/oom-only identities are retained as alternatives; the precise
-English identities are now accepted as equally specific frontiers.
+The modern observer ran from a short physical stage with the same current
+source-built observer and read-only window snapshot tool:
 
-The complete three-program legacy frontier script has not yet produced its
-final all-three summary in this invocation: its SOL observation reached the
-window frontier but the controller did not emit its final timeout report
-before the harness ended.  This is recorded as a harness/liveness evidence
-gap, not a failed consumer or a claim that SOL/WRITE behavior is proved.  It
-does not weaken the passed dedicated WINMINE interaction regression.
+* SOL retained one live staged `ntvdm.exe` identity for four observations at
+  about 4, 8, 12 and 16 seconds.  Each contained visible `Solitaire` and
+  `Stat` windows.  The observer ended with its explicit observation-timeout
+  marker, not an application crash or a character frontend.
+* WRITE retained one live staged `ntvdm.exe` identity for the same four
+  observations.  The checked-in `verify-wow-write-frontier.ps1` passed:
+  visible `MSWRITE_MENU`, `MSWRITE_DOC` and `MSWRITE_PAGEINFO` in every
+  sample, with no illegal-instruction dialog.  Editing and normal WRITE exit
+  remain outside this startup-frontier proof.
+
+The dedicated WINMINE gate supplies the stronger interaction proof (flag,
+reset, open cell and `WM_CLOSE`); the SOL/WRITE rows deliberately claim only
+their observed frontiers.

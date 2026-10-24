@@ -10,48 +10,35 @@ param(
 )
 $ErrorActionPreference='Stop'
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid log prefix'}
-. "$PSScriptRoot\isolated_package_cleanup.ps1"
 $Observer=(Resolve-Path -LiteralPath $Observer).Path
 $WindowReader=(Resolve-Path -LiteralPath $WindowReader).Path
 $PackageRoot=(Resolve-Path -LiteralPath $PackageRoot).Path
 $LogRoot=(Resolve-Path -LiteralPath $LogRoot).Path
+$launcher=Join-Path $PackageRoot 'run16.exe'
 if(!$ProcessPackageRoot){$ProcessPackageRoot=$PackageRoot}
 $ProcessPackageRoot=(Resolve-Path -LiteralPath $ProcessPackageRoot).Path
-$packageBinaryRoot=Get-PackageBinaryRoot $PackageRoot
-$processPackageBinaryRoot=Get-PackageBinaryRoot $ProcessPackageRoot
-$launcher=Join-Path $packageBinaryRoot 'run16.exe'
 foreach($name in @('run16.exe','ntvdm.exe','ntcon.exe','ntsrv.exe')){
-    if((Get-FileHash (Join-Path $packageBinaryRoot $name)).Hash -ne
-        (Get-FileHash (Join-Path $processPackageBinaryRoot $name)).Hash){throw 'Process package differs from launch package'}
+    if((Get-FileHash (Join-Path $PackageRoot $name)).Hash -ne
+        (Get-FileHash (Join-Path $ProcessPackageRoot $name)).Hash){throw 'Process package differs from launch package'}
 }
 $paths=@('run16.exe','ntvdm.exe','ntcon.exe','ntsrv.exe') |
-    ForEach-Object {(Join-Path $processPackageBinaryRoot $_);(Join-Path $packageBinaryRoot $_)}
-$worker=@((Join-Path $processPackageBinaryRoot 'ntvdm.exe'),(Join-Path $packageBinaryRoot 'ntvdm.exe'))
-$frontend=@((Join-Path $processPackageBinaryRoot 'ntcon.exe'),(Join-Path $packageBinaryRoot 'ntcon.exe'))
+    ForEach-Object {(Join-Path $ProcessPackageRoot $_);(Join-Path $PackageRoot $_)}
+$worker=@((Join-Path $ProcessPackageRoot 'ntvdm.exe'),(Join-Path $PackageRoot 'ntvdm.exe'))
+$frontend=@((Join-Path $ProcessPackageRoot 'ntcon.exe'),(Join-Path $PackageRoot 'ntcon.exe'))
 if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'Another broker is running'}
 if(@(Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -in $paths}).Count){throw 'Candidate already in use'}
 $oldPrivate=$env:MVDM_OBSERVER_PRIVATE_DESKTOP
-$oldTemp=$env:TEMP
-$oldTmp=$env:TMP
-$oldPath=$env:PATH
 if($PackageNetworkProfile){
     $profile=Get-Content -LiteralPath (Join-Path $PackageRoot 'system.ini') -Raw
     if($profile -notmatch '(?im)^network\.drv\s*=\s*wfwnet\.drv\s*$'){
         throw 'PackageNetworkProfile requires the existing WFWNET.DRV configuration; this test never edits it'
     }
-    if((Get-FileHash (Join-Path $packageBinaryRoot 'WFWNET.DRV')).Hash -ne
+    if((Get-FileHash (Join-Path $PackageRoot 'WFWNET.DRV')).Hash -ne
         '4C321D43511F845EC1A95518507133D1CF4CF3993BAE422037DBA95CE6258CCA'){
         throw 'Unexpected original WFWNET.DRV media'
     }
 }
 try {
-    # Match the isolated package contract used by the retained WINMINE
-    # integration gate.  A guest worker must resolve temporary files and its
-    # host DLL cohort from the short staged package, not from the controller's
-    # arbitrary environment.
-    $env:TEMP=$PackageRoot
-    $env:TMP=$PackageRoot
-    $env:PATH="$packageBinaryRoot;"+$env:SystemRoot+'\System32'
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     foreach($app in @('WINMINE','SOL','WRITE')){
         $controller=$null
@@ -59,8 +46,8 @@ try {
         $report=Join-Path $LogRoot "$LogPrefix-$($app.ToLowerInvariant()).txt"
         if(Test-Path -LiteralPath $report){throw 'Use a fresh log prefix'}
         try {
-            $arguments=@(('"'+$launcher+'"'),('"'+$PackageRoot+'"'),('"'+$report+'"'),
-                '--observation-timeout-ms','16000','--wait',(Join-Path $PackageRoot "$app.EXE"))
+            $arguments=@(('"'+$launcher+'"'),('"'+(Join-Path $PackageRoot '.')+'"'),('"'+$report+'"'),
+                '--observation-timeout-ms','16000','--wait',"$app.EXE")
             # S8 makes default GUI launch asynchronous. This frontier gate
             # deliberately observes a live target, so request explicit waiting
             # rather than treating successful launcher exit as guest failure.
@@ -83,8 +70,8 @@ try {
                         # original GBK bytes may appear as Latin-1 code units.
                         # Both exact forms identify these original media strings;
                         # an arbitrary visible window is not a frontier witness.
-                        elseif($app -eq 'WINMINE'){$windows -match '(?m)^window-utf16=\S+ visible=1 class=(626B96F7|00C900A800C000D7|004D0069006E00650073007700650065007000650072) text=\1\r?$'}
-                        elseif($app -eq 'SOL'){$windows -match '(?m)^window-utf16=\S+ visible=1 class=005300740061007400690063 text=(51855B584E0D591F|00C400DA00B400E600B200BB00B900BB|0053006F006C006900740061006900720065)\r?$'}
+                        elseif($app -eq 'WINMINE'){$windows -match '(?m)^window-utf16=\S+ visible=1 class=(626B96F7|00C900A800C000D7) text=\1\r?$'}
+                        elseif($app -eq 'SOL'){$windows -match '(?m)^window-utf16=\S+ visible=1 class=005300740061007400690063 text=(51855B584E0D591F|00C400DA00B400E600B200BB00B900BB)\r?$'}
                         else{$windows -match 'Not enough memory for Write to complete this operation\.'}
                     if($reached){
                         if($workers.Count -ne 1){throw 'Expected one WOW worker'}
@@ -108,7 +95,7 @@ try {
             }
             $description=if(!$PackageNetworkProfile){'NETWORK.DRV modal'}
                 elseif($app -eq 'WINMINE'){'localized WINMINE main window; interaction not tested'}
-                elseif($app -eq 'SOL'){'localized SOL main window; interaction not tested'}
+                elseif($app -eq 'SOL'){'original out-of-memory modal; application still incomplete'}
                 else{'original Write out-of-memory modal; application still incomplete'}
             $verified=$true
             Write-Output "BASELINE PRESERVED $app : $description, no character frontend; not full application acceptance"
@@ -147,9 +134,4 @@ try {
             }
         }
     }
-} finally {
-    $env:MVDM_OBSERVER_PRIVATE_DESKTOP=$oldPrivate
-    $env:TEMP=$oldTemp
-    $env:TMP=$oldTmp
-    $env:PATH=$oldPath
-}
+} finally {$env:MVDM_OBSERVER_PRIVATE_DESKTOP=$oldPrivate}
