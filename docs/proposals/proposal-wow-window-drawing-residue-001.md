@@ -29,6 +29,16 @@ and not the independent win16-style demo. The visual resemblance to the
 demo's native-caption leakage is a hypothesis, not proof of shared cause.
 Do not assume the reported shapes were drawn by a Win3.1 caption implementation.
 
+### Minimum-diff admission gate
+
+This candidate is **Yellow** under the shared [WOW32 minimum-diff admission
+governance](../etc/operations/wow32-queue-minimal-diff-admission-governance.md),
+which links its work to the external OpenNT-only seam ledger. Before production
+implementation, record the original owner, build condition, ABI and
+normal/failure/retirement ownership for every changed edge. trace the actual painter and client/non-client boundary before any visual repair; masking is not a fix. Static
+ledger closure, a symbol match or a successful link does not prove this
+candidate's product/runtime behavior.
+
 ## Read-only findings and limitations
 
 The side investigation searched the existing message/DC bindings, read the

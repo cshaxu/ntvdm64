@@ -171,6 +171,31 @@ static void verify_dos_input_queue(frontend_io_channel *channel)
     CHECK(FlushConsoleInputBuffer(channel->console.input));
     do { CHECK(!frontend_session_read(test_frontend,FALSE,received,260,&count)); } while(count);
     frontend_session_leave(test_frontend);
+    /* Keep OS control-dispatch thread initialization outside the separate
+     * steady-state channel handle-count experiment. The --input-output
+     * process exercises actual delivery, not merely survival of the event. */
+    if(input_output_only)CHECK(SetConsoleCtrlHandler(NULL,FALSE));
+    for(i=0;input_output_only && i<2;++i) {
+        CHECK(GenerateConsoleCtrlEvent(i ? CTRL_BREAK_EVENT : CTRL_C_EVENT,0));
+        CHECK(WaitForSingleObject(ready,5000)==WAIT_OBJECT_0);
+        CHECK(!frontend_session_enter(test_frontend,channel));
+        CHECK(!frontend_session_read(test_frontend,FALSE,received,260,&count) && count==4);
+        CHECK(received[0].EventType==KEY_EVENT && received[1].EventType==KEY_EVENT);
+        CHECK(received[0].Event.KeyEvent.bKeyDown && received[1].Event.KeyEvent.bKeyDown);
+        CHECK(!received[2].Event.KeyEvent.bKeyDown && !received[3].Event.KeyEvent.bKeyDown);
+        CHECK(received[0].Event.KeyEvent.wVirtualKeyCode==VK_CONTROL &&
+            received[3].Event.KeyEvent.wVirtualKeyCode==VK_CONTROL);
+        CHECK(received[3].Event.KeyEvent.dwControlKeyState==0);
+        CHECK(received[1].Event.KeyEvent.wVirtualKeyCode==(i ? VK_CANCEL : 'C'));
+        CHECK(received[1].Event.KeyEvent.wVirtualScanCode==(i ? 0x46 : 0x2e));
+        CHECK(received[1].Event.KeyEvent.uChar.UnicodeChar==3);
+        CHECK(received[0].Event.KeyEvent.dwControlKeyState==LEFT_CTRL_PRESSED);
+        CHECK(WaitForSingleObject(ready,0)==WAIT_TIMEOUT);
+        frontend_session_leave(test_frontend);
+    }
+    if(input_output_only)
+        fprintf(private_report ? private_report : stdout,
+            "PASS real Console Ctrl+C/Break reaches the active copied input queue as complete key gestures\n");
     puts("PASS DOS input growth, atomic prepend/order, peek, partial drain/readiness, overflow preservation and shared native-channel handoff");
 }
 static void run_case(unsigned mode,unsigned round)
@@ -1304,7 +1329,11 @@ int main(int argc,char **argv)
         fprintf(private_report,"PASS private 80x30 to 80x25/80x28 Console API handoff\n");
         fclose(private_report);return 0;
     }
-    if(argc==2 && !strcmp(argv[1],"--input-output")) {
+    if((argc==2 || argc==3) && !strcmp(argv[1],"--input-output")) {
+        if(argc==3) {
+            CHECK(!fopen_s(&private_report,argv[2],"w") && private_report);
+            setvbuf(private_report,NULL,_IONBF,0);
+        }
         /* Keep the S5 regression probe independent of the broad geometry
          * fixture: it needs only an ordinary Console, one real frontend
          * channel and the queued-input/following-output transaction. */
@@ -1320,10 +1349,12 @@ int main(int argc,char **argv)
         }
         test_prepare_operation();
         input_output_only=TRUE;
-        run_case(1,1);
+        run_case(1,0);
         CHECK(!frontend_session_destroy(test_frontend));
         CloseHandle(read_entered);
-        puts("PASS variable-record input/output regression probe");
+        fprintf(private_report ? private_report : stdout,
+            "PASS variable-record input/output regression probe\n");
+        if(private_report)fclose(private_report);
         return 0;
     }
     if(argc==2 && !strcmp(argv[1],"--present-barrier")) {
@@ -1454,7 +1485,8 @@ int main(int argc,char **argv)
     for(round=1;round<=16;++round)
         for(mode=0;mode<6;++mode) run_case(mode,round);
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&after));
-    printf("channel handles before=%lu after=%lu\n",before,after);
+    fprintf(private_report ? private_report : stdout,
+        "channel handles before=%lu after=%lu\n",before,after);
     CHECK(after==before);
     /* Connection waiting, cancellation and peer-death arbitration belong to
      * NTSRV (production-linked --io-authority and frontend-wait cases).

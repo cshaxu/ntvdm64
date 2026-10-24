@@ -15,6 +15,17 @@ are inherited rather than reset. No new global source audit is required.
 Original lookup/load/lock/unlock/free and module association; finite aliases owned by W03. Prove original guest names/IDs, bounds, missing/partial loads and lifetime before GDI/menu consumers. No resource-specific drawing or duplicate memory manager.
 
 Expected reuse boundaries: [Modules, memory and resource aliases](proposal-wow32-modules-memory-aliases-001.md), [Files, directories, environment and OEM](proposal-wow32-files-environment-oem-001.md).
+
+### Minimum-diff admission gate
+
+This candidate is **Yellow** under the shared [WOW32 minimum-diff admission
+governance](../etc/operations/wow32-queue-minimal-diff-admission-governance.md),
+which links its work to the external OpenNT-only seam ledger. Before production
+implementation, record the original owner, build condition, ABI and
+normal/failure/retirement ownership for every changed edge. reuse the W03 alias and load/lock/free owner before changing a resource consumer. Static
+ledger closure, a symbol match or a successful link does not prove this
+candidate's product/runtime behavior.
+
 Queue order is the planned execution order; it does not assert an unproved
 runtime dependency. At admission, prove which listed reuse edges are actual
 prerequisites; do not require an unrelated service merely because it is listed. A missing

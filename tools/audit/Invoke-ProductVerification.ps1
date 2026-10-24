@@ -26,6 +26,7 @@ $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $sourceRuntime=(Resolve-Path $RuntimeRoot).Path
 $cache=(Resolve-Path $BuildCache).Path
 $observerPath=(Resolve-Path $Observer).Path
+$Node=(Get-Command $Node -CommandType Application -ErrorAction Stop).Source
 $log=[IO.Path]::GetFullPath($LogRoot)
 $build=(Join-Path $repo 'build')+'\'
 if(!$log.StartsWith($build,[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $log)){
@@ -111,7 +112,7 @@ $preparationMs=$total.ElapsedMilliseconds
 $variables=@('MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_WINDOW_INPUT','MVDM_OBSERVER_SHORT_HISTORY','TEST_RUNTIME_ROOT',
     'MVDM_TEST_DIRECT_CMD','MVDM_TEST_S34_REPEAT_DIR','OPENNT_BROKER_PRODUCT_BUILD',
     'OPENNT_VERSION_TEST_BUILD','OPENNT_VERSION_TEST_LOGS','OPENNT_VERSION_TEST_RUNTIME',
-    'MVDM_OBSERVER_MILESTONE_INPUT')
+    'MVDM_OBSERVER_MILESTONE_INPUT','PATH')
 $old=@{};foreach($name in $variables){$old[$name]=[Environment]::GetEnvironmentVariable($name)}
 function Invoke-Gate([string]$Name,[scriptblock]$Body) {
     $watch=[Diagnostics.Stopwatch]::StartNew();$passed=$false
@@ -138,6 +139,9 @@ function Invoke-ShortRuntime([scriptblock]$Body) {
     & $Body
 }
 try {
+    # Match the ordinary command matrix's controlled lookup environment.
+    # Original COMMAND's large-environment limitation is tested separately.
+    $env:PATH=$runtimeBinary+';'+(Join-Path $env:SystemRoot 'System32')
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     # Only the ordinary shell matrix opts into echo/result milestones.
     # Other probes may have non-echo input contracts; do not reinterpret them.
@@ -262,14 +266,14 @@ try {
                     }
                 }
             }else{throw 'Control gate requires the retained Terminal observer'}
-            Invoke-Gate 'modern-edit-return' {& "$repo/tests/observation/verify-command-native-edit-return.ps1" -Observer $observerPath -PackageRoot $runtime -ReportPath "$log/modern-edit.txt"}
+            Invoke-Gate 'modern-edit-return' {& "$repo/tests/observation/verify-command-native-edit-return.ps1" -Observer $observerPath -PackageRoot $sourceRuntime -ReportPath "$log/modern-edit.txt"}
             Invoke-Gate 'cooked-return' {& "$repo/tests/observation/verify-frontend-relaunch.ps1" -Observer $observerPath -PackageRoot $runtime -ReportPath "$log/cooked-return.txt"}
             Invoke-Gate 'rapid-relaunch' {& "$repo/tests/observation/verify-frontend-rapid-relaunch.ps1" -Observer $observerPath -PackageRoot $runtime -ReportPath "$log/rapid.txt"}
             Invoke-Gate 'interactive-relaunch' {& "$repo/tests/observation/verify-frontend-rapid-interactive.ps1" -Observer $observerPath -PackageRoot $runtime -ReportPath "$log/interactive.txt"}
             Invoke-Gate 'session-isolation' {& "$repo/tests/observation/verify-ntvwm-management.ps1" -Observer $observerPath -MonitorRpc $(if($MonitorRpc){$MonitorRpc}else{"$cache/monitor-rpc-test.exe"}) -PackageRoot $runtime -ProcessPackageRoot $runtime -LogPrefix isolation -LogRoot $log -TwoSessions}
             Invoke-Gate 'retirement-wiring' {& "$repo/tests/observation/verify-broker-retirement.ps1" -Observer $observerPath -PackageRoot $runtime -ProcessPackageRoot $runtime -LogPrefix retirement -LogRoot $log -FullDeadlines:$FullDeadlines}
         }
-        Invoke-Gate 'nested-window-handoff' {& "$repo/tests/observation/verify-broker-io-handoff.ps1" -RuntimeRoot $runtime -Observer $observerPath -ReportPrefix "$log/handoff" -Case nested-window}
+        Invoke-Gate 'nested-window-handoff' {& "$repo/tests/observation/verify-broker-io-handoff.ps1" -RuntimeRoot $sourceRuntime -Observer $observerPath -ReportPrefix "$log/handoff" -Case nested-window}
     }
     foreach($row in $manifest){if((Get-IsolatedFileSha256 (Join-Path $runtimeBinary $row.Name)) -ne $row.Sha256){throw 'Runtime identity changed during verification'}}
     "PASS $Suite selected gates; identical $($packageNames.Count)-file package"

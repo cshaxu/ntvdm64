@@ -34,6 +34,10 @@ try {
     $start.UseShellExecute=$false
     $start.WindowStyle=[Diagnostics.ProcessWindowStyle]::Hidden
     $start.EnvironmentVariables['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'
+    # This lifecycle fixture uses only this package and host System32.
+    # Developer toolchain PATH growth is a separate immutable-COMMAND guest
+    # boundary, not input to the EDIT return contract. Affect only the child.
+    $start.EnvironmentVariables['PATH']=$binary+';'+(Join-Path $env:SystemRoot 'System32')
     $mem=Join-Path $binary 'MEM.EXE'
     $text="cmd.exe /d`r$edit`r$([char]17)`recho S40-NATIVE-RETURN-OK`rexit`r$mem`rexit`r"
     foreach($argument in @((Join-Path $binary 'run16.exe'),$stage,$ReportPath,

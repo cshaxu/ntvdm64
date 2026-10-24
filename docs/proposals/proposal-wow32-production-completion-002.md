@@ -205,6 +205,17 @@ interpreting a new candidate's local S number.
   not assumed prerequisites for the three apps without a real call edge.
   Three-app frontier checks run throughout, not only at W20.
 
+## Minimum-diff admission gate
+
+Every candidate in this program applies the shared
+[WOW32 minimum-diff admission governance](../etc/operations/wow32-queue-minimal-diff-admission-governance.md).
+It binds candidate implementation to the external OpenNT-only seam ledger,
+requires an original-owner/ABI/lifetime disposition before new behavior, and
+assigns the queue-specific green, yellow, red or acceptance gate. The record
+does not change Queue order, candidate scope, admission authority or runtime
+closure criteria. Static audit conclusions guide implementation but do not
+prove a product image or runtime equivalence.
+
 ## Architecture and immutable inputs
 
 Modern Windows USER is the sole delivery/reply transport for Win16/Win16 and

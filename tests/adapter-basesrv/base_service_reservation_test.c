@@ -694,7 +694,7 @@ static int frontend_authority(void)
             frontend_notification_cleanup,worker_cleanup));
         CHECK(!OpenNtBaseServiceConnect(service,self,&launcher,&launcher_generation));
         CHECK(!OpenNtBaseServiceAcquireFrontendRoot(launcher,GetCurrentProcessId(),launcher_generation,
-            1234,&create,&selected,&selected_cap,&selected_retire,&selected_restored) && create);
+            phase>=4 ? 0 : 1234,&create,&selected,&selected_cap,&selected_retire,&selected_restored) && create);
         CHECK(GetModuleFileNameA(NULL,image,MAX_PATH));
         sprintf_s(command,sizeof(command),"\"%s\" --reservation-child",image);
         CHECK(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
@@ -725,8 +725,11 @@ static int frontend_authority(void)
         members[0]=child.dwProcessId;
         members[1]=GetCurrentProcessId();
         CHECK(!OpenNtBaseServiceReportConsoleMembers(root,child.dwProcessId,root_generation,2,members));
+        /* A host can expose a different HWND after the authenticated NTCON
+         * attaches (for example a pseudoconsole message-only HWND).  The
+         * creator reservation, not that presentation observation, admits it. */
         CHECK(!OpenNtBaseServiceRegisterFrontendLease(root,child.dwProcessId,root_generation,
-            1234,GetCurrentProcessId(),borrowed,retire,restored));
+            phase>=4 ? 0 : 4321,GetCurrentProcessId(),borrowed,retire,restored));
         CHECK(OpenNtBaseServiceFrontendStartupResult(launcher,GetCurrentProcessId(),launcher_generation,
             capability,0)==ERROR_ACCESS_DENIED);
         CHECK(OpenNtBaseServiceFrontendStartupResult(root,child.dwProcessId,root_generation,

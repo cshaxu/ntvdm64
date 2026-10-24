@@ -451,7 +451,7 @@ DWORD OpenNtBaseServiceAcquireFrontendRoot(OPENNT_BASE_CONNECTION *caller,DWORD 
 {
     OPENNT_BASE_SERVICE *service;
     DWORD error=ERROR_ACCESS_DENIED;
-    if(!caller || !console_window || !create_root || !process || !capability || !retire || !restored)
+    if(!caller || !create_root || !process || !capability || !retire || !restored)
         return ERROR_INVALID_PARAMETER;
     *create_root=0;*process=*capability=*retire=*restored=NULL;
     service=caller->service;
@@ -464,13 +464,17 @@ DWORD OpenNtBaseServiceAcquireFrontendRoot(OPENNT_BASE_CONNECTION *caller,DWORD 
             {error=ERROR_ACCESS_DENIED;break;}
         for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
             OPENNT_BASE_CONNECTION *item=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-            if(item->frontend_console_window==console_window && item->frontend_capability &&
+            /* A real HWND can serialize reuse.  A missing HWND cannot: its
+             * authenticated creator reservation is deliberately one-shot. */
+            if(console_window && item->frontend_lease_registered &&
+                item->frontend_console_window==console_window && item->frontend_capability &&
                 !item->frontend_closing && !item->frontend_close_draining && !item->frontend_terminal_retire &&
                 WaitForSingleObject(item->process.ProcessHandle,0)==WAIT_TIMEOUT) {
                 if(root){error=ERROR_INVALID_STATE;goto done;}
                 root=item;
             }
-            if(item->frontend_reserved_window==console_window)reservation=item;
+            if(item->frontend_reserved && item->frontend_reserved_window==console_window &&
+                (console_window || item==caller))reservation=item;
         }
         if(root && root->frontend_retire && root->frontend_restored) {
             if(caller->retained_frontend_root &&
@@ -512,6 +516,7 @@ DWORD OpenNtBaseServiceAcquireFrontendRoot(OPENNT_BASE_CONNECTION *caller,DWORD 
             }
         } else if(!root && !reservation) {
             caller->frontend_reserved_window=console_window;
+            caller->frontend_reserved=TRUE;
             *create_root=1;error=ERROR_SUCCESS;break;
         }
         if(!SleepConditionVariableCS(&service->frontend_changed,&service->lock,INFINITE))
@@ -606,7 +611,7 @@ DWORD OpenNtBaseServiceFrontendStartupResult(OPENNT_BASE_CONNECTION *root,DWORD 
         if(creator->frontend_start_reported){error=ERROR_ALREADY_EXISTS;break;}
         /* Failure may precede root registration; success must prove the
          * registered Console lease, not merely possession of an event. */
-        if(!status && (!root->frontend_capability || !root->frontend_console_window ||
+        if(!status && (!root->frontend_capability || !root->frontend_lease_registered ||
             !compare(root->frontend_capability,capability)))break;
         creator->frontend_start_status=status;
         if(!SetEvent(creator->frontend_start_result)){error=GetLastError();break;}
@@ -631,7 +636,7 @@ DWORD OpenNtBaseServiceStartFrontend(OPENNT_BASE_CONNECTION *caller,DWORD pid,
     SIZE_T bytes=0;
     DWORD error,create=0,root_generation=0;
     BOOL attributes=FALSE,accepted=FALSE;
-    if(!caller || !window || borrowed>1 || !root || !capability || !restored)
+    if(!caller || borrowed>1 || !root || !capability || !restored)
         return ERROR_INVALID_PARAMETER;
     *root=*capability=*restored=NULL;
     EnterCriticalSection(&caller->service->lock);
@@ -850,8 +855,9 @@ DWORD OpenNtBaseServiceCancelFrontendRootReservation(OPENNT_BASE_CONNECTION *cal
     DWORD error=ERROR_ACCESS_DENIED;
     if(!caller)return error;
     EnterCriticalSection(&caller->service->lock);
-    if(OpenNtBaseServicePeer(caller,pid,generation) && caller->frontend_reserved_window) {
+    if(OpenNtBaseServicePeer(caller,pid,generation) && caller->frontend_reserved) {
         caller->frontend_reserved_window=0;
+        caller->frontend_reserved=FALSE;
         WakeAllConditionVariable(&caller->service->frontend_changed);
         error=ERROR_SUCCESS;
     }
@@ -920,7 +926,7 @@ DWORD OpenNtBaseServiceRegisterFrontendLease(OPENNT_BASE_CONNECTION *root,DWORD 
     DWORD error=ERROR_ACCESS_DENIED;
     EVENT_BASIC_INFORMATION info;
     SERVICE_COMPARE_HANDLES compare=root ? root->service->compare_handles : NULL;
-    if(!root || !console_window || !creator_pid || borrowed>1)return ERROR_INVALID_PARAMETER;
+    if(!root || !creator_pid || borrowed>1)return ERROR_INVALID_PARAMETER;
     if(!compare)return ERROR_INVALID_STATE;
     if(NtQueryEvent(retire,EventBasicInformation,&info,sizeof(info),NULL)<0 ||
         info.EventType!=NotificationEvent ||
@@ -928,14 +934,19 @@ DWORD OpenNtBaseServiceRegisterFrontendLease(OPENNT_BASE_CONNECTION *root,DWORD 
         info.EventType!=NotificationEvent)return ERROR_INVALID_PARAMETER;
     EnterCriticalSection(&root->service->lock);
     if(!OpenNtBaseServicePeer(root,pid,generation) || !root->frontend_capability ||
-        root->frontend_console_window || root->process.fVDM)goto done;
+        root->frontend_lease_registered || root->process.fVDM)goto done;
     for(link=root->service->connections.Flink;link!=&root->service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *item=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-        if(item!=root && item->frontend_console_window==console_window &&
+        if(item!=root && console_window && item->frontend_lease_registered &&
+            item->frontend_console_window==console_window &&
             item->frontend_capability && !item->frontend_closing && !item->frontend_close_draining &&
             WaitForSingleObject(item->process.ProcessHandle,0)==WAIT_TIMEOUT)
             {error=ERROR_ALREADY_EXISTS;goto done;}
-        if(item->frontend_reserved_window==console_window &&
+        /* The creator reservation, authenticated suspended NTCON process,
+         * and capability are the identity proof.  HWND is deliberately not:
+         * pseudoconsole attach can produce a different observation in the
+         * admitted frontend.  Keep HWND only for live-root reuse above. */
+        if(item->frontend_reserved &&
             (DWORD)(ULONG_PTR)item->process.ClientId.UniqueProcess==creator_pid &&
             WaitForSingleObject(item->process.ProcessHandle,0)==WAIT_TIMEOUT)creator=item;
     }
@@ -957,6 +968,7 @@ DWORD OpenNtBaseServiceRegisterFrontendLease(OPENNT_BASE_CONNECTION *root,DWORD 
         goto done;
     }
     root->frontend_console_window=console_window;
+    root->frontend_lease_registered=TRUE;
     root->frontend_borrowed=borrowed;
     root->frontend_creator_generation=creator->process.SequenceNumber;
     creator->retained_frontend_root=generation;
@@ -968,6 +980,7 @@ DWORD OpenNtBaseServiceRegisterFrontendLease(OPENNT_BASE_CONNECTION *root,DWORD 
         service_frontend_exited,root->service,INFINITE,WT_EXECUTEONLYONCE)) {
         error=GetLastError();
         root->frontend_console_window=0;
+        root->frontend_lease_registered=FALSE;
         root->frontend_creator_generation=0;
         root->frontend_borrowed=FALSE;
         creator->retained_frontend_root=0;
@@ -985,6 +998,7 @@ DWORD OpenNtBaseServiceRegisterFrontendLease(OPENNT_BASE_CONNECTION *root,DWORD 
         root->frontend_exit_watch=NULL;
         CloseHandle(root->frontend_exit_process);root->frontend_exit_process=NULL;
         root->frontend_console_window=0;
+        root->frontend_lease_registered=FALSE;
         root->frontend_creator_generation=0;
         root->frontend_borrowed=FALSE;
         creator->retained_frontend_root=0;
@@ -993,6 +1007,7 @@ DWORD OpenNtBaseServiceRegisterFrontendLease(OPENNT_BASE_CONNECTION *root,DWORD 
         goto done;
     }
     creator->frontend_reserved_window=0;
+    creator->frontend_reserved=FALSE;
     service_signal_frontend_states(root->service);
     WakeAllConditionVariable(&root->service->frontend_changed);
     error=ERROR_SUCCESS;
@@ -1045,9 +1060,12 @@ DWORD OpenNtBaseServiceFrontendLeaseReady(OPENNT_BASE_CONNECTION *root,DWORD pid
         !root->frontend_closing && !root->frontend_close_draining && root->frontend_restored) {
         if(SetEvent(root->frontend_restored)) {
             service_console_return_ack(root);
-            /* A leased root returns the visible Console, not the worker
-             * channels. Keep delivered routes for resident worker reuse. */
-            root->frontend_idle=TRUE;
+            /* Borrowed Consoles keep their frontend for the outer shell.
+             * A standalone root has nobody to return to: after acknowledging
+             * restoration, NTSRV must retire NTCON too, otherwise its last
+             * attachment leaves a dead Console window after Run16 exits. */
+            root->frontend_idle=root->frontend_borrowed;
+            if(!root->frontend_borrowed)root->frontend_closing=TRUE;
             service_signal_frontend_states(root->service);
             WakeAllConditionVariable(&root->service->frontend_changed);
             error=ERROR_SUCCESS;
@@ -1661,7 +1679,7 @@ DWORD OpenNtBaseServiceReportConsoleMembers(OPENNT_BASE_CONNECTION *connection,
     }
     LeaveCriticalSection(&connection->service->lock);
     if(!error)error=service_bind_existing_console(connection);
-    if(!error && connection->frontend_borrowed && connection->frontend_console_window &&
+    if(!error && connection->frontend_borrowed && connection->frontend_lease_registered &&
         !connection->frontend_console_member_watches)
         error=service_arm_frontend_console_member_watches(connection);
 done:

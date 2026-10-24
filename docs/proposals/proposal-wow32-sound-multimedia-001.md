@@ -15,6 +15,16 @@ are inherited rather than reset. No new global source audit is required.
 Inherited: multimedia family: selected operation families, callbacks, buffers, async completion/cancel and device/task cleanup. Track family-specific tests rather than link-only acceptance.
 
 Expected reuse boundaries: [Messages, callbacks and task execution](proposal-wow32-message-task-execution-001.md), [Modules, memory and resource aliases](proposal-wow32-modules-memory-aliases-001.md).
+### Minimum-diff admission gate
+
+This candidate is **Red** under the shared [WOW32 minimum-diff admission
+governance](../etc/operations/wow32-queue-minimal-diff-admission-governance.md),
+which links its work to the external OpenNT-only seam ledger. Before production
+implementation, record the original owner, build condition, ABI and
+normal/failure/retirement ownership for every changed edge. first prove completion/cancel callback admission and device/task rundown before adding asynchronous support. Static
+ledger closure, a symbol match or a successful link does not prove this
+candidate's product/runtime behavior.
+
 Queue order is the planned execution order; it does not assert an unproved
 runtime dependency. At admission, prove which listed reuse edges are actual
 prerequisites; do not require an unrelated service merely because it is listed. A missing

@@ -19,10 +19,25 @@ void service_signal_frontend_states(OPENNT_BASE_SERVICE *service)
 BOOL OpenNtBaseServiceIsEmpty(OPENNT_BASE_SERVICE *service)
 {
     BOOL empty;
+    LIST_ENTRY *link;
     if (!service) return FALSE;
     EnterCriticalSection(&service->lock);
     empty=IsListEmpty(&service->worker_watches) && IsListEmpty(&service->gui_records) && OpenNtBaseProcessRegistryIsEmpty(&service->registry) &&
         OpenNtBaseReservationsIsEmpty(service->reservations);
+    /* A registered NTCON is the live Console during the interval between
+     * Run16's authenticated frontend acquisition and worker submission.
+     * It is neither a worker nor a reservation, but treating it as empty
+     * lets the service's only idle grace terminate its own startup route. */
+    if(empty) {
+        for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
+            OPENNT_BASE_CONNECTION *connection=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
+            if(connection->frontend_capability && connection->frontend_lease_registered &&
+                !connection->frontend_closing &&
+                WaitForSingleObject(connection->process.ProcessHandle,0)==WAIT_TIMEOUT) {
+                empty=FALSE;break;
+            }
+        }
+    }
     LeaveCriticalSection(&service->lock);
     return empty;
 }
@@ -422,6 +437,7 @@ DWORD OpenNtBaseServiceRetireWorkerlessFrontend(OPENNT_BASE_CONNECTION *root,DWO
              !root->frontend_close_returned ? OPENNT_FRONTEND_RETIRE_RETURN_CONSOLE :
              OPENNT_FRONTEND_RETIRE_NONE);
         if(*retired==OPENNT_FRONTEND_RETIRE_NONE && !root->frontend_close_draining &&
+            !root->frontend_terminal_retire &&
             root->frontend_creator_generation &&
             root->frontend_restored && WaitForSingleObject(root->frontend_restored,0)==WAIT_TIMEOUT) {
             LIST_ENTRY *link;BOOL returning=TRUE;DWORD pending=0,tasks=0;
@@ -469,7 +485,7 @@ BOOL service_root_has_worker(OPENNT_BASE_CONNECTION *root)
 static BOOL service_root_borrowed_console_lost(const OPENNT_BASE_CONNECTION *root)
 {
     DWORD index,root_pid;
-    if(!root || !root->frontend_borrowed || !root->frontend_console_window ||
+    if(!root || !root->frontend_borrowed || !root->frontend_lease_registered ||
         !root->console_members || !root->console_member_processes ||
         !root->console_member_count)return FALSE;
     root_pid=(DWORD)(ULONG_PTR)root->process.ClientId.UniqueProcess;
@@ -649,22 +665,15 @@ void service_advance_terminal_root_retire(OPENNT_BASE_SERVICE *service,DWORD roo
         LIST_ENTRY *worker_link;
         if(watch->frontend_root_generation!=root_generation ||
             WaitForSingleObject(watch->process.ProcessHandle,0)!=WAIT_TIMEOUT)continue;
-        /* WOW and GUI launchers do not carry this root's text Console. They
-         * must not keep a Console-return transaction live merely because an
-         * unrelated observation record remains registered. */
         if(watch->wow || watch->native_gui_launcher)continue;
         live=TRUE;
         for(worker_link=service->connections.Flink;worker_link!=&service->connections;worker_link=worker_link->Flink) {
             OPENNT_BASE_CONNECTION *candidate=CONTAINING_RECORD(worker_link,OPENNT_BASE_CONNECTION,service_link);
             if(candidate->process.SequenceNumber==watch->process.SequenceNumber) {worker=candidate;break;}
         }
-        /* WOW has no text frontend and a GUI launcher is one-shot.  Neither
-         * belongs to this root Console retirement.  The remaining two kinds
-         * are text carriers with distinct implementation paths but one
-         * NTSRV-owned worker-close protocol.  Returning merely because the
-         * DOS carrier is live creates a cycle: a root COMMAND can be waiting
-         * for the service to close it while this transaction waits for it to
-         * disappear. */
+        /* WOW and GUI launchers do not carry this root's text Console. They
+         * must not keep a Console-return transaction live merely because an
+         * unrelated observation record remains registered. */
         if(!worker ||
             (watch->kind!=OPENNT_BASE_WORKER_DOS && watch->kind!=OPENNT_BASE_WORKER_NATIVE) ||
             (worker->native_worker && (worker->native_gui_launcher || worker->native_inflight ||

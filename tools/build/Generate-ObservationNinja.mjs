@@ -31,6 +31,9 @@ writeFileSync(resolve(build, 'build.ninja'), [
   'build run16-direct-command-observer.obj: cc ' +
     source('tests/observation/run16_direct_command_observer.c'),
   'build run16-direct-command-observer.exe: link run16-direct-command-observer.obj',
+  'build terminal-observer.obj: cc ' + source('tests/observation/console_terminal_observer.c'),
+  '  cflags = /nologo /TC /std:c11 /c /MT /W4 /D_CRT_SECURE_NO_WARNINGS /showIncludes /I"' + source('src') + '" /I"' + source('src/ntcon-exe') + '"',
+  'build terminal-observer.exe: link terminal-observer.obj',
   'default console-startup-observer.exe',
   ''
 ].join('\n'));

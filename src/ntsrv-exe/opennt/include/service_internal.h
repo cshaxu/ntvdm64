@@ -116,7 +116,12 @@ struct OPENNT_BASE_CONNECTION {
     BOOL wow_started;
     BOOL separate_wow_delivered; /* Original GetNext consumed the one-shot record. */
     HANDLE frontend_capability; /* Root lease, independent of command lifetime. */
+    /* An HWND is a best-effort host observation, not the frontend identity.
+     * A newly allocated Console may not expose one while its owner starts.
+     * Keep explicit state bits so zero is a valid observed value rather than
+     * an accidental "not registered" sentinel. */
     uint64_t frontend_console_window,frontend_reserved_window;
+    BOOL frontend_lease_registered,frontend_reserved;
     HANDLE frontend_retire,frontend_restored;
     HANDLE frontend_start_process; /* Borrowed only during the active Start RPC. */
     HANDLE frontend_start_capability,frontend_start_retire,frontend_start_restored;

@@ -115,7 +115,7 @@ static int startup_failures(void)
         SetEnvironmentVariableW(L"FRONTEND_TEST_REPLY",modes[i]);
         error=start_broker(image,&broker);if(error)goto done;
         /* Warm the new RPC marshalling path independently of the rejection. */
-        (void)OpenNtBaseClientStartFrontend(0,TRUE,&root,&cap,&restored);
+        (void)OpenNtBaseClientWaitFrontendConsoleRestored();
         if(!GetProcessHandleCount(GetCurrentProcess(),&before))goto done;
         began=GetTickCount64();
         error=OpenNtBaseClientStartFrontend((uint64_t)(UINT_PTR)GetConsoleWindow(),TRUE,&root,&cap,&restored);
@@ -324,11 +324,13 @@ int wmain(int argc,WCHAR **argv)
         }
         puts("PASS broker VDM creation requires original Check; malformed environment denied; no exported handles");
     }
-    error=OpenNtBaseClientStartFrontend(0,TRUE,&root,&capability,&restored);
-    if(error!=ERROR_INVALID_PARAMETER || root || capability || restored){puts("FAIL invalid Console accepted");goto done;}
+    error=OpenNtBaseClientStartFrontend(0,TRUE,NULL,&capability,&restored);
+    if(error!=ERROR_INVALID_PARAMETER || root || capability || restored){puts("FAIL invalid output accepted");goto done;}
     error=OpenNtBaseClientWaitFrontendConsoleRestored();
     if(error){puts("FAIL request without a Console lease required a return");goto done;}
-    error=OpenNtBaseClientStartFrontend((uint64_t)(UINT_PTR)GetConsoleWindow(),TRUE,
+    /* Missing HWND metadata must still use the authenticated creator and
+     * process/capability admission, not be rejected as a missing Console. */
+    error=OpenNtBaseClientStartFrontend(0,TRUE,
         &root,&capability,&restored);
     if(error){printf("FAIL bootstrap=%lu\n",error);goto done;}
     if(parent_pid(GetProcessId(root))!=broker.dwProcessId){puts("FAIL frontend not created by broker");goto done;}

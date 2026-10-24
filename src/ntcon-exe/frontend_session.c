@@ -54,7 +54,6 @@ struct frontend_session {
     uint32_t committed_video_serial;
     console_text_configuration text_configuration;
     uint32_t text_revision;
-    BOOL controls_live;
     frontend_window_controller *window;
     frontend_keyboard_delivery keyboard;
     frontend_window_mouse window_mouse;
@@ -582,7 +581,7 @@ static BOOL WINAPI frontend_control(DWORD event)
     BOOL handled=FALSE;
     if(event!=CTRL_C_EVENT && event!=CTRL_BREAK_EVENT)return FALSE;
     AcquireSRWLockShared(&control_lock);
-    if(control_owner && control_owner->controls_live)
+    if(control_owner)
         handled=SetEvent(control_owner->control[event]);
     ReleaseSRWLockShared(&control_lock);
     return handled;
@@ -590,16 +589,45 @@ static BOOL WINAPI frontend_control(DWORD event)
 static DWORD present_loop(frontend_session *frontend)
 {
     for(;;) {
-        HANDLE waits[8]={frontend->stop,frontend->changed,frontend->refresh,
+        HANDLE waits[10]={frontend->stop,frontend->changed,frontend->refresh,
             frontend->handoff,frontend->park,frontend->return_console,
-            frontend_window_wake(frontend->window)};
-        DWORD error=0,wait,count=7;
+            frontend_window_wake(frontend->window),frontend->control[0],frontend->control[1]};
+        DWORD error=0,wait,count=9,control;
         BOOL requested=WaitForSingleObject(frontend->refresh,0)==WAIT_OBJECT_0;
         const frontend_video *video;
         uint32_t *published;
         if(WaitForSingleObject(frontend->stop,0)==WAIT_OBJECT_0)return ERROR_OPERATION_ABORTED;
         if(requested)ResetEvent(frontend->refresh);
         EnterCriticalSection(&frontend->io_lock);
+        /* Console control handlers cannot operate the worker or its lifetime.
+         * Deliver the consumed host control gesture through the same copied
+         * input queue as Window keys. The presentation thread owns ordering
+         * and reports queue failures through its existing failure path. */
+        for(control=0;control<2;++control) {
+            if(WaitForSingleObject(frontend->control[control],0)!=WAIT_OBJECT_0)continue;
+            if(!ResetEvent(frontend->control[control])) { error=GetLastError();break; }
+            if(frontend->owner && !frontend->parked && !frontend->console_return_frozen) {
+                INPUT_RECORD keys[4]={0};
+                keys[0].EventType=KEY_EVENT;
+                keys[0].Event.KeyEvent.bKeyDown=TRUE;
+                keys[0].Event.KeyEvent.wRepeatCount=1;
+                keys[0].Event.KeyEvent.wVirtualKeyCode=VK_CONTROL;
+                keys[0].Event.KeyEvent.wVirtualScanCode=0x1d;
+                keys[0].Event.KeyEvent.dwControlKeyState=LEFT_CTRL_PRESSED;
+                /* Original DOS consumes scan-key transitions, not just the
+                 * modifier annotation understood by a native Console. */
+                keys[1]=keys[0];
+                keys[1].Event.KeyEvent.wVirtualKeyCode=control ? VK_CANCEL : 'C';
+                keys[1].Event.KeyEvent.wVirtualScanCode=control ? 0x46 : 0x2e;
+                keys[1].Event.KeyEvent.uChar.UnicodeChar=3;
+                keys[2]=keys[1];keys[2].Event.KeyEvent.bKeyDown=FALSE;
+                keys[2].Event.KeyEvent.uChar.UnicodeChar=0;
+                keys[3]=keys[0];keys[3].Event.KeyEvent.bKeyDown=FALSE;
+                keys[3].Event.KeyEvent.dwControlKeyState=0;
+                error=input_write(frontend,keys,ARRAYSIZE(keys),FALSE);
+                if(error)break;
+            }
+        }
         if(WaitForSingleObject(frontend->handoff,0)==WAIT_OBJECT_0) {
             ResetEvent(frontend->handoff);
             frontend->handoff_error=apply_binding(frontend,frontend->handoff_owner,
@@ -643,7 +671,7 @@ static DWORD present_loop(frontend_session *frontend)
             SetEvent(frontend->return_done);
         }
         if(!frontend->console_return_frozen)(void)refresh_window_title(frontend);
-        if(!frontend->console_return_frozen && (frontend->owner || frontend->window_active)) {
+        if(!error && !frontend->console_return_frozen && (frontend->owner || frontend->window_active)) {
             error=collect_console(frontend);
             waits[count++]=frontend->console_input;
         }
@@ -754,8 +782,8 @@ DWORD frontend_session_create(frontend_session **output)
     frontend->park_done=CreateEventW(NULL,TRUE,FALSE,NULL);
     frontend->return_console=CreateEventW(NULL,TRUE,FALSE,NULL);
     frontend->return_done=CreateEventW(NULL,TRUE,FALSE,NULL);
-    frontend->control[0]=CreateEventW(NULL,FALSE,FALSE,NULL);
-    frontend->control[1]=CreateEventW(NULL,FALSE,FALSE,NULL);
+    frontend->control[0]=CreateEventW(NULL,TRUE,FALSE,NULL);
+    frontend->control[1]=CreateEventW(NULL,TRUE,FALSE,NULL);
     frontend->handoff=CreateEventW(NULL,TRUE,FALSE,NULL);
     frontend->handoff_done=CreateEventW(NULL,TRUE,FALSE,NULL);
     frontend->input_ready=CreateEventW(NULL,TRUE,FALSE,NULL);

@@ -49,7 +49,7 @@ Observe 'gui-fresh-text' $launcher @('--wait',$probe,'--spawn-text') 'exit=0x000
 $survivalArguments=@('-NoProfile','-File',(Join-Path $PSScriptRoot 'native_gui_route_fixture.ps1'),'-PackageRoot',$PackageRoot)
 if($FullDeadlines){$survivalArguments+='-ObserveWorkerResidency'}
 $survivalMarker='PASS GUI-SURVIVAL-EXIT-37'
-Observe 'carrier-residency' (Get-Command pwsh).Source $survivalArguments 'exit=0x00000000' $survivalMarker
+Observe 'carrier-residency' (Join-Path $PSHOME 'pwsh.exe') $survivalArguments 'exit=0x00000000' $survivalMarker
 $survivalScreen=Get-Content ($ReportPrefix+'-carrier-residency.txt.console.txt') -Raw
 if(!$survivalScreen.Contains('PASS GUI-RESIDENCY-'+[bool]$FullDeadlines)){throw 'Wrong residency coverage mode'}
 if($MonitorRpc){

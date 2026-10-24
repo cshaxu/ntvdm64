@@ -7,6 +7,12 @@ is now admitted and represented only in Current. Remaining candidates retain the
 residual scope. The [WOW32 program](../proposals/proposal-wow32-production-completion-002.md)
 and its approved cross-package mappings remain inherited without dropped rows.
 
+The [WOW32 minimum-diff admission governance](../etc/operations/wow32-queue-minimal-diff-admission-governance.md)
+links every remaining WOW32 candidate to the OpenNT-only seam ledger and
+classifies its admission gate. It does not reorder this Queue, admit work, or
+turn static audit closure into product/runtime completion. Every candidate
+proposal applies that rule before adding a mirror difference or adapter.
+
 | Next order | Candidate implementation package | Proposal |
 | --- | --- | --- |
 | 1 | WOW32 modules, memory and aliases — retain general loader/allocation/alias coverage; reached EDIT/dialog DS and startup-failure coordination transfer to the active execution package. | [Proposal](../proposals/proposal-wow32-modules-memory-aliases-001.md) |

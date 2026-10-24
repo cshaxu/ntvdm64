@@ -29,30 +29,55 @@
 
 ## Current Technical Baseline
 
-The current ten-image host package is published in both `assets/release/` and
-`O:\winnt\system32`; guest media and guest configuration remain immutable and
-unchanged. S5 refreshes all ten images from one staged current build and
-records its authenticated direct-root native-CUI delivery repair and
-sequence-specific final-frame barrier in the
-[S5 route record](../etc/evidence/m0-t451-s5-direct-root-native-cui-route.md).
-The current S5 candidate also fixes root-carrier retirement: NTSRV closes both
-text-carrier kinds under the root transaction while preserving the frontend
-lease for the creator's normal Console-restoration acknowledgement. The
-published staged hash record and eight-case root-return evidence are in the
-same S5 route record.
-The earlier restricted-token desktop failure is superseded by the documented
-desktop-capable modern-PowerShell runner.  The active S5 record now includes
-passing private-desktop real-carrier return probes in both DOS→native and
-native→DOS directions; remaining S5 checks still run from the same token and
-are not inferred from screenshots. During S3, the published Run16 image
-additionally corrected the host-specific cold-NTSRV RPC startup classification
-without changing its existing five-second bootstrap grace; its exact build,
-cold Console exercise and ten-image hash evidence are in the
-[S3 audit](../etc/evidence/m0-t451-s3-mutation-destruction-audit.md).
-The S2 USER publication acceptance remains linked below.
-T450 is closed at
-[its closure record](../history/m0-t450-closure.md). T451 S2 begins from the
-S1 inventory; no new WOW32 capability is claimed until its coherent delivery.
+S5's r5 regression and complete publication are finished; its reviewed P
+delivery is being committed and pushed before requesting owner acceptance.
+The owner rejected the preceding installed root EXIT/mixed-chain behavior;
+that rejection is not overwritten by earlier candidate results.
+
+The complete r5 candidate is version `0.0.451`, protocol unchanged, under
+`build/t451-s5/revalidate-r5/candidate`. Full cached ten-component build and
+second-build identity checks pass (1489 unchanged intermediates). Service40,
+real DOS Ctrl+C/Break followed by VER/MEM, and the strengthened ten-case
+root/inherited matrix pass. The matrix retains all eight owner-requested
+mixed chains and adds root CMD/COMMAND EXIT-only cases. Its six standalone
+rows now require both Run16 and NTCON exit, detach the observer before
+retirement, and exclude frontends older than the current launcher.
+
+The source corrections preserve NTSRV lifetime authority: explicit lease/
+reservation state replaces HWND-as-state; Console identity is authenticated
+through process/event ownership rather than raw HWND equality; terminal
+carrier retirement precedes restoration; borrowed roots may park, whereas
+self-created roots finally close NTCON after restoration. DOS completion is
+published before advancing the transaction that checks that same event.
+NTCON delivers real Ctrl gestures through the existing input queue with
+actual Ctrl-down/up transitions required by the original DOS keyboard.
+No guest or original-mirror change is part of these corrections.
+
+The final same-package batch passed all eleven Control gates, both seventeen-
+case DOS matrices, WINMINE interaction, SOL/WRITE startup frontiers,
+redirection/append/pipeline, service-loss cleanup and the frontend channel/
+failure fixtures. Exact handle counts remain 427/427 and 424/424; the separate
+actual control-delivery fixture also passes. Fresh reports are under
+`revalidate-r5`; failed earlier observations are retained and explained,
+not counted as passing. SOL Options is not covered by startup acceptance.
+Root closure, source traces, corrected observer limitations and exact
+earlier failures are recorded in the
+[S5 route audit](../etc/evidence/m0-t451-s5-direct-root-native-cui-route.md).
+
+The same ten images are now published to `assets/release` and
+`O:\winnt\system32`, with all twenty hashes matched to the tested candidate
+and tracked release manifest. All 71 non-product candidate files match the
+sealed baseline; original mirrors and guest remain unchanged. Required before
+inviting acceptance: commit, push and verify clean synchronization.
+Current disposable evidence remains
+owned by S5: 40 minutes per build run, scenario-specific diagnostic test
+budgets, and 2 GiB disposable output; preserve failed evidence until its
+cause is resolved and archive reviewed summaries before cleanup.
+
+S1--S4 retain their separate accepted boundaries below. SOL Options remains
+owned by the queued everyday-usability interaction stage; startup/frontier
+checks do not claim complete SOL interaction. T450 is closed at
+[its closure record](../history/m0-t450-closure.md).
 
 ## S1 Closure Record
 

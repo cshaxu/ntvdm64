@@ -15,6 +15,17 @@ are inherited rather than reset. No new global source audit is required.
 Inherited: Shell family: all selected Shell thunks; shared NTVDM.REG read/create/set/enum/delete/close, original error conversion/recursive delete, tombstones, atomic persistence, cross-worker serialization and cleanup; never write system Registry.
 
 Expected reuse boundaries: [Messages, callbacks and task execution](proposal-wow32-message-task-execution-001.md), [Modules, memory and resource aliases](proposal-wow32-modules-memory-aliases-001.md), [Files, directories, environment and OEM](proposal-wow32-files-environment-oem-001.md).
+
+### Minimum-diff admission gate
+
+This candidate is **Green** under the shared [WOW32 minimum-diff admission
+governance](../etc/operations/wow32-queue-minimal-diff-admission-governance.md),
+which links its work to the external OpenNT-only seam ledger. Before production
+implementation, record the original owner, build condition, ABI and
+normal/failure/retirement ownership for every changed edge. reuse the one NTVDM.REG owner and may not write the system Registry or create a parallel Registry provider. Static
+ledger closure, a symbol match or a successful link does not prove this
+candidate's product/runtime behavior.
+
 Queue order is the planned execution order; it does not assert an unproved
 runtime dependency. At admission, prove which listed reuse edges are actual
 prerequisites; do not require an unrelated service merely because it is listed. A missing

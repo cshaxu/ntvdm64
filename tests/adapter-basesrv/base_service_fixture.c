@@ -324,6 +324,15 @@ int fixture_shared_worker_residency(void)
     service_advance_terminal_root_retire(service,root_generation);
     RETIRE_CHECK(!root->frontend_closing && !root->frontend_terminal_retire &&
         !root->frontend_return_pending);
+    RETIRE_CHECK(root->frontend_restored=CreateEventW(NULL,TRUE,FALSE,NULL));
+    root->frontend_borrowed=TRUE;
+    RETIRE_CHECK(!OpenNtBaseServiceFrontendLeaseReady(root,GetCurrentProcessId(),root_generation));
+    RETIRE_CHECK(root->frontend_idle && !root->frontend_closing);
+    root->frontend_borrowed=FALSE;
+    RETIRE_CHECK(ResetEvent(root->frontend_restored));
+    RETIRE_CHECK(!OpenNtBaseServiceFrontendLeaseReady(root,GetCurrentProcessId(),root_generation));
+    RETIRE_CHECK(!root->frontend_idle && root->frontend_closing &&
+        WaitForSingleObject(root->frontend_restored,0)==WAIT_OBJECT_0);
     /* The direct root has one more real shape: COMMAND's DOS carrier and an
      * idle NTVWM-CUI carrier can overlap while the root is retiring.  They
      * are different worker implementations, not different ownership.  The
@@ -802,7 +811,7 @@ int fixture_borrowed_console_identity_loss(void)
         OPENNT_BASE_WORKER_WATCH watch={0};
         PROCESS_INFORMATION external={0};
         STARTUPINFOA startup={sizeof(startup)};
-        HANDLE shutdown=NULL;
+        HANDLE shutdown=NULL,worker_shutdown=NULL;
         DWORD generation=0;
         char image[MAX_PATH],command[MAX_PATH+32];
 #define IDENTITY_CHECK(value) do {if(!(value)){fprintf(stderr,"FAIL borrowed Console identity loss borrowed=%lu line=%d\n",borrowed,__LINE__);return 1;}}while(0)
@@ -814,6 +823,7 @@ int fixture_borrowed_console_identity_loss(void)
         IDENTITY_CHECK(!OpenNtBaseServiceConnect(service,GetCurrentProcess(),&root,&generation));
         root->frontend_capability=CreateEventW(NULL,TRUE,FALSE,NULL);
         root->frontend_console_window=1234;
+        root->frontend_lease_registered=TRUE;
         root->frontend_borrowed=borrowed;
         root->console_member_count=2;
         root->console_members=HeapAlloc(GetProcessHeap(),0,2*sizeof(*root->console_members));
@@ -830,8 +840,13 @@ int fixture_borrowed_console_identity_loss(void)
             GetCurrentProcess(),&root->console_member_processes[1],SYNCHRONIZE|
             PROCESS_QUERY_LIMITED_INFORMATION,FALSE,0));
         shutdown=CreateEventW(NULL,TRUE,FALSE,NULL);IDENTITY_CHECK(shutdown);
+        worker_shutdown=CreateEventW(NULL,TRUE,FALSE,NULL);IDENTITY_CHECK(worker_shutdown);
         watch.frontend_root_generation=generation;
-        watch.shutdown=shutdown;
+        /* A real watch carries a live process and distinct control events.
+         * Lost Console ownership must issue Console-close, not worker-close. */
+        watch.process.ProcessHandle=GetCurrentProcess();
+        watch.console_close=shutdown;
+        watch.shutdown=worker_shutdown;
         EnterCriticalSection(&service->lock);
         InsertTailList(&service->worker_watches,&watch.link);
         LeaveCriticalSection(&service->lock);
@@ -840,12 +855,15 @@ int fixture_borrowed_console_identity_loss(void)
         IDENTITY_CHECK(!OpenNtBaseServiceReconcileFrontends(service));
         IDENTITY_CHECK((root->frontend_closing ? 1u : 0u)==borrowed);
         IDENTITY_CHECK(WaitForSingleObject(shutdown,0)==(borrowed ? WAIT_OBJECT_0 : WAIT_TIMEOUT));
+        IDENTITY_CHECK(WaitForSingleObject(worker_shutdown,0)==WAIT_TIMEOUT);
+        IDENTITY_CHECK(watch.close_kind==(borrowed ? WORKER_CLOSE_CONSOLE : WORKER_CLOSE_NONE));
         EnterCriticalSection(&service->lock);
         RemoveEntryList(&watch.link);
         LeaveCriticalSection(&service->lock);
         IDENTITY_CHECK(!OpenNtBaseServiceDisconnect(root));root=NULL;
         IDENTITY_CHECK(OpenNtBaseServiceStop(service));
         CloseHandle(shutdown);
+        CloseHandle(worker_shutdown);
         CloseHandle(external.hThread);CloseHandle(external.hProcess);
 #undef IDENTITY_CHECK
     }

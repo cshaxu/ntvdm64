@@ -26,6 +26,17 @@ is not evidence of guest-root leakage by itself; do not mechanically replace
 Inherited: font/text conversion and drawing, font lifetime, metafile creation/playback/release and failure paths; consume W07 identities.
 
 Expected reuse boundaries: [Files, directories, environment and OEM](proposal-wow32-files-environment-oem-001.md), [GDI identity, DC and drawing](proposal-wow32-gdi-dc-drawing-001.md).
+
+### Minimum-diff admission gate
+
+This candidate is **Yellow** under the shared [WOW32 minimum-diff admission
+governance](../etc/operations/wow32-queue-minimal-diff-admission-governance.md),
+which links its work to the external OpenNT-only seam ledger. Before production
+implementation, record the original owner, build condition, ABI and
+normal/failure/retirement ownership for every changed edge. separate host font discovery from Guest product-root lookup and reuse the W04/W07 owners. Static
+ledger closure, a symbol match or a successful link does not prove this
+candidate's product/runtime behavior.
+
 Queue order is the planned execution order; it does not assert an unproved
 runtime dependency. At admission, prove which listed reuse edges are actual
 prerequisites; do not require an unrelated service merely because it is listed. A missing

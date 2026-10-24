@@ -9,18 +9,8 @@
 #include <string.h>
 
 PVOID CsrPortHeap;
-static void bootstrap_trace(const char *stage,DWORD error)
-{
-    WCHAR path[MAX_PATH];char text[96];HANDLE file;DWORD count,length;
-    length=GetEnvironmentVariableW(L"NTVDM_BOOTSTRAP_TRACE",path,ARRAYSIZE(path));
-    if(!length || length>=ARRAYSIZE(path))return;
-    file=CreateFileW(path,FILE_APPEND_DATA,FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
-    if(file==INVALID_HANDLE_VALUE)return;
-    count=(DWORD)sprintf_s(text,sizeof(text),"ntcon %s %lu\r\n",stage,error);
-    if(count)WriteFile(file,text,count,&length,NULL);CloseHandle(file);
-}
 static DWORD session_entry(HANDLE caller,HANDLE notification,HANDLE retire,HANDLE restored,
-    BOOL lease,BOOL borrowed,uint64_t console_window)
+    BOOL lease,BOOL borrowed)
 {
     DWORD pid=0,error,ignored;
     frontend_session_service *service=NULL;
@@ -28,21 +18,25 @@ static DWORD session_entry(HANDLE caller,HANDLE notification,HANDLE retire,HANDL
      * registration and startup-result calls. The inherited caller identifies
      * the real Console, not the broker's own Console. */
     error=OpenNtBaseClientConnectCurrent();
-    if(error){bootstrap_trace("connect",error);goto done;}
-    if(WaitForSingleObject(caller,0)!=WAIT_TIMEOUT){error=ERROR_ACCESS_DENIED;bootstrap_trace("identity",error);goto respond;}
+    if(error)goto done;
+    if(WaitForSingleObject(caller,0)!=WAIT_TIMEOUT){error=ERROR_ACCESS_DENIED;goto respond;}
     pid=GetProcessId(caller);
-    if(!pid || !AttachConsole(pid)){error=GetLastError();bootstrap_trace("attach",error);goto respond;}
-    if(lease && (uint64_t)(UINT_PTR)GetConsoleWindow()!=console_window)
-        {error=ERROR_ACCESS_DENIED;bootstrap_trace("console-match",error);goto respond;}
-    error=OpenNtBaseClientRegisterFrontendRoot(notification);if(error){bootstrap_trace("register",error);goto respond;}
+    if(!pid || !AttachConsole(pid)){error=GetLastError();goto respond;}
+    /* GetConsoleWindow is presentation metadata, not Console identity.  In
+     * particular, a modern pseudoconsole may report distinct message-only
+     * HWND values before and after AttachConsole.  NTSRV authenticates this
+     * bootstrap with its suspended-process admission, the creator PID, and
+     * the one-shot capability reservation; do not replace that authority
+     * with an implementation-dependent HWND comparison. */
+    error=OpenNtBaseClientRegisterFrontendRoot(notification);if(error)goto respond;
     error=OpenNtBaseClientReportCurrentConsoleMembers();
-    if(error){bootstrap_trace("console-identity",error);goto respond;}
+    if(error)goto respond;
     if(lease) {
-        error=OpenNtBaseClientRegisterFrontendLease(console_window,pid,borrowed,retire,restored);
-        if(error){bootstrap_trace("lease",error);goto respond;}
+        uint64_t actual_window=(uint64_t)(UINT_PTR)GetConsoleWindow();
+        error=OpenNtBaseClientRegisterFrontendLease(actual_window,pid,borrowed,retire,restored);
+        if(error)goto respond;
     }
-    error=frontend_service_start_process(notification,caller,retire,&service);
-    if(error){bootstrap_trace("service",error);goto respond;}
+    error=frontend_service_start_process(notification,caller,retire,&service);if(error)goto respond;
 respond:
     {
         DWORD sent=OpenNtBaseClientFrontendStartupResult(notification,error);
@@ -54,7 +48,6 @@ respond:
         if(!GetExitCodeThread(frontend_service_thread(service),&ignored))error=GetLastError();
         else error=ignored;
     }else error=GetLastError();
-    bootstrap_trace("thread",error);
 done:
     {
         DWORD close_error=frontend_service_close(service),ack_error=ERROR_SUCCESS;
@@ -91,6 +84,6 @@ int wmain(int argc,WCHAR **argv)
     }
     CsrPortHeap=HeapCreate(0,0,0);if(!CsrPortHeap)return ERROR_NOT_ENOUGH_MEMORY;
     result=session_entry((HANDLE)caller,(HANDLE)notification,(HANDLE)retire,
-        (HANDLE)restored,lease,borrowed,console_window);
+        (HANDLE)restored,lease,borrowed);
     HeapDestroy(CsrPortHeap);return (int)result;
 }

@@ -27,6 +27,16 @@ an aggregate acceptance dependency, not a claim that every service lies on an
 application's runtime path. Missing implementation returns to its named owner;
 this candidate must not absorb it or introduce temporary providers.
 
+### Minimum-diff admission gate
+
+This candidate is **Acceptance** under the shared [WOW32 minimum-diff admission
+governance](../etc/operations/wow32-queue-minimal-diff-admission-governance.md),
+which links its work to the external OpenNT-only seam ledger. Before production
+implementation, record the original owner, build condition, ABI and
+normal/failure/retirement ownership for every changed edge. consume owner evidence only; no temporary provider, test-only semantic substitute or hidden implementation is allowed. Static
+ledger closure, a symbol match or a successful link does not prove this
+candidate's product/runtime behavior.
+
 ## Proposed S tasks
 
 | S | Scope | Work | Required closure |

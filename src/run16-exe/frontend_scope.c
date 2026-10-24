@@ -30,6 +30,18 @@ static DWORD inherited_capability(const char *name,HANDLE *capability)
     *capability=(HANDLE)(ULONG_PTR)value;
     return ERROR_SUCCESS;
 }
+/* Windows Terminal/ConPTY exposes a message-only HWND for Console API
+ * compatibility. It is not a shared, visible Console window: a later
+ * AttachConsole process can receive a different message-only value. Keep the
+ * real HWND as a reuse hint, but represent this non-comparable observation
+ * as absent. Creator authentication remains in
+ * NTSRV's one-shot reservation. */
+static uint64_t frontend_console_window(void)
+{
+    HWND window=GetConsoleWindow();
+    return window && GetParent(window)!=HWND_MESSAGE ?
+        (uint64_t)(UINT_PTR)window : 0;
+}
 struct run16_frontend_scope {
     HANDLE capability,receipt;
     BOOL owns_environment,has_execution;
@@ -87,7 +99,7 @@ static DWORD scope_begin(run16_frontend_scope **output,BOOL lease,BOOL console_o
             &scope->capability,SYNCHRONIZE,FALSE,0)) { error=GetLastError();goto fail; }
     } else if(acquire_frontend) {
         frontend_connection connection={0};
-        uint64_t console_window=(uint64_t)(UINT_PTR)GetConsoleWindow();
+        uint64_t console_window=frontend_console_window();
         error=OpenNtBaseClientStartFrontend(console_window,lease && !console_owned,
             &connection.process,&connection.capability,&connection.restored);
         if(error)goto fail;

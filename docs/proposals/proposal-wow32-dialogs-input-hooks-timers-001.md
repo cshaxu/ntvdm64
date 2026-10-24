@@ -24,6 +24,17 @@ not another implementation of its transferred paths. See the approved
 C08 and inherited USER families: real dialog init/control/procedure/cancel/release; selected input, caret, keyboard, hook and timer operation families, callbacks and task-loss cleanup. Reuse W01/W02, never a second input router or scheduler.
 
 Expected reuse boundaries: [Messages, callbacks and task execution](proposal-wow32-message-task-execution-001.md), [USER objects and shared view](proposal-wow32-user-objects-shared-view-001.md), [Resource discovery and loading foundation](proposal-wow32-resource-loading-001.md).
+
+### Minimum-diff admission gate
+
+This candidate is **Red** under the shared [WOW32 minimum-diff admission
+governance](../etc/operations/wow32-queue-minimal-diff-admission-governance.md),
+which links its work to the external OpenNT-only seam ledger. Before production
+implementation, record the original owner, build condition, ABI and
+normal/failure/retirement ownership for every changed edge. first prove callback admission, native input ownership and task retirement; it may not create a second router or scheduler. Static
+ledger closure, a symbol match or a successful link does not prove this
+candidate's product/runtime behavior.
+
 Queue order is the planned execution order; it does not assert an unproved
 runtime dependency. At admission, prove which listed reuse edges are actual
 prerequisites; do not require an unrelated service merely because it is listed. A missing

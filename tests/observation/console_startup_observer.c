@@ -867,7 +867,7 @@ static BOOL console_caf_return(HANDLE input,const char *report_path,DWORD *front
     fprintf(report,"x-closed-window=%d frontend-alive=%d\n",!IsWindow(window),
         WaitForSingleObject(process,0)==WAIT_TIMEOUT);
 done:
-    fprintf(report,"result=%s stage=%s error=%lu\n",ok ? "pass" : "fail",stage,GetLastError());
+    fprintf(report,"result=%s stage=%s error=%lu\n",ok ? "pass" : "fail",stage,ok ? ERROR_SUCCESS : GetLastError());
     if(process)CloseHandle(process);fclose(report);return ok;
 }
 

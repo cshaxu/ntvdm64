@@ -24,6 +24,16 @@ they must not delay this milestone unless an actual failing call proves a
 dependency. Missing required implementation returns to its owner rather than
 being hidden inside acceptance code or bypassed by altered guest media.
 
+### Minimum-diff admission gate
+
+This candidate is **Acceptance** under the shared [WOW32 minimum-diff admission
+governance](../etc/operations/wow32-queue-minimal-diff-admission-governance.md),
+which links its work to the external OpenNT-only seam ledger. Before production
+implementation, record the original owner, build condition, ABI and
+normal/failure/retirement ownership for every changed edge. consume completed owner evidence only and return each defect to its named owner. Static
+ledger closure, a symbol match or a successful link does not prove this
+candidate's product/runtime behavior.
+
 ## Proposed stages
 
 | Stage | Work | Required evidence |

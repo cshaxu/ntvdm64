@@ -15,16 +15,16 @@ static BOOL parse_hex(const WCHAR *text,uint64_t maximum,uint64_t *value)
         if(result>(maximum-digit)/16)return FALSE;
         result=result*16+digit;
     }
-    if(!result)return FALSE;
     *value=result;
     return TRUE;
 }
 BOOL frontend_session_resource(const WCHAR *text,UINT_PTR *value)
 {
     uint64_t parsed;
-    if(!value || !parse_hex(text,(uint64_t)UINTPTR_MAX,&parsed))return FALSE;
+    if(!value || !parse_hex(text,(uint64_t)UINTPTR_MAX,&parsed) || !parsed)return FALSE;
     *value=(UINT_PTR)parsed;
     return TRUE;
 }
 BOOL frontend_session_window(const WCHAR *text,uint64_t *value)
+/* Zero means absent presentation metadata, never an inherited resource. */
 {return parse_hex(text,UINT64_MAX,value);}

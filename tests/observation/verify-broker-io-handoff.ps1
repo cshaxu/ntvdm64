@@ -103,7 +103,8 @@ try {
     }
     if($Case -eq 'nested-window') {
         $caf=Get-Content "$prefix.observer.caf.txt" -Raw
-        if($caf -notmatch 'caf-visible-window=1' -or $caf -notmatch 'result=pass error=0') {
+        if($caf -notmatch 'caf-visible-window=1' -or
+           $caf -notmatch '(?m)^result=pass stage=verify-owner error=0\r?$') {
             throw 'Window/CAF was not actually verified'
         }
     }

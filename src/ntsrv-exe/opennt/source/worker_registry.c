@@ -537,9 +537,12 @@ static VOID CALLBACK service_vdm_process_completed(void *context,BOOLEAN fired)
         if(parent->parent_is_worker_exit && GetExitCodeProcess(parent->vdm_exit_process,&code)) {
             parent->completed_receipt=parent->parent_receipt;
             parent->completed_exit_code=code;parent->worker_failed=FALSE;
+            /* Retirement checks this receipt as pending work. Publish the
+             * completion before advancing it, under the same service lock;
+             * the independent worker-rundown callback may already have run. */
+            (void)SetEvent(parent->parent_wait);
             if(parent->pending_vdm_binary==BINARY_TYPE_DOS && parent->task)
                 service_retire_completed_root(parent);
-            (void)SetEvent(parent->parent_wait);
         } else if(WaitForSingleObject(parent->parent_wait,0)==WAIT_TIMEOUT) {
             parent->worker_failed=TRUE;
             (void)SetEvent(parent->parent_wait);

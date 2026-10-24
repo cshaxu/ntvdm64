@@ -15,6 +15,17 @@ are inherited rather than reset. No new global source audit is required.
 Inherited: related UI/OLE slice: selected conversion, callback, cancel/error and ownership contracts. Use W06 dialogs and completed resource/service owners; enumerate both families separately and close every selected edge.
 
 Expected reuse boundaries: [Messages, callbacks and task execution](proposal-wow32-message-task-execution-001.md), [USER objects and shared view](proposal-wow32-user-objects-shared-view-001.md), [Modules, memory and resource aliases](proposal-wow32-modules-memory-aliases-001.md), [Files, directories, environment and OEM](proposal-wow32-files-environment-oem-001.md), [Resource discovery and loading foundation](proposal-wow32-resource-loading-001.md), [Dialogs, input, hooks and timers](proposal-wow32-dialogs-input-hooks-timers-001.md), [GDI identity, DC and drawing](proposal-wow32-gdi-dc-drawing-001.md), [Fonts, text and metafiles](proposal-wow32-fonts-text-metafiles-001.md), [Resource conversion, menus and accelerators](proposal-wow32-menus-resource-conversion-001.md), [Clipboard](proposal-wow32-clipboard-001.md), [DDE](proposal-wow32-dde-001.md), [Shell and layered Registry](proposal-wow32-shell-registry-001.md).
+
+### Minimum-diff admission gate
+
+This candidate is **Red** under the shared [WOW32 minimum-diff admission
+governance](../etc/operations/wow32-queue-minimal-diff-admission-governance.md),
+which links its work to the external OpenNT-only seam ledger. Before production
+implementation, record the original owner, build condition, ABI and
+normal/failure/retirement ownership for every changed edge. first reuse the W01/W02/W06 callback, resource and cancellation boundaries; no temporary dialog or OLE provider is allowed. Static
+ledger closure, a symbol match or a successful link does not prove this
+candidate's product/runtime behavior.
+
 Queue order is the planned execution order; it does not assert an unproved
 runtime dependency. At admission, prove which listed reuse edges are actual
 prerequisites; do not require an unrelated service merely because it is listed. A missing
