@@ -160,7 +160,8 @@ int wmain(int argc, WCHAR **argv)
     fprintf(report, "attached=%u attach-error=%lu submitted=%u frontend=%lu observed=%u\n",
         attached, attach_error, submitted, frontend_pid, observed);
     if (input != INVALID_HANDLE_VALUE) write_text(input, "exit\r");
-    WaitForSingleObject(child.hProcess, 10000);
+    if (WaitForSingleObject(child.hProcess, 10000) != WAIT_OBJECT_0)
+        observed = FALSE;
     GetExitCodeProcess(child.hProcess, &code);
     fprintf(report, "exit=%lu\n", code);
     if (input != INVALID_HANDLE_VALUE) CloseHandle(input);
@@ -168,5 +169,5 @@ int wmain(int argc, WCHAR **argv)
     if (attached) FreeConsole();
     if (WaitForSingleObject(child.hProcess, 0) == WAIT_TIMEOUT) TerminateProcess(child.hProcess, 0x53504354u);
     CloseHandle(child.hProcess); fclose(report);
-    return observed ? 0 : 1;
+    return observed && code == 0 ? 0 : 1;
 }

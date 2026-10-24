@@ -35,9 +35,11 @@ unchanged. S5 refreshes all ten images from one staged current build and
 records its authenticated direct-root native-CUI delivery repair and
 sequence-specific final-frame barrier in the
 [S5 route record](../etc/evidence/m0-t451-s5-direct-root-native-cui-route.md).
-The live visible-frontend matrix remains an explicit acceptance limitation in
-that record because the automated execution desktop was unavailable; it is not
-reported as a passing guest run. During S3, the published Run16 image
+The earlier restricted-token desktop failure is superseded by the documented
+desktop-capable modern-PowerShell runner.  The active S5 record now includes
+passing private-desktop real-carrier return probes in both DOS→native and
+native→DOS directions; remaining S5 checks still run from the same token and
+are not inferred from screenshots. During S3, the published Run16 image
 additionally corrected the host-specific cold-NTSRV RPC startup classification
 without changing its existing five-second bootstrap grace; its exact build,
 cold Console exercise and ten-image hash evidence are in the

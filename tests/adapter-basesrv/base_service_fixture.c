@@ -143,7 +143,10 @@ int fixture_management_gui(void)
     lstrcpynW(gui_image,image,ARRAYSIZE(gui_image));
     {WCHAR *leaf=wcsrchr(gui_image,L'\\');GUI_CHECK(leaf);*leaf=0;
         leaf=wcsrchr(gui_image,L'\\');GUI_CHECK(leaf);*leaf=0;
-        GUI_CHECK(!wcscat_s(gui_image,ARRAYSIZE(gui_image),L"\\ntmon.exe") &&
+        /* The fixture runs from the service Ninja subtree.  Use the sibling
+         * GUI product itself as a suspended target: ntmon is CUI and must be
+         * rejected by BindNativeTarget's independent PE-subsystem check. */
+        GUI_CHECK(!wcscat_s(gui_image,ARRAYSIZE(gui_image),L"\\service\\ntsrv.exe") &&
             GetFileAttributesW(gui_image)!=INVALID_FILE_ATTRIBUTES);}
     swprintf_s(command,ARRAYSIZE(command),L"\"%ls\"",gui_image);
     GUI_CHECK(CreateProcessW(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED,
@@ -274,24 +277,61 @@ int fixture_shared_worker_residency(void)
     EnterCriticalSection(&service->lock);
     worker->native_worker=TRUE;worker->console=root->console;
     worker->retained_frontend_root=root_generation;root->frontend_closing=FALSE;
+    watch.close_kind=WORKER_CLOSE_NONE;
+    RETIRE_CHECK(ResetEvent(watch.shutdown));
+    /* An inner DOS/native Run16 shares the root but is never its creator.
+     * Its completion must not admit a terminal-retire barrier that blocks
+     * the live parent carrier's later command/exit completion. */
     root->frontend_creator_generation=generation+1;
-    service_retire_completed_root(worker,generation);
-    RETIRE_CHECK(!root->frontend_closing);
+    root->frontend_terminal_retire=FALSE;
+    service_retire_completed_root(worker);
+    RETIRE_CHECK(!root->frontend_terminal_retire && !root->frontend_closing &&
+        watch.close_kind==WORKER_CLOSE_NONE &&
+        WaitForSingleObject(watch.shutdown,0)==WAIT_TIMEOUT);
     root->frontend_creator_generation=generation;root->frontend_borrowed=TRUE;
-    service_retire_completed_root(worker,generation);
+    service_retire_completed_root(worker);
     RETIRE_CHECK(!root->frontend_closing);
     root->frontend_borrowed=FALSE;
-    service_retire_completed_root(worker,generation);
-    RETIRE_CHECK(root->frontend_closing);
+    service_retire_completed_root(worker);
+    RETIRE_CHECK(root->frontend_terminal_retire && !root->frontend_closing);
+    RETIRE_CHECK(watch.close_kind==WORKER_CLOSE_WORKER &&
+        WaitForSingleObject(watch.shutdown,0)==WAIT_OBJECT_0);
+    RemoveEntryList(&watch.link);
+    service_advance_terminal_root_retire(service,root_generation);
+    RETIRE_CHECK(root->frontend_closing && !root->frontend_terminal_retire);
+    /* Probe the inverse COMMAND exit shape: a DOS root is complete while a
+     * nested NTVWM-CUI carrier is idle.  NTSRV must issue the same close,
+     * keep the frontend lease until actual carrier rundown, then arm the
+     * existing launcher return path.  No shell name or timing participates. */
+    RETIRE_CHECK(root->frontend_retire=CreateEventW(NULL,TRUE,FALSE,NULL));
+    root->frontend_closing=FALSE;root->frontend_terminal_retire=FALSE;
+    root->frontend_return_pending=FALSE;root->frontend_creator_generation=root_generation;
+    root->retained_frontend_root=root_generation;root->console=(HANDLE)456;
+    worker->console=root->console;worker->native_worker=TRUE;worker->native_inflight=1;
+    RETIRE_CHECK(IsListEmpty(&worker->win32records));
+    watch.close_kind=WORKER_CLOSE_NONE;
+    InsertTailList(&service->worker_watches,&watch.link);
+    RETIRE_CHECK(ResetEvent(watch.shutdown));
+    service_retire_completed_root(root);
+    RETIRE_CHECK(root->frontend_terminal_retire && !root->frontend_closing);
+    RETIRE_CHECK(watch.close_kind==WORKER_CLOSE_NONE &&
+        WaitForSingleObject(watch.shutdown,0)==WAIT_TIMEOUT);
+    worker->native_inflight=0;
+    service_advance_terminal_root_retire(service,root_generation);
+    RETIRE_CHECK(watch.close_kind==WORKER_CLOSE_WORKER &&
+        WaitForSingleObject(watch.shutdown,0)==WAIT_OBJECT_0);
+    RemoveEntryList(&watch.link);
+    service_advance_terminal_root_retire(service,root_generation);
+    RETIRE_CHECK(root->frontend_closing && !root->frontend_terminal_retire &&
+        root->frontend_return_pending);
     LeaveCriticalSection(&service->lock);
-    EnterCriticalSection(&service->lock);RemoveEntryList(&watch.link);LeaveCriticalSection(&service->lock);
     RETIRE_CHECK(!OpenNtBaseServiceDisconnect(root));
     RETIRE_CHECK(!OpenNtBaseServiceDisconnect(worker));
     RETIRE_CHECK(OpenNtBaseServiceIsEmpty(service) && OpenNtBaseServiceStop(service));
     RETIRE_CHECK(TerminateProcess(child.hProcess,0));
     CloseHandle(child.hThread);CloseHandle(child.hProcess);CloseHandle(watch.shutdown);
     CloseHandle(watch.console_close);
-    puts("PASS shared GUI carrier: native/WOW residency; DOS/native common root authority and Console-close");
+    puts("PASS shared GUI carrier: native/WOW residency, root authority, Console-close, and terminal idle-CUI carrier retirement");
     return 0;
 #undef RETIRE_CHECK
 }

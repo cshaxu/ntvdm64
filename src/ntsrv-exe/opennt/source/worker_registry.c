@@ -44,7 +44,8 @@ DWORD service_bind_worker_root(OPENNT_BASE_SERVICE *service,HANDLE worker,
     SERVICE_COMPARE_HANDLES compare=service ? service->compare_handles : NULL;
     if(!worker || !root || !root->frontend_capability)return ERROR_INVALID_PARAMETER;
     if(!compare)return ERROR_INVALID_STATE;
-    if(root->frontend_closing || root->frontend_close_draining || WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT)
+    if(root->frontend_closing || root->frontend_close_draining || root->frontend_terminal_retire ||
+        WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT)
         return ERROR_PIPE_NOT_CONNECTED;
     for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
         OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
@@ -78,7 +79,7 @@ static BOOL service_native_root_selectable(OPENNT_BASE_SERVICE *service,
             root_link=root_link->Flink) {
             OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(root_link,OPENNT_BASE_CONNECTION,service_link);
             if(root->process.SequenceNumber==bound_root && root->frontend_capability &&
-                !root->frontend_closing && !root->frontend_close_draining &&
+                !root->frontend_closing && !root->frontend_close_draining && !root->frontend_terminal_retire &&
                 WaitForSingleObject(root->process.ProcessHandle,0)==WAIT_TIMEOUT)return TRUE;
         }
         return FALSE;
@@ -97,12 +98,14 @@ VOID CALLBACK service_worker_terminated(PVOID context,BOOLEAN fired)
 {
     OPENNT_BASE_WORKER_WATCH *watch=context;
     OPENNT_BASE_CONNECTION *connection=NULL;
+    DWORD root_generation;
     LIST_ENTRY *entry;
     OPENNT_BASE_EMPTY_NOTIFY notify=NULL;
     void *notify_context=NULL;
     (void)fired;
     if (!watch || !watch->service) return;
     EnterCriticalSection(&watch->service->lock);
+    root_generation=watch->frontend_root_generation;
     if(watch->kind!=OPENNT_BASE_WORKER_NATIVE)
         service_preserve_parent_results(watch->service,watch->console,watch->wow);
     /* Equivalent to the selected BaseClientDisconnectRoutine: a one-shot
@@ -144,6 +147,7 @@ VOID CALLBACK service_worker_terminated(PVOID context,BOOLEAN fired)
         InsertTailList(&watch->service->retired_connections,&connection->retired_link);
     }
     RemoveEntryList(&watch->link);
+    if(root_generation)service_advance_terminal_root_retire(watch->service,root_generation);
     WakeAllConditionVariable(&watch->service->frontend_changed);
     service_signal_frontend_states(watch->service);
     service_signal_worker_states(watch->service);
@@ -534,7 +538,7 @@ static VOID CALLBACK service_vdm_process_completed(void *context,BOOLEAN fired)
             parent->completed_receipt=parent->parent_receipt;
             parent->completed_exit_code=code;parent->worker_failed=FALSE;
             if(parent->pending_vdm_binary==BINARY_TYPE_DOS && parent->task)
-                service_retire_completed_root(parent,0);
+                service_retire_completed_root(parent);
             (void)SetEvent(parent->parent_wait);
         } else if(WaitForSingleObject(parent->parent_wait,0)==WAIT_TIMEOUT) {
             parent->worker_failed=TRUE;

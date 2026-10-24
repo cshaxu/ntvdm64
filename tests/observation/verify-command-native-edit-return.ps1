@@ -11,7 +11,6 @@ if($env:MVDM_OBSERVER_WINDOW_INPUT){
 $Observer=(Resolve-Path -LiteralPath $Observer).Path
 $PackageRoot=(Resolve-Path -LiteralPath $PackageRoot).Path
 . "$PSScriptRoot/isolated_package_cleanup.ps1"
-$binary=Get-PackageBinaryRoot $PackageRoot
 $ReportPath=[IO.Path]::GetFullPath($ReportPath)
 $build=(Resolve-Path (Join-Path $PSScriptRoot '../../build')).Path+'\'
 if(!$ReportPath.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)){
@@ -20,19 +19,29 @@ if(!$ReportPath.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)){
 if(Test-Path -LiteralPath $ReportPath){throw 'Use a fresh report'}
 $edit=Join-Path $env:WINDIR 'System32\edit.exe'
 if(!(Test-Path -LiteralPath $edit)){throw 'Installed modern EDIT is required'}
-$start=[Diagnostics.ProcessStartInfo]::new($Observer)
-$start.UseShellExecute=$false
-$start.WindowStyle=[Diagnostics.ProcessWindowStyle]::Hidden
-$start.EnvironmentVariables['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'
-$mem=Join-Path $binary 'MEM.EXE'
-$text="cmd.exe /d`r$edit`r$([char]17)`recho S40-NATIVE-RETURN-OK`rexit`r$mem`rexit`r"
-foreach($argument in @((Join-Path $binary 'run16.exe'),$PackageRoot,$ReportPath,
-    (Join-Path $binary 'COMMAND.COM'),'--observe-console-input-text',$text,
-    '--observe-console-line-delay-ms','1800','--observation-timeout-ms','35000')){
-    $start.ArgumentList.Add($argument)
-}
-$process=[Diagnostics.Process]::Start($start)
+$stage=$null
+$scope=$null
+$process=$null
 try {
+    # The immutable guest sees the launch path.  A full evidence path can
+    # fail before either carrier starts, which is not a handoff result.  Use
+    # the existing checked real short stage, then retain its exact identity
+    # for the cleanup boundary below.
+    $stage=New-PhysicalRuntimeStage $PackageRoot
+    $scope=New-IsolatedPackageScope $stage
+    $binary=Get-PackageBinaryRoot $stage
+    $start=[Diagnostics.ProcessStartInfo]::new($Observer)
+    $start.UseShellExecute=$false
+    $start.WindowStyle=[Diagnostics.ProcessWindowStyle]::Hidden
+    $start.EnvironmentVariables['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'
+    $mem=Join-Path $binary 'MEM.EXE'
+    $text="cmd.exe /d`r$edit`r$([char]17)`recho S40-NATIVE-RETURN-OK`rexit`r$mem`rexit`r"
+    foreach($argument in @((Join-Path $binary 'run16.exe'),$stage,$ReportPath,
+        (Join-Path $binary 'COMMAND.COM'),'--observe-console-input-text',$text,
+        '--observe-console-line-delay-ms','1800','--observation-timeout-ms','35000')){
+        $start.ArgumentList.Add($argument)
+    }
+    $process=[Diagnostics.Process]::Start($start)
     if(!$process.WaitForExit(60000)){throw 'EDIT return observer timed out'}
     $report=Get-Content -LiteralPath $ReportPath -Raw
     $editor=Get-Content -LiteralPath ($ReportPath+'.line-02.console.txt') -Raw
@@ -50,6 +59,11 @@ try {
     }
     'PASS real modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion'
 } finally {
-    if(!$process.HasExited){$process.Kill();$process.WaitForExit()}
-    $process.Dispose()
+    if($process){
+        if(!$process.HasExited){$process.Kill();$process.WaitForExit()}
+        $process.Dispose()
+    }
+    try {if($scope){Stop-IsolatedPackageScope $scope}} finally {
+        if($stage){Remove-PhysicalRuntimeStage $stage}
+    }
 }

@@ -499,6 +499,7 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
                 OPENNT_BASE_CONNECTION,service_link);
             if(candidate->process.SequenceNumber==connection->retained_frontend_root &&
                 candidate->frontend_capability && !candidate->frontend_closing && !candidate->frontend_close_draining &&
+                !candidate->frontend_terminal_retire &&
                 WaitForSingleObject(candidate->process.ProcessHandle,0)==WAIT_TIMEOUT) {
                 root=candidate;break;
             }

@@ -154,6 +154,37 @@ clean only its pinned owned processes, and restore its environment even on
 failure. Tests must not create or depend on `subst` drive mappings. Explicit
 fixture cleanup is not evidence of normal retirement.
 
+### Private-desktop test token
+
+Tests that create a private desktop are valid only when their checked-in
+runner is launched from a desktop-capable, medium-integrity modern `pwsh`
+token. A constrained or low-integrity command executor that returns
+`CreateDesktopW` access denied is a runner-configuration failure, not an
+unavailable desktop, a product result, or authority to skip the test. Reuse
+the normal private-desktop runner and record its host path, token class, PID,
+script hash and child-case results in the evidence. Do not substitute legacy
+Windows PowerShell: tracked runners derive their child host from the parent
+and require the modern `pwsh` command surface. The runner still owns its
+private desktop and cleanup; this rule grants no foreground interaction or
+desktop-control requirement.
+
+For an agent invocation, the authoritative launch is the configured modern
+`pwsh.exe` in the desktop-capable execution context, running the checked-in
+test script with `-NoProfile -ExecutionPolicy Bypass -File <script>`.  The
+agent must request that execution context before launching the runner; it must
+not run the same script directly from a restricted tool token and then report
+that no desktop is available.  A `result=not-started` artifact is evidence of
+the wrong parent token, not a runtime verdict.  This is a launch rule only:
+tests remain isolated, background-owned, and may not use desktop automation.
+
+When that runner exercises an immutable DOS/WOW guest, build-root staging is
+also not a valid substitute for its runtime root. Use the checked-in
+`New-PhysicalRuntimeStage` helper: it makes a short, real, helper-owned
+physical directory and records its marker before launch. This preserves the proven
+legacy path budget without `subst`, junctions, or a drive alias. Keep the
+stage on a failing run for diagnosis; remove it only through the helper after
+its identity checks pass.
+
 Test only the approved timed policies in the
 [lifecycle boundary](../design/ARCHITECTURE.md#approved-lifecycle-target-boundary)
 at their production owner, using explicit time inputs where supported. Cover

@@ -18,8 +18,12 @@ if(!(Test-Path (Split-Path $prefix -Parent))) {throw 'Declare/create the build r
 if(Test-Path "$prefix.observer") {throw 'Preserve existing run evidence; choose a fresh prefix'}
 if(Get-Process ntsrv -ErrorAction SilentlyContinue) {throw 'An existing broker must finish before this isolated probe'}
 . "$PSScriptRoot/isolated_package_cleanup.ps1"
-$testScope=New-IsolatedPackageScope $runtime
-$binary=Get-PackageBinaryRoot $runtime
+# The 16-bit guest sees its launch path.  A deep Ninja/evidence path can fail
+# before worker registration and thereby masquerade as a broker failure; use
+# the checked, real short stage rather than a drive alias or a path heuristic.
+$stage=$null
+$testScope=$null
+$binary=$null
 $names='run16.exe','ntsrv.exe','ntvdm.exe','ntvwm.exe','ntcon.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL'
 foreach($hook in 'nthook32.dll','nthook64.dll') {
     if(Test-Path (Join-Path $binary $hook)){$names+=,$hook}
@@ -44,6 +48,9 @@ $environmentNames='MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_WINDOW_INPUT','
 $saved=@{}
 foreach($name in $environmentNames) {$saved[$name]=[Environment]::GetEnvironmentVariable($name,'Process')}
 try {
+    $stage=New-PhysicalRuntimeStage $runtime
+    $testScope=New-IsolatedPackageScope $stage
+    $binary=Get-PackageBinaryRoot $stage
     # Run from the real build-owned package path. A global drive alias is not
     # test isolation and would make failure attribution depend on unrelated
     # process-wide state.
@@ -66,7 +73,7 @@ try {
         # fitting the observer's current-row echo acknowledgement.
         $input='.\run16.exe '+(Join-Path $launchBinary 'COMMAND.COM')+"`rver`rmem`rexit`recho S6-PARENT-RETURN`rexit /b 23`r"
     }
-    [pscustomobject]@{Runtime=$runtime;Binary=$binary;LaunchBinary=$launchBinary;
+    [pscustomobject]@{Runtime=$stage;Binary=$binary;LaunchBinary=$launchBinary;
         Observer=$observerLaunch;NativeMachine=$NativeMachine;Case=$Case;Input=$input;
         ShortHistory=$env:MVDM_OBSERVER_SHORT_HISTORY} |
         ConvertTo-Json | Set-Content "$prefix.launch.json" -Encoding UTF8
@@ -108,6 +115,7 @@ try {
     "PASS broker I/O $Case $NativeMachine : actual CMD/DOS input, parent return and direct exit=23"
 } finally {
     try {Stop-IsolatedPackageScope $testScope}finally{
+        if($stage){Remove-PhysicalRuntimeStage $stage}
         foreach($name in $environmentNames) {
             # PowerShell can marshal null to an empty string here. Native
             # GetEnvironmentVariable(name,NULL,0) sees that as present (1),

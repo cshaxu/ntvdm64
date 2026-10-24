@@ -699,7 +699,7 @@ DWORD OpenNtBaseServiceFinishNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD 
     if(io_error){error=io_error;goto done;}
     if(idle_worker && (io_flags & NATIVE_COMPLETION_CONSOLE_EMPTY)) {
         EnterCriticalSection(&caller->service->lock);
-        service_retire_completed_root(caller,idle_worker);
+        service_retire_completed_root(caller);
         LeaveCriticalSection(&caller->service->lock);
     }
 done:

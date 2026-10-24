@@ -501,11 +501,11 @@ static DWORD service_copy_management_tree(OPENNT_BASE_SERVICE *service,
         if(service_management_root(service,root->process.SequenceNumber)!=root)continue;
         item.key=service_management_key(service,MANAGEMENT_FRONTEND,root->process.SequenceNumber,0);
         item.process_id=GetProcessId(root->process.ProcessHandle);
-        item.display_state=(root->frontend_closing || root->frontend_close_draining) ? MANAGEMENT_CLOSING : MANAGEMENT_IDLE;
-        if(!root->frontend_closing && !root->frontend_close_draining && !OpenNtBaseServiceFrontendUsage(root,item.process_id,
+        item.display_state=(root->frontend_closing || root->frontend_close_draining || root->frontend_terminal_retire) ? MANAGEMENT_CLOSING : MANAGEMENT_IDLE;
+        if(!root->frontend_closing && !root->frontend_close_draining && !root->frontend_terminal_retire && !OpenNtBaseServiceFrontendUsage(root,item.process_id,
             root->process.SequenceNumber,&pending,&tasks) && (pending || tasks))
             item.display_state=MANAGEMENT_BUSY;
-        item.actions=(root->frontend_closing || root->frontend_close_draining) ? 0 : MANAGEMENT_CAN_CLOSE;
+        item.actions=(root->frontend_closing || root->frontend_close_draining || root->frontend_terminal_retire) ? 0 : MANAGEMENT_CAN_CLOSE;
         if(GetProcessTimes(root->process.ProcessHandle,&started,&ignored,&ignored,&ignored))
             item.started_filetime=((uint64_t)started.dwHighDateTime<<32)|started.dwLowDateTime;
         lstrcpynW(item.image,L"NTCON",OPENNT_BASE_WORKER_IMAGE_CHARS);

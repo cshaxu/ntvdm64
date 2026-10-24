@@ -135,6 +135,10 @@ struct OPENNT_BASE_CONNECTION {
     HANDLE frontend_state_changed; /* Root-private auto-reset retirement wake. */
     HANDLE worker_io_release; /* Service-owned auto-reset I/O instruction, not a task. */
     BOOL frontend_closing; /* Admission barrier, never execution/task state. */
+    /* A completed root may leave only idle NTVWM-CUI carrier(s).  NTSRV
+     * closes those through the normal worker command, then turns this into
+     * the existing frontend-close transaction from their real exit rundown. */
+    BOOL frontend_terminal_retire;
     /* An explicit frontend close must let an attached DOS worker complete its
      * original Console reset before NTCON restores the borrowed parent mode.
      * This is a close-order barrier, not another worker/task state. */
@@ -317,7 +321,9 @@ DWORD service_authorize_worker_io(OPENNT_BASE_CONNECTION *worker,DWORD pid);
 DWORD service_take_native_command(OPENNT_BASE_CONNECTION *root,DWORD pid,
     DWORD generation,DWORD capacity,BYTE *payload,DWORD *bytes,
     HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request,DWORD *caller_generation);
-void service_retire_completed_root(OPENNT_BASE_CONNECTION *parent,DWORD idle_worker);
+void service_retire_completed_root(OPENNT_BASE_CONNECTION *parent);
+/* Service lock held after a worker watch is removed. */
+void service_advance_terminal_root_retire(OPENNT_BASE_SERVICE *service,DWORD root_generation);
 DWORD service_bind_existing_console(OPENNT_BASE_CONNECTION *connection);
 /* Policy-owner time inputs; production callers pass GetTickCount64 through
  * the public wrappers. No mutable clock or runtime timeout override. */

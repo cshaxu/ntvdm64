@@ -588,57 +588,86 @@ DWORD OpenNtBaseServiceReconcileFrontends(OPENNT_BASE_SERVICE *service)
 /* Service lock held. The owner-specific boundary proves completion before
  * entering this shared Console-return/retirement path: original nonzero
  * DosSesId worker exit, or native final I/O acknowledgement with an empty
- * backend Console. Native passes its idle worker generation; DOS passes zero.
+ * backend Console. The caller has already consumed its exact completion;
  * PIF CloseOnExit is never reimplemented here. */
-void service_retire_completed_root(OPENNT_BASE_CONNECTION *parent,DWORD idle_worker)
+void service_retire_completed_root(OPENNT_BASE_CONNECTION *parent)
 {
-    LIST_ENTRY *link,*other_link;
+    LIST_ENTRY *link;
     for(link=parent->service->connections.Flink;
         link!=&parent->service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-        BOOL pending=FALSE;
         if(root->process.SequenceNumber!=parent->retained_frontend_root ||
             !root->frontend_capability || root->frontend_closing ||
             !service_root_console_matches(root,parent->console))continue;
-        if(idle_worker) {
-            LIST_ENTRY *watch_link;
-            /* Native CloseOnExit applies only to this launcher's self-created
-             * Console. A nested request never retires its parent's frontend. */
-            if(root->frontend_borrowed || root->frontend_creator_generation!=parent->process.SequenceNumber)continue;
-            for(watch_link=parent->service->worker_watches.Flink;
-                watch_link!=&parent->service->worker_watches;watch_link=watch_link->Flink) {
-                OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(watch_link,OPENNT_BASE_WORKER_WATCH,link);
-                if(watch->wow || WaitForSingleObject(watch->process.ProcessHandle,0)!=WAIT_TIMEOUT)continue;
-                if(watch->process.SequenceNumber==idle_worker)continue;
-                if(watch->frontend_root_generation==root->process.SequenceNumber){pending=TRUE;break;}
-            }
-            if(pending)continue;
-        } else if(service_root_has_worker(root))continue;
-        for(other_link=parent->service->connections.Flink;
-            other_link!=&parent->service->connections;other_link=other_link->Flink) {
-            OPENNT_BASE_CONNECTION *other=CONTAINING_RECORD(other_link,OPENNT_BASE_CONNECTION,service_link);
-            if(other==parent || other->retained_frontend_root!=root->process.SequenceNumber)continue;
-            if((other->pending_creation && !other->registered_worker) ||
-                (other->parent_wait && WaitForSingleObject(other->parent_wait,0)==WAIT_TIMEOUT) ||
-                other->frontend_request_root==root->process.SequenceNumber ||
-                other->frontend_channel_root==root->process.SequenceNumber) {
-                pending=TRUE;break;
-            }
-        }
-        if(idle_worker)for(other_link=parent->service->connections.Flink;
-            other_link!=&parent->service->connections;other_link=other_link->Flink) {
-            OPENNT_BASE_CONNECTION *other=CONTAINING_RECORD(other_link,OPENNT_BASE_CONNECTION,service_link);
-            if(other->native_worker && service_worker_root(other)==root->process.SequenceNumber &&
-                (other->native_inflight || !IsListEmpty(&other->win32records))) {pending=TRUE;break;}
-        }
-        if(pending)continue;
-        /* Arm the existing return acknowledgement before the shutdown
-         * notification. The launcher must not return before Console cleanup. */
-        if(root->frontend_creator_generation==parent->process.SequenceNumber && root->frontend_retire)
-            parent->frontend_return_pending=TRUE;
-        root->frontend_closing=TRUE;
-        service_signal_frontend_states(parent->service);
-        WakeAllConditionVariable(&parent->service->frontend_changed);
+        /* A child completion is not a terminal-root completion.  In
+         * particular, COMMAND can enter a DOS worker from an active NTVWM
+         * carrier (and the reverse); the inner Run16 has the same retained
+         * root but did not create it.  Starting a terminal transaction here
+         * would freeze the still-live parent before it can consume `exit`.
+         * The root creator is the only authority that may start its
+         * self-created Console's retirement, for both DOS and native paths. */
+        if(root->frontend_borrowed ||
+            root->frontend_creator_generation!=parent->process.SequenceNumber)continue;
+        /* Completion has one root-owned meaning irrespective of whether its
+         * source was DOS or NTVWM-CUI.  Later worker exits re-enter the same
+         * broker transaction; no component guesses that another carrier is
+         * already idle, and no component contacts Run16 or NTCON directly. */
+        root->frontend_terminal_retire=TRUE;
+        service_advance_terminal_root_retire(parent->service,root->process.SequenceNumber);
         break;
     }
+}
+
+/* Service lock held.  A terminal root transaction becomes frontend close
+ * only after every NTSRV-requested idle native carrier has really exited. */
+void service_advance_terminal_root_retire(OPENNT_BASE_SERVICE *service,DWORD root_generation)
+{
+    LIST_ENTRY *link;
+    OPENNT_BASE_CONNECTION *root=NULL,*creator=NULL;
+    BOOL live=FALSE,pending=FALSE;
+    if(!service || !root_generation)return;
+    for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
+        OPENNT_BASE_CONNECTION *candidate=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
+        if(candidate->process.SequenceNumber==root_generation) {root=candidate;break;}
+    }
+    if(!root || !root->frontend_terminal_retire || root->frontend_closing)return;
+    for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
+        OPENNT_BASE_CONNECTION *other=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
+        if(other->retained_frontend_root!=root_generation)continue;
+        if((other->pending_creation && !other->registered_worker) ||
+            (other->parent_wait && WaitForSingleObject(other->parent_wait,0)==WAIT_TIMEOUT) ||
+            other->frontend_request_root==root_generation || other->frontend_channel_root==root_generation) {
+            pending=TRUE;break;
+        }
+    }
+    if(pending)return;
+    for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
+        OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
+        OPENNT_BASE_CONNECTION *worker=NULL;
+        LIST_ENTRY *worker_link;
+        if(watch->frontend_root_generation!=root_generation ||
+            WaitForSingleObject(watch->process.ProcessHandle,0)!=WAIT_TIMEOUT)continue;
+        live=TRUE;
+        for(worker_link=service->connections.Flink;worker_link!=&service->connections;worker_link=worker_link->Flink) {
+            OPENNT_BASE_CONNECTION *candidate=CONTAINING_RECORD(worker_link,OPENNT_BASE_CONNECTION,service_link);
+            if(candidate->process.SequenceNumber==watch->process.SequenceNumber) {worker=candidate;break;}
+        }
+        if(watch->wow || watch->kind!=OPENNT_BASE_WORKER_NATIVE || watch->native_gui_launcher ||
+            !worker || !worker->native_worker || worker->native_gui_launcher ||
+            worker->native_inflight || !IsListEmpty(&worker->win32records))return;
+        if(watch->close_kind==WORKER_CLOSE_NONE) {
+            if(!watch->shutdown || !SetEvent(watch->shutdown))return;
+            watch->close_kind=WORKER_CLOSE_WORKER;
+        }
+    }
+    if(live)return;
+    for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
+        OPENNT_BASE_CONNECTION *candidate=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
+        if(candidate->process.SequenceNumber==root->frontend_creator_generation) {creator=candidate;break;}
+    }
+    if(root->frontend_retire && creator)creator->frontend_return_pending=TRUE;
+    root->frontend_terminal_retire=FALSE;
+    root->frontend_closing=TRUE;
+    service_signal_frontend_states(service);
+    WakeAllConditionVariable(&service->frontend_changed);
 }

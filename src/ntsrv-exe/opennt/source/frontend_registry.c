@@ -465,7 +465,7 @@ DWORD OpenNtBaseServiceAcquireFrontendRoot(OPENNT_BASE_CONNECTION *caller,DWORD 
         for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
             OPENNT_BASE_CONNECTION *item=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
             if(item->frontend_console_window==console_window && item->frontend_capability &&
-                !item->frontend_closing && !item->frontend_close_draining &&
+                !item->frontend_closing && !item->frontend_close_draining && !item->frontend_terminal_retire &&
                 WaitForSingleObject(item->process.ProcessHandle,0)==WAIT_TIMEOUT) {
                 if(root){error=ERROR_INVALID_STATE;goto done;}
                 root=item;
@@ -1075,7 +1075,8 @@ DWORD OpenNtBaseServiceRetainFrontendRoot(OPENNT_BASE_CONNECTION *connection,
          link!=&connection->service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
         if (!root->frontend_capability || !compare(root->frontend_capability,capability)) continue;
-        if (root->frontend_closing || root->frontend_close_draining || WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT) {
+        if (root->frontend_closing || root->frontend_close_draining || root->frontend_terminal_retire ||
+            WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT) {
             error=ERROR_PIPE_NOT_CONNECTED;goto done;
         }
         if (connection->console && connection->console!=root->console &&
@@ -1179,7 +1180,8 @@ DWORD OpenNtBaseServiceAcquireConsoleContext(OPENNT_BASE_CONNECTION *connection,
             (DWORD)(ULONG_PTR)candidate->process.ClientId.UniqueProcess==GetProcessId(root_process) &&
             candidate->frontend_capability) { root=candidate;break; }
     }
-    if (!root || root->frontend_closing || root->frontend_close_draining || WaitForSingleObject(root_process,0)!=WAIT_TIMEOUT) {
+    if (!root || root->frontend_closing || root->frontend_close_draining || root->frontend_terminal_retire ||
+        WaitForSingleObject(root_process,0)!=WAIT_TIMEOUT) {
         error=ERROR_PIPE_NOT_CONNECTED;goto done;
     }
     error=service_acquire_console_context(root,connection->console,
@@ -1210,6 +1212,7 @@ DWORD OpenNtBaseServiceBindConsoleContext(OPENNT_BASE_CONNECTION *connection,
         OPENNT_BASE_CONSOLE_CONTEXT *context=CONTAINING_RECORD(link,OPENNT_BASE_CONSOLE_CONTEXT,link);
         if (!compare(context->capability,capability)) continue;
         if (context->root->frontend_closing || context->root->frontend_close_draining ||
+            context->root->frontend_terminal_retire ||
             WaitForSingleObject(context->root->process.ProcessHandle,0)!=WAIT_TIMEOUT) {
             error=ERROR_PIPE_NOT_CONNECTED;break;
         }
@@ -1233,7 +1236,8 @@ static DWORD service_attach_frontend(OPENNT_BASE_CONNECTION *connection,
     EVENT_BASIC_INFORMATION event_info;
     HANDLE local_pipe=NULL,local_ready=NULL;
     DWORD error,flags;
-    if(connection->frontend_closing || connection->frontend_close_draining) return ERROR_PIPE_NOT_CONNECTED;
+    if(connection->frontend_closing || connection->frontend_close_draining ||
+        connection->frontend_terminal_retire) return ERROR_PIPE_NOT_CONNECTED;
     if(!route || route->root!=connection || !route->io_requested || route->io_releasing ||
         GetProcessId(route->worker)!=GetProcessId(worker))return ERROR_ACCESS_DENIED;
     if(route->pipe || route->ready || route->delivered)return ERROR_ALREADY_EXISTS;

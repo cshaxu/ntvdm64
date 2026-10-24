@@ -36,8 +36,8 @@ owner and records the provider/consumer boundary used by the S4 closure.
 
 [T451 S5 direct-root native CUI route record](evidence/m0-t451-s5-direct-root-native-cui-route.md)
 records the authenticated execution-Console delivery repair, the distinct
-final-frame ordering candidate, ten-image publication, and the unavailable
-interactive-desktop limitation on the final runtime matrix.
+final-frame ordering candidate, terminal-root retirement correction, ten-image
+publication, and the corrected private-desktop token boundary.
 
 [T450 S1--S4 closure ledger](evidence/m0-t450-s1-s4-closure-ledger.md)
 indexes the completed Win16 Style-removal sequence retained before the active
