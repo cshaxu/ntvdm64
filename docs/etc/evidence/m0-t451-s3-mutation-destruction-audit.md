@@ -41,6 +41,34 @@ creation veto/unwind and terminal table emptiness. Their required markers are
 `WOW_NATIVE_SLOT_REUSE_CCPU`, `WOW_MANAGED_SLOT_REUSE_CCPU`,
 `WOW_DEFERRED_RECLAIM_CCPU`, and `WOW_NATIVE_CREATION_BINDING`.
 
+### Host terminal-observation boundary
+
+The selected original `createw.c::xxxDestroyWindow` marks its private WND with
+`WFDESTROYED`, then `xxxFreeWindow` destroys children and sends
+`WM_NCDESTROY`.  The original kernel therefore knows whether that notification
+belongs to its actual free path.  Modern USER exposes neither that WND flag nor
+an equivalent per-window destruction transaction.
+
+The current adapter's `WH_CALLWNDPROCRET` observer can preserve the original
+control/dialog message ordering, but cannot itself distinguish an application
+`SendMessage(WM_NCDESTROY)` from a native destroy path.  The existing public
+`EVENT_OBJECT_DESTROY` research fixture was built and exercised on 2026-10-23:
+for a root window it arrives before the `WM_NCDESTROY` body while `IsWindow`
+is still true; it does not arrive for a hand-sent `WM_NCDESTROY`; and a parent
+destroy did not produce a child event before that child's terminal body.
+Thus it is useful corroboration, not a complete replacement for the original
+kernel transaction.  The run ended
+`DESTROY_EVENT_RESEARCH failures=0 semantic_equivalence=unproven`.
+
+This is a real adaptation boundary, not evidence that a small public-API swap
+can restore exact NT4 private semantics.  No production change is selected
+until the S3 acceptance matrix can exercise the actual adapter chain on a
+private desktop and establish whether the reachable WOW lifecycle exposes a
+harmful discrepancy.  A future semantic change must retain original control
+finalization while separately proving exact identity withdrawal for root and
+child windows; it may not treat the incomplete WinEvent observation as a
+universal substitute.
+
 ## R10 — copied task and invocation-local fixed fields
 
 | Required fact | Current authority and timing | Boundary conclusion |
