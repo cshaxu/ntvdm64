@@ -8,6 +8,13 @@ minimum-diff production reconciliation gates.
 records the finite W03 owner/build/lifetime review before any production
 implementation; it does not claim runtime acceptance.
 
+[T452 S2 module/alias delivery](evidence/m0-t452-s2-module-alias-delivery.md)
+records the bounded source-shaped repairs and the coherent published package.
+
+[T452 S3 alias and WinOldAp audit](evidence/m0-t452-s3-alias-winoldap-audit.md)
+records the original ownership conclusion, actual alias-owner fixture and the
+explicit W03 integration non-pass handed to S4.
+
 [T451 S1 USER object contract ledger](operations/m0-t451-s1-user-object-contract-ledger.md)
 maps every residual C04--C07/object-C10 PMODE32 direct-reader family to its
 producer, authority, update/withdrawal rule, evidence and bounded S2--S4

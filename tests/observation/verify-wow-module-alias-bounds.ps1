@@ -74,7 +74,7 @@ try {
     Invoke-Owned 'fixture' $fixtureCommand 120
     Invoke-Owned 'link' ('link.exe /nologo /machine:x86 /subsystem:console /out:"' + $out + '/fixture.exe" /map:"' + $out + '/fixture.map" "' + $out + '/fixture.obj" "' + $out + '/wole2.obj" kernel32.lib ntdll.lib oldnames.lib') 120
     Invoke-OwnedExecutable 'run' (Join-Path $out 'fixture.exe') 30
-    if ((Get-Content (Join-Path $out 'run.stdout.txt') -Raw) -ne "WOW_MODULE_ALIAS_BOUNDS_OK`r`n") {
+    if ((Get-Content (Join-Path $out 'run.stdout.txt') -Raw) -ne "WOW_MODULE_ALIAS_BOUNDS_AND_LIFETIME_OK`r`n") {
         throw 'Alias fixture contract markers absent.'
     }
 

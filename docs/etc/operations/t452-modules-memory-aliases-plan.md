@@ -122,3 +122,9 @@ narrow guard or serialization only if a reachable project-owned concurrent or
 stale-access path is established. It may not introduce a global registry,
 opaque-token coordinator, retained process-handle owner or changed capacity
 policy merely to make a probe easier.
+
+S3's completed audit is recorded in
+[alias and WinOldAp ownership audit](../evidence/m0-t452-s3-alias-winoldap-audit.md).
+It adds no production WOA policy: the selected original owner remains intact,
+and the separately failing concurrent return chain is an S4 non-pass at the
+USER execution boundary, not an alias repair opportunity.

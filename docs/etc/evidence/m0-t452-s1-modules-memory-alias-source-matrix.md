@@ -27,8 +27,10 @@ the CCPU40 software-machine branch, not the historical kernel-V86 branch.
 
 ## Direct comparison and exclusions
 
-`wkmem.c` and `wole2.c` are byte-identical to the pinned OpenNT comparison
-edition. `wkernel.c` and `wkman.c` contain pre-existing registered product
+`wkmem.c` is byte-identical to the pinned OpenNT comparison edition.
+`wole2.c` retains the later registered bounded process-image query divergence
+`MVDM-HOST-DIV-450`; its alias allocation/find/get/remove bodies remain
+original-shaped and are rechecked by S3. `wkernel.c` and `wkman.c` contain pre-existing registered product
 divergences outside these W03 leaves (profile shadow and lifecycle/USER
 bindings respectively). This task neither deletes nor broadens those changes.
 
