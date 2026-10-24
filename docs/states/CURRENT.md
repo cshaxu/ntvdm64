@@ -81,6 +81,15 @@ build, immutable-guest acceptance, dual-destination hash verification and
 delivery package are complete. See the
 [S2 closure record](../etc/evidence/m0-t451-s2-closure.md).
 
+## S4 Delivery Pending Owner Acceptance
+
+The [S4 closure record](../etc/evidence/m0-t451-s4-closure.md) records the
+completed selected-consumer accounting, 19-row direct object matrix, WINMINE
+interaction acceptance and SOL/WRITE startup frontiers. It changed no product
+binary: the candidate, `assets/release`, and installed `WOW32.DLL` remain
+hash-identical. No S5 is admitted; T451 itself remains open only for the
+owner's T-level closure decision.
+
 ## Active temporary outputs
 
 S3 is closed at [its closure record](../etc/evidence/m0-t451-s3-closure.md).
