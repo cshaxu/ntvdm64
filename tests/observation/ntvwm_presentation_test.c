@@ -69,7 +69,7 @@ static DWORD WINAPI peer(void *context)
         ++state->calls;
         if(state->mode==0) {
             static const DWORD expected[]={CONSOLE_IO_BARRIER,CONSOLE_IO_VIDEO_BEGIN,
-                CONSOLE_IO_VIDEO_DATA,CONSOLE_IO_BARRIER};
+                CONSOLE_IO_VIDEO_DATA,CONSOLE_IO_PRESENT_BARRIER};
             if(sequence>ARRAYSIZE(expected) || request.operation!=expected[sequence-1])
                 return ERROR_INVALID_FUNCTION;
         }
@@ -86,7 +86,10 @@ static DWORD WINAPI peer(void *context)
             } else if(request.operation==CONSOLE_IO_VIDEO_DATA)
                 error=frontend_video_data(&state->video,request.state.mode,request.state.count,
                     request.data,request.bytes);
-            else if(request.operation!=CONSOLE_IO_BARRIER && state->mode!=6)return ERROR_INVALID_FUNCTION;
+            else if(request.operation==CONSOLE_IO_PRESENT_BARRIER) {
+                if(!request.state.mode || request.state.mode!=state->video.serial)
+                    return ERROR_INVALID_DATA;
+            } else if(request.operation!=CONSOLE_IO_BARRIER && state->mode!=6)return ERROR_INVALID_FUNCTION;
         }
         reply.version=CONSOLE_IO_VERSION;reply.generation=17;reply.sequence=sequence;
         reply.result=error==0;reply.error=error;
@@ -199,7 +202,7 @@ static DWORD WINAPI peer(void *context)
                 error=frontend_video_begin(&state->video,request.state.mode,&description);
             } else if(request.operation==CONSOLE_IO_VIDEO_DATA)
                 error=frontend_video_data(&state->video,request.state.mode,request.state.count,request.data,request.bytes);
-            else if(request.operation!=CONSOLE_IO_BARRIER && request.operation!=CONSOLE_IO_SET_MODE &&
+            else if(request.operation!=CONSOLE_IO_BARRIER && request.operation!=CONSOLE_IO_PRESENT_BARRIER && request.operation!=CONSOLE_IO_SET_MODE &&
                 request.operation!=CONSOLE_IO_WRITE_CELLS_W && request.operation!=CONSOLE_IO_CURSOR_POSITION &&
                 request.operation!=CONSOLE_IO_CURSOR_INFO && request.operation!=CONSOLE_IO_ATTRIBUTE)
                 return ERROR_INVALID_FUNCTION;

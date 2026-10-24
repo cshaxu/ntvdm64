@@ -6,35 +6,42 @@
 
 ## Active Packet
 
-### M0 T451 S5 — SOL Options access-violation investigation
+### M0 T451 S5 — direct-root native CUI route and handoff
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T451 S5, Ordinary Mode. |
-| Admission And Approval | Owner admitted S5 on 2026-10-23 after observing that SOL can now enter its Options route but faults in `WOW32.DLL`; S4 remains its completed, separately bounded handoff/acceptance delivery. |
-| Objective | Reproduce and source-trace the SOL Options `WOW32.DLL` access violation to its original consumer, copied-view/host boundary and lifetime state; determine a finite repair proposal or a source-proven retained limitation. |
-| Non-goals | No guest modification/rebuild, USER-server reconstruction, new object table, speculative catch-all exception handling, broad control/dialog/message implementation, external source import, or production repair before the root-cause design is recorded. |
-| Reference Baseline | S1 object ledger; S2 publication closure; S3 mutation/destruction closure; S4 handoff audit; owner screenshot of SOL Options fault. |
-| Files And ABI Surface | Investigation evidence and, if needed, a narrowly scoped source-level diagnostic fixture only; no guest or new cross-component ABI. |
+| Admission And Approval | Owner redirected the unclosed SOL Options observation to the queued everyday-usability interaction stage on 2026-10-23, and admitted this S5 repair for the independently reproducible direct `run16 command` native-CUI route failure. S4 remains its completed, separately bounded handoff/acceptance delivery. |
+| Objective | Repair the direct-new-Console NTVWM-CUI route failure shared by `run16 command → VER`, `NTMON`, and the installed native `EDIT.EXE`, without command-name special cases. The source root is a delivery-time raw equality check between an authenticated nested execution Console and the visible frontend root; it must retain the existing broker-authenticated context relation instead. The proposed final-frame acknowledgement remains a separate candidate for a fast-output release race, not this long-lived-route repair. |
+| Non-goals | No guest modification/rebuild, COMMAND/BOP/BaseCheckVDM semantic change, USER-server reconstruction, shell-token heuristic, synchronous ordinary-frame transport, new polling/timeout/sleep, or worker-local endpoint shortcut into host CUI children. |
+| Reference Baseline | S1 object ledger; S2 publication closure; S3 mutation/destruction closure; S4 handoff audit; existing NTVWM publication and NTCON channel/render protocol. |
+| Files And ABI Surface | Project-owned NTSRV native-command/frontend-context adapter and its actual-service fixture; the pre-existing `console_io`/NTVWM/NTCON final-frame candidate remains separately audited. No guest ABI. |
 | Applicable Rules | [Execution](../rules/EXECUTION.md), [architecture](../rules/ARCHITECTURE.md), [coding](../rules/CODING.md), and [source policy](../etc/operations/policy/source-policy.md). |
-| Verification | First obtain a reproducible Options route and map the fault offset to the exact source/binary; trace the original call chain and every object/state owner.  Then compare the reached original contract with the modern-host adapter without changing guest media. |
-| Expected Markers | Exact faulting module/address and source range; reproducible input sequence; one identified invalid identity, stale projection, invalid host assumption, or a source-proven non-project limitation; no guessed ownership. |
-| Asset Needs | Existing selected original sources, current Ninja symbols/build graph, immutable guest media and the owner-supplied runtime observation only. |
-| Reporting Requirements | State the reproducer, fault mapping, original algorithm, adapter boundary, identity/lifetime owner, root cause confidence, repair options and any semantic boundary. |
+| Verification | Establish the real direct-root NTVWM-CUI input/output route before asserting repair; then cover direct `VER`, `NTMON`, and native `EDIT.EXE`, with DOS (`MEM`, `EDIT.COM`) and inherited-CMD controls. If retained, the final-frame sequence test proves only its exact release ordering. Also cover redirection/pipeline negatives, `EXIT`, failed `cmd /c`, Ctrl+C and channel/worker loss. |
+| Expected Markers | An authenticated execution context distinct from the visible root is delivered only when it belongs to that root; a foreign context remains rejected. If retained, the separate final barrier records exact source serial, render-committed serial, acknowledgement and release ordering. |
+| Asset Needs | Existing original COMMAND sources, current Ninja symbols/build graph, immutable guest media, and project-owned frontend fixtures. |
+| Reporting Requirements | State the source chain, final-frame/commit authority, failure disposition, new protocol surface, focused evidence, package identity and any remaining observation boundary. |
 | Stop Conditions | Pause for a new observable semantic concession, unapproved source import, guest change, or an unbounded dependency closure. |
-| Exit Criteria | A finite, evidence-backed root-cause report and repair/limitation disposition; no repair is claimed merely because the fault is caught or hidden. |
-| Original Owner Request | “不用打开，你准入一个S5来调研看看吧”。 |
-| Similar-Issue Sweep | Cover SOL dialog/control/menu calls that share the faulting original consumer, including stale/reused HWND, failed dialog creation and nested callback paths when reached by the trace. |
+| Exit Criteria | Reproduced source-level handoff proof, bounded implementation, focused failure/ordering evidence, delivery and audit. No success is inferred from a screenshot alone. |
+| Original Owner Request | “请调查并修复‘直接从 Win+R 启动 `run16 command` 后，COMMAND.COM 内部命令输出丢失’的前端交接缺陷。” |
+| Similar-Issue Sweep | Cover final native CUI release for fast internal output, ordinary external output and failure/cancellation paths; SOL Options is owned by the queued everyday-usability interaction stage. |
 | Candidate Proposal | [WOW32 USER objects/shared view](../proposals/proposal-wow32-user-objects-shared-view-001.md). |
 
 ## Current Technical Baseline
 
 The current ten-image host package is published in both `assets/release/` and
 `O:\winnt\system32`; guest media and guest configuration remain immutable and
-unchanged.  During S3, the published Run16 image additionally corrected the
-host-specific cold-NTSRV RPC startup classification without changing its
-existing five-second bootstrap grace; its exact build, cold Console exercise
-and ten-image hash evidence are in the [S3 audit](../etc/evidence/m0-t451-s3-mutation-destruction-audit.md).
+unchanged. S5 refreshes all ten images from one staged current build and
+records its authenticated direct-root native-CUI delivery repair and
+sequence-specific final-frame barrier in the
+[S5 route record](../etc/evidence/m0-t451-s5-direct-root-native-cui-route.md).
+The live visible-frontend matrix remains an explicit acceptance limitation in
+that record because the automated execution desktop was unavailable; it is not
+reported as a passing guest run. During S3, the published Run16 image
+additionally corrected the host-specific cold-NTSRV RPC startup classification
+without changing its existing five-second bootstrap grace; its exact build,
+cold Console exercise and ten-image hash evidence are in the
+[S3 audit](../etc/evidence/m0-t451-s3-mutation-destruction-audit.md).
 The S2 USER publication acceptance remains linked below.
 T450 is closed at
 [its closure record](../history/m0-t450-closure.md). T451 S2 begins from the
@@ -87,9 +94,10 @@ The [S4 closure record](../etc/evidence/m0-t451-s4-closure.md) records the
 completed selected-consumer accounting, 19-row direct object matrix, WINMINE
 interaction acceptance and SOL/WRITE startup frontiers. It changed no product
 binary: the candidate, `assets/release`, and installed `WOW32.DLL` remain
-hash-identical.  The subsequently owner-admitted S5 is a separate, observed
-SOL Options fault investigation; it does not rewrite S4's selected handoff
-evidence or claim that its startup frontier proved complete SOL interaction.
+hash-identical. The later observed SOL Options fault is owned by the queued
+everyday-usability interaction stage; active S5 instead repairs the separately
+reproducible native CUI route failure. Neither changes S4's selected
+handoff evidence or claims that its startup frontier proved complete SOL interaction.
 
 ## S3 Closure Record
 

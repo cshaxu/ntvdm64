@@ -158,6 +158,10 @@ int main(void)
     CHECK(GetConsoleCursorInfo(owner.output,&cursor) && cursor.dwSize==20 && !cursor.bVisible);
     operation(&owner,CONSOLE_IO_BARRIER);
     CHECK(!frontend_console_dispatch(&owner,&request,&reply) && reply.result);
+    operation(&owner,CONSOLE_IO_PRESENT_BARRIER);
+    CHECK(frontend_console_dispatch(&owner,&request,&reply)==ERROR_INVALID_DATA);
+    request.state.mode=1;
+    CHECK(!frontend_console_dispatch(&owner,&request,&reply) && reply.result);
     operation(&owner,CONSOLE_IO_SET_TITLE_A);
     CHECK(frontend_console_dispatch(&owner,&request,&reply)==ERROR_INVALID_DATA);
     request.bytes=3;memcpy(request.data,"bad",3);

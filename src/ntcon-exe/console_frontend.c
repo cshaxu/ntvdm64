@@ -99,7 +99,7 @@ DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request
     if (!request->sequence || owner->sequence==UINT32_MAX ||
         request->sequence!=owner->sequence+1 || request->bytes>CONSOLE_IO_MAX_DATA_BYTES ||
         (request->bytes && !request->data) ||
-        request->operation<CONSOLE_IO_WRITE || request->operation>CONSOLE_IO_GET_HANDOFF_TITLE_A ||
+        request->operation<CONSOLE_IO_WRITE || request->operation>CONSOLE_IO_PRESENT_BARRIER ||
         request->operation==38) /* Retired peer activation, never a data operation. */
         return ERROR_INVALID_DATA;
     cells=request->operation>=CONSOLE_IO_READ_CELLS_A && request->operation<=CONSOLE_IO_WRITE_CELLS_W;
@@ -126,6 +126,8 @@ DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request
         return ERROR_INVALID_DATA;
     if (request->operation==CONSOLE_IO_PREPEND_KEYS &&
         (s->count>CONSOLE_IO_INPUT_CAPACITY || request->bytes!=s->count*sizeof(console_io_input)))
+        return ERROR_INVALID_DATA;
+    if(request->operation==CONSOLE_IO_PRESENT_BARRIER && !s->mode)
         return ERROR_INVALID_DATA;
     if ((request->operation==CONSOLE_IO_READ_INPUT || request->operation==CONSOLE_IO_PEEK_INPUT) &&
         s->count>CONSOLE_IO_INPUT_CAPACITY)
@@ -400,6 +402,7 @@ DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request
         ok=SetConsoleMode(s->input ? owner->input : owner->output,s->mode);
         break;
     case CONSOLE_IO_BARRIER:
+    case CONSOLE_IO_PRESENT_BARRIER:
         ok=TRUE;
         break;
     case CONSOLE_IO_PREPEND_KEYS: {

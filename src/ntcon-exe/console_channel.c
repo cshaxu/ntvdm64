@@ -362,6 +362,13 @@ static DWORD WINAPI console_channel_main(void *context)
             frontend_session_snapshot_begin(channel->root);video_locked=TRUE;
         }
         if (!error) error=frontend_console_dispatch(&channel->console,request,&reply);
+        /* Dispatch has released the frontend I/O lock before this event-driven
+         * wait. Only final native CUI handoff asks the presentation thread to
+         * acknowledge a particular complete VIDEO serial; ordinary barriers
+         * retain their original logical ordering semantics. */
+        if(!error && reply.result && request->operation==CONSOLE_IO_PRESENT_BARRIER)
+            error=frontend_session_present_barrier(channel->root,channel,&channel->console.video,
+                request->state.mode);
         if(!error && reply.result && !channel->publication_surface && !channel->console.video.pending && (request->operation==CONSOLE_IO_VIDEO_BEGIN ||
             request->operation==CONSOLE_IO_VIDEO_TEXT))
             error=frontend_session_video(channel->root,channel,&channel->console.video,TRUE);

@@ -29,7 +29,7 @@ being hidden inside acceptance code or bypassed by altered guest media.
 | Stage | Work | Required evidence |
 | --- | --- | --- |
 | S1 | Freeze ordinary package and application baseline | Source/package/guest/configuration hashes, actual first failing call for any startup error, and explicit prerequisite/deferred-family ledger. |
-| S2 | Display and interaction | WINMINE board, digits, face, reveal/flag, timer, menu/new game; SOL cards, deal, legal movement, draw/options; WRITE readable text, edit/select, menus/dialogs, clipboard, save/reopen and cancellation. Repaint/expose, activation and supported resize preserve correct content without residual frame pixels. |
+| S2 | Display and interaction | WINMINE board, digits, face, reveal/flag, timer, menu/new game; SOL cards, deal, legal movement, draw/options (including the observed Options-route `WOW32.DLL` access violation, source-traced to its actual owner before repair); WRITE readable text, edit/select, menus/dialogs, clipboard, save/reopen and cancellation. Repaint/expose, activation and supported resize preserve correct content without residual frame pixels. |
 | S3 | Lifecycle and owner acceptance | Normal close/restart, supported multiple tasks, scoped abnormal cleanup and subsequent DOS use; reproducible tests, reviewed captures and applicable production delivery gates. |
 
 Each application must actually work: a window, process exit or matching old

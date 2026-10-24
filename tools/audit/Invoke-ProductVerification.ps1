@@ -210,8 +210,12 @@ try {
         Invoke-Gate 'rpc' {
             # native-command/native-registry are in-process archive cases,
             # now run concurrently in verify-service-fixtures, not duplicated here.
-            $cases=@('client','bootstrap','startup-rejections','startup-timeout','native-worker-failure','native-completed-worker-loss','monitor-rpc')
-            if($FullDeadlines){$cases+=@('workerless-grace','workerless-cancel')}
+            # The fixture owns this finite contract list.  Do not retain
+            # historical timeout/workerless labels after their implementations
+            # were intentionally removed: ValidateSet rejection would make the
+            # product gate fail before it exercised any actual peer.
+            $cases=@('client','bootstrap','startup-rejections',
+                'native-worker-failure','native-completed-worker-loss','monitor-rpc')
             & "$repo/tests/observation/verify-s7-rpc-fixtures.ps1" -Observer $observerPath -PackageRoot $runtimeBinary -ReportPrefix "$log/rpc" -Cases $cases
         }
         Invoke-Gate 'native-gui' {

@@ -8,7 +8,7 @@
 /* Direct worker/frontend wire header; no pointers or native resource
  * identities cross the pipe.  Local payload pointers below are explicitly
  * process-local staging only.  Peers are authenticated by BaseSrv attachment. */
-#define CONSOLE_IO_VERSION 28u
+#define CONSOLE_IO_VERSION 29u
 /* One-hop worker -> launcher stream routing, not an authorization token.
  * Versioned name; three low bits designate worker-local interactive endpoints.
  * File/pipe handles remain actual inherited resources. Consume before launch. */
@@ -97,7 +97,11 @@ enum console_io_operation {
      * Device-mode selection belongs to the caller, never the frontend. */
     CONSOLE_IO_PREPARE_TEXT_REGION,
     /* Copied caption of the logical Console at ownership handoff. */
-    CONSOLE_IO_GET_HANDOFF_TITLE_A
+    CONSOLE_IO_GET_HANDOFF_TITLE_A,
+    /* Final native-CUI handoff only. state.mode is the complete VIDEO frame
+     * serial that must have been committed by NTCON's presentation thread.
+     * It deliberately is not the ordinary logical CONSOLE_IO_BARRIER. */
+    CONSOLE_IO_PRESENT_BARRIER
 };
 enum console_io_window_query {
     CONSOLE_WINDOW_ICONIC=1,

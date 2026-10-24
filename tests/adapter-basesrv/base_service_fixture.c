@@ -598,6 +598,110 @@ DWORD fixture_take_native_command(OPENNT_BASE_CONNECTION *connection,DWORD pid,
         sender,execution,frontend,request,&caller_generation);
 }
 
+/* Exercise the exact delivery boundary used by a direct DOS CheckVDM launch:
+ * the visible root and the nested native launcher have different Console
+ * locators, but the service issued the latter capability for that root.
+ * Keep this here because the production take routine is intentionally private;
+ * the fixture links the real service archive rather than copying its policy. */
+int fixture_native_command_distinct_context(void)
+{
+    OPENNT_BASE_SERVICE *service=NULL;
+    OPENNT_BASE_CONNECTION *root=NULL,*launcher=NULL,*worker=NULL;
+    PROCESS_INFORMATION children[2]={{0}};
+    STARTUPINFOW startup={sizeof(startup)};
+    OPENNT_FRONTEND_ROUTE route={0};
+    HANDLE self=NULL,execution=NULL,sender=NULL,delivered_execution=NULL,frontend=NULL;
+    WCHAR image[MAX_PATH],command[MAX_PATH+32];
+    BYTE payload[2]={'O','K'},actual[2]={0};
+    DWORD root_generation=0,launcher_generation=0,worker_generation=0,bytes=0,request=0,index;
+    BOOL route_linked=FALSE,result=FALSE,locked=FALSE;
+    BOOL (WINAPI *compare)(HANDLE,HANDLE)=(BOOL (WINAPI *)(HANDLE,HANDLE))
+        GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
+#define CONTEXT_CHECK(x) do {if(!(x)){fprintf(stderr,"FAIL distinct-context %d\\n",__LINE__);goto done;}}while(0)
+    service=OpenNtBaseServiceStart();
+    self=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|PROCESS_DUP_HANDLE|SYNCHRONIZE,
+        FALSE,GetCurrentProcessId());
+    CONTEXT_CHECK(service && self && compare && GetModuleFileNameW(NULL,image,ARRAYSIZE(image)));
+    for(index=0;index<2;++index) {
+        CONTEXT_CHECK(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" --reservation-child",image)>0);
+        CONTEXT_CHECK(CreateProcessW(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
+            NULL,NULL,&startup,&children[index]));
+    }
+    CONTEXT_CHECK(!OpenNtBaseServiceConnect(service,self,&root,&root_generation));
+    CONTEXT_CHECK(!OpenNtBaseServiceConnect(service,children[0].hProcess,&launcher,&launcher_generation));
+    CONTEXT_CHECK(!OpenNtBaseServiceConnect(service,children[1].hProcess,&worker,&worker_generation));
+    EnterCriticalSection(&service->lock);locked=TRUE;
+    root->frontend_capability=CreateEventW(NULL,TRUE,FALSE,NULL);
+    root->console=(HANDLE)(ULONG_PTR)0x4514;
+    root->console_members=HeapAlloc(GetProcessHeap(),0,sizeof(*root->console_members));
+    root->console_member_processes=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,
+        sizeof(*root->console_member_processes));
+    CONTEXT_CHECK(root->frontend_capability && root->console_members && root->console_member_processes);
+    root->console_members[0]=GetCurrentProcessId();root->console_member_count=1;
+    CONTEXT_CHECK(DuplicateHandle(GetCurrentProcess(),self,GetCurrentProcess(),
+        &root->console_member_processes[0],0,FALSE,DUPLICATE_SAME_ACCESS));
+    worker->native_worker=TRUE;
+    CONTEXT_CHECK(!service_acquire_console_context(root,(HANDLE)(ULONG_PTR)0x4515,
+        worker_generation,&execution));
+    LeaveCriticalSection(&service->lock);locked=FALSE;
+    /* The public bind accepts only the server-issued capability above. */
+    CONTEXT_CHECK(!OpenNtBaseServiceBindConsoleContext(launcher,children[0].dwProcessId,
+        launcher_generation,execution));
+    CONTEXT_CHECK(launcher->console==(HANDLE)(ULONG_PTR)0x4515 &&
+        launcher->execution_worker_generation==worker_generation);
+    EnterCriticalSection(&service->lock);locked=TRUE;
+    route.root=root;route.worker=worker->process.ProcessHandle;route.native_worker=TRUE;
+    InsertTailList(&service->frontend_routes,&route.link);route_linked=TRUE;
+    CONTEXT_CHECK(DuplicateHandle(GetCurrentProcess(),root->frontend_capability,GetCurrentProcess(),
+        &launcher->channel_frontend,SYNCHRONIZE,FALSE,0));
+    CONTEXT_CHECK(DuplicateHandle(GetCurrentProcess(),execution,GetCurrentProcess(),
+        &launcher->frontend_execution,SYNCHRONIZE,FALSE,0));
+    launcher->native_command_payload=HeapAlloc(GetProcessHeap(),0,sizeof(payload));
+    CONTEXT_CHECK(launcher->native_command_payload);
+    CopyMemory(launcher->native_command_payload,payload,sizeof(payload));
+    launcher->native_command_bytes=sizeof(payload);launcher->native_command_pending=TRUE;
+    launcher->channel_worker_generation=worker_generation;
+    launcher->frontend_channel_root=root_generation;
+    LeaveCriticalSection(&service->lock);locked=FALSE;
+    CONTEXT_CHECK(!service_take_native_command(worker,children[1].dwProcessId,worker_generation,
+        sizeof(actual),actual,&bytes,&sender,&delivered_execution,&frontend,&request,&index));
+    CONTEXT_CHECK(bytes==sizeof(payload) && !memcmp(actual,payload,sizeof(payload)) &&
+        compare(delivered_execution,execution) && compare(frontend,root->frontend_capability));
+    CloseHandle(sender);sender=NULL;CloseHandle(delivered_execution);delivered_execution=NULL;
+    CloseHandle(frontend);frontend=NULL;
+    /* An unissued locator cannot masquerade as the root's distinct context. */
+    EnterCriticalSection(&service->lock);locked=TRUE;
+    launcher->console=(HANDLE)(ULONG_PTR)0x4516;
+    launcher->native_command_payload=HeapAlloc(GetProcessHeap(),0,1);
+    CONTEXT_CHECK(launcher->native_command_payload);
+    launcher->native_command_payload[0]='X';launcher->native_command_bytes=1;
+    launcher->native_command_pending=TRUE;launcher->channel_worker_generation=worker_generation;
+    launcher->frontend_channel_root=root_generation;
+    CONTEXT_CHECK(DuplicateHandle(GetCurrentProcess(),root->frontend_capability,GetCurrentProcess(),
+        &launcher->channel_frontend,SYNCHRONIZE,FALSE,0));
+    LeaveCriticalSection(&service->lock);locked=FALSE;
+    CONTEXT_CHECK(service_take_native_command(worker,children[1].dwProcessId,worker_generation,
+        sizeof(actual),actual,&bytes,&sender,&delivered_execution,&frontend,&request,&index)==ERROR_PIPE_NOT_CONNECTED);
+    CONTEXT_CHECK(!sender && !delivered_execution && !frontend && !bytes);
+    result=TRUE;
+done:
+    if(locked)LeaveCriticalSection(&service->lock);
+    if(sender)CloseHandle(sender);if(delivered_execution)CloseHandle(delivered_execution);if(frontend)CloseHandle(frontend);
+    if(route_linked) {EnterCriticalSection(&service->lock);RemoveEntryList(&route.link);LeaveCriticalSection(&service->lock);}
+    if(launcher)OpenNtBaseServiceDisconnect(launcher);
+    if(worker)OpenNtBaseServiceDisconnect(worker);
+    if(root)OpenNtBaseServiceDisconnect(root);
+    if(service)OpenNtBaseServiceStop(service);
+    if(execution)CloseHandle(execution);if(self)CloseHandle(self);
+    for(index=0;index<2;++index)if(children[index].hProcess) {
+        TerminateProcess(children[index].hProcess,0);WaitForSingleObject(children[index].hProcess,5000);
+        CloseHandle(children[index].hThread);CloseHandle(children[index].hProcess);
+    }
+    if(result)puts("PASS native command distinct context: broker-issued root context delivers; foreign locator is rejected");
+    return result ? 0 : 1;
+#undef CONTEXT_CHECK
+}
+
 /* Fault injection changes only the local reference rights of the actual
  * notification object. The real production publisher/decision runs under
  * its existing lock; the owned handle is restored before leaving the seam. */

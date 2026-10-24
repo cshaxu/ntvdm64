@@ -28,6 +28,9 @@ writeFileSync(resolve(build, 'build.ninja'), [
   'build input-milestone-test.exe: link input-milestone-test.obj',
   'build worker-window-snapshot.obj: cc ' + source('tests/observation/worker_window_snapshot.c'),
   'build worker-window-snapshot.exe: link worker-window-snapshot.obj',
+  'build run16-direct-command-observer.obj: cc ' +
+    source('tests/observation/run16_direct_command_observer.c'),
+  'build run16-direct-command-observer.exe: link run16-direct-command-observer.obj',
   'default console-startup-observer.exe',
   ''
 ].join('\n'));

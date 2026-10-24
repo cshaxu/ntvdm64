@@ -2,31 +2,31 @@
     {
         "Name":  "run16.exe",
         "RelativePath":  "system32\\run16.exe",
-        "Sha256":  "E7AC4E89E9D1E88D57D7CEA1A1AD239DEEAD1537A58C8537820BB504C1739121",
+        "Sha256":  "33F16671D41937D3F576A32710A2C7EB17870293AA42D5AAB4B0072FC3087547",
         "Machine":  34404
     },
     {
         "Name":  "ntsrv.exe",
         "RelativePath":  "system32\\ntsrv.exe",
-        "Sha256":  "7ADC57E6F4C1B1A3058618994664D43DCD77895079BD3B8BC5BC9A1CA6F77168",
+        "Sha256":  "67481CA1DC9238BB3EF0C893C0096C2B7B33FCFD73046FC8CC8BB7D0F4B8A1B6",
         "Machine":  34404
     },
     {
         "Name":  "ntcon.exe",
         "RelativePath":  "system32\\ntcon.exe",
-        "Sha256":  "E2713F6C382F58389BA158F14FA1997434CC94F135A8D0F5D5ECDCBFFE72FA77",
+        "Sha256":  "89011274579600ECB21291BFA95630C33512AF5CD180E578DE24CB1B95C4E3BF",
         "Machine":  34404
     },
     {
         "Name":  "ntvdm.exe",
         "RelativePath":  "system32\\ntvdm.exe",
-        "Sha256":  "8333B6D92AAC64A753998DA10359FEB5AA7FC5729760599A25A6F931A34F2224",
+        "Sha256":  "1D6F6BADD91DE9E2603499ADB6B2A3777F3412CBCD9B1DA0F24F0DF5D6012B07",
         "Machine":  332
     },
     {
         "Name":  "ntvwm.exe",
         "RelativePath":  "system32\\ntvwm.exe",
-        "Sha256":  "3ED02191359F9F0BA4EAD6445B5E59BB1B5B02227854F408B19FA957635B1BD8",
+        "Sha256":  "7394F33A85C684C4DF2B163BF5A8982346280EBFD8ACE6F23F1090C9B73F92C8",
         "Machine":  34404
     },
     {
@@ -44,13 +44,13 @@
     {
         "Name":  "VDMREDIR.DLL",
         "RelativePath":  "system32\\VDMREDIR.DLL",
-        "Sha256":  "192C7891617FA559D1C0CA6815787CFEF5FDB24E7122CC2B06324B8C94ED7319",
+        "Sha256":  "AA97AE29068DC7838949C0C3F5A2DE8F6AFE1C6A3B15C932F979C0D105F44796",
         "Machine":  332
     },
     {
         "Name":  "nthook32.dll",
         "RelativePath":  "system32\\nthook32.dll",
-        "Sha256":  "EB02654A0ECC3D6CA2F0D7F8E7B2B63B5CDA72D59E664560B162F48810D7A2A2",
+        "Sha256":  "EF527AF0EEF7A05A66FB6F5D570EFA9652622D3205B1EC1867C9A1EB02F8829C",
         "Machine":  332
     },
     {

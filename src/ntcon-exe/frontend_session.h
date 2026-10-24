@@ -43,6 +43,10 @@ DWORD frontend_session_prepare_text(frontend_session *,const void *,COORD,BOOL *
 /* Channel video is read only under the shared I/O lock. Forget/unbind must
  * detach it before channel storage is disposed. No pointer crosses IPC. */
 DWORD frontend_session_video(frontend_session *,const void *,frontend_video *,BOOL import_text);
+/* The caller owns an authenticated channel but no session I/O lock. This
+ * waits only for that channel's requested complete video serial to reach the
+ * presentation-thread commit frontier; stop/thread loss is an explicit error. */
+DWORD frontend_session_present_barrier(frontend_session *,const void *,const frontend_video *,uint32_t);
 /* Complete batch grid/frame/font publication uses the same transaction.
  * Surface is consumed iff committed is TRUE, including projection failure. */
 DWORD frontend_session_publish_text(frontend_session *,const void *,

@@ -734,8 +734,10 @@ DWORD service_take_native_command(OPENNT_BASE_CONNECTION *root,DWORD pid,
             (caller->channel_frontend && root->native_inflight && root->native_activity_root!=caller->frontend_channel_root))) {
             error=ERROR_BUSY;goto done;
         }
-        /* The visible Console identity belongs to the authenticated
-         * frontend root, not to this short-lived direct launcher. */
+        /* The visible frontend belongs to the authenticated root. A direct
+         * DOS CheckVDM may, however, give its nested launcher a distinct
+         * broker-authenticated execution Console. Do not reduce that proven
+         * association back to raw Console equality at delivery time. */
         if(caller->channel_frontend) {
             OPENNT_BASE_CONNECTION *frontend=NULL;
             LIST_ENTRY *root_link;
@@ -749,7 +751,7 @@ DWORD service_take_native_command(OPENNT_BASE_CONNECTION *root,DWORD pid,
                     frontend=candidate;break;
                 }
             }
-            if(!frontend || frontend->console!=caller->console ||
+            if(!frontend || !service_root_console_matches(frontend,caller->console) ||
                 !frontend->console_member_count) {error=ERROR_PIPE_NOT_CONNECTED;goto done;}
             error=service_copy_execution_console_members(root,frontend);
         } else error=ERROR_SUCCESS;

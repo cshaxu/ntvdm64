@@ -242,6 +242,15 @@ static void run_case(unsigned mode,unsigned round)
         request.sequence=4;request.state.count=4;
         peer_request(&request);
         peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));CHECK(reply.result);
+        /* Final native-CUI release must not acknowledge the frame merely
+         * because its channel accepted VIDEO_DATA. PRESENT_BARRIER returns
+         * only after the presentation thread has committed this serial. */
+        request.sequence=5;request.operation=CONSOLE_IO_PRESENT_BARRIER;
+        request.state=(console_io_state){0};request.state.mode=1;request.bytes=0;
+        peer_request(&request);
+        peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));CHECK(reply.result);
+        window=FindWindowW(L"LibKvmWindow",NULL);
+        CHECK(window && GetWindowThreadProcessId(window,&window_pid) && window_pid==GetCurrentProcessId());
         deadline=GetTickCount64()+5000;
         do {
             window=FindWindowW(L"LibKvmWindow",NULL);
@@ -276,7 +285,7 @@ static void run_case(unsigned mode,unsigned round)
                   SMTO_ABORTIFHUNG,3000,&result)); }
         }
         Sleep(100);CHECK(IsWindow(window)); /* No new frame is not TEXT. */
-        request.sequence=5;request.operation=CONSOLE_IO_VIDEO_TEXT;
+        request.sequence=6;request.operation=CONSOLE_IO_VIDEO_TEXT;
         request.state.mode=2;request.bytes=0;request.state.count=0;
         peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data));
         peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));CHECK(reply.result);
@@ -300,12 +309,12 @@ static void run_case(unsigned mode,unsigned round)
          * changed its first cell. Re-establish the next case's marker. */
         { DWORD written;COORD origin={0,0};
           CHECK(WriteConsoleOutputCharacterW(channel->console.output,L"K",1,origin,&written) && written==1); }
-        request.sequence=6;request.operation=CONSOLE_IO_VIDEO_BEGIN;
+        request.sequence=7;request.operation=CONSOLE_IO_VIDEO_BEGIN;
         request.state.mode=3;request.bytes=sizeof(description);
         memcpy(request.data,&description,sizeof(description));
         peer_request(&request);
         peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));CHECK(reply.result);
-        request.sequence=7;request.operation=CONSOLE_IO_VIDEO_DATA;request.bytes=8;
+        request.sequence=8;request.operation=CONSOLE_IO_VIDEO_DATA;request.bytes=8;
         memset(request.data,1,8);
         peer_request(&request);
         peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));CHECK(reply.result);
@@ -1302,12 +1311,49 @@ int main(int argc,char **argv)
         read_entered=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(read_entered);
         CHECK(GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE),&original_cursor));
         CHECK(!frontend_session_create(&test_frontend));
+        {
+            HANDLE logical;DWORD count;COORD origin={0,0};
+            CHECK(!frontend_session_logical_console(test_frontend,&logical));
+            CHECK(WriteConsoleOutputCharacterW(logical,L"K",1,origin,&count) && count==1);
+            CHECK(!frontend_session_project_text(test_frontend));
+            CloseHandle(logical);
+        }
         test_prepare_operation();
         input_output_only=TRUE;
         run_case(1,1);
         CHECK(!frontend_session_destroy(test_frontend));
         CloseHandle(read_entered);
         puts("PASS variable-record input/output regression probe");
+        return 0;
+    }
+    if(argc==2 && !strcmp(argv[1],"--present-barrier")) {
+        /* Keep the final-frame acknowledgement witness independent of the
+         * broad 80x60 geometry fixture: it needs one ordinary Console, one
+         * real channel and the production presentation thread. run_case(0)
+         * sends VIDEO then PRESENT_BARRIER and verifies a committed Window
+         * frame before the peer receives its reply. */
+        if(!GetConsoleWindow()) {
+            CHECK(FreeConsole());CHECK(AllocConsole());
+            ShowWindow(GetConsoleWindow(),SW_HIDE);
+        }
+        read_entered=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(read_entered);
+        CHECK(GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE),&original_cursor));
+        CHECK(!frontend_session_create(&test_frontend));
+        {
+            HANDLE logical;DWORD count;COORD origin={0,0};
+            /* run_case verifies that channel cloning preserves the logical
+             * Console seed.  Establish it in this focused fixture without
+             * pulling in the unrelated geometry matrix. */
+            CHECK(!frontend_session_logical_console(test_frontend,&logical));
+            CHECK(WriteConsoleOutputCharacterW(logical,L"K",1,origin,&count) && count==1);
+            CHECK(!frontend_session_project_text(test_frontend));
+            CloseHandle(logical);
+        }
+        test_prepare_operation();
+        run_case(0,0);
+        CHECK(!frontend_session_destroy(test_frontend));
+        CloseHandle(read_entered);
+        puts("PASS native final frame waits for sequence-specific render commit");
         return 0;
     }
     if(argc==2 && !strcmp(argv[1],"--worker-wait")) {Sleep(INFINITE);return 0;}

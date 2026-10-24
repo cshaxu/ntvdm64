@@ -41,7 +41,7 @@ with stable-ID handoff, even when general hard-error recovery is later.
 | S2 | Identity, classes and publication | Complete desktop/WND/CLS identity, registration, first-callback publication and original layout/rebasing. | Guest direct reads and first callbacks observe valid objects, including external objects. |
 | S3 | Mutation and destruction | Complete geometry, host-originated updates without thunk refresh, stale reuse, nested destruction and rollback. | Reentry, mutation and failed creation withdraw or update the correct object without corrupting another task. |
 | S4 | Object acceptance and handoff | Run direct-data, callback and object-lifetime tests plus production regression. | All selected object classes and direct-read paths are accounted for; consumers reuse this single view owner. |
-| S5 | SOL Options fault investigation | Reproduce and source-trace the observed `WOW32.DLL` access violation on SOL's Options route. | Exact original consumer and modern-host/copied-view boundary are identified, with a finite repair or retained-limitation disposition. |
+| S5 | Native CUI final-frame handoff | Make the native CUI final capture wait for NTCON's sequence-specific render submission before I/O release. | Direct new-Console COMMAND internal output is not overwritten before the final frame is committed; failure never reports a false release. |
 
 ## Verification, boundaries and handoff
 

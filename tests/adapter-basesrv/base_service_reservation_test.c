@@ -20,6 +20,7 @@ int fixture_parent_resume_origin(void);
 int fixture_shared_worker_residency(void);
 int fixture_management_gui(void);
 int fixture_borrowed_console_identity_loss(void);
+int fixture_native_command_distinct_context(void);
 static const BYTE native_payload[3]={'N','T','C'};
 #define TEST_NATIVE_CUI_TYPE (sizeof(void *)==8 ? \
     OPENNT_BASE_NATIVE_LAUNCH_WIN64_CUI : OPENNT_BASE_NATIVE_LAUNCH_WIN32_CUI)
@@ -1070,6 +1071,7 @@ int main(int argc,char **argv)
     if(argc==2 && !strcmp(argv[1],"--prepared-native-root-loss"))return fixture_prepared_native_root_loss();
     if(argc==2 && !strcmp(argv[1],"--parent-resume-origin"))return fixture_parent_resume_origin();
     if(argc==2 && !strcmp(argv[1],"--management-gui"))return fixture_management_gui();
+    if(argc==2 && !strcmp(argv[1],"--native-command-distinct-context"))return fixture_native_command_distinct_context();
     if(argc==2 && !strcmp(argv[1],"--frontend-completion-barrier"))return frontend_completion_barrier();
     if(argc==2 && !strcmp(argv[1],"--management-frontend-close"))return management_frontend_close();
     if(argc==2 && !strcmp(argv[1],"--management-frontend-close-order"))return management_frontend_close_ordering(0,0);

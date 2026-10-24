@@ -21,7 +21,7 @@ struct frontend_session {
      * terminal presentation state: late video/display requests must not make
      * CAF visible again after NTSRV observes the acknowledgement. */
     BOOL console_return_frozen;
-    HANDLE stop,refresh,refreshed,thread,changed,park,park_done,return_console,
+    HANDLE stop,refresh,refreshed,thread,changed,video_committed,park,park_done,return_console,
         return_done,control[2];
     DWORD park_error;
     DWORD return_error;
@@ -47,6 +47,11 @@ struct frontend_session {
     uint32_t title_epoch;
     const frontend_video *video;
     uint32_t video_serial;
+    /* Only the presentation thread advances this frontier after it has handed
+     * the immutable frame to the Window renderer. It is never a producer-side
+     * receipt or a logical Console publication acknowledgement. */
+    const frontend_video *committed_video;
+    uint32_t committed_video_serial;
     console_text_configuration text_configuration;
     uint32_t text_revision;
     BOOL controls_live;
@@ -251,6 +256,7 @@ DWORD frontend_session_commit_text(frontend_session *frontend,HANDLE surface,SMA
     /* Conversion committed: no prior frame describes this new grid, even
      * when the subsequent physical projection fails. Font metadata survives. */
     frontend->video=NULL;frontend->video_serial=0;
+    frontend->committed_video=NULL;frontend->committed_video_serial=0;
     CloseHandle(previous);
     return frontend_session_project_text(frontend);
 }
@@ -666,7 +672,12 @@ static DWORD present_loop(frontend_session *frontend)
                     if(!error && frontend->window_active)
                         error=frontend_window_mouse_enter(&frontend->window_mouse,window_records,frontend);
                 } else error=frontend_window_clear(frontend->window);
-                if(!error)*published=serial;
+                if(!error) {
+                    *published=serial;
+                    frontend->committed_video=video;
+                    frontend->committed_video_serial=serial;
+                    if(!SetEvent(frontend->video_committed))error=GetLastError();
+                }
             }
         }
         LeaveCriticalSection(&frontend->io_lock);
@@ -738,6 +749,7 @@ DWORD frontend_session_create(frontend_session **output)
     frontend->refresh=CreateEventW(NULL,TRUE,FALSE,NULL);
     frontend->refreshed=CreateEventW(NULL,TRUE,FALSE,NULL);
     frontend->changed=CreateEventW(NULL,FALSE,FALSE,NULL);
+    frontend->video_committed=CreateEventW(NULL,TRUE,FALSE,NULL);
     frontend->park=CreateEventW(NULL,TRUE,FALSE,NULL);
     frontend->park_done=CreateEventW(NULL,TRUE,FALSE,NULL);
     frontend->return_console=CreateEventW(NULL,TRUE,FALSE,NULL);
@@ -747,7 +759,7 @@ DWORD frontend_session_create(frontend_session **output)
     frontend->handoff=CreateEventW(NULL,TRUE,FALSE,NULL);
     frontend->handoff_done=CreateEventW(NULL,TRUE,FALSE,NULL);
     frontend->input_ready=CreateEventW(NULL,TRUE,FALSE,NULL);
-    if(!frontend->stop || !frontend->refresh || !frontend->refreshed || !frontend->changed ||
+    if(!frontend->stop || !frontend->refresh || !frontend->refreshed || !frontend->changed || !frontend->video_committed ||
         !frontend->park || !frontend->park_done || !frontend->return_console || !frontend->return_done ||
         !frontend->control[0] || !frontend->control[1] || !frontend->handoff || !frontend->handoff_done || !frontend->input_ready) {
         error=GetLastError();frontend_session_destroy(frontend);return error;
@@ -905,6 +917,8 @@ static DWORD apply_binding(frontend_session *frontend,const void *owner,BOOL act
     frontend->owner=active ? owner : NULL;
     frontend->title_owner=NULL;frontend->worker_title_valid=FALSE;
     frontend->video=NULL;frontend->video_serial=0;
+    frontend->committed_video=NULL;frontend->committed_video_serial=0;
+    ResetEvent(frontend->video_committed);
     return 0;
 }
 DWORD frontend_session_bind(frontend_session *frontend,const void *owner,BOOL active)
@@ -1060,6 +1074,45 @@ DWORD frontend_session_video(frontend_session *frontend,const void *owner,
 {
     return publish_video(frontend,owner,video,import_text,NULL,(SMALL_RECT){0},NULL);
 }
+DWORD frontend_session_present_barrier(frontend_session *frontend,const void *owner,
+    const frontend_video *video,uint32_t serial)
+{
+    HANDLE waits[3];
+    if(!frontend || !owner || !video || !serial)return ERROR_INVALID_PARAMETER;
+    waits[0]=frontend->video_committed;waits[1]=frontend->stop;waits[2]=frontend->thread;
+    for(;;) {
+        DWORD wait,error;
+        EnterCriticalSection(&frontend->io_lock);
+        if(frontend->owner!=owner || frontend->video!=video ||
+            video->published_serial<serial || frontend->console_return_frozen) {
+            LeaveCriticalSection(&frontend->io_lock);return ERROR_NOT_READY;
+        }
+        if(frontend->committed_video==video && frontend->committed_video_serial==serial) {
+            LeaveCriticalSection(&frontend->io_lock);return ERROR_SUCCESS;
+        }
+        /* A later presentation is not evidence that this frame reached the
+         * renderer.  The release caller asked for this exact serial, so fail
+         * rather than silently acknowledging a replacement frame. */
+        if(frontend->committed_video==video && frontend->committed_video_serial>serial) {
+            LeaveCriticalSection(&frontend->io_lock);return ERROR_NOT_READY;
+        }
+        /* Reset while holding the same lock that the presentation thread uses
+         * to advance the frontier, so no completion can be lost between the
+         * predicate and the event wait. */
+        if(!ResetEvent(frontend->video_committed)) {
+            error=GetLastError();LeaveCriticalSection(&frontend->io_lock);return error;
+        }
+        LeaveCriticalSection(&frontend->io_lock);
+        wait=WaitForMultipleObjects(3,waits,FALSE,INFINITE);
+        if(wait==WAIT_OBJECT_0)continue;
+        if(wait==WAIT_OBJECT_0+1)return ERROR_OPERATION_ABORTED;
+        if(wait==WAIT_OBJECT_0+2) {
+            if(!GetExitCodeThread(frontend->thread,&error))return GetLastError();
+            return error ? error : ERROR_BROKEN_PIPE;
+        }
+        return wait==WAIT_FAILED ? GetLastError() : ERROR_BROKEN_PIPE;
+    }
+}
 DWORD frontend_session_publish_text(frontend_session *frontend,const void *owner,
     frontend_video *video,HANDLE surface,SMALL_RECT window,BOOL *committed)
 {
@@ -1127,7 +1180,8 @@ void frontend_session_forget(frontend_session *frontend,const void *owner)
     EnterCriticalSection(&frontend->io_lock);
     if(frontend->owner==owner) {
         frontend->owner=NULL;frontend->video=NULL;
-        frontend->video_serial=0;
+        frontend->video_serial=0;frontend->committed_video=NULL;frontend->committed_video_serial=0;
+        ResetEvent(frontend->video_committed);
         ZeroMemory(&frontend->window_mouse,sizeof(frontend->window_mouse));
     }
     SetEvent(frontend->changed);
@@ -1170,6 +1224,7 @@ DWORD frontend_session_destroy(frontend_session *frontend)
     if(frontend->refresh)CloseHandle(frontend->refresh);
     if(frontend->refreshed)CloseHandle(frontend->refreshed);
     if(frontend->changed)CloseHandle(frontend->changed);
+    if(frontend->video_committed)CloseHandle(frontend->video_committed);
     if(frontend->park)CloseHandle(frontend->park);
     if(frontend->park_done)CloseHandle(frontend->park_done);
     if(frontend->return_console)CloseHandle(frontend->return_console);

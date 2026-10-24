@@ -53,7 +53,7 @@ accepted matrix.
 The latest S4 source/evidence checkpoint is published on `origin/main`.
 S4 changes only evidence/governance and uses the already hash-verified product
 package; it does not require a binary republish.  This closes S4's finite
-scope.  A later owner observation admitted S5 to investigate a SOL Options
-access violation; that new route was outside S4's explicitly startup-only SOL
-frontier and does not retrospectively convert that limited assertion into a
-complete SOL-interaction claim.
+scope. A later owner observation assigned the SOL Options access violation to
+the queued everyday-usability interaction stage; that route remains outside
+S4's explicitly startup-only SOL frontier and does not retrospectively convert
+that limited assertion into a complete SOL-interaction claim.

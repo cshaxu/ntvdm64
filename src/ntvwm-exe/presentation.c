@@ -106,7 +106,7 @@ DWORD ntvwm_presentation_call(ntvwm_presentation *client,const console_io_reques
 {
     console_io_request request;DWORD error;
     if(!client || !input || !reply || input->bytes>CONSOLE_IO_MAX_DATA_BYTES ||
-        input->operation<CONSOLE_IO_WRITE || input->operation>CONSOLE_IO_GET_HANDOFF_TITLE_A)
+        input->operation<CONSOLE_IO_WRITE || input->operation>CONSOLE_IO_PRESENT_BARRIER)
         return ERROR_INVALID_PARAMETER;
     memcpy(&request,input,sizeof(request));
     EnterCriticalSection(&client->lock);error=exchange(client,&request,reply);
@@ -633,7 +633,11 @@ DWORD ntvwm_presentation_end(ntvwm_presentation *client,const console_text_style
     if(!error)error=final_capture(client,font);
     if(!error)error=return_unused_input(client);
     if(!error) {
-        request.operation=CONSOLE_IO_BARRIER;
+        request.operation=CONSOLE_IO_PRESENT_BARRIER;
+        /* Bind final I/O release to the complete native frame just captured.
+         * The regular flush path stays asynchronous; only handoff waits for
+         * NTCON's presentation-thread commit of this serial. */
+        request.state.mode=client->channel.video_serial;
         error=exchange(client,&request,&reply);
     }
     client->title_valid=FALSE;
