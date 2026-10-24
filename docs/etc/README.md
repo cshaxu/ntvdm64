@@ -597,6 +597,7 @@ proves the original `FSTI` continuation reaches BOP `FDh`.
 | [T418 S4 worker ownership reorganization](evidence/m0-t418-s4-worker-ownership-reorganization.md) | M0 T418 S4 | Worker-only implementation relocation, fresh x86 three-program/CCPU/C-VID/memory proof, and BaseSrv lifecycle proof. | Retain through T418 closure. |
 
 | [T420 S37 OEMUNI capability review](evidence/m0-t420-s37-oemuni-capability-review.md) | M0 T420 S37 | Original consumer inventory and non-ASCII conversion/buffer verification. | Retain with T420 capability evidence. |
+| [T453 S1 files/environment/OEM owner matrix](evidence/m0-t453-s1-files-environment-oem-owner-matrix.md) | M0 T453 S1 | Finite W04 original-owner, state-authority, lifecycle and consumer-test matrix; admits only the bounded S2 verification/repair work. | Retain through T453 closure. |
 | [T420 S38 DPMI32 capability review](evidence/m0-t420-s38-dpmi32-capability-review.md) | M0 T420 S38 | Selected package, BOP dispatch and protected-mode verification obligations. | Retain with T420 capability evidence. |
 
 [T425 S11 typeahead and closure audit](evidence/m0-t425-s11-typeahead-closure.md)
