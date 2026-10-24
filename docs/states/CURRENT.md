@@ -89,7 +89,11 @@ non-interactive token received `ERROR_ACCESS_DENIED` from `CreateDesktopW`.
 This is recorded in the
 [S3 audit](../etc/evidence/m0-t451-s3-mutation-destruction-audit.md). It is
 not a product result and must be rerun in a desktop-capable context before S3
-closure. Stable Ninja/ccache roots remain untouched.
+closure.  The same audit now separately records the finite modern-host
+boundary for original kernel-owned real destruction: neither a return hook,
+WinEvent nor CBT covers every original root/child/failure path.  No synthetic
+host replacement or production semantic concession is selected. Stable
+Ninja/ccache roots remain untouched.
 
 ## Recent M0 Closures
 
