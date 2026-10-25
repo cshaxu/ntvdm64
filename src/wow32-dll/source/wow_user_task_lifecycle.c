@@ -1131,7 +1131,8 @@ static void publish_scheduled_return(wow_user_runtime_thread *binding)
     SetLastError(saved);
 }
 
-static BOOL native_call_end(wow_user_native_call *call, BOOL scheduler_wait)
+static BOOL native_call_end(wow_user_native_call *call, BOOL scheduler_wait,
+    BOOL publish_return)
 {
     wow_user_runtime_thread *binding = call->binding;
     wow_task_order_thread *sender;
@@ -1166,7 +1167,7 @@ static BOOL native_call_end(wow_user_native_call *call, BOOL scheduler_wait)
             wow_user_native_call_failed("native-wait-task", ERROR_INVALID_STATE);
         task->wait_publication_pending = TRUE;
         published = TRUE;
-    } else published = publish_guest_return(binding, call);
+    } else published = publish_return ? publish_guest_return(binding, call) : TRUE;
     error = GetLastError();
     if (!published) wow_user_native_call_failed("publish-native-return", error);
     if (!call->held && !wow_user_runtime_leave(binding))
@@ -1177,12 +1178,17 @@ static BOOL native_call_end(wow_user_native_call *call, BOOL scheduler_wait)
 
 BOOL WINAPI wow_user_native_call_end(wow_user_native_call *call)
 {
-    return native_call_end(call, FALSE);
+    return native_call_end(call, FALSE, TRUE);
+}
+
+BOOL WINAPI wow_user_native_call_end_no_publication(wow_user_native_call *call)
+{
+    return native_call_end(call, FALSE, FALSE);
 }
 
 BOOL WINAPI wow_user_native_call_end_wait(wow_user_native_call *call)
 {
-    return native_call_end(call, TRUE);
+    return native_call_end(call, TRUE, TRUE);
 }
 
 /* A native operation may already have consumed a MSG or mutated USER. It
@@ -1224,6 +1230,27 @@ type WINAPI wow_native_##name params \
     WOW_NATIVE_CALL_RESULT(type, name, params, args, failed, target, NULL)
 #define WOW_NATIVE_CALL(type, name, params, args, failed) \
     WOW_NATIVE_CALL_TARGET(type, name, params, args, failed, w)
+
+/* A successful DestroyWindow returns after native USER has consumed the
+ * target identity.  The original owner returns that BOOL; it does not ask an
+ * adapter to re-enumerate the desktop or re-borrow a window which no longer
+ * exists.  Retain the exact native-call scheduler restoration, but do not
+ * turn normal terminal destruction into a synthetic view-publication error. */
+#define WOW_NATIVE_DESTROY_WINDOW(type, name, params, args, failed, target) \
+type WINAPI wow_native_##name params \
+{ \
+    wow_user_native_call call; \
+    type result; BOOL restored; DWORD error = GetLastError(); \
+    if (!wow_user_native_call_begin(&call, target)) return failed; \
+    SetLastError(error); \
+    __try { result = name args; } \
+    __finally { \
+        error = GetLastError(); \
+        restored = wow_user_native_call_end_no_publication(&call); \
+        if (restored) SetLastError(error); \
+    } \
+    return restored ? result : failed; \
+}
 WOW_NATIVE_CALL(BOOL, BringWindowToTop, (HWND w), (w), FALSE)
 WOW_NATIVE_CALL(BOOL, SetWindowPos, (HWND w, HWND after, int x, int y, int cx, int cy, UINT flags), (w, after, x, y, cx, cy, flags), FALSE)
 WOW_NATIVE_CALL(BOOL, MoveWindow, (HWND w, int x, int y, int cx, int cy, BOOL paint), (w, x, y, cx, cy, paint), FALSE)
@@ -1241,7 +1268,7 @@ WOW_NATIVE_CALL_RESULT(HWND, SetFocus, (HWND w), (w), NULL, w, result)
 /* capture.c sends WM_CAPTURECHANGED to the previous capture, not w. */
 WOW_NATIVE_CALL_RESULT(HWND, SetCapture, (HWND w), (w), NULL, GetCapture(), result)
 WOW_NATIVE_CALL_TARGET(BOOL, ReleaseCapture, (void), (), FALSE, GetCapture())
-WOW_NATIVE_CALL(BOOL, DestroyWindow, (HWND w), (w), FALSE)
+WOW_NATIVE_DESTROY_WINDOW(BOOL, DestroyWindow, (HWND w), (w), FALSE, w)
 WOW_NATIVE_CALL(BOOL, EndDialog, (HWND w, INT_PTR result_value), (w, result_value), FALSE)
 WOW_NATIVE_CALL_RESULT(HWND, SetParent, (HWND w, HWND parent), (w, parent), NULL, w, result)
 WOW_NATIVE_CALL(BOOL, SetWindowPlacement, (HWND w, const WINDOWPLACEMENT *placement), (w, placement), FALSE)
@@ -1336,6 +1363,7 @@ WOW_NATIVE_MESSAGE(DefFrameProcA, (HWND w, HWND client, UINT message, WPARAM wp,
 WOW_NATIVE_CALL_TARGET(LRESULT, DispatchMessageA, (const MSG *message), (message), 0, message ? message->hwnd : NULL)
 WOW_NATIVE_CALL_TARGET(LRESULT, DispatchMessageW, (const MSG *message), (message), 0, message ? message->hwnd : NULL)
 #undef WOW_NATIVE_CALL
+#undef WOW_NATIVE_DESTROY_WINDOW
 #undef WOW_NATIVE_CALL_TARGET
 #undef WOW_NATIVE_CALL_RESULT
 #undef WOW_NATIVE_CALL_AFTER

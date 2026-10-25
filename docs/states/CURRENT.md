@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T454 S3**
+**Active: M0 T454 S4**
 
 The owner has directed automatic sequential closure and advancement. T454
 admits Queue row W05, WOW32 resource discovery and loading foundation, after
@@ -12,29 +12,29 @@ binding, with no guest modification or rebuild.
 
 ## Active Packet
 
-### M0 T454 S3 — free, rollback and retirement services
+### M0 T454 S4 — foundation acceptance
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T454 S3, Ordinary Mode; single-agent implementation and independent final review. |
-| Admission And Approval | S1 delivered as `60145281e`; S2's original load/lock witness is complete. Owner directed automatic sequential S closure. T452 W03 remains the consumed allocation/alias owner. |
-| Objective | Exercise and, only if proven necessary, reconnect original host-to-guest and guest-to-host FreeResource behavior, partial-load failure retention, exact raw-key retirement and failure cleanup. |
+| Identifier Mode | M0 T454 S4, Ordinary Mode; single-agent implementation and independent final review. |
+| Admission And Approval | S1 `60145281e`, S2 `7aa1932e8` and S3's full coherent published package are complete. Owner directed automatic sequential S closure. T452 W03 remains the consumed allocation/alias owner. |
+| Objective | Aggregate the selected original lookup/load/lock/free foundation, audit exact package/source identity and close W05 without absorbing later menu/dialog conversion or drawing work. |
 | Non-goals | No guest changes/rebuild; no new resource manager, generic PE-resource fallback, accelerator conversion, resource-specific drawing, dialog/menu completion, broad common-dialog repair or bulk module retirement. |
 | Reference Baseline | S1 [owner matrix](../etc/evidence/m0-t454-s1-resource-owner-matrix.md), S2 [load/lock witness](../etc/evidence/m0-t454-s2-resource-load-lock-witness.md), W05 proposal and T454 plan; selected original `wres32.c`, `wres16.c`, `wcall16.c`, `wkman.c` and WOW16 callback shim. |
 | Files And ABI Surface | The selected original W05 provider bodies and current W03 alias/guest-callback interfaces. New tests may live under established WOW fixture trees; product edits require a traced owner/binding and divergence record. |
 | Applicable Rules | Execution, architecture, coding, documentation, source policy and WOW32 minimum-diff admission governance. |
-| Verification | Exercise the two FreeResource directions and failure/retirement edges through current selected provider and real immutable guest consumers where available; test raw key equality, response normalization, partial load and no stale alias/RES state. |
-| Expected Markers | Callback-before-release ordering, guest zero/nonzero normalization, exact record unlink, raw task key matching, one retirement and no accidental cursor/icon or accelerator substitution. |
+| Verification | Reconcile S1--S3 source records and exact release identities; re-run only evidence whose inputs changed, then conduct independent closure audit. |
+| Expected Markers | One selected original provider chain, one W03 allocation/alias owner, immutable guest media, coherent ten-image release and no foundation claim beyond recorded evidence. |
 | Asset Needs | Existing formal provider, immutable guest media, W03 aliases and source-selected resource fixtures; no imported source or replacement media. |
 | Reporting Requirements | Record each production versus fixture route, the exact source/binding chosen, normal/failure evidence, any product diff and its divergence identity; distinguish unavailable guest coverage from a pass. |
 | Stop Conditions | Need for guest change, new resource/memory/task authority, unbounded external import, unsupported callback lifetime machinery, or a semantic concession beyond the fixed S1 boundary. |
-| Exit Criteria | The bounded free/rollback group has executable normal and negative evidence, or a finite original-owner repair with coherent product publication; S4 receives the foundation acceptance only. |
+| Exit Criteria | A finite foundation-acceptance record, package identity audit, queue handoff and closure commit; any unproven later consumer behavior stays assigned to its later owner. |
 | Original Owner Request | 准入队列第一条；按照 ntvdm64-wow32-audit 审计结果执行最小化 diff 和最大化复通。随后要求每个 S 自动收口并继续。 |
 | Similar-Issue Sweep | Both FreeResource directions, zero/nonzero callback normalization, cursor/icon partition, missing/partial load, callback failure, repeated release, raw task versus module key and task exit. |
 | Candidate Proposal | [Resource discovery and loading foundation](../proposals/proposal-wow32-resource-loading-001.md). |
 
-S1 is closed as `60145281e`; S2 is now closed by its real guest witness. The full
-four-S sequence is in the [T454 plan](../etc/operations/t454-resource-loading-plan.md).
+S1 and S2 are closed; S3 is closed by its [resource free/rollback witness](../etc/evidence/m0-t454-s3-resource-free-rollback-witness.md).
+S4 is the finite foundation acceptance, not an expansion of resource consumers.
 
 ## S1 Closure Record
 
@@ -49,6 +49,16 @@ records the current selected original provider, the corrected current `CDL2`
 test parser, linked fixture evidence and a real immutable-guest same-worker
 FindText lifecycle run. It made no runtime product or guest-media change; S3
 retains only the explicitly bounded free/rollback/retirement obligations.
+
+## S3 Closure Record
+
+[The S3 resource free/rollback witness](../etc/evidence/m0-t454-s3-resource-free-rollback-witness.md)
+records the original-provider review, removal of the adapter-only modeless and
+post-destruction graph projections, a sixteen-round immutable-guest same-worker
+lifetime proof, full ten-component/idle-incremental build and coherent release
+publication.  Guest media stayed immutable.  The one broad real-dialog fixture
+non-pass is explicitly retained for S4 source disposition; it is not counted as
+S3 proof or silently repaired by a generic fallback.
 
 ## T453 S1 Closure Record
 
@@ -77,9 +87,11 @@ publish a new product image.
 
 ## Current Technical Baseline
 
-T452 S2 `0f8487f04` remains the W03 coherent ten-image delivery. T452 S3/S4
-made no product-source or deployment change; their current production-object
-and formal evidence is indexed in `docs/etc/README.md`.
+T454 S3 is the current coherent ten-image delivery: it publishes the bounded
+WOW32 free/rollback correction together with the rebuilt dependent product
+images. Its release identity and formal evidence are indexed in
+`docs/etc/README.md`; guest media remains unchanged. T452 S2 `0f8487f04`
+remains the prior W03 allocation/alias foundation delivery.
 
 ## Successor Boundary
 

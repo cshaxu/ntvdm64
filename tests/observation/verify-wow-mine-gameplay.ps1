@@ -10,6 +10,7 @@ param(
     [switch]$ExceptionSibling,
     [switch]$StartupFailureSibling,
     [switch]$ShellExceptionSibling,
+    [ValidateRange(1,32)][uint32]$CommonDialogRounds=1,
     [ValidateSet('Close','Ignore')][string]$ShellExceptionResponse='Close',
     [ValidateSet('Preparation','Returned')][string]$CallbackAbortPhase,
     [string]$StartupDiagnosticManifest,
@@ -22,6 +23,7 @@ if(([int]$RetiringSibling.IsPresent+[int]$ExceptionSibling.IsPresent+[int]$Start
 $withSibling=$RetiringSibling -or $ExceptionSibling -or $StartupFailureSibling -or $ShellExceptionSibling
 if($VisibleDesktop -and $withSibling){throw 'Ordinary desktop acceptance selects only the exact owned game'}
 if($CallbackAbortPhase -and !$ShellExceptionSibling){throw 'Callback abort requires the isolated Shell sibling contract'}
+if($CommonDialogRounds -ne 1 -and !$RetiringSibling){throw 'CommonDialogRounds requires the retiring sibling contract'}
 if($StartupFailureSibling -or $ShellExceptionSibling){
     $expectedTarget=if($ShellExceptionSibling){'SHLPROBE'}else{'GENPROBE'}
     $diagnostic=Get-Content $StartupDiagnosticManifest -Raw|ConvertFrom-Json
@@ -63,6 +65,7 @@ try {
         $siblingSource=if($ExceptionSibling -or $StartupFailureSibling){"$PSScriptRoot\win16_generic_probe.asm"}else{"$PSScriptRoot\win16_common_dialog_probe.asm"}
         if($ShellExceptionSibling){$siblingName='SHLPROBE';$siblingSource="$PSScriptRoot\win16_shell_probe.asm"}
         $assemblyArgs=@('-f','bin','-o',"$root\$siblingName.EXE",'-l',"$root\sibling.lst")
+        if($RetiringSibling){$assemblyArgs+=('-DCOMMON_DIALOG_ROUNDS='+$CommonDialogRounds)}
         if($ExceptionSibling){$assemblyArgs+='-DFAULT'}
         if($ShellExceptionSibling -and $ShellExceptionResponse -eq 'Ignore'){$assemblyArgs+='-DIGNORE_EXCEPTION'}
         if($CallbackAbortPhase){$assemblyArgs+='-DCALLBACK_ABORT'}
@@ -131,6 +134,12 @@ try {
     if($StartupFailureSibling){$probeArguments+="$root\startup-identity.txt"}
     & "$root\probe.exe" @probeArguments *> "$root\probe.txt"
     $probeExit=$LASTEXITCODE
+    # Preserve the guest's completed checkpoints before propagating a host
+    # probe failure.  This is diagnostic evidence only; the normal contract
+    # below still requires the entire sibling/gameplay run to succeed.
+    if($RetiringSibling -and (Test-Path "$runtime\tests\CDLPROBE.BIN")){
+        Copy-Item "$runtime\tests\CDLPROBE.BIN" "$root\sibling-report.partial.bin"
+    }
     if($ExceptionSibling -and (Test-Path "$runtime\tests\GENPROBE.BIN")){
         Copy-Item "$runtime\tests\GENPROBE.BIN" "$root\sibling-report.bin"
     }
@@ -233,12 +242,13 @@ try {
         Copy-Item "$runtime\tests\CDLPROBE.BIN" "$root\sibling-report.bin"
         $bytes=[IO.File]::ReadAllBytes("$root\sibling-report.bin")
         # CDL2 records the guest-observed DestroyWindow and IsWindow results.
-        # Four checkpoints are intentional: initialization, owner creation,
-        # ordinary dialog destruction, then the live dialog left for task exit.
+        # It writes initialization, owner creation, one record for each
+        # explicitly destroyed dialog, and the live dialog left for task exit.
         $recordSize=24
-        if($bytes.Length -ne (4*$recordSize)){throw 'Expected four CDL2 lifetime records'}
+        $recordCount=[int]$CommonDialogRounds+3
+        if($bytes.Length -ne ($recordCount*$recordSize)){throw 'Unexpected CDL2 lifetime record count'}
         $records=@();$names=@('phase','errors','created','closed','hooks','leaving','task','dialog','destroy_ax','iswindow_ax')
-        for($record=0;$record -lt 4;$record++){
+        for($record=0;$record -lt $recordCount;$record++){
             $offset=$recordSize*$record
             if([Text.Encoding]::ASCII.GetString($bytes,$offset,4) -ne 'CDL2'){throw 'Bad sibling signature'}
             $row=[ordered]@{}
@@ -247,10 +257,16 @@ try {
         }
         $records|ConvertTo-Json|Set-Content "$root\sibling-report.json"
         $last=$records[-1]
-        if(($records.phase -join ',') -ne '0,1,1,2' -or @($records|Where-Object errors -ne 0).Count -or
-            $records[2].created -ne 1 -or $records[2].closed -ne 1 -or $records[2].hooks -ne 1 -or
-            $records[2].destroy_ax -ne 1 -or $records[2].iswindow_ax -ne 0 -or
-            $last.created -ne 2 -or $last.closed -ne 1 -or $last.hooks -ne 2 -or
+        $destroyed=@($records[2..($recordCount-2)])
+        $destroyFailures=0
+        for($i=0;$i -lt $destroyed.Count;$i++){
+            $expected=$i+1;$row=$destroyed[$i]
+            if($row.phase -ne 1 -or $row.created -ne $expected -or $row.closed -ne $expected -or
+                $row.hooks -ne $expected -or $row.destroy_ax -ne 1 -or $row.iswindow_ax -ne 0){++$destroyFailures}
+        }
+        if($records[0].phase -ne 0 -or $records[1].phase -ne 1 -or $last.phase -ne 2 -or
+            @($records|Where-Object errors -ne 0).Count -or $destroyFailures -or
+            $last.created -ne ($CommonDialogRounds+1) -or $last.closed -ne $CommonDialogRounds -or $last.hooks -ne ($CommonDialogRounds+1) -or
             $last.leaving -ne 1 -or !$last.task -or !$last.dialog){throw 'Sibling operation/exit assertions failed'}
         $trace=Get-Content "$root\lifetime.txt" -Raw
         $task4='{0:X4}' -f [int]$last.task;$task8='{0:X8}' -f [int]$last.task

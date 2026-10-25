@@ -23,6 +23,10 @@ BOOL WINAPI wow_user_native_call_begin(wow_user_native_call *, HWND);
  * that native frame without inventing a send/reply association. */
 BOOL WINAPI wow_user_native_call_begin_inline(wow_user_native_call *);
 BOOL WINAPI wow_user_native_call_end(wow_user_native_call *);
+/* A modeless original leaf can return a public HWND without requiring the
+ * adapter's unrelated full desktop-graph projection.  This still restores
+ * the exact scheduler/runtime handoff and preserves the native result. */
+BOOL WINAPI wow_user_native_call_end_no_publication(wow_user_native_call *);
 /* Scheduler-wait entry did not necessarily own guest execution. Restore its
  * borrowed native frame without pretending to return to guest in that case. */
 BOOL WINAPI wow_user_native_call_end_wait(wow_user_native_call *);

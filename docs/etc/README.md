@@ -33,6 +33,11 @@ records the selected original runtime path, corrected current `CDL2` test
 format and real immutable-guest lifecycle acceptance; it transfers only
 free/rollback/retirement to S3.
 
+[T454 S3 resource free/rollback witness](evidence/m0-t454-s3-resource-free-rollback-witness.md)
+records removal of two adapter-only return projections from original modeless
+and terminal-destruction paths, the sixteen-round immutable-guest lifetime
+witness, full coherent component build and published-package regression.
+
 [T453 W04 plan](operations/t453-files-environment-oem-plan.md) records the
 active files, directories, environment and OEM packet, fixed one-owner boundary
 and source-first four-stage sequence.

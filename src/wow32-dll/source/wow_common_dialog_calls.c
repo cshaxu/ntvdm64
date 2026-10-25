@@ -4,9 +4,11 @@
 #include "wow_user_native_call.h"
 
 /* The original owner has already converted each request into a host structure.
- * Preserve its native result/error and run the existing return publication on
- * success, cancellation, failure and exception. No native operation is replayed. */
-#define COMMON_DIALOG_CALL(type, name, request_type, native, failed, publication) \
+ * Preserve its native result/error and exact runtime restoration on success,
+ * cancellation, failure and exception.  Find/Replace are modeless: their
+ * original owner returns the HWND directly and does not require a synthetic
+ * whole-desktop graph projection after every creation. */
+#define COMMON_DIALOG_CALL(type, name, request_type, native, failed, publication, finish) \
 type WINAPI name(request_type request) \
 { \
     wow_user_native_call call; \
@@ -20,24 +22,24 @@ type WINAPI name(request_type request) \
         publication; \
     } __finally { \
         error = GetLastError(); \
-        if (!wow_user_native_call_end(&call)) \
+        if (!finish(&call)) \
             wow_user_native_call_failed("common-dialog-return", GetLastError()); \
         SetLastError(error); \
     } \
     return result; \
 }
 COMMON_DIALOG_CALL(BOOL, wow_native_choose_color, LPCHOOSECOLORA,
-    ChooseColorA, FALSE, (void)0)
+    ChooseColorA, FALSE, (void)0, wow_user_native_call_end)
 COMMON_DIALOG_CALL(BOOL, wow_native_choose_font, LPCHOOSEFONTA,
-    ChooseFontA, FALSE, (void)0)
+    ChooseFontA, FALSE, (void)0, wow_user_native_call_end)
 COMMON_DIALOG_CALL(BOOL, wow_native_open_file, LPOPENFILENAMEA,
-    GetOpenFileNameA, FALSE, (void)0)
+    GetOpenFileNameA, FALSE, (void)0, wow_user_native_call_end)
 COMMON_DIALOG_CALL(BOOL, wow_native_save_file, LPOPENFILENAMEA,
-    GetSaveFileNameA, FALSE, (void)0)
+    GetSaveFileNameA, FALSE, (void)0, wow_user_native_call_end)
 COMMON_DIALOG_CALL(HWND, wow_native_find_text, LPFINDREPLACEA,
-    FindTextA, NULL, call.returned_window = result)
+    FindTextA, NULL, call.returned_window = result, wow_user_native_call_end_no_publication)
 COMMON_DIALOG_CALL(HWND, wow_native_replace_text, LPFINDREPLACEA,
-    ReplaceTextA, NULL, call.returned_window = result)
+    ReplaceTextA, NULL, call.returned_window = result, wow_user_native_call_end_no_publication)
 COMMON_DIALOG_CALL(BOOL, wow_native_print_dialog, LPPRINTDLGA,
-    PrintDlgA, FALSE, (void)0)
+    PrintDlgA, FALSE, (void)0, wow_user_native_call_end)
 #undef COMMON_DIALOG_CALL

@@ -35,6 +35,18 @@ The only correction was to the owned test parser, which had retained the
 obsolete `CDL1` report format.  S3 consequently remains the finite owner of
 free/rollback/retirement rather than reopening lookup or lock behavior.
 
+## Completed S3 execution
+
+S3 retained the selected original free/rollback providers and removed only two
+adapter-only return-time full-desktop projections: modeless `FindText`/
+`ReplaceText` completion and terminal `DestroyWindow` completion.  Both paths
+retain scheduler/runtime restoration and native results; neither asks an
+original resource operation to publish an invalid or unrelated desktop graph.
+The [S3 witness](../evidence/m0-t454-s3-resource-free-rollback-witness.md)
+records the real sixteen-round immutable-guest lifecycle pass, full
+ten-component build/idle-incremental pass and coherent package regression.
+S4 receives only the foundation aggregation boundary.
+
 ## Boundaries
 
 `FreeResource` is not one operation: guest `IFreeResource`, guest-to-host

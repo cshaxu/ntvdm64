@@ -8,7 +8,7 @@ typedef struct wow_user_native_call {
     HWND target_window, returned_window;
     unsigned prior;
 } wow_user_native_call;
-static unsigned errors, depth, starts, ends, leaves, mode, rejected, end_failed;
+static unsigned errors, depth, starts, ends, no_publish_ends, leaves, mode, rejected, end_failed;
 static HWND expected_owner = (HWND)0x1234, expected_return = (HWND)0x5678;
 static HWND published;
 static void check(BOOL condition, const char *name)
@@ -27,6 +27,16 @@ static BOOL WINAPI wow_user_native_call_end(wow_user_native_call *call)
 {
     ++ends; check(depth == call->prior + 1, "nested LIFO");
     depth = call->prior; published = call->returned_window;
+    SetLastError(9003); return !end_failed;
+}
+static BOOL WINAPI wow_user_native_call_end_no_publication(wow_user_native_call *call)
+{
+    ++no_publish_ends; check(depth == call->prior + 1, "modeless nested LIFO");
+    depth = call->prior;
+    /* The returned HWND remains the original API result, but this path must
+     * not imply a full-desktop adapter publication. */
+    check(call->returned_window == expected_return || !call->returned_window,
+        "modeless returned HWND retained locally");
     SetLastError(9003); return !end_failed;
 }
 __declspec(noreturn) static void WINAPI wow_user_native_call_failed(const char *where, DWORD error)
@@ -77,14 +87,15 @@ static HWND WINAPI leaf_replace(LPFINDREPLACEA p) { return native_leaf(p) ? expe
         ULONG_PTR result = 0; \
         DWORD exception = 0; \
         ZeroMemory(&request, sizeof(request)); request.hwndOwner = expected_owner; \
-        starts = ends = leaves = depth = 0; published = NULL; \
+        starts = ends = no_publish_ends = leaves = depth = 0; published = NULL; \
         mode = scenario == 5 ? 1 : scenario; \
         rejected = scenario == 4; end_failed = scenario == 5; \
         SetLastError(7001); \
         __try { result = (ULONG_PTR)name(&request); } \
         __except(EXCEPTION_EXECUTE_HANDLER) { exception = GetExceptionCode(); } \
         check(depth == 0 && starts == (scenario == 3 ? 2U : 1U), "balanced entry"); \
-        check(ends == (rejected ? 0U : starts), "exactly once finalization"); \
+        check((ends + no_publish_ends) == (rejected ? 0U : starts), "exactly once finalization"); \
+        check(no_publish_ends == ((modeless && !rejected) ? starts : scenario == 3 ? 1U : 0U), "modeless no global publication"); \
         check(leaves == (rejected ? 0U : starts), "native exactly once/no replay"); \
         check(exception == (scenario == 2 ? 0xE0449701U : scenario == 5 ? 0xE0449702U : 0U), "SEH propagation"); \
         if (scenario != 2 && scenario != 5) { \
@@ -93,7 +104,7 @@ static HWND WINAPI leaf_replace(LPFINDREPLACEA p) { return native_leaf(p) ? expe
         } \
         if (!rejected && scenario != 2) check(request.lStructSize == 0x7654, "native output forwarded"); \
         if (!rejected && scenario != 2 && scenario != 5) \
-            check(published == ((modeless && scenario != 0) ? expected_return : NULL), "returned window publication"); \
+            check(published == NULL, "no synthetic returned window publication"); \
     } \
     printf("COMMON_DIALOG_LEAF %s scenarios=6\n", #name); \
 } while (0)
