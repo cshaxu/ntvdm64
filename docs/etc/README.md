@@ -45,6 +45,10 @@ guest-graphics acceptance boundary.
 records the physical private-desktop WINMINE, SOL and WRITE frontiers, the
 test-only x64 probe type correction and the explicit SOL geometry non-pass.
 
+[T456 S1 font/text/metafile owner matrix](evidence/m0-t456-s1-font-text-metafile-owner-matrix.md)
+records the selected original providers, one existing public font-tracking
+binding, and the sole source-proven glyph-rotation seam admitted to S2.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.

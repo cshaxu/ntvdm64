@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T456 S1**
+**Active: M0 T456 S2**
 
 The owner directed automatic sequential S closure and advancement. T455 W07
 is closed; T456 admits Queue W08, WOW32 fonts, text and metafiles. The task
@@ -12,28 +12,30 @@ or rebuild.
 
 ## Active Packet
 
-### M0 T456 S1 — font/text/metafile owner and composition audit
+### M0 T456 S2 — glyph-outline compatibility and text/font lifetime
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T456 S1, Ordinary Mode; single-agent implementation and independent final review. |
-| Admission And Approval | Owner's standing WOW32 objective and automatic sequential S directive; T455 W07 closure. |
-| Objective | Establish the exact original owner/build/lifetime boundary for WOW font conversion, text drawing and metafile operations, including T443 H08 font discovery transfer, before any repair. |
-| Non-goals | No guest changes/rebuild; no generic text renderer, second font registry, host-font-to-guest lookup merger, metafile replacement, control/resource conversion, or speculative source edit. |
-| Reference Baseline | [T455 closure](../history/m0-t455-closure.md), [W08 proposal](../proposals/proposal-wow32-fonts-text-metafiles-001.md), T443 H08 transfer, W04/W07 evidence and WOW32 minimum-diff governance. |
-| Files And ABI Surface | Original WOW32 font/text/metafile units and existing selected providers; no product file is presumed changed. |
+| Identifier Mode | M0 T456 S2, Ordinary Mode; single-agent implementation and independent final review. |
+| Admission And Approval | Owner's standing WOW32 objective and automatic sequential S directive; S1 owner-matrix closure. |
+| Objective | Restore the source-proven `GetGlyphOutlineWow` Win3.1 rotation policy with a bounded public seam, then prove original guest text/font content and task lifetime through selected callers. |
+| Non-goals | No guest changes/rebuild; no generic text renderer, second font registry, host-font-to-guest lookup merger, metafile replacement, control/resource conversion, private GDI import or speculative provider replacement. |
+| Reference Baseline | [S1 owner matrix](../etc/evidence/m0-t456-s1-font-text-metafile-owner-matrix.md), [T455 closure](../history/m0-t455-closure.md), [W08 proposal](../proposals/proposal-wow32-fonts-text-metafiles-001.md), T443 H08 transfer, W04/W07 evidence and WOW32 minimum-diff governance. |
+| Files And ABI Surface | `wow_public_user_facade.c`, its existing private ABI declarations, focused fixture/test source and selected original font/text callers. |
 | Applicable Rules | Execution, architecture, coding, documentation, source policy and WOW32 minimum-diff admission governance. |
-| Verification | Trace dispatch tables and actual build selection; classify original/facade/replacement rungs; inspect lifetime/failure edges and execute only existing non-mutating focused probes needed to distinguish routes. |
-| Expected Markers | One authority each for host-font discovery, guest-root lookup, font handles/text conversion and metafile lifetime; every missing dependency has a finite source-shaped boundary. |
-| Asset Needs | Existing OpenNT MVDM mirror, formal x86 graph, immutable guest media, T443/W04/W07 evidence and current release package; no new source import or replacement media. |
-| Reporting Requirements | Produce an owner/build/lifetime ledger, exact source/build conditions, tests and finite S2 repair handoff; record no-runtime-proof limits precisely. |
-| Stop Conditions | Need for guest change, broad USER/GDI server import, second font/metafile authority, source-less renderer, or semantic concession beyond existing original behavior. |
-| Exit Criteria | Every reachable selected font/text/metafile family is classified with an original owner or bounded missing dependency; S2 scope is finite and does not hide a provider replacement. |
+| Verification | Add a focused public-GDI fixture for raw rotated versus zero-rotation equivalent glyph outlines and failure restoration; build the affected x86 WOW32 closure; execute guest text/font content plus repeat-task lifetime cases, then required inherited regression/publication gates. |
+| Expected Markers | The seam changes only the source-proven selected-font escapement/orientation input; caller DC/font state, `MAT2`, result/error direction and font task cleanup remain single-owner. |
+| Asset Needs | Existing OpenNT MVDM mirror, formal x86 graph, immutable guest media, existing release package and no new source import or replacement media. |
+| Reporting Requirements | Record exact source comparison, native fixture and guest/lifetime evidence, complete ten-image package identity, explicit non-passes and S3 metafile handoff. |
+| Stop Conditions | Need for guest change, broad USER/GDI server import, second font/metafile authority, source-less renderer or semantic concession beyond the documented two-field rotation policy. |
+| Exit Criteria | The selected text/font rows execute through original callers with normal/failure/task-retirement evidence; package is built, published, hash-verified, committed and pushed if production changes. |
 | Original Owner Request | 单人双角色模式复通 WOW32；优先原版代码追溯与最少 diff，整批接通后再统一验证；每个 S 自动收口并继续。 |
-| Similar-Issue Sweep | `WG32CreateFont`/selection/delete, ANSI/OEM/Unicode conversion, text extent/output, host versus guest font search, metafile create/play/delete, task teardown and failure rollback. |
+| Similar-Issue Sweep | `WG32CreateFont`/selection/delete, ANSI/OEM/Unicode conversion, text extent/output, rotated versus zero-rotation glyphs, host versus guest font search and task teardown/failure rollback. |
 | Candidate Proposal | [Fonts, text and metafiles](../proposals/proposal-wow32-fonts-text-metafiles-001.md). |
 
 ## S1 Closure Record
+
+S1 proved that `wgfont.c`, `wgtext.c` and `wgmeta.c` are selected original production providers, not dormant sources; it also closed the existing public font tracking and ETM seams against their retained T420 contract evidence. The only source-proven live discrepancy is `GetGlyphOutlineWow` omitting the original `bIgnoreRotation` policy. [The S1 owner matrix](../etc/evidence/m0-t456-s1-font-text-metafile-owner-matrix.md) defines the finite S2 public-font seam and keeps metafiles in S3.
 
 S1 selected the original `walias`/`wgdi`/`wreldc`/`wdib` providers from the
 formal x86 graph and proved that one bounded worker alias carrier is the only
