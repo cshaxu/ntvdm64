@@ -64,7 +64,7 @@ try {
         throw 'Require exactly one CCPU40 production wole2 compile command.'
     }
     $compile[0] | Set-Content (Join-Path $out 'production-command.txt')
-    @($source, $fixture, $PSCommandPath) | Get-FileHash | Export-Csv -NoTypeInformation (Join-Path $out 'inputs.csv')
+    Get-FileHash -LiteralPath @($source, $fixture, $PSCommandPath) | Export-Csv -NoTypeInformation (Join-Path $out 'inputs.csv')
 
     $owner = $compile[0] -replace '/Fo\S+', ('/Fo"' + $out + '/wole2.obj"')
     Invoke-Owned 'owner' $owner 120
@@ -85,7 +85,7 @@ try {
     foreach ($forbidden in @('LargeBuffer1[16*1024]', 'strcpy( lpNameBuffer, pname.Buffer )')) {
         if ($text.Contains($forbidden)) { throw "Retired unsafe alias source survived: $forbidden" }
     }
-    @($source, $fixture, $PSCommandPath) | Get-FileHash | Export-Csv -NoTypeInformation (Join-Path $out 'outputs-inputs.csv')
+    Get-FileHash -LiteralPath @($source, $fixture, $PSCommandPath) | Export-Csv -NoTypeInformation (Join-Path $out 'outputs-inputs.csv')
     Get-FileHash (Join-Path $out 'fixture.exe'), (Join-Path $out 'wole2.obj') |
         Export-Csv -NoTypeInformation (Join-Path $out 'artifacts.csv')
     '0' | Set-Content (Join-Path $out 'exit.txt')

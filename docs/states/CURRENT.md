@@ -2,13 +2,45 @@
 
 ## Current Work
 
-**No active M/T/S packet. M0 T458 is closed.**
+**Active: M0 T459 S2**
 
 The owner directed automatic sequential S closure and advancement. T455 W07,
-T456 W08, T457 W06 and T458 W09 are closed. The next candidate requires a new
-admission. Completed work follows the read-only `ntvdm64-wow32-audit`: recover
+T456 W08, T457 W06 and T458 W09 are closed. T459 admits Queue W18, common
+dialogs and related OLE interfaces. Completed work follows the read-only `ntvdm64-wow32-audit`: recover
 maximum selected original behavior through the smallest source-shaped binding,
 with no guest modification or rebuild.
+
+## Active Packet
+
+### M0 T459 S2 — common-dialog original-consumer acceptance
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T459 S2, Ordinary Mode; single-agent implementation and independent final review. |
+| Admission And Approval | Automatic continuation after closed S1 owner audit; Queue W18 proposal. |
+| Objective | Exercise only selected original common-dialog callers through immutable guest consumers and prove cancellation, errors, callback reentry and terminal cleanup. |
+| Non-goals | No guest changes/rebuild; no temporary dialog provider, broad COMMDLG replacement, OLE implementation or consumer-name special case. |
+| Reference Baseline | [S1 owner matrix](../etc/evidence/m0-t459-s1-common-dialog-ole-owner-matrix.md), W06 dialog boundaries and W18 proposal. |
+| Files And ABI Surface | Original `wcommdlg.c`/`wcmdgtbl.h`; existing native-leaf and original-callback scope seams only. |
+| Applicable Rules | Applicable execution, architecture, coding, documentation, source-policy and WOW32 minimum-diff rules. |
+| Verification | Formal x86 build, existing exact-boundary witnesses and immutable guest modal/modeless consumer matrix where the current environment exposes it. |
+| Expected Markers | Original conversion/callback bodies see the request; cancel/error and resource retirement are not replaced or leaked. |
+| Asset Needs | Existing immutable guest media and published coherent package only; no new guest artifact. |
+| Reporting Requirements | Caller/input/result/failure/retirement matrix and source-defect conclusion. |
+| Stop Conditions | Guest change, second dialog provider, template/resource reimplementation, synthetic native result graph or source-less workaround. |
+| Exit Criteria | Every selected modal/modeless common-dialog edge has a named executable witness or an explicit pre-provider environmental non-pass with no product inference. |
+| Original Owner Request | 单人双角色模式复通 WOW32；源码追溯优先、最少 diff、完整接通后验证；每个 S 自动收口并继续。 |
+| Similar-Issue Sweep | Templates, callbacks, modal/modeless completion, cancel/error, output copy-back, terminal cleanup and task retirement. |
+| Candidate Proposal | [Common dialogs and related OLE](../proposals/proposal-wow32-common-dialogs-ole-001.md). |
+
+## T459 S1 Closure Record
+
+S1 proved original `wcommdlg.c` and `wole2.c` remain the only dialog and OLE
+authorities. Thin project scopes are necessary host entry/exit bindings, not
+second providers; immutable guest OLE libraries remain a stopping boundary.
+Exact dialog/callback/OLE alias witnesses pass after observer-only PowerShell
+portability repairs. [The S1 matrix](../etc/evidence/m0-t459-s1-common-dialog-ole-owner-matrix.md)
+admits S2 dialogs and reserves OLE for S3.
 
 ## T458 S1 Closure Record
 
@@ -195,6 +227,10 @@ evidence roots.
 
 T458 S4 may use only `build/t458-s4` for disposable consumer acceptance, with
 a 45-minute phase, 2-GiB size and 10-minute no-progress budget. Stable
+`.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
+
+T459 S1 may use only `build/t459-s1` for disposable owner-audit evidence, with
+a 30-minute phase, 2-GiB size and 10-minute no-progress budget. Stable
 `.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
 
 T457 S1 may use only `build/t457-s1` for disposable source-audit and focused

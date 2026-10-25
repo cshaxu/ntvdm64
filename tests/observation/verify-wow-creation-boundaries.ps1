@@ -49,7 +49,9 @@ if($Case -eq 'common-dialog') { $selected += ' "'+$provider+'\obj\wow32-dll\wow_
 Invoke-CompileCommand ('link /nologo /OPT:REF /out:"'+$out+'\fixture.exe" "'+$out+'\fixture.obj"'+$selected+' kernel32.lib user32.lib')
 $start=[DateTime]::UtcNow
 $arguments=if($LogicOnly -and $Case -eq 'idle'){'--logic-only'}else{''}
-$p=Start-Process "$out/fixture.exe" -ArgumentList $arguments -WindowStyle Hidden -PassThru -RedirectStandardOutput "$out/stdout.txt" -RedirectStandardError "$out/stderr.txt"
+$startOptions=@{FilePath="$out/fixture.exe";WindowStyle='Hidden';PassThru=$true;RedirectStandardOutput="$out/stdout.txt";RedirectStandardError="$out/stderr.txt"}
+if($arguments){$startOptions.ArgumentList=$arguments}
+$p=Start-Process @startOptions
 $ownedHandle=$p.Handle
 @{pid=$p.Id;start=$start.ToString('o');deadline=$start.AddSeconds(30).ToString('o')} | ConvertTo-Json | Set-Content "$out/process.json"
 if(!$p.WaitForExit(30000)){& taskkill.exe /PID $p.Id /T /F;throw 'Owned creation fixture exceeded deadline'}
