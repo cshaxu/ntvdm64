@@ -55,10 +55,34 @@ if ($missingExports.Count) {
     throw ('Generated x86 DEF omits original WOW32 exports: ' + ($missingExports -join ', '))
 }
 
+# This is deliberately exact rather than a permissive prefix test. The
+# provider generator splits the admitted original USER consumers into stable
+# object identities so that their narrow compile-time feature selections do
+# not collide. Keep this census synchronized with that generator; otherwise a
+# stale assertion can reject the current formal production graph before any
+# WOW32 source or ABI has changed.
 $expectedUser = @(
+    'control-body-editec', 'control-body-edecrare', 'control-body-editsl',
+    'control-body-editml', 'control-body-edmlonce', 'control-body-edmlrare',
+    'control-body-edslrare', 'control-body-combo', 'control-body-combodir',
+    'control-body-comboini', 'control-body-lb1', 'control-body-lboxctl1',
+    'control-body-lboxctl2', 'control-body-lboxctl3', 'control-body-lboxmult',
+    'control-body-lboxrare', 'control-body-lboxvar', 'control-body-dlgbegin',
+    'control-body-dlgend', 'control-body-dlgmgr', 'control-body-dlgmgrc',
+    'control-body-dlgmgr2', 'control-body-dmmnem', 'control-body-wow',
+    'control-body-winmgrc', 'control-view-winmgr', 'control-view-wow',
     'hdata', 'clres', 'cldib', 'client', 'rtlinit', 'ntstubs', 'clmenu',
-    'handtabl', 'cleanup', 'probe', 'class-remove', 'class-register',
-    'taskman', 'input', 'profile', 'queue', 'exitwin', 'class-client', 'class'
+    'clglobal', 'control-lookaside', 'dialog-template', 'dialog-memory',
+    'control-text', 'control-color', 'control-brush-client', 'control-brush',
+    'control-state', 'control-fnid', 'dialog-pointer', 'control-rect',
+    'default-client', 'private-word-reader', 'private-word-client',
+    'private-word-setter', 'client-callproc', 'default-window-bits',
+    'default-borders', 'default-messages', 'control-draw',
+    'control-text-client', 'control-text-rtl', 'control-text-extent',
+    'control-client-draw', 'control-client-mngrayc', 'button-client',
+    'button-blit', 'button-atlas-table', 'handtabl', 'cleanup', 'probe',
+    'class-remove', 'class-register', 'taskman', 'input', 'profile', 'queue',
+    'exitwin', 'class-client', 'class'
 )
 $actualUser = @([regex]::Matches($link, '\bobj/opennt-user/([^\s/]+)\.obj') |
     ForEach-Object { $_.Groups[1].Value })
@@ -69,7 +93,11 @@ if (@(Compare-Object $expectedUser $actualUser).Count) {
 $targetSources = @([regex]::Matches([IO.File]::ReadAllText((Join-Path $root 'src/wow32-dll/sources')),
     '(?m)^\s*([A-Za-z0-9_]+)\.c\s*\\?\s*$') |
     ForEach-Object { $_.Groups[1].Value })
-if ($targetSources.Count -ne 21) { throw "Expected 21 WOW32 DLL bindings, found $($targetSources.Count)." }
+# The target-only manifest has 28 bounded host bindings. Its full content is
+# checked below against the link edge; this count catches accidental manifest
+# expansion or truncation without treating the earlier 21-entry recovery
+# checkpoint as the current production contract.
+if ($targetSources.Count -ne 28) { throw "Expected 28 WOW32 DLL bindings, found $($targetSources.Count)." }
 $missingBindings = @($targetSources | Where-Object {
     $link -notmatch ('\bobj/wow32-dll/' + [regex]::Escape($_) + '\.obj\b')
 })

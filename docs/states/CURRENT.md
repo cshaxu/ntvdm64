@@ -2,13 +2,36 @@
 
 ## Current Work
 
-**No active M/T/S packet. M0 T459 is closed.**
+**Active: M0 T460 S2**
 
 The owner directed automatic sequential S closure and advancement. T455 W07,
 T456 W08, T457 W06, T458 W09 and T459 W18 are closed. Completed work follows
 the read-only `ntvdm64-wow32-audit`: recover
 maximum selected original behavior through the smallest source-shaped binding,
 with no guest modification or rebuild.
+
+## Active Packet
+
+### M0 T460 S2 — clipboard formats and transfer
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T460 S2, Ordinary Mode; single-agent implementation and independent final review. |
+| Admission And Approval | S1 source contract closed; automatic continuation under Queue W10 Clipboard proposal. |
+| Objective | Prove selected original open/set/get/close conversion and ownership transfer with real immutable guest/native peers; repair only a source-proven existing boundary. |
+| Non-goals | No guest change/rebuild; no new clipboard manager, duplicate data cache, DDE provider or source-less transfer substitute. |
+| Reference Baseline | [S1 owner matrix](../etc/evidence/m0-t460-s1-clipboard-owner-matrix.md), [Clipboard proposal](../proposals/proposal-wow32-clipboard-001.md), W01/W02/W03/W07 owner records and WOW32 minimum-diff governance. |
+| Files And ABI Surface | Selected original `wuclip.c` format conversion, existing public USER/VDM/GDI boundaries, immutable guest/native peer fixtures. |
+| Applicable Rules | Applicable execution, architecture, coding, documentation, source-policy and WOW32 minimum-diff rules. |
+| Verification | Real guest/native selected-format exchange, rejected/abandoned ownership assertions, focused original callback ABI/formal x86 graph and coherent x86 package regression if production changes. |
+| Expected Markers | Accepted transfer has one host Clipboard owner and one original guest cache owner; rejected/abandoned input creates neither a false success nor an orphaned guest allocation. |
+| Asset Needs | Existing immutable guest media, mirrors and existing fixtures only; no new guest artifact. |
+| Reporting Requirements | Exact selected format/peer matrix, conversion/ownership result, failure disposition, production change and package hashes or explicit no-change result. |
+| Stop Conditions | Guest change, new clipboard registry/cache, unbounded data bridge, DDE import, source-less semantic concession or a previously unproved callback lifetime mechanism. |
+| Exit Criteria | Real selected guest/native transfer and rejected/abandoned paths prove ownership through the original production callers, or a bounded source-proven repair is implemented and verified. |
+| Original Owner Request | 单人双角色模式复通 WOW32；源码追溯优先、最少 diff、完整接通后验证；每个 S 自动收口并继续。 |
+| Similar-Issue Sweep | Formats, ownership replacement, delayed rendering, rejected data, task loss, callbacks, nested operations and native/guest identity. |
+| Candidate Proposal | [WOW32 clipboard](../proposals/proposal-wow32-clipboard-001.md). |
 
 ## T459 Closure Record
 
@@ -173,6 +196,10 @@ a 45-minute phase, 2-GiB size and 10-minute no-progress budget. Stable
 T459 S1--S4 used `build/t459-s1` through `build/t459-s4` only for disposable
 evidence. Their retained results are indexed from the closure; stable `.ninja`
 and `.ccache` remain reusable caches and are never task evidence roots.
+
+T460 S2 may use only `build/t460-s2` for disposable format-transfer evidence,
+with a 30-minute phase, 2-GiB size and 10-minute no-progress budget. Stable
+`.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
 
 T457 S1 may use only `build/t457-s1` for disposable source-audit and focused
 fixture evidence. Stable `.ninja` and `.ccache` remain reusable caches and
