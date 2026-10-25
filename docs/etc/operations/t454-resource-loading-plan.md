@@ -47,6 +47,16 @@ records the real sixteen-round immutable-guest lifecycle pass, full
 ten-component build/idle-incremental pass and coherent package regression.
 S4 receives only the foundation aggregation boundary.
 
+## Completed S4 acceptance
+
+S4 re-ran the previously retained registered-owner dialog/resource fixture
+against the current selected production objects. It passed all physical
+rollback, resource-owner, native-dialog-owner and terminal lifecycle markers.
+The [S4 acceptance record](../evidence/m0-t454-s4-foundation-acceptance.md)
+aggregates that result with S1--S3 and closes W05. It makes no product, guest
+or release-asset change; W07 receives the resource foundation without a
+second resource manager.
+
 ## Boundaries
 
 `FreeResource` is not one operation: guest `IFreeResource`, guest-to-host

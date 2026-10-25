@@ -38,6 +38,10 @@ records removal of two adapter-only return projections from original modeless
 and terminal-destruction paths, the sixteen-round immutable-guest lifetime
 witness, full coherent component build and published-package regression.
 
+[T454 S4 resource foundation acceptance](evidence/m0-t454-s4-foundation-acceptance.md)
+records the final registered-owner resource/physical rollback fixture, aggregate
+W05 boundary and T454 closure handoff.
+
 [T453 W04 plan](operations/t453-files-environment-oem-plan.md) records the
 active files, directories, environment and OEM packet, fixed one-owner boundary
 and source-first four-stage sequence.
