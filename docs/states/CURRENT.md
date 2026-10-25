@@ -2,36 +2,36 @@
 
 ## Current Work
 
-**Active: M0 T455 S4**
+**Active: M0 T456 S1**
 
-The owner directed automatic sequential S closure and advancement. T455 admits
-Queue row W07, WOW32 GDI identity, DC and drawing, after T454 W05 closure.
-The task follows the read-only `ntvdm64-wow32-audit`: recover maximum selected
-original behavior through the smallest source-shaped binding, with no guest
-modification or rebuild.
+The owner directed automatic sequential S closure and advancement. T455 W07
+is closed; T456 admits Queue W08, WOW32 fonts, text and metafiles. The task
+follows the read-only `ntvdm64-wow32-audit`: recover maximum selected original
+behavior through the smallest source-shaped binding, with no guest modification
+or rebuild.
 
 ## Active Packet
 
-### M0 T455 S4 — integrated GDI graphics acceptance
+### M0 T456 S1 — font/text/metafile owner and composition audit
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T455 S4, Ordinary Mode; single-agent implementation and independent final review. |
-| Admission And Approval | Owner's standing WOW32 objective and automatic sequential S directive; closed T455 S1--S3 and Queue W07. |
-| Objective | Exercise the selected original GDI/DC/DIB/palette routes in real WOW graphics consumers; repair only a proved host binding or lifecycle defect, then publish a coherent package if product code changes. |
-| Non-goals | No guest changes/rebuild; no new bitmap/GDI manager, generic image decoder, font/text/metafile conversion, control resource conversion, broad drawing repair or screenshot-only cosmetic patch. |
-| Reference Baseline | Closed [S1 GDI owner matrix](../etc/evidence/m0-t455-s1-gdi-owner-matrix.md), [S2 DC/drawing evidence](../etc/evidence/m0-t455-s2-dc-dispatch-lifetime.md), [S3 DIB/palette boundary](../etc/evidence/m0-t455-s3-dib-palette-boundary.md), T454 closure, W07 proposal and WOW32 minimum-diff governance. |
-| Files And ABI Surface | Selected original WOW32 GDI providers and already-selected worker alias carrier only; product files are not presumed changed. |
+| Identifier Mode | M0 T456 S1, Ordinary Mode; single-agent implementation and independent final review. |
+| Admission And Approval | Owner's standing WOW32 objective and automatic sequential S directive; T455 W07 closure. |
+| Objective | Establish the exact original owner/build/lifetime boundary for WOW font conversion, text drawing and metafile operations, including T443 H08 font discovery transfer, before any repair. |
+| Non-goals | No guest changes/rebuild; no generic text renderer, second font registry, host-font-to-guest lookup merger, metafile replacement, control/resource conversion, or speculative source edit. |
+| Reference Baseline | [T455 closure](../history/m0-t455-closure.md), [W08 proposal](../proposals/proposal-wow32-fonts-text-metafiles-001.md), T443 H08 transfer, W04/W07 evidence and WOW32 minimum-diff governance. |
+| Files And ABI Surface | Original WOW32 font/text/metafile units and existing selected providers; no product file is presumed changed. |
 | Applicable Rules | Execution, architecture, coding, documentation, source policy and WOW32 minimum-diff admission governance. |
-| Verification | Reuse exact cached x86 inputs; run source-owned/physical-runtime graphics probes and application start/content/cleanup checks where environment permits; then perform proportionate DOS/native regression only after a connected repair. |
-| Expected Markers | One carrier and original owners remain selected; each real result has a traceable product route; a visible failure has a proven host owner before code changes. |
-| Asset Needs | Existing OpenNT MVDM mirror, current formal x86 build graph, immutable guest media and approved private-desktop runner where required; no imported source or replacement media. |
-| Reporting Requirements | Record exact application/probe inputs, package hashes, result category, source owner, remediation or finite limitation, and T455 closure handoff. |
-| Stop Conditions | Need for guest change, GDI/USER server import, second identity carrier, source-less replacement, unbounded build closure or semantic concession beyond the original contract. |
-| Exit Criteria | The W07 graphics acceptance matrix has each reachable consumer positively verified or a finite proved host gap repaired/published; no unowned DIB/palette defect is transferred to a later capability. |
+| Verification | Trace dispatch tables and actual build selection; classify original/facade/replacement rungs; inspect lifetime/failure edges and execute only existing non-mutating focused probes needed to distinguish routes. |
+| Expected Markers | One authority each for host-font discovery, guest-root lookup, font handles/text conversion and metafile lifetime; every missing dependency has a finite source-shaped boundary. |
+| Asset Needs | Existing OpenNT MVDM mirror, formal x86 graph, immutable guest media, T443/W04/W07 evidence and current release package; no new source import or replacement media. |
+| Reporting Requirements | Produce an owner/build/lifetime ledger, exact source/build conditions, tests and finite S2 repair handoff; record no-runtime-proof limits precisely. |
+| Stop Conditions | Need for guest change, broad USER/GDI server import, second font/metafile authority, source-less renderer, or semantic concession beyond existing original behavior. |
+| Exit Criteria | Every reachable selected font/text/metafile family is classified with an original owner or bounded missing dependency; S2 scope is finite and does not hide a provider replacement. |
 | Original Owner Request | 单人双角色模式复通 WOW32；优先原版代码追溯与最少 diff，整批接通后再统一验证；每个 S 自动收口并继续。 |
-| Similar-Issue Sweep | WINMINE/SOL/WRITE startup and content, DIB/memory-DC selection, palette effects, stale aliases, error paths, worker/task teardown and ordinary DOS/native regression. |
-| Candidate Proposal | [GDI identity, DC and drawing](../proposals/proposal-wow32-gdi-dc-drawing-001.md). |
+| Similar-Issue Sweep | `WG32CreateFont`/selection/delete, ANSI/OEM/Unicode conversion, text extent/output, host versus guest font search, metafile create/play/delete, task teardown and failure rollback. |
+| Candidate Proposal | [Fonts, text and metafiles](../proposals/proposal-wow32-fonts-text-metafiles-001.md). |
 
 ## S1 Closure Record
 
@@ -58,6 +58,17 @@ route has one DIB information owner and original callback cleanup; the formal
 x86 DIB fixture proved bidirectional native/guest storage sharing, selection
 and removal.  [The S3 DIB/palette boundary](../etc/evidence/m0-t455-s3-dib-palette-boundary.md)
 records the precise scope and admits only real graphics acceptance in S4.
+
+## S4 and T455 Closure Record
+
+S4 found no GDI/DC/DIB/palette source defect. The physical private-desktop
+WINMINE content/lifetime probe passed; WRITE retained all required visible
+startup windows over four samples. SOL startup and normal close passed, while
+full gameplay is explicitly unverified because the test desktop's maximum
+tracking geometry prevents its 585-pixel client width. The full matrix,
+test-only x64 type correction and W07 handoff are in [the S4 graphics
+acceptance record](../etc/evidence/m0-t455-s4-graphics-acceptance.md) and
+[T455 closure](../history/m0-t455-closure.md).
 
 ## T453 S1 Closure Record
 
@@ -94,8 +105,8 @@ remains the prior W03 allocation/alias foundation delivery.
 
 ## Successor Boundary
 
-W05 is closed. W07 GDI/DC/drawing is admitted at S3. Resource-specific
-menu/dialog conversion and font/text/metafile drawing remain later owners.
+W05 and W07 are closed. W08 font/text/metafiles is active at S1.
+Resource-specific menu/dialog conversion remains a later owner.
 
 ## Temporary Evidence
 
@@ -114,6 +125,12 @@ T455 S2 may use only `build/t455-s2` for disposable evidence. Stable `.ninja`
 and `.ccache` remain reusable caches and are never task evidence roots.
 
 T455 S3 may use only `build/t455-s3` for disposable evidence. Stable `.ninja`
+and `.ccache` remain reusable caches and are never task evidence roots.
+
+T455 S4 may use only `build/t455-s4` for disposable evidence. Stable `.ninja`
+and `.ccache` remain reusable caches and are never task evidence roots.
+
+T456 S1 may use only `build/t456-s1` for disposable evidence. Stable `.ninja`
 and `.ccache` remain reusable caches and are never task evidence roots.
 
 ## Recent M0 Closures

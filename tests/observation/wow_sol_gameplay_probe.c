@@ -281,7 +281,7 @@ int main(int argc,char **argv)
     }
     if(game) {
         DWORD_PTR close_reply=0;
-        BOOL responsive=SendMessageTimeoutW(game,WM_NULL,0,0,
+        BOOL responsive=(BOOL)SendMessageTimeoutW(game,WM_NULL,0,0,
             SMTO_ABORTIFHUNG,2000,&close_reply);
         printf("close-timeout responsive=%d error=%lu reply=%llu\n",
             responsive,GetLastError(),(unsigned long long)close_reply);

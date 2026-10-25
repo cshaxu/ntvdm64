@@ -41,6 +41,10 @@ records the original memory-DC, selector callback, DIB-section and palette
 owners, with cached x86 DIB storage-sharing evidence and the explicit S4
 guest-graphics acceptance boundary.
 
+[T455 S4 graphics acceptance](evidence/m0-t455-s4-graphics-acceptance.md)
+records the physical private-desktop WINMINE, SOL and WRITE frontiers, the
+test-only x64 probe type correction and the explicit SOL geometry non-pass.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.
