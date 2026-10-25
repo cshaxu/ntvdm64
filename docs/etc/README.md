@@ -32,6 +32,10 @@ four-stage recovery sequence.
 the selected original providers, the one necessary modern-host identity bridge
 and the bounded DC/DIB/presentation handoff.
 
+[T455 S2 DC/drawing evidence](evidence/m0-t455-s2-dc-dispatch-lifetime.md)
+records the complete selected original dispatch/lifetime route and the
+no-speculative-repair conclusion before S3 DIB/palette work.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.
