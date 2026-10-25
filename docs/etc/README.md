@@ -24,6 +24,14 @@ W03 without a product-source change.
 resource discovery/loading boundary, original state ownership and bounded
 four-stage recovery sequence.
 
+[T455 W07 plan](operations/t455-gdi-dc-drawing-plan.md) records the active
+GDI identity/DC/drawing boundary, one-carrier ownership target and bounded
+four-stage recovery sequence.
+
+[T455 S1 GDI owner matrix](evidence/m0-t455-s1-gdi-owner-matrix.md) records
+the selected original providers, the one necessary modern-host identity bridge
+and the bounded DC/DIB/presentation handoff.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.
