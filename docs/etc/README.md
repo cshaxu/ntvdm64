@@ -90,6 +90,10 @@ the retained modal/error boundary proof and its observer-only portability fix.
 records the selected original 32-slot `HTASK` alias contract and the explicit
 immutable-guest OLE client/server stopping boundary.
 
+[T459 S4 combined acceptance](evidence/m0-t459-s4-combined-acceptance.md)
+reconciles the real common-dialog and original OLE-alias evidence against the
+current hash-identical thirteen-image package and closes W18.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.
