@@ -735,5 +735,6 @@ semantics, strict native compile/link/layout attempts and the proposed diff budg
 [T457 S1 dialog/input/hook/timer owner matrix](evidence/m0-t457-s1-dialog-input-hook-timer-owner-matrix.md)
 [T457 S2 dialog/input/caret acceptance](evidence/m0-t457-s2-dialog-input-caret-acceptance.md)
 [T457 S3 hooks/timers acceptance](evidence/m0-t457-s3-hooks-timers-acceptance.md)
+[T457 S4 integrated acceptance](evidence/m0-t457-s4-integrated-acceptance.md)
 records the selected original USER providers, callback and task-loss ownership,
 focused timer/hook witnesses, and the finite S2 dialog/input/caret handoff.

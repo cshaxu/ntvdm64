@@ -2,36 +2,43 @@
 
 ## Current Work
 
-**Active: M0 T457 S4**
+**Active: M0 T458 S1**
 
 The owner directed automatic sequential S closure and advancement. T455 W07
 is closed; T456 W08 is closed and T457 admits Queue W06, WOW32 residual
-dialogs, input, hooks and timers. The task follows the read-only
+resource conversion, accelerators and display refinement. The task follows the read-only
 `ntvdm64-wow32-audit`: recover maximum selected original behavior through the
 smallest source-shaped binding, with no guest modification or rebuild.
 
 ## Active Packet
 
-### M0 T457 S4 — integrated UI acceptance
+### M0 T458 S1 — resource-consumer boundary audit
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T457 S4, Ordinary Mode; single-agent implementation and independent final review. |
-| Admission And Approval | Automatic sequential continuation after S3 hook/timer closure. |
-| Objective | Run normal, error and reentry acceptance across the closed dialog/input/caret and hook/timer boundaries; repair only a newly observed source-proven seam. |
-| Non-goals | No guest changes/rebuild; no second input router, scheduler, hook registry, timer engine, dialog implementation or speculative host-control replacement. |
-| Reference Baseline | [S1 owner matrix](../etc/evidence/m0-t457-s1-dialog-input-hook-timer-owner-matrix.md), [S2 acceptance](../etc/evidence/m0-t457-s2-dialog-input-caret-acceptance.md), [S3 acceptance](../etc/evidence/m0-t457-s3-hooks-timers-acceptance.md), [W06 proposal](../proposals/proposal-wow32-dialogs-input-hooks-timers-001.md). |
-| Files And ABI Surface | Selected original dialog/input/hook/timer providers and their existing T447 callback/task bindings, plus focused guest/native acceptance material. |
+| Identifier Mode | M0 T458 S1, Ordinary Mode; single-agent source audit and independent final review. |
+| Admission And Approval | Automatic sequential continuation after T457 W06 closure; Queue W09 is now first. |
+| Objective | Map residual icon/cursor/bitmap formats, accelerator consumers and inherited MENU-01 boundaries before any production change. |
+| Non-goals | No guest changes/rebuild; no second menu graph, mutation or retirement owner; no speculative display rewrite. |
+| Reference Baseline | [W09 proposal](../proposals/proposal-wow32-menus-resource-conversion-001.md), [T447 transfer plan](../etc/operations/t447-wow-execution-plan.md), minimum-diff governance and the closed T457 acceptance records. |
+| Files And ABI Surface | Selected original resource/accelerator callers and existing T447 menu/resource bindings; no new ABI admitted during S1. |
 | Applicable Rules | Execution, architecture, coding, documentation, source policy and WOW32 minimum-diff admission governance. |
-| Verification | Re-run actual guest dialog and idle/task witnesses plus applicable callback fixtures against one coherent ten-image package. Classify unavailable desktop-state prerequisites as non-passes rather than product evidence. |
-| Expected Markers | No callback survives task retirement; dialog cancel/rollback and timer/hook removal remain balanced; no new adapter owner emerges. |
+| Verification | Formal graph/source/caller/owner audit plus existing focused resource witnesses; no runtime replacement is inferred from static success. |
+| Expected Markers | Every selected consumer has one original owner, modern resource owner, adapter edge and normal/failure/retirement rule. |
 | Asset Needs | Existing OpenNT MVDM mirror, formal x86 graph, immutable guest media, existing release package and no new source import or replacement media. |
-| Reporting Requirements | Record each real integrated witness, package identity, remaining non-passes and either task closure or a finite blocking edge. |
-| Stop Conditions | Need for guest change, second scheduler/router/registry, broad replacement of original USER code, invented transport or source-less semantic concession. |
-| Exit Criteria | C08 selected dialog/input/hook/timer scope has integrated real-entry evidence, all production repairs are delivered, and every non-pass is bounded rather than hidden. |
+| Reporting Requirements | Record graph evidence, source/host/adapter allocation, lifetime rules, admitted S2 boundary and explicit omissions. |
+| Stop Conditions | Need for guest change, second resource/menu owner, broad USER replacement, invented transport or source-less semantic concession. |
+| Exit Criteria | Each W09 residual family has a source-shaped owner matrix and finite S2 boundary. |
 | Original Owner Request | 单人双角色模式复通 WOW32；优先原版代码追溯与最少 diff，整批接通后再统一验证；每个 S 自动收口并继续。 |
-| Similar-Issue Sweep | Dialog init/procedure/cancel/end, keyboard/mouse/caret, hook install/remove/callback, timer set/kill/callback, native/guest identity, nested callback, task loss and cleanup. |
-| Candidate Proposal | [Dialogs, input, hooks and timers](../proposals/proposal-wow32-dialogs-input-hooks-timers-001.md). |
+| Similar-Issue Sweep | Icon/cursor/bitmap representation, resource selection, palette/display, accelerator translation, menu consumption, partial load, task loss and release. |
+| Candidate Proposal | [Resource conversion, menus and accelerators](../proposals/proposal-wow32-menus-resource-conversion-001.md). |
+
+## T457 S4 And Task Closure Record
+
+S4 reran the actual dialog/control/input/caret probe and the retained
+hook/timer callback boundaries against one coherent published package. No new
+production seam appeared. T457 W06 is closed in [its closure record](../history/m0-t457-closure.md);
+the detailed integrated evidence is [the S4 record](../etc/evidence/m0-t457-s4-integrated-acceptance.md).
 
 ## T457 S1 Closure Record
 
