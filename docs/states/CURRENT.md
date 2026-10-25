@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T460 S2**
+**Active: M0 T460 S3**
 
 The owner directed automatic sequential S closure and advancement. T455 W07,
 T456 W08, T457 W06, T458 W09 and T459 W18 are closed. Completed work follows
@@ -12,26 +12,37 @@ with no guest modification or rebuild.
 
 ## Active Packet
 
-### M0 T460 S2 — clipboard formats and transfer
+### M0 T460 S3 — delayed rendering and loss
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T460 S2, Ordinary Mode; single-agent implementation and independent final review. |
-| Admission And Approval | S1 source contract closed; automatic continuation under Queue W10 Clipboard proposal. |
-| Objective | Prove selected original open/set/get/close conversion and ownership transfer with real immutable guest/native peers; repair only a source-proven existing boundary. |
-| Non-goals | No guest change/rebuild; no new clipboard manager, duplicate data cache, DDE provider or source-less transfer substitute. |
+| Identifier Mode | M0 T460 S3, Ordinary Mode; single-agent implementation and independent final review. |
+| Admission And Approval | S2 transfer delivery is closed; automatic continuation under Queue W10 Clipboard proposal. |
+| Objective | Prove the selected original deferred callbacks, owner replacement and task-loss cleanup with real immutable guest/native peers; repair only a source-proven existing boundary. |
+| Non-goals | No guest change/rebuild; no new clipboard manager, duplicate data cache, listener window, DDE provider or source-less transfer substitute. |
 | Reference Baseline | [S1 owner matrix](../etc/evidence/m0-t460-s1-clipboard-owner-matrix.md), [Clipboard proposal](../proposals/proposal-wow32-clipboard-001.md), W01/W02/W03/W07 owner records and WOW32 minimum-diff governance. |
-| Files And ABI Surface | Selected original `wuclip.c` format conversion, existing public USER/VDM/GDI boundaries, immutable guest/native peer fixtures. |
+| Files And ABI Surface | Selected original `wuclip.c` deferred/provider callbacks, existing public USER/VDM/GDI boundaries, immutable guest/native peer fixtures. |
 | Applicable Rules | Applicable execution, architecture, coding, documentation, source-policy and WOW32 minimum-diff rules. |
-| Verification | Real guest/native selected-format exchange, rejected/abandoned ownership assertions, focused original callback ABI/formal x86 graph and coherent x86 package regression if production changes. |
-| Expected Markers | Accepted transfer has one host Clipboard owner and one original guest cache owner; rejected/abandoned input creates neither a false success nor an orphaned guest allocation. |
+| Verification | Real delayed-render, owner-replacement and task-loss cases; cancellation/reentry cleanup; focused original callback ABI/formal x86 graph and coherent x86 package regression if production changes. |
+| Expected Markers | Deferred data is rendered only for a live selected owner; replacement and task loss retire callbacks/data exactly once without a stale guest task call. |
 | Asset Needs | Existing immutable guest media, mirrors and existing fixtures only; no new guest artifact. |
 | Reporting Requirements | Exact selected format/peer matrix, conversion/ownership result, failure disposition, production change and package hashes or explicit no-change result. |
 | Stop Conditions | Guest change, new clipboard registry/cache, unbounded data bridge, DDE import, source-less semantic concession or a previously unproved callback lifetime mechanism. |
-| Exit Criteria | Real selected guest/native transfer and rejected/abandoned paths prove ownership through the original production callers, or a bounded source-proven repair is implemented and verified. |
+| Exit Criteria | Real selected deferred/replacement/loss paths prove cleanup and callback lifetime through the original production callers, or a bounded source-proven repair is implemented and verified. |
 | Original Owner Request | 单人双角色模式复通 WOW32；源码追溯优先、最少 diff、完整接通后验证；每个 S 自动收口并继续。 |
 | Similar-Issue Sweep | Formats, ownership replacement, delayed rendering, rejected data, task loss, callbacks, nested operations and native/guest identity. |
 | Candidate Proposal | [WOW32 clipboard](../proposals/proposal-wow32-clipboard-001.md). |
+
+## T460 S2 Closure Record
+
+S2 repaired the bounded host-generation invalidation and rejected-handoff
+ownership seam while retaining the selected original `wuclip.c` conversion
+owners.  Two real guest/native transfer rounds, the original callback ABI and
+formal x86 graph, cached component build, all retained WOW frontiers and the
+Console-17/Window-17 product gates pass against one published ten-image
+package.  [The S2 transfer acceptance](../etc/evidence/m0-t460-s2-clipboard-transfer-acceptance.md)
+records the hashes, modern-host exceptions and finite S3 handoff.  Guest media
+is unchanged.
 
 ## T459 Closure Record
 

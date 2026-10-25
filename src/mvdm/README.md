@@ -1,5 +1,28 @@
 # mvdm
 
+MVDM-HOST-DIV-453 (T460 S2): for selected original
+`wow32/wuclip.c::WU32SetClipboardData` text-like formats, preserve the
+original guest-to-host copy and original cache owner only after public USER
+accepts the copied `HGLOBAL`. The unchanged source cached the guest handle and
+returned it even when `SetClipboardData` failed because the Clipboard was not
+open; it also left the rejected copied host allocation unowned. On rejection,
+free only that just-created host copy, retain the prior cache unchanged and
+return zero. This does not change delayed rendering, structured formats or
+guest media. The isolated guest/native five-phase transfer witness proves
+accepted bidirectional conversion, cache retirement/reuse and rejected-input
+ownership.
+
+MVDM-HOST-DIV-452 (T460 S2): original NT4 USER invoked the registered
+`pfnEmptyCB` whenever a native writer invalidated WOW's original 16-bit
+Clipboard cache. Modern USER rejects that private registration ABI. The small
+`wow32-dll` adapter therefore records only the public Clipboard sequence after
+the original `WU32CloseClipboard` releases the lock; before a cached guest
+handle is reused, a changed sequence enters the original
+`W32EmptyClipboard` retirement owner. No Clipboard bytes, handles, format
+registry, listener window or second cache are introduced. The same five-phase
+witness proves an external native replacement retires the old guest cache and
+performs the original native-to-guest conversion.
+
 MVDM-HOST-DIV-451 (T453 S2 candidate): original
 `wow32/wkfileio.c::WK32FileSetAttributes` rejects a non-root trailing path
 separator before calling `NormalizeDosPath`, but then reaches its ordinary

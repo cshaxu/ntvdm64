@@ -130,6 +130,7 @@ $providerSupportSources = @(
     (Join-Path $adapterWow 'wow_user_private_access.c'),
     (Join-Path $adapterWow 'wow_window_creation_binding.c'),
     (Join-Path $adapterWow 'wow_class_words_binding.c'),
+    (Join-Path $adapterWow 'wow_clipboard_epoch.c'),
     (Join-Path $adapterWow 'wow_standard_class_bindings.c'),
     (Join-Path $adapterWow 'wow_user_registration_bridge.c'),
     (Join-Path $root 'src/opennt-host/windows/core/ntuser/rtl/chartran.c'),

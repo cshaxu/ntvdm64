@@ -17,6 +17,7 @@ SOURCES= \
     wow_callback_frame_lease.c \
     wow_class_client_bindings.c \
     wow_class_words_binding.c \
+    wow_clipboard_epoch.c \
     wow_standard_class_bindings.c \
     wow_cleanup_bindings.c \
     wow_dialog_creation_binding.c \

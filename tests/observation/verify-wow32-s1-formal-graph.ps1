@@ -93,11 +93,11 @@ if (@(Compare-Object $expectedUser $actualUser).Count) {
 $targetSources = @([regex]::Matches([IO.File]::ReadAllText((Join-Path $root 'src/wow32-dll/sources')),
     '(?m)^\s*([A-Za-z0-9_]+)\.c\s*\\?\s*$') |
     ForEach-Object { $_.Groups[1].Value })
-# The target-only manifest has 28 bounded host bindings. Its full content is
+# The target-only manifest has 29 bounded host bindings. Its full content is
 # checked below against the link edge; this count catches accidental manifest
 # expansion or truncation without treating the earlier 21-entry recovery
 # checkpoint as the current production contract.
-if ($targetSources.Count -ne 28) { throw "Expected 28 WOW32 DLL bindings, found $($targetSources.Count)." }
+if ($targetSources.Count -ne 29) { throw "Expected 29 WOW32 DLL bindings, found $($targetSources.Count)." }
 $missingBindings = @($targetSources | Where-Object {
     $link -notmatch ('\bobj/wow32-dll/' + [regex]::Escape($_) + '\.obj\b')
 })

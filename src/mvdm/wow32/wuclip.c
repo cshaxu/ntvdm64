@@ -92,6 +92,13 @@ ULONG FASTCALL WU32CloseClipboard(PVDMFRAME pFrame)
 
     ul = GETBOOL16(CloseClipboard());
 
+    /* DIVERGENCE(MVDM-HOST-DIV-452): associate the existing original cache
+     * with the public host generation only after the original lock release.
+     * A native writer cannot replace the Clipboard while this task owns it. */
+    if (ul) {
+        wow_clipboard_epoch_note_current();
+    }
+
     RETURN(ul);
 }
 
@@ -864,8 +871,17 @@ ULONG FASTCALL WU32SetClipboardData(PVDMFRAME pFrame)
             }
 
             ul = (ULONG) SetClipboardData(WORD32(parg16->f1), hMem32);
-
-            WU32ICBStoreHandle(parg16->f1, hMem16);
+            /* DIVERGENCE(MVDM-HOST-DIV-453): the original path retained the
+             * 16-bit cache and overwrote its failure result even when modern
+             * USER rejected the copied HGLOBAL (for example, no open
+             * Clipboard). Keep the original transfer only after accepted
+             * ownership; a rejected host copy remains this call's resource. */
+            if (ul) {
+                WU32ICBStoreHandle(parg16->f1, hMem16);
+            }
+            else if (hMem32) {
+                GlobalFree(hMem32);
+            }
             break;
 
         case CF_HDROP:
@@ -924,7 +940,10 @@ ULONG FASTCALL WU32SetClipboardData(PVDMFRAME pFrame)
 
     }
 
-    if (parg16->f2) {
+    /* DIVERGENCE(MVDM-HOST-DIV-453): return the guest handle only after the
+     * public Clipboard accepted it. The zero result is the original API's
+     * observable rejection result, not a cache-backed false success. */
+    if (parg16->f2 && ul) {
         ul = parg16->f2;
     }
 
@@ -1068,6 +1087,7 @@ VOID WU32ICBStoreHandle(WORD wFormat, HMEM16 hMem16)
             }
         }
     }
+
 }
 
 
@@ -1076,6 +1096,13 @@ HMEM16 WU32ICBGetHandle(WORD wFormat)
 {
     HMEM16 hMem16 = 0;
     PCBNODE Temp;
+
+    /* DIVERGENCE(MVDM-HOST-DIV-452): preserve the original pfnEmptyCB cache
+     * invalidation contract through the modern public sequence number before
+     * returning a cached guest handle. */
+    if (!wow_clipboard_epoch_matches_current()) {
+        W32EmptyClipboard();
+    }
 
     if ((wFormat >= CF_TEXT) && (wFormat <= CF_WAVE)) {
         hMem16 = ClipboardFormats.Pre1[wFormat];
@@ -1185,6 +1212,11 @@ VOID W32EmptyClipboard ()
 
         Temp = Temp1;
     }
+
+    /* DIVERGENCE(MVDM-HOST-DIV-452): W32EmptyClipboard is the original cache
+     * retirement owner. Clear only the adapter's generation observation with
+     * it; no independent clipboard state survives this boundary. */
+    wow_clipboard_epoch_reset();
 
 }
 

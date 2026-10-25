@@ -33,6 +33,7 @@
  * binding only the unavailable NT4-private host edges. */
 #include <wow32_provider_private.h>
 #include <wow_private_user_compat.h>
+#include <wow_clipboard_epoch.h>
 #include <mvdm_softpc_firmware.h>
 #include <ntpsapi_wow32.h>
 #include <nturtl_wow32.h>
