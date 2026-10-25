@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T459 S3**
+**Active: M0 T459 S4**
 
 The owner directed automatic sequential S closure and advancement. T455 W07,
 T456 W08, T457 W06 and T458 W09 are closed. T459 admits Queue W18, common
@@ -12,26 +12,34 @@ with no guest modification or rebuild.
 
 ## Active Packet
 
-### M0 T459 S3 — selected OLE alias/consumer acceptance
+### M0 T459 S4 — common-dialog/OLE reconciliation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T459 S3, Ordinary Mode; single-agent implementation and independent final review. |
-| Admission And Approval | Automatic continuation after closed S2 common-dialog acceptance; Queue W18 proposal. |
-| Objective | Prove the selected original OLE HTASK-alias route through its reachable consumer, including normal lookup, bounded output, stale identity and retirement. |
-| Non-goals | No guest changes/rebuild; no broad OLE/COM/DDE provider, registry, transport or unbounded task identity service. |
-| Reference Baseline | [S1 matrix](../etc/evidence/m0-t459-s1-common-dialog-ole-owner-matrix.md), [S2 acceptance](../etc/evidence/m0-t459-s2-common-dialog-consumer-acceptance.md) and W18 proposal. |
-| Files And ABI Surface | Original `wole2.c`, `walias.c`, `wuwind.c` and `wkernel.c`; registered T452 bounded process-list/output divergence only. |
+| Identifier Mode | M0 T459 S4, Ordinary Mode; single-agent implementation and independent final review. |
+| Admission And Approval | Automatic continuation after closed S3 OLE boundary; Queue W18 proposal. |
+| Objective | Reconcile the two W18 family ledgers against one current formal build and hash-identical package without treating either proof as the other. |
+| Non-goals | No guest changes/rebuild; no new common-dialog/OLE provider, guest OLE client/server claim or unrelated application feature. |
+| Reference Baseline | [S1 matrix](../etc/evidence/m0-t459-s1-common-dialog-ole-owner-matrix.md), [S2 dialogs](../etc/evidence/m0-t459-s2-common-dialog-consumer-acceptance.md), [S3 OLE](../etc/evidence/m0-t459-s3-ole-alias-consumer-boundary.md) and W18 proposal. |
+| Files And ABI Surface | The selected original W18 graph and existing thin host seams only. |
 | Applicable Rules | Applicable execution, architecture, coding, documentation, source-policy and WOW32 minimum-diff rules. |
-| Verification | Formal x86 build, current original alias fixture and a named reached consumer or explicit unavailable boundary. |
-| Expected Markers | One original alias owner; no native token crosses guest state; stale/reused identity cannot resolve. |
-| Asset Needs | Existing immutable guest media and published coherent package only; no new guest artifact. |
-| Reporting Requirements | Caller/input/result/failure/retirement matrix, actual consumer disposition and source-defect conclusion. |
-| Stop Conditions | Guest change, second alias table, broad OLE shell, native identity pass-through or source-less workaround. |
-| Exit Criteria | The selected original alias path has a finite real-consumer or explicit unavailable disposition with normal/failure/retirement evidence. |
+| Verification | Repeat formal x86 build; reconcile S2's real guest result and S3's exact original alias witness with package hashes. |
+| Expected Markers | Both owners remain original; guest OLE client/server boundary remains explicit and no product input diverges. |
+| Asset Needs | Existing immutable guest media and current package only; no new guest artifact. |
+| Reporting Requirements | Combined evidence matrix, package/guest-diff disposition, closure record and exact successor boundary. |
+| Stop Conditions | Guest change, second owner, invented OLE host, unrecorded source divergence or unsupported pass claim. |
+| Exit Criteria | Both W18 families have independent evidence/disposition, complete governing records and no unowned host defect. |
 | Original Owner Request | 单人双角色模式复通 WOW32；源码追溯优先、最少 diff、完整接通后验证；每个 S 自动收口并继续。 |
-| Similar-Issue Sweep | Alias allocation, foreign thread selection, stale/reused IDs, process-name output bounds, window ownership and task retirement. |
+| Similar-Issue Sweep | Cross-family ownership, result/error/retirement attribution, current package identity and immutable guest boundary. |
 | Candidate Proposal | [Common dialogs and related OLE](../proposals/proposal-wow32-common-dialogs-ole-001.md). |
+
+## T459 S3 Closure Record
+
+S3 reconfirmed selected original `wole2.c` alias allocation, bounded output,
+oldest-slot reuse and explicit retirement against the current CCPU40 graph.
+No host OLE client/server exists or is admitted; immutable guest OLE libraries
+are an explicit stopping boundary. [The S3 record](../etc/evidence/m0-t459-s3-ole-alias-consumer-boundary.md)
+admits reconciliation only.
 
 ## T459 S2 Closure Record
 
@@ -206,6 +214,11 @@ T459 S1/S2 may use only `build/t459-s1` and `build/t459-s2` for disposable
 owner-audit/consumer evidence, with a 45-minute phase, 2-GiB size and a
 10-minute no-progress budget. Stable
 `.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
+
+T459 S3/S4 may use only `build/t459-s3` and `build/t459-s4` for disposable
+alias/reconciliation evidence, with a 30-minute phase, 2-GiB size and a
+10-minute no-progress budget. Stable `.ninja` and `.ccache` remain reusable
+caches and are never task evidence roots.
 
 T457 S1 may use only `build/t457-s1` for disposable source-audit and focused
 fixture evidence. Stable `.ninja` and `.ccache` remain reusable caches and

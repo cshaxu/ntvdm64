@@ -86,6 +86,10 @@ defects before real consumer acceptance.
 records the sixteen-round immutable guest modeless-dialog/retirement witness,
 the retained modal/error boundary proof and its observer-only portability fix.
 
+[T459 S3 OLE alias consumer boundary](evidence/m0-t459-s3-ole-alias-consumer-boundary.md)
+records the selected original 32-slot `HTASK` alias contract and the explicit
+immutable-guest OLE client/server stopping boundary.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.
