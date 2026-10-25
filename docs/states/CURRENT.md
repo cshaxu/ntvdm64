@@ -2,36 +2,13 @@
 
 ## Current Work
 
-**Active: M0 T458 S4**
+**No active M/T/S packet. M0 T458 is closed.**
 
-The owner directed automatic sequential S closure and advancement. T455 W07
-is closed; T456 W08 is closed and T457 admits Queue W06, WOW32 residual
-resource conversion, accelerators and display refinement. The task follows the read-only
-`ntvdm64-wow32-audit`: recover maximum selected original behavior through the
-smallest source-shaped binding, with no guest modification or rebuild.
-
-## Active Packet
-
-### M0 T458 S4 — consumer and application acceptance
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T458 S4, Ordinary Mode; single-agent implementation and independent final review. |
-| Admission And Approval | Automatic continuation after closed S3 accelerator boundary. |
-| Objective | Run bounded resource/menu/accelerator consumer acceptance against the coherent package; close T458 or record only proven external/original limitations. |
-| Non-goals | No guest changes/rebuild; no duplicate resource parser, menu graph, accelerator cache, replacement USER or speculative display work. |
-| Reference Baseline | [T458 S1 matrix](../etc/evidence/m0-t458-s1-resource-accelerator-owner-matrix.md), [S2 conversion](../etc/evidence/m0-t458-s2-resource-conversion-acceptance.md), [S3 accelerator](../etc/evidence/m0-t458-s3-accelerator-dispatch-retirement.md), W09 proposal and T447 transfer. |
-| Files And ABI Surface | Existing original resource/accelerator providers and T447 MENU-01 consumer; no new ABI. |
-| Applicable Rules | Execution, architecture, coding, documentation, source policy and WOW32 minimum-diff admission governance. |
-| Verification | Retained executable resource/menu consumers, original accelerator boundary witnesses, formal x86 graph and coherent-package identity; explicitly distinguish pre-provider observer failure from application evidence. |
-| Expected Markers | No consumer introduces a competing owner; resource/accelerator release remains task-local; existing T447 menu behavior is consumed, not recreated. |
-| Asset Needs | Existing immutable guest media, coherent package and source fixtures; no new source import. |
-| Reporting Requirements | Record every actual consumer result, package/hash identity, publication need, limitation and final T disposition. |
-| Stop Conditions | Guest change, a duplicate owner, broad USER replacement, invented transport or source-less concession. |
-| Exit Criteria | Consumer evidence completes or has a bounded attributable non-pass; all residual W09 owners have a source-proven disposition and T458 closure is recorded. |
-| Original Owner Request | 单人双角色模式复通 WOW32；优先原版代码追溯与最少 diff，整批接通后再统一验证；每个 S 自动收口并继续。 |
-| Similar-Issue Sweep | Resource/menu/accelerator consumers, task retirement, package identity and pre-provider runtime failures. |
-| Candidate Proposal | [Resource conversion, menus and accelerators](../proposals/proposal-wow32-menus-resource-conversion-001.md). |
+The owner directed automatic sequential S closure and advancement. T455 W07,
+T456 W08, T457 W06 and T458 W09 are closed. The next candidate requires a new
+admission. Completed work follows the read-only `ntvdm64-wow32-audit`: recover
+maximum selected original behavior through the smallest source-shaped binding,
+with no guest modification or rebuild.
 
 ## T458 S1 Closure Record
 
@@ -59,6 +36,14 @@ packed-record boundary, and original `SetupAccelAlias`/`FindAccelAlias`/
 `DestroyAccelAlias` retain task-local aliases and one native destroy per task
 retirement. T447 remains the only MENU-01 owner. [The S3 evidence](../etc/evidence/m0-t458-s3-accelerator-dispatch-retirement.md)
 admits finite consumer acceptance.
+
+## T458 S4 And Task Closure Record
+
+The bound current-source menu/resource consumer compiled and linked, then the
+host rejected isolated page-domain desktop creation before any worker or WOW
+provider entry. This is an explicit external non-pass, not an inferred product
+result. S2 and S3 prove the reachable original resource/accelerator boundaries;
+no T458 production source changed. T458 W09 is closed in [its closure record](../history/m0-t458-closure.md).
 
 ## T457 S4 And Task Closure Record
 
@@ -207,6 +192,10 @@ T458 S2 may use only `build/t458-s2` for retained conversion and guest
 resource evidence, with a 45-minute phase, 2-GiB size and 10-minute no-progress
 budget. Stable `.ninja` and `.ccache` remain reusable caches and are never task
 evidence roots.
+
+T458 S4 may use only `build/t458-s4` for disposable consumer acceptance, with
+a 45-minute phase, 2-GiB size and 10-minute no-progress budget. Stable
+`.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
 
 T457 S1 may use only `build/t457-s1` for disposable source-audit and focused
 fixture evidence. Stable `.ninja` and `.ccache` remain reusable caches and

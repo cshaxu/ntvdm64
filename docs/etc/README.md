@@ -74,6 +74,9 @@ the explicit pre-resource private-desktop observer non-pass.
 records extracted-original conversion and task-local alias-retirement evidence
 without creating a second accelerator or menu owner.
 
+[T458 S4 consumer acceptance](evidence/m0-t458-s4-consumer-acceptance.md)
+records the explicit pre-provider desktop non-pass and the bounded W09 closure.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.
