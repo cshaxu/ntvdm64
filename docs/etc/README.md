@@ -28,6 +28,11 @@ four-stage recovery sequence.
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.
 
+[T454 S2 resource load/lock witness](evidence/m0-t454-s2-resource-load-lock-witness.md)
+records the selected original runtime path, corrected current `CDL2` test
+format and real immutable-guest lifecycle acceptance; it transfers only
+free/rollback/retirement to S3.
+
 [T453 W04 plan](operations/t453-files-environment-oem-plan.md) records the
 active files, directories, environment and OEM packet, fixed one-owner boundary
 and source-first four-stage sequence.

@@ -26,6 +26,15 @@ direction-specific value, not a common raw resource result.
 | S3 | Free and rollback | Complete matrix-selected free, partial-load rollback and module-associated release without stale RES/alias state. |
 | S4 | Foundation acceptance | Exercise the selected loading contracts and hand the verified foundation to later menu/dialog consumers without absorbing conversion/drawing. |
 
+## Completed S2 execution
+
+S2 found the selected original `Find/Load/Lock/Unlock` graph already live and
+made no product change.  Its [load/lock witness](../evidence/m0-t454-s2-resource-load-lock-witness.md)
+records the linked fixture and real immutable-guest `CDL2` lifecycle evidence.
+The only correction was to the owned test parser, which had retained the
+obsolete `CDL1` report format.  S3 consequently remains the finite owner of
+free/rollback/retirement rather than reopening lookup or lock behavior.
+
 ## Boundaries
 
 `FreeResource` is not one operation: guest `IFreeResource`, guest-to-host

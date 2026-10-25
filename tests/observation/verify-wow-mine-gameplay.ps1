@@ -232,21 +232,26 @@ try {
     }elseif($RetiringSibling){
         Copy-Item "$runtime\tests\CDLPROBE.BIN" "$root\sibling-report.bin"
         $bytes=[IO.File]::ReadAllBytes("$root\sibling-report.bin")
-        if($bytes.Length -ne 54){throw 'Expected three COMMDLG lifetime records'}
-        $records=@();$names=@('phase','errors','created','closed','hooks','leaving','task')
-        for($record=0;$record -lt 3;$record++){
-            $offset=18*$record
-            if([Text.Encoding]::ASCII.GetString($bytes,$offset,4) -ne 'CDL1'){throw 'Bad sibling signature'}
+        # CDL2 records the guest-observed DestroyWindow and IsWindow results.
+        # Four checkpoints are intentional: initialization, owner creation,
+        # ordinary dialog destruction, then the live dialog left for task exit.
+        $recordSize=24
+        if($bytes.Length -ne (4*$recordSize)){throw 'Expected four CDL2 lifetime records'}
+        $records=@();$names=@('phase','errors','created','closed','hooks','leaving','task','dialog','destroy_ax','iswindow_ax')
+        for($record=0;$record -lt 4;$record++){
+            $offset=$recordSize*$record
+            if([Text.Encoding]::ASCII.GetString($bytes,$offset,4) -ne 'CDL2'){throw 'Bad sibling signature'}
             $row=[ordered]@{}
             for($i=0;$i -lt $names.Count;$i++){$row[$names[$i]]=[BitConverter]::ToUInt16($bytes,$offset+4+2*$i)}
             $records+=[pscustomobject]$row
         }
         $records|ConvertTo-Json|Set-Content "$root\sibling-report.json"
         $last=$records[-1]
-        if(($records.phase -join ',') -ne '0,1,2' -or @($records|Where-Object errors -ne 0).Count -or
-            $records[1].created -ne 1 -or $records[1].closed -ne 1 -or $records[1].hooks -ne 1 -or
+        if(($records.phase -join ',') -ne '0,1,1,2' -or @($records|Where-Object errors -ne 0).Count -or
+            $records[2].created -ne 1 -or $records[2].closed -ne 1 -or $records[2].hooks -ne 1 -or
+            $records[2].destroy_ax -ne 1 -or $records[2].iswindow_ax -ne 0 -or
             $last.created -ne 2 -or $last.closed -ne 1 -or $last.hooks -ne 2 -or
-            $last.leaving -ne 1 -or !$last.task){throw 'Sibling operation/exit assertions failed'}
+            $last.leaving -ne 1 -or !$last.task -or !$last.dialog){throw 'Sibling operation/exit assertions failed'}
         $trace=Get-Content "$root\lifetime.txt" -Raw
         $task4='{0:X4}' -f [int]$last.task;$task8='{0:X8}' -f [int]$last.task
         $prefix='(?m)^'+$worker.ProcessId+' '

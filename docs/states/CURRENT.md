@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T454 S1**
+**Active: M0 T454 S3**
 
 The owner has directed automatic sequential closure and advancement. T454
 admits Queue row W05, WOW32 resource discovery and loading foundation, after
@@ -12,30 +12,43 @@ binding, with no guest modification or rebuild.
 
 ## Active Packet
 
-### M0 T454 S1 — resource lookup boundary
+### M0 T454 S3 — free, rollback and retirement services
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T454 S1, Ordinary Mode; single-agent implementation and independent final review. |
-| Admission And Approval | Owner approved the Queue's first WOW32 package and later directed that every S automatically close and advance. T452 W03 supplies the selected module, allocation and alias boundary; T453 is closed. |
-| Objective | Produce the finite original-owner matrix for FindResource, LoadResource, LockResource, UnlockResource and FreeResource: guest names/IDs, module association, bounds, normal/failure/retirement ownership and selected real consumers. |
-| Non-goals | No guest changes/rebuild; no resource-specific drawing, dialog/menu implementation, second resource manager, new USER state, generic memory manager, PE-resource substitution, or production repair before the matrix proves a bounded edge. |
-| Reference Baseline | T452 closure; W05 [proposal](../proposals/proposal-wow32-resource-loading-001.md); [T454 plan](../etc/operations/t454-resource-loading-plan.md); the read-only audit's `free-resource-direction-contract.md`; selected original `wow16/kernel31/resaux.asm`, `wow16/kernel31/wow16cal.asm`, `wow32/wres16.c` and `wow32/wkernel.c`. |
-| Files And ABI Surface | Expected review surface is the original WOW16 callback ABI, `wres16.c` RES list and W03 alias/module providers; S1 may add only plan/evidence documentation and test inventory. Guest ABI and product source remain unchanged. |
+| Identifier Mode | M0 T454 S3, Ordinary Mode; single-agent implementation and independent final review. |
+| Admission And Approval | S1 delivered as `60145281e`; S2's original load/lock witness is complete. Owner directed automatic sequential S closure. T452 W03 remains the consumed allocation/alias owner. |
+| Objective | Exercise and, only if proven necessary, reconnect original host-to-guest and guest-to-host FreeResource behavior, partial-load failure retention, exact raw-key retirement and failure cleanup. |
+| Non-goals | No guest changes/rebuild; no new resource manager, generic PE-resource fallback, accelerator conversion, resource-specific drawing, dialog/menu completion, broad common-dialog repair or bulk module retirement. |
+| Reference Baseline | S1 [owner matrix](../etc/evidence/m0-t454-s1-resource-owner-matrix.md), S2 [load/lock witness](../etc/evidence/m0-t454-s2-resource-load-lock-witness.md), W05 proposal and T454 plan; selected original `wres32.c`, `wres16.c`, `wcall16.c`, `wkman.c` and WOW16 callback shim. |
+| Files And ABI Surface | The selected original W05 provider bodies and current W03 alias/guest-callback interfaces. New tests may live under established WOW fixture trees; product edits require a traced owner/binding and divergence record. |
 | Applicable Rules | Execution, architecture, coding, documentation, source policy and WOW32 minimum-diff admission governance. |
-| Verification | Static caller/source/ABI review; compare the two pinned original editions where needed; identify existing test entrypoints and real guest consumers. No build/test is claimed as runtime proof in this review-only S. |
-| Expected Markers | One authority per guest resource count, RES record, converted/aliased data pointer and native cursor/icon identity; every changed future edge has a normal, failure and retirement route. |
-| Asset Needs | Pinned OpenNT/OpenNT-4.5 audit, immutable guest media and existing W03/W05 test sources; no imported source or replacement media. |
-| Reporting Requirements | Separate source facts from unproved runtime behavior; record exact original owner/build condition/ABI, selected consumers, unresolved bounded edges, mirror-diff budget and successor ownership. |
-| Stop Conditions | Need for guest change, unbounded original import, replacement resource/memory/task owner, required new scheduler/USER authority, or a semantic concession not already approved. |
-| Exit Criteria | A finite matrix defines the S2 load/lock closure and S3 free/rollback closure with exact tests and no unowned shared state. |
+| Verification | Exercise the two FreeResource directions and failure/retirement edges through current selected provider and real immutable guest consumers where available; test raw key equality, response normalization, partial load and no stale alias/RES state. |
+| Expected Markers | Callback-before-release ordering, guest zero/nonzero normalization, exact record unlink, raw task key matching, one retirement and no accidental cursor/icon or accelerator substitution. |
+| Asset Needs | Existing formal provider, immutable guest media, W03 aliases and source-selected resource fixtures; no imported source or replacement media. |
+| Reporting Requirements | Record each production versus fixture route, the exact source/binding chosen, normal/failure evidence, any product diff and its divergence identity; distinguish unavailable guest coverage from a pass. |
+| Stop Conditions | Need for guest change, new resource/memory/task authority, unbounded external import, unsupported callback lifetime machinery, or a semantic concession beyond the fixed S1 boundary. |
+| Exit Criteria | The bounded free/rollback group has executable normal and negative evidence, or a finite original-owner repair with coherent product publication; S4 receives the foundation acceptance only. |
 | Original Owner Request | 准入队列第一条；按照 ntvdm64-wow32-audit 审计结果执行最小化 diff 和最大化复通。随后要求每个 S 自动收口并继续。 |
-| Similar-Issue Sweep | NULL/numeric/string names and types; same-module and cross-module association; failed/partial load; aliases versus converted buffers; duplicate loads; guest/global/module/task retirement; cursor/icon callback direction and return normalization. |
+| Similar-Issue Sweep | Both FreeResource directions, zero/nonzero callback normalization, cursor/icon partition, missing/partial load, callback failure, repeated release, raw task versus module key and task exit. |
 | Candidate Proposal | [Resource discovery and loading foundation](../proposals/proposal-wow32-resource-loading-001.md). |
 
-S1 is intentionally review-only. Its matrix must establish the bounded
-implementation group before S2 changes production source. The full four-S
-sequence is in the [T454 plan](../etc/operations/t454-resource-loading-plan.md).
+S1 is closed as `60145281e`; S2 is now closed by its real guest witness. The full
+four-S sequence is in the [T454 plan](../etc/operations/t454-resource-loading-plan.md).
+
+## S1 Closure Record
+
+[The S1 resource owner matrix](../etc/evidence/m0-t454-s1-resource-owner-matrix.md)
+records the selected original chain, state authority, caller census and finite
+S2/S3 handoff. It is static source evidence only and made no product change.
+
+## S2 Closure Record
+
+[The S2 load/lock witness](../etc/evidence/m0-t454-s2-resource-load-lock-witness.md)
+records the current selected original provider, the corrected current `CDL2`
+test parser, linked fixture evidence and a real immutable-guest same-worker
+FindText lifecycle run. It made no runtime product or guest-media change; S3
+retains only the explicitly bounded free/rollback/retirement obligations.
 
 ## T453 S1 Closure Record
 
