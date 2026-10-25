@@ -208,8 +208,8 @@ T459 S1--S4 used `build/t459-s1` through `build/t459-s4` only for disposable
 evidence. Their retained results are indexed from the closure; stable `.ninja`
 and `.ccache` remain reusable caches and are never task evidence roots.
 
-T460 S2 may use only `build/t460-s2` for disposable format-transfer evidence,
-with a 30-minute phase, 2-GiB size and 10-minute no-progress budget. Stable
+T460 S3 may use only `build/t460-s3` for disposable delayed-render/loss
+evidence, with a 45-minute phase, 2-GiB size and 10-minute no-progress budget. Stable
 `.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
 
 T457 S1 may use only `build/t457-s1` for disposable source-audit and focused
