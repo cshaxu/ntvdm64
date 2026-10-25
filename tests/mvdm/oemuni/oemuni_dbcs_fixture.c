@@ -5,6 +5,7 @@
 #include <oemuni.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdint.h>
 
 /* Test-only CP932 boundary: never changes the host/system code page. */
 static const WCHAR full_path[] = L"C:\\\x8868\\x.txt";
@@ -82,6 +83,19 @@ static BOOL WINAPI fixed_computer(LPWSTR output, LPDWORD chars)
     output[0] = 0x8868; output[1] = 0; *chars = 1; return TRUE;
 }
 
+/* `process.c` now deliberately obtains these roots from the session-aware
+ * firmware provider.  Keep this DBCS capacity fixture at that exact public
+ * boundary rather than intercepting the obsolete direct Win32 calls. */
+uint32_t NtvdmGetSystemDirectoryW(wchar_t *output, uint32_t chars)
+{
+    return fixed_directory(output, (UINT)chars);
+}
+
+uint32_t NtvdmGetWindowsDirectoryW(wchar_t *output, uint32_t chars)
+{
+    return fixed_directory(output, (UINT)chars);
+}
+
 static int volume_failure, outstanding, fail_allocation, environment_mode;
 static DWORD WINAPI checked_environment(LPCSTR name, LPSTR output, DWORD capacity)
 {
@@ -122,8 +136,6 @@ static BOOL WINAPI fixed_volume(LPCWSTR root, LPWSTR volume, DWORD volume_size,
 #define RtlUnicodeStringToOemSize cp932_size
 #define RtlGetCurrentDirectory_U fixed_current
 #define SearchPathW fixed_search
-#define GetSystemDirectoryW fixed_directory
-#define GetWindowsDirectoryW fixed_directory
 #define GetTempPathW fixed_temp
 #define GetShortPathNameW fixed_short
 #define GetComputerNameW fixed_computer

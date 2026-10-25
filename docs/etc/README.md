@@ -29,6 +29,10 @@ records the repaired legacy witness layout, direct/nested real DOS OEM proof,
 the exact selected WOW attribute-cleanup correction and its finite S2 consumer
 boundaries.
 
+[T453 S3 OEM/font fallback witness](evidence/m0-t453-s3-oem-font-fallback-witness.md)
+records the selected original non-ASCII and font-removal consumer paths, the
+current fixture-provider boundary and its completed bounded acceptance group.
+
 [T451 S1 USER object contract ledger](operations/m0-t451-s1-user-object-contract-ledger.md)
 maps every residual C04--C07/object-C10 PMODE32 direct-reader family to its
 producer, authority, update/withdrawal rule, evidence and bounded S2--S4

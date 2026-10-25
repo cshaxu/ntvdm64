@@ -12,7 +12,6 @@ PIF_DATA pfdata;
 ULONG DosSessionId;
 BOOL IsFirstVDM, DontCheckDosBinaryType;
 static int message, writes;
-static FILE *report;
 int RcMessageBox(USHORT id, CHAR *one, CHAR *two, ULONG options)
 { (void)one; (void)two; (void)options; message = id; return 0; }
 BOOL GetPIFData(PIF_DATA *data, char *name)
@@ -27,7 +26,9 @@ DWORD cmdExpandEnvironmentStrings(PVDMENVBLK env, PCHAR input, PCHAR output, DWO
 }
 int mvdm_command_guest_state_write_is_dos_binary(uint8_t value)
 { if (value) ExitProcess(93); ++writes; return 1; }
-#define CHECK(x) do { if (!(x)) { fprintf(report, "S37_PIF_CALLER_FAIL line=%d error=%lu\n", __LINE__, GetLastError()); fclose(report); return 1; } } while (0)
+BOOL WINAPI MvdmSetConsoleTitleA(LPCSTR title)
+{ (void)title; return TRUE; }
+#define CHECK(x) do { if (!(x)) { printf("S37_PIF_CALLER_FAIL line=%d error=%lu\n", __LINE__, GetLastError()); return 1; } } while (0)
 int main(void)
 {
     WCHAR original[MAX_PATH], actual[MAX_PATH], expected[MAX_PATH], shortName[MAX_PATH];
@@ -36,8 +37,6 @@ int main(void)
     VDMINFO info;
     HANDLE file;
     unsigned int row;
-    report = fopen("pif-caller-result.txt", "w");
-    if (!report) return 90;
     CHECK(GetOEMCP() == 437 && GetCurrentDirectoryW(MAX_PATH, original));
     CHECK(CreateDirectoryW(L"O37PIF", NULL));
     CHECK(CreateDirectoryW(L"O37PIF\\D\x00a3", NULL));
@@ -64,8 +63,6 @@ int main(void)
         pfdata.SubSysId = SUBSYS_DOS; IsFirstVDM = TRUE;
         DosSessionId = row == 1 ? 0 : 1; message = writes = 0;
         cmdCheckForPIF(&info);
-        fprintf(report, "row=%u message=%d writes=%d appLen=%u\n", row, message, writes, info.AppLen);
-        fflush(report);
         CHECK(!pfdata.StartDir && !pfdata.StartFile && !pfdata.CmdLine && !pfdata.WinTitle);
         CHECK(GetCurrentDirectoryW(MAX_PATH, actual));
         if (row == 0) {
@@ -91,7 +88,5 @@ int main(void)
     CHECK(SetCurrentDirectoryW(original));
     CHECK(RemoveDirectoryW(expected) && RemoveDirectoryW(L"O37PIF"));
     puts("S37_ORIGINAL_PIF_CALLER_OEM_PATH_ERRORS_CLEANUP_OK");
-    fprintf(report, "S37_ORIGINAL_PIF_CALLER_OEM_PATH_ERRORS_CLEANUP_OK\n");
-    fclose(report);
     return 0;
 }

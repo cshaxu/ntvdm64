@@ -37,6 +37,7 @@ const cflags = [
   "/FI", `\"${root}/src/opennt-abi/host-compat/include/nt.h\"`,
   "/I", `\"${root}/src/mvdm/inc\"`,
   "/I", `\"${root}/src/mvdm/oemuni\"`,
+  "/I", `\"${root}/src/ntvdm-exe/softpc/include\"`,
   "/I", `\"${root}/src/opennt-abi/host-compat/include\"`,
   "/I", `\"${root}/src/opennt-host/public/sdk/inc\"`
 ].join(" ");
@@ -58,6 +59,7 @@ const lines = [
   "  command = link.exe /nologo /out:$out $in $formal/obj/opennt-abi-host-compat/opennt_support_rtl.obj $formal/original-opennt-rtl-x86.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib",
   "build obj/file.obj: cc $root/src/mvdm/oemuni/file.c",
   "build obj/process.obj: cc $root/src/mvdm/oemuni/process.c",
+  "build obj/firmware-root-stub.obj: cc $root/tests/mvdm/oemuni/oemuni_firmware_root_stub.c",
   "build obj/toemuni.obj: cc $root/src/mvdm/oemuni/toemuni.c",
   "  cflags = $cflags /Dgetch=oemuni_no_pause",
   "build obj/pause.obj: cc $root/tests/mvdm/oemuni/oemuni_pause_stub.c",
@@ -82,17 +84,17 @@ const lines = [
   "build oemuni-media-fixture.exe: link obj/media.obj",
   "build obj/pif-caller.obj: cc $root/tests/mvdm/oemuni/oemuni_pif_caller_fixture.c",
   `  cflags = ${formalFlags} /I \"$root/src/mvdm/dos/command\"`,
-  "build oemuni-pif-caller-fixture.exe: link obj/pif-caller.obj $formal/obj/command/cmdpif.obj obj/file.obj obj/process.obj",
+  "build oemuni-pif-caller-fixture.exe: link obj/pif-caller.obj $formal/obj/command/cmdpif.obj obj/file.obj obj/process.obj obj/firmware-root-stub.obj",
   "build obj/pif-environment.obj: cc $root/src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
   `  cflags = ${formalFlags} /Gy /Dmalloc=pif_test_malloc /Dfree=pif_test_free`,
   "build obj/pif-environment-test.obj: cc $root/tests/mvdm/oemuni/oemuni_pif_environment_fixture.c",
   `  cflags = ${formalFlags} /Gy`,
   "build oemuni-pif-environment-fixture.exe: link obj/pif-environment.obj obj/pif-environment-test.obj",
   "build oemuni-dbcs-fixture.exe: link obj/dbcs.obj",
-  "build oemuni-family-fixture.exe: link obj/file.obj obj/process.obj obj/family.obj",
+  "build oemuni-family-fixture.exe: link obj/file.obj obj/process.obj obj/family.obj obj/firmware-root-stub.obj",
   "build oemuni-expand-failure-fixture.exe: link obj/expand-failure.obj",
   "build oemuni-original-test.exe: link obj/file.obj obj/process.obj obj/toemuni.obj obj/pause.obj",
-  "build oemuni-failure-fixture.exe: link obj/file.obj obj/process.obj obj/failure.obj",
+  "build oemuni-failure-fixture.exe: link obj/file.obj obj/process.obj obj/failure.obj obj/firmware-root-stub.obj",
   "default oemuni-original-test.exe",
   ""
 ];
