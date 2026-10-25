@@ -36,6 +36,11 @@ and the bounded DC/DIB/presentation handoff.
 records the complete selected original dispatch/lifetime route and the
 no-speculative-repair conclusion before S3 DIB/palette work.
 
+[T455 S3 DIB/palette boundary](evidence/m0-t455-s3-dib-palette-boundary.md)
+records the original memory-DC, selector callback, DIB-section and palette
+owners, with cached x86 DIB storage-sharing evidence and the explicit S4
+guest-graphics acceptance boundary.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.
