@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T458 S1**
+**Active: M0 T458 S2**
 
 The owner directed automatic sequential S closure and advancement. T455 W07
 is closed; T456 W08 is closed and T457 admits Queue W06, WOW32 residual
@@ -12,26 +12,35 @@ smallest source-shaped binding, with no guest modification or rebuild.
 
 ## Active Packet
 
-### M0 T458 S1 — resource-consumer boundary audit
+### M0 T458 S2 — original resource conversion acceptance
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T458 S1, Ordinary Mode; single-agent source audit and independent final review. |
-| Admission And Approval | Automatic sequential continuation after T457 W06 closure; Queue W09 is now first. |
-| Objective | Map residual icon/cursor/bitmap formats, accelerator consumers and inherited MENU-01 boundaries before any production change. |
-| Non-goals | No guest changes/rebuild; no second menu graph, mutation or retirement owner; no speculative display rewrite. |
-| Reference Baseline | [W09 proposal](../proposals/proposal-wow32-menus-resource-conversion-001.md), [T447 transfer plan](../etc/operations/t447-wow-execution-plan.md), minimum-diff governance and the closed T457 acceptance records. |
-| Files And ABI Surface | Selected original resource/accelerator callers and existing T447 menu/resource bindings; no new ABI admitted during S1. |
+| Identifier Mode | M0 T458 S2, Ordinary Mode; single-agent implementation and independent final review. |
+| Admission And Approval | Automatic continuation after the closed T458 S1 source matrix. |
+| Objective | Exercise and repair only a source-proven icon/cursor/bitmap conversion seam through original WU32 callers and registered output slots. |
+| Non-goals | No guest changes/rebuild; no second resource parser, bitmap converter, menu graph, mutation or retirement owner; no speculative display rewrite. |
+| Reference Baseline | [T458 S1 owner matrix](../etc/evidence/m0-t458-s1-resource-accelerator-owner-matrix.md), [W09 proposal](../proposals/proposal-wow32-menus-resource-conversion-001.md), T447 transfer plan and minimum-diff governance. |
+| Files And ABI Surface | Existing original `wuser.c`/`wucursor.c`/`wcuricon.c` and their established output slots; only a source-proven bounded adapter/test seam is admissible. |
 | Applicable Rules | Execution, architecture, coding, documentation, source policy and WOW32 minimum-diff admission governance. |
-| Verification | Formal graph/source/caller/owner audit plus existing focused resource witnesses; no runtime replacement is inferred from static success. |
-| Expected Markers | Every selected consumer has one original owner, modern resource owner, adapter edge and normal/failure/retirement rule. |
-| Asset Needs | Existing OpenNT MVDM mirror, formal x86 graph, immutable guest media, existing release package and no new source import or replacement media. |
-| Reporting Requirements | Record graph evidence, source/host/adapter allocation, lifetime rules, admitted S2 boundary and explicit omissions. |
+| Verification | Actual WU32 caller/output-slot fixtures for named/ordinal, color/mono, old/malformed data, partial load and retirement; formal x86 build; real guest resource case where available. |
+| Expected Markers | Original caller owns bytes/aliases; the adapter owns no persistent resource state; normal, failed and task/module-retirement paths are observed. |
+| Asset Needs | Existing OpenNT MVDM mirror, formal x86 graph, immutable guest media and existing release package; no new source import or replacement media. |
+| Reporting Requirements | Record the exact conversion/caller chain, source-proven repair if any, tests, package identity and any unavailable real-guest boundary. |
 | Stop Conditions | Need for guest change, second resource/menu owner, broad USER replacement, invented transport or source-less semantic concession. |
-| Exit Criteria | Each W09 residual family has a source-shaped owner matrix and finite S2 boundary. |
+| Exit Criteria | One coherent original conversion path passes its positive/negative/lifetime cohort, is packaged if product inputs change, and leaves only accelerator/menu dispatch for S3. |
 | Original Owner Request | 单人双角色模式复通 WOW32；优先原版代码追溯与最少 diff，整批接通后再统一验证；每个 S 自动收口并继续。 |
-| Similar-Issue Sweep | Icon/cursor/bitmap representation, resource selection, palette/display, accelerator translation, menu consumption, partial load, task loss and release. |
+| Similar-Issue Sweep | Bitmap/icon/cursor representation, resource selection, partial load, color/monochrome selection, task/module loss and release. |
 | Candidate Proposal | [Resource conversion, menus and accelerators](../proposals/proposal-wow32-menus-resource-conversion-001.md). |
+
+## T458 S1 Closure Record
+
+S1 found one selected original owner for resource lookup, bitmap conversion,
+cursor/icon aliases and accelerator conversion, and no second MENU-01 graph.
+The focused actual-bitmap binding witness passes after a test-entrypoint repair
+for the current component Ninja subgraph. The matrix fixes S2's finite
+conversion/retirement boundary and deliberately leaves cursor fixture execution
+and real guest resource acceptance open.
 
 ## T457 S4 And Task Closure Record
 
@@ -170,6 +179,16 @@ W05 and W07 are closed. W08 font/text/metafiles is active at S1.
 Resource-specific menu/dialog conversion remains a later owner.
 
 ## Temporary Evidence
+
+T458 S1 may use only `build/t458-s1` for disposable source-audit and focused
+resource-fixture evidence, with a 30-minute phase, 2-GiB size and 10-minute
+no-progress budget. Stable `.ninja` and `.ccache` remain reusable caches and
+are never task evidence roots.
+
+T458 S2 may use only `build/t458-s2` for disposable conversion and guest
+resource evidence, with a 45-minute phase, 2-GiB size and 10-minute no-progress
+budget. Stable `.ninja` and `.ccache` remain reusable caches and are never task
+evidence roots.
 
 T457 S1 may use only `build/t457-s1` for disposable source-audit and focused
 fixture evidence. Stable `.ninja` and `.ccache` remain reusable caches and

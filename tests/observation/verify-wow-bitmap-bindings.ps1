@@ -8,6 +8,12 @@ param(
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path "$PSScriptRoot/../..").Path
 $provider = (Resolve-Path $ProviderBuildRoot).Path
+# The formal CMake root now contains one Ninja subgraph per component.  Keep
+# accepting the older component-root argument, but select the WOW32 graph when
+# the caller supplies the stable configuration root.
+if (Test-Path (Join-Path $provider 'wow32/build.ninja')) {
+    $provider = (Resolve-Path (Join-Path $provider 'wow32')).Path
+}
 $out = [IO.Path]::GetFullPath($BuildRoot)
 if (!$out.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or
         (Test-Path $out)) { throw 'Fresh repository build output required' }
