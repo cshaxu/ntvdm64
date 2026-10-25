@@ -1191,7 +1191,7 @@ static void verify_original_modal_task(void)
         modal_retained=NULL;
         modal_handle_form=carrier;
         fprintf(stderr,"WOW_MODAL_STAGE enter encoding=%u\n",encoding);
-        result=wow_original_DialogBoxIndirectParamAorW(GetModuleHandleW(NULL),dialog,NULL,
+        result=wow_user_dialog_box_indirect_param(GetModuleHandleW(NULL),dialog,NULL,
             original_modal_witness,0,encoding?0:SCDLG_ANSI);
         fprintf(stderr,"WOW_MODAL_STAGE returned result=%ld error=%lu\n",(LONG)result,GetLastError());
         BORROW_CHECK(result==49 && modal_dialog_calls==calls+1 && modal_retained);

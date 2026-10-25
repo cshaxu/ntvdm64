@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T457 S2**
+**Active: M0 T457 S3**
 
 The owner directed automatic sequential S closure and advancement. T455 W07
 is closed; T456 W08 is closed and T457 admits Queue W06, WOW32 residual
@@ -12,23 +12,23 @@ smallest source-shaped binding, with no guest modification or rebuild.
 
 ## Active Packet
 
-### M0 T457 S2 — dialog, keyboard/input and caret acceptance
+### M0 T457 S3 — hooks and timers acceptance
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T457 S2, Ordinary Mode; single-agent implementation and independent final review. |
-| Admission And Approval | Automatic sequential continuation after S1 owner-matrix closure. |
-| Objective | Exercise real Win16 dialog/control callback, keyboard and caret behavior through the retained original providers; repair only a source-proven boundary seam. |
-| Non-goals | No guest changes/rebuild; no second input router, scheduler, hook registry, timer engine, dialog implementation or speculative host-control replacement; hook/timer registration remains S3. |
-| Reference Baseline | [S1 owner matrix](../etc/evidence/m0-t457-s1-dialog-input-hook-timer-owner-matrix.md), [W06 proposal](../proposals/proposal-wow32-dialogs-input-hooks-timers-001.md), [T447 transfer plan](../etc/operations/t447-wow-execution-plan.md), original-provider graph and minimum-diff governance. |
-| Files And ABI Surface | Selected original `wudlg.c`/`wumsg.c`/`wucaret.c` callers and existing T447 dialog/message/callback bindings, plus focused guest/native acceptance material. |
+| Identifier Mode | M0 T457 S3, Ordinary Mode; single-agent implementation and independent final review. |
+| Admission And Approval | Automatic sequential continuation after S2 dialog/input/caret closure. |
+| Objective | Exercise retained original hook/timer registration, callback reentry, removal and task-loss cleanup; repair only a source-proven boundary seam. |
+| Non-goals | No guest changes/rebuild; no second input router, scheduler, hook registry, timer engine, dialog implementation or speculative host-control replacement. |
+| Reference Baseline | [S1 owner matrix](../etc/evidence/m0-t457-s1-dialog-input-hook-timer-owner-matrix.md), [S2 acceptance](../etc/evidence/m0-t457-s2-dialog-input-caret-acceptance.md), [W06 proposal](../proposals/proposal-wow32-dialogs-input-hooks-timers-001.md), original-provider graph and minimum-diff governance. |
+| Files And ABI Surface | Selected original `wuhook.c`/`wowhooks.c`/`wutmr.c` callers and existing T447 callback/task bindings, plus focused guest/native acceptance material. |
 | Applicable Rules | Execution, architecture, coding, documentation, source policy and WOW32 minimum-diff admission governance. |
-| Verification | Real dialog/control callback and keyboard/caret acceptance where available, plus focused original-path fixtures.  Classify unavailable desktop-state prerequisites as non-passes rather than product evidence. |
-| Expected Markers | Original dialog/message/caret owner remains singular; callback/cancel/retirement is balanced; any repair has a source-proven boundary and no duplicate state. |
+| Verification | Real registration/removal and timer callback/task-loss acceptance where available, plus focused original-path fixtures. Classify unavailable desktop-state prerequisites as non-passes rather than product evidence. |
+| Expected Markers | Original hook/timer owner remains singular; callback/reentry/removal/retirement is balanced; any repair has a source-proven boundary and no duplicate state. |
 | Asset Needs | Existing OpenNT MVDM mirror, formal x86 graph, immutable guest media, existing release package and no new source import or replacement media. |
-| Reporting Requirements | Record real-entry evidence, source/host/adapter allocation, callback execution context, lifetime/cleanup proof and a finite S3 handoff or no-change conclusion. |
+| Reporting Requirements | Record real-entry evidence, source/host/adapter allocation, callback execution context, lifetime/cleanup proof and a finite S4 handoff or no-change conclusion. |
 | Stop Conditions | Need for guest change, second scheduler/router/registry, broad replacement of original USER code, invented transport or source-less semantic concession. |
-| Exit Criteria | Dialog/input/caret scope has real-entry evidence or explicitly bounded unavailable prerequisites; any actual defect is repaired and fully delivered before S3. |
+| Exit Criteria | Hook/timer scope has real-entry evidence or explicitly bounded unavailable prerequisites; any actual defect is repaired and fully delivered before S4. |
 | Original Owner Request | 单人双角色模式复通 WOW32；优先原版代码追溯与最少 diff，整批接通后再统一验证；每个 S 自动收口并继续。 |
 | Similar-Issue Sweep | Dialog init/procedure/cancel/end, keyboard/mouse/caret, hook install/remove/callback, timer set/kill/callback, native/guest identity, nested callback, task loss and cleanup. |
 | Candidate Proposal | [Dialogs, input, hooks and timers](../proposals/proposal-wow32-dialogs-input-hooks-timers-001.md). |
@@ -41,6 +41,15 @@ family.  Native hook and original timer callback fixtures pass; the only input
 fixture non-pass precedes WOW behavior because the test desktop does not own
 the required native keyboard state.  The finite S2 scope is recorded in [the
 owner matrix](../etc/evidence/m0-t457-s1-dialog-input-hook-timer-owner-matrix.md).
+
+## T457 S2 Closure Record
+
+S2 repaired the sole source-proven modal-dialog call-context omission, then
+passed a real eight-phase Win16 dialog/input/caret probe, focused modal-entry
+fixture, formal x86 build and coherent ten-image publication. The original
+dialog providers remain authoritative; guest media is unchanged. The complete
+root-cause, evidence and finite S3 handoff are in [the S2 acceptance
+record](../etc/evidence/m0-t457-s2-dialog-input-caret-acceptance.md).
 
 ## S1 Closure Record
 
@@ -151,6 +160,14 @@ Resource-specific menu/dialog conversion remains a later owner.
 T457 S1 may use only `build/t457-s1` for disposable source-audit and focused
 fixture evidence. Stable `.ninja` and `.ccache` remain reusable caches and
 are never task evidence roots.
+
+T457 S2 may use only `build/t457-s2` for disposable guest-dialog/input/caret
+evidence. Stable `.ninja` and `.ccache` remain reusable caches and are never
+task evidence roots.
+
+T457 S3 may use only `build/t457-s3` for disposable hook/timer evidence.
+Stable `.ninja` and `.ccache` remain reusable caches and are never task
+evidence roots.
 
 T454 may use only declared `build/t454-s1`, `build/t454-s2`, `build/t454-s3`
 and `build/t454-s4` roots for disposable evidence; stable `.ninja` and

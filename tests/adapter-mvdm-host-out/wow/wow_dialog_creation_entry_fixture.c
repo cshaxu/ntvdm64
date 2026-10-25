@@ -14,7 +14,7 @@ static wow_task_order_thread thread;
 static wow_task_order_process process;
 static wow_user_object_table objects;
 static DLGTEMPLATE resource;
-static unsigned errors, tasks, borrows, calls;
+static unsigned errors, tasks, borrows, calls, modal_calls;
 static BOOL reject_task, reject_borrow, fail_create, raise_create, fail_ready;
 static unsigned ready_calls;
 static UINT expected_flags;
@@ -75,10 +75,32 @@ HWND WINAPI InternalCreateDialog(HANDLE module, LPDLGTEMPLATE data, DWORD bytes,
     SetLastError(fail_create ? ERROR_INVALID_DATA : 0x4473);
     return fail_create ? NULL : (HWND)0x3456;
 }
+int WINAPI wow_original_DialogBoxIndirectParamAorW(HINSTANCE module,
+    LPCDLGTEMPLATEW data, HWND owner, DLGPROC proc, LPARAM parameter,
+    UINT flags)
+{
+    CHECK(ready_calls && tasks == 1 && borrows == 1);
+    CHECK(wow_dialog_current &&
+        wow_dialog_current->server.hMsgFont == (HFONT)(ULONG_PTR)0x123);
+    CHECK(wow_dialog_current != &outer_context);
+    CHECK(wow_default_current == &wow_dialog_current->geometry);
+    CHECK(module == (HINSTANCE)0x1235 && data == (LPCDLGTEMPLATEW)&resource);
+    CHECK(owner == (HWND)0x2468 && proc == procedure && parameter == 0x76543210);
+    CHECK(flags == expected_flags);
+    ++modal_calls;
+    SetLastError(fail_create ? ERROR_INVALID_DATA : 0x4473);
+    return fail_create ? -1 : 49;
+}
 static HWND create(void)
 {
     return wow_user_server_create_dialog((HANDLE)0x1235, &resource,
         sizeof(resource), (HWND)0x2468, procedure, 0x76543210, expected_flags);
+}
+static int create_modal(void)
+{
+    return wow_user_modal_dialog_box((HINSTANCE)0x1235,
+        (LPCDLGTEMPLATEW)&resource, (HWND)0x2468, procedure, 0x76543210,
+        expected_flags);
 }
 int main(void)
 {
@@ -96,6 +118,14 @@ int main(void)
         CHECK(!tasks && !borrows);
         CHECK(wow_dialog_current == &outer_context);
     }
+    expected_flags = SCDLG_ANSI;
+    CHECK(create_modal() == 49 && GetLastError() == 0x4473);
+    CHECK(modal_calls == 1 && !tasks && !borrows);
+    CHECK(wow_dialog_current == &outer_context);
+    fail_create = TRUE;
+    CHECK(create_modal() == -1 && GetLastError() == ERROR_INVALID_DATA);
+    CHECK(modal_calls == 2 && !tasks && !borrows);
+    fail_create = FALSE;
     fail_create = TRUE;
     CHECK(!create() && GetLastError() == ERROR_INVALID_DATA);
     CHECK(wow_dialog_current == &outer_context);

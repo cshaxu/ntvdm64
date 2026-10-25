@@ -6,11 +6,9 @@
  */
 
 #include <windows.h>
+#include "wow_dialog_creation_binding.h"
 #include "opennt-abi/host-compat/include/wow32_provider_private.h"
 #include "opennt-abi/source/public/internal/windows/inc/wingdip.h"
-
-int WINAPI wow_original_DialogBoxIndirectParamAorW(HINSTANCE, LPCDLGTEMPLATEW,
-    HWND, DLGPROC, LPARAM, UINT);
 
 /* ADAPTER-WOW-063 supersedes ADAPTER-WIN32-051's native modal substitution.
  * Preserve the complete input flags so the original entry owns their
@@ -19,8 +17,7 @@ int WINAPI wow_user_dialog_box_indirect_param(HINSTANCE module,
     LPCDLGTEMPLATEW dialog_template, HWND owner, DLGPROC dialog_proc,
     LPARAM init_param, UINT flags)
 {
-    if (dialog_template == NULL) return -1;
-    return wow_original_DialogBoxIndirectParamAorW(module,dialog_template,
+    return wow_user_modal_dialog_box(module,dialog_template,
         owner,dialog_proc,init_param,flags);
 }
 

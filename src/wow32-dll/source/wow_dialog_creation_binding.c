@@ -12,6 +12,69 @@
  * Select only with the complete dialog/EDIT dependency group. */
 HWND WINAPI InternalCreateDialog(HANDLE, LPDLGTEMPLATE, DWORD, HWND,
     DLGPROC, LONG, UINT);
+int WINAPI wow_original_DialogBoxIndirectParamAorW(HINSTANCE, LPCDLGTEMPLATEW,
+    HWND, DLGPROC, LPARAM, UINT);
+
+typedef struct wow_dialog_call_scope {
+    wow_task_callback_scope task;
+    wow_user_borrow_scope borrow;
+    wow_dialog_context context;
+    wow_dialog_context *previous;
+    wow_default_context *previous_geometry;
+} wow_dialog_call_scope;
+
+/* Both recovered original call shapes reach InternalCreateDialog, whose
+ * precompiled gpsi/oemInfo aliases require this provider-local TLS context.
+ * This owns only the entered call lease.  Original clres.c and dlgbegin.c
+ * retain all dialog policy, parsing, creation and rollback. */
+static BOOL wow_dialog_call_scope_enter(wow_dialog_call_scope *scope)
+{
+    DWORD error;
+    wow_user_runtime_thread *runtime = wow_user_runtime_current();
+
+    ZeroMemory(scope, sizeof(*scope));
+    scope->previous = wow_dialog_current;
+    scope->previous_geometry = wow_default_current;
+    if (!runtime || !runtime->thread || !runtime->thread->ppi ||
+            !runtime->thread->ppi->objects) {
+        SetLastError(ERROR_INVALID_STATE);
+        return FALSE;
+    }
+    if (runtime->thread->TIF_flags & WOW_TASK_TIF_INCLEANUP) {
+        SetLastError(ERROR_INVALID_STATE);
+        return FALSE;
+    }
+    if (!wow_edit_lookaside_ready()) return FALSE;
+    if (!wow_task_callback_enter(&scope->task)) return FALSE;
+    if (!wow_user_borrow_enter(&scope->borrow)) {
+        error = GetLastError();
+        (void)wow_task_callback_leave(&scope->task);
+        SetLastError(error);
+        return FALSE;
+    }
+    if (!wow_dialog_capture_context(&scope->context, TRUE)) {
+        error = GetLastError();
+        wow_user_borrow_leave_required(&scope->borrow);
+        (void)wow_task_callback_leave(&scope->task);
+        SetLastError(error);
+        return FALSE;
+    }
+    wow_dialog_current = &scope->context;
+    wow_default_current = &scope->context.geometry;
+    return TRUE;
+}
+
+static VOID wow_dialog_call_scope_leave(wow_dialog_call_scope *scope)
+{
+    DWORD error = GetLastError();
+
+    wow_dialog_current = scope->previous;
+    wow_default_current = scope->previous_geometry;
+    wow_dialog_release_context(&scope->context);
+    wow_user_borrow_leave_required(&scope->borrow);
+    (void)wow_task_callback_leave(&scope->task);
+    SetLastError(error);
+}
 
 HWND WINAPI wow_user_server_create_dialog(HANDLE module,
     LPDLGTEMPLATE dialog_template, DWORD bytes, HWND owner, DLGPROC procedure,
@@ -19,11 +82,8 @@ HWND WINAPI wow_user_server_create_dialog(HANDLE module,
 {
     DWORD error = GetLastError();
     wow_user_runtime_thread *runtime = wow_user_runtime_current();
-    wow_task_callback_scope task;
-    wow_user_borrow_scope borrow;
+    wow_dialog_call_scope scope;
     HWND result = NULL;
-    wow_dialog_context context = {0}, *previous = wow_dialog_current;
-    wow_default_context *previous_geometry = wow_default_current;
 
     if (!dialog_template || !bytes || !runtime || !runtime->thread ||
             !runtime->thread->ppi || !runtime->thread->ppi->objects ||
@@ -32,33 +92,33 @@ HWND WINAPI wow_user_server_create_dialog(HANDLE module,
         SetLastError(ERROR_INVALID_PARAMETER);
         return NULL;
     }
-    if (runtime->thread->TIF_flags & WOW_TASK_TIF_INCLEANUP) {
-        SetLastError(ERROR_INVALID_STATE);
-        return NULL;
-    }
-    if (!wow_edit_lookaside_ready()) return NULL;
-    if (!wow_task_callback_enter(&task)) return NULL;
-    if (!wow_user_borrow_enter(&borrow)) {
-        error = GetLastError();
-        (void)wow_task_callback_leave(&task);
-        SetLastError(error);
-        return NULL;
-    }
+    if (!wow_dialog_call_scope_enter(&scope)) return NULL;
     __try {
-        if (!wow_dialog_capture_context(&context, TRUE)) __leave;
-        wow_dialog_current = &context;
-        wow_default_current = &context.geometry;
         SetLastError(error);
         result = InternalCreateDialog(module, dialog_template, bytes, owner,
             procedure, init_parameter, flags);
     } __finally {
-        error = GetLastError();
-        wow_dialog_current = previous;
-        wow_default_current = previous_geometry;
-        wow_dialog_release_context(&context);
-        wow_user_borrow_leave_required(&borrow);
-        (void)wow_task_callback_leave(&task);
+        wow_dialog_call_scope_leave(&scope);
+    }
+    return result;
+}
+
+int WINAPI wow_user_modal_dialog_box(HINSTANCE module,
+    LPCDLGTEMPLATEW dialog_template, HWND owner, DLGPROC procedure,
+    LPARAM init_parameter, UINT flags)
+{
+    DWORD error = GetLastError();
+    wow_dialog_call_scope scope;
+    int result = -1;
+
+    if (dialog_template == NULL) return -1;
+    if (!wow_dialog_call_scope_enter(&scope)) return -1;
+    __try {
         SetLastError(error);
+        result = wow_original_DialogBoxIndirectParamAorW(module,
+            dialog_template, owner, procedure, init_parameter, flags);
+    } __finally {
+        wow_dialog_call_scope_leave(&scope);
     }
     return result;
 }
