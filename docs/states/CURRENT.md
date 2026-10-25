@@ -2,40 +2,11 @@
 
 ## Current Work
 
-**Active: M0 T453 S4**
+**No active M/T/S packet.**
 
-The owner admits the Queue's first remaining WOW32 package: W04 files,
-directories, environment and OEM. T452 has closed its W03 boundary. This packet follows the read-only
-`ntvdm64-wow32-audit`: minimum mirror/adapter diff and maximum sourced
-reconnection, with no guest modification.
-
-## Active Packet
-
-### M0 T453 S4 — W04 package acceptance
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T453 S4, Ordinary Mode; single-agent author and separate reviewer passes. |
-| Admission And Approval | S1 completed the source matrix; S2 closed and published its bounded file-attribute repair; S3 closed its OEM/font consumer fixture boundary. T452 supplies the consumed W03 allocation/alias boundary. |
-| Objective | Complete coherent W04 package acceptance: repeated real operations, cleanup and non-ASCII DOS/native return, publishing only if a product image changes. |
-| Non-goals | No guest changes/rebuild, generic filesystem/environment service, second current-directory or OEM authority, global cwd lock, registry/shell/resource/GDI implementation, unrelated USER repair or external-audit edits. |
-| Reference Baseline | T452 closure, W04 [proposal](../proposals/proposal-wow32-files-environment-oem-001.md), [T453 plan](../etc/operations/t453-files-environment-oem-plan.md), and [S1 matrix](../etc/evidence/m0-t453-s1-files-environment-oem-owner-matrix.md). |
-| Files And ABI Surface | S1-selected original file/OEM callers and existing bindings only. Guest ABI, W03 allocation/alias ownership and later providers remain unchanged unless a traced edge proves a bounded prerequisite. |
-| Applicable Rules | Execution, architecture, coding, documentation, source policy and WOW32 minimum-diff admission governance. |
-| Verification | Run a coherent package only after the source and fixture group: repeated direct/nested OEM operations, cleanup, non-ASCII DOS/native return, and current release identity. |
-| Expected Markers | The selected W04 operations have one original/host owner, repeat without leaked test state, and either preserve the existing ten-image publication or produce one coherent replacement package. |
-| Asset Needs | Pinned original OpenNT/audit, immutable guests and existing W04 tests; no guest replacement. |
-| Reporting Requirements | Separate static/build/runtime evidence; mirror/adapter estimate only after tracing the finite matrix; unresolved edges name their original owner and successor. |
-| Stop Conditions | New semantic concession, guest mutation, unbounded import, competing filesystem/environment owner, required scheduler/USER reconstruction or material scope expansion. |
-| Exit Criteria | All S1-selected consumer groups have a source-linked normal/failure/retirement witness; any product correction is original-owner-shaped, complete as a group and published with its affected acceptance. |
-| Original Owner Request | 准入队列第一条；按照 ntvdm64-wow32-audit 审计结果执行最小化 diff 和最大化复通。 |
-| Similar-Issue Sweep | Repeated OEM conversion both directions, cleanup after failure, DOS/native return/error values, package manifest identity and release deployment correspondence. |
-| Candidate Proposal | [Files, directories, environment and OEM](../proposals/proposal-wow32-files-environment-oem-001.md). |
-
-S1 closed its static owner matrix. S2 closed its bounded repair, coherent build,
-runtime acceptance and publication; S3 closed its consumer/fallback fixture group;
-S4 is active. The four-stage sequence is in the
-[T453 plan](../etc/operations/t453-files-environment-oem-plan.md).
+T453 W04 files, directories, environment and OEM is closed. Its
+[closure record](../history/m0-t453-closure.md) is authoritative for the
+completed sequence. The next Queue candidate remains unadmitted.
 
 ## S1 Closure Record
 
@@ -70,13 +41,13 @@ and formal evidence is indexed in `docs/etc/README.md`.
 
 ## Successor Boundary
 
-W04 is active. The remaining Queue relative order is unchanged. SOL Options
+W04 is closed. The remaining Queue relative order is unchanged. SOL Options
 remains in the queued everyday-usability package; startup is not full
 interaction acceptance.
 
 ## Temporary Evidence
 
-T453 may use only declared `build/t453-s1`, `build/t453-s2`, `build/t453-s3` and `build/t453-s4` roots for disposable evidence;
+T453 used only declared `build/t453-s1`, `build/t453-s2`, `build/t453-s3` and `build/t453-s4` roots for disposable evidence;
 stable `.ninja` and `.ccache` remain reusable caches. Retain durable results
 before exact-target cleanup; never use a task root as a build cache.
 
@@ -88,6 +59,7 @@ Stable `.ninja` and `.ccache` caches remain untouched.
 
 ## Recent M0 Closures
 
+- [T453](../history/m0-t453-closure.md): files, directories, environment and OEM.
 - T452: modules, memory and aliases.
 - [T451](../history/m0-t451-closure.md): USER objects/shared view and CUI handoff.
 - [T450](../history/m0-t450-closure.md): style removal and Run16 entry.
@@ -96,5 +68,6 @@ Stable `.ninja` and `.ccache` caches remain untouched.
 
 ## Recent Governance
 
-T453 admission preserves Queue order and records the W04 Green gate. No
-production source, guest media or release asset changed during this transition.
+T453 closes W04 without reordering the successor queue. Its S2 product
+delivery remains the current verified release; S3/S4 changed no product source,
+guest media or release asset.

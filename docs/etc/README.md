@@ -33,6 +33,10 @@ boundaries.
 records the selected original non-ASCII and font-removal consumer paths, the
 current fixture-provider boundary and its completed bounded acceptance group.
 
+[T453 S4 package acceptance](evidence/m0-t453-s4-package-acceptance.md)
+records the repeated deployed direct/nested OEM witness, release identity and
+whole W04 conclusion.
+
 [T451 S1 USER object contract ledger](operations/m0-t451-s1-user-object-contract-ledger.md)
 maps every residual C04--C07/object-C10 PMODE32 direct-reader family to its
 producer, authority, update/withdrawal rule, evidence and bounded S2--S4
