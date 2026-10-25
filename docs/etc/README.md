@@ -20,6 +20,14 @@ the former WinOldAp wait non-pass with the existing minimal binding and records
 current production lifecycle plus formal external-memory evidence. It closes
 W03 without a product-source change.
 
+[T454 W05 plan](operations/t454-resource-loading-plan.md) records the active
+resource discovery/loading boundary, original state ownership and bounded
+four-stage recovery sequence.
+
+[T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
+records the finite original lookup/load/lock/free ownership, caller census,
+limits and S2/S3 handoff; it is static evidence, not runtime acceptance.
+
 [T453 W04 plan](operations/t453-files-environment-oem-plan.md) records the
 active files, directories, environment and OEM packet, fixed one-owner boundary
 and source-first four-stage sequence.
