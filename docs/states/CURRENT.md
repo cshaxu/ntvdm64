@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T458 S3**
+**Active: M0 T458 S4**
 
 The owner directed automatic sequential S closure and advancement. T455 W07
 is closed; T456 W08 is closed and T457 admits Queue W06, WOW32 residual
@@ -12,25 +12,25 @@ smallest source-shaped binding, with no guest modification or rebuild.
 
 ## Active Packet
 
-### M0 T458 S3 — original accelerator dispatch acceptance
+### M0 T458 S4 — consumer and application acceptance
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T458 S3, Ordinary Mode; single-agent implementation and independent final review. |
-| Admission And Approval | Automatic continuation after closed S2 conversion evidence. |
-| Objective | Prove or minimally repair original `waccel.c` table conversion/dispatch and consume T447's MENU-01 graph without creating a second menu owner. |
-| Non-goals | No guest changes/rebuild; no menu parser, mutation graph, owner-draw provider, accelerator cache or general USER replacement. |
-| Reference Baseline | [T458 S1 matrix](../etc/evidence/m0-t458-s1-resource-accelerator-owner-matrix.md), [T458 S2 conversion acceptance](../etc/evidence/m0-t458-s2-resource-conversion-acceptance.md), W09 proposal and T447 transfer. |
-| Files And ABI Surface | Original `waccel.c`/`wkman.c` conversion and retirement callers plus established public `HACCEL` boundary. |
+| Identifier Mode | M0 T458 S4, Ordinary Mode; single-agent implementation and independent final review. |
+| Admission And Approval | Automatic continuation after closed S3 accelerator boundary. |
+| Objective | Run bounded resource/menu/accelerator consumer acceptance against the coherent package; close T458 or record only proven external/original limitations. |
+| Non-goals | No guest changes/rebuild; no duplicate resource parser, menu graph, accelerator cache, replacement USER or speculative display work. |
+| Reference Baseline | [T458 S1 matrix](../etc/evidence/m0-t458-s1-resource-accelerator-owner-matrix.md), [S2 conversion](../etc/evidence/m0-t458-s2-resource-conversion-acceptance.md), [S3 accelerator](../etc/evidence/m0-t458-s3-accelerator-dispatch-retirement.md), W09 proposal and T447 transfer. |
+| Files And ABI Surface | Existing original resource/accelerator providers and T447 MENU-01 consumer; no new ABI. |
 | Applicable Rules | Execution, architecture, coding, documentation, source policy and WOW32 minimum-diff admission governance. |
-| Verification | Actual original accelerator conversion/alias/retirement fixture, dispatch/reentry/cancellation evidence through the existing MENU-01 consumer, formal x86 build, and a bounded real consumer case where available. |
-| Expected Markers | Original tables and aliases remain authoritative; public `HACCEL` is not reinterpreted as a guest alias; task retirement cannot dispatch stale accelerators. |
-| Asset Needs | Existing original mirrors, formal x86 graph, immutable guest media and coherent package; no new source import. |
-| Reporting Requirements | Record precise original caller/alias chain, source-proven repair if any, evidence and unavailable real-consumer boundary. |
-| Stop Conditions | Guest change, a second menu graph/cache, broad USER replacement, invented transport or source-less concession. |
-| Exit Criteria | One original accelerator path passes conversion, dispatch, failure and retirement evidence; all menu behavior remains assigned to T447; finite S4 consumer handoff is recorded. |
+| Verification | Retained executable resource/menu consumers, original accelerator boundary witnesses, formal x86 graph and coherent-package identity; explicitly distinguish pre-provider observer failure from application evidence. |
+| Expected Markers | No consumer introduces a competing owner; resource/accelerator release remains task-local; existing T447 menu behavior is consumed, not recreated. |
+| Asset Needs | Existing immutable guest media, coherent package and source fixtures; no new source import. |
+| Reporting Requirements | Record every actual consumer result, package/hash identity, publication need, limitation and final T disposition. |
+| Stop Conditions | Guest change, a duplicate owner, broad USER replacement, invented transport or source-less concession. |
+| Exit Criteria | Consumer evidence completes or has a bounded attributable non-pass; all residual W09 owners have a source-proven disposition and T458 closure is recorded. |
 | Original Owner Request | 单人双角色模式复通 WOW32；优先原版代码追溯与最少 diff，整批接通后再统一验证；每个 S 自动收口并继续。 |
-| Similar-Issue Sweep | Accelerator table aliases, task/module retirement, menu dispatch reentry/cancellation and public handle ownership. |
+| Similar-Issue Sweep | Resource/menu/accelerator consumers, task retirement, package identity and pre-provider runtime failures. |
 | Candidate Proposal | [Resource conversion, menus and accelerators](../proposals/proposal-wow32-menus-resource-conversion-001.md). |
 
 ## T458 S1 Closure Record
@@ -51,6 +51,14 @@ stock and invalid paths. The formal x86 graph is current. A retained
 private-desktop WINMINE observer fails before worker/resource entry and is an
 explicit non-pass. No production or guest input changed; [the S2 evidence](../etc/evidence/m0-t458-s2-resource-conversion-acceptance.md)
 admits S3 accelerator-only work.
+
+## T458 S3 Closure Record
+
+S3 added test witnesses only. Extracted original `CreateAccel32` retains the
+packed-record boundary, and original `SetupAccelAlias`/`FindAccelAlias`/
+`DestroyAccelAlias` retain task-local aliases and one native destroy per task
+retirement. T447 remains the only MENU-01 owner. [The S3 evidence](../etc/evidence/m0-t458-s3-accelerator-dispatch-retirement.md)
+admits finite consumer acceptance.
 
 ## T457 S4 And Task Closure Record
 

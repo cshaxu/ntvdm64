@@ -70,6 +70,10 @@ their bounded modern output slots, and the finite conversion acceptance scope.
 records the extracted-original caller/output-slot cohort, formal x86 build and
 the explicit pre-resource private-desktop observer non-pass.
 
+[T458 S3 accelerator dispatch and retirement](evidence/m0-t458-s3-accelerator-dispatch-retirement.md)
+records extracted-original conversion and task-local alias-retirement evidence
+without creating a second accelerator or menu owner.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.
