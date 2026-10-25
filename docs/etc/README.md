@@ -49,6 +49,11 @@ test-only x64 probe type correction and the explicit SOL geometry non-pass.
 records the selected original providers, one existing public font-tracking
 binding, and the sole source-proven glyph-rotation seam admitted to S2.
 
+[T456 S2 glyph-outline rotation seam](evidence/m0-t456-s2-glyph-outline-rotation.md)
+records the bounded public-GDI compatibility seam, its actual x86 fixture,
+the normalized ten-image publication identity, and explicit private-desktop
+runtime-test limitation.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.

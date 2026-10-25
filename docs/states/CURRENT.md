@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T456 S2**
+**Active: M0 T456 S3**
 
 The owner directed automatic sequential S closure and advancement. T455 W07
 is closed; T456 admits Queue W08, WOW32 fonts, text and metafiles. The task
@@ -12,25 +12,25 @@ or rebuild.
 
 ## Active Packet
 
-### M0 T456 S2 — glyph-outline compatibility and text/font lifetime
+### M0 T456 S3 — metafile creation, playback and release
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T456 S2, Ordinary Mode; single-agent implementation and independent final review. |
-| Admission And Approval | Owner's standing WOW32 objective and automatic sequential S directive; S1 owner-matrix closure. |
-| Objective | Restore the source-proven `GetGlyphOutlineWow` Win3.1 rotation policy with a bounded public seam, then prove original guest text/font content and task lifetime through selected callers. |
-| Non-goals | No guest changes/rebuild; no generic text renderer, second font registry, host-font-to-guest lookup merger, metafile replacement, control/resource conversion, private GDI import or speculative provider replacement. |
-| Reference Baseline | [S1 owner matrix](../etc/evidence/m0-t456-s1-font-text-metafile-owner-matrix.md), [T455 closure](../history/m0-t455-closure.md), [W08 proposal](../proposals/proposal-wow32-fonts-text-metafiles-001.md), T443 H08 transfer, W04/W07 evidence and WOW32 minimum-diff governance. |
-| Files And ABI Surface | `wow_public_user_facade.c`, its existing private ABI declarations, focused fixture/test source and selected original font/text callers. |
+| Identifier Mode | M0 T456 S3, Ordinary Mode; single-agent implementation and independent final review. |
+| Admission And Approval | Owner's automatic sequential S directive; S2 glyph-outline closure. |
+| Objective | Trace selected original metafile creation, conversion, playback, release and partial-failure paths; repair only a source-proven public-host seam. |
+| Non-goals | No guest changes/rebuild; no replacement metafile engine, recorder, renderer, second handle authority, broad USER/GDI import or speculative provider replacement. |
+| Reference Baseline | [S2 glyph-outline seam](../etc/evidence/m0-t456-s2-glyph-outline-rotation.md), [S1 owner matrix](../etc/evidence/m0-t456-s1-font-text-metafile-owner-matrix.md), [W08 proposal](../proposals/proposal-wow32-fonts-text-metafiles-001.md), T443 H08 transfer and WOW32 minimum-diff governance. |
+| Files And ABI Surface | Selected original `wgmeta.c` callers, their existing public facade declarations, focused fixture/test source and retained GDI identity/lifetime owners. |
 | Applicable Rules | Execution, architecture, coding, documentation, source policy and WOW32 minimum-diff admission governance. |
-| Verification | Add a focused public-GDI fixture for raw rotated versus zero-rotation equivalent glyph outlines and failure restoration; build the affected x86 WOW32 closure; execute guest text/font content plus repeat-task lifetime cases, then required inherited regression/publication gates. |
-| Expected Markers | The seam changes only the source-proven selected-font escapement/orientation input; caller DC/font state, `MAT2`, result/error direction and font task cleanup remain single-owner. |
+| Verification | First establish exact original caller/ownership and the modern host boundary. Then use focused creation/playback/release fixtures, formal x86 closure and retained package/frontier gates in proportion to any production change. |
+| Expected Markers | Every metafile handle has a single owner; normal/error release keeps original result/error direction and no copied view becomes authoritative. |
 | Asset Needs | Existing OpenNT MVDM mirror, formal x86 graph, immutable guest media, existing release package and no new source import or replacement media. |
-| Reporting Requirements | Record exact source comparison, native fixture and guest/lifetime evidence, complete ten-image package identity, explicit non-passes and S3 metafile handoff. |
-| Stop Conditions | Need for guest change, broad USER/GDI server import, second font/metafile authority, source-less renderer or semantic concession beyond the documented two-field rotation policy. |
-| Exit Criteria | The selected text/font rows execute through original callers with normal/failure/task-retirement evidence; package is built, published, hash-verified, committed and pushed if production changes. |
+| Reporting Requirements | Record exact source comparison, ownership/lifetime map, focused fixture evidence, complete package identity if changed and explicit non-passes/S4 handoff. |
+| Stop Conditions | Need for guest change, broad USER/GDI server import, second metafile authority, source-less renderer or semantic concession beyond an approved finite host seam. |
+| Exit Criteria | Selected metafile rows have proven original/provider ownership and normal/failure/release behavior; production changes are built, published, hash-verified, committed and pushed. |
 | Original Owner Request | 单人双角色模式复通 WOW32；优先原版代码追溯与最少 diff，整批接通后再统一验证；每个 S 自动收口并继续。 |
-| Similar-Issue Sweep | `WG32CreateFont`/selection/delete, ANSI/OEM/Unicode conversion, text extent/output, rotated versus zero-rotation glyphs, host versus guest font search and task teardown/failure rollback. |
+| Similar-Issue Sweep | Metafile create/copy/delete, record/playback, ANSI/OEM/Unicode conversion, handle reuse, DC selection/release and failure cleanup. |
 | Candidate Proposal | [Fonts, text and metafiles](../proposals/proposal-wow32-fonts-text-metafiles-001.md). |
 
 ## S1 Closure Record
@@ -52,6 +52,17 @@ retirement semantics. Its cached component build and bounded carrier fixture
 found no binding defect; no speculative product change or release was made.
 [The S2 DC/drawing evidence](../etc/evidence/m0-t455-s2-dc-dispatch-lifetime.md)
 admits S3 DIB/palette work.
+
+## T456 S2 Closure Record
+
+S2 restored the source-proven Win3.1 `GetGlyphOutlineWow` ignore-rotation
+policy through a minimal public-GDI selection seam. The actual x86 fixture,
+formal full component build (including unchanged second-build intermediates),
+ten-image publication and three-way hash verification pass. Published immutable
+WRITE startup/liveness also passes. Retained private-desktop whole-app probes
+fail before selected behavior with known pre-existing exits and are explicitly
+non-passes, not hidden regressions. The full evidence and finite S3 metafile
+handoff are in [the S2 glyph-outline record](../etc/evidence/m0-t456-s2-glyph-outline-rotation.md).
 
 ## S3 Closure Record
 
@@ -133,6 +144,9 @@ T455 S4 may use only `build/t455-s4` for disposable evidence. Stable `.ninja`
 and `.ccache` remain reusable caches and are never task evidence roots.
 
 T456 S1 may use only `build/t456-s1` for disposable evidence. Stable `.ninja`
+and `.ccache` remain reusable caches and are never task evidence roots.
+
+T456 S2 may use only `build/t456-s2` for disposable evidence. Stable `.ninja`
 and `.ccache` remain reusable caches and are never task evidence roots.
 
 ## Recent M0 Closures

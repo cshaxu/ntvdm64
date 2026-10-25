@@ -33,16 +33,47 @@ HFONT WINAPI GetHFONT(HDC device_context)
     return (HFONT)GetCurrentObject(device_context, OBJ_FONT);
 }
 
-/* DIVERGENCE(ADAPTER-WIN32-053): WOW32 supplies the ANSI 16-bit glyph code,
- * metrics, output buffer and MAT2 directly.  The public ANSI entry point has
- * the same caller-owned buffer, result-count and GDI error contract; no GDI
- * handle table or private glyph engine is reproduced here. */
+/* DIVERGENCE(ADAPTER-WIN32-053): OpenNT dcquery.c calls the private glyph
+ * query with bIgnoreRotation=TRUE for the Win3.1 caller.  The public API has
+ * no flag for that policy.  Preserve its finite observable input by selecting
+ * a one-shot equivalent font with only escapement/orientation cleared, then
+ * restore the caller's selected font before returning.  Modern GDI remains
+ * authoritative for the DC, glyph buffer, metrics and result/error contract;
+ * there is deliberately no font cache or private GDI reconstruction. */
 DWORD WINAPI GetGlyphOutlineWow(HDC device_context, UINT character,
     UINT format, LPGLYPHMETRICS metrics, DWORD buffer_size, LPVOID buffer,
     const MAT2 *matrix)
 {
-    return GetGlyphOutlineA(device_context, character, format, metrics,
+    LOGFONTA log_font;
+    HFONT current_font, compatible_font;
+    HGDIOBJ old_object;
+    DWORD result;
+
+    current_font = (HFONT)GetCurrentObject(device_context, OBJ_FONT);
+    if (current_font == NULL ||
+        GetObjectA(current_font, sizeof(log_font), &log_font) != sizeof(log_font) ||
+        (log_font.lfEscapement == 0 && log_font.lfOrientation == 0)) {
+        return GetGlyphOutlineA(device_context, character, format, metrics,
+            buffer_size, buffer, matrix);
+    }
+    log_font.lfEscapement = 0;
+    log_font.lfOrientation = 0;
+    compatible_font = CreateFontIndirectA(&log_font);
+    if (compatible_font == NULL) {
+        return GetGlyphOutlineA(device_context, character, format, metrics,
+            buffer_size, buffer, matrix);
+    }
+    old_object = SelectObject(device_context, compatible_font);
+    if (old_object == NULL || old_object == HGDI_ERROR) {
+        (void)DeleteObject(compatible_font);
+        return GetGlyphOutlineA(device_context, character, format, metrics,
+            buffer_size, buffer, matrix);
+    }
+    result = GetGlyphOutlineA(device_context, character, format, metrics,
         buffer_size, buffer, matrix);
+    (void)SelectObject(device_context, old_object);
+    (void)DeleteObject(compatible_font);
+    return result;
 }
 
 /* DIVERGENCE(ADAPTER-WIN32-054): OpenNT's public client ExtEscape handling

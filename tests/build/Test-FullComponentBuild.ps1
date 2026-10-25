@@ -10,7 +10,12 @@ if (!$output.StartsWith((Join-Path $repo 'build')+'\', [StringComparison]::Ordin
 }
 $null = New-Item -ItemType Directory -Force -Path $output
 Set-Location $repo
-$cmake = (Get-Command cmake.exe -ErrorAction Stop).Source
+$cmake = @(Get-Command cmake.exe -All -ErrorAction Stop |
+    Where-Object { $_.Source -notmatch '[\\/]mingw(32|64)[\\/]' } |
+    Select-Object -First 1).Source
+if (!$cmake) {
+    throw 'Full component build requires a non-MinGW cmake.exe; a MinGW CMake cannot configure the MSVC preset reliably.'
+}
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 $steps = [Collections.Generic.List[object]]::new()
 $started = [DateTime]::UtcNow
