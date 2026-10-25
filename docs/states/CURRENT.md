@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T453 S2**
+**Active: M0 T453 S3**
 
 The owner admits the Queue's first remaining WOW32 package: W04 files,
 directories, environment and OEM. T452 has closed its W03 boundary. This packet follows the read-only
@@ -11,28 +11,29 @@ reconnection, with no guest modification.
 
 ## Active Packet
 
-### M0 T453 S2 — W04 file, directory, environment and OEM operations
+### M0 T453 S3 — W04 OEM consumers and retained-file/font fallback
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T453 S2, Ordinary Mode; single-agent author and separate reviewer passes. |
-| Admission And Approval | S1 completed the source matrix; T452 supplies the consumed W03 allocation/alias boundary. |
-| Objective | Prove and repair only a connected W04 consumer/binding defect, preserving selected original directory, delete, environment and OEM algorithms. |
+| Identifier Mode | M0 T453 S3, Ordinary Mode; single-agent author and separate reviewer passes. |
+| Admission And Approval | S1 completed the source matrix; S2 closed and published its bounded file-attribute repair. T452 supplies the consumed W03 allocation/alias boundary. |
+| Objective | Trace and close the finite real non-ASCII consumer and retained-file/font fallback paths, preserving selected original delete, conversion, error and notification algorithms. |
 | Non-goals | No guest changes/rebuild, generic filesystem/environment service, second current-directory or OEM authority, global cwd lock, registry/shell/resource/GDI implementation, unrelated USER repair or external-audit edits. |
 | Reference Baseline | T452 closure, W04 [proposal](../proposals/proposal-wow32-files-environment-oem-001.md), [T453 plan](../etc/operations/t453-files-environment-oem-plan.md), and [S1 matrix](../etc/evidence/m0-t453-s1-files-environment-oem-owner-matrix.md). |
 | Files And ABI Surface | S1-selected original file/OEM callers and existing bindings only. Guest ABI, W03 allocation/alias ownership and later providers remain unchanged unless a traced edge proves a bounded prerequisite. |
 | Applicable Rules | Execution, architecture, coding, documentation, source policy and WOW32 minimum-diff admission governance. |
-| Verification | Run coherent consumer groups only after source tracing: both directory directions, direct/retained delete, DEM/FCB deletion, ordinary COMMAND environment/PIF publication and Win16 open/create/attribute result/cleanup. |
-| Expected Markers | No independent path/environment/OEM state; exact selected original error/cleanup owner; a proved bounded repair or a recorded no-change witness for each selected branch. |
+| Verification | Run coherent consumer groups only after source tracing: non-ASCII create/open/delete round trips, missing-file error mapping, direct/retained delete, and the selected font-removal fallback/notification path. |
+| Expected Markers | No independent path/environment/OEM state; exact selected original error/cleanup/notification owner; a proved bounded repair or a recorded no-change witness for each selected branch. |
 | Asset Needs | Pinned original OpenNT/audit, immutable guests and existing W04 tests; no guest replacement. |
 | Reporting Requirements | Separate static/build/runtime evidence; mirror/adapter estimate only after tracing the finite matrix; unresolved edges name their original owner and successor. |
 | Stop Conditions | New semantic concession, guest mutation, unbounded import, competing filesystem/environment owner, required scheduler/USER reconstruction or material scope expansion. |
 | Exit Criteria | All S1-selected consumer groups have a source-linked normal/failure/retirement witness; any product correction is original-owner-shaped, complete as a group and published with its affected acceptance. |
 | Original Owner Request | 准入队列第一条；按照 ntvdm64-wow32-audit 审计结果执行最小化 diff 和最大化复通。 |
-| Similar-Issue Sweep | File/open/close/rename/delete, directory enumeration/resume, environment creation/release, ANSI/OEM conversion both directions, buffer bounds, rollback and consumer cleanup. |
+| Similar-Issue Sweep | OEM conversion both directions, direct/retained delete, missing-file errors, font fallback and notification, buffer bounds, rollback and consumer cleanup. |
 | Candidate Proposal | [Files, directories, environment and OEM](../proposals/proposal-wow32-files-environment-oem-001.md). |
 
-S1 closed its static owner matrix. Only S2 is active. The four-stage sequence is in the
+S1 closed its static owner matrix. S2 closed its bounded repair, coherent build,
+runtime acceptance and publication; S3 is active. The four-stage sequence is in the
 [T453 plan](../etc/operations/t453-files-environment-oem-plan.md).
 
 ## S1 Closure Record
@@ -41,6 +42,15 @@ Static source, caller, authority and test-entrypoint closure is recorded in
 [the T453 S1 owner matrix](../etc/evidence/m0-t453-s1-files-environment-oem-owner-matrix.md).
 It admits S2's finite consumer verification/repair boundary; it does not claim
 runtime package completion.
+
+## S2 Closure Record
+
+S2's source-shaped `WK32FileSetAttributes` cleanup repair, product/provider
+fixtures, full component build, product regression, coherent ten-image publication
+and post-publication OEM witness are recorded in [the S2 runtime
+witness](../etc/evidence/m0-t453-s2-oem-runtime-witness.md). The delivery is
+`9bf66f914dceac0ffb75c004835e1c990ef05a3d`; it leaves the remaining S3 consumer
+and fallback paths intentionally unclaimed.
 
 ## Current Technical Baseline
 
@@ -56,7 +66,7 @@ interaction acceptance.
 
 ## Temporary Evidence
 
-T453 may use only declared `build/t453-s1` and `build/t453-s2` roots for disposable evidence;
+T453 may use only declared `build/t453-s1`, `build/t453-s2` and `build/t453-s3` roots for disposable evidence;
 stable `.ninja` and `.ccache` remain reusable caches. Retain durable results
 before exact-target cleanup; never use a task root as a build cache.
 

@@ -13,7 +13,7 @@ task service.
 | Stage | Scope | Exit |
 | --- | --- | --- |
 | S1 | Finite file/directory/environment/OEM owner matrix. | Closed: [owner matrix](../evidence/m0-t453-s1-files-environment-oem-owner-matrix.md) names both OEM-WOW-DIR directions, OEM-WOW-DELETE branches, buffers/handles, rollback and guest consumers. |
-| S2 | Proven file/environment repair, including rename/delete rollback. | Normal, failure and cleanup proof has no duplicate path/environment owner. |
+| S2 | Proven file/environment repair, including rename/delete rollback. | Closed: `9bf66f914dceac0ffb75c004835e1c990ef05a3d`; [S2 runtime witness](../evidence/m0-t453-s2-oem-runtime-witness.md) records the bounded cleanup repair, coherent build, product acceptance and publication. |
 | S3 | Proven non-ASCII consumers and retained file/font fallback. | Round trip, missing-file and fallback paths use selected original providers. |
 | S4 | Whole W04 acceptance. | Repeated operations, cleanup, non-ASCII and DOS/native return pass; publish only for a product change. |
 
