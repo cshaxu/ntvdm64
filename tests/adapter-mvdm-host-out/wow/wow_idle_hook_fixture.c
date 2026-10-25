@@ -175,6 +175,7 @@ int __cdecl main(int argc, char **argv)
     CHECK(GetLastError() == 0xe0447015);
     second.hThread = (HANDLE)(ULONG_PTR)1;
     CHECK(wow_user_idle_hook_registered(thread.native_thread_id));
+    CHECK(wow_user_idle_hook_registered(0));
     (void)WK32ForegroundIdleHook(HC_ACTION, 0, 0);
     CHECK(GetLastError() == 0xe0447015);
     nested = TRUE;
@@ -202,17 +203,20 @@ int __cdecl main(int argc, char **argv)
     CHECK(calls == 4 && !task_depth && !borrow_depth);
     second.hIdleHook = NULL;
     CHECK(!wow_user_idle_hook_registered(thread.native_thread_id));
+    thread.ptdb = &entry;
     first.dwThreadID = thread.native_thread_id + 1;
     first.hThread = (HANDLE)(ULONG_PTR)2;
     first.hIdleHook = (HHOOK)(ULONG_PTR)2;
     CHECK(!wow_user_idle_hook_registered(thread.native_thread_id));
+    CHECK(wow_user_idle_hook_registered(0));
     (void)WK32ForegroundIdleHook(HC_ACTION, 0, 0);
-    CHECK(calls == 4 && !task_depth && !borrow_depth);
+    /* Original registration is worker-shared: a foreign live TD's intent
+     * causes this selected task to receive INT 2F:1689. */
+    CHECK(calls == 5 && !task_depth && !borrow_depth);
     first.hIdleHook = NULL;
-    thread.ptdb = &entry;
     (void)WK32ForegroundIdleHook(HC_ACTION, 0, 0);
-    CHECK(calls == 4 && !task_depth && !borrow_depth);
-    fprintf(stderr, "WOW_IDLE_HOOK_GUARD errors=%u calls=%u nested=1 exception=1 denied=2 foreign=2 retired=1 task_scoped=1\n",
+    CHECK(calls == 5 && !task_depth && !borrow_depth);
+    fprintf(stderr, "WOW_IDLE_HOOK_GUARD errors=%u calls=%u nested=1 exception=1 denied=2 foreign=2 retired=1 worker_shared=1\n",
         errors, calls);
     if (logic_only) {
         fprintf(stderr, "WOW_IDLE_NATIVE_CHAIN unavailable=logic-only\n");

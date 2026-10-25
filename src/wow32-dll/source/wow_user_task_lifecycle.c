@@ -193,7 +193,10 @@ static BOOL WINAPI idle_hooked(wow_task_order_thread *thread)
     wow_user_runtime_thread *binding = wow_user_runtime_current();
     if (!binding || binding->thread != thread || !binding->exclusive_held)
         lifecycle_failure("idle-hook-query-owner", ERROR_INVALID_STATE);
-    return wow_user_idle_hook_registered(thread->native_thread_id);
+    /* taskman asks whether its selected task should receive the shared WOW
+     * idle vector.  Original TD ownership supplies the intent, while the
+     * selected task supplies the callback execution context. */
+    return wow_user_idle_hook_registered(0);
 }
 
 static void WINAPI idle_hook(wow_task_order_thread *thread)

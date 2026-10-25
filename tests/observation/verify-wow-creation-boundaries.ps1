@@ -58,7 +58,7 @@ $p.ExitCode | Set-Content "$out/fixture-exit.txt"
 $output=@(Get-Content "$out/stdout.txt";Get-Content "$out/stderr.txt")
 $output | Write-Output
 if($null -eq $p.ExitCode -or $p.ExitCode -ne 0){throw 'Creation fixture failed'}
-$marker=switch($Case){'hook'{'^WOW_HOOK_CREATION_GUARD errors=0 enrollment=6 accepted=1 rollback=4$'} 'timer'{'^WOW_TIMER_CALLBACK_GUARD errors=0 calls=30 nested=1 exception=1 denied=2$'} 'idle'{'^WOW_IDLE_HOOK_GUARD errors=0 calls=4 nested=1 exception=1 denied=2 foreign=2 retired=1 task_scoped=1$'} 'common-dialog'{'^WOW_COMMDLG_EXIT_GUARD errors=0 entries=3 resource_branch=1 nested=1 exception=1 denied=3 early_order=1 rejected_free=1$'} default{'^WOW_CREATION_MENU errors=0 loads=4$'}}
+$marker=switch($Case){'hook'{'^WOW_HOOK_CREATION_GUARD errors=0 enrollment=6 accepted=1 rollback=4$'} 'timer'{'^WOW_TIMER_CALLBACK_GUARD errors=0 calls=30 nested=1 exception=1 denied=2$'} 'idle'{'^WOW_IDLE_HOOK_GUARD errors=0 calls=5 nested=1 exception=1 denied=2 foreign=2 retired=1 worker_shared=1$'} 'common-dialog'{'^WOW_COMMDLG_EXIT_GUARD errors=0 entries=3 resource_branch=1 nested=1 exception=1 denied=3 early_order=1 rejected_free=1$'} default{'^WOW_CREATION_MENU errors=0 loads=4$'}}
 if(!($output -match $marker)){throw 'Creation fixture completion assertions missing'}
 if($LogicOnly -and $Case -ne 'idle'){throw 'LogicOnly is valid only for the idle fixture'}
 if($LogicOnly -and !($output -match '^WOW_IDLE_NATIVE_CHAIN unavailable=logic-only$')) {
