@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T456 S3**
+**Active: M0 T456 S4**
 
 The owner directed automatic sequential S closure and advancement. T455 W07
 is closed; T456 admits Queue W08, WOW32 fonts, text and metafiles. The task
@@ -12,25 +12,25 @@ or rebuild.
 
 ## Active Packet
 
-### M0 T456 S3 — metafile creation, playback and release
+### M0 T456 S4 — package acceptance and bounded application frontiers
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T456 S3, Ordinary Mode; single-agent implementation and independent final review. |
-| Admission And Approval | Owner's automatic sequential S directive; S2 glyph-outline closure. |
-| Objective | Trace selected original metafile creation, conversion, playback, release and partial-failure paths; repair only a source-proven public-host seam. |
-| Non-goals | No guest changes/rebuild; no replacement metafile engine, recorder, renderer, second handle authority, broad USER/GDI import or speculative provider replacement. |
-| Reference Baseline | [S2 glyph-outline seam](../etc/evidence/m0-t456-s2-glyph-outline-rotation.md), [S1 owner matrix](../etc/evidence/m0-t456-s1-font-text-metafile-owner-matrix.md), [W08 proposal](../proposals/proposal-wow32-fonts-text-metafiles-001.md), T443 H08 transfer and WOW32 minimum-diff governance. |
-| Files And ABI Surface | Selected original `wgmeta.c` callers, their existing public facade declarations, focused fixture/test source and retained GDI identity/lifetime owners. |
+| Identifier Mode | M0 T456 S4, Ordinary Mode; single-agent implementation and independent final review. |
+| Admission And Approval | Owner's automatic sequential S directive; S3 classic-metafile closure. |
+| Objective | Run bounded package-level repeated drawing/release checks and retained WOW application frontiers using the sealed S2 provider; classify only observable failures. |
+| Non-goals | No guest changes/rebuild; no replacement renderer/metafile engine, no new object authority, no speculative repair of unrelated private-desktop runner limits. |
+| Reference Baseline | [S3 metafile audit](../etc/evidence/m0-t456-s3-metafile-owner-host-audit.md), [S2 glyph-outline seam](../etc/evidence/m0-t456-s2-glyph-outline-rotation.md), [W08 proposal](../proposals/proposal-wow32-fonts-text-metafiles-001.md) and prior immutable-guest frontier evidence. |
+| Files And ABI Surface | Existing WOW32 provider/package, selected focused fixtures, existing app-observer tests and release identity manifests. |
 | Applicable Rules | Execution, architecture, coding, documentation, source policy and WOW32 minimum-diff admission governance. |
-| Verification | First establish exact original caller/ownership and the modern host boundary. Then use focused creation/playback/release fixtures, formal x86 closure and retained package/frontier gates in proportion to any production change. |
-| Expected Markers | Every metafile handle has a single owner; normal/error release keeps original result/error direction and no copied view becomes authoritative. |
+| Verification | Reuse the sealed x86/full-component build and published hashes; run repeated focused public-host checks and available existing application frontiers without treating known runner pre-window exits as product passes. |
+| Expected Markers | Repeated operations leave no live owned process or leaked test stage; release identity remains exact and failures retain their actual exit/classification. |
 | Asset Needs | Existing OpenNT MVDM mirror, formal x86 graph, immutable guest media, existing release package and no new source import or replacement media. |
-| Reporting Requirements | Record exact source comparison, ownership/lifetime map, focused fixture evidence, complete package identity if changed and explicit non-passes/S4 handoff. |
-| Stop Conditions | Need for guest change, broad USER/GDI server import, second metafile authority, source-less renderer or semantic concession beyond an approved finite host seam. |
-| Exit Criteria | Selected metafile rows have proven original/provider ownership and normal/failure/release behavior; production changes are built, published, hash-verified, committed and pushed. |
+| Reporting Requirements | Record exact commands, package identities, normal/failure observations and immutable-guest/run-environment limits; close T456 only when its finite proposal is fully accounted for. |
+| Stop Conditions | Need for guest change, new renderer/object authority, invented test transport, or a semantic concession outside earlier source decisions. |
+| Exit Criteria | The selected font/text/metafile work has an evidence-backed production/no-change disposition, required build and release identities are intact, and any real residual limit is explicitly transferred rather than hidden. |
 | Original Owner Request | 单人双角色模式复通 WOW32；优先原版代码追溯与最少 diff，整批接通后再统一验证；每个 S 自动收口并继续。 |
-| Similar-Issue Sweep | Metafile create/copy/delete, record/playback, ANSI/OEM/Unicode conversion, handle reuse, DC selection/release and failure cleanup. |
+| Similar-Issue Sweep | Repeated create/restore/copy/play/delete, existing app frontiers, task return, package hash identity and cleanup of test stages/processes. |
 | Candidate Proposal | [Fonts, text and metafiles](../proposals/proposal-wow32-fonts-text-metafiles-001.md). |
 
 ## S1 Closure Record
@@ -63,6 +63,14 @@ WRITE startup/liveness also passes. Retained private-desktop whole-app probes
 fail before selected behavior with known pre-existing exits and are explicitly
 non-passes, not hidden regressions. The full evidence and finite S3 metafile
 handoff are in [the S2 glyph-outline record](../etc/evidence/m0-t456-s2-glyph-outline-rotation.md).
+
+## T456 S3 Closure Record
+
+S3 found no production source defect. The selected original `wgmeta.c` owner
+uses supported public classic-GDI operations and retains the original guest
+global-handle, synchronous callback and release rules. Its x86 capability
+witness passes create/bits/restore/copy/reopen/play/enumerate plus failure
+checks. The exact audit and S4 handoff are in [the S3 metafile record](../etc/evidence/m0-t456-s3-metafile-owner-host-audit.md).
 
 ## S3 Closure Record
 

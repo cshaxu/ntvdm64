@@ -54,6 +54,10 @@ records the bounded public-GDI compatibility seam, its actual x86 fixture,
 the normalized ten-image publication identity, and explicit private-desktop
 runtime-test limitation.
 
+[T456 S3 classic metafile audit](evidence/m0-t456-s3-metafile-owner-host-audit.md)
+records the selected original provider, public-host capability witness and
+the S4 package-acceptance handoff without creating a second metafile owner.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.
