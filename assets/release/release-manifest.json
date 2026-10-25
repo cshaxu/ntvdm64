@@ -1,13 +1,38 @@
 [
   {
+    "Name": "run16.exe",
+    "RelativePath": "system32\\run16.exe",
+    "Sha256": "31F3B53D6E541FA6D1A396EC2818A8EB76468042DF28604BA0CD42ECA454140A"
+  },
+  {
+    "Name": "ntsrv.exe",
+    "RelativePath": "system32\\ntsrv.exe",
+    "Sha256": "1F2C2C69DD3D394A3758564125569F0BD59771C5180977BC216B93C45412CF65"
+  },
+  {
+    "Name": "ntcon.exe",
+    "RelativePath": "system32\\ntcon.exe",
+    "Sha256": "C688B88C0DC68A3E3BEDB7E9D4BB3311E951FD556876114981499417E2DE64CB"
+  },
+  {
     "Name": "ntvdm.exe",
     "RelativePath": "system32\\ntvdm.exe",
-    "Sha256": "7A0FE927D0DF9A736DFE8800E1657A6FDB5B96B5A77CBEEBFF889F978937FCD7"
+    "Sha256": "3A340CACCDDD2F9B0927A57328B24AAA10CF39D305C04E252DB0DC48DF0E48E9"
+  },
+  {
+    "Name": "ntvwm.exe",
+    "RelativePath": "system32\\ntvwm.exe",
+    "Sha256": "FD2B5A13F8A84DE7D9E22BA45F2BC40C14A115170A426F0F334CA74211643345"
+  },
+  {
+    "Name": "ntmon.exe",
+    "RelativePath": "system32\\ntmon.exe",
+    "Sha256": "A214BCBA3430034066A3CF78A9491D11788025B5D1572051F193D0A7D0F1BF4D"
   },
   {
     "Name": "WOW32.DLL",
     "RelativePath": "system32\\WOW32.DLL",
-    "Sha256": "CC1B4A456786FDC8F9A4DEE99CDDD3537BE44470D15D5F96E2811205FE65516E"
+    "Sha256": "0145E96705E2E4DB3A63694601A072CEEFE9CB8B390B6F93BEFAB0853A2F7C1D"
   },
   {
     "Name": "VDMREDIR.DLL",
@@ -17,32 +42,7 @@
   {
     "Name": "nthook32.dll",
     "RelativePath": "system32\\nthook32.dll",
-    "Sha256": "EAC4613B5761A34E0861020C0F5FB182BEE74299B2FE61E70454A65FF3546F46"
-  },
-  {
-    "Name": "ntvwm.exe",
-    "RelativePath": "system32\\ntvwm.exe",
-    "Sha256": "FD2B5A13F8A84DE7D9E22BA45F2BC40C14A115170A426F0F334CA74211643345"
-  },
-  {
-    "Name": "ntcon.exe",
-    "RelativePath": "system32\\ntcon.exe",
-    "Sha256": "C688B88C0DC68A3E3BEDB7E9D4BB3311E951FD556876114981499417E2DE64CB"
-  },
-  {
-    "Name": "ntmon.exe",
-    "RelativePath": "system32\\ntmon.exe",
-    "Sha256": "A214BCBA3430034066A3CF78A9491D11788025B5D1572051F193D0A7D0F1BF4D"
-  },
-  {
-    "Name": "run16.exe",
-    "RelativePath": "system32\\run16.exe",
-    "Sha256": "31F3B53D6E541FA6D1A396EC2818A8EB76468042DF28604BA0CD42ECA454140A"
-  },
-  {
-    "Name": "ntsrv.exe",
-    "RelativePath": "system32\\ntsrv.exe",
-    "Sha256": "7B6E0662236C267E6FF3610D7AEABCAEFFC0D88FE31513EDF7ED93560C11ED2D"
+    "Sha256": "A9FD879DF34DA2AA7B031F0AF3B6DD151097083AB274D081FE0A8DA223199F26"
   },
   {
     "Name": "nthook64.dll",

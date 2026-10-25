@@ -18,7 +18,7 @@ $names=@('OPENNT_BROKER_PRODUCT_BUILD','OPENNT_VERSION_TEST_BUILD',
     'OPENNT_VERSION_TEST_LOGS','OPENNT_VERSION_TEST_RUNTIME')
 $saved=@{};foreach($name in $names){$saved[$name]=[Environment]::GetEnvironmentVariable($name,'Process')}
 $savedExit=$global:LASTEXITCODE
-$cache='fixture-cache';$log='fixture-log';$Node='Test-VersionNode'
+$cache='fixture-cache';$log='fixture-log';$runtime='Z:\';$Node='Test-VersionNode'
 $script:checked=0
 function Test-VersionNode([string]$path) {
     if($path -ne "$repo/tools/audit/Verify-ProductVersions.mjs" -or

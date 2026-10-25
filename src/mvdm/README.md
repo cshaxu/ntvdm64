@@ -1,5 +1,16 @@
 # mvdm
 
+MVDM-HOST-DIV-451 (T453 S2 candidate): original
+`wow32/wkfileio.c::WK32FileSetAttributes` rejects a non-root trailing path
+separator before calling `NormalizeDosPath`, but then reaches its ordinary
+named-pipe cleanup predicate.  That skipped original path leaves the local
+pointer and ownership flag indeterminate.  Initialize only those two cleanup
+locals; retain the original trailing-separator error precedence, DOS attribute
+masking, native call/result encoding and all successful normalization paths.
+No guest, pathname algorithm, handle, cache or alternate cleanup owner is
+added.  Focused branch evidence and the composed W04 package determine
+closure.
+
 MVDM-HOST-DIV-450 (T452 S2): retain original WOW32 KERNEL k49's module versus
 HTASK-alias selection, original `NtQuerySystemInformation` observation and
 ANSI conversion, but make the caller-declared guest byte count the sole

@@ -24,6 +24,11 @@ W03 without a product-source change.
 active files, directories, environment and OEM packet, fixed one-owner boundary
 and source-first four-stage sequence.
 
+[T453 S2 OEM runtime witness](evidence/m0-t453-s2-oem-runtime-witness.md)
+records the repaired legacy witness layout, direct/nested real DOS OEM proof,
+the exact selected WOW attribute-cleanup correction and its finite S2 consumer
+boundaries.
+
 [T451 S1 USER object contract ledger](operations/m0-t451-s1-user-object-contract-ledger.md)
 maps every residual C04--C07/object-C10 PMODE32 direct-reader family to its
 producer, authority, update/withdrawal rule, evidence and bounded S2--S4

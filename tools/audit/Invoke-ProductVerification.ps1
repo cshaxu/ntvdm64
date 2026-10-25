@@ -162,8 +162,15 @@ try {
                         # Chinese media. Still require the exact baseline
                         # signature below; this is not a liveness waiver.
                         winmine {'visible=1 class=(?:00C900A800C000D7 text=00C900A800C000D7|004D0069006E00650073007700650065007000650072 text=004D0069006E00650073007700650065007000650072)'}
-                        sol {'visible=1 class=005300740061007400690063 text=(?:00C400DA00B400E600B200BB00B900BB|004F007500740020006F00660020006D0065006D006F00720079)'}
-                        write {'visible=1 class=005300740061007400690063 text=004E006F0074[0-9A-F]+'}
+                        # Retained packages expose either the selected SOL
+                        # status/static frontier or its visible main Solitaire
+                        # window.  Both are exact UTF-16 application identities;
+                        # do not weaken this to an arbitrary visible window.
+                        sol {'visible=1 class=(?:005300740061007400690063 text=(?:00C400DA00B400E600B200BB00B900BB|004F007500740020006F00660020006D0065006D006F00720079)|0053006F006C006900740061006900720065 text=0053006F006C006900740061006900720065)'}
+                        # As with SOL, retain the historical status/static
+                        # signature as well as the exact visible Write main
+                        # window emitted by the current retained baseline.
+                        write {'visible=1 class=(?:005300740061007400690063 text=004E006F0074[0-9A-F]+|004D005300570052004900540045005F004D0045004E0055 text=005700720069007400650020002D002000280055006E007400690074006C006500640029)'}
                     }
                     foreach($baselineRoot in $WowBaselineRoots){
                         $prior=Join-Path $baselineRoot "wow-restored-$guest-windows.txt"

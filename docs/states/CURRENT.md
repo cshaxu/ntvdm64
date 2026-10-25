@@ -56,7 +56,7 @@ interaction acceptance.
 
 ## Temporary Evidence
 
-T453 may use only a declared `build/t453-s1` root for disposable evidence;
+T453 may use only declared `build/t453-s1` and `build/t453-s2` roots for disposable evidence;
 stable `.ninja` and `.ccache` remain reusable caches. Retain durable results
 before exact-target cleanup; never use a task root as a build cache.
 

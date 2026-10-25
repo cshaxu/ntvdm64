@@ -1904,9 +1904,14 @@ ULONG FASTCALL WK32FileGetAttributes(PVDMFRAME pFrame)
 ULONG FASTCALL WK32FileSetAttributes(PVDMFRAME pFrame)
 {
     PWOWFILESETATTRIBUTES16 parg16;
-    PSTR                    pszPath, lpFileName;
+    /* DIVERGENCE(MVDM-HOST-DIV-451): the original trailing-separator
+     * rejection bypasses NormalizeDosPath, whose normal path initializes
+     * these cleanup values.  Keep that original error precedence, but make
+     * the skipped cleanup ownership explicit rather than reading/freeing
+     * indeterminate stack data. */
+    PSTR                    pszPath, lpFileName = NULL;
     ULONG                   attributes, l, dwReturn;
-    BOOL                    ItsANamedPipe;
+    BOOL                    ItsANamedPipe = FALSE;
 
     GETARGPTR(pFrame, sizeof(WOWFILESETATTRIBUTES16), parg16);
 

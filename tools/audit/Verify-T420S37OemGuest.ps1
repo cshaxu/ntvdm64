@@ -10,10 +10,16 @@ $Observer = (Resolve-Path $Observer).Path
 $Probe = (Resolve-Path $Probe).Path
 $PackageRoot = (Resolve-Path $PackageRoot).Path
 if ($LogPrefix -notmatch '^[a-z0-9-]+$') { throw 'Invalid prefix' }
+$binaryRoot = Join-Path $PackageRoot 'system32'
+if (!(Test-Path -LiteralPath (Join-Path $binaryRoot 'run16.exe'))) {
+    # Historical staged packages placed images at their root; deployed
+    # packages use SYSTEM32. This is a fixed layout choice for this test.
+    $binaryRoot = $PackageRoot
+}
 if ((Get-ItemPropertyValue 'HKLM:\SYSTEM\CurrentControlSet\Control\Nls\CodePage' OEMCP) -ne '437') {
     throw 'This fixed-byte probe requires the recorded OEM 437 host profile'
 }
-$paths = @('run16.exe','ntvdm.exe','ntsrv.exe') | ForEach-Object { Join-Path $PackageRoot $_ }
+$paths = @('run16.exe','ntvdm.exe','ntsrv.exe') | ForEach-Object { Join-Path $binaryRoot $_ }
 function Processes {
     @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='ntsrv.exe'" |
         Where-Object { $_.ExecutablePath -in $paths })
@@ -50,15 +56,38 @@ $fsBytes = $oem.GetBytes($filesystem.ToString())
 $volumeHex = [BitConverter]::ToString($volumeExpected).Replace('-', '')
 $root = Join-Path $PackageRoot 'tests\O37G'
 if (Test-Path -LiteralPath $root) { throw 'Previous test directory exists; inspect it' }
+# Physical test staging deliberately omits historical logs. This probe owns
+# only its fresh reports below the supplied package, so establish that output
+# directory rather than depending on copied diagnostic history.
+$null = New-Item -ItemType Directory -Force -Path (Join-Path $PackageRoot 'logs')
 Copy-Item -LiteralPath $Probe -Destination "$PackageRoot\tests\O37.COM"
+$previousPrivateDesktop = [Environment]::GetEnvironmentVariable('MVDM_OBSERVER_PRIVATE_DESKTOP', 'Process')
+$previousPath = [Environment]::GetEnvironmentVariable('PATH', 'Process')
+# The observer's private desktop is the established noninteractive product
+# test boundary.  It avoids depending on whichever interactive desktop
+# happens to be available, while leaving the package and guest unchanged.
+[Environment]::SetEnvironmentVariable('MVDM_OBSERVER_PRIVATE_DESKTOP', '1', 'Process')
+# Match the ordinary product-observation lookup environment.  This exposes
+# the candidate's selected carrier binaries without inheriting unrelated
+# developer-tool paths as a hidden launch dependency.
+[Environment]::SetEnvironmentVariable('PATH', $binaryRoot + ';' + (Join-Path $env:SystemRoot 'System32'), 'Process')
 $results = @()
+try {
 foreach ($route in @('direct','nested')) {
     $report = "$PackageRoot\logs\$LogPrefix-$route.txt"
     if (Test-Path $report) { throw 'Use fresh prefix' }
     New-Item -ItemType Directory -Path $root | Out-Null
-    $args = @($paths[0],$PackageRoot,$report)
+    # The observer's second positional argument is the launched image's
+    # working directory.  The selected runtime is in SYSTEM32, but this
+    # original DOS probe deliberately uses package-root-relative tests\ paths.
+    # Its absolute Run16 image and controlled PATH resolve binaries; keep the
+    # probe's own working-directory contract at the package root.
+    # This is a completion witness, not merely launch admission.  Without
+    # Run16's explicit wait contract the observer may finish when the
+    # launcher has handed work to the broker, before the DOS probe executes.
+    $args = @($paths[0],$PackageRoot,$report,'--wait')
     if ($route -eq 'nested') { $args += @('COMMAND.COM','/c','COMMAND.COM','/c') }
-    $args += @('tests\O37.COM','--observation-timeout-ms','15000')
+    $args += @((Join-Path $PackageRoot 'tests\O37.COM'),'--observation-timeout-ms','15000')
     $launcher = 0
     try {
         $p = Start-Process -FilePath $Observer -ArgumentList $args -WorkingDirectory $PackageRoot -WindowStyle Hidden -PassThru
@@ -98,3 +127,7 @@ foreach ($route in @('direct','nested')) {
     }
 }
 $results | ConvertTo-Json -Depth 4 | Set-Content "$PackageRoot\logs\$LogPrefix-summary.json" -Encoding utf8
+} finally {
+    [Environment]::SetEnvironmentVariable('MVDM_OBSERVER_PRIVATE_DESKTOP', $previousPrivateDesktop, 'Process')
+    [Environment]::SetEnvironmentVariable('PATH', $previousPath, 'Process')
+}
