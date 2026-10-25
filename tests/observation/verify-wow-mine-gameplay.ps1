@@ -87,8 +87,8 @@ try {
             Copy-Item "$root\GENHOST.DLL" "$runtime\tests\GENHOST.DLL"
             @($nativeSource,"$root\GENHOST.DLL")|Get-FileHash|Select-Object Path,Hash|ConvertTo-Json|Set-Content "$root\native-inputs.json"
         }
-        @($siblingSource,"$root\$siblingName.EXE","$runtime\system32\COMMDLG.DLL",
-            "$runtime\system32\KRNL386.EXE","$runtime\system32\USER.EXE") | Get-FileHash |
+        Get-FileHash -LiteralPath @($siblingSource,"$root\$siblingName.EXE","$runtime\system32\COMMDLG.DLL",
+            "$runtime\system32\KRNL386.EXE","$runtime\system32\USER.EXE") |
             Select-Object Path,Hash | ConvertTo-Json | Set-Content "$root\sibling-inputs.json"
         $env:MVDM_WOW_CALLBACK_FRAME_TRACE_PATH="$root\lifetime.txt"
         $env:MVDM_WOW_WINDOW_TRACE_PATH="$root\lifetime.txt"

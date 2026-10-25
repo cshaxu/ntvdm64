@@ -82,6 +82,10 @@ separates selected original COMMDLG and OLE alias authorities, preserves the
 thin existing host seams and fixes the observer-only PowerShell invocation
 defects before real consumer acceptance.
 
+[T459 S2 common-dialog consumer acceptance](evidence/m0-t459-s2-common-dialog-consumer-acceptance.md)
+records the sixteen-round immutable guest modeless-dialog/retirement witness,
+the retained modal/error boundary proof and its observer-only portability fix.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.

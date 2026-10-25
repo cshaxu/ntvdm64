@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T459 S2**
+**Active: M0 T459 S3**
 
 The owner directed automatic sequential S closure and advancement. T455 W07,
 T456 W08, T457 W06 and T458 W09 are closed. T459 admits Queue W18, common
@@ -12,26 +12,34 @@ with no guest modification or rebuild.
 
 ## Active Packet
 
-### M0 T459 S2 — common-dialog original-consumer acceptance
+### M0 T459 S3 — selected OLE alias/consumer acceptance
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T459 S2, Ordinary Mode; single-agent implementation and independent final review. |
-| Admission And Approval | Automatic continuation after closed S1 owner audit; Queue W18 proposal. |
-| Objective | Exercise only selected original common-dialog callers through immutable guest consumers and prove cancellation, errors, callback reentry and terminal cleanup. |
-| Non-goals | No guest changes/rebuild; no temporary dialog provider, broad COMMDLG replacement, OLE implementation or consumer-name special case. |
-| Reference Baseline | [S1 owner matrix](../etc/evidence/m0-t459-s1-common-dialog-ole-owner-matrix.md), W06 dialog boundaries and W18 proposal. |
-| Files And ABI Surface | Original `wcommdlg.c`/`wcmdgtbl.h`; existing native-leaf and original-callback scope seams only. |
+| Identifier Mode | M0 T459 S3, Ordinary Mode; single-agent implementation and independent final review. |
+| Admission And Approval | Automatic continuation after closed S2 common-dialog acceptance; Queue W18 proposal. |
+| Objective | Prove the selected original OLE HTASK-alias route through its reachable consumer, including normal lookup, bounded output, stale identity and retirement. |
+| Non-goals | No guest changes/rebuild; no broad OLE/COM/DDE provider, registry, transport or unbounded task identity service. |
+| Reference Baseline | [S1 matrix](../etc/evidence/m0-t459-s1-common-dialog-ole-owner-matrix.md), [S2 acceptance](../etc/evidence/m0-t459-s2-common-dialog-consumer-acceptance.md) and W18 proposal. |
+| Files And ABI Surface | Original `wole2.c`, `walias.c`, `wuwind.c` and `wkernel.c`; registered T452 bounded process-list/output divergence only. |
 | Applicable Rules | Applicable execution, architecture, coding, documentation, source-policy and WOW32 minimum-diff rules. |
-| Verification | Formal x86 build, existing exact-boundary witnesses and immutable guest modal/modeless consumer matrix where the current environment exposes it. |
-| Expected Markers | Original conversion/callback bodies see the request; cancel/error and resource retirement are not replaced or leaked. |
+| Verification | Formal x86 build, current original alias fixture and a named reached consumer or explicit unavailable boundary. |
+| Expected Markers | One original alias owner; no native token crosses guest state; stale/reused identity cannot resolve. |
 | Asset Needs | Existing immutable guest media and published coherent package only; no new guest artifact. |
-| Reporting Requirements | Caller/input/result/failure/retirement matrix and source-defect conclusion. |
-| Stop Conditions | Guest change, second dialog provider, template/resource reimplementation, synthetic native result graph or source-less workaround. |
-| Exit Criteria | Every selected modal/modeless common-dialog edge has a named executable witness or an explicit pre-provider environmental non-pass with no product inference. |
+| Reporting Requirements | Caller/input/result/failure/retirement matrix, actual consumer disposition and source-defect conclusion. |
+| Stop Conditions | Guest change, second alias table, broad OLE shell, native identity pass-through or source-less workaround. |
+| Exit Criteria | The selected original alias path has a finite real-consumer or explicit unavailable disposition with normal/failure/retirement evidence. |
 | Original Owner Request | 单人双角色模式复通 WOW32；源码追溯优先、最少 diff、完整接通后验证；每个 S 自动收口并继续。 |
-| Similar-Issue Sweep | Templates, callbacks, modal/modeless completion, cancel/error, output copy-back, terminal cleanup and task retirement. |
+| Similar-Issue Sweep | Alias allocation, foreign thread selection, stale/reused IDs, process-name output bounds, window ownership and task retirement. |
 | Candidate Proposal | [Common dialogs and related OLE](../proposals/proposal-wow32-common-dialogs-ole-001.md). |
+
+## T459 S2 Closure Record
+
+S2's immutable-guest modeless dialog probe passed 16 explicit destroy rounds
+and one terminal cleanup in a surviving WOW worker. The existing exact
+modal/error boundaries also pass; no product/guest source or package changed.
+[The S2 acceptance](../etc/evidence/m0-t459-s2-common-dialog-consumer-acceptance.md)
+admits only selected OLE alias/consumer acceptance.
 
 ## T459 S1 Closure Record
 
@@ -41,41 +49,6 @@ second providers; immutable guest OLE libraries remain a stopping boundary.
 Exact dialog/callback/OLE alias witnesses pass after observer-only PowerShell
 portability repairs. [The S1 matrix](../etc/evidence/m0-t459-s1-common-dialog-ole-owner-matrix.md)
 admits S2 dialogs and reserves OLE for S3.
-
-## T458 S1 Closure Record
-
-S1 found one selected original owner for resource lookup, bitmap conversion,
-cursor/icon aliases and accelerator conversion, and no second MENU-01 graph.
-The focused actual-bitmap binding witness passes after a test-entrypoint repair
-for the current component Ninja subgraph. The matrix fixes S2's finite
-conversion/retirement boundary and deliberately leaves cursor fixture execution
-and real guest resource acceptance open.
-
-## T458 S2 Closure Record
-
-S2 added only test witnesses. Extracted current original `WU32LoadBitmap` and
-`WU32LoadCursor` bodies pass byte-lease/output-slot and alias-order evidence;
-the existing adapter/public cursor cohort passes old/new headers, color/mono,
-stock and invalid paths. The formal x86 graph is current. A retained
-private-desktop WINMINE observer fails before worker/resource entry and is an
-explicit non-pass. No production or guest input changed; [the S2 evidence](../etc/evidence/m0-t458-s2-resource-conversion-acceptance.md)
-admits S3 accelerator-only work.
-
-## T458 S3 Closure Record
-
-S3 added test witnesses only. Extracted original `CreateAccel32` retains the
-packed-record boundary, and original `SetupAccelAlias`/`FindAccelAlias`/
-`DestroyAccelAlias` retain task-local aliases and one native destroy per task
-retirement. T447 remains the only MENU-01 owner. [The S3 evidence](../etc/evidence/m0-t458-s3-accelerator-dispatch-retirement.md)
-admits finite consumer acceptance.
-
-## T458 S4 And Task Closure Record
-
-The bound current-source menu/resource consumer compiled and linked, then the
-host rejected isolated page-domain desktop creation before any worker or WOW
-provider entry. This is an explicit external non-pass, not an inferred product
-result. S2 and S3 prove the reachable original resource/accelerator boundaries;
-no T458 production source changed. T458 W09 is closed in [its closure record](../history/m0-t458-closure.md).
 
 ## T457 S4 And Task Closure Record
 
@@ -229,8 +202,9 @@ T458 S4 may use only `build/t458-s4` for disposable consumer acceptance, with
 a 45-minute phase, 2-GiB size and 10-minute no-progress budget. Stable
 `.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
 
-T459 S1 may use only `build/t459-s1` for disposable owner-audit evidence, with
-a 30-minute phase, 2-GiB size and 10-minute no-progress budget. Stable
+T459 S1/S2 may use only `build/t459-s1` and `build/t459-s2` for disposable
+owner-audit/consumer evidence, with a 45-minute phase, 2-GiB size and a
+10-minute no-progress budget. Stable
 `.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
 
 T457 S1 may use only `build/t457-s1` for disposable source-audit and focused
