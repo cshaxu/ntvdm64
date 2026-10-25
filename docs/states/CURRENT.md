@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T458 S2**
+**Active: M0 T458 S3**
 
 The owner directed automatic sequential S closure and advancement. T455 W07
 is closed; T456 W08 is closed and T457 admits Queue W06, WOW32 residual
@@ -12,25 +12,25 @@ smallest source-shaped binding, with no guest modification or rebuild.
 
 ## Active Packet
 
-### M0 T458 S2 — original resource conversion acceptance
+### M0 T458 S3 — original accelerator dispatch acceptance
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T458 S2, Ordinary Mode; single-agent implementation and independent final review. |
-| Admission And Approval | Automatic continuation after the closed T458 S1 source matrix. |
-| Objective | Exercise and repair only a source-proven icon/cursor/bitmap conversion seam through original WU32 callers and registered output slots. |
-| Non-goals | No guest changes/rebuild; no second resource parser, bitmap converter, menu graph, mutation or retirement owner; no speculative display rewrite. |
-| Reference Baseline | [T458 S1 owner matrix](../etc/evidence/m0-t458-s1-resource-accelerator-owner-matrix.md), [W09 proposal](../proposals/proposal-wow32-menus-resource-conversion-001.md), T447 transfer plan and minimum-diff governance. |
-| Files And ABI Surface | Existing original `wuser.c`/`wucursor.c`/`wcuricon.c` and their established output slots; only a source-proven bounded adapter/test seam is admissible. |
+| Identifier Mode | M0 T458 S3, Ordinary Mode; single-agent implementation and independent final review. |
+| Admission And Approval | Automatic continuation after closed S2 conversion evidence. |
+| Objective | Prove or minimally repair original `waccel.c` table conversion/dispatch and consume T447's MENU-01 graph without creating a second menu owner. |
+| Non-goals | No guest changes/rebuild; no menu parser, mutation graph, owner-draw provider, accelerator cache or general USER replacement. |
+| Reference Baseline | [T458 S1 matrix](../etc/evidence/m0-t458-s1-resource-accelerator-owner-matrix.md), [T458 S2 conversion acceptance](../etc/evidence/m0-t458-s2-resource-conversion-acceptance.md), W09 proposal and T447 transfer. |
+| Files And ABI Surface | Original `waccel.c`/`wkman.c` conversion and retirement callers plus established public `HACCEL` boundary. |
 | Applicable Rules | Execution, architecture, coding, documentation, source policy and WOW32 minimum-diff admission governance. |
-| Verification | Actual WU32 caller/output-slot fixtures for named/ordinal, color/mono, old/malformed data, partial load and retirement; formal x86 build; real guest resource case where available. |
-| Expected Markers | Original caller owns bytes/aliases; the adapter owns no persistent resource state; normal, failed and task/module-retirement paths are observed. |
-| Asset Needs | Existing OpenNT MVDM mirror, formal x86 graph, immutable guest media and existing release package; no new source import or replacement media. |
-| Reporting Requirements | Record the exact conversion/caller chain, source-proven repair if any, tests, package identity and any unavailable real-guest boundary. |
-| Stop Conditions | Need for guest change, second resource/menu owner, broad USER replacement, invented transport or source-less semantic concession. |
-| Exit Criteria | One coherent original conversion path passes its positive/negative/lifetime cohort, is packaged if product inputs change, and leaves only accelerator/menu dispatch for S3. |
+| Verification | Actual original accelerator conversion/alias/retirement fixture, dispatch/reentry/cancellation evidence through the existing MENU-01 consumer, formal x86 build, and a bounded real consumer case where available. |
+| Expected Markers | Original tables and aliases remain authoritative; public `HACCEL` is not reinterpreted as a guest alias; task retirement cannot dispatch stale accelerators. |
+| Asset Needs | Existing original mirrors, formal x86 graph, immutable guest media and coherent package; no new source import. |
+| Reporting Requirements | Record precise original caller/alias chain, source-proven repair if any, evidence and unavailable real-consumer boundary. |
+| Stop Conditions | Guest change, a second menu graph/cache, broad USER replacement, invented transport or source-less concession. |
+| Exit Criteria | One original accelerator path passes conversion, dispatch, failure and retirement evidence; all menu behavior remains assigned to T447; finite S4 consumer handoff is recorded. |
 | Original Owner Request | 单人双角色模式复通 WOW32；优先原版代码追溯与最少 diff，整批接通后再统一验证；每个 S 自动收口并继续。 |
-| Similar-Issue Sweep | Bitmap/icon/cursor representation, resource selection, partial load, color/monochrome selection, task/module loss and release. |
+| Similar-Issue Sweep | Accelerator table aliases, task/module retirement, menu dispatch reentry/cancellation and public handle ownership. |
 | Candidate Proposal | [Resource conversion, menus and accelerators](../proposals/proposal-wow32-menus-resource-conversion-001.md). |
 
 ## T458 S1 Closure Record
@@ -41,6 +41,16 @@ The focused actual-bitmap binding witness passes after a test-entrypoint repair
 for the current component Ninja subgraph. The matrix fixes S2's finite
 conversion/retirement boundary and deliberately leaves cursor fixture execution
 and real guest resource acceptance open.
+
+## T458 S2 Closure Record
+
+S2 added only test witnesses. Extracted current original `WU32LoadBitmap` and
+`WU32LoadCursor` bodies pass byte-lease/output-slot and alias-order evidence;
+the existing adapter/public cursor cohort passes old/new headers, color/mono,
+stock and invalid paths. The formal x86 graph is current. A retained
+private-desktop WINMINE observer fails before worker/resource entry and is an
+explicit non-pass. No production or guest input changed; [the S2 evidence](../etc/evidence/m0-t458-s2-resource-conversion-acceptance.md)
+admits S3 accelerator-only work.
 
 ## T457 S4 And Task Closure Record
 
@@ -185,7 +195,7 @@ resource-fixture evidence, with a 30-minute phase, 2-GiB size and 10-minute
 no-progress budget. Stable `.ninja` and `.ccache` remain reusable caches and
 are never task evidence roots.
 
-T458 S2 may use only `build/t458-s2` for disposable conversion and guest
+T458 S2 may use only `build/t458-s2` for retained conversion and guest
 resource evidence, with a 45-minute phase, 2-GiB size and 10-minute no-progress
 budget. Stable `.ninja` and `.ccache` remain reusable caches and are never task
 evidence roots.

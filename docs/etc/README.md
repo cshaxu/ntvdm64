@@ -66,6 +66,10 @@ the explicit application-frontier non-passes and the W06 handoff.
 records the original resource, bitmap, cursor/icon and accelerator authorities,
 their bounded modern output slots, and the finite conversion acceptance scope.
 
+[T458 S2 resource conversion acceptance](evidence/m0-t458-s2-resource-conversion-acceptance.md)
+records the extracted-original caller/output-slot cohort, formal x86 build and
+the explicit pre-resource private-desktop observer non-pass.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.

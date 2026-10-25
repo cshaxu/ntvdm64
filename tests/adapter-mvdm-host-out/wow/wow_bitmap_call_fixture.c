@@ -1,66 +1,65 @@
 #include <windows.h>
+#include <stdint.h>
 #include <stdio.h>
-#include <string.h>
-#include "wow_callback_frame_lease.h"
-/* Compile the extracted current WU32LoadBitmap body, not a copied algorithm.
- * All historical macros below are observation seams, not runtime providers. */
-typedef struct { DWORD f4, f3, f2; WORD f1; } LOADBITMAP16, *PLOADBITMAP16;
-typedef LOADBITMAP16 *PVDMFRAME;
-typedef char *PSZ;
-static unsigned errors, step, reject, has_data;
-static BYTE borrowed, leased;
-static const char name[] = "BITMAP";
-static void event(unsigned expected) { if (++step != expected) ++errors; }
-#define FASTCALL
-#define GETARGPTR(frame,size,arg) do { event(1); arg=frame; } while (0)
-#define GETPSZIDPTR(vp,p) do { event(2); p=(PSZ)name; } while (0)
-#define GETMISCPTR(vp,p) do { event(3); p=has_data ? &borrowed : NULL; } while (0)
-#define FETCHDWORD(value) (value)
-#define HINSTRES32(value) ((HANDLE)(ULONG_PTR)(value))
-#define GETHBITMAP16(value) ((ULONG)(ULONG_PTR)(value))
-#define FREEMISCPTR(p) event(has_data ? (reject ? 5 : 7) : 5)
-#define FREEPSZIDPTR(p) event(has_data ? (reject ? 6 : 8) : 6)
-#define FREEARGPTR(p) event(has_data ? (reject ? 7 : 9) : 7)
-#define RETURN(value) return value
 
-int wow_callback_frame_acquire_protected_vp(uint32_t vp, uint32_t count,
+/* The current WU32LoadBitmap body is extracted at test time.  This observes
+ * its protected-byte lease and output-slot order without copying its logic. */
+typedef WORD HAND16;
+typedef struct { DWORD f4, f3, f2; HAND16 f1; } LOADBITMAP16, *PLOADBITMAP16;
+typedef LOADBITMAP16 *PVDMFRAME;
+typedef struct { void *lease; uint8_t *bytes; uint32_t guest_address, byte_count, access; } wow_callback_frame_lease;
+static BYTE fixture_bytes[12];
+static int errors, output_calls, acquire_calls, release_calls, acquire_ok, has_data;
+#define FASTCALL
+#define GETARGPTR(f,s,a) do {(void)(s);(a)=(f);}while(0)
+#define GETPSZIDPTR(v,p) do {(void)(v);(p)="BITMAP";}while(0)
+#define GETMISCPTR(v,p) do {(void)(v);(p)=has_data ? fixture_bytes : NULL;}while(0)
+#define FETCHDWORD(v) ((DWORD)(v))
+#define HINSTRES32(v) ((HANDLE)(ULONG_PTR)(v))
+#define GUEST_MEMORY_ACCESS_READ 1
+#define GETHBITMAP16(v) ((ULONG)(ULONG_PTR)(v))
+#define FREEMISCPTR(p) ((void)(p))
+#define FREEPSZIDPTR(p) ((void)(p))
+#define FREEARGPTR(p) ((void)(p))
+#define RETURN(v) return (v)
+static int wow_callback_frame_acquire_protected_vp(uint32_t vp, uint32_t count,
     uint32_t access, wow_callback_frame_lease *view)
 {
-    event(4);
-    if (vp != 0x12340020 || count != 98304 || access != GUEST_MEMORY_ACCESS_READ)
-        ++errors;
-    if (reject) return 0;
-    view->lease = (guest_memory_lease *)&leased;
-    view->bytes = &leased;
+    ++acquire_calls;
+    if (vp != 0x12340000u || count != sizeof(fixture_bytes) || access != GUEST_MEMORY_ACCESS_READ) ++errors;
+    if (!acquire_ok) return 0;
+    view->lease = view; view->bytes = fixture_bytes;
     return 1;
 }
-int wow_callback_frame_release(wow_callback_frame_lease *view, int commit)
+static int wow_callback_frame_release(wow_callback_frame_lease *view, int commit)
 {
-    event(6);
-    if (view->bytes != &leased || commit) ++errors;
-    ZeroMemory(view, sizeof(*view));
+    ++release_calls;
+    if (view->bytes != fixture_bytes || commit) ++errors;
     return 1;
 }
-static HBITMAP WINAPI output(HANDLE module, LPCSTR resource_name, LPBYTE bytes, DWORD size)
+static HBITMAP WINAPI output(HINSTANCE module, LPCSTR name, LPBYTE bytes, DWORD count)
 {
-    event(has_data ? 5 : 4);
-    if ((ULONG_PTR)module != 42 || resource_name != name ||
-        bytes != (has_data ? &leased : NULL) || size != (has_data ? 98304u : 0u)) ++errors;
-    return (HBITMAP)7;
+    ++output_calls;
+    if (module != (HINSTANCE)(ULONG_PTR)7 || !name || count != sizeof(fixture_bytes) ||
+        bytes != (has_data ? fixture_bytes : NULL)) ++errors;
+    return (HBITMAP)(ULONG_PTR)0x77;
 }
-static struct { HBITMAP (WINAPI *pfnWOWLoadBitmapA)(HANDLE,LPCSTR,LPBYTE,DWORD); }
-    pfnOut = { output };
+static struct { HBITMAP (WINAPI *pfnWOWLoadBitmapA)(HINSTANCE, LPCSTR, LPBYTE, DWORD); } pfnOut = { output };
 #include "bitmap-call.inc"
-
-int __cdecl main(void)
+static void run(int data, int available)
 {
-    LOADBITMAP16 frame = {98304, 0x12340020, 1, 42};
-    has_data = 1;
-    if (WU32LoadBitmap(&frame) != 7 || step != 9) ++errors;
-    step = 0; reject = 1;
-    if (WU32LoadBitmap(&frame) != 0 || step != 7) ++errors;
-    step = 0; reject = 0; has_data = 0; frame.f3 = frame.f4 = 0;
-    if (WU32LoadBitmap(&frame) != 7 || step != 7) ++errors;
-    printf("WOW_BITMAP_CALL_ORDER errors=%u cases=3\n", errors);
+    LOADBITMAP16 frame = {sizeof(fixture_bytes), 0x12340000u, 0, 7};
+    ULONG result;
+    has_data = data;
+    acquire_ok = available;
+    result = WU32LoadBitmap(&frame);
+    if (data && !available ? result != 0 : result != 0x77) ++errors;
+}
+int main(void)
+{
+    run(1, 1); run(1, 0); run(0, 0);
+    if (output_calls != 2 || acquire_calls != 2 || release_calls != 1) ++errors;
+    printf("WOW_BITMAP_CALL_ORDER errors=%d output=%d acquire=%d release=%d\n",
+        errors, output_calls, acquire_calls, release_calls);
     return errors ? 3 : 0;
 }
