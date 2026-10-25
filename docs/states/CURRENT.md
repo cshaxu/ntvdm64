@@ -2,36 +2,36 @@
 
 ## Current Work
 
-**Active: M0 T456 S4**
+**Active: M0 T457 S1**
 
 The owner directed automatic sequential S closure and advancement. T455 W07
-is closed; T456 admits Queue W08, WOW32 fonts, text and metafiles. The task
-follows the read-only `ntvdm64-wow32-audit`: recover maximum selected original
-behavior through the smallest source-shaped binding, with no guest modification
-or rebuild.
+is closed; T456 W08 is closed and T457 admits Queue W06, WOW32 residual
+dialogs, input, hooks and timers. The task follows the read-only
+`ntvdm64-wow32-audit`: recover maximum selected original behavior through the
+smallest source-shaped binding, with no guest modification or rebuild.
 
 ## Active Packet
 
-### M0 T456 S4 — package acceptance and bounded application frontiers
+### M0 T457 S1 — dialog/input/hook/timer owner and execution contract
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T456 S4, Ordinary Mode; single-agent implementation and independent final review. |
-| Admission And Approval | Owner's automatic sequential S directive; S3 classic-metafile closure. |
-| Objective | Run bounded package-level repeated drawing/release checks and retained WOW application frontiers using the sealed S2 provider; classify only observable failures. |
-| Non-goals | No guest changes/rebuild; no replacement renderer/metafile engine, no new object authority, no speculative repair of unrelated private-desktop runner limits. |
-| Reference Baseline | [S3 metafile audit](../etc/evidence/m0-t456-s3-metafile-owner-host-audit.md), [S2 glyph-outline seam](../etc/evidence/m0-t456-s2-glyph-outline-rotation.md), [W08 proposal](../proposals/proposal-wow32-fonts-text-metafiles-001.md) and prior immutable-guest frontier evidence. |
-| Files And ABI Surface | Existing WOW32 provider/package, selected focused fixtures, existing app-observer tests and release identity manifests. |
+| Identifier Mode | M0 T457 S1, Ordinary Mode; single-agent implementation and independent final review. |
+| Admission And Approval | Owner's automatic sequential S directive; T456 W08 closure. |
+| Objective | Establish the complete selected original owner/callback/lifecycle matrix for residual dialog, input, caret, keyboard, hook and timer families before admitting a production repair. |
+| Non-goals | No guest changes/rebuild; no second input router, scheduler, hook registry, timer engine, dialog implementation or speculative host-control replacement. |
+| Reference Baseline | [W06 proposal](../proposals/proposal-wow32-dialogs-input-hooks-timers-001.md), [T447 transfer plan](../etc/operations/t447-wow-execution-plan.md), [T456 closure](../history/m0-t456-closure.md), original-provider graph and minimum-diff governance. |
+| Files And ABI Surface | Selected original dialog/input/hook/timer callers, existing execution/object/resource owners and focused audit/test material only. |
 | Applicable Rules | Execution, architecture, coding, documentation, source policy and WOW32 minimum-diff admission governance. |
-| Verification | Reuse the sealed x86/full-component build and published hashes; run repeated focused public-host checks and available existing application frontiers without treating known runner pre-window exits as product passes. |
-| Expected Markers | Repeated operations leave no live owned process or leaked test stage; release identity remains exact and failures retain their actual exit/classification. |
+| Verification | Build a finite family/caller/authority ledger from actual graph selection and execute only existing focused entry tests needed to distinguish a real missing seam from a later feature owner. |
+| Expected Markers | Every selected family has one original/host/adapter owner, known callback context, normal/failure/retirement rule and no unresolved duplicated authority. |
 | Asset Needs | Existing OpenNT MVDM mirror, formal x86 graph, immutable guest media, existing release package and no new source import or replacement media. |
-| Reporting Requirements | Record exact commands, package identities, normal/failure observations and immutable-guest/run-environment limits; close T456 only when its finite proposal is fully accounted for. |
-| Stop Conditions | Need for guest change, new renderer/object authority, invented test transport, or a semantic concession outside earlier source decisions. |
-| Exit Criteria | The selected font/text/metafile work has an evidence-backed production/no-change disposition, required build and release identities are intact, and any real residual limit is explicitly transferred rather than hidden. |
+| Reporting Requirements | Record selected entries, build condition, source/host/adapter allocation, callback execution context, lifetime/cleanup proof and a finite S2 admission or no-change conclusion. |
+| Stop Conditions | Need for guest change, second scheduler/router/registry, broad replacement of original USER code, invented transport or source-less semantic concession. |
+| Exit Criteria | All selected W06 families have a source-backed ownership and contract disposition; S2 scope is finite and does not hide a foundational lifecycle gap. |
 | Original Owner Request | 单人双角色模式复通 WOW32；优先原版代码追溯与最少 diff，整批接通后再统一验证；每个 S 自动收口并继续。 |
-| Similar-Issue Sweep | Repeated create/restore/copy/play/delete, existing app frontiers, task return, package hash identity and cleanup of test stages/processes. |
-| Candidate Proposal | [Fonts, text and metafiles](../proposals/proposal-wow32-fonts-text-metafiles-001.md). |
+| Similar-Issue Sweep | Dialog init/procedure/cancel/end, keyboard/mouse/caret, hook install/remove/callback, timer set/kill/callback, native/guest identity, nested callback, task loss and cleanup. |
+| Candidate Proposal | [Dialogs, input, hooks and timers](../proposals/proposal-wow32-dialogs-input-hooks-timers-001.md). |
 
 ## S1 Closure Record
 
@@ -71,6 +71,14 @@ uses supported public classic-GDI operations and retains the original guest
 global-handle, synchronous callback and release rules. Its x86 capability
 witness passes create/bits/restore/copy/reopen/play/enumerate plus failure
 checks. The exact audit and S4 handoff are in [the S3 metafile record](../etc/evidence/m0-t456-s3-metafile-owner-host-audit.md).
+
+## T456 S4 And Task Closure Record
+
+S4 ran eight repeated focused x86 font/metafile rounds and independently
+verified all ten manifest/release/installed image identities. The published
+WRITE startup witness remains valid; retained private-desktop app probes fail
+before their selected observation and are non-passes. T456 is closed in
+[its closure record](../history/m0-t456-closure.md); T457 W06 is now active.
 
 ## S3 Closure Record
 

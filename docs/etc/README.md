@@ -58,6 +58,10 @@ runtime-test limitation.
 records the selected original provider, public-host capability witness and
 the S4 package-acceptance handoff without creating a second metafile owner.
 
+[T456 S4 package acceptance](evidence/m0-t456-s4-package-acceptance.md)
+records repeated focused checks, the exact ten-image release/install identity,
+the explicit application-frontier non-passes and the W06 handoff.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.
