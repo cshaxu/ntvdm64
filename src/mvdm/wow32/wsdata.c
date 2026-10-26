@@ -323,7 +323,7 @@ ULONG FASTCALL WWS32WSAAsyncGetHostByAddr(PVDMFRAME pFrame)
     }
 
     buffer32 = malloc_w( MAXGETHOSTSTRUCT );
-    if ( context == NULL ) {
+    if ( buffer32 == NULL ) {
         (*wsockapis[WOW_WSASETLASTERROR].lpfn)( WSAENOBUFS );
         goto exit;
     }
@@ -335,6 +335,7 @@ ULONG FASTCALL WWS32WSAAsyncGetHostByAddr(PVDMFRAME pFrame)
     context->Buffer32 = buffer32;
     context->vBuffer16 = parg16->Buffer;
     context->Buffer16Length = parg16->BufferLength;
+    context->ThreadSerialNumber = WWS32ThreadSerialNumber;
 
     //
     // Enter a critical section to synchronize access to the context block
@@ -427,7 +428,7 @@ ULONG FASTCALL WWS32WSAAsyncGetHostByName(PVDMFRAME pFrame)
     }
 
     buffer32 = malloc_w( MAXGETHOSTSTRUCT );
-    if ( context == NULL ) {
+    if ( buffer32 == NULL ) {
         (*wsockapis[WOW_WSASETLASTERROR].lpfn)( WSAENOBUFS );
         goto exit;
     }
@@ -439,6 +440,7 @@ ULONG FASTCALL WWS32WSAAsyncGetHostByName(PVDMFRAME pFrame)
     context->Buffer32 = buffer32;
     context->vBuffer16 = parg16->Buffer;
     context->Buffer16Length = parg16->BufferLength;
+    context->ThreadSerialNumber = WWS32ThreadSerialNumber;
 
     //
     // Enter a critical section to synchronize access to the context block
@@ -510,7 +512,12 @@ WWS32PostAsyncGetHost (
     DWORD bytesRequired;
 
     context = WWS32FindAndRemoveAsyncContext( (HANDLE)wParam );
-    ASSERT( context != NULL );
+    if ( context == NULL ) {
+        // A successful cancel or task rundown detaches the context before
+        // asking WSOCK32 to stop it.  A completion already queued by the
+        // provider is therefore stale and must not touch freed guest memory.
+        return TRUE;
+    }
 
     //
     // If the call was successful, copy the 32-bit buffer to the
@@ -887,7 +894,7 @@ ULONG FASTCALL WWS32WSAAsyncGetProtoByName(PVDMFRAME pFrame)
     }
 
     buffer32 = malloc_w( MAXGETHOSTSTRUCT );
-    if ( context == NULL ) {
+    if ( buffer32 == NULL ) {
         (*wsockapis[WOW_WSASETLASTERROR].lpfn)( WSAENOBUFS );
         goto exit;
     }
@@ -899,6 +906,7 @@ ULONG FASTCALL WWS32WSAAsyncGetProtoByName(PVDMFRAME pFrame)
     context->Buffer32 = buffer32;
     context->vBuffer16 = parg16->Buffer;
     context->Buffer16Length = parg16->BufferLength;
+    context->ThreadSerialNumber = WWS32ThreadSerialNumber;
 
     //
     // Enter a critical section to synchronize access to the context block
@@ -988,7 +996,7 @@ ULONG FASTCALL WWS32WSAAsyncGetProtoByNumber(PVDMFRAME pFrame)
     }
 
     buffer32 = malloc_w( MAXGETHOSTSTRUCT );
-    if ( context == NULL ) {
+    if ( buffer32 == NULL ) {
         (*wsockapis[WOW_WSASETLASTERROR].lpfn)( WSAENOBUFS );
         goto exit;
     }
@@ -1000,6 +1008,7 @@ ULONG FASTCALL WWS32WSAAsyncGetProtoByNumber(PVDMFRAME pFrame)
     context->Buffer32 = buffer32;
     context->vBuffer16 = parg16->Buffer;
     context->Buffer16Length = parg16->BufferLength;
+    context->ThreadSerialNumber = WWS32ThreadSerialNumber;
 
     //
     // Enter a critical section to synchronize access to the context block
@@ -1070,7 +1079,9 @@ WWS32PostAsyncGetProto (
     DWORD bytesRequired;
 
     context = WWS32FindAndRemoveAsyncContext( (HANDLE)wParam );
-    ASSERT( context != NULL );
+    if ( context == NULL ) {
+        return TRUE;
+    }
 
     //
     // If the call was successful, copy the 32-bit buffer to the
@@ -1382,7 +1393,7 @@ ULONG FASTCALL WWS32WSAAsyncGetServByPort(PVDMFRAME pFrame)
     }
 
     buffer32 = malloc_w( MAXGETHOSTSTRUCT );
-    if ( context == NULL ) {
+    if ( buffer32 == NULL ) {
         (*wsockapis[WOW_WSASETLASTERROR].lpfn)( WSAENOBUFS );
         goto exit;
     }
@@ -1394,6 +1405,7 @@ ULONG FASTCALL WWS32WSAAsyncGetServByPort(PVDMFRAME pFrame)
     context->Buffer32 = buffer32;
     context->vBuffer16 = parg16->Buffer;
     context->Buffer16Length = parg16->BufferLength;
+    context->ThreadSerialNumber = WWS32ThreadSerialNumber;
 
     //
     // Enter a critical section to synchronize access to the context block
@@ -1488,7 +1500,7 @@ ULONG FASTCALL WWS32WSAAsyncGetServByName(PVDMFRAME pFrame)
     }
 
     buffer32 = malloc_w( MAXGETHOSTSTRUCT );
-    if ( context == NULL ) {
+    if ( buffer32 == NULL ) {
         (*wsockapis[WOW_WSASETLASTERROR].lpfn)( WSAENOBUFS );
         goto exit;
     }
@@ -1500,6 +1512,7 @@ ULONG FASTCALL WWS32WSAAsyncGetServByName(PVDMFRAME pFrame)
     context->Buffer32 = buffer32;
     context->vBuffer16 = parg16->Buffer;
     context->Buffer16Length = parg16->BufferLength;
+    context->ThreadSerialNumber = WWS32ThreadSerialNumber;
 
     //
     // Enter a critical section to synchronize access to the context block
@@ -1573,7 +1586,9 @@ WWS32PostAsyncGetServ (
     DWORD bytesRequired;
 
     context = WWS32FindAndRemoveAsyncContext( (HANDLE)wParam );
-    ASSERT( context != NULL );
+    if ( context == NULL ) {
+        return TRUE;
+    }
 
     //
     // If the call was successful, copy the 32-bit buffer to the
@@ -1772,8 +1787,14 @@ BytesInServent32 (
 
 ULONG FASTCALL WWS32WSACancelAsyncRequest(PVDMFRAME pFrame)
 {
+    /* DIVERGENCE(MVDM-HOST-DIV-463): the selected source leaves this
+       mapped WINSOCK operation as WSAEINVAL, although it already owns the
+       native request identity in the existing async-context list. */
     ULONG ul;
     register PWSACANCELASYNCREQUEST16 parg16;
+    HANDLE asyncTaskHandle32;
+    HAND16 asyncTaskHandle16;
+    PWINSOCK_ASYNC_CONTEXT_BLOCK context;
 
     if ( !WWS32IsThreadInitialized ) {
         SetLastError( WSANOTINITIALISED );
@@ -1781,18 +1802,173 @@ ULONG FASTCALL WWS32WSACancelAsyncRequest(PVDMFRAME pFrame)
     }
 
     GETARGPTR(pFrame, sizeof(WSACANCELASYNCREQUEST16), parg16);
+    asyncTaskHandle16 = GETWORD16( parg16->hAsyncTaskHandle );
 
-    //ul = GETWORD16((*wsockapis[WOW_WSACANCELASYNCREQUEST].lpfn)(
-    //                    ));
+    if ( !WWS32FindAsyncTaskHandle32(
+              asyncTaskHandle16,
+              WWS32ThreadSerialNumber,
+              &asyncTaskHandle32
+              ) ) {
+
+        FREEARGPTR(parg16);
+        SetLastError( WSAEINVAL );
+        RETURN((ULONG)SOCKET_ERROR);
+    }
+
+    ul = GETWORD16((*wsockapis[WOW_WSACANCELASYNCREQUEST].lpfn)(
+                        asyncTaskHandle32
+                        ));
 
     FREEARGPTR(parg16);
 
-    ul = (ULONG) SOCKET_ERROR;
-    SetLastError( WSAEINVAL );
+    if ( ul == NO_ERROR ) {
+        // WSOCK32 has accepted the cancellation.  Remove the matching
+        // context before a queued post can reach the task's guest buffer.
+        // A completion that won the race has already removed and released it.
+        context = WWS32FindAndRemoveAsyncContext16(
+                      asyncTaskHandle16,
+                      WWS32ThreadSerialNumber
+                      );
+        if ( context != NULL ) {
+            free_w( context->Buffer32 );
+            free_w( (PVOID)context );
+        }
+    }
 
     RETURN(ul);
 
 } // WWS32WSACancelAsyncRequest
+
+
+BOOL
+WWS32FindAsyncTaskHandle32 (
+    IN HAND16 AsyncTaskHandle16,
+    IN DWORD ThreadSerialNumber,
+    OUT HANDLE *AsyncTaskHandle32
+    )
+{
+    PWINSOCK_ASYNC_CONTEXT_BLOCK context;
+    PLIST_ENTRY listEntry;
+    BOOL found;
+
+    found = FALSE;
+    RtlEnterCriticalSection( &WWS32CriticalSection );
+
+    for ( listEntry = WWS32AsyncContextBlockListHead.Flink;
+          listEntry != &WWS32AsyncContextBlockListHead;
+          listEntry = listEntry->Flink ) {
+
+        context = CONTAINING_RECORD(
+                      listEntry,
+                      WINSOCK_ASYNC_CONTEXT_BLOCK,
+                      ContextBlockListEntry
+                      );
+
+        if ( context->AsyncTaskHandle16 == AsyncTaskHandle16 &&
+             context->ThreadSerialNumber == ThreadSerialNumber ) {
+
+            *AsyncTaskHandle32 = context->AsyncTaskHandle32;
+            found = TRUE;
+            break;
+        }
+    }
+
+    RtlLeaveCriticalSection( &WWS32CriticalSection );
+
+    return found;
+
+} // WWS32FindAsyncTaskHandle32
+
+
+PWINSOCK_ASYNC_CONTEXT_BLOCK
+WWS32FindAndRemoveAsyncContext16 (
+    IN HAND16 AsyncTaskHandle16,
+    IN DWORD ThreadSerialNumber
+    )
+{
+    PWINSOCK_ASYNC_CONTEXT_BLOCK context;
+    PLIST_ENTRY listEntry;
+
+    RtlEnterCriticalSection( &WWS32CriticalSection );
+
+    for ( listEntry = WWS32AsyncContextBlockListHead.Flink;
+          listEntry != &WWS32AsyncContextBlockListHead;
+          listEntry = listEntry->Flink ) {
+
+        context = CONTAINING_RECORD(
+                      listEntry,
+                      WINSOCK_ASYNC_CONTEXT_BLOCK,
+                      ContextBlockListEntry
+                      );
+
+        if ( context->AsyncTaskHandle16 == AsyncTaskHandle16 &&
+             context->ThreadSerialNumber == ThreadSerialNumber ) {
+
+            RemoveEntryList( &context->ContextBlockListEntry );
+            RtlLeaveCriticalSection( &WWS32CriticalSection );
+            return context;
+        }
+    }
+
+    RtlLeaveCriticalSection( &WWS32CriticalSection );
+    return NULL;
+
+} // WWS32FindAndRemoveAsyncContext16
+
+
+VOID
+WWS32CancelAsyncRequestsForTask(
+    IN DWORD ThreadSerialNumber
+    )
+{
+    LIST_ENTRY listHead;
+    PWINSOCK_ASYNC_CONTEXT_BLOCK context;
+    PLIST_ENTRY listEntry;
+
+    InitializeListHead( &listHead );
+    RtlEnterCriticalSection( &WWS32CriticalSection );
+
+    for ( listEntry = WWS32AsyncContextBlockListHead.Flink;
+          listEntry != &WWS32AsyncContextBlockListHead;
+          listEntry = listEntry->Flink ) {
+
+        context = CONTAINING_RECORD(
+                      listEntry,
+                      WINSOCK_ASYNC_CONTEXT_BLOCK,
+                      ContextBlockListEntry
+                      );
+
+        if ( context->ThreadSerialNumber == ThreadSerialNumber ) {
+            listEntry = context->ContextBlockListEntry.Blink;
+            RemoveEntryList( &context->ContextBlockListEntry );
+            InsertTailList( &listHead, &context->ContextBlockListEntry );
+        }
+    }
+
+    RtlLeaveCriticalSection( &WWS32CriticalSection );
+
+    for ( listEntry = listHead.Flink;
+          listEntry != &listHead;
+          listEntry = listEntry->Flink ) {
+
+        context = CONTAINING_RECORD(
+                      listEntry,
+                      WINSOCK_ASYNC_CONTEXT_BLOCK,
+                      ContextBlockListEntry
+                      );
+        listEntry = context->ContextBlockListEntry.Blink;
+        RemoveEntryList( &context->ContextBlockListEntry );
+
+        // Do not hold the list lock across WSOCK32: a provider can dispatch
+        // a completion while honoring cancellation.
+        (VOID)(*wsockapis[WOW_WSACANCELASYNCREQUEST].lpfn)(
+                  context->AsyncTaskHandle32
+                  );
+        free_w( context->Buffer32 );
+        free_w( (PVOID)context );
+    }
+
+} // WWS32CancelAsyncRequestsForTask
 
 
 PWINSOCK_ASYNC_CONTEXT_BLOCK

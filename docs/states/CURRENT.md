@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T467 S3**
+**Active: M0 T467 S4**
 
 T464 is closed at the published `0.0.464` ten-image package; [its closure](../history/m0-t464-closure.md)
 is authoritative. `books/` is expressly excluded and remains untracked pending
@@ -20,25 +20,25 @@ retained buffer owner. It changes no production or guest image.
 
 ## Active Packet
 
-### M0 T467 S3 — Winsock asynchronous requests and task loss
+### M0 T467 S4 — Winsock capability acceptance
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T467 S3, Ordinary Mode. |
-| Admission And Approval | Automatic progression from S2 under owner-approved automatic S/T closure. |
-| Objective | Recover/prove original Win16 async Winsock notification, cancellation, peer loss and task-loss cleanup. |
+| Identifier Mode | M0 T467 S4, Ordinary Mode. |
+| Admission And Approval | Automatic progression from S3 under owner-approved automatic S/T closure. |
+| Objective | Close the selected original Win16 Winsock capability only if its S1--S3 owner, local-peer, async cancellation/task-loss and product-package evidence form one finite, coherent result. |
 | Non-goals | Guest change/rebuild; a new provider, callback carrier, scheduler, socket/buffer registry or unrelated network protocol feature. |
-| Reference Baseline | [S1 owner/lifetime inventory](../etc/evidence/m0-t467-s1-winsock-owner-matrix.md), [Winsock proposal](../proposals/proposal-wow32-winsock-001.md), [WOW32 minimum-diff governance](../etc/operations/wow32-queue-minimal-diff-admission-governance.md), and retained T466 callback boundary. |
-| Files And ABI Surface | `wsext.c`, `wsraw.c`, async context blocks, original notification ABI and isolated `WINSOCK.DLL`. |
+| Reference Baseline | [S1 owner/lifetime inventory](../etc/evidence/m0-t467-s1-winsock-owner-matrix.md), [S2 synchronous bridge](../etc/evidence/m0-t467-s2-synchronous-winsock-bridge.md), [S3 async lifetime](../etc/evidence/m0-t467-s3-winsock-async-lifetime.md), [Winsock proposal](../proposals/proposal-wow32-winsock-001.md), and [WOW32 minimum-diff governance](../etc/operations/wow32-queue-minimal-diff-admission-governance.md). |
+| Files And ABI Surface | Existing S1--S3 source/test/evidence only; no additional protocol surface is admitted. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Immutable real-guest/local-peer async, cancel, peer-loss and repeated-task cleanup witnesses; affected build and retained package regressions. |
-| Expected Markers | One context owner; correct completion identity/error; no socket, buffer or callback leak after cancel, loss or task exit. |
-| Asset Needs | `build/t467-s2` only for disposable evidence; archive-derived, hash-recorded original guest DLL; installed tree and guest inputs remain read-only. |
-| Reporting Requirements | Original-owner ledger, context/identity lifetime proof, build/guest/native evidence, diff/package accounting and S4 acceptance handoff. |
-| Stop Conditions | Need for guest/driver change, a provider/scheduler/registry, non-source-shaped correction, or semantics outside async lifecycle. |
-| Exit Criteria | Async notification, cancellation, peer loss and task cleanup have real guest evidence and required production verification/publication. |
+| Verification | Reconcile the immutable real-guest/local-peer synchronous and async completion/cancel/task-loss witnesses with the retained peer-loss socket-map boundary, full component build and Product gate against the published package. |
+| Expected Markers | One owner per socket/context; completion identity/error, cancellation and task exit retain no live guest callback/buffer; package identity is three-way hash-equal. |
+| Asset Needs | `build/t467-s3/package-r2` and recorded evidence only; archive-derived, hash-recorded original guest DLL; installed tree and guest inputs remain read-only. |
+| Reporting Requirements | Explicit combined capability verdict, unverified limits, package/hash accounting and next-T handoff. |
+| Stop Conditions | An uncovered selected operation or a need for guest/driver change, provider/scheduler/registry, or non-source-shaped correction. |
+| Exit Criteria | All proposal S1--S3 criteria are evidenced, limits are explicit and the currently published ten-image package is verified. |
 | Original Owner Request | Automatic completion of this WOW32 candidate before the next queued candidate. |
-| Similar-Issue Sweep | Every async constructor, cancellation, HWND/message identity, task cleanup, peer loss, allocation failure and stale-context reuse. |
+| Similar-Issue Sweep | All selected synchronous/async operations, cancellation, HWND/message identity, socket peer loss, task cleanup, allocation failure and stale-context reuse. |
 | Candidate Proposal | [WOW32 Winsock](../proposals/proposal-wow32-winsock-001.md). |
 
 ## T467 S1 Closure Record
@@ -57,7 +57,16 @@ retains real immutable-guest original/fixed differential evidence, cached x86/x6
 builds, the full Product gate and matching ten-image publication. Guest media
 is unchanged; S3 owns async requests and task loss.
 
-T463 S1's scoped baseline remains in its [ledger](../etc/evidence/m0-t463-s1-everyday-baseline.md); it changed no runtime or guest image.
+## T467 S3 Closure Record
+
+S3 corrects the six original asynchronous query allocation checks, associates
+each existing async context with its creator task, implements source-shaped
+cancellation, and retires contexts before a task loses its guest reply buffer.
+The [S3 evidence](../etc/evidence/m0-t467-s3-winsock-async-lifetime.md)
+records real immutable-guest completion, cancellation and task-loss witnesses,
+the complete cached build and Product gate, as well as explicit limits. The
+published ten-image package is `build/t467-s3/package-r2`; its SHA-256 values
+match both `assets/release` and `O:\winnt\system32`. Guest media is unchanged.
 
 ## T463 S2 Closure Record
 
@@ -71,15 +80,6 @@ SOL Options/close/parent-recovery witness and the final Full product gate.
 All ten selected images are published with matching release/installed hashes;
 guest media remains unchanged. S3 alone owns normal/restart/multiple-task and
 scoped abnormal-cleanup acceptance.
-
-## T462 Closure Record
-
-T462 S1 closes as a bounded no-repair attribution result.  The [retained
-evidence](../etc/evidence/m0-t462-s1-window-residue-attribution.md) proves a
-current private-desktop, no-input WINMINE window and board frame, but not the
-historical residual strip.  Source review identifies no normal-path painter to
-change; therefore the smallest correct image diff is zero.  A future recurrence
-must retain its full frame and owning HWND before any repair admission.
 
 T461 S3 closes at the reviewed durable-overlay delivery.  [Its acceptance
 evidence](../etc/evidence/m0-t461-s3-registry-persistence-candidate.md)
@@ -177,11 +177,10 @@ packet above remains the only current S authority.
 
 ## Current Technical Baseline
 
-T460 S3 `5e2e8bfaf` is the current coherent ten-image delivery: it publishes
-the Clipboard deferred-lifetime boundary plus PIC/keyboard device repairs with
-rebuilt dependent images. Its release identity is `assets/release/release-manifest.json`;
-guest media remains unchanged. T454 S3 `5ede6c0e4` remains the prior bounded
-WOW32 free/rollback delivery.
+T467 S3 is the current coherent ten-image delivery. Its release identity is
+`assets/release/release-manifest.json`; all ten files are hash-equal to
+`O:\winnt\system32` and `build/t467-s3/package-r2/SYSTEM32`. Guest media remains
+unchanged.
 
 ## Temporary Evidence
 
@@ -189,9 +188,10 @@ T459 S1--S4 used `build/t459-s1` through `build/t459-s4` only for disposable
 evidence. Their retained results are indexed from the closure; stable `.ninja`
 and `.ccache` remain reusable caches and are never task evidence roots.
 
-T460 S3 may use only `build/t460-s3` for disposable delayed-render/loss
-evidence, with a 45-minute phase, 2-GiB size and 10-minute no-progress budget. Stable
-`.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
+T467 S3/S4 may use only `build/t467-s3` for disposable build, probe,
+publication-recovery and acceptance evidence, with a 60-minute phase, 3-GiB
+size and 10-minute no-progress budget. Stable `.ninja` and `.ccache` remain
+reusable caches and are never task evidence roots.
 
 T461 S1 may use only `build/t461-s1` for disposable source-audit evidence,
 with a 30-minute phase, 2-GiB size and 10-minute no-progress budget. Stable

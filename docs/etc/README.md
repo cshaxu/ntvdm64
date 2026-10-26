@@ -155,9 +155,12 @@ WINSOCK boundary, native loopback provider witness, and finite
 S2/S3 handoff without adding a provider or guest artifact to a release.
 
 [T467 S2 synchronous Winsock bridge](evidence/m0-t467-s2-synchronous-winsock-bridge.md)
-records the directly composed original synchronous owner, the one corrected
-idle-unhook predicate, immutable-WINSOCK real-guest baseline/fix evidence and
-the bounded asynchronous S3 handoff.
+records the directly composed original synchronous owner, the corrected
+idle-unhook predicate and immutable-WINSOCK real-guest baseline/fix evidence.
+
+[T467 S3 async Winsock lifetime](evidence/m0-t467-s3-winsock-async-lifetime.md)
+records async context ownership, cancellation, task-loss retirement and the
+bounded S4 acceptance handoff.
 
 [T461 S1 Shell and layered Registry owner matrix](evidence/m0-t461-s1-shell-registry-owner-matrix.md)
 records the selected Shell service and seven Registry entries, the sole

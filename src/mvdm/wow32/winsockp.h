@@ -73,6 +73,7 @@ typedef struct _WINSOCK_ASYNC_CONTEXT_BLOCK {
     LIST_ENTRY ContextBlockListEntry;
     HANDLE AsyncTaskHandle32;
     HAND16 AsyncTaskHandle16;
+    DWORD ThreadSerialNumber;
     VPVOID vBuffer16;
     DWORD Buffer16Length;
     PVOID Buffer32;
@@ -159,6 +160,24 @@ WWS32PostAsyncGetServ (
 PWINSOCK_ASYNC_CONTEXT_BLOCK
 WWS32FindAndRemoveAsyncContext (
     IN HANDLE AsyncTaskHandle32
+    );
+
+BOOL
+WWS32FindAsyncTaskHandle32 (
+    IN HAND16 AsyncTaskHandle16,
+    IN DWORD ThreadSerialNumber,
+    OUT HANDLE *AsyncTaskHandle32
+    );
+
+PWINSOCK_ASYNC_CONTEXT_BLOCK
+WWS32FindAndRemoveAsyncContext16 (
+    IN HAND16 AsyncTaskHandle16,
+    IN DWORD ThreadSerialNumber
+    );
+
+VOID
+WWS32CancelAsyncRequestsForTask(
+    IN DWORD ThreadSerialNumber
     );
 
 HAND16
