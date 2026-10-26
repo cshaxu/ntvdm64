@@ -118,3 +118,27 @@ does not claim interactive print-dialog cancellation, hook reentrancy, or
 returned-DC retirement; those remain in the bounded S3 failure/retirement
 scope rather than being silently treated as covered by the noninteractive
 path.
+
+## PrintDlg hook-cancellation witness
+
+`tests/observation/win16_printdlg_cancel_probe.asm` covers the distinct
+interactive cancellation contract without UI automation: it supplies a real
+16-bit `PD_ENABLEPRINTHOOK` callback through original
+`KERNEL.MakeProcInstance`.  On the original `WM_INITDIALOG` callback, the
+hook invokes original `USER.EndDialog(hwnd, FALSE)`.  This is the common
+dialog's documented cancellation route, not a synthetic host cancellation.
+After `COMMDLG@20` returns, the probe reads original `COMMDLG@26` extended
+error and retires the callback with original `FreeProcInstance`.
+
+The owned private-desktop run `build/t468-s2/printdlg-cancel-r1` exited
+normally and recorded:
+
+```text
+PASS original Win16 PrintDlg hook cancellation and ProcInstance retirement witness
+result=0; extendedError=0; hooks=1; freed=1
+```
+
+Thus the selected cancellation boundary proves callback entry, the normal
+cancel return (not a transport failure), zero extended error, and balanced
+guest callback carrier retirement.  It does not claim a returned printer DC,
+which cancellation does not produce.
