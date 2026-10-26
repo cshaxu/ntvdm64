@@ -27,13 +27,13 @@ retained buffer owner. It changes no production or guest image.
 | Identifier Mode | M0 T467 S2, Ordinary Mode. |
 | Admission And Approval | Automatic progression from S1's [owner/lifetime inventory](../etc/evidence/m0-t467-s1-winsock-owner-matrix.md) under owner-approved automatic S/T closure. |
 | Objective | Recover/prove the selected synchronous Win16 Winsock bridge: startup, loopback sockets, conversion, blocking-hook cancellation and idle unhook. |
-| Non-goals | Guest change/rebuild or normal-package Winsock deployment; a new socket provider, callback carrier, scheduler, socket/buffer registry, async request cancellation or task-loss implementation. |
+| Non-goals | Guest change/rebuild or installed-tree deployment; a new socket provider, callback carrier, scheduler, socket/buffer registry, async request cancellation or task-loss implementation. |
 | Reference Baseline | [S1 owner/lifetime inventory](../etc/evidence/m0-t467-s1-winsock-owner-matrix.md), [Winsock proposal](../proposals/proposal-wow32-winsock-001.md), [WOW32 minimum-diff governance](../etc/operations/wow32-queue-minimal-diff-admission-governance.md), and retained T466 callback boundary. |
 | Files And ABI Surface | `wsext.c`, `wsraw.c`, `wwstbl2.h`, isolated original guest `WINSOCK.DLL`, `WSOCK32` ordinal-109 hook and existing synchronous `CallBack16` ABI. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
 | Verification | Isolated immutable guest probe plus native loopback peer prove startup, data conversion, custom/default hook, cancel, idle unhook, errors and teardown; affected x86 build and retained package regressions. |
 | Expected Markers | One original mapping/cleanup owner; explicit `WSAEINPROGRESS` only while blocking; no socket/guest-buffer leak on failed or normal synchronous calls. |
-| Asset Needs | `build/t467-s2` only for disposable evidence; hash-recorded original guest test DLL; installed/default package and guest inputs remain read-only. |
+| Asset Needs | `build/t467-s2` only for disposable evidence; archive-derived, hash-recorded original guest DLL; installed tree and guest inputs remain read-only. |
 | Reporting Requirements | Exact correction/provenance register, source/build/guest/native evidence, diff and package accounting, and bounded S3 async handoff. |
 | Stop Conditions | Need for guest/driver change, a new provider/scheduler/registry, non-source-shaped correction, or semantics outside the synchronous bridge. |
 | Exit Criteria | The synchronous original bridge passes real guest/local-loopback positive, negative and cleanup evidence; all product gates and required publication complete before S2 closure. |
@@ -45,7 +45,7 @@ retained buffer owner. It changes no production or guest image.
 
 S1 closes as a source/composition inventory only.  Its [owner/lifetime
 matrix](../etc/evidence/m0-t467-s1-winsock-owner-matrix.md) fixes the selected
-original owners, ordinary WINSOCK-less package boundary, local provider
+original owners, installed-tree WINSOCK absence/archive availability, local provider
 witness and finite S2/S3 split; it changes no product or guest artifact.
 
 ## T463 S1 Closure Record

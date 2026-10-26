@@ -6,16 +6,17 @@ This is the source-first admission record for the selected Win16 Winsock
 surface.  It adds no provider, scheduler, callback carrier, socket registry,
 guest binary, runtime image or release asset.  It establishes that the
 original `WINSOCK.DLL` guest thunk, the selected original WOW32 bodies and
-the native `WSOCK32.DLL` provider form a finite binding, but that the default
-Windows 3.1 package intentionally has no `WINSOCK.DLL`; consequently it is
-not yet a default-package capability claim.
+the native `WSOCK32.DLL` provider form a finite binding.  The immutable
+`assets/winnt.zip` guest archive contains the original DLL; the currently
+installed `O:\WINNT` tree does not.  Consequently this is not yet an
+installed-package capability claim.
 
 The active WOW32 build selects `wsraw.c`, `wsdata.c` and `wsext.c`, and the
 formal x86 graph selects all 77 active original WOW32 sources.  `wwstbl2.h`
 contains the dispatch table for the guest module, while the guest module
 itself is an immutable, separately supplied original input.  No guest file is
-to be put in the normal release merely to make this testable.  S2 will stage a
-hash-recorded original guest DLL only in an isolated test package.
+to be put in the host release merely to make this testable.  S2 will unpack
+the archive into an isolated test package and record the original DLL hash.
 
 ## Authority and data ownership
 
