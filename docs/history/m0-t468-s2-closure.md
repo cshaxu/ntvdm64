@@ -25,7 +25,7 @@ than installing a substitute where it does not.
 ## Boundary and handoff
 
 S2 does not claim raw normal-job delivery, g454 provider completion, returned
-PrintDlg DC retirement, or abrupt task loss cleanup.  These are finite S3
-failure/retirement concerns.  The current published ten-image package remains
+PrintDlg DC retirement, or abrupt task loss cleanup.  These are finite next-
+subtask failure/retirement concerns.  The current published ten-image package remains
 `build/t467-s3/package-r2`; S2's tests and documentation contain no production
 binary and guest media remains unchanged.

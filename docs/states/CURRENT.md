@@ -41,6 +41,19 @@ ten-image package remains `build/t467-s3/package-r2` and guest media is unchange
 | Similar-Issue Sweep | Print DC, job handles, DEVMODE/DEVCAPS buffers, abort/cancel callbacks, endpoint errors and task/DC loss. |
 | Candidate Proposal | [WOW32 printing and spool](../proposals/proposal-wow32-printing-spool-001.md). |
 
+## S1 Closure Record
+
+S1 completed the source-shaped owner, ABI and retirement inventory.  Its
+[owner matrix](../etc/evidence/m0-t468-s1-printing-spool-owner-matrix.md)
+remains the authority for selected raw spool, HDC, device setup and PrintDlg
+ownership.
+
+## S2 Closure Record
+
+S2 accepted the bounded real endpoint evidence and explicit non-pass
+disposition in its [witness record](../etc/evidence/m0-t468-s2-hdc-print-witness.md).
+The [S2 closure](../history/m0-t468-s2-closure.md) retains the exact handoff.
+
 ## T463 S2 Closure Record
 
 S2 closes at the one mapped public-USER boundary in
