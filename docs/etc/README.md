@@ -67,6 +67,10 @@ owners while bounding project code to input, snapshot and resource transport.
 separates the selected original DLL from its narrow parent-worker ABI and
 keeps incomplete USER behavior visible as a runtime, rather than source, gap.
 
+[T473 S2 Redirector/monitor reconciliation](evidence/m0-t473-s2-redirector-monitor-reconciliation.md)
+finishes the source-owner sweep with bounded async-copy, monitor, VDD and
+debugger boundaries instead of private-subsystem substitutions.
+
 [T471 S4 aggregate review](evidence/m0-t471-s4-aggregate-review.md) records
 the unchanged installed/package identity, S1--S3 reconciliation and the sole
 owner-deferred physical WRITE non-pass for T-level acceptance.
