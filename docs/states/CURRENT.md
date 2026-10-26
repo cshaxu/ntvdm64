@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T470 S4**
+**Active: M0 T471 S1**
 
 T464 is closed at the published `0.0.464` ten-image package; [its closure](../history/m0-t464-closure.md)
 is authoritative. `books/` is expressly excluded and remains untracked pending
@@ -21,46 +21,32 @@ ten-image package remains `build/t467-s3/package-r2` and guest media is unchange
 
 ## Active Packet
 
-### M0 T470 S4 — ToolHelp/debugger candidate reconciliation
+### M0 T471 S1 — whole-provider artifact and prerequisite freeze
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T470 S4, Ordinary Mode. |
-| Admission And Approval | Automatic sequential admission after [T470 S3 closure](../history/m0-t470-s3-closure.md), under the owner-approved automatic S/T sequence. |
-| Objective | Reconcile the complete admitted ToolHelp/debugger scope, test/source evidence and immutable stopping boundaries for T closure. |
-| Non-goals | Guest change/rebuild; debugger replacement, new scheduler, VDMDBG direct-process control, ToolHelp query substitute or a new ABI. |
-| Reference Baseline | T470 S1--S3 evidence, accepted non-WOW debugger ledger and current released package identity. |
-| Files And ABI Surface | Evidence, test sources and closure authority only; no new runtime ABI. |
+| Identifier Mode | M0 T471 S1, Ordinary Mode. |
+| Admission And Approval | Automatic sequential admission after [T470 closure](../history/m0-t470-closure.md), under the owner-approved automatic S/T sequence. |
+| Objective | Freeze one ordinary package and reconcile preceding WOW32 evidence, dispatch/direct-data edges and explicit non-passes before three-application acceptance. |
+| Non-goals | Guest change/rebuild; temporary provider, test-only semantic substitute, hidden implementation or absorbing an earlier owner's missing repair. |
+| Reference Baseline | [Integrated-acceptance proposal](../proposals/proposal-wow32-integrated-acceptance-001.md), current package and preceding T451--T470 closures. |
+| Files And ABI Surface | Provider/evidence inventory and closure records; no new ABI before a proven owning gap. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Review all T470 diff/evidence, execute documentation governance, and verify no production/release/guest change was smuggled in. |
-| Expected Markers | Every admitted row has one owner, an explicit pass/non-pass disposition and a successor or stopping boundary. |
-| Asset Needs | Current source, T470 evidence and existing package only. |
-| Reporting Requirements | T closure with exact test evidence, no false release claim and next queue admission. |
-| Stop Conditions | Need for guest change, a second debugger/provider, unbounded private USER/NT assumptions, or a new observable semantic concession. |
-| Exit Criteria | Complete candidate closure or a finite explicitly recorded blocker. |
+| Verification | Produce a finite prerequisite/package matrix, source/ABI owner sweep and exact product-gate plan; run no broad product test until the selected artifact is frozen. |
+| Expected Markers | Every inherited row is accepted, explicit non-pass, or returned to its owning candidate; no placeholder/mirror ambiguity. |
+| Asset Needs | Current package, proposals, closure evidence and source only; guest inputs remain immutable. |
+| Reporting Requirements | Exact artifact hashes, prerequisite disposition and admitted S2 test matrix. |
+| Stop Conditions | Missing owner, an unapproved semantic concession, a hidden provider, guest change requirement, or mismatch among staged/release/installed artifacts. |
+| Exit Criteria | One frozen package and finite acceptance matrix with no unassigned prerequisite. |
 | Original Owner Request | Automatically proceed through the ordered WOW32 candidates after each bounded closure. |
-| Similar-Issue Sweep | All ToolHelp exports, class thunk, debugger event, remote callback, lifecycle and historical observer boundaries. |
-| Candidate Proposal | [WOW32 ToolHelp/debugger](../proposals/proposal-wow32-toolhelp-debugger-001.md). |
+| Similar-Issue Sweep | C11/C12, registration, dispatch, direct data, retained original limitations, package hash and each application gate. |
+| Candidate Proposal | [WOW32 integrated acceptance](../proposals/proposal-wow32-integrated-acceptance-001.md). |
 
-## S1 Closure Record
+## T470 Closure Record
 
-S1's [owner matrix](../etc/evidence/m0-t470-s1-toolhelp-debugger-owner-matrix.md)
-is authoritative for the original class-enumeration boundary and the
-non-WOW/WOW debugger split.
-
-## S2 Closure Record
-
-S2 closed the immutable ToolHelp query route at its
-[query disposition](../etc/evidence/m0-t470-s2-toolhelp-query-disposition.md).
-It adds only an independently authored diagnostic witness; no guest, runtime
-or release image changed.
-
-## S3 Closure Record
-
-S3 closed the WOW debugger producer and retirement audit at its
-[disposition](../etc/evidence/m0-t470-s3-wow-debugger-retirement.md).  It
-retains the original debugger owner, records the obsolete observer launch
-failure, and changes no runtime or guest image.
+T470 closed ToolHelp/debugger ownership at its
+[closure](../history/m0-t470-closure.md); immutable query/class limitations
+remain explicit non-passes rather than temporary implementation debt.
 
 ## T468 Closure Record
 

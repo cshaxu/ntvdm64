@@ -12,6 +12,10 @@ immutable guest/provider stopping boundary.
 records the original task/debug producer graph, retained native debugger
 evidence and the obsolete real-worker observer boundary.
 
+[T470 S4 ToolHelp/debugger reconciliation](evidence/m0-t470-s4-toolhelp-debugger-reconciliation.md)
+closes the admitted rows with explicit original limitations and no false
+runtime/release claim.
+
 [T469 S3 COMM retained-route acceptance](evidence/m0-t469-s3-comm-retained-route.md)
 records the current original-provider success-side fixture, exact environment
 non-passes, and the absence of an admitted serial substitute.
