@@ -35,8 +35,11 @@ the smallest source-shaped binding and no guest modification or rebuild.
 | Similar-Issue Sweep | Every mutation, deletion, failed commit, restart and cross-worker ordering path, including unchanged S2 token retirement and no-write guarantees. |
 | Candidate Proposal | [WOW32 Shell and layered Registry](../proposals/proposal-wow32-shell-registry-001.md). |
 
-S3 begins from the published S2 binding. It may not substitute persistence
-with a second provider or re-open the accepted raw-key/token boundary.
+S3 closes at the reviewed durable-overlay delivery.  [Its acceptance
+evidence](../etc/evidence/m0-t461-s3-registry-persistence-candidate.md)
+records the parent-owned commit/rollback contract, concurrent writer fixture,
+formal graphs and complete Product gate.  It changes only `ntvdm.exe`; guest
+media and the S2 raw-key/token boundary remain unchanged.
 
 ## T461 S1 Closure Record
 
