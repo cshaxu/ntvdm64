@@ -181,6 +181,10 @@ boundary as a non-pass.
 records the original raw carrier and the application-owned PrintDlg returned
 handles, without introducing a second host job manager.
 
+[T468 S4 printing acceptance](evidence/m0-t468-s4-printing-acceptance.md)
+records the retained HDC, raw-boundary and common-dialog witnesses against one
+unchanged package and the explicit provider limits.
+
 [T461 S1 Shell and layered Registry owner matrix](evidence/m0-t461-s1-shell-registry-owner-matrix.md)
 records the selected Shell service and seven Registry entries, the sole
 `NTVDM.REG` façade, its missing persistent-write/concurrency contract, and the

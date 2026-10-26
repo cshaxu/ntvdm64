@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T468 S4**
+**Active: M0 T469 S1**
 
 T464 is closed at the published `0.0.464` ten-image package; [its closure](../history/m0-t464-closure.md)
 is authoritative. `books/` is expressly excluded and remains untracked pending
@@ -12,34 +12,35 @@ Automatic progression is approved. Completed work follows
 the read-only `ntvdm64-wow32-audit`: recover selected original behavior with
 the smallest source-shaped binding and no guest modification or rebuild.
 
-T465, T466 and T467 are closed by their [DDE](../history/m0-t465-closure.md),
+T465, T466, T467 and T468 are closed by their [DDE](../history/m0-t465-closure.md),
 [multimedia](../history/m0-t466-closure.md) and
-[Winsock](../history/m0-t467-closure.md) closures.  T467's test-only S4 adds
+[Winsock](../history/m0-t467-closure.md) and
+[printing/spool](../history/m0-t468-closure.md) closures.  T467's test-only S4 adds
 the real async-select notification/disable/close witness; the published
 ten-image package remains `build/t467-s3/package-r2` and guest media is unchanged.
 
 ## Active Packet
 
-### M0 T468 S4 — Printing and spool acceptance
+### M0 T469 S1 — COMM contract and endpoint inventory
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T468 S4, Ordinary Mode. |
-| Admission And Approval | Automatic sequential admission after the bounded [S3 closure](../history/m0-t468-s3-closure.md), under the owner-approved automatic S/T sequence. |
-| Objective | Replay the selected available original printing routes together, retain external-provider non-passes explicitly, and close the candidate without adding a print policy. |
-| Non-goals | Guest change/rebuild; print provider, spooler, device emulation, replacement DC/job/callback owner, atomic dynamic-loader rewrite, or speculative task-cleanup replacement. |
-| Reference Baseline | [S3 closure](../history/m0-t468-s3-closure.md), [S3 retirement disposition](../etc/evidence/m0-t468-s3-printing-retirement.md), [S2 witness](../etc/evidence/m0-t468-s2-hdc-print-witness.md), and the printing/spool proposal. |
-| Files And ABI Surface | Existing original print owners plus immutable test-only witnesses; no new production ABI. |
+| Identifier Mode | M0 T469 S1, Ordinary Mode. |
+| Admission And Approval | Automatic sequential admission after [T468 closure](../history/m0-t468-closure.md), under the owner-approved automatic S/T sequence. |
+| Objective | Map selected original COMM open/config/read/write/status/event/close families, actual endpoint availability, and normal/failure/retirement owners before implementation. |
+| Non-goals | Guest change/rebuild; serial provider, virtual-port pair, polling loop, callback/task manager, inferred hardware success, or production repair. |
+| Reference Baseline | [COMM proposal](../proposals/proposal-wow32-comm-001.md), [minimum-diff COMM gate](../etc/operations/wow32-queue-minimal-diff-admission-governance.md), current package and existing external-COM debt record. |
+| Files And ABI Surface | Original WOW32 COMM owners, reached host serial bindings and existing observation fixtures; source audit only. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Run the HDC normal/cancel, raw-profile boundary, PrintDlg default-handle and hook-cancel witnesses using the retained package and real guest boundary. |
-| Expected Markers | One original owner per accepted object/callback; no new manager; exact external-provider non-passes remain explicit. |
-| Asset Needs | Immutable test-only guest probes and observed local provider; guest inputs remain immutable. |
-| Reporting Requirements | Case results, source-boundary interpretation, exact limits and package identity. |
-| Stop Conditions | Need for guest change, private spooler/USER recreation, a new manager/provider, or a new observable semantic concession. |
-| Exit Criteria | All selected runners pass against one unchanged package and unavailable endpoints are classified without a substitute policy. |
-| Original Owner Request | Automatically proceed to the next WOW32 task after closing the preceding T. |
-| Similar-Issue Sweep | HDC/DC, raw job, PrintDlg returned handles, cancellation callback, provider/profile boundary and task-loss owner. |
-| Candidate Proposal | [WOW32 printing and spool](../proposals/proposal-wow32-printing-spool-001.md). |
+| Verification | Source/ABI/lifetime matrix for each selected family, actual endpoint inventory and exact reusable test entrypoints; no runtime claim from static evidence. |
+| Expected Markers | One original owner per port/overlapped buffer/event/callback; explicit real endpoint or unavailable result; no new lifetime authority. |
+| Asset Needs | Read-only original source, actual serial-device inventory and existing fixtures; guest inputs remain immutable. |
+| Reporting Requirements | Owner graph, ABI/build conditions, endpoint result, normal/failure/retirement test plan and finite next-S boundary. |
+| Stop Conditions | Need for guest change, virtual provider, new async/callback manager, hidden retry/polling policy, or a new observable semantic concession. |
+| Exit Criteria | Every selected family has an original owner and finite source-shaped test/repair disposition; unavailable hardware is factual, not success. |
+| Original Owner Request | Automatically proceed through the ordered WOW32 candidates after each bounded closure. |
+| Similar-Issue Sweep | COM open/close, DCB/timeouts, synchronous and pending I/O, event/cancel, task loss, external device and stale callback. |
+| Candidate Proposal | [WOW32 COMM](../proposals/proposal-wow32-comm-001.md). |
 
 ## S1 Closure Record
 
@@ -60,6 +61,12 @@ S3 traced the original raw carrier and PrintDlg returned-object retirement in
 the [retirement disposition](../etc/evidence/m0-t468-s3-printing-retirement.md).
 It made no production or guest change and left no project-owned spool manager
 to add.
+
+## T468 Closure Record
+
+T468 closed the selected original printing/spool scope at the
+[T468 closure](../history/m0-t468-closure.md). The new active packet owns only
+the ordered COMM source inventory.
 
 ## T463 S2 Closure Record
 
