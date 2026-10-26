@@ -26,6 +26,14 @@ their S1 rows.  T471 only added test/evidence code after this freeze; it made
 no production source, release asset, installed-image or guest-media change.
 No new publication is required for a byte-identical package.
 
+The direct source-footprint comparison from the S1 freeze commit
+`d4e0e5f561e3357e87974e47d0bce75ea874217b` through this review contains only
+T471 evidence/status files and these observation scripts:
+`verify-wow-sol-gameplay.ps1`, `verify-wow-idle-workers.ps1`, and
+`verify-dos-wow-isolation.ps1`.  It contains no path under `src/`, no release
+asset, and no build-graph input.  Thus S4's conclusion is based on an
+unchanged runtime, not on a source-tree inference from successful probes.
+
 ## Reconciliation
 
 1. [S1](m0-t471-s1-provider-artifact-freeze.md) reconciles W01--W19 to their
