@@ -27,8 +27,11 @@ static HWND peer_window;
 #ifdef CLASSIC_DDE
 static HANDLE dde_ack_event;
 static HANDLE dde_reverse_event;
+static HANDLE dde_initiate_event;
 static HGLOBAL dde_payload;
 static volatile LONG dde_ack, dde_released, dde_retired;
+static volatile LONG dde_initiate_ack;
+static ATOM dde_initiate_service, dde_initiate_topic;
 static volatile LONG dde_reverse_received;
 static volatile LONG dde_native_control;
 static HGLOBAL dde_observed_packet;
@@ -331,6 +334,14 @@ static LRESULT CALLBACK peer_proc(HWND window, UINT message, WPARAM wp, LPARAM l
     case WM_DDE_ACK:
         {
             UINT lo=0,hi=0;
+            if (dde_initiate_event) {
+                check(window==peer_window && (HWND)wp==sender_window);
+                check(LOWORD((DWORD_PTR)lp)==dde_initiate_service &&
+                    HIWORD((DWORD_PTR)lp)==dde_initiate_topic);
+                InterlockedIncrement(&dde_initiate_ack);
+                check(SetEvent(dde_initiate_event));
+                return 0;
+            }
             check(UnpackDDElParam(WM_DDE_ACK,lp,&lo,&hi));
             check(lo==0x8000 && (HGLOBAL)(ULONG_PTR)hi==dde_payload);
             check(FreeDDElParam(WM_DDE_ACK,lp));
@@ -574,7 +585,7 @@ DWORD WINAPI MessagePeer(DWORD operation)
 {
     DWORD owner = 0, code = 1;
 #ifdef CLASSIC_DDE
-    DWORD report[16] = {0};
+    DWORD report[17] = {0};
 #else
     DWORD report[
 #ifdef MESSAGE_CROSS_WORKER
@@ -797,6 +808,34 @@ DWORD WINAPI MessagePeer(DWORD operation)
         dde_observed_packet=NULL;
         return errors ? 0 : 0x447a0095;
     }
+    if (operation == 22) {
+        if(GetCurrentThreadId()!=sender_thread || dde_initiate_event || !peer_window) return 0;
+        dde_initiate_service=GlobalAddAtomA("T465-DDE-SERVICE");
+        dde_initiate_topic=GlobalAddAtomA("T465-DDE-TOPIC");
+        if(!dde_initiate_service || !dde_initiate_topic) goto initiate_fail;
+        dde_initiate_event=CreateEventA(NULL,TRUE,FALSE,NULL);
+        if(!dde_initiate_event) goto initiate_fail;
+        InterlockedExchange(&dde_initiate_ack,0);
+        if(!PostMessageA(sender_window,WM_DDE_INITIATE,(WPARAM)peer_window,
+                         MAKELPARAM(dde_initiate_service,dde_initiate_topic))) goto initiate_fail;
+        return 0x447a0096;
+initiate_fail:
+        if(dde_initiate_event) { CloseHandle(dde_initiate_event); dde_initiate_event=NULL; }
+        if(dde_initiate_service) { GlobalDeleteAtom(dde_initiate_service); dde_initiate_service=0; }
+        if(dde_initiate_topic) { GlobalDeleteAtom(dde_initiate_topic); dde_initiate_topic=0; }
+        return 0;
+    }
+    if (operation == 23) {
+        DWORD wait;
+        if(GetCurrentThreadId()!=sender_thread || !dde_initiate_event) return 0;
+        wait=WaitForSingleObject(dde_initiate_event,5000);
+        check(wait==WAIT_OBJECT_0 && dde_initiate_ack==1);
+        check(CloseHandle(dde_initiate_event)); dde_initiate_event=NULL;
+        check(GlobalDeleteAtom(dde_initiate_service)==0);
+        check(GlobalDeleteAtom(dde_initiate_topic)==0);
+        dde_initiate_service=0; dde_initiate_topic=0;
+        return errors ? 0 : 0x447a0097;
+    }
     if (operation == 18) {
         if(GetCurrentThreadId()!=sender_thread || !dde_observed_packet || dde_free_slot) return 0;
         dde_free_calls=0;dde_free_result=(HGLOBAL)(ULONG_PTR)1;
@@ -937,6 +976,7 @@ DWORD WINAPI MessagePeer(DWORD operation)
     report[13]=(DWORD)dde_ack;
     report[14]=(DWORD)dde_released;
     report[15]=(DWORD)dde_retired;
+    report[16]=(DWORD)dde_initiate_ack;
     report[1]=(DWORD)errors;
 #endif
 #ifdef M4_COPYDATA_PROC32

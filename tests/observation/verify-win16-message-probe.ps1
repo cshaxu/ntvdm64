@@ -83,7 +83,7 @@ function Read-GuestReport([string]$path,[string]$name){
  if($CrossWorkerCoordinator){$recordBytes+=6;$signature='MSG7'}
  if($PendingSend){$recordBytes+=4;$signature='MSG8'}
  if($Construction){$recordBytes+=14;$signature='MSG9'}
- if($ClassicDde){$recordBytes+=12}
+ if($ClassicDde){$recordBytes+=14}
  if(!$bytes.Length -or $bytes.Length%$recordBytes){throw "Incomplete $name message records"}
  $fields=@('role','phase','errors','task','peerTask','basic','nested','early','posted','same','filtered','threadpost','text','native','destroyed')
  if($ThreadClientView){$fields+=@('clientVersion','clientExpected','clientChecks')}
@@ -91,7 +91,7 @@ function Read-GuestReport([string]$path,[string]$name){
  if($CrossWorkerCoordinator){$fields+=@('remoteTask','foreignExpected','launchReady')}
  if($PendingSend){$fields+=@('waitBlocked','waitDeath')}
  if($Construction){$fields+=@('mdiCreated','mdiDestroyed','mdiTitleMutation','mdiParamMutation','mdiTextChecks','helpCalls','helpFreed')}
- if($ClassicDde){$fields+=@('ddeReceived','ddeReleaseAttempt','ddeRetired','ddeStage','ddeReverseAck','ddePacketCount')}
+ if($ClassicDde){$fields+=@('ddeReceived','ddeReleaseAttempt','ddeRetired','ddeStage','ddeReverseAck','ddePacketCount','ddeInitiateAck')}
  $rows=@()
  for($offset=0;$offset -lt $bytes.Length;$offset+=$recordBytes){
   if([Text.Encoding]::ASCII.GetString($bytes,$offset,4) -ne $signature){throw "Invalid $name signature"}
@@ -262,14 +262,14 @@ public static class WowMessageLogonEnvironment {
  }
  $bytes=[IO.File]::ReadAllBytes("$root/MSGHOST.bin")
  $nativeBytes=if($StructuredPayloads){52}else{48}
- if($ClassicDde){$nativeBytes+=12}
+ if($ClassicDde){$nativeBytes+=16}
  if($CopyDataProc32){$nativeBytes+=8}
  if($ExternalNativePeer){$nativeBytes+=8}
  if($CrossWorkerCoordinator){$nativeBytes+=4}
  if($bytes.Length -ne $nativeBytes -or [Text.Encoding]::ASCII.GetString($bytes,0,4) -ne 'NMSG'){throw 'Missing native peer report'}
  $names=@('signature','errors','pid','senderThread','receiverThread','nativeThread','received','nested','replied','text','exit','windowAlive');$nativeReport=[ordered]@{}
  if($StructuredPayloads){$names+='structures'}
- if($ClassicDde){$names+=@('ddeAck','ddeReleased','ddeRetired')}
+ if($ClassicDde){$names+=@('ddeAck','ddeReleased','ddeRetired','ddeInitiateAck')}
  if($CopyDataProc32){$names+=@('proc32Fresh','proc32Borrowed')}
  if($ExternalNativePeer){$names+=@('externalPid','externalBits')}
  if($CrossWorkerCoordinator){$names+='receiverPid'}
@@ -306,13 +306,14 @@ public static class WowMessageLogonEnvironment {
  if($StructuredPayloads -and $nativeReport.structures -ne 6){throw 'Both native directions did not complete all three structure families'}
  if($ClassicDde){
   $expectedReverseAck=if($SyncDdeDiagnostic){2}else{1}
-  if($last.ddeReceived -ne 1 -or $last.ddeReleaseAttempt -ne 1 -or $last.ddeRetired -ne 1 -or $last.ddeReverseAck -ne $expectedReverseAck -or $last.ddePacketCount -ne 3 -or
+  if($last.ddeReceived -ne 1 -or $last.ddeReleaseAttempt -ne 1 -or $last.ddeRetired -ne 1 -or $last.ddeInitiateAck -ne 1 -or $last.ddeReverseAck -ne $expectedReverseAck -or $last.ddePacketCount -ne 3 -or
      $peer.ddeReceived -ne 0 -or $peer.ddeReverseAck -ne 0 -or $peer.ddePacketCount -ne 0 -or $nativeReport.ddeAck -ne 1 -or $nativeReport.ddeReleased -ne 1 -or
-     $nativeReport.ddeRetired -ne 1){throw 'Actual classic DDE execute/ack/free lifecycle incomplete'}
+     $nativeReport.ddeRetired -ne 1 -or $nativeReport.ddeInitiateAck -ne 1){throw 'Actual classic DDE execute/ack/initiate/free lifecycle incomplete'}
   @{execute='native HGLOBAL -> original WM32DDEExecute -> Win16 alias';ack='Win16 PostMessage WM_DDE_ACK -> original reverse thunk -> native packed lParam';
+    initiate='native WM_DDE_INITIATE service/topic atoms -> original initiator registration -> Win16 direct-atom WM_DDE_ACK -> original registration retirement';
     reverse=if($SyncDdeDiagnostic){'Win16-owned EXECUTE posted and sent synchronously -> native peer validates payload -> ACK returns original guest handle'}else{'Win16-owned EXECUTE posted -> native peer validates payload -> ACK returns original guest handle'};release='guest early GlobalFree request is deferred; native GlobalFree retires both aliases';guest=@{received=$last.ddeReceived;releaseAttempt=$last.ddeReleaseAttempt;retired=$last.ddeRetired;reverseAck=$last.ddeReverseAck};
-    packets='Win16-to-native DATA/POKE/ADVISE CF_TEXT; guest free calls original WOW32 GlobalFree exactly once per native allocation, each returns success';native=@{ack=$nativeReport.ddeAck;released=$nativeReport.ddeReleased;retired=$nativeReport.ddeRetired};
-    originalGuestChanged=$false;scope='EXECUTE/ACK both directions, sender-owned DATA/POKE/ADVISE CF_TEXT, and a test-only rejected DATA PostMessage rollback; no DDEML endpoint, item atoms, nested formats or heap-failure injection'}|ConvertTo-Json|Set-Content "$root/classic-dde-result.json"
+    packets='Win16-to-native DATA/POKE/ADVISE CF_TEXT; guest free calls original WOW32 GlobalFree exactly once per native allocation, each returns success';native=@{ack=$nativeReport.ddeAck;released=$nativeReport.ddeReleased;retired=$nativeReport.ddeRetired;initiateAck=$nativeReport.ddeInitiateAck};
+    originalGuestChanged=$false;scope='INITIATE/ACK atom negotiation, EXECUTE/ACK both directions, sender-owned DATA/POKE/ADVISE CF_TEXT, and a test-only rejected DATA PostMessage rollback; no DDEML endpoint, item atoms beyond INITIATE, nested formats or heap-failure injection'}|ConvertTo-Json|Set-Content "$root/classic-dde-result.json"
  }
  if($TransactionDiagnosticManifest){
   $trace=@(Get-Content "$root/transaction.trace")

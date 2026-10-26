@@ -196,6 +196,10 @@ hashes, and finite unavailable private-server presentation boundary.
 records the selected classic-DDE owner/callback/alias boundary, the retained
 DDEML private-USER stopping boundary, and the finite S2/S3 transfer.
 
+[T465 S2 classic DDE conversation acceptance](evidence/m0-t465-s2-classic-dde-conversation-acceptance.md)
+records the real INITIATE atom ACK, EXECUTE/ACK and DATA/POKE/ADVISE original
+transport witness, with DDEML explicitly excluded.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.

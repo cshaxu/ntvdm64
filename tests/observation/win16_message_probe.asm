@@ -458,6 +458,27 @@ result 0x8e
 inc word [native_count-data]
 cmp word [dde_retired-data],1
 jne failed
+; INITIATE is a direct service/topic atom pair, not a packed DDE lParam.
+; Exercise the original initiator registration independently of EXECUTE.
+mov ax,22
+call native_operation
+result 0x96
+.wait_initiate:
+peek 0x3e0,0x3e0,1
+test ax,ax
+jnz .dispatch_initiate
+call deadline
+api 1,29
+jmp .wait_initiate
+.dispatch_initiate:
+push ds
+push word message-data
+api 2,114
+cmp word [dde_initiate_ack-data],1
+jne failed
+mov ax,23
+call native_operation
+result 0x97
 ; Independent reverse-direction witness: a Win16-owned command is posted
 ; to the native peer, which ACKs the native alias back to this task.
 mov ax,15
@@ -949,6 +970,8 @@ cmp word [bp+12],0x47e
 je .death_stale
 %endif
 %ifdef CLASSIC_DDE
+cmp word [bp+12],0x3e0
+je .dde_initiate
 cmp word [bp+12],0x3e8
 je .dde_execute
 cmp word [bp+12],0x3e4
@@ -1470,6 +1493,25 @@ jne .bad
 jmp .value
 %endif
 %ifdef CLASSIC_DDE
+.dde_initiate:
+; Preserve the atom pair directly in the INITIATE ACK.
+mov ax,[bp+6]
+mov dx,[bp+8]
+or ax,ax
+jz .bad
+or dx,dx
+jz .bad
+push word [native_window-data]
+push word 0x3e4
+push word [window-data]
+push dx
+push ax
+api 2,110
+test ax,ax
+jz .bad
+inc word [dde_initiate_ack-data]
+xor ax,ax
+jmp .value
 .dde_execute:
 mov word [dde_stage-data],1
 mov ax,[bp+8]
@@ -1801,6 +1843,7 @@ dde_retired: dw 0
 dde_stage: dw 0
 dde_reverse_ack: dw 0
 dde_packet_count: dw 0
+dde_initiate_ack: dw 0
 %endif
 %ifdef CROSS_WORKER
 remote_task: dw 0
