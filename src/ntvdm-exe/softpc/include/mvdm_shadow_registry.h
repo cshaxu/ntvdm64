@@ -12,6 +12,15 @@ VOID ntvdm_shadow_registry_shutdown(VOID);
 
 LONG WINAPI ntvdm_shadow_reg_open_key_ex(HKEY root, LPCSTR subkey, DWORD options,
     REGSAM access, PHKEY result);
+LONG WINAPI ntvdm_shadow_reg_open_key(HKEY root, LPCSTR subkey, PHKEY result);
+LONG WINAPI ntvdm_shadow_reg_create_key(HKEY root, LPCSTR subkey, PHKEY result);
+LONG WINAPI ntvdm_shadow_reg_delete_key(HKEY key, LPCSTR subkey);
+LONG WINAPI ntvdm_shadow_reg_set_value(HKEY key, LPCSTR subkey, DWORD type,
+    LPCSTR data, DWORD data_size);
+LONG WINAPI ntvdm_shadow_reg_query_value(HKEY key, LPCSTR subkey, LPSTR data,
+    PLONG data_size);
+LONG WINAPI ntvdm_shadow_reg_enum_key(HKEY key, DWORD index, LPSTR name,
+    DWORD name_size);
 LONG WINAPI ntvdm_shadow_reg_query_value_ex(HKEY key, LPCSTR value, LPDWORD reserved,
     LPDWORD type, LPBYTE data, LPDWORD data_size);
 LONG WINAPI ntvdm_shadow_reg_query_info_key(HKEY key, LPTSTR class_name,

@@ -27,13 +27,35 @@ typedef struct _MVDM_SHADOW_VALUE {
     DWORD data_size;
 } MVDM_SHADOW_VALUE;
 
+/* S2 keeps the product layer in process only.  This is intentionally not a
+ * second provider: it is merely the mutable top layer of NTVDM.REG's existing
+ * view.  S3 owns durable serialization and atomic writing. */
+typedef struct _MVDM_SHADOW_OVERLAY_VALUE {
+    struct _MVDM_SHADOW_OVERLAY_VALUE *next;
+    char *name;
+    DWORD type;
+    BYTE *data;
+    DWORD data_size;
+    BOOL deleted;
+} MVDM_SHADOW_OVERLAY_VALUE;
+
+typedef struct _MVDM_SHADOW_OVERLAY_KEY {
+    struct _MVDM_SHADOW_OVERLAY_KEY *next;
+    char *section;
+    BOOL created;
+    BOOL deleted;
+    MVDM_SHADOW_OVERLAY_VALUE *values;
+} MVDM_SHADOW_OVERLAY_KEY;
+
 static char *shadow_contents;
 static DWORD shadow_size;
 static BOOL shadow_initialized;
 static char shadow_trace_path[MAX_PATH];
 static MVDM_SHADOW_KEY *shadow_keys;
+static MVDM_SHADOW_OVERLAY_KEY *shadow_overlay_keys;
 
 static VOID free_host_values(MVDM_SHADOW_VALUE *value);
+static VOID free_overlay_keys(VOID);
 
 static VOID shadow_trace(LPCSTR event)
 {
@@ -110,6 +132,7 @@ VOID ntvdm_shadow_registry_shutdown(VOID)
         free_host_values(key->host_values);
         free(key);
     }
+    free_overlay_keys();
     free(shadow_contents);
     shadow_contents=NULL;
     shadow_size=0;
@@ -154,13 +177,17 @@ static BOOL value_line(const char *line, const char **name, DWORD *name_length,
     const char *end=line_end(line), *cursor=line, *equals;
 
     while (cursor<end && (*cursor==' ' || *cursor=='\t')) ++cursor;
-    if (cursor==end || *cursor==';' || *cursor!='"') return FALSE;
-    ++cursor;
-    *name=cursor;
-    while (cursor<end && *cursor!='"') ++cursor;
-    if (cursor==end) return FALSE;
-    *name_length=(DWORD)(cursor-*name);
-    ++cursor;
+    if (cursor==end || *cursor==';') return FALSE;
+    if (*cursor=='@') {
+        *name=cursor; *name_length=0; ++cursor;
+    } else if (*cursor=='"') {
+        ++cursor;
+        *name=cursor;
+        while (cursor<end && *cursor!='"') ++cursor;
+        if (cursor==end) return FALSE;
+        *name_length=(DWORD)(cursor-*name);
+        ++cursor;
+    } else return FALSE;
     equals=cursor;
     while (equals<end && (*equals==' ' || *equals=='\t')) ++equals;
     if (equals==end || *equals!='=') return FALSE;
@@ -620,7 +647,7 @@ NTSTATUS NTAPI ntvdm_shadow_nt_close(HANDLE handle)
     return status;
 }
 
-LONG WINAPI ntvdm_shadow_reg_open_key_ex(HKEY root, LPCSTR subkey, DWORD options,
+static LONG WINAPI ntvdm_shadow_reg_open_key_ex_readonly(HKEY root, LPCSTR subkey, DWORD options,
     REGSAM access, PHKEY result)
 {
     MVDM_SHADOW_KEY *key;
@@ -668,7 +695,7 @@ LONG WINAPI ntvdm_shadow_reg_open_key_ex(HKEY root, LPCSTR subkey, DWORD options
     return ERROR_SUCCESS;
 }
 
-LONG WINAPI ntvdm_shadow_reg_query_value_ex(HKEY handle, LPCSTR value,
+static LONG WINAPI ntvdm_shadow_reg_query_value_ex_readonly(HKEY handle, LPCSTR value,
     LPDWORD reserved, LPDWORD type, LPBYTE data, LPDWORD data_size)
 {
     MVDM_SHADOW_KEY *key=validate_key(handle);
@@ -714,7 +741,7 @@ LONG WINAPI ntvdm_shadow_reg_query_value_ex(HKEY handle, LPCSTR value,
     return ERROR_SUCCESS;
 }
 
-LONG WINAPI ntvdm_shadow_reg_query_info_key(HKEY handle, LPTSTR class_name,
+static LONG WINAPI ntvdm_shadow_reg_query_info_key_readonly(HKEY handle, LPTSTR class_name,
     LPDWORD class_length, LPDWORD reserved, LPDWORD subkeys,
     LPDWORD maximum_subkey_length, LPDWORD maximum_class_length,
     LPDWORD values, LPDWORD maximum_value_name_length,
@@ -781,7 +808,7 @@ LONG WINAPI ntvdm_shadow_reg_query_info_key(HKEY handle, LPTSTR class_name,
     return ERROR_SUCCESS;
 }
 
-LONG WINAPI ntvdm_shadow_reg_enum_value(HKEY handle, DWORD index, LPSTR value_name,
+static LONG WINAPI ntvdm_shadow_reg_enum_value_readonly(HKEY handle, DWORD index, LPSTR value_name,
     LPDWORD value_name_size, LPDWORD reserved, LPDWORD type, LPBYTE data,
     LPDWORD data_size)
 {
@@ -901,4 +928,355 @@ LONG WINAPI ntvdm_shadow_reg_close_key(HKEY handle)
     free(key);
     shadow_trace("CLOSE");
     return ERROR_SUCCESS;
+}
+
+static char *shadow_duplicate(LPCSTR text)
+{
+    size_t length;
+    char *copy;
+    if (!text) return NULL;
+    length=strlen(text)+1u;
+    copy=(char *)malloc(length);
+    if (copy) memcpy(copy,text,length);
+    return copy;
+}
+
+static VOID free_overlay_values(MVDM_SHADOW_OVERLAY_VALUE *value)
+{
+    while (value) {
+        MVDM_SHADOW_OVERLAY_VALUE *next=value->next;
+        free(value->name); free(value->data); free(value);
+        value=next;
+    }
+}
+
+static VOID free_overlay_keys(VOID)
+{
+    while (shadow_overlay_keys) {
+        MVDM_SHADOW_OVERLAY_KEY *key=shadow_overlay_keys;
+        shadow_overlay_keys=key->next;
+        free(key->section); free_overlay_values(key->values); free(key);
+    }
+}
+
+static MVDM_SHADOW_OVERLAY_KEY *overlay_key(LPCSTR section, BOOL add)
+{
+    MVDM_SHADOW_OVERLAY_KEY *key;
+    for (key=shadow_overlay_keys; key; key=key->next)
+        if (!_stricmp(key->section,section)) return key;
+    if (!add) return NULL;
+    key=(MVDM_SHADOW_OVERLAY_KEY *)calloc(1,sizeof(*key));
+    if (!key) return NULL;
+    key->section=shadow_duplicate(section);
+    if (!key->section) { free(key); return NULL; }
+    key->next=shadow_overlay_keys;
+    shadow_overlay_keys=key;
+    return key;
+}
+
+static MVDM_SHADOW_OVERLAY_VALUE *overlay_value(MVDM_SHADOW_OVERLAY_KEY *key,
+    LPCSTR name, BOOL add)
+{
+    MVDM_SHADOW_OVERLAY_VALUE *value;
+    for (value=key ? key->values : NULL; value; value=value->next)
+        if (!_stricmp(value->name,name ? name : "")) return value;
+    if (!add || !key) return NULL;
+    value=(MVDM_SHADOW_OVERLAY_VALUE *)calloc(1,sizeof(*value));
+    if (!value) return NULL;
+    value->name=shadow_duplicate(name ? name : "");
+    if (!value->name) { free(value); return NULL; }
+    value->next=key->values; key->values=value;
+    return value;
+}
+
+static BOOL section_is_child(LPCSTR parent, LPCSTR section, LPCSTR *child,
+    DWORD *length)
+{
+    size_t prefix;
+    const char *slash,*end;
+    if (!parent || !section) return FALSE;
+    prefix=strlen(parent);
+    if (_strnicmp(parent,section,prefix) || section[prefix]!='\\') return FALSE;
+    *child=section+prefix+1u;
+    slash=strchr(*child,'\\');
+    end=slash ? slash : *child+strlen(*child);
+    *length=(DWORD)(end-*child);
+    return *length!=0;
+}
+
+static BOOL section_baseline_exists(LPCSTR section)
+{
+    const char *line;
+    size_t length;
+    if (!section) return FALSE;
+    if (!_stricmp(section,"HKEY_CLASSES_ROOT") ||
+        !_stricmp(section,"HKEY_LOCAL_MACHINE")) return TRUE;
+    if (find_section(section)) return TRUE;
+    length=strlen(section);
+    for (line=shadow_contents; line && line<shadow_contents+shadow_size;
+         line=next_line(line)) {
+        const char *end=line_end(line);
+        if (line[0]=='[' && (size_t)(end-line)>length+2u &&
+            !_strnicmp(line+1,section,length) && line[length+1]=='\\') return TRUE;
+    }
+    return FALSE;
+}
+
+static BOOL section_visible(LPCSTR section)
+{
+    MVDM_SHADOW_OVERLAY_KEY *overlay=overlay_key(section,FALSE);
+    return !(overlay && overlay->deleted) &&
+        (section_baseline_exists(section) || (overlay && overlay->created));
+}
+
+static LONG section_from_root(HKEY root, LPCSTR subkey, char *section,
+    DWORD capacity)
+{
+    MVDM_SHADOW_KEY *key;
+    LPCSTR base;
+    size_t length;
+    if (root==HKEY_CLASSES_ROOT) base="HKEY_CLASSES_ROOT";
+    else if (root==HKEY_LOCAL_MACHINE) base="HKEY_LOCAL_MACHINE";
+    else {
+        key=validate_key(root);
+        if (!key) return ERROR_INVALID_HANDLE;
+        base=key->section;
+    }
+    length=strlen(base);
+    if (subkey && *subkey) length+=1u+strlen(subkey);
+    if (length+1u>capacity) return ERROR_FILE_NOT_FOUND;
+    lstrcpyA(section,base);
+    if (subkey && *subkey) { lstrcatA(section,"\\"); lstrcatA(section,subkey); }
+    return ERROR_SUCCESS;
+}
+
+static LONG open_section(HKEY root, LPCSTR subkey, BOOL create, PHKEY result)
+{
+    MVDM_SHADOW_KEY *key;
+    MVDM_SHADOW_OVERLAY_KEY *overlay;
+    char section[512];
+    LONG status;
+    if (!result || !shadow_initialized) return ERROR_FILE_NOT_FOUND;
+    *result=NULL;
+    status=section_from_root(root,subkey,section,sizeof(section));
+    if (status!=ERROR_SUCCESS) return status;
+    if (!section_visible(section)) {
+        if (!create) return ERROR_FILE_NOT_FOUND;
+        overlay=overlay_key(section,TRUE);
+        if (!overlay) return ERROR_NOT_ENOUGH_MEMORY;
+        overlay->created=TRUE; overlay->deleted=FALSE;
+    }
+    key=(MVDM_SHADOW_KEY *)calloc(1,sizeof(*key));
+    if (!key) return ERROR_NOT_ENOUGH_MEMORY;
+    lstrcpyA(key->section,section);
+    if (!_stricmp(section,"HKEY_LOCAL_MACHINE\\" MVDM_SERIALCOMM_SUBKEY)) {
+        key->source=MVDM_SHADOW_KEY_SERIALCOMM; key->serial_ports=serial_port_mask();
+    } else if (admitted_host_section(section)) {
+        (void)snapshot_host_values(key);
+    }
+    register_key(key); *result=(HKEY)key;
+    return ERROR_SUCCESS;
+}
+
+static LONG query_overlay_value(MVDM_SHADOW_KEY *key, LPCSTR name,
+    LPDWORD type, LPBYTE data, LPDWORD data_size)
+{
+    MVDM_SHADOW_OVERLAY_KEY *overlay=overlay_key(key->section,FALSE);
+    MVDM_SHADOW_OVERLAY_VALUE *value=overlay_value(overlay,name,FALSE);
+    if (!value) return ERROR_FILE_NOT_FOUND;
+    if (value->deleted) return ERROR_FILE_NOT_FOUND;
+    if (type) *type=value->type;
+    if (!data || !data_size || *data_size<value->data_size) {
+        if (data_size) *data_size=value->data_size;
+        return ERROR_MORE_DATA;
+    }
+    memcpy(data,value->data,value->data_size); *data_size=value->data_size;
+    return ERROR_SUCCESS;
+}
+
+LONG WINAPI ntvdm_shadow_reg_open_key(HKEY root, LPCSTR subkey, PHKEY result)
+{
+    return open_section(root,subkey,FALSE,result);
+}
+
+LONG WINAPI ntvdm_shadow_reg_create_key(HKEY root, LPCSTR subkey, PHKEY result)
+{
+    return open_section(root,subkey,TRUE,result);
+}
+
+LONG WINAPI ntvdm_shadow_reg_open_key_ex(HKEY root, LPCSTR subkey, DWORD options,
+    REGSAM access, PHKEY result)
+{
+    (void)options; (void)access;
+    return open_section(root,subkey,FALSE,result);
+}
+
+LONG WINAPI ntvdm_shadow_reg_set_value(HKEY handle, LPCSTR subkey, DWORD type,
+    LPCSTR data, DWORD data_size)
+{
+    MVDM_SHADOW_KEY *key=validate_key(handle);
+    MVDM_SHADOW_OVERLAY_KEY *overlay;
+    MVDM_SHADOW_OVERLAY_VALUE *value;
+    HKEY child;
+    LONG status;
+    if (!key || type!=REG_SZ || !data) return ERROR_INVALID_PARAMETER;
+    status=open_section(handle,subkey,TRUE,&child);
+    if (status!=ERROR_SUCCESS) return status;
+    key=validate_key(child);
+    overlay=overlay_key(key->section,TRUE);
+    value=overlay_value(overlay,"",TRUE);
+    if (!overlay || !value) { ntvdm_shadow_reg_close_key(child); return ERROR_NOT_ENOUGH_MEMORY; }
+    free(value->data); value->data=(BYTE *)malloc(data_size);
+    if (!value->data) { value->data_size=0; ntvdm_shadow_reg_close_key(child); return ERROR_NOT_ENOUGH_MEMORY; }
+    memcpy(value->data,data,data_size); value->data_size=data_size; value->type=type;
+    value->deleted=FALSE; overlay->created=TRUE; overlay->deleted=FALSE;
+    return ntvdm_shadow_reg_close_key(child);
+}
+
+LONG WINAPI ntvdm_shadow_reg_query_value(HKEY handle, LPCSTR subkey, LPSTR data,
+    PLONG data_size)
+{
+    HKEY child; DWORD size,type; LONG status;
+    if (!data_size) return ERROR_INVALID_PARAMETER;
+    status=open_section(handle,subkey,FALSE,&child);
+    if (status!=ERROR_SUCCESS) return status;
+    size=(DWORD)*data_size;
+    status=ntvdm_shadow_reg_query_value_ex(child,"",NULL,&type,(LPBYTE)data,&size);
+    *data_size=(LONG)size; ntvdm_shadow_reg_close_key(child);
+    return status;
+}
+
+LONG WINAPI ntvdm_shadow_reg_query_value_ex(HKEY handle, LPCSTR value,
+    LPDWORD reserved, LPDWORD type, LPBYTE data, LPDWORD data_size)
+{
+    MVDM_SHADOW_KEY *key=validate_key(handle);
+    if (!key) return ERROR_INVALID_HANDLE;
+    {
+        MVDM_SHADOW_OVERLAY_KEY *overlay=overlay_key(key->section,FALSE);
+        if (overlay_value(overlay,value ? value : "",FALSE))
+            return query_overlay_value(key,value ? value : "",type,data,data_size);
+    }
+    return ntvdm_shadow_reg_query_value_ex_readonly(handle,value,reserved,type,data,data_size);
+}
+
+LONG WINAPI ntvdm_shadow_reg_delete_key(HKEY handle, LPCSTR subkey)
+{
+    MVDM_SHADOW_KEY *key=validate_key(handle);
+    MVDM_SHADOW_OVERLAY_KEY *overlay;
+    char section[512], child[512]; HKEY target; LONG status;
+    if (!key || !subkey || !*subkey) return ERROR_INVALID_PARAMETER;
+    status=section_from_root(handle,subkey,section,sizeof(section));
+    if (status!=ERROR_SUCCESS || !section_visible(section)) return ERROR_FILE_NOT_FOUND;
+    status=open_section(handle,subkey,FALSE,&target);
+    if (status!=ERROR_SUCCESS) return status;
+    status=ntvdm_shadow_reg_enum_key(target,0,child,sizeof(child));
+    ntvdm_shadow_reg_close_key(target);
+    if (status==ERROR_SUCCESS) return ERROR_ACCESS_DENIED;
+    if (status!=ERROR_NO_MORE_ITEMS) return status;
+    overlay=overlay_key(section,TRUE);
+    if (!overlay) return ERROR_NOT_ENOUGH_MEMORY;
+    overlay->deleted=TRUE; return ERROR_SUCCESS;
+}
+
+LONG WINAPI ntvdm_shadow_reg_enum_key(HKEY handle, DWORD index, LPSTR name,
+    DWORD name_size)
+{
+    MVDM_SHADOW_KEY *key=validate_key(handle);
+    const char *line; MVDM_SHADOW_OVERLAY_KEY *overlay; DWORD current=0;
+    if (!key || !name || !name_size) return ERROR_INVALID_HANDLE;
+    for (line=shadow_contents; line && line<shadow_contents+shadow_size; line=next_line(line)) {
+        const char *child; DWORD length; const char *end=line_end(line);
+        if (line[0]!='[' || end<=line+2) continue;
+        { char section[512]; DWORD section_length=(DWORD)(end-line-2);
+          if (section_length>=sizeof(section)) continue;
+          memcpy(section,line+1,section_length); section[section_length]=0;
+          if (!section_is_child(key->section,section,&child,&length) || !section_visible(section)) continue;
+          if (current++==index) { if (length+1u>name_size) return ERROR_MORE_DATA; memcpy(name,child,length); name[length]=0; return ERROR_SUCCESS; }
+        }
+    }
+    for (overlay=shadow_overlay_keys; overlay; overlay=overlay->next) {
+        const char *child; DWORD length; DWORD prior=0; const char *scan;
+        if (overlay->deleted || !section_is_child(key->section,overlay->section,&child,&length)) continue;
+        for (scan=shadow_contents; scan && scan<shadow_contents+shadow_size; scan=next_line(scan)) {
+            const char *old_child; DWORD old_length; const char *end=line_end(scan);
+            if (scan[0]=='[' && end>scan+2) { char old[512]; DWORD n=(DWORD)(end-scan-2);
+                if (n<sizeof(old)) { memcpy(old,scan+1,n); old[n]=0;
+                    if (section_is_child(key->section,old,&old_child,&old_length) && old_length==length && !_strnicmp(old_child,child,length)) { prior=1; break; } }
+            }
+        }
+        if (prior) continue;
+        if (current++==index) { if (length+1u>name_size) return ERROR_MORE_DATA; memcpy(name,child,length); name[length]=0; return ERROR_SUCCESS; }
+    }
+    return ERROR_NO_MORE_ITEMS;
+}
+
+LONG WINAPI ntvdm_shadow_reg_query_info_key(HKEY handle, LPTSTR class_name,
+    LPDWORD class_length, LPDWORD reserved, LPDWORD subkeys,
+    LPDWORD maximum_subkey_length, LPDWORD maximum_class_length,
+    LPDWORD values, LPDWORD maximum_value_name_length,
+    LPDWORD maximum_value_data_length, LPDWORD security_descriptor,
+    PFILETIME last_write_time)
+{
+    MVDM_SHADOW_KEY *key=validate_key(handle); char child[512]; DWORD count=0,max=0;
+    LONG status;
+    if (!key) return ERROR_INVALID_HANDLE;
+    while ((status=ntvdm_shadow_reg_enum_key(handle,count,child,sizeof(child)))==ERROR_SUCCESS) {
+        DWORD length=(DWORD)lstrlenA(child); if (length>max) max=length; ++count;
+    }
+    if (status!=ERROR_NO_MORE_ITEMS) return status;
+    if (subkeys) *subkeys=count;
+    if (maximum_subkey_length) *maximum_subkey_length=max;
+    {
+        MVDM_SHADOW_OVERLAY_KEY *overlay=overlay_key(key->section,FALSE);
+        if (overlay && overlay->created && !find_section(key->section)) {
+            MVDM_SHADOW_OVERLAY_VALUE *value;
+            DWORD value_count=0,value_name_max=0,value_data_max=0;
+            for (value=overlay->values; value; value=value->next) if (!value->deleted) {
+                DWORD length=(DWORD)lstrlenA(value->name);
+                ++value_count;
+                if (length>value_name_max) value_name_max=length;
+                if (value->data_size>value_data_max) value_data_max=value->data_size;
+            }
+            if (values) *values=value_count;
+            if (maximum_value_name_length) *maximum_value_name_length=value_name_max;
+            if (maximum_value_data_length) *maximum_value_data_length=value_data_max;
+            if (class_length) *class_length=0;
+            return ERROR_SUCCESS;
+        }
+    }
+    return ntvdm_shadow_reg_query_info_key_readonly(handle,class_name,class_length,reserved,
+        NULL,NULL,maximum_class_length,values,maximum_value_name_length,
+        maximum_value_data_length,security_descriptor,last_write_time);
+}
+
+LONG WINAPI ntvdm_shadow_reg_enum_value(HKEY handle, DWORD index, LPSTR value_name,
+    LPDWORD value_name_size, LPDWORD reserved, LPDWORD type, LPBYTE data,
+    LPDWORD data_size)
+{
+    MVDM_SHADOW_KEY *key=validate_key(handle);
+    MVDM_SHADOW_OVERLAY_KEY *overlay;
+    MVDM_SHADOW_OVERLAY_VALUE *value;
+    DWORD length;
+    if (!key || !value_name_size) return ERROR_INVALID_HANDLE;
+    overlay=overlay_key(key->section,FALSE);
+    if (overlay && overlay->created && !find_section(key->section)) {
+        for (value=overlay->values; value && index; value=value->next)
+            if (!value->deleted) --index;
+        while (value && value->deleted) value=value->next;
+        if (!value) return ERROR_NO_MORE_ITEMS;
+        length=(DWORD)lstrlenA(value->name);
+        if (*value_name_size<=length || !data_size || (!data && *data_size)) {
+            *value_name_size=length; return ERROR_MORE_DATA;
+        }
+        if (*data_size<value->data_size) {
+            *value_name_size=length; *data_size=value->data_size; return ERROR_MORE_DATA;
+        }
+        memcpy(value_name,value->name,length+1u); *value_name_size=length;
+        if (type) *type=value->type;
+        if (data) memcpy(data,value->data,value->data_size);
+        *data_size=value->data_size;
+        return ERROR_SUCCESS;
+    }
+    return ntvdm_shadow_reg_enum_value_readonly(handle,index,value_name,value_name_size,
+        reserved,type,data,data_size);
 }
