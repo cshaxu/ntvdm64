@@ -149,6 +149,10 @@ binding boundary before S2 implementation; it does not claim a runtime path.
 records the retained original callers, one parent façade/token boundary,
 formal builds and the published coherent-package gate.
 
+[T461 S3 durable Registry overlay acceptance](evidence/m0-t461-s3-registry-persistence-candidate.md)
+records the atomic commit/rollback, restart-tombstone and concurrent-writer
+contract used by the T461 closure.
+
 [T461 S3 durable Registry overlay design](operations/t461-shell-registry-s3-design.md)
 defines the sole façade's atomic persistence, tombstone and cross-worker
 serialization boundary before implementation.
@@ -157,6 +161,10 @@ serialization boundary before implementation.
 records the exact private-desktop no-input WINMINE witness, the rejected
 environment/container false leads and the finite no-repair decision pending a
 reproduced full-frame residual.
+
+[T463 S1 WOW32 everyday baseline](evidence/m0-t463-s1-everyday-baseline.md)
+freezes the exact ordinary package and independent WINMINE/SOL/WRITE frontiers,
+including the SOL Options source-trace admission boundary.
 
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,

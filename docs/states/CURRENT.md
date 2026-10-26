@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T463 S1**
+**Active: M0 T463 S2**
 
 T460 is closed at `5f12610eb`; its owner-approved Win95 Start Menu
 PIF-template provenance repair is retained in its closure record. `books/` is
@@ -14,26 +14,36 @@ the read-only `ntvdm64-wow32-audit`: recover selected original behavior with
 the smallest source-shaped binding and no guest modification or rebuild.
 ## Active Packet
 
-### M0 T463 S1 — WOW32 everyday usability baseline
+### M0 T463 S2 — SOL Options owner attribution and coherent repair batch
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T463 S1, Ordinary Mode; single-agent baseline and prerequisite ledger. |
-| Admission And Approval | Automatic advance after T462's bounded no-repair result. |
-| Objective | Freeze one ordinary package and the WINMINE/SOL/WRITE everyday baseline before any repair. |
-| Non-goals | No guest change, broad provider claim, cosmetic workaround or speculative runtime repair. |
-| Reference Baseline | [Everyday-usability proposal](../proposals/proposal-wow32-everyday-usability-001.md), minimum-diff governance and T462 evidence. |
-| Files And ABI Surface | Source/package/guest/configuration inventory and checked-in observation tooling only; no admitted runtime ABI change. |
+| Identifier Mode | M0 T463 S2, Ordinary Mode; single-agent source attribution and one owner-shaped repair batch. |
+| Admission And Approval | Automatic advance after the S1 baseline ledger. |
+| Objective | Capture and map the SOL Options failure to one actual original owner, then repair only the proven source-shaped edge and validate the coherent three-app interaction cohort. |
+| Non-goals | No guest change, broad provider claim, cosmetic workaround, host UI substitution or speculative runtime repair. |
+| Reference Baseline | [Everyday-usability proposal](../proposals/proposal-wow32-everyday-usability-001.md), [S1 baseline](../etc/evidence/m0-t463-s1-everyday-baseline.md), minimum-diff governance and T462 evidence. |
+| Files And ABI Surface | Selected original WOW32 owner and its already-admitted binding only after fault attribution; no new public ABI. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Hash ledger, application-by-application first failing call or valid behaviour witness, and explicit deferred-family ledger. |
-| Expected Markers | No application is passed merely because a window or process exists. |
-| Asset Needs | Build-owned T463 evidence only; existing product package and guest media read-only. |
-| Reporting Requirements | Inputs, procedure, observed behaviour, source owner for each failure and finite S2 handoff. |
-| Stop Conditions | Need for a guest edit, unsupported causal conclusion or a repair not tied to an actual failing call. |
-| Exit Criteria | One frozen baseline and a bounded, source-owned S2 repair/acceptance plan. |
+| Verification | Fault address/symbol-to-owner proof; normal, failure and retirement contract; focused original-owner tests plus the applicable coherent product package gate. |
+| Expected Markers | No application is passed merely because a window or process exists; no repair precedes a mapped SOL Options owner. |
+| Asset Needs | Build-owned T463 S2 evidence only; existing product package and guest media read-only. |
+| Reporting Requirements | Inputs, procedure, observed behaviour, source owner, exact changed-edge state authority and finite S3 handoff. |
+| Stop Conditions | Need for a guest edit, unsupported causal conclusion, fault outside the admitted owner closure, or a repair not tied to the captured failing call. |
+| Exit Criteria | A source-owned Options disposition and a bounded three-application interaction result; unresolved owner attribution remains an explicit no-repair conclusion rather than a substitute implementation. |
 | Original Owner Request | 自动准入后续 WOW32 T；按最小镜像 diff、最大原版复通执行。 |
 | Similar-Issue Sweep | Client painting, non-client painting/activation, menu/hover, expose and move/resize transitions. |
 | Candidate Proposal | [WOW32 everyday usability](../proposals/proposal-wow32-everyday-usability-001.md). |
+
+## T463 S1 Closure Record
+
+S1 freezes the exact ordinary package and its deliberately limited WINMINE,
+SOL and WRITE frontiers in the [baseline ledger](../etc/evidence/m0-t463-s1-everyday-baseline.md).
+It records that SOL Options is an observed `WOW32.DLL` failure but has no
+captured fault-to-symbol attribution yet; the source-shaped modal-dialog route
+is a lead, not a repair authorization.  S1 changes documentation only, leaves
+guest media and runtime images unchanged, and transfers the finite capture and
+owner-attribution obligation to S2.
 
 ## T462 Closure Record
 
