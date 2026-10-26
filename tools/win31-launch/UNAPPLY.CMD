@@ -13,14 +13,13 @@ for %%F in (SYSTEM\KRNL386.EXE SYSTEM\KRNL386.EXE.BAK SYSTEM\WIN386.EXE SYSTEM\W
   set "RESULT=2"
   goto done
 )
-for %%F in (HASH.EXE MOUSE31.DRV) do if not exist "%RELEASE%\%%F" (
+for %%F in (HASH.EXE) do if not exist "%RELEASE%\%%F" (
   echo Missing released add-on: %RELEASE%\%%F
   set "RESULT=3"
   goto done
 )
 call :verify_binary "%TARGET%\SYSTEM\KRNL386.EXE" FBEAF672EE9E917318CE8FCD1D560DB805DBFADF4777039ABBAAFF1A9C75B980 88E095A7C39C6294E8E3BE71CBD2EDC1E4DCECBB7101D1581021EA7BE7B33181 || goto mismatch
 call :verify_binary "%TARGET%\SYSTEM\WIN386.EXE" 6006860AE1003114583D70A1C6447247E1280A99633202912092A5F06A0C22A5 C67E667E25E91C65EFB5ACDDEC437DA8B586037DA7DE502228CA8FBD806CF3F8 || goto mismatch
-call :verify_mouse || goto mismatch
 echo Restore: KRNL386.EXE =^> %TARGET%\SYSTEM
 move /y "%TARGET%\SYSTEM\KRNL386.EXE.BAK" "%TARGET%\SYSTEM\KRNL386.EXE" >nul || goto mutation_failure
 echo Restore: WIN386.EXE =^> %TARGET%\SYSTEM
@@ -45,15 +44,6 @@ for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%~1"') do set "CURRENT=%%H"
 for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%~1.BAK"') do set "BACKUP=%%H"
 if /I not "%CURRENT%"=="%CANDIDATE%" exit /b 1
 if /I not "%BACKUP%"=="%RETAIL%" exit /b 1
-exit /b 0
-
-:verify_mouse
-set "CURRENT=" & set "RELEASE_HASH=" & set "BACKUP="
-for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%TARGET%\SYSTEM\MOUSE.DRV"') do set "CURRENT=%%H"
-for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%RELEASE%\MOUSE31.DRV"') do set "RELEASE_HASH=%%H"
-for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%TARGET%\SYSTEM\MOUSE.DRV.BAK"') do set "BACKUP=%%H"
-if not defined BACKUP exit /b 1
-if /I not "%CURRENT%"=="%RELEASE_HASH%" exit /b 1
 exit /b 0
 
 :mismatch

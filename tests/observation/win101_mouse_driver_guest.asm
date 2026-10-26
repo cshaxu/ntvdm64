@@ -4,7 +4,7 @@ bits 16
 org 0x100
 jmp main
 %define MOUSE101_GUEST_TEST
-%include "mouse101.asm"
+%include "mouse.asm"
 
 %macro check 1
     je %%ok

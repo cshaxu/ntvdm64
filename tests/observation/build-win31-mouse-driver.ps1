@@ -6,7 +6,7 @@ $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)) {
     throw 'Fresh build-owned output required'
 }
-$source=Join-Path $repo 'src/addon/win31-mouse-drv/mouse31.asm'
+$source=Join-Path $repo 'src/addon/win31-mouse-drv/mouse.asm'
 $assembler=(Get-Command nasm.exe -ErrorAction Stop).Source
 $pythonPath=(Resolve-Path -LiteralPath $Python).Path
 New-Item -ItemType Directory -Path $root|Out-Null
@@ -19,6 +19,12 @@ if($LASTEXITCODE){throw 'Mock guest assembly failed'}
 & $assembler -f bin "-I$include" "$PSScriptRoot/win31_mouse_driver_real.asm" `
     -o "$root/M31REAL.COM" -l "$root/real.lst"
 if($LASTEXITCODE){throw 'Real protected-mode guest assembly failed'}
+& $assembler -f bin "-I$include" "$PSScriptRoot/win31_mouse_callback_context.asm" `
+    -o "$root/M31CTX.COM" -l "$root/context.lst"
+if($LASTEXITCODE){throw 'Callback context guest assembly failed'}
+& $assembler -f bin "$PSScriptRoot/win31_mouse_windows_probe.asm" `
+    -o "$root/M31WIN.EXE" -l "$root/windows-probe.lst"
+if($LASTEXITCODE){throw 'Win16 mouse runtime probe assembly failed'}
 & $pythonPath "$PSScriptRoot/audit-win31-mouse.py" --driver "$root/MOUSE31.DRV" --output "$root/contract.json" | Out-Null
 if($LASTEXITCODE){throw 'NE audit failed'}
 $audit=Get-Content "$root/contract.json" -Raw|ConvertFrom-Json

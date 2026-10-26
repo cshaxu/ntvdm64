@@ -104,6 +104,21 @@ records the selected text guest/native exchange, rejected-handoff ownership,
 original-cache invalidation, coherent ten-image publication and the finite S3
 delayed-rendering/task-loss handoff.
 
+[T460 S3 Clipboard deferred-lifetime progress](evidence/m0-t460-s3-clipboard-deferred-lifetime.md)
+records the narrow live-HWND host adaptation, the restored original global
+conversion, and the isolated modern-USER access-denied acceptance non-pass
+that keeps S3 open.
+
+[T460 S3 PIC-reset EOI plan](evidence/m0-t460-s3-pic-eoi-reset-plan.md)
+records the independent, owner-admitted source/contract audit of PIC ICW1
+reset against device-side EOI state; it is not a Win95 experiment or a release
+claim.
+
+[T460 S3 keyboard early-EOI plan](evidence/m0-t460-s3-keyboard-early-eoi-plan.md)
+records the separate one-slot controller contract, the normal and Win95
+early-EOI order, and the bounded production-PIC fixture; it is not an image,
+driver, or guest change.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.
@@ -349,6 +364,7 @@ delivered single-worker/dual-Hook gates; see
 | [T442 S1 mysmb64 pre-trace audit](evidence/m0-t442-s1-mysmb64-pretrace-audit.md) | M0 T442 S1 | Static ownership audit before target evidence; retained and succeeded by the source transition record. | Retain with its successor. |
 | [T442 S1 mysmb64 Console-identity transition](evidence/m0-t442-s1-mysmb64-console-identity-transition.md) | M0 T442 S1 | Source-backed proof that the target frees and reattaches its Console before showing it; stops the visibility-only design. | Retain until re-admission or closure. |
 | [T439 S1 Win31 launch-profile recovery](evidence/m0-t439-s1-win31-launch-profile-recovery.md) | M0 T439 S1 | Recoverable Standard VGA profile, PMCC working-directory-tag repair, focused tool proof, and owner desktop acceptance. | Retain with the T439 closure. |
+| [T460 S3 add-on and launch-tool audit](evidence/m0-t460-s3-addon-tool-audit.md) | M0 T460 S3 | Audits independent mouse/Win95/LNK add-ons and launch tooling; hardens repeated mouse Apply and records source provenance. | Retain through S3 closure. |
 | [T438 S2 Win31 path tool split](evidence/m0-t438-s2-win31-path-tool-split.md) | M0 T438 S2 | CMD ownership split, released GRP/PIF structured transforms, and recovery fixture proof. | Retain through T438 closure. |
 | [T438 S1 Win31 path adjacent recovery](evidence/m0-t438-s1-win31-path-adjacent-recovery.md) | M0 T438 S1 | Bounded path-tool mutation audit, adjacent-backup recovery, and focused first/repeat/unapply fixture proof. | Retain through T438 completion. |
 | [T437 S11 Win3.1 adjacent backups](evidence/m0-t437-s11-win31-adjacent-backups.md) | M0 T437 S11 | Replaces PATCH recovery copies with adjacent `.BAK` files and adds authenticated rollback. | Retain through portable-launch acceptance. |

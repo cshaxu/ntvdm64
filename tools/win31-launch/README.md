@@ -41,9 +41,15 @@ The tool directory contains only `APPLY.CMD`, `UNAPPLY.CMD`, `PATCH386.EXE`, and
 documentation.  It resolves `PIF.EXE`, `HASH.EXE`, and `MOUSE31.DRV` from the
 repository's `assets\release` directory; they are not duplicated here.
 
-`UNAPPLY.CMD` is the recovery entry point. It verifies that the active files
-are the approved candidates/released driver and that the adjacent `.BAK` files
-are present before moving each backup back into place. It deletes only the six
+The first `APPLY.CMD` preserves the installed mouse driver as its adjacent
+backup. Repeated `APPLY.CMD` accepts only the exact currently released driver;
+it refuses an unrecognised replacement instead of overwriting it. Restore first
+when intentionally changing driver versions.
+
+`UNAPPLY.CMD` is the recovery entry point. It verifies the two patched system
+binary identities and requires the adjacent `.BAK` files before moving each
+backup back into place. Mouse restoration does not depend on the current or
+released driver version. It deletes only the six
 tool-owned launch-profile files under `PATCH`; any other `PATCH` content is
 preserved. Older compatible `PATCH\*.ORIG` recovery copies are migrated to
 their adjacent `.BAK` locations by a successful later `APPLY.CMD`.

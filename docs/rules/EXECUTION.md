@@ -177,6 +177,44 @@ that no desktop is available.  A `result=not-started` artifact is evidence of
 the wrong parent token, not a runtime verdict.  This is a launch rule only:
 tests remain isolated, background-owned, and may not use desktop automation.
 
+### Pre-blocking execution reconstruction
+
+This is a rule for **every task-affecting action** and every external
+dependency. It is not a Clipboard, desktop, token, UI, build or test
+exception. It covers source or document mutation, build, test, runtime launch,
+deployment, process management, package staging, cleanup and their required
+diagnostics.
+
+Before declaring **any** capability, service, process, broker, token, media,
+guest input, device, permission, path, configuration, tool, runner, test host
+or other external facility unavailable, failed or blocked, the agent must
+first reconstruct and reuse its most recent real successful path. It may not
+invent a local runner, scope, staging path, cleanup method, environmental
+substitute or acceptance substitute merely because the first path is more
+convenient. Before selecting an exception path or recording any blocker, it
+must, in order:
+
+1. find the most recent successful checked-in case for the same capability;
+2. recover its checked-in runner, host command path, parent-token class and
+   stage/scope construction from retained evidence and source;
+3. invoke that same modern `pwsh.exe` runner through the desktop-capable
+   execution context; and
+4. record the actual parent PID, mandatory-integrity class, script hash and
+   case result.
+
+The supervising command must also propagate the invoked runner's exit status
+and inspect its declared result artifact.  A detached child that is reaped when
+its short-lived parent exits, or a shell that returns success after an invoked
+script wrote its own nonzero result, is likewise a runner-configuration error
+rather than evidence about the product.
+
+A direct restricted-executor failure is only a runner-configuration error. It
+must not be described as a product failure, an unavailable capability, a
+reason to skip the case, or an S closure/blocker. Only after the reconstructed
+historical path itself fails may the failure be classified from its actual
+evidence. This rule does not authorize desktop automation, foreground input,
+token brokers, helper windows or a substitute test implementation.
+
 When that runner exercises an immutable DOS/WOW guest, build-root staging is
 also not a valid substitute for its runtime root. Use the checked-in
 `New-PhysicalRuntimeStage` helper: it makes a short, real, helper-owned

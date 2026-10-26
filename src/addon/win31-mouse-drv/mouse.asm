@@ -279,8 +279,9 @@ wep:
 ; The underlying INT33 continuation is RETF, so consume its two return words
 ; in the real register image before returning to the DPMI host with IRET.
 callback:
-    pushf
-    pusha
+    ; A 16-bit USER callback may use full 386 registers asynchronously.
+    pushfd
+    pushad
     push ds
     push es
     mov ax,[ds:si]
@@ -331,8 +332,8 @@ callback:
 .return:
     pop es
     pop ds
-    popa
-    popf
+    popad
+    popfd
     iret
 
 ; Same authored endpoint rule as Win101; not copied original guest code.

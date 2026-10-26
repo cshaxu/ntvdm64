@@ -119,30 +119,32 @@ if /I not "%BACKUP%"=="%RETAIL%" (echo Recovery copy is not the original: %~1& e
 exit /b 0
 
 :install_mouse
-set "CURRENT=" & set "RELEASE_HASH=" & set "BACKUP="
-for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%TARGET%\SYSTEM\MOUSE.DRV"') do set "CURRENT=%%H"
+set "CURRENT=" & set "RELEASE_HASH="
 for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%RELEASE%\MOUSE31.DRV"') do set "RELEASE_HASH=%%H"
-if not defined CURRENT exit /b 1
-if /I not "%RELEASE_HASH%"=="D6BA5380A2EDCDB33E0C36850FB6BDD0542D78EC03E982DBD5114A462B0A2F1A" (
-  echo Released MOUSE31.DRV does not match its approved identity.
-  exit /b 1
-)
-if /I "%CURRENT%"=="%RELEASE_HASH%" (
-  if exist "%TARGET%\SYSTEM\MOUSE.DRV.BAK" (
-    for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%TARGET%\SYSTEM\MOUSE.DRV.BAK"') do set "BACKUP=%%H"
-    if defined BACKUP exit /b 0
-  )
+if not defined RELEASE_HASH exit /b 1
+if not exist "%TARGET%\SYSTEM\MOUSE.DRV.BAK" (
   if exist "%PATCH%\MOUSE.DRV.ORIG" (
     move /y "%PATCH%\MOUSE.DRV.ORIG" "%TARGET%\SYSTEM\MOUSE.DRV.BAK" >nul || exit /b 1
-    exit /b 0
+  ) else (
+    move /y "%TARGET%\SYSTEM\MOUSE.DRV" "%TARGET%\SYSTEM\MOUSE.DRV.BAK" >nul || exit /b 1
   )
-  echo Installed replacement lacks its recovery copy: %TARGET%\SYSTEM\MOUSE.DRV.BAK
+) else (
+  call :verify_released_mouse || exit /b 1
+)
+echo Replace: MOUSE.DRV =^> %TARGET%\SYSTEM
+copy /y "%RELEASE%\MOUSE31.DRV" "%TARGET%\SYSTEM\MOUSE.DRV" >nul || exit /b 1
+exit /b 0
+
+:verify_released_mouse
+set "CURRENT=" & set "RELEASE_HASH="
+for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%RELEASE%\MOUSE31.DRV"') do set "RELEASE_HASH=%%H"
+for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%TARGET%\SYSTEM\MOUSE.DRV"') do set "CURRENT=%%H"
+if not defined CURRENT exit /b 1
+if not defined RELEASE_HASH exit /b 1
+if /I not "%CURRENT%"=="%RELEASE_HASH%" (
+  echo Refusing to overwrite an unrecognised installed mouse driver.
   exit /b 1
 )
-if exist "%TARGET%\SYSTEM\MOUSE.DRV.BAK" (echo Refusing to overwrite existing mouse-driver recovery copy.& exit /b 1)
-echo Replace: MOUSE.DRV =^> %TARGET%\SYSTEM
-move /y "%TARGET%\SYSTEM\MOUSE.DRV" "%TARGET%\SYSTEM\MOUSE.DRV.BAK" >nul || exit /b 1
-copy /y "%RELEASE%\MOUSE31.DRV" "%TARGET%\SYSTEM\MOUSE.DRV" >nul || exit /b 1
 exit /b 0
 
 :announce_profile

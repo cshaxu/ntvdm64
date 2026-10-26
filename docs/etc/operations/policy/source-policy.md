@@ -2,6 +2,18 @@
 
 OpenNT NT4 MVDM/NTDOS is the primary historical guest/service source family.
 
+### Owner-supplied independent add-on audit — T460 S3
+
+The owner requests joint audit/submission of the supplied `src/addon` and
+launch tools. `win95-compat-sys` has independently authored driver sources;
+its offline `extract-logo.py` adapts the already supplied MIT-licensed
+`JHRobotics/patcher9x pe/ds_decompress.c`, revision
+`b6e30d4b5a396dcd453b6c8e6733fd5b5cbce59e`. The adjacent provenance manifest
+records the derived file hash and `DS-LICENSE.txt`. This source attribution
+does not admit an external fetch, patcher9x runtime/link dependency, or
+Microsoft artwork in release assets. The helper reads an identity-bound
+owner-supplied IO.SYS copy and creates separate local artwork only.
+
 ### Permanent guest-media immutability
 
 Owner-scoped T436 exception: after verified ten-CON DOSMGR SFT failure, owner
@@ -24,9 +36,10 @@ guest memory, or add other media replacements.
 Owner-scoped T437 exception: the two already approved, identity-bound
 `KRNL386.EXE` and `WIN386.EXE` candidate images and released `MOUSE31.DRV` may
 be installed into a recoverable, user-selected **already installed** Windows
-3.1 tree. Preserve the first matching installed originals below that tree's
-owned `PATCH` directory, verify hashes before every replacement, and record
-every configuration/path rewrite. This authorizes portable-launch preparation
+3.1 tree. Preserve the first matching installed originals as adjacent `.BAK`
+files; the tree-owned `PATCH` directory owns only generated launch
+configuration. Verify hashes before every replacement, and record every
+configuration/path rewrite. This authorizes portable-launch preparation
 only; it does not authorize retail-media mutation, any additional guest-binary
 change, Setup modification, runtime hot patch, enhanced-mode success claim, or
 a replacement for the separately queued ordinary-Setup transition recovery.

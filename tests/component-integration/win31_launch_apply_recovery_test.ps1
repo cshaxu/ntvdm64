@@ -39,7 +39,7 @@ function Invoke-Tool([string]$Script, [string]$Root, [int]$ExpectedExit = 0) {
     [IO.File]::WriteAllText($input, "$Root`r`n`r`n", [Text.Encoding]::ASCII)
     $stdout = "$input.out"; $stderr = "$input.err"
     $command = 'call "{0}" < "{1}"' -f (Join-Path $tool $Script),$input
-    $process = Start-Process -FilePath cmd.exe -ArgumentList @('/d','/c',$command) -RedirectStandardOutput $stdout -RedirectStandardError $stderr -Wait -PassThru
+    $process = Start-Process -FilePath cmd.exe -ArgumentList @('/d','/c',$command) -WindowStyle Hidden -RedirectStandardOutput $stdout -RedirectStandardError $stderr -Wait -PassThru
     if ($process.ExitCode -ne $ExpectedExit) {
         throw "$Script returned $($process.ExitCode), expected $ExpectedExit`n$((Get-Content -LiteralPath $stdout -Raw))$((Get-Content -LiteralPath $stderr -Raw))"
     }
@@ -79,6 +79,14 @@ Assert-Applied $fresh
 & (Join-Path $repo 'tests/component-integration/win31_launch_profile_test.ps1') -InstallRoot $fresh -ProfileDirectory (Join-Path $fresh 'PATCH')
 Invoke-Tool 'APPLY.CMD' $fresh
 Assert-Applied $fresh
+# A repeat apply cannot overwrite a driver whose identity is no longer the
+# released add-on.  The original adjacent backup remains recoverable.
+[IO.File]::WriteAllBytes((Join-Path $fresh 'SYSTEM\MOUSE.DRV'), [byte[]](1,2,3))
+$unknownMouse = (Get-FileHash -LiteralPath (Join-Path $fresh 'SYSTEM\MOUSE.DRV')).Hash
+Invoke-Tool 'APPLY.CMD' $fresh 5
+if ((Get-FileHash -LiteralPath (Join-Path $fresh 'SYSTEM\MOUSE.DRV')).Hash -ne $unknownMouse) { throw 'unrecognised mouse driver was overwritten' }
+[IO.File]::Copy((Join-Path $release 'MOUSE31.DRV'), (Join-Path $fresh 'SYSTEM\MOUSE.DRV'), $true)
+[IO.File]::WriteAllBytes((Join-Path $fresh 'SYSTEM\MOUSE.DRV'), [byte[]](4,5,6))
 [IO.File]::WriteAllText((Join-Path $fresh 'PATCH\KEEP.TXT'), 'owner content', [Text.Encoding]::ASCII)
 $unapplyOutput = Invoke-Tool 'UNAPPLY.CMD' $fresh
 foreach ($expected in @(
@@ -105,4 +113,4 @@ Move-Item -LiteralPath (Join-Path $legacy 'SYSTEM\MOUSE.DRV.BAK') -Destination (
 Invoke-Tool 'APPLY.CMD' $legacy
 Assert-Applied $legacy
 
-'PASS win31-launch adjacent backup, repeat apply, legacy migration, and authenticated unapply'
+'PASS win31-launch adjacent backup, repeat apply, unknown mouse-driver refusal, legacy migration, and system-binary identity checks'

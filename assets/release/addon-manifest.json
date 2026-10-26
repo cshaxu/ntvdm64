@@ -1,44 +1,71 @@
-﻿{
-    "schema":  1,
-    "drivers":  [
-                    {
-                        "id":  "win101",
-                        "file":  "MOUSE101.DRV",
-                        "sha256":  "DC01039B0FC2B7E9244F31A42A4AAA9ED10613291557B4B6E2695ECE1BA5666E",
-                        "source":  "src/addon/win101-mouse-drv/mouse101.asm",
-                        "sourceSha256":  "0999EA9631BBAE52DAFADFE0A6E4DD8B946DF8136A5D42869573A08C259CAA8E",
-                        "acceptance":  "verified"
-                    },
-                    {
-                        "id":  "win31",
-                        "file":  "MOUSE31.DRV",
-                        "sha256":  "D6BA5380A2EDCDB33E0C36850FB6BDD0542D78EC03E982DBD5114A462B0A2F1A",
-                        "source":  "src/addon/win31-mouse-drv/mouse31.asm",
-                        "sourceSha256":  "22D0A16DC701CA058BFC4357A155460C06187CBB0DDB6A3805735067CC19FCB9",
-                        "acceptance":  "verified"
-                    }
-                ],
-    "utilities":  [
-                      {
-                          "id":  "pif",
-                          "file":  "PIF.EXE",
-                          "architecture":  "amd64",
-                          "sha256":  "9A2265B888DF7F219073B6FD78031FC5C638BFEFC1EF2402E186FA8E11D0B283",
-                          "source":  "src/addon/pif/pif.c"
-                      },
-                      {
-                          "id":  "hash",
-                          "file":  "HASH.EXE",
-                          "architecture":  "amd64",
-                          "sha256":  "2838242E0F7A3BACE0DA1DC0B42A1C84CCC358CB5B23A1473314AF0B85124726",
-                          "source":  "src/addon/hash/hash.c"
-                      },
-                      {
-                          "id":  "grp",
-                          "file":  "GRP.EXE",
-                          "architecture":  "amd64",
-                          "sha256":  "8C38B1FB777409D956F45E6F9E7967052502898A088B5E71C7FA47CCEE09AFD2",
-                          "source":  "src/addon/grp/grp.c"
-                      }
-                  ]
+{
+  "schema": 1,
+  "drivers": [
+    {
+      "id": "win101",
+      "file": "MOUSE101.DRV",
+      "sha256": "DC01039B0FC2B7E9244F31A42A4AAA9ED10613291557B4B6E2695ECE1BA5666E",
+      "source": "src/addon/win101-mouse-drv/mouse.asm",
+      "sourceSha256": "0999EA9631BBAE52DAFADFE0A6E4DD8B946DF8136A5D42869573A08C259CAA8E",
+      "acceptance": "verified"
+    },
+    {
+      "id": "win31",
+      "file": "MOUSE31.DRV",
+      "sha256": "186AD08C4E75BA528001D29C102797B05901BCD74C720334D5859EB53CF390C7",
+      "source": "src/addon/win31-mouse-drv/mouse.asm",
+      "sourceSha256": "33B7CD881BA6412701D719765C909DCE1B8C58C9E4D3FBD3A862C5C843D8A4D1",
+      "acceptance": "verified"
+    },
+    {
+      "id": "win95-compat",
+      "file": "compat95.sys",
+      "kind": "dos-character-driver",
+      "architecture": "i386-real-mode",
+      "sha256": "BFD8E8D3AF62D4398BE414087B36E30EFF9798308387B5454C4B109ED4490D17",
+      "source": "src/addon/win95-compat-sys/compat.asm",
+      "sourceSha256": "FDBEDC5FF2B6960ACBF0129CD0F955F8C1735FF21571C35E6856E192DC0337E9",
+      "sources": [
+        {
+          "name": "compat.asm",
+          "sha256": "FDBEDC5FF2B6960ACBF0129CD0F955F8C1735FF21571C35E6856E192DC0337E9"
+        },
+        {
+          "name": "bootlogo.inc",
+          "sha256": "21DB3DB939A0D8FD14939063D70D1AC6089D4F025642740003A07702BB318FD7"
+        }
+      ],
+      "acceptance": "verified"
+    }
+  ],
+  "utilities": [
+    {
+      "id": "pif",
+      "file": "PIF.EXE",
+      "architecture": "amd64",
+      "sha256": "9A2265B888DF7F219073B6FD78031FC5C638BFEFC1EF2402E186FA8E11D0B283",
+      "source": "src/addon/pif/pif.c"
+    },
+    {
+      "id": "hash",
+      "file": "HASH.EXE",
+      "architecture": "amd64",
+      "sha256": "2838242E0F7A3BACE0DA1DC0B42A1C84CCC358CB5B23A1473314AF0B85124726",
+      "source": "src/addon/hash/hash.c"
+    },
+    {
+      "id": "grp",
+      "file": "GRP.EXE",
+      "architecture": "amd64",
+      "sha256": "8C38B1FB777409D956F45E6F9E7967052502898A088B5E71C7FA47CCEE09AFD2",
+      "source": "src/addon/grp/grp.c"
+    },
+    {
+      "id": "lnk",
+      "file": "LNK.EXE",
+      "architecture": "amd64",
+      "sha256": "B27F657281EB00BCA30314014AF20FE5D7E3ADB2E190934CB292A20F523E0B60",
+      "source": "src/addon/lnk/lnk.c"
+    }
+  ]
 }
