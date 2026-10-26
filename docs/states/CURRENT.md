@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T470 S3**
+**Active: M0 T470 S4**
 
 T464 is closed at the published `0.0.464` ten-image package; [its closure](../history/m0-t464-closure.md)
 is authoritative. `books/` is expressly excluded and remains untracked pending
@@ -21,34 +21,32 @@ ten-image package remains `build/t467-s3/package-r2` and guest media is unchange
 
 ## Active Packet
 
-### M0 T470 S3 — WOW debugger notification and retirement evidence
+### M0 T470 S4 — ToolHelp/debugger candidate reconciliation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T470 S3, Ordinary Mode. |
-| Admission And Approval | Automatic sequential admission after [T470 S2 closure](../history/m0-t470-s2-closure.md), under the owner-approved automatic S/T sequence. |
-| Objective | Verify selected retained original WOW debugger producer/retirement edges without adding a debugger or task-control path. |
+| Identifier Mode | M0 T470 S4, Ordinary Mode. |
+| Admission And Approval | Automatic sequential admission after [T470 S3 closure](../history/m0-t470-s3-closure.md), under the owner-approved automatic S/T sequence. |
+| Objective | Reconcile the complete admitted ToolHelp/debugger scope, test/source evidence and immutable stopping boundaries for T closure. |
 | Non-goals | Guest change/rebuild; debugger replacement, new scheduler, VDMDBG direct-process control, ToolHelp query substitute or a new ABI. |
-| Reference Baseline | [S1 owner matrix](../etc/evidence/m0-t470-s1-toolhelp-debugger-owner-matrix.md), [S2 disposition](../etc/evidence/m0-t470-s2-toolhelp-query-disposition.md), and accepted non-WOW debugger ledger. |
-| Files And ABI Surface | Existing `wkman.c` producers, original `dbg.c` event ABI and test-only evidence; no new ABI admitted. |
+| Reference Baseline | T470 S1--S3 evidence, accepted non-WOW debugger ledger and current released package identity. |
+| Files And ABI Surface | Evidence, test sources and closure authority only; no new runtime ABI. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Trace selected producer/task-loss edges and rerun the accepted original debugger worker observer where its inputs remain available. |
-| Expected Markers | One retained WOW producer/retirement owner; no stale identity or project-created control plane. |
-| Asset Needs | Existing package, source and prior debugger observer; no guest rebuild. |
-| Reporting Requirements | Exact producer/consumer lifecycle, observed evidence or bounded non-pass, and source disposition. |
+| Verification | Review all T470 diff/evidence, execute documentation governance, and verify no production/release/guest change was smuggled in. |
+| Expected Markers | Every admitted row has one owner, an explicit pass/non-pass disposition and a successor or stopping boundary. |
+| Asset Needs | Current source, T470 evidence and existing package only. |
+| Reporting Requirements | T closure with exact test evidence, no false release claim and next queue admission. |
 | Stop Conditions | Need for guest change, a second debugger/provider, unbounded private USER/NT assumptions, or a new observable semantic concession. |
-| Exit Criteria | Bounded original producer/retirement disposition without a second debugger or control path. |
+| Exit Criteria | Complete candidate closure or a finite explicitly recorded blocker. |
 | Original Owner Request | Automatically proceed through the ordered WOW32 candidates after each bounded closure. |
-| Similar-Issue Sweep | New-task, module/segment, remote callback, task-loss and debugger-detach edges. |
+| Similar-Issue Sweep | All ToolHelp exports, class thunk, debugger event, remote callback, lifecycle and historical observer boundaries. |
 | Candidate Proposal | [WOW32 ToolHelp/debugger](../proposals/proposal-wow32-toolhelp-debugger-001.md). |
 
 ## S1 Closure Record
 
-S1 completed the source-shaped ToolHelp/debugger owner, ABI and retirement
-inventory at its [closure](../history/m0-t470-s1-closure.md).  The
-[owner matrix](../etc/evidence/m0-t470-s1-toolhelp-debugger-owner-matrix.md)
-is authoritative for the original class-enumeration stopping boundary and
-the non-WOW versus WOW debugger split.
+S1's [owner matrix](../etc/evidence/m0-t470-s1-toolhelp-debugger-owner-matrix.md)
+is authoritative for the original class-enumeration boundary and the
+non-WOW/WOW debugger split.
 
 ## S2 Closure Record
 
@@ -56,6 +54,13 @@ S2 closed the immutable ToolHelp query route at its
 [query disposition](../etc/evidence/m0-t470-s2-toolhelp-query-disposition.md).
 It adds only an independently authored diagnostic witness; no guest, runtime
 or release image changed.
+
+## S3 Closure Record
+
+S3 closed the WOW debugger producer and retirement audit at its
+[disposition](../etc/evidence/m0-t470-s3-wow-debugger-retirement.md).  It
+retains the original debugger owner, records the obsolete observer launch
+failure, and changes no runtime or guest image.
 
 ## T468 Closure Record
 

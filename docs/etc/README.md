@@ -8,6 +8,10 @@ stopping boundary, and the retained WOW/non-WOW debugger seams.
 retains the executable original-query/explicit-unavailable contract and its
 immutable guest/provider stopping boundary.
 
+[T470 S3 WOW debugger retirement disposition](evidence/m0-t470-s3-wow-debugger-retirement.md)
+records the original task/debug producer graph, retained native debugger
+evidence and the obsolete real-worker observer boundary.
+
 [T469 S3 COMM retained-route acceptance](evidence/m0-t469-s3-comm-retained-route.md)
 records the current original-provider success-side fixture, exact environment
 non-passes, and the absence of an admitted serial substitute.
