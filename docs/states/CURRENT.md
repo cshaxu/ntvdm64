@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T461 S3**
+**Active: M0 T462 S1**
 
 T460 is closed at `5f12610eb`; its owner-approved Win95 Start Menu
 PIF-template provenance repair is retained in its closure record. `books/` is
@@ -14,28 +14,28 @@ the read-only `ntvdm64-wow32-audit`: recover selected original behavior with
 the smallest source-shaped binding and no guest modification or rebuild.
 ## Active Packet
 
-### M0 T461 S3 — Registry persistence and concurrency
+### M0 T462 S1 — WOW window drawing-residue attribution
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T461 S3, Ordinary Mode; single-agent implementation and final review. |
-| Admission And Approval | Automatic sequential advance after the S2 published binding acceptance. |
-| Objective | Persist the one parent-owned `NTVDM.REG` overlay atomically, including key/value tombstones and cross-worker serialization, without changing selected original caller bodies. |
-| Non-goals | No guest-media modification/rebuild; no system-Registry write; no second Registry provider, shell launcher/association database, DDE/OLE consumer or unrelated runtime repair. |
-| Reference Baseline | [S2 acceptance](../etc/evidence/m0-t461-s2-binding-implementation.md), [S3 persistence design](../etc/operations/t461-shell-registry-s3-design.md), [Shell and layered Registry proposal](../proposals/proposal-wow32-shell-registry-001.md), shared minimum-diff governance and OpenNT-only seam ledger. |
-| Files And ABI Surface | `mvdm_shadow_registry` serialization/overlay state and its existing opaque-key ABI; selected original callers and the S2 WOW token binding remain source-shaped consumers. |
-| Applicable Rules | Execution, architecture, coding, documentation and source-policy rules; original behavior remains in original callers, façade remains the one Registry authority. |
-| Verification | Restart, tombstone, atomic-write rollback and concurrent-worker fixtures; source-owner/build/ABI review and coherent product package gate. |
-| Expected Markers | No native Registry handle crosses an original caller; no system Registry write; a failed commit preserves the prior file/view and a restart preserves explicit deletion. |
-| Asset Needs | Build-owned `build/t461-s3` fixtures and installed package inputs read-only; no guest or host-Registry mutation. |
-| Reporting Requirements | Commit/rollback/lifetime matrix, test evidence, image/guest diff and finite S4 service-acceptance handoff. |
-| Stop Conditions | A second provider, host Registry write, replacement shell resolver, unbounded mirror import or unapproved semantic relaxation. |
-| Exit Criteria | One façade persists and reloads correct value/deletion state across workers without partial commits; governed review, coherent build/package evidence, commit and push. |
+| Identifier Mode | M0 T462 S1, Ordinary Mode; single-agent source attribution and review. |
+| Admission And Approval | Owner-approved automatic sequential WOW32 queue advance after T461 closure. |
+| Objective | Reproduce the reported WOW residual strip and identify its actual painter and client/non-client boundary before any repair. |
+| Non-goals | No cosmetic masking, caption padding, guest change, style-demo reuse, global theme change or production runtime repair. |
+| Reference Baseline | [Drawing-residue proposal](../proposals/proposal-wow-window-drawing-residue-001.md), T461 S3 published baseline and minimum-diff governance. |
+| Files And ABI Surface | Read-only audit of WOW USER message/DC paths and window-view projection; no admitted ABI change. |
+| Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
+| Verification | Retained reproducible capture plus message/DC/geometry attribution, including client and non-client transitions. |
+| Expected Markers | Exact affected strip, responsible painter, DC origin/clip and client boundary are evidenced rather than inferred from screenshot resemblance. |
+| Asset Needs | Build-owned T462 evidence only; existing product package and guest media read-only. |
+| Reporting Requirements | Inputs, procedure, observation, causal interpretation, uncertainty and finite S2 handoff. |
+| Stop Conditions | Need for an unapproved runtime component, guest edit, cosmetic workaround or unsupported causal conclusion. |
+| Exit Criteria | Bounded source/trace attribution and a source-shaped repair admission decision. |
 | Original Owner Request | 自动准入后续 WOW32 T；按最小镜像 diff、最大原版复通执行。 |
-| Similar-Issue Sweep | Every mutation, deletion, failed commit, restart and cross-worker ordering path, including unchanged S2 token retirement and no-write guarantees. |
-| Candidate Proposal | [WOW32 Shell and layered Registry](../proposals/proposal-wow32-shell-registry-001.md). |
+| Similar-Issue Sweep | Client painting, non-client painting/activation, menu/hover, expose and move/resize transitions. |
+| Candidate Proposal | [Existing WOW window drawing residue](../proposals/proposal-wow-window-drawing-residue-001.md). |
 
-S3 closes at the reviewed durable-overlay delivery.  [Its acceptance
+T461 S3 closes at the reviewed durable-overlay delivery.  [Its acceptance
 evidence](../etc/evidence/m0-t461-s3-registry-persistence-candidate.md)
 records the parent-owned commit/rollback contract, concurrent writer fixture,
 formal graphs and complete Product gate.  It changes only `ntvdm.exe`; guest
