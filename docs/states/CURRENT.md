@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T473 S2**
+**Active: M0 T473 S3**
 
 `books/` is expressly excluded and remains untracked pending separate
 documentation admission.
@@ -16,25 +16,25 @@ media is unchanged.
 
 ## Active Packet
 
-### M0 T473 S2 — source-shaped MVDM owner reconciliation
+### M0 T473 S3 — CPU40 execution lifecycle recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T473 S2, Ordinary Mode. |
-| Admission And Approval | S1 closes at [its inventory closure](../history/m0-t473-s1-closure.md); owner-approved automatic progression admits the finite S2 plan. |
-| Objective | Reconcile selected original owners with project-owned binding bodies, remove only proved duplicate behavior and retain only single-purpose modern resource/ABI boundaries. |
-| Non-goals | Guest modification/rebuild; bulk import; CPU30/private-kernel revival; new feature work; replacing selected original algorithms with host defaults. |
-| Reference Baseline | [S1 closure](../history/m0-t473-s1-closure.md), [finite S2 plan](../etc/evidence/m0-t473-s1-s2-reconciliation-plan.md), source policy and unchanged T467 package. |
-| Files And ABI Surface | Selected MVDM sources/manifests and the named project-owned adapter groups; no interface changes without source-owner proof. |
+| Identifier Mode | M0 T473 S3, Ordinary Mode. |
+| Admission And Approval | S2 closes at [its source reconciliation closure](../history/m0-t473-s2-closure.md); approved automatic progression admits the first single-owner runtime packet. |
+| Objective | Prove and repair, if needed, the selected CPU40 host entry → CCPU execution → original return/termination → session/host teardown lifecycle as one production owner chain. |
+| Non-goals | Guest modification/rebuild; CPU30/private-kernel revival; DPMI, DOS/COMMAND, device, WOW32 or redirector feature expansion unless a direct CPU40 lifecycle dependency proves it necessary. |
+| Reference Baseline | [S2 closure](../history/m0-t473-s2-closure.md), [CPU40/DPMI source reconciliation](../etc/evidence/m0-t473-s2-cpu40-dpmi-reconciliation.md), source policy and unchanged T467 package. |
+| Files And ABI Surface | Selected original CCPU/host entry/teardown sources, session lease/lifecycle and the named CPU40 boundary adapters. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | For each bounded owner group: caller/owner and authority maps, x86 build/link proof, normal/failure/teardown evidence through the selected production route. |
-| Expected Markers | Every reviewed body is retained as a bounded adapter, retained original owner, or removed duplicate; no second behavioral authority. |
-| Asset Needs | Pinned original sources, repository build metadata, retained package evidence and existing test facilities; guest media remains immutable. |
-| Reporting Requirements | Before/after source/adapter footprint, each owner/disposition, removed selections, test evidence and explicit remaining runtime gaps. |
-| Stop Conditions | Need unpinned source, guest change, private subsystem reconstruction, unapproved semantic concession, or a source owner whose complete dependency closure is not finite. |
-| Exit Criteria | All five S2 owner groups have a finite disposition and all production changes, if any, pass coherent build/test/package publication gates. |
+| Verification | Production-route normal entry/return, rejected/inactive entry, controlled termination, nested return, host teardown, worker loss and repeat launch; formal x86 link/map plus focused fixtures. |
+| Expected Markers | One execution owner, one session/lease lifetime, original close cohort exactly once and no raw alias/state surviving return or termination. |
+| Asset Needs | Pinned original sources, existing CPU40 fixtures and real worker/package runner; guest media remains immutable. |
+| Reporting Requirements | Exact caller/owner chain, normal/failure/teardown evidence, source/adapter diff, package identity and explicit later-owner handoff. |
+| Stop Conditions | Need guest change, private kernel monitor, unpinned source, new semantic concession, or an unrelated runtime owner outside the named lifecycle chain. |
+| Exit Criteria | One coherent CPU40 lifecycle route passes normal/rejection/termination/repeat evidence; any production change is fully built, tested and ten-image published. |
 | Original Owner Request | Recover complete original MVDM composition with minimum non-original footprint and no capability loss. |
-| Similar-Issue Sweep | CPU40/DPMI, COMMAND/XMS, SoftPC devices, WOW/session and redirector/monitor/debug carriers plus initialization, return, failure and teardown. |
+| Similar-Issue Sweep | Entry/return, session thread binding, guest-memory lease, CCPU wait/event, host close, termination escape, worker death and repeated worker lifecycle. |
 | Candidate Proposal | [MVDM whole-closure recovery](../proposals/proposal-mvdm-whole-closure-recovery-001.md). |
 
 ## T471 Closure Record
