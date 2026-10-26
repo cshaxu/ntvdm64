@@ -4,20 +4,15 @@
 
 **Active: M0 T471 S4**
 
-T464 is closed at the published `0.0.464` ten-image package; [its closure](../history/m0-t464-closure.md)
-is authoritative. `books/` is expressly excluded and remains untracked pending
-separate documentation admission.
+`books/` is expressly excluded and remains untracked pending separate
+documentation admission.
 
 Automatic progression is approved. Completed work follows
 the read-only `ntvdm64-wow32-audit`: recover selected original behavior with
 the smallest source-shaped binding and no guest modification or rebuild.
 
-T465, T466, T467 and T468 are closed by their [DDE](../history/m0-t465-closure.md),
-[multimedia](../history/m0-t466-closure.md) and
-[Winsock](../history/m0-t467-closure.md) and
-[printing/spool](../history/m0-t468-closure.md) closures.  T467's test-only S4 adds
-the real async-select notification/disable/close witness; the published
-ten-image package remains `build/t467-s3/package-r2` and guest media is unchanged.
+The published ten-image package remains `build/t467-s3/package-r2`; guest
+media is unchanged.
 
 ## Active Packet
 
@@ -57,7 +52,8 @@ proceeds with that limitation.
 The frozen package passed shared/separate WOW idle retirement, selected OEM,
 native CUI return, and identified WOW-worker loss followed by DOS recovery at
 the [S3 progress record](../etc/evidence/m0-t471-s3-progress.md). No product
-or guest bytes changed. S4 alone owns aggregate reconciliation.
+or guest bytes changed. Its [S4 aggregate review](../etc/evidence/m0-t471-s4-aggregate-review.md)
+is ready for owner T acceptance.
 
 ## T469 S1 Closure Record
 

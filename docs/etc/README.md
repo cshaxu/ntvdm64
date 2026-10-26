@@ -1,5 +1,9 @@
 # Supporting Material
 
+[T471 S4 aggregate review](evidence/m0-t471-s4-aggregate-review.md) records
+the unchanged installed/package identity, S1--S3 reconciliation and the sole
+owner-deferred physical WRITE non-pass for T-level acceptance.
+
 [T471 S3 repeated/concurrent/abnormal acceptance progress](evidence/m0-t471-s3-progress.md)
 records the frozen-package idle, OEM, native-return and abnormal-cleanup
 witnesses, while retaining S2's separate deferred physical WRITE boundary.
