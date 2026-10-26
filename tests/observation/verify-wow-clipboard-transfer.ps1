@@ -8,6 +8,7 @@ param(
     [switch]$SharedClipboard,
     [switch]$CallbackReturnOnly,
     [switch]$OwnerTaskExit,
+    [switch]$ClipboardDib,
     [string]$Nasm='nasm.exe'
 )
 
@@ -46,13 +47,23 @@ try {
     $package=(Resolve-Path -LiteralPath $PackageRoot).Path
     $observer=(Resolve-Path -LiteralPath $Observer).Path
     $driver=(Resolve-Path -LiteralPath $CompilerDriver).Path
-    $packageImages=@(Get-Content "$package/product-system32-manifest.json" -Raw | ConvertFrom-Json | ForEach-Object {
-        if($_.RelativePath -ine ('system32\'+$_.Name) -or [IO.Path]::GetFileName($_.Name) -ne $_.Name){
-            throw 'Invalid Clipboard package image path'
+    $packageManifestRoot=@(Get-Content "$package/product-system32-manifest.json" -Raw | ConvertFrom-Json)
+    # Windows PowerShell 5.1 wraps this top-level JSON array once whereas
+    # PowerShell 7 enumerates it. Normalize only that serializer shape, then
+    # enforce the manifest contract one image at a time.
+    if($packageManifestRoot.Count -eq 1 -and $packageManifestRoot[0] -is [array]){
+        $packageManifest=$packageManifestRoot[0]
+    } else {
+        $packageManifest=$packageManifestRoot
+    }
+    $packageImages=@(foreach($entry in $packageManifest) {
+        $expectedRelativePath='system32\'+$entry.Name
+        if($entry.RelativePath -ine $expectedRelativePath -or [IO.Path]::GetFileName($entry.Name) -ne $entry.Name){
+            throw "Invalid Clipboard package image path: name=$($entry.Name) relative=$($entry.RelativePath) expected=$expectedRelativePath"
         }
-        $image=Join-Path $package $_.RelativePath
-        if((Get-FileHash -LiteralPath $image).Hash -ne $_.Sha256){
-            throw "Clipboard package image differs from manifest: $($_.Name)"
+        $image=Join-Path $package $entry.RelativePath
+        if((Get-FileHash -LiteralPath $image).Hash -ne $entry.Sha256){
+            throw "Clipboard package image differs from manifest: $($entry.Name)"
         }
         $image
     })
@@ -84,6 +95,7 @@ try {
         $assemblyArgs=@('-f','bin','-o',"$root\CLIPPRB.EXE",'-l',"$root\clipprobe.lst")
         if($CallbackReturnOnly){$assemblyArgs+='-d';$assemblyArgs+='CALLBACK_RETURN_ONLY'}
         if($OwnerTaskExit){$assemblyArgs+='-d';$assemblyArgs+='OWNER_TASK_EXIT'}
+        if($ClipboardDib){$assemblyArgs+='-d';$assemblyArgs+='CLIPBOARD_DIB'}
         $assemblyArgs+=$assembly
         & $assembler @assemblyArgs `
             *> "$root\assemble.txt"
@@ -93,8 +105,9 @@ try {
             # The repository compiler driver is a batch file and deliberately
             # returns with ``exit /b``.  Invoke it through a child cmd.exe with
             # CALL so that the PowerShell witness continues to the runtime phase.
-            $nativeCommand = 'call "{0}" cl.exe /nologo /LD /MT /O2 /W4 /WX /D_CRT_SECURE_NO_WARNINGS "{1}" "{2}" "{3}" /link "{4}" user32.lib /EXPORT:ClipboardBridge=_ClipboardBridge@12' -f `
-                $driver, "/Fo$root\cliphost.obj", "/Fe$root\GENHOST.DLL", $native, "/IMPLIB:$root\GENHOST.lib"
+            $nativeDefine=if($ClipboardDib){'/DCLIPBOARD_DIB'}else{''}
+            $nativeCommand = 'call "{0}" cl.exe /nologo /LD /MT /O2 /W4 /WX /D_CRT_SECURE_NO_WARNINGS {1} "{2}" "{3}" "{4}" /link "{5}" user32.lib /EXPORT:ClipboardBridge=_ClipboardBridge@12' -f `
+                $driver,$nativeDefine, "/Fo$root\cliphost.obj", "/Fe$root\GENHOST.DLL", $native, "/IMPLIB:$root\GENHOST.lib"
             & $env:ComSpec /d /c $nativeCommand *> "$root\native-build.txt"
             if($LASTEXITCODE){throw "Clipboard native bridge build failed: $LASTEXITCODE"}
             if($OwnerTaskExit){
@@ -235,10 +248,12 @@ try {
     }
     $desktopMode=if($SharedClipboard){'shared'}else{'private'}
     $mode=if($OwnerTaskExit){'task-exit'}elseif($CallbackReturnOnly){'callback-return'}else{'transfer'}
+    $format=if($ClipboardDib){'CF_DIB'}else{'CF_TEXT'}
+    $renderHandoff=if($ClipboardDib){'yield'}else{'direct'}
     $transfers=if($CallbackReturnOnly -or $OwnerTaskExit){0}else{1}
     $renderAll=if($OwnerTaskExit){0}else{1}
     $taskExit=[int][bool]$OwnerTaskExit
-    "WOW_CLIPBOARD_TRANSFER_OK mode=$mode checkpoints=$($rows.Count) guest_to_native=$transfers native_to_guest=$transfers rejected=$transfers deferred=1 replacement=$transfers owner_destroy_renderall=$renderAll task_exit=$taskExit desktop=$desktopMode" |
+    "WOW_CLIPBOARD_TRANSFER_OK mode=$mode format=$format render_handoff=$renderHandoff checkpoints=$($rows.Count) guest_to_native=$transfers native_to_guest=$transfers rejected=$transfers deferred=1 replacement=$transfers owner_destroy_renderall=$renderAll task_exit=$taskExit desktop=$desktopMode" |
         Set-Content "$root\result.txt"
 } catch {
     $_|Out-String|Set-Content "$root\failure.txt"

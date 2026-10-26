@@ -87,6 +87,11 @@ the shared-view snapshot remains an identity projection, not a second Clipboard
 state owner. [S3 lifetime evidence](../etc/evidence/m0-t460-s3-clipboard-deferred-lifetime.md)
 and [the PIC plan](../etc/evidence/m0-t460-s3-pic-eoi-reset-plan.md) are
 closed inputs, not S4 expansion authority.
+The selected-format matrix now passes on the shared Clipboard for `CF_TEXT`
+and `CF_DIB`, including normal/rejection/replacement/deferred/owner-destroy,
+callback-return and task-loss paths.  [S4 evidence](../etc/evidence/m0-t460-s4-clipboard-selected-format-acceptance.md)
+records the original-owner audit, cooperative DIB Yield boundary and runner
+compatibility correction; no product image or guest media changed.
 
 ## S1 Closure Record
 

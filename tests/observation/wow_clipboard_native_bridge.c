@@ -10,6 +10,17 @@
 
 #define CLIP_BRIDGE_OK 0x447A0001u
 
+#ifdef CLIPBOARD_DIB
+#define CLIPBOARD_FORMAT CF_DIB
+/* Exact peers of the independently authored 1x1 24-bit guest DIBs. */
+static const BYTE dib_guest[]    = {40,0,0,0,1,0,0,0,1,0,0,0,1,0,24,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0x31,0x22,0x13,0};
+static const BYTE dib_native[]   = {40,0,0,0,1,0,0,0,1,0,0,0,1,0,24,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0x32,0x23,0x14,0};
+static const BYTE dib_deferred[] = {40,0,0,0,1,0,0,0,1,0,0,0,1,0,24,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0x34,0x25,0x16,0};
+static const BYTE dib_replace[]  = {40,0,0,0,1,0,0,0,1,0,0,0,1,0,24,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0x35,0x26,0x17,0};
+#else
+#define CLIPBOARD_FORMAT CF_TEXT
+#endif
+
 typedef BOOL (WINAPI *clipboard_open_fn)(HWND);
 typedef BOOL (WINAPI *clipboard_close_fn)(void);
 typedef BOOL (WINAPI *clipboard_empty_fn)(void);
@@ -118,28 +129,93 @@ done:
     return result;
 }
 
+#ifdef CLIPBOARD_DIB
+static BOOL clipboard_dib_is(const BYTE *expected)
+{
+    clipboard_api api; HANDLE data; const BYTE *bytes; BOOL match=FALSE;
+    if (!clipboard_resolve(&api) || !api.open(NULL)) return FALSE;
+    data=api.get(CLIPBOARD_FORMAT);
+    if (data && (bytes=(const BYTE *)GlobalLock(data))!=NULL) {
+        SIZE_T size=GlobalSize(data);
+        /* Win16 GlobalAlloc rounds this 44-byte DIB block to its original
+         * movable allocation quantum. Copyh16Toh32 correctly preserves that
+         * full allocation; prove the declared DIB prefix, not an invented
+         * exact GlobalSize contract. */
+        match=size>=sizeof(dib_guest) && memcmp(bytes,expected,sizeof(dib_guest))==0;
+        clipboard_trace(match ? "dib-match" : "dib-mismatch",(DWORD)size,
+            match ? ERROR_SUCCESS : ERROR_INVALID_DATA);
+        if (!match && size >= 4) clipboard_trace("dib-first-dword",
+            *(const DWORD *)bytes,ERROR_INVALID_DATA);
+        GlobalUnlock(data);
+    }
+    api.close(); return match;
+}
+static BOOL clipboard_set_dib(const BYTE *value)
+{
+    clipboard_api api; HGLOBAL data; BYTE *bytes; BOOL result=FALSE;
+    if (!clipboard_resolve(&api) || !api.open(NULL)) return FALSE;
+    if (!api.empty()) goto done;
+    data=GlobalAlloc(GMEM_MOVEABLE,sizeof(dib_guest)); if (!data) goto done;
+    bytes=(BYTE *)GlobalLock(data); if (!bytes) {GlobalFree(data);goto done;}
+    memcpy(bytes,value,sizeof(dib_guest)); GlobalUnlock(data);
+    if (!api.set(CLIPBOARD_FORMAT,data)) {GlobalFree(data);goto done;}
+    result=TRUE;
+done: api.close(); return result;
+}
+
+#endif
+
 __declspec(dllexport) DWORD WINAPI ClipboardBridge(DWORD operation,
     DWORD unused_one, DWORD unused_two)
 {
     (void)unused_one;
     (void)unused_two;
     if (operation==1) {
+#ifdef CLIPBOARD_DIB
+        return clipboard_dib_is(dib_guest) ? CLIP_BRIDGE_OK : 0;
+#else
         return clipboard_text_is("guest clipboard") ? CLIP_BRIDGE_OK : 0;
+#endif
     }
-    if (operation==2) return clipboard_set_text("native clipboard") ? CLIP_BRIDGE_OK : 0;
+    if (operation==2) {
+#ifdef CLIPBOARD_DIB
+        return clipboard_set_dib(dib_native) ? CLIP_BRIDGE_OK : 0;
+#else
+        return clipboard_set_text("native clipboard") ? CLIP_BRIDGE_OK : 0;
+#endif
+    }
     if (operation==3) {
+#ifdef CLIPBOARD_DIB
+        return clipboard_dib_is(dib_native) ? CLIP_BRIDGE_OK : 0;
+#else
         return clipboard_text_is("native clipboard") ? CLIP_BRIDGE_OK : 0;
+#endif
     }
     if (operation==4) {
+#ifdef CLIPBOARD_DIB
+        return clipboard_dib_is(dib_deferred) ? CLIP_BRIDGE_OK : 0;
+#else
         return clipboard_text_is("deferred clipboard") ? CLIP_BRIDGE_OK : 0;
+#endif
     }
-    if (operation==5) return clipboard_set_text("replacement clipboard") ? CLIP_BRIDGE_OK : 0;
+    if (operation==5) {
+#ifdef CLIPBOARD_DIB
+        return clipboard_set_dib(dib_replace) ? CLIP_BRIDGE_OK : 0;
+#else
+        return clipboard_set_text("replacement clipboard") ? CLIP_BRIDGE_OK : 0;
+#endif
+    }
     if (operation==6) {
         clipboard_trace("renderall-entry",0,ERROR_SUCCESS);
         return CLIP_BRIDGE_OK;
     }
     if (operation==7) {
-        BOOL rendered=clipboard_text_is("deferred clipboard");
+        BOOL rendered=
+#ifdef CLIPBOARD_DIB
+            clipboard_dib_is(dib_deferred);
+#else
+            clipboard_text_is("deferred clipboard");
+#endif
         clipboard_trace("renderall-verify",rendered,rendered ? ERROR_SUCCESS : GetLastError());
         return rendered ? CLIP_BRIDGE_OK : 0;
     }

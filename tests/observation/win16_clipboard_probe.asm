@@ -1,9 +1,16 @@
 ; Independently authored Win16 Clipboard witness.  It is assembled into a
 ; disposable test input and never replaces or rebuilds any guest image.
 ; The two directions deliberately use the selected original USER/KERNEL
-; entries: guest CF_TEXT -> native verifier, then native CF_TEXT -> guest.
+; entries: guest selected HGLOBAL format -> native verifier, then the same
+; native format -> guest.  `CLIPBOARD_DIB` selects CF_DIB; otherwise CF_TEXT.
+; Both formats deliberately use the original WU32 generic HGLOBAL path.
 bits 16
 org 0
+%ifdef CLIPBOARD_DIB
+%define clipboard_format 8              ; CF_DIB
+%else
+%define clipboard_format 1              ; CF_TEXT
+%endif
 db 'MZ'
 dw (image_end-$$) % 512,((image_end-$$)+511)/512,0,4,0,0xffff,0,0x100,0,0,0,0x40,0
 times 0x3c-($-$$) db 0
@@ -184,7 +191,7 @@ cld
 rep movsb
 push word [guest_handle-data]
 api 1,19                         ; KERNEL GlobalUnlock
-push word 1                      ; CF_TEXT
+push word clipboard_format
 push word [guest_handle-data]
 api 2,141                        ; USER SetClipboardData
 cmp ax,[guest_handle-data]
@@ -209,7 +216,7 @@ push word [owner-data]
 api 2,137                        ; USER OpenClipboard
 test ax,ax
 jz failed
-push word 1                      ; CF_TEXT
+push word clipboard_format
 api 2,142                        ; USER GetClipboardData
 test ax,ax
 jz failed
@@ -255,7 +262,7 @@ cld
 rep movsb
 push word [rejected_handle-data]
 api 1,19                         ; KERNEL GlobalUnlock
-push word 1                      ; CF_TEXT, deliberately without OpenClipboard
+push word clipboard_format        ; deliberately without OpenClipboard
 push word [rejected_handle-data]
 api 2,141                        ; USER SetClipboardData
 mov [rejected_result-data],ax
@@ -265,7 +272,7 @@ push word [owner-data]
 api 2,137                        ; USER OpenClipboard
 test ax,ax
 jz failed
-push word 1
+push word clipboard_format
 api 2,142                        ; USER GetClipboardData
 mov [rejected_observed-data],ax
 test ax,ax
@@ -290,12 +297,17 @@ rejection_done:
 api 2,138                        ; USER CloseClipboard
 test ax,ax
 jz failed
+; Preserve both distinct ownership identities if caller-side GlobalFree fails:
+; guest_handle is the pre-existing native-to-guest cache, native_handle is the
+; input whose rejected SetClipboardData must not have transferred ownership.
+mov ax,[rejected_observed-data]
+mov [guest_handle-data],ax
+mov ax,[rejected_handle-data]
+mov [native_handle-data],ax
 push word [rejected_handle-data] ; caller retains failed input ownership
 api 1,17                         ; KERNEL GlobalFree returns zero on success
 or ax,ax
 jnz failed
-mov ax,[rejected_observed-data]
-mov [guest_handle-data],ax
 mov ax,[rejected_result-data]
 mov [native_handle-data],ax
 mov word [phase-data],5
@@ -305,7 +317,8 @@ api 2,147                        ; USER SetClipboardViewer
 mov [viewer_next-data],ax
 ; A NULL HMEM16 is the documented original delayed-render request.  Native
 ; GetClipboardData must synchronously enter this Win16 WNDPROC with
-; WM_RENDERFORMAT, which supplies CF_TEXT through the original WU32 bridge.
+; WM_RENDERFORMAT, which supplies the selected format through the original
+; WU32 generic HGLOBAL bridge.
 push word [owner-data]
 api 2,137
 test ax,ax
@@ -313,7 +326,7 @@ jz failed
 api 2,139
 test ax,ax
 jz failed
-push word 1
+push word clipboard_format
 push word 0
 api 2,141
 test ax,ax
@@ -328,6 +341,12 @@ mov ax,[destroy_clipboard-data]
 mov [destroy_clipboard_baseline-data],ax
 mov ax,[draw_clipboard-data]
 mov [draw_clipboard_baseline-data],ax
+%ifdef CLIPBOARD_DIB
+; Delayed DIB rendering reaches this owner through its message queue. Model
+; the original cooperative task handoff with exactly one KERNEL Yield before
+; the native peer demands the data; do not substitute a host sleep or poll.
+api 1,47                         ; KERNEL Yield
+%endif
 mov ax,4
 call invoke_bridge
 cmp word [render_format-data],1
@@ -359,9 +378,9 @@ jz failed
 api 2,139                        ; USER EmptyClipboard
 test ax,ax
 jz failed
-push word 1
+push word clipboard_format
 push word 0
-api 2,141                        ; USER SetClipboardData, delayed CF_TEXT
+api 2,141                        ; USER SetClipboardData, delayed selected format
 test ax,ax
 jnz failed
 api 2,138                        ; USER CloseClipboard
@@ -398,7 +417,7 @@ jz failed
 api 2,139
 test ax,ax
 jz failed
-push word 1
+push word clipboard_format
 push word 0
 api 2,141
 test ax,ax
@@ -429,9 +448,9 @@ jz failed
 api 2,139                          ; USER EmptyClipboard
 test ax,ax
 jz failed
-push word 1
+push word clipboard_format
 push word 0
-api 2,141                          ; delayed CF_TEXT
+api 2,141                          ; delayed selected format
 test ax,ax
 jnz failed
 api 2,138                          ; USER CloseClipboard
@@ -487,7 +506,7 @@ jne failed
 pop bp
 ret
 
-render_clipboard_text:
+render_clipboard_hglobal:
 push word 0x2002                 ; GMEM_MOVEABLE | GMEM_DDESHARE
 push word 0
 push word deferred_payload_end-deferred_payload
@@ -507,7 +526,7 @@ cld
 rep movsb
 push word [render_handle-data]
 api 1,19                         ; KERNEL GlobalUnlock
-push word 1                      ; CF_TEXT
+push word clipboard_format
 push word [render_handle-data]
 api 2,141                        ; USER SetClipboardData while render is open
 cmp ax,[render_handle-data]
@@ -551,9 +570,11 @@ push word [bp+6]
 api 2,107                        ; USER DefWindowProc
 jmp .return
 .render_format:
-cmp word [bp+10],1
+; wParam is the requested format. It must follow the same selected-format
+; constant as SetClipboardData, not retain the former CF_TEXT-only witness.
+cmp word [bp+10],clipboard_format
 jne .bad
-call render_clipboard_text
+call render_clipboard_hglobal
 inc word [render_format-data]
 xor ax,ax
 jmp .value
@@ -579,7 +600,7 @@ cmp ax,[owner-data]
 jne .render_all_owner_bad
 mov word [phase-data],16           ; owner identity returned
 call checkpoint
-call render_clipboard_text
+call render_clipboard_hglobal
 mov word [phase-data],17           ; delayed format rendered
 call checkpoint
 .render_all_close:
@@ -694,6 +715,31 @@ title: db 'Clipboard probe owner',0
 library: db 'GENHOST.DLL',0
 export: db 'ClipboardBridge',0
 filename: db 'CLIPPRB.BIN',0
+%ifdef CLIPBOARD_DIB
+; 1x1, 24-bit uncompressed DIB: BITMAPINFOHEADER + one padded BGR pixel.
+; Each payload differs only in the final pixel so the native bridge can prove
+; exact transfer without treating a host bitmap handle as guest memory.
+guest_payload: dd 40,1,1
+dw 1,24
+dd 0,4,0,0,0,0
+db 0x31,0x22,0x13,0
+guest_payload_end:
+native_payload: dd 40,1,1
+dw 1,24
+dd 0,4,0,0,0,0
+db 0x32,0x23,0x14,0
+native_payload_end:
+rejected_payload: dd 40,1,1
+dw 1,24
+dd 0,4,0,0,0,0
+db 0x33,0x24,0x15,0
+rejected_payload_end:
+deferred_payload: dd 40,1,1
+dw 1,24
+dd 0,4,0,0,0,0
+db 0x34,0x25,0x16,0
+deferred_payload_end:
+%else
 guest_payload: db 'guest clipboard',0
 guest_payload_end:
 native_payload: db 'native clipboard',0
@@ -702,6 +748,7 @@ rejected_payload: db 'rejected clipboard',0
 rejected_payload_end:
 deferred_payload: db 'deferred clipboard',0
 deferred_payload_end:
+%endif
 rejected_handle: dw 0
 rejected_result: dw 0
 rejected_observed: dw 0
