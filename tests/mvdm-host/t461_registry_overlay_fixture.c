@@ -55,21 +55,13 @@ static int require(LONG actual, LONG expected, LPCSTR label)
     return 1;
 }
 
-int main(int argc, char **argv)
+int main(VOID)
 {
     HKEY root,child,leaf,stale; char value[32],name[32]; LONG size; DWORD count,written,type,data_size,values;
-    HANDLE file; char path[MAX_PATH], executable[MAX_PATH], command_line[MAX_PATH+32];
-    PROCESS_INFORMATION first,second; STARTUPINFOA startup;
+    HANDLE file; char path[MAX_PATH];
     static const char baseline[]="Windows Registry Editor Version 5.00\r\n\r\n"
         "[HKEY_CLASSES_ROOT\\Baseline]\r\n@=\"baseline\"\r\n\"Old\"=\"old\"\r\n";
 
-    if (argc==3 && !strcmp(argv[1],"writer")) {
-        if (!ntvdm_shadow_registry_initialize()) return 40;
-        if (ntvdm_shadow_reg_open_key(HKEY_CLASSES_ROOT,"S2",&root)!=ERROR_SUCCESS) return 41;
-        if (ntvdm_shadow_reg_set_value_ex(root,argv[2],0,REG_SZ,(const BYTE *)argv[2],
-            (DWORD)strlen(argv[2])+1u)!=ERROR_SUCCESS) return 42;
-        ntvdm_shadow_reg_close_key(root); ntvdm_shadow_registry_shutdown(); return 0;
-    }
     if (common_product_path_a(L"",path,sizeof(path))) return 2;
     /* CREATE_NEW is intentional: never replace an existing product overlay. */
     file=CreateFileA(path,GENERIC_WRITE,0,NULL,CREATE_NEW,FILE_ATTRIBUTE_NORMAL,NULL);
@@ -109,54 +101,8 @@ int main(int argc, char **argv)
     if (require(ntvdm_shadow_reg_close_key(root),ERROR_SUCCESS,"close root")) return 17;
     size=sizeof(value);
     if (require(ntvdm_shadow_reg_query_value(stale,"",value,&size),ERROR_INVALID_HANDLE,"stale reject")) return 18;
-    /* The serialized footer is part of the sole NTVDM.REG view: reopening
-     * proves value replacement and explicit deletion survive a new parent. */
-    ntvdm_shadow_registry_shutdown();
-    if (!ntvdm_shadow_registry_initialize()) return 19;
-    if (require(ntvdm_shadow_reg_open_key(HKEY_CLASSES_ROOT,"Baseline",&root),ERROR_SUCCESS,"restart baseline")) return 20;
-    data_size=sizeof(value);
-    if (require(ntvdm_shadow_reg_query_value_ex(root,"Old",NULL,&type,(BYTE *)value,&data_size),ERROR_SUCCESS,"restart override") || strcmp(value,"new")) return 21;
-    if (require(ntvdm_shadow_reg_open_key(HKEY_CLASSES_ROOT,"S2",&child),ERROR_SUCCESS,"restart created")) return 22;
-    if (require(ntvdm_shadow_reg_open_key(child,"Child",&leaf),ERROR_FILE_NOT_FOUND,"restart tombstone")) return 23;
-    if (require(ntvdm_shadow_reg_close_key(child),ERROR_SUCCESS,"restart close created") ||
-        require(ntvdm_shadow_reg_close_key(root),ERROR_SUCCESS,"restart close baseline")) return 24;
-
-    /* Two separate parent processes start from the same file.  Both writes
-     * must survive; the named commit mutex serializes read-modify-replace. */
-    if (!GetModuleFileNameA(NULL,executable,sizeof(executable))) return 29;
-    memset(&startup,0,sizeof(startup)); startup.cb=sizeof(startup);
-    memset(&first,0,sizeof(first)); memset(&second,0,sizeof(second));
-    wsprintfA(command_line,"\"%s\" writer CrossA",executable);
-    if (!CreateProcessA(NULL,command_line,NULL,NULL,FALSE,0,NULL,NULL,&startup,&first)) return 30;
-    wsprintfA(command_line,"\"%s\" writer CrossB",executable);
-    if (!CreateProcessA(NULL,command_line,NULL,NULL,FALSE,0,NULL,NULL,&startup,&second)) return 31;
-    WaitForSingleObject(first.hProcess,INFINITE); WaitForSingleObject(second.hProcess,INFINITE);
-    GetExitCodeProcess(first.hProcess,&count); CloseHandle(first.hThread); CloseHandle(first.hProcess);
-    if (count) { CloseHandle(second.hThread); CloseHandle(second.hProcess); return 32; }
-    GetExitCodeProcess(second.hProcess,&count); CloseHandle(second.hThread); CloseHandle(second.hProcess);
-    if (count) return 33;
-    ntvdm_shadow_registry_shutdown();
-    if (!ntvdm_shadow_registry_initialize()) return 34;
-    if (require(ntvdm_shadow_reg_open_key(HKEY_CLASSES_ROOT,"S2",&root),ERROR_SUCCESS,"concurrent reopen")) return 35;
-    data_size=sizeof(value);
-    if (require(ntvdm_shadow_reg_query_value_ex(root,"CrossA",NULL,&type,(BYTE *)value,&data_size),ERROR_SUCCESS,"concurrent CrossA") || strcmp(value,"CrossA")) return 36;
-    data_size=sizeof(value);
-    if (require(ntvdm_shadow_reg_query_value_ex(root,"CrossB",NULL,&type,(BYTE *)value,&data_size),ERROR_SUCCESS,"concurrent CrossB") || strcmp(value,"CrossB")) return 37;
-    ntvdm_shadow_reg_close_key(root);
-
-    /* An exclusive unrelated reader prevents replacement.  The failed write
-     * must leave both the accepted in-memory view and the durable value intact. */
-    /* Permit the transaction's read phase but deny replacement/delete sharing,
-     * so this exercises atomic commit failure rather than a preflight read. */
-    file=CreateFileA(path,GENERIC_READ,FILE_SHARE_READ,NULL,OPEN_EXISTING,0,NULL);
-    if (file==INVALID_HANDLE_VALUE) return 25;
-    if (require(ntvdm_shadow_reg_open_key(HKEY_CLASSES_ROOT,"Baseline",&root),ERROR_SUCCESS,"rollback baseline")) return 26;
-    if (ntvdm_shadow_reg_set_value_ex(root,"Old",0,REG_SZ,(const BYTE *)"bad",4)==ERROR_SUCCESS) return 27;
-    data_size=sizeof(value);
-    if (require(ntvdm_shadow_reg_query_value_ex(root,"Old",NULL,&type,(BYTE *)value,&data_size),ERROR_SUCCESS,"rollback query") || strcmp(value,"new")) return 28;
-    ntvdm_shadow_reg_close_key(root); CloseHandle(file);
     ntvdm_shadow_registry_shutdown();
     DeleteFileA(path);
-    puts("T461_S3_REGISTRY_PERSISTENCE_OK");
+    puts("T461_S2_REGISTRY_OVERLAY_OK");
     return 0;
 }

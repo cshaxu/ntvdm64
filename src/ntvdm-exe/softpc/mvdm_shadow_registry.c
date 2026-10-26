@@ -49,24 +49,13 @@ typedef struct _MVDM_SHADOW_OVERLAY_KEY {
 
 static char *shadow_contents;
 static DWORD shadow_size;
-static DWORD shadow_base_size;
 static BOOL shadow_initialized;
 static char shadow_trace_path[MAX_PATH];
 static MVDM_SHADOW_KEY *shadow_keys;
 static MVDM_SHADOW_OVERLAY_KEY *shadow_overlay_keys;
-static HANDLE shadow_commit_mutex;
-
-/* The on-disk overlay is deliberately comments, rather than a second .reg
- * provider.  The ordinary NTVDM.REG body remains the original parser input;
- * this footer only records the parent-owned mutable layer and tombstones. */
-static const char shadow_overlay_header[]=";NTVDM64-OVERLAY-V1\r\n";
 
 static VOID free_host_values(MVDM_SHADOW_VALUE *value);
 static VOID free_overlay_keys(VOID);
-static MVDM_SHADOW_OVERLAY_KEY *overlay_key(LPCSTR section, BOOL add);
-static MVDM_SHADOW_OVERLAY_VALUE *overlay_value(MVDM_SHADOW_OVERLAY_KEY *key,
-    LPCSTR name, BOOL add);
-static BOOL shadow_load_overlay_footer(VOID);
 
 static VOID shadow_trace(LPCSTR event)
 {
@@ -113,9 +102,6 @@ BOOL ntvdm_shadow_registry_initialize(VOID)
     handle=CreateFileA(path,GENERIC_READ,FILE_SHARE_READ,NULL,OPEN_EXISTING,0,NULL);
     if (handle==INVALID_HANDLE_VALUE) {
         if (GetLastError()==ERROR_FILE_NOT_FOUND || GetLastError()==ERROR_PATH_NOT_FOUND) {
-            shadow_commit_mutex=CreateMutexA(NULL,FALSE,
-                "Local\\NTVDM64.Registry.Commit.1");
-            if (!shadow_commit_mutex) return FALSE;
             shadow_initialized=TRUE;
             shadow_trace("LOAD_ABSENT");
             return TRUE;
@@ -133,16 +119,6 @@ BOOL ntvdm_shadow_registry_initialize(VOID)
     }
     CloseHandle(handle);
     shadow_contents[shadow_size]='\0';
-    shadow_base_size=shadow_size;
-    if (!shadow_load_overlay_footer()) {
-        free(shadow_contents); shadow_contents=NULL; shadow_size=0;
-        return FALSE;
-    }
-    shadow_commit_mutex=CreateMutexA(NULL,FALSE,"Local\\NTVDM64.Registry.Commit.1");
-    if (!shadow_commit_mutex) {
-        free_overlay_keys(); free(shadow_contents); shadow_contents=NULL; shadow_size=0;
-        return FALSE;
-    }
     shadow_initialized=TRUE;
     shadow_trace("LOAD_OK");
     return TRUE;
@@ -160,10 +136,7 @@ VOID ntvdm_shadow_registry_shutdown(VOID)
     free(shadow_contents);
     shadow_contents=NULL;
     shadow_size=0;
-    shadow_base_size=0;
     shadow_initialized=FALSE;
-    if (shadow_commit_mutex) CloseHandle(shadow_commit_mutex);
-    shadow_commit_mutex=NULL;
     shadow_trace_path[0]='\0';
 }
 
@@ -1023,248 +996,6 @@ static MVDM_SHADOW_OVERLAY_VALUE *overlay_value(MVDM_SHADOW_OVERLAY_KEY *key,
     return value;
 }
 
-static char *hex_decode(LPCSTR text, DWORD length, DWORD *bytes)
-{
-    char *result;
-    DWORD index;
-    if ((length&1u)!=0) return NULL;
-    result=(char *)malloc(length/2u+1u);
-    if (!result) return NULL;
-    for (index=0; index<length; index+=2u) {
-        int high=hex_digit(text[index]), low=hex_digit(text[index+1u]);
-        if (high<0 || low<0) { free(result); return NULL; }
-        result[index/2u]=(char)((high<<4)|low);
-    }
-    result[length/2u]='\0';
-    if (bytes) *bytes=length/2u;
-    return result;
-}
-
-static DWORD hex_length(DWORD bytes)
-{
-    return bytes>0x7fffffffu ? 0xffffffffu : bytes*2u;
-}
-
-static char *hex_append(char *cursor, const BYTE *bytes, DWORD length)
-{
-    static const char digits[]="0123456789ABCDEF";
-    DWORD index;
-    for (index=0; index<length; ++index) {
-        *cursor++=digits[bytes[index]>>4];
-        *cursor++=digits[bytes[index]&15u];
-    }
-    return cursor;
-}
-
-static BOOL shadow_load_overlay_footer(VOID)
-{
-    char *footer, *line;
-    size_t header_length=sizeof(shadow_overlay_header)-1u;
-
-    if (!shadow_contents) return TRUE;
-    footer=strstr(shadow_contents,shadow_overlay_header);
-    if (!footer) return TRUE;
-    shadow_base_size=(DWORD)(footer-shadow_contents);
-    line=footer+(DWORD)header_length;
-    while (*line) {
-        char *end=strpbrk(line,"\r\n");
-        size_t length=end ? (size_t)(end-line) : strlen(line);
-        if (length && !_strnicmp(line,";K:",3u)) {
-            char *first, *decoded;
-            DWORD section_bytes;
-            MVDM_SHADOW_OVERLAY_KEY *key;
-            if (length<6u || (line[3]!='0' && line[3]!='1') ||
-                (line[4]!='0' && line[4]!='1') || line[5]!=':') goto malformed;
-            first=line+6u;
-            decoded=hex_decode(first,(DWORD)(length-(first-line)),&section_bytes);
-            if (!decoded || !section_bytes) { free(decoded); goto malformed; }
-            key=overlay_key(decoded,TRUE); free(decoded);
-            if (!key) goto malformed;
-            key->created=line[3]=='1'; key->deleted=line[4]=='1';
-        } else if (length && !_strnicmp(line,";V:",3u)) {
-            char *fields[5], *cursor=line+3u, *decoded_section, *decoded_name,
-                *decoded_data;
-            DWORD part, section_bytes, name_bytes, data_bytes, type, data_characters;
-            MVDM_SHADOW_OVERLAY_KEY *key;
-            MVDM_SHADOW_OVERLAY_VALUE *value;
-            for (part=0; part<5u; ++part) {
-                fields[part]=cursor;
-                cursor=(char *)memchr(cursor,':',(size_t)(line+length-cursor));
-                if (!cursor && part<4u) goto malformed;
-                if (cursor) *cursor++='\0';
-            }
-            if (strlen(fields[0])!=1u || (fields[0][0]!='0' && fields[0][0]!='1') ||
-                strlen(fields[1])!=8u) goto malformed;
-            type=0;
-            for (part=0; part<8u; ++part) { int digit=hex_digit(fields[1][part]); if (digit<0) goto malformed; type=(type<<4)|(DWORD)digit; }
-            data_characters=(DWORD)(line+length-fields[4]);
-            decoded_section=hex_decode(fields[2],(DWORD)strlen(fields[2]),&section_bytes);
-            decoded_name=hex_decode(fields[3],(DWORD)strlen(fields[3]),&name_bytes);
-            decoded_data=hex_decode(fields[4],data_characters,&data_bytes);
-            if (!decoded_section || !decoded_name || !decoded_data || !section_bytes) {
-                free(decoded_section); free(decoded_name); free(decoded_data); goto malformed;
-            }
-            key=overlay_key(decoded_section,TRUE);
-            value=key ? overlay_value(key,decoded_name,TRUE) : NULL;
-            free(decoded_section); free(decoded_name);
-            if (!value) { free(decoded_data); goto malformed; }
-            free(value->data); value->data=(BYTE *)decoded_data;
-            value->data_size=data_bytes; value->type=type; value->deleted=fields[0][0]=='1';
-        }
-        if (!end) break;
-        line=end; while (*line=='\r' || *line=='\n') ++line;
-    }
-    return TRUE;
-malformed:
-    free_overlay_keys(); SetLastError(ERROR_BAD_FORMAT); return FALSE;
-}
-
-static BOOL shadow_read_current(VOID)
-{
-    char path[MAX_PATH], *contents;
-    HANDLE file;
-    DWORD size, read;
-    if (!shadow_path(path,sizeof(path))) return FALSE;
-    file=CreateFileA(path,GENERIC_READ,FILE_SHARE_READ,NULL,OPEN_EXISTING,0,NULL);
-    if (file==INVALID_HANDLE_VALUE) {
-        if (GetLastError()!=ERROR_FILE_NOT_FOUND && GetLastError()!=ERROR_PATH_NOT_FOUND) return FALSE;
-        free(shadow_contents); shadow_contents=NULL; shadow_size=shadow_base_size=0;
-        free_overlay_keys(); return TRUE;
-    }
-    size=GetFileSize(file,NULL);
-    if (size==INVALID_FILE_SIZE || size>65535u) { CloseHandle(file); SetLastError(ERROR_FILE_TOO_LARGE); return FALSE; }
-    contents=(char *)malloc((SIZE_T)size+1u);
-    if (!contents) { CloseHandle(file); SetLastError(ERROR_NOT_ENOUGH_MEMORY); return FALSE; }
-    if (!ReadFile(file,contents,size,&read,NULL) || read!=size) { free(contents); CloseHandle(file); return FALSE; }
-    CloseHandle(file); contents[size]='\0';
-    free(shadow_contents); shadow_contents=contents; shadow_size=size; shadow_base_size=size;
-    free_overlay_keys();
-    return shadow_load_overlay_footer();
-}
-
-static MVDM_SHADOW_OVERLAY_KEY *shadow_clone_overlay_keys(BOOL *ok)
-{
-    MVDM_SHADOW_OVERLAY_KEY *source, *head=NULL, **key_link=&head;
-    *ok=FALSE;
-    for (source=shadow_overlay_keys; source; source=source->next) {
-        MVDM_SHADOW_OVERLAY_KEY *copy=(MVDM_SHADOW_OVERLAY_KEY *)calloc(1,sizeof(*copy));
-        MVDM_SHADOW_OVERLAY_VALUE *source_value, **value_link;
-        if (!copy) goto fail;
-        copy->section=shadow_duplicate(source->section);
-        if (!copy->section) { free(copy); goto fail; }
-        copy->created=source->created; copy->deleted=source->deleted;
-        value_link=&copy->values;
-        for (source_value=source->values; source_value; source_value=source_value->next) {
-            MVDM_SHADOW_OVERLAY_VALUE *value=(MVDM_SHADOW_OVERLAY_VALUE *)calloc(1,sizeof(*value));
-            if (!value) { free(copy->section); free(copy); goto fail; }
-            value->name=shadow_duplicate(source_value->name);
-            value->type=source_value->type; value->data_size=source_value->data_size;
-            value->deleted=source_value->deleted;
-            if (!value->name || (value->data_size && !(value->data=(BYTE *)malloc(value->data_size)))) {
-                free(value->name); free(value->data); free(value); free(copy->section); free(copy); goto fail;
-            }
-            if (value->data_size) memcpy(value->data,source_value->data,value->data_size);
-            *value_link=value; value_link=&value->next;
-        }
-        *key_link=copy; key_link=&copy->next;
-    }
-    *ok=TRUE; return head;
-fail:
-    while (head) { MVDM_SHADOW_OVERLAY_KEY *next=head->next; free(head->section); free_overlay_values(head->values); free(head); head=next; }
-    return NULL;
-}
-
-static BOOL shadow_build_persisted(char **output, DWORD *size)
-{
-    MVDM_SHADOW_OVERLAY_KEY *key;
-    SIZE_T total=shadow_base_size ? shadow_base_size : 38u;
-    char *contents, *cursor;
-    static const char default_header[]="Windows Registry Editor Version 5.00\r\n\r\n";
-
-    if (shadow_base_size && shadow_contents &&
-        shadow_contents[shadow_base_size-1u]!='\n') ++total;
-    total+=sizeof(shadow_overlay_header)-1u;
-    for (key=shadow_overlay_keys; key; key=key->next) {
-        MVDM_SHADOW_OVERLAY_VALUE *value;
-        total+=6u+hex_length((DWORD)lstrlenA(key->section))+2u;
-        for (value=key->values; value; value=value->next)
-            total+=3u+1u+1u+8u+1u+hex_length((DWORD)lstrlenA(key->section))+1u+
-                hex_length((DWORD)lstrlenA(value->name))+1u+hex_length(value->data_size)+2u;
-    }
-    if (total>65535u || total>0xffffffffu-1u) { SetLastError(ERROR_FILE_TOO_LARGE); return FALSE; }
-    contents=(char *)malloc(total+1u);
-    if (!contents) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return FALSE; }
-    cursor=contents;
-    if (shadow_base_size && shadow_contents) {
-        memcpy(cursor,shadow_contents,shadow_base_size); cursor+=shadow_base_size;
-        if (cursor>contents && cursor[-1]!='\n') { *cursor++='\r'; *cursor++='\n'; }
-    } else { memcpy(cursor,default_header,sizeof(default_header)-1u); cursor+=sizeof(default_header)-1u; }
-    memcpy(cursor,shadow_overlay_header,sizeof(shadow_overlay_header)-1u); cursor+=sizeof(shadow_overlay_header)-1u;
-    for (key=shadow_overlay_keys; key; key=key->next) {
-        MVDM_SHADOW_OVERLAY_VALUE *value;
-        *cursor++=';'; *cursor++='K'; *cursor++=':'; *cursor++=key->created?'1':'0';
-        *cursor++=key->deleted?'1':'0'; *cursor++=':';
-        cursor=hex_append(cursor,(const BYTE *)key->section,(DWORD)lstrlenA(key->section));
-        *cursor++='\r'; *cursor++='\n';
-        for (value=key->values; value; value=value->next) {
-            int count=wsprintfA(cursor,";V:%c:%08lX:",value->deleted?'1':'0',(unsigned long)value->type);
-            cursor+=count;
-            cursor=hex_append(cursor,(const BYTE *)key->section,(DWORD)lstrlenA(key->section)); *cursor++=':';
-            cursor=hex_append(cursor,(const BYTE *)value->name,(DWORD)lstrlenA(value->name)); *cursor++=':';
-            cursor=hex_append(cursor,value->data,value->data_size); *cursor++='\r'; *cursor++='\n';
-        }
-    }
-    *cursor='\0'; *output=contents; *size=(DWORD)(cursor-contents); return TRUE;
-}
-
-static LONG shadow_commit_overlay(VOID)
-{
-    char path[MAX_PATH], temporary[MAX_PATH], *contents;
-    DWORD size, written;
-    HANDLE file;
-    BOOL replaced;
-    if (!shadow_build_persisted(&contents,&size)) return GetLastError();
-    if (!shadow_path(path,sizeof(path)) || lstrlenA(path)+5u>sizeof(temporary)) { free(contents); return GetLastError(); }
-    lstrcpyA(temporary,path); lstrcatA(temporary,".tmp");
-    file=CreateFileA(temporary,GENERIC_WRITE,0,NULL,CREATE_ALWAYS,
-        FILE_ATTRIBUTE_TEMPORARY|FILE_FLAG_WRITE_THROUGH,NULL);
-    if (file==INVALID_HANDLE_VALUE) { free(contents); return GetLastError(); }
-    if (!WriteFile(file,contents,size,&written,NULL) || written!=size || !FlushFileBuffers(file)) {
-        DWORD error=GetLastError(); CloseHandle(file); DeleteFileA(temporary); free(contents); return error;
-    }
-    CloseHandle(file);
-    if (GetFileAttributesA(path)==INVALID_FILE_ATTRIBUTES && GetLastError()==ERROR_FILE_NOT_FOUND)
-        replaced=MoveFileExA(temporary,path,MOVEFILE_REPLACE_EXISTING|MOVEFILE_WRITE_THROUGH);
-    else replaced=ReplaceFileA(path,temporary,NULL,REPLACEFILE_WRITE_THROUGH,NULL,NULL);
-    if (!replaced) { DWORD error=GetLastError(); DeleteFileA(temporary); free(contents); return error; }
-    free(shadow_contents); shadow_contents=contents; shadow_size=size;
-    shadow_base_size=shadow_size; free_overlay_keys();
-    if (!shadow_load_overlay_footer()) return GetLastError();
-    shadow_trace("COMMIT_OK"); return ERROR_SUCCESS;
-}
-
-static LONG shadow_begin_mutation(MVDM_SHADOW_OVERLAY_KEY **prior)
-{
-    BOOL copied;
-    DWORD wait;
-    if (!shadow_commit_mutex) return ERROR_INVALID_HANDLE;
-    wait=WaitForSingleObject(shadow_commit_mutex,INFINITE);
-    if (wait!=WAIT_OBJECT_0 && wait!=WAIT_ABANDONED) return ERROR_GEN_FAILURE;
-    *prior=shadow_clone_overlay_keys(&copied);
-    if (!copied) { ReleaseMutex(shadow_commit_mutex); return ERROR_NOT_ENOUGH_MEMORY; }
-    if (!shadow_read_current()) { LONG error=GetLastError(); free_overlay_keys(); shadow_overlay_keys=*prior; *prior=NULL; ReleaseMutex(shadow_commit_mutex); return error; }
-    return ERROR_SUCCESS;
-}
-
-static LONG shadow_finish_mutation(MVDM_SHADOW_OVERLAY_KEY *prior, LONG status)
-{
-    if (status==ERROR_SUCCESS) status=shadow_commit_overlay();
-    if (status!=ERROR_SUCCESS) { free_overlay_keys(); shadow_overlay_keys=prior; prior=NULL; }
-    if (prior) { MVDM_SHADOW_OVERLAY_KEY *saved=shadow_overlay_keys; shadow_overlay_keys=prior; free_overlay_keys(); shadow_overlay_keys=saved; }
-    ReleaseMutex(shadow_commit_mutex);
-    return status;
-}
-
 static BOOL section_is_child(LPCSTR parent, LPCSTR section, LPCSTR *child,
     DWORD *length)
 {
@@ -1407,21 +1138,7 @@ LONG WINAPI ntvdm_shadow_reg_open_key(HKEY root, LPCSTR subkey, PHKEY result)
 
 LONG WINAPI ntvdm_shadow_reg_create_key(HKEY root, LPCSTR subkey, PHKEY result)
 {
-    MVDM_SHADOW_OVERLAY_KEY *prior;
-    LONG status;
-    if (!result) return ERROR_INVALID_PARAMETER;
-    status=shadow_begin_mutation(&prior);
-    if (status!=ERROR_SUCCESS) return status;
-    status=open_section(root,subkey,TRUE,result);
-    if (status==ERROR_SUCCESS) {
-        status=shadow_finish_mutation(prior,status);
-        if (status!=ERROR_SUCCESS) {
-            (void)ntvdm_shadow_reg_close_key(*result);
-            *result=NULL;
-        }
-        return status;
-    }
-    return shadow_finish_mutation(prior,status);
+    return open_section(root,subkey,TRUE,result);
 }
 
 LONG WINAPI ntvdm_shadow_reg_open_key_ex(HKEY root, LPCSTR subkey, DWORD options,
@@ -1439,22 +1156,18 @@ LONG WINAPI ntvdm_shadow_reg_set_value(HKEY handle, LPCSTR subkey, DWORD type,
     MVDM_SHADOW_OVERLAY_VALUE *value;
     HKEY child;
     LONG status;
-    MVDM_SHADOW_OVERLAY_KEY *prior;
     if (!key || type!=REG_SZ || !data) return ERROR_INVALID_PARAMETER;
-    status=shadow_begin_mutation(&prior);
-    if (status!=ERROR_SUCCESS) return status;
     status=open_section(handle,subkey,TRUE,&child);
-    if (status!=ERROR_SUCCESS) return shadow_finish_mutation(prior,status);
+    if (status!=ERROR_SUCCESS) return status;
     key=validate_key(child);
     overlay=overlay_key(key->section,TRUE);
     value=overlay_value(overlay,"",TRUE);
-    if (!overlay || !value) { ntvdm_shadow_reg_close_key(child); return shadow_finish_mutation(prior,ERROR_NOT_ENOUGH_MEMORY); }
+    if (!overlay || !value) { ntvdm_shadow_reg_close_key(child); return ERROR_NOT_ENOUGH_MEMORY; }
     free(value->data); value->data=(BYTE *)malloc(data_size);
-    if (!value->data) { value->data_size=0; ntvdm_shadow_reg_close_key(child); return shadow_finish_mutation(prior,ERROR_NOT_ENOUGH_MEMORY); }
+    if (!value->data) { value->data_size=0; ntvdm_shadow_reg_close_key(child); return ERROR_NOT_ENOUGH_MEMORY; }
     memcpy(value->data,data,data_size); value->data_size=data_size; value->type=type;
     value->deleted=FALSE; overlay->created=TRUE; overlay->deleted=FALSE;
-    status=ntvdm_shadow_reg_close_key(child);
-    return shadow_finish_mutation(prior,status);
+    return ntvdm_shadow_reg_close_key(child);
 }
 
 LONG WINAPI ntvdm_shadow_reg_set_value_ex(HKEY handle, LPCSTR name, DWORD reserved,
@@ -1465,20 +1178,16 @@ LONG WINAPI ntvdm_shadow_reg_set_value_ex(HKEY handle, LPCSTR name, DWORD reserv
     MVDM_SHADOW_OVERLAY_VALUE *value;
     BYTE *copy;
     (void)reserved;
-    MVDM_SHADOW_OVERLAY_KEY *prior;
-    LONG status;
     if (!key || (!data && data_size)) return ERROR_INVALID_PARAMETER;
-    status=shadow_begin_mutation(&prior);
-    if (status!=ERROR_SUCCESS) return status;
     overlay=overlay_key(key->section,TRUE);
     value=overlay_value(overlay,name ? name : "",TRUE);
-    if (!overlay || !value) return shadow_finish_mutation(prior,ERROR_NOT_ENOUGH_MEMORY);
+    if (!overlay || !value) return ERROR_NOT_ENOUGH_MEMORY;
     copy=data_size ? (BYTE *)malloc(data_size) : NULL;
-    if (data_size && !copy) return shadow_finish_mutation(prior,ERROR_NOT_ENOUGH_MEMORY);
+    if (data_size && !copy) return ERROR_NOT_ENOUGH_MEMORY;
     if (data_size) memcpy(copy,data,data_size);
     free(value->data); value->data=copy; value->data_size=data_size; value->type=type;
     value->deleted=FALSE; overlay->created=TRUE; overlay->deleted=FALSE;
-    return shadow_finish_mutation(prior,ERROR_SUCCESS);
+    return ERROR_SUCCESS;
 }
 
 LONG WINAPI ntvdm_shadow_reg_query_value(HKEY handle, LPCSTR subkey, LPSTR data,
@@ -1512,21 +1221,18 @@ LONG WINAPI ntvdm_shadow_reg_delete_key(HKEY handle, LPCSTR subkey)
     MVDM_SHADOW_KEY *key=validate_key(handle);
     MVDM_SHADOW_OVERLAY_KEY *overlay;
     char section[512], child[512]; HKEY target; LONG status;
-    MVDM_SHADOW_OVERLAY_KEY *prior;
     if (!key || !subkey || !*subkey) return ERROR_INVALID_PARAMETER;
-    status=shadow_begin_mutation(&prior);
-    if (status!=ERROR_SUCCESS) return status;
     status=section_from_root(handle,subkey,section,sizeof(section));
-    if (status!=ERROR_SUCCESS || !section_visible(section)) return shadow_finish_mutation(prior,ERROR_FILE_NOT_FOUND);
+    if (status!=ERROR_SUCCESS || !section_visible(section)) return ERROR_FILE_NOT_FOUND;
     status=open_section(handle,subkey,FALSE,&target);
-    if (status!=ERROR_SUCCESS) return shadow_finish_mutation(prior,status);
+    if (status!=ERROR_SUCCESS) return status;
     status=ntvdm_shadow_reg_enum_key(target,0,child,sizeof(child));
     ntvdm_shadow_reg_close_key(target);
-    if (status==ERROR_SUCCESS) return shadow_finish_mutation(prior,ERROR_ACCESS_DENIED);
-    if (status!=ERROR_NO_MORE_ITEMS) return shadow_finish_mutation(prior,status);
+    if (status==ERROR_SUCCESS) return ERROR_ACCESS_DENIED;
+    if (status!=ERROR_NO_MORE_ITEMS) return status;
     overlay=overlay_key(section,TRUE);
-    if (!overlay) return shadow_finish_mutation(prior,ERROR_NOT_ENOUGH_MEMORY);
-    overlay->deleted=TRUE; return shadow_finish_mutation(prior,ERROR_SUCCESS);
+    if (!overlay) return ERROR_NOT_ENOUGH_MEMORY;
+    overlay->deleted=TRUE; return ERROR_SUCCESS;
 }
 
 LONG WINAPI ntvdm_shadow_reg_enum_key(HKEY handle, DWORD index, LPSTR name,

@@ -19,14 +19,14 @@
 
 - Regenerated the formal x86 worker graph with repository `build/.ccache`,
   rebuilt `ntvdm.exe`, regenerated the complete 77-body WOW32 provider and
-  linked `wow32.dll`. The final parent export table exposes all twelve fixed
+  linked `wow32.dll`. The final parent export table exposes all eleven fixed
   façade ABI entries.
 - `t461_registry_overlay_fixture.c`, compiled in a fresh build-owned leaf,
   passed `T461_S2_REGISTRY_OVERLAY_OK`: default-value create/set/query/enum,
   leaf deletion, non-leaf rejection, enumeration, close and stale-handle
   rejection.  Its only file is created with `CREATE_NEW` under its supplied
   disposable directory and was absent after the test.
-- `dumpbin /exports ntvdm.exe` confirms all twelve façade exports, including
+- `dumpbin /exports ntvdm.exe` confirms all eleven façade exports, including
   the original `RegSetValueEx` shape required by `wow32fax.c`.
 - A complete coherent ten-image candidate (`product-r4`) passed the retained
   WOW WINMINE/SOL/WRITE frontiers, Console-17 and Window-17 groups in

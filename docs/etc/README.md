@@ -150,11 +150,6 @@ records the retained original callers, one parent façade/token boundary,
 formal builds and the published coherent-package gate.
 
 [T461 S3 durable Registry overlay design](operations/t461-shell-registry-s3-design.md)
-
-[T461 S3 Registry persistence candidate evidence](evidence/m0-t461-s3-registry-persistence-candidate.md)
-records the parent-owned atomic overlay implementation, restart/concurrency/
-rollback fixture and published candidate identity; it explicitly retains the
-complete Product-gate record as an active requirement.
 defines the sole façade's atomic persistence, tombstone and cross-worker
 serialization boundary before implementation.
 
