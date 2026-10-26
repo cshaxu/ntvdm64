@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T468 S1**
+**Active: M0 T468 S2**
 
 T464 is closed at the published `0.0.464` ten-image package; [its closure](../history/m0-t464-closure.md)
 is authoritative. `books/` is expressly excluded and remains untracked pending
