@@ -2,9 +2,9 @@
 
 ## Purpose
 
-This is an in-progress source audit, not an asynchronous-device acceptance
+This is a source-ownership closure, not an asynchronous-device acceptance
 claim.  It determines whether an unconnected project provider must be restored
-before a real Win16 callback/cancellation witness is attempted.
+before real Win16 device acceptance is attempted.
 
 ## Reached architecture
 
@@ -60,11 +60,17 @@ open a device or retain a host pointer.
 WOW_NATIVE_EXTENSION_BOUNDARY errors=0 ... tid32_native_sync=1 mm_private_exports=11
 ```
 
-## Remaining S3 proof
+## S3 disposition
 
-This audit rules out a missing project-side resolver or substitute provider.
-It does not prove that a real Win16 `timeSetEvent`, wave/MIDI completion,
-cancellation, failed open, or task exit reaches and drains the host callback
-path.  The next source trace must identify an immutable Win16 caller/witness
-for that original route and verify its callback, cancellation and task-rundown
-semantics without modifying guest media or reviving disabled thunks.
+| Selected asynchronous family | Reached original owner | S3 disposition | S4 obligation |
+| --- | --- | --- | --- |
+| `timeSetEvent` / `timeKillEvent` | Win16 `time.c` packages `TIMEREVENT`; the original TIMER driver owns event scheduling and invokes original `DriverCallback`. | No host provider or retained project state exists to restore. The timer driver owns cancellation; its comment and `AppExit` retain timer-event retirement. | Run a real immutable Win16 timer callback/cancel witness. |
+| Wave/MIDI completion and queued headers | Win16 `wave.c` / `midi.c` own headers and handle state; the original WINMM private endpoints own their native invocation and callback-ring production. | The 11-entry witness proves the existing host boundary. The disabled 32-bit converter cannot be revived because it would become a duplicate retained-header owner. | Run real device/open/error/completion/cancel and task-loss witnesses where a device is available; record explicit unavailable hardware separately. |
+| MCI and command-table helpers | Original Win16 mmsystem owns the device/task records. The selected WOW32 dispatch table does not activate the historical structured MCI body. | Explicitly unavailable in this selected runtime; no provider is invented. | Select a real immutable caller before claiming MCI capability. |
+| Task exit | Original `drvproc.c::AppExit` closes creator-task MCI devices and wave/MIDI/MMIO handles; `hdrvDestroy` suppresses callbacks during that rundown. | No project callback/buffer registry exists, so there is no independent state to leak or reclaim. | Verify real task loss against a completed device operation. |
+
+S3 therefore closes the reached integration question: **there is no missing
+project binding, scheduler, buffer owner or task-rundown substitute to add**.
+It deliberately does not convert a private-export resolution result into a
+claim that a physical device completed work.  Those immutable caller/device
+observations are the next, separate S4 acceptance scope.

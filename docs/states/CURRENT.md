@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T466 S3**
+**Active: M0 T467 S1**
 
 T464 is closed at the published `0.0.464` ten-image package; [its closure](../history/m0-t464-closure.md)
 is authoritative. `books/` is expressly excluded and remains untracked pending
@@ -14,36 +14,32 @@ the smallest source-shaped binding and no guest modification or rebuild.
 
 T465 is closed by [its closure](../history/m0-t465-closure.md): it completed
 the selected original classic-DDE transport with no production or guest diff.
-T466 S1 [multimedia matrix](../etc/evidence/m0-t466-s1-multimedia-owner-matrix.md)
-closed one active `MMCallProc32` bridge, disabled historical thunks and a
-callback/task-rundown red gate. T466 S2 closes the [selected synchronous timer
-route](../etc/evidence/m0-t466-s2-sync-multimedia-bridge.md): current SysWOW64
-WINMM already exposes its original `tid32Message` compatibility entry, so the
-correct production diff is zero. Its four focused source-boundary phases pass;
-guest media, runtime images and release identity remain unchanged.
+T466 is closed by [its closure](../history/m0-t466-closure.md): the complete
+reached multimedia source boundary needs no project provider, scheduler or
+retained buffer owner. It changes no production or guest image.
 
 ## Active Packet
 
-### M0 T466 S3 — asynchronous completion, cancellation and cleanup
+### M0 T467 S1 — Winsock surface and ownership inventory
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T466 S3, Ordinary Mode. |
-| Admission And Approval | Automatic progression from closed T466 S2 under owner-approved automatic S closure. |
-| Objective | Complete source-proven multimedia callbacks, queued-buffer completion/cancel and device/task cleanup without inventing a second scheduler. |
-| Non-goals | Guest change/rebuild; re-enabling disabled thunk families; guessed provider/device success; a new callback queue, retained-buffer owner or lifecycle authority. |
-| Reference Baseline | [T466 S1 matrix](../etc/evidence/m0-t466-s1-multimedia-owner-matrix.md), [T466 S2 evidence](../etc/evidence/m0-t466-s2-sync-multimedia-bridge.md), and [sound/multimedia proposal](../proposals/proposal-wow32-sound-multimedia-001.md). |
-| Files And ABI Surface | Reached original callback, buffer and device paths, their active build conditions and actual caller contracts. |
+| Identifier Mode | M0 T467 S1, Ordinary Mode. |
+| Admission And Approval | Automatic progression from closed T466 under owner-approved automatic S/T closure. |
+| Objective | Establish the source-first inventory of selected Win16 Winsock calls, structures, async notification, errors, cancellation and task cleanup before any binding or implementation change. |
+| Non-goals | Guest change/rebuild; a new socket provider, callback carrier, scheduler or socket/buffer registry; speculative repair from export names. |
+| Reference Baseline | [Winsock proposal](../proposals/proposal-wow32-winsock-001.md), [WOW32 minimum-diff governance](../etc/operations/wow32-queue-minimal-diff-admission-governance.md), and retained T466 callback boundary. |
+| Files And ABI Surface | Reached `winsock`/WOW32 owner families, active build conditions, callback/notification ABI, socket/buffer/task authority and actual caller contracts. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Per-path normal, error, cancellation, reentry and task-loss evidence; formal x86 source graph; affected DOS/WOW/Win3.x regressions. Link-only, fixture-only or mock-only results do not prove a device capability. |
-| Expected Markers | One original-owner disposition per reached asynchronous path; source-shaped normal/error/cancel result; no retained callback/buffer after task loss; no new provider or scheduler. |
-| Asset Needs | `build/t466-s3` only for disposable evidence; immutable guest inputs and installed package remain read-only. |
-| Reporting Requirements | Per-path owner/ABI/lifetime map, implementation or unavailable disposition, evidence roots, product/guest diff accounting and S4 handoff. |
-| Stop Conditions | Need for guest/driver change, new external provider, private-host recreation, retained callback/buffer ownership not supplied by the original path, or a new scheduler/lifecycle authority. |
-| Exit Criteria | Each selected asynchronous path has a caller-proven source-shaped implementation or explicit unavailable disposition; no live callback/buffer survives failure, cancellation or task loss. S4 retains whole-family device acceptance. |
-| Original Owner Request | “把这个 S5 做完就可以收口本 T 任务，然后自动准入后续 wow32 的 T 任务。” |
-| Similar-Issue Sweep | wave/MIDI/MCI callback, queued buffers, cancellation, task loss, device absence and callback retention. |
-| Candidate Proposal | [WOW32 sound and multimedia](../proposals/proposal-wow32-sound-multimedia-001.md). |
+| Verification | Per-family caller/owner/ABI/build/lifetime table and controlled real guest/local-peer starting evidence. Symbol/link success is not a capability pass. |
+| Expected Markers | One original owner and one authority per selected operation; explicit active/inactive disposition; no unbounded callback or socket ownership inferred from static names. |
+| Asset Needs | `build/t467-s1` only for disposable evidence; immutable guest inputs and installed package remain read-only. |
+| Reporting Requirements | Per-path owner/ABI/lifetime map, rejected reuse alternatives, evidence roots, product/guest diff accounting and S2 handoff. |
+| Stop Conditions | Need for guest/driver change, new external provider, private-host recreation, a new scheduler/lifecycle authority, or a semantic retreat not recorded in the proposal. |
+| Exit Criteria | The selected network surface has a complete source-shaped disposition and finite S2 implementation/acceptance boundary; no product change is made from static export evidence alone. |
+| Original Owner Request | “把这个S5做完就可以收口本T任务，然后自动准入后续wow32的T任务。” |
+| Similar-Issue Sweep | connect/listen/accept/send/receive, blocking hook, async select, notification removal, error mapping, cancellation, peer loss and task exit. |
+| Candidate Proposal | [WOW32 Winsock](../proposals/proposal-wow32-winsock-001.md). |
 
 ## T463 S1 Closure Record
 
