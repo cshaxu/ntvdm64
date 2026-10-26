@@ -51,6 +51,10 @@ the source-first duplicate/removal decision required in S2.
 turns the complete inventory into five bounded source-owner groups without
 inventing a bulk-import phase or silently treating runtime verification as done.
 
+[T473 S2 CPU40/DPMI reconciliation](evidence/m0-t473-s2-cpu40-dpmi-reconciliation.md)
+records why the selected original execution owners remain primary and which
+small session/kernel-resource carriers cannot be replaced by a same-named file.
+
 [T471 S4 aggregate review](evidence/m0-t471-s4-aggregate-review.md) records
 the unchanged installed/package identity, S1--S3 reconciliation and the sole
 owner-deferred physical WRITE non-pass for T-level acceptance.
