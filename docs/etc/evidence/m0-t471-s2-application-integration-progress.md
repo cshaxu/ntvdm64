@@ -27,7 +27,7 @@ existing pixel-verified deal/draw path.
 WRITE's ordinary `WM_CHAR` edit path and its Save As modal file-dialog submit
 cannot be represented by cross-thread `WM_COMMAND` or queued Enter on an
 inactive private desktop.  The prior source/physical analysis at
-[T449 S4](../../history/m0-t449-s4-reconciliation-ledger.md#write-physical-interaction-witness--2026-10-23)
+[T449 S4](m0-t449-s4-reconciliation-ledger.md#write-physical-interaction-witness-2026-10-23)
 shows why: those messages do not make the original document queue or native
 common-dialog loop consume the input.  Treating them as an interaction pass
 would be a test-only semantic substitute.
