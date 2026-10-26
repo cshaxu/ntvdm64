@@ -51,7 +51,7 @@ try{
   Run-Owned "$case-link" cmd.exe $line 120
   Run-Owned "$case-run" "$root/$case.exe" '--verify' 30
  }
- if($Phase -in @('all','extension') -and (Get-Content "$root/extension-run.stdout.txt" -Raw) -notmatch 'WOW_NATIVE_EXTENSION_BOUNDARY errors=0 .*unwind=1 reject=1 result_error=1 native_loader=1 tid32_native_sync=1'){throw 'Missing paired scope/resource/exception assertions'}
+ if($Phase -in @('all','extension') -and (Get-Content "$root/extension-run.stdout.txt" -Raw) -notmatch 'WOW_NATIVE_EXTENSION_BOUNDARY errors=0 .*unwind=1 reject=1 result_error=1 native_loader=1 tid32_native_sync=1 mm_private_exports=11'){throw 'Missing paired scope/resource/exception assertions'}
  if($Phase -in @('all','mm-body') -and (Get-Content "$root/mm-body-run.stdout.txt" -Raw) -notmatch 'WOW_ORIGINAL_MM_EXTENSION errors=0 actual_body=1 five_args=1 directory_order=1 zero_target=1 exception=1 tid32_through_original=1'){throw 'Missing actual original MM body/argument/zero-target assertions'}
  if($Phase -in @('all','rejection') -and (Get-Content "$root/rejection-run.stdout.txt" -Raw) -notmatch 'WOW_PUBLIC_CALLBACK_REJECTION errors=0 .*invalid_size_untouched=1 no_guest_entry=1'){throw 'Missing original public-export refusal assertions'}
  if($Phase -in @('all','original-frame')){Run-Owned original-frame $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-original-callback-frame.ps1" -ProviderBuildRoot "'+$provider+'" -BuildRoot "'+$root+'/original-frame"') 400}

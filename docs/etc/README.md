@@ -145,6 +145,10 @@ records the exact original `timeGetTime` five-word packet and proves that the
 existing SysWOW64 WINMM `tid32Message` compatibility entry satisfies it with
 no new host adaptation.
 
+[T466 S3 asynchronous multimedia owner audit](evidence/m0-t466-s3-async-multimedia-owner-audit.md)
+records the reached original callback/buffer/task-rundown ownership and the
+current WINMM private-entry witness; it does not claim asynchronous acceptance.
+
 [T461 S1 Shell and layered Registry owner matrix](evidence/m0-t461-s1-shell-registry-owner-matrix.md)
 records the selected Shell service and seven Registry entries, the sole
 `NTVDM.REG` façade, its missing persistent-write/concurrency contract, and the

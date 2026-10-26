@@ -132,8 +132,15 @@ int __cdecl main(void)
     FARPROC private_address;
     FARPROC address;
     FARPROC native_private_address;
+    FARPROC native_entry;
+    FARPROC extension_entry;
     typedef DWORD (WINAPI *tid32_message)(DWORD, DWORD, DWORD, DWORD, DWORD);
-    unsigned before, i;
+    static const char * const private_mm_entries[] = {
+        "NotifyCallbackData", "wod32Message", "wid32Message", "mod32Message",
+        "mid32Message", "aux32Message", "mci32Message", "tid32Message",
+        "joy32Message", "WOW32DriverCallback", "WOW32ResolveMultiMediaHandle"
+    };
+    unsigned before, i, private_index;
     const INT helpers[] = {RET_LOCALFREE,RET_GLOBALUNLOCKFREE,RET_LOCKRESOURCE,
         RET_FORCESEGMENTFAULT,RET_GETEXPWINVER,RET_WOWDDEFREEHANDLE,RET_FREEDIBSEL,
         RET_GETCURDIR,RET_SETCURDIR};
@@ -214,6 +221,11 @@ int __cdecl main(void)
     CHECK(native_private_address != NULL);
     private_address = winmm ? wow_extension_get_proc_address(winmm,"tid32Message") : NULL;
     CHECK(private_address == native_private_address);
+    for (private_index = 0; private_index < ARRAYSIZE(private_mm_entries); ++private_index) {
+        native_entry = GetProcAddress(winmm, private_mm_entries[private_index]);
+        extension_entry = wow_extension_get_proc_address(winmm, private_mm_entries[private_index]);
+        CHECK(native_entry != NULL && extension_entry == native_entry);
+    }
     if(private_address) {
         DWORD first = ((tid32_message)private_address)(0,0,0,0,0x000A);
         DWORD second = ((tid32_message)private_address)(0,0,0,0,0x000A);
@@ -222,7 +234,7 @@ int __cdecl main(void)
     if(winmm) CHECK(wow_extension_free_library(winmm));
     if(module) CHECK(wow_extension_free_library(module));
     CHECK(!native_depth && !ready_depth && starts == finishes);
-    printf("WOW_NATIVE_EXTENSION_BOUNDARY errors=%u inline_pairs=%u callbacks=%u ready_entries=%u resource_entries=%u unwind=1 reject=1 result_error=1 native_loader=1 tid32_native_sync=1\n",
+    printf("WOW_NATIVE_EXTENSION_BOUNDARY errors=%u inline_pairs=%u callbacks=%u ready_entries=%u resource_entries=%u unwind=1 reject=1 result_error=1 native_loader=1 tid32_native_sync=1 mm_private_exports=11\n",
         errors,starts,callbacks,callback_entries,resource_entries);
     return errors ? 1 : 0;
 }
