@@ -1,5 +1,10 @@
 # Supporting Material
 
+[T472 S1 error-dialog owner ledger](evidence/m0-t472-s1-error-dialog-owner-ledger.md)
+records the selected original response/termination routes, the narrow modern
+WOW hard-error boundary, and the finite DOS-fatal proof handoff without
+claiming runtime acceptance.
+
 [T471 S4 aggregate review](evidence/m0-t471-s4-aggregate-review.md) records
 the unchanged installed/package identity, S1--S3 reconciliation and the sole
 owner-deferred physical WRITE non-pass for T-level acceptance.
