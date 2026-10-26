@@ -187,7 +187,48 @@ cmp ax,[task-data]
 jne failed
 call checkpoint
 %ifdef RECEIVER
+%ifdef CLASSIC_DDE_TASK_LOSS
+; The sender owns peer startup. The surviving task only observes its cleanup.
+push ds
+push word library-data
+push word 0
+push word 0
+push word 0
+push word 0
+api 1,513
+mov [module-data],ax
+mov [module+2-data],dx
+or ax,dx
+require 24
+push32 module
+push ds
+push word export-data
+api 1,515
+mov [native-data],ax
+mov [native+2-data],dx
+or ax,dx
+require 25
+%endif
 .pump:
+%ifdef CLASSIC_DDE_TASK_LOSS
+cmp word [dde_task_loss_requested-data],1
+jne .pump_message
+push word [sender-data]
+api 2,47
+test ax,ax
+jz .task_loss_released
+api 1,29
+jmp .pump
+.task_loss_released:
+mov word [dde_task_loss_released-data],1
+mov word [dde_task_loss_requested-data],2
+mov ax,2
+call native_operation
+result 3
+push word 0
+api 2,6
+%endif
+.pump_message:
 push ds
 push word message-data
 push word 0
@@ -690,6 +731,13 @@ cmp word [same-data],2
 jne failed
 cmp word [early-data],1
 jne failed
+%ifdef CLASSIC_DDE_TASK_LOSS
+call dde_task_loss
+mov word [phase-data],3
+call checkpoint
+mov ax,0x4c00
+int 0x21
+%endif
 mov ax,2
 call native_operation
 result 3
@@ -876,6 +924,58 @@ call native_operation
 result 0x93
 inc word [dde_packet_count-data]
 ret
+
+%ifdef CLASSIC_DDE_TASK_LOSS
+; Leave a sender-owned DATA alias live and end this task.  The surviving
+; task records the original rule: task exit itself does not call GlobalFree.
+dde_task_loss:
+mov ax,15
+call native_operation
+result 0x8f
+push word 0x2002
+push word 0
+push word 32
+api 1,15
+test ax,ax
+jz failed
+mov [dde_reverse_handle-data],ax
+push ax
+api 1,18
+mov bx,ax
+or bx,dx
+jz failed
+mov di,ax
+mov es,dx
+mov word [es:di],0
+mov word [es:di+2],1
+add di,4
+mov si,dde_packet_payload-data
+mov cx,14
+cld
+rep movsb
+push word [dde_reverse_handle-data]
+api 1,19
+push word [native_window-data]
+push word 0x3e5
+push word [window-data]
+push word 0
+push word [dde_reverse_handle-data]
+api 2,110
+client_view
+test ax,ax
+jz failed
+mov ax,16
+call native_operation
+result 0x90
+mov ax,18
+call native_operation
+result 0x92
+post peer,0x47f,[window-data],0,0
+test ax,ax
+jz failed
+mov word [dde_task_loss_armed-data],1
+ret
+%endif
 %endif
 native_operation:
 push bp
@@ -970,6 +1070,8 @@ cmp word [bp+12],0x47e
 je .death_stale
 %endif
 %ifdef CLASSIC_DDE
+cmp word [bp+12],0x47f
+je .dde_task_loss_notice
 cmp word [bp+12],0x3e0
 je .dde_initiate
 cmp word [bp+12],0x3e8
@@ -1493,6 +1595,18 @@ jne .bad
 jmp .value
 %endif
 %ifdef CLASSIC_DDE
+.dde_task_loss_notice:
+%ifdef CLASSIC_DDE_TASK_LOSS
+mov ax,[bp+10]
+test ax,ax
+jz .bad
+mov [sender-data],ax
+mov word [dde_task_loss_requested-data],1
+xor ax,ax
+jmp .value
+%else
+jmp .bad
+%endif
 .dde_initiate:
 ; Preserve the atom pair directly in the INITIATE ACK.
 mov ax,[bp+6]
@@ -1844,6 +1958,11 @@ dde_stage: dw 0
 dde_reverse_ack: dw 0
 dde_packet_count: dw 0
 dde_initiate_ack: dw 0
+%ifdef CLASSIC_DDE_TASK_LOSS
+dde_task_loss_armed: dw 0
+dde_task_loss_requested: dw 0
+dde_task_loss_released: dw 0
+%endif
 %endif
 %ifdef CROSS_WORKER
 remote_task: dw 0

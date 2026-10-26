@@ -31,6 +31,9 @@ static HANDLE dde_initiate_event;
 static HGLOBAL dde_payload;
 static volatile LONG dde_ack, dde_released, dde_retired;
 static volatile LONG dde_initiate_ack;
+#ifdef CLASSIC_DDE_TASK_LOSS
+static volatile LONG dde_task_loss_free;
+#endif
 static ATOM dde_initiate_service, dde_initiate_topic;
 static volatile LONG dde_reverse_received;
 static volatile LONG dde_native_control;
@@ -146,6 +149,9 @@ static HGLOBAL WINAPI dde_observe_free(HGLOBAL handle)
     if(handle==dde_observed_packet) {
         dde_free_result=result;
         InterlockedIncrement(&dde_free_calls);
+#ifdef CLASSIC_DDE_TASK_LOSS
+        InterlockedIncrement(&dde_task_loss_free);
+#endif
     }
     return result;
 }
@@ -585,7 +591,11 @@ DWORD WINAPI MessagePeer(DWORD operation)
 {
     DWORD owner = 0, code = 1;
 #ifdef CLASSIC_DDE
+#ifdef CLASSIC_DDE_TASK_LOSS
+    DWORD report[18] = {0};
+#else
     DWORD report[17] = {0};
+#endif
 #else
     DWORD report[
 #ifdef MESSAGE_CROSS_WORKER
@@ -839,6 +849,9 @@ initiate_fail:
     if (operation == 18) {
         if(GetCurrentThreadId()!=sender_thread || !dde_observed_packet || dde_free_slot) return 0;
         dde_free_calls=0;dde_free_result=(HGLOBAL)(ULONG_PTR)1;
+#ifdef CLASSIC_DDE_TASK_LOSS
+        dde_task_loss_free=0;
+#endif
         return dde_switch_free_import(TRUE) ? 0x447a0092 : 0;
     }
     if (operation == 19) {
@@ -977,6 +990,9 @@ initiate_fail:
     report[14]=(DWORD)dde_released;
     report[15]=(DWORD)dde_retired;
     report[16]=(DWORD)dde_initiate_ack;
+#ifdef CLASSIC_DDE_TASK_LOSS
+    report[17]=(DWORD)dde_task_loss_free;
+#endif
     report[1]=(DWORD)errors;
 #endif
 #ifdef M4_COPYDATA_PROC32

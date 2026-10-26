@@ -18,6 +18,7 @@ param(
  [switch]$PendingSend,
  [switch]$Construction,
  [switch]$ClassicDde,
+ [switch]$ClassicDdeTaskLoss,
  [switch]$SyncDdeDiagnostic,
  [string]$TransactionDiagnosticManifest,
  [ValidateSet('BeforeCallback','AfterCallback')][string]$TransactionPhase='BeforeCallback'
@@ -44,6 +45,7 @@ if($ClassicDde -and (!$StructuredPayloads -or !$ThreadClientView -or $CrossWorke
  throw 'ClassicDde requires the normal structured/client-view same-worker message group'
 }
 if($SyncDdeDiagnostic -and !$ClassicDde){throw 'SyncDdeDiagnostic requires ClassicDde'}
+if($ClassicDdeTaskLoss -and (!$ClassicDde -or $SyncDdeDiagnostic)){throw 'ClassicDdeTaskLoss requires ordinary ClassicDde'}
 if($PendingSend -and (!$NativeHost -or !$StructuredPayloads -or !$ThreadClientView -or
  $CrossWorkerCoordinator -or $ExternalNativePeer -or $NativeExtension -or
  $CopyDataProc32 -or $ReplyPayloadLifetime -or $TimeoutPayloadLifetime)){
@@ -84,6 +86,7 @@ function Read-GuestReport([string]$path,[string]$name){
  if($PendingSend){$recordBytes+=4;$signature='MSG8'}
  if($Construction){$recordBytes+=14;$signature='MSG9'}
  if($ClassicDde){$recordBytes+=14}
+ if($ClassicDdeTaskLoss){$recordBytes+=6}
  if(!$bytes.Length -or $bytes.Length%$recordBytes){throw "Incomplete $name message records"}
  $fields=@('role','phase','errors','task','peerTask','basic','nested','early','posted','same','filtered','threadpost','text','native','destroyed')
  if($ThreadClientView){$fields+=@('clientVersion','clientExpected','clientChecks')}
@@ -92,6 +95,7 @@ function Read-GuestReport([string]$path,[string]$name){
  if($PendingSend){$fields+=@('waitBlocked','waitDeath')}
  if($Construction){$fields+=@('mdiCreated','mdiDestroyed','mdiTitleMutation','mdiParamMutation','mdiTextChecks','helpCalls','helpFreed')}
  if($ClassicDde){$fields+=@('ddeReceived','ddeReleaseAttempt','ddeRetired','ddeStage','ddeReverseAck','ddePacketCount','ddeInitiateAck')}
+ if($ClassicDdeTaskLoss){$fields+=@('ddeTaskLossArmed','ddeTaskLossRequested','ddeTaskLossReleased')}
  $rows=@()
  for($offset=0;$offset -lt $bytes.Length;$offset+=$recordBytes){
   if([Text.Encoding]::ASCII.GetString($bytes,$offset,4) -ne $signature){throw "Invalid $name signature"}
@@ -117,6 +121,7 @@ try{
   if($PendingSend){$arguments+='-DPENDING_SEND'}
   if($Construction){$arguments+='-DCONSTRUCTION'}
   if($ClassicDde){$arguments+='-DCLASSIC_DDE'}
+  if($ClassicDdeTaskLoss){$arguments+='-DCLASSIC_DDE_TASK_LOSS'}
   if($SyncDdeDiagnostic){$arguments+='-DSYNC_DDE_DIAGNOSTIC'}
   if($TransactionDiagnosticManifest -and $role -eq 'SEND'){$arguments+='-DMESSAGE_TRANSACTION'}
   & $assembler @arguments $assembly *> "$root/$role-assemble.txt"
@@ -147,6 +152,7 @@ try{
   if($CopyDataProc32){$nativeDefines+='/DM4_COPYDATA_PROC32'}
   if($Construction){$nativeDefines+='/DMESSAGE_CONSTRUCTION'}
   if($ClassicDde){$nativeDefines+='/DCLASSIC_DDE'}
+  if($ClassicDdeTaskLoss){$nativeDefines+='/DCLASSIC_DDE_TASK_LOSS'}
   if($TransactionDiagnosticManifest){$nativeDefines+='/DMESSAGE_TRANSACTION'}
   & $compiler cl.exe /nologo /LD /MT /O2 /W4 /WX /D_CRT_SECURE_NO_WARNINGS @nativeDefines "/Fo$root/peer.obj" $native /link "/OUT:$root/MSGHOST.DLL" "/IMPLIB:$root/MSGHOST.lib" /EXPORT:MessagePeer=_MessagePeer@4 /EXPORT:MessageExtension=_MessageExtension@12 user32.lib *> "$root/native-build.txt"
   if($LASTEXITCODE){throw 'Native peer build failed'}
@@ -229,7 +235,8 @@ public static class WowMessageLogonEnvironment {
  }
  $report=Get-Content "$root/observer.txt" -Raw
  if($process.ExitCode -or $report -notmatch 'result=exited' -or $report -notmatch 'exit=0x00000000'){throw 'Guest/launcher failed normal completion'}
- if(($send.phase -join ',') -ne '0,1,2,3,4,6' -or ($receive.phase -join ',') -ne '0,5,6' -or
+ $expectedSendPhases=if($ClassicDdeTaskLoss){'0,1,2,3'}else{'0,1,2,3,4,6'}
+ if(($send.phase -join ',') -ne $expectedSendPhases -or ($receive.phase -join ',') -ne '0,5,6' -or
     @(@($send)+@($receive)|Where-Object errors -ne 0).Count){throw 'Guest message phase/assertion failure'}
  $last=$send[-1];$peer=$receive[-1]
  if($ThreadClientView -and
@@ -241,17 +248,19 @@ public static class WowMessageLogonEnvironment {
  $expectedNative=if($NativeExtension){5}else{4}
  if($StructuredPayloads){$expectedNative+=3}
  if($ClassicDde){$expectedNative++}
+ $nativeCountOk=if($ClassicDdeTaskLoss){$true}else{$last.native -eq $expectedNative}
  $identityOk=if($CrossWorkerCoordinator){
   $last.remoteTask -eq $peer.task -and $peer.remoteTask -eq $last.task -and
   $last.foreignExpected -ne 0 -and $peer.foreignExpected -ne 0 -and
   $last.peerTask -eq $last.foreignExpected -and $peer.peerTask -eq $peer.foreignExpected -and
   $last.launchReady -eq 1 -and $peer.launchReady -eq 0
  }else{$last.task -ne $peer.task -and $last.peerTask -eq $peer.task}
+ $senderCompletionOk=if($ClassicDdeTaskLoss){$last.ddeTaskLossArmed -eq 1 -and $last.destroyed -eq 0}else{$last.destroyed -eq 1}
  if(!$last.task -or !$peer.task -or !$identityOk -or
     @($send|Where-Object task -ne $last.task).Count -or @($receive|Where-Object task -ne $peer.task).Count -or
     $last.role -ne 0 -or $peer.role -ne 1 -or $last.nested -ne 2 -or $last.same -ne 2 -or
     $last.early -ne 1 -or $last.posted -ne 1 -or $last.filtered -ne 1 -or $last.threadpost -ne 1 -or
-    $last.text -ne 1 -or $last.native -ne $expectedNative -or $last.destroyed -ne 1 -or
+    $last.text -ne 1 -or !$nativeCountOk -or !$senderCompletionOk -or
     $peer.basic -ne 1 -or $peer.nested -ne 1 -or $peer.early -ne 1 -or $peer.posted -ne 1){throw 'Incomplete actual Win16 message contract'}
  if($StructuredPayloads -and ($last.structures -ne 4 -or $peer.structures -ne 4)){
   throw 'MINMAXINFO nested stack copyback, WINDOWPOS or COPYDATA guest path incomplete'
@@ -263,6 +272,7 @@ public static class WowMessageLogonEnvironment {
  $bytes=[IO.File]::ReadAllBytes("$root/MSGHOST.bin")
  $nativeBytes=if($StructuredPayloads){52}else{48}
  if($ClassicDde){$nativeBytes+=16}
+ if($ClassicDdeTaskLoss){$nativeBytes+=4}
  if($CopyDataProc32){$nativeBytes+=8}
  if($ExternalNativePeer){$nativeBytes+=8}
  if($CrossWorkerCoordinator){$nativeBytes+=4}
@@ -270,6 +280,7 @@ public static class WowMessageLogonEnvironment {
  $names=@('signature','errors','pid','senderThread','receiverThread','nativeThread','received','nested','replied','text','exit','windowAlive');$nativeReport=[ordered]@{}
  if($StructuredPayloads){$names+='structures'}
  if($ClassicDde){$names+=@('ddeAck','ddeReleased','ddeRetired','ddeInitiateAck')}
+ if($ClassicDdeTaskLoss){$names+='ddeTaskLossFree'}
  if($CopyDataProc32){$names+=@('proc32Fresh','proc32Borrowed')}
  if($ExternalNativePeer){$names+=@('externalPid','externalBits')}
  if($CrossWorkerCoordinator){$names+='receiverPid'}
@@ -308,11 +319,13 @@ public static class WowMessageLogonEnvironment {
   $expectedReverseAck=if($SyncDdeDiagnostic){2}else{1}
   if($last.ddeReceived -ne 1 -or $last.ddeReleaseAttempt -ne 1 -or $last.ddeRetired -ne 1 -or $last.ddeInitiateAck -ne 1 -or $last.ddeReverseAck -ne $expectedReverseAck -or $last.ddePacketCount -ne 3 -or
      $peer.ddeReceived -ne 0 -or $peer.ddeReverseAck -ne 0 -or $peer.ddePacketCount -ne 0 -or $nativeReport.ddeAck -ne 1 -or $nativeReport.ddeReleased -ne 1 -or
-     $nativeReport.ddeRetired -ne 1 -or $nativeReport.ddeInitiateAck -ne 1){throw 'Actual classic DDE execute/ack/initiate/free lifecycle incomplete'}
+     $nativeReport.ddeRetired -ne 1 -or $nativeReport.ddeInitiateAck -ne 1 -or
+     ($ClassicDdeTaskLoss -and ($peer.ddeTaskLossReleased -ne 1 -or $nativeReport.ddeTaskLossFree -ne 0))){throw 'Actual classic DDE execute/ack/initiate/free lifecycle incomplete'}
   @{execute='native HGLOBAL -> original WM32DDEExecute -> Win16 alias';ack='Win16 PostMessage WM_DDE_ACK -> original reverse thunk -> native packed lParam';
     initiate='native WM_DDE_INITIATE service/topic atoms -> original initiator registration -> Win16 direct-atom WM_DDE_ACK -> original registration retirement';
     reverse=if($SyncDdeDiagnostic){'Win16-owned EXECUTE posted and sent synchronously -> native peer validates payload -> ACK returns original guest handle'}else{'Win16-owned EXECUTE posted -> native peer validates payload -> ACK returns original guest handle'};release='guest early GlobalFree request is deferred; native GlobalFree retires both aliases';guest=@{received=$last.ddeReceived;releaseAttempt=$last.ddeReleaseAttempt;retired=$last.ddeRetired;reverseAck=$last.ddeReverseAck};
     packets='Win16-to-native DATA/POKE/ADVISE CF_TEXT; guest free calls original WOW32 GlobalFree exactly once per native allocation, each returns success';native=@{ack=$nativeReport.ddeAck;released=$nativeReport.ddeReleased;retired=$nativeReport.ddeRetired;initiateAck=$nativeReport.ddeInitiateAck};
+    taskLoss=if($ClassicDdeTaskLoss){'sender task exits with one armed DATA alias; surviving Win16 task proves original task cleanup does not invoke GlobalFree, so app ownership continues until explicit release or final worker teardown'}else{'not selected'};
     originalGuestChanged=$false;scope='INITIATE/ACK atom negotiation, EXECUTE/ACK both directions, sender-owned DATA/POKE/ADVISE CF_TEXT, and a test-only rejected DATA PostMessage rollback; no DDEML endpoint, item atoms beyond INITIATE, nested formats or heap-failure injection'}|ConvertTo-Json|Set-Content "$root/classic-dde-result.json"
  }
  if($TransactionDiagnosticManifest){

@@ -200,6 +200,10 @@ DDEML private-USER stopping boundary, and the finite S2/S3 transfer.
 records the real INITIATE atom ACK, EXECUTE/ACK and DATA/POKE/ADVISE original
 transport witness, with DDEML explicitly excluded.
 
+[T465 S3 classic DDE loss/release ledger](evidence/m0-t465-s3-dde-loss-release-ledger.md)
+records original cancellation, alias and task-loss ownership boundaries and
+the real two-task negative-free witness; it adds no DDE provider or scheduler.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.
