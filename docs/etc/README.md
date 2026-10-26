@@ -185,6 +185,10 @@ handles, without introducing a second host job manager.
 records the retained HDC, raw-boundary and common-dialog witnesses against one
 unchanged package and the explicit provider limits.
 
+[T469 S1 COMM owner matrix](evidence/m0-t469-s1-comm-owner-matrix.md)
+records the original serial state, task-loss and external-device boundaries,
+including the inherited multi-port retirement discrepancy.
+
 [T461 S1 Shell and layered Registry owner matrix](evidence/m0-t461-s1-shell-registry-owner-matrix.md)
 records the selected Shell service and seven Registry entries, the sole
 `NTVDM.REG` façade, its missing persistent-write/concurrency contract, and the

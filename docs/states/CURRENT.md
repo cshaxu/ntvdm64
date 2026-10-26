@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T469 S1**
+**Active: M0 T469 S2**
 
 T464 is closed at the published `0.0.464` ten-image package; [its closure](../history/m0-t464-closure.md)
 is authoritative. `books/` is expressly excluded and remains untracked pending
@@ -21,23 +21,23 @@ ten-image package remains `build/t467-s3/package-r2` and guest media is unchange
 
 ## Active Packet
 
-### M0 T469 S1 — COMM contract and endpoint inventory
+### M0 T469 S2 — COMM operations and source correction search
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T469 S1, Ordinary Mode. |
-| Admission And Approval | Automatic sequential admission after [T468 closure](../history/m0-t468-closure.md), under the owner-approved automatic S/T sequence. |
-| Objective | Map selected original COMM open/config/read/write/status/event/close families, actual endpoint availability, and normal/failure/retirement owners before implementation. |
-| Non-goals | Guest change/rebuild; serial provider, virtual-port pair, polling loop, callback/task manager, inferred hardware success, or production repair. |
-| Reference Baseline | [COMM proposal](../proposals/proposal-wow32-comm-001.md), [minimum-diff COMM gate](../etc/operations/wow32-queue-minimal-diff-admission-governance.md), current package and existing external-COM debt record. |
-| Files And ABI Surface | Original WOW32 COMM owners, reached host serial bindings and existing observation fixtures; source audit only. |
+| Identifier Mode | M0 T469 S2, Ordinary Mode. |
+| Admission And Approval | Automatic sequential admission after [S1 closure](../history/m0-t469-s1-closure.md), under the owner-approved automatic S/T sequence. |
+| Objective | Verify selected original COMM operation boundaries and find an admissible source-shaped disposition for the inherited multi-port task-loss discrepancy. |
+| Non-goals | Guest change/rebuild; serial provider, virtual-port pair, polling loop, callback/task manager, inferred hardware success, or speculative cleanup rewrite. |
+| Reference Baseline | [S1 owner matrix](../etc/evidence/m0-t469-s1-comm-owner-matrix.md), COMM proposal, minimum-diff gate, existing device boundary and current package. |
+| Files And ABI Surface | Existing `wucomm.c`/`wucomm.h`, original USER COMM source and existing serial fixtures; no new production ABI. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Source/ABI/lifetime matrix for each selected family, actual endpoint inventory and exact reusable test entrypoints; no runtime claim from static evidence. |
-| Expected Markers | One original owner per port/overlapped buffer/event/callback; explicit real endpoint or unavailable result; no new lifetime authority. |
-| Asset Needs | Read-only original source, actual serial-device inventory and existing fixtures; guest inputs remain immutable. |
-| Reporting Requirements | Owner graph, ABI/build conditions, endpoint result, normal/failure/retirement test plan and finite next-S boundary. |
+| Verification | Trace original Win16 and host correction candidates; then run only the coherent selected normal/negative/lifecycle group. |
+| Expected Markers | Original operation/result semantics preserved; either a matching correction or explicit inherited boundary; no duplicate task/port owner. |
+| Asset Needs | Read-only source candidates, existing COM3 boundary and fixtures; guest inputs remain immutable. |
+| Reporting Requirements | Reuse/rejection proof, exact lifetime decision, selected test plan/results and external limitation. |
 | Stop Conditions | Need for guest change, virtual provider, new async/callback manager, hidden retry/polling policy, or a new observable semantic concession. |
-| Exit Criteria | Every selected family has an original owner and finite source-shaped test/repair disposition; unavailable hardware is factual, not success. |
+| Exit Criteria | Each operation family has a source-shaped normal/failure disposition; multi-port cleanup has a policy-compliant decision. |
 | Original Owner Request | Automatically proceed through the ordered WOW32 candidates after each bounded closure. |
 | Similar-Issue Sweep | COM open/close, DCB/timeouts, synchronous and pending I/O, event/cancel, task loss, external device and stale callback. |
 | Candidate Proposal | [WOW32 COMM](../proposals/proposal-wow32-comm-001.md). |
@@ -67,6 +67,12 @@ to add.
 T468 closed the selected original printing/spool scope at the
 [T468 closure](../history/m0-t468-closure.md). The new active packet owns only
 the ordered COMM source inventory.
+
+## T469 S1 Closure Record
+
+S1 completed the original COMM owner and endpoint map at the
+[S1 closure](../history/m0-t469-s1-closure.md). S2 owns only source-shaped
+operation and task-loss disposition work.
 
 ## T463 S2 Closure Record
 
