@@ -15,6 +15,6 @@ try {
  @{pid=$p.Id;start=$p.StartTime.ToUniversalTime().ToString('o');deadline=$p.StartTime.AddSeconds(20).ToUniversalTime().ToString('o')}|ConvertTo-Json|Set-Content "$root/process.json"
  if(!$p.WaitForExit(20000)){& taskkill.exe /PID $p.Id /T /F;throw 'Owned provider timeout'}
  $p.WaitForExit();$p.Refresh()
- if($p.ExitCode -or (Get-Content "$root/probe.err" -Raw) -notmatch 'WINSOCK_PROVIDER result=0 calls=[1-9]\d* foreign=0 outside_blocking=0 cancel=0 '){throw 'Provider callback contract failed'}
+ if($p.ExitCode -or (Get-Content "$root/probe.err" -Raw) -notmatch 'WINSOCK_PROVIDER result=0 stage=restore hook calls=[1-9]\d* foreign=0 outside_blocking=0 cancel=0 error=0'){throw 'Provider callback contract failed'}
  '0'|Set-Content "$root/exit.txt"
 }catch{$_|Out-String|Set-Content "$root/error.txt";'1'|Set-Content "$root/exit.txt";throw}

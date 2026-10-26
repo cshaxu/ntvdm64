@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T467 S1**
+**Active: M0 T467 S2**
 
 T464 is closed at the published `0.0.464` ten-image package; [its closure](../history/m0-t464-closure.md)
 is authoritative. `books/` is expressly excluded and remains untracked pending
@@ -20,26 +20,33 @@ retained buffer owner. It changes no production or guest image.
 
 ## Active Packet
 
-### M0 T467 S1 — Winsock surface and ownership inventory
+### M0 T467 S2 — Winsock synchronous original bridge
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T467 S1, Ordinary Mode. |
-| Admission And Approval | Automatic progression from closed T466 under owner-approved automatic S/T closure. |
-| Objective | Establish the source-first inventory of selected Win16 Winsock calls, structures, async notification, errors, cancellation and task cleanup before any binding or implementation change. |
-| Non-goals | Guest change/rebuild; a new socket provider, callback carrier, scheduler or socket/buffer registry; speculative repair from export names. |
-| Reference Baseline | [Winsock proposal](../proposals/proposal-wow32-winsock-001.md), [WOW32 minimum-diff governance](../etc/operations/wow32-queue-minimal-diff-admission-governance.md), and retained T466 callback boundary. |
-| Files And ABI Surface | Reached `winsock`/WOW32 owner families, active build conditions, callback/notification ABI, socket/buffer/task authority and actual caller contracts. |
+| Identifier Mode | M0 T467 S2, Ordinary Mode. |
+| Admission And Approval | Automatic progression from S1's [owner/lifetime inventory](../etc/evidence/m0-t467-s1-winsock-owner-matrix.md) under owner-approved automatic S/T closure. |
+| Objective | Recover/prove the selected synchronous Win16 Winsock bridge: startup, loopback sockets, conversion, blocking-hook cancellation and idle unhook. |
+| Non-goals | Guest change/rebuild or normal-package Winsock deployment; a new socket provider, callback carrier, scheduler, socket/buffer registry, async request cancellation or task-loss implementation. |
+| Reference Baseline | [S1 owner/lifetime inventory](../etc/evidence/m0-t467-s1-winsock-owner-matrix.md), [Winsock proposal](../proposals/proposal-wow32-winsock-001.md), [WOW32 minimum-diff governance](../etc/operations/wow32-queue-minimal-diff-admission-governance.md), and retained T466 callback boundary. |
+| Files And ABI Surface | `wsext.c`, `wsraw.c`, `wwstbl2.h`, isolated original guest `WINSOCK.DLL`, `WSOCK32` ordinal-109 hook and existing synchronous `CallBack16` ABI. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Per-family caller/owner/ABI/build/lifetime table and controlled real guest/local-peer starting evidence. Symbol/link success is not a capability pass. |
-| Expected Markers | One original owner and one authority per selected operation; explicit active/inactive disposition; no unbounded callback or socket ownership inferred from static names. |
-| Asset Needs | `build/t467-s1` only for disposable evidence; immutable guest inputs and installed package remain read-only. |
-| Reporting Requirements | Per-path owner/ABI/lifetime map, rejected reuse alternatives, evidence roots, product/guest diff accounting and S2 handoff. |
-| Stop Conditions | Need for guest/driver change, new external provider, private-host recreation, a new scheduler/lifecycle authority, or a semantic retreat not recorded in the proposal. |
-| Exit Criteria | The selected network surface has a complete source-shaped disposition and finite S2 implementation/acceptance boundary; no product change is made from static export evidence alone. |
+| Verification | Isolated immutable guest probe plus native loopback peer prove startup, data conversion, custom/default hook, cancel, idle unhook, errors and teardown; affected x86 build and retained package regressions. |
+| Expected Markers | One original mapping/cleanup owner; explicit `WSAEINPROGRESS` only while blocking; no socket/guest-buffer leak on failed or normal synchronous calls. |
+| Asset Needs | `build/t467-s2` only for disposable evidence; hash-recorded original guest test DLL; installed/default package and guest inputs remain read-only. |
+| Reporting Requirements | Exact correction/provenance register, source/build/guest/native evidence, diff and package accounting, and bounded S3 async handoff. |
+| Stop Conditions | Need for guest/driver change, a new provider/scheduler/registry, non-source-shaped correction, or semantics outside the synchronous bridge. |
+| Exit Criteria | The synchronous original bridge passes real guest/local-loopback positive, negative and cleanup evidence; all product gates and required publication complete before S2 closure. |
 | Original Owner Request | “把这个S5做完就可以收口本T任务，然后自动准入后续wow32的T任务。” |
-| Similar-Issue Sweep | connect/listen/accept/send/receive, blocking hook, async select, notification removal, error mapping, cancellation, peer loss and task exit. |
+| Similar-Issue Sweep | All synchronous socket entry points, hook install/unhook/cancel, startup nesting, 16/32 socket mapping, reentry pointer refresh, normal/failure socket cleanup. |
 | Candidate Proposal | [WOW32 Winsock](../proposals/proposal-wow32-winsock-001.md). |
+
+## T467 S1 Closure Record
+
+S1 closes as a source/composition inventory only.  Its [owner/lifetime
+matrix](../etc/evidence/m0-t467-s1-winsock-owner-matrix.md) fixes the selected
+original owners, ordinary WINSOCK-less package boundary, local provider
+witness and finite S2/S3 split; it changes no product or guest artifact.
 
 ## T463 S1 Closure Record
 

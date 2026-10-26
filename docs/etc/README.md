@@ -149,6 +149,11 @@ no new host adaptation.
 records the reached original callback/buffer/task-rundown ownership and the
 current WINMM private-entry witness; it does not claim asynchronous acceptance.
 
+[T467 S1 Winsock owner and lifetime inventory](evidence/m0-t467-s1-winsock-owner-matrix.md)
+records the selected original synchronous/async owners, the ordinary
+WINSOCK-less package boundary, native loopback provider witness, and finite
+S2/S3 handoff without adding a provider or guest artifact to a release.
+
 [T461 S1 Shell and layered Registry owner matrix](evidence/m0-t461-s1-shell-registry-owner-matrix.md)
 records the selected Shell service and seven Registry entries, the sole
 `NTVDM.REG` façade, its missing persistent-write/concurrency contract, and the
