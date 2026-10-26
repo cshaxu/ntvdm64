@@ -1,8 +1,10 @@
 param([Parameter(Mandatory)][string]$PackageRoot,[Parameter(Mandatory)][string]$BuildRoot,
  [Parameter(Mandatory)][string]$Observer,[Parameter(Mandatory)][string]$CompilerDriver,
- [Parameter(Mandatory)][string]$Nasm,[switch]$SharedTasks)
+ [Parameter(Mandatory)][string]$Nasm,[switch]$SharedTasks,[switch]$LifecycleOnly)
 # Run from an owned hidden supervisor. One service/package owns both workers.
 $ErrorActionPreference='Stop'
+$LifecycleOnly = $LifecycleOnly.IsPresent
+if($LifecycleOnly -and !$SharedTasks){throw 'LifecycleOnly requires SharedTasks'}
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Fresh build-owned root required'}
@@ -86,16 +88,21 @@ try {
  $pids=@($idle|ForEach-Object {$_.Groups[1].Value}|Sort-Object -Unique)
  if($SharedTasks){
    if($pids.Count -ne 1 -or $results[0].task -eq $results[1].task -or
-       !$results[0].cross -or $results[0].crossTask -ne $results[1].task){throw 'Missing A-vector callback executing on B task in one worker'}
+       (!$LifecycleOnly -and (!$results[0].cross -or $results[0].crossTask -ne $results[1].task))){throw 'Missing A-vector callback executing on B task in one worker'}
    foreach($item in $results){
-     if(!@($idle|Where-Object {$_.Groups[2].Value -eq $item.task}).Count){throw 'Missing taskman dispatch for task'}
      $completion=[regex]::Matches($trace,'(?m)^'+$pids[0]+' TaskRetirement .*task='+$item.task+' stage=complete status=0\r?$')
      if($completion.Count -ne 1 -or @($idle|Where-Object {$_.Groups[2].Value -eq $item.task -and $_.Index -gt $completion[0].Index}).Count){throw 'Missing unique retirement or idle after retirement'}
+     # The lifecycle slice proves task overlap, terminal cleanup and the
+     # surviving registrar. It intentionally does not claim the later
+     # cross-task idle-vector/message-identity contract; an unregistered
+     # peer therefore need not have its own taskman idle-dispatch marker.
+     if(!$LifecycleOnly -and !@($idle|Where-Object {$_.Groups[2].Value -eq $item.task}).Count){throw 'Missing taskman dispatch for task'}
    }
    $peerCompletion=[regex]::Match($trace,'(?m)^'+$pids[0]+' TaskRetirement .*task='+$results[1].task+' stage=complete status=0\r?$')
    if(!@($idle|Where-Object {$_.Groups[2].Value -eq $results[0].task -and $_.Index -gt $peerCompletion.Index}).Count){throw 'Registrar did not continue idle after peer retirement'}
    $results|ConvertTo-Json|Set-Content "$root/identities.json"
-   "PASS shared worker $($pids[0]), A vector ran on unregistered B task, both requests exited normally"|Set-Content "$root/result.txt"
+   $detail=if($LifecycleOnly){'two distinct tasks overlapped and retired independently'}else{'A vector ran on unregistered B task'}
+   "PASS shared worker $($pids[0]), $detail, both requests exited normally"|Set-Content "$root/result.txt"
    '0'|Set-Content "$root/exit.txt"
    return
  }

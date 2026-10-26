@@ -166,6 +166,14 @@ reproduced full-frame residual.
 freezes the exact ordinary package and independent WINMINE/SOL/WRITE frontiers,
 including the SOL Options source-trace admission boundary.
 
+[T463 S2 SOL Options attribution and delivery](evidence/m0-t463-s2-sol-options-attribution.md)
+records the original modal route, the public-HWND conversion repair, and the
+coherent ten-image `0.0.463` product gate.
+
+[T463 S3 lifecycle and owner acceptance](evidence/m0-t463-s3-lifecycle-owner-acceptance.md)
+records the corrected same-desktop WRITE restart witness, the intentionally
+narrow shared-worker retirement witness, and the test-only S5 audit.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.

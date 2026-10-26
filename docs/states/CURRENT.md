@@ -2,11 +2,11 @@
 
 ## Current Work
 
-**Active: M0 T463 S3**
+**Active: M0 T464 S1**
 
-T460 is closed at `5f12610eb`; its owner-approved Win95 Start Menu
-PIF-template provenance repair is retained in its closure record. `books/` is
-expressly excluded and remains untracked pending separate documentation
+T463 is closed at the published S2 package plus its S3/S5 lifecycle acceptance;
+[the closure record](../history/m0-t463-closure.md) is authoritative. `books/`
+is expressly excluded and remains untracked pending separate documentation
 admission.
 
 Automatic sequential S closure/advancement is approved. Completed work follows
@@ -14,26 +14,26 @@ the read-only `ntvdm64-wow32-audit`: recover selected original behavior with
 the smallest source-shaped binding and no guest modification or rebuild.
 ## Active Packet
 
-### M0 T463 S3 — lifecycle and owner acceptance
+### M0 T464 S1 — residual WOW hard-error ownership
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T463 S3, Ordinary Mode; lifecycle/owner acceptance only after the published S2 repair. |
-| Admission And Approval | Automatic advance after S2 closure. |
-| Objective | Prove normal close/restart, supported multiple tasks, scoped abnormal cleanup and subsequent DOS use for the three-app cohort; repair only a source-proven owner edge if a required lifecycle case fails. |
-| Non-goals | No guest change, broad provider claim, cosmetic workaround, host UI substitution or speculative runtime repair. |
-| Reference Baseline | [Everyday-usability proposal](../proposals/proposal-wow32-everyday-usability-001.md), [S2 attribution and delivery](../etc/evidence/m0-t463-s2-sol-options-attribution.md), minimum-diff governance and T462 evidence. |
-| Files And ABI Surface | Existing lifecycle/owner paths only after failure-to-owner attribution; no new public ABI without a separate admission. |
+| Identifier Mode | M0 T464 S1, Ordinary Mode. |
+| Admission And Approval | Automatic admission of Queue item 1 after T463 closure; owner authorized sequential WOW32 work. |
+| Objective | Reconcile every reachable ERROR-01 hard-error caller, response, cancellation and fatal-cleanup dependency to its original owner; admit only a finite source-proven S2 repair. |
+| Non-goals | No guest edit/rebuild, new USER queue/scheduler/terminator, generic error-dialog replacement, host UI substitution or speculative provider. |
+| Reference Baseline | [Hard-error proposal](../proposals/proposal-wow32-hard-error-responses-001.md), [minimum-diff governance](../etc/operations/wow32-queue-minimal-diff-admission-governance.md), and [T463 closure](../history/m0-t463-closure.md). |
+| Files And ABI Surface | Read-only attribution first. A later change must name original response/hung-task owner, build condition, Guest/WOW/native ABI and normal/failure/retirement authority. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Reproducible normal, restart, concurrent-task and scoped loss/recovery witnesses plus applicable coherent product package gate. |
-| Expected Markers | No application is passed merely because a window or process exists; normal and abnormal exits retain the owning worker/parent contract. |
-| Asset Needs | Build-owned T463 S3 evidence only; existing product package and guest media read-only. |
-| Reporting Requirements | Inputs, procedure, lifecycle owner, exact cleanup disposition and finite T closure or defect handoff. |
-| Stop Conditions | Need for a guest edit, unsupported causal conclusion, fault outside the admitted lifecycle closure, or a repair not tied to the captured failing call. |
-| Exit Criteria | Bounded lifecycle acceptance for all three applications, or a source-attributed defect packet with no substitute implementation. |
-| Original Owner Request | 自动准入后续 WOW32 T；按最小镜像 diff、最大原版复通执行。 |
-| Similar-Issue Sweep | Cross-task close/restart, worker retirement, and DOS usability after scoped WOW cleanup. |
-| Candidate Proposal | [WOW32 everyday usability](../proposals/proposal-wow32-everyday-usability-001.md). |
+| Verification | Caller census; source/condition/ABI ledger; real normal, cancellation, failure and task/worker-cleanup entrypoints for any proposed repair. |
+| Expected Markers | One original owner for each response and cleanup edge; no second terminator or lifetime authority. |
+| Asset Needs | `build/t464-s1` only for disposable audit evidence; released package and immutable guest inputs read-only. |
+| Reporting Requirements | Exact owner, rejected reuse forms, state authority, evidence, limitations and earliest Queue handoff for every out-of-scope edge. |
+| Stop Conditions | Needed guest change, private USER/CSRSS recreation, new scheduler/terminator, missing original owner requiring broader admission, or non-source-proven replacement. |
+| Exit Criteria | Finite ERROR-01 ledger and bounded S2 plan, or explicit unavailable boundary with real caller evidence. |
+| Original Owner Request | “把这个 S5 做完就可以收口本 T 任务，然后自动准入后续 wow32 的 T 任务。” |
+| Similar-Issue Sweep | Reconcile WOW/non-WOW hard-error callers, response encodings, cancellation, fatal task/worker tails and retirement owner. |
+| Candidate Proposal | [WOW32 hard-error responses](../proposals/proposal-wow32-hard-error-responses-001.md). |
 
 ## T463 S1 Closure Record
 
