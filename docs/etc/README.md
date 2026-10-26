@@ -1,5 +1,9 @@
 # Supporting Material
 
+[T471 S2 three-application integration progress](evidence/m0-t471-s2-application-integration-progress.md)
+records the frozen-package WRITE/WINMINE/SOL probe results and the one
+remaining physical-input boundary without treating it as a provider pass.
+
 [T471 S1 whole-provider artifact freeze](evidence/m0-t471-s1-provider-artifact-freeze.md)
 records the single ten-image runtime identity, all predecessor dispositions,
 the C11/C12 ownership sweep, and the fixed three-application S2 matrix.
