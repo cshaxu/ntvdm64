@@ -2,11 +2,12 @@
 
 ## Current Work
 
-**Active: M0 T460 S5**
+**Active: M0 T461 S1**
 
-T460 reopens only for the owner-approved Win95 Start Menu PIF-template
-provenance and fixture correction. `books/` is expressly excluded and remains
-untracked pending separate documentation admission.
+T460 is closed at `5f12610eb`; its owner-approved Win95 Start Menu
+PIF-template provenance repair is retained in its closure record. `books/` is
+expressly excluded and remains untracked pending separate documentation
+admission.
 
 Owner requests standalone Win95 launch/path toolkits on 2026-10-25, based on
 copies of win31-launch/win31-path. Admit tools/win95-launch, tools/win95-path,
@@ -65,32 +66,30 @@ S3 is closed at `5e2e8bfaf`; S4 now owns the remaining selected-format and
 full lifetime acceptance, without reopening S3's completed boundaries.
 ## Active Packet
 
-### M0 T460 S5 — Win95 Start Menu PIF template provenance
+### M0 T461 S1 — Shell and layered Registry caller surface
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T460 S5, Ordinary Mode; single-agent implementation and final review. |
-| Admission And Approval | Owner approved 2026-10-26 after S5 audit; bounded reopening after T460 closure. |
-| Objective | Make the Win95 Start Menu plan truthful about the `DOSPRMPT.PIF` template that produces its MS-DOS Prompt candidate, and prove `PIF.EXE update` preserves template fields other than dispatch fields. |
-| Non-goals | No `books/` import; no guest-media modification/rebuild; no runtime image, Clipboard, DDE, Win95 execution, or Start Menu installation expansion. |
-| Reference Baseline | T460 closure, `Prepare-StartMenu.ps1`, released `PIF.EXE`, and the Win95 launch-tool source/recovery policy. |
-| Files And ABI Surface | `tools/win95-launch/Prepare-StartMenu.ps1`, its fixture test, plan JSON provenance only. |
-| Applicable Rules | Execution, coding, documentation and source-policy rules; installed PIF is a read-only test input. |
-| Verification | Isolated fixture invokes the actual plan producer and released PIF utility; verifies template provenance, candidate dispatch fields, unchanged non-dispatch PIF fields, and existing launch/PIF regression. |
-| Expected Markers | Plan records both original menu source and actual template source/hash; template profile survives candidate update. |
-| Asset Needs | Build-owned synthetic PIF fixture and released PIF utility only; no installed tree mutation. |
-| Reporting Requirements | Exact changed fields, fixture evidence, `books/` exclusion, no-image/no-guest result and delivery identity. |
-| Stop Conditions | Any guest write, unrecorded template dependency, profile-field loss, or request to include the book. |
-| Exit Criteria | Provenance and retention test pass; existing relevant tool tests pass; governance review, commit and push complete. |
-| Original Owner Request | 审计并修正工具改动，作为 S5 提交推送；先不包含 `books/`。 |
-| Similar-Issue Sweep | All plan inputs that are copied into candidates but differ from their menu-source provenance. |
-| Candidate Proposal | [WOW32 Clipboard](../proposals/proposal-wow32-clipboard-001.md) bounded reopening. |
+| Identifier Mode | M0 T461 S1, Ordinary Mode; single-agent source audit and final review. |
+| Admission And Approval | Automatically admitted after the owner-approved T460 closure. |
+| Objective | Enumerate the selected WOW Shell callers and original layered-Registry error/recursive-delete semantics, then establish one exact production-path assertion and one Registry owner per caller. |
+| Non-goals | No guest-media modification/rebuild; no host Registry writes; no parallel Registry provider; no Shell-service implementation, persistence, DDE, or unrelated runtime repair. |
+| Reference Baseline | [Shell and layered Registry proposal](../proposals/proposal-wow32-shell-registry-001.md), WOW32 program, shared minimum-diff governance and OpenNT-only seam ledger. |
+| Files And ABI Surface | Audit-only evidence for the selected Shell thunk callers, the existing NTVDM.REG owner, original conversion/error paths and their current adapters; no production ABI change in S1. |
+| Applicable Rules | Execution, architecture, coding, documentation and source-policy rules; one original owner per mechanism and no second scheduler/provider. |
+| Verification | Exact source call-chain/owner matrix, build-condition and ABI review, normal/failure/retirement ownership per row, minimum-diff governance and documentation verification. |
+| Expected Markers | Every admitted caller has a bounded production-path assertion; one existing Registry owner is identified; any missing prerequisite is promoted explicitly rather than substituted. |
+| Asset Needs | Existing checked-in source/mirror and build-owned `build/t461-s1` text evidence only; no guest, host-Registry or external-service mutation. |
+| Reporting Requirements | Caller/owner matrix, actual prerequisites, retained semantic gaps, S2 handoff and proof/limitation separation. |
+| Stop Conditions | Guest or system-Registry write; a second Registry provider; unbounded import; or a proposed semantic relaxation without owner approval. |
+| Exit Criteria | Complete selected caller inventory and original-owner semantic ledger, finite S2 scope, governance review, commit and push. |
+| Original Owner Request | 自动准入后续 WOW32 T；按最小镜像 diff、最大原版复通执行。 |
+| Similar-Issue Sweep | Every selected Shell entry and all Registry read/create/set/enum/delete/close error/retirement callers, not just the first successful path. |
+| Candidate Proposal | [WOW32 Shell and layered Registry](../proposals/proposal-wow32-shell-registry-001.md). |
 
-S5 records the original menu PIF and actual `DOSPRMPT.PIF` template separately,
-proves profile retention through the released editor, and rejects roots that
-cannot fit the original PIF OEM directory field. [The S5 evidence](../etc/evidence/m0-t460-s5-win95-start-menu-pif-template.md)
-records the isolated fixture and related tool regressions; no guest, runtime
-image or release binary changed. `books/` remains excluded and untracked.
+S1 is an admission/source-ownership audit only. It may not turn a static
+symbol match into a behavior claim, and it must leave each later implementation
+edge with an explicit original owner and lifecycle handoff.
 
 ## S1 Closure Record
 
@@ -130,6 +129,16 @@ acceptance. [The S4 record](../etc/evidence/m0-t460-s4-clipboard-selected-format
 retains the original-owner audit and all normal, rejection, deferred,
 replacement, callback-return and task-loss evidence. It changed no product
 image or guest media.
+
+## S5 Closure Record
+
+S5 closed the owner-approved Win95 Start Menu PIF-template provenance repair
+at `5f12610eb`. [Its fixture evidence](../etc/evidence/m0-t460-s5-win95-start-menu-pif-template.md)
+proves that the plan records both the original menu source and actual
+`DOSPRMPT.PIF` template, preserves all non-dispatch template fields through
+the released PIF editor, and rejects an unrepresentable OEM PIF directory.
+No guest, runtime image or release binary changed; `books/` remains excluded
+and untracked.
 
 ## T459 Closure Record
 
@@ -186,6 +195,10 @@ T460 S3 may use only `build/t460-s3` for disposable delayed-render/loss
 evidence, with a 45-minute phase, 2-GiB size and 10-minute no-progress budget. Stable
 `.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
 
+T461 S1 may use only `build/t461-s1` for disposable source-audit evidence,
+with a 30-minute phase, 2-GiB size and 10-minute no-progress budget. Stable
+`.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
+
 T457 S1 may use only `build/t457-s1` for disposable source-audit and focused
 fixture evidence. Stable `.ninja` and `.ccache` remain reusable caches and
 are never task evidence roots.
@@ -231,7 +244,8 @@ and `.ccache` remain reusable caches and are never task evidence roots.
 ## Recent M0 Closures
 
 - [T460](../history/m0-t460-closure.md): WOW32 Clipboard selected-format and
-  lifetime acceptance, with project-owned PIC and keyboard device repairs.
+  lifetime acceptance, project-owned PIC/keyboard repairs, and the bounded
+  Win95 Start Menu PIF-template provenance correction.
 - [T454](../history/m0-t454-closure.md): WOW32 resource discovery and loading.
 - [T453](../history/m0-t453-closure.md): files, directories, environment and OEM.
 - T452: modules, memory and aliases.

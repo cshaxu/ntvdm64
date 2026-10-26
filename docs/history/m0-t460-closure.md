@@ -15,13 +15,17 @@ modify, rebuild, or package guest media.
 - S4 accepted the same original `HGLOBAL` route for `CF_TEXT` and `CF_DIB`,
   including normal transfer, rejected data, replacement, deferred rendering,
   callback return and owner task loss.
+- S5 corrected the independently owned Win95 Start Menu plan so the MS-DOS
+  Prompt candidate records its actual `DOSPRMPT.PIF` template and retains the
+  template's non-dispatch profile fields. It changed no guest or runtime image.
 
 The detailed evidence is [S1](../etc/evidence/m0-t460-s1-clipboard-owner-matrix.md),
 [S2](../etc/evidence/m0-t460-s2-clipboard-transfer-acceptance.md),
 [S3](../etc/evidence/m0-t460-s3-clipboard-deferred-lifetime.md),
 [PIC](../etc/evidence/m0-t460-s3-pic-eoi-reset-plan.md),
 [keyboard](../etc/evidence/m0-t460-s3-keyboard-early-eoi-plan.md) and
-[S4](../etc/evidence/m0-t460-s4-clipboard-selected-format-acceptance.md).
+[S4](../etc/evidence/m0-t460-s4-clipboard-selected-format-acceptance.md), and
+[S5](../etc/evidence/m0-t460-s5-win95-start-menu-pif-template.md).
 
 ## Final package and verification
 
@@ -53,6 +57,7 @@ changing Clipboard behavior.
 ## Boundary handed forward
 
 Clipboard DDE remains unimplemented and is explicitly still the later Queue
-candidate. The next unadmitted capability is shell and layered Registry. No
-T460 result asserts DDE conversation, reply, cancellation or DDE-data
-ownership semantics.
+candidate. Shell and layered Registry is now admitted as T461 S1. No T460
+result asserts DDE conversation, reply, cancellation or DDE-data ownership
+semantics. The unadmitted `books/` tree remains outside this closure and its
+commit.
