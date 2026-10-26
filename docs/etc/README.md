@@ -39,6 +39,10 @@ maps each unselected host C/ASM family to its original profile, CPU40 boundary,
 or explicit re-admission condition, leaving only the debugger package boundary
 for a further product-provider decision.
 
+[T473 S1 runtime-owner matrix](evidence/m0-t473-s1-runtime-owner-matrix.md)
+keeps final-link selection separate from initialization, dispatch, failure and
+teardown evidence, and fixes the finite package-by-package recovery order.
+
 [T471 S4 aggregate review](evidence/m0-t471-s4-aggregate-review.md) records
 the unchanged installed/package identity, S1--S3 reconciliation and the sole
 owner-deferred physical WRITE non-pass for T-level acceptance.
