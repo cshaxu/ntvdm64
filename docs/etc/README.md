@@ -30,6 +30,10 @@ attributes the seven unmarked source-like deltas to bounded original-owner or
 adapter boundaries, and records the three non-functional deltas removed by
 the audit.
 
+[T473 S1 package composition map](evidence/m0-t473-s1-package-composition-map.md)
+separates actual worker/WOW compile and link selection from archive extraction,
+runtime reachability, immutable guest/media inputs and unadmitted providers.
+
 [T471 S4 aggregate review](evidence/m0-t471-s4-aggregate-review.md) records
 the unchanged installed/package identity, S1--S3 reconciliation and the sole
 owner-deferred physical WRITE non-pass for T-level acceptance.

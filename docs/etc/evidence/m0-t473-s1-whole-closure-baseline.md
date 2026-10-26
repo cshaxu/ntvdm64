@@ -4,7 +4,7 @@
 
 `tools/audit/Export-MvdmWholeClosureInventory.mjs` compares every file below the selected OpenNT `base/mvdm`, OpenNT-4.5 `nt/private/mvdm`, and current `src/mvdm` roots. It hashes bytes, rejects symbolic links, permits output only below `build/`, and deliberately does not select an upstream conflict or claim build/link/runtime reachability.
 
-The normalized run `build/t473-s1/mvdm-union-node-r12` records both raw byte identity and formatting-normalized identity. The normalizer changes only CRLF-to-LF and trailing horizontal whitespace; it never selects an edition, changes source, or claims build/link/runtime reachability.
+Two normalized runs (`build/t473-s1/mvdm-union-node-r20` and `...-r21`) produced byte-identical CSV inventories, SHA-256 `265C7323F903E6275BEC6A4B078E19AA753D3E57C7AD17AA66FDA98C51A39A11`. The normalizer changes only CRLF-to-LF and trailing horizontal whitespace; it never selects an edition, changes source, or claims build/link/runtime reachability.
 
 ## Source-union facts
 
@@ -29,7 +29,15 @@ Of the 1,013 current-only paths, 836 are retained historical `.obj` files. The r
 
 ## Actual current composition, not inferred reachability
 
-The canonical x86 graphs contain 367 worker compile edges resolving to 333 unique `src/mvdm` paths, plus 78 unique original WOW32 paths in the `wow32.dll` graph. This is a direct-compile selection baseline, not proof that every archive member is extracted, linked, loaded, reached, or behaviorally complete.
+The canonical x86 Ninja graphs contain 368 unique `src/mvdm` paths in the worker graph and 78 in the WOW32 graph. This full-graph selection includes fixture edges and is not proof that a source object reaches either product target, nor that an archive member is extracted, loaded, reached, or behaviorally complete.
+
+The reproducible path ledger now assigns all 4,684 rows an S1 disposition:
+446 full-graph selected direct compiles; 2,616 immutable guest/media/build inputs; 306
+retained build artifacts; 119 tooling/build carriers; 33 unmirrored tool
+inputs; 33 unmirrored retired CPU30-monitor inputs; two retained retired-CPU30
+paths; and 1,129 unselected host-package rows explicitly queued for S2
+disposition. The latter category is a finite worklist, not a statement that
+those providers are optional or complete.
 
 ## Finite S1 review worklist
 
