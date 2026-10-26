@@ -2,12 +2,11 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T460 is closed; see the
-[T460 closure](../history/m0-t460-closure.md). Queue item 1, WOW32 shell and
-layered Registry, is the next unadmitted candidate.
+**Active: M0 T460 S5**
 
-The retained T460 details below are archival closure context, not authority to
-start or continue an implementation packet.
+T460 reopens only for the owner-approved Win95 Start Menu PIF-template
+provenance and fixture correction. `books/` is expressly excluded and remains
+untracked pending separate documentation admission.
 
 Owner requests standalone Win95 launch/path toolkits on 2026-10-25, based on
 copies of win31-launch/win31-path. Admit tools/win95-launch, tools/win95-path,
@@ -64,39 +63,34 @@ complete product gate and WINMINE/SOL probes pass; its ten images are published
 to `assets/release` and `O:\winnt\system32` with matching SHA-256 manifests.
 S3 is closed at `5e2e8bfaf`; S4 now owns the remaining selected-format and
 full lifetime acceptance, without reopening S3's completed boundaries.
-## Archived T460 Packet
+## Active Packet
 
-### M0 T460 S4 — Clipboard complete selected-format and lifetime acceptance
+### M0 T460 S5 — Win95 Start Menu PIF template provenance
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T460 S4, Ordinary Mode; single-agent implementation and independent final review. |
-| Admission And Approval | Automatic continuation under the admitted Queue W10 Clipboard proposal, after S3 closure at `5e2e8bfaf`. |
-| Objective | Prove all selected Clipboard formats and their normal, rejection, replacement, deferred-render and task-loss lifetimes through production callers; hand only proved reusable boundary facts to the later DDE package. |
-| Non-goals | No guest change/rebuild; no Clipboard manager/cache/listener/DDE substitute; no unrelated Win95/video/device expansion; no claim that a selected-format acceptance closes DDE. |
-| Reference Baseline | [S1 owner matrix](../etc/evidence/m0-t460-s1-clipboard-owner-matrix.md), [Clipboard proposal](../proposals/proposal-wow32-clipboard-001.md), [S3 lifetime evidence](../etc/evidence/m0-t460-s3-clipboard-deferred-lifetime.md), and WOW32 minimum-diff governance. |
-| Files And ABI Surface | Original `wuclip.c` format/ownership callers, original guest/native conversion and USER public boundary only; immutable guest/native fixtures. |
-| Applicable Rules | Applicable execution, architecture, coding, documentation, source-policy and WOW32 minimum-diff rules. |
-| Verification | Repeated real guest/native selected-format exchanges; open/set/get/close, rejected/abandoned data, owner replacement, deferred rendering and task loss; targeted error/cleanup evidence and complete package regression for a production change. |
-| Expected Markers | Each selected format has one original conversion/ownership owner; native and guest results agree; callbacks retire once; dead/replaced owners neither leak buffers nor receive callbacks. |
-| Asset Needs | Existing immutable guest media, mirrors and fixtures only; no Win95 image or new guest artifact. |
-| Reporting Requirements | Per-format source/ownership matrix, failure/lifetime disposition, production diff and package hashes or explicit no-change result, and precise DDE handoff facts. |
-| Stop Conditions | Guest change; Clipboard substitute; a new cache/listener/manager; DDE implementation; source-less conversion; or a failed/rejected/retired path silently counted as a transfer success. |
-| Exit Criteria | All selected formats and their stated lifetime/error paths are verified through production callers, or each remaining bounded non-pass is retained explicitly rather than transferred to generic integration. |
-| Original Owner Request | 单人双角色模式复通 WOW32；源码追溯优先、最少 diff、禁止 guest 修改。 |
-| Similar-Issue Sweep | All selected formats, ownership, callbacks, rejection, replacement, deferred render, task loss and public USER operands/results. |
-| Candidate Proposal | [WOW32 clipboard](../proposals/proposal-wow32-clipboard-001.md). |
+| Identifier Mode | M0 T460 S5, Ordinary Mode; single-agent implementation and final review. |
+| Admission And Approval | Owner approved 2026-10-26 after S5 audit; bounded reopening after T460 closure. |
+| Objective | Make the Win95 Start Menu plan truthful about the `DOSPRMPT.PIF` template that produces its MS-DOS Prompt candidate, and prove `PIF.EXE update` preserves template fields other than dispatch fields. |
+| Non-goals | No `books/` import; no guest-media modification/rebuild; no runtime image, Clipboard, DDE, Win95 execution, or Start Menu installation expansion. |
+| Reference Baseline | T460 closure, `Prepare-StartMenu.ps1`, released `PIF.EXE`, and the Win95 launch-tool source/recovery policy. |
+| Files And ABI Surface | `tools/win95-launch/Prepare-StartMenu.ps1`, its fixture test, plan JSON provenance only. |
+| Applicable Rules | Execution, coding, documentation and source-policy rules; installed PIF is a read-only test input. |
+| Verification | Isolated fixture invokes the actual plan producer and released PIF utility; verifies template provenance, candidate dispatch fields, unchanged non-dispatch PIF fields, and existing launch/PIF regression. |
+| Expected Markers | Plan records both original menu source and actual template source/hash; template profile survives candidate update. |
+| Asset Needs | Build-owned synthetic PIF fixture and released PIF utility only; no installed tree mutation. |
+| Reporting Requirements | Exact changed fields, fixture evidence, `books/` exclusion, no-image/no-guest result and delivery identity. |
+| Stop Conditions | Any guest write, unrecorded template dependency, profile-field loss, or request to include the book. |
+| Exit Criteria | Provenance and retention test pass; existing relevant tool tests pass; governance review, commit and push complete. |
+| Original Owner Request | 审计并修正工具改动，作为 S5 提交推送；先不包含 `books/`。 |
+| Similar-Issue Sweep | All plan inputs that are copied into candidates but differ from their menu-source provenance. |
+| Candidate Proposal | [WOW32 Clipboard](../proposals/proposal-wow32-clipboard-001.md) bounded reopening. |
 
-S4 inherits S3's original-handle projection and narrow public-USER adaptation;
-the shared-view snapshot remains an identity projection, not a second Clipboard
-state owner. [S3 lifetime evidence](../etc/evidence/m0-t460-s3-clipboard-deferred-lifetime.md)
-and [the PIC plan](../etc/evidence/m0-t460-s3-pic-eoi-reset-plan.md) are
-closed inputs, not S4 expansion authority.
-The selected-format matrix now passes on the shared Clipboard for `CF_TEXT`
-and `CF_DIB`, including normal/rejection/replacement/deferred/owner-destroy,
-callback-return and task-loss paths.  [S4 evidence](../etc/evidence/m0-t460-s4-clipboard-selected-format-acceptance.md)
-records the original-owner audit, cooperative DIB Yield boundary and runner
-compatibility correction; no product image or guest media changed.
+S5 records the original menu PIF and actual `DOSPRMPT.PIF` template separately,
+proves profile retention through the released editor, and rejects roots that
+cannot fit the original PIF OEM directory field. [The S5 evidence](../etc/evidence/m0-t460-s5-win95-start-menu-pif-template.md)
+records the isolated fixture and related tool regressions; no guest, runtime
+image or release binary changed. `books/` remains excluded and untracked.
 
 ## S1 Closure Record
 
@@ -128,6 +122,14 @@ early-EOI/read ordering repair. Five cached build stages, 24 PIC/RTC/mouse and
 product gate and isolated WINMINE/SOL probes pass. Ten matching images are
 published; guest media is unchanged. S4 retains selected-format acceptance and
 DDE handoff only.
+
+## S4 Closure Record
+
+S4 closed selected `CF_TEXT` and `CF_DIB` Clipboard-format and lifetime
+acceptance. [The S4 record](../etc/evidence/m0-t460-s4-clipboard-selected-format-acceptance.md)
+retains the original-owner audit and all normal, rejection, deferred,
+replacement, callback-return and task-loss evidence. It changed no product
+image or guest media.
 
 ## T459 Closure Record
 

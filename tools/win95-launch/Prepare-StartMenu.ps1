@@ -14,6 +14,13 @@ $windows=(Resolve-Path -LiteralPath $WindowsRoot).Path
 $programs=(Resolve-Path -LiteralPath $ProgramFilesRoot).Path
 $sourceRoot=Join-Path $windows 'STARTM~1';$menuRoot=Join-Path $windows 'STRTMENU'
 $appsRoot=Join-Path $windows 'APPS95'
+$promptTemplate=Join-Path $windows 'DOSPRMPT.PIF'
+if(-not(Test-Path -LiteralPath $promptTemplate -PathType Leaf)){throw "Missing Win95 MS-DOS Prompt PIF template: $promptTemplate"}
+# STDPIF::defpath is a 64-byte OEM field and the released writer requires the
+# terminating NUL to fit strictly inside it. Refuse before staging any plan
+# rather than emitting a partial candidate that PIF.EXE cannot write.
+if(([Text.Encoding]::Default.GetByteCount($windows)+1) -ge 64){throw "Win95 MS-DOS Prompt PIF directory exceeds its 62-byte OEM limit: $windows"}
+$promptTemplateSha256=(Get-FileHash -LiteralPath $promptTemplate).Hash
 $map=[Collections.Generic.Dictionary[string,object]]::new([StringComparer]::OrdinalIgnoreCase)
 foreach($row in (Get-Content -LiteralPath $Inventory -Raw|ConvertFrom-Json)){$map.Add($row.path.TrimStart('/').Replace('ß','SS'),$row)}
 function StableDosName([string]$name){
@@ -40,7 +47,10 @@ foreach($source in Get-ChildItem -LiteralPath $programs -File -Recurse -Force){
 function CheckTarget([string]$path){if($path.StartsWith($appsRoot+'\',[StringComparison]::OrdinalIgnoreCase)){$path=Join-Path "$out/apps" $path.Substring($appsRoot.Length+1)};return Test-Path -LiteralPath $path}
 foreach($source in Get-ChildItem -LiteralPath $sourceRoot -File -Recurse -Force){
  if($source.Extension -notin @('.LNK','.PIF')){throw "Unexpected menu file: $($source.FullName)"}
- $key=$source.FullName.Substring([IO.Path]::GetPathRoot($windows).Length).Replace('\','/').Replace('ß','SS')
+ # Inventory paths describe the Win95 tree, not the host drive used for an
+ # installed copy.  Keep the fixed archive `/WINDOWS/...` form so an approved
+ # alternate WindowsRoot has the same original-name provenance lookup.
+ $key=('WINDOWS/'+$source.FullName.Substring($windows.Length+1).Replace('\','/')).Replace('ß','SS')
  if(!$map.ContainsKey($key)){throw "No original long-name provenance: $key"}
  $original=$map[$key].long_path
  $prefix='/WINDOWS/Start Menu/'
@@ -64,7 +74,7 @@ foreach($source in Get-ChildItem -LiteralPath $sourceRoot -File -Recurse -Force)
  if([IO.Path]::IsPathRooted($relative) -or ($relative -split '\\') -contains '..'){throw 'Unsafe menu relative path'}
  $candidate=Join-Path "$out/menu" $relative
  New-Item -ItemType Directory (Split-Path $candidate) -Force|Out-Null
- $target=$null
+ $target=$null;$templateSource=$null;$templateSha256=$null
  if($source.Extension -ieq '.LNK'){
   Copy-Item -LiteralPath $source.FullName -Destination $candidate
   $target=Relocate $fields.TARGET
@@ -79,12 +89,24 @@ foreach($source in Get-ChildItem -LiteralPath $sourceRoot -File -Recurse -Force)
  }else{
   $target='O:\WINNT\system32\COMMAND.COM'
   if(!(Test-Path -LiteralPath $target)){throw 'Stock NTDOS command interpreter absent'}
-  # The supplied Win95 PIF is outside the OpenNT editor's accepted format.
-  # Keep its original and create the supported classic records explicitly.
-  & $Pif create $candidate --title 'MS-DOS Prompt' --program $target --directory $windows --arguments '' --config '' --autoexec '' --w386-max-xms 65535
-  if($LASTEXITCODE){throw 'Classic MS-DOS PIF creation failed'}
+  # The extracted STARTM~1 PIF is not parseable by the OpenNT editor.  The
+  # installed root template is: preserve its Win95 386/task-memory records,
+  # and change only the dispatchable command and working directory.
+  Copy-Item -LiteralPath $promptTemplate -Destination $candidate
+  & $Pif update $candidate --title 'MS-DOS Prompt' --program $target --directory $windows
+  if($LASTEXITCODE){throw 'Win95 MS-DOS Prompt PIF update failed'}
+  $promptView=@(& $Pif show $candidate)
+  if($LASTEXITCODE -or $promptView -notcontains 'STANDARD.MAXMEM_KB=640' -or
+     $promptView -notcontains 'STANDARD.MINMEM_KB=128' -or
+     $promptView -notcontains 'W386.MAXMEM_KB=65535' -or
+     $promptView -notcontains 'W386.MINMEM_KB=65535'){
+   throw 'Win95 MS-DOS Prompt PIF template lost its conventional-memory profile'
+  }
+  $templateSource=$promptTemplate;$templateSha256=$promptTemplateSha256
  }
- $files+=@{role='menu';source=$source.FullName;sourceSha256=(Get-FileHash -LiteralPath $source.FullName).Hash;originalLongName=$original;relative=$relative;candidate=$candidate;sha256=(Get-FileHash -LiteralPath $candidate).Hash;destination=(Join-Path $menuRoot $relative);target=$target}
+ $record=@{role='menu';source=$source.FullName;sourceSha256=(Get-FileHash -LiteralPath $source.FullName).Hash;originalLongName=$original;relative=$relative;candidate=$candidate;sha256=(Get-FileHash -LiteralPath $candidate).Hash;destination=(Join-Path $menuRoot $relative);target=$target}
+ if($templateSource){$record.templateSource=$templateSource;$record.templateSha256=$templateSha256}
+ $files+=$record
 }
 if(@($files|Where-Object {$_.role -eq 'menu' -and $_.relative -match '\.LNK$'}).Count -lt 25){throw 'Expected populated original Win95 menu'}
 @{schema=1;windows=$windows;sourceRoot=$sourceRoot;programSourceRoot=$programs;menuRoot=$menuRoot;appsRoot=$appsRoot;inventorySha256=(Get-FileHash -LiteralPath $Inventory).Hash;lnkSha256=(Get-FileHash -LiteralPath $Lnk).Hash;pifSha256=(Get-FileHash -LiteralPath $Pif).Hash;files=$files}|ConvertTo-Json -Depth 5|Set-Content "$out/plan.json" -Encoding UTF8

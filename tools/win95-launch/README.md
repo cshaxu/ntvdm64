@@ -21,5 +21,11 @@ The lower-level `Apply-Compat95.ps1` / `Restore-StartMenu.ps1` tools remain
 explicit opt-in installation helpers. They require fresh external backups,
 record installed identities, and refuse restoration over later user changes.
 `Prepare-StartMenu.ps1` produces a build-owned hashed plan; it never edits a
-guest tree. Their source and recovery contract are covered by the component
-fixture tests, not by a claim of general Win95 runtime compatibility.
+guest tree. For its MS-DOS Prompt candidate, the plan retains both the original
+Start Menu source identity and the installed `DOSPRMPT.PIF` template identity:
+the latter is the actual candidate-content source and its Win95 memory profile
+must survive the dispatch-field update. The original PIF working-directory
+field is limited to 62 OEM bytes; preparation rejects a longer selected root
+before staging an unusable candidate. Their source and recovery contract are
+covered by component fixture tests, not by a claim of general Win95 runtime
+compatibility.

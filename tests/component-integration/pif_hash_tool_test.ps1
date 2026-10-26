@@ -72,7 +72,12 @@ if ($missingHashExit -eq 0) { throw 'HASH accepted a nonexistent file' }
 if ($ReleaseRoot) {
     $manifestPath = Join-Path $ReleaseRoot 'addon-manifest.json'
     $manifest = Get-Content -Raw -LiteralPath $manifestPath | ConvertFrom-Json
-    if ($manifest.schema -ne 1 -or $manifest.drivers.Count -ne 2 -or $manifest.utilities.Count -ne 3) { throw 'Invalid add-on utility manifest' }
+    $utilities=@($manifest.utilities)
+    $required=@('pif','hash')
+    if ($manifest.schema -ne 1 -or $utilities.Count -lt $required.Count) {
+        throw 'Release manifest is missing required PIF/HASH utilities'
+    }
+    foreach($id in $required){if(@($utilities|Where-Object {$_.id -eq $id}).Count -ne 1){throw "Release manifest has no unique required utility: $id"}}
     foreach ($utility in $manifest.utilities) {
         if ($utility.architecture -ne 'amd64') { throw "Unexpected utility architecture: $($utility.file)" }
         $image = Join-Path $ReleaseRoot $utility.file

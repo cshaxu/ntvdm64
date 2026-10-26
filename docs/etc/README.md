@@ -132,6 +132,10 @@ image or guest media.
 records the published ten-image and device-repair evidence, and leaves DDE as
 an explicit later Queue capability.
 
+[T460 S5 Win95 Start Menu PIF-template record](evidence/m0-t460-s5-win95-start-menu-pif-template.md)
+records plan-template provenance, the original PIF path-capacity refusal and
+isolated tool evidence; it changes no guest, runtime image or release binary.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.
