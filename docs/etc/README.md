@@ -21,6 +21,10 @@ T464's executable acceptance without fabricating unavailable private UI.
 records the unchanged production/package identity and the finite closure of
 the selected response/termination contract.
 
+[T473 S1 whole-closure baseline](evidence/m0-t473-s1-whole-closure-baseline.md)
+records the reproducible selected-source union, safe non-runtime exclusions,
+actual current compilation selection and the finite divergence-owner worklist.
+
 [T471 S4 aggregate review](evidence/m0-t471-s4-aggregate-review.md) records
 the unchanged installed/package identity, S1--S3 reconciliation and the sole
 owner-deferred physical WRITE non-pass for T-level acceptance.
