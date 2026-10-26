@@ -44,8 +44,10 @@ S1 closed the selected Shell-service and layered Registry caller/owner inventory
 [The owner matrix](../etc/evidence/m0-t461-s1-shell-registry-owner-matrix.md)
 identifies the two original Shell-service and seven Registry entries, the one
 worker-local `NTVDM.REG` façade, its opaque-key lifetime, the missing
-write/persistence/concurrency contract, and the explicit W18/W11 consumer
-handoffs. It changed no runtime, guest or installed package.
+write/persistence/concurrency contract, its necessary replacement of a
+private-pointer key representation with bounded guest-safe tokens, and the
+explicit W18/W11 consumer handoffs. It changed no runtime, guest or installed
+package.
 
 ## S1 Closure Record
 
