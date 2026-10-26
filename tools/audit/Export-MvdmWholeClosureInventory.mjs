@@ -10,7 +10,14 @@ const output = path.resolve(repo, process.argv[outputIndex + 1]);
 const build = `${path.resolve(repo, 'build')}${path.sep}`;
 if (!output.startsWith(build)) throw new Error('output must be below build');
 const roots = { opennt: 'O:/repos.external/OpenNT/base/mvdm', opennt45: 'O:/repos.external/OpenNT-4.5/nt/private/mvdm', current: path.join(repo, 'src/mvdm') };
-const sha256 = async (file) => createHash('sha256').update(await readFile(file)).digest('hex').toUpperCase();
+const hash = (bytes) => createHash('sha256').update(bytes).digest('hex').toUpperCase();
+async function fingerprint(file) {
+  const bytes = await readFile(file);
+  return {
+    sha256: hash(bytes),
+    normalizedSha256: bytes.includes(0) ? '' : hash(Buffer.from(bytes.toString().replaceAll('\r\n', '\n'))),
+  };
+}
 async function index(root) {
   const candidates = [];
   async function visit(directory) {
@@ -31,7 +38,7 @@ async function index(root) {
   const worker = async () => {
     while (next < candidates.length) {
       const index = next++;
-      hashes[index] = await sha256(candidates[index].full);
+      hashes[index] = await fingerprint(candidates[index].full);
     }
   };
   await Promise.all(Array.from({ length: Math.min(32, candidates.length) }, worker));
@@ -47,9 +54,13 @@ const [opennt, opennt45, current] = await Promise.all(Object.values(roots).map(i
 const paths = [...new Set([...opennt.keys(), ...opennt45.keys(), ...current.keys()])].sort();
 const rows = paths.map((relativePath) => {
   const a = opennt.get(relativePath), b = opennt45.get(relativePath), c = current.get(relativePath);
-  const upstreamOrigin = a && b ? (a === b ? 'both-identical' : 'both-conflict') : a ? 'opennt-only' : b ? 'opennt45-only' : 'current-only';
-  const currentIdentity = !c ? 'not-currently-mirrored' : a && c === a && (!b || a === b) ? 'exact-opennt-selected-or-identical' : b && c === b && (!a || a === b) ? 'exact-opennt45-selected-or-identical' : a && b && c === a ? 'exact-opennt-on-conflict' : a && b && c === b ? 'exact-opennt45-on-conflict' : upstreamOrigin === 'current-only' ? 'current-only-needs-provenance' : 'mirror-different-needs-divergence-review';
-  return { relative_path: relativePath, upstream_origin: upstreamOrigin, opennt_sha256: a ?? '', opennt45_sha256: b ?? '', current_sha256: c ?? '', current_identity: currentIdentity };
+  const upstreamOrigin = a && b ? (a.sha256 === b.sha256 ? 'both-identical' : 'both-conflict') : a ? 'opennt-only' : b ? 'opennt45-only' : 'current-only';
+  const rawOpenNt = a && c && c.sha256 === a.sha256;
+  const rawOpenNt45 = b && c && c.sha256 === b.sha256;
+  const normalizedOpenNt = a && c && a.normalizedSha256 && a.normalizedSha256 === c.normalizedSha256;
+  const normalizedOpenNt45 = b && c && b.normalizedSha256 && b.normalizedSha256 === c.normalizedSha256;
+  const currentIdentity = !c ? 'not-currently-mirrored' : rawOpenNt && (!b || a.sha256 === b.sha256) ? 'exact-opennt-selected-or-identical' : rawOpenNt45 && (!a || a.sha256 === b.sha256) ? 'exact-opennt45-selected-or-identical' : rawOpenNt ? 'exact-opennt-on-conflict' : rawOpenNt45 ? 'exact-opennt45-on-conflict' : normalizedOpenNt && (!b || a.normalizedSha256 === b.normalizedSha256) ? 'line-ending-only-opennt-selected-or-identical' : normalizedOpenNt45 && (!a || a.normalizedSha256 === b.normalizedSha256) ? 'line-ending-only-opennt45-selected-or-identical' : normalizedOpenNt ? 'line-ending-only-opennt-on-conflict' : normalizedOpenNt45 ? 'line-ending-only-opennt45-on-conflict' : upstreamOrigin === 'current-only' ? 'current-only-needs-provenance' : 'mirror-different-needs-divergence-review';
+  return { relative_path: relativePath, upstream_origin: upstreamOrigin, opennt_sha256: a?.sha256 ?? '', opennt45_sha256: b?.sha256 ?? '', current_sha256: c?.sha256 ?? '', current_identity: currentIdentity };
 });
 const counts = (field) => Object.entries(Object.groupBy(rows, (row) => row[field])).map(([classification, values]) => ({ classification, count: values.length })).sort((a, b) => a.classification.localeCompare(b.classification));
 const summary = { rows: rows.length, upstream_origin: counts('upstream_origin'), current_identity: counts('current_identity'), limitation: 'Identity inventory only. It does not select a conflict, prove build/link selection, or claim runtime reachability.' };

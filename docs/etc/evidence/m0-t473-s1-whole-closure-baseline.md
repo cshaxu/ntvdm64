@@ -4,7 +4,7 @@
 
 `tools/audit/Export-MvdmWholeClosureInventory.mjs` compares every file below the selected OpenNT `base/mvdm`, OpenNT-4.5 `nt/private/mvdm`, and current `src/mvdm` roots. It hashes bytes, rejects symbolic links, permits output only below `build/`, and deliberately does not select an upstream conflict or claim build/link/runtime reachability.
 
-Two runs (`build/t473-s1/mvdm-union-node-r1` and `...-r2`) produced byte-equal CSV inventories, SHA-256 `E61F17A52FE5E318FFF2BC6E207D1FB5F7B1F79DF98C2EC1E62E113B9D452BCF`.
+Two normalized runs (`build/t473-s1/mvdm-union-node-r3` and `...-r4`) produced byte-equal CSV inventories, SHA-256 `0E75EAD4F026335280C448CC9BBEFDD0F932DD51B4FC0223BB458E8E89574DD3`. Raw-byte hashes remain recorded in each row; the classification separately identifies a line-ending-only difference.
 
 ## Source-union facts
 
@@ -19,7 +19,7 @@ Two runs (`build/t473-s1/mvdm-union-node-r1` and `...-r2`) produced byte-equal C
 
 The six edition conflicts are all Win16 build/declaration inputs under `wow16/`; current bytes select the OpenNT copy. S1 records that fact but does not yet accept the edition choice. Their role is load/build evidence, not a host-runtime provider.
 
-Current identity is 3,271 exact OpenNT/identical files, 125 exact OpenNT-4.5/identical files, six exact OpenNT conflict selections, 203 mirror-different files, 66 not-currently-mirrored paths, and 1,013 current-only paths.
+Current identity is 3,271 exact OpenNT/identical files, 125 exact OpenNT-4.5/identical files, six exact OpenNT conflict selections, five line-ending-only OpenNT selections, 198 semantic mirror differences, 66 not-currently-mirrored paths, and 1,013 current-only paths.
 
 ### Safe non-runtime exclusions, not repair candidates
 
@@ -33,14 +33,14 @@ The current x86 worker Ninja graph directly compiles 367 `src/mvdm` edges: 297 S
 
 ## Finite S1 review worklist
 
-The 203 mirror differences contain 202 source-like files. 55 have no inline `DIVERGENCE(...)` marker; 16 also have no direct current `src/mvdm/README.md` path/leaf reference:
+The 198 semantic mirror differences contain 197 source-like files. 50 have no inline `DIVERGENCE(...)` marker; 11 also have no direct current `src/mvdm/README.md` path/leaf reference:
 
 ```text
-dos/command/cmd.c; dos/v86/cmd/command/{init,rdata,stub}.asm;
+dos/command/cmd.c;
 dpmi32/{dpmiint.h,dpmimscr.c,vxd.c,xlathlp.h};
 softpc.new/base/ccpu386/{c_debug.h,iret.c,ret.c};
 softpc.new/host/inc/insignia.h;
-wow32/{winsockp.h,wkglobal.c,wklocal.c,wow32.def}
+wow32/{winsockp.h,wow32.def}
 ```
 
-Some are line-ending-only or declaration/build-carrier differences; others are known functional adaptations such as system-root projection, CPU40 stack selection, FastBOP, registry binding, and Win16 Winsock task cleanup. None is assumed justified merely because it currently builds. The remaining S1 work is to map these 16 and the other 187 differences to a source owner, registered divergence or a removal candidate, then to reconcile manifest selection, archive/link participation, initialization, teardown and runtime evidence by complete owner package.
+The five line-ending-only paths are `dos/v86/cmd/command/init.asm`, `dos/v86/cmd/command/rdata.asm`, `dos/v86/cmd/command/stub.asm`, `wow32/wkglobal.c`, and `wow32/wklocal.c`; they are not semantic repair candidates. The remaining differences include declaration/build carriers and functional adaptations such as system-root projection, CPU40 stack selection, FastBOP, registry binding, and Win16 Winsock task cleanup. None is assumed justified merely because it currently builds. The remaining S1 work is to map these 11 and the other 187 semantic differences to a source owner, registered divergence or a removal candidate, then to reconcile manifest selection, archive/link participation, initialization, teardown and runtime evidence by complete owner package.
