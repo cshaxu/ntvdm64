@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T472 S2**
+**Active: M0 T472 S3**
 
 `books/` is expressly excluded and remains untracked pending separate
 documentation admission.
@@ -16,25 +16,25 @@ media is unchanged.
 
 ## Active Packet
 
-### M0 T472 S2 — DOS fatal-dialog terminal proof
+### M0 T472 S3 — nonfatal response semantics
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T472 S2, Ordinary Mode. |
-| Admission And Approval | S1 closes at its [owner ledger](../etc/evidence/m0-t472-s1-error-dialog-owner-ledger.md); automatic sequential progression remains approved. |
-| Objective | Prove the selected original DOS fatal-dialog Abort path reaches broker receipt and worker exit in original order; repair only a demonstrated ordering defect. |
-| Non-goals | Guest change/rebuild; a generic error dispatcher/terminator; private CSRSS/USER recreation; dialog policy changes. |
-| Reference Baseline | [Error-dialog proposal](../proposals/proposal-error-dialog-termination-semantics-restoration-001.md), [S1 ledger](../etc/evidence/m0-t472-s1-error-dialog-owner-ledger.md), T471 closure, and current T467 package identity. |
-| Files And ABI Surface | Existing original error/termination route, lifecycle bridge and focused test instrumentation only; no broker ABI change. |
+| Identifier Mode | M0 T472 S3, Ordinary Mode. |
+| Admission And Approval | S2 closes at its [terminal proof](../etc/evidence/m0-t472-s2-dos-fatal-terminal-proof.md); automatic sequential progression remains approved. |
+| Objective | Prove selected original nonfatal response families and classify historical labels whose immediate caller cannot continue. |
+| Non-goals | Guest change/rebuild; a generic error dispatcher/terminator; private CSRSS/USER recreation; unapproved dialog-product-policy changes. |
+| Reference Baseline | [Error-dialog proposal](../proposals/proposal-error-dialog-termination-semantics-restoration-001.md), T472 S1/S2 evidence, T471 closure, and current T467 package identity. |
+| Files And ABI Surface | Original `RcMessageBox`/caller paths and focused source/test evidence only; no broker ABI change. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Connected source batch, focused fatal-dialog/receipt/process-exit witnesses, then build and regression only if a defect requires a source change. |
-| Expected Markers | Original Abort ordering, one receipt, one worker exit, and no Console leak; failure never manufactures a successful termination. |
+| Verification | Connected source batch for retry/ignore/edit and `host_error`; runtime fixture only where it can drive the existing path without a new dialog engine. |
+| Expected Markers | Each response has a caller-local disposition; no historical label is misrepresented as a global continuation. |
 | Asset Needs | Pinned selected OpenNT source already in the repository and retained runtime evidence; guest media remains immutable. |
-| Reporting Requirements | Reproducer, source path/owner, receipt/process ordering, any minimal repair, test evidence and next-S boundary. |
+| Reporting Requirements | Caller table, response semantics, real/source witness, product-policy boundary and next-S handoff. |
 | Stop Conditions | Need for guest change, broker-protocol change, CCPU semantic change, private-server recreation, or unapproved product-policy concession. |
-| Exit Criteria | One connected source/probe batch proves the selected DOS terminal tail or identifies one finite source-owned ordering repair. |
+| Exit Criteria | Selected retry/ignore/edit routes and the `host_error` discrepancy have finite source-owned dispositions. |
 | Original Owner Request | Restore original WOW32 capability with minimum source diff and no autonomous substitute; source tracing first, tests after a connected batch. |
-| Similar-Issue Sweep | `ErrorDialogBox`/`RcErrorDialogBox`, `TerminateVDM`, `terminate`, `host_applClose`, `host_terminate`, receipt and worker exit. |
+| Similar-Issue Sweep | PIF edit/abort, allocation ignore, floppy retry, DPMI failure, startup failure and `host_error` callers. |
 | Candidate Proposal | [Error-dialog response/termination semantics](../proposals/proposal-error-dialog-termination-semantics-restoration-001.md). |
 
 ## T471 Closure Record
@@ -195,7 +195,7 @@ T471 S2/S3 may use only `build/t471-s2` for disposable acceptance evidence,
 with a 60-minute phase, 3-GiB size and 10-minute no-progress budget. Stable
 `.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
 
-T472 S2 may use only `build/t472-s2` for disposable terminal-path evidence,
+T472 S3 may use only `build/t472-s3` for disposable response-path evidence,
 with a 45-minute phase, 2-GiB size and 10-minute no-progress budget. Stable
 `.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
 
