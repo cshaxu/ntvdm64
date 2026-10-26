@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T473 S1**
+**Active: M0 T473 S2**
 
 `books/` is expressly excluded and remains untracked pending separate
 documentation admission.
@@ -16,25 +16,25 @@ media is unchanged.
 
 ## Active Packet
 
-### M0 T473 S1 — MVDM whole-closure inventory
+### M0 T473 S2 — source-shaped MVDM owner reconciliation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T473 S1, Ordinary Mode. |
-| Admission And Approval | T472 closes at [its closure](../history/m0-t472-closure.md); the queue's next candidate is automatically admitted. |
-| Objective | Freeze a complete source-to-build-to-runtime MVDM closure ledger before any recovery change, identifying every missing, cropped, unused, duplicate or unconnected original owner. |
-| Non-goals | Guest modification/rebuild; broad feature additions; importing a private Windows subsystem; implementing findings before the owner/dependency ledger is complete. |
-| Reference Baseline | [Whole-closure proposal](../proposals/proposal-mvdm-whole-closure-recovery-001.md), source policy, current T467 package and retained WOW32 ledger. |
-| Files And ABI Surface | Source/build manifests, original MVDM/OpenNT provenance and existing adapter bindings; no runtime ABI change in S1. |
+| Identifier Mode | M0 T473 S2, Ordinary Mode. |
+| Admission And Approval | S1 closes at [its inventory closure](../history/m0-t473-s1-closure.md); owner-approved automatic progression admits the finite S2 plan. |
+| Objective | Reconcile selected original owners with project-owned binding bodies, remove only proved duplicate behavior and retain only single-purpose modern resource/ABI boundaries. |
+| Non-goals | Guest modification/rebuild; bulk import; CPU30/private-kernel revival; new feature work; replacing selected original algorithms with host defaults. |
+| Reference Baseline | [S1 closure](../history/m0-t473-s1-closure.md), [finite S2 plan](../etc/evidence/m0-t473-s1-s2-reconciliation-plan.md), source policy and unchanged T467 package. |
+| Files And ABI Surface | Selected MVDM sources/manifests and the named project-owned adapter groups; no interface changes without source-owner proof. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Reconcile pinned original package/path union, repository files, actual compile/link selections and runtime evidence; record normal, failure and teardown proof entrypoints. |
-| Expected Markers | Every original MVDM path has a source, build, reachability and behavior disposition; no item closes as unknown or merely optional. |
-| Asset Needs | Pinned selected OpenNT source, repository build metadata and existing release evidence; guest media remains immutable. |
-| Reporting Requirements | Package/path ledger, original/current hashes, connection categories, duplicate map, finite dependency-ordered recovery plan and diff baseline. |
-| Stop Conditions | Need to import unpinned source, modify guest, recreate a private subsystem, or make a new semantic concession. |
-| Exit Criteria | Complete reconciled worklist with every exclusion evidence-backed; S2 has a finite source-shaped implementation order. |
+| Verification | For each bounded owner group: caller/owner and authority maps, x86 build/link proof, normal/failure/teardown evidence through the selected production route. |
+| Expected Markers | Every reviewed body is retained as a bounded adapter, retained original owner, or removed duplicate; no second behavioral authority. |
+| Asset Needs | Pinned original sources, repository build metadata, retained package evidence and existing test facilities; guest media remains immutable. |
+| Reporting Requirements | Before/after source/adapter footprint, each owner/disposition, removed selections, test evidence and explicit remaining runtime gaps. |
+| Stop Conditions | Need unpinned source, guest change, private subsystem reconstruction, unapproved semantic concession, or a source owner whose complete dependency closure is not finite. |
+| Exit Criteria | All five S2 owner groups have a finite disposition and all production changes, if any, pass coherent build/test/package publication gates. |
 | Original Owner Request | Recover complete original MVDM composition with minimum non-original footprint and no capability loss. |
-| Similar-Issue Sweep | Source presence, build/link inclusion, DLL/export/load selection, initialization, dispatch, teardown, adapters and overlays. |
+| Similar-Issue Sweep | CPU40/DPMI, COMMAND/XMS, SoftPC devices, WOW/session and redirector/monitor/debug carriers plus initialization, return, failure and teardown. |
 | Candidate Proposal | [MVDM whole-closure recovery](../proposals/proposal-mvdm-whole-closure-recovery-001.md). |
 
 ## T471 Closure Record
