@@ -9,6 +9,10 @@ claiming runtime acceptance.
 records the original Abort-to-ExitVDM chain, the one NTSRV authorization
 route, and the bounded non-interactive worker-lifecycle witness.
 
+[T472 S3 nonfatal response ledger](evidence/m0-t472-s3-nonfatal-response-ledger.md)
+records caller-owned Retry/Ignore/Edit dispositions and the literal historical
+`host_error` label boundary without adding a response engine.
+
 [T471 S4 aggregate review](evidence/m0-t471-s4-aggregate-review.md) records
 the unchanged installed/package identity, S1--S3 reconciliation and the sole
 owner-deferred physical WRITE non-pass for T-level acceptance.
