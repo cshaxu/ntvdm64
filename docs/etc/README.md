@@ -188,6 +188,10 @@ presentation boundary.
 maps every selected returned slot and receiver failure to one existing original
 cleanup/continuation owner, without adding a second task or worker terminator.
 
+[T464 S4 WOW hard-error acceptance](evidence/m0-t464-s4-hard-error-acceptance.md)
+records the `0.0.464` coherent package, complete product gate, publication
+hashes, and finite unavailable private-server presentation boundary.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.

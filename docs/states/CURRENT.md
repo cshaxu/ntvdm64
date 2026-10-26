@@ -2,38 +2,38 @@
 
 ## Current Work
 
-**Active: M0 T464 S4**
+**Active: M0 T465 S1**
 
-T463 is closed at the published S2 package plus its S3/S5 lifecycle acceptance;
-[the closure record](../history/m0-t463-closure.md) is authoritative. `books/`
-is expressly excluded and remains untracked pending separate documentation
-admission.
+T464 is closed at the published `0.0.464` ten-image package; [its closure](../history/m0-t464-closure.md)
+is authoritative. `books/` is expressly excluded and remains untracked pending
+separate documentation admission.
 
-Automatic sequential S closure/advancement is approved. Completed work follows
+Automatic progression is approved. Completed work follows
 the read-only `ntvdm64-wow32-audit`: recover selected original behavior with
 the smallest source-shaped binding and no guest modification or rebuild.
+
 ## Active Packet
 
-### M0 T464 S4 — error acceptance and handoff
+### M0 T465 S1 — WOW32 DDE conversation contract
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T464 S4, Ordinary Mode. |
-| Admission And Approval | Automatic sequential admission after the [S3 fatal-tail audit](../etc/evidence/m0-t464-s3-hard-error-fatal-tail-audit.md). |
-| Objective | Reconcile the published S2 receiver and S3 caller tails against the admitted WOW acceptance frontier and record finite retained boundaries. |
-| Non-goals | No guest edit/rebuild, private USER/CSRSS recreation, generic provider, new scheduler/terminator, or speculative UI automation. |
-| Reference Baseline | S1--S3 evidence, [hard-error proposal](../proposals/proposal-wow32-hard-error-responses-001.md), and minimum-diff governance. |
-| Files And ABI Surface | Published ten-image package, retained fixtures and selected original WOW callers only. |
+| Identifier Mode | M0 T465 S1, Ordinary Mode. |
+| Admission And Approval | Automatic next-candidate admission after [T464 closure](../history/m0-t464-closure.md). |
+| Objective | Map selected original DDE conversation, data/reply, callback/reentry, cancellation and peer/module/task-death owners before any runtime change. |
+| Non-goals | No guest edit/rebuild, autonomous DDE provider, replacement scheduler, speculative message shim, or S1 runtime implementation. |
+| Reference Baseline | [DDE proposal](../proposals/proposal-wow32-dde-001.md), WOW32 minimum-diff governance, T464 closure and current release manifest. |
+| Files And ABI Surface | Selected original DDE callers and explicit public message/callback/Clipboard conversions only. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Published-hash audit, decoder fixture, retained ordinary WOW app frontiers, and explicit real-modal/loss coverage boundary. |
-| Expected Markers | Published source slot contract, one original tail, no false private-server or UI-automation claim. |
-| Asset Needs | `build/t464-s2` only for disposable evidence; immutable guest inputs remain read-only. |
-| Reporting Requirements | Acceptance denominator, exact package identity and all remaining boundary evidence. |
-| Stop Conditions | Need for a guest change, private server recreation, new termination owner, or an unsupported automation mechanism. |
-| Exit Criteria | T464 closure with all completed work, finite retained limits and successor ownership recorded. |
+| Verification | Finite original-owner/ABI/lifetime ledger; executable focused probes only after a seam is formally admitted. Symbol or compile success cannot close S1. |
+| Expected Markers | One authority per conversation/payload/reply/callback state; explicit ordering, cancellation and loss rule; no duplicate provider state. |
+| Asset Needs | `build/t465-s1` only for disposable evidence; immutable guest inputs remain read-only. |
+| Reporting Requirements | Reached caller, owner, ABI/data, payload, reentry/loss rule, composability result and S2/S3 handoff per row. |
+| Stop Conditions | Need for a guest change, new provider/scheduler, unproved private USER/CSRSS assumption, or new observable semantic retreat. |
+| Exit Criteria | Finite DDE contract/dependency ledger and explicit S2/S3 ownership split; no behavior admitted outside selected DDE families. |
 | Original Owner Request | “把这个 S5 做完就可以收口本 T 任务，然后自动准入后续 wow32 的 T 任务。” |
-| Similar-Issue Sweep | All current `WOWSysErrorBox` callers and `ErrorDialogBox` abort tail; reject accidental DOS INT 24 absorption. |
-| Candidate Proposal | [WOW32 hard-error responses](../proposals/proposal-wow32-hard-error-responses-001.md). |
+| Similar-Issue Sweep | Conversation establish/data/reply/reentry plus cancel and peer/module/task loss; reject accidental generic USER provider recovery. |
+| Candidate Proposal | [WOW32 DDE](../proposals/proposal-wow32-dde-001.md). |
 
 ## T463 S1 Closure Record
 
