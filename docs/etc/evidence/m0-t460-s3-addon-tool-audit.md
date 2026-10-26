@@ -73,3 +73,22 @@ resolved by offline LNK or installer tests.
 The mouse build checks are structural only; their existing real guest runtime
 evidence remains their respective T435/T436 records.  This audit neither
 claims new guest runtime acceptance nor deploys any add-on to an installation.
+
+## T460 S4 follow-up collection audit
+
+The owner directed collection of the remaining Win95 tools and MVDM mirror
+changes was reviewed as one bounded delivery.  The following conclusions are
+specific to that collection:
+
+| Area | Result | Evidence |
+| --- | --- | --- |
+| Video7 packed output | Retain the upstream SoftPC T60 painter width and real-DIB bounds rules.  A concurrent reverse diff would have discarded both rules; it was removed before delivery. | `verify-dos-video-source-contract.ps1`, including the two Video7 assertions |
+| PIC reset / keyboard early EOI | Retain the independently reviewed host repairs.  They are host controller state changes, not guest changes. | `pic-reset-eoi-test.exe`: 24 assertions; `keyboard-controller-pic-test.exe`: 46 assertions |
+| `compat95.sys` root receiver | Retain as candidate-only add-on support.  The new receiver is appended after the IOS-sensitive resident prefix; the compatibility-only prefix comparator confirms the resident layout is unchanged. | `verify-win95-compat-prefix.py` against `6048075f4` control |
+| Win95 path and launch recovery | Hardened the journals to bind each record to its installed hash; Undo now validates every record before any mutation and refuses reparse-point trees or user-modified files. | `win95_launch_command_safety_test.ps1`, `win95_launch_install_test.ps1` |
+| Offline tool binaries | Retain checked `PATCH95.EXE` and `WIN95PATH.EXE`. Fresh producers have matching `.text`, `.data`, `.pdata` and `.reloc` sections; only linker-generated `.rdata` differs. | `build/t460-s3/audit-win95-tools-r1` |
+
+The Win95 add-ons remain explicitly opt-in and candidate accepted.  No original
+guest media was changed.  The current host package is independently staged and
+published as a coherent ten-image set; package identity is recorded in
+`build/t460-s3/audit-publish-r1/published-manifest.json`.

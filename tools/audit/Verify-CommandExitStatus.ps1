@@ -108,7 +108,8 @@ if ($GuestFixturePath) {
     # MOV AX,4C07h; INT 21h.  The outer launcher exit alone is not proof that
     # DOS opened and executed this COM image.  Never replaces package media.
     $guest=Join-Path $fixtureRoot 'G7.COM'
-    if ($guest -notmatch '\\build\\M[0-9]+-T[0-9]+\\S[0-9]+\\') { throw 'Guest fixture must stay in an admitted task S build root' }
+    $ownedBuild=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../build'))+'\'
+    if (!$guest.StartsWith($ownedBuild,[StringComparison]::OrdinalIgnoreCase)) { throw 'Guest fixture must stay below repository build' }
     [IO.File]::WriteAllBytes($guest,[byte[]](
         0xba,0x0c,0x01,             # MOV DX,010Ch (COM message)
         0xb4,0x09,0xcd,0x21,         # MOV AH,09h; INT 21h

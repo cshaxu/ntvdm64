@@ -11,7 +11,7 @@ if($data.schema -ne 1 -or $root -ine (Join-Path $data.windows 'STRTMENU')){throw
 $roots=@{menu=$root;apps=(Join-Path $data.windows 'APPS95')}
 $sources=@{menu=$data.sourceRoot;apps=$data.programSourceRoot}
 if((Test-Path -LiteralPath $roots.apps) -and @(Get-ChildItem -LiteralPath $roots.apps -Force).Count){throw 'Preserve existing APPS95 data; expected an empty/new short-path payload root'}
-if(@(Get-CimInstance Win32_Process -Filter "Name='ntvdm.exe'").Count){throw 'Close running VDM sessions before menu installation'}
+if(@(Get-Process -Name ntvdm -ErrorAction SilentlyContinue).Count){throw 'Close running VDM sessions before menu installation'}
 $backup=[IO.Path]::GetFullPath($BackupRoot)
 if(Test-Path -LiteralPath $backup){throw 'Fresh backup required'}
 foreach($allowed in $roots.Values){if($backup -ieq $allowed -or $backup.StartsWith($allowed+'\',[StringComparison]::OrdinalIgnoreCase)){throw 'Backup outside prepared roots required'}}

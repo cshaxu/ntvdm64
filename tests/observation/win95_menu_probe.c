@@ -21,6 +21,7 @@ static HANDLE output;
 static char line[2048],module[MAX_PATH],programs[MAX_PATH];
 static unsigned links,missing;
 static BOOL launchCanaries=TRUE;
+static BOOL appsOnly=FALSE;
 static unsigned add(unsigned n,const char *s){while(*s&&n<2000)line[n++]=*s++;return n;}
 static unsigned hex(unsigned n,DWORD x){int i;static const char d[]="0123456789ABCDEF";for(i=7;i>=0;i--)line[n++]=d[(x>>(i*4))&15];return n;}
 static void write(unsigned n){DWORD done;line[n++]='\r';line[n++]='\n';WriteFile(output,line,n,&done,0);}
@@ -60,14 +61,17 @@ static void enumerate(const char *root,unsigned depth){
   n=(unsigned)lstrlenA(path);if(n>=4&&!lstrcmpiA(path+n-4,".lnk")){links++;if(!inspect(path))missing++;}
  }while(FindNextFileA(search,&data));FindClose(search);
 }
+static BOOL CALLBACK childText(HWND window,LPARAM unused){char label[256];(void)unused;GetClassNameA(window,label,sizeof(label));text("CHILD_CLASS",label);GetWindowTextA(window,label,sizeof(label));text("CHILD_TEXT",label);return TRUE;}
+static BOOL CALLBACK processWindow(HWND window,LPARAM processId){DWORD owner;char label[256];GetWindowThreadProcessId(window,&owner);if(owner==(DWORD)processId){GetClassNameA(window,label,sizeof(label));text("PROCESS_WINDOW_CLASS",label);GetWindowTextA(window,label,sizeof(label));text("PROCESS_WINDOW_TEXT",label);EnumChildWindows(window,childText,0);}return TRUE;}
 static void canary(const char *name,const char *file,const char *className){
  static STARTUPINFOA startup;static PROCESS_INFORMATION process;char path[MAX_PATH];DWORD i,code=0;HWND window=0;BOOL loaded;
  lstrcpyA(path,module);lstrcatA(path,file);text("CANARY",name);loaded=inspect(path);value("CANARY_TARGET_OK",loaded);
  if(!loaded||!launchCanaries)return;
  startup.cb=sizeof(startup);process.hProcess=0;process.hThread=0;
  value("CREATEPROCESS",CreateProcessA(lastTarget,0,0,0,FALSE,0,0,0,&startup,&process));value("CREATE_ERROR",GetLastError());
- for(i=0;i<100;i++){window=FindWindowA(className,0);if(window)break;Sleep(100);}
+ for(i=0;i<60;i++){window=FindWindowA(className,0);if(window)break;if(i==3&&process.hProcess)EnumWindows(processWindow,(LPARAM)process.dwProcessId);Sleep(10);}
  text("CANARY_CLASS",className);value("CANARY_WINDOW",!!window);
+ if(!window&&process.hProcess)EnumWindows(processWindow,(LPARAM)process.dwProcessId);
  if(process.hProcess){GetExitCodeProcess(process.hProcess,&code);value("CANARY_PROCESS",code);}
  if(window)PostMessageA(window,WM_CLOSE,0,0);
  if(process.hThread)CloseHandle(process.hThread);
@@ -87,12 +91,13 @@ __declspec(noreturn) void entry(void){
  shell_factory=(void*)bind("SHELL32.DLL","DllGetClassObject");
  if(!shell_factory||!reg_open||!reg_query||!reg_close||!shell_execute){CloseHandle(output);ExitProcess(92);}
  for(i=(DWORD)lstrlenA(module);i;i--)if(module[i-1]=='\\'){module[i]=0;break;}
- {char path[MAX_PATH];lstrcpyA(path,module);lstrcatA(path,"INSPECT.ONLY");if(GetFileAttributesA(path)!=INVALID_FILE_ATTRIBUTES)launchCanaries=FALSE;value("LAUNCH_ENABLED",launchCanaries);}
+ {char path[MAX_PATH];lstrcpyA(path,module);lstrcatA(path,"INSPECT.TAG");if(GetFileAttributesA(path)!=INVALID_FILE_ATTRIBUTES)launchCanaries=FALSE;value("LAUNCH_ENABLED",launchCanaries);}
+ {char path[MAX_PATH];lstrcpyA(path,module);lstrcatA(path,"APPS.TAG");appsOnly=GetFileAttributesA(path)!=INVALID_FILE_ATTRIBUTES;value("APPS_ONLY",appsOnly);}
  hr=S_OK;
  if(SUCCEEDED(hr)){
   value("REGOPEN",RegOpenKeyExA(HKEY_CURRENT_USER,"Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders",0,KEY_QUERY_VALUE,&key));
   if(key){value("REGQUERY",RegQueryValueExA(key,"Programs",0,&type,(BYTE*)programs,&size));RegCloseKey(key);}
-  text("PROGRAMS",programs);if(programs[0])enumerate(programs,0);
+  text("PROGRAMS",programs);if(programs[0]&&!appsOnly)enumerate(programs,0);
   value("MENU_LINKS",links);value("MENU_MISSING",missing);
   {char path[MAX_PATH];lstrcpyA(path,module);lstrcatA(path,"\xb2\xe2\xca\xd4.LNK");value("CHINESE_FILENAME",inspect(path));}
   canary("NOTEPAD","NOTE.LNK","Notepad");

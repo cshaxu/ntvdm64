@@ -16,6 +16,15 @@ owner-supplied IO.SYS copy and creates separate local artwork only.
 
 ### Permanent guest-media immutability
 
+Owner-scoped standalone Win95 toolkit exception dated 2026-10-25: package the
+already proven VMM32.VXD IOS/VMM/VWIN32/DOSMGR consumer adaptations in an
+identity-bound offline patcher for recoverable installed copies. Retain exact
+input identities, before/after ranges and rollback; preserve original media,
+NTIO/NTDOS and all unrelated guest binaries. This also admits configuration,
+registry/path relocation and independently authored compatibility/mouse add-ons
+for the user-selected installation root. It is not permission for unrelated
+guest fixes, runtime hot patches or unverified universal-build support.
+
 Owner-scoped T436 exception: after verified ten-CON DOSMGR SFT failure, owner
 explicitly approves adapting the supplied retail WIN386.EXE DOSMGR and the
 previously established retail KRNL386.EXE SFT probe on recoverable installation

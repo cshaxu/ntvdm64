@@ -1961,6 +1961,8 @@ $graph.Add('build obj/tests/ccpu_stack_transition_test.obj: cc ' + (NinjaPath (J
 $graph.Add('build ccpu-stack-transition-test.exe: memory_test_link obj/tests/ccpu_stack_transition_test.obj ' + $boundedExecutionFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $graph.Add('build obj/tests/keyboard_controller_pic_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/keyboard_controller_pic_test.c')))
 $graph.Add('build keyboard-controller-pic-test.exe: memory_test_link obj/tests/keyboard_controller_pic_test.obj ' + $boundedExecutionFixtureSeamsObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
+$graph.Add('build obj/tests/pic_reset_eoi_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/pic_reset_eoi_test.c')))
+$graph.Add('build pic-reset-eoi-test.exe: memory_test_link obj/tests/pic_reset_eoi_test.obj ' + $boundedExecutionFixtureSeamsObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $wowPageDomainFixtureObject = 'obj/tests/wow_page_domain_fixture.obj'
 $wowUserObjectFixtureObject = 'obj/adapter-wow/wow_user_object_bindings.obj'
 $wowMenuClientFixtureObject = 'obj/adapter-wow/wow_menu_client_bindings.obj'

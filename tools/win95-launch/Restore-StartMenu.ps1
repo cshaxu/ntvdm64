@@ -5,7 +5,7 @@ $backup=(Resolve-Path -LiteralPath $BackupRoot).Path
 $state=Get-Content "$backup/install.json" -Raw|ConvertFrom-Json
 $plan=Get-Content "$backup/plan.json" -Raw|ConvertFrom-Json
 if(!$state.installed -or $plan.schema -ne 1){throw 'Expected a completed owned menu installation'}
-if(@(Get-CimInstance Win32_Process -Filter "Name='ntvdm.exe'").Count){throw 'Close running VDMs before restoring menu configuration'}
+if(@(Get-Process -Name ntvdm -ErrorAction SilentlyContinue).Count){throw 'Close running VDMs before restoring menu configuration'}
 $roots=@{menu=[IO.Path]::GetFullPath($plan.menuRoot);apps=(Join-Path $plan.windows 'APPS95')}
 foreach($row in $state.before){
  if($row.role -notin @('menu','apps')){throw 'Unknown installed artifact role'}

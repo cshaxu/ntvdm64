@@ -7,9 +7,9 @@ $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $build=(Resolve-Path -LiteralPath $BuildRoot).Path
 if(!$build.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase)){throw 'Build-owned add-on required'}
 $metadata=Get-Content "$build/build.json" -Raw|ConvertFrom-Json
-if($metadata.file -ne 'compat95.sys' -or $metadata.compatibilityOnly -or @($metadata.sources).Count -ne 2){throw 'Expected complete compat95 producer manifest'}
+if($metadata.file -ne 'compat95.sys' -or $metadata.compatibilityOnly -or @($metadata.sources).Count -ne 3){throw 'Expected complete compat95 producer manifest'}
 $source=Join-Path $repo 'src/addon/win95-compat-sys'
-foreach($name in @('compat.asm','bootlogo.inc')) {
+foreach($name in @('compat.asm','bootlogo.inc','root.inc')) {
  $row=@($metadata.sources|Where-Object name -eq $name)
  if($row.Count -ne 1 -or (Get-FileHash (Join-Path $source $name)).Hash -ne $row[0].sha256){throw 'Add-on source changed after build'}
 }

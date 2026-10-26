@@ -9,7 +9,7 @@ $patch=Join-Path $windows 'PATCH'
 $config=Join-Path $patch 'CONFIG.NT'
 if(!(Test-Path -LiteralPath "$windows/WIN.COM") -or !(Test-Path -LiteralPath $config)){throw 'Existing prepared Win95 installation required'}
 if($windows -match '\s' -or $Logo -and $NoLogo){throw 'Use the existing short DOS installation path and one logo choice'}
-if(@(Get-CimInstance Win32_Process -Filter "Name='ntvdm.exe'").Count){throw 'Close running VDMs before changing the installed guest profile'}
+if(@(Get-Process -Name ntvdm -ErrorAction SilentlyContinue).Count){throw 'Close running VDMs before changing the installed guest profile'}
 $release=Join-Path $repo 'assets/release'
 $manifest=Get-Content "$release/addon-manifest.json" -Raw|ConvertFrom-Json
 $entry=@($manifest.drivers|Where-Object id -eq 'win95-compat')

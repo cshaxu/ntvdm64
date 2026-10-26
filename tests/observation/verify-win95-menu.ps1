@@ -2,12 +2,13 @@
 param([Parameter(Mandatory)][string]$OutputRoot,
  [Parameter(Mandatory)][string]$GuestProbe,
  [Parameter(Mandatory)][string]$Lnk,
- [switch]$AfterMigration,[switch]$MenuOnly,[string]$WindowsRoot='O:\WINDOWS',
+ [ValidateSet('Keep','On','Off')][string]$Paging='Keep',[switch]$AfterMigration,[switch]$MenuOnly,[switch]$AppsOnly,[ValidateRange(30000,180000)][int]$ObservationTimeoutMs=60000,[string]$WindowsRoot='O:\WINDOWS',
  [int]$XmsKB=65535,
  [string]$RuntimeRoot='O:\WINNT',
  [string]$GuestDesktopObserver='O:\assets\win95-ntvdm-research\display256\hostfix\OBS95.EXE',
  [string]$Observer='O:\WINNT\logs\win95-research\observer.exe')
 $ErrorActionPreference='Stop'
+if($AppsOnly -and $MenuOnly){throw 'Choose program lifecycle or menu-only scope'}
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $out=[IO.Path]::GetFullPath($OutputRoot)
 if(!$out.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $out)){throw 'Fresh build output required'}
@@ -23,7 +24,8 @@ try {
  $stage=New-PhysicalRuntimeStage "$out/package" -TopLevelNames @('system32')
  $scope=New-IsolatedPackageScope $stage
  Copy-Item $GuestProbe "$stage/MENU95.EXE"
- if($MenuOnly){[IO.File]::WriteAllText("$stage/INSPECT.ONLY",'explicit menu-only gate; program launch remains a separate non-pass')}
+ if($MenuOnly){[IO.File]::WriteAllText("$stage/INSPECT.TAG",'explicit menu-only gate; program launch remains a separate non-pass')}
+ if($AppsOnly){[IO.File]::WriteAllText("$stage/APPS.TAG",'explicit program-lifecycle gate')}
  Copy-Item $GuestDesktopObserver "$stage/DSP95.EXE"
  if(!$AfterMigration){Copy-Item -LiteralPath 'O:\Program Files' -Destination "$stage/APPS95" -Recurse}
  $apps=if($AfterMigration){"$WindowsRoot\APPS95"}else{"$stage\APPS95"}
@@ -37,6 +39,14 @@ try {
   $path=Join-Path $WindowsRoot $file;$row=@{path=$path;exists=[IO.File]::Exists($path)}
   if($row.exists){$row.backup=Join-Path $out ($file.Replace('/','_')+'.before');$row.hash=(Get-FileHash -LiteralPath $path).Hash;$row.attributes=(Get-Item -LiteralPath $path -Force).Attributes;[IO.File]::Copy($path,$row.backup,$true)}
   $saved+=,$row
+ }
+ if($Paging -ne 'Keep'){
+  $sysEncoding=[Text.Encoding]::GetEncoding(936)
+  $sysPath="$WindowsRoot/SYSTEM.INI"
+  $sys=$sysEncoding.GetString([IO.File]::ReadAllBytes($sysPath))
+  $sys=[regex]::Replace($sys,'(?im)^Paging=[^\r\n]*',"Paging=$Paging")
+  [IO.File]::SetAttributes($sysPath,[IO.FileAttributes]::Normal)
+  [IO.File]::WriteAllBytes($sysPath,$sysEncoding.GetBytes($sys))
  }
  Copy-Item "$WindowsRoot/PATCH/CONFIG.NT" "$stage/CONFIG.NT"
  $auto="@echo off`r`nSET windir=$WindowsRoot`r`nSET winbootdir=$WindowsRoot`r`nSET TEMP=$stage\TEMP`r`nSET TMP=$stage\TEMP`r`nSET PATH=$WindowsRoot;$WindowsRoot\SYSTEM;$stage\system32`r`n"
@@ -56,10 +66,10 @@ try {
  $start.Environment['MVDM_OBSERVER_PRIVATE_DESKTOP']='1';$start.Environment['MVDM_OBSERVER_OWN_JOB']='1'
  $start.Environment['PATH']="$stage\system32;$env:SystemRoot\System32"
  $start.Environment['TEMP']="$stage\TEMP";$start.Environment['TMP']="$stage\TEMP"
- foreach($arg in @("$stage/system32/run16.exe",$WindowsRoot,"$out/observer.txt","$stage/WIN.PIF",'--observation-timeout-ms','60000')){$start.ArgumentList.Add($arg)}
+ foreach($arg in @("$stage/system32/run16.exe",$WindowsRoot,"$out/observer.txt","$stage/WIN.PIF",'--observation-timeout-ms',[string]$ObservationTimeoutMs)){$start.ArgumentList.Add($arg)}
  $process=[Diagnostics.Process]::Start($start)
  @{pid=$process.Id;started=$process.StartTime;command=$start.FileName;arguments=@($start.ArgumentList);stage=$stage}|ConvertTo-Json -Depth 4|Set-Content "$out/process.json"
- if(!$process.WaitForExit(80000)){throw 'Menu witness diagnostic deadline'}
+ if(!$process.WaitForExit($ObservationTimeoutMs+20000)){throw 'Menu witness diagnostic deadline'}
  if([IO.File]::Exists($logPath)){Copy-Item -LiteralPath $logPath "$out/MENU95.LOG"}
  if([IO.File]::Exists("$WindowsRoot/PATCH/TESTS/OBS95.LOG")){Copy-Item -LiteralPath "$WindowsRoot/PATCH/TESTS/OBS95.LOG" "$out/OBS95.LOG"}
  $log=if([IO.File]::Exists("$out/MENU95.LOG")){[IO.File]::ReadAllText("$out/MENU95.LOG",$encoding)}else{''}
@@ -73,8 +83,8 @@ try {
  $menuPassed=$log.Contains('MENU_INSPECTION_COMPLETE') -and $resolved -eq 3 -and $chinese
  $launchPassed=$canaries -eq 3 -and $normalCloses -eq 3
  $passed=$menuPassed -and ($MenuOnly -or $launchPassed)
- if($AfterMigration){$passed=$passed -and $menuCount -ge 25 -and $missing -eq 0}
- @{passed=$passed;scope=if($MenuOnly){'menu-path-resolution-only'}else{'menu-and-program-lifecycle'};launchPassed=$launchPassed;afterMigration=[bool]$AfterMigration;xmsKB=$XmsKB;menuLinks=$menuCount;missingTargets=$missing;canaryTargets=$resolved;canaryWindows=$canaries;normalCloses=$normalCloses;chineseFilename=$chinese;observerExit=$process.ExitCode;computerUse=$false;inputInjected=$false;workerSha256=(Get-FileHash "$stage/system32/ntvdm.exe").Hash;lnkSha256=(Get-FileHash $Lnk).Hash;probeSha256=(Get-FileHash $GuestProbe).Hash}|ConvertTo-Json|Set-Content "$out/result.json"
+ if($AfterMigration -and !$AppsOnly){$passed=$passed -and $menuCount -ge 25 -and $missing -eq 0}
+ @{passed=$passed;paging=$Paging;scope=if($MenuOnly){'menu-path-resolution-only'}elseif($AppsOnly){'program-lifecycle-only'}else{'menu-and-program-lifecycle'};launchPassed=$launchPassed;afterMigration=[bool]$AfterMigration;xmsKB=$XmsKB;menuLinks=$menuCount;missingTargets=$missing;canaryTargets=$resolved;canaryWindows=$canaries;normalCloses=$normalCloses;chineseFilename=$chinese;observerExit=$process.ExitCode;computerUse=$false;inputInjected=$false;workerSha256=(Get-FileHash "$stage/system32/ntvdm.exe").Hash;lnkSha256=(Get-FileHash $Lnk).Hash;probeSha256=(Get-FileHash $GuestProbe).Hash}|ConvertTo-Json|Set-Content "$out/result.json"
  if(!$passed){throw 'Original Win95 shell/target/canary lifecycle gate failed'}
 }catch{($_|Out-String)+$_.ScriptStackTrace|Set-Content "$out/failure.txt";throw}
 finally{

@@ -22,20 +22,24 @@
       "file": "compat95.sys",
       "kind": "dos-character-driver",
       "architecture": "i386-real-mode",
-      "sha256": "BFD8E8D3AF62D4398BE414087B36E30EFF9798308387B5454C4B109ED4490D17",
+      "sha256": "50117300CE5CCE2C3C1F8671A109A8A9B9C58FC8B27C1DA48746C05C56AB9E6E",
       "source": "src/addon/win95-compat-sys/compat.asm",
-      "sourceSha256": "FDBEDC5FF2B6960ACBF0129CD0F955F8C1735FF21571C35E6856E192DC0337E9",
+      "sourceSha256": "0B6690F7D9351B4E5C6B6614C2C47555A98B1486528896E45BFC60B636D8BBF7",
       "sources": [
         {
-          "name": "compat.asm",
-          "sha256": "FDBEDC5FF2B6960ACBF0129CD0F955F8C1735FF21571C35E6856E192DC0337E9"
+          "sha256": "0B6690F7D9351B4E5C6B6614C2C47555A98B1486528896E45BFC60B636D8BBF7",
+          "name": "compat.asm"
         },
         {
-          "name": "bootlogo.inc",
-          "sha256": "21DB3DB939A0D8FD14939063D70D1AC6089D4F025642740003A07702BB318FD7"
+          "sha256": "21DB3DB939A0D8FD14939063D70D1AC6089D4F025642740003A07702BB318FD7",
+          "name": "bootlogo.inc"
+        },
+        {
+          "sha256": "CB80038540E4363650921A85FCBBCF19F44D2BB26A82A50544995B3E144F639D",
+          "name": "root.inc"
         }
       ],
-      "acceptance": "verified"
+      "acceptance": "candidate"
     }
   ],
   "utilities": [

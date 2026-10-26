@@ -1,5 +1,9 @@
 # Supporting Material
 
+[Win95 paging research](evidence/m0-t460-s3-win95-paging-research.md) records
+the owner-requested error-8 on/off control, recoverable configuration change
+and the unresolved WordPad/menu-enumeration acceptance boundaries.
+
 [T452 module, memory and alias plan](operations/t452-modules-memory-aliases-plan.md)
 records the owner-admitted sequence, pinned read-only audit receipt and
 minimum-diff production reconciliation gates.

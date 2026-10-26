@@ -547,6 +547,7 @@ d_int19:
 %ifndef COMPAT95_NO_LOGO
 %include "bootlogo.inc"
 %endif
+%include "root.inc"
 resident_end:
 ; Discardable initialization. Do not use process-only AH31/AH49 services.
 init:
@@ -555,6 +556,8 @@ init:
  mov [es:bx+16],cs
  cmp byte [initialized],0
  jne .ok
+ call root_parse_options
+ jc .duplicate
 %ifndef COMPAT95_NO_LOGO
  call logo_parse_options
 %endif
@@ -608,11 +611,7 @@ init:
  mov [k_old16],eax
  mov word [es:16h*4],k_int16
  mov [es:16h*4+2],cs
-%ifndef COMPAT95_NO_LOGO
- mov word [es:2fh*4],logo_dispatch
-%else
- mov word [es:2fh*4],multiplex
-%endif
+ mov word [es:2fh*4],root_dispatch
  mov [es:2fh*4+2],cs
  popf
  mov [r_rrs_rmd+2],cs
