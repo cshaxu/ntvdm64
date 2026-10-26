@@ -172,6 +172,11 @@ records the selected original raw-job, HDC-document, device-setup and
 PrintDlg owners, their existing W07/W08/W18 handoffs, and the finite S2 test
 boundary without adding a print provider.
 
+[T468 S2 Win16 HDC printing witness](evidence/m0-t468-s2-hdc-print-witness.md)
+records the original GDI StartDoc/AbortProc normal-and-cancel path with the
+named PDF provider, while retaining raw spool's distinct legacy-profile
+boundary as a non-pass.
+
 [T461 S1 Shell and layered Registry owner matrix](evidence/m0-t461-s1-shell-registry-owner-matrix.md)
 records the selected Shell service and seven Registry entries, the sole
 `NTVDM.REG` façade, its missing persistent-write/concurrency contract, and the
