@@ -42,6 +42,13 @@ ten-image package remains `build/t467-s3/package-r2` and guest media is unchange
 | Similar-Issue Sweep | C11/C12, registration, dispatch, direct data, retained original limitations, package hash and each application gate. |
 | Candidate Proposal | [WOW32 integrated acceptance](../proposals/proposal-wow32-integrated-acceptance-001.md). |
 
+## S1 Closure Record
+
+S1 freezes the unchanged ten-image artifact and reconciles W01--W19, C11 and
+C12 at the [provider/artifact record](../etc/evidence/m0-t471-s1-provider-artifact-freeze.md).
+Every predecessor is either closed by its named owner or retained as an
+explicit non-pass; no provider work is absorbed. S2 may use only that package.
+
 ## T470 Closure Record
 
 T470 closed ToolHelp/debugger ownership at its
@@ -197,6 +204,10 @@ T467 S3/S4 may use only `build/t467-s3` for disposable build, probe,
 publication-recovery and acceptance evidence, with a 60-minute phase, 3-GiB
 size and 10-minute no-progress budget. Stable `.ninja` and `.ccache` remain
 reusable caches and are never task evidence roots.
+
+T471 S1 may use only `build/t471-s1` for disposable package-freeze evidence,
+with a 30-minute phase, 1-GiB size and 10-minute no-progress budget. Stable
+`.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
 
 T461 S1 may use only `build/t461-s1` for disposable source-audit evidence,
 with a 30-minute phase, 2-GiB size and 10-minute no-progress budget. Stable

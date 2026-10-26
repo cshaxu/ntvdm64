@@ -1,5 +1,9 @@
 # Supporting Material
 
+[T471 S1 whole-provider artifact freeze](evidence/m0-t471-s1-provider-artifact-freeze.md)
+records the single ten-image runtime identity, all predecessor dispositions,
+the C11/C12 ownership sweep, and the fixed three-application S2 matrix.
+
 [T470 S1 ToolHelp/debugger owner matrix](evidence/m0-t470-s1-toolhelp-debugger-owner-matrix.md)
 records immutable ToolHelp ownership, the original WOW class-enumeration
 stopping boundary, and the retained WOW/non-WOW debugger seams.
