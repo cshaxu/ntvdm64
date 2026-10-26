@@ -43,6 +43,14 @@ for a further product-provider decision.
 keeps final-link selection separate from initialization, dispatch, failure and
 teardown evidence, and fixes the finite package-by-package recovery order.
 
+[T473 S1 non-original boundary matrix](evidence/m0-t473-s1-adapter-boundary-matrix.md)
+maps every project-owned NTVDM link group to a single allowed boundary role and
+the source-first duplicate/removal decision required in S2.
+
+[T473 S1 finite S2 reconciliation plan](evidence/m0-t473-s1-s2-reconciliation-plan.md)
+turns the complete inventory into five bounded source-owner groups without
+inventing a bulk-import phase or silently treating runtime verification as done.
+
 [T471 S4 aggregate review](evidence/m0-t471-s4-aggregate-review.md) records
 the unchanged installed/package identity, S1--S3 reconciliation and the sole
 owner-deferred physical WRITE non-pass for T-level acceptance.

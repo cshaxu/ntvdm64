@@ -4,7 +4,7 @@
 
 `tools/audit/Export-MvdmWholeClosureInventory.mjs` compares every file below the selected OpenNT `base/mvdm`, OpenNT-4.5 `nt/private/mvdm`, and current `src/mvdm` roots. It hashes bytes, rejects symbolic links, permits output only below `build/`, and deliberately does not select an upstream conflict or claim runtime reachability.
 
-Runs `r20` and `r21` of the original identity inventory were byte-identical, SHA-256 `265C7323F903E6275BEC6A4B078E19AA753D3E57C7AD17AA66FDA98C51A39A11`. The corrected product-selection/disposition inventory is `build/t473-s1/mvdm-union-node-r25`, SHA-256 `B97A3DE643838B10E3167345984E22DF11A5DF2178EDCDF4C60D9F1BE46E640F`. The normalizer changes only CRLF-to-LF and trailing horizontal whitespace; it never selects an edition, changes source, or claims runtime reachability.
+Runs `r20` and `r21` of the original identity inventory were byte-identical, SHA-256 `265C7323F903E6275BEC6A4B078E19AA753D3E57C7AD17AA66FDA98C51A39A11`. The corrected product-selection/disposition inventory was reproduced as `build/t473-s1/mvdm-union-node-r27/mvdm-union.csv`, SHA-256 `B97A3DE643838B10E3167345984E22DF11A5DF2178EDCDF4C60D9F1BE46E640F`. The normalizer changes only CRLF-to-LF and trailing horizontal whitespace; it never selects an edition, changes source, or claims runtime reachability.
 
 ## Source-union facts
 
