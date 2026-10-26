@@ -137,9 +137,9 @@ records plan-template provenance, the original PIF path-capacity refusal and
 isolated tool evidence; it changes no guest, runtime image or release binary.
 
 [T461 S1 Shell and layered Registry owner matrix](evidence/m0-t461-s1-shell-registry-owner-matrix.md)
-records the two selected original Shell entries, the sole `NTVDM.REG` façade,
-its missing persistent-write/concurrency contract, and the finite S2 handoff;
-it is source evidence, not runtime acceptance.
+records the selected Shell service and seven Registry entries, the sole
+`NTVDM.REG` façade, its missing persistent-write/concurrency contract, and the
+finite S2 handoff; it is source evidence, not runtime acceptance.
 
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
