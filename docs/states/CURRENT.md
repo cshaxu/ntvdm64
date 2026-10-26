@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T467 S4**
+**Active: M0 T468 S1**
 
 T464 is closed at the published `0.0.464` ten-image package; [its closure](../history/m0-t464-closure.md)
 is authoritative. `books/` is expressly excluded and remains untracked pending
@@ -12,61 +12,34 @@ Automatic progression is approved. Completed work follows
 the read-only `ntvdm64-wow32-audit`: recover selected original behavior with
 the smallest source-shaped binding and no guest modification or rebuild.
 
-T465 is closed by [its closure](../history/m0-t465-closure.md): it completed
-the selected original classic-DDE transport with no production or guest diff.
-T466 is closed by [its closure](../history/m0-t466-closure.md): the complete
-reached multimedia source boundary needs no project provider, scheduler or
-retained buffer owner. It changes no production or guest image.
+T465, T466 and T467 are closed by their [DDE](../history/m0-t465-closure.md),
+[multimedia](../history/m0-t466-closure.md) and
+[Winsock](../history/m0-t467-closure.md) closures.  T467's test-only S4 adds
+the real async-select notification/disable/close witness; the published
+ten-image package remains `build/t467-s3/package-r2` and guest media is unchanged.
 
 ## Active Packet
 
-### M0 T467 S4 — Winsock capability acceptance
+### M0 T468 S1 — Printing and spool contract inventory
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T467 S4, Ordinary Mode. |
-| Admission And Approval | Automatic progression from S3 under owner-approved automatic S/T closure. |
-| Objective | Close the selected original Win16 Winsock capability only if its S1--S3 owner, local-peer, async cancellation/task-loss and product-package evidence form one finite, coherent result. |
-| Non-goals | Guest change/rebuild; a new provider, callback carrier, scheduler, socket/buffer registry or unrelated network protocol feature. |
-| Reference Baseline | [S1 owner/lifetime inventory](../etc/evidence/m0-t467-s1-winsock-owner-matrix.md), [S2 synchronous bridge](../etc/evidence/m0-t467-s2-synchronous-winsock-bridge.md), [S3 async lifetime](../etc/evidence/m0-t467-s3-winsock-async-lifetime.md), [Winsock proposal](../proposals/proposal-wow32-winsock-001.md), and [WOW32 minimum-diff governance](../etc/operations/wow32-queue-minimal-diff-admission-governance.md). |
-| Files And ABI Surface | Existing S1--S3 source/test/evidence only; no additional protocol surface is admitted. |
+| Identifier Mode | M0 T468 S1, Ordinary Mode. |
+| Admission And Approval | Automatic successor admission after T467 closure under the owner-approved automatic S/T sequence. |
+| Objective | Produce a finite source-first inventory of the selected original Win16 printing/spool call families, their Guest/WOW32/modern-host ABI, job/DC/cancel/retirement authority, and actual endpoint availability. |
+| Non-goals | Guest change/rebuild; print provider, spooler, device emulation, replacement DC/job/callback owner, or production implementation. |
+| Reference Baseline | [Printing/spool proposal](../proposals/proposal-wow32-printing-spool-001.md), [W07 GDI closure](../history/m0-t455-closure.md), [W08 text/metafile closure](../history/m0-t456-closure.md), and [WOW32 admission governance](../etc/operations/wow32-queue-minimal-diff-admission-governance.md). |
+| Files And ABI Surface | Source/evidence only: selected original WOW32 printer/spool files, original guest import/ordinal surface, existing GDI/font handoffs and supported modern spool endpoint evidence. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Reconcile the immutable real-guest/local-peer synchronous and async completion/cancel/task-loss witnesses with the retained peer-loss socket-map boundary, full component build and Product gate against the published package. |
-| Expected Markers | One owner per socket/context; completion identity/error, cancellation and task exit retain no live guest callback/buffer; package identity is three-way hash-equal. |
-| Asset Needs | `build/t467-s3/package-r2` and recorded evidence only; archive-derived, hash-recorded original guest DLL; installed tree and guest inputs remain read-only. |
-| Reporting Requirements | Explicit combined capability verdict, unverified limits, package/hash accounting and next-T handoff. |
-| Stop Conditions | An uncovered selected operation or a need for guest/driver change, provider/scheduler/registry, or non-source-shaped correction. |
-| Exit Criteria | All proposal S1--S3 criteria are evidenced, limits are explicit and the currently published ten-image package is verified. |
-| Original Owner Request | Automatic completion of this WOW32 candidate before the next queued candidate. |
-| Similar-Issue Sweep | All selected synchronous/async operations, cancellation, HWND/message identity, socket peer loss, task cleanup, allocation failure and stale-context reuse. |
-| Candidate Proposal | [WOW32 Winsock](../proposals/proposal-wow32-winsock-001.md). |
-
-## T467 S1 Closure Record
-
-S1 closes as a source/composition inventory only.  Its [owner/lifetime
-matrix](../etc/evidence/m0-t467-s1-winsock-owner-matrix.md) fixes the selected
-original owners, installed-tree WINSOCK absence/archive availability, local provider
-witness and finite S2/S3 split; it changes no product or guest artifact.
-
-## T467 S2 Closure Record
-
-S2 corrects the original idle-unhook predicate in `wsext.c`: it now calls,
-rather than tests the address of, the selected `WSAIsBlocking` provider entry.
-The [S2 evidence](../etc/evidence/m0-t467-s2-synchronous-winsock-bridge.md)
-retains real immutable-guest original/fixed differential evidence, cached x86/x64
-builds, the full Product gate and matching ten-image publication. Guest media
-is unchanged; S3 owns async requests and task loss.
-
-## T467 S3 Closure Record
-
-S3 corrects the six original asynchronous query allocation checks, associates
-each existing async context with its creator task, implements source-shaped
-cancellation, and retires contexts before a task loses its guest reply buffer.
-The [S3 evidence](../etc/evidence/m0-t467-s3-winsock-async-lifetime.md)
-records real immutable-guest completion, cancellation and task-loss witnesses,
-the complete cached build and Product gate, as well as explicit limits. The
-published ten-image package is `build/t467-s3/package-r2`; its SHA-256 values
-match both `assets/release` and `O:\winnt\system32`. Guest media is unchanged.
+| Verification | Trace every selected entry to original owner and build selection; identify real provider availability without creating a substitute; record normal, failure, cancellation and task/DC/job retirement paths. |
+| Expected Markers | One owner per job/DC/buffer/callback; finite public or unavailable endpoint boundary; no duplicate spool/task/callback manager. |
+| Asset Needs | Read-only source/mirror, retained W07/W08 records and local modern spool capability observation only; guest inputs remain immutable. |
+| Reporting Requirements | Owner matrix, ABI/lifetime graph, endpoint evidence, exact candidate S2 scope and any explicit unavailable limit. |
+| Stop Conditions | Need for guest change, private spooler/USER recreation, a new manager/provider, or an unbounded device dependency. |
+| Exit Criteria | Every selected family is attributed with a finite normal/failure/retirement handoff and S2 has a bounded, source-shaped implementation decision. |
+| Original Owner Request | Automatically proceed to the next WOW32 task after closing the preceding T. |
+| Similar-Issue Sweep | Print DC, job handles, DEVMODE/DEVCAPS buffers, abort/cancel callbacks, endpoint errors and task/DC loss. |
+| Candidate Proposal | [WOW32 printing and spool](../proposals/proposal-wow32-printing-spool-001.md). |
 
 ## T463 S2 Closure Record
 

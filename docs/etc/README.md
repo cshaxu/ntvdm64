@@ -162,6 +162,11 @@ idle-unhook predicate and immutable-WINSOCK real-guest baseline/fix evidence.
 records async context ownership, cancellation, task-loss retirement and the
 bounded S4 acceptance handoff.
 
+[T467 S4 Winsock acceptance](evidence/m0-t467-s4-winsock-acceptance.md)
+records the real Win16 async-select loopback notification/disable/close
+witness, reconciled async-query lifecycle evidence and the published package
+boundary.
+
 [T461 S1 Shell and layered Registry owner matrix](evidence/m0-t461-s1-shell-registry-owner-matrix.md)
 records the selected Shell service and seven Registry entries, the sole
 `NTVDM.REG` façade, its missing persistent-write/concurrency contract, and the

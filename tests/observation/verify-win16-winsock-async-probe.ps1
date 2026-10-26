@@ -3,7 +3,7 @@ param(
  [Parameter(Mandatory)][string]$Observer,
  [Parameter(Mandatory)][string]$BuildRoot,
  [Parameter(Mandatory)][string]$Nasm,
- [ValidateSet('Completion','Cancel','TaskLoss')][string]$Mode='Completion'
+ [ValidateSet('Completion','Cancel','TaskLoss','AsyncSelect','AsyncSelectTaskLoss')][string]$Mode='Completion'
 )
 # Run only from an owned hidden supervisor.  The real Win16 witness proves the
 # original WSOCK32 post routine crosses the WOW completion conversion exactly
@@ -17,7 +17,7 @@ $null=New-Item -ItemType Directory $root
 $runtime=$null;$scope=$null;$process=$null
 $saved=@{};foreach($name in @('TEMP','TMP','PATH','MVDM_OBSERVER_PRIVATE_DESKTOP')){$saved[$name]=[Environment]::GetEnvironmentVariable($name)}
 try {
- $defines=@();if($Mode -eq 'Cancel'){$defines+='-dCANCEL_REQUEST=1'}elseif($Mode -eq 'TaskLoss'){$defines+='-dTASK_LOSS=1'}
+ $defines=@();if($Mode -eq 'Cancel'){$defines+='-dCANCEL_REQUEST=1'}elseif($Mode -eq 'TaskLoss'){$defines+='-dTASK_LOSS=1'}elseif($Mode -eq 'AsyncSelect'){$defines+='-dASYNC_SELECT=1'}elseif($Mode -eq 'AsyncSelectTaskLoss'){$defines+='-dASYNC_SELECT=1';$defines+='-dASYNC_SELECT_TASK_LOSS=1'}
  & $Nasm @defines -f bin -o "$root/WSKASYNC.EXE" -l "$root/probe.lst" "$PSScriptRoot/win16_winsock_async_probe.asm" *> "$root/assemble.txt"
  if($LASTEXITCODE){throw 'Independent async Winsock guest probe assembly failed'}
  $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path
@@ -32,16 +32,19 @@ try {
  if(!$process.WaitForExit(45000)){throw 'Observer timeout'};$process.WaitForExit();$process.Refresh()
  Copy-Item "$tests/WSKASYNC.BIN" "$root/guest-report.bin"
  $bytes=[IO.File]::ReadAllBytes("$root/guest-report.bin")
- if($bytes.Length -lt 18 -or ($bytes.Length % 18)){throw 'Invalid async Winsock guest report length'}
- $bytes=$bytes[($bytes.Length-18)..($bytes.Length-1)]
+ $recordLength=24
+ if($bytes.Length -lt $recordLength -or ($bytes.Length % $recordLength)){throw 'Invalid async Winsock guest report length'}
+ $bytes=$bytes[($bytes.Length-$recordLength)..($bytes.Length-1)]
  if([Text.Encoding]::ASCII.GetString($bytes,0,4) -ne 'WSA1'){throw 'Invalid async Winsock guest report'}
- $names=@('phase','errors','startup','task','completion','freed','cancel');$row=[ordered]@{}
+ $names=@('phase','errors','startup','task','completion','freed','cancel','select','disabled','closed');$row=[ordered]@{}
  for($i=0;$i -lt $names.Count;$i++){$row[$names[$i]]=[BitConverter]::ToUInt16($bytes,4+2*$i)}
  $row|ConvertTo-Json|Set-Content "$root/guest-report.json"
- if($process.ExitCode -or (Get-Content "$root/observer.txt" -Raw) -notmatch 'result=exited' -or $row.errors -or $row.startup -ne 0 -or !$row.task){throw 'Async Winsock common witness failed'}
+ if($process.ExitCode -or (Get-Content "$root/observer.txt" -Raw) -notmatch 'result=exited' -or $row.errors -or $row.startup -ne 0 -or ($Mode -notin @('AsyncSelect','AsyncSelectTaskLoss') -and !$row.task)){throw 'Async Winsock common witness failed'}
  if($Mode -eq 'Completion' -and ($row.phase -ne 2 -or $row.completion -ne 1 -or !$row.freed -or $row.cancel)){throw 'Async Winsock completion witness failed'}
  if($Mode -eq 'Cancel' -and ($row.phase -ne 2 -or $row.completion -or !$row.freed -or $row.cancel -ne 1)){throw 'Async Winsock cancellation witness failed'}
  if($Mode -eq 'TaskLoss' -and ($row.phase -ne 3 -or $row.completion -or $row.freed -or $row.cancel)){throw 'Async Winsock task-loss witness failed'}
+ if($Mode -eq 'AsyncSelect' -and ($row.phase -ne 2 -or $row.completion -ne 1 -or !$row.select -or !$row.disabled -or !$row.closed)){throw 'Win16 WSAAsyncSelect witness failed'}
+ if($Mode -eq 'AsyncSelectTaskLoss' -and ($row.phase -ne 3 -or $row.completion -or !$row.select -or $row.disabled -or $row.closed)){throw 'Win16 WSAAsyncSelect task-loss witness failed'}
  "PASS real Win16 Winsock async $Mode witness"|Set-Content "$root/result.txt"
  '0'|Set-Content "$root/result.exit"
 }catch{$_|Out-String|Set-Content "$root/failure.txt";'1'|Set-Content "$root/result.exit";throw}

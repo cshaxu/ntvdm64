@@ -107,6 +107,63 @@ api 3,115                        ; WINSOCK WSAStartup
 mov [startup-data],ax
 test ax,ax
 jnz finish
+%ifdef ASYNC_SELECT
+; Use one task-owned UDP socket as both the local loopback sender and receiver.
+; This keeps the async-select witness entirely inside the immutable Win16
+; guest/program boundary: the native provider supplies readiness, while the
+; original WOW32 bridge must map its socket and encoded notification back to
+; this window.
+mov word [phase-data],10
+push word 2
+push word 2
+push word 0
+api 3,23                         ; WINSOCK socket(AF_INET, SOCK_DGRAM, 0)
+cmp ax,0xffff
+je bad
+mov [socket-data],ax
+mov word [phase-data],11
+push ax
+push ds
+push word address-data
+push word 16
+api 3,2                          ; WINSOCK bind
+test ax,ax
+jnz bad
+mov word [phase-data],12
+push word [socket-data]
+push word [window-data]
+push word 0x502
+push word 0
+push word 1                      ; FD_READ
+api 3,101                        ; WSAAsyncSelect
+test ax,ax
+jnz .select_failed
+mov word [select-data],1
+mov word [phase-data],13
+push word [socket-data]
+push ds
+push word payload-data
+push word 1
+push word 0
+push ds
+push word address-data
+push word 16
+api 3,20                         ; sendto(socket, byte, ..., bound loopback)
+cmp ax,1
+jne bad
+%ifdef ASYNC_SELECT_TASK_LOSS
+mov word [phase-data],3
+call checkpoint
+mov ax,0x4c00
+int 0x21
+%endif
+mov word [phase-data],1
+jmp .pump
+.select_failed:
+api 3,111                        ; WSAGetLastError, retained in task for failure report
+mov [task-data],ax
+jmp bad
+%endif
 mov word [phase-data],1
 push word [window-data]
 push word 0x501
@@ -149,6 +206,27 @@ push word message-data
 api 2,114                        ; USER DispatchMessage
 jmp .pump
 .completed:
+%ifdef ASYNC_SELECT
+cmp word [phase-data],2
+jne bad
+cmp word [completion-data],1
+jne bad
+push word [socket-data]
+push word [window-data]
+push word 0x502
+push word 0
+push word 0
+api 3,101                        ; disable readiness notification
+test ax,ax
+jnz bad
+mov word [disabled-data],1
+push word [socket-data]
+api 3,3                          ; closesocket removes socket identity first
+test ax,ax
+jnz bad
+mov word [closed-data],1
+jmp .teardown
+%endif
 cmp word [phase-data],2
 jne bad
 cmp word [completion-data],1
@@ -202,6 +280,23 @@ push si
 push di
 push bx
 mov ds,ax
+%ifdef ASYNC_SELECT
+cmp word [bp+12],0x502
+jne .default
+mov bx,[socket-data]
+cmp word [bp+10],bx
+jne .bad
+cmp word [bp+6],1               ; LOWORD(lParam) is FD_READ
+jne .bad
+cmp word [bp+8],0               ; HIWORD(lParam) is async error
+jne .bad
+inc word [completion-data]
+mov word [phase-data],2
+push word 0
+api 2,6
+xor ax,ax
+jmp .return
+%endif
 cmp word [bp+12],0x501
 jne .default
 mov bx,[task-data]
@@ -258,6 +353,9 @@ task: dw 0
 completion: dw 0
 freed: dw 0
 cancel: dw 0
+select: dw 0
+disabled: dw 0
+closed: dw 0
 report_end:
 instance: dw 0
 file: dw 0
@@ -276,5 +374,10 @@ title: db 'Winsock async witness',0
 filename: db 'WSKASYNC.BIN',0
 buffer: times 512 db 0
 wsadata: times 512 db 0
+socket: dw 0xffff
+address: dw 2,0xbb9c
+db 127,0,0,1
+times 8 db 0
+payload: db 0x41
 data_end:
 image_end:
