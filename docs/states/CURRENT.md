@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T470 S1**
+**Active: M0 T470 S2**
 
 T464 is closed at the published `0.0.464` ten-image package; [its closure](../history/m0-t464-closure.md)
 is authoritative. `books/` is expressly excluded and remains untracked pending
@@ -21,33 +21,34 @@ ten-image package remains `build/t467-s3/package-r2` and guest media is unchange
 
 ## Active Packet
 
-### M0 T470 S1 — WOW32 ToolHelp/debugger owner inventory
+### M0 T470 S2 — WOW ToolHelp query/export evidence
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T470 S1, Ordinary Mode. |
-| Admission And Approval | Automatic sequential admission after [T469 closure](../history/m0-t469-closure.md), under the owner-approved automatic S/T sequence. |
-| Objective | Establish original-owner, caller, ABI, host-boundary and retirement inventory for selected WOW32 ToolHelp and debugger interfaces before admitting a mirror or adapter change. |
-| Non-goals | Guest change/rebuild; debugger replacement, new task scheduler, synthetic debug provider, or implementation before owner/lifecycle closure. |
-| Reference Baseline | [ToolHelp/debugger proposal](../proposals/proposal-wow32-toolhelp-debugger-001.md), WOW32 minimum-diff admission governance and current hash-matched package. |
-| Files And ABI Surface | Original ToolHelp/debugger entries and current public host seams, to be inventoried; no new ABI admitted. |
+| Identifier Mode | M0 T470 S2, Ordinary Mode. |
+| Admission And Approval | Automatic sequential admission after [T470 S1 closure](../history/m0-t470-s1-closure.md), under the owner-approved automatic S/T sequence. |
+| Objective | Exercise the retained original WOW ToolHelp query/export route and classify its real normal/failure result without replacing guest ownership. |
+| Non-goals | Guest change/rebuild; debugger replacement, new task scheduler, synthetic debug provider, class-enumeration substitute, or production implementation without a proven bounded seam. |
+| Reference Baseline | [S1 owner matrix](../etc/evidence/m0-t470-s1-toolhelp-debugger-owner-matrix.md), [ToolHelp/debugger proposal](../proposals/proposal-wow32-toolhelp-debugger-001.md), current hash-matched package. |
+| Files And ABI Surface | Existing immutable ToolHelp exports, original WOW32 query routes and test-only evidence; no new ABI admitted. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Produce a finite entry/caller/state/ownership matrix and classify each seam as original retained, existing public host binding, bounded correction candidate or excluded. |
-| Expected Markers | One owner per mechanism, no untracked private-structure assumption, explicit normal/failure/retirement edges and no implementation claim. |
-| Asset Needs | Source trees and existing package/evidence only; guest inputs remain immutable. |
-| Reporting Requirements | Exact source/caller records, dependency closure and any candidate implementation boundary. |
+| Verification | Run selected real WOW ToolHelp query/export evidence plus original-source failure classification; retain exact commands/results. |
+| Expected Markers | Retained query result follows original task/module identity; deliberate class-enumeration failure is distinguished from a host defect. |
+| Asset Needs | Existing package, immutable guest tools and source; no guest rebuild. |
+| Reporting Requirements | Exact caller/export record, normal/failure evidence, retirement boundary and any candidate host seam. |
 | Stop Conditions | Need for guest change, a second debugger/provider, unbounded private USER/NT assumptions, or a new observable semantic concession. |
-| Exit Criteria | Complete bounded inventory that supports or rejects a minimal-diff S2 implementation plan. |
+| Exit Criteria | Bounded real retained-route evidence, or a finite source-proven host correction candidate with its lifecycle boundary. |
 | Original Owner Request | Automatically proceed through the ordered WOW32 candidates after each bounded closure. |
-| Similar-Issue Sweep | COM open/close, DCB/timeouts, synchronous and pending I/O, event/cancel, task loss, external device and stale callback. |
+| Similar-Issue Sweep | Global/local/module/task/stack queries, notification registration, task/module loss and explicit class-enumeration failure. |
 | Candidate Proposal | [WOW32 ToolHelp/debugger](../proposals/proposal-wow32-toolhelp-debugger-001.md). |
 
 ## S1 Closure Record
 
-S1 completed the source-shaped owner, ABI and retirement inventory.  Its
-[owner matrix](../etc/evidence/m0-t468-s1-printing-spool-owner-matrix.md)
-remains the authority for selected raw spool, HDC, device setup and PrintDlg
-ownership.
+S1 completed the source-shaped ToolHelp/debugger owner, ABI and retirement
+inventory at its [closure](../history/m0-t470-s1-closure.md).  The
+[owner matrix](../etc/evidence/m0-t470-s1-toolhelp-debugger-owner-matrix.md)
+is authoritative for the original class-enumeration stopping boundary and
+the non-WOW versus WOW debugger split.
 
 ## S2 Closure Record
 
