@@ -4,6 +4,10 @@
 records immutable ToolHelp ownership, the original WOW class-enumeration
 stopping boundary, and the retained WOW/non-WOW debugger seams.
 
+[T470 S2 ToolHelp query disposition](evidence/m0-t470-s2-toolhelp-query-disposition.md)
+retains the executable original-query/explicit-unavailable contract and its
+immutable guest/provider stopping boundary.
+
 [T469 S3 COMM retained-route acceptance](evidence/m0-t469-s3-comm-retained-route.md)
 records the current original-provider success-side fixture, exact environment
 non-passes, and the absence of an admitted serial substitute.
