@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T465 S1**
+**Active: M0 T465 S2**
 
 T464 is closed at the published `0.0.464` ten-image package; [its closure](../history/m0-t464-closure.md)
 is authoritative. `books/` is expressly excluded and remains untracked pending
@@ -12,25 +12,29 @@ Automatic progression is approved. Completed work follows
 the read-only `ntvdm64-wow32-audit`: recover selected original behavior with
 the smallest source-shaped binding and no guest modification or rebuild.
 
+T465 S1 closes at the [DDE contract](../etc/evidence/m0-t465-s1-dde-conversation-contract.md):
+classic `WM_DDE_*` is a finite original cohort; private USER DDEML remains a
+stopping boundary. S2 owns conversation/data/reply; S3 owns loss/release.
+
 ## Active Packet
 
-### M0 T465 S1 — WOW32 DDE conversation contract
+### M0 T465 S2 — classic DDE conversation and data execution
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T465 S1, Ordinary Mode. |
-| Admission And Approval | Automatic next-candidate admission after [T464 closure](../history/m0-t464-closure.md). |
-| Objective | Map selected original DDE conversation, data/reply, callback/reentry, cancellation and peer/module/task-death owners before any runtime change. |
-| Non-goals | No guest edit/rebuild, autonomous DDE provider, replacement scheduler, speculative message shim, or S1 runtime implementation. |
-| Reference Baseline | [DDE proposal](../proposals/proposal-wow32-dde-001.md), WOW32 minimum-diff governance, T464 closure and current release manifest. |
-| Files And ABI Surface | Selected original DDE callers and explicit public message/callback/Clipboard conversions only. |
+| Identifier Mode | M0 T465 S2, Ordinary Mode. |
+| Admission And Approval | Automatic progression from the closed S1 owner ledger. |
+| Objective | Complete selected INITIATE, DATA, POKE and ADVISE paths through retained original owners. |
+| Non-goals | No guest edit/rebuild, DDEML provider, autonomous scheduler/table, speculative shim, cross-worker claim or synthetic peer. |
+| Reference Baseline | [S1 contract](../etc/evidence/m0-t465-s1-dde-conversation-contract.md), [proposal](../proposals/proposal-wow32-dde-001.md), WOW32 minimum-diff governance and release manifest. |
+| Files And ABI Surface | Selected `wdde.c`, `wmsg16.c`, `wmdisp32.c`, `wumsg.c`, `wmtbl32.c` and public conversions only. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Finite original-owner/ABI/lifetime ledger; executable focused probes only after a seam is formally admitted. Symbol or compile success cannot close S1. |
-| Expected Markers | One authority per conversation/payload/reply/callback state; explicit ordering, cancellation and loss rule; no duplicate provider state. |
-| Asset Needs | `build/t465-s1` only for disposable evidence; immutable guest inputs remain read-only. |
-| Reporting Requirements | Reached caller, owner, ABI/data, payload, reentry/loss rule, composability result and S2/S3 handoff per row. |
-| Stop Conditions | Need for a guest change, new provider/scheduler, unproved private USER/CSRSS assumption, or new observable semantic retreat. |
-| Exit Criteria | Finite DDE contract/dependency ledger and explicit S2/S3 ownership split; no behavior admitted outside selected DDE families. |
+| Verification | Real guest/native witnesses for INITIATE/ACK, DATA, POKE and ADVISE plus allocation/post-failure, nested-selector and alias-lifetime controls. Compile or mock-only success cannot close S2. |
+| Expected Markers | Original HDDE/initiation lists remain sole long-lived authorities; exact reply order and failed-transfer unwind; no DDEML admission. |
+| Asset Needs | `build/t465-s2` only for disposable evidence; immutable guest inputs remain read-only. |
+| Reporting Requirements | Caller, ABI, ownership, reply/reentry, failure unwind and S3 loss handoff per family. |
+| Stop Conditions | Need for a guest change, new provider/scheduler, private USER/CSRSS assumption, a DDEML dependency, or new observable semantic retreat. |
+| Exit Criteria | Selected classic conversation/data/reply evidence and finite S3 loss/release ledger; no scope expansion. |
 | Original Owner Request | “把这个 S5 做完就可以收口本 T 任务，然后自动准入后续 wow32 的 T 任务。” |
 | Similar-Issue Sweep | Conversation establish/data/reply/reentry plus cancel and peer/module/task loss; reject accidental generic USER provider recovery. |
 | Candidate Proposal | [WOW32 DDE](../proposals/proposal-wow32-dde-001.md). |

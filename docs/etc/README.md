@@ -192,6 +192,10 @@ cleanup/continuation owner, without adding a second task or worker terminator.
 records the `0.0.464` coherent package, complete product gate, publication
 hashes, and finite unavailable private-server presentation boundary.
 
+[T465 S1 WOW32 DDE conversation contract](evidence/m0-t465-s1-dde-conversation-contract.md)
+records the selected classic-DDE owner/callback/alias boundary, the retained
+DDEML private-USER stopping boundary, and the finite S2/S3 transfer.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.
