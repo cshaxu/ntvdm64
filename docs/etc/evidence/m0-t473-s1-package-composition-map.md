@@ -2,11 +2,11 @@
 
 ## Observed product graph
 
-The canonical x86 Ninja graphs are the authority for this map. They compile 368 unique current MVDM paths in the worker graph and 78 in the WOW32 graph; these graph counts include fixture edges and do not themselves prove a product-target link.
+The canonical x86 Ninja graphs are the authority for this map. They compile 368 unique current MVDM paths in the worker graph and 78 in the WOW32 graph; those graph counts include fixture edges. The product selector resolves 350 current MVDM source paths into `ntvdm.exe`, 16 into the separate `VDMREDIR.dll`, and 78 into `wow32.dll`. `dbg/dbg.c` is a worker-fixture-only source, while `vdmredir/vdmredir.def` is a DLL link input rather than a compiled source provider.
 
 The worker link edge names these complete selected original archive inputs: `original-ccpu386`, `original-softpc-{host-roots,support,bios,keymouse,system,disks,video,cvidc,comms,dos,base-trace}`, `original-mvdm-{dem,command,xms,dpmi32,host-suballoc,host-oemuni}`, and `original-opennt-base-vdm` / RTL support. `VDMREDIR.dll` retains its distinct original DLL boundary and imports the worker's generated `ntvdm.lib`. The WOW graph links its 78 original WOW32 objects directly into `wow32.dll`.
 
-The selected archive names prove source selection and final link input, not archive extraction, initialization, dispatch, teardown, or behavioral reach. S1 keeps those evidence columns separate.
+For `ntvdm.exe`, the worker link rule explicitly `/wholearchive`s every named original archive, and the selector verifies that contract before it counts each member source. For `VDMREDIR.dll` and WOW32, the selector reads their direct product-object edges. Neither form of final-link selection proves load, registration, dispatch, teardown, or behavioral reach; S1 keeps those evidence columns separate.
 
 ## Dispositions from the current union
 

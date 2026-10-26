@@ -56,15 +56,57 @@ async function selectedBy(graph, label) {
   for (const match of text.matchAll(pattern)) selected.add(match[1].replaceAll('\\', '/').toLowerCase());
   return [label, selected];
 }
+function sourceFromNinjaLine(line) {
+  const match = /(?:O\$?:\/repos\.hobby\/ntvdm64\/|O:\\repos\.hobby\\ntvdm64\\)src(?:\/|\\)mvdm(?:\/|\\)([^\s]+)/i.exec(line);
+  return match ? match[1].replaceAll('\\', '/').toLowerCase() : '';
+}
+async function productSelection(graph, product, label, requireWholeArchive) {
+  const lines = (await readFile(graph, 'utf8')).split(/\r?\n/);
+  const objects = new Map();
+  const libraries = new Map();
+  let productLine = '';
+  for (const line of lines) {
+    if (line.startsWith(`build ${product}`)) productLine = line;
+    const build = /^build\s+(\S+):\s+\S+\s+/.exec(line);
+    if (!build) continue;
+    const source = sourceFromNinjaLine(line);
+    if (source) objects.set(build[1].toLowerCase(), source);
+    const library = /^build\s+(\S+\.lib):\s+lib\s+(.+)$/i.exec(line);
+    if (library) libraries.set(library[1].toLowerCase(), library[2].trim().split(/\s+/).map((item) => item.toLowerCase()));
+  }
+  if (!productLine) throw new Error(`missing product link edge for ${product}: ${graph}`);
+  const tokens = productLine.split(':', 2)[1].trim().split(/\s+/).slice(1).map((item) => item.toLowerCase());
+  const productObjects = new Set(tokens.filter((token) => objects.has(token)));
+  const linkedOriginalLibraries = tokens.filter((token) => /^original-.*\.lib$/i.test(token));
+  if (requireWholeArchive) {
+    const workerRule = lines.find((line) => line.startsWith('  command = link.exe ') && line.includes('/out:$out'));
+    if (!workerRule || !workerRule.includes('/wholearchive:original-')) throw new Error(`missing explicit original whole-archive contract: ${graph}`);
+  }
+  for (const library of linkedOriginalLibraries) {
+    for (const object of libraries.get(library) ?? []) productObjects.add(object);
+  }
+  const selected = new Set();
+  for (const object of productObjects) {
+    const source = objects.get(object);
+    if (source) selected.add(source);
+  }
+  return [label, selected];
+}
 const csv = (value) => { const text = String(value ?? ''); return /[",\r\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text; };
-const [opennt, opennt45, current, workerSelection, wow32Selection] = await Promise.all([
+const workerGraph = path.join(repo, 'build/.ninja/msvc-x86-release/worker/build.ninja');
+const wow32Graph = path.join(repo, 'build/.ninja/msvc-x86-release/wow32/build.ninja');
+const [opennt, opennt45, current, workerSelection, wow32Selection, ntvdmProductSelection, vdmredirProductSelection, wow32ProductSelection] = await Promise.all([
   ...Object.values(roots).map(index),
-  selectedBy(path.join(repo, 'build/.ninja/msvc-x86-release/worker/build.ninja'), 'worker-graph'),
-  selectedBy(path.join(repo, 'build/.ninja/msvc-x86-release/wow32/build.ninja'), 'wow32-graph'),
+  selectedBy(workerGraph, 'worker-graph'),
+  selectedBy(wow32Graph, 'wow32-graph'),
+  productSelection(workerGraph, 'ntvdm.exe | ntvdm.lib', 'ntvdm-product', true),
+  productSelection(workerGraph, 'VDMREDIR.dll | VDMREDIR.dll.lib', 'vdmredir-product', false),
+  productSelection(wow32Graph, 'wow32.dll | wow32.lib', 'wow32-product', false),
 ]);
 const selections = new Map([workerSelection, wow32Selection]);
-function disposition(relativePath, currentFile, graphCompileSelection) {
-  if (graphCompileSelection !== 'not-directly-compiled') return 'selected-direct-compile';
+const productSelections = new Map([ntvdmProductSelection, vdmredirProductSelection, wow32ProductSelection]);
+function disposition(relativePath, currentFile, productLinkSelection) {
+  if (productLinkSelection !== 'not-product-selected') return 'selected-product-source';
   if (!currentFile) return relativePath.startsWith('tools16/') ? 'unmirrored-tool-build-input' : relativePath.startsWith('v86/') ? 'unmirrored-retired-cpu30-executor' : 'unmirrored-needs-explicit-disposition';
   if (relativePath.startsWith('dos/v86/') || relativePath.startsWith('wow16/') || relativePath.startsWith('dpmi/')) return 'immutable-guest-or-guest-build-input';
   if (relativePath.startsWith('v86/')) return 'retired-cpu30-executor';
@@ -82,10 +124,11 @@ const rows = paths.map((relativePath) => {
   const normalizedOpenNt45 = b && c && b.normalizedSha256 && b.normalizedSha256 === c.normalizedSha256;
   const currentIdentity = !c ? 'not-currently-mirrored' : rawOpenNt && (!b || a.sha256 === b.sha256) ? 'exact-opennt-selected-or-identical' : rawOpenNt45 && (!a || a.sha256 === b.sha256) ? 'exact-opennt45-selected-or-identical' : rawOpenNt ? 'exact-opennt-on-conflict' : rawOpenNt45 ? 'exact-opennt45-on-conflict' : normalizedOpenNt && (!b || a.normalizedSha256 === b.normalizedSha256) ? 'formatting-only-opennt-selected-or-identical' : normalizedOpenNt45 && (!a || a.normalizedSha256 === b.normalizedSha256) ? 'formatting-only-opennt45-selected-or-identical' : normalizedOpenNt ? 'formatting-only-opennt-on-conflict' : normalizedOpenNt45 ? 'formatting-only-opennt45-on-conflict' : upstreamOrigin === 'current-only' ? 'current-only-needs-provenance' : 'mirror-different-needs-divergence-review';
   const graphSelection = [...selections.entries()].filter(([, selected]) => selected.has(relativePath.toLowerCase())).map(([label]) => label).join('+') || 'not-directly-compiled';
-  return { relative_path: relativePath, upstream_origin: upstreamOrigin, opennt_sha256: a?.sha256 ?? '', opennt45_sha256: b?.sha256 ?? '', current_sha256: c?.sha256 ?? '', current_identity: currentIdentity, graph_compile_selection: graphSelection, audit_disposition: disposition(relativePath, c, graphSelection) };
+  const productSelection = [...productSelections.entries()].filter(([, selected]) => selected.has(relativePath.toLowerCase())).map(([label]) => label).join('+') || 'not-product-selected';
+  return { relative_path: relativePath, upstream_origin: upstreamOrigin, opennt_sha256: a?.sha256 ?? '', opennt45_sha256: b?.sha256 ?? '', current_sha256: c?.sha256 ?? '', current_identity: currentIdentity, graph_compile_selection: graphSelection, product_link_selection: productSelection, audit_disposition: disposition(relativePath, c, productSelection) };
 });
 const counts = (field) => Object.entries(Object.groupBy(rows, (row) => row[field])).map(([classification, values]) => ({ classification, count: values.length })).sort((a, b) => a.classification.localeCompare(b.classification));
-const summary = { rows: rows.length, upstream_origin: counts('upstream_origin'), current_identity: counts('current_identity'), graph_compile_selection: counts('graph_compile_selection'), audit_disposition: counts('audit_disposition'), limitation: 'Identity and full Ninja-graph compile-edge inventory only. Graph selection does not prove an object reaches a product target; disposition labels do not prove archive extraction/final linkage or runtime reachability.' };
+const summary = { rows: rows.length, upstream_origin: counts('upstream_origin'), current_identity: counts('current_identity'), graph_compile_selection: counts('graph_compile_selection'), product_link_selection: counts('product_link_selection'), audit_disposition: counts('audit_disposition'), limitation: 'Identity, full Ninja-graph compile-edge, and selected product-link-source inventory only. NTVDM product selection relies on the explicit original-library whole-archive contract; direct product selection does not prove load, dispatch, teardown, or behavioral reachability.' };
 await mkdir(output, { recursive: false });
 const columns = Object.keys(rows[0]);
 await writeFile(path.join(output, 'mvdm-union.csv'), `${columns.join(',')}\n${rows.map((row) => columns.map((column) => csv(row[column])).join(',')).join('\n')}\n`);
