@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T471 S3**
+**Active: M0 T471 S4**
 
 T464 is closed at the published `0.0.464` ten-image package; [its closure](../history/m0-t464-closure.md)
 is authoritative. `books/` is expressly excluded and remains untracked pending
@@ -21,23 +21,23 @@ ten-image package remains `build/t467-s3/package-r2` and guest media is unchange
 
 ## Active Packet
 
-### M0 T471 S3 — repeated, concurrent and abnormal same-artifact acceptance
+### M0 T471 S4 — aggregate review and acceptance readiness
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T471 S3, Ordinary Mode. |
-| Admission And Approval | Owner deferred unavailable S2 physical WRITE interaction; automatic sequential admission continues. |
-| Objective | Exercise repeats, supported concurrency, abnormal cleanup, OEM and subsequent DOS on the frozen package. |
-| Non-goals | Guest change/rebuild; temporary provider/substitute/hidden implementation; treating deferred S2 WRITE as passed. |
-| Reference Baseline | [Integrated-acceptance proposal](../proposals/proposal-wow32-integrated-acceptance-001.md) and [S1 freeze](../etc/evidence/m0-t471-s1-provider-artifact-freeze.md). |
-| Files And ABI Surface | Existing application probes and runtime package only; no new ABI before a proven owner gap. |
+| Identifier Mode | M0 T471 S4, Ordinary Mode. |
+| Admission And Approval | S3 accepted its complete repeated/concurrent/abnormal/OEM matrix; the S2 physical WRITE item remains owner-deferred and non-pass. |
+| Objective | Reconcile the frozen package, inherited acceptance evidence and source footprint for T471 owner acceptance. |
+| Non-goals | Guest change/rebuild; temporary provider/substitute/hidden implementation; treating deferred WRITE as passed. |
+| Reference Baseline | [Integrated-acceptance proposal](../proposals/proposal-wow32-integrated-acceptance-001.md), [S1 freeze](../etc/evidence/m0-t471-s1-provider-artifact-freeze.md), and [S3 evidence](../etc/evidence/m0-t471-s3-progress.md). |
+| Files And ABI Surface | Existing evidence, runtime package and source footprint; no ABI change before a proven owner gap. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Repeated/concurrent guest tasks, abnormal cleanup, subsequent DOS and OEM, with lifecycle evidence. |
+| Verification | Reconcile S1--S3 evidence, current package identity and source/exception footprint; rerun only tests affected by a proven change. |
 | Expected Markers | Same manifest; no stale task/resource/callback; no accepted DOS regression. |
-| Asset Needs | S1-frozen package, immutable app inputs and existing noninteractive probes; guest inputs remain immutable. |
-| Reporting Requirements | Exact package identity, per-app action/result and a named owner for any failure. |
+| Asset Needs | S1-frozen package and immutable existing evidence; guest inputs remain immutable. |
+| Reporting Requirements | Exact package identity, inherited limitation and a named owner for any failure. |
 | Stop Conditions | Package mismatch, provider gap, unapproved concession, hidden provider or guest change. |
-| Exit Criteria | Repeat/concurrency/cleanup/OEM/DOS matrix has lifecycle evidence; S2 WRITE stays non-pass. |
+| Exit Criteria | Coherent whole-provider record ready for owner T acceptance; S2 WRITE remains non-pass. |
 | Original Owner Request | Automatically proceed through the ordered WOW32 candidates after each bounded closure. |
 | Similar-Issue Sweep | C11/C12, registration, dispatch, direct data, retained original limitations, package hash and each application gate. |
 | Candidate Proposal | [WOW32 integrated acceptance](../proposals/proposal-wow32-integrated-acceptance-001.md). |
@@ -52,11 +52,12 @@ Its current-package physical WRITE edit/save/dialog/resize witness is owner-
 deferred, non-pass, neither synthetic substitute nor provider defect; S3
 proceeds with that limitation.
 
-## T468 Closure Record
+## S3 Closure Record
 
-T468 closed the selected original printing/spool scope at the
-[T468 closure](../history/m0-t468-closure.md). The new active packet owns only
-the ordered COMM source inventory.
+The frozen package passed shared/separate WOW idle retirement, selected OEM,
+native CUI return, and identified WOW-worker loss followed by DOS recovery at
+the [S3 progress record](../etc/evidence/m0-t471-s3-progress.md). No product
+or guest bytes changed. S4 alone owns aggregate reconciliation.
 
 ## T469 S1 Closure Record
 

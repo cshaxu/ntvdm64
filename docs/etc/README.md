@@ -1,5 +1,9 @@
 # Supporting Material
 
+[T471 S3 repeated/concurrent/abnormal acceptance progress](evidence/m0-t471-s3-progress.md)
+records the frozen-package idle, OEM, native-return and abnormal-cleanup
+witnesses, while retaining S2's separate deferred physical WRITE boundary.
+
 [T471 S2 three-application integration progress](evidence/m0-t471-s2-application-integration-progress.md)
 records the frozen-package WRITE/WINMINE/SOL probe results and the one
 remaining physical-input boundary without treating it as a provider pass.

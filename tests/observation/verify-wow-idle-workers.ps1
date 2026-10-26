@@ -29,10 +29,10 @@ try {
  $null=New-Item -ItemType Directory "$runtime/tests" -Force
  foreach($name in @('IDLEHOST.EXE','IDLPROBE.EXE','IDLPEER.EXE')){Copy-Item "$root/$name" "$runtime/tests/$name"}
  $scope.Paths+="$runtime\tests\IDLEHOST.EXE"
- @($source,$guestSource,"$root/IDLEHOST.EXE","$root/IDLPROBE.EXE","$root/IDLPEER.EXE",
+ $inputs=@($source,$guestSource,"$root/IDLEHOST.EXE","$root/IDLPROBE.EXE","$root/IDLPEER.EXE",
    "$runtime/system32/ntvdm.exe","$runtime/system32/WOW32.DLL","$runtime/system32/nthook32.dll",
-   "$runtime/system32/run16.exe","$runtime/system32/KRNL386.EXE","$runtime/system32/USER.EXE")|
-   Get-FileHash|Select-Object Path,Hash|ConvertTo-Json|Set-Content "$root/inputs.json"
+   "$runtime/system32/run16.exe","$runtime/system32/KRNL386.EXE","$runtime/system32/USER.EXE")
+ Get-FileHash -LiteralPath $inputs | Select-Object Path,Hash | ConvertTo-Json | Set-Content "$root/inputs.json"
  $env:TEMP=$runtime;$env:TMP=$runtime;$env:PATH="$runtime\system32;"+$env:SystemRoot+'\System32'
  $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1';$env:MVDM_WOW_WINDOW_TRACE_PATH="$root/lifetime.txt"
  $env:MVDM_WOW_DISPATCH_TRACE_PATH="$root/dispatch.txt"
