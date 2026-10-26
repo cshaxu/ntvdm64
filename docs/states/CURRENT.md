@@ -20,7 +20,7 @@ media is unchanged.
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T473 S3, Ordinary Mode. |
+| Identifier Mode | M0 T473 S6, Ordinary Mode. |
 | Admission And Approval | S5 closes at [its SoftPC device closure](../history/m0-t473-s5-closure.md); approved automatic progression admits the next finite owner group. |
 | Objective | Prove and repair, if needed, selected original WOW32/session dispatch, public USER identity, callback nesting and retirement without reviving NT4 private USER/kernel state or adding a second message engine. |
 | Non-goals | Guest modification/rebuild; private USER layout reconstruction; host-window-style work; DOS/COMMAND, device or redirector feature expansion unless a direct WOW callback/session dependency proves it necessary. |
