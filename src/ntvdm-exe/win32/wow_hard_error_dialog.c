@@ -21,6 +21,7 @@ typedef struct mvdm_wow_hard_error_dialog_data {
     UINT result_values[3];
     UINT button_count;
     UINT default_result;
+    UINT cancel_result;
 } mvdm_wow_hard_error_dialog_data;
 
 static BYTE *mvdm_wow_hard_error_align_dword(BYTE *cursor)
@@ -112,9 +113,17 @@ static INT_PTR CALLBACK mvdm_wow_hard_error_dialog_proc(HWND dialog,
             return TRUE;
         }
     }
-    /* There is no source-proven implicit close response. Keep the dialog
-     * modal until an offered source-defined button is selected. */
-    if (message == WM_CLOSE) return TRUE;
+    /* The original SysErrorBox selects a source Cancel slot for Escape.  The
+     * public dialog has no source control IDs, so return that same source
+     * slot for the equivalent standard cancellation messages. */
+    if ((message == WM_CLOSE || (message == WM_COMMAND &&
+            LOWORD(wparam) == IDCANCEL)) && data != NULL &&
+        data->cancel_result != 0u) {
+        EndDialog(dialog, (INT_PTR)data->cancel_result);
+        return TRUE;
+    }
+    if (message == WM_CLOSE || (message == WM_COMMAND &&
+            LOWORD(wparam) == IDCANCEL)) return TRUE;
     return FALSE;
 }
 
@@ -194,7 +203,8 @@ NTSTATUS mvdm_wow_hard_error_present(NTSTATUS error_status,
 {
     const UNICODE_STRING *title;
     const UNICODE_STRING *message;
-    WORD descriptors[3];
+    WORD descriptors[MVDM_WOW_HARD_ERROR_MAX_BUTTONS];
+    mvdm_wow_hard_error_buttons buttons;
     WCHAR *title_copy = NULL;
     WCHAR *message_copy = NULL;
     mvdm_wow_hard_error_dialog_data data;
@@ -219,22 +229,19 @@ NTSTATUS mvdm_wow_hard_error_present(NTSTATUS error_status,
     title = (const UNICODE_STRING *)(ULONG_PTR)parameters[2];
     message = (const UNICODE_STRING *)(ULONG_PTR)parameters[3];
 
+    if (!mvdm_wow_hard_error_decode_buttons(descriptors, &buttons))
+        return STATUS_INVALID_PARAMETER;
     ZeroMemory(&data, sizeof(data));
-    for (index = 0u; index < 3u; ++index) {
+    for (index = 0u; index < buttons.count; ++index) {
         const WCHAR *label;
-        if (descriptors[index] == 0u) continue;
-        label = mvdm_wow_hard_error_button_text(descriptors[index]);
-        if (label == NULL) return STATUS_INVALID_PARAMETER;
+        label = mvdm_wow_hard_error_button_text(buttons.descriptors[index]);
+        if (label == NULL) return STATUS_UNSUCCESSFUL;
         data.labels[data.button_count] = label;
-        data.result_values[data.button_count] = index + 1u;
-        if ((descriptors[index] & MVDM_SEB_DEFAULT) != 0u) {
-            if (data.default_result != 0u) return STATUS_INVALID_PARAMETER;
-            data.default_result = index + 1u;
-        }
+        data.result_values[data.button_count] = buttons.source_slots[index];
         ++data.button_count;
     }
-    if (data.button_count == 0u || data.default_result == 0u)
-        return STATUS_INVALID_PARAMETER;
+    data.default_result = buttons.default_slot;
+    data.cancel_result = buttons.cancel_slot;
     if (!mvdm_wow_hard_error_copy_unicode(title, &title_copy) ||
         !mvdm_wow_hard_error_copy_unicode(message, &message_copy)) {
         if (title_copy != NULL) HeapFree(GetProcessHeap(), 0u, title_copy);

@@ -174,6 +174,16 @@ coherent ten-image `0.0.463` product gate.
 records the corrected same-desktop WRITE restart witness, the intentionally
 narrow shared-worker retirement witness, and the test-only S5 audit.
 
+[T464 S1 WOW hard-error owner ledger](evidence/m0-t464-s1-wow-hard-error-owner-ledger.md)
+records the selected client, response, cancellation and task-cleanup owners;
+it admits only the finite public-receiver decoder repair and excludes private
+NT4 USER/CSRSS recreation.
+
+[T464 S2 WOW hard-error response delivery](evidence/m0-t464-s2-hard-error-response-delivery.md)
+records the sparse source-slot/default/cancel decoder, exact selected-owner
+boundary, x86 product build, coherent candidate and the remaining real-modal
+presentation boundary.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.

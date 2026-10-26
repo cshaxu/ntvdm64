@@ -269,7 +269,7 @@ $adapterWin32Names = @('ntioapi_facade.c', 'thread_start_compat.c', 'ccpu_thread
                           'nt_thread_alert_compat.c',
                           'console_compat.c', 'console_client.c', 'worker_lifecycle.c', 'console_bitmap.c', 'console_graphics.c', 'console_text.c', 'crt_compat.c',
                            'command_process_compat.c', 'wow_private_unavailable.c',
-                           'wow_hard_error_dialog.c',
+                           'wow_hard_error_dialog.c', 'wow_hard_error_decoder.c',
                            'mvdm_base_vdm_environment.c')
 # ExitVDM is an original Base client call reached by selected SoftPC teardown
 # sources.  It already has one same-shaped session-owned implementation; keep
