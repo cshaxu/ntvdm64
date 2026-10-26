@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T464 S3**
+**Active: M0 T464 S4**
 
 T463 is closed at the published S2 package plus its S3/S5 lifecycle acceptance;
 [the closure record](../history/m0-t463-closure.md) is authoritative. `books/`
@@ -14,23 +14,23 @@ the read-only `ntvdm64-wow32-audit`: recover selected original behavior with
 the smallest source-shaped binding and no guest modification or rebuild.
 ## Active Packet
 
-### M0 T464 S3 — fatal task and worker cleanup
+### M0 T464 S4 — error acceptance and handoff
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T464 S3, Ordinary Mode. |
-| Admission And Approval | Automatic sequential admission after the published S2 response package and [delivery evidence](../etc/evidence/m0-t464-s2-hard-error-response-delivery.md). |
-| Objective | Prove each already-selected hard-error fatal response reaches exactly one original task/worker cleanup owner. |
-| Non-goals | No guest edit/rebuild, private USER/CSRSS recreation, new scheduler/terminator, generic provider, or new adapter task/worker terminator. |
-| Reference Baseline | S1 ledger, S2 delivery evidence, [hard-error proposal](../proposals/proposal-wow32-hard-error-responses-001.md), and minimum-diff governance. |
-| Files And ABI Surface | Existing `WOWSysErrorBox` callers and their selected original cleanup tails only. |
+| Identifier Mode | M0 T464 S4, Ordinary Mode. |
+| Admission And Approval | Automatic sequential admission after the [S3 fatal-tail audit](../etc/evidence/m0-t464-s3-hard-error-fatal-tail-audit.md). |
+| Objective | Reconcile the published S2 receiver and S3 caller tails against the admitted WOW acceptance frontier and record finite retained boundaries. |
+| Non-goals | No guest edit/rebuild, private USER/CSRSS recreation, generic provider, new scheduler/terminator, or speculative UI automation. |
+| Reference Baseline | S1--S3 evidence, [hard-error proposal](../proposals/proposal-wow32-hard-error-responses-001.md), and minimum-diff governance. |
+| Files And ABI Surface | Published ten-image package, retained fixtures and selected original WOW callers only. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Source call-chain/cleanup matrix, selected response-tail fixtures and real-guest lifecycle evidence where the original path is available. |
-| Expected Markers | Exactly one existing terminator per response, no duplicate cleanup after cancellation or receiver failure. |
+| Verification | Published-hash audit, decoder fixture, retained ordinary WOW app frontiers, and explicit real-modal/loss coverage boundary. |
+| Expected Markers | Published source slot contract, one original tail, no false private-server or UI-automation claim. |
 | Asset Needs | `build/t464-s2` only for disposable evidence; immutable guest inputs remain read-only. |
-| Reporting Requirements | Caller-to-cleanup ownership, normal/failure/loss evidence and explicit unverified domains. |
-| Stop Conditions | Need for a guest change, private server recreation, new termination owner, or an unmappable selected caller. |
-| Exit Criteria | Every selected fatal tail has one owner and finite handoff to S4 acceptance. |
+| Reporting Requirements | Acceptance denominator, exact package identity and all remaining boundary evidence. |
+| Stop Conditions | Need for a guest change, private server recreation, new termination owner, or an unsupported automation mechanism. |
+| Exit Criteria | T464 closure with all completed work, finite retained limits and successor ownership recorded. |
 | Original Owner Request | “把这个 S5 做完就可以收口本 T 任务，然后自动准入后续 wow32 的 T 任务。” |
 | Similar-Issue Sweep | All current `WOWSysErrorBox` callers and `ErrorDialogBox` abort tail; reject accidental DOS INT 24 absorption. |
 | Candidate Proposal | [WOW32 hard-error responses](../proposals/proposal-wow32-hard-error-responses-001.md). |

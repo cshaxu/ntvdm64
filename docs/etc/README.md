@@ -184,6 +184,10 @@ records the sparse source-slot/default/cancel decoder, exact selected-owner
 boundary, x86 product build, coherent candidate and the remaining real-modal
 presentation boundary.
 
+[T464 S3 WOW hard-error fatal-tail audit](evidence/m0-t464-s3-hard-error-fatal-tail-audit.md)
+maps every selected returned slot and receiver failure to one existing original
+cleanup/continuation owner, without adding a second task or worker terminator.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.
