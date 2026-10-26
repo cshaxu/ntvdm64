@@ -177,6 +177,10 @@ records the original GDI StartDoc/AbortProc normal-and-cancel path with the
 named PDF provider, while retaining raw spool's distinct legacy-profile
 boundary as a non-pass.
 
+[T468 S3 printing retirement disposition](evidence/m0-t468-s3-printing-retirement.md)
+records the original raw carrier and the application-owned PrintDlg returned
+handles, without introducing a second host job manager.
+
 [T461 S1 Shell and layered Registry owner matrix](evidence/m0-t461-s1-shell-registry-owner-matrix.md)
 records the selected Shell service and seven Registry entries, the sole
 `NTVDM.REG` façade, its missing persistent-write/concurrency contract, and the

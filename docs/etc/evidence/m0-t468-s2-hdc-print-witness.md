@@ -115,9 +115,8 @@ result=1; extendedError=0
 
 This proves the selected default-data conversion and return edge only.  It
 does not claim interactive print-dialog cancellation, hook reentrancy, or
-returned-DC retirement; those remain in the bounded S3 failure/retirement
-scope rather than being silently treated as covered by the noninteractive
-path.
+returned-DC retirement; the selected returned-object ownership is recorded
+separately in the [S3 retirement disposition](m0-t468-s3-printing-retirement.md).
 
 ## PrintDlg hook-cancellation witness
 

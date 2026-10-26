@@ -60,9 +60,19 @@ mov [result-data],ax
 api 5                         ; COMMDLG.CommDlgExtendedError @26
 mov [error-data],ax
 mov [error-data+2],dx
+mov ax,[printdlg-data+6]
+mov [devmode-data],ax
+push ax
+api 6                         ; KERNEL.GlobalFree returned hDevMode
+mov [freed_devmode-data],ax
+mov ax,[printdlg-data+8]
+mov [devnames-data],ax
+push ax
+api 7                         ; KERNEL.GlobalFree returned hDevNames
+mov [freed_devnames-data],ax
 call checkpoint
 push word [file-data]
-api 7                         ; KERNEL._lclose
+api 9                         ; KERNEL._lclose
 mov ax,0x4c00
 int 0x21
 fatal:
@@ -73,12 +83,12 @@ push word [file-data]
 push ds
 push word record-data
 push word record_end-record
-api 6                         ; KERNEL._lwrite
+api 8                         ; KERNEL._lwrite
 cmp ax,record_end-record
 jne fatal
 ret
 code_end:
-dw 7
+dw 9
 %macro fixup 3
 db 3,1
 dw ..@call_%1-code+1,%2,%3
@@ -88,14 +98,20 @@ fixup 2,2,5
 fixup 3,1,83
 fixup 4,3,20
 fixup 5,3,26
-fixup 6,1,86
-fixup 7,1,81
+fixup 6,1,17
+fixup 7,1,17
+fixup 8,1,86
+fixup 9,1,81
 align 16,db 0
 data:
 times 32 db 0
 record: db 'PDG1'
 result: dw 0
 error: dd 0
+devmode: dw 0
+devnames: dw 0
+freed_devmode: dw 0
+freed_devnames: dw 0
 record_end:
 file: dw 0
 ; PRINTDLGDATA16, packed 52 bytes.  PD_RETURNDEFAULT requires the two

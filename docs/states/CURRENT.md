@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T468 S3**
+**Active: M0 T468 S4**
 
 T464 is closed at the published `0.0.464` ten-image package; [its closure](../history/m0-t464-closure.md)
 is authoritative. `books/` is expressly excluded and remains untracked pending
@@ -20,25 +20,25 @@ ten-image package remains `build/t467-s3/package-r2` and guest media is unchange
 
 ## Active Packet
 
-### M0 T468 S3 — Printing and spool failure and retirement
+### M0 T468 S4 — Printing and spool acceptance
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T468 S3, Ordinary Mode. |
-| Admission And Approval | Automatic sequential admission after the bounded [S2 closure](../history/m0-t468-s2-closure.md), under the owner-approved automatic S/T sequence. |
-| Objective | Trace and validate original raw-job carrier, PrintDlg returned-object and abrupt task retirement behavior; repair only a proven missing original binding. |
+| Identifier Mode | M0 T468 S4, Ordinary Mode. |
+| Admission And Approval | Automatic sequential admission after the bounded [S3 closure](../history/m0-t468-s3-closure.md), under the owner-approved automatic S/T sequence. |
+| Objective | Replay the selected available original printing routes together, retain external-provider non-passes explicitly, and close the candidate without adding a print policy. |
 | Non-goals | Guest change/rebuild; print provider, spooler, device emulation, replacement DC/job/callback owner, atomic dynamic-loader rewrite, or speculative task-cleanup replacement. |
-| Reference Baseline | [S2 closure](../history/m0-t468-s2-closure.md), [S1 owner matrix](../etc/evidence/m0-t468-s1-printing-spool-owner-matrix.md), [Printing/spool proposal](../proposals/proposal-wow32-printing-spool-001.md), and W07/W08/W18 closures. |
-| Files And ABI Surface | Existing original `wspool.c`, `wgdi31.c`, `wgprnset.c`, `wcommdlg.c`, worker task retirement and immutable test-only witnesses. |
+| Reference Baseline | [S3 closure](../history/m0-t468-s3-closure.md), [S3 retirement disposition](../etc/evidence/m0-t468-s3-printing-retirement.md), [S2 witness](../etc/evidence/m0-t468-s2-hdc-print-witness.md), and the printing/spool proposal. |
+| Files And ABI Surface | Existing original print owners plus immutable test-only witnesses; no new production ABI. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Trace every raw job/DC/PrintDlg allocation to its original task-loss or ordinary return cleanup; exercise only a coherent selected group after source binding is complete. |
-| Expected Markers | One owner per job/DC/buffer/callback; no new manager; no task-retirement leak, double free, stale callback or live native object after failure. |
-| Asset Needs | Read-only source/mirror, immutable test-only guest companion/probe and observed local provider; guest inputs remain immutable. |
-| Reporting Requirements | Exact owner/lifetime graph, source-shaped code decision, accepted retirement evidence and every explicit non-pass. |
-| Stop Conditions | Need for guest change, private spooler/USER recreation, a new manager/provider, or an unbounded device dependency. |
-| Exit Criteria | Each selected failure/retirement family has one proven owner and normal/task-loss paths leave no duplicate or stale carrier. |
+| Verification | Run the HDC normal/cancel, raw-profile boundary, PrintDlg default-handle and hook-cancel witnesses using the retained package and real guest boundary. |
+| Expected Markers | One original owner per accepted object/callback; no new manager; exact external-provider non-passes remain explicit. |
+| Asset Needs | Immutable test-only guest probes and observed local provider; guest inputs remain immutable. |
+| Reporting Requirements | Case results, source-boundary interpretation, exact limits and package identity. |
+| Stop Conditions | Need for guest change, private spooler/USER recreation, a new manager/provider, or a new observable semantic concession. |
+| Exit Criteria | All selected runners pass against one unchanged package and unavailable endpoints are classified without a substitute policy. |
 | Original Owner Request | Automatically proceed to the next WOW32 task after closing the preceding T. |
-| Similar-Issue Sweep | Print DC, job handles, DEVMODE/DEVCAPS buffers, abort/cancel callbacks, endpoint errors and task/DC loss. |
+| Similar-Issue Sweep | HDC/DC, raw job, PrintDlg returned handles, cancellation callback, provider/profile boundary and task-loss owner. |
 | Candidate Proposal | [WOW32 printing and spool](../proposals/proposal-wow32-printing-spool-001.md). |
 
 ## S1 Closure Record
@@ -53,6 +53,13 @@ ownership.
 S2 accepted the bounded real endpoint evidence and explicit non-pass
 disposition in its [witness record](../etc/evidence/m0-t468-s2-hdc-print-witness.md).
 The [S2 closure](../history/m0-t468-s2-closure.md) retains the exact handoff.
+
+## S3 Closure Record
+
+S3 traced the original raw carrier and PrintDlg returned-object retirement in
+the [retirement disposition](../etc/evidence/m0-t468-s3-printing-retirement.md).
+It made no production or guest change and left no project-owned spool manager
+to add.
 
 ## T463 S2 Closure Record
 

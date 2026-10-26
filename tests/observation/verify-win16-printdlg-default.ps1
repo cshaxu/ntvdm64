@@ -20,9 +20,9 @@ try{
  if($process.ExitCode -or (Get-Content "$root/observer.txt" -Raw) -notmatch 'result=exited'){throw 'PrintDlg default probe did not complete normally'}
  $reportPath=@("$tests/PDGPROBE.BIN","$runtime/PDGPROBE.BIN")|Where-Object{Test-Path -LiteralPath $_}|Select-Object -First 1;if(!$reportPath){throw 'PrintDlg default probe did not write its report'}
  Copy-Item $reportPath "$root/guest-report.bin";$bytes=[IO.File]::ReadAllBytes("$root/guest-report.bin")
- if($bytes.Length -ne 10 -or [Text.Encoding]::ASCII.GetString($bytes,0,4) -ne 'PDG1'){throw 'Malformed PrintDlg default report'}
- $row=[ordered]@{result=[BitConverter]::ToUInt16($bytes,4);extendedError=[BitConverter]::ToUInt32($bytes,6)};$row|ConvertTo-Json|Set-Content "$root/guest-report.json"
- if(!$row.result -or $row.extendedError){throw "PrintDlg PD_RETURNDEFAULT did not return original default data: $($row|ConvertTo-Json -Compress)"}
- 'PASS original Win16 PrintDlg PD_RETURNDEFAULT witness'|Set-Content "$root/result.txt";'0'|Set-Content "$root/result.exit"
+ if($bytes.Length -ne 18 -or [Text.Encoding]::ASCII.GetString($bytes,0,4) -ne 'PDG1'){throw 'Malformed PrintDlg default report'}
+ $row=[ordered]@{result=[BitConverter]::ToUInt16($bytes,4);extendedError=[BitConverter]::ToUInt32($bytes,6);devMode=[BitConverter]::ToUInt16($bytes,10);devNames=[BitConverter]::ToUInt16($bytes,12);freeDevMode=[BitConverter]::ToUInt16($bytes,14);freeDevNames=[BitConverter]::ToUInt16($bytes,16)};$row|ConvertTo-Json|Set-Content "$root/guest-report.json"
+ if(!$row.result -or $row.extendedError -or !$row.devMode -or !$row.devNames -or $row.freeDevMode -or $row.freeDevNames){throw "PrintDlg PD_RETURNDEFAULT ownership contract failed: $($row|ConvertTo-Json -Compress)"}
+ 'PASS original Win16 PrintDlg default conversion and returned-handle retirement witness'|Set-Content "$root/result.txt";'0'|Set-Content "$root/result.exit"
 }catch{$_|Out-String|Set-Content "$root/failure.txt";'1'|Set-Content "$root/result.exit";throw}
 finally{if($process){if(!$process.HasExited){$process.Kill();$process.WaitForExit(5000)|Out-Null};$process.Dispose()};try{if($scope){Stop-IsolatedPackageScope $scope}}finally{try{if($runtime){Remove-PhysicalRuntimeStage $runtime}}finally{foreach($name in $saved.Keys){[Environment]::SetEnvironmentVariable($name,$saved[$name])}}}}
