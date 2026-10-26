@@ -41,13 +41,15 @@ documents independent COM/LPT opens and associates each with `GetCurrentTask`,
 one task can own more than one device. Therefore a second port can survive the
 current WOW32 task-loss path.
 
-This is an inherited original-host discrepancy: `wucomm.c` is unchanged from
-the restored WOW32 baseline, and the inspected SoftPC tree has no matching
-correction. Under source policy it is not repaired by inventing a new manager
-or cleanup mechanism. The next subtask must first locate an admissible matching
-source correction or retain the task-loss edge as an explicit original-host
-limit. It must separately audit the original 1.5/5-second close waits and
-their interaction with the project-approved event-driven lifecycle policy.
+This is an inherited original-host discrepancy. The exact loop, including the
+`break`, is present in the current restored baseline and in the inspected
+OpenNT, OpenNT-4.5, opennt-src-2, Windows 2000 and XP SP1 source trees.
+SoftPC has no matching correction. Under source policy it is not repaired by
+inventing a new manager or cleanup mechanism. The task-loss edge is therefore
+an explicit original-host limit unless a separately admissible matching source
+appears. The same original close path retains its 1.5-second modem-thread and
+5-second writer-thread waits; these are source-defined close semantics, not
+project-added lifecycle polling or retry policy.
 
 ## Next boundary
 

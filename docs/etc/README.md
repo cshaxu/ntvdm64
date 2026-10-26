@@ -189,6 +189,10 @@ unchanged package and the explicit provider limits.
 records the original serial state, task-loss and external-device boundaries,
 including the inherited multi-port retirement discrepancy.
 
+[T469 S2 COMM source disposition](evidence/m0-t469-s2-comm-source-disposition.md)
+records the multi-revision correction search and distinguishes original close
+wait semantics from project-added retry or polling.
+
 [T461 S1 Shell and layered Registry owner matrix](evidence/m0-t461-s1-shell-registry-owner-matrix.md)
 records the selected Shell service and seven Registry entries, the sole
 `NTVDM.REG` façade, its missing persistent-write/concurrency contract, and the

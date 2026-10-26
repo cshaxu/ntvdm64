@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T469 S2**
+**Active: M0 T469 S3**
 
 T464 is closed at the published `0.0.464` ten-image package; [its closure](../history/m0-t464-closure.md)
 is authoritative. `books/` is expressly excluded and remains untracked pending
@@ -21,23 +21,23 @@ ten-image package remains `build/t467-s3/package-r2` and guest media is unchange
 
 ## Active Packet
 
-### M0 T469 S2 — COMM operations and source correction search
+### M0 T469 S3 — COMM retained-route acceptance
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T469 S2, Ordinary Mode. |
-| Admission And Approval | Automatic sequential admission after [S1 closure](../history/m0-t469-s1-closure.md), under the owner-approved automatic S/T sequence. |
-| Objective | Verify selected original COMM operation boundaries and find an admissible source-shaped disposition for the inherited multi-port task-loss discrepancy. |
+| Identifier Mode | M0 T469 S3, Ordinary Mode. |
+| Admission And Approval | Automatic sequential admission after [S2 closure](../history/m0-t469-s2-closure.md), under the owner-approved automatic S/T sequence. |
+| Objective | Exercise one coherent retained original COMM group: real external unavailable behavior, controller-local normal behavior, and source-defined task/close cleanup limits. |
 | Non-goals | Guest change/rebuild; serial provider, virtual-port pair, polling loop, callback/task manager, inferred hardware success, or speculative cleanup rewrite. |
-| Reference Baseline | [S1 owner matrix](../etc/evidence/m0-t469-s1-comm-owner-matrix.md), COMM proposal, minimum-diff gate, existing device boundary and current package. |
-| Files And ABI Surface | Existing `wucomm.c`/`wucomm.h`, original USER COMM source and existing serial fixtures; no new production ABI. |
+| Reference Baseline | [S2 disposition](../etc/evidence/m0-t469-s2-comm-source-disposition.md), S1 owner matrix, existing device boundary and current package. |
+| Files And ABI Surface | Existing original COMM owner and checked-in DOS/WOW observation fixtures; no new production ABI. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Trace original Win16 and host correction candidates; then run only the coherent selected normal/negative/lifecycle group. |
-| Expected Markers | Original operation/result semantics preserved; either a matching correction or explicit inherited boundary; no duplicate task/port owner. |
-| Asset Needs | Read-only source candidates, existing COM3 boundary and fixtures; guest inputs remain immutable. |
-| Reporting Requirements | Reuse/rejection proof, exact lifetime decision, selected test plan/results and external limitation. |
+| Verification | Run checked-in original external COM open/timeout and controller loopback witnesses together; add no synthetic provider or guest change. |
+| Expected Markers | Real COM3 unavailable result, controller-local original transmit/receive result, source-defined cleanup disposition and no policy substitution. |
+| Asset Needs | Current package, existing COM3 and checked-in fixtures; guest inputs remain immutable. |
+| Reporting Requirements | Exact runs, provider facts, retained limits and no-release rationale. |
 | Stop Conditions | Need for guest change, virtual provider, new async/callback manager, hidden retry/polling policy, or a new observable semantic concession. |
-| Exit Criteria | Each operation family has a source-shaped normal/failure disposition; multi-port cleanup has a policy-compliant decision. |
+| Exit Criteria | Coherent retained-route group passes and every unavailable/untestable edge remains a non-pass. |
 | Original Owner Request | Automatically proceed through the ordered WOW32 candidates after each bounded closure. |
 | Similar-Issue Sweep | COM open/close, DCB/timeouts, synchronous and pending I/O, event/cancel, task loss, external device and stale callback. |
 | Candidate Proposal | [WOW32 COMM](../proposals/proposal-wow32-comm-001.md). |
@@ -73,6 +73,12 @@ the ordered COMM source inventory.
 S1 completed the original COMM owner and endpoint map at the
 [S1 closure](../history/m0-t469-s1-closure.md). S2 owns only source-shaped
 operation and task-loss disposition work.
+
+## T469 S2 Closure Record
+
+S2 closed the original-correction search at the
+[source disposition](../etc/evidence/m0-t469-s2-comm-source-disposition.md).
+S3 owns only the retained original-route acceptance group.
 
 ## T463 S2 Closure Record
 
