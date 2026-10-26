@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T466 S2**
+**Active: M0 T466 S3**
 
 T464 is closed at the published `0.0.464` ten-image package; [its closure](../history/m0-t464-closure.md)
 is authoritative. `books/` is expressly excluded and remains untracked pending
@@ -14,31 +14,35 @@ the smallest source-shaped binding and no guest modification or rebuild.
 
 T465 is closed by [its closure](../history/m0-t465-closure.md): it completed
 the selected original classic-DDE transport with no production or guest diff.
-T466 S1 [multimedia matrix](../etc/evidence/m0-t466-s1-multimedia-owner-matrix.md):
-one active `MMCallProc32` bridge, disabled historical thunks and a callback/
-task-rundown red gate; no runtime/guest change.
+T466 S1 [multimedia matrix](../etc/evidence/m0-t466-s1-multimedia-owner-matrix.md)
+closed one active `MMCallProc32` bridge, disabled historical thunks and a
+callback/task-rundown red gate. T466 S2 closes the [selected synchronous timer
+route](../etc/evidence/m0-t466-s2-sync-multimedia-bridge.md): current SysWOW64
+WINMM already exposes its original `tid32Message` compatibility entry, so the
+correct production diff is zero. Its four focused source-boundary phases pass;
+guest media, runtime images and release identity remain unchanged.
 
 ## Active Packet
 
-### M0 T466 S2 — synchronous multimedia bridge
+### M0 T466 S3 — asynchronous completion, cancellation and cleanup
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T466 S2, Ordinary Mode. |
-| Admission And Approval | Automatic progression from closed T466 S1 under owner-approved automatic S closure. |
-| Objective | Prove one caller-reached synchronous `MMCallProc32` operation without enabling disabled thunks or adding a provider. |
-| Non-goals | Guest change, emulation, callback/queue scheduler, async completion/cancel or guessed device success. |
-| Reference Baseline | [T466 S1 matrix](../etc/evidence/m0-t466-s1-multimedia-owner-matrix.md) and [sound/multimedia proposal](../proposals/proposal-wow32-sound-multimedia-001.md). |
-| Files And ABI Surface | Original Win16 mmsystem caller, `MMCALLPROC3216`, selected `WMM32CallProc32`, public x86 WINMM result only. |
+| Identifier Mode | M0 T466 S3, Ordinary Mode. |
+| Admission And Approval | Automatic progression from closed T466 S2 under owner-approved automatic S closure. |
+| Objective | Complete source-proven multimedia callbacks, queued-buffer completion/cancel and device/task cleanup without inventing a second scheduler. |
+| Non-goals | Guest change/rebuild; re-enabling disabled thunk families; guessed provider/device success; a new callback queue, retained-buffer owner or lifecycle authority. |
+| Reference Baseline | [T466 S1 matrix](../etc/evidence/m0-t466-s1-multimedia-owner-matrix.md), [T466 S2 evidence](../etc/evidence/m0-t466-s2-sync-multimedia-bridge.md), and [sound/multimedia proposal](../proposals/proposal-wow32-sound-multimedia-001.md). |
+| Files And ABI Surface | Reached original callback, buffer and device paths, their active build conditions and actual caller contracts. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Exact caller/target/argument trace; real synchronous normal and unavailable/error result; alias/buffer ownership if the selected call needs either; no link-only claim. |
-| Expected Markers | One caller-proven synchronous route, source-shaped failure result, no retained native pointer, no new queue or callback owner. |
-| Asset Needs | `build/t466-s2` only for disposable evidence; immutable guest inputs and installed package remain read-only. |
-| Reporting Requirements | Target map, normal/error witness, diff disposition and S3 callback handoff. |
-| Stop Conditions | Need for guest/driver change, private host mechanism, retained callback/buffer state, provider/scheduler, or a device-dependent semantic retreat. |
-| Exit Criteria | A caller-proven synchronous route with normal/error evidence, or an explicit source-proven unavailable disposition; S3 still owns all asynchronous behavior. |
+| Verification | Per-path normal, error, cancellation, reentry and task-loss evidence; formal x86 source graph; affected DOS/WOW/Win3.x regressions. Link-only, fixture-only or mock-only results do not prove a device capability. |
+| Expected Markers | One original-owner disposition per reached asynchronous path; source-shaped normal/error/cancel result; no retained callback/buffer after task loss; no new provider or scheduler. |
+| Asset Needs | `build/t466-s3` only for disposable evidence; immutable guest inputs and installed package remain read-only. |
+| Reporting Requirements | Per-path owner/ABI/lifetime map, implementation or unavailable disposition, evidence roots, product/guest diff accounting and S4 handoff. |
+| Stop Conditions | Need for guest/driver change, new external provider, private-host recreation, retained callback/buffer ownership not supplied by the original path, or a new scheduler/lifecycle authority. |
+| Exit Criteria | Each selected asynchronous path has a caller-proven source-shaped implementation or explicit unavailable disposition; no live callback/buffer survives failure, cancellation or task loss. S4 retains whole-family device acceptance. |
 | Original Owner Request | “把这个 S5 做完就可以收口本 T 任务，然后自动准入后续 wow32 的 T 任务。” |
-| Similar-Issue Sweep | wave/MIDI/MCI/timer, aliases, buffers, device absence and callback retention. |
+| Similar-Issue Sweep | wave/MIDI/MCI callback, queued buffers, cancellation, task loss, device absence and callback retention. |
 | Candidate Proposal | [WOW32 sound and multimedia](../proposals/proposal-wow32-sound-multimedia-001.md). |
 
 ## T463 S1 Closure Record
@@ -175,26 +179,7 @@ rebuilt dependent images. Its release identity is `assets/release/release-manife
 guest media remains unchanged. T454 S3 `5ede6c0e4` remains the prior bounded
 WOW32 free/rollback delivery.
 
-## Successor Boundary
-
-W05 and W07 are closed. W08 font/text/metafiles is active at S1.
-Resource-specific menu/dialog conversion remains a later owner.
-
 ## Temporary Evidence
-
-T458 S1 may use only `build/t458-s1` for disposable source-audit and focused
-resource-fixture evidence, with a 30-minute phase, 2-GiB size and 10-minute
-no-progress budget. Stable `.ninja` and `.ccache` remain reusable caches and
-are never task evidence roots.
-
-T458 S2 may use only `build/t458-s2` for retained conversion and guest
-resource evidence, with a 45-minute phase, 2-GiB size and 10-minute no-progress
-budget. Stable `.ninja` and `.ccache` remain reusable caches and are never task
-evidence roots.
-
-T458 S4 may use only `build/t458-s4` for disposable consumer acceptance, with
-a 45-minute phase, 2-GiB size and 10-minute no-progress budget. Stable
-`.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
 
 T459 S1--S4 used `build/t459-s1` through `build/t459-s4` only for disposable
 evidence. Their retained results are indexed from the closure; stable `.ninja`

@@ -1,6 +1,8 @@
 param(
  [Parameter(Mandatory)][string]$ProviderBuildRoot,
- [Parameter(Mandatory)][string]$BuildRoot
+ [Parameter(Mandatory)][string]$BuildRoot,
+ [ValidateSet('all','extension','mm-body','rejection','original-frame')]
+ [string]$Phase = 'all'
 )
 # Supplementary unit/original-frame group. Run in an owned hidden background
 # supervisor; actual generic-thunk/guest callbacks are a separate mandatory gate.
@@ -34,7 +36,8 @@ try{
   "$repo/src/wow32-dll/include/wow_callback_frame_lease.h",
   "$repo/tests/observation/verify-wow-original-callback-frame.ps1","$repo/src/mvdm/wow32/wmmedia.c")
  Get-FileHash $inputs|Export-Csv -NoTypeInformation "$root/source-sha256.csv"
- foreach($case in @('extension','mm-body','rejection')){
+ $cases=if($Phase -eq 'all'){@('extension','mm-body','rejection')}elseif($Phase -eq 'original-frame'){@()}else{@($Phase)}
+ foreach($case in $cases){
   $sources=if($case -ne 'rejection'){@('src/wow32-dll/source/wow_user_native_extension.c','tests/adapter-mvdm-host-out/wow/wow_native_extension_boundary_fixture.c')}else{@('src/mvdm/wow32/wcall16.c','tests/adapter-mvdm-host-out/wow/wow_public_callback_rejection_fixture.c')}
   if($case -eq 'mm-body'){$sources+='src/mvdm/wow32/wmmedia.c'}
   $objects=@();$i=0
@@ -48,10 +51,10 @@ try{
   Run-Owned "$case-link" cmd.exe $line 120
   Run-Owned "$case-run" "$root/$case.exe" '--verify' 30
  }
- if((Get-Content "$root/extension-run.stdout.txt" -Raw) -notmatch 'WOW_NATIVE_EXTENSION_BOUNDARY errors=0 .*unwind=1 reject=1 result_error=1 native_loader=1'){throw 'Missing paired scope/resource/exception assertions'}
- if((Get-Content "$root/mm-body-run.stdout.txt" -Raw) -notmatch 'WOW_ORIGINAL_MM_EXTENSION errors=0 actual_body=1 five_args=1 directory_order=1 zero_target=1 exception=1'){throw 'Missing actual original MM body/argument/zero-target assertions'}
- if((Get-Content "$root/rejection-run.stdout.txt" -Raw) -notmatch 'WOW_PUBLIC_CALLBACK_REJECTION errors=0 .*invalid_size_untouched=1 no_guest_entry=1'){throw 'Missing original public-export refusal assertions'}
- Run-Owned original-frame $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-original-callback-frame.ps1" -ProviderBuildRoot "'+$provider+'" -BuildRoot "'+$root+'/original-frame"') 400
+ if($Phase -in @('all','extension') -and (Get-Content "$root/extension-run.stdout.txt" -Raw) -notmatch 'WOW_NATIVE_EXTENSION_BOUNDARY errors=0 .*unwind=1 reject=1 result_error=1 native_loader=1 tid32_native_sync=1'){throw 'Missing paired scope/resource/exception assertions'}
+ if($Phase -in @('all','mm-body') -and (Get-Content "$root/mm-body-run.stdout.txt" -Raw) -notmatch 'WOW_ORIGINAL_MM_EXTENSION errors=0 actual_body=1 five_args=1 directory_order=1 zero_target=1 exception=1 tid32_through_original=1'){throw 'Missing actual original MM body/argument/zero-target assertions'}
+ if($Phase -in @('all','rejection') -and (Get-Content "$root/rejection-run.stdout.txt" -Raw) -notmatch 'WOW_PUBLIC_CALLBACK_REJECTION errors=0 .*invalid_size_untouched=1 no_guest_entry=1'){throw 'Missing original public-export refusal assertions'}
+ if($Phase -in @('all','original-frame')){Run-Owned original-frame $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-original-callback-frame.ps1" -ProviderBuildRoot "'+$provider+'" -BuildRoot "'+$root+'/original-frame"') 400}
  foreach($input in Import-Csv "$root/source-sha256.csv"){if((Get-FileHash $input.Path).Hash -ne $input.Hash){throw 'Boundary source changed during group'}}
  0|Set-Content "$root/exit.txt"
 }catch{$_|Out-String|Set-Content "$root/failure.txt";1|Set-Content "$root/exit.txt";exit 1}

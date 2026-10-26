@@ -128,7 +128,11 @@ int __cdecl main(void)
 #endif
     VPVOID output = 0;
     HMODULE module;
+    HMODULE winmm;
+    FARPROC private_address;
     FARPROC address;
+    FARPROC native_private_address;
+    typedef DWORD (WINAPI *tid32_message)(DWORD, DWORD, DWORD, DWORD, DWORD);
     unsigned before, i;
     const INT helpers[] = {RET_LOCALFREE,RET_GLOBALUNLOCKFREE,RET_LOCKRESOURCE,
         RET_FORCESEGMENTFAULT,RET_GETEXPWINVER,RET_WOWDDEFREEHANDLE,RET_FREEDIBSEL,
@@ -152,11 +156,27 @@ int __cdecl main(void)
     throw_native = FALSE;
     CHECK(!native_depth && !ready_depth && starts == finishes);
 #ifdef WOW_EXTENSION_ORIGINAL_MM
+    {
+        HMODULE timer_module;
+        FARPROC timer_target;
+        DWORD first, second;
+        timer_module = wow_extension_load_library_a("winmm.dll",NULL,
+            LOAD_LIBRARY_SEARCH_SYSTEM32);
+        timer_target = timer_module ? wow_extension_get_proc_address(timer_module,
+            "tid32Message") : NULL;
+        CHECK(timer_target != NULL);
+        mm->fSetCurrentDirectory=0;
+        mm->lpProcAddress=(DWORD)(ULONG_PTR)timer_target;
+        mm->p1=0x000A;mm->p2=0;mm->p3=0;mm->p4=0;mm->p5=0;
+        first=WMM32CallProc32(frame);second=WMM32CallProc32(frame);
+        CHECK(second >= first);
+        if(timer_module) CHECK(wow_extension_free_library(timer_module));
+    }
     CHECK(directory_calls == 2 && mm_calls == 2);
     mm->lpProcAddress=0;SetLastError(0x5678);
     CHECK(!WMM32CallProc32(frame) && GetLastError() == 0x5678 && directory_calls == 2 && mm_calls == 2);
     mm->lpProcAddress=(DWORD)(ULONG_PTR)native_mm_target;
-    puts("WOW_ORIGINAL_MM_EXTENSION errors=0 actual_body=1 five_args=1 directory_order=1 zero_target=1 exception=1");
+    puts("WOW_ORIGINAL_MM_EXTENSION errors=0 actual_body=1 five_args=1 directory_order=1 zero_target=1 exception=1 tid32_through_original=1");
 #endif
     before = callbacks;throw_callback = TRUE;
     __try { (void)CallBack16(RET_WOWCALLBACK16,&parameters,expected_procedure,&output); CHECK(FALSE); }
@@ -188,9 +208,21 @@ int __cdecl main(void)
     address = module ? GetProcAddress(module,"GetFileVersionInfoSizeA") : NULL;
     CHECK(address && wow_extension_get_proc_address(module,"GetFileVersionInfoSizeA") == address);
     if(module) CHECK(!wow_extension_get_proc_address(module,"T447AbsentExport") && GetLastError() == ERROR_PROC_NOT_FOUND);
+    winmm = wow_extension_load_library_a("winmm.dll",NULL,LOAD_LIBRARY_SEARCH_SYSTEM32);
+    CHECK(winmm != NULL);
+    native_private_address = winmm ? GetProcAddress(winmm,"tid32Message") : NULL;
+    CHECK(native_private_address != NULL);
+    private_address = winmm ? wow_extension_get_proc_address(winmm,"tid32Message") : NULL;
+    CHECK(private_address == native_private_address);
+    if(private_address) {
+        DWORD first = ((tid32_message)private_address)(0,0,0,0,0x000A);
+        DWORD second = ((tid32_message)private_address)(0,0,0,0,0x000A);
+        CHECK(second >= first);
+    }
+    if(winmm) CHECK(wow_extension_free_library(winmm));
     if(module) CHECK(wow_extension_free_library(module));
     CHECK(!native_depth && !ready_depth && starts == finishes);
-    printf("WOW_NATIVE_EXTENSION_BOUNDARY errors=%u inline_pairs=%u callbacks=%u ready_entries=%u resource_entries=%u unwind=1 reject=1 result_error=1 native_loader=1\n",
+    printf("WOW_NATIVE_EXTENSION_BOUNDARY errors=%u inline_pairs=%u callbacks=%u ready_entries=%u resource_entries=%u unwind=1 reject=1 result_error=1 native_loader=1 tid32_native_sync=1\n",
         errors,starts,callbacks,callback_entries,resource_entries);
     return errors ? 1 : 0;
 }

@@ -140,6 +140,11 @@ isolated tool evidence; it changes no guest, runtime image or release binary.
 records the single selected `MMCallProc32` bridge, original disabled thunk
 boundary, alias/callback ownership and public x86 WINMM feasibility evidence.
 
+[T466 S2 synchronous multimedia bridge](evidence/m0-t466-s2-sync-multimedia-bridge.md)
+records the exact original `timeGetTime` five-word packet and proves that the
+existing SysWOW64 WINMM `tid32Message` compatibility entry satisfies it with
+no new host adaptation.
+
 [T461 S1 Shell and layered Registry owner matrix](evidence/m0-t461-s1-shell-registry-owner-matrix.md)
 records the selected Shell service and seven Registry entries, the sole
 `NTVDM.REG` façade, its missing persistent-write/concurrency contract, and the
