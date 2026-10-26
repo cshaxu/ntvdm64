@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T463 S2**
+**Active: M0 T463 S3**
 
 T460 is closed at `5f12610eb`; its owner-approved Win95 Start Menu
 PIF-template provenance repair is retained in its closure record. `books/` is
@@ -14,25 +14,25 @@ the read-only `ntvdm64-wow32-audit`: recover selected original behavior with
 the smallest source-shaped binding and no guest modification or rebuild.
 ## Active Packet
 
-### M0 T463 S2 — SOL Options owner attribution and coherent repair batch
+### M0 T463 S3 — lifecycle and owner acceptance
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T463 S2, Ordinary Mode; single-agent source attribution and one owner-shaped repair batch. |
-| Admission And Approval | Automatic advance after the S1 baseline ledger. |
-| Objective | Capture and map the SOL Options failure to one actual original owner, then repair only the proven source-shaped edge and validate the coherent three-app interaction cohort. |
+| Identifier Mode | M0 T463 S3, Ordinary Mode; lifecycle/owner acceptance only after the published S2 repair. |
+| Admission And Approval | Automatic advance after S2 closure. |
+| Objective | Prove normal close/restart, supported multiple tasks, scoped abnormal cleanup and subsequent DOS use for the three-app cohort; repair only a source-proven owner edge if a required lifecycle case fails. |
 | Non-goals | No guest change, broad provider claim, cosmetic workaround, host UI substitution or speculative runtime repair. |
-| Reference Baseline | [Everyday-usability proposal](../proposals/proposal-wow32-everyday-usability-001.md), [S1 baseline](../etc/evidence/m0-t463-s1-everyday-baseline.md), minimum-diff governance and T462 evidence. |
-| Files And ABI Surface | Selected original WOW32 owner and its already-admitted binding only after fault attribution; no new public ABI. |
+| Reference Baseline | [Everyday-usability proposal](../proposals/proposal-wow32-everyday-usability-001.md), [S2 attribution and delivery](../etc/evidence/m0-t463-s2-sol-options-attribution.md), minimum-diff governance and T462 evidence. |
+| Files And ABI Surface | Existing lifecycle/owner paths only after failure-to-owner attribution; no new public ABI without a separate admission. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Fault address/symbol-to-owner proof; normal, failure and retirement contract; focused original-owner tests plus the applicable coherent product package gate. |
-| Expected Markers | No application is passed merely because a window or process exists; no repair precedes a mapped SOL Options owner. |
-| Asset Needs | Build-owned T463 S2 evidence only; existing product package and guest media read-only. |
-| Reporting Requirements | Inputs, procedure, observed behaviour, source owner, exact changed-edge state authority and finite S3 handoff. |
-| Stop Conditions | Need for a guest edit, unsupported causal conclusion, fault outside the admitted owner closure, or a repair not tied to the captured failing call. |
-| Exit Criteria | A source-owned Options disposition and a bounded three-application interaction result; unresolved owner attribution remains an explicit no-repair conclusion rather than a substitute implementation. |
+| Verification | Reproducible normal, restart, concurrent-task and scoped loss/recovery witnesses plus applicable coherent product package gate. |
+| Expected Markers | No application is passed merely because a window or process exists; normal and abnormal exits retain the owning worker/parent contract. |
+| Asset Needs | Build-owned T463 S3 evidence only; existing product package and guest media read-only. |
+| Reporting Requirements | Inputs, procedure, lifecycle owner, exact cleanup disposition and finite T closure or defect handoff. |
+| Stop Conditions | Need for a guest edit, unsupported causal conclusion, fault outside the admitted lifecycle closure, or a repair not tied to the captured failing call. |
+| Exit Criteria | Bounded lifecycle acceptance for all three applications, or a source-attributed defect packet with no substitute implementation. |
 | Original Owner Request | 自动准入后续 WOW32 T；按最小镜像 diff、最大原版复通执行。 |
-| Similar-Issue Sweep | Client painting, non-client painting/activation, menu/hover, expose and move/resize transitions. |
+| Similar-Issue Sweep | Cross-task close/restart, worker retirement, and DOS usability after scoped WOW cleanup. |
 | Candidate Proposal | [WOW32 everyday usability](../proposals/proposal-wow32-everyday-usability-001.md). |
 
 ## T463 S1 Closure Record
@@ -44,6 +44,19 @@ captured fault-to-symbol attribution yet; the source-shaped modal-dialog route
 is a lead, not a repair authorization.  S1 changes documentation only, leaves
 guest media and runtime images unchanged, and transfers the finite capture and
 owner-attribution obligation to S2.
+
+## T463 S2 Closure Record
+
+S2 closes at the one mapped public-USER boundary in
+`wow_native_EnableWindow`: original `wuwind.c::WU32EnableWindow` supplies an
+`HWND32` carrier, so the binding now resolves the existing worker-published
+public HWND before it calls modern USER. The [attribution and delivery
+record](../etc/evidence/m0-t463-s2-sol-options-attribution.md) retains the
+first-chance CoreMessaging fault, eliminated alternatives, the private-desktop
+SOL Options/close/parent-recovery witness and the final Full product gate.
+All ten selected images are published with matching release/installed hashes;
+guest media remains unchanged. S3 alone owns normal/restart/multiple-task and
+scoped abnormal-cleanup acceptance.
 
 ## T462 Closure Record
 
@@ -200,6 +213,16 @@ Stable `.ninja` and `.ccache` remain reusable caches and are never task evidence
 
 T462 S1 may use only `build/t462-s1` for disposable read-only window/paint
 attribution evidence, with a 30-minute phase, 2-GiB size and 10-minute
+no-progress budget. Stable `.ninja` and `.ccache` remain reusable caches and
+are never task evidence roots.
+
+T463 S2 may use only `build/t463-s2` for disposable SOL Options attribution
+and coherent three-application evidence, with a 45-minute phase, 2-GiB size
+and 10-minute no-progress budget. Stable `.ninja` and `.ccache` remain
+reusable caches and are never task evidence roots.
+
+T463 S3 may use only `build/t463-s3` for disposable lifecycle and owner
+acceptance evidence, with a 45-minute phase, 2-GiB size and 10-minute
 no-progress budget. Stable `.ninja` and `.ccache` remain reusable caches and
 are never task evidence roots.
 

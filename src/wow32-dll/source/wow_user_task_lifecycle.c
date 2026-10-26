@@ -1257,7 +1257,30 @@ WOW_NATIVE_CALL(BOOL, BringWindowToTop, (HWND w), (w), FALSE)
 WOW_NATIVE_CALL(BOOL, SetWindowPos, (HWND w, HWND after, int x, int y, int cx, int cy, UINT flags), (w, after, x, y, cx, cy, flags), FALSE)
 WOW_NATIVE_CALL(BOOL, MoveWindow, (HWND w, int x, int y, int cx, int cy, BOOL paint), (w, x, y, cx, cy, paint), FALSE)
 WOW_NATIVE_CALL(BOOL, ShowWindow, (HWND w, int show), (w, show), FALSE)
-WOW_NATIVE_CALL(BOOL, EnableWindow, (HWND w, BOOL enable), (w, enable), FALSE)
+/* wuwind.c::WU32EnableWindow deliberately passes HWND32: an original 16-bit
+ * USER carrier, not a public HWND.  NT4 USER accepted that carrier directly;
+ * modern USER must receive the one live public identity already published by
+ * the worker object table.  Keep this conversion at the one admitted public
+ * boundary rather than changing the original HWND32/FULLHWND32 contracts. */
+BOOL WINAPI wow_native_EnableWindow(HWND w, BOOL enable)
+{
+    wow_user_native_call call;
+    HWND native;
+    BOOL result, restored;
+    DWORD error = GetLastError();
+    native = wow_user_window_public_handle(w);
+    if (!native) return FALSE;
+    if (!wow_user_native_call_begin(&call, native)) return FALSE;
+    SetLastError(error);
+    __try {
+        result = EnableWindow(native, enable);
+    } __finally {
+        error = GetLastError();
+        restored = wow_user_native_call_end(&call);
+        if (restored) SetLastError(error);
+    }
+    return restored ? result : FALSE;
+}
 WOW_NATIVE_CALL_RESULT(HWND, SetActiveWindow, (HWND w), (w), NULL, w, result)
 WOW_NATIVE_CALL(BOOL, SetForegroundWindow, (HWND w), (w), FALSE)
 WOW_NATIVE_CALL(BOOL, SetWindowContextHelpId, (HWND w, DWORD id), (w, id), FALSE)
