@@ -136,6 +136,10 @@ an explicit later Queue capability.
 records plan-template provenance, the original PIF path-capacity refusal and
 isolated tool evidence; it changes no guest, runtime image or release binary.
 
+[T466 S1 WOW32 multimedia owner matrix](evidence/m0-t466-s1-multimedia-owner-matrix.md)
+records the single selected `MMCallProc32` bridge, original disabled thunk
+boundary, alias/callback ownership and public x86 WINMM feasibility evidence.
+
 [T461 S1 Shell and layered Registry owner matrix](evidence/m0-t461-s1-shell-registry-owner-matrix.md)
 records the selected Shell service and seven Registry entries, the sole
 `NTVDM.REG` façade, its missing persistent-write/concurrency contract, and the

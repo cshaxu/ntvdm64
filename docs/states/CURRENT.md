@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T466 S1**
+**Active: M0 T466 S2**
 
 T464 is closed at the published `0.0.464` ten-image package; [its closure](../history/m0-t464-closure.md)
 is authoritative. `books/` is expressly excluded and remains untracked pending
@@ -14,29 +14,31 @@ the smallest source-shaped binding and no guest modification or rebuild.
 
 T465 is closed by [its closure](../history/m0-t465-closure.md): it completed
 the selected original classic-DDE transport with no production or guest diff.
-The next ordered WOW32 candidate is automatically admitted below.
+T466 S1 [multimedia matrix](../etc/evidence/m0-t466-s1-multimedia-owner-matrix.md):
+one active `MMCallProc32` bridge, disabled historical thunks and a callback/
+task-rundown red gate; no runtime/guest change.
 
 ## Active Packet
 
-### M0 T466 S1 — multimedia family inventory
+### M0 T466 S2 — synchronous multimedia bridge
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T466 S1, Ordinary Mode. |
-| Admission And Approval | Automatic progression from closed M0 T465; first remaining Queue candidate. |
-| Objective | Map selected WOW32 sound/multimedia operation families, callers, device boundaries, buffers, callbacks and cleanup before implementation. |
-| Non-goals | No guest change, provider/scheduler, device emulation, guessed success or unrelated multimedia feature. |
-| Reference Baseline | [sound/multimedia proposal](../proposals/proposal-wow32-sound-multimedia-001.md), WOW32 minimum-diff governance, T465 closure and current source. |
-| Files And ABI Surface | Selected original multimedia source, build selection, existing tests and public host/device APIs only; no ABI is admitted yet. |
+| Identifier Mode | M0 T466 S2, Ordinary Mode. |
+| Admission And Approval | Automatic progression from closed T466 S1 under owner-approved automatic S closure. |
+| Objective | Prove one caller-reached synchronous `MMCallProc32` operation without enabling disabled thunks or adding a provider. |
+| Non-goals | Guest change, emulation, callback/queue scheduler, async completion/cancel or guessed device success. |
+| Reference Baseline | [T466 S1 matrix](../etc/evidence/m0-t466-s1-multimedia-owner-matrix.md) and [sound/multimedia proposal](../proposals/proposal-wow32-sound-multimedia-001.md). |
+| Files And ABI Surface | Original Win16 mmsystem caller, `MMCALLPROC3216`, selected `WMM32CallProc32`, public x86 WINMM result only. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Source/caller/build census, existing-test inventory and one bounded public-device feasibility probe where available; no link-only claim. |
-| Expected Markers | Every selected family has one original authority, host boundary, buffer/callback owner, cleanup route, runnable witness or explicit unavailable disposition. |
-| Asset Needs | `build/t466-s1` only for disposable evidence; immutable guest inputs and installed package remain read-only. |
-| Reporting Requirements | Family ledger, test disposition, minimum-diff options and S2 admission boundary. |
-| Stop Conditions | Need for guest/driver change, private host mechanism, new provider/scheduler, device-dependent semantic retreat or a non-WOW capability expansion. |
-| Exit Criteria | Finite source-first S1 ledger and executable-test plan; no implementation or production diff without a separate admitted S2. |
+| Verification | Exact caller/target/argument trace; real synchronous normal and unavailable/error result; alias/buffer ownership if the selected call needs either; no link-only claim. |
+| Expected Markers | One caller-proven synchronous route, source-shaped failure result, no retained native pointer, no new queue or callback owner. |
+| Asset Needs | `build/t466-s2` only for disposable evidence; immutable guest inputs and installed package remain read-only. |
+| Reporting Requirements | Target map, normal/error witness, diff disposition and S3 callback handoff. |
+| Stop Conditions | Need for guest/driver change, private host mechanism, retained callback/buffer state, provider/scheduler, or a device-dependent semantic retreat. |
+| Exit Criteria | A caller-proven synchronous route with normal/error evidence, or an explicit source-proven unavailable disposition; S3 still owns all asynchronous behavior. |
 | Original Owner Request | “把这个 S5 做完就可以收口本 T 任务，然后自动准入后续 wow32 的 T 任务。” |
-| Similar-Issue Sweep | waveOut/waveIn/MCI/aux/mixer/timer families, 16/32 conversion, callback delivery, buffers, device absence, cancellation and task/device rundown. |
+| Similar-Issue Sweep | wave/MIDI/MCI/timer, aliases, buffers, device absence and callback retention. |
 | Candidate Proposal | [WOW32 sound and multimedia](../proposals/proposal-wow32-sound-multimedia-001.md). |
 
 ## T463 S1 Closure Record
