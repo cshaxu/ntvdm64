@@ -204,6 +204,10 @@ transport witness, with DDEML explicitly excluded.
 records original cancellation, alias and task-loss ownership boundaries and
 the real two-task negative-free witness; it adds no DDE provider or scheduler.
 
+[T465 S4 classic DDE acceptance](evidence/m0-t465-s4-dde-acceptance.md)
+reconciles the real transport/task-loss witnesses and exact alias fixture into
+the selected classic-DDE closure without a product-image claim.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.

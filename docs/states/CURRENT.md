@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T465 S4**
+**Active: M0 T466 S1**
 
 T464 is closed at the published `0.0.464` ten-image package; [its closure](../history/m0-t464-closure.md)
 is authoritative. `books/` is expressly excluded and remains untracked pending
@@ -12,33 +12,32 @@ Automatic progression is approved. Completed work follows
 the read-only `ntvdm64-wow32-audit`: recover selected original behavior with
 the smallest source-shaped binding and no guest modification or rebuild.
 
-T465 S1’s [DDE contract](../etc/evidence/m0-t465-s1-dde-conversation-contract.md),
-[S2 acceptance](../etc/evidence/m0-t465-s2-classic-dde-conversation-acceptance.md)
-and [S3 ledger](../etc/evidence/m0-t465-s3-dde-loss-release-ledger.md) close the
-selected classic transport. S4 owns aggregate acceptance only.
+T465 is closed by [its closure](../history/m0-t465-closure.md): it completed
+the selected original classic-DDE transport with no production or guest diff.
+The next ordered WOW32 candidate is automatically admitted below.
 
 ## Active Packet
 
-### M0 T465 S4 — selected classic DDE acceptance
+### M0 T466 S1 — multimedia family inventory
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T465 S4, Ordinary Mode. |
-| Admission And Approval | Automatic progression from the completed S3 loss/release ledger. |
-| Objective | Reconcile selected classic-DDE source owners, real guest/native evidence and retained stopping boundaries into one closure record. |
-| Non-goals | No guest change, DDEML/provider/scheduler, speculative shim, cross-worker claim or synthetic peer. |
-| Reference Baseline | [S1](../etc/evidence/m0-t465-s1-dde-conversation-contract.md), [S2](../etc/evidence/m0-t465-s2-classic-dde-conversation-acceptance.md), [S3](../etc/evidence/m0-t465-s3-dde-loss-release-ledger.md), [proposal](../proposals/proposal-wow32-dde-001.md). |
-| Files And ABI Surface | Existing classic DDE source and message probe only; no production ABI change is admitted. |
+| Identifier Mode | M0 T466 S1, Ordinary Mode. |
+| Admission And Approval | Automatic progression from closed M0 T465; first remaining Queue candidate. |
+| Objective | Map selected WOW32 sound/multimedia operation families, callers, device boundaries, buffers, callbacks and cleanup before implementation. |
+| Non-goals | No guest change, provider/scheduler, device emulation, guessed success or unrelated multimedia feature. |
+| Reference Baseline | [sound/multimedia proposal](../proposals/proposal-wow32-sound-multimedia-001.md), WOW32 minimum-diff governance, T465 closure and current source. |
+| Files And ABI Surface | Selected original multimedia source, build selection, existing tests and public host/device APIs only; no ABI is admitted yet. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Rerun complete selected real guest/native conversation and task-loss cases; inspect diff and retained evidence. Compile or mock-only success cannot close S4. |
-| Expected Markers | Every selected owner has a source authority and real witness or explicit original stopping boundary; no DDEML admission. |
-| Asset Needs | `build/t465-s4` only for disposable evidence; immutable guest inputs remain read-only. |
-| Reporting Requirements | Exact aggregate result, limitations, package impact and next-queue handoff. |
-| Stop Conditions | Need for a guest change, new provider/scheduler, private USER/CSRSS assumption, a DDEML dependency, or new observable semantic retreat. |
-| Exit Criteria | Complete selected interaction/loss matrix passes; S1--S3 boundaries remain intact; review finds no unfinished T465 owner gap. |
+| Verification | Source/caller/build census, existing-test inventory and one bounded public-device feasibility probe where available; no link-only claim. |
+| Expected Markers | Every selected family has one original authority, host boundary, buffer/callback owner, cleanup route, runnable witness or explicit unavailable disposition. |
+| Asset Needs | `build/t466-s1` only for disposable evidence; immutable guest inputs and installed package remain read-only. |
+| Reporting Requirements | Family ledger, test disposition, minimum-diff options and S2 admission boundary. |
+| Stop Conditions | Need for guest/driver change, private host mechanism, new provider/scheduler, device-dependent semantic retreat or a non-WOW capability expansion. |
+| Exit Criteria | Finite source-first S1 ledger and executable-test plan; no implementation or production diff without a separate admitted S2. |
 | Original Owner Request | “把这个 S5 做完就可以收口本 T 任务，然后自动准入后续 wow32 的 T 任务。” |
-| Similar-Issue Sweep | Initiate/data/ack, rejected post, termination/request/unadvise scalar paths, task loss and DDEML boundary. |
-| Candidate Proposal | [WOW32 DDE](../proposals/proposal-wow32-dde-001.md). |
+| Similar-Issue Sweep | waveOut/waveIn/MCI/aux/mixer/timer families, 16/32 conversion, callback delivery, buffers, device absence, cancellation and task/device rundown. |
+| Candidate Proposal | [WOW32 sound and multimedia](../proposals/proposal-wow32-sound-multimedia-001.md). |
 
 ## T463 S1 Closure Record
 
