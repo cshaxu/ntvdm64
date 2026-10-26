@@ -20,23 +20,23 @@ ten-image package remains `build/t467-s3/package-r2` and guest media is unchange
 
 ## Active Packet
 
-### M0 T468 S1 — Printing and spool contract inventory
+### M0 T468 S2 — Printing and spool bounded binding acceptance
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T468 S1, Ordinary Mode. |
-| Admission And Approval | Automatic successor admission after T467 closure under the owner-approved automatic S/T sequence. |
-| Objective | Produce a finite source-first inventory of the selected original Win16 printing/spool call families, their Guest/WOW32/modern-host ABI, job/DC/cancel/retirement authority, and actual endpoint availability. |
-| Non-goals | Guest change/rebuild; print provider, spooler, device emulation, replacement DC/job/callback owner, or production implementation. |
-| Reference Baseline | [Printing/spool proposal](../proposals/proposal-wow32-printing-spool-001.md), [W07 GDI closure](../history/m0-t455-closure.md), [W08 text/metafile closure](../history/m0-t456-closure.md), and [WOW32 admission governance](../etc/operations/wow32-queue-minimal-diff-admission-governance.md). |
-| Files And ABI Surface | Source/evidence only: selected original WOW32 printer/spool files, original guest import/ordinal surface, existing GDI/font handoffs and supported modern spool endpoint evidence. |
+| Identifier Mode | M0 T468 S2, Ordinary Mode. |
+| Admission And Approval | Automatic successor admission after S1 inventory under the owner-approved automatic S/T sequence. |
+| Objective | Validate the selected original Win16 printing/spool bindings against an explicitly observed provider and prove normal, failure, cancellation and carrier/DC cleanup boundaries without adding a provider or lifecycle manager. |
+| Non-goals | Guest change/rebuild; print provider, spooler, device emulation, replacement DC/job/callback owner, atomic dynamic-loader rewrite, or production behavior not proven by a real selected endpoint. |
+| Reference Baseline | [S1 owner matrix](../etc/evidence/m0-t468-s1-printing-spool-owner-matrix.md), [Printing/spool proposal](../proposals/proposal-wow32-printing-spool-001.md), [W07 GDI closure](../history/m0-t455-closure.md), [W08 text/metafile closure](../history/m0-t456-closure.md), and [WOW32 admission governance](../etc/operations/wow32-queue-minimal-diff-admission-governance.md). |
+| Files And ABI Surface | Existing selected original WOW32 printer/spool files and immutable test-only guest companion/probe; W07/W08/W18 handoffs only. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Trace every selected entry to original owner and build selection; identify real provider availability without creating a substitute; record normal, failure, cancellation and task/DC/job retirement paths. |
-| Expected Markers | One owner per job/DC/buffer/callback; finite public or unavailable endpoint boundary; no duplicate spool/task/callback manager. |
-| Asset Needs | Read-only source/mirror, retained W07/W08 records and local modern spool capability observation only; guest inputs remain immutable. |
-| Reporting Requirements | Owner matrix, ABI/lifetime graph, endpoint evidence, exact candidate S2 scope and any explicit unavailable limit. |
+| Verification | Use an observed provider to exercise raw spool and HDC document families, device conversion and PrintDlg cancellation; prove failed endpoint behavior and trace local carrier/DC retirement. |
+| Expected Markers | One owner per job/DC/buffer/callback; no new job/DC/provider manager; test-only immutable guest staging; explicit provider-unavailable non-pass if endpoint cannot be observed. |
+| Asset Needs | Read-only source/mirror, immutable test-only guest companion/probe and observed local provider; guest inputs remain immutable. |
+| Reporting Requirements | Exact selected provider, normal/failure/cancel evidence, source-shaped code decision, carrier/DC retirement evidence and every explicit non-pass. |
 | Stop Conditions | Need for guest change, private spooler/USER recreation, a new manager/provider, or an unbounded device dependency. |
-| Exit Criteria | Every selected family is attributed with a finite normal/failure/retirement handoff and S2 has a bounded, source-shaped implementation decision. |
+| Exit Criteria | Each selected family has a real or explicit unavailable endpoint disposition; no raw job, HDC, DEVMODE, callback or cleanup owner is duplicated. |
 | Original Owner Request | Automatically proceed to the next WOW32 task after closing the preceding T. |
 | Similar-Issue Sweep | Print DC, job handles, DEVMODE/DEVCAPS buffers, abort/cancel callbacks, endpoint errors and task/DC loss. |
 | Candidate Proposal | [WOW32 printing and spool](../proposals/proposal-wow32-printing-spool-001.md). |

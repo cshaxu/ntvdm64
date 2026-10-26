@@ -167,6 +167,11 @@ records the real Win16 async-select loopback notification/disable/close
 witness, reconciled async-query lifecycle evidence and the published package
 boundary.
 
+[T468 S1 printing/spool owner matrix](evidence/m0-t468-s1-printing-spool-owner-matrix.md)
+records the selected original raw-job, HDC-document, device-setup and
+PrintDlg owners, their existing W07/W08/W18 handoffs, and the finite S2 test
+boundary without adding a print provider.
+
 [T461 S1 Shell and layered Registry owner matrix](evidence/m0-t461-s1-shell-registry-owner-matrix.md)
 records the selected Shell service and seven Registry entries, the sole
 `NTVDM.REG` façade, its missing persistent-write/concurrency contract, and the
