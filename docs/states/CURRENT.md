@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T468 S2**
+**Active: M0 T468 S3**
 
 T464 is closed at the published `0.0.464` ten-image package; [its closure](../history/m0-t464-closure.md)
 is authoritative. `books/` is expressly excluded and remains untracked pending
@@ -20,23 +20,23 @@ ten-image package remains `build/t467-s3/package-r2` and guest media is unchange
 
 ## Active Packet
 
-### M0 T468 S2 — Printing and spool bounded binding acceptance
+### M0 T468 S3 — Printing and spool failure and retirement
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T468 S2, Ordinary Mode. |
-| Admission And Approval | Automatic successor admission after S1 inventory under the owner-approved automatic S/T sequence. |
-| Objective | Validate the selected original Win16 printing/spool bindings against an explicitly observed provider and prove normal, failure, cancellation and carrier/DC cleanup boundaries without adding a provider or lifecycle manager. |
-| Non-goals | Guest change/rebuild; print provider, spooler, device emulation, replacement DC/job/callback owner, atomic dynamic-loader rewrite, or production behavior not proven by a real selected endpoint. |
-| Reference Baseline | [S1 owner matrix](../etc/evidence/m0-t468-s1-printing-spool-owner-matrix.md), [Printing/spool proposal](../proposals/proposal-wow32-printing-spool-001.md), [W07 GDI closure](../history/m0-t455-closure.md), [W08 text/metafile closure](../history/m0-t456-closure.md), and [WOW32 admission governance](../etc/operations/wow32-queue-minimal-diff-admission-governance.md). |
-| Files And ABI Surface | Existing selected original WOW32 printer/spool files and immutable test-only guest companion/probe; W07/W08/W18 handoffs only. |
+| Identifier Mode | M0 T468 S3, Ordinary Mode. |
+| Admission And Approval | Automatic sequential admission after the bounded [S2 closure](../history/m0-t468-s2-closure.md), under the owner-approved automatic S/T sequence. |
+| Objective | Trace and validate original raw-job carrier, PrintDlg returned-object and abrupt task retirement behavior; repair only a proven missing original binding. |
+| Non-goals | Guest change/rebuild; print provider, spooler, device emulation, replacement DC/job/callback owner, atomic dynamic-loader rewrite, or speculative task-cleanup replacement. |
+| Reference Baseline | [S2 closure](../history/m0-t468-s2-closure.md), [S1 owner matrix](../etc/evidence/m0-t468-s1-printing-spool-owner-matrix.md), [Printing/spool proposal](../proposals/proposal-wow32-printing-spool-001.md), and W07/W08/W18 closures. |
+| Files And ABI Surface | Existing original `wspool.c`, `wgdi31.c`, `wgprnset.c`, `wcommdlg.c`, worker task retirement and immutable test-only witnesses. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Use an observed provider to exercise raw spool and HDC document families, device conversion and PrintDlg cancellation; prove failed endpoint behavior and trace local carrier/DC retirement. |
-| Expected Markers | One owner per job/DC/buffer/callback; no new job/DC/provider manager; test-only immutable guest staging; explicit provider-unavailable non-pass if endpoint cannot be observed. |
+| Verification | Trace every raw job/DC/PrintDlg allocation to its original task-loss or ordinary return cleanup; exercise only a coherent selected group after source binding is complete. |
+| Expected Markers | One owner per job/DC/buffer/callback; no new manager; no task-retirement leak, double free, stale callback or live native object after failure. |
 | Asset Needs | Read-only source/mirror, immutable test-only guest companion/probe and observed local provider; guest inputs remain immutable. |
-| Reporting Requirements | Exact selected provider, normal/failure/cancel evidence, source-shaped code decision, carrier/DC retirement evidence and every explicit non-pass. |
+| Reporting Requirements | Exact owner/lifetime graph, source-shaped code decision, accepted retirement evidence and every explicit non-pass. |
 | Stop Conditions | Need for guest change, private spooler/USER recreation, a new manager/provider, or an unbounded device dependency. |
-| Exit Criteria | Each selected family has a real or explicit unavailable endpoint disposition; no raw job, HDC, DEVMODE, callback or cleanup owner is duplicated. |
+| Exit Criteria | Each selected failure/retirement family has one proven owner and normal/task-loss paths leave no duplicate or stale carrier. |
 | Original Owner Request | Automatically proceed to the next WOW32 task after closing the preceding T. |
 | Similar-Issue Sweep | Print DC, job handles, DEVMODE/DEVCAPS buffers, abort/cancel callbacks, endpoint errors and task/DC loss. |
 | Candidate Proposal | [WOW32 printing and spool](../proposals/proposal-wow32-printing-spool-001.md). |
