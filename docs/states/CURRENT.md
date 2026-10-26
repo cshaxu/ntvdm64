@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T471 S4**
+**Active: M0 T472 S1**
 
 `books/` is expressly excluded and remains untracked pending separate
 documentation admission.
@@ -16,44 +16,32 @@ media is unchanged.
 
 ## Active Packet
 
-### M0 T471 S4 — aggregate review and acceptance readiness
+### M0 T472 S1 — error-dialog caller and termination ledger
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T471 S4, Ordinary Mode. |
-| Admission And Approval | S3 accepted its complete repeated/concurrent/abnormal/OEM matrix; the S2 physical WRITE item remains owner-deferred and non-pass. |
-| Objective | Reconcile the frozen package, inherited acceptance evidence and source footprint for T471 owner acceptance. |
-| Non-goals | Guest change/rebuild; temporary provider/substitute/hidden implementation; treating deferred WRITE as passed. |
-| Reference Baseline | [Integrated-acceptance proposal](../proposals/proposal-wow32-integrated-acceptance-001.md), [S1 freeze](../etc/evidence/m0-t471-s1-provider-artifact-freeze.md), and [S3 evidence](../etc/evidence/m0-t471-s3-progress.md). |
-| Files And ABI Surface | Existing evidence, runtime package and source footprint; no ABI change before a proven owner gap. |
+| Identifier Mode | M0 T472 S1, Ordinary Mode. |
+| Admission And Approval | Owner approved automatic sequential queue progression; T471 is closed at [its closure](../history/m0-t471-closure.md). |
+| Objective | Build the complete source/caller ledger for selected OpenNT error dialogs and their response/termination paths before any repair. |
+| Non-goals | Guest change/rebuild; a generic error dispatcher/terminator; private CSRSS/USER recreation; policy changes before source proof. |
+| Reference Baseline | [Error-dialog proposal](../proposals/proposal-error-dialog-termination-semantics-restoration-001.md), T471 closure, and current T467 package identity. |
+| Files And ABI Surface | Original dialog/termination callers, their declarations and existing tests only; no ABI change in S1. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Reconcile S1--S3 evidence, current package identity and source/exception footprint; rerun only tests affected by a proven change. |
-| Expected Markers | Same manifest; no stale task/resource/callback; no accepted DOS regression. |
-| Asset Needs | S1-frozen package and immutable existing evidence; guest inputs remain immutable. |
-| Reporting Requirements | Exact package identity, inherited limitation and a named owner for any failure. |
-| Stop Conditions | Package mismatch, provider gap, unapproved concession, hidden provider or guest change. |
-| Exit Criteria | Coherent whole-provider record ready for owner T acceptance; S2 WRITE remains non-pass. |
-| Original Owner Request | Automatically proceed through the ordered WOW32 candidates after each bounded closure. |
-| Similar-Issue Sweep | C11/C12, registration, dispatch, direct data, retained original limitations, package hash and each application gate. |
-| Candidate Proposal | [WOW32 integrated acceptance](../proposals/proposal-wow32-integrated-acceptance-001.md). |
+| Verification | Source/definition/caller BFS; original-versus-current mirror comparison; exact post-response ownership classification; no product run until a complete source batch is selected. |
+| Expected Markers | Every selected dialog button maps to one original caller-local action and termination tail; every mirror difference is classified. |
+| Asset Needs | Pinned selected OpenNT source already in the repository and retained runtime evidence; guest media remains immutable. |
+| Reporting Requirements | Source paths/hashes, caller response mapping, current divergence, owner, limitation and next-S admissible repair batch. |
+| Stop Conditions | Need for guest change, broker-protocol change, CCPU semantic change, private-server recreation, or unapproved product-policy concession. |
+| Exit Criteria | No reached selected dialog route lacks a source owner, button mapping or post-response disposition; smallest S2 batch is explicit. |
+| Original Owner Request | Restore original WOW32 capability with minimum source diff and no autonomous substitute; source tracing first, tests after a connected batch. |
+| Similar-Issue Sweep | ErrorDialogBox/RcErrorDialogBox/RcMessageBox/host_error/RcErrorBoxPrintf/DisplayErrorTerm, DOS termination and WOW hard-error routes. |
+| Candidate Proposal | [Error-dialog response/termination semantics](../proposals/proposal-error-dialog-termination-semantics-restoration-001.md). |
 
-## S1 Closure Record
+## T471 Closure Record
 
-S1 freezes the unchanged ten-image artifact and reconciles W01--W19, C11 and
-C12 at the [provider/artifact record](../etc/evidence/m0-t471-s1-provider-artifact-freeze.md).
-Every predecessor is either closed by its named owner or retained as an
-explicit non-pass; no provider work is absorbed. S2 may use only that package.
-Its current-package physical WRITE edit/save/dialog/resize witness is owner-
-deferred, non-pass, neither synthetic substitute nor provider defect; S3
-proceeds with that limitation.
-
-## S3 Closure Record
-
-The frozen package passed shared/separate WOW idle retirement, selected OEM,
-native CUI return, and identified WOW-worker loss followed by DOS recovery at
-the [S3 progress record](../etc/evidence/m0-t471-s3-progress.md). No product
-or guest bytes changed. Its [S4 aggregate review](../etc/evidence/m0-t471-s4-aggregate-review.md)
-is ready for owner T acceptance.
+T471 closes at [its closure](../history/m0-t471-closure.md): same-artifact
+application/concurrency/abnormal evidence passed, while physical WRITE input
+remains the explicitly approved non-pass. No runtime or guest bytes changed.
 
 ## T469 S1 Closure Record
 
