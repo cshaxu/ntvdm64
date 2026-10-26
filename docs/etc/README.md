@@ -17,6 +17,10 @@ records caller-owned Retry/Ignore/Edit dispositions and the literal historical
 reconfirms the source-slot receiver and original WOW terminal owner, retaining
 T464's executable acceptance without fabricating unavailable private UI.
 
+[T472 S5 final reconciliation](evidence/m0-t472-s5-final-reconciliation.md)
+records the unchanged production/package identity and the finite closure of
+the selected response/termination contract.
+
 [T471 S4 aggregate review](evidence/m0-t471-s4-aggregate-review.md) records
 the unchanged installed/package identity, S1--S3 reconciliation and the sole
 owner-deferred physical WRITE non-pass for T-level acceptance.
