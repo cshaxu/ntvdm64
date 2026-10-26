@@ -46,13 +46,18 @@ specific re-admission condition.
 
 ## Finite S1 review worklist
 
-The 195 semantic mirror differences contain 194 source-like files. After removing three needless local deltas (an unused Registry include and two formatting-only adjustments), seven remaining source-like deltas have neither an inline `DIVERGENCE` marker nor a direct current `src/mvdm/README.md` leaf reference:
+The 195 semantic mirror differences contain 194 source-like files. After
+removing three needless local deltas (an unused Registry include and two
+formatting-only adjustments), the semantic ledger accounts for all of them:
+167 have an inline marker, 13 have an explicit owner-table row, 14 are
+markerless but leaf-indexed in the divergence register, and the one
+non-source manifest has its own inline monitor-profile marker.
 
-```text
-dos/command/cmd.c;
-dpmi32/{dpmiint.h,dpmimscr.c};
-softpc.new/base/ccpu386/{iret.c,ret.c};
-wow32/{winsockp.h,wow32.def}
-```
-
-The eight formatting-only paths are not semantic repair candidates. The remaining differences include declaration/build carriers and functional adaptations such as system-root projection, CPU40 stack selection, FastBOP, registry binding, and Win16 Winsock task cleanup. None is assumed justified merely because it currently builds. The remaining S1 work is to map these seven and the other 188 semantic differences to a source owner, registered divergence or a removal candidate, then to reconcile manifest selection, archive/link participation, initialization, teardown and runtime evidence by complete owner package.
+The eight formatting-only paths are not semantic repair candidates. The
+remaining differences include declaration/build carriers and functional
+adaptations such as system-root projection, CPU40 stack selection, FastBOP,
+registry binding, and Win16 Winsock task cleanup. None is assumed justified
+merely because it currently builds. The remaining S1 work is to reconcile
+manifest selection, archive/link participation, initialization, teardown and
+runtime evidence by complete owner package; no semantic-delta row remains
+unowned.
