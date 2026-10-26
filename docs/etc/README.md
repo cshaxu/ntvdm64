@@ -63,6 +63,10 @@ remaining lease/native-child carriers to transport and retirement only.
 keeps controller, cursor, video and media behavior in their selected original
 owners while bounding project code to input, snapshot and resource transport.
 
+[T473 S2 WOW32/session reconciliation](evidence/m0-t473-s2-wow32-session-reconciliation.md)
+separates the selected original DLL from its narrow parent-worker ABI and
+keeps incomplete USER behavior visible as a runtime, rather than source, gap.
+
 [T471 S4 aggregate review](evidence/m0-t471-s4-aggregate-review.md) records
 the unchanged installed/package identity, S1--S3 reconciliation and the sole
 owner-deferred physical WRITE non-pass for T-level acceptance.
