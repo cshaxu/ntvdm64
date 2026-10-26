@@ -36,7 +36,10 @@ the smallest source-shaped binding and no guest modification or rebuild.
 | Candidate Proposal | [WOW32 Shell and layered Registry](../proposals/proposal-wow32-shell-registry-001.md). |
 
 S3 begins from the published S2 binding. It may not substitute persistence
-with a second provider or re-open the accepted raw-key/token boundary.
+with a second provider or re-open the accepted raw-key/token boundary. The
+[S3 candidate evidence](../etc/evidence/m0-t461-s3-registry-persistence-candidate.md)
+records the published persistence candidate and its still-required complete
+Product-gate record; it is not a closure claim.
 
 ## T461 S1 Closure Record
 
