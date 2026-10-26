@@ -32,8 +32,8 @@ Revision History:
 // )
 
 #define DPMI_FLAT_TO_SEGMENTED(buffer, seg, off) {  \
-    *seg = (USHORT)(((ULONG)buffer-IntelBase) >> 4);        \
-    *off = (USHORT)(((ULONG)buffer-IntelBase) & 0xf);       \
+    *seg = (USHORT)(((ULONG)buffer-IntelBase) >> 4);            \
+    *off = (USHORT)(((ULONG)buffer-IntelBase) & 0xf);           \
 }
 
 

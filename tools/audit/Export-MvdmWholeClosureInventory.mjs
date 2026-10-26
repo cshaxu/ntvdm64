@@ -15,7 +15,7 @@ async function fingerprint(file) {
   const bytes = await readFile(file);
   return {
     sha256: hash(bytes),
-    normalizedSha256: bytes.includes(0) ? '' : hash(Buffer.from(bytes.toString().replaceAll('\r\n', '\n'))),
+    normalizedSha256: bytes.includes(0) ? '' : hash(Buffer.from(bytes.toString().replaceAll('\r\n', '\n').replace(/[ \t]+(?=\n|$)/g, ''))),
   };
 }
 async function index(root) {
@@ -49,8 +49,20 @@ async function index(root) {
   }
   return result;
 }
+async function selectedBy(graph, label) {
+  const text = await readFile(graph, 'utf8');
+  const selected = new Set();
+  const pattern = /(?:O\$?:\/repos\.hobby\/ntvdm64\/|O:\\repos\.hobby\\ntvdm64\\)src(?:\/|\\)mvdm(?:\/|\\)([^\s]+)/gi;
+  for (const match of text.matchAll(pattern)) selected.add(match[1].replaceAll('\\', '/'));
+  return [label, selected];
+}
 const csv = (value) => { const text = String(value ?? ''); return /[",\r\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text; };
-const [opennt, opennt45, current] = await Promise.all(Object.values(roots).map(index));
+const [opennt, opennt45, current, workerSelection, wow32Selection] = await Promise.all([
+  ...Object.values(roots).map(index),
+  selectedBy(path.join(repo, 'build/.ninja/msvc-x86-release/worker/build.ninja'), 'worker'),
+  selectedBy(path.join(repo, 'build/.ninja/msvc-x86-release/wow32/build.ninja'), 'wow32'),
+]);
+const selections = new Map([workerSelection, wow32Selection]);
 const paths = [...new Set([...opennt.keys(), ...opennt45.keys(), ...current.keys()])].sort();
 const rows = paths.map((relativePath) => {
   const a = opennt.get(relativePath), b = opennt45.get(relativePath), c = current.get(relativePath);
@@ -59,11 +71,12 @@ const rows = paths.map((relativePath) => {
   const rawOpenNt45 = b && c && c.sha256 === b.sha256;
   const normalizedOpenNt = a && c && a.normalizedSha256 && a.normalizedSha256 === c.normalizedSha256;
   const normalizedOpenNt45 = b && c && b.normalizedSha256 && b.normalizedSha256 === c.normalizedSha256;
-  const currentIdentity = !c ? 'not-currently-mirrored' : rawOpenNt && (!b || a.sha256 === b.sha256) ? 'exact-opennt-selected-or-identical' : rawOpenNt45 && (!a || a.sha256 === b.sha256) ? 'exact-opennt45-selected-or-identical' : rawOpenNt ? 'exact-opennt-on-conflict' : rawOpenNt45 ? 'exact-opennt45-on-conflict' : normalizedOpenNt && (!b || a.normalizedSha256 === b.normalizedSha256) ? 'line-ending-only-opennt-selected-or-identical' : normalizedOpenNt45 && (!a || a.normalizedSha256 === b.normalizedSha256) ? 'line-ending-only-opennt45-selected-or-identical' : normalizedOpenNt ? 'line-ending-only-opennt-on-conflict' : normalizedOpenNt45 ? 'line-ending-only-opennt45-on-conflict' : upstreamOrigin === 'current-only' ? 'current-only-needs-provenance' : 'mirror-different-needs-divergence-review';
-  return { relative_path: relativePath, upstream_origin: upstreamOrigin, opennt_sha256: a?.sha256 ?? '', opennt45_sha256: b?.sha256 ?? '', current_sha256: c?.sha256 ?? '', current_identity: currentIdentity };
+  const currentIdentity = !c ? 'not-currently-mirrored' : rawOpenNt && (!b || a.sha256 === b.sha256) ? 'exact-opennt-selected-or-identical' : rawOpenNt45 && (!a || a.sha256 === b.sha256) ? 'exact-opennt45-selected-or-identical' : rawOpenNt ? 'exact-opennt-on-conflict' : rawOpenNt45 ? 'exact-opennt45-on-conflict' : normalizedOpenNt && (!b || a.normalizedSha256 === b.normalizedSha256) ? 'formatting-only-opennt-selected-or-identical' : normalizedOpenNt45 && (!a || a.normalizedSha256 === b.normalizedSha256) ? 'formatting-only-opennt45-selected-or-identical' : normalizedOpenNt ? 'formatting-only-opennt-on-conflict' : normalizedOpenNt45 ? 'formatting-only-opennt45-on-conflict' : upstreamOrigin === 'current-only' ? 'current-only-needs-provenance' : 'mirror-different-needs-divergence-review';
+  const buildSelection = [...selections.entries()].filter(([, selected]) => selected.has(relativePath)).map(([label]) => label).join('+') || 'not-directly-compiled';
+  return { relative_path: relativePath, upstream_origin: upstreamOrigin, opennt_sha256: a?.sha256 ?? '', opennt45_sha256: b?.sha256 ?? '', current_sha256: c?.sha256 ?? '', current_identity: currentIdentity, direct_compile_selection: buildSelection };
 });
 const counts = (field) => Object.entries(Object.groupBy(rows, (row) => row[field])).map(([classification, values]) => ({ classification, count: values.length })).sort((a, b) => a.classification.localeCompare(b.classification));
-const summary = { rows: rows.length, upstream_origin: counts('upstream_origin'), current_identity: counts('current_identity'), limitation: 'Identity inventory only. It does not select a conflict, prove build/link selection, or claim runtime reachability.' };
+const summary = { rows: rows.length, upstream_origin: counts('upstream_origin'), current_identity: counts('current_identity'), direct_compile_selection: counts('direct_compile_selection'), limitation: 'Identity and direct compile-edge inventory only. It does not select a conflict, prove archive extraction/final linkage, or claim runtime reachability.' };
 await mkdir(output, { recursive: false });
 const columns = Object.keys(rows[0]);
 await writeFile(path.join(output, 'mvdm-union.csv'), `${columns.join(',')}\n${rows.map((row) => columns.map((column) => csv(row[column])).join(',')).join('\n')}\n`);

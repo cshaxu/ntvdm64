@@ -25,6 +25,11 @@ the selected response/termination contract.
 records the reproducible selected-source union, safe non-runtime exclusions,
 actual current compilation selection and the finite divergence-owner worklist.
 
+[T473 S1 semantic-delta owner ledger](evidence/m0-t473-s1-semantic-delta-ledger.md)
+attributes the seven unmarked source-like deltas to bounded original-owner or
+adapter boundaries, and records the three non-functional deltas removed by
+the audit.
+
 [T471 S4 aggregate review](evidence/m0-t471-s4-aggregate-review.md) records
 the unchanged installed/package identity, S1--S3 reconciliation and the sole
 owner-deferred physical WRITE non-pass for T-level acceptance.
