@@ -37,3 +37,27 @@ WRITE edit/select/menu/dialog/save/reopen/failure/cancel/resize run against
 the same S1 package.  This is a bounded test-driver limitation, not evidence
 of a product defect or permission to change guest/host behavior.  S2 is not
 closed by this progress record.
+
+### 2026-10-26 visible-desktop probe reconstruction
+
+The owner authorized a visible-desktop probe.  The implementation first
+reconstructed the T449 boundary rather than replacing it: the only candidate
+launcher staged the exact frozen package under the marker-verified short
+physical root and would have targeted only its exact `MSWRITE_MENU`/modal
+dialog process.  It was discarded without a product or guest change because
+the execution host could not reach the active input desktop:
+
+- a native input-desktop open returned `ERROR_ACCESS_DENIED` before it could
+  launch or input to WRITE;
+- the visible-desktop automation channel independently failed at
+  `GetCursorPos: Access is denied (0x80070005)` before any pointer or key
+  operation;
+- no staged runtime process or saved document remained; the exact marked
+  stage was removed through `Remove-PhysicalRuntimeStage` after the failure.
+
+The rejected candidates did **not** replace the input with `WM_COMMAND`,
+queued Enter, `PostMessage`, `SetWindowPos`, focus attachment, or a guest
+change.  Such a substitution would violate the already source-proven
+original document/common-dialog contract.  This confirms a test-host input
+capability gap only; it neither establishes a WRITE regression nor widens
+the S2 acceptance claim.
