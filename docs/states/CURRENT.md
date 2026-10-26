@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T472 S4**
+**Active: M0 T472 S5**
 
 `books/` is expressly excluded and remains untracked pending separate
 documentation admission.
@@ -16,25 +16,25 @@ media is unchanged.
 
 ## Active Packet
 
-### M0 T472 S4 — WOW hard-error handoff reconciliation
+### M0 T472 S5 — Final response/lifecycle reconciliation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T472 S4, Ordinary Mode. |
-| Admission And Approval | S3 closes at its [nonfatal ledger](../etc/evidence/m0-t472-s3-nonfatal-response-ledger.md); automatic sequential progression remains approved. |
-| Objective | Reconcile the selected WOW hard-error response slots with original `W32HungAppNotifyThread` ownership and the completed T464 public boundary. |
-| Non-goals | Guest change/rebuild; private CSRSS/USER recreation; a second WOW task terminator; dialog policy changes. |
-| Reference Baseline | [Error-dialog proposal](../proposals/proposal-error-dialog-termination-semantics-restoration-001.md), T472 S1--S3 evidence, [T464 hard-error closure](../history/m0-t464-closure.md), and current T467 package identity. |
-| Files And ABI Surface | Existing WOW hard-error decoder/presenter and original `wkman.c` handoff only; no broker ABI change. |
+| Identifier Mode | M0 T472 S5, Ordinary Mode. |
+| Admission And Approval | S4 closes at its [WOW hard-error reconciliation](../etc/evidence/m0-t472-s4-wow-hard-error-reconciliation.md); automatic sequential progression remains approved. |
+| Objective | Reconcile the complete selected error-dialog ownership ledger with the unchanged current package; close the finite candidate without expanding private-service emulation. |
+| Non-goals | Guest change/rebuild; private CSRSS/USER recreation; a second task terminator; dialog policy changes; a new synthetic modal test seam. |
+| Reference Baseline | [Error-dialog proposal](../proposals/proposal-error-dialog-termination-semantics-restoration-001.md), T472 S1--S4 evidence, [T464 hard-error closure](../history/m0-t464-closure.md), and current T467 package identity. |
+| Files And ABI Surface | Existing selected DOS/WOW original paths and documentation only; no broker ABI change. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Original/current source and completed T464 fixture evidence; targeted current audit only. |
-| Expected Markers | Exact recognized response slots reach original WOW ownership; unavailable private shapes stop explicitly without fabricated responses. |
+| Verification | Reconcile S1--S4 source ledgers, package identity, documentation governance and diff integrity. No new runtime image build is required unless source differs from the published identity. |
+| Expected Markers | Every selected button has one original caller owner; retained unavailable private UI is explicitly bounded rather than simulated. |
 | Asset Needs | Pinned selected OpenNT source already in the repository and retained runtime evidence; guest media remains immutable. |
-| Reporting Requirements | Slot map, task/process handoff owner, private-service boundary, retained evidence and S5 handoff. |
+| Reporting Requirements | Closure ledger, package/source identity, retained verification limit and successor handoff. |
 | Stop Conditions | Need for guest change, broker-protocol change, CCPU semantic change, private-server recreation, or unapproved product-policy concession. |
-| Exit Criteria | The selected WOW path has one response decoder/presenter and one original termination owner; no duplicated lifecycle control. |
+| Exit Criteria | The selected routes retain one original owner each; no production source or package delta is hidden behind a documentation closure. |
 | Original Owner Request | Restore original WOW32 capability with minimum source diff and no autonomous substitute; source tracing first, tests after a connected batch. |
-| Similar-Issue Sweep | `WOWpSysErrorBox`, `NtRaiseHardError`, response decode, `ErrorDialogBoxThread`, `W32HungAppNotifyThread`, task binding/retirement. |
+| Similar-Issue Sweep | S1--S4 evidence indices, selected original source blocks, package/release/install hashes and excluded untracked material. |
 | Candidate Proposal | [Error-dialog response/termination semantics](../proposals/proposal-error-dialog-termination-semantics-restoration-001.md). |
 
 ## T471 Closure Record
@@ -195,8 +195,8 @@ T471 S2/S3 may use only `build/t471-s2` for disposable acceptance evidence,
 with a 60-minute phase, 3-GiB size and 10-minute no-progress budget. Stable
 `.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
 
-T472 S4 may use only `build/t472-s4` for disposable hard-error-path evidence,
-with a 45-minute phase, 2-GiB size and 10-minute no-progress budget. Stable
+T472 S5 may use only `build/t472-s5` for disposable closure evidence,
+with a 30-minute phase, 1-GiB size and 10-minute no-progress budget. Stable
 `.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
 
 T461 S1 may use only `build/t461-s1` for disposable source-audit evidence,

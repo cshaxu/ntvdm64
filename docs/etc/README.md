@@ -13,6 +13,10 @@ route, and the bounded non-interactive worker-lifecycle witness.
 records caller-owned Retry/Ignore/Edit dispositions and the literal historical
 `host_error` label boundary without adding a response engine.
 
+[T472 S4 WOW hard-error reconciliation](evidence/m0-t472-s4-wow-hard-error-reconciliation.md)
+reconfirms the source-slot receiver and original WOW terminal owner, retaining
+T464's executable acceptance without fabricating unavailable private UI.
+
 [T471 S4 aggregate review](evidence/m0-t471-s4-aggregate-review.md) records
 the unchanged installed/package identity, S1--S3 reconciliation and the sole
 owner-deferred physical WRITE non-pass for T-level acceptance.
