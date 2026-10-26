@@ -2,94 +2,50 @@
 
 ## Current Work
 
-**Active: M0 T461 S1**
+**Active: M0 T461 S2**
 
 T460 is closed at `5f12610eb`; its owner-approved Win95 Start Menu
 PIF-template provenance repair is retained in its closure record. `books/` is
 expressly excluded and remains untracked pending separate documentation
 admission.
 
-Owner requests standalone Win95 launch/path toolkits on 2026-10-25, based on
-copies of win31-launch/win31-path. Admit tools/win95-launch, tools/win95-path,
-independent add-on producers, arbitrary DOS-safe installation-root support,
-identity-bound recoverable VMM32 consumer adaptations, driver/profile/version
-installation and INI/PIF/LNK/GRP/registry relocation. Original media remains
-read-only. No host/core NTIO/NTDOS change or Computer Use. Use disposable
-`build/t460-s3/win95-toolkit-owner` (90 minutes, 2 GiB, 10-minute no-progress
-budget); verify alternate-root install, rollback/failure safety and original
-Win95 runtime before delivery. Preserve unrelated main-session work; no joint
-commit from this standalone work until the owner's main session collects it.
-
 Automatic sequential S closure/advancement is approved. Completed work follows
 the read-only `ntvdm64-wow32-audit`: recover selected original behavior with
 the smallest source-shaped binding and no guest modification or rebuild.
-
-The independent Video7, packed-surface and Win95 add-on/tool work is bounded
-outside S3 core closure. Their source register, published/recovery identities,
-and explicit Win95 launch limits are in `src/mvdm/README.md`,
-[the paging record](../etc/evidence/m0-t460-s3-win95-paging-research.md) and
-[the add-on audit](../etc/evidence/m0-t460-s3-addon-tool-audit.md). Original
-media remains read-only; no such record upgrades this Clipboard/PIC/keyboard S.
-Clipboard callback source tracing identified twelve stray WORD arguments in
-the independently authored probe's zero-argument Close/EmptyClipboard calls.
-Removing them passes owner-destroy callback return and all eighteen shared
-Clipboard transfer/deferred/replacement phases; the guarded version also
-passes. [The S3 evidence](../etc/evidence/m0-t460-s3-clipboard-deferred-lifetime.md)
-supersedes the unproved continuation-failure hypothesis. Final coherent-package
-acceptance, review and joint submission remain open.
-The independent add-on/tool audit was pushed as `6048075f4`.
-The frozen-source candidate now passes thirteen-phase owner destruction,
-seven-phase task exit and the unchanged eighteen-phase full Clipboard group,
-24 PIC/RTC/mouse assertions, 46 keyboard assertions and noninteractive
-regressions. Owner clarified that probe-driven interaction is allowed:
-reuse the successful private-desktop DOS17/Window17 and gameplay runners,
-without Computer Use. The candidate-only submission question is superseded;
-complete the ordinary package gates before publication and S3 closure.
-The first full run passes both seventeen-case command matrices, six RPC
-groups and GUI routing, then correctly rejects the stale `0.0.451` product
-identity. The shared version is advanced to admitted T460 (`0.0.460`), without
-changing protocol 65. All affected components have been incrementally rebuilt
-into `build/t460-s3/versioned-package`; acceptance is rerun against that exact
-package. The first gameplay invocation's relative compiler path failed before
-execution; both runners now resolve their compiler/observer paths before
-changing directory. Neither earlier failure is counted as a pass.
-R4 rebuilt the stale monitor fixture and exposed only external global-Clipboard
-contention: `RadeonSoftware.exe` owned it during two fresh attempts. R5 closes
-a return-to-input asymmetry by reusing the existing shared-view snapshot for
-public Clipboard operands. After verified unrelated Clipboard owner
-`logioptionsplus_agent.exe` was stopped, the complete 18-checkpoint shared
-transfer passes (`guest_to_native`, `native_to_guest`, rejection, deferred
-render and replacement all succeed). R5's five cached builds, focused suite,
-complete product gate and WINMINE/SOL probes pass; its ten images are published
-to `assets/release` and `O:\winnt\system32` with matching SHA-256 manifests.
-S3 is closed at `5e2e8bfaf`; S4 now owns the remaining selected-format and
-full lifetime acceptance, without reopening S3's completed boundaries.
 ## Active Packet
 
-### M0 T461 S1 — Shell and layered Registry caller surface
+### M0 T461 S2 — Shell services and Registry operations
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T461 S1, Ordinary Mode; single-agent source audit and final review. |
-| Admission And Approval | Automatically admitted after the owner-approved T460 closure. |
-| Objective | Enumerate the selected WOW Shell callers and original layered-Registry error/recursive-delete semantics, then establish one exact production-path assertion and one Registry owner per caller. |
-| Non-goals | No guest-media modification/rebuild; no host Registry writes; no parallel Registry provider; no Shell-service implementation, persistence, DDE, or unrelated runtime repair. |
-| Reference Baseline | [Shell and layered Registry proposal](../proposals/proposal-wow32-shell-registry-001.md), WOW32 program, shared minimum-diff governance and OpenNT-only seam ledger. |
-| Files And ABI Surface | Audit-only evidence for the selected Shell thunk callers, the existing NTVDM.REG owner, original conversion/error paths and their current adapters; no production ABI change in S1. |
-| Applicable Rules | Execution, architecture, coding, documentation and source-policy rules; one original owner per mechanism and no second scheduler/provider. |
-| Verification | Exact source call-chain/owner matrix, build-condition and ABI review, normal/failure/retirement ownership per row, minimum-diff governance and documentation verification. |
-| Expected Markers | Every admitted caller has a bounded production-path assertion; one existing Registry owner is identified; any missing prerequisite is promoted explicitly rather than substituted. |
-| Asset Needs | Existing checked-in source/mirror and build-owned `build/t461-s1` text evidence only; no guest, host-Registry or external-service mutation. |
-| Reporting Requirements | Caller/owner matrix, actual prerequisites, retained semantic gaps, S2 handoff and proof/limitation separation. |
-| Stop Conditions | Guest or system-Registry write; a second Registry provider; unbounded import; or a proposed semantic relaxation without owner approval. |
-| Exit Criteria | Complete selected caller inventory and original-owner semantic ledger, finite S2 scope, governance review, commit and push. |
+| Identifier Mode | M0 T461 S2, Ordinary Mode; single-agent implementation and final review. |
+| Admission And Approval | Automatic sequential advance after completed T461 S1 source matrix. |
+| Objective | Complete selected Shell calls and the one `NTVDM.REG` façade's read/create/set/enum/delete/close conversions while retaining original caller bodies, errors and cleanup. |
+| Non-goals | No guest-media modification/rebuild; no system-Registry write; no second Registry provider, shell launcher/association database, DDE/OLE consumer, persistence/concurrency completion or unrelated runtime repair. |
+| Reference Baseline | [S1 owner matrix](../etc/evidence/m0-t461-s1-shell-registry-owner-matrix.md), [Shell and layered Registry proposal](../proposals/proposal-wow32-shell-registry-001.md), shared minimum-diff governance and OpenNT-only seam ledger. |
+| Files And ABI Surface | Selected original `wshell.c`/`wkernel.c` callers, registered Shell callback binding, and `mvdm_shadow_registry` opaque-key C ABI; preserve guest buffers and original error conversion. |
+| Applicable Rules | Execution, architecture, coding, documentation and source-policy rules; original behavior remains in original callers, façade remains the one Registry authority. |
+| Verification | Original ShellExecute/FindExecutable normal/error guest routes; Registry read/create/set/enum/delete/close normal/failure/retirement fixtures; source-owner, build and ABI review. |
+| Expected Markers | No native Registry handle crosses an original caller; no system Registry write; exact `NTVDM.REG` errors/cleanup and finite shell callback/return evidence. |
+| Asset Needs | Build-owned `build/t461-s2` fixtures and installed package inputs read-only; no guest or host-Registry mutation. |
+| Reporting Requirements | Changed owner/body/adapter split, error and lifetime matrix, test evidence, image/guest diff and finite S3 persistence/concurrency handoff. |
+| Stop Conditions | A second provider, host Registry write, replacement shell resolver, unbounded mirror import or unapproved semantic relaxation. |
+| Exit Criteria | Selected original callers and single façade operations pass normal/failure/cleanup evidence; governed review, coherent build/package evidence, commit and push. |
 | Original Owner Request | 自动准入后续 WOW32 T；按最小镜像 diff、最大原版复通执行。 |
-| Similar-Issue Sweep | Every selected Shell entry and all Registry read/create/set/enum/delete/close error/retirement callers, not just the first successful path. |
+| Similar-Issue Sweep | Every selected Shell entry plus all façade read/create/set/enum/delete/close error/retirement paths, including stale keys and no-write guarantees. |
 | Candidate Proposal | [WOW32 Shell and layered Registry](../proposals/proposal-wow32-shell-registry-001.md). |
 
-S1 is an admission/source-ownership audit only. It may not turn a static
-symbol match into a behavior claim, and it must leave each later implementation
-edge with an explicit original owner and lifecycle handoff.
+S2 begins from the completed S1 matrix. Static S1 evidence is not a substitute
+for original guest/runtime normal, failure and retirement proof.
+
+## T461 S1 Closure Record
+
+S1 closed the selected Shell and layered Registry caller/owner inventory.
+[The owner matrix](../etc/evidence/m0-t461-s1-shell-registry-owner-matrix.md)
+identifies the two original Shell entries, the one worker-local `NTVDM.REG`
+façade, its opaque-key lifetime, the missing write/persistence/concurrency
+contract, and the explicit W18/W11 consumer handoffs. It changed no runtime,
+guest or installed package.
 
 ## S1 Closure Record
 
@@ -198,6 +154,11 @@ evidence, with a 45-minute phase, 2-GiB size and 10-minute no-progress budget. S
 T461 S1 may use only `build/t461-s1` for disposable source-audit evidence,
 with a 30-minute phase, 2-GiB size and 10-minute no-progress budget. Stable
 `.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
+
+T461 S2 may use only `build/t461-s2` for disposable Shell/Registry fixture and
+build evidence, with a 45-minute phase, 2-GiB size and 10-minute no-progress
+budget. Stable `.ninja` and `.ccache` remain reusable caches and are never task
+evidence roots.
 
 T457 S1 may use only `build/t457-s1` for disposable source-audit and focused
 fixture evidence. Stable `.ninja` and `.ccache` remain reusable caches and
