@@ -141,6 +141,10 @@ records the selected Shell service and seven Registry entries, the sole
 `NTVDM.REG` façade, its missing persistent-write/concurrency contract, and the
 finite S2 handoff; it is source evidence, not runtime acceptance.
 
+[T461 S2 Shell/Registry binding design](operations/t461-shell-registry-s2-design.md)
+fixes the parent-owned façade, guest-safe worker-token and original-thunk
+binding boundary before S2 implementation; it does not claim a runtime path.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.

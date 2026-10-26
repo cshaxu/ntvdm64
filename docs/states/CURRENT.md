@@ -22,7 +22,7 @@ the smallest source-shaped binding and no guest modification or rebuild.
 | Admission And Approval | Automatic sequential advance after completed T461 S1 source matrix. |
 | Objective | Complete selected Shell calls and the one `NTVDM.REG` façade's read/create/set/enum/delete/close conversions while retaining original caller bodies, errors and cleanup. |
 | Non-goals | No guest-media modification/rebuild; no system-Registry write; no second Registry provider, shell launcher/association database, DDE/OLE consumer, persistence/concurrency completion or unrelated runtime repair. |
-| Reference Baseline | [S1 owner matrix](../etc/evidence/m0-t461-s1-shell-registry-owner-matrix.md), [Shell and layered Registry proposal](../proposals/proposal-wow32-shell-registry-001.md), shared minimum-diff governance and OpenNT-only seam ledger. |
+| Reference Baseline | [S1 owner matrix](../etc/evidence/m0-t461-s1-shell-registry-owner-matrix.md), [S2 binding design](../etc/operations/t461-shell-registry-s2-design.md), [Shell and layered Registry proposal](../proposals/proposal-wow32-shell-registry-001.md), shared minimum-diff governance and OpenNT-only seam ledger. |
 | Files And ABI Surface | Selected original `wshell.c`/`wkernel.c` callers, registered Shell callback binding, and `mvdm_shadow_registry` opaque-key C ABI; preserve guest buffers and original error conversion. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules; original behavior remains in original callers, façade remains the one Registry authority. |
 | Verification | Original ShellExecute/FindExecutable normal/error guest routes; Registry read/create/set/enum/delete/close normal/failure/retirement fixtures; source-owner, build and ABI review. |
