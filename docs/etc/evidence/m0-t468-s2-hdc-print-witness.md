@@ -52,3 +52,22 @@ Microsoft Print to PDF, but that modern provider listing is not the legacy
 profile mapping required by the original raw-spool body.  The distinction is
 intentional: provider availability does not authorize a new compatibility
 policy.
+
+`tests/observation/win16_raw_spool_probe.asm` and
+`verify-win16-raw-spool-profile.ps1` now verify that boundary through the
+actual immutable guest thunk rather than profile-file inspection alone.  The
+probe invokes original GDI `OpenJob` (240) with `FILE:` and writes its exact
+16-bit result.  The owned isolated run
+`build/t468-s2/raw-spool-profile-r3` completed normally and recorded:
+
+```text
+PASS raw OpenJob reaches original explicit no-profile failure without host configuration
+openJob=0; closeJob=0
+```
+
+The probe deliberately calls `CloseJob` only on an unexpected nonzero return,
+so this evidence neither leaks nor synthesizes a native job.  Its first two
+attempts are retained only as test-input construction failures: r1/r2 had an
+incomplete NE module-reference table and therefore did not write a guest
+record; r3 uses the same three-module table shape as the retained working
+Win16 probe and is the only result used here.
