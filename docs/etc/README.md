@@ -59,6 +59,10 @@ small session/kernel-resource carriers cannot be replaced by a same-named file.
 confirms the formerly duplicated XMS parser was already removed and bounds the
 remaining lease/native-child carriers to transport and retirement only.
 
+[T473 S2 SoftPC device reconciliation](evidence/m0-t473-s2-softpc-device-reconciliation.md)
+keeps controller, cursor, video and media behavior in their selected original
+owners while bounding project code to input, snapshot and resource transport.
+
 [T471 S4 aggregate review](evidence/m0-t471-s4-aggregate-review.md) records
 the unchanged installed/package identity, S1--S3 reconciliation and the sole
 owner-deferred physical WRITE non-pass for T-level acceptance.
