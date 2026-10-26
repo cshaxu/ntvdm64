@@ -61,3 +61,10 @@ change.  Such a substitution would violate the already source-proven
 original document/common-dialog contract.  This confirms a test-host input
 capability gap only; it neither establishes a WRITE regression nor widens
 the S2 acceptance claim.
+
+An RDP reconnect on the same date restored screenshot/AX capture of the
+visible Codex desktop, but did not restore the separate pointer-injection
+capability: a newly prepared exact stage again failed at the same
+`GetCursorPos` boundary before its launcher or WRITE process began.  The
+absence of `completion.txt` and subsequent marker-checked cleanup confirm
+that this retry did not exercise or alter the product.
