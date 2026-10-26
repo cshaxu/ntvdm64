@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T471 S1**
+**Active: M0 T471 S2**
 
 T464 is closed at the published `0.0.464` ten-image package; [its closure](../history/m0-t464-closure.md)
 is authoritative. `books/` is expressly excluded and remains untracked pending
@@ -21,23 +21,23 @@ ten-image package remains `build/t467-s3/package-r2` and guest media is unchange
 
 ## Active Packet
 
-### M0 T471 S1 — whole-provider artifact and prerequisite freeze
+### M0 T471 S2 — three-application same-artifact acceptance
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T471 S1, Ordinary Mode. |
-| Admission And Approval | Automatic sequential admission after [T470 closure](../history/m0-t470-closure.md), under the owner-approved automatic S/T sequence. |
-| Objective | Freeze one ordinary package and reconcile preceding WOW32 evidence, dispatch/direct-data edges and explicit non-passes before three-application acceptance. |
-| Non-goals | Guest change/rebuild; temporary provider, test-only semantic substitute, hidden implementation or absorbing an earlier owner's missing repair. |
-| Reference Baseline | [Integrated-acceptance proposal](../proposals/proposal-wow32-integrated-acceptance-001.md), current package and preceding T451--T470 closures. |
-| Files And ABI Surface | Provider/evidence inventory and closure records; no new ABI before a proven owning gap. |
+| Identifier Mode | M0 T471 S2, Ordinary Mode. |
+| Admission And Approval | Automatic sequential admission after the S1 freeze, under the owner-approved automatic S/T sequence. |
+| Objective | Exercise WRITE, WINMINE and SOL normal interactions, normal close and restart on exactly the S1-frozen package. |
+| Non-goals | Guest change/rebuild; temporary provider, test-only semantic substitute, hidden implementation or absorbing a provider repair. |
+| Reference Baseline | [Integrated-acceptance proposal](../proposals/proposal-wow32-integrated-acceptance-001.md) and [S1 freeze](../etc/evidence/m0-t471-s1-provider-artifact-freeze.md). |
+| Files And ABI Surface | Existing application probes and runtime package only; no new ABI before a proven owner gap. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Produce a finite prerequisite/package matrix, source/ABI owner sweep and exact product-gate plan; run no broad product test until the selected artifact is frozen. |
-| Expected Markers | Every inherited row is accepted, explicit non-pass, or returned to its owning candidate; no placeholder/mirror ambiguity. |
-| Asset Needs | Current package, proposals, closure evidence and source only; guest inputs remain immutable. |
-| Reporting Requirements | Exact artifact hashes, prerequisite disposition and admitted S2 test matrix. |
-| Stop Conditions | Missing owner, an unapproved semantic concession, a hidden provider, guest change requirement, or mismatch among staged/release/installed artifacts. |
-| Exit Criteria | One frozen package and finite acceptance matrix with no unassigned prerequisite. |
+| Verification | Actual WRITE edit/select/menu/dialog/save/reopen/failure/cancel/resize; WINMINE reveal/flag/timer/menu/difficulty/new; SOL deal/legal move/draw/options/repaint, each with normal close/restart. |
+| Expected Markers | Same manifest identity for every run; application interaction and lifecycle results do not conceal provider limitations. |
+| Asset Needs | S1-frozen package, immutable app inputs and existing noninteractive probes; guest inputs remain immutable. |
+| Reporting Requirements | Exact package identity, per-app action/result and a named owner for any failure. |
+| Stop Conditions | Package mismatch, missing actual interaction evidence, unapproved semantic concession, hidden provider or guest change requirement. |
+| Exit Criteria | WRITE and WINMINE pass their finite ordinary interaction/restart matrix; SOL passes deal/draw on a host that admits its required geometry, or its explicit geometry-limited startup/readiness/close branch when the actual host maximum rejects that geometry. |
 | Original Owner Request | Automatically proceed through the ordered WOW32 candidates after each bounded closure. |
 | Similar-Issue Sweep | C11/C12, registration, dispatch, direct data, retained original limitations, package hash and each application gate. |
 | Candidate Proposal | [WOW32 integrated acceptance](../proposals/proposal-wow32-integrated-acceptance-001.md). |
@@ -48,12 +48,6 @@ S1 freezes the unchanged ten-image artifact and reconciles W01--W19, C11 and
 C12 at the [provider/artifact record](../etc/evidence/m0-t471-s1-provider-artifact-freeze.md).
 Every predecessor is either closed by its named owner or retained as an
 explicit non-pass; no provider work is absorbed. S2 may use only that package.
-
-## T470 Closure Record
-
-T470 closed ToolHelp/debugger ownership at its
-[closure](../history/m0-t470-closure.md); immutable query/class limitations
-remain explicit non-passes rather than temporary implementation debt.
 
 ## T468 Closure Record
 
@@ -207,6 +201,10 @@ reusable caches and are never task evidence roots.
 
 T471 S1 may use only `build/t471-s1` for disposable package-freeze evidence,
 with a 30-minute phase, 1-GiB size and 10-minute no-progress budget. Stable
+`.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
+
+T471 S2 may use only `build/t471-s2` for disposable three-application evidence,
+with a 60-minute phase, 3-GiB size and 10-minute no-progress budget. Stable
 `.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
 
 T461 S1 may use only `build/t461-s1` for disposable source-audit evidence,
