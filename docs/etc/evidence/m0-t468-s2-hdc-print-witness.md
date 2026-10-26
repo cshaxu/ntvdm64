@@ -71,3 +71,26 @@ attempts are retained only as test-input construction failures: r1/r2 had an
 incomplete NE module-reference table and therefore did not write a guest
 record; r3 uses the same three-module table shape as the retained working
 Win16 probe and is the only result used here.
+
+## Device-capability endpoint disposition
+
+The selected original entry is GDI ordinal 454.  Its existing
+`WG32DeviceCapabilities` body in `wgprnset.c` owns the 16:16 argument
+conversion and then lazily loads `WINSPOOL.DRV`; it is not correct to replace
+that route with a native-only provider probe or a new device manager.  A
+disposable Win16 witness was constructed for `DC_VERSION` against the same
+named PDF provider.  It corrected its NE data-segment offsets and uses the
+same `USER.InitApp` import as the passing HDC witness.  It also stages the
+immutable `WINSPOOL.EXE` facade under the observer-selected test system root,
+which is required for the original loader's normal redirect path.
+
+The resulting owned run `build/t468-s2/devicecaps-r10` did not return from
+the original provider-load/call boundary in the observer's 30-second
+observation budget and wrote no guest record.  It is therefore an explicit
+**unavailable / not-accepted endpoint**, not evidence that g454 conversion
+works or fails.  The untracked witness sources were removed rather than
+committed as a misleading regression test.  No guest, profile, printer,
+provider, production source, or runtime policy was changed.  This leaves the
+device-capability normal/failure endpoint for the later S3 failure-and-
+retirement package, where a reliably observable selected provider can be
+admitted without widening the original owner boundary.
