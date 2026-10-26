@@ -9,13 +9,21 @@ if (Test-Path -LiteralPath $output) { throw 'Output already exists.' }
 $files=@(& git -C $repo ls-files src)
 if ($LASTEXITCODE -ne 0) { throw 'Cannot enumerate tracked source.' }
 $roles=@{
-    'mvdm-host'='S2-original-mvdm'; 'mvdm-host-overlay'='S2-overlay';
-    'opennt-host'='S3-original-non-mvdm';
-    'adapter-mvdm-host-out'='S2-S3-assign-by-original-owner';
-    'adapter-opennt-host'='S3-private-host-binding'; 'opennt-abi'='S2-S3-declaration-provenance';
-    'app'='S2-S3-composition-or-replacement'; 'session'='S2-S3-neutral-or-replacement';
-    'broker'='S3-coordination-or-replacement'; 'mvdm-guest'='load-only-guest-evidence';
-    'mvdm-softpc-firmware'='load-only-firmware-evidence'; 'mvdm-tools'='independent-tool-evidence'
+    'mvdm'='original-MVDM-union-by-subrole';
+    'opennt-host'='original-non-MVDM-host-by-owner';
+    'opennt-abi'='declaration-provenance';
+    'common'='project-shared-runtime';
+    'worker-base'='project-lifecycle-runtime';
+    'run16-exe'='project-launcher-runtime';
+    'ntsrv-exe'='project-service-runtime';
+    'ntcon-exe'='project-console-runtime';
+    'ntvdm-exe'='project-MVDM-composition';
+    'ntvwm-exe'='project-native-worker-composition';
+    'ntmon-exe'='project-monitor-runtime';
+    'nthook32-dll'='project-hook-runtime';
+    'vdmredir-dll'='project-redirector-runtime';
+    'wow32-dll'='project-WOW-binding-runtime';
+    'addon'='separately-provenanced-addon';
 }
 $textExtensions=@('.c','.h','.cpp','.cxx','.hpp','.asm','.inc','.def','.rc','.patch')
 $rows=foreach($name in $files){
